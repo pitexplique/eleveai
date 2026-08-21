@@ -155,6 +155,52 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — l'ÉCHANGE qui échoue. Le premier item suit une variable ligne à
+    // ligne ; celui-ci met en scène le piège que cette lecture doit permettre
+    // de voir : échanger deux variables sans en garder une de côté écrase la
+    // première valeur, et l'on obtient deux fois la même. C'est le premier
+    // programme faux que tout le monde écrit.
+    kind: "template",
+    id: "stmg_algo_affectation_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "algo_variables",
+    microId: "algo_affectation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Après la première ligne de l'échange, l'ancienne valeur de `x` n'existe plus nulle part.",
+    tags: ["stmg", "maths", "algorithmique", "python", "template"],
+    generate: () => {
+      const a = randomInt(2, 30);
+      const b = randomInt(2, 30) + 30;
+      const lignes = [`x = ${a}`, `y = ${b}`, `x = y`, `y = x`, `print(x, y)`];
+      const bonne = `${b} ${b}`;
+      return {
+        text:
+          `Ce programme voudrait ÉCHANGER les valeurs de \`x\` et \`y\`. Qu'affiche-t-il réellement ?\n\n${code(lignes)}`,
+        format: "qcm",
+        choices: shuffle([bonne, `${b} ${a}`, `${a} ${b}`, `${a} ${a}`]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une affectation ÉCRASE la valeur précédente : dès que `x = y` est exécutée, l'ancienne valeur de `x` a disparu de la mémoire.",
+          "On suit les deux variables ligne à ligne, sans supposer que l'ordinateur « se souvient » de ce qu'il vient de remplacer.",
+          `Après \`x = ${a}\` et \`y = ${b}\` : x vaut ${a}, y vaut ${b}. ` +
+            `Après \`x = y\` : x vaut ${b}, y vaut ${b} — le ${a} est perdu. ` +
+            `\`y = x\` recopie alors ${b} dans y, qui le contenait déjà.`,
+          `Le programme affiche « ${bonne} » : l'échange a échoué. Il aurait fallu une troisième variable pour mettre le ${a} de côté.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `${b} ${a}`,
+            cause: "a supposé que l'échange fonctionnait : c'est justement ce que ce programme ne fait PAS",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ algo_compteur ═══════════════════ */
 
   {
@@ -197,6 +243,60 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           "On parcourt la liste et l'on incrémente `c` chaque fois que la condition est vraie.",
           `Valeurs strictement supérieures à ${seuil} : ${donnees.filter((v) => v > seuil).join(", ") || "aucune"} — soit ${compte}.`,
           `Le programme affiche ${compte}.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — le compteur RÉINITIALISÉ dans la boucle. Le premier item fait
+    // lire un compteur correct ; celui-ci en montre un qui repart de zéro à
+    // chaque tour, et demande pourquoi le résultat est absurde. L'erreur tient
+    // à une seule indentation — c'est celle qu'on cherche le plus longtemps.
+    kind: "template",
+    id: "stmg_algo_compteur_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "algo_variables",
+    microId: "algo_compteur",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regarde À QUEL MOMENT la variable `c` est remise à zéro : dedans ou dehors ?",
+    tags: ["stmg", "maths", "algorithmique", "python", "diagnostic", "template"],
+    generate: () => {
+      const g = pick(GRANDEURS);
+      const donnees = Array.from({ length: 6 }, () => randomInt(5, 40));
+      const seuil = randomInt(12, 25);
+      const attendu = donnees.filter((v) => v > seuil).length;
+      const dernierDepasse = donnees[donnees.length - 1] > seuil;
+      const lignes = [
+        `${g.variable} = [${donnees.join(", ")}]`,
+        `for v in ${g.variable}:`,
+        `    c = 0`,
+        `    if v > ${seuil}:`,
+        `        c = c + 1`,
+        `print(c)`,
+      ];
+      const bonne = `la ligne \`c = 0\` est DANS la boucle : le compteur repart de zéro à chaque tour`;
+      return {
+        text:
+          `Ce programme devait compter les ${g.nom} supérieures à $${seuil}$ — il devrait afficher $${attendu}$. ` +
+          `Il affiche $${dernierDepasse ? 1 : 0}$. Où est l'erreur ?\n\n${code(lignes)}`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `la condition devrait être \`v >= ${seuil}\``,
+          `il manque un \`else\` pour les valeurs inférieures au seuil`,
+          `la liste est parcourue à l'envers`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un compteur s'initialise UNE FOIS, avant la boucle : il doit survivre d'un tour à l'autre pour cumuler. Placé à l'intérieur, il est remis à zéro à chaque passage.",
+          "On regarde l'indentation : ce qui est aligné sous le `for` est exécuté à chaque tour.",
+          `Ici \`c = 0\` est indentée sous le \`for\` : à chaque tour, le compteur oublie tout ce qu'il avait compté. ` +
+            `À la fin, il ne reste que le résultat du DERNIER tour — soit $${dernierDepasse ? 1 : 0}$, puisque la dernière valeur ($${donnees[donnees.length - 1]}$) ${dernierDepasse ? "dépasse" : "ne dépasse pas"} le seuil.`,
+          `Il faut sortir \`c = 0\` de la boucle, en la plaçant avant le \`for\` : le programme afficherait alors $${attendu}$.`
         ),
       };
     },
@@ -245,6 +345,65 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           `Le programme affiche ${total}.`
         ),
         choiceDiagnostics: [],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — passer de la SOMME au PRODUIT. Le premier item fait lire un
+    // accumulateur additif ; celui-ci demande ce qu'il faut changer pour
+    // cumuler des multiplications. Il y a DEUX modifications, et l'élève n'en
+    // voit qu'une : l'opération saute aux yeux, l'initialisation à $1$ jamais.
+    // Or partir de $0$ écrase tout.
+    kind: "template",
+    id: "stmg_algo_accumulateur_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "algo_variables",
+    microId: "algo_accumulateur",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un produit qui commence à zéro reste nul : l'élément neutre de la multiplication n'est pas $0$.",
+    tags: ["stmg", "maths", "algorithmique", "python", "template"],
+    generate: () => {
+      const coefs = Array.from({ length: 4 }, () => pick([1.05, 1.1, 1.2, 0.9, 0.8] as const));
+      const produit = coefs.reduce((s, v) => s * v, 1);
+      const lignes = [
+        `coefs = [${coefs.map((c) => fr(c).replace(",", ".")).join(", ")}]`,
+        `s = 0`,
+        `for c in coefs:`,
+        `    s = s + c`,
+        `print(s)`,
+      ];
+      const bonne = "remplacer `s = 0` par `s = 1`, et `s = s + c` par `s = s * c`";
+      return {
+        text:
+          `Ce programme cumule des coefficients multiplicateurs par ADDITION. ` +
+          `On veut qu'il calcule leur PRODUIT, c'est-à-dire le coefficient global. ` +
+          `Que faut-il changer ?\n\n${code(lignes)}`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          "remplacer seulement `s = s + c` par `s = s * c`",
+          "remplacer seulement `s = 0` par `s = 1`",
+          "il n'y a rien à changer : additionner des coefficients revient à les multiplier",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un accumulateur part de l'ÉLÉMENT NEUTRE de son opération : $0$ pour une somme, $1$ pour un produit. Sans quoi la première étape fausse tout le reste.",
+          "On change l'opération ET la valeur de départ — les deux vont ensemble.",
+          `Avec \`s = 0\` et une multiplication, on aurait $0 \\times ${fr(coefs[0])} = 0$, puis $0$ pour toujours. ` +
+            `Avec \`s = 1\`, on obtient $${coefs.map((c) => fr(c)).join(" \\times ")} \\approx ${fr(Math.round(produit * 10000) / 10000)}$ — ` +
+            `le coefficient global des quatre évolutions.`,
+          bonne
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "remplacer seulement `s = s + c` par `s = s * c`",
+            cause: "a changé l'opération sans changer le départ : le produit resterait nul",
+          },
+        ],
       };
     },
   },
@@ -298,6 +457,66 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — ce que le programme COMPTE, une fois la simulation lancée. Le
+    // premier item règle la condition d'un tirage ; celui-ci met cette épreuve
+    // dans une boucle et demande ce que rend le total. C'est le pont entre
+    // l'algorithmique et l'échantillonnage : un nombre de succès sur $n$
+    // épreuves, dont la fréquence fluctuera d'une exécution à l'autre.
+    kind: "template",
+    id: "stmg_algo_aleatoire_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "algo_variables",
+    microId: "algo_aleatoire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La boucle répète l'épreuve $n$ fois, et `s` s'incrémente à chaque succès.",
+    tags: ["stmg", "maths", "algorithmique", "python", "probabilites", "template"],
+    generate: () => {
+      const p = pick([0.1, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.75] as const);
+      const n = pick([50, 100, 200, 500] as const);
+      const pTexte = fr(p).replace(",", ".");
+      const lignes = [
+        `from random import random`,
+        ``,
+        `s = 0`,
+        `for i in range(${n}):`,
+        `    if random() < ${pTexte}:`,
+        `        s = s + 1`,
+        `print(s)`,
+      ];
+      const bonne = `le nombre de succès obtenus sur $${n}$ épreuves de probabilité $${fr(p)}$`;
+      return {
+        text: `Que représente le nombre affiché par ce programme ?\n\n${code(lignes)}`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `la probabilité de succès, soit $${fr(p)}$`,
+          `la fréquence des succès observée sur les $${n}$ épreuves`,
+          `le nombre d'épreuves, soit toujours $${n}$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le programme répète $n$ fois une épreuve de Bernoulli et incrémente un compteur à chaque succès : il affiche donc un NOMBRE de succès, un entier compris entre $0$ et $n$.",
+          "On sépare ce que compte la variable de ce qu'on en ferait ensuite : la fréquence demanderait une division supplémentaire.",
+          `\`s\` augmente de $1$ à chaque succès, et la boucle tourne $${n}$ fois : le résultat est un entier entre $0$ et $${n}$, ` +
+            `proche de $np = ${fr(Math.round(n * p * 100) / 100)}$ en moyenne. ` +
+            `Pour obtenir la FRÉQUENCE, il faudrait écrire \`print(s / ${n})\`. ` +
+            `Et deux exécutions ne donneront pas le même résultat : c'est la fluctuation d'échantillonnage.`,
+          bonne
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `la fréquence des succès observée sur les $${n}$ épreuves`,
+            cause: "il manque la division par le nombre d'épreuves : le programme affiche un effectif, pas une fréquence",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ algo_boucle_bornee ═══════════════════ */
 
   {
@@ -333,6 +552,49 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           "On compte les tours, puis on applique l'opération autant de fois.",
           `Le capital est multiplié $${n}$ fois par $${fr(q)}$ : $${depart} \\times ${fr(q)}^{${n}} \\approx ${fr(resultat)}$.`,
           `Le programme affiche ${fr(resultat)}.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — COMBIEN de tours, et non ce qui s'affiche. Le premier item
+    // déroule la boucle jusqu'au résultat ; celui-ci ne demande que le nombre
+    // de passages, avec un `range(a, b)` à deux arguments — la forme où l'on se
+    // trompe d'un, parce que la borne de gauche est incluse et celle de droite
+    // non.
+    kind: "template",
+    id: "stmg_algo_boucle_bornee_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "algo_boucles",
+    microId: "algo_boucle_bornee",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "`range(a, b)` part de $a$ INCLUS et s'arrête avant $b$ : il y a $b - a$ tours.",
+    tags: ["stmg", "maths", "algorithmique", "python", "template", "short"],
+    generate: () => {
+      const a = randomInt(1, 6);
+      const b = a + randomInt(3, 12);
+      const lignes = [
+        `total = 0`,
+        `for i in range(${a}, ${b}):`,
+        `    total = total + i`,
+        `print(total)`,
+      ];
+      return {
+        text:
+          `Combien de fois la ligne \`total = total + i\` est-elle exécutée ?\n\n${code(lignes)}`,
+        format: "short",
+        expected: [String(b - a)],
+        comparator: "number_equal",
+        explanation: exp(
+          "`range(a, b)` produit les entiers de $a$ jusqu'à $b - 1$ : la borne de gauche est INCLUSE, celle de droite ne l'est pas. La boucle fait donc $b - a$ tours.",
+          "On écrit la liste des valeurs prises par la variable de boucle, puis on les compte.",
+          `Ici \`i\` prend les valeurs ${Array.from({ length: Math.min(b - a, 6) }, (_, k) => a + k).join(", ")}` +
+            `${b - a > 6 ? ", … " : ""} et s'arrête à $${b - 1}$ : cela fait $${b} - ${a} = ${b - a}$ tours. ` +
+            `La valeur $${b}$ n'est jamais atteinte.`,
+          `La ligne est exécutée $${b - a}$ fois — et le total affiché vaudra $${Array.from({ length: b - a }, (_, k) => a + k).reduce((s, v) => s + v, 0)}$.`
         ),
       };
     },
@@ -382,6 +644,69 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
               : ` ; puis $${montant} ${montant >= s1 ? "\\geqslant" : "<"} ${s1}$ : on rend ${resultat}.`),
           `Le programme affiche ${resultat}.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — l'ORDRE des conditions, qui rend une branche INATTEIGNABLE. Le
+    // premier item déroule un `if / elif` bien rangé ; celui-ci le présente
+    // dans le mauvais ordre : le seuil le plus bas étant testé en premier, il
+    // attrape tout, et la remise de 15 % n'est jamais accordée. Le programme ne
+    // plante pas — il rend simplement un résultat faux, ce qui est pire.
+    kind: "template",
+    id: "stmg_algo_condition_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "algo_boucles",
+    microId: "algo_condition_si",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un montant très élevé dépasse AUSSI le petit seuil : quelle condition sera testée en premier ?",
+    tags: ["stmg", "maths", "algorithmique", "python", "diagnostic", "template"],
+    generate: () => {
+      const s1 = randomInt(200, 400);
+      const s2 = s1 + randomInt(200, 400);
+      const gros = s2 + randomInt(50, 300);
+      const lignes = [
+        `def remise(montant):`,
+        `    if montant >= ${s1}:`,
+        `        return 5`,
+        `    elif montant >= ${s2}:`,
+        `        return 15`,
+        `    else:`,
+        `        return 0`,
+        ``,
+        `print(remise(${gros}))`,
+      ];
+      const bonne = `il affiche $5$ : la première condition est déjà vraie, le \`elif\` n'est jamais testé`;
+      return {
+        text:
+          `Ce programme devrait accorder $15\\,\\%$ de remise au-delà de $${s2}$ €, et $5\\,\\%$ au-delà de $${s1}$ €. ` +
+          `Qu'affiche-t-il pour un montant de $${gros}$ € ?\n\n${code(lignes)}`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `il affiche $15$ : le montant dépasse bien $${s2}$ €`,
+          `il affiche $20$ : les deux remises s'additionnent`,
+          `il affiche $0$ : les conditions se contredisent`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Dans un `if / elif / else`, les conditions sont testées DANS L'ORDRE et l'exécution s'arrête à la première vraie. Une condition large placée en tête rend inatteignables toutes celles qui la suivent.",
+          "On teste le premier `if` avec la valeur donnée : s'il est vrai, tout le reste est ignoré.",
+          `$${gros} \\geqslant ${s1}$ : la première condition est vraie, la fonction rend $5$ et s'arrête là. ` +
+            `La branche à $15\\,\\%$ ne servira JAMAIS, quel que soit le montant. ` +
+            `Il faut tester les seuils du plus GRAND au plus petit.`,
+          bonne
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `il affiche $15$ : le montant dépasse bien $${s2}$ €`,
+            cause: "a lu les conditions comme un ensemble de règles, alors qu'elles s'excluent dans l'ordre d'écriture",
+          },
+        ],
       };
     },
   },
@@ -690,6 +1015,70 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — dérouler UN ALGORITHME EN LANGAGE NATUREL, avec la flèche. Le
+    // premier item continue un tableau de trace sur du Python ; celui-ci prend
+    // la notation qui tombe vraiment au bac — « ← » et « Tant que » — et
+    // demande la valeur finale. Un élève qui ne reconnaît pas la flèche perd le
+    // sujet dès la première ligne.
+    kind: "template",
+    id: "stmg_algo_derouler_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "algo_boucles",
+    microId: "algo_derouler",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La flèche « ← » se lit « reçoit » : c'est une affectation, comme le `=` de Python.",
+    tags: ["stmg", "maths", "algorithmique", "langage-naturel", "canvas", "template", "short"],
+    generate: () => {
+      const depart = pick([1000, 1500, 2000, 2500] as const);
+      const t = pick([5, 10, 20, 25] as const);
+      const q = 1 + t / 100;
+      const tours = randomInt(3, 5);
+      const lignes = [
+        `C ← ${depart}`,
+        `N ← 0`,
+        `Tant que N < ${tours}`,
+        `    C ← C × ${fr(q)}`,
+        `    N ← N + 1`,
+        `Fin Tant que`,
+        `Afficher C`,
+      ];
+      // ⚠️ On n'arrondit QUE pour l'affichage : en arrondissant la valeur
+      // courante à chaque tour, la trace dérivait de quelques centimes et ne
+      // tombait plus sur la réponse attendue.
+      const valeurs: number[] = [];
+      let c = depart;
+      for (let k = 0; k < tours; k++) {
+        c = c * q;
+        valeurs.push(Math.round(c * 100) / 100);
+      }
+      const resultat = Math.round(depart * Math.pow(q, tours) * 100) / 100;
+      return {
+        text:
+          `Cet algorithme est écrit en langage naturel. Quelle valeur affiche-t-il ? ` +
+          `(arrondie au centième)\n\n${pseudo(lignes)}`,
+        format: "short",
+        expected: [fr(resultat)],
+        comparator: "number_equal",
+        canvas: canvasTrace(
+          ["N", "C"],
+          [Array.from({ length: tours }, (_, k) => k + 1), valeurs],
+          "Déroulement de l'algorithme"
+        ),
+        explanation: exp(
+          "La flèche « ← » désigne l'AFFECTATION dans un algorithme écrit en langage naturel : « C ← C × 1,1 » se lit « C reçoit C multiplié par 1,1 ». C'est la notation employée dans les sujets de bac.",
+          "On dresse un tableau de déroulement : une colonne par tour, une ligne par variable.",
+          `Le compteur N va de $1$ à $${tours}$, et C est multiplié par $${fr(q)}$ à chaque tour : ` +
+            `$${depart} \\times ${fr(q)}^{${tours}} \\approx ${fr(resultat)}$. ` +
+            `La boucle s'arrête dès que N atteint $${tours}$, car la condition « N < $${tours}$ » devient fausse.`,
+          `L'algorithme affiche environ $${fr(resultat)}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ algo_liste_generer ═══════════════════ */
 
   {
@@ -744,6 +1133,57 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — l'instruction CHERCHÉE, pas la liste produite. Le premier item
+    // exécute une compréhension ; celui-ci donne le résultat et demande quelle
+    // écriture le produit. Les trois pièges sont les trois façons de se tromper
+    // d'un : partir de $1$, s'arrêter trop tôt, ou appliquer l'expression au
+    // rang plutôt qu'à la valeur.
+    kind: "template",
+    id: "stmg_algo_liste_generer_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "algo_listes",
+    microId: "algo_liste_generer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "`range(n)` commence à $0$ : pour obtenir une liste qui commence à $1$, il faut ajouter $1$ à l'indice.",
+    tags: ["stmg", "maths", "algorithmique", "python", "template"],
+    generate: () => {
+      const n = randomInt(4, 6);
+      const k = pick([2, 3, 5, 10] as const);
+      // La liste attendue commence à $k$ : elle est produite par
+      // `[k * (i + 1) for i in range(n)]`.
+      const attendue = Array.from({ length: n }, (_, i) => k * (i + 1));
+      const bonne = `\`L = [${k} * (i + 1) for i in range(${n})]\``;
+      return {
+        text: `Quelle instruction produit exactement la liste $[${attendue.join(", ")}]$ ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `\`L = [${k} * i for i in range(${n})]\``,
+          `\`L = [${k} * i for i in range(1, ${n})]\``,
+          `\`L = [i + ${k} for i in range(${n})]\``,
+          `\`L = [${k} * (i + 1) for i in range(${n - 1})]\``,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une liste en compréhension `[expression for i in range(n)]` applique l'expression à chaque valeur de $i$, qui va de $0$ à $n-1$.",
+          "On énumère mentalement les valeurs produites par chaque proposition et l'on compare à la liste voulue — le premier terme suffit souvent à trancher.",
+          `Avec \`${k} * (i + 1)\` et $i$ de $0$ à $${n - 1}$ : ${attendue.join(", ")}. ` +
+            `Avec \`${k} * i\`, la liste commencerait par $0$ ; avec \`range(1, ${n})\`, elle n'aurait que $${n - 1}$ termes.`,
+          `L'instruction correcte est ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `\`L = [${k} * i for i in range(${n})]\``,
+            cause: "oublie que `range` commence à $0$ : la liste débuterait par $0$",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ algo_liste_indices ═══════════════════ */
 
   {
@@ -771,6 +1211,50 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           `L'indice ${i} désigne le ${i + 1}ᵉ élément de la liste, soit ${donnees[i]}.`,
           `Le programme affiche ${donnees[i]}.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — l'indice du DERNIER élément. Le premier item lit `L[i]` pour un
+    // indice donné ; celui-ci demande lequel désigne la fin de la liste, et
+    // c'est là que le décalage d'un se paie : une liste de $n$ éléments s'arrête
+    // à l'indice $n-1$. Demander `L[n]` provoque une erreur, pas une valeur.
+    kind: "template",
+    id: "stmg_algo_liste_indices_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "algo_listes",
+    microId: "algo_liste_indices",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Les indices vont de $0$ à $n-1$ : il y en a bien $n$, mais le dernier n'est pas $n$.",
+    tags: ["stmg", "maths", "algorithmique", "python", "template"],
+    generate: () => {
+      const n = randomInt(5, 9);
+      const donnees = Array.from({ length: n }, () => randomInt(10, 90));
+      const bonne = `\`L[${n - 1}]\``;
+      return {
+        text:
+          `La liste \`L\` contient $${n}$ valeurs.\n\n${code([`L = [${donnees.join(", ")}]`])}\n` +
+          `Quelle écriture donne son DERNIER élément ?`,
+        format: "qcm",
+        choices: shuffle([bonne, `\`L[${n}]\``, `\`L[${n + 1}]\``, `\`L[1]\``]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "En Python, les indices d'une liste de $n$ éléments vont de $0$ à $n-1$ : le premier est `L[0]`, le dernier `L[n-1]`.",
+          "On compte les positions en partant de zéro — ou l'on retient que le dernier indice vaut la longueur MOINS UN.",
+          `Ici $${n}$ valeurs, donc les indices $0$ à $${n - 1}$ : le dernier élément est \`L[${n - 1}]\`, qui vaut $${donnees[n - 1]}$. ` +
+            `\`L[${n}]\` n'existe pas : Python renverrait une erreur « index out of range ».`,
+          `Le dernier élément s'écrit ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `\`L[${n}]\``,
+            cause: "a compté les éléments à partir de $1$ : cet indice dépasse la liste et provoque une erreur",
+          },
+        ],
       };
     },
   },
@@ -821,6 +1305,61 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — les DEUX façons d'itérer. Le premier item déroule un parcours
+    // par valeurs ; celui-ci met les deux écritures côte à côte —
+    // `for v in L` et `for i in range(len(L))` — et demande ce que rend
+    // chacune. L'élève qui les confond affiche des indices en croyant afficher
+    // des valeurs.
+    kind: "template",
+    id: "stmg_algo_liste_parcourir_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "algo_listes",
+    microId: "algo_liste_parcourir",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "`for v in L` donne les VALEURS ; `for i in range(len(L))` donne les POSITIONS.",
+    tags: ["stmg", "maths", "algorithmique", "python", "template"],
+    generate: () => {
+      const donnees = Array.from({ length: 4 }, () => randomInt(10, 90));
+      const parValeurs = Math.random() < 0.5;
+      const lignes = parValeurs
+        ? [`L = [${donnees.join(", ")}]`, `for v in L:`, `    print(v)`]
+        : [`L = [${donnees.join(", ")}]`, `for i in range(len(L)):`, `    print(i)`];
+      const bonne = parValeurs
+        ? `les quatre valeurs : $${donnees.join("$, $")}$`
+        : `les quatre indices : $0$, $1$, $2$, $3$`;
+      return {
+        text: `Qu'affiche ce programme, ligne après ligne ?\n\n${code(lignes)}`,
+        format: "qcm",
+        choices: shuffle([
+          `les quatre valeurs : $${donnees.join("$, $")}$`,
+          `les quatre indices : $0$, $1$, $2$, $3$`,
+          `une seule ligne : $${donnees.reduce((s, v) => s + v, 0)}$`,
+          `les quatre indices à partir de $1$ : $1$, $2$, $3$, $4$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Python offre deux parcours : `for v in L` fait prendre à `v` les VALEURS de la liste, tandis que `for i in range(len(L))` fait prendre à `i` les POSITIONS, de $0$ à $n-1$.",
+          "On regarde ce qui suit le `in` : une liste donne ses valeurs, un `range` donne des entiers.",
+          parValeurs
+            ? `Ici \`for v in L\` : \`v\` vaut successivement ${donnees.join(", ")}, et chaque tour affiche une valeur.`
+            : `Ici \`for i in range(len(L))\` : \`len(L)\` vaut $4$, donc \`i\` prend les valeurs $0$, $1$, $2$, $3$. ` +
+              `Pour afficher les valeurs, il faudrait écrire \`print(L[i])\`.`,
+          `Le programme affiche ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `une seule ligne : $${donnees.reduce((s, v) => s + v, 0)}$`,
+            cause: "le `print` est DANS la boucle : il s'exécute à chaque tour, et rien n'est cumulé",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ algo_liste_modifier ═══════════════════ */
 
   {
@@ -862,6 +1401,52 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           `Départ : [${depart.join(", ")}] ; après le premier append : [${[...depart, ajouts[0]].join(", ")}] ; ` +
             `après le second : [${resultat.join(", ")}].`,
           `La liste contient [${resultat.join(", ")}].`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — la liste CONSTRUITE dans une boucle, et sa longueur. Le premier
+    // item empile deux `append` écrits à la main ; celui-ci les met dans une
+    // boucle avec un filtre, et demande combien d'éléments il reste. C'est le
+    // geste réel : on part d'une liste vide et l'on n'y garde que ce qui
+    // convient.
+    kind: "template",
+    id: "stmg_algo_liste_modifier_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "algo_listes",
+    microId: "algo_liste_modifier",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La liste part VIDE : seuls les éléments qui passent le test y entrent.",
+    tags: ["stmg", "maths", "algorithmique", "python", "template", "short"],
+    generate: () => {
+      const g = pick(GRANDEURS);
+      const donnees = Array.from({ length: 8 }, () => randomInt(5, 60));
+      const seuil = randomInt(20, 40);
+      const retenues = donnees.filter((v) => v > seuil);
+      const lignes = [
+        `${g.variable} = [${donnees.join(", ")}]`,
+        `L = []`,
+        `for v in ${g.variable}:`,
+        `    if v > ${seuil}:`,
+        `        L.append(v)`,
+        `print(len(L))`,
+      ];
+      return {
+        text: `Qu'affiche ce programme ?\n\n${code(lignes)}`,
+        format: "short",
+        expected: [String(retenues.length)],
+        comparator: "number_equal",
+        explanation: exp(
+          "`append` ajoute un élément à la fin d'une liste, et `len` en donne la longueur. Une liste initialisée à `[]` ne contient donc, à la fin, que les éléments ayant passé le test.",
+          "On parcourt les données, on retient celles qui vérifient la condition, puis on les compte.",
+          `Valeurs strictement supérieures à $${seuil}$ : ${retenues.length > 0 ? retenues.join(", ") : "aucune"}. ` +
+            `La liste \`L\` contient donc $${retenues.length}$ élément(s), et c'est cette longueur qui s'affiche — ` +
+            `pas les valeurs elles-mêmes.`,
+          `Le programme affiche $${retenues.length}$.`
         ),
       };
     },
@@ -910,6 +1495,61 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — la SORTIE, l'autre moitié du libellé. Le premier item demande
+    // les entrées ; celui-ci demande ce que la fonction rend, et les pièges
+    // sont ceux qu'on entend en classe : « elle affiche », « elle renvoie la
+    // variable ». Une fonction ne rend qu'UNE chose, celle qui suit `return`.
+    kind: "template",
+    id: "stmg_algo_fct_es_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "algo_fonctions",
+    microId: "algo_fct_entrees_sorties",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La sortie est ce qui suit le mot `return` — pas ce qui est affiché à l'écran.",
+    tags: ["stmg", "maths", "algorithmique", "python", "template"],
+    generate: () => {
+      const seuil = pick([100, 150, 200, 300] as const);
+      const t = pick([5, 10, 15, 20] as const);
+      const lignes = [
+        `def frais_port(montant):`,
+        `    if montant >= ${seuil}:`,
+        `        return 0`,
+        `    else:`,
+        `        return ${t}`,
+      ];
+      const bonne = `un montant de frais de port : $0$ ou $${t}$ selon le cas`;
+      return {
+        text: `Que RENVOIE la fonction \`frais_port\` ?\n\n${code(lignes)}`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `le montant de la commande, tel qu'il a été donné`,
+          `rien : elle se contente d'afficher les frais de port`,
+          `les deux valeurs $0$ et $${t}$ à la fois`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La SORTIE d'une fonction est la valeur transmise par `return`. Une fonction peut contenir plusieurs `return`, mais un seul s'exécute : dès qu'il est atteint, la fonction s'arrête et rend sa valeur.",
+          "On repère tous les `return` et l'on regarde ce qu'ils portent : c'est cela, et rien d'autre, qui sort de la fonction.",
+          `Les deux \`return\` rendent un nombre : $0$ si le montant atteint $${seuil}$ €, $${t}$ sinon. ` +
+            `L'entrée est \`montant\`, la sortie est le montant des frais de port. ` +
+            `Il n'y a aucun \`print\` : la fonction n'affiche rien, elle RENVOIE.`,
+          `La fonction renvoie ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `rien : elle se contente d'afficher les frais de port`,
+            cause: "confond `return` et `print` : l'un transmet une valeur au programme, l'autre l'écrit à l'écran",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ algo_fct_definir ═══════════════════ */
 
   {
@@ -949,6 +1589,60 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — le nombre d'ARGUMENTS. Le premier item guette le `return`
+    // manquant ; celui-ci guette l'autre erreur de définition : une fonction à
+    // deux paramètres appelée avec un seul. Python refuse d'exécuter, et le
+    // message d'erreur est illisible pour un élève — d'où l'intérêt de savoir
+    // le prévoir en lisant.
+    kind: "template",
+    id: "stmg_algo_fct_definir_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "algo_fonctions",
+    microId: "algo_fct_definir",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compte les paramètres de la ligne `def`, puis les valeurs données lors de l'appel.",
+    tags: ["stmg", "maths", "algorithmique", "python", "diagnostic", "template"],
+    generate: () => {
+      const prix = pick([80, 120, 150, 200, 250] as const);
+      const lignes = [
+        `def prix_ttc(prix_ht, taux):`,
+        `    return prix_ht * (1 + taux / 100)`,
+        ``,
+        `print(prix_ttc(${prix}))`,
+      ];
+      const bonne = "l'appel ne donne qu'une valeur alors que la fonction en attend deux";
+      return {
+        text: `Ce programme provoque une erreur. Pourquoi ?\n\n${code(lignes)}`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          "il manque le `return` dans la définition de la fonction",
+          "le nom `prix_ht` n'existe pas en dehors de la fonction",
+          "on ne peut pas mettre un appel de fonction dans un `print`",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une fonction s'appelle avec exactement autant d'arguments qu'elle a de paramètres, et dans le même ordre. Python vérifie ce nombre avant d'exécuter quoi que ce soit.",
+          "On compte les paramètres de la ligne `def`, puis les valeurs de l'appel : les deux nombres doivent coïncider.",
+          `\`def prix_ttc(prix_ht, taux)\` déclare DEUX paramètres, mais l'appel \`prix_ttc(${prix})\` n'en fournit qu'un : ` +
+            `Python ne sait pas quelle valeur donner à \`taux\`. ` +
+            `Il faudrait écrire par exemple \`prix_ttc(${prix}, 20)\`.`,
+          bonne
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "le nom `prix_ht` n'existe pas en dehors de la fonction",
+            cause: "c'est vrai en général, mais ce n'est pas ce qui bloque ici : le programme n'utilise `prix_ht` que dans la fonction",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ algo_fct_appeler ═══════════════════ */
 
   {
@@ -982,6 +1676,49 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           "On substitue, puis on effectue le calcul du `return`.",
           `\`prix_ht\` vaut ${prix} et \`taux\` vaut ${t}, donc le résultat est $${prix} \\times (1 + ${fr(t / 100)}) = ${fr(resultat)}$.`,
           `Le programme affiche ${fr(resultat)}.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — l'appel IMBRIQUÉ. Le premier item substitue deux arguments dans
+    // l'ordre ; celui-ci applique la fonction au résultat d'elle-même, ce qui
+    // arrive dès qu'on compose deux évolutions. Il faut calculer de l'intérieur
+    // vers l'extérieur, comme dans une expression à parenthèses.
+    kind: "template",
+    id: "stmg_algo_fct_appeler_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "algo_fonctions",
+    microId: "algo_fct_appeler",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On calcule d'abord l'appel du DEDANS, puis on applique la fonction à son résultat.",
+    tags: ["stmg", "maths", "algorithmique", "python", "template", "short"],
+    generate: () => {
+      const capital = pick([1000, 1500, 2000, 2500, 4000] as const);
+      const t = pick([2, 5, 10, 20, 25] as const);
+      const q = 1 + t / 100;
+      const lignes = [
+        `def apres_un_an(c):`,
+        `    return c * ${fr(q).replace(",", ".")}`,
+        ``,
+        `print(apres_un_an(apres_un_an(${capital})))`,
+      ];
+      const resultat = Math.round(capital * q * q * 100) / 100;
+      return {
+        text: `Qu'affiche ce programme ?\n\n${code(lignes)}`,
+        format: "short",
+        expected: [fr(resultat)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Quand un appel de fonction sert d'argument à un autre appel, on évalue d'abord celui de l'INTÉRIEUR : son résultat devient l'entrée du suivant.",
+          "On calcule l'appel interne, on note sa valeur, puis on relance la fonction sur cette valeur.",
+          `Appel interne : $${capital} \\times ${fr(q)} = ${fr(Math.round(capital * q * 100) / 100)}$. ` +
+            `Appel externe : $${fr(Math.round(capital * q * 100) / 100)} \\times ${fr(q)} = ${fr(resultat)}$. ` +
+            `Autrement dit, le capital a subi DEUX années d'évolution : $${capital} \\times ${fr(q)}^2$.`,
+          `Le programme affiche $${fr(resultat)}$.`
         ),
       };
     },
@@ -1036,6 +1773,69 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — ce qu'il faut changer QUAND LE TAUX CHANGE. Le premier item
+    // demande l'intérêt d'une fonction en général ; celui-ci le fait mesurer :
+    // avec la fonction, une seule ligne à corriger ; sans elle, autant de
+    // lignes que d'endroits où le calcul était recopié. C'est l'argument qui
+    // convainc, parce qu'il se compte.
+    kind: "template",
+    id: "stmg_algo_fct_structurer_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "algo_fonctions",
+    microId: "algo_fct_structurer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche combien de fois le taux apparaît dans le programme.",
+    tags: ["stmg", "maths", "algorithmique", "python", "template"],
+    generate: () => {
+      const t = pick([5, 10, 20] as const);
+      const nouveau = pick([5.5, 8, 15, 25].filter((v) => v !== t));
+      const q = fr(1 + t / 100).replace(",", ".");
+      const prix = Array.from({ length: 3 }, () => randomInt(50, 300));
+      const lignes = [
+        `panier = [${prix.join(", ")}]`,
+        `total = 0`,
+        `for p in panier:`,
+        `    total = total + p * ${q}`,
+        ``,
+        `frais = 15 * ${q}`,
+        `assurance = 40 * ${q}`,
+        `print(round(total + frais + assurance, 2))`,
+      ];
+      const bonne = `trois lignes, car le coefficient $${q.replace(".", ",")}$ y est recopié trois fois`;
+      return {
+        text:
+          `Ce programme applique une TVA de $${t}\\,\\%$ sans utiliser de fonction. ` +
+          `Le taux passe à $${fr(nouveau)}\\,\\%$ : combien de lignes faut-il modifier ?\n\n${code(lignes)}`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `une seule ligne : celle de la boucle`,
+          `aucune : le programme s'adapte tout seul`,
+          `toutes les lignes du programme`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Structurer un programme avec des fonctions, c'est écrire chaque calcul UNE SEULE FOIS. Recopié à plusieurs endroits, il devra être corrigé partout — et l'on en oublie toujours un.",
+          "On compte les endroits où la valeur à changer apparaît.",
+          `Le coefficient \`${q}\` apparaît trois fois : dans la boucle, dans le calcul des frais et dans celui de l'assurance. ` +
+            `Avec une fonction \`def prix_ttc(ht): return ht * ${q}\`, il n'apparaîtrait qu'UNE fois : ` +
+            `passer à $${fr(nouveau)}\\,\\%$ ne demanderait qu'une seule correction, et aucun oubli ne serait possible.`,
+          `Il faut modifier ${bonne} — c'est exactement ce qu'une fonction évite.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `une seule ligne : celle de la boucle`,
+            cause: "n'a vu que le premier usage : les frais et l'assurance appliquent aussi le taux",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ tab_lire ═══════════════════ */
 
   {
@@ -1073,6 +1873,61 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           `La cellule B${ligne} se trouve à l'intersection de la colonne B et de la ligne ${ligne} : elle contient ${valeurs[ligne - 2]}.`,
           `B${ligne} contient ${valeurs[ligne - 2]}.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — la RÉFÉRENCE cherchée, pas la valeur. Le premier item lit le
+    // contenu d'une cellule désignée ; celui-ci part de la valeur et demande où
+    // elle se trouve. C'est le geste qu'on fait pour écrire une formule : on
+    // repère l'adresse avant de la taper.
+    kind: "template",
+    id: "stmg_tab_lire_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "tableur_formules",
+    microId: "tab_lire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "On nomme d'abord la colonne (une lettre), puis la ligne (un nombre) : B3, jamais 3B.",
+    tags: ["stmg", "maths", "tableur", "canvas", "template"],
+    generate: () => {
+      const mois = ["Janvier", "Février", "Mars", "Avril", "Mai"];
+      // Valeurs deux à deux distinctes : sinon deux cellules porteraient la
+      // même, et la question n'aurait plus de réponse unique.
+      const valeurs = shuffle([200, 340, 450, 520, 610, 730, 880, 910]).slice(0, 5);
+      const k = randomInt(0, 4);
+      const ligne = k + 2;
+      const bonne = `\`B${ligne}\``;
+      return {
+        text: `Dans quelle cellule se trouve la valeur $${valeurs[k]}$ ?`,
+        format: "qcm",
+        choices: shuffle([bonne, `\`A${ligne}\``, `\`B${k + 1}\``, `\`${ligne}B\``]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: {
+          kind: "tableau_donnees",
+          title: "Feuille de calcul — chiffre d'affaires mensuel (€)",
+          headers: ["", "A", "B"],
+          rows: [
+            { label: "1", values: ["Mois", "CA (€)"] },
+            ...mois.map((m, i) => ({ label: String(i + 2), values: [m, String(valeurs[i])] })),
+          ],
+        } satisfies CanvasFigure,
+        explanation: exp(
+          "Une cellule se désigne par sa COLONNE, en lettre, suivie de sa LIGNE, en chiffre : toujours dans cet ordre.",
+          "On repère la valeur dans la feuille, puis on lit son en-tête de colonne et son numéro de ligne.",
+          `La valeur $${valeurs[k]}$ est dans la colonne B (les montants) et sur la ligne ${ligne} (le mois de ${mois[k]}) : ` +
+            `c'est donc la cellule \`B${ligne}\`. La colonne A contiendrait le nom du mois, et la ligne 1 les en-têtes.`,
+          `La valeur se trouve en ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `\`${ligne}B\``,
+            cause: "a inversé l'ordre : la lettre de colonne vient toujours en premier",
+          },
+        ],
       };
     },
   },
@@ -1128,6 +1983,56 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
               : `$${valeurs[2]} - ${valeurs[0]} = ${resultat}$.`,
           `La formule renvoie ${fr(resultat)}.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — TRADUIRE la formule en français. Le premier item la fait
+    // exécuter et rend un nombre ; celui-ci demande ce qu'elle SIGNIFIE en
+    // gestion. C'est ce qu'on attend dans une copie : « cette formule calcule
+    // le chiffre d'affaires augmenté de 5 % » — et un élève peut calculer sans
+    // savoir dire cela.
+    kind: "template",
+    id: "stmg_tab_comprendre_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "tableur_formules",
+    microId: "tab_comprendre_formule",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un coefficient supérieur à $1$ signale une hausse ; inférieur à $1$, une baisse.",
+    tags: ["stmg", "maths", "tableur", "template"],
+    generate: () => {
+      const t = pick([2, 5, 10, 15, 20, 25] as const);
+      const hausse = Math.random() < 0.5;
+      const q = fr(hausse ? 1 + t / 100 : 1 - t / 100).replace(",", ".");
+      const bonne = `le contenu de B2 ${hausse ? "augmenté" : "diminué"} de $${t}\\,\\%$`;
+      return {
+        text: `Que calcule la formule \`=B2*${q}\` saisie dans une feuille de calcul ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `le contenu de B2 ${hausse ? "diminué" : "augmenté"} de $${t}\\,\\%$`,
+          `le contenu de B2 ${hausse ? "augmenté" : "diminué"} de $${fr(hausse ? 1 + t / 100 : 1 - t / 100)}$ €`,
+          `$${t}\\,\\%$ du contenu de B2`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Multiplier par un coefficient, c'est appliquer une évolution : $1 + \\dfrac{t}{100}$ pour une hausse, $1 - \\dfrac{t}{100}$ pour une baisse. Le coefficient se lit donc comme un pourcentage.",
+          "On compare le coefficient à $1$ : au-dessus, c'est une hausse ; en dessous, une baisse. L'écart à $1$ donne le taux.",
+          `Le coefficient $${q.replace(".", ",")}$ est ${hausse ? "supérieur" : "inférieur"} à $1$, et son écart à $1$ vaut $${fr(t / 100)}$ : ` +
+            `c'est une ${hausse ? "hausse" : "baisse"} de $${t}\\,\\%$. ` +
+            `Prendre seulement $${t}\\,\\%$ du contenu s'écrirait \`=B2*${fr(t / 100).replace(",", ".")}\`, ce qui est tout autre chose.`,
+          `La formule calcule ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$${t}\\,\\%$ du contenu de B2`,
+            cause: "confond le coefficient multiplicateur et le pourcentage lui-même : le $1$ garde la valeur de départ",
+          },
+        ],
       };
     },
   },
@@ -1191,6 +2096,64 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — la recopie vers la DROITE, l'autre moitié du libellé. Le
+    // premier item écrit une formule qui descend ; celle-ci se déplace
+    // latéralement, et ce sont alors les LETTRES de colonne qui changent, pas
+    // les numéros de ligne. Un élève qui n'a vu que la recopie vers le bas
+    // écrit une formule qui ne suit pas.
+    // ⛔⛔ Les références restent entre accents graves : nue, « =$B$2 » passe
+    // dans KaTeX, qui prend les dollars pour des délimiteurs et les avale.
+    kind: "template",
+    id: "stmg_tab_ecrire_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "tableur_formules",
+    microId: "tab_ecrire_formule",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Vers la droite, ce sont les LETTRES qui avancent : B devient C, puis D.",
+    tags: ["stmg", "maths", "tableur", "template"],
+    generate: () => {
+      const ligneQuantite = 2;
+      const lignePrix = 3;
+      const ligneTotal = 4;
+      const colonne = pick(["B", "C", "D"] as const);
+      const suivante = colonne === "B" ? "C" : colonne === "C" ? "D" : "E";
+      const bonne = `\`=${colonne}${ligneQuantite}*${colonne}${lignePrix}\``;
+      return {
+        text:
+          `Une feuille de calcul donne, en ligne ${ligneQuantite}, les quantités vendues, ` +
+          `et en ligne ${lignePrix}, les prix unitaires — un mois par colonne. ` +
+          `On veut le chiffre d'affaires en ligne ${ligneTotal}. ` +
+          `Quelle formule saisir en ${colonne}${ligneTotal} pour pouvoir la recopier vers la DROITE ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `\`=$${colonne}$${ligneQuantite}*$${colonne}$${lignePrix}\``,
+          `\`=${colonne}${lignePrix}*${suivante}${lignePrix}\``,
+          `\`=${colonne}${ligneQuantite}+${colonne}${lignePrix}\``,
+          `\`=${suivante}${ligneQuantite}*${suivante}${lignePrix}\``,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une formule recopiée vers la DROITE voit ses références de COLONNE avancer d'une lettre, tandis que les numéros de ligne restent les mêmes. En adressage relatif, cette adaptation est automatique.",
+          "On écrit la formule pour la première colonne, en pensant à ce qu'elle deviendra une colonne plus loin.",
+          `${bonne} recopiée en ${suivante}${ligneTotal} devient \`=${suivante}${ligneQuantite}*${suivante}${lignePrix}\` : ` +
+            `quantité fois prix du mois suivant, ce qui est exactement voulu. ` +
+            `Avec des dollars partout, la formule resterait figée sur le premier mois et recopierait le même total.`,
+          `Il faut saisir ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `\`=$${colonne}$${ligneQuantite}*$${colonne}$${lignePrix}\``,
+            cause: "a tout figé : la recopie donnerait partout le chiffre d'affaires du premier mois",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ tab_adressage ═══════════════════ */
 
   {
@@ -1243,6 +2206,65 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — CHOISIR l'adressage, au lieu de subir la recopie. Le premier
+    // item prédit ce que devient une formule ; celui-ci part du besoin — un
+    // taux rangé dans une seule cellule, à réutiliser sur toute une colonne —
+    // et demande la formule à écrire. C'est le seul cas où les dollars
+    // servent, et c'est celui du bac.
+    // ⛔⛔ Références entre accents graves, toujours : les dollars nus seraient
+    // avalés par KaTeX.
+    kind: "template",
+    id: "stmg_tab_adressage_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "tableur_recopie",
+    microId: "tab_adressage",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La cellule du taux ne doit PAS bouger quand la formule descend : il faut la figer.",
+    tags: ["stmg", "maths", "tableur", "template"],
+    generate: () => {
+      const t = pick([5, 10, 20] as const);
+      const ligne = randomInt(2, 4);
+      const bonne = `\`=B${ligne}*$D$1\``;
+      return {
+        text:
+          `La cellule D1 contient le taux de TVA ($${t}\\,\\%$), et la colonne B les prix hors taxes. ` +
+          `On saisit une formule en C${ligne} pour calculer la TVA, puis on la recopie vers le bas. ` +
+          `Quelle formule faut-il écrire ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `\`=B${ligne}*D1\``,
+          `\`=$B$${ligne}*$D$1\``,
+          `\`=B${ligne}*D${ligne}\``,
+          `\`=$B$${ligne}*D1\``,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une référence RELATIVE se décale à la recopie ; une référence ABSOLUE, écrite avec des dollars, reste figée. On fige ce qui ne doit pas bouger, et on laisse libre ce qui doit suivre.",
+          "On se demande, pour chaque référence : à la ligne suivante, doit-elle changer ou non ?",
+          `Le prix hors taxes change à chaque ligne : \`B${ligne}\` reste relative. ` +
+            `Le taux est rangé une fois pour toutes en D1 : sans dollars, la recopie irait chercher D${ligne + 1}, ` +
+            `puis D${ligne + 2} — des cellules vides, et le résultat tomberait à zéro. ` +
+            `On écrit donc \`$D$1\`.`,
+          `Il faut saisir ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `\`=B${ligne}*D1\``,
+            cause: "n'a pas figé le taux : à la recopie, la formule pointerait des cellules vides",
+          },
+          {
+            choice: `\`=$B$${ligne}*$D$1\``,
+            cause: "a tout figé : la formule donnerait le même montant sur toute la colonne",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════ tab_exploiter_colonne ═══════════════ */
 
   {
@@ -1282,6 +2304,55 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           "On descend la colonne et l'on s'arrête à la première valeur strictement supérieure au seuil.",
           `Année ${rang - 1} : $${valeurs[rang - 1]}$ € (sous le seuil) ; année ${rang} : $${valeurs[rang]}$ € (au-dessus).`,
           `Le capital dépasse $${seuil}$ € à partir de l'année ${rang}.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — COMBIEN de lignes franchissent le seuil, et non à partir de
+    // laquelle. Le premier item cherche le premier dépassement dans une colonne
+    // croissante ; ici les valeurs montent et descendent, et il faut toutes les
+    // examiner. C'est ce que fait un filtre de tableur, et c'est ce que
+    // comptera le programme Python de la micro voisine.
+    kind: "template",
+    id: "stmg_tab_exploiter_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "tableur_recopie",
+    microId: "tab_exploiter_colonne",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La colonne ne monte pas régulièrement : il faut lire TOUTES les lignes.",
+    tags: ["stmg", "maths", "tableur", "canvas", "template", "short"],
+    generate: () => {
+      const mois = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août"];
+      // Valeurs multiples de 20, deux à deux distinctes : l'objectif tombe à
+      // mi-chemin entre deux d'entre elles, donc jamais SUR une valeur.
+      const valeurs = shuffle([60, 80, 100, 120, 140, 160, 180, 200]).slice(0, 6);
+      const triees = [...valeurs].sort((a, b) => a - b);
+      const rang = randomInt(1, 5);
+      const objectif = (triees[rang - 1] + triees[rang]) / 2;
+      const combien = 6 - rang;
+      return {
+        text:
+          `La colonne B donne le chiffre d'affaires mensuel, en k€. ` +
+          `Combien de mois ont dépassé l'objectif de $${objectif}$ k€ ?`,
+        format: "short",
+        expected: [String(combien)],
+        comparator: "number_equal",
+        canvas: {
+          kind: "tableau_donnees",
+          title: "Feuille de calcul — chiffre d'affaires mensuel (k€)",
+          headers: ["", "A (mois)", "B (CA)"],
+          rows: valeurs.map((v, k) => ({ label: String(k + 2), values: [mois[k], String(v)] })),
+        } satisfies CanvasFigure,
+        explanation: exp(
+          "Exploiter une colonne, c'est la parcourir en entier pour répondre à une question de seuil — c'est exactement ce que fait un filtre de tableur.",
+          "On compare chaque ligne à l'objectif, sans supposer que la colonne est ordonnée.",
+          `Les valeurs, remises dans l'ordre : ${triees.join(", ")}. ` +
+            `Au-dessus de $${objectif}$ : ${triees.slice(rang).join(", ")} — soit $${combien}$ mois sur $6$.`,
+          `$${combien}$ mois ont dépassé l'objectif.`
         ),
       };
     },
@@ -1359,6 +2430,64 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — CRITIQUER un graphique déjà choisi. Le premier item désigne la
+    // bonne représentation ; celui-ci en montre une inadaptée et demande
+    // pourquoi. Dire ce qui cloche vaut mieux que reconnaître ce qui convient :
+    // c'est ce qu'on demande devant le graphique d'un journal.
+    kind: "template",
+    id: "stmg_tab_choisir_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "tableur_recopie",
+    microId: "tab_choisir_representation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un camembert montre des parts d'un TOUT : que vaudrait la « part » d'une année ?",
+    tags: ["stmg", "maths", "tableur", "canvas", "diagnostic", "template"],
+    generate: () => {
+      const annees = ["2021", "2022", "2023", "2024", "2025"];
+      const valeurs = annees.map(() => randomInt(20, 60) * 10);
+      const bonne =
+        "les années ne forment pas un tout dont on partagerait les parts : on veut voir une évolution";
+      return {
+        text:
+          `On a représenté le chiffre d'affaires annuel d'une entreprise par un diagramme circulaire. ` +
+          `Pourquoi ce choix est-il inadapté ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          "un diagramme circulaire ne peut pas afficher plus de quatre catégories",
+          "les valeurs sont trop grandes pour un diagramme circulaire",
+          "il aurait fallu convertir les montants en pourcentages avant de tracer",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        canvas: {
+          kind: "stat_graph",
+          graphType: "camembert",
+          title: "Chiffre d'affaires annuel (k€) — représentation à critiquer",
+          data: annees.map((label, k) => ({ label, value: valeurs[k] })),
+          display: { showValues: true, showLabels: true },
+        } satisfies CanvasFigure,
+        explanation: exp(
+          "Un diagramme circulaire représente la répartition d'un TOUT en parts : il suppose que les catégories s'additionnent en un ensemble qui a un sens. Une chronologie n'est pas un tout à partager.",
+          "On se demande ce que signifierait la part de chaque secteur — puis ce que la représentation empêche de voir.",
+          `Ici, le secteur de $${annees[0]}$ vaudrait « $${fr(Math.round((valeurs[0] / valeurs.reduce((s, v) => s + v, 0)) * 1000) / 10)}\\,\\%$ du chiffre d'affaires des cinq années » : ` +
+            `une information dont personne n'a l'usage. Et surtout, le camembert cache l'essentiel — la progression, ou la chute, d'une année sur l'autre. ` +
+            `Une courbe la montrerait d'un coup d'œil.`,
+          `Le choix est inadapté parce que ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "un diagramme circulaire ne peut pas afficher plus de quatre catégories",
+            cause: "aucune limite technique n'est en cause : c'est la NATURE des données qui ne convient pas",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ logique_et ═══════════════════ */
 
   {
@@ -1406,6 +2535,58 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           `Clients avec CA > ${seuilCa} ET ancienneté > ${seuilAnc} : ${compte}.`,
           `Le programme affiche ${compte}.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — TRADUIRE une phrase en condition. Le premier item compte les
+    // lignes retenues par un filtre déjà écrit ; celui-ci part du français —
+    // « les clients à la fois anciens et importants » — et demande la
+    // condition. C'est le geste du filtre de tableur, et le « et » y a un sens
+    // strict : les deux à la fois.
+    kind: "template",
+    id: "stmg_logique_et_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "logique_connecteurs",
+    microId: "logique_et",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "« À la fois » se traduit par `and` : les deux conditions doivent être vraies en même temps.",
+    tags: ["stmg", "maths", "logique", "python", "template"],
+    generate: () => {
+      const seuilCa = randomInt(30, 60) * 100;
+      const seuilAnc = randomInt(3, 10);
+      const bonne = `\`if ca > ${seuilCa} and anc > ${seuilAnc}:\``;
+      return {
+        text:
+          `On veut retenir les clients dont le chiffre d'affaires dépasse $${seuilCa}$ € ` +
+          `ET dont l'ancienneté dépasse $${seuilAnc}$ ans. ` +
+          `Quelle condition faut-il écrire ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `\`if ca > ${seuilCa} or anc > ${seuilAnc}:\``,
+          `\`if ca > ${seuilCa}:\``,
+          `\`if ca > ${seuilCa} and anc < ${seuilAnc}:\``,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le connecteur ET n'est vrai que si les DEUX propositions le sont : il RESTREINT la sélection. Le OU, lui, l'élargit.",
+          "On traduit chaque exigence de la phrase, puis on les relie par le connecteur qui correspond à « et ».",
+          `« dépasse $${seuilCa}$ € » donne \`ca > ${seuilCa}\`, « dépasse $${seuilAnc}$ ans » donne \`anc > ${seuilAnc}\`, ` +
+            `et « ET » les relie par \`and\`. ` +
+            `Avec \`or\`, un client récent mais gros passerait le filtre — ce n'est pas ce qu'on demande.`,
+          `La condition est ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `\`if ca > ${seuilCa} or anc > ${seuilAnc}:\``,
+            cause: "le `or` retient les clients qui vérifient UNE seule des deux exigences",
+          },
+        ],
       };
     },
   },
@@ -1460,6 +2641,59 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — comparer les DEUX filtres sur les mêmes données. Le premier
+    // item compte les lignes retenues par un `or` ; celui-ci met les deux
+    // comptages face à face et demande si l'écart est cohérent. Le OU retient
+    // toujours au moins autant que le ET — un élève qui trouve l'inverse a
+    // interverti ses connecteurs.
+    kind: "template",
+    id: "stmg_logique_ou_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "logique_connecteurs",
+    microId: "logique_ou",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Tout client retenu par le ET est aussi retenu par le OU : le second groupe contient le premier.",
+    tags: ["stmg", "maths", "logique", "template"],
+    generate: () => {
+      const avecEt = randomInt(3, 12);
+      const avecOu = avecEt + randomInt(4, 20);
+      const total = avecOu + randomInt(5, 30);
+      const bonne = `oui : tout client retenu par le ET l'est aussi par le OU, donc le OU en retient toujours au moins autant`;
+      return {
+        text:
+          `Sur un fichier de $${total}$ clients, un filtre « chiffre d'affaires élevé ET ancienneté élevée » ` +
+          `retient $${avecEt}$ clients ; le filtre « chiffre d'affaires élevé OU ancienneté élevée » en retient $${avecOu}$. ` +
+          `Ce résultat est-il cohérent ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `non : le ET devrait retenir plus de clients que le OU, puisqu'il pose deux conditions`,
+          `non : les deux filtres devraient donner le même nombre`,
+          `on ne peut pas le dire sans connaître les deux seuils`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le connecteur ET exige les deux propositions ; le OU se contente d'une. Le groupe retenu par le ET est donc TOUJOURS inclus dans celui retenu par le OU.",
+          "On raisonne par inclusion : un client qui vérifie les deux conditions en vérifie forcément au moins une.",
+          `Ici $${avecEt} \\leqslant ${avecOu}$ : cohérent. ` +
+            `Les $${avecOu - avecEt}$ clients de l'écart ne vérifient qu'UNE des deux conditions. ` +
+            `Poser deux exigences au lieu d'une ne peut que réduire le nombre de lignes retenues, jamais l'augmenter.`,
+          bonne
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `non : le ET devrait retenir plus de clients que le OU, puisqu'il pose deux conditions`,
+            cause: "confond le nombre de CONDITIONS et le nombre de lignes retenues : plus on exige, moins on retient",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ logique_non ═══════════════════ */
 
   {
@@ -1501,6 +2735,86 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
           {
             choice: `le montant est $${lire(sens === ">" ? "<" : sens === "<" ? ">" : sens === "\\geqslant" ? "\\leqslant" : "\\geqslant")} ${seuil}$`,
             cause: "a oublié le cas d'égalité : les deux propositions laisseraient un trou",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — nier « TOUS » et « AU MOINS UN ». Le premier item nie une
+    // inégalité ; celui-ci nie une proposition portant sur une population
+    // entière, et le renversement surprend : le contraire de « tous » n'est pas
+    // « aucun ». C'est l'erreur qui fait rater les contrôles qualité.
+    kind: "template",
+    id: "stmg_logique_non_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "logique_connecteurs",
+    microId: "logique_non",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Pour qu'« ils sont TOUS conformes » soit faux, il suffit d'UN seul qui ne le soit pas.",
+    tags: ["stmg", "maths", "logique", "template"],
+    generate: () => {
+      const cas = pick([
+        {
+          prop: "tous les colis sont arrivés à l'heure",
+          bonne: "au moins un colis n'est pas arrivé à l'heure",
+          pieges: [
+            "aucun colis n'est arrivé à l'heure",
+            "tous les colis sont arrivés en retard",
+            "la moitié des colis sont arrivés à l'heure",
+          ],
+        },
+        {
+          prop: "toutes les pièces du lot sont conformes",
+          bonne: "au moins une pièce du lot n'est pas conforme",
+          pieges: [
+            "aucune pièce du lot n'est conforme",
+            "toutes les pièces du lot sont défectueuses",
+            "la plupart des pièces du lot sont conformes",
+          ],
+        },
+        {
+          prop: "au moins un client a renouvelé son contrat",
+          bonne: "aucun client n'a renouvelé son contrat",
+          pieges: [
+            "tous les clients ont renouvelé leur contrat",
+            "au moins un client n'a pas renouvelé son contrat",
+            "un seul client a renouvelé son contrat",
+          ],
+        },
+        {
+          prop: "au moins une machine est en panne",
+          bonne: "aucune machine n'est en panne",
+          pieges: [
+            "toutes les machines sont en panne",
+            "au moins une machine n'est pas en panne",
+            "une seule machine est en panne",
+          ],
+        },
+      ] as const);
+      return {
+        text: `Quelle est la négation de la proposition « ${cas.prop} » ?`,
+        format: "qcm",
+        choices: shuffle([cas.bonne, ...cas.pieges]),
+        expected: [cas.bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Nier « TOUS vérifient » donne « AU MOINS UN ne vérifie pas » ; nier « au moins un vérifie » donne « AUCUN ne vérifie ». Le quantificateur se retourne en même temps que la propriété.",
+          "On se demande ce qu'il faut, au minimum, pour que la proposition soit FAUSSE.",
+          cas.prop.startsWith("tous") || cas.prop.startsWith("toutes")
+            ? `Un seul contre-exemple suffit à rendre la proposition fausse : il n'est pas nécessaire que tous le soient. ` +
+              `« ${cas.pieges[0]} » est bien plus fort que la négation — c'est une autre proposition, qui peut être fausse elle aussi.`
+            : `Pour que « ${cas.prop} » soit fausse, il faut qu'AUCUN cas ne se produise. ` +
+              `« ${cas.pieges[0]} » est bien plus fort que nécessaire.`,
+          `La négation est : « ${cas.bonne} ».`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: cas.pieges[0],
+            cause: "a nié la propriété sans retourner le quantificateur : c'est une proposition plus forte que la négation",
           },
         ],
       };
@@ -1671,6 +2985,69 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — TROUVER le contre-exemple, pas le nommer. Le premier item
+    // demande la MÉTHODE de réfutation ; celui-ci exige de la mettre en œuvre :
+    // parmi quatre nombres, un seul met l'affirmation en défaut. On ne peut pas
+    // y répondre en récitant.
+    kind: "template",
+    id: "stmg_logique_contre_exemple_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "logique_raisonnement",
+    microId: "logique_contre_exemple",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Teste les quatre nombres un par un : il en suffit d'un qui échoue.",
+    tags: ["stmg", "maths", "logique", "template"],
+    generate: () => {
+      const cas = pick([
+        {
+          affirmation: "« Le carré d'un nombre est toujours supérieur à ce nombre »",
+          contre: "0,5",
+          autres: ["3", "7", "12"],
+          pourquoi: "$0{,}5^2 = 0{,}25$, qui est plus PETIT que $0{,}5$",
+        },
+        {
+          affirmation: "« Tout nombre est plus petit que son double »",
+          contre: "-4",
+          autres: ["2", "9", "15"],
+          pourquoi: "le double de $-4$ vaut $-8$, qui est plus petit que $-4$",
+        },
+        {
+          affirmation: "« Une hausse puis une baisse du même pourcentage ramènent au prix initial »",
+          contre: "un prix de 100 € avec 50 %",
+          autres: ["un prix de 100 € avec 0 %", "un prix de 200 € avec 0 %", "un prix nul avec 30 %"],
+          pourquoi: "$100 \\times 1{,}5 \\times 0{,}5 = 75$, et non $100$",
+        },
+        {
+          // ⛔ Les trois autres cas opposent un nombre NÉGATIF à un positif :
+          // l'inverse d'un négatif reste négatif, donc l'affirmation y tient.
+          // Avec des paires de nombres égaux, la bonne réponse se repérait à
+          // l'œil — c'était la seule à comporter deux nombres différents.
+          affirmation: "« Un nombre plus grand a toujours un inverse plus grand »",
+          contre: "comparer 2 et 4",
+          autres: ["comparer -2 et 3", "comparer -4 et 1", "comparer -1 et 5"],
+          pourquoi: "$\\dfrac{1}{2} = 0{,}5$ est plus GRAND que $\\dfrac{1}{4} = 0{,}25$, alors que $2 < 4$",
+        },
+      ] as const);
+      return {
+        text: `Lequel de ces cas RÉFUTE l'affirmation suivante ?\n\n${cas.affirmation}`,
+        format: "qcm",
+        choices: shuffle([cas.contre, ...cas.autres]),
+        expected: [cas.contre],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un contre-exemple est un cas particulier où l'affirmation est FAUSSE. Un seul suffit à la réfuter — et les cas où elle est vraie, si nombreux soient-ils, ne prouvent rien.",
+          "On essaie les propositions une à une, en cherchant celle qui met l'affirmation en défaut.",
+          `Avec « ${cas.contre} » : ${cas.pourquoi}. L'affirmation tombe. ` +
+            `Les trois autres cas la vérifient — ils ne prouvent rien, ni dans un sens ni dans l'autre.`,
+          `Le contre-exemple est « ${cas.contre} ».`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ logique_reciproque ═══════════════════ */
 
   {
@@ -1740,6 +3117,89 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — ÉCRIRE la réciproque, avant de la juger. Le premier item la
+    // donne toute faite et demande si elle tient ; celui-ci demande de la
+    // former, et les pièges sont les deux fausses manœuvres : nier au lieu
+    // d'échanger, ou ne retourner qu'une moitié de la phrase.
+    kind: "template",
+    id: "stmg_logique_reciproque_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "logique_raisonnement",
+    microId: "logique_reciproque",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La réciproque ÉCHANGE l'hypothèse et la conclusion — elle ne nie rien.",
+    tags: ["stmg", "maths", "logique", "template"],
+    generate: () => {
+      // ⛔⛔ Les deux membres doivent être ÉCHANGEABLES tels quels : avec
+      // « une suite est géométrique » d'un côté et « elle est croissante » de
+      // l'autre, la réciproque s'écrivait « si elle est croissante, alors une
+      // suite est géométrique » — un pronom sans antécédent. Chaque membre
+      // porte donc son sujet, et sa forme niée est rangée avec lui.
+      const cas = pick([
+        {
+          a: "le prix augmente de 20 %",
+          b: "le prix est multiplié par 1,2",
+          nonA: "le prix n'augmente pas de 20 %",
+          nonB: "le prix n'est pas multiplié par 1,2",
+        },
+        {
+          a: "la suite est géométrique de raison 2",
+          b: "la suite est croissante",
+          nonA: "la suite n'est pas géométrique de raison 2",
+          nonB: "la suite n'est pas croissante",
+        },
+        {
+          a: "le nombre est le carré d'un entier",
+          b: "le nombre est positif",
+          nonA: "le nombre n'est pas le carré d'un entier",
+          nonB: "le nombre est strictement négatif",
+        },
+        {
+          a: "la dérivée est positive sur un intervalle",
+          b: "la fonction est croissante sur cet intervalle",
+          nonA: "la dérivée n'est pas positive sur cet intervalle",
+          nonB: "la fonction n'est pas croissante sur cet intervalle",
+        },
+        {
+          a: "le client commande plus de 200 €",
+          b: "le client ne paie pas de frais de port",
+          nonA: "le client commande au plus 200 €",
+          nonB: "le client paie des frais de port",
+        },
+      ] as const);
+      const bonne = `si ${cas.b}, alors ${cas.a}`;
+      return {
+        text: `Quelle est la RÉCIPROQUE de la proposition « si ${cas.a}, alors ${cas.b} » ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `si ${cas.nonA}, alors ${cas.nonB}`,
+          `si ${cas.nonB}, alors ${cas.nonA}`,
+          `${cas.a} et ${cas.b} sont toujours vrais en même temps`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La RÉCIPROQUE de « si A alors B » est « si B alors A » : on échange l'hypothèse et la conclusion, sans rien nier. À ne pas confondre avec la CONTRAPOSÉE, « si non B alors non A », qui est toujours vraie quand la proposition l'est.",
+          "On repère A et B, puis on les remet dans l'autre ordre.",
+          `Ici A = « ${cas.a} » et B = « ${cas.b} » : la réciproque est « si ${cas.b}, alors ${cas.a} ». ` +
+            `La proposition « si ${cas.nonB}, alors ${cas.nonA} » est sa CONTRAPOSÉE — une tout autre chose, ` +
+            `qui a exactement la même valeur de vérité que la proposition de départ.`,
+          `La réciproque est : « ${bonne} ».`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `si ${cas.nonB}, alors ${cas.nonA}`,
+            cause: "c'est la contraposée, pas la réciproque : elle est vraie dès que la proposition l'est",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════ logique_necessaire_suffisante ═══════════ */
 
   {
@@ -1782,6 +3242,61 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
             ? `Il SUFFIT que « ${cas.a} » pour avoir « ${cas.b} ».`
             : `Il FAUT que « ${cas.b} » pour que « ${cas.a} » puisse être vraie.`,
           `La condition est ${sens === "suffisante" ? "suffisante" : "nécessaire"}.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — l'ÉQUIVALENCE, le troisième mot du libellé. Le premier item
+    // range une condition du côté nécessaire ou suffisant ; celui-ci demande
+    // quand les deux se rejoignent. Une équivalence n'est pas un cas de figure
+    // parmi d'autres : c'est le seul où l'implication tient DANS LES DEUX SENS,
+    // et c'est ce qui autorise à écrire « si et seulement si ».
+    kind: "template",
+    id: "stmg_logique_ns_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "logique_raisonnement",
+    microId: "logique_necessaire_suffisante",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Il y a équivalence quand la proposition ET sa réciproque sont vraies : essaie de retourner chaque phrase.",
+    tags: ["stmg", "maths", "logique", "template"],
+    generate: () => {
+      const t = pick([5, 10, 20, 25] as const);
+      const q = fr(1 + t / 100);
+      // Une seule paire est une VRAIE équivalence : les trois autres ont une
+      // réciproque fausse, et c'est ce qui les élimine.
+      const equivalences = [
+        `un prix est multiplié par $${q}$ et il augmente de $${t}\\,\\%$`,
+        `deux évènements sont incompatibles et leur intersection est vide`,
+        `une fonction est constante et sa courbe est une droite horizontale`,
+      ];
+      const nonEquivalences = [
+        `une suite est géométrique de raison $2$ et elle est croissante`,
+        `un nombre est le carré d'un entier et il est positif`,
+        `une fonction est affine de coefficient directeur $3$ et sa courbe est une droite`,
+        `un nombre est supérieur à $10$ et il est positif`,
+      ];
+      const bonne = pick(equivalences);
+      const autres = shuffle(nonEquivalences).slice(0, 3);
+      return {
+        text:
+          `Dans laquelle de ces paires de propositions y a-t-il ÉQUIVALENCE, ` +
+          `c'est-à-dire où l'on peut écrire « si et seulement si » ?`,
+        format: "qcm",
+        choices: shuffle([bonne, ...autres]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Il y a ÉQUIVALENCE entre A et B quand « si A alors B » et « si B alors A » sont toutes deux vraies. A est alors à la fois nécessaire et suffisante pour B, et l'on écrit « A si et seulement si B ».",
+          "On teste l'implication dans les deux sens, en cherchant un contre-exemple pour le sens retour.",
+          `Dans la bonne paire, les deux propositions se déduisent l'une de l'autre : ce sont deux façons de dire la même chose. ` +
+            `Dans les autres, le sens retour tombe — une suite croissante n'a aucune raison d'être géométrique de raison $2$, ` +
+            `un nombre positif n'est pas forcément le carré d'un entier, une droite n'a pas forcément le coefficient directeur annoncé, ` +
+            `et un nombre positif peut être bien plus petit que $10$.`,
+          `L'équivalence est : ${bonne}.`
         ),
       };
     },
