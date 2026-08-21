@@ -66,6 +66,18 @@ EleveAI est le seul coach scolaire par IA où **l'élève ne paie jamais**. Il n
 
 Frédéric Lacoste, enseignant à La Réunion. Pas de levée de fonds à rembourser, pas d'équipe commerciale, pas d'intermédiaire. Le prix bas n'est pas un défaut de qualité, c'est ce qui reste quand on enlève tout le reste.
 
+## Comment c'est fait — écrit par un enseignant, vérifié par un enseignant, démultiplié par l'IA
+
+C'est la thèse d'EleveAI, et elle tient en trois temps qu'il ne faut pas séparer.
+
+**L'IA fait tomber le coût.** Un enseignant seul produit aujourd'hui ce qui demandait une équipe : les exercices, les parcours, les corrections, les épreuves blanches. C'est ce qui rend possible un prix que personne d'autre ne peut tenir.
+
+**L'humain garde la vérification.** Chaque contenu est relu par un enseignant en exercice, devant ses propres élèves. Ce n'est pas une garantie de communication : c'est la seule chose qui distingue un exercice conforme au programme d'un texte plausible.
+
+**Et l'humain garde l'imagination.** Ce que l'IA n'invente pas : Ti Margo le margouillat, les problèmes qui se passent au marché de Saint-Pierre, un cahier de vacances qui raconte un tour de l'île. Un contenu scolaire qui n'a été rêvé par personne se reconnaît immédiatement, et les élèves le referment.
+
+Un concurrent financé peut copier le produit. Il ne peut pas être un professeur en exercice qui relit ses propres exercices.
+
 ## Le modèle, en clair
 
 - Le coach, les exercices et les évaluations ne se paient pas, et l'élève garde ses résultats.

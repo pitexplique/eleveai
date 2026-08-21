@@ -640,6 +640,22 @@ export default function TarifsClient() {
                   texte:
                     "Le coach tourne sur un modèle léger : une explication coûte une fraction de centime. C'est ce qui permet de ne faire payer que le suivi.",
                 },
+                /* ⭐ LA CARTE QUI MANQUAIT, ET C'EST LA PLUS IMPORTANTE
+                   (Frédéric, 21/08 : « sinon ils voient un prix 10 fois plus
+                   bas et pour eux c'est 10 fois moins de qualité »).
+                   Les quatre autres disent ce qu'on N'A PAS — investisseurs,
+                   commerciaux, coûts. Aucune ne disait ce qu'on A, et c'est
+                   pourtant là que se joue le doute : un parent qui lit « moins
+                   cher » sans savoir pourquoi conclut « moins bon ».
+                   ⚠️ LES DEUX MOITIÉS SE TIENNENT ET NE SE SÉPARENT PAS. Dire
+                   « c'est l'IA qui produit » sans dire qui vérifie, c'est
+                   confirmer la crainte au lieu de la lever. */
+                {
+                  emoji: "🤖",
+                  titre: "L'IA démultiplie, l'enseignant vérifie",
+                  texte:
+                    "Ce qui demandait une équipe, un enseignant le produit seul avec l'IA. Mais rien n'est publié sans être relu par un professeur en exercice, devant ses propres élèves — c'est ce qui sépare un exercice conforme du programme d'un texte seulement plausible.",
+                },
               ].map((r) => (
                 <div key={r.titre} className="flex items-start gap-3">
                   <span className="text-2xl">{r.emoji}</span>
@@ -653,8 +669,15 @@ export default function TarifsClient() {
               ))}
             </div>
             <p className="mt-5 text-center text-sm font-black text-slate-800">
-              Le prix bas n&apos;est pas un défaut de qualité. C&apos;est ce qui reste
-              quand on enlève tout le reste.
+              Écrit par un enseignant, vérifié par un enseignant, démultiplié par
+              l&apos;IA.
+              <span className="mt-1 block font-bold text-slate-600">
+                Le prix bas n&apos;est pas un défaut de qualité : c&apos;est ce qui
+                reste quand on enlève tout le reste. Ce qu&apos;on n&apos;enlève
+                jamais, c&apos;est le professeur qui relit — et qui imagine Ti Margo,
+                le marché de Saint-Pierre et le tour de l&apos;île, choses
+                qu&apos;aucune machine n&apos;a envie d&apos;inventer.
+              </span>
             </p>
           </div>
 
