@@ -20,6 +20,24 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // ─── Les fiches de maths de 4e et de 3e, éteintes le 21/08/2026 ───────
+      // Cinq fiches de juin (Pythagore, cosinus, statistiques, probabilités,
+      // Thalès), restées seules de leur niveau et jamais reprises au standard
+      // du 19/08 : aucune propriété illustrée, aucun dessin hors des exemples.
+      // Frédéric : « on éteint toute la 4e et la 3e, on repart au propre ».
+      // 308 vers le hub des maths plutôt que cinq 404 : elles étaient au
+      // sitemap depuis juillet. `permanent: false` — ces adresses reviendront
+      // quand les deux classes seront réécrites.
+      {
+        source: "/fiches-cours/maths/4e/:notion(pythagore-theoreme|trigo-cosinus|stat-statistique|proba-experience)",
+        destination: "/fiches-cours/maths",
+        permanent: false,
+      },
+      {
+        source: "/fiches-cours/maths/3e/thales-theoreme",
+        destination: "/fiches-cours/maths",
+        permanent: false,
+      },
       // /presets était une bibliothèque de prompts guidés. Frédéric, 06/08 :
       // « ne sert plus à rien, plus aucun intérêt ». Elle était orpheline —
       // absente du sitemap, aucun lien du site n'y menait — donc elle ne vivait

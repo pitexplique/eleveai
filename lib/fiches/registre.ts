@@ -270,26 +270,6 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Calculer avec les fractions",
     resume: "Additionner, soustraire, multiplier, et prendre une fraction d'une quantité.",
   },
-  "maths/4e/pythagore-theoreme": {
-    titre: "Le théorème de Pythagore",
-    resume: "Calculer une longueur dans un triangle rectangle et prouver l'angle droit.",
-  },
-  "maths/4e/trigo-cosinus": {
-    titre: "Le cosinus",
-    resume: "Utiliser le cosinus dans un triangle rectangle pour calculer une longueur.",
-  },
-  "maths/4e/stat-statistique": {
-    titre: "Les statistiques",
-    resume: "Calculer une moyenne, une médiane et l'étendue d'une série.",
-  },
-  "maths/4e/proba-experience": {
-    titre: "Les probabilités",
-    resume: "Calculer la probabilité d'un événement (cas favorables sur cas possibles).",
-  },
-  "maths/3e/thales-theoreme": {
-    titre: "Le théorème de Thalès",
-    resume: "Calculer une longueur avec les rapports égaux et prouver un parallélisme.",
-  },
   "maths/premiere-spe/derivation": {
     titre: "La dérivation",
     resume: "Taux de variation, nombre dérivé, dérivées usuelles et équation de la tangente.",
@@ -354,26 +334,15 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
 // attendent une vraie fiche.
 //
 // Clé = ce que demande le coach ; valeur = la fiche réellement servie.
+// ⛔ LES ALIAS DE MATHS 4e ET 3e SONT PARTIS LE 21/08/2026, avec leurs fiches.
+// Ils faisaient qu'un élève de 3e trouvait Pythagore et un élève de 4e trouvait
+// Thalès, en pointant vers la fiche rangée sous l'autre niveau. Frédéric a
+// décidé d'éteindre les deux classes : « on repart au propre plus tard ». Sept
+// alias sont donc tombés — quatre parce que leur cible n'existe plus, trois
+// (volumes, triangles, périmètres, qui visaient la 5e et la 6e) parce qu'une
+// classe éteinte ne doit garder aucun badge « Fiche ».
+// Le mécanisme reste : quand la 4e et la 3e reviendront, on redéclarera ici.
 export const FICHES_ALIAS: Record<string, string> = {
-  // La fiche 3e couvre les 7 micros de 4e sauf « vérifier une égalité de rapports ».
-  "maths/4e/thales-theoreme": "maths/3e/thales-theoreme",
-  // La fiche 4e (8 micros) est un sur-ensemble des 6 micros de 3e.
-  "maths/3e/pythagore-theoreme": "maths/4e/pythagore-theoreme",
-  // La fiche 4e (10 micros) couvre les 8 de la 3e (effectif et fréquence y sont séparés).
-  "maths/3e/stat-statistique": "maths/4e/stat-statistique",
-  // ⚠️ Couvre 7 micros sur 8 : l'expérience à DEUX épreuves (l'arbre) manque,
-  // et c'est ce qui tombe au brevet. Alias provisoire — à remplacer par une
-  // vraie fiche 3e dès que le lot 3e est écrit.
-  "maths/3e/proba-experience": "maths/4e/proba-experience",
-  // La fiche 5e couvre pavé, prisme, cylindre et unités ; la 4e n'ajoute que
-  // le lien « aire de base × hauteur ».
-  "maths/4e/volume-solide": "maths/5e/volume-solide",
-  // Triangles usuels, somme des angles, inégalité triangulaire, construction :
-  // la fiche 5e les a tous.
-  "maths/3e/triangle-figure": "maths/5e/triangle-figure",
-  // Périmètres du carré, du rectangle, d'une figure, résolution de problème :
-  // la fiche 6e les couvre ; la 4e n'ajoute que le triangle.
-  "maths/4e/aire-perimetre": "maths/6e/aire-perimetre",
 
   /* ⏳ PROVISOIRE — LE TEMPS D'ÉCRIRE LES TROIS FICHES (20/08/2026).
      La grammaire du CM2 a été coupée en trois notions le 20/08. La fiche
