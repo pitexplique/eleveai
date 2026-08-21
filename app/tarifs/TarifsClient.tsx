@@ -2,142 +2,186 @@
 
 import Link from "next/link";
 
-const offres = [
+import { VENTE } from "@/lib/legal/editeur";
+import {
+  ARGUMENT_COLLECTIF,
+  EXEMPLE_CLASSE,
+  EXEMPLE_ETABLISSEMENT,
+  PRIX_CLASSE_ELEVE_AN,
+  PRIX_ETABLISSEMENT_ELEVE_AN,
+  PRIX_FAMILLE_AN,
+  euros,
+} from "@/lib/tarifs";
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LA PAGE TARIFS, REFAITE LE 21/08/2026.
+//
+// Ce qu'elle faisait avant : elle ouvrait sur « Classe » et « Établissement »,
+// les deux canaux qui n'existent pas cette année, et fermait sur « Famille ·
+// Bientôt » — la seule offre qui concerne les 74 % de visiteurs qui arrivent
+// par un cahier de vacances. Elle promettait en plus, dans la carte Famille,
+// six outils qui sont GRATUITS (coach, parcours, calcul rapide, défis…) : elle
+// vendait ce qu'elle donne, et échouait au test maison — « si l'enfant d'à côté
+// ne paie pas, apprend-il moins ? ».
+//
+// Ce qu'elle fait maintenant, dans cet ordre : la famille d'abord, puis le mur
+// du gratuit (c'est LUI qui rend les 12 € compréhensibles), puis le collectif
+// en bas — non plus comme un tunnel de vente mais comme une preuve de sérieux.
+//
+// ⭐ Les couleurs sont celles du coach (`app/tutor-v4/TutorV4Client.tsx`) :
+// bandeau indigo→sky→cyan, tuiles sky/violet/emerald/amber. Une page de tarifs
+// qui ne ressemble pas au produit se lit comme une page de quelqu'un d'autre.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Ce qui ne se paiera jamais. La liste est longue exprès : c'est l'argument. */
+const gratuit = [
+  { icon: "🧠", label: "Coach Maths IA", desc: "Du CP à la Terminale, notion par notion" },
+  { icon: "📖", label: "Coach Français IA", desc: "CP → 3e, sons, grammaire, conjugaison" },
+  { icon: "🇬🇧", label: "English Maths", desc: "A1 → B2, avec l'audio" },
+  { icon: "🛤️", label: "Parcours", desc: "Un bilan de compétences, matière par matière" },
+  { icon: "⚡", label: "Calcul rapide", desc: "Les automatismes en 5 minutes" },
+  { icon: "🎯", label: "Défis du jour", desc: "Des problèmes ancrés à La Réunion" },
+  { icon: "☀️", label: "Cahiers de vacances", desc: "14 cahiers, de la GS au post-bac" },
+  { icon: "📄", label: "Fiches de cours", desc: "À lire à l'écran ou à imprimer" },
+  { icon: "✍️", label: "Dictée du jour", desc: "Et les rituels de langue" },
+  { icon: "📝", label: "Évaluations blanches", desc: "6e et 4e, dans les conditions réelles" },
+  { icon: "🎓", label: "Coach Brevet · Bac", desc: "Sprint de révisions, notions clés" },
+  { icon: "💾", label: "Ses résultats gardés", desc: "L'élève retrouve sa progression" },
+];
+
+/** Ce que la famille achète — et qui n'apprend rien à personne. */
+const inclusFamille = [
+  "Le bulletin de votre enfant, mis à jour tout seul",
+  "Ce qu'il a travaillé cette semaine, et ce qui coince",
+  "Son historique depuis le début, sans rien à saisir",
+  "Pour lui : son thème, son badge, composer son parcours",
+  "Son nom dans les remerciements du site",
+];
+
+const collectif = [
   {
     nom: "Classe",
     badge: "🧑‍🏫 Un enseignant",
-    badgeColor: "bg-blue-100 text-blue-800",
-    prix: "5 € / élève / an",
-    soustitre: "ex. 30 élèves = 150 € / classe · ≤ 35 élèves par classe",
-    description: "Pour un enseignant qui veut équiper sa ou ses classes. Pris en charge par la coopérative, le FSE ou l'établissement — jamais par les familles.",
+    prix: `${euros(PRIX_CLASSE_ELEVE_AN)} / élève / an`,
+    exemple: `${EXEMPLE_CLASSE.eleves} élèves = ${euros(EXEMPLE_CLASSE.total)} par an`,
+    description:
+      "Le prof voit sa classe sans corriger : devoirs suivis, bulletins, qui décroche. Les familles de la classe ne paient rien.",
     inclus: [
-      "5 € / élève — ex. 30 élèves = 150 €",
-      "Toutes les matières : maths, français, anglais, espagnol, IA",
-      "Gratuit pour chaque élève",
+      "Toutes les matières, tous les élèves de la classe",
       "Évaluation automatique, sans correction",
       "Devoirs maison faits et suivis en ligne",
-      "Dashboard professeur inclus",
+      "Tableau de bord professeur",
+      "Pris en charge par la coopérative ou le FSE",
     ],
     cta: "Demander un accès classe",
-    ctaHref: "/contact",
-    ctaColor: "bg-blue-600 hover:bg-blue-500 text-white",
-    highlight: false,
-    soon: false,
+    gradient: "from-sky-400 to-blue-500",
+    anneau: "ring-sky-100",
   },
   {
     nom: "Établissement",
-    badge: "⭐ Tous les élèves couverts",
-    badgeColor: "bg-emerald-100 text-emerald-800",
-    prix: "4 € / élève / an",
-    soustitre: "dégressif dès 600 élèves · ex. 420 élèves = 1 680 € / an",
-    description: "Tout un collège ou lycée, toutes les matières, tous les profs. Facturé globalement à l'établissement — gratuit pour chaque élève, sans aucun paiement demandé aux familles.",
+    badge: "🏫 Tout le collège",
+    prix: `${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} / élève / an`,
+    exemple: `${EXEMPLE_ETABLISSEMENT.eleves} élèves = ${euros(EXEMPLE_ETABLISSEMENT.total)} par an`,
+    description:
+      "Tous les profs équipés, et le principal a la vue complète : tous les niveaux, toutes les classes. Facturé à l'établissement — rien aux familles.",
     inclus: [
-      "Tous les élèves, toutes les classes",
-      "Toutes les matières : maths, français, anglais, espagnol, IA",
-      "Évaluation automatique, sans correction",
-      "Devoirs maison faits et suivis en ligne",
+      "Tous les élèves, toutes les classes, tous les profs",
+      "La vue complète du chef d'établissement",
       "Accès 100 % gratuit pour chaque élève",
-      "Dashboard principal + par classe et élève",
       "Éligible REP/REP+, fonds sociaux, coopérative",
+      "Jamais un classement des enseignants",
     ],
-    cta: "Demander un devis établissement",
-    ctaHref: "/contact",
-    ctaColor: "bg-emerald-600 hover:bg-emerald-500 text-white",
-    highlight: true,
-    soon: false,
+    cta: "Demander un devis",
+    gradient: "from-violet-400 to-purple-500",
+    anneau: "ring-violet-100",
+  },
+];
+
+/**
+ * ⚠️ COMPARER CE QUI SE COMPARE. L'ancienne version alignait le prix
+ * ÉTABLISSEMENT d'EleveAI contre des prix FAMILLE (Kwyk, Lumni) : le rapport
+ * était flatteur et faux. Ici chaque ligne dit pour qui elle vaut, et EleveAI
+ * apparaît deux fois — une par public.
+ */
+const comparatif = [
+  {
+    outil: "IXL",
+    pourQui: "Une famille · toutes matières",
+    prix: "19,95 € / mois",
+    soit: "239 € / an · +4 €/mois par enfant en plus",
   },
   {
-    // ⛔ OFFRE FAMILLE — PAS ENCORE OUVERTE (17/08/2026).
-    //
-    // Cette carte annonçait « 4,90 € / mois », « prix de lancement bloqué à
-    // VIE » et « résiliation libre » : trois ENGAGEMENTS CONTRACTUELS, sur une
-    // offre dont le tarif n'est pas arrêté et derrière laquelle il n'y a, à ce
-    // jour, aucune structure pour encaisser. Un parent qui écrivait via le
-    // bouton avait déjà, de son point de vue, souscrit à un prix garanti.
-    //
-    // L'offre École, elle, reste ouverte : elle passe par un devis et une
-    // facturation à l'établissement — rien ne s'y déclenche tout seul.
-    //
-    // Pour l'ouvrir : régler le statut (cf. app/formation-ia/page.tsx, même
-    // sujet), fixer le tarif, brancher le paiement — puis repasser `soon` à
-    // false et rendre son prix à la carte.
-    nom: "Famille",
-    badge: "🏠 Hors cadre scolaire",
-    badgeColor: "bg-violet-100 text-violet-800",
-    prix: "Bientôt",
-    soustitre: "l'accès à la maison n'est pas encore ouvert",
-    description: "Pour les parents qui veulent un accès à la maison, sans passer par l'établissement. Cette offre se prépare : le tarif n'est pas encore arrêté, et rien n'est proposé à la souscription pour le moment.",
-    inclus: [
-      "1 élève, tous les outils débloqués",
-      "Coach Maths IA · Coach Français IA",
-      "English Maths A1 → B2",
-      "Parcours · Calcul rapide · Défis",
-    ],
-    cta: "Être prévenu à l'ouverture",
-    ctaHref: "/contact",
-    ctaColor: "bg-slate-200 hover:bg-slate-300 text-slate-700",
-    highlight: false,
-    soon: true,
+    outil: "IXL",
+    pourQui: "Une famille · une seule matière",
+    prix: "9,95 € / mois",
+    soit: "119 € / an",
   },
-];
-
-const comparatif = [
-  { outil: "Kwyk",       prix: "6 € / élève / mois",   soit: "72 € / an / élève" },
-  { outil: "Mathia",     prix: "8 € / élève / mois",   soit: "96 € / an / élève" },
-  { outil: "Lumni Pro",  prix: "5,99 € / mois",        soit: "72 € / an" },
-  { outil: "EleveAI 🟢", prix: "4 € / élève / an",     soit: "établissement — soit 18× moins cher" },
-];
-
-const valeur = [
-  { icon: "🧠", label: "Coach Maths IA",      desc: "Du CP à la Terminale, notion par notion" },
-  { icon: "📖", label: "Coach Français IA",   desc: "CP → 3e, phonologie, grammaire, conjugaison" },
-  { icon: "🇬🇧", label: "English Maths",       desc: "A1 → B2, vocabulaire maths en anglais + audio" },
-  { icon: "🛤️", label: "Parcours adaptatif",   desc: "Bilan de compétences personnalisé" },
-  { icon: "⚡", label: "Calcul rapide",        desc: "Automatismes en 5 minutes chrono" },
-  { icon: "🎯", label: "Défis du jour",        desc: "Problèmes contextualisés La Réunion" },
-  { icon: "📚", label: "Coach Brevet",         desc: "Sprint 30 jours, toutes les notions clés" },
-  { icon: "🎓", label: "Coach Bac Spé",        desc: "Suites, fonctions, probabilités" },
+  { outil: "Mathia", pourQui: "Par élève", prix: "8 € / élève / mois", soit: "96 € / an / élève" },
+  {
+    outil: "Kwyk",
+    pourQui: "Par élève · établissement",
+    prix: "6 € / élève / mois",
+    soit: "72 € / an / élève",
+  },
+  { outil: "Lumni Pro", pourQui: "Une famille", prix: "5,99 € / mois", soit: "72 € / an" },
+  {
+    outil: "EleveAI 🌺",
+    pourQui: "Une famille · toutes matières · tous les enfants",
+    prix: `${euros(PRIX_FAMILLE_AN)} / an`,
+    soit: "12 € / an — et pas un centime par enfant en plus",
+  },
+  {
+    outil: "EleveAI 🌺",
+    pourQui: "Tout un établissement",
+    prix: `${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} / élève / an`,
+    soit: "3 € / an / élève",
+  },
 ];
 
 const faq = [
   {
-    q: "Les élèves doivent-ils payer ?",
-    a: "Dans le cadre scolaire, non. Les élèves accèdent à EleveAI avec un code fourni par leur établissement. Aucun paiement n'est demandé aux élèves ni aux familles.",
+    q: "Mon enfant peut-il utiliser EleveAI sans payer ?",
+    a: "Oui, entièrement. Le coach dans les cinq matières, les exercices corrigés, les parcours, le calcul rapide, les défis, les cahiers, les fiches, les évaluations blanches : tout est gratuit, sans limite de temps et sans publicité. Et il garde ses résultats. Rien de tout ça ne deviendra payant.",
   },
   {
-    q: "Un prof seul peut-il inscrire ses classes ?",
-    a: "Oui. Comptez 5 €/élève/an (ex. 150 € pour une classe de 30). C'est en général pris en charge par la coopérative ou le FSE. Dès que plusieurs profs sont intéressés, l'offre Établissement (4 €/élève) devient plus avantageuse et couvre tout le monde.",
+    q: `Alors qu'est-ce que je paie avec les ${euros(PRIX_FAMILLE_AN)} ?`,
+    a: "La fenêtre du parent. Votre enfant, lui, voit déjà sa progression. Ce que l'abonnement ouvre, c'est votre vue à vous : son bulletin, ce qu'il a travaillé cette semaine, son historique. Vous n'achetez pas ce qu'il apprend, vous achetez de le voir apprendre.",
   },
   {
-    q: "Comment se passe la mise en place pour une classe ?",
-    a: "On crée les codes pour vos élèves (sous 48h) et on vous accompagne avec une formation rapide en visio. Vos élèves peuvent commencer le jour même.",
+    q: `${euros(PRIX_FAMILLE_AN)} par enfant ou par famille ?`,
+    a: "Par famille, quel que soit le nombre d'enfants. Le frère ou la sœur d'à côté n'a pas à apprendre moins parce qu'il est le deuxième.",
   },
   {
-    q: "Y a-t-il un pilote gratuit ?",
-    a: "Oui — contactez-nous pour un accès pilote de 4 semaines pour une classe complète. Sans engagement, pour tester avant de vous décider.",
+    q: "Mon collège peut-il payer pour tout le monde ?",
+    a: `Oui, et c'est deux fois moins cher : ${ARGUMENT_COLLECTIF.eleves} familles abonnées, cela ferait ${euros(ARGUMENT_COLLECTIF.siChaqueFamillePaie)} ; la même classe payée par la coopérative, c'est ${euros(ARGUMENT_COLLECTIF.siLaClassePaie)} — et personne n'est laissé dehors. Parlez-en à l'enseignant ou au principal, on s'occupe du reste.`,
   },
   {
-    q: "Y a-t-il un contrat à signer ?",
-    a: "Pour l'accès établissement, oui — un contrat simple qui précise les conditions d'accès, la protection des données et la durée, dans le cadre du RGPD.",
-  },
-  // Les deux questions « famille » qui étaient ici (résiliation en 1 clic,
-  // prix de lancement verrouillé à vie) répondaient sur un abonnement qui
-  // n'existe pas : elles poussaient même à « s'abonner tôt pour verrouiller le
-  // meilleur prix ». Une seule question honnête les remplace.
-  {
-    q: "L'offre famille est-elle disponible ?",
-    a: "Pas encore. L'accès à la maison, hors cadre scolaire, se prépare : le tarif n'est pas arrêté et aucune souscription n'est ouverte. Écrivez-nous si vous voulez être prévenu le jour où elle ouvre. En attendant, une grande partie du site s'utilise librement, sans compte.",
+    q: "Puis-je arrêter quand je veux ?",
+    a: "Oui. Sans engagement, résiliable à tout moment depuis votre espace. Et vous avez 14 jours pour changer d'avis, remboursés, même si votre enfant a déjà tout utilisé — c'est écrit dans les conditions de vente.",
   },
   {
-    q: "Pourquoi EleveAI est moins cher que les autres ?",
-    a: "EleveAI est développé par un seul enseignant de La Réunion — sans équipe commerciale, sans levée de fonds, sans surcoût. L'objectif est que chaque élève puisse y accéder, quelle que soit la situation de sa famille.",
+    q: "J'ai un code, où est-ce que je le saisis ?",
+    a: "À l'étape du paiement : un champ « code promotionnel » vous attend juste avant de valider. Les codes sont envoyés par courriel ou remis par un enseignant — ils ne sont pas affichés sur le site.",
+  },
+  {
+    q: "Pourquoi si peu cher ?",
+    a: "EleveAI est développé par un seul enseignant de La Réunion : pas de levée de fonds à rembourser, pas d'équipe commerciale, pas d'intermédiaire. Le prix bas n'est pas un défaut de qualité, c'est ce qui reste quand on enlève tout le reste.",
+  },
+  {
+    q: "Et une famille qui ne peut pas payer ?",
+    a: "Elle ne paie pas, et personne ne le saura. Aucun élève n'a jamais eu à demander quoi que ce soit pour travailler ici, et ça ne changera pas.",
   },
 ];
 
 export default function TarifsClient() {
+  // ⚠️ Le bouton n'invente pas l'ouverture de la vente : il lit le même verrou
+  // que les CGV et que `lib/paiement/stripe.ts`. Tant que `VENTE.ouverte` est
+  // faux, le prix s'affiche mais rien ne prétend encaisser — le jour du
+  // branchement, un seul booléen change et la page s'ouvre d'elle-même.
+  const venteOuverte = VENTE.ouverte;
+
   return (
     <main className="relative min-h-screen overflow-hidden text-slate-950">
-
       {/* FOND */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <svg className="h-full w-full" viewBox="0 0 1440 1800" preserveAspectRatio="xMidYMid slice">
@@ -165,239 +209,324 @@ export default function TarifsClient() {
         </svg>
       </div>
 
-      <div className="mx-auto max-w-5xl px-4 py-10 space-y-14">
-
-        {/* HERO */}
-        <section className="rounded-[2rem] border border-white/80 bg-white/80 p-8 shadow-2xl backdrop-blur-xl text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 text-xs font-black uppercase tracking-wide text-blue-800 ring-1 ring-blue-200">
-            💰 Tarifs EleveAI
+      <div className="mx-auto max-w-5xl space-y-14 px-4 py-10">
+        {/* ── HERO ─────────────────────────────────────────────────────── */}
+        {/* ⛔ Pas de grand aplat sombre : les couleurs saturées du coach ne
+            servent que sur les petits objets (pastilles, boutons). Les fonds
+            restent clairs — c'est une page qu'on lit en plein jour. */}
+        <section className="rounded-[2rem] border border-white bg-gradient-to-br from-sky-50 via-white to-emerald-50 p-8 text-center shadow-xl ring-1 ring-sky-100">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 via-sky-600 to-cyan-500 px-4 py-2 text-xs font-black uppercase tracking-wide text-white shadow">
+            🌺 Les tarifs
           </div>
           <h1 className="text-3xl font-black leading-tight text-slate-950 sm:text-5xl">
-            Un coach IA complet.<br />À un prix accessible.
+            Tout ce qui fait apprendre
+            <br />
+            <span className="bg-gradient-to-r from-emerald-500 to-green-600 bg-clip-text text-transparent">
+              est gratuit.
+            </span>
           </h1>
-          <p className="mt-4 mx-auto max-w-2xl text-base font-semibold leading-relaxed text-slate-600">
-            Développé par un enseignant de La Réunion en 5 mois. Sans équipe commerciale, sans intermédiaire.
-            <br />Le prix reflète l&apos;essentiel : que chaque élève progresse, quels que soient ses moyens.
+          <p className="mx-auto mt-4 max-w-2xl text-base font-bold leading-relaxed text-slate-600">
+            Et ça ne changera pas. Ce qui se paie, c&apos;est de{" "}
+            <strong className="text-slate-900">voir</strong> et de{" "}
+            <strong className="text-slate-900">garder</strong> — jamais d&apos;accéder.
           </p>
-          <div className="mt-6 inline-flex items-center gap-3 rounded-2xl bg-emerald-100 px-6 py-3 text-sm font-black text-emerald-800 ring-1 ring-emerald-200">
-            <span className="text-lg">💚</span>
-            Avec l&apos;abonnement école : gratuit pour chaque élève · rien à payer pour les familles
+          <p className="mx-auto mt-5 max-w-xl rounded-2xl bg-white px-6 py-3 text-sm font-black text-emerald-800 ring-1 ring-emerald-200">
+            Si l&apos;enfant d&apos;à côté ne paie pas, il apprend exactement la même chose.
+          </p>
+        </section>
+
+        {/* ── FAMILLE — la carte principale ────────────────────────────── */}
+        <section className="relative rounded-[2rem] border border-white bg-white/90 p-8 shadow-2xl ring-4 ring-emerald-100 backdrop-blur">
+          <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-emerald-400 to-green-500 px-5 py-1.5 text-xs font-black text-white shadow-lg">
+            🏠 Pour la maison
           </div>
-          <div className="mt-3 inline-flex items-center gap-3 rounded-2xl bg-blue-100 px-6 py-3 text-sm font-black text-blue-800 ring-1 ring-blue-200">
-            <span className="text-lg">📚</span>
-            Toutes les matières incluses : maths, français, anglais, espagnol, IA
-          </div>
-          <div className="mt-3 inline-flex items-center gap-3 rounded-2xl bg-slate-100 px-6 py-3 text-sm font-bold text-slate-700">
-            <span className="text-lg">🧑‍🏫</span>
-             Conçu par frédéric Lacoste enseignant sur l'île de la réunion et ses élèves ! A destination de tous !
+
+          <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-center">
+            <div className="text-center md:text-left">
+              <p className="bg-gradient-to-r from-emerald-500 to-green-600 bg-clip-text text-6xl font-black text-transparent sm:text-7xl">
+                {euros(PRIX_FAMILLE_AN)}
+              </p>
+              <p className="mt-1 text-lg font-black text-slate-900">par an</p>
+              <p className="mt-1 text-sm font-black text-emerald-700">
+                Moins d&apos;un euro par mois · par famille, quel que soit le nombre
+                d&apos;enfants
+              </p>
+
+              <p className="mt-5 text-base font-bold leading-relaxed text-slate-700">
+                Le coach, les exercices, les évaluations : gratuits, et l&apos;élève garde
+                ses résultats.
+                <br />
+                <strong className="text-slate-950">
+                  Ce qui se paie, c&apos;est que ça se souvienne de votre enfant.
+                </strong>
+              </p>
+
+              {venteOuverte ? (
+                <>
+                  <Link
+                    href="/abonnement/famille"
+                    className="mt-6 inline-flex rounded-2xl bg-gradient-to-r from-emerald-400 to-green-500 px-8 py-4 text-base font-black text-white shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl"
+                  >
+                    S&apos;abonner — {euros(PRIX_FAMILLE_AN)} par an
+                  </Link>
+                  <p className="mt-3 text-xs font-bold text-slate-500">
+                    Sans engagement · 14 jours pour changer d&apos;avis · Apple Pay et
+                    Google Pay
+                  </p>
+                  <p className="mt-1 text-xs font-bold text-slate-500">
+                    Vous avez un code ? Vous le saisirez juste avant de valider.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/contact"
+                    className="mt-6 inline-flex rounded-2xl bg-gradient-to-r from-emerald-400 to-green-500 px-8 py-4 text-base font-black text-white shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl"
+                  >
+                    Prévenez-moi à l&apos;ouverture
+                  </Link>
+                  <p className="mt-3 text-xs font-bold text-slate-500">
+                    L&apos;abonnement ouvre dans quelques jours. Le prix ci-dessus est
+                    ferme — rien n&apos;est encaissé pour l&apos;instant.
+                  </p>
+                </>
+              )}
+            </div>
+
+            <ul className="space-y-3 rounded-3xl bg-gradient-to-br from-emerald-50 to-green-50 p-6 ring-1 ring-emerald-100">
+              {inclusFamille.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm font-bold text-slate-700">
+                  <span className="mt-0.5 text-lg text-emerald-500">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
-        {/* OFFRES */}
-        <section className="grid gap-6 md:grid-cols-3">
-          {offres.map((o) => (
-            <div
-              key={o.nom}
-              className={`relative flex flex-col rounded-[2rem] border p-6 shadow-xl backdrop-blur transition hover:-translate-y-1 ${
-                o.highlight
-                  ? "border-blue-300 bg-white/90 ring-4 ring-blue-100"
-                  : o.soon
-                    ? "border-dashed border-slate-300 bg-white/60"
-                    : "border-white/70 bg-white/90"
-              }`}
-            >
-              {o.highlight && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-blue-600 px-4 py-1 text-xs font-black text-white shadow">
-                  ⭐ Le plus populaire
-                </div>
-              )}
+        {/* ── LE MUR DU GRATUIT ────────────────────────────────────────── */}
+        <section>
+          <div className="mb-6 text-center">
+            <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-5 py-2 text-xs font-black uppercase tracking-wide text-white shadow">
+              🎁 Gratuit, et ça le reste
+            </span>
+            <h2 className="mt-3 text-2xl font-black text-slate-950 sm:text-3xl">
+              Rien de tout ça ne se paiera jamais
+            </h2>
+            <p className="mx-auto mt-2 max-w-2xl text-sm font-bold text-slate-600">
+              Sans compte obligatoire, sans limite de temps, sans publicité.
+            </p>
+          </div>
 
-              {/* `soon` était déclaré sur les trois offres depuis toujours et
-                  lu nulle part : le moyen de dire « pas encore » existait, sans
-                  jamais rien changer à l'écran. Il est branché ici. */}
-              {o.soon && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-slate-600 px-4 py-1 text-xs font-black text-white shadow">
-                  ⏳ Bientôt
-                </div>
-              )}
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+            {gratuit.map((g) => (
+              <div
+                key={g.label}
+                className="rounded-2xl border border-white bg-white/90 p-4 shadow-md backdrop-blur transition hover:-translate-y-0.5"
+              >
+                <span className="text-2xl">{g.icon}</span>
+                <p className="mt-2 text-sm font-black text-slate-950">{g.label}</p>
+                <p className="mt-1 text-xs font-bold leading-relaxed text-slate-500">{g.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
-              <div className="mb-4">
-                <span className={`rounded-full px-3 py-1 text-xs font-black ${o.badgeColor}`}>
+        {/* ── PREMIUM S'ACHÈTE OU SE GAGNE ─────────────────────────────── */}
+        <section className="rounded-[2rem] bg-gradient-to-r from-cyan-500 via-emerald-500 to-orange-400 p-1 shadow-xl">
+          <div className="rounded-[1.85rem] bg-white/95 p-8 text-center backdrop-blur">
+            <p className="text-3xl">⭐</p>
+            <h2 className="mt-2 text-2xl font-black text-slate-950">
+              Premium s&apos;achète — ou se gagne
+            </h2>
+            <p className="mx-auto mt-3 max-w-2xl text-sm font-bold leading-relaxed text-slate-600">
+              Le badge, le thème, composer son parcours : compris dans l&apos;abonnement
+              famille. <strong className="text-slate-900">Ou gagnés</strong> en aidant
+              quelqu&apos;un — proposer un exercice, signaler une erreur, laisser un avis,
+              expliquer à un autre élève.
+            </p>
+            <p className="mx-auto mt-4 max-w-xl rounded-2xl bg-amber-50 px-6 py-3 text-sm font-black text-amber-900 ring-1 ring-amber-200">
+              Comme ça, le badge ne dit pas « ma famille a payé ». Il dit « j&apos;ai fait
+              quelque chose pour les autres ».
+            </p>
+          </div>
+        </section>
+
+        {/* ── CLASSE ET ÉTABLISSEMENT ──────────────────────────────────── */}
+        <section>
+          <div className="mb-6 text-center">
+            <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-400 to-blue-500 px-5 py-2 text-xs font-black uppercase tracking-wide text-white shadow">
+              🏫 Quand c&apos;est l&apos;école qui paie
+            </span>
+            <h2 className="mt-3 text-2xl font-black text-slate-950 sm:text-3xl">
+              Plus le cercle s&apos;élargit, moins ça coûte par enfant
+            </h2>
+            <p className="mx-auto mt-2 max-w-2xl text-sm font-bold text-slate-600">
+              On divise par deux à chaque fois : {euros(PRIX_FAMILLE_AN)} pour une famille,{" "}
+              {euros(PRIX_CLASSE_ELEVE_AN)} par élève pour une classe,{" "}
+              {euros(PRIX_ETABLISSEMENT_ELEVE_AN)} pour tout un établissement.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {collectif.map((o) => (
+              <div
+                key={o.nom}
+                className={`flex flex-col rounded-[2rem] border border-white bg-white/90 p-6 shadow-xl ring-4 backdrop-blur transition hover:-translate-y-1 ${o.anneau}`}
+              >
+                <span className="self-start rounded-full bg-slate-100 px-3 py-1 text-xs font-black text-slate-700">
                   {o.badge}
                 </span>
+
+                <h3 className="mt-4 text-xl font-black text-slate-950">{o.nom}</h3>
+                <p
+                  className={`mt-1 bg-gradient-to-r ${o.gradient} bg-clip-text text-3xl font-black text-transparent`}
+                >
+                  {o.prix}
+                </p>
+                <p className="mt-1 text-sm font-black text-slate-500">{o.exemple}</p>
+                <p className="mt-3 text-sm font-bold leading-relaxed text-slate-600">
+                  {o.description}
+                </p>
+
+                <ul className="mt-5 flex-1 space-y-2">
+                  {o.inclus.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2 text-sm font-bold text-slate-700"
+                    >
+                      <span className="mt-0.5 text-emerald-500">✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                <Link
+                  href="/contact"
+                  className={`mt-6 block rounded-2xl bg-gradient-to-r ${o.gradient} px-5 py-3 text-center text-sm font-black text-white shadow transition hover:-translate-y-0.5`}
+                >
+                  {o.cta}
+                </Link>
               </div>
-
-              <h2 className="text-xl font-black text-slate-950">{o.nom}</h2>
-              <p
-                className={`mt-1 text-3xl font-black ${
-                  o.soon ? "text-slate-400" : "text-blue-700"
-                }`}
-              >
-                {o.prix}
-              </p>
-              <p className="mt-1 text-sm font-bold text-slate-500">{o.soustitre}</p>
-              <p className="mt-3 text-sm font-semibold leading-relaxed text-slate-600">
-                {o.description}
-              </p>
-
-              <ul className="mt-5 flex-1 space-y-2">
-                {o.inclus.map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-sm font-semibold text-slate-700">
-                    <span className="mt-0.5 text-emerald-500">✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-              <Link
-                href={o.ctaHref}
-                className={`mt-6 block rounded-2xl px-5 py-3 text-center text-sm font-black shadow transition ${o.ctaColor}`}
-              >
-                {o.cta}
-              </Link>
-            </div>
-          ))}
-        </section>
-
-        {/* TOUTES LES MATIÈRES */}
-        <section className="rounded-[2rem] border border-white/80 bg-white/80 p-8 shadow-xl backdrop-blur text-center">
-          <p className="text-xs font-black uppercase tracking-widest text-slate-400">Un seul abonnement</p>
-          <h2 className="mt-1 text-2xl font-black text-slate-950">Toutes les matières incluses</h2>
-          <p className="mt-2 text-sm font-semibold text-slate-600">
-            Pas une app par matière : tout est compris dans le même tarif.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm font-bold">
-            {[
-              { icon: "🔢", label: "Mathématiques" },
-              { icon: "📖", label: "Français" },
-              { icon: "🇬🇧", label: "Anglais" },
-              { icon: "🇪🇸", label: "Espagnol" },
-              { icon: "🤖", label: "IA" },
-            ].map((m) => (
-              <span
-                key={m.label}
-                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-slate-700"
-              >
-                <span className="text-lg">{m.icon}</span>
-                {m.label}
-              </span>
             ))}
-            <span className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-blue-700">
-              <span className="text-lg">➕</span>
-              Votre matière sur demande
-            </span>
+          </div>
+
+          {/* L'argument, calculé — jamais recopié. */}
+          <div className="mt-6 rounded-[2rem] border border-emerald-200 bg-emerald-50/80 p-6 text-center shadow-lg backdrop-blur">
+            <p className="text-lg font-black text-slate-950">
+              Faites le calcul : {ARGUMENT_COLLECTIF.eleves} familles abonnées, c&apos;est{" "}
+              {euros(ARGUMENT_COLLECTIF.siChaqueFamillePaie)}.
+            </p>
+            <p className="mt-1 text-lg font-black text-emerald-700">
+              La même classe payée par la coopérative, c&apos;est{" "}
+              {euros(ARGUMENT_COLLECTIF.siLaClassePaie)}.
+            </p>
+            <p className="mt-2 text-sm font-bold text-slate-600">
+              Deux fois moins cher — et personne n&apos;est laissé dehors.
+            </p>
           </div>
         </section>
 
-        {/* PILOTE GRATUIT */}
-        <section className="rounded-[2rem] border border-emerald-200 bg-emerald-50/80 p-6 shadow-lg backdrop-blur flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
-          <div className="text-5xl shrink-0">🎁</div>
+        {/* ── PILOTE GRATUIT ───────────────────────────────────────────── */}
+        <section className="flex flex-col items-center gap-6 rounded-[2rem] border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 p-6 text-center shadow-lg backdrop-blur sm:flex-row sm:text-left">
+          <div className="shrink-0 text-5xl">🎁</div>
           <div className="flex-1">
             <h2 className="text-xl font-black text-slate-950">Pilote gratuit — 4 semaines</h2>
-            <p className="mt-1 text-sm font-semibold text-slate-600">
-              Accès complet pour une classe (jusqu&apos;à 35 élèves), sans engagement. Pour tester avant de décider.
+            <p className="mt-1 text-sm font-bold text-slate-600">
+              Accès complet pour une classe entière, sans engagement. Pour essayer avant de
+              décider quoi que ce soit.
             </p>
           </div>
           <Link
             href="/contact"
-            className="shrink-0 rounded-2xl bg-emerald-500 px-6 py-3 text-sm font-black text-white shadow hover:bg-emerald-400 transition"
+            className="shrink-0 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-500 px-6 py-3 text-sm font-black text-white shadow transition hover:-translate-y-0.5"
           >
             Demander le pilote
           </Link>
         </section>
 
-        {/* CE QUE TU OBTIENS */}
-        <section>
-          <div className="mb-6 text-center">
-            <p className="text-xs font-black uppercase tracking-widest text-slate-400">Inclus dans tous les plans</p>
-            <h2 className="mt-1 text-2xl font-black text-slate-950">8 outils. 1 seul abonnement.</h2>
-          </div>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {valeur.map((v) => (
-              <div
-                key={v.label}
-                className="rounded-2xl border border-white/80 bg-white/80 p-4 shadow-md backdrop-blur"
-              >
-                <span className="text-2xl">{v.icon}</span>
-                <p className="mt-2 text-sm font-black text-slate-950">{v.label}</p>
-                <p className="mt-1 text-xs font-semibold text-slate-500">{v.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* TRANSPARENCE DES COÛTS */}
-        <section className="rounded-[2rem] border border-white/80 bg-white/80 p-8 shadow-xl backdrop-blur">
-          <div className="mb-5 text-center">
-            <p className="text-xs font-black uppercase tracking-widest text-slate-400">Transparence</p>
-            <h2 className="mt-1 text-2xl font-black text-slate-950">Ce que ça coûte vraiment</h2>
-          </div>
-          <p className="mx-auto max-w-2xl text-center text-sm font-semibold leading-relaxed text-slate-600">
-            Un coach IA, ce n&apos;est pas gratuit à faire tourner : chaque question posée à l&apos;IA a un coût,
-            auquel s&apos;ajoutent l&apos;hébergement, la voix (audio TTS) et des centaines d&apos;heures pour
-            écrire les milliers d&apos;exercices. Mais sans investisseurs à rembourser ni équipe commerciale,
-            ce coût reste <span className="font-black text-slate-900">très inférieur</span> à celui des plateformes concurrentes.
-          </p>
-          <p className="mx-auto mt-4 max-w-2xl text-center text-sm font-semibold leading-relaxed text-slate-600">
-            C&apos;est pour ça qu&apos;EleveAI peut rester à <span className="font-black text-slate-900">quelques euros
-            par élève et par an</span> côté établissement — tout en restant 100 % gratuit pour chaque élève.
-          </p>
-        </section>
-
-        {/* COMPARATIF */}
+        {/* ── COMPARATIF ───────────────────────────────────────────────── */}
         <section className="rounded-[2rem] border border-white/80 bg-white/80 p-8 shadow-xl backdrop-blur">
           <div className="mb-6 text-center">
-            <p className="text-xs font-black uppercase tracking-widest text-slate-400">Comparatif</p>
-            <h2 className="mt-1 text-2xl font-black text-slate-950">EleveAI vs les autres</h2>
+            <p className="text-xs font-black uppercase tracking-widest text-slate-400">
+              Comparatif
+            </p>
+            <h2 className="mt-1 text-2xl font-black text-slate-950">EleveAI et les autres</h2>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-slate-200 text-left text-xs font-black uppercase tracking-wide text-slate-400">
                   <th className="pb-3 pr-6">Outil</th>
+                  <th className="pb-3 pr-6">Pour qui</th>
                   <th className="pb-3 pr-6">Tarif</th>
-                  <th className="pb-3">Soit / an</th>
+                  <th className="pb-3">Soit par an</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {comparatif.map((c) => (
-                  <tr key={c.outil} className={c.outil.includes("EleveAI") ? "bg-emerald-50" : ""}>
-                    <td className="py-3 pr-6 font-black text-slate-950">{c.outil}</td>
-                    <td className="py-3 pr-6 font-semibold text-slate-600">{c.prix}</td>
-                    <td className={`py-3 font-bold ${c.outil.includes("EleveAI") ? "text-emerald-600" : "text-slate-500"}`}>
-                      {c.soit}
-                    </td>
-                  </tr>
-                ))}
+                {comparatif.map((c) => {
+                  const nous = c.outil.includes("EleveAI");
+                  return (
+                    <tr key={`${c.outil}-${c.pourQui}`} className={nous ? "bg-emerald-50" : ""}>
+                      <td className="py-3 pr-6 font-black text-slate-950">{c.outil}</td>
+                      <td className="py-3 pr-6 font-bold text-slate-500">{c.pourQui}</td>
+                      <td className="py-3 pr-6 font-bold text-slate-600">{c.prix}</td>
+                      <td
+                        className={`py-3 font-black ${nous ? "text-emerald-600" : "text-slate-500"}`}
+                      >
+                        {c.soit}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
-          <p className="mt-4 text-xs font-semibold text-slate-400 text-center">
-            * Tarifs constatés sur les sites officiels en juin 2026.
+          <p className="mx-auto mt-5 max-w-2xl rounded-2xl bg-amber-50 px-6 py-3 text-center text-sm font-black text-amber-900 ring-1 ring-amber-200">
+            Chez IXL, le deuxième enfant coûte 4 € de plus par mois. Ici, la famille entière
+            est comprise dans les {euros(PRIX_FAMILLE_AN)}.
+          </p>
+          <p className="mt-4 text-center text-xs font-bold text-slate-400">
+            * Tarifs relevés sur les sites officiels — IXL en août 2026, les autres en juin 2026.
           </p>
         </section>
 
-        {/* HISTOIRE */}
-        <section className="rounded-[2rem] bg-[#041B33] p-8 shadow-2xl text-center text-white">
-          <p className="text-3xl">🧑‍💻</p>
-          <h2 className="mt-3 text-2xl font-black">Développé seul, en 5 mois, à La Réunion</h2>
-          <p className="mt-3 max-w-2xl mx-auto text-sm font-semibold leading-relaxed text-white/70">
-            EleveAI n&apos;a pas de levée de fonds, pas d&apos;équipe de 50 personnes, pas de service commercial.
-            C&apos;est un enseignant qui a construit l&apos;outil qu&apos;il aurait voulu avoir pour ses élèves.
-            Le prix bas n&apos;est pas un manque de qualité — c&apos;est un choix.
+        {/* ── LA PREUVE ────────────────────────────────────────────────── */}
+        <section className="rounded-[2rem] border border-white bg-gradient-to-br from-amber-50 via-white to-sky-50 p-8 text-center shadow-xl ring-1 ring-amber-100">
+          <p className="text-4xl">🧑‍🏫</p>
+          <h2 className="mt-3 text-2xl font-black text-slate-950">
+            Déjà utilisé dans un collège, à La Réunion, avec de vrais élèves
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-sm font-bold leading-relaxed text-slate-600">
+            EleveAI n&apos;a pas de levée de fonds, pas d&apos;équipe de cinquante personnes,
+            pas de service commercial. C&apos;est un enseignant qui a construit l&apos;outil
+            qu&apos;il aurait voulu avoir pour ses élèves — et les exercices ont été écrits
+            un par un, pas achetés.
           </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm font-bold">
-            <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2">Coach Maths IA ✓</span>
-            <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2">Coach Français IA ✓</span>
-            <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2">English Maths ✓</span>
-            <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2">CP → Terminale ✓</span>
-            <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2">Audio TTS ✓</span>
+          <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm font-black">
+            {[
+              "Coach Maths IA",
+              "Coach Français IA",
+              "English Maths",
+              "CP → Terminale",
+              "Sans publicité",
+              "Données dans l'UE",
+            ].map((chip) => (
+              <span
+                key={chip}
+                className="rounded-full bg-white px-4 py-2 text-slate-700 shadow-sm ring-1 ring-slate-200"
+              >
+                {chip} ✓
+              </span>
+            ))}
           </div>
         </section>
 
-        {/* FAQ */}
+        {/* ── FAQ ──────────────────────────────────────────────────────── */}
         <section>
-          <h2 className="mb-6 text-2xl font-black text-slate-950 text-center">Questions fréquentes</h2>
+          <h2 className="mb-6 text-center text-2xl font-black text-slate-950">
+            Les questions qu&apos;on nous pose
+          </h2>
           <div className="space-y-3">
             {faq.map((f) => (
               <details
@@ -405,26 +534,26 @@ export default function TarifsClient() {
                 className="rounded-[1.5rem] border border-white/80 bg-white/80 px-6 py-4 shadow-md backdrop-blur"
               >
                 <summary className="cursor-pointer font-black text-slate-950">{f.q}</summary>
-                <p className="mt-3 text-sm font-semibold leading-relaxed text-slate-600">{f.a}</p>
+                <p className="mt-3 text-sm font-bold leading-relaxed text-slate-600">{f.a}</p>
               </details>
             ))}
           </div>
         </section>
 
-        {/* CTA FINAL */}
-        <section className="rounded-[2rem] bg-blue-600 p-8 shadow-2xl text-center text-white">
-          <h2 className="text-2xl font-black">Une question sur les tarifs ?</h2>
-          <p className="mt-2 font-semibold text-blue-100">
-            Réponse sous 24h · Pas de commercial · Juste une conversation.
+        {/* ── CTA FINAL ────────────────────────────────────────────────── */}
+        <section className="rounded-[2rem] border border-white bg-gradient-to-br from-sky-50 via-white to-cyan-50 p-8 text-center shadow-xl ring-1 ring-sky-100">
+          <p className="text-4xl">💬</p>
+          <h2 className="mt-2 text-2xl font-black text-slate-950">Une question ?</h2>
+          <p className="mt-2 font-bold text-slate-600">
+            Réponse sous 24 h · Pas de commercial · Juste une conversation.
           </p>
           <Link
             href="/contact"
-            className="mt-5 inline-flex rounded-2xl bg-white px-8 py-4 text-base font-black text-blue-700 shadow hover:bg-blue-50 transition"
+            className="mt-5 inline-flex rounded-2xl bg-gradient-to-r from-indigo-600 via-sky-600 to-cyan-500 px-8 py-4 text-base font-black text-white shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl"
           >
             📩 Nous écrire
           </Link>
         </section>
-
       </div>
     </main>
   );

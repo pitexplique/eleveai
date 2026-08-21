@@ -1,6 +1,12 @@
 // app/tarifs/page.tsx
 import type { Metadata } from "next";
 import TarifsClient from "./TarifsClient";
+import {
+  PRIX_CLASSE_ELEVE_AN,
+  PRIX_ETABLISSEMENT_ELEVE_AN,
+  PRIX_FAMILLE_AN,
+  euros,
+} from "@/lib/tarifs";
 
 const url = "https://www.eleveai.fr/tarifs";
 
@@ -9,18 +15,23 @@ const url = "https://www.eleveai.fr/tarifs";
 // une offre aux particuliers qui n'est pas ouverte. Corriger la carte sur la
 // page sans corriger la description, c'est laisser la promesse dans la SERP,
 // là où elle est justement le plus lue.
+// ⛔ Aucun prix recopié ici : ils viennent de `lib/tarifs.ts`, comme sur la
+// page. C'est exactement ce couple-là qui s'était désaccordé en juin.
+const resume =
+  `Tout ce qui fait apprendre est gratuit et le reste : coach, exercices, parcours, cahiers, fiches. ` +
+  `Le suivi par les parents est à ${euros(PRIX_FAMILLE_AN)} par an et par famille, quel que soit le nombre d'enfants. ` +
+  `Pour une classe ${euros(PRIX_CLASSE_ELEVE_AN)} par élève et par an, pour un établissement ${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} — et là, les familles ne paient rien.`;
+
 export const metadata: Metadata = {
-  title: "Tarifs — pilote gratuit, écoles et établissements",
-  description:
-    "Accès pilote gratuit 4 semaines pour les collèges et lycées. 5 €/élève/an pour une classe, 4 €/élève/an pour un établissement — et gratuit pour chaque élève, rien à payer pour les familles.",
+  title: "Tarifs — gratuit pour apprendre, 12 € par an pour suivre",
+  description: resume,
   alternates: { canonical: url },
   robots: { index: true, follow: true },
   openGraph: {
     type: "website",
     url,
-    title: "Tarifs EleveAI — classes, établissements, pilote gratuit",
-    description:
-      "5 €/élève/an pour une classe, 4 €/élève/an pour tout un établissement. Gratuit pour chaque élève, aucun paiement demandé aux familles. Pilote gratuit de 4 semaines.",
+    title: "Tarifs EleveAI — familles, classes, établissements",
+    description: resume,
     siteName: "EleveAI",
     locale: "fr_FR",
     images: [
@@ -28,15 +39,14 @@ export const metadata: Metadata = {
         url: "/preview.jpg",
         width: 1200,
         height: 630,
-        alt: "EleveAI — Tarifs pour les classes et les établissements",
+        alt: "EleveAI — les tarifs pour les familles, les classes et les établissements",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tarifs EleveAI — classes, établissements, pilote gratuit",
-    description:
-      "5 €/élève/an pour une classe, 4 €/élève/an pour un établissement. Gratuit pour chaque élève. Pilote gratuit de 4 semaines.",
+    title: "Tarifs EleveAI — familles, classes, établissements",
+    description: resume,
     images: ["/preview.jpg"],
   },
 };
