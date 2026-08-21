@@ -246,6 +246,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les fractions",
     resume: "Reconnaître des fractions égales, simplifier, comparer, et l'opposé.",
   },
+  "maths/5e/parallelogramme": {
+    titre: "Le parallélogramme",
+    resume: "Reconnaître, côtés et angles opposés, diagonales, losange/rectangle/carré et aire.",
+  },
   "maths/5e/fraction-calcul": {
     titre: "Calculer avec les fractions",
     resume: "Additionner, soustraire, multiplier, et prendre une fraction d'une quantité.",

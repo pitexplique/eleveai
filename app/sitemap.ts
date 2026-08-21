@@ -169,6 +169,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours/maths/5e/pourcentages",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/5e/fraction-nombre",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/5e/fraction-calcul",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
+  { path: "/fiches-cours/maths/5e/parallelogramme",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/4e/pythagore-theoreme",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/4e/trigo-cosinus",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/4e/stat-statistique",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
