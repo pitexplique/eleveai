@@ -152,14 +152,27 @@ export default function PourquoiEleveAIClient() {
           </h1>
 
           <div className="mt-6 grid items-center gap-6 lg:grid-cols-2">
-            <div className="overflow-hidden rounded-2xl border border-slate-200" style={{ backgroundColor: "#fcfcf7" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/coeur-epsilon-infini.svg"
-                alt="Un cœur dessiné au stylo bleu : un epsilon, les indices i j k n, un réseau de neurones, les nombres 1 2 3 4, l'infini — et une flèche qui s'échappe"
-                className="h-auto w-full"
-              />
-            </div>
+            {/* ⭐ LA LÉGENDE SOUS LE DESSIN (Frédéric, 21/08/2026), et elle n'est
+                pas décorative : elle relie le dessin à la thèse de la page, qui
+                s'appelle « Plusieurs portes pour apprendre ». Le cœur montre un
+                epsilon qui avance d'un carreau à l'autre — la légende dit que
+                ce carreau-là, ce détail-là, peut tout changer, et qu'il n'est
+                pas le même pour chaque enfant. C'est le pont entre l'histoire
+                et l'argument. ⛔ Ses mots, on n'y touche pas. */}
+            <figure className="m-0">
+              <div className="overflow-hidden rounded-2xl border border-slate-200" style={{ backgroundColor: "#fcfcf7" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/coeur-epsilon-infini.svg"
+                  alt="Un cœur dessiné au stylo bleu : un epsilon, les indices i j k n, un réseau de neurones, les nombres 1 2 3 4, l'infini — et une flèche qui s'échappe"
+                  className="h-auto w-full"
+                />
+              </div>
+              <figcaption className="mt-3 text-center text-sm font-bold italic leading-relaxed text-slate-600">
+                Un détail peut tout changer, surtout si on a plusieurs portes pour
+                apprendre.
+              </figcaption>
+            </figure>
             <div className="space-y-4 text-base font-semibold leading-relaxed text-slate-700">
               <p>
                 {/* « juillet » → « mars » (Frédéric, 21/08/2026) : c'est lui qui
@@ -177,10 +190,18 @@ export default function PourquoiEleveAIClient() {
                 l&apos;IA est <em>dans</em> le cœur, jamais au-dessus. Il en ressort en
                 comptant 1, 2, 3, 4… jusqu&apos;à <strong>l&apos;infini</strong>.
               </p>
+              {/* ⛔ LE PROVERBE EST RETIRÉ (Frédéric, 21/08/2026). « In min i lav
+                  lot » dit la RÉCIPROCITÉ — je t'aide, tu m'aides — quand le
+                  paragraphe au-dessus parle d'ACCUMULATION : le petit répété qui
+                  engendre l'immense. Ce sont deux idées, et le « font pareil »
+                  promettait une équivalence que le proverbe ne tient pas.
+                  ⚠️ Il n'est pas faux, il est ailleurs : sa version LONGUE
+                  (« … toulédé lav la figir », les deux lavent le visage) ajoute
+                  le résultat de l'entraide et retombe, elle, sur l'engendrement.
+                  Si le proverbe revient un jour, que ce soit celle-là. */}
               <p>
                 Les petites actions du quotidien font pareil&nbsp;: aider, expliquer,
-                réessayer. En créole&nbsp;: <strong>«&nbsp;In min i lav lot&nbsp;»</strong> —
-                une main lave l&apos;autre.
+                réessayer.
               </p>
               <div className="flex flex-wrap gap-3 pt-2">
                 <Link
