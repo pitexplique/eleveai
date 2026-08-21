@@ -167,6 +167,11 @@ export const CONFIG_6E_FRANCAIS: ConfigEpreuve = {
   // l'oral s'appuient sur un texte LU À VOIX HAUTE, imprimé sur la feuille du
   // professeur et jamais sur celle de l'élève. Voir `EncartTextesALire`.
   sujetPapier: true,
+  // Six domaines du bilan officiel, découpage éduscol repris le 16/08/2026
+  // (60 questions). ⚠️ L'orthographe ne rend que 3 des 9 questions demandées,
+  // faute de vivier : si la banque s'étoffe, l'effectif change et cette version
+  // doit être incrémentée.
+  baremeVersion: "2026-08",
   reserve:
     "Une seule chose de l'épreuve officielle manque ici : la fluence, qui se passe à voix haute, en tête à tête avec un professeur — un ordinateur ne peut pas l'évaluer. La compréhension de l'oral, elle, y est : prévois des écouteurs ou une pièce calme.",
   themes: THEMES,

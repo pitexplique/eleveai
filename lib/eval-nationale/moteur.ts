@@ -136,6 +136,23 @@ export type ConfigEpreuve = {
    * dans SA config, et le bouton apparaît sur SA page.
    */
   sujetPapier?: boolean;
+  /**
+   * LA VERSION DU BARÈME QUI A PRODUIT LE RÉSULTAT (21/08/2026).
+   *
+   * ⭐ SANS ELLE, LA COMPARAISON D'UNE ANNÉE SUR L'AUTRE EST IMPOSSIBLE — et
+   * c'est justement toute la valeur d'un référentiel. Le jour où un seuil
+   * bouge, où un domaine se scinde, où les effectifs changent, les résultats
+   * d'avant cessent d'être comparables à ceux d'après. Rien, en base, ne
+   * permettrait de le savoir : deux lignes identiques diraient deux choses
+   * différentes.
+   *
+   * ⚠️ À INCRÉMENTER DÈS QU'UN SEUIL, UN DOMAINE OU UN EFFECTIF CHANGE. Pas au
+   * moindre ajustement de libellé — ce qui compte est ce qui déplace un élève
+   * d'un groupe de maîtrise à un autre.
+   *
+   * Format : AAAA-MM de la version, pour se lire sans table de correspondance.
+   */
+  baremeVersion: string;
   themes: ThemeEval[];
   /**
    * LES TESTS SPÉCIFIQUES, qui traversent les domaines. Ils ne changent rien
@@ -874,6 +891,113 @@ function seuilsAjustes(
   };
 }
 
+/**
+ * LA RÈGLE DE CORRECTION, EN UN SEUL ENDROIT.
+ *
+ * Elle était écrite en toutes lettres dans `construireBilan` et allait l'être
+ * une deuxième fois dans le détail par item (21/08/2026). Deux copies d'une
+ * règle de correction finissent toujours par diverger, et celle-ci décide de
+ * tout ce qui part en base : le bilan que lit l'élève ET les données sur
+ * lesquelles se construira le panel.
+ *
+ * ⚠️ `expected[0]` ET NON `expected.includes()` : le tableau série réduit sa
+ * grille à UNE réponse via `reponseTableau`, juste ou marquée fausse. Accepter
+ * n'importe quelle valeur attendue rendrait vraies des grilles incomplètes.
+ */
+export function estReussie(
+  q: Pick<QuestionEval, "expected">,
+  reponse: string | undefined,
+): boolean {
+  return reponse === q.expected[0];
+}
+
+/**
+ * CE QU'ON ENREGISTRE PAR QUESTION — et ce qui manquait (21/08/2026).
+ *
+ * ⭐ POURQUOI `itemId` CHANGE TOUT. Le bilan ne gardait que la
+ * micro-compétence : on savait qu'un élève avait raté « comparer deux
+ * décimaux », jamais SUR QUELLE QUESTION. Impossible, dès lors, de distinguer
+ * une compétence difficile d'un énoncé cassé — et c'est exactement ce qu'il
+ * faut savoir pour améliorer la banque avec l'usage. Le défaut du 21/08, où
+ * une proposition « > » sortait blanche sur le sujet papier, se serait vu en
+ * une requête si le taux de réussite par item avait été suivi.
+ *
+ * ⛔ ET C'EST IRRATTRAPABLE. Une donnée qu'on n'écrit pas aujourd'hui n'existe
+ * pas demain : les évaluations nationales se passent à la rentrée, et cette
+ * cohorte-là ne repasse pas.
+ *
+ * `cle` accompagne `itemId` parce qu'un gabarit produit plusieurs énoncés sous
+ * un seul identifiant — voir la note de `QuestionEval.cle`. Sans elle, sept à
+ * treize énoncés différents se confondraient dans les statistiques.
+ */
+export type ItemPasse = {
+  rang: number;
+  itemId: string;
+  cle: string;
+  themeId: string;
+  microId: string;
+  typeItem: TypeItem;
+  format: FormatReponse;
+  repondu: boolean;
+  reussi: boolean;
+};
+
+export function construireItems(
+  questions: QuestionEval[],
+  reponses: Record<number, string>,
+): ItemPasse[] {
+  return questions.map((q, index) => ({
+    rang: index + 1,
+    itemId: q.itemId,
+    cle: q.cle,
+    themeId: q.themeId,
+    microId: q.microId,
+    typeItem: q.typeItem,
+    format: q.format ?? "cases",
+    repondu: reponses[index] !== undefined,
+    reussi: estReussie(q, reponses[index]),
+  }));
+}
+
+/**
+ * EST-CE UNE VRAIE PASSATION, OU UN CLIC DE VÉRIFICATION ?
+ *
+ * ⭐ LE PANEL NE VAUT QUE S'IL EST PROPRE. Les épreuves de démonstration
+ * tournent sur les mêmes tables que les vraies — la vue de classe mentionne
+ * elle-même les élèves `6ETEST-01…30` mêlés à la 6ᵉ C réelle. Mélangées à un
+ * panel national, ces lignes le faussent, et rien ne permet de les retirer
+ * après coup.
+ *
+ * ⛔ LE TRI NE SE FAIT PAS SUR LE CODE DE L'ÉLÈVE, et c'est délibéré. La route
+ * `evaluation-nationale/classe` porte la leçon : « un code est une identité,
+ * pas une description ; il ne bouge jamais, donc il ment vite ». Un préfixe
+ * `TEST` finira sur un vrai élève, et un vrai élève finira avec un préfixe qui
+ * ressemble à un test.
+ *
+ * On juge donc sur des FAITS OBSERVABLES : a-t-on répondu à l'essentiel des
+ * questions, et y a-t-on passé un temps compatible avec le fait de lire ?
+ * Quelqu'un qui clique soixante-deux fois en trente secondes n'a pas passé
+ * l'épreuve, quel que soit son code.
+ */
+export const SECONDES_MINIMUM_PAR_QUESTION = 5;
+export const PART_MINIMUM_REPONDUE = 0.8;
+
+export function passationEligiblePanel(
+  questions: QuestionEval[],
+  reponses: Record<number, string>,
+  dureeSecondes: number,
+): { eligible: boolean; raison: string | null } {
+  const repondues = questions.filter((_, i) => reponses[i] !== undefined).length;
+  if (questions.length === 0) return { eligible: false, raison: "aucune question" };
+  if (repondues < questions.length * PART_MINIMUM_REPONDUE) {
+    return { eligible: false, raison: "épreuve trop incomplète" };
+  }
+  if (dureeSecondes < questions.length * SECONDES_MINIMUM_PAR_QUESTION) {
+    return { eligible: false, raison: "temps trop court pour avoir lu" };
+  }
+  return { eligible: true, raison: null };
+}
+
 export function construireBilan(
   config: ConfigEpreuve,
   questions: QuestionEval[],
@@ -888,7 +1012,7 @@ export function construireBilan(
       questions.forEach((q, index) => {
         if (q.themeId !== theme.id) return;
         total += 1;
-        const reussi = reponses[index] === q.expected[0];
+        const reussi = estReussie(q, reponses[index]);
         if (reussi) justes += 1;
         micros.push({
           microId: q.microId,
@@ -951,7 +1075,7 @@ export function construireBilanTests(
       questions.forEach((q, index) => {
         if (q.typeItem !== test.id) return;
         total += 1;
-        const reussi = reponses[index] === q.expected[0];
+        const reussi = estReussie(q, reponses[index]);
         if (reussi) justes += 1;
         micros.push({
           microId: q.microId,

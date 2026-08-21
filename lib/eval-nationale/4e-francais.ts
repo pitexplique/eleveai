@@ -129,6 +129,8 @@ export const CONFIG_4E_FRANCAIS: ConfigEpreuve = {
   // l'oral s'appuient sur un texte LU À VOIX HAUTE, imprimé sur la feuille du
   // professeur et jamais sur celle de l'élève. Voir `EncartTextesALire`.
   sujetPapier: true,
+  // Six domaines, 67 questions, relevés le 16/08/2026.
+  baremeVersion: "2026-08",
   reserve:
     "Une seule chose de l'épreuve officielle manque ici : la fluence, qui se passe à voix haute, en tête à tête avec un professeur — un ordinateur ne peut pas l'évaluer. La compréhension de l'oral, elle, y est : prévois des écouteurs ou une pièce calme.",
   themes: THEMES,

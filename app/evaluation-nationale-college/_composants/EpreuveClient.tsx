@@ -14,7 +14,9 @@ import {
   construireBilan,
   construireBilanTests,
   groupeDeMaitrise,
+  construireItems,
   nbQuestions as compterQuestions,
+  passationEligiblePanel,
   reponseTableau,
   routeRemediation,
   tirerEpreuve,
@@ -395,6 +397,43 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
           groupe: groupeDeMaitrise(t.justes, t.total, t.seuils),
         })),
         micros: bilan.flatMap((t) => t.micros),
+
+        /* ═══ CE QUI FABRIQUE L'ACTIF, ET QUI NE SE RATTRAPE PAS ═══
+           Ajouté le 21/08/2026, deux semaines avant la rentrée. Les trois
+           champs qui suivent ne servent pas au bilan que l'élève lit à
+           l'instant : ils servent au panel qu'on construira dans six mois, et
+           ils ne peuvent PAS être reconstitués après coup. Une donnée qu'on
+           n'écrit pas aujourd'hui n'existera jamais — et l'évaluation
+           nationale ne se repasse pas.
+
+           `details` est en jsonb : aucune migration, rien à exécuter dans
+           Supabase avant la rentrée. C'était la condition pour que ça parte
+           à temps. */
+
+        // 1. QUELLE QUESTION, et pas seulement quelle compétence. C'est ce qui
+        //    permettra de distinguer un énoncé cassé d'une notion difficile,
+        //    et d'améliorer la banque avec l'usage. Voir `construireItems`.
+        /* ⚠️ `reponses`, PAS `suivant` : on est dans l'effet du bilan, pas dans
+           `validerEtContinuer`. L'état porte déjà la dernière réponse — c'est
+           la même source que `construireBilan` juste au-dessus, et il faut que
+           ce soit exactement la même, sinon le détail par item contredirait le
+           bilan qu'il accompagne. */
+        items: construireItems(questions, reponses),
+
+        // 2. EST-CE UNE VRAIE PASSATION. Les épreuves de démonstration
+        //    tournent sur la même table que les vraies ; sans ce drapeau, le
+        //    panel national serait pollué sans recours. Jugé sur des faits
+        //    observables, jamais sur le code de l'élève — voir
+        //    `passationEligiblePanel`.
+        panel: passationEligiblePanel(
+          questions,
+          reponses,
+          config.dureeSecondes - restant,
+        ),
+
+        // 3. QUEL BARÈME. Le jour où un seuil bouge, les résultats d'avant
+        //    cessent d'être comparables — et rien, en base, ne le dirait.
+        bareme: config.baremeVersion,
       },
     }).then(({ error }) => {
       setEnregistrement(error ? error.message : "ok");

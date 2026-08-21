@@ -351,6 +351,9 @@ export const CONFIG_4E_MATHS: ConfigEpreuve = {
   // Le sujet papier existe : /evaluation-nationale-college/4e-maths/a-imprimer
   // (21/08). Deuxième des quatre — voir `sujetPapier` dans moteur.ts.
   sujetPapier: true,
+  // Volume du sujet officiel repris le 15/08/2026 (62 questions) ; seuils non
+  // publiés pour ce niveau, on retombe sur le 30 % / 60 % en proportion.
+  baremeVersion: "2026-08",
   themes: THEMES,
   // ⚠️ AUCUN `seuils` ICI, ET C'EST VOULU. Le document professeur de la DEPP
   // donne les barèmes de la 6ᵉ en nombre de réponses ; nous n'avons pas ceux

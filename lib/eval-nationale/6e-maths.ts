@@ -242,6 +242,9 @@ export const CONFIG_6E_MATHS: ConfigEpreuve = {
   // Le sujet papier existe : /evaluation-nationale-college/6e-maths/a-imprimer
   // (21/08). Premier des quatre — voir `sujetPapier` dans moteur.ts.
   sujetPapier: true,
+  // Barème DEPP de septembre 2025, relevé le 11/08/2026 : trois domaines, deux
+  // tests spécifiques, seuils en nombre de réponses. Inchangé depuis.
+  baremeVersion: "2026-08",
   themes: DOMAINES,
   testsSpecifiques: [
     {
