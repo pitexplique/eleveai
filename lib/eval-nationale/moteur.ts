@@ -124,6 +124,18 @@ export type ConfigEpreuve = {
    * domaines laisserait croire qu'on reproduit toute l'épreuve.
    */
   reserve?: string;
+  /**
+   * LE SUJET PAPIER EXISTE POUR CETTE ÉPREUVE (21/08/2026).
+   *
+   * ⭐ POURQUOI UN DRAPEAU ET PAS UNE ROUTE DEVINÉE : la page d'épreuve doit
+   * proposer le téléchargement, parce que Google y fait atterrir directement —
+   * c'est une page fille indexée, pas seulement une étape du hub. Mais les
+   * quatre épreuves partagent `EpreuveClient` et les trois autres sujets ne
+   * sont pas écrits : construire l'URL à partir du slug enverrait trois quarts
+   * des visiteurs sur une 404. Le jour où un sujet existe, on ajoute la ligne
+   * dans SA config, et le bouton apparaît sur SA page.
+   */
+  sujetPapier?: boolean;
   themes: ThemeEval[];
   /**
    * LES TESTS SPÉCIFIQUES, qui traversent les domaines. Ils ne changent rien

@@ -40,6 +40,29 @@ import { QRCodeSVG } from "qrcode.react";
    donc ici comme le français le fait : « du CM2 », « de la 5ᵉ ». */
 const deLaSource = (label: string) => `de ${label}`.replace(/^de le /, "du ");
 
+/**
+ * LA SIGNATURE, EN UN SEUL EXEMPLAIRE.
+ *
+ * ⭐ ELLE EST UNE CONSTANTE ET PLUS UN TEXTE RECOPIÉ (Frédéric, 21/08 : « on
+ * ajuste les deux formules en haut et en bas, on prend celle d'en haut »). La
+ * couverture et le pied du corrigé signaient différemment depuis le matin même
+ * — « conçu par » ici, « réalisée par » là — sur la MÊME feuille. C'est
+ * exactement le défaut qu'on avait mis onze cahiers de vacances à corriger :
+ * une phrase recopiée finit toujours par diverger.
+ *
+ * ⚠️ C'EST LA FORMULE DE L'ACCUEIL ET DES CAHIERS, mot pour mot. Ne la
+ * reformuler ici que pour la reformuler partout — c'est en la répétant à
+ * l'identique qu'un nom finit par valoir quelque chose.
+ * ⚠️ « Enseignant » et non « professeur » : Frédéric est contractuel, et c'est
+ * le mot des mentions légales.
+ * ⚠️ « — et pour toi » n'est pas de la politesse. Sans cette moitié, la phrase
+ * se referme sur « SES élèves », ceux d'un enseignant de La Réunion, et 86 %
+ * des visiteurs sont ailleurs : ils liraient qu'ils tiennent la feuille faite
+ * pour la classe de quelqu'un d'autre.
+ */
+export const SIGNATURE =
+  "Conçu par Frédéric Lacoste, enseignant à La Réunion, pour ses élèves — et pour toi.";
+
 export const lienAccueilQR = (slug: string) =>
   `https://www.eleveai.fr/accueil?from=eval-nationale&utm_source=sujet-papier&utm_medium=qr-couverture&utm_content=${slug}`;
 
@@ -174,10 +197,7 @@ export function EncartBadges({
 export function EncartSignature() {
   return (
     <>
-      <p className="mt-4 text-sm font-bold italic text-slate-500">
-        Conçu par Frédéric Lacoste, enseignant à La Réunion, pour ses élèves — et
-        pour toi.
-      </p>
+      <p className="mt-4 text-sm font-bold italic text-slate-500">{SIGNATURE}</p>
       <p className="mt-1 text-base font-black text-teal-600">
         « Nou la fé&nbsp;! » 🌺
       </p>
@@ -342,9 +362,25 @@ export function EncartPiedDeFin({ slug }: { slug: string }) {
   return (
     <div className="mt-6 flex items-center justify-between gap-4 border-t-2 border-slate-200 pt-4">
       <div className="min-w-0">
+        {/* ⭐ « CONTINUER L'ENTRAÎNEMENT » ET NON « CONTINUER GRATUITEMENT »
+            (Frédéric, 21/08). Le mot « gratuitement » disait le prix ; à cet
+            endroit-là de la feuille, celui qui vient de corriger son sujet ne
+            se demande pas ce que ça coûte, il se demande ce qu'il fait de ce
+            qui a coincé. On lui répond par le geste, pas par le tarif. La
+            gratuité reste dite deux lignes plus bas, où elle est un argument et
+            non une réponse.
+            ⭐ ET LA SIGNATURE DESCEND JUSQU'ICI. Elle est déjà sur la
+            couverture, mais la couverture se détache : un professeur qui
+            photocopie ne photocopie pas toujours la garde, et le corrigé est la
+            feuille qu'on garde. C'est donc ici que le nom survit à la
+            photocopieuse — et c'est la MÊME phrase qu'en haut, la constante
+            `SIGNATURE`, pas une variante. */}
         <p className="text-sm font-black text-slate-900">
-          Continuer gratuitement sur{" "}
+          Continuer l&apos;entraînement sur{" "}
           <span className="text-teal-600">eleveai.fr</span>
+        </p>
+        <p className="mt-0.5 text-xs font-bold italic text-slate-600">
+          {SIGNATURE}
         </p>
         <p className="mt-0.5 text-xs font-medium leading-5 text-slate-500">
           Les quatre épreuves blanches, les guides de survie et les cahiers de

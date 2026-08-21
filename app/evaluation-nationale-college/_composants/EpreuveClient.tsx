@@ -500,12 +500,30 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
         {/* ══ ACCUEIL ══════════════════════════════════════════════════════ */}
         {etape === "accueil" && (
           <>
-            <Link
-              href="/evaluation-nationale-college"
-              className="inline-flex items-center gap-1.5 rounded-full bg-white/70 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/60 shadow-sm ring-1 ring-[#1d1c16]/10 transition hover:bg-white"
-            >
-              ← Les évaluations du collège
-            </Link>
+            {/* ⚠️ LA PUCE « À IMPRIMER » DOUBLE LE BLOC DU BAS, et c'est
+                voulu : celui-ci est à plus de 1000 px du haut, soit une page et
+                demie de défilement sur ordinateur. Un visiteur déposé ici par
+                Google — c'est le cas de la majorité, cette page fille se classe
+                seule — repartirait sans savoir que le sujet existe sur papier.
+                La puce le dit en haut, en un mot ; le bloc du bas l'explique,
+                après que la page a fait son travail. */}
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <Link
+                href="/evaluation-nationale-college"
+                className="inline-flex items-center gap-1.5 rounded-full bg-white/70 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/60 shadow-sm ring-1 ring-[#1d1c16]/10 transition hover:bg-white"
+              >
+                ← Les évaluations du collège
+              </Link>
+              {config.sujetPapier && (
+                <Link
+                  href={`/evaluation-nationale-college/${config.slug}/a-imprimer`}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.16em] shadow-sm ring-1 transition hover:brightness-105"
+                  style={{ color: accent, boxShadow: `inset 0 0 0 1px ${accent}55` }}
+                >
+                  🖨️ Le sujet à imprimer
+                </Link>
+              )}
+            </div>
 
             <header className="mt-4">
               <p
@@ -667,6 +685,53 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
             >
               Commencer par la prise en main →
             </button>
+
+            {/* ⭐ LE SUJET PAPIER SE PROPOSE ICI AUSSI (Frédéric, 21/08 :
+                « Google peut faire arriver directement sur cette page »). Et
+                c'est exact : cette page fille est déclarée au sitemap depuis le
+                14/08, elle se classe sur « évaluation nationale 6e maths » —
+                un visiteur sur deux n'a jamais vu le hub, où le bloc « à
+                télécharger » se trouve. Lui laisser croire que l'épreuve
+                n'existe qu'à l'écran, c'est perdre le professeur qui cherchait
+                une feuille pour sa classe.
+
+                ⚠️ SECONDAIRE, ET DÉLIBÉRÉMENT. Le geste principal reste de la
+                passer en ligne : c'est là qu'elle se corrige toute seule et
+                qu'elle rend un profil de compétences. Le papier ne sait pas
+                faire ça, il sait faire ce que l'écran ne fait pas — vingt-huit
+                élèves sans vingt-huit ordinateurs. Deux besoins, deux places
+                dans la hiérarchie.
+
+                ⛔ N'APPARAÎT QUE SI LE SUJET EXISTE. Voir `sujetPapier` dans
+                moteur.ts : trois des quatre épreuves n'ont pas encore le leur,
+                et deviner l'URL depuis le slug les enverrait sur une 404. */}
+            {config.sujetPapier && (
+              <div className="mt-4 rounded-2xl border-2 border-dashed border-[#1d1c16]/20 bg-white/70 p-4">
+                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/55">
+                  Ou sur papier
+                </p>
+                <Link
+                  href={`/evaluation-nationale-college/${config.slug}/a-imprimer`}
+                  className="group mt-1.5 block"
+                >
+                  <span className="block font-serif text-lg font-black leading-snug group-hover:underline">
+                    🖨️ Télécharger le sujet en PDF — gratuit
+                  </span>
+                  <span className="mt-1 block max-w-2xl text-sm font-medium leading-6 text-[#1d1c16]/75">
+                    L&apos;épreuve entière à imprimer, avec son corrigé : pour
+                    une classe sans ordinateurs, une heure d&apos;étude, ou pour
+                    chercher au crayon. Trois formats — le sujet seul, le sujet
+                    et son corrigé, ou le corrigé seul.
+                  </span>
+                  <span
+                    className="mt-3 inline-flex items-center gap-2 rounded-xl border-2 bg-white px-4 py-2.5 text-sm font-black transition group-hover:brightness-105"
+                    style={{ borderColor: accent, color: accent }}
+                  >
+                    Voir le sujet à imprimer <span aria-hidden>→</span>
+                  </span>
+                </Link>
+              </div>
+            )}
           </>
         )}
 

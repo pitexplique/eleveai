@@ -239,6 +239,9 @@ export const CONFIG_6E_MATHS: ConfigEpreuve = {
   // 48 secondes chacune.
   dureeSecondes: 50 * 60,
   volumeOfficiel: true,
+  // Le sujet papier existe : /evaluation-nationale-college/6e-maths/a-imprimer
+  // (21/08). Premier des quatre — voir `sujetPapier` dans moteur.ts.
+  sujetPapier: true,
   themes: DOMAINES,
   testsSpecifiques: [
     {
