@@ -22,12 +22,14 @@ const url = "https://www.eleveai.fr/tarifs";
 // le texte visible — c'est la condition pour que Google la retienne (leçon du
 // 08/08, app/accueil/metadata.ts).
 const resume =
-  `Apprendre ne se paie pas : coach, exercices, parcours, cahiers et fiches restent ouverts à tous. ` +
+  `Plusieurs portes pour apprendre, progresser et s'évaluer : cinq matières du CP au Bac, coachs, parcours, rituels, cahiers et fiches. ` +
   `Le suivi par les parents est à ${euros(PRIX_FAMILLE_AN)} par an et par famille, quel que soit le nombre d'enfants. ` +
   `Pour une classe ${euros(PRIX_CLASSE_ELEVE_AN)} par élève et par an, pour un établissement ${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} — et là, les familles ne paient rien.`;
 
 export const metadata: Metadata = {
-  title: "Tarifs — apprendre ne se paie pas, 12 € par an pour suivre",
+  // ⚠️ Le titre suit le <h1> : une description ou un titre qui ne dit plus la
+  // même chose que la page se fait remplacer par Google (leçon du 08/08).
+  title: "Tarifs — apprendre, progresser, s'évaluer",
   description: resume,
   alternates: { canonical: url },
   robots: { index: true, follow: true },

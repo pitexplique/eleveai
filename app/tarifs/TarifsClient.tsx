@@ -286,21 +286,33 @@ export default function TarifsClient() {
               finit par se demander ce qu'il achète. La chose reste vraie et se
               dit autrement — « ne se paie pas », « personne ne paie »,
               « offert ». C'est le verbe qui porte, pas l'étiquette. */}
+          {/* ⭐ LE MÊME TITRE QUE /pourquoi-eleveai, à un verbe près (Frédéric,
+              21/08). « Apprendre ne se paie pas » disait vrai mais vendait
+              contre soi : sur la page du prix, la première phrase expliquait
+              qu'il n'y avait rien à payer. Celle-ci montre d'abord l'étendue de
+              ce qu'on ouvre — et le prix se lit ensuite comme petit devant. */}
           <h1 className="text-3xl font-black leading-tight text-slate-950 sm:text-5xl">
-            Apprendre
+            Plusieurs portes pour
             <br />
             <span className="bg-gradient-to-r from-emerald-500 to-green-600 bg-clip-text text-transparent">
-              ne se paie pas.
+              apprendre, progresser, s&apos;évaluer
             </span>
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-base font-bold leading-relaxed text-slate-600">
-            Et ça ne changera pas. Ce qui se paie, c&apos;est de{" "}
+            Cinq matières, du CP au Bac. Ce qui se paie, c&apos;est de{" "}
             <strong className="text-slate-900">voir</strong> et de{" "}
             <strong className="text-slate-900">garder</strong> — jamais d&apos;accéder.
           </p>
-          <p className="mx-auto mt-5 max-w-xl rounded-2xl bg-white px-6 py-3 text-sm font-black text-emerald-800 ring-1 ring-emerald-200">
-            Si l&apos;enfant d&apos;à côté ne paie pas, il apprend exactement la même chose.
-          </p>
+          {/* ⛔ RETIRÉ (Frédéric, 21/08) : « Si l'enfant d'à côté ne paie pas, il
+              apprend exactement la même chose. »
+              C'est la règle qui GOUVERNE l'offre — le test qu'on applique à
+              chaque idée de monétisation — mais ce n'est pas un argument de
+              vente. Écrite sur la page qui demande l'argent, elle dit au lecteur
+              qu'il n'a aucune raison de payer, et elle a raison : c'est
+              exactement ce qu'elle veut dire en interne.
+              ⚠️ La règle ne bouge pas d'un pouce, elle cesse seulement d'être
+              criée à l'acheteur. Elle reste vérifiable dans les faits : la
+              colonne gratuite de la page ne perd rien. */}
         </section>
 
         {/* ── LES TROIS PORTES ─────────────────────────────────────────── */}

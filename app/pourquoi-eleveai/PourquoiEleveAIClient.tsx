@@ -3,21 +3,124 @@
 import Link from "next/link";
 import Script from "next/script";
 
+/**
+ * LES PORTES, DANS L'ORDRE DONNÉ PAR FRÉDÉRIC LE 21/08/2026.
+ *
+ * « coach maths, coach français, coach espagnol, coach anglais, coach IA — puis
+ * les parcours associés — puis les rituels — puis concours général et Concours
+ * Avenir — puis les évaluations nationales — puis Pix IA. »
+ *
+ * ⭐ L'ordre EST une information : on apprend (les coachs), on fait le point
+ * (les parcours), on entretient (les rituels), puis on passe les épreuves. La
+ * rangée raconte une année scolaire, elle ne liste pas un catalogue.
+ *
+ * ⚠️ La liste précédente en montrait huit, toutes de maths, sur une page qui
+ * annonce cinq matières deux blocs plus bas. Manquaient : les coachs français,
+ * espagnol et IA, quatre parcours sur cinq, la dictée, les évaluations
+ * nationales, Pix, le Concours Avenir, les cahiers et le guide de survie.
+ *
+ * ⛔ NE PAS RECOPIER LE NOMBRE DE PORTES ailleurs : `preuves` le compte sur ce
+ * tableau. C'est ce qui a fait vivre un « 8 » périmé pendant des mois.
+ */
 const portes = [
+  // ── Apprendre : les cinq coachs ────────────────────────────────────────
+  {
+    emoji: "🧠",
+    title: "Coach Maths",
+    text: "Un entraînement notion par notion, du CP à la Terminale. Missions progressives, score, badges.",
+    href: "/coach-ia/maths",
+    color: "from-orange-400 to-red-500",
+  },
+  {
+    emoji: "📖",
+    title: "Coach Français",
+    text: "Du CP à la 3ᵉ : les sons, la grammaire, la conjugaison, notion par notion comme en maths.",
+    href: "/coach-ia/francais",
+    color: "from-fuchsia-500 to-purple-600",
+  },
+  {
+    emoji: "🗣️",
+    title: "Coach Espagnol",
+    text: "A1 → B2, avec l'audio : le vocabulaire, les verbes, les tournures du quotidien.",
+    href: "/coach-ia/espagnol",
+    color: "from-rose-500 to-red-600",
+  },
+  {
+    emoji: "🇬🇧",
+    title: "Coach Anglais",
+    text: "English Maths, A1 → B2 : parler des maths en anglais, avec l'audio et un mini-défi.",
+    href: "/coach-ia/english-maths",
+    color: "from-sky-500 to-blue-600",
+  },
+  {
+    emoji: "✳️",
+    title: "Coach IA",
+    text: "Ce qu'il faut savoir sur l'intelligence artificielle, calé sur le référentiel Pix.",
+    href: "/coach-ia/ia",
+    color: "from-cyan-500 to-teal-600",
+  },
+
+  // ── Faire le point : un parcours par matière ───────────────────────────
   {
     emoji: "🛤️",
-    title: "Le Parcours",
-    text: "Un bilan clair : notions maîtrisées 🟢, à revoir 🟡, fragiles 🔴. L'élève sait exactement où il en est.",
+    title: "Parcours Maths",
+    text: "Un bilan clair : notions maîtrisées 🟢, à revoir 🟡, fragiles 🔴. L'élève sait où il en est.",
     href: "/parcours",
     color: "from-violet-500 to-indigo-600",
   },
   {
-    emoji: "🧠",
-    title: "Coach Maths IA",
-    text: "Un entraînement notion par notion, du CM1 à la Terminale. Missions progressives, score, badges.",
-    href: "/coach-ia/maths",
-    color: "from-orange-400 to-red-500",
+    emoji: "🛤️",
+    title: "Parcours Français",
+    text: "Le même bilan, matière par matière : ce qui est acquis, ce qui demande à être repris.",
+    href: "/parcours-francais",
+    color: "from-violet-500 to-purple-600",
   },
+  {
+    emoji: "🛤️",
+    title: "Parcours Espagnol",
+    text: "Où en est-on vraiment&nbsp;? Le point sur les notions travaillées, sans note ni classement.",
+    href: "/parcours-espagnol",
+    color: "from-indigo-500 to-violet-600",
+  },
+  {
+    emoji: "🛤️",
+    title: "Parcours Anglais",
+    text: "Le bilan English Maths : le vocabulaire tenu, celui qui s'échappe encore.",
+    href: "/parcours-english-maths",
+    color: "from-blue-500 to-indigo-600",
+  },
+  {
+    emoji: "🛤️",
+    title: "Parcours IA",
+    text: "Le point sur les compétences numériques, dans l'ordre du référentiel.",
+    href: "/parcours-ia",
+    color: "from-teal-500 to-cyan-600",
+  },
+
+  // ── Entretenir : les rituels du jour ───────────────────────────────────
+  {
+    emoji: "⚡",
+    title: "Calcul rapide",
+    text: "7 questions en 5 minutes. Des sessions courtes pour muscler les automatismes.",
+    href: "/calcul-rapide",
+    color: "from-lime-400 to-green-600",
+  },
+  {
+    emoji: "✍️",
+    title: "Dictée du jour",
+    text: "Une dictée courte chaque jour, lue à voix haute et corrigée mot à mot.",
+    href: "/dictee-du-jour",
+    color: "from-teal-500 to-cyan-600",
+  },
+  {
+    emoji: "🎯",
+    title: "Défis du jour",
+    text: "Des défis inspirés de La Réunion — Piton de la Fournaise, Grand Raid, océan…",
+    href: "/defis-du-jour",
+    color: "from-pink-500 to-rose-600",
+  },
+
+  // ── Préparer une épreuve ───────────────────────────────────────────────
   {
     emoji: "📚",
     title: "Coach Brevet",
@@ -28,43 +131,70 @@ const portes = [
   {
     emoji: "🎓",
     title: "Coach Bac Spé",
-    text: "21 jours pour préparer l'épreuve de maths spé : suites, fonctions, probabilités, logarithme…",
+    text: "21 jours pour l'épreuve de maths spé : suites, fonctions, probabilités, logarithme…",
     href: "/coach-bac-spe",
     color: "from-blue-600 to-violet-700",
   },
-  {
-    emoji: "⚡",
-    title: "Calcul rapide",
-    text: "7 questions en 5 minutes. Des sessions courtes pour muscler les automatismes de calcul.",
-    href: "/calcul-rapide",
-    color: "from-lime-400 to-green-600",
-  },
-  {
-    emoji: "🇬🇧",
-    title: "English Maths",
-    text: "La semaine des verbes en anglais, avec audio et mini-défi.",
-    href: "/english-maths",
-    color: "from-sky-500 to-blue-600",
-  },
-  {
-    emoji: "🎯",
-    title: "Défis du jour",
-    text: "Des défis maths inspirés de La Réunion — Piton de la Fournaise, Grand Raid, océan…",
-    href: "/defis-du-jour",
-    color: "from-pink-500 to-rose-600",
-  },
+
+  // ── Les concours ───────────────────────────────────────────────────────
   {
     emoji: "🏆",
     title: "Concours général",
-    text: "Des questions de niveau supérieur pour les élèves qui veulent aller plus loin.",
+    text: "Des questions de niveau supérieur, pour les élèves qui veulent aller plus loin.",
     href: "/concours-general",
     color: "from-amber-400 to-orange-500",
   },
+  {
+    emoji: "🥇",
+    title: "Concours Avenir",
+    text: "L'entraînement au concours des écoles d'ingénieurs post-bac, épreuve par épreuve.",
+    href: "/concours-avenir",
+    color: "from-yellow-400 to-amber-600",
+  },
+
+  // ── Les évaluations, puis Pix ──────────────────────────────────────────
+  {
+    emoji: "📝",
+    title: "Évaluations nationales",
+    text: "6ᵉ et 4ᵉ, français et maths, dans les conditions réelles — et corrigées tout de suite.",
+    href: "/evaluation-nationale-college",
+    color: "from-slate-500 to-slate-700",
+  },
+  {
+    emoji: "🎖️",
+    title: "Pix IA",
+    text: "Une évaluation blanche sur le référentiel Pix, pour savoir où l'on se situe avant la vraie.",
+    href: "/eval-pix-ia",
+    color: "from-cyan-600 to-blue-700",
+  },
+
+  // ── Et les deux portes en papier — celles qui amènent vraiment du monde :
+  //    les cahiers font 74 % du trafic du site, et ils circulent hors du site,
+  //    de parent à parent.
+  {
+    emoji: "☀️",
+    title: "Cahiers de vacances",
+    text: "14 cahiers à imprimer, de la GS au post-bac. Trente jours, un par page, corrigés compris.",
+    href: "/cahier-vacances",
+    color: "from-amber-400 to-yellow-500",
+  },
+  {
+    emoji: "🆘",
+    title: "Guide de survie",
+    text: "L'essentiel d'une année sur quelques feuilles, à garder sous la main toute l'année.",
+    href: "/guide-de-survie",
+    color: "from-red-500 to-orange-600",
+  },
 ];
 
+// ⚠️ CES QUATRE NOMBRES SE RECOMPTENT, ILS NE SE RECOPIENT PAS (21/08/2026).
+// « CM1 → Bac » était faux depuis des mois — le site commence au CP — et
+// « 8 » l'était devenu à la seconde où une porte s'est ajoutée. Un chiffre
+// écrit à la main sur une page vieillit sans prévenir : le nombre de portes se
+// lit désormais dans le tableau lui-même.
 const preuves = [
-  { chiffre: "CM1 → Bac", label: "Niveaux couverts" },
-  { chiffre: "8", label: "Portes d'entrée" },
+  { chiffre: "CP → Bac", label: "Niveaux couverts" },
+  { chiffre: String(portes.length), label: "Portes d'entrée" },
   { chiffre: "100 %", label: "Suivi enregistré" },
   { chiffre: "La Réunion", label: "Conçu ici" },
 ];
@@ -76,7 +206,7 @@ export default function PourquoiEleveAIClient() {
     name: "EleveAI",
     url: "https://www.eleveai.fr",
     description:
-      "EleveAI : plusieurs portes d'entrée pour apprendre les maths et suivre la progression des élèves, du CM1 au Bac.",
+      "EleveAI : de multiples portes pour s'entraîner, s'amuser et s'évaluer — maths, français, anglais, espagnol et IA, du CP au Bac, avec la progression suivie.",
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer support",
@@ -227,15 +357,24 @@ export default function PourquoiEleveAIClient() {
             🚀 Pourquoi EleveAI
           </div>
 
+          {/* ⭐ LE TITRE (Frédéric, 21/08/2026). Il disait « pour apprendre LES
+              MATHS » alors que la page annonce cinq matières et que la rangée en
+              dessous porte le français, l'espagnol, l'anglais et l'IA. Les trois
+              verbes disent aussi ce que « apprendre » cachait : on ne fait pas
+              que travailler ici, on s'amuse et on se mesure.
+              ⚠️ C'est le SECOND <h1> de la page — le premier ouvre le cœur
+              ε → ∞. Deux titres de premier niveau, un moteur ne sait pas de quoi
+              parle la page : à passer en <h2>, mais pas dans la même minute que
+              le texte, sinon on ne saura pas ce qui a bougé. */}
           <h1 className="text-3xl font-black leading-tight text-slate-950 sm:text-5xl">
-            Plusieurs portes pour apprendre les maths
+            Multiples portes pour s&apos;entraîner, s&apos;amuser et s&apos;évaluer
           </h1>
 
           <p className="mt-4 max-w-2xl text-base font-semibold leading-relaxed text-slate-700 sm:text-lg">
             Chaque élève est différent. Certains progressent mieux avec des défis chronométrés,
-            d'autres avec un bilan de notions, d'autres encore avec un entraînement notion par notion.
-            EleveAI propose <strong>8 portes d'entrée</strong> — l'élève choisit celle qui lui convient,
-            et ses résultats sont suivis automatiquement.
+            d&apos;autres avec un bilan de notions, d&apos;autres encore avec un entraînement notion
+            par notion. EleveAI ouvre <strong>{portes.length} portes</strong> dans cinq matières,
+            du CP au Bac — l&apos;élève choisit la sienne, et ses résultats le suivent.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
@@ -270,7 +409,7 @@ export default function PourquoiEleveAIClient() {
         {/* LES PORTES */}
         <section className="mb-10">
           <p className="mb-4 text-xs font-black uppercase tracking-[0.25em] text-slate-500">
-            Les 8 portes d'entrée
+            Les {portes.length} portes d&apos;entrée
           </p>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {portes.map((p) => (

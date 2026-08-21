@@ -4,9 +4,9 @@ import PourquoiEleveAIClient from "./PourquoiEleveAIClient";
 export const metadata: Metadata = {
   // « Pourquoi EleveAI » est le nom de la page : `absolute` pour ne pas servir
   // « Pourquoi EleveAI — Plusieurs portes… — EleveAI ».
-  title: { absolute: "Pourquoi EleveAI — Plusieurs portes pour apprendre les maths" },
+  title: { absolute: "Pourquoi EleveAI — s'entraîner, s'amuser et s'évaluer" },
   description:
-    "EleveAI propose 8 portes d'entrée pour apprendre les maths : Coach Maths IA, Parcours, Brevet, Calcul rapide, English Maths, Défis… avec suivi de progression automatique.",
+    "De multiples portes pour s'entraîner, s'amuser et s'évaluer : cinq coachs (maths, français, espagnol, anglais, IA), les parcours, les rituels du jour, les concours, les évaluations nationales et Pix — du CP au Bac, avec la progression suivie.",
   alternates: { canonical: "/pourquoi-eleveai" },
 };
 
