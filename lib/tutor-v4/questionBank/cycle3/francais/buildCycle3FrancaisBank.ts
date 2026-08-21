@@ -221,7 +221,11 @@ const LECTURE: QcmItem[] = [
   {
     text: 'Lis ce passage :\n"- Tu viens ? demanda Léa. - J\'arrive ! répondit Sami en attrapant son sac."\n\nQue montre la ponctuation ?',
     correct: "c'est un dialogue entre deux personnages",
-    wrongs: ["c'est une liste", "c'est un titre", "c'est une définition"],
+    wrongs: [
+      "c'est une énumération de plusieurs actions",
+      "c'est un même personnage qui se parle à lui-même",
+      "c'est le narrateur qui s'adresse au lecteur",
+    ],
     methode: "Les tirets et les guillemets signalent les paroles échangées.",
   },
   {
@@ -242,13 +246,21 @@ const DOCUMENT: QcmItem[] = [
   {
     text: "À quoi sert surtout un dictionnaire ?",
     correct: "à trouver le sens et l'orthographe d'un mot",
-    wrongs: ["à raconter une histoire","à donner l'heure","à dessiner une carte"],
+    wrongs: [
+      "à trouver l'origine et l'histoire d'un mot",
+      "à trouver un synonyme plus rare d'un mot",
+      "à vérifier qu'un mot existe bien en français",
+    ],
     methode: "Le dictionnaire donne le sens et l'écriture des mots.",
   },
   {
     text: "Sur la boîte d'un jeu : « À partir de 6 ans. » Que signifie cette information ?",
     correct: "l'âge conseillé pour jouer",
-    wrongs: ["le nombre de joueurs","le prix du jeu","la durée d'une partie"],
+    wrongs: [
+      "le nombre de joueurs qu'il faut réunir",
+      "la durée moyenne d'une partie complète",
+      "le nombre d'années de garantie du jeu",
+    ],
     methode: "On lit l'information utile sur l'emballage.",
   },
   {
@@ -363,13 +375,21 @@ const OEUVRE: QcmItem[] = [
   {
     text: "Après avoir lu un poème, quelle trace est utile dans un carnet de lecteur ?",
     correct: "recopier un vers qu'on a aimé et dire pourquoi",
-    wrongs: ["noter la couleur de la couverture","compter les pages","dessiner la maîtresse"],
+    wrongs: [
+      "recopier le poème en entier, pour le garder",
+      "noter le titre, l'auteur et le nombre de vers",
+      "résumer le poème en une phrase de son cru",
+    ],
     methode: "Le carnet garde la mémoire de ce qu'on a compris et ressenti.",
   },
   {
     text: "Pour ne pas perdre le fil d'une histoire longue, on peut...",
     correct: "résumer chaque chapitre en une phrase",
-    wrongs: ["lire la fin en premier","sauter des chapitres","fermer le livre"],
+    wrongs: [
+      "relire le chapitre précédent avant chaque séance",
+      "noter le nom de tous les personnages rencontrés",
+      "lire la fin d'abord, pour savoir où l'on va",
+    ],
     methode: "Persévérer et garder le fil aident à lire une œuvre entière.",
   },
   {
@@ -538,7 +558,11 @@ const ECRITURE: QcmItem[] = [
   {
     text: "Pour améliorer un paragraphe, que faut-il vérifier en priorité ?",
     correct: "l'ordre des idées, les accords et la ponctuation",
-    wrongs: ["uniquement la couleur du stylo", "le nombre exact de lignes", "la taille du cahier"],
+    wrongs: [
+      "le nombre de lignes et la longueur des phrases",
+      "la propreté de l'écriture et l'absence de ratures",
+      "la richesse du vocabulaire et les mots rares employés",
+    ],
     methode: "Relire sert à rendre l'écrit plus clair et plus correct.",
   },
   {
@@ -573,25 +597,41 @@ const ORAL: QcmItem[] = [
   {
     text: "Pour bien écouter une consigne, il faut...",
     correct: "être attentif et ne pas parler en même temps",
-    wrongs: ["regarder par la fenêtre","parler à son voisin","se boucher les oreilles"],
+    wrongs: [
+      "commencer tout de suite, pour ne pas perdre de temps",
+      "retenir sa question jusqu'à la fin de la journée",
+      "noter chaque mot prononcé, sans en oublier aucun",
+    ],
     methode: "Écouter, c'est se rendre disponible pour comprendre.",
   },
   {
     text: "Reformuler ce qu'on a entendu, c'est le redire...",
     correct: "avec ses propres mots",
-    wrongs: ["exactement pareil sans comprendre","beaucoup plus fort","en criant"],
+    wrongs: [
+      "avec les mots exacts de celui qui a parlé",
+      "en y ajoutant ce qu'on en pense soi-même",
+      "en le raccourcissant à un seul mot clé",
+    ],
     methode: "Reformuler montre qu'on a compris.",
   },
   {
     text: "Pour présenter un exposé, il vaut mieux...",
     correct: "parler assez fort et regarder la classe",
-    wrongs: ["lire très vite, tête baissée","chuchoter","tourner le dos"],
+    wrongs: [
+      "lire ses notes mot à mot, sans lever les yeux",
+      "apprendre son texte par cœur et le réciter",
+      "parler vite pour tenir dans le temps imparti",
+    ],
     methode: "Une présentation doit être audible et claire.",
   },
   {
     text: "« Je pense que ce livre est bien parce qu'il fait rire. » Cette phrase donne...",
     correct: "un avis avec une raison",
-    wrongs: ["une question","une consigne","une simple liste"],
+    wrongs: [
+      "un avis sans aucune raison",
+      "une raison sans aucun avis",
+      "un résumé du livre en une phrase",
+    ],
     methode: "Un avis justifié donne le « pourquoi ».",
   },
   {
@@ -785,7 +825,11 @@ const VOC_FAMILLE: QcmItem[] = [
   {
     text: "Avec le suffixe '-able', 'lavable' signifie...",
     correct: "qui peut être lavé",
-    wrongs: ["qui ne se lave jamais", "déjà lavé", "qui salit"],
+    wrongs: [
+      "qui a déjà été lavé",
+      "qui doit être lavé",
+      "qui ne peut pas être lavé",
+    ],
     methode: "Le suffixe '-able' veut dire 'qui peut être'.",
   },
   {
@@ -966,13 +1010,23 @@ const VOC_REEMPLOI: QcmItem[] = [
   {
     text: "Quelle phrase emploie bien le mot 'courageusement' ?",
     correct: "Le pompier est entré courageusement dans les flammes.",
-    wrongs: ["Le courageusement est bleu.","Il mange un courageusement.","Courageusement la table brille."],
+    // Les leurres emploient l'adverbe comme un adjectif, puis comme un nom :
+    // c'est la faute réelle, pas une phrase absurde.
+    wrongs: [
+      "Le pompier était très courageusement ce jour-là.",
+      "Le pompier a montré un grand courageusement.",
+      "Le courageusement du pompier a sauvé la maison.",
+    ],
     methode: "L'adverbe accompagne le verbe.",
   },
   {
     text: "Quelle phrase emploie bien le mot 'énorme' ?",
     correct: "Un énorme camion bloque la route.",
-    wrongs: ["Il dort énorme.","Un énorme sur le banc.","Énorme mange la pomme."],
+    wrongs: [
+      "Le camion avance énorme sur la route.",
+      "Le camion a montré un grand énorme.",
+      "L'énorme du camion bloque la route.",
+    ],
     methode: "L'adjectif qualifie un nom.",
   },
   {
@@ -1242,7 +1296,11 @@ const SUJET_VERBE: QcmItem[] = [
   {
     text: "Pour trouver le sujet, quelle question pose-t-on ?",
     correct: "qui est-ce qui fait l'action ?",
-    wrongs: ["où ?","quand ?","combien ?"],
+    wrongs: [
+      "qui est-ce qui subit l'action ?",
+      "où et quand se passe l'action ?",
+      "comment se passe l'action ?",
+    ],
     methode: "Le sujet répond à 'qui est-ce qui ?'.",
   },
   {
@@ -1887,9 +1945,9 @@ const COD_COI: QcmItem[] = [
     text: "Comment reconnait-on un complément d'objet INDIRECT ?",
     correct: "Il est relié au verbe par une préposition : à, de…",
     wrongs: [
-      "Il suit le verbe sans préposition",
-      "Il est toujours un pronom",
-      "Il est toujours au pluriel",
+      "Il suit le verbe sans préposition : on demande « quoi ? »",
+      "Il se déplace et se supprime sans casser la phrase",
+      "Il se place toujours après le complément circonstanciel",
     ],
     methode: "Indirect veut dire : on y arrive par un petit mot.",
   },
@@ -1983,7 +2041,11 @@ const CC_SORTES: QcmItem[] = [
   {
     text: "« Le samedi, les enfants jouent sur la plage. » Combien y a-t-il de compléments circonstanciels ?",
     correct: "deux : un de temps, un de lieu",
-    wrongs: ["un seul", "trois", "aucun"],
+    wrongs: [
+      "un seul : « sur la plage »",
+      "un seul : « Le samedi »",
+      "trois : avec « les enfants » en plus",
+    ],
     methode: "« Le samedi » dit quand, « sur la plage » dit où.",
   },
   {
@@ -2081,7 +2143,11 @@ const ATTRIBUT: QcmItem[] = [
   {
     text: "Peut-on supprimer l'attribut du sujet ?",
     correct: "Non : « Le lagon est. » ne veut plus rien dire",
-    wrongs: ["Oui, toujours", "Seulement si c'est un adjectif", "Seulement au pluriel"],
+    wrongs: [
+      "Oui : comme le complément circonstanciel, il s'enlève",
+      "Oui, mais seulement quand c'est un adjectif",
+      "Non : mais on peut le déplacer en tête de phrase",
+    ],
     methode: "Le verbe d'état ne peut pas rester seul.",
   },
   {
@@ -2266,9 +2332,9 @@ const ACCORD_ATTRIBUT: QcmItem[] = [
     text: "Dans « Les vagues sont hautes », combien y a-t-il de chaînes d'accords ?",
     correct: "deux : sujet → verbe, et sujet → attribut",
     wrongs: [
-      "une seule : sujet → verbe",
-      "une seule : verbe → attribut",
-      "aucune",
+      "une seule : sujet → verbe, l'attribut ne s'accorde pas",
+      "une seule : verbe → attribut, le sujet reste à part",
+      "trois : sujet → verbe, sujet → attribut, verbe → attribut",
     ],
     methode: "Le sujet commande deux fois : la fin du verbe ET la fin de l'attribut.",
   },
@@ -2681,10 +2747,12 @@ const PRONOM_RELATIF: QcmItem[] = [
   {
     text: "Comment choisir entre « qui » et « que » ?",
     correct: "« qui » est sujet du verbe qui suit ; « que » ne l'est pas",
+    // ⭐ Le premier leurre INVERSE la règle ; le deuxième est l'erreur la plus
+    // répandue (personnes contre choses), et elle est fausse.
     wrongs: [
-      "« qui » pour les personnes, « que » pour les choses",
-      "« qui » au singulier, « que » au pluriel",
-      "on choisit au hasard",
+      "« que » est sujet du verbe qui suit ; « qui » ne l'est pas",
+      "« qui » s'emploie pour les personnes, « que » pour les choses",
+      "« qui » s'emploie au singulier, « que » au pluriel",
     ],
     methode: "« le filet qui sèche » : un filet n'est pas une personne, et c'est bien « qui ».",
   },
@@ -2869,7 +2937,11 @@ const PRONOM_ANTECEDENT: QcmItem[] = [
   {
     text: "L'antécédent d'un pronom, c'est…",
     correct: "le mot qu'il remplace, dit avant lui",
-    wrongs: ["le mot qui le suit", "son sujet", "sa terminaison"],
+    wrongs: [
+      "le mot qu'il remplace, dit après lui",
+      "le verbe dont il est le sujet",
+      "le déterminant qui l'accompagne",
+    ],
     methode: "Anté-cédent : ce qui vient avant.",
   },
   {
@@ -3094,9 +3166,9 @@ const IMPERATIF_CONDITIONNEL: QcmItem[] = [
     text: "Comment se forme le conditionnel présent ?",
     correct: "le radical du futur + les terminaisons de l'imparfait",
     wrongs: [
-      "le radical du présent + « -rais »",
-      "l'infinitif employé seul",
-      "l'auxiliaire + le participe passé",
+      "le radical de l'imparfait + les terminaisons du futur",
+      "le radical du présent + les terminaisons de l'imparfait",
+      "l'auxiliaire au conditionnel + le participe passé",
     ],
     methode: "je viendr- (futur) + -ais (imparfait) = je viendrais.",
   },
@@ -3477,7 +3549,11 @@ const CLASSES_MOTS: QcmItem[] = [
   {
     text: "Dans « le margouillat », quelle est la nature du mot « le » ?",
     correct: "un déterminant : un article défini",
-    wrongs: ["un pronom", "une préposition", "un adjectif"],
+    wrongs: [
+      "un déterminant : un article indéfini",
+      "un pronom personnel complément",
+      "une préposition placée devant le nom",
+    ],
     methode: "Il est collé devant le nom et l'annonce.",
   },
   {
@@ -3605,9 +3681,9 @@ const PRONOMS_SUJET_OBJET: QcmItem[] = [
     text: "Quels sont les pronoms personnels SUJETS ?",
     correct: "je, tu, il, elle, nous, vous, ils, elles",
     wrongs: [
-      "me, te, le, la, les",
-      "mon, ton, son, notre",
-      "qui, que, où",
+      "me, te, se, le, la, les, lui, leur",
+      "mon, ton, son, notre, votre, leur",
+      "qui, que, dont, où, lequel, auquel",
     ],
     methode: "Ce sont ceux qui commandent la terminaison du verbe.",
   },
@@ -3733,7 +3809,11 @@ const GN_EPITHETE: QcmItem[] = [
   {
     text: "Dans « le petit bateau blanc », combien y a-t-il d'épithètes ?",
     correct: "deux : « petit » et « blanc »",
-    wrongs: ["une seule", "trois", "aucune"],
+    wrongs: [
+      "une seule : « petit »",
+      "une seule : « blanc »",
+      "trois : « le », « petit » et « blanc »",
+    ],
     methode: "Un adjectif avant le nom, un après : les deux sont épithètes.",
   },
   {
@@ -3843,9 +3923,9 @@ const PARTICIPE_PASSE_ETRE: QcmItem[] = [
     text: "Avec « être », le participe passé se comporte comme…",
     correct: "un adjectif : il s'accorde avec le sujet",
     wrongs: [
-      "un adverbe : il ne change jamais",
-      "un déterminant",
-      "un nom",
+      "un adjectif : il s'accorde avec le complément d'objet",
+      "un adverbe : il reste invariable en toute circonstance",
+      "un verbe : il s'accorde en personne comme un verbe conjugué",
     ],
     methode: "« Elles sont parties » se comporte comme « Elles sont contentes ».",
   },
@@ -4122,7 +4202,11 @@ const HEROS: QcmItem[] = [
   {
     text: "Dans un conte, l'héroïne ou le héros est souvent…",
     correct: "aidé par un adjuvant et gêné par un opposant",
-    wrongs: ["seul du début à la fin", "toujours adulte", "toujours le narrateur"],
+    wrongs: [
+      "gêné par un adjuvant et aidé par un opposant",
+      "seul face aux épreuves, du début jusqu'à la fin",
+      "aidé par un objet magique, jamais par un personnage",
+    ],
     methode: "Le conte distribue les rôles autour du héros.",
   },
   {
@@ -4382,7 +4466,11 @@ const AUTRES_VIES: QcmItem[] = [
   {
     text: "Lire la vie d'un personnage nourrit surtout…",
     correct: "la sensibilité et la créativité du lecteur",
-    wrongs: ["sa vitesse de calcul", "sa mémoire des lieux", "son écriture cursive"],
+    wrongs: [
+      "sa connaissance des époques et des lieux",
+      "sa mémoire des noms et des dates du récit",
+      "sa capacité à lire vite et sans s'arrêter",
+    ],
     methode: "Le BO le dit en toutes lettres pour cette entrée.",
   },
   {
@@ -4800,7 +4888,11 @@ const ORIGINES: QcmItem[] = [
   {
     text: "Prométhée apporte le feu aux hommes. Ce récit explique…",
     correct: "l'origine d'un savoir humain, et son prix",
-    wrongs: ["la météo", "une règle de grammaire", "la géographie de la Grèce"],
+    wrongs: [
+      "l'origine d'un phénomène naturel : la foudre, le volcan",
+      "l'origine d'un peuple, et le nom de ses premiers rois",
+      "la vie d'un dieu grec, de sa naissance à sa chute",
+    ],
     methode: "Le mythe explique, et il fait payer : les deux comptent.",
   },
   {
@@ -4983,9 +5075,9 @@ const AVENTURE: QcmItem[] = [
     text: "Qu'est-ce qui fait le moteur d'un récit d'aventure ?",
     correct: "un départ, un danger et un but à atteindre",
     wrongs: [
-      "un décor très détaillé",
-      "un narrateur bavard",
-      "une morale finale",
+      "un décor précis, une époque et des costumes crédibles",
+      "un narrateur qui commente tout ce que fait le héros",
+      "une morale à la fin, qui dit ce qu'il fallait comprendre",
     ],
     methode: "Sans enjeu, il n'y a pas d'aventure.",
   },
@@ -5064,13 +5156,21 @@ const AVENTURE: QcmItem[] = [
   {
     text: "Pourquoi les récits d'aventure plaisent-ils depuis si longtemps ?",
     correct: "parce qu'ils donnent à vivre ce qu'on ne vivra pas",
-    wrongs: ["parce qu'ils sont courts", "parce qu'ils sont faciles", "parce qu'ils sont récents"],
+    wrongs: [
+      "parce qu'ils se lisent vite et sans effort particulier",
+      "parce qu'ils racontent des choses réellement arrivées",
+      "parce qu'ils finissent toujours par une victoire du héros",
+    ],
     methode: "Le BO parle de « l'expression littéraire qui en décuple le pouvoir ».",
   },
   {
     text: "Écrire un récit d'aventure demande d'abord…",
     correct: "de choisir un but, un obstacle et un enjeu",
-    wrongs: ["de trouver un titre", "de compter les pages", "de choisir un décor"],
+    wrongs: [
+      "de choisir un décor, une époque et des costumes",
+      "de trouver un titre, un héros et une belle fin",
+      "de décider combien de chapitres on va écrire",
+    ],
     methode: "Le reste s'écrit autour de ces trois-là.",
   },
   {
@@ -5168,9 +5268,9 @@ const MONSTRES: QcmItem[] = [
     text: "Créer un monstre dans un texte demande de…",
     correct: "choisir ce qui, en lui, fait peur ET ce qui touche",
     wrongs: [
-      "lui donner beaucoup de dents",
-      "le décrire très longuement",
-      "lui donner un nom compliqué",
+      "choisir ce qui, en lui, fait peur — et rien d'autre",
+      "le décrire très longuement, pour qu'on le voie bien",
+      "lui donner une taille et une force hors du commun",
     ],
     methode: "Sans la seconde part, ce n'est qu'un décor effrayant.",
   },
@@ -5272,9 +5372,9 @@ const FLUENCE_130: QcmItem[] = [
     text: "Une liaison mal faite en lecture à voix haute…",
     correct: "casse le rythme et gêne la compréhension",
     wrongs: [
-      "n'a aucune importance",
-      "accélère la lecture",
-      "améliore le sens",
+      "n'a aucune importance : seuls les mots comptent",
+      "accélère la lecture en supprimant une pause",
+      "rend la phrase plus claire pour celui qui écoute",
     ],
     methode: "Le BO cite les liaisons parmi ce qu'il faut prendre en compte.",
   },
@@ -5297,7 +5397,11 @@ const FLUENCE_130: QcmItem[] = [
   {
     text: "Que faire devant un mot long inconnu, en lecture à voix haute ?",
     correct: "le préparer des yeux avant de le dire",
-    wrongs: ["le sauter", "le lire lettre par lettre", "s'arrêter net"],
+    wrongs: [
+      "le lire lettre par lettre, pour ne rien manquer",
+      "le remplacer par un mot plus simple qu'on connait",
+      "le dire très vite, pour qu'il passe inaperçu",
+    ],
     methode: "Une lecture à voix haute se prépare avant que la voix ne commence.",
   },
   {
@@ -5396,7 +5500,11 @@ const DOCUMENTS: QcmItem[] = [
   {
     text: "Un article de presse et un article d'encyclopédie…",
     correct: "n'ont pas le même but, donc pas le même ton",
-    wrongs: ["sont identiques", "ont le même auteur", "ont la même longueur"],
+    wrongs: [
+      "ont le même but, mais l'un est plus long que l'autre",
+      "disent la même chose, l'un pour adultes, l'autre pour enfants",
+      "se distinguent surtout par la date à laquelle ils ont paru",
+    ],
     methode: "L'un informe sur l'actualité, l'autre fait le point sur un savoir.",
   },
   {
@@ -5495,7 +5603,11 @@ const IMAGE: QcmItem[] = [
   {
     text: "Une prise de vue en plongée, vue d'en haut, donne souvent…",
     correct: "l'impression que le sujet est petit ou dominé",
-    wrongs: ["l'impression qu'il est grand", "aucune impression", "plus de couleurs"],
+    wrongs: [
+      "l'impression que le sujet est grand ou puissant",
+      "l'impression que la scène se passe très loin",
+      "l'impression que le sujet est en mouvement",
+    ],
     methode: "L'angle raconte, autant que ce qui est photographié.",
   },
   {
@@ -5531,7 +5643,11 @@ const IMAGE: QcmItem[] = [
   {
     text: "Deux personnes peuvent-elles interpréter la même image autrement ?",
     correct: "Oui, si chacune s'appuie sur ce qu'elle voit",
-    wrongs: ["Non, jamais", "Seulement si elles ont le même âge", "Seulement en classe"],
+    wrongs: [
+      "Non : une image ne dit qu'une seule chose",
+      "Oui, mais l'une des deux se trompe forcément",
+      "Oui, parce que chacun est libre d'imaginer",
+    ],
     methode: "Interpréter n'est pas inventer : il faut pouvoir montrer du doigt.",
   },
   {
@@ -5954,7 +6070,11 @@ const CONJ_VALEUR_TEMPS: QcmItem[] = [
   {
     text: "Quel temps raconte le mieux une action soudaine dans un récit au passé ?",
     correct: "le passé composé (ou le passé simple)",
-    wrongs: ["le futur", "le présent de demain", "l'imparfait seul"],
+    wrongs: [
+      "l'imparfait, qui installe la scène qui dure",
+      "le plus-que-parfait, pour ce qui précède",
+      "le présent, pour rendre la scène plus vive",
+    ],
     methode: "L'imparfait pose le décor, le passé composé marque l'action brève.",
   },
 ];
