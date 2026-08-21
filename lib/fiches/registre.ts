@@ -246,6 +246,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les fractions",
     resume: "Reconnaître des fractions égales, simplifier, comparer, et l'opposé.",
   },
+  "maths/5e/grandeur-conversion": {
+    titre: "Convertir les grandeurs",
+    resume: "Longueurs, masses, contenances et durées : changer d'unité, et le sens du changement.",
+  },
   "maths/5e/prop-ratio-pourcentage": {
     titre: "Ratios, pourcentages et coefficient",
     resume: "Lire un ratio, prendre un pourcentage, passer d'une évolution au coefficient multiplicateur.",

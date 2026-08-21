@@ -69,7 +69,7 @@ se pose sur `figure.schema`, `propriete.schema`, `exemple.schema`, `formule.sche
 |---|---|---|
 | `duree` | Horloge, affichage digital, frise début → fin | Une durée en calcul posé |
 | `masse` | Balance à deux plateaux, objets à peser, conversions | Une contenance |
-| `contenance` | Récipients à remplir, comparaison, conversions | Une masse |
+| `contenance` | Récipients à remplir, comparaison, conversions | ⛔ Une masse, **et surtout pas une longueur** : la variante `conversion` imprime « 1 L = 1000 mL » **en dur** sous la figure. Sur « 3,5 km = 3500 m » elle affiche donc une relation de contenances sous une longueur — faux, et invisible au typecheck. Une longueur se montre en `schema_barre` (les km mis bout à bout). |
 | `echelle` | Plan et réel côte à côte, l'échelle qui les relie | Un agrandissement de figure |
 
 ## Algorithmique
