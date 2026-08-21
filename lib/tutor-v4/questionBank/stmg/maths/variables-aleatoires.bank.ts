@@ -1584,6 +1584,78 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — DÉCIDER contre une annonce. Le premier item qualifie une
+    // observation, courante ou rare ; celui-ci en tire la conséquence : peut-on
+    // douter de ce qu'annonce le fabricant ? C'est le seul usage que le
+    // programme donne à cette comparaison — juger un modèle sans construire de
+    // test.
+    kind: "template",
+    id: "stmg_va_ech_rare_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_echantillonnage",
+    microId: "va_ech_rare_ou_frequent",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare l'écart observé à l'écart-type : au-delà de trois, l'annonce devient difficile à soutenir.",
+    tags: ["stmg", "maths", "probabilites", "gestion", "template"],
+    generate: () => {
+      // Les couples $(p\,;\,n)$ sont appariés pour que l'écart-type reste petit
+      // devant $p$ : sinon un écart de trois écarts-types donnait une fréquence
+      // absurde — 45 % de pièces défectueuses pour une annonce à 5 %.
+      const cas = pick([
+        { p: 0.05, n: 2500 },
+        { p: 0.1, n: 2500 },
+        { p: 0.1, n: 400 },
+        { p: 0.2, n: 400 },
+        { p: 0.2, n: 2500 },
+        { p: 0.3, n: 100 },
+        { p: 0.3, n: 400 },
+      ] as const);
+      const s = 1 / Math.sqrt(cas.n);
+      const k = pick([0.5, 1, 3, 4] as const);
+      const f = Math.round((cas.p + k * s) * 1000) / 1000;
+      const douteux = k >= 3;
+      const ep = pick(EPREUVES);
+      const bonne = douteux
+        ? "oui : l'écart dépasse trois écarts-types, une telle observation est très improbable si l'annonce est exacte"
+        : "non : l'écart ne dépasse pas un écart-type, c'est une fluctuation banale";
+      return {
+        text:
+          `Un fournisseur annonce une proportion de $${fr(cas.p)}$ de ${ep.nom} ${ep.qualite}. ` +
+          `Un contrôle sur $${cas.n}$ ${ep.nom} en trouve une fréquence de $${fr(f)}$. ` +
+          `L'écart-type des fréquences est de l'ordre de $${fr(Math.round(s * 1000) / 1000)}$. ` +
+          `Peut-on douter de l'annonce ?`,
+        format: "qcm",
+        choices: shuffle([
+          "oui : l'écart dépasse trois écarts-types, une telle observation est très improbable si l'annonce est exacte",
+          "non : l'écart ne dépasse pas un écart-type, c'est une fluctuation banale",
+          "oui : dès que la fréquence observée diffère de l'annonce, celle-ci est fausse",
+          "non : un échantillon ne permet jamais de se prononcer sur une population",
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On compare l'écart entre la fréquence observée et la proportion annoncée à l'écart-type des fréquences, de l'ordre de $\\dfrac{1}{\\sqrt{n}}$. Un écart d'un écart-type est banal ; un écart de trois est rare.",
+          "On calcule l'écart, on le divise par l'écart-type, puis on conclut — sans théorie des tests, que le programme exclut.",
+          `Écart : $${fr(f)} - ${fr(cas.p)} = ${fr(Math.round((f - cas.p) * 1000) / 1000)}$, ` +
+            `soit $${fr(k)}$ écart(s)-type(s) de $${fr(Math.round(s * 1000) / 1000)}$. ` +
+            (douteux
+              ? `Une telle observation est très improbable si la proportion annoncée est la bonne.`
+              : `Un tel écart se produit constamment : il ne dit rien contre l'annonce.`),
+          bonne
+        ),
+        choiceDiagnostics: [
+          {
+            choice: "oui : dès que la fréquence observée diffère de l'annonce, celle-ci est fausse",
+            cause: "une fréquence observée n'est JAMAIS exactement égale à la proportion : c'est la fluctuation d'échantillonnage",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ va_ech_taille ═══════════════════ */
 
   {
@@ -1669,8 +1741,8 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       const p = pick(PROBAS);
       const binomiale = Math.random() < 0.5;
       const situation = binomiale
-        ? `on prélève $${n}$ ${ep.nom} AVEC REMISE et l'on compte ${ep.nom} ${ep.qualite}`
-        : `on prélève $${n}$ ${ep.nom} SANS REMISE dans un lot de $${n + randomInt(2, 8)}$ et l'on compte ${ep.nom} ${ep.qualite}`;
+        ? `on prélève $${n}$ ${ep.nom} AVEC REMISE et l'on compte les ${ep.nom} ${ep.qualite}`
+        : `on prélève $${n}$ ${ep.nom} SANS REMISE dans un lot de $${n + randomInt(2, 8)}$ et l'on compte les ${ep.nom} ${ep.qualite}`;
       return {
         text: `La variable $X$ décrite ci-dessous suit-elle une loi binomiale ?\n\n${situation}, la probabilité étant $${fr(p)}$ à chaque prélèvement.`,
         format: "qcm",
@@ -1685,6 +1757,55 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
             : `Le prélèvement se fait SANS remise dans un petit lot : chaque tirage modifie la composition, donc les épreuves ne sont pas indépendantes.`,
           `$X$ ${binomiale ? "suit" : "ne suit pas"} une loi binomiale.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — TRIER quatre situations. Le premier item répond par oui ou par
+    // non ; ici trois situations échouent chacune sur une condition
+    // DIFFÉRENTE — sans remise, épreuves non identiques, comptage d'autre chose
+    // — et il faut retrouver celle qui les vérifie toutes.
+    kind: "template",
+    id: "stmg_vaT_bin_reconnaitre_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_binomiale_reconnaitre",
+    microId: "vaT_bin_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Trois conditions : un nombre fixe d'épreuves, identiques et indépendantes, et $X$ compte les succès.",
+    tags: ["stmg", "maths", "probabilites", "template"],
+    generate: () => {
+      const ep = pick(EPREUVES);
+      const n = randomInt(5, 30);
+      const p = pick(PROBAS);
+      const bonne = `on prélève $${n}$ ${ep.nom} AVEC REMISE, chacun ayant la probabilité $${fr(p)}$ de donner ${unSucces(ep)}, et $X$ compte les succès`;
+      return {
+        text: `Dans laquelle de ces situations la variable $X$ suit-elle une loi binomiale ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `on prélève $${n}$ ${ep.nom} SANS REMISE dans un lot de $${n + randomInt(2, 6)}$, et $X$ compte les succès`,
+          `on prélève ${ep.nom} un par un AVEC REMISE jusqu'au premier succès, et $X$ compte le nombre de prélèvements`,
+          `on prélève $${n}$ ${ep.nom} AVEC REMISE, et $X$ désigne la masse totale du prélèvement`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une loi binomiale compte les succès d'un nombre FIXE d'épreuves identiques et indépendantes, chacune à deux issues.",
+          "On teste les trois conditions sur chaque situation : le nombre d'épreuves est-il fixé d'avance, les épreuves sont-elles indépendantes, et compte-t-on bien des succès ?",
+          `La bonne situation les vérifie toutes. Les trois autres échouent chacune sur un point : ` +
+            `le tirage sans remise détruit l'INDÉPENDANCE ; « jusqu'au premier succès » ne fixe pas le NOMBRE d'épreuves ; ` +
+            `une masse totale n'est pas un COMPTAGE de succès.`,
+          `$X$ suit une loi binomiale dans le cas du prélèvement avec remise, où l'on compte les succès.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `on prélève ${ep.nom} un par un AVEC REMISE jusqu'au premier succès, et $X$ compte le nombre de prélèvements`,
+            cause: "les épreuves sont bien indépendantes, mais leur NOMBRE n'est pas fixé d'avance",
+          },
+        ],
       };
     },
   },
@@ -1736,6 +1857,61 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — les paramètres sont DONNÉS, la situation est à retrouver. Le
+    // premier item lit $n$ et $p$ dans un énoncé ; celui-ci part de
+    // $\mathcal{B}(n\,;\,p)$ et demande ce que ces deux nombres désignent
+    // concrètement. Un élève peut identifier les paramètres sans savoir les
+    // relire — et c'est la relecture qu'on attend dans une conclusion.
+    kind: "template",
+    id: "stmg_vaT_bin_parametres_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_binomiale_reconnaitre",
+    microId: "vaT_bin_parametres",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$n$ compte les répétitions ; $p$ ne concerne qu'UNE épreuve.",
+    tags: ["stmg", "maths", "probabilites", "template"],
+    generate: () => {
+      const ep = pick(EPREUVES);
+      const n = randomInt(8, 50);
+      const p = pick(PROBAS);
+      const surN = Math.random() < 0.5;
+      const bonne = surN
+        ? `le nombre de ${ep.nom} prélevés`
+        : `la probabilité qu'un seul prélèvement donne ${unSucces(ep)}`;
+      return {
+        text:
+          `On prélève des ${ep.nom} avec remise et l'on note $X$ le nombre de succès. ` +
+          `On sait que $X$ suit la loi $\\mathcal{B}(${n}\\,;\\,${fr(p)})$. ` +
+          `Que représente le nombre $${surN ? n : fr(p)}$ dans cette situation ?`,
+        format: "qcm",
+        choices: shuffle([
+          `le nombre de ${ep.nom} prélevés`,
+          `la probabilité qu'un seul prélèvement donne ${unSucces(ep)}`,
+          `le nombre de succès attendus en moyenne`,
+          `la probabilité d'obtenir au moins un succès`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La loi $\\mathcal{B}(n\\,;\\,p)$ a deux paramètres : $n$, le nombre de répétitions de l'épreuve, et $p$, la probabilité de succès d'UNE seule épreuve.",
+          "On relit chaque nombre dans la situation : l'un compte des prélèvements, l'autre mesure une chance.",
+          `Ici $n = ${n}$ prélèvements, et $p = ${fr(p)}$ pour chacun d'eux. ` +
+            `Le nombre de succès attendus en moyenne, lui, vaut $np = ${fr(Math.round(n * p * 100) / 100)}$ : c'est encore autre chose.`,
+          `Le nombre $${surN ? n : fr(p)}$ représente ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `le nombre de succès attendus en moyenne`,
+            cause: "c'est l'espérance $np$, qui se calcule à partir des deux paramètres",
+          },
+        ],
+      };
+    },
+  },
+
   /* ═══════════════════ vaT_bin_arbre ═══════════════════ */
 
   {
@@ -1771,6 +1947,52 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — la PROBABILITÉ d'un chemin, pas leur nombre. Le premier item
+    // compte les chemins de $\{X = k\}$ ; celui-ci en prend UN et demande sa
+    // probabilité : on multiplie le long du chemin. Les deux gestes réunis
+    // donnent la formule de $P(X = k)$ — le nombre de chemins fois la
+    // probabilité de chacun —, et c'est pour cela qu'ils se travaillent
+    // séparément.
+    kind: "template",
+    id: "stmg_vaT_bin_arbre_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_binomiale_reconnaitre",
+    microId: "vaT_bin_arbre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Sur un arbre, la probabilité d'un chemin est le PRODUIT des probabilités rencontrées.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "template", "short"],
+    generate: () => {
+      const n = pick([2, 3] as const);
+      const p = pick([0.2, 0.3, 0.4, 0.5, 0.6, 0.7] as const);
+      const k = randomInt(1, n - 1 >= 1 ? n - 1 : 1);
+      // Un chemin précis, écrit en toutes lettres : $k$ succès placés en tête,
+      // puis les échecs.
+      const chemin = `${"S".repeat(k)}${"E".repeat(n - k)}`;
+      const valeur = Math.pow(p, k) * Math.pow(1 - p, n - k);
+      return {
+        text:
+          `L'arbre représente $${n}$ épreuves identiques et indépendantes (S = succès, E = échec), ` +
+          `de probabilité de succès $${fr(p)}$. ` +
+          `Quelle est la probabilité du chemin « ${chemin} » ? (arrondi au millième)`,
+        format: "short",
+        expected: [fr(Math.round(valeur * 1000) / 1000)],
+        comparator: "number_equal",
+        canvas: canvasArbreBernoulli(n, p, `Schéma de Bernoulli de taille ${n}`),
+        explanation: exp(
+          "Sur un arbre de probabilité, la probabilité d'un chemin est le PRODUIT des probabilités portées par ses branches. Tous les chemins ayant le même nombre de succès ont donc la même probabilité.",
+          "On multiplie $p$ autant de fois qu'il y a de S, et $1 - p$ autant de fois qu'il y a de E.",
+          `« ${chemin} » comporte $${k}$ succès et $${n - k}$ échec(s) : ` +
+            `$${fr(p)}^{${k}} \\times ${fr(Math.round((1 - p) * 100) / 100)}^{${n - k}} \\approx ${fr(Math.round(valeur * 100000) / 100000)}$. ` +
+            `Les $${binom(n, k)}$ chemins de $\\{X = ${k}\\}$ ont tous cette même probabilité — c'est ce qui permettra de les regrouper.`,
+          `La probabilité du chemin « ${chemin} » est d'environ $${fr(Math.round(valeur * 1000) / 1000)}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════ vaT_bin_contre_exemple ═══════════════ */
 
   {
@@ -1791,7 +2013,7 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
       return {
         text:
           `On prélève $${n}$ ${ep.nom} SANS REMISE dans un lot de $${lot}$. ` +
-          `$X$ compte ${ep.nom} ${ep.qualite}. Quelle condition de la loi binomiale n'est pas vérifiée ?`,
+          `$X$ compte les ${ep.nom} ${ep.qualite}. Quelle condition de la loi binomiale n'est pas vérifiée ?`,
         format: "qcm",
         choices: shuffle([
           "l'indépendance des épreuves",
@@ -1807,6 +2029,50 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
           `Après un premier prélèvement, il ne reste que $${lot - 1}$ ${ep.nom} : la probabilité de succès a changé. ` +
             `Les épreuves ne sont donc pas indépendantes.`,
           "C'est l'indépendance des épreuves qui fait défaut."
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — la dépendance CALCULÉE, pas nommée. Le premier item fait
+    // choisir la condition qui manque ; celui-ci la fait constater : après un
+    // premier tirage sans remise, la probabilité du second a CHANGÉ, et l'élève
+    // la calcule. Un mot que l'on peut vérifier tient mieux qu'un mot qu'on
+    // récite.
+    // ⚠️ Sans figure : un arbre à deux niveaux montrerait les probabilités
+    // modifiées, donc la réponse.
+    kind: "template",
+    id: "stmg_vaT_bin_contre_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_binomiale_reconnaitre",
+    microId: "vaT_bin_contre_exemple",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Après le premier tirage, il reste une pièce défectueuse de moins ET une pièce de moins dans le lot.",
+    tags: ["stmg", "maths", "probabilites", "piege", "template", "short"],
+    generate: () => {
+      const lot = pick([10, 12, 15, 20] as const);
+      const defectueuses = pick([3, 4, 5] as const);
+      const apres = (defectueuses - 1) / (lot - 1);
+      const ep = pick(EPREUVES);
+      return {
+        text:
+          `Un lot de $${lot}$ ${ep.nom} en contient $${defectueuses}$ ${ep.qualite}. ` +
+          `On en prélève deux SANS REMISE. Le premier prélèvement a donné ${unSucces(ep)}. ` +
+          `Quelle est alors la probabilité que le second le soit aussi ? (arrondi au centième)`,
+        format: "short",
+        expected: [fr(Math.round(apres * 100) / 100)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Deux épreuves sont indépendantes lorsque le résultat de la première ne change pas les probabilités de la seconde. Un tirage SANS REMISE détruit cette propriété — et c'est pour cela qu'il ne relève pas de la loi binomiale.",
+          "On recompte le lot après le premier prélèvement : une unité de moins au total, et une de moins parmi les succès.",
+          `Au départ : $\\dfrac{${defectueuses}}{${lot}} = ${fr(Math.round((defectueuses / lot) * 10000) / 10000)}$. ` +
+            `Après le premier prélèvement, il reste $${defectueuses - 1}$ ${ep.qualite} sur $${lot - 1}$ : ` +
+            `$\\dfrac{${defectueuses - 1}}{${lot - 1}} \\approx ${fr(Math.round(apres * 10000) / 10000)}$.`,
+          `La probabilité passe de $${fr(Math.round((defectueuses / lot) * 100) / 100)}$ à $${fr(Math.round(apres * 100) / 100)}$ : ` +
+            `elle a changé, donc les épreuves ne sont pas indépendantes et $X$ ne suit pas une loi binomiale.`
         ),
       };
     },
@@ -1856,6 +2122,48 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — la SYMÉTRIE, qui découle de la définition. Le premier item dit
+    // ce que compte un coefficient binomial ; celui-ci en tire une conséquence
+    // qu'on peut voir sans rien calculer : choisir où placer $k$ succès, c'est
+    // choisir où placer les $n-k$ échecs. Le triangle est symétrique parce que
+    // les chemins le sont.
+    // ⚠️ Sans figure : le triangle donnerait la réponse par lecture, alors
+    // qu'on veut le raisonnement. Le premier item, lui, l'affiche.
+    kind: "template",
+    id: "stmg_vaT_coef_def_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_binomiale_coefficients",
+    microId: "vaT_coef_definition",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Placer $k$ succès parmi $n$, c'est exactement placer les échecs qui restent.",
+    tags: ["stmg", "maths", "probabilites", "template", "short"],
+    generate: () => {
+      const n = randomInt(6, 10);
+      // ⛔ $k \neq n - k$ : sinon la question se répondrait sans réfléchir, les
+      // deux coefficients étant écrits pareil.
+      const k = pick(Array.from({ length: n - 1 }, (_, i) => i + 1).filter((v) => v !== n - v));
+      return {
+        text:
+          `On sait que $\\binom{${n}}{${k}} = ${binom(n, k)}$. ` +
+          `Sans calculer et sans triangle, que vaut $\\binom{${n}}{${n - k}}$ ?`,
+        format: "short",
+        expected: [String(binom(n, n - k))],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le coefficient $\\binom{n}{k}$ compte les chemins réalisant $k$ succès sur $n$ épreuves. Or désigner les $k$ positions des succès revient à désigner les $n-k$ positions des échecs : $\\binom{n}{k} = \\binom{n}{n-k}$.",
+          "On n'a rien à calculer : on reconnaît deux façons de décrire les mêmes chemins.",
+          `Un chemin à $${k}$ succès sur $${n}$ épreuves a exactement $${n - k}$ échecs. ` +
+            `Compter les uns ou les autres revient au même : $\\binom{${n}}{${n - k}} = \\binom{${n}}{${k}} = ${binom(n, k)}$. ` +
+            `C'est ce qui rend chaque ligne du triangle de Pascal symétrique.`,
+          `$\\binom{${n}}{${n - k}} = ${binom(n, n - k)}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ vaT_triangle_pascal ═══════════════════ */
 
   {
@@ -1883,6 +2191,44 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
           "On repère la ligne $n$, puis on compte les colonnes en commençant à $0$.",
           `Ligne $${n}$, colonne $${k}$ : $\\binom{${n}}{${k}} = ${binom(n, k)}$.`,
           `$\\binom{${n}}{${k}} = ${binom(n, k)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — la LIGNE ENTIÈRE, pas une case. Le premier item lit un
+    // coefficient ; celui-ci fait additionner toute la ligne, et le résultat
+    // tombe sur $2^n$ — le nombre total de chemins de l'arbre. Les deux
+    // lectures se rejoignent : chaque chemin a un nombre de succès et un seul,
+    // donc la somme des coefficients compte tous les chemins.
+    kind: "template",
+    id: "stmg_vaT_pascal_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_binomiale_coefficients",
+    microId: "vaT_triangle_pascal",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Additionne la ligne… puis compare le résultat au nombre de chemins d'un arbre à $n$ épreuves.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "template", "short"],
+    generate: () => {
+      const n = randomInt(3, 8);
+      const somme = Math.pow(2, n);
+      return {
+        text:
+          `À l'aide du triangle de Pascal, calcule la somme de tous les nombres de la ligne $${n}$, ` +
+          `c'est-à-dire $\\binom{${n}}{0} + \\binom{${n}}{1} + \\dots + \\binom{${n}}{${n}}$.`,
+        format: "short",
+        expected: [String(somme)],
+        comparator: "number_equal",
+        canvas: canvasTrianglePascal(10),
+        explanation: exp(
+          "La ligne $n$ du triangle donne le nombre de chemins réalisant $0$ succès, $1$ succès, … , $n$ succès. Comme chaque chemin d'un arbre à $n$ épreuves a un nombre de succès et un seul, leur somme compte TOUS les chemins : elle vaut $2^n$.",
+          "On additionne les termes de la ligne, puis on reconnaît une puissance de deux.",
+          `Ligne $${n}$ : $${Array.from({ length: n + 1 }, (_, k) => binom(n, k)).join(" + ")} = ${somme}$. ` +
+            `Et un arbre de $${n}$ épreuves a bien $2^{${n}} = ${somme}$ chemins, puisque chaque épreuve double leur nombre.`,
+          `La somme de la ligne $${n}$ vaut $${somme}$, soit $2^{${n}}$.`
         ),
       };
     },
@@ -1923,6 +2269,45 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — la formule REMONTÉE. Le premier item additionne deux termes de
+    // la ligne précédente ; ici c'est la somme et l'un des termes qui sont
+    // donnés, et l'autre qu'on cherche : on soustrait. Ce sens-là sert quand
+    // une case du triangle manque au milieu d'un exercice.
+    // ⛔ Sans triangle affiché : il donnerait la réponse par simple lecture,
+    // alors qu'on veut la relation. Le premier item, lui, l'affiche.
+    kind: "template",
+    id: "stmg_vaT_formule_pascal_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_binomiale_coefficients",
+    microId: "vaT_formule_pascal",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$\\binom{n}{k} = \\binom{n-1}{k-1} + \\binom{n-1}{k}$ : si l'on connaît la somme et un terme, l'autre s'obtient par soustraction.",
+    tags: ["stmg", "maths", "probabilites", "template", "short"],
+    generate: () => {
+      const n = randomInt(5, 10);
+      const k = randomInt(2, n - 1);
+      const cherche = binom(n - 1, k);
+      return {
+        text:
+          `On sait que $\\binom{${n - 1}}{${k - 1}} = ${binom(n - 1, k - 1)}$ et que $\\binom{${n}}{${k}} = ${binom(n, k)}$. ` +
+          `Sans triangle, déduis-en $\\binom{${n - 1}}{${k}}$.`,
+        format: "short",
+        expected: [String(cherche)],
+        comparator: "number_equal",
+        explanation: exp(
+          "La formule de Pascal relie trois coefficients : $\\binom{n}{k} = \\binom{n-1}{k-1} + \\binom{n-1}{k}$. Chaque terme du triangle est la somme des deux qui le surplombent.",
+          "On écrit la relation, puis on isole le terme manquant — c'est une soustraction.",
+          `$${binom(n, k)} = ${binom(n - 1, k - 1)} + \\binom{${n - 1}}{${k}}$, ` +
+            `donc $\\binom{${n - 1}}{${k}} = ${binom(n, k)} - ${binom(n - 1, k - 1)} = ${cherche}$.`,
+          `$\\binom{${n - 1}}{${k}} = ${cherche}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ vaT_coef_denombrer ═══════════════════ */
 
   {
@@ -1953,6 +2338,50 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
           "On parcourt les chemins un par un et l'on retient ceux qui comportent exactement $k$ lettres S.",
           `Sur $${n}$ épreuves, il y a $2^{${n}} = ${Math.pow(2, n)}$ chemins au total, dont $${binom(n, k)}$ avec exactement $${k}$ succès.`,
           `Il y a $${binom(n, k)}$ chemin(s), ce qui vaut bien $\\binom{${n}}{${k}}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — « AU MOINS », qui regroupe plusieurs valeurs de $k$. Le premier
+    // item dénombre les chemins d'un $\{X = k\}$ ; celui-ci demande ceux d'un
+    // évènement qui en réunit plusieurs, et il faut additionner des
+    // coefficients. C'est le pont vers les probabilités de réunion, où l'on
+    // fera la même chose avec des nombres décimaux.
+    kind: "template",
+    id: "stmg_vaT_denombrer_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_binomiale_coefficients",
+    microId: "vaT_coef_denombrer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "« Au moins $k$ » réunit les chemins à $k$ succès, à $k+1$, et ainsi de suite jusqu'à $n$.",
+    tags: ["stmg", "maths", "probabilites", "canvas", "template", "short"],
+    generate: () => {
+      const n = pick([3, 4] as const);
+      const auMoins = Math.random() < 0.5;
+      const seuil = randomInt(1, n - 1);
+      const ks = auMoins
+        ? Array.from({ length: n - seuil + 1 }, (_, i) => seuil + i)
+        : Array.from({ length: seuil + 1 }, (_, i) => i);
+      const total = ks.reduce((s, k) => s + binom(n, k), 0);
+      return {
+        text:
+          `Sur un arbre de $${n}$ épreuves (S = succès, E = échec), ` +
+          `combien de chemins comportent AU ${auMoins ? "MOINS" : "PLUS"} $${seuil}$ succès ?`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        canvas: canvasTrianglePascal(6),
+        explanation: exp(
+          "Un évènement comme « au moins $k$ succès » réunit plusieurs valeurs de $X$ : ses chemins sont ceux de $\\{X = k\\}$, de $\\{X = k+1\\}$, et ainsi de suite. On additionne donc les coefficients binomiaux correspondants.",
+          "On liste les valeurs de $X$ concernées, on lit chaque coefficient dans le triangle, puis on additionne.",
+          `Valeurs concernées : ${ks.map((k) => `$${k}$`).join(", ")}. ` +
+            `Coefficients : $${ks.map((k) => binom(n, k)).join(" + ")} = ${total}$, ` +
+            `sur $2^{${n}} = ${Math.pow(2, n)}$ chemins au total.`,
+          `$${total}$ chemins comportent au ${auMoins ? "moins" : "plus"} $${seuil}$ succès.`
         ),
       };
     },
@@ -2002,6 +2431,46 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — $P(X = n-1)$, l'autre moitié du libellé. Le premier item
+    // travaille les cas à UN chemin, $k = 0$ et $k = n$, où le coefficient vaut
+    // $1$ et se laisse oublier. Ici il y a $n$ chemins — un pour chaque
+    // position de l'unique échec —, et oublier le coefficient donne une réponse
+    // $n$ fois trop petite.
+    kind: "template",
+    id: "stmg_vaT_bin_extremes_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_binomiale_calcul",
+    microId: "vaT_bin_extremes",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "« Un seul échec » : il peut tomber à n'importe laquelle des $n$ places, d'où $n$ chemins.",
+    tags: ["stmg", "maths", "probabilites", "template", "short"],
+    generate: () => {
+      // $n$ petit et $p$ pas trop faible : sinon $p^{n-1}$ s'écrase et la
+      // réponse arrondie au millième vaudrait zéro.
+      const n = pick([3, 4, 5] as const);
+      const p = pick([0.4, 0.5, 0.6, 0.7, 0.8] as const);
+      const valeur = loiBinomiale(n, p, n - 1);
+      return {
+        text:
+          `$X$ suit la loi binomiale $\\mathcal{B}(${n}\\,;\\,${fr(p)})$. ` +
+          `Calcule $P(X = ${n - 1})$, arrondi au millième.`,
+        format: "short",
+        expected: [fr(Math.round(valeur * 1000) / 1000)],
+        comparator: "number_equal",
+        explanation: exp(
+          "L'évènement $\\{X = n-1\\}$ signifie « un seul échec ». Cet échec peut occuper n'importe laquelle des $n$ positions : il y a donc $\\binom{n}{n-1} = n$ chemins, tous de probabilité $p^{n-1}(1-p)$.",
+          "On compte les chemins — il y en a $n$ —, puis on multiplie par la probabilité de l'un d'eux.",
+          `$\\binom{${n}}{${n - 1}} = ${n}$, donc $P(X = ${n - 1}) = ${n} \\times ${fr(p)}^{${n - 1}} \\times ${fr(Math.round((1 - p) * 100) / 100)} \\approx ${fr(Math.round(valeur * 100000) / 100000)}$. ` +
+            `Sans le coefficient, on aurait trouvé $${n}$ fois moins.`,
+          `$P(X = ${n - 1}) \\approx ${fr(Math.round(valeur * 1000) / 1000)}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ vaT_bin_pk ═══════════════════ */
 
   {
@@ -2035,6 +2504,67 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
           `$\\binom{${n}}{${k}} = ${binom(n, k)}$, donc $P(X = ${k}) = ${binom(n, k)} \\times ${fr(p)}^{${k}} \\times ${fr(Math.round((1 - p) * 100) / 100)}^{${n - k}} \\approx ${fr(Math.round(valeur * 100000) / 100000)}$.`,
           `$P(X = ${k}) \\approx ${fr(Math.round(valeur * 1000) / 1000)}$.`
         ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — RECONNAÎTRE l'écriture avant de calculer. Le premier item rend
+    // un nombre, et une calculatrice suffit à le trouver sans comprendre.
+    // Celui-ci demande la formule, où les trois pièges vivent : le coefficient
+    // oublié, les exposants intervertis, les échecs oubliés. C'est aussi la
+    // ligne qu'un correcteur veut voir écrite.
+    // ⚠️ Sans triangle : la valeur du coefficient n'est pas ce qu'on cherche
+    // ici, sa PLACE dans la formule l'est.
+    kind: "template",
+    id: "stmg_vaT_bin_pk_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_binomiale_calcul",
+    microId: "vaT_bin_pk",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$P(X = k) = \\binom{n}{k} \\times p^{k} \\times (1-p)^{n-k}$ : l'exposant de $p$ compte les SUCCÈS.",
+    tags: ["stmg", "maths", "probabilites", "template"],
+    generate: () => {
+      const n = randomInt(5, 9);
+      // ⛔ $p \neq 0,5$ : sinon intervertir les exposants donne le même nombre,
+      // et deux propositions seraient justes.
+      const p = pick([0.2, 0.25, 0.3, 0.4, 0.6, 0.7] as const);
+      // ⛔ $k \neq n-k$ : même raison, l'interversion serait invisible.
+      const k = pick(Array.from({ length: n - 1 }, (_, i) => i + 1).filter((v) => v !== n - v));
+      const q = fr(Math.round((1 - p) * 100) / 100);
+      const bonne = `$\\binom{${n}}{${k}} \\times ${fr(p)}^{${k}} \\times ${q}^{${n - k}}$`;
+      return {
+        text:
+          `$X$ suit la loi binomiale $\\mathcal{B}(${n}\\,;\\,${fr(p)})$. ` +
+          `Quelle expression donne $P(X = ${k})$ ?`,
+        format: "qcm",
+        choices: shuffle([
+          bonne,
+          `$\\binom{${n}}{${k}} \\times ${fr(p)}^{${n - k}} \\times ${q}^{${k}}$`,
+          `$\\binom{${n}}{${k}} \\times ${fr(p)}^{${k}}$`,
+          `$${fr(p)}^{${k}} \\times ${q}^{${n - k}}$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Pour une loi binomiale : $P(X = k) = \\binom{n}{k} \\times p^{k} \\times (1-p)^{n-k}$. Le coefficient compte les chemins, et le produit des puissances donne la probabilité de CHACUN d'eux.",
+          "On vérifie trois choses : le coefficient est présent, l'exposant de $p$ est le nombre de succès, et celui de $1-p$ le nombre d'échecs.",
+          `Ici $${k}$ succès et $${n - k}$ échecs : $${fr(p)}$ porte l'exposant $${k}$, et $${q}$ l'exposant $${n - k}$. ` +
+            `Sans le coefficient $\\binom{${n}}{${k}} = ${binom(n, k)}$, on ne compterait qu'UN chemin sur les $${binom(n, k)}$ possibles.`,
+          `L'expression correcte est ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$${fr(p)}^{${k}} \\times ${q}^{${n - k}}$`,
+            cause: "a oublié le coefficient binomial : cette expression ne donne la probabilité que d'UN chemin",
+          },
+          {
+            choice: `$\\binom{${n}}{${k}} \\times ${fr(p)}^{${k}}$`,
+            cause: "a oublié les échecs : il faut aussi les $(1-p)$ des branches non réussies",
+          },
+        ],
       };
     },
   },
@@ -2076,6 +2606,48 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
     },
   },
 
+  {
+    // ANGLE 2 — « AU MOINS DEUX », où le contraire compte DEUX termes. Le
+    // premier item n'a qu'un terme à retrancher ; celui-ci en demande deux, et
+    // l'élève qui a retenu « il suffit d'enlever $P(X = 0)$ » se trompe. C'est
+    // la forme sous laquelle la question tombe le plus souvent en gestion :
+    // « au moins deux pannes », « au moins deux retards ».
+    kind: "template",
+    id: "stmg_vaT_bin_reunion_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_binomiale_calcul",
+    microId: "vaT_bin_reunion",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le contraire de « au moins deux » est « aucun OU exactement un » : deux termes à retrancher.",
+    tags: ["stmg", "maths", "probabilites", "gestion", "template", "short"],
+    generate: () => {
+      const n = randomInt(5, 10);
+      const p = pick([0.1, 0.15, 0.2, 0.25, 0.3] as const);
+      const aucun = loiBinomiale(n, p, 0);
+      const unSeul = loiBinomiale(n, p, 1);
+      const auMoinsDeux = 1 - aucun - unSeul;
+      const ep = pick(EPREUVES);
+      return {
+        text:
+          `$X$ suit la loi $\\mathcal{B}(${n}\\,;\\,${fr(p)})$ et compte les ${ep.nom} ${ep.qualite}. ` +
+          `Calcule $P(X \\geqslant 2)$, arrondi au millième.`,
+        format: "short",
+        expected: [fr(Math.round(auMoinsDeux * 1000) / 1000)],
+        comparator: "number_equal",
+        explanation: exp(
+          "L'évènement $\\{X \\geqslant 2\\}$ a pour contraire $\\{X = 0\\} \\cup \\{X = 1\\}$ : « aucun succès » ou « exactement un ». On retranche donc DEUX probabilités à $1$.",
+          "On calcule les deux premiers termes de la loi, on les additionne, puis on prend le complément.",
+          `$P(X = 0) = ${fr(Math.round((1 - p) * 100) / 100)}^{${n}} \\approx ${fr(Math.round(aucun * 100000) / 100000)}$ ; ` +
+            `$P(X = 1) = ${n} \\times ${fr(p)} \\times ${fr(Math.round((1 - p) * 100) / 100)}^{${n - 1}} \\approx ${fr(Math.round(unSeul * 100000) / 100000)}$. ` +
+            `Donc $P(X \\geqslant 2) = 1 - ${fr(Math.round(aucun * 100000) / 100000)} - ${fr(Math.round(unSeul * 100000) / 100000)} \\approx ${fr(Math.round(auMoinsDeux * 1000) / 1000)}$.`,
+          `$P(X \\geqslant 2) \\approx ${fr(Math.round(auMoinsDeux * 1000) / 1000)}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ vaT_bin_esperance ═══════════════════ */
 
   {
@@ -2105,6 +2677,44 @@ export const variablesAleatoiresBank: TutorBankItemV4[] = [
           "On multiplie le nombre de répétitions par la probabilité de succès d'une épreuve.",
           `$E(X) = ${n} \\times ${fr(p)} = ${fr(n * p)}$.`,
           `On peut attendre en moyenne $${fr(n * p)}$ succès — c'est une moyenne sur un grand nombre de séries, pas une prévision pour une série donnée.`
+        ),
+      };
+    },
+  },
+
+  {
+    // ANGLE 2 — l'espérance est CONNUE, le paramètre manque. Le premier item
+    // multiplie $n$ par $p$ ; celui-ci divise, et c'est ce que fait un
+    // gestionnaire qui observe : sur un grand nombre de lots, on relève en
+    // moyenne tant de défauts — quel est le taux de défaut ?
+    kind: "template",
+    id: "stmg_vaT_bin_esperance_tpl_2",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "va_binomiale_calcul",
+    microId: "vaT_bin_esperance",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$E(X) = np$ : connaissant $E(X)$ et $n$, on divise.",
+    tags: ["stmg", "maths", "probabilites", "gestion", "template", "short"],
+    generate: () => {
+      const n = pick([20, 25, 40, 50, 80, 100, 200] as const);
+      const p = pick([0.05, 0.1, 0.15, 0.2, 0.25, 0.4] as const);
+      const esperance = Math.round(n * p * 100) / 100;
+      const ep = pick(EPREUVES);
+      return {
+        text:
+          `Sur des lots de $${n}$ ${ep.nom}, on relève en moyenne $${fr(esperance)}$ ${ep.nom} ${ep.qualite}. ` +
+          `Le nombre de succès par lot suit une loi binomiale. Quelle est la probabilité $p$ ?`,
+        format: "short",
+        expected: [fr(p)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Pour une loi binomiale $\\mathcal{B}(n\\,;\\,p)$, l'espérance vaut $E(X) = np$. Connaissant l'espérance et le nombre d'épreuves, on retrouve donc $p = \\dfrac{E(X)}{n}$.",
+          "On divise la moyenne observée par la taille du lot.",
+          `$p = \\dfrac{${fr(esperance)}}{${n}} = ${fr(p)}$, soit $${fr(p * 100)}\\,\\%$. ` +
+            `Vérification : $${n} \\times ${fr(p)} = ${fr(esperance)}$.`,
+          `La probabilité vaut $p = ${fr(p)}$.`
         ),
       };
     },
