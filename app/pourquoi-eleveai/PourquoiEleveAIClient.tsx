@@ -162,7 +162,12 @@ export default function PourquoiEleveAIClient() {
             </div>
             <div className="space-y-4 text-base font-semibold leading-relaxed text-slate-700">
               <p>
-                Un soir de juillet, un prof de maths a dessiné un cœur sur une feuille à
+                {/* « juillet » → « mars » (Frédéric, 21/08/2026) : c'est lui qui
+                    l'a dessiné, c'est lui qui sait quand. ⚠️ Ne pas confondre
+                    avec l'AUTRE dessin d'un soir de juillet, celui de
+                    /loi-performance (ADN → coefficients → réseau) : deux
+                    feuilles, deux soirs, et celui-là n'est pas touché. */}
+                Un soir de mars, un prof de maths a dessiné un cœur sur une feuille à
                 carreaux. Dedans&nbsp;: un <strong>ε</strong> — l&apos;infiniment petit. Le grand
                 mathématicien Erdős appelait les enfants «&nbsp;des epsilons&nbsp;».
               </p>
