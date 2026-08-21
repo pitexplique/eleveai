@@ -611,11 +611,21 @@ export default function TarifsClient() {
           <h2 className="mt-3 text-2xl font-black text-slate-950">
             Déjà utilisé dans un collège, à La Réunion, avec de vrais élèves
           </h2>
+          {/* ⛔ LA SIGNATURE NE SE PERD PAS EN CHEMIN (21/08/2026). La version
+              précédente de cette page portait « Conçu par Frédéric Lacoste » et
+              ma réécriture l'avait laissée tomber. Ce n'est pas une mention
+              d'auteur parmi d'autres : le nom est porté exprès partout — les 14
+              cahiers, le pied de page, `/qui-sommes-nous`, les documents
+              légaux — pour qu'il devienne une marque. Une page qui parle
+              d'argent est la dernière d'où il devrait disparaître.
+              Formulation reprise mot pour mot des trois moteurs de cahiers. */}
           <p className="mx-auto mt-3 max-w-2xl text-sm font-bold leading-relaxed text-slate-600">
             EleveAI n&apos;a pas de levée de fonds, pas d&apos;équipe de cinquante personnes,
-            pas de service commercial. C&apos;est un enseignant qui a construit l&apos;outil
-            qu&apos;il aurait voulu avoir pour ses élèves — et les exercices ont été écrits
-            un par un, pas achetés.
+            pas de service commercial. Les exercices ont été écrits un par un, pas achetés.
+          </p>
+          <p className="mx-auto mt-3 max-w-2xl text-base font-black text-slate-900">
+            Conçu par Frédéric Lacoste, enseignant à La Réunion, pour ses élèves — et pour
+            vous.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm font-black">
             {[
