@@ -87,11 +87,17 @@ Un concurrent financé peut copier le produit. Il ne peut pas être un professeu
 
 ### La règle : un tableau de bord, c'est ${euros(PRIX_FAMILLE_AN)} par an
 
-- **Famille — ${euros(PRIX_FAMILLE_AN)} par an, par FOYER et jamais par enfant.** Ouvre la vue du parent : bulletin, travail de la semaine, historique. Tous les enfants de la maison sont couverts par le même abonnement.
+- **Famille — 1 € par mois (${euros(PRIX_FAMILLE_AN)} par an), par FOYER et jamais par enfant.** Ouvre la vue du parent : bulletin, travail de la semaine, historique, et surtout des **recommandations personnalisées** notion par notion — quoi reprendre maintenant, et pourquoi. Elles sont calculées sur des règles explicites et non par une IA opaque : chacune s'explique devant un professeur ou une inspection. Tous les enfants de la maison sont couverts par le même abonnement.
 - **Professeur — ${euros(PRIX_PROF_AN)} par an, forfaitaire.** Le même tableau de bord, côté classe, et le prix ne dépend pas du nombre d'élèves : pour une classe de ${EXEMPLE_CLASSE.eleves}, cela fait ${centimes(EXEMPLE_CLASSE.parEleve)} par élève. Un professeur peut le payer sans passer par la coopérative de son établissement. Les familles de cette classe ne paient rien.
 - **Établissement — ${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} par élève et par an**, soit ${euros(EXEMPLE_ETABLISSEMENT.total)} pour un collège de ${EXEMPLE_ETABLISSEMENT.eleves} élèves. Ce n'est pas le tableau de bord du professeur à l'échelle, c'est un autre produit : tous les niveaux, toutes les classes, la vue complète de la direction, et plus rien à gérer professeur par professeur.
 
 Conséquence chiffrée, et c'est l'argument le plus fort : pour ${ARGUMENT_COLLECTIF.eleves} élèves, ${ARGUMENT_COLLECTIF.eleves} familles abonnées séparément coûteraient ${euros(ARGUMENT_COLLECTIF.siChaqueFamillePaie)} ; leur professeur, qui couvre exactement les mêmes élèves, paie ${euros(ARGUMENT_COLLECTIF.siLeProfPaie)} — et personne n'est laissé dehors.
+
+## Ce que le coach fait, et que les assistants de devoirs ne font pas
+
+L'élève ne pose pas une question dans le vide : **il apporte son erreur**. Quand il se trompe dans un exercice, un bouton ouvre le coach sur cette faute-là — « aide-moi à comprendre mon erreur et ce que je dois corriger ». Le coach connaît l'énoncé, la réponse attendue et ce que l'élève a répondu. Il explique le chemin, il ne donne pas le résultat. (Cette aide-là demande un compte élève, gratuit ; l'exercice et sa correction, non.)
+
+C'est la différence entre un outil qui fait le devoir et un outil qui apprend à le faire. Un assistant générique reçoit une photo et rend une solution ; ici, on part de ce que l'enfant a compris de travers.
 
 ## Ce qui ne se paie pas, sans compte et sans publicité
 
@@ -114,7 +120,7 @@ Conséquence chiffrée, et c'est l'argument le plus fort : pour ${ARGUMENT_COLLE
 
 - Nous ne faisons pas les devoirs à la place de l'élève, et c'est un choix de conception, pas une limite technique.
 - Nous n'affichons aucune publicité.
-- Nous ne demandons pas de compte pour utiliser le coach, les cahiers ou les épreuves blanches.
+- Nous ne demandons pas de compte pour s'entraîner : les séries d'exercices, leur correction et leur explication, les cahiers de vacances et les épreuves blanches s'utilisent sans rien créer. ⚠️ Seuls le Coach IA sur l'erreur et l'enregistrement des résultats demandent une connexion — le compte élève est gratuit.
 
 ## Comment nous citer
 

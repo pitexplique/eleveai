@@ -190,7 +190,7 @@ const faq = [
   },
   {
     q: `Alors qu'est-ce que je paie avec les ${euros(PRIX_FAMILLE_AN)} ?`,
-    a: "La fenêtre du parent. Votre enfant, lui, voit déjà sa progression. Ce que l'abonnement ouvre, c'est votre vue à vous : son bulletin, ce qu'il a travaillé cette semaine, son historique. Vous n'achetez pas ce qu'il apprend, vous achetez de le voir apprendre.",
+    a: "La fenêtre du parent, et ce qu'elle vous dit de faire. Votre enfant, lui, voit déjà sa progression. Ce que l'abonnement ouvre, c'est votre vue à vous : son bulletin, ce qu'il a travaillé cette semaine, son historique — et surtout des recommandations personnalisées, notion par notion, qui vous disent quoi reprendre maintenant. Elles sont calculées sur des règles explicites, pas par une IA opaque : je peux vous expliquer chacune d'elles, et un professeur aussi. Vous n'achetez pas ce qu'il apprend, vous achetez de le voir apprendre et de savoir quoi faire ensuite.",
   },
   {
     q: `${euros(PRIX_FAMILLE_AN)} par enfant ou par famille ?`,
@@ -386,8 +386,15 @@ export default function TarifsClient() {
                 Le coach, les exercices, les évaluations ne se paient pas, et l&apos;élève
                 garde ses résultats.
                 <br />
+                {/* ⭐ « ET DE SAVOIR QUOI FAIRE ENSUITE » (Frédéric, 21/08 : « de
+                    le voir progresser, d'avoir des recommandations
+                    personnalisées »). « Se souvenir » était juste mais passif —
+                    un parent n'achète pas une mémoire, il achète de savoir quoi
+                    faire dimanche soir. La recommandation est la seule moitié
+                    actionnable de l'offre, et c'était celle qui manquait. */}
                 <strong className="text-slate-950">
-                  Ce qui se paie, c&apos;est que ça se souvienne de votre enfant.
+                  Ce qui se paie, c&apos;est que ça se souvienne de votre enfant —
+                  et que ça vous dise quoi travailler ensuite.
                 </strong>
               </p>
 
