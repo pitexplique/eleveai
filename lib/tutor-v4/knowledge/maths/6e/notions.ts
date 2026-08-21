@@ -32,6 +32,23 @@ export const notions: NotionSource[] = [
     levels: [1, 2, 3],
   },
 
+  // ⛔ COUPÉE EN DEUX LE 21/08/2026 (Frédéric : « il faut que les notions
+  // soient cohérentes »). « Nombres décimaux » portait sept micros et deux
+  // sujets : ce qu'EST un décimal (lire, rang, comparer) et ce qu'on en FAIT
+  // (additionner, multiplier, diviser). Un élève qui bute sur la virgule d'une
+  // multiplication n'a pas un problème de lecture de nombre, et le diagnostic
+  // le rangeait pourtant au même endroit.
+  //
+  // C'est exactement le découpage déjà fait en 5e : `fraction_nombre` /
+  // `fraction_calcul`, `relatif_nombre` / `relatif_operation`.
+  {
+    id: "decimal_calcul",
+    label: "Calculer avec les décimaux",
+    boId: "BO6N1",
+    prerequis: ["decimal_nombre"],
+    levels: [1, 2, 3],
+  },
+
   {
     id: "fraction_nombre",
     label: "Fractions",

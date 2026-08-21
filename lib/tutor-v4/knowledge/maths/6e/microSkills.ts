@@ -65,28 +65,44 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["decimal_rang"],
   },
   {
-    id: "decimal_additionner",
-    label: "Additionner des nombres décimaux",
+    id: "decimal_defi",
+    label: "Défis sur les nombres décimaux",
     notionId: "decimal_nombre",
-    prerequis: ["decimal_lire_ecrire"],
+    prerequis: ["decimal_comparer"],
+  },
+
+  /* =========================
+     CALCULER AVEC LES DÉCIMAUX
+     ⛔ Séparé de « Nombres décimaux » le 21/08/2026 : lire un décimal et
+     calculer avec un décimal sont deux notions. Le calcul a ses propres
+     obstacles — aligner les virgules, compter les décimales d'un produit,
+     poursuivre une division au-delà de la virgule — qui n'ont rien à voir avec
+     le rang d'un chiffre. Découpage repris de la 5e (fraction_nombre /
+     fraction_calcul).
+  ========================= */
+  {
+    id: "decimal_additionner",
+    label: "Additionner et soustraire des nombres décimaux",
+    notionId: "decimal_calcul",
+    prerequis: ["decimal_rang"],
   },
   {
     id: "decimal_multiplier",
     label: "Multiplier des nombres décimaux",
-    notionId: "decimal_nombre",
+    notionId: "decimal_calcul",
     prerequis: ["decimal_additionner"],
   },
   {
     id: "decimal_diviser_par_entier",
     label: "Diviser un nombre décimal par un entier",
-    notionId: "decimal_nombre",
-    prerequis: ["decimal_lire_ecrire"],
+    notionId: "decimal_calcul",
+    prerequis: ["decimal_multiplier"],
   },
   {
-    id: "decimal_defi",
-    label: "Défis sur les nombres décimaux",
-    notionId: "decimal_nombre",
-    prerequis: ["decimal_comparer"],
+    id: "decimal_calcul_defi",
+    label: "Défis de calcul avec les décimaux",
+    notionId: "decimal_calcul",
+    prerequis: ["decimal_multiplier"],
   },
 
   /* =========================
