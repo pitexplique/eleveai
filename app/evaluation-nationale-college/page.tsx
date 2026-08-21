@@ -158,7 +158,8 @@ const EPREUVES: Epreuve[] = [
     ],
     // LIVRÉE (01/08) : l'épreuve pioche dans le programme de 5ᵉ.
     epreuve: "/evaluation-nationale-college/4e-maths",
-    papier: null,
+    // LE SUJET SUR PAPIER (21/08) — la deuxième des quatre.
+    papier: "/evaluation-nationale-college/4e-maths/a-imprimer",
     coach: "/coach-ia/maths?classe=4e",
     guide: "/guide-de-survie/maths-quatrieme",
   },

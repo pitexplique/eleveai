@@ -348,6 +348,9 @@ export const CONFIG_4E_MATHS: ConfigEpreuve = {
   // cela laisse 48 secondes chacune.
   dureeSecondes: 50 * 60,
   volumeOfficiel: true,
+  // Le sujet papier existe : /evaluation-nationale-college/4e-maths/a-imprimer
+  // (21/08). Deuxième des quatre — voir `sujetPapier` dans moteur.ts.
+  sujetPapier: true,
   themes: THEMES,
   // ⚠️ AUCUN `seuils` ICI, ET C'EST VOULU. Le document professeur de la DEPP
   // donne les barèmes de la 6ᵉ en nombre de réponses ; nous n'avons pas ceux
