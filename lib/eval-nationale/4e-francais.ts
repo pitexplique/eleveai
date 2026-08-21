@@ -124,6 +124,11 @@ export const CONFIG_4E_FRANCAIS: ConfigEpreuve = {
   // comme le jour J.
   dureeSecondes: 50 * 60,
   volumeOfficiel: true,
+  // Le sujet papier existe : /evaluation-nationale-college/4e-francais/a-imprimer
+  // (21/08). ⚠️ Il demande un adulte : les neuf questions de compréhension de
+  // l'oral s'appuient sur un texte LU À VOIX HAUTE, imprimé sur la feuille du
+  // professeur et jamais sur celle de l'élève. Voir `EncartTextesALire`.
+  sujetPapier: true,
   reserve:
     "Une seule chose de l'épreuve officielle manque ici : la fluence, qui se passe à voix haute, en tête à tête avec un professeur — un ordinateur ne peut pas l'évaluer. La compréhension de l'oral, elle, y est : prévois des écouteurs ou une pièce calme.",
   themes: THEMES,

@@ -57,6 +57,7 @@ import {
   EncartRetourEnLigne,
   EncartSignature,
   EncartSommaire,
+  EncartTextesALire,
   EncartTitre,
   EnteteImprimee,
 } from "./EncartsSujet";
@@ -148,6 +149,30 @@ export default function SujetImprimable({ config }: { config: ConfigEpreuve }) {
   const montreCorrige = format !== "sujet";
   const minutes = Math.round(config.dureeSecondes / 60);
 
+  /* LES ENREGISTREMENTS, NUMÉROTÉS UNE FOIS POUR TOUTE LA FEUILLE.
+     Le sujet de l'élève dit « Enregistrement 2 », la feuille de l'adulte porte
+     le texte n° 2 : c'est le seul lien entre les deux documents, puisque le
+     titre du texte trahirait déjà son contenu. On les numérote dans l'ordre où
+     ils tombent, et on déduplique sur le titre — un même enregistrement porte
+     plusieurs questions d'affilée. */
+  const supportsOraux = (questions ?? [])
+    .filter((q) => q.support?.oral)
+    .reduce<
+      { numero: number; titre: string; source: string; texte: string; ecoutes: number }[]
+    >((acc, q) => {
+      const s = q.support!;
+      if (acc.some((x) => x.titre === s.titre)) return acc;
+      acc.push({
+        numero: acc.length + 1,
+        titre: s.titre,
+        source: s.source,
+        texte: s.texte,
+        ecoutes: s.oral!.ecoutes,
+      });
+      return acc;
+    }, []);
+  const numeroOral = new Map(supportsOraux.map((s) => [s.titre, s.numero]));
+
   /* Le sommaire de la couverture : un domaine, son nombre de questions — lu sur
      les questions tirées et non sur la config. Voir `EncartSommaire`. */
   const sommaire = config.themes.map((t) => ({
@@ -228,6 +253,22 @@ export default function SujetImprimable({ config }: { config: ConfigEpreuve }) {
                 </label>
               ))}
             </div>
+            {/* ⚠️ LA MISE EN GARDE NE PEUT PAS VIVRE DANS LE LIBELLÉ DU FORMAT :
+                les quatre épreuves partagent cette liste, et seules celles de
+                français ont des enregistrements. Elle n'apparaît donc que
+                lorsqu'il y en a — sinon on avertirait d'un piège inexistant. */}
+            {supportsOraux.length > 0 && (
+              <p className="mt-2 rounded-xl border-l-4 border-amber-400 bg-amber-50 py-2 pl-3 pr-3 text-xs font-medium leading-5 text-amber-900">
+                🎧 Cette épreuve demande quelqu&apos;un à côté —{" "}
+                <b>toi, parent ou professeur</b>. Elle contient{" "}
+                {supportsOraux.length} texte
+                {supportsOraux.length > 1 ? "s" : ""} à lire à voix haute, sur
+                une page à part qui est jointe aux trois formats.{" "}
+                <b>Détache-la avant de donner le sujet à l&apos;élève</b> —
+                s&apos;il lit le texte au lieu de l&apos;écouter, ces questions
+                ne mesurent plus rien.
+              </p>
+            )}
           </fieldset>
         </div>
       </div>
@@ -299,7 +340,46 @@ export default function SujetImprimable({ config }: { config: ConfigEpreuve }) {
                         </h3>
                       )}
 
-                      {nouveauSupport && q.support && (
+                      {/* ⛔ LE SUPPORT ORAL N'IMPRIME PAS SON TEXTE ICI.
+                          Corrigé le 21/08, en montant le français : la première
+                          version rendait le texte à l'élève avec la mention
+                          « tu n'as pas ce texte sous les yeux » — écrite juste
+                          au-dessus du texte. Absurde, et pire qu'absurde : huit
+                          questions sur soixante seraient devenues un exercice
+                          de lecture. Le texte part sur la feuille de l'adulte
+                          (`EncartTextesALire`, avec le corrigé) ; ici, on
+                          n'annonce que l'enregistrement et son numéro. */}
+                      {nouveauSupport && q.support && q.support.oral && (
+                        <div
+                          className="question-bloc mt-4 rounded-xl border-2 border-dashed p-3"
+                          style={{ borderColor: accent }}
+                        >
+                          <p
+                            className="text-[10px] font-black uppercase tracking-[0.16em]"
+                            style={{ color: accent }}
+                          >
+                            {q.support.kicker}
+                          </p>
+                          <p className="mt-1 font-serif text-base font-black leading-tight">
+                            🎧 Enregistrement {numeroOral.get(q.support.titre)}
+                          </p>
+                          <p className="mt-1 text-[13px] font-medium leading-5 text-slate-600">
+                            Un adulte va te lire un texte{" "}
+                            <b>
+                              {q.support.oral.ecoutes} fois
+                            </b>
+                            . Écoute sans rien écrire, puis réponds aux questions
+                            qui suivent. Tu n&apos;as pas le texte&nbsp;: c&apos;est
+                            exactement ce qu&apos;on te demande le jour J.
+                          </p>
+                          <p className="mt-1 text-[11px] font-bold italic text-slate-400">
+                            (Le texte est sur la feuille de l&apos;adulte qui te
+                            le lira.)
+                          </p>
+                        </div>
+                      )}
+
+                      {nouveauSupport && q.support && !q.support.oral && (
                         <figure
                           className="question-bloc mt-4 rounded-xl border-2 p-3"
                           style={{ borderColor: accent }}
@@ -313,21 +393,10 @@ export default function SujetImprimable({ config }: { config: ConfigEpreuve }) {
                           <p className="mt-1 font-serif text-base font-black leading-tight">
                             {q.support.titre}
                           </p>
-                          {/* ⚠️ LE SUPPORT ORAL S'IMPRIME QUAND MÊME, et il le
-                              doit : à l'écran il se joue et le texte reste
-                              caché — c'est tout l'objet du domaine
-                              « compréhension de l'oral ». Une feuille ne parle
-                              pas. On rend donc le texte à celui qui tiendra le
-                              rôle du haut-parleur, avec la consigne qui va
-                              avec, plutôt que de laisser cinq questions sans
-                              leur support. */}
-                          {q.support.oral && (
-                            <p className="mt-1 rounded-lg bg-amber-50 px-2 py-1 text-[11px] font-bold leading-5 text-amber-900">
-                              🎧 À LIRE À VOIX HAUTE par un adulte,{" "}
-                              {q.support.oral.ecoutes} fois au maximum.
-                              L&apos;élève n&apos;a pas ce texte sous les yeux.
-                            </p>
-                          )}
+                          {/* Le texte support S'IMPRIME EN ENTIER, sans hauteur
+                              bornée : à l'écran il défile dans un cadre, sur
+                              papier il doit être lisible d'un bout à l'autre —
+                              dix questions en dépendent. */}
                           <div className="mt-2 whitespace-pre-line font-serif text-[14px] leading-6">
                             {q.support.texte}
                           </div>
@@ -423,6 +492,17 @@ export default function SujetImprimable({ config }: { config: ConfigEpreuve }) {
               Quand on imprime « le sujet et son corrigé », la dernière feuille
               se détache ; quand on imprime « le corrigé seul », c'est la seule
               qui sorte. */}
+          {/* LA FEUILLE DU LECTEUR, DANS LES TROIS FORMATS — y compris « le
+              sujet seul » (Frédéric, 21/08). Sans elle, le parent qui imprime
+              le sujet ne peut pas poser les questions d'écoute : elle fait
+              partie du matériel de passation, au même titre que les questions.
+              Ce qui protège l'élève n'est pas son absence, c'est qu'elle
+              commence sur une page neuve et qu'elle s'annonce comme n'étant pas
+              pour lui — voir `EncartTextesALire`.
+              Elle ne s'affiche que s'il y a des enregistrements : les deux
+              épreuves de maths n'en ont aucun et n'en verront jamais la trace. */}
+          <EncartTextesALire accent={accent} supports={supportsOraux} />
+
           {montreCorrige && (
             <section className="sujet-page mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-300/40 sm:p-8 print:mt-0 print:rounded-none print:border-0 print:p-0 print:shadow-none">
               <EnteteImprimee slug={config.slug} />

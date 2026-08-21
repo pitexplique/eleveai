@@ -85,7 +85,7 @@ const EPREUVES: Epreuve[] = [
     // LIVRÉE (01/08) : l'épreuve pioche dans le programme de CM2. La fluence
     // et la compréhension de l'oral n'y sont pas — c'est dit sur la page.
     epreuve: "/evaluation-nationale-college/6e-francais",
-    papier: null,
+    papier: "/evaluation-nationale-college/6e-francais/a-imprimer",
     coach: "/coach-ia/francais?classe=6e",
     guide: "/guide-de-survie/francais-6e",
   },
@@ -133,7 +133,7 @@ const EPREUVES: Epreuve[] = [
     ],
     // LIVRÉE (01/08) : l'épreuve pioche dans le programme de 5ᵉ.
     epreuve: "/evaluation-nationale-college/4e-francais",
-    papier: null,
+    papier: "/evaluation-nationale-college/4e-francais/a-imprimer",
     coach: "/coach-ia/francais?classe=4e",
     guide: "/guide-de-survie/francais-4e",
   },

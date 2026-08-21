@@ -234,11 +234,12 @@ const ROUTES: RouteConfig[] = [
   // « sujet PDF », « annales » cherchent une feuille. Deux intentions, deux
   // pages — c'est exactement d'où vient le trafic des cahiers de vacances, dont
   // tout passe par « à imprimer » et « PDF gratuit ».
-  // ⚠️ LES DEUX ÉPREUVES DE MATHS SEULEMENT : les sujets papier de français ne
-  // sont pas écrits. On ne déclare pas une URL qui répond 404 — le sitemap est
-  // la promesse la plus formelle qu'on fasse à un moteur.
-  { path: "/evaluation-nationale-college/6e-maths/a-imprimer", priority: 0.9, changeFrequency: "weekly", lastMod: new Date("2026-08-21") },
-  { path: "/evaluation-nationale-college/4e-maths/a-imprimer", priority: 0.9, changeFrequency: "weekly", lastMod: new Date("2026-08-21") },
+  // LES QUATRE Y SONT depuis le 21/08 — deux niveaux, deux matières, comme les
+  // épreuves à l'écran juste au-dessus.
+  { path: "/evaluation-nationale-college/6e-maths/a-imprimer",    priority: 0.9, changeFrequency: "weekly", lastMod: new Date("2026-08-21") },
+  { path: "/evaluation-nationale-college/6e-francais/a-imprimer", priority: 0.9, changeFrequency: "weekly", lastMod: new Date("2026-08-21") },
+  { path: "/evaluation-nationale-college/4e-maths/a-imprimer",    priority: 0.9, changeFrequency: "weekly", lastMod: new Date("2026-08-21") },
+  { path: "/evaluation-nationale-college/4e-francais/a-imprimer", priority: 0.9, changeFrequency: "weekly", lastMod: new Date("2026-08-21") },
 
   // ── DICO (vocabulaire & gestes — prépa éval nationale) ─────────────────────
   { path: "/dico",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },

@@ -352,6 +352,109 @@ export function EncartRetourEnLigne() {
 }
 
 /**
+ * LES TEXTES À LIRE À VOIX HAUTE — la feuille de celui qui fait passer.
+ *
+ * ⛔ ELLE NE VA JAMAIS SUR LE SUJET DE L'ÉLÈVE, et c'est toute la difficulté du
+ * français sur papier. À l'écran, la compréhension de l'oral fonctionne parce
+ * que le texte se JOUE et ne s'affiche pas : l'élève écoute deux fois et répond
+ * de mémoire. Une feuille ne parle pas — et si on imprime le texte à côté des
+ * questions, l'élève le lit, et on ne mesure plus rien du tout. Huit questions
+ * sur soixante deviendraient un exercice de lecture déguisé.
+ *
+ * ⭐ LA SOLUTION EST CELLE DU JOUR J LUI-MÊME, avant que tout passe à
+ * l'ordinateur : l'adulte tient le texte, l'élève ne l'a pas. Le sujet
+ * n'annonce que l'enregistrement et son numéro ; le texte vit sur sa propre
+ * page, qui se détache.
+ *
+ * ⭐ ET CETTE PAGE EST DANS LES TROIS FORMATS (Frédéric, 21/08 : « le sujet doit
+ * y être, et celui qui lit c'est le parent ! »). Première version : elle
+ * partait avec le corrigé, sur « la feuille du professeur ». Deux erreurs dans
+ * la même décision.
+ *
+ * La première est de public. Le lecteur le plus fréquent n'est pas un
+ * professeur devant sa classe — c'est un parent à sa table, le dimanche. Les
+ * cahiers de vacances le disent depuis juillet : les trois quarts des visites
+ * viennent de familles. Écrire « feuille du professeur » sur la seule page dont
+ * un parent a besoin, c'est lui dire qu'elle ne le concerne pas.
+ *
+ * La seconde est mécanique. Le parent qui imprimait « le sujet seul » — le
+ * format qui porte justement le mot « sujet » — repartait sans les textes, donc
+ * sans pouvoir poser huit à neuf questions sur soixante. Un format qui ne
+ * permet pas de faire passer l'épreuve n'est pas un format, c'est un piège.
+ *
+ * ⚠️ LA PROTECTION N'EST DONC PLUS LE FORMAT, C'EST LA PAGE. Elle commence sur
+ * une feuille neuve, elle s'annonce en toutes lettres comme n'étant pas pour
+ * l'élève, et elle se retire de la liasse avant qu'on la pose sur la table.
+ */
+export function EncartTextesALire({
+  accent,
+  supports,
+}: {
+  accent: string;
+  supports: {
+    numero: number;
+    titre: string;
+    source: string;
+    texte: string;
+    ecoutes: number;
+  }[];
+}) {
+  if (supports.length === 0) return null;
+  return (
+    <section className="sujet-page mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-300/40 sm:p-8 print:mt-0 print:rounded-none print:border-0 print:p-0 print:shadow-none">
+      <h2 className="border-b-2 border-slate-200 pb-2 text-2xl font-black tracking-tight text-slate-900">
+        🎧 Les textes à lire à voix haute
+      </h2>
+      {/* ⛔ L'AVERTISSEMENT EST LA PAGE ELLE-MÊME, pas une petite note en bas :
+          c'est le seul endroit du document où une erreur de manipulation coûte
+          un domaine entier de l'épreuve. Il tutoie l'adulte comme le reste du
+          site, et il le nomme — parent OU professeur — parce que celui qui lira
+          sera le plus souvent un parent. */}
+      <div className="mt-3 rounded-xl border-2 border-amber-400 bg-amber-50 p-4">
+        <p className="text-base font-black text-amber-900">
+          ✂️ Cette page est pour toi, l&apos;adulte qui fait passer
+          l&apos;épreuve — parent ou professeur. Détache-la, et ne la donne pas
+          à l&apos;élève.
+        </p>
+        <p className="mt-1.5 text-[13px] font-medium leading-6 text-amber-900/85">
+          Lis chaque texte à voix haute, posément, le nombre de fois indiqué —
+          pas une de plus. L&apos;élève écoute sans rien écrire, puis répond aux
+          questions de l&apos;enregistrement correspondant, repérées par leur
+          numéro sur son sujet. Il ne doit à aucun moment voir le texte&nbsp;:
+          c&apos;est exactement ce qu&apos;on mesure. S&apos;il le lit, ces
+          questions ne valent plus rien.
+        </p>
+      </div>
+
+      {supports.map((s) => (
+        <article
+          key={s.numero}
+          className="question-bloc mt-4 rounded-xl border-2 p-3"
+          style={{ borderColor: accent }}
+        >
+          <p
+            className="text-[10px] font-black uppercase tracking-[0.16em]"
+            style={{ color: accent }}
+          >
+            Enregistrement {s.numero} · {s.ecoutes} lecture
+            {s.ecoutes > 1 ? "s" : ""}
+          </p>
+          <p className="mt-1 font-serif text-lg font-black leading-tight">
+            {s.titre}
+          </p>
+          <div className="mt-2 whitespace-pre-line font-serif text-[15px] leading-7">
+            {s.texte}
+          </div>
+          <p className="mt-2 border-t border-slate-200 pt-1.5 text-[11px] font-medium italic text-slate-500">
+            {s.source}
+          </p>
+        </article>
+      ))}
+    </section>
+  );
+}
+
+/**
  * Le pied de la dernière page imprimée : l'adresse en clair et un second QR.
  *
  * Le QR de la couverture part souvent avec elle — un professeur qui photocopie
