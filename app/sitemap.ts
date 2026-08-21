@@ -37,6 +37,11 @@ const LASTMOD_FICHES_FR = new Date("2026-08-20");
 // 25/07 : lancement des kits de survie lycée (Première spé maths en premier)
 const LASTMOD_KIT = new Date("2026-07-28");
 const LASTMOD_AUDIENCES = new Date("2026-07-05");
+/* Les pages reprises le 21/08 : tarifs refaits (trois portes, offre famille,
+   balisage FAQ) et la connexion sortie du `noindex`. Une date propre plutôt
+   qu'un décalage de `LASTMOD_CORE`, qui aurait annoncé à tort une modification
+   sur la quarantaine de pages qui la partagent. */
+const LASTMOD_SEO_AOUT = new Date("2026-08-21");
 const LASTMOD_LEGAL   = new Date("2026-02-18");
 
 // Les classes du site vivent dans `/programme/<classe>` (plus bas) : c'est là
@@ -358,12 +363,19 @@ const ROUTES: RouteConfig[] = [
   { path: "/espace-parents",  priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
 
   // ── AUTH (public) ──────────────────────────────────────────────────────────
-  { path: "/auth/signin-eleve", priority: 0.8, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  // ⚠️ 21/08 : c'est `/auth/signin` qui est déclarée, pas `/auth/signin-eleve`.
+  // Cette dernière ne contient qu'un `redirect()` vers la première — le site
+  // annonçait donc à Google une adresse qui n'affiche rien, et qui menait de
+  // surcroît à une page alors en `noindex`. Une redirection ne se met pas au
+  // sitemap : on y met sa destination.
+  { path: "/auth/signin", priority: 0.8, changeFrequency: "monthly", lastMod: LASTMOD_SEO_AOUT },
 
   // ── INSTITUTIONNEL ─────────────────────────────────────────────────────────
   { path: "/pourquoi-eleveai",  priority: 0.75, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/qui-sommes-nous",   priority: 0.7,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
-  { path: "/tarifs",            priority: 0.7,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  // 0,7 → 0,85 le 21/08 : la page est devenue une destination de l'en-tête et
+  // porte désormais les trois offres. Elle n'est plus une annexe.
+  { path: "/tarifs",            priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_SEO_AOUT },
   { path: "/contact",           priority: 0.65, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   // 20/07 : les pages de la PHILOSOPHIE qui manquaient au sitemap (audit
   // Frédéric « qu'il n'oublie pas notre philosophie ») — la charte d'usage de

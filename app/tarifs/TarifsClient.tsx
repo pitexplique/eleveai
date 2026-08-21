@@ -58,8 +58,60 @@ const inclusFamille = [
   "Son nom dans les remerciements du site",
 ];
 
+/**
+ * LES TROIS PORTES — la seule chose d'IXL qui valait d'être reprise telle
+ * quelle : chez eux, la page d'entrée sépare Familles / Classes / Écoles avant
+ * de parler d'argent, et chaque porte a DEUX boutons — le prix, et « en savoir
+ * plus ».
+ *
+ * ⛔ Pas de sous-pages `/tarifs/familles` : les trois pages d'audience existent
+ * déjà (`/espace-parents`, `/espace-profs`, `/espace-ecoles`). En créer de
+ * nouvelles ferait deux pages du même sujet pour le même lecteur — Google en
+ * choisit une, rarement la bonne, et les deux perdent.
+ *
+ * ⭐ Ce que ces portes apportent au référencement : le texte des liens. « Pour
+ * les parents » → /espace-parents dit à Google et à Bing de quoi cette page
+ * parle, bien mieux qu'un mot-clé posé dessus.
+ */
+const portes = [
+  {
+    emoji: "🏠",
+    titre: "Pour les parents",
+    sousTitre: "Suivre son enfant à la maison",
+    prix: `${euros(PRIX_FAMILLE_AN)} par an, par famille`,
+    ancre: "#famille",
+    page: "/espace-parents",
+    pageLabel: "Ce que voient les parents",
+    gradient: "from-emerald-400 to-green-500",
+    anneau: "ring-emerald-100",
+  },
+  {
+    emoji: "🧑‍🏫",
+    titre: "Pour les enseignants",
+    sousTitre: "Voir sa classe sans corriger",
+    prix: `${euros(PRIX_CLASSE_ELEVE_AN)} par élève et par an`,
+    ancre: "#classe",
+    page: "/espace-profs",
+    pageLabel: "L'outil du professeur",
+    gradient: "from-sky-400 to-blue-500",
+    anneau: "ring-sky-100",
+  },
+  {
+    emoji: "🏫",
+    titre: "Pour les établissements",
+    sousTitre: "Tout le collège, et la vue du principal",
+    prix: `${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} par élève et par an`,
+    ancre: "#etablissement",
+    page: "/espace-ecoles",
+    pageLabel: "EleveAI dans un établissement",
+    gradient: "from-violet-400 to-purple-500",
+    anneau: "ring-violet-100",
+  },
+];
+
 const collectif = [
   {
+    id: "classe",
     nom: "Classe",
     badge: "🧑‍🏫 Un enseignant",
     prix: `${euros(PRIX_CLASSE_ELEVE_AN)} / élève / an`,
@@ -78,6 +130,7 @@ const collectif = [
     anneau: "ring-sky-100",
   },
   {
+    id: "etablissement",
     nom: "Établissement",
     badge: "🏫 Tout le collège",
     prix: `${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} / élève / an`,
@@ -180,8 +233,33 @@ export default function TarifsClient() {
   // branchement, un seul booléen change et la page s'ouvre d'elle-même.
   const venteOuverte = VENTE.ouverte;
 
+  // ⭐ LE SEUL GAIN SEO RÉEL DE CETTE PAGE. Les sitelinks ne se déclarent pas
+  // (Google les calcule), mais un bloc `FAQPage` permet aux questions de
+  // s'afficher DANS le résultat de recherche. Et ce qui est cherché, ce ne sont
+  // pas les tarifs — personne ne tape « tarif EleveAI » — ce sont les
+  // questions : « est-ce que c'est gratuit », « combien coûte… ».
+  // ⚠️ Les réponses doivent être MOT POUR MOT celles de la page : un balisage
+  // qui promet autre chose que ce qu'on lit est une raison de désindexation.
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+
   return (
     <main className="relative min-h-screen overflow-hidden text-slate-950">
+      <script
+        type="application/ld+json"
+        // Le `<` échappé : sans lui, une réponse contenant du HTML pourrait
+        // fermer la balise script.
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       {/* FOND */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <svg className="h-full w-full" viewBox="0 0 1440 1800" preserveAspectRatio="xMidYMid slice">
@@ -235,8 +313,43 @@ export default function TarifsClient() {
           </p>
         </section>
 
+        {/* ── LES TROIS PORTES ─────────────────────────────────────────── */}
+        <section className="grid gap-5 md:grid-cols-3">
+          {portes.map((p) => (
+            <div
+              key={p.titre}
+              className={`flex flex-col rounded-[2rem] border border-white bg-white/90 p-6 text-center shadow-xl ring-4 backdrop-blur transition hover:-translate-y-1 ${p.anneau}`}
+            >
+              <span className="text-5xl">{p.emoji}</span>
+              <h2
+                className={`mt-3 bg-gradient-to-r ${p.gradient} bg-clip-text text-xl font-black text-transparent`}
+              >
+                {p.titre}
+              </h2>
+              <p className="mt-1 flex-1 text-sm font-bold text-slate-600">{p.sousTitre}</p>
+              <p className="mt-3 text-sm font-black text-slate-900">{p.prix}</p>
+
+              <Link
+                href={p.ancre}
+                className={`mt-4 rounded-2xl bg-gradient-to-r ${p.gradient} px-5 py-3 text-sm font-black text-white shadow transition hover:-translate-y-0.5`}
+              >
+                Voir l&apos;offre
+              </Link>
+              <Link
+                href={p.page}
+                className="mt-2 rounded-2xl bg-white px-5 py-2.5 text-sm font-black text-slate-700 ring-1 ring-slate-200 transition hover:bg-slate-50"
+              >
+                {p.pageLabel}
+              </Link>
+            </div>
+          ))}
+        </section>
+
         {/* ── FAMILLE — la carte principale ────────────────────────────── */}
-        <section className="relative rounded-[2rem] border border-white bg-white/90 p-8 shadow-2xl ring-4 ring-emerald-100 backdrop-blur">
+        <section
+          id="famille"
+          className="relative scroll-mt-24 rounded-[2rem] border border-white bg-white/90 p-8 shadow-2xl ring-4 ring-emerald-100 backdrop-blur"
+        >
           <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-emerald-400 to-green-500 px-5 py-1.5 text-xs font-black text-white shadow-lg">
             🏠 Pour la maison
           </div>
@@ -372,7 +485,8 @@ export default function TarifsClient() {
             {collectif.map((o) => (
               <div
                 key={o.nom}
-                className={`flex flex-col rounded-[2rem] border border-white bg-white/90 p-6 shadow-xl ring-4 backdrop-blur transition hover:-translate-y-1 ${o.anneau}`}
+                id={o.id}
+                className={`flex scroll-mt-24 flex-col rounded-[2rem] border border-white bg-white/90 p-6 shadow-xl ring-4 backdrop-blur transition hover:-translate-y-1 ${o.anneau}`}
               >
                 <span className="self-start rounded-full bg-slate-100 px-3 py-1 text-xs font-black text-slate-700">
                   {o.badge}

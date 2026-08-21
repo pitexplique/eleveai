@@ -769,6 +769,27 @@ export default function Header() {
                   regard est celle qu'on lit en premier. Deux écrans, deux
                   hiérarchies contraires pour la même paire de boutons : c'est
                   réglé, l'inscription mène partout. */}
+              {/* ⭐ TARIFS DANS L'EN-TÊTE (21/08/2026). Elle n'était liée depuis
+                  AUCUN menu — seulement depuis neuf pages éparpillées. Deux
+                  conséquences : le visiteur qui se demande « combien ça coûte »
+                  n'avait aucun chemin, et Google, qui construit ses rubriques
+                  de marque à partir de la navigation, n'avait aucune raison de
+                  la retenir (vérifié dans la SERP du 21/08 : cinq rubriques,
+                  toutes issues du header, aucune pour les tarifs).
+                  ⚠️ Placée dans la branche VISITEUR seulement : un élève
+                  connecté n'a rien à faire là, et les robots ne sont jamais
+                  connectés — ils voient donc toujours ce lien. */}
+              <Link
+                prefetch={false}
+                href="/tarifs"
+                className={`hidden items-center rounded-full px-3 py-2 text-sm font-black transition lg:inline-flex ${
+                  paper
+                    ? "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10"
+                    : "text-white/85 hover:bg-white/15 hover:text-white"
+                }`}
+              >
+                Tarifs
+              </Link>
               <Link
                 prefetch={false}
                 href="/auth/signin?mode=eleve&inscription=1"
@@ -917,18 +938,34 @@ export default function Header() {
               /* Une seule porte ici : « Inscription » est déjà en pastille dans
                  la barre, deux centimètres plus haut et toujours visible, elle.
                  Celle-ci est pour qui revient. */
-              <Link
-                prefetch={false}
-                href="/auth/signin?mode=eleve"
-                onClick={() => setMobileOpen(false)}
-                className={`flex items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-black ${
-                  paper
-                    ? "border-[#1d1c16]/25 bg-white/60 text-[#1d1c16]"
-                    : "border-white/15 bg-white/5 text-white"
-                }`}
-              >
-                Connexion
-              </Link>
+              <div className="grid grid-cols-2 gap-2">
+                <Link
+                  prefetch={false}
+                  href="/auth/signin?mode=eleve"
+                  onClick={() => setMobileOpen(false)}
+                  className={`flex items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-black ${
+                    paper
+                      ? "border-[#1d1c16]/25 bg-white/60 text-[#1d1c16]"
+                      : "border-white/15 bg-white/5 text-white"
+                  }`}
+                >
+                  Connexion
+                </Link>
+                {/* Quatre visiteurs sur dix sont sur un téléphone : le lien
+                    « Tarifs » du bandeau large ne leur arrive jamais. */}
+                <Link
+                  prefetch={false}
+                  href="/tarifs"
+                  onClick={() => setMobileOpen(false)}
+                  className={`flex items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-black ${
+                    paper
+                      ? "border-[#1d1c16]/25 bg-white/60 text-[#1d1c16]"
+                      : "border-white/15 bg-white/5 text-white"
+                  }`}
+                >
+                  Tarifs
+                </Link>
+              </div>
             )}
 
             {eleve && !isStaff ? (

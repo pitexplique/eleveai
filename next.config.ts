@@ -70,9 +70,13 @@ const nextConfig = {
       // deux emplacements sur cinq pour le même public. Rien ne lui disait
       // laquelle est la bonne, puisque rien ne le disait nulle part.
       //
-      // `/enseignants` gagne : c'est celle que le header pointe, celle que la
-      // matrice propose, celle du sitemap, et la plus fournie (365 lignes
-      // contre 220 et 75).
+      // `/espace-profs` gagne : c'est celle du sitemap, et la plus fournie.
+      // ⚠️ Ce commentaire disait « /enseignants gagne » alors que les deux
+      // redirections ci-dessous font l'inverse — corrigé le 21/08, en
+      // constatant que Google affiche TOUJOURS les deux rubriques. Le 301 est
+      // en place depuis le 08/08 : il n'y a rien de plus à faire que patienter,
+      // les rubriques de marque sont ce qu'un moteur met le plus longtemps à
+      // recalculer.
       //
       // ⚠️ CE QU'ON PERD, ET OÙ LE RETROUVER : `/profs` racontait « vous
       // formulez une consigne → l'IA propose → vous jugez ». C'est exactement
