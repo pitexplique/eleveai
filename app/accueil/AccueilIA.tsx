@@ -104,102 +104,13 @@ export default function AccueilIA() {
               avec « les ressources » du titre. La Réunion y reste, en petit et
               après — inchangé. */}
           <header className="mb-6 text-center">
-            {/* ⭐ TI MARGO RESTE. Il est parti avec la manchette lors de la
-                refonte — il était dans le titre du journal. Or il n'appartient
-                pas au journal : c'est la figure d'EleveAI, dessinée, celle des
-                vidéos et des cahiers. Une page d'entrée peut être sobre sans
-                être anonyme.
-                Il a maigri de 16 px (07/08) : ce qu'on lui demande, c'est
-                d'être reconnu, pas d'occuper le premier écran. */}
-            <Image
-              src="/cahier-vacances/ti-margo.png"
-              alt="Ti Margo, le margouillat d'EleveAI, avec son crayon"
-              width={1122}
-              height={1402}
-              sizes="64px"
-              priority
-              className="mx-auto mb-2 h-14 w-auto sm:h-16"
-            />
-            {/* ⭐ L'ORIGINE PASSE AU-DESSUS DU TITRE (20/08/2026).
-                Elle était en bas de ce bloc, en `text-xs text-slate-500` : le
-                texte le plus petit ET le plus pâle de la page. C'est le seul
-                argument du site que personne d'autre ne peut recopier, et il
-                était rangé là où l'œil ne descend qu'après avoir décidé de
-                rester. Un badge le met sur le chemin du regard, avant le titre.
-                ⛔ AU SINGULIER, ET ÇA NE SE NÉGOCIE PAS : « par un enseignant ».
-                Le pluriel laisserait entendre une équipe pédagogique qui
-                n'existe pas — c'est une personne, et le dire est justement ce
-                qui rend la phrase vérifiable.
-                ⭐ ET L'ENSEIGNANT PASSE DEVANT L'ÎLE (20/08, deuxième passe).
-                Le badge disait « Conçu à La Réunion par un enseignant » : le
-                lieu d'abord, la personne ensuite. Or 86 % des inscrits sont de
-                métropole, et c'est le premier texte de la page — avant le
-                titre. Un parent de Lille qui lit « La Réunion » en tête risque
-                de se poser une question qu'il n'avait pas : « c'est régional,
-                ça suit le programme de chez moi ? » Exactement le piège des
-                quatre portes d'audience retirées du header le matin même : ne
-                jamais laisser quelqu'un se demander s'il est au bon endroit.
-                « Par un enseignant » est la moitié qui porte — c'est la seule
-                chose qu'un produit financé ne peut pas recopier, et elle est
-                vraie partout. L'île reste, en second : une texture, pas une
-                adresse où il faudrait habiter.
-                ⚠️ Les cahiers et le kit de survie gardent leur ordre à eux
-                (« conçu à La Réunion par un professeur, pour ses élèves ») :
-                là, le document qu'on tient a une histoire, et l'origine EST le
-                sujet. Ici, elle ne l'est pas.
-                ⭐ ET FINALEMENT LE BADGE EST SIGNÉ (20/08, troisième passe).
-                Deux objections de Frédéric, dans cet ordre, et la seconde annule
-                la première :
-                  1. « Conçu par un enseignant, il est tout seul ! » — le
-                     singulier ne rassurait pas, il inquiétait : un site qu'une
-                     personne peut arrêter.
-                  2. « Quoi que, Yvan Monka a fait tout ça tout seul, et bien
-                     d'autres ! » — exact, et ça retourne le diagnostic. Monka,
-                     M. Mathieu, Hedacademy : dans la pédagogie française,
-                     l'enseignant isolé n'est pas une faiblesse, c'est un genre,
-                     et c'est même le format le plus fiable du paysage.
-                Ce qui sonnait petit n'était donc pas d'ÊTRE seul, c'était d'être
-                ANONYME. « Un enseignant », article indéfini, ne désigne
-                personne. Monka n'est pas « un enseignant » : il est Yvan Monka —
-                un nom, quelqu'un qui répond de ce qu'il écrit.
-                ⛔ TOUJOURS PAS DE PLURIEL (l'interdit du 20/08 tient) : on ne
-                remplit pas le vide avec une équipe qui n'existe pas. On le
-                remplit avec le nom de la personne qui écrit vraiment — déjà
-                public, directeur de publication dans les mentions légales
-                (lib/legal/editeur.ts). Le badge ne révèle rien, il déplace
-                simplement la signature là où on la lit.
-                ⚠️ CE QUE ÇA ACHÈTE, ET CE QUE ÇA N'ACHÈTE PAS. Un nom inconnu
-                n'apporte aucune notoriété — il apporte une RESPONSABILITÉ : ce
-                site a un auteur identifiable. La notoriété, elle, se construit
-                en répétant le même nom partout pendant des années. Ce badge n'a
-                donc de sens que si le nom revient ailleurs (page « pourquoi »,
-                fiches, vidéos). S'il devait rester seul ici, il redeviendrait
-                décoratif — et « testé en classe » serait alors plus utile.
-                ⚠️ L'île reste dans le badge, mais en fin de phrase et rattachée
-                à la personne (« enseignant à La Réunion ») : c'est là où il
-                enseigne, plus une étiquette posée sur le site.
-                ⚠️ LES TROIS VERBES DE FRÉDÉRIC RESTENT en dessous, ils n'ont
-                pas été absorbés ici : « conçues, sélectionnées et vérifiées »
-                dit ce que sont les ressources, le badge dit d'où elles
-                viennent. La ligne du bas perd seulement « — à La Réunion », qui
-                vient de monter. */}
-            <p className="mb-2.5 flex justify-center">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-50 px-3 py-1 text-[13px] font-semibold text-teal-800">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5"
-                >
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-                Frédéric Lacoste, enseignant à La Réunion
-              </span>
-            </p>
+            {/* ⛔ RIEN AU-DESSUS DU TITRE (Frédéric, 21/08/2026).
+                Ti Margo puis le badge signé occupaient les deux premiers blocs
+                de la page : ~80 px à regarder avant la moindre question posée
+                à l'élève. Cet écran n'a qu'un travail — faire choisir une
+                classe et une matière — et tout ce qui passe devant ce choix le
+                retarde. Les deux ne sont pas supprimés : ils sont descendus
+                sous les cartes, juste avant le pied de page (voir plus bas). */}
             {/* ⭐ DEUX LIGNES, ET PAS DE DEUX-POINTS (Frédéric, 19/08).
                 Les deux-points faisaient de la première moitié l'annonce de la
                 seconde, alors que ce sont deux phrases : l'une dit ce qu'on
@@ -262,6 +173,53 @@ export default function AccueilIA() {
                 atteignable, à un geste plutôt qu'à zéro. */}
             <EntreeMatrice variante="page" />
           </Suspense>
+          </div>
+
+          {/* ⭐ TI MARGO ET LA SIGNATURE, DESCENDUS ICI (Frédéric, 21/08/2026).
+              Ils ouvraient la page, ils la ferment maintenant. Le premier écran
+              n'a qu'un travail — faire choisir une classe et une matière — et
+              ces deux blocs passaient devant ce choix : ~80 px à regarder avant
+              la moindre question posée à l'élève.
+              ⚠️ ILS SONT ENSEMBLE, EN UN SEUL BLOC, et ce n'est pas cosmétique :
+              une mascotte + un nom, ça se lit comme la signature d'un auteur.
+              En tête, le margouillat flottait seul au-dessus d'un titre — une
+              illustration. Posé contre le nom, il désigne quelqu'un.
+              ⛔ LE BADGE GARDE SON TEAL, il ne redevient PAS `text-slate-500`.
+              C'est exactement ce qu'il était avant le 20/08 : le texte le plus
+              petit ET le plus pâle de la page, rangé là où l'œil ne descend
+              qu'après avoir décidé de rester. On accepte de le redescendre, pas
+              de le repâlir — celui qui lit cette ligne a déjà passé les cartes,
+              il n'a plus à être convaincu avant de lire, mais il doit pouvoir
+              lire.
+              ⚠️ Ti Margo tombe à 40 px (56 puis 64 en tête) et perd `priority` :
+              il est sous le pli, il accompagne le nom au lieu de s'annoncer. */}
+          <div className="mt-10 flex flex-col items-center gap-2 border-t border-slate-100 pt-6">
+            <Image
+              src="/cahier-vacances/ti-margo.png"
+              alt="Ti Margo, le margouillat d'EleveAI, avec son crayon"
+              width={1122}
+              height={1402}
+              sizes="40px"
+              loading="lazy"
+              className="h-10 w-auto"
+            />
+            <p className="flex justify-center">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-50 px-3 py-1 text-[13px] font-semibold text-teal-800">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  className="h-3.5 w-3.5"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+                Frédéric Lacoste, enseignant à La Réunion
+              </span>
+            </p>
           </div>
 
           <footer className="pt-10">
