@@ -20,6 +20,13 @@ import type {
 
 import { getClasseNotions } from "@/lib/parcours/getClasseNotions";
 import { getDefiQuestionForNotion } from "@/lib/parcours/getDefiQuestionForNotion";
+import { getAnneesNotions, sansMarqueurAnnee } from "@/lib/tutor-v4/catalog";
+import {
+  filtrerNotionsParAnnee,
+  marqueurAnneeUtile,
+  normalizeAnnee,
+  type ParcoursAnnee,
+} from "@/lib/parcours/annee";
 import {
   getStatusLabel,
   isCorrectAnswer,
@@ -66,6 +73,27 @@ const classeLabels: Record<ParcoursClasse, string> = {
   stmg: "STMG",
   adulte: "Calculs du quotidien",
 };
+
+/**
+ * DEUX ANNÉES DANS UNE SEULE CLASSE — le parcours, à son tour (21/08/2026).
+ *
+ * Le coach a ces trois pastilles depuis le 18/08 ; le parcours, lui, tirait
+ * encore ses défis dans les 86 notions de la STMG d'un bloc. Un élève de
+ * première pouvait recevoir une loi binomiale ou un logarithme sans que rien
+ * ne le prévienne — et, à la différence du coach, il ne choisissait pas la
+ * ligne : elle lui tombait dessus.
+ *
+ * ⛔ Toujours pas deux classes : les suites commencent en première et se
+ * terminent en terminale. Une classe, une LISTE filtrée — ici avant le tirage.
+ *
+ * Le filtre lui-même vit dans `lib/parcours/annee.ts`, pour que le vérificateur
+ * mesure celui de la page et non une copie.
+ */
+const ANNEE_CHIPS: { id: ParcoursAnnee; label: string }[] = [
+  { id: "premiere", label: "1re STMG" },
+  { id: "terminale", label: "Tle STMG" },
+  { id: "cycle", label: "Les deux" },
+];
 
 const questionCountOptions = [
   {
@@ -157,11 +185,20 @@ export default function ParcoursClient() {
   // 6ᵉ. Il ne s'agit pas de se protéger d'un attaquant (il n'y a rien à
   // prendre) mais d'un lien mal écrit, qui casserait la page au lieu de
   // simplement ne rien faire.
+  // ⭐ `?annee=` — même lecture, même effet, même raison qu'au-dessus (⛔ pas
+  // `useSearchParams`). Le coach écrit ce paramètre : un lien qui vient de là
+  // garde l'année choisie en arrivant ici. Défaut : `premiere`, comme le coach.
+  const [annee, setAnnee] = useState<ParcoursAnnee>("premiere");
+
   useEffect(() => {
-    const demandee = new URLSearchParams(window.location.search).get("classe");
+    const params = new URLSearchParams(window.location.search);
+
+    const demandee = params.get("classe");
     if (demandee && (classes as string[]).includes(demandee)) {
       setClasse(demandee as ParcoursClasse);
     }
+
+    setAnnee(normalizeAnnee(params.get("annee")));
   }, []);
 
   const [started, setStarted] = useState(false);
@@ -179,7 +216,40 @@ export default function ParcoursClient() {
   const [saved, setSaved] = useState(false);
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
 
-  const notions = useMemo(() => getClasseNotions(classe), [classe]);
+  // `anneesNotions` vaut `null` pour toutes les autres classes : une classe =
+  // une année, les pastilles n'apparaissent pas et la liste ne bouge pas.
+  // ⚠️ Ce `null` n'est pas un repli, c'est « la question ne se pose pas ».
+  const anneesNotions = useMemo(() => getAnneesNotions(classe, "maths"), [classe]);
+
+  const toutesLesNotions = useMemo(() => getClasseNotions(classe), [classe]);
+
+  // LE FILTRE EST AVANT LE TIRAGE : `startParcours` pioche dans `notions`, donc
+  // une notion écartée ici ne peut pas revenir par la porte des questions.
+  const notions = useMemo(
+    () => filtrerNotionsParAnnee(toutesLesNotions, anneesNotions, annee),
+    [toutesLesNotions, anneesNotions, annee]
+  );
+
+  // Quand l'élève a choisi son année, le « (Tle) » collé au libellé n'apprend
+  // plus rien : la pastille active le dit déjà.
+  const libelleNotion = useMemo(
+    () =>
+      marqueurAnneeUtile(anneesNotions, annee)
+        ? sansMarqueurAnnee
+        : (label: string) => label,
+    [anneesNotions, annee]
+  );
+
+  const comptesAnnee = useMemo(() => {
+    if (!anneesNotions) return null;
+    let premiere = 0;
+    let terminale = 0;
+    for (const notion of toutesLesNotions) {
+      if (anneesNotions[notion.id] === "terminale") terminale += 1;
+      else premiere += 1;
+    }
+    return { premiere, terminale, cycle: premiere + terminale };
+  }, [anneesNotions, toutesLesNotions]);
 
   const scores = useMemo<ParcoursNotionScore[]>(() => {
     if (!submitted) return [];
@@ -234,7 +304,10 @@ export default function ParcoursClient() {
           mode: difficulteMode,
         })
       )
-      .filter((q): q is ParcoursQuestion => q !== null);
+      .filter((q): q is ParcoursQuestion => q !== null)
+      // Le libellé voyage avec la question jusqu'au bilan : on le nettoie ici,
+      // une fois, plutôt qu'à chacun des endroits qui l'affichent.
+      .map((q) => ({ ...q, notionLabel: libelleNotion(q.notionLabel) }));
 
     const selectedQuestions = shuffleArray(allQuestions).slice(
       0,
@@ -566,6 +639,56 @@ export default function ParcoursClient() {
             </div>
           </div>
 
+          {/* Année, à l'intérieur d'une classe qui en couvre deux (STMG). */}
+          {anneesNotions && comptesAnnee ? (
+            <div className="mt-6 rounded-3xl border border-sky-200 bg-sky-50/80 p-4">
+              <p className="text-sm font-black uppercase tracking-wide text-sky-700">
+                Ton année
+              </p>
+
+              <div className="mt-3 flex flex-wrap gap-2">
+                {ANNEE_CHIPS.map((chip) => {
+                  const actif = annee === chip.id;
+                  return (
+                    <button
+                      key={chip.id}
+                      type="button"
+                      onClick={() => {
+                        setAnnee(chip.id);
+                        resetParcours();
+                      }}
+                      aria-pressed={actif}
+                      className={[
+                        "inline-flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-black shadow-sm transition hover:-translate-y-0.5",
+                        actif
+                          ? "bg-sky-700 text-white ring-4 ring-yellow-300"
+                          : "bg-white text-sky-800 ring-1 ring-sky-200 hover:bg-sky-100",
+                      ].join(" ")}
+                    >
+                      {chip.label}
+                      <span
+                        className={[
+                          "rounded-full px-2 py-0.5 text-xs font-black",
+                          actif ? "bg-white/20 text-white" : "bg-sky-100 text-sky-800",
+                        ].join(" ")}
+                      >
+                        {comptesAnnee[chip.id]}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <p className="mt-3 text-sm font-bold leading-6 text-sky-900/80">
+                {annee === "terminale"
+                  ? "Ce qui est nouveau en terminale. Le programme de première reste au menu toute l'année : clique sur « Les deux » pour le revoir."
+                  : annee === "premiere"
+                    ? "Le programme de première. Les suites, elles, se terminent en terminale : elles sont sur l'autre pastille."
+                    : "Les deux années du cycle, dans l'ordre du programme."}
+              </p>
+            </div>
+          ) : null}
+
           <div className="mt-6">
             <p className="mb-3 text-sm font-black uppercase tracking-wide text-slate-700">
               2. Combien de questions ?
@@ -692,7 +815,7 @@ export default function ParcoursClient() {
 
                     <div>
                       <div className="font-black text-slate-950">
-                        {notion.label}
+                        {libelleNotion(notion.label)}
                       </div>
                       <div className="mt-1 text-xs font-bold text-slate-500">
                         {notion.id}
