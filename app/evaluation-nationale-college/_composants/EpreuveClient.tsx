@@ -520,7 +520,12 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                   className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.16em] shadow-sm ring-1 transition hover:brightness-105"
                   style={{ color: accent, boxShadow: `inset 0 0 0 1px ${accent}55` }}
                 >
-                  🖨️ Le sujet à imprimer
+                  {/* « PDF GRATUIT », les deux mots ensemble (Frédéric,
+                      21/08). Ce sont eux qui font tout le trafic des cahiers de
+                      vacances — « à imprimer » et « PDF gratuit » — et ils
+                      répondent aux deux questions que se pose celui qui
+                      cherche une feuille : sous quelle forme, et à quel prix. */}
+                  🖨️ Le sujet en PDF gratuit
                 </Link>
               )}
             </div>
@@ -715,7 +720,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                   className="group mt-1.5 block"
                 >
                   <span className="block font-serif text-lg font-black leading-snug group-hover:underline">
-                    🖨️ Télécharger le sujet en PDF — gratuit
+                    🖨️ Télécharger le sujet — PDF gratuit
                   </span>
                   <span className="mt-1 block max-w-2xl text-sm font-medium leading-6 text-[#1d1c16]/75">
                     L&apos;épreuve entière à imprimer, avec son corrigé : pour
@@ -727,7 +732,7 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                     className="mt-3 inline-flex items-center gap-2 rounded-xl border-2 bg-white px-4 py-2.5 text-sm font-black transition group-hover:brightness-105"
                     style={{ borderColor: accent, color: accent }}
                   >
-                    Voir le sujet à imprimer <span aria-hidden>→</span>
+                    Télécharger le PDF gratuit <span aria-hidden>→</span>
                   </span>
                 </Link>
               </div>
