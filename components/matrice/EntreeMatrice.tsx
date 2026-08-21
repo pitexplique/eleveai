@@ -120,8 +120,27 @@ const ROLES: { id: RoleId; label: string }[] = [
   { id: "direction", label: "Chef d'établissement" },
 ];
 
-/** Les douze classes, du CP à la Terminale — dans l'ordre de la scolarité. */
-const CLASSES = PROFILS.filter((p) => p.groupe === "eleve");
+/**
+ * Les douze classes, du CP à la Terminale — dans l'ordre de la scolarité —
+ * PUIS « Adulte », en treizième (21/08/2026).
+ *
+ * ⚠️ POURQUOI IL NE SORT PAS DU FILTRE. Le profil `adulte` porte
+ * `groupe: "adulte"` parce que c'en est un : on ne le tutoie pas. Mais c'est
+ * bien ICI qu'on le choisit, et non dans la rangée des rôles — le coach le
+ * modélise lui-même comme une CLASSE (`buildKnowledgeAdulteMaths`), et une
+ * cinquième pastille de rôle aurait dit le contraire de la base de
+ * connaissances. Le filtre dit donc ce qu'il sait dire, et la ligne d'après
+ * ajoute le cas qu'il ne sait pas.
+ *
+ * ⚠️ EN DERNIER, JAMAIS AU MILIEU. La rangée suit la scolarité ; « Adulte »
+ * n'y est pas une étape mais une sortie de route. Posé après la Terminale, il
+ * se lit comme « et sinon, moi » — glissé entre deux classes, il casserait la
+ * seule chose que cette rangée sait faire lire d'un coup d'œil : un ordre.
+ */
+const CLASSES = [
+  ...PROFILS.filter((p) => p.groupe === "eleve"),
+  ...PROFILS.filter((p) => p.id === "adulte"),
+];
 
 /**
  * ⭐ LE LIBELLÉ COURT DES TROIS CLASSES DE LYCÉE — DANS CETTE RANGÉE SEULEMENT
@@ -618,6 +637,24 @@ export default function EntreeMatrice({
 
   const exemples = useMemo(() => (profil ? exemplesPour(profil) : []), [profil]);
 
+  /**
+   * ⭐ L'INTITULÉ DE LA RANGÉE QUAND « ADULTE » EST ALLUMÉ (21/08/2026).
+   *
+   * `INTITULE_CLASSE` est indexé par RÔLE, et le rôle d'un adulte-apprenant est
+   * « eleve » (voir `roleDuProfil`) : il lisait donc « Ta classe » — tutoyé, et
+   * faux deux fois. Un adulte n'a pas de classe, et personne ne le tutoie
+   * ailleurs sur cet écran (`tutoie: false` bascule déjà la barre en
+   * « Décrivez votre besoin… »). C'était le dernier texte de la page à ne pas
+   * suivre le profil.
+   *
+   * ⚠️ IL CHANGE APRÈS LE CLIC, PAS AVANT — et c'est la seule sortie possible :
+   * la rangée mélange douze classes et un « Adulte », donc tant que rien n'est
+   * choisi, « Ta classe » reste la bonne question pour les douze treizièmes des
+   * gens qui la lisent. C'est le même moment où le tutoiement bascule.
+   */
+  const intituleClasse =
+    classe === "adulte" ? "Le niveau" : (role ? INTITULE_CLASSE[role] : null) ?? "La classe";
+
   const lancer = useCallback(
     (
       texte: string,
@@ -1106,6 +1143,17 @@ export default function EntreeMatrice({
           « Qui es-tu ? », voit quatre cases où il n'est pas, et repart. Cette
           ligne est la phrase que Frédéric disait à voix haute.
 
+          ⭐ RÉÉCRITE LE JOUR MÊME, ET C'EST LE FOND QUI A CHANGÉ. La première
+          version disait « choisissez la classe du niveau visé » — vrai tant
+          que la rangée n'avait que des classes scolaires. Depuis, « Adulte »
+          y est entré (voir CLASSES), et les DEUX portes ne mènent pas au même
+          endroit : « Adulte » ouvre les calculs du quotidien (budget, remises,
+          prix unitaire) et les rituels ; une classe scolaire ouvre le
+          programme. Un candidat au concours doit cliquer une CLASSE, pas
+          « Adulte » — l'épreuve porte sur les fractions et la
+          proportionnalité, pas sur le prix au kilo. Sans cette phrase, la
+          pastille la plus évidente serait la mauvaise pour lui.
+
           ⚠️ ELLE VOUVOIE au milieu d'un écran qui tutoie, et c'est voulu :
           elle ne s'adresse qu'à l'adulte. Le reste de la page parle à l'élève,
           et `tutoie` vaut d'ailleurs `true` ici (sans classe, `profil` est nul).
@@ -1120,8 +1168,9 @@ export default function EntreeMatrice({
           qui n'ont pas encore répondu — après, elle disparaît. */}
       {role === "eleve" && !classe && (
         <p className="mt-2 text-xs leading-snug text-slate-600 sm:ml-36">
-          Adulte&nbsp;? Reprendre les bases, préparer un concours&nbsp;:
-          choisissez la classe du niveau visé.
+          Adulte&nbsp;? «&nbsp;Adulte&nbsp;» pour les calculs du quotidien et
+          les rituels&nbsp;; une classe scolaire pour reprendre les bases ou
+          préparer un concours.
         </p>
       )}
 
@@ -1131,11 +1180,11 @@ export default function EntreeMatrice({
           fait exister leurs matières, leur guide de survie et la porte du
           coach. */}
       {role && ROLES_AVEC_CLASSE.has(role) && (
-        <Etape intitule={INTITULE_CLASSE[role] ?? "La classe"} surAccueil={surAccueil}>
+        <Etape intitule={intituleClasse} surAccueil={surAccueil}>
           <div
             className="rangee-defilante gap-1 sm:gap-1.5"
             role="group"
-            aria-label={INTITULE_CLASSE[role] ?? "La classe"}
+            aria-label={intituleClasse}
           >
             {CLASSES.map((c) => {
               const actif = classe === c.id;
@@ -1461,8 +1510,25 @@ export default function EntreeMatrice({
               {question.trim()
                 ? "Je n'ai pas bien compris la demande — voici par où "
                 : "Par où "}
-              {p.tutoie ? "tu peux" : "vous pouvez"} commencer en{" "}
-              <span className="text-[#1d1c16]">{labelClasseAdulte ?? p.label}</span>.
+              {p.tutoie ? "tu peux" : "vous pouvez"} commencer
+              {/* ⭐ « EN ADULTE » NE VEUT RIEN DIRE (21/08/2026) — exactement la
+                  faute que la note de `labelClasseAdulte` signale pour
+                  « en Parent », et qui est revenue par l'autre bout : là-bas un
+                  RÔLE tombait dans un gabarit écrit pour un niveau ; ici c'est
+                  un profil rangé DANS la rangée des niveaux qui n'en est pas un.
+                  « en CM2 », « en Terminale » se disent ; « en Adulte », non.
+                  ⚠️ On coupe la queue de la phrase au lieu de chercher un mot à
+                  y mettre : « Par où vous pouvez commencer. » est une phrase
+                  entière et vraie. Inventer « en vie courante » nommerait un
+                  niveau que la pastille ne porte pas. */}
+              {profil === "adulte" ? (
+                "."
+              ) : (
+                <>
+                  {" "}
+                  en <span className="text-[#1d1c16]">{labelClasseAdulte ?? p.label}</span>.
+                </>
+              )}
             </p>
           ) : (
             <p className="mb-2.5 text-center text-xs text-[#1d1c16]/65">

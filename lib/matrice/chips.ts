@@ -31,13 +31,44 @@ export type ChipDynamique = {
  * « M'entraîner », un professeur « Trouver une ressource » — même intention,
  * trois vocabulaires. `defaut` sert dès qu'un profil n'a pas son mot à lui.
  */
-const LIBELLES: Record<Intention, { defaut: string; primaire?: string; adulte?: string }> = {
-  comprendre: { defaut: "Comprendre une notion", primaire: "Comprendre", adulte: "Comprendre une notion" },
+/**
+ * ⭐ `apprenant` AJOUTÉ LE 21/08/2026 — ET IL CORRIGE UNE AMBIGUÏTÉ DU MOT
+ * « adulte » DANS CE FICHIER.
+ *
+ * `adulte` ici a toujours voulu dire « un adulte qui parle de QUELQU'UN
+ * D'AUTRE » : le parent, le professeur, le chef d'établissement. D'où « Trouver
+ * une activité » (pour l'enfant) et « Faire le point » (sur lui). C'était sans
+ * ambiguïté tant que tous les adultes du site regardaient un enfant.
+ *
+ * Le profil `adulte` en casse la règle : il vient travailler POUR LUI. Sans ce
+ * troisième mot, il héritait de `groupe === "adulte"` et lisait « Préparer une
+ * évaluation » — celle de son fils. Constaté au rendu le 21/08.
+ */
+const LIBELLES: Record<
+  Intention,
+  { defaut: string; primaire?: string; adulte?: string; apprenant?: string }
+> = {
+  comprendre: {
+    defaut: "Comprendre une notion",
+    primaire: "Comprendre",
+    adulte: "Comprendre une notion",
+    apprenant: "Reprendre les bases",
+  },
   entrainer: { defaut: "M'entraîner", primaire: "M'entraîner", adulte: "Trouver une activité" },
   // « Teste-toi » — les parcours. Un adulte ne se teste pas lui-même : il vient
   // voir où en est quelqu'un, d'où « Faire le point ».
   tester: { defaut: "Teste-toi", primaire: "Teste-toi", adulte: "Faire le point" },
-  preparer: { defaut: "Préparer un contrôle", primaire: "Me préparer", adulte: "Préparer une évaluation" },
+  // ⛔ L'APPRENANT NE LIT PAS « Préparer un concours », et c'est un interdit,
+  // pas un oubli : derrière cette intention il n'y a que le coach maths adulte,
+  // c'est-à-dire les « Calculs du quotidien » — budget, remises, prix au kilo.
+  // Aucune épreuve de concours ne porte là-dessus. La chip promettrait une
+  // porte que la ressource n'ouvre pas.
+  preparer: {
+    defaut: "Préparer un contrôle",
+    primaire: "Me préparer",
+    adulte: "Préparer une évaluation",
+    apprenant: "Me préparer",
+  },
   corriger: { defaut: "Corriger une erreur", primaire: "Corriger une erreur" },
   decouvrir: { defaut: "Découvrir", primaire: "Découvrir" },
   rituel: { defaut: "Cinq minutes", primaire: "Un petit défi" },
@@ -54,6 +85,9 @@ function libelle(intention: Intention, profil: ProfilId | null): string {
   // celui d'un profil qu'on aurait supposé.
   if (!profil) return l.defaut;
   const p = getProfil(profil);
+  // ⚠️ AVANT le test de `groupe` : l'apprenant adulte EST du groupe « adulte »,
+  // et il tomberait sinon sur les mots écrits pour le parent (voir LIBELLES).
+  if (profil === "adulte") return l.apprenant ?? l.defaut;
   if (p.groupe === "adulte") return l.adulte ?? l.defaut;
   if (p.cycle === "primaire") return l.primaire ?? l.defaut;
   return l.defaut;

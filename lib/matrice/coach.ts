@@ -46,6 +46,14 @@ export const CLASSE_COACH: Record<ProfilId, string | null> = {
   // de classe en deux clics dans le coach.
   premiere: "premiere",
   terminale: "terminale-spe",
+  // ⭐ 21/08/2026 — LA SEULE LIGNE DE CE TABLEAU QUI N'AIT RIEN À TRADUIRE.
+  // La matrice dit « adulte », le coach dit « adulte » : même mot des deux
+  // côtés, parce que la classe existait dans le coach AVANT d'exister ici
+  // (`buildKnowledgeAdulteMaths`, section « Adultes » du sélecteur, libellée
+  // « Calculs du quotidien »). C'est la matrice qui rattrapait son retard.
+  // ⚠️ Et c'est bien une valeur de la whitelist `normalizeClasse` — sans quoi
+  // elle retomberait EN SILENCE sur la 6ᵉ, ce que dit le piège n°1 en tête.
+  adulte: "adulte",
   parent: null,
   prof: null,
   direction: null,

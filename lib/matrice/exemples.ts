@@ -23,6 +23,16 @@ import type { ProfilId } from "./types";
 
 /** Les adultes n'ont pas de programme : leurs exemples restent écrits. */
 const EXEMPLES_ADULTES: Record<string, string[]> = {
+  // ⭐ 21/08/2026 — SANS CETTE LIGNE, LE CHAMP D'UN ADULTE RESTAIT MUET.
+  // `exemplesPour` rend `EXEMPLES_ADULTES[profil] ?? []` pour tout le groupe
+  // adulte : un profil absent de cette table ne reçoit pas le défaut d'un
+  // cycle, il reçoit le vide. Et le commentaire en tête du fichier dit ce que
+  // ça coûte — devant un champ vide, personne ne tape rien.
+  // ⚠️ Les trois pointent chacun vers une ressource réellement taguée
+  // « adulte » : la remise vient des « Calculs du quotidien » du coach, les
+  // accords de la dictée du jour, les cinq mots de l'anglais du jour. Un
+  // exemple soufflé qui n'ouvre sur rien serait pire qu'un champ vide.
+  adulte: ["calculer une remise", "revoir mes accords", "cinq mots d'anglais par jour"],
   parent: ["ma fille passe en 6e", "aider mon enfant en lecture", "voir où il en est"],
   prof: ["une activité pour ma classe", "où en sont mes élèves", "différencier en géométrie"],
   direction: ["où en sont mes classes", "préparer le bilan de rentrée", "gérer les accès"],

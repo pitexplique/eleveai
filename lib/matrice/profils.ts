@@ -34,6 +34,22 @@ export const PROFILS: Profil[] = [
   { id: "seconde", label: "Seconde", cycle: "lycee", groupe: "eleve", niveaux: ["seconde", "3e"], tutoie: true },
   { id: "premiere", label: "Première", cycle: "lycee", groupe: "eleve", niveaux: ["premiere", "seconde"], tutoie: true },
   { id: "terminale", label: "Terminale", cycle: "lycee", groupe: "eleve", niveaux: ["terminale", "premiere"], tutoie: true },
+  /**
+   * ⭐ L'ADULTE QUI VIENT TRAVAILLER POUR LUI (21/08/2026).
+   *
+   * ⚠️ `groupe: "adulte"` ET POURTANT IL S'AFFICHE DANS LA RANGÉE DES CLASSES.
+   * Les deux sont vrais et ne se contredisent pas : `groupe` dit ce qu'il EST
+   * (un adulte, qu'on ne tutoie pas), la rangée dit où on le CHOISIT. C'est
+   * pour ça que `CLASSES` ne se contente plus de filtrer sur `groupe` dans
+   * EntreeMatrice — il l'ajoute explicitement.
+   *
+   * ⛔ `niveaux: ["adulte"]` ET RIEN D'AUTRE — pas de repli sur la 6ᵉ ni sur le
+   * CM2. Un repli déverserait tout l'inventaire scolaire, écrit pour des
+   * enfants et tutoyé, sur quelqu'un qui n'a rien demandé de tel. Cinq
+   * ressources ont un vrai niveau adulte (voir ressources.ts) : ce sont
+   * celles-là qu'il doit voir, et elles seules.
+   */
+  { id: "adulte", label: "Adulte", cycle: "adulte", groupe: "adulte", niveaux: ["adulte"], tutoie: false },
   { id: "parent", label: "Parent", cycle: "adulte", groupe: "adulte", niveaux: ["parent"], tutoie: false },
   { id: "prof", label: "Professeur", cycle: "adulte", groupe: "adulte", niveaux: ["prof"], tutoie: false },
   { id: "direction", label: "Chef d'établissement", cycle: "adulte", groupe: "adulte", niveaux: ["direction"], tutoie: false },
@@ -95,7 +111,29 @@ const CHIPS_PAR_CYCLE: Record<Cycle | "prof" | "direction" | "parent", Chip[]> =
     { label: "Revoir mes prérequis", intention: "corriger" },
     { label: "Me challenger", intention: "decouvrir" },
   ],
-  adulte: [],
+  /**
+   * ⭐ LE CYCLE ADULTE N'EST PLUS VIDE (21/08/2026).
+   *
+   * ⛔ CES LIBELLÉS SONT RECOPIÉS DE `LIBELLES` DANS chips.ts, AU CARACTÈRE
+   * PRÈS, et ce n'est pas une redondance qu'on peut « nettoyer » à la légère :
+   * `moteur.ts` retrouve l'intention d'une chip CLIQUÉE en comparant son
+   * libellé à cette liste (`chipsPour(...).find(c => c.label === chip)`).
+   * Les deux tables qui divergent d'une majuscule, et la chip devient muette —
+   * elle s'affiche, on clique, rien ne se passe. Les autres cycles sont déjà
+   * tenus d'accord de la même façon ; changer un mot ici oblige à le changer
+   * là-bas, et réciproquement.
+   *
+   * ⚠️ Elles sont ensuite FILTRÉES par `chipsDisponibles` contre l'inventaire
+   * réel : celles dont aucune ressource adulte ne porte l'intention ne
+   * s'affichent pas. Aucune ne peut donc ouvrir sur du vide.
+   */
+  adulte: [
+    { label: "Cinq minutes", intention: "rituel" },
+    { label: "Reprendre les bases", intention: "comprendre" },
+    { label: "M'entraîner", intention: "entrainer" },
+    { label: "Corriger une erreur", intention: "corriger" },
+    { label: "Me préparer", intention: "preparer" },
+  ],
   parent: [
     { label: "Aider mon enfant", intention: "comprendre" },
     { label: "Trouver une activité", intention: "entrainer" },
@@ -129,7 +167,12 @@ const EXEMPLES: Record<Cycle | "prof" | "direction" | "parent", string[]> = {
   primaire: ["je sais pas compter jusqu'à 100", "j'ai du mal à lire", "un jeu de maths"],
   college: ["j'ai rien compris aux fractions", "contrôle de maths demain", "je veux m'entraîner en conjugaison"],
   lycee: ["je bloque sur les dérivées", "réviser les suites avant le bac", "revoir mes prérequis de seconde"],
-  adulte: [],
+  // ⚠️ CE N'EST PAS CETTE TABLE QUE L'ÉCRAN LIT. EntreeMatrice importe
+  // `exemplesPour` depuis lib/matrice/exemples.ts, pas d'ici — celui-ci n'a
+  // plus d'appelant depuis que les exemples se déduisent des notions au
+  // programme. On la tient quand même d'accord avec l'autre plutôt que de
+  // laisser deux réponses à la même question, dont une fausse.
+  adulte: ["calculer une remise", "revoir mes accords", "cinq mots d'anglais par jour"],
   parent: ["ma fille passe en 6e", "aider mon enfant en lecture", "comment on explique les fractions"],
   prof: ["une activité de proportionnalité en 5e", "différencier en géométrie", "évaluer mes 4e"],
   direction: ["l'activité de mes classes", "où sont les difficultés", "préparer le bilan de rentrée"],

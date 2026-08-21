@@ -93,7 +93,27 @@ const PORTES_ELEVE_DES_LA_6E = ["type:coach", "*", "photo-cours"];
  */
 const PORTES_ELEVE_CYCLE_3 = ["coach-maths", "coach-francais", "dictee-du-jour"];
 
+/**
+ * ⭐ L'ADULTE — LE RITUEL D'ABORD, LE COACH ENSUITE (21/08/2026).
+ *
+ * C'est l'ordre inverse de celui de l'élève, et c'est délibéré. Un élève vient
+ * avec un devoir : le coach est sa porte. Un adulte revient tous les jours ou
+ * ne revient pas — cinq minutes de calcul, cinq mots, cinq lignes de dictée.
+ * Le rituel est ce qui le ramène ; le coach est ce qu'il ouvre une fois qu'il
+ * est revenu.
+ *
+ * ⚠️ AUCUN « * » : à quatre ressources taguées, le joker n'aurait rien à
+ * tirer. On nomme les trois, et la quatrième (l'espagnol du jour) sort par le
+ * score dès qu'on clique sa matière.
+ * ⛔ PAS DE `coach-francais` : le coach n'a PAS de classe adulte en français,
+ * et `normalizeClasse` retomberait EN SILENCE sur la 6ᵉ (voir le piège n°1 de
+ * coach.ts). Un adulte y trouverait le français d'un sixième sans qu'on le
+ * prévienne. C'est le seul trou de l'étagère, et il est connu.
+ */
+const PORTES_ADULTE = ["calcul-rapide", "dictee-du-jour", "coach-maths"];
+
 export const PORTES_ECRITES: Partial<Record<ProfilId, string[]>> = {
+  adulte: PORTES_ADULTE,
   parent: ["espace-parents", "coach-maths", "photo-cours"],
   cm1: PORTES_ELEVE_CYCLE_3,
   cm2: PORTES_ELEVE_CYCLE_3,
@@ -123,7 +143,13 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // l'enfant, exactement comme le professeur avant le 08/08. Un parent ne
     // vient pas s'entraîner pour lui : il vient voir ce que son enfant fait,
     // et refaire une question avec lui.
-    niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "prof", "parent"],
+    // ⭐ « adulte » AJOUTÉ LE 21/08/2026, et il ne s'agit pas d'un repli sur la
+    // 6ᵉ : le coach a sa PROPRE classe adulte, « Calculs du quotidien » —
+    // 24 micros (budget, prix unitaire, comparer deux offres, remises, doses,
+    // horaires, lire un tableau) et une banque de 861 lignes, écrites avant
+    // que la matrice sache les proposer. Elles étaient atteignables seulement
+    // en ouvrant le sélecteur du coach à la main.
+    niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "adulte", "prof", "parent"],
     matiere: "maths",
     notions: ["*"],
     // « preparer » aussi : un élève qui a un contrôle vendredi vient s'entraîner
@@ -429,9 +455,15 @@ export const RESSOURCES: RessourceEleveAI[] = [
     //      page sautait de la 3e à la Terminale alors que le coach couvre tout.
     //   ⭐ « parent » = le mode « Calculs du quotidien », écrit pour des
     //      adultes — souvent celui qui est assis à côté de l'enfant.
+    //   ⭐ « adulte » ENTRE LE 21/08/2026, et c'est la même banque que
+    //      « parent » — le mode « Calculs du quotidien » de
+    //      CalculRapideClient.tsx. La ligne du dessus disait déjà « écrit pour
+    //      des adultes » : il manquait simplement le profil pour le dire en
+    //      face. On garde « parent » : le parent assis à côté de l'enfant y a
+    //      toujours droit, et il n'arrive pas par la même porte.
     niveaux: [
       "cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e",
-      "seconde", "premiere", "terminale", "parent",
+      "seconde", "premiere", "terminale", "adulte", "parent",
     ],
     matiere: "maths",
     notions: ["calcul"],
@@ -466,7 +498,12 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // compte, et le sélecteur « 🎓 Ta classe » couvre déjà CP → Terminale,
     // donc un adulte tombe sur le bon niveau quel que soit l'enfant ou la
     // classe dont il parle.
-    niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "prof", "parent"],
+    // ⭐ « adulte » AJOUTÉ LE 21/08/2026, et pour une raison différente des
+    // autres : la dictée n'a PAS de niveau adulte, elle n'en a pas besoin. Sa
+    // source par défaut est le « mélange », qui ne demande aucune classe — un
+    // adulte s'en sert tel quel, et c'est le rituel d'orthographe que
+    // cherchent les candidats aux concours.
+    niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "adulte", "prof", "parent"],
     // ⭐ ELLE RESTE « FRANÇAIS », ET C'EST MESURÉ (16/08). Passée en
     // `transversal` pour être trouvable au-delà du français, elle a coûté plus
     // qu'elle ne rapportait : `transversal` est un JOKER, pas une compétence,
@@ -502,6 +539,10 @@ export const RESSOURCES: RessourceEleveAI[] = [
     testeeAvec: "Collège du Dimitile",
   },
   {
+    // ⭐ LE RITUEL LE PLUS PRÊT POUR UN ADULTE DU SITE (constaté le 21/08/2026).
+    // Il ne se range pas par classe scolaire mais par CADRE EUROPÉEN — « du
+    // niveau A1 au B2, choisis ton niveau ». Un adulte y entre donc sans avoir
+    // à se déclarer en 4ᵉ : la page ne lui demande rien qu'il ne sache dire.
     id: "anglais-du-jour",
     titre: "L'anglais du jour",
     promesse: "Cinq mots par jour, entendus et écrits.",
@@ -517,7 +558,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // ⛔ L'ESPAGNOL NE DESCEND PAS, et ce n'est pas un oubli : Frédéric a
     // tranché le 06/08 qu'au primaire la LV1 est l'anglais et rien d'autre.
     // Une ligne suffira le jour où il en décidera autrement.
-    niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
+    niveaux: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "adulte"],
     matiere: "anglais",
     notions: ["anglais"],
     intentions: ["rituel"],
@@ -532,7 +573,10 @@ export const RESSOURCES: RessourceEleveAI[] = [
     url: "/espagnol-du-jour",
     // 6ᵉ incluse, comme le coach : voir la note sur `coach-espagnol`.
     // Cinq mots par jour ne demandent aucun prérequis de programme.
-    niveaux: ["6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
+    // ⭐ « adulte » AJOUTÉ LE 21/08/2026, même raison que l'anglais du jour :
+    // le rituel se range par cadre européen, pas par classe. Et cette
+    // phrase-là — « aucun prérequis de programme » — était déjà l'argument.
+    niveaux: ["6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "adulte"],
     matiere: "espagnol",
     notions: ["espagnol"],
     intentions: ["rituel"],

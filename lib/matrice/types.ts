@@ -20,6 +20,15 @@ export type ProfilId =
   | "seconde"
   | "premiere"
   | "terminale"
+  // ⭐ 21/08/2026 — LE TREIZIÈME NIVEAU, ET IL N'EST PAS UN RÔLE.
+  // « adulte » se range ICI, avec les classes, et non à côté de parent/prof/
+  // direction : le coach le modélise déjà comme une CLASSE (`Classe` dans
+  // lib/tutor-v4/catalog.ts), avec son socle `knowledge/maths/adulte` et sa
+  // banque de 861 lignes. La matrice dit maintenant la même chose que la base
+  // de connaissances, au lieu de la contredire.
+  // ⚠️ Ce n'est PAS « un adulte » au sens de parent/prof/direction — ceux-là
+  // parlent DE quelqu'un d'autre. Celui-ci vient travailler pour lui.
+  | "adulte"
   | "parent"
   | "prof"
   | "direction";
