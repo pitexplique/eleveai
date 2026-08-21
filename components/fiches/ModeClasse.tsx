@@ -57,6 +57,15 @@ export type ClasseSlide = {
   titre: string;
   badge: string;
   section: ClasseSection;
+  /**
+   * Le DESSIN de la slide, projeté à côté du texte.
+   *
+   * ⛔ Ajouté le 20/08/2026. Le mode classe était resté un diaporama de texte
+   * pendant que les fiches devenaient visuelles : aucune section ne pouvait
+   * porter une figure, alors que le prof projette justement pour MONTRER.
+   * Frédéric : « le mode classe est vraiment essentiel pour les profs ».
+   */
+  schema?: ReactNode;
 };
 
 const BTN_REVELER =
@@ -395,11 +404,24 @@ export default function ModeClasse({
               {index + 1} / {slides.length}
             </p>
           </div>
-          <Section
-            section={slide.section}
-            revealed={revealed}
-            reveal={() => setRevealed(true)}
-          />
+          {slide.schema ? (
+            // Le dessin à gauche, le texte à droite : en vidéoprojection, la
+            // figure est ce qu'on regarde, elle prend la moitié de l'écran.
+            <div className="grid gap-10 lg:grid-cols-2">
+              <div className="mx-auto w-full max-w-xl [&_svg]:w-full">{slide.schema}</div>
+              <Section
+                section={slide.section}
+                revealed={revealed}
+                reveal={() => setRevealed(true)}
+              />
+            </div>
+          ) : (
+            <Section
+              section={slide.section}
+              revealed={revealed}
+              reveal={() => setRevealed(true)}
+            />
+          )}
         </div>
       </section>
     </div>

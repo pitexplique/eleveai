@@ -34,6 +34,7 @@ import {
 } from "lucide-react";
 import { useEleve } from "@/context/EleveContext";
 import ModeClasse, { type ClasseSlide } from "@/components/fiches/ModeClasse";
+import { slidesDepuisFiche } from "@/lib/fiches/slidesDepuisFiche";
 import Flashcards from "@/components/fiches/Flashcards";
 import VideoNotion from "@/components/fiches/VideoNotion";
 import EncartsFiche from "@/components/fiches/EncartsFiche";
@@ -71,8 +72,20 @@ export default function FicheCoursClient({
   slides,
 }: {
   fiche: FicheCoursData;
+  /**
+   * ⛔ N'EST PLUS LA SOURCE DU MODE CLASSE (20/08/2026). Les tableaux de slides
+   * écrits à la main dans chaque fiche étaient un second contenu, figé : ils ne
+   * montraient ni les propriétés, ni aucun dessin, et divergeaient dès qu'on
+   * enrichissait la fiche. Le diaporama se fabrique désormais depuis la donnée
+   * (`slidesDepuisFiche`), donc il est complet par construction.
+   *
+   * La prop reste acceptée pour ne casser aucune page ; elle ne sert plus qu'à
+   * DÉSACTIVER le mode classe en passant un tableau vide (les fiches IA sans
+   * slides le faisaient déjà).
+   */
   slides: ClasseSlide[];
 }) {
+  const slidesProjetees = slides.length === 0 ? [] : slidesDepuisFiche(fiche);
   const { eleve } = useEleve();
   const role = eleve?.type_utilisateur ?? null;
   const estStaff = role === "prof" || role === "principal" || role === "boss";
@@ -581,8 +594,8 @@ export default function FicheCoursClient({
                 Composer ma fiche
               </button>
             )}
-            {slides.length > 0 && (
-              <ModeClasse sousTitre={`${fiche.titre} - ${libelleClasse(fiche.classe)}`} slides={slides} />
+            {slidesProjetees.length > 0 && (
+              <ModeClasse sousTitre={`${fiche.titre} - ${libelleClasse(fiche.classe)}`} slides={slidesProjetees} />
             )}
             <button
               type="button"
