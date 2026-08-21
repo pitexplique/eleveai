@@ -6,6 +6,82 @@
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+
+// LA GRILLE DE CENT CASES : « pour cent », litteralement. C'est le canvas
+// `fraction` en modele `grid` (lib/canvas/CATALOGUE.md) — 10 x 10, on colorie p
+// cases, et l'eleve VOIT ce que veut dire « sur 100 ». Cette fiche etait la plus
+// depouillee du lot : aucune figure nulle part, ni definition, ni proprietes,
+// ni exemples.
+const grille = (p: number) => (
+  <CanvasRenderer
+    figure={{
+      kind: "fraction",
+      model: "grid",
+      grid: { rows: 10, cols: 10, shaded: p },
+      fraction: { numerator: p, denominator: 100, label: p + " %" },
+      display: { showLabel: true, showFraction: true },
+    }}
+  />
+);
+
+// Une part PRELEVEE sur une quantite reelle : la grille dit ce qu'EST un
+// pourcentage, la barre dit ce qu'il DONNE sur 45, sur 80 ou sur 25 eleves.
+// Les parts sont a l'echelle depuis le 20/08.
+const part = (
+  titre: string,
+  total: string,
+  pris: string,
+  labelPris: string,
+  reste: string,
+  question: string
+) => (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      title: titre,
+      total,
+      parts: [
+        { label: labelPris, value: pris },
+        { label: "le reste", value: reste },
+      ],
+      questionLabel: question,
+      size: { width: 320, height: 175 },
+    }}
+  />
+);
+
+// Le tableau de proportionnalite : un pourcentage garde la meme part quelle que
+// soit la quantite — ca ne se voit que sur PLUSIEURS colonnes.
+const tableau = (values: (number | string)[][], rowLabels: string[]) => (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_proportionnalite",
+      rows: values.length,
+      cols: values[0].length,
+      rowLabels,
+      values: values.map((row) => row.map((v) => String(v))),
+      missing: [],
+      highlightedCells: [],
+      display: { showRowLabels: true, showColLabels: false, showGrid: true },
+    }}
+  />
+);
+
+// Deux dessins empiles (REGLES.md 2 ter : dans une carte, on empile) : une
+// propriete qui oppose deux gestes a besoin des deux.
+const duo = (haut: React.ReactNode, hautLabel: string, bas: React.ReactNode, basLabel: string) => (
+  <div className="space-y-2">
+    <div>
+      {haut}
+      <p className="mt-1 text-center text-xs font-black text-rose-700">{hautLabel}</p>
+    </div>
+    <div>
+      {bas}
+      <p className="mt-1 text-center text-xs font-black text-emerald-700">{basLabel}</p>
+    </div>
+  </div>
+);
 
 const pieges = [
   "Oublier de diviser par 100 : un pourcentage, c'est toujours sur 100.",
@@ -78,21 +154,34 @@ export const fichePourcentages5e: FicheCoursData = {
     texte:
       "Un pourcentage est une proportion exprimée sur 100 : écrire p %, c'est écrire la fraction p / 100. Prendre p % d'une quantité, c'est en prendre la fraction p / 100.",
   },
+  figure: {
+    schema: grille(25),
+    legende:
+      "25 % : sur cent cases, on en colorie vingt-cinq. C'est ce que dit le mot « pour cent ».",
+  },
   proprietes: [
     {
       titre: "Prendre p % = multiplier par p / 100",
       texte:
         "Prendre p % d'un nombre revient à le multiplier par p / 100. Par exemple, prendre 20 % de 45, c'est calculer 45 × 20 / 100 = 9.",
+      schema: part("20 % de 45", "45", "9", "on prend", "36", "45 x 20 / 100 = 9"),
     },
     {
       titre: "Un cas de proportionnalité",
       texte:
         "Appliquer un pourcentage, c'est une situation de proportionnalité : la part reste la même quelle que soit la quantité. 40 %, c'est 40 sur 100, mais aussi 20 sur 50 ou 10 sur 25.",
+      schema: tableau([[100, 50, 25], [40, 20, 10]], ["Total", "40 % de ce total"]),
     },
     {
       titre: "Réduction et augmentation",
       texte:
         "Pour une réduction de p %, on calcule la part enlevée (prix × p / 100), puis on la soustrait au prix de départ. Pour une augmentation de p %, on calcule la part de la même façon, puis on l'ajoute.",
+      schema: duo(
+        part("60 € avec −25 %", "60 € au départ", "15", "on enlève", "45", "60 − 15 = 45 € à payer"),
+        "réduction : on soustrait la part",
+        part("60 € avec +25 %", "75 € à la fin", "60", "prix de départ", "15", "60 + 15 = 75 €"),
+        "augmentation : on ajoute la part"
+      ),
     },
   ],
   reel: {
@@ -113,36 +202,43 @@ export const fichePourcentages5e: FicheCoursData = {
     {
       titre: "Comprendre",
       texte: "p % signifie « p sur 100 ». Par exemple 20 % = 20 / 100 = 0,2.",
+      schema: grille(20),
     },
     {
       titre: "Calculer",
       texte: "Pour prendre p % d'un nombre N, on calcule N x p / 100.",
+      schema: part("25 % de 80", "80", "20", "on prend", "60", "80 x 25 / 100 = 20"),
     },
     {
       titre: "Vérifier",
       texte:
         "On vérifie avec un cas facile : 50 % = la moitié, 25 % = le quart, 10 % = diviser par 10.",
+      schema: grille(50),
     },
   ],
   usages: [
     {
       titre: "Calculer un pourcentage",
       detail: "p % d'un nombre N se calcule ainsi : N × p / 100.",
+      schema: part("30 % de 50", "50", "15", "on prend", "35", "50 x 30 / 100 = 15"),
     },
     {
       titre: "Les cas faciles",
       detail: "50 % = la moitié, 25 % = le quart, 10 % = diviser par 10.",
+      schema: grille(10),
     },
     {
       titre: "Réduction ou hausse",
       detail:
         "Une réduction de p % enlève une part du prix : on calcule la part, puis on soustrait.",
+      schema: part("40 € avec −10 %", "40 € au départ", "4", "on enlève", "36", "40 − 4 = 36 € à payer"),
     },
   ],
   exemples: [
     {
       titre: "Calculer une part",
       donnees: "Une classe compte 25 élèves et 40 % sont demi-pensionnaires.",
+      schema: part("40 % de 25 élèves", "25 élèves", "10", "demi-pensionnaires", "15", "25 x 40 / 100 = 10"),
       question: "Combien d'élèves sont demi-pensionnaires ?",
       solution:
         "40 % de 25 = 25 × 40 / 100 = 10. Il y a donc 10 demi-pensionnaires.",
@@ -150,6 +246,7 @@ export const fichePourcentages5e: FicheCoursData = {
     {
       titre: "Une réduction",
       donnees: "Un article coûte 40 euros avec 10 % de réduction.",
+      schema: part("40 € avec −10 %", "40 € au départ", "4", "la réduction", "36", "40 − 4 = 36 € à payer"),
       question: "Quel est le montant de la réduction, puis le prix payé ?",
       solution:
         "Réduction = 40 × 10 / 100 = 4 euros. Prix payé = 40 − 4 = 36 euros.",
