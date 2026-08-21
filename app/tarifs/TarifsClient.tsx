@@ -9,6 +9,7 @@ import {
   EXEMPLE_ETABLISSEMENT,
   PRIX_ETABLISSEMENT_ELEVE_AN,
   PRIX_FAMILLE_AN,
+  PRIX_FAMILLE_MENSUEL_EQUIVALENT,
   PRIX_PROF_AN,
   centimes,
   euros,
@@ -369,9 +370,16 @@ export default function TarifsClient() {
                 {euros(PRIX_FAMILLE_AN)}
               </p>
               <p className="mt-1 text-lg font-black text-slate-900">par an</p>
+              {/* ⚠️ « MOINS D'UN EURO PAR MOIS » ÉTAIT FAUX : 12 ÷ 12 = 1, pas
+                  moins. Le mot « moins » cherchait à impressionner et affaiblit
+                  au contraire — un euro rond se retient, « moins d'un euro »
+                  sonne comme un arrondi qu'on n'ose pas nommer.
+                  ⭐ ET C'EST LE NOMBRE DE LA MARQUE (Frédéric, 21/08 : « pas
+                  1 euro par an mais par mois »). C'est en mois qu'il faut le
+                  dire partout : 1 € se compare à un café, 12 € à un abonnement. */}
               <p className="mt-1 text-sm font-black text-emerald-700">
-                Moins d&apos;un euro par mois · par famille, quel que soit le nombre
-                d&apos;enfants
+                {centimes(PRIX_FAMILLE_MENSUEL_EQUIVALENT).replace(",00", "")} par
+                mois · par famille, quel que soit le nombre d&apos;enfants
               </p>
 
               <p className="mt-5 text-base font-bold leading-relaxed text-slate-700">
