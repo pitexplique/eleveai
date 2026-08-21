@@ -222,6 +222,22 @@ const ROUTES: RouteConfig[] = [
   { path: "/evaluation-nationale-college/6e-francais", priority: 0.9, changeFrequency: "weekly", lastMod: new Date("2026-08-08") },
   { path: "/evaluation-nationale-college/4e-maths",    priority: 0.9, changeFrequency: "weekly", lastMod: new Date("2026-08-08") },
   { path: "/evaluation-nationale-college/4e-francais", priority: 0.9, changeFrequency: "weekly", lastMod: new Date("2026-08-08") },
+  // ── ÉVALUATIONS NATIONALES GRATUIT EN PDF IMPRIMABLE (21/08) ───────────────
+  //
+  // ⚠️ LA FORMULE EST DE FRÉDÉRIC, et elle ne peut pas vivre dans le XML :
+  // un sitemap ne porte que des URL, jamais de titre ni de description. Elle
+  // est donc portée par le <title> de chaque sujet — c'est lui que Google
+  // affiche — et reprise en tête de section ici pour qu'on retrouve
+  // l'intention en relisant le fichier.
+  // ⭐ CE SONT DES PAGES À PART, ET C'EST TOUT L'INTÉRÊT. « évaluation nationale
+  // 6e maths » cherche à comprendre ; « évaluation nationale 6e à imprimer »,
+  // « sujet PDF », « annales » cherchent une feuille. Deux intentions, deux
+  // pages — c'est exactement d'où vient le trafic des cahiers de vacances, dont
+  // tout passe par « à imprimer » et « PDF gratuit ».
+  // ⚠️ UNE SEULE LIGNE POUR L'INSTANT : les trois autres sujets papier ne sont
+  // pas écrits. On ne déclare pas une URL qui répond 404 — le sitemap est la
+  // promesse la plus formelle qu'on fasse à un moteur.
+  { path: "/evaluation-nationale-college/6e-maths/a-imprimer", priority: 0.9, changeFrequency: "weekly", lastMod: new Date("2026-08-21") },
 
   // ── DICO (vocabulaire & gestes — prépa éval nationale) ─────────────────────
   { path: "/dico",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },

@@ -43,7 +43,27 @@ export const metadata: Metadata = {
 // (16/08). L'arbitrage du 01/08 — une minute par question sur un échantillon
 // — n'a plus cours nulle part : il tenait la cadence faute de connaître les
 // effectifs, nous les avons tous.
-const EPREUVES = [
+//
+// ⚠️ LE TYPE EST ÉCRIT À LA MAIN à cause de `papier`, présent sur une seule des
+// quatre entrées (21/08) : sans lui, TypeScript infère une union où `papier`
+// n'existe pas sur les trois autres, et le bloc « à télécharger » ne compile
+// plus. Les trois portent donc `papier: null` — le jour où leur sujet existe,
+// on remplace le `null` par la route, et rien d'autre ne bouge.
+type Epreuve = {
+  niveau: string;
+  matiere: string;
+  slug: string;
+  minutes: number;
+  emoji: string;
+  accent: string;
+  teste: string[];
+  epreuve: string;
+  papier: string | null;
+  coach: string;
+  guide: string;
+};
+
+const EPREUVES: Epreuve[] = [
   {
     niveau: "6ᵉ",
     matiere: "Français",
@@ -65,6 +85,7 @@ const EPREUVES = [
     // LIVRÉE (01/08) : l'épreuve pioche dans le programme de CM2. La fluence
     // et la compréhension de l'oral n'y sont pas — c'est dit sur la page.
     epreuve: "/evaluation-nationale-college/6e-francais",
+    papier: null,
     coach: "/coach-ia/francais?classe=6e",
     guide: "/guide-de-survie/francais-6e",
   },
@@ -86,6 +107,9 @@ const EPREUVES = [
     ],
     // LIVRÉE (01/08) : l'épreuve blanche existe pour ce couple niveau/matière.
     epreuve: "/evaluation-nationale-college/6e-maths",
+    // LE SUJET SUR PAPIER (21/08) — la première des quatre. Voir la note du
+    // bloc « à télécharger » en bas de page.
+    papier: "/evaluation-nationale-college/6e-maths/a-imprimer",
     coach: "/coach-ia/maths?classe=6e",
     guide: "/guide-de-survie/maths-sixieme",
   },
@@ -109,6 +133,7 @@ const EPREUVES = [
     ],
     // LIVRÉE (01/08) : l'épreuve pioche dans le programme de 5ᵉ.
     epreuve: "/evaluation-nationale-college/4e-francais",
+    papier: null,
     coach: "/coach-ia/francais?classe=4e",
     guide: "/guide-de-survie/francais-4e",
   },
@@ -133,6 +158,7 @@ const EPREUVES = [
     ],
     // LIVRÉE (01/08) : l'épreuve pioche dans le programme de 5ᵉ.
     epreuve: "/evaluation-nationale-college/4e-maths",
+    papier: null,
     coach: "/coach-ia/maths?classe=4e",
     guide: "/guide-de-survie/maths-quatrieme",
   },
@@ -272,6 +298,18 @@ export default function EvaluationNationaleCollegePage() {
                       <span aria-hidden>→</span>
                     </Link>
                     <div className="mt-2.5 flex flex-col gap-1">
+                      {/* LE SUJET PAPIER, sous l'épreuve à l'écran et non à sa
+                          place : le geste principal reste de la passer en
+                          ligne, où elle se corrige toute seule. Le lien
+                          n'apparaît que là où le sujet existe. */}
+                      {e.papier && (
+                        <Link
+                          href={e.papier}
+                          className="text-sm font-black text-[#1d1c16]/70 hover:text-[color:var(--accent)] hover:underline"
+                        >
+                          🖨️ Ou l&apos;imprimer, sujet et corrigé →
+                        </Link>
+                      )}
                       <Link
                         href={e.coach}
                         className="text-sm font-black text-[#1d1c16]/70 hover:text-[color:var(--accent)] hover:underline"
@@ -379,6 +417,101 @@ export default function EvaluationNationaleCollegePage() {
               Passer l&apos;éval blanche IA <span aria-hidden>→</span>
             </span>
           </Link>
+        </section>
+
+        {/* ═══════════ LES SUJETS À TÉLÉCHARGER (21/08/2026) ═══════════
+            « En bas de page comme cahier de vacances » (Frédéric). Et c'est
+            littéralement la même structure : la liste de ce qu'on peut sortir
+            de l'imprimante, puis le bandeau qui explique le geste en deux
+            cartes. Les cahiers tirent tout leur trafic de « à imprimer » et
+            « PDF gratuit » — deux requêtes que la rubrique éval nationale ne
+            savait pas servir, faute d'avoir quoi que ce soit à imprimer.
+
+            ⚠️ ON N'ANNONCE QUE CE QUI EXISTE, règle du journal : les trois
+            sujets non écrits sont affichés en gris, sans lien, avec le mot
+            « bientôt ». Une carte morte ou un lien vers une 404 coûte plus
+            cher qu'une case vide honnête. */}
+        <section className="mt-8 rounded-2xl border-2 border-[#1d1c16]/15 bg-white/80 p-5 sm:p-6">
+          <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#1d1c16]/55">
+            Sur papier
+          </p>
+          <h2 className="mt-2 font-serif text-2xl font-black leading-snug">
+            Les évaluations nationales à télécharger gratuitement
+          </h2>
+          <p className="mt-1 max-w-2xl text-sm font-medium leading-6 text-[#1d1c16]/75">
+            Le sujet entier, aux effectifs de l&apos;épreuve officielle, à
+            imprimer en un clic — pour une classe sans ordinateurs, pour une
+            heure d&apos;étude, ou pour chercher au crayon sur la table de la
+            cuisine. Trois formats&nbsp;: le sujet seul, le sujet et son
+            corrigé, ou le corrigé seul pour le professeur. Sans inscription.
+          </p>
+
+          <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
+            {EPREUVES.map((e) =>
+              e.papier ? (
+                <li key={e.slug}>
+                  <Link
+                    href={e.papier}
+                    className="flex items-center gap-3 rounded-xl border-2 bg-white px-4 py-3 transition hover:brightness-105"
+                    style={{ borderColor: e.accent }}
+                  >
+                    <span className="text-xl leading-none" aria-hidden>
+                      🖨️
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-black">
+                        {e.niveau} · {e.matiere}
+                      </span>
+                      <span className="block text-xs font-medium text-[#1d1c16]/60">
+                        Sujet + corrigé · PDF gratuit
+                      </span>
+                    </span>
+                    <span aria-hidden style={{ color: e.accent }}>
+                      →
+                    </span>
+                  </Link>
+                </li>
+              ) : (
+                <li
+                  key={e.slug}
+                  className="flex items-center gap-3 rounded-xl border-2 border-dashed border-[#1d1c16]/15 px-4 py-3"
+                >
+                  <span className="text-xl leading-none opacity-40" aria-hidden>
+                    🖨️
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-sm font-black text-[#1d1c16]/45">
+                      {e.niveau} · {e.matiere}
+                    </span>
+                    <span className="block text-xs font-medium text-[#1d1c16]/40">
+                      Le sujet papier arrive
+                    </span>
+                  </span>
+                </li>
+              ),
+            )}
+          </ul>
+
+          {/* Le bandeau des cahiers de vacances, transposé : comment on
+              imprime, et pourquoi c'est gratuit. */}
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            <div className="rounded-2xl border border-[#1d1c16]/12 bg-white p-4">
+              <h3 className="text-base font-black">🖨️ À imprimer en 1 clic</h3>
+              <p className="mt-1 text-sm leading-6 text-[#1d1c16]/70">
+                Ouvre le sujet, choisis ce que tu veux sur la feuille, clique
+                sur « Imprimer / PDF ». Le corrigé est à la fin, sur une page
+                qui se détache.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-[#a34c07]/25 bg-[#a34c07]/[0.06] p-4">
+              <h3 className="text-base font-black">🌺 Et toujours gratuit</h3>
+              <p className="mt-1 text-sm leading-6 text-[#1d1c16]/70">
+                Aucune inscription, aucune publicité, rien à installer. Comme
+                les cahiers de vacances&nbsp;: écrit à La Réunion, donné à tout
+                le monde.
+              </p>
+            </div>
+          </div>
         </section>
 
         {/* ⚠️ CE PARAGRAPHE MENTAIT (corrigé le 09/08). Écrit le 01/08 quand
