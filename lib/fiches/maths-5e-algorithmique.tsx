@@ -59,6 +59,20 @@ const progCarre = scratch("Dessiner un carré", [
   { type: "repeat", times: 4, children: [{ type: "move", value: 100 }, { type: "turn", value: 90 }] },
 ]);
 
+// Un compteur : la variable CHANGE a chaque tour. C'est le seul programme ou
+// suivre la valeur pas a pas est indispensable — d'ou sa place sous le
+// deuxieme reflexe.
+const progCompteur = scratch("Suivre une variable", [
+  { type: "event" },
+  { type: "set_variable", variable: "x", value: 0 },
+  {
+    type: "repeat",
+    times: 3,
+    children: [{ type: "set_variable", variable: "x", value: 2 }],
+  },
+  { type: "say", text: "x vaut 6" },
+]);
+
 const pieges = [
   "Changer l'ordre des instructions : tourner avant d'avancer ne mène pas au même endroit. L'ordre compte.",
   "Oublier que la boucle répète : « répéter 4 fois avancer de 10 » = 4 × 10 = 40 pas, pas 10.",
@@ -96,18 +110,24 @@ export const ficheAlgorithmique5e: FicheCoursData = {
     {
       titre: "La variable",
       texte: "Une case mémoire nommée (ex. x) où l'on range une valeur, qu'on peut lire et modifier.",
+      schema: progVariable,
     },
     {
       titre: "Le test (si...)",
       texte: "On n'exécute des blocs QUE si une condition est vraie : « si score > 10 alors... ».",
+      schema: progTest,
     },
     {
       titre: "La boucle (répéter...)",
       texte: "On refait plusieurs fois les mêmes blocs : « répéter 4 fois : avancer de 10 ».",
+      schema: progBoucle,
     },
     {
       titre: "Le paramètre",
       texte: "Une valeur que l'on donne à un bloc (avancer de combien ? tourner de quel angle ?).",
+      // Le carre : deux parametres a lire dans le meme programme, la longueur
+      // du cote et l'angle du virage. Un bloc sans nombre ne montrerait rien.
+      schema: progCarre,
     },
   ],
   reel: {
@@ -119,14 +139,38 @@ export const ficheAlgorithmique5e: FicheCoursData = {
       "Le mot « algorithme » vient du savant Al-Khwarizmi (Bagdad, vers 820). Scratch, lui, a été créé en 2007 au MIT pour apprendre à programmer avec des blocs colorés, sans faute de syntaxe.",
   },
   methode: [
-    { titre: "Je lis dans l'ordre", texte: "J'exécute les blocs de haut en bas, un par un." },
-    { titre: "Je suis les variables", texte: "Je note la valeur de chaque variable au fil du programme." },
-    { titre: "Je déplie les boucles", texte: "« Répéter n fois » = je refais le contenu n fois." },
+    {
+      titre: "Je lis dans l'ordre",
+      texte: "J'exécute les blocs de haut en bas, un par un.",
+      schema: progSequence,
+    },
+    {
+      titre: "Je suis les variables",
+      texte: "Je note la valeur de chaque variable au fil du programme.",
+      schema: progCompteur,
+    },
+    {
+      titre: "Je déplie les boucles",
+      texte: "« Répéter n fois » = je refais le contenu n fois.",
+      schema: progCarre,
+    },
   ],
   usages: [
-    { titre: "Variable & expression", detail: "Ranger une valeur (x = 5), puis calculer (3x + 2)." },
-    { titre: "Test (si...)", detail: "Agir seulement si une condition est vraie." },
-    { titre: "Boucle (répéter...)", detail: "Refaire plusieurs fois, pour un programme plus court." },
+    {
+      titre: "Variable & expression",
+      detail: "Ranger une valeur (x = 5), puis calculer (3x + 2).",
+      schema: progVariable,
+    },
+    {
+      titre: "Test (si...)",
+      detail: "Agir seulement si une condition est vraie.",
+      schema: progTest,
+    },
+    {
+      titre: "Boucle (répéter...)",
+      detail: "Refaire plusieurs fois, pour un programme plus court.",
+      schema: progBoucle,
+    },
   ],
   exemples: [
     {
