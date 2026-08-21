@@ -1094,6 +1094,37 @@ export default function EntreeMatrice({
         </div>
       </Etape>
 
+      {/* ⭐ L'ADULTE QUI N'EST DANS AUCUNE DES QUATRE CASES (21/08/2026).
+          Deux adultes ont testé le site : ils ont cliqué « Élève », tapé une
+          classe, et ça ne les a pas gênés. C'est ce test qui a fait ABANDONNER
+          la 5ᵉ pastille « Adulte » — elle n'aurait rien ouvert de neuf, les
+          rituels et les coachs sortent déjà pour qui dit une classe, et un
+          profil `adulte` sans ressource taguée aurait rendu une page blanche
+          (`rangNiveaux` ne trouve ce niveau nulle part).
+          Reste ce que le test ne pouvait pas voir : Frédéric était À CÔTÉ
+          d'eux pour leur dire quoi cliquer. Celui qui arrive par Google lit
+          « Qui es-tu ? », voit quatre cases où il n'est pas, et repart. Cette
+          ligne est la phrase que Frédéric disait à voix haute.
+
+          ⚠️ ELLE VOUVOIE au milieu d'un écran qui tutoie, et c'est voulu :
+          elle ne s'adresse qu'à l'adulte. Le reste de la page parle à l'élève,
+          et `tutoie` vaut d'ailleurs `true` ici (sans classe, `profil` est nul).
+          ⚠️ `sm:ml-36` = la colonne d'intitulé d'`Etape` (w-32) plus son gap-4 :
+          la ligne se pose SOUS les pastilles, pas sous leur libellé.
+          ⛔ ON NE NOMME NI LE CRPE NI AUCUNE DATE. Le français du cycle 3 le
+          prépare déjà (lib/fiches/REGLES.md), mais les fiches ne sont pas
+          finies : on n'annonce pas un concours qu'on ne tient pas encore.
+          ⛔ ET ELLE S'EFFACE DÈS QU'UNE CLASSE EST CLIQUÉE. C'est ce qui la rend
+          acceptable sur un écran dont tout le fichier répète qu'il n'a qu'un
+          travail : faire choisir une classe. Elle ne coûte une ligne qu'à ceux
+          qui n'ont pas encore répondu — après, elle disparaît. */}
+      {role === "eleve" && !classe && (
+        <p className="mt-2 text-xs leading-snug text-slate-600 sm:ml-36">
+          Adulte&nbsp;? Reprendre les bases, préparer un concours&nbsp;:
+          choisissez la classe du niveau visé.
+        </p>
+      )}
+
       {/* ── 2. La classe ──────────────────────────────────────────────────
           ⭐ PLUS SEULEMENT L'ÉLÈVE (16/08) : le parent et l'enseignant l'ont
           aussi. Voir ROLES_AVEC_CLASSE en tête de fichier — c'est la classe qui
