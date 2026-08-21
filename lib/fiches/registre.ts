@@ -254,6 +254,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Ratios, pourcentages et coefficient",
     resume: "Lire un ratio, prendre un pourcentage, passer d'une évolution au coefficient multiplicateur.",
   },
+  "maths/5e/algo-construire": {
+    titre: "Construire un programme",
+    resume: "Traduire une formule en blocs, écrire une condition, régler les paramètres, poser une boucle.",
+  },
   "maths/5e/divisibilite": {
     titre: "Multiples, diviseurs et divisibilité",
     resume: "Multiples et diviseurs, critères par 2, 5, 10, 3 et 9, et la liste des diviseurs par paires.",
