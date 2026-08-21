@@ -1,4 +1,23 @@
+# EleveAI — https://www.eleveai.fr
+#
+# TOUT EST OUVERT, ET C'EST DÉLIBÉRÉ (vérifié le 21/08/2026).
+# Les robots d'entraînement et de recherche des IA — GPTBot, OAI-SearchBot,
+# ClaudeBot, PerplexityBot, Google-Extended — sont couverts par le « * »
+# ci-dessous. Beaucoup de sites les bloquent ; nous non, et c'est un choix :
+# un site que les modèles n'ont pas le droit de lire est un site qu'ils ne
+# peuvent pas recommander. Nous ne vendons rien à l'élève, nous n'avons donc
+# rien à protéger d'une citation.
+#
+# ⛔ NE PAS AJOUTER DE « Disallow » POUR CES ROBOTS sans mesurer d'abord ce
+# qu'on y perd. Le trafic assistant est déjà là (chatgpt.com apparaît dans les
+# référents), et il ne fera que croître.
+
 User-agent: *
 Allow: /
 
 Sitemap: https://www.eleveai.fr/sitemap.xml
+
+# Le résumé du site écrit pour les modèles de langage, généré depuis les mêmes
+# constantes que la page /tarifs — il ne peut donc pas annoncer un prix périmé.
+# Voir app/llms.txt/route.ts.
+# llms.txt: https://www.eleveai.fr/llms.txt

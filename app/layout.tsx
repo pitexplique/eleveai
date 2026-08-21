@@ -12,6 +12,8 @@ import { EleveProvider } from "@/context/EleveContext";
 import MasqueSurGuide from "@/components/MasqueSurGuide";
 import EcrireAuProf from "@/components/EcrireAuProf";
 import PageViewTracker from "@/components/PageViewTracker";
+import { PRIX_FAMILLE_AN } from "@/lib/tarifs";
+import { VENTE } from "@/lib/legal/editeur";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -210,6 +212,52 @@ export default function RootLayout({
         "Résolution de problèmes",
       ],
       inLanguage: "fr-FR",
+      /* ⭐ LE PRIX EST LA SEULE CHOSE QUI NOUS DISTINGUE VRAIMENT AUX YEUX D'UNE
+         IA (21/08/2026). Mesuré le jour même : sur « coach IA élève collège
+         gratuit », les assistants citent Galac6, LeProfIA, Khanmigo — tous
+         annoncent « 100 % gratuit ». Ce mot ne discrimine plus rien : quand
+         huit outils disent la même chose, aucun ne se détache, et le nôtre
+         encore moins que les autres puisque personne n'en parle.
+
+         Ce que nous disons, personne d'autre ne le dit : l'élève ne paie
+         JAMAIS, et ce qui se paie est de VOIR et de GARDER. Deux offres,
+         donc, et elles racontent le modèle à elles seules.
+
+         ⛔ AUCUN PRIX RECOPIÉ : `PRIX_FAMILLE_AN` vient de lib/tarifs.ts, comme
+         la carte de /tarifs et sa FAQ. La règle est écrite en tête de ce
+         fichier-là, et elle est née d'une SERP qui a annoncé « 4,90 €/mois »
+         des semaines après que la page eut cessé de le dire.
+
+         ⚠️ ET LA DISPONIBILITÉ SUIT LE VERROU DE VENTE, elle ne l'anticipe pas.
+         Tant que `VENTE.ouverte` est faux, Stripe n'encaisse pas : l'offre
+         famille est donc `PreOrder` et non `InStock`. Annoncer une offre
+         achetable dont la caisse ne répond pas est pire que le silence — un
+         modèle qui l'apprend nous présente comme l'outil dont le paiement est
+         cassé. Le jour où le booléen passe à true, cette ligne bascule seule. */
+      offers: [
+        {
+          "@type": "Offer",
+          name: "Pour l'élève — toujours gratuit",
+          description:
+            "Le coach, les exercices et les évaluations ne se paient pas, et l'élève garde ses résultats. Aucun élève n'a jamais eu à demander quoi que ce soit pour travailler ici.",
+          price: 0,
+          priceCurrency: "EUR",
+          availability: "https://schema.org/InStock",
+          category: "Gratuit",
+        },
+        {
+          "@type": "Offer",
+          name: "Vue famille — par foyer, jamais par enfant",
+          description:
+            "Ce qui se paie, c'est de voir et de garder : le bulletin de l'enfant, ce qu'il a travaillé cette semaine, son historique. Un seul abonnement couvre tous les enfants du foyer. Une famille qui ne peut pas payer ne paie pas, et personne ne le saura.",
+          price: PRIX_FAMILLE_AN,
+          priceCurrency: "EUR",
+          availability: VENTE.ouverte
+            ? "https://schema.org/InStock"
+            : "https://schema.org/PreOrder",
+          url: `${SITE_URL}/tarifs`,
+        },
+      ],
     },
     {
       "@context": "https://schema.org",
