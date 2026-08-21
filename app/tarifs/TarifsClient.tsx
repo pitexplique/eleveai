@@ -25,29 +25,13 @@ import {
 // ne paie pas, apprend-il moins ? ».
 //
 // Ce qu'elle fait maintenant, dans cet ordre : la famille d'abord, puis le mur
-// du gratuit (c'est LUI qui rend les 12 € compréhensibles), puis le collectif
+// du gratuit — retiré depuis, voir plus bas —, puis le collectif
 // en bas — non plus comme un tunnel de vente mais comme une preuve de sérieux.
 //
 // ⭐ Les couleurs sont celles du coach (`app/tutor-v4/TutorV4Client.tsx`) :
 // bandeau indigo→sky→cyan, tuiles sky/violet/emerald/amber. Une page de tarifs
 // qui ne ressemble pas au produit se lit comme une page de quelqu'un d'autre.
 // ─────────────────────────────────────────────────────────────────────────────
-
-/** Ce qui ne se paiera jamais. La liste est longue exprès : c'est l'argument. */
-const gratuit = [
-  { icon: "🧠", label: "Coach Maths IA", desc: "Du CP à la Terminale, notion par notion" },
-  { icon: "📖", label: "Coach Français IA", desc: "CP → 3e, sons, grammaire, conjugaison" },
-  { icon: "🇬🇧", label: "English Maths", desc: "A1 → B2, avec l'audio" },
-  { icon: "🛤️", label: "Parcours", desc: "Un bilan de compétences, matière par matière" },
-  { icon: "⚡", label: "Calcul rapide", desc: "Les automatismes en 5 minutes" },
-  { icon: "🎯", label: "Défis du jour", desc: "Des problèmes ancrés à La Réunion" },
-  { icon: "☀️", label: "Cahiers de vacances", desc: "14 cahiers, de la GS au post-bac" },
-  { icon: "📄", label: "Fiches de cours", desc: "À lire à l'écran ou à imprimer" },
-  { icon: "✍️", label: "Dictée du jour", desc: "Et les rituels de langue" },
-  { icon: "📝", label: "Évaluations blanches", desc: "6e et 4e, dans les conditions réelles" },
-  { icon: "🎓", label: "Coach Brevet · Bac", desc: "Sprint de révisions, notions clés" },
-  { icon: "💾", label: "Ses résultats gardés", desc: "L'élève retrouve sa progression" },
-];
 
 /** Ce que la famille achète — et qui n'apprend rien à personne. */
 const inclusFamille = [
@@ -140,7 +124,7 @@ const collectif = [
     inclus: [
       "Tous les élèves, toutes les classes, tous les profs",
       "La vue complète du chef d'établissement",
-      "Accès 100 % gratuit pour chaque élève",
+      "Aucun élève ne paie, jamais",
       "Éligible REP/REP+, fonds sociaux, coopérative",
       "Jamais un classement des enseignants",
     ],
@@ -194,7 +178,7 @@ const comparatif = [
 const faq = [
   {
     q: "Mon enfant peut-il utiliser EleveAI sans payer ?",
-    a: "Oui, entièrement. Le coach dans les cinq matières, les exercices corrigés, les parcours, le calcul rapide, les défis, les cahiers, les fiches, les évaluations blanches : tout est gratuit, sans limite de temps et sans publicité. Et il garde ses résultats. Rien de tout ça ne deviendra payant.",
+    a: "Oui, entièrement. Le coach dans les cinq matières, les exercices corrigés, les parcours, le calcul rapide, les défis, les cahiers, les fiches, les évaluations blanches : rien de tout cela ne se paie, sans limite de temps et sans publicité. Et il garde ses résultats. Rien de tout ça ne deviendra payant.",
   },
   {
     q: `Alors qu'est-ce que je paie avec les ${euros(PRIX_FAMILLE_AN)} ?`,
@@ -296,11 +280,17 @@ export default function TarifsClient() {
           <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 via-sky-600 to-cyan-500 px-4 py-2 text-xs font-black uppercase tracking-wide text-white shadow">
             🌺 Les tarifs
           </div>
+          {/* ⛔ LE MOT « GRATUIT » NE S'ÉCRIT PLUS ICI (Frédéric, 21/08). Il
+              apparaissait sept fois sur une page qui demande de l'argent. Un
+              mot répété à ce point ne rassure plus, il dévalue : le lecteur
+              finit par se demander ce qu'il achète. La chose reste vraie et se
+              dit autrement — « ne se paie pas », « personne ne paie »,
+              « offert ». C'est le verbe qui porte, pas l'étiquette. */}
           <h1 className="text-3xl font-black leading-tight text-slate-950 sm:text-5xl">
-            Tout ce qui fait apprendre
+            Apprendre
             <br />
             <span className="bg-gradient-to-r from-emerald-500 to-green-600 bg-clip-text text-transparent">
-              est gratuit.
+              ne se paie pas.
             </span>
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-base font-bold leading-relaxed text-slate-600">
@@ -366,8 +356,8 @@ export default function TarifsClient() {
               </p>
 
               <p className="mt-5 text-base font-bold leading-relaxed text-slate-700">
-                Le coach, les exercices, les évaluations : gratuits, et l&apos;élève garde
-                ses résultats.
+                Le coach, les exercices, les évaluations ne se paient pas, et l&apos;élève
+                garde ses résultats.
                 <br />
                 <strong className="text-slate-950">
                   Ce qui se paie, c&apos;est que ça se souvienne de votre enfant.
@@ -417,33 +407,15 @@ export default function TarifsClient() {
           </div>
         </section>
 
-        {/* ── LE MUR DU GRATUIT ────────────────────────────────────────── */}
-        <section>
-          <div className="mb-6 text-center">
-            <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-5 py-2 text-xs font-black uppercase tracking-wide text-white shadow">
-              🎁 Gratuit, et ça le reste
-            </span>
-            <h2 className="mt-3 text-2xl font-black text-slate-950 sm:text-3xl">
-              Rien de tout ça ne se paiera jamais
-            </h2>
-            <p className="mx-auto mt-2 max-w-2xl text-sm font-bold text-slate-600">
-              Sans compte obligatoire, sans limite de temps, sans publicité.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-            {gratuit.map((g) => (
-              <div
-                key={g.label}
-                className="rounded-2xl border border-white bg-white/90 p-4 shadow-md backdrop-blur transition hover:-translate-y-0.5"
-              >
-                <span className="text-2xl">{g.icon}</span>
-                <p className="mt-2 text-sm font-black text-slate-950">{g.label}</p>
-                <p className="mt-1 text-xs font-bold leading-relaxed text-slate-500">{g.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+        {/* ⛔ LE MUR DU GRATUIT EST PARTI (Frédéric, 21/08). Douze tuiles
+            énuméraient les outils gratuits — coach maths, coach français,
+            English Maths… — juste sous la carte Famille. C'était une redite :
+            le titre de la page dit déjà « Tout ce qui fait apprendre est
+            gratuit » et la carte le répète ligne 2. Le catalogue, lui, vit sur
+            `/espace-parents` et `/explorer`, dont c'est le sujet.
+            ⚠️ Ce qu'on perd : le poids visuel du gratuit, qui rendait les 12 €
+            évidents par contraste. Si la page se met à se lire comme une page
+            payante, c'est là qu'il faudra regarder. */}
 
         {/* ── PREMIUM S'ACHÈTE OU SE GAGNE ─────────────────────────────── */}
         <section className="rounded-[2rem] bg-gradient-to-r from-cyan-500 via-emerald-500 to-orange-400 p-1 shadow-xl">
@@ -541,11 +513,13 @@ export default function TarifsClient() {
           </div>
         </section>
 
-        {/* ── PILOTE GRATUIT ───────────────────────────────────────────── */}
+        {/* ── LE PILOTE, OFFERT ────────────────────────────────────────── */}
         <section className="flex flex-col items-center gap-6 rounded-[2rem] border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 p-6 text-center shadow-lg backdrop-blur sm:flex-row sm:text-left">
           <div className="shrink-0 text-5xl">🎁</div>
           <div className="flex-1">
-            <h2 className="text-xl font-black text-slate-950">Pilote gratuit — 4 semaines</h2>
+            <h2 className="text-xl font-black text-slate-950">
+              Quatre semaines offertes, pour essayer
+            </h2>
             <p className="mt-1 text-sm font-bold text-slate-600">
               Accès complet pour une classe entière, sans engagement. Pour essayer avant de
               décider quoi que ce soit.
@@ -600,6 +574,61 @@ export default function TarifsClient() {
             Chez IXL, le deuxième enfant coûte 4 € de plus par mois. Ici, la famille entière
             est comprise dans les {euros(PRIX_FAMILLE_AN)}.
           </p>
+          {/* ⭐ POURQUOI ON EST MOINS CHER (Frédéric, 21/08). Un écart de un à
+              vingt sans explication ne se lit pas comme une bonne affaire, il se
+              lit comme un piège — ou comme un produit au rabais. Il faut le
+              justifier là où il se voit, sous le tableau.
+              ⚠️ Dit à la première personne du « ce que nous n'avons pas », et
+              jamais en accusant les autres de ce qu'ils paient : on ne connaît
+              pas leurs comptes, et l'argument est aussi fort à l'endroit. */}
+          <div className="mt-6 rounded-3xl bg-gradient-to-br from-sky-50 to-white p-6 ring-1 ring-sky-100">
+            <h3 className="text-center text-lg font-black text-slate-950">
+              Pourquoi c&apos;est possible
+            </h3>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              {[
+                {
+                  emoji: "🏦",
+                  titre: "Aucun investisseur à rembourser",
+                  texte:
+                    "Pas de levée de fonds, donc pas d'argent à rendre avec des intérêts. Le prix n'a personne d'autre à financer que le site.",
+                },
+                {
+                  emoji: "🤝",
+                  titre: "Aucun commercial",
+                  texte:
+                    "Pas d'équipe de vente, pas de salons, pas de publicité achetée. Ce sont les enseignants qui en parlent aux enseignants.",
+                },
+                {
+                  emoji: "✍️",
+                  titre: "Les exercices sont écrits, pas achetés",
+                  texte:
+                    "Un enseignant les écrit un par un, sur son temps. C'est du travail déjà fait — il ne se refacture pas à chaque nouvel élève.",
+                },
+                {
+                  emoji: "⚙️",
+                  titre: "Un élève de plus ne coûte presque rien",
+                  texte:
+                    "Le coach tourne sur un modèle léger : une explication coûte une fraction de centime. C'est ce qui permet de ne faire payer que le suivi.",
+                },
+              ].map((r) => (
+                <div key={r.titre} className="flex items-start gap-3">
+                  <span className="text-2xl">{r.emoji}</span>
+                  <span>
+                    <span className="block text-sm font-black text-slate-950">{r.titre}</span>
+                    <span className="mt-0.5 block text-xs font-bold leading-relaxed text-slate-600">
+                      {r.texte}
+                    </span>
+                  </span>
+                </div>
+              ))}
+            </div>
+            <p className="mt-5 text-center text-sm font-black text-slate-800">
+              Le prix bas n&apos;est pas un défaut de qualité. C&apos;est ce qui reste
+              quand on enlève tout le reste.
+            </p>
+          </div>
+
           <p className="mt-4 text-center text-xs font-bold text-slate-400">
             * Tarifs relevés sur les sites officiels — IXL en août 2026, les autres en juin 2026.
           </p>

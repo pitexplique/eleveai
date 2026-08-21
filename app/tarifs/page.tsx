@@ -17,13 +17,17 @@ const url = "https://www.eleveai.fr/tarifs";
 // là où elle est justement le plus lue.
 // ⛔ Aucun prix recopié ici : ils viennent de `lib/tarifs.ts`, comme sur la
 // page. C'est exactement ce couple-là qui s'était désaccordé en juin.
+// ⛔ Le mot « gratuit » ne s'écrit plus sur cette page (Frédéric, 21/08) : il y
+// figurait sept fois, sur une page qui demande de l'argent. La description suit
+// le texte visible — c'est la condition pour que Google la retienne (leçon du
+// 08/08, app/accueil/metadata.ts).
 const resume =
-  `Tout ce qui fait apprendre est gratuit et le reste : coach, exercices, parcours, cahiers, fiches. ` +
+  `Apprendre ne se paie pas : coach, exercices, parcours, cahiers et fiches restent ouverts à tous. ` +
   `Le suivi par les parents est à ${euros(PRIX_FAMILLE_AN)} par an et par famille, quel que soit le nombre d'enfants. ` +
   `Pour une classe ${euros(PRIX_CLASSE_ELEVE_AN)} par élève et par an, pour un établissement ${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} — et là, les familles ne paient rien.`;
 
 export const metadata: Metadata = {
-  title: "Tarifs — gratuit pour apprendre, 12 € par an pour suivre",
+  title: "Tarifs — apprendre ne se paie pas, 12 € par an pour suivre",
   description: resume,
   alternates: { canonical: url },
   robots: { index: true, follow: true },
