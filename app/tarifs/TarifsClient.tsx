@@ -7,7 +7,7 @@ import {
   ARGUMENT_COLLECTIF,
   EXEMPLE_CLASSE,
   EXEMPLE_ETABLISSEMENT,
-  PRIX_ETABLISSEMENT_ELEVE_AN,
+  PRIX_ETABLISSEMENT_AN,
   PRIX_FAMILLE_AN,
   PRIX_FAMILLE_MENSUEL_EQUIVALENT,
   PRIX_PROF_AN,
@@ -86,7 +86,7 @@ const portes = [
     emoji: "🏫",
     titre: "Pour les établissements",
     sousTitre: "Tout le collège, et la vue du principal",
-    prix: `${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} par élève et par an`,
+    prix: `${euros(PRIX_ETABLISSEMENT_AN)} par an, quel que soit l'effectif`,
     ancre: "#etablissement",
     page: "/espace-ecoles",
     pageLabel: "EleveAI dans un établissement",
@@ -119,10 +119,10 @@ const collectif = [
     id: "etablissement",
     nom: "Établissement",
     badge: "🏫 Tout le collège",
-    prix: `${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} / élève / an`,
-    exemple: `${EXEMPLE_ETABLISSEMENT.eleves} élèves = ${euros(EXEMPLE_ETABLISSEMENT.total)} par an`,
+    prix: `${euros(PRIX_ETABLISSEMENT_AN)} / an`,
+    exemple: `forfait — ${centimes(EXEMPLE_ETABLISSEMENT.parEleve)} par élève pour un collège de ${EXEMPLE_ETABLISSEMENT.eleves}`,
     description:
-      "Tous les profs équipés, et le principal a la vue complète : tous les niveaux, toutes les classes. Facturé à l'établissement — rien aux familles.",
+      "Tous les profs équipés, et le principal a la vue complète : tous les niveaux, toutes les classes. Forfait — il n'y a pas d'élèves à compter, et le prix ne bouge pas à la rentrée suivante. Facturé à l'établissement — rien aux familles.",
     inclus: [
       "Tous les élèves, toutes les classes, tous les profs",
       "La vue complète du chef d'établissement",
@@ -172,8 +172,12 @@ const comparatif = [
   {
     outil: "EleveAI 🌺",
     pourQui: "Tout un établissement",
-    prix: `${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} / élève / an`,
-    soit: `${EXEMPLE_ETABLISSEMENT.eleves} élèves = ${euros(EXEMPLE_ETABLISSEMENT.total)} par an`,
+    prix: `${euros(PRIX_ETABLISSEMENT_AN)} / an`,
+    // ⚠️ L'équivalent par élève est indispensable ICI, et nulle part ailleurs :
+    // la ligne d'en face (Kwyk) est facturée à l'élève. Un forfait comparé à un
+    // prix unitaire ne se compare pas — c'est le défaut corrigé le 21/08, quand
+    // le tableau alignait notre prix établissement contre des prix famille.
+    soit: `forfait — ${centimes(EXEMPLE_ETABLISSEMENT.parEleve)} / élève / an pour un collège de ${EXEMPLE_ETABLISSEMENT.eleves}`,
   },
   {
     outil: "EleveAI 🌺",
@@ -198,7 +202,7 @@ const faq = [
   },
   {
     q: "Mon collège peut-il payer pour tout le monde ?",
-    a: `Oui, et l'écart est considérable : ${ARGUMENT_COLLECTIF.eleves} familles abonnées, cela ferait ${euros(ARGUMENT_COLLECTIF.siChaqueFamillePaie)} ; le professeur qui couvre exactement les mêmes élèves paie ${euros(ARGUMENT_COLLECTIF.siLeProfPaie)}, forfait. Et pour tout l'établissement, ${EXEMPLE_ETABLISSEMENT.eleves} élèves reviennent à ${euros(EXEMPLE_ETABLISSEMENT.total)} par an — personne n'est laissé dehors. Parlez-en à l'enseignant ou au principal, on s'occupe du reste.`,
+    a: `Oui, et l'écart est considérable : ${ARGUMENT_COLLECTIF.eleves} familles abonnées, cela ferait ${euros(ARGUMENT_COLLECTIF.siChaqueFamillePaie)} ; le professeur qui couvre exactement les mêmes élèves paie ${euros(ARGUMENT_COLLECTIF.siLeProfPaie)}, forfait. Et tout l'établissement, c'est ${euros(EXEMPLE_ETABLISSEMENT.total)} par an, forfait lui aussi — soit ${centimes(EXEMPLE_ETABLISSEMENT.parEleve)} par élève pour un collège de ${EXEMPLE_ETABLISSEMENT.eleves}, et personne n'est laissé dehors. Parlez-en à l'enseignant ou au principal, on s'occupe du reste.`,
   },
   {
     q: "Puis-je arrêter quand je veux ?",
@@ -422,9 +426,19 @@ export default function TarifsClient() {
                   >
                     Prévenez-moi à l&apos;ouverture
                   </Link>
+                  {/* ⛔ PAS DE DÉLAI ANNONCÉ. La phrase disait « l'abonnement
+                      ouvre dans quelques jours » — une date implicite, qui se
+                      périme toute seule et que personne ne vient corriger.
+                      L'ouverture ne dépend pas du calendrier mais de l'état du
+                      produit : la vue du parent, et les fiches de cours de
+                      maths et de français (règle de Frédéric, 22/08 : « quand
+                      les fiches seront prêtes on envoie Stripe, pas avant »).
+                      On dit donc CE QUI MANQUE, comme sur /espace-parents, et
+                      la phrase reste vraie aussi longtemps qu'il le faudra. */}
                   <p className="mt-3 text-xs font-bold text-slate-500">
-                    L&apos;abonnement ouvre dans quelques jours. Le prix ci-dessus est
-                    ferme — rien n&apos;est encaissé pour l&apos;instant.
+                    Cette vue se construit en ce moment. Le prix ci-dessus est
+                    ferme, et rien n&apos;est encaissé tant qu&apos;elle n&apos;est pas
+                    prête.
                   </p>
                 </>
               )}
@@ -477,23 +491,29 @@ export default function TarifsClient() {
             <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-400 to-blue-500 px-5 py-2 text-xs font-black uppercase tracking-wide text-white shadow">
               🏫 Quand c&apos;est l&apos;école qui paie
             </span>
-            {/* ⚠️ LE TITRE DISAIT « on divise par deux à chaque fois » (12 → 6
-                → 3). La règle a changé le 21/08 au soir : un dashboard vaut
-                12 € par an, celui d'une famille comme celui d'un professeur, et
-                le forfait du prof ne dépend plus du nombre d'élèves. La phrase
-                qui décrivait l'ancienne grille aurait survécu au changement de
-                prix — c'est exactement le défaut que `lib/tarifs.ts` existe
-                pour empêcher, et il ne se voit pas dans un chiffre. */}
+            {/* ⚠️ CE TITRE A MENTI DEUX FOIS, ET C'EST LA MÊME LEÇON.
+                Il disait d'abord « on divise par deux à chaque fois » (12 → 6
+                → 3) ; la règle a changé le 21/08 au soir et la phrase a
+                survécu. Il disait ensuite « plus le cercle s'élargit, moins ça
+                coûte par enfant » — arithmétiquement FAUX dès ce soir-là : le
+                professeur est à 0,40 € par élève, l'établissement à 2 € puis à
+                2,25 €. Le cercle s'élargit, et le prix par enfant MONTE.
+                ⭐ Une phrase qui décrit la grille en toutes lettres ne se
+                recalcule pas, donc elle ne se corrige pas toute seule : c'est
+                le seul endroit où `lib/tarifs.ts` ne protège de rien. Celle-ci
+                dit désormais ce qui restera vrai quels que soient les montants
+                — les trois lignes sont des forfaits. */}
             <h2 className="mt-3 text-2xl font-black text-slate-950 sm:text-3xl">
-              Plus le cercle s&apos;élargit, moins ça coûte par enfant
+              Trois forfaits, et pas un élève à compter
             </h2>
             <p className="mx-auto mt-2 max-w-2xl text-sm font-bold text-slate-600">
               Un tableau de bord, c&apos;est {euros(PRIX_FAMILLE_AN)} par an — pour
               une famille comme pour un professeur, et le professeur ne paie pas
               plus cher parce qu&apos;il a trente élèves : cela lui fait{" "}
               {centimes(EXEMPLE_CLASSE.parEleve)} par élève. Pour tout un
-              établissement, {euros(PRIX_ETABLISSEMENT_ELEVE_AN)} par élève ouvre
-              en plus la vue complète de la direction.
+              établissement, {euros(EXEMPLE_ETABLISSEMENT.total)} par an ouvrent
+              en plus la vue complète de la direction — là non plus, il n&apos;y a
+              pas d&apos;élèves à compter.
             </p>
           </div>
 

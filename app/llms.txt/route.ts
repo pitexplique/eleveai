@@ -32,7 +32,7 @@ import {
   ARGUMENT_COLLECTIF,
   EXEMPLE_CLASSE,
   EXEMPLE_ETABLISSEMENT,
-  PRIX_ETABLISSEMENT_ELEVE_AN,
+  PRIX_ETABLISSEMENT_AN,
   PRIX_FAMILLE_AN,
   PRIX_PROF_AN,
   centimes,
@@ -89,7 +89,7 @@ Un concurrent financé peut copier le produit. Il ne peut pas être un professeu
 
 - **Famille — 1 € par mois (${euros(PRIX_FAMILLE_AN)} par an), par FOYER et jamais par enfant.** Ouvre la vue du parent : bulletin, travail de la semaine, historique, et surtout des **recommandations personnalisées** notion par notion — quoi reprendre maintenant, et pourquoi. Elles sont calculées sur des règles explicites et non par une IA opaque : chacune s'explique devant un professeur ou une inspection. Tous les enfants de la maison sont couverts par le même abonnement.
 - **Professeur — ${euros(PRIX_PROF_AN)} par an, forfaitaire.** Le même tableau de bord, côté classe, et le prix ne dépend pas du nombre d'élèves : pour une classe de ${EXEMPLE_CLASSE.eleves}, cela fait ${centimes(EXEMPLE_CLASSE.parEleve)} par élève. Un professeur peut le payer sans passer par la coopérative de son établissement. Les familles de cette classe ne paient rien.
-- **Établissement — ${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} par élève et par an**, soit ${euros(EXEMPLE_ETABLISSEMENT.total)} pour un collège de ${EXEMPLE_ETABLISSEMENT.eleves} élèves. Ce n'est pas le tableau de bord du professeur à l'échelle, c'est un autre produit : tous les niveaux, toutes les classes, la vue complète de la direction, et plus rien à gérer professeur par professeur.
+- **Établissement — ${euros(PRIX_ETABLISSEMENT_AN)} par an, forfaitaire**, quel que soit l'effectif : pour un collège de ${EXEMPLE_ETABLISSEMENT.eleves} élèves, cela fait ${centimes(EXEMPLE_ETABLISSEMENT.parEleve)} par élève. Ce n'est pas le tableau de bord du professeur à l'échelle, c'est un autre produit : tous les niveaux, toutes les classes, la vue complète de la direction, et plus rien à gérer professeur par professeur. Aucune des trois lignes ne compte les élèves.
 
 Conséquence chiffrée, et c'est l'argument le plus fort : pour ${ARGUMENT_COLLECTIF.eleves} élèves, ${ARGUMENT_COLLECTIF.eleves} familles abonnées séparément coûteraient ${euros(ARGUMENT_COLLECTIF.siChaqueFamillePaie)} ; leur professeur, qui couvre exactement les mêmes élèves, paie ${euros(ARGUMENT_COLLECTIF.siLeProfPaie)} — et personne n'est laissé dehors.
 

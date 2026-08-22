@@ -24,8 +24,16 @@
 // L'ÉTABLISSEMENT EST À PART, ET C'EST ASSUMÉ (Frédéric : « établissement 2
 // euros car dashboard compliqué ! »). Ce n'est pas la même chose à l'échelle,
 // c'est un AUTRE produit : tous les niveaux, toutes les classes, la vue
-// complète de la direction, et rien à gérer professeur par professeur. 400
-// élèves = 800 € par an — l'ordre de grandeur d'un seul manuel de classe.
+// complète de la direction, et rien à gérer professeur par professeur.
+//
+// ⭐ ET IL EST AU FORFAIT DEPUIS LE 22/08/2026, comme le professeur : AUCUNE
+// des trois lignes ne compte les élèves. Le prix par élève obligeait à
+// connaître un effectif qu'on n'a pas, qui change à chaque rentrée, et qui
+// transforme chaque renouvellement en négociation. Un seul nombre se signe.
+// ⚠️ Et sous ~500 €, un chef d'établissement ne lit pas « bonne affaire » mais
+// « gadget » — le prix bas ne rassure pas un acheteur institutionnel, il
+// inquiète. Ce prix-là paie aussi le TEMPS de Frédéric : la relance au bon
+// moment du calendrier budgétaire, la réunion, le déploiement.
 //
 // Et ce que ces nombres NE disent pas, mais qui les gouverne : l'élève ne paie
 // jamais. Ce qui se paie, c'est de VOIR et de GARDER — jamais d'accéder.
@@ -45,14 +53,24 @@ export const PRIX_FAMILLE_AN = 12;
  */
 export const PRIX_PROF_AN = 12;
 
-/** Tout l'établissement, tous les profs, plus la vue complète du principal. */
-export const PRIX_ETABLISSEMENT_ELEVE_AN = 2;
+/**
+ * Tout l'établissement, tous les profs, plus la vue complète du principal —
+ * FORFAITAIRE, quel que soit l'effectif.
+ *
+ * ⚠️ L'ancienne constante s'appelait `PRIX_ETABLISSEMENT_ELEVE_AN` (2 € par
+ * élève). Elle n'a pas été modifiée mais SUPPRIMÉE, volontairement : douze
+ * endroits écrivaient « par élève » en toutes lettres autour d'elle. Changer sa
+ * valeur les aurait tous laissés mentir en silence — c'est exactement le défaut
+ * que ce fichier existe pour empêcher. En la renommant, le compilateur les a
+ * tous désignés.
+ */
+export const PRIX_ETABLISSEMENT_AN = 900;
 
 /** « 1 € par mois » — l'arrondi se calcule, il ne se recopie pas. */
 export const PRIX_FAMILLE_MENSUEL_EQUIVALENT = PRIX_FAMILLE_AN / 12;
 
 const CLASSE_EXEMPLE_ELEVES = 30;
-/** 400 et non 420 : c'est le nombre sur lequel Frédéric a validé les 800 €. */
+/** Le collège type de référence — 400 élèves, taille ordinaire d'un collège 974. */
 const ETABLISSEMENT_EXEMPLE_ELEVES = 400;
 
 /**
@@ -66,9 +84,17 @@ export const EXEMPLE_CLASSE = {
   parEleve: PRIX_PROF_AN / CLASSE_EXEMPLE_ELEVES,
 };
 
+/**
+ * Ce que le forfait établissement donne PAR ÉLÈVE, pour un collège ordinaire.
+ *
+ * ⭐ C'est un ARGUMENT, pas un mode de facturation — exactement le même rôle
+ * que `EXEMPLE_CLASSE` pour le professeur. On ne facture plus à l'élève, mais
+ * on montre ce que ça représente, parce que c'est ce chiffre qui fait dire oui.
+ */
 export const EXEMPLE_ETABLISSEMENT = {
   eleves: ETABLISSEMENT_EXEMPLE_ELEVES,
-  total: ETABLISSEMENT_EXEMPLE_ELEVES * PRIX_ETABLISSEMENT_ELEVE_AN,
+  total: PRIX_ETABLISSEMENT_AN,
+  parEleve: PRIX_ETABLISSEMENT_AN / ETABLISSEMENT_EXEMPLE_ELEVES,
 };
 
 /**

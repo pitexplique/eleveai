@@ -1,5 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+// ⛔ CETTE PAGE NE CONNAISSAIT PAS `lib/tarifs.ts` (corrigé le 22/08/2026), et
+// c'est la page que lit un chef d'établissement. Elle ne recopiait pourtant
+// aucun chiffre — elle recopiait la STRUCTURE du prix : « un tarif par élève,
+// négocié sur devis selon vos effectifs », deux fois, plus « offre pilote sur
+// devis » dans la description que Google affiche. Aucune constante ne protège
+// contre ça, et la page annonçait donc un mode de facturation que /tarifs
+// n'applique plus. Le prix vient d'ici, la formule aussi.
+import {
+  EXEMPLE_ETABLISSEMENT,
+  PRIX_ETABLISSEMENT_AN,
+  centimes,
+  euros,
+} from "@/lib/tarifs";
 
 export const metadata: Metadata = {
   // Même cas que /besoin-de-vous : la marque ouvre la phrase, `absolute` évite
@@ -7,13 +20,15 @@ export const metadata: Metadata = {
   title: {
     absolute: "EleveAI pour les établissements — Collèges et lycées à La Réunion",
   },
-  description:
-    "Un coach IA multi-matières et un suivi élève par élève, déployé en quelques heures. Financé par l'établissement, gratuit pour les familles. RGPD maîtrisé, conçu par un enseignant.",
+  description: `Un coach IA multi-matières et un suivi élève par élève, déployé en quelques heures. ${euros(
+    PRIX_ETABLISSEMENT_AN,
+  )} par an pour tout l'établissement, forfait quel que soit l'effectif — les familles ne paient rien. RGPD maîtrisé, conçu par un enseignant.`,
   alternates: { canonical: "https://www.eleveai.fr/espace-ecoles" },
   openGraph: {
     title: "EleveAI pour les établissements scolaires",
-    description:
-      "Coach IA multi-matières + suivi élève par élève. Financé par l'établissement, gratuit pour les familles. Offre pilote sur devis.",
+    description: `Coach IA multi-matières + suivi élève par élève. ${euros(
+      PRIX_ETABLISSEMENT_AN,
+    )} par an pour tout l'établissement, forfait — les familles ne paient rien.`,
     url: "https://www.eleveai.fr/espace-ecoles",
     siteName: "EleveAI",
     type: "website",
@@ -46,9 +61,12 @@ const EPREUVES = [
 const modele = [
   {
     emoji: "🏫",
-    titre: "Vous financez, à prix viable par élève",
-    texte:
-      "Un tarif par élève, négocié sur devis selon vos effectifs. Un seul interlocuteur, une seule facture — pas de gestion de paiements familles.",
+    titre: `Vous financez : ${euros(PRIX_ETABLISSEMENT_AN)} par an, forfait`,
+    texte: `Tout l'établissement pour ${euros(
+      PRIX_ETABLISSEMENT_AN,
+    )} par an, quel que soit l'effectif — soit ${centimes(
+      EXEMPLE_ETABLISSEMENT.parEleve,
+    )} par élève pour un collège de ${EXEMPLE_ETABLISSEMENT.eleves}. Rien à recompter à chaque rentrée, un seul interlocuteur, une seule facture — et pas de paiements familles à gérer.`,
   },
   {
     emoji: "🤝",
@@ -90,7 +108,13 @@ const etapes = [
 const faq = [
   {
     q: "Combien ça coûte pour l'établissement ?",
-    a: "Un tarif par élève, sur devis selon vos effectifs, pensé pour rester viable. En contrepartie, c'est gratuit pour toutes les familles et il n'y a aucun paiement à gérer côté foyers.",
+    a: `${euros(
+      PRIX_ETABLISSEMENT_AN,
+    )} par an pour tout l'établissement : tous les niveaux, toutes les classes, tous les professeurs, plus la vue complète de la direction. C'est un forfait — il n'y a pas d'effectif à déclarer, et le prix ne change pas à la rentrée suivante. Pour un collège de ${
+      EXEMPLE_ETABLISSEMENT.eleves
+    } élèves, cela représente ${centimes(
+      EXEMPLE_ETABLISSEMENT.parEleve,
+    )} par élève. En contrepartie, aucune famille ne paie et il n'y a aucun paiement à gérer côté foyers.`,
   },
   {
     q: "Et pour les familles ?",

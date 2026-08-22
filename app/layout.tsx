@@ -13,7 +13,7 @@ import MasqueSurGuide from "@/components/MasqueSurGuide";
 import EcrireAuProf from "@/components/EcrireAuProf";
 import PageViewTracker from "@/components/PageViewTracker";
 import {
-  PRIX_ETABLISSEMENT_ELEVE_AN,
+  PRIX_ETABLISSEMENT_AN,
   PRIX_FAMILLE_AN,
   PRIX_PROF_AN,
 } from "@/lib/tarifs";
@@ -293,12 +293,12 @@ export default function RootLayout({
         },
         {
           "@type": "Offer",
-          name: "Établissement — tous les professeurs, plus la direction",
+          name: "Établissement — forfait, tous les professeurs plus la direction",
           description:
-            "Tous les niveaux, toutes les classes, tous les professeurs, et la vue complète du chef d'établissement. Facturé à l'établissement — rien aux familles, et aucun élève ne paie.",
-          price: PRIX_ETABLISSEMENT_ELEVE_AN,
+            "Tous les niveaux, toutes les classes, tous les professeurs, et la vue complète du chef d'établissement. Forfait annuel, quel que soit l'effectif — rien aux familles, et aucun élève ne paie.",
+          price: PRIX_ETABLISSEMENT_AN,
           priceCurrency: "EUR",
-          unitText: "élève et par an",
+          unitText: "an",
           availability: VENTE.ouverte
             ? "https://schema.org/InStock"
             : "https://schema.org/PreOrder",
