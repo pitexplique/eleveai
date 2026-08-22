@@ -305,6 +305,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Opposer l'attribut et le COD, distinguer direct et indirect, reconnaître un circonstanciel de temps, de lieu ou de cause.",
   },
+  "francais/6e/grammaire-groupe-nominal": {
+    titre: "Le groupe nominal : épithète et complément du nom",
+    resume:
+      "Trouver le nom noyau, distinguer l'épithète du complément du nom, reconnaître un groupe nominal quelle que soit sa fonction.",
+  },
 
   "ia/fondements/definir-l-ia": { titre: "Qu'est-ce que l'intelligence artificielle ?" },
   "ia/fondements/apprentissage-automatique": { titre: "L'apprentissage automatique" },

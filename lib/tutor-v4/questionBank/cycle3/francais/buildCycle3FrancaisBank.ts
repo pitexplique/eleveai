@@ -6142,6 +6142,112 @@ const MISE_EN_VOIX: QcmItem[] = [
        le respect des codes de l'écrit » — dix-sept micros d'écriture, en 6e et
        au CM2, tiraient toutes dans le même pool ECRITURE. */
 
+/* ── « Identifier le groupe nominal, QUELLE QUE SOIT SA FONCTION » ───────────
+   Objectif nommé du BO en 6e, et ce n'est pas la même question que « comment
+   est fait un groupe nominal ». Le pool GN interroge l'INTÉRIEUR du groupe —
+   noyau, déterminant, expansion ; celui-ci demande de RECONNAÎTRE un groupe
+   nominal là où il est, qu'il soit sujet, complément d'objet ou derrière une
+   préposition. Sans lui, `6e_gram_gn_toute_fonction` recevait des questions
+   sur le noyau : justes, et sur un autre sujet. (22/08/2026) */
+const GN_FONCTION: QcmItem[] = [
+  {
+    text: "Dans « Le pêcheur répare son filet », combien y a-t-il de groupes nominaux ?",
+    correct: "deux",
+    wrongs: ["un", "trois", "aucun"],
+    methode: "« Le pêcheur » est sujet, « son filet » est complément d'objet : deux groupes nominaux.",
+  },
+  {
+    text: "Un groupe nominal cesse-t-il d'être un groupe nominal quand il devient complément ?",
+    correct: "non, sa nature ne change pas",
+    wrongs: [
+      "oui, il devient un complément",
+      "oui, il devient un groupe verbal",
+      "seulement s'il suit une préposition",
+    ],
+    methode: "La nature est ce que le groupe EST ; la fonction est le rôle qu'il joue. L'une ne change pas l'autre.",
+  },
+  {
+    text: "Dans « Sur le piton souffle un vent froid », quel groupe nominal est sujet ?",
+    correct: "un vent froid",
+    wrongs: ["Sur le piton", "le piton", "souffle"],
+    methode: "On pose « qu'est-ce qui souffle ? » : un vent froid — un groupe nominal placé après le verbe.",
+  },
+  {
+    text: "Dans « Elle parle à sa grand-mère », le groupe « sa grand-mère » est…",
+    correct: "un groupe nominal, complément d'objet indirect",
+    wrongs: [
+      "un groupe verbal",
+      "un complément circonstanciel",
+      "un attribut du sujet",
+    ],
+    methode: "La préposition « à » donne la fonction ; le groupe qui suit reste un groupe nominal.",
+  },
+  {
+    text: "Quel est le groupe nominal dans « Les enfants jouent sur la plage » qui n'est pas sujet ?",
+    correct: "la plage",
+    wrongs: ["Les enfants", "jouent", "sur"],
+    methode: "« la plage » est un groupe nominal, dans un complément circonstanciel de lieu.",
+  },
+  {
+    text: "Un groupe nominal peut-il être attribut du sujet ?",
+    correct: "oui : « Il est un bon nageur »",
+    wrongs: [
+      "non, l'attribut est toujours un adjectif",
+      "non, l'attribut est toujours un verbe",
+      "seulement au pluriel",
+    ],
+    methode: "L'attribut peut être un adjectif OU un groupe nominal : c'est une fonction, pas une nature.",
+  },
+  {
+    text: "Comment reconnaît-on un groupe nominal, où qu'il soit dans la phrase ?",
+    correct: "il s'organise autour d'un nom",
+    wrongs: [
+      "il commence toujours la phrase",
+      "il suit toujours le verbe",
+      "il contient toujours un adjectif",
+    ],
+    methode: "Le nom noyau est le seul repère fiable : ni la place, ni la longueur.",
+  },
+  {
+    text: "Dans « Le cari de ma grand-mère est délicieux », quel est le groupe nominal sujet ?",
+    correct: "Le cari de ma grand-mère",
+    wrongs: ["Le cari", "ma grand-mère", "délicieux"],
+    methode: "Le sujet est le groupe ENTIER, expansion comprise : c'est tout le groupe qui commande l'accord.",
+  },
+  {
+    text: "Dans « Tom regarde la mer », quelle est la fonction du groupe nominal « la mer » ?",
+    correct: "complément d'objet direct",
+    wrongs: ["sujet", "attribut du sujet", "complément circonstanciel"],
+    methode: "On pose « regarde quoi ? » : la mer. Le groupe est nominal, sa fonction est COD.",
+  },
+  {
+    text: "Combien de groupes nominaux dans « Le samedi, les enfants jouent sur la plage » ?",
+    correct: "trois",
+    wrongs: ["un", "deux", "quatre"],
+    methode: "« Le samedi », « les enfants » et « la plage » : trois groupes nominaux, trois fonctions différentes.",
+  },
+  {
+    text: "Un groupe nominal peut-il tenir en deux mots seulement ?",
+    correct: "oui : déterminant + nom suffit",
+    wrongs: [
+      "non, il en faut au moins trois",
+      "non, il faut toujours un adjectif",
+      "seulement s'il est sujet",
+    ],
+    methode: "« la mer », « son filet » : déterminant + nom, c'est déjà un groupe nominal.",
+  },
+  {
+    text: "Pour donner la fonction d'un groupe nominal, il faut d'abord…",
+    correct: "trouver le verbe conjugué",
+    wrongs: [
+      "compter ses mots",
+      "regarder sa place dans la phrase",
+      "chercher son déterminant",
+    ],
+    methode: "Une fonction se dit toujours PAR RAPPORT AU VERBE : sans lui, on ne peut rien nommer.",
+  },
+];
+
 const EPITHETE_ATTRIBUT: QcmItem[] = [
   {
     text: "Dans « une plage déserte », l'adjectif « déserte » est…",
@@ -7047,6 +7153,10 @@ function grammaireQuestion(microId: string): Generated {
      épithète / complément du nom — qui est le programme de la 6e, pas du CM2.
      Le CM2 oppose l'épithète à l'ATTRIBUT ; c'est un pool à part. */
   if (microId.includes("epithete_attribut")) return qcm(EPITHETE_ATTRIBUT);
+  /* ⚠️ AVANT `gn_epithete` ET AVANT `gn` : « gn_toute_fonction » contient « gn »
+     et serait servi depuis le pool qui interroge l'INTÉRIEUR du groupe, alors
+     que l'objectif du BO est de le RECONNAÎTRE quelle que soit sa fonction. */
+  if (microId.includes("gn_toute_fonction")) return qcm(GN_FONCTION);
   if (microId.includes("participe_passe_etre")) return qcm(PARTICIPE_PASSE_ETRE);
   if (microId.includes("gn_epithete")) return qcm(GN_EPITHETE);
   if (microId.includes("participe_passe")) return qcm(PARTICIPE_PASSE);
