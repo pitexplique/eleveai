@@ -4,10 +4,20 @@ import type {
 } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 import type { KnowledgeBoCompetence, SchoolLevel } from "@/lib/tutor-v4/types";
 
-type CollegeFrancaisLevel = Extract<SchoolLevel, "6e" | "5e" | "4e" | "3e">;
+/* ⛔ LA 6e N'EST PLUS ICI (22/08/2026). Elle a longtemps été « une classe de
+   collège parmi quatre », avec un gros bloc de rattrapage `if (level === "6e")`
+   pour lui rendre ce que la fabrique du cycle 4 lui faisait perdre. C'était le
+   mauvais parent : la 6e ne suit pas le programme du cycle 4, elle FERME LE
+   CYCLE 3 et relève du BO n° 16 du 17 avril 2025, le même texte que le CM1 et
+   le CM2. Ses `bo`, `notions`, `microSkills` et `supportLinks` sont désormais
+   écrits en littéral dans `knowledge/francais/6e/`, comme ceux du CM2, et se
+   relisent ligne à ligne sur le programme.
+   ⚠️ Ne pas la remettre dans ce type : c'est ce qui l'avait privée de la phrase
+   complexe, de « Lire une œuvre et se l'approprier », et lui avait donné une
+   micro (« Distinguer usages de l'oral et de l'écrit ») absente de son BO. */
+type CollegeFrancaisLevel = Extract<SchoolLevel, "5e" | "4e" | "3e">;
 
 const labels: Record<CollegeFrancaisLevel, { code: string; levelLabel: string; boPrefix: string }> = {
-  "6e": { code: "6e", levelLabel: "6e", boPrefix: "BO6EFR" },
   "5e": { code: "5e", levelLabel: "5e", boPrefix: "BO5EFR" },
   "4e": { code: "4e", levelLabel: "4e", boPrefix: "BO4EFR" },
   "3e": { code: "3e", levelLabel: "3e", boPrefix: "BO3EFR" },
@@ -18,7 +28,7 @@ const labels: Record<CollegeFrancaisLevel, { code: string; levelLabel: string; b
    s'applique à elle dès la rentrée 2026. Celles de 4e et de 3e restent
    approximatives tant que ces classes suivent le programme de 2018 : elles
    seront reprises à leur bascule, en 2027 et 2028. */
-const cycle4Perspectives: Record<Extract<CollegeFrancaisLevel, "5e" | "4e" | "3e">, string> = {
+const cycle4Perspectives: Record<CollegeFrancaisLevel, string> = {
   "5e": "Éprouver, expérimenter : la découverte de soi, d'autrui et du monde",
   "4e": "Jugement, valeurs et vérité",
   "3e": "Engagement humaniste et émancipation",
@@ -45,13 +55,6 @@ export function buildCollegeFrancaisBo(level: CollegeFrancaisLevel): KnowledgeBo
 
 export function buildCollegeFrancaisNotions(level: CollegeFrancaisLevel): NotionSource[] {
   const p = labels[level].boPrefix;
-  const hasComplexAnalysis = level !== "6e";
-  /* ⚠️ La 6e FERME le cycle 3 ; elle n'ouvre pas le cycle 4. Ce module la
-     traite comme une classe de collège parmi quatre, et c'est ce qui lui a
-     coûté la phrase complexe : le BO n° 16 du 17 avril 2025 lui consacre une
-     rubrique entière (notion de proposition, juxtaposition, coordination,
-     subordination) que le CM2 avait et pas elle. */
-  const estCycle3 = level === "6e";
 
   return [
     {
@@ -70,9 +73,7 @@ export function buildCollegeFrancaisNotions(level: CollegeFrancaisLevel): Notion
     },
     {
       id: "culture_litteraire",
-      label: level === "6e"
-        ? "Culture littéraire et artistique"
-        : `Culture littéraire — ${cycle4Perspectives[level]}`,
+      label: `Culture littéraire — ${cycle4Perspectives[level]}`,
       boId: `${p}C`,
       prerequis: ["lecture_comprehension"],
       levels: [1, 2, 3],
@@ -105,28 +106,13 @@ export function buildCollegeFrancaisNotions(level: CollegeFrancaisLevel): Notion
       prerequis: ["lecture_comprehension"],
       levels: [1, 2, 3],
     },
-    ...(estCycle3
-      ? [
-          {
-            id: "phrase_complexe",
-            label: "Se repérer dans la phrase complexe",
-            boId: `${p}G`,
-            prerequis: ["grammaire_phrase"],
-            levels: [2, 3],
-          } satisfies NotionSource,
-        ]
-      : []),
-    ...(hasComplexAnalysis
-      ? [
-          {
-            id: "analyse_discours",
-            label: "Discours, registres et paroles rapportées",
-            boId: `${p}G`,
-            prerequis: ["grammaire_phrase"],
-            levels: [2, 3],
-          } satisfies NotionSource,
-        ]
-      : []),
+    {
+      id: "analyse_discours",
+      label: "Discours, registres et paroles rapportées",
+      boId: `${p}G`,
+      prerequis: ["grammaire_phrase"],
+      levels: [2, 3],
+    },
     /* LA 4e N'AVAIT PAS DE NOTION `phrase_complexe` — alors que le CM2 et la 6e
        en ont une. Le programme de cycle 4 encore en vigueur pour elle (arrêté
        du 9 novembre 2015, version consolidée au BO n° 31 du 30 juillet 2020) y
@@ -182,8 +168,8 @@ export function buildCollegeFrancaisNotions(level: CollegeFrancaisLevel): Notion
 
 export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): MicroSkillSource[] {
   const prefix = level.replace("e", "e");
-  const lineCount = level === "6e" ? "10 à 20 lignes" : level === "5e" ? "une vingtaine de lignes" : level === "4e" ? "une quinzaine de lignes ou vers" : "une vingtaine de lignes ou vers";
-  const interpretationDepth = level === "6e" ? "le sens global" : level === "5e" ? "un jugement de lecteur" : level === "4e" ? "l'implicite et le débat interprétatif" : "une interprétation nuancée et argumentée";
+  const lineCount = level === "5e" ? "une vingtaine de lignes" : level === "4e" ? "une quinzaine de lignes ou vers" : "une vingtaine de lignes ou vers";
+  const interpretationDepth = level === "5e" ? "un jugement de lecteur" : level === "4e" ? "l'implicite et le débat interprétatif" : "une interprétation nuancée et argumentée";
 
   const base: MicroSkillSource[] = [
     { id: `${prefix}_comp_sens_global`, label: `Dégager ${interpretationDepth}`, notionId: "lecture_comprehension", prerequis: [] },
@@ -226,72 +212,6 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
     { id: `${prefix}_conj_employer`, label: "Employer les temps et modes selon le sens", notionId: "conjugaison", prerequis: [`${prefix}_conj_composer`] },
   ];
 
-  /* ═══════════════════════════════════════════════════════════════════════
-     LA 6e FERME LE CYCLE 3 — bloc ajouté le 11/08/2026
-
-     Les micros ci-dessus sont partagées avec la 5e, la 4e et la 3e : seul le
-     préfixe change. C'est légitime pour la lecture, l'écriture, l'oral et la
-     culture. Ça ne l'est pas pour l'étude de la langue, parce que la 6e est
-     la dernière année du cycle 3 et suit le BO n° 16 du 17 avril 2025 — pas
-     le programme du cycle 4.
-
-     Résultat mesuré avant correction : 31 micros en 6e contre 50 au CM2, sur
-     un programme plus riche. Dix objectifs nommés par le BO n'avaient rien —
-     à commencer par la phrase complexe ENTIÈRE, que le CM2 avait déjà.
-     ═══════════════════════════════════════════════════════════════════════ */
-  if (level === "6e") {
-    base.push(
-      // « Opposer et distinguer attribut du sujet et complément d'objet direct »
-      { id: `${prefix}_gram_attribut_cod`, label: "Opposer l'attribut du sujet et le complément d'objet direct", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_fonctions`] },
-      // « Identifier et différencier sans ambigüité […] épithète et […] complément du nom »
-      { id: `${prefix}_gram_epithete_cn`, label: "Différencier épithète et complément du nom", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_fonctions`] },
-      // « Mettre en relation un pronom personnel avec son antécédent »
-      { id: `${prefix}_gram_pronom_antecedent`, label: "Relier un pronom personnel à son antécédent et préciser sa fonction", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_fonctions`] },
-      // « Utiliser les manipulations syntaxiques […] au service de la
-      //   reconnaissance des constituants d'une phrase »
-      { id: `${prefix}_gram_manipulations`, label: "Utiliser les manipulations syntaxiques pour reconnaitre les constituants", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_constituants`] },
-      // « Accorder le participe passé […] avec l'auxiliaire être » / « avec le
-      //   COD […] (pronom personnel antéposé) »
-      { id: `${prefix}_orth_participe_passe`, label: "Accorder le participe passé avec être, et avec le COD antéposé pour avoir", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_accords`] },
-
-      // Rubrique « Se repérer dans la phrase complexe » — absente jusqu'ici.
-      { id: `${prefix}_complexe_proposition`, label: "Comprendre la notion de proposition", notionId: "phrase_complexe", prerequis: [`${prefix}_gram_constituants`] },
-      { id: `${prefix}_complexe_articulation`, label: "Distinguer juxtaposition, coordination et subordination", notionId: "phrase_complexe", prerequis: [`${prefix}_complexe_proposition`] },
-      { id: `${prefix}_complexe_conjonctions`, label: "Distinguer le rôle des conjonctions de coordination et de subordination", notionId: "phrase_complexe", prerequis: [`${prefix}_complexe_articulation`] },
-
-      // « Conjugaisons à mémoriser et à maîtriser : impératif présent,
-      //   conditionnel présent »
-      { id: `${prefix}_conj_imperatif_conditionnel`, label: "Conjuguer à l'impératif présent et au conditionnel présent", notionId: "conjugaison", prerequis: [`${prefix}_conj_composer`] },
-      // « des temps du discours, puis des temps du récit »
-      { id: `${prefix}_conj_discours_recit`, label: "Distinguer les temps du discours et les temps du récit", notionId: "conjugaison", prerequis: [`${prefix}_conj_employer`] },
-
-      /* ── Les CINQ ENTRÉES LITTÉRAIRES de la 6e ──────────────────────────
-         Le BO les nomme une par une, et précise que la mise en correspondance
-         avec un genre est « recommandée en CM et PRESCRITE en 6e ». La banque
-         n'en nommait aucune : `culture_litteraire` ne portait que des gestes
-         génériques — genres, contexte, réseau, trace. */
-      { id: `${prefix}_cult_origines`, label: "Créer, recréer le monde : récits des origines", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
-      { id: `${prefix}_cult_poesie`, label: "Chanter et enchanter le monde : mots et merveilles (poésie)", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
-      { id: `${prefix}_cult_theatre`, label: "Se masquer, jouer, déjouer : ruses en action (théâtre)", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
-      { id: `${prefix}_cult_aventure`, label: "Partir à l'aventure !", notionId: "culture_litteraire", prerequis: [`${prefix}_cult_origines`] },
-      { id: `${prefix}_cult_monstres`, label: "Rencontrer des monstres : expérience de l'autre, expérience de soi", notionId: "culture_litteraire", prerequis: [`${prefix}_cult_origines`] },
-
-      /* ── Trois trous relevés dans les rubriques Lecture et Écriture ──────
-         La 6e avait perdu, en passant par la fabrique collège, des attendus
-         que le CM1 et le CM2 portent pourtant : */
-      // « Parvenir à lire correctement en ciblant 130 mots par minute en
-      //   moyenne » — le CM1 vise 110, le CM2 120, la 6e ne visait rien.
-      { id: `${prefix}_flue_130_mots`, label: "Viser une lecture fluide autour de 130 mots par minute", notionId: "lecture_voix_haute", prerequis: [`${prefix}_voix_preparer`] },
-      // « Identifier la nature et la source des documents » ; « Comparer des
-      //   documents de genres différents » ; « Prendre appui sur les éléments
-      //   essentiels d'une image fixe et les interpréter »
-      { id: `${prefix}_comp_documents`, label: "Identifier, comparer et croiser des documents", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_indices`] },
-      { id: `${prefix}_comp_image`, label: "Prendre appui sur les éléments essentiels d'une image fixe", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_documents`] },
-      // « Copier des textes de façon lisible, régulière, soignée et sans
-      //   erreur d'orthographe ou de ponctuation » — objectif CM1, CM2 ET 6e.
-      { id: `${prefix}_ecrit_copie`, label: "Écrire à la main de manière fluide et efficace", notionId: "ecriture", prerequis: [] },
-    );
-  }
 
   /* ═══════════════════════════════════════════════════════════════════════
      LA 5e PASSE AU NOUVEAU PROGRAMME — bloc ajouté le 12/08/2026
@@ -514,13 +434,11 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
     );
   }
 
-  if (level !== "6e") {
-    base.push(
-      { id: `${prefix}_discours_registres`, label: "Identifier et ajuster les registres de langue", notionId: "analyse_discours", prerequis: [`${prefix}_gram_oral_ecrit`] },
-      { id: `${prefix}_discours_rapportees`, label: "Analyser et employer des paroles rapportées", notionId: "analyse_discours", prerequis: [`${prefix}_discours_registres`] },
-      { id: `${prefix}_discours_argumentatif`, label: "Repérer procédés du discours argumentatif", notionId: "analyse_discours", prerequis: [`${prefix}_discours_rapportees`] }
-    );
-  }
+  base.push(
+    { id: `${prefix}_discours_registres`, label: "Identifier et ajuster les registres de langue", notionId: "analyse_discours", prerequis: [`${prefix}_gram_oral_ecrit`] },
+    { id: `${prefix}_discours_rapportees`, label: "Analyser et employer des paroles rapportées", notionId: "analyse_discours", prerequis: [`${prefix}_discours_registres`] },
+    { id: `${prefix}_discours_argumentatif`, label: "Repérer procédés du discours argumentatif", notionId: "analyse_discours", prerequis: [`${prefix}_discours_rapportees`] }
+  );
 
   /* ── LA 4e, SUR SON PROGRAMME ENCORE EN VIGUEUR ─────────────────────────────
      ⚠️ Le nouveau BO du 5 mars 2026 ne l'atteindra qu'en septembre 2027 : la 4e
