@@ -4,8 +4,14 @@ import Epreuve4eMathsClient from "./Epreuve4eMathsClient";
 export const metadata: Metadata = {
   title:
     "Évaluation nationale de 4e en maths — l'épreuve blanche, 50 minutes, corrigée | EleveAI",
+  // ⚠️ 160 CARACTÈRES, PAS UN DE PLUS (Bing Webmaster, 22/08 : « Meta
+  // Description too long »). Celle-ci en faisait 708 — les 548 derniers
+  // n'ont jamais été lus par personne : le moteur coupe vers 157 et le
+  // snippet s'arrêtait au milieu du mot « défilen… ». Ce qui tombait, c'était
+  // la fin — donc « Gratuit, sans publicité », l'argument qui fait cliquer.
+  // Le détail des domaines et des notions vit dans la PAGE, où il sert.
   description:
-    "L'épreuve blanche de l'évaluation nationale de 4e en mathématiques : l'épreuve entière, au volume du sujet officiel — 62 questions en 50 minutes, qui défilent une par une, sans retour en arrière. Quatre domaines (nombres et calculs, grandeurs et mesures, espace et géométrie, organisation et gestion de données) et les deux tests spécifiques, automatismes et résolution de problèmes. Sur le programme de 5e : relatifs, fractions, divisibilité, calcul littéral, conversions, aires et volumes, triangles et parallélogrammes, proportionnalité, statistiques, probabilités, programmation. À la fin, un groupe de maîtrise par domaine et de quoi retravailler chaque compétence qui a coincé. Gratuit, sans publicité.",
+    "Évaluation nationale de 4e en maths : l'épreuve blanche, au volume du sujet officiel — 62 questions en 50 minutes, sur le programme de 5e. Gratuit.",
   keywords: [
     "évaluation nationale 4e maths",
     "évaluation nationale 4e s'entraîner",

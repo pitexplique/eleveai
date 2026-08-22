@@ -11,8 +11,10 @@ import { BOUCAN, CANNE, FLAMBOYANT, FOND, SAFRAN } from "./_composants/couleurs"
 export const metadata: Metadata = {
   title:
     "Les évaluations nationales du collège — 6e et 4e, français et maths | EleveAI",
+  // ⚠️ 160 CARACTÈRES MAXIMUM — voir 4e-maths/page.tsx pour le pourquoi.
+  // Elle en faisait 224 : « gratuit, sans publicité » tombait hors du cadre.
   description:
-    "En 6e et en 4e, à la rentrée, tout le monde passe deux évaluations nationales : français et mathématiques. Ce qu'elles testent, épreuve par épreuve, et de quoi s'entraîner sur les mêmes compétences — gratuit, sans publicité.",
+    "En 6e et en 4e, tout le monde passe deux évaluations nationales à la rentrée. Ce qu'elles testent, épreuve par épreuve, et de quoi s'entraîner. Gratuit.",
   keywords: [
     "évaluations nationales 6e",
     "évaluations nationales 4e",

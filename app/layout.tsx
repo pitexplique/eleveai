@@ -282,7 +282,7 @@ export default function RootLayout({
           "@type": "Offer",
           name: "Classe — 0,75 € par élève et par mois",
           description:
-            "Le professeur suit sa classe compétence par compétence, sans corriger. Forfait à l'intérieur de la classe : 25 élèves ou 35, c'est le même prix, et il n'a pas à passer par la coopérative pour le payer. Les familles de cette classe ne paient rien.",
+            "Le professeur suit sa classe compétence par compétence, sans corriger. Il ne paie rien lui-même : c'est le tarif de groupe qu'il ouvre à ses familles, qui paient 25 % de moins que si chacune s'abonnait seule. L'élève, lui, ne paie jamais.",
           price: PRIX_CLASSE_ELEVE_MOIS,
           priceCurrency: "EUR",
           unitText: "élève et par mois",
@@ -293,7 +293,7 @@ export default function RootLayout({
         },
         {
           "@type": "Offer",
-          name: "Établissement — tous les professeurs, plus la direction",
+          name: "Établissement — forfait, tous les professeurs plus la direction",
           description:
             "Tous les niveaux, toutes les classes, tous les professeurs, et la vue complète du chef d'établissement. Facturé à l'établissement — rien aux familles, et aucun élève ne paie.",
           price: PRIX_ETABLISSEMENT_ELEVE_MOIS,

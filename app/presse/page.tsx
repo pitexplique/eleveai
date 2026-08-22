@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import { ECHELLE, PLAFOND_ETABLISSEMENT_AN, PRIX_FAMILLE_MOIS, euros, montant } from "@/lib/tarifs";
 
 export default function PressePage() {
   return (
@@ -105,11 +106,28 @@ export default function PressePage() {
                 </div>
 
                 <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4">
+                  {/* ⛔ CE PARAGRAPHE ANNONÇAIT « autour de 5 € », AU FUTUR
+                      (corrigé le 22/08/2026) — un montant qui n'a jamais été
+                      celui de la grille, sur la page que lit un journaliste,
+                      c'est-à-dire à l'endroit précis où un chiffre se recopie
+                      et se met à circuler tout seul. Un prix cité dans un
+                      article ne se corrige plus jamais.
+                      ⛔ Aucun montant écrit à la main : ils viennent tous de
+                      `lib/tarifs.ts`, comme sur /tarifs et dans le llms.txt. */}
                   <p className="text-sm font-semibold">“Quel est le modèle économique ?”</p>
                   <p className="mt-1 text-sm text-slate-200">
-                    Construction progressive : le produit doit d’abord être utile et fiable.
-                    À terme, un abonnement simple et accessible (autour de 5 €) pour financer
-                    l’hébergement, l’amélioration continue et l’accompagnement.
+                    L’élève ne paie jamais : le coach, les exercices, les parcours et
+                    les évaluations restent ouverts, sans publicité. Ce qui se paie,
+                    c’est de VOIR et de GARDER. Le prix suit une échelle, et
+                    c’est le payeur qui la descend : {montant(PRIX_FAMILLE_MOIS)}{" "}
+                    par élève et par mois pour une famille seule, moins quand sa
+                    classe s’en charge, moins encore quand c’est
+                    l’établissement — jamais plus de{" "}
+                    {euros(PLAFOND_ETABLISSEMENT_AN)} par an. Pour{" "}
+                    {ECHELLE.eleves} élèves : {euros(ECHELLE.siLesFamillesPaient)},{" "}
+                    {euros(ECHELLE.siLesClassesPaient)} ou{" "}
+                    {euros(ECHELLE.siLEtablissementPaie)}. On paie une fois, jamais
+                    deux.
                   </p>
                 </div>
               </div>

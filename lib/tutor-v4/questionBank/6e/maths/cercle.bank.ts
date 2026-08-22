@@ -786,4 +786,83 @@ export const cercleBank: TutorBankItemV4[] = [
     ),
     tags: ["cercle_disque", "defi", "raisonnement"],
   },
+  // ⭐ LES DÉFIS AUSSI ONT LEUR GÉNÉRATEUR (règle d'or : dix variantes minimum
+  // par micro, sinon l'élève retombe sur la même question en dix minutes).
+  {
+    kind: "template",
+    id: "cercle_defi_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "cercle_disque",
+    microId: "cercle_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Un tour complet, c'est le périmètre du disque.",
+    tags: ["cercle_disque", "defi", "template"],
+    generate: () => {
+      const objets = [
+        { nom: "une roue de vélo", d: randomInt(60, 75), unite: "cm" },
+        { nom: "une roue de trottinette", d: randomInt(15, 25), unite: "cm" },
+        { nom: "un rond-point", d: randomInt(15, 30), unite: "m" },
+        { nom: "un bassin rond", d: randomInt(4, 12), unite: "m" },
+      ];
+      const o = objets[randomInt(0, objets.length - 1)];
+      const p = Number((o.d * 3.14).toFixed(2));
+      const fr = (x: number) => String(x).replace(".", ",");
+      return {
+        text: `${o.nom.charAt(0).toUpperCase()}${o.nom.slice(1)} a un diamètre de ${o.d} ${o.unite}. Quelle distance parcourt-on en en faisant tout le tour (π ≈ 3,14) ?`,
+        format: "short",
+        expected: [fr(p), String(p)],
+        comparator: "number_equal",
+        explanation: expl(
+          `Faire le tour, c'est parcourir le périmètre : P = π × d = 3,14 × ${o.d} = ${fr(p)} ${o.unite}.`
+        ),
+        canvas: cercleAvec("diametre", `${o.d} ${o.unite}`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "cercle_defi_tpl_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "cercle_disque",
+    microId: "cercle_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Dis ce que π représente, et d'où vient sa valeur.",
+    tags: ["cercle_disque", "defi", "template", "ouverte"],
+    generate: () => {
+      const cas = [
+        {
+          q: "Explique pourquoi le nombre π est le même pour tous les disques, grands ou petits.",
+          mots: ["proportionnel", "rapport", "quotient", "coefficient"],
+          r: "Le tour d'un disque est proportionnel à son diamètre : si on multiplie le diamètre par un nombre, le tour est multiplié par le même nombre. Le quotient tour ÷ diamètre ne change donc jamais — c'est ce coefficient qu'on appelle π.",
+        },
+        {
+          q: "Explique comment on peut mesurer π avec une ficelle et une règle.",
+          mots: ["ficelle", "enrouler", "diviser", "diamètre", "diametre"],
+          r: "On enroule une ficelle autour d'un objet rond, on la déroule et on mesure sa longueur : c'est le périmètre. On mesure ensuite le diamètre, puis on divise le périmètre par le diamètre. On trouve toujours un nombre proche de 3,14, quel que soit l'objet.",
+        },
+        {
+          q: "Explique pourquoi la formule P = 2 × π × R donne le même résultat que P = π × D.",
+          mots: ["diamètre", "diametre", "deux", "rayon", "double"],
+          r: "Le diamètre vaut deux rayons : D = 2 × R. En remplaçant D par 2 × R dans P = π × D, on obtient P = π × 2 × R, c'est-à-dire 2 × π × R. Les deux formules disent la même chose.",
+        },
+        {
+          q: "Un élève calcule le périmètre d'un disque de rayon 5 cm et trouve 15,7 cm. Explique son erreur.",
+          mots: ["rayon", "diamètre", "diametre", "moitié", "moitie", "double"],
+          r: "Il a multiplié 3,14 par le RAYON au lieu du diamètre : il a trouvé la moitié du tour. Le diamètre vaut 2 × 5 = 10 cm, donc P = 3,14 × 10 = 31,4 cm.",
+        },
+      ];
+      const c = cas[randomInt(0, cas.length - 1)];
+      return {
+        text: c.q,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: expl(c.r),
+      };
+    },
+  },
 ];

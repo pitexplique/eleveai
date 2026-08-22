@@ -170,7 +170,12 @@ const collectif = [
       "Éligible REP/REP+, fonds sociaux, coopérative",
       "Jamais un classement des enseignants",
     ],
-    cta: "Demander un devis",
+    // ⚠️ LE BOUTON DISAIT « DEMANDER UN DEVIS », juste sous le prix affiché en
+    // gros (trouvé par `scripts/verifier-tarifs.ts`, 22/08). Les deux se
+    // contredisaient sur la même carte : si le prix est ferme et écrit là, il
+    // n'y a rien à deviser — et proposer un devis rouvre une négociation qu'on
+    // vient de fermer, en laissant croire que le nombre affiché est indicatif.
+    cta: "Parler de mon établissement",
     gradient: "from-violet-400 to-purple-500",
     anneau: "ring-violet-100",
   },
@@ -485,9 +490,19 @@ export default function TarifsClient() {
                   >
                     Prévenez-moi à l&apos;ouverture
                   </Link>
+                  {/* ⛔ PAS DE DÉLAI ANNONCÉ. La phrase disait « l'abonnement
+                      ouvre dans quelques jours » — une date implicite, qui se
+                      périme toute seule et que personne ne vient corriger.
+                      L'ouverture ne dépend pas du calendrier mais de l'état du
+                      produit : la vue du parent, et les fiches de cours de
+                      maths et de français (règle de Frédéric, 22/08 : « quand
+                      les fiches seront prêtes on envoie Stripe, pas avant »).
+                      On dit donc CE QUI MANQUE, comme sur /espace-parents, et
+                      la phrase reste vraie aussi longtemps qu'il le faudra. */}
                   <p className="mt-3 text-xs font-bold text-slate-500">
-                    L&apos;abonnement ouvre dans quelques jours. Le prix ci-dessus est
-                    ferme — rien n&apos;est encaissé pour l&apos;instant.
+                    Cette vue se construit en ce moment. Le prix ci-dessus est
+                    ferme, et rien n&apos;est encaissé tant qu&apos;elle n&apos;est pas
+                    prête.
                   </p>
                 </>
               )}
@@ -560,7 +575,7 @@ export default function TarifsClient() {
                 dit la seule chose que le professeur veut savoir — et elle, elle
                 reste vraie quel que soit le tarif établissement. */}
             <h2 className="mt-3 text-2xl font-black text-slate-950 sm:text-3xl">
-              Plus le cercle s&apos;élargit, moins ça coûte par enfant
+              Trois forfaits, et pas un élève à compter
             </h2>
             {/* ⚠️ « PAR AN », JAMAIS SANS SON UNITÉ. Le même « 1 € » vit deux
                 fois dans cette grille : 1 € par MOIS pour la famille, 1 € par AN

@@ -16,7 +16,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { cgvEnVigueur } from "@/lib/legal/editeur";
 
+// ⚠️ LES ÉVALUATIONS NATIONALES N'AVAIENT AUCUN LIEN DE PIED DE PAGE (22/08).
+// Les huit pages existaient, étaient au sitemap en priorité 0,9, et n'étaient
+// atteignables que depuis /espace-ecoles et /pourquoi-eleveai — deux pages
+// qu'un parent ne visite pas. Or c'est le rendez-vous du 7 au 25 septembre :
+// la seule fenêtre de l'année où on cherche ces mots-là.
+// Le hub tient les quatre épreuves ET les quatre sujets à imprimer ; les
+// quatre épreuves sont doublées ici pour qu'elles soient à UN saut de
+// l'accueil, comme le sont déjà les douze classes du coach maths.
 const outils = [
+  { label: "Évaluations nationales 6e et 4e", href: "/evaluation-nationale-college" },
+  { label: "Évaluation nationale 6e maths", href: "/evaluation-nationale-college/6e-maths" },
+  { label: "Évaluation nationale 6e français", href: "/evaluation-nationale-college/6e-francais" },
+  { label: "Évaluation nationale 4e maths", href: "/evaluation-nationale-college/4e-maths" },
+  { label: "Évaluation nationale 4e français", href: "/evaluation-nationale-college/4e-francais" },
   { label: "Coach English IA", href: "/coach-ia/english-maths" },
   { label: "Coach Maths IA", href: "/coach-ia/maths" },
   { label: "Coach Français IA", href: "/coach-ia/francais" },
@@ -78,8 +91,20 @@ const espaces = [
   { label: "Connexion élève / prof", href: "/auth/signin-eleve" },
 ];
 
+// ⭐ `/formation-crpe` EST OUVERTE (22/08, décision de Frédéric : « il faut
+// formation-crpe dans sitemap avec index pas no-index »). Les trois gestes
+// vont ensemble et doivent le rester : le `noindex` retiré de la page, la
+// ligne dans `app/sitemap.ts`, et ce lien-ci.
+// ⛔ NE PAS REFERMER L'UN SANS LES DEUX AUTRES : le site pointerait vers une
+// page qu'il demande aux moteurs d'ignorer, et la Search Console le signalerait
+// comme une erreur — c'est exactement le précédent de /photo-cours, raconté
+// dans le sitemap.
+// ⚠️ La page nomme l'Hôtel Terre-Sainte, et elle est maintenant indexable.
+// Si l'accord écrit n'existe pas, `LIEU.nom = null` dans la page la rend
+// anonyme (« Terre-Sainte, à Saint-Pierre ») sans rien fermer.
 const infos = [
   { label: "Pourquoi EleveAI", href: "/pourquoi-eleveai" },
+  { label: "Préparer les maths du CRPE", href: "/formation-crpe" },
   { label: "Qui sommes-nous", href: "/qui-sommes-nous" },
   { label: "Charte d'usage de l'IA", href: "/charte" },
   { label: "Tarifs", href: "/tarifs" },

@@ -183,15 +183,39 @@ const figureL: Case[] = [...rectCells(3, 4, 0, 0), ...rectCells(2, 2, 3, 0)];
 // pourquoi on multiplie par 100 et non par 10.
 const centCarres = grille(10, 10, rectCells(10, 10), { cellSize: 20 });
 
-const tableauConversions = (
+// ⛔ PAS DE TABLEAU DE CONVERSION (BO 6e, relu le 22/08/2026) : « le recours à
+// un tableau de conversion est déconseillé à ce stade de l'apprentissage ».
+// Ce tableau-ci ne convertit rien — il dit ce que CHAQUE unité EST, et c'est
+// exactement ce que le BO demande de mémoriser : « l'élève sait que 1 cm² est
+// l'aire d'un carré de 1 cm de côté […], que 1 mm² est l'aire d'un carré de
+// 1 mm de côté et que 1 km² est l'aire d'un carré de 1 km de côté ».
+const tableauUnites = (
   <CanvasRenderer
     figure={{
       kind: "tableau_donnees",
-      headers: ["Unité", "Le carré qui la définit", "Vaut"],
+      headers: ["Unité", "C'est l'aire d'un carré de côté"],
       rows: [
-        { values: ["1 m²", "un carré de 1 m de côté", "100 dm²"] },
-        { values: ["1 dm²", "un carré de 1 dm de côté", "100 cm²"] },
-        { values: ["1 cm²", "un carré de 1 cm de côté", "0,01 dm²"] },
+        { values: ["1 mm²", "1 mm"] },
+        { values: ["1 cm²", "1 cm"] },
+        { values: ["1 dm²", "1 dm"] },
+        { values: ["1 m²", "1 m"] },
+        { values: ["1 km²", "1 km"] },
+      ],
+      highlight: { col: 1 },
+    }}
+  />
+);
+
+// La comparaison de l'exemple 4, posée : on ne convertit pas dans un tableau
+// d'unités, on ramène les deux aires à la même unité et on compare les nombres.
+const tableauComparaison = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      headers: ["Objet", "Aire donnée", "La même aire, en cm²"],
+      rows: [
+        { values: ["Affiche", "250 cm²", "250"] },
+        { values: ["Feuille", "3 dm²", "3 × 100 = 300"] },
       ],
       highlight: { col: 2 },
     }}
@@ -240,7 +264,7 @@ export const ficheAires6e: FicheCoursData = {
     {
       titre: "L'unité est un carré",
       texte:
-        "1 cm² est l'aire d'un carré de 1 cm de côté. De même, 1 dm² est l'aire d'un carré de 1 dm de côté et 1 m² celle d'un carré de 1 m de côté.",
+        "1 cm² est l'aire d'un carré de 1 cm de côté. De même pour 1 mm², 1 dm², 1 m² et 1 km² : chaque unité d'aire est le carré construit sur l'unité de longueur qui porte son nom.",
       schema: legende(
         rectangleCote(140, 140, { AB: "1 cm", BC: "1 cm", CD: "1 cm", DA: "1 cm" }),
         "ce carré-là, c'est 1 cm²"
@@ -285,7 +309,7 @@ export const ficheAires6e: FicheCoursData = {
     {
       titre: "Convertir : × 100 par étage",
       texte:
-        "1 m² = 100 dm² et 1 dm² = 100 cm², car un côté 10 fois plus grand donne 10 × 10 = 100 carrés. Dans l'autre sens, 1 cm² = 0,01 dm².",
+        "En 6e, deux conversions seulement : 1 m² = 100 dm² et 1 dm² = 100 cm², car un côté 10 fois plus grand donne 10 × 10 = 100 carrés. Dans l'autre sens, 1 cm² est le centième de 1 dm² : 1 cm² = 0,01 dm².",
       schema: legende(centCarres, "1 dm de côté = 10 cm × 10 cm = 100 carrés de 1 cm²"),
     },
     {
@@ -347,8 +371,8 @@ export const ficheAires6e: FicheCoursData = {
     {
       titre: "La même unité, puis l'unité carrée",
       texte:
-        "On termine toujours par l'unité : 24 cm², 40 m². Et avant de comparer deux aires, on les met dans la même unité — on change d'étage en multipliant ou en divisant par 100.",
-      schema: tableauConversions,
+        "On termine toujours par l'unité : 24 cm², 40 m². Et avant de comparer deux aires, on les met dans la même unité — la mesure en dm² est 100 fois plus petite que la mesure en cm².",
+      schema: tableauUnites,
     },
   ],
   usages: [
@@ -411,7 +435,7 @@ export const ficheAires6e: FicheCoursData = {
       titre: "Comparer deux aires",
       donnees: "Une affiche a une aire de 250 cm². Une feuille a une aire de 3 dm².",
       question: "Laquelle occupe la plus grande surface ?",
-      schema: tableauConversions,
+      schema: tableauComparaison,
       solution:
         "On met tout dans la même unité. 1 dm² = 100 cm², donc 3 dm² = 3 × 100 = 300 cm². On compare alors 250 cm² et 300 cm² : c'est la feuille qui a la plus grande aire.",
     },
@@ -443,9 +467,9 @@ export const ficheAires6e: FicheCoursData = {
         "Oui. Un rectangle de 3 cm sur 4 cm et un rectangle de 2 cm sur 6 cm ont tous les deux une aire de 12 cm². Mais leurs périmètres valent 14 cm et 16 cm : l'aire et le périmètre sont deux grandeurs différentes.",
     },
     {
-      question: "Range dans l'ordre croissant : 450 cm², 5 dm², 0,04 m².",
+      question: "Convertis 3,7 m² en dm², puis 370 cm² en dm².",
       correction:
-        "On convertit tout en cm² : 5 dm² = 500 cm², et 0,04 m² = 0,04 × 100 = 4 dm² = 400 cm². L'ordre croissant est donc 0,04 m² (400 cm²), puis 450 cm², puis 5 dm² (500 cm²).",
+        "1 m² = 100 dm², donc 3,7 m² = 3,7 × 100 = 370 dm². Dans l'autre sens, 1 dm² = 100 cm² : la mesure en dm² est 100 fois plus petite que la mesure en cm², donc 370 cm² = 370 ÷ 100 = 3,7 dm².",
     },
     {
       question:

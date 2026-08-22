@@ -2,6 +2,8 @@ import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
 import { entiersBank } from "./entiers.bank";
 import { fractionsBank } from "./fractions.bank";
+import { fractionsCalculBank } from "./fractions-calcul.bank";
+import { algebreBank } from "./algebre.bank";
 import { decimauxBank } from "./decimaux.bank";
 import { pourcentagesBank } from "./pourcentages.bank";
 
@@ -19,6 +21,12 @@ import { calculMentalBank } from "./calcul-mental.bank";
 import { calculPoseBank } from "./calcul-pose.bank";
 
 import { longueursBank } from "./longueurs.bank";
+import { dureesBank } from "./durees.bank";
+import { distancesBank } from "./distances.bank";
+import { mediatriceBank } from "./mediatrice.bank";
+import { bissectriceBank } from "./bissectrice.bank";
+import { cercleCirconscritBank } from "./cercle-circonscrit.bank";
+import { visionEspaceBank } from "./vision-espace.bank";
 import { volumesBank } from "./volumes.bank";
 
 import { donneesBank } from "./donnees.bank";
@@ -33,6 +41,8 @@ export const maths6eQuestionBank: TutorBankItemV4[] = [
   ...entiersBank,
   ...decimauxBank,
   ...fractionsBank,
+  ...fractionsCalculBank,
+  ...algebreBank,
   ...pourcentagesBank,
   ...proportionnaliteBank,
   ...longueursBank,
@@ -46,18 +56,24 @@ export const maths6eQuestionBank: TutorBankItemV4[] = [
   // =========================
   // GRANDEURS ET GÉOMÉTRIE
   // =========================
+  ...distancesBank,
+  ...mediatriceBank,
   ...anglesBank,
+  ...bissectriceBank,
   ...perimetresBank,
   ...cercleBank,
   ...airesBank,
+  ...dureesBank,
 
   // =========================
   // GÉOMÉTRIE
   // =========================
   ...trianglesBank,
+  ...cercleCirconscritBank,
   ...quadrilateresBank,
   ...symetrieBank,
   ...volumesBank,
+  ...visionEspaceBank,
 
   // =========================
   // ALGORITHMIQUE

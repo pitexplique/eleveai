@@ -14,8 +14,11 @@ export const metadata: Metadata = {
   // ne transporte aucun titre, seul le <title> arrive dans les résultats.
   title:
     "Évaluation nationale 6e maths — gratuit, en PDF imprimable (sujet + corrigé) | EleveAI",
+  // ⚠️ 160 CARACTÈRES MAXIMUM — voir ../page.tsx pour le pourquoi.
+  // Elle en faisait 317. Les trois formats restent dans la page, où on les
+  // choisit ; le snippet garde ce qui décide du clic.
   description:
-    "Le sujet de l'épreuve blanche d'évaluation nationale de 6e en mathématiques, à imprimer gratuitement : 62 questions en 50 minutes, aux effectifs du sujet officiel, sur le programme de CM2. Trois formats — le sujet seul, le sujet et son corrigé, ou le corrigé seul pour le professeur. Sans inscription, sans publicité.",
+    "L'évaluation nationale de 6e en maths à imprimer : 62 questions en 50 minutes, sur le programme de CM2. Sujet et corrigé, gratuits, sans inscription.",
   keywords: [
     "évaluation nationale 6e maths à imprimer",
     "évaluation nationale 6e PDF",

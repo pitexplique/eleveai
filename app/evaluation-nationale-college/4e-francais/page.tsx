@@ -4,8 +4,10 @@ import Epreuve4eFrancaisClient from "./Epreuve4eFrancaisClient";
 export const metadata: Metadata = {
   title:
     "Évaluation nationale de 4e en français — l'épreuve blanche, 50 minutes, corrigée | EleveAI",
+  // ⚠️ 160 CARACTÈRES MAXIMUM — voir 4e-maths/page.tsx pour le pourquoi.
+  // Elle en faisait 564. Le détail des six domaines est dans la page.
   description:
-    "L'épreuve blanche de l'évaluation nationale de 4e en français : l'épreuve entière, au volume du sujet officiel — 67 questions en 50 minutes, qui défilent une par une, sans retour en arrière. Six domaines : dix questions sur un texte littéraire, neuf sur un groupement de documents, quinze de lexique, douze de grammaire, douze d'orthographe et neuf sur un enregistrement à écouter. Sur le programme de 5e. À la fin, un groupe de maîtrise par domaine, dans les mots du bilan officiel, et de quoi retravailler chaque compétence qui a coincé. Gratuit, sans publicité.",
+    "Évaluation nationale de 4e en français : l'épreuve blanche, au volume du sujet officiel — 67 questions en 50 minutes, sur le programme de 5e. Gratuit.",
   keywords: [
     "évaluation nationale 4e français",
     "évaluation nationale 4e s'entraîner",

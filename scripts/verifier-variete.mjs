@@ -15,11 +15,23 @@
 // textes distincts. Un `fixed` compte pour un ; un `template` pour autant
 // d'énoncés qu'il sait fabriquer.
 //
-//   node --experimental-strip-types scripts/verifier-variete.mjs premiere maths
-//   node --experimental-strip-types scripts/verifier-variete.mjs premiere maths 15
+//   npx --yes tsx@4 scripts/verifier-variete.mjs premiere maths
+//   npx --yes tsx@4 scripts/verifier-variete.mjs premiere maths 15
 //
 // Le troisième argument est le seuil (10 par défaut).
 // Sortie 1 si une micro-compétence passe sous le seuil.
+//
+// ⛔⛔ IL MESURAIT LA MOITIÉ DE LA BANQUE — corrigé le 22/08/2026.
+// Le chargeur ne lisait que les `*.bank.ts` du dossier de la classe. En maths
+// c'est toute la banque ; EN FRANÇAIS, non : les gabarits générés viennent de
+// `questionBank/cycle3/francais/buildCycle3FrancaisBank.ts`, un dossier qu'il
+// n'ouvrait jamais. Il ne voyait donc que la couche « fixed », et annonçait
+// « 1 énoncé » sur des micros que les générateurs alimentent en centaines de
+// variantes. Un instrument qui ne voit qu'une partie de son objet ne mesure
+// pas peu : il mesure FAUX, et dans le sens qui fait travailler pour rien.
+// On charge désormais `index.ts` — l'export que le coach consomme réellement.
+// ⚠️ Il faut donc `tsx` : `index.ts` importe par alias `@/…`, que
+// `node --experimental-strip-types` ne sait pas résoudre.
 
 import fs from "node:fs";
 import { pathToFileURL } from "node:url";
@@ -30,8 +42,10 @@ const matiere = process.argv[3] ?? "maths";
 const SEUIL = Number(process.argv[4] ?? 10);
 const TIRAGES = 400;
 
-// On charge chaque `*.bank.ts` directement : l'index les importe sans extension
-// de fichier, ce que Node ne sait pas résoudre hors bundler.
+// LA BANQUE, C'EST `index.ts` — celle que le coach sert vraiment. Elle fusionne
+// les fichiers `*.bank.ts` du dossier ET, en français, les gabarits fabriqués
+// ailleurs (`cycle3/francais`, `cycle4/francais`). On ne retombe sur la lecture
+// fichier par fichier que si la classe n'a pas d'index.
 const dossier = path.resolve(process.cwd(), "lib/tutor-v4/questionBank", classe, matiere);
 if (!fs.existsSync(dossier)) {
   console.error(`Dossier introuvable : ${dossier}`);
@@ -39,8 +53,12 @@ if (!fs.existsSync(dossier)) {
 }
 
 const banque = [];
-for (const fichier of fs.readdirSync(dossier).filter((f) => f.endsWith(".bank.ts"))) {
-  const mod = await import(pathToFileURL(path.join(dossier, fichier)).href);
+const index = path.join(dossier, "index.ts");
+const fichiers = fs.existsSync(index)
+  ? [index]
+  : fs.readdirSync(dossier).filter((f) => f.endsWith(".bank.ts")).map((f) => path.join(dossier, f));
+for (const fichier of fichiers) {
+  const mod = await import(pathToFileURL(fichier).href);
   for (const exporte of Object.values(mod)) {
     if (Array.isArray(exporte)) banque.push(...exporte);
   }
@@ -62,8 +80,16 @@ function enoncesDe(item) {
       // propositions, et la FIGURE. « Quelle est la moyenne de la série
       // ci-contre ? » ne change pas d'un mot d'un tirage à l'autre, mais le
       // tableau, lui, change — et c'est une autre question.
+      //
+      // ⛔⛔ LES PROPOSITIONS SONT TRIÉES — corrigé le 22/08/2026. Elles étaient
+      // jointes dans l'ordre du tirage, or les QCM MÉLANGENT leurs quatre choix
+      // à chaque génération (`makeChoices`). Les mêmes quatre propositions
+      // comptaient donc jusqu'à 24 fois : un vivier de 9 questions s'affichait
+      // « 216 énoncés distincts », et le seuil des 10 était franchi par le
+      // mélange, pas par le contenu. Le français annonçait 353 en médiane.
+      // Or reconnaître une question ne dépend pas de l'ordre des réponses.
       vus.add(
-        `${q.text}||${(q.choices ?? []).join("|")}||${q.canvas ? JSON.stringify(q.canvas) : ""}`
+        `${q.text}||${[...(q.choices ?? [])].sort().join("|")}||${q.canvas ? JSON.stringify(q.canvas) : ""}`
       );
     } catch {
       /* un tirage qui échoue est signalé par verifier-generateurs */

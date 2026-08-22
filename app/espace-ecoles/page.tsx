@@ -1,5 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+// ⛔ CETTE PAGE NE CONNAISSAIT PAS `lib/tarifs.ts` (corrigé le 22/08/2026), et
+// c'est la page que lit un chef d'établissement. Elle ne recopiait pourtant
+// aucun chiffre — elle recopiait la STRUCTURE du prix : « un tarif par élève,
+// négocié sur devis selon vos effectifs », deux fois, plus « offre pilote sur
+// devis » dans la description que Google affiche. Aucune constante ne protège
+// contre ça, et la page annonçait donc un mode de facturation que /tarifs
+// n'applique plus. Le prix vient d'ici, la formule aussi.
+import {
+  EXEMPLE_ETABLISSEMENT,
+  PLAFOND_ETABLISSEMENT_AN,
+  PRIX_ETABLISSEMENT_ELEVE_MOIS,
+  euros,
+  montant,
+} from "@/lib/tarifs";
 
 export const metadata: Metadata = {
   // Même cas que /besoin-de-vous : la marque ouvre la phrase, `absolute` évite
@@ -7,13 +21,15 @@ export const metadata: Metadata = {
   title: {
     absolute: "EleveAI pour les établissements — Collèges et lycées à La Réunion",
   },
-  description:
-    "Un coach IA multi-matières et un suivi élève par élève, déployé en quelques heures. Financé par l'établissement, gratuit pour les familles. RGPD maîtrisé, conçu par un enseignant.",
+  description: `Un coach IA multi-matières et un suivi élève par élève, déployé en quelques heures. ${montant(
+    PRIX_ETABLISSEMENT_ELEVE_MOIS,
+  )} par élève et par mois, jamais plus de ${euros(PLAFOND_ETABLISSEMENT_AN)} par an — les familles ne paient rien. RGPD maîtrisé, conçu par un enseignant.`,
   alternates: { canonical: "https://www.eleveai.fr/espace-ecoles" },
   openGraph: {
     title: "EleveAI pour les établissements scolaires",
-    description:
-      "Coach IA multi-matières + suivi élève par élève. Financé par l'établissement, gratuit pour les familles. Offre pilote sur devis.",
+    description: `Coach IA multi-matières + suivi élève par élève. ${montant(
+      PRIX_ETABLISSEMENT_ELEVE_MOIS,
+    )} par élève et par mois, plafonné à ${euros(PLAFOND_ETABLISSEMENT_AN)} par an — les familles ne paient rien.`,
     url: "https://www.eleveai.fr/espace-ecoles",
     siteName: "EleveAI",
     type: "website",
@@ -46,9 +62,12 @@ const EPREUVES = [
 const modele = [
   {
     emoji: "🏫",
-    titre: "Vous financez, à prix viable par élève",
-    texte:
-      "Un tarif par élève, négocié sur devis selon vos effectifs. Un seul interlocuteur, une seule facture — pas de gestion de paiements familles.",
+    titre: `Vous financez : ${montant(PRIX_ETABLISSEMENT_ELEVE_MOIS)} par élève et par mois`,
+    texte: `Le barreau le plus bas de l'échelle, et il est plafonné : jamais plus de ${euros(
+      PLAFOND_ETABLISSEMENT_AN,
+    )} par an quel que soit l'effectif. Un collège de ${EXEMPLE_ETABLISSEMENT.eleves} élèves paie ${euros(
+      EXEMPLE_ETABLISSEMENT.total,
+    )}, soit ${montant(EXEMPLE_ETABLISSEMENT.parEleveAn)} par élève et par an. Rien à recompter à chaque rentrée, un seul interlocuteur, une seule facture — et pas de paiements familles à gérer.`,
   },
   {
     emoji: "🤝",
@@ -90,7 +109,13 @@ const etapes = [
 const faq = [
   {
     q: "Combien ça coûte pour l'établissement ?",
-    a: "Un tarif par élève, sur devis selon vos effectifs, pensé pour rester viable. En contrepartie, c'est gratuit pour toutes les familles et il n'y a aucun paiement à gérer côté foyers.",
+    a: `${montant(
+      PRIX_ETABLISSEMENT_ELEVE_MOIS,
+    )} par élève et par mois, et jamais plus de ${euros(PLAFOND_ETABLISSEMENT_AN)} par an : tous les niveaux, toutes les classes, tous les professeurs, plus la vue complète de la direction. Le plafond est ferme : au-delà de 334 élèves, plus l'établissement est grand, moins l'élève coûte. Un collège de ${
+      EXEMPLE_ETABLISSEMENT.eleves
+    } élèves paie ${euros(EXEMPLE_ETABLISSEMENT.total)}, soit ${montant(
+      EXEMPLE_ETABLISSEMENT.parEleveAn,
+    )} par élève et par an. En contrepartie, aucune famille ne paie et il n'y a aucun paiement à gérer côté foyers.`,
   },
   {
     q: "Et pour les familles ?",

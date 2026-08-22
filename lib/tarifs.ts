@@ -151,13 +151,24 @@ export const EXEMPLE_CLASSE = {
   eleves: CLASSE_EXEMPLE_ELEVES,
   parMois: CLASSE_EXEMPLE_ELEVES * PRIX_CLASSE_ELEVE_MOIS,
   parAn: CLASSE_EXEMPLE_ELEVES * PRIX_CLASSE_ELEVE_MOIS * 12,
+  /** 9 € — la seule unité qui se compare à Kwyk (72 €) et Mathia (96 €). */
+  parEleveAn: PRIX_CLASSE_ELEVE_MOIS * 12,
 };
 
+/**
+ * Ce que le forfait établissement donne PAR ÉLÈVE, pour un collège ordinaire.
+ *
+ * ⭐ C'est un ARGUMENT, pas un mode de facturation — exactement le même rôle
+ * que `EXEMPLE_CLASSE` pour le professeur. On ne facture plus à l'élève, mais
+ * on montre ce que ça représente, parce que c'est ce chiffre qui fait dire oui.
+ */
 export const EXEMPLE_ETABLISSEMENT = {
   eleves: ETABLISSEMENT_EXEMPLE_ELEVES,
   total: factureEtablissement(ETABLISSEMENT_EXEMPLE_ELEVES),
   sansPlafond: ETABLISSEMENT_EXEMPLE_ELEVES * PRIX_ETABLISSEMENT_ELEVE_MOIS * 12,
   parMois: factureEtablissement(ETABLISSEMENT_EXEMPLE_ELEVES) / 12,
+  /** 5 € — le tarif est de 6 €, le plafond ramène l'exemple à 5 €. */
+  parEleveAn: factureEtablissement(ETABLISSEMENT_EXEMPLE_ELEVES) / ETABLISSEMENT_EXEMPLE_ELEVES,
 };
 
 /**
