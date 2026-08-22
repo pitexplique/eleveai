@@ -6952,6 +6952,13 @@ function conjugaisonQuestion(microId: string): Generated {
      notion, et passe désormais par CE routeur et non par `grammaireQuestion`.
      Sans cette branche, il traversait toute la fonction et tombait sur le
      moteur du présent — juste, et sur un autre sujet. */
+  /* ⛔ L'ÊTRE AVANT LE GÉNÉRIQUE. Au CM1, le BO ne demande QUE l'auxiliaire
+     être ; l'accord avec le COD pour avoir entre au CM2. Servir PARTICIPE_PASSE
+     à `cm1_orth_participe_passe_etre` mettrait le CM1 un an en avance — c'est
+     l'ordre que `grammaireQuestion` tient depuis le 11/08, et qu'il faut tenir
+     ici aussi depuis que ces micros sont passées sous une notion de
+     conjugaison. */
+  if (microId.includes("participe_passe_etre")) return qcm(PARTICIPE_PASSE_ETRE);
   if (microId.includes("participe")) return qcm(PARTICIPE_PASSE);
 
   // Present / imparfait / futur / infinitif : moteur parametrique (centaines de
@@ -7712,7 +7719,11 @@ function questionParMicro(microId: string): Generated | null {
      et il DOIT le rester : la progression déjà enregistrée d'un élève porte cet
      identifiant, un renommage l'effacerait en silence. On déplace la notion, on
      garde l'identité — et on paie ce choix ici, par deux lignes explicites. */
-  if (microId.includes("flue_mise_en_voix") || microId.includes("flue_plaisir")) {
+  if (
+    microId.includes("flue_mise_en_voix") ||
+    microId.includes("flue_plaisir") ||
+    microId.includes("flue_expressive")
+  ) {
     return qcm(MISE_EN_VOIX);
   }
   // Les trois trous de Lecture et Écriture relevés en 6e.

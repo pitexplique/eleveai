@@ -92,7 +92,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_fluence_5",
-    "fluence_lecture",
+    "lecture_voix_haute",
     "cm1_flue_expressive",
     3,
     "Lis : « Le rideau se lève. Deux personnages entrent et parlent chacun leur tour. » De quel genre de texte s'agit-il surtout ?",
@@ -104,7 +104,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   // ── 2. Comprendre textes, documents et images ──────────────────────────────
   qcm(
     "cm1_fr_fixed_comp_1",
-    "comprehension_textes_documents",
+    "comprehension_textes",
     "cm1_comp_explicite",
     1,
     "Lis : « Le petit chat gris dormait, roulé en boule au creux du fauteuil. » Où dort le chat ?",
@@ -114,7 +114,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_comp_2",
-    "comprehension_textes_documents",
+    "comprehension_textes",
     "cm1_comp_implicite",
     3,
     "Lis : « Léo n'avait rien mangé depuis le matin. Son ventre gargouillait. » Que ressent Léo ?",
@@ -124,7 +124,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_comp_3",
-    "comprehension_textes_documents",
+    "comprehension_textes",
     "cm1_comp_genres",
     2,
     "Lis : « Le loup s'approcha lentement de la maison des trois petits cochons. » Ce passage vient sûrement...",
@@ -134,7 +134,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_comp_4",
-    "comprehension_textes_documents",
+    "comprehension_documents",
     "cm1_doc_source",
     2,
     "Un document indique : Titre : Les volcans. Source : magazine scientifique junior. Date : mars 2025. Quelle information donne la source ?",
@@ -144,7 +144,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_comp_5",
-    "comprehension_textes_documents",
+    "comprehension_documents",
     "cm1_doc_infos",
     1,
     "Sur une affiche : « Piscine ouverte de 9h à 18h, sauf le lundi. » Peut-on y aller le lundi ?",
@@ -176,7 +176,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_oeuvre_3",
-    "lecture_oeuvres",
+    "culture_lecteur",
     "cm1_oeuvre_carnet",
     2,
     "Après la lecture d'un conte, quelle trace est la plus utile dans un carnet de lecteur ?",
@@ -196,7 +196,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_oeuvre_5",
-    "lecture_oeuvres",
+    "culture_lecteur",
     "cm1_oeuvre_perseverer",
     3,
     "Pour s'engager dans une lecture longue, le mieux est de...",
@@ -208,7 +208,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   // ── 4. Écrire pour apprendre et produire ───────────────────────────────────
   qcm(
     "cm1_fr_fixed_ecrit_1",
-    "ecriture",
+    "ecriture_produire",
     "cm1_ecrit_phrase",
     1,
     "Quelle phrase est correctement ponctuée ?",
@@ -218,7 +218,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_ecrit_2",
-    "ecriture",
+    "ecriture_produire",
     "cm1_ecrit_paragraphe",
     2,
     "Quel groupe de mots organise le mieux les étapes d'un récit ?",
@@ -228,7 +228,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_ecrit_3",
-    "ecriture",
+    "ecriture_produire",
     "cm1_ecrit_recit",
     2,
     "Pour écrire une courte description, on choisit surtout...",
@@ -238,7 +238,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_ecrit_4",
-    "ecriture",
+    "ecriture_reviser",
     "cm1_ecrit_reviser",
     1,
     "Avant de rendre un texte, la dernière étape utile est de...",
@@ -248,7 +248,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_ecrit_5",
-    "ecriture",
+    "ecriture_preparer",
     "cm1_ecrit_notes",
     2,
     "Pour ne pas répéter « le chien » dans deux phrases qui se suivent, on peut le remplacer par...",
@@ -260,7 +260,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   // ── 5. Écouter, dire et participer aux échanges ────────────────────────────
   qcm(
     "cm1_fr_fixed_oral_1",
-    "oral",
+    "oral_ecouter",
     "cm1_oral_ecouter",
     1,
     "Pour bien écouter une consigne, il faut...",
@@ -270,7 +270,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_oral_2",
-    "oral",
+    "oral_ecouter",
     "cm1_oral_reformuler",
     2,
     "Reformuler une consigne entendue, c'est...",
@@ -280,7 +280,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_oral_3",
-    "oral",
+    "oral_echanger",
     "cm1_oral_presenter",
     2,
     "Pour bien présenter un livre à la classe, il vaut mieux...",
@@ -290,7 +290,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_oral_4",
-    "oral",
+    "oral_echanger",
     "cm1_oral_argumenter",
     2,
     "Donner un avis justifié, c'est dire...",
@@ -300,7 +300,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_oral_5",
-    "oral",
+    "oral_echanger",
     "cm1_oral_echanger",
     1,
     "Quand un camarade parle dans un échange, on doit...",
@@ -312,7 +312,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   // ── 6. Vocabulaire et relations entre les mots ─────────────────────────────
   qcm(
     "cm1_fr_fixed_voc_1",
-    "vocabulaire",
+    "vocabulaire_sens",
     "cm1_voc_contexte",
     1,
     "Dans « Le chemin était boueux après la pluie », que veut dire boueux ?",
@@ -322,7 +322,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_voc_2",
-    "vocabulaire",
+    "vocabulaire_relations",
     "cm1_voc_famille",
     2,
     "Quel mot appartient à la même famille que dent ?",
@@ -332,7 +332,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_voc_3",
-    "vocabulaire",
+    "vocabulaire_relations",
     "cm1_voc_syn_ant",
     1,
     "Quel est le contraire de content ?",
@@ -342,7 +342,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_voc_4",
-    "vocabulaire",
+    "vocabulaire_sens",
     "cm1_voc_polysemie",
     2,
     "Quelle phrase utilise le mot glace au sens du dessert ?",
@@ -352,7 +352,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_voc_5",
-    "vocabulaire",
+    "vocabulaire_emploi",
     "cm1_voc_orthographe",
     2,
     "Quelle est l'orthographe correcte ?",
@@ -364,7 +364,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   // ── 7. Phrase simple, accords et orthographe grammaticale ──────────────────
   qcm(
     "cm1_fr_fixed_gram_1",
-    "grammaire_orthographe",
+    "grammaire_phrase",
     "cm1_gram_phrase_simple",
     1,
     "Quel est le type de la phrase « Est-ce que tu viens ? »",
@@ -374,7 +374,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_gram_2",
-    "grammaire_orthographe",
+    "grammaire_phrase",
     "cm1_gram_sujet_verbe",
     1,
     "Dans « Le facteur apporte le courrier », quel est le sujet ?",
@@ -384,7 +384,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_gram_3",
-    "grammaire_orthographe",
+    "grammaire_groupe_nominal",
     "cm1_gram_gn",
     2,
     "Dans le groupe « un grand bateau blanc », quel est le nom principal ?",
@@ -394,7 +394,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_gram_4",
-    "grammaire_orthographe",
+    "grammaire_accords",
     "cm1_orth_accord_gn",
     2,
     "Quel groupe nominal est correctement accordé ?",
@@ -404,7 +404,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_gram_5",
-    "grammaire_orthographe",
+    "grammaire_accords",
     "cm1_orth_homophones",
     3,
     "Homophones « est » / « et » : choisis la phrase correcte.",
@@ -416,7 +416,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   // ── 8. Conjugaison et valeur des temps ─────────────────────────────────────
   qcm(
     "cm1_fr_fixed_conj_1",
-    "conjugaison",
+    "conjugaison_temps_simples",
     "cm1_conj_infinitif_groupe",
     1,
     "Quel est l'infinitif du verbe dans « Nous mangeons une pomme » ?",
@@ -426,7 +426,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_conj_2",
-    "conjugaison",
+    "conjugaison_temps_simples",
     "cm1_conj_present",
     1,
     "Choisis la forme correcte au présent : « Tu ___ une chanson. »",
@@ -436,7 +436,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_conj_3",
-    "conjugaison",
+    "conjugaison_temps_simples",
     "cm1_conj_imparfait",
     2,
     "Choisis la forme correcte à l'imparfait : « Il ___ dans la cour. »",
@@ -446,7 +446,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_conj_4",
-    "conjugaison",
+    "conjugaison_temps_simples",
     "cm1_conj_futur",
     2,
     "Choisis la forme correcte au futur : « Demain, nous ___ en voyage. »",
@@ -456,7 +456,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_conj_5",
-    "conjugaison",
+    "conjugaison_passe_compose",
     "cm1_conj_passe_compose",
     2,
     "Quel auxiliaire complète : « Nous ___ mangé une pomme. »",
@@ -466,7 +466,7 @@ export const francaisCm1FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm1_fr_fixed_conj_6",
-    "conjugaison",
+    "conjugaison_passe_compose",
     "cm1_conj_valeur_temps",
     3,
     "Dans « Hier, il pleuvait sans arrêt », quel temps est utilisé ?",
