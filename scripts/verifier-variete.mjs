@@ -80,8 +80,16 @@ function enoncesDe(item) {
       // propositions, et la FIGURE. « Quelle est la moyenne de la série
       // ci-contre ? » ne change pas d'un mot d'un tirage à l'autre, mais le
       // tableau, lui, change — et c'est une autre question.
+      //
+      // ⛔⛔ LES PROPOSITIONS SONT TRIÉES — corrigé le 22/08/2026. Elles étaient
+      // jointes dans l'ordre du tirage, or les QCM MÉLANGENT leurs quatre choix
+      // à chaque génération (`makeChoices`). Les mêmes quatre propositions
+      // comptaient donc jusqu'à 24 fois : un vivier de 9 questions s'affichait
+      // « 216 énoncés distincts », et le seuil des 10 était franchi par le
+      // mélange, pas par le contenu. Le français annonçait 353 en médiane.
+      // Or reconnaître une question ne dépend pas de l'ordre des réponses.
       vus.add(
-        `${q.text}||${(q.choices ?? []).join("|")}||${q.canvas ? JSON.stringify(q.canvas) : ""}`
+        `${q.text}||${[...(q.choices ?? [])].sort().join("|")}||${q.canvas ? JSON.stringify(q.canvas) : ""}`
       );
     } catch {
       /* un tirage qui échoue est signalé par verifier-generateurs */
