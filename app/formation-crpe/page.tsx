@@ -4,6 +4,15 @@
 // /formation-CRPE renverrait un 404. Si le sigle en capitales est indispensable
 // à l'oral, il reste dans le titre de la page — pas dans l'adresse.
 //
+// ⛔ ET ELLE RESTE COURTE. La question s'est posée le 22/08 :
+// `/formation-crpe-ile-de-la-reunion` mettrait le lieu dans l'adresse. Non, pour
+// deux raisons. La première : les mots de l'URL pèsent très peu aujourd'hui face
+// au titre, au H1 et au texte — et le lieu y est déjà partout. La seconde, qui
+// tranche vraiment : cette adresse se DIT. Au téléphone, sur un message, sur une
+// affiche en salle des profs. « eleveai.fr slash formation crpe » se retient ;
+// « slash formation crpe île de la Réunion » ne se dit pas. Le référencement
+// local se gagne dans le titre, pas dans le chemin.
+//
 // ⭐ OUVERTE LE 22/08/2026. Frédéric : « je suis déclaré URSSAF ». Le `noindex`
 // et l'absence du sitemap tenaient au statut, et le statut est réglé — micro-
 // entrepreneur depuis le 19/08. La page s'indexe, elle est au sitemap, et elle
@@ -36,18 +45,23 @@ const SITE_URL = "https://www.eleveai.fr";
 // ─────────────────────────────────────────────────────────────────────────────
 // LE LIEU.
 //
-// ⚠️⚠️ ACCORD ÉCRIT DE L'HÔTEL AVANT TOUTE MISE EN LIGNE. Nommer une maison sur
-// une page commerciale ne l'informe pas, ça l'engage : elle apparaît comme
-// partenaire d'une offre payante qu'elle n'a pas relue. Un mail où le nom, la
-// salle et les samedis sont écrits noir sur blanc suffit — mais il doit exister
-// avant que le `noindex` saute. Si l'accord tarde, `nom: null` fait retomber la
-// page sur « à Terre-Sainte, Saint-Pierre » sans rien casser.
+// ✅ L'HÔTEL A CONFIRMÉ (22/08/2026). Son directeur est un ami de Frédéric et a
+// donné son accord — la salle ne se loue pas facilement le samedi matin, l'hôtel
+// y gagne autant que nous. C'était le dernier verrou : nommer une maison sur une
+// page commerciale ne l'informe pas, ça l'engage, et il fallait donc son accord
+// avant que la page devienne publique. Il existe.
 //
-// `debut` / `fin` : la salle se loue à la MATINÉE, d'où les 4 h. À confirmer
-// avec l'hôtel en même temps que l'accord — un candidat qui vient de
-// Saint-Joseph organise son samedi sur cette ligne-là. Deux champs et non une
-// chaîne toute faite, parce que l'horaire s'écrit « 8 h – 12 h » dans un encart
-// et « de 8 h à 12 h » dans une phrase : une seule source, deux rendus.
+// ⚠️ `nom: null` reste la sortie de secours : la page retombe alors sur
+// « à Terre-Sainte, Saint-Pierre » sans rien casser ailleurs. Une amitié n'est
+// pas un bail — si l'arrangement s'arrête, c'est UNE ligne à changer, pas la
+// page à réécrire.
+//
+// `debut` / `fin` : la salle se loue à la MATINÉE, d'où les 4 h. ⚠️ Le créneau
+// 8 h – 12 h reste DÉDUIT de « 50 € la matinée » et n'a pas été confirmé avec
+// l'hôtel — un candidat qui vient de Saint-Joseph organise son samedi sur cette
+// ligne-là. Deux champs et non une chaîne toute faite, parce que l'horaire
+// s'écrit « 8 h – 12 h » dans un encart et « de 8 h à 12 h » dans une phrase :
+// une seule source, deux rendus.
 // ─────────────────────────────────────────────────────────────────────────────
 const LIEU: {
   nom: string | null;
@@ -142,6 +156,14 @@ const PRIX_SEANCE = TARIF.horaire * TARIF.heuresParSeance;
 // semaines de vide juste avant l'écrit, au moment exact où un candidat a besoin
 // d'être tenu. Deux séances ont donc été déplacées de l'automne vers le 20 et le
 // 27 mars. On révise moins longtemps, on révise plus près.
+//
+// ⛔⛔ LA PROGRESSION A ÉTÉ RELUE ET VALIDÉE PAR FRÉDÉRIC LE 22/08/2026
+// (« les 14 séances sont parfaites »). Elle avait d'abord été écrite par la
+// machine, ce qui était l'inverse du bon sens sur le seul contenu que seul un
+// prof puisse ordonner — c'est réparé, et ça ne se refait pas. Ne rien
+// réordonner, ne rien fusionner, ne rien « enrichir » : l'ordre des thèmes, ce
+// qui mérite une matinée entière et ce qui n'en mérite pas, c'est un jugement
+// de métier, pas une optimisation. Toute modification passe par lui.
 //
 // `bloc` : "automne" | "austral" (la coupure, aucune séance) | "finale".
 // Les dates sont écrites en dur parce qu'elles sont *décidées*, pas calculées :
@@ -278,7 +300,10 @@ const CE_QUE_CE_NEST_PAS = [
 
 export const metadata: Metadata = {
   // Le layout ajoute déjà « — EleveAI » : pas de suffixe ici.
-  title: `Les maths du CRPE, le samedi, à ${LIEU.ville}`,
+  // ⭐ « (La Réunion) » AJOUTÉ : la ville seule ne dit rien à qui cherche depuis
+  // ailleurs, et c'est le TITRE qui porte le référencement local — pas l'adresse
+  // de la page. Voir la note sur l'URL en tête de fichier.
+  title: `Les maths du CRPE, le samedi, à ${LIEU.ville} (La Réunion)`,
   description:
     `${NB_SEANCES} samedis de ${TARIF.heuresParSeance} h pour préparer l'épreuve de mathématiques du CRPE, ` +
     `à ${LIEU_COURT} (La Réunion). ${eur(PRIX_SEANCE)} la matinée, payable à la séance, ` +
