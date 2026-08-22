@@ -16,7 +16,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { cgvEnVigueur } from "@/lib/legal/editeur";
 
+// ⚠️ LES ÉVALUATIONS NATIONALES N'AVAIENT AUCUN LIEN DE PIED DE PAGE (22/08).
+// Les huit pages existaient, étaient au sitemap en priorité 0,9, et n'étaient
+// atteignables que depuis /espace-ecoles et /pourquoi-eleveai — deux pages
+// qu'un parent ne visite pas. Or c'est le rendez-vous du 7 au 25 septembre :
+// la seule fenêtre de l'année où on cherche ces mots-là.
+// Le hub tient les quatre épreuves ET les quatre sujets à imprimer ; les
+// quatre épreuves sont doublées ici pour qu'elles soient à UN saut de
+// l'accueil, comme le sont déjà les douze classes du coach maths.
 const outils = [
+  { label: "Évaluations nationales 6e et 4e", href: "/evaluation-nationale-college" },
+  { label: "Évaluation nationale 6e maths", href: "/evaluation-nationale-college/6e-maths" },
+  { label: "Évaluation nationale 6e français", href: "/evaluation-nationale-college/6e-francais" },
+  { label: "Évaluation nationale 4e maths", href: "/evaluation-nationale-college/4e-maths" },
+  { label: "Évaluation nationale 4e français", href: "/evaluation-nationale-college/4e-francais" },
   { label: "Coach English IA", href: "/coach-ia/english-maths" },
   { label: "Coach Maths IA", href: "/coach-ia/maths" },
   { label: "Coach Français IA", href: "/coach-ia/francais" },
@@ -78,8 +91,21 @@ const espaces = [
   { label: "Connexion élève / prof", href: "/auth/signin-eleve" },
 ];
 
+// ⚠️⚠️ `/formation-crpe` EST EN `noindex` DANS LE CODE (page.tsx, ligne 273) —
+// délibérément : le régime formation et l'accord de l'hôtel ne sont pas
+// tranchés. Ce lien la rend donc trouvable PAR UN VISITEUR, pas par un moteur,
+// et c'est bien l'intention : quelqu'un qui descend au pied de page cherche.
+// ⛔ MAIS LE 22/08, LE `noindex` N'ÉTAIT PAS EN LIGNE : la page servie sur
+// www.eleveai.fr/formation-crpe ne portait aucune balise robots (vérifié avec
+// témoin — /dashboard-eleve, lui, la porte bien). La production tournait donc
+// sur une version antérieure au commit qui l'a posé. Le prochain déploiement
+// de `main` remet le noindex. Tant qu'il n'est pas passé, ce lien + l'absence
+// de noindex = une offre tarifée, avec son lieu, ouverte aux moteurs.
+// → VÉRIFIER APRÈS DÉPLOIEMENT :
+//   curl -s https://www.eleveai.fr/formation-crpe | grep -c noindex   (doit rendre 1)
 const infos = [
   { label: "Pourquoi EleveAI", href: "/pourquoi-eleveai" },
+  { label: "Préparer les maths du CRPE", href: "/formation-crpe" },
   { label: "Qui sommes-nous", href: "/qui-sommes-nous" },
   { label: "Charte d'usage de l'IA", href: "/charte" },
   { label: "Tarifs", href: "/tarifs" },
