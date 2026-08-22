@@ -7706,6 +7706,15 @@ function questionParMicro(microId: string): Generated | null {
      lecture expressive s'appelle `flue_expressive`. Le jour où elles seront
      relues sur le BO, elles viendront ici aussi. */
   if (microId.includes("voix_")) return qcm(MISE_EN_VOIX);
+  /* ⛔ ET CES DEUX-LÀ SONT NOMMÉES UNE PAR UNE, à dessein. Au CM2, la mise en
+     voix et le plaisir de lire ont quitté la fluence pour « Lire à voix haute
+     avec expressivité ». Leur `id` commence pourtant toujours par `cm2_flue_`,
+     et il DOIT le rester : la progression déjà enregistrée d'un élève porte cet
+     identifiant, un renommage l'effacerait en silence. On déplace la notion, on
+     garde l'identité — et on paie ce choix ici, par deux lignes explicites. */
+  if (microId.includes("flue_mise_en_voix") || microId.includes("flue_plaisir")) {
+    return qcm(MISE_EN_VOIX);
+  }
   // Les trois trous de Lecture et Écriture relevés en 6e.
   if (microId.includes("flue_130")) return qcm(FLUENCE_130);
   if (microId.includes("comp_documents")) return qcm(DOCUMENTS);

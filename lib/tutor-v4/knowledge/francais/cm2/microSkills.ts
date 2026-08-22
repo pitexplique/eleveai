@@ -37,14 +37,21 @@ export const microSkills: MicroSkillSource[] = [
   // en amont, en respectant l'articulation du texte » · « Travailler la mise en
   // voix d'un texte (intonation, effets) » · « S'entrainer à faire vivre le
   // texte et prendre plaisir à le lire ».
-  // ⚠️ Les micros s'appellent `cm2_voix_*` et non `cm2_flue_*` : c'est ce
-  // morceau d'identifiant qui les fait tomber sur le pool MISE_EN_VOIX, écrit
-  // le 22/08. Sous leur ancien nom, elles recevaient des questions de
-  // compréhension de texte — justes, et sur un autre sujet.
+  /* ⛔ DEUX `id` GARDENT LEUR NOM D'ORIGINE, ET C'EST LA RÈGLE.
+     `cm2_flue_mise_en_voix` et `cm2_flue_plaisir_lire` ont l'air mal nommés
+     depuis qu'ils ont quitté la fluence — je les avais renommés en
+     `cm2_voix_*`, et c'était une faute. Ce fichier l'écrit lui-même depuis le
+     20/08 : « LES `id` DE MICRO NE SE RENOMMENT PAS, même quand leur notion
+     change […] la progression déjà enregistrée d'un élève les porte. » Un
+     renommage efface silencieusement ce qu'un élève a acquis.
+     On DÉPLACE la notion, on GARDE l'identité. L'aiguillage, lui, se règle où
+     il doit se régler : deux lignes nommant ces deux micros dans
+     `questionParMicro`. Les deux micros NEUVES, elles, sont libres de porter
+     le préfixe `cm2_voix_`, qui les fait tomber toutes seules sur MISE_EN_VOIX. */
   { id: "cm2_voix_articulation", label: "Lire avec aisance en respectant l'articulation du texte", notionId: "lecture_voix_haute", prerequis: ["cm2_flue_unites_syntaxiques"] }, // → MISE_EN_VOIX
-  { id: "cm2_voix_mise_en_voix", label: "Mettre en voix un texte : intonation et effets", notionId: "lecture_voix_haute", prerequis: ["cm2_voix_articulation"] }, // → MISE_EN_VOIX
-  { id: "cm2_voix_plaisir", label: "Faire vivre un texte et prendre plaisir à le lire", notionId: "lecture_voix_haute", prerequis: ["cm2_voix_mise_en_voix"] }, // → MISE_EN_VOIX
-  { id: "cm2_voix_defi", label: "Relever un défi de lecture à voix haute", notionId: "lecture_voix_haute", prerequis: ["cm2_voix_plaisir"] }, // → MISE_EN_VOIX
+  { id: "cm2_flue_mise_en_voix", label: "Mettre en voix un texte : intonation et effets", notionId: "lecture_voix_haute", prerequis: ["cm2_voix_articulation"] }, // → MISE_EN_VOIX (nommée)
+  { id: "cm2_flue_plaisir_lire", label: "Faire vivre un texte et prendre plaisir à le lire", notionId: "lecture_voix_haute", prerequis: ["cm2_flue_mise_en_voix"] }, // → MISE_EN_VOIX (nommée)
+  { id: "cm2_voix_defi", label: "Relever un défi de lecture à voix haute", notionId: "lecture_voix_haute", prerequis: ["cm2_flue_plaisir_lire"] }, // → MISE_EN_VOIX
 
   // ── « Lire et comprendre seul des textes, des documents et des images » ────
   // BO : « Poursuivre son apprentissage de lecteur autonome face à des textes de

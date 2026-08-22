@@ -89,7 +89,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   qcm(
     "cm2_fr_fixed_fluence_4",
     "lecture_voix_haute",
-    "cm2_voix_mise_en_voix",
+    "cm2_flue_mise_en_voix",
     3,
     "Pour mettre en voix « — Au secours ! Le feu ! » cria le pompier, il faut lire cette phrase...",
     ["d'une voix douce et lente", "en chuchotant", "sans aucune expression", "avec une voix forte et pressée"],
@@ -99,7 +99,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   qcm(
     "cm2_fr_fixed_fluence_5",
     "lecture_voix_haute",
-    "cm2_voix_plaisir",
+    "cm2_flue_plaisir_lire",
     3,
     "Pour lire une histoire à des plus jeunes et leur donner envie d'écouter, le mieux est de...",
     ["lire très vite pour finir vite", "mettre le ton et respecter les pauses", "lire tout bas", "sauter les passages difficiles"],
