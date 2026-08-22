@@ -56,12 +56,16 @@ const SITE_URL = "https://www.eleveai.fr";
 // pas un bail — si l'arrangement s'arrête, c'est UNE ligne à changer, pas la
 // page à réécrire.
 //
-// `debut` / `fin` : la salle se loue à la MATINÉE, d'où les 4 h. ⚠️ Le créneau
-// 8 h – 12 h reste DÉDUIT de « 50 € la matinée » et n'a pas été confirmé avec
-// l'hôtel — un candidat qui vient de Saint-Joseph organise son samedi sur cette
-// ligne-là. Deux champs et non une chaîne toute faite, parce que l'horaire
-// s'écrit « 8 h – 12 h » dans un encart et « de 8 h à 12 h » dans une phrase :
-// une seule source, deux rendus.
+// ✅ `debut` / `fin` : 8 h – 12 h, CONFIRMÉ AVEC L'HÔTEL le 22/08/2026. La salle
+// se loue à la matinée, d'où les 4 h. Le créneau n'était au départ qu'une
+// déduction de « 50 € la matinée » ; il ne l'est plus. C'était la dernière
+// hypothèse de la page — il n'en reste aucune, hors la date des écrits, qui ne
+// dépend de personne ici.
+//
+// Deux champs et non une chaîne toute faite, parce que l'horaire s'écrit
+// « 8 h – 12 h » dans un encart et « de 8 h à 12 h » dans une phrase : une seule
+// source, deux rendus. Un candidat qui vient de Saint-Joseph organise son samedi
+// sur cette ligne-là — si elle bouge, elle bouge ICI et nulle part ailleurs.
 // ─────────────────────────────────────────────────────────────────────────────
 const LIEU: {
   nom: string | null;
