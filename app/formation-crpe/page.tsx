@@ -99,10 +99,18 @@ const CONCOURS = {
 //
 // Les charges réelles d'une matinée, arrêtées le 22/08/2026 :
 //   • salle de séminaire ........ 50 € la matinée (coût fixe)
-//   • café + viennoiserie ....... 4 € par personne (2 + 2, coût variable)
-// Donc : net d'une séance = 56 € × inscrits − 50 €. Le point mort tombe à UN
+//   • café ou thé ............... 2 € par personne (coût variable)
+// Donc : net d'une séance = 58 € × inscrits − 50 €. Le point mort tombe à UN
 // inscrit — la salle ne décide rien, contrairement à ce qu'on croyait d'abord.
-//   3 inscrits → 118 €   5 → 230 €   8 → 398 €   15 → 790 €
+//   3 inscrits → 124 €   5 → 240 €   8 → 414 €   15 → 820 €
+//
+// ⛔ LA VIENNOISERIE EST SORTIE DE L'OFFRE (Frédéric, 22/08 : « je peux payer le
+// café ou le thé, mais pas plus »). Ne pas la réintroduire au motif que « ça
+// ferait mieux » : ce serait 2 € de plus par personne et par samedi, soit 420 €
+// sur le cycle à 15 inscrits, pour une ligne que personne ne vient chercher.
+// ⚠️ Et ne pas réécrire « rien à sortir sur place » : c'est devenu faux dès
+// qu'il y a une vitrine à côté. Une promesse d'intendance ratée coûte plus cher
+// que l'intendance elle-même.
 //
 // ⚠️ `seuilOuverture` N'EST DONC PAS UN SEUIL FINANCIER, C'EST UN SEUIL
 // PÉDAGOGIQUE : à trois, personne ne se corrige mutuellement et la séance perd
@@ -347,6 +355,42 @@ export default function FormationCrpePage() {
           ))}
         </div>
 
+        {/* ⭐⭐ LE MALENTENDU QUI COÛTE LE PLUS CHER, ET QUI EST L'ARGUMENT DE
+            LA PAGE (correction de Frédéric, 22/08).
+            Un candidat se prépare à enseigner jusqu'au CM2 et croit donc réviser
+            le programme du primaire. Or l'épreuve écrite de mathématiques du
+            CRPE porte sur le programme de l'école ET du collège : Thalès,
+            Pythagore, PGCD, mise en équation, probabilités y sont. C'est
+            exactement l'écart qui fait rater l'épreuve à des gens qui savent
+            enseigner.
+            ⛔ NE PAS ÉCRIRE « le programme du primaire » AILLEURS SUR CETTE
+            PAGE. Le premier jet le faisait, dans la citation et dans l'encart
+            d'été austral, et ça sous-vendait la préparation autant que ça
+            trompait le lecteur.
+            ⚠️ La maquette a changé à la session 2026 : reverifier l'étendue
+            exacte dans l'arrêté de la session 2027 quand il sortira, en même
+            temps que la date des écrits. */}
+        <div className="mt-6 rounded-2xl border border-rose-300/30 bg-gradient-to-br from-rose-400/[0.10] to-white/[0.03] p-5 sm:p-6">
+          <h2 className="text-lg font-black text-white">
+            ⚠️ L&apos;épreuve va bien plus loin que ce que vous enseignerez
+          </h2>
+          <p className="mt-2 text-sm font-semibold leading-6 text-white/80">
+            Vous préparez un métier qui s&apos;arrête au CM2, mais
+            l&apos;épreuve, elle, ne s&apos;arrête pas là&nbsp;: elle porte sur
+            le programme de l&apos;école <strong>et du collège</strong>. Thalès,
+            Pythagore, PGCD, mise en équation, probabilités — c&apos;est du
+            programme de troisième, et c&apos;est dans le sujet. Beaucoup de
+            candidats révisent le primaire, qu&apos;ils maîtrisent déjà, et se
+            font sortir par un exercice de quatrième.
+          </p>
+          <p className="mt-2 text-sm font-semibold leading-6 text-white/80">
+            C&apos;est précisément là que je peux servir&nbsp;: j&apos;enseigne
+            les mathématiques au collège, et j&apos;écris les fiches de cours du
+            primaire. Les deux bouts du programme de l&apos;épreuve, je les ai
+            sous la main tous les jours.
+          </p>
+        </div>
+
         {/* Le mot de Frédéric : d'où vient la légitimité. Pas d'un organisme,
             de la salle de classe — et c'est exactement ce qu'un candidat qui a
             déjà échoué une fois vient chercher. */}
@@ -359,11 +403,12 @@ export default function FormationCrpePage() {
             className="h-14 w-14 shrink-0 rounded-full border-2 border-amber-300/60 object-cover sm:h-16 sm:w-16"
           />
           <p className="text-sm font-semibold leading-6 text-white/85">
-            «&nbsp;J&apos;enseigne les mathématiques, et j&apos;écris en ce
-            moment les fiches de cours du primaire, du CP au CM2. Le programme
-            que vous devrez enseigner, je suis en train de le relire ligne à
-            ligne. C&apos;est de là que je vous prépare&nbsp;: pas d&apos;un
-            manuel de concours, du programme réel.&nbsp;»
+            «&nbsp;J&apos;enseigne les mathématiques au collège, et j&apos;écris
+            en ce moment les fiches de cours du primaire, du CP au CM2. Le
+            programme sur lequel on vous interroge, du CP à la troisième, je suis
+            en train de le relire ligne à ligne. C&apos;est de là que je vous
+            prépare&nbsp;: pas d&apos;un manuel de concours, du programme
+            réel.&nbsp;»
             <span className="mt-1 block text-xs font-black text-white/50">
               — Frédéric Lacoste, professeur de mathématiques, fondateur d&apos;EleveAI
             </span>
@@ -404,10 +449,12 @@ export default function FormationCrpePage() {
             Six semaines de vacances à La Réunion, et personne ne viendra
             travailler un samedi de janvier. Alors on ne fait pas semblant&nbsp;:
             il n&apos;y a pas de séance, et il n&apos;y a rien à payer. Ce qui
-            reste, c&apos;est tout ce que vous devrez enseigner, en accès libre —
-            les fiches de cours du CP au CM2, et le coach pour s&apos;entraîner.
-            Vous entretenez, vous ne progressez pas&nbsp;: la progression
-            reprend le 6 février.
+            reste, en accès libre, c&apos;est tout le programme sur lequel on
+            vous interroge — les fiches de cours <strong>du CP à la
+            troisième</strong>, et le coach pour s&apos;entraîner. Le collège
+            surtout&nbsp;: c&apos;est là que se perdent les points, et c&apos;est
+            là que l&apos;entretien compte. Vous entretenez, vous ne progressez
+            pas&nbsp;: la progression reprend le 6 février.
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
             <Link
@@ -454,14 +501,15 @@ export default function FormationCrpePage() {
             payez les samedis où vous êtes là.
           </p>
 
-          {/* CE QUI EST COMPRIS. Le café et la viennoiserie ne sont pas un
-              détail d'intendance : ils disent qu'on n'a rien à ressortir de sa
-              poche une fois sur place, et qu'une matinée de quatre heures a été
-              pensée comme une matinée, pas comme un créneau. */}
+          {/* CE QUI EST COMPRIS. Le café n'est pas un détail d'intendance : il
+              dit qu'une matinée de quatre heures a été pensée comme une matinée,
+              avec une pause, et non comme un créneau qu'on subit. Il s'arrête
+              là — voir le bloc TARIF : rien d'autre n'est promis, donc rien
+              d'autre ne peut décevoir. */}
           <ul className="mt-4 grid gap-2 sm:grid-cols-2">
             {[
               `La salle, à ${LIEU.nom ? `l'${LIEU.nom}` : LIEU.quartier} — on vient, on s'assoit, on travaille.`,
-              "Le café et la viennoiserie de la pause. Rien à sortir sur place.",
+              "Le café ou le thé de la pause, au milieu de la matinée.",
               "Les sujets, les corrigés et vos copies annotées de ma main.",
               "Les fiches et le coach du site, toute l'année, sans surcoût.",
             ].map((l) => (
