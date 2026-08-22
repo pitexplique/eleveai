@@ -310,6 +310,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Trouver le nom noyau, distinguer l'épithète du complément du nom, reconnaître un groupe nominal quelle que soit sa fonction.",
   },
+  "francais/6e/grammaire-pronoms": {
+    titre: "Les pronoms personnels et leur antécédent",
+    resume:
+      "Sujet ou complément, préciser la fonction d'un pronom et remonter jusqu'au groupe qu'il reprend.",
+  },
 
   "ia/fondements/definir-l-ia": { titre: "Qu'est-ce que l'intelligence artificielle ?" },
   "ia/fondements/apprentissage-automatique": { titre: "L'apprentissage automatique" },
