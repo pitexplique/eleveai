@@ -821,6 +821,32 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     MÉDIATRICES D'UN TRIANGLE ET CERCLE CIRCONSCRIT
+     ⛔ Ouvert le 22/08/2026. C'est la PREMIÈRE PREUVE de l'année : le BO
+     demande que l'élève « comprenne pourquoi » et « restitue les arguments ».
+     D'où le poids des questions ouvertes ici — restituer une preuve ne se
+     coche pas dans un QCM.
+  ========================= */
+  {
+    id: "circonscrit_concourantes",
+    label: "Les trois médiatrices d'un triangle sont concourantes",
+    notionId: "cercle_circonscrit",
+    prerequis: ["mediatrice_propriete", "triangle_nommer"],
+  },
+  {
+    id: "circonscrit_construire",
+    label: "Construire le cercle circonscrit à un triangle",
+    notionId: "cercle_circonscrit",
+    prerequis: ["circonscrit_concourantes", "mediatrice_construire"],
+  },
+  {
+    id: "circonscrit_defi",
+    label: "Défis : trois points à égale distance, points alignés",
+    notionId: "cercle_circonscrit",
+    prerequis: ["circonscrit_construire"],
+  },
+
+  /* =========================
      LA MÉDIATRICE D'UN SEGMENT
      ⛔ Ouvert le 22/08/2026 : trois objectifs du programme de 6e, zéro micro.
      ⭐ `mediatrice_propriete` porte la propriété caractéristique DANS LES DEUX

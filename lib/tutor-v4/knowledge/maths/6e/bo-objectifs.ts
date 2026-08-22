@@ -658,7 +658,8 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     objectif:
       "Savoir que les médiatrices d'un triangle sont concourantes. Connaître et construire le cercle circonscrit à un triangle.",
     page: 15,
-    micros: [],
+    micros: ["circonscrit_concourantes", "circonscrit_construire", "circonscrit_defi"],
+    note: "⭐ Le BO demande que l'élève « restitue les arguments de la preuve » — pas seulement le résultat.",
   },
 
   // ─── Symétrie axiale ───────────────────────────────────────────────────────

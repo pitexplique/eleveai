@@ -24,6 +24,7 @@ import { dureesBank } from "./durees.bank";
 import { distancesBank } from "./distances.bank";
 import { mediatriceBank } from "./mediatrice.bank";
 import { bissectriceBank } from "./bissectrice.bank";
+import { cercleCirconscritBank } from "./cercle-circonscrit.bank";
 import { volumesBank } from "./volumes.bank";
 
 import { donneesBank } from "./donnees.bank";
@@ -65,6 +66,7 @@ export const maths6eQuestionBank: TutorBankItemV4[] = [
   // GÉOMÉTRIE
   // =========================
   ...trianglesBank,
+  ...cercleCirconscritBank,
   ...quadrilateresBank,
   ...symetrieBank,
   ...volumesBank,

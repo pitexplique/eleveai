@@ -130,16 +130,14 @@ export const notions: NotionSource[] = [
     levels: [1, 2],
   },
 
-  // ⛔ OUVERTE LE 21/08/2026 — ELLE MANQUAIT ENTIÈREMENT. Le BO de 6e demande
-  // de savoir que le périmètre du disque est proportionnel à son diamètre, d'en
-  // connaître la formule et de le calculer. Le coach n'avait aucune micro
-  // cercle, disque, rayon ou diamètre — ni en 6e, ni dans AUCUNE classe de
-  // maths. Les vérificateurs comptent les items d'une micro ; aucun ne demande
-  // si une micro manque, et un chapitre entier restait donc invisible.
-  // ⛔ OUVERTE LE 22/08/2026. « Distances » ouvre le chapitre « Étude de
-  // configurations planes » du programme de 6e — avant les cercles, avant la
-  // médiatrice, avant les angles. C'est la PREMIÈRE notion de géométrie de
-  // l'année, et le coach n'en avait aucune micro.
+  // ─── ÉTUDE DE CONFIGURATIONS PLANES ────────────────────────────────────────
+  // Les cinq notions qui suivent ont été ouvertes les 21 et 22/08/2026, et
+  // elles s'enchaînent dans l'ordre du programme : les distances, puis la
+  // médiatrice qui en découle, puis le cercle circonscrit qui découle de la
+  // médiatrice. Aucune n'existait dans le coach.
+
+  // ⛔ « Distances » ouvre le chapitre — avant les cercles, avant la médiatrice,
+  // avant les angles. C'est la PREMIÈRE notion de géométrie de l'année.
   //
   // ⭐ Ce qui s'y joue et nulle part ailleurs : la différence entre (AB), [AB]
   // et AB — une droite, un segment, un NOMBRE. Un élève qui écrit
@@ -153,18 +151,24 @@ export const notions: NotionSource[] = [
     levels: [1, 2],
   },
 
-  // ⛔ OUVERTE LE 22/08/2026. Trois objectifs d'apprentissage du programme de
-  // 6e, zéro micro dans le coach — alors que c'est la notion qui tient toute la
-  // géométrie de l'année : la symétrie axiale se DÉFINIT par elle (« (d) est la
-  // médiatrice de [MM'] »), le cercle circonscrit en découle, et la
-  // construction du milieu au compas n'est rien d'autre qu'elle.
+  // ⛔ Trois objectifs d'apprentissage, zéro micro — alors que c'est la notion
+  // qui tient toute la géométrie de l'année : la symétrie axiale se DÉFINIT par
+  // elle (« (d) est la médiatrice de [MM'] »), le cercle circonscrit en
+  // découle, et la construction du milieu au compas n'est rien d'autre qu'elle.
   //
   // ⭐ « Propriété caractéristique » veut dire DEUX SENS, et c'est tout l'enjeu.
   // L'élève retient « sur la médiatrice → équidistant » et oublie l'autre —
   // « équidistant → sur la médiatrice » —, qui est pourtant celui qui sert à
   // DÉMONTRER (retrouver le centre d'un cercle, prouver qu'un point y est).
-  // ⛔ OUVERTE LE 22/08/2026. Une section entière du chapitre « Étude de
-  // configurations planes », et zéro micro dans le coach — alors que le canvas
+  {
+    id: "mediatrice_segment",
+    label: "La médiatrice d’un segment",
+    boId: "BO6G4",
+    prerequis: ["distance_segment"],
+    levels: [1, 2],
+  },
+
+  // ⛔ Une section entière du chapitre, et zéro micro — alors que le canvas
   // `angle` savait déjà poser un rapporteur sur la figure.
   //
   // ⭐ La bissectrice est à l'ANGLE ce que la médiatrice est au SEGMENT : la
@@ -179,14 +183,29 @@ export const notions: NotionSource[] = [
     levels: [1, 2],
   },
 
+  // ⛔ Le programme demande, sous « Triangles » : « savoir que les médiatrices
+  // d'un triangle sont concourantes » et « connaître et construire le cercle
+  // circonscrit à un triangle ».
+  //
+  // ⭐ C'EST LA PREMIÈRE PREUVE DE L'ANNÉE, et le BO le dit : l'élève doit
+  // « comprendre POURQUOI » et « restituer les arguments de la preuve ». Ce
+  // n'est donc pas un résultat à admettre. La preuve ne tient que par la
+  // propriété caractéristique de la médiatrice, utilisée dans les DEUX sens —
+  // d'où la dépendance directe à `mediatrice_segment`.
   {
-    id: "mediatrice_segment",
-    label: "La médiatrice d’un segment",
-    boId: "BO6G4",
-    prerequis: ["distance_segment"],
+    id: "cercle_circonscrit",
+    label: "Médiatrices d'un triangle et cercle circonscrit",
+    boId: "BO6G3",
+    prerequis: ["mediatrice_segment", "triangle_figure"],
     levels: [1, 2],
   },
 
+  // ⛔ OUVERTE LE 21/08/2026 — ELLE MANQUAIT ENTIÈREMENT. Le BO de 6e demande
+  // de savoir que le périmètre du disque est proportionnel à son diamètre, d'en
+  // connaître la formule et de le calculer. Le coach n'avait aucune micro
+  // cercle, disque, rayon ou diamètre — ni en 6e, ni dans AUCUNE classe de
+  // maths. Les vérificateurs comptent les items d'une micro ; aucun ne demande
+  // si une micro manque, et un chapitre entier restait donc invisible.
   {
     id: "cercle_disque",
     label: "Le cercle et le périmètre du disque",

@@ -510,6 +510,14 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "cercle_circonscrit",
+        "label": "Médiatrices d'un triangle et cercle circonscrit",
+        "prerequis": [
+          "mediatrice_segment",
+          "triangle_figure"
+        ]
+      },
+      {
         "id": "bissectrice_angle",
         "label": "La bissectrice d’un angle",
         "prerequis": [
