@@ -13,9 +13,9 @@ import MasqueSurGuide from "@/components/MasqueSurGuide";
 import EcrireAuProf from "@/components/EcrireAuProf";
 import PageViewTracker from "@/components/PageViewTracker";
 import {
-  PRIX_ETABLISSEMENT_ELEVE_AN,
+  PRIX_ETABLISSEMENT_ELEVE_MOIS,
   PRIX_FAMILLE_AN,
-  PRIX_PROF_AN,
+  PRIX_CLASSE_ELEVE_MOIS,
 } from "@/lib/tarifs";
 import { VENTE } from "@/lib/legal/editeur";
 
@@ -280,12 +280,12 @@ export default function RootLayout({
         },
         {
           "@type": "Offer",
-          name: "Professeur — forfait, quel que soit le nombre d'élèves",
+          name: "Classe — 0,75 € par élève et par mois",
           description:
-            "Le professeur suit sa classe compétence par compétence, sans corriger. Forfait annuel : 25 élèves ou 35, c'est le même prix, et il n'a pas à passer par la coopérative pour le payer. Les familles de cette classe ne paient rien.",
-          price: PRIX_PROF_AN,
+            "Le professeur suit sa classe compétence par compétence, sans corriger. Forfait à l'intérieur de la classe : 25 élèves ou 35, c'est le même prix, et il n'a pas à passer par la coopérative pour le payer. Les familles de cette classe ne paient rien.",
+          price: PRIX_CLASSE_ELEVE_MOIS,
           priceCurrency: "EUR",
-          unitText: "an",
+          unitText: "élève et par mois",
           availability: VENTE.ouverte
             ? "https://schema.org/InStock"
             : "https://schema.org/PreOrder",
@@ -296,9 +296,9 @@ export default function RootLayout({
           name: "Établissement — tous les professeurs, plus la direction",
           description:
             "Tous les niveaux, toutes les classes, tous les professeurs, et la vue complète du chef d'établissement. Facturé à l'établissement — rien aux familles, et aucun élève ne paie.",
-          price: PRIX_ETABLISSEMENT_ELEVE_AN,
+          price: PRIX_ETABLISSEMENT_ELEVE_MOIS,
           priceCurrency: "EUR",
-          unitText: "élève et par an",
+          unitText: "élève et par mois",
           availability: VENTE.ouverte
             ? "https://schema.org/InStock"
             : "https://schema.org/PreOrder",
