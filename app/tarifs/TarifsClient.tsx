@@ -130,7 +130,12 @@ const collectif = [
       "Éligible REP/REP+, fonds sociaux, coopérative",
       "Jamais un classement des enseignants",
     ],
-    cta: "Demander un devis",
+    // ⚠️ LE BOUTON DISAIT « DEMANDER UN DEVIS », juste sous le prix affiché en
+    // gros (trouvé par `scripts/verifier-tarifs.ts`, 22/08). Les deux se
+    // contredisaient sur la même carte : si le prix est ferme et écrit là, il
+    // n'y a rien à deviser — et proposer un devis rouvre une négociation qu'on
+    // vient de fermer, en laissant croire que le nombre affiché est indicatif.
+    cta: "Parler de mon établissement",
     gradient: "from-violet-400 to-purple-500",
     anneau: "ring-violet-100",
   },

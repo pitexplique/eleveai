@@ -22,8 +22,15 @@ export default function FAQAdministration() {
       a: "Oui. EleveAI propose une charte explicitant droits, devoirs et limites : transparence, démarche, responsabilité, et anti-triche par design.",
     },
     {
-      q: "Proposez-vous une phase pilote ?",
-      a: "Oui. Une phase pilote permet de tester l’usage encadré (scénarios, règles, retours terrain) avant toute généralisation. Elle peut inclure un accompagnement et des ajustements.",
+      // ⚠️ CETTE RÉPONSE VENDAIT UNE « PHASE PILOTE » qui n'existe plus en tant
+      // qu'offre commerciale : le prix établissement est ferme et public depuis
+      // le 22/08, il n'y a plus ni devis ni dispositif pilote à négocier. Ce
+      // qui reste vrai, et qui est même plus simple à dire : commencer par une
+      // classe ne coûte rien de plus, puisqu'un professeur est au forfait.
+      // ⚠️ Cette page émet elle aussi un JSON-LD FAQPage — la réponse peut
+      // s'afficher directement dans les résultats de Google.
+      q: "Peut-on commencer petit, avant de généraliser ?",
+      a: "Oui, et sans rien négocier. Un professeur peut équiper sa ou ses classes au forfait, de son côté, pour voir ce que ça donne en conditions réelles — scénarios, règles d’usage, retours des équipes. L’établissement décide ensuite s’il passe au forfait global, qui ouvre en plus la vue complète de la direction. Il n’y a pas de dispositif pilote à demander : les prix sont publics et fermes.",
     },
     {
       q: "Quels accompagnements sont proposés ?",
