@@ -790,6 +790,37 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     LA BISSECTRICE D'UN ANGLE
+     ⛔ Ouvert le 22/08/2026 : deux objectifs du programme de 6e, zéro micro.
+     ⚠️ « Saillant » n'est pas un détail : deux demi-droites de même origine
+     définissent DEUX angles, et le programme se limite au plus petit.
+  ========================= */
+  {
+    id: "bissectrice_definition",
+    label: "Définition : partager l’angle en deux angles égaux",
+    notionId: "bissectrice_angle",
+    prerequis: ["angle_reconnaitre", "angle_comparer"],
+  },
+  {
+    id: "bissectrice_construire",
+    label: "Construire une bissectrice (pliage, rapporteur)",
+    notionId: "bissectrice_angle",
+    prerequis: ["bissectrice_definition", "angle_mesurer"],
+  },
+  {
+    id: "bissectrice_probleme",
+    label: "Calculer un angle à partir d’une bissectrice",
+    notionId: "bissectrice_angle",
+    prerequis: ["bissectrice_definition"],
+  },
+  {
+    id: "bissectrice_defi",
+    label: "Défis : bissectrices successives, unicité",
+    notionId: "bissectrice_angle",
+    prerequis: ["bissectrice_construire", "bissectrice_probleme"],
+  },
+
+  /* =========================
      LA MÉDIATRICE D'UN SEGMENT
      ⛔ Ouvert le 22/08/2026 : trois objectifs du programme de 6e, zéro micro.
      ⭐ `mediatrice_propriete` porte la propriété caractéristique DANS LES DEUX

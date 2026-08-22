@@ -23,6 +23,7 @@ import { longueursBank } from "./longueurs.bank";
 import { dureesBank } from "./durees.bank";
 import { distancesBank } from "./distances.bank";
 import { mediatriceBank } from "./mediatrice.bank";
+import { bissectriceBank } from "./bissectrice.bank";
 import { volumesBank } from "./volumes.bank";
 
 import { donneesBank } from "./donnees.bank";
@@ -54,6 +55,7 @@ export const maths6eQuestionBank: TutorBankItemV4[] = [
   ...distancesBank,
   ...mediatriceBank,
   ...anglesBank,
+  ...bissectriceBank,
   ...perimetresBank,
   ...cercleBank,
   ...airesBank,

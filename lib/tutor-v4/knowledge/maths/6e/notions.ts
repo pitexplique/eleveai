@@ -163,6 +163,22 @@ export const notions: NotionSource[] = [
   // L'élève retient « sur la médiatrice → équidistant » et oublie l'autre —
   // « équidistant → sur la médiatrice » —, qui est pourtant celui qui sert à
   // DÉMONTRER (retrouver le centre d'un cercle, prouver qu'un point y est).
+  // ⛔ OUVERTE LE 22/08/2026. Une section entière du chapitre « Étude de
+  // configurations planes », et zéro micro dans le coach — alors que le canvas
+  // `angle` savait déjà poser un rapporteur sur la figure.
+  //
+  // ⭐ La bissectrice est à l'ANGLE ce que la médiatrice est au SEGMENT : la
+  // droite qui le coupe en deux parts égales, et son axe de symétrie. Les deux
+  // se plient de la même façon. Plusieurs items le disent explicitement — un
+  // élève qui voit le parallèle retient les deux au lieu d'une.
+  {
+    id: "bissectrice_angle",
+    label: "La bissectrice d’un angle",
+    boId: "BO6G2",
+    prerequis: ["angle_mesure"],
+    levels: [1, 2],
+  },
+
   {
     id: "mediatrice_segment",
     label: "La médiatrice d’un segment",

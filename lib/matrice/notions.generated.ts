@@ -510,6 +510,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "bissectrice_angle",
+        "label": "La bissectrice d’un angle",
+        "prerequis": [
+          "angle_mesure"
+        ]
+      },
+      {
         "id": "mediatrice_segment",
         "label": "La médiatrice d’un segment",
         "prerequis": [

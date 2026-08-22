@@ -610,7 +610,7 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     chapitre: "Étude de configurations planes — Bissectrice d'un angle saillant",
     objectif: "Connaître la définition de la bissectrice d'un angle saillant.",
     page: 14,
-    micros: [],
+    micros: ["bissectrice_definition"],
     note: "La droite qui partage l'angle en deux angles adjacents égaux ; c'est l'axe de symétrie de l'angle.",
   },
   {
@@ -620,7 +620,7 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     objectif:
       "Utiliser la définition de la bissectrice d'un angle pour effectuer des constructions et résoudre des problèmes.",
     page: 14,
-    micros: [],
+    micros: ["bissectrice_construire", "bissectrice_probleme", "bissectrice_defi"],
   },
 
   // ─── Triangles ─────────────────────────────────────────────────────────────
