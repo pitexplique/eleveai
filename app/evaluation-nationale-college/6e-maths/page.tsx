@@ -4,8 +4,11 @@ import Epreuve6eMathsClient from "./Epreuve6eMathsClient";
 export const metadata: Metadata = {
   title:
     "Évaluation nationale de 6e en maths — l'épreuve blanche, 50 minutes, corrigée | EleveAI",
+  // ⚠️ 160 CARACTÈRES MAXIMUM — voir 4e-maths/page.tsx pour le pourquoi.
+  // Elle en faisait 605. « aux effectifs » et non « au volume » : c'est le
+  // mot de cette page-ci, les deux ne sont pas synonymes ici.
   description:
-    "L'épreuve blanche de l'évaluation nationale de 6e en mathématiques : l'épreuve entière, aux effectifs du sujet officiel — 62 questions en 50 minutes, qui défilent une par une, sans retour en arrière. Trois domaines (espace et géométrie, grandeurs et mesures, nombres et calculs) et les deux tests spécifiques, automatismes et résolution de problèmes. Sur le programme de CM2. À la fin, un groupe de maîtrise par domaine, dans les mots du bilan officiel, et de quoi retravailler chaque compétence qui a coincé. Le sujet est aussi téléchargeable en PDF imprimable, avec son corrigé. Gratuit, sans publicité.",
+    "Évaluation nationale de 6e en maths : l'épreuve blanche, aux effectifs du sujet officiel — 62 questions en 50 minutes, sur le programme de CM2. Gratuit.",
   keywords: [
     "évaluation nationale 6e maths",
     "évaluation nationale 6e s'entraîner",
