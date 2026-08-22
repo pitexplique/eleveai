@@ -717,6 +717,44 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     LE REPÉRAGE DANS LE TEMPS ET LES DURÉES
+     ⛔ Ouvert le 22/08/2026 : trois objectifs d'apprentissage du programme de
+     6e, zéro micro dans le coach. Le temps ne se compte pas en base dix, et
+     c'est là que l'élève tombe — 8 h 50 + 20 min n'est pas 8 h 70, 1,30 h n'est
+     pas 1 h 30. `duree_decimale` porte ce point à elle seule.
+  ========================= */
+  {
+    id: "duree_calculer",
+    label: "Calculer un horaire ou une durée",
+    notionId: "duree_temps",
+    prerequis: ["entier_addition_mentale"],
+  },
+  {
+    id: "duree_convertir",
+    label: "Convertir des durées (h, min, s, jours)",
+    notionId: "duree_temps",
+    prerequis: ["duree_calculer"],
+  },
+  {
+    id: "duree_decimale",
+    label: "Passer de l’écriture décimale d’une durée aux minutes",
+    notionId: "duree_temps",
+    prerequis: ["duree_convertir", "decimal_lire_ecrire"],
+  },
+  {
+    id: "duree_probleme",
+    label: "Résoudre un problème d’horaires",
+    notionId: "duree_temps",
+    prerequis: ["duree_calculer", "duree_convertir"],
+  },
+  {
+    id: "duree_defi",
+    label: "Défis : passer minuit, lire un tableau d’horaires",
+    notionId: "duree_temps",
+    prerequis: ["duree_probleme"],
+  },
+
+  /* =========================
      LE CERCLE ET LE PÉRIMÈTRE DU DISQUE
      ⛔ Ouvert le 21/08/2026 : le BO de 6e le demande, le coach n'en avait
      aucune micro — dans aucune classe. La proportionnalité vient AVANT la

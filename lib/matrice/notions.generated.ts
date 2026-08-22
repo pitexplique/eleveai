@@ -510,6 +510,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "duree_temps",
+        "label": "Le repérage dans le temps et les durées",
+        "prerequis": [
+          "decimal_nombre"
+        ]
+      },
+      {
         "id": "volume_solide",
         "label": "Volumes",
         "prerequis": [

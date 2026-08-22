@@ -20,6 +20,7 @@ import { calculMentalBank } from "./calcul-mental.bank";
 import { calculPoseBank } from "./calcul-pose.bank";
 
 import { longueursBank } from "./longueurs.bank";
+import { dureesBank } from "./durees.bank";
 import { volumesBank } from "./volumes.bank";
 
 import { donneesBank } from "./donnees.bank";
@@ -52,6 +53,7 @@ export const maths6eQuestionBank: TutorBankItemV4[] = [
   ...perimetresBank,
   ...cercleBank,
   ...airesBank,
+  ...dureesBank,
 
   // =========================
   // GÉOMÉTRIE

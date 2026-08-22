@@ -144,6 +144,25 @@ export const notions: NotionSource[] = [
     levels: [1, 2],
   },
 
+  // ⛔ OUVERTE LE 22/08/2026 — UN CHAPITRE ENTIER MANQUAIT. « Le repérage dans
+  // le temps et les durées » porte trois objectifs d'apprentissage du programme
+  // de 6e (calculer sur des horaires et des durées, résoudre des problèmes,
+  // convertir des durées) et le coach n'en avait AUCUNE micro. Le canvas `duree`
+  // existait pourtant depuis des mois — horloge, double horloge, affichage
+  // digital, frise : le dessin était prêt, les questions n'avaient jamais été
+  // écrites.
+  //
+  // ⭐ La difficulté du chapitre tient en une ligne : le temps ne se compte pas
+  // en base dix. 8 h 50 + 20 min ne fait pas 8 h 70, et 1,30 h ne vaut pas
+  // 1 h 30. D'où la micro `duree_decimale`, qui n'existe nulle part ailleurs.
+  {
+    id: "duree_temps",
+    label: "Le repérage dans le temps et les durées",
+    boId: "BO6G1",
+    prerequis: ["decimal_nombre"],
+    levels: [1, 2],
+  },
+
   {
     id: "volume_solide",
     label: "Volumes",

@@ -476,7 +476,7 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     chapitre: "Le repérage dans le temps et les durées",
     objectif: "Effectuer des calculs sur des horaires et des durées.",
     page: 10,
-    micros: [],
+    micros: ["duree_calculer"],
     note: "Instant initial, instant final, durée. La séance de cinéma de 17 h 40 qui dure 110 minutes.",
   },
   {
@@ -485,7 +485,7 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     chapitre: "Le repérage dans le temps et les durées",
     objectif: "Résoudre des problèmes impliquant des horaires, des durées.",
     page: 10,
-    micros: [],
+    micros: ["duree_probleme", "duree_defi"],
     note: "Le tableau des bus : quel est le prochain, dans combien de temps.",
   },
   {
@@ -494,7 +494,7 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     chapitre: "Le repérage dans le temps et les durées",
     objectif: "Convertir des durées.",
     page: 11,
-    micros: [],
+    micros: ["duree_convertir", "duree_decimale"],
     note: "0,5 h = 1/2 h = 30 min ; 0,25 h = 15 min ; 0,75 h = 45 min ; 0,1 h = 6 min. Écritures sexagésimale ET décimale.",
   },
 
