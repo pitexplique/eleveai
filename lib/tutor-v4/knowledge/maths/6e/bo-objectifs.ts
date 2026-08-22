@@ -560,7 +560,7 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     chapitre: "Étude de configurations planes — Médiatrice d'un segment",
     objectif: "Connaître la définition de la médiatrice d'un segment.",
     page: 12,
-    micros: [],
+    micros: ["mediatrice_definition", "mediatrice_construire"],
     note: "La droite perpendiculaire au segment PASSANT PAR son milieu.",
   },
   {
@@ -569,7 +569,7 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     chapitre: "Étude de configurations planes — Médiatrice d'un segment",
     objectif: "Comprendre et utiliser la propriété caractéristique de la médiatrice d'un segment.",
     page: 12,
-    micros: [],
+    micros: ["mediatrice_propriete"],
     note: "« La médiatrice d'un segment est l'ensemble des points équidistants des extrémités de ce segment. »",
   },
   {
@@ -579,7 +579,7 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     objectif:
       "Résoudre des problèmes en s'appuyant sur la propriété caractéristique de la médiatrice.",
     page: 13,
-    micros: [],
+    micros: ["mediatrice_probleme", "mediatrice_defi"],
     note: "Placer le milieu d'une corde ; retrouver le centre inconnu d'un cercle.",
   },
 

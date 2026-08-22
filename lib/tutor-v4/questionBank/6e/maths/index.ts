@@ -22,6 +22,7 @@ import { calculPoseBank } from "./calcul-pose.bank";
 import { longueursBank } from "./longueurs.bank";
 import { dureesBank } from "./durees.bank";
 import { distancesBank } from "./distances.bank";
+import { mediatriceBank } from "./mediatrice.bank";
 import { volumesBank } from "./volumes.bank";
 
 import { donneesBank } from "./donnees.bank";
@@ -51,6 +52,7 @@ export const maths6eQuestionBank: TutorBankItemV4[] = [
   // GRANDEURS ET GÉOMÉTRIE
   // =========================
   ...distancesBank,
+  ...mediatriceBank,
   ...anglesBank,
   ...perimetresBank,
   ...cercleBank,

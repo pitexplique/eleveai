@@ -153,6 +153,24 @@ export const notions: NotionSource[] = [
     levels: [1, 2],
   },
 
+  // ⛔ OUVERTE LE 22/08/2026. Trois objectifs d'apprentissage du programme de
+  // 6e, zéro micro dans le coach — alors que c'est la notion qui tient toute la
+  // géométrie de l'année : la symétrie axiale se DÉFINIT par elle (« (d) est la
+  // médiatrice de [MM'] »), le cercle circonscrit en découle, et la
+  // construction du milieu au compas n'est rien d'autre qu'elle.
+  //
+  // ⭐ « Propriété caractéristique » veut dire DEUX SENS, et c'est tout l'enjeu.
+  // L'élève retient « sur la médiatrice → équidistant » et oublie l'autre —
+  // « équidistant → sur la médiatrice » —, qui est pourtant celui qui sert à
+  // DÉMONTRER (retrouver le centre d'un cercle, prouver qu'un point y est).
+  {
+    id: "mediatrice_segment",
+    label: "La médiatrice d’un segment",
+    boId: "BO6G4",
+    prerequis: ["distance_segment"],
+    levels: [1, 2],
+  },
+
   {
     id: "cercle_disque",
     label: "Le cercle et le périmètre du disque",

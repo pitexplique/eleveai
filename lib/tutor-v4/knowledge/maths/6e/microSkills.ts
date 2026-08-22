@@ -790,6 +790,44 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     LA MÉDIATRICE D'UN SEGMENT
+     ⛔ Ouvert le 22/08/2026 : trois objectifs du programme de 6e, zéro micro.
+     ⭐ `mediatrice_propriete` porte la propriété caractéristique DANS LES DEUX
+     SENS. C'est le second — « équidistant, donc sur la médiatrice » — qui sert
+     à démontrer, et c'est celui que l'élève oublie.
+  ========================= */
+  {
+    id: "mediatrice_definition",
+    label: "Définition : perpendiculaire ET passant par le milieu",
+    notionId: "mediatrice_segment",
+    prerequis: ["distance_milieu", "angle_droit"],
+  },
+  {
+    id: "mediatrice_propriete",
+    label: "La propriété caractéristique, dans les deux sens",
+    notionId: "mediatrice_segment",
+    prerequis: ["mediatrice_definition"],
+  },
+  {
+    id: "mediatrice_construire",
+    label: "Construire une médiatrice (compas, équerre, pliage)",
+    notionId: "mediatrice_segment",
+    prerequis: ["mediatrice_definition"],
+  },
+  {
+    id: "mediatrice_probleme",
+    label: "Milieu d’une corde, centre inconnu d’un cercle",
+    notionId: "mediatrice_segment",
+    prerequis: ["mediatrice_propriete", "cercle_vocabulaire"],
+  },
+  {
+    id: "mediatrice_defi",
+    label: "Défis : triangle isocèle, point équidistant de trois points",
+    notionId: "mediatrice_segment",
+    prerequis: ["mediatrice_probleme"],
+  },
+
+  /* =========================
      LE CERCLE ET LE PÉRIMÈTRE DU DISQUE
      ⛔ Ouvert le 21/08/2026 : le BO de 6e le demande, le coach n'en avait
      aucune micro — dans aucune classe. La proportionnalité vient AVANT la

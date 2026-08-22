@@ -510,6 +510,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "mediatrice_segment",
+        "label": "La médiatrice d’un segment",
+        "prerequis": [
+          "distance_segment"
+        ]
+      },
+      {
         "id": "cercle_disque",
         "label": "Le cercle et le périmètre du disque",
         "prerequis": [
