@@ -46,6 +46,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { track } from "@vercel/analytics";
 import { useEleve } from "@/context/EleveContext";
+import CarteRessource from "./CarteRessource";
 import { PROFILS, getProfil } from "@/lib/matrice/profils";
 import { exemplesPour } from "@/lib/matrice/exemples";
 import {
@@ -1593,157 +1594,23 @@ export default function EntreeMatrice({
               )}
             </div>
           ) : (
-            <ul className="grid gap-2 sm:grid-cols-3">
+            /* ⭐ UNE PILE VERTICALE, PLUS UNE RANGÉE DE TROIS (22/08/2026).
+                Frédéric : « 3 c'est trop peu […] des sections différentes en
+                vertical, et sur chaque rectangle un screenshot à gauche et à
+                droite l'explication. Ça améliorera notre bounce. »
+                Le détail de ce que la carte dit, et pourquoi elle le dit dans
+                cet ordre, est en tête de CarteRessource.tsx. Ce qui se décide
+                ICI, c'est seulement la FORME DE LA LISTE — et une colonne se
+                continue sous le pli là où une rangée de trois se termine. */
+            <ul className="flex flex-col gap-2">
               {resultat.recommandations.map((r, i) => (
-                <li key={r.ressource.id}>
-                  <Link
-                    // Une ressource externe s'ouvre dans un nouvel onglet et ne
-                    // porte pas `?from=ia` : ce paramètre ne sert qu'à notre
-                    // suivi interne, et on ne renvoie personne d'un clic hors
-                    // du site sans qu'il puisse revenir.
-                    href={
-                      r.ressource.externe
-                        ? r.url
-                        : `${r.url}${r.url.includes("?") ? "&" : "?"}from=ia`
-                    }
-                    target={r.ressource.externe ? "_blank" : undefined}
-                    rel={r.ressource.externe ? "noopener noreferrer" : undefined}
-                    // ⚠️ PAS DE PRÉCHARGEMENT. Un <Link> d'App Router va
-                    // chercher la charge RSC de sa destination dès qu'il entre
-                    // dans le champ de vision, et sur une route statique c'est
-                    // une LECTURE du cache durable — le quota ISR Reads du
-                    // compte. Ces cartes changent à chaque question : les
-                    // laisser précharger ferait payer des destinations que
-                    // personne n'ouvre.
-                    prefetch={false}
-                    onClick={() => track("ia_ressource", { id: r.ressource.id, rang: i + 1, profil: p.id })}
-                    // ⭐ COLONNE FLEX, ET NON UN SIMPLE `block` (20/08/2026).
-                    // Les trois cartes sont d'égale hauteur (grille), donc la
-                    // plus courte creusait un vide en bas pendant que sa voisine
-                    // était pleine — et la ligne de raison flottait à une
-                    // hauteur différente sur chaque carte. En colonne, c'est la
-                    // PROMESSE qui prend le mou (`flex-1`) et la raison qui se
-                    // pose au même endroit sur les trois.
-                    className={`flex h-full flex-col border-2 bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_#1d1c16] ${
-                      i === 0 ? "border-[#0e7490]" : "border-[#1d1c16]/30"
-                    }`}
-                  >
-                    {/* ⭐ LE PICTOGRAMME DU GESTE (Frédéric, 12/08 : « comme
-                        sur Le Bon Coin »). Un appareil photo dit « il y a une
-                        photo à prendre » avant qu'on ait lu le titre — et
-                        « photographier » est le seul geste PHYSIQUE de toute
-                        la rangée, donc le seul qui gagne à être dessiné.
-                        ⚠️ Discret et sur une seule carte : trois vignettes
-                        côte à côte se neutraliseraient, et la carte perdrait
-                        la place de sa promesse. `aria-hidden` — le titre dit
-                        déjà tout à qui n'y voit pas. */}
-                    {/* ⚠️ UNE PASTILLE, PLUS UNE BANDE (20/08/2026). Le
-                        pictogramme vivait dans un rectangle pleine largeur de
-                        56 px de haut, bordé et grisé, avec une petite icône
-                        pâle au milieu : la forme exacte d'une image qui n'a pas
-                        chargé. Sur la seule carte censée dire « il y a une
-                        photo à prendre », l'écran répondait « il manque une
-                        photo ». Même icône, même intention, dans une pastille
-                        de 38 px qui ne peut pas se lire comme un cadre vide. */}
-                    {/* ⭐ LE BADGE MONTE SUR LA LIGNE DU PICTOGRAMME (20/08/2026),
-                        IL NE PARTAGE PLUS SA LIGNE AVEC LE TITRE.
-                        Un badge `shrink-0 whitespace-nowrap` posé à droite du
-                        titre lui prenait 110 px inamovibles : dans une colonne
-                        de tiers d'écran, « Le coach maths » se cassait en TROIS
-                        lignes et « Photographier un cours » aussi. Le titre a
-                        maintenant toute la largeur, et il tient sur une ligne
-                        dès que la place existe.
-                        ⚠️ `h-9` MÊME SANS PICTOGRAMME : cette ligne est la même
-                        sur les trois cartes, donc les trois titres commencent à
-                        la même hauteur. Sans hauteur fixe, la carte à l'appareil
-                        photo décalait son titre de 16 px vers le bas. */}
-                    <div className="mb-2 flex h-9 items-center justify-between gap-2">
-                      {/* ⭐ LE PICTOGRAMME DU GESTE (Frédéric, 12/08 : « comme
-                          sur Le Bon Coin »). Un appareil photo dit « il y a une
-                          photo à prendre » avant qu'on ait lu le titre — et
-                          « photographier » est le seul geste PHYSIQUE de toute
-                          la rangée, donc le seul qui gagne à être dessiné.
-                          ⚠️ UNE PASTILLE, PLUS UNE BANDE (20/08). Il vivait dans
-                          un rectangle pleine largeur de 56 px de haut, bordé et
-                          grisé, avec une petite icône pâle au milieu : la forme
-                          exacte d'une image qui n'a pas chargé. Sur la seule
-                          carte censée dire « il y a une photo à prendre »,
-                          l'écran répondait « il manque une photo ».
-                          ⚠️ Discret et sur une seule carte : trois vignettes
-                          côte à côte se neutraliseraient. `aria-hidden` — le
-                          titre dit déjà tout à qui n'y voit pas. */}
-                      {r.ressource.icone === "camera" ? (
-                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#0e7490]/10">
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.7"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            aria-hidden="true"
-                            className="h-5 w-5 text-[#0e7490]"
-                          >
-                            <path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.2a1.5 1.5 0 0 0 1.3-.75l.7-1.2A1.5 1.5 0 0 1 10 4.3h4a1.5 1.5 0 0 1 1.3.75l.7 1.2A1.5 1.5 0 0 0 17.3 7h2.2A1.5 1.5 0 0 1 21 8.5v9A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z" />
-                            <circle cx="12" cy="13" r="3.4" />
-                          </svg>
-                        </span>
-                      ) : (
-                        <span aria-hidden="true" />
-                      )}
-                      {/* ⭐ LES DEUX BADGES RESTENT, MAIS ILS SE DISENT
-                          (20/08/2026). Un audit demandait d'en choisir UN, au
-                          motif que deux mots pour une idée sèment le doute. Ce
-                          ne sont pas deux mots pour une idée : « vérifiée » veut
-                          dire qu'un enseignant l'a relue, « testée en classe »
-                          qu'elle est en plus passée devant des élèves. La
-                          seconde contient la première, elle ne la répète pas —
-                          et c'est exactement la promesse du site.
-                          Ce qui manquait, c'est que la différence n'était écrite
-                          NULLE PART : le `title` la dit à qui s'arrête dessus. */}
-                      <span
-                        title={
-                          r.ressource.statut === "testee_eleves"
-                            ? "Relue par un enseignant, et déjà utilisée avec des élèves."
-                            : "Relue par un enseignant avant d'être publiée."
-                        }
-                        className={`shrink-0 whitespace-nowrap px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${
-                          r.ressource.statut === "testee_eleves"
-                            ? "bg-[#3f6b0c]/12 text-[#3f6b0c]"
-                            : "bg-[#0e7490]/12 text-[#0e7490]"
-                        }`}
-                      >
-                        {r.ressource.statut === "testee_eleves" ? "testée en classe" : "vérifiée"}
-                      </span>
-                    </div>
-                    {/* Le titre a la ligne pour lui seul — voir la note du bloc
-                        au-dessus. `text-balance` pour que, s'il doit tout de
-                        même passer à deux lignes sur téléphone, la coupure
-                        tombe au milieu et non après le premier mot. */}
-                    <p className="text-balance font-bold text-[#1d1c16]">{r.ressource.titre}</p>
-                    {/* `flex-1` : c'est la promesse qui absorbe la différence de
-                        hauteur entre les trois cartes, pas un vide en bas. */}
-                    <p className="mt-1 flex-1 text-sm text-[#1d1c16]/75">{r.ressource.promesse}</p>
-                    {/* ⚠️ LA LIGNE N'EXISTE QUE S'IL Y A QUELQUE CHOSE À Y
-                        METTRE. Depuis que `raisonner` ne réécrit plus le niveau
-                        sous chaque carte (moteur.ts, 20/08), `r.raison` peut
-                        être vide — un <p> vide laisserait une ligne blanche
-                        sous la promesse, ce qu'on vient justement de retirer.
-                        ⚠️ `/65` et non `/50` : #1d1c16 à 50 % sur blanc, c'est
-                        3,4:1, sous le seuil AA. À 65 % on est à 5,3:1. */}
-                    {(r.raison || (r.ciblee && resultat.lecture.notionLabel)) && (
-                      <p className="mt-1.5 text-xs text-[#1d1c16]/65">
-                        {r.ciblee && resultat.lecture.notionLabel ? (
-                          <span className="text-[#0e7490]">
-                            s&apos;ouvre sur {resultat.lecture.notionLabel}
-                            {r.raison ? " — " : ""}
-                          </span>
-                        ) : null}
-                        {r.raison}
-                      </p>
-                    )}
-                  </Link>
-                </li>
+                <CarteRessource
+                  key={r.ressource.id}
+                  r={r}
+                  rang={i + 1}
+                  profil={p.id}
+                  notionLabel={resultat.lecture.notionLabel}
+                />
               ))}
             </ul>
           )}

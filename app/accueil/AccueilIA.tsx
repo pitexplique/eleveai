@@ -67,7 +67,7 @@ export default function AccueilIA() {
               sous les ressources et se lisait comme un formulaire collé au
               plafond. */}
           <div className="flex flex-1 flex-col justify-center py-2">
-          {/* « PROPOSE », pas « trouve » : le moteur sort deux ou trois
+          {/* « PROPOSE », pas « trouve » : le moteur sort deux à six
               ressources compatibles, il ne devine pas LA bonne — on ne promet
               pas plus que ce que fait ressources.ts.
               ⭐ « CONÇUES, SÉLECTIONNÉES ET VÉRIFIÉES » (Frédéric, 07/08).

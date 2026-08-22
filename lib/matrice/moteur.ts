@@ -3,14 +3,14 @@
 // Le moteur. Déterministe, sans aucun appel d'API : la même phrase donne
 // toujours le même résultat, et on peut expliquer pourquoi.
 //
-//   [ qui es-tu · question · chip ]  ×  [ ressources validées ]  =  2 ou 3 ressources
+//   [ qui es-tu · question · chip ]  ×  [ ressources validées ]  =  2 à 6 ressources
 //
 // Trois étages, dans cet ordre :
 //   1. le PROFIL filtre dur (une ressource de Terminale ne sort jamais en CP) ;
 //   2. l'INTENTION vient de la chip si elle est cliquée, sinon de la façon de dire ;
 //   3. la NOTION vient des mots, avec les alias et une tolérance aux fautes.
 //
-// On ne renvoie jamais plus de trois ressources : au-delà, on a recréé le
+// On ne renvoie jamais plus de SIX ressources : au-delà, on a recréé le
 // catalogue qu'on voulait enterrer.
 
 import { intentionDeLaChip, matiereDeLaChip } from "./chips";
@@ -32,7 +32,30 @@ import type {
   VecteurEntree,
 } from "./types";
 
-const NB_MAX = 3;
+/**
+ * ⭐ SIX PLACES, ET C'ÉTAIT TROIS (22/08/2026).
+ *
+ * Frédéric : « 3 c'est trop peu […] on passe de 3 à 4, 5 ou 6 suivant le
+ * besoin, donc max à 6 ».
+ *
+ * ⚠️ SIX EST UN PLAFOND, PAS UN QUOTA — et c'est toute la nuance de « suivant
+ * le besoin ». Rien dans le calcul ci-dessous ne cherche à remplir les six
+ * cases : le `seuil` reste le même, la règle « une seule par famille » reste la
+ * même. Un CP continuera donc de sortir deux cartes, parce qu'il n'a que deux
+ * ressources à son niveau — et servir une ressource à peine pertinente pour
+ * tenir une case serait exactement ce que le trou « * » des portes écrites
+ * refuse déjà de faire.
+ *
+ * Ce que trois coûtait, en revanche, était réel : sur un profil bien fourni —
+ * une 4ᵉ, un enseignant — le moteur avait dix candidats au-dessus du seuil et
+ * en jetait sept. La troisième carte était souvent la dernière chose que le
+ * visiteur voyait de tout le site.
+ *
+ * ⛔ NE PAS MONTER PLUS HAUT. Le jour où l'écran d'accueil affiche dix
+ * ressources, il a rouvert le catalogue que la refonte du 06/08 a enterré, et
+ * la promesse « on te propose CE qui correspond » redevient « débrouille-toi ».
+ */
+const NB_MAX = 6;
 
 
 /** Distance de Levenshtein, bornée : au-delà de `max` on abandonne. */
