@@ -6127,6 +6127,476 @@ const MISE_EN_VOIX: QcmItem[] = [
   },
 ];
 
+/* ── CINQ POOLS DE PLUS, POUR LA RELECTURE DU CM2 (22/08/2026) ───────────────
+   Le CM2 relu sur le BO ouvre des objectifs que le programme nomme et que le
+   coach ne savait pas servir autrement que par un pool générique :
+
+     · « Différencier épithète et ATTRIBUT DU SUJET » — le CM2 oppose l'épithète
+       à l'attribut, la 6e l'oppose au complément du nom. Deux oppositions, deux
+       années : le pool COMPLEMENT_NOM ne couvre que la seconde.
+     · « Utiliser des dictionnaires » — chercher un mot n'est pas le deviner :
+       servi depuis VOC_CONTEXTE, l'intitulé promettait une chose et en donnait
+       une autre.
+     · « Écrire pour résumer », « Appliquer les principes de la cohérence
+       textuelle », « Utiliser le brouillon » et « Faire preuve d'autonomie dans
+       le respect des codes de l'écrit » — dix-sept micros d'écriture, en 6e et
+       au CM2, tiraient toutes dans le même pool ECRITURE. */
+
+const EPITHETE_ATTRIBUT: QcmItem[] = [
+  {
+    text: "Dans « une plage déserte », l'adjectif « déserte » est…",
+    correct: "épithète",
+    wrongs: ["attribut du sujet", "complément du nom", "sujet"],
+    methode: "L'adjectif est collé au nom, dans le groupe nominal : il est épithète.",
+  },
+  {
+    text: "Dans « la plage est déserte », l'adjectif « déserte » est…",
+    correct: "attribut du sujet",
+    wrongs: ["épithète", "complément d'objet", "complément du nom"],
+    methode: "Le verbe « est » sépare l'adjectif du nom : l'adjectif devient attribut du sujet.",
+  },
+  {
+    text: "Qu'est-ce qui distingue à coup sûr l'épithète de l'attribut ?",
+    correct: "l'attribut est relié au nom par un verbe d'état",
+    wrongs: [
+      "l'attribut est toujours placé après le nom",
+      "l'épithète est toujours au masculin",
+      "l'épithète est toujours un seul mot",
+    ],
+    methode: "C'est le VERBE qui décide : sans verbe d'état entre les deux, l'adjectif est épithète.",
+  },
+  {
+    text: "« Le ciel devient sombre. » L'adjectif « sombre » est…",
+    correct: "attribut du sujet",
+    wrongs: ["épithète", "complément circonstanciel", "complément d'objet direct"],
+    methode: "« devenir » est un verbe d'état, comme être, sembler, paraitre, rester.",
+  },
+  {
+    text: "« Les enfants heureux courent. » L'adjectif « heureux » est…",
+    correct: "épithète",
+    wrongs: ["attribut du sujet", "complément d'objet", "adverbe"],
+    methode: "« courir » n'est pas un verbe d'état : l'adjectif reste dans le groupe nominal.",
+  },
+  {
+    text: "Dans laquelle de ces phrases l'adjectif est ATTRIBUT ?",
+    correct: "La mer semble calme.",
+    wrongs: ["La mer calme s'étend.", "Une mer calme, enfin.", "Sur la mer calme, un voilier."],
+    methode: "Seule la première place un verbe d'état entre le nom et l'adjectif.",
+  },
+  {
+    text: "Un adjectif épithète peut-il être supprimé sans casser la phrase ?",
+    correct: "oui, la phrase reste correcte",
+    wrongs: [
+      "non, jamais",
+      "seulement s'il est au pluriel",
+      "seulement s'il est placé avant le nom",
+    ],
+    methode: "« une plage déserte » → « une plage » tient debout. « la plage est » ne tient pas.",
+  },
+  {
+    text: "« Ce gâteau paraît délicieux. » Quelle est la fonction de « délicieux » ?",
+    correct: "attribut du sujet",
+    wrongs: ["épithète", "complément du nom", "sujet"],
+    methode: "« paraitre » est un verbe d'état : ce qui suit dit ce QU'EST le sujet.",
+  },
+  {
+    text: "Avec quel mot l'épithète s'accorde-t-elle ?",
+    correct: "avec le nom qu'elle complète",
+    wrongs: ["avec le verbe", "avec le sujet de la phrase", "elle ne s'accorde pas"],
+    methode: "L'épithète est dans le groupe nominal : elle suit le genre et le nombre de son nom.",
+  },
+  {
+    text: "Avec quel mot l'attribut du sujet s'accorde-t-il ?",
+    correct: "avec le sujet",
+    wrongs: ["avec le verbe", "avec le complément", "avec le déterminant"],
+    methode: "« Les plages sont désertes » : l'attribut prend le genre et le nombre du sujet.",
+  },
+  {
+    text: "« Elle rentre fatiguée. » L'adjectif « fatiguée » est…",
+    correct: "attribut du sujet",
+    wrongs: ["épithète", "complément d'objet direct", "adverbe"],
+    methode: "Certains verbes d'action introduisent aussi un attribut : il dit l'état du sujet.",
+  },
+  {
+    text: "Combien d'adjectifs ÉPITHÈTES dans « Le vieux pêcheur ramène un filet lourd » ?",
+    correct: "deux",
+    wrongs: ["un", "trois", "aucun"],
+    methode: "« vieux » complète « pêcheur », « lourd » complète « filet » : deux épithètes.",
+  },
+];
+
+const DICTIONNAIRE: QcmItem[] = [
+  {
+    text: "Pour trouver « volcan » dans un dictionnaire, on cherche à la lettre…",
+    correct: "V",
+    wrongs: ["O", "L", "C"],
+    methode: "L'ordre alphabétique se lit sur la PREMIÈRE lettre du mot.",
+  },
+  {
+    text: "Entre « marée » et « marin », lequel vient en premier dans le dictionnaire ?",
+    correct: "marée",
+    wrongs: ["marin", "les deux à la même page", "celui qui est le plus court"],
+    methode: "On compare lettre à lettre : mar-é vient avant mar-i, car « e » précède « i ».",
+  },
+  {
+    text: "À quoi servent les deux mots écrits en haut d'une page de dictionnaire ?",
+    correct: "à indiquer le premier et le dernier mot de la page",
+    wrongs: [
+      "à donner les mots les plus difficiles",
+      "à signaler les mots nouveaux",
+      "à donner le titre du chapitre",
+    ],
+    methode: "Ce sont les mots-repères : ils évitent de lire toute la page.",
+  },
+  {
+    text: "Dans un article de dictionnaire, l'abréviation « n. m. » signifie…",
+    correct: "nom masculin",
+    wrongs: ["nom multiple", "nouveau mot", "négationma­jeure"],
+    methode: "L'article donne d'abord la classe grammaticale du mot.",
+  },
+  {
+    text: "Pour chercher le verbe « courais », on cherche…",
+    correct: "courir",
+    wrongs: ["courais", "cour", "couru"],
+    methode: "Un verbe se cherche à l'infinitif ; un nom, au singulier.",
+  },
+  {
+    text: "Un article donne trois définitions numérotées. Cela signifie que le mot…",
+    correct: "a plusieurs sens",
+    wrongs: [
+      "s'écrit de trois façons",
+      "existe en trois langues",
+      "a trois synonymes",
+    ],
+    methode: "Les numéros séparent les sens d'un mot polysémique.",
+  },
+  {
+    text: "Pour chercher « chevaux », on cherche…",
+    correct: "cheval",
+    wrongs: ["chevaux", "chevau", "cheva"],
+    methode: "Le dictionnaire donne les noms au singulier : on ramène le mot à sa forme de base.",
+  },
+  {
+    text: "Que trouve-t-on dans un article, en plus de la définition ?",
+    correct: "un exemple d'emploi du mot",
+    wrongs: ["la biographie de l'auteur", "l'âge du mot en années", "un dessin obligatoire"],
+    methode: "L'exemple montre le mot dans une phrase : c'est souvent lui qui éclaire le sens.",
+  },
+  {
+    text: "Le dictionnaire indique « fam. » devant un sens. Cela veut dire…",
+    correct: "que ce sens appartient au langage familier",
+    wrongs: ["que le mot vient d'une famille de mots", "que le mot est ancien", "que le mot est rare"],
+    methode: "Les abréviations de registre préviennent : « fam. » ne s'écrit pas dans un devoir.",
+  },
+  {
+    text: "Quand faut-il ouvrir le dictionnaire pendant une lecture ?",
+    correct: "quand le contexte n'a pas suffi à deviner le mot",
+    wrongs: [
+      "à chaque mot inconnu, sans réfléchir",
+      "seulement après avoir fini le texte",
+      "jamais pendant une lecture",
+    ],
+    methode: "Le BO le dit : l'usage du dictionnaire n'est pas systématique, il vérifie une hypothèse.",
+  },
+  {
+    text: "Entre « pêche » (le fruit) et « pêche » (l'activité), le dictionnaire…",
+    correct: "fait deux entrées séparées",
+    wrongs: [
+      "n'en garde qu'une",
+      "les met dans la même définition",
+      "renvoie à un autre dictionnaire",
+    ],
+    methode: "Deux mots homonymes ont deux origines : le dictionnaire leur donne deux entrées.",
+  },
+  {
+    text: "Où cherche-t-on l'orthographe exacte d'un mot dont on n'est pas sûr ?",
+    correct: "dans le dictionnaire, à l'ordre alphabétique",
+    wrongs: [
+      "dans un livre de conjugaison",
+      "dans la table des matières",
+      "on ne peut pas le chercher",
+    ],
+    methode: "On teste l'orthographe la plus probable : si le mot n'y est pas, c'est qu'elle est fausse.",
+  },
+];
+
+const ECRIT_RESUMER: QcmItem[] = [
+  {
+    text: "Un bon résumé de récit garde…",
+    correct: "les personnages, l'action et la fin",
+    wrongs: ["tous les dialogues", "l'avis du lecteur", "la biographie de l'auteur"],
+    methode: "Résumer, c'est garder la trame et laisser tomber les détails.",
+  },
+  {
+    text: "Dans un résumé, on écrit…",
+    correct: "avec ses propres mots",
+    wrongs: [
+      "en recopiant les phrases du texte",
+      "en ajoutant son opinion",
+      "en inventant une autre fin",
+    ],
+    methode: "Recopier ne prouve pas qu'on a compris : reformuler, oui.",
+  },
+  {
+    text: "Pour résumer une page, par quoi commence-t-on ?",
+    correct: "par repérer l'idée principale de chaque paragraphe",
+    wrongs: [
+      "par recopier la première phrase",
+      "par compter les lignes",
+      "par la conclusion de l'auteur",
+    ],
+    methode: "Le résumé se construit sur les idées, pas sur l'ordre d'apparition des phrases.",
+  },
+  {
+    text: "Hiérarchiser ses idées avant d'écrire, c'est…",
+    correct: "les classer de la plus importante à la moins importante",
+    wrongs: ["les écrire dans l'ordre où elles viennent", "les compter", "les souligner"],
+    methode: "Hiérarchiser, c'est décider ce qui vient d'abord parce que c'est le plus important.",
+  },
+  {
+    text: "Qu'est-ce qu'on SUPPRIME en priorité dans un résumé ?",
+    correct: "les détails qui ne changent pas l'histoire",
+    wrongs: ["le nom du héros", "la fin", "le problème du récit"],
+    methode: "Test : si l'histoire tient sans ce détail, il sort du résumé.",
+  },
+  {
+    text: "À quel temps écrit-on le plus souvent un résumé ?",
+    correct: "au présent",
+    wrongs: ["au passé simple", "au futur", "au conditionnel"],
+    methode: "Le présent de narration rend le résumé plus court et plus lisible.",
+  },
+  {
+    text: "Écrire pour comparer deux documents, c'est écrire…",
+    correct: "ce qu'ils ont en commun et ce qui les sépare",
+    wrongs: [
+      "seulement le contenu du premier",
+      "lequel des deux est le meilleur",
+      "un résumé de chacun, sans lien",
+    ],
+    methode: "Comparer, c'est mettre en regard : les points communs ET les différences.",
+  },
+  {
+    text: "Reformuler l'essentiel d'une leçon « de manière schématique », c'est…",
+    correct: "la mettre en schéma, en flèches ou en tableau",
+    wrongs: [
+      "la recopier en plus petit",
+      "n'en garder que le titre",
+      "l'apprendre par cœur",
+    ],
+    methode: "Le schéma montre les liens entre les idées : c'est une autre façon d'écrire pour apprendre.",
+  },
+  {
+    text: "Dans un écrit réflexif court, on attend…",
+    correct: "une idée et la raison qui la soutient",
+    wrongs: [
+      "une longue introduction",
+      "un titre et une conclusion",
+      "un résumé du cours entier",
+    ],
+    methode: "Court ne veut pas dire vague : une idée, un appui.",
+  },
+  {
+    text: "Combien de phrases faut-il pour résumer une page en classe de CM2 ?",
+    correct: "trois ou quatre suffisent",
+    wrongs: ["une seule", "une dizaine", "autant que de paragraphes lus"],
+    methode: "Un résumé qui fait la longueur du texte n'est plus un résumé.",
+  },
+  {
+    text: "Pourquoi écrire pour apprendre une leçon ?",
+    correct: "parce que reformuler avec ses mots aide à retenir",
+    wrongs: [
+      "pour remplir son cahier",
+      "pour aller plus vite",
+      "parce que c'est obligatoire",
+    ],
+    methode: "Le BO parle d'« écrire pour réfléchir, apprendre et mémoriser » : écrire fixe.",
+  },
+  {
+    text: "Ton résumé contient une phrase que le texte ne dit pas. Que fais-tu ?",
+    correct: "tu l'enlèves : un résumé n'ajoute rien",
+    wrongs: [
+      "tu la gardes, elle est jolie",
+      "tu la mets entre parenthèses",
+      "tu la mets à la fin",
+    ],
+    methode: "Un résumé rend compte du texte : il ne l'invente pas et ne le juge pas.",
+  },
+];
+
+const ECRIT_COHERENCE: QcmItem[] = [
+  {
+    text: "Ton récit est au passé simple. Une phrase passe au présent sans raison. Que se passe-t-il ?",
+    correct: "la cohérence du récit est rompue",
+    wrongs: ["rien, c'est équivalent", "le texte devient un poème", "il faut couper le paragraphe"],
+    methode: "La cohérence tient au système des temps : on n'en change pas sans raison.",
+  },
+  {
+    text: "Dans un récit, pour dire qu'une action se passe APRÈS une autre, on écrit…",
+    correct: "« Plus tard »",
+    wrongs: ["« En même temps »", "« Au même moment »", "« Pendant ce temps »"],
+    methode: "« ensuite », « plus tard » marquent la succession ; les autres, la simultanéité.",
+  },
+  {
+    text: "Quand commence-t-on un nouveau paragraphe ?",
+    correct: "quand on passe à une nouvelle idée",
+    wrongs: ["quand la page est pleine", "tous les cinq mots", "à chaque virgule"],
+    methode: "Le paragraphe est une unité de sens, pas une unité de place.",
+  },
+  {
+    text: "Ton héros s'appelle Malo au début et Marlo à la fin. C'est…",
+    correct: "une rupture de cohérence",
+    wrongs: ["une faute d'orthographe sans importance", "un effet de style", "un synonyme"],
+    methode: "Le lecteur ne sait plus de qui on parle : la chaine du personnage est cassée.",
+  },
+  {
+    text: "Pourquoi remplacer « le pêcheur » par « il » dans la phrase suivante ?",
+    correct: "pour éviter la répétition sans changer de personnage",
+    wrongs: [
+      "pour raccourcir la phrase",
+      "pour parler de quelqu'un d'autre",
+      "parce que la grammaire l'oblige",
+    ],
+    methode: "Les reprises tissent le texte : c'est aussi de la cohérence.",
+  },
+  {
+    text: "Écrire la suite d'un récit demande de conserver…",
+    correct: "les personnages, le temps et le lieu",
+    wrongs: ["le nombre de lignes", "le titre", "la première phrase"],
+    methode: "Une suite cohérente ne change pas en route ce que le texte a installé.",
+  },
+  {
+    text: "Dans un dialogue écrit, une nouvelle réplique se marque par…",
+    correct: "un tiret et un retour à la ligne",
+    wrongs: ["une parenthèse", "un astérisque", "des points de suspension"],
+    methode: "C'est un code de l'écrit : il dit au lecteur que quelqu'un d'autre parle.",
+  },
+  {
+    text: "Quel connecteur ouvre le mieux la fin d'un récit ?",
+    correct: "« Enfin »",
+    wrongs: ["« D'abord »", "« Ensuite »", "« Pendant que »"],
+    methode: "Les connecteurs de temps ordonnent le récit : « enfin » referme la série.",
+  },
+  {
+    text: "Ton texte raconte à la 1re personne, puis dit « il pensa ». C'est…",
+    correct: "un changement de point de vue non justifié",
+    wrongs: ["une bonne idée de style", "une faute d'accord", "une reprise nominale"],
+    methode: "Qui raconte doit rester le même du début à la fin, sauf choix assumé.",
+  },
+  {
+    text: "Une description cohérente suit…",
+    correct: "un ordre : de loin en près, de haut en bas",
+    wrongs: [
+      "l'ordre où les mots viennent",
+      "l'ordre alphabétique",
+      "aucun ordre particulier",
+    ],
+    methode: "Le lecteur doit pouvoir construire l'image : un ordre l'y aide.",
+  },
+  {
+    text: "Dans un texte explicatif, à quoi sert le connecteur « parce que » ?",
+    correct: "à donner la cause",
+    wrongs: ["à donner la conséquence", "à opposer deux idées", "à conclure"],
+    methode: "Les connecteurs disent le rapport entre les idées : sans eux, le texte est une liste.",
+  },
+  {
+    text: "Ton récit passe d'un lieu à un autre sans prévenir. Que faut-il ajouter ?",
+    correct: "une phrase ou un connecteur de lieu",
+    wrongs: ["un titre", "un dialogue", "une nouvelle page"],
+    methode: "Le lecteur ne voit pas ce que tu imagines : les changements se signalent.",
+  },
+];
+
+const ECRIT_REVISER: QcmItem[] = [
+  {
+    text: "À quoi sert un brouillon ?",
+    correct: "à essayer, raturer et réorganiser avant la version finale",
+    wrongs: ["à écrire le texte définitif", "à faire joli", "à compter les mots"],
+    methode: "Le brouillon est un écrit À RETRAVAILLER : les ratures y sont un signe de travail.",
+  },
+  {
+    text: "Réviser son texte, c'est…",
+    correct: "le relire pour corriger et améliorer",
+    wrongs: [
+      "le recopier au propre sans le lire",
+      "compter les lignes",
+      "changer de cahier",
+    ],
+    methode: "Réviser ajoute quelque chose au texte ; recopier ne fait que le déplacer.",
+  },
+  {
+    text: "Quand tu relis pour l'orthographe, quel accord vérifies-tu en premier ?",
+    correct: "l'accord du verbe avec son sujet",
+    wrongs: ["la longueur des phrases", "le nombre de paragraphes", "la place des guillemets"],
+    methode: "Le BO cite l'accord sujet-verbe et celui du groupe nominal comme points de vigilance.",
+  },
+  {
+    text: "Un camarade te dit : « On ne comprend pas qui parle. » Que fais-tu ?",
+    correct: "tu ajoutes des tirets et tu nommes les personnages",
+    wrongs: ["tu effaces le dialogue", "tu écris plus gros", "tu ajoutes un titre"],
+    methode: "Améliorer à partir d'une remarque, c'est agir précisément sur ce qui a gêné.",
+  },
+  {
+    text: "Combien de fois faut-il relire un texte avant de le rendre ?",
+    correct: "au moins deux fois, avec un but différent à chaque fois",
+    wrongs: ["une seule fois suffit", "dix fois", "aucune, si on a bien écrit"],
+    methode: "Une relecture pour le sens, une pour l'orthographe : on ne voit pas les deux à la fois.",
+  },
+  {
+    text: "S'autoévaluer, c'est…",
+    correct: "relire son texte avec des critères connus",
+    wrongs: [
+      "se donner une note",
+      "demander l'avis du professeur",
+      "comparer avec le texte du voisin",
+    ],
+    methode: "Sans critères, la relecture ne trouve rien : on relit ce qu'on croit avoir écrit.",
+  },
+  {
+    text: "Quel signe manque le plus souvent dans un brouillon ?",
+    correct: "la ponctuation de fin de phrase",
+    wrongs: ["les accents", "les majuscules de noms propres", "les tirets de dialogue"],
+    methode: "On écrit vite pour ne pas perdre l'idée : le point est le premier oublié.",
+  },
+  {
+    text: "Respecter les codes de l'écrit, c'est notamment…",
+    correct: "majuscule au début, point à la fin",
+    wrongs: [
+      "écrire en lettres attachées",
+      "sauter une ligne sur deux",
+      "écrire au crayon",
+    ],
+    methode: "Les codes sont ce que tout lecteur attend, pas une préférence de présentation.",
+  },
+  {
+    text: "« Les élève de la classe a rendu leur devoirs. » Combien de fautes d'accord ?",
+    correct: "trois",
+    wrongs: ["une", "deux", "aucune"],
+    methode: "« les élèves », « ont rendu », « leurs devoirs » : trois chaines d'accord cassées.",
+  },
+  {
+    text: "Que fait-on d'une phrase trop longue repérée à la relecture ?",
+    correct: "on la coupe en deux phrases",
+    wrongs: ["on la supprime", "on l'écrit plus petit", "on ajoute des virgules partout"],
+    methode: "Deux phrases claires valent mieux qu'une phrase juste mais illisible.",
+  },
+  {
+    text: "Pourquoi relire son texte à voix basse ?",
+    correct: "parce que l'oreille entend ce que l'œil saute",
+    wrongs: [
+      "pour aller plus vite",
+      "pour apprendre le texte",
+      "pour vérifier l'écriture",
+    ],
+    methode: "Un mot manquant s'entend souvent avant de se voir.",
+  },
+  {
+    text: "Améliorer son texte, ce n'est pas seulement corriger : c'est aussi…",
+    correct: "enrichir une phrase pauvre",
+    wrongs: ["allonger le texte", "changer de sujet", "ajouter un titre"],
+    methode: "Le BO dit « améliorer tout ou partie de son texte » : corriger ET enrichir.",
+  },
+];
+
 // ── CONJUGAISON ─────────────────────────────────────────────────────────────
 // Present / imparfait / futur / infinitif sont produits par le moteur
 // parametrique (conjugationEngine.ts). Restent ici les notions conceptuelles.
@@ -6476,6 +6946,13 @@ function conjugaisonQuestion(microId: string): Generated {
      tombaient jusqu'ici sur le moteur du présent. */
   if (microId.includes("radical_variations")) return qcm(RADICAL_VARIATIONS);
   if (microId.includes("conj_marques")) return qcm(MARQUES_TEMPS_PERSONNE);
+  /* ⚠️ LE PARTICIPE PASSÉ ARRIVE ICI DEPUIS LE 22/08/2026. Le BO range son
+     accord sous « Approfondir sa maitrise de la conjugaison », pas sous les
+     accords du groupe nominal : `cm2_orth_participe_passe` a donc changé de
+     notion, et passe désormais par CE routeur et non par `grammaireQuestion`.
+     Sans cette branche, il traversait toute la fonction et tombait sur le
+     moteur du présent — juste, et sur un autre sujet. */
+  if (microId.includes("participe")) return qcm(PARTICIPE_PASSE);
 
   // Present / imparfait / futur / infinitif : moteur parametrique (centaines de
   // variantes). Passe compose et valeur des temps : pools rediges (notions plus
@@ -6557,6 +7034,12 @@ function grammaireQuestion(microId: string): Generated {
     return qcm(auHasard([ACCORD_ATTRIBUT, PARTICIPE_PASSE, HOMOPHONES, ACCORD_SUJET_VERBE]));
   }
 
+  /* ⚠️ EN TÊTE, ET IL LE FAUT (22/08/2026). « cm2_gram_epithete_attribut »
+     contient « attribut » ET « epithete » : sous les branches suivantes il
+     recevrait soit la reconnaissance de l'attribut, soit l'opposition
+     épithète / complément du nom — qui est le programme de la 6e, pas du CM2.
+     Le CM2 oppose l'épithète à l'ATTRIBUT ; c'est un pool à part. */
+  if (microId.includes("epithete_attribut")) return qcm(EPITHETE_ATTRIBUT);
   if (microId.includes("participe_passe_etre")) return qcm(PARTICIPE_PASSE_ETRE);
   if (microId.includes("gn_epithete")) return qcm(GN_EPITHETE);
   if (microId.includes("participe_passe")) return qcm(PARTICIPE_PASSE);
@@ -7191,6 +7674,33 @@ function questionParMicro(microId: string): Generated | null {
      pools génériques — des questions justes, sur un autre sujet. */
   if (microId.includes("comp_reprises")) return qcm(REPRISES);
   if (microId.includes("comp_liens_logiques")) return qcm(LIENS_LOGIQUES);
+  /* ── L'ÉCRITURE ET LE DICTIONNAIRE (22/08/2026) ──────────────────────────
+     Dix-sept micros d'écriture, en 6e et au CM2, tiraient dans le seul pool
+     ECRITURE. Chacune de ces branches correspond à un objectif que le BO nomme
+     à part : résumer, tenir la cohérence, reprendre son texte. */
+  if (
+    microId.includes("ecrit_resumer") ||
+    microId.includes("ecrit_hierarchiser") ||
+    microId.includes("ecrit_comparer_documents") ||
+    microId.includes("ecrit_apprendre_defi")
+  ) {
+    return qcm(ECRIT_RESUMER);
+  }
+  if (
+    microId.includes("ecrit_coherence") ||
+    microId.includes("ecrit_codes") ||
+    microId.includes("ecrit_produire_defi")
+  ) {
+    return qcm(ECRIT_COHERENCE);
+  }
+  if (
+    microId.includes("ecrit_brouillon") ||
+    microId.includes("ecrit_reviser") ||
+    microId.includes("ecrit_normes")
+  ) {
+    return qcm(ECRIT_REVISER);
+  }
+  if (microId.includes("voc_dictionnaire")) return qcm(DICTIONNAIRE);
   /* ⚠️ `voix_` et non `voix` : `lecture_voix_haute` est un notionId, pas un
      microId, et aucune micro du CM1 ni du CM2 ne porte ce morceau — leur
      lecture expressive s'appelle `flue_expressive`. Le jour où elles seront
