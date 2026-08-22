@@ -1512,4 +1512,87 @@ export const probabilitesBank: TutorBankItemV4[] = [
     tags: ["proba_experience", "defi", "de", "fraction", "canvas"],
     canvas: probabilitesCanvas({ variant: "de", de: { faces: [1, 2, 3, 4, 5, 6], surligne: [3] } }),
   },
+  /* =========================
+     PROBA_VOCABULAIRE — LES GENERATEURS
+     ⛔ Ajoutes le 22/08/2026 : la micro n'avait que dix items figes. Regle d'or
+     de Frederic — un eleve ne doit pas retomber sur la meme question en dix
+     minutes, soit dix variantes MINIMUM, donc un generateur.
+     ⭐ Une micro de vocabulaire se parametre sur la SITUATION (de, piece, urne,
+     roue) : le raisonnement ne bouge pas, l'habillage si.
+  ========================= */
+  {
+    kind: "template",
+    id: "6e_proba_vocabulaire_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Une issue est UN resultat possible de l'experience.",
+    tags: ["proba_experience", "vocabulaire", "template"],
+    generate: () => {
+      const situations = [
+        { exp: "on lance un de a six faces", n: 6, issues: "1, 2, 3, 4, 5 et 6" },
+        { exp: "on lance une piece de monnaie", n: 2, issues: "pile et face" },
+        { exp: "on tire une bille dans un sac contenant une bille de chaque couleur : rouge, bleue, verte et jaune", n: 4, issues: "rouge, bleue, verte et jaune" },
+        { exp: "on fait tourner une roue partagee en 8 secteurs numerotes", n: 8, issues: "les nombres de 1 a 8" },
+      ];
+      const s = situations[Math.floor(Math.random() * situations.length)];
+      return {
+        text: `Une experience aleatoire : ${s.exp}. Combien y a-t-il d'issues possibles ?`,
+        format: "short",
+        expected: [String(s.n)],
+        comparator: "number_equal",
+        explanation: pe(
+          "une issue est un resultat possible d'une experience aleatoire.",
+          "on enumere tous les resultats que l'experience peut donner, sans en oublier ni en compter deux fois.",
+          `Les issues sont ${s.issues}.`,
+          `Il y a donc ${s.n} issues possibles.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "6e_proba_vocabulaire_tpl_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Impossible vaut 0, certain vaut 1.",
+    tags: ["proba_experience", "vocabulaire", "template"],
+    generate: () => {
+      const cas = [
+        { txt: "obtenir un 7 en lancant un de a six faces", rep: "impossible" },
+        { txt: "obtenir un nombre entier compris entre 1 et 6 en lancant un de a six faces", rep: "certain" },
+        { txt: "obtenir pile en lancant une piece equilibree", rep: "ni impossible ni certain" },
+        { txt: "obtenir un nombre pair en lancant un de a six faces", rep: "ni impossible ni certain" },
+        { txt: "tirer une bille rouge dans un sac ne contenant que des billes bleues", rep: "impossible" },
+        { txt: "tirer une bille bleue dans un sac ne contenant que des billes bleues", rep: "certain" },
+      ];
+      const c = cas[Math.floor(Math.random() * cas.length)];
+      const explications = {
+        impossible: "L'evenement ne peut jamais se produire : sa probabilite vaut 0.",
+        certain: "L'evenement se produit a coup sur : sa probabilite vaut 1.",
+        "ni impossible ni certain":
+          "L'evenement se produit parfois : sa probabilite est strictement comprise entre 0 et 1.",
+      } as const;
+      return {
+        text: `Cet evenement est-il impossible, certain, ou ni l'un ni l'autre : ${c.txt} ?`,
+        format: "qcm",
+        choices: shuffle(["impossible", "certain", "ni impossible ni certain"]),
+        expected: [c.rep],
+        comparator: "mcq_exact",
+        explanation: pe(
+          "une probabilite est un nombre compris entre 0 (impossible) et 1 (certain).",
+          "on se demande si l'evenement peut ne jamais arriver, toujours arriver, ou parfois.",
+          explications[c.rep as keyof typeof explications],
+          "On situe l'evenement sur l'echelle de 0 a 1."
+        ),
+      };
+    },
+  },
 ]
