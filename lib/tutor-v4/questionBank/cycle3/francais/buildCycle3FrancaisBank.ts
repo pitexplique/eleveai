@@ -5781,6 +5781,352 @@ const ECRIRE_MAIN: QcmItem[] = [
   },
 ];
 
+/* ── TROIS POOLS AJOUTÉS LE 22/08/2026, EN RELISANT LE BO DU CYCLE 3 ─────────
+   Mesuré, pas supposé : on a tiré une question sur chaque micro de 6e et
+   comparé ce qui était SERVI à ce qui était ATTENDU. Trois intitulés recevaient
+   des questions justes, sur un autre sujet — la panne qui ne tombe jamais en
+   panne :
+     · « Retrouver de qui parle un pronom »  → « à quoi sert la flèche d'un
+       panneau ? » (pool DOCUMENT) ;
+     · « Reconnaître ce qu'exprime un mot de liaison » → « à quoi sert la
+       légende d'un plan ? » (pool DOCUMENT) ;
+     · toute la notion « Lire à voix haute et mettre en voix » → des questions
+       de compréhension (pool LECTURE), faute du moindre pool de mise en voix.
+
+   ⭐ LES DEUX PREMIERS PORTENT LA CHAÎNE ANAPHORIQUE. Le BO l'écrit en toutes
+   lettres en 6e — « Repérer les informations explicites et implicites, LES
+   LIENS LOGIQUES, LES REPRISES NOMINALES » — et c'est le point le plus bas des
+   résultats d'évaluation nationale. Le coach ne posait pas une seule question
+   dessus.
+
+   ⚠️ Aiguillés par MICRO (`questionParMicro`), pas par notion : ces micros
+   vivent dans des notions de compréhension et de lecture qui les avaleraient. */
+
+const REPRISES: QcmItem[] = [
+  {
+    text: "« Léa observait le margouillat. Il ne bougeait plus. » Que reprend « Il » ?",
+    correct: "le margouillat",
+    wrongs: ["Léa", "un autre animal, non nommé", "celui qui raconte l'histoire"],
+    methode: "Un pronom reprend un groupe déjà écrit : on remonte le texte jusqu'à lui.",
+  },
+  {
+    text: "« Ulysse affronta le cyclope. Le monstre hurla. » Que désigne « Le monstre » ?",
+    correct: "le cyclope",
+    wrongs: ["Ulysse", "un troisième personnage", "l'équipage du navire"],
+    methode: "Une reprise nominale nomme autrement ce dont on vient de parler.",
+  },
+  {
+    text: "« Les élèves rangèrent leurs cahiers. Ils sortirent en silence. » Qui sort ?",
+    correct: "les élèves",
+    wrongs: ["les cahiers", "les professeurs", "on ne peut pas le savoir"],
+    methode: "Le pronom s'accorde avec ce qu'il reprend : « Ils », pluriel, reprend « les élèves ».",
+  },
+  {
+    text: "Dans un texte, l'ANTÉCÉDENT d'un pronom, c'est…",
+    correct: "le groupe qu'il reprend, et qui vient avant lui",
+    wrongs: [
+      "le mot qui le suit immédiatement",
+      "le premier mot du paragraphe",
+      "le sujet de la première phrase du texte",
+    ],
+    methode: "« Anté- » veut dire avant : l'antécédent est déjà passé quand le pronom arrive.",
+  },
+  {
+    text: "« Marie tendit le livre à Paul. Il la remercia. » Que reprend « la » ?",
+    correct: "Marie",
+    wrongs: ["le livre", "Paul", "une personne dont on n'a pas parlé"],
+    methode: "« Il » a déjà pris Paul ; il ne reste que Marie, et le féminin le confirme.",
+  },
+  {
+    text: "« Le vieux chêne dominait la cour. L'arbre avait plus de cent ans. » « L'arbre » désigne…",
+    correct: "le vieux chêne",
+    wrongs: ["la cour", "un arbre voisin", "le narrateur"],
+    methode: "Un mot plus général (arbre) peut reprendre un mot précis (chêne) : c'est encore une reprise.",
+  },
+  {
+    text: "Pourquoi un texte remplace-t-il « le pêcheur » par « il » ou « cet homme » ?",
+    correct: "pour éviter de répéter toujours le même mot",
+    wrongs: [
+      "pour raccourcir le texte au maximum",
+      "pour parler d'une autre personne",
+      "parce que la grammaire l'interdit après deux phrases",
+    ],
+    methode: "Les reprises tissent le texte : elles évitent la répétition sans changer de sujet.",
+  },
+  {
+    text: "« Sami a prêté sa raquette à Nina. Elle la lui a rendue. » Qui rend quoi ?",
+    correct: "Nina rend la raquette à Sami",
+    wrongs: [
+      "Sami rend la raquette à Nina",
+      "Nina rend Sami à la raquette",
+      "on ne peut pas le savoir",
+    ],
+    methode: "Trois pronoms d'affilée se démêlent un par un : « Elle » = Nina, « la » = la raquette, « lui » = Sami.",
+  },
+  {
+    text: "« La tempête approchait. Elle inquiétait les marins. » Que reprend « Elle » ?",
+    correct: "la tempête",
+    wrongs: ["les marins", "la mer", "le bateau"],
+    methode: "Un pronom peut reprendre une chose, pas seulement une personne.",
+  },
+  {
+    text: "« Le train entra en gare. Le convoi s'arrêta. » Ces deux phrases parlent…",
+    correct: "du même train",
+    wrongs: ["de deux trains différents", "d'un train et d'un car", "de la gare seulement"],
+    methode: "« Le convoi » est un synonyme employé en reprise : c'est toujours le même objet.",
+  },
+  {
+    text: "« Paul appela Théo. Il ne répondit pas. » Pourquoi cette phrase est-elle ambiguë ?",
+    correct: "« Il » peut reprendre Paul comme Théo",
+    wrongs: [
+      "il manque un verbe",
+      "« Il » ne reprend personne",
+      "les deux noms sont au pluriel",
+    ],
+    methode: "Deux antécédents possibles du même genre : le texte doit alors nommer, pas pronominaliser.",
+  },
+  {
+    text: "« Nous avons visité le volcan. Cette excursion nous a épuisés. » « Cette excursion » reprend…",
+    correct: "la visite du volcan",
+    wrongs: ["le volcan seul", "la fatigue", "les visiteurs"],
+    methode: "Une reprise peut résumer toute une action, pas seulement un nom.",
+  },
+  {
+    text: "Dans « Elle la regarda », combien y a-t-il de personnes dont on parle ?",
+    correct: "deux",
+    wrongs: ["une", "trois", "aucune"],
+    methode: "« Elle » désigne l'une, « la » désigne l'autre : deux antécédents différents.",
+  },
+  {
+    text: "Pour vérifier qu'un pronom est bien compris, le plus sûr est de…",
+    correct: "le remplacer par le groupe qu'il reprend et relire",
+    wrongs: [
+      "le supprimer et voir si la phrase tient",
+      "chercher le mot le plus proche avant lui",
+      "regarder s'il est en début de phrase",
+    ],
+    methode: "Le mot le plus proche n'est pas toujours le bon : seule la substitution le prouve.",
+  },
+];
+
+const LIENS_LOGIQUES: QcmItem[] = [
+  {
+    text: "« Il pleuvait, DONC le match fut annulé. » Que marque « donc » ?",
+    correct: "une conséquence",
+    wrongs: ["une cause", "une opposition", "une comparaison"],
+    methode: "« donc » introduit ce qui résulte de ce qui précède.",
+  },
+  {
+    text: "« Le match fut annulé CAR il pleuvait. » Que marque « car » ?",
+    correct: "une cause",
+    wrongs: ["une conséquence", "un but", "une condition"],
+    methode: "« car » donne la raison : c'est l'inverse de « donc ».",
+  },
+  {
+    text: "« Il avait beaucoup travaillé, POURTANT il rata l'épreuve. » Que marque « pourtant » ?",
+    correct: "une opposition",
+    wrongs: ["une cause", "une addition", "une succession"],
+    methode: "« pourtant » signale que la suite contredit ce à quoi on s'attendait.",
+  },
+  {
+    text: "Quel mot de liaison exprime le BUT ?",
+    correct: "afin que",
+    wrongs: ["parce que", "cependant", "ensuite"],
+    methode: "« afin que », « pour que » disent l'intention ; « parce que » dit la cause.",
+  },
+  {
+    text: "« D'abord… ENSUITE… ENFIN… » Ces mots organisent…",
+    correct: "l'ordre des étapes",
+    wrongs: ["les causes d'un fait", "les oppositions d'un débat", "les lieux d'un récit"],
+    methode: "Ce sont des connecteurs de succession : ils rangent les étapes dans le temps.",
+  },
+  {
+    text: "« Il fait froid, MAIS je sors quand même. » Que marque « mais » ?",
+    correct: "une opposition",
+    wrongs: ["une cause", "une conséquence", "un ajout"],
+    methode: "« mais » oppose deux idées : la seconde résiste à la première.",
+  },
+  {
+    text: "« SI tu viens, nous partirons ensemble. » Que marque « si » ?",
+    correct: "une condition",
+    wrongs: ["une cause", "un but", "une opposition"],
+    methode: "« si » pose ce qui doit arriver pour que la suite ait lieu.",
+  },
+  {
+    text: "Dans « Le vent se leva ; PAR CONSÉQUENT la mer devint mauvaise », on pourrait remplacer « par conséquent » par…",
+    correct: "donc",
+    wrongs: ["car", "pourtant", "afin que"],
+    methode: "Deux connecteurs sont équivalents quand ils marquent le même rapport : ici, la conséquence.",
+  },
+  {
+    text: "« Elle est fatiguée. EN EFFET, elle a couru dix kilomètres. » « En effet » sert à…",
+    correct: "expliquer ce qui vient d'être dit",
+    wrongs: [
+      "contredire ce qui vient d'être dit",
+      "annoncer la suite de l'histoire",
+      "conclure le texte",
+    ],
+    methode: "« en effet » apporte la raison de l'affirmation précédente.",
+  },
+  {
+    text: "Quel connecteur ne marque PAS le temps ?",
+    correct: "cependant",
+    wrongs: ["puis", "alors", "enfin"],
+    methode: "« cependant » oppose ; les trois autres situent des moments l'un par rapport à l'autre.",
+  },
+  {
+    text: "« Il n'a pas révisé. C'est POURQUOI il a échoué. » La deuxième phrase donne…",
+    correct: "la conséquence de la première",
+    wrongs: ["la cause de la première", "un exemple", "une opposition"],
+    methode: "« c'est pourquoi » tire la conclusion de ce qui précède.",
+  },
+  {
+    text: "Dans un texte qui explique, à quoi servent les mots de liaison ?",
+    correct: "à montrer comment les idées se tiennent entre elles",
+    wrongs: [
+      "à rendre le texte plus long",
+      "à séparer les paragraphes",
+      "à remplacer la ponctuation",
+    ],
+    methode: "Ils disent le RAPPORT entre deux idées : cause, conséquence, opposition, temps.",
+  },
+  {
+    text: "« Bien qu'il fût blessé, il termina la course. » Que marque « bien que » ?",
+    correct: "une opposition",
+    wrongs: ["une cause", "une condition", "une conséquence"],
+    methode: "« bien que » accorde un obstacle, et dit que la suite a eu lieu malgré lui.",
+  },
+  {
+    text: "Remplace le lien qui convient : « Prends ton parapluie ___ il pleut. »",
+    correct: "parce qu'",
+    wrongs: ["pourtant", "afin qu'", "ensuite"],
+    methode: "La pluie est la RAISON du parapluie : c'est un lien de cause.",
+  },
+];
+
+const MISE_EN_VOIX: QcmItem[] = [
+  {
+    text: "Avant de lire un texte long devant la classe, la meilleure préparation est de…",
+    correct: "le lire d'abord en silence pour repérer les mots difficiles",
+    wrongs: [
+      "le lire une seule fois, très vite",
+      "n'apprendre que le titre et la fin",
+      "le découvrir directement devant le public",
+    ],
+    methode: "Le BO demande une lecture « travaillée en amont » : on anticipe ce qui fera buter.",
+  },
+  {
+    text: "Le programme de 6e demande de lire à voix haute…",
+    correct: "en regardant l'auditoire",
+    wrongs: [
+      "le plus vite possible",
+      "en gardant les yeux sur la feuille",
+      "en apprenant le texte par cœur",
+    ],
+    methode: "« Lire un texte de 10 à 20 lignes EN REGARDANT L'AUDITOIRE » : le regard fait partie de la lecture.",
+  },
+  {
+    text: "« — Attends-moi ! » cria Léa. Quel ton faut-il prendre ?",
+    correct: "une voix plus forte, comme un appel",
+    wrongs: ["une voix chuchotée", "une voix moqueuse", "une voix monotone"],
+    methode: "Le point d'exclamation et le verbe « cria » commandent le volume.",
+  },
+  {
+    text: "« Il rangea ses affaires sans un mot et referma doucement la porte. » Quel ton convient ?",
+    correct: "retenu et grave",
+    wrongs: ["enjoué et rapide", "moqueur", "furieux et fort"],
+    methode: "« sans un mot », « doucement » : la voix doit faire entendre ce que le texte retient.",
+  },
+  {
+    text: "Dans un dialogue de récit, comment fait-on entendre le changement de personnage ?",
+    correct: "on change de voix à chaque tiret",
+    wrongs: [
+      "on lit tout de la même façon",
+      "on lit de plus en plus fort",
+      "on saute les passages entre guillemets",
+    ],
+    methode: "Le tiret annonce un nouveau locuteur : la voix le rend audible.",
+  },
+  {
+    text: "À quoi sert une PAUSE dans une lecture à voix haute ?",
+    correct: "à marquer la ponctuation et à laisser comprendre",
+    wrongs: [
+      "à reprendre son souffle uniquement",
+      "à vérifier la suite du texte",
+      "à ralentir toute la lecture",
+    ],
+    methode: "La pause est une ponctuation entendue : elle sépare les groupes de sens.",
+  },
+  {
+    text: "Une lecture MONOTONE, c'est une lecture…",
+    correct: "sans variation de ton ni de rythme",
+    wrongs: ["trop rapide", "trop faible", "pleine d'hésitations"],
+    methode: "Monotone : « un seul ton ». C'est ce que la mise en voix cherche à éviter.",
+  },
+  {
+    text: "Que faire si tu oublies un passage en récitant de mémoire ?",
+    correct: "faire une courte pause et reprendre",
+    wrongs: [
+      "t'arrêter et abandonner",
+      "accélérer pour cacher l'oubli",
+      "recommencer le texte au début",
+    ],
+    methode: "Une courte pause passe inaperçue ; l'accélération, non.",
+  },
+  {
+    text: "Pour réciter un poème, il vaut mieux…",
+    correct: "respecter le rythme des vers et articuler",
+    wrongs: [
+      "réciter le plus vite possible",
+      "sauter les vers difficiles",
+      "parler tout bas, sans expression",
+    ],
+    methode: "Le vers a une longueur : la respecter, c'est faire entendre le poème.",
+  },
+  {
+    text: "Dans « Le vent — un vent glacé — se leva », que t'indiquent les tirets ?",
+    correct: "il faut détacher le groupe par deux pauses",
+    wrongs: [
+      "il faut supprimer le groupe",
+      "il faut monter la voix jusqu'à la fin",
+      "il faut lire plus vite",
+    ],
+    methode: "Les tirets encadrent une incise : on l'isole à la voix, comme entre deux parenthèses.",
+  },
+  {
+    text: "Que fait la voix à la fin d'une phrase interrogative ?",
+    correct: "elle monte",
+    wrongs: ["elle descend", "elle reste plate", "elle s'arrête net"],
+    methode: "L'intonation montante signale la question, même sans mot interrogatif.",
+  },
+  {
+    text: "Rendre les INTENTIONS de l'auteur à la lecture, c'est faire entendre…",
+    correct: "l'ironie, l'émotion ou l'urgence du passage",
+    wrongs: [
+      "le nombre de personnages",
+      "la date d'écriture du texte",
+      "la longueur des phrases",
+    ],
+    methode: "Le BO demande de « rendre compte des émotions des personnages et des intentions de l'auteur ».",
+  },
+  {
+    text: "Tu lis trop vite et le public décroche. Que corriges-tu en premier ?",
+    correct: "le débit et les pauses",
+    wrongs: ["le volume", "le choix du texte", "ta position dans la salle"],
+    methode: "Un texte lu trop vite ne se comprend pas, même bien articulé : le débit passe avant tout.",
+  },
+  {
+    text: "Pour préparer une mise en voix à plusieurs, on commence par…",
+    correct: "se répartir les passages et les repérer sur le texte",
+    wrongs: [
+      "apprendre tout le texte chacun de son côté",
+      "lire tous ensemble en même temps",
+      "choisir un décor",
+    ],
+    methode: "La mise en voix se prépare sur le texte : qui lit quoi, et où l'on passe le relais.",
+  },
+];
+
 // ── CONJUGAISON ─────────────────────────────────────────────────────────────
 // Present / imparfait / futur / infinitif sont produits par le moteur
 // parametrique (conjugationEngine.ts). Restent ici les notions conceptuelles.
@@ -6399,6 +6745,54 @@ const SENS_FIGURE: QcmItem[] = [
     methode:
       "L'image de la gêne dans la gorge dit l'enrouement. On ne cherche pas le chat.",
   },
+  /* ── Complété le 22/08/2026, même raison que RACINES. Le sens figuré est,
+     avec le niveau de langue, l'un des deux écarts les plus lourds de
+     l'évaluation nationale de 6e en lexique : le vivier devait tenir dix
+     minutes de travail, il en tenait six. */
+  {
+    text: "« Cette montagne de devoirs m'effraie. » Le mot « montagne » est employé…",
+    correct: "au sens figuré",
+    wrongs: ["au sens propre", "comme un verbe", "comme un adjectif"],
+    methode: "Une pile de devoirs n'est pas un relief : l'image dit la quantité.",
+  },
+  {
+    text: "Dans quelle phrase « clé » est-il au sens propre ?",
+    correct: "Il a perdu la clé de la porte.",
+    wrongs: [
+      "C'est le témoin clé de l'affaire.",
+      "Voici la clé du problème.",
+      "Elle occupe un poste clé.",
+    ],
+    methode: "Le sens propre est celui qu'on peut voir : un objet de métal qui ouvre une serrure.",
+  },
+  {
+    text: "« Prendre ses jambes à son cou » veut dire…",
+    correct: "s'enfuir très vite",
+    wrongs: ["se blesser au cou", "s'asseoir en tailleur", "porter quelqu'un"],
+    methode: "Une expression figée se comprend en bloc, jamais mot à mot.",
+  },
+  {
+    text: "« Le temps file. » Ce verbe est employé…",
+    correct: "au sens figuré",
+    wrongs: ["au sens propre", "au sens littéral", "comme un nom"],
+    methode: "Le temps ne court pas vraiment : l'image dit la vitesse à laquelle il passe.",
+  },
+  {
+    text: "Quelle expression NE contient PAS de sens figuré ?",
+    correct: "Il ferme la fenêtre.",
+    wrongs: [
+      "Il ferme les yeux sur ses erreurs.",
+      "Elle a fermé son cœur.",
+      "La discussion est fermée.",
+    ],
+    methode: "On teste : la fenêtre se ferme pour de vrai ; les yeux « fermés sur » une erreur, non.",
+  },
+  {
+    text: "« Jeter l'éponge » signifie…",
+    correct: "renoncer",
+    wrongs: ["nettoyer", "se mettre en colère", "recommencer"],
+    methode: "L'expression vient de la boxe : jeter l'éponge sur le ring, c'était abandonner le combat.",
+  },
 ];
 
 const NIVEAU_LANGUE: QcmItem[] = [
@@ -6452,6 +6846,57 @@ const NIVEAU_LANGUE: QcmItem[] = [
     methode:
       "Familier, courant, soutenu : c'est l'ordre du registre, pas celui de la longueur du mot.",
   },
+  /* ── Complété le 22/08/2026, même raison que RACINES. C'est l'écart le plus
+     lourd de toute l'épreuve de lexique de l'évaluation nationale de 6e :
+     26 % de réussite contre 57 % au national. */
+  {
+    text: "Quel est l'équivalent SOUTENU du mot courant « peur » ?",
+    correct: "effroi",
+    wrongs: ["trouille", "frousse", "crainte passagère"],
+    methode: "« Trouille » et « frousse » sont familiers ; « effroi » relève du registre soutenu.",
+  },
+  {
+    text: "« Sa bagnole est tombée en rade. » Combien de mots familiers ?",
+    correct: "deux",
+    wrongs: ["un", "trois", "aucun"],
+    methode: "« bagnole » (voiture) et « en rade » (en panne) sont tous deux familiers.",
+  },
+  {
+    text: "Tu écris à un camarade. Quel registre convient ?",
+    correct: "le registre courant ou familier",
+    wrongs: [
+      "le registre soutenu obligatoirement",
+      "aucun registre particulier",
+      "le registre administratif",
+    ],
+    methode: "Le registre s'adapte au destinataire : entre camarades, le courant suffit.",
+  },
+  {
+    text: "Laquelle de ces phrases est au registre soutenu ?",
+    correct: "Je vous saurais gré de me répondre.",
+    wrongs: [
+      "Réponds-moi vite.",
+      "Tu me réponds quand ?",
+      "Faudrait me répondre.",
+    ],
+    methode: "Le conditionnel de politesse et le vouvoiement signent le registre soutenu.",
+  },
+  {
+    text: "« Ouais, j'sais pas trop. » Cette phrase est écrite…",
+    correct: "au registre familier",
+    wrongs: ["au registre courant", "au registre soutenu", "sans aucun registre"],
+    methode: "« Ouais » et la négation avalée (« j'sais pas ») sont des marques du familier à l'écrit.",
+  },
+  {
+    text: "Dans un devoir de français, quel registre attend-on ?",
+    correct: "le registre courant, correct et complet",
+    wrongs: [
+      "le registre familier, plus naturel",
+      "le registre le plus soutenu possible",
+      "un mélange des trois",
+    ],
+    methode: "Le devoir demande un français correct : ni relâché, ni cérémonieux.",
+  },
 ];
 
 const RACINES: QcmItem[] = [
@@ -6500,6 +6945,46 @@ const RACINES: QcmItem[] = [
     wrongs: ["le ciel", "la carte", "la pierre"],
     methode:
       "« Géo » = Terre. Géographie : décrire la Terre. Géologie : étudier la Terre.",
+  },
+  /* ── Complété le 22/08/2026 : le pool tenait six questions, l'élève en voyait
+     donc six et reconnaissait la septième. Voir l'en-tête de
+     scripts/verifier-variete.mjs — c'est le mélange des propositions qui
+     masquait le compte. */
+  {
+    text: "Dans « microscope », que veut dire la racine grecque « micro » ?",
+    correct: "petit",
+    wrongs: ["rond", "lointain", "clair"],
+    methode: "« Micro » (petit) + « scope » (regarder) : un microscope fait voir le très petit.",
+  },
+  {
+    text: "« Zoo » veut dire « animal ». Que fait un zoologiste ?",
+    correct: "il étudie les animaux",
+    wrongs: ["il soigne les plantes", "il dessine des cartes", "il élève des poissons"],
+    methode: "« Zoo » (animal) + « logie » (étude) : la racine donne le métier.",
+  },
+  {
+    text: "Quelle racine, dans « aquaculture » et « agriculture », veut dire « cultiver » ?",
+    correct: "culture",
+    wrongs: ["aqua", "agri", "ure"],
+    methode: "« aqua » = eau, « agri » = champ ; « culture » est la partie commune aux deux mots.",
+  },
+  {
+    text: "Dans « manuscrit », que veut dire la racine latine « manu » ?",
+    correct: "la main",
+    wrongs: ["le livre", "l'encre", "le maître"],
+    methode: "« Manu » (main) + « scrit » (écrit) : un manuscrit est écrit à la main.",
+  },
+  {
+    text: "Quel mot contient une racine qui parle de la VOIX ?",
+    correct: "phonétique",
+    wrongs: ["photographie", "physique", "philosophie"],
+    methode: "« phon » = voix, « photo » = lumière, « phys » = nature, « philo » = amour.",
+  },
+  {
+    text: "« Poly » veut dire « plusieurs ». Un polygone est donc une figure…",
+    correct: "à plusieurs côtés",
+    wrongs: ["à un seul côté", "toujours ronde", "toujours à trois côtés"],
+    methode: "« Poly » (plusieurs) + « gone » (angle) : plusieurs angles, donc plusieurs côtés.",
   },
 ];
 
@@ -6554,6 +7039,47 @@ const COMPOSITION: QcmItem[] = [
     methode:
       "Le second mot dit ce qu'on porte : le manteau. Les autres portent la parole, la chance, des avions.",
   },
+  /* ── Complété le 22/08/2026, même raison que RACINES. */
+  {
+    text: "« Un lave-vaisselle » est composé…",
+    correct: "d'un verbe et d'un nom",
+    wrongs: ["de deux noms", "de deux verbes", "d'un adjectif et d'un nom"],
+    methode: "« lave » est un verbe, « vaisselle » un nom : verbe + nom, comme ouvre-boîte.",
+  },
+  {
+    text: "Lequel de ces mots est DÉRIVÉ, et non composé ?",
+    correct: "chanteur",
+    wrongs: ["cerf-volant", "rez-de-chaussée", "tire-bouchon"],
+    methode: "Dériver, c'est ajouter un affixe à un radical : chant + -eur.",
+  },
+  {
+    text: "« Un après-midi » est un mot composé formé…",
+    correct: "d'une préposition et d'un nom",
+    wrongs: ["de deux noms", "d'un verbe et d'un nom", "de deux adjectifs"],
+    methode: "« après » est une préposition, « midi » un nom : la composition ne se limite pas aux noms.",
+  },
+  {
+    text: "Que désigne « un garde-manger » ?",
+    correct: "un endroit où l'on garde la nourriture",
+    wrongs: [
+      "quelqu'un qui surveille les repas",
+      "un repas gardé au chaud",
+      "un couvert de table",
+    ],
+    methode: "Verbe + nom : « garder » ce qu'on « mange ». Le mot dit sa fonction.",
+  },
+  {
+    text: "Quel mot composé s'écrit SANS trait d'union ?",
+    correct: "chemin de fer",
+    wrongs: ["porte-clés", "arc-en-ciel", "sous-sol"],
+    methode: "Un mot composé peut se souder, se lier par un trait d'union, ou rester en trois mots.",
+  },
+  {
+    text: "Fabrique un mot composé qui désigne un appareil séchant les cheveux :",
+    correct: "sèche-cheveux",
+    wrongs: ["cheveux-sèche", "séchoir", "séchage"],
+    methode: "En français, le verbe vient d'abord, puis ce sur quoi il agit : sèche + cheveux.",
+  },
 ];
 
 const HOMONYMIE: QcmItem[] = [
@@ -6607,6 +7133,37 @@ const HOMONYMIE: QcmItem[] = [
     methode:
       "« Grand » et « grande » sont le même mot au masculin et au féminin, pas deux mots différents.",
   },
+  /* ── Complété le 22/08/2026 : `cm2_voc_homonymie` tenait 9 énoncés, sous le
+     seuil des dix minutes sans répétition. Même cause que les quatre autres
+     pools du lexique — voir l'en-tête de scripts/verifier-variete.mjs. */
+  {
+    text: "« Il a acheté un pot de peinture. » Quel homonyme de « pot » existe aussi ?",
+    correct: "peau",
+    wrongs: ["port", "pont", "poil"],
+    methode: "« Pot » et « peau » se prononcent pareil et s'écrivent autrement : ce sont des homonymes.",
+  },
+  {
+    text: "Complète : « Le ___ souffle fort sur la côte. »",
+    correct: "vent",
+    wrongs: ["vend", "vends", "vant"],
+    methode: "« Vent » est un nom ; « vend » est le verbe vendre. Le déterminant « le » appelle le nom.",
+  },
+  {
+    text: "Dans « Il chante faux », quel homonyme de « faux » N'est PAS possible ici ?",
+    correct: "l'outil du faucheur",
+    wrongs: [
+      "le contraire de « juste »",
+      "l'adverbe qui suit « chanter »",
+      "ce qui n'est pas vrai",
+    ],
+    methode: "Trois emplois voisins d'un même mot, et un homonyme : l'outil n'a rien à faire ici.",
+  },
+  {
+    text: "« Cette histoire est sans fin » / « Il a cent euros ». Ces deux mots sont…",
+    correct: "des homonymes",
+    wrongs: ["des synonymes", "des mots de la même famille", "le même mot"],
+    methode: "Même son, sens et orthographe différents : c'est la définition de l'homonymie.",
+  },
 ];
 
 function questionParMicro(microId: string): Generated | null {
@@ -6628,6 +7185,17 @@ function questionParMicro(microId: string): Generated | null {
   if (microId.includes("cult_theatre")) return qcm(THEATRE);
   if (microId.includes("cult_aventure")) return qcm(AVENTURE);
   if (microId.includes("cult_monstres")) return qcm(MONSTRES);
+  /* ── La chaîne anaphorique et la mise en voix (22/08/2026) ───────────────
+     Elles passent AVANT tout aiguillage par notion : ces micros vivent dans
+     des notions de compréhension et de lecture qui les serviraient depuis les
+     pools génériques — des questions justes, sur un autre sujet. */
+  if (microId.includes("comp_reprises")) return qcm(REPRISES);
+  if (microId.includes("comp_liens_logiques")) return qcm(LIENS_LOGIQUES);
+  /* ⚠️ `voix_` et non `voix` : `lecture_voix_haute` est un notionId, pas un
+     microId, et aucune micro du CM1 ni du CM2 ne porte ce morceau — leur
+     lecture expressive s'appelle `flue_expressive`. Le jour où elles seront
+     relues sur le BO, elles viendront ici aussi. */
+  if (microId.includes("voix_")) return qcm(MISE_EN_VOIX);
   // Les trois trous de Lecture et Écriture relevés en 6e.
   if (microId.includes("flue_130")) return qcm(FLUENCE_130);
   if (microId.includes("comp_documents")) return qcm(DOCUMENTS);
@@ -6644,7 +7212,19 @@ function questionForNotion(notionId: string, microId: string): Generated {
   const parMicro = questionParMicro(microId);
   if (parMicro) return parMicro;
   if (notionId.includes("fluence")) return qcm(LECTURE);
-  if (notionId.includes("comprehension")) return Math.random() < 0.5 ? qcm(LECTURE) : qcm(DOCUMENT);
+  /* ⚠️ LA COMPRÉHENSION DE TEXTE N'EST PAS LA LECTURE DE DOCUMENTS — séparé le
+     22/08/2026. Cette branche tirait à pile ou face entre les deux pools pour
+     toute notion contenant « comprehension ». Une fois sur deux, « Rattacher un
+     texte à un genre » recevait donc « quelle information donne la source ? ».
+     Tant que le CM1 n'avait qu'une notion fourre-tout, le mélange passait ; la
+     6e distingue maintenant les deux, et le CM2 aussi (`comprehension_textes`
+     et `comprehension_documents`). On sert le pool que la notion annonce. */
+  if (notionId === "comprehension_documents") return qcm(DOCUMENT);
+  /* ⏳ LE CM1 GARDE LE MÉLANGE, ET C'EST VOLONTAIRE. Sa notion s'appelle encore
+     `comprehension_textes_documents` : elle porte les deux, le pile ou face y
+     est donc honnête. Il tombera quand le CM1 sera relu sur le BO à son tour. */
+  if (notionId.includes("textes_documents")) return Math.random() < 0.5 ? qcm(LECTURE) : qcm(DOCUMENT);
+  if (notionId.includes("comprehension")) return qcm(LECTURE);
   if (notionId.includes("oeuvre")) return qcm(OEUVRE);
   if (notionId.includes("ecriture")) return qcm(ECRITURE);
   if (notionId.includes("oral")) return qcm(ORAL);
