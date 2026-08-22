@@ -755,6 +755,41 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     DISTANCES ET MILIEU D'UN SEGMENT
+     ⛔ Ouvert le 22/08/2026 : c'est la première notion de géométrie du
+     programme de 6e, et le coach n'en avait rien. Elle porte l'inégalité
+     AC + CB ⩾ AB, que le BO fait ADMETTRE ici et qui resservira toute l'année.
+     ⚠️ `distance_inegalite` et `triangle_possible_ou_non` sont deux visages de
+     la même inégalité : ici trois POINTS et la question de l'alignement, là
+     trois LONGUEURS et la question de la construction. Le BO les range dans
+     deux chapitres, et l'élève ne les croise pas au même moment.
+  ========================= */
+  {
+    id: "distance_definition",
+    label: "Distance entre deux points : (AB), [AB] et AB",
+    notionId: "distance_segment",
+    prerequis: ["aire_longueur_mesurer"],
+  },
+  {
+    id: "distance_milieu",
+    label: "Le milieu d’un segment",
+    notionId: "distance_segment",
+    prerequis: ["distance_definition"],
+  },
+  {
+    id: "distance_inegalite",
+    label: "Le plus court chemin : AC + CB ⩾ AB",
+    notionId: "distance_segment",
+    prerequis: ["distance_definition"],
+  },
+  {
+    id: "distance_defi",
+    label: "Défis : milieux emboîtés, alignement",
+    notionId: "distance_segment",
+    prerequis: ["distance_milieu", "distance_inegalite"],
+  },
+
+  /* =========================
      LE CERCLE ET LE PÉRIMÈTRE DU DISQUE
      ⛔ Ouvert le 21/08/2026 : le BO de 6e le demande, le coach n'en avait
      aucune micro — dans aucune classe. La proportionnalité vient AVANT la

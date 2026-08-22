@@ -136,6 +136,23 @@ export const notions: NotionSource[] = [
   // cercle, disque, rayon ou diamètre — ni en 6e, ni dans AUCUNE classe de
   // maths. Les vérificateurs comptent les items d'une micro ; aucun ne demande
   // si une micro manque, et un chapitre entier restait donc invisible.
+  // ⛔ OUVERTE LE 22/08/2026. « Distances » ouvre le chapitre « Étude de
+  // configurations planes » du programme de 6e — avant les cercles, avant la
+  // médiatrice, avant les angles. C'est la PREMIÈRE notion de géométrie de
+  // l'année, et le coach n'en avait aucune micro.
+  //
+  // ⭐ Ce qui s'y joue et nulle part ailleurs : la différence entre (AB), [AB]
+  // et AB — une droite, un segment, un NOMBRE. Un élève qui écrit
+  // « [AB] = 5 cm » confond l'objet et sa mesure, et il l'écrira encore en 3e
+  // si personne ne le reprend ici.
+  {
+    id: "distance_segment",
+    label: "Distances et milieu d’un segment",
+    boId: "BO6G4",
+    prerequis: ["aire_longueur"],
+    levels: [1, 2],
+  },
+
   {
     id: "cercle_disque",
     label: "Le cercle et le périmètre du disque",

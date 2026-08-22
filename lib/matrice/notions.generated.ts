@@ -503,6 +503,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "distance_segment",
+        "label": "Distances et milieu d’un segment",
+        "prerequis": [
+          "aire_longueur"
+        ]
+      },
+      {
         "id": "cercle_disque",
         "label": "Le cercle et le périmètre du disque",
         "prerequis": [

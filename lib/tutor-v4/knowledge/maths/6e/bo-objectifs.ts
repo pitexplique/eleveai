@@ -509,7 +509,7 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     chapitre: "Étude de configurations planes — Distances",
     objectif: "Connaître et utiliser la définition de la distance entre deux points.",
     page: 11,
-    micros: [],
+    micros: ["distance_definition", "distance_inegalite", "distance_defi"],
     note: "AC + CB ≥ AB, l'égalité uniquement si C appartient à [AB].",
   },
   {
@@ -518,7 +518,8 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     chapitre: "Étude de configurations planes — Distances",
     objectif: "Connaître et utiliser la définition du milieu d'un segment.",
     page: 11,
-    micros: [],
+    micros: ["distance_milieu"],
+    note: "Le construire « par pliage, en utilisant un guide-âne, une règle graduée ou un compas et une règle non graduée ».",
   },
 
   // ─── Cercles et disques ────────────────────────────────────────────────────
