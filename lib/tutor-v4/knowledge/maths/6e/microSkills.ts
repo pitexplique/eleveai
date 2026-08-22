@@ -121,9 +121,13 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["fraction_lire_ecrire"],
   },
   {
+    // ⛔ PASSÉE SOUS « Calculer avec les fractions » le 22/08/2026. « La moitié
+    // de 10 », « le quart de 20 » : c'est déjà la fraction comme OPÉRATEUR
+    // MULTIPLICATIF du programme, pas une façon de lire un nombre. Elle ouvre
+    // donc la notion de calcul, avec les items du BO (2/5 de 60).
     id: "fraction_quantite",
-    label: "Comprendre une fraction comme quantité",
-    notionId: "fraction_nombre",
+    label: "Prendre une fraction d’un nombre",
+    notionId: "fraction_calcul",
     prerequis: ["fraction_representer"],
   },
   {
@@ -143,6 +147,34 @@ export const microSkills: MicroSkillSource[] = [
     label: "Défis sur les fractions",
     notionId: "fraction_nombre",
     prerequis: ["fraction_comparer"],
+  },
+
+  /* =========================
+     CALCULER AVEC LES FRACTIONS
+     ⛔ Ouvert le 22/08/2026. « Effectuer des opérations sur les fractions » est
+     un objectif d'apprentissage du programme de 6e, et le coach n'en avait
+     RIEN : additionner et soustraire (même dénominateur, dénominateurs
+     multiples l'un de l'autre, puis cas simples quelconques 5/4 + 2/3 et
+     7/2 − 3/5), multiplier une fraction par un entier et connaître la
+     commutativité de ce produit.
+  ========================= */
+  {
+    id: "fraction_additionner",
+    label: "Additionner et soustraire des fractions",
+    notionId: "fraction_calcul",
+    prerequis: ["fraction_comparer"],
+  },
+  {
+    id: "fraction_multiplier_entier",
+    label: "Multiplier une fraction par un nombre entier",
+    notionId: "fraction_calcul",
+    prerequis: ["fraction_quantite"],
+  },
+  {
+    id: "fraction_calcul_defi",
+    label: "Défis de calcul avec les fractions",
+    notionId: "fraction_calcul",
+    prerequis: ["fraction_additionner", "fraction_multiplier_entier"],
   },
 
   /* =========================

@@ -57,6 +57,23 @@ export const notions: NotionSource[] = [
     levels: [1, 2, 3],
   },
 
+  // ⛔ OUVERTE LE 22/08/2026 — LES OPÉRATIONS SUR LES FRACTIONS MANQUAIENT.
+  // Le programme de 6e (« Effectuer des opérations sur les fractions ») demande
+  // d'additionner et soustraire des fractions — même dénominateur, dénominateurs
+  // multiples l'un de l'autre, puis des cas simples quelconques comme 5/4 + 2/3
+  // — et de multiplier une fraction par un entier. `fraction_nombre` s'arrêtait
+  // à lire, représenter et comparer : l'élève de 6e ne rencontrait AUCUN calcul
+  // sur les fractions dans le coach.
+  //
+  // Même découpage que `decimal_nombre` / `decimal_calcul`, et que la 5e.
+  {
+    id: "fraction_calcul",
+    label: "Calculer avec les fractions",
+    boId: "BO6N2",
+    prerequis: ["fraction_nombre"],
+    levels: [1, 2, 3],
+  },
+
   {
     id: "pourcentage_nombre",
     label: "Pourcentages",
