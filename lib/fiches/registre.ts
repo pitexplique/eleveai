@@ -315,6 +315,17 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Sujet ou complément, préciser la fonction d'un pronom et remonter jusqu'au groupe qu'il reprend.",
   },
+  /* ⚠️ LA 6e A SA PROPRE FICHE DE PHRASE COMPLEXE, ET CE N'EST PAS UN DOUBLON
+     DE CELLE DU CM2. Le BO du CM2 distingue simple et complexe « à partir du
+     repérage DES VERBES CONJUGUÉS » ; celui de la 6e « à partir de la notion DE
+     PROPOSITION », et lui ajoute un objectif que le CM2 n'a pas : « Distinguer
+     LE RÔLE de la conjonction de coordination et celui de la conjonction de
+     subordination ». Deux années, deux marches. */
+  "francais/6e/phrase-complexe": {
+    titre: "Se repérer dans la phrase complexe",
+    resume:
+      "Compter les propositions, distinguer juxtaposition, coordination et subordination, et dire ce que fait chaque conjonction.",
+  },
 
   "ia/fondements/definir-l-ia": { titre: "Qu'est-ce que l'intelligence artificielle ?" },
   "ia/fondements/apprentissage-automatique": { titre: "L'apprentissage automatique" },
