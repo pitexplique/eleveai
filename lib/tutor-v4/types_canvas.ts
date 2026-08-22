@@ -1430,7 +1430,7 @@ export type PhraseCanvasData = {
     showGroupes?: boolean;
   };
   /**
-   * ⭐ LA LARGEUR OÙ LA PHRASE PASSE À LA LIGNE (défaut : 300).
+   * ⭐ LA LARGEUR OÙ LA PHRASE PASSE À LA LIGNE (défaut : 250).
    *
    * C'est le réglage qui décide de la lisibilité sur téléphone, et il se calcule.
    * Mesuré sur la fiche réelle en 375 px de large : le bloc qui reçoit un dessin

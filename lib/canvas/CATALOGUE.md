@@ -103,7 +103,7 @@ vert, circonstanciel orange, attribut violet, expansion du nom rose. Elle se dé
 `label` : une fiche écrit `label: "sujet"`, jamais une couleur. Deux fiches ne peuvent
 donc pas diverger. ⚠️ L'ordre des tests compte : « attribut du sujet » contient « sujet ».
 
-⛔ **Le réglage qui décide de tout : `largeurMax` (270 par défaut).** Le bloc qui reçoit un
+⛔ **Le réglage qui décide de tout : `largeurMax` (250 par défaut).** Le bloc qui reçoit un
 dessin mesure **226 px sur un téléphone de 375** — mesuré sur la fiche, pas estimé. Un SVG
 se met à l'échelle de son bloc : dessiné sur 466 px, il y écrit ses mots en 7,8 px. À 270,
 le rapport est de 0,84 et les mots restent à 13 px : **la phrase se plie en deux lignes

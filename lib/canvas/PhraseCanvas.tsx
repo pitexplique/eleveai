@@ -13,7 +13,7 @@ import type { CanvasFigure, PhraseCanvasData } from "@/lib/tutor-v4/types";
 // ⭐ ELLE PASSE À LA LIGNE (20/08, mesuré sur la fiche réelle en 375 px). Sur un
 // téléphone, le bloc qui reçoit un dessin ne fait que 226 px : une phrase de
 // huit mots dessinée sur une seule ligne y arrivait à 7,8 px de police. Le
-// canvas plie donc la phrase à `largeurMax` (300 par défaut) et lui donne de la
+// canvas plie donc la phrase à `largeurMax` (250 par défaut) et lui donne de la
 // HAUTEUR, jamais moins de taille de lettre. Chaque ligne emporte ses propres
 // bandes — c'est ce qui fait que le deuxième rang de mots n'écrase pas les
 // étiquettes du premier :

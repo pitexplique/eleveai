@@ -294,6 +294,18 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
       "Compter les propositions, distinguer juxtaposition, coordination et subordination, choisir qui, que, où.",
   },
 
+  /* ⭐ LA 6e OUVRE ICI (22/08/2026). Elle n'avait aucune fiche de français,
+     parce que ses notions faisaient jusqu'à NEUF micro-compétences : rien de
+     tel ne tient dans une fiche. Elle a été relue sur le BO n° 16 du 17 avril
+     2025 le matin même — 29 notions de 3 à 5 micros —, et la première fiche
+     porte l'objectif que le programme de 6e formule comme une OPPOSITION,
+     c'est-à-dire le geste neuf de l'année. */
+  "francais/6e/grammaire-complements": {
+    titre: "Attribut du sujet et compléments du verbe",
+    resume:
+      "Opposer l'attribut et le COD, distinguer direct et indirect, reconnaître un circonstanciel de temps, de lieu ou de cause.",
+  },
+
   "ia/fondements/definir-l-ia": { titre: "Qu'est-ce que l'intelligence artificielle ?" },
   "ia/fondements/apprentissage-automatique": { titre: "L'apprentissage automatique" },
   "ia/fondements/modeles-apprentissage": { titre: "Les modèles d'apprentissage" },
