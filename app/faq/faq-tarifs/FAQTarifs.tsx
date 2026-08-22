@@ -1,37 +1,93 @@
-﻿"use client";
+"use client";
 
 import Script from "next/script";
 import Link from "next/link";
+// ⛔ CETTE PAGE A ÉTÉ RÉÉCRITE LE 22/08/2026, ET C'ÉTAIT LA PLUS URGENTE.
+// Elle décrivait encore le modèle d'avant, mot pour mot : « EleveAI est
+// actuellement en phase pilote », « contactez-nous pour un devis », « un accès
+// individuel payant pour les familles est prévu, les modalités seront
+// communiquées prochainement ». Le prix était publié sur /tarifs depuis le
+// 21/08 ; ici, il n'existait pas encore.
+//
+// ⚠️ ET ELLE ÉMET UN JSON-LD `FAQPage` : ces réponses-là ne dorment pas dans
+// une page peu visitée, elles peuvent s'afficher DANS les résultats de Google,
+// sous la marque. Une FAQ périmée est le pire endroit où laisser un ancien
+// modèle économique — c'est le seul format que les moteurs recopient tel quel.
+//
+// ⛔ Aucun prix n'est écrit à la main ici. Ils viennent tous de `lib/tarifs.ts`,
+// et l'état de la vente de `lib/legal/editeur.ts`, exactement comme /tarifs et
+// le llms.txt. C'est ce couple-là qui s'était désaccordé en juin.
+import { VENTE } from "@/lib/legal/editeur";
+import {
+  EXEMPLE_CLASSE,
+  EXEMPLE_ETABLISSEMENT,
+  PRIX_ETABLISSEMENT_AN,
+  PRIX_FAMILLE_AN,
+  PRIX_PROF_AN,
+  centimes,
+  euros,
+} from "@/lib/tarifs";
 
 export default function FAQTarifs() {
+  // La même phrase que sur /tarifs et dans le llms.txt : tant que Stripe
+  // n'encaisse pas, on annonce un prix ferme et une caisse fermée. Annoncer une
+  // offre achetable dont le paiement ne répond pas est pire que le silence.
+  const etatVente = VENTE.ouverte
+    ? "L'abonnement est ouvert."
+    : "L'abonnement n'ouvre pas encore : la vue du parent se construit en ce moment, et rien n'est encaissé tant qu'elle n'est pas prête. Le prix, lui, est ferme.";
+
   const faq = [
     {
-      q: "EleveAI est-il gratuit ?",
-      a: "EleveAI est actuellement en phase pilote. L'accès est fourni gratuitement aux élèves des établissements partenaires via un code établissement et un code élève. Aucun paiement n'est demandé aux élèves.",
+      q: "Mon enfant peut-il travailler sur EleveAI sans que je paie ?",
+      a: "Oui, entièrement et sans limite de temps. Le coach dans les cinq matières, les exercices corrigés, les parcours, le calcul rapide, les défis, les cahiers, les fiches de cours et les évaluations blanches ne se paient pas, et il n'y a aucune publicité. Il garde ses résultats. Rien de tout cela ne deviendra payant.",
     },
     {
-      q: "Comment un élève accède-t-il à EleveAI ?",
-      a: "L'élève reçoit un code établissement et un code élève de la part de son professeur ou de l'établissement. Il se connecte sur /auth/signin-eleve et accède immédiatement à tous les outils : Coach Maths IA, Parcours, Calcul rapide, English Maths, Défis du jour, Brevet et Bac Spé.",
+      q: "Alors qu'est-ce qui se paie ?",
+      a: "La fenêtre du parent. Votre enfant voit déjà sa progression ; ce que l'abonnement ouvre, c'est votre vue à vous — son bulletin, ce qu'il a travaillé cette semaine, son historique, et des recommandations qui vous disent quoi reprendre maintenant, notion par notion. Elles sont calculées sur des règles explicites et non par une IA opaque : chacune s'explique devant un professeur.",
     },
     {
-      q: "Les résultats des élèves sont-ils enregistrés ?",
-      a: "Oui. Dès qu'un élève est connecté, il peut enregistrer ses scores dans Parcours, Calcul rapide, Défis du jour et English Maths. Tout l'historique est visible dans son tableau de bord personnel.",
+      q: `${euros(PRIX_FAMILLE_AN)} par enfant ou par famille ?`,
+      a: `Par famille, quel que soit le nombre d'enfants, sur une seule adresse e-mail. Le frère ou la sœur d'à côté n'a pas à apprendre moins parce qu'il est le deuxième. Cela fait un euro par mois pour toute la maison.`,
     },
     {
-      q: "Existe-t-il une offre pour les établissements ?",
-      a: "Oui. EleveAI propose une offre pilote pour les collèges et lycées : accès pour une ou plusieurs classes, codes élèves générés par l'établissement, suivi des résultats. Contactez-nous pour un devis.",
+      q: "Et si je suis professeur ?",
+      a: `${euros(
+        PRIX_PROF_AN,
+      )} par an, forfaitaires — le même tableau de bord, côté classe. Le prix ne dépend pas du nombre d'élèves : pour une classe de ${
+        EXEMPLE_CLASSE.eleves
+      }, cela fait ${centimes(
+        EXEMPLE_CLASSE.parEleve,
+      )} par élève. C'est fait pour être payé sans passer par la coopérative, donc sans attendre une réunion. Les familles de cette classe ne paient rien.`,
     },
     {
-      q: "Un élève peut-il utiliser EleveAI sans être connecté ?",
-      a: "Oui, la plupart des outils sont accessibles sans connexion. Mais pour enregistrer les scores et accéder au tableau de bord personnel, la connexion avec un code élève est nécessaire.",
+      q: "Et pour un établissement entier ?",
+      a: `${euros(
+        PRIX_ETABLISSEMENT_AN,
+      )} par an, forfaitaires là aussi : tous les niveaux, toutes les classes, tous les professeurs, plus la vue complète de la direction. Il n'y a pas d'effectif à déclarer et le prix ne change pas à la rentrée suivante — pour un collège de ${
+        EXEMPLE_ETABLISSEMENT.eleves
+      } élèves, cela représente ${centimes(
+        EXEMPLE_ETABLISSEMENT.parEleve,
+      )} par élève. Aucune famille ne paie, et il n'y a aucun paiement à gérer côté foyers.`,
     },
     {
-      q: "Y aura-t-il un abonnement individuel à l'avenir ?",
-      a: "Un accès individuel payant pour les familles est prévu. Il permettra à un élève de s'inscrire sans passer par un établissement. Les modalités seront communiquées prochainement.",
+      q: "Pourquoi est-ce à ce point moins cher qu'ailleurs ?",
+      a: "Parce que la structure n'est pas la même : aucun investisseur à rémunérer, aucun commercial, des exercices écrits ici plutôt qu'achetés, et un élève de plus qui ne coûte presque rien. L'IA démultiplie le travail, et l'enseignant vérifie — les deux moitiés ne se séparent jamais. C'est un professeur en exercice qui relit ses propres exercices.",
     },
     {
-      q: "Les données des élèves sont-elles protégées ?",
-      a: "Oui. EleveAI ne collecte que le strict nécessaire : code établissement, code élève, nom et résultats. Aucune donnée personnelle sensible n'est stockée. Consultez notre politique de confidentialité pour le détail.",
+      q: "Comment mon enfant se connecte-t-il ?",
+      a: "Le compte élève est gratuit et se crée en quelques secondes. Si son établissement participe, il reçoit un code établissement et un code élève de son professeur — et dans ce cas, la famille n'a rien à payer du tout.",
+    },
+    {
+      q: "Puis-je arrêter quand je veux ?",
+      a: "Oui. Sans engagement, résiliable à tout moment depuis votre espace, et vous avez quatorze jours pour changer d'avis, remboursés, même si votre enfant a déjà tout utilisé. C'est écrit dans les conditions de vente.",
+    },
+    {
+      q: "Et si je ne peux pas payer ?",
+      a: "Alors vous ne payez pas, et personne ne le saura. Si l'enfant d'à côté ne paie pas, il apprend exactement la même chose : aucun élève n'a jamais eu à demander quoi que ce soit pour travailler ici.",
+    },
+    {
+      q: "Les données de mon enfant sont-elles protégées ?",
+      a: "Oui. On ne collecte que le strict nécessaire — de quoi l'identifier dans sa classe et suivre ses résultats. Aucune donnée sensible n'est stockée, et les recommandations sont calculées chez nous, sans appel à un service externe. Le détail est dans la politique de confidentialité.",
     },
   ];
 
@@ -71,8 +127,9 @@ export default function FAQTarifs() {
         </h1>
 
         <p className="text-slate-300 text-sm leading-relaxed">
-          Ici, on répond simplement aux questions sur les essais gratuits,
-          l'abonnement, l'historique et le paiement.
+          Un tableau de bord, c&apos;est {euros(PRIX_FAMILLE_AN)} par an — celui
+          d&apos;une famille comme celui d&apos;un professeur. L&apos;élève, lui, ne
+          paie jamais. {etatVente}
         </p>
 
         <section className="space-y-4">
@@ -92,19 +149,19 @@ export default function FAQTarifs() {
         </section>
 
         <div className="pt-6 border-t border-slate-800 text-sm text-slate-400">
-          Besoin d'un avis ?{" "}
+          Besoin d&apos;un avis ?{" "}
           <Link
             href="/contact"
             className="text-emerald-300 font-semibold hover:text-emerald-200"
           >
-            Écrire à l'équipe
+            Écrire à l&apos;équipe
           </Link>
           {" · "}
           <Link
-            href="/offre-pilote"
+            href="/espace-ecoles"
             className="text-emerald-300 font-semibold hover:text-emerald-200"
           >
-            Offre pilote (établissements)
+            EleveAI dans un établissement
           </Link>
           {" · "}
           <Link
@@ -118,4 +175,3 @@ export default function FAQTarifs() {
     </main>
   );
 }
-

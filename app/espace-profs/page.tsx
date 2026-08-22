@@ -1,6 +1,26 @@
 // app/espace-profs/page.tsx
 import Link from "next/link";
 import type { Metadata } from "next";
+// ⛔ CETTE PAGE NE PARLAIT PAS D'ARGENT DU TOUT (corrigé le 22/08/2026) : zéro
+// prix, zéro lien vers /tarifs, et « Comment démarrer » renvoyait le professeur
+// vers son ÉTABLISSEMENT — « les comptes sont créés au niveau de
+// l'établissement, la mise en place se fait avec votre collège ».
+//
+// ⭐ C'est exactement ce que le forfait à 12 € a été créé pour supprimer la
+// veille : à 6 € par élève, une classe de 30 coûtait 180 €, donc la
+// coopérative, donc une réunion, donc la rentrée suivante. Le forfait existe
+// pour qu'un professeur décide SEUL — et sa page ne le lui proposait jamais.
+// C'est le seul canal d'acquisition qu'un prix à 12 € puisse financer.
+//
+// ⚠️ MAIS ON NE PROMET PAS UN BOUTON QUI N'EXISTE PAS. L'inscription
+// professeur par e-mail n'est pas codée (le rattachement prof↔classe↔élève doit
+// être tranché avant), et `VENTE.ouverte` est à false. On annonce donc le prix
+// et la règle — ils sont fermes — et on dit où ça en est, comme /tarifs. Une
+// page qui annonce un achat dont la caisse ne répond pas est pire que le
+// silence : c'est la leçon du llms.txt qui prétendait que le coach ne demandait
+// pas de compte.
+import { VENTE } from "@/lib/legal/editeur";
+import { EXEMPLE_CLASSE, PRIX_PROF_AN, centimes, euros } from "@/lib/tarifs";
 
 // ⚠️ LA CANONIQUE SUIT LA REDIRECTION, ELLE NE LA CONTREDIT PAS (10/08/2026).
 // Cette page a vécu à `/enseignants` ; depuis le 08/08 c'est l'inverse qui est
@@ -346,23 +366,89 @@ export default function EnseignantsPage() {
         <section className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-md">
           <h2 className="text-2xl font-black">Comment démarrer avec votre classe</h2>
           <p className="mt-2 text-sm font-semibold leading-relaxed text-slate-600">
-            Les comptes élèves et professeurs sont créés au niveau de
-            l&apos;établissement : un code établissement, un code par élève et par
-            professeur, sans installation ni adresse e-mail. La mise en place se fait
-            avec votre collège — souvent en quelques heures.
+            Il y a deux chemins, et le premier ne demande l&apos;autorisation de
+            personne.
           </p>
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {/* Le chemin du prof seul — celui pour lequel le forfait existe. */}
+            <div className="rounded-2xl border-2 border-sky-200 bg-sky-50/60 p-5">
+              <p className="text-xs font-black uppercase tracking-wide text-sky-700">
+                Vous, pour votre ou vos classes
+              </p>
+              <p className="mt-2 text-3xl font-black text-slate-900">
+                {euros(PRIX_PROF_AN)}
+                <span className="ml-1 text-base font-black text-slate-500">par an</span>
+              </p>
+              <p className="mt-1 text-sm font-black text-sky-800">
+                Forfait — 25 élèves ou 35, c&apos;est le même prix
+              </p>
+              <p className="mt-3 text-sm font-semibold leading-relaxed text-slate-600">
+                Pour une classe de {EXEMPLE_CLASSE.eleves}, cela fait{" "}
+                {centimes(EXEMPLE_CLASSE.parEleve)} par élève. C&apos;est fait pour
+                être payé sans passer par la coopérative — donc sans attendre une
+                réunion, ni la rentrée suivante. Les familles de votre classe ne
+                paient rien, et vos élèves n&apos;ont jamais rien à payer.
+              </p>
+              {VENTE.ouverte ? (
+                <Link
+                  href="/tarifs#classe"
+                  className="mt-4 inline-flex items-center gap-2 rounded-full bg-sky-600 px-5 py-2.5 text-sm font-black text-white transition hover:bg-sky-500"
+                >
+                  Équiper ma classe
+                </Link>
+              ) : (
+                <>
+                  <Link
+                    href="/tarifs#classe"
+                    className="mt-4 inline-flex items-center gap-2 rounded-full bg-sky-600 px-5 py-2.5 text-sm font-black text-white transition hover:bg-sky-500"
+                  >
+                    Voir l&apos;offre classe
+                  </Link>
+                  <p className="mt-2 text-xs font-bold text-slate-500">
+                    Le tableau de bord professeur se construit en ce moment. Le
+                    prix ci-dessus est ferme, et rien n&apos;est encaissé tant
+                    qu&apos;il n&apos;est pas prêt.
+                  </p>
+                </>
+              )}
+            </div>
+
+            {/* Le chemin établissement — il reste, il n'est plus le seul. */}
+            <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5">
+              <p className="text-xs font-black uppercase tracking-wide text-slate-600">
+                Ou tout votre établissement
+              </p>
+              <p className="mt-2 text-sm font-semibold leading-relaxed text-slate-600">
+                Un code établissement, un code par élève et par professeur, sans
+                installation ni adresse e-mail. Tous les niveaux, toutes les
+                classes, tous les collègues, plus la vue complète de la direction.
+                La mise en place se fait avec votre collège — souvent en quelques
+                heures.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <Link
+                  href="/espace-ecoles"
+                  className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-black text-white transition hover:bg-slate-700"
+                >
+                  🏫 Déployer dans mon établissement
+                </Link>
+              </div>
+            </div>
+          </div>
+
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link
-              href="/espace-ecoles"
-              className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-black text-white transition hover:bg-slate-700"
-            >
-              🏫 Déployer dans mon établissement
-            </Link>
             <Link
               href="/dashboard-prof"
               className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-5 py-2.5 text-sm font-black text-slate-800 transition hover:bg-slate-50"
             >
               Accéder à mon tableau de bord
+            </Link>
+            <Link
+              href="/tarifs"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-5 py-2.5 text-sm font-black text-slate-800 transition hover:bg-slate-50"
+            >
+              Les trois offres en détail
             </Link>
           </div>
         </section>
