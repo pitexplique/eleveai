@@ -326,6 +326,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Compter les propositions, distinguer juxtaposition, coordination et subordination, et dire ce que fait chaque conjonction.",
   },
+  "francais/6e/grammaire-accords": {
+    titre: "Les accords et les homophones",
+    resume:
+      "Tenir la chaîne du groupe nominal, accorder avec un sujet éloigné, le participe passé avec être et avec le COD antéposé.",
+  },
 
   "ia/fondements/definir-l-ia": { titre: "Qu'est-ce que l'intelligence artificielle ?" },
   "ia/fondements/apprentissage-automatique": { titre: "L'apprentissage automatique" },
