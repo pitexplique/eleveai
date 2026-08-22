@@ -338,7 +338,7 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     chapitre: "Algèbre",
     objectif: "Utiliser des modèles pré-algébriques pour résoudre des problèmes algébriques.",
     page: 8,
-    micros: [],
+    micros: ["algebre_barres", "algebre_inconnues", "algebre_defi"],
     note: "Schéma en barres : la prime d'or/argent/bronze, le prix de la pastèque et de l'ananas.",
   },
   {
@@ -348,7 +348,7 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     objectif:
       "Identifier la structure d'un motif évolutif en repérant une régularité et en identifiant une structure.",
     page: 8,
-    micros: [],
+    micros: ["algebre_motif", "algebre_defi"],
     note: "Les maisons en allumettes : 6 + (n − 1) × 5.",
   },
 

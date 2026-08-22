@@ -178,6 +178,37 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     ALGÈBRE : PROBLÈMES À NOMBRES INCONNUS ET MOTIFS
+     ⛔ Ouvert le 22/08/2026 : deux objectifs du programme de 6e, zéro micro.
+     ⭐ En 6e on ne pose PAS d'équation : on dessine la relation. La « part »
+     du schéma en barres joue exactement le rôle que la lettre jouera en 5e.
+  ========================= */
+  {
+    id: "algebre_barres",
+    label: "Traduire un problème par un schéma en barres",
+    notionId: "algebre_probleme",
+    prerequis: ["entier_addition_mentale"],
+  },
+  {
+    id: "algebre_inconnues",
+    label: "Trouver deux nombres inconnus par échange",
+    notionId: "algebre_probleme",
+    prerequis: ["algebre_barres"],
+  },
+  {
+    id: "algebre_motif",
+    label: "Motif évolutif : régularité et structure",
+    notionId: "algebre_probleme",
+    prerequis: ["entier_multiplication_mentale"],
+  },
+  {
+    id: "algebre_defi",
+    label: "Défis : remonter un motif, partages en parts",
+    notionId: "algebre_probleme",
+    prerequis: ["algebre_inconnues", "algebre_motif"],
+  },
+
+  /* =========================
      POURCENTAGES
   ========================= */
   {

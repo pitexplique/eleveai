@@ -74,6 +74,23 @@ export const notions: NotionSource[] = [
     levels: [1, 2, 3],
   },
 
+  // ⛔ OUVERTE LE 22/08/2026. « Algèbre » est une section du domaine « Nombres,
+  // calcul et résolution de problèmes » du programme de 6e, et le coach n'en
+  // avait aucune micro — alors que c'est le chapitre qui prépare tout le calcul
+  // littéral de 5e.
+  //
+  // ⭐ « Pré-algébrique » veut dire SANS LETTRE : on ne pose pas d'équation, on
+  // DESSINE la relation (schéma en barres). Le raisonnement est le même ; la
+  // lettre arrive en 5e, et elle arrive plus facilement quand le dessin a été
+  // fait avant.
+  {
+    id: "algebre_probleme",
+    label: "Problèmes à nombres inconnus et motifs",
+    boId: "BO6N5",
+    prerequis: ["entier_calcul_mental"],
+    levels: [1, 2, 3],
+  },
+
   {
     id: "pourcentage_nombre",
     label: "Pourcentages",

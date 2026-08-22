@@ -503,6 +503,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "algebre_probleme",
+        "label": "Problèmes à nombres inconnus et motifs",
+        "prerequis": [
+          "entier_calcul_mental"
+        ]
+      },
+      {
         "id": "distance_segment",
         "label": "Distances et milieu d’un segment",
         "prerequis": [

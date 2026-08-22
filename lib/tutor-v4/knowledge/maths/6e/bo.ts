@@ -7,6 +7,10 @@ export const bo: KnowledgeBoCompetence[] = [
   { boId: "BO6N2", label: "Comprendre fractions et pourcentages" },
   { boId: "BO6N3", label: "Résoudre des problèmes de proportionnalité" },
   { boId: "BO6N4", label: "Pratiquer le calcul mental et posé" },
+  // ⛔ AJOUTÉ LE 22/08/2026 : « Algèbre » est une section à part entière du
+  // programme de 6e (modèles pré-algébriques, motifs évolutifs), et aucune des
+  // quatre rubriques ci-dessus ne la décrit.
+  { boId: "BO6N5", label: "Algèbre" },
 
   { boId: "BO6G1", label: "Grandeurs et mesures" },
   { boId: "BO6G2", label: "Angles" },
