@@ -394,6 +394,14 @@ const ROUTES: RouteConfig[] = [
   // 0,7 → 0,85 le 21/08 : la page est devenue une destination de l'en-tête et
   // porte désormais les trois offres. Elle n'est plus une annexe.
   { path: "/tarifs",            priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_SEO_AOUT },
+  // ⭐ 22/08 — LA FORMATION CRPE ENTRE AU SITEMAP, le statut URSSAF étant réglé.
+  // `weekly` et non `monthly` : les inscriptions se jouent avant le 3 octobre et
+  // le nombre de places bouge. Priorité 0,8, au niveau de /tarifs et non des
+  // pages institutionnelles : c'est une offre datée, pas une page de présentation.
+  // ⚠️ Elle vise une requête locale et étroite — « préparation CRPE Réunion »,
+  // « maths CRPE Saint-Pierre ». Ne pas espérer du volume : ce qui compte est
+  // qu'un candidat de l'île qui cherche exactement ça la trouve.
+  { path: "/formation-crpe",    priority: 0.8,  changeFrequency: "weekly",  lastMod: LASTMOD_SEO_AOUT },
   { path: "/contact",           priority: 0.65, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   // 20/07 : les pages de la PHILOSOPHIE qui manquaient au sitemap (audit
   // Frédéric « qu'il n'oublie pas notre philosophie ») — la charte d'usage de

@@ -109,8 +109,29 @@ const PORTES_ELEVE_CYCLE_3 = ["coach-maths", "coach-francais", "dictee-du-jour"]
  * et `normalizeClasse` retomberait EN SILENCE sur la 6ᵉ (voir le piège n°1 de
  * coach.ts). Un adulte y trouverait le français d'un sixième sans qu'on le
  * prévienne. C'est le seul trou de l'étagère, et il est connu.
+ *
+ * ── ⭐ 22/08/2026 — LE CRPE PREND LA TROISIÈME PLACE ────────────────────────
+ * Frédéric : « à élève classe adulte tu rajoutes CRPE en encart, choisis sa
+ * position ». ⚠️ `NB_MAX = 3` dans moteur.ts : une QUATRIÈME entrée ne
+ * s'afficherait jamais. Ajouter, ici, c'est forcément remplacer.
+ *
+ * Les deux rituels gardent les places 1 et 2 : la décision du 21/08 ci-dessus
+ * tient toujours, c'est le rituel qui ramène un adulte, et une offre payante en
+ * premier écran dirait le contraire de tout le reste du site.
+ *
+ * C'est donc `coach-maths` qui cède, et il cède peu : il revient au score dès
+ * qu'on clique « Mathématiques » ou qu'on écrit trois mots, et il est dans les
+ * chips. La page CRPE n'a pas de seconde route — hors du lexique, une carte est
+ * sa seule porte. S'ajoute qu'elle EXPIRE : les inscriptions se jouent avant le
+ * 3 octobre, alors qu'un coach est là toute l'année.
+ *
+ * ⛔ Ne pas la monter en première place « parce qu'elle rapporte ». Un adulte
+ * qui arrive doit voir ce qui est gratuit avant ce qui est payant.
+ * ⚠️ À REVOIR APRÈS LE CONCOURS : passé le printemps 2027, cette ligne rend
+ * la place à `coach-maths` — sinon l'étagère de l'adulte gardera l'affiche
+ * d'une session terminée.
  */
-const PORTES_ADULTE = ["calcul-rapide", "dictee-du-jour", "coach-maths"];
+const PORTES_ADULTE = ["calcul-rapide", "dictee-du-jour", "formation-crpe"];
 
 export const PORTES_ECRITES: Partial<Record<ProfilId, string[]>> = {
   adulte: PORTES_ADULTE,
@@ -1057,6 +1078,47 @@ export const RESSOURCES: RessourceEleveAI[] = [
   },
 
   // ── Les adultes ────────────────────────────────────────────────────────
+  {
+    // ⭐ LA SEULE RESSOURCE PAYANTE DE L'INVENTAIRE (22/08/2026, Frédéric :
+    // « à élève classe adulte tu rajoutes CRPE en encart »). Tout le reste ici
+    // est gratuit ; celle-ci vend une matinée de son temps, et c'est justement
+    // ce que son propre test de monétisation autorise — ce qui est rare par
+    // nature, pas ce qui se copie à coût nul.
+    //
+    // ⚠️ `niveaux: ["adulte"]` ET RIEN D'AUTRE. Pas de `parent`, pas de `prof` :
+    // un parent vient pour son enfant et un enseignant est déjà en poste — leur
+    // servir une préparation au concours serait du bruit chez l'un et une
+    // maladresse chez l'autre. C'est le champ du piège récurrent de ce fichier
+    // (le lycée oublié le 07/08, les adultes oubliés le 16/08) : ici l'oubli
+    // serait inverse, en déclarer trop.
+    //
+    // ⚠️ `notions: ["concours"]` — la notion existe déjà au lexique et son
+    // commentaire dit pourquoi ça suffit : « ce sont les NIVEAUX des ressources
+    // qui départagent ». Avenir sort en Terminale, le concours général au
+    // collège, le CRPE chez l'adulte. Le sigle « crpe » vient d'être ajouté à
+    // ses alias, sans quoi la page serait introuvable au clavier — le moteur ne
+    // lit NI `titre` NI `promesse`.
+    //
+    // ⚠️ `statut: "validee"` et jamais `testee_eleves` : le bandeau de la carte
+    // se décide là-dessus et dirait « testée en classe » d'une formation qui n'a
+    // pas encore eu lieu.
+    //
+    // ⛔ PAS de `resultat` : rien ne remonte au tableau de bord, et c'est vrai.
+    // Une matinée en salle ne produit pas de score.
+    id: "formation-crpe",
+    titre: "Préparer les maths du CRPE",
+    // La promesse ne choisit ni le tutoiement ni le vouvoiement (voir types.ts),
+    // et elle dit le prix : une carte qui mène à une page payante sans l'annoncer
+    // se paie en confiance, pas en clics.
+    promesse: "14 samedis à Saint-Pierre, 60 € la matinée, pour la seule épreuve de maths.",
+    url: "/formation-crpe",
+    niveaux: ["adulte"],
+    matiere: "maths",
+    notions: ["concours"],
+    intentions: ["preparer"],
+    type: "page",
+    statut: "validee",
+  },
   {
     id: "espace-parents",
     titre: "L'espace parents",

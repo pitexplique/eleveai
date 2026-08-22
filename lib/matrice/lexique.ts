@@ -199,8 +199,21 @@ export const NOTIONS: NotionLexique[] = [
     alias: ["exponentielle", "exp", "logarithme", "ln", "log", "croissance exponentielle"],
   },
   {
+    // ⛔⛔ « des » A ÉTÉ RETIRÉ DES ALIAS LE 22/08/2026 — NE PAS LE REMETTRE.
+    // Il désignait les DÉS à jouer, mais la saisie est normalisée sans accents :
+    // « dés » devient « des », c'est-à-dire l'article le plus courant du
+    // français. Toute phrase où aucune autre notion n'accroche d'abord tombait
+    // donc sur les probabilités — « je veux reviser des maths », « professeur
+    // des ecoles ». Le bug était silencieux : la lecture affichée disait « les
+    // probabilités » et personne ne relie ça à un article.
+    // Les dés restent atteignables par les formulations explicites ci-dessous,
+    // et « hasard », « chance », « tirage », « proba » n'ont jamais bougé.
     id: "probabilites", label: "les probabilités", matiere: "maths",
-    alias: ["probabilite", "probabilites", "proba", "hasard", "chance", "arbre", "tirage", "des", "aleatoire"],
+    alias: [
+      "probabilite", "probabilites", "proba", "hasard", "chance", "arbre",
+      "tirage", "aleatoire",
+      "de a jouer", "des a jouer", "lancer un de", "lancer le de", "lancer un des",
+    ],
   },
   {
     id: "statistiques", label: "les statistiques", matiere: "maths",
@@ -321,11 +334,21 @@ export const NOTIONS: NotionLexique[] = [
     // mot dans l'ordre de la phrase. « concours » seul suffit à accrocher les
     // deux ; ce sont les NIVEAUX des ressources qui départagent ensuite —
     // Avenir en Terminale, le général au collège.
+    // ⭐ LE CRPE ENTRE LE 22/08/2026, dans CETTE notion et pas dans une
+    // nouvelle. Le commentaire ci-dessus dit pourquoi ça marche : « ce sont les
+    // NIVEAUX des ressources qui départagent ». Avenir sort en Terminale, le
+    // général au collège, le CRPE chez l'adulte — une seule notion, trois
+    // publics disjoints, zéro collision.
+    // ⚠️ Écrire les alias SANS ACCENT ET SANS APOSTROPHE : la saisie est
+    // normalisée avant comparaison, « professeur des écoles » ne s'accrocherait
+    // jamais à un alias accentué.
     id: "concours", label: "les concours", matiere: "maths",
     alias: [
       "concours", "concours general", "concours generale", "concour general",
       "concours avenir", "concour avenir", "avenir",
       "olympiade", "olympiades", "olympiades junior",
+      "crpe", "professeur des ecoles", "prof des ecoles", "professeur ecole",
+      "concours professeur des ecoles", "instituteur", "institutrice",
     ],
   },
 

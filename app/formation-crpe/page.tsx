@@ -4,15 +4,23 @@
 // /formation-CRPE renverrait un 404. Si le sigle en capitales est indispensable
 // à l'oral, il reste dans le titre de la page — pas dans l'adresse.
 //
-// ⛔ TANT QUE LE RÉGIME N'EST PAS TRANCHÉ, elle reste en `noindex` et n'est
-// liée depuis nulle part : ni le header, ni le sitemap, ni le pied de page.
-// Vendre une « action de formation » ouvre un régime à part — déclaration
-// d'activité (NDA) auprès de la DREETS, règlement intérieur, convention,
-// feuilles d'émargement. Sans NDA : ni CPF ni financeur public, donc paiement
-// direct par le stagiaire uniquement. Ce n'est pas bloquant pour des candidats
-// qui paient de leur poche ; ça le devient dès qu'un employeur ou France
-// Travail entre dans la boucle. Pour ouvrir la page : retirer le bloc `robots`
-// ci-dessous, ajouter la ligne dans `app/sitemap.ts`, et la lier.
+// ⭐ OUVERTE LE 22/08/2026. Frédéric : « je suis déclaré URSSAF ». Le `noindex`
+// et l'absence du sitemap tenaient au statut, et le statut est réglé — micro-
+// entrepreneur depuis le 19/08. La page s'indexe, elle est au sitemap, et elle
+// sort en encart chez l'adulte (`lib/matrice/ressources.ts`, PORTES_ADULTE).
+//
+// ⚠️ CE QUI N'EST PAS ENCORE RÉGLÉ, ET QUI SE VOIT DANS LE TEXTE : l'agrément
+// formation. Vendre une « action de formation » ouvre un régime à part —
+// déclaration d'activité (NDA) auprès de la DREETS, règlement intérieur,
+// convention, feuilles d'émargement. Sans NDA : ni CPF ni financeur public.
+// C'est pourquoi la page dit noir sur blanc « aucun financement CPF n'est
+// possible aujourd'hui : vous payez directement ». Elle est donc juste EN
+// L'ÉTAT, et le jour où le numéro d'agrément arrive, c'est cette ligne-là qu'on
+// remplace — pas le `robots`, qui n'a plus lieu d'être.
+//
+// ⚠️ L'ACCORD DE L'HÔTEL RESTE À OBTENIR. La page est désormais publique et le
+// nomme : `LIEU.nom = null` la fait retomber sur « Terre-Sainte, à Saint-Pierre »
+// en une ligne, si jamais il fallait retirer le nom vite.
 //
 // ⭐ LE PARI DE LA PAGE : ne vendre que ce qui est rare. Le site est gratuit et
 // se copie à coût nul ; un samedi matin en salle, non. C'est pourquoi la
@@ -275,10 +283,13 @@ export const metadata: Metadata = {
     `${NB_SEANCES} samedis de ${TARIF.heuresParSeance} h pour préparer l'épreuve de mathématiques du CRPE, ` +
     `à ${LIEU_COURT} (La Réunion). ${eur(PRIX_SEANCE)} la matinée, payable à la séance, ` +
     `café compris. Par un professeur de mathématiques en exercice.`,
+  // ⚠️ La canonique se déclare ICI et jamais dans le layout — sinon toutes les
+  // pages du site hériteraient de celle-ci. Toujours avec le `www`.
   alternates: { canonical: `${SITE_URL}/formation-crpe` },
-  // ⛔ Voir l'en-tête : tant que le régime formation n'est pas tranché, cette
-  // page ne s'indexe pas. C'est la seule ligne à retirer pour l'ouvrir.
-  robots: { index: false, follow: false },
+  // ⭐ PLUS DE `robots` : il portait `index: false` tant que le statut n'était
+  // pas réglé. Il l'est (URSSAF, 19/08), la page s'indexe. Ne pas le remettre
+  // « par prudence » — une page au sitemap ET en noindex dit deux choses
+  // contraires à Google, et c'est le noindex qui gagne.
 };
 
 export default function FormationCrpePage() {
