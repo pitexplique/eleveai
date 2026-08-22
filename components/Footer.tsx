@@ -91,18 +91,17 @@ const espaces = [
   { label: "Connexion élève / prof", href: "/auth/signin-eleve" },
 ];
 
-// ⚠️⚠️ `/formation-crpe` EST EN `noindex` DANS LE CODE (page.tsx, ligne 273) —
-// délibérément : le régime formation et l'accord de l'hôtel ne sont pas
-// tranchés. Ce lien la rend donc trouvable PAR UN VISITEUR, pas par un moteur,
-// et c'est bien l'intention : quelqu'un qui descend au pied de page cherche.
-// ⛔ MAIS LE 22/08, LE `noindex` N'ÉTAIT PAS EN LIGNE : la page servie sur
-// www.eleveai.fr/formation-crpe ne portait aucune balise robots (vérifié avec
-// témoin — /dashboard-eleve, lui, la porte bien). La production tournait donc
-// sur une version antérieure au commit qui l'a posé. Le prochain déploiement
-// de `main` remet le noindex. Tant qu'il n'est pas passé, ce lien + l'absence
-// de noindex = une offre tarifée, avec son lieu, ouverte aux moteurs.
-// → VÉRIFIER APRÈS DÉPLOIEMENT :
-//   curl -s https://www.eleveai.fr/formation-crpe | grep -c noindex   (doit rendre 1)
+// ⭐ `/formation-crpe` EST OUVERTE (22/08, décision de Frédéric : « il faut
+// formation-crpe dans sitemap avec index pas no-index »). Les trois gestes
+// vont ensemble et doivent le rester : le `noindex` retiré de la page, la
+// ligne dans `app/sitemap.ts`, et ce lien-ci.
+// ⛔ NE PAS REFERMER L'UN SANS LES DEUX AUTRES : le site pointerait vers une
+// page qu'il demande aux moteurs d'ignorer, et la Search Console le signalerait
+// comme une erreur — c'est exactement le précédent de /photo-cours, raconté
+// dans le sitemap.
+// ⚠️ La page nomme l'Hôtel Terre-Sainte, et elle est maintenant indexable.
+// Si l'accord écrit n'existe pas, `LIEU.nom = null` dans la page la rend
+// anonyme (« Terre-Sainte, à Saint-Pierre ») sans rien fermer.
 const infos = [
   { label: "Pourquoi EleveAI", href: "/pourquoi-eleveai" },
   { label: "Préparer les maths du CRPE", href: "/formation-crpe" },
