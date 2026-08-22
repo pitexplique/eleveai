@@ -566,10 +566,28 @@ export default function Header() {
             href="/accueil"
             className="group flex shrink-0 items-center gap-2.5 rounded-full pr-1 transition hover:brightness-110"
           >
+            {/* ⚠️ `alt` ET `aria-hidden` VONT PAR PAIRE ICI — NE PAS EN DÉFAIRE UN
+                SEUL (22/08, Bing Webmaster : « Alt attribute for images is
+                missing », 1 instance sur /accueil, et c'était celle-ci).
+                Le logo portait `alt=""` — ce qui était JUSTE : il est dans un
+                lien qui écrit déjà « EleveAI » à côté, et une image décorative
+                doublant le texte voisin se tait (WCAG H67). Sauf que le
+                crawler de Bing ne distingue pas un `alt` absent d'un `alt` vide
+                et volontaire : il signalait le premier lien de chaque page du
+                site.
+                ⭐ La sortie n'est pas de choisir entre les deux : on déplace le
+                nom du lien, du texte vers l'image. L'image dit « EleveAI », le
+                `<span>` qui l'écrivait se tait. Le nom accessible du lien est
+                RIGOUREUSEMENT LE MÊME qu'avant — « EleveAI » (+ « La liberté
+                d'apprendre » au-dessus de 1280 px) — et l'attribut est rempli.
+                ⛔ Remettre `alt=""` sans retirer `aria-hidden` rendrait le lien
+                MUET pour un lecteur d'écran sous 1280 px : plus d'image, plus de
+                texte. Retirer `aria-hidden` sans revider `alt` le ferait bégayer
+                « EleveAI EleveAI ». Les deux lignes ne se relisent qu'ensemble. */}
             <div className="relative h-10 w-[72px] overflow-hidden rounded-[16px] shadow-[0_0_22px_rgba(248,200,70,0.22)] ring-1 ring-white/15">
               <Image
                 src="/logo-eleveai-header.svg"
-                alt=""
+                alt="EleveAI"
                 fill
                 sizes="72px"
                 className="object-contain"
@@ -577,7 +595,7 @@ export default function Header() {
               />
             </div>
             <div className="flex flex-col leading-tight">
-              <span className={`text-[1.05rem] font-black tracking-tight ${paper ? "text-[#1d1c16]" : "text-white"}`}>
+              <span aria-hidden="true" className={`text-[1.05rem] font-black tracking-tight ${paper ? "text-[#1d1c16]" : "text-white"}`}>
                 Eleve<span className={paper ? "text-cyan-800" : "text-cyan-200"}>AI</span>
               </span>
               <span className={`hidden text-xs xl:block ${paper ? "font-serif italic text-[#1d1c16]/60" : "text-cyan-100/75"}`}>
