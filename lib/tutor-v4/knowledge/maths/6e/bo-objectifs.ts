@@ -689,7 +689,7 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     chapitre: "La vision dans l'espace",
     objectif: "Voir dans l'espace des assemblages de cubes.",
     page: 16,
-    micros: [],
+    micros: ["vision_vues", "vision_denombrer", "vision_representation", "vision_defi"],
     note: "Vues de dessus, de face, de gauche, de droite ; perspective cavalière ; patron ; dénombrer les cubes d'un empilement.",
   },
 

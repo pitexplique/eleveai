@@ -821,6 +821,38 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     LA VISION DANS L'ESPACE
+     ⛔ Ouvert le 22/08/2026 : l'un des deux chapitres du domaine « Espace et
+     géométrie », zéro micro dans le coach.
+     ⭐ Le cœur du chapitre est ce qu'on NE VOIT PAS. Compter les faces
+     visibles donne toujours un nombre trop petit ; on compte par étages.
+  ========================= */
+  {
+    id: "vision_vues",
+    label: "Les quatre vues : dessus, face, gauche, droite",
+    notionId: "vision_espace",
+    prerequis: ["volume_assemblage"],
+  },
+  {
+    id: "vision_denombrer",
+    label: "Compter les cubes d’un empilement, cachés compris",
+    notionId: "vision_espace",
+    prerequis: ["volume_compter"],
+  },
+  {
+    id: "vision_representation",
+    label: "Perspective cavalière, dessin à main levée, patron",
+    notionId: "vision_espace",
+    prerequis: ["vision_vues"],
+  },
+  {
+    id: "vision_defi",
+    label: "Défis : cubes cachés, cube peint puis découpé",
+    notionId: "vision_espace",
+    prerequis: ["vision_denombrer", "vision_representation"],
+  },
+
+  /* =========================
      MÉDIATRICES D'UN TRIANGLE ET CERCLE CIRCONSCRIT
      ⛔ Ouvert le 22/08/2026. C'est la PREMIÈRE PREUVE de l'année : le BO
      demande que l'élève « comprenne pourquoi » et « restitue les arguments ».

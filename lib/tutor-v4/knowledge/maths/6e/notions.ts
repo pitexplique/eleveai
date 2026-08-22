@@ -233,6 +233,24 @@ export const notions: NotionSource[] = [
     levels: [1, 2],
   },
 
+  // ⛔ OUVERTE LE 22/08/2026. « La vision dans l'espace » est l'un des DEUX
+  // chapitres du domaine « Espace et géométrie » du programme de 6e — l'autre
+  // étant l'étude de configurations planes. Le coach n'en avait aucune micro,
+  // alors que le canvas `solide_3d` savait déjà dessiner un assemblage cube par
+  // cube.
+  //
+  // ⭐ Ce qui s'y joue : LES CUBES QU'ON NE VOIT PAS. Un empilement dessiné en
+  // perspective en cache derrière et dessous ; l'élève qui compte les faces
+  // visibles se trompe toujours. La parade — compter par étages — est le cœur
+  // de `vision_denombrer`.
+  {
+    id: "vision_espace",
+    label: "La vision dans l'espace",
+    boId: "BO6G5",
+    prerequis: ["volume_solide"],
+    levels: [1, 2],
+  },
+
   {
     id: "volume_solide",
     label: "Volumes",

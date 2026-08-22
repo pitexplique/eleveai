@@ -539,6 +539,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "vision_espace",
+        "label": "La vision dans l'espace",
+        "prerequis": [
+          "volume_solide"
+        ]
+      },
+      {
         "id": "duree_temps",
         "label": "Le repérage dans le temps et les durées",
         "prerequis": [
