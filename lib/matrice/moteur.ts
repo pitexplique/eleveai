@@ -55,7 +55,7 @@ import type {
  * ressources, il a rouvert le catalogue que la refonte du 06/08 a enterré, et
  * la promesse « on te propose CE qui correspond » redevient « débrouille-toi ».
  */
-const NB_MAX = 6;
+export const NB_MAX = 6;
 
 
 /** Distance de Levenshtein, bornée : au-delà de `max` on abandonne. */

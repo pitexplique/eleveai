@@ -51,7 +51,16 @@ export default function CarteRessource({
   r: Recommandation;
   /** 1 pour la première. Sert au suivi ET à la bordure de la carte de tête. */
   rang: number;
-  profil: ProfilId;
+  /**
+   * Qui regarde — pour le suivi, et rien d'autre.
+   *
+   * ⚠️ `"vitrine"` N'EST PAS UN PROFIL, et c'est justement pourquoi il est
+   * écrit ici : ces cartes-là s'affichent quand personne n'a encore dit qui il
+   * est (voir lib/matrice/vitrine.ts). Sans cette valeur, un clic de vitrine
+   * serait indistinguable d'un clic de réponse dans les statistiques — or c'est
+   * exactement le chiffre qu'on essaie de faire bouger.
+   */
+  profil: ProfilId | "vitrine";
   /** La notion que le moteur a lue, s'il en a lu une. */
   notionLabel: string | null;
 }) {

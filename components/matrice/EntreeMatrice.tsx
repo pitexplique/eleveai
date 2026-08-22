@@ -60,6 +60,7 @@ import { actionsPour, urlAction } from "@/lib/matrice/actions";
 import { afficherConcours } from "@/lib/matrice/concours";
 import { cahiersPour, guidesPour, urlCahierPour, urlGuidePour } from "@/lib/matrice/guides";
 import { chercher, libelleIntention } from "@/lib/matrice/moteur";
+import { vitrine } from "@/lib/matrice/vitrine";
 import {
   EVENEMENT_NOUVELLE_DEMANDE,
   ecrireHistorique,
@@ -637,6 +638,21 @@ export default function EntreeMatrice({
   const actions = useMemo(() => (profil ? actionsPour(profil) : []), [profil]);
 
   const exemples = useMemo(() => (profil ? exemplesPour(profil) : []), [profil]);
+
+  /**
+   * ⭐ LA VITRINE — ce qu'on montre à quelqu'un dont on ne sait encore rien.
+   *
+   * ⚠️ `useMemo(…, [])` ET NON UN `useState` REMPLI DANS UN EFFET. La liste
+   * dépend du MOIS (deux entrées sont saisonnières), donc du fuseau : le
+   * serveur est en UTC, La Réunion en UTC+4, et trois nuits par an les deux ne
+   * sont pas dans le même mois — l'hydratation peut alors se plaindre. On
+   * l'accepte, exactement comme saison.ts l'accepte déjà et pour la même
+   * raison : la remplir après le montage retarderait de quelques centaines de
+   * millisecondes la SEULE chose que cet écran ait à montrer à un inconnu.
+   * Guérir une gêne de trois nuits par an en abîmant les 362 autres jours, ce
+   * serait payer très cher.
+   */
+  const cartesVitrine = useMemo(() => vitrine(), []);
 
   /**
    * ⭐ L'INTITULÉ DE LA RANGÉE QUAND « ADULTE » EST ALLUMÉ (21/08/2026).
@@ -1468,11 +1484,46 @@ export default function EntreeMatrice({
           Une ligne suffit, et elle redit l'argument qui justifie la question.
           ⚠️ Elle sort AUSSI pour un élève qui a cliqué son rôle sans sa classe —
           c'est le même trou. Le parent, le prof et la direction, eux, ont un
-          profil dès leur rôle : leur écran répond, ils ne la voient jamais. */}
+          profil dès leur rôle : leur écran répond, ils ne la voient jamais.
+
+          ── ⭐ 22/08/2026 — UNE LIGNE NE SUFFISAIT PAS ────────────────────────
+          « On est à 62 % de bounce » (Frédéric), puis : « s'il arrive sans
+          élève, classe et matière, une chose doit s'afficher par défaut ». La
+          phrase du 20/08 EXPLIQUAIT le vide ; elle ne le remplissait pas. Un
+          visiteur venu de Google voyait un formulaire, une ligne grise, et
+          repartait — pas parce qu'on lui avait mal répondu, parce qu'on ne lui
+          avait rien montré.
+          La vitrine est écrite à la main dans lib/matrice/vitrine.ts : elle ne
+          devine aucun niveau, elle ne calcule rien, c'est le choix éditorial de
+          ce qu'on montre à quelqu'un dont on ne sait rien. La règle « on ne
+          devine pas » est intacte.
+          ⚠️ LA PHRASE RESTE, MAIS ELLE PASSE DESSOUS. En tête, elle annonçait
+          un vide ; sous les cartes, elle dit ce qu'on gagne à cliquer — et
+          c'est le geste qu'on cherche à provoquer. */}
       {!profil && !resultat && !demandeProfil && (
-        <p className="mt-3 text-center text-xs text-[#1d1c16]/70">
-          Choisis ta classe : les réponses ne sont pas les mêmes du CP à la Terminale.
-        </p>
+        <div className="mt-6">
+          <p className="mb-2.5 text-center text-xs text-[#1d1c16]/65">
+            Ce qu&rsquo;on met en avant en ce moment
+          </p>
+          <ul className="flex flex-col gap-2">
+            {cartesVitrine.map((r, i) => (
+              <CarteRessource
+                key={r.ressource.id}
+                r={r}
+                rang={i + 1}
+                /* ⚠️ Aucun profil n'est connu — c'est tout le sujet de ce bloc.
+                   Le suivi doit pouvoir séparer un clic de vitrine d'un clic de
+                   réponse, sinon on ne saura jamais si elle sert à quelque
+                   chose : c'est précisément le chiffre qu'on essaie de bouger. */
+                profil="vitrine"
+                notionLabel={null}
+              />
+            ))}
+          </ul>
+          <p className="mt-3 text-center text-xs text-[#1d1c16]/70">
+            Choisis ta classe : les réponses ne sont pas les mêmes du CP à la Terminale.
+          </p>
+        </div>
       )}
 
       {/* Une barre vide, c'est la page blanche. On souffle trois départs —
