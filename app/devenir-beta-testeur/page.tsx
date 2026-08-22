@@ -188,14 +188,14 @@ export default function DevenirBetaTesteurPage() {
           <p className="mt-2 text-sm font-semibold text-white/75">
             Un établissement ne prend pas une des {TOTAL_PLACES} places — un
             collège de 600 élèves avalerait la bêta entière à lui seul. Vous avez
-            une autre porte, faite pour ça : l’accès pilote gratuit de quatre
-            semaines, pour tout l’établissement.
+            une autre porte, faite pour ça : une période d’essai gratuite de
+            quatre semaines, pour tout l’établissement.
           </p>
           <Link
             href="/offre-pilote"
             className="mt-3 inline-block rounded-xl bg-sky-500 px-4 py-2 text-sm font-black text-white hover:bg-sky-400"
           >
-            Voir l’accès pilote
+            Voir la période d’essai
           </Link>
         </section>
 
