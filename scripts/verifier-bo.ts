@@ -30,7 +30,7 @@
 import { loadKnowledgeV4 } from "@/lib/tutor-v4/loaders/loadKnowledgeV4";
 
 /** Les classes dont le programme a été écrit comme une donnée. */
-const CLASSES_OUTILLEES = ["6e"] as const;
+const CLASSES_OUTILLEES = ["cm2", "6e"] as const;
 
 type ObjectifBO = {
   id: string;
