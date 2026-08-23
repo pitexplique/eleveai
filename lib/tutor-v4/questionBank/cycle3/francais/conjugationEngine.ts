@@ -185,7 +185,29 @@ function buildWrongs(correct: string, ...pools: string[][]): string[] {
 
 // ── Generation d'une question de conjugaison ────────────────────────────────
 
-export function generateConjugationItem(tense: ConjTense): ConjItem {
+/* ⛔ LE ZERO-CLAVIER EST UNE OPTION DU MOTEUR, PAS UN FILTRE EN AVAL
+   (23/08/2026, rappel de Frederic : « normalement regle zero clavier pour
+   cm2 »).
+
+   CE QUE CA REPARE. Le moteur tirait a pile ou face entre une reponse LIBRE et
+   un QCM. Mesure : 114 questions a taper sur 8 768 tirages en CM2 francais, sur
+   les cinq micros de conjugaison. Le garde-fou du primaire ne pouvait pas le
+   voir — il cherche `format: "open"` et `contains_keyword` dans les banques
+   FIXES, or ce sont des `short` fabriques ici, dans un autre fichier et sous un
+   autre format. Et `applyMathsKeyboardFree` ne couvre que les MATHS.
+
+   ⭐ POURQUOI UNE OPTION ICI PLUTOT QU'UN TRANSFORM SUR LA BANQUE. Un transform
+   doit deviner des distracteurs apres coup ; le moteur, lui, a deja la table de
+   conjugaison sous la main — les autres personnes et les autres temps du MEME
+   verbe. Les fausses reponses restent donc les confusions reelles de l'enfant,
+   et non des variantes fabriquees.
+
+   ⚠️ La classe se lit sur le `microId` (prefixe `cm2_`), au point d'appel, dans
+   `buildCycle3FrancaisBank`. Le CM1, le CE2 et la 6e ne sont PAS touches : leur
+   cas est une decision, pas un oubli. */
+export type ConjOptions = { sansSaisie?: boolean };
+
+export function generateConjugationItem(tense: ConjTense, opts: ConjOptions = {}): ConjItem {
   const useRegular = Math.random() < 0.65; // majorite de reguliers (reponse libre)
 
   if (useRegular) {
@@ -196,8 +218,8 @@ export function generateConjugationItem(tense: ConjTense): ConjItem {
     const correct = table[person];
 
     // Une fois sur deux : reponse libre (formes reguliere = sans accent) ;
-    // sinon QCM pour varier le format.
-    if (Math.random() < 0.5) {
+    // sinon QCM pour varier le format. `sansSaisie` ferme cette porte.
+    if (!opts.sansSaisie && Math.random() < 0.5) {
       return {
         kind: "short",
         text: `Conjugue le verbe « ${inf} » ${TENSE_PHRASE[tense]} avec « ${PRONOUNS[person]} ».`,
@@ -240,7 +262,7 @@ export function generateConjugationItem(tense: ConjTense): ConjItem {
 }
 
 // Question "trouver l'infinitif" parametree : on montre une forme conjuguee.
-export function generateInfinitifItem(): ConjItem {
+export function generateInfinitifItem(opts: ConjOptions = {}): ConjItem {
   if (Math.random() < 0.7) {
     const group: "er" | "ir" = Math.random() < 0.5 ? "er" : "ir";
     const inf = group === "er" ? pick(ER_VERBS) : pick(IR_VERBS);
@@ -250,6 +272,25 @@ export function generateInfinitifItem(): ConjItem {
     const forme = table[person];
     const groupLabel = group === "er" ? "1er groupe" : "2e groupe";
     if (Math.random() < 0.5) {
+      /* ⛔ SANS CLAVIER, ON NE SUPPRIME PAS LA QUESTION : ON LA CLIQUE.
+         Rabattre ce cas sur la branche « a quel groupe ? » ci-dessous ferait
+         disparaitre « trouver l'infinitif » de la classe — un objectif du BO
+         echange contre un autre, en silence. Les fausses reponses sont donc
+         d'autres infinitifs reels, comme le fait deja la branche irreguliere. */
+      if (opts.sansSaisie) {
+        return {
+          kind: "qcm",
+          text: `Quel est l'infinitif du verbe dans la forme « ${forme} » ?`,
+          correct: inf,
+          wrongs: buildWrongs(
+            inf,
+            group === "er" ? ER_VERBS : IR_VERBS,
+            group === "er" ? IR_VERBS : ER_VERBS,
+            [forme]
+          ),
+          methode: "On enlève la terminaison et on retrouve la forme de base du verbe.",
+        };
+      }
       // demander l'infinitif (reponse libre, infinitifs reguliers sans accent ici)
       return {
         kind: "short",

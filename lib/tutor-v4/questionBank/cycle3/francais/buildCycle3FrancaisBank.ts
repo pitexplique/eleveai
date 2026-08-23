@@ -7235,16 +7235,29 @@ function phraseComplexeQuestion(microId: string): Generated {
 }
 
 function conjugaisonQuestion(microId: string): Generated {
+  /* ⛔ ZERO-CLAVIER AU CM2 (23/08/2026, rappel de Frederic : « normalement
+     regle zero clavier pour cm2 »). Le moteur paramétrique tirait a pile ou
+     face entre une reponse LIBRE et un QCM : 114 questions a taper sur 8 768
+     tirages en CM2 francais, toutes sur ces cinq micros de conjugaison.
+     ⛔ AUCUN GARDE-FOU NE POUVAIT LE VOIR. Celui du primaire cherche
+     `format: "open"` et `contains_keyword` dans les banques FIXES ; ce sont des
+     `short`, fabriques par le moteur, dans un autre fichier et sous un autre
+     format. Et `applyMathsKeyboardFree` ne couvre que les MATHS.
+     ⚠️ LE CM1 ET LA 6e NE SONT PAS TOUCHES ICI. Le CM1 a le meme defaut (121
+     tirages sur 7 916) et le CE2 aussi (125 sur 8 484) : c'est une DECISION a
+     prendre, pas un oubli a corriger en passant. */
+  const sansSaisie = microId.startsWith("cm2_");
+
   /* ─── LES DEUX DÉFIS DE CONJUGAISON (CM2, 20/08/2026) ─────────────────────
      ⚠️ En tête : « cm2_conj_recit_defi » contient « recit », et la branche
      « discours_recit » juste en dessous le servirait depuis le pool de la 6e
      sur le discours rapporté — un sujet que le CM2 ne traite pas. */
   if (microId.includes("conj_simples_defi")) {
     const r = Math.random();
-    if (r < 0.3) return fromConjItem(generateConjugationItem("present"));
-    if (r < 0.55) return fromConjItem(generateConjugationItem("imparfait"));
-    if (r < 0.8) return fromConjItem(generateConjugationItem("futur"));
-    return fromConjItem(generateInfinitifItem());
+    if (r < 0.3) return fromConjItem(generateConjugationItem("present", { sansSaisie }));
+    if (r < 0.55) return fromConjItem(generateConjugationItem("imparfait", { sansSaisie }));
+    if (r < 0.8) return fromConjItem(generateConjugationItem("futur", { sansSaisie }));
+    return fromConjItem(generateInfinitifItem({ sansSaisie }));
   }
   if (microId.includes("conj_recit_defi")) {
     return qcm(
@@ -7343,9 +7356,9 @@ function conjugaisonQuestion(microId: string): Generated {
     microId.includes("employer")
   ) {
     const r = Math.random();
-    if (r < 0.2) return fromConjItem(generateConjugationItem("present"));
-    if (r < 0.4) return fromConjItem(generateConjugationItem("imparfait"));
-    if (r < 0.6) return fromConjItem(generateConjugationItem("futur"));
+    if (r < 0.2) return fromConjItem(generateConjugationItem("present", { sansSaisie }));
+    if (r < 0.4) return fromConjItem(generateConjugationItem("imparfait", { sansSaisie }));
+    if (r < 0.6) return fromConjItem(generateConjugationItem("futur", { sansSaisie }));
     if (r < 0.8) return qcm(CONJ_PASSE_COMPOSE);
     return qcm(CONJ_VALEUR_TEMPS);
   }
@@ -7353,16 +7366,16 @@ function conjugaisonQuestion(microId: string): Generated {
      « imparfait » — les lettres ne se suivent pas — mais l'ordre le dit, et
      personne n'aura à le revérifier. Micro ajoutée au CM2 le 11/08/2026. */
   if (microId.includes("plus_que_parfait")) return qcm(CONJ_PLUS_QUE_PARFAIT);
-  if (microId.includes("imparfait")) return fromConjItem(generateConjugationItem("imparfait"));
-  if (microId.includes("futur")) return fromConjItem(generateConjugationItem("futur"));
+  if (microId.includes("imparfait")) return fromConjItem(generateConjugationItem("imparfait", { sansSaisie }));
+  if (microId.includes("futur")) return fromConjItem(generateConjugationItem("futur", { sansSaisie }));
   if (microId.includes("passe_compose")) return qcm(CONJ_PASSE_COMPOSE);
   /* Le passé simple était servi depuis CONJ_VALEUR_TEMPS, qui parle du rôle
      des temps et pas de leurs formes. Le BO du CM2 le veut « à mémoriser et à
      maîtriser » : il a désormais son pool. */
   if (microId.includes("passe_simple")) return qcm(CONJ_PASSE_SIMPLE);
   if (microId.includes("valeur")) return qcm(CONJ_VALEUR_TEMPS);
-  if (microId.includes("infinitif") || microId.includes("groupe")) return fromConjItem(generateInfinitifItem());
-  return fromConjItem(generateConjugationItem("present"));
+  if (microId.includes("infinitif") || microId.includes("groupe")) return fromConjItem(generateInfinitifItem({ sansSaisie }));
+  return fromConjItem(generateConjugationItem("present", { sansSaisie }));
 }
 
 function grammaireQuestion(microId: string): Generated {
