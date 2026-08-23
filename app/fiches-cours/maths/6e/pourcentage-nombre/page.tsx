@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-6e-pourcentages";
 
 export const metadata: Metadata = {
-  title: "Les pourcentages — fiche de cours 6e",
+  title: "Les pourcentages — 6e : cours et exercices corrigés",
   description:
     "Définition, lien avec les fractions et les décimaux, exemples corrigés et exercices : la fiche de cours complète des pourcentages en 6e, à lire, imprimer ou réviser en flashcards.",
 };

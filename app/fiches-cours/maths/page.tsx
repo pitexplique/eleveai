@@ -3,10 +3,20 @@ import type { Metadata } from "next";
 import { ArrowLeft, BookOpen, ChevronRight, Download, FileText, MessageCircle } from "lucide-react";
 import { listerFiches } from "@/lib/fiches/registre";
 
+// ⭐ 23/08/2026 — LE TITRE PORTE CE QU'ON TAPE, PAS CE QU'ON VEND.
+// « Fiche de cours » est le nom de la COLLECTION : il reste dans le fil
+// d'Ariane, dans le corps de la page et dans le surtitre des cartes de
+// l'accueil. Le `title`, lui, sert à être trouvé — et la requête historique du
+// soutien scolaire en France est « cours et exercices corrigés ». « Fiche » n'y
+// pèse aucun volume : c'est du vocabulaire de vendeur.
+// ⚠️ « exercices résolus » est la même chose dite au Maroc, en Algérie et en
+// Belgique. Il n'entre pas dans les 27 titres de fiches — ce serait de
+// l'empilement de mots-clés, et Google le lit comme tel. Il est écrit UNE fois
+// par sommaire, dans une phrase qui se lit.
 export const metadata: Metadata = {
-  title: "Fiches de cours Maths",
+  title: "Maths : cours et exercices corrigés (CM2, 6e, 5e, 1re)",
   description:
-    "Fiches de cours de mathématiques eleveai.fr à lire en ligne ou à télécharger en PDF.",
+    "Cours, méthodes et exercices corrigés (ou exercices résolus) en maths, du CM2 à la Première : à lire en ligne ou à imprimer en PDF.",
 };
 
 // Généré depuis le registre : toute fiche ajoutée à FICHES_REGISTRE apparaît

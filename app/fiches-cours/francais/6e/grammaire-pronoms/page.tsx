@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/francais-6e-grammaire-pronoms";
 
 export const metadata: Metadata = {
-  title: "Les pronoms personnels et leur antécédent — fiche de cours 6e",
+  title: "Les pronoms personnels — 6e : cours et exercices corrigés",
   description:
     "Reconnaître un pronom personnel sujet ou complément, préciser sa fonction et retrouver son antécédent dans le texte : la fiche de cours de grammaire 6e, chaque reprise dessinée sur la phrase, avec exemples corrigés et exercices — à lire, imprimer ou réviser en flashcards.",
 };

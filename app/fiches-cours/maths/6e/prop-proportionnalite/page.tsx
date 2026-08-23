@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/maths-6e-proportionnalite";
 
 export const metadata: Metadata = {
-  title: "Proportionnalité — fiche de cours 6e",
+  title: "Proportionnalité — 6e : cours et exercices corrigés",
   description:
     "Définition, propriétés, exemples corrigés et exercices : la fiche de cours complète de la proportionnalité en 6e, à lire, imprimer ou réviser en flashcards.",
 };

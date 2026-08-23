@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/francais-6e-phrase-complexe";
 
 export const metadata: Metadata = {
-  title: "Se repérer dans la phrase complexe — fiche de cours 6e",
+  title: "Se repérer dans la phrase complexe — 6e : cours et exercices corrigés",
   description:
     "Comprendre la notion de proposition, compter les propositions d'une phrase, distinguer juxtaposition, coordination et subordination, et savoir ce que fait chaque sorte de conjonction : la fiche de cours de grammaire 6e, chaque phrase dessinée, avec exemples corrigés et exercices.",
 };

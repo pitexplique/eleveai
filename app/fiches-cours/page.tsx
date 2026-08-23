@@ -2,10 +2,20 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, BookOpen, Sparkles } from "lucide-react";
 
+// ⭐ 23/08/2026 — LE TITRE PORTE CE QU'ON TAPE, PAS CE QU'ON VEND.
+// « Fiche de cours » est le nom de la COLLECTION : il reste dans le fil
+// d'Ariane, dans le corps de la page et dans le surtitre des cartes de
+// l'accueil. Le `title`, lui, sert à être trouvé — et la requête historique du
+// soutien scolaire en France est « cours et exercices corrigés ». « Fiche » n'y
+// pèse aucun volume : c'est du vocabulaire de vendeur.
+// ⚠️ « exercices résolus » est la même chose dite au Maroc, en Algérie et en
+// Belgique. Il n'entre pas dans les 27 titres de fiches — ce serait de
+// l'empilement de mots-clés, et Google le lit comme tel. Il est écrit UNE fois
+// par sommaire, dans une phrase qui se lit.
 export const metadata: Metadata = {
   title: "Fiches de cours",
   description:
-    "Fiches de cours eleveai.fr par matière, à lire en ligne ou à télécharger en PDF.",
+    "Toutes les fiches EleveAI par matière : cours et exercices corrigés, à lire en ligne ou à télécharger en PDF.",
 };
 
 // Une « porte » par matière. Ajouter une entrée quand une matière a son index.

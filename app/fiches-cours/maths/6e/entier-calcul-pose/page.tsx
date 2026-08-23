@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-6e-calcul-pose";
 
 export const metadata: Metadata = {
-  title: "Le calcul posé — fiche de cours 6e",
+  title: "Le calcul posé — 6e : cours et exercices corrigés",
   description:
     "Définition, méthode, exemples corrigés et exercices : la fiche de cours complète du calcul posé (addition, soustraction, multiplication, division) en 6e, à lire, imprimer ou réviser en flashcards.",
 };

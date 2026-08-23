@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/francais-6e-conjugaison-valeurs";
 
 export const metadata: Metadata = {
-  title: "La valeur des temps : raconter ou parler — fiche de cours 6e",
+  title: "La valeur des temps — 6e : cours et exercices corrigés",
   description:
     "Distinguer les temps du récit (imparfait, passé simple, plus-que-parfait) des temps du discours (présent, passé composé, futur), séparer le décor de l'action dans un récit, et employer le temps qui convient au sens de la phrase : la fiche de cours de conjugaison 6e, chaque phrase dessinée et comparée.",
 };

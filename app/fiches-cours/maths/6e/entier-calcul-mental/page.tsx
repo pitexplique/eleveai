@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/maths-6e-calcul-mental";
 
 export const metadata: Metadata = {
-  title: "Le calcul mental — fiche de cours 6e",
+  title: "Le calcul mental — 6e : cours et exercices corrigés",
   description:
     "Décomposer, passer par les dizaines, utiliser les tables : la fiche de cours complète du calcul mental en 6e, avec astuces, exemples corrigés et exercices, à lire, imprimer ou réviser en flashcards.",
 };

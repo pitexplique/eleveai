@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-6e-perimetres";
 
 export const metadata: Metadata = {
-  title: "Les périmètres — fiche de cours 6e",
+  title: "Les périmètres — 6e : cours et exercices corrigés",
   description:
     "Définition, formules du carré et du rectangle, exemples corrigés et exercices : la fiche de cours complète des périmètres en 6e, à lire, imprimer ou réviser en flashcards.",
 };

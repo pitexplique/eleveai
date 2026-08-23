@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-6e-longueurs";
 
 export const metadata: Metadata = {
-  title: "Les longueurs — fiche de cours 6e",
+  title: "Les longueurs — 6e : cours et exercices corrigés",
   description:
     "Définition, unités, conversions, exemples corrigés et exercices : la fiche de cours complète des longueurs en 6e, à lire, imprimer ou réviser en flashcards.",
 };

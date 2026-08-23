@@ -6,7 +6,7 @@ import FicheCoursClient from "@/components/fiches/FicheCoursClient";
 import { ficheDonnees6e, slidesDonnees6e } from "@/lib/fiches/maths-6e-donnees";
 
 export const metadata: Metadata = {
-  title: "Lire et interpréter des données — fiche de cours 6e",
+  title: "Lire et interpréter des données — 6e : cours et exercices corrigés",
   description:
     "Lire un tableau, un graphique en barres et un diagramme circulaire, prélever une information, comparer et interpréter : la fiche de cours complète de 6e avec exemples corrigés et exercices, à lire, imprimer ou réviser en flashcards.",
 };
