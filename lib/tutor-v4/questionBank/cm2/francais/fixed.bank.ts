@@ -186,7 +186,12 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
     "cm2_oeuvre_experience",
     2,
     "Relier une lecture à son expérience, c'est...",
-    ["compter les pages du livre", "penser à un moment de sa vie qui ressemble à l'histoire", "copier le résumé au dos", "chercher l'âge de l'auteur"],
+    [
+      "raconter l'histoire à quelqu'un qui ne l'a pas lue",
+      "penser à un moment de sa vie qui ressemble à l'histoire",
+      "chercher si l'auteur a vraiment vécu cette histoire",
+      "dire si on a aimé le livre et expliquer pourquoi",
+    ],
     "penser à un moment de sa vie qui ressemble à l'histoire",
     "On relie l'histoire à ce qu'on a soi-même vécu ou ressenti."
   ),
@@ -258,7 +263,12 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
     "cm2_ecrit_paragraphe",
     2,
     "Quand on change d'idée dans un texte, on...",
-    ["écrit tout d'un seul bloc", "va à la ligne pour commencer un nouveau paragraphe", "met plusieurs points d'affilée", "efface la phrase précédente"],
+    [
+      "ajoute un titre pour annoncer la nouvelle partie",
+      "va à la ligne pour commencer un nouveau paragraphe",
+      "met un point-virgule pour marquer la séparation",
+      "continue à la suite, en changeant de connecteur",
+    ],
     "va à la ligne pour commencer un nouveau paragraphe",
     "Chaque nouvelle idée mérite un nouveau paragraphe, en allant à la ligne."
   ),
@@ -278,7 +288,12 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
     "cm2_ecrit_reviser",
     3,
     "Pour enrichir la phrase « Le chien court. », on peut écrire...",
-    ["Chien court.", "Le grand chien noir court dans le jardin.", "Le chien.", "Court le chien court."],
+    [
+      "Le chien court, le chien court, le chien court.",
+      "Le grand chien noir court dans le jardin.",
+      "Le chien court vite et le chat dort tranquille.",
+      "Le chien qui court est un chien qui court.",
+    ],
     "Le grand chien noir court dans le jardin.",
     "Enrichir un texte, c'est ajouter des précisions (adjectifs, compléments) tout en gardant une phrase correcte."
   ),
@@ -320,7 +335,14 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
     "cm2_oral_argumenter",
     2,
     "Pour appuyer ton avis « Ce livre est drôle », tu ajoutes...",
-    ["un exemple : « la scène du gâteau m'a fait rire »", "seulement « parce que »", "rien de plus", "« c'est comme ça »"],
+    // Trois VRAIS sophismes à la place de trois blagues — répétition, ralliement,
+    // argument de nombre. On gagne l'équilibre des longueurs ET l'exercice.
+    [
+      "une deuxième fois ton avis, en parlant plus fort",
+      "un exemple : « la scène du gâteau m'a fait rire »",
+      "que beaucoup de gens trouvent ce livre drôle",
+      "l'avis d'un camarade qui pense la même chose",
+    ],
     "un exemple : « la scène du gâteau m'a fait rire »",
     "Un bon argument s'appuie sur une preuve ou un exemple précis."
   ),
@@ -680,7 +702,12 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
     "cm2_complexe_pronom_relatif",
     2,
     "Dans « Voici le livre que j'ai adoré », le mot « que » sert à...",
-    ["poser une question", "relier une précision au mot « livre »", "donner un ordre", "compter les livres"],
+    [
+      "remplacer le nom pour éviter de le répéter",
+      "relier une précision au mot « livre »",
+      "introduire une question sur le livre choisi",
+      "marquer la comparaison entre deux livres",
+    ],
     "relier une précision au mot « livre »",
     "« que » est un pronom relatif : il relie la proposition « j'ai adoré » au nom « livre »."
   ),

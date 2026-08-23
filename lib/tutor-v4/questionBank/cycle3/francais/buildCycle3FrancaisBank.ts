@@ -346,7 +346,11 @@ const DOCUMENT: QcmItem[] = [
   {
     text: "Un graphique a pour titre : 'Nombre de livres lus par mois'.\n\nQue lit-on sur ce graphique ?",
     correct: "combien de livres sont lus chaque mois",
-    wrongs: ["le prix des livres", "le nom des auteurs", "la taille des livres"],
+    wrongs: [
+      "combien de mois il faut pour lire un livre",
+      "combien de personnes ont lu chaque livre",
+      "quels livres ont été lus pendant l'année",
+    ],
     methode: "Le titre d'un graphique annonce ce qu'il montre.",
   },
 ];
@@ -643,7 +647,11 @@ const ORAL: QcmItem[] = [
   {
     text: "Pour raconter un souvenir à l'oral, on parle...",
     correct: "clairement, dans l'ordre des événements",
-    wrongs: ["en mélangeant tout","sans faire de phrases","sans jamais respirer"],
+    wrongs: [
+      "en donnant le plus de détails possible, sans trier",
+      "en commençant par la fin, pour donner envie",
+      "vite, pour ne pas ennuyer ceux qui écoutent",
+    ],
     methode: "L'ordre aide à se faire comprendre.",
   },
   {
@@ -667,7 +675,11 @@ const ORAL: QcmItem[] = [
   {
     text: "Écouter quelqu'un jusqu'au bout permet de...",
     correct: "vraiment comprendre ce qu'il veut dire",
-    wrongs: ["l'empêcher de parler","gagner un concours","changer de sujet"],
+    wrongs: [
+      "préparer sa réponse pendant qu'il parle encore",
+      "montrer qu'on est poli, même sans écouter",
+      "repérer les fautes qu'il fait en parlant",
+    ],
     methode: "L'écoute complète la compréhension.",
   },
   {
@@ -1318,7 +1330,11 @@ const SUJET_VERBE: QcmItem[] = [
   {
     text: "Le verbe conjugué est le mot qui...",
     correct: "change avec le temps et la personne",
-    wrongs: ["ne change jamais","donne une couleur","montre un lieu"],
+    wrongs: [
+      "se termine toujours par -er, -ir ou -re",
+      "porte l'accent le plus fort dans la phrase",
+      "se place toujours juste après le sujet",
+    ],
     methode: "Le verbe se conjugue.",
   },
   {
@@ -2316,9 +2332,9 @@ const ACCORD_ATTRIBUT: QcmItem[] = [
     text: "« Ma sœur est devenue institutrice. » Pourquoi « institutrice » ?",
     correct: "Parce que le sujet « Ma sœur » est féminin singulier",
     wrongs: [
-      "Parce que le verbe est au passé",
-      "Parce que c'est un nom de métier",
-      "Parce qu'il y a le mot « devenue »",
+      "Parce que « devenue » est déjà au féminin singulier",
+      "Parce qu'un nom de métier s'accorde avec la personne",
+      "Parce que le complément suit toujours le verbe d'état",
     ],
     methode: "Un attribut peut être un nom : il s'accorde quand même avec le sujet.",
   },
@@ -3091,9 +3107,9 @@ const MANIPULATIONS: QcmItem[] = [
     text: "En quoi consiste l'addition ?",
     correct: "à ajouter un mot pour éprouver la phrase",
     wrongs: [
-      "à supprimer un mot",
-      "à déplacer un groupe",
-      "à conjuguer le verbe",
+      "à ajouter un mot pour rendre la phrase plus jolie",
+      "à additionner les mots pour mesurer la phrase",
+      "à ajouter une phrase pour allonger le texte",
     ],
     methode: "Ajouter un adjectif, une négation… et regarder ce qui résiste.",
   },
@@ -4196,11 +4212,15 @@ const RADICAL_TROISIEME_GROUPE: QcmItem[] = [
   },
   {
     text: "Pourquoi « je viens » et « nous venons » n'ont-ils pas le même radical ?",
-    correct: "Parce que certains verbes du 3e groupe changent de radical selon la personne",
+    // ⚠️ Écrit le matin même, et repris l'après-midi : la bonne réponse faisait
+    // 27 caractères de plus que le plus long leurre. Elle est raccourcie ET les
+    // leurres deviennent de vraies confusions — deux verbes pour un, le temps
+    // confondu avec la personne, la règle du « e » avec « nous ».
+    correct: "Parce qu'au 3e groupe le radical change selon la personne",
     wrongs: [
-      "Parce que ce sont deux verbes différents",
-      "Parce que le pluriel supprime toujours une lettre",
-      "Parce qu'on a fait une faute dans l'un des deux",
+      "Parce que « je viens » vient d'un autre verbe que « nous venons »",
+      "Parce que le radical change chaque fois qu'on change de temps",
+      "Parce qu'on ajoute toujours un « e » au radical avec « nous »",
     ],
     methode: "C'est le même verbe : seul le radical varie, comme au premier groupe mais davantage.",
   },
@@ -4531,7 +4551,11 @@ const MERVEILLEUX: QcmItem[] = [
   {
     text: "Un récit étrange laisse souvent le lecteur…",
     correct: "avec un doute : rêve, folie, ou réalité ?",
-    wrongs: ["avec une réponse claire", "avec une morale écrite", "avec une liste d'objets"],
+    wrongs: [
+      "avec une explication surnaturelle assumée",
+      "avec la certitude que tout était un rêve",
+      "avec une morale à retenir pour plus tard",
+    ],
     methode: "Le doute n'est pas un défaut du récit : c'est son effet.",
   },
   {
@@ -4906,7 +4930,11 @@ const POESIE: QcmItem[] = [
   {
     text: "Un recueil de poèmes, c'est…",
     correct: "un livre qui rassemble plusieurs poèmes",
-    wrongs: ["un poème très long", "un roman écrit en vers", "un dictionnaire"],
+    wrongs: [
+      "un poème que plusieurs auteurs ont écrit ensemble",
+      "un livre qui explique comment écrire un poème",
+      "un long poème découpé en plusieurs parties",
+    ],
     methode: "Recueillir : rassembler.",
   },
   {
@@ -6221,9 +6249,9 @@ const MISE_EN_VOIX: QcmItem[] = [
     text: "Avant de lire un texte long devant la classe, la meilleure préparation est de…",
     correct: "le lire d'abord en silence pour repérer les mots difficiles",
     wrongs: [
-      "le lire une seule fois, très vite",
-      "n'apprendre que le titre et la fin",
-      "le découvrir directement devant le public",
+      "s'entraîner devant un miroir en travaillant les gestes",
+      "le lire à voix haute une fois, le plus vite possible",
+      "apprendre par cœur le début pour bien démarrer",
     ],
     methode: "Le BO demande une lecture « travaillée en amont » : on anticipe ce qui fera buter.",
   },
@@ -6240,7 +6268,11 @@ const MISE_EN_VOIX: QcmItem[] = [
   {
     text: "« — Attends-moi ! » cria Léa. Quel ton faut-il prendre ?",
     correct: "une voix plus forte, comme un appel",
-    wrongs: ["une voix chuchotée", "une voix moqueuse", "une voix monotone"],
+    wrongs: [
+      "une voix douce, pour ne pas réveiller les autres",
+      "une voix grave, en détachant bien chaque mot",
+      "une voix rapide et sans aucune pause",
+    ],
     methode: "Le point d'exclamation et le verbe « cria » commandent le volume.",
   },
   {
@@ -6659,9 +6691,9 @@ const ECRIT_RESUMER: QcmItem[] = [
     text: "Pour résumer une page, par quoi commence-t-on ?",
     correct: "par repérer l'idée principale de chaque paragraphe",
     wrongs: [
-      "par recopier la première phrase",
-      "par compter les lignes",
-      "par la conclusion de l'auteur",
+      "par compter les paragraphes pour connaitre la longueur",
+      "par recopier la première et la dernière phrase",
+      "par supprimer tous les mots qu'on ne comprend pas",
     ],
     methode: "Le résumé se construit sur les idées, pas sur l'ordre d'apparition des phrases.",
   },
@@ -6674,7 +6706,11 @@ const ECRIT_RESUMER: QcmItem[] = [
   {
     text: "Qu'est-ce qu'on SUPPRIME en priorité dans un résumé ?",
     correct: "les détails qui ne changent pas l'histoire",
-    wrongs: ["le nom du héros", "la fin", "le problème du récit"],
+    wrongs: [
+      "les passages où le héros ne parle pas",
+      "tout ce qui se passe avant le problème",
+      "les mots qu'on ne comprend pas bien",
+    ],
     methode: "Test : si l'histoire tient sans ce détail, il sort du résumé.",
   },
   {
@@ -6697,9 +6733,9 @@ const ECRIT_RESUMER: QcmItem[] = [
     text: "Reformuler l'essentiel d'une leçon « de manière schématique », c'est…",
     correct: "la mettre en schéma, en flèches ou en tableau",
     wrongs: [
-      "la recopier en plus petit",
-      "n'en garder que le titre",
-      "l'apprendre par cœur",
+      "la réécrire en phrases plus courtes et plus simples",
+      "la recopier en changeant l'ordre des paragraphes",
+      "n'en garder que les mots écrits en gras",
     ],
     methode: "Le schéma montre les liens entre les idées : c'est une autre façon d'écrire pour apprendre.",
   },
@@ -6723,9 +6759,9 @@ const ECRIT_RESUMER: QcmItem[] = [
     text: "Pourquoi écrire pour apprendre une leçon ?",
     correct: "parce que reformuler avec ses mots aide à retenir",
     wrongs: [
-      "pour remplir son cahier",
-      "pour aller plus vite",
-      "parce que c'est obligatoire",
+      "parce qu'une leçon recopiée s'apprend mieux",
+      "parce que le professeur vérifie le cahier",
+      "parce qu'on écrit plus vite qu'on ne lit",
     ],
     methode: "Le BO parle d'« écrire pour réfléchir, apprendre et mémoriser » : écrire fixe.",
   },
@@ -6770,9 +6806,9 @@ const ECRIT_COHERENCE: QcmItem[] = [
     text: "Pourquoi remplacer « le pêcheur » par « il » dans la phrase suivante ?",
     correct: "pour éviter la répétition sans changer de personnage",
     wrongs: [
-      "pour raccourcir la phrase",
-      "pour parler de quelqu'un d'autre",
-      "parce que la grammaire l'oblige",
+      "pour montrer qu'on parle maintenant d'un autre homme",
+      "parce qu'un nom ne se répète jamais dans un texte",
+      "pour raccourcir la phrase et gagner de la place",
     ],
     methode: "Les reprises tissent le texte : c'est aussi de la cohérence.",
   },
@@ -6797,7 +6833,11 @@ const ECRIT_COHERENCE: QcmItem[] = [
   {
     text: "Ton texte raconte à la 1re personne, puis dit « il pensa ». C'est…",
     correct: "un changement de point de vue non justifié",
-    wrongs: ["une bonne idée de style", "une faute d'accord", "une reprise nominale"],
+    wrongs: [
+      "une erreur de conjugaison sur le verbe penser",
+      "une reprise nominale mal choisie dans la phrase",
+      "un changement de temps entre les deux phrases",
+    ],
     methode: "Qui raconte doit rester le même du début à la fin, sauf choix assumé.",
   },
   {
@@ -6819,7 +6859,11 @@ const ECRIT_COHERENCE: QcmItem[] = [
   {
     text: "Ton récit passe d'un lieu à un autre sans prévenir. Que faut-il ajouter ?",
     correct: "une phrase ou un connecteur de lieu",
-    wrongs: ["un titre", "un dialogue", "une nouvelle page"],
+    wrongs: [
+      "un nouveau paragraphe, sans rien écrire d'autre",
+      "une description du nouveau lieu, très détaillée",
+      "un dialogue pour expliquer le déplacement",
+    ],
     methode: "Le lecteur ne voit pas ce que tu imagines : les changements se signalent.",
   },
 ];
@@ -6828,7 +6872,11 @@ const ECRIT_REVISER: QcmItem[] = [
   {
     text: "À quoi sert un brouillon ?",
     correct: "à essayer, raturer et réorganiser avant la version finale",
-    wrongs: ["à écrire le texte définitif", "à faire joli", "à compter les mots"],
+    wrongs: [
+      "à écrire une première version qu'on recopiera au propre",
+      "à noter ses idées en vrac avant de les oublier",
+      "à s'entraîner sans que personne ne le corrige",
+    ],
     methode: "Le brouillon est un écrit À RETRAVAILLER : les ratures y sont un signe de travail.",
   },
   {
@@ -6850,13 +6898,21 @@ const ECRIT_REVISER: QcmItem[] = [
   {
     text: "Un camarade te dit : « On ne comprend pas qui parle. » Que fais-tu ?",
     correct: "tu ajoutes des tirets et tu nommes les personnages",
-    wrongs: ["tu effaces le dialogue", "tu écris plus gros", "tu ajoutes un titre"],
+    wrongs: [
+      "tu ajoutes des guillemets au début et à la fin",
+      "tu mets les noms des personnages dans le titre",
+      "tu réécris le passage sans aucun dialogue",
+    ],
     methode: "Améliorer à partir d'une remarque, c'est agir précisément sur ce qui a gêné.",
   },
   {
     text: "Combien de fois faut-il relire un texte avant de le rendre ?",
     correct: "au moins deux fois, avec un but différent à chaque fois",
-    wrongs: ["une seule fois suffit", "dix fois", "aucune, si on a bien écrit"],
+    wrongs: [
+      "deux fois de suite, en cherchant les mêmes choses",
+      "une seule fois, mais lentement et jusqu'au bout",
+      "autant de fois qu'il reste des fautes à trouver",
+    ],
     methode: "Une relecture pour le sens, une pour l'orthographe : on ne voit pas les deux à la fois.",
   },
   {
@@ -6901,9 +6957,9 @@ const ECRIT_REVISER: QcmItem[] = [
     text: "Pourquoi relire son texte à voix basse ?",
     correct: "parce que l'oreille entend ce que l'œil saute",
     wrongs: [
-      "pour aller plus vite",
-      "pour apprendre le texte",
-      "pour vérifier l'écriture",
+      "parce que les fautes d'accord s'entendent toutes",
+      "parce que cela aide à retenir le texte par cœur",
+      "parce qu'on lit plus lentement à voix basse",
     ],
     methode: "Un mot manquant s'entend souvent avant de se voir.",
   },
