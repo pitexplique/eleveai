@@ -1168,14 +1168,45 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
-     DONNEES
+     MENER UNE ENQUÊTE ET CONSTRUIRE UN TABLEAU
+     ⛔ Ouverte le 23/08/2026. Tout le chapitre des données était en LECTURE
+     SEULE : les sept micros de `stat_donnee` lisaient un tableau, un graphique,
+     un diagramme, et interprétaient — l'élève recevait toujours des données
+     déjà faites. Or le programme de 6e ouvre par le geste inverse, PRODUIRE les
+     données : planifier l'enquête, mesurer, consigner, construire le tableau.
+     Trois objectifs (6e-D-donnees-1, -2, -3) sans aucune micro.
+     ⭐ `stat_donnee_lire_tableau` REJOINT cette notion : construire un tableau
+     et le lire sont les deux faces du même objet. `stat_donnee` retombe ainsi
+     à six micros, dans la règle.
   ========================= */
+  {
+    id: "stat_enquete_planifier",
+    label: "Planifier une enquête et recueillir des données",
+    notionId: "stat_enquete",
+    prerequis: [],
+  },
+  {
+    id: "stat_enquete_mesurer",
+    label: "Réaliser des mesures et les consigner",
+    notionId: "stat_enquete",
+    prerequis: ["stat_enquete_planifier"],
+  },
+  {
+    id: "stat_construire_tableau",
+    label: "Construire un tableau d’effectifs",
+    notionId: "stat_enquete",
+    prerequis: ["stat_enquete_mesurer"],
+  },
   {
     id: "stat_donnee_lire_tableau",
     label: "Lire un tableau",
-    notionId: "stat_donnee",
+    notionId: "stat_enquete",
     prerequis: [],
   },
+
+  /* =========================
+     DONNEES
+  ========================= */
   {
     id: "stat_donnee_lire_graphique",
     label: "Lire un graphique",

@@ -40,7 +40,7 @@ export const donneesBank: TutorBankItemV4[] = [
     id: "6e_stat_stat_stat_donnee_lire_tableau_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "stat_donnee",
+    notionId: "stat_enquete",
     microId: "stat_donnee_lire_tableau",
     difficulty: 1,
     theme: "neutral",
@@ -73,7 +73,7 @@ export const donneesBank: TutorBankItemV4[] = [
     id: "6e_stat_stat_stat_donnee_lire_tableau_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "stat_donnee",
+    notionId: "stat_enquete",
     microId: "stat_donnee_lire_tableau",
     difficulty: 2,
     theme: "reunion",
@@ -118,7 +118,7 @@ export const donneesBank: TutorBankItemV4[] = [
     id: "6e_stat_stat_stat_donnee_lire_tableau_open_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "stat_donnee",
+    notionId: "stat_enquete",
     microId: "stat_donnee_lire_tableau",
     difficulty: 3,
     theme: "neutral",
@@ -656,7 +656,7 @@ export const donneesBank: TutorBankItemV4[] = [
     id: "6e_stat_stat_stat_donnee_lire_tableau_erreur_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "stat_donnee",
+    notionId: "stat_enquete",
     microId: "stat_donnee_lire_tableau",
     difficulty: 3,
     theme: "neutral",
@@ -849,7 +849,7 @@ export const donneesBank: TutorBankItemV4[] = [
     id: "6e_stat_stat_stat_donnee_lire_tableau_open_2_ligne_colonne",
     niveau: "6e",
     matiere: "maths",
-    notionId: "stat_donnee",
+    notionId: "stat_enquete",
     microId: "stat_donnee_lire_tableau",
     difficulty: 4,
     theme: "neutral",
@@ -871,7 +871,7 @@ export const donneesBank: TutorBankItemV4[] = [
     id: "6e_stat_stat_stat_donnee_lire_tableau_tpl_2_total_colonne",
     niveau: "6e",
     matiere: "maths",
-    notionId: "stat_donnee",
+    notionId: "stat_enquete",
     microId: "stat_donnee_lire_tableau",
     difficulty: 3,
     theme: "neutral",
@@ -1569,7 +1569,7 @@ export const donneesBank: TutorBankItemV4[] = [
   {
     kind: "fixed",
     id: "6e_stat_lire_tableau_topup_1",
-    niveau: "6e", matiere: "maths", notionId: "stat_donnee", microId: "stat_donnee_lire_tableau",
+    niveau: "6e", matiere: "maths", notionId: "stat_enquete", microId: "stat_donnee_lire_tableau",
     difficulty: 1, theme: "neutral",
     text: "Dans le tableau, combien d’élèves font de la natation ?",
     format: "short", expected: ["8"], comparator: "number_equal",
@@ -1585,7 +1585,7 @@ export const donneesBank: TutorBankItemV4[] = [
   {
     kind: "fixed",
     id: "6e_stat_lire_tableau_topup_2",
-    niveau: "6e", matiere: "maths", notionId: "stat_donnee", microId: "stat_donnee_lire_tableau",
+    niveau: "6e", matiere: "maths", notionId: "stat_enquete", microId: "stat_donnee_lire_tableau",
     difficulty: 1, theme: "neutral",
     text: "Quelle activité a été choisie par 12 élèves ?",
     format: "qcm", choices: ["Football", "Natation", "Danse", "Tennis"], expected: ["Football"], comparator: "mcq_exact",
@@ -1601,7 +1601,7 @@ export const donneesBank: TutorBankItemV4[] = [
   {
     kind: "fixed",
     id: "6e_stat_lire_tableau_topup_3",
-    niveau: "6e", matiere: "maths", notionId: "stat_donnee", microId: "stat_donnee_lire_tableau",
+    niveau: "6e", matiere: "maths", notionId: "stat_enquete", microId: "stat_donnee_lire_tableau",
     difficulty: 2, theme: "reunion",
     text: "Au marché, combien de mangues ont été vendues l’après-midi ?",
     format: "short", expected: ["9"], comparator: "number_equal",
@@ -1618,7 +1618,7 @@ export const donneesBank: TutorBankItemV4[] = [
   {
     kind: "fixed",
     id: "6e_stat_lire_tableau_topup_4",
-    niveau: "6e", matiere: "maths", notionId: "stat_donnee", microId: "stat_donnee_lire_tableau",
+    niveau: "6e", matiere: "maths", notionId: "stat_enquete", microId: "stat_donnee_lire_tableau",
     difficulty: 1, theme: "neutral",
     text: "Combien d’élèves font de la danse ?",
     format: "qcm", choices: ["10", "8", "12", "30"], expected: ["10"], comparator: "mcq_exact",
@@ -1889,5 +1889,599 @@ export const donneesBank: TutorBankItemV4[] = [
     explanation: se("un défi peut demander un calcul en deux étapes.", "on retire les élèves de football au total.", "30 - 12 = 18.", "18 élèves ne font pas de football."),
     tags: ["stat_donnee", "defi", "canvas"],
     canvas: tableauDonneesCanvas({ title: "Activités choisies", headers: ["Nombre d’élèves"], rows: [{ label: "Football", values: [12] }, { label: "Natation", values: [8] }, { label: "Danse", values: [10] }] }),
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // STAT_ENQUETE_PLANIFIER — décider ce qu'on mesure, sur qui, et comment
+  //
+  // ⛔ OUVERTE LE 23/08/2026 — TROU DU PROGRAMME (6e-D-donnees-1) : « planifier
+  // une enquête et recueillir des données ».
+  //
+  // ⭐ TOUT LE CHAPITRE DES DONNÉES ÉTAIT EN LECTURE SEULE. Les sept micros de
+  // `stat_donnee` lisent un tableau, lisent un graphique, prélèvent, comparent,
+  // interprètent — on servait à l'élève des données toujours déjà faites. Or le
+  // programme de 6e ouvre par le geste inverse : les PRODUIRE. C'est le premier
+  // endroit où l'élève décide de ce qu'il mesure, et donc le premier où il peut
+  // se tromper avant même le moindre calcul.
+  //
+  // ⚠️ LE BIAIS D'ÉCHANTILLON EST LE CŒUR DU SUJET, pas une finesse : interroger
+  // les seuls adhérents de l'association sportive pour connaître le sport
+  // préféré du collège donne un résultat FAUX, sans qu'aucun calcul ne soit
+  // faux. C'est la compétence d'esprit critique que le programme vise ici.
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    kind: "fixed",
+    id: "stat_enquete_planifier_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_enquete",
+    microId: "stat_enquete_planifier",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Tu veux savoir quel sport est le plus pratiqué dans ta classe. Que faut-il décider EN PREMIER ?",
+    format: "qcm",
+    choices: [
+      "la question exacte à poser et à qui on la pose",
+      "la couleur du diagramme final",
+      "le nombre de colonnes du tableau",
+      "la moyenne qu'on va calculer",
+    ],
+    expected: ["la question exacte à poser et à qui on la pose"],
+    comparator: "mcq_exact",
+    hint: "Avant de recueillir, il faut savoir ce qu'on cherche.",
+    explanation: se(
+      "planifier une enquête, c'est décider ce qu'on cherche, auprès de qui, et comment on l'enregistre — avant de recueillir quoi que ce soit.",
+      "on fixe la question, la population interrogée, puis la façon de noter les réponses.",
+      "Le tableau, le diagramme et les calculs viennent après : ils ne servent à rien si la question est floue ou si on interroge les mauvaises personnes. Une enquête mal planifiée ne se rattrape pas au moment des calculs.",
+      "on décide d'abord la question et la population."
+    ),
+    tags: ["stat_enquete", "planifier", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "stat_enquete_planifier_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_enquete",
+    microId: "stat_enquete_planifier",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pour connaître le sport préféré des élèves du collège, Léa interroge uniquement les élèves inscrits à l'association sportive. Que peut-on dire de son enquête ?",
+    format: "qcm",
+    choices: [
+      "les personnes interrogées ne représentent pas tout le collège : le résultat sera faussé",
+      "l'enquête est fiable, car ces élèves connaissent bien le sport",
+      "l'enquête est fiable si elle interroge au moins 30 élèves",
+      "l'enquête est fausse parce qu'elle n'a pas fait de calcul",
+    ],
+    expected: [
+      "les personnes interrogées ne représentent pas tout le collège : le résultat sera faussé",
+    ],
+    comparator: "mcq_exact",
+    hint: "Qui n'a AUCUNE chance d'être interrogé ?",
+    explanation: se(
+      "les personnes interrogées doivent représenter l'ensemble sur lequel on veut conclure.",
+      "on se demande qui a une chance d'être interrogé, et qui n'en a aucune.",
+      "Les élèves qui ne font pas de sport n'ont aucune chance d'être interrogés, alors que la question porte sur tout le collège. Le résultat sera donc faussé — et interroger davantage de membres de l'association ne corrige rien : on aggrave même le déséquilibre. Aucun calcul ne peut réparer un recueil mal choisi.",
+      "l'échantillon doit ressembler à la population étudiée."
+    ),
+    tags: ["stat_enquete", "planifier", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "stat_enquete_planifier_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_enquete",
+    microId: "stat_enquete_planifier",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Laquelle de ces questions convient le mieux pour une enquête dont on veut compter les réponses ?",
+    format: "qcm",
+    choices: [
+      "« Combien de fois par semaine fais-tu du sport ? »",
+      "« Aimes-tu un peu le sport, ou pas trop ? »",
+      "« Que penses-tu du sport en général ? »",
+      "« Le sport, c'est important, non ? »",
+    ],
+    expected: ["« Combien de fois par semaine fais-tu du sport ? »"],
+    comparator: "mcq_exact",
+    hint: "Laquelle donne des réponses qu'on peut ranger dans un tableau ?",
+    explanation: se(
+      "une question d'enquête doit appeler une réponse précise, comparable d'une personne à l'autre.",
+      "on vérifie que deux personnes qui répondent la même chose écriront bien la même réponse.",
+      "« Combien de fois par semaine » appelle un nombre : on peut le noter, le compter, le comparer. « Que penses-tu du sport » donne autant de réponses différentes que de personnes, impossibles à additionner. Et « c'est important, non ? » souffle sa réponse — une question qui oriente ne mesure plus rien.",
+      "on garde la question précise et neutre."
+    ),
+    tags: ["stat_enquete", "planifier", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "stat_enquete_planifier_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_enquete",
+    microId: "stat_enquete_planifier",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Demande-toi qui n'a aucune chance d'être interrogé.",
+    tags: ["stat_enquete", "planifier", "template"],
+    generate: () => {
+      const cas = [
+        {
+          sujet: "le temps passé devant les écrans par les élèves du collège",
+          mauvais: "les élèves qui sortent du club informatique",
+          bon: "des élèves tirés au sort dans toutes les classes",
+        },
+        {
+          sujet: "le moyen de transport des élèves pour venir au collège",
+          mauvais: "les élèves qui descendent du bus le matin",
+          bon: "des élèves tirés au sort dans toutes les classes",
+        },
+        {
+          sujet: "le petit-déjeuner des élèves du collège",
+          mauvais: "les élèves qui font la queue à la cafétéria",
+          bon: "des élèves tirés au sort dans toutes les classes",
+        },
+        {
+          sujet: "le livre préféré des élèves du collège",
+          mauvais: "les élèves présents au CDI à midi",
+          bon: "des élèves tirés au sort dans toutes les classes",
+        },
+      ];
+      const c = randomChoice(cas);
+      return {
+        text: `On veut connaître ${c.sujet}. Qui faut-il interroger ?`,
+        format: "qcm",
+        choices: shuffle([
+          c.bon,
+          c.mauvais,
+          "les délégués de chaque classe seulement",
+          "les professeurs du collège",
+        ]),
+        expected: [c.bon],
+        comparator: "mcq_exact",
+        explanation: se(
+          "les personnes interrogées doivent représenter l'ensemble sur lequel on veut conclure.",
+          "on cherche un groupe où chaque élève du collège a une chance d'être choisi.",
+          `Interroger ${c.mauvais} met de côté tous les autres, et fausse le résultat. Les délégués ne sont pas des élèves comme les autres, et les professeurs ne sont pas des élèves du tout. Seul un tirage au sort dans toutes les classes donne à chacun une chance d'être interrogé.`,
+          "on interroge un groupe qui ressemble à toute la population étudiée."
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "stat_enquete_planifier_tpl_ouverte",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_enquete",
+    microId: "stat_enquete_planifier",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Parle de la question, de qui on interroge, et de ce qu'on note.",
+    tags: ["stat_enquete", "planifier", "template", "ouverte"],
+    generate: () => {
+      const cas = [
+        {
+          q: "Explique les étapes à prévoir AVANT de commencer à recueillir les données d'une enquête.",
+          mots: ["question", "qui", "interroge", "noter", "tableau", "avant"],
+          r: "On fixe d'abord la question exacte, formulée de façon que deux personnes d'accord répondent pareil. On décide ensuite qui on interroge, et on vérifie que ce groupe représente bien l'ensemble sur lequel on veut conclure. On prépare enfin la façon de noter les réponses — le plus souvent un tableau, avec une ligne par personne ou une ligne par réponse possible. Tout cela se décide avant, parce qu'aucun calcul ne rattrape une enquête mal préparée.",
+        },
+        {
+          q: "Un élève veut connaître le dessert préféré du collège et interroge dix camarades à la sortie du self. Explique pourquoi son enquête peut donner un résultat faussé.",
+          mots: ["self", "demi-pensionnaires", "externes", "représente", "represente", "dix", "peu"],
+          r: "À la sortie du self, il n'interroge que des demi-pensionnaires : les externes, qui mangent chez eux, n'ont aucune chance d'être choisis. Son groupe ne représente donc pas tout le collège. S'y ajoute un second problème : dix personnes, c'est très peu, et le hasard peut à lui seul faire ressortir un dessert. Un groupe mal choisi et un groupe trop petit faussent le résultat de deux façons différentes.",
+        },
+        {
+          q: "Pourquoi la formulation de la question compte-t-elle autant que le nombre de personnes interrogées ?",
+          mots: ["oriente", "influence", "précise", "precise", "comparer", "même", "meme"],
+          r: "Parce qu'une question mal formulée fausse toutes les réponses à la fois, même si on interroge le collège entier. Une question qui oriente — « le sport, c'est important, non ? » — souffle sa réponse. Une question vague donne des réponses qu'on ne peut ni compter ni comparer. Interroger plus de monde ne fait alors qu'accumuler des réponses inexploitables.",
+        },
+      ];
+      const c = randomChoice(cas);
+      return {
+        text: c.q,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: se(
+          "planifier une enquête, c'est décider ce qu'on cherche, auprès de qui, et comment on l'enregistre.",
+          "on fixe la question, la population, puis le support de recueil.",
+          c.r,
+          "on garde le raisonnement, il vaut pour toute enquête."
+        ),
+      };
+    },
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // STAT_ENQUETE_MESURER — réaliser des mesures et les consigner
+  //
+  // ⛔ OUVERTE LE 23/08/2026 — TROU DU PROGRAMME (6e-D-donnees-2) : « réaliser
+  // des mesures et les consigner dans un tableau ».
+  //
+  // ⚠️ L'UNITÉ SE MET DANS L'EN-TÊTE, PAS DANS CHAQUE CASE. C'est la règle de
+  // présentation que le chapitre installe, et elle sert toute la scolarité :
+  // une colonne « Taille (cm) » se lit d'un coup d'œil, une colonne où chaque
+  // case répète « cm » ne s'additionne plus du regard. Un tableau dont les
+  // mesures ne sont pas dans la même unité est, lui, tout simplement faux.
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    kind: "fixed",
+    id: "stat_enquete_mesurer_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_enquete",
+    microId: "stat_enquete_mesurer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Tu mesures la taille de cinq camarades. Comment consigner ces mesures ?",
+    format: "qcm",
+    choices: [
+      "dans un tableau à deux colonnes : le prénom, et la taille",
+      "de mémoire, on notera à la fin",
+      "dans une seule case, en écrivant tous les nombres à la suite",
+      "dans un tableau à cinq colonnes, une par centimètre",
+    ],
+    expected: ["dans un tableau à deux colonnes : le prénom, et la taille"],
+    comparator: "mcq_exact",
+    hint: "Il faut pouvoir retrouver QUI mesure combien.",
+    explanation: se(
+      "consigner des mesures, c'est les écrire au fur et à mesure, de façon à pouvoir les relire sans ambiguïté.",
+      "on prévoit une colonne pour ce qu'on identifie et une colonne pour ce qu'on mesure.",
+      "Deux colonnes suffisent : l'une dit de qui il s'agit, l'autre donne la mesure. Écrire les nombres à la suite dans une seule case fait perdre à qui appartient chaque taille, et se fier à sa mémoire fait perdre les données elles-mêmes. On note pendant qu'on mesure, jamais après.",
+      "on garde un tableau à deux colonnes."
+    ),
+    tags: ["stat_enquete", "mesurer", "canvas", "qcm"],
+    canvas: tableauDonneesCanvas({
+      title: "Taille des élèves",
+      headers: ["Taille (cm)"],
+      rows: [
+        { label: "Alice", values: [152] },
+        { label: "Bilal", values: [148] },
+        { label: "Chloé", values: [155] },
+        { label: "Dylan", values: [161] },
+        { label: "Élodie", values: [149] },
+      ],
+    }),
+  },
+  {
+    kind: "fixed",
+    id: "stat_enquete_mesurer_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_enquete",
+    microId: "stat_enquete_mesurer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Où faut-il écrire l'unité des mesures dans un tableau ?",
+    format: "qcm",
+    choices: [
+      "une seule fois, dans l'en-tête de la colonne",
+      "dans chaque case, après le nombre",
+      "nulle part, l'unité se devine",
+      "seulement sur la première et la dernière ligne",
+    ],
+    expected: ["une seule fois, dans l'en-tête de la colonne"],
+    comparator: "mcq_exact",
+    hint: "Regarde l'en-tête « Taille (cm) ».",
+    explanation: se(
+      "l'en-tête d'une colonne annonce ce qu'elle contient ET dans quelle unité.",
+      "on écrit « Taille (cm) » en haut, puis les nombres seuls en dessous.",
+      "L'unité vaut pour toute la colonne : la répéter dans chaque case alourdit le tableau et gêne la comparaison des nombres. Mais la supprimer serait pire : « 152 » ne veut rien dire sans son unité — des centimètres, des millimètres, des pouces ? Une colonne sans unité est une colonne qu'on ne peut pas utiliser.",
+      "l'unité se met une fois, dans l'en-tête."
+    ),
+    tags: ["stat_enquete", "mesurer", "canvas", "qcm"],
+    canvas: tableauDonneesCanvas({
+      title: "Longueur des feuilles ramassées",
+      headers: ["Longueur (cm)"],
+      rows: [
+        { label: "Feuille 1", values: [12] },
+        { label: "Feuille 2", values: [9] },
+        { label: "Feuille 3", values: [15] },
+      ],
+    }),
+  },
+  {
+    kind: "fixed",
+    id: "stat_enquete_mesurer_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_enquete",
+    microId: "stat_enquete_mesurer",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Dans un tableau de masses, un élève a noté 1,2 kg pour un objet et 800 g pour un autre. Quel est le problème ?",
+    format: "qcm",
+    choices: [
+      "les deux mesures ne sont pas dans la même unité : on ne peut pas les comparer directement",
+      "aucun problème, les deux mesures sont justes",
+      "il manque la virgule sur 800 g",
+      "1,2 kg est forcément une erreur de mesure",
+    ],
+    expected: [
+      "les deux mesures ne sont pas dans la même unité : on ne peut pas les comparer directement",
+    ],
+    comparator: "mcq_exact",
+    hint: "Compare 1,2 et 800 : lequel semble le plus grand, et est-ce vrai ?",
+    explanation: se(
+      "toutes les mesures d'une même colonne doivent être exprimées dans la même unité.",
+      "on choisit une unité pour la colonne, et on y convertit toutes les mesures.",
+      "En lisant les nombres seuls, 800 paraît bien plus grand que 1,2 — alors que 800 g valent 0,8 kg, donc MOINS que 1,2 kg. Le tableau ment tant que les unités diffèrent. On convertit tout : soit 1,2 kg et 0,8 kg, soit 1 200 g et 800 g. L'en-tête annonce alors l'unité choisie.",
+      "on ramène toute la colonne à une seule unité."
+    ),
+    tags: ["stat_enquete", "mesurer", "piege", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "stat_enquete_mesurer_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_enquete",
+    microId: "stat_enquete_mesurer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une ligne par objet mesuré, une colonne par grandeur.",
+    tags: ["stat_enquete", "mesurer", "template"],
+    generate: () => {
+      const cas = [
+        { quoi: "la taille de 12 élèves", grandeur: "Taille", unite: "cm", lignes: 12 },
+        { quoi: "la masse de 8 cailloux ramassés", grandeur: "Masse", unite: "g", lignes: 8 },
+        { quoi: "la longueur de 10 feuilles d'arbre", grandeur: "Longueur", unite: "cm", lignes: 10 },
+        { quoi: "la durée de 6 trajets en bus", grandeur: "Durée", unite: "min", lignes: 6 },
+      ];
+      const c = randomChoice(cas);
+      return {
+        text: `Tu dois relever ${c.quoi} et les consigner dans un tableau. Combien de LIGNES de données ton tableau contiendra-t-il, en plus de l'en-tête ?`,
+        format: "short",
+        expected: [String(c.lignes)],
+        comparator: "number_equal",
+        explanation: se(
+          "un tableau de mesures porte une ligne par objet mesuré, et une ligne d'en-tête qui nomme les colonnes.",
+          "on compte les objets mesurés : c'est le nombre de lignes de données.",
+          `Il y a ${c.lignes} mesures à relever, donc ${c.lignes} lignes de données. L'en-tête, lui, ne contient aucune mesure : il annonce les colonnes, ici « ${c.grandeur} (${c.unite}) ». L'unité s'écrit dans cet en-tête, une seule fois, et les cases ne portent que des nombres.`,
+          `on garde ${c.lignes} lignes de données.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "stat_enquete_mesurer_tpl_ouverte",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_enquete",
+    microId: "stat_enquete_mesurer",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Pense à l'unité, et à ce qu'on doit pouvoir relire plus tard.",
+    tags: ["stat_enquete", "mesurer", "template", "ouverte"],
+    generate: () => {
+      const cas = [
+        {
+          q: "Explique comment organiser un tableau pour relever la taille de tous les élèves de ta classe.",
+          mots: ["colonne", "ligne", "prénom", "prenom", "unité", "unite", "cm", "en-tête", "en-tete"],
+          r: "Je prévois deux colonnes : la première identifie l'élève (son prénom ou un numéro), la seconde reçoit sa taille. En haut, l'en-tête annonce « Taille (cm) », avec l'unité écrite une seule fois. Puis une ligne par élève, remplie au fur et à mesure des mesures. Ainsi je peux relire le tableau plus tard et savoir exactement à qui correspond chaque nombre.",
+        },
+        {
+          q: "Pourquoi faut-il écrire les mesures pendant qu'on les fait, et non les retenir pour les noter à la fin ?",
+          mots: ["oublie", "mémoire", "memoire", "erreur", "recommencer", "ordre"],
+          r: "Parce que la mémoire perd des données et en mélange l'ordre : au bout de quelques mesures, on ne sait plus laquelle appartient à qui. Une donnée perdue ne se retrouve pas, il faut recommencer toute la mesure. Noter au fur et à mesure coûte quelques secondes et garantit qu'on pourra tout relire — c'est pour cela qu'on prépare le tableau AVANT de commencer.",
+        },
+        {
+          q: "Un tableau de masses contient 1,2 kg, 800 g et 0,5 kg. Explique le problème et comment le corriger.",
+          mots: ["unité", "unite", "même", "meme", "convertir", "0,8", "comparer"],
+          r: "Les trois mesures ne sont pas dans la même unité : en lisant les nombres seuls, 800 semble le plus grand alors que 800 g ne valent que 0,8 kg. Tant que les unités diffèrent, on ne peut ni comparer ni additionner. Je choisis donc une unité pour toute la colonne — le kilogramme, par exemple — et je convertis : 1,2 kg ; 0,8 kg ; 0,5 kg. L'en-tête indique alors « Masse (kg) ».",
+        },
+      ];
+      const c = randomChoice(cas);
+      return {
+        text: c.q,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: se(
+          "consigner des mesures, c'est les écrire de façon à pouvoir les relire et les comparer.",
+          "une ligne par objet mesuré, une unité unique annoncée dans l'en-tête.",
+          c.r,
+          "on garde le raisonnement, il vaut pour tout relevé."
+        ),
+      };
+    },
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // STAT_CONSTRUIRE_TABLEAU — construire un tableau d'effectifs
+  //
+  // ⛔ OUVERTE LE 23/08/2026 — TROU DU PROGRAMME (6e-D-donnees-3) : « construire
+  // un tableau simple pour présenter des données (observations, caractères) ».
+  //
+  // ⭐ LE PASSAGE DES OBSERVATIONS AUX EFFECTIFS EST LE GESTE DU CHAPITRE. Une
+  // liste de 25 réponses brutes ne se lit pas ; le même contenu rangé en « une
+  // ligne par réponse POSSIBLE, avec son effectif » se lit d'un coup d'œil. Le
+  // tableau ne stocke plus les observations, il les COMPTE.
+  //
+  // ⚠️ LE CONTRÔLE QUI SAUVE : la somme des effectifs doit redonner le nombre de
+  // personnes interrogées. C'est la seule vérification à la portée de l'élève, et
+  // elle attrape aussi bien l'oubli que le double comptage.
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    kind: "fixed",
+    id: "stat_construire_tableau_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_enquete",
+    microId: "stat_construire_tableau",
+    difficulty: 3,
+    theme: "neutral",
+    text: "On a demandé à 25 élèves leur sport préféré. Les réponses possibles sont : football, natation, danse, escalade. Combien de LIGNES de données le tableau des effectifs doit-il contenir ?",
+    format: "short",
+    expected: ["4"],
+    comparator: "number_equal",
+    hint: "Une ligne par réponse possible, pas par élève.",
+    explanation: se(
+      "un tableau d'effectifs porte une ligne par réponse possible, et non par personne interrogée.",
+      "on liste les réponses possibles, puis on compte combien de fois chacune apparaît.",
+      "Il y a quatre réponses possibles, donc quatre lignes : football, natation, danse, escalade. Faire 25 lignes reviendrait à recopier les réponses une à une, sans rien résumer — c'est exactement ce que le tableau d'effectifs évite. Le tableau ne stocke pas les observations, il les COMPTE.",
+      "on garde 4 lignes."
+    ),
+    tags: ["stat_enquete", "construire", "canvas", "short"],
+    canvas: tableauDonneesCanvas({
+      title: "Sport préféré (25 élèves)",
+      headers: ["Effectif"],
+      rows: [
+        { label: "Football", values: [9] },
+        { label: "Natation", values: [6] },
+        { label: "Danse", values: [7] },
+        { label: "Escalade", values: [3] },
+      ],
+    }),
+  },
+  {
+    kind: "fixed",
+    id: "stat_construire_tableau_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_enquete",
+    microId: "stat_construire_tableau",
+    difficulty: 4,
+    theme: "neutral",
+    text: "On a interrogé 25 élèves. Le tableau donne : football 9, natation 6, danse 7, escalade 3. Comment vérifier qu'on n'a oublié personne ?",
+    format: "qcm",
+    choices: [
+      "en additionnant les effectifs : la somme doit valoir 25",
+      "en vérifiant que chaque effectif est plus petit que 25",
+      "en comptant les lignes du tableau",
+      "en calculant la moyenne des effectifs",
+    ],
+    expected: ["en additionnant les effectifs : la somme doit valoir 25"],
+    comparator: "mcq_exact",
+    hint: "Chaque élève a donné une réponse, et une seule.",
+    explanation: se(
+      "la somme des effectifs est égale au nombre de personnes interrogées.",
+      "on additionne la colonne des effectifs et on compare au total attendu.",
+      "9 + 6 + 7 + 3 = 25 : le compte est bon, personne n'a été oublié ni compté deux fois. Si la somme avait donné 24, il manquerait une réponse ; si elle avait donné 26, un élève aurait été compté deux fois. C'est le seul contrôle vraiment utile — compter les lignes ne dit rien, puisqu'elles comptent les réponses possibles et non les élèves.",
+      "on vérifie que la somme des effectifs redonne le total."
+    ),
+    tags: ["stat_enquete", "construire", "controle", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "stat_construire_tableau_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_enquete",
+    microId: "stat_construire_tableau",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Voici les réponses brutes de 10 élèves : bus, vélo, bus, marche, bus, vélo, marche, bus, vélo, bus. Quel est l'effectif de « bus » ?",
+    format: "short",
+    expected: ["5"],
+    comparator: "number_equal",
+    hint: "Compte les « bus » un par un, en les barrant au fur et à mesure.",
+    explanation: se(
+      "l'effectif d'une réponse est le nombre de fois où elle apparaît.",
+      "on parcourt la liste une seule fois, en cochant chaque réponse dans la bonne ligne.",
+      "« bus » apparaît en positions 1, 3, 5, 8 et 10 : son effectif est 5. On trouve ensuite vélo 3 et marche 2. Vérification : 5 + 3 + 2 = 10, soit le nombre d'élèves interrogés — le compte est bon.",
+      "on garde l'effectif obtenu."
+    ),
+    tags: ["stat_enquete", "construire", "short"],
+  },
+  {
+    kind: "template",
+    id: "stat_construire_tableau_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_enquete",
+    microId: "stat_construire_tableau",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La somme des effectifs vaut le nombre de personnes interrogées.",
+    tags: ["stat_enquete", "construire", "template"],
+    generate: () => {
+      const jeux = [
+        { titre: "Sport préféré", labels: ["Football", "Natation", "Danse", "Escalade"] },
+        { titre: "Transport pour venir au collège", labels: ["Bus", "Vélo", "Marche", "Voiture"] },
+        { titre: "Fruit préféré", labels: ["Mangue", "Letchi", "Ananas", "Banane"] },
+        { titre: "Matière préférée", labels: ["Maths", "Français", "Histoire", "SVT"] },
+      ];
+      const j = randomChoice(jeux);
+      const effectifs = j.labels.map(() => Math.floor(Math.random() * 8) + 2);
+      const total = effectifs.reduce((a, b) => a + b, 0);
+      const cache = Math.floor(Math.random() * j.labels.length);
+      const connus = effectifs.filter((_, i) => i !== cache);
+      const sommeConnus = connus.reduce((a, b) => a + b, 0);
+
+      return {
+        text: `On a interrogé ${total} élèves. Le tableau est presque complet : ${j.labels
+          .filter((_, i) => i !== cache)
+          .map((l, i) => `${l} ${connus[i]}`)
+          .join(", ")}. Quel est l'effectif de « ${j.labels[cache]} » ?`,
+        format: "short",
+        expected: [String(effectifs[cache])],
+        comparator: "number_equal",
+        explanation: se(
+          "la somme des effectifs est égale au nombre de personnes interrogées.",
+          "on additionne les effectifs connus, puis on retire cette somme du total.",
+          `Les effectifs connus font ${connus.join(" + ")} = ${sommeConnus}. Comme ${total} élèves ont été interrogés et que chacun n'a donné qu'une réponse, il reste ${total} − ${sommeConnus} = ${effectifs[cache]} élèves pour « ${j.labels[cache]} ». Vérification : ${effectifs.join(" + ")} = ${total}.`,
+          `on garde ${effectifs[cache]}.`
+        ),
+        canvas: tableauDonneesCanvas({
+          title: `${j.titre} (${total} élèves)`,
+          headers: ["Effectif"],
+          // `values` accepte string | number : le « ? » de la case à trouver
+          // n'a donc besoin d'aucun contournement de type.
+          rows: j.labels.map((l, i) => ({
+            label: l,
+            values: [i === cache ? "?" : effectifs[i]],
+          })),
+        }),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "stat_construire_tableau_tpl_ouverte",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "stat_enquete",
+    microId: "stat_construire_tableau",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Explique le passage de la liste brute au tableau qui compte.",
+    tags: ["stat_enquete", "construire", "template", "ouverte"],
+    generate: () => {
+      const cas = [
+        {
+          q: "Tu as recueilli 25 réponses écrites à la suite sur une feuille. Explique comment en faire un tableau qui se lit d'un coup d'œil.",
+          mots: ["réponses possibles", "reponses possibles", "ligne", "compte", "effectif", "coche", "somme"],
+          r: "Je commence par lister les réponses POSSIBLES — elles sont peu nombreuses — et je fais une ligne pour chacune, pas une ligne par élève. Je parcours ensuite ma feuille une seule fois, en cochant chaque réponse dans la bonne ligne. Je compte enfin les coches : c'est l'effectif. Vingt-cinq réponses illisibles deviennent quatre lignes qu'on lit d'un regard, et je vérifie en additionnant les effectifs, qui doivent redonner 25.",
+        },
+        {
+          q: "Explique pourquoi un tableau d'effectifs a une ligne par réponse possible, et non une ligne par personne interrogée.",
+          mots: ["résumer", "resumer", "compte", "lisible", "recopier", "possible"],
+          r: "Parce que le tableau sert à RÉSUMER, pas à recopier. Une ligne par personne redonnerait la liste brute, tout aussi illisible, en plus long. Une ligne par réponse possible transforme la liste en comptage : on ne voit plus qui a répondu quoi, mais on voit immédiatement ce qui l'emporte. On perd le détail individuel, et c'est justement ce qu'on cherche — un tableau d'effectifs répond à « combien », pas à « qui ».",
+        },
+        {
+          q: "Comment vérifier qu'un tableau d'effectifs est complet, et que peut signaler une erreur ?",
+          mots: ["somme", "total", "interrogées", "interrogees", "oublié", "oublie", "deux fois"],
+          r: "On additionne tous les effectifs : la somme doit redonner exactement le nombre de personnes interrogées, puisque chacune a donné une réponse et une seule. Si la somme est trop petite, des réponses ont été oubliées ou une catégorie manque au tableau. Si elle est trop grande, quelqu'un a été compté deux fois — souvent en repassant sur une ligne déjà cochée. C'est un contrôle qui prend dix secondes et attrape les deux erreurs les plus fréquentes.",
+        },
+      ];
+      const c = randomChoice(cas);
+      return {
+        text: c.q,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: se(
+          "un tableau d'effectifs range des observations en comptant combien de fois chaque réponse apparaît.",
+          "une ligne par réponse possible, un comptage, puis un contrôle par la somme.",
+          c.r,
+          "on garde le raisonnement, il vaut pour tout recueil."
+        ),
+      };
+    },
   },
 ];

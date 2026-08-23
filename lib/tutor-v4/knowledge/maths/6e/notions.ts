@@ -379,10 +379,28 @@ export const notions: NotionSource[] = [
   },
 
   {
-    id: "stat_donnee",
-    label: "Données",
+    id: "stat_enquete",
+    label: "Mener une enquête et construire un tableau",
     boId: "BO6D1",
     prerequis: [],
+    levels: [1, 2],
+  },
+
+  // ⛔ COUPÉE LE 23/08/2026. « Données » portait SEPT micros, et toutes
+  // lisaient : lire un tableau, lire un graphique, lire un diagramme,
+  // prélever, comparer, interpréter. L'élève recevait toujours des données
+  // déjà faites, alors que le programme de 6e ouvre le chapitre par le geste
+  // inverse — planifier une enquête, mesurer, consigner, construire le tableau.
+  //
+  // ⭐ « Lire un tableau » est passée du côté de l'enquête : construire un
+  // tableau et le lire sont les deux faces du même objet. Il reste ici la
+  // lecture des REPRÉSENTATIONS (graphique, diagramme) et le raisonnement
+  // qu'on mène dessus.
+  {
+    id: "stat_donnee",
+    label: "Lire et interpréter des données",
+    boId: "BO6D1",
+    prerequis: ["stat_enquete"],
     levels: [1, 2],
   },
 

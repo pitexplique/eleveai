@@ -621,9 +621,16 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
-        "id": "stat_donnee",
-        "label": "Données",
+        "id": "stat_enquete",
+        "label": "Mener une enquête et construire un tableau",
         "prerequis": []
+      },
+      {
+        "id": "stat_donnee",
+        "label": "Lire et interpréter des données",
+        "prerequis": [
+          "stat_enquete"
+        ]
       },
       {
         "id": "proba_experience",

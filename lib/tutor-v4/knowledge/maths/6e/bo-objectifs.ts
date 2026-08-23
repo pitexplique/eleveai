@@ -703,8 +703,9 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     domaine: "Organisation et gestion de données et probabilités",
     chapitre: "Organisation et gestion de données",
     objectif: "Planifier une enquête et recueillir des données.",
+    note: "Couvert le 23/08/2026. Le cœur de la micro est le BIAIS D'ÉCHANTILLON : interroger les seuls adhérents de l'association sportive donne un résultat faux sans qu'aucun calcul ne le soit.",
     page: 16,
-    micros: [],
+    micros: ["stat_enquete_planifier"],
   },
   {
     id: "6e-D-donnees-2",
@@ -712,7 +713,8 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     chapitre: "Organisation et gestion de données",
     objectif: "Réaliser des mesures et les consigner dans un tableau.",
     page: 16,
-    micros: [],
+    micros: ["stat_enquete_mesurer"],
+    note: "Couvert le 23/08/2026. Règle de présentation installée ici : l'unité se met UNE FOIS dans l'en-tête, et toute la colonne doit être dans la même unité.",
   },
   {
     id: "6e-D-donnees-3",
@@ -720,7 +722,8 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     chapitre: "Organisation et gestion de données",
     objectif: "Construire un tableau simple pour présenter des données (observations, caractères).",
     page: 17,
-    micros: [],
+    micros: ["stat_construire_tableau"],
+    note: "Couvert le 23/08/2026. Le geste visé est le passage des observations aux EFFECTIFS — une ligne par réponse possible, pas par personne — et le contrôle par la somme.",
   },
   {
     id: "6e-D-donnees-4",
