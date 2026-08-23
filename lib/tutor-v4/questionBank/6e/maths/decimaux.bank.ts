@@ -8,6 +8,20 @@ function formatComma(n: number | string) {
   return String(n).replace(".", ",");
 }
 
+function explDecimal(calcul: string) {
+  return (
+    "Définition : un nombre décimal peut s’écrire avec une partie entière et une partie décimale.\n\n" +
+    "Méthode : on lit bien les chiffres et leur position, puis on compare ou on calcule.\n\n" +
+    "Calcul : " +
+    calcul +
+    "\n\nConclusion : on garde la réponse obtenue."
+  );
+}
+
+function entierAleatoire(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 export const decimauxBank: TutorBankItemV4[] = [
   // =========================
   // DECIMAL_LIRE_ECRIRE
@@ -1754,6 +1768,152 @@ export const decimauxBank: TutorBankItemV4[] = [
           quotient
         )}. Chaque personne reçoit donc ${formatComma(quotient)} litre(s).`) +
           "\n\nConclusion : on garde la réponse obtenue.",
+      };
+    },
+  },
+  // =========================
+  // DEFIS — LES GENERATEURS MANQUANTS
+  //
+  // ⛔ AJOUTES LE 22/08/2026. `decimal_defi` et `decimal_calcul_defi` n'avaient
+  // que des items figes : cinq et quatre. La regle d'or de Frederic est qu'un
+  // eleve ne doit pas retomber sur la meme question en dix minutes — soit dix
+  // variantes minimum par micro, donc un generateur, jamais un item seul.
+  //
+  // Les deux micros sont CONCEPTUELLES : on parametre la situation et les
+  // nombres, le raisonnement ne bouge pas, et la question cesse d'etre
+  // reconnaissable.
+  // =========================
+  {
+    kind: "template",
+    id: "decimal_defi_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_nombre",
+    microId: "decimal_defi",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Plus de chiffres apres la virgule ne veut pas dire plus grand.",
+    tags: ["decimal_nombre", "defi", "template"],
+    generate: () => {
+      const e = entierAleatoire(2, 9);
+      const d = entierAleatoire(4, 8);
+      const petit = entierAleatoire(1, d - 1);
+      // Le piege du programme : 2,5 est PLUS GRAND que 2,45 alors que 45 > 5.
+      const a = `${e},${d}`;
+      const b = `${e},${petit}${entierAleatoire(1, 9)}`;
+      return {
+        text: `Quel est le plus grand : ${a} ou ${b} ?`,
+        format: "qcm",
+        choices: shuffle([a, b]),
+        expected: [a],
+        comparator: "mcq_exact",
+        explanation: explDecimal(
+          `Les parties entieres sont egales (${e}). On compare alors les dixiemes : ${d} contre ${petit}. Comme ${d} est plus grand que ${petit}, ${a} est plus grand que ${b} — meme si ${b} a plus de chiffres apres la virgule.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "decimal_defi_tpl_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_nombre",
+    microId: "decimal_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Dis ce que tu compares en premier, et pourquoi.",
+    tags: ["decimal_nombre", "defi", "template", "ouverte"],
+    generate: () => {
+      const cas = [
+        {
+          q: "Explique pourquoi 3,5 est plus grand que 3,45, alors que 45 est plus grand que 5.",
+          mots: ["dixieme", "dixiemes", "dixième", "dixièmes", "position", "rang"],
+          r: "On ne compare pas les chiffres apres la virgule comme des entiers. On compare rang par rang : les parties entieres sont egales (3), puis les dixiemes — 5 dixiemes contre 4 dixiemes. 3,5 est donc plus grand. On peut aussi ecrire 3,5 = 3,50 et comparer 3,50 a 3,45.",
+        },
+        {
+          q: "Explique pourquoi 2 est un nombre decimal.",
+          mots: ["virgule", "partie decimale", "partie décimale", "2,0", "zero", "zéro"],
+          r: "Un nombre decimal s'ecrit avec une partie entiere et une partie decimale. Celle de 2 est nulle : 2 = 2,0. Tout nombre entier est donc un nombre decimal — l'inverse est faux.",
+        },
+        {
+          q: "Explique pourquoi on peut ajouter des zeros a la fin d'un nombre decimal sans le changer.",
+          mots: ["zero", "zéro", "valeur", "rang", "rien"],
+          r: "Les chiffres ajoutes occupent les rangs des centiemes, des milliemes... et valent zero a ces rangs : ils n'ajoutent rien. 3,5 = 3,50 = 3,500. C'est ce qui permet de comparer deux decimaux en leur donnant le meme nombre de chiffres apres la virgule.",
+        },
+      ];
+      const c = cas[Math.floor(Math.random() * cas.length)];
+      return {
+        text: c.q,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: explDecimal(c.r),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "decimal_calcul_defi_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_calcul",
+    microId: "decimal_calcul_defi",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "10 % d'un nombre, c'est ce nombre divise par 10.",
+    tags: ["decimal_calcul", "defi", "template"],
+    generate: () => {
+      const pourcent = [10, 20, 25, 50][Math.floor(Math.random() * 4)];
+      const base = entierAleatoire(2, 20) * 20;
+      const resultat = (base * pourcent) / 100;
+      return {
+        text: `Une addition est de ${base} euros. Tu laisses ${pourcent} % de pourboire. Combien vaut le pourboire ?`,
+        format: "short",
+        expected: [formatComma(resultat), String(resultat)],
+        comparator: "number_equal",
+        explanation: explDecimal(
+          `${pourcent} % de ${base}, c'est ${pourcent}/100 de ${base}, soit ${base} x ${formatComma(pourcent / 100)} = ${formatComma(resultat)} euros.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "decimal_calcul_defi_tpl_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_calcul",
+    microId: "decimal_calcul_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Multiplier ne veut pas toujours dire rendre plus grand.",
+    tags: ["decimal_calcul", "defi", "template", "ouverte"],
+    generate: () => {
+      const cas = [
+        {
+          q: "Explique pourquoi multiplier un nombre par 0,1 le rend plus petit.",
+          mots: ["dixieme", "dixième", "diviser", "division", "10"],
+          r: "Multiplier par 0,1, c'est prendre le dixieme du nombre — donc le diviser par 10. 45 x 0,1 = 4,5. « Multiplier » ne veut donc pas toujours dire « rendre plus grand » : cela ne vaut que pour les nombres plus grands que 1.",
+        },
+        {
+          q: "Explique pourquoi il faut aligner les virgules pour poser une addition de nombres decimaux.",
+          mots: ["rang", "virgule", "dixieme", "dixième", "unite", "unité", "colonne"],
+          r: "On additionne des unites avec des unites, des dixiemes avec des dixiemes. Aligner les virgules, c'est aligner les rangs les uns sous les autres. Si on aligne les nombres a droite au lieu des virgules, on additionne des centiemes avec des dixiemes, et le resultat est faux.",
+        },
+        {
+          q: "Explique comment verifier rapidement que 3,7 x 2,9 vaut environ 11 et non 110.",
+          mots: ["ordre de grandeur", "environ", "arrondi", "4", "3"],
+          r: "On remplace chaque nombre par un ordre de grandeur : 3,7 est proche de 4, et 2,9 de 3. Le produit est donc proche de 4 x 3 = 12. Un resultat de 110 serait dix fois trop grand : la virgule serait mal placee.",
+        },
+      ];
+      const c = cas[Math.floor(Math.random() * cas.length)];
+      return {
+        text: c.q,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: explDecimal(c.r),
       };
     },
   },

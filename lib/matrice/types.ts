@@ -176,9 +176,11 @@ export type RessourceEleveAI = {
   surDemande?: boolean;
   /**
    * UNE SEULE PAR RÉPONSE. Les ressources d'une même famille se ressemblent
-   * trop pour occuper les trois places : huit machines à égalité de score
+   * trop pour occuper les places de l'écran : huit machines à égalité de score
    * auraient rempli l'écran de simulateurs, là où une machine, les maths en
-   * vrai et la chaîne valent mieux. La famille se choisit sur ce qui se
+   * vrai et la chaîne valent mieux. ⚠️ La règle compte DOUBLE depuis que
+   * l'écran en affiche six (22/08) : c'est elle, et non le plafond, qui empêche
+   * les six cartes de se ressembler. La famille se choisit sur ce qui se
    * substitue — deux machines sont interchangeables, une machine et un guide
    * ne le sont pas.
    */

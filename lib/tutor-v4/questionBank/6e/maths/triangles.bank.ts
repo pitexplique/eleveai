@@ -2290,4 +2290,119 @@ export const trianglesBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // =========================
+  // TRIANGLE_DEFI — LES GÉNÉRATEURS DE RECONNAISSANCE
+  //
+  // ⛔ RÉPARATION DU 22/08/2026. La coupe de `triangle_figure` en deux notions a
+  // emporté les DEUX générateurs de `triangle_defi` vers `triangle_propriete`
+  // (ils portaient sur la somme des angles et sur la constructibilité). La micro
+  // de reconnaissance s'est donc retrouvée avec cinq questions figées — et la
+  // règle d'or de Frédéric est qu'un élève ne doit pas retomber sur la même
+  // question en dix minutes, soit dix variantes au minimum par micro.
+  //
+  // ⭐ Une micro CONCEPTUELLE se paramètre sur la SITUATION, pas sur les
+  // nombres : ici le type du triangle et ses mesures changent, le raisonnement
+  // reste le même, et l'élève ne peut plus reconnaître la question sans la
+  // refaire.
+  // =========================
+  {
+    kind: "template",
+    id: "triangle_defi_tpl_reconnaissance",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Regarde d'abord les côtés : combien sont égaux ?",
+    tags: ["triangle_figure", "defi", "template"],
+    generate: () => {
+      const a = randomInt(3, 9);
+      const b = a + randomInt(1, 4);
+      const cas = [
+        {
+          text: `Un triangle a trois côtés de ${a} cm. Quel est son type ?`,
+          rep: "équilatéral",
+          expl: `Ses trois côtés sont égaux : le triangle est équilatéral. Ses trois angles mesurent alors 60°.`,
+        },
+        {
+          text: `Un triangle a deux côtés de ${a} cm et un côté de ${b} cm. Quel est son type ?`,
+          rep: "isocèle",
+          expl: `Deux côtés seulement sont égaux (${a} cm et ${a} cm) : le triangle est isocèle.`,
+        },
+        {
+          text: `Un triangle a des côtés de ${a} cm, ${b} cm et ${b + randomInt(1, 3)} cm. Quel est son type ?`,
+          rep: "quelconque",
+          expl: `Les trois côtés sont différents : le triangle est quelconque, il n'a pas de nom particulier.`,
+        },
+      ];
+      const c = cas[Math.floor(Math.random() * cas.length)];
+      return {
+        text: c.text,
+        format: "qcm",
+        choices: shuffle(["équilatéral", "isocèle", "quelconque", "rectangle"]),
+        expected: [c.rep],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : un triangle est un polygone qui possède 3 côtés.\n\n" +
+          "Méthode : on observe les côtés, les sommets et les angles du triangle.\n\n" +
+          "Calcul : " +
+          c.expl +
+          "\n\nConclusion : on garde la réponse obtenue.",
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "triangle_defi_tpl_ouverte",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Dis ce que tu regardes sur la figure pour trancher.",
+    tags: ["triangle_figure", "defi", "template", "ouverte"],
+    generate: () => {
+      const cas = [
+        {
+          nom: "isocèle",
+          question:
+            "Explique comment on reconnaît qu'un triangle est isocèle sans mesurer ses angles.",
+          mots: ["côtés", "cotes", "égaux", "egaux", "codage"],
+          reponse:
+            "On regarde le CODAGE des côtés : deux petits traits identiques signalent deux côtés de même longueur. Deux côtés égaux suffisent à dire que le triangle est isocèle — les angles à la base sont alors égaux eux aussi.",
+        },
+        {
+          nom: "équilatéral",
+          question:
+            "Explique pourquoi un triangle équilatéral est aussi un triangle isocèle.",
+          mots: ["deux", "trois", "égaux", "egaux"],
+          reponse:
+            "Un triangle isocèle a AU MOINS deux côtés égaux. Un triangle équilatéral en a trois : il en a donc bien au moins deux. Tout triangle équilatéral est isocèle, l'inverse est faux.",
+        },
+        {
+          nom: "rectangle",
+          question: "Explique comment on reconnaît qu'un triangle est rectangle sur une figure.",
+          mots: ["angle droit", "droit", "carré", "carre", "équerre", "equerre"],
+          reponse:
+            "On cherche la marque d'angle droit : un petit carré placé dans l'un des trois angles. C'est ce codage, et lui seul, qui autorise à dire que le triangle est rectangle — un angle « qui a l'air droit » ne prouve rien.",
+        },
+      ];
+      const c = cas[Math.floor(Math.random() * cas.length)];
+      return {
+        text: c.question,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation:
+          "Définition : un triangle est un polygone qui possède 3 côtés.\n\n" +
+          "Méthode : on observe les côtés, les sommets et les angles du triangle.\n\n" +
+          "Calcul : " +
+          c.reponse +
+          "\n\nConclusion : on garde la réponse obtenue.",
+      };
+    },
+  },
 ];

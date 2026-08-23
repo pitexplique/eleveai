@@ -4,15 +4,18 @@ import Link from "next/link";
 
 import { VENTE } from "@/lib/legal/editeur";
 import {
-  ARGUMENT_COLLECTIF,
+  ARGUMENT_ETABLISSEMENT,
   EXEMPLE_CLASSE,
   EXEMPLE_ETABLISSEMENT,
-  PRIX_ETABLISSEMENT_ELEVE_AN,
+  ECHELLE,
+  PLAFOND_ETABLISSEMENT_AN,
+  PRIX_CLASSE_ELEVE_MOIS,
+  PRIX_ETABLISSEMENT_ELEVE_MOIS,
   PRIX_FAMILLE_AN,
-  PRIX_FAMILLE_MENSUEL_EQUIVALENT,
-  PRIX_PROF_AN,
+  PRIX_FAMILLE_MOIS,
   centimes,
   euros,
+  montant,
 } from "@/lib/tarifs";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -64,7 +67,7 @@ const portes = [
     emoji: "🏠",
     titre: "Pour les parents",
     sousTitre: "Suivre son enfant à la maison",
-    prix: `${euros(PRIX_FAMILLE_AN)} par an, par famille`,
+    prix: `${montant(PRIX_FAMILLE_MOIS)} par mois, par famille`,
     ancre: "#famille",
     page: "/espace-parents",
     pageLabel: "Ce que voient les parents",
@@ -75,7 +78,13 @@ const portes = [
     emoji: "🧑‍🏫",
     titre: "Pour les enseignants",
     sousTitre: "Voir sa classe sans corriger",
-    prix: `${euros(PRIX_PROF_AN)} par an, quel que soit le nombre d'élèves`,
+    // ⭐ CE QUE LE PROFESSEUR APPORTE À SES FAMILLES : 25 % DE MOINS (22/08).
+    // C'est ce qui a débloqué la grille après cinq versions. Le professeur
+    // n'achète pas pour lui et ne sort rien de sa poche : il organise sa classe,
+    // et ses familles paient 0,75 € au lieu de 1 €. Son rôle n'est pas d'être
+    // client, il est d'ouvrir le tarif de groupe — comme pour une sortie
+    // scolaire, où personne ne s'étonne que le prix baisse à trente.
+    prix: `${montant(PRIX_CLASSE_ELEVE_MOIS)} par élève et par mois`,
     ancre: "#classe",
     page: "/espace-profs",
     pageLabel: "L'outil du professeur",
@@ -86,7 +95,7 @@ const portes = [
     emoji: "🏫",
     titre: "Pour les établissements",
     sousTitre: "Tout le collège, et la vue du principal",
-    prix: `${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} par élève et par an`,
+    prix: `${montant(PRIX_ETABLISSEMENT_ELEVE_MOIS)} par élève et par mois, jamais plus de ${euros(PLAFOND_ETABLISSEMENT_AN)} par an`,
     ancre: "#etablissement",
     page: "/espace-ecoles",
     pageLabel: "EleveAI dans un établissement",
@@ -100,18 +109,39 @@ const collectif = [
     id: "classe",
     nom: "Classe",
     badge: "🧑‍🏫 Un enseignant",
-    prix: `${euros(PRIX_PROF_AN)} / an`,
-    exemple: `${EXEMPLE_CLASSE.eleves} élèves = ${centimes(EXEMPLE_CLASSE.parEleve)} par élève`,
+    /* ⭐ CETTE CARTE NE VEND PAS UN PRODUIT AU PROFESSEUR, ELLE LUI OUVRE UN
+       TARIF DE GROUPE. La distinction a mis cinq versions à se dégager le
+       22/08 : tant qu'on facturait le professeur, il devait demander à
+       quelqu'un — coopérative, réunion, rentrée suivante — et toutes les
+       grilles mouraient là. Le déclencheur est de Frédéric : « un prof propose
+       parfois un livre à 12 euros », puis « le prof va devoir inciter les
+       élèves à prendre son abonnement qui sera 25 % moins cher qu'individuel ».
+       Il ne sort rien de sa poche, il fait baisser le prix de ses familles. */
+    prix: `${montant(PRIX_CLASSE_ELEVE_MOIS)} / élève / mois`,
+    /* ⛔ LA CLASSE S'AFFICHE AU MOIS, JAMAIS À L'ANNÉE. 22,50 € par mois se
+       décide seul ; 270 € renvoie à la coopérative, donc à une réunion, donc à
+       la rentrée suivante — le mur sur lequel quatre grilles sont mortes le
+       22/08. Le choix de l'unité ne décore pas ici, il décide si l'offre se
+       vend. */
+    exemple: `${EXEMPLE_CLASSE.eleves} élèves = ${centimes(EXEMPLE_CLASSE.parMois)} par mois`,
     description:
-      "Le prof voit sa classe sans corriger : devoirs suivis, bulletins, qui décroche. Forfait — 25 élèves ou 35, c'est le même prix. Les familles de la classe ne paient rien.",
+      "Le prof voit sa classe sans corriger : devoirs suivis, bulletins, qui décroche. Et il n'a rien à sortir de sa poche : c'est le tarif de groupe qu'il ouvre à ses familles, qui paient 25 % de moins que si chacune s'abonnait dans son coin.",
     inclus: [
       "Toutes les matières, tous les élèves de la classe",
       "Évaluation automatique, sans correction",
       "Devoirs maison faits et suivis en ligne",
       "Tableau de bord professeur",
-      "Payable sans passer par la coopérative",
+      /* ⛔ LA LIGNE QUI TIENT TOUT LE MODÈLE, ET ELLE EST DIFFICILE À TENIR.
+         Le risque n'est pas dans le code, il est dans la salle : un professeur
+         qui ramasse 12 € voit les huit qui ne les ont pas, et les huit savent
+         qu'il voit. Les familles s'abonnent donc EN DIRECT, et le tableau de
+         bord affiche les 30 élèves sans distinction. ⛔ Aucun compteur
+         « 14 abonnés sur 30 » nulle part — c'est exactement le genre de chiffre
+         qu'on ajoute un jour parce qu'il est facile à calculer. */
+      "Vos familles paient 25 % de moins qu'en s'abonnant seules",
+      "Vous ne savez pas qui a payé, et vous ne le saurez jamais",
     ],
-    cta: "Demander un accès classe",
+    cta: "Ouvrir le tarif classe",
     gradient: "from-sky-400 to-blue-500",
     anneau: "ring-sky-100",
   },
@@ -119,18 +149,33 @@ const collectif = [
     id: "etablissement",
     nom: "Établissement",
     badge: "🏫 Tout le collège",
-    prix: `${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} / élève / an`,
-    exemple: `${EXEMPLE_ETABLISSEMENT.eleves} élèves = ${euros(EXEMPLE_ETABLISSEMENT.total)} par an`,
-    description:
-      "Tous les profs équipés, et le principal a la vue complète : tous les niveaux, toutes les classes. Facturé à l'établissement — rien aux familles.",
+    prix: `${montant(PRIX_ETABLISSEMENT_ELEVE_MOIS)} / élève / mois`,
+    exemple: `${EXEMPLE_ETABLISSEMENT.eleves} élèves = ${euros(EXEMPLE_ETABLISSEMENT.total)} par an, plafond compris`,
+    /* ⭐ « VOUS PAYEZ POUR QUE PERSONNE D'AUTRE NE PAIE » — c'est enfin une
+       proposition en une phrase, et c'est la seule qui justifie la dépense
+       maintenant que la classe ne se vend plus. Sans ce couple de nombres, le
+       principal ne voit qu'une ligne de budget sans contrepartie visible : les
+       familles, elles, ne lui envoient pas de facture. */
+    description: `Sans vous, ce sont les familles qui paient : ${ARGUMENT_ETABLISSEMENT.eleves} élèves, cela ferait ${euros(ARGUMENT_ETABLISSEMENT.siLesFamillesPaient)} sortis de leurs poches. L'établissement paie ${euros(ARGUMENT_ETABLISSEMENT.siLEtablissementPaie)} et plus personne ne débourse rien.`,
     inclus: [
       "Tous les élèves, toutes les classes, tous les profs",
       "La vue complète du chef d'établissement",
-      "Aucun élève ne paie, jamais",
+      "Aucune famille ne paie, aucun élève non plus",
+      /* ⭐ LE PLAFOND EST UN ARGUMENT DE VENTE, PAS UNE CLAUSE. Il vient d'un
+         seuil de friction que Frédéric a mesuré dans sa propre vie : « en
+         dessous de 2 000 euros un établissement n'a pas de pb », et son ancien
+         proviseur lui a débloqué 1 500 € l'an dernier. Sans plafond, un collège
+         de 400 élèves passerait à 4 800 € et repartirait dans le circuit long. */
+      `Jamais plus de ${euros(PLAFOND_ETABLISSEMENT_AN)} par an, quel que soit l'effectif`,
       "Éligible REP/REP+, fonds sociaux, coopérative",
       "Jamais un classement des enseignants",
     ],
-    cta: "Demander un devis",
+    // ⚠️ LE BOUTON DISAIT « DEMANDER UN DEVIS », juste sous le prix affiché en
+    // gros (trouvé par `scripts/verifier-tarifs.ts`, 22/08). Les deux se
+    // contredisaient sur la même carte : si le prix est ferme et écrit là, il
+    // n'y a rien à deviser — et proposer un devis rouvre une négociation qu'on
+    // vient de fermer, en laissant croire que le nombre affiché est indicatif.
+    cta: "Parler de mon établissement",
     gradient: "from-violet-400 to-purple-500",
     anneau: "ring-violet-100",
   },
@@ -166,20 +211,33 @@ const comparatif = [
   {
     outil: "EleveAI 🌺",
     pourQui: "Une famille · toutes matières · tous les enfants",
-    prix: `${euros(PRIX_FAMILLE_AN)} / an`,
-    soit: "12 € / an — et pas un centime par enfant en plus",
+    /* ⚠️ CETTE LIGNE S'AFFICHAIT À L'ANNÉE (12 €/an) AU MILIEU DE CONCURRENTS
+       AFFICHÉS AU MOIS. Le lecteur devait convertir de tête pour voir l'écart —
+       et un tableau qu'il faut convertir ne se lit pas, il se survole. Au même
+       compteur, la ligne se lit d'un coup : 1 € contre 19,95 €.
+       ⛔ Ne jamais remettre une unité différente des autres lignes ici : c'est
+       la seule colonne où l'on se compare, et une unité qui décroche annule le
+       bénéfice de tout le tableau. */
+    prix: `${montant(PRIX_FAMILLE_MOIS)} / mois`,
+    soit: `${euros(PRIX_FAMILLE_AN)} / an — et pas un centime par enfant en plus`,
+  },
+  {
+    outil: "EleveAI 🌺",
+    pourQui: "Une classe · organisée par le professeur",
+    prix: `${montant(PRIX_CLASSE_ELEVE_MOIS)} / élève / mois`,
+    /* ⛔ ICI ON DONNE LE PRIX ANNUEL PAR ÉLÈVE, JAMAIS LE TOTAL DE LA CLASSE.
+       La colonne s'intitule « Soit par an », et les 270 € d'une classe de 30
+       sont précisément le nombre qui renvoie un professeur à sa coopérative.
+       9 € par élève et par an se compare en revanche directement à Kwyk
+       (72 €) et Mathia (96 €), qui sont sur la même unité — c'est la seule
+       ligne du tableau qui compare enfin ce qui se compare. */
+    soit: `${euros(PRIX_CLASSE_ELEVE_MOIS * 12)} / an / élève — 25 % de moins que seul`,
   },
   {
     outil: "EleveAI 🌺",
     pourQui: "Tout un établissement",
-    prix: `${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} / élève / an`,
-    soit: `${EXEMPLE_ETABLISSEMENT.eleves} élèves = ${euros(EXEMPLE_ETABLISSEMENT.total)} par an`,
-  },
-  {
-    outil: "EleveAI 🌺",
-    pourQui: "Un professeur · sa ou ses classes",
-    prix: `${euros(PRIX_PROF_AN)} / an`,
-    soit: `forfait — ${centimes(EXEMPLE_CLASSE.parEleve)} par élève pour une classe de ${EXEMPLE_CLASSE.eleves}`,
+    prix: `${montant(PRIX_ETABLISSEMENT_ELEVE_MOIS)} / élève / mois`,
+    soit: `${euros(PRIX_ETABLISSEMENT_ELEVE_MOIS * 12)} / an / élève — ${EXEMPLE_ETABLISSEMENT.eleves} élèves = ${euros(EXEMPLE_ETABLISSEMENT.total)}`,
   },
 ];
 
@@ -198,7 +256,15 @@ const faq = [
   },
   {
     q: "Mon collège peut-il payer pour tout le monde ?",
-    a: `Oui, et l'écart est considérable : ${ARGUMENT_COLLECTIF.eleves} familles abonnées, cela ferait ${euros(ARGUMENT_COLLECTIF.siChaqueFamillePaie)} ; le professeur qui couvre exactement les mêmes élèves paie ${euros(ARGUMENT_COLLECTIF.siLeProfPaie)}, forfait. Et pour tout l'établissement, ${EXEMPLE_ETABLISSEMENT.eleves} élèves reviennent à ${euros(EXEMPLE_ETABLISSEMENT.total)} par an — personne n'est laissé dehors. Parlez-en à l'enseignant ou au principal, on s'occupe du reste.`,
+    a: `Oui, et c'est exactement à ça que sert l'offre établissement : il paie pour que personne d'autre ne paie. ${EXEMPLE_ETABLISSEMENT.eleves} élèves, cela ferait ${euros(ARGUMENT_ETABLISSEMENT.siLesFamillesPaient)} sortis des poches des familles ; l'établissement paie ${euros(EXEMPLE_ETABLISSEMENT.total)} par an, plafond compris, et plus personne ne débourse rien. Parlez-en au principal, on s'occupe du reste.`,
+  },
+  {
+    // ⭐ LA QUESTION QUE POSE LE PRINCIPAL, et qu'il valait mieux poser nous-mêmes
+    // (22/08). Sans elle, il fait le calcul « 1 € en classe contre 2 € chez moi »
+    // et conclut que l'établissement est l'offre chère. La réponse tient au fait
+    // qu'une classe a cinq professeurs, ce que la grille seule ne dit pas.
+    q: "Combien paie le professeur ?",
+    a: `Rien de sa poche. Il ouvre le tarif de groupe de sa classe : ses familles paient ${montant(PRIX_CLASSE_ELEVE_MOIS)} par élève et par mois au lieu de ${montant(PRIX_FAMILLE_MOIS)}, soit 25 % de moins que si chacune s'abonnait dans son coin. Son tableau de bord de classe s'ouvre avec. Et ce qui se prescrit reste la fenêtre des parents, jamais l'accès de l'enfant : l'élève dont la famille ne s'abonne pas travaille exactement à l'identique, et le professeur ne sait pas qui a payé.`,
   },
   {
     q: "Puis-je arrêter quand je veux ?",
@@ -366,20 +432,22 @@ export default function TarifsClient() {
 
           <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-center">
             <div className="text-center md:text-left">
-              <p className="bg-gradient-to-r from-emerald-500 to-green-600 bg-clip-text text-6xl font-black text-transparent sm:text-7xl">
-                {euros(PRIX_FAMILLE_AN)}
-              </p>
-              <p className="mt-1 text-lg font-black text-slate-900">par an</p>
               {/* ⚠️ « MOINS D'UN EURO PAR MOIS » ÉTAIT FAUX : 12 ÷ 12 = 1, pas
                   moins. Le mot « moins » cherchait à impressionner et affaiblit
                   au contraire — un euro rond se retient, « moins d'un euro »
                   sonne comme un arrondi qu'on n'ose pas nommer.
-                  ⭐ ET C'EST LE NOMBRE DE LA MARQUE (Frédéric, 21/08 : « pas
-                  1 euro par an mais par mois »). C'est en mois qu'il faut le
-                  dire partout : 1 € se compare à un café, 12 € à un abonnement. */}
+                  ⭐ LE MOIS EST PASSÉ EN GRAND, L'ANNÉE EN DESSOUS (Frédéric,
+                  22/08 : « on met tout par mois ! »). C'était l'inverse jusque-là
+                  — 12 € en corps 72 et « 1 € par mois » en petit — donc la page
+                  criait le nombre le moins favorable et chuchotait le meilleur.
+                  1 € se compare à un café, 12 € à un abonnement de plus. */}
+              <p className="bg-gradient-to-r from-emerald-500 to-green-600 bg-clip-text text-6xl font-black text-transparent sm:text-7xl">
+                {montant(PRIX_FAMILLE_MOIS)}
+              </p>
+              <p className="mt-1 text-lg font-black text-slate-900">par mois</p>
               <p className="mt-1 text-sm font-black text-emerald-700">
-                {centimes(PRIX_FAMILLE_MENSUEL_EQUIVALENT).replace(",00", "")} par
-                mois · par famille, quel que soit le nombre d&apos;enfants
+                {euros(PRIX_FAMILLE_AN)} par an · par famille, quel que soit le
+                nombre d&apos;enfants
               </p>
 
               <p className="mt-5 text-base font-bold leading-relaxed text-slate-700">
@@ -404,7 +472,7 @@ export default function TarifsClient() {
                     href="/abonnement/famille"
                     className="mt-6 inline-flex rounded-2xl bg-gradient-to-r from-emerald-400 to-green-500 px-8 py-4 text-base font-black text-white shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl"
                   >
-                    S&apos;abonner — {euros(PRIX_FAMILLE_AN)} par an
+                    S&apos;abonner — {montant(PRIX_FAMILLE_MOIS)} par mois
                   </Link>
                   <p className="mt-3 text-xs font-bold text-slate-500">
                     Sans engagement · 14 jours pour changer d&apos;avis · Apple Pay et
@@ -422,9 +490,19 @@ export default function TarifsClient() {
                   >
                     Prévenez-moi à l&apos;ouverture
                   </Link>
+                  {/* ⛔ PAS DE DÉLAI ANNONCÉ. La phrase disait « l'abonnement
+                      ouvre dans quelques jours » — une date implicite, qui se
+                      périme toute seule et que personne ne vient corriger.
+                      L'ouverture ne dépend pas du calendrier mais de l'état du
+                      produit : la vue du parent, et les fiches de cours de
+                      maths et de français (règle de Frédéric, 22/08 : « quand
+                      les fiches seront prêtes on envoie Stripe, pas avant »).
+                      On dit donc CE QUI MANQUE, comme sur /espace-parents, et
+                      la phrase reste vraie aussi longtemps qu'il le faudra. */}
                   <p className="mt-3 text-xs font-bold text-slate-500">
-                    L&apos;abonnement ouvre dans quelques jours. Le prix ci-dessus est
-                    ferme — rien n&apos;est encaissé pour l&apos;instant.
+                    Cette vue se construit en ce moment. Le prix ci-dessus est
+                    ferme, et rien n&apos;est encaissé tant qu&apos;elle n&apos;est pas
+                    prête.
                   </p>
                 </>
               )}
@@ -484,16 +562,36 @@ export default function TarifsClient() {
                 qui décrivait l'ancienne grille aurait survécu au changement de
                 prix — c'est exactement le défaut que `lib/tarifs.ts` existe
                 pour empêcher, et il ne se voit pas dans un chiffre. */}
+            {/* ⛔ « PLUS LE CERCLE S'ÉLARGIT, MOINS ÇA COÛTE PAR ENFANT » EST
+                PARTI (22/08) — c'était devenu faux, et faux dans le sens qui se
+                retourne contre nous : la classe revient à 0,40 € par élève,
+                l'établissement à 2 €. Le cercle s'élargit et le prix par enfant
+                est CINQ FOIS plus haut. Un principal qui vérifie la phrase du
+                titre trouve le contraire, et ne lit pas la suite.
+                ⚠️ Ce titre-là avait déjà survécu à une correction : le
+                paragraphe en dessous avait été réécrit pour la nouvelle grille,
+                pas le titre. Une section se relit en entier ou pas du tout.
+                ⭐ Ce qui le remplace ne compare plus les offres entre elles, il
+                dit la seule chose que le professeur veut savoir — et elle, elle
+                reste vraie quel que soit le tarif établissement. */}
             <h2 className="mt-3 text-2xl font-black text-slate-950 sm:text-3xl">
-              Plus le cercle s&apos;élargit, moins ça coûte par enfant
+              Trois forfaits, et pas un élève à compter
             </h2>
+            {/* ⚠️ « PAR AN », JAMAIS SANS SON UNITÉ. Le même « 1 € » vit deux
+                fois dans cette grille : 1 € par MOIS pour la famille, 1 € par AN
+                pour l'élève en classe. Frédéric s'y est trompé lui-même le
+                22/08 — « ça fait un euro par élève et par mois en gros » — et
+                l'écart est d'un facteur douze sur tout le chiffre d'affaires.
+                ⛔ Ne jamais écrire « 1 € » seul sur cette page. */}
             <p className="mx-auto mt-2 max-w-2xl text-sm font-bold text-slate-600">
-              Un tableau de bord, c&apos;est {euros(PRIX_FAMILLE_AN)} par an — pour
-              une famille comme pour un professeur, et le professeur ne paie pas
-              plus cher parce qu&apos;il a trente élèves : cela lui fait{" "}
-              {centimes(EXEMPLE_CLASSE.parEleve)} par élève. Pour tout un
-              établissement, {euros(PRIX_ETABLISSEMENT_ELEVE_AN)} par élève ouvre
-              en plus la vue complète de la direction.
+              C&apos;est le même abonnement, au même élève — seul le payeur
+              change, et le prix descend avec lui. Une famille dans son coin paie{" "}
+              {montant(PRIX_FAMILLE_MOIS)} par mois. Si son professeur organise
+              la classe, {montant(PRIX_CLASSE_ELEVE_MOIS)}. Si
+              l&apos;établissement prend tout en charge,{" "}
+              {montant(PRIX_ETABLISSEMENT_ELEVE_MOIS)} — et jamais plus de{" "}
+              {euros(PLAFOND_ETABLISSEMENT_AN)} par an. On paie une fois, jamais
+              deux.
             </p>
           </div>
 
@@ -541,18 +639,43 @@ export default function TarifsClient() {
             ))}
           </div>
 
-          {/* L'argument, calculé — jamais recopié. */}
-          <div className="mt-6 rounded-[2rem] border border-emerald-200 bg-emerald-50/80 p-6 text-center shadow-lg backdrop-blur">
-            <p className="text-lg font-black text-slate-950">
-              Faites le calcul : {ARGUMENT_COLLECTIF.eleves} familles abonnées, c&apos;est{" "}
-              {euros(ARGUMENT_COLLECTIF.siChaqueFamillePaie)}.
+          {/* ⭐ L'ÉCHELLE CHIFFRÉE SUR UN SEUL EFFECTIF — et c'est aussi le
+              test de non-régression de la grille : ces trois totaux doivent
+              rester strictement décroissants. Une inversion, et un payeur a
+              intérêt à en contourner un autre ; c'est par là qu'un principal
+              est entré dans chacune des cinq versions précédentes, et ça ne se
+              voit jamais dans les taux — seulement ici.
+              ⛔ CE BLOC A REMPLACÉ « FAITES LE CALCUL », qui posait 360 € contre
+              30 € et concluait « douze fois moins cher ». Frédéric : « on tourne
+              en rond ». Il avait raison — l'ancien bloc opposait deux offres
+              sous les yeux de la seule personne qu'on essaie de faire payer, et
+              lui disait d'attendre. Celui-ci ne compare plus des offres, il
+              compare des PAYEURS pour le même élève. */}
+          <div className="mt-6 rounded-[2rem] border border-emerald-200 bg-emerald-50/80 p-6 shadow-lg backdrop-blur">
+            <p className="text-center text-lg font-black text-slate-950">
+              Le même collège de {ECHELLE.eleves} élèves, selon qui paie
             </p>
-            <p className="mt-1 text-lg font-black text-emerald-700">
-              Leur professeur, qui couvre exactement les mêmes élèves, paie{" "}
-              {euros(ARGUMENT_COLLECTIF.siLeProfPaie)}.
-            </p>
-            <p className="mt-2 text-sm font-bold text-slate-600">
-              Deux fois moins cher — et personne n&apos;est laissé dehors.
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              {[
+                { qui: "Chaque famille seule", total: ECHELLE.siLesFamillesPaient, ton: "text-slate-600" },
+                { qui: "Par les classes", total: ECHELLE.siLesClassesPaient, ton: "text-sky-700" },
+                { qui: "Par l'établissement", total: ECHELLE.siLEtablissementPaie, ton: "text-emerald-700" },
+              ].map((l) => (
+                <div key={l.qui} className="rounded-2xl bg-white/80 px-4 py-3 text-center ring-1 ring-emerald-100">
+                  <span className="block text-xs font-black uppercase tracking-wide text-slate-400">
+                    {l.qui}
+                  </span>
+                  <span className={`mt-1 block text-2xl font-black ${l.ton}`}>
+                    {euros(l.total)}
+                  </span>
+                  <span className="block text-xs font-bold text-slate-500">par an</span>
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 text-center text-sm font-bold text-slate-600">
+              Et dans les trois cas, l&apos;enfant dont personne n&apos;a payé
+              travaille exactement à l&apos;identique — le coach, les exercices et
+              les évaluations ne se ferment jamais.
             </p>
           </div>
         </section>

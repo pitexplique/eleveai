@@ -121,9 +121,13 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["fraction_lire_ecrire"],
   },
   {
+    // ⛔ PASSÉE SOUS « Calculer avec les fractions » le 22/08/2026. « La moitié
+    // de 10 », « le quart de 20 » : c'est déjà la fraction comme OPÉRATEUR
+    // MULTIPLICATIF du programme, pas une façon de lire un nombre. Elle ouvre
+    // donc la notion de calcul, avec les items du BO (2/5 de 60).
     id: "fraction_quantite",
-    label: "Comprendre une fraction comme quantité",
-    notionId: "fraction_nombre",
+    label: "Prendre une fraction d’un nombre",
+    notionId: "fraction_calcul",
     prerequis: ["fraction_representer"],
   },
   {
@@ -143,6 +147,65 @@ export const microSkills: MicroSkillSource[] = [
     label: "Défis sur les fractions",
     notionId: "fraction_nombre",
     prerequis: ["fraction_comparer"],
+  },
+
+  /* =========================
+     CALCULER AVEC LES FRACTIONS
+     ⛔ Ouvert le 22/08/2026. « Effectuer des opérations sur les fractions » est
+     un objectif d'apprentissage du programme de 6e, et le coach n'en avait
+     RIEN : additionner et soustraire (même dénominateur, dénominateurs
+     multiples l'un de l'autre, puis cas simples quelconques 5/4 + 2/3 et
+     7/2 − 3/5), multiplier une fraction par un entier et connaître la
+     commutativité de ce produit.
+  ========================= */
+  {
+    id: "fraction_additionner",
+    label: "Additionner et soustraire des fractions",
+    notionId: "fraction_calcul",
+    prerequis: ["fraction_comparer"],
+  },
+  {
+    id: "fraction_multiplier_entier",
+    label: "Multiplier une fraction par un nombre entier",
+    notionId: "fraction_calcul",
+    prerequis: ["fraction_quantite"],
+  },
+  {
+    id: "fraction_calcul_defi",
+    label: "Défis de calcul avec les fractions",
+    notionId: "fraction_calcul",
+    prerequis: ["fraction_additionner", "fraction_multiplier_entier"],
+  },
+
+  /* =========================
+     ALGÈBRE : PROBLÈMES À NOMBRES INCONNUS ET MOTIFS
+     ⛔ Ouvert le 22/08/2026 : deux objectifs du programme de 6e, zéro micro.
+     ⭐ En 6e on ne pose PAS d'équation : on dessine la relation. La « part »
+     du schéma en barres joue exactement le rôle que la lettre jouera en 5e.
+  ========================= */
+  {
+    id: "algebre_barres",
+    label: "Traduire un problème par un schéma en barres",
+    notionId: "algebre_probleme",
+    prerequis: ["entier_addition_mentale"],
+  },
+  {
+    id: "algebre_inconnues",
+    label: "Trouver deux nombres inconnus par échange",
+    notionId: "algebre_probleme",
+    prerequis: ["algebre_barres"],
+  },
+  {
+    id: "algebre_motif",
+    label: "Motif évolutif : régularité et structure",
+    notionId: "algebre_probleme",
+    prerequis: ["entier_multiplication_mentale"],
+  },
+  {
+    id: "algebre_defi",
+    label: "Défis : remonter un motif, partages en parts",
+    notionId: "algebre_probleme",
+    prerequis: ["algebre_inconnues", "algebre_motif"],
   },
 
   /* =========================
@@ -682,6 +745,206 @@ export const microSkills: MicroSkillSource[] = [
     label: "Défis : propriétés et inclusions",
     notionId: "quadrilatere_propriete",
     prerequis: ["quadrilatere_lien_propriete", "quadrilatere_conclusion"],
+  },
+
+  /* =========================
+     LE REPÉRAGE DANS LE TEMPS ET LES DURÉES
+     ⛔ Ouvert le 22/08/2026 : trois objectifs d'apprentissage du programme de
+     6e, zéro micro dans le coach. Le temps ne se compte pas en base dix, et
+     c'est là que l'élève tombe — 8 h 50 + 20 min n'est pas 8 h 70, 1,30 h n'est
+     pas 1 h 30. `duree_decimale` porte ce point à elle seule.
+  ========================= */
+  {
+    id: "duree_calculer",
+    label: "Calculer un horaire ou une durée",
+    notionId: "duree_temps",
+    prerequis: ["entier_addition_mentale"],
+  },
+  {
+    id: "duree_convertir",
+    label: "Convertir des durées (h, min, s, jours)",
+    notionId: "duree_temps",
+    prerequis: ["duree_calculer"],
+  },
+  {
+    id: "duree_decimale",
+    label: "Passer de l’écriture décimale d’une durée aux minutes",
+    notionId: "duree_temps",
+    prerequis: ["duree_convertir", "decimal_lire_ecrire"],
+  },
+  {
+    id: "duree_probleme",
+    label: "Résoudre un problème d’horaires",
+    notionId: "duree_temps",
+    prerequis: ["duree_calculer", "duree_convertir"],
+  },
+  {
+    id: "duree_defi",
+    label: "Défis : passer minuit, lire un tableau d’horaires",
+    notionId: "duree_temps",
+    prerequis: ["duree_probleme"],
+  },
+
+  /* =========================
+     DISTANCES ET MILIEU D'UN SEGMENT
+     ⛔ Ouvert le 22/08/2026 : c'est la première notion de géométrie du
+     programme de 6e, et le coach n'en avait rien. Elle porte l'inégalité
+     AC + CB ⩾ AB, que le BO fait ADMETTRE ici et qui resservira toute l'année.
+     ⚠️ `distance_inegalite` et `triangle_possible_ou_non` sont deux visages de
+     la même inégalité : ici trois POINTS et la question de l'alignement, là
+     trois LONGUEURS et la question de la construction. Le BO les range dans
+     deux chapitres, et l'élève ne les croise pas au même moment.
+  ========================= */
+  {
+    id: "distance_definition",
+    label: "Distance entre deux points : (AB), [AB] et AB",
+    notionId: "distance_segment",
+    prerequis: ["aire_longueur_mesurer"],
+  },
+  {
+    id: "distance_milieu",
+    label: "Le milieu d’un segment",
+    notionId: "distance_segment",
+    prerequis: ["distance_definition"],
+  },
+  {
+    id: "distance_inegalite",
+    label: "Le plus court chemin : AC + CB ⩾ AB",
+    notionId: "distance_segment",
+    prerequis: ["distance_definition"],
+  },
+  {
+    id: "distance_defi",
+    label: "Défis : milieux emboîtés, alignement",
+    notionId: "distance_segment",
+    prerequis: ["distance_milieu", "distance_inegalite"],
+  },
+
+  /* =========================
+     LA BISSECTRICE D'UN ANGLE
+     ⛔ Ouvert le 22/08/2026 : deux objectifs du programme de 6e, zéro micro.
+     ⚠️ « Saillant » n'est pas un détail : deux demi-droites de même origine
+     définissent DEUX angles, et le programme se limite au plus petit.
+  ========================= */
+  {
+    id: "bissectrice_definition",
+    label: "Définition : partager l’angle en deux angles égaux",
+    notionId: "bissectrice_angle",
+    prerequis: ["angle_reconnaitre", "angle_comparer"],
+  },
+  {
+    id: "bissectrice_construire",
+    label: "Construire une bissectrice (pliage, rapporteur)",
+    notionId: "bissectrice_angle",
+    prerequis: ["bissectrice_definition", "angle_mesurer"],
+  },
+  {
+    id: "bissectrice_probleme",
+    label: "Calculer un angle à partir d’une bissectrice",
+    notionId: "bissectrice_angle",
+    prerequis: ["bissectrice_definition"],
+  },
+  {
+    id: "bissectrice_defi",
+    label: "Défis : bissectrices successives, unicité",
+    notionId: "bissectrice_angle",
+    prerequis: ["bissectrice_construire", "bissectrice_probleme"],
+  },
+
+  /* =========================
+     LA VISION DANS L'ESPACE
+     ⛔ Ouvert le 22/08/2026 : l'un des deux chapitres du domaine « Espace et
+     géométrie », zéro micro dans le coach.
+     ⭐ Le cœur du chapitre est ce qu'on NE VOIT PAS. Compter les faces
+     visibles donne toujours un nombre trop petit ; on compte par étages.
+  ========================= */
+  {
+    id: "vision_vues",
+    label: "Les quatre vues : dessus, face, gauche, droite",
+    notionId: "vision_espace",
+    prerequis: ["volume_assemblage"],
+  },
+  {
+    id: "vision_denombrer",
+    label: "Compter les cubes d’un empilement, cachés compris",
+    notionId: "vision_espace",
+    prerequis: ["volume_compter"],
+  },
+  {
+    id: "vision_representation",
+    label: "Perspective cavalière, dessin à main levée, patron",
+    notionId: "vision_espace",
+    prerequis: ["vision_vues"],
+  },
+  {
+    id: "vision_defi",
+    label: "Défis : cubes cachés, cube peint puis découpé",
+    notionId: "vision_espace",
+    prerequis: ["vision_denombrer", "vision_representation"],
+  },
+
+  /* =========================
+     MÉDIATRICES D'UN TRIANGLE ET CERCLE CIRCONSCRIT
+     ⛔ Ouvert le 22/08/2026. C'est la PREMIÈRE PREUVE de l'année : le BO
+     demande que l'élève « comprenne pourquoi » et « restitue les arguments ».
+     D'où le poids des questions ouvertes ici — restituer une preuve ne se
+     coche pas dans un QCM.
+  ========================= */
+  {
+    id: "circonscrit_concourantes",
+    label: "Les trois médiatrices d'un triangle sont concourantes",
+    notionId: "cercle_circonscrit",
+    prerequis: ["mediatrice_propriete", "triangle_nommer"],
+  },
+  {
+    id: "circonscrit_construire",
+    label: "Construire le cercle circonscrit à un triangle",
+    notionId: "cercle_circonscrit",
+    prerequis: ["circonscrit_concourantes", "mediatrice_construire"],
+  },
+  {
+    id: "circonscrit_defi",
+    label: "Défis : trois points à égale distance, points alignés",
+    notionId: "cercle_circonscrit",
+    prerequis: ["circonscrit_construire"],
+  },
+
+  /* =========================
+     LA MÉDIATRICE D'UN SEGMENT
+     ⛔ Ouvert le 22/08/2026 : trois objectifs du programme de 6e, zéro micro.
+     ⭐ `mediatrice_propriete` porte la propriété caractéristique DANS LES DEUX
+     SENS. C'est le second — « équidistant, donc sur la médiatrice » — qui sert
+     à démontrer, et c'est celui que l'élève oublie.
+  ========================= */
+  {
+    id: "mediatrice_definition",
+    label: "Définition : perpendiculaire ET passant par le milieu",
+    notionId: "mediatrice_segment",
+    prerequis: ["distance_milieu", "angle_droit"],
+  },
+  {
+    id: "mediatrice_propriete",
+    label: "La propriété caractéristique, dans les deux sens",
+    notionId: "mediatrice_segment",
+    prerequis: ["mediatrice_definition"],
+  },
+  {
+    id: "mediatrice_construire",
+    label: "Construire une médiatrice (compas, équerre, pliage)",
+    notionId: "mediatrice_segment",
+    prerequis: ["mediatrice_definition"],
+  },
+  {
+    id: "mediatrice_probleme",
+    label: "Milieu d’une corde, centre inconnu d’un cercle",
+    notionId: "mediatrice_segment",
+    prerequis: ["mediatrice_propriete", "cercle_vocabulaire"],
+  },
+  {
+    id: "mediatrice_defi",
+    label: "Défis : triangle isocèle, point équidistant de trois points",
+    notionId: "mediatrice_segment",
+    prerequis: ["mediatrice_probleme"],
   },
 
   /* =========================

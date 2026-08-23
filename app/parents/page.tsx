@@ -1,11 +1,21 @@
 // app/parents/page.tsx
 import Link from "next/link";
 import type { Metadata } from "next";
+// ⚠️ LA CARTE « OFFRE FAMILLE » N'AVAIT PAS DE PRIX (corrigé le 22/08/2026).
+// Les deux cartes voisines annonçaient un montant en gros caractères
+// (« Gratuit », puis un pictogramme) ; celle du milieu affichait « Offre
+// famille » à la place du chiffre. Un parent ne clique pas pour découvrir un
+// prix qu'on lui cache — surtout quand le prix est justement l'argument.
+// ⛔ Et elle promettait un « prix de lancement bloqué » : il n'y a pas de prix
+// de lancement, le prix est ferme. Cette formule dit au lecteur qu'il achète
+// une remise temporaire, donc que le vrai prix est ailleurs et plus haut.
+import { PRIX_FAMILLE_AN, euros } from "@/lib/tarifs";
 
 export const metadata: Metadata = {
   title: "Parents",
-  description:
-    "Une IA qui explique, jamais qui fait à la place. Encadrée par un enseignant, sans publicité, données protégées. Gratuit si le collège l'utilise, sinon offre famille.",
+  description: `Une IA qui explique, jamais qui fait à la place. Encadrée par un enseignant, sans publicité, données protégées. Rien à payer si le collège l'utilise ; sinon ${euros(
+    PRIX_FAMILLE_AN,
+  )} par an et par famille, quel que soit le nombre d'enfants.`,
   alternates: { canonical: "https://www.eleveai.fr/parents" },
 };
 
@@ -52,7 +62,9 @@ const faq = [
   },
   {
     q: "Combien ça coûte, pour moi ?",
-    a: "Si le collège de votre enfant utilise EleveAI, c'est entièrement gratuit pour vous : l'établissement finance pour tous ses élèves. Sinon, une offre famille existe — et vous pouvez suggérer EleveAI à votre établissement.",
+    a: `Votre enfant, lui, ne paie jamais : le coach, les exercices, les parcours et les évaluations restent ouverts sans limite de temps. Si son collège participe, vous n'avez rien à payer non plus. Sinon, l'offre famille est à ${euros(
+      PRIX_FAMILLE_AN,
+    )} par an — un euro par mois, pour toute la maison quel que soit le nombre d'enfants — et elle ouvre votre vue à vous : son bulletin, sa semaine, et quoi reprendre ensuite. Vous pouvez aussi suggérer EleveAI à son établissement.`,
   },
 ];
 
@@ -280,12 +292,15 @@ export default function ParentsPage() {
             {/* Porte 2 — Offre famille (repli) */}
             <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md">
               <p className="text-4xl font-black text-slate-900">
-                Offre famille
+                {euros(PRIX_FAMILLE_AN)}
+                <span className="ml-1 text-base font-black text-slate-500">par an</span>
               </p>
               <h3 className="mt-2 font-black">Votre collège ne l'a pas encore</h3>
               <p className="mt-2 text-sm font-semibold leading-relaxed text-slate-600">
-                Un abonnement famille simple, sans engagement, pour continuer à la
-                maison. Prix de lancement bloqué.
+                Un euro par mois, par famille et jamais par enfant : le second de
+                la maison ne coûte rien de plus. Sans engagement. Votre enfant,
+                lui, continue de travailler sans rien payer — ce que
+                l&apos;abonnement ouvre, c&apos;est votre vue à vous.
               </p>
               <Link
                 href="/tarifs"

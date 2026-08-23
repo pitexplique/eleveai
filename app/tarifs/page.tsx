@@ -3,9 +3,11 @@ import type { Metadata } from "next";
 import TarifsClient from "./TarifsClient";
 import {
   EXEMPLE_ETABLISSEMENT,
-  PRIX_ETABLISSEMENT_ELEVE_AN,
+  PRIX_CLASSE_ELEVE_MOIS,
   PRIX_FAMILLE_AN,
-  PRIX_PROF_AN,
+  PRIX_FAMILLE_MOIS,
+  PLAFOND_ETABLISSEMENT_AN,
+  PRIX_ETABLISSEMENT_ELEVE_MOIS,
   euros,
 } from "@/lib/tarifs";
 
@@ -25,7 +27,7 @@ const url = "https://www.eleveai.fr/tarifs";
 const resume =
   `Plusieurs portes pour apprendre, progresser et s'évaluer : cinq matières du CP au Bac, coachs, parcours, rituels, cahiers et fiches. ` +
   `Le suivi par les parents est à ${euros(PRIX_FAMILLE_AN)} par an et par famille, quel que soit le nombre d'enfants. ` +
-  `Un professeur équipe sa classe pour ${euros(PRIX_PROF_AN)} par an, forfait, quel que soit le nombre d'élèves ; un établissement entier pour ${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} par élève et par an, soit ${euros(EXEMPLE_ETABLISSEMENT.total)} pour ${EXEMPLE_ETABLISSEMENT.eleves} élèves — et là, les familles ne paient rien.`;
+  `Une échelle : ${PRIX_FAMILLE_MOIS} € par élève et par mois pour une famille seule, ${PRIX_CLASSE_ELEVE_MOIS} € quand c'est le professeur qui organise sa classe, ${PRIX_ETABLISSEMENT_ELEVE_MOIS} € quand c'est l'établissement — plafonné à ${euros(PLAFOND_ETABLISSEMENT_AN)} par an. Plus le payeur est large, moins l'élève coûte, et on ne paie jamais deux fois.`;
 
 export const metadata: Metadata = {
   // ⚠️ Le titre suit le <h1> : une description ou un titre qui ne dit plus la

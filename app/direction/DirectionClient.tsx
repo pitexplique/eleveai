@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { EXEMPLE_ETABLISSEMENT, PLAFOND_ETABLISSEMENT_AN, euros } from "@/lib/tarifs";
 
 export default function DirectionClient() {
   const [password, setPassword] = useState("");
@@ -49,9 +50,25 @@ export default function DirectionClient() {
             Espace Direction EleveAI
           </h1>
 
+          {/* ⚠️ CETTE PHRASE PROMETTAIT TROIS CHOSES, dont deux qui n'existent
+              plus ici (corrigé le 22/08/2026) : « l'offre pilote » — dont le
+              lien a été retiré avec la page le 06/08 — et « les licences »,
+              qui annonçaient 1 490 € et 2 490 €, des montants sans rapport
+              avec la grille. Ne reste derrière le mot de passe qu'un tableau
+              de bord de consommation. Une page d'accueil qui annonce ce qu'elle
+              ne contient pas déçoit exactement le lecteur qu'on veut garder.
+              L'offre établissement, elle, est publique : /espace-ecoles. */}
           <p className="text-sm text-slate-300 max-w-xl">
-            Réservé aux chefs d’établissement.  
-            Vous trouverez ici l’offre pilote, les licences, les formations IA
+            Réservé aux chefs d’établissement. Vous trouverez ici le tableau de
+            bord de consommation de votre établissement. L’offre, elle, est
+            publique et sans devis —{" "}
+            <Link
+              href="/espace-ecoles"
+              className="font-semibold text-emerald-300 underline underline-offset-2 hover:text-emerald-200"
+            >
+              jamais plus de {euros(PLAFOND_ETABLISSEMENT_AN)} par an — {euros(EXEMPLE_ETABLISSEMENT.total)} pour un collège de {EXEMPLE_ETABLISSEMENT.eleves} élèves
+            </Link>
+            .
           </p>
         </header>
 

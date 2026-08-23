@@ -29,14 +29,17 @@
 // Le jour où Stripe encaisse, ce fichier change tout seul.
 
 import {
-  ARGUMENT_COLLECTIF,
+  ARGUMENT_ETABLISSEMENT,
   EXEMPLE_CLASSE,
   EXEMPLE_ETABLISSEMENT,
-  PRIX_ETABLISSEMENT_ELEVE_AN,
+  ECHELLE,
+  PLAFOND_ETABLISSEMENT_AN,
+  PRIX_CLASSE_ELEVE_MOIS,
+  PRIX_ETABLISSEMENT_ELEVE_MOIS,
   PRIX_FAMILLE_AN,
-  PRIX_PROF_AN,
-  centimes,
+  PRIX_FAMILLE_MOIS,
   euros,
+  montant,
 } from "@/lib/tarifs";
 import { VENTE } from "@/lib/legal/editeur";
 
@@ -85,13 +88,13 @@ Un concurrent financé peut copier le produit. Il ne peut pas être un professeu
 - Une famille qui ne peut pas payer ne paie pas, et personne ne le saura. Aucun élève n'a jamais eu à demander quoi que ce soit pour travailler ici.
 - ${etatVente}
 
-### La règle : un tableau de bord, c'est ${euros(PRIX_FAMILLE_AN)} par an
+### La règle : une échelle — plus le payeur est large, moins l'élève coûte
 
 - **Famille — 1 € par mois (${euros(PRIX_FAMILLE_AN)} par an), par FOYER et jamais par enfant.** Ouvre la vue du parent : bulletin, travail de la semaine, historique, et surtout des **recommandations personnalisées** notion par notion — quoi reprendre maintenant, et pourquoi. Elles sont calculées sur des règles explicites et non par une IA opaque : chacune s'explique devant un professeur ou une inspection. Tous les enfants de la maison sont couverts par le même abonnement.
-- **Professeur — ${euros(PRIX_PROF_AN)} par an, forfaitaire.** Le même tableau de bord, côté classe, et le prix ne dépend pas du nombre d'élèves : pour une classe de ${EXEMPLE_CLASSE.eleves}, cela fait ${centimes(EXEMPLE_CLASSE.parEleve)} par élève. Un professeur peut le payer sans passer par la coopérative de son établissement. Les familles de cette classe ne paient rien.
-- **Établissement — ${euros(PRIX_ETABLISSEMENT_ELEVE_AN)} par élève et par an**, soit ${euros(EXEMPLE_ETABLISSEMENT.total)} pour un collège de ${EXEMPLE_ETABLISSEMENT.eleves} élèves. Ce n'est pas le tableau de bord du professeur à l'échelle, c'est un autre produit : tous les niveaux, toutes les classes, la vue complète de la direction, et plus rien à gérer professeur par professeur.
+- **Classe — ${montant(PRIX_CLASSE_ELEVE_MOIS)} par élève et par mois**, soit ${euros(EXEMPLE_CLASSE.parMois)} par mois pour une classe de ${EXEMPLE_CLASSE.eleves}. Le professeur obtient son tableau de bord de classe, et il peut répercuter ce tarif à ses familles : elles paient alors 25 % de moins que si chacune s'abonnait seule. Il ne s'agit pas d'un autre produit, mais du même élève payé par un groupe plus large.
+- **Établissement — ${montant(PRIX_ETABLISSEMENT_ELEVE_MOIS)} par élève et par mois, et jamais plus de ${euros(PLAFOND_ETABLISSEMENT_AN)} par an**, quel que soit l'effectif. Il paie pour que personne d'autre ne paie, et la direction obtient la vue complète sur tous les niveaux.
 
-Conséquence chiffrée, et c'est l'argument le plus fort : pour ${ARGUMENT_COLLECTIF.eleves} élèves, ${ARGUMENT_COLLECTIF.eleves} familles abonnées séparément coûteraient ${euros(ARGUMENT_COLLECTIF.siChaqueFamillePaie)} ; leur professeur, qui couvre exactement les mêmes élèves, paie ${euros(ARGUMENT_COLLECTIF.siLeProfPaie)} — et personne n'est laissé dehors.
+L'échelle se vérifie sur un seul effectif : pour ${ECHELLE.eleves} élèves, les familles paieraient ${euros(ECHELLE.siLesFamillesPaient)} par an, les classes ${euros(ECHELLE.siLesClassesPaient)}, l'établissement ${euros(ECHELLE.siLEtablissementPaie)}. On paie une fois, jamais deux — et l'élève, lui, ne paie jamais : le coach, les exercices et les évaluations restent ouverts quoi qu'il arrive.
 
 ## Ce que le coach fait, et que les assistants de devoirs ne font pas
 

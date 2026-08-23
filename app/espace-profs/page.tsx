@@ -1,6 +1,32 @@
 // app/espace-profs/page.tsx
 import Link from "next/link";
 import type { Metadata } from "next";
+// ⛔ CETTE PAGE NE PARLAIT PAS D'ARGENT DU TOUT (corrigé le 22/08/2026) : zéro
+// prix, zéro lien vers /tarifs, et « Comment démarrer » renvoyait le professeur
+// vers son ÉTABLISSEMENT — « les comptes sont créés au niveau de
+// l'établissement, la mise en place se fait avec votre collège ».
+//
+// ⭐ C'est exactement ce que le forfait à 12 € a été créé pour supprimer la
+// veille : à 6 € par élève, une classe de 30 coûtait 180 €, donc la
+// coopérative, donc une réunion, donc la rentrée suivante. Le forfait existe
+// pour qu'un professeur décide SEUL — et sa page ne le lui proposait jamais.
+// C'est le seul canal d'acquisition qu'un prix à 12 € puisse financer.
+//
+// ⚠️ MAIS ON NE PROMET PAS UN BOUTON QUI N'EXISTE PAS. L'inscription
+// professeur par e-mail n'est pas codée (le rattachement prof↔classe↔élève doit
+// être tranché avant), et `VENTE.ouverte` est à false. On annonce donc le prix
+// et la règle — ils sont fermes — et on dit où ça en est, comme /tarifs. Une
+// page qui annonce un achat dont la caisse ne répond pas est pire que le
+// silence : c'est la leçon du llms.txt qui prétendait que le coach ne demandait
+// pas de compte.
+import { VENTE } from "@/lib/legal/editeur";
+import {
+  EXEMPLE_CLASSE,
+  PRIX_CLASSE_ELEVE_MOIS,
+  PRIX_FAMILLE_MOIS,
+  centimes,
+  montant,
+} from "@/lib/tarifs";
 
 // ⚠️ LA CANONIQUE SUIT LA REDIRECTION, ELLE NE LA CONTREDIT PAS (10/08/2026).
 // Cette page a vécu à `/enseignants` ; depuis le 08/08 c'est l'inverse qui est
@@ -346,23 +372,108 @@ export default function EnseignantsPage() {
         <section className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-md">
           <h2 className="text-2xl font-black">Comment démarrer avec votre classe</h2>
           <p className="mt-2 text-sm font-semibold leading-relaxed text-slate-600">
-            Les comptes élèves et professeurs sont créés au niveau de
-            l&apos;établissement : un code établissement, un code par élève et par
-            professeur, sans installation ni adresse e-mail. La mise en place se fait
-            avec votre collège — souvent en quelques heures.
+            Il y a deux chemins, et le premier ne demande l&apos;autorisation de
+            personne.
           </p>
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {/* Le chemin du prof seul — celui pour lequel le forfait existe. */}
+            <div className="rounded-2xl border-2 border-sky-200 bg-sky-50/60 p-5">
+              <p className="text-xs font-black uppercase tracking-wide text-sky-700">
+                Vous, pour votre ou vos classes
+              </p>
+              <p className="mt-2 text-3xl font-black text-slate-900">
+                {montant(PRIX_CLASSE_ELEVE_MOIS)}
+                <span className="ml-1 text-base font-black text-slate-500">
+                  par élève et par mois
+                </span>
+              </p>
+              {/* ⭐ CE QUE LE PROFESSEUR APPORTE, SANS PAYER POUR AUTANT : ses
+                  familles passent de 1 € à 0,75 €. C'est le tarif de groupe
+                  qu'il ouvre, comme pour une sortie scolaire. ⛔ Ne jamais
+                  afficher le total annuel d'une classe (270 €) : c'est le
+                  nombre qui renvoie un prof à sa coopérative. */}
+              <p className="mt-1 text-sm font-black text-sky-800">
+                {centimes(EXEMPLE_CLASSE.parMois)} par mois pour{" "}
+                {EXEMPLE_CLASSE.eleves} élèves — 25 % de moins que si chaque
+                famille s&apos;abonnait seule à {montant(PRIX_FAMILLE_MOIS)}
+              </p>
+              {/* ⛔ CETTE PHRASE DISAIT « LES FAMILLES DE VOTRE CLASSE NE PAIENT
+                  RIEN » — vrai du forfait professeur du 21/08, faux depuis le 22.
+                  Ce sont elles qui paient, moins cher, et c'est tout l'intérêt.
+                  Une constante ne protège que d'un chiffre : celle-ci était juste
+                  pendant que la phrase autour d'elle mentait.
+                  ⚠️ CE QUI RESTE VRAI ET QU'ON NE TOUCHE PAS : l'ÉLÈVE, lui, ne
+                  paie jamais. C'est la fenêtre du parent qui s'achète, et
+                  l'enfant dont la famille ne s'abonne pas travaille à
+                  l'identique — sans que vous sachiez lequel c'est. */}
+              <p className="mt-3 text-sm font-semibold leading-relaxed text-slate-600">
+                Vous n&apos;avancez rien et vous ne ramassez rien : vos familles
+                s&apos;abonnent en direct, au tarif de votre classe. Vous ne
+                saurez pas qui a payé — votre tableau de bord affiche vos{" "}
+                {EXEMPLE_CLASSE.eleves} élèves sans distinction, et celui dont la
+                famille ne s&apos;abonne pas travaille exactement comme les
+                autres. Vos élèves, eux, n&apos;ont jamais rien à payer.
+              </p>
+              {VENTE.ouverte ? (
+                <Link
+                  href="/tarifs#classe"
+                  className="mt-4 inline-flex items-center gap-2 rounded-full bg-sky-600 px-5 py-2.5 text-sm font-black text-white transition hover:bg-sky-500"
+                >
+                  Équiper ma classe
+                </Link>
+              ) : (
+                <>
+                  <Link
+                    href="/tarifs#classe"
+                    className="mt-4 inline-flex items-center gap-2 rounded-full bg-sky-600 px-5 py-2.5 text-sm font-black text-white transition hover:bg-sky-500"
+                  >
+                    Voir l&apos;offre classe
+                  </Link>
+                  <p className="mt-2 text-xs font-bold text-slate-500">
+                    Le tableau de bord professeur se construit en ce moment. Le
+                    prix ci-dessus est ferme, et rien n&apos;est encaissé tant
+                    qu&apos;il n&apos;est pas prêt.
+                  </p>
+                </>
+              )}
+            </div>
+
+            {/* Le chemin établissement — il reste, il n'est plus le seul. */}
+            <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5">
+              <p className="text-xs font-black uppercase tracking-wide text-slate-600">
+                Ou tout votre établissement
+              </p>
+              <p className="mt-2 text-sm font-semibold leading-relaxed text-slate-600">
+                Un code établissement, un code par élève et par professeur, sans
+                installation ni adresse e-mail. Tous les niveaux, toutes les
+                classes, tous les collègues, plus la vue complète de la direction.
+                La mise en place se fait avec votre collège — souvent en quelques
+                heures.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <Link
+                  href="/espace-ecoles"
+                  className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-black text-white transition hover:bg-slate-700"
+                >
+                  🏫 Déployer dans mon établissement
+                </Link>
+              </div>
+            </div>
+          </div>
+
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link
-              href="/espace-ecoles"
-              className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-black text-white transition hover:bg-slate-700"
-            >
-              🏫 Déployer dans mon établissement
-            </Link>
             <Link
               href="/dashboard-prof"
               className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-5 py-2.5 text-sm font-black text-slate-800 transition hover:bg-slate-50"
             >
               Accéder à mon tableau de bord
+            </Link>
+            <Link
+              href="/tarifs"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-5 py-2.5 text-sm font-black text-slate-800 transition hover:bg-slate-50"
+            >
+              Les trois offres en détail
             </Link>
           </div>
         </section>

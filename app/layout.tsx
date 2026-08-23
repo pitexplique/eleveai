@@ -13,9 +13,10 @@ import MasqueSurGuide from "@/components/MasqueSurGuide";
 import EcrireAuProf from "@/components/EcrireAuProf";
 import PageViewTracker from "@/components/PageViewTracker";
 import {
-  PRIX_ETABLISSEMENT_ELEVE_AN,
+  PRIX_ETABLISSEMENT_ELEVE_MOIS,
   PRIX_FAMILLE_AN,
-  PRIX_PROF_AN,
+  PLAFOND_ETABLISSEMENT_AN,
+  PRIX_CLASSE_ELEVE_MOIS,
 } from "@/lib/tarifs";
 import { VENTE } from "@/lib/legal/editeur";
 
@@ -265,8 +266,16 @@ export default function RootLayout({
           name: "Famille — par foyer, jamais par enfant",
           description:
             "Le coach, les exercices et les évaluations ne se paient pas, et l'élève garde ses résultats. Ce qui se paie, c'est que ça se souvienne de votre enfant : bulletin, travail de la semaine, historique. Un seul abonnement couvre tous les enfants du foyer.",
-          price: PRIX_FAMILLE_AN,
-          priceCurrency: "EUR",
+          priceSpecification: {
+            "@type": "UnitPriceSpecification",
+            price: PRIX_FAMILLE_AN,
+            priceCurrency: "EUR",
+            unitText: "foyer",
+            referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitText: "foyer" },
+            billingDuration: 12,
+            billingIncrement: 1,
+            unitCode: "ANN",
+          },
           /* ⚠️ LA DISPONIBILITÉ SUIT LE VERROU DE VENTE, elle ne l'anticipe
              pas. Tant que `VENTE.ouverte` est faux, Stripe n'encaisse pas :
              annoncer une offre achetable dont la caisse ne répond pas est pire
@@ -280,12 +289,19 @@ export default function RootLayout({
         },
         {
           "@type": "Offer",
-          name: "Professeur — forfait, quel que soit le nombre d'élèves",
+          name: "Classe — 0,75 € par élève et par mois",
           description:
-            "Le professeur suit sa classe compétence par compétence, sans corriger. Forfait annuel : 25 élèves ou 35, c'est le même prix, et il n'a pas à passer par la coopérative pour le payer. Les familles de cette classe ne paient rien.",
-          price: PRIX_PROF_AN,
-          priceCurrency: "EUR",
-          unitText: "an",
+            "Le professeur suit sa classe compétence par compétence, sans corriger. Il ne paie rien lui-même : c'est le tarif de groupe qu'il ouvre à ses familles, qui paient 25 % de moins que si chacune s'abonnait seule. L'élève, lui, ne paie jamais.",
+          priceSpecification: {
+            "@type": "UnitPriceSpecification",
+            price: PRIX_CLASSE_ELEVE_MOIS,
+            priceCurrency: "EUR",
+            unitText: "élève",
+            referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitText: "élève" },
+            billingDuration: 1,
+            billingIncrement: 1,
+            unitCode: "MON",
+          },
           availability: VENTE.ouverte
             ? "https://schema.org/InStock"
             : "https://schema.org/PreOrder",
@@ -293,12 +309,24 @@ export default function RootLayout({
         },
         {
           "@type": "Offer",
-          name: "Établissement — tous les professeurs, plus la direction",
+          name: "Établissement — 0,50 € par élève et par mois, plafonné",
           description:
-            "Tous les niveaux, toutes les classes, tous les professeurs, et la vue complète du chef d'établissement. Facturé à l'établissement — rien aux familles, et aucun élève ne paie.",
-          price: PRIX_ETABLISSEMENT_ELEVE_AN,
-          priceCurrency: "EUR",
-          unitText: "élève et par an",
+            "Tous les niveaux, toutes les classes, tous les professeurs, et la vue complète du chef d'établissement. Jamais plus de 2 000 € par an quel que soit l'effectif. L'établissement paie pour que personne d'autre ne paie — rien aux familles, et aucun élève ne paie.",
+          priceSpecification: {
+            "@type": "UnitPriceSpecification",
+            price: PRIX_ETABLISSEMENT_ELEVE_MOIS,
+            priceCurrency: "EUR",
+            unitText: "élève",
+            referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitText: "élève" },
+            billingDuration: 1,
+            billingIncrement: 1,
+            unitCode: "MON",
+            /* Le plafond fait partie du prix : sans lui, un moteur qui
+               multiplie 0,50 € par un effectif annonce un montant que nous ne
+               demandons pas. `maxPrice` le dit dans le vocabulaire des
+               machines. */
+            maxPrice: PLAFOND_ETABLISSEMENT_AN,
+          },
           availability: VENTE.ouverte
             ? "https://schema.org/InStock"
             : "https://schema.org/PreOrder",

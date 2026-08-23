@@ -54,6 +54,17 @@ export const STATUTS_PUBLIABLES: StatutRessource[] = ["validee", "testee_eleves"
  * ⛔ N'écrire une liste ici que si l'ordre au score est FAUX pour ce profil.
  * Ailleurs, le score fait mieux que nous.
  *
+ * ── ⭐ 22/08/2026 — CES LISTES NE REMPLISSENT PLUS L'ÉCRAN, ELLES L'OUVRENT ──
+ * `NB_MAX` est passé de 3 à 6 (moteur.ts). Une liste de trois entrées ne dit
+ * donc plus « voici les trois cartes » mais « voici les trois PREMIÈRES » : le
+ * score reprend la main pour les places 4 à 6, sous le même seuil et la même
+ * règle d'une seule ressource par famille.
+ *
+ * C'est le bon partage, et il n'y a rien à rallonger ici par symétrie : ce
+ * qu'un prof sait mieux que le calcul, c'est PAR OÙ on commence — la quatrième
+ * carte d'un écran, elle, est exactement ce que le score sait faire. Une liste
+ * de six serait six lignes à tenir à jour pour reproduire ce qui se calcule.
+ *
  * ── TROIS FORMES D'ENTRÉE ───────────────────────────────────────────────────
  *   « photo-cours »  un id précis ;
  *   « type:coach »   la mieux classée de ce TYPE — c'est ce qu'il faut pour
@@ -80,6 +91,15 @@ const PORTES_ELEVE_DES_LA_6E = ["type:coach", "*", "photo-cours"];
  * deux coachs ouverts, maths et français, et ils doivent sortir TOUS LES DEUX.
  * Le joker n'en aurait donné qu'un.
  *
+ * ⚠️ 22/08/2026 — CETTE PHRASE EST À MOITIÉ PÉRIMÉE, ET IL FAUT LE SAVOIR.
+ * « Aucune case au hasard du score » était vrai tant que `NB_MAX` valait 3 :
+ * trois portes écrites remplissaient l'écran, le calcul n'avait plus la main.
+ * À six places, il reprend les trois dernières — au CM1 et au CM2 ce sont les
+ * parcours, les cahiers et le dico, c'est-à-dire tout ce que ces classes ont
+ * de publiable, et il n'y a donc pas de hasard à craindre : le score ne CHOISIT
+ * plus, il finit la liste. Ce qui reste vrai, et qui est le vrai sujet de cette
+ * note, c'est l'ORDRE DES TROIS PREMIÈRES.
+ *
  * Pourquoi une liste écrite alors que la règle dit de laisser faire le score :
  * parce qu'au score la 3ᵉ carte est « Les parcours ». La dictée du jour a
  * exactement le même score (7, comme les deux coachs) et arrive après — c'est
@@ -102,15 +122,45 @@ const PORTES_ELEVE_CYCLE_3 = ["coach-maths", "coach-francais", "dictee-du-jour"]
  * Le rituel est ce qui le ramène ; le coach est ce qu'il ouvre une fois qu'il
  * est revenu.
  *
- * ⚠️ AUCUN « * » : à quatre ressources taguées, le joker n'aurait rien à
- * tirer. On nomme les trois, et la quatrième (l'espagnol du jour) sort par le
- * score dès qu'on clique sa matière.
+ * ⚠️ AUCUN « * », ET IL N'EN FAUT TOUJOURS PAS. Le joker sert à laisser une
+ * case au score au MILIEU d'une liste ; ici il n'y a rien à intercaler, et
+ * depuis le 22/08 le score prend de toute façon les places qui restent après la
+ * dernière entrée écrite. L'espagnol du jour arrive donc par là.
  * ⛔ PAS DE `coach-francais` : le coach n'a PAS de classe adulte en français,
  * et `normalizeClasse` retomberait EN SILENCE sur la 6ᵉ (voir le piège n°1 de
  * coach.ts). Un adulte y trouverait le français d'un sixième sans qu'on le
  * prévienne. C'est le seul trou de l'étagère, et il est connu.
+ *
+ * ── ⭐ 22/08/2026 — LE CRPE PREND LA TROISIÈME PLACE ────────────────────────
+ * Frédéric : « à élève classe adulte tu rajoutes CRPE en encart, choisis sa
+ * position ».
+ *
+ * Les deux rituels gardent les places 1 et 2 : la décision du 21/08 ci-dessus
+ * tient toujours, c'est le rituel qui ramène un adulte, et une offre payante en
+ * premier écran dirait le contraire de tout le reste du site.
+ *
+ * La page CRPE n'a pas de seconde route — hors du lexique, une carte est sa
+ * seule porte. S'ajoute qu'elle EXPIRE : les inscriptions se jouent avant le
+ * 3 octobre, alors qu'un coach est là toute l'année.
+ *
+ * ⛔ Ne pas la monter en première place « parce qu'elle rapporte ». Un adulte
+ * qui arrive doit voir ce qui est gratuit avant ce qui est payant.
+ * ⚠️ À REVOIR APRÈS LE CONCOURS : passé le printemps 2027, cette ligne s'efface
+ * — sinon l'étagère de l'adulte gardera l'affiche d'une session terminée.
+ *
+ * ── ⭐ ET `coach-maths` REVIENT, LE MÊME JOUR ────────────────────────────────
+ * Cette liste n'en comptait que trois, et la note disait pourquoi : à
+ * `NB_MAX = 3`, ajouter le CRPE ne pouvait pas être autre chose que remplacer,
+ * et c'est le coach qui avait cédé. Le plafond est passé à six dans l'heure
+ * (Frédéric : « on passe de 3 à 4, 5 ou 6 »), donc l'arbitrage n'a plus lieu
+ * d'être : le coach reprend sa place, en quatrième, derrière l'offre qui expire
+ * et devant ce que le score ajoutera.
+ * ⚠️ C'est SA classe adulte qu'il ouvre — « Calculs du quotidien », 24 micros
+ * et 861 lignes — et non un repli silencieux sur la 6ᵉ. Voir sa fiche.
+ * ⛔ TOUJOURS PAS DE `coach-francais` : le trou du français adulte est réel et
+ * il n'a pas bougé (piège n°1 de coach.ts). Six places ne le comblent pas.
  */
-const PORTES_ADULTE = ["calcul-rapide", "dictee-du-jour", "coach-maths"];
+const PORTES_ADULTE = ["calcul-rapide", "dictee-du-jour", "formation-crpe", "coach-maths"];
 
 export const PORTES_ECRITES: Partial<Record<ProfilId, string[]>> = {
   adulte: PORTES_ADULTE,
@@ -1057,6 +1107,47 @@ export const RESSOURCES: RessourceEleveAI[] = [
   },
 
   // ── Les adultes ────────────────────────────────────────────────────────
+  {
+    // ⭐ LA SEULE RESSOURCE PAYANTE DE L'INVENTAIRE (22/08/2026, Frédéric :
+    // « à élève classe adulte tu rajoutes CRPE en encart »). Tout le reste ici
+    // est gratuit ; celle-ci vend une matinée de son temps, et c'est justement
+    // ce que son propre test de monétisation autorise — ce qui est rare par
+    // nature, pas ce qui se copie à coût nul.
+    //
+    // ⚠️ `niveaux: ["adulte"]` ET RIEN D'AUTRE. Pas de `parent`, pas de `prof` :
+    // un parent vient pour son enfant et un enseignant est déjà en poste — leur
+    // servir une préparation au concours serait du bruit chez l'un et une
+    // maladresse chez l'autre. C'est le champ du piège récurrent de ce fichier
+    // (le lycée oublié le 07/08, les adultes oubliés le 16/08) : ici l'oubli
+    // serait inverse, en déclarer trop.
+    //
+    // ⚠️ `notions: ["concours"]` — la notion existe déjà au lexique et son
+    // commentaire dit pourquoi ça suffit : « ce sont les NIVEAUX des ressources
+    // qui départagent ». Avenir sort en Terminale, le concours général au
+    // collège, le CRPE chez l'adulte. Le sigle « crpe » vient d'être ajouté à
+    // ses alias, sans quoi la page serait introuvable au clavier — le moteur ne
+    // lit NI `titre` NI `promesse`.
+    //
+    // ⚠️ `statut: "validee"` et jamais `testee_eleves` : le bandeau de la carte
+    // se décide là-dessus et dirait « testée en classe » d'une formation qui n'a
+    // pas encore eu lieu.
+    //
+    // ⛔ PAS de `resultat` : rien ne remonte au tableau de bord, et c'est vrai.
+    // Une matinée en salle ne produit pas de score.
+    id: "formation-crpe",
+    titre: "Préparer les maths du CRPE",
+    // La promesse ne choisit ni le tutoiement ni le vouvoiement (voir types.ts),
+    // et elle dit le prix : une carte qui mène à une page payante sans l'annoncer
+    // se paie en confiance, pas en clics.
+    promesse: "14 samedis à Saint-Pierre, 60 € la matinée, pour la seule épreuve de maths.",
+    url: "/formation-crpe",
+    niveaux: ["adulte"],
+    matiere: "maths",
+    notions: ["concours"],
+    intentions: ["preparer"],
+    type: "page",
+    statut: "validee",
+  },
   {
     id: "espace-parents",
     titre: "L'espace parents",

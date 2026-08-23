@@ -12,8 +12,11 @@ import Sujet6eFrancaisClient from "./Sujet6eFrancaisClient";
 export const metadata: Metadata = {
   title:
     "Évaluation nationale 6e français — gratuit, en PDF imprimable (sujet + corrigé) | EleveAI",
+  // ⚠️ 160 CARACTÈRES MAXIMUM — voir ../page.tsx pour le pourquoi.
+  // Elle en faisait 474. « les textes » est gardé pour la même raison qu'en
+  // 4e : sans eux, les questions d'oral n'ont pas de support.
   description:
-    "Le sujet de l'épreuve blanche d'évaluation nationale de 6e en français, à imprimer gratuitement : 60 questions en 50 minutes, aux effectifs du sujet officiel, sur le programme de CM2 — texte littéraire, document composite, lexique, grammaire, orthographe et compréhension de l'oral. Les textes des enregistrements sont fournis à part, sur la feuille du professeur. Trois formats : le sujet seul, le sujet et son corrigé, ou le corrigé seul. Sans inscription, sans publicité.",
+    "L'évaluation nationale de 6e en français à imprimer : 60 questions en 50 minutes, sur le programme de CM2. Le sujet, le corrigé et les textes. Gratuit.",
   keywords: [
     "évaluation nationale 6e français à imprimer",
     "évaluation nationale 6e français PDF",
@@ -31,7 +34,7 @@ export const metadata: Metadata = {
     title:
       "Évaluation nationale 6e français — gratuit, en PDF imprimable (sujet + corrigé) — EleveAI",
     description:
-      "60 questions en 50 minutes, aux effectifs du sujet officiel, sur le programme de CM2. Le sujet, le corrigé, et les textes à lire à voix haute — à imprimer gratuitement.",
+      "60 questions en 50 minutes, sur le programme de CM2. Le sujet, le corrigé et les textes à lire à voix haute — à imprimer gratuitement.",
     url: "/evaluation-nationale-college/6e-francais/a-imprimer",
     type: "article",
     siteName: "EleveAI",

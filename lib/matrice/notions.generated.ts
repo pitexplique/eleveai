@@ -13,7 +13,7 @@
 // liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
 // par où l'année peut commencer.
 //
-// 689 notions, 40 paquets.
+// 690 notions, 40 paquets.
 
 export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
@@ -451,6 +451,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "fraction_calcul",
+        "label": "Calculer avec les fractions",
+        "prerequis": [
+          "fraction_nombre"
+        ]
+      },
+      {
         "id": "pourcentage_nombre",
         "label": "Pourcentages",
         "prerequis": [
@@ -496,10 +503,60 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "algebre_probleme",
+        "label": "Problèmes à nombres inconnus et motifs",
+        "prerequis": [
+          "entier_calcul_mental"
+        ]
+      },
+      {
+        "id": "distance_segment",
+        "label": "Distances et milieu d’un segment",
+        "prerequis": [
+          "aire_longueur"
+        ]
+      },
+      {
+        "id": "cercle_circonscrit",
+        "label": "Médiatrices d'un triangle et cercle circonscrit",
+        "prerequis": [
+          "mediatrice_segment",
+          "triangle_figure"
+        ]
+      },
+      {
+        "id": "bissectrice_angle",
+        "label": "La bissectrice d’un angle",
+        "prerequis": [
+          "angle_mesure"
+        ]
+      },
+      {
+        "id": "mediatrice_segment",
+        "label": "La médiatrice d’un segment",
+        "prerequis": [
+          "distance_segment"
+        ]
+      },
+      {
         "id": "cercle_disque",
         "label": "Le cercle et le périmètre du disque",
         "prerequis": [
           "aire_perimetre"
+        ]
+      },
+      {
+        "id": "vision_espace",
+        "label": "La vision dans l'espace",
+        "prerequis": [
+          "volume_solide"
+        ]
+      },
+      {
+        "id": "duree_temps",
+        "label": "Le repérage dans le temps et les durées",
+        "prerequis": [
+          "decimal_nombre"
         ]
       },
       {

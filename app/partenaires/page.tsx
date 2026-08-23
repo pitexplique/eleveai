@@ -3,7 +3,13 @@
 import Link from "next/link";
 import React, { useState } from "react";
 
-export default function PartenairesPage(): JSX.Element {
+// ⚠️ `React.JSX.Element` ET NON `JSX.Element` (22/08/2026). React 19 a retiré
+// le namespace GLOBAL `JSX` — il vit maintenant sous `React`. C'était la seule
+// annotation de ce genre du dépôt, et la seule erreur de typage de la montée de
+// version. Le type de retour ne sert d'ailleurs à rien ici : TypeScript le
+// déduit. On le corrige plutôt que de le retirer, pour ne pas faire croire que
+// la montée de React demandait de réécrire du code.
+export default function PartenairesPage(): React.JSX.Element {
   const EMAIL = "contact@eleveai.fr";
   const [copied, setCopied] = useState(false);
 

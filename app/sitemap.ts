@@ -42,6 +42,20 @@ const LASTMOD_AUDIENCES = new Date("2026-07-05");
    qu'un décalage de `LASTMOD_CORE`, qui aurait annoncé à tort une modification
    sur la quarantaine de pages qui la partagent. */
 const LASTMOD_SEO_AOUT = new Date("2026-08-21");
+/* ⭐ LA GRILLE TARIFAIRE A CHANGÉ LE 22/08 — et un `lastmod` qui ne bouge pas
+   après un vrai changement de contenu est précisément ce qui retarde le
+   recrawl. Google et Bing s'en servent pour décider s'ils reviennent : laisser
+   /tarifs au 21/08 revenait à leur dire « rien de neuf » le lendemain du jour
+   où tous les prix du site ont changé.
+   ⚠️ UNE DATE À PART, et pas un décalage de `LASTMOD_SEO_AOUT` : celui-ci
+   couvre aussi des pages que la grille n'a pas touchées, et les faire bouger
+   toutes annoncerait des modifications qui n'ont pas eu lieu. La règle de ce
+   fichier depuis juin : une date par vague de modifications réelle.
+   ⛔ CETTE DATE SE MET À JOUR AVEC LA GRILLE, JAMAIS SEULE. Si `lib/tarifs.ts`
+   bouge et pas elle, les huit pages ci-dessous mentent aux moteurs pendant des
+   semaines — c'est exactement ce qui était arrivé à la SERP en juin, qui a
+   annoncé « 4,90 €/mois » longtemps après la page. */
+const LASTMOD_TARIFS = new Date("2026-08-22");
 const LASTMOD_LEGAL   = new Date("2026-02-18");
 
 // Les classes du site vivent dans `/programme/<classe>` (plus bas) : c'est là
@@ -367,7 +381,7 @@ const ROUTES: RouteConfig[] = [
   // ── ESPACES / AUDIENCES ────────────────────────────────────────────────────
   // Pages d'audience = portes du header et de l'accueil (destinations principales).
   { path: "/parents",         priority: 0.9,  changeFrequency: "monthly", lastMod: LASTMOD_AUDIENCES },
-  { path: "/espace-profs",     priority: 0.9,  changeFrequency: "monthly", lastMod: LASTMOD_AUDIENCES },
+  { path: "/espace-profs",     priority: 0.9,  changeFrequency: "monthly", lastMod: LASTMOD_TARIFS },
   // ⚠️ Entrée au sitemap le 12/08 — ce qui a OBLIGÉ à retirer le `noindex` de
   // la page. Annoncer une adresse à Google et lui interdire de l'indexer dans
   // la même journée, c'est se signaler une erreur à soi-même dans la Search
@@ -381,7 +395,7 @@ const ROUTES: RouteConfig[] = [
   ...["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere-spe", "terminale-spe"].map((c) => (
     { path: `/programme/${c}`, priority: 0.9, changeFrequency: "monthly" as const, lastMod: new Date("2026-07-11") }
   )),
-  { path: "/espace-ecoles",   priority: 0.95, changeFrequency: "monthly", lastMod: LASTMOD_AUDIENCES },
+  { path: "/espace-ecoles",   priority: 0.95, changeFrequency: "monthly", lastMod: LASTMOD_TARIFS },
   { path: "/espace-eleves",   priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/espace-parents",  priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
 
@@ -398,16 +412,24 @@ const ROUTES: RouteConfig[] = [
   { path: "/qui-sommes-nous",   priority: 0.7,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   // 0,7 → 0,85 le 21/08 : la page est devenue une destination de l'en-tête et
   // porte désormais les trois offres. Elle n'est plus une annexe.
-  { path: "/tarifs",            priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_SEO_AOUT },
+  { path: "/tarifs",            priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_TARIFS },
+  // ⭐ 22/08 — LA FORMATION CRPE ENTRE AU SITEMAP, le statut URSSAF étant réglé.
+  // `weekly` et non `monthly` : les inscriptions se jouent avant le 3 octobre et
+  // le nombre de places bouge. Priorité 0,8, au niveau de /tarifs et non des
+  // pages institutionnelles : c'est une offre datée, pas une page de présentation.
+  // ⚠️ Elle vise une requête locale et étroite — « préparation CRPE Réunion »,
+  // « maths CRPE Saint-Pierre ». Ne pas espérer du volume : ce qui compte est
+  // qu'un candidat de l'île qui cherche exactement ça la trouve.
+  { path: "/formation-crpe",    priority: 0.8,  changeFrequency: "weekly",  lastMod: LASTMOD_SEO_AOUT },
   { path: "/contact",           priority: 0.65, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   // 20/07 : les pages de la PHILOSOPHIE qui manquaient au sitemap (audit
   // Frédéric « qu'il n'oublie pas notre philosophie ») — la charte d'usage de
   // l'IA (la confiance), les tarifs justes (gratuit pour l'élève, jamais la
   // famille), le pilote gratuit, la presse et les partenaires (l'institution).
   { path: "/charte",            priority: 0.7,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
-  { path: "/pourquoi-nos-tarifs-sont-justes", priority: 0.65, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
-  { path: "/offre-pilote",      priority: 0.7,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
-  { path: "/presse",            priority: 0.6,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  { path: "/pourquoi-nos-tarifs-sont-justes", priority: 0.65, changeFrequency: "monthly", lastMod: LASTMOD_TARIFS },
+  { path: "/offre-pilote",      priority: 0.7,  changeFrequency: "monthly", lastMod: LASTMOD_TARIFS },
+  { path: "/presse",            priority: 0.6,  changeFrequency: "monthly", lastMod: LASTMOD_TARIFS },
   { path: "/partenaires",       priority: 0.6,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/entreprises",       priority: 0.6,  changeFrequency: "monthly", lastMod: new Date("2026-07-22") },
   // 11/08 : les 50 places de la bêta 2026-2027. Priorité haute pour la rentrée,
@@ -421,8 +443,8 @@ const ROUTES: RouteConfig[] = [
   { path: "/faq",                   priority: 0.6,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/faq/faq-professeurs",   priority: 0.55, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/faq/faq-parents",       priority: 0.55, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
-  { path: "/faq/faq-administration",priority: 0.5,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
-  { path: "/faq/faq-tarifs",        priority: 0.5,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  { path: "/faq/faq-administration",priority: 0.5,  changeFrequency: "monthly", lastMod: LASTMOD_TARIFS },
+  { path: "/faq/faq-tarifs",        priority: 0.7,  changeFrequency: "monthly", lastMod: LASTMOD_TARIFS },
 
   // ── LÉGAL ──────────────────────────────────────────────────────────────────
   { path: "/mentions-legales",           priority: 0.3, changeFrequency: "yearly", lastMod: LASTMOD_LEGAL },

@@ -12,8 +12,12 @@ import Sujet4eFrancaisClient from "./Sujet4eFrancaisClient";
 export const metadata: Metadata = {
   title:
     "Évaluation nationale 4e français — gratuit, en PDF imprimable (sujet + corrigé) | EleveAI",
+  // ⚠️ 160 CARACTÈRES MAXIMUM — voir ../page.tsx pour le pourquoi.
+  // Elle en faisait 473. « les textes » est gardé : c'est la particularité du
+  // français — sans eux, huit questions n'ont pas de support, et un prof qui
+  // l'ignore imprime une épreuve inutilisable.
   description:
-    "Le sujet de l'épreuve blanche d'évaluation nationale de 4e en français, à imprimer gratuitement : 67 questions en 50 minutes, aux effectifs du sujet officiel, sur le programme de 5e — texte littéraire, document composite, lexique, grammaire, orthographe et compréhension de l'oral. Les textes des enregistrements sont fournis à part, sur la feuille du professeur. Trois formats : le sujet seul, le sujet et son corrigé, ou le corrigé seul. Sans inscription, sans publicité.",
+    "L'évaluation nationale de 4e en français à imprimer : 67 questions en 50 minutes, sur le programme de 5e. Le sujet, le corrigé et les textes. Gratuit.",
   keywords: [
     "évaluation nationale 4e français à imprimer",
     "évaluation nationale 4e français PDF",
@@ -31,7 +35,7 @@ export const metadata: Metadata = {
     title:
       "Évaluation nationale 4e français — gratuit, en PDF imprimable (sujet + corrigé) — EleveAI",
     description:
-      "67 questions en 50 minutes, aux effectifs du sujet officiel, sur le programme de 5e. Le sujet, le corrigé, et les textes à lire à voix haute — à imprimer gratuitement.",
+      "67 questions en 50 minutes, sur le programme de 5e. Le sujet, le corrigé et les textes à lire à voix haute — à imprimer gratuitement.",
     url: "/evaluation-nationale-college/4e-francais/a-imprimer",
     type: "article",
     siteName: "EleveAI",

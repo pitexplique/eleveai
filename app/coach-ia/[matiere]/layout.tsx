@@ -14,31 +14,38 @@ import type { Metadata } from "next";
 
 type Fiche = { titre: string; description: string };
 
+// ⚠️ 160 CARACTÈRES MAXIMUM PAR DESCRIPTION (Bing Webmaster, 22/08 : « Meta
+// Description too long », relevé sur /coach-ia/maths). Cinq des six en
+// faisaient plus — maths 200, ia 214 — et le moteur coupe vers 157.
+// Sur maths, les 43 caractères perdus étaient « du programme, du CP à la
+// Terminale. Gratuit. » : la couverture et le prix, c'est-à-dire les deux
+// seuls arguments qui font cliquer, jamais affichés.
+// ⛔ NE PAS RALLONGER pour « mieux décrire » : ce qui dépasse n'existe pas.
 const FICHES: Record<string, Fiche> = {
   maths: {
     titre: "Coach de maths gratuit — du CP à la Terminale",
     description:
-      "Un coach qui explique sans faire à ta place : choisis ta classe et ta notion, il pose les questions, corrige et reprend là où ça coince. Toutes les notions du programme, du CP à la Terminale. Gratuit.",
+      "Un coach qui explique sans faire à ta place : choisis ta classe et ta notion, il pose les questions et corrige. Du CP à la Terminale. Gratuit.",
   },
   francais: {
     titre: "Coach de français gratuit — du CP à la 3e",
     description:
-      "Conjugaison, accords, analyse de phrase, orthographe : le coach de français d'EleveAI reprend notion par notion, avec correction immédiate et explication. Du CP à la 3e, gratuit.",
+      "Conjugaison, accords, analyse de phrase, orthographe : le coach reprend notion par notion, avec correction immédiate. Du CP à la 3e, gratuit.",
   },
   anglais: {
     titre: "Coach d'anglais gratuit — de A1 à B2",
     description:
-      "Vocabulaire, verbes irréguliers, temps et compréhension : entraîne-toi en anglais à ton niveau réel, de A1 à B2, avec correction et explication à chaque réponse. Gratuit.",
+      "Vocabulaire, verbes irréguliers, temps et compréhension : entraîne-toi en anglais à ton niveau réel, de A1 à B2, correction expliquée. Gratuit.",
   },
   espagnol: {
     titre: "Coach d'espagnol gratuit — de A1 à B2",
     description:
-      "Ser ou estar, conjugaison, vocabulaire du quotidien : le coach d'espagnol d'EleveAI t'entraîne à ton niveau, de A1 à B2, avec la correction expliquée. Gratuit, dès la 6e.",
+      "Ser ou estar, conjugaison, vocabulaire du quotidien : le coach d'espagnol t'entraîne à ton niveau, de A1 à B2, correction expliquée. Dès la 6e.",
   },
   ia: {
     titre: "Coach d'intelligence artificielle — préparer le Pix IA",
     description:
-      "Comprendre ce qu'est vraiment une intelligence artificielle : modèles, apprentissage, usages, limites et enjeux. Les 16 compétences du référentiel Pix IA, du collège au lycée, avec la correction expliquée. Gratuit.",
+      "Modèles, apprentissage, usages, limites et enjeux : les 16 compétences du référentiel Pix IA, du collège au lycée, avec la correction expliquée. Gratuit.",
   },
   economie: {
     titre: "Coach d'économie — découvrir, collège, lycée",

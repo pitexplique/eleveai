@@ -2537,4 +2537,104 @@ export const quadrilateresBank: TutorBankItemV4[] = [
     explanation: expl("Un quadrilatère possède 4 côtés et 4 sommets : il faut donc placer 4 sommets."),
     tags: ["quadrilatere", "completer_construire"],
   },
+
+  // =========================
+  // QUADRILATERE_DEFI — LES GÉNÉRATEURS DE RECONNAISSANCE
+  //
+  // ⛔ RÉPARATION DU 22/08/2026. La coupe de `quadrilatere_figure` en deux
+  // notions a emporté l'unique générateur de `quadrilatere_defi` vers
+  // `quadrilatere_propriete` (il portait sur les inclusions carré/rectangle/
+  // losange). La micro de reconnaissance s'est retrouvée avec trois questions
+  // figées : un élève les avait vues toutes les trois en deux minutes.
+  //
+  // ⭐ On paramètre la SITUATION, pas les nombres : ce sont les propriétés
+  // annoncées qui changent, et donc la figure à nommer.
+  // =========================
+  {
+    kind: "template",
+    id: "quadrilatere_defi_tpl_nature",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilatere_figure",
+    microId: "quadrilatere_defi",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Regarde d'abord les angles droits, ensuite les côtés égaux.",
+    tags: ["quadrilatere_figure", "defi", "template"],
+    generate: () => {
+      const c = randomInt(3, 9);
+      const L = c + randomInt(2, 5);
+      const cas = [
+        {
+          text: `Un quadrilatère a 4 angles droits et 4 côtés de ${c} cm. Quel est son type ?`,
+          rep: "carré",
+          expl: `Quatre angles droits ET quatre côtés égaux : c'est un carré.`,
+        },
+        {
+          text: `Un quadrilatère a 4 angles droits, deux côtés de ${L} cm et deux côtés de ${c} cm. Quel est son type ?`,
+          rep: "rectangle",
+          expl: `Quatre angles droits, mais les côtés ne sont pas tous égaux (${L} cm et ${c} cm) : c'est un rectangle, et pas un carré.`,
+        },
+        {
+          text: `Un quadrilatère a 4 côtés de ${c} cm et aucun angle droit. Quel est son type ?`,
+          rep: "losange",
+          expl: `Quatre côtés égaux mais aucun angle droit : c'est un losange. Un carré serait un losange qui aurait, en plus, ses angles droits.`,
+        },
+      ];
+      const choisi = cas[Math.floor(Math.random() * cas.length)];
+      return {
+        text: choisi.text,
+        format: "qcm",
+        choices: shuffle(["carré", "rectangle", "losange", "trapèze"]),
+        expected: [choisi.rep],
+        comparator: "mcq_exact",
+        explanation: expl(choisi.expl),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "quadrilatere_defi_tpl_ouverte",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilatere_figure",
+    microId: "quadrilatere_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Dis ce que tu regardes sur la figure, dans quel ordre.",
+    tags: ["quadrilatere_figure", "defi", "template", "ouverte"],
+    generate: () => {
+      const cas = [
+        {
+          question:
+            "Explique comment distinguer un carré d'un rectangle en regardant seulement la figure.",
+          mots: ["côtés", "cotes", "égaux", "egaux", "quatre"],
+          reponse:
+            "Les deux ont quatre angles droits : ce n'est pas là qu'ils se distinguent. On regarde les CÔTÉS. Si les quatre côtés sont égaux (même codage), c'est un carré ; s'il y a deux longueurs différentes, c'est un rectangle.",
+        },
+        {
+          question:
+            "Explique comment distinguer un carré d'un losange en regardant seulement la figure.",
+          mots: ["angle droit", "droit", "angles"],
+          reponse:
+            "Les deux ont quatre côtés égaux : ce n'est pas là qu'ils se distinguent. On regarde les ANGLES. Si les quatre angles sont droits, c'est un carré ; sinon, c'est un losange.",
+        },
+        {
+          question:
+            "Un élève dit : « cette figure a quatre côtés égaux, donc c'est un carré ». Explique pourquoi il va trop vite.",
+          mots: ["losange", "angle droit", "droit"],
+          reponse:
+            "Quatre côtés égaux, c'est la définition du LOSANGE. Pour un carré, il faut en plus les quatre angles droits. Un losange aplati a bien quatre côtés égaux et n'est pas un carré.",
+        },
+      ];
+      const c = cas[Math.floor(Math.random() * cas.length)];
+      return {
+        text: c.question,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: expl(c.reponse),
+      };
+    },
+  },
 ];

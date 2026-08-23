@@ -13,8 +13,12 @@ export const metadata: Metadata = {
   // un sitemap XML ne transporte aucun titre.
   title:
     "Évaluation nationale 4e maths — gratuit, en PDF imprimable (sujet + corrigé) | EleveAI",
+  // ⚠️ 160 CARACTÈRES MAXIMUM — voir ../page.tsx pour le pourquoi.
+  // Elle en faisait 316. Ce qui est gardé, c'est ce qu'un prof cherche avant
+  // de cliquer : le volume, le programme, et « sans inscription » — le seul
+  // mot qui le rassure sur le fait qu'il pourra imprimer dans dix minutes.
   description:
-    "Le sujet de l'épreuve blanche d'évaluation nationale de 4e en mathématiques, à imprimer gratuitement : 62 questions en 50 minutes, aux effectifs du sujet officiel, sur le programme de 5e. Trois formats — le sujet seul, le sujet et son corrigé, ou le corrigé seul pour le professeur. Sans inscription, sans publicité.",
+    "L'évaluation nationale de 4e en maths à imprimer : 62 questions en 50 minutes, sur le programme de 5e. Sujet et corrigé, gratuits, sans inscription.",
   keywords: [
     "évaluation nationale 4e maths à imprimer",
     "évaluation nationale 4e PDF",
