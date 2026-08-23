@@ -1,0 +1,36 @@
+// ⚠️ FICHIER GÉNÉRÉ — ne pas éditer à la main.
+// Produit par scripts/build-fiches-pdf.ts, qui relit public/fiches/.
+// Il dit quelles fiches ont vraiment leur PDF : le bouton de
+// téléchargement ne s'affiche que pour celles-là.
+export const PDF_DISPONIBLES = new Set<string>([
+  "accords-et-les-homophones-6e-cours-exercices-corriges.pdf",
+  "aires-6e-cours-exercices-corriges.pdf",
+  "aires-cm2-cours-exercices-corriges.pdf",
+  "algorithmique-et-programmation-6e-cours-exercices-corriges.pdf",
+  "angles-6e-cours-exercices-corriges.pdf",
+  "attribut-du-sujet-et-complements-du-verbe-6e-cours-exercices-corriges.pdf",
+  "calcul-mental-6e-cours-exercices-corriges.pdf",
+  "calcul-pose-6e-cours-exercices-corriges.pdf",
+  "derivation-premiere-spe-cours-exercices-corriges.pdf",
+  "fractions-6e-cours-exercices-corriges.pdf",
+  "groupe-nominal-epithete-et-complement-du-nom-6e-cours-exercices-corriges.pdf",
+  "imperatif-et-le-conditionnel-present-6e-cours-exercices-corriges.pdf",
+  "lire-et-interpreter-des-donnees-6e-cours-exercices-corriges.pdf",
+  "lire-une-forme-verbale-radical-temps-personne-6e-cours-exercices-corriges.pdf",
+  "longueurs-6e-cours-exercices-corriges.pdf",
+  "nombres-decimaux-6e-cours-exercices-corriges.pdf",
+  "nombres-entiers-6e-cours-exercices-corriges.pdf",
+  "perimetres-6e-cours-exercices-corriges.pdf",
+  "phrase-sujet-verbe-nature-et-fonction-cm2-cours-exercices-corriges.pdf",
+  "pourcentages-6e-cours-exercices-corriges.pdf",
+  "premiers-pas-en-probabilites-6e-cours-exercices-corriges.pdf",
+  "pronoms-personnels-et-leur-antecedent-6e-cours-exercices-corriges.pdf",
+  "proportionnalite-6e-cours-exercices-corriges.pdf",
+  "quadrilateres-6e-cours-exercices-corriges.pdf",
+  "se-reperer-dans-la-phrase-complexe-6e-cours-exercices-corriges.pdf",
+  "symetrie-axiale-6e-cours-exercices-corriges.pdf",
+  "temps-composes-passe-compose-et-plus-que-parfait-6e-cours-exercices-corriges.pdf",
+  "triangles-6e-cours-exercices-corriges.pdf",
+  "valeur-des-temps-raconter-ou-parler-6e-cours-exercices-corriges.pdf",
+  "volumes-6e-cours-exercices-corriges.pdf",
+]);

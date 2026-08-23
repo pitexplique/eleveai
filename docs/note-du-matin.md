@@ -1,5 +1,35 @@
 # Note du matin — 24/08/2026
 
+## 0. Les PDF existent — et le CM2 les aura d'une commande
+
+Le bouton « Télécharger en PDF » des fiches appelait `window.print()` : sur
+téléphone, une boîte d'impression et pas d'imprimante. Il y a maintenant de
+**vrais fichiers**, dans `public/fiches/`, fabriqués par Chrome depuis la page
+elle-même — donc avec les dessins, et avec les corrections dépliées.
+
+**Les 27 fiches de 6ᵉ sont faites** (plus trois de calibration : `cm2/aire`,
+`cm2/grammaire-phrase`, `premiere-spe/derivation`). Pour le CM2 :
+
+```bash
+npm run dev
+```
+
+puis, dans un autre terminal, en listant les chemins voulus :
+
+```bash
+npm run build:fiches-pdf -- http://localhost:3000 /fiches-cours/francais/cm2/grammaire-phrase
+```
+
+Le script mesure chaque fichier (pages, poids, corrections rendues, titres de
+bloc) et **sort en erreur** si l'un sort du domaine. Il réécrit aussi
+`lib/fiches/pdf-disponibles.ts` : c'est cette liste qui décide si une fiche
+affiche « Télécharger en PDF » ou seulement « Imprimer ». **Une fiche sans PDF
+n'a pas de lien mort** — elle garde son bouton d'impression.
+
+⚠️ **La génération n'est pas automatique.** Si tu écris une fiche et que tu
+oublies la commande, sa page n'aura pas de PDF (pas de casse, juste pas de
+lien). À lancer en fin de session, comme un `git push`.
+
 > Écrite le soir du 23/08 depuis le poste du soir, à lire depuis le poste du
 > matin. **Commence par `git pull`.** Le partage est en place depuis le 23/08 :
 > les fiches de maths et de français se font le matin sur l'autre poste, le soir

@@ -39,6 +39,8 @@ import Flashcards from "@/components/fiches/Flashcards";
 import VideoNotion from "@/components/fiches/VideoNotion";
 import EncartsFiche from "@/components/fiches/EncartsFiche";
 import { libelleClasse } from "@/lib/fiches/registre";
+import { DOSSIER_PDF, nomPdf } from "@/lib/fiches/pdf";
+import { PDF_DISPONIBLES } from "@/lib/fiches/pdf-disponibles";
 import {
   ORDRE_CANONIQUE,
   RUBRIQUES_LABELS,
@@ -103,6 +105,21 @@ export default function FicheCoursClient({
   slides: ClasseSlide[];
 }) {
   const slidesProjetees = slides.length === 0 ? [] : slidesDepuisFiche(fiche);
+
+  // ⭐ LE PDF EXISTE-T-IL VRAIMENT POUR CETTE FICHE ? (23/08/2026)
+  //
+  // Le bouton disait « Télécharger en PDF » et appelait `window.print()`. Sur un
+  // ordinateur on peut y choisir « Enregistrer en PDF » ; sur un téléphone on
+  // tombe sur une boîte d'impression, sans imprimante. Il promettait un fichier
+  // que le site ne produisait pas.
+  //
+  // Les fichiers existent maintenant, fabriqués par scripts/build-fiches-pdf.ts
+  // et servis en statique. Mais TOUTES les fiches ne les ont pas encore : la
+  // liste générée dit lesquelles. Une fiche sans PDF garde son bouton
+  // d'impression — on ne remplace pas une demi-promesse par un lien mort.
+  const fichierPdf = nomPdf(fiche.titre, fiche.classe);
+  const pdfPret = PDF_DISPONIBLES.has(fichierPdf);
+  const hrefPdf = `${DOSSIER_PDF}/${fichierPdf}`;
   const { eleve } = useEleve();
   const role = eleve?.type_utilisateur ?? null;
   const estStaff = role === "prof" || role === "principal" || role === "boss";
@@ -562,14 +579,32 @@ export default function FicheCoursClient({
                 <Sparkles className="h-4 w-4" />
                 M&apos;entraîner avec le Coach IA
               </Link>
-              <button
-                type="button"
-                onClick={() => window.print()}
-                className="inline-flex w-fit items-center gap-2 rounded-full border border-sky-200 bg-white px-5 py-3 text-sm font-black text-sky-700 shadow-sm transition hover:bg-sky-50"
-              >
-                <Download className="h-4 w-4" />
-                Télécharger en PDF
-              </button>
+              {pdfPret ? (
+                // ⚠️ UN VRAI LIEN, PAS UN BOUTON — c'est ce qui fait marcher le
+                // téléphone. Sur iPhone il ouvre le PDF dans le lecteur, d'où
+                // « Partager → Enregistrer dans Fichiers » ; sur Android il
+                // atterrit dans Téléchargements. Aucun des deux ne savait quoi
+                // faire d'une boîte d'impression.
+                // ⚠️ `download` porte le nom du fichier, celui-là même qui est
+                // indexé : on ne le laisse pas au hasard du navigateur.
+                <a
+                  href={hrefPdf}
+                  download={fichierPdf}
+                  className="inline-flex w-fit items-center gap-2 rounded-full border border-sky-200 bg-white px-5 py-3 text-sm font-black text-sky-700 shadow-sm transition hover:bg-sky-50"
+                >
+                  <Download className="h-4 w-4" />
+                  Télécharger en PDF
+                </a>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => window.print()}
+                  className="inline-flex w-fit items-center gap-2 rounded-full border border-sky-200 bg-white px-5 py-3 text-sm font-black text-sky-700 shadow-sm transition hover:bg-sky-50"
+                >
+                  <Printer className="h-4 w-4" />
+                  Imprimer
+                </button>
+              )}
             </div>
           </section>
         );
@@ -625,14 +660,40 @@ export default function FicheCoursClient({
             {slidesProjetees.length > 0 && (
               <ModeClasse sousTitre={`${fiche.titre} - ${libelleClasse(fiche.classe)}`} slides={slidesProjetees} />
             )}
-            <button
-              type="button"
-              onClick={() => window.print()}
-              className="inline-flex w-fit items-center gap-2 rounded-full bg-sky-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-sky-500/30 transition hover:bg-sky-400"
-            >
-              <Download className="h-4 w-4" />
-              Télécharger en PDF
-            </button>
+            {pdfPret ? (
+              <>
+                <a
+                  href={hrefPdf}
+                  download={fichierPdf}
+                  className="inline-flex w-fit items-center gap-2 rounded-full bg-sky-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-sky-500/30 transition hover:bg-sky-400"
+                >
+                  <Download className="h-4 w-4" />
+                  Télécharger en PDF
+                </a>
+                {/* ⚠️ « Imprimer » RESTE, à côté et en second. Le PDF sert celui
+                    qui veut garder le fichier ; l'impression directe sert celui
+                    qui a une feuille dans le bac et ne veut pas d'un fichier de
+                    plus sur son bureau. Ce sont deux gestes, pas deux chemins
+                    vers le même. */}
+                <button
+                  type="button"
+                  onClick={() => window.print()}
+                  className="inline-flex w-fit items-center gap-2 rounded-full border border-sky-200 bg-white px-5 py-3 text-sm font-black text-sky-700 shadow-sm transition hover:bg-sky-50"
+                >
+                  <Printer className="h-4 w-4" />
+                  Imprimer
+                </button>
+              </>
+            ) : (
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="inline-flex w-fit items-center gap-2 rounded-full bg-sky-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-sky-500/30 transition hover:bg-sky-400"
+              >
+                <Printer className="h-4 w-4" />
+                Imprimer
+              </button>
+            )}
           </div>
         </div>
       </div>

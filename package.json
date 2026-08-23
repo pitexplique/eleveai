@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:ebook": "node --experimental-strip-types scripts/build-ebook.ts"
+    "build:ebook": "node --experimental-strip-types scripts/build-ebook.ts",
+    "build:fiches-pdf": "node --experimental-strip-types scripts/build-fiches-pdf.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.8.0",
@@ -37,6 +38,7 @@
     "eslint-config-next": "15.1.4",
     "jszip": "^3.10.1",
     "pdfkit": "^0.19.1",
+    "playwright-core": "^1.62.1",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.2"
   }
