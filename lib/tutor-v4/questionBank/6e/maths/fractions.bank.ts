@@ -43,6 +43,44 @@ function fractionCanvas(
   return { kind: "fraction", ...data };
 }
 
+function entierMixte(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+/**
+ * La demi-droite graduée — pour les nombres mixtes.
+ *
+ * Une fraction supérieure à 1 ne se voit pas sur un disque partagé : il en
+ * faudrait deux. Sur une droite, elle a simplement une place plus loin, ce qui
+ * est exactement ce que l'écriture mixte raconte — un entier, puis un reste.
+ *
+ * ⚠️ `DroiteGradueeCanvas` étiquette TOUTES ses graduations et son SVG est
+ * enfermé dans un `max-w-[320px]` : rester à cinq ou six, sinon elles se
+ * chevauchent. Voir `demi-droite.bank.ts`, même contrainte.
+ */
+function droiteMixte(
+  min: number,
+  max: number,
+  pas: number,
+  points: { value: number; label?: string }[] = []
+) {
+  return {
+    kind: "number_line" as const,
+    min,
+    max,
+    step: pas,
+    points,
+    display: {
+      showTicks: true,
+      showValues: true,
+      showPoints: points.length > 0,
+      showPointLabels: points.length > 0,
+      showZero: true,
+    },
+    size: { width: 340, height: 130 },
+  };
+}
+
 export const fractionsBank: TutorBankItemV4[] = [
   // =========================
   // FRACTION_LIRE_ECRIRE
@@ -1750,5 +1788,230 @@ export const fractionsBank: TutorBankItemV4[] = [
       "Observation : couper en 6 donne bien plus de parts qu’en 2, mais chaque part est plus petite. Prendre 3 parts sur 6, c’est prendre la moitié de la barre — exactement comme 1 part sur 2.\n\n" +
       "Conclusion : 3/6 et 1/2 représentent la même quantité, elles ne sont ni plus grandes ni plus petites l’une que l’autre.",
     tags: ["fraction_nombre", "open", "equivalence", "raisonnement"],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // FRACTION_MIXTE — encadrer et ordonner, écriture mixte
+  //
+  // ⛔ OUVERTE LE 23/08/2026 — TROU DU PROGRAMME (6e-N-fractions-8) : « ordonner
+  // une liste de nombres écrits sous forme de fractions ou de NOMBRES MIXTES ».
+  // `fraction_comparer` s'arrêtait aux fractions inférieures à 1.
+  //
+  // ⭐ LE NOMBRE MIXTE EST AUSSI RÉCLAMÉ AILLEURS : l'objectif 6e-N-entiers-6
+  // demande d'« associer et utiliser différentes écritures d'un nombre décimal :
+  // écriture à virgule, fraction, NOMBRE MIXTE, pourcentage ». Sa note disait
+  // depuis hier que personne ne le couvrait — cette micro la referme aussi.
+  //
+  // ⭐ LA STRATÉGIE DU BO, ET C'EST ELLE QU'ON ENSEIGNE : on ne met pas au même
+  // dénominateur pour ranger une liste. On compare d'abord à 1 et à 1/2, puis on
+  // encadre par deux entiers consécutifs. Trois nombres se trient souvent sans
+  // le moindre calcul — c'est plus rapide ET plus solide.
+  //
+  // ⚠️ Le piège du chapitre n'est pas un calcul, c'est une lecture : dans 7/4,
+  // le numérateur compte des QUARTS et non des unités. L'élève qui voit « 7 »
+  // cherche vers 7 au lieu de chercher entre 1 et 2.
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    kind: "fixed",
+    id: "fraction_mixte_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_mixte",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Complète l'écriture mixte : 7/4 = 1 + …/4. Quel numérateur manque ?",
+    format: "short",
+    expected: ["3"],
+    comparator: "number_equal",
+    hint: "Combien de quarts faut-il pour faire 1 entier ?",
+    explanation:
+      "Définition : un nombre mixte s’écrit avec un entier et une fraction inférieure à 1.\n\n" +
+      "Méthode : on retire du numérateur autant de fois le dénominateur qu’on le peut ; ce qu’on a retiré donne l’entier, ce qui reste donne la fraction.\n\n" +
+      "Calcul : Il faut 4 quarts pour faire 1 entier. Dans 7 quarts, il y en a donc 4 qui font 1 entier, et il en reste 7 − 4 = 3. On écrit 7/4 = 1 + 3/4, ce qui se lit « un et trois quarts ».\n\n" +
+      "Conclusion : on garde la réponse obtenue.",
+    tags: ["fraction_nombre", "mixte", "canvas", "short"],
+    canvas: droiteMixte(0, 2, 0.25, [{ value: 1.75, label: "A" }]),
+  },
+  {
+    kind: "fixed",
+    id: "fraction_mixte_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_mixte",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Entre quels deux entiers consécutifs se trouve 7/3 ?",
+    format: "qcm",
+    choices: ["entre 2 et 3", "entre 1 et 2", "entre 3 et 4", "entre 7 et 8"],
+    expected: ["entre 2 et 3"],
+    comparator: "mcq_exact",
+    hint: "Cherche les multiples de 3 qui encadrent 7.",
+    explanation:
+      "Définition : encadrer une fraction, c’est trouver les deux entiers consécutifs entre lesquels elle se place.\n\n" +
+      "Méthode : on cherche les multiples du dénominateur qui encadrent le numérateur.\n\n" +
+      "Calcul : 6/3 = 2 et 9/3 = 3. Or 7 est entre 6 et 9, donc 7/3 est entre 2 et 3. En écriture mixte : 7/3 = 2 + 1/3. Le piège est de regarder le 7 et de chercher vers 7 — mais le numérateur compte des TIERS, pas des unités.\n\n" +
+      "Conclusion : on garde la réponse obtenue.",
+    tags: ["fraction_nombre", "mixte", "encadrer", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_mixte_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_mixte",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Une seule de ces fractions est plus grande que 1. Laquelle ?",
+    format: "qcm",
+    choices: ["7/5", "3/4", "5/6", "2/3"],
+    expected: ["7/5"],
+    comparator: "mcq_exact",
+    hint: "Une fraction dépasse 1 quand son numérateur dépasse son dénominateur.",
+    explanation:
+      "Définition : une fraction vaut 1 lorsque son numérateur est égal à son dénominateur.\n\n" +
+      "Méthode : on compare le numérateur au dénominateur, sans aucun calcul.\n\n" +
+      "Calcul : 7 > 5, donc 7/5 dépasse 5/5 = 1. Dans les trois autres, le numérateur est plus petit que le dénominateur (3 < 4, 5 < 6, 2 < 3) : elles sont toutes inférieures à 1. Comparer à 1 est le premier réflexe pour ranger une liste — il suffit souvent à séparer le groupe en deux.\n\n" +
+      "Conclusion : on garde la réponse obtenue.",
+    tags: ["fraction_nombre", "mixte", "comparer_a_1", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_mixte_fixed_4",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_mixte",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Range ces trois nombres dans l'ordre croissant : 3/2 ; 5/4 ; 1 + 3/4",
+    format: "qcm",
+    choices: [
+      "5/4 < 3/2 < 1 + 3/4",
+      "3/2 < 5/4 < 1 + 3/4",
+      "1 + 3/4 < 5/4 < 3/2",
+      "5/4 < 1 + 3/4 < 3/2",
+    ],
+    expected: ["5/4 < 3/2 < 1 + 3/4"],
+    comparator: "mcq_exact",
+    hint: "Les trois sont entre 1 et 2 : compare seulement ce qui dépasse l'entier.",
+    explanation:
+      "Définition : ordonner, c’est ranger du plus petit au plus grand.\n\n" +
+      "Méthode : on encadre d’abord chaque nombre par deux entiers ; s’ils tombent dans le même intervalle, on ne compare plus que la partie qui dépasse.\n\n" +
+      "Calcul : les trois sont entre 1 et 2. En écriture mixte : 3/2 = 1 + 1/2, 5/4 = 1 + 1/4, et le troisième est 1 + 3/4. Il ne reste qu’à ranger 1/4, 1/2 et 3/4 — soit, en quarts, 1/4 < 2/4 < 3/4. D’où 5/4 < 3/2 < 1 + 3/4.\n\n" +
+      "Conclusion : on garde la réponse obtenue.",
+    tags: ["fraction_nombre", "mixte", "ordonner", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "fraction_mixte_fixed_5",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_mixte",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Compare 5/4 et 1 + 1/4.",
+    format: "qcm",
+    choices: [
+      "ils sont égaux : ce sont deux écritures du même nombre",
+      "5/4 est plus grand",
+      "1 + 1/4 est plus grand",
+      "on ne peut pas comparer une fraction et un nombre mixte",
+    ],
+    expected: ["ils sont égaux : ce sont deux écritures du même nombre"],
+    comparator: "mcq_exact",
+    hint: "Écris 1 en quarts.",
+    explanation:
+      "Définition : l’écriture mixte et l’écriture fractionnaire désignent le même nombre, écrit autrement.\n\n" +
+      "Méthode : on ramène l’entier au même dénominateur que la fraction.\n\n" +
+      "Calcul : 1 = 4/4, donc 1 + 1/4 = 4/4 + 1/4 = 5/4. Les deux écritures désignent le même point sur la demi-droite graduée, donc le même nombre. L’écriture mixte ne change pas la valeur : elle rend seulement visible ce qui dépasse l’entier, ce qui est bien pratique pour comparer.\n\n" +
+      "Conclusion : on garde la réponse obtenue.",
+    tags: ["fraction_nombre", "mixte", "canvas", "qcm"],
+    canvas: droiteMixte(0, 2, 0.25, [{ value: 1.25, label: "A" }]),
+  },
+  {
+    kind: "template",
+    id: "fraction_mixte_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_mixte",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Combien de fois le dénominateur tient-il dans le numérateur ?",
+    tags: ["fraction_nombre", "mixte", "template"],
+    generate: () => {
+      const denominateur = [2, 3, 4, 5][entierMixte(0, 3)];
+      const entier = entierMixte(1, 3);
+      const reste = entierMixte(1, denominateur - 1);
+      const numerateur = entier * denominateur + reste;
+
+      return {
+        text: `Écris ${numerateur}/${denominateur} en écriture mixte : ${numerateur}/${denominateur} = ${entier} + …/${denominateur}. Quel numérateur manque ?`,
+        format: "short",
+        expected: [String(reste)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : un nombre mixte s’écrit avec un entier et une fraction inférieure à 1.\n\n" +
+          "Méthode : on cherche combien de fois le dénominateur tient dans le numérateur ; le quotient donne l’entier, le reste donne le numérateur qui reste.\n\n" +
+          `Calcul : il faut ${denominateur} parts pour faire 1 entier. Dans ${numerateur}, le nombre ${denominateur} tient ${entier} fois (${entier} × ${denominateur} = ${entier * denominateur}), et il reste ${numerateur} − ${entier * denominateur} = ${reste}. Donc ${numerateur}/${denominateur} = ${entier} + ${reste}/${denominateur}, un nombre situé entre ${entier} et ${entier + 1}.\n\n` +
+          "Conclusion : on garde la réponse obtenue.",
+        canvas: droiteMixte(entier, entier + 1, 1 / denominateur, [
+          { value: Number((numerateur / denominateur).toFixed(4)), label: "A" },
+        ]),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "fraction_mixte_tpl_ouverte",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_nombre",
+    microId: "fraction_mixte",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Explique ta stratégie de tri AVANT de parler de calcul.",
+    tags: ["fraction_nombre", "mixte", "template", "ouverte"],
+    generate: () => {
+      const cas = [
+        {
+          q: "Pour ranger 2/5 ; 7/4 ; 5/9 ; 3/2, un élève veut tout mettre au même dénominateur. Explique une méthode plus rapide.",
+          mots: ["1", "comparer", "plus petites", "plus grandes", "deux groupes", "moitié", "moitie"],
+          r: "On compare d'abord chaque nombre à 1 : 2/5 et 5/9 ont un numérateur plus petit que leur dénominateur, ils sont sous 1 ; 7/4 et 3/2 sont au-dessus. La liste est déjà coupée en deux groupes sans un seul calcul. Il ne reste qu'à trier à l'intérieur : 2/5 est sous la moitié, 5/9 juste au-dessus ; et 3/2 = 1 + 1/2 est plus petit que 7/4 = 1 + 3/4. On obtient 2/5 < 5/9 < 3/2 < 7/4. Mettre au même dénominateur aurait demandé de trouver 180.",
+        },
+        {
+          q: "Explique pourquoi l'écriture mixte rend la comparaison de 11/4 et 8/3 plus facile.",
+          mots: ["entier", "même", "meme", "reste", "2", "dépasse", "depasse"],
+          r: "Sous forme mixte, 11/4 = 2 + 3/4 et 8/3 = 2 + 2/3. Les deux ont le même entier 2 : il ne sert donc à rien de le comparer, et toute la question se joue sur ce qui dépasse, 3/4 contre 2/3. Comme 3/4 vaut 0,75 et 2/3 environ 0,67, c'est 11/4 le plus grand. L'écriture mixte met de côté la partie commune et ne laisse à comparer que la différence.",
+        },
+        {
+          q: "Un élève range 7/4 après 7 parce que « 7 est le plus grand nombre écrit ». Explique son erreur.",
+          mots: ["quarts", "numérateur", "numerateur", "unités", "unites", "entre 1 et 2", "dénominateur", "denominateur"],
+          r: "Il lit le numérateur comme s'il comptait des unités, alors qu'il compte des QUARTS. Sept quarts, ce n'est pas sept : quatre quarts font déjà 1, donc sept quarts font 1 et trois quarts, un nombre situé entre 1 et 2. Le dénominateur dit dans quelle unité on compte ; sans lui, le numérateur ne veut rien dire.",
+        },
+        {
+          q: "Explique pourquoi comparer une fraction à 1/2 aide à la ranger, et donne un exemple.",
+          mots: ["moitié", "moitie", "double", "numérateur", "numerateur", "dénominateur", "denominateur", "repère", "repere"],
+          r: "Une fraction vaut 1/2 quand son dénominateur est le double de son numérateur : 3/6, 4/8, 5/10. Il suffit donc de comparer le double du numérateur au dénominateur. Pour 5/9, le double de 5 est 10, plus grand que 9 : la fraction dépasse 1/2. Pour 2/5, le double de 2 est 4, plus petit que 5 : elle est en dessous. Sans aucun calcul, on sait que 2/5 < 5/9. 1 et 1/2 sont deux repères qui découpent la liste avant tout calcul.",
+        },
+      ];
+      const c = cas[entierMixte(0, cas.length - 1)];
+      return {
+        text: c.q,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation:
+          "Définition : ordonner une liste de fractions, c’est les placer les unes par rapport aux autres — pas nécessairement les calculer.\n\n" +
+          "Méthode : on utilise les repères 1 et 1/2, puis l’encadrement par deux entiers consécutifs.\n\n" +
+          "Observation : " +
+          c.r +
+          "\n\nConclusion : on garde le raisonnement, il vaut pour toute liste.",
+      };
+    },
   },
 ];

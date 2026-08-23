@@ -201,6 +201,17 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "fraction_nombre",
     prerequis: ["fraction_lire_ecrire"],
   },
+  // ⛔ AJOUTÉE LE 23/08/2026 (6e-N-fractions-8). `fraction_comparer` s'arrêtait
+  // aux fractions inférieures à 1 : ordonner une liste mêlant fractions et
+  // NOMBRES MIXTES n'était travaillé nulle part. Elle referme aussi la note de
+  // 6e-N-entiers-6, qui réclamait l'écriture mixte parmi les écritures d'un
+  // nombre décimal.
+  {
+    id: "fraction_mixte",
+    label: "Encadrer et ordonner, écriture mixte",
+    notionId: "fraction_nombre",
+    prerequis: ["fraction_comparer"],
+  },
   {
     id: "fraction_defi",
     label: "Défis sur les fractions",

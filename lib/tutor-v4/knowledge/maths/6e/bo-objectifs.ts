@@ -106,8 +106,8 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     objectif:
       "Associer et utiliser différentes écritures d'un nombre décimal : écriture à virgule, fraction, nombre mixte, pourcentage.",
     page: 2,
-    micros: ["fraction_decimal", "pourcentage_decimal"],
-    note: "⚠️ Le NOMBRE MIXTE (6/5 = 1 + 1/5 = 1,2) n'est couvert par aucune micro.",
+    micros: ["fraction_decimal", "pourcentage_decimal", "fraction_mixte"],
+    note: "Le NOMBRE MIXTE (6/5 = 1 + 1/5 = 1,2) n'était couvert par aucune micro ; `fraction_mixte` l'a ouvert le 23/08/2026.",
   },
   {
     id: "6e-N-entiers-7",
@@ -285,8 +285,8 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     objectif:
       "Ordonner une liste de nombres écrits sous forme de fractions ou de nombres mixtes.",
     page: 7,
-    micros: [],
-    note: "Comparer à 1 et à 1/2, encadrer par deux entiers consécutifs, écriture mixte.",
+    micros: ["fraction_mixte"],
+    note: "Comparer à 1 et à 1/2, encadrer par deux entiers consécutifs, écriture mixte. Couvert le 23/08/2026 — et c'est bien la STRATÉGIE du BO qui est enseignée, pas la mise au même dénominateur.",
   },
   {
     id: "6e-N-fractions-9",
