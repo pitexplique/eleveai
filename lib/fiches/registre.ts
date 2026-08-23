@@ -448,7 +448,10 @@ export const FICHES_ALIAS: Record<string, string> = {
      l'élève qui vient des accords y trouve aussi la phrase et les
      compléments. Elles s'effacent dès que les trois fiches sont écrites. */
   // (« grammaire-phrase » a désormais SA fiche : plus d'alias pour elle.)
-  "francais/cm2/grammaire-complements": "francais/cm2/grammaire-orthographe",
+  // (« grammaire-complements » aussi, depuis le 23/08/2026 — sa ligne est
+  //  partie d'ici le jour où sa fiche est entrée dans le dépôt. Il reste les
+  //  deux du dessous : le groupe nominal et les accords n'ont toujours pas la
+  //  leur au CM2, et le coach continue donc de les envoyer sur l'orthographe.)
   "francais/cm2/grammaire-groupe-nominal": "francais/cm2/grammaire-orthographe",
   "francais/cm2/grammaire-accords": "francais/cm2/grammaire-orthographe",
 };
