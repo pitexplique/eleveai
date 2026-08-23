@@ -53,6 +53,14 @@ docs/*
 !docs/prompt-francais-ce1.md
 !docs/prompt-francais-ce2.md
 !docs/prompt-debiaiser-cycle4.md
+# ⭐ 23/08/2026 — LA NOTE DU MATIN, et c'est la même raison portée plus loin :
+# depuis que le travail est partagé entre deux ordinateurs (les fiches le matin
+# sur l'un, le reste le soir sur l'autre), les deux postes ne communiquent que
+# par ce dépôt. Une note laissée en local ne serait lue que par celui qui l'a
+# écrite — c'est-à-dire par personne.
+# ⚠️ Elle se RÉÉCRIT à chaque passage, elle ne s'empile pas : une note datée
+# qu'on laisse grossir devient un journal que plus personne n'ouvre.
+!docs/note-du-matin.md
 
 # typescript
 *.tsbuildinfo
