@@ -4116,6 +4116,218 @@ const RADICAL_VARIATIONS: QcmItem[] = [
 ];
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   LES VARIATIONS DU RADICAL AU TROISIÈME GROUPE — CM2 SEUL, 23/08/2026
+
+   ⛔ CE QUE ÇA RÉPARE. Le BO du CM2 écrit : « Consolider la connaissance des
+   variations du radical pour certains verbes du premier groupe ET DU TROISIÈME
+   GROUPE ». Le pool RADICAL_VARIATIONS ci-dessus ne contient QUE du premier
+   groupe — manger, commencer, lancer, appeler, jeter, nettoyer, déplacer.
+   `cm2_conj_radical_variations` ne voyait donc jamais la moitié de son objectif.
+
+   ⛔ ET POURQUOI UN POOL À PART, PLUTÔT QUE DOUZE ITEMS DE PLUS DANS L'AUTRE.
+   Le CM1 et la 6e portent une micro au nom identique, et leur BO à eux ne
+   demande QUE le premier groupe (« Maîtriser les variations du radical pour
+   certains verbes du 1er groupe »). Verser le troisième groupe dans le pool
+   commun mettrait deux classes en avance sur leur programme, sans que rien ne
+   le signale — c'est exactement le piège de `participe_passe_etre`, déjà
+   documenté plus bas. Un pool séparé, une branche nommée sur `cm2_`.
+
+   Les verbes sont CEUX QUE LE BO NOMME pour le CM2 : faire, aller, dire, venir,
+   pouvoir, voir, vouloir, prendre.
+   ═══════════════════════════════════════════════════════════════════════════ */
+const RADICAL_TROISIEME_GROUPE: QcmItem[] = [
+  {
+    text: "« Je ___ à la fête, nous ___ ensemble. » (venir, au présent)",
+    correct: "viens / venons",
+    wrongs: ["viens / vienons", "vien / venons", "viens / viendons"],
+    methode: "Le radical change : « vien- » au singulier, « ven- » avec nous et vous.",
+  },
+  {
+    text: "« Il ___ son cartable, nous ___ nos cartables. » (prendre, au présent)",
+    correct: "prend / prenons",
+    wrongs: ["prend / prendons", "prends / prenons", "prend / prennons"],
+    methode: "« prend- » au singulier, « pren- » au pluriel : le « d » tombe.",
+  },
+  {
+    text: "« Je ___ courir, nous ___ courir. » (pouvoir, au présent)",
+    correct: "peux / pouvons",
+    wrongs: ["peux / peuvons", "peut / pouvons", "peux / pouvions"],
+    methode: "« peu- » au singulier, « pouv- » au pluriel. Deux radicaux pour un verbe.",
+  },
+  {
+    text: "« Tu ___ partir, vous ___ partir. » (vouloir, au présent)",
+    correct: "veux / voulez",
+    wrongs: ["veux / veulez", "veut / voulez", "veux / voulz"],
+    methode: "« veu- » au singulier, « voul- » au pluriel.",
+  },
+  {
+    text: "« Elle ___ la mer, nous ___ la mer. » (voir, au présent)",
+    correct: "voit / voyons",
+    wrongs: ["voit / voions", "voit / voyions", "vois / voyons"],
+    methode: "Le « i » du radical devient « y » devant une terminaison qui s'entend.",
+  },
+  {
+    text: "Combien de radicaux le verbe « pouvoir » a-t-il au présent ?",
+    correct: "plusieurs : peu-, pouv-, peuv-",
+    wrongs: [
+      "un seul : pouv-",
+      "un seul : peu-",
+      "aucun, c'est un verbe sans radical",
+    ],
+    methode: "je peux, nous pouvons, ils peuvent : trois formes du même radical.",
+  },
+  {
+    text: "« Vous ___ la vérité. » (dire, au présent)",
+    correct: "dites",
+    wrongs: ["disez", "dissez", "direz"],
+    methode: "⚠️ Trois verbes seulement font « -tes » avec vous : dites, faites, êtes.",
+  },
+  {
+    text: "« Nous ___ nos devoirs. » (faire, au présent)",
+    correct: "faisons",
+    wrongs: ["faisez", "faison", "fesons"],
+    methode: "Le radical s'écrit « fais- » mais se prononce « fe » : on l'écrit comme au singulier.",
+  },
+  {
+    text: "« Je ___ à l'école, nous ___ à l'école. » (aller, au présent)",
+    correct: "vais / allons",
+    wrongs: ["vais / vallons", "vas / allons", "vais / alons"],
+    methode: "« aller » change complètement de radical : vais, vas, va… puis allons, allez.",
+  },
+  {
+    text: "Pourquoi « je viens » et « nous venons » n'ont-ils pas le même radical ?",
+    correct: "Parce que certains verbes du 3e groupe changent de radical selon la personne",
+    wrongs: [
+      "Parce que ce sont deux verbes différents",
+      "Parce que le pluriel supprime toujours une lettre",
+      "Parce qu'on a fait une faute dans l'un des deux",
+    ],
+    methode: "C'est le même verbe : seul le radical varie, comme au premier groupe mais davantage.",
+  },
+  {
+    text: "« Ils ___ le bruit. » (entendre) — et au singulier, « il ___ ». (au présent)",
+    correct: "entendent / entend",
+    wrongs: ["entendent / entends", "entendes / entend", "entendrent / entend"],
+    methode: "Le radical « entend- » ne bouge pas ; c'est la terminaison qui change.",
+  },
+  {
+    text: "Laquelle de ces formes a un radical qui a CHANGÉ par rapport à « je » ?",
+    correct: "nous voulons (je veux)",
+    wrongs: ["nous chantons (je chante)", "nous finissons (je finis)", "nous entendons (j'entends)"],
+    methode: "« veu- » devient « voul- ». Les autres gardent le même radical.",
+  },
+];
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LA FORME NÉGATIVE D'UN TEMPS COMPOSÉ — CM2, 23/08/2026
+
+   ⛔ UN OBJECTIF DU BO QUE RIEN NE SERVAIT. Le programme du CM2 écrit :
+   « Effectuer la transformation à la forme négative d'un verbe aux temps
+   composés EN PLAÇANT LES ADVERBES DE NÉGATION AU BON EMPLACEMENT ». La micro
+   `cm2_conj_negation_passe_compose` existait, portait cet intitulé — et
+   recevait « Quel auxiliaire complète : "Ils ___ partis ?" », faute de branche.
+   Une question juste, sur un autre sujet, et aucun vérificateur ne pouvait le
+   voir : ils comptent les items, ils ne lisent pas de quoi ils parlent.
+
+   ⭐ CE QUE L'OBJECTIF DEMANDE VRAIMENT, ET QUI FAIT LE POOL. Le difficile n'est
+   pas de nier, c'est de PLACER : à un temps simple la négation entoure le verbe
+   (« il ne mange pas »), à un temps composé elle entoure le SEUL AUXILIAIRE
+   (« il n'a pas mangé »), parce que l'auxiliaire est le mot conjugué. Toutes les
+   questions tournent autour de cette place, et non autour du sens.
+
+   ⚠️ « personne » et « nulle part » font exception et se placent APRÈS le
+   participe : « il n'a vu personne ». Deux items le disent, en fin de pool et
+   en difficulté 3 — le BO parle des adverbes « au bon emplacement », et cet
+   emplacement-là n'est pas le même.
+   ═══════════════════════════════════════════════════════════════════════════ */
+const CONJ_NEGATION_COMPOSEE: QcmItem[] = [
+  {
+    text: "Mets à la forme négative : « Il a mangé. »",
+    correct: "Il n'a pas mangé.",
+    wrongs: ["Il n'a mangé pas.", "Il ne a pas mangé.", "Il n'a pas mangé pas."],
+    methode: "À un temps composé, « ne » et « pas » entourent l'AUXILIAIRE, pas le participe.",
+  },
+  {
+    text: "Où se place « pas » dans un temps composé ?",
+    correct: "entre l'auxiliaire et le participe passé",
+    wrongs: [
+      "après le participe passé",
+      "avant l'auxiliaire",
+      "à la fin de la phrase",
+    ],
+    methode: "« il n'a PAS mangé » : le mot conjugué est l'auxiliaire, c'est lui qu'on encadre.",
+  },
+  {
+    text: "Mets à la forme négative : « Elle est partie. »",
+    correct: "Elle n'est pas partie.",
+    wrongs: ["Elle n'est partie pas.", "Elle ne est pas partie.", "Elle est ne pas partie."],
+    methode: "Avec être comme avec avoir : « ne » + auxiliaire + « pas » + participe.",
+  },
+  {
+    text: "Quelle phrase est correctement écrite à la forme négative ?",
+    correct: "Nous n'avons pas fini.",
+    wrongs: ["Nous n'avons fini pas.", "Nous avons pas fini.", "Nous n'avons pas fini pas."],
+    methode: "« n' » devant l'auxiliaire, « pas » juste après : le participe reste à la fin.",
+  },
+  {
+    text: "Mets à la forme négative : « Ils sont arrivés à l'heure. »",
+    correct: "Ils ne sont pas arrivés à l'heure.",
+    wrongs: [
+      "Ils ne sont arrivés pas à l'heure.",
+      "Ils sont ne pas arrivés à l'heure.",
+      "Ils ne sont arrivés à l'heure pas.",
+    ],
+    methode: "L'auxiliaire « sont » est encadré ; le participe « arrivés » ne bouge pas.",
+  },
+  {
+    text: "« Il ne mange pas » devient, au passé composé…",
+    correct: "Il n'a pas mangé",
+    wrongs: ["Il n'a mangé pas", "Il ne a mangé pas", "Il n'a pas mangé pas"],
+    methode: "Le verbe se coupe en deux : la négation suit l'auxiliaire, qui est le mot conjugué.",
+  },
+  {
+    text: "Mets à la forme négative avec « jamais » : « J'ai vu ce film. »",
+    correct: "Je n'ai jamais vu ce film.",
+    wrongs: ["Je n'ai vu jamais ce film.", "Je n'ai pas jamais vu ce film.", "Jamais je n'ai vu pas ce film."],
+    methode: "« jamais » prend la place de « pas », au même endroit : après l'auxiliaire.",
+  },
+  {
+    text: "Mets à la forme négative avec « plus » : « Elle est revenue. »",
+    correct: "Elle n'est plus revenue.",
+    wrongs: ["Elle n'est revenue plus.", "Elle n'est pas plus revenue.", "Elle ne est plus revenue."],
+    methode: "« plus », « jamais », « rien » se placent tous après l'auxiliaire.",
+  },
+  {
+    text: "Mets à la forme négative avec « rien » : « Nous avons compris. »",
+    correct: "Nous n'avons rien compris.",
+    wrongs: ["Nous n'avons compris rien.", "Nous n'avons pas rien compris.", "Nous ne avons rien compris."],
+    methode: "« rien » se glisse entre l'auxiliaire et le participe, comme « pas ».",
+  },
+  {
+    text: "Au plus-que-parfait, où va la négation ? « Il avait fini. »",
+    correct: "Il n'avait pas fini.",
+    wrongs: ["Il n'avait fini pas.", "Il avait n'a pas fini.", "Il ne avait pas fini."],
+    methode: "Même règle à tous les temps composés : c'est l'auxiliaire qu'on encadre.",
+  },
+  {
+    text: "Pourquoi la négation entoure-t-elle l'auxiliaire et non le participe ?",
+    correct: "Parce que l'auxiliaire est le mot conjugué du verbe",
+    wrongs: [
+      "Parce que l'auxiliaire est toujours le mot le plus court",
+      "Parce que le participe passé ne peut pas être nié",
+      "Parce que « pas » doit finir la phrase",
+    ],
+    methode: "À un temps simple on encadre le verbe ; à un temps composé, le verbe conjugué EST l'auxiliaire.",
+  },
+  {
+    text: "⚠️ Mets à la forme négative avec « personne » : « Il a vu quelqu'un. »",
+    correct: "Il n'a vu personne.",
+    wrongs: ["Il n'a personne vu.", "Il n'a pas vu personne.", "Il ne a vu personne."],
+    methode: "⚠️ « personne » fait exception : il passe APRÈS le participe, contrairement à « pas ».",
+  },
+];
+
+/* ═══════════════════════════════════════════════════════════════════════════
    CULTURE LITTÉRAIRE ET ARTISTIQUE — 11/08/2026
 
    Le BO en fait un DOMAINE À PART, à côté de la Lecture, et il nomme ses
@@ -7039,6 +7251,21 @@ function conjugaisonQuestion(microId: string): Generated {
       auHasard([CONJ_PASSE_COMPOSE, CONJ_PASSE_SIMPLE, CONJ_PLUS_QUE_PARFAIT, CONJ_VALEUR_TEMPS])
     );
   }
+  /* ─── LES DÉFIS DES TEMPS COMPOSÉS (23/08/2026) ────────────────────────────
+     Un défi PARCOURT sa notion — c'est ce qui en fait un défi et non une
+     question de plus : l'élève ne sait pas laquelle des compétences va tomber.
+     Ces deux-là tombaient sur `passe_compose`, quinze branches plus bas, et ne
+     voyaient donc qu'un seul de leurs sujets.
+     ⛔ UNE LIGNE PAR CLASSE, ET NOMMÉE. Les deux notions ne contiennent pas la
+     même chose : le CM2 range la NÉGATION sous la sienne (son BO la lui
+     demande), la 6e range le PLUS-QUE-PARFAIT sous la sienne. Une branche
+     commune servirait à chacune la matière de l'autre. */
+  if (microId.includes("cm2_conj_passe_compose_defi")) {
+    return qcm(auHasard([CONJ_PASSE_COMPOSE, PARTICIPE_PASSE, CONJ_NEGATION_COMPOSEE]));
+  }
+  if (microId.includes("6e_conj_passe_compose_defi")) {
+    return qcm(auHasard([CONJ_PASSE_COMPOSE, CONJ_PLUS_QUE_PARFAIT, PARTICIPE_PASSE]));
+  }
 
   /* 6e, ajoutées le 11/08/2026. Elles passent AVANT la branche générique du
      collège (identifier / composer / employer), qui ferait tourner les temps
@@ -7050,6 +7277,22 @@ function conjugaisonQuestion(microId: string): Generated {
   /* CM1 (11/08/2026) : les marques de temps et de personne, et les variations
      du radical du premier groupe. Deux attendus explicites du BO au CM1, qui
      tombaient jusqu'ici sur le moteur du présent. */
+  /* ⛔ LA NÉGATION D'UN TEMPS COMPOSÉ — CM2, 23/08/2026, ET ELLE PASSE EN TÊTE.
+     « cm2_conj_negation_passe_compose » contient « passe_compose » : sans cette
+     ligne il tombait, quinze branches plus bas, sur CONJ_PASSE_COMPOSE et
+     recevait « Quel auxiliaire complète : "Ils ___ partis ?" ». Une question
+     juste, sur un autre sujet — l'objectif du BO « effectuer la transformation
+     à la forme négative […] en plaçant les adverbes de négation au bon
+     emplacement » n'était servi par RIEN. */
+  if (microId.includes("negation")) return qcm(CONJ_NEGATION_COMPOSEE);
+  /* ⛔ LE CM2 SEUL VOIT LE TROISIÈME GROUPE, ET L'ORDRE LE DIT. Son BO écrit
+     « variations du radical pour certains verbes du premier groupe ET DU
+     TROISIÈME GROUPE » ; celui du CM1 et celui de la 6e s'arrêtent au premier.
+     Cette branche doit donc précéder la générique, et elle est nommée `cm2_`
+     pour qu'on ne l'élargisse pas par distraction. */
+  if (microId.includes("cm2_conj_radical_variations")) {
+    return qcm(Math.random() < 0.5 ? RADICAL_VARIATIONS : RADICAL_TROISIEME_GROUPE);
+  }
   if (microId.includes("radical_variations")) return qcm(RADICAL_VARIATIONS);
   if (microId.includes("conj_marques")) return qcm(MARQUES_TEMPS_PERSONNE);
   /* ⚠️ LE PARTICIPE PASSÉ ARRIVE ICI DEPUIS LE 22/08/2026. Le BO range son
