@@ -266,7 +266,11 @@ const DOCUMENT: QcmItem[] = [
   {
     text: "Dans un sommaire : « Chapitre 3 ..... page 20 ». À quoi sert la page indiquée ?",
     correct: "à trouver où commence le chapitre",
-    wrongs: ["à compter les images","à connaître l'auteur","à savoir le prix"],
+    wrongs: [
+      "à savoir combien de pages fait le chapitre",
+      "à repérer l'ordre dans lequel lire le livre",
+      "à connaître le nombre d'images du livre",
+    ],
     methode: "Le sommaire aide à se repérer dans un livre.",
   },
   {
@@ -373,7 +377,11 @@ const OEUVRE: QcmItem[] = [
   {
     text: "Quelle phrase raconte un événement de l'histoire (et non un avis) ?",
     correct: "Le dragon s'envola au-dessus du château.",
-    wrongs: ["J'ai adoré ce passage.","Ce livre est trop long.","C'est mon conte préféré."],
+    wrongs: [
+      "Ce livre sur les dragons est vraiment trop long.",
+      "J'ai adoré le passage où le dragon s'envole.",
+      "Le dragon est le personnage le plus réussi.",
+    ],
     methode: "Un événement décrit une action de l'histoire.",
   },
   {
@@ -455,7 +463,11 @@ const OEUVRE: QcmItem[] = [
   {
     text: "Quelle phrase exprime une réaction personnelle de lecteur ?",
     correct: "J'ai eu peur quand le loup est apparu.",
-    wrongs: ["Le livre a 64 pages.", "C'est un conte.", "Il y a trois chapitres."],
+    wrongs: [
+      "C'est un conte traditionnel avec un loup.",
+      "Le loup apparaît au troisième chapitre.",
+      "L'histoire du loup fait soixante pages.",
+    ],
     methode: "Une réaction de lecteur dit ce qu'on a ressenti.",
   },
   {
@@ -590,7 +602,11 @@ const ECRITURE: QcmItem[] = [
   {
     text: "Avant de rendre un texte, la dernière étape utile est de...",
     correct: "se relire pour corriger les erreurs",
-    wrongs: ["le plier en quatre", "compter les mots", "changer de stylo"],
+    wrongs: [
+      "recopier le texte au propre sans le relire",
+      "montrer son texte à un camarade sans rien changer",
+      "compter les mots pour vérifier la longueur",
+    ],
     methode: "La relecture est une étape de la production d'écrit.",
   },
 ];
@@ -992,7 +1008,11 @@ const VOC_REEMPLOI: QcmItem[] = [
   {
     text: "Quelle phrase emploie bien le mot 'joyeux' ?",
     correct: "Les enfants joyeux dansaient dans la cour.",
-    wrongs: ["Le joyeux est sur l'étagère.","Il mange un joyeux.","Joyeux vite la porte."],
+    wrongs: [
+      "Il mange un joyeux avec sa fourchette.",
+      "Joyeux la porte avant de sortir d'ici.",
+      "Le joyeux du salon est resté allumé.",
+    ],
     methode: "On réemploie le mot correctement.",
   },
   {
@@ -1050,7 +1070,11 @@ const VOC_REEMPLOI: QcmItem[] = [
   {
     text: "Quelle phrase emploie bien le mot 'gourmand' ?",
     correct: "Le chat gourmand a mangé tout le poisson.",
-    wrongs: ["Le gourmand est en bois.","Il écrit un gourmand.","Gourmand court la rivière."],
+    wrongs: [
+      "Le gourmand du placard est en bois massif.",
+      "Il écrit un gourmand sur son cahier neuf.",
+      "Gourmand court le long de la rivière.",
+    ],
     methode: "L'adjectif qualifie un nom.",
   },
   {
@@ -1649,7 +1673,11 @@ const HOMOPHONES: QcmItem[] = [
   {
     text: "Homophones 'son' / 'sont' : choisis la phrase correcte.",
     correct: "Les enfants sont contents de leur cadeau.",
-    wrongs: ["Les enfants son contents.", "Les enfants sont content.", "Les enfants sonts contents."],
+    wrongs: [
+      "Les enfants sonts content de leur cadeau.",
+      "Les enfants son contents de leur cadeau.",
+      "Les enfants sont content de leur cadeau.",
+    ],
     methode: "'sont' = verbe être ; 'son' = à lui.",
   },
   {
@@ -1788,7 +1816,11 @@ const PREPOSITIONS: QcmItem[] = [
   {
     text: "Dans « Je pense que tu as raison », le mot « que » est…",
     correct: "une conjonction de subordination",
-    wrongs: ["une préposition", "un pronom personnel", "un déterminant"],
+    wrongs: [
+      "une conjonction de coordination",
+      "un adverbe interrogatif de temps",
+      "une préposition de temps",
+    ],
     methode: "Il accroche une proposition entière à la première.",
   },
   {
@@ -1916,9 +1948,9 @@ const SUJET_INVERSE: QcmItem[] = [
     text: "Pourquoi faut-il savoir repérer un sujet inversé ?",
     correct: "Parce que c'est lui qui commande l'accord du verbe",
     wrongs: [
-      "Parce qu'il faut le supprimer",
-      "Parce qu'il change le temps du verbe",
-      "Parce qu'il prend une majuscule",
+      "Parce qu'il change le temps auquel le verbe se met",
+      "Parce qu'il faut le remettre devant le verbe",
+      "Parce qu'il prend toujours une majuscule",
     ],
     methode: "Se tromper de sujet, c'est se tromper de terminaison.",
   },
@@ -2236,7 +2268,11 @@ const COMPLEMENT_NOM: QcmItem[] = [
   {
     text: "Un complément du nom est presque toujours introduit par…",
     correct: "une préposition : de, à, en…",
-    wrongs: ["un déterminant", "un verbe", "un adverbe"],
+    wrongs: [
+      "un déterminant placé devant le nom",
+      "un verbe conjugué à l'infinitif",
+      "un adverbe qui précise le nom",
+    ],
     methode: "« un jus DE letchi », « une case EN tôle ».",
   },
   {
@@ -2721,9 +2757,9 @@ const ARTICULATION: QcmItem[] = [
     text: "Quelles sont les trois façons de relier des propositions ?",
     correct: "juxtaposition, coordination, subordination",
     wrongs: [
-      "sujet, verbe, complément",
-      "nom, adjectif, déterminant",
-      "passé, présent, futur",
+      "juxtaposition, coordination, ponctuation",
+      "coordination, subordination, comparaison",
+      "sujet, verbe et complément de la phrase",
     ],
     methode: "Ponctuation seule, mot de coordination, ou mot de subordination.",
   },
@@ -2848,8 +2884,8 @@ const CONJONCTIONS_ROLE: QcmItem[] = [
     correct: "une conjonction de coordination",
     wrongs: [
       "une conjonction de subordination",
-      "une préposition",
-      "un adverbe",
+      "une préposition qui relie deux noms",
+      "un adverbe placé entre deux noms",
     ],
     methode: "mais, ou, et, donc, or, ni, car : les sept.",
   },
@@ -2913,9 +2949,9 @@ const CONJONCTIONS_ROLE: QcmItem[] = [
     text: "Une conjonction de coordination peut relier…",
     correct: "deux mots, deux groupes ou deux propositions",
     wrongs: [
-      "seulement deux propositions",
-      "seulement deux noms",
-      "un nom et son déterminant",
+      "seulement deux propositions de même nature",
+      "un nom et le déterminant qui l'accompagne",
+      "deux verbes conjugués au même temps",
     ],
     methode: "« du riz et du cari » : elle relie aussi des groupes.",
   },
@@ -2932,7 +2968,11 @@ const CONJONCTIONS_ROLE: QcmItem[] = [
   {
     text: "Dans « Il est parti, car il était tard », le mot « car » marque…",
     correct: "une coordination qui donne la cause",
-    wrongs: ["une subordination", "une juxtaposition", "une préposition"],
+    wrongs: [
+      "une subordination qui donne la cause",
+      "une préposition qui introduit un complément",
+      "une juxtaposition sans mot de liaison",
+    ],
     methode: "Attention : « car » coordonne, « parce que » subordonne — et tous deux disent la cause.",
   },
   {
@@ -3115,11 +3155,11 @@ const MANIPULATIONS: QcmItem[] = [
   },
   {
     text: "Pourquoi ne pas se fier à la PLACE d'un groupe pour trouver sa fonction ?",
-    correct: "Parce qu'un groupe peut se déplacer sans changer de fonction",
+    correct: "Parce qu'un groupe se déplace sans changer de fonction",
     wrongs: [
-      "Parce que la place ne change jamais",
-      "Parce que les groupes sont toujours au pluriel",
-      "Parce que le verbe est toujours au milieu",
+      "Parce que deux groupes différents peuvent occuper la même place",
+      "Parce que la place d'un groupe ne change jamais",
+      "Parce que le verbe se trouve toujours au milieu",
     ],
     methode: "« Hier, il pleuvait. » / « Il pleuvait hier. » Même fonction, deux places.",
   },
@@ -4095,9 +4135,9 @@ const RADICAL_VARIATIONS: QcmItem[] = [
     text: "Les verbes en -yer changent le « y » en…",
     correct: "« i » devant un e muet : il nettoie",
     wrongs: [
-      "« e » : il netteoe",
-      "rien du tout",
-      "« ï » : il nettoïe",
+      "« e » quand la terminaison s'entend : il netteoie",
+      "rien : le « y » reste à toutes les personnes",
+      "« ï » devant une voyelle : il nettoïe",
     ],
     methode: "nettoyer, essuyer, appuyer : tous suivent cette règle.",
   },
@@ -4117,9 +4157,9 @@ const RADICAL_VARIATIONS: QcmItem[] = [
     text: "Le radical d'un verbe du premier groupe…",
     correct: "peut changer légèrement selon la personne",
     wrongs: [
-      "ne change jamais",
-      "change à chaque personne",
-      "disparait au pluriel",
+      "change complètement d'une personne à l'autre",
+      "reste identique à toutes les personnes du verbe",
+      "disparait quand la terminaison est muette",
     ],
     methode: "Il ne change pas de sens, seulement d'orthographe, et pour le son.",
   },
@@ -4271,9 +4311,9 @@ const CONJ_NEGATION_COMPOSEE: QcmItem[] = [
     text: "Où se place « pas » dans un temps composé ?",
     correct: "entre l'auxiliaire et le participe passé",
     wrongs: [
-      "après le participe passé",
-      "avant l'auxiliaire",
-      "à la fin de la phrase",
+      "après le participe passé, à la fin du verbe",
+      "à la fin de la phrase, après le complément",
+      "avant l'auxiliaire, juste après le sujet",
     ],
     methode: "« il n'a PAS mangé » : le mot conjugué est l'auxiliaire, c'est lui qu'on encadre.",
   },
@@ -4587,7 +4627,11 @@ const MERVEILLEUX: QcmItem[] = [
   {
     text: "Le merveilleux se rencontre…",
     correct: "dans les contes, les mythes et la fantasy",
-    wrongs: ["seulement dans les contes", "seulement au théâtre", "seulement en poésie"],
+    wrongs: [
+      "seulement dans les contes pour les enfants",
+      "dans les romans policiers et d'aventure",
+      "uniquement au théâtre et dans la poésie",
+    ],
     methode: "C'est un registre, pas un genre : il traverse plusieurs formes.",
   },
   {
@@ -4858,7 +4902,11 @@ const POESIE: QcmItem[] = [
   {
     text: "Une rime, c'est…",
     correct: "un même son à la fin de deux vers",
-    wrongs: ["un même mot répété", "une phrase courte", "un titre en gras"],
+    wrongs: [
+      "un vers qui compte le même nombre de syllabes",
+      "un même mot répété au début de deux vers",
+      "une phrase courte placée en fin de strophe",
+    ],
     methode: "C'est le son qui compte, pas l'orthographe.",
   },
   {
@@ -6295,16 +6343,20 @@ const MISE_EN_VOIX: QcmItem[] = [
     text: "À quoi sert une PAUSE dans une lecture à voix haute ?",
     correct: "à marquer la ponctuation et à laisser comprendre",
     wrongs: [
-      "à reprendre son souffle uniquement",
-      "à vérifier la suite du texte",
-      "à ralentir toute la lecture",
+      "à reprendre son souffle quand la phrase est longue",
+      "à ralentir la lecture pour la rendre solennelle",
+      "à vérifier la suite du texte avant de continuer",
     ],
     methode: "La pause est une ponctuation entendue : elle sépare les groupes de sens.",
   },
   {
     text: "Une lecture MONOTONE, c'est une lecture…",
     correct: "sans variation de ton ni de rythme",
-    wrongs: ["trop rapide", "trop faible", "pleine d'hésitations"],
+    wrongs: [
+      "hachée par des hésitations trop nombreuses",
+      "trop faible pour être entendue du fond",
+      "trop rapide pour qu'on suive le sens",
+    ],
     methode: "Monotone : « un seul ton ». C'est ce que la mise en voix cherche à éviter.",
   },
   {
@@ -6347,9 +6399,9 @@ const MISE_EN_VOIX: QcmItem[] = [
     text: "Rendre les INTENTIONS de l'auteur à la lecture, c'est faire entendre…",
     correct: "l'ironie, l'émotion ou l'urgence du passage",
     wrongs: [
-      "le nombre de personnages",
-      "la date d'écriture du texte",
-      "la longueur des phrases",
+      "le nombre de personnages qui prennent la parole",
+      "la longueur des phrases et des paragraphes",
+      "l'époque à laquelle le texte a été écrit",
     ],
     methode: "Le BO demande de « rendre compte des émotions des personnages et des intentions de l'auteur ».",
   },
@@ -6662,9 +6714,9 @@ const DICTIONNAIRE: QcmItem[] = [
     text: "Où cherche-t-on l'orthographe exacte d'un mot dont on n'est pas sûr ?",
     correct: "dans le dictionnaire, à l'ordre alphabétique",
     wrongs: [
-      "dans un livre de conjugaison",
-      "dans la table des matières",
-      "on ne peut pas le chercher",
+      "dans le sommaire, où les mots sont classés",
+      "dans un livre de conjugaison, à la fin",
+      "dans la table des matières du manuel",
     ],
     methode: "On teste l'orthographe la plus probable : si le mot n'y est pas, c'est qu'elle est fausse.",
   },
@@ -6700,7 +6752,11 @@ const ECRIT_RESUMER: QcmItem[] = [
   {
     text: "Hiérarchiser ses idées avant d'écrire, c'est…",
     correct: "les classer de la plus importante à la moins importante",
-    wrongs: ["les écrire dans l'ordre où elles viennent", "les compter", "les souligner"],
+    wrongs: [
+      "les écrire dans l'ordre où elles viennent à l'esprit",
+      "les compter pour savoir combien de paragraphes faire",
+      "les souligner pour ne pas les oublier en écrivant",
+    ],
     methode: "Hiérarchiser, c'est décider ce qui vient d'abord parce que c'est le plus important.",
   },
   {
@@ -6815,7 +6871,11 @@ const ECRIT_COHERENCE: QcmItem[] = [
   {
     text: "Écrire la suite d'un récit demande de conserver…",
     correct: "les personnages, le temps et le lieu",
-    wrongs: ["le nombre de lignes", "le titre", "la première phrase"],
+    wrongs: [
+      "le titre et la façon d'écrire les dialogues",
+      "le nombre de lignes et de paragraphes",
+      "la première phrase, recopiée mot pour mot",
+    ],
     methode: "Une suite cohérente ne change pas en route ce que le texte a installé.",
   },
   {
@@ -6844,9 +6904,9 @@ const ECRIT_COHERENCE: QcmItem[] = [
     text: "Une description cohérente suit…",
     correct: "un ordre : de loin en près, de haut en bas",
     wrongs: [
-      "l'ordre où les mots viennent",
-      "l'ordre alphabétique",
-      "aucun ordre particulier",
+      "l'ordre dans lequel les mots viennent à l'esprit",
+      "l'ordre alphabétique des objets décrits",
+      "aucun ordre : la description est libre",
     ],
     methode: "Le lecteur doit pouvoir construire l'image : un ordre l'y aide.",
   },
@@ -7755,9 +7815,9 @@ const NIVEAU_LANGUE: QcmItem[] = [
     text: "Tu écris une lettre au maire de ta commune. Quelle formulation choisis-tu ?",
     correct: "Je vous prie de bien vouloir examiner ma demande.",
     wrongs: [
-      "Répondez-moi vite s'il vous plaît.",
-      "Faut que vous regardiez mon truc.",
-      "Jetez un œil à ma demande.",
+      "Merci de regarder ma demande dès que possible.",
+      "Je voudrais que vous lisiez vite ma demande.",
+      "Pouvez-vous jeter un œil à ma demande, svp ?",
     ],
     methode:
       "On adapte le niveau de langue à qui l'on parle : à une autorité, on écrit en langage soutenu.",
@@ -7809,9 +7869,9 @@ const NIVEAU_LANGUE: QcmItem[] = [
     text: "Laquelle de ces phrases est au registre soutenu ?",
     correct: "Je vous saurais gré de me répondre.",
     wrongs: [
-      "Réponds-moi vite.",
-      "Tu me réponds quand ?",
-      "Faudrait me répondre.",
+      "Je vous demande de me répondre vite.",
+      "Il faudrait que vous me répondiez.",
+      "J'aimerais bien que tu me répondes.",
     ],
     methode: "Le conditionnel de politesse et le vouvoiement signent le registre soutenu.",
   },
@@ -8035,9 +8095,9 @@ const HOMONYMIE: QcmItem[] = [
     text: "Dans « La reine porte une chaîne », quels mots sont homonymes d'autres mots courants ?",
     correct: "reine (rêne, renne) et chaîne (chêne)",
     wrongs: [
-      "porte seulement",
-      "une seulement",
-      "aucun mot de la phrase",
+      "porte (le nom) et porte (le verbe) seulement",
+      "une et chaîne, qui se prononcent pareil",
+      "aucun : ces mots n'ont pas d'homonyme",
     ],
     methode:
       "Un homonyme s'entend, il ne se voit pas : il faut passer par le sens de la phrase.",

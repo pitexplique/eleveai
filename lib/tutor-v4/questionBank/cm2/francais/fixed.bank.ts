@@ -201,7 +201,12 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
     "cm2_oeuvre_reference",
     2,
     "« Cette histoire de renard rusé me fait penser au Roman de Renart. » Que fait le lecteur ?",
-    ["il invente une suite", "il corrige des fautes", "il relie l'œuvre à une autre qu'il connaît", "il compte les personnages"],
+    [
+      "il vérifie si l'auteur a copié l'autre livre",
+      "il relie l'œuvre à une autre qu'il connaît",
+      "il cherche lequel des deux est le plus ancien",
+      "il compare le nombre de personnages des deux",
+    ],
     "il relie l'œuvre à une autre qu'il connaît",
     "Relier une œuvre à une autre référence culturelle enrichit la lecture."
   ),
@@ -352,7 +357,12 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
     "cm2_oral_debat",
     3,
     "Dans un débat réglé, quand on n'est pas d'accord, on...",
-    ["coupe la parole pour crier plus fort", "se moque de l'autre", "attend son tour et explique poliment son désaccord", "quitte la salle"],
+    [
+      "coupe la parole pour que son avis soit entendu",
+      "attend son tour et explique poliment son désaccord",
+      "répète son avis plus fort jusqu'à convaincre",
+      "garde son désaccord pour soi jusqu'à la fin",
+    ],
     "attend son tour et explique poliment son désaccord",
     "Un débat réglé demande d'écouter, d'attendre son tour et de justifier son avis avec respect."
   ),
@@ -475,7 +485,12 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
     "cm2_voc_niveau_langue",
     2,
     "Tu écris une lettre au maire de ta commune. Quelle formulation choisis-tu ?",
-    ["Faut que vous regardiez mon truc.", "Répondez-moi vite s'il vous plaît.", "Je vous prie de bien vouloir examiner ma demande.", "Jetez un œil à ma demande."],
+    [
+      "Merci de regarder ma demande dès que possible.",
+      "Je voudrais que vous lisiez vite ma demande.",
+      "Je vous prie de bien vouloir examiner ma demande.",
+      "Pouvez-vous jeter un œil à ma demande, svp ?",
+    ],
     "Je vous prie de bien vouloir examiner ma demande.",
     "On adapte le niveau de langue à qui l'on s'adresse : à une autorité, on écrit en langage soutenu."
   ),
