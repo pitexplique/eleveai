@@ -1230,6 +1230,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "fraction_mixte",
+        "label": "Fractions supérieures à 1",
+        "prerequis": [
+          "fraction"
+        ]
+      },
+      {
         "id": "nombre_decimal",
         "label": "Nombres décimaux",
         "prerequis": [

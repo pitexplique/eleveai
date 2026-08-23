@@ -197,6 +197,33 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["fraction_comparer", "fraction_equivalente"],
   },
 
+  /* =========================
+     FRACTIONS SUPÉRIEURES À 1
+     ⛔ Ouvertes le 23/08/2026 : trois objectifs du programme de CM2
+     (cm2-N-fractions-2, -3 et -4) n'avaient aucune micro. Ils forment un seul
+     sujet — ce qui se passe quand une fraction dépasse l'unité.
+     ⭐ La relation d/d = 1 les porte toutes les trois, et c'est la table de
+     multiplication qui fait le calcul : 58/7 = 56/7 + 2/7 = 8 + 2/7.
+  ========================= */
+  {
+    id: "fraction_mixte_ecrire",
+    label: "Écrire une fraction comme un entier et une fraction",
+    notionId: "fraction_mixte",
+    prerequis: ["fraction_lire"],
+  },
+  {
+    id: "fraction_mixte_regrouper",
+    label: "Regrouper un entier et une fraction en une seule",
+    notionId: "fraction_mixte",
+    prerequis: ["fraction_mixte_ecrire"],
+  },
+  {
+    id: "fraction_encadrer",
+    label: "Encadrer une fraction entre deux entiers",
+    notionId: "fraction_mixte",
+    prerequis: ["fraction_mixte_ecrire"],
+  },
+
   // ============================================================
   // NOMBRES DÉCIMAUX
   // ============================================================

@@ -159,8 +159,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif:
       "Écrire une fraction supérieure à 1 comme la somme d'un entier et d'une fraction inférieure à 1.",
     page: 10,
-    micros: [],
-    note: "L'écriture mixte. Elle sera redemandée en 6e (6e-N-fractions-8) : la préparer ici a du sens.",
+    micros: ["fraction_mixte_ecrire"],
+    note: "L'écriture mixte, redemandée en 6e (6e-N-fractions-8). Couvert le 23/08/2026. Exemple de réussite du BO : 58/7 = 56/7 + 2/7 = 8 + 2/7, en s'appuyant sur 7/7 = 1 et la table de 7.",
   },
   {
     id: "cm2-N-fractions-3",
@@ -169,8 +169,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     objectif:
       "Écrire la somme d'un entier et d'une fraction inférieure à 1 comme une unique fraction.",
     page: 10,
-    micros: [],
-    note: "Le chemin inverse du précédent.",
+    micros: ["fraction_mixte_regrouper"],
+    note: "Le chemin inverse du précédent. Couvert le 23/08/2026 — avec l'item qui explique pourquoi le dénominateur ne change PAS : c'est l'unité dans laquelle on compte.",
   },
   {
     id: "cm2-N-fractions-4",
@@ -178,7 +178,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Les fractions",
     objectif: "Encadrer une fraction entre deux nombres entiers consécutifs.",
     page: 10,
-    micros: [],
+    micros: ["fraction_encadrer"],
+    note: "Couvert le 23/08/2026. Exemple de réussite du BO : 43/8 = 5 × 8/8 + 3/8 = 5 + 3/8, donc 5 < 43/8 < 6. Le piège (lire le numérateur comme des unités, chercher 9/2 entre 9 et 10) a son item.",
   },
   {
     id: "cm2-N-fractions-5",

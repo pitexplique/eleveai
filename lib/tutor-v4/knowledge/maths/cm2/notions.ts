@@ -42,6 +42,23 @@ export const notions: NotionSource[] = [
     prerequis: ["division"],
     levels: [1, 2, 3],
   },
+  // ⛔ OUVERTE LE 23/08/2026 — TROIS TROUS DU PROGRAMME, UN SEUL SUJET
+  // (cm2-N-fractions-2, -3 et -4). « Fractions » s'arrêtait à lire, représenter,
+  // comparer : rien n'y traitait les fractions PLUS GRANDES QUE 1, alors que le
+  // programme de CM2 en fait trois objectifs.
+  //
+  // ⭐ TOUT REPOSE SUR d/d = 1, et c'est la table de multiplication qui fait le
+  // travail : 58/7 = 56/7 + 2/7 = 8 + 2/7. L'obstacle n'est pas technique, c'est
+  // la croyance « une fraction, c'est plus petit que 1 » — vraie tant qu'on
+  // partageait une pizza, fausse dès qu'on en a deux.
+  {
+    id: "fraction_mixte",
+    label: "Fractions supérieures à 1",
+    boId: "BOCM2N3",
+    prerequis: ["fraction"],
+    levels: [1, 2, 3],
+  },
+
   {
     id: "nombre_decimal",
     label: "Nombres décimaux",
