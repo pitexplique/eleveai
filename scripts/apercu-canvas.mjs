@@ -68,11 +68,52 @@ const CADRES_PAR_DEFAUT = [250, 340, 400];
 const POLICE_MINI = 11;
 const alertes = [];
 
+/* ⛔ LE SECOND DÉFAUT MUET : UN TEXTE QUI SORT DE SON `viewBox` (23/08/2026).
+   Un SVG masque ce qui dépasse de son cadre. Une étiquette trop longue n'est
+   donc pas « mal placée » : elle est COUPÉE, et rien ne le dit — ni le rendu
+   qu'on regarde de loin, ni la mesure de police ci-dessus, qui ne s'occupe que
+   de la TAILLE des lettres et jamais de la place qu'elles prennent.
+
+   Trouvé sur la quatrième fiche de conjugaison de la 6e : `PhraseCanvas`
+   calcule la largeur d'un mot sur LE MOT, pas sur la `nature` écrite au-dessus.
+   « passé simple » posé sur le dernier mot d'une phrase sortait de trois
+   pixels — invisible à la lecture du code, invisible sur la page.
+
+   La largeur est une ESTIMATION (0,55 × la police par caractère, mesure d'une
+   police système sans empattement) : on ne signale donc qu'au-delà de 2 px de
+   débordement, pour ne pas crier sur un arrondi. */
+const LARGEUR_CARACTERE = 0.55;
+const MARGE_DEBORDEMENT = 2;
+const debordements = [];
+
+function verifierDebordements(titre, html) {
+  const viewBox = /viewBox="0 0 ([\d.]+) ([\d.]+)"/.exec(html);
+  if (!viewBox) return;
+  const largeur = Number(viewBox[1]);
+  for (const t of html.matchAll(/<text([^>]*)>([^<]*)<\/text>/g)) {
+    const attrs = t[1];
+    const texte = t[2].replace(/&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, "&");
+    if (!texte.trim()) continue;
+    const x = Number(/\bx="([\d.-]+)"/.exec(attrs)?.[1] ?? 0);
+    const police = Number(/font-size="([\d.]+)"/.exec(attrs)?.[1] ?? 15);
+    const ancre = /text-anchor="([a-z]+)"/.exec(attrs)?.[1] ?? "start";
+    const large = texte.length * police * LARGEUR_CARACTERE;
+    const gauche = ancre === "middle" ? x - large / 2 : ancre === "end" ? x - large : x;
+    const droite = gauche + large;
+    if (gauche < -MARGE_DEBORDEMENT || droite > largeur + MARGE_DEBORDEMENT) {
+      debordements.push(
+        `  · ${titre} — « ${texte} » occupe [${gauche.toFixed(0)} ; ${droite.toFixed(0)}] dans un cadre de ${largeur.toFixed(0)} px`
+      );
+    }
+  }
+}
+
 const blocs = entrees
   .map((e, i) => {
     const html = renderToStaticMarkup(
       React.createElement(CanvasRenderer, { figure: e.figure })
     );
+    verifierDebordements(e.titre ?? e.figure.kind, html);
     const cadres = e.largeurCarte ? [e.largeurCarte] : CADRES_PAR_DEFAUT;
     const viewBox = /viewBox="0 0 ([\d.]+) ([\d.]+)"/.exec(html);
     const largeurSvg = viewBox ? Number(viewBox[1]) : null;
@@ -150,4 +191,12 @@ if (alertes.length) {
   console.log(`\n⛔ Texte sous ${POLICE_MINI} px une fois le dessin à l'échelle :`);
   console.log([...new Set(alertes)].join("\n"));
   console.log("\n→ raccourcir la phrase, ou réduire ce que le dessin porte.");
+}
+if (debordements.length) {
+  console.log("\n⛔ Texte hors du cadre du dessin (il sera COUPÉ, sans un mot) :");
+  console.log([...new Set(debordements)].join("\n"));
+  console.log("\n→ raccourcir cette étiquette : le canvas n'élargit pas son cadre pour elle.");
+}
+if (!alertes.length && !debordements.length) {
+  console.log("✅ police et cadre : rien à signaler.");
 }
