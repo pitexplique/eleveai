@@ -24,7 +24,51 @@ import { cgvEnVigueur } from "@/lib/legal/editeur";
 // Le hub tient les quatre épreuves ET les quatre sujets à imprimer ; les
 // quatre épreuves sont doublées ici pour qu'elles soient à UN saut de
 // l'accueil, comme le sont déjà les douze classes du coach maths.
+// ⭐ 23/08/2026 — ET LES FICHES NON PLUS N'AVAIENT AUCUN LIEN DE PIED DE PAGE.
+// C'est mot pour mot le constat du 22/08 ci-dessus, un cran plus grave : 104
+// URL au sitemap, la 6ᵉ complète dans les deux matières, et pas UN lien de
+// navigation sur tout le site. Le sommaire n'était atteignable qu'en tapant son
+// adresse. Google construit ses rubriques de marque à partir de la navigation —
+// c'est l'argument qui a fait entrer les tarifs dans l'en-tête le 21/08 — et
+// pour ces pages-là il n'avait rien à lire.
+//
+// ⚠️ L'ANCRE DIT « COURS ET EXERCICES CORRIGÉS », PAS « FICHES DE COURS ». Le
+// texte d'un lien est ce que le moteur retient de la page d'en face : il doit
+// donc porter les mêmes mots que son `title`, qui vient de changer le même
+// jour. Écrire « Fiches de cours » ici et « cours et exercices corrigés »
+// là-bas, ce serait se contredire à un clic d'intervalle.
+// ⚠️ LE SOMMAIRE, PAS LES 104 FICHES. Elles sont déjà toutes au sitemap ; ce
+// pied de page dit la STRUCTURE, il ne recopie pas le catalogue. Le sommaire
+// les liste, et c'est son travail.
+// ⛔ Pas de niveau dans l'ancre : le sommaire de maths couvre le CM2, la 6ᵉ, la
+// 5ᵉ et la Première. « Maths 6e » mentirait sur trois classes.
+//
+// ── ⭐ « À IMPRIMER », ET PAS « PDF » — LA VÉRIFICATION QUI A TRANCHÉ ────────
+// Frédéric proposait « fiche cours exercices corrigés pdf ». Deux objections, et
+// la seconde est factuelle :
+//   1. CE N'EST PAS UNE PHRASE, c'est une liste de mots. Une ancre empilée est
+//      précisément ce que Google appelle du « keyword-stuffed anchor text », et
+//      un humain la lit comme du spam. Le lien perd des deux côtés. En plus,
+//      « fiche » y passerait en PREMIER — le mot sans volume, celui qu'on vient
+//      de retirer des 27 titres.
+//   2. LE PDF N'EXISTE PAS. Le bouton « Télécharger en PDF » de
+//      FicheCoursClient.tsx appelle `window.print()` : il ouvre la boîte
+//      d'impression du navigateur, où l'on PEUT choisir « Enregistrer en PDF »
+//      sur un ordinateur — et où l'on ne le trouve pas sur un téléphone. Aucun
+//      fichier n'est produit ni servi. Écrire « PDF » dans une ancre de
+//      navigation ferait donc promettre au pied de page un téléchargement que
+//      la page n'offre pas.
+// « À imprimer » dit exactement ce qui se passe, et ce n'est pas un lot de
+// consolation : « exercices à imprimer » est au moins aussi tapé que « pdf » au
+// primaire et au collège, où c'est le parent qui cherche, avec une imprimante
+// derrière lui.
+// ✅ LE JOUR OÙ UN VRAI PDF EXISTE, cette ancre peut le dire — et il n'est pas
+// loin : `scripts/build-ebook.ts` fabrique déjà un PDF paginé avec pdfkit pour
+// le livre d'IA. Le changer ici sans l'avoir écrit là-bas serait remettre la
+// promesse devant la chose.
 const outils = [
+  { label: "Maths : cours et exercices corrigés à imprimer", href: "/fiches-cours/maths" },
+  { label: "Français : cours et exercices corrigés à imprimer", href: "/fiches-cours/francais" },
   { label: "Évaluations nationales 6e et 4e", href: "/evaluation-nationale-college" },
   { label: "Évaluation nationale 6e maths", href: "/evaluation-nationale-college/6e-maths" },
   { label: "Évaluation nationale 6e français", href: "/evaluation-nationale-college/6e-francais" },

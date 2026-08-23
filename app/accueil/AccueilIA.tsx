@@ -28,6 +28,18 @@ const PIED = [
   { label: "Enseignants", href: "/espace-profs" },
   { label: "Établissements", href: "/espace-ecoles" },
   { label: "Parents", href: "/parents" },
+  // ⭐ 23/08/2026 — LES FICHES ENTRENT DANS LE PIED DE L'ACCUEIL.
+  // Elles n'avaient aucun lien de navigation sur tout le site (voir la note du
+  // pied de page complet, components/Footer.tsx). Ce pied-ci est volontairement
+  // « des repères, pas une seconde page d'accueil » : il n'accueille donc pas
+  // les deux sommaires par matière mais leur porte commune, en un mot.
+  // ⚠️ « Fiches de cours » ICI, et « Maths : cours et exercices corrigés » dans
+  // le pied de page complet — ce n'est pas une incohérence, c'est la même règle
+  // appliquée deux fois. Ce pied porte des NOMS DE RUBRIQUE, courts, alignés sur
+  // « Tarifs » et « Aide » ; l'autre porte des ancres, qui doivent recopier les
+  // titres des pages visées. Et /fiches-cours, lui, a gardé « Fiches de cours »
+  // comme titre : c'est la page de la collection.
+  { label: "Fiches de cours", href: "/fiches-cours" },
   { label: "Toutes les ressources", href: "/explorer" },
   { label: "Tarifs", href: "/tarifs" },
   { label: "À propos", href: "/qui-sommes-nous" },
