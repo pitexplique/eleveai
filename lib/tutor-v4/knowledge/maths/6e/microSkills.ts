@@ -359,6 +359,40 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     LES ÉCHELLES
+     ⛔ Ouverte le 23/08/2026 (6e-P-proportionnalite-5) — le DERNIER trou du
+     programme de 6e. Les échelles sont au programme de la 6e et de là seulement :
+     au CM1 comme au CM2, la proportionnalité n'a que deux objectifs, l'identifier
+     et la résoudre, et le mot « échelle » n'y figure pas.
+     ⛔⛔ LE PRODUIT EN CROIX EST INTERDIT à ce stade — le BO le dit pour la 6e.
+     Les procédures attendues sont la LINÉARITÉ et le RETOUR À L'UNITÉ.
+  ========================= */
+  {
+    id: "echelle_comprendre",
+    label: "Comprendre ce que dit une échelle",
+    notionId: "prop_echelle",
+    prerequis: ["prop_reconnaitre"],
+  },
+  {
+    id: "echelle_distance_reelle",
+    label: "Du plan vers la réalité",
+    notionId: "prop_echelle",
+    prerequis: ["echelle_comprendre"],
+  },
+  {
+    id: "echelle_distance_plan",
+    label: "De la réalité vers le plan",
+    notionId: "prop_echelle",
+    prerequis: ["echelle_comprendre"],
+  },
+  {
+    id: "echelle_defi",
+    label: "Défis : retrouver l’échelle, plans et maquettes",
+    notionId: "prop_echelle",
+    prerequis: ["echelle_distance_reelle", "echelle_distance_plan", "prop_unite"],
+  },
+
+  /* =========================
      CALCUL POSE
   ========================= */
   {

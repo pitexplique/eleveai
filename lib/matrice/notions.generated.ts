@@ -486,6 +486,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "prop_echelle",
+        "label": "Échelles, plans et cartes",
+        "prerequis": [
+          "prop_proportionnalite"
+        ]
+      },
+      {
         "id": "entier_calcul_pose",
         "label": "Calcul posé",
         "prerequis": [

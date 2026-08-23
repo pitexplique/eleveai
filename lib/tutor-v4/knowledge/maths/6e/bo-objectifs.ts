@@ -824,8 +824,8 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     chapitre: "La proportionnalité",
     objectif: "S'initier à la résolution de problèmes d'échelles.",
     page: 19,
-    micros: [],
-    note: "Échelle graphique : « 1 cm sur le plan correspond à 10 m dans la réalité ».",
+    micros: ["echelle_comprendre", "echelle_distance_reelle", "echelle_distance_plan", "echelle_defi"],
+    note: "Échelle graphique : « 1 cm sur le plan correspond à 10 m dans la réalité ». Couvert le 23/08/2026 par la notion `prop_echelle`. ⛔ Le produit en croix n'est PAS enseigné en 6e (le BO l'écrit) : les explications passent toutes par la linéarité ou le retour à l'unité.",
   },
 
   // ═══════════════════════════════════════════════════════════════════════════

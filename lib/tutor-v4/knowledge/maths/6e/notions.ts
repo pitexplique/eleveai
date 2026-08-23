@@ -128,6 +128,28 @@ export const notions: NotionSource[] = [
     levels: [1, 2, 3],
   },
 
+  // ⛔ OUVERTE LE 23/08/2026 — LE DERNIER TROU DU PROGRAMME DE 6e
+  // (6e-P-proportionnalite-5, « s'initier à la résolution de problèmes
+  // d'échelles »).
+  //
+  // ⭐ NOTION À PART, et non une septième micro dans « Proportionnalité » : les
+  // échelles sont au programme de la 6e et de là seulement. Au CM1 comme au CM2,
+  // la proportionnalité n'a que deux objectifs — l'identifier, la résoudre — et
+  // le mot « échelle » n'y figure pas. C'est ici que l'élève rencontre pour la
+  // première fois un rapport entre deux longueurs qui ne sont ni dans la même
+  // unité, ni dans le même monde : le papier et le terrain.
+  //
+  // ⛔⛔ LE PRODUIT EN CROIX EST INTERDIT à ce stade, le BO l'écrit noir sur
+  // blanc pour la 6e. Les procédures attendues sont la LINÉARITÉ et le RETOUR À
+  // L'UNITÉ — c'est pourquoi `echelle_defi` a `prop_unite` en prérequis.
+  {
+    id: "prop_echelle",
+    label: "Échelles, plans et cartes",
+    boId: "BO6N3",
+    prerequis: ["prop_proportionnalite"],
+    levels: [1, 2, 3],
+  },
+
   {
     id: "entier_calcul_pose",
     label: "Calcul posé",
