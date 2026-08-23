@@ -638,6 +638,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         "prerequis": [
           "stat_donnee"
         ]
+      },
+      {
+        "id": "proba_frequence",
+        "label": "Fréquences observées et probabilité",
+        "prerequis": [
+          "proba_experience"
+        ]
       }
     ],
     "adulte": [

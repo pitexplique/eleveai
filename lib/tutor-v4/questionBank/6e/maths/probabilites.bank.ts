@@ -1595,4 +1595,542 @@ export const probabilitesBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PROBA_FREQUENCE_CALCULER — la fréquence observée
+  //
+  // ⛔ NOTION OUVERTE LE 23/08/2026 — TROU DU PROGRAMME (6e-D-probabilites-3) :
+  // « comparer des résultats d'une expérience aléatoire répétée à une
+  // probabilité calculée ». Le BO l'annonce comme une nouveauté de la classe :
+  // « l'approche fréquentiste des probabilités est également introduite ».
+  //
+  // ⭐ C'EST UNE AUTRE IDÉE QUE COMPTER LES ISSUES, et c'est pourquoi elle a sa
+  // propre notion. `proba_experience` répond à « combien de cas favorables sur
+  // combien de cas possibles » — un calcul fait AVANT toute expérience. Ici on
+  // lance vraiment, on compte ce qui est SORTI, et on confronte les deux. C'est
+  // le seul endroit du programme où l'élève découvre ce qu'une probabilité veut
+  // dire dans le monde réel.
+  //
+  // ⚠️ LES DEUX ERREURS SYMÉTRIQUES, et elles ont chacune leur item :
+  //   · croire que l'expérience DOIT donner le résultat calculé — 20 lancers ne
+  //     donnent presque jamais exactement 5 « deux piles » ;
+  //   · en conclure que le calcul est faux, ou que la pièce est truquée.
+  // La bonne lecture est la troisième : l'écart est normal, et il se réduit
+  // quand on répète davantage.
+  //
+  // L'exemple de réussite du BO est ici : lancer 20 fois deux pièces, mettre
+  // les résultats en commun, comparer la proportion obtenue à la probabilité.
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    kind: "fixed",
+    id: "proba_frequence_calculer_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "proba_frequence",
+    microId: "proba_frequence_calculer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "On lance 20 fois deux pièces. On obtient « deux piles » 6 fois. Quelle est la fréquence observée de « deux piles » ?",
+    format: "short",
+    expected: ["0,3", "0.3", "6/20", "3/10", "30 %", "30%"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "Nombre de fois obtenu, divisé par nombre de lancers.",
+    explanation: pe(
+      "la fréquence observée d'un résultat est le nombre de fois où il est sorti, divisé par le nombre total d'essais.",
+      "on écrit la fraction « nombre de fois obtenu / nombre d'essais », puis on la donne en écriture décimale ou en pourcentage.",
+      "« Deux piles » est sorti 6 fois sur 20 lancers : la fréquence observée est 6/20, soit 0,3 ou 30 %. Elle se lit après coup, sur ce qui s'est réellement passé — contrairement à la probabilité, qui se calcule avant d'avoir lancé quoi que ce soit.",
+      "on garde 6/20 = 0,3."
+    ),
+    tags: ["proba_frequence", "calculer", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "proba_frequence_calculer_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "proba_frequence",
+    microId: "proba_frequence_calculer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quelle est la différence entre une fréquence observée et une probabilité ?",
+    format: "qcm",
+    choices: [
+      "la fréquence se lit sur des essais déjà faits, la probabilité se calcule avant",
+      "il n'y en a aucune, ce sont deux mots pour la même chose",
+      "la fréquence est toujours plus grande que la probabilité",
+      "la probabilité se mesure en lançant, la fréquence se calcule",
+    ],
+    expected: [
+      "la fréquence se lit sur des essais déjà faits, la probabilité se calcule avant",
+    ],
+    comparator: "mcq_exact",
+    hint: "Laquelle des deux a besoin qu'on ait vraiment lancé ?",
+    explanation: pe(
+      "la probabilité se calcule à partir des issues possibles ; la fréquence observée se compte sur des essais réellement effectués.",
+      "on se demande si le nombre vient d'un raisonnement ou d'un relevé.",
+      "La probabilité d'obtenir « deux piles » vaut 1/4 : on l'obtient en comptant les issues possibles (PP, PF, FP, FF), sans lancer une seule fois. La fréquence, elle, exige d'avoir lancé : elle change d'une série à l'autre, alors que la probabilité, elle, ne bouge jamais. La dernière proposition dit exactement l'inverse de la vérité.",
+      "l'une se calcule, l'autre se relève."
+    ),
+    tags: ["proba_frequence", "calculer", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "proba_frequence_calculer_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "proba_frequence",
+    microId: "proba_frequence_calculer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Une fréquence observée peut-elle valoir 1,4 ?",
+    format: "qcm",
+    choices: [
+      "non : elle est toujours comprise entre 0 et 1",
+      "oui, si le résultat sort très souvent",
+      "oui, mais seulement avec plus de 100 essais",
+      "non, elle doit être un nombre entier",
+    ],
+    expected: ["non : elle est toujours comprise entre 0 et 1"],
+    comparator: "mcq_exact",
+    hint: "Peut-on obtenir un résultat plus de fois qu'on n'a lancé ?",
+    explanation: pe(
+      "une fréquence observée est un quotient dont le numérateur ne peut pas dépasser le dénominateur.",
+      "on compare le nombre de fois obtenu au nombre d'essais.",
+      "Un résultat ne peut pas sortir plus souvent qu'on n'a fait d'essais : le numérateur est au plus égal au dénominateur, donc le quotient ne dépasse jamais 1. Il vaut 0 si le résultat n'est jamais sorti, 1 s'il est sorti à chaque fois. C'est la même contrainte que pour une probabilité — et un résultat hors de [0 ; 1] signale à coup sûr une erreur de calcul.",
+      "une fréquence reste entre 0 et 1."
+    ),
+    tags: ["proba_frequence", "calculer", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "proba_frequence_calculer_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "proba_frequence",
+    microId: "proba_frequence_calculer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Fréquence = nombre de fois obtenu ÷ nombre d'essais.",
+    tags: ["proba_frequence", "calculer", "template"],
+    generate: () => {
+      const essais = randomChoice([20, 25, 40, 50, 100]);
+      const obtenu = Math.floor(Math.random() * (essais / 2)) + 1;
+      const frequence = obtenu / essais;
+      const experiences = [
+        { quoi: "on lance un dé", resultat: "un 6" },
+        { quoi: "on lance deux pièces", resultat: "« deux piles »" },
+        { quoi: "on tire une bille dans un sac", resultat: "une bille rouge" },
+        { quoi: "on fait tourner une roue", resultat: "le secteur bleu" },
+      ];
+      const e = randomChoice(experiences);
+      return {
+        text: `${e.quoi.charAt(0).toUpperCase()}${e.quoi.slice(1)} ${essais} fois. On obtient ${e.resultat} ${obtenu} fois. Quelle est la fréquence observée de ce résultat ?`,
+        format: "short",
+        expected: [
+          `${obtenu}/${essais}`,
+          String(frequence).replace(".", ","),
+          String(frequence),
+          `${String(frequence * 100).replace(".", ",")} %`,
+        ],
+        comparator: "fraction_decimal_equivalent",
+        explanation: pe(
+          "la fréquence observée est le nombre de fois où le résultat est sorti, divisé par le nombre d'essais.",
+          "on écrit le quotient, puis on le donne en écriture décimale ou en pourcentage.",
+          `Le résultat est sorti ${obtenu} fois sur ${essais} essais : la fréquence observée vaut ${obtenu}/${essais} = ${String(frequence).replace(".", ",")}, soit ${String(frequence * 100).replace(".", ",")} %. Elle décrit ce qui s'est passé, pas ce qui devait se passer.`,
+          `on garde ${obtenu}/${essais}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "proba_frequence_calculer_tpl_ouverte",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "proba_frequence",
+    microId: "proba_frequence_calculer",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Distingue ce qui se calcule de ce qui se relève.",
+    tags: ["proba_frequence", "calculer", "template", "ouverte"],
+    generate: () => {
+      const cas = [
+        {
+          q: "Explique la différence entre la probabilité d'obtenir « deux piles » et la fréquence observée de « deux piles » sur 20 lancers.",
+          mots: ["calcule", "avant", "lancer", "observée", "observee", "1/4", "change", "varie"],
+          r: "La probabilité se calcule sans rien lancer : les issues possibles sont PP, PF, FP et FF, une seule convient, donc la probabilité vaut 1/4. La fréquence observée, elle, exige d'avoir vraiment lancé : c'est le nombre de « deux piles » obtenus divisé par 20. Elle change d'une série à l'autre — 4/20 aujourd'hui, 7/20 demain — alors que la probabilité, elle, ne bouge jamais.",
+        },
+        {
+          q: "Pourquoi une fréquence observée est-elle toujours comprise entre 0 et 1 ?",
+          mots: ["essais", "plus souvent", "numérateur", "numerateur", "jamais", "toujours", "quotient"],
+          r: "Parce qu'un résultat ne peut pas sortir plus souvent qu'on n'a fait d'essais : le numérateur du quotient est au plus égal au dénominateur. Elle vaut 0 quand le résultat n'est jamais sorti, 1 quand il est sorti à chaque essai, et se situe entre les deux le reste du temps. Trouver une valeur en dehors de cet intervalle signale une erreur de calcul, sans même vérifier le détail.",
+        },
+        {
+          q: "Deux classes lancent chacune 20 fois deux pièces et n'obtiennent pas la même fréquence de « deux piles ». Est-ce inquiétant ? Explique.",
+          mots: ["hasard", "normal", "varie", "20", "peu", "réunir", "reunir"],
+          r: "Non, c'est normal : chaque série de 20 lancers est une expérience différente, et le hasard fait varier le résultat. Vingt lancers, c'est peu — il suffit de deux ou trois « deux piles » de plus pour changer nettement la fréquence. Ce serait inquiétant si les écarts étaient énormes et se répétaient toujours dans le même sens. La bonne réaction est justement celle du BO : réunir les résultats des deux classes pour disposer de plus de lancers.",
+        },
+      ];
+      const c = randomChoice(cas);
+      return {
+        text: c.q,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: pe(
+          "la fréquence observée décrit ce qui s'est passé ; la probabilité, ce à quoi on peut s'attendre.",
+          "on distingue le relevé du calcul.",
+          c.r,
+          "on garde le raisonnement, il vaut pour toute expérience répétée."
+        ),
+      };
+    },
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PROBA_FREQUENCE_COMPARER — confronter l'observé au calculé
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    kind: "fixed",
+    id: "proba_frequence_comparer_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "proba_frequence",
+    microId: "proba_frequence_comparer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "On lance deux pièces. Quelle est la probabilité d'obtenir « deux piles » ?",
+    format: "short",
+    expected: ["1/4", "0,25", "0.25", "25 %", "25%"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "Écris toutes les issues possibles des deux pièces.",
+    explanation: pe(
+      "la probabilité d'un évènement, en situation d'équiprobabilité, est le nombre de cas favorables divisé par le nombre de cas possibles.",
+      "on écrit toutes les issues possibles, puis on compte celles qui conviennent.",
+      "Avec deux pièces, les issues possibles sont PP, PF, FP et FF : il y en a 4, et elles ont toutes la même chance. Une seule donne « deux piles » : la probabilité vaut donc 1/4, soit 0,25 ou 25 %. Attention à ne pas oublier que PF et FP sont deux issues DIFFÉRENTES — c'est l'erreur qui fait répondre 1/3.",
+      "on garde 1/4."
+    ),
+    tags: ["proba_frequence", "comparer", "canvas", "short"],
+    canvas: probabilitesCanvas({
+      variant: "tableau",
+      tableau: {
+        entetes: ["Pièce 1", "Pièce 2", "Résultat"],
+        lignes: [
+          ["Pile", "Pile", "deux piles"],
+          ["Pile", "Face", "—"],
+          ["Face", "Pile", "—"],
+          ["Face", "Face", "—"],
+        ],
+        casesSurlignees: [[0, 2]],
+      },
+    }),
+  },
+  {
+    kind: "fixed",
+    id: "proba_frequence_comparer_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "proba_frequence",
+    microId: "proba_frequence_comparer",
+    difficulty: 4,
+    theme: "neutral",
+    text: "La probabilité de « deux piles » vaut 0,25. Une classe lance 20 fois et obtient 6 « deux piles », soit une fréquence de 0,3. Que faut-il en conclure ?",
+    format: "qcm",
+    choices: [
+      "rien d'anormal : sur 20 lancers, un écart de ce genre est attendu",
+      "le calcul de la probabilité est faux",
+      "les pièces sont truquées",
+      "la classe a mal compté ses lancers",
+    ],
+    expected: ["rien d'anormal : sur 20 lancers, un écart de ce genre est attendu"],
+    comparator: "mcq_exact",
+    hint: "0,25 sur 20 lancers, cela ferait 5 fois. Est-ce si loin de 6 ?",
+    explanation: pe(
+      "une fréquence observée s'approche de la probabilité sans avoir à lui être égale.",
+      "on convertit la probabilité en nombre de fois attendu, puis on regarde l'écart.",
+      "0,25 × 20 = 5 : on s'attendait à environ 5 « deux piles », il y en a eu 6. Un seul de plus — c'est exactement le genre d'écart que produit le hasard sur si peu de lancers. Croire que l'expérience DOIT donner 5, ou en déduire que le calcul est faux, sont les deux erreurs symétriques du chapitre.",
+      "l'écart est normal, on ne conclut rien contre le calcul."
+    ),
+    tags: ["proba_frequence", "comparer", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "proba_frequence_comparer_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "proba_frequence",
+    microId: "proba_frequence_comparer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "On lance 60 fois un dé équilibré. Combien de 6 peut-on s'attendre à obtenir, à peu près ?",
+    format: "short",
+    expected: ["10"],
+    comparator: "number_equal",
+    hint: "La probabilité d'obtenir un 6 vaut 1/6.",
+    explanation: pe(
+      "le nombre de fois attendu s'obtient en multipliant la probabilité par le nombre d'essais.",
+      "on calcule probabilité × nombre d'essais.",
+      "La probabilité d'obtenir un 6 vaut 1/6, donc sur 60 lancers on s'attend à environ 60 × 1/6 = 10 sorties du 6. « À peu près » est important : on obtiendra sans doute 8, 11 ou 13, presque jamais exactement 10. Le calcul donne un ORDRE DE GRANDEUR, pas une promesse.",
+      "on garde environ 10."
+    ),
+    tags: ["proba_frequence", "comparer", "short"],
+  },
+  {
+    kind: "template",
+    id: "proba_frequence_comparer_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "proba_frequence",
+    microId: "proba_frequence_comparer",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Multiplie la probabilité par le nombre d'essais.",
+    tags: ["proba_frequence", "comparer", "template"],
+    generate: () => {
+      const situations = [
+        { quoi: "un dé équilibré", resultat: "un 6", num: 1, den: 6 },
+        { quoi: "un dé équilibré", resultat: "un nombre pair", num: 1, den: 2 },
+        { quoi: "deux pièces", resultat: "« deux piles »", num: 1, den: 4 },
+        { quoi: "une roue à 5 secteurs identiques", resultat: "le secteur vert", num: 1, den: 5 },
+      ];
+      const s = randomChoice(situations);
+      const multiple = Math.floor(Math.random() * 8) + 3;
+      const essais = s.den * multiple;
+      const attendu = (essais * s.num) / s.den;
+      return {
+        text: `On lance ${s.quoi} ${essais} fois. À combien de fois « ${s.resultat} » peut-on s'attendre, à peu près ?`,
+        format: "short",
+        expected: [String(attendu)],
+        comparator: "number_equal",
+        explanation: pe(
+          "le nombre de fois attendu vaut la probabilité multipliée par le nombre d'essais.",
+          "on calcule probabilité × nombre d'essais.",
+          `La probabilité de « ${s.resultat} » vaut ${s.num}/${s.den}. Sur ${essais} essais, on s'attend donc à environ ${essais} × ${s.num}/${s.den} = ${attendu} fois. Le résultat réel sera proche de ${attendu} sans lui être égal : c'est un ordre de grandeur, et l'écart se réduit si l'on répète davantage.`,
+          `on garde environ ${attendu}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "proba_frequence_comparer_tpl_ouverte",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "proba_frequence",
+    microId: "proba_frequence_comparer",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Un écart n'est pas une erreur — dis à partir de quand il devient suspect.",
+    tags: ["proba_frequence", "comparer", "template", "ouverte"],
+    generate: () => {
+      const cas = [
+        {
+          q: "La probabilité de « deux piles » vaut 0,25, mais une classe obtient 6 fois sur 20, soit 0,3. Explique pourquoi cela ne remet en cause ni le calcul ni les pièces.",
+          mots: ["5", "attendu", "écart", "ecart", "hasard", "normal", "20", "peu"],
+          r: "On attendait 0,25 × 20 = 5 « deux piles », il y en a eu 6 : un seul de plus. Sur vingt lancers, le hasard produit facilement ce genre d'écart — il suffit d'un lancer qui tombe autrement. Une probabilité ne promet pas un résultat exact, elle donne ce vers quoi on tend. Il faudrait un écart bien plus grand, et répété sur beaucoup de séries, pour soupçonner les pièces.",
+        },
+        {
+          q: "Pourquoi le BO demande-t-il de METTRE EN COMMUN les résultats de toute la classe plutôt que de garder ses 20 lancers ?",
+          mots: ["plus de lancers", "proche", "écart", "ecart", "réduit", "reduit", "hasard", "600"],
+          r: "Parce que plus on répète, plus la fréquence observée s'approche de la probabilité. Vingt lancers laissent beaucoup de place au hasard ; en réunissant ceux de trente élèves, on arrive à six cents lancers, et la fréquence obtenue colle nettement mieux à 0,25. C'est une observation qu'on ne peut pas faire seul à sa table : il faut le cumul de la classe pour voir l'écart se réduire.",
+        },
+        {
+          q: "À partir de quand un écart entre fréquence observée et probabilité devient-il vraiment suspect ?",
+          mots: ["grand", "beaucoup", "essais", "répète", "repete", "même sens", "meme sens", "truqué", "truque"],
+          r: "Quand il reste grand ALORS QU'ON A FAIT BEAUCOUP D'ESSAIS, et qu'il va toujours dans le même sens. Obtenir 6 « deux piles » sur 20 au lieu de 5 ne dit rien. En obtenir 300 sur 600 au lieu de 150, c'est tout autre chose : avec autant de lancers, le hasard ne suffit plus à l'expliquer, et on peut soupçonner que les pièces ou le dé sont truqués. C'est le nombre d'essais qui donne son poids à un écart.",
+        },
+      ];
+      const c = randomChoice(cas);
+      return {
+        text: c.q,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: pe(
+          "on compare la fréquence observée au nombre de fois attendu, sans exiger l'égalité.",
+          "on convertit la probabilité en effectif attendu, puis on juge l'écart au regard du nombre d'essais.",
+          c.r,
+          "on garde le raisonnement, il vaut pour toute expérience répétée."
+        ),
+      };
+    },
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PROBA_FREQUENCE_REPETER — plus on répète, plus l'écart se réduit
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    kind: "fixed",
+    id: "proba_frequence_repeter_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "proba_frequence",
+    microId: "proba_frequence_repeter",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Voici les fréquences de « pile » obtenues en lançant une pièce de plus en plus de fois. Que constate-t-on ?",
+    format: "qcm",
+    choices: [
+      "plus on lance, plus la fréquence se rapproche de 0,5",
+      "la fréquence augmente toujours quand on lance plus",
+      "la fréquence finit par valoir exactement 0,5",
+      "le nombre de lancers ne change rien à la fréquence",
+    ],
+    expected: ["plus on lance, plus la fréquence se rapproche de 0,5"],
+    comparator: "mcq_exact",
+    hint: "Regarde l'écart à 0,5 à chaque ligne, pas la fréquence elle-même.",
+    explanation: pe(
+      "quand on répète beaucoup une expérience, la fréquence observée se rapproche de la probabilité.",
+      "on suit l'écart entre la fréquence et la probabilité au fil des lignes.",
+      "L'écart à 0,5 passe de 0,10 à 0,06, puis 0,02, puis 0,008 : il diminue nettement. La fréquence ne monte pas toujours — elle oscille autour de 0,5 — et elle n'atteint presque jamais 0,5 tout rond. Ce qui se réduit, c'est l'ÉCART, pas la fréquence.",
+      "la fréquence se rapproche de la probabilité sans l'atteindre."
+    ),
+    tags: ["proba_frequence", "repeter", "canvas", "qcm"],
+    canvas: probabilitesCanvas({
+      variant: "tableau",
+      tableau: {
+        entetes: ["Nombre de lancers", "Fréquence de « pile »", "Écart à 0,5"],
+        lignes: [
+          ["10", "0,60", "0,10"],
+          ["50", "0,44", "0,06"],
+          ["500", "0,52", "0,02"],
+          ["5 000", "0,492", "0,008"],
+        ],
+      },
+    }),
+  },
+  {
+    kind: "fixed",
+    id: "proba_frequence_repeter_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "proba_frequence",
+    microId: "proba_frequence_repeter",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Une pièce équilibrée est tombée 5 fois de suite sur pile. Quelle est la probabilité qu'elle tombe sur face au lancer suivant ?",
+    format: "short",
+    expected: ["1/2", "0,5", "0.5", "50 %", "50%"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "La pièce se souvient-elle des lancers précédents ?",
+    explanation: pe(
+      "chaque lancer est indépendant des précédents : la probabilité ne change pas.",
+      "on raisonne sur le lancer suivant seul, sans tenir compte de ce qui s'est passé avant.",
+      "La probabilité reste 1/2. La pièce n'a pas de mémoire : elle ne « doit » rien rattraper. Croire que face devient plus probable après cinq piles est une erreur si répandue qu'elle porte un nom — et c'est bien pour cela que le rapprochement de la fréquence vers 0,5 ne vient pas d'une compensation, mais du fait que les premiers lancers pèsent de moins en moins lourd quand leur nombre grandit.",
+      "la probabilité reste 1/2 à chaque lancer."
+    ),
+    tags: ["proba_frequence", "repeter", "piege", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "proba_frequence_repeter_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "proba_frequence",
+    microId: "proba_frequence_repeter",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Deux séries donnent une fréquence de 0,30 pour « deux piles » : l'une sur 20 lancers, l'autre sur 2 000. Laquelle renseigne le mieux sur la vraie probabilité ?",
+    format: "qcm",
+    choices: [
+      "celle sur 2 000 lancers",
+      "celle sur 20 lancers",
+      "les deux également, la fréquence est la même",
+      "aucune, il faudrait connaître les résultats détaillés",
+    ],
+    expected: ["celle sur 2 000 lancers"],
+    comparator: "mcq_exact",
+    hint: "Sur laquelle le hasard a-t-il le moins de prise ?",
+    explanation: pe(
+      "plus une série est longue, plus sa fréquence observée est un bon indicateur de la probabilité.",
+      "on compare le nombre d'essais, pas seulement la fréquence obtenue.",
+      "Les deux fréquences sont égales, mais elles ne pèsent pas le même poids. Sur 20 lancers, un ou deux résultats de plus suffisent à faire passer la fréquence de 0,25 à 0,30 : le hasard explique tout. Sur 2 000 lancers, un écart de 0,05 correspond à une centaine de résultats — le hasard seul ne suffit plus. La deuxième série mérite donc bien plus de confiance, et suggère même que la probabilité n'est peut-être pas 0,25.",
+      "on garde la série la plus longue."
+    ),
+    tags: ["proba_frequence", "repeter", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "proba_frequence_repeter_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "proba_frequence",
+    microId: "proba_frequence_repeter",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Compare les écarts, pas les fréquences.",
+    tags: ["proba_frequence", "repeter", "template"],
+    generate: () => {
+      const proba = randomChoice([0.5, 0.25, 0.2]);
+      const petits = randomChoice([10, 20, 25]);
+      const grands = randomChoice([500, 1000, 2000]);
+      const ecartPetit = randomChoice([0.1, 0.15, 0.2]);
+      const ecartGrand = randomChoice([0.004, 0.008, 0.01]);
+      const fPetit = Number((proba + ecartPetit).toFixed(3));
+      const fGrand = Number((proba + ecartGrand).toFixed(3));
+      const virgule = (n: number) => String(n).replace(".", ",");
+      return {
+        text: `La probabilité d'un résultat vaut ${virgule(proba)}. Sur ${petits} essais on observe la fréquence ${virgule(fPetit)} ; sur ${grands} essais, ${virgule(fGrand)}. Quelle série s'écarte le MOINS de la probabilité ?`,
+        format: "qcm",
+        choices: [
+          `celle sur ${grands} essais`,
+          `celle sur ${petits} essais`,
+          "les deux s'écartent autant",
+          "on ne peut pas comparer des séries de tailles différentes",
+        ],
+        expected: [`celle sur ${grands} essais`],
+        comparator: "mcq_exact",
+        explanation: pe(
+          "plus on répète une expérience, plus la fréquence observée se rapproche de la probabilité.",
+          "on calcule l'écart entre chaque fréquence et la probabilité, puis on les compare.",
+          `Sur ${petits} essais, l'écart vaut ${virgule(Number((fPetit - proba).toFixed(3)))} ; sur ${grands} essais, il ne vaut plus que ${virgule(Number((fGrand - proba).toFixed(3)))}. La longue série est donc bien plus proche de ${virgule(proba)}. C'est ce qu'on observe toujours : le hasard garde beaucoup de prise sur quelques essais, presque plus sur des milliers.`,
+          `on garde la série sur ${grands} essais.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "proba_frequence_repeter_tpl_ouverte",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "proba_frequence",
+    microId: "proba_frequence_repeter",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Attention : « se rapprocher » ne veut pas dire « rattraper ».",
+    tags: ["proba_frequence", "repeter", "template", "ouverte"],
+    generate: () => {
+      const cas = [
+        {
+          q: "Explique ce qui se passe quand on répète une expérience aléatoire de plus en plus de fois.",
+          mots: ["fréquence", "frequence", "rapproche", "probabilité", "probabilite", "écart", "ecart", "diminue"],
+          r: "La fréquence observée se rapproche de la probabilité, et l'écart entre les deux diminue. Sur dix lancers d'une pièce, on peut obtenir 0,6 de piles sans que cela étonne ; sur cinq mille, on tourne autour de 0,49 ou 0,51. La fréquence ne monte pas régulièrement : elle oscille autour de la probabilité, mais son oscillation devient de plus en plus étroite.",
+        },
+        {
+          q: "Une pièce équilibrée est tombée cinq fois de suite sur pile. Un joueur affirme que face « est due ». Explique pourquoi il se trompe.",
+          mots: ["mémoire", "memoire", "indépendant", "independant", "1/2", "rattrape", "compense"],
+          r: "La pièce n'a pas de mémoire : chaque lancer est indépendant des précédents, et la probabilité de face reste 1/2, exactement comme au premier lancer. Rien ne « compense » les cinq piles. Si la fréquence finit par s'approcher de 0,5, ce n'est pas parce que le hasard rattrape son retard, mais parce que ces cinq lancers pèsent de moins en moins lourd à mesure que leur nombre grandit — cinq sur mille ne changent presque rien.",
+        },
+        {
+          q: "Pourquoi peut-on soupçonner un dé d'être truqué s'il donne 300 fois le 6 sur 600 lancers, mais pas s'il le donne 3 fois sur 6 ?",
+          mots: ["600", "hasard", "beaucoup", "écart", "ecart", "1/6", "100", "petit"],
+          r: "Dans les deux cas la fréquence vaut 0,5 au lieu de 1/6, mais le nombre d'essais change tout. Sur six lancers, obtenir trois 6 arrive sans difficulté par simple hasard. Sur six cents lancers, on en attendait une centaine et on en compte trois cents : un tel écart ne s'explique plus par le hasard, il faudrait une coïncidence extraordinaire. C'est le nombre d'essais qui donne son poids à un écart — un même écart ne dit pas la même chose selon la taille de la série.",
+        },
+      ];
+      const c = randomChoice(cas);
+      return {
+        text: c.q,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: pe(
+          "quand on répète beaucoup, la fréquence observée se rapproche de la probabilité — sans jamais lui être due.",
+          "on raisonne sur l'écart et sur le nombre d'essais.",
+          c.r,
+          "on garde le raisonnement, il vaut pour toute expérience répétée."
+        ),
+      };
+    },
+  },
 ]

@@ -1296,4 +1296,34 @@ export const microSkills: MicroSkillSource[] = [
       "proba_lire",
     ],
   },
+
+  /* =========================
+     FRÉQUENCES OBSERVÉES
+     ⛔ Ouverte le 23/08/2026 (6e-D-probabilites-3). Le BO l'annonce comme une
+     nouveauté de la classe : « l'approche fréquentiste des probabilités est
+     également introduite ».
+     ⭐ Notion à part, et non trois micros de plus dans `proba_experience` :
+     celle-ci répond à « combien de cas favorables sur combien de possibles »,
+     un calcul fait AVANT toute expérience. Ici on lance vraiment, on compte ce
+     qui est SORTI, et on confronte les deux. C'est le seul endroit du programme
+     où l'élève découvre ce qu'une probabilité veut dire dans le monde réel.
+  ========================= */
+  {
+    id: "proba_frequence_calculer",
+    label: "Calculer une fréquence observée",
+    notionId: "proba_frequence",
+    prerequis: ["proba_estimer"],
+  },
+  {
+    id: "proba_frequence_comparer",
+    label: "Comparer l’observé au calculé",
+    notionId: "proba_frequence",
+    prerequis: ["proba_frequence_calculer"],
+  },
+  {
+    id: "proba_frequence_repeter",
+    label: "Répéter : l’écart se réduit",
+    notionId: "proba_frequence",
+    prerequis: ["proba_frequence_comparer"],
+  },
 ];

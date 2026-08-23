@@ -412,4 +412,22 @@ export const notions: NotionSource[] = [
     levels: [1, 2],
   },
 
+  // ⛔ OUVERTE LE 23/08/2026 — DERNIER TROU DU CHAPITRE (6e-D-probabilites-3).
+  // Le BO l'annonce comme une nouveauté de la classe : « l'approche
+  // fréquentiste des probabilités est également introduite ».
+  //
+  // ⭐ POURQUOI UNE NOTION À PART. `proba_experience` répond à « combien de cas
+  // favorables sur combien de cas possibles » — un calcul mené AVANT d'avoir
+  // lancé quoi que ce soit. Ici, on lance vraiment, on compte ce qui est SORTI,
+  // et on confronte les deux nombres. C'est le seul endroit du programme où
+  // l'élève découvre ce qu'une probabilité veut dire dans le monde réel, et
+  // pourquoi elle ne promet jamais un résultat exact.
+  {
+    id: "proba_frequence",
+    label: "Fréquences observées et probabilité",
+    boId: "BO6P1",
+    prerequis: ["proba_experience"],
+    levels: [1, 2],
+  },
+
 ];

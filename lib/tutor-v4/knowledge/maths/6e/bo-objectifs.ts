@@ -774,8 +774,8 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     objectif:
       "Comparer des résultats d'une expérience aléatoire répétée à une probabilité calculée.",
     page: 18,
-    micros: [],
-    note: "Lancer 20 fois deux pièces, mettre les résultats en commun, comparer la proportion à la probabilité.",
+    micros: ["proba_frequence_calculer", "proba_frequence_comparer", "proba_frequence_repeter"],
+    note: "Lancer 20 fois deux pièces, mettre les résultats en commun, comparer la proportion à la probabilité. Couvert le 23/08/2026 par la notion `proba_frequence` — avec les deux erreurs symétriques : exiger que l'expérience donne le résultat calculé, ou en déduire que le calcul est faux.",
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
