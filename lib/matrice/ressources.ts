@@ -875,12 +875,48 @@ export const RESSOURCES: RessourceEleveAI[] = [
   // écrite tient la promesse au hasard des notions — l'élève qui tombe sur le
   // trou n'en conclut pas que la fiche manque, il en conclut que le site ment.
   // ⛔ NE PAS LES REMETTRE avant que le chantier des fiches soit tranché.
+  //
+  // ── ⭐ 23/08/2026 — LA 6ᵉ EST TRANCHÉE, ET IL Y AVAIT UN 404 DESSOUS ────────
+  // Frédéric : « dans ressources.ts il faut rajouter pour 6e fiche de cours
+  // maths et français, elles sont produites ce matin, pour les élèves, profs et
+  // parents et adulte ». Le chantier annoncé le 16/08 a abouti pour cette
+  // classe : 17 fiches de maths et 9 de français, écrites sur le programme du
+  // BO. Ce n'est plus « une collection à moitié écrite », c'est le niveau le
+  // mieux couvert du site.
+  //
+  // ⚠️ ET EN LES DÉCLARANT, J'AI TROUVÉ PIRE QUE L'ABSENCE : LES TROIS ENTRÉES
+  // QUI EXISTAIENT POINTAIENT TOUTES SUR UN 404. Il n'y a pas de page de
+  // classe — `app/fiches-cours/maths/` ne contient que des dossiers de NOTION,
+  // pas de segment dynamique. Vérifié une par une sur le serveur :
+  //     /fiches-cours/maths/6e            → 404
+  //     /fiches-cours/maths/3e            → 404
+  //     /fiches-cours/maths/premiere-spe  → 404
+  //     /fiches-cours/maths               → 200   ← le seul sommaire qui existe
+  //     /fiches-cours/maths/6e/fractions… → 200   ← les fiches, elles, sont là
+  // Le sommaire par matière liste TOUTES les classes et TOUTES les notions :
+  // c'est lui, la porte. Une carte « Fiches de cours » menait donc à une page
+  // d'erreur depuis le jour où elle a été écrite, pour la 6ᵉ, la 3ᵉ et la 1re.
+  //
+  // ⛔ NE PAS « CORRIGER » EN RECRÉANT /fiches-cours/maths/6e. Ce serait une
+  // page de plus à tenir pour chaque classe et chaque matière ; le sommaire
+  // fait déjà le travail. Si un jour l'ancre par classe manque vraiment, elle
+  // se pose sur le sommaire (`#6e`), elle ne se refait pas en route.
   {
     id: "fiches-maths-6e",
     titre: "Fiches de cours — maths 6e",
-    promesse: "La notion expliquée court, avec un exemple.",
-    url: "/fiches-cours/maths/6e",
-    niveaux: ["6e"],
+    // ⭐ LA PROMESSE DIT LE DESSIN (23/08). « Expliquée court, avec un
+    // exemple » décrivait les fiches d'avant. Celles-ci suivent le standard du
+    // 19/08 — un visuel par bloc, et un exemple pris dans le monde de l'élève —
+    // et c'est précisément ce qui les distingue d'un cours recopié.
+    promesse: "La notion en une page, un dessin par idée, un exemple par règle.",
+    url: "/fiches-cours/maths",
+    // ⭐ QUATRE PUBLICS, PAS UN (Frédéric, 23/08). Une fiche de cours n'est pas
+    // un exercice : elle se lit, elle s'imprime, elle se donne. Le prof la
+    // projette, le parent la relit avant d'aider, l'adulte y retrouve ce qu'il
+    // a oublié — la 6ᵉ est justement le niveau où un adulte reprend pied.
+    // ⚠️ `adulte` EST UNE CLASSE ICI, pas un rôle (voir types.ts) : c'est bien
+    // la fiche de 6ᵉ qu'on lui propose, et c'est assumé.
+    niveaux: ["6e", "prof", "parent", "adulte"],
     matiere: "maths",
     notions: ["*"],
     intentions: ["comprendre"],
@@ -888,22 +924,61 @@ export const RESSOURCES: RessourceEleveAI[] = [
     statut: "validee",
   },
   {
-    id: "fiches-maths-3e",
-    titre: "Fiches de cours — maths 3e",
-    promesse: "La notion expliquée court, avec un exemple.",
-    url: "/fiches-cours/maths/3e",
-    niveaux: ["3e"],
-    matiere: "maths",
+    // ⭐ LE FRANÇAIS DE LA 6ᵉ ENTRE (23/08/2026) — neuf fiches, écrites ce
+    // matin sur le programme : les quatre de conjugaison, les quatre de
+    // grammaire, la phrase complexe.
+    // ⚠️ Le sommaire du français ne connaît que DEUX classes, le CM2 et la 6ᵉ.
+    // C'est peu, et c'est honnête : on ne déclare que ce qui existe.
+    id: "fiches-francais-6e",
+    titre: "Fiches de cours — français 6e",
+    // La grammaire se dessine — c'est le canvas de la phrase, celui qui met la
+    // fonction en couleur et l'accord en arc. Le dire ici, c'est la seule
+    // manière de ne pas passer pour un cours recopié de plus.
+    promesse: "La règle en une page, avec la phrase dessinée.",
+    url: "/fiches-cours/francais",
+    niveaux: ["6e", "prof", "parent", "adulte"],
+    matiere: "francais",
     notions: ["*"],
     intentions: ["comprendre"],
     type: "fiche",
     statut: "validee",
   },
   {
+    // ⛔ ÉTEINTE LE 23/08/2026 — ELLE PROMETTAIT UNE CLASSE QUI N'EXISTE PLUS.
+    // Les cinq fiches de 3ᵉ ont été retirées le 21/08 (« on éteint toute la 4e
+    // et la 3e, on repart au propre ») et next.config.js redirige leurs cinq
+    // adresses vers le sommaire. Cette entrée-là, elle, est restée : un élève
+    // de 3ᵉ qui cliquait « Comprendre une notion » recevait une carte
+    // « Fiches de cours — maths 3e » qui ouvrait un 404. Ce n'est pas une
+    // décision nouvelle, c'est celle du 21/08 qu'on finit d'appliquer.
+    // ✅ À rallumer le jour où la 3ᵉ est réécrite — en pointant sur
+    //    /fiches-cours/maths, pas sur /fiches-cours/maths/3e.
+    // {
+    //   id: "fiches-maths-3e",
+    //   titre: "Fiches de cours — maths 3e",
+    //   promesse: "La notion expliquée court, avec un exemple.",
+    //   url: "/fiches-cours/maths",
+    //   niveaux: ["3e"],
+    //   matiere: "maths",
+    //   notions: ["*"],
+    //   intentions: ["comprendre"],
+    //   type: "fiche",
+    //   statut: "validee",
+    // },
+    //
+    // ⏳ LA PREMIÈRE RESTE, MAIS SON URL EST RÉPARÉE — ET IL FAUT LA REGARDER.
+    // Elle pointait elle aussi sur un 404. Le sommaire, lui, ne contient QU'UNE
+    // fiche de Première spé (`derivation`) contre 84 de CM2 et 54 de 6ᵉ : un
+    // lycéen y arrive et cherche la sienne au milieu de deux cents autres.
+    // C'est exactement le cas que la note du 16/08 en tête de section décrit —
+    // une collection à moitié écrite qui tient sa promesse au hasard. Je ne la
+    // retire pas de moi-même, parce qu'une fiche existe vraiment et que c'est à
+    // Frédéric de dire si elle suffit ; mais tant qu'il n'y en a qu'une, cette
+    // carte est la plus fragile du fichier.
     id: "fiches-maths-premiere",
     titre: "Fiches de cours — maths Première spé",
     promesse: "La notion expliquée court, avec un exemple.",
-    url: "/fiches-cours/maths/premiere-spe",
+    url: "/fiches-cours/maths",
     niveaux: ["premiere"],
     matiere: "maths",
     notions: ["*"],
