@@ -67,6 +67,23 @@ const STYLES_METHODE = [
   { carte: "border-emerald-200 bg-emerald-50", icone: "text-emerald-500" },
 ];
 
+/**
+ * Le titre de la fiche tel qu'il se pose APRÈS un deux-points.
+ *
+ * En français, ce qui suit un deux-points ne prend pas de majuscule :
+ * « Définition : les fractions ». Mais on ne peut pas abaisser l'initiale de
+ * n'importe quoi — « Définition : pythagore » serait une faute, et une faute
+ * visible. La règle ne touche donc QUE les titres qui commencent par un article
+ * défini ou indéfini : aucun nom propre ne commence par « Les », « Un » ou
+ * « L' ». Tout le reste est rendu intact.
+ */
+const ARTICLES = ["Le ", "La ", "Les ", "L'", "L’", "Un ", "Une ", "Des ", "Du "];
+function apresDeuxPoints(titre: string): string {
+  return ARTICLES.some((a) => titre.startsWith(a))
+    ? titre[0].toLowerCase() + titre.slice(1)
+    : titre;
+}
+
 export default function FicheCoursClient({
   fiche,
   slides,
@@ -300,7 +317,7 @@ export default function FicheCoursClient({
               <div className="rounded-2xl border-2 border-sky-300 bg-white p-5">
                 <h2 className="flex items-center gap-2 text-lg font-black text-sky-700 print:text-base">
                   <BookMarked className="h-5 w-5 print:hidden" />
-                  Définition
+                  Définition : {apresDeuxPoints(fiche.titre)}
                 </h2>
                 <p className="mt-3 text-base font-bold leading-7 text-slate-900 print:text-sm">
                   {fiche.definition.texte}
@@ -326,7 +343,7 @@ export default function FicheCoursClient({
           <section className="pt-6 print:pt-4">
             <h2 className="flex items-center gap-2 text-2xl font-black text-slate-900 print:text-xl">
               <ListChecks className="h-6 w-6 text-sky-500 print:hidden" />
-              Propriétés
+              Propriétés : {apresDeuxPoints(fiche.titre)}
             </h2>
             <div className="mt-4 grid gap-4 md:grid-cols-3 print:grid-cols-3 print:gap-3">
               {fiche.proprietes.map((p) => (
@@ -380,7 +397,17 @@ export default function FicheCoursClient({
       case "methode":
         if (!fiche.methode.length) return null;
         return (
-          <div className="grid gap-5 py-6 md:grid-cols-3 print:grid-cols-3 print:gap-3 print:py-4">
+          <section className="py-6 print:py-4">
+            {/* ⭐ LE BLOC MÉTHODE N'AVAIT AUCUN TITRE (23/08/2026) : ses trois
+                étapes étaient des <h2> posés côte à côte, donc trois titres de
+                même rang que « Définition » pour une seule idée. On ajoute le
+                titre qui manquait — « comment calculer une aire » est une
+                requête, « 1. Je repère » n'en est pas une — et les étapes
+                passent en <h3>, ce qu'elles ont toujours été. */}
+            <h2 className="text-2xl font-black text-slate-900 print:text-xl">
+              Méthode : {apresDeuxPoints(fiche.titre)}
+            </h2>
+            <div className="mt-4 grid gap-5 md:grid-cols-3 print:grid-cols-3 print:gap-3">
             {fiche.methode.map((etape, i) => {
               const Icone = ICONES_METHODE[i % ICONES_METHODE.length];
               const style = STYLES_METHODE[i % STYLES_METHODE.length];
@@ -390,9 +417,9 @@ export default function FicheCoursClient({
                   className={`rounded-2xl border p-4 ${style.carte}`}
                 >
                   <Icone className={`h-5 w-5 print:hidden ${style.icone}`} />
-                  <h2 className="mt-3 text-lg font-black text-slate-900 print:mt-0 print:text-base">
+                  <h3 className="mt-3 text-lg font-black text-slate-900 print:mt-0 print:text-base">
                     {i + 1}. {etape.titre}
-                  </h2>
+                  </h3>
                   <p className="mt-2 text-sm leading-6 text-slate-600 print:text-xs">
                     {etape.texte}
                   </p>
@@ -400,7 +427,8 @@ export default function FicheCoursClient({
                 </div>
               );
             })}
-          </div>
+            </div>
+          </section>
         );
 
       case "usages":
@@ -503,7 +531,7 @@ export default function FicheCoursClient({
           <section className="border-t border-slate-200 pt-6 print:pt-4">
             <h2 className="flex items-center gap-2 text-2xl font-black text-slate-900 print:text-xl">
               <Calculator className="h-6 w-6 text-sky-500 print:hidden" />
-              Je m&apos;entraîne
+              Exercices corrigés : {apresDeuxPoints(fiche.titre)}
             </h2>
             <ol className="mt-4 grid gap-4 text-sm leading-6 text-slate-700 print:gap-2 print:text-xs">
               {fiche.entrainement.map((item, index) => (

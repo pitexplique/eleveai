@@ -66,6 +66,33 @@ Le script d'hier soir est reproductible : il lit `title:` dans chaque
 `page.tsx`, coupe le suffixe, garde la partie avant un `:` éventuel, et réécrit.
 Compte une quinzaine de pages pour le CM2.
 
+### En revanche, les H2 sont déjà faits — partout, CM2 compris
+
+Une seule modification dans `components/fiches/FicheCoursClient.tsx` vaut pour
+les 104 fiches : chaque intitulé de bloc porte maintenant le nom de la notion,
+pris dans la fiche elle-même. **Rien à faire de ce côté pour le CM2.**
+
+```
+Définition            →  Définition : les compléments du verbe
+Propriétés            →  Propriétés : les compléments du verbe
+(le bloc méthode n'avait aucun titre)  →  Méthode : les compléments du verbe
+Je m'entraîne         →  Exercices corrigés : les compléments du verbe
+```
+
+Le plus gros gain est le dernier : le bloc s'appelait « Je m'entraîne » alors
+qu'il contient des `question` + `correction`. C'étaient des exercices corrigés
+qui ne le disaient pas — la requête la plus tapée du domaine, sur la seule
+section qui la méritait vraiment.
+
+Les trois étapes de la méthode passent de `<h2>` à `<h3>` : elles étaient de
+même rang que « Définition » pour une seule idée.
+
+⚠️ **Le titre est repris tel quel, sauf l'initiale d'un article** (`Le`, `La`,
+`Les`, `L'`, `Un`, `Une`, `Des`, `Du`) qui passe en minuscule après le
+deux-points. Aucun nom propre ne commence par « Les » — c'est ce qui rend la
+règle sûre. « Définition : Premiers pas en probabilités » garde donc sa
+majuscule, et c'est correct.
+
 ---
 
 ## 3. Ce qui a bougé côté matrice, et qui te concerne
