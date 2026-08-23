@@ -84,6 +84,18 @@ export const metadata: Metadata = {
   keywords: [
     "EleveAI",
     "exercices corrigés",
+    // ⭐ « RÉSOLUS », LA VARIANTE DU MAGHREB (Frédéric, 23/08/2026). En France
+    // on dit « corrigés » et c'est massivement majoritaire ; « exercices
+    // résolus » est l'usage du Maroc, de l'Algérie et de la Belgique. Les deux
+    // décrivent le même contenu, et rien n'oblige à choisir.
+    //
+    // ⚠️ ET IL FAUT SAVOIR CE QUE ÇA VAUT : PRESQUE RIEN. Google ignore
+    // `<meta name="keywords">` depuis 2009, et Bing n'y met qu'un poids
+    // symbolique. Cette ligne coûte zéro et ne rapportera pas grand-chose. Le
+    // mot ne se mettra à travailler que le jour où il sera dans un `title`, une
+    // `description` ou un texte visible — c'est-à-dire dans les métadonnées des
+    // pages de app/fiches-cours/**, qui disent encore « fiche de cours 6e ».
+    "exercices résolus",
     "cahier de vacances gratuit",
     "aide aux devoirs",
     "soutien scolaire gratuit",

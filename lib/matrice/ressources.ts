@@ -83,6 +83,40 @@ export const STATUTS_PUBLIABLES: StatutRessource[] = ["validee", "testee_eleves"
 const PORTES_ELEVE_DES_LA_6E = ["type:coach", "*", "photo-cours"];
 
 /**
+ * ⭐ LA 6ᵉ PREND SA PROPRE LISTE (Frédéric, 23/08/2026) — « je veux fiches de
+ * cours juste après parcours en 6ᵉ, pour maths et français ».
+ *
+ * C'est la seule classe qui sorte du rang commun, et pour une raison qui n'est
+ * pas un goût : elle est la seule à avoir une collection de fiches COMPLÈTE
+ * dans les deux matières — 17 en maths, 9 en français, écrites sur le BO. La
+ * 5ᵉ et le CM2 en ont aussi, la Première en a une ; aucune des trois n'a la
+ * paire. Le jour où la 5ᵉ l'aura, elle prendra la même liste, pas avant.
+ *
+ * L'ORDRE, ET CE QU'IL DIT :
+ *   1. le coach          — on explique quand ça coince ;
+ *   2. le joker          — la saison (l'évaluation nationale, à la rentrée) ;
+ *   3. les parcours      — on va voir où on en est ;
+ *   4-5. les deux fiches — et on relit la notion, dans les deux matières ;
+ *   6. photographier     — la décision du 12/08, qui garde sa place.
+ *
+ * ⚠️ SIX ENTRÉES POUR SIX PLACES (`NB_MAX`) : cette liste remplit l'écran, le
+ * score n'a plus la main après elle. Conséquence à connaître — `coach-francais`
+ * ne sort plus tout seul en 6ᵉ ; il sortait au score, il n'était écrit nulle
+ * part, et « type:coach » ne rend que le mieux classé. Il revient au premier
+ * clic sur « Français ».
+ * ⚠️ Un id absent des candidats est sauté sans bruit : hors saison, le joker
+ * prend simplement la ressource suivante au score.
+ */
+const PORTES_6E = [
+  "type:coach",
+  "*",
+  "parcours",
+  "fiches-maths-6e",
+  "fiches-francais-6e",
+  "photo-cours",
+];
+
+/**
  * ⭐ LE CYCLE 3 — CM1 et CM2 (Frédéric, 19/08/2026 : « remets coach maths,
  * coach français, dictée du jour », puis « oui » pour le CM1).
  *
@@ -164,10 +198,53 @@ const PORTES_ADULTE = ["calcul-rapide", "dictee-du-jour", "formation-crpe", "coa
 
 export const PORTES_ECRITES: Partial<Record<ProfilId, string[]>> = {
   adulte: PORTES_ADULTE,
-  parent: ["espace-parents", "coach-maths", "photo-cours"],
+  /**
+   * ⭐ LES FICHES ENTRENT CHEZ LE PARENT ET CHEZ L'ENSEIGNANT (23/08/2026) —
+   * « ainsi que pour parents et profs en 6ᵉ ».
+   *
+   * ⚠️ CES DEUX LISTES SONT INDEXÉES PAR RÔLE, PAS PAR CLASSE : elles servent
+   * le parent d'un CP comme celui d'un 6ᵉ. Ce n'est pas un problème, et c'est
+   * même le mécanisme qui rend la demande réalisable en une ligne : les deux
+   * fiches ne sont candidates que si la CLASSE DITE est « 6e » (leurs `niveaux`
+   * ne contiennent que « 6e » et « adulte »), donc chez le parent d'un CP les
+   * deux entrées sont sautées sans bruit et le score reprend la place.
+   * Autrement dit : « en 6ᵉ » n'est pas écrit ici, il est écrit dans la
+   * ressource — et c'est le bon endroit, puisque c'est elle qui est de 6ᵉ.
+   *
+   * ⚠️ `parcours` N'A PAS « parent » DANS SES NIVEAUX, et il sort quand même :
+   * c'est la seconde porte qui le fait entrer, celle de la classe dite. Un
+   * parent qui a cliqué « 6ᵉ » reçoit donc bien les parcours PUIS les deux
+   * fiches, dans l'ordre demandé ; celui qui a cliqué « CP » n'a ni l'un ni
+   * l'autre, et le score reprend les trois places. Le même mécanisme sert deux
+   * fois, et c'est pour ça que ces listes tiennent en six lignes.
+   */
+  parent: [
+    "espace-parents",
+    "coach-maths",
+    "parcours",
+    "fiches-maths-6e",
+    "fiches-francais-6e",
+    "photo-cours",
+  ],
+  /**
+   * ⭐ L'ENSEIGNANT AVAIT ZÉRO LISTE ÉCRITE, ET C'ÉTAIT JUSTE JUSQU'ICI.
+   *
+   * La règle du fichier dit de ne rien écrire tant que l'ordre au score est bon
+   * — et il l'était : à la rentrée, un professeur de 6ᵉ recevait les deux
+   * évaluations nationales, leur sommaire, les deux coachs et les parcours.
+   * Rien à redire. Ce que le score ne pouvait pas deviner, c'est que les fiches
+   * viennent d'être écrites et qu'un enseignant les veut sous la main — c'est
+   * exactement le cas où une liste se justifie.
+   *
+   * ⚠️ TROIS JOKERS SUR SIX : les places 1, 2 et 6 restent au calcul. C'est
+   * volontaire — la rentrée, le brevet, les conseils de classe ne tombent pas
+   * aux mêmes dates, et une liste figée d'enseignant serait fausse dix mois sur
+   * douze. On n'écrit que le milieu, celui qu'on sait meilleur que le score.
+   */
+  prof: ["*", "*", "parcours", "fiches-maths-6e", "fiches-francais-6e", "*"],
   cm1: PORTES_ELEVE_CYCLE_3,
   cm2: PORTES_ELEVE_CYCLE_3,
-  "6e": PORTES_ELEVE_DES_LA_6E,
+  "6e": PORTES_6E,
   "5e": PORTES_ELEVE_DES_LA_6E,
   "4e": PORTES_ELEVE_DES_LA_6E,
   "3e": PORTES_ELEVE_DES_LA_6E,
@@ -903,20 +980,56 @@ export const RESSOURCES: RessourceEleveAI[] = [
   // se pose sur le sommaire (`#6e`), elle ne se refait pas en route.
   {
     id: "fiches-maths-6e",
-    titre: "Fiches de cours — maths 6e",
+    // ⭐ « COURS ET EXERCICES CORRIGÉS », ET PAS « FICHE DE COURS » (23/08/2026).
+    //
+    // « Fiche de cours » est du vocabulaire de VENDEUR : c'est le nom qu'on
+    // donne à la collection quand on la range dans son site. « Cours et
+    // exercices corrigés » est le vocabulaire de l'ACHETEUR — c'est la requête
+    // historique du soutien scolaire en français, et c'est ce qu'un parent tape.
+    // Les deux ne se concurrencent pas : le surtitre de la carte affiche déjà
+    // « FICHE » (le type, donc la collection), le titre porte la promesse.
+    //
+    // ✅ VÉRIFIÉ AVANT DE L'ÉCRIRE, parce qu'un titre qui promet des exercices
+    // sans en avoir est exactement ce que ce fichier interdit : la page d'une
+    // fiche de 6ᵉ contient bien un bloc « À toi de jouer / Exercice flash » et
+    // une section « Exemples corrigés », en plus de la définition, des
+    // propriétés et de la méthode. La promesse est tenue.
+    //
+    // ⚠️ ET CE N'EST PAS UN GESTE DE RÉFÉRENCEMENT — ce fichier n'est lu par
+    // aucun robot. La matrice est rendue côté client sur /accueil : Google n'en
+    // voit pas un mot. Le vrai levier SEO est dans les `<title>`, les H1 et les
+    // noms de PDF de app/fiches-cours/**, qui disent encore « fiche de cours 6e ».
+    // Ici on gagne seulement — et c'est déjà beaucoup — d'être compris par la
+    // personne qui lit la carte.
+    titre: "Maths 6e — cours et exercices corrigés",
     // ⭐ LA PROMESSE DIT LE DESSIN (23/08). « Expliquée court, avec un
     // exemple » décrivait les fiches d'avant. Celles-ci suivent le standard du
     // 19/08 — un visuel par bloc, et un exemple pris dans le monde de l'élève —
     // et c'est précisément ce qui les distingue d'un cours recopié.
     promesse: "La notion en une page, un dessin par idée, un exemple par règle.",
     url: "/fiches-cours/maths",
-    // ⭐ QUATRE PUBLICS, PAS UN (Frédéric, 23/08). Une fiche de cours n'est pas
-    // un exercice : elle se lit, elle s'imprime, elle se donne. Le prof la
-    // projette, le parent la relit avant d'aider, l'adulte y retrouve ce qu'il
-    // a oublié — la 6ᵉ est justement le niveau où un adulte reprend pied.
-    // ⚠️ `adulte` EST UNE CLASSE ICI, pas un rôle (voir types.ts) : c'est bien
-    // la fiche de 6ᵉ qu'on lui propose, et c'est assumé.
-    niveaux: ["6e", "prof", "parent", "adulte"],
+    // ⭐ QUATRE PUBLICS, MAIS DEUX ENTRÉES SEULEMENT (Frédéric, 23/08 : « pour
+    // les élèves, profs et parents et adulte », puis « ainsi que pour parents
+    // et profs EN 6ᵉ »). Une fiche de cours n'est pas un exercice : elle se
+    // lit, elle s'imprime, elle se donne. Le prof la projette, le parent la
+    // relit avant d'aider, l'adulte y retrouve ce qu'il a oublié.
+    //
+    // ⛔ ET POURTANT NI « prof » NI « parent » N'EST ÉCRIT ICI — c'était le cas
+    // pendant une heure, et c'était faux. Ces deux étiquettes-là désignent un
+    // RÔLE, pas un niveau : elles font passer la ressource pour TOUS les
+    // parents et TOUS les enseignants. Mesuré : un parent qui avait dit « CP »
+    // et un professeur qui avait dit « Terminale » recevaient tous les deux
+    // « Fiches de cours — maths 6e ». C'est exactement la faute que le reste du
+    // fichier passe son temps à éviter — montrer le monde d'un sixième à
+    // quelqu'un qui a dit autre chose.
+    // ✅ Le mécanisme du 16/08 fait le travail tout seul : le moteur essaie
+    // DEUX portes, le rôle et la CLASSE DITE (`rangClasse` dans moteur.ts).
+    // « 6e » suffit donc à servir le parent et l'enseignant qui ont cliqué
+    // « 6e », et à n'écarter qu'eux quand ils ont cliqué autre chose.
+    // ⚠️ `adulte` reste, et ce n'est pas une exception : c'est une CLASSE
+    // (voir types.ts), pas un rôle. La 6ᵉ est justement le niveau où un adulte
+    // reprend pied, et c'est bien cette fiche-là qu'on lui propose.
+    niveaux: ["6e", "adulte"],
     matiere: "maths",
     notions: ["*"],
     intentions: ["comprendre"],
@@ -930,13 +1043,18 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // ⚠️ Le sommaire du français ne connaît que DEUX classes, le CM2 et la 6ᵉ.
     // C'est peu, et c'est honnête : on ne déclare que ce qui existe.
     id: "fiches-francais-6e",
-    titre: "Fiches de cours — français 6e",
+    // Même arbitrage qu'en maths, juste au-dessus : le surtitre porte la
+    // collection (« FICHE »), le titre porte ce que les gens cherchent.
+    titre: "Français 6e — cours et exercices corrigés",
     // La grammaire se dessine — c'est le canvas de la phrase, celui qui met la
     // fonction en couleur et l'accord en arc. Le dire ici, c'est la seule
     // manière de ne pas passer pour un cours recopié de plus.
     promesse: "La règle en une page, avec la phrase dessinée.",
     url: "/fiches-cours/francais",
-    niveaux: ["6e", "prof", "parent", "adulte"],
+    // ⚠️ Deux entrées, pas quatre — voir la note de `fiches-maths-6e` juste
+    // au-dessus : « prof » et « parent » sont des rôles, et les écrire ici
+    // servait la fiche de 6ᵉ au parent d'un CP.
+    niveaux: ["6e", "adulte"],
     matiere: "francais",
     notions: ["*"],
     intentions: ["comprendre"],

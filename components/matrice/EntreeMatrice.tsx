@@ -59,6 +59,7 @@ import {
 import { actionsPour, urlAction } from "@/lib/matrice/actions";
 import { afficherConcours } from "@/lib/matrice/concours";
 import { cahiersPour, guidesPour, urlCahierPour, urlGuidePour } from "@/lib/matrice/guides";
+import { fichesPour, urlFichesPour } from "@/lib/matrice/fiches";
 import { chercher, libelleIntention } from "@/lib/matrice/moteur";
 import { vitrine } from "@/lib/matrice/vitrine";
 import {
@@ -508,6 +509,19 @@ export default function EntreeMatrice({
   // existaient en ligne sans être proposés à personne.
   const cahiers = useMemo(() => cahiersPour(niveauContexte), [niveauContexte]);
 
+  // ⭐ LES FICHES DE COURS, EN PASTILLE (Frédéric, 23/08/2026 : « mets-les en
+  // chips aussi, fiche de cours, c'est une forte demande des élèves », puis
+  // « prof et parents »). Voir lib/matrice/fiches.ts pour ce qui compte comme
+  // une fiche de cours, et pourquoi ce n'est pas une chip mais un raccourci.
+  // ⚠️ `niveauContexte` ET NON `profil`, comme le guide et les cahiers : une
+  // fiche appartient à une CLASSE. Un enseignant qui a dit « 6ᵉ » a la pastille,
+  // celui qui n'a rien dit ne l'a pas.
+  const fiches = useMemo(() => fichesPour(niveauContexte, matiereId), [niveauContexte, matiereId]);
+  const hrefFiches = useMemo(
+    () => urlFichesPour(niveauContexte, matiereId),
+    [niveauContexte, matiereId],
+  );
+
   /**
    * Les pastilles qui ne filtrent rien : elles ouvrent une page.
    *
@@ -563,6 +577,28 @@ export default function EntreeMatrice({
           ? "border-2 border-[#a34c07] bg-[#a34c07]/10 text-[#a34c07] hover:bg-[#a34c07]/20"
           : "border border-amber-500 bg-amber-50 text-amber-900 hover:bg-amber-100",
       });
+    // ⭐ LES FICHES EN DEUXIÈME, DEVANT LE GUIDE (23/08/2026). L'argument est
+    // celui de Frédéric et il se mesure : « c'est une forte demande des
+    // élèves ». Le concours garde la première place parce qu'il EXPIRE ; tout
+    // le reste est là toute l'année, et entre deux ressources permanentes c'est
+    // la plus demandée qui passe devant.
+    // ⚠️ CE QUE ÇA DÉPLACE, ET IL FAUT LE SAVOIR : le budget est de cinq
+    // pastilles pour les chips ET les raccourcis, avec un plancher de trois
+    // chips. Il ne reste donc que DEUX places de raccourci. En 6ᵉ sur une chip
+    // de maths, ce sont le concours et les fiches ; « 🆘 Guide » et
+    // « 📒 Cahiers » passent derrière « Autres options ». C'est le prix de la
+    // demande, il est assumé — et il ne se paie que là où un concours tombe.
+    if (fiches.length > 0)
+      l.push({
+        cle: "fiches",
+        href: `${hrefFiches}?from=ia`,
+        // ⚠️ « Fiches » ET NON « Fiches de cours » : les trois voisines tiennent
+        // en un mot (« Guide », « Cahiers », « Concours »), et une rangée qui
+        // déborde annule tout le travail de compactage du 07/08. Le pictogramme
+        // porte le reste.
+        label: "📄 Fiches",
+        evenement: "ia_fiche",
+      });
     if (guides.length > 0)
       l.push({
         cle: "guide",
@@ -585,7 +621,7 @@ export default function EntreeMatrice({
         evenement: "ia_maths_reel",
       });
     return l;
-  }, [concours, guides, cahiers, mathsEnVrai, hrefGuide, profil, surAccueil]);
+  }, [concours, fiches, hrefFiches, guides, cahiers, mathsEnVrai, hrefGuide, profil, surAccueil]);
 
   // ⭐ LA PASTILLE CONCOURS S'INSÈRE EN 5ᵉ POSITION (Frédéric, 07/08 : « le
   // concours arrive en 5ᵉ position ! »). L'ordre de la rangée suit les outils :

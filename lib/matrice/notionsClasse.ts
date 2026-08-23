@@ -37,6 +37,39 @@ const MOTS_FAIBLES = new Set([
   // Un mot aussi courant ne désigne pas une notion à lui seul : c'est
   // précisément ce que cette liste est faite pour dire.
   "calculs", "calculer",
+
+  // ── ⭐ 23/08/2026 — LES VERBES DU BO NE SONT PAS DES NOTIONS ────────────────
+  //
+  // LE DÉFAUT, ET IL ÉTAIT ÉNORME : « je veux comprendre la grammaire », en 6ᵉ,
+  // ouvrait le coach de MATHS. Pas parce que « grammaire » manquait au lexique —
+  // il y est, avec douze alias, et `lireNotion` le reconnaissait très bien. Mais
+  // la fonction ci-dessous passe AVANT le lexique, et elle accrochait
+  // `aire_unite`, dont le libellé officiel est « Comprendre l'aire et ses
+  // unités ». Un seul mot suffit à désigner une notion : « comprendre » en était
+  // un. Résultat, TOUTE phrase contenant le verbe le plus courant de la langue
+  // scolaire — « je veux comprendre X » — tombait sur l'aire, en maths, quelle
+  // que soit la matière de X.
+  //
+  // 🔑 LA RÈGLE, ET ELLE EST GÉNÉRALE : un libellé du BO commence par un verbe
+  // d'ACTION PÉDAGOGIQUE, et ce verbe dit ce que l'élève doit SAVOIR FAIRE, pas
+  // de quoi il s'agit. Or ces mêmes verbes sont exactement ceux qu'une personne
+  // tape pour dire son INTENTION — et l'intention se lit ailleurs, dans
+  // MARQUEURS_INTENTION. Les laisser désigner une notion, c'est confondre les
+  // deux moitiés du vecteur.
+  //
+  // ⚠️ CE QUE ÇA COÛTE, MESURÉ : six notions sur 748 n'ont plus AUCUN mot fort
+  // et deviennent introuvables par leur titre — « Écouter pour comprendre »
+  // (CM1, CM2, 6ᵉ) et « Comprendre, interpréter et apprécier » (5ᵉ, 4ᵉ, 3ᵉ).
+  // Ce sont des intitulés que personne ne tape ; et le lexique, lui, garde
+  // « comprendre un texte », « lecture », « comprehension » sur la notion
+  // `lecture`. On perd un titre administratif, pas une porte.
+  // ⛔ « resoudre » N'EST PAS DANS LA LISTE, et c'est délibéré : il est le seul
+  // mot fort de « Résoudre x² = c et x³ = c » (STMG). Un verbe qui porte seul le
+  // sens d'un libellé n'est plus un verbe d'intention, c'est son nom.
+  "comprendre", "expliquer", "apprendre", "reviser", "preparer", "corriger",
+  "verifier", "tester", "entrainer", "decouvrir", "utiliser", "identifier",
+  "connaitre", "maitriser", "reconnaitre", "ecouter", "apprecier", "interpreter",
+  "raisonner", "mobiliser", "employer", "produire", "effectuer", "appliquer",
 ]);
 
 export type NotionTrouvee = { id: string; label: string; matiere: string; classe: string };
