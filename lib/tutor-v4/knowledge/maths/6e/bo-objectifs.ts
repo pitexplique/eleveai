@@ -532,8 +532,8 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     objectif:
       "Connaître les définitions d'un cercle, d'un disque, d'un rayon, d'un diamètre, d'une corde.",
     page: 11,
-    micros: ["cercle_vocabulaire"],
-    note: "⚠️ La CORDE n'a aucun item : `cercle_vocabulaire` s'arrête au centre, au rayon et au diamètre.",
+    micros: ["cercle_vocabulaire", "cercle_ensemble"],
+    note: "`cercle_vocabulaire` s'arrête au centre, au rayon et au diamètre ; la CORDE, longtemps sans aucun item, a été traitée dans `cercle_ensemble` le 23/08/2026 (figure à l'appui, avec le diamètre comme corde particulière).",
   },
   {
     id: "6e-G-cercles-2",
@@ -542,8 +542,8 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     objectif:
       "Comprendre la définition d'un cercle et celle d'un disque sous la forme d'ensembles de points.",
     page: 12,
-    micros: [],
-    note: "« Le cercle de centre O et de rayon 2 cm est l'ensemble des points situés à 2 cm de O. »",
+    micros: ["cercle_ensemble"],
+    note: "« Le cercle de centre O et de rayon 2 cm est l'ensemble des points situés à 2 cm de O. » Couvert le 23/08/2026, avec la distinction cercle (exactement r) / disque (au plus r).",
   },
   {
     id: "6e-G-cercles-3",
@@ -551,8 +551,8 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     chapitre: "Étude de configurations planes — Cercles et disques",
     objectif: "Résoudre des problèmes mettant en jeu des distances à un point.",
     page: 12,
-    micros: [],
-    note: "La chèvre attachée à une corde de 8 m : hachurer la zone où elle peut brouter.",
+    micros: ["cercle_distance"],
+    note: "La chèvre attachée à une corde de 8 m : hachurer la zone où elle peut brouter. Couvert le 23/08/2026, la chèvre comprise — et l'erreur visée (« un cercle » au lieu d'un disque) a son item.",
   },
 
   // ─── Médiatrice d'un segment ───────────────────────────────────────────────

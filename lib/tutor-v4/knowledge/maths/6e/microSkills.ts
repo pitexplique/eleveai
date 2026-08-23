@@ -1041,6 +1041,22 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "cercle_disque",
     prerequis: ["aire_longueur_mesurer"],
   },
+  // ⛔ AJOUTÉES LE 23/08/2026 — deux objectifs du programme sans micro
+  // (6e-G-cercles-2 et 6e-G-cercles-3). Elles se placent JUSTE APRÈS le
+  // vocabulaire et AVANT la proportionnalité : définir le cercle comme un
+  // ensemble de points, puis s'en servir, précède tout calcul de périmètre.
+  {
+    id: "cercle_ensemble",
+    label: "Le cercle et le disque, ensembles de points",
+    notionId: "cercle_disque",
+    prerequis: ["cercle_vocabulaire"],
+  },
+  {
+    id: "cercle_distance",
+    label: "Problèmes de distances à un point",
+    notionId: "cercle_disque",
+    prerequis: ["cercle_ensemble"],
+  },
   {
     id: "cercle_proportionnel",
     label: "Savoir que le tour du disque est proportionnel à son diamètre",

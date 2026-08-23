@@ -42,6 +42,81 @@ function expl(calcul: string) {
   );
 }
 
+/**
+ * LE CERCLE COMME ENSEMBLE DE POINTS — avec des points posés à des distances
+ * choisies du centre : sur le cercle, dedans, dehors.
+ *
+ * ⭐ C'est la figure qui fait basculer la définition. Tant qu'on ne voit qu'un
+ * rond, le cercle est une FORME ; dès qu'on y pose des points en disant leur
+ * distance à O, il devient un ENSEMBLE — ce que le BO demande de comprendre.
+ *
+ * `distances` est exprimé en fraction du rayon : 1 = sur le cercle, 0,6 =
+ * dedans, 1,4 = dehors.
+ */
+function cercleDesPoints(
+  pts: { id: string; distance: number; angle: number; highlight?: boolean }[],
+  options?: { disque?: boolean }
+) {
+  const cx = 170;
+  const cy = 130;
+  const r = 80;
+  return {
+    kind: "cercle" as const,
+    size: { width: 340, height: 260 },
+    circle: {
+      cx,
+      cy,
+      r,
+      showCircle: true,
+      showDisk: options?.disque ?? false,
+    },
+    points: [
+      { id: "O", x: cx, y: cy, label: "O", color: "#ef4444", highlight: true },
+      ...pts.map((p) => ({
+        id: p.id,
+        x: cx + p.distance * r * Math.cos((p.angle * Math.PI) / 180),
+        y: cy - p.distance * r * Math.sin((p.angle * Math.PI) / 180),
+        label: p.id,
+        highlight: p.highlight,
+      })),
+    ],
+    segments: pts.map((p) => ({
+      id: `s_${p.id}`,
+      kind: "segment" as const,
+      from: "O",
+      to: p.id,
+      dashed: true,
+    })),
+    display: {
+      showLabels: true,
+      showPoints: true,
+      showCenter: true,
+      showDisk: options?.disque ?? false,
+    },
+  };
+}
+
+/** Un cercle portant une CORDE — le mot du BO qu'aucun item ne posait. */
+function cercleAvecCorde() {
+  const cx = 170;
+  const cy = 130;
+  const r = 80;
+  return {
+    kind: "cercle" as const,
+    size: { width: 340, height: 260 },
+    circle: { cx, cy, r, showCircle: true },
+    points: [
+      { id: "O", x: cx, y: cy, label: "O", color: "#ef4444", highlight: true },
+      { id: "A", x: cx + r * Math.cos((140 * Math.PI) / 180), y: cy - r * Math.sin((140 * Math.PI) / 180), label: "A" },
+      { id: "B", x: cx + r * Math.cos((40 * Math.PI) / 180), y: cy - r * Math.sin((40 * Math.PI) / 180), label: "B" },
+    ],
+    segments: [
+      { id: "c1", kind: "corde" as const, from: "A", to: "B", label: "[AB]", highlight: true },
+    ],
+    display: { showLabels: true, showPoints: true, showCenter: true, showChord: true },
+  };
+}
+
 /** Un cercle de centre O, avec le segment demandé mis en avant. */
 function cercleAvec(segment: "rayon" | "diametre", label?: string) {
   const cx = 170;
@@ -853,6 +928,453 @@ export const cercleBank: TutorBankItemV4[] = [
           q: "Un élève calcule le périmètre d'un disque de rayon 5 cm et trouve 15,7 cm. Explique son erreur.",
           mots: ["rayon", "diamètre", "diametre", "moitié", "moitie", "double"],
           r: "Il a multiplié 3,14 par le RAYON au lieu du diamètre : il a trouvé la moitié du tour. Le diamètre vaut 2 × 5 = 10 cm, donc P = 3,14 × 10 = 31,4 cm.",
+        },
+      ];
+      const c = cas[randomInt(0, cas.length - 1)];
+      return {
+        text: c.q,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: expl(c.r),
+      };
+    },
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // CERCLE_ENSEMBLE — le cercle et le disque comme ENSEMBLES DE POINTS
+  //
+  // ⛔ OUVERTE LE 23/08/2026 — TROU DU PROGRAMME (6e-G-cercles-2) : « comprendre
+  // la définition d'un cercle et celle d'un disque sous la forme d'ensembles de
+  // points ». Le BO l'écrit ainsi : « le cercle de centre O et de rayon 2 cm est
+  // l'ensemble des points situés à 2 cm de O ».
+  //
+  // ⭐ CE N'EST PAS DU VOCABULAIRE EN PLUS, C'EST UN CHANGEMENT DE NATURE. Tant
+  // qu'on le dessine au compas, le cercle est une FORME — un rond. La définition
+  // par ensemble de points en fait un CRITÈRE : pour savoir si un point est
+  // dessus, on ne regarde plus le dessin, on mesure sa distance au centre. C'est
+  // ce basculement qui rend possibles la médiatrice, le cercle circonscrit et
+  // toute la géométrie de 5e.
+  //
+  // ⚠️ CERCLE ET DISQUE SE DISTINGUENT ICI, ET NULLE PART AILLEURS : le cercle
+  // est l'ensemble des points situés à EXACTEMENT r du centre — le tour seul ;
+  // le disque, ceux situés à AU PLUS r — le tour et tout l'intérieur. Confondre
+  // les deux est l'erreur du chapitre, et elle a ses items.
+  //
+  // ⚠️ LA CORDE EST TRAITÉE ICI AUSSI. L'objectif 6e-G-cercles-1 la réclame
+  // (« connaître les définitions d'un cercle, d'un disque, d'un rayon, d'un
+  // diamètre, d'une CORDE ») et `cercle_vocabulaire` s'arrêtait au diamètre.
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    kind: "fixed",
+    id: "cercle_ensemble_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "cercle_disque",
+    microId: "cercle_ensemble",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Le cercle de centre O et de rayon 3 cm, c'est l'ensemble des points situés…",
+    format: "qcm",
+    choices: [
+      "à exactement 3 cm de O",
+      "à 3 cm au plus de O",
+      "à 3 cm au moins de O",
+      "à exactement 6 cm de O",
+    ],
+    expected: ["à exactement 3 cm de O"],
+    comparator: "mcq_exact",
+    hint: "Le cercle est le tour seul, pas ce qu'il y a dedans.",
+    explanation: expl(
+      "Le cercle de centre O et de rayon 3 cm est l'ensemble des points situés à EXACTEMENT 3 cm de O : ni plus près, ni plus loin. « À 3 cm au plus » décrirait le DISQUE, qui comprend l'intérieur ; « à 3 cm au moins » décrirait tout l'extérieur ; et 6 cm est le diamètre, pas le rayon."
+    ),
+    tags: ["cercle_disque", "ensemble", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "cercle_ensemble_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "cercle_disque",
+    microId: "cercle_ensemble",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quelle est la différence entre le cercle et le disque de centre O et de rayon 4 cm ?",
+    format: "qcm",
+    choices: [
+      "le cercle est le tour seul, le disque comprend aussi l'intérieur",
+      "le disque est le tour seul, le cercle comprend aussi l'intérieur",
+      "il n'y en a aucune, ce sont deux mots pour la même chose",
+      "le disque a un rayon deux fois plus grand",
+    ],
+    expected: ["le cercle est le tour seul, le disque comprend aussi l'intérieur"],
+    comparator: "mcq_exact",
+    hint: "Pense à une pièce de monnaie et à son contour.",
+    explanation: expl(
+      "Le cercle est l'ensemble des points à exactement 4 cm de O : c'est une ligne, le tour. Le disque est l'ensemble des points à 4 cm AU PLUS de O : c'est une surface, le tour ET tout l'intérieur. Une pièce de monnaie est un disque ; le trait qu'on dessine autour est un cercle. C'est pour cela qu'on parle du PÉRIMÈTRE du disque et de l'AIRE du disque, mais jamais de l'aire d'un cercle."
+    ),
+    tags: ["cercle_disque", "ensemble", "piege", "canvas", "qcm"],
+    canvas: cercleDesPoints([], { disque: true }),
+  },
+  {
+    kind: "fixed",
+    id: "cercle_ensemble_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "cercle_disque",
+    microId: "cercle_ensemble",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un point M vérifie OM = 5 cm. Le cercle de centre O et de rayon 5 cm passe-t-il par M ?",
+    format: "qcm",
+    choices: [
+      "oui, car M est à exactement 5 cm de O",
+      "non, il faudrait connaître la position de M",
+      "non, car M pourrait être à l'intérieur",
+      "seulement si M est sur un rayon tracé",
+    ],
+    expected: ["oui, car M est à exactement 5 cm de O"],
+    comparator: "mcq_exact",
+    hint: "La seule chose qui compte est la distance à O.",
+    explanation: expl(
+      "Oui. Appartenir au cercle de centre O et de rayon 5 cm, c'est exactement être à 5 cm de O — rien d'autre n'est demandé. Peu importe la direction dans laquelle se trouve M : il y a une infinité de points à 5 cm de O, et ils forment justement ce cercle. C'est toute la force de la définition par ensemble de points : elle donne un CRITÈRE qu'on peut vérifier au compas, sans regarder le dessin."
+    ),
+    tags: ["cercle_disque", "ensemble", "canvas", "qcm"],
+    canvas: cercleDesPoints([{ id: "M", distance: 1, angle: 55, highlight: true }]),
+  },
+  {
+    kind: "fixed",
+    id: "cercle_ensemble_fixed_4",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "cercle_disque",
+    microId: "cercle_ensemble",
+    difficulty: 4,
+    theme: "neutral",
+    text: "On considère le disque de centre O et de rayon 5 cm. Où se trouve le point N tel que ON = 4 cm ?",
+    format: "qcm",
+    choices: [
+      "à l'intérieur du disque, mais pas sur le cercle",
+      "sur le cercle",
+      "à l'extérieur du disque",
+      "au centre du disque",
+    ],
+    expected: ["à l'intérieur du disque, mais pas sur le cercle"],
+    comparator: "mcq_exact",
+    hint: "Compare 4 cm au rayon 5 cm.",
+    explanation: expl(
+      "4 cm est plus petit que 5 cm : N est donc à moins de 5 cm de O. Il appartient bien au disque, qui rassemble tous les points à 5 cm AU PLUS, mais pas au cercle, qui exige exactement 5 cm. N n'est pas non plus au centre, ce qui demanderait ON = 0."
+    ),
+    tags: ["cercle_disque", "ensemble", "canvas", "qcm"],
+    canvas: cercleDesPoints([{ id: "N", distance: 0.62, angle: 120, highlight: true }], {
+      disque: true,
+    }),
+  },
+  {
+    kind: "fixed",
+    id: "cercle_ensemble_fixed_5",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "cercle_disque",
+    microId: "cercle_ensemble",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Sur la figure, [AB] joint deux points du cercle sans passer par le centre O. Comment appelle-t-on ce segment ?",
+    format: "qcm",
+    choices: ["une corde", "un diamètre", "un rayon", "un arc"],
+    expected: ["une corde"],
+    comparator: "mcq_exact",
+    hint: "Un diamètre passerait par O ; un arc serait courbe.",
+    explanation: expl(
+      "Un segment qui joint deux points d'un cercle s'appelle une CORDE. Le diamètre est la corde particulière qui passe par le centre — c'est la plus longue de toutes. L'arc, lui, n'est pas un segment : c'est la portion de cercle entre les deux points, donc une ligne courbe. Et le rayon joint le centre à un point du cercle."
+    ),
+    tags: ["cercle_disque", "ensemble", "corde", "canvas", "qcm"],
+    canvas: cercleAvecCorde(),
+  },
+  {
+    kind: "template",
+    id: "cercle_ensemble_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "cercle_disque",
+    microId: "cercle_ensemble",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare la distance donnée au rayon.",
+    tags: ["cercle_disque", "ensemble", "template"],
+    generate: () => {
+      const rayon = randomInt(3, 9);
+      const cas = randomInt(0, 2);
+      const distance = cas === 0 ? rayon : cas === 1 ? randomInt(1, rayon - 1) : rayon + randomInt(1, 4);
+      const bonne =
+        cas === 0
+          ? "sur le cercle"
+          : cas === 1
+            ? "à l'intérieur du disque, mais pas sur le cercle"
+            : "à l'extérieur du disque";
+
+      return {
+        text: `Un cercle a pour centre O et pour rayon ${rayon} cm. Un point P vérifie OP = ${distance} cm. Où se trouve P ?`,
+        format: "qcm",
+        choices: [
+          "sur le cercle",
+          "à l'intérieur du disque, mais pas sur le cercle",
+          "à l'extérieur du disque",
+          "au centre du cercle",
+        ],
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: expl(
+          `On compare la distance au rayon : ${distance} cm ${
+            cas === 0
+              ? `est égal au rayon ${rayon} cm, donc P est à exactement ${rayon} cm de O : il est SUR le cercle`
+              : cas === 1
+                ? `est plus petit que le rayon ${rayon} cm, donc P est trop près de O pour être sur le cercle : il est à l'intérieur du disque`
+                : `est plus grand que le rayon ${rayon} cm, donc P est trop loin de O : il est à l'extérieur du disque`
+          }. Seule la distance à O compte, jamais la direction.`
+        ),
+        canvas: cercleDesPoints(
+          [{ id: "P", distance: distance / rayon, angle: randomInt(20, 160), highlight: true }],
+          { disque: cas !== 0 }
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "cercle_ensemble_tpl_ouverte",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "cercle_disque",
+    microId: "cercle_ensemble",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Parle de DISTANCE au centre, pas de forme.",
+    tags: ["cercle_disque", "ensemble", "template", "ouverte"],
+    generate: () => {
+      const cas = [
+        {
+          q: "Explique ce que veut dire « le cercle de centre O et de rayon 2 cm est l'ensemble des points situés à 2 cm de O ».",
+          mots: ["distance", "exactement", "tous", "2 cm", "infinité", "infinite", "critère", "critere"],
+          r: "Cela veut dire que le cercle n'est pas d'abord une forme, mais une COLLECTION : celle de tous les points qui sont à exactement 2 cm de O, et d'eux seuls. Il y en a une infinité, dans toutes les directions autour de O, et mis bout à bout ils dessinent le rond qu'on connaît. L'intérêt est qu'on obtient un critère : pour savoir si un point appartient au cercle, on mesure sa distance à O, sans avoir besoin du dessin.",
+        },
+        {
+          q: "Explique la différence entre le cercle et le disque, et donne un exemple de la vie courante.",
+          mots: ["tour", "intérieur", "interieur", "au plus", "exactement", "surface", "ligne"],
+          r: "Le cercle est l'ensemble des points situés à exactement r du centre : c'est une ligne, le tour. Le disque est l'ensemble des points situés à r AU PLUS : c'est une surface, le tour et tout ce qu'il y a dedans. Une pièce de monnaie est un disque, le trait qu'on dessine en en faisant le tour est un cercle. C'est pour cela qu'on calcule le périmètre d'un disque et son aire, mais jamais l'aire d'un cercle : une ligne n'a pas d'aire.",
+        },
+        {
+          q: "Pourquoi la définition du cercle par ensemble de points est-elle plus utile que « un rond tracé au compas » ?",
+          mots: ["vérifier", "verifier", "distance", "critère", "critere", "sans dessin", "démontrer", "demontrer"],
+          r: "Parce qu'elle permet de DÉCIDER. Avec « un rond », on ne peut que regarder et estimer ; avec « les points à 2 cm de O », on mesure et on tranche, même sans dessin soigné. C'est ce qui permet ensuite de démontrer : dire qu'un point est sur un cercle devient une affirmation sur une longueur, qu'on peut justifier. Le compas, d'ailleurs, ne fait rien d'autre que garder une distance constante — il applique la définition.",
+        },
+        {
+          q: "Un élève dit qu'un point situé à 7 cm du centre d'un cercle de rayon 7 cm « est peut-être dedans, ça dépend où ». Explique son erreur.",
+          mots: ["direction", "distance", "toutes", "sur le cercle", "peu importe", "infinité", "infinite"],
+          r: "Il croit que la position dépend de la direction, alors que seule la DISTANCE au centre compte. Tous les points à 7 cm de O — quelle que soit la direction — sont sur le cercle de rayon 7 cm : ils sont même une infinité, et c'est précisément eux qui le forment. Un point n'est à l'intérieur que si sa distance est plus PETITE que le rayon.",
+        },
+      ];
+      const c = cas[randomInt(0, cas.length - 1)];
+      return {
+        text: c.q,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: expl(c.r),
+      };
+    },
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // CERCLE_DISTANCE — les problèmes de distances à un point
+  //
+  // ⛔ OUVERTE LE 23/08/2026 — TROU DU PROGRAMME (6e-G-cercles-3) : « résoudre
+  // des problèmes mettant en jeu des distances à un point ». L'exemple de
+  // réussite du BO est la chèvre attachée à une corde de 8 m, dont on demande de
+  // hachurer la zone de broutage.
+  //
+  // ⭐ C'EST LA DÉFINITION PRÉCÉDENTE, MISE AU TRAVAIL. « Les points à moins de
+  // 8 m du piquet » n'a l'air de rien tant qu'on ne l'a pas reconnu : c'est un
+  // DISQUE de rayon 8 m. Le chapitre sert à ça — traduire une contrainte de
+  // distance en une figure, puis lire la réponse sur la figure.
+  //
+  // ⚠️ LA CORDE DONNE UN DISQUE, PAS UN CERCLE : la chèvre peut brouter partout
+  // où la corde n'est pas tendue, donc à 8 m AU PLUS. Répondre « un cercle »,
+  // c'est ne lui laisser que le tour — l'erreur exacte que le BO vise.
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    kind: "fixed",
+    id: "cercle_distance_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "cercle_disque",
+    microId: "cercle_distance",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Une chèvre est attachée à un piquet par une corde de 8 m, dans un pré tout plat. Quelle est la forme de la zone où elle peut brouter ?",
+    format: "qcm",
+    choices: [
+      "un disque de rayon 8 m",
+      "un cercle de rayon 8 m",
+      "un disque de rayon 16 m",
+      "un carré de 8 m de côté",
+    ],
+    expected: ["un disque de rayon 8 m"],
+    comparator: "mcq_exact",
+    hint: "La corde peut aussi être détendue.",
+    explanation: expl(
+      "La chèvre peut aller partout où sa distance au piquet ne dépasse pas 8 m — corde tendue, mais aussi corde détendue. La zone est donc l'ensemble des points situés à 8 m AU PLUS du piquet : un DISQUE de rayon 8 m. Répondre « un cercle » ne lui laisserait que le tour, corde toujours tendue, ce qui n'a aucun sens pour brouter. Et 16 m serait le diamètre, pas le rayon."
+    ),
+    tags: ["cercle_disque", "distance", "piege", "canvas", "qcm"],
+    canvas: cercleDesPoints([], { disque: true }),
+  },
+  {
+    kind: "fixed",
+    id: "cercle_distance_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "cercle_disque",
+    microId: "cercle_distance",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Même chèvre, même corde de 8 m. Un arbre se trouve à 9 m du piquet. Peut-elle l'atteindre ?",
+    format: "qcm",
+    choices: [
+      "non, car 9 m dépasse la longueur de la corde",
+      "oui, si elle tire bien sur la corde",
+      "oui, car 9 m est proche de 8 m",
+      "on ne peut pas savoir sans connaître la direction",
+    ],
+    expected: ["non, car 9 m dépasse la longueur de la corde"],
+    comparator: "mcq_exact",
+    hint: "Compare 9 m au rayon de la zone.",
+    explanation: expl(
+      "La zone de broutage est le disque de rayon 8 m. L'arbre est à 9 m, donc plus loin que 8 m : il est en dehors du disque, et la chèvre ne peut pas l'atteindre. La direction n'y change rien — la contrainte ne porte que sur la distance au piquet."
+    ),
+    tags: ["cercle_disque", "distance", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "cercle_distance_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "cercle_disque",
+    microId: "cercle_distance",
+    difficulty: 5,
+    theme: "neutral",
+    text: "On cherche les points situés à la fois à 3 cm du point A et à 4 cm du point B, avec AB = 5 cm. Combien y en a-t-il ?",
+    format: "qcm",
+    choices: ["2", "1", "aucun", "une infinité"],
+    expected: ["2"],
+    comparator: "mcq_exact",
+    hint: "Trace les deux cercles : où se coupent-ils ?",
+    explanation: expl(
+      "Les points à 3 cm de A forment le cercle de centre A et de rayon 3 cm ; ceux à 4 cm de B, le cercle de centre B et de rayon 4 cm. Les points cherchés sont sur les DEUX : ce sont les points d'intersection des deux cercles. Comme 5 cm est plus petit que 3 + 4 = 7 cm et plus grand que 4 − 3 = 1 cm, les cercles se coupent en DEUX points. C'est exactement la méthode pour construire un triangle dont on connaît les trois côtés."
+    ),
+    tags: ["cercle_disque", "distance", "construction", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "cercle_distance_fixed_4",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "cercle_disque",
+    microId: "cercle_distance",
+    difficulty: 4,
+    theme: "reunion",
+    text: "Une borne de secours couvre tout ce qui est à moins de 500 m d'elle. Une case est à 500 m exactement. Est-elle couverte ?",
+    format: "qcm",
+    choices: [
+      "non : « à moins de 500 m » exclut la distance 500 m elle-même",
+      "oui, car 500 m est la portée annoncée",
+      "oui, car la borne couvre un disque de rayon 500 m",
+      "on ne peut pas savoir sans connaître la direction",
+    ],
+    expected: ["non : « à moins de 500 m » exclut la distance 500 m elle-même"],
+    comparator: "mcq_exact",
+    hint: "Lis très précisément : « à moins de » ou « à 500 m au plus » ?",
+    explanation: expl(
+      "« À moins de 500 m » veut dire strictement moins : la case, qui est à 500 m tout juste, n'est pas couverte. Si l'énoncé avait dit « à 500 m au plus », elle l'aurait été. En géométrie comme en droit, la frontière appartient à l'un ou à l'autre selon la formulation — c'est la différence entre le disque avec son bord et le disque sans son bord."
+    ),
+    tags: ["cercle_disque", "distance", "974", "piege", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "cercle_distance_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "cercle_disque",
+    microId: "cercle_distance",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Traduis la contrainte de distance en disque, puis compare.",
+    tags: ["cercle_disque", "distance", "template"],
+    generate: () => {
+      const portee = randomInt(4, 20);
+      const objets = [
+        { quoi: "un arroseur", verbe: "arroser", lieu: "un massif" },
+        { quoi: "une lampe", verbe: "éclairer", lieu: "un banc" },
+        { quoi: "une borne wifi", verbe: "couvrir", lieu: "une salle" },
+        { quoi: "un chien attaché", verbe: "atteindre", lieu: "une gamelle" },
+      ];
+      const o = objets[randomInt(0, objets.length - 1)];
+      const dedans = Math.random() < 0.5;
+      const distance = dedans ? randomInt(1, portee - 1) : portee + randomInt(1, 6);
+
+      return {
+        text: `${o.quoi.charAt(0).toUpperCase()}${o.quoi.slice(1)} placé en O peut ${o.verbe} tout ce qui se trouve à ${portee} m au plus. ${o.lieu.charAt(0).toUpperCase()}${o.lieu.slice(1)} est à ${distance} m de O. Est-il concerné ?`,
+        format: "qcm",
+        choices: [
+          "oui, il est dans le disque de rayon " + portee + " m",
+          "non, il est en dehors du disque de rayon " + portee + " m",
+          "oui, mais seulement s'il est dans la bonne direction",
+          "on ne peut pas répondre sans connaître la forme du terrain",
+        ],
+        expected: [
+          dedans
+            ? "oui, il est dans le disque de rayon " + portee + " m"
+            : "non, il est en dehors du disque de rayon " + portee + " m",
+        ],
+        comparator: "mcq_exact",
+        explanation: expl(
+          `La zone concernée est l'ensemble des points situés à ${portee} m au plus de O : c'est le disque de centre O et de rayon ${portee} m. On compare donc ${distance} m à ${portee} m — ${distance} m est ${
+            dedans ? "plus petit" : "plus grand"
+          }, donc le point est ${dedans ? "dans" : "hors de"} la zone. La direction n'intervient jamais : seule la distance à O compte.`
+        ),
+        canvas: cercleDesPoints(
+          [{ id: "M", distance: distance / portee, angle: randomInt(20, 160), highlight: true }],
+          { disque: true }
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "cercle_distance_tpl_ouverte",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "cercle_disque",
+    microId: "cercle_distance",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Dis d'abord quelle FIGURE traduit la contrainte, ensuite conclus.",
+    tags: ["cercle_disque", "distance", "template", "ouverte"],
+    generate: () => {
+      const cas = [
+        {
+          q: "Une chèvre est attachée à un piquet par une corde de 8 m. Explique quelle zone elle peut brouter, et pourquoi ce n'est pas un cercle.",
+          mots: ["disque", "au plus", "détendue", "detendue", "intérieur", "interieur", "8"],
+          r: "Elle peut aller partout où sa distance au piquet ne dépasse pas 8 m. Corde tendue, elle décrit le cercle de rayon 8 m ; mais rien ne l'oblige à tendre la corde, et elle broute aussi tout ce qui est plus près. La zone est donc le DISQUE de rayon 8 m — le tour et tout l'intérieur. Répondre « un cercle » reviendrait à la faire brouter uniquement sur une ligne.",
+        },
+        {
+          q: "Explique comment trouver les points situés à la fois à 3 cm de A et à 4 cm de B.",
+          mots: ["deux cercles", "intersection", "coupent", "compas", "deux points"],
+          r: "On trace le cercle de centre A et de rayon 3 cm : il contient tous les points qui remplissent la première condition. Puis le cercle de centre B et de rayon 4 cm, pour la seconde. Les points cherchés doivent remplir les deux, ils sont donc à l'intersection : là où les deux cercles se coupent, ce qui donne en général deux points. C'est exactement ce qu'on fait au compas pour construire un triangle dont on connaît les trois longueurs.",
+        },
+        {
+          q: "Pourquoi la direction ne joue-t-elle aucun rôle dans ces problèmes de distance à un point ?",
+          mots: ["distance", "seule", "toutes les directions", "symétrie", "symetrie", "rond"],
+          r: "Parce que la contrainte ne porte que sur une longueur : « à moins de 8 m du piquet » ne dit rien du nord ni du sud. Toutes les directions sont donc traitées de la même façon, et c'est précisément ce qui rend la zone ronde. Si la corde était gênée par un mur, la zone cesserait d'être un disque — c'est le signe que la symétrie venait bien de l'absence de contrainte de direction.",
         },
       ];
       const c = cas[randomInt(0, cas.length - 1)];
