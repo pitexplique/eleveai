@@ -213,8 +213,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Les fractions",
     objectif: "Additionner et soustraire des fractions.",
     page: 10,
-    micros: [],
-    note: "⚠️ Aucun item d'addition ou de soustraction de fractions dans toute la banque CM2 — vérifié le 23/08/2026.",
+    micros: ["fraction_additionner"],
+    note: "Couvert le 23/08/2026. ⛔ BORNÉ COMME LE BO : même dénominateur, puis dénominateurs dont l'un est MULTIPLE de l'autre (3/2 + 7/8 ; 5/6 − 1/12). Jamais 1/3 + 1/4 — le dénominateur commun quelconque relève de la 6e.",
   },
   {
     id: "cm2-N-fractions-9",
@@ -222,7 +222,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Les fractions",
     objectif: "Calculer le produit d'un entier et d'une fraction.",
     page: 10,
-    micros: [],
+    micros: ["fraction_produit_entier"],
+    note: "Couvert le 23/08/2026 comme une ADDITION ITÉRÉE, ce que le BO fait verbaliser : « trois fois cinq quarts, c'est cinq quarts plus cinq quarts plus cinq quarts, cela fait quinze quarts ».",
   },
   {
     id: "cm2-N-fractions-10",
@@ -230,8 +231,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "Les fractions",
     objectif: "Déterminer une fraction d'une quantité ou d'une grandeur.",
     page: 10,
-    micros: [],
-    note: "Le BO donne les exemples : deux tiers de 12 €, trois quarts de 100 mètres.",
+    micros: ["fraction_quantite"],
+    note: "Couvert le 23/08/2026, schéma en barres compris. ⭐ L'ordre compte : on PARTAGE d'abord (dénominateur), on PREND ensuite (numérateur) — cela garde des nombres petits. Exemples du BO : deux tiers de douze œufs, 3/10 de 500 g, 2/5 de 60 kg.",
   },
 
   // ─── Les nombres décimaux ──────────────────────────────────────────────────

@@ -10,6 +10,7 @@ import { divisionBank } from "./division.bank";
 import { nombresEntiersBank } from "./nombres-entiers.bank";
 import { fractionsBank } from "./fractions.bank";
 import { fractionsSuperieuresBank } from "./fractions-superieures.bank";
+import { fractionsCalculCm2Bank } from "./fractions-calcul.bank";
 import { calculBank } from "./calcul.bank";
 import { problemeBank } from "./probleme.bank";
 import { pourcentagesBank } from "./pourcentages.bank";
@@ -54,6 +55,7 @@ export const mathsCm2QuestionBank: TutorBankItemV4[] = [
   ...applyMathsKeyboardFree(nombresEntiersBank),
   ...applyMathsKeyboardFree(fractionsBank),
   ...applyMathsKeyboardFree(fractionsSuperieuresBank),
+  ...applyMathsKeyboardFree(fractionsCalculCm2Bank),
   ...applyMathsKeyboardFree(algorithmiqueBank),
   ...applyMathsKeyboardFree(calculBank),
   ...applyMathsKeyboardFree(problemeBank),

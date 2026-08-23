@@ -224,6 +224,33 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["fraction_mixte_ecrire"],
   },
 
+  /* =========================
+     CALCULER AVEC LES FRACTIONS
+     ⛔ Ouvertes le 23/08/2026 : trois objectifs du programme de CM2
+     (cm2-N-fractions-8, -9 et -10) n'avaient aucune micro. On savait lire et
+     comparer des fractions, jamais en calculer.
+     ⭐ Le dénominateur NOMME l'unité, il ne se compte pas — c'est ce qui explique
+     à la fois pourquoi il ne s'additionne pas et pourquoi il ne se multiplie pas.
+  ========================= */
+  {
+    id: "fraction_additionner",
+    label: "Additionner et soustraire des fractions",
+    notionId: "fraction_calcul",
+    prerequis: ["fraction_equivalente", "fraction_mixte_regrouper"],
+  },
+  {
+    id: "fraction_produit_entier",
+    label: "Multiplier une fraction par un entier",
+    notionId: "fraction_calcul",
+    prerequis: ["fraction_additionner"],
+  },
+  {
+    id: "fraction_quantite",
+    label: "Prendre une fraction d’une quantité",
+    notionId: "fraction_calcul",
+    prerequis: ["division_sens", "fraction_lire"],
+  },
+
   // ============================================================
   // NOMBRES DÉCIMAUX
   // ============================================================

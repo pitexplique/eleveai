@@ -59,6 +59,26 @@ export const notions: NotionSource[] = [
     levels: [1, 2, 3],
   },
 
+  // ⛔ OUVERTE LE 23/08/2026 — TROIS AUTRES TROUS (cm2-N-fractions-8, -9 et -10).
+  // La banque de fractions savait lire, représenter et comparer : on n'y
+  // CALCULAIT jamais, alors que le programme de CM2 en fait trois objectifs.
+  //
+  // ⭐ Un seul principe porte les trois : une fraction est un NOMBRE DE PARTS, et
+  // le dénominateur dit lesquelles. Trois quarts plus deux quarts font cinq
+  // quarts, comme trois pommes plus deux pommes font cinq pommes. Le
+  // dénominateur nomme l'unité, il ne se compte pas.
+  //
+  // ⛔ BORNE DU BO : l'addition s'arrête aux dénominateurs dont l'un est MULTIPLE
+  // de l'autre (3/2 + 7/8, 5/6 − 1/12). Jamais 1/3 + 1/4 — le dénominateur commun
+  // quelconque relève de la 6e.
+  {
+    id: "fraction_calcul",
+    label: "Calculer avec les fractions",
+    boId: "BOCM2N3",
+    prerequis: ["fraction_mixte"],
+    levels: [1, 2, 3],
+  },
+
   {
     id: "nombre_decimal",
     label: "Nombres décimaux",
