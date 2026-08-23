@@ -797,6 +797,33 @@ export default function Header() {
                   ⚠️ Placée dans la branche VISITEUR seulement : un élève
                   connecté n'a rien à faire là, et les robots ne sont jamais
                   connectés — ils voient donc toujours ce lien. */}
+              {/* ⛔ ÉTEINTE LE 23/08/2026 — TANT QUE STRIPE N'EST PAS EN PLACE.
+                  Frédéric : « enlève tarif du header tant que Stripe n'est pas
+                  fonctionnel, mets-le en commentaire ».
+
+                  Ce n'est pas un renoncement à la décision du 21/08 ci-dessus,
+                  qui reste juste : c'est une question de séquence. Un lien
+                  « Tarifs » dans l'en-tête est une invitation à acheter, et il
+                  est présent sur TOUTES les pages du site. Tant que le paiement
+                  n'existe pas, cette invitation mène à une page qui annonce un
+                  prix que personne ne peut payer — c'est-à-dire qu'elle fait
+                  exactement le contraire de ce qu'elle promet, et sur chaque
+                  écran. Voir aussi le statut URSSAF de l'offre famille.
+
+                  ⚠️ CE QU'ON PERD, ET QU'IL FAUDRA RÉCUPÉRER : la raison n°2 du
+                  21/08 était le référencement — Google construit ses rubriques
+                  de marque à partir de la NAVIGATION, et /tarifs n'y sera plus.
+                  La rubrique mettra des semaines à revenir le jour où on
+                  rallume. C'est le prix à payer, il est connu.
+                  ⚠️ La page /tarifs, elle, N'EST PAS retirée : elle reste en
+                  ligne, au sitemap, et liée depuis le pied de page. On coupe
+                  l'invitation permanente, pas l'information.
+
+                  ✅ POUR RALLUMER : décommenter ce bloc ET son jumeau du menu
+                  mobile (chercher « ÉTEINTE LE 23/08 » plus bas dans ce même
+                  fichier). Les deux, sinon le lien revient sur ordinateur et
+                  reste absent sur téléphone, là où sont quatre visiteurs sur
+                  dix.
               <Link
                 prefetch={false}
                 href="/tarifs"
@@ -808,6 +835,7 @@ export default function Header() {
               >
                 Tarifs
               </Link>
+              */}
               <Link
                 prefetch={false}
                 href="/auth/signin?mode=eleve&inscription=1"
@@ -956,7 +984,14 @@ export default function Header() {
               /* Une seule porte ici : « Inscription » est déjà en pastille dans
                  la barre, deux centimètres plus haut et toujours visible, elle.
                  Celle-ci est pour qui revient. */
-              <div className="grid grid-cols-2 gap-2">
+              /* ⚠️ `grid-cols-1`, ET C'ÉTAIT `grid-cols-2` (23/08/2026). Cette
+                 grille tenait DEUX boutons, « Connexion » et « Tarifs » ; depuis
+                 que le second est éteint le temps que Stripe arrive, deux
+                 colonnes laisseraient « Connexion » sur la moitié gauche et un
+                 trou à droite — la forme exacte d'un bouton qui n'a pas chargé.
+                 ✅ À remettre à `grid-cols-2` en même temps qu'on rallume les
+                 tarifs, sinon le bouton reviendra pleine largeur sous l'autre. */
+              <div className="grid grid-cols-1 gap-2">
                 <Link
                   prefetch={false}
                   href="/auth/signin?mode=eleve"
@@ -971,6 +1006,10 @@ export default function Header() {
                 </Link>
                 {/* Quatre visiteurs sur dix sont sur un téléphone : le lien
                     « Tarifs » du bandeau large ne leur arrive jamais. */}
+                {/* ⛔ ÉTEINTE LE 23/08/2026 — TANT QUE STRIPE N'EST PAS EN
+                    PLACE. Le jumeau de celle du bandeau large : le pourquoi y
+                    est écrit en entier, et il ne se répète pas ici.
+                    ✅ Pour rallumer, décommenter LES DEUX.
                 <Link
                   prefetch={false}
                   href="/tarifs"
@@ -983,6 +1022,7 @@ export default function Header() {
                 >
                   Tarifs
                 </Link>
+                */}
               </div>
             )}
 
