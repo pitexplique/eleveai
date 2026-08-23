@@ -133,8 +133,8 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     objectif:
       "Donner la valeur arrondie à l'unité, au dixième, ou au centième d'un nombre décimal. Déterminer ou connaître la valeur arrondie de certains nombres non décimaux.",
     page: 2,
-    micros: [],
-    note: "Le BO cite π : « il sait que π n'est pas un nombre décimal, et que 3,14 en est la valeur arrondie au centième ».",
+    micros: ["decimal_arrondir"],
+    note: "Le BO cite π : « il sait que π n'est pas un nombre décimal, et que 3,14 en est la valeur arrondie au centième ». Couvert le 23/08/2026, π compris.",
   },
   {
     id: "6e-N-entiers-10",
@@ -143,8 +143,8 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     objectif:
       "Encadrer un nombre décimal par deux nombres décimaux, intercaler un nombre décimal entre deux nombres décimaux.",
     page: 2,
-    micros: [],
-    note: "`entier_encadrer` ne traite que les entiers.",
+    micros: ["decimal_encadrer"],
+    note: "`entier_encadrer` ne traite que les entiers ; `decimal_encadrer` a été ouverte pour ça le 23/08/2026, avec l'intercalation.",
   },
   {
     id: "6e-N-entiers-11",
@@ -161,8 +161,8 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     objectif:
       "Multiplier un nombre entier ou un nombre décimal par 0,1, par 0,01, et par 0,001. Connaître le lien avec la division par 10, 100 et par 1 000.",
     page: 2,
-    micros: [],
-    note: "Le BO demande de MÉMORISER 10 × 0,1 = 1 ; 0,1 × 0,1 = 0,01 ; etc.",
+    micros: ["decimal_multiplier_par_01"],
+    note: "Le BO demande de MÉMORISER 10 × 0,1 = 1 ; 0,1 × 0,1 = 0,01 ; etc. Couvert le 23/08/2026.",
   },
   {
     id: "6e-N-entiers-13",

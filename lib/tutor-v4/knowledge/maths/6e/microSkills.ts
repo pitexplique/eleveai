@@ -64,6 +64,21 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "decimal_nombre",
     prerequis: ["decimal_rang"],
   },
+  // ⛔ AJOUTÉES LE 23/08/2026 — deux objectifs du programme (6e-N-entiers-9 et
+  // 6e-N-entiers-10) que personne ne couvrait. `entier_encadrer` existait, mais
+  // il ne traite que les entiers : en 6e l'encadrement porte sur les décimaux.
+  {
+    id: "decimal_arrondir",
+    label: "Arrondir un nombre décimal",
+    notionId: "decimal_nombre",
+    prerequis: ["decimal_comparer"],
+  },
+  {
+    id: "decimal_encadrer",
+    label: "Encadrer et intercaler des nombres décimaux",
+    notionId: "decimal_nombre",
+    prerequis: ["decimal_comparer"],
+  },
   {
     id: "decimal_defi",
     label: "Défis sur les nombres décimaux",
@@ -91,6 +106,15 @@ export const microSkills: MicroSkillSource[] = [
     label: "Multiplier des nombres décimaux",
     notionId: "decimal_calcul",
     prerequis: ["decimal_additionner"],
+  },
+  // ⛔ AJOUTÉE LE 23/08/2026 (6e-N-entiers-12). Rangée dans le CALCUL et non
+  // dans « Nombres décimaux » : multiplier par 0,1 est une opération, et c'est
+  // le cas particulier le plus utile de `decimal_multiplier`.
+  {
+    id: "decimal_multiplier_par_01",
+    label: "Multiplier par 0,1 · 0,01 · 0,001",
+    notionId: "decimal_calcul",
+    prerequis: ["decimal_multiplier"],
   },
   {
     id: "decimal_diviser_par_entier",

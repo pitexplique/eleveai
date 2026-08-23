@@ -22,6 +22,37 @@ function entierAleatoire(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+/**
+ * Le ZOOM entre deux voisins — la figure des micros « arrondir » et « encadrer ».
+ *
+ * ⚠️ `DroiteGradueeCanvas` enferme son SVG dans un `max-w-[320px]` : au-delà de
+ * cinq ou six graduations, les étiquettes se chevauchent quelle que soit la
+ * largeur du viewBox. On grade donc TRÈS peu — souvent les deux voisins et leur
+ * milieu, qui est exactement ce qui décide de l'arrondi.
+ */
+function droiteZoom(
+  bas: number,
+  haut: number,
+  pas: number,
+  points: { value: number; label?: string }[]
+) {
+  return {
+    kind: "number_line" as const,
+    min: bas,
+    max: haut,
+    step: pas,
+    points,
+    display: {
+      showTicks: true,
+      showValues: true,
+      showPoints: points.length > 0,
+      showPointLabels: points.length > 0,
+      showZero: true,
+    },
+    size: { width: 340, height: 120 },
+  };
+}
+
 export const decimauxBank: TutorBankItemV4[] = [
   // =========================
   // DECIMAL_LIRE_ECRIRE
@@ -1908,6 +1939,665 @@ export const decimauxBank: TutorBankItemV4[] = [
         },
       ];
       const c = cas[Math.floor(Math.random() * cas.length)];
+      return {
+        text: c.q,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: explDecimal(c.r),
+      };
+    },
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // DECIMAL_ARRONDIR — la valeur arrondie à l'unité, au dixième, au centième
+  //
+  // ⛔ OUVERTE LE 23/08/2026 — TROU DU PROGRAMME (6e-N-entiers-9). Le BO
+  // demande « donner la valeur arrondie à l'unité, au dixième, ou au centième
+  // d'un nombre décimal » ET « déterminer ou connaître la valeur arrondie de
+  // certains nombres non décimaux » : aucune micro de 6e ne le travaillait.
+  //
+  // ⭐ ARRONDIR N'EST PAS TRONQUER. Couper après le chiffre voulu donne la
+  // troncature (12,78 → 12,7) ; arrondir demande de regarder le chiffre SUIVANT
+  // et de choisir le plus proche des deux voisins (12,78 → 12,8). C'est la
+  // confusion n°1 du chapitre, et elle a son item.
+  //
+  // ⭐ π EST DANS LE BO, nommément : « il sait que π n'est pas un nombre
+  // décimal, et que 3,14 en est la valeur arrondie au centième ». C'est le seul
+  // endroit de la 6e où l'élève rencontre un nombre dont l'écriture décimale ne
+  // s'arrête jamais.
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    kind: "fixed",
+    id: "decimal_arrondir_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_nombre",
+    microId: "decimal_arrondir",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Donne la valeur arrondie de 12,7 à l'unité.",
+    format: "short",
+    expected: ["13"],
+    comparator: "number_equal",
+    hint: "Entre quels deux entiers se trouve 12,7 ? Duquel est-il le plus proche ?",
+    explanation: explDecimal(
+      "12,7 est compris entre les deux entiers 12 et 13. Il est à 0,7 de 12 et à seulement 0,3 de 13 : le plus proche est 13. La valeur arrondie de 12,7 à l'unité est donc 13."
+    ),
+    tags: ["decimal_nombre", "arrondir", "canvas", "short"],
+    canvas: droiteZoom(12, 13, 0.5, [{ value: 12.7, label: "A" }]),
+  },
+  {
+    kind: "fixed",
+    id: "decimal_arrondir_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_nombre",
+    microId: "decimal_arrondir",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Donne la valeur arrondie de 4,382 au dixième.",
+    format: "short",
+    expected: ["4,4", "4.4", "4,40", "4.40"],
+    comparator: "number_equal",
+    hint: "Les deux dixièmes voisins sont 4,3 et 4,4.",
+    explanation: explDecimal(
+      "4,382 est compris entre les dixièmes 4,3 et 4,4. Pour choisir, on regarde le chiffre des centièmes : c'est 8, donc 8 ou plus, et on monte au dixième supérieur. La valeur arrondie au dixième est 4,4."
+    ),
+    tags: ["decimal_nombre", "arrondir", "canvas", "short"],
+    canvas: droiteZoom(4.3, 4.4, 0.05, [{ value: 4.38, label: "A" }]),
+  },
+  {
+    kind: "fixed",
+    id: "decimal_arrondir_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_nombre",
+    microId: "decimal_arrondir",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Donne la valeur arrondie de 9,146 au centième.",
+    format: "short",
+    expected: ["9,15", "9.15"],
+    comparator: "number_equal",
+    hint: "Les deux centièmes voisins sont 9,14 et 9,15.",
+    explanation: explDecimal(
+      "9,146 est compris entre les centièmes 9,14 et 9,15. Le chiffre des millièmes est 6, donc 5 ou plus : on monte au centième supérieur. La valeur arrondie au centième est 9,15."
+    ),
+    tags: ["decimal_nombre", "arrondir", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "decimal_arrondir_fixed_4",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_nombre",
+    microId: "decimal_arrondir",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Le nombre π vaut 3,141592… et son écriture décimale ne s'arrête jamais. Quelle est sa valeur arrondie au centième ?",
+    format: "qcm",
+    choices: ["3,14", "3,15", "3,1", "3,142"],
+    expected: ["3,14"],
+    comparator: "mcq_exact",
+    hint: "Regarde le chiffre des millièmes de 3,141592…",
+    explanation: explDecimal(
+      "Arrondir au centième, c'est garder deux chiffres après la virgule. Les centièmes voisins sont 3,14 et 3,15 ; le chiffre des millièmes est 1, donc inférieur à 5, et on reste à 3,14. Attention : 3,1 est l'arrondi au DIXIÈME et 3,142 l'arrondi au MILLIÈME — ils répondent à une autre question. Et π n'est pas un nombre décimal : aucune écriture à virgule ne le donne exactement, 3,14 n'en est qu'une valeur approchée."
+    ),
+    tags: ["decimal_nombre", "arrondir", "pi", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "decimal_arrondir_fixed_5",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_nombre",
+    microId: "decimal_arrondir",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Quelle est la valeur arrondie de 3,96 au dixième ?",
+    format: "qcm",
+    choices: ["4", "3,9", "3,10", "3,96"],
+    expected: ["4"],
+    comparator: "mcq_exact",
+    hint: "Le dixième juste au-dessus de 3,9 n'est pas 3,10.",
+    explanation: explDecimal(
+      "Les deux dixièmes voisins de 3,96 sont 3,9 et 4,0. Le chiffre des centièmes est 6, donc 5 ou plus : on monte, et 4,0 s'écrit 4. Le piège est d'écrire « 3,10 » en croyant qu'après 3,9 vient 3,10 : dans la partie décimale on ne compte pas comme avec des entiers, 3,10 vaut 3,1 et se trouve en dessous de 3,9."
+    ),
+    tags: ["decimal_nombre", "arrondir", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "decimal_arrondir_fixed_6",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_nombre",
+    microId: "decimal_arrondir",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pourquoi 12,78 arrondi au dixième donne-t-il 12,8, et non 12,7 ?",
+    format: "qcm",
+    choices: [
+      "parce que 12,78 est plus proche de 12,8 que de 12,7",
+      "parce qu'on enlève simplement les chiffres après le dixième",
+      "parce qu'on arrondit toujours vers le haut",
+      "parce que 8 est le dernier chiffre écrit",
+    ],
+    expected: ["parce que 12,78 est plus proche de 12,8 que de 12,7"],
+    comparator: "mcq_exact",
+    hint: "Compare les deux écarts : 12,78 − 12,7 et 12,8 − 12,78.",
+    explanation: explDecimal(
+      "12,78 − 12,7 = 0,08 alors que 12,8 − 12,78 = 0,02 : 12,8 est bien le plus proche. Couper après le dixième donnerait 12,7 — c'est la TRONCATURE, pas l'arrondi. Et on n'arrondit pas toujours vers le haut : 12,73 s'arrondit en 12,7."
+    ),
+    tags: ["decimal_nombre", "arrondir", "piege", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "decimal_arrondir_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_nombre",
+    microId: "decimal_arrondir",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Repère les deux voisins, puis regarde le chiffre juste après le rang demandé.",
+    tags: ["decimal_nombre", "arrondir", "template"],
+    generate: () => {
+      const rangs = [
+        { nom: "à l'unité", decimales: 0, pas: 1 },
+        { nom: "au dixième", decimales: 1, pas: 0.1 },
+        { nom: "au centième", decimales: 2, pas: 0.01 },
+      ];
+      const r = rangs[entierAleatoire(0, rangs.length - 1)];
+
+      // Le nombre porte toujours au moins un chiffre APRÈS le rang demandé,
+      // sinon il n'y a rien à arrondir.
+      const entier = entierAleatoire(1, 40);
+      const millimes = entierAleatoire(1, 999);
+      const nombre = Number((entier + millimes / 1000).toFixed(3));
+
+      const facteur = Math.pow(10, r.decimales);
+      const arrondi = Number((Math.round(nombre * facteur) / facteur).toFixed(r.decimales));
+      const bas = Number((Math.floor(nombre * facteur) / facteur).toFixed(r.decimales));
+      const haut = Number((bas + r.pas).toFixed(r.decimales));
+      const suivant = Math.floor(nombre * facteur * 10) % 10;
+
+      return {
+        text: `Donne la valeur arrondie de ${formatComma(nombre)} ${r.nom}.`,
+        format: "short",
+        expected: [formatComma(arrondi), String(arrondi)],
+        comparator: "number_equal",
+        explanation: explDecimal(
+          `${formatComma(nombre)} est compris entre ${formatComma(bas)} et ${formatComma(haut)}. Le chiffre juste après le rang demandé est ${suivant} : ${
+            suivant >= 5
+              ? `il vaut 5 ou plus, donc on monte à ${formatComma(haut)}`
+              : `il vaut moins de 5, donc on reste à ${formatComma(bas)}`
+          }. La valeur arrondie est ${formatComma(arrondi)}.`
+        ),
+        canvas: droiteZoom(bas, haut, Number((r.pas / 2).toFixed(4)), [
+          { value: nombre, label: "A" },
+        ]),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "decimal_arrondir_tpl_ouverte",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_nombre",
+    microId: "decimal_arrondir",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Parle des deux voisins et du chiffre qui permet de choisir entre eux.",
+    tags: ["decimal_nombre", "arrondir", "template", "ouverte"],
+    generate: () => {
+      const cas = [
+        {
+          q: "Explique la règle qui permet d'arrondir un nombre décimal à un rang donné.",
+          mots: ["voisins", "proche", "chiffre", "5", "suivant", "rang"],
+          r: "On repère d'abord les deux voisins du nombre à ce rang : pour arrondir 4,382 au dixième, ce sont 4,3 et 4,4. On regarde ensuite le chiffre juste APRÈS le rang demandé — ici le 8 des centièmes. S'il vaut 5 ou plus, le nombre est plus proche du voisin du haut et on monte ; s'il vaut moins de 5, on reste au voisin du bas. Arrondir, c'est choisir le plus proche des deux.",
+        },
+        {
+          q: "Quelle est la différence entre tronquer un nombre au dixième et l'arrondir au dixième ?",
+          mots: ["coupe", "tronque", "supprime", "proche", "arrondi", "12,8", "12,7"],
+          r: "Tronquer, c'est couper : on supprime tout ce qui suit le rang, et 12,78 devient 12,7. Arrondir, c'est choisir le plus proche des deux voisins, et 12,78 devient 12,8 parce qu'il n'est qu'à 0,02 de 12,8 contre 0,08 de 12,7. La troncature descend toujours ; l'arrondi peut monter ou descendre.",
+        },
+        {
+          q: "Explique pourquoi on dit que 3,14 est une valeur arrondie de π, et pas la valeur de π.",
+          mots: ["jamais", "infini", "approché", "approchee", "décimal", "decimal", "pas exact"],
+          r: "L'écriture décimale de π ne s'arrête jamais : 3,141592… continue sans fin et sans se répéter. Aucune écriture à virgule ne peut donc donner π exactement — π n'est pas un nombre décimal. 3,14 est le nombre décimal à deux chiffres après la virgule le plus proche de π : c'est une valeur approchée, utile pour calculer, mais différente de π.",
+        },
+        {
+          q: "Un magasin annonce un article à 19,99 €. Explique ce que donne l'arrondi à l'unité, et pourquoi ce prix est écrit ainsi.",
+          mots: ["20", "proche", "unité", "unite", "0,01", "centime"],
+          r: "19,99 est compris entre 19 et 20, et il n'est qu'à 0,01 de 20 : arrondi à l'unité, il vaut 20 €. Le magasin écrit 19,99 parce que le premier chiffre lu est un 1 et non un 2, ce qui donne l'impression d'un prix bien plus bas — alors que la différence réelle est d'un centime.",
+        },
+      ];
+      const c = cas[entierAleatoire(0, cas.length - 1)];
+      return {
+        text: c.q,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: explDecimal(c.r),
+      };
+    },
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // DECIMAL_ENCADRER — encadrer et intercaler des nombres décimaux
+  //
+  // ⛔ OUVERTE LE 23/08/2026 — TROU DU PROGRAMME (6e-N-entiers-10). Le coach
+  // avait `entier_encadrer`, qui ne traite que les ENTIERS ; l'encadrement au
+  // programme de 6e porte sur les décimaux, et personne ne le couvrait.
+  //
+  // ⭐ INTERCALER EST LA VRAIE NOUVEAUTÉ. Entre deux entiers consécutifs il n'y
+  // a rien ; entre deux décimaux il y en a toujours une infinité. C'est ce qui
+  // sépare définitivement les décimaux des entiers dans la tête de l'élève, et
+  // c'est ce que le BO vise en demandant d'intercaler. L'erreur « il n'y a rien
+  // entre 2,5 et 2,6 » a donc son item.
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    kind: "fixed",
+    id: "decimal_encadrer_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_nombre",
+    microId: "decimal_encadrer",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Complète l'encadrement à l'unité : … < 7,38 < 8. Quel nombre manque ?",
+    format: "short",
+    expected: ["7"],
+    comparator: "number_equal",
+    hint: "C'est la partie entière de 7,38.",
+    explanation: explDecimal(
+      "La partie entière de 7,38 est 7, et l'entier suivant est 8 : on écrit 7 < 7,38 < 8. Encadrer à l'unité, c'est trouver les deux entiers consécutifs entre lesquels le nombre se place."
+    ),
+    tags: ["decimal_nombre", "encadrer", "canvas", "short"],
+    canvas: droiteZoom(7, 8, 0.5, [{ value: 7.38, label: "A" }]),
+  },
+  {
+    kind: "fixed",
+    id: "decimal_encadrer_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_nombre",
+    microId: "decimal_encadrer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Complète l'encadrement au dixième : 7,3 < 7,38 < … . Quel nombre manque ?",
+    format: "short",
+    expected: ["7,4", "7.4", "7,40", "7.40"],
+    comparator: "number_equal",
+    hint: "Après 7,3 vient le dixième suivant, pas le centième suivant.",
+    explanation: explDecimal(
+      "Encadrer au dixième, c'est trouver les deux dixièmes consécutifs qui entourent le nombre. Après 7,3 vient 7,4 : on écrit 7,3 < 7,38 < 7,4. L'encadrement au dixième est plus serré que celui à l'unité — il donne une meilleure idée de la position du nombre."
+    ),
+    tags: ["decimal_nombre", "encadrer", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "decimal_encadrer_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_nombre",
+    microId: "decimal_encadrer",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Intercale un nombre décimal entre 4,7 et 4,8.",
+    format: "short",
+    expected: [
+      "4,75",
+      "4.75",
+      "4,71",
+      "4,72",
+      "4,73",
+      "4,74",
+      "4,76",
+      "4,77",
+      "4,78",
+      "4,79",
+      "4,705",
+      "4,725",
+      "4,755",
+    ],
+    comparator: "number_equal",
+    hint: "Ajoute un chiffre de plus après la virgule.",
+    explanation: explDecimal(
+      "4,7 s'écrit aussi 4,70 et 4,8 s'écrit 4,80. Entre 70 centièmes et 80 centièmes, il y a 4,71 ; 4,72 ; … ; 4,79 : neuf réponses possibles rien qu'au centième, et bien d'autres au millième. Le plus simple est de prendre le milieu, 4,75."
+    ),
+    tags: ["decimal_nombre", "intercaler", "canvas", "short"],
+    canvas: droiteZoom(4.7, 4.8, 0.01, []),
+  },
+  {
+    kind: "fixed",
+    id: "decimal_encadrer_fixed_4",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_nombre",
+    microId: "decimal_encadrer",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Combien de nombres décimaux peut-on intercaler entre 2,5 et 2,6 ?",
+    format: "qcm",
+    choices: ["une infinité", "aucun, ils se suivent", "un seul : 2,55", "exactement neuf"],
+    expected: ["une infinité"],
+    comparator: "mcq_exact",
+    hint: "Après les centièmes viennent les millièmes, puis les dix-millièmes…",
+    explanation: explDecimal(
+      "Au centième, on en trouve déjà neuf : 2,51 à 2,59. Mais on peut continuer au millième — 2,551 ; 2,552 ; … — puis au dix-millième, sans jamais s'arrêter : il y en a une INFINITÉ. C'est la grande différence avec les entiers, où 2 et 3 n'ont rien entre eux."
+    ),
+    tags: ["decimal_nombre", "intercaler", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "decimal_encadrer_fixed_5",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_nombre",
+    microId: "decimal_encadrer",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Lequel de ces encadrements de 5,206 est CORRECT ?",
+    format: "qcm",
+    choices: [
+      "5,20 < 5,206 < 5,21",
+      "5,20 < 5,206 < 5,26",
+      "5,2 < 5,206 < 5,3",
+      "5,206 < 5,21 < 5,22",
+    ],
+    expected: ["5,20 < 5,206 < 5,21"],
+    comparator: "mcq_exact",
+    hint: "Un encadrement au centième utilise deux centièmes qui se suivent.",
+    explanation: explDecimal(
+      "5,206 se place entre les centièmes 5,20 et 5,21 : c'est l'encadrement au centième, le plus serré des quatre. « 5,20 < 5,206 < 5,26 » est vrai mais bien plus large, ce n'est pas un encadrement au centième. « 5,2 < 5,206 < 5,3 » est l'encadrement au dixième. La dernière ligne n'encadre rien : 5,206 y est en dehors."
+    ),
+    tags: ["decimal_nombre", "encadrer", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "decimal_encadrer_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_nombre",
+    microId: "decimal_encadrer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche les deux voisins consécutifs au rang demandé.",
+    tags: ["decimal_nombre", "encadrer", "template"],
+    generate: () => {
+      const rangs = [
+        { nom: "à l'unité", decimales: 0, pas: 1 },
+        { nom: "au dixième", decimales: 1, pas: 0.1 },
+      ];
+      const r = rangs[entierAleatoire(0, rangs.length - 1)];
+
+      const entier = entierAleatoire(1, 40);
+      const centiemes = entierAleatoire(1, 99);
+      const nombre = Number((entier + centiemes / 100).toFixed(2));
+
+      const facteur = Math.pow(10, r.decimales);
+      const bas = Number((Math.floor(nombre * facteur) / facteur).toFixed(r.decimales));
+      const haut = Number((bas + r.pas).toFixed(r.decimales));
+
+      return {
+        text: `Complète l'encadrement ${r.nom} : ${formatComma(bas)} < ${formatComma(nombre)} < … . Quel nombre manque ?`,
+        format: "short",
+        expected: [formatComma(haut), String(haut)],
+        comparator: "number_equal",
+        explanation: explDecimal(
+          `Encadrer ${r.nom}, c'est trouver les deux voisins consécutifs à ce rang. Après ${formatComma(bas)} vient ${formatComma(haut)} : on écrit ${formatComma(bas)} < ${formatComma(nombre)} < ${formatComma(haut)}.`
+        ),
+        canvas: droiteZoom(bas, haut, Number((r.pas / 2).toFixed(4)), [
+          { value: nombre, label: "A" },
+        ]),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "decimal_encadrer_tpl_ouverte",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_nombre",
+    microId: "decimal_encadrer",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Compare ce qui se passe entre deux entiers et entre deux décimaux.",
+    tags: ["decimal_nombre", "encadrer", "template", "ouverte"],
+    generate: () => {
+      const cas = [
+        {
+          q: "Explique pourquoi on peut toujours intercaler un nombre décimal entre deux nombres décimaux, alors qu'on ne peut rien intercaler entre 6 et 7 chez les entiers.",
+          mots: ["infinité", "infinite", "chiffre", "virgule", "milieu", "centième", "centieme"],
+          r: "Entre 6 et 7 il n'y a aucun ENTIER : les entiers se suivent un par un. Avec les décimaux, il suffit d'ajouter un chiffre après la virgule pour se glisser entre deux nombres : entre 2,5 et 2,6 il y a 2,55, et entre 2,55 et 2,56 il y a 2,555. On peut recommencer indéfiniment : il y en a une infinité.",
+        },
+        {
+          q: "Explique la différence entre encadrer un nombre à l'unité et l'encadrer au centième.",
+          mots: ["serré", "serre", "précis", "precis", "large", "voisins", "rang"],
+          r: "Les deux donnent deux voisins entre lesquels le nombre se place, mais pas au même rang. À l'unité, 5,206 est entre 5 et 6 : l'écart est de 1, l'encadrement est large. Au centième, il est entre 5,20 et 5,21 : l'écart n'est plus que de 0,01, l'encadrement est cent fois plus serré et situe bien mieux le nombre.",
+        },
+        {
+          q: "Un élève écrit « 3,9 < 3,10 » parce que 10 est plus grand que 9. Explique son erreur.",
+          mots: ["dixième", "dixieme", "centième", "centieme", "3,1", "rang", "partie décimale"],
+          r: "Il lit la partie décimale comme un nombre entier, alors que chaque chiffre y a un rang. 3,10 signifie 3 unités, 1 dixième et 0 centième : c'est 3,1, qui est plus PETIT que 3,9. Pour comparer, on compare d'abord les parties entières, puis les dixièmes, puis les centièmes — 1 dixième contre 9 dixièmes, donc 3,10 < 3,9.",
+        },
+      ];
+      const c = cas[entierAleatoire(0, cas.length - 1)];
+      return {
+        text: c.q,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: explDecimal(c.r),
+      };
+    },
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // DECIMAL_MULTIPLIER_PAR_01 — multiplier par 0,1 · 0,01 · 0,001
+  //
+  // ⛔ OUVERTE LE 23/08/2026 — TROU DU PROGRAMME (6e-N-entiers-12) : « multiplier
+  // un nombre entier ou un nombre décimal par 0,1, par 0,01, et par 0,001 »,
+  // « connaître le lien avec la division par 10, 100 et par 1 000 ».
+  //
+  // ⭐ RANGÉE DANS `decimal_calcul`, PAS DANS `decimal_nombre` : c'est un
+  // calcul, pas une façon de lire un nombre. Elle vient juste après
+  // `decimal_multiplier`, dont elle est le cas particulier le plus utile.
+  //
+  // ⭐ LES AUTOMATISMES DU BO SONT ICI, mot pour mot : « l'élève restitue de
+  // manière automatique les équivalences 1/10 = 0,1 ; 1/100 = 0,01 ;
+  // 1/1000 = 0,001 ». Multiplier par 0,1, c'est donc prendre UN DIXIÈME —
+  // exactement diviser par 10.
+  //
+  // ⚠️ L'OBSTACLE EST UNE CROYANCE, pas une technique : « multiplier rend plus
+  // grand » est vrai depuis le CP et devient faux ici. Deux items l'attaquent
+  // de face.
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    kind: "fixed",
+    id: "decimal_mult01_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_calcul",
+    microId: "decimal_multiplier_par_01",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Calcule : 37 × 0,1",
+    format: "short",
+    expected: ["3,7", "3.7", "3,70", "3.70"],
+    comparator: "number_equal",
+    hint: "0,1 c'est un dixième : prendre 0,1 fois un nombre, c'est en prendre le dixième.",
+    explanation: explDecimal(
+      "0,1 est l'écriture décimale de 1/10. Multiplier par 0,1, c'est donc prendre le dixième du nombre, autrement dit le diviser par 10 : 37 ÷ 10 = 3,7. Les chiffres ne changent pas, ils reculent d'un rang."
+    ),
+    tags: ["decimal_calcul", "multiplier_01", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "decimal_mult01_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_calcul",
+    microId: "decimal_multiplier_par_01",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Calcule : 5,2 × 0,01",
+    format: "short",
+    expected: ["0,052", "0.052"],
+    comparator: "number_equal",
+    hint: "0,01 c'est un centième : on divise par 100.",
+    explanation: explDecimal(
+      "0,01 vaut 1/100. Multiplier par 0,01, c'est diviser par 100 : 5,2 ÷ 100 = 0,052. Les chiffres 5 et 2 reculent de deux rangs — le 5 passe des unités aux centièmes."
+    ),
+    tags: ["decimal_calcul", "multiplier_01", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "decimal_mult01_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_calcul",
+    microId: "decimal_multiplier_par_01",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Multiplier un nombre par 0,001 revient à…",
+    format: "qcm",
+    choices: [
+      "le diviser par 1 000",
+      "le diviser par 100",
+      "le multiplier par 1 000",
+      "lui ajouter trois zéros",
+    ],
+    expected: ["le diviser par 1 000"],
+    comparator: "mcq_exact",
+    hint: "Combien vaut 0,001 sous forme de fraction ?",
+    explanation: explDecimal(
+      "0,001 est l'écriture décimale de 1/1000. Prendre 0,001 fois un nombre, c'est en prendre un millième, donc le diviser par 1 000 : 4 × 0,001 = 0,004. Multiplier par 0,001 REND PLUS PETIT — c'est l'inverse de multiplier par 1 000."
+    ),
+    tags: ["decimal_calcul", "multiplier_01", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "decimal_mult01_fixed_4",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_calcul",
+    microId: "decimal_multiplier_par_01",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Calcule : 0,1 × 0,1",
+    format: "qcm",
+    choices: ["0,01", "0,2", "0,1", "1"],
+    expected: ["0,01"],
+    comparator: "mcq_exact",
+    hint: "Un dixième d'un dixième, c'est quoi ?",
+    explanation: explDecimal(
+      "0,1 × 0,1, c'est prendre le dixième de 0,1, soit 0,1 ÷ 10 = 0,01. Autrement dit, un dixième d'un dixième est un centième : 1/10 × 1/10 = 1/100. Le piège est de répondre 0,2 en ADDITIONNANT les deux nombres au lieu de les multiplier."
+    ),
+    tags: ["decimal_calcul", "multiplier_01", "automatisme", "piege", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "decimal_mult01_fixed_5",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_calcul",
+    microId: "decimal_multiplier_par_01",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Sans poser le calcul : le résultat de 250 × 0,1 est-il plus grand ou plus petit que 250 ?",
+    format: "qcm",
+    choices: [
+      "plus petit, car on prend seulement un dixième de 250",
+      "plus grand, car une multiplication agrandit toujours",
+      "égal à 250, car multiplier par 0,1 ne change rien",
+      "plus grand, car 250 est un grand nombre",
+    ],
+    expected: ["plus petit, car on prend seulement un dixième de 250"],
+    comparator: "mcq_exact",
+    hint: "0,1 est plus petit que 1.",
+    explanation: explDecimal(
+      "250 × 0,1 = 25, dix fois moins que 250. Multiplier par un nombre PLUS PETIT QUE 1 rend le résultat plus petit : c'est vrai pour 0,1 comme pour 0,5, qui donne la moitié. La règle « multiplier agrandit » n'était valable que tant qu'on multipliait par des entiers supérieurs à 1."
+    ),
+    tags: ["decimal_calcul", "multiplier_01", "piege", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "decimal_mult01_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_calcul",
+    microId: "decimal_multiplier_par_01",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Remplace la multiplication par la division correspondante.",
+    tags: ["decimal_calcul", "multiplier_01", "template"],
+    generate: () => {
+      const facteurs = [
+        { texte: "0,1", diviseur: 10, nom: "un dixième", fraction: "1/10" },
+        { texte: "0,01", diviseur: 100, nom: "un centième", fraction: "1/100" },
+        { texte: "0,001", diviseur: 1000, nom: "un millième", fraction: "1/1000" },
+      ];
+      const f = facteurs[entierAleatoire(0, facteurs.length - 1)];
+
+      // Une fois sur deux un entier, une fois sur deux un décimal : le BO
+      // demande explicitement les deux.
+      const avecVirgule = Math.random() < 0.5;
+      const nombre = avecVirgule
+        ? Number((entierAleatoire(11, 999) / 10).toFixed(1))
+        : entierAleatoire(2, 9999);
+
+      const resultat = Number((nombre / f.diviseur).toFixed(6));
+
+      return {
+        text: `Calcule : ${formatComma(nombre)} × ${f.texte}`,
+        format: "short",
+        expected: [formatComma(resultat), String(resultat)],
+        comparator: "number_equal",
+        explanation: explDecimal(
+          `${f.texte} est l'écriture décimale de ${f.fraction}. Multiplier par ${f.texte}, c'est prendre ${f.nom} du nombre, donc le diviser par ${f.diviseur} : ${formatComma(nombre)} ÷ ${f.diviseur} = ${formatComma(resultat)}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "decimal_mult01_tpl_ouverte",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "decimal_calcul",
+    microId: "decimal_multiplier_par_01",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Passe par la fraction : 0,1 c'est 1/10.",
+    tags: ["decimal_calcul", "multiplier_01", "template", "ouverte"],
+    generate: () => {
+      const cas = [
+        {
+          q: "Explique pourquoi multiplier par 0,01 revient exactement à diviser par 100.",
+          mots: ["centième", "centieme", "1/100", "fraction", "divise", "100"],
+          r: "0,01 est l'écriture décimale de la fraction 1/100. Multiplier un nombre par 1/100, c'est en prendre un centième — c'est-à-dire le partager en 100 parts égales et en garder une, ce qui est exactement une division par 100. Ainsi 5,2 × 0,01 = 5,2 ÷ 100 = 0,052.",
+        },
+        {
+          q: "« Quand on multiplie, le résultat est toujours plus grand. » Explique pourquoi cette phrase devient fausse en 6e.",
+          mots: ["plus petit", "1", "0,1", "inférieur", "inferieur", "dixième", "dixieme"],
+          r: "Elle n'était vraie que parce qu'on ne multipliait que par des entiers supérieurs à 1. Dès qu'on multiplie par un nombre plus petit que 1, le résultat devient plus petit : 250 × 0,1 = 25, et 8 × 0,5 = 4. Multiplier par 1 ne change rien : 1 est la frontière entre les facteurs qui agrandissent et ceux qui rapetissent.",
+        },
+        {
+          q: "Explique ce qui arrive aux chiffres d'un nombre quand on le multiplie par 0,1, en parlant des rangs.",
+          mots: ["rang", "recule", "dixième", "dixieme", "droite", "virgule", "unité", "unite"],
+          r: "Chaque chiffre recule d'un rang : ce qui valait des unités ne vaut plus que des dixièmes, ce qui valait des dixièmes ne vaut plus que des centièmes. Les chiffres eux-mêmes ne changent pas, c'est leur position qui change — 37 × 0,1 donne 3,7, avec les mêmes 3 et 7. On dit souvent « la virgule se déplace », mais ce sont les chiffres qui changent de rang.",
+        },
+        {
+          q: "Un élève écrit « 4 × 0,001 = 4 000 ». Explique son erreur et donne le bon résultat.",
+          mots: ["millième", "millieme", "0,004", "divise", "1 000", "plus petit"],
+          r: "Il a vu les trois zéros de 0,001 et a cru qu'il fallait les ajouter au nombre, comme pour une multiplication par 1 000. Mais 0,001 vaut 1/1000, il est bien plus PETIT que 1 : multiplier par lui divise par 1 000. Le bon résultat est 4 ÷ 1 000 = 0,004, soit quatre millièmes.",
+        },
+      ];
+      const c = cas[entierAleatoire(0, cas.length - 1)];
       return {
         text: c.q,
         format: "open",
