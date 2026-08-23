@@ -503,10 +503,17 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
-        "id": "aire_surface",
-        "label": "Aires",
+        "id": "aire_unite",
+        "label": "Comprendre l'aire et ses unités",
         "prerequis": [
           "aire_perimetre"
+        ]
+      },
+      {
+        "id": "aire_surface",
+        "label": "Calculer une aire",
+        "prerequis": [
+          "aire_unite"
         ]
       },
       {

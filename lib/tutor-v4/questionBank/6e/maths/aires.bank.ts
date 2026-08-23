@@ -21,6 +21,30 @@ function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+/**
+ * LE CARRÉ DÉCOUPÉ EN 100 — la figure qui remplace le tableau de conversion.
+ *
+ * ⛔ Le BO 6e : « le recours à un tableau de conversion est déconseillé à ce
+ * stade ». Ce qu'il fait verbaliser à la place, c'est justement ce dessin :
+ * 1 dm² = 1 dm × 1 dm = 10 cm × 10 cm = 100 cm². Ici la figure EST la méthode,
+ * pas une décoration.
+ *
+ * Sans case colorée, on compte les cent carrés ; avec une seule, on lit
+ * « 1 cm² est le centième de 1 dm² ».
+ */
+function carreDecoupe(casesColorees: [number, number][]) {
+  return {
+    kind: "figure_libre" as const,
+    grid: { rows: 10, cols: 10, filledCells: casesColorees },
+    display: {
+      showGrid: true,
+      showFilled: casesColorees.length > 0,
+      showPerimeter: true,
+    },
+    size: { cellSize: 22, padding: 14 },
+  };
+}
+
 function expl(calcul: string) {
   return (
     "Définition : une aire mesure la surface occupée par une figure.\n\n" +
@@ -40,7 +64,7 @@ export const airesBank: TutorBankItemV4[] = [
     id: "aire_comprendre_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aire_surface",
+    notionId: "aire_unite",
     microId: "aire_comprendre",
     difficulty: 1,
     theme: "neutral",
@@ -56,14 +80,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("L’aire mesure la surface occupée par une figure, c’est-à-dire tout l’intérieur de la figure.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aire_surface", "comprendre", "qcm"],
+    tags: ["aire_unite", "comprendre", "qcm"],
   },
   {
     kind: "fixed",
     id: "aire_comprendre_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aire_surface",
+    notionId: "aire_unite",
     microId: "aire_comprendre",
     difficulty: 1,
     theme: "neutral",
@@ -79,14 +103,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Une aire se mesure avec des unités carrées. Par exemple, on utilise cm² pour mesurer une surface.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aire_surface", "comprendre", "qcm"],
+    tags: ["aire_unite", "comprendre", "qcm"],
   },
   {
     kind: "fixed",
     id: "aire_comprendre_fixed_3",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aire_surface",
+    notionId: "aire_unite",
     microId: "aire_comprendre",
     difficulty: 2,
     theme: "neutral",
@@ -102,14 +126,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("15 cm est une longueur, 15 cm³ un volume, 15 kg une masse. Une aire s’écrit ici 15 cm².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aire_surface", "comprendre", "qcm"],
+    tags: ["aire_unite", "comprendre", "qcm"],
   },
   {
     kind: "fixed",
     id: "aire_comprendre_reunion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aire_surface",
+    notionId: "aire_unite",
     microId: "aire_comprendre",
     difficulty: 2,
     theme: "reunion",
@@ -125,14 +149,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("La surface d’un jardin est une aire. On la mesure donc en mètres carrés, notés m².") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aire_surface", "comprendre", "reunion", "qcm"],
+    tags: ["aire_unite", "comprendre", "reunion", "qcm"],
   },
   {
     kind: "fixed",
     id: "aire_comprendre_confusion_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aire_surface",
+    notionId: "aire_unite",
     microId: "aire_comprendre",
     difficulty: 3,
     theme: "neutral",
@@ -148,7 +172,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Pour un rectangle de 5 cm sur 4 cm, l’aire vaut 5 × 4 = 20 cm². Le périmètre vaudrait 18 cm.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aire_surface", "comprendre", "confusion", "qcm"],
+    tags: ["aire_unite", "comprendre", "confusion", "qcm"],
   },
 
   // =========================
@@ -159,7 +183,7 @@ export const airesBank: TutorBankItemV4[] = [
     id: "aire_compter_fixed_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aire_surface",
+    notionId: "aire_unite",
     microId: "aire_compter",
     difficulty: 1,
     theme: "neutral",
@@ -174,14 +198,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Quand on mesure une aire par comptage, on compte les carreaux unités. Ici, 6 carreaux donnent une aire de 6 unités d’aire.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aire_surface", "compter"],
+    tags: ["aire_unite", "compter"],
   },
   {
     kind: "fixed",
     id: "aire_compter_fixed_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aire_surface",
+    notionId: "aire_unite",
     microId: "aire_compter",
     difficulty: 2,
     theme: "neutral",
@@ -196,14 +220,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("L’aire d’une figure mesurée sur quadrillage est le nombre de carreaux unités qu’elle recouvre. Ici, cela fait 12.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aire_surface", "compter"],
+    tags: ["aire_unite", "compter"],
   },
   {
     kind: "fixed",
     id: "aire_compter_qcm_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aire_surface",
+    notionId: "aire_unite",
     microId: "aire_compter",
     difficulty: 2,
     theme: "neutral",
@@ -219,14 +243,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Chaque carreau unité compte pour 1 unité d’aire. Avec 9 carreaux, l’aire est donc 9.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aire_surface", "compter", "qcm"],
+    tags: ["aire_unite", "compter", "qcm"],
   },
   {
     kind: "fixed",
     id: "aire_compter_qcm_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aire_surface",
+    notionId: "aire_unite",
     microId: "aire_compter",
     difficulty: 3,
     theme: "neutral",
@@ -242,14 +266,14 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("Il y a 3 rangées de 4 carreaux, donc 3 × 4 = 12 carreaux unités. L’aire est 12.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aire_surface", "compter", "qcm"],
+    tags: ["aire_unite", "compter", "qcm"],
   },
   {
     kind: "fixed",
     id: "aire_compter_canvas_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aire_surface",
+    notionId: "aire_unite",
     microId: "aire_compter",
     difficulty: 3,
     theme: "neutral",
@@ -264,7 +288,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("La figure recouvre 5 carreaux unités. Son aire vaut donc 5 unités d’aire.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aire_surface", "compter", "canvas"],
+    tags: ["aire_unite", "compter", "canvas"],
     canvas: {
       kind: "figure_libre",
       grid: {
@@ -289,7 +313,7 @@ export const airesBank: TutorBankItemV4[] = [
     id: "aire_compter_canvas_2",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aire_surface",
+    notionId: "aire_unite",
     microId: "aire_compter",
     difficulty: 4,
     theme: "neutral",
@@ -305,7 +329,7 @@ export const airesBank: TutorBankItemV4[] = [
       "Calcul : " +
       ("La figure recouvre 6 carreaux unités. Son aire vaut donc 6 unités d’aire.") +
       "\n\nConclusion : on garde la réponse obtenue.",
-    tags: ["aire_surface", "compter", "canvas", "qcm"],
+    tags: ["aire_unite", "compter", "canvas", "qcm"],
     canvas: {
       kind: "figure_libre",
       grid: {
@@ -1165,12 +1189,12 @@ export const airesBank: TutorBankItemV4[] = [
     id: "aire_comprendre_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aire_surface",
+    notionId: "aire_unite",
     microId: "aire_comprendre",
     difficulty: 1,
     theme: "neutral",
     hint: "Une aire se mesure en unités carrées.",
-    tags: ["aire_surface", "comprendre", "template"],
+    tags: ["aire_unite", "comprendre", "template"],
     generate: () => {
       return {
         text: "Quelle unité est adaptée pour mesurer une aire ?",
@@ -1196,12 +1220,12 @@ export const airesBank: TutorBankItemV4[] = [
     id: "aire_compter_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aire_surface",
+    notionId: "aire_unite",
     microId: "aire_compter",
     difficulty: 2,
     theme: "neutral",
     hint: "Compte les carreaux unités.",
-    tags: ["aire_surface", "compter", "template"],
+    tags: ["aire_unite", "compter", "template"],
     generate: () => {
       const n = randomInt(4, 16);
       return {
@@ -1222,12 +1246,12 @@ export const airesBank: TutorBankItemV4[] = [
     id: "aire_compter_qcm_tpl_1",
     niveau: "6e",
     matiere: "maths",
-    notionId: "aire_surface",
+    notionId: "aire_unite",
     microId: "aire_compter",
     difficulty: 3,
     theme: "neutral",
     hint: "Multiplie les rangées par les carreaux de chaque rangée.",
-    tags: ["aire_surface", "compter", "qcm", "template"],
+    tags: ["aire_unite", "compter", "qcm", "template"],
     generate: () => {
       const a = randomInt(2, 4);
       const b = randomInt(3, 6);
@@ -1658,40 +1682,40 @@ export const airesBank: TutorBankItemV4[] = [
   // ========== TOP-UP — AIRE_COMPRENDRE ==========
   {
     kind: "fixed", id: "aire_comprendre_topup_1", niveau: "6e", matiere: "maths",
-    notionId: "aire_surface", microId: "aire_comprendre", difficulty: 1, theme: "neutral",
+    notionId: "aire_unite", microId: "aire_comprendre", difficulty: 1, theme: "neutral",
     text: "Le périmètre mesure le contour d’une figure. Que mesure l’aire ?",
     format: "qcm", choices: ["la surface", "le contour", "la hauteur", "le nombre de sommets"],
     expected: ["la surface"], comparator: "mcq_exact",
     hint: "L’aire concerne l’intérieur de la figure.",
     explanation: expl("L’aire mesure la surface, c’est-à-dire la place occupée à l’intérieur de la figure, contrairement au périmètre qui mesure le contour."),
-    tags: ["aire_surface", "comprendre", "qcm"],
+    tags: ["aire_unite", "comprendre", "qcm"],
   },
   {
     kind: "fixed", id: "aire_comprendre_topup_2", niveau: "6e", matiere: "maths",
-    notionId: "aire_surface", microId: "aire_comprendre", difficulty: 1, theme: "neutral",
+    notionId: "aire_unite", microId: "aire_comprendre", difficulty: 1, theme: "neutral",
     text: "Quelle unité convient pour mesurer l’aire d’un terrain de football ?",
     format: "qcm", choices: ["m²", "m", "m³", "kg"], expected: ["m²"], comparator: "mcq_exact",
     hint: "Une aire se mesure en unités carrées.",
     explanation: expl("Une aire se mesure en unités carrées. Pour une grande surface comme un terrain, on utilise le mètre carré (m²)."),
-    tags: ["aire_surface", "comprendre", "qcm"],
+    tags: ["aire_unite", "comprendre", "qcm"],
   },
   {
     kind: "fixed", id: "aire_comprendre_topup_3", niveau: "6e", matiere: "maths",
-    notionId: "aire_surface", microId: "aire_comprendre", difficulty: 2, theme: "neutral",
+    notionId: "aire_unite", microId: "aire_comprendre", difficulty: 2, theme: "neutral",
     text: "« 15 cm² » est une mesure de…",
     format: "qcm", choices: ["aire", "longueur", "masse", "durée"], expected: ["aire"], comparator: "mcq_exact",
     hint: "Le « ² » indique une unité carrée.",
     explanation: expl("L’unité cm² (centimètre carré) est une unité d’aire. « 15 cm² » est donc une mesure d’aire."),
-    tags: ["aire_surface", "comprendre", "qcm"],
+    tags: ["aire_unite", "comprendre", "qcm"],
   },
   {
     kind: "fixed", id: "aire_comprendre_topup_4", niveau: "6e", matiere: "maths",
-    notionId: "aire_surface", microId: "aire_comprendre", difficulty: 2, theme: "neutral",
+    notionId: "aire_unite", microId: "aire_comprendre", difficulty: 2, theme: "neutral",
     text: "Un carreau mesure 1 cm². Une figure recouvre exactement 12 carreaux. Quelle est son aire ?",
     format: "short", expected: ["12"], comparator: "number_equal",
     hint: "Chaque carreau vaut 1 cm².",
     explanation: expl("On compte les carreaux : 12 carreaux de 1 cm² donnent une aire de 12 cm²."),
-    tags: ["aire_surface", "comprendre", "carreaux"],
+    tags: ["aire_unite", "comprendre", "carreaux"],
   },
 
   // ========== TOP-UP — AIRE_CARRE ==========
@@ -1867,5 +1891,250 @@ export const airesBank: TutorBankItemV4[] = [
     hint: "Calcule d’abord l’aire du sol.",
     explanation: expl("L’aire du sol est 5 × 3 = 15 m². Chaque dalle couvre 1 m², il faut donc 15 dalles."),
     tags: ["aire_surface", "probleme"],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // AIRE_CONVERTIR — les conversions d'aire
+  //
+  // ⛔ OUVERTE LE 23/08/2026 — TROU DU PROGRAMME (6e-GM-aires-1, « effectuer des
+  // conversions d'aire »). C'est l'un des trois SEULS objectifs d'apprentissage
+  // du chapitre « Les aires » en 6e, avec la formule et le calcul.
+  //
+  // ⛔⛔ DEUX BORNES DU BO, ET ELLES SONT STRICTES :
+  //   1. UNIQUEMENT m² ↔ dm² et dm² ↔ cm². « Les autres conversions d'aire ne
+  //      figurent pas au programme » — donc pas de cm² ↔ m², pas de km², pas de
+  //      mm² en conversion. Aucun item de cette micro n'en propose.
+  //   2. « Le recours à un tableau de conversion est DÉCONSEILLÉ à ce stade. »
+  //      La figure remplace donc le tableau : un carré de 1 dm de côté découpé
+  //      en 100 carrés de 1 cm de côté. C'est la méthode, pas une illustration.
+  //
+  // ⭐ LA DÉMONSTRATION EST DANS LE BO, mot pour mot, et elle tient en une ligne :
+  //   1 dm² = 1 dm × 1 dm = 10 cm × 10 cm = 10 × 10 cm² = 100 cm².
+  // Le côté est multiplié par 10, donc l'aire par 10 × 10 = 100. Un élève qui a
+  // vu ce calcul n'a plus besoin de retenir un tableau — il le refabrique.
+  //
+  // ⚠️ L'ERREUR ATTENDUE EST ×10, importée des longueurs, où elle est juste.
+  // Elle a son item, et le carré découpé la réfute d'un regard.
+  //
+  // ⚠️ mm² ET km² SE CONNAISSENT SANS SE CONVERTIR : le BO demande que l'élève
+  // sache que 1 mm² est l'aire d'un carré de 1 mm de côté et 1 km² celle d'un
+  // carré de 1 km de côté. Un item le pose, et il ne demande aucune conversion.
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    kind: "fixed",
+    id: "aire_convertir_fixed_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "aire_unite",
+    microId: "aire_convertir",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un carré de 1 dm de côté est découpé en carrés de 1 cm de côté. Combien en obtient-on ?",
+    format: "short",
+    expected: ["100"],
+    comparator: "number_equal",
+    hint: "1 dm = 10 cm : compte les rangées, puis les carrés par rangée.",
+    explanation: expl(
+      "1 dm vaut 10 cm, donc le carré mesure 10 cm sur 10 cm : il contient 10 rangées de 10 carrés, soit 10 × 10 = 100 carrés de 1 cm². On écrit 1 dm² = 1 dm × 1 dm = 10 cm × 10 cm = 100 cm². Le côté a été multiplié par 10, mais l'aire par 100 — parce qu'on multiplie DEUX longueurs."
+    ),
+    tags: ["aire_unite", "convertir", "canvas", "short"],
+    canvas: carreDecoupe([]),
+  },
+  {
+    kind: "fixed",
+    id: "aire_convertir_fixed_2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "aire_unite",
+    microId: "aire_convertir",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Le carré ci-dessous mesure 1 dm de côté, et la case colorée 1 cm de côté. Quelle fraction du grand carré la case colorée représente-t-elle ?",
+    format: "qcm",
+    choices: ["un centième", "un dixième", "un millième", "un quart"],
+    expected: ["un centième"],
+    comparator: "mcq_exact",
+    hint: "Compte les cases du grand carré.",
+    explanation: expl(
+      "Le grand carré contient 100 cases identiques : chacune en est donc UN CENTIÈME. On écrit 1 cm² = 1/100 dm² = 0,01 dm². De la même façon, 1 dm² = 0,01 m². C'est cette image — et non un tableau — qu'il faut garder en tête pour convertir."
+    ),
+    tags: ["aire_unite", "convertir", "canvas", "qcm"],
+    canvas: carreDecoupe([[1, 1]]),
+  },
+  {
+    kind: "fixed",
+    id: "aire_convertir_fixed_3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "aire_unite",
+    microId: "aire_convertir",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Convertis 3,7 m² en dm².",
+    format: "short",
+    expected: ["370"],
+    comparator: "number_equal",
+    hint: "1 m² = 100 dm².",
+    explanation: expl(
+      "1 m² vaut 100 dm², puisqu'un carré de 1 m de côté se découpe en 10 × 10 = 100 carrés de 1 dm de côté. Il y a donc 100 fois plus de dm² que de m² : 3,7 × 100 = 370 dm². On va vers une unité plus PETITE, donc le nombre grandit."
+    ),
+    tags: ["aire_unite", "convertir", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "aire_convertir_fixed_4",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "aire_unite",
+    microId: "aire_convertir",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Convertis 370 cm² en dm².",
+    format: "short",
+    expected: ["3,7", "3.7", "3,70", "3.70"],
+    comparator: "number_equal",
+    hint: "1 dm² = 100 cm² : ici on va vers une unité plus grande.",
+    explanation: expl(
+      "Il faut 100 cm² pour faire 1 dm². On cherche donc combien de fois 100 tient dans 370 : 370 ÷ 100 = 3,7 dm². On va vers une unité plus GRANDE, donc le nombre diminue — et il n'a aucune raison d'être entier."
+    ),
+    tags: ["aire_unite", "convertir", "short"],
+  },
+  {
+    kind: "fixed",
+    id: "aire_convertir_fixed_5",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "aire_unite",
+    microId: "aire_convertir",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pour passer des dm² aux cm², par combien multiplie-t-on ?",
+    format: "qcm",
+    choices: ["par 100", "par 10", "par 1 000", "par 2"],
+    expected: ["par 100"],
+    comparator: "mcq_exact",
+    hint: "C'est le côté qui est multiplié par 10, pas l'aire.",
+    explanation: expl(
+      "On multiplie par 100. L'erreur naturelle est de répondre 10, parce que c'est vrai pour les LONGUEURS : 1 dm = 10 cm. Mais une aire est un produit de deux longueurs : si chacune est multipliée par 10, l'aire l'est par 10 × 10 = 100. Le carré découpé en 100 cases le montre d'un regard."
+    ),
+    tags: ["aire_unite", "convertir", "piege", "canvas", "qcm"],
+    canvas: carreDecoupe([]),
+  },
+  {
+    kind: "fixed",
+    id: "aire_convertir_fixed_6",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "aire_unite",
+    microId: "aire_convertir",
+    difficulty: 3,
+    theme: "reunion",
+    text: "Le Piton de la Fournaise est parfois décrit par sa superficie en km². Que représente 1 km² ?",
+    format: "qcm",
+    choices: [
+      "l'aire d'un carré de 1 km de côté",
+      "un carré de 1 km de périmètre",
+      "une longueur de 1 km",
+      "l'aire d'un carré de 100 m de côté",
+    ],
+    expected: ["l'aire d'un carré de 1 km de côté"],
+    comparator: "mcq_exact",
+    hint: "Une unité d'aire se nomme toujours d'après le côté d'un carré.",
+    explanation: expl(
+      "Toutes les unités d'aire se lisent de la même façon : 1 km² est l'aire d'un carré de 1 km de côté, comme 1 cm² est l'aire d'un carré de 1 cm de côté et 1 mm² celle d'un carré de 1 mm de côté. Il faut le SAVOIR ; convertir des km² ou des mm², en revanche, n'est pas au programme de 6e."
+    ),
+    tags: ["aire_unite", "convertir", "974", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "aire_convertir_tpl_1",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "aire_unite",
+    microId: "aire_convertir",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cent d'une unité font l'unité juste au-dessus.",
+    tags: ["aire_unite", "convertir", "template"],
+    generate: () => {
+      // ⛔ SEULEMENT m² ↔ dm² ET dm² ↔ cm². Le BO exclut toute autre conversion
+      // d'aire du programme de 6e : ne pas ajouter de couple ici.
+      const couples = [
+        { grande: "m²", petite: "dm²" },
+        { grande: "dm²", petite: "cm²" },
+      ];
+      const c = couples[randomInt(0, 1)];
+      const versLaPetite = Math.random() < 0.5;
+
+      if (versLaPetite) {
+        const valeur = Number((randomInt(11, 990) / 10).toFixed(1));
+        const resultat = Number((valeur * 100).toFixed(2));
+        return {
+          text: `Convertis ${String(valeur).replace(".", ",")} ${c.grande} en ${c.petite}.`,
+          format: "short",
+          expected: [String(resultat).replace(".", ","), String(resultat)],
+          comparator: "number_equal",
+          explanation: expl(
+            `1 ${c.grande} vaut 100 ${c.petite} : un carré d'un côté se découpe en 10 × 10 = 100 carrés du côté d'en dessous. On va vers une unité plus PETITE, donc le nombre grandit : ${String(valeur).replace(".", ",")} × 100 = ${String(resultat).replace(".", ",")} ${c.petite}.`
+          ),
+        };
+      }
+
+      const resultat = Number((randomInt(11, 990) / 10).toFixed(1));
+      const valeur = Number((resultat * 100).toFixed(2));
+      return {
+        text: `Convertis ${String(valeur).replace(".", ",")} ${c.petite} en ${c.grande}.`,
+        format: "short",
+        expected: [String(resultat).replace(".", ","), String(resultat)],
+        comparator: "number_equal",
+        explanation: expl(
+          `Il faut 100 ${c.petite} pour faire 1 ${c.grande}. On cherche donc combien de fois 100 tient dans ${String(valeur).replace(".", ",")} : ${String(valeur).replace(".", ",")} ÷ 100 = ${String(resultat).replace(".", ",")} ${c.grande}. On va vers une unité plus GRANDE, donc le nombre diminue.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "aire_convertir_tpl_ouverte",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "aire_unite",
+    microId: "aire_convertir",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Une aire est un produit de DEUX longueurs — pars de là.",
+    tags: ["aire_unite", "convertir", "template", "ouverte"],
+    generate: () => {
+      const cas = [
+        {
+          q: "Explique pourquoi 1 dm² vaut 100 cm² et non 10 cm², alors que 1 dm vaut bien 10 cm.",
+          mots: ["deux longueurs", "10 x 10", "10 × 10", "100", "carré", "carre", "produit"],
+          r: "Parce qu'une aire n'est pas une longueur : c'est le produit de DEUX longueurs. Un carré de 1 dm de côté mesure 10 cm sur 10 cm, il contient donc 10 rangées de 10 carrés de 1 cm², soit 100. Le côté a été multiplié par 10, l'aire par 10 × 10 = 100. On peut le vérifier en dessinant le carré et en le découpant : les cent cases sont là.",
+        },
+        {
+          q: "Un élève convertit 5 m² en 50 dm². Explique son erreur et donne le bon résultat.",
+          mots: ["100", "longueur", "10", "aire", "500", "deux fois"],
+          r: "Il a utilisé le facteur des LONGUEURS, où 1 m = 10 dm. Mais on convertit une aire : le carré de 1 m de côté fait 10 dm sur 10 dm, soit 100 dm². Le bon facteur est donc 100, et 5 m² = 5 × 100 = 500 dm². La règle des longueurs est juste, elle s'applique simplement à autre chose.",
+        },
+        {
+          q: "Comment savoir si un nombre doit GRANDIR ou DIMINUER quand on convertit une aire ?",
+          mots: ["petite", "grande", "plus", "grandit", "diminue", "unité", "unite"],
+          r: "On regarde si l'unité d'arrivée est plus petite ou plus grande que celle de départ. Vers une unité plus petite, il en faut davantage pour couvrir la même surface : le nombre grandit, on multiplie par 100. Vers une unité plus grande, il en faut moins : le nombre diminue, on divise par 100. Un résultat qui va dans l'autre sens signale une erreur avant même de vérifier le calcul.",
+        },
+        {
+          q: "Pourquoi peut-on se passer d'un tableau de conversion pour les aires ?",
+          mots: ["carré", "carre", "100", "refabrique", "dessin", "retenir", "découpe", "decoupe"],
+          r: "Parce qu'un seul dessin remplace tout le tableau : le carré de 1 dm de côté découpé en 100 carrés de 1 cm de côté. Il suffit de le revoir pour retrouver le facteur 100, et pour comprendre POURQUOI c'est 100 et pas 10. Un tableau se retient sans être compris, et il s'oublie ; le carré, lui, se refabrique en dix secondes.",
+        },
+      ];
+      const c = cas[randomInt(0, cas.length - 1)];
+      return {
+        text: c.q,
+        format: "open",
+        expected: c.mots,
+        comparator: "contains_keyword",
+        explanation: expl(c.r),
+      };
+    },
   },
 ];

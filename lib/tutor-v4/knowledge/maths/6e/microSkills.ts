@@ -531,17 +531,28 @@ export const microSkills: MicroSkillSource[] = [
   /* =========================
      AIRES
   ========================= */
+  // ─── Comprendre l'aire et ses unités ──────────────────────────────────────
+  // ⛔ Ces trois micros sont passées de `aire_surface` à `aire_unite` le
+  // 23/08/2026. Elles forment l'étage des AUTOMATISMES du programme : ce qu'est
+  // une surface, comment on la mesure au carreau, et dans quelle unité on la
+  // dit. `aire_convertir` était le trou 6e-GM-aires-1.
   {
     id: "aire_comprendre",
     label: "Comprendre l’aire",
-    notionId: "aire_surface",
+    notionId: "aire_unite",
     prerequis: ["aire_perimetre_comprendre"],
   },
   {
     id: "aire_compter",
     label: "Calculer une aire par comptage",
-    notionId: "aire_surface",
+    notionId: "aire_unite",
     prerequis: ["aire_comprendre"],
+  },
+  {
+    id: "aire_convertir",
+    label: "Convertir des aires",
+    notionId: "aire_unite",
+    prerequis: ["aire_compter"],
   },
   {
     id: "aire_rectangle",

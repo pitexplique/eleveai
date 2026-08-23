@@ -410,7 +410,7 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     chapitre: "Les aires",
     objectif: "Effectuer des conversions d'aire.",
     page: 10,
-    micros: [],
+    micros: ["aire_convertir"],
     note: "⛔ UNIQUEMENT m² ↔ dm² et dm² ↔ cm². « Les autres conversions d'aire ne figurent pas au programme », et « le recours à un tableau de conversion est déconseillé ».",
   },
   {

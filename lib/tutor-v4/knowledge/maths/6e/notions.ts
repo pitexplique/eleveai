@@ -160,11 +160,29 @@ export const notions: NotionSource[] = [
     levels: [1, 2],
   },
 
+  // ⛔ COUPÉE EN DEUX LE 23/08/2026. « Aires » portait HUIT micros, et le
+  // programme de 6e range lui-même le chapitre en deux étages : des
+  // AUTOMATISMES (ce qu'est 1 cm², le quadrillage de carreaux de 1 cm,
+  // 1 dm² = 10 cm × 10 cm = 100 cm²) et trois OBJECTIFS d'apprentissage
+  // seulement (convertir, connaître la formule, calculer).
+  //
+  // ⭐ La coupe allège ET comble : « effectuer des conversions d'aire » était un
+  // trou du programme, et c'est exactement la micro qui manquait à l'étage des
+  // unités. Comprendre l'aire, la mesurer au carreau et changer d'unité sont un
+  // seul sujet — la surface unité ; appliquer longueur × largeur en est un autre.
   {
-    id: "aire_surface",
-    label: "Aires",
+    id: "aire_unite",
+    label: "Comprendre l’aire et ses unités",
     boId: "BO6G1",
     prerequis: ["aire_perimetre"],
+    levels: [1, 2],
+  },
+
+  {
+    id: "aire_surface",
+    label: "Calculer une aire",
+    boId: "BO6G1",
+    prerequis: ["aire_unite"],
     levels: [1, 2],
   },
 
