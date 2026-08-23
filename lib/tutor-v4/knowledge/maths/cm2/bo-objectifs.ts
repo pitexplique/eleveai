@@ -12,9 +12,14 @@
 // `scripts/verifier-bo.ts cm2` fait les deux lectures et refuse la seconde si
 // elle n'est pas déclarée et justifiée dans `microsHorsProgrammeCm2Maths`.
 //
-// SOURCE, et une seule : « Programme de mathématiques pour le cycle 3 », MENESR,
-// le PDF que Frédéric a envoyé le 23/08/2026. Les intitulés sont RECOPIÉS,
-// jamais reformulés. Le numéro de page est celui de ce PDF.
+// SOURCE DES INTITULÉS : « Programme de mathématiques pour le cycle 3 », MENESR.
+// Les intitulés sont RECOPIÉS, jamais reformulés, et `page` renvoie à CE PDF.
+//
+// ⭐ SOURCE DES EXEMPLES DE RÉUSSITE : « Exemples pour la mise en œuvre des
+// programmes — CM2, Mathématiques », MENESR 2025 (26 pages), envoyé par Frédéric
+// le 23/08/2026. C'est le document jumeau de celui de la 6e : il ne change aucun
+// objectif, mais il dit à quoi ressemble la réussite, et c'est LUI qu'il faut
+// rouvrir avant d'écrire une micro. Les notes ci-dessous en citent l'essentiel.
 //
 // ⚠️ `micros: []` n'est pas un oubli, c'est un CONSTAT. Ne jamais y mettre une
 // micro « qui s'en rapproche » pour faire passer le vérificateur au vert.
@@ -589,8 +594,8 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "La résolution de problèmes",
     objectif: "Résoudre des problèmes préparant à l'utilisation d'algorithmes.",
     page: 12,
-    micros: ["algo_programme", "algo_repetition", "algo_defi"],
-    note: "⭐ C'est ICI que la pensée informatique s'accroche au programme du cours moyen : le BO précise qu'« elle est intégrée à certains des domaines au cours moyen, tandis qu'elle constitue un domaine spécifique en 6e ».",
+    micros: [],
+    note: "⚠️ CORRIGÉ le 23/08/2026 après lecture des exemples de réussite : il ne s'agit PAS de suivre un programme d'instructions, mais de « rechercher TOUTES les solutions vérifiant certaines conditions » en organisant sa recherche pour en assurer l'exhaustivité (les 100 œufs en boîtes de 6 et de 10, les rectangles d'aire 60 cm²). Aucune micro ne fait ça — `algo_programme` et `algo_repetition` exécutent des instructions, ce qui est un autre geste.",
   },
 
   // ─── Algèbre ───────────────────────────────────────────────────────────────
@@ -1067,7 +1072,7 @@ export const objectifsBOCm2Maths: ObjectifBO[] = [
     chapitre: "La proportionnalité",
     objectif: "Savoir résoudre un problème de proportionnalité.",
     page: 27,
-    micros: ["prop_probleme", "prop_defi"],
+    micros: ["prop_probleme", "prop_quatrieme", "prop_defi"],
     note: "⛔⛔ LE BO BORNE LES PROCÉDURES, ET LE COACH LES DÉPASSE : « Seuls des raisonnements fondés sur les propriétés de linéarité pour la multiplication et pour l'addition sont attendus ; ni l'utilisation du coefficient de proportionnalité, ni le recours au “produit en croix” ne sont enseignés au cours moyen. » Voir les dettes `prop_tableau`, `prop_coefficient` et `prop_quatrieme`.",
   },
 ];
@@ -1084,17 +1089,12 @@ export const microsHorsProgrammeCm2Maths: { micro: string; raison: string }[] = 
   {
     micro: "prop_tableau",
     raison:
-      "⛔⛔ CONTRAIRE AU BO. « Afin d'éviter le risque de développement d'automatismes ne s'appuyant pas sur le sens, les élèves n'utilisent pas de tableaux de proportionnalité au cours moyen » (p. 27). À retirer ou à déplacer en 6e, où le tableau devient un objectif.",
+      "⚠️ LE LIBELLÉ EST HORS PROGRAMME, PAS LES ITEMS — vérifié le 23/08/2026. Le BO écrit : « les élèves n'utilisent pas de tableaux de proportionnalité au cours moyen » (p. 27). Or les items de cette micro raisonnent par LINÉARITÉ (« 8 personnes, c'est 2 fois plus que 4 ») et par PASSAGE À L'UNITÉ — exactement ce que le BO demande. Il suffit donc de la RENOMMER, pas de la supprimer.",
   },
   {
     micro: "prop_coefficient",
     raison:
       "⛔⛔ CONTRAIRE AU BO. « Ni l'utilisation du coefficient de proportionnalité, ni le recours au “produit en croix” ne sont enseignés au cours moyen » (p. 27). À retirer ou à déplacer.",
-  },
-  {
-    micro: "prop_quatrieme",
-    raison:
-      "⛔ À VÉRIFIER : « calculer une quatrième proportionnelle » est admis au cours moyen SI la procédure est la linéarité ou le retour à l'unité. Lire les items avant de trancher — s'ils passent par le produit en croix, ils sont hors programme.",
   },
   {
     micro: "angle_mesurer",
@@ -1248,7 +1248,17 @@ export const microsHorsProgrammeCm2Maths: { micro: string; raison: string }[] = 
   {
     micro: "algo_logique",
     raison:
-      "La pensée informatique n'est pas un domaine propre au cours moyen : elle est « intégrée à certains des domaines ». Les suites logiques servent cm2-N-algebre-4.",
+      "La pensée informatique n'est pas un domaine propre au cours moyen : elle est « intégrée à certains des domaines », et elle n'a donc AUCUN objectif à elle. Les suites logiques servent cm2-N-algebre-4.",
+  },
+  {
+    micro: "algo_repetition",
+    raison:
+      "Idem : pas de domaine propre au cours moyen. La répétition sert les programmes de calcul (cm2-N-algebre-3) et les codages de déplacement (cm2-G-deplacements-2).",
+  },
+  {
+    micro: "algo_defi",
+    raison:
+      "Bloc de défis d'un domaine qui n'a pas d'objectif propre au cours moyen. ⏳ Ce serait le bon endroit pour accrocher cm2-N-problemes-7 (chercher TOUTES les solutions), qui n'a aujourd'hui aucune micro.",
   },
   {
     micro: "reperage_quadrillage",
