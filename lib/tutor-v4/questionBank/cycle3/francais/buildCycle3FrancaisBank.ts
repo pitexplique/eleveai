@@ -7067,11 +7067,33 @@ function conjugaisonQuestion(microId: string): Generated {
   if (microId.includes("participe_passe_etre")) return qcm(PARTICIPE_PASSE_ETRE);
   if (microId.includes("participe")) return qcm(PARTICIPE_PASSE);
 
+  /* ⛔ DEUX MICROS DE 6e SORTAIENT DE LA ROTATION GENERIQUE SUR UN AUTRE SUJET
+     (23/08/2026, constate en TIRANT des questions, pas en lisant le routeur).
+     La rotation ci-dessous fait tourner present / imparfait / futur : elle
+     servait donc, trois fois sur cinq, une question JUSTE mais hors sujet.
+
+     — « 6e_conj_composer » = « Former un temps compose : auxiliaire + participe
+       passe ». Il recevait « Choisis la bonne forme : "voir" au present avec
+       "tu" ». Un temps SIMPLE pour une micro dont toute la matiere est le temps
+       COMPOSE, et rien ne le signalait : la question etait correcte.
+     — « 6e_conj_employer » = « Employer le temps qui convient AU SENS DE LA
+       PHRASE ». Il recevait « Choisis la bonne forme : "faire" au futur avec
+       "ils" » — sans phrase, donc sans sens auquel convenir.
+
+     ⛔ On ne renomme pas les `id` : la progression enregistree d'un eleve les
+     porte. On paie par ces deux lignes nommees, placees AVANT la rotation. */
+  if (microId.includes("conj_composer")) {
+    return qcm(Math.random() < 0.65 ? CONJ_PASSE_COMPOSE : CONJ_PLUS_QUE_PARFAIT);
+  }
+  if (microId.includes("conj_employer")) {
+    return qcm(CONJ_VALEUR_TEMPS);
+  }
+
   // Present / imparfait / futur / infinitif : moteur parametrique (centaines de
   // variantes). Passe compose et valeur des temps : pools rediges (notions plus
   // conceptuelles, peu mecaniques).
-  // 6e (identifier / composer / employer) : la conjugaison n'est pas decoupee par
-  // temps -> on fait TOURNER les temps existants pour couvrir tout le programme.
+  // 6e (identifier) : la micro demande le temps, le mode ET la personne d'une
+  // forme quelconque -> on fait TOURNER les temps pour couvrir tout le programme.
   if (
     microId.includes("identifier") ||
     microId.includes("composer") ||
