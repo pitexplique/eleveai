@@ -444,6 +444,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "demi_droite_graduee",
+        "label": "Repérer sur une demi-droite graduée",
+        "prerequis": [
+          "decimal_nombre"
+        ]
+      },
+      {
         "id": "fraction_nombre",
         "label": "Fractions",
         "prerequis": [

@@ -116,7 +116,8 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     objectif:
       "Placer sur une demi-droite graduée un point dont l'abscisse est un nombre décimal. Repérer un nombre décimal sur une demi-droite graduée.",
     page: 2,
-    micros: [],
+    micros: ["abscisse_lire", "abscisse_placer"],
+    note: "Couvert le 23/08/2026 par la notion `demi_droite_graduee`, partagée avec 6e-N-fractions-3 : c'est le même geste.",
   },
   {
     id: "6e-N-entiers-8",
@@ -238,7 +239,8 @@ export const objectifsBO6eMaths: ObjectifBO[] = [
     objectif:
       "Placer une fraction sur une demi-droite graduée dans des cas simples. Graduer un segment de longueur donnée.",
     page: 5,
-    micros: [],
+    micros: ["abscisse_fraction", "abscisse_graduer"],
+    note: "Rangé sous `demi_droite_graduee` et non sous `fraction_nombre` : c'est le même objet que 6e-N-entiers-7, et c'est lui qui donne aux fractions le statut de nombres.",
   },
   {
     id: "6e-N-fractions-4",

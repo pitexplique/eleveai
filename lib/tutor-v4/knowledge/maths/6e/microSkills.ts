@@ -130,6 +130,41 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     LA DEMI-DROITE GRADUÉE
+     ⛔ Ouverte le 23/08/2026. Deux objectifs du programme (6e-N-entiers-7 pour
+     les décimaux, 6e-N-fractions-3 pour les fractions) demandent le MÊME geste :
+     situer un nombre sur une droite. Les séparer aurait coupé en deux ce qui
+     est un seul objet — celui, précisément, qui fait entrer les fractions dans
+     la famille des nombres.
+     ⚠️ « Placer » se pose à l'envers dans le coach : on ne fait pas glisser un
+     point, on désigne celui qui convient parmi plusieurs.
+  ========================= */
+  {
+    id: "abscisse_lire",
+    label: "Lire l’abscisse d’un point",
+    notionId: "demi_droite_graduee",
+    prerequis: ["decimal_comparer"],
+  },
+  {
+    id: "abscisse_placer",
+    label: "Placer un nombre décimal",
+    notionId: "demi_droite_graduee",
+    prerequis: ["abscisse_lire"],
+  },
+  {
+    id: "abscisse_fraction",
+    label: "Repérer et placer une fraction",
+    notionId: "demi_droite_graduee",
+    prerequis: ["abscisse_lire"],
+  },
+  {
+    id: "abscisse_graduer",
+    label: "Graduer un segment de longueur donnée",
+    notionId: "demi_droite_graduee",
+    prerequis: ["abscisse_fraction"],
+  },
+
+  /* =========================
      FRACTIONS
   ========================= */
   {

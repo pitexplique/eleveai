@@ -49,6 +49,27 @@ export const notions: NotionSource[] = [
     levels: [1, 2, 3],
   },
 
+  // ⛔ OUVERTE LE 23/08/2026 — DEUX TROUS DU PROGRAMME, UN SEUL GESTE.
+  // « Placer sur une demi-droite graduée un point dont l'abscisse est un nombre
+  // décimal » (6e-N-entiers-7) et « placer une fraction sur une demi-droite
+  // graduée / graduer un segment de longueur donnée » (6e-N-fractions-3)
+  // n'avaient aucune micro. Les rattacher l'un aux décimaux et l'autre aux
+  // fractions aurait coupé en deux ce qui est UN objet.
+  //
+  // ⭐ La demi-droite graduée n'est l'accessoire de personne : le programme du
+  // cycle 3 la demande au CM1, au CM2 et en 6e, pour les entiers puis les
+  // décimaux puis les fractions. Le BO dit même ce qu'elle produit — « le
+  // repérage de points sur une demi-droite graduée par des fractions contribue
+  // à donner aux fractions le statut de NOMBRES, qui s'intercalent entre les
+  // nombres entiers déjà connus ».
+  {
+    id: "demi_droite_graduee",
+    label: "Repérer sur une demi-droite graduée",
+    boId: "BO6N1",
+    prerequis: ["decimal_nombre"],
+    levels: [1, 2, 3],
+  },
+
   {
     id: "fraction_nombre",
     label: "Fractions",

@@ -5,6 +5,7 @@ import { fractionsBank } from "./fractions.bank";
 import { fractionsCalculBank } from "./fractions-calcul.bank";
 import { algebreBank } from "./algebre.bank";
 import { decimauxBank } from "./decimaux.bank";
+import { demiDroiteBank } from "./demi-droite.bank";
 import { pourcentagesBank } from "./pourcentages.bank";
 
 import { anglesBank } from "./angles.bank";
@@ -40,6 +41,7 @@ export const maths6eQuestionBank: TutorBankItemV4[] = [
   // =========================
   ...entiersBank,
   ...decimauxBank,
+  ...demiDroiteBank,
   ...fractionsBank,
   ...fractionsCalculBank,
   ...algebreBank,
