@@ -74,6 +74,10 @@ const CLASSES = [
   "adulte",
 ] as const;
 
+/** Tirages par item à quatre lignes. Le mélange change à chaque service : une
+ *  seule observation par item ne dirait rien de sa loi. */
+const TIRAGES = 60;
+
 type Item = {
   id: string;
   kind: string;
@@ -99,6 +103,9 @@ async function main() {
   let totalQuatre = 0;
   const solitaires: { classe: string; id: string }[] = [];
   const impossibles: { classe: string; id: string }[] = [];
+  /** La position de la bonne réponse, comptée SÉPARÉMENT pour chaque classe. */
+  const parClasse4 = new Map<string, { pos: Map<number, number>; total: number }>();
+  const derives: string[] = [];
 
   console.log(`\nPROPOSITIONS DES QCM FIGÉS · ${matiere}`);
   console.log("─".repeat(72));
@@ -124,11 +131,25 @@ async function main() {
       if (servi.length < 2) solitaires.push({ classe, id: item.id });
       if (!servi.includes(item.expected![0])) impossibles.push({ classe, id: item.id });
 
+      /* ⛔⛔ LA GRAINE RÉELLE, PAS L'ID (corrigé le 23/08/2026). Ma première
+         version amorçait le mélange avec `item.id` seul — c'est ce que le code
+         faisait AVANT le correctif du 11/08, et elle mesurait donc le monde
+         d'avant. Elle a « trouvé » un biais de 4,1σ en terminale qui n'existe
+         pas. Le pipeline amorce en réalité avec
+         `${item.id}__${Date.now()}_${aléa}` : la permutation change à chaque
+         tirage. On tire donc PLUSIEURS FOIS par item, avec cette forme-là. */
       if (servi.length === 4) {
-        const idx = servi.indexOf(item.expected![0]);
-        if (idx >= 0) {
+        for (let t = 0; t < TIRAGES; t++) {
+          const graine = `${item.id}__${Date.now() + t}_${Math.floor(Math.random() * 10000)}`;
+          const melange = shuffleChoices(item.choices!, graine);
+          const idx = melange.indexOf(item.expected![0]);
+          if (idx < 0) continue;
           positions.set(idx + 1, (positions.get(idx + 1) ?? 0) + 1);
           totalQuatre += 1;
+          if (!parClasse4.has(classe)) parClasse4.set(classe, { pos: new Map(), total: 0 });
+          const c = parClasse4.get(classe)!;
+          c.pos.set(idx + 1, (c.pos.get(idx + 1) ?? 0) + 1);
+          c.total += 1;
         }
       }
     }
@@ -138,6 +159,29 @@ async function main() {
       .map((t) => `${t} lignes : ${String(parTaille.get(t)).padStart(4)}`)
       .join("   ");
     console.log(`  ${classe.padEnd(14)} ${String(qcm.length).padStart(4)} QCM   ${detail}`);
+
+    /* ⭐ LA POSITION, CLASSE PAR CLASSE (23/08/2026, demande de Frédéric :
+       « c'est l'ordre des bonnes réponses qu'il faut vérifier »). Le total
+       global peut être impeccable alors qu'une classe dérive : une moyenne
+       cache toujours ce qui se compense. */
+    const q4 = parClasse4.get(classe);
+    if (q4 && q4.total >= 40 * TIRAGES) {
+      const e = Math.sqrt(q4.total * 0.25 * 0.75);
+      let pireClasse = 0;
+      const cols: string[] = [];
+      for (let p = 1; p <= 4; p++) {
+        const n = q4.pos.get(p) ?? 0;
+        const s = (n - q4.total / 4) / e;
+        pireClasse = Math.max(pireClasse, Math.abs(s));
+        cols.push(`${((n / q4.total) * 100).toFixed(1).padStart(5)} %`);
+      }
+      const voyant = pireClasse < 3 ? "🟢" : "⛔";
+      console.log(
+        `                 ${voyant} position de la bonne réponse : ${cols.join(" · ")}` +
+          `   (max ${pireClasse.toFixed(1)}σ sur ${q4.total})`
+      );
+      if (pireClasse >= 3) derives.push(classe);
+    }
   }
 
   console.log(
@@ -167,6 +211,12 @@ async function main() {
 
   // ── Les vrais défauts ──
   let faute = false;
+  if (derives.length) {
+    faute = true;
+    console.log(
+      `\n⛔ ${derives.length} classe(s) où la bonne réponse dérive de plus de 3σ : ${derives.join(", ")}`
+    );
+  }
   if (solitaires.length) {
     faute = true;
     console.log(`\n⛔ ${solitaires.length} QCM ne servent qu'UNE proposition — rien à choisir :`);
