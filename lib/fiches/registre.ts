@@ -348,6 +348,16 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Former un verbe en deux parties, choisir entre être et avoir, accorder le participe, et reculer d'un cran avec le plus-que-parfait.",
   },
+  "francais/6e/conjugaison-modes": {
+    titre: "L'impératif et le conditionnel présent",
+    resume:
+      "Donner un ordre sans sujet écrit, fabriquer le conditionnel avec le radical du futur et les terminaisons de l'imparfait, et ne plus confondre « je viendrai » et « je viendrais ».",
+  },
+  "francais/6e/conjugaison-valeurs": {
+    titre: "La valeur des temps : raconter ou parler",
+    resume:
+      "Opposer les temps du récit et ceux du discours, séparer le décor de l'action, et choisir le temps qui convient au sens de la phrase.",
+  },
 
   "ia/fondements/definir-l-ia": { titre: "Qu'est-ce que l'intelligence artificielle ?" },
   "ia/fondements/apprentissage-automatique": { titre: "L'apprentissage automatique" },
