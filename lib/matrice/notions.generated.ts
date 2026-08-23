@@ -13,7 +13,7 @@
 // liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
 // par où l'année peut commencer.
 //
-// 690 notions, 40 paquets.
+// 744 notions, 40 paquets.
 
 export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
@@ -465,6 +465,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "algebre_probleme",
+        "label": "Problèmes à nombres inconnus et motifs",
+        "prerequis": [
+          "entier_calcul_mental"
+        ]
+      },
+      {
         "id": "pourcentage_nombre",
         "label": "Pourcentages",
         "prerequis": [
@@ -504,7 +511,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "aire_unite",
-        "label": "Comprendre l'aire et ses unités",
+        "label": "Comprendre l’aire et ses unités",
         "prerequis": [
           "aire_perimetre"
         ]
@@ -517,17 +524,24 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
-        "id": "algebre_probleme",
-        "label": "Problèmes à nombres inconnus et motifs",
-        "prerequis": [
-          "entier_calcul_mental"
-        ]
-      },
-      {
         "id": "distance_segment",
         "label": "Distances et milieu d’un segment",
         "prerequis": [
           "aire_longueur"
+        ]
+      },
+      {
+        "id": "mediatrice_segment",
+        "label": "La médiatrice d’un segment",
+        "prerequis": [
+          "distance_segment"
+        ]
+      },
+      {
+        "id": "bissectrice_angle",
+        "label": "La bissectrice d’un angle",
+        "prerequis": [
+          "angle_mesure"
         ]
       },
       {
@@ -539,20 +553,6 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
-        "id": "bissectrice_angle",
-        "label": "La bissectrice d’un angle",
-        "prerequis": [
-          "angle_mesure"
-        ]
-      },
-      {
-        "id": "mediatrice_segment",
-        "label": "La médiatrice d’un segment",
-        "prerequis": [
-          "distance_segment"
-        ]
-      },
-      {
         "id": "cercle_disque",
         "label": "Le cercle et le périmètre du disque",
         "prerequis": [
@@ -560,17 +560,17 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
-        "id": "vision_espace",
-        "label": "La vision dans l'espace",
-        "prerequis": [
-          "volume_solide"
-        ]
-      },
-      {
         "id": "duree_temps",
         "label": "Le repérage dans le temps et les durées",
         "prerequis": [
           "decimal_nombre"
+        ]
+      },
+      {
+        "id": "vision_espace",
+        "label": "La vision dans l'espace",
+        "prerequis": [
+          "volume_solide"
         ]
       },
       {
@@ -3034,46 +3034,166 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
     ],
     "6e": [
       {
-        "id": "lecture_comprehension",
-        "label": "Comprendre, interpréter et apprécier",
+        "id": "fluence_lecture",
+        "label": "Lire avec fluidité",
         "prerequis": []
       },
       {
         "id": "lecture_voix_haute",
         "label": "Lire à voix haute et mettre en voix",
         "prerequis": [
-          "lecture_comprehension"
+          "fluence_lecture"
         ]
       },
       {
-        "id": "culture_litteraire",
-        "label": "Culture littéraire et artistique",
+        "id": "comprehension_textes",
+        "label": "Comprendre et interpréter un texte",
         "prerequis": [
-          "lecture_comprehension"
+          "fluence_lecture"
         ]
       },
       {
-        "id": "ecriture",
-        "label": "Écrire pour apprendre, inventer et réfléchir",
-        "prerequis": []
-      },
-      {
-        "id": "oral",
-        "label": "Prendre la parole, écouter et interagir",
-        "prerequis": []
-      },
-      {
-        "id": "vocabulaire",
-        "label": "Vocabulaire et orthographe lexicale",
+        "id": "comprehension_reprises",
+        "label": "Suivre les reprises et les liens logiques d'un texte",
         "prerequis": [
-          "lecture_comprehension"
+          "comprehension_textes"
+        ]
+      },
+      {
+        "id": "comprehension_documents",
+        "label": "Lire des documents et des images",
+        "prerequis": [
+          "comprehension_textes"
+        ]
+      },
+      {
+        "id": "lecture_oeuvres",
+        "label": "Lire une œuvre et se l'approprier",
+        "prerequis": [
+          "comprehension_textes"
+        ]
+      },
+      {
+        "id": "culture_recits",
+        "label": "Récits des origines, aventure et monstres",
+        "prerequis": [
+          "comprehension_textes"
+        ]
+      },
+      {
+        "id": "culture_poesie_theatre",
+        "label": "Poésie et théâtre : mots, merveilles et ruses",
+        "prerequis": [
+          "comprehension_textes"
+        ]
+      },
+      {
+        "id": "culture_reperes",
+        "label": "Genres, contexte et carnet de lecture",
+        "prerequis": [
+          "culture_recits"
+        ]
+      },
+      {
+        "id": "ecriture_main",
+        "label": "Écrire à la main de manière fluide et efficace",
+        "prerequis": []
+      },
+      {
+        "id": "ecriture_apprendre",
+        "label": "Écrire pour réfléchir, apprendre et mémoriser",
+        "prerequis": [
+          "ecriture_main"
+        ]
+      },
+      {
+        "id": "ecriture_produire",
+        "label": "Produire des écrits variés",
+        "prerequis": [
+          "ecriture_apprendre"
+        ]
+      },
+      {
+        "id": "ecriture_reviser",
+        "label": "Revenir sur son texte et le réviser",
+        "prerequis": [
+          "ecriture_produire"
+        ]
+      },
+      {
+        "id": "oral_ecouter",
+        "label": "Écouter pour comprendre",
+        "prerequis": []
+      },
+      {
+        "id": "oral_dire",
+        "label": "Dire pour être compris",
+        "prerequis": [
+          "oral_ecouter"
+        ]
+      },
+      {
+        "id": "oral_echanger",
+        "label": "Participer à des échanges verbaux",
+        "prerequis": [
+          "oral_dire"
+        ]
+      },
+      {
+        "id": "vocabulaire_enrichir",
+        "label": "Comprendre un mot nouveau et enrichir son lexique",
+        "prerequis": [
+          "comprehension_textes"
+        ]
+      },
+      {
+        "id": "vocabulaire_relations",
+        "label": "Composer, décomposer et relier les mots",
+        "prerequis": [
+          "vocabulaire_enrichir"
+        ]
+      },
+      {
+        "id": "vocabulaire_emploi",
+        "label": "Réemployer le mot juste et l'écrire correctement",
+        "prerequis": [
+          "vocabulaire_enrichir"
         ]
       },
       {
         "id": "grammaire_phrase",
-        "label": "Phrase, constituants et accords",
+        "label": "Analyser une phrase simple",
         "prerequis": [
-          "lecture_comprehension"
+          "fluence_lecture"
+        ]
+      },
+      {
+        "id": "grammaire_complements",
+        "label": "Attribut du sujet et compléments du verbe",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "grammaire_groupe_nominal",
+        "label": "Analyser le groupe nominal : épithète et complément du nom",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "grammaire_pronoms",
+        "label": "Les pronoms personnels et leur antécédent",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "grammaire_accords",
+        "label": "Les accords : groupe nominal, sujet-verbe, participe passé",
+        "prerequis": [
+          "grammaire_groupe_nominal",
+          "grammaire_complements"
         ]
       },
       {
@@ -3084,10 +3204,31 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
-        "id": "conjugaison",
-        "label": "Formes verbales, temps et modes",
+        "id": "conjugaison_formes",
+        "label": "Lire une forme verbale : radical, temps, personne",
         "prerequis": [
           "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "conjugaison_temps_composes",
+        "label": "Les temps composés et l'accord du participe passé",
+        "prerequis": [
+          "conjugaison_formes"
+        ]
+      },
+      {
+        "id": "conjugaison_modes",
+        "label": "L'impératif présent et le conditionnel présent",
+        "prerequis": [
+          "conjugaison_formes"
+        ]
+      },
+      {
+        "id": "conjugaison_valeurs",
+        "label": "Temps du discours, temps du récit",
+        "prerequis": [
+          "conjugaison_temps_composes"
         ]
       }
     ],
@@ -3294,85 +3435,33 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
     "cm1": [
       {
         "id": "fluence_lecture",
-        "label": "Lire avec fluidité et expressivité",
+        "label": "Lire avec fluidité",
         "prerequis": []
       },
       {
-        "id": "comprehension_textes_documents",
-        "label": "Comprendre textes, documents et images",
+        "id": "lecture_voix_haute",
+        "label": "Lire à voix haute avec expressivité",
         "prerequis": [
           "fluence_lecture"
         ]
-      },
-      {
-        "id": "lecture_oeuvres",
-        "label": "Lire une œuvre et se l'approprier",
-        "prerequis": [
-          "comprehension_textes_documents"
-        ]
-      },
-      {
-        "id": "culture_litteraire",
-        "label": "Culture littéraire et artistique",
-        "prerequis": [
-          "lecture_oeuvres"
-        ]
-      },
-      {
-        "id": "ecriture",
-        "label": "Écrire pour apprendre et produire",
-        "prerequis": []
-      },
-      {
-        "id": "oral",
-        "label": "Écouter, dire et participer aux échanges",
-        "prerequis": []
-      },
-      {
-        "id": "vocabulaire",
-        "label": "Vocabulaire et relations entre les mots",
-        "prerequis": [
-          "comprehension_textes_documents"
-        ]
-      },
-      {
-        "id": "grammaire_orthographe",
-        "label": "Phrase simple, accords et orthographe grammaticale",
-        "prerequis": [
-          "fluence_lecture"
-        ]
-      },
-      {
-        "id": "conjugaison",
-        "label": "Conjugaison et valeur des temps",
-        "prerequis": [
-          "grammaire_orthographe"
-        ]
-      }
-    ],
-    "cm2": [
-      {
-        "id": "fluence_lecture",
-        "label": "Lire avec fluidité et expressivité",
-        "prerequis": []
       },
       {
         "id": "comprehension_textes",
-        "label": "Comprendre un texte long",
+        "label": "Comprendre seul un texte",
         "prerequis": [
           "fluence_lecture"
         ]
       },
       {
         "id": "comprehension_documents",
-        "label": "Lire un document composite",
+        "label": "Lire un document pour apprendre",
         "prerequis": [
           "comprehension_textes"
         ]
       },
       {
         "id": "lecture_oeuvres",
-        "label": "Lire une œuvre et construire une culture littéraire",
+        "label": "Lire une œuvre et se l'approprier",
         "prerequis": [
           "comprehension_textes"
         ]
@@ -3392,21 +3481,214 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "culture_lecteur",
+        "label": "Varier ses lectures, en garder trace, persévérer",
+        "prerequis": [
+          "lecture_oeuvres"
+        ]
+      },
+      {
+        "id": "ecriture_preparer",
+        "label": "Copier, trier et reformuler pour apprendre",
+        "prerequis": []
+      },
+      {
+        "id": "ecriture_produire",
+        "label": "Produire des écrits variés",
+        "prerequis": [
+          "ecriture_preparer"
+        ]
+      },
+      {
+        "id": "ecriture_reviser",
+        "label": "Revenir sur son texte et le réviser",
+        "prerequis": [
+          "ecriture_produire"
+        ]
+      },
+      {
+        "id": "oral_ecouter",
+        "label": "Écouter pour comprendre",
+        "prerequis": []
+      },
+      {
+        "id": "oral_echanger",
+        "label": "Dire, présenter et participer à des échanges",
+        "prerequis": [
+          "oral_ecouter"
+        ]
+      },
+      {
+        "id": "vocabulaire_sens",
+        "label": "Comprendre un mot inconnu : contexte et morphologie",
+        "prerequis": [
+          "comprehension_textes"
+        ]
+      },
+      {
+        "id": "vocabulaire_relations",
+        "label": "Relier les mots : familles, synonymes, contraires",
+        "prerequis": [
+          "vocabulaire_sens"
+        ]
+      },
+      {
+        "id": "vocabulaire_emploi",
+        "label": "Réemployer et écrire les mots appris",
+        "prerequis": [
+          "vocabulaire_sens"
+        ]
+      },
+      {
+        "id": "grammaire_types_phrases",
+        "label": "Les types et les formes de phrases",
+        "prerequis": [
+          "fluence_lecture"
+        ]
+      },
+      {
+        "id": "grammaire_phrase",
+        "label": "Analyser une phrase simple : sujet, verbe, manipulations",
+        "prerequis": [
+          "grammaire_types_phrases"
+        ]
+      },
+      {
+        "id": "grammaire_complements",
+        "label": "Les compléments du verbe et les groupes circonstanciels",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "grammaire_classes_mots",
+        "label": "Nature des mots : déterminants, adverbes, pronoms",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "grammaire_groupe_nominal",
+        "label": "Le groupe nominal, son noyau et l'épithète",
+        "prerequis": [
+          "grammaire_classes_mots"
+        ]
+      },
+      {
+        "id": "grammaire_accords",
+        "label": "Les accords et les homophones",
+        "prerequis": [
+          "grammaire_groupe_nominal",
+          "grammaire_complements"
+        ]
+      },
+      {
+        "id": "conjugaison_temps_simples",
+        "label": "Conjuguer aux temps simples",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "conjugaison_formes",
+        "label": "Lire une forme verbale : radical, marques de temps et de personne",
+        "prerequis": [
+          "conjugaison_temps_simples"
+        ]
+      },
+      {
+        "id": "conjugaison_passe_compose",
+        "label": "Le passé composé et l'accord du participe avec être",
+        "prerequis": [
+          "conjugaison_temps_simples"
+        ]
+      }
+    ],
+    "cm2": [
+      {
+        "id": "fluence_lecture",
+        "label": "Lire avec fluidité",
+        "prerequis": []
+      },
+      {
+        "id": "lecture_voix_haute",
+        "label": "Lire à voix haute avec expressivité",
+        "prerequis": [
+          "fluence_lecture"
+        ]
+      },
+      {
+        "id": "comprehension_textes",
+        "label": "Comprendre un texte long",
+        "prerequis": [
+          "fluence_lecture"
+        ]
+      },
+      {
+        "id": "comprehension_documents",
+        "label": "Lire un document composite",
+        "prerequis": [
+          "comprehension_textes"
+        ]
+      },
+      {
+        "id": "lecture_oeuvres",
+        "label": "Lire une œuvre et se l'approprier",
+        "prerequis": [
+          "comprehension_textes"
+        ]
+      },
+      {
+        "id": "culture_personnages",
+        "label": "Héros, merveilleux et autres vies",
+        "prerequis": [
+          "lecture_oeuvres"
+        ]
+      },
+      {
+        "id": "culture_soi_et_les_autres",
+        "label": "Morale, poésie et rapport aux autres",
+        "prerequis": [
+          "culture_personnages"
+        ]
+      },
+      {
+        "id": "culture_lecteur",
+        "label": "Choisir, garder trace et persévérer dans ses lectures",
+        "prerequis": [
+          "lecture_oeuvres"
+        ]
+      },
+      {
         "id": "ecriture_preparer",
         "label": "Copier, prendre des notes et organiser ses idées",
         "prerequis": []
       },
       {
         "id": "ecriture_produire",
-        "label": "Produire un texte et le réviser",
+        "label": "Produire des écrits variés et cohérents",
         "prerequis": [
           "ecriture_preparer"
         ]
       },
       {
-        "id": "oral",
-        "label": "Écouter, présenter et argumenter",
+        "id": "ecriture_reviser",
+        "label": "Revenir sur son texte et le réviser",
+        "prerequis": [
+          "ecriture_produire"
+        ]
+      },
+      {
+        "id": "oral_ecouter",
+        "label": "Écouter pour comprendre",
         "prerequis": []
+      },
+      {
+        "id": "oral_echanger",
+        "label": "Dire, présenter et participer à des échanges",
+        "prerequis": [
+          "oral_ecouter"
+        ]
       },
       {
         "id": "vocabulaire_sens",
@@ -3431,9 +3713,16 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "grammaire_phrase",
-        "label": "La phrase : sujet, verbe, nature et fonction",
+        "label": "La phrase simple : sujet, verbe, manipulations",
         "prerequis": [
           "fluence_lecture"
+        ]
+      },
+      {
+        "id": "grammaire_nature_fonction",
+        "label": "Nature et fonction : deux questions différentes",
+        "prerequis": [
+          "grammaire_phrase"
         ]
       },
       {
@@ -3446,6 +3735,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       {
         "id": "grammaire_groupe_nominal",
         "label": "Le groupe nominal et ses expansions",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "grammaire_pronoms",
+        "label": "Les pronoms personnels : sujet, complément, variations",
         "prerequis": [
           "grammaire_phrase"
         ]
@@ -3473,10 +3769,24 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "conjugaison_formes",
+        "label": "Lire une forme verbale : radical, temps, personne",
+        "prerequis": [
+          "conjugaison_temps_simples"
+        ]
+      },
+      {
         "id": "conjugaison_recit",
         "label": "Les temps du récit et leur valeur",
         "prerequis": [
           "conjugaison_temps_simples"
+        ]
+      },
+      {
+        "id": "conjugaison_participe",
+        "label": "Les temps composés et l'accord du participe passé",
+        "prerequis": [
+          "conjugaison_recit"
         ]
       }
     ],
