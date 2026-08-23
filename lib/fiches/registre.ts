@@ -294,6 +294,35 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
       "Compter les propositions, distinguer juxtaposition, coordination et subordination, choisir qui, que, où.",
   },
 
+  /* ⭐ LA CONJUGAISON DU CM2 (23/08/2026). La classe avait trois fiches, toutes
+     de grammaire : ses DIX-SEPT micro-compétences de conjugaison n'en avaient
+     aucune. Un élève qui cliquait « présent », « passé simple » ou « participe
+     passé » dans le coach ne trouvait rien à lire.
+     ⚠️ `conjugaison-formes` existe aussi en 6e, sous le même slug : les clés du
+     registre portent la classe, il n'y a donc pas de collision — et il ne faut
+     PAS aliaser l'une vers l'autre. Le CM2 y voit le troisième groupe (son BO
+     le demande), la 6e non. */
+  "francais/cm2/conjugaison-temps-simples": {
+    titre: "Conjuguer au présent, à l'imparfait et au futur",
+    resume:
+      "Trouver l'infinitif et le groupe, repérer le radical, et conjuguer aux trois temps simples, irréguliers compris.",
+  },
+  "francais/cm2/conjugaison-formes": {
+    titre: "La forme d'un verbe : radical, temps, personne",
+    resume:
+      "Isoler la marque de temps et la marque de personne dans la terminaison, et reconnaître les variations du radical au 1er comme au 3e groupe.",
+  },
+  "francais/cm2/conjugaison-recit": {
+    titre: "Les temps du récit : passé composé, passé simple, plus-que-parfait",
+    resume:
+      "Séparer le passé qu'on parle du passé qu'on lit, reculer d'un cran avec le plus-que-parfait, et distinguer le décor de l'action.",
+  },
+  "francais/cm2/conjugaison-participe": {
+    titre: "Le participe passé : accorder, et où mettre la négation",
+    resume:
+      "Former un temps composé en deux parties, accorder avec être puis avec le COD placé avant, et poser la négation autour de l'auxiliaire.",
+  },
+
   /* ⭐ LA 6e OUVRE ICI (22/08/2026). Elle n'avait aucune fiche de français,
      parce que ses notions faisaient jusqu'à NEUF micro-compétences : rien de
      tel ne tient dans une fiche. Elle a été relue sur le BO n° 16 du 17 avril
