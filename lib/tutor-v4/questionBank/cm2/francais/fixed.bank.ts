@@ -88,7 +88,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_fluence_4",
-    "fluence_lecture",
+    "lecture_voix_haute",
     "cm2_flue_mise_en_voix",
     3,
     "Pour mettre en voix « — Au secours ! Le feu ! » cria le pompier, il faut lire cette phrase...",
@@ -98,7 +98,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_fluence_5",
-    "fluence_lecture",
+    "lecture_voix_haute",
     "cm2_flue_plaisir_lire",
     3,
     "Pour lire une histoire à des plus jeunes et leur donner envie d'écouter, le mieux est de...",
@@ -110,7 +110,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   // ── 2. Comprendre textes et documents complexes ────────────────────────────
   qcm(
     "cm2_fr_fixed_comp_1",
-    "comprehension_textes_documents",
+    "comprehension_textes",
     "cm2_comp_autonomie",
     1,
     "Quand tu ne comprends pas un passage en lisant seul, le mieux est de...",
@@ -120,7 +120,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_comp_2",
-    "comprehension_textes_documents",
+    "comprehension_textes",
     "cm2_comp_essentiel",
     1,
     "Restituer l'essentiel d'un texte, c'est...",
@@ -130,7 +130,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_comp_3",
-    "comprehension_textes_documents",
+    "comprehension_textes",
     "cm2_comp_implicite",
     2,
     "Lis : « Kévin sortit de l'eau, rangea ses lunettes dans son sac et remit son maillot trempé. » Que vient de faire Kévin ?",
@@ -140,7 +140,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_comp_4",
-    "comprehension_textes_documents",
+    "comprehension_textes",
     "cm2_comp_genres",
     2,
     "Un texte écrit en vers, avec des rimes et des strophes, est...",
@@ -150,7 +150,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_comp_5",
-    "comprehension_textes_documents",
+    "comprehension_documents",
     "cm2_doc_composite",
     2,
     "Dans un documentaire, à quoi sert surtout un schéma légendé ?",
@@ -160,7 +160,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_comp_6",
-    "comprehension_textes_documents",
+    "comprehension_documents",
     "cm2_doc_croiser_infos",
     3,
     "Une affiche dit que le musée ouvre à 9 h ; une autre qu'il est fermé le mardi. Peux-tu le visiter mardi à 10 h ?",
@@ -202,7 +202,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_oeuvre_4",
-    "lecture_oeuvres",
+    "culture_lecteur",
     "cm2_oeuvre_choix",
     2,
     "Pour bien choisir un livre à lire, une bonne raison est de dire :",
@@ -212,7 +212,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_oeuvre_5",
-    "lecture_oeuvres",
+    "culture_lecteur",
     "cm2_oeuvre_carnet",
     3,
     "Pour tenir un carnet de lecture bien organisé, on note pour chaque livre...",
@@ -224,7 +224,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   // ── 4. Produire, organiser et réviser des écrits ───────────────────────────
   qcm(
     "cm2_fr_fixed_ecrit_1",
-    "ecriture",
+    "ecriture_preparer",
     "cm2_ecrit_copie",
     1,
     "Pour copier vite et sans erreur un texte long, le mieux est de...",
@@ -234,7 +234,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_ecrit_2",
-    "ecriture",
+    "ecriture_preparer",
     "cm2_ecrit_plan",
     1,
     "Avant d'écrire un texte, faire un plan, c'est...",
@@ -244,7 +244,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_ecrit_3",
-    "ecriture",
+    "ecriture_preparer",
     "cm2_ecrit_notes",
     2,
     "Prendre des notes pour retenir une leçon, c'est écrire...",
@@ -254,7 +254,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_ecrit_4",
-    "ecriture",
+    "ecriture_produire",
     "cm2_ecrit_paragraphe",
     2,
     "Quand on change d'idée dans un texte, on...",
@@ -264,7 +264,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_ecrit_5",
-    "ecriture",
+    "ecriture_produire",
     "cm2_ecrit_varie",
     2,
     "Pour écrire un dialogue entre deux personnages, on utilise surtout...",
@@ -274,7 +274,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_ecrit_6",
-    "ecriture",
+    "ecriture_reviser",
     "cm2_ecrit_reviser",
     3,
     "Pour enrichir la phrase « Le chien court. », on peut écrire...",
@@ -286,7 +286,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   // ── 5. Écouter, présenter et argumenter ────────────────────────────────────
   qcm(
     "cm2_fr_fixed_oral_1",
-    "oral",
+    "oral_ecouter",
     "cm2_oral_ecouter",
     1,
     "Écouter un exposé pour en retenir l'idée principale, c'est...",
@@ -296,7 +296,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_oral_2",
-    "oral",
+    "oral_ecouter",
     "cm2_oral_reformuler",
     2,
     "Synthétiser ce qu'un camarade vient de dire, c'est...",
@@ -306,7 +306,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_oral_3",
-    "oral",
+    "oral_echanger",
     "cm2_oral_presenter",
     2,
     "Pour présenter un exposé sur les volcans, il vaut mieux employer...",
@@ -316,7 +316,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_oral_4",
-    "oral",
+    "oral_echanger",
     "cm2_oral_argumenter",
     2,
     "Pour appuyer ton avis « Ce livre est drôle », tu ajoutes...",
@@ -326,7 +326,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_oral_5",
-    "oral",
+    "oral_echanger",
     "cm2_oral_debat",
     3,
     "Dans un débat réglé, quand on n'est pas d'accord, on...",
@@ -338,7 +338,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   // ── 6. Vocabulaire, nuances et orthographe lexicale ────────────────────────
   qcm(
     "cm2_fr_fixed_voc_1",
-    "vocabulaire",
+    "vocabulaire_emploi",
     "cm2_voc_orthographe",
     1,
     "Quelle est l'orthographe correcte ?",
@@ -348,7 +348,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_voc_2",
-    "vocabulaire",
+    "vocabulaire_sens",
     "cm2_voc_contexte",
     2,
     "Dans « La vieille cabane était vétuste et menaçait de s'écrouler », vétuste veut dire...",
@@ -358,7 +358,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_voc_3",
-    "vocabulaire",
+    "vocabulaire_formation",
     "cm2_voc_famille_prefixe_suffixe",
     2,
     "Avec le préfixe « in- », que veut dire « invisible » ?",
@@ -368,7 +368,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_voc_4",
-    "vocabulaire",
+    "vocabulaire_sens",
     "cm2_voc_polysemie",
     2,
     "Quelle phrase utilise « opération » au sens des mathématiques ?",
@@ -378,7 +378,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_voc_5",
-    "vocabulaire",
+    "vocabulaire_emploi",
     "cm2_voc_reemploi",
     2,
     "Quelle phrase emploie correctement le mot « généreux » ?",
@@ -388,7 +388,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_voc_6",
-    "vocabulaire",
+    "vocabulaire_sens",
     "cm2_voc_nuance",
     3,
     "Pour dire qu'on a très peur, quel mot est le plus fort ?",
@@ -408,7 +408,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
 
   qcm(
     "cm2_fr_fixed_voc_figure_1",
-    "vocabulaire",
+    "vocabulaire_sens",
     "cm2_voc_sens_figure",
     2,
     "Dans « Elle a dévoré ce livre en une soirée », le verbe « dévorer » est employé...",
@@ -418,7 +418,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_voc_figure_2",
-    "vocabulaire",
+    "vocabulaire_sens",
     "cm2_voc_sens_figure",
     2,
     "Que veut dire l'expression « avoir le cœur sur la main » ?",
@@ -428,7 +428,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_voc_figure_3",
-    "vocabulaire",
+    "vocabulaire_sens",
     "cm2_voc_sens_figure",
     3,
     "Dans quelle phrase « brûler » est-il employé au sens PROPRE ?",
@@ -439,7 +439,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
 
   qcm(
     "cm2_fr_fixed_voc_registre_1",
-    "vocabulaire",
+    "vocabulaire_emploi",
     "cm2_voc_niveau_langue",
     1,
     "Parmi ces mots, lequel appartient au langage familier ?",
@@ -449,7 +449,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_voc_registre_2",
-    "vocabulaire",
+    "vocabulaire_emploi",
     "cm2_voc_niveau_langue",
     2,
     "Tu écris une lettre au maire de ta commune. Quelle formulation choisis-tu ?",
@@ -459,7 +459,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_voc_registre_3",
-    "vocabulaire",
+    "vocabulaire_emploi",
     "cm2_voc_niveau_langue",
     3,
     "Range du plus familier au plus soutenu : voiture, bagnole, automobile.",
@@ -470,7 +470,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
 
   qcm(
     "cm2_fr_fixed_voc_racine_1",
-    "vocabulaire",
+    "vocabulaire_formation",
     "cm2_voc_racines",
     2,
     "Dans « bibliothèque », que veut dire la racine grecque « biblio » ?",
@@ -480,7 +480,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_voc_racine_2",
-    "vocabulaire",
+    "vocabulaire_formation",
     "cm2_voc_racines",
     2,
     "Dans « aquarium » et « aquatique », que désigne la racine latine « aqua » ?",
@@ -490,7 +490,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_voc_racine_3",
-    "vocabulaire",
+    "vocabulaire_formation",
     "cm2_voc_racines",
     3,
     "« Télé » veut dire « loin ». Que fait donc un téléphone ?",
@@ -501,7 +501,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
 
   qcm(
     "cm2_fr_fixed_voc_compose_1",
-    "vocabulaire",
+    "vocabulaire_formation",
     "cm2_voc_composition",
     1,
     "Quel mot est formé par composition, c'est-à-dire par la réunion de deux mots ?",
@@ -511,7 +511,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_voc_compose_2",
-    "vocabulaire",
+    "vocabulaire_formation",
     "cm2_voc_composition",
     2,
     "Lequel de ces mots N'EST PAS un mot composé ?",
@@ -521,7 +521,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_voc_compose_3",
-    "vocabulaire",
+    "vocabulaire_formation",
     "cm2_voc_composition",
     2,
     "Que désigne le mot composé « ouvre-boîte » ?",
@@ -532,7 +532,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
 
   qcm(
     "cm2_fr_fixed_voc_homonyme_1",
-    "vocabulaire",
+    "vocabulaire_formation",
     "cm2_voc_homonymie",
     1,
     "« Le ver, le verre, le vert » : ces mots sont...",
@@ -542,7 +542,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_voc_homonyme_2",
-    "vocabulaire",
+    "vocabulaire_formation",
     "cm2_voc_homonymie",
     2,
     "Quel mot est l'homonyme de « conte », une histoire ?",
@@ -552,7 +552,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_voc_homonyme_3",
-    "vocabulaire",
+    "vocabulaire_formation",
     "cm2_voc_homonymie",
     3,
     "Lequel de ces couples N'EST PAS un couple d'homonymes ?",
@@ -564,7 +564,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   // ── 7. Phrase, groupes, accords et homophones ──────────────────────────────
   qcm(
     "cm2_fr_fixed_gram_1",
-    "grammaire_orthographe",
+    "grammaire_phrase",
     "cm2_gram_phrase_simple",
     1,
     "Combien de verbes conjugués contient une phrase simple ?",
@@ -574,7 +574,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_gram_2",
-    "grammaire_orthographe",
+    "grammaire_phrase",
     "cm2_gram_sujet_verbe",
     1,
     "Dans « Chaque matin, les coqs du village chantent », quel est le verbe conjugué ?",
@@ -584,7 +584,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_gram_3",
-    "grammaire_orthographe",
+    "grammaire_complements",
     "cm2_gram_complements",
     2,
     "Dans « Le soir, Léa lit un roman », quel groupe peut être supprimé sans casser la phrase ?",
@@ -594,7 +594,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_gram_4",
-    "grammaire_orthographe",
+    "grammaire_groupe_nominal",
     "cm2_gram_gn",
     2,
     "Dans « une tarte aux pommes toute chaude », quelles sont les expansions du nom « tarte » ?",
@@ -604,7 +604,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_gram_5",
-    "grammaire_orthographe",
+    "grammaire_accords",
     "cm2_orth_accord_gn",
     2,
     "Quel groupe nominal est correctement accordé ?",
@@ -614,7 +614,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_gram_6",
-    "grammaire_orthographe",
+    "grammaire_accords",
     "cm2_orth_sujet_verbe",
     3,
     "Choisis la forme correcte : « Les élèves de la classe ___ à la cantine. »",
@@ -624,7 +624,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_gram_7",
-    "grammaire_orthographe",
+    "grammaire_accords",
     "cm2_orth_homophones",
     3,
     "Homophones « a » / « à » : choisis la phrase correcte.",
@@ -698,7 +698,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   // ── 9. Conjugaison et valeur des temps (écrit à la main) ───────────────────
   qcm(
     "cm2_fr_fixed_conj_1",
-    "conjugaison",
+    "conjugaison_temps_simples",
     "cm2_conj_infinitif_groupe",
     1,
     "Quel est l'infinitif du verbe dans « Nous finissons notre travail » ?",
@@ -708,7 +708,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_conj_2",
-    "conjugaison",
+    "conjugaison_temps_simples",
     "cm2_conj_present",
     2,
     "Choisis la forme correcte au présent : « Nous ___ nos devoirs. »",
@@ -718,7 +718,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_conj_3",
-    "conjugaison",
+    "conjugaison_temps_simples",
     "cm2_conj_imparfait",
     2,
     "Choisis la forme correcte à l'imparfait : « Nous ___ dans le jardin. »",
@@ -728,7 +728,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_conj_4",
-    "conjugaison",
+    "conjugaison_temps_simples",
     "cm2_conj_futur",
     2,
     "Choisis la forme correcte au futur : « Demain, tu ___ tes clés. »",
@@ -738,7 +738,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_conj_5",
-    "conjugaison",
+    "conjugaison_recit",
     "cm2_conj_passe_compose",
     2,
     "Choisis la forme correcte au passé composé : « Elles ___ à la maison. » (verbe rentrer)",
@@ -748,7 +748,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_conj_6",
-    "conjugaison",
+    "conjugaison_recit",
     "cm2_conj_passe_simple_intro",
     3,
     "Dans « Le loup entra dans la bergerie », à quel temps est le verbe « entra » ?",
@@ -758,7 +758,7 @@ export const francaisCm2FixedBank: TutorBankItemFixedV4[] = [
   ),
   qcm(
     "cm2_fr_fixed_conj_7",
-    "conjugaison",
+    "conjugaison_recit",
     "cm2_conj_valeur_temps",
     3,
     "Dans « Il lisait tranquillement quand la porte claqua », quel verbe raconte l'action soudaine ?",

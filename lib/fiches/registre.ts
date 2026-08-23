@@ -294,6 +294,44 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
       "Compter les propositions, distinguer juxtaposition, coordination et subordination, choisir qui, que, où.",
   },
 
+  /* ⭐ LA 6e OUVRE ICI (22/08/2026). Elle n'avait aucune fiche de français,
+     parce que ses notions faisaient jusqu'à NEUF micro-compétences : rien de
+     tel ne tient dans une fiche. Elle a été relue sur le BO n° 16 du 17 avril
+     2025 le matin même — 29 notions de 3 à 5 micros —, et la première fiche
+     porte l'objectif que le programme de 6e formule comme une OPPOSITION,
+     c'est-à-dire le geste neuf de l'année. */
+  "francais/6e/grammaire-complements": {
+    titre: "Attribut du sujet et compléments du verbe",
+    resume:
+      "Opposer l'attribut et le COD, distinguer direct et indirect, reconnaître un circonstanciel de temps, de lieu ou de cause.",
+  },
+  "francais/6e/grammaire-groupe-nominal": {
+    titre: "Le groupe nominal : épithète et complément du nom",
+    resume:
+      "Trouver le nom noyau, distinguer l'épithète du complément du nom, reconnaître un groupe nominal quelle que soit sa fonction.",
+  },
+  "francais/6e/grammaire-pronoms": {
+    titre: "Les pronoms personnels et leur antécédent",
+    resume:
+      "Sujet ou complément, préciser la fonction d'un pronom et remonter jusqu'au groupe qu'il reprend.",
+  },
+  /* ⚠️ LA 6e A SA PROPRE FICHE DE PHRASE COMPLEXE, ET CE N'EST PAS UN DOUBLON
+     DE CELLE DU CM2. Le BO du CM2 distingue simple et complexe « à partir du
+     repérage DES VERBES CONJUGUÉS » ; celui de la 6e « à partir de la notion DE
+     PROPOSITION », et lui ajoute un objectif que le CM2 n'a pas : « Distinguer
+     LE RÔLE de la conjonction de coordination et celui de la conjonction de
+     subordination ». Deux années, deux marches. */
+  "francais/6e/phrase-complexe": {
+    titre: "Se repérer dans la phrase complexe",
+    resume:
+      "Compter les propositions, distinguer juxtaposition, coordination et subordination, et dire ce que fait chaque conjonction.",
+  },
+  "francais/6e/grammaire-accords": {
+    titre: "Les accords et les homophones",
+    resume:
+      "Tenir la chaîne du groupe nominal, accorder avec un sujet éloigné, le participe passé avec être et avec le COD antéposé.",
+  },
+
   "ia/fondements/definir-l-ia": { titre: "Qu'est-ce que l'intelligence artificielle ?" },
   "ia/fondements/apprentissage-automatique": { titre: "L'apprentissage automatique" },
   "ia/fondements/modeles-apprentissage": { titre: "Les modèles d'apprentissage" },
