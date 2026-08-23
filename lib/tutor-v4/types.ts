@@ -69,7 +69,11 @@ export type {
   PhraseCanvasMot,
   PhraseCanvasGroupe,
   PhraseCanvasLien,
-  PhraseCanvasData
+  PhraseCanvasData,
+  ConjugaisonSegment,
+  ConjugaisonLigne,
+  ConjugaisonRepere,
+  ConjugaisonCanvasData
 } from "./types_canvas";
 
 import type { CanvasFigure } from "./types_canvas";

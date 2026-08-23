@@ -83,6 +83,7 @@ se pose sur `figure.schema`, `propriete.schema`, `exemple.schema`, `formule.sche
 | `kind` | Ce qu'il montre | ⛔ Pas pour |
 |---|---|---|
 | `phrase` | **Le canvas du français** : les mots en étiquettes, les groupes sous un crochet coloré, la nature au-dessus, les flèches d'accord, de question et de reprise par-dessus | Un texte de plusieurs phrases (les reprises d'un paragraphe), un tableau de conjugaison |
+| `conjugaison` | **Le canvas du verbe** : la forme verbale démontée en wagons (radical, marque de temps, marque de personne), les temps composés en deux caisses accrochées, le tableau des six personnes, et la frise passé/présent/futur | Une phrase (c'est `phrase`), une durée sur une horloge (c'est `duree`) |
 
 C'est à la grammaire ce que `number_line` est aux nombres : **un seul objet, dessiné
 toujours pareil, sur lequel toutes les notions viennent se poser**. Avant d'en écrire un
@@ -103,12 +104,49 @@ vert, circonstanciel orange, attribut violet, expansion du nom rose. Elle se dé
 `label` : une fiche écrit `label: "sujet"`, jamais une couleur. Deux fiches ne peuvent
 donc pas diverger. ⚠️ L'ordre des tests compte : « attribut du sujet » contient « sujet ».
 
-⛔ **Le réglage qui décide de tout : `largeurMax` (270 par défaut).** Le bloc qui reçoit un
+⛔ **Le réglage qui décide de tout : `largeurMax` (250 par défaut).** Le bloc qui reçoit un
 dessin mesure **226 px sur un téléphone de 375** — mesuré sur la fiche, pas estimé. Un SVG
 se met à l'échelle de son bloc : dessiné sur 466 px, il y écrit ses mots en 7,8 px. À 270,
 le rapport est de 0,84 et les mots restent à 13 px : **la phrase se plie en deux lignes
 plutôt que de rapetisser**. Le canvas coupe **entre les groupes**, jamais dedans — sinon
 crochet orphelin, étiquette sous un demi-groupe et flèches en diagonale.
+
+---
+
+### `conjugaison` — les quatre modes, et celui qui ne va pas partout
+
+Ajouté le 23/08/2026. Frédéric : « on ajoute un canvas, à cet âge il faut des
+dessins », « ou schéma ludique ». Il a fallu le créer parce que `phrase`
+s'interdit lui-même « un tableau de conjugaison » : les quatre notions de
+conjugaison de la 6e n'avaient donc AUCUN dessin possible.
+
+**Une forme verbale est un mot ASSEMBLÉ** — le BO parle de « la composition de
+la terminaison » et de « la composition EN DEUX PARTIES » des temps composés.
+D'où les wagons : chaque morceau est une caisse sur ses roues, et la forme
+verbale est le train. La métaphore n'est pas un décor, elle dit la règle.
+
+| `mode` | Ce qu'il montre | Où le poser |
+|---|---|---|
+| `wagons` (défaut) | radical + marque de temps + marque de personne, accrochés | partout |
+| `composee` | auxiliaire + participe passé, avec la flèche d'accord — ou la **croix** qui dit son absence | partout |
+| `tableau` | les six personnes, la partie qui varie en relief (`alerte`) | partout |
+| `frise` | passé / présent / futur, pour la valeur des temps | ⛔ **bloc d'exemple ou de méthode uniquement** |
+
+⛔ **LA FRISE NE VA PAS DANS UNE CARTE DE PROPRIÉTÉ.** Elle porte trois zones
+qui doivent rester lisibles : sa largeur naturelle est de ~420 px. Dans une
+carte sur trois colonnes (250 px) elle tombe à **8 px de police** — mesuré,
+et `scripts/apercu-canvas.mjs` la refuse. Baisser sa police serait la mauvaise
+réparation : c'est la largeur qui manque, pas la place.
+
+⚠️ **Les `note` sous les wagons se comptent en caractères.** C'est la note, et
+non le mot, qui fixe la largeur d'un wagon : « 1re p. plur. » (12 signes) pousse
+le dessin à 303 px, donc à 11,2 px de police dans une carte de 250. Viser
+**huit caractères** — « imparfait », « nous », « radical ».
+
+⭐ La couleur porte le rôle, comme la fonction dans `phrase` : radical bleu,
+marque de temps orange, marque de personne verte, auxiliaire rouge (la même
+couleur que le verbe conjugué ailleurs), participe passé violet. Une fiche écrit
+`role: "temps"`, jamais une couleur.
 
 ---
 

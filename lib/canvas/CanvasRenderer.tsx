@@ -34,6 +34,7 @@ import ContenanceCanvas from "./ContenanceCanvas";
 import EchelleCanvas from "./EchelleCanvas";
 import SchemaBarreCanvas from "./SchemaBarreCanvas";
 import PhraseCanvas from "./PhraseCanvas";
+import ConjugaisonCanvas from "./ConjugaisonCanvas";
 
 
 type Props = {
@@ -140,6 +141,9 @@ export default function CanvasRenderer({ figure }: Props) {
     // Le premier canvas non mathématique : la phrase analysée (français).
     case "phrase":
       return <PhraseCanvas figure={figure} />;
+
+    case "conjugaison":
+      return <ConjugaisonCanvas figure={figure} />;
 
     default:
       return null;

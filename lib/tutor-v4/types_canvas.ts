@@ -1430,7 +1430,7 @@ export type PhraseCanvasData = {
     showGroupes?: boolean;
   };
   /**
-   * ⭐ LA LARGEUR OÙ LA PHRASE PASSE À LA LIGNE (défaut : 300).
+   * ⭐ LA LARGEUR OÙ LA PHRASE PASSE À LA LIGNE (défaut : 250).
    *
    * C'est le réglage qui décide de la lisibilité sur téléphone, et il se calcule.
    * Mesuré sur la fiche réelle en 375 px de large : le bloc qui reçoit un dessin
@@ -1448,7 +1448,104 @@ export type PhraseCanvasData = {
   size?: { width?: number; height?: number };
 };
 
+// ─── LE CANVAS DE LA CONJUGAISON ──────────────────────────────────────────────
+// Ajouté le 23/08/2026, sur décision de Frédéric : « on ajoute un canvas, à cet
+// âge il faut des dessins », « ou schéma ludique ».
+//
+// ⭐ POURQUOI IL A FALLU EN CRÉER UN. `phrase` est le canvas du français, et son
+// commentaire l'interdit explicitement pour « un tableau de conjugaison ». Les
+// quatre notions de conjugaison de la 6e n'avaient donc AUCUN dessin possible :
+// on ne pouvait pas écrire leurs fiches sans violer la règle qui commande tout
+// le chantier — « montrer, pas raconter ».
+//
+// ⭐ CE QU'IL MONTRE, ET POURQUOI CETTE FORME-LÀ. Une forme verbale n'est pas un
+// mot : c'est un mot ASSEMBLÉ. Le BO le dit dans ces termes — « identifier la
+// composition de la terminaison : la marque de temps et la marque de personne »,
+// « connaitre la composition EN DEUX PARTIES des temps composés ». On dessine
+// donc des WAGONS qu'on accroche : chaque morceau est une caisse posée sur ses
+// roues, et la forme verbale est le train entier. La métaphore n'est pas un
+// décor — elle dit la vérité grammaticale, et un enfant de dix ans la lit sans
+// explication.
+//
+// ⛔ PAS POUR : une phrase (c'est `phrase`), ni une durée sur une horloge (c'est
+// `duree`). Ici, l'objet est LE VERBE, seul, démonté.
+
+/** Un wagon : un morceau de la forme verbale. La couleur vient du rôle, jamais
+ *  de l'appelant — comme dans `phrase`, pour que deux fiches ne divergent pas.
+ *  radical bleu · marque de temps orange · marque de personne verte. */
+export type ConjugaisonSegment = {
+  texte: string;
+  role: "radical" | "temps" | "personne";
+  /** Écrit sous le wagon, en petit : « imparfait », « 1re pers. plur. ». */
+  note?: string;
+  /** Le wagon qui change d'une personne à l'autre — contour épais et teinte
+   *  soutenue. C'est ainsi qu'on montre une variation du radical. */
+  alerte?: boolean;
+};
+
+/** Une ligne du tableau des six personnes (mode `tableau`). */
+export type ConjugaisonLigne = {
+  pronom: string;
+  radical: string;
+  terminaison: string;
+  /** La ligne où le radical change : « j'appelle » face à « nous appelons ». */
+  alerte?: boolean;
+};
+
+/** Un repère posé sur la frise (mode `frise`), pour la valeur des temps. */
+export type ConjugaisonRepere = {
+  texte: string;
+  zone: "passe" | "present" | "futur";
+  note?: string;
+};
+
+export type ConjugaisonCanvasData = {
+  kind: "conjugaison";
+  titre?: string;
+  /**
+   * · `wagons` (défaut) : la forme verbale démontée en radical + marques.
+   * · `composee`   : auxiliaire + participe passé, les deux caisses accrochées,
+   *                  avec la flèche d'accord — ou son absence, qui est le point.
+   * · `tableau`    : les six personnes d'un temps, la partie qui varie en relief.
+   * · `frise`      : passé / présent / futur, pour la valeur des temps.
+   */
+  mode?: "wagons" | "composee" | "tableau" | "frise";
+
+  /** L'infinitif, affiché en étiquette de départ (« chanter »). */
+  infinitif?: string;
+  /** Le pronom, posé devant le train (« nous »). */
+  pronom?: string;
+
+  /** mode `wagons`. */
+  segments?: ConjugaisonSegment[];
+
+  /** mode `composee`. */
+  auxiliaire?: { texte: string; note?: string };
+  participe?: { texte: string; note?: string };
+  /** La flèche d'accord. `absent: true` la remplace par une croix : c'est ainsi
+   *  qu'on montre « avec avoir et le COD placé après, on n'accorde pas ». */
+  accord?: { label?: string; absent?: boolean };
+
+  /** mode `tableau`. */
+  temps?: string;
+  lignes?: ConjugaisonLigne[];
+
+  /** mode `frise`. */
+  reperes?: ConjugaisonRepere[];
+
+  /** Phrase courte sous le dessin (la consigne, la remarque). */
+  legende?: string;
+  /**
+   * ⭐ MÊME RÈGLE QUE `phrase` : la largeur se règle, la hauteur se calcule.
+   * Le bloc qui reçoit un dessin ne fait que 201 px dans une carte de méthode
+   * sur un téléphone de 375. Défaut : 250, pour que les lettres restent au-dessus
+   * de 11 px une fois le dessin mis à l'échelle de son bloc.
+   */
+  size?: { width?: number; height?: number };
+};
+
 export type CanvasFigure =
+  | ConjugaisonCanvasData
   | PhraseCanvasData
   | TriangleCanvasData
   | QuadrilatereCanvasData
