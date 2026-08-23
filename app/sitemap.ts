@@ -130,6 +130,8 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours/francais/6e/grammaire-pronoms", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   { path: "/fiches-cours/francais/6e/phrase-complexe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   { path: "/fiches-cours/francais/6e/grammaire-accords", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/6e/conjugaison-formes", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/6e/conjugaison-temps-composes", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   // Fiches maths — refaites « en blocs » le 11/07, + les fiches 6e créées
   // le 12/07 (une par banque du coach) : fiche + flashcards + composeur.
   { path: "/fiches-cours/maths/6e/entier-nombre",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },

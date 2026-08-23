@@ -332,6 +332,23 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
       "Tenir la chaîne du groupe nominal, accorder avec un sujet éloigné, le participe passé avec être et avec le COD antéposé.",
   },
 
+  /* ⭐ LA CONJUGAISON DE LA 6e (23/08/2026). Ses quatre notions n'avaient AUCUNE
+     fiche possible tant que `phrase` était le seul canvas de la matière : son
+     propre commentaire s'interdit « un tableau de conjugaison ». Le canvas
+     `conjugaison` a été créé pour elles le matin même — la forme verbale
+     démontée en wagons, les temps composés en deux caisses, le tableau des six
+     personnes, la frise des valeurs. */
+  "francais/6e/conjugaison-formes": {
+    titre: "Lire une forme verbale : radical, temps, personne",
+    resume:
+      "Couper le verbe en radical et terminaison, y retrouver la marque de temps et celle de personne, et maîtriser les variations du radical du premier groupe.",
+  },
+  "francais/6e/conjugaison-temps-composes": {
+    titre: "Les temps composés : passé composé et plus-que-parfait",
+    resume:
+      "Former un verbe en deux parties, choisir entre être et avoir, accorder le participe, et reculer d'un cran avec le plus-que-parfait.",
+  },
+
   "ia/fondements/definir-l-ia": { titre: "Qu'est-ce que l'intelligence artificielle ?" },
   "ia/fondements/apprentissage-automatique": { titre: "L'apprentissage automatique" },
   "ia/fondements/modeles-apprentissage": { titre: "Les modèles d'apprentissage" },
