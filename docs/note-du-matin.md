@@ -30,6 +30,13 @@ n'a pas de lien mort** — elle garde son bouton d'impression.
 oublies la commande, sa page n'aura pas de PDF (pas de casse, juste pas de
 lien). À lancer en fin de session, comme un `git push`.
 
+⚠️ **Les fiches d'IA n'en ont pas** et n'en auront pas par ce chemin : elles
+passent par `FicheCoursIa.tsx`, un autre composant, dont le bouton appelle
+toujours `window.print()`. À traiter à part le jour où on s'en occupe.
+
+Le sitemap les prend automatiquement : il lit le même manifeste. Rien à
+maintenir de ce côté.
+
 > Écrite le soir du 23/08 depuis le poste du soir, à lire depuis le poste du
 > matin. **Commence par `git pull`.** Le partage est en place depuis le 23/08 :
 > les fiches de maths et de français se font le matin sur l'autre poste, le soir

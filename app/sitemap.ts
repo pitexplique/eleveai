@@ -4,6 +4,7 @@ import type { MetadataRoute } from "next";
 import { getAllBlogPosts } from "@/data/blogPosts";
 import { NIVEAUX, motsDeLaClasse } from "@/lib/dico";
 import { cgvEnVigueur } from "@/lib/legal/editeur";
+import { PDF_DISPONIBLES } from "@/lib/fiches/pdf-disponibles";
 
 // ⚠️ AVEC LE www : `eleveai.fr` répond 308 vers `www.eleveai.fr`. Sans lui,
 // les 270 lignes de ce fichier désignaient des adresses qui redirigent.
@@ -34,6 +35,8 @@ const LASTMOD_FICHES  = new Date("2026-07-11");
 const LASTMOD_FICHES_IA = new Date("2026-07-12");
 // Le français entre dans les fiches de cours (première fiche : la grammaire du CM2).
 const LASTMOD_FICHES_FR = new Date("2026-08-20");
+// 23/08 : les fiches deviennent de vrais PDF, fabriques par Chrome depuis la page.
+const LASTMOD_FICHES_PDF = new Date("2026-08-23");
 // 25/07 : lancement des kits de survie lycée (Première spé maths en premier)
 const LASTMOD_KIT = new Date("2026-07-28");
 const LASTMOD_AUDIENCES = new Date("2026-07-05");
@@ -666,5 +669,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
-  return [...staticRoutes, ...blogRoutes];
+  // ⭐ LES PDF DES FICHES (23/08/2026) — et Google les indexe comme des
+  // documents à part entière, pas comme une pièce jointe de la page.
+  //
+  // C'est la moitié de l'intérêt d'avoir fabriqué de vrais fichiers plutôt que
+  // de laisser une boîte d'impression : chaque fiche gagne une SECONDE entrée
+  // possible dans les résultats, et le nom du fichier est lui-même indexé —
+  // « fractions-6e-cours-exercices-corriges.pdf ».
+  //
+  // ⚠️ LA LISTE SE GÉNÈRE, ELLE NE S'ÉCRIT PAS. `PDF_DISPONIBLES` est réécrit
+  // par scripts/build-fiches-pdf.ts, qui relit public/fiches/. Un PDF fabriqué
+  // entre donc au sitemap sans que personne ait à y penser — et un PDF supprimé
+  // en sort, ce qui évite le précédent de /photo-cours (une adresse au sitemap
+  // que le site demandait aux moteurs d'ignorer).
+  // ⚠️ Priorité plus basse que la page : le PDF est une COMMODITÉ, la page est
+  // la ressource. S'ils se concurrencent, c'est la page qu'on veut voir sortir.
+  const pdfRoutes = [...PDF_DISPONIBLES].map((f) => ({
+    url: u(`/fiches/${f}`),
+    lastModified: LASTMOD_FICHES_PDF,
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...blogRoutes, ...pdfRoutes];
 }
