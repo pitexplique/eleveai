@@ -23,13 +23,17 @@ const droiteDizaine = (
       kind: "number_line",
       min: 45,
       max: 57,
-      step: 1,
+      // ⚠️ MESURÉ LE 24/08 : `step: 1` posait treize graduations sur 260 px et
+      // les nombres se touchaient deux à deux, à 10,3 px. Une graduation tous
+      // les 3 suffit — les POINTS, eux, restent placés au nombre exact.
+      step: 3,
       points: [
         { value: 47, label: "47", color: "#38BDF8" },
         { value: 50, label: "50", color: "#F97316" },
         { value: 55, label: "55", color: "#00FF7F" },
       ],
       display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
+      size: { width: 260, height: 95 },
     }}
   />
 );
@@ -44,8 +48,16 @@ const barreFois5 = (
         { label: "18 × 5", value: "90", color: "#00FF7F" },
         { label: "18 × 5", value: "90", color: "#38BDF8" },
       ],
-      questionLabel: "18 × 10 = 180, et 18 × 5 en est la moitié : 90.",
+      // ⚠️ Phrase raccourcie ET cadre serré le 24/08 : sans `size`, le canvas
+      // prend 340 de large et ses étiquettes tombent à 8,6 px dans un bloc de
+      // 244. Sous 245, elles rendent 12 — mais alors une phrase de 47 signes
+      // déborde du cadre, en silence. Les deux réglages vont ensemble.
+      questionLabel: "18 × 10 = 180, sa moitié : 90",
       display: { showTotal: true, showPartLabels: true, showValues: true, showQuestion: true },
+      // ⚠️ 210, PAS 240 : mesuré le 24/08, un bloc d'EXEMPLE ne fait que 199 px
+      // sur un téléphone de 375 — plus étroit qu'une carte de propriété (225).
+      // C'est lui, le bloc le plus serré du site.
+      size: { width: 210, height: 190 },
     }}
   />
 );
@@ -60,10 +72,179 @@ const barreMonnaie = (
         { label: "les achats", value: "9 €", color: "#38BDF8" },
         { label: "rendu", unknown: true, color: "#F97316" },
       ],
-      questionLabel: "On paie 9 €, on cherche ce qui manque pour aller à 10 €.",
+      // ⚠️ 28 signes débordaient encore du cadre de 210, en silence — mesuré au
+      // rendu (le texte sortait du <svg>). La phrase du bas se compte en
+      // caractères, pas en px : viser vingt.
+      questionLabel: "il manque combien ?",
       display: { showTotal: true, showPartLabels: true, showValues: true, showQuestion: true },
+      size: { width: 210, height: 190 },
     }}
   />
+);
+
+// ─── Les sept dessins des blocs ───────────────────────────────────────────────
+// ⛔ PAS UN SEUL `calcul_pose` SUR CETTE FICHE, et c'est le catalogue qui le dit :
+// « `calcul_pose` montre une opération posée, ⛔ pas un calcul mental ». Poser
+// 134 + 28 en colonnes, ce serait montrer exactement ce qu'on demande à l'élève
+// de NE PAS faire. Restent trois familles de dessins — la barre (un tout qu'on
+// coupe), la droite (un nombre qu'on situe) et le tableau (ce qu'on sait par
+// cœur) — et sept messages différents à leur faire porter (REGLES.md § 2 bis).
+
+/** Un dessin et sa phrase, sous lui. */
+const legende = (dessin: React.ReactNode, texte: string) => (
+  <div>
+    {dessin}
+    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+  </div>
+);
+
+// DÉCOUPER, C'EST GARDER LE MÊME TOUT. 134 + 28 devient 134, puis 20, puis 8 :
+// trois morceaux bout à bout qui refont 162. La droite graduée ne saurait pas le
+// montrer — elle dessine des points, pas des morceaux (CATALOGUE.md).
+const barreDecomposition = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      // ⚠️ ON COUPE LE 28, PAS LE TOUT. Première version : 162 = 134 + 20 + 8.
+      // Mesuré au rendu, les deux petites parts faisaient 29 et 12 px de large —
+      // « + 20 » et « + 8 » se chevauchaient. Le message est le découpage de
+      // l'AJOUT : deux parts comparables, lisibles.
+      title: "On coupe le 28",
+      total: "28",
+      parts: [
+        { label: "d'abord", value: "20", color: "#F97316" },
+        { label: "ensuite", value: "8", color: "#00FF7F" },
+      ],
+      questionLabel: "134 → 154 → 162",
+      // ⚠️ Largeur sous 245 (`SchemaBarreCanvas` écrit en 12 px) et hauteur à
+      // 190, sinon les étiquettes touchent la phrase du bas.
+      size: { width: 240, height: 190 },
+    }}
+  />
+);
+
+// CE QU'ON SAIT PAR CŒUR, ET QU'ON N'A PLUS À CALCULER. Le seul dessin de la
+// fiche qui ne montre aucun calcul en train de se faire : une liste apprise.
+const memoDesComplements = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Les compléments à connaître",
+      headers: ["à 10", "à 100"],
+      rows: [
+        { values: ["7 + 3", "70 + 30"] },
+        { values: ["6 + 4", "64 + 36"] },
+        { values: ["5 + 5", "55 + 45"] },
+      ],
+      highlight: { col: 1 },
+      questionLabel: "36 pour aller à 100 : c'est 64.",
+    }}
+  />
+);
+
+// ⭐ LA TABLE SE LIT DANS LES DEUX SENS, ET LE TABLEAU AUSSI. De gauche à
+// droite on multiplie par 7, de droite à gauche on divise : c'est la propriété
+// elle-même, et aucun autre canvas de la fiche ne se lit dans deux sens.
+const tableDansLesDeuxSens = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_proportionnalite",
+      rows: 2,
+      cols: 4,
+      rowLabels: ["le nombre", "× 7"],
+      values: [
+        ["1", "5", "9", "10"],
+        ["7", "35", "63", "70"],
+      ],
+      missing: [],
+      highlightedCells: [{ row: 1, col: 2 }],
+      display: { showRowLabels: true, showColLabels: false, showGrid: true },
+      size: { width: 250, height: 150 },
+    }}
+  />,
+  "9 × 7 = 63 en descendant, 63 ÷ 7 = 9 en remontant"
+);
+
+// LE 1 DE TROP, DEVENU UNE LONGUEUR. Arrondir fait dépasser : la barre montre
+// que 147 contient les 146 cherchés PLUS un petit bout à rendre.
+const barreDuTropPlein = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      title: "99 + 47 par 100 + 47",
+      total: "147",
+      parts: [
+        { label: "la réponse", value: "146", color: "#00FF7F" },
+        { label: "en trop", value: "1", color: "#F97316" },
+      ],
+      questionLabel: "on a ajouté 1 de trop, on l'enlève",
+      size: { width: 240, height: 190 },
+    }}
+  />
+);
+
+// OBSERVER, C'EST VOIR LE NOMBRE ROND JUSTE À CÔTÉ. La droite ne sert ici ni à
+// sauter ni à calculer : elle montre une PROXIMITÉ, 99 collé à 100.
+const droiteDuNombreRond = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min: 95,
+      max: 105,
+      // Une graduation tous les 5 : à `step: 1`, les nombres à trois chiffres
+      // se touchaient (mesuré).
+      step: 5,
+      points: [
+        { value: 99, label: "99", color: "#38BDF8" },
+        { value: 100, label: "100", color: "#F97316" },
+      ],
+      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
+      size: { width: 260, height: 95 },
+    }}
+  />,
+  "99 est collé à 100 : autant partir de 100"
+);
+
+// LES DEUX SAUTS, SUR D'AUTRES NOMBRES QUE LA FIGURE. La figure du cours fait
+// 47 + 8 ; la méthode fait 68 + 7, les nombres de son propre texte.
+const droiteDesDeuxSauts = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min: 65,
+      max: 80,
+      step: 5,
+      points: [
+        { value: 68, label: "68", color: "#38BDF8" },
+        { value: 70, label: "70", color: "#F97316" },
+        { value: 75, label: "75", color: "#00FF7F" },
+      ],
+      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
+      size: { width: 260, height: 95 },
+    }}
+  />,
+  "68 + 2 pour atteindre 70, puis + 5"
+);
+
+// ⭐ VÉRIFIER, C'EST REGARDER DE LOIN. La même droite, mais déroulée sur 140 :
+// 69 est là où on l'attendait, 129 est visiblement hors sujet. Aucun calcul —
+// juste l'ordre de grandeur, qui est tout l'objet de la troisième étape.
+const droiteDeLOrdreDeGrandeur = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min: 0,
+      max: 140,
+      step: 20,
+      points: [
+        { value: 69, label: "69", color: "#00FF7F" },
+        { value: 129, label: "129", color: "#F87171" },
+      ],
+      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
+      size: { width: 280, height: 95 },
+    }}
+  />,
+  "96 − 27 : un peu moins de 70. 129 est impossible."
 );
 
 const pieges = [
@@ -105,21 +286,25 @@ export const ficheCalculMental6e: FicheCoursData = {
       titre: "Décomposer les nombres",
       texte:
         "On peut couper un nombre en morceaux plus simples sans changer le résultat. Pour 134 + 28, on ajoute d'abord 20 (154), puis 8 (162). Chaque étape est facile.",
+      schema: barreDecomposition,
     },
     {
       titre: "S'appuyer sur les compléments à 10 et à 100",
       texte:
         "Les nombres ronds sont nos amis. 47 + 8 : on complète à 50 (47 + 3), puis on ajoute le reste (+ 5). Et pour 100 - 36, on cherche ce qui manque à 36 pour faire 100 : c'est 64.",
+      schema: memoDesComplements,
     },
     {
       titre: "Connaître ses tables dans les deux sens",
       texte:
         "Une table sert à multiplier et à diviser. Si on sait que 9 × 7 = 63, alors on sait aussi que 63 ÷ 9 = 7. Une seule table apprise, deux calculs gagnés.",
+      schema: tableDansLesDeuxSens,
     },
     {
       titre: "Arrondir puis corriger",
       texte:
         "On peut remplacer un nombre par un nombre rond proche, puis corriger. Pour 99 + 47, on calcule 100 + 47 = 147, puis on enlève le 1 de trop : 146.",
+      schema: barreDuTropPlein,
     },
   ],
   reel: {
@@ -135,16 +320,19 @@ export const ficheCalculMental6e: FicheCoursData = {
       titre: "Observer",
       texte:
         "Avant de calculer, on regarde les nombres : y a-t-il un nombre rond tout proche ? Une table que je connais ? Un double ou une moitié ?",
+      schema: droiteDuNombreRond,
     },
     {
       titre: "Décomposer",
       texte:
         "On coupe le calcul en étapes simples : les dizaines d'abord, puis les unités. Ou on passe par la dizaine suivante (68 + 7 : d'abord + 2, puis + 5).",
+      schema: droiteDesDeuxSauts,
     },
     {
       titre: "Vérifier",
       texte:
         "On se demande si le résultat est raisonnable : 96 - 27 doit donner un peu moins de 70. Si on trouve 129, c'est qu'on s'est trompé quelque part.",
+      schema: droiteDeLOrdreDeGrandeur,
     },
   ],
   usages: [

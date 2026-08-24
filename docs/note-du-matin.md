@@ -18,9 +18,9 @@ demandée.
 Le standard est **un visuel par bloc** : chaque propriété et chaque étape de
 méthode porte son dessin. Les exemples corrigés, eux, sont déjà dessinés partout.
 
-**Avancement : 6 fiches sur 18 (43 dessins sur 105).**
+**Avancement : 7 fiches sur 18 (50 dessins sur 105).**
 
-✅ **Les six fiches faites sont complètes** : mesurées sur la page à 375, 820 et
+✅ **Les sept fiches faites sont complètes** : mesurées sur la page à 375, 820 et
 1280 px (aucun texte sous 11 px, aucun chevauchement), PDF refaits, `verifier:pdf`
 au vert.
 
@@ -32,7 +32,7 @@ Lire et interpréter des données     4/4    3/3    2/2      0   ✅ 24/08, mesu
 Les triangles                       4/4    3/3    2/2      0   ✅ 24/08, mesurée + PDF
 Les quadrilatères                   4/4    3/3    2/2      0   ✅ 24/08, mesurée + PDF
 Les fractions                       4/4    3/3    4/4      0   ✅ 24/08, mesurée + PDF
-Le calcul mental                    0/4    0/3    3/3      7
+Le calcul mental                    4/4    3/3    3/3      0   ✅ 24/08, mesurée + PDF
 La symétrie axiale                  0/4    0/3    2/2      7
 Les volumes                         0/3    0/3    2/2      6
 Les pourcentages                    0/3    0/3    3/3      6
@@ -96,6 +96,16 @@ Aucun ne se lit dans le code, tous se mesurent sur la page (§ 2 quater) :
 3. **Le cadre se serre sur le dessin, donc la largeur du viewBox VARIE.** Deux
    angles côte à côte : l'aigu (viewBox 106) reste lisible, l'obtus (159) tombe
    à 9 px dans la même cellule. D'où `pile()` plutôt que deux colonnes.
+4. **Le bloc le plus serré du site est l'EXEMPLE, pas la carte de propriété** :
+   199 px sur un téléphone de 375, contre 225. Les canvas à viewBox fixe
+   (`schema_barre`, `stat_graph`, `probabilites`, `fraction`, `tableau_*`)
+   écrivent en 12–13 px : au-delà de **210** de viewBox dans un exemple, ou
+   **245** dans une propriété, le texte passe sous 11 px.
+5. **Trois défauts qui ne sont PAS des polices**, et qu'il faut chercher à part :
+   des graduations trop denses qui se touchent (`step: 1` sur douze nombres),
+   des étiquettes de parts trop étroites pour leur mot (une part qui vaut 8 sur
+   162 fait 12 px de large), et une phrase du bas qui SORT du cadre sans rien
+   casser — se compter en caractères, viser vingt.
 
 Le mesureur à coller dans la console (il rend les deux : polices sous 11 px et
 chevauchements de textes) est dans le commit `70d8076f`, mais il se réécrit en
