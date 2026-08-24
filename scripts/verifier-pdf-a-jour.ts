@@ -156,6 +156,31 @@ for (const f of fiches) {
   }
 }
 
+/**
+ * ⭐ LES PDF ORPHELINS (24/08/2026) — le piège de la réécriture.
+ *
+ * Frédéric : « je dois refaire toutes les fiches CM2 plus tard ». Or le nom d'un
+ * PDF se construit sur le H1 de la fiche (`nomPdf`). Réécrire une fiche en
+ * changeant son titre produit donc un fichier NEUF, et laisse l'ancien sur le
+ * disque — où plus aucune page ne le lie.
+ *
+ * Et il ne dort pas tranquille : `lib/fiches/pdf-disponibles.ts` est reconstruit
+ * en RELISANT le dossier, donc l'orphelin y reste ; app/sitemap.ts lit ce même
+ * manifeste, donc il continue de l'annoncer à Google. Résultat : deux PDF
+ * indexés pour une seule fiche, dont un périmé — exactement le précédent de
+ * /photo-cours, une adresse au sitemap que le site ne sert plus.
+ *
+ * ⚠️ ON NE SUPPRIME RIEN AUTOMATIQUEMENT. Un fichier qu'aucune fiche ne réclame
+ * peut aussi être un fichier dont la fiche a été renommée il y a une minute et
+ * qu'on veut rediriger. On signale, la personne tranche.
+ */
+const attendus = new Set(
+  fiches.filter((f) => f.pdf).map((f) => path.basename(f.pdf as string)),
+);
+const orphelins = fs.existsSync(PDF)
+  ? fs.readdirSync(PDF).filter((n) => n.endsWith(".pdf") && !attendus.has(n))
+  : [];
+
 const total = fiches.filter((f) => !f.route.startsWith("/fiches-cours/ia/")).length;
 console.log(`${total} fiches examinées (les fiches d'IA sont hors de ce contrôle).`);
 
@@ -174,8 +199,14 @@ if (enRetard.length) {
   console.log("\n   Pour les refaire — une seule fiche suffit, ce n'est pas la fournée :");
   console.log("   node --experimental-strip-types scripts/build-fiches-pdf.ts http://localhost:3000 <chemin>");
 }
-if (!enRetard.length && !sansPdf.length && !nonCommite.length) {
+if (orphelins.length) {
+  console.log(`\n🧹 ${orphelins.length} PDF ORPHELIN(S) — aucune fiche ne les réclame :`);
+  orphelins.forEach((n) => console.log("   " + n));
+  console.log("\n   Une fiche renommée ? Le fichier reste au sitemap tant qu'il est là.");
+  console.log("   Supprimer, ou rediriger l'ancienne adresse dans next.config.js.");
+}
+if (!enRetard.length && !sansPdf.length && !nonCommite.length && !orphelins.length) {
   console.log("\n✅ tous les PDF sont à jour.");
 }
 
-if (strict && (enRetard.length || sansPdf.length)) process.exit(1);
+if (strict && (enRetard.length || sansPdf.length || orphelins.length)) process.exit(1);
