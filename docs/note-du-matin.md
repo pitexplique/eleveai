@@ -18,7 +18,7 @@ demandée.
 Le standard est **un visuel par bloc** : chaque propriété et chaque étape de
 méthode porte son dessin. Les exemples corrigés, eux, sont déjà dessinés partout.
 
-**Avancement : 4 fiches sur 18 (29 dessins sur 105).**
+**Avancement : 5 fiches sur 18 (36 dessins sur 105).**
 
 ⚠️ **DEUX PDF RESTENT À REFAIRE** — l'autre session occupait le serveur de
 développement, et un PDF ne se fabrique qu'en rendant la page. À passer dès que
@@ -28,6 +28,7 @@ la machine est libre, puis `npm run verifier:pdf` :
 npm run build:fiches-pdf -- http://localhost:3000 /fiches-cours/maths/6e/proba-experience
 npm run build:fiches-pdf -- http://localhost:3000 /fiches-cours/maths/6e/stat-donnee
 npm run build:fiches-pdf -- http://localhost:3000 /fiches-cours/maths/6e/triangle-figure
+npm run build:fiches-pdf -- http://localhost:3000 /fiches-cours/maths/6e/quadrilatere-figure
 ```
 
 Il reste aussi, sur ces deux fiches, la mesure **sur la page** aux trois
@@ -41,7 +42,7 @@ Les angles                          4/4    3/3    2/2      0   ✅ 24/08, commit
 Premiers pas en probabilités        4/4    3/3    2/2      0   ✅ 24/08, PDF à refaire
 Lire et interpréter des données     4/4    3/3    2/2      0   ✅ 24/08, PDF à refaire
 Les triangles                       4/4    3/3    2/2      0   ✅ 24/08, PDF à refaire
-Les quadrilatères                   0/4    0/3    2/2      7
+Les quadrilatères                   4/4    3/3    2/2      0   ✅ 24/08, PDF à refaire
 Les fractions                       0/4    0/3    4/4      7
 Le calcul mental                    0/4    0/3    3/3      7
 La symétrie axiale                  0/4    0/3    2/2      7
