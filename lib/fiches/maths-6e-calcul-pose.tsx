@@ -48,6 +48,129 @@ const poseDivision = (
   />
 );
 
+// ─── Les six dessins des blocs ────────────────────────────────────────────────
+// ⭐ ICI LE CANVAS EST IMPOSÉ : une fiche sur le calcul POSÉ montre des calculs
+// posés. Le risque n'est donc pas de changer d'objet, c'est de poser six fois la
+// même opération (REGLES.md § 2 bis). Chaque dessin change ce qu'il MET EN
+// AVANT : une colonne, une retenue, l'opération inverse, un alignement faux, et
+// un ordre de grandeur qui n'est plus un calcul du tout.
+
+/** Un dessin et sa phrase, sous lui. */
+const legende = (dessin: React.ReactNode, texte: string) => (
+  <div>
+    {dessin}
+    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+  </div>
+);
+
+// LA COLONNE, ALLUMÉE. Poser, c'est d'abord ranger : la mise en avant d'une
+// seule colonne dit que les chiffres se répondent verticalement.
+const colonneDesUnites = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "calcul_pose",
+      operation: "addition",
+      title: "347 + 25",
+      numbers: ["347", "25"],
+      result: "372",
+      highlight: { col: 0 },
+      display: { showResult: true },
+    }}
+  />,
+  "les unités sous les unités : 7 et 5, pas 7 et 2"
+);
+
+// ⭐ LA RETENUE ÉCRITE, PAS RACONTÉE. Le seul dessin de la fiche qui porte la
+// petite ligne du haut — c'est elle, la propriété.
+const laRetenueEcrite = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "calcul_pose",
+      operation: "addition",
+      title: "168 + 47",
+      numbers: ["168", "47"],
+      result: "215",
+      retenues: ["1", "1", ""],
+      display: { showResult: true },
+    }}
+  />,
+  "8 + 7 = 15 : j'écris 5, je reporte 1"
+);
+
+// VÉRIFIER UNE DIVISION, C'EST FAIRE UNE MULTIPLICATION. L'exemple de la fiche
+// pose 58 ÷ 7 ; ce dessin-ci fait le chemin inverse, 7 × 8, et l'on retrouve 56
+// auquel il manque le reste 2. Deux opérations différentes pour un seul calcul.
+const verifierParLInverse = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "calcul_pose",
+      operation: "multiplication",
+      title: "La vérification",
+      numbers: ["7", "8"],
+      result: "56",
+      display: { showResult: true },
+    }}
+  />,
+  "7 × 8 = 56, plus le reste 2 : on retrouve 58"
+);
+
+// ⭐ L'ALIGNEMENT FAUX, ET C'EST LE SEUL CONTRE-EXEMPLE DE LA FICHE. Un calcul
+// posé correct ne montre jamais pourquoi l'alignement compte : il faut voir le
+// désastre. Un tableau, parce qu'aucun canvas de calcul ne sait poser DE TRAVERS.
+const alignementFaux = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "347 + 25, mal posé",
+      headers: ["Centaines", "Dizaines", "Unités", "?"],
+      rows: [
+        { label: "347", values: ["3", "4", "7", ""] },
+        { label: "25 décalé", values: ["", "", "2", "5"] },
+      ],
+      highlight: { cell: { row: 1, col: 3 } },
+      caption: "Le 5 tombe hors des unités : le résultat sera faux.",
+    }}
+  />
+);
+
+// CALCULER, C'EST DESCENDRE COLONNE PAR COLONNE — et la soustraction est celle
+// qui fait peur. Une retenue, mais dans l'autre sens.
+const soustractionAvecRetenue = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "calcul_pose",
+      operation: "soustraction",
+      title: "425 − 78",
+      numbers: ["425", "78"],
+      result: "347",
+      retenues: ["", "1", "1"],
+      display: { showResult: true },
+    }}
+  />,
+  "5 − 8 est impossible : on emprunte une dizaine"
+);
+
+// ⭐ VÉRIFIER SANS CALCULER. Le seul dessin de la fiche qui ne pose rien : 425
+// moins 78, c'est « un peu moins de 350 ». Un résultat à 500 se refuse d'un coup
+// d'œil, avant même de refaire l'opération.
+const ordreDeGrandeur = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min: 0,
+      max: 500,
+      step: 100,
+      points: [
+        { value: 347, label: "347", color: "#16a34a" },
+        { value: 480, label: "480 ?", color: "#dc2626" },
+      ],
+      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
+      size: { width: 280, height: 95 },
+    }}
+  />,
+  "425 − 78 : autour de 350, pas 480"
+);
+
 const pieges = [
   "Oublier une retenue : tout le reste du calcul devient faux.",
   "Mal aligner les chiffres : on additionne alors une unité avec une dizaine.",
@@ -85,14 +208,17 @@ export const ficheCalculPose6e: FicheCoursData = {
     {
       titre: "J'aligne les rangs",
       texte: "Unités sous unités, dizaines sous dizaines. Sinon le calcul est faux.",
+      schema: colonneDesUnites,
     },
     {
       titre: "Je gère la retenue",
       texte: "Si une colonne dépasse 9, j'écris le chiffre des unités et je reporte 1 à gauche.",
+      schema: laRetenueEcrite,
     },
     {
       titre: "Je vérifie",
       texte: "Avec l'opération inverse : dividende = diviseur × quotient + reste.",
+      schema: verifierParLInverse,
     },
   ],
   reel: {
@@ -104,9 +230,9 @@ export const ficheCalculPose6e: FicheCoursData = {
       "Vers 820, à Bagdad, le savant Al-Khwarizmi explique comment calculer pas à pas. Son nom a donné le mot « algorithme » : une suite d'étapes dans l'ordre.",
   },
   methode: [
-    { titre: "J'aligne", texte: "Les chiffres de même rang, l'un sous l'autre." },
-    { titre: "Je calcule", texte: "Colonne par colonne, de droite à gauche, avec les retenues." },
-    { titre: "Je vérifie", texte: "Avec l'opération inverse, ou un ordre de grandeur." },
+    { titre: "J'aligne", texte: "Les chiffres de même rang, l'un sous l'autre." , schema: alignementFaux },
+    { titre: "Je calcule", texte: "Colonne par colonne, de droite à gauche, avec les retenues." , schema: soustractionAvecRetenue },
+    { titre: "Je vérifie", texte: "Avec l'opération inverse, ou un ordre de grandeur." , schema: ordreDeGrandeur },
   ],
   usages: [
     { titre: "Regrouper → addition", detail: "On met ensemble : on pose une addition." },
