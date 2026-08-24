@@ -18,9 +18,9 @@ demandée.
 Le standard est **un visuel par bloc** : chaque propriété et chaque étape de
 méthode porte son dessin. Les exemples corrigés, eux, sont déjà dessinés partout.
 
-**Avancement : 5 fiches sur 18 (36 dessins sur 105).**
+**Avancement : 6 fiches sur 18 (43 dessins sur 105).**
 
-✅ **Les cinq fiches faites sont complètes** : mesurées sur la page à 375, 820 et
+✅ **Les six fiches faites sont complètes** : mesurées sur la page à 375, 820 et
 1280 px (aucun texte sous 11 px, aucun chevauchement), PDF refaits, `verifier:pdf`
 au vert.
 
@@ -31,7 +31,7 @@ Premiers pas en probabilités        4/4    3/3    2/2      0   ✅ 24/08, mesur
 Lire et interpréter des données     4/4    3/3    2/2      0   ✅ 24/08, mesurée + PDF
 Les triangles                       4/4    3/3    2/2      0   ✅ 24/08, mesurée + PDF
 Les quadrilatères                   4/4    3/3    2/2      0   ✅ 24/08, mesurée + PDF
-Les fractions                       0/4    0/3    4/4      7
+Les fractions                       4/4    3/3    4/4      0   ✅ 24/08, mesurée + PDF
 Le calcul mental                    0/4    0/3    3/3      7
 La symétrie axiale                  0/4    0/3    2/2      7
 Les volumes                         0/3    0/3    2/2      6

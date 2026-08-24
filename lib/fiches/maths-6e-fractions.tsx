@@ -59,6 +59,163 @@ const compare1315 = (
   />
 );
 
+// ─── Les sept dessins des blocs ───────────────────────────────────────────────
+// ⭐ LE CANVAS `fraction` A QUATRE MODÈLES, ET LES QUATRE ÉTAIENT DÉJÀ PRIS
+// (disque, grille, barre, comparaison). Les répéter tels quels aurait donné sept
+// fois la même image (REGLES.md § 2 bis). Trois blocs sortent donc du canvas des
+// fractions — et c'est le catalogue qui l'impose : « `fraction` montre l'objet,
+// PAS l'opération ». D'où la droite graduée pour l'écriture décimale (une
+// fraction est un NOMBRE, il se place), le tableau pour décoder l'écriture, et
+// le schéma en barre pour « les 3/4 de 12 », qui est un calcul.
+//
+// ⚠️ TOUTES LES `size` SONT MESURÉES. `FractionCanvas` écrit ses étiquettes de
+// comparaison en 13 px dans un viewBox fixe : à 320 (son défaut), elles tombent
+// à 9,1 px dans une carte de 225. À 250, elles rendent 11,7.
+
+/** Un dessin et sa phrase, sous lui. */
+const legende = (dessin: React.ReactNode, texte: string) => (
+  <div>
+    {dessin}
+    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+  </div>
+);
+
+// LE HAUT ET LE BAS, SUR UNE BARRE. La formule montre déjà 3/4 en barre : ici
+// c'est 2/5, et la légende nomme ce que le dessin ne sait pas écrire.
+const barre25 = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "fraction",
+      model: "bar",
+      fraction: { numerator: 2, denominator: 5 },
+      size: { width: 250, height: 200 },
+    }}
+  />,
+  "2 parts prises (en haut) sur 5 parts égales (en bas)"
+);
+
+// ⭐ LE CONTRE-EXEMPLE, ET C'EST LE SEUL DE LA FICHE. `unequalParts` découpe la
+// barre en morceaux inégaux : on voit tout de suite qu'aucune fraction ne peut
+// s'écrire là-dessus. Une propriété qui dit « toujours » se montre en dessinant
+// le cas où c'est FAUX — aucune barre correcte ne fait ça.
+//
+// ⚠️ PAS DE LÉGENDE ICI, ET C'EST MESURÉ : le canvas écrit DÉJÀ « Attention :
+// les parts ne sont pas égales » sous la barre quand `unequalParts` est posé.
+// Une phrase de plus aurait fait trois avertissements pour une seule idée.
+// (Vu au rendu — la lecture du type ne le disait pas.)
+const partsInegales = (
+  <CanvasRenderer
+    figure={{
+      kind: "fraction",
+      model: "bar",
+      fraction: { numerator: 2, denominator: 5, label: "pas une fraction" },
+      display: { unequalParts: true },
+      size: { width: 250, height: 200 },
+    }}
+  />
+);
+
+// COMPARER À MÊME DÉNOMINATEUR. L'exemple 3 traite l'autre cas (même numérateur,
+// 1/3 contre 1/5) : celui-ci prend 3/5 contre 4/5, où c'est le HAUT qui décide.
+const compare3545 = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "fraction",
+      model: "compare",
+      fractions: [
+        { numerator: 3, denominator: 5 },
+        { numerator: 4, denominator: 5 },
+      ],
+      size: { width: 250, height: 210 },
+    }}
+  />,
+  "même bas : c'est le haut qui décide — 4/5 > 3/5"
+);
+
+// UNE FRACTION EST UN NOMBRE, DONC ELLE SE PLACE. Le seul dessin de la fiche qui
+// ne découpe rien : 1/4, 1/2 et 3/4 posés entre 0 et 1, à l'endroit exact où on
+// lit 0,25 · 0,5 · 0,75.
+const fractionsSurLaDroite = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min: 0,
+      max: 1,
+      step: 0.25,
+      points: [
+        { value: 0.25, label: "1/4", color: "#2563eb" },
+        { value: 0.5, label: "1/2", color: "#16a34a" },
+        { value: 0.75, label: "3/4", color: "#dc2626" },
+      ],
+      display: {
+        showTicks: true,
+        showValues: true,
+        showPoints: true,
+        showPointLabels: true,
+        showZero: true,
+      },
+      size: { width: 260, height: 95 },
+    }}
+  />,
+  "1/4 = 0,25 · 1/2 = 0,5 · 3/4 = 0,75"
+);
+
+// DÉCODER L'ÉCRITURE, PAS LE GÂTEAU. Toutes les autres images de la fiche
+// découpent quelque chose ; celle-ci lit les deux nombres, l'un après l'autre.
+const anatomieDeLEcriture = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Lire 3/4",
+      headers: ["Où", "Le nombre", "Ce que ça dit"],
+      rows: [
+        { values: ["en haut", "3", "parts prises"] },
+        { values: ["en bas", "4", "parts du partage"] },
+      ],
+      highlight: { col: 2 },
+    }}
+  />
+);
+
+// DESSINER, C'EST PARTAGER PUIS COLORIER. La grille de l'exemple 2 fait 2 × 2 ;
+// celle-ci fait 2 × 3, et ce sont les nombres de l'usage « Pour 4/6 ».
+const grille46 = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "fraction",
+      model: "grid",
+      grid: { rows: 2, cols: 3, shaded: 4 },
+      size: { width: 250, height: 200 },
+    }}
+  />,
+  "6 parts égales, on en colorie 4"
+);
+
+// ⛔ CALCULER N'EST PAS DÉCOUPER (CATALOGUE.md : « `fraction` montre l'objet, pas
+// l'opération »). Les 3/4 de 12 : le tout vaut 12, une part vaut 3, on en prend
+// trois. Ce sont les nombres de la formule et de l'usage.
+const troisQuartsDeDouze = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      // ⚠️ Au-delà de ~28 caractères, le titre déborde du cadre, en silence.
+      title: "Les 3/4 de 12",
+      total: "12",
+      parts: [
+        { label: "prise", value: "3" },
+        { label: "prise", value: "3" },
+        { label: "prise", value: "3" },
+        { label: "reste", value: "3" },
+      ],
+      questionLabel: "12 ÷ 4 = 3, puis 3 × 3 = 9",
+      // ⚠️ La HAUTEUR à 190 décolle les étiquettes de la phrase du bas ; la
+      // LARGEUR doit rester sous 245, sinon ces étiquettes tombent sous 11 px
+      // dans une carte de 225 (`SchemaBarreCanvas` écrit en 12 px).
+      size: { width: 240, height: 190 },
+    }}
+  />
+);
+
 const pieges = [
   "Confondre numérateur (en haut) et dénominateur (en bas) : 3/4 n'est pas 4/3.",
   "Croire que 1/5 dépasse 1/3 : plus on partage, plus les parts sont petites (1/3 > 1/5).",
@@ -96,18 +253,22 @@ export const ficheFractions6e: FicheCoursData = {
     {
       titre: "Numérateur et dénominateur",
       texte: "En haut, les parts prises ; en bas, le nombre total de parts égales.",
+      schema: barre25,
     },
     {
       titre: "Toujours des parts égales",
       texte: "Sans parts égales, on ne peut pas écrire de fraction.",
+      schema: partsInegales,
     },
     {
       titre: "Comparer",
       texte: "Même dénominateur → plus grand numérateur ; même numérateur → plus petit dénominateur.",
+      schema: compare3545,
     },
     {
       titre: "Écriture décimale",
       texte: "À connaître : 1/2 = 0,5 ; 1/4 = 0,25 ; 3/4 = 0,75.",
+      schema: fractionsSurLaDroite,
     },
   ],
   reel: {
@@ -125,9 +286,9 @@ export const ficheFractions6e: FicheCoursData = {
     schema: barre34,
   },
   methode: [
-    { titre: "Je repère", texte: "Numérateur en haut (parts prises), dénominateur en bas (parts du partage)." },
-    { titre: "Je dessine", texte: "Autant de parts égales que le dénominateur, je colorie le numérateur." },
-    { titre: "Je calcule", texte: "Fraction d'une quantité : je divise par le bas, je multiplie par le haut." },
+    { titre: "Je repère", texte: "Numérateur en haut (parts prises), dénominateur en bas (parts du partage)." , schema: anatomieDeLEcriture },
+    { titre: "Je dessine", texte: "Autant de parts égales que le dénominateur, je colorie le numérateur." , schema: grille46 },
+    { titre: "Je calcule", texte: "Fraction d'une quantité : je divise par le bas, je multiplie par le haut." , schema: troisQuartsDeDouze },
   ],
   usages: [
     { titre: "Lire → écrire", detail: "3 parts prises sur 5 parts égales s'écrit 3/5." },
