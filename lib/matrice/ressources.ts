@@ -196,6 +196,35 @@ const PORTES_ELEVE_CYCLE_3 = ["coach-maths", "coach-francais", "dictee-du-jour"]
  */
 const PORTES_ADULTE = ["calcul-rapide", "dictee-du-jour", "formation-crpe", "coach-maths"];
 
+/**
+ * ⭐ LE CM2 ET LA 5ᵉ PRENNENT LEUR LISTE (24/08/2026) — même raison que la 6ᵉ.
+ *
+ * Elles ont maintenant leurs fiches, et elles doivent les voir. Ce ne sont pas
+ * des copies de PORTES_6E : chaque classe garde ce qui la caractérise.
+ *
+ * ⚠️ LE CM2 GARDE SES DEUX COACHS NOMMÉS, pas `type:coach`. C'est la décision du
+ * 19/08, et elle tient : à cet âge il n'y a que deux coachs ouverts, maths et
+ * français, et ils doivent sortir TOUS LES DEUX — le joker n'en donnerait qu'un.
+ * La dictée du jour cède sa place aux fiches ; elle revient au score dès qu'on
+ * clique « Français », et elle est dans les chips.
+ *
+ * ⚠️ LA 5ᵉ N'A QU'UNE CARTE DE FICHE, et c'est voulu : elle n'a pas une seule
+ * fiche de français. Sa sixième place revient donc au score, pas à un doublon.
+ * ⛔ Ne pas y écrire `fiches-maths-6e` pour « remplir » : le moteur le sert déjà
+ * tout seul au rang 1 quand il reste de la place, et il l'annonce alors « au
+ * niveau juste en dessous ». Écrit ici, il passerait DEVANT la fiche de 5ᵉ.
+ */
+const PORTES_CM2 = [
+  "coach-maths",
+  "coach-francais",
+  "parcours",
+  "fiches-maths-cm2",
+  "fiches-francais-cm2",
+  "dictee-du-jour",
+];
+
+const PORTES_5E = ["type:coach", "*", "parcours", "fiches-maths-5e", "photo-cours"];
+
 export const PORTES_ECRITES: Partial<Record<ProfilId, string[]>> = {
   adulte: PORTES_ADULTE,
   /**
@@ -222,8 +251,24 @@ export const PORTES_ECRITES: Partial<Record<ProfilId, string[]>> = {
     "espace-parents",
     "coach-maths",
     "parcours",
-    "fiches-maths-6e",
-    "fiches-francais-6e",
+    // ⭐ `type:fiche` ET NON DEUX IDENTIFIANTS DE 6ᵉ (24/08/2026). Ces listes
+    // sont indexées par RÔLE : elles servent le parent d'un CM2 comme celui
+    // d'une 6ᵉ. Nommer `fiches-maths-6e` marchait tant que la 6ᵉ était seule à
+    // en avoir ; depuis que le CM2 et la 5ᵉ ont les leurs, un identifiant figé
+    // servirait la fiche de 6ᵉ au parent d'un CM2 — ou pire, la ferait passer
+    // DEVANT la bonne chez le parent d'un 5ᵉ, qui l'attrape au rang 1.
+    // Le joker prend la mieux classée, et la mieux classée est celle de la
+    // classe dite : rang 0 vaut 6 points, rang 1 n'en vaut que 3.
+    // ⚠️ Deux jetons, deux cartes — `premier()` ne rend jamais deux fois le
+    // même identifiant. Chez un CM2 ce sont les maths et le français.
+    // ⚠️ EN 5ᵉ, LE SECOND JETON ATTRAPE « LE DICO » — mesuré, pas supposé. Il
+    // est de `type: "fiche"` lui aussi, et comme la 5ᵉ n'a pas de fiche de
+    // français, c'est lui le suivant au score. On l'accepte : le dico des mots
+    // de consigne est une bonne carte pour un 5ᵉ, et il ne promet rien qu'il ne
+    // tienne. Ce serait un défaut s'il PRENAIT la place d'une fiche de cours ;
+    // il prend celle qui reste.
+    "type:fiche",
+    "type:fiche",
     "photo-cours",
   ],
   /**
@@ -241,11 +286,11 @@ export const PORTES_ECRITES: Partial<Record<ProfilId, string[]>> = {
    * aux mêmes dates, et une liste figée d'enseignant serait fausse dix mois sur
    * douze. On n'écrit que le milieu, celui qu'on sait meilleur que le score.
    */
-  prof: ["*", "*", "parcours", "fiches-maths-6e", "fiches-francais-6e", "*"],
+  prof: ["*", "*", "parcours", "type:fiche", "type:fiche", "*"],
   cm1: PORTES_ELEVE_CYCLE_3,
-  cm2: PORTES_ELEVE_CYCLE_3,
+  cm2: PORTES_CM2,
   "6e": PORTES_6E,
-  "5e": PORTES_ELEVE_DES_LA_6E,
+  "5e": PORTES_5E,
   "4e": PORTES_ELEVE_DES_LA_6E,
   "3e": PORTES_ELEVE_DES_LA_6E,
   seconde: PORTES_ELEVE_DES_LA_6E,
@@ -978,6 +1023,57 @@ export const RESSOURCES: RessourceEleveAI[] = [
   // page de plus à tenir pour chaque classe et chaque matière ; le sommaire
   // fait déjà le travail. Si un jour l'ancre par classe manque vraiment, elle
   // se pose sur le sommaire (`#6e`), elle ne se refait pas en route.
+  {
+    // ⭐ 24/08/2026 — LE CM2 ET LA 5ᵉ ENTRENT À LEUR TOUR.
+    // La règle du 16/08 n'a pas bougé — « une ressource déclarée est une
+    // ressource promise », on n'annonce pas une collection à moitié écrite. Ce
+    // qui a changé, c'est le stock : 28 fiches de maths et 8 de français au
+    // CM2, 20 de maths en 5ᵉ, toutes avec leur PDF depuis le 23/08.
+    // ⛔ PAS DE FRANÇAIS EN 5ᵉ : le dossier est vide, zéro fiche. La 5ᵉ n'a donc
+    // qu'une carte, et c'est exactement ce que la règle demande.
+    // ⚠️ `niveaux` NE PORTE QUE LA CLASSE — jamais « prof » ni « parent ». Le
+    // moteur essaie deux portes (le rôle, la classe dite) : « cm2 » suffit à
+    // servir le parent et l'enseignant qui ont cliqué CM2, et à n'écarter
+    // qu'eux quand ils ont cliqué autre chose. Voir la note de fiches-maths-6e.
+    id: "fiches-maths-cm2",
+    titre: "Maths CM2 — cours et exercices corrigés",
+    promesse: "La notion en une page, un dessin par idée, un exemple par règle.",
+    url: "/fiches-cours/maths",
+    niveaux: ["cm2"],
+    matiere: "maths",
+    notions: ["*"],
+    intentions: ["comprendre"],
+    type: "fiche",
+    statut: "validee",
+  },
+  {
+    id: "fiches-francais-cm2",
+    titre: "Français CM2 — cours et exercices corrigés",
+    promesse: "La règle en une page, avec la phrase dessinée.",
+    url: "/fiches-cours/francais",
+    niveaux: ["cm2"],
+    matiere: "francais",
+    notions: ["*"],
+    intentions: ["comprendre"],
+    type: "fiche",
+    statut: "validee",
+  },
+  {
+    // ⚠️ SEULE DE SON NIVEAU : la 5ᵉ n'a pas une fiche de français. Ne pas
+    // ajouter `fiches-francais-5e` « pour la symétrie » — il n'y a rien
+    // derrière, et une carte qui ouvre un sommaire sans sa classe est pire
+    // qu'une carte absente.
+    id: "fiches-maths-5e",
+    titre: "Maths 5e — cours et exercices corrigés",
+    promesse: "La notion en une page, un dessin par idée, un exemple par règle.",
+    url: "/fiches-cours/maths",
+    niveaux: ["5e"],
+    matiere: "maths",
+    notions: ["*"],
+    intentions: ["comprendre"],
+    type: "fiche",
+    statut: "validee",
+  },
   {
     id: "fiches-maths-6e",
     // ⭐ « COURS ET EXERCICES CORRIGÉS », ET PAS « FICHE DE COURS » (23/08/2026).
