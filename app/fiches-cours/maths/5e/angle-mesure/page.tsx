@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-5e-angles";
 
 export const metadata: Metadata = {
-  title: "Les angles — fiche de cours 5e",
+  title: "Les angles — 5e : cours et exercices corrigés",
   description:
     "Définition, méthode, exemples corrigés et exercices : la fiche de cours complète des angles en 5e (sommet, degré, rapporteur, angle aigu, droit, obtus, plat), à lire, imprimer ou réviser en flashcards.",
 };

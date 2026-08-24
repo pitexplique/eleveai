@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-5e-symetrie-centrale";
 
 export const metadata: Metadata = {
-  title: "La symétrie centrale — fiche de cours 5e",
+  title: "La symétrie centrale — 5e : cours et exercices corrigés",
   description:
     "Définition, méthode, exemples corrigés et exercices : la fiche de cours complète de la symétrie centrale en 5e (demi-tour, centre, image d'un point et d'une figure, propriétés), à lire, imprimer ou réviser en flashcards.",
 };

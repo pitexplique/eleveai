@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-cm2-graphiques";
 
 export const metadata: Metadata = {
-  title: "Lire un graphique — fiche de cours CM2",
+  title: "Lire un graphique — CM2 : cours et exercices corrigés",
   description:
     "Définition, méthode, exemples corrigés et exercices : la fiche de cours complète pour lire un graphique (diagramme en barres, en bâtons, camembert, échelle, hauteur, interpréter des données) en CM2, à lire, imprimer ou réviser en flashcards.",
 };

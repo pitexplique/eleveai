@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-5e-triangles";
 
 export const metadata: Metadata = {
-  title: "Les triangles — fiche de cours 5e",
+  title: "Les triangles — 5e : cours et exercices corrigés",
   description:
     "Définition, méthode, exemples corrigés et exercices : la fiche de cours complète des triangles en 5e (nature, inégalité triangulaire, construction au compas, somme des angles = 180°), à lire, imprimer ou réviser en flashcards.",
 };

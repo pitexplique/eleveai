@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/ia-fondements-grands-modeles-de-langage";
 
 export const metadata: Metadata = {
-  title: "Les grands modèles de langage — fiche de cours",
+  title: "Les grands modèles de langage — cours et exercices corrigés",
   description:
     "Comment fonctionne un chatbot : prédire le mot suivant, entraînement, hallucinations. La fiche de cours IA complète (référentiel Pix, Fondements), à lire ou réviser en flashcards.",
 };

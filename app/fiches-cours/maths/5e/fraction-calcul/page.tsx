@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/maths-5e-fraction-calcul";
 
 export const metadata: Metadata = {
-  title: "Calculer avec les fractions — fiche de cours 5e",
+  title: "Calculer avec les fractions — 5e : cours et exercices corrigés",
   description:
     "Additionner, soustraire, multiplier des fractions et calculer une fraction d'une quantité : définition, propriétés dessinées, exemples corrigés et exercices, la fiche de cours complète de 5e à lire, imprimer ou réviser en flashcards.",
 };

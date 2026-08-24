@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/ia-enjeux-gouvernance";
 
 export const metadata: Metadata = {
-  title: "La gouvernance de l'IA — fiche de cours",
+  title: "La gouvernance de l'IA — cours et exercices corrigés",
   description:
     "Qui régule l'IA ? L'IA Act européen, la souveraineté numérique, les valeurs encodées : la fiche de cours complète avec exemples corrigés et exercices (référentiel Pix, domaine Enjeux).",
 };

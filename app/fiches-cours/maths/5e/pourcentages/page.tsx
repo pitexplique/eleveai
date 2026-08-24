@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/maths-5e-pourcentages";
 
 export const metadata: Metadata = {
-  title: "Les pourcentages — fiche de cours 5e",
+  title: "Les pourcentages — 5e : cours et exercices corrigés",
   description:
     "Définition, propriétés, formule, exemples corrigés et exercices : la fiche de cours complète des pourcentages en 5e, à lire, imprimer ou réviser en flashcards.",
 };

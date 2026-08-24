@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/francais-cm2-conjugaison-participe";
 
 export const metadata: Metadata = {
-  title: "Le participe passé : accorder, et où mettre la négation — fiche de cours CM2",
+  title: "Le participe passé — CM2 : cours et exercices corrigés",
   description:
     "Former un temps composé en deux parties, accorder le participe passé avec être puis avec le COD placé avant, et poser « ne » et « pas » autour de l'auxiliaire : la fiche de cours de conjugaison CM2, l'accord et la négation dessinés sur la phrase.",
 };

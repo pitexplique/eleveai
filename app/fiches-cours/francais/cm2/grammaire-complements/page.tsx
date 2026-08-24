@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/francais-cm2-grammaire-complements";
 
 export const metadata: Metadata = {
-  title: "Les compléments du verbe — fiche de cours CM2",
+  title: "Les compléments du verbe — CM2 : cours et exercices corrigés",
   description:
     "COD, COI, compléments circonstanciels de temps, de lieu et de cause, attribut du sujet : la fiche de cours complète des compléments en CM2, chaque manipulation dessinée sur la phrase, avec exemples corrigés et exercices (utile aussi pour le CRPE).",
 };

@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/ia-enjeux-emploi-et-formation";
 
 export const metadata: Metadata = {
-  title: "IA, emploi et formation — fiche de cours",
+  title: "IA, emploi et formation — cours et exercices corrigés",
   description:
     "Métiers transformés, nouveaux métiers, travailleurs du clic et formation tout au long de la vie : la fiche de cours complète sur l'IA et l'emploi (référentiel Pix IA, Enjeux), à lire ou réviser en flashcards.",
 };

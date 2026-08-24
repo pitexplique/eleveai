@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/maths-5e-parallelogramme";
 
 export const metadata: Metadata = {
-  title: "Le parallélogramme — fiche de cours 5e",
+  title: "Le parallélogramme — 5e : cours et exercices corrigés",
   description:
     "Définition, propriétés dessinées, aire, diagonales et cas particuliers (losange, rectangle, carré) : la fiche de cours complète du parallélogramme en 5e, avec exemples corrigés et exercices, à lire, imprimer ou réviser en flashcards.",
 };

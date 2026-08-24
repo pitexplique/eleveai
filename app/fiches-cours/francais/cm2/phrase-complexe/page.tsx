@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/francais-cm2-phrase-complexe";
 
 export const metadata: Metadata = {
-  title: "La phrase complexe — fiche de cours CM2",
+  title: "La phrase complexe — CM2 : cours et exercices corrigés",
   description:
     "Propositions, juxtaposition, coordination, subordination et pronoms relatifs qui, que, où : la fiche de cours complète de la phrase complexe en CM2, chaque cas dessiné sur la phrase, avec exemples corrigés et exercices (utile aussi pour le CRPE).",
 };

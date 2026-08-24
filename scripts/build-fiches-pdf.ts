@@ -128,6 +128,32 @@ async function main() {
     // bruit — mais elle ne doit pas se faire passer pour la raison du succès.
     await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
 
+    // ⭐ ON ATTEND QUE LA FEUILLE D'IMPRESSION SOIT RÉELLEMENT APPLIQUÉE
+    // (24/08/2026) — et on le MESURE, on ne le suppose pas.
+    //
+    // Le défaut : `networkidle` dit que le réseau s'est tu, pas que React a
+    // monté ses composants. Sur les deux pages les plus lourdes du site
+    // (« algorithmique et programmation » en 5ᵉ, « calculer avec les
+    // fractions »), Chrome a imprimé AVANT que le `<style jsx global>` de
+    // FicheCoursClient soit dans le document. Résultat mesuré : le pied de page
+    // du site dans le PDF, zéro correction rendue, et le poids qui passe de
+    // 1 057 à 1 562 Ko. Les 56 autres fiches, plus légères, passaient — c'est
+    // un défaut de RÉPÉTABILITÉ, celui qui ne se voit que sur une partie du lot.
+    //
+    // ⚠️ LA CONDITION PORTE SUR LA GRANDEUR, PAS SUR UN INDICE. On n'attend ni
+    // un délai fixe, ni la présence d'une balise `<style>` : on attend que
+    // l'en-tête soit EFFECTIVEMENT calculé à `display: none`, c'est-à-dire la
+    // chose même dont dépend le rendu. Un `waitForTimeout(500)` aurait marché
+    // aujourd'hui et lâché le jour où la machine est chargée.
+    await page.waitForFunction(
+      () => {
+        const h = document.querySelector("body > header");
+        return !!h && getComputedStyle(h).display === "none";
+      },
+      undefined,
+      { timeout: 20000 },
+    );
+
     // ⚠️ LA MESURE SE PREND AVANT `page.pdf()`, PAS APRÈS. Chrome émet
     // `afterprint` en fin de génération, et la page revient à son état d'écran :
     // tout ce qu'on lit ensuite décrit une page qu'on n'a pas imprimée. C'est

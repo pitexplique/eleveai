@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/francais-cm2-conjugaison-temps-simples";
 
 export const metadata: Metadata = {
-  title: "Conjuguer au présent, à l'imparfait et au futur — fiche de cours CM2",
+  title: "Présent, imparfait, futur — CM2 : cours et exercices corrigés",
   description:
     "Trouver l'infinitif et le groupe d'un verbe, repérer le radical, et conjuguer au présent, à l'imparfait et au futur — y compris les verbes irréguliers du programme : la fiche de cours de conjugaison CM2, les six personnes dessinées pour voir ce qui bouge.",
 };

@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/maths-5e-fractions";
 
 export const metadata: Metadata = {
-  title: "Les fractions — fiche de cours 5e",
+  title: "Les fractions — 5e : cours et exercices corrigés",
   description:
     "Définition, propriétés dessinées, exemples corrigés et exercices : la fiche de cours des fractions en 5e — fractions égales, simplifier, comparer, nombre rationnel et opposé — à lire, imprimer ou réviser en flashcards.",
 };

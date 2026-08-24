@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-cm2-fractions";
 
 export const metadata: Metadata = {
-  title: "Les fractions — fiche de cours CM2",
+  title: "Les fractions — CM2 : cours et exercices corrigés",
   description:
     "Définition, méthode, exemples corrigés et exercices : la fiche de cours complète des fractions (numérateur, dénominateur, parts égales, barre, disque, grille, droite graduée) en CM2, à lire, imprimer ou réviser en flashcards.",
 };

@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/ia-usages-utiliser-ia-generative";
 
 export const metadata: Metadata = {
-  title: "Utiliser l'IA générative — fiche de cours",
+  title: "Utiliser l'IA générative — cours et exercices corrigés",
   description:
     "Écrire un bon prompt (contexte, tâche, contraintes, format), itérer, vérifier les réponses et rester responsable : la fiche de cours complète pour utiliser une IA générative, avec exemples corrigés et exercices (référentiel Pix, domaine Usages).",
 };

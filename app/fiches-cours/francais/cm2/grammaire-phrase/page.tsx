@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/francais-cm2-grammaire-phrase";
 
 export const metadata: Metadata = {
-  title: "La phrase : sujet, verbe, nature et fonction — fiche de cours CM2",
+  title: "La phrase — CM2 : cours et exercices corrigés",
   description:
     "Verbe conjugué, sujet, sujet inversé, nature et fonction : la fiche de cours complète de grammaire CM2, chaque règle dessinée sur la phrase, avec exemples corrigés et exercices — à lire, imprimer ou réviser en flashcards (utile aussi pour le CRPE).",
 };

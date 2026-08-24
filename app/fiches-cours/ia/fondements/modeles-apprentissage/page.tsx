@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/ia-fondements-modeles-apprentissage";
 
 export const metadata: Metadata = {
-  title: "Les modèles d'apprentissage — fiche de cours",
+  title: "Les modèles d'apprentissage — cours et exercices corrigés",
   description:
     "Arbre de décision, régression, réseau de neurones : les familles de modèles d'IA, leurs forces, leurs limites et l'explicabilité. Fiche de cours IA (référentiel Pix, Fondements) avec exemples et exercices corrigés.",
 };

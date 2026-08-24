@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/ia-enjeux-ethique-et-transparence";
 
 export const metadata: Metadata = {
-  title: "Éthique et transparence de l'IA — fiche de cours",
+  title: "Éthique et transparence de l'IA — cours et exercices corrigés",
   description:
     "Transparence, explicabilité, non-discrimination, responsabilité, RGPD et IA Act : la fiche de cours complète sur l'éthique de l'IA, avec exemples corrigés et exercices (référentiel Pix, domaine Enjeux).",
 };

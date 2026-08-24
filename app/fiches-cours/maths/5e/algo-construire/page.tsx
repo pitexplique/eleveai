@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/maths-5e-algo-construire";
 
 export const metadata: Metadata = {
-  title: "Construire un programme — fiche de cours 5e",
+  title: "Construire un programme — 5e : cours et exercices corrigés",
   description:
     "Traduire une formule en blocs, écrire une condition, régler les paramètres, remplacer des blocs répétés par une boucle : la fiche de cours d'algorithmique de 5e, avec programmes Scratch dessinés, exemples corrigés et exercices.",
 };

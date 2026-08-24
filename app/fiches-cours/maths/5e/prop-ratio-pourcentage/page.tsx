@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/maths-5e-ratio-pourcentage";
 
 export const metadata: Metadata = {
-  title: "Ratios, pourcentages et coefficient multiplicateur — fiche de cours 5e",
+  title: "Ratios et pourcentages — 5e : cours et exercices corrigés",
   description:
     "Lire et simplifier un ratio, prendre un pourcentage, passer d'une hausse ou d'une baisse au coefficient multiplicateur : la fiche de cours de 5e avec propriétés dessinées, exemples corrigés et exercices.",
 };

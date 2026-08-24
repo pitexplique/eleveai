@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/ia-enjeux-empreinte-environnementale";
 
 export const metadata: Metadata = {
-  title: "L'empreinte environnementale de l'IA — fiche de cours",
+  title: "L'empreinte environnementale de l'IA — cours et exercices corrigés",
   description:
     "Énergie des centres de calcul, ressources rares, IA frugale : la fiche de cours complète sur l'empreinte environnementale de l'IA (référentiel Pix, Enjeux), à lire ou réviser en flashcards.",
 };

@@ -3,7 +3,7 @@ import FicheCoursClient from "@/components/fiches/FicheCoursClient";
 import { ficheAiresCM2, slidesAiresCM2 } from "@/lib/fiches/maths-cm2-aires";
 
 export const metadata: Metadata = {
-  title: "Les aires — fiche de cours CM2",
+  title: "Les aires — CM2 : cours et exercices corrigés",
   description:
     "Définition, méthode, exemples corrigés et exercices : la fiche de cours complète des aires (la surface d'une figure, compter les carreaux, rectangle L × l, carré, triangle rectangle, figure composée) en CM2, à lire, imprimer ou réviser en flashcards.",
 };

@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/maths-5e-divisibilite";
 
 export const metadata: Metadata = {
-  title: "Multiples, diviseurs et divisibilité — fiche de cours 5e",
+  title: "Multiples et diviseurs — 5e : cours et exercices corrigés",
   description:
     "Multiples et diviseurs, critères de divisibilité par 2, 5, 10, 3 et 9, liste des diviseurs par paires : la fiche de cours de 5e avec propriétés dessinées, exemples corrigés et exercices, à lire, imprimer ou réviser en flashcards.",
 };

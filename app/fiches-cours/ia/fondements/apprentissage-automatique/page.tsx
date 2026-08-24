@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/ia-fondements-apprentissage-automatique";
 
 export const metadata: Metadata = {
-  title: "L'apprentissage automatique — fiche de cours",
+  title: "L'apprentissage automatique — cours et exercices corrigés",
   description:
     "Comment une IA apprend à partir de données : supervisé, non supervisé, renforcement. Définition, exemples corrigés et exercices — fiche de cours IA (référentiel Pix, Fondements), à lire ou réviser en flashcards.",
 };

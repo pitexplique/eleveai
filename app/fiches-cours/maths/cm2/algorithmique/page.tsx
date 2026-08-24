@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-cm2-algorithmique";
 
 export const metadata: Metadata = {
-  title: "L'algorithmique — fiche de cours CM2",
+  title: "L'algorithmique — CM2 : cours et exercices corrigés",
   description:
     "Définition, méthode, exemples corrigés et exercices : la fiche de cours complète de l'algorithmique (instruction, programme, lire dans l'ordre, boucle répéter, avancer et tourner dans Scratch) en CM2, à lire, imprimer ou réviser en flashcards.",
 };

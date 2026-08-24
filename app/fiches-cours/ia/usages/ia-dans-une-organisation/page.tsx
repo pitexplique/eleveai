@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/ia-usages-ia-dans-une-organisation";
 
 export const metadata: Metadata = {
-  title: "L'IA dans une organisation — fiche de cours",
+  title: "L'IA dans une organisation — cours et exercices corrigés",
   description:
     "Identifier le besoin, choisir l'outil, protéger les données, charte d'usage et RAG : la fiche de cours complète pour utiliser l'IA dans une organisation (référentiel Pix, domaine Usages).",
 };

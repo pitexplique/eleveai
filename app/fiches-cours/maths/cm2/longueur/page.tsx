@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-cm2-longueurs";
 
 export const metadata: Metadata = {
-  title: "Les longueurs — fiche de cours CM2",
+  title: "Les longueurs — CM2 : cours et exercices corrigés",
   description:
     "Définition, méthode, exemples corrigés et exercices : la fiche de cours complète des longueurs (millimètre, centimètre, mètre, kilomètre, estimer, comparer, convertir, 1 m = 100 cm, 1 km = 1000 m) en CM2, à lire, imprimer ou réviser en flashcards.",
 };

@@ -6,7 +6,7 @@ import {
 } from "@/lib/fiches/maths-cm2-proportionnalite";
 
 export const metadata: Metadata = {
-  title: "La proportionnalité — fiche de cours CM2",
+  title: "La proportionnalité — CM2 : cours et exercices corrigés",
   description:
     "Définition, méthode, exemples corrigés et exercices : la fiche de cours complète de la proportionnalité (reconnaître, tableau, coefficient, retour à l'unité, problèmes) en CM2, à lire, imprimer ou réviser en flashcards.",
 };

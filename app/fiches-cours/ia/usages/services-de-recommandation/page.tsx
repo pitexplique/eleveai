@@ -9,7 +9,7 @@ import {
 } from "@/lib/fiches/ia-usages-services-de-recommandation";
 
 export const metadata: Metadata = {
-  title: "Les services de recommandation — fiche de cours",
+  title: "Les services de recommandation — cours et exercices corrigés",
   description:
     "Avantages, limites et contrôle de la personnalisation : bulle de filtre, chambre d'écho, réglages. La fiche de cours IA complète (référentiel Pix, Usages), à lire ou réviser en flashcards.",
 };
