@@ -187,24 +187,30 @@ export default function AccueilIA() {
           </Suspense>
           </div>
 
-          {/* ⭐ TI MARGO ET LA SIGNATURE, DESCENDUS ICI (Frédéric, 21/08/2026).
-              Ils ouvraient la page, ils la ferment maintenant. Le premier écran
-              n'a qu'un travail — faire choisir une classe et une matière — et
-              ces deux blocs passaient devant ce choix : ~80 px à regarder avant
-              la moindre question posée à l'élève.
-              ⚠️ ILS SONT ENSEMBLE, EN UN SEUL BLOC, et ce n'est pas cosmétique :
-              une mascotte + un nom, ça se lit comme la signature d'un auteur.
-              En tête, le margouillat flottait seul au-dessus d'un titre — une
-              illustration. Posé contre le nom, il désigne quelqu'un.
-              ⛔ LE BADGE GARDE SON TEAL, il ne redevient PAS `text-slate-500`.
-              C'est exactement ce qu'il était avant le 20/08 : le texte le plus
-              petit ET le plus pâle de la page, rangé là où l'œil ne descend
-              qu'après avoir décidé de rester. On accepte de le redescendre, pas
-              de le repâlir — celui qui lit cette ligne a déjà passé les cartes,
-              il n'a plus à être convaincu avant de lire, mais il doit pouvoir
-              lire.
+          {/* ⭐ TI MARGO, DESCENDU ICI (Frédéric, 21/08/2026).
+              Il ouvrait la page, il la ferme maintenant. Le premier écran n'a
+              qu'un travail — faire choisir une classe et une matière — et ce
+              bloc passait devant ce choix : ~80 px à regarder avant la moindre
+              question posée à l'élève.
               ⚠️ Ti Margo tombe à 40 px (56 puis 64 en tête) et perd `priority` :
-              il est sous le pli, il accompagne le nom au lieu de s'annoncer. */}
+              il est sous le pli, il ferme la page au lieu de s'annoncer.
+
+              ⛔ LE BADGE SIGNÉ EST RETIRÉ DE CET ÉCRAN (Frédéric, 24/08/2026) —
+              « enlève sur la page d'accueil Frédéric Lacoste enseignant ».
+              Il était posé juste ici, sous le margouillat, et il y était depuis
+              le 20/08 (la décision de SIGNER plutôt que d'écrire « un
+              enseignant », article indéfini qui ne désigne personne).
+              ⚠️ CE QUI PART, ET CE QUI RESTE — à savoir avant de le remettre :
+              la signature n'est pas supprimée du site, elle quitte l'ACCUEIL.
+              Elle continue de s'écrire en toutes lettres dans le pied de page
+              commun (components/Footer.tsx), qui s'affiche sur cet écran comme
+              sur les autres, et mot pour mot au dos des trois cahiers, sur
+              /tarifs et dans l'espace parents : « Conçu par Frédéric Lacoste,
+              enseignant à La Réunion, pour ses élèves — et pour toi. »
+              ⚠️ Ti Margo reste seul dans son bloc. C'est un choix, et il a un
+              coût connu : la note du 21/08 disait qu'une mascotte POSÉE CONTRE
+              UN NOM désigne quelqu'un, là où seule elle n'est qu'une
+              illustration. On perd ça, et c'est le prix demandé. */}
           <div className="mt-10 flex flex-col items-center gap-2 border-t border-slate-100 pt-6">
             <Image
               src="/cahier-vacances/ti-margo.png"
@@ -215,23 +221,6 @@ export default function AccueilIA() {
               loading="lazy"
               className="h-10 w-auto"
             />
-            <p className="flex justify-center">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-50 px-3 py-1 text-[13px] font-semibold text-teal-800">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5"
-                >
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-                Frédéric Lacoste, enseignant à La Réunion
-              </span>
-            </p>
           </div>
 
           <footer className="pt-10">
