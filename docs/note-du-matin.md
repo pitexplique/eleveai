@@ -18,9 +18,11 @@ demandée.
 Le standard est **un visuel par bloc** : chaque propriété et chaque étape de
 méthode porte son dessin. Les exemples corrigés, eux, sont déjà dessinés partout.
 
+**Avancement : 1 fiche sur 18 (8 dessins sur 105).**
+
 ```
 fiche                              propr.  méth.   ex.   manque
-Les angles                          0/4    0/3    1/2      8
+Les angles                          4/4    3/3    2/2      0   ✅ 24/08, commit 70d8076f
 Premiers pas en probabilités        0/4    0/3    2/2      7
 Lire et interpréter des données     0/4    0/3    2/2      7
 Les triangles                       0/4    0/3    2/2      7
@@ -74,9 +76,33 @@ l'objet, **pas l'opération** ; `angle` montre **un** angle, pas deux à compare
 
 ---
 
-## Ce que j'ai déjà trouvé pour « Les angles »
+## Trois pièges découverts EN RENDANT, le 24/08 — ils valent pour toutes les fiches
 
-C'était la fiche par laquelle je commençais, l'analyse est faite :
+Aucun ne se lit dans le code, tous se mesurent sur la page (§ 2 quater) :
+
+1. **`apercu-canvas.mjs` ne suffit pas.** Il a dit « ✅ rien à signaler » sur les
+   deux dessins du rapporteur — la page, elle, les donnait à 8,7 px. Le script
+   juge un dessin isolé dans un cadre supposé ; la page ajoute la vraie largeur
+   du bloc et les vraies polices. **Passer les deux**, dans cet ordre.
+2. **La largeur d'une carte ne dépend pas que du téléphone.** Le pire cas était
+   une fenêtre de **820 px** : trois colonnes déjà en place, 155 px par carte,
+   tous les dessins sous 8 px. Corrigé dans `FicheCoursClient` (palier à deux
+   colonnes) — donc pour toutes les fiches, sans rien changer dans les fiches.
+   ⚠️ Mesurer désormais à **375, 820 ET 1280**.
+3. **Le cadre se serre sur le dessin, donc la largeur du viewBox VARIE.** Deux
+   angles côte à côte : l'aigu (viewBox 106) reste lisible, l'obtus (159) tombe
+   à 9 px dans la même cellule. D'où `pile()` plutôt que deux colonnes.
+
+Le mesureur à coller dans la console (il rend les deux : polices sous 11 px et
+chevauchements de textes) est dans le commit `70d8076f`, mais il se réécrit en
+dix lignes : pour chaque `svg`, `police × largeurAffichée ÷ largeurViewBox`,
+puis toutes les paires de `<text>` dont les rectangles se coupent.
+
+---
+
+## Ce que j'ai déjà trouvé pour « Les angles » (fiche FAITE — gardé pour la 4ᵉ)
+
+L'analyse du rapporteur, qui resservira dès qu'une fiche d'angles reviendra :
 
 - `showProtractor: true` pose le **rapporteur** sur l'angle ;
 - `protractorStep: "vertex" | "zero" | "reading"` déroule le geste en trois
