@@ -145,6 +145,10 @@ const roueInegale = legende(
           { label: "C", poids: 1, couleur: VERT },
         ],
       },
+      // ⚠️ MESURÉ SUR LA PAGE, pas dans `apercu-canvas.mjs` qui l'avait laissée
+      // passer : sans `size`, le canvas prend 320 de large et ses lettres
+      // tombent à 9,8 px dans une carte de 225. Cadre serré à 250 : 11,8 px.
+      size: { width: 250, height: 200 },
     }}
   />,
   "A a le plus de chances · B et C sont aussi probables"
@@ -192,6 +196,7 @@ const roueEgale = legende(
           { label: "D", poids: 1, couleur: JAUNE },
         ],
       },
+      size: { width: 250, height: 200 },
     }}
   />,
   "4 secteurs, donc 4 issues — et pas une de plus"
@@ -213,10 +218,12 @@ const barreDesIssues = (
         { label: "impairs", value: "3", color: GRIS },
       ],
       questionLabel: "3 issues sur 6 sont paires",
-      // ⚠️ 175 px de haut collaient « pairs » / « impairs » à la phrase du bas :
-      // le canvas pose les étiquettes à 144 et la phrase à hauteur − 18. Le même
-      // piège, déjà payé sur la fiche des périmètres.
-      size: { width: 300, height: 190 },
+      // ⚠️ DEUX RÉGLAGES, DEUX MESURES DIFFÉRENTES. La HAUTEUR : 175 px collaient
+      // « pairs » / « impairs » à la phrase du bas (le canvas pose les étiquettes
+      // à 144 et la phrase à hauteur − 18) — piège déjà payé sur les périmètres.
+      // La LARGEUR : à 300, ces mêmes étiquettes tombent à 9 px dans une carte de
+      // 225 ; `SchemaBarreCanvas` écrit en 12 px, il faut donc rester sous 245.
+      size: { width: 240, height: 190 },
     }}
   />
 );
@@ -236,7 +243,9 @@ const barresAComparer = (
         { label: "plus de 2", value: 4, color: ROUGE },
       ],
       display: { showValues: true, showLabels: true, highlightIndex: 2 },
-      size: { width: 300, height: 190 },
+      // `StatGraphCanvas` écrit en 12 px : au-delà de 245 de viewBox, une carte
+      // de 225 le descend sous le seuil.
+      size: { width: 230, height: 190 },
     }}
   />
 );

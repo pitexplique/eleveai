@@ -37,6 +37,11 @@ const camembertAnimaux = (
         { label: "Oiseau", value: 4 },
       ],
       display: { showValues: true, showLabels: true },
+      // ⚠️ AJOUTÉ LE 24/08 : sans `size`, le canvas prend 320 de large et ses
+      // noms de secteurs tombent à 8,8 px sur un téléphone, où même le bloc de
+      // la figure ne fait que 225. Le défaut était là depuis l'écriture de la
+      // fiche — invisible sur un écran d'ordinateur.
+      size: { width: 240, height: 200 },
     }}
   />
 );
@@ -71,6 +76,8 @@ const graphLoisirs = (
         { label: "Jeux", value: 12 },
       ],
       display: { showValues: true, showLabels: true, highlightIndex: 0 },
+      // Même correction que le camembert ci-dessus : 9,5 px sur un téléphone.
+      size: { width: 240, height: 200 },
     }}
   />
 );
@@ -207,9 +214,11 @@ const ecartEnBarre = (
         { label: "l'écart", value: "7" },
       ],
       questionLabel: "16 − 9 = 7 : voilà l'écart",
-      // ⚠️ 175 px collent les étiquettes à la phrase du bas (piège déjà payé
-      // deux fois : périmètres, puis probabilités).
-      size: { width: 300, height: 190 },
+      // ⚠️ DEUX RÉGLAGES, DEUX MESURES. La HAUTEUR : 175 px collent les
+      // étiquettes à la phrase du bas. La LARGEUR : à 300, « lecture » et
+      // « l'écart » tombent à 9,1 px sur un téléphone, où le bloc ne fait que
+      // 225 — `SchemaBarreCanvas` écrit en 12 px, il faut rester sous 245.
+      size: { width: 240, height: 190 },
     }}
   />
 );

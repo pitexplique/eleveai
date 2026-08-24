@@ -20,29 +20,17 @@ méthode porte son dessin. Les exemples corrigés, eux, sont déjà dessinés pa
 
 **Avancement : 5 fiches sur 18 (36 dessins sur 105).**
 
-⚠️ **QUATRE PDF RESTENT À REFAIRE** — l'autre session occupait le serveur de
-développement, et un PDF ne se fabrique qu'en rendant la page. À passer dès que
-la machine est libre, puis `npm run verifier:pdf` :
-
-```bash
-npm run build:fiches-pdf -- http://localhost:3000 /fiches-cours/maths/6e/proba-experience
-npm run build:fiches-pdf -- http://localhost:3000 /fiches-cours/maths/6e/stat-donnee
-npm run build:fiches-pdf -- http://localhost:3000 /fiches-cours/maths/6e/triangle-figure
-npm run build:fiches-pdf -- http://localhost:3000 /fiches-cours/maths/6e/quadrilatere-figure
-```
-
-Il reste aussi, sur ces quatre fiches, la mesure **sur la page** aux trois
-largeurs. Les dessins sont passés à `apercu-canvas.mjs` (hors du site, sans
-serveur) : c'est nécessaire, ce n'est pas suffisant — voir le piège n° 1
-ci-dessous.
+✅ **Les cinq fiches faites sont complètes** : mesurées sur la page à 375, 820 et
+1280 px (aucun texte sous 11 px, aucun chevauchement), PDF refaits, `verifier:pdf`
+au vert.
 
 ```
 fiche                              propr.  méth.   ex.   manque
 Les angles                          4/4    3/3    2/2      0   ✅ 24/08, commit 70d8076f
-Premiers pas en probabilités        4/4    3/3    2/2      0   ✅ 24/08, PDF à refaire
-Lire et interpréter des données     4/4    3/3    2/2      0   ✅ 24/08, PDF à refaire
-Les triangles                       4/4    3/3    2/2      0   ✅ 24/08, PDF à refaire
-Les quadrilatères                   4/4    3/3    2/2      0   ✅ 24/08, PDF à refaire
+Premiers pas en probabilités        4/4    3/3    2/2      0   ✅ 24/08, mesurée + PDF
+Lire et interpréter des données     4/4    3/3    2/2      0   ✅ 24/08, mesurée + PDF
+Les triangles                       4/4    3/3    2/2      0   ✅ 24/08, mesurée + PDF
+Les quadrilatères                   4/4    3/3    2/2      0   ✅ 24/08, mesurée + PDF
 Les fractions                       0/4    0/3    4/4      7
 Le calcul mental                    0/4    0/3    3/3      7
 La symétrie axiale                  0/4    0/3    2/2      7

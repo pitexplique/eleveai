@@ -226,9 +226,11 @@ const inegaliteTriangulaire = (
         { label: "2e côté", value: "4" },
       ],
       questionLabel: "7 < 8 : le triangle est impossible",
-      // ⚠️ 175 px collent les étiquettes à la phrase du bas (piège déjà payé
-      // trois fois : périmètres, probabilités, données).
-      size: { width: 300, height: 190 },
+      // ⚠️ DEUX RÉGLAGES, DEUX MESURES. La HAUTEUR : 175 px collent les
+      // étiquettes à la phrase du bas. La LARGEUR : à 300, « 1er côté » et
+      // « 2e côté » tombent à 9,1 px dans une carte de 228 — `SchemaBarreCanvas`
+      // écrit en 12 px, il faut donc rester sous 245.
+      size: { width: 240, height: 190 },
     }}
   />
 );
