@@ -1,191 +1,160 @@
-# Note du matin — 24/08/2026
+# Passation — fermer la 6ᵉ en maths
 
-## 0. Les PDF existent — et le CM2 les aura d'une commande
-
-Le bouton « Télécharger en PDF » des fiches appelait `window.print()` : sur
-téléphone, une boîte d'impression et pas d'imprimante. Il y a maintenant de
-**vrais fichiers**, dans `public/fiches/`, fabriqués par Chrome depuis la page
-elle-même — donc avec les dessins, et avec les corrections dépliées.
-
-**Les 27 fiches de 6ᵉ sont faites** (plus trois de calibration : `cm2/aire`,
-`cm2/grammaire-phrase`, `premiere-spe/derivation`). Pour le CM2 :
-
-```bash
-npm run dev
-```
-
-puis, dans un autre terminal, en listant les chemins voulus :
-
-```bash
-npm run build:fiches-pdf -- http://localhost:3000 /fiches-cours/francais/cm2/grammaire-phrase
-```
-
-Le script mesure chaque fichier (pages, poids, corrections rendues, titres de
-bloc) et **sort en erreur** si l'un sort du domaine. Il réécrit aussi
-`lib/fiches/pdf-disponibles.ts` : c'est cette liste qui décide si une fiche
-affiche « Télécharger en PDF » ou seulement « Imprimer ». **Une fiche sans PDF
-n'a pas de lien mort** — elle garde son bouton d'impression.
-
-⚠️ **La génération n'est pas automatique.** Si tu écris une fiche et que tu
-oublies la commande, sa page n'aura pas de PDF (pas de casse, juste pas de
-lien). À lancer en fin de session, comme un `git push`.
-
-### Et un contrôle pour ne plus dépendre de ta mémoire
-
-```bash
-npm run verifier:pdf
-```
-
-Il compare, pour chacune des 84 fiches, la **date du dernier commit** de son
-fichier de données à celle de son PDF, et liste les trois défauts possibles :
-PDF manquant, PDF en retard, fiche modifiée pas encore commitée.
-
-⚠️ **Les dates de git, pas celles du disque** — et c'est tout l'intérêt : git ne
-conserve pas les `mtime`, donc sur un clone neuf (ton poste du matin, un runner)
-tous les fichiers ont la date du checkout et un contrôle sur `mtime` passerait au
-vert partout, y compris là où il sert.
-
-Il ne bloque rien : `--strict` existe pour un hook, mais un PDF en retard n'est
-pas une raison de barrer un déploiement — la page, elle, est juste.
-
-⚠️ **Les fiches d'IA n'en ont pas** et n'en auront pas par ce chemin : elles
-passent par `FicheCoursIa.tsx`, un autre composant, dont le bouton appelle
-toujours `window.print()`. À traiter à part le jour où on s'en occupe.
-
-Le sitemap les prend automatiquement : il lit le même manifeste. Rien à
-maintenir de ce côté.
-
-> Écrite le soir du 23/08 depuis le poste du soir, à lire depuis le poste du
-> matin. **Commence par `git pull`.** Le partage est en place depuis le 23/08 :
-> les fiches de maths et de français se font le matin sur l'autre poste, le soir
-> on s'occupe d'autre chose.
+> Réécrite le 24/08/2026. **Cette note se remplace, elle ne s'empile pas** : elle
+> ne vaut que pour la session suivante. Commencer par `git pull`.
+>
+> ⚠️ Le partage des deux postes est suspendu ce jour-là : « on reste sur cet
+> ordinateur aujourd'hui ». L'autre poste fait le CM2.
 
 ---
 
-## 1. À faire en premier : relire la fiche CM2 « Attribut, COD et COI »
+## Le travail : 105 dessins, 18 fiches
 
-`app/fiches-cours/francais/cm2/grammaire-complements/` **était sur le disque du
-poste du soir depuis des jours, jamais commitée.** Elle l'est maintenant
-([6d33405c]), parce que le CM2 est ton chantier de ce matin et qu'elle t'aurait
-fait réécrire de zéro quelque chose qui existe déjà.
+Décision de Frédéric : **fermer la 6ᵉ entièrement**, puis faire ses vidéos Manim,
+« comme ça on estimera le temps pour une classe parfaite ». C'est une campagne
+d'étalonnage — on mesure sur la classe la moins chère à finir, pas sur la plus
+demandée.
 
-Ce qui est vérifié : la page répond `200` et porte la structure complète du
-standard du 19/08 — « À quoi ça sert », « Un peu d'histoire », définition,
-propriétés, la méthode en trois temps (poser la question au verbe, déplacer,
-supprimer), « Exemples corrigés ».
+Le standard est **un visuel par bloc** : chaque propriété et chaque étape de
+méthode porte son dessin. Les exemples corrigés, eux, sont déjà dessinés partout.
 
-⚠️ **Ce qui ne l'est pas : personne ne l'a regardée.** Ni à l'œil, ni en 375 px.
-C'est la règle du dépôt et elle n'a pas été appliquée à celle-là.
+```
+fiche                              propr.  méth.   ex.   manque
+Les angles                          0/4    0/3    1/2      8
+Premiers pas en probabilités        0/4    0/3    2/2      7
+Lire et interpréter des données     0/4    0/3    2/2      7
+Les triangles                       0/4    0/3    2/2      7
+Les quadrilatères                   0/4    0/3    2/2      7
+Les fractions                       0/4    0/3    4/4      7
+Le calcul mental                    0/4    0/3    3/3      7
+La symétrie axiale                  0/4    0/3    2/2      7
+Les volumes                         0/3    0/3    2/2      6
+Les pourcentages                    0/3    0/3    3/3      6
+Les nombres entiers                 0/3    0/3    4/4      6
+Les nombres décimaux                0/3    0/3    4/4      6
+Les longueurs                       0/3    0/3    2/2      6
+Le calcul posé                      0/3    0/3    4/4      6
+La proportionnalité                 0/3    0/3    3/3      6
+Algorithmique et programmation      0/3    0/3    2/2      6
+Les périmètres                      5/5    3/3    4/4      0   ← déjà au standard
+Les aires                           7/7    3/3    4/4      0   ← déjà au standard
+```
 
-Son alias est tombé de `lib/fiches/registre.ts` du même coup. Il reste les deux
-autres — `grammaire-groupe-nominal` et `grammaire-accords` n'ont toujours pas
-leur fiche au CM2, et le coach continue de les envoyer sur l'orthographe. **Ce
-sont les deux dernières de la série de grammaire du CM2.**
+**« Les périmètres » et « Les aires » sont les deux fiches de 6ᵉ déjà complètes.**
+Les lire avant de commencer : elles montrent à quoi ressemble l'objectif dans
+cette classe précise.
 
 ---
 
-## 2. Le patron des titres a changé — applique-le au CM2
+## L'étalon d'écriture
 
-Les 27 pages de 6ᵉ et les trois sommaires sont passés à un nouveau `title`
-([ee421e22]). Le CM2 est resté à l'ancien : c'est à faire ce matin, en même
-temps que les fiches.
+`lib/fiches/maths-5e-nombres-relatifs.tsx` — c'est la référence, et le
+CATALOGUE la désigne comme telle (« un helper simple réutilisé sur six blocs
+d'une même fiche »).
 
-```
-avant :  Les compléments du verbe — fiche de cours CM2
-après :  Les compléments du verbe — CM2 : cours et exercices corrigés
-```
+Le patron : une petite fonction locale au-dessus de `CanvasRenderer`, réutilisée
+sur tous les blocs, avec les couleurs en constantes.
 
-**La règle** : la notion et le niveau devant — c'est ce qui est tapé — puis la
-promesse. « Fiche de cours » n'est pas supprimé, il change de rôle : il reste le
-nom de la **collection** (fil d'Ariane, corps de page, surtitre des cartes de
-l'accueil), mais il ne porte aucun volume de recherche et il occupait la moitié
-du titre. La requête historique du soutien scolaire en France est « cours et
-exercices corrigés ».
-
-**Trois garde-fous appris hier soir :**
-
-1. **Ne l'écris que si c'est vrai.** Une fiche doit contenir un bloc d'exercice
-   et une section « Exemples corrigés » pour avoir le droit à ce titre. Les 27
-   de 6ᵉ ont été vérifiées avant, une par une.
-2. **~60 signes**, et le gabarit ajoute encore « — EleveAI ». Au-delà, Google
-   coupe la promesse — c'est-à-dire exactement la partie qu'on vient d'ajouter.
-   Trois titres de 6ᵉ ont dû être raccourcis pour cette raison ; le `H1` de la
-   page, lui, garde l'intitulé complet.
-3. **« exercices résolus »** (la même chose dite au Maroc, en Algérie et en
-   Belgique) va **une fois par sommaire**, dans une phrase qui se lit — jamais
-   dans les titres de fiche. Répété 27 fois, c'est de l'empilement de mots-clés
-   et il se lit comme tel. C'est déjà fait sur `/fiches-cours/maths` et
-   `/fiches-cours/francais`.
-
-Le script d'hier soir est reproductible : il lit `title:` dans chaque
-`page.tsx`, coupe le suffixe, garde la partie avant un `:` éventuel, et réécrit.
-Compte une quinzaine de pages pour le CM2.
-
-### En revanche, les H2 sont déjà faits — partout, CM2 compris
-
-Une seule modification dans `components/fiches/FicheCoursClient.tsx` vaut pour
-les 104 fiches : chaque intitulé de bloc porte maintenant le nom de la notion,
-pris dans la fiche elle-même. **Rien à faire de ce côté pour le CM2.**
-
-```
-Définition            →  Définition : les compléments du verbe
-Propriétés            →  Propriétés : les compléments du verbe
-(le bloc méthode n'avait aucun titre)  →  Méthode : les compléments du verbe
-Je m'entraîne         →  Exercices corrigés : les compléments du verbe
+```tsx
+function droite(points: {value: number; label: string; color?: string}[], min = -5, max = 5) {
+  return <CanvasRenderer figure={{ kind: "number_line", min, max, ... }} />;
+}
+// puis, dans chaque propriété :
+schema: droite([{ value: -4, label: "−4", color: ROUGE }]),
 ```
 
-Le plus gros gain est le dernier : le bloc s'appelait « Je m'entraîne » alors
-qu'il contient des `question` + `correction`. C'étaient des exercices corrigés
-qui ne le disaient pas — la requête la plus tapée du domaine, sur la seule
-section qui la méritait vraiment.
+⛔ **Ne pas dessiner à la main en SVG.** On passe par les canvas du coach, pour
+que l'élève retrouve dans sa fiche **la même figure que dans ses exercices**.
 
-Les trois étapes de la méthode passent de `<h2>` à `<h3>` : elles étaient de
-même rang que « Définition » pour une seule idée.
-
-⚠️ **Le titre est repris tel quel, sauf l'initiale d'un article** (`Le`, `La`,
-`Les`, `L'`, `Un`, `Une`, `Des`, `Du`) qui passe en minuscule après le
-deux-points. Aucun nom propre ne commence par « Les » — c'est ce qui rend la
-règle sûre. « Définition : Premiers pas en probabilités » garde donc sa
-majuscule, et c'est correct.
+📖 **`lib/canvas/CATALOGUE.md` est à lire en entier avant de choisir un `kind`.**
+Il dit ce que chaque canvas montre **et ce pour quoi il ne faut pas l'employer** —
+c'est la colonne « ⛔ Pas pour » qui évite les contresens. Exemples :
+`number_line` dessine des points, **pas un déplacement** ; `fraction` montre
+l'objet, **pas l'opération** ; `angle` montre **un** angle, pas deux à comparer.
 
 ---
 
-## 3. Ce qui a bougé côté matrice, et qui te concerne
+## Ce que j'ai déjà trouvé pour « Les angles »
 
-- **Les fiches de 6ᵉ sont déclarées** dans `lib/matrice/ressources.ts`
-  (`fiches-maths-6e`, `fiches-francais-6e`). Quand le CM2 sera complet dans les
-  deux matières, il prendra les siennes sur le même modèle — **pas avant** : une
-  ressource déclarée est une ressource promise.
-- ⚠️ **N'écris jamais `"prof"` ou `"parent"` dans les `niveaux` d'une fiche.**
-  Ce sont des rôles, pas des niveaux : essayé hier, et un parent qui avait dit
-  « CP » recevait la fiche de 6ᵉ. La classe dite suffit, le moteur essaie les
-  deux portes depuis le 16/08.
-- **Il n'existe aucune page de classe.** `/fiches-cours/maths/6e` répond `404` —
-  seuls le sommaire par matière et les pages de notion existent. Trois entrées
-  de l'inventaire pointaient dessus depuis des mois. Si tu déclares le CM2,
-  vise `/fiches-cours/francais`, pas `/fiches-cours/francais/cm2`.
-- **Une pastille « 📄 Fiches »** est apparue dans la rangée d'entrée
-  (`lib/matrice/fiches.ts`). Elle se déduit des ressources : le CM2 l'aura le
-  jour où ses fiches seront déclarées, sans rien à brancher.
+C'était la fiche par laquelle je commençais, l'analyse est faite :
 
----
+- `showProtractor: true` pose le **rapporteur** sur l'angle ;
+- `protractorStep: "vertex" | "zero" | "reading"` déroule le geste en trois
+  temps **sans changer de dessin** — le centre sur le sommet, le zéro sur un
+  côté, la graduation atteinte. Ça tombe exactement sur les trois étapes de
+  méthode de la fiche ;
+- ⚠️ le canvas `angle` ne sait montrer **qu'un seul angle**. La propriété « Aigu
+  ou obtus » en demande deux : composer deux `CanvasRenderer` côte à côte dans
+  un `<div>` plutôt que de forcer le canvas ;
+- la fiche a déjà `schemaAngleDroit` et `schemaAngleObtus` en tête de fichier :
+  les réutiliser, ne pas les redéfinir.
 
-## 4. Deux choses en suspens, à trancher quand tu veux
-
-- **`fiches-maths-premiere`** promet une collection et n'a **qu'une seule
-  fiche** (`derivation`) contre 84 en CM2 et 54 en 6ᵉ. Un lycéen arrive sur le
-  sommaire et cherche la sienne au milieu de deux cents. C'est la carte la plus
-  fragile de l'inventaire — soit on écrit la Première, soit on retire la carte.
-- **12 branches `codex/*`** de mars-mai portent chacune 1 à 5 patchs qu'on ne
-  retrouve pas sur `main`. Neuf autres ont été supprimées hier (contenu déjà
-  remonté, vérifié au `git cherry`). Celles-là attendent ton avis.
+Le type complet est dans `lib/tutor-v4/types_canvas.ts` (`AngleCanvasData`).
 
 ---
 
-## 5. Le sujet du soir, si tu veux y penser d'ici là
+## Après chaque fiche modifiée
 
-Le **livre électronique** des fiches. Le tuyau existe déjà :
-`scripts/build-ebook.ts` fabrique un PDF **et** un EPUB, avec couverture,
-avant-propos et chapitres. Mais il lit `lib/fiches-ia.ts`, une **donnée**, alors
-que les fiches de maths et de français sont des **composants React** dans
-`lib/fiches/`. Tout le travail est là : trouver comment en sortir le contenu.
+1. **Rendre la page** et la regarder — y compris à 375 px. Les petites erreurs ne
+   se lisent pas dans le code.
+2. **Refaire son PDF** (le contenu a changé) :
+   ```bash
+   npm run build:fiches-pdf -- http://localhost:3000 /fiches-cours/maths/6e/angle-mesure
+   ```
+3. **Vérifier** :
+   ```bash
+   npm run verifier:pdf
+   ```
+   Quatre contrôles : PDF manquant, PDF en retard, fiche non commitée, PDF
+   orphelin. Il compare des **dates de commit**, pas des `mtime` — git ne
+   conserve pas les seconds.
+
+⚠️ Si le **H1** d'une fiche change, le nom de son PDF change aussi et l'ancien
+devient orphelin. Le contrôle le dit, il ne le supprime pas.
+
+---
+
+## Pour remesurer la couverture
+
+Compter les blocs `proprietes` / `methode` / `exemples` de `lib/fiches/*.tsx` et
+ceux qui portent un champ `schema:`.
+
+⚠️ **Ne pas filtrer l'IA sur `fiches-ia*`** : les fichiers s'appellent `ia-*`.
+L'erreur du 24/08 avait rendu la première mesure entièrement inutile — les « 15
+fiches les plus pauvres » étaient les 16 fiches d'IA, hors sujet.
+
+---
+
+## Ce qui vient après, et pourquoi
+
+**La 4ᵉ.** Les analytics Vercel du 24/08 :
+
+```
+/cahier-vacances/vers-la-4e   507   ← la page la plus vue du site
+/cahier-vacances/vers-la-5e   474
+/accueil                      355
+/cahier-vacances/vers-la-6e   177
+```
+
+Le cahier « vers la 4ᵉ » fait presque trois fois celui de la 6ᵉ, et les fiches de
+4ᵉ sont à **zéro** — éteintes le 21/08 pour être refaites au propre. La 5ᵉ, elle,
+est déjà à 100 %.
+
+⚠️ Réserve d'interprétation : ces 507 visiteurs sont sur un **cahier de
+vacances**, pas sur une fiche. En déduire l'audience des fiches de 4ᵉ est un pari
+raisonnable, pas une mesure.
+
+⛔ **Ne pas payer les 213 dessins manquants du CM2 en maths** : Frédéric réécrit
+toutes les fiches de CM2. Ce travail partirait à la poubelle.
+
+✅ **Le français est à 100 %**, CM2 comme 6ᵉ. Ne pas y toucher.
+
+---
+
+## Deux dossiers en sommeil
+
+- **Les 16 fiches d'IA** n'ont pas de PDF : leur bouton appelle encore
+  `window.print()` (`FicheCoursIa.tsx`, un autre composant). Frédéric : « les
+  fiches IA pas grave ». Priorité basse, assumée.
+- **`fiches-maths-premiere`** promet une collection et n'a qu'une fiche
+  (`derivation`). Soit on écrit la Première, soit on retire la carte.
