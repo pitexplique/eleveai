@@ -1498,174 +1498,6 @@ export default function EntreeMatrice({
           </button>
         </form>
 
-        {/* ── L'ACCUSÉ DE RÉCEPTION ────────────────────────────────────────
-            ⭐ 24/08/2026, Frédéric : « on tape "5e maths" dans le champ, on
-            appuie sur la flèche, le résultat est pris en compte et les cards
-            bougent, mais ça ne se voit pas ».
-
-            Le diagnostic tient en une mesure : entre la flèche et la première
-            carte il y a la rangée des chips, la ligne « Ce que j'ai compris »
-            et une marge de 24 px — soit ~180 px sur ordinateur, et la première
-            carte SOUS LE PLI sur un téléphone. Tout ce que la personne voyait
-            après son clic, c'était son propre texte, immobile dans le champ.
-            Deux signaux, au même endroit que le geste :
-              • le champ se vide — c'est parti, il n'y a plus rien à envoyer ;
-              • la demande se réécrit juste en dessous — voici ce qui a été reçu.
-
-            ⚠️ ELLE N'EST PAS « CE QUE J'AI COMPRIS ». Celle-là est plus bas et
-            dit la LECTURE du moteur (classe · matière · intention · notion) ;
-            celle-ci rend la PHRASE, mot pour mot. Les confondre, ce serait
-            perdre le seul endroit où la personne peut relire ce qu'elle a
-            réellement tapé — et donc voir qu'elle s'est trompée.
-            ⚠️ `role="status"` : au lecteur d'écran aussi, la flèche ne disait
-            rien. La liste des résultats est annoncée (`aria-live` plus bas),
-            mais elle arrive après tout le reste du bloc.
-            ⚠️ `line-clamp-2` ET NON `truncate`, ET PAS DE HAUTEUR LIBRE NON PLUS.
-            Une demande de 200 caractères existe (« comment additionner deux
-            fractions qui n'ont pas le même dénominateur en cinquième »), et le
-            champ est vidé : couper à une ligne, c'est la lui reprendre au
-            moment où on prétend la lui rendre. La laisser couler, c'est
-            repousser la première carte de trois lignes — soit ce qu'on essaie
-            de gagner. Deux lignes, et le `title` porte le reste.
-            ⚠️ `rounded-2xl` et non `rounded-full` : à 13 px sur une ligne les
-            deux sont indiscernables (rayon 15 px contre 16), mais sur deux
-            lignes une pastille pleinement ronde devient un ovale.
-
-            ── ⭐ 24/08/2026, SECONDE PASSE : NOIR PLEIN, ET UNE FLÈCHE ─────────
-            Frédéric, devant la première version : « je le mettrai juste en
-            dessous du champ texte en fond noir et écriture blanche », et « il
-            manque, avec une icône, les cards en dessous qu'on te propose ».
-
-            Ce que la pastille teal ratait. Elle était bordée, claire, centrée —
-            c'est-à-dire de la même famille visuelle que les DIX pastilles
-            posées au-dessus et en dessous d'elle (rôles, classes, matières,
-            chips). Un accusé de réception qui ressemble à un bouton ne se lit
-            pas comme un accusé de réception : l'œil, qui vient de parcourir
-            trois rangées de pastilles, saute la onzième. Le noir plein est la
-            SEULE valeur de la page qui n'apparaisse nulle part ailleurs dans ce
-            bloc — c'est ce qui la fait voir sans qu'on ait à l'agrandir.
-
-            ⚠️ ET LA FLÈCHE FAIT LE TRAVAIL QUE LE TEXTE SEUL NE FAISAIT PAS.
-            Dire « voici ta demande » confirme la réception ; ça ne dit toujours
-            pas que quelque chose a bougé PLUS BAS — et c'était la plainte
-            d'origine, mot pour mot : « les cards bougent mais ça ne se voit
-            pas ». Le « ↓ » et sa phrase désignent l'endroit où regarder. C'est
-            la moitié qui manquait.
-
-            ⚠️ PLEINE LARGEUR, PLUS CENTRÉE. Une ligne centrée sous un champ de
-            1000 px flotte au milieu de rien ; une barre qui prend la largeur du
-            champ se lit comme sa continuation — donc comme sa réponse.
-            ⚠️ UNE SEULE GAMME POUR LES DEUX VARIANTES. `#1d1c16` sur `#f5fafb`,
-            ce sont l'encre et le papier du journal : la barre est déjà chez elle
-            dans la variante « accueil », et c'est la couleur que Frédéric a
-            demandée pour la variante « page ». Rien à dédoubler ici. */}
-        {demande && (
-          <div
-            role="status"
-            aria-live="polite"
-            className="mt-3 flex items-start gap-3 rounded-2xl bg-[#1d1c16] px-4 py-2.5 text-[13px] text-[#f5fafb]"
-          >
-            {/* ⭐ TI MARGO PORTE LA BARRE (Frédéric, 24/08/2026 : « plus icône
-                margouillat »). C'est la mascotte du site, et c'est ici qu'elle
-                sert à quelque chose : elle signe la réponse. Une barre noire
-                sans visage est un bandeau système ; avec lui, c'est quelqu'un
-                qui répond.
-                ⚠️ `ti-margo-112.webp` (4,8 Ko) ET NON `ti-margo.png` (163 Ko
-                pour un dessin de 32 px), avec `unoptimized` — le même choix,
-                pour la même raison, que le bandeau du coach : l'image naît au
-                moment où l'on valide, donc elle se télécharge à cet instant
-                précis. Le vrai dessin au prix d'un émoji.
-                ⚠️ `alt=""` : le texte à côté dit tout, et un `role="status"`
-                qui annoncerait « Ti Margo, le margouillat d'EleveAI » AVANT la
-                demande ferait perdre l'information à ceux qui écoutent. */}
-            <Image
-              src="/cahier-vacances/ti-margo-112.webp"
-              alt=""
-              width={90}
-              height={112}
-              unoptimized
-              // ⚠️ `eager` ET NON LE `lazy` PAR DÉFAUT, et ça ne coûte rien au
-              // premier écran : cette balise N'EXISTE PAS tant qu'on n'a pas
-              // validé. Elle naît déjà dans le champ de vision, à l'instant
-              // précis où l'on attend une réponse — la faire attendre un
-              // deuxième aller-retour d'observateur, c'est la faire apparaître
-              // après la barre qui la contient.
-              loading="eager"
-              aria-hidden="true"
-              className="mt-0.5 h-8 w-auto shrink-0"
-            />
-            <div className="min-w-0 flex-1">
-              {/* ⚠️ LE CONTEXTE EN GRAS, LA PHRASE EN CLAIR. Ce sont deux
-                  natures : à gauche ce que la personne a CLIQUÉ (et qui est
-                  encore allumé au-dessus), à droite ce qu'elle a ÉCRIT. Une
-                  seule graisse pour les deux, et la ligne redevient la liste
-                  indifférenciée que « Ce que j'ai compris » est déjà. */}
-              <p className="line-clamp-2" title={demande}>
-                {contexteDemande && (
-                  <span className="font-semibold">{contexteDemande} · </span>
-                )}
-                «&nbsp;{demande}&nbsp;»
-              </p>
-              {/* ⚠️ LA FLÈCHE EST DANS LE TEXTE, PAS À CÔTÉ. Elle vivait dans un
-                  `flex` avec la phrase : deux éléments, donc deux boîtes, donc
-                  une rupture de ligne possible entre le « ↓ » et ce qu'il
-                  désigne — une flèche seule sur sa ligne ne montre plus rien.
-                  Collée par une espace insécable, elle ne peut plus se
-                  détacher. */}
-              {/* ⚠️ « Voici ce qu'on te propose. » ET NON « Regarde ce qu'on te
-                  propose en dessous. » — mesuré, pas raccourci par goût. La
-                  version longue faisait 41 signes, soit 265 px, dans les 278 px
-                  qui restent à 375 une fois le margouillat et la croix
-                  déduits : elle passait à la ligne, et la barre montait à
-                  100 px. Cent pixels au-dessus des cartes, c'est reprendre d'une
-                  main ce que toute cette barre essaie de gagner de l'autre. La
-                  flèche dit déjà « en dessous » ; les trois mots qui la
-                  répétaient coûtaient une ligne entière.
-                  ⚠️ `text-xs` : c'est la ligne de service, pas la réponse. */}
-              <p className="mt-0.5 text-xs text-[#f5fafb]/75">
-                ↓&nbsp;
-                {/* ⚠️ LA NOTION TOUTE SEULE, SANS « Compris : » DEVANT — et
-                    c'est une mesure, pas une élégance. « Compris : Fractions :
-                    reconnaître et comparer. » fait 47 signes et passe à deux
-                    lignes à 375 : la barre remontait à 93 px et rendait la
-                    moitié des 70 px qu'on venait de gagner en supprimant le
-                    doublon. Les dix signes de « Compris : » coûtaient une ligne
-                    entière — et deux deux-points dans la même phrase, puisque
-                    les libellés de notion en portent déjà un.
-                    ⚠️ Ce qu'on perd en le retirant est plus petit qu'il n'y
-                    paraît : la flèche dit « en dessous », la notion dit de quoi
-                    ça parle, et l'aveu — le seul moment où il faut nommer la
-                    lecture — garde sa phrase entière dans `rienCompris`. */}
-                {rienCompris
-                  ? `Je n'ai pas bien compris — voici par où ${
-                      tutoie ? "tu peux" : "vous pouvez"
-                    } commencer.`
-                  : lectureCompris
-                    ? `${lectureCompris}.`
-                    : tutoie
-                      ? "Voici ce qu'on te propose."
-                      : "Voici ce qu'on vous propose."}
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={effacerDemande}
-              aria-label="Effacer la demande"
-              title="Effacer la demande"
-              // ⚠️ LA CIBLE, PAS LE GLYPHE. Le « ✕ » mesure 10 × 13 px : au
-              // doigt, on le rate. Le rembourrage lui donne 26 × 25, et la
-              // marge négative reprend exactement ce que ce rembourrage a pris —
-              // la croix reste collée au bord de la barre, la barre ne bouge
-              // pas d'un pixel. `-mt-1` recentre le glyphe sur la première
-              // ligne : sans lui il tombe 2,5 px trop bas, ce qui se voit sur
-              // une barre à deux lignes.
-              className="-mr-2 -mt-1 shrink-0 px-2 py-1.5 leading-none text-[#f5fafb]/60 transition hover:text-[#f5fafb]"
-            >
-              <span aria-hidden="true">✕</span>
-            </button>
-          </div>
-        )}
-
         {/* Les actions du professeur et du chef d'établissement — écrites, pas
             déduites, et chacune ouvre un outil. Voir lib/matrice/actions.ts.
             ⚠️ `sm:justify-center` et pas `justify-center` : centrer une rangée
@@ -1781,6 +1613,195 @@ export default function EntreeMatrice({
                 {plusDOptions ? "Moins d'options" : "Autres options"}
               </button>
             )}
+          </div>
+        )}
+
+        {/* ── L'ACCUSÉ DE RÉCEPTION ────────────────────────────────────────
+            ⭐ 24/08/2026, Frédéric : « on tape "5e maths" dans le champ, on
+            appuie sur la flèche, le résultat est pris en compte et les cards
+            bougent, mais ça ne se voit pas ».
+
+            Le diagnostic tient en une mesure : entre la flèche et la première
+            carte il y a la rangée des chips, la ligne « Ce que j'ai compris »
+            et une marge de 24 px — soit ~180 px sur ordinateur, et la première
+            carte SOUS LE PLI sur un téléphone. Tout ce que la personne voyait
+            après son clic, c'était son propre texte, immobile dans le champ.
+            Deux signaux, au même endroit que le geste :
+              • le champ se vide — c'est parti, il n'y a plus rien à envoyer ;
+              • la demande se réécrit juste en dessous — voici ce qui a été reçu.
+
+            ⚠️ ELLE N'EST PAS « CE QUE J'AI COMPRIS ». Celle-là est plus bas et
+            dit la LECTURE du moteur (classe · matière · intention · notion) ;
+            celle-ci rend la PHRASE, mot pour mot. Les confondre, ce serait
+            perdre le seul endroit où la personne peut relire ce qu'elle a
+            réellement tapé — et donc voir qu'elle s'est trompée.
+            ⚠️ `role="status"` : au lecteur d'écran aussi, la flèche ne disait
+            rien. La liste des résultats est annoncée (`aria-live` plus bas),
+            mais elle arrive après tout le reste du bloc.
+            ⚠️ `line-clamp-2` ET NON `truncate`, ET PAS DE HAUTEUR LIBRE NON PLUS.
+            Une demande de 200 caractères existe (« comment additionner deux
+            fractions qui n'ont pas le même dénominateur en cinquième »), et le
+            champ est vidé : couper à une ligne, c'est la lui reprendre au
+            moment où on prétend la lui rendre. La laisser couler, c'est
+            repousser la première carte de trois lignes — soit ce qu'on essaie
+            de gagner. Deux lignes, et le `title` porte le reste.
+            ⚠️ `rounded-2xl` et non `rounded-full` : à 13 px sur une ligne les
+            deux sont indiscernables (rayon 15 px contre 16), mais sur deux
+            lignes une pastille pleinement ronde devient un ovale.
+
+            ── ⭐ 24/08/2026, SECONDE PASSE : NOIR PLEIN, ET UNE FLÈCHE ─────────
+            Frédéric, devant la première version : « je le mettrai juste en
+            dessous du champ texte en fond noir et écriture blanche », et « il
+            manque, avec une icône, les cards en dessous qu'on te propose ».
+
+            Ce que la pastille teal ratait. Elle était bordée, claire, centrée —
+            c'est-à-dire de la même famille visuelle que les DIX pastilles
+            posées au-dessus et en dessous d'elle (rôles, classes, matières,
+            chips). Un accusé de réception qui ressemble à un bouton ne se lit
+            pas comme un accusé de réception : l'œil, qui vient de parcourir
+            trois rangées de pastilles, saute la onzième. Le noir plein est la
+            SEULE valeur de la page qui n'apparaisse nulle part ailleurs dans ce
+            bloc — c'est ce qui la fait voir sans qu'on ait à l'agrandir.
+
+            ⚠️ ET LA FLÈCHE FAIT LE TRAVAIL QUE LE TEXTE SEUL NE FAISAIT PAS.
+            Dire « voici ta demande » confirme la réception ; ça ne dit toujours
+            pas que quelque chose a bougé PLUS BAS — et c'était la plainte
+            d'origine, mot pour mot : « les cards bougent mais ça ne se voit
+            pas ». Le « ↓ » et sa phrase désignent l'endroit où regarder. C'est
+            la moitié qui manquait.
+
+            ⚠️ PLEINE LARGEUR, PLUS CENTRÉE. Une ligne centrée sous un champ de
+            1000 px flotte au milieu de rien ; une barre qui prend la largeur du
+            champ se lit comme sa continuation — donc comme sa réponse.
+            ⚠️ UNE SEULE GAMME POUR LES DEUX VARIANTES. `#1d1c16` sur `#f5fafb`,
+            ce sont l'encre et le papier du journal : la barre est déjà chez elle
+            dans la variante « accueil », et c'est la couleur que Frédéric a
+            demandée pour la variante « page ». Rien à dédoubler ici.
+
+            ── ⭐ 24/08/2026, TROISIÈME PASSE : ELLE PASSE SOUS LES CHIPS ───────
+            Frédéric, après essai : « il faut que l'affichage soit en dessous des
+            chips, car les chips ne répondent pas ».
+
+            Elle était collée au champ, et c'était une erreur de raisonnement :
+            j'avais placé l'accusé de réception au plus près du GESTE, alors
+            qu'il annonce la RÉPONSE. Entre les deux s'intercalait la rangée des
+            chips — « M'entraîner », « Teste-toi », « Fiches » —, c'est-à-dire
+            des choses à cliquer. La barre disait « ↓ voici ce qu'on te propose »
+            et la flèche tombait sur des boutons. Elle désignait le mauvais
+            endroit, et une flèche qui désigne à côté est pire qu'aucune flèche.
+
+            Posée sous les chips, elle devient l'en-tête de la liste : la flèche
+            n'a plus rien à traverser, et l'ordre de lecture redevient celui de
+            la page — d'abord ce qu'on peut FAIRE (les rangées, puis les chips),
+            ensuite ce qu'on a REÇU, puis les cartes.
+            ⚠️ Elle reste DANS le bloc du champ (le `border-t`), en dernier
+            enfant : c'est ce qui lui garde exactement la largeur du champ, la
+            filiation se voit encore. Sortir du bloc l'aurait recentrée sur la
+            colonne, plus large. */}
+        {demande && (
+          <div
+            role="status"
+            aria-live="polite"
+            className="mt-3 flex items-start gap-3 rounded-2xl bg-[#1d1c16] px-4 py-2.5 text-[13px] text-[#f5fafb]"
+          >
+            {/* ⭐ TI MARGO PORTE LA BARRE (Frédéric, 24/08/2026 : « plus icône
+                margouillat »). C'est la mascotte du site, et c'est ici qu'elle
+                sert à quelque chose : elle signe la réponse. Une barre noire
+                sans visage est un bandeau système ; avec lui, c'est quelqu'un
+                qui répond.
+                ⚠️ `ti-margo-112.webp` (4,8 Ko) ET NON `ti-margo.png` (163 Ko
+                pour un dessin de 32 px), avec `unoptimized` — le même choix,
+                pour la même raison, que le bandeau du coach : l'image naît au
+                moment où l'on valide, donc elle se télécharge à cet instant
+                précis. Le vrai dessin au prix d'un émoji.
+                ⚠️ `alt=""` : le texte à côté dit tout, et un `role="status"`
+                qui annoncerait « Ti Margo, le margouillat d'EleveAI » AVANT la
+                demande ferait perdre l'information à ceux qui écoutent. */}
+            <Image
+              src="/cahier-vacances/ti-margo-112.webp"
+              alt=""
+              width={90}
+              height={112}
+              unoptimized
+              // ⚠️ `eager` ET NON LE `lazy` PAR DÉFAUT, et ça ne coûte rien au
+              // premier écran : cette balise N'EXISTE PAS tant qu'on n'a pas
+              // validé. Elle naît déjà dans le champ de vision, à l'instant
+              // précis où l'on attend une réponse — la faire attendre un
+              // deuxième aller-retour d'observateur, c'est la faire apparaître
+              // après la barre qui la contient.
+              loading="eager"
+              aria-hidden="true"
+              className="mt-0.5 h-8 w-auto shrink-0"
+            />
+            <div className="min-w-0 flex-1">
+              {/* ⚠️ LE CONTEXTE EN GRAS, LA PHRASE EN CLAIR. Ce sont deux
+                  natures : à gauche ce que la personne a CLIQUÉ (et qui est
+                  encore allumé au-dessus), à droite ce qu'elle a ÉCRIT. Une
+                  seule graisse pour les deux, et la ligne redevient la liste
+                  indifférenciée que « Ce que j'ai compris » est déjà. */}
+              <p className="line-clamp-2" title={demande}>
+                {contexteDemande && (
+                  <span className="font-semibold">{contexteDemande} · </span>
+                )}
+                «&nbsp;{demande}&nbsp;»
+              </p>
+              {/* ⚠️ LA FLÈCHE EST DANS LE TEXTE, PAS À CÔTÉ. Elle vivait dans un
+                  `flex` avec la phrase : deux éléments, donc deux boîtes, donc
+                  une rupture de ligne possible entre le « ↓ » et ce qu'il
+                  désigne — une flèche seule sur sa ligne ne montre plus rien.
+                  Collée par une espace insécable, elle ne peut plus se
+                  détacher. */}
+              {/* ⚠️ « Voici ce qu'on te propose. » ET NON « Regarde ce qu'on te
+                  propose en dessous. » — mesuré, pas raccourci par goût. La
+                  version longue faisait 41 signes, soit 265 px, dans les 278 px
+                  qui restent à 375 une fois le margouillat et la croix
+                  déduits : elle passait à la ligne, et la barre montait à
+                  100 px. Cent pixels au-dessus des cartes, c'est reprendre d'une
+                  main ce que toute cette barre essaie de gagner de l'autre. La
+                  flèche dit déjà « en dessous » ; les trois mots qui la
+                  répétaient coûtaient une ligne entière.
+                  ⚠️ `text-xs` : c'est la ligne de service, pas la réponse. */}
+              <p className="mt-0.5 text-xs text-[#f5fafb]/75">
+                ↓&nbsp;
+                {/* ⚠️ LA NOTION TOUTE SEULE, SANS « Compris : » DEVANT — et
+                    c'est une mesure, pas une élégance. « Compris : Fractions :
+                    reconnaître et comparer. » fait 47 signes et passe à deux
+                    lignes à 375 : la barre remontait à 93 px et rendait la
+                    moitié des 70 px qu'on venait de gagner en supprimant le
+                    doublon. Les dix signes de « Compris : » coûtaient une ligne
+                    entière — et deux deux-points dans la même phrase, puisque
+                    les libellés de notion en portent déjà un.
+                    ⚠️ Ce qu'on perd en le retirant est plus petit qu'il n'y
+                    paraît : la flèche dit « en dessous », la notion dit de quoi
+                    ça parle, et l'aveu — le seul moment où il faut nommer la
+                    lecture — garde sa phrase entière dans `rienCompris`. */}
+                {rienCompris
+                  ? `Je n'ai pas bien compris — voici par où ${
+                      tutoie ? "tu peux" : "vous pouvez"
+                    } commencer.`
+                  : lectureCompris
+                    ? `${lectureCompris}.`
+                    : tutoie
+                      ? "Voici ce qu'on te propose."
+                      : "Voici ce qu'on vous propose."}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={effacerDemande}
+              aria-label="Effacer la demande"
+              title="Effacer la demande"
+              // ⚠️ LA CIBLE, PAS LE GLYPHE. Le « ✕ » mesure 10 × 13 px : au
+              // doigt, on le rate. Le rembourrage lui donne 26 × 25, et la
+              // marge négative reprend exactement ce que ce rembourrage a pris —
+              // la croix reste collée au bord de la barre, la barre ne bouge
+              // pas d'un pixel. `-mt-1` recentre le glyphe sur la première
+              // ligne : sans lui il tombe 2,5 px trop bas, ce qui se voit sur
+              // une barre à deux lignes.
+              className="-mr-2 -mt-1 shrink-0 px-2 py-1.5 leading-none text-[#f5fafb]/60 transition hover:text-[#f5fafb]"
+            >
+              <span aria-hidden="true">✕</span>
+            </button>
           </div>
         )}
       </div>
