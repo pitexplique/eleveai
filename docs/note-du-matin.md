@@ -18,9 +18,9 @@ demandée.
 Le standard est **un visuel par bloc** : chaque propriété et chaque étape de
 méthode porte son dessin. Les exemples corrigés, eux, sont déjà dessinés partout.
 
-**Avancement : 10 fiches sur 18 (69 dessins sur 105).**
+**Avancement : 11 fiches sur 18 (75 dessins sur 105).**
 
-✅ **Les dix fiches faites sont complètes** : mesurées sur la page à 375, 820 et
+✅ **Les onze fiches faites sont complètes** : mesurées sur la page à 375, 820 et
 1280 px (aucun texte sous 11 px, aucun chevauchement), PDF refaits, `verifier:pdf`
 au vert.
 
@@ -40,7 +40,7 @@ Les nombres entiers                 0/3    0/3    4/4      6
 Les nombres décimaux                0/3    0/3    4/4      6
 Les longueurs                       0/3    0/3    2/2      6
 Le calcul posé                      0/3    0/3    4/4      6
-La proportionnalité                 0/3    0/3    3/3      6
+La proportionnalité                 3/3    3/3    3/3      0   ✅ 24/08, mesurée + PDF
 Algorithmique et programmation      0/3    0/3    2/2      6
 Les périmètres                      5/5    3/3    4/4      0   ← déjà au standard
 Les aires                           7/7    3/3    4/4      0   ← déjà au standard
@@ -101,7 +101,15 @@ Aucun ne se lit dans le code, tous se mesurent sur la page (§ 2 quater) :
    (`schema_barre`, `stat_graph`, `probabilites`, `fraction`, `tableau_*`)
    écrivent en 12–13 px : au-delà de **210** de viewBox dans un exemple, ou
    **245** dans une propriété, le texte passe sous 11 px.
-5. **Trois défauts qui ne sont PAS des polices**, et qu'il faut chercher à part :
+5. ⛔ **`fonctionGraphique` NE TIENT PAS dans une carte de propriété**, et ce
+   n'est pas réparable en serrant le cadre : son repère est calculé sur un
+   viewBox de 320, ses graduations rendent 9,5 px dans 228, et le rogner sort
+   les axes du dessin. Monter la police à 15 les remonte à 10,7 — toujours sous
+   le seuil — et fait déborder les nombres du bout des axes. Essayé, mesuré,
+   abandonné : ce canvas demande un bloc large. La fiche de Première
+   (`derivation`) a le même défaut, non traité — c'est le seul endroit du site
+   où il reste.
+6. **Trois défauts qui ne sont PAS des polices**, et qu'il faut chercher à part :
    des graduations trop denses qui se touchent (`step: 1` sur douze nombres),
    des étiquettes de parts trop étroites pour leur mot (une part qui vaut 8 sur
    162 fait 12 px de large), et une phrase du bas qui SORT du cadre sans rien

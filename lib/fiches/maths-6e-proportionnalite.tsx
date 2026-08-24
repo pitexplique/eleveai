@@ -44,6 +44,143 @@ function tableauProp(
   );
 }
 
+// ─── Les six dessins des blocs ────────────────────────────────────────────────
+// ⭐ LE TABLEAU DE PROPORTIONNALITÉ SERVAIT DÉJÀ CINQ FOIS (figure, formule, les
+// trois exemples). Six de plus et la fiche entière n'aurait été qu'un seul
+// dessin répété onze fois (REGLES.md § 2 bis). Il ne revient donc que deux fois,
+// pour deux lectures différentes — le coefficient entre les LIGNES, puis la
+// COLONNE du 1 — et les quatre autres blocs montrent ce qu'un tableau ne montre
+// pas : l'alignement des points, un tout découpé en parts égales, et deux
+// grandeurs simplement nommées.
+
+/** Un dessin et sa phrase, sous lui. */
+const legende = (dessin: React.ReactNode, texte: string) => (
+  <div>
+    {dessin}
+    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+  </div>
+);
+
+// LE COEFFICIENT VIT ENTRE LES DEUX LIGNES. La case allumée est celle qu'on
+// obtient en multipliant celle du dessus — c'est le geste, pas le résultat.
+const leCoefficient = legende(
+  tableauProp(
+    ["objets", "prix (€)"],
+    [
+      ["1", "2", "3", "5"],
+      ["2", "4", "6", "10"],
+    ],
+    [{ row: 1, col: 3 }]
+  ),
+  "d'une ligne à l'autre, toujours × 2"
+);
+
+// ⭐ RECONNAÎTRE, C'EST DISPOSER D'UN CONTRE-EXEMPLE. Une seule situation
+// proportionnelle ne prouve rien : ce qui apprend à reconnaître, c'est de voir
+// À CÔTÉ une situation qui n'en est pas. La seconde ligne ajoute 3 à chaque fois
+// — régulier, mais pas proportionnel. C'est le piège n° 1 de la fiche, dessiné.
+//
+// ⛔ CE BLOC A D'ABORD PORTÉ UN GRAPHIQUE (des points alignés passant par
+// l'origine), et c'était la meilleure image — mais `fonctionGraphique` ne tient
+// pas dans une carte de propriété : son repère est calculé sur un viewBox de
+// 320, ses graduations tombaient à 9,5 px dans 228, et les rogner sort les axes
+// du cadre. Mesuré, essayé, abandonné : le graphique demande un bloc large.
+const proportionnelOuPas = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Proportionnel ou pas ?",
+      headers: ["1", "2", "3", "La règle"],
+      rows: [
+        { label: "prix A", values: ["2", "4", "6", "× 2"] },
+        { label: "prix B", values: ["2", "5", "8", "+ 3"] },
+      ],
+      highlight: { row: 0 },
+    }}
+  />,
+  "A double quand la quantité double · B, non"
+);
+
+// REVENIR À L'UNITÉ, C'EST DÉCOUPER. Le tout vaut 15 €, il y a 5 objets : la
+// barre montre les cinq parts ÉGALES, donc la division. Le tableau, lui, ne
+// montre jamais un partage — il montre des nombres déjà calculés.
+const leToutEnCinqParts = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      title: "15 € pour 5 objets",
+      total: "15 €",
+      parts: [
+        { label: "1", value: "3" },
+        { label: "1", value: "3" },
+        { label: "1", value: "3" },
+        { label: "1", value: "3" },
+        { label: "1", value: "3" },
+      ],
+      questionLabel: "15 ÷ 5 = 3 € l'objet",
+      // ⚠️ Largeur sous 245, hauteur à 190 (§ 2 quater).
+      size: { width: 240, height: 190 },
+    }}
+  />
+);
+
+// LIRE, C'EST NOMMER LES DEUX GRANDEURS — et rien de plus. Aucun calcul, aucun
+// coefficient : le seul dessin de la fiche où il n'y a rien à trouver.
+const lesDeuxGrandeurs = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Deux grandeurs, à chaque fois",
+      headers: ["La première", "La seconde"],
+      rows: [
+        { values: ["des objets", "un prix"] },
+        { values: ["des personnes", "une masse"] },
+        { values: ["un temps", "une distance"] },
+      ],
+      highlight: { row: 0 },
+    }}
+  />
+);
+
+// LA COLONNE DU 1, ALLUMÉE. C'est le même tableau que la propriété, lu tout
+// autrement : là on regardait les deux lignes, ici on regarde UNE colonne, et
+// la case à trouver est laissée vide.
+const laColonneDeLUnite = legende(
+  tableauProp(
+    ["objets", "prix (€)"],
+    [
+      ["1", "4", "7"],
+      ["", "12", "21"],
+    ],
+    [{ row: 1, col: 0 }]
+  ),
+  "on cherche d'abord le prix de 1 : 12 ÷ 4 = 3"
+);
+
+// MULTIPLIER, C'EST RECOLLER LES PARTS. La propriété découpait 15 € en cinq
+// parts de 3 ; ici on part de la part et on en met sept bout à bout. Même
+// dessin, geste inverse — et c'est exactement la méthode en deux temps.
+const septPartsRecollees = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      title: "7 objets à 3 €",
+      total: "21 €",
+      parts: [
+        { label: "3", value: "3" },
+        { label: "3", value: "3" },
+        { label: "3", value: "3" },
+        { label: "3", value: "3" },
+        { label: "3", value: "3" },
+        { label: "3", value: "3" },
+        { label: "3", value: "3" },
+      ],
+      questionLabel: "7 × 3 = 21 €",
+      size: { width: 240, height: 190 },
+    }}
+  />
+);
+
 const pieges = [
   "Croire qu'ajouter le même nombre suffit : c'est multiplier, pas additionner.",
   "Oublier de revenir à l'unité avant de multiplier.",
@@ -91,14 +228,17 @@ export const ficheProportionnalite6e: FicheCoursData = {
     {
       titre: "Le coefficient",
       texte: "On passe d'une ligne à l'autre en multipliant par le même nombre (ici × 2).",
+      schema: leCoefficient,
     },
     {
       titre: "Reconnaître",
       texte: "Si une grandeur double, l'autre double ; si elle triple, l'autre triple.",
+      schema: proportionnelOuPas,
     },
     {
       titre: "Passer par l'unité",
       texte: "On cherche la valeur pour 1, puis on multiplie par la quantité voulue.",
+      schema: leToutEnCinqParts,
     },
   ],
   reel: {
@@ -122,9 +262,9 @@ export const ficheProportionnalite6e: FicheCoursData = {
     ),
   },
   methode: [
-    { titre: "Je lis", texte: "Les deux grandeurs : objets et prix, personnes et masse, temps et distance…" },
-    { titre: "Je reviens à 1", texte: "Je cherche la valeur pour 1 unité (une division)." },
-    { titre: "Je multiplie", texte: "Je multiplie cette valeur par la quantité demandée." },
+    { titre: "Je lis", texte: "Les deux grandeurs : objets et prix, personnes et masse, temps et distance…" , schema: lesDeuxGrandeurs },
+    { titre: "Je reviens à 1", texte: "Je cherche la valeur pour 1 unité (une division)." , schema: laColonneDeLUnite },
+    { titre: "Je multiplie", texte: "Je multiplie cette valeur par la quantité demandée." , schema: septPartsRecollees },
   ],
   usages: [
     { titre: "Reconnaître", detail: "On double une quantité → l'autre double aussi." },
