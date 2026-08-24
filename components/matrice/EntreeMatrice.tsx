@@ -768,6 +768,46 @@ export default function EntreeMatrice({
     .filter(Boolean)
     .join(" · ");
 
+  /**
+   * ⭐ CE QUE LE MOTEUR A LU, DESCENDU DANS LA BARRE (24/08/2026).
+   *
+   * Frédéric a compté avec moi : entre le champ et la première carte il y avait
+   * 204 px sur un téléphone de 375, dont 70 pour la ligne « Ce que j'ai
+   * compris » (28 de marge + 32 de texte + 10). Or cette ligne redisait la
+   * classe et la matière déjà écrites 60 px plus haut dans la barre : elle
+   * n'apportait qu'UNE information neuve, la notion reconnue. Soixante-dix
+   * pixels pour deux mots, juste au-dessus des cartes, et sur l'écran dont le
+   * rebond est à 62 %.
+   *
+   * La notion descend donc dans la ligne de service de la barre, et le
+   * paragraphe ne sort plus que lorsqu'il n'y a PAS de barre — c'est-à-dire
+   * quand personne n'a rien tapé (un simple clic de classe : « Par où tu peux
+   * commencer en 5e »). Un seul endroit dit ce qu'on a compris.
+   *
+   * ⚠️ `rienCompris` REPREND MOT POUR MOT L'ANCIENNE CONDITION, et il faut
+   * qu'il la reprenne : cliquer une matière EST quelque chose de compris, d'où
+   * le `!matiereChoisie`. Sans lui, un élève qui clique « Français » et tape une
+   * phrase inconnue s'entendrait dire qu'on n'a rien compris, alors qu'on a
+   * compris la moitié de sa demande.
+   * ⛔ ET ON NE SUPPRIME PAS L'AVEU. « Je n'ai pas bien compris » est la phrase
+   * la plus importante de l'écran le jour où elle est vraie : la fondre dans un
+   * « voici ce qu'on te propose » ferait passer un repli sur le niveau pour une
+   * réponse. Elle change de place, pas de statut.
+   */
+  const lectureCompris = resultat
+    ? [
+        resultat.lecture.intention ? libelleIntention(resultat.lecture.intention) : null,
+        resultat.lecture.notionLabel,
+      ]
+        .filter(Boolean)
+        .join(" · ")
+    : "";
+  const rienCompris =
+    !!resultat &&
+    !resultat.lecture.notionId &&
+    !resultat.lecture.intention &&
+    !matiereChoisie;
+
   const lancer = useCallback(
     (
       texte: string,
@@ -1583,7 +1623,28 @@ export default function EntreeMatrice({
                   répétaient coûtaient une ligne entière.
                   ⚠️ `text-xs` : c'est la ligne de service, pas la réponse. */}
               <p className="mt-0.5 text-xs text-[#f5fafb]/75">
-                ↓&nbsp;{tutoie ? "Voici ce qu'on te propose." : "Voici ce qu'on vous propose."}
+                ↓&nbsp;
+                {/* ⚠️ LA NOTION TOUTE SEULE, SANS « Compris : » DEVANT — et
+                    c'est une mesure, pas une élégance. « Compris : Fractions :
+                    reconnaître et comparer. » fait 47 signes et passe à deux
+                    lignes à 375 : la barre remontait à 93 px et rendait la
+                    moitié des 70 px qu'on venait de gagner en supprimant le
+                    doublon. Les dix signes de « Compris : » coûtaient une ligne
+                    entière — et deux deux-points dans la même phrase, puisque
+                    les libellés de notion en portent déjà un.
+                    ⚠️ Ce qu'on perd en le retirant est plus petit qu'il n'y
+                    paraît : la flèche dit « en dessous », la notion dit de quoi
+                    ça parle, et l'aveu — le seul moment où il faut nommer la
+                    lecture — garde sa phrase entière dans `rienCompris`. */}
+                {rienCompris
+                  ? `Je n'ai pas bien compris — voici par où ${
+                      tutoie ? "tu peux" : "vous pouvez"
+                    } commencer.`
+                  : lectureCompris
+                    ? `${lectureCompris}.`
+                    : tutoie
+                      ? "Voici ce qu'on te propose."
+                      : "Voici ce qu'on vous propose."}
               </p>
             </div>
             <button
@@ -1826,24 +1887,35 @@ export default function EntreeMatrice({
       {/* ── Ce qu'on a trouvé ───────────────────────────────────────────── */}
       {resultat && p && (
         <div className={surAccueil ? "mt-6" : "mt-7"} aria-live="polite">
-          {/* Quand NI notion NI intention n'ont été lues, on n'a rien compris —
-              et écrire « Ce que j'ai compris : 4e » au-dessus de trois ressources
-              choisies au niveau seul serait un mensonge poli. On le dit, et les
-              ressources deviennent une proposition de départ, pas une réponse.
-              ⚠️ Sauf quand la personne n'a RIEN demandé : après un simple choix
-              de classe, « je n'ai pas bien compris la demande » reprocherait un
-              silence. On annonce alors ce que c'est — un point de départ. */}
-          {!resultat.lecture.notionId && !resultat.lecture.intention && !matiereChoisie ? (
+          {/* ── ⭐ 24/08/2026 : CE BLOC NE SORT PLUS QUE SANS BARRE ────────────
+              Il disait « Ce que j'ai compris : 5e · Mathématiques · les
+              fractions » soixante pixels sous une barre noire qui venait
+              d'écrire « Élève · 5e · Mathématiques · « fractions » ». Deux
+              lignes qui se ressemblent à l'œil, pour une seule information
+              neuve — la notion — et 70 px de hauteur (28 de marge + 32 de texte
+              + 10), juste au-dessus des cartes, sur l'écran dont le rebond est à
+              62 %. La notion est descendue dans la ligne de service de la barre
+              (voir `lectureCompris`), et ce bloc garde le seul cas que la barre
+              ne couvre pas : celui où il n'y a rien à récapituler parce que
+              personne n'a rien tapé — un simple clic de classe.
+              Mesure du gain : première carte à 742 px sur un téléphone de 812,
+              contre 672 après.
+
+              ⚠️ CE QUI RESTE VRAI ICI. Quand NI notion NI intention n'ont été
+              lues, on n'a rien compris — et écrire « Ce que j'ai compris : 4e »
+              au-dessus de trois ressources choisies au niveau seul serait un
+              mensonge poli. On le dit, et les ressources deviennent une
+              proposition de départ, pas une réponse.
+              ⛔ ET LA BRANCHE « JE N'AI PAS BIEN COMPRIS » A DISPARU D'ICI SANS
+              DISPARAÎTRE DU SITE : elle ne pouvait se déclencher qu'avec un
+              texte envoyé, donc avec une barre, donc jamais dans ce bloc
+              désormais. C'est la barre qui la porte, mot pour mot. La garder
+              ici, c'était laisser un ternaire dont une branche était devenue
+              inatteignable — et un commentaire qui l'expliquait au futur. */}
+          {!demande && (
+          !resultat.lecture.notionId && !resultat.lecture.intention && !matiereChoisie ? (
             <p className="mb-2.5 text-center text-xs text-[#1d1c16]/65">
-              {/* ⚠️ `demande` ET NON `question` depuis le 24/08 : le champ est
-                  vidé à l'envoi, donc `question` y est toujours vide à ce
-                  moment-là — la page aurait dit « Par où tu peux commencer »
-                  après une phrase qu'elle n'a pas comprise, c'est-à-dire sans
-                  jamais admettre qu'elle n'avait pas compris. */}
-              {demande.trim()
-                ? "Je n'ai pas bien compris la demande — voici par où "
-                : "Par où "}
-              {p.tutoie ? "tu peux" : "vous pouvez"} commencer
+              Par où {p.tutoie ? "tu peux" : "vous pouvez"} commencer
               {/* ⭐ « EN ADULTE » NE VEUT RIEN DIRE (21/08/2026) — exactement la
                   faute que la note de `labelClasseAdulte` signale pour
                   « en Parent », et qui est revenue par l'autre bout : là-bas un
@@ -1878,7 +1950,7 @@ export default function EntreeMatrice({
                   .join(" · ")}
               </span>
             </p>
-          )}
+          ))}
 
           {resultat.lecture.intention === "humain" ? (
             // Chercher quelqu'un, ce n'est pas chercher une ressource. On n'a
