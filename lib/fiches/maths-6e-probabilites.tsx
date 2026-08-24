@@ -18,11 +18,35 @@
 //                       pieges (2)
 // - proba_defi        → pieges (3), aRetenir (3), entrainement (Q4), slide « pièges »
 
+//
+// ⭐ SEPT DESSINS, SEPT IMAGES DIFFÉRENTES (REGLES.md § 2 bis). Le piège de cette
+// fiche-là est le dé : il est parlant, donc il revenait partout, et sept dés
+// alignés font sept règles identiques aux yeux d'un élève de 6e. Chaque bloc
+// porte donc l'objet qui montre SA chose : un sac d'une seule couleur (le
+// certain et l'impossible se voient d'un coup), un tableau qui liste les issues
+// de trois expériences, une roue aux secteurs inégaux (le plus grand gagne), la
+// graduation de 0 à 1, une roue aux secteurs égaux (on fait le tour, on n'oublie
+// rien), une barre de 6 dont 3 sont favorables, et des barres qu'on compare.
+
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 
 type Face = 1 | 2 | 3 | 4 | 5 | 6;
+
+const ROUGE = "#dc2626";
+const BLEU = "#2563eb";
+const VERT = "#16a34a";
+const JAUNE = "#f59e0b";
+const GRIS = "#94a3b8";
+
+/** Un dessin et sa phrase, sous lui. */
+const legende = (dessin: React.ReactNode, texte: string) => (
+  <div>
+    {dessin}
+    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+  </div>
+);
 
 // Un dé à 6 faces (canvas du coach) : la définition « 6 issues » se voit.
 const deSixFaces = (
@@ -67,6 +91,156 @@ const sacBilles = (
   />
 );
 
+// LE CERTAIN ET L'IMPOSSIBLE DANS UN SEUL DESSIN. Un sac où toutes les billes
+// sont rouges dit les deux extrêmes d'un coup d'œil : tirer rouge arrive à tous
+// les coups, tirer bleu n'arrive jamais. Aucune liste de mots ne fait ça.
+const sacUneSeuleCouleur = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "probabilites",
+      variant: "billes",
+      billes: {
+        elements: [
+          { couleur: ROUGE },
+          { couleur: ROUGE },
+          { couleur: ROUGE },
+          { couleur: ROUGE },
+          { couleur: ROUGE },
+        ],
+      },
+    }}
+  />,
+  "tirer rouge : certain · tirer bleu : impossible"
+);
+
+// LISTER, C'EST ÉCRIRE LA COLONNE ENTIÈRE. Trois expériences, leurs issues et
+// leur compte : ce que la propriété demande, c'est de ne rien laisser dehors.
+const tableauDesIssues = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      headers: ["Expérience", "Ses issues", "Combien"],
+      rows: [
+        { values: ["Un dé", "1 à 6", "6"] },
+        { values: ["Une pièce", "pile, face", "2"] },
+        { values: ["7 billes", "une par bille", "7"] },
+      ],
+      highlight: { col: 2 },
+    }}
+  />
+);
+
+// LE PLUS GRAND SECTEUR GAGNE. C'est la roue de l'exercice 3 de la fiche —
+// A grand, B et C petits et de même taille : l'élève retrouve dans le cours
+// exactement la figure sur laquelle on l'interroge plus bas.
+const roueInegale = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "probabilites",
+      variant: "roue",
+      roue: {
+        segments: [
+          { label: "A", poids: 4, couleur: ROUGE },
+          { label: "B", poids: 1, couleur: BLEU },
+          { label: "C", poids: 1, couleur: VERT },
+        ],
+      },
+    }}
+  />,
+  "A a le plus de chances · B et C sont aussi probables"
+);
+
+// LA GRADUATION DES CHANCES. Le seul dessin de la fiche qui porte des NOMBRES :
+// une chance se range entre 0 et 1, comme n'importe quel nombre sur une droite.
+const echelleDesChances = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min: 0,
+      max: 1,
+      step: 0.25,
+      points: [
+        { value: 0, label: "jamais", color: ROUGE },
+        { value: 1, label: "toujours", color: VERT },
+      ],
+      display: {
+        showTicks: true,
+        showValues: true,
+        showPoints: true,
+        showPointLabels: true,
+        showZero: true,
+      },
+      size: { width: 300, height: 95 },
+    }}
+  />,
+  "0 = impossible · 1 = certain"
+);
+
+// FAIRE LE TOUR SANS RIEN OUBLIER. Un disque complet : quatre secteurs, quatre
+// issues, et il ne reste pas de place pour une cinquième. C'est le geste de la
+// méthode « Lister », là où le tableau de la propriété en donnait la trace.
+const roueEgale = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "probabilites",
+      variant: "roue",
+      roue: {
+        segments: [
+          { label: "A", poids: 1, couleur: ROUGE },
+          { label: "B", poids: 1, couleur: BLEU },
+          { label: "C", poids: 1, couleur: VERT },
+          { label: "D", poids: 1, couleur: JAUNE },
+        ],
+      },
+    }}
+  />,
+  "4 secteurs, donc 4 issues — et pas une de plus"
+);
+
+// COMPTER, C'EST DÉCOUPER LE TOUT. Les 6 issues du dé mises bout à bout, les 3
+// favorables d'un côté : le rapport se voit avant d'être écrit. Les nombres sont
+// ceux de l'exemple 1, pour que l'élève les reconnaisse.
+const barreDesIssues = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      // ⚠️ Au-delà de ~28 caractères, le titre déborde du cadre en silence
+      // (mesuré sur la fiche des périmètres).
+      title: "Les 6 issues d'un dé",
+      total: "6 issues",
+      parts: [
+        { label: "pairs", value: "3", color: VERT },
+        { label: "impairs", value: "3", color: GRIS },
+      ],
+      questionLabel: "3 issues sur 6 sont paires",
+      // ⚠️ 175 px de haut collaient « pairs » / « impairs » à la phrase du bas :
+      // le canvas pose les étiquettes à 144 et la phrase à hauteur − 18. Le même
+      // piège, déjà payé sur la fiche des périmètres.
+      size: { width: 300, height: 190 },
+    }}
+  />
+);
+
+// COMPARER, C'EST METTRE CÔTE À CÔTE. Trois événements du même dé, la hauteur
+// donne le nombre d'issues qui les réalisent : la barre la plus haute est
+// l'événement le plus probable, sans un mot de plus.
+const barresAComparer = (
+  <CanvasRenderer
+    figure={{
+      kind: "stat_graph",
+      graphType: "barres",
+      title: "Issues favorables",
+      data: [
+        { label: "« 6 »", value: 1, color: BLEU },
+        { label: "pair", value: 3, color: VERT },
+        { label: "plus de 2", value: 4, color: ROUGE },
+      ],
+      display: { showValues: true, showLabels: true, highlightIndex: 2 },
+      size: { width: 300, height: 190 },
+    }}
+  />
+);
+
 const pieges = [
   "Confondre « possible » et « certain » : obtenir 6 avec un dé est possible, mais pas certain, car les autres faces peuvent sortir.",
   "Conclure sans compter : en regardant vite un sac de billes, on peut se tromper. On compte les billes de chaque couleur avant de décider.",
@@ -105,21 +279,25 @@ export const ficheProbabilites6e: FicheCoursData = {
       titre: "Certain, possible, impossible",
       texte:
         "Un événement impossible ne peut jamais se produire (obtenir 7 avec un dé classique). Un événement certain se produit toujours (obtenir un nombre entre 1 et 6). Entre les deux, un événement possible peut arriver, sans être garanti (obtenir 6).",
+      schema: sacUneSeuleCouleur,
     },
     {
       titre: "Lister toutes les issues",
       texte:
         "Avant tout, on cherche tous les résultats possibles. Un dé a 6 issues, une pièce en a 2 (pile ou face), un sac de billes en a autant que de billes. Si on en oublie une, la suite est faussée.",
+      schema: tableauDesIssues,
     },
     {
       titre: "Plus, moins ou aussi probable",
       texte:
         "Un événement est d'autant plus probable qu'il a de résultats qui le réalisent. Sur un dé, « obtenir un nombre pair » (2, 4 ou 6) est plus probable qu'« obtenir 6 » tout seul. Deux événements sont aussi probables quand ils ont autant de chances chacun.",
+      schema: roueInegale,
     },
     {
       titre: "L'échelle de 0 à 1",
       texte:
         "On mesure une chance entre 0 et 1. 0, c'est impossible ; 1, c'est certain. Un événement qui a beaucoup de chances est proche de 1 ; un événement qui en a peu est proche de 0. Une chance n'est jamais plus grande que 1.",
+      schema: echelleDesChances,
     },
   ],
   reel: {
@@ -135,16 +313,19 @@ export const ficheProbabilites6e: FicheCoursData = {
       titre: "Lister les issues",
       texte:
         "On écrit tous les résultats possibles de l'expérience : les 6 faces d'un dé, les 2 côtés d'une pièce, les billes du sac. On vérifie qu'on n'en oublie aucun.",
+      schema: roueEgale,
     },
     {
       titre: "Compter",
       texte:
         "On compte combien d'issues au total, puis combien réalisent l'événement qui nous intéresse (les issues favorables). Sur un dé, « nombre pair » a 3 issues favorables : 2, 4 et 6.",
+      schema: barreDesIssues,
     },
     {
       titre: "Comparer",
       texte:
         "Pour dire quel événement est le plus probable, on compare le nombre d'issues favorables : le plus de chances gagne. On peut aussi situer une chance sur l'échelle de 0 à 1.",
+      schema: barresAComparer,
     },
   ],
   usages: [
