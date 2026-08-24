@@ -24,13 +24,20 @@ import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 
 // Une figure et son image par rapport à un axe vertical, dessinées par le
 // moteur du coach : l'élève voit le « miroir » et peut compter les carreaux.
+//
+// ⚠️ `cellSize: 22, padding: 10` SUR LES SIX DESSINS DE LA FICHE, et c'est
+// mesuré. La taille d'une case fixe la largeur du viewBox (8 colonnes), donc le
+// rapport d'échelle une fois le SVG mis à la largeur de son bloc. À 30, la
+// phrase du bas du canvas tombait à 8,7 px dans un bloc d'exemple de 199 px.
+// Le dessin ne rétrécit pas pour autant : il occupe toujours toute la largeur —
+// ce sont les LETTRES qui grossissent.
 const schemaSymetrie = (
   <CanvasRenderer
     figure={{
       kind: "transformation",
       transformation: "symetrie_axiale",
       grid: { rows: 6, cols: 8 },
-      size: { cellSize: 30, padding: 18 },
+      size: { cellSize: 22, padding: 10 },
       axis: { type: "vertical", x: 4, label: "axe" },
       source: { points: [{ x: 1, y: 1 }, { x: 1, y: 4 }, { x: 3, y: 1 }], label: "figure" },
       image: { points: [{ x: 7, y: 1 }, { x: 7, y: 4 }, { x: 5, y: 1 }], label: "image" },
@@ -51,7 +58,7 @@ const symReflet = (
       kind: "transformation",
       transformation: "symetrie_axiale",
       grid: { rows: 6, cols: 8 },
-      size: { cellSize: 30, padding: 18 },
+      size: { cellSize: 22, padding: 10 },
       axis: { type: "vertical", x: 4, label: "axe" },
       source: { points: [{ x: 1, y: 1 }, { x: 3, y: 2 }, { x: 1, y: 4 }], label: "figure" },
       image: { points: [{ x: 7, y: 1 }, { x: 5, y: 2 }, { x: 7, y: 4 }], label: "image" },
@@ -67,13 +74,223 @@ const symPoint = (
       kind: "transformation",
       transformation: "symetrie_axiale",
       grid: { rows: 6, cols: 8 },
-      size: { cellSize: 30, padding: 18 },
+      size: { cellSize: 22, padding: 10 },
       axis: { type: "vertical", x: 4, label: "axe" },
       source: { points: [{ x: 1, y: 3 }], label: "A" },
       image: { points: [{ x: 7, y: 3 }], label: "A'" },
       display: { showGrid: true, showLabels: true, showPoints: true, showDashedLinks: true },
     }}
   />
+);
+
+// ─── Les sept dessins des blocs ───────────────────────────────────────────────
+// ⭐ LE CANVAS `transformation` DESSINE TOUJOURS LA MÊME CHOSE : une figure, un
+// axe, son image. Mis sur les sept blocs, il aurait fait sept fois le miroir
+// (REGLES.md § 2 bis). Trois blocs passent donc à `droites`, qui sait ce que la
+// transformation ignore — marquer un angle droit, poser un milieu, tracer
+// plusieurs axes — et un quatrième à un tableau, parce que « ça ne change pas »
+// n'est pas une figure mais une liste.
+
+/** Un dessin et sa phrase, sous lui. */
+const legende = (dessin: React.ReactNode, texte: string) => (
+  <div>
+    {dessin}
+    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+  </div>
+);
+
+const NOIR = "#0f172a";
+const BLEU = "#2563eb";
+const ROUGE = "#dc2626";
+
+// LE CAS QUI ÉTONNE : UN POINT QUI NE BOUGE PAS. L'exemple 2 montre déjà A à
+// trois carreaux et son image de l'autre côté ; celui-ci montre la seconde
+// moitié de la propriété, celle qu'on oublie — sur l'axe, l'image est le point
+// lui-même.
+const pointSurLAxe = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "transformation",
+      transformation: "symetrie_axiale",
+      grid: { rows: 6, cols: 8 },
+      size: { cellSize: 22, padding: 10 },
+      axis: { type: "vertical", x: 4, label: "axe" },
+      // ⚠️ UNE SEULE ÉTIQUETTE, et c'est tout l'intérêt : A et A' sont au MÊME
+      // endroit, donc leurs deux noms se chevauchaient (mesuré). Un seul texte,
+      // « A = A' », dit la chose mieux que deux textes empilés.
+      source: { points: [{ x: 4, y: 2 }], label: "A = A'" },
+      image: { points: [{ x: 4, y: 2 }], label: "" },
+      display: { showGrid: true, showLabels: true, showPoints: true, showDashedLinks: false },
+    }}
+  />,
+  "A est sur l'axe : son image, c'est lui-même"
+);
+
+// ⭐ CE QUE LA TRANSFORMATION NE SAIT PAS DESSINER. « L'axe est la médiatrice »
+// demande deux marques que le canvas des symétries n'a pas : l'angle droit au
+// croisement et le MILIEU du segment. `droites` les pose toutes les deux.
+const laMediatrice = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "droites",
+      size: { width: 250, height: 200 },
+      lines: [
+        {
+          id: "axe",
+          type: "droite",
+          from: { x: 125, y: 25 },
+          to: { x: 125, y: 175 },
+          label: "axe",
+          color: ROUGE,
+          display: { showLabel: true, showArrows: false },
+        },
+        {
+          id: "segment",
+          type: "segment",
+          // ⚠️ REMONTÉ À 70. À y = 100, le segment coupait l'axe en son milieu
+          // exact — et l'étiquette « axe », posée au milieu de la droite,
+          // tombait pile sur le nom du point M (mesuré).
+          from: { x: 45, y: 70 },
+          to: { x: 205, y: 70 },
+          color: BLEU,
+          display: { showLabel: false, showArrows: false },
+        },
+      ],
+      points: [
+        { x: 45, y: 70, label: "A", color: BLEU },
+        { x: 125, y: 70, label: "M", color: ROUGE, highlight: true },
+        { x: 205, y: 70, label: "A'", color: BLEU },
+      ],
+      markers: {
+        rightAngles: [{ x: 125, y: 70, lineA: "axe", lineB: "segment" }],
+      },
+    }}
+  />,
+  "M est le milieu de [AA'], et l'angle est droit"
+);
+
+// « ÇA NE CHANGE PAS » N'EST PAS UNE FIGURE, C'EST UNE LISTE. Dessiner un
+// segment et son image côte à côte ne montre rien : ils se ressemblent, c'est
+// tout. Ce qui se voit, c'est la colonne de droite identique à celle de gauche.
+const cequiSeConserve = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Rien ne change",
+      headers: ["Avant", "Après"],
+      rows: [
+        { label: "Un segment", values: ["7 cm", "7 cm"] },
+        { label: "Un angle", values: ["40°", "40°"] },
+        { label: "Une aire", values: ["12 cm²", "12 cm²"] },
+      ],
+      highlight: { col: 1 },
+    }}
+  />
+);
+
+// LES QUATRE AXES DU CARRÉ, TOUS SUR LE MÊME DESSIN. Le canvas des symétries
+// n'accepte qu'UN axe : impossible d'y montrer qu'un carré en a quatre. Quatre
+// droites en pointillés sur un carré, elles, le disent d'un coup d'œil.
+const lesQuatreAxesDuCarre = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "droites",
+      size: { width: 250, height: 220 },
+      lines: [
+        { id: "h", type: "segment", from: { x: 60, y: 55 }, to: { x: 190, y: 55 }, color: NOIR, strokeWidth: 3, display: { showLabel: false } },
+        { id: "d", type: "segment", from: { x: 190, y: 55 }, to: { x: 190, y: 185 }, color: NOIR, strokeWidth: 3, display: { showLabel: false } },
+        { id: "b", type: "segment", from: { x: 190, y: 185 }, to: { x: 60, y: 185 }, color: NOIR, strokeWidth: 3, display: { showLabel: false } },
+        { id: "g", type: "segment", from: { x: 60, y: 185 }, to: { x: 60, y: 55 }, color: NOIR, strokeWidth: 3, display: { showLabel: false } },
+        { id: "ax1", type: "droite", from: { x: 125, y: 40 }, to: { x: 125, y: 200 }, color: ROUGE, dashed: true, display: { showLabel: false } },
+        { id: "ax2", type: "droite", from: { x: 45, y: 120 }, to: { x: 205, y: 120 }, color: ROUGE, dashed: true, display: { showLabel: false } },
+        { id: "ax3", type: "droite", from: { x: 48, y: 43 }, to: { x: 202, y: 197 }, color: ROUGE, dashed: true, display: { showLabel: false } },
+        { id: "ax4", type: "droite", from: { x: 202, y: 43 }, to: { x: 48, y: 197 }, color: ROUGE, dashed: true, display: { showLabel: false } },
+      ],
+    }}
+  />,
+  "le carré en a 4 · le rectangle 2 · le cercle une infinité"
+);
+
+// ⭐ LE CONTRE-EXEMPLE DU PLIAGE. Toutes les autres figures de la fiche se
+// superposent : celle-ci NON, et c'est ce qui rend le geste vérifiable. Plier
+// pour voir, c'est utile seulement s'il existe des cas où ça rate.
+const leProblemeDuPliage = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "transformation",
+      transformation: "symetrie_axiale",
+      grid: { rows: 6, cols: 8 },
+      size: { cellSize: 22, padding: 10 },
+      axis: { type: "vertical", x: 4, label: "axe" },
+      source: { points: [{ x: 1, y: 1 }, { x: 3, y: 2 }, { x: 1, y: 4 }], label: "figure" },
+      // ⚠️ Étiquette courte : « pas l'image » (11 signes) chevauchait le mot
+      // « axe » posé en haut de la droite (mesuré). La légende sous le dessin
+      // dit la phrase entière, l'étiquette n'a qu'à désigner.
+      image: { points: [{ x: 6, y: 1 }, { x: 5, y: 3 }, { x: 7, y: 4 }], label: "faux" },
+      display: { showGrid: true, showLabels: true, showPoints: true, showDashedLinks: false },
+    }}
+  />,
+  "plié, ça ne se superpose pas : ce n'est pas une symétrie"
+);
+
+// LE GESTE EN COURS, PAS LE RÉSULTAT. La propriété montrait la médiatrice
+// terminée, avec son milieu ; ici A' n'existe pas encore — on vient seulement
+// de tracer la droite sur laquelle il se trouvera.
+const laPerpendiculaire = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "droites",
+      size: { width: 250, height: 200 },
+      lines: [
+        {
+          id: "axe",
+          type: "droite",
+          from: { x: 125, y: 25 },
+          to: { x: 125, y: 175 },
+          label: "axe",
+          color: ROUGE,
+          display: { showLabel: true, showArrows: false },
+        },
+        {
+          id: "perp",
+          type: "droite",
+          from: { x: 45, y: 70 },
+          to: { x: 210, y: 70 },
+          color: BLEU,
+          dashed: true,
+          display: { showLabel: false, showArrows: false },
+        },
+      ],
+      points: [{ x: 45, y: 70, label: "A", color: BLEU, highlight: true }],
+      markers: {
+        rightAngles: [{ x: 125, y: 70, lineA: "axe", lineB: "perp" }],
+      },
+    }}
+  />,
+  "A' sera quelque part sur cette droite"
+);
+
+// ⭐ L'AXE N'EST PAS TOUJOURS VERTICAL. Les quatre autres dessins de la fiche
+// ont tous un axe debout : celui-ci est couché, et le report de distance se
+// compte alors en carreaux vers le haut et vers le bas. Même geste, autre
+// direction — c'est ce que la troisième étape doit rendre évident.
+const reporterLaDistance = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "transformation",
+      transformation: "symetrie_axiale",
+      grid: { rows: 6, cols: 8 },
+      size: { cellSize: 22, padding: 10 },
+      // ⚠️ Pas d'étiquette sur un axe HORIZONTAL : le canvas la pose au bout de
+      // la droite, donc hors du cadre (mesuré — le texte sortait du <svg>).
+      // C'est la légende du dessous qui nomme l'axe.
+      axis: { type: "horizontal", y: 3, label: "" },
+      source: { points: [{ x: 2, y: 1 }], label: "A" },
+      image: { points: [{ x: 2, y: 5 }], label: "A'" },
+      display: { showGrid: true, showLabels: true, showPoints: true, showDashedLinks: true },
+    }}
+  />,
+  "l'axe est couché : 2 carreaux au-dessus, 2 en dessous"
 );
 
 const pieges = [
@@ -115,21 +332,25 @@ export const ficheSymetrie6e: FicheCoursData = {
       titre: "L'image d'un point",
       texte:
         "L'image d'un point A est le point A', placé de l'autre côté de l'axe, à la même distance de l'axe. Si A est déjà sur l'axe, il ne bouge pas : son image est lui-même.",
+      schema: pointSurLAxe,
     },
     {
       titre: "L'axe est la médiatrice",
       texte:
         "Le segment [AA'] qui relie un point à son image est toujours perpendiculaire à l'axe, et l'axe le coupe en son milieu. Autrement dit, l'axe est la médiatrice de [AA'].",
+      schema: laMediatrice,
     },
     {
       titre: "La symétrie conserve les mesures",
       texte:
         "Une symétrie axiale ne déforme pas la figure : elle conserve les longueurs, les mesures d'angles, les aires, les périmètres et l'alignement des points. Un segment de 7 cm a une image de 7 cm ; un angle de 40° a une image de 40°.",
+      schema: cequiSeConserve,
     },
     {
       titre: "Les axes des figures usuelles",
       texte:
         "Un rectangle non carré possède 2 axes de symétrie, un carré en possède 4 (les deux médianes et les deux diagonales), un triangle équilatéral en possède 3, un triangle isocèle non équilatéral en possède 1 et un cercle en possède une infinité.",
+      schema: lesQuatreAxesDuCarre,
     },
   ],
   reel: {
@@ -145,16 +366,19 @@ export const ficheSymetrie6e: FicheCoursData = {
       titre: "Plier en pensée",
       texte:
         "Pour reconnaître une symétrie, on imagine que l'on plie la feuille le long de l'axe. Si la figure et son image se superposent exactement, c'est bien une symétrie axiale.",
+      schema: leProblemeDuPliage,
     },
     {
       titre: "Tracer la perpendiculaire",
       texte:
         "Pour construire l'image d'un point A, on trace la droite perpendiculaire à l'axe qui passe par A. C'est sur cette droite que se trouvera l'image A'.",
+      schema: laPerpendiculaire,
     },
     {
       titre: "Reporter la distance",
       texte:
         "On mesure la distance de A à l'axe, puis on reporte cette même distance de l'autre côté, sur la perpendiculaire. On obtient A'. Pour une figure, on répète ce geste pour chaque sommet.",
+      schema: reporterLaDistance,
     },
   ],
   usages: [

@@ -415,7 +415,13 @@ export default function TransformationCanvas({ figure }: Props) {
           fontWeight="800"
           fill="#475569"
         >
-          figure bleue : départ — figure rouge : image
+          {/* ⚠️ RACCOURCIE LE 24/08/2026. « figure bleue : départ — figure
+              rouge : image » fait 43 signes, soit ~280 px en 12 px de police :
+              centrée sur un cadre de 240 à 270, elle SORTAIT du <svg> des deux
+              côtés. Le défaut touchait les six dessins de symétrie de la 6e —
+              et il ne se voyait pas, le texte débordant sur du blanc. Mesuré au
+              rendu (rectangle du texte contre rectangle du svg). */}
+          bleu : départ · rouge : image
         </text>
       </svg>
     </div>
