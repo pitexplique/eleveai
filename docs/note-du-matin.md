@@ -30,6 +30,24 @@ n'a pas de lien mort** — elle garde son bouton d'impression.
 oublies la commande, sa page n'aura pas de PDF (pas de casse, juste pas de
 lien). À lancer en fin de session, comme un `git push`.
 
+### Et un contrôle pour ne plus dépendre de ta mémoire
+
+```bash
+npm run verifier:pdf
+```
+
+Il compare, pour chacune des 84 fiches, la **date du dernier commit** de son
+fichier de données à celle de son PDF, et liste les trois défauts possibles :
+PDF manquant, PDF en retard, fiche modifiée pas encore commitée.
+
+⚠️ **Les dates de git, pas celles du disque** — et c'est tout l'intérêt : git ne
+conserve pas les `mtime`, donc sur un clone neuf (ton poste du matin, un runner)
+tous les fichiers ont la date du checkout et un contrôle sur `mtime` passerait au
+vert partout, y compris là où il sert.
+
+Il ne bloque rien : `--strict` existe pour un hook, mais un PDF en retard n'est
+pas une raison de barrer un déploiement — la page, elle, est juste.
+
 ⚠️ **Les fiches d'IA n'en ont pas** et n'en auront pas par ce chemin : elles
 passent par `FicheCoursIa.tsx`, un autre composant, dont le bouton appelle
 toujours `window.print()`. À traiter à part le jour où on s'en occupe.

@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "build:ebook": "node --experimental-strip-types scripts/build-ebook.ts",
+    "build:fiches-pdf": "node --experimental-strip-types scripts/build-fiches-pdf.ts",
+    "verifier:pdf": "node --experimental-strip-types scripts/verifier-pdf-a-jour.ts",
     "build:fiches-pdf": "node --experimental-strip-types scripts/build-fiches-pdf.ts"
   },
   "dependencies": {
