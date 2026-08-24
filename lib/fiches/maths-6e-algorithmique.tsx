@@ -69,6 +69,207 @@ const progRepetition = (
   />
 );
 
+// ─── Les six dessins des blocs ────────────────────────────────────────────────
+// ⭐ LE CANVAS `scratch` EMPILE DES BLOCS, ET C'EST TOUT CE QU'IL SAIT FAIRE.
+// Trois programmes servaient déjà (figure, exemples 1 et 2) : six de plus et la
+// fiche serait une colonne de blocs colorés (REGLES.md § 2 bis). Trois blocs
+// gardent donc le Scratch — mais toujours PAR PAIRE, parce qu'un programme seul
+// ne montre jamais qu'un autre ordre donnerait autre chose. Les trois derniers
+// sortent : le catalogue dit que `scratch` n'est ⛔ pas pour un tableau
+// d'exécution, et c'est justement ce qui manque à la méthode.
+
+/** Un dessin et sa phrase, sous lui. */
+const legende = (dessin: React.ReactNode, texte: string) => (
+  <div>
+    {dessin}
+    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+  </div>
+);
+
+/** ⛔ On empile, on ne juxtapose pas (§ 2 ter) : deux programmes côte à côte
+ *  dans une carte de 225 px recevraient 110 px chacun. */
+const pile = (items: { dessin: React.ReactNode; nom: string }[]) => (
+  <div className="grid grid-cols-1 gap-2">
+    {items.map((it) => (
+      <div key={it.nom}>
+        {it.dessin}
+        <p className="mt-1 text-center text-xs font-black text-slate-700">{it.nom}</p>
+      </div>
+    ))}
+  </div>
+);
+
+// ⭐ LES MÊMES DEUX BLOCS, DANS LES DEUX ORDRES. Un programme seul ne peut pas
+// dire que l'ordre compte : il faut voir la paire. Rien d'autre ne change entre
+// ces deux dessins — ni les blocs, ni les valeurs, seulement leur rang.
+const lesDeuxOrdres = pile([
+  {
+    dessin: (
+      <CanvasRenderer
+        figure={{
+          kind: "scratch",
+          title: "Avancer, puis tourner",
+          blocks: [
+            { type: "event" },
+            { type: "move", value: 10 },
+            { type: "turn", value: 90 },
+          ],
+        }}
+      />
+    ),
+    nom: "on part tout droit, puis on pivote",
+  },
+  {
+    dessin: (
+      <CanvasRenderer
+        figure={{
+          kind: "scratch",
+          title: "Tourner, puis avancer",
+          blocks: [
+            { type: "event" },
+            { type: "turn", value: 90 },
+            { type: "move", value: 10 },
+          ],
+        }}
+      />
+    ),
+    nom: "on pivote sur place, puis on part de côté",
+  },
+]);
+
+// ⭐ LE MÊME CARRÉ, ÉCRIT DEUX FOIS. « La répétition raccourcit » ne se voit pas
+// sur une boucle isolée — elle se voit contre les huit blocs qu'elle remplace.
+const longEtCourt = pile([
+  {
+    dessin: (
+      <CanvasRenderer
+        figure={{
+          kind: "scratch",
+          title: "Sans boucle",
+          blocks: [
+            { type: "move", value: 10 },
+            { type: "turn", value: 90 },
+            { type: "move", value: 10 },
+            { type: "turn", value: 90 },
+            { type: "move", value: 10 },
+            { type: "turn", value: 90 },
+            { type: "move", value: 10 },
+            { type: "turn", value: 90 },
+          ],
+        }}
+      />
+    ),
+    nom: "8 blocs pour un carré",
+  },
+  {
+    dessin: (
+      <CanvasRenderer
+        figure={{
+          kind: "scratch",
+          title: "Avec une boucle",
+          blocks: [
+            {
+              type: "repeat",
+              times: 4,
+              children: [
+                { type: "move", value: 10 },
+                { type: "turn", value: 90 },
+              ],
+            },
+          ],
+        }}
+      />
+    ),
+    nom: "le même carré, en 1 boucle",
+  },
+]);
+
+// ⭐ L'ERREUR EXÉCUTÉE TELLE QUELLE. On voulait 90°, on a tapé 9° : la machine ne
+// corrige pas, elle obéit. Le seul programme FAUX de la fiche — et il fallait
+// qu'il existe, sinon la propriété reste une phrase.
+const leProgrammeQuiObeit = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "scratch",
+      title: "On voulait un carré",
+      blocks: [
+        { type: "event" },
+        {
+          type: "repeat",
+          times: 4,
+          children: [
+            { type: "move", value: 10 },
+            { type: "turn", value: 9 },
+          ],
+        },
+      ],
+    }}
+  />,
+  "9° au lieu de 90° : la machine trace un éventail, sans rien dire"
+);
+
+// LIRE DANS L'ORDRE, C'EST COMMENCER PAR LE DRAPEAU. Un programme ordinaire,
+// mais dont la légende désigne le point de départ : c'est le geste, pas le code.
+const parOuCommencer = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "scratch",
+      title: "Par où commence-t-on ?",
+      blocks: [
+        { type: "event" },
+        { type: "move", value: 5 },
+        { type: "turn", value: 90 },
+        { type: "say", text: "Fini !" },
+      ],
+    }}
+  />,
+  "toujours par le drapeau vert, puis de haut en bas"
+);
+
+// ⭐ CE QUE `scratch` NE SAIT PAS FAIRE. Le catalogue est explicite : ce canvas
+// montre des blocs empilés, ⛔ pas un tableau d'exécution. Or « faire comme si
+// on était la machine », c'est exactement remplir ce tableau-là — une ligne par
+// instruction, et l'on voit la position changer.
+const tableauDExecution = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "On joue la machine",
+      headers: ["L'instruction", "Position", "Direction"],
+      rows: [
+        { label: "départ", values: ["—", "0", "→"] },
+        { label: "avancer 5", values: ["5 pas", "5", "→"] },
+        { label: "tourner 90°", values: ["—", "5", "↓"] },
+      ],
+      highlight: { col: 1 },
+      caption: "Une ligne par instruction : rien ne se saute.",
+    }}
+  />
+);
+
+// ⭐ UNE BOUCLE EST UNE MULTIPLICATION. Quatre tours de 10 pas font 40 pas : le
+// tableau de proportionnalité dit pourquoi, là où le programme ne montre que le
+// nombre de tours.
+const laBoucleEstUneMultiplication = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_proportionnalite",
+      rows: 2,
+      cols: 4,
+      rowLabels: ["tours", "pas"],
+      values: [
+        ["1", "2", "3", "4"],
+        ["10", "20", "30", "40"],
+      ],
+      missing: [],
+      highlightedCells: [{ row: 1, col: 3 }],
+      display: { showRowLabels: true, showColLabels: false, showGrid: true },
+      size: { width: 250, height: 150 },
+    }}
+  />,
+  "répéter 4 fois « avancer de 10 » : 40 pas en tout"
+);
+
 const pieges = [
   "Changer l'ordre des instructions sans y penser : si on tourne avant d'avancer, le lutin ne va pas au même endroit. L'ordre fait partie du programme.",
   "Oublier que la boucle répète : dans « répéter 4 fois : avancer de 10 », le lutin avance 4 × 10 = 40 pas, pas seulement 10.",
@@ -107,16 +308,19 @@ export const ficheAlgorithmique6e: FicheCoursData = {
       titre: "L'ordre compte",
       texte:
         "Les instructions s'exécutent dans l'ordre, de haut en bas. Si on change l'ordre, le résultat peut changer : « avancer puis tourner » ne mène pas au même endroit que « tourner puis avancer ».",
+      schema: lesDeuxOrdres,
     },
     {
       titre: "La répétition raccourcit",
       texte:
         "Quand une même action revient plusieurs fois, on utilise une boucle « répéter … fois » au lieu de tout réécrire. « Répéter 4 fois : avancer, tourner de 90° » trace un carré avec quelques blocs seulement.",
+      schema: longEtCourt,
     },
     {
       titre: "L'ordinateur exécute sans deviner",
       texte:
         "La machine ne comprend pas ce qu'on voulait faire : elle applique les instructions telles quelles. Si un bloc est faux ou mal placé, elle exécute l'erreur sans la corriger. C'est à nous d'être précis.",
+      schema: leProgrammeQuiObeit,
     },
   ],
   reel: {
@@ -132,16 +336,19 @@ export const ficheAlgorithmique6e: FicheCoursData = {
       titre: "Lire dans l'ordre",
       texte:
         "On lit le programme de haut en bas, comme un texte. On repère d'abord le bloc de départ (« quand le drapeau vert est cliqué »), puis chaque instruction dans l'ordre.",
+      schema: parOuCommencer,
     },
     {
       titre: "Exécuter pas à pas",
       texte:
         "On fait comme si on était la machine : on suit chaque instruction une par une et on note ce qui se passe (position, direction). On ne saute aucune étape.",
+      schema: tableauDExecution,
     },
     {
       titre: "Chercher les répétitions",
       texte:
         "On repère les blocs à l'intérieur d'un « répéter … fois » : ils sont exécutés plusieurs fois. On multiplie l'action par le nombre de tours pour trouver le résultat total.",
+      schema: laBoucleEstUneMultiplication,
     },
   ],
   usages: [
