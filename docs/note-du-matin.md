@@ -18,9 +18,9 @@ demandée.
 Le standard est **un visuel par bloc** : chaque propriété et chaque étape de
 méthode porte son dessin. Les exemples corrigés, eux, sont déjà dessinés partout.
 
-**Avancement : 12 fiches sur 18 (81 dessins sur 105).**
+**Avancement : 13 fiches sur 18 (87 dessins sur 105).**
 
-✅ **Les douze fiches faites sont complètes** : mesurées sur la page à 375, 820 et
+✅ **Les treize fiches faites sont complètes** : mesurées sur la page à 375, 820 et
 1280 px (aucun texte sous 11 px, aucun chevauchement), PDF refaits, `verifier:pdf`
 au vert.
 
@@ -37,7 +37,7 @@ La symétrie axiale                  4/4    3/3    2/2      0   ✅ 24/08, mesur
 Les volumes                         3/3    3/3    2/2      0   ✅ 24/08, mesurée + PDF
 Les pourcentages                    3/3    3/3    3/3      0   ✅ 24/08, mesurée + PDF
 Les nombres entiers                 3/3    3/3    4/4      0   ✅ 24/08, mesurée + PDF
-Les nombres décimaux                0/3    0/3    4/4      6
+Les nombres décimaux                3/3    3/3    4/4      0   ✅ 24/08, mesurée + PDF
 Les longueurs                       0/3    0/3    2/2      6
 Le calcul posé                      0/3    0/3    4/4      6
 La proportionnalité                 3/3    3/3    3/3      0   ✅ 24/08, mesurée + PDF

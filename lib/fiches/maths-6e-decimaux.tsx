@@ -93,6 +93,129 @@ const droite25 = (
   />
 );
 
+// ─── Les six dessins des blocs ────────────────────────────────────────────────
+// ⭐ TROIS TABLEAUX DE NUMÉRATION SERVAIENT DÉJÀ (figure, exemples 2 et 3), plus
+// un calcul posé et une droite graduée. Six blocs de plus au tableau et la fiche
+// serait illisible d'uniformité (REGLES.md § 2 bis). Deux nouveautés portent
+// l'essentiel : la droite graduée montre qu'un décimal est un NOMBRE, coincé
+// entre deux entiers ; la grille de cent carreaux montre POURQUOI les rangs
+// continuent — un carreau vaut un centième, une colonne vaut un dixième.
+//
+// ⛔ PAS DE `schema_barre` ICI. Essayé pour « la virgule sépare » : 3 et 0,45
+// donnent des parts de 87 % et 13 %, et « partie décimale » ne tient pas dans les
+// 13 %. Même piège d'échelle que sur la fiche des nombres entiers.
+
+/** Un dessin et sa phrase, sous lui. */
+const legende = (dessin: React.ReactNode, texte: string) => (
+  <div>
+    {dessin}
+    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+  </div>
+);
+
+// ⭐ UN DÉCIMAL EST UN NOMBRE, ET IL A SA PLACE. La partie entière n'est pas une
+// moitié de l'écriture : c'est l'entier juste EN DESSOUS. 3,45 est entre 3 et 4,
+// et plus près de 3 — ce qu'aucun tableau de rangs ne dit.
+const entreTroisEtQuatre = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min: 3,
+      max: 4,
+      step: 0.25,
+      points: [{ value: 3.45, label: "3,45", color: "#16a34a" }],
+      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
+      size: { width: 260, height: 95 },
+    }}
+  />,
+  "3,45 est entre 3 et 4 : sa partie entière est 3"
+);
+
+// ⭐ POURQUOI LES RANGS CONTINUENT. Un carreau sur cent, c'est un centième ; une
+// colonne entière, c'est un dixième. Le tableau NOMME les rangs, la grille montre
+// ce qu'ils valent — et que dix centièmes font bien un dixième.
+const grilleDesCentiemes = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "fraction",
+      model: "grid",
+      grid: { rows: 10, cols: 10, shaded: 45 },
+      size: { width: 240, height: 210 },
+    }}
+  />,
+  "45 carreaux sur 100 : 0,45 — soit 4 colonnes et 5 carreaux"
+);
+
+// LE MÊME POINT, DEUX ÉCRITURES. Le tableau de l'exemple 3 compare rang par
+// rang ; la droite dit quelque chose qu'il ne peut pas dire — 0,5 et 0,50 ne sont
+// pas deux nombres voisins, c'est le MÊME endroit.
+const cinqDixiemesEtCinquanteCentiemes = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min: 0,
+      max: 1,
+      step: 0.25,
+      points: [{ value: 0.5, label: "0,5 = 0,50", color: "#2563eb" }],
+      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
+      size: { width: 260, height: 95 },
+    }}
+  />,
+  "un seul point, deux façons de l'écrire"
+);
+
+// LIRE UN RANG, C'EST POSER LE DOIGT SUR UNE COLONNE. Même objet que l'exemple 2,
+// autre nombre et autre colonne allumée : ici les CENTIÈMES.
+const lireLesCentiemes = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Les rangs de 8,306",
+      headers: ["Unités", ",", "Dixièmes", "Centièmes", "Millièmes"],
+      rows: [{ label: "Chiffre", values: ["8", ",", "3", "0", "6"] }],
+      highlight: { cell: { row: 0, col: 3 } },
+      caption: "Le chiffre des centièmes est 0, pas 6.",
+    }}
+  />
+);
+
+// AJOUTER DES ZÉROS NE CHANGE RIEN — et c'est exactement ce qui surprend. Trois
+// écritures, une seule valeur : le seul dessin de la fiche dont le message est
+// qu'il ne se passe RIEN.
+const lesZerosInutiles = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Trois écritures, un seul nombre",
+      headers: ["On écrit", "Ça se lit", "Ça vaut"],
+      rows: [
+        { values: ["0,5", "5 dixièmes", "0,5"] },
+        { values: ["0,50", "50 centièmes", "0,5"] },
+        { values: ["0,500", "500 millièmes", "0,5"] },
+      ],
+      highlight: { col: 2 },
+      caption: "Les zéros de droite ne changent pas la valeur.",
+    }}
+  />
+);
+
+// ⭐ ALIGNER LES VIRGULES, ET LE ZÉRO SERT ENFIN. L'exemple 4 pose deux nombres
+// qui ont déjà le même nombre de décimales ; ici 12,4 en a une et 3,75 en a deux.
+// C'est le cas où la méthode précédente devient utile : on écrit 12,40.
+const alignerAvecUnZero = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "calcul_pose",
+      operation: "addition",
+      title: "12,4 + 3,75",
+      numbers: ["12,40", "3,75"],
+      result: "16,15",
+      display: { showResult: true },
+    }}
+  />,
+  "12,4 devient 12,40 : les virgules tombent l'une sous l'autre"
+);
+
 const pieges = [
   "Croire que 2,45 dépasse 2,5 : 2,5 = 2,50, et 50 centièmes valent plus que 45.",
   "Confondre les rangs : dans 5,83, le 8 est aux dixièmes, le 3 aux centièmes.",
@@ -130,14 +253,17 @@ export const ficheDecimaux6e: FicheCoursData = {
     {
       titre: "La virgule sépare",
       texte: "Partie entière à gauche, partie décimale à droite : 3,45 → 3 et 45 centièmes.",
+      schema: entreTroisEtQuatre,
     },
     {
       titre: "Les rangs continuent",
       texte: "Après la virgule : dixièmes, puis centièmes, puis millièmes.",
+      schema: grilleDesCentiemes,
     },
     {
       titre: "Comparer",
       texte: "Même nombre de décimales (0,5 = 0,50), puis on compare rang par rang.",
+      schema: cinqDixiemesEtCinquanteCentiemes,
     },
   ],
   reel: {
@@ -149,9 +275,9 @@ export const ficheDecimaux6e: FicheCoursData = {
       "« Décimal » vient de dix : on compte en base 10. En 1585, Simon Stevin montre l'intérêt d'écrire les dixièmes et centièmes ; la virgule se répand au début du XVIIe siècle.",
   },
   methode: [
-    { titre: "Je lis le rang", texte: "1er après la virgule = dixièmes, 2e = centièmes, 3e = millièmes." },
-    { titre: "J'ajoute des zéros", texte: "Pour comparer ou poser : 0,5 = 0,50, la valeur ne change pas." },
-    { titre: "J'aligne les virgules", texte: "Pour additionner : virgule sous virgule, puis on calcule." },
+    { titre: "Je lis le rang", texte: "1er après la virgule = dixièmes, 2e = centièmes, 3e = millièmes." , schema: lireLesCentiemes },
+    { titre: "J'ajoute des zéros", texte: "Pour comparer ou poser : 0,5 = 0,50, la valeur ne change pas." , schema: lesZerosInutiles },
+    { titre: "J'aligne les virgules", texte: "Pour additionner : virgule sous virgule, puis on calcule." , schema: alignerAvecUnZero },
   ],
   usages: [
     { titre: "Lire → écrire", detail: "D'une fraction décimale au nombre : 25/10 = 2,5." },
