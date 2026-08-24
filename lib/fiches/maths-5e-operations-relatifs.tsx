@@ -51,7 +51,12 @@ function droite(
         kind: "number_line",
         min,
         max,
-        step: 1,
+        // ⚠️ PAS ADAPTATIF, ET C'EST MESURÉ. `step: 1` posait jusqu'à vingt
+        // nombres sur 260 px : « −8 » et « −7 » se chevauchaient, et les
+        // négatifs à trois signes (« −11 ») encore plus. Une graduation tous les
+        // (étendue ÷ 6) en laisse sept au maximum — les POINTS, eux, restent
+        // posés à la valeur exacte, quelle que soit la graduation.
+        step: Math.max(1, Math.ceil((max - min) / 6)),
         points,
         display: {
           showTicks: true,
@@ -60,7 +65,9 @@ function droite(
           showPointLabels: true,
           showZero: true,
         },
-        size: { width: 360, height: 90 },
+        // ⚠️ 260, PAS 360 (mesuré le 24/08 sur la page). Une carte de propriété
+        // fait 225 px : à 360 de viewBox, les graduations rendaient 8,8 px.
+        size: { width: 260, height: 90 },
       }}
     />
   );
@@ -108,10 +115,108 @@ function barre(
           showValues: true,
           showQuestion: true,
         },
+        // ⚠️ Sans `size`, `SchemaBarreCanvas` prend 340 de large et écrit en
+        // 12 px : 7,9 px dans une carte de 225. À 240 il rend 11,3 — mais la
+        // phrase du bas doit alors tenir en une vingtaine de signes, d'où les
+        // légendes raccourcies ci-dessous.
+        size: { width: 240, height: 190 },
       }}
     />
   );
 }
+
+// ─── Les trois dessins de la MÉTHODE ──────────────────────────────────────────
+// ⭐ LE DERNIER TROU DE LA 5e ÉTAIT DANS LA FICHE PILOTE. Celle qui a fixé le
+// standard le 19/08 (« un dessin sur chaque propriété ») portait quatre dessins
+// sur ses propriétés… et aucun sur sa méthode. Trouvé en remesurant la couverture
+// après la fermeture de la 6e, le 24/08.
+//
+// Les deux helpers existants ne suffisaient pas : la barre et la droite servent
+// déjà aux quatre propriétés. Le premier bloc passe donc au tableau — enlever des
+// parenthèses est une affaire d'ÉCRITURE, pas de longueur ni de position.
+
+/** Un dessin et sa phrase, sous lui. */
+const legende = (dessin: React.ReactNode, texte: string) => (
+  <div>
+    {dessin}
+    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+  </div>
+);
+
+const pile = (items: { dessin: React.ReactNode; nom: string }[]) => (
+  <div className="grid grid-cols-1 gap-2">
+    {items.map((it) => (
+      <div key={it.nom}>
+        {it.dessin}
+        <p className="mt-1 text-center text-xs font-black text-slate-700">{it.nom}</p>
+      </div>
+    ))}
+  </div>
+);
+
+// ENLEVER LES PARENTHÈSES EST UNE RÉÉCRITURE. Ni une longueur, ni une position :
+// les quatre cas s'apprennent, et un tableau est le seul objet qui les range.
+const lesQuatreReecritures = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Les 4 réécritures",
+      headers: ["On lit", "On écrit"],
+      rows: [
+        { values: ["+ (+3)", "+ 3"] },
+        { values: ["+ (−3)", "− 3"] },
+        { values: ["− (+3)", "− 3"] },
+        { values: ["− (−3)", "+ 3"] },
+      ],
+      highlight: { row: 3 },
+      caption: "Deux signes − qui se suivent font +.",
+    }}
+  />
+);
+
+// ⭐ LES DEUX RÈGLES SUR LES MÊMES NOMBRES. Chaque propriété ne montre que SON
+// cas ; ici les distances 5 et 2 sont traitées des deux façons, l'une sous
+// l'autre. C'est le choix lui-même qui devient visible — et c'est tout l'objet
+// de cette étape.
+const lesDeuxReglesComparees = pile([
+  {
+    dessin: barre(
+      "7",
+      [
+        { label: "5", value: "5", color: ROUGE },
+        { label: "2", value: "2", color: ROUGE },
+      ],
+      "5 + 2 = 7, donc −7",
+    ),
+    nom: "−5 et −2 : mêmes signes, on ajoute",
+  },
+  {
+    dessin: barre(
+      "5",
+      [
+        { label: "annulé", value: "2", color: BLEU },
+        { label: "il reste", value: "3", color: ROUGE },
+      ],
+      "5 − 2 = 3, donc −3",
+    ),
+    nom: "−5 et +2 : signes différents, on retire",
+  },
+]);
+
+// VÉRIFIER, C'EST REGARDER DE QUEL CÔTÉ DE 0 ON TOMBE. Un calcul que la fiche
+// n'a pas encore dessiné : −4 + 3 reste négatif, parce qu'on n'a pas assez
+// remonté pour franchir le zéro.
+const verifierSurLaDroite = legende(
+  droite(
+    [
+      { value: -4, label: "−4", color: ROUGE },
+      { value: -1, label: "−1", color: VERT },
+    ],
+    -6,
+    4,
+  ),
+  "−4 + 3 = −1 : on remonte, mais pas jusqu'à 0",
+);
 
 const pieges = [
   "Additionner les distances à 0 quand les signes sont différents : −5 + 2 ne fait pas −7, mais −3.",
@@ -173,7 +278,7 @@ export const ficheOperationsRelatifs5e: FicheCoursData = {
           { label: "1re perte", value: "4", color: ROUGE },
           { label: "2e perte", value: "3", color: ROUGE },
         ],
-        "Les deux distances à 0 se mettent bout à bout : 4 + 3 = 7. Signe − devant : −7.",
+        "4 + 3 = 7, donc −7",
       ),
     },
     {
@@ -183,10 +288,10 @@ export const ficheOperationsRelatifs5e: FicheCoursData = {
       schema: barre(
         "10",
         [
-          { label: "annulé par les 7 points", value: "7", color: BLEU },
-          { label: "ce qui reste en moins", value: "3", color: ROUGE },
+          { label: "annulé", value: "7", color: BLEU },
+          { label: "il reste", value: "3", color: ROUGE },
         ],
-        "La perte de 10 est la plus longue : 7 s'annulent, il reste 3 en moins. Résultat : −3.",
+        "10 − 7 = 3, donc −3",
       ),
     },
     {
@@ -243,14 +348,17 @@ export const ficheOperationsRelatifs5e: FicheCoursData = {
     {
       titre: "Je transforme",
       texte: "J'enlève les parenthèses : − (−3) devient + 3, + (−3) devient − 3.",
+      schema: lesQuatreReecritures,
     },
     {
       titre: "Je regarde les signes",
       texte: "Mêmes signes : j'additionne les distances. Signes différents : je les soustrais.",
+      schema: lesDeuxReglesComparees,
     },
     {
       titre: "Je vérifie sur la droite",
       texte: "Je pars du premier nombre et je me déplace : le résultat doit tomber du bon côté de 0.",
+      schema: verifierSurLaDroite,
     },
   ],
   usages: [

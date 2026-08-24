@@ -1,181 +1,139 @@
-# Passation — fermer la 6ᵉ en maths
+# Passation — la 6ᵉ est fermée, et ce qu'on sait maintenant
 
-> Réécrite le 24/08/2026. **Cette note se remplace, elle ne s'empile pas** : elle
-> ne vaut que pour la session suivante. Commencer par `git pull`.
->
-> ⚠️ Le partage des deux postes est suspendu ce jour-là : « on reste sur cet
-> ordinateur aujourd'hui ». L'autre poste fait le CM2.
+> Réécrite le 24/08/2026, campagne terminée. **Cette note se remplace, elle ne
+> s'empile pas** : elle ne vaut que pour la session suivante. Commencer par
+> `git pull`.
 
 ---
 
-## Le travail : 105 dessins, 18 fiches
+## Ce qui est fait
 
-Décision de Frédéric : **fermer la 6ᵉ entièrement**, puis faire ses vidéos Manim,
-« comme ça on estimera le temps pour une classe parfaite ». C'est une campagne
-d'étalonnage — on mesure sur la classe la moins chère à finir, pas sur la plus
-demandée.
+**La 6ᵉ en maths est à 100 %** : 18 fiches, chaque propriété et chaque étape de
+méthode porte son dessin. 105 dessins écrits dans la journée, sur 16 fiches (les
+périmètres et les aires l'étaient déjà).
 
-Le standard est **un visuel par bloc** : chaque propriété et chaque étape de
-méthode porte son dessin. Les exemples corrigés, eux, sont déjà dessinés partout.
-
-**🎉 LA 6ᵉ EST FERMÉE : 16 fiches sur 16, 105 dessins sur 105.**
-
-✅ **Les seize fiches sont complètes** : mesurées sur la page à 375, 820 et
-1280 px (aucun texte sous 11 px, aucun chevauchement), PDF refaits, `verifier:pdf`
-au vert.
+**Et la 5ᵉ aussi**, depuis le dernier commit : le dernier trou était dans
+`maths-5e-operations-relatifs.tsx` — la fiche PILOTE, celle qui a fixé le
+standard le 19/08 (« un dessin sur chaque propriété »). Elle portait quatre
+dessins sur ses propriétés et **aucun sur sa méthode**. Trouvé en remesurant la
+couverture après coup, pas en le lisant.
 
 ```
-fiche                              propr.  méth.   ex.   manque
-Les angles                          4/4    3/3    2/2      0   ✅ 24/08, commit 70d8076f
-Premiers pas en probabilités        4/4    3/3    2/2      0   ✅ 24/08, mesurée + PDF
-Lire et interpréter des données     4/4    3/3    2/2      0   ✅ 24/08, mesurée + PDF
-Les triangles                       4/4    3/3    2/2      0   ✅ 24/08, mesurée + PDF
-Les quadrilatères                   4/4    3/3    2/2      0   ✅ 24/08, mesurée + PDF
-Les fractions                       4/4    3/3    4/4      0   ✅ 24/08, mesurée + PDF
-Le calcul mental                    4/4    3/3    3/3      0   ✅ 24/08, mesurée + PDF
-La symétrie axiale                  4/4    3/3    2/2      0   ✅ 24/08, mesurée + PDF
-Les volumes                         3/3    3/3    2/2      0   ✅ 24/08, mesurée + PDF
-Les pourcentages                    3/3    3/3    3/3      0   ✅ 24/08, mesurée + PDF
-Les nombres entiers                 3/3    3/3    4/4      0   ✅ 24/08, mesurée + PDF
-Les nombres décimaux                3/3    3/3    4/4      0   ✅ 24/08, mesurée + PDF
-Les longueurs                       3/3    3/3    2/2      0   ✅ 24/08, mesurée + PDF
-Le calcul posé                      3/3    3/3    4/4      0   ✅ 24/08, mesurée + PDF
-La proportionnalité                 3/3    3/3    3/3      0   ✅ 24/08, mesurée + PDF
-Algorithmique et programmation      3/3    3/3    2/2      0   ✅ 24/08, mesurée + PDF
-Les périmètres                      5/5    3/3    4/4      0   ← déjà au standard
-Les aires                           7/7    3/3    4/4      0   ← déjà au standard
+classe          fiches   propr.   méth.    ex.
+maths 6e          18     100 %   100 %   100 %
+maths 5e          20     100 %   100 %   100 %
+maths cm2         28       0 %     0 %    91 %   ⛔ à réécrire, ne rien payer
+maths première     1       0 %     0 %    25 %
+français 6e        9     100 %   100 %   100 %
+français cm2       8     100 %   100 %   100 %
+français 5e        3     100 %   100 %   100 %   (autre session)
 ```
 
-**« Les périmètres » et « Les aires » sont les deux fiches de 6ᵉ déjà complètes.**
-Les lire avant de commencer : elles montrent à quoi ressemble l'objectif dans
-cette classe précise.
+⛔ **Ne pas dessiner le CM2 en maths** : Frédéric réécrit toutes ces fiches, le
+travail partirait à la poubelle.
 
 ---
 
-## L'étalon d'écriture
+## Le coût mesuré d'une classe parfaite
 
-`lib/fiches/maths-5e-nombres-relatifs.tsx` — c'est la référence, et le
-CATALOGUE la désigne comme telle (« un helper simple réutilisé sur six blocs
-d'une même fiche »).
+C'était la raison de la campagne : **estimer en mesurant, pas en devinant**.
 
-Le patron : une petite fonction locale au-dessus de `CanvasRenderer`, réutilisée
-sur tous les blocs, avec les couleurs en constantes.
+- **une journée** pour 16 fiches et 105 dessins, vérification et PDF compris ;
+- **33 commits**, un par fiche plus les corrections de canvas ;
+- **≈ 6,5 dessins par fiche**, et le temps ne se passe PAS à choisir le dessin —
+  il se passe à le rendre lisible. Compter à peu près moitié-moitié.
 
-```tsx
-function droite(points: {value: number; label: string; color?: string}[], min = -5, max = 5) {
-  return <CanvasRenderer figure={{ kind: "number_line", min, max, ... }} />;
-}
-// puis, dans chaque propriété :
-schema: droite([{ value: -4, label: "−4", color: ROUGE }]),
-```
-
-⛔ **Ne pas dessiner à la main en SVG.** On passe par les canvas du coach, pour
-que l'élève retrouve dans sa fiche **la même figure que dans ses exercices**.
-
-📖 **`lib/canvas/CATALOGUE.md` est à lire en entier avant de choisir un `kind`.**
-Il dit ce que chaque canvas montre **et ce pour quoi il ne faut pas l'employer** —
-c'est la colonne « ⛔ Pas pour » qui évite les contresens. Exemples :
-`number_line` dessine des points, **pas un déplacement** ; `fraction` montre
-l'objet, **pas l'opération** ; `angle` montre **un** angle, pas deux à comparer.
+⚠️ Réserve honnête : la 6ᵉ était la classe la MOINS chère à finir — ses exemples
+corrigés étaient déjà dessinés partout. Une classe partant de zéro coûte plus. Et
+la journée a été ralentie par une collision de sessions (voir tout en bas).
 
 ---
 
-## Trois pièges découverts EN RENDANT, le 24/08 — ils valent pour toutes les fiches
+## Les cinq règles apprises en mesurant — à lire avant de dessiner
 
-Aucun ne se lit dans le code, tous se mesurent sur la page (§ 2 quater) :
+Aucune ne se lit dans le code. Toutes se sont vues au rendu.
 
-1. **`apercu-canvas.mjs` ne suffit pas.** Il a dit « ✅ rien à signaler » sur les
-   deux dessins du rapporteur — la page, elle, les donnait à 8,7 px. Le script
-   juge un dessin isolé dans un cadre supposé ; la page ajoute la vraie largeur
-   du bloc et les vraies polices. **Passer les deux**, dans cet ordre.
-2. **La largeur d'une carte ne dépend pas que du téléphone.** Le pire cas était
-   une fenêtre de **820 px** : trois colonnes déjà en place, 155 px par carte,
-   tous les dessins sous 8 px. Corrigé dans `FicheCoursClient` (palier à deux
-   colonnes) — donc pour toutes les fiches, sans rien changer dans les fiches.
-   ⚠️ Mesurer désormais à **375, 820 ET 1280**.
-3. **Le cadre se serre sur le dessin, donc la largeur du viewBox VARIE.** Deux
-   angles côte à côte : l'aigu (viewBox 106) reste lisible, l'obtus (159) tombe
-   à 9 px dans la même cellule. D'où `pile()` plutôt que deux colonnes.
-4. **Le bloc le plus serré du site est l'EXEMPLE, pas la carte de propriété** :
+1. **`apercu-canvas.mjs` ne suffit pas.** Il a dit « ✅ rien à signaler » sur des
+   dessins que la page donnait à 8,7 px. Le script juge un dessin isolé dans un
+   cadre supposé ; la page ajoute la vraie largeur du bloc. **Passer les deux.**
+2. **Le bloc le plus serré du site est l'EXEMPLE, pas la carte de propriété** :
    199 px sur un téléphone de 375, contre 225. Les canvas à viewBox fixe
-   (`schema_barre`, `stat_graph`, `probabilites`, `fraction`, `tableau_*`)
-   écrivent en 12–13 px : au-delà de **210** de viewBox dans un exemple, ou
-   **245** dans une propriété, le texte passe sous 11 px.
-5. ⛔ **`fonctionGraphique` NE TIENT PAS dans une carte de propriété**, et ce
-   n'est pas réparable en serrant le cadre : son repère est calculé sur un
-   viewBox de 320, ses graduations rendent 9,5 px dans 228, et le rogner sort
-   les axes du dessin. Monter la police à 15 les remonte à 10,7 — toujours sous
-   le seuil — et fait déborder les nombres du bout des axes. Essayé, mesuré,
-   abandonné : ce canvas demande un bloc large. La fiche de Première
-   (`derivation`) a le même défaut, non traité — c'est le seul endroit du site
-   où il reste.
-6. **Trois défauts qui ne sont PAS des polices**, et qu'il faut chercher à part :
-   des graduations trop denses qui se touchent (`step: 1` sur douze nombres),
-   des étiquettes de parts trop étroites pour leur mot (une part qui vaut 8 sur
-   162 fait 12 px de large), et une phrase du bas qui SORT du cadre sans rien
-   casser — se compter en caractères, viser vingt.
+   (`schema_barre`, `stat_graph`, `probabilites`, `fraction`, `tableau_*`,
+   `calcul_pose`) écrivent en 12–15 px : au-delà de **210** de viewBox dans un
+   exemple, ou **245** dans une propriété, le texte passe sous 11 px.
+3. **Mesurer à 375 ET 1280.** Le palier intermédiaire (820 px) a été corrigé le
+   24/08 dans `FicheCoursClient` — trois colonnes ne s'ouvrent plus qu'à 1024.
+4. ⛔ **Trois canvas ne se laissent PAS rétrécir**, parce qu'ils dessinent depuis
+   une origine fixe : réduire `size.width` les ROGNE au lieu de les mettre à
+   l'échelle. `solide_3d` (origine 160,170, pas de 32 px), `transformation`
+   (régler `cellSize`, jamais `width`) et `fonctionGraphique`. Sur les deux
+   premiers, la seule commande est la POLICE. Le troisième ne tient pas du tout
+   dans une carte de propriété — essayé, mesuré, abandonné.
+5. **Quatre défauts qui ne sont pas des polices**, à chercher à part :
+   - des **graduations trop denses** qui se touchent (`step: 1` sur douze
+     nombres) — viser sept graduations, les points restent à la valeur exacte ;
+   - des **étiquettes de parts trop étroites** : `schema_barre` donne à chaque
+     part une largeur PROPORTIONNELLE à sa valeur. ⛔ Une décomposition décimale
+     (4000 + 200 + 70 + 3) ne se dessine donc **jamais** en longueurs — les 4000
+     mangent 93 % de la barre ;
+   - une **phrase du bas qui sort du cadre** sans rien casser : elle se compte en
+     caractères, viser vingt ;
+   - deux **étiquettes au même endroit** (un point et son image confondus, un nom
+     d'axe posé au milieu d'un segment).
 
-Le mesureur à coller dans la console (il rend les deux : polices sous 11 px et
-chevauchements de textes) est dans le commit `70d8076f`, mais il se réécrit en
-dix lignes : pour chaque `svg`, `police × largeurAffichée ÷ largeurViewBox`,
-puis toutes les paires de `<text>` dont les rectangles se coupent.
+Le mesureur à coller dans la console — polices sous 11 px, chevauchements de
+textes, et textes sortis de leur `<svg>` — est dans le commit `c1840a67`. Il se
+réécrit en quinze lignes : pour chaque `svg`, `police × largeurAffichée ÷
+largeurViewBox` ; puis toutes les paires de `<text>` dont les rectangles se
+coupent ; puis tout `<text>` dont le rectangle dépasse celui du `<svg>`.
+
+⚠️ Vérifier que la fenêtre mesurée n'est pas à **zéro** de large : le volet du
+navigateur peut être replié, et toutes les mesures sont alors fausses.
 
 ---
 
-## Ce que j'ai déjà trouvé pour « Les angles » (fiche FAITE — gardé pour la 4ᵉ)
+## La règle qui commande tout, et qui a tenu 105 fois
 
-L'analyse du rapporteur, qui resservira dès qu'une fiche d'angles reviendra :
+**Le canvas se choisit pour ce qu'il MONTRE** (REGLES.md § 2 bis). Sur chaque
+fiche, le dessin évident revenait partout : le dé en probabilités, le tableau en
+proportionnalité, la grille de 100 carreaux en pourcentages, le triangle en
+géométrie. Six fois le même objet, ce sont six règles identiques aux yeux de
+l'élève.
 
-- `showProtractor: true` pose le **rapporteur** sur l'angle ;
-- `protractorStep: "vertex" | "zero" | "reading"` déroule le geste en trois
-  temps **sans changer de dessin** — le centre sur le sommet, le zéro sur un
-  côté, la graduation atteinte. Ça tombe exactement sur les trois étapes de
-  méthode de la fiche ;
-- ⚠️ le canvas `angle` ne sait montrer **qu'un seul angle**. La propriété « Aigu
-  ou obtus » en demande deux : composer deux `CanvasRenderer` côte à côte dans
-  un `<div>` plutôt que de forcer le canvas ;
-- la fiche a déjà `schemaAngleDroit` et `schemaAngleObtus` en tête de fichier :
-  les réutiliser, ne pas les redéfinir.
+Ce qui a marché à chaque fois : **chercher ce que le canvas évident ne sait PAS
+faire**, et le lire dans la colonne « ⛔ Pas pour » de `lib/canvas/CATALOGUE.md`.
 
-Le type complet est dans `lib/tutor-v4/types_canvas.ts` (`AngleCanvasData`).
+⭐ **Et un procédé qui revient : le CONTRE-EXEMPLE.** Une propriété qui dit
+« toujours » se montre en dessinant le cas où c'est faux. Des parts inégales sur
+lesquelles aucune fraction ne s'écrit ; un pliage qui ne se superpose pas ; un
+alignement de calcul posé de travers ; un tableau régulier mais non
+proportionnel ; un programme qui tourne de 9° au lieu de 90°. C'est souvent le
+dessin le plus utile de la fiche.
 
 ---
 
 ## Après chaque fiche modifiée
 
-1. **Rendre la page** et la regarder — y compris à 375 px. Les petites erreurs ne
-   se lisent pas dans le code.
-2. **Refaire son PDF** (le contenu a changé) :
+1. **Rendre la page** et la mesurer à 375 et 1280 px.
+2. **Refaire son PDF** :
    ```bash
    npm run build:fiches-pdf -- http://localhost:3000 /fiches-cours/maths/6e/angle-mesure
    ```
-3. **Vérifier** :
-   ```bash
-   npm run verifier:pdf
-   ```
-   Quatre contrôles : PDF manquant, PDF en retard, fiche non commitée, PDF
-   orphelin. Il compare des **dates de commit**, pas des `mtime` — git ne
-   conserve pas les seconds.
+3. **Vérifier** : `npm run verifier:pdf` — PDF manquant, en retard, fiche non
+   commitée, PDF orphelin. Il compare des **dates de commit**, pas des `mtime`.
 
-⚠️ Si le **H1** d'une fiche change, le nom de son PDF change aussi et l'ancien
-devient orphelin. Le contrôle le dit, il ne le supprime pas.
+⚠️ Si le **H1** d'une fiche change, le nom de son PDF change et l'ancien devient
+orphelin. Le contrôle le dit, il ne le supprime pas.
 
----
-
-## Pour remesurer la couverture
-
-Compter les blocs `proprietes` / `methode` / `exemples` de `lib/fiches/*.tsx` et
-ceux qui portent un champ `schema:`.
-
-⚠️ **Ne pas filtrer l'IA sur `fiches-ia*`** : les fichiers s'appellent `ia-*`.
-L'erreur du 24/08 avait rendu la première mesure entièrement inutile — les « 15
-fiches les plus pauvres » étaient les 16 fiches d'IA, hors sujet.
+⚠️ **Le serveur de développement se dégrade** au bout d'une heure ou deux : 404
+aléatoires sur des routes qui existent, puis `build:fiches-pdf` qui expire en
+attendant `networkidle`. Le relancer suffit — ce n'est jamais le code.
 
 ---
 
-## Ce qui vient après, et pourquoi
+## Ce qui vient après
 
-**La 4ᵉ.** Les analytics Vercel du 24/08 :
+**La 4ᵉ**, et les analytics Vercel du 24/08 le disent :
 
 ```
 /cahier-vacances/vers-la-4e   507   ← la page la plus vue du site
@@ -184,25 +142,44 @@ fiches les plus pauvres » étaient les 16 fiches d'IA, hors sujet.
 /cahier-vacances/vers-la-6e   177
 ```
 
-Le cahier « vers la 4ᵉ » fait presque trois fois celui de la 6ᵉ, et les fiches de
-4ᵉ sont à **zéro** — éteintes le 21/08 pour être refaites au propre. La 5ᵉ, elle,
-est déjà à 100 %.
+⚠️ Mais ce n'est PAS le même travail : les fiches de 4ᵉ sont à **zéro**, éteintes
+le 21/08 pour être refaites au propre. Il ne s'agit pas d'ajouter des dessins à
+des fiches existantes, il s'agit d'**écrire les fiches**. Prévoir plus qu'une
+journée, et commencer par lire une banque du coach en 4ᵉ.
 
 ⚠️ Réserve d'interprétation : ces 507 visiteurs sont sur un **cahier de
 vacances**, pas sur une fiche. En déduire l'audience des fiches de 4ᵉ est un pari
 raisonnable, pas une mesure.
 
-⛔ **Ne pas payer les 213 dessins manquants du CM2 en maths** : Frédéric réécrit
-toutes les fiches de CM2. Ce travail partirait à la poubelle.
-
-✅ **Le français est à 100 %**, CM2 comme 6ᵉ. Ne pas y toucher.
+**L'autre branche**, annoncée par Frédéric : les **vidéos Manim**, maintenant que
+le coût d'une classe est mesuré. Les deux ne se font pas en même temps —
+demander laquelle avant de commencer.
 
 ---
 
 ## Deux dossiers en sommeil
 
 - **Les 16 fiches d'IA** n'ont pas de PDF : leur bouton appelle encore
-  `window.print()` (`FicheCoursIa.tsx`, un autre composant). Frédéric : « les
-  fiches IA pas grave ». Priorité basse, assumée.
+  `window.print()` (`FicheCoursIa.tsx`). Frédéric : « les fiches IA pas grave ».
 - **`fiches-maths-premiere`** promet une collection et n'a qu'une fiche
-  (`derivation`). Soit on écrit la Première, soit on retire la carte.
+  (`derivation`), dont les graduations sont à 10,0 px — seul endroit du site où le
+  défaut de `fonctionGraphique` subsiste. Soit on écrit la Première, soit on
+  retire la carte.
+
+---
+
+## ⛔ Une seule session par dossier
+
+Le 24/08, deux sessions ont travaillé dans `C:\Users\FRED\Documents\eleveai` en
+même temps. Un `git commit --amend` de l'autre session a avalé un de mes commits
+(récupéré à la main : `git reset --soft HEAD~1`, puis commit limité par chemin),
+et deux serveurs Next sur le même `.next` ont donné des 404 aléatoires qui ont
+fait échouer plusieurs constructions de PDF.
+
+**Deux règles qui en découlent :**
+
+- une seule session à la fois **dans ce dossier** — le partage des deux postes ne
+  suffit pas, c'est le dossier qui compte ;
+- ⭐ **toujours committer par chemin** : `git commit -F msg.txt -- <fichiers>`.
+  Un `git commit` ordinaire emporte tout ce que l'autre session a laissé dans
+  l'index.
