@@ -388,6 +388,42 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
       "Opposer les temps du récit et ceux du discours, séparer le décor de l'action, et choisir le temps qui convient au sens de la phrase.",
   },
 
+  /* ⭐ LA 5e OUVRE EN FRANÇAIS (24/08/2026). Elle avait vingt fiches de maths et
+     aucune de français — alors qu'elle est la SEULE classe du collège déjà
+     passée au programme neuf (BO n° 10 du 5 mars 2026, applicable à la rentrée
+     2026). Les trois fiches couvrent en entier les deux objectifs de grammaire
+     que le BO nomme : « Comprendre ce qu'est une phrase » et « Connaitre les
+     différents constituants d'une phrase ».
+
+     ⭐ LEUR TITRE PORTE L'ANNÉE SCOLAIRE, et c'est une décision de Frédéric du
+     24/08 : la requête tapée à la rentrée est « français 5e 2026-2027 », les
+     sites qui nous devancent l'écrivent, et le `titre` d'une fiche alimente le
+     H1 ET tous les H2 de sa page (« Définition : … », « Propriétés : … »,
+     « Méthode : … », « Exercices corrigés : … »). L'écrire une fois le pose
+     partout.
+     ⚠️ Ce titre nomme aussi le PDF : le changer rend l'ancien orphelin, et
+     `npm run verifier:pdf` le signale.
+
+     ⚠️ LES TROIS `notion` TOMBENT PILE SUR TROIS NOTIONS DU COACH, et ce n'est
+     pas un hasard : c'est le découpage du même jour qui l'a permis. Avant lui,
+     `grammaire_phrase` portait DIX-NEUF micros à elle seule — une notion pareille
+     ne tient dans aucune fiche, et deux des trois n'auraient eu aucun badge. */
+  "francais/5e/grammaire-phrase": {
+    titre: "La phrase, ses types et sa ponctuation — 5e (2026-2027)",
+    resume:
+      "Les trois types et les formes, la phrase simple, complexe ou non verbale, le rôle de chaque signe de ponctuation, et ce qu'exprime une juxtaposition.",
+  },
+  "francais/5e/grammaire-fonctions": {
+    titre: "Les fonctions dans la phrase — 5e (2026-2027)",
+    resume:
+      "Prouver une fonction au lieu de la deviner : COD et COI même placés avant le verbe, attribut du sujet, verbes attributifs par occasion, circonstanciels.",
+  },
+  "francais/5e/grammaire-groupe-nominal": {
+    titre: "Le groupe nominal et les classes de mots — 5e (2026-2027)",
+    resume:
+      "Le nom noyau et ses trois expansions, déterminant ou pronom, préposition ou adverbe : la classe d'un mot se lit sur ce qui le suit.",
+  },
+
   "ia/fondements/definir-l-ia": { titre: "Qu'est-ce que l'intelligence artificielle ?" },
   "ia/fondements/apprentissage-automatique": { titre: "L'apprentissage automatique" },
   "ia/fondements/modeles-apprentissage": { titre: "Les modèles d'apprentissage" },

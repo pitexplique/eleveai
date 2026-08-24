@@ -40,9 +40,15 @@ const PALETTE = {
   neutre: { fill: "#f1f5f9", stroke: "#94a3b8", text: "#475569" },
 } as const;
 
+// ⛔ AUCUNE POLICE SOUS 11 UNE FOIS À L'ÉCHELLE (24/08/2026, REGLES.md § 2
+// quater). La note sous un wagon était à 10 et l'étiquette à 11 : sur les huit
+// fiches de conjugaison du CM2 et de la 6e, mesurées, la police minimale
+// tombait entre 6,9 et 8,0 px dans la carte de méthode d'un téléphone. On écrit
+// 12, comme dans `PhraseCanvas` depuis le même jour — 11 ne suffit pas, le
+// moindre rapport de 0,98 le fait retomber à 10,8.
 const FONT_MOT = 15;
-const FONT_NOTE = 10;
-const FONT_ETIQUETTE = 11;
+const FONT_NOTE = 12;
+const FONT_ETIQUETTE = 12;
 const FONT_TITRE = 12;
 
 const PAD_X = 12;
@@ -53,7 +59,83 @@ const RAYON_ROUE = 3.5;
 // Large exprès : un dessin trop aéré se lit, deux étiquettes qui se touchent ne
 // se lisent pas (REGLES.md § 2 ter).
 function largeurTexte(texte: string, fontSize: number) {
-  return texte.length * fontSize * 0.6;
+  return texte.length * fontSize * 0.62;
+}
+
+/**
+ * ⭐ LA NOTE PASSE À LA LIGNE, ELLE N'ÉLARGIT PLUS LE WAGON (24/08/2026).
+ *
+ * C'était LA cause de l'illisibilité des fiches de conjugaison, et le CATALOGUE
+ * la nommait sans en tirer la conséquence : « les note sous les wagons se
+ * comptent en caractères — c'est la NOTE, et non le mot, qui fixe la largeur
+ * d'un wagon ». Un train « chant- / i- / -ons » noté « radical / imparfait /
+ * 1re pers. plur. » mesurait 270 px de large pour trois mots de cinq lettres.
+ * Dans une carte de méthode de 201 px, tout le dessin était réduit de 26 %.
+ *
+ * Le wagon se dimensionne donc sur SON MOT, et la note se plie dessous — même
+ * principe que la phrase dans `PhraseCanvas` : on perd de la hauteur, jamais de
+ * la taille de lettre. Deux lignes au maximum ; au-delà, c'est que la note est
+ * une phrase, et une phrase va dans la légende.
+ */
+function couperNote(
+  note: string,
+  largeurDispo: number,
+  fontSize: number,
+  maxLignes = 2
+): string[] {
+  if (largeurTexte(note, fontSize) <= largeurDispo) return [note];
+  const lignes: string[] = [];
+  let courante = "";
+  for (const mot of note.split(" ")) {
+    const essai = courante ? `${courante} ${mot}` : mot;
+    if (courante && largeurTexte(essai, fontSize) > largeurDispo) {
+      lignes.push(courante);
+      courante = mot;
+    } else {
+      courante = essai;
+    }
+  }
+  if (courante) lignes.push(courante);
+  return lignes.slice(0, maxLignes);
+}
+
+const H_LIGNE_NOTE = 13;
+const H_LIGNE_LEGENDE = 14;
+
+/**
+ * ⛔ LA LÉGENDE NE SE PLIAIT PAS, ET ELLE SORTAIT DU CADRE (24/08/2026).
+ *
+ * Elle était écrite en une seule ligne centrée sur `w/2`. Tant que le canvas
+ * faisait 250 px de large, la plupart des légendes y tenaient ; ramené à 190
+ * pour rester lisible sur un téléphone, il n'en tenait plus une seule —
+ * « Le "r" signale toujours le futur » occupait [-35 ; 225] dans un cadre de
+ * 190. Un SVG masque ce qui dépasse : la légende n'était pas mal placée, elle
+ * était coupée aux deux bouts, et rien à l'écran ne le disait.
+ *
+ * `PhraseCanvas` plie la sienne depuis le 20/08 ; c'est la même règle, appliquée
+ * au second canvas de la matière avec quatre jours de retard.
+ */
+function lignesLegende(texte: string, w: number) {
+  return couperNote(texte, w - 2 * PAD_X, FONT_ETIQUETTE, 3);
+}
+
+function Legende({ texte, w, y }: { texte: string; w: number; y: number }) {
+  return (
+    <>
+      {lignesLegende(texte, w).map((ligne, i) => (
+        <text
+          key={i}
+          x={w / 2}
+          y={y + i * H_LIGNE_LEGENDE}
+          textAnchor="middle"
+          fontSize={FONT_ETIQUETTE}
+          fill="#475569"
+        >
+          {ligne}
+        </text>
+      ))}
+    </>
+  );
 }
 
 /** Une caisse sur deux roues. C'est l'unité de tout le canvas. */
@@ -100,18 +182,21 @@ function Wagon({
           et cesse d'être un schéma. */}
       <circle cx={x + largeur * 0.28} cy={y + H_WAGON + RAYON_ROUE} r={RAYON_ROUE} fill={couleur.stroke} />
       <circle cx={x + largeur * 0.72} cy={y + H_WAGON + RAYON_ROUE} r={RAYON_ROUE} fill={couleur.stroke} />
-      {note ? (
-        <text
-          x={x + largeur / 2}
-          y={y + H_WAGON + 2 * RAYON_ROUE + 13}
-          textAnchor="middle"
-          fontSize={FONT_NOTE}
-          fontWeight={600}
-          fill={couleur.text}
-        >
-          {note}
-        </text>
-      ) : null}
+      {note
+        ? couperNote(note, largeur - 2, FONT_NOTE).map((ligne, i) => (
+            <text
+              key={i}
+              x={x + largeur / 2}
+              y={y + H_WAGON + 2 * RAYON_ROUE + 13 + i * H_LIGNE_NOTE}
+              textAnchor="middle"
+              fontSize={FONT_NOTE}
+              fontWeight={600}
+              fill={couleur.text}
+            >
+              {ligne}
+            </text>
+          ))
+        : null}
     </g>
   );
 }
@@ -129,7 +214,13 @@ export default function ConjugaisonCanvas({ figure }: Props) {
   if (!isConjugaisonCanvas(figure)) return null;
 
   const mode = figure.mode ?? "wagons";
-  const width = figure.size?.width ?? 250;
+  // ⛔ 250 ÉTAIT LE PLANCHER DE LARGEUR, DONC LE PLAFOND DE LISIBILITÉ
+  // (24/08/2026). `w = Math.max(width, contenu)` : tant que ce défaut valait
+  // 250, aucun dessin ne pouvait descendre en dessous, et la carte de méthode
+  // d'un téléphone n'en fait que 201 — soit une réduction de 20 % imposée même
+  // aux dessins qui tenaient. À 190, un petit train reste petit et n'est plus
+  // réduit du tout.
+  const width = figure.size?.width ?? 190;
   const legende = figure.legende;
 
   // ── Le bandeau du haut : l'infinitif et le pronom ─────────────────────────
@@ -147,20 +238,35 @@ export default function ConjugaisonCanvas({ figure }: Props) {
     const pronom = figure.pronom;
     const largeurPronom = pronom ? largeurTexte(pronom, FONT_MOT) + 14 : 0;
 
+    // ⛔ LA NOTE NE DICTE PLUS LA LARGEUR (24/08/2026) : elle se plie sous le
+    // wagon. Voir `couperNote`. Le wagon se mesure sur son mot, et c'est tout.
     const largeurs = segments.map((s) =>
-      Math.max(30, largeurTexte(s.texte, FONT_MOT) + 18, s.note ? largeurTexte(s.note, FONT_NOTE) + 6 : 0)
+      Math.max(30, largeurTexte(s.texte, FONT_MOT) + 18)
     );
     const largeurTrain =
       largeurs.reduce((a, b) => a + b, 0) + GAP_WAGON * (segments.length - 1);
-    const largeurTotale = largeurPronom + (pronom ? GAP_WAGON + 4 : 0) + largeurTrain;
+    // ⭐ QUAND ÇA NE TIENT PAS, ON EMPILE (REGLES.md § 2 ter). Un train de trois
+    // wagons précédé de « nous » dépassait 250 px ; le pronom passe au-dessus et
+    // rend au train les cinquante pixels qu'il lui prenait. Voir le même
+    // arbitrage en mode `composee`.
+    const largeurEnLigne = largeurPronom + (pronom ? GAP_WAGON + 4 : 0) + largeurTrain;
+    const pronomDessus = Boolean(pronom) && largeurEnLigne + 2 * PAD_X > width;
+    const largeurTotale = pronomDessus ? largeurTrain : largeurEnLigne;
 
     // Le dessin se dimensionne sur son contenu : on ne force pas un cadre qui
     // laisserait le sujet occuper un quart de sa place (REGLES § 2 ter).
     const w = Math.max(width, largeurTotale + 2 * PAD_X);
-    const yWagons = yEnTete + 12;
-    const hauteurNotes = segments.some((s) => s.note) ? 16 : 0;
+    const yPronomDessus = yEnTete + 12;
+    const yWagons = yEnTete + 12 + (pronomDessus ? 16 : 0);
+    // La bande des notes fait la hauteur de la note la PLUS PLIÉE : sinon la
+    // deuxième ligne d'une note passe sous la légende.
+    const lignesNoteMax = Math.max(
+      0,
+      ...segments.map((s, i) => (s.note ? couperNote(s.note, largeurs[i] - 2, FONT_NOTE).length : 0))
+    );
+    const hauteurNotes = lignesNoteMax ? 3 + lignesNoteMax * H_LIGNE_NOTE : 0;
     const yLegende = yWagons + H_WAGON + 2 * RAYON_ROUE + hauteurNotes + 14;
-    const h = yLegende + (legende ? 6 : -8);
+    const h = yLegende + (legende ? (lignesLegende(legende, w).length - 1) * H_LIGNE_LEGENDE + 6 : -8);
 
     let x = (w - largeurTotale) / 2;
 
@@ -180,8 +286,8 @@ export default function ConjugaisonCanvas({ figure }: Props) {
         {pronom ? (
           <>
             <text
-              x={x + largeurPronom / 2}
-              y={yWagons + H_WAGON / 2 + 5}
+              x={pronomDessus ? w / 2 : x + largeurPronom / 2}
+              y={pronomDessus ? yPronomDessus + 4 : yWagons + H_WAGON / 2 + 5}
               textAnchor="middle"
               fontSize={FONT_MOT}
               fontWeight={700}
@@ -190,7 +296,7 @@ export default function ConjugaisonCanvas({ figure }: Props) {
               {pronom}
             </text>
             {(() => {
-              x += largeurPronom + GAP_WAGON + 4;
+              if (!pronomDessus) x += largeurPronom + GAP_WAGON + 4;
               return null;
             })()}
           </>
@@ -216,9 +322,7 @@ export default function ConjugaisonCanvas({ figure }: Props) {
         })}
 
         {legende ? (
-          <text x={w / 2} y={yLegende} textAnchor="middle" fontSize={FONT_ETIQUETTE} fill="#475569">
-            {legende}
-          </text>
+          <Legende texte={legende} w={w} y={yLegende} />
         ) : null}
       </svg>
     );
@@ -235,32 +339,44 @@ export default function ConjugaisonCanvas({ figure }: Props) {
 
     const pronom = figure.pronom;
     const largeurPronom = pronom ? largeurTexte(pronom, FONT_MOT) + 14 : 0;
-    const lAux = Math.max(
-      40,
-      largeurTexte(aux.texte, FONT_MOT) + 18,
-      aux.note ? largeurTexte(aux.note, FONT_NOTE) + 6 : 0
-    );
-    const lPart = Math.max(
-      40,
-      largeurTexte(part.texte, FONT_MOT) + 18,
-      part.note ? largeurTexte(part.note, FONT_NOTE) + 6 : 0
-    );
-    const largeurTotale = largeurPronom + (pronom ? GAP_WAGON + 4 : 0) + lAux + GAP_WAGON + lPart;
+    // Même règle qu'en mode wagons : la note se plie, elle n'élargit pas.
+    const lAux = Math.max(40, largeurTexte(aux.texte, FONT_MOT) + 18);
+    const lPart = Math.max(40, largeurTexte(part.texte, FONT_MOT) + 18);
+    // ⭐ QUAND ÇA NE TIENT PAS, ON EMPILE — ON NE RÉDUIT PAS (REGLES.md § 2 ter,
+    // 24/08/2026). « nous avons regardé » alignait pronom + deux caisses sur
+    // 252 px ; dans la carte de méthode d'un téléphone, qui n'en fait que 201,
+    // le dessin entier était réduit à 0,80 et ses notes tombaient à 9,6 px. Le
+    // pronom passe donc AU-DESSUS du train, et les 51 px qu'il prenait en
+    // largeur reviennent aux deux caisses. C'est le même arbitrage que partout
+    // ailleurs : on perd de la hauteur, jamais de la taille de lettre.
+    const largeurTrain = lAux + GAP_WAGON + lPart;
+    const largeurEnLigne = largeurPronom + (pronom ? GAP_WAGON + 4 : 0) + largeurTrain;
+    const pronomDessus = Boolean(pronom) && largeurEnLigne + 2 * PAD_X > width;
+    const largeurTotale = pronomDessus ? largeurTrain : largeurEnLigne;
     const w = Math.max(width, largeurTotale + 2 * PAD_X);
 
     // L'arc d'accord passe AU-DESSUS, comme dans `phrase` : le lecteur n'a
     // qu'une grammaire visuelle à apprendre pour toute la matière.
     const hauteurArc = figure.accord ? 24 : 0;
-    const yWagons = yEnTete + 12 + hauteurArc;
-    const hauteurNotes = aux.note || part.note ? 16 : 0;
+    const yPronomDessus = yEnTete + 12;
+    const yWagons = yEnTete + 12 + (pronomDessus ? 16 : 0) + hauteurArc;
+    const lignesNoteMax = Math.max(
+      aux.note ? couperNote(aux.note, lAux - 2, FONT_NOTE).length : 0,
+      part.note ? couperNote(part.note, lPart - 2, FONT_NOTE).length : 0
+    );
+    const hauteurNotes = lignesNoteMax ? 3 + lignesNoteMax * H_LIGNE_NOTE : 0;
     const yLegende = yWagons + H_WAGON + 2 * RAYON_ROUE + hauteurNotes + 14;
-    const h = yLegende + (legende ? 6 : -8);
+    const h = yLegende + (legende ? (lignesLegende(legende, w).length - 1) * H_LIGNE_LEGENDE + 6 : -8);
 
     const xPronom = (w - largeurTotale) / 2;
-    const xAux = xPronom + (pronom ? largeurPronom + GAP_WAGON + 4 : 0);
+    const xAux = xPronom + (pronom && !pronomDessus ? largeurPronom + GAP_WAGON + 4 : 0);
     const xPart = xAux + lAux + GAP_WAGON;
 
-    const depart = pronom ? xPronom + largeurPronom / 2 : xAux + lAux / 2;
+    const depart = pronomDessus
+      ? w / 2
+      : pronom
+        ? xPronom + largeurPronom / 2
+        : xAux + lAux / 2;
     const arrivee = xPart + lPart / 2;
     const yArc = yWagons - 6;
 
@@ -316,8 +432,8 @@ export default function ConjugaisonCanvas({ figure }: Props) {
 
         {pronom ? (
           <text
-            x={xPronom + largeurPronom / 2}
-            y={yWagons + H_WAGON / 2 + 5}
+            x={pronomDessus ? w / 2 : xPronom + largeurPronom / 2}
+            y={pronomDessus ? yPronomDessus + 4 : yWagons + H_WAGON / 2 + 5}
             textAnchor="middle"
             fontSize={FONT_MOT}
             fontWeight={700}
@@ -346,9 +462,7 @@ export default function ConjugaisonCanvas({ figure }: Props) {
         />
 
         {legende ? (
-          <text x={w / 2} y={yLegende} textAnchor="middle" fontSize={FONT_ETIQUETTE} fill="#475569">
-            {legende}
-          </text>
+          <Legende texte={legende} w={w} y={yLegende} />
         ) : null}
       </svg>
     );
@@ -372,7 +486,7 @@ export default function ConjugaisonCanvas({ figure }: Props) {
     const yEntete = yTitre + (figure.temps ? 14 : 0);
     const yPremiere = yEntete + 12;
     const yLegende = yPremiere + lignes.length * hLigne + 14;
-    const h = yLegende + (legende ? 6 : -8);
+    const h = yLegende + (legende ? (lignesLegende(legende, w).length - 1) * H_LIGNE_LEGENDE + 6 : -8);
     const x0 = (w - largeurTotale) / 2;
 
     return (
@@ -441,9 +555,7 @@ export default function ConjugaisonCanvas({ figure }: Props) {
         })}
 
         {legende ? (
-          <text x={w / 2} y={yLegende} textAnchor="middle" fontSize={FONT_ETIQUETTE} fill="#475569">
-            {legende}
-          </text>
+          <Legende texte={legende} w={w} y={yLegende} />
         ) : null}
       </svg>
     );
@@ -454,26 +566,37 @@ export default function ConjugaisonCanvas({ figure }: Props) {
   // ne démonte rien : la valeur d'un temps n'est pas dans sa forme, elle est
   // dans le moment qu'il désigne — et cela se montre sur une ligne du temps.
   const reperes = figure.reperes ?? [];
-  /* ⛔ LA FRISE DEMANDE UN BLOC LARGE, ET ELLE LE DIT EN LE PRENANT.
-     Première version : les repères étaient écrits en 11 px, et
-     `scripts/apercu-canvas.mjs` a refusé le dessin — 9,9 px une fois mis à
-     l'échelle d'une carte de 250. Le seuil est à 11.
-     Baisser encore la police aurait été la mauvaise réparation : c'est la
-     LARGEUR qui manque, pas la place. Les repères sont donc écrits comme le
-     reste du canvas (15 px) et la frise calcule sa largeur sur eux. Elle sort
-     à ~410 px : elle va dans un bloc d'exemple ou de méthode, PAS dans une
-     carte de propriété sur trois colonnes. C'est écrit dans le type. */
-  const largeurRepere = reperes.length
-    ? Math.max(...reperes.map((r) => largeurTexte(r.texte, FONT_MOT))) + 16
-    : 70;
-  const w = Math.max(width, 3 * (largeurRepere + 8) + 2 * PAD_X);
+  /* ⛔ LA FRISE PRENAIT SA LARGEUR SUR LE PLUS LONG DE SES REPÈRES, EN ENTIER.
+     Écrits en 15 px et jamais pliés, « passé composé » ou « plus-que-parfait »
+     poussaient la frise à 291 px — et dans la carte de méthode d'un téléphone,
+     qui n'en fait que 201, tout le dessin y était réduit à 0,69 : les repères
+     arrivaient à 10,3 px et les zones à 8,3.
+
+     ⚠️ LA VERSION PRÉCÉDENTE AVAIT DÉJÀ VU LE PROBLÈME ET CHOISI L'INVERSE —
+     « c'est la LARGEUR qui manque, pas la place », donc on prenait la largeur.
+     C'était juste tant qu'on regardait un écran d'ordinateur. Sur un téléphone,
+     la largeur n'est pas à prendre : elle n'existe pas. On plie donc le repère
+     en deux lignes, comme la note sous un wagon et comme la phrase dans
+     `PhraseCanvas` — la frise perd de la hauteur et garde ses lettres. */
+  const lignesRepere = reperes.map((r) => couperNote(r.texte, 62, FONT_ETIQUETTE));
+  const largeurRepere = lignesRepere.length
+    ? Math.max(
+        ...lignesRepere.flat().map((ligne) => largeurTexte(ligne, FONT_ETIQUETTE))
+      ) + 12
+    : 60;
+  const w = Math.max(width, 3 * (largeurRepere + 6) + 2 * PAD_X);
   const empilementMax = Math.max(
     1,
     ...["passe", "present", "futur"].map((z) => reperes.filter((r) => r.zone === z).length)
   );
-  const yLigne = yTitre + 22 + empilementMax * 26;
+  // Un repère plié en deux lignes est plus haut : le pas d'empilement suit, sinon
+  // la deuxième ligne du repère du dessous passe sous l'étiquette du dessus.
+  const lignesMax = Math.max(1, ...lignesRepere.map((l) => l.length));
+  const hBoite = 8 + lignesMax * 14;
+  const PAS_REPERE = hBoite + 6;
+  const yLigne = yTitre + 22 + empilementMax * PAS_REPERE;
   const yLegendeF = yLigne + 44;
-  const h = yLegendeF + (legende ? 6 : -8);
+  const h = yLegendeF + (legende ? (lignesLegende(legende, w).length - 1) * H_LIGNE_LEGENDE + 6 : -8);
 
   const zones: Array<{ id: "passe" | "present" | "futur"; label: string }> = [
     { id: "passe", label: "passé" },
@@ -516,30 +639,37 @@ export default function ConjugaisonCanvas({ figure }: Props) {
               {z.label}
             </text>
             {dedans.map((r, j) => {
-              const lw = Math.max(46, largeurTexte(r.texte, FONT_MOT) + 14);
-              const y = yLigne - 18 - j * 26;
+              const lignes = couperNote(r.texte, 62, FONT_ETIQUETTE);
+              const lw = Math.max(
+                46,
+                ...lignes.map((ligne) => largeurTexte(ligne, FONT_ETIQUETTE) + 12)
+              );
+              const yBas = yLigne - 12 - j * PAS_REPERE;
               return (
                 <g key={j}>
                   <rect
                     x={cx - lw / 2}
-                    y={y - 15}
+                    y={yBas - hBoite}
                     width={lw}
-                    height={22}
+                    height={hBoite}
                     rx={5}
                     fill={PALETTE.temps.fill}
                     stroke={PALETTE.temps.stroke}
                     strokeWidth={1.2}
                   />
-                  <text
-                    x={cx}
-                    y={y}
-                    textAnchor="middle"
-                    fontSize={FONT_MOT}
-                    fontWeight={700}
-                    fill={PALETTE.temps.text}
-                  >
-                    {r.texte}
-                  </text>
+                  {lignes.map((ligne, k) => (
+                    <text
+                      key={k}
+                      x={cx}
+                      y={yBas - hBoite + 8 + (k + 1) * 12 - 2}
+                      textAnchor="middle"
+                      fontSize={FONT_ETIQUETTE}
+                      fontWeight={700}
+                      fill={PALETTE.temps.text}
+                    >
+                      {ligne}
+                    </text>
+                  ))}
                 </g>
               );
             })}
@@ -548,9 +678,7 @@ export default function ConjugaisonCanvas({ figure }: Props) {
       })}
 
       {legende ? (
-        <text x={w / 2} y={yLegendeF} textAnchor="middle" fontSize={FONT_ETIQUETTE} fill="#475569">
-          {legende}
-        </text>
+        <Legende texte={legende} w={w} y={yLegendeF} />
       ) : null}
     </svg>
   );

@@ -131,7 +131,7 @@ function phrase(opts: { mots: (string | PhraseCanvasMot)[]; legende?: string }) 
         kind: "phrase",
         mots: opts.mots.map((m) => (typeof m === "string" ? { texte: m } : m)),
         legende: opts.legende,
-        largeurMax: 250,
+        largeurMax: 190,
       }}
     />
   );

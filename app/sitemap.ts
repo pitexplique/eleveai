@@ -34,7 +34,7 @@ const LASTMOD_FICHES  = new Date("2026-07-11");
 // 12/07 : les 16 fiches IA refaites « en blocs » (fiche + flashcards + composeur)
 const LASTMOD_FICHES_IA = new Date("2026-07-12");
 // Le français entre dans les fiches de cours (première fiche : la grammaire du CM2).
-const LASTMOD_FICHES_FR = new Date("2026-08-20");
+const LASTMOD_FICHES_FR = new Date("2026-08-24");
 // 23/08 : les fiches deviennent de vrais PDF, fabriques par Chrome depuis la page.
 const LASTMOD_FICHES_PDF = new Date("2026-08-23");
 // 25/07 : lancement des kits de survie lycée (Première spé maths en premier)
@@ -141,6 +141,13 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours/francais/6e/conjugaison-temps-composes", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   { path: "/fiches-cours/francais/6e/conjugaison-modes", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   { path: "/fiches-cours/francais/6e/conjugaison-valeurs", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  // ⭐ LA 5e OUVRE EN FRANÇAIS (24/08/2026). Elle est la seule classe déjà
+  // passée au programme du 5 mars 2026 : ses trois fiches portent l'année
+  // scolaire dans leur titre, parce que la requête tapée à la rentrée est
+  // « français 5e 2026-2027 » et que les sites qui nous devancent l'écrivent.
+  { path: "/fiches-cours/francais/5e/grammaire-phrase", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/5e/grammaire-fonctions", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/5e/grammaire-groupe-nominal", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   // Fiches maths — refaites « en blocs » le 11/07, + les fiches 6e créées
   // le 12/07 (une par banque du coach) : fiche + flashcards + composeur.
   { path: "/fiches-cours/maths/6e/entier-nombre",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },

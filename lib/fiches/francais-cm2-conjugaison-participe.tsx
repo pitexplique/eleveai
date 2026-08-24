@@ -102,7 +102,7 @@ function phrase(opts: {
         groupes: opts.groupes,
         liens: opts.liens,
         legende: opts.legende,
-        largeurMax: 250,
+        largeurMax: 190,
       }}
     />
   );

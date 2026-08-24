@@ -80,8 +80,37 @@ function couleurFonction(label: string) {
 // La place réellement occupée par un texte, avant de poser quoi que ce soit à
 // côté (REGLES.md § 2 ter : « calculer la place occupée »). Large exprès : un
 // dessin trop aéré se lit, deux légendes qui se touchent ne se lisent pas.
+//
+// ⚠️ 0,58 SOUS-ESTIMAIT, ET C'EST UNE ESTIMATION QUI SERT À NE PAS DÉBORDER
+// (24/08/2026). Mesuré au rendu, getBBox() contre le viewBox : « complément du
+// nom » en gras occupe 133 px là où la formule en annonçait 118. L'étiquette
+// passait donc le test du cadre et sortait quand même. 0,62 est la largeur
+// réelle du gras de cette fonte ; l'écart de layout est de trois pixels par
+// étiquette, la phrase ne se replie pas pour autant.
 function largeurTexte(texte: string, fontSize: number) {
-  return texte.length * fontSize * 0.58;
+  return texte.length * fontSize * 0.62;
+}
+
+/**
+ * Ramène une étiquette centrée à l'intérieur du cadre.
+ *
+ * ⛔ TROISIÈME FOIS QUE LE MÊME DÉFAUT REVIENT, À TROIS ENDROITS DIFFÉRENTS.
+ * L'étiquette de FONCTION a été ramenée dans le cadre le 20/08 (« CC de temps »
+ * sous « Hier » perdait son premier C), celle de NATURE le 24/08 au matin
+ * (« déterminant » sur « un » sortait de 8 px). Restaient les labels de LIEN :
+ * « qui est-ce qui ? », posé au sommet d'un arc qui part du premier mot,
+ * dépassait de 3 px à gauche sur trois fiches — le CM2 et la 6e.
+ * Un SVG masque ce qui sort de son `viewBox` : l'étiquette n'est pas « mal
+ * placée », elle est COUPÉE, et rien à l'écran ne le dit.
+ *
+ * ⚠️ Le fond blanc de l'étiquette se décale AVEC elle, sinon le rectangle reste
+ * en arrière et le texte flotte à côté de son propre fond.
+ */
+function centreDansCadre(x: number, largeurEtiquette: number, largeurCadre: number) {
+  return Math.min(
+    Math.max(x, largeurEtiquette / 2 + 2),
+    largeurCadre - largeurEtiquette / 2 - 2
+  );
 }
 
 // ⭐ ON SERRE LES ÉTIQUETTES, PAS LES LETTRES (20/08). Chaque mot portait 16 px
@@ -90,10 +119,24 @@ function largeurTexte(texte: string, fontSize: number) {
 // retour à la ligne, donc les groupes coupés en deux et les flèches en
 // diagonale. Marges resserrées, la phrase tient sur une ligne et le mot reste
 // gros. La police, elle, ne descend pas plus bas que 15.
+// ⛔ AUCUNE POLICE SOUS 11 UNE FOIS À L'ÉCHELLE (24/08/2026), ET C'EST POURQUOI
+// AUCUNE N'EST ÉCRITE À 11. REGLES.md § 2 quater pose le plancher ; la nature et
+// le label d'un lien étaient à 10, donc DÉJÀ dessous avant toute réduction — et à
+// 8,6 px sur un téléphone une fois le dessin mis à l'échelle de son bloc. Mesuré
+// sur la page rendue en 375 px, pas estimé : sur la fiche du groupe nominal de
+// 5e, 67 des 98 textes trop petits étaient des natures.
+//
+// ⚠️ ÉCRIRE 11 NE SUFFIT PAS, ET C'EST L'ERREUR QUE J'AI FAITE D'ABORD. Un dessin
+// se met à l'échelle de son bloc : le plus étroit d'une fiche mesure 201 px sur un
+// téléphone, et le moindre rapport de 0,98 fait retomber un 11 à 10,8. On écrit
+// donc 12, ce qui laisse la marge — et la fiche règle son `largeurMax` pour que le
+// rapport ne descende jamais loin de 1.
+// ⚠️ Les largeurs se calculent depuis ces constantes (`largeurTexte`) et la bande
+// des natures réserve 16 px de haut : monter à 12 ne chevauche rien.
 const FONT_MOT = 15;
-const FONT_NATURE = 10;
-const FONT_FONCTION = 11;
-const FONT_LIEN = 10;
+const FONT_NATURE = 12;
+const FONT_FONCTION = 12;
+const FONT_LIEN = 12;
 
 const PAD_X = 12;
 const GAP_MOT = 5;
@@ -104,13 +147,30 @@ const PAS_ARC = 22;
 // l'étiquette qui se pose dessous (constaté au rendu, 20/08 — à 22 px de creux,
 // « remplace » et l'arc se disputaient les mêmes pixels).
 const PAS_ARC_BAS = 30;
+// ⚠️ NE PAS L'AUGMENTER POUR ÉCARTER LES ÉTIQUETTES : ÇA LES RAPPROCHE
+// (essayé et mesuré le 24/08/2026). Quand un lien relie deux mots posés sur DEUX
+// lignes — « Léa mange | une mangue », la flèche « quoi ? » va du verbe au COD —
+// son étiquette se place à mi-hauteur entre les deux lignes, donc juste au-dessus
+// des étiquettes de fonction de la première. Écarter les lignes de 10 à 16 a
+// fait descendre l'étiquette de l'arc d'autant : les boîtes se chevauchaient de
+// 7 px au lieu de 5. Les lettres, elles, gardent un pixel d'écart — c'est serré,
+// et c'est le prix des arcs qui traversent un retour à la ligne.
 const ESPACE_LIGNES = 10;
 // 250, et le nombre se déduit du bloc le PLUS ÉTROIT, pas du bloc moyen : sur un
 // téléphone de 375, un dessin posé dans une carte de méthode ne reçoit que
 // 201 px (226 dans une carte de propriété). Un dessin de 250 px s'y affiche donc
 // à 201/250 = 0,80, et les mots écrits en 15 px arrivent à 12. À 270, la carte
 // la plus serrée retombait à 10,9.
-const LARGEUR_MAX_DEFAUT = 250;
+// ⛔ 250 ÉTAIT ENCORE TROP LARGE, ET LE COMMENTAIRE CI-DESSUS LE DISAIT SANS EN
+// TIRER LA CONSÉQUENCE (24/08/2026). Il calculait bien 201/250 = 0,80, et
+// concluait « les mots écrits en 15 arrivent à 12 » — vrai pour les MOTS, faux
+// pour tout le reste : une fonction en 12 y arrive à 9,6, et le plancher est 11.
+// Mesuré ensuite sur les dix-sept fiches de CM2 et de 6e : minimum entre 9,1 et
+// 9,9 px, sur toutes, sans exception.
+// À 190, le dessin tient dans la carte la plus serrée sans être réduit du tout,
+// et l'échelle ne descend plus jamais sous 1. La phrase se plie une ligne de
+// plus : c'est le prix, et c'est celui qu'on a choisi de payer partout ailleurs.
+const LARGEUR_MAX_DEFAUT = 190;
 
 // Un signe de ponctuation ne commence jamais une ligne : il reste collé au mot
 // qu'il suit, comme dans un texte imprimé.
@@ -462,7 +522,7 @@ export default function PhraseCanvas({ figure }: Props) {
               {lien.label ? (
                 <>
                   <rect
-                    x={(x1 + x2) / 2 - largeurLabel / 2}
+                    x={centreDansCadre((x1 + x2) / 2, largeurLabel, width) - largeurLabel / 2}
                     y={yArc - 9}
                     width={largeurLabel}
                     height={15}
@@ -470,7 +530,7 @@ export default function PhraseCanvas({ figure }: Props) {
                     fill="white"
                   />
                   <text
-                    x={(x1 + x2) / 2}
+                    x={centreDansCadre((x1 + x2) / 2, largeurLabel, width)}
                     y={yArc + 2}
                     textAnchor="middle"
                     fontSize={FONT_LIEN}
@@ -490,9 +550,19 @@ export default function PhraseCanvas({ figure }: Props) {
         {showNatures
           ? mots.map((m, i) =>
               m.nature ? (
+                // ⛔ MÊME CORRECTIF QUE POUR LA FONCTION, AVEC HUIT JOURS DE
+                // RETARD (24/08/2026). L'étiquette de fonction est ramenée dans
+                // le cadre depuis le 20/08 ; celle de NATURE, non — et
+                // « déterminant » (69 px à 12) centré sur « un » (18 px), premier
+                // mot du groupe, débordait de 8 px à gauche et y perdait son d.
+                // Constaté au rendu, en mesurant les getBBox() contre le viewBox,
+                // pas en relisant le code.
                 <text
                   key={`n-${i}`}
-                  x={centre(i)}
+                  x={Math.min(
+                    Math.max(centre(i), largeurTexte(m.nature, FONT_NATURE) / 2 + 2),
+                    width - largeurTexte(m.nature, FONT_NATURE) / 2 - 2
+                  )}
                   y={yMotsDe[ligneDe[i]] - 5}
                   textAnchor="middle"
                   fontSize={FONT_NATURE}
@@ -636,7 +706,7 @@ export default function PhraseCanvas({ figure }: Props) {
               {lien.label ? (
                 <>
                   <rect
-                    x={xLabel - largeurLabel / 2}
+                    x={centreDansCadre(xLabel, largeurLabel, width) - largeurLabel / 2}
                     y={yLabel - 8}
                     width={largeurLabel}
                     height={15}
@@ -646,7 +716,7 @@ export default function PhraseCanvas({ figure }: Props) {
                     strokeWidth={0.8}
                   />
                   <text
-                    x={xLabel}
+                    x={centreDansCadre(xLabel, largeurLabel, width)}
                     y={yLabel + 3}
                     textAnchor="middle"
                     fontSize={FONT_LIEN}
@@ -686,7 +756,7 @@ export default function PhraseCanvas({ figure }: Props) {
               {lien.label ? (
                 <>
                   <rect
-                    x={(x1 + x2) / 2 - largeurLabel / 2}
+                    x={centreDansCadre((x1 + x2) / 2, largeurLabel, width) - largeurLabel / 2}
                     y={yCreux + 6}
                     width={largeurLabel}
                     height={15}
@@ -694,7 +764,7 @@ export default function PhraseCanvas({ figure }: Props) {
                     fill="white"
                   />
                   <text
-                    x={(x1 + x2) / 2}
+                    x={centreDansCadre((x1 + x2) / 2, largeurLabel, width)}
                     y={yCreux + 17}
                     textAnchor="middle"
                     fontSize={FONT_LIEN}
