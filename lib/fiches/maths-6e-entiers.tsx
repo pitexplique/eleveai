@@ -74,6 +74,147 @@ const droiteEncadrement = (
   />
 );
 
+// ─── Les six dessins des blocs ────────────────────────────────────────────────
+// ⭐ LE TABLEAU DE NUMÉRATION SERT DÉJÀ TROIS FOIS (figure, exemples 1 et 2).
+// Six de plus et la fiche serait une colonne de tableaux (REGLES.md § 2 bis). Il
+// ne revient donc que sur les deux blocs dont le geste EST de lire une colonne —
+// et encore, avec une case allumée à chaque fois différente. Les quatre autres
+// blocs sortent : une barre pour la décomposition (4 273, c'est une LONGUEUR
+// faite de quatre morceaux), et la droite graduée pour comparer et encadrer,
+// parce que « plus grand » veut dire « plus à droite ».
+
+/** Un dessin et sa phrase, sous lui. */
+const legende = (dessin: React.ReactNode, texte: string) => (
+  <div>
+    {dessin}
+    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+  </div>
+);
+
+// ⭐ LA DÉCOMPOSITION SE POSE EN COLONNES, ET LES RANGS S'ALIGNENT TOUT SEULS.
+// C'est même le seul dessin de la fiche où la position d'un chiffre se voit
+// physiquement : les zéros de 4000 poussent le 4 quatre crans à gauche.
+//
+// ⛔ CE BLOC A D'ABORD PORTÉ UNE BARRE (4000 + 200 + 70 + 3), et c'était une
+// erreur d'échelle mesurée au rendu : `schema_barre` donne à chaque part une
+// largeur PROPORTIONNELLE à sa valeur. Les 4000 mangeaient 93 % de la barre, et
+// « 200 », « 70 », « centaines », « dizaines », « unités » se chevauchaient tous
+// dans les 7 % restants. Une décomposition décimale est par nature déséquilibrée
+// d'un facteur dix par rang : elle ne se dessine pas en longueurs.
+const additionDesRangs = (
+  <CanvasRenderer
+    figure={{
+      kind: "calcul_pose",
+      operation: "addition",
+      title: "4 273 en morceaux",
+      numbers: ["4000", "200", "70", "3"],
+      result: "4273",
+    }}
+  />
+);
+
+// L'AUTRE MOITIÉ DE LA RÈGLE. L'exemple 1 compare 345 et 354, deux nombres de
+// MÊME longueur — il montre donc « chiffre par chiffre ». Celui-ci montre la
+// première moitié, celle qu'on applique avant même de regarder les chiffres :
+// le plus long gagne, toujours.
+const lePlusLongGagne = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "98 ou 1 042 ?",
+      headers: ["Milliers", "Centaines", "Dizaines", "Unités"],
+      rows: [
+        { label: "98", values: ["", "", "9", "8"] },
+        { label: "1 042", values: ["1", "0", "4", "2"] },
+      ],
+      highlight: { row: 1 },
+      caption: "4 chiffres contre 2 : inutile de comparer, 1 042 gagne.",
+    }}
+  />
+);
+
+// ENCADRER, C'EST VOIR LES DEUX BORNES EN MÊME TEMPS. L'exemple 3 place 47 sur
+// une droite qui va déjà de 40 à 50 : les bornes y sont les bouts du dessin, donc
+// invisibles en tant que choix. Ici la droite va de 0 à 100, et ce sont les deux
+// dizaines encadrantes qui sont marquées — on VOIT qu'on les a choisies.
+const encadrerEntreDeuxDizaines = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min: 0,
+      max: 100,
+      step: 20,
+      points: [
+        { value: 40, label: "40", color: "#2563eb" },
+        { value: 47, label: "47", color: "#16a34a" },
+        { value: 50, label: "50", color: "#2563eb" },
+      ],
+      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
+      size: { width: 260, height: 95 },
+    }}
+  />,
+  "47 est coincé entre 40 et 50"
+);
+
+// LE RANG QU'ON CHERCHE, ALLUMÉ. Même tableau que la figure, mais une colonne
+// est mise en avant : lire un rang, c'est poser le doigt sur une colonne.
+const rangDesDizaines = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Le rang des dizaines",
+      headers: ["Milliers", "Centaines", "Dizaines", "Unités"],
+      rows: [
+        { label: "Chiffre", values: ["1", "0", "4", "2"] },
+        { label: "Vaut", values: ["1000", "0", "40", "2"] },
+      ],
+      highlight: { col: 2 },
+      caption: "Le 4 est au rang des dizaines : il vaut 40.",
+    }}
+  />
+);
+
+// COMPARER, C'EST REGARDER QUI EST À DROITE. Le tableau explique POURQUOI 354
+// dépasse 345 ; la droite le montre sans un mot — et c'est le seul dessin de la
+// fiche où le résultat se lit sans lire un seul chiffre.
+const leDroitierGagne = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min: 340,
+      max: 360,
+      step: 5,
+      points: [
+        { value: 345, label: "345", color: "#dc2626" },
+        { value: 354, label: "354", color: "#16a34a" },
+      ],
+      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
+      size: { width: 260, height: 95 },
+    }}
+  />,
+  "354 est à droite de 345 : il est plus grand"
+);
+
+// ⭐ LE ZÉRO NE VAUT RIEN, MAIS IL TIENT LA PLACE. La colonne des centaines est
+// vide, et pourtant il faut écrire un 0 : sans lui, le 1 glisserait d'un rang et
+// 1 042 deviendrait 142. Le tableau est le seul objet qui montre une colonne
+// VIDE — une barre ou une droite ne peut pas dessiner une absence.
+const leZeroQuiTientLaPlace = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Pourquoi ce 0 ?",
+      headers: ["Milliers", "Centaines", "Dizaines", "Unités"],
+      rows: [
+        { label: "1 042", values: ["1", "0", "4", "2"] },
+        { label: "sans le 0", values: ["", "1", "4", "2"] },
+      ],
+      highlight: { cell: { row: 0, col: 1 } },
+      caption: "Sans le 0, tout glisse d'un rang : on écrirait 142.",
+    }}
+  />
+);
+
 const pieges = [
   "Confondre chiffre et nombre : dans 352, le chiffre des dizaines est 5, mais le nombre de dizaines est 35.",
   "Croire qu'un nombre qui commence par 9 est le plus grand : 908 est plus petit que 1 205 (moins de chiffres).",
@@ -116,14 +257,17 @@ export const ficheEntiers6e: FicheCoursData = {
     {
       titre: "La position donne la valeur",
       texte: "Dans 4 273, le 2 vaut 200 : c'est le rang qui compte, pas le chiffre seul.",
+      schema: additionDesRangs,
     },
     {
       titre: "Comparer",
       texte: "Le plus de chiffres gagne ; à égalité, on compare de gauche à droite.",
+      schema: lePlusLongGagne,
     },
     {
       titre: "Encadrer",
       texte: "Placer entre deux nombres ronds qui se suivent : 40 < 47 < 50.",
+      schema: encadrerEntreDeuxDizaines,
     },
   ],
   reel: {
@@ -135,9 +279,9 @@ export const ficheEntiers6e: FicheCoursData = {
       "Nos dix chiffres viennent d'Inde (vers le 5e siècle). Le zéro comme vrai nombre a été décrit par Brahmagupta en 628. Cette écriture par position a remplacé les chiffres romains, peu pratiques pour calculer.",
   },
   methode: [
-    { titre: "Je repère le rang", texte: "De droite à gauche : unités, dizaines, centaines, milliers." },
-    { titre: "Je compare", texte: "Le plus long gagne ; sinon, chiffre par chiffre depuis la gauche." },
-    { titre: "Je vérifie le zéro", texte: "Chaque rang vide garde un 0 : 1 042, pas 142." },
+    { titre: "Je repère le rang", texte: "De droite à gauche : unités, dizaines, centaines, milliers." , schema: rangDesDizaines },
+    { titre: "Je compare", texte: "Le plus long gagne ; sinon, chiffre par chiffre depuis la gauche." , schema: leDroitierGagne },
+    { titre: "Je vérifie le zéro", texte: "Chaque rang vide garde un 0 : 1 042, pas 142." , schema: leZeroQuiTientLaPlace },
   ],
   usages: [
     { titre: "Lire → écrire", detail: "Des mots aux chiffres : « deux mille trente-cinq » → 2 035." },
