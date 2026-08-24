@@ -53,8 +53,16 @@ export default function AngleCanvas({ figure }: Props) {
   const arcEndY = cy + arcRadius * Math.sin(-angleRad);
 
   const labelAngle = -angleRad / 2;
-  const labelX = cx + (arcRadius + 22) * Math.cos(labelAngle);
-  const labelY = cy + (arcRadius + 22) * Math.sin(labelAngle);
+  // ⚠️ SOUS LE RAPPORTEUR, LA MESURE RENTRE. Posée à 64 du sommet, elle tombe
+  // sur la couronne chiffrée de l'instrument (rayon − 24) : mesuré sur la fiche
+  // de 6e, le « ? » de la méthode « Mesurer » et le « 40° » de « Tracer »
+  // chevauchaient tous deux le 30 du rapporteur. Ramenée à 26, elle s'écrit
+  // dans l'ouverture de l'angle, là où il n'y a rien.
+  const labelRayon = (figure.angle?.display?.showProtractor ?? false)
+    ? 26
+    : arcRadius + 22;
+  const labelX = cx + labelRayon * Math.cos(labelAngle);
+  const labelY = cy + labelRayon * Math.sin(labelAngle);
 
   const angleLabel = showMeasure
     ? labels.angle ?? `${angleDeg}°`
@@ -73,6 +81,18 @@ export default function AngleCanvas({ figure }: Props) {
     y: cy + r * Math.sin((-deg * Math.PI) / 180),
   });
 
+  // ⚠️ SOUS L'INSTRUMENT, LES LETTRES SORTENT. Les côtés s'arrêtent à 82 et le
+  // rapporteur va jusqu'à 104 : les lettres A et B tombaient donc DANS la
+  // couronne graduée. Sur la fiche de 5e, le « A » d'un angle de 55° et le
+  // « 60 » du rapporteur se chevauchaient — un défaut mesuré le 24/08/2026,
+  // antérieur au grossissement des graduations. Posées au-delà du bord de
+  // l'instrument, les lettres nomment les côtés là où il n'y a plus rien.
+  const rLettres = showProtractor ? rRapporteur + 16 : radius;
+  const bX = cx + rLettres;
+  const bY = cy;
+  const aX = cx + rLettres * Math.cos(-angleRad);
+  const aY = cy + rLettres * Math.sin(-angleRad);
+
   // ─── Le cadre se serre sur le dessin ────────────────────────────────────────
   // ⛔ LE VIEWBOX NE SE FIXE PLUS À LA TAILLE DEMANDÉE (Frédéric, 20/08 : « tu
   // peux mieux utiliser l'espace », capture à l'appui). Le sommet est posé à
@@ -90,8 +110,8 @@ export default function AngleCanvas({ figure }: Props) {
   ];
   if (showLabels) {
     aCouvrir.push({ x: cx - 16, y: cy + 24 }); // le O, sous le sommet
-    aCouvrir.push({ x: rightX + 22, y: rightY + 6 }); // le B
-    aCouvrir.push({ x: leftX - 14, y: leftY - 20 }); // le A
+    aCouvrir.push({ x: bX + 22, y: bY + 6 }); // le B
+    aCouvrir.push({ x: aX - 14, y: aY - 20 }); // le A
   }
   if (angleLabel && !showRightAngle) {
     const demi = String(angleLabel).length * 4.5 + 4;
@@ -136,7 +156,11 @@ export default function AngleCanvas({ figure }: Props) {
               const majeur = deg % 30 === 0;
               const a = pointSur(deg, rRapporteur);
               const b = pointSur(deg, rRapporteur - (majeur ? 12 : 7));
-              const t = pointSur(deg, rRapporteur - 24);
+              // ⚠️ 24 posait les nombres au rayon des CÔTÉS de l'angle : à 55°,
+              // le « 60 » du rapporteur et la lettre « A » du côté se
+              // chevauchaient sur la fiche de 5e (mesuré, après le passage de la
+              // graduation de 9 à 12 px). 32 les rentre sous les côtés.
+              const t = pointSur(deg, rRapporteur - 32);
               const allume =
                 (step === "zero" && deg === 0) ||
                 (step === "reading" && deg === Math.round(angleDeg / 10) * 10);
@@ -155,7 +179,15 @@ export default function AngleCanvas({ figure }: Props) {
                       x={t.x}
                       y={t.y + 4}
                       textAnchor="middle"
-                      fontSize="9"
+                      // ⚠️ 9 px mettait les graduations à 8,7 px une fois le
+                      // dessin à l'échelle de son bloc — mesuré sur la fiche de
+                      // 6e en 375 px, où SEPT des huit textes du rapporteur
+                      // passaient sous le seuil de 11 px (REGLES.md § 2 quater).
+                      // Un rapporteur dont on ne lit pas les nombres ne montre
+                      // plus rien : c'est justement la graduation qu'on vient
+                      // lire. À 12, l'arc des majeures garde 42 px entre deux
+                      // étiquettes de 20 : elles ne se touchent pas.
+                      fontSize="12"
                       fontWeight="800"
                       fill={allume ? "#dc2626" : "#0369a1"}
                     >
@@ -252,8 +284,8 @@ export default function AngleCanvas({ figure }: Props) {
             </text>
 
             <text
-              x={rightX + 8}
-              y={rightY + 5}
+              x={bX + 8}
+              y={bY + 5}
               fontSize="16"
               fontWeight="900"
               fill={COULEURS.label}
@@ -265,8 +297,8 @@ export default function AngleCanvas({ figure }: Props) {
             </text>
 
             <text
-              x={leftX - 12}
-              y={leftY - 8}
+              x={aX - 12}
+              y={aY - 8}
               fontSize="16"
               fontWeight="900"
               fill={COULEURS.label}

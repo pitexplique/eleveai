@@ -8,9 +8,185 @@
 //   angle_tracer      → Méthode « Tracer », usage 3, exercice 3
 //   angle_defi        → Exemple 2 et exercice 4 (comparer à l'angle droit)
 
+//
+// ⭐ UN DESSIN PAR BLOC (REGLES.md § 2 bis), et HUIT IMAGES DIFFÉRENTES. Les
+// quatre propriétés d'une fiche d'angles glissent naturellement vers quatre fois
+// le même angle — donc quatre règles identiques aux yeux d'un élève de 6e. Ici :
+// le carré et ses coins codés (l'angle droit est un COIN), deux ouvertures
+// comparées, l'angle plat dont les côtés s'alignent, une droite graduée de 0 à
+// 180 (comparer deux angles, c'est comparer deux NOMBRES), les deux demi-droites
+// avant l'angle (ce qu'on repère), et le rapporteur sur deux de ses trois gestes.
+//
+// ⭐ LE PATRON VIENT DE LA 5e (`maths-5e-angles.tsx`) : même helper `angle()`,
+// pour que l'élève qui monte d'une classe retrouve exactement le même dessin.
+// Sa `rangee()` en deux colonnes est ici une `pile()` — mesuré plus bas.
+
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+
+const BLEU = "#2563eb";
+const ROUGE = "#dc2626";
+
+// Un angle du moteur du coach, en un appel — et, au besoin, le RAPPORTEUR posé
+// dessus : `rapporteur` allume un des trois gestes de la mesure sans changer de
+// dessin (le centre sur le sommet, le 0 sur un côté, la graduation atteinte).
+const angle = (
+  angleDeg: number,
+  opts: {
+    showMeasure?: boolean;
+    placeholder?: string;
+    labels?: { vertex?: string; left?: string; right?: string };
+    /** "pose" = l'instrument entier, sans geste allumé. */
+    rapporteur?: "pose" | "vertex" | "zero" | "reading";
+    size?: { width?: number; height?: number };
+  } = {}
+) => (
+  <CanvasRenderer
+    figure={{
+      kind: "angle",
+      size: opts.size,
+      angle: {
+        angleDeg,
+        labels: {
+          vertex: opts.labels?.vertex ?? "",
+          left: opts.labels?.left ?? "",
+          right: opts.labels?.right ?? "",
+          angle: `${angleDeg}°`,
+        },
+        display: {
+          showLabels: !!opts.labels,
+          showMeasure: opts.showMeasure ?? true,
+          showArc: true,
+          showRightAngle: angleDeg === 90,
+          placeholder: opts.placeholder,
+          showProtractor: !!opts.rapporteur,
+          protractorStep: opts.rapporteur === "pose" ? undefined : opts.rapporteur,
+        },
+      },
+    }}
+  />
+);
+
+// Deux angles sous leur nom : « plus petit qu'un angle droit » n'a de sens que
+// CONTRE quelque chose. Un 130° tout seul ne montre rien.
+//
+// ⛔ EMPILÉS, JAMAIS CÔTE À CÔTE (§ 2 ter, et c'est MESURÉ ici, pas repris) :
+// une carte de propriété fait 225 px de large sur un écran de 1280 comme sur un
+// téléphone de 375 — donc 97 px par cellule en deux colonnes. Le cadre se serre
+// sur le dessin, et un OBTUS est large : son « 130° » tombait à 9,1 px sur
+// ordinateur et 9,0 px sur téléphone. Empilé, chaque angle reprend les 225 px
+// et son étiquette remonte à 21 px.
+const pile = (items: { deg: number; nom: string }[]) => (
+  <div className="grid grid-cols-1 gap-2">
+    {items.map((it) => (
+      <div key={it.nom}>
+        <CanvasRenderer
+          figure={{
+            kind: "angle",
+            size: { width: 150, height: 120 },
+            angle: {
+              angleDeg: it.deg,
+              labels: { vertex: "", left: "", right: "", angle: `${it.deg}°` },
+              display: { showLabels: false, showMeasure: true, showArc: true },
+            },
+          }}
+        />
+        <p className="mt-1 text-center text-xs font-black text-slate-700">{it.nom}</p>
+      </div>
+    ))}
+  </div>
+);
+
+/** Un dessin et sa phrase, sous lui. */
+const legende = (dessin: React.ReactNode, texte: string) => (
+  <div>
+    {dessin}
+    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+  </div>
+);
+
+// L'ANGLE DROIT EST UN COIN. Le petit carré tout seul, l'élève le prend pour une
+// décoration ; sur les quatre coins d'un carré, il devient ce qu'il est — la
+// forme qu'on vérifie à l'équerre. Le 90° dessiné nu reste sur la formule.
+const carreCoins = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "quadrilatere",
+      size: { width: 200, height: 180 },
+      points: {
+        A: { x: 45, y: 35 },
+        B: { x: 155, y: 35 },
+        C: { x: 155, y: 145 },
+        D: { x: 45, y: 145 },
+      },
+      display: { showPoints: false, showLabels: false, showSides: false, showAngles: false },
+      marks: { rightAnglesAt: ["A", "B", "C", "D"] },
+    }}
+  />,
+  "les 4 coins d'un carré : 90° chacun"
+);
+
+// CE QU'ON REPÈRE AVANT DE VOIR UN ANGLE : deux demi-droites et leur point
+// commun. Pas d'arc, pas de mesure — l'angle n'est pas encore nommé, c'est tout
+// l'objet de la méthode « Reconnaître ». Aucun canvas `angle` ne sait montrer ça,
+// puisqu'il dessine toujours l'angle déjà formé.
+const deuxDemiDroites = (
+  <CanvasRenderer
+    figure={{
+      kind: "droites",
+      size: { width: 260, height: 170 },
+      lines: [
+        {
+          id: "d1",
+          type: "demi_droite",
+          from: { x: 45, y: 130 },
+          to: { x: 235, y: 130 },
+          color: BLEU,
+          display: { showArrows: true, showLabel: false },
+        },
+        {
+          id: "d2",
+          type: "demi_droite",
+          from: { x: 45, y: 130 },
+          to: { x: 190, y: 30 },
+          color: BLEU,
+          display: { showArrows: true, showLabel: false },
+        },
+      ],
+      points: [{ x: 45, y: 130, label: "le sommet", color: ROUGE, highlight: true }],
+    }}
+  />
+);
+
+// COMPARER DEUX ANGLES, C'EST COMPARER DEUX NOMBRES. Le degré est une unité :
+// posé sur une droite graduée de 0 à 180 — le tour du rapporteur mis à plat —
+// 80° est à droite de 30°, comme n'importe quel nombre plus grand.
+const echelleDesDegres = (
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min: 0,
+      max: 180,
+      step: 30,
+      points: [
+        { value: 30, label: "30°", color: BLEU },
+        { value: 80, label: "80°", color: ROUGE },
+      ],
+      display: {
+        showTicks: true,
+        showValues: true,
+        showPoints: true,
+        showPointLabels: true,
+        showZero: true,
+      },
+      // ⚠️ MESURÉ, pas estimé (§ 2 quater) : à 360 de viewBox, la droite tombe à
+      // 8,8 px de texte dans une carte de propriété de 250 px — refusée par
+      // `apercu-canvas.mjs`. Le cadre serré à 280 la remonte à 11,3 px.
+      size: { width: 280, height: 90 },
+    }}
+  />
+);
 
 // L'angle droit dessiné par le moteur du coach (le petit carré au sommet).
 const schemaAngleDroit = (
@@ -95,21 +271,32 @@ export const ficheAngles6e: FicheCoursData = {
       titre: "L'angle droit",
       texte:
         "Un angle droit mesure exactement 90°. C'est l'angle des coins d'un carré ou d'un rectangle. On le vérifie avec une équerre.",
+      schema: carreCoins,
     },
     {
       titre: "Aigu ou obtus",
       texte:
         "Un angle aigu mesure moins de 90° : il est plus petit qu'un angle droit. Un angle obtus mesure entre 90° et 180° : il est plus grand qu'un angle droit.",
+      // ⚠️ Le canvas `angle` ne montre QU'UN angle (CATALOGUE.md) : deux ouvertures
+      // à comparer, ce sont deux dessins posés l'un à côté de l'autre.
+      schema: pile([
+        { deg: 50, nom: "aigu : < 90°" },
+        { deg: 130, nom: "obtus : > 90°" },
+      ]),
     },
     {
       titre: "L'angle plat",
       texte:
         "Un angle plat mesure 180°. Ses deux côtés sont alignés : ils forment une ligne droite qui passe par le sommet.",
+      // Le seul angle de la fiche dont le dessin est une LIGNE DROITE : c'est
+      // exactement ce qui étonne, et c'est ce qu'il faut voir.
+      schema: angle(180, { labels: { vertex: "sommet", left: "côté", right: "côté" } }),
     },
     {
       titre: "Le degré",
       texte:
         "On mesure les angles en degrés, notés °. Comparer deux angles donnés en degrés, c'est comparer leurs mesures : 80° est plus grand que 30°.",
+      schema: echelleDesDegres,
     },
   ],
   reel: {
@@ -131,16 +318,23 @@ export const ficheAngles6e: FicheCoursData = {
       titre: "Reconnaître",
       texte:
         "On repère les deux demi-droites et leur point commun : le sommet. Puis on classe l'angle en le comparant à l'angle droit : aigu, droit, obtus ou plat.",
+      schema: legende(deuxDemiDroites, "deux demi-droites, un point commun"),
     },
     {
       titre: "Mesurer",
       texte:
         "On place le centre du rapporteur sur le sommet, le zéro sur un côté, puis on lit la graduation traversée par l'autre côté.",
+      // Le geste « reading » : le rapporteur en place, la graduation atteinte
+      // mise en avant. La mesure reste un « ? » — c'est ce qu'on cherche.
+      schema: angle(55, { showMeasure: false, placeholder: "?", rapporteur: "reading" }),
     },
     {
       titre: "Tracer",
       texte:
         "On commence par placer le sommet et un premier côté. Ensuite, avec le rapporteur, on marque la mesure voulue et on trace le deuxième côté.",
+      // Le geste « zero » : le premier côté est déjà là, le 0 vient se poser
+      // dessus. C'est le départ du tracé, pas la lecture.
+      schema: angle(40, { showMeasure: false, placeholder: "40°", rapporteur: "zero" }),
     },
   ],
   usages: [
@@ -165,6 +359,12 @@ export const ficheAngles6e: FicheCoursData = {
       titre: "Reconnaître un angle",
       donnees: "Sur une figure, deux demi-droites partent du même point O.",
       question: "Que forment-elles, et comment s'appelle le point O ?",
+      // L'énoncé dessiné : l'angle AOB, ses trois lettres, sans mesure — la
+      // question porte sur les mots, pas sur un nombre.
+      schema: angle(65, {
+        showMeasure: false,
+        labels: { vertex: "O", left: "A", right: "B" },
+      }),
       solution:
         "Deux demi-droites de même origine forment un angle. Le point O, commun aux deux côtés, s'appelle le sommet de l'angle.",
     },

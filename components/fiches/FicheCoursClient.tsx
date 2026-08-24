@@ -362,7 +362,13 @@ export default function FicheCoursClient({
               <ListChecks className="h-6 w-6 text-sky-500 print:hidden" />
               Propriétés : {apresDeuxPoints(fiche.titre)}
             </h2>
-            <div className="mt-4 grid gap-4 md:grid-cols-3 print:grid-cols-3 print:gap-3">
+            {/* ⚠️ TROIS COLONNES SEULEMENT À PARTIR DE 1024 (mesuré le 24/08/2026).
+                À `md` (768), la page tenait déjà trois cartes dans 820 px : chacune
+                tombait à 155 px, et TOUS les dessins d'une fiche d'angles y passaient
+                sous 8 px — le rapporteur, la droite graduée, les légendes. Le palier
+                intermédiaire à deux colonnes rend 340 px par carte. Le `print` garde
+                ses trois colonnes : sur A4, la largeur ne manque pas. */}
+            <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3 print:grid-cols-3 print:gap-3">
               {fiche.proprietes.map((p) => (
                 <div
                   key={p.titre}
@@ -424,7 +430,9 @@ export default function FicheCoursClient({
             <h2 className="text-2xl font-black text-slate-900 print:text-xl">
               Méthode : {apresDeuxPoints(fiche.titre)}
             </h2>
-            <div className="mt-4 grid gap-5 md:grid-cols-3 print:grid-cols-3 print:gap-3">
+            {/* Même palier que les propriétés : les étapes de méthode portent
+                elles aussi un dessin. */}
+            <div className="mt-4 grid gap-5 md:grid-cols-2 lg:grid-cols-3 print:grid-cols-3 print:gap-3">
             {fiche.methode.map((etape, i) => {
               const Icone = ICONES_METHODE[i % ICONES_METHODE.length];
               const style = STYLES_METHODE[i % STYLES_METHODE.length];
@@ -455,7 +463,8 @@ export default function FicheCoursClient({
             <h2 className="text-2xl font-black text-slate-900 print:text-xl">
               Selon ce que l&apos;on cherche
             </h2>
-            <div className="mt-4 grid gap-4 md:grid-cols-3 print:grid-cols-3 print:gap-3">
+            {/* Même palier : les usages portent un dessin dès la 5e. */}
+            <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3 print:grid-cols-3 print:gap-3">
               {fiche.usages.map((usage) => (
                 <div
                   key={usage.titre}
