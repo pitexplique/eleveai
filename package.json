@@ -10,7 +10,9 @@
     "build:ebook": "node --experimental-strip-types scripts/build-ebook.ts",
     "build:fiches-pdf": "node --experimental-strip-types scripts/build-fiches-pdf.ts",
     "verifier:pdf": "node --experimental-strip-types scripts/verifier-pdf-a-jour.ts",
-    "build:fiches-pdf": "node --experimental-strip-types scripts/build-fiches-pdf.ts"
+    "dev:2": "node scripts/dev-second-poste.mjs",
+    "verifier:fiches": "node scripts/verifier-fiches-francais.mjs",
+    "verifier:notions": "node scripts/verifier-notions-francais.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.8.0",

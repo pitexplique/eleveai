@@ -1,5 +1,23 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // ⛔ DEUX SERVEURS DE DÉVELOPPEMENT, UN SEUL DOSSIER `.next` (24/08/2026).
+  //
+  // Deux postes travaillent sur ce dépôt en même temps — les maths le matin, le
+  // français le soir. Chacun lance `npm run dev`, et le second prend un autre
+  // port parce que le 3000 est occupé : jusque-là tout va bien. Mais les deux
+  // écrivent leurs modules compilés dans le MÊME `.next`, et se les écrasent.
+  //
+  // Ce que ça donne, mesuré aujourd'hui : des 404 sur des routes qui existent,
+  // des 500 sur `/favicon.ico` et `/_document`, un « Cannot read properties of
+  // undefined (reading 'call') » au fond d'un chunk webpack — et tout cela par
+  // intermittence, donc impossible à rapporter à sa cause. Une fournée de PDF
+  // s'y est arrêtée deux fois, et a même écrit le PDF d'une page 404.
+  //
+  // NEXT_DIST_DIR donne au second serveur son propre dossier :
+  //     NEXT_DIST_DIR=.next-francais npm run dev
+  // Sans la variable, rien ne change pour personne.
+  distDir: process.env.NEXT_DIST_DIR || ".next",
+
   eslint: {
     ignoreDuringBuilds: true,
   },

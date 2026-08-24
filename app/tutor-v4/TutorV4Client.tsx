@@ -1,5 +1,6 @@
 "use client";
 
+import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import {
   useEffect,
   useMemo,
@@ -348,7 +349,20 @@ if (canvas.kind === "schema_barre") {
   return <SchemaBarreCanvas figure={canvas} />;
 }
 
-  return null;
+  /* ⛔ CE `return null` ÉTAIT UN TROU MUET (24/08/2026). Cette fonction redit,
+     `kind` par `kind`, ce que `CanvasRenderer` sait déjà faire — et elle en
+     oubliait DEUX : `phrase` et `conjugaison`, les deux canvas du français. Le
+     coach y répondait en n'affichant rien, sans une erreur, sans une trace.
+
+     ⚠️ Personne ne l'avait vu parce qu'aucun item de banque de français ne porte
+     encore de dessin (vérifié : zéro `canvas:` dans les banques de français).
+     Le jour où l'on en ajoute un — et c'est prévu, la phrase se dessine dans les
+     vingt fiches —, la question se serait affichée sans son dessin.
+
+     On délègue donc le reste à `CanvasRenderer`, qui est la liste complète et
+     qui rend `null` de lui-même pour un `kind` inconnu. Les branches au-dessus
+     restent : elles portent des réglages propres au coach. */
+  return <CanvasRenderer figure={canvas} />;
 }
 
 function normalizeClasse(value: string | null): Classe {

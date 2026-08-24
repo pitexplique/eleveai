@@ -4,8 +4,21 @@
     {
       "name": "eleveai",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 3000,
+      "autoPort": true
+    },
+    {
+      "name": "eleveai-2",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev:2"
+      ],
+      "port": 3100,
       "autoPort": true
     }
   ]

@@ -15,6 +15,9 @@
 
 # next.js
 /.next/
+# Le dossier du SECOND serveur de dev (NEXT_DIST_DIR) : deux postes
+# travaillent sur ce depot en meme temps et ne doivent pas se marcher dessus.
+/.next-*/
 /out/
 
 # production
