@@ -42,6 +42,7 @@
 //    intention déduite ne peut pas produire un outil qui n'existe pas encore.
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { track } from "@vercel/analytics";
@@ -736,6 +737,36 @@ export default function EntreeMatrice({
    */
   const intituleClasse =
     classe === "adulte" ? "Le niveau" : (role ? INTITULE_CLASSE[role] : null) ?? "La classe";
+
+  /**
+   * ⭐ QUI DEMANDE, ET SUR QUOI — relu dans la barre de rappel (24/08/2026).
+   *
+   * Frédéric : « il faut rajouter élève ou prof - matière - texte ». La barre
+   * ne rendait que la phrase tapée, et une phrase seule ne dit pas dans quel
+   * monde on l'a lue : « les fractions » n'a pas la même réponse selon qu'on
+   * est un élève de 5ᵉ ou un enseignant de CM2. Les trois rangées du dessus
+   * portent déjà l'information, mais en pastilles — c'est-à-dire à relire, et
+   * en levant les yeux. Ici, elle est posée dans la même ligne que la demande.
+   *
+   * ⚠️ RIEN DE NEUF N'EST CALCULÉ : `role`, `classe` et `matiereChoisie` sont
+   * les trois états que les pastilles allument déjà. La barre les REDIT, elle
+   * ne les devine pas.
+   * ⛔ « ÉLÈVE · ADULTE » NE SE DIT PAS. Un adulte-apprenant a `role: "eleve"`
+   * (voir roleDuProfil) et `classe: "adulte"` : la concaténation naïve produit
+   * exactement la faute que `labelClasseAdulte` et « en Adulte » ont déjà
+   * coûtée deux fois. Quand la classe EST « Adulte », elle parle pour les deux.
+   * ⚠️ La MATIÈRE est celle du bouton allumé, pas celle que le moteur a
+   * devinée : ce que la barre affiche doit se retrouver à l'écran, en jaune,
+   * dans la rangée du dessus. Ce que le moteur a lu vit dans « Ce que j'ai
+   * compris », plus bas, et c'est une autre phrase.
+   */
+  const contexteDemande = [
+    classe === "adulte" ? null : ROLES.find((r) => r.id === role)?.label ?? null,
+    classe ? getProfil(classe).label : null,
+    matiereChoisie,
+  ]
+    .filter(Boolean)
+    .join(" · ");
 
   const lancer = useCallback(
     (
@@ -1494,17 +1525,65 @@ export default function EntreeMatrice({
             aria-live="polite"
             className="mt-3 flex items-start gap-3 rounded-2xl bg-[#1d1c16] px-4 py-2.5 text-[13px] text-[#f5fafb]"
           >
+            {/* ⭐ TI MARGO PORTE LA BARRE (Frédéric, 24/08/2026 : « plus icône
+                margouillat »). C'est la mascotte du site, et c'est ici qu'elle
+                sert à quelque chose : elle signe la réponse. Une barre noire
+                sans visage est un bandeau système ; avec lui, c'est quelqu'un
+                qui répond.
+                ⚠️ `ti-margo-112.webp` (4,8 Ko) ET NON `ti-margo.png` (163 Ko
+                pour un dessin de 32 px), avec `unoptimized` — le même choix,
+                pour la même raison, que le bandeau du coach : l'image naît au
+                moment où l'on valide, donc elle se télécharge à cet instant
+                précis. Le vrai dessin au prix d'un émoji.
+                ⚠️ `alt=""` : le texte à côté dit tout, et un `role="status"`
+                qui annoncerait « Ti Margo, le margouillat d'EleveAI » AVANT la
+                demande ferait perdre l'information à ceux qui écoutent. */}
+            <Image
+              src="/cahier-vacances/ti-margo-112.webp"
+              alt=""
+              width={90}
+              height={112}
+              unoptimized
+              // ⚠️ `eager` ET NON LE `lazy` PAR DÉFAUT, et ça ne coûte rien au
+              // premier écran : cette balise N'EXISTE PAS tant qu'on n'a pas
+              // validé. Elle naît déjà dans le champ de vision, à l'instant
+              // précis où l'on attend une réponse — la faire attendre un
+              // deuxième aller-retour d'observateur, c'est la faire apparaître
+              // après la barre qui la contient.
+              loading="eager"
+              aria-hidden="true"
+              className="mt-0.5 h-8 w-auto shrink-0"
+            />
             <div className="min-w-0 flex-1">
+              {/* ⚠️ LE CONTEXTE EN GRAS, LA PHRASE EN CLAIR. Ce sont deux
+                  natures : à gauche ce que la personne a CLIQUÉ (et qui est
+                  encore allumé au-dessus), à droite ce qu'elle a ÉCRIT. Une
+                  seule graisse pour les deux, et la ligne redevient la liste
+                  indifférenciée que « Ce que j'ai compris » est déjà. */}
               <p className="line-clamp-2" title={demande}>
-                {tutoie ? "Ta demande" : "Votre demande"} : «&nbsp;{demande}&nbsp;»
+                {contexteDemande && (
+                  <span className="font-semibold">{contexteDemande} · </span>
+                )}
+                «&nbsp;{demande}&nbsp;»
               </p>
-              <p className="mt-0.5 flex items-center gap-1.5 text-[#f5fafb]/75">
-                <span aria-hidden="true" className="shrink-0 text-sm leading-none">
-                  ↓
-                </span>
-                {tutoie
-                  ? "Regarde ce qu'on te propose en dessous."
-                  : "Voici ce qu'on vous propose en dessous."}
+              {/* ⚠️ LA FLÈCHE EST DANS LE TEXTE, PAS À CÔTÉ. Elle vivait dans un
+                  `flex` avec la phrase : deux éléments, donc deux boîtes, donc
+                  une rupture de ligne possible entre le « ↓ » et ce qu'il
+                  désigne — une flèche seule sur sa ligne ne montre plus rien.
+                  Collée par une espace insécable, elle ne peut plus se
+                  détacher. */}
+              {/* ⚠️ « Voici ce qu'on te propose. » ET NON « Regarde ce qu'on te
+                  propose en dessous. » — mesuré, pas raccourci par goût. La
+                  version longue faisait 41 signes, soit 265 px, dans les 278 px
+                  qui restent à 375 une fois le margouillat et la croix
+                  déduits : elle passait à la ligne, et la barre montait à
+                  100 px. Cent pixels au-dessus des cartes, c'est reprendre d'une
+                  main ce que toute cette barre essaie de gagner de l'autre. La
+                  flèche dit déjà « en dessous » ; les trois mots qui la
+                  répétaient coûtaient une ligne entière.
+                  ⚠️ `text-xs` : c'est la ligne de service, pas la réponse. */}
+              <p className="mt-0.5 text-xs text-[#f5fafb]/75">
+                ↓&nbsp;{tutoie ? "Voici ce qu'on te propose." : "Voici ce qu'on vous propose."}
               </p>
             </div>
             <button
