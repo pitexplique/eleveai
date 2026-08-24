@@ -20,7 +20,7 @@ méthode porte son dessin. Les exemples corrigés, eux, sont déjà dessinés pa
 
 **Avancement : 5 fiches sur 18 (36 dessins sur 105).**
 
-⚠️ **DEUX PDF RESTENT À REFAIRE** — l'autre session occupait le serveur de
+⚠️ **QUATRE PDF RESTENT À REFAIRE** — l'autre session occupait le serveur de
 développement, et un PDF ne se fabrique qu'en rendant la page. À passer dès que
 la machine est libre, puis `npm run verifier:pdf` :
 
@@ -31,7 +31,7 @@ npm run build:fiches-pdf -- http://localhost:3000 /fiches-cours/maths/6e/triangl
 npm run build:fiches-pdf -- http://localhost:3000 /fiches-cours/maths/6e/quadrilatere-figure
 ```
 
-Il reste aussi, sur ces deux fiches, la mesure **sur la page** aux trois
+Il reste aussi, sur ces quatre fiches, la mesure **sur la page** aux trois
 largeurs. Les dessins sont passés à `apercu-canvas.mjs` (hors du site, sans
 serveur) : c'est nécessaire, ce n'est pas suffisant — voir le piège n° 1
 ci-dessous.
