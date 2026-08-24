@@ -1458,40 +1458,71 @@ export default function EntreeMatrice({
             de gagner. Deux lignes, et le `title` porte le reste.
             ⚠️ `rounded-2xl` et non `rounded-full` : à 13 px sur une ligne les
             deux sont indiscernables (rayon 15 px contre 16), mais sur deux
-            lignes une pastille pleinement ronde devient un ovale. */}
+            lignes une pastille pleinement ronde devient un ovale.
+
+            ── ⭐ 24/08/2026, SECONDE PASSE : NOIR PLEIN, ET UNE FLÈCHE ─────────
+            Frédéric, devant la première version : « je le mettrai juste en
+            dessous du champ texte en fond noir et écriture blanche », et « il
+            manque, avec une icône, les cards en dessous qu'on te propose ».
+
+            Ce que la pastille teal ratait. Elle était bordée, claire, centrée —
+            c'est-à-dire de la même famille visuelle que les DIX pastilles
+            posées au-dessus et en dessous d'elle (rôles, classes, matières,
+            chips). Un accusé de réception qui ressemble à un bouton ne se lit
+            pas comme un accusé de réception : l'œil, qui vient de parcourir
+            trois rangées de pastilles, saute la onzième. Le noir plein est la
+            SEULE valeur de la page qui n'apparaisse nulle part ailleurs dans ce
+            bloc — c'est ce qui la fait voir sans qu'on ait à l'agrandir.
+
+            ⚠️ ET LA FLÈCHE FAIT LE TRAVAIL QUE LE TEXTE SEUL NE FAISAIT PAS.
+            Dire « voici ta demande » confirme la réception ; ça ne dit toujours
+            pas que quelque chose a bougé PLUS BAS — et c'était la plainte
+            d'origine, mot pour mot : « les cards bougent mais ça ne se voit
+            pas ». Le « ↓ » et sa phrase désignent l'endroit où regarder. C'est
+            la moitié qui manquait.
+
+            ⚠️ PLEINE LARGEUR, PLUS CENTRÉE. Une ligne centrée sous un champ de
+            1000 px flotte au milieu de rien ; une barre qui prend la largeur du
+            champ se lit comme sa continuation — donc comme sa réponse.
+            ⚠️ UNE SEULE GAMME POUR LES DEUX VARIANTES. `#1d1c16` sur `#f5fafb`,
+            ce sont l'encre et le papier du journal : la barre est déjà chez elle
+            dans la variante « accueil », et c'est la couleur que Frédéric a
+            demandée pour la variante « page ». Rien à dédoubler ici. */}
         {demande && (
           <div
             role="status"
             aria-live="polite"
-            className="mt-3 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[13px]"
+            className="mt-3 flex items-start gap-3 rounded-2xl bg-[#1d1c16] px-4 py-2.5 text-[13px] text-[#f5fafb]"
           >
-            <span className={surAccueil ? "text-[#1d1c16]/70" : "text-slate-500"}>
-              {tutoie ? "Ta demande" : "Votre demande"} :
-            </span>
-            <span
-              className={`inline-flex min-w-0 max-w-full items-center gap-2 rounded-2xl px-3 py-1 ${
-                surAccueil
-                  ? "border-2 border-[#0e7490] bg-[#0e7490]/10 text-[#1d1c16]"
-                  : "border border-teal-700 bg-teal-50 text-teal-900"
-              }`}
+            <div className="min-w-0 flex-1">
+              <p className="line-clamp-2" title={demande}>
+                {tutoie ? "Ta demande" : "Votre demande"} : «&nbsp;{demande}&nbsp;»
+              </p>
+              <p className="mt-0.5 flex items-center gap-1.5 text-[#f5fafb]/75">
+                <span aria-hidden="true" className="shrink-0 text-sm leading-none">
+                  ↓
+                </span>
+                {tutoie
+                  ? "Regarde ce qu'on te propose en dessous."
+                  : "Voici ce qu'on vous propose en dessous."}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={effacerDemande}
+              aria-label="Effacer la demande"
+              title="Effacer la demande"
+              // ⚠️ LA CIBLE, PAS LE GLYPHE. Le « ✕ » mesure 10 × 13 px : au
+              // doigt, on le rate. Le rembourrage lui donne 26 × 25, et la
+              // marge négative reprend exactement ce que ce rembourrage a pris —
+              // la croix reste collée au bord de la barre, la barre ne bouge
+              // pas d'un pixel. `-mt-1` recentre le glyphe sur la première
+              // ligne : sans lui il tombe 2,5 px trop bas, ce qui se voit sur
+              // une barre à deux lignes.
+              className="-mr-2 -mt-1 shrink-0 px-2 py-1.5 leading-none text-[#f5fafb]/60 transition hover:text-[#f5fafb]"
             >
-              <span className="line-clamp-2 min-w-0" title={demande}>
-                «&nbsp;{demande}&nbsp;»
-              </span>
-              <button
-                type="button"
-                onClick={effacerDemande}
-                aria-label="Effacer la demande"
-                title="Effacer la demande"
-                className={`shrink-0 leading-none transition ${
-                  surAccueil
-                    ? "text-[#1d1c16]/50 hover:text-[#1d1c16]"
-                    : "text-teal-700/60 hover:text-teal-900"
-                }`}
-              >
-                <span aria-hidden="true">✕</span>
-              </button>
-            </span>
+              <span aria-hidden="true">✕</span>
+            </button>
           </div>
         )}
 
