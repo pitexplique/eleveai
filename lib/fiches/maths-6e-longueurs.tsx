@@ -33,12 +33,16 @@ const regleMesure = (
       kind: "number_line",
       min: 0,
       max: 12,
-      step: 1,
+      // ⚠️ MESURÉ LE 24/08 : à `step: 1`, treize nombres sur 320 px de viewBox
+      // rendaient 10,3 px sur un téléphone. Une graduation tous les 2 — les
+      // POINTS, eux, restent posés à la valeur exacte.
+      step: 2,
       points: [
         { value: 0, label: "0", color: "#64748b" },
         { value: 8, label: "8 cm", color: "#0ea5e9" },
       ],
       display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true, showZero: true },
+      size: { width: 260, height: 95 },
     }}
   />
 );
@@ -87,6 +91,139 @@ const barreRuban = (
   />
 );
 
+// ─── Les six dessins des blocs ────────────────────────────────────────────────
+// ⭐ LE TABLEAU DE CONVERSION SERT DÉJÀ DEUX FOIS, et il est la tentation de
+// cette fiche : tout y passerait. Il ne revient qu'une fois, sur l'étape de
+// méthode dont le geste EST de compter des colonnes. Ailleurs, on montre ce
+// qu'un tableau ne montre pas : à quoi sert chaque unité, ce que « dix fois plus
+// petit » veut dire en longueur, et pourquoi deux nombres ne se comparent pas
+// tant qu'ils ne sont pas dans la même unité (REGLES.md § 2 bis).
+
+/** Un dessin et sa phrase, sous lui. */
+const legende = (dessin: React.ReactNode, texte: string) => (
+  <div>
+    {dessin}
+    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+  </div>
+);
+
+// CHOISIR L'UNITÉ, C'EST CHOISIR L'OBJET. Le tableau de conversion aligne sept
+// colonnes sans dire à quoi elles servent ; celui-ci associe chaque unité à une
+// chose qu'un élève de 6e a déjà tenue dans la main.
+const aQuoiSertChaqueUnite = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Quelle unité pour quoi ?",
+      headers: ["Unité", "Pour mesurer"],
+      rows: [
+        { values: ["mm", "l'épaisseur d'une pièce"] },
+        { values: ["cm", "un crayon"] },
+        { values: ["m", "une salle de classe"] },
+        { values: ["km", "deux villes"] },
+      ],
+      highlight: { col: 1 },
+    }}
+  />
+);
+
+// ⭐ « DIX FOIS PLUS PETIT », EN LONGUEUR. Le tableau fait glisser des chiffres
+// de colonne en colonne ; la barre montre ce que ce glissement VEUT DIRE — un
+// mètre, ce sont dix décimètres mis bout à bout.
+const leMetreEnDixMorceaux = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      // ⚠️ DEUX PARTS, PAS DIX. Première version : dix parts de 1 dm. Mesuré au
+      // rendu, chacune faisait 20 px de large et les étiquettes sortaient du
+      // cadre. Un dixième MONTRÉ contre le reste dit la même chose, en lisible.
+      title: "1 dm dans 1 m",
+      total: "1 m",
+      parts: [
+        { label: "1 dm", value: "1", color: "#f59e0b" },
+        { label: "les 9 autres", value: "9", color: "#0ea5e9" },
+      ],
+      questionLabel: "1 dm, c'est un dixième du mètre",
+      // ⚠️ Largeur sous 245, hauteur à 190 (§ 2 quater).
+      size: { width: 240, height: 190 },
+    }}
+  />
+);
+
+// ⭐ POURQUOI ON NE COMPARE PAS DIRECTEMENT. Sur une droite graduée en
+// centimètres, 150 et 140 se rangent tout seuls — mais il a fallu écrire 1,5 m
+// en centimètres AVANT de pouvoir les y poser. C'est tout l'objet de la
+// propriété, et aucun tableau ne le montre.
+const comparerDansLaMemeUnite = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min: 100,
+      max: 200,
+      step: 25,
+      points: [
+        { value: 140, label: "140 cm", color: "#dc2626" },
+        { value: 150, label: "1,5 m", color: "#16a34a" },
+      ],
+      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
+      size: { width: 280, height: 95 },
+    }}
+  />,
+  "1,5 m vaut 150 cm : il dépasse 140 cm"
+);
+
+// REPÉRER, C'EST VOIR QUE LES UNITÉS NE SONT PAS LES MÊMES. Le seul dessin de la
+// fiche où il n'y a rien à calculer : on constate le mélange, c'est tout.
+const lesUnitesMelangees = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "L'énoncé, avant tout calcul",
+      headers: ["Ce qui est écrit", "Son unité"],
+      rows: [
+        { values: ["2 m", "des mètres"] },
+        { values: ["30 cm", "des centimètres"] },
+      ],
+      highlight: { col: 1 },
+      caption: "Deux unités différentes : on ne peut pas encore additionner.",
+    }}
+  />
+);
+
+// LE TABLEAU, ET SEULEMENT ICI. Convertir, c'est compter des colonnes : c'est le
+// bloc dont le geste est exactement celui-là.
+const convertirEnColonnes = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "2 m en centimètres",
+      headers: ["km", "hm", "dam", "m", "dm", "cm", "mm"],
+      rows: [{ label: "2 m", values: ["", "", "", "2", "0", "0", ""] }],
+      highlight: { cell: { row: 0, col: 5 } },
+      caption: "Deux colonnes à droite : 2 m = 200 cm.",
+    }}
+  />
+);
+
+// UNE FOIS TOUT EN CENTIMÈTRES, LE CALCUL EST UNE ADDITION ORDINAIRE. La barre
+// remet les deux longueurs bout à bout — et l'unité, elle, ne se calcule pas :
+// elle s'écrit dans la réponse.
+const additionnerEnCentimetres = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      title: "2 m et 30 cm",
+      total: "230 cm",
+      parts: [
+        { label: "2 m", value: "200", color: "#0ea5e9" },
+        { label: "30 cm", value: "30", color: "#f59e0b" },
+      ],
+      questionLabel: "200 + 30 = 230 cm",
+      size: { width: 240, height: 190 },
+    }}
+  />
+);
+
 export const ficheLongueurs6e: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
@@ -113,16 +250,19 @@ export const ficheLongueurs6e: FicheCoursData = {
       titre: "Les unités, du mm au km",
       texte:
         "Du plus petit au plus grand : millimètre (mm), centimètre (cm), décimètre (dm), mètre (m), décamètre (dam), hectomètre (hm), kilomètre (km). On choisit l'unité adaptée : mm pour l'épaisseur d'une pièce, cm pour un crayon, m pour une salle, km pour la distance entre deux villes.",
+      schema: aQuoiSertChaqueUnite,
     },
     {
       titre: "Le tableau de conversion",
       texte:
         "Chaque unité vaut 10 fois l'unité juste plus petite. Pour convertir, on multiplie par 10 à chaque colonne vers la droite (unité plus petite), on divise par 10 à chaque colonne vers la gauche (unité plus grande). Exemple : 2 m = 200 cm et 300 cm = 3 m.",
+      schema: leMetreEnDixMorceaux,
     },
     {
       titre: "Comparer des longueurs",
       texte:
         "On ne peut comparer deux longueurs que dans la même unité. On convertit d'abord, puis on compare les nombres. Exemple : 1,5 m = 150 cm, donc 1,5 m est plus grand que 140 cm.",
+      schema: comparerDansLaMemeUnite,
     },
   ],
   reel: {
@@ -144,16 +284,19 @@ export const ficheLongueurs6e: FicheCoursData = {
       titre: "Repérer",
       texte:
         "On lit les longueurs données dans l'énoncé et on regarde bien leurs unités. Sont-elles toutes les mêmes ?",
+      schema: lesUnitesMelangees,
     },
     {
       titre: "Convertir",
       texte:
         "Si les unités sont différentes, on met tout dans la même unité : on multiplie vers une unité plus petite, on divise vers une plus grande.",
+      schema: convertirEnColonnes,
     },
     {
       titre: "Calculer",
       texte:
         "Une fois dans la même unité, on peut comparer, additionner ou soustraire les longueurs. On n'oublie pas l'unité dans la réponse.",
+      schema: additionnerEnCentimetres,
     },
   ],
   usages: [
