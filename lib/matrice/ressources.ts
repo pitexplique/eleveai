@@ -1158,6 +1158,51 @@ export const RESSOURCES: RessourceEleveAI[] = [
     statut: "validee",
   },
   {
+    // ⭐ 24/08/2026 — LES SEIZE FICHES D'IA ENTRENT ENFIN.
+    //
+    // Elles avaient été retirées le 16/08 avec les collections incomplètes du
+    // CM2, de la 5ᵉ et de la 4ᵉ (« fiches de cours pas complète, c'est un autre
+    // chantier »). Elles n'avaient rien à y faire : ce sont les SEULES du site à
+    // être complètes depuis le début — seize fiches sur les seize compétences du
+    // référentiel Pix, en trois parties, et elles ont même leur livre en PDF et
+    // en EPUB (/fiches-cours/ia/livre). Elles ont payé pour les autres.
+    //
+    // ✅ VÉRIFIÉ AVANT D'ÉCRIRE « EXERCICES CORRIGÉS » : lib/fiches-ia.ts porte
+    // 49 champs `correction` dans ses blocs d'entraînement. La promesse tient,
+    // comme pour les fiches de maths et de français.
+    //
+    // ⚠️ ET ICI « prof » ET « parent » SONT LÉGITIMES DANS `niveaux` — ce qui
+    // contredit en apparence la règle posée ce matin. La distinction est nette,
+    // et c'est elle qu'il faut retenir : une étiquette de RÔLE est fausse sur
+    // une ressource attachée à UNE CLASSE (la fiche de 6ᵉ servie au parent d'un
+    // CP), elle est juste sur une ressource qui n'en a pas. L'IA n'est pas
+    // rangée par classe — sa banque est en A1→C1, comme l'anglais et l'espagnol
+    // — donc un enseignant ou un parent y a droit quelle que soit l'année dont
+    // il parle. C'est exactement la liste de `coach-ia`, recopiée sciemment.
+    //
+    // ⏳ PAS ENCORE DE PDF : le bouton de ces fiches-là appelle toujours
+    // `window.print()` (FicheCoursIa.tsx, un autre composant). La carte ne
+    // promet donc pas de fichier — elle promet un cours et des exercices
+    // corrigés, ce qui est vrai à l'écran. À rebrancher quand le second
+    // composant recevra le même traitement que le premier.
+    id: "fiches-ia",
+    titre: "L'IA — cours et exercices corrigés",
+    promesse: "Seize fiches pour comprendre l'IA, de son fonctionnement à ses enjeux.",
+    url: "/fiches-cours/ia",
+    niveaux: [
+      "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale",
+      "prof", "parent",
+    ],
+    matiere: "ia",
+    notions: ["ia"],
+    // ⚠️ « comprendre » SEUL, comme les autres fiches — et non « decouvrir » que
+    // porte le coach d'IA. Une fiche se lit pour comprendre ; découvrir, c'est
+    // le geste de la machine et de la chaîne, pas celui d'une feuille A4.
+    intentions: ["comprendre"],
+    type: "fiche",
+    statut: "validee",
+  },
+  {
     // ⛔ ÉTEINTE LE 23/08/2026 — ELLE PROMETTAIT UNE CLASSE QUI N'EXISTE PLUS.
     // Les cinq fiches de 3ᵉ ont été retirées le 21/08 (« on éteint toute la 4e
     // et la 3e, on repart au propre ») et next.config.js redirige leurs cinq
