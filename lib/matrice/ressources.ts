@@ -998,6 +998,19 @@ export const RESSOURCES: RessourceEleveAI[] = [
   // trou n'en conclut pas que la fiche manque, il en conclut que le site ment.
   // ⛔ NE PAS LES REMETTRE avant que le chantier des fiches soit tranché.
   //
+  // ── ⚠️ 24/08/2026 — LEUR PLACE SUR UN CLIC DE MATIÈRE NE SE JOUE PAS ICI ────
+  // Ces entrées vivent tout en bas du fichier, dans la dernière section — et
+  // l'ordre du fichier est ce qui départage deux ressources à score égal
+  // (moteur.ts, le tri de `candidates`). Sur « 6ᵉ » + « Mathématiques », six
+  // ressources étaient à 8 points pour trois places : la fiche sortait de
+  // l'écran, non pas jugée moins utile, mais écrite plus tard que les autres.
+  // ⛔ NE PAS « CORRIGER » EN LES REMONTANT AU-DESSUS DES GUIDES. Les sections
+  // de ce fichier rangent les ressources par INTENTION (les échéances, les
+  // guides, les rituels, comprendre une notion) — ce n'est pas un classement,
+  // et le devenir ferait mentir les six titres de section. Le point qui les
+  // fait passer devant le guide et le cahier est posé dans moteur.ts, § 3 bis,
+  // avec sa mesure et sa raison.
+  //
   // ── ⭐ 23/08/2026 — LA 6ᵉ EST TRANCHÉE, ET IL Y AVAIT UN 404 DESSOUS ────────
   // Frédéric : « dans ressources.ts il faut rajouter pour 6e fiche de cours
   // maths et français, elles sont produites ce matin, pour les élèves, profs et

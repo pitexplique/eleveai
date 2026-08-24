@@ -353,6 +353,39 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
     // elle gagnait d'un point, celui de « déjà utilisée en classe ».
     if (matiereVoulue && r.matiere === matiereVoulue) score += 2;
 
+    // ── 3 bis. LA FICHE DE COURS SURVIT AU CLIC SUR UNE MATIÈRE (24/08/2026).
+    //
+    // Frédéric : « si je clique sur maths, "6e maths — exercices corrigés"
+    // disparaît, pareil pour français, et donc sans doute pour la 5e ».
+    // C'était vrai, et voici POURQUOI — mesuré, pas supposé.
+    //
+    // Un élève de 6ᵉ qui n'a rien cliqué reçoit les six portes écrites de sa
+    // classe (PORTES_6E), et les deux fiches y sont nommées en 4ᵉ et 5ᵉ. Dès
+    // qu'il clique « Mathématiques », les portes se taisent — c'est la règle du
+    // 16/08, cliquer une matière EST une demande — et le score reprend la main
+    // seul. Or à ce moment-là PERSONNE n'a d'intention ni de notion à faire
+    // valoir : tout ce qui est au bon niveau dans la bonne matière tombe sur le
+    // même score. En 6ᵉ maths, ils étaient SIX à 8 points pour trois places, et
+    // c'est l'ordre du fichier qui tranchait — c'est-à-dire l'ordre des
+    // SECTIONS de ressources.ts (les échéances, puis les guides, puis les
+    // cahiers, et « Comprendre une notion » tout en bas). La fiche ne perdait
+    // pas un arbitrage : elle perdait la date à laquelle elle a été écrite.
+    //
+    // Le classement, lui, est déjà tranché — c'est celui des raccourcis du
+    // 23/08 : le concours (il expire), PUIS les fiches (« c'est une forte
+    // demande des élèves »), PUIS le guide, PUIS les cahiers. Ce point le dit
+    // au score, là où il ne pouvait pas se deviner.
+    //
+    // ⚠️ UN SEUL POINT, ET C'EST UN PLAFOND CHOISI. À +2 la fiche passerait
+    // devant le coach (9 points), et « coach toujours en 1er » (Frédéric,
+    // 16/08) est une décision qui tient. À +1 elle le REJOINT, et l'ordre du
+    // fichier les départage dans le bon sens — le coach est écrit en premier.
+    // ⚠️ SEULEMENT SUR UNE MATIÈRE CLIQUÉE, jamais sur une matière DEVINÉE
+    // d'après la phrase : quand une notion est reconnue, elle vaut 5 points et
+    // c'est elle qui doit décider. Ce point-ci ne règle qu'un cas, celui où
+    // l'on n'a dit que sa classe et sa matière.
+    if (matiereChip && r.type === "fiche") score += 1;
+
     // ── 4. La notion. Si on en a lu une, on écarte ce qui parle d'autre chose.
     const generique = r.notions.includes("*");
     const notionOk = Boolean(notion && r.notions.includes(notion.id));
