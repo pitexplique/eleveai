@@ -75,6 +75,165 @@ const graphLoisirs = (
   />
 );
 
+// ─── Les sept dessins des blocs ───────────────────────────────────────────────
+// ⭐ CETTE FICHE PARLE DE TROIS REPRÉSENTATIONS : les répéter est inévitable, les
+// répéter POUR LA MÊME CHOSE ne l'est pas (REGLES.md § 2 bis). Chaque dessin ci-
+// dessous dit quelque chose qu'aucun autre ne dit : la structure du tableau, le
+// titre qui donne l'unité, le plus haut bâton, le bâton qu'on CHERCHE (et qui
+// n'est pas le plus haut), le demi-disque, l'écart devenu une longueur, et deux
+// barres presque égales que seul le nombre départage.
+
+/** Un dessin et sa phrase, sous lui. */
+const legende = (dessin: React.ReactNode, texte: string) => (
+  <div>
+    {dessin}
+    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+  </div>
+);
+
+// LA STRUCTURE DU TABLEAU. Des lignes nommées, des colonnes nommées, et la
+// valeur au croisement des deux. Les communes sont celles du coach (La Réunion).
+const tableauTransports = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      headers: ["Bus", "Voiture"],
+      rows: [
+        { label: "Le Tampon", values: [12, 8] },
+        { label: "Saint-Pierre", values: [9, 14] },
+      ],
+      highlight: { cell: { row: 0, col: 0 } },
+      questionLabel: "Ligne « Le Tampon » × colonne « Bus » = 12.",
+    }}
+  />
+);
+
+// LE TITRE FAIT LE SENS. Sans lui, « 24 » ne veut rien dire — 24 quoi ? C'est
+// tout l'objet de la première étape de méthode, et c'est le seul dessin de la
+// fiche dont le sujet n'est pas un nombre mais les MOTS qui l'entourent.
+const tableauTemperatures = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Températures de la semaine (°C)",
+      headers: ["Lun", "Mar", "Mer", "Jeu"],
+      rows: [{ label: "Midi", values: [24, 27, 22, 26] }],
+      highlight: { row: 0 },
+      questionLabel: "Sans le titre, 24 ne veut rien dire : 24 quoi ?",
+    }}
+  />
+);
+
+// LE PLUS HAUT SE VOIT SANS COMPTER. Des bâtons, pas des barres : la fiche
+// montre déjà des barres à l'exemple 2, et deux dessins jumeaux, c'est une
+// règle de moins.
+const batonsFruits = (
+  <CanvasRenderer
+    figure={{
+      kind: "stat_graph",
+      graphType: "batons",
+      title: "Fruits vendus le matin",
+      data: [
+        { label: "Pomme", value: 7 },
+        { label: "Banane", value: 15 },
+        { label: "Kiwi", value: 4 },
+      ],
+      display: { showValues: true, showLabels: true, highlightIndex: 1 },
+      // ⚠️ MESURÉ, PAS ESTIMÉ. `StatGraphCanvas` écrit ses étiquettes en 12 px
+      // dans un viewBox fixe : à 300 de large, elles tombent à 8,7 px dans une
+      // carte de propriété de 225. Le cadre serré à 230 les rend à 11,7.
+      size: { width: 230, height: 190 },
+    }}
+  />
+);
+
+// ⭐ CE N'EST PAS LE PLUS HAUT QU'ON CHERCHE. Le même graphique, mais c'est le
+// bâton de SA catégorie qui est allumé — le kiwi, le plus petit. Repérer n'est
+// pas comparer : la carte d'à côté dit le contraire, et c'est voulu.
+const batonKiwiCherche = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "stat_graph",
+      graphType: "batons",
+      title: "Fruits vendus le matin",
+      data: [
+        { label: "Pomme", value: 7 },
+        { label: "Banane", value: 15 },
+        { label: "Kiwi", value: 4 },
+      ],
+      display: { showValues: true, showLabels: true, highlightIndex: 2 },
+      size: { width: 230, height: 190 },
+    }}
+  />,
+  "on cherche le kiwi : c'est SON bâton qu'on lit, pas le plus haut"
+);
+
+// LA MOITIÉ DU DISQUE. Le camembert de la figure montre « des parts » ; celui-ci
+// montre LA moitié — 10 sur 20, et le secteur occupe exactement la moitié du
+// tour. C'est la phrase de la propriété, dessinée.
+const camembertMoitie = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "stat_graph",
+      graphType: "camembert",
+      title: "Trajet du matin (20 élèves)",
+      data: [
+        { label: "Bus", value: 10 },
+        { label: "À pied", value: 5 },
+        { label: "Voiture", value: 5 },
+      ],
+      display: { showValues: true, showLabels: true, highlightIndex: 0 },
+      // Le camembert porte ses noms de secteurs AUTOUR du disque : il lui faut
+      // un cadre encore plus serré que les bâtons pour tenir les 11 px.
+      size: { width: 210, height: 190 },
+    }}
+  />,
+  "le bus prend la moitié du disque : 10 élèves sur 20"
+);
+
+// L'ÉCART EST UNE LONGUEUR. Aucun graphique ne montre une soustraction : la
+// hauteur d'un bâton dit une valeur, jamais une différence. Mis bout à bout, les
+// 9 de la lecture et les 7 qui manquent font les 16 du sport — et l'écart, lui,
+// se voit.
+const ecartEnBarre = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      // ⚠️ Au-delà de ~28 caractères, le titre déborde du cadre, en silence.
+      title: "Sport 16, lecture 9",
+      total: "16",
+      parts: [
+        { label: "lecture", value: "9" },
+        { label: "l'écart", value: "7" },
+      ],
+      questionLabel: "16 − 9 = 7 : voilà l'écart",
+      // ⚠️ 175 px collent les étiquettes à la phrase du bas (piège déjà payé
+      // deux fois : périmètres, puis probabilités).
+      size: { width: 300, height: 190 },
+    }}
+  />
+);
+
+// DEUX BARRES QUE L'ŒIL NE DÉPARTAGE PAS. 12 et 11 : à l'œil elles se valent,
+// et c'est exactement le piège n° 2 de cette fiche. Le dessin ne tranche pas —
+// ce sont les nombres écrits dessus qui tranchent.
+const barresPresqueEgales = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "stat_graph",
+      graphType: "barres",
+      title: "Buts marqués",
+      data: [
+        { label: "Équipe A", value: 12 },
+        { label: "Équipe B", value: 11 },
+      ],
+      display: { showValues: true, showLabels: true },
+      size: { width: 230, height: 190 },
+    }}
+  />,
+  "à l'œil, elles se valent — 12 et 11 tranchent"
+);
+
 const pieges = [
   "Se tromper de ligne ou de colonne dans un tableau à double entrée : on doit lire la valeur au croisement de la bonne ligne ET de la bonne colonne.",
   "Se fier seulement à l'impression visuelle : un bâton qui « paraît » plus haut ou un secteur qui « paraît » plus grand ne remplace pas la lecture des vraies valeurs.",
@@ -113,21 +272,25 @@ export const ficheDonnees6e: FicheCoursData = {
       titre: "Le tableau croise lignes et colonnes",
       texte:
         "Un tableau range les données en lignes et en colonnes. Dans un tableau à double entrée, chaque valeur se lit au croisement d'une ligne et d'une colonne : par exemple la ligne « Natation » et la colonne « Filles ».",
+      schema: tableauTransports,
     },
     {
       titre: "Le graphique montre les grandeurs d'un coup d'oeil",
       texte:
         "Dans un graphique en barres, chaque catégorie est un bâton dont la hauteur donne la valeur. Plus le bâton est haut, plus la valeur est grande : on repère très vite le plus grand et le plus petit.",
+      schema: batonsFruits,
     },
     {
       titre: "Le diagramme circulaire montre des parts",
       texte:
         "Un diagramme circulaire partage un disque en secteurs, un par catégorie. Plus un secteur est grand, plus la catégorie est fréquente. Un secteur qui occupe la moitié du disque représente la moitié du total.",
+      schema: camembertMoitie,
     },
     {
       titre: "Comparer, c'est chercher un écart",
       texte:
         "Comparer deux données, c'est regarder laquelle est la plus grande, la plus petite, ou calculer leur écart par une soustraction. Le total, lui, s'obtient en additionnant toutes les valeurs.",
+      schema: ecartEnBarre,
     },
   ],
   reel: {
@@ -143,16 +306,19 @@ export const ficheDonnees6e: FicheCoursData = {
       titre: "Lire le titre et les légendes",
       texte:
         "On commence toujours par lire le titre : il dit de quoi parlent les données. On repère ensuite les catégories et les unités, pour savoir ce que représente chaque nombre.",
+      schema: tableauTemperatures,
     },
     {
       titre: "Repérer la bonne ligne ou la bonne colonne",
       texte:
         "Dans un tableau, on suit la ligne de la catégorie cherchée, puis la bonne colonne. La valeur est à leur croisement. Dans un graphique, on repère le bon bâton ou le bon secteur, puis on lit sa valeur.",
+      schema: batonKiwiCherche,
     },
     {
       titre: "Comparer avant de conclure",
       texte:
         "Une conclusion doit s'appuyer sur des valeurs lues, pas sur une impression. On compare les nombres exacts (le plus grand, le plus petit, l'écart) avant d'affirmer quoi que ce soit.",
+      schema: barresPresqueEgales,
     },
   ],
   usages: [
