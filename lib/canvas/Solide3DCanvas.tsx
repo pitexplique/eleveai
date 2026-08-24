@@ -65,7 +65,13 @@ function Label({
       x={x}
       y={y}
       textAnchor="middle"
-      fontSize="15"
+      // ⚠️ 15 → 19 LE 24/08/2026, ET C'EST UNE MESURE, PAS UN GOÛT. Les cubes
+      // sont projetés depuis une origine FIXE (160, 170) au pas de 32 px : la
+      // largeur du viewBox ne met pas le dessin à l'échelle, elle le ROGNE.
+      // `size.width` ne pouvait donc pas servir à grossir les lettres — seule la
+      // police le peut. À 15 dans un cadre de 340, « 15 cubes unités » tombait à
+      // 9,9 px dans une carte de propriété et à 8,8 dans un bloc d'exemple.
+      fontSize="19"
       fontWeight="900"
       fill={color}
       stroke="white"

@@ -53,12 +53,126 @@ function paveLabelle(
         kind: "solide_3d",
         solide: "pave_droit",
         dimensions: { longueur, largeur, hauteur },
-        labels,
+        // ⚠️ « la base » AU LIEU DE « base rectangulaire ». Le canvas écrit ce
+        // mot au centre de la face du bas ; depuis que ses étiquettes sont en
+        // 19 px, les 18 signes de « base rectangulaire » s'étalent sur 180 px et
+        // touchaient le « l » de la largeur (mesuré). Le mot « rectangulaire »
+        // ne dit rien de plus que le dessin.
+        labels: { aireBase: "la base", ...labels },
         display: { showLabels: true, showDimensions: true },
       }}
     />
   );
 }
+
+// ─── Les six dessins des blocs ────────────────────────────────────────────────
+// ⭐ QUATRE PAVÉS ÉTAIENT DÉJÀ LÀ, TOUS RECTANGULAIRES (4×2×2, 4×2×3, 5×1×3,
+// 2×3×2). En ajouter six autres du même genre aurait fait dix boîtes qui se
+// ressemblent (REGLES.md § 2 bis). Ce qui distingue les six nouveaux : un
+// empilement IRRÉGULIER là où il faut compter, deux solides de MÊME volume et de
+// formes différentes, une soudure visible en L, et un tableau — parce que
+// « cm³ n'est pas cm² » est une affaire d'écriture, pas de solide.
+
+/** Un dessin et sa phrase, sous lui. */
+const legende = (dessin: React.ReactNode, texte: string) => (
+  <div>
+    {dessin}
+    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+  </div>
+);
+
+// ⛔ ON EMPILE, ON NE JUXTAPOSE PAS (§ 2 ter) : deux solides côte à côte dans une
+// carte de 225 px recevraient 110 px chacun.
+const pile = (items: { dessin: React.ReactNode; nom: string }[]) => (
+  <div className="grid grid-cols-1 gap-2">
+    {items.map((it) => (
+      <div key={it.nom}>
+        {it.dessin}
+        <p className="mt-1 text-center text-xs font-black text-slate-700">{it.nom}</p>
+      </div>
+    ))}
+  </div>
+);
+
+/** Un tas de cubes quelconque, décrit case par case. */
+function tas(cubes: Array<{ x: number; y: number; z: number }>) {
+  return (
+    <CanvasRenderer
+      figure={{
+        kind: "solide_3d",
+        solide: "assemblage_cubes",
+        cubes,
+        display: { showLabels: true },
+      }}
+    />
+  );
+}
+
+// DES COUCHES IDENTIQUES, DONC UNE MULTIPLICATION. Trois étages de six cubes :
+// on compte une fois, on multiplie. L'exemple 1 fait 3 couches de 5 — ici c'est
+// 3 couches de 6, et surtout la couche est un RECTANGLE, pas une ligne.
+const troisCouchesDeSix = legende(assemblage(3, 2, 3), "une couche de 6, trois couches : 3 × 6 = 18");
+
+// ⭐ MÊME VOLUME, FORMES DIFFÉRENTES. C'est toute la propriété, et un seul solide
+// ne peut pas la dire : il en faut deux, et il faut qu'ils ne se ressemblent pas.
+const memeVolumeDeuxFormes = pile([
+  { dessin: assemblage(6, 2, 1), nom: "6 × 2 × 1 = 12 cubes" },
+  { dessin: assemblage(3, 2, 2), nom: "3 × 2 × 2 = 12 cubes aussi" },
+]);
+
+// COLLER, C'EST ADDITIONNER. Les deux morceaux sont montrés SÉPARÉS : la somme
+// se fait dans la tête de l'élève, pas dans le dessin. La méthode, plus bas,
+// montrera le résultat soudé.
+const deuxSolidesSepares = pile([
+  { dessin: assemblage(2, 2, 2), nom: "le premier : 8 cubes" },
+  { dessin: assemblage(2, 2, 1), nom: "le second : 4 cubes" },
+]);
+
+// L'UNITÉ EST UNE AFFAIRE D'ÉCRITURE, PAS DE SOLIDE. Aucun empilement ne peut
+// montrer la différence entre cm, cm² et cm³ : c'est le petit chiffre en haut
+// qui la fait. Seul dessin de la fiche sans un seul cube.
+const lesTroisUnites = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Le petit chiffre décide",
+      headers: ["On écrit", "C'est"],
+      rows: [
+        { values: ["cm", "une longueur"] },
+        { values: ["cm²", "une aire"] },
+        { values: ["cm³", "un volume"] },
+      ],
+      highlight: { row: 2 },
+    }}
+  />
+);
+
+// ⭐ CELUI-LÀ NE SE CALCULE PAS : IL SE COMPTE. Neuf cubes au sol, quatre
+// au-dessus — aucune formule ne marche, et deux cubes du fond sont cachés par
+// ceux de devant. C'est exactement le piège n° 2 de la fiche, dessiné.
+const tasIrregulier = legende(
+  tas([
+    ...[0, 1, 2].flatMap((x) => [0, 1, 2].map((y) => ({ x, y, z: 0 }))),
+    { x: 0, y: 0, z: 1 },
+    { x: 1, y: 0, z: 1 },
+    { x: 0, y: 1, z: 1 },
+    { x: 1, y: 1, z: 1 },
+  ]),
+  "9 au sol + 4 dessus = 13 — sans oublier ceux du fond"
+);
+
+// LA SOUDURE SE VOIT. Les deux morceaux de la propriété, recollés : le solide en
+// L n'est plus un pavé, et pourtant son volume est bien 8 + 4.
+const solideRecolleEnL = legende(
+  tas([
+    ...[0, 1].flatMap((x) => [0, 1].flatMap((y) => [0, 1].map((z) => ({ x, y, z })))),
+    { x: 2, y: 0, z: 0 },
+    { x: 2, y: 1, z: 0 },
+    { x: 3, y: 0, z: 0 },
+    { x: 3, y: 1, z: 0 },
+  ]),
+  "collés : 8 + 4 = 12 cubes, aucun n'a disparu"
+);
 
 const pieges = [
   "Confondre cm² (une aire, une surface plate) et cm³ (un volume, de la place en 3 dimensions).",
@@ -73,10 +187,13 @@ const aRetenir = [
 ];
 
 const paveDefinition = assemblage(4, 2, 2);
+// ⚠️ « L », « l », « h » ET NON LES MOTS EN ENTIER : « largeur » chevauchait la
+// mention « base rectangulaire » que le canvas écrit lui-même sous le pavé
+// (mesuré). Les trois lettres sont d'ailleurs celles de la formule.
 const paveFormule = paveLabelle(4, 2, 3, {
-  longueur: "longueur",
-  largeur: "largeur",
-  hauteur: "hauteur",
+  longueur: "L",
+  largeur: "l",
+  hauteur: "h",
 });
 const paveTroisCouches = assemblage(5, 1, 3);
 const paveBoite = assemblage(2, 3, 2);
@@ -107,16 +224,19 @@ export const ficheVolumes6e: FicheCoursData = {
       titre: "Compter les cubes",
       texte:
         "Un solide construit avec des cubes unités a pour volume le nombre total de cubes. Pour un empilement régulier, on compte une couche, puis on multiplie par le nombre de couches. Exemple : 3 couches de 5 cubes, c'est 3 × 5 = 15 cubes.",
+      schema: troisCouchesDeSix,
     },
     {
       titre: "Comparer deux solides",
       texte:
         "Pour comparer deux volumes écrits dans la même unité, on compare simplement les nombres. Deux solides de formes différentes peuvent avoir le même volume : ce qui compte, c'est le nombre de cubes.",
+      schema: memeVolumeDeuxFormes,
     },
     {
       titre: "Assembler des solides",
       texte:
         "Quand on colle deux solides, le volume total est la somme des deux volumes. Et si on coupe un solide en morceaux puis qu'on les recolle, le volume ne change pas : aucun cube n'a disparu.",
+      schema: deuxSolidesSepares,
     },
   ],
   reel: {
@@ -129,7 +249,7 @@ export const ficheVolumes6e: FicheCoursData = {
   },
   formule: {
     contexte: "Pavé droit rempli de cubes unités (les défis de la fiche)",
-    expression: "Volume = longueur × largeur × hauteur",
+    expression: "Volume = L × l × h (longueur × largeur × hauteur)",
     legende: "On compte les cubes d'une couche, puis on multiplie par le nombre de couches.",
     schema: paveFormule,
   },
@@ -138,16 +258,19 @@ export const ficheVolumes6e: FicheCoursData = {
       titre: "Repérer l'unité",
       texte:
         "Le petit 3 signale un volume : cm³, m³. Sans lui, ce n'est pas un volume (cm est une longueur, cm² une aire).",
+      schema: lesTroisUnites,
     },
     {
       titre: "Compter les cubes",
       texte:
         "On compte les cubes unités couche par couche, sans oublier ceux cachés derrière ou en dessous. Couches identiques : on multiplie.",
+      schema: tasIrregulier,
     },
     {
       titre: "Additionner si on assemble",
       texte:
         "Deux solides collés : on additionne leurs volumes. Un solide coupé puis recollé garde le même volume.",
+      schema: solideRecolleEnL,
     },
   ],
   usages: [
