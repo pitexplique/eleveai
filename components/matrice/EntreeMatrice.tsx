@@ -376,7 +376,32 @@ export default function EntreeMatrice({
    */
   const niveauContexte: ProfilId | null = role && ROLES_AVEC_CLASSE.has(role) ? classe : null;
 
+  /**
+   * ⭐ DEUX TEXTES LÀ OÙ IL N'Y EN AVAIT QU'UN (24/08/2026, Frédéric : « on tape
+   * "5e maths", on appuie sur la flèche, les cartes bougent mais ça ne se voit
+   * pas »).
+   *
+   *   • `question` — ce qui est EN TRAIN d'être tapé. Il vit dans le champ, et
+   *     rien d'autre ne le lit.
+   *   • `demande`  — ce qui a été ENVOYÉ et fait encore effet. Il vit sous le
+   *     champ, en toutes lettres, et c'est LUI que les pastilles renvoient au
+   *     moteur quand on clique une matière ou une intention.
+   *
+   * Pourquoi les séparer plutôt que garder le texte dans la barre. La demande
+   * partait bien, le moteur répondait bien — mais la seule chose qui bougeait
+   * était à 600 px plus bas, sous le pli sur un portable : le champ gardait le
+   * texte, la barre ne clignotait pas, et le geste ressemblait à un clic dans le
+   * vide. Vider le champ ET écrire la demande juste en dessous, ce sont les deux
+   * moitiés du même accusé de réception : la première dit « c'est parti », la
+   * seconde dit « voici ce que j'ai reçu ».
+   *
+   * ⚠️ LE CHAMP VIDÉ N'EST PAS UNE DEMANDE OUBLIÉE. Tout ce qui relançait
+   * `lancer(question, …)` relance maintenant `lancer(demande, …)` : cliquer
+   * « Français » après avoir tapé « les fractions » doit toujours chercher les
+   * fractions, sinon vider le champ effacerait la demande pour de bon.
+   */
   const [question, setQuestion] = useState("");
+  const [demande, setDemande] = useState("");
   // Deux sélections à l'écran, UNE SEULE chip dans le vecteur : elles se
   // composent en « Mathématiques · M'entraîner ». Le vecteur reste à trois
   // champs — c'est une règle du produit, pas une contrainte technique.
@@ -436,7 +461,11 @@ export default function EntreeMatrice({
         // seulement remplir le champ.
         const q = new URLSearchParams(window.location.search).get("q");
         if (q) {
-          setQuestion(q);
+          // ⚠️ Dans la LIGNE DE RAPPEL, pas dans le champ : une demande rappelée
+          // est une demande déjà envoyée. La remettre en saisie ferait croire
+          // qu'il reste un geste à faire, et le premier caractère tapé
+          // par-dessus l'aurait effacée.
+          setDemande(q);
           setResultat(chercher({ quiEsTu: id, classe: classeVecteur, question: q, chip: null }));
         } else {
           // Les portes de son niveau, sans avoir rien à taper. Le moteur sait
@@ -904,7 +933,10 @@ export default function EntreeMatrice({
 
       setRole(r);
       setClasse(laClasse);
-      setQuestion(e.question);
+      // Rejouer une ligne du RÉCENT, c'est la renvoyer — pas la remettre en
+      // brouillon. Elle s'affiche donc dans la ligne de rappel, champ vide.
+      setQuestion("");
+      setDemande(e.question);
       setMatiereChoisie(e.matiereLabel ?? null);
       setIntentionChoisie(e.intention ?? null);
       setDemandeProfil(false);
@@ -928,6 +960,7 @@ export default function EntreeMatrice({
   /** Repartir à blanc — la page vide, mais SANS redemander qui l'on est. */
   const nouvelleDemande = useCallback(() => {
     setQuestion("");
+    setDemande("");
     setMatiereChoisie(null);
     setIntentionChoisie(null);
     setPlusDOptions(false);
@@ -978,7 +1011,8 @@ export default function EntreeMatrice({
     if (auMontage) return;
 
     if (questionUrl) {
-      setQuestion(questionUrl);
+      setQuestion("");
+      setDemande(questionUrl);
       if (profil) {
         setResultat(
           chercher({ quiEsTu: profil, classe: classeAdulte, question: questionUrl, chip: null }),
@@ -1009,7 +1043,7 @@ export default function EntreeMatrice({
       // La classe déjà connue reste valable : on ne redemande pas.
       if (classe) {
         memoriser(classe);
-        lancer(question, null, { profil: classe, classe: null });
+        lancer(demande, null, { profil: classe, classe: null });
       } else {
         // La rangée des classes vient de s'ouvrir — c'est elle, la réponse
         // attendue. On n'affiche rien tant qu'elle n'est pas remplie.
@@ -1025,7 +1059,7 @@ export default function EntreeMatrice({
     // secondes plus tôt. Seul le chef d'établissement la met de côté — il n'a
     // pas de rangée pour la montrer, donc il ne doit pas en avoir une cachée
     // qui filtre en silence.
-    lancer(question, null, {
+    lancer(demande, null, {
       profil: id,
       classe: ROLES_AVEC_CLASSE.has(id) ? classe : null,
     });
@@ -1073,10 +1107,10 @@ export default function EntreeMatrice({
     // il verrait « Teste-toi » et perdrait son espace parents.
     if (role === "eleve") {
       memoriser(id);
-      lancer(question, null, { profil: id, classe: null });
+      lancer(demande, null, { profil: id, classe: null });
     } else {
       retenirClasse(id);
-      lancer(question, null, { classe: id });
+      lancer(demande, null, { classe: id });
     }
     champ.current?.focus();
   }
@@ -1088,13 +1122,28 @@ export default function EntreeMatrice({
     // plus exister ici. On la relâche plutôt que de garder un filtre invisible.
     setIntentionChoisie(null);
     setPlusDOptions(false);
-    lancer(question, composerChip(suivante, null));
+    lancer(demande, composerChip(suivante, null));
   }
 
   function cliquerChip(label: string) {
     const suivante = intentionChoisie === label ? null : label;
     setIntentionChoisie(suivante);
-    lancer(question, composerChip(matiereChoisie, suivante));
+    lancer(demande, composerChip(matiereChoisie, suivante));
+  }
+
+  /**
+   * RETIRER LE TEXTE SANS TOUT PERDRE — la croix de la ligne de rappel.
+   *
+   * ⚠️ Ce n'est PAS « Nouvelle demande » : les pastilles allumées restent, et
+   * l'écran retombe sur les portes du niveau au lieu de se vider. On enlève une
+   * phrase, pas un profil — quelqu'un qui a mal formulé sa question n'a pas
+   * changé de classe entre-temps.
+   */
+  function effacerDemande() {
+    setDemande("");
+    setQuestion("");
+    lancer("", chip);
+    champ.current?.focus();
   }
 
   // Sur le journal on emprunte l'encre et le papier de la page ; sur l'accueil
@@ -1331,7 +1380,16 @@ export default function EntreeMatrice({
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            lancer(question, chip);
+            // ⚠️ LE CHAMP VIDE NE VIDE PAS LA DEMANDE. Réappuyer sur la flèche
+            // sans rien avoir tapé, c'est relancer ce qui est déjà envoyé — pas
+            // annuler. La seule façon d'effacer une demande est la croix de la
+            // ligne de rappel, ou « Nouvelle demande ».
+            const tape = question.trim();
+            lancer(tape || demande, chip);
+            if (tape) {
+              setDemande(tape);
+              setQuestion("");
+            }
           }}
           className="relative"
         >
@@ -1368,6 +1426,74 @@ export default function EntreeMatrice({
             <span aria-hidden="true">→</span>
           </button>
         </form>
+
+        {/* ── L'ACCUSÉ DE RÉCEPTION ────────────────────────────────────────
+            ⭐ 24/08/2026, Frédéric : « on tape "5e maths" dans le champ, on
+            appuie sur la flèche, le résultat est pris en compte et les cards
+            bougent, mais ça ne se voit pas ».
+
+            Le diagnostic tient en une mesure : entre la flèche et la première
+            carte il y a la rangée des chips, la ligne « Ce que j'ai compris »
+            et une marge de 24 px — soit ~180 px sur ordinateur, et la première
+            carte SOUS LE PLI sur un téléphone. Tout ce que la personne voyait
+            après son clic, c'était son propre texte, immobile dans le champ.
+            Deux signaux, au même endroit que le geste :
+              • le champ se vide — c'est parti, il n'y a plus rien à envoyer ;
+              • la demande se réécrit juste en dessous — voici ce qui a été reçu.
+
+            ⚠️ ELLE N'EST PAS « CE QUE J'AI COMPRIS ». Celle-là est plus bas et
+            dit la LECTURE du moteur (classe · matière · intention · notion) ;
+            celle-ci rend la PHRASE, mot pour mot. Les confondre, ce serait
+            perdre le seul endroit où la personne peut relire ce qu'elle a
+            réellement tapé — et donc voir qu'elle s'est trompée.
+            ⚠️ `role="status"` : au lecteur d'écran aussi, la flèche ne disait
+            rien. La liste des résultats est annoncée (`aria-live` plus bas),
+            mais elle arrive après tout le reste du bloc.
+            ⚠️ `line-clamp-2` ET NON `truncate`, ET PAS DE HAUTEUR LIBRE NON PLUS.
+            Une demande de 200 caractères existe (« comment additionner deux
+            fractions qui n'ont pas le même dénominateur en cinquième »), et le
+            champ est vidé : couper à une ligne, c'est la lui reprendre au
+            moment où on prétend la lui rendre. La laisser couler, c'est
+            repousser la première carte de trois lignes — soit ce qu'on essaie
+            de gagner. Deux lignes, et le `title` porte le reste.
+            ⚠️ `rounded-2xl` et non `rounded-full` : à 13 px sur une ligne les
+            deux sont indiscernables (rayon 15 px contre 16), mais sur deux
+            lignes une pastille pleinement ronde devient un ovale. */}
+        {demande && (
+          <div
+            role="status"
+            aria-live="polite"
+            className="mt-3 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[13px]"
+          >
+            <span className={surAccueil ? "text-[#1d1c16]/70" : "text-slate-500"}>
+              {tutoie ? "Ta demande" : "Votre demande"} :
+            </span>
+            <span
+              className={`inline-flex min-w-0 max-w-full items-center gap-2 rounded-2xl px-3 py-1 ${
+                surAccueil
+                  ? "border-2 border-[#0e7490] bg-[#0e7490]/10 text-[#1d1c16]"
+                  : "border border-teal-700 bg-teal-50 text-teal-900"
+              }`}
+            >
+              <span className="line-clamp-2 min-w-0" title={demande}>
+                «&nbsp;{demande}&nbsp;»
+              </span>
+              <button
+                type="button"
+                onClick={effacerDemande}
+                aria-label="Effacer la demande"
+                title="Effacer la demande"
+                className={`shrink-0 leading-none transition ${
+                  surAccueil
+                    ? "text-[#1d1c16]/50 hover:text-[#1d1c16]"
+                    : "text-teal-700/60 hover:text-teal-900"
+                }`}
+              >
+                <span aria-hidden="true">✕</span>
+              </button>
+            </span>
+          </div>
+        )}
 
         {/* Les actions du professeur et du chef d'établissement — écrites, pas
             déduites, et chacune ouvre un outil. Voir lib/matrice/actions.ts.
@@ -1572,7 +1698,11 @@ export default function EntreeMatrice({
               key={ex}
               type="button"
               onClick={() => {
-                setQuestion(ex);
+                // Cliquer un exemple, c'est l'ENVOYER — pas le recopier dans le
+                // champ pour le renvoyer soi-même. Il rejoint donc la ligne de
+                // rappel, comme une demande tapée.
+                setQuestion("");
+                setDemande(ex);
                 lancer(ex, null);
               }}
               className="underline decoration-[#1d1c16]/30 underline-offset-2 hover:decoration-[#1d1c16]"
@@ -1595,7 +1725,12 @@ export default function EntreeMatrice({
               silence. On annonce alors ce que c'est — un point de départ. */}
           {!resultat.lecture.notionId && !resultat.lecture.intention && !matiereChoisie ? (
             <p className="mb-2.5 text-center text-xs text-[#1d1c16]/65">
-              {question.trim()
+              {/* ⚠️ `demande` ET NON `question` depuis le 24/08 : le champ est
+                  vidé à l'envoi, donc `question` y est toujours vide à ce
+                  moment-là — la page aurait dit « Par où tu peux commencer »
+                  après une phrase qu'elle n'a pas comprise, c'est-à-dire sans
+                  jamais admettre qu'elle n'avait pas compris. */}
+              {demande.trim()
                 ? "Je n'ai pas bien compris la demande — voici par où "
                 : "Par où "}
               {p.tutoie ? "tu peux" : "vous pouvez"} commencer
