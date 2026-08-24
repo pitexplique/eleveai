@@ -13,7 +13,7 @@
 // liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
 // par où l'année peut commencer.
 //
-// 744 notions, 40 paquets.
+// 767 notions, 40 paquets.
 
 export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
@@ -2990,66 +2990,200 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
     "5e": [
       {
         "id": "lecture_comprehension",
-        "label": "Comprendre, interpréter et apprécier",
+        "label": "Comprendre et interpréter un texte",
         "prerequis": []
+      },
+      {
+        "id": "lecture_apprecier",
+        "label": "Apprécier un texte et fonder son jugement",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
       },
       {
         "id": "lecture_voix_haute",
-        "label": "Lire à voix haute et mettre en voix",
+        "label": "Lire à voix haute, seul ou à plusieurs",
         "prerequis": [
           "lecture_comprehension"
         ]
       },
       {
-        "id": "culture_litteraire",
-        "label": "Culture littéraire — Éprouver, expérimenter : la découverte de soi, d'autrui et du monde",
+        "id": "lecture_oeuvre_contextes",
+        "label": "Appréhender une œuvre dans des contextes artistiques variés",
         "prerequis": [
           "lecture_comprehension"
         ]
       },
       {
-        "id": "ecriture",
-        "label": "Écrire pour apprendre, inventer et réfléchir",
-        "prerequis": []
-      },
-      {
-        "id": "oral",
-        "label": "Prendre la parole, écouter et interagir",
-        "prerequis": []
-      },
-      {
-        "id": "vocabulaire",
-        "label": "Vocabulaire et orthographe lexicale",
+        "id": "culture_connaissances",
+        "label": "Acquérir et mobiliser des connaissances littéraires",
         "prerequis": [
           "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "culture_entrees_5e",
+        "label": "Éprouver, expérimenter : les quatre entrées de 5e",
+        "prerequis": [
+          "culture_connaissances"
+        ]
+      },
+      {
+        "id": "ecriture_reflechir",
+        "label": "Écrire pour réfléchir, apprendre et mémoriser",
+        "prerequis": []
+      },
+      {
+        "id": "ecriture_produire",
+        "label": "Écrire des textes d'invention et de réflexion",
+        "prerequis": [
+          "ecriture_reflechir"
+        ]
+      },
+      {
+        "id": "ecriture_reviser",
+        "label": "Évaluer son écrit et savoir le faire évoluer",
+        "prerequis": [
+          "ecriture_produire"
+        ]
+      },
+      {
+        "id": "oral_ecouter",
+        "label": "Écouter, comprendre et interpréter",
+        "prerequis": []
+      },
+      {
+        "id": "oral_prendre_parole",
+        "label": "Prendre la parole, communiquer et interagir",
+        "prerequis": [
+          "oral_ecouter"
+        ]
+      },
+      {
+        "id": "oral_dire_jouer",
+        "label": "Dire, lire, jouer un texte",
+        "prerequis": [
+          "lecture_voix_haute"
+        ]
+      },
+      {
+        "id": "vocabulaire_enrichir",
+        "label": "Enrichir son vocabulaire",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "vocabulaire_relations",
+        "label": "Identifier les types de relations entre les mots",
+        "prerequis": [
+          "vocabulaire_enrichir"
+        ]
+      },
+      {
+        "id": "vocabulaire_jouer",
+        "label": "Réemployer son lexique et jouer avec les mots",
+        "prerequis": [
+          "vocabulaire_relations"
+        ]
+      },
+      {
+        "id": "vocabulaire_formation",
+        "label": "Comprendre la formation des mots",
+        "prerequis": [
+          "vocabulaire_relations"
+        ]
+      },
+      {
+        "id": "vocabulaire_orthographe",
+        "label": "Écrire avec justesse (orthographe lexicale)",
+        "prerequis": [
+          "vocabulaire_formation"
         ]
       },
       {
         "id": "grammaire_phrase",
-        "label": "Phrase, constituants et accords",
+        "label": "La phrase : types, formes, ponctuation et propositions",
         "prerequis": [
           "lecture_comprehension"
         ]
       },
       {
-        "id": "analyse_discours",
-        "label": "Discours, registres et paroles rapportées",
+        "id": "grammaire_fonctions",
+        "label": "Les fonctions : sujet, compléments, attribut",
         "prerequis": [
           "grammaire_phrase"
         ]
       },
       {
-        "id": "orthographe_grammaticale",
-        "label": "Accorder les mots dans la phrase et expliquer ses choix",
+        "id": "grammaire_groupe_nominal",
+        "label": "Le groupe nominal et les classes de mots",
+        "prerequis": [
+          "grammaire_fonctions"
+        ]
+      },
+      {
+        "id": "grammaire_reprises",
+        "label": "Les reprises et la chaîne anaphorique",
+        "prerequis": [
+          "grammaire_groupe_nominal"
+        ]
+      },
+      {
+        "id": "orthographe_accords",
+        "label": "Les chaînes d'accord et l'accord sujet-verbe",
+        "prerequis": [
+          "grammaire_fonctions"
+        ]
+      },
+      {
+        "id": "orthographe_participe",
+        "label": "L'accord du participe passé",
+        "prerequis": [
+          "orthographe_accords"
+        ]
+      },
+      {
+        "id": "discours_registres",
+        "label": "Grammaire de l'écrit, grammaire de l'oral et registres",
         "prerequis": [
           "grammaire_phrase"
         ]
       },
       {
-        "id": "conjugaison",
-        "label": "Formes verbales, temps et modes",
+        "id": "discours_paroles_rapportees",
+        "label": "Analyser et employer des paroles rapportées",
         "prerequis": [
-          "grammaire_phrase"
+          "discours_registres"
+        ]
+      },
+      {
+        "id": "conjugaison_formes",
+        "label": "La composition d'une forme verbale",
+        "prerequis": [
+          "grammaire_fonctions"
+        ]
+      },
+      {
+        "id": "conjugaison_temps_simples",
+        "label": "Les temps simples : passé simple, conditionnel, impératif",
+        "prerequis": [
+          "conjugaison_formes"
+        ]
+      },
+      {
+        "id": "conjugaison_temps_composes",
+        "label": "Les temps composés et les temps antérieurs",
+        "prerequis": [
+          "conjugaison_formes"
+        ]
+      },
+      {
+        "id": "conjugaison_valeurs",
+        "label": "L'emploi des temps et des modes",
+        "prerequis": [
+          "conjugaison_temps_simples",
+          "conjugaison_temps_composes"
         ]
       }
     ],

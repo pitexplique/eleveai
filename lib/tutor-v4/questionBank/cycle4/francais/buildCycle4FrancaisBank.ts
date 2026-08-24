@@ -3878,14 +3878,24 @@ function orth_cod_coi_antepose(_level: Cycle4Level): QcmItem[] {
 
 // Repli par notion si un microId inattendu apparaît : on garde toujours un pool
 // on-topic pour la notion (jamais de contenu hors sujet).
+// ⚠️ 24/08/2026 — LES TESTS SUIVENT LE DÉCOUPAGE DES NOTIONS DE 5e. La classe
+// est passée de dix notions à vingt-neuf (`lecture_apprecier`,
+// `lecture_oeuvre_contextes`, `discours_registres`, `orthographe_accords`…), et
+// ce repli testait des identifiants qui n'existent plus chez elle. Un id non
+// reconnu ne fait rien tomber en panne : il tombait dans le `return` final et
+// servait de la grammaire à une question de lecture, sans que rien ne le
+// signale. Les tests vont donc du plus spécifique au plus général, et couvrent
+// les deux nomenclatures — celle de la 5e et celle, encore en place, de la 4e
+// et de la 3e.
 function poolForNotion(notionId: string, level: Cycle4Level): QcmItem[] {
   if (notionId.includes("lecture_voix")) return voix_expressive(level);
-  if (notionId.includes("lecture_comprehension")) return comp_sens_global(level);
+  if (notionId.includes("lecture_apprecier")) return comp_apprecier(level);
+  if (notionId.includes("lecture")) return comp_sens_global(level);
   if (notionId.includes("culture")) return culture_genres(level);
   if (notionId.includes("ecriture")) return ecrit_invention(level);
   if (notionId.includes("oral")) return oral_argumenter(level);
   if (notionId.includes("vocabulaire")) return voc_contexte(level);
-  if (notionId.includes("analyse_discours")) return discours_registres(level);
+  if (notionId.includes("discours")) return discours_registres(level);
   if (notionId.includes("conjugaison")) return conj_identifier(level);
   return gram_fonctions(level);
 }

@@ -1,7 +1,9 @@
 // ─── Guide de survie · Français 5e (cycle 4) ────────────────────────────────
 // Contenu ALIGNÉ sur le coach (source de vérité unique) :
-// - chapitres      = notions de lib/tutor-v4/knowledge/francais/5e/notions.ts
-//   (générées par le module PARTAGÉ shared/buildCollegeFrancaisSources)
+// - chapitres      = DOMAINES du BO, chacun recouvrant plusieurs notions de
+//   lib/tutor-v4/knowledge/francais/5e/notions.ts (écrites en littéral depuis le
+//   24/08/2026 : la 5e s'est détachée de la fabrique du cycle 4, et ses dix
+//   notions ont été découpées en vingt-neuf). Voir NOTIONS_DU_CHAPITRE.
 // - checklists     = micro-compétences de microSkills.ts (BO cycle 4)
 // - test de survie = items "fixed" imprimables de la couche francais5eFixedBank
 //   (le builder cycle 4 ne produit que des "template" → testDeSurvie serait vide
@@ -23,7 +25,55 @@ import type { KitData, KitNotion } from "@/components/kit/types";
 // Checklists + tests dérivés du coach (module partagé par tous les guides).
 const { microsDe, testDeSurvie } = kitHelpers(microSkills);
 
-type Condense = Omit<KitNotion, "micros" | "exos">;
+/**
+ * ⭐ UN CHAPITRE DU GUIDE PEUT COUVRIR PLUSIEURS NOTIONS DU COACH (24/08/2026).
+ *
+ * Le 24/08, les dix notions de la 5e ont été découpées en vingt-neuf (règle de
+ * Frédéric : cinq micros par notion au maximum). Le guide, lui, ne peut pas
+ * suivre : un guide de survie de vingt-neuf fiches n'est plus un guide, c'est un
+ * manuel — et il est fait pour être imprimé et glissé dans un classeur.
+ *
+ * Les deux granularités sont donc assumées, et reliées ici : le coach travaille
+ * notion par notion, le guide révise domaine par domaine. `notions` dit quelles
+ * notions du coach un chapitre recouvre ; sans elle, `microsDe(c.id)` ne
+ * trouvait plus rien et les checklists « je sais… » se vidaient en silence.
+ */
+type Condense = Omit<KitNotion, "micros" | "exos"> & { notions?: string[] };
+
+/** Chapitre du guide → notions du coach (voir knowledge/francais/5e/notions.ts). */
+const NOTIONS_DU_CHAPITRE: Record<string, string[]> = {
+  lecture_comprehension: ["lecture_comprehension", "lecture_apprecier"],
+  lecture_voix_haute: ["lecture_voix_haute"],
+  culture_litteraire: [
+    "culture_connaissances",
+    "culture_entrees_5e",
+    "lecture_oeuvre_contextes",
+  ],
+  ecriture: ["ecriture_reflechir", "ecriture_produire", "ecriture_reviser"],
+  oral: ["oral_ecouter", "oral_prendre_parole", "oral_dire_jouer"],
+  vocabulaire: [
+    "vocabulaire_enrichir",
+    "vocabulaire_relations",
+    "vocabulaire_jouer",
+    "vocabulaire_formation",
+    "vocabulaire_orthographe",
+  ],
+  grammaire_phrase: [
+    "grammaire_phrase",
+    "grammaire_fonctions",
+    "grammaire_groupe_nominal",
+    "grammaire_reprises",
+    "orthographe_accords",
+    "orthographe_participe",
+  ],
+  analyse_discours: ["discours_registres", "discours_paroles_rapportees"],
+  conjugaison: [
+    "conjugaison_formes",
+    "conjugaison_temps_simples",
+    "conjugaison_temps_composes",
+    "conjugaison_valeurs",
+  ],
+};
 
 const CONDENSES: Condense[] = [
   {
@@ -271,9 +321,15 @@ const CONDENSES: Condense[] = [
 ];
 
 // Couche "fixed" imprimable groupée par notion (source des tests de survie).
+// ⚠️ ON RANGE PAR LA NOTION DE LA MICRO, PAS PAR CELLE ÉCRITE DANS L'ITEM
+// (24/08/2026). Les items de `fixed.bank.ts` portent encore les dix notionId
+// d'avant le découpage ; c'est le `microId` qui est la clé stable. Le coach fait
+// le même recalage dans `questionBank/5e/francais/index.ts`.
+const NOTION_PAR_MICRO = new Map(microSkills.map((micro) => [micro.id, micro.notionId]));
 const BANQUES: Record<string, TutorBankItemV4[]> = {};
 for (const item of francais5eFixedBank) {
-  (BANQUES[item.notionId] ??= []).push(item);
+  const notionId = NOTION_PAR_MICRO.get(item.microId) ?? item.notionId;
+  (BANQUES[notionId] ??= []).push(item);
 }
 
 export const KIT_FRANCAIS_5E: KitData = {
@@ -284,9 +340,12 @@ export const KIT_FRANCAIS_5E: KitData = {
   matiere: "francais",
   classeLabel: "5e",
   coachClasse: "5e",
-  notions: CONDENSES.map((c) => ({
-    ...c,
-    micros: microsDe(c.id),
-    exos: testDeSurvie(BANQUES[c.id] ?? []),
-  })),
+  notions: CONDENSES.map(({ notions: _ignore, ...c }) => {
+    const ids = NOTIONS_DU_CHAPITRE[c.id] ?? [c.id];
+    return {
+      ...c,
+      micros: ids.flatMap((id) => microsDe(id)),
+      exos: testDeSurvie(ids.flatMap((id) => BANQUES[id] ?? [])),
+    };
+  }),
 };

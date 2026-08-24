@@ -15,21 +15,40 @@ import type { KnowledgeBoCompetence, SchoolLevel } from "@/lib/tutor-v4/types";
    ⚠️ Ne pas la remettre dans ce type : c'est ce qui l'avait privée de la phrase
    complexe, de « Lire une œuvre et se l'approprier », et lui avait donné une
    micro (« Distinguer usages de l'oral et de l'écrit ») absente de son BO. */
-type CollegeFrancaisLevel = Extract<SchoolLevel, "5e" | "4e" | "3e">;
+
+/* ⛔ LA 5e N'EST PLUS ICI NON PLUS (24/08/2026), et pour la raison inverse de
+   la 6e : elle est la SEULE classe du collège déjà passée au programme neuf —
+   BO n° 10 du 5 mars 2026, applicable en 5e à la rentrée 2026. La 4e et la 3e
+   n'y basculeront qu'en 2027 et 2028, et suivent d'ici là le texte de 2015
+   consolidé en 2020. Une fabrique commune à trois classes qui suivent deux
+   programmes différents ne peut pas rester juste longtemps : le bloc
+   `if (level === "5e")` pesait deux cents lignes, soit plus que le reste.
+
+   ⭐ ET SURTOUT : ses notions ont été DÉCOUPÉES. Règle de Frédéric — « 3-4
+   micros par notion, 5 au maximum », « il faut découper, pas enlever ». La
+   fabrique produisait pour la 5e une notion `grammaire_phrase` de DIX-NEUF
+   micros, et quatre autres au-dessus de neuf ; ses 92 micros vivent désormais
+   dans 29 notions calées sur la hiérarchie du BO (domaine → compétence →
+   objectif), comme celles de la 6e depuis le 22/08.
+
+   ⚠️ LA 4e ET LA 3e ONT LE MÊME DÉFAUT, ICI, INTACT : `vocabulaire` y porte
+   ONZE micros, `lecture_comprehension` huit et neuf, `conjugaison` dix et neuf.
+   Elles attendent leur propre relecture — à faire sur leur programme à elles,
+   pas sur celui de la 5e. Ses `bo`, `notions`, `microSkills` et `supportLinks`
+   sont écrits en littéral dans `knowledge/francais/5e/`. */
+type CollegeFrancaisLevel = Extract<SchoolLevel, "4e" | "3e">;
 
 const labels: Record<CollegeFrancaisLevel, { code: string; levelLabel: string; boPrefix: string }> = {
-  "5e": { code: "5e", levelLabel: "5e", boPrefix: "BO5EFR" },
   "4e": { code: "4e", levelLabel: "4e", boPrefix: "BO4EFR" },
   "3e": { code: "3e", levelLabel: "3e", boPrefix: "BO3EFR" },
 };
 
 /* Les perspectives annuelles du cycle 4.
-   ⚠️ Celle de 5e est reprise MOT POUR MOT du BO n° 10 du 5 mars 2026, qui
-   s'applique à elle dès la rentrée 2026. Celles de 4e et de 3e restent
-   approximatives tant que ces classes suivent le programme de 2018 : elles
-   seront reprises à leur bascule, en 2027 et 2028. */
+   ⚠️ Celles de 4e et de 3e restent approximatives tant que ces classes suivent
+   le programme de 2018 : elles seront reprises à leur bascule, en 2027 et 2028.
+   (Celle de la 5e, reprise mot pour mot du BO du 5 mars 2026, est partie avec
+   elle dans `knowledge/francais/5e/notions.ts`.) */
 const cycle4Perspectives: Record<CollegeFrancaisLevel, string> = {
-  "5e": "Éprouver, expérimenter : la découverte de soi, d'autrui et du monde",
   "4e": "Jugement, valeurs et vérité",
   "3e": "Engagement humaniste et émancipation",
 };
@@ -134,28 +153,24 @@ export function buildCollegeFrancaisNotions(level: CollegeFrancaisLevel): Notion
       : []),
 
     /* « Savoir accorder les mots dans la phrase et expliquer ses choix » est,
-       dans le BO n° 10 du 5 mars 2026, un OBJECTIF À PART de la grammaire —
-       cinq attendus rien qu'en 5e. Il était replié dans `grammaire_phrase`,
-       derrière une seule micro : « Accorder les mots dans la phrase ».
-       ⛔ Ouvert à la 5e, à la 4e et à la 3e, pour deux raisons DIFFÉRENTES : la
-       5e parce que le BO du 5 mars 2026 en fait un objectif nommé, la 4e et la
-       3e parce que leur propre programme — cycle 4 de 2015, consolidé en 2020 —
-       exige les mêmes chaines d'accord sans que la moindre notion les porte.
-       Les micros et les items ne sont PAS les mêmes : ceux de la 4e vont
-       jusqu'au groupe nominal complexe, au participe apposé et au passif ; ceux
-       de la 3e vont plus loin encore — participe passé suivi d'un infinitif,
-       cas où il reste invariable, pronominaux réciproques, homophones. */
-    ...(level === "5e" || level === "4e" || level === "3e"
-      ? [
-          {
-            id: "orthographe_grammaticale",
-            label: "Accorder les mots dans la phrase et expliquer ses choix",
-            boId: `${p}G`,
-            prerequis: ["grammaire_phrase"],
-            levels: [1, 2, 3],
-          } satisfies NotionSource,
-        ]
-      : []),
+       dans le BO n° 10 du 5 mars 2026, un OBJECTIF À PART de la grammaire. Il
+       était replié dans `grammaire_phrase`, derrière une seule micro :
+       « Accorder les mots dans la phrase ».
+       ⛔ Ouvert à la 4e et à la 3e parce que leur propre programme — cycle 4 de
+       2015, consolidé en 2020 — exige les mêmes chaines d'accord sans que la
+       moindre notion les porte. Les micros et les items ne sont PAS les mêmes :
+       ceux de la 4e vont jusqu'au groupe nominal complexe, au participe apposé
+       et au passif ; ceux de la 3e vont plus loin encore — participe passé suivi
+       d'un infinitif, cas où il reste invariable, pronominaux réciproques,
+       homophones. (La 5e a les siens dans `knowledge/francais/5e/`, coupés en
+       deux notions : les chaines d'accord et le participe passé.) */
+    {
+      id: "orthographe_grammaticale",
+      label: "Accorder les mots dans la phrase et expliquer ses choix",
+      boId: `${p}G`,
+      prerequis: ["grammaire_phrase"],
+      levels: [1, 2, 3],
+    },
     {
       id: "conjugaison",
       label: "Formes verbales, temps et modes",
@@ -168,8 +183,11 @@ export function buildCollegeFrancaisNotions(level: CollegeFrancaisLevel): Notion
 
 export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): MicroSkillSource[] {
   const prefix = level.replace("e", "e");
-  const lineCount = level === "5e" ? "une vingtaine de lignes" : level === "4e" ? "une quinzaine de lignes ou vers" : "une vingtaine de lignes ou vers";
-  const interpretationDepth = level === "5e" ? "un jugement de lecteur" : level === "4e" ? "l'implicite et le débat interprétatif" : "une interprétation nuancée et argumentée";
+  // ⚠️ « d'un texte de une quinzaine de lignes » se lit tel quel dans le coach,
+  // en français, sur une fiche de français : l'article est déjà dans le gabarit.
+  // Corrigé ici le 24/08/2026, en même temps que le départ de la 5e.
+  const lineCount = level === "4e" ? "d'une quinzaine de lignes ou vers" : "d'une vingtaine de lignes ou vers";
+  const interpretationDepth = level === "4e" ? "l'implicite et le débat interprétatif" : "une interprétation nuancée et argumentée";
 
   const base: MicroSkillSource[] = [
     { id: `${prefix}_comp_sens_global`, label: `Dégager ${interpretationDepth}`, notionId: "lecture_comprehension", prerequis: [] },
@@ -177,7 +195,7 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
     { id: `${prefix}_comp_implicite`, label: "Comprendre l'implicite et justifier son interprétation", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_indices`] },
     { id: `${prefix}_comp_apprecier`, label: "Formuler une appréciation fondée sur le texte", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_implicite`] },
 
-    { id: `${prefix}_voix_preparer`, label: `Préparer la lecture orale d'un texte de ${lineCount}`, notionId: "lecture_voix_haute", prerequis: [`${prefix}_comp_indices`] },
+    { id: `${prefix}_voix_preparer`, label: `Préparer la lecture orale d'un texte ${lineCount}`, notionId: "lecture_voix_haute", prerequis: [`${prefix}_comp_indices`] },
     { id: `${prefix}_voix_expressive`, label: "Utiliser voix, rythme, regard et ponctuation", notionId: "lecture_voix_haute", prerequis: [`${prefix}_voix_preparer`] },
     { id: `${prefix}_voix_reciter`, label: "Réciter un texte en prose ou en vers avec fluidité", notionId: "lecture_voix_haute", prerequis: [`${prefix}_voix_expressive`] },
 
@@ -211,228 +229,6 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
     { id: `${prefix}_conj_composer`, label: "Composer et conjuguer les formes verbales attendues", notionId: "conjugaison", prerequis: [`${prefix}_conj_identifier`] },
     { id: `${prefix}_conj_employer`, label: "Employer les temps et modes selon le sens", notionId: "conjugaison", prerequis: [`${prefix}_conj_composer`] },
   ];
-
-
-  /* ═══════════════════════════════════════════════════════════════════════
-     LA 5e PASSE AU NOUVEAU PROGRAMME — bloc ajouté le 12/08/2026
-
-     ⚠️ RÉFÉRENCE NEUVE : BO n° 10 du 5 mars 2026 (arrêté du 18 février 2026),
-     « Annexe 1 – Programme de français pour le cycle 4 ». Il s'applique en 5e
-     À LA RENTRÉE 2026, en 4e à la rentrée 2027, en 3e à la rentrée 2028.
-     ⛔ La 4e et la 3e restent donc, cette année, sur le programme de 2015
-     modifié en 2018 : NE PAS leur étendre ce bloc avant leur date.
-
-     L'état de départ, mesuré : 5e, 4e et 3e avaient les 34 MÊMES micros, à
-     deux libellés près. Un élève de 3e en avait moins qu'un élève de 6e (50),
-     et exactement les mêmes qu'un élève de 5e. Pour la seule grammaire, quatre
-     micros couvraient tout le cycle.
-
-     Ce bloc ouvre la rubrique « Comprendre et expliquer le fonctionnement
-     d'une phrase », que le BO détaille en deux objectifs et treize attendus.
-     ⚠️ Les micros ne sont ajoutées qu'AVEC leur banque écrite : sans elle,
-     `buildCycle4FrancaisBank` aiguille par sous-chaîne et sert autre chose
-     sans jamais tomber en panne — c'est ce qui était arrivé au CM2.
-     ═══════════════════════════════════════════════════════════════════════ */
-  if (level === "5e") {
-    base.push(
-      /* ── « Comprendre ce qu'est une phrase pour mieux lire et mieux écrire » */
-      // « Identifier et réinvestir le rôle des différents signes de ponctuation
-      //   en lien avec les constituants de la phrase. »
-      { id: `${prefix}_gram_ponctuation`, label: "Expliquer le rôle d'un signe de ponctuation dans la phrase", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_constituants`] },
-      // « Identifier trois types de phrases » / « Reconnaitre trois formes de
-      //   phrases et leurs caractéristiques (exclamative et négative). »
-      { id: `${prefix}_gram_types_formes`, label: "Identifier le type d'une phrase et ses formes exclamative ou négative", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_constituants`] },
-      // « Comprendre et expliciter la différence entre phrase simple, phrase
-      //   complexe, phrase non verbale. »
-      { id: `${prefix}_gram_simple_complexe`, label: "Distinguer phrase simple, phrase complexe et phrase non verbale", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_types_formes`] },
-      // « Comprendre les effets de sens produits par les relations de
-      //   juxtaposition et coordination. »
-      { id: `${prefix}_gram_juxta_coord`, label: "Comprendre ce qu'exprime une juxtaposition ou une coordination", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_simple_complexe`] },
-
-      /* ── « Connaitre les différents constituants d'une phrase » ─────────── */
-      // « Identifier le sujet, les compléments d'objet direct et indirect… »
-      // ⚠️ Le libellé dit « et des autres fonctions » parce que la banque sert
-      // aussi des circonstanciels et des attributs comme bonnes réponses : un
-      // COD ne se reconnait qu'en s'opposant à eux. Promettre « COD et COI »
-      // et servir un circonstanciel serait le défaut du CM2 à nouveau.
-      { id: `${prefix}_gram_cod_coi`, label: "Distinguer les compléments d'objet direct et indirect des autres fonctions", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_fonctions`] },
-      // « …l'attribut du sujet » ; « Identifier les verbes attributifs »
-      { id: `${prefix}_gram_attribut`, label: "Identifier l'attribut du sujet et les verbes attributifs", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_cod_coi`] },
-      // « …les compléments circonstanciels de lieu, de cause, de temps et de
-      //   manière, en utilisant des manipulations syntaxiques. »
-      { id: `${prefix}_gram_circonstanciels`, label: "Identifier un complément circonstanciel de lieu, de cause, de temps ou de manière", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_fonctions`] },
-      // « Comprendre la structure du groupe nominal minimal et du groupe
-      //   nominal étendu ; les identifier dans une phrase ou un court passage. »
-      { id: `${prefix}_gram_gn_etendu`, label: "Analyser le groupe nominal minimal et le groupe nominal étendu", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_fonctions`] },
-      // « Identifier les prépositions, les adverbes et les mots subordonnants. »
-      { id: `${prefix}_gram_prepositions`, label: "Identifier prépositions, adverbes et mots subordonnants", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_constituants`] },
-      // « Distinguer les déterminants et les pronoms. »
-      { id: `${prefix}_gram_determinant_pronom`, label: "Distinguer un déterminant d'un pronom", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_gn_etendu`] },
-      // « Identifier les pronoms personnels, démonstratifs et indéfinis, sans
-      //   chercher l'exhaustivité. »
-      { id: `${prefix}_gram_pronoms`, label: "Identifier les pronoms personnels, démonstratifs et indéfinis", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_determinant_pronom`] },
-      // « Identifier les mots coordonnants et comprendre leurs rôles syntaxique
-      //   et sémantique dans la phrase. »
-      { id: `${prefix}_gram_coordonnants`, label: "Identifier un mot coordonnant et le rapport qu'il établit", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_juxta_coord`] },
-
-      /* ── LA CHAÎNE ANAPHORIQUE (ajoutée le 15/08/2026) ───────────────────
-         ⭐ POURQUOI, ET SUR QUOI JE M'APPUIE. L'évaluation nationale de 5ᵉ
-         mesure « maîtriser la chaine anaphorique et l'emploi des pronoms
-         représentants » sur six items. Les résultats 2025 d'un collège de
-         l'île y donnent 19 %, 24 % et 43 % — le point le plus bas de tout
-         le document, français et maths confondus.
-         Les attendus de fin de CM2 nomment déjà « les substituts (ex :
-         reprises pronominales) » parmi les indices sur lesquels l'élève
-         s'appuie pour comprendre un texte : la compétence est installée en
-         amont, elle n'est pas nouvelle en 5ᵉ.
-
-         ⚠️ `${prefix}_gram_pronoms` NE LA COUVRE PAS. Identifier qu'un mot
-         est un pronom démonstratif, c'est une question de classe de mot.
-         Retrouver ce que ce pronom REPREND deux phrases plus haut, c'est une
-         question de texte. Un intitulé voisin n'est pas une couverture —
-         même écart qu'entre « nuance de sens » et « niveau de langue ».
-
-         ⚠️ Trois micros, et leur banque est écrite (anaphore.bank.ts) :
-         sans elle, `buildCycle4FrancaisBank` aiguille par sous-chaîne et
-         sert autre chose sans jamais tomber en panne. */
-      { id: `${prefix}_gram_anaphore_pronom`, label: "Retrouver ce qu'un pronom reprend dans un texte", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_pronoms`] },
-      { id: `${prefix}_gram_reprise_nominale`, label: "Identifier une reprise nominale et ce qu'elle désigne", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_gn_etendu`] },
-      { id: `${prefix}_gram_chaine_reference`, label: "Suivre une chaîne de reprises d'un bout à l'autre d'un texte", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_anaphore_pronom`, `${prefix}_gram_reprise_nominale`] },
-
-      /* ── « Savoir accorder les mots dans la phrase et expliquer ses choix »
-         Cinq attendus, que le BO détache de la grammaire de la phrase. Le
-         verbe du BO est « expliquer » et « justifier » : ce ne sont pas des
-         accords à appliquer, ce sont des accords à RAISONNER. */
-      // « Maitriser les chaines d'accord du groupe nominal en développant son
-      //   raisonnement. »
-      { id: `${prefix}_orth_chaine_gn`, label: "Tenir la chaine d'accord dans le groupe nominal", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_gram_gn_etendu`] },
-      // « Maitriser les chaines d'accord de l'attribut du sujet. »
-      { id: `${prefix}_orth_accord_attribut`, label: "Accorder l'attribut avec le sujet", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_gram_attribut`] },
-      // « Maitriser les cas complexes de l'accord sujet-verbe (sujet séparé du
-      //   verbe par un complément, sujet comportant plusieurs noms). »
-      { id: `${prefix}_orth_sujet_verbe_complexe`, label: "Accorder le verbe quand le sujet est éloigné, inversé ou multiple", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_gram_cod_coi`] },
-      // « Justifier […] l'accord du participe passé employé avec l'auxiliaire
-      //   être… »
-      { id: `${prefix}_orth_participe_etre`, label: "Accorder le participe passé employé avec être", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_accord_attribut`] },
-      // « …et avec l'auxiliaire avoir (COD antéposé…) »
-      { id: `${prefix}_orth_participe_avoir`, label: "Accorder le participe passé avec avoir quand le COD est placé avant", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_participe_etre`] },
-      // « …dont pronom personnel COD, À DISTINGUER DU COI. » C'est là que se
-      //   joue l'erreur : « je leur ai parlé » ne s'accorde pas.
-      { id: `${prefix}_orth_cod_coi_antepose`, label: "Ne pas accorder quand le pronom placé avant est un COI", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_participe_avoir`] },
-
-      /* ── « Approfondir sa maitrise des formes conjuguées du verbe et leur
-         emploi » — deux objectifs, six attendus. Le coach en avait trois
-         micros génériques, les mêmes de la 5e à la 3e. */
-      // « …les éléments qui constituent une forme verbale : radical verbal et
-      //   terminaison (marques de temps et de personne). »
-      { id: `${prefix}_conj_radical_terminaison`, label: "Lire dans la terminaison le temps et la personne", notionId: "conjugaison", prerequis: [`${prefix}_conj_identifier`] },
-      // « …la morphologie des temps simples (… passé simple de l'indicatif…) »
-      { id: `${prefix}_conj_passe_simple`, label: "Conjuguer au passé simple de l'indicatif", notionId: "conjugaison", prerequis: [`${prefix}_conj_radical_terminaison`] },
-      // « … conditionnel et présent de l'impératif »
-      { id: `${prefix}_conj_conditionnel_imperatif`, label: "Conjuguer au conditionnel présent et à l'impératif présent", notionId: "conjugaison", prerequis: [`${prefix}_conj_radical_terminaison`] },
-      // « …et des temps composés (passé composé et plus-que-parfait). »
-      { id: `${prefix}_conj_temps_composes`, label: "Former le passé composé et le plus-que-parfait", notionId: "conjugaison", prerequis: [`${prefix}_conj_radical_terminaison`] },
-      // « Conjuguer un verbe par imitation, au passé antérieur et au futur
-      //   antérieur de l'indicatif. »
-      { id: `${prefix}_conj_anterieurs`, label: "Conjuguer au passé antérieur et au futur antérieur", notionId: "conjugaison", prerequis: [`${prefix}_conj_temps_composes`] },
-      // « Consolider la conjugaison des verbes réguliers et des principaux
-      //   verbes irréguliers en fonction de la variation de leur radical. »
-      { id: `${prefix}_conj_radical_variable`, label: "Conjuguer les verbes dont le radical change", notionId: "conjugaison", prerequis: [`${prefix}_conj_radical_terminaison`] },
-      // « Approfondir sa maitrise des valeurs temporelles et aspectuelles des
-      //   temps simples et composés. »
-      { id: `${prefix}_conj_valeurs`, label: "Distinguer ce qu'exprime chaque temps du récit", notionId: "conjugaison", prerequis: [`${prefix}_conj_passe_simple`, `${prefix}_conj_temps_composes`] },
-      // « Approfondir sa maitrise des modes indicatif et impératif. »
-      { id: `${prefix}_conj_modes`, label: "Distinguer l'indicatif de l'impératif et ce que chacun fait", notionId: "conjugaison", prerequis: [`${prefix}_conj_conditionnel_imperatif`] },
-
-      /* ── LES QUATRE ENTRÉES DE CULTURE LITTÉRAIRE ───────────────────────────
-         Le BO les nomme une par une, sous la perspective annuelle « Éprouver,
-         expérimenter : la découverte de soi, d'autrui et du monde ». La notion
-         `culture_litteraire` ne portait que quatre gestes génériques — genres,
-         contexte, réseau, trace —, les mêmes de la 5e à la 3e.
-         ⛔ On interroge les NOTIONS, jamais une œuvre : les livres sont choisis
-         par le professeur. Appui sur les figures que tout élève a croisées. */
-      { id: `${prefix}_cult_heros`, label: "Devenir héroïne, héros : destins romanesques", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
-      { id: `${prefix}_cult_voyage_poesie`, label: "Voyager en poésie : « Du monde entier au cœur du monde »", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
-      { id: `${prefix}_cult_theatre`, label: "Expérimenter et jouer au théâtre : la société sens dessus dessous", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
-      { id: `${prefix}_cult_plaire_instruire`, label: "Imaginer, sentir, raisonner : des histoires pour plaire et instruire", notionId: "culture_litteraire", prerequis: [`${prefix}_cult_heros`] },
-
-      /* ── VOCABULAIRE ET ORTHOGRAPHE LEXICALE ────────────────────────────────
-         Cinq objectifs et seize attendus au BO ; le coach en avait cinq micros
-         génériques. On n'ajoute ici que ce qui n'était nulle part — les
-         registres restent tenus par `_discours_registres`. */
-      // « Connaitre le sens des préfixes et suffixes les plus fréquents. »
-      { id: `${prefix}_voc_prefixe_suffixe`, label: "Connaitre le sens des préfixes et des suffixes fréquents", notionId: "vocabulaire", prerequis: [`${prefix}_voc_formation`] },
-      // « Appréhender la dimension historique des mots (étymologie) en
-      //   maitrisant quelques éléments latins, grecs ou empruntés. »
-      { id: `${prefix}_voc_etymologie`, label: "Reconnaitre un élément latin ou grec dans un mot", notionId: "vocabulaire", prerequis: [`${prefix}_voc_prefixe_suffixe`] },
-      // « Comprendre le fonctionnement du néologisme (de forme et de sens). »
-      { id: `${prefix}_voc_neologisme`, label: "Comprendre comment un mot nouveau entre dans la langue", notionId: "vocabulaire", prerequis: [`${prefix}_voc_prefixe_suffixe`] },
-      // « Comprendre le principe de la dérivation des mots et son incidence sur
-      //   l'orthographe. »
-      { id: `${prefix}_voc_derivation_orthographe`, label: "Trouver la lettre muette par un mot de la même famille", notionId: "vocabulaire", prerequis: [`${prefix}_voc_prefixe_suffixe`] },
-      // « Utiliser les mots en exploitant les variations de sens. »
-      { id: `${prefix}_voc_variations_sens`, label: "Choisir le sens d'un mot selon la phrase où il apparait", notionId: "vocabulaire", prerequis: [`${prefix}_voc_contexte`] },
-      // « Maitriser l'usage du dictionnaire de langue en version papier et
-      //   numérique. »
-      { id: `${prefix}_voc_dictionnaire`, label: "Lire un article de dictionnaire, sur papier comme à l'écran", notionId: "vocabulaire", prerequis: [`${prefix}_voc_contexte`] },
-
-      /* ── « Analyser et employer des paroles rapportées » ─────────────────────
-         Deux attendus en 5e : « Identifier des paroles rapportées aux discours
-         direct et indirect » et « Insérer des paroles au discours direct dans
-         un texte ». Une seule micro générique les portait. */
-      { id: `${prefix}_discours_direct_indirect`, label: "Distinguer le discours direct du discours indirect", notionId: "analyse_discours", prerequis: [`${prefix}_discours_rapportees`] },
-      { id: `${prefix}_discours_inserer`, label: "Insérer des paroles au discours direct et les ponctuer", notionId: "analyse_discours", prerequis: [`${prefix}_discours_direct_indirect`] },
-
-      /* ── LECTURE : les quatre objectifs du BO ───────────────────────────────
-         Le coach avait sept micros génériques pour les quatre objectifs. On
-         ouvre les attendus nommés qui n'étaient nulle part. */
-      // « Travailler la lecture silencieuse et développer les différentes
-      //   stratégies de compréhension » ; « contrôler sa compréhension ».
-      { id: `${prefix}_comp_strategies`, label: "Contrôler sa compréhension et se débloquer en lisant seul", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_indices`] },
-      // « Formuler un jugement fondé sur des émotions, sur des critères
-      //   esthétiques, sur des idées et des valeurs. »
-      { id: `${prefix}_comp_jugement`, label: "Dire sur quoi se fonde son jugement de lecteur", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_apprecier`] },
-      // « Apprendre à recourir à quelques outils d'analyse pertinents. »
-      { id: `${prefix}_comp_outils_analyse`, label: "Choisir l'outil d'analyse qui répond à la question posée", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_implicite`] },
-      // « Repérer des éléments à améliorer dans sa lecture oralisée ou celle
-      //   des autres. »
-      { id: `${prefix}_voix_ameliorer`, label: "Repérer ce qui est à améliorer dans une lecture à voix haute", notionId: "lecture_voix_haute", prerequis: [`${prefix}_voix_expressive`] },
-      // « Comprendre et interpréter le parcours d'un ou plusieurs personnages
-      //   afin d'appréhender les enjeux de l'œuvre. »
-      { id: `${prefix}_lect_parcours_personnage`, label: "Suivre le parcours d'un personnage pour saisir les enjeux de l'œuvre", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_contexte`] },
-      // « Comparer les langages différents d'une œuvre littéraire et d'une
-      //   œuvre artistique. »
-      { id: `${prefix}_lect_langages`, label: "Comparer ce que peuvent les mots, l'image, la musique et la scène", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_reseau`] },
-      // « Tirer parti des informations sur le contexte de production d'une
-      //   œuvre pour la comprendre et l'interpréter. »
-      { id: `${prefix}_lect_contexte_production`, label: "Se servir du contexte de production pour interpréter une œuvre", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_contexte`] },
-      // « Se constituer des repères dans l'histoire littéraire. »
-      { id: `${prefix}_lect_reperes_histoire`, label: "Se constituer des repères dans l'histoire littéraire", notionId: "culture_litteraire", prerequis: [`${prefix}_lect_contexte_production`] },
-
-      /* ── ÉCRITURE : les trois objectifs du BO ───────────────────────────── */
-      // « Repérer l'idée principale d'un message écrit ou oral. »
-      { id: `${prefix}_ecrit_idee_principale`, label: "Repérer l'idée principale d'un message pour en rendre compte", notionId: "ecriture", prerequis: [`${prefix}_ecrit_notes`] },
-      // « Planifier son écrit en étant accompagné. »
-      { id: `${prefix}_ecrit_planifier`, label: "Planifier son écrit avant de rédiger", notionId: "ecriture", prerequis: [`${prefix}_ecrit_notes`] },
-      // « Écrire des textes narratifs et descriptifs. »
-      { id: `${prefix}_ecrit_narratif_descriptif`, label: "Écrire un texte narratif et descriptif", notionId: "ecriture", prerequis: [`${prefix}_ecrit_planifier`] },
-      // « Écrire un texte à visée argumentative à partir de consignes simples. »
-      { id: `${prefix}_ecrit_argumentatif`, label: "Bâtir un texte à visée argumentative", notionId: "ecriture", prerequis: [`${prefix}_ecrit_planifier`] },
-      // « Utiliser le brouillon comme un écrit à retravailler. »
-      { id: `${prefix}_ecrit_brouillon`, label: "Se servir du brouillon comme d'un écrit à retravailler", notionId: "ecriture", prerequis: [`${prefix}_ecrit_reviser`] },
-
-      /* ── ORAL : les trois objectifs du BO ───────────────────────────────── */
-      // « Entrer dans un dialogue. »
-      { id: `${prefix}_oral_dialogue`, label: "Entrer dans un dialogue et y tenir sa place", notionId: "oral", prerequis: [`${prefix}_oral_presenter`] },
-      // « Intervenir dans un débat en respectant les règles d'un échange
-      //   argumentatif. »
-      { id: `${prefix}_oral_debat`, label: "Intervenir dans un débat en respectant les règles de l'échange", notionId: "oral", prerequis: [`${prefix}_oral_argumenter`] },
-      // « Comprendre les visées d'une production orale spécifique. »
-      { id: `${prefix}_oral_visees`, label: "Reconnaitre la visée d'une production orale", notionId: "oral", prerequis: [`${prefix}_oral_ecouter`] },
-      // « Utiliser les ressources de la voix et du corps. »
-      { id: `${prefix}_oral_corps`, label: "Se servir des ressources de la voix et du corps", notionId: "oral", prerequis: [`${prefix}_oral_jouer`] },
-    );
-  }
 
   base.push(
     { id: `${prefix}_discours_registres`, label: "Identifier et ajuster les registres de langue", notionId: "analyse_discours", prerequis: [`${prefix}_gram_oral_ecrit`] },

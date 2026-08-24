@@ -35,10 +35,37 @@ import { lecture5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/lecture.b
 // domaines qui sont des productions.
 import { ecritureOral5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/ecriture-oral.bank";
 
+/**
+ * ⭐ LA NOTION D'UN ITEM SE DÉDUIT DE SA MICRO (24/08/2026).
+ *
+ * Le 24/08, les dix notions de la 5e ont été découpées en vingt-neuf (règle de
+ * Frédéric : « 3-4 micros par notion, 5 au maximum » ; `grammaire_phrase` en
+ * portait dix-neuf). Or le `notionId` était RECOPIÉ À LA MAIN dans chaque item
+ * des onze banques ci-dessus — soixante endroits pour la seule 5e. Les mettre à
+ * jour un par un, c'était garantir qu'un oubli reste : un item dont la notion
+ * n'existe plus n'échoue pas, il disparaît simplement du coach, en silence.
+ *
+ * On le déduit donc du `microId`, qui est la vraie clé et qui n'a pas bougé.
+ * `microSkills` reste la source de vérité unique, et il n'y a plus qu'un seul
+ * endroit à corriger le jour d'un prochain découpage.
+ *
+ * ⚠️ Un item dont la micro n'est pas au programme garde son `notionId` d'origine
+ * plutôt que d'être jeté : c'est visible dans `scripts/auditer-banque-runtime.ts`,
+ * alors qu'un item silencieusement écarté ne l'est pas.
+ */
+const NOTION_PAR_MICRO = new Map(microSkills.map((micro) => [micro.id, micro.notionId]));
+
+function recalerNotions(items: TutorBankItemV4[]): TutorBankItemV4[] {
+  return items.map((item) => {
+    const notionId = NOTION_PAR_MICRO.get(item.microId);
+    return notionId && notionId !== item.notionId ? { ...item, notionId } : item;
+  });
+}
+
 // Banque du coach = gabarits générés (variété) + couche "fixed" imprimable
 // (≥5 QCM fixes par notion). La couche "fixed" enrichit le coach ET sert de
 // source aux tests du guide de survie (testDeSurvie ne garde que les "fixed").
-export const francais5eQuestionBank: TutorBankItemV4[] = [
+export const francais5eQuestionBank: TutorBankItemV4[] = recalerNotions([
   ...buildCycle4FrancaisBank("5e", microSkills),
   ...francais5eFixedBank,
   ...complementsEtudeLangue5eBank,
@@ -50,7 +77,7 @@ export const francais5eQuestionBank: TutorBankItemV4[] = [
   ...vocabulaireDiscours5eBank,
   ...lecture5eBank,
   ...ecritureOral5eBank,
-];
+]);
 
 export function getFrancais5eQuestionBank(args?: {
   notionId?: string | null;
