@@ -80,6 +80,198 @@ const triangleAngles = (
   />
 );
 
+// ─── Les sept dessins des blocs ───────────────────────────────────────────────
+// ⭐ SEPT TRIANGLES NE FONT PAS SEPT DESSINS (REGLES.md § 2 bis). Sur cette
+// fiche-là, tout est un triangle : le piège est qu'ils se ressemblent tous. Ce
+// qui change d'une carte à l'autre est donc CE QUI EST ÉCRIT DESSUS — les noms
+// des côtés, les codages d'égalité, les marques d'angle — et deux blocs ne
+// portent pas de triangle du tout : l'inégalité triangulaire est une longueur
+// (schéma en barre), et calculer un angle est une soustraction (calcul posé).
+
+/** Un dessin et sa phrase, sous lui. */
+const legende = (dessin: React.ReactNode, texte: string) => (
+  <div>
+    {dessin}
+    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+  </div>
+);
+
+// ⛔ ON EMPILE, ON NE JUXTAPOSE PAS (§ 2 ter) : une carte de propriété fait
+// 225 px, trois triangles en ligne y recevraient 70 px chacun.
+const pile = (items: { dessin: React.ReactNode; nom: string }[]) => (
+  <div className="grid grid-cols-1 gap-2">
+    {items.map((it) => (
+      <div key={it.nom}>
+        {it.dessin}
+        <p className="mt-1 text-center text-xs font-black text-slate-700">{it.nom}</p>
+      </div>
+    ))}
+  </div>
+);
+
+type Pt = { x: number; y: number };
+
+const triangle = (
+  points: { A: Pt; B: Pt; C: Pt },
+  opts: {
+    labels?: Partial<Record<"A" | "B" | "C", string>>;
+    sideLabels?: Partial<Record<"AB" | "BC" | "CA", string>>;
+    angleLabels?: Partial<Record<"A" | "B" | "C", string>>;
+    marks?: {
+      rightAngleAt?: "A" | "B" | "C";
+      equalSides?: Array<["AB" | "BC" | "CA", "AB" | "BC" | "CA"]>;
+    };
+    showAngles?: boolean;
+    size?: { width?: number; height?: number };
+  } = {}
+) => (
+  <CanvasRenderer
+    figure={{
+      kind: "triangle",
+      size: opts.size ?? { width: 220, height: 180 },
+      points,
+      display: {
+        showPoints: !!opts.labels,
+        showLabels: !!opts.labels,
+        showSides: true,
+        showAngles: opts.showAngles ?? false,
+      },
+      labels: opts.labels,
+      sideLabels: opts.sideLabels,
+      angleLabels: opts.angleLabels,
+      marks: opts.marks,
+    }}
+  />
+);
+
+// LES TROIS FOIS TROIS. La figure du cours nomme les sommets ; celle-ci nomme
+// AUSSI les côtés et marque les angles — c'est le seul dessin de la fiche où
+// les neuf éléments sont écrits en même temps, ce que dit la propriété.
+const anatomie = legende(
+  triangle(
+    { A: { x: 35, y: 145 }, B: { x: 195, y: 145 }, C: { x: 115, y: 35 } },
+    {
+      labels: { A: "A", B: "B", C: "C" },
+      sideLabels: { AB: "AB", BC: "BC", CA: "CA" },
+      showAngles: true,
+    }
+  ),
+  "le côté opposé au sommet A, c'est BC"
+);
+
+// LES CÔTÉS DÉCIDENT — et ce qu'on regarde, ce sont les CODAGES, pas la forme.
+const famillesCotes = pile([
+  {
+    dessin: triangle(
+      { A: { x: 40, y: 145 }, B: { x: 180, y: 145 }, C: { x: 110, y: 24 } },
+      { marks: { equalSides: [["AB", "BC"], ["BC", "CA"]] } }
+    ),
+    nom: "équilatéral : 3 côtés égaux",
+  },
+  {
+    dessin: triangle(
+      { A: { x: 40, y: 145 }, B: { x: 110, y: 35 }, C: { x: 180, y: 145 } },
+      { marks: { equalSides: [["AB", "BC"]] } }
+    ),
+    nom: "isocèle : 2 côtés égaux",
+  },
+  {
+    dessin: triangle({ A: { x: 25, y: 145 }, B: { x: 200, y: 145 }, C: { x: 70, y: 40 } }),
+    nom: "quelconque : aucun codage",
+  },
+]);
+
+// LES ANGLES DÉCIDENT — et cette fois c'est la FORME qui change, pas un codage :
+// le coin carré, l'angle trop ouvert, les trois angles pointus.
+const famillesAngles = pile([
+  {
+    dessin: triangle(
+      { A: { x: 40, y: 145 }, B: { x: 40, y: 35 }, C: { x: 190, y: 145 } },
+      { marks: { rightAngleAt: "A" }, showAngles: true }
+    ),
+    nom: "rectangle : un angle droit",
+  },
+  {
+    dessin: triangle(
+      { A: { x: 95, y: 140 }, B: { x: 205, y: 140 }, C: { x: 25, y: 75 } },
+      { showAngles: true }
+    ),
+    nom: "obtusangle : un angle > 90°",
+  },
+  {
+    // ⚠️ 54-54-71 aurait été un aigu ISOCÈLE, sosie du deuxième dessin de la
+    // carte d'au-dessus. Décalé à 45-63-72 : trois angles différents, trois
+    // côtés différents, et plus aucune confusion avec la famille des côtés.
+    dessin: triangle(
+      { A: { x: 35, y: 145 }, B: { x: 185, y: 145 }, C: { x: 135, y: 45 } },
+      { showAngles: true }
+    ),
+    nom: "aigu : les trois < 90°",
+  },
+]);
+
+// L'INÉGALITÉ TRIANGULAIRE EST UNE LONGUEUR, PAS UNE FIGURE. On ne peut pas
+// dessiner le triangle impossible — c'est justement le problème. Mis bout à
+// bout, les deux petits côtés font 7 : trop court pour rejoindre les deux bouts
+// du troisième, qui en mesure 8. Les nombres sont ceux du piège n° 3.
+const inegaliteTriangulaire = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      // ⚠️ Au-delà de ~28 caractères, le titre déborde du cadre, en silence.
+      title: "Deux côtés bout à bout",
+      total: "7 cm",
+      parts: [
+        { label: "1er côté", value: "3" },
+        { label: "2e côté", value: "4" },
+      ],
+      questionLabel: "7 < 8 : le triangle est impossible",
+      // ⚠️ 175 px collent les étiquettes à la phrase du bas (piège déjà payé
+      // trois fois : périmètres, probabilités, données).
+      size: { width: 300, height: 190 },
+    }}
+  />
+);
+
+// LE NOM VIENT DES SOMMETS, ET DE RIEN D'AUTRE. Ici, aucun côté n'est nommé,
+// aucun angle n'est marqué : il ne reste que les trois lettres qui donnent le
+// nom. Ce sont celles de l'usage « Nommer et décrire ».
+const trianglePourNommer = legende(
+  triangle(
+    { A: { x: 35, y: 145 }, B: { x: 195, y: 145 }, C: { x: 145, y: 35 } },
+    { labels: { A: "D", B: "E", C: "F" } }
+  ),
+  "triangle DEF — ou DFE, ou FED : c'est le même"
+);
+
+// LES DEUX LECTURES DANS UN SEUL DESSIN. La méthode dit « d'abord les côtés,
+// PUIS les angles » : ce triangle-là porte les deux à la fois, deux codages
+// d'égalité et le petit carré. Aucune des deux cartes de propriété ne montre ça.
+const rectangleEtIsocele = legende(
+  triangle(
+    { A: { x: 45, y: 150 }, B: { x: 45, y: 40 }, C: { x: 155, y: 150 } },
+    { marks: { rightAngleAt: "A", equalSides: [["AB", "CA"]] }, showAngles: true }
+  ),
+  "les deux à la fois : rectangle ET isocèle"
+);
+
+// CALCULER UN ANGLE EST UNE SOUSTRACTION. Le triangle de l'exemple 2 montrait la
+// question (60°, 70°, « ? ») ; ici c'est l'opération qu'on effectue, posée. Même
+// partage que sur la fiche des périmètres : la figure d'un côté, le calcul de
+// l'autre. Les nombres sont ceux de l'exemple 2, pour qu'il les reconnaisse.
+const angleManquantPose = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "calcul_pose",
+      operation: "soustraction",
+      title: "180 − (60 + 70)",
+      numbers: ["180", "130"],
+      result: "50",
+    }}
+  />,
+  "le troisième angle mesure 50°"
+);
+
 const pieges = [
   "Confondre un sommet et un côté : dans le triangle ABC, A, B et C sont les sommets (des points), tandis que AB, BC et CA sont les côtés (des segments).",
   "Croire qu'un triangle avec deux angles droits existe : deux angles droits font déjà 90° + 90° = 180°, il ne resterait plus rien pour le troisième angle.",
@@ -118,21 +310,25 @@ export const ficheTriangles6e: FicheCoursData = {
       titre: "Sommets, côtés et angles",
       texte:
         "Un triangle a exactement 3 sommets (des points), 3 côtés (des segments) et 3 angles. Le côté opposé à un sommet est celui qui ne le contient pas : dans le triangle ABC, le côté opposé au sommet A est BC.",
+      schema: anatomie,
     },
     {
       titre: "Les familles selon les côtés",
       texte:
         "On reconnaît un triangle à ses côtés : équilatéral si ses trois côtés sont de même longueur, isocèle s'il a au moins deux côtés de même longueur, et quelconque si ses trois côtés ont des longueurs toutes différentes. Un triangle équilatéral est un cas particulier de triangle isocèle.",
+      schema: famillesCotes,
     },
     {
       titre: "Les familles selon les angles",
       texte:
         "On reconnaît aussi un triangle à son plus grand angle : rectangle s'il a un angle droit (90°), obtusangle s'il a un angle supérieur à 90°, et aigu si ses trois angles sont inférieurs à 90°.",
+      schema: famillesAngles,
     },
     {
       titre: "La somme des angles et l'inégalité triangulaire",
       texte:
         "Dans tout triangle, la somme des trois angles est toujours égale à 180°. Et pour qu'un triangle existe, la longueur de chaque côté doit être plus petite que la somme des deux autres : c'est l'inégalité triangulaire.",
+      schema: inegaliteTriangulaire,
     },
   ],
   reel: {
@@ -148,16 +344,19 @@ export const ficheTriangles6e: FicheCoursData = {
       titre: "Nommer et repérer",
       texte:
         "On nomme un triangle avec ses trois sommets, peu importe l'ordre : triangle ABC ou triangle CBA désignent la même figure. On repère bien les sommets (les points), les côtés (les segments) et les angles avant de répondre.",
+      schema: trianglePourNommer,
     },
     {
       titre: "Reconnaître la nature",
       texte:
         "On observe d'abord les côtés (les codages en traits égaux) pour savoir s'il est équilatéral, isocèle ou quelconque, puis les angles (le petit carré signale l'angle droit) pour savoir s'il est rectangle, aigu ou obtusangle.",
+      schema: rectangleEtIsocele,
     },
     {
       titre: "Calculer un angle",
       texte:
         "Pour trouver un angle manquant, on part de 180° et on enlève les deux angles connus : troisième angle = 180 − angle 1 − angle 2. On vérifie toujours que les trois angles additionnés font bien 180°.",
+      schema: angleManquantPose,
     },
   ],
   usages: [
