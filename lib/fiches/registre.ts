@@ -270,6 +270,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Calculer avec les fractions",
     resume: "Additionner, soustraire, multiplier, et prendre une fraction d'une quantité.",
   },
+  "maths/4e/sym-transformation": {
+    titre: "Les transformations",
+    resume: "Symétrie axiale, symétrie centrale, translation, rotation, et ce que toutes conservent.",
+  },
   "maths/4e/quadrilatere-parallelogramme": {
     titre: "Le parallélogramme",
     resume: "Reconnaître, côtés et angles opposés, diagonales, les trois chemins pour démontrer, et l'aire.",
