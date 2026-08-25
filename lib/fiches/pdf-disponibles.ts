@@ -59,6 +59,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "nombres-entiers-cm2-cours-exercices-corriges.pdf",
   "nombres-relatifs-5e-cours-exercices-corriges.pdf",
   "operations-sur-les-nombres-relatifs-5e-cours-exercices-corriges.pdf",
+  "parallelogramme-4e-cours-exercices-corriges.pdf",
   "parallelogramme-5e-cours-exercices-corriges.pdf",
   "participe-passe-accorder-et-ou-mettre-la-negation-cm2-cours-exercices-corriges.pdf",
   "passe-simple-le-conditionnel-et-les-temps-composes-2026-2027-5e-cours-exercices-corriges.pdf",

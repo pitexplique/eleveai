@@ -270,6 +270,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Calculer avec les fractions",
     resume: "Additionner, soustraire, multiplier, et prendre une fraction d'une quantité.",
   },
+  "maths/4e/quadrilatere-parallelogramme": {
+    titre: "Le parallélogramme",
+    resume: "Reconnaître, côtés et angles opposés, diagonales, les trois chemins pour démontrer, et l'aire.",
+  },
   "maths/4e/trigo-cosinus": {
     titre: "Le cosinus d'un angle aigu",
     resume: "Côté adjacent et hypoténuse, la définition du cosinus, calculer une longueur puis un angle.",
