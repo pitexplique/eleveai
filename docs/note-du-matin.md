@@ -207,6 +207,65 @@ de son générateur, et en a déjà deux. Ne pas y toucher.
 
 ---
 
+## ✅ FAIT — les micro-compétences sont dans la donnée (25/08/2026)
+
+**Les 18 fiches de 6ᵉ maths citent leurs micros : 105 sur 105.** Le lien
+fiche ↔ compétence n'est plus un commentaire d'en-tête que rien ne lit, c'est un
+champ vérifié : `npm run verifier:micros`.
+
+- `FicheMicros` = `micros?: string[]` sur les cinq types de bloc — **optionnel**,
+  les 89 fiches non annotées compilent et s'affichent à l'identique ;
+- une micro sans bloc est un **trou** (signalé, n'échoue pas) ; une micro inconnue
+  ou d'une autre notion est une **erreur** (fait échouer) ;
+- une propriété a été écrite pour combler le seul vrai trou : « Plus grand qu'un
+  entier » sur les fractions (`fraction_mixte`).
+
+⭐ **La règle qui a tenu 105 fois : on n'annote pas tout.** Quand la banque n'a
+pas de micro pour ce qu'un bloc enseigne, le bloc reste **sans** micro. Coller la
+plus proche produirait ce que le contrôle est censé empêcher.
+
+⛔ **DEUX SOURCES DE CONNAISSANCES COEXISTENT, NE PAS SE TROMPER :**
+
+```
+catalog.ts → buildKnowledge6eMaths() → microSkills.ts        ← LA SOURCE VIVE
+lib/tutor/loaders/loadKnowledge.ts → *.knowledge.json        ← l'ANCIEN tuteur, figé au 14/08
+```
+
+Le vieux JSON dit `fraction_compare`, `fraction_defis`, `fraction_quantite` là où
+la banque vive dit `fraction_comparer`, `fraction_defi`, `fraction_mixte`. Les
+en-têtes de fiches qui citent les premiers sont des restes.
+
+**Ce qui reste :** annoter les **89 autres fiches**, une classe à la fois. La 5ᵉ
+maths d'abord (20 fiches, méthode rodée). Le français est traité par l'autre
+session au fil de son générateur.
+
+---
+
+## ⏭️ DÉCIDÉ, PAS ENCORE FAIT
+
+**L'ancre par bloc** — `#micro-angle_tracer`. Le prompt complet, autonome, est
+dans **`docs/prompt-ancres-micros.md`** : la décision (une micro = une ancre, sur
+le premier bloc dans l'ordre CANONIQUE) et les deux pièges mesurés. Le code se
+fait une fois dans le composant partagé et vaut pour les 109 fiches ; l'effet ne
+vaut que sur les 20 annotées.
+
+**Le graphe des prérequis** — reporté par Frédéric, et voici ce qu'on sait :
+
+```
+3 426 micros · 3 618 liens · 0 cycle · 0 référence cassée
+15 niveaux pour la plus longue chaîne
+   0 lien inter-classes   ⛔
+```
+
+Le graphe est complet et sain DANS une classe, et vide ENTRE les classes. La 6ᵉ
+maths a **10 racines** — les points où la chaîne devrait continuer vers le CM2 et
+s'arrête. ⚠️ Un lien inter-classes ne peut pas être un simple `id` :
+`angle_reconnaitre` existe en CM1, CM2 **et** 6ᵉ. Il faudrait
+`prerequis: ["cm2:angle_reconnaitre"]`, donc toucher le type et le moteur du
+coach. Le volume est petit, c'est la **forme** qui engage.
+
+---
+
 ## Ce qui vient après
 
 **La 4ᵉ**, et les analytics Vercel du 24/08 le disent :
