@@ -80,6 +80,18 @@ const STYLES_METHODE = [
  * « L' ». Tout le reste est rendu intact.
  */
 const ARTICLES = ["Le ", "La ", "Les ", "L'", "L’", "Un ", "Une ", "Des ", "Du "];
+/**
+ * Le titre de la fiche, prêt à suivre un deux-points : « Les angles » devient
+ * « les angles », pour écrire « Définition : les angles ».
+ *
+ * ⭐ TOUS LES H2 RAPPELLENT LA NOTION (Frédéric, 25/08/2026). Quatre le
+ * faisaient déjà (Définition, Propriétés, Méthode, Exercices corrigés) ; sept
+ * restaient génériques — « La formule », « À retenir », « Pièges à éviter »…
+ * Sur une page, le contexte est donné par le h1 juste au-dessus ; sur un PDF
+ * détaché, dans un résultat Google, ou sur la troisième feuille d'une pile
+ * imprimée, « À retenir » ne dit plus de quoi. Les onze h2 nomment maintenant la
+ * notion.
+ */
 function apresDeuxPoints(titre: string): string {
   return ARTICLES.some((a) => titre.startsWith(a))
     ? titre[0].toLowerCase() + titre.slice(1)
@@ -299,7 +311,7 @@ export default function FicheCoursClient({
             <div className="rounded-2xl border border-sky-200 bg-sky-50 p-4">
               <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
                 <Wrench className="h-5 w-5 text-sky-500 print:hidden" />
-                À quoi ça sert ?
+                À quoi ça sert : {apresDeuxPoints(fiche.titre)}
               </h2>
               <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">
                 {fiche.reel.texte}
@@ -314,7 +326,7 @@ export default function FicheCoursClient({
             <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
               <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
                 <Landmark className="h-5 w-5 text-amber-500 print:hidden" />
-                Un peu d&apos;histoire
+                Un peu d&apos;histoire : {apresDeuxPoints(fiche.titre)}
               </h2>
               <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">
                 {fiche.historique.texte}
@@ -394,7 +406,7 @@ export default function FicheCoursClient({
         return (
           <section className="border-t border-slate-200 py-6 print:py-4">
             <h2 className="text-2xl font-black text-slate-900 print:text-xl">
-              La formule
+              La formule : {apresDeuxPoints(fiche.titre)}
             </h2>
             <div className="mt-4 grid gap-4 md:grid-cols-[1fr_1.25fr] print:grid-cols-[1fr_1.25fr]">
               <div className="rounded-2xl border border-sky-200 bg-sky-50 p-5 text-center">
@@ -461,7 +473,7 @@ export default function FicheCoursClient({
         return (
           <section className="border-t border-slate-200 py-6 print:py-4">
             <h2 className="text-2xl font-black text-slate-900 print:text-xl">
-              Selon ce que l&apos;on cherche
+              Selon ce que l&apos;on cherche : {apresDeuxPoints(fiche.titre)}
             </h2>
             {/* Même palier : les usages portent un dessin dès la 5e. */}
             <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3 print:grid-cols-3 print:gap-3">
@@ -486,7 +498,7 @@ export default function FicheCoursClient({
         return (
           <section className="border-t border-slate-200 py-6 print:py-4">
             <h2 className="text-2xl font-black text-slate-900 print:text-xl">
-              Exemples corrigés
+              Exemples corrigés : {apresDeuxPoints(fiche.titre)}
             </h2>
             <div className="mt-4 grid gap-4 md:grid-cols-2 print:grid-cols-2 print:gap-3">
               {fiche.exemples.map((exemple) => (
@@ -522,7 +534,7 @@ export default function FicheCoursClient({
             <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
               <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
                 <AlertTriangle className="h-5 w-5 text-amber-500 print:hidden" />
-                Pièges à éviter
+                Pièges à éviter : {apresDeuxPoints(fiche.titre)}
               </h2>
               <ul className="mt-3 grid gap-2 text-sm leading-6 text-slate-700 print:text-xs">
                 {fiche.pieges.map((piege) => (
@@ -540,7 +552,7 @@ export default function FicheCoursClient({
             <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
               <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
                 <CheckCircle2 className="h-5 w-5 text-emerald-500 print:hidden" />
-                À retenir
+                À retenir : {apresDeuxPoints(fiche.titre)}
               </h2>
               <ul className="mt-3 grid gap-2 text-sm leading-6 text-slate-700 print:text-xs">
                 {fiche.aRetenir.map((point) => (
@@ -835,8 +847,26 @@ export default function FicheCoursClient({
                   Fiche de cours
                 </span>
               </div>
-              <h1 className="mt-5 text-3xl font-black tracking-normal text-slate-900 sm:text-5xl print:text-3xl">
-                {fiche.titre}
+              {/* ⭐ UN H1 EXPLICITE (Frédéric, 25/08/2026). Il valait « Les
+                  angles » : la matière et la classe étaient à côté, dans des
+                  pastilles — donc invisibles pour Google, pour un PDF détaché de
+                  sa page, et pour un élève qui imprime trois fiches et les
+                  mélange. Le titre dit maintenant de quoi il s'agit, pour qui,
+                  et ce que c'est.
+
+                  ⚠️ `data-titre-pdf` N'EST PAS DÉCORATIF. `build-fiches-pdf.ts`
+                  lisait le TEXTE du h1 pour nommer le fichier : rendre le h1
+                  explicite aurait donné « angles-cours-de-maths-6e-6e-cours-
+                  exercices-corriges.pdf » et orphelin les 87 PDF existants. Le
+                  script lit désormais cet attribut, qui porte le titre nu — le
+                  même que `urlPdf()` côté lien. Le nom du fichier ne dépend plus
+                  de la façon dont le titre s'affiche. */}
+              <h1
+                data-titre-pdf={fiche.titre}
+                className="mt-5 text-3xl font-black tracking-normal text-slate-900 sm:text-5xl print:text-3xl"
+              >
+                {fiche.titre} — cours de {fiche.matiereLabel.toLowerCase()}{" "}
+                {fiche.classe}
               </h1>
               <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600 print:text-sm">
                 {fiche.accroche}

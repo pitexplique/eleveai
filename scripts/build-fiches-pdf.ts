@@ -91,7 +91,18 @@ async function main() {
     await page.goto(url, { waitUntil: "networkidle" });
     await page.waitForSelector("h1");
 
-    const titre = (await page.textContent("h1"))?.trim() ?? "fiche";
+    // ⚠️ LE NOM DU FICHIER NE SE LIT PLUS DANS LE TEXTE DU H1 (25/08/2026). Le
+    // h1 affiche désormais « Les angles — cours de maths 6e » : le prendre tel
+    // quel aurait produit « angles-cours-de-maths-6e-6e-cours-exercices-
+    // corriges.pdf » et rendu orphelins les 87 PDF déjà publiés et indexés.
+    // `data-titre-pdf` porte le titre NU (« Les angles »), celui-là même que
+    // `urlPdf()` utilise pour poser le lien : les deux ne peuvent plus diverger,
+    // et le titre est libre de changer d'habillage.
+    // Le repli sur le texte reste, pour les pages qui n'ont pas l'attribut.
+    const titre =
+      (await page.getAttribute("h1", "data-titre-pdf"))?.trim() ||
+      (await page.textContent("h1"))?.trim() ||
+      "fiche";
     // La classe se lit dans le chemin : /fiches-cours/<matiere>/<classe>/<notion>
     const classe = chemin.split("/")[3] ?? "";
 
