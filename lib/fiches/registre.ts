@@ -426,6 +426,18 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
      ⚠️ Ce n'est PAS la fiche des pronoms : reconnaître un pronom démonstratif
      est une question de classe de mot, retrouver ce qu'il reprend deux phrases
      plus haut est une question de texte. */
+  /* « Savoir accorder les mots dans la phrase ET EXPLIQUER SES CHOIX » est un
+     objectif à part entière du BO, avec cinq attendus pour la seule 5e. Il tient
+     en deux fiches parce que le découpage du 24/08 l'a coupé en deux notions :
+     les chaînes d'accord ici, le participe passé à part — c'est là que se joue
+     l'essentiel des erreurs, et une règle noyée dans quatre autres ne se
+     travaille pas. */
+  "francais/5e/orthographe-accords": {
+    titre: "Les chaînes d'accord dans la phrase (2026-2027)",
+    resume:
+      "Le noyau qui commande le groupe nominal, l'attribut par-dessus le verbe, et le sujet qu'un complément vient cacher : on barre, et on relit.",
+  },
+
   "francais/5e/grammaire-reprises": {
     titre: "Les reprises et la chaîne anaphorique (2026-2027)",
     resume:
