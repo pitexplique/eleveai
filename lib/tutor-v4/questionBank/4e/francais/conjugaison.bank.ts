@@ -244,6 +244,50 @@ const VALEURS: readonly Classement[] = [
 
 const TOUTES_VALEURS: readonly string[] = [...new Set(VALEURS.map((v) => v.rep))];
 
+/* =============================================================================
+   8. CE QU'EXPRIME LE CONDITIONNEL
+   ---------------------------------------------------------------------------
+   ⛔ ÉCRIT LE 25/08/2026, parce que le coach ne savait faire qu'UNE chose du
+   conditionnel : le FORMER. Les quatorze cas de la table `CONDITIONNEL`
+   ci-dessus sont tous du même moule — radical du futur, terminaison de
+   l'imparfait. Ce que la forme veut dire n'était nulle part.
+
+   ⚠️ DANS LE PROGRAMME QUE SUIT LA 4e, LE CONDITIONNEL EST UN MODE : la
+   terminologie exigible dit « mode conditionnel présent, passé ». C'est
+   l'inverse du texte de 2026 suivi par la 5e, où il redevient un temps de
+   l'indicatif. Ne pas « harmoniser » les deux banques : chacune a raison pour
+   sa classe.
+
+   ⭐ LA QUATRIÈME VALEUR VAUT À ELLE SEULE LA MICRO — l'information non
+   confirmée. « Le suspect aurait pris la fuite » : le journal rapporte sans
+   garantir, et toute la prudence tient dans une terminaison. C'est le cœur du
+   questionnement de 4e « Informer, s'informer, déformer ? », et la banque
+   `documents-composites` apprend déjà à peser une source sans jamais la relier
+   à la forme verbale qui porte le doute.
+   ⚠️ UN SEUL des trois cas porte son marqueur (« Selon le journal ») : sinon
+   l'élève ne classe plus une valeur, il repère un mot.
+   ========================================================================== */
+
+const CONDITIONNEL_VALEURS: readonly Classement[] = [
+  { phrase: "Si j'avais le temps, je viendrais avec vous.", rep: "une hypothèse : le fait dépend d'une condition non réalisée" },
+  { phrase: "Pourriez-vous répéter la question, s'il vous plait ?", rep: "une demande polie : le conditionnel adoucit ce qu'on demande" },
+  { phrase: "Tu aurais dû me prévenir avant de partir.", rep: "un regret ou un reproche : ce qui n'a pas été fait à temps" },
+  { phrase: "Selon le journal, le suspect aurait pris la fuite.", rep: "une information non confirmée : le journal ne la garantit pas" },
+  { phrase: "Il annonça qu'il partirait le lendemain.", rep: "un futur vu du passé : ce qui était à venir à ce moment-là" },
+  { phrase: "À ta place, je répondrais tout autrement.", rep: "une hypothèse : le fait dépend d'une condition non réalisée" },
+  { phrase: "Je voudrais un renseignement sur les horaires.", rep: "une demande polie : le conditionnel adoucit ce qu'on demande" },
+  { phrase: "J'aurais aimé le voir une dernière fois.", rep: "un regret ou un reproche : ce qui n'a pas été fait à temps" },
+  { phrase: "L'incendie aurait détruit une partie du hangar.", rep: "une information non confirmée : le journal ne la garantit pas" },
+  { phrase: "Elle savait qu'ils reviendraient un jour.", rep: "un futur vu du passé : ce qui était à venir à ce moment-là" },
+  { phrase: "Sans la pluie, ils seraient partis bien plus tôt.", rep: "une hypothèse : le fait dépend d'une condition non réalisée" },
+  { phrase: "Auriez-vous une minute à m'accorder ?", rep: "une demande polie : le conditionnel adoucit ce qu'on demande" },
+  { phrase: "Il aurait fallu réviser cette leçon-là.", rep: "un regret ou un reproche : ce qui n'a pas été fait à temps" },
+  { phrase: "Le maire annoncerait sa décision dans la semaine.", rep: "une information non confirmée : le journal ne la garantit pas" },
+  { phrase: "Nous pensions qu'il ferait beau ce matin-là.", rep: "un futur vu du passé : ce qui était à venir à ce moment-là" },
+];
+
+const TOUTES_VALEURS_COND: readonly string[] = [...new Set(CONDITIONNEL_VALEURS.map((v) => v.rep))];
+
 /** Gabarit des tables de PRODUCTION. */
 function gabaritForme(
   id: string,
@@ -392,5 +436,17 @@ export const conjugaison4eBank: TutorBankItemV4[] = [
     "Les temps ne disent pas seulement quand : ils disent comment on regarde l'action. Le programme donne son exemple — « elle lut une page » borne l'action d'un bout à l'autre, « elle lisait une page » la laisse ouverte. Et un temps composé présente l'action comme déjà accomplie.",
     "Demande-toi si l'on pourrait retirer la phrase sans casser l'enchainement. Si oui, elle est à l'arrière-plan ; si non, elle fait avancer. Et si le verbe est composé, cherche l'action par rapport à laquelle il est accompli.",
     ["4e", "conjugaison", "valeurs", "aspect", "template"],
+  ),
+  gabaritClassement(
+    "4e_conj_valeurs_conditionnel_tpl_1",
+    "4e_conj_valeurs_conditionnel",
+    CONDITIONNEL_VALEURS,
+    TOUTES_VALEURS_COND,
+    "Qu'exprime le conditionnel dans cette phrase ?",
+    3,
+    "La forme est toujours la même : c'est ce qu'elle fait qui change.",
+    "Le conditionnel a une seule forme et cinq emplois. Il pose une hypothèse suspendue à une condition ; il adoucit une demande ; il dit le regret ou le reproche de ce qui n'a pas eu lieu ; il rapporte une information sans la garantir ; et il exprime ce qui était à venir dans un récit au passé.",
+    "Cherche ce qui accompagne le verbe. Un « si » avec de l'imparfait annonce l'hypothèse. Une question polie s'adresse à quelqu'un. « Aurait dû », « aurait fallu » disent le regret. Un verbe de parole au passé avant la subordonnée donne le futur du passé. Et s'il ne reste rien de tout cela, dans un texte qui informe : c'est que le journal ne garantit pas.",
+    ["4e", "conjugaison", "valeurs", "conditionnel", "template"],
   ),
 ];

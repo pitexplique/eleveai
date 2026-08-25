@@ -129,7 +129,7 @@ const VALEURS: readonly Cas[] = [
 
   { gauche: "Le personnage préfère mourir plutôt que d'accepter une réparation qui le déshonorerait.", droite: "l'honneur contre la vie sauve : on tient à sa réputation plus qu'à sa sécurité" },
   { gauche: "Un duel est refusé, et celui qui refuse perd tout aux yeux des autres.", droite: "l'honneur contre la vie sauve : on tient à sa réputation plus qu'à sa sécurité" },
-  { gauche: "Le soldat reste sur la position, sachant qu'il n'en reviendra pas, pour ne pas passer pour un lâche.", droite: "l'honneur contre la vie sauve : on tient à sa réputation plus qu'à sa sécurité" },
+  { gauche: "Le soldat reste sur la position, sachant qu'il n'en reviendra pas, pour ne pas être un lâche.", droite: "l'honneur contre la vie sauve : on tient à sa réputation plus qu'à sa sécurité" },
 
   { gauche: "On ordonne au personnage quelque chose qu'il juge injuste, et il doit décider s'il obéit.", droite: "l'obéissance contre la conscience : un ordre s'oppose à ce que l'on croit juste" },
   { gauche: "Le serviteur reçoit une consigne qui va nuire à un innocent.", droite: "l'obéissance contre la conscience : un ordre s'oppose à ce que l'on croit juste" },
@@ -303,6 +303,142 @@ function gabarit(
   };
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   LE GABARIT INVERSE — écrit le 25/08/2026 pour réparer une panne.
+
+   ⛔ LA PANNE : les cinq questionnements de 4e ÉTAIENT AFFICHÉS DANS LE COACH
+   ET OUVRAIENT SUR UNE ERREUR. « Aucune paire disponible dans la notion
+   culture_questionnements. » Le mode complet oppose DEUX questions, donc il
+   exige deux items de banque distincts (`allowSingleItem: false`) ; chacune de
+   ces micros n'en avait qu'UN — le gabarit ci-dessus. Et comme la notion ne
+   contient qu'elles cinq, le repli sur une micro voisine ne trouvait rien non
+   plus. Aucun des six autres vérificateurs ne le voyait : la variété était
+   bonne (18 énoncés), la couverture à 100 %, les notions bien rattachées.
+   Seul `verifier-demarrage.ts … complete` le dit — c'est la leçon du 18/08 sur
+   la 2de, et elle se rejoue ici.
+
+   ⭐ POURQUOI UN SECOND GÉNÉRATEUR ET PAS UNE QUESTION FIXE (Frédéric, 25/08 :
+   « n'oublie pas les générateurs »). Un item fixe aurait suffi à faire la
+   paire, mais il ne se renouvelle jamais : l'élève l'aurait revu à chaque
+   tirage, et l'exigence est qu'il tienne cinq à sept minutes sans retomber sur
+   la même question. Deux générateurs, eux, se renouvellent tous les deux.
+
+   ⭐ CE QUE FAIT LE GABARIT INVERSE : il retourne la table. Le premier donne
+   une situation et demande le cas ; celui-ci donne le cas et demande quelle
+   situation l'illustre. Ce n'est pas un remplissage — reconnaitre un exemple
+   et produire un exemple sont deux gestes différents, et le second est le plus
+   exigeant. Aucun contenu neuf, donc aucun risque d'erreur neuve.
+
+   ⚠️ LES LEURRES SONT CALIBRÉS EN LONGUEUR, et c'est indispensable ici. Les
+   propositions ne sont plus des étiquettes calibrées à la main mais les
+   SITUATIONS elles-mêmes, qui vont de soixante à cent-quinze caractères. Tirées
+   au hasard, la plus longue aurait souvent été la bonne, et le QCM se serait
+   gagné sans rien savoir. On ne retient donc comme leurres que des situations
+   de longueur voisine, et l'on n'élargit la fenêtre que s'il en manque.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ⚠️ PREMIÈRE VERSION REJETÉE PAR LA MESURE (25/08/2026). Elle retenait les
+   situations dont la longueur tombait dans une FENÊTRE fixe autour de la bonne
+   réponse, quitte à l'élargir de dix en dix quand il en manquait. Trois items
+   sont ressortis au-dessus du seuil de huit caractères : quand la bonne réponse
+   est la plus longue de sa table, la fenêtre s'élargit, et elle attrape des
+   situations bien plus courtes qu'elle.
+   Le tri par VOISINAGE le règle sans cas particulier : on classe les leurres
+   possibles par écart de longueur croissant, on garde les six plus proches, et
+   l'on en tire trois. Le voisinage borne l'écart, le tirage garde la variété. */
+/* ⚠️ DEUXIÈME VERSION REJETÉE, ELLE AUSSI PAR LA MESURE. Garder les six plus
+   proches et en tirer trois laissait encore passer un cas : quand la bonne
+   réponse est la PLUS LONGUE de sa table, ses six voisins sont tous plus courts,
+   et le tirage pouvait retenir les trois plus courts des six. Écart mesuré : 12.
+
+   ⭐ CE QUI MARCHE, PARCE QU'IL VISE LA MESURE ELLE-MÊME. Ce que le
+   vérificateur regarde, ce n'est pas la dispersion des quatre lignes : c'est
+   l'écart entre la bonne réponse et LE PLUS LONG DES LEURRES. Il suffit donc
+   de garantir qu'un leurre au moins soit aussi long qu'elle — et de ne se
+   rabattre sur les plus proches que lorsqu'il n'en existe aucun, c'est-à-dire
+   quand la bonne réponse est vraiment la plus longue de la table. */
+const VOISINS_RETENUS = 6;
+
+function parProximite(candidats: readonly string[], cible: number) {
+  return [...candidats].sort(
+    (a, b) => Math.abs(a.length - cible) - Math.abs(b.length - cible),
+  );
+}
+
+function makeChoicesCalibrees(correct: string, pool: readonly string[]) {
+  const candidats = Array.from(new Set(pool)).filter((p) => p !== correct);
+  const aussiLongs = parProximite(
+    candidats.filter((p) => p.length >= correct.length),
+    correct.length,
+  );
+
+  /* ⛔ AUCUN LEURRE AUSSI LONG : la bonne réponse est la plus longue de sa
+     table, et là il n'y a plus rien à arbitrer. On prend les TROIS PLUS
+     LONGUES disponibles, sans tirage — tout aléa ne peut ici qu'agrandir
+     l'écart. C'est ce repli, laissé au hasard, qui a fait échouer les deux
+     versions précédentes. */
+  if (aussiLongs.length === 0) {
+    const plusLongues = [...candidats].sort((a, b) => b.length - a.length).slice(0, 3);
+    return shuffle([correct, ...plusLongues]);
+  }
+
+  // Sinon : un leurre au moins aussi long que la bonne réponse — tiré parmi les
+  // trois qui la serrent de plus près —, et deux voisins pour la variété. Le
+  // plus long des trois est alors garanti, c'est lui que la mesure regarde.
+  const retenus = [randomChoice(aussiLongs.slice(0, 3))];
+  const reste = parProximite(
+    candidats.filter((p) => !retenus.includes(p)),
+    correct.length,
+  ).slice(0, VOISINS_RETENUS);
+  retenus.push(...shuffle(reste).slice(0, 2));
+
+  return shuffle([correct, ...retenus]);
+}
+
+function gabaritInverse(
+  id: string,
+  microId: string,
+  table: readonly Cas[],
+  question: string,
+  difficulty: 2 | 3,
+  hint: string,
+  definition: string,
+  methode: string,
+  tags: readonly string[],
+): TutorBankItemV4 {
+  return {
+    kind: "template",
+    id,
+    niveau: "4e",
+    matiere: "francais",
+    notionId: "culture_litteraire",
+    microId,
+    difficulty,
+    theme: "neutral",
+    hint,
+    tags: [...tags],
+    generate: () => {
+      const c = randomChoice(table);
+      // ⛔ Les leurres viennent d'AUTRES cas que celui-ci : deux situations qui
+      //    illustrent le même cas seraient toutes les deux justes.
+      const autres = table.filter((x) => x.droite !== c.droite).map((x) => x.gauche);
+      return {
+        text: `${c.droite.charAt(0).toUpperCase()}${c.droite.slice(1)}.\n\n${question}`,
+        format: "qcm" as const,
+        choices: makeChoicesCalibrees(c.gauche, autres),
+        expected: [c.gauche],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          definition,
+          methode,
+          `${c.droite.charAt(0).toUpperCase()}${c.droite.slice(1)} → « ${c.gauche} »`,
+          "Les autres situations proposées illustrent d'autres cas de la même liste.",
+        ),
+      };
+    },
+  };
+}
+
 export const cultureLitteraire4eBank: TutorBankItemV4[] = [
   gabarit(
     "4e_cult_dire_amour_tpl_1",
@@ -363,5 +499,67 @@ export const cultureLitteraire4eBank: TutorBankItemV4[] = [
     "La ville n'a pas un seul visage en littérature, elle en a plusieurs et souvent contradictoires. Elle est une promesse pour qui arrive. Elle est un labyrinthe où l'on se perd. Elle laisse seul au milieu de la foule. Elle broie ceux qui y travaillent. Elle devient parfois un être vivant, voire un monstre. Et elle change, effaçant un monde pendant qu'elle en bâtit un autre.",
     "Cherche ce que la ville FAIT au personnage : elle l'attire, elle l'égare, elle l'isole, elle l'use, elle l'inquiète, ou elle lui retire ce qu'il connaissait. C'est cet effet, et non le décor, qui donne le visage.",
     ["4e", "culture", "ville", "questionnement-complementaire", "template"],
+  ),
+
+  /* ── LES SECONDS GÉNÉRATEURS (25/08/2026) ────────────────────────────────
+     Sans eux, ces cinq micros s'affichent au coach et ouvrent sur une erreur :
+     le mode complet oppose deux questions et n'avait qu'un item. Voir le pavé
+     au-dessus de `gabaritInverse`. Ils travaillent le geste inverse — non plus
+     reconnaitre le cas d'une situation, mais retrouver la situation qui
+     illustre un cas. */
+  gabaritInverse(
+    "4e_cult_dire_amour_tpl_2",
+    "4e_cult_dire_amour",
+    AMOUR,
+    "Quelle situation en est un exemple ?",
+    3,
+    "Trois des quatre situations disent l'amour autrement. Cherche celle qui fait exactement cela.",
+    "Les façons de dire l'amour ne se distinguent pas par le sentiment, qui est le même, mais par ce que le texte FAIT de lui : s'adresser à l'aimé, le célébrer, pleurer sa perte, le lui reprocher, attendre son retour, ou se moquer des mots convenus.",
+    "Relis le cas, puis élimine : à qui parle-t-on dans chaque situation ? l'aimé est-il là, absent ou perdu ? et le texte célèbre-t-il, souffre-t-il, reproche-t-il ou se moque-t-il ?",
+    ["4e", "culture", "dire-amour", "poesie", "template", "inverse"],
+  ),
+  gabaritInverse(
+    "4e_cult_individu_societe_tpl_2",
+    "4e_cult_individu_societe",
+    VALEURS,
+    "Quelle situation en est un exemple ?",
+    3,
+    "Un conflit de valeurs n'est pas une dispute : c'est ce qu'on croit juste qui s'oppose.",
+    "Un conflit de valeurs met aux prises deux façons de juger ce qui est bien, et non deux personnes qui se disputent un bien. Il peut opposer un personnage au groupe, la loi à la conscience, la fidélité à la vérité, ou le personnage à lui-même.",
+    "Dans chaque situation, demande-toi ce que le personnage devrait TRAHIR pour obtenir ce qu'il veut. C'est ce qu'il trahit qui nomme le conflit.",
+    ["4e", "culture", "individu-societe", "template", "inverse"],
+  ),
+  gabaritInverse(
+    "4e_cult_fiction_reel_tpl_2",
+    "4e_cult_fiction_reel",
+    FICTION,
+    "Quelle situation en est un exemple ?",
+    3,
+    "Le fantastique laisse le doute ; le merveilleux ne le laisse pas ; l'anticipation prolonge le réel.",
+    "Ces récits ne se distinguent pas par leur étrangeté mais par le statut qu'ils lui donnent. Le merveilleux admet le surnaturel d'emblée. Le fantastique le laisse indécidable et garde le doute jusqu'au bout. L'anticipation prolonge une tendance du présent. Et l'enquête soumet l'étrange à la raison.",
+    "Demande-toi, à la fin de chaque situation, si l'on SAIT ce qui s'est passé. Si oui, ce n'est pas du fantastique — même s'il s'y passe des choses inexplicables.",
+    ["4e", "culture", "fiction-reel", "template", "inverse"],
+  ),
+  gabaritInverse(
+    "4e_cult_informer_deformer_tpl_2",
+    "4e_cult_informer_deformer",
+    INFO,
+    "Quelle situation en est un exemple ?",
+    3,
+    "Ce n'est pas le sujet qui change, c'est le traitement qu'on lui fait subir.",
+    "Un même fait peut être rapporté, cadré, amplifié, orienté ou tu. Ce qui sépare ces traitements n'est pas la vérité de chacun — tous peuvent être exacts —, mais ce qu'ils font voir et ce qu'ils laissent hors du champ.",
+    "Pour chaque situation, demande-toi ce que le lecteur NE SAURA PAS après l'avoir lue. C'est ce manque-là qui nomme le traitement.",
+    ["4e", "culture", "informer-deformer", "medias", "template", "inverse"],
+  ),
+  gabaritInverse(
+    "4e_cult_ville_tpl_2",
+    "4e_cult_ville",
+    VILLE,
+    "Quelle situation en est un exemple ?",
+    3,
+    "Regarde ce que la ville FAIT au personnage, pas à quoi elle ressemble.",
+    "La ville a plusieurs visages en littérature, et souvent contradictoires : promesse pour qui arrive, labyrinthe où l'on se perd, solitude au milieu de la foule, machine qui use, être vivant ou monstre, et monde qui s'efface pendant qu'un autre se bâtit.",
+    "Élimine les situations où la ville n'est qu'un décor : dans le bon exemple, elle agit sur le personnage, et c'est cette action qui donne le visage.",
+    ["4e", "culture", "ville", "template", "inverse"],
   ),
 ];

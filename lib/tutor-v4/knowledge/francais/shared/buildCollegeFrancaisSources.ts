@@ -396,9 +396,35 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
       { id: `${prefix}_conj_subjonctif`, label: "Former et employer le subjonctif présent", notionId: "conjugaison_temps", prerequis: [`${prefix}_conj_modes_personnels`] },
       { id: `${prefix}_conj_conditionnel`, label: "Former le conditionnel présent et le conditionnel passé", notionId: "conjugaison_temps", prerequis: [`${prefix}_conj_modes_personnels`] },
       { id: `${prefix}_conj_temps_composes`, label: "Construire les temps composés et écrire les participes passés", notionId: "conjugaison_temps", prerequis: [`${prefix}_conj_modes_personnels`] },
-      { id: `${prefix}_conj_pronominaux`, label: "Accorder les verbes pronominaux", notionId: "conjugaison_temps", prerequis: [`${prefix}_conj_temps_composes`, `${prefix}_orth_participe_etre_avoir`] },
+      /* ⚠️ CETTE MICRO A CHANGÉ DE NOTION LE 25/08/2026, et elle n'a pas changé
+         d'une ligne par ailleurs. Elle s'appelle « Accorder les verbes
+         pronominaux » et elle vivait sous `conjugaison_temps` — « Les temps et
+         les modes à construire ». Or sa banque ne construit aucun temps : ses
+         quatorze cas sont de l'accord du participe passé, et rien d'autre —
+         « Elle s'est lavé LES MAINS » contre « Elle s'est lavée », « elles se
+         sont parlé » parce qu'on parle À quelqu'un. C'est le COD antéposé, le
+         COI, et les essentiellement pronominaux : `orthographe_participe`.
+         ⭐ Son prérequis pointait DÉJÀ vers `_orth_participe_etre_avoir` : la
+         micro savait où elle allait, seul son rattachement l'ignorait.
+         Effet de bord voulu : `conjugaison_temps` passe de 4 micros à 3, et
+         `orthographe_participe` de 2 à 3 — les deux rentrent dans la règle
+         « 3-4 par notion », dont le PLANCHER n'est vérifié par aucun script. */
+      { id: `${prefix}_conj_pronominaux`, label: "Accorder les verbes pronominaux", notionId: "orthographe_participe", prerequis: [`${prefix}_conj_temps_composes`, `${prefix}_orth_participe_etre_avoir`] },
       { id: `${prefix}_conj_irreguliers`, label: "Conjuguer les onze verbes irréguliers du 3e groupe", notionId: "conjugaison_formes", prerequis: [`${prefix}_conj_subjonctif`] },
       { id: `${prefix}_conj_valeurs_aspect`, label: "Reconnaitre ce qu'exprime un temps dans le récit", notionId: "conjugaison_valeurs", prerequis: [`${prefix}_conj_temps_composes`] },
+      /* ⛔ LE COACH NE SAVAIT QUE FORMER LE CONDITIONNEL (ajoutée le 25/08/2026).
+         Les quatorze cas de `_conj_conditionnel` sont tous du même moule —
+         radical du futur, terminaison de l'imparfait. Ce que le conditionnel
+         EXPRIME n'était nulle part, alors que le programme range « mettre en
+         évidence le lien entre le temps employé et le sens » parmi ses
+         objectifs, et que ce texte-ci fait du conditionnel un MODE.
+         ⭐ Une de ses valeurs vaut à elle seule la micro : l'information non
+         confirmée — « le suspect AURAIT pris la fuite ». C'est le conditionnel
+         du journaliste, et c'est le cœur du questionnement de 4e « Informer,
+         s'informer, déformer ? ». La banque `documents-composites` apprend déjà
+         à peser une source ; rien ne la reliait à la forme verbale qui porte
+         le doute. */
+      { id: `${prefix}_conj_valeurs_conditionnel`, label: "Reconnaitre ce que le conditionnel exprime", notionId: "conjugaison_valeurs", prerequis: [`${prefix}_conj_conditionnel`] },
 
       /* « Lire des textes non littéraires, des images et des documents
          composites (y compris numériques) » est une COMPÉTENCE TRAVAILLÉE
