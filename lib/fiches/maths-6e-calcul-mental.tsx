@@ -284,24 +284,28 @@ export const ficheCalculMental6e: FicheCoursData = {
   proprietes: [
     {
       titre: "Décomposer les nombres",
+      micros: ["entier_strategie_mentale"],
       texte:
         "On peut couper un nombre en morceaux plus simples sans changer le résultat. Pour 134 + 28, on ajoute d'abord 20 (154), puis 8 (162). Chaque étape est facile.",
       schema: barreDecomposition,
     },
     {
       titre: "S'appuyer sur les compléments à 10 et à 100",
+      micros: ["entier_addition_mentale", "entier_soustraction_mentale"],
       texte:
         "Les nombres ronds sont nos amis. 47 + 8 : on complète à 50 (47 + 3), puis on ajoute le reste (+ 5). Et pour 100 - 36, on cherche ce qui manque à 36 pour faire 100 : c'est 64.",
       schema: memoDesComplements,
     },
     {
       titre: "Connaître ses tables dans les deux sens",
+      micros: ["entier_multiplication_mentale", "entier_division_mentale"],
       texte:
         "Une table sert à multiplier et à diviser. Si on sait que 9 × 7 = 63, alors on sait aussi que 63 ÷ 9 = 7. Une seule table apprise, deux calculs gagnés.",
       schema: tableDansLesDeuxSens,
     },
     {
       titre: "Arrondir puis corriger",
+      micros: ["entier_strategie_mentale"],
       texte:
         "On peut remplacer un nombre par un nombre rond proche, puis corriger. Pour 99 + 47, on calcule 100 + 47 = 147, puis on enlève le 1 de trop : 146.",
       schema: barreDuTropPlein,
@@ -318,18 +322,21 @@ export const ficheCalculMental6e: FicheCoursData = {
   methode: [
     {
       titre: "Observer",
+      micros: ["entier_strategie_mentale"],
       texte:
         "Avant de calculer, on regarde les nombres : y a-t-il un nombre rond tout proche ? Une table que je connais ? Un double ou une moitié ?",
       schema: droiteDuNombreRond,
     },
     {
       titre: "Décomposer",
+      micros: ["entier_addition_mentale"],
       texte:
         "On coupe le calcul en étapes simples : les dizaines d'abord, puis les unités. Ou on passe par la dizaine suivante (68 + 7 : d'abord + 2, puis + 5).",
       schema: droiteDesDeuxSauts,
     },
     {
       titre: "Vérifier",
+      micros: ["entier_soustraction_mentale"],
       texte:
         "On se demande si le résultat est raisonnable : 96 - 27 doit donner un peu moins de 70. Si on trouve 129, c'est qu'on s'est trompé quelque part.",
       schema: droiteDeLOrdreDeGrandeur,
@@ -338,16 +345,19 @@ export const ficheCalculMental6e: FicheCoursData = {
   usages: [
     {
       titre: "Addition et soustraction mentales",
+      micros: ["entier_addition_mentale", "entier_soustraction_mentale"],
       detail:
         "On passe par les dizaines : 56 + 8, c'est 56 + 4 = 60 puis + 4 = 64. Pour soustraire, pareil : 83 - 7, c'est 83 - 3 = 80 puis - 4 = 76.",
     },
     {
       titre: "Multiplication et division mentales",
+      micros: ["entier_multiplication_mentale", "entier_division_mentale"],
       detail:
         "Les tables d'abord : 6 × 8 = 48, donc 48 ÷ 6 = 8. Pour × 5, on fait × 10 puis on prend la moitié : 18 × 5 = 180 ÷ 2 = 90.",
     },
     {
       titre: "Les stratégies malines",
+      micros: ["entier_strategie_mentale"],
       detail:
         "Double (× 2), moitié (÷ 2), quart (÷ 4). Et × 10 ou ÷ 10 : la virgule se déplace d'un rang (4,23 × 10 = 42,3 ; 645 ÷ 10 = 64,5).",
     },
@@ -355,6 +365,7 @@ export const ficheCalculMental6e: FicheCoursData = {
   exemples: [
     {
       titre: "Une addition en passant par la dizaine",
+      micros: ["entier_addition_mentale"],
       donnees: "On veut calculer 47 + 8 de tête.",
       question: "Combien font 47 + 8 ?",
       schema: droiteDizaine,
@@ -363,6 +374,7 @@ export const ficheCalculMental6e: FicheCoursData = {
     },
     {
       titre: "Une multiplication par 5 sans souffrir",
+      micros: ["entier_multiplication_mentale"],
       donnees: "On veut calculer 18 × 5 de tête.",
       question: "Combien font 18 × 5 ?",
       schema: barreFois5,
@@ -371,6 +383,7 @@ export const ficheCalculMental6e: FicheCoursData = {
     },
     {
       titre: "Rendre la monnaie",
+      micros: ["entier_soustraction_mentale"],
       donnees: "Tu achètes pour 9 € et tu paies avec un billet de 10 €.",
       question: "Combien te rend-on ?",
       schema: barreMonnaie,
@@ -395,12 +408,14 @@ export const ficheCalculMental6e: FicheCoursData = {
       question: "Calcule de tête : 96 ÷ 8.",
       correction:
         "Stratégie : on cherche dans la table de 8 le nombre qui donne 96. On sait que 8 × 10 = 80, et il manque 16, soit 8 × 2. Donc 8 × 12 = 96, et 96 ÷ 8 = 12.",
+      micros: ["entier_division_mentale"],
     },
     {
       question:
         "À la boulangerie, tu achètes un pain à 2 €, un croissant à 1 € et un gâteau à 6 €. Tu paies avec un billet de 10 €. Combien te rend-on ?",
       correction:
         "Stratégie : on additionne d'abord les prix : 2 + 1 + 6 = 9 €. Puis on cherche le complément à 10 : il manque 1 pour aller de 9 à 10. On te rend donc 1 €.",
+      micros: ["entier_calcul_mental_defi"],
     },
   ],
   coachHref: "/coach-ia/maths?classe=6e",

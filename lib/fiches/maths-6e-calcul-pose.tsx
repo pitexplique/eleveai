@@ -207,16 +207,19 @@ export const ficheCalculPose6e: FicheCoursData = {
   proprietes: [
     {
       titre: "J'aligne les rangs",
+      micros: ["entier_addition_posee", "entier_soustraction_posee"],
       texte: "Unités sous unités, dizaines sous dizaines. Sinon le calcul est faux.",
       schema: colonneDesUnites,
     },
     {
       titre: "Je gère la retenue",
+      micros: ["entier_addition_posee"],
       texte: "Si une colonne dépasse 9, j'écris le chiffre des unités et je reporte 1 à gauche.",
       schema: laRetenueEcrite,
     },
     {
       titre: "Je vérifie",
+      micros: ["entier_calcul_verifier"],
       texte: "Avec l'opération inverse : dividende = diviseur × quotient + reste.",
       schema: verifierParLInverse,
     },
@@ -230,18 +233,19 @@ export const ficheCalculPose6e: FicheCoursData = {
       "Vers 820, à Bagdad, le savant Al-Khwarizmi explique comment calculer pas à pas. Son nom a donné le mot « algorithme » : une suite d'étapes dans l'ordre.",
   },
   methode: [
-    { titre: "J'aligne", texte: "Les chiffres de même rang, l'un sous l'autre." , schema: alignementFaux },
-    { titre: "Je calcule", texte: "Colonne par colonne, de droite à gauche, avec les retenues." , schema: soustractionAvecRetenue },
+    { titre: "J'aligne", texte: "Les chiffres de même rang, l'un sous l'autre." , schema: alignementFaux , micros: ["entier_addition_posee"] },
+    { titre: "Je calcule", texte: "Colonne par colonne, de droite à gauche, avec les retenues." , schema: soustractionAvecRetenue , micros: ["entier_soustraction_posee"] },
     { titre: "Je vérifie", texte: "Avec l'opération inverse, ou un ordre de grandeur." , schema: ordreDeGrandeur },
   ],
   usages: [
-    { titre: "Regrouper → addition", detail: "On met ensemble : on pose une addition." },
-    { titre: "Enlever → soustraction", detail: "On retire une quantité : on pose une soustraction." },
-    { titre: "Répéter / partager", detail: "On répète : multiplication. On partage en parts égales : division." },
+    { titre: "Regrouper → addition", detail: "On met ensemble : on pose une addition." , micros: ["entier_addition_posee"] },
+    { titre: "Enlever → soustraction", detail: "On retire une quantité : on pose une soustraction." , micros: ["entier_soustraction_posee"] },
+    { titre: "Répéter / partager", detail: "On répète : multiplication. On partage en parts égales : division." , micros: ["entier_multiplication_posee", "entier_division_posee"] },
   ],
   exemples: [
     {
       titre: "Addition (avec retenue)",
+      micros: ["entier_addition_posee"],
       donnees: "475 + 286.",
       question: "Combien font 475 + 286 ?",
       schema: pose("addition", ["475", "286"], "761"),
@@ -250,6 +254,7 @@ export const ficheCalculPose6e: FicheCoursData = {
     },
     {
       titre: "Soustraction (avec emprunt)",
+      micros: ["entier_soustraction_posee"],
       donnees: "632 − 458 (le plus grand en haut).",
       question: "Combien font 632 − 458 ?",
       schema: pose("soustraction", ["632", "458"], "174"),
@@ -258,6 +263,7 @@ export const ficheCalculPose6e: FicheCoursData = {
     },
     {
       titre: "Multiplication",
+      micros: ["entier_multiplication_posee"],
       donnees: "267 × 4.",
       question: "Combien font 267 × 4 ?",
       schema: pose("multiplication", ["267", "4"], "1068"),
@@ -266,6 +272,7 @@ export const ficheCalculPose6e: FicheCoursData = {
     },
     {
       titre: "Division",
+      micros: ["entier_division_posee"],
       donnees: "On partage 58 en parts de 7.",
       question: "Quel est le quotient et le reste de 58 ÷ 7 ?",
       schema: poseDivision,
@@ -290,11 +297,13 @@ export const ficheCalculPose6e: FicheCoursData = {
       question: "Pose et calcule : 267 × 4.",
       correction:
         "7 × 4 = 28 (8, retenue 2). 6 × 4 = 24 + 2 = 26 (6, retenue 2). 2 × 4 = 8 + 2 = 10. Résultat : 1 068.",
+      micros: ["entier_multiplication_posee"],
     },
     {
       question: "On partage 58 billes entre 7 enfants. Combien chacun, et combien reste-t-il ?",
       correction:
         "Partager, c'est diviser : 58 ÷ 7. 7 × 8 = 56, donc 8 billes chacun et il reste 2. Vérif : 7 × 8 + 2 = 58.",
+      micros: ["entier_division_posee", "entier_calcul_pose_defi"],
     },
   ],
   coachHref: "/coach-ia/maths?classe=6e",

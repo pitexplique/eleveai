@@ -256,16 +256,19 @@ export const ficheEntiers6e: FicheCoursData = {
   proprietes: [
     {
       titre: "La position donne la valeur",
+      micros: ["entier_rang"],
       texte: "Dans 4 273, le 2 vaut 200 : c'est le rang qui compte, pas le chiffre seul.",
       schema: additionDesRangs,
     },
     {
       titre: "Comparer",
+      micros: ["entier_comparer"],
       texte: "Le plus de chiffres gagne ; à égalité, on compare de gauche à droite.",
       schema: lePlusLongGagne,
     },
     {
       titre: "Encadrer",
+      micros: ["entier_encadrer"],
       texte: "Placer entre deux nombres ronds qui se suivent : 40 < 47 < 50.",
       schema: encadrerEntreDeuxDizaines,
     },
@@ -279,18 +282,19 @@ export const ficheEntiers6e: FicheCoursData = {
       "Nos dix chiffres viennent d'Inde (vers le 5e siècle). Le zéro comme vrai nombre a été décrit par Brahmagupta en 628. Cette écriture par position a remplacé les chiffres romains, peu pratiques pour calculer.",
   },
   methode: [
-    { titre: "Je repère le rang", texte: "De droite à gauche : unités, dizaines, centaines, milliers." , schema: rangDesDizaines },
-    { titre: "Je compare", texte: "Le plus long gagne ; sinon, chiffre par chiffre depuis la gauche." , schema: leDroitierGagne },
-    { titre: "Je vérifie le zéro", texte: "Chaque rang vide garde un 0 : 1 042, pas 142." , schema: leZeroQuiTientLaPlace },
+    { titre: "Je repère le rang", texte: "De droite à gauche : unités, dizaines, centaines, milliers." , schema: rangDesDizaines , micros: ["entier_rang"] },
+    { titre: "Je compare", texte: "Le plus long gagne ; sinon, chiffre par chiffre depuis la gauche." , schema: leDroitierGagne , micros: ["entier_comparer"] },
+    { titre: "Je vérifie le zéro", texte: "Chaque rang vide garde un 0 : 1 042, pas 142." , schema: leZeroQuiTientLaPlace , micros: ["entier_lire_ecrire"] },
   ],
   usages: [
-    { titre: "Lire → écrire", detail: "Des mots aux chiffres : « deux mille trente-cinq » → 2 035." },
-    { titre: "Comparer → ranger", detail: "Trouver le plus grand ou ranger : 3 045 < 3 405 < 3 450." },
-    { titre: "Décomposer / encadrer", detail: "4 206 = 4 000 + 200 + 6, ou 300 < 326 < 400." },
+    { titre: "Lire → écrire", detail: "Des mots aux chiffres : « deux mille trente-cinq » → 2 035." , micros: ["entier_lire_ecrire"] },
+    { titre: "Comparer → ranger", detail: "Trouver le plus grand ou ranger : 3 045 < 3 405 < 3 450." , micros: ["entier_comparer"] },
+    { titre: "Décomposer / encadrer", detail: "4 206 = 4 000 + 200 + 6, ou 300 < 326 < 400." , micros: ["entier_decomposer", "entier_encadrer"] },
   ],
   exemples: [
     {
       titre: "Écrire et repérer un rang",
+      micros: ["entier_lire_ecrire", "entier_rang"],
       donnees: "On donne « mille quarante-deux ».",
       question: "Écris-le en chiffres, puis donne le chiffre des dizaines.",
       schema: (
@@ -310,6 +314,7 @@ export const ficheEntiers6e: FicheCoursData = {
     },
     {
       titre: "Comparer deux nombres",
+      micros: ["entier_comparer"],
       donnees: "On compare 345 et 354.",
       question: "Quel est le plus grand ?",
       schema: tableauComparaison,
@@ -318,6 +323,7 @@ export const ficheEntiers6e: FicheCoursData = {
     },
     {
       titre: "Décomposer un nombre",
+      micros: ["entier_decomposer"],
       donnees: "On donne le nombre 2 845.",
       question: "Décompose 2 845.",
       schema: tableauNumeration(
@@ -331,6 +337,7 @@ export const ficheEntiers6e: FicheCoursData = {
     },
     {
       titre: "Encadrer un nombre",
+      micros: ["entier_encadrer"],
       donnees: "On veut encadrer 47 entre deux dizaines.",
       question: "Entre quelles dizaines se trouve 47 ?",
       schema: droiteEncadrement,
@@ -360,6 +367,7 @@ export const ficheEntiers6e: FicheCoursData = {
       question: "Défi : le plus petit nombre de 4 chiffres avec 3, 0, 5 et 1 (une seule fois chacun) ?",
       correction:
         "Un nombre ne commence pas par 0. On place d'abord le plus petit chiffre non nul (1), puis 0, 3, 5. Réponse : 1 035.",
+      micros: ["entier_decomposer", "entier_defi"],
     },
   ],
   coachHref: "/coach-ia/maths?classe=6e",

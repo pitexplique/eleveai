@@ -252,16 +252,19 @@ export const ficheDecimaux6e: FicheCoursData = {
   proprietes: [
     {
       titre: "La virgule sépare",
+      micros: ["decimal_lire_ecrire"],
       texte: "Partie entière à gauche, partie décimale à droite : 3,45 → 3 et 45 centièmes.",
       schema: entreTroisEtQuatre,
     },
     {
       titre: "Les rangs continuent",
+      micros: ["decimal_rang"],
       texte: "Après la virgule : dixièmes, puis centièmes, puis millièmes.",
       schema: grilleDesCentiemes,
     },
     {
       titre: "Comparer",
+      micros: ["decimal_comparer"],
       texte: "Même nombre de décimales (0,5 = 0,50), puis on compare rang par rang.",
       schema: cinqDixiemesEtCinquanteCentiemes,
     },
@@ -275,18 +278,19 @@ export const ficheDecimaux6e: FicheCoursData = {
       "« Décimal » vient de dix : on compte en base 10. En 1585, Simon Stevin montre l'intérêt d'écrire les dixièmes et centièmes ; la virgule se répand au début du XVIIe siècle.",
   },
   methode: [
-    { titre: "Je lis le rang", texte: "1er après la virgule = dixièmes, 2e = centièmes, 3e = millièmes." , schema: lireLesCentiemes },
-    { titre: "J'ajoute des zéros", texte: "Pour comparer ou poser : 0,5 = 0,50, la valeur ne change pas." , schema: lesZerosInutiles },
-    { titre: "J'aligne les virgules", texte: "Pour additionner : virgule sous virgule, puis on calcule." , schema: alignerAvecUnZero },
+    { titre: "Je lis le rang", texte: "1er après la virgule = dixièmes, 2e = centièmes, 3e = millièmes." , schema: lireLesCentiemes , micros: ["decimal_rang"] },
+    { titre: "J'ajoute des zéros", texte: "Pour comparer ou poser : 0,5 = 0,50, la valeur ne change pas." , schema: lesZerosInutiles , micros: ["decimal_comparer"] },
+    { titre: "J'aligne les virgules", texte: "Pour additionner : virgule sous virgule, puis on calcule." , schema: alignerAvecUnZero , micros: ["decimal_lire_ecrire"] },
   ],
   usages: [
-    { titre: "Lire → écrire", detail: "D'une fraction décimale au nombre : 25/10 = 2,5." },
-    { titre: "Comparer", detail: "Même nombre de décimales, puis rang par rang : 2,50 > 2,45." },
-    { titre: "Calculer", detail: "Additionner (virgules alignées) ; ×/÷ par un entier en pensant en dixièmes." },
+    { titre: "Lire → écrire", detail: "D'une fraction décimale au nombre : 25/10 = 2,5." , micros: ["decimal_lire_ecrire"] },
+    { titre: "Comparer", detail: "Même nombre de décimales, puis rang par rang : 2,50 > 2,45." , micros: ["decimal_comparer"] },
+    { titre: "Calculer", detail: "Additionner (virgules alignées) ; ×/÷ par un entier en pensant en dixièmes." , micros: ["decimal_arrondir"] },
   ],
   exemples: [
     {
       titre: "Lire et écrire",
+      micros: ["decimal_lire_ecrire"],
       donnees: "On a la fraction 25/10.",
       question: "Écris-la en nombre décimal.",
       schema: droite25,
@@ -295,6 +299,7 @@ export const ficheDecimaux6e: FicheCoursData = {
     },
     {
       titre: "Le rang d'un chiffre",
+      micros: ["decimal_rang"],
       donnees: "On donne le nombre 12,764.",
       question: "Quel est le chiffre des dixièmes ?",
       schema: tableauRang,
@@ -303,6 +308,7 @@ export const ficheDecimaux6e: FicheCoursData = {
     },
     {
       titre: "Comparer deux prix",
+      micros: ["decimal_comparer"],
       donnees: "Un jus à 2,5 € et un autre à 2,45 €.",
       question: "Lequel est le plus cher ?",
       schema: tableauComparer,
@@ -311,6 +317,7 @@ export const ficheDecimaux6e: FicheCoursData = {
     },
     {
       titre: "Additionner",
+      micros: ["decimal_lire_ecrire"],
       donnees: "On calcule 3,45 + 1,7.",
       question: "Combien font 3,45 + 1,7 ?",
       schema: additionPosee,
@@ -330,6 +337,7 @@ export const ficheDecimaux6e: FicheCoursData = {
       question: "Quel est le plus petit : 0,305 ou 0,35 ?",
       correction:
         "On écrit 0,35 = 0,350. On compare 305 millièmes et 350 millièmes : 305 est plus petit. Donc 0,305.",
+      micros: ["decimal_comparer", "decimal_encadrer"],
     },
     {
       question: "Calcule 3,45 + 1,7.",
@@ -340,6 +348,7 @@ export const ficheDecimaux6e: FicheCoursData = {
       question: "Un objet coûte 2,5 €. Combien coûtent 6 objets ? Puis calcule 9,6 ÷ 3.",
       correction:
         "2,5 × 6 = 15, donc 15 €. Pour la division : 9,6 = 96 dixièmes, 96 ÷ 3 = 32, soit 32 dixièmes = 3,2.",
+      micros: ["decimal_defi"],
     },
   ],
   coachHref: "/coach-ia/maths?classe=6e",

@@ -279,24 +279,28 @@ export const ficheDonnees6e: FicheCoursData = {
   proprietes: [
     {
       titre: "Le tableau croise lignes et colonnes",
+      micros: ["stat_donnee_prelever"],
       texte:
         "Un tableau range les données en lignes et en colonnes. Dans un tableau à double entrée, chaque valeur se lit au croisement d'une ligne et d'une colonne : par exemple la ligne « Natation » et la colonne « Filles ».",
       schema: tableauTransports,
     },
     {
       titre: "Le graphique montre les grandeurs d'un coup d'oeil",
+      micros: ["stat_donnee_lire_graphique"],
       texte:
         "Dans un graphique en barres, chaque catégorie est un bâton dont la hauteur donne la valeur. Plus le bâton est haut, plus la valeur est grande : on repère très vite le plus grand et le plus petit.",
       schema: batonsFruits,
     },
     {
       titre: "Le diagramme circulaire montre des parts",
+      micros: ["stat_donnee_lire_circulaire"],
       texte:
         "Un diagramme circulaire partage un disque en secteurs, un par catégorie. Plus un secteur est grand, plus la catégorie est fréquente. Un secteur qui occupe la moitié du disque représente la moitié du total.",
       schema: camembertMoitie,
     },
     {
       titre: "Comparer, c'est chercher un écart",
+      micros: ["stat_donnee_comparer"],
       texte:
         "Comparer deux données, c'est regarder laquelle est la plus grande, la plus petite, ou calculer leur écart par une soustraction. Le total, lui, s'obtient en additionnant toutes les valeurs.",
       schema: ecartEnBarre,
@@ -313,18 +317,21 @@ export const ficheDonnees6e: FicheCoursData = {
   methode: [
     {
       titre: "Lire le titre et les légendes",
+      micros: ["stat_donnee_lire_graphique"],
       texte:
         "On commence toujours par lire le titre : il dit de quoi parlent les données. On repère ensuite les catégories et les unités, pour savoir ce que représente chaque nombre.",
       schema: tableauTemperatures,
     },
     {
       titre: "Repérer la bonne ligne ou la bonne colonne",
+      micros: ["stat_donnee_prelever"],
       texte:
         "Dans un tableau, on suit la ligne de la catégorie cherchée, puis la bonne colonne. La valeur est à leur croisement. Dans un graphique, on repère le bon bâton ou le bon secteur, puis on lit sa valeur.",
       schema: batonKiwiCherche,
     },
     {
       titre: "Comparer avant de conclure",
+      micros: ["stat_donnee_comparer", "stat_donnee_interpreter"],
       texte:
         "Une conclusion doit s'appuyer sur des valeurs lues, pas sur une impression. On compare les nombres exacts (le plus grand, le plus petit, l'écart) avant d'affirmer quoi que ce soit.",
       schema: barresPresqueEgales,
@@ -333,16 +340,19 @@ export const ficheDonnees6e: FicheCoursData = {
   usages: [
     {
       titre: "Lire un tableau",
+      micros: ["stat_donnee_prelever"],
       detail:
         "Retrouver une valeur en suivant la ligne et la colonne. Dans un tableau à double entrée, on lit au croisement des deux : ligne « Le Tampon », colonne « Bus » donne le nombre cherché.",
     },
     {
       titre: "Lire un graphique",
+      micros: ["stat_donnee_lire_graphique"],
       detail:
         "Repérer le bâton d'une catégorie et lire sa hauteur. On voit immédiatement quelle catégorie a la plus grande ou la plus petite valeur.",
     },
     {
       titre: "Lire un diagramme circulaire",
+      micros: ["stat_donnee_lire_circulaire"],
       detail:
         "Repérer un secteur et lire sa valeur. Le plus grand secteur est la catégorie la plus fréquente ; un demi-disque vaut la moitié du total.",
     },
@@ -350,6 +360,7 @@ export const ficheDonnees6e: FicheCoursData = {
   exemples: [
     {
       titre: "Prélever une valeur dans un tableau",
+      micros: ["stat_donnee_prelever"],
       donnees:
         "Un tableau donne le nombre d'élèves par activité et par groupe. Football : 5 filles et 9 garçons. Natation : 6 filles et 7 garçons. Danse : 8 filles et 3 garçons.",
       question: "Combien de filles ont choisi la natation ?",
@@ -359,6 +370,7 @@ export const ficheDonnees6e: FicheCoursData = {
     },
     {
       titre: "Comparer les valeurs d'un graphique",
+      micros: ["stat_donnee_comparer"],
       donnees:
         "Un graphique en barres montre les loisirs préférés d'une classe. Sport : 16. Lecture : 9. Jeux : 12.",
       question: "Quelle est l'activité préférée, et combien d'élèves de plus la choisissent par rapport à la lecture ?",
@@ -393,6 +405,7 @@ export const ficheDonnees6e: FicheCoursData = {
         "Défi : un sondage indique 8 élèves à pied, 12 en bus et 5 en voiture. Combien d'élèves ont répondu au sondage en tout ?",
       correction:
         "L'effectif total est la somme de toutes les catégories. On additionne : 8 + 12 + 5 = 25. Donc 25 élèves ont répondu au sondage.",
+      micros: ["stat_donnee_interpreter", "stat_donnee_defi"],
     },
   ],
   coachHref: "/coach-ia/maths?classe=6e",
