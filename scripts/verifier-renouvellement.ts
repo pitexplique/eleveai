@@ -26,6 +26,16 @@
 // micro à gabarit unique tombe en panne dans le mode complet du coach
 // (`allowSingleItem: false`, voir `verifier-demarrage.ts`).
 //
+// ⛔⛔ LA CLÉ D'UNE QUESTION EST L'ÉNONCÉ **ET SES PROPOSITIONS** — corrigé le
+// 25/08/2026, le jour même où ce script a été écrit. Ma première version ne
+// signait une question que par son `text`, et elle a annoncé « 1 énoncé » sur
+// dix micros de CP, CM1, CM2 et 6e. C'était FAUX : leurs gabarits gardent un
+// libellé constant — « Quelle est l'orthographe correcte ? » — et font varier
+// les PROPOSITIONS. L'élève voit bien une question différente à chaque tirage.
+// Un instrument qui se trompe est pire que pas d'instrument : il aurait fait
+// réécrire des gabarits qui vont bien. La clé est celle de `mesurer-vivier.ts`,
+// et c'est la même raison qui la justifie là-bas.
+//
 // ⚠️ EN FRANÇAIS, TOUJOURS UNE VARIANTE `.ts` : le chargeur passe par des
 // imports en alias `@/…` que `node --experimental-strip-types` ne résout pas.
 //
@@ -41,13 +51,25 @@ const SEUIL = Number(process.argv[4] ?? 12);
 /** Tirages par gabarit. 300 épuise une table de quinze cas sans effort. */
 const TIRAGES = 300;
 
+type Question = { text?: string; choices?: string[] };
+
 type Item = {
   id: string;
   microId: string;
   notionId: string;
   text?: string;
-  generate?: () => { text?: string };
+  choices?: string[];
+  generate?: () => Question;
 };
+
+/** La signature d'une question : son énoncé ET ses propositions, triées —
+ *  l'ordre des lignes change à chaque service et ne fait pas une question de
+ *  plus. Même clé que `mesurer-vivier.ts`. */
+function cle(q: Question | undefined): string | null {
+  if (!q?.text) return null;
+  const choix = q.choices?.length ? [...q.choices].sort().join("|") : "";
+  return `${q.text}##${choix}`;
+}
 
 async function main() {
   const bank = ((await loadQuestionBankV4(CLASSE, MATIERE)) ?? []) as Item[];
@@ -66,8 +88,8 @@ async function main() {
     if (it.generate) {
       m.gabarits += 1;
       for (let t = 0; t < TIRAGES; t++) {
-        const x = it.generate()?.text;
-        if (x) m.gen.add(x);
+        const k = cle(it.generate());
+        if (k) m.gen.add(k);
       }
     } else {
       m.fixes += 1;
