@@ -17,9 +17,35 @@ export type FicheIdentite = { label: string; valeur: string };
  * qu'un élève survole. `schema` est optionnel pour ne rien casser des 81 fiches
  * écrites avant lui ; sur les nouvelles, il se remplit.
  */
-export type FichePropriete = { titre: string; texte: string; schema?: ReactNode };
-export type FicheMethode = { titre: string; texte: string; schema?: ReactNode };
-export type FicheUsage = { titre: string; detail: string; schema?: ReactNode };
+/**
+ * LES MICRO-COMPÉTENCES QU'UN BLOC ENSEIGNE — par leur `id` dans la banque de
+ * connaissances (`lib/tutor-v4/knowledge/<matière>/<classe>/microSkills.ts`).
+ *
+ * ⭐ POURQUOI SUR LE BLOC ET NON SUR LA FICHE. Une fiche couvre une NOTION
+ * (`angle_mesure`) ; ses blocs couvrent des micros (`angle_mesurer`,
+ * `angle_tracer`). C'est la granularité du bloc qui rend trois choses possibles,
+ * et aucune ne l'est au niveau de la fiche :
+ *   • le coach sait sur quelle micro l'élève a échoué → il l'envoie au BLOC
+ *     exact, pas à la fiche entière ;
+ *   • une ancre par bloc, que Google peut afficher en lien direct ;
+ *   • un contrôle : chaque micro de la banque a-t-elle un bloc, chaque bloc
+ *     cite-t-il une micro qui existe ?
+ * La liste au niveau de la fiche se déduit — c'est l'union. On ne l'écrit pas
+ * deux fois.
+ *
+ * ⚠️ MESURÉ LE 25/08/2026, AVANT D'ÉCRIRE CE CHAMP : la banque compte 3 426
+ * micros sur 527 notions, et 357 seulement sont citées quelque part — dans des
+ * COMMENTAIRES d'en-tête de fiche, que rien ne vérifie et que rien ne lit.
+ * 66 fiches de maths sur 67 en portent un ; 8 fiches de français sur 25.
+ *
+ * ⛔ OPTIONNEL, ET QUI LE RESTE. Les 109 fiches écrites avant ce champ
+ * continuent de compiler et de s'afficher à l'identique. Aucune n'est à refaire.
+ */
+export type FicheMicros = { micros?: string[] };
+
+export type FichePropriete = { titre: string; texte: string; schema?: ReactNode } & FicheMicros;
+export type FicheMethode = { titre: string; texte: string; schema?: ReactNode } & FicheMicros;
+export type FicheUsage = { titre: string; detail: string; schema?: ReactNode } & FicheMicros;
 export type FicheExemple = {
   titre: string;
   donnees: string;
@@ -28,8 +54,8 @@ export type FicheExemple = {
   /** Figure optionnelle (ex. opération posée dessinée) — pour MONTRER plutôt
    *  que faire lire. Rendue au-dessus de la solution. */
   schema?: ReactNode;
-};
-export type FicheExercice = { question: string; correction: string };
+} & FicheMicros;
+export type FicheExercice = { question: string; correction: string } & FicheMicros;
 
 /** Les rubriques composables — le prof coche et ordonne les siennes. */
 export type FicheRubriqueId =
