@@ -27,6 +27,18 @@ import { cultureLitteraire5eBank } from "@/lib/tutor-v4/questionBank/5e/francais
 // Vocabulaire (étymologie, néologisme, dérivation, dictionnaire) et paroles
 // rapportées : seize attendus du BO, cinq micros génériques dans le coach.
 import { vocabulaireDiscours5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/vocabulaire-discours.bank";
+// ⛔⛔ LES TRENTE-QUATRE MICROS DE SOCLE (25/08/2026). Frédéric : « il faut des
+// générateurs, un élève doit pouvoir rester sans les mêmes questions pendant des
+// minutes. » Les micros du NOUVEAU BO ont leurs banques ci-dessus et se portent
+// bien ; les micros de SOCLE, héritées de la fabrique du cycle 4, vivaient du
+// seul `buildCycle4FrancaisBank` — cinq à onze énoncés générés chacune, partagés
+// avec la 4e et la 3e, et le tout maquillé par sept à huit questions figées.
+// ⚠️ `verifier-variete.mjs` ADDITIONNE le figé et le généré : elles étaient donc
+// toutes au vert. Le contrôle qui les voit est `verifier-renouvellement.ts`.
+import { socleLectureCulture5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/socle-lecture-culture.bank";
+import { socleEcritureOral5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/socle-ecriture-oral.bank";
+import { socleGrammaireConjugaison5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/socle-grammaire-conjugaison.bank";
+import { socleLexiqueDiscours5eBank } from "@/lib/tutor-v4/questionBank/5e/francais/socle-lexique-discours.bank";
 // Les attendus nommés des quatre objectifs de Lecture : contrôler sa
 // compréhension, fonder son jugement, les outils d'analyse, le parcours d'un
 // personnage, les langages, le contexte, les repères d'histoire littéraire.
@@ -77,6 +89,10 @@ export const francais5eQuestionBank: TutorBankItemV4[] = recalerNotions([
   ...vocabulaireDiscours5eBank,
   ...lecture5eBank,
   ...ecritureOral5eBank,
+  ...socleLectureCulture5eBank,
+  ...socleEcritureOral5eBank,
+  ...socleGrammaireConjugaison5eBank,
+  ...socleLexiqueDiscours5eBank,
 ]);
 
 export function getFrancais5eQuestionBank(args?: {
