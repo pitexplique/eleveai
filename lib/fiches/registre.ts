@@ -432,6 +432,12 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
      les chaînes d'accord ici, le participe passé à part — c'est là que se joue
      l'essentiel des erreurs, et une règle noyée dans quatre autres ne se
      travaille pas. */
+  "francais/5e/orthographe-participe": {
+    titre: "L'accord du participe passé (2026-2027)",
+    resume:
+      "Avec être on regarde le sujet, avec avoir on cherche le COD et sa place — et « tu m'as parlé » ne s'accorde pas quand « tu m'as appelée » s'accorde.",
+  },
+
   "francais/5e/orthographe-accords": {
     titre: "Les chaînes d'accord dans la phrase (2026-2027)",
     resume:

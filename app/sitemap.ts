@@ -150,6 +150,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours/francais/5e/grammaire-groupe-nominal", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   { path: "/fiches-cours/francais/5e/grammaire-reprises", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   { path: "/fiches-cours/francais/5e/orthographe-accords", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/5e/orthographe-participe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   // Fiches maths — refaites « en blocs » le 11/07, + les fiches 6e créées
   // le 12/07 (une par banque du coach) : fiche + flashcards + composeur.
   { path: "/fiches-cours/maths/6e/entier-nombre",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
