@@ -114,6 +114,30 @@ Et le procédé le plus utile est le CONTRE-EXEMPLE — une propriété qui dit
 Annoter les micros au passage (champ `micros` sur chaque bloc, contrôle
 `npm run verifier:micros`) : c'est gratuit pendant l'écriture, cher après.
 
+════ POURQUOI LA QUALITÉ N'EST PAS NÉGOCIABLE ICI ═══════════════════
+Frédéric, 25/08 : « le principal est d'avoir la qualité des coachs et des
+fiches, car après j'attaquerai les vidéos Manim SUR LES FICHES. »
+
+⭐ CE QUI VEUT DIRE QUE LES DESSINS SONT DE LA DONNÉE, PAS DES IMAGES.
+Un dessin de fiche s'écrit :
+
+    { kind: "angle", angle: { angleDeg: 55,
+        display: { showProtractor: true, protractorStep: "reading" } } }
+
+Ce n'est pas un SVG, c'est une DESCRIPTION de figure. Un script Manim
+peut la lire et la rejouer — le rapporteur qui se pose, le zéro qui
+s'aligne, la graduation qu'on lit. C'est l'animation que la fiche décrit
+déjà en trois cartes fixes.
+
+⛔ D'où l'interdit du SVG écrit à la main : il ne semblait qu'une règle
+de cohérence visuelle (l'élève retrouve dans sa fiche la figure de ses
+exercices), il est en réalité ce qui rendra les vidéos possibles. Un SVG
+dessiné à la main ne se rejoue pas.
+
+Et la structure en blocs d'une fiche — définition, propriétés, méthode,
+exemples — EST déjà le storyboard. Une fiche bâclée donnera une vidéo
+bâclée, et il sera trop tard pour la reprendre.
+
 ════ LES CINQ RÈGLES DE MESURE, APPRISES EN FERMANT LA 6e ═══════════
 Aucune ne se lit dans le code ; toutes se sont vues au rendu.
 
