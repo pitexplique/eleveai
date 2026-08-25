@@ -31,6 +31,19 @@ import { cultureLitteraire4eBank } from "@/lib/tutor-v4/questionBank/4e/francais
    écrite depuis le 12/08. Signature : « 4 items, dont 1 fixe ». */
 import { lectureCulture4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/lecture-culture.bank";
 import { ecritureOral4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/ecriture-oral.bank";
+/* ⛔⛔ LE SOCLE, ET LE DÉFAUT QUE `verifier-variete.mjs` NE VOIT PAS (25/08/2026).
+   Ce script ADDITIONNE les énoncés figés et les générés, puis pose son seuil de
+   dix sur le total. Or un `fixed` ne se renouvelle jamais : il compte pour UNE
+   question, revue à chaque tirage. Quinze micros de 4e servaient moins de dix
+   énoncés GÉNÉRÉS — jusqu'à cinq seulement pour `4e_gram_accords` et
+   `4e_conj_identifier` — et s'affichaient vertes parce que sept ou huit
+   questions figées gonflaient leur total.
+   Frédéric, 25/08 : « IL FAUT DES GÉNÉRATEURS. Un élève doit pouvoir rester
+   sans les mêmes questions pendant des minutes. »
+   ⚠️ Les questions figées RESTENT : elles servent au guide de survie et font la
+   paire du mode complet. On ajoute à côté ce qui manquait. */
+import { socleGrammaireConjugaison4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/socle-grammaire-conjugaison.bank";
+import { socleLexiqueDiscours4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/socle-lexique-discours.bank";
 
 /**
  * ⭐ LA NOTION D'UN ITEM SE DÉDUIT DE SA MICRO (24/08/2026).
@@ -69,6 +82,8 @@ export const francais4eQuestionBank: TutorBankItemV4[] = recalerNotions([
   ...cultureLitteraire4eBank,
   ...lectureCulture4eBank,
   ...ecritureOral4eBank,
+  ...socleGrammaireConjugaison4eBank,
+  ...socleLexiqueDiscours4eBank,
 ]);
 
 export function getFrancais4eQuestionBank(args?: {
