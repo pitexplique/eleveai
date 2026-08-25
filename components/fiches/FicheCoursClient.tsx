@@ -865,8 +865,15 @@ export default function FicheCoursClient({
                 data-titre-pdf={fiche.titre}
                 className="mt-5 text-3xl font-black tracking-normal text-slate-900 sm:text-5xl print:text-3xl"
               >
+                {/* ⚠️ `libelleClasse`, PAS `fiche.classe` (25/08/2026). Le champ
+                    brut est un SLUG D'URL : il donnait « cours de maths cm2 »
+                    sur les trente-six fiches de CM2, et « cours de maths
+                    premiere-spe » sur celle de première — un identifiant de
+                    route affiché en gros titre, dans le premier signal que
+                    Google lit. La fonction existe depuis le 20/08 pour cette
+                    raison exacte, et le bas de page s'en sert déjà (l. 909). */}
                 {fiche.titre} — cours de {fiche.matiereLabel.toLowerCase()}{" "}
-                {fiche.classe}
+                {libelleClasse(fiche.classe)}
               </h1>
               <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600 print:text-sm">
                 {fiche.accroche}

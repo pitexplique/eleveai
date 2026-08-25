@@ -409,17 +409,17 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
      `grammaire_phrase` portait DIX-NEUF micros à elle seule — une notion pareille
      ne tient dans aucune fiche, et deux des trois n'auraient eu aucun badge. */
   "francais/5e/grammaire-phrase": {
-    titre: "La phrase, ses types et sa ponctuation — 5e (2026-2027)",
+    titre: "La phrase, ses types et sa ponctuation (2026-2027)",
     resume:
       "Les trois types et les formes, la phrase simple, complexe ou non verbale, le rôle de chaque signe de ponctuation, et ce qu'exprime une juxtaposition.",
   },
   "francais/5e/grammaire-fonctions": {
-    titre: "Les fonctions dans la phrase — 5e (2026-2027)",
+    titre: "Les fonctions dans la phrase (2026-2027)",
     resume:
       "Prouver une fonction au lieu de la deviner : COD et COI même placés avant le verbe, attribut du sujet, verbes attributifs par occasion, circonstanciels.",
   },
   "francais/5e/grammaire-groupe-nominal": {
-    titre: "Le groupe nominal et les classes de mots — 5e (2026-2027)",
+    titre: "Le groupe nominal et les classes de mots (2026-2027)",
     resume:
       "Le nom noyau et ses trois expansions, déterminant ou pronom, préposition ou adverbe : la classe d'un mot se lit sur ce qui le suit.",
   },

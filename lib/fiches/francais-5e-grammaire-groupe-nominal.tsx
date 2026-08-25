@@ -382,7 +382,7 @@ export const ficheGroupeNominal5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "grammaire-groupe-nominal",
-  titre: "Le groupe nominal et les classes de mots — 5e (2026-2027)",
+  titre: "Le groupe nominal et les classes de mots (2026-2027)",
   accroche:
     "« Chaque élève a répondu » et « Chacun a répondu » disent la même chose. Pourtant « chaque » est un déterminant et « chacun » un pronom. La classe d'un mot ne se lit pas sur le mot : elle se lit sur ce qui l'entoure.",
   identite: [

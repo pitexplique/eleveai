@@ -45,6 +45,31 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
+  /**
+   * ⛔ AUCUNE PAGE DU SITE NE DÉCLARAIT SA CANONIQUE (25/08/2026).
+   *
+   * Vérifié sur les pages en ligne : zéro balise `rel="canonical"`, sur les
+   * fiches comme ailleurs. Google devait donc deviner, page par page, laquelle
+   * de plusieurs adresses est la vraie — et il y en a plusieurs sans qu'on l'ait
+   * voulu :
+   *
+   *   /fiches-cours/francais            la page
+   *   /fiches-cours/francais?from=ia    la MÊME page, depuis nos propres liens
+   *
+   * Le paramètre `?from=ia` est posé par la navigation interne ; du point de vue
+   * de Google c'est une seconde URL, avec le même contenu. Sans canonique, le
+   * poids se divise entre les deux, et la page qui remonte n'est pas forcément
+   * celle qu'on partage.
+   *
+   * ⚠️ `"./"` est RELATIF, et c'est ce qui le rend utilisable ici : Next le
+   * résout route par route, donc chaque page devient sa propre canonique, sans
+   * les paramètres. Une valeur absolue écrite une fois pointerait tout le site
+   * vers l'accueil — l'erreur qui déréférence un site entier.
+   */
+  alternates: {
+    canonical: "./",
+  },
+
   manifest: "/manifest.webmanifest",
 
   appleWebApp: {

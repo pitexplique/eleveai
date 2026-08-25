@@ -423,7 +423,7 @@ export const ficheFonctions5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "grammaire-fonctions",
-  titre: "Les fonctions dans la phrase — 5e (2026-2027)",
+  titre: "Les fonctions dans la phrase (2026-2027)",
   accroche:
     "« Il reste inquiet » et « il reste à la maison » : le même verbe, la même place, et deux fonctions qui n'ont rien à voir. En 5e, on ne devine plus une fonction — on la prouve, par un geste sur la phrase.",
   identite: [

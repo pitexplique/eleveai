@@ -427,7 +427,7 @@ export const fichePhrase5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "grammaire-phrase",
-  titre: "La phrase, ses types et sa ponctuation — 5e (2026-2027)",
+  titre: "La phrase, ses types et sa ponctuation (2026-2027)",
   accroche:
     "« Rentrez tout de suite ! » finit par un point d'exclamation, et pourtant elle n'est pas exclamative : elle est impérative. Le point final ne donne pas le type d'une phrase — c'est ce qu'elle FAIT qui le donne.",
   identite: [
