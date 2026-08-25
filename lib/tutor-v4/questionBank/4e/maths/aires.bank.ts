@@ -1734,9 +1734,9 @@ export const airesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: [
       "la découpe en figures simples et on additionne les aires",
-      "additionne les côtés",
-      "compte les sommets",
-      "multiplie les périmètres",
+      "la découpe en figures simples et on additionne les périmètres",
+      "la découpe en figures simples et on multiplie les aires",
+      "l’entoure par un rectangle et on additionne les deux aires",
     ],
     expected: ["la découpe en figures simples et on additionne les aires"],
     comparator: "mcq_exact",

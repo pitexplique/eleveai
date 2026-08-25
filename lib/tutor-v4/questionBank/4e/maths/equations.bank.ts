@@ -785,9 +785,9 @@ export const equationsBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: [
       "trouver la valeur de l’inconnue qui rend l’égalité vraie",
-      "développer l’expression",
-      "calculer une aire",
-      "tracer une figure",
+      "trouver toutes les valeurs qui rendent l’égalité fausse",
+      "calculer la valeur de l’expression pour x égal à zéro",
+      "réduire chaque membre de l’égalité le plus possible",
     ],
     expected: ["trouver la valeur de l’inconnue qui rend l’égalité vraie"],
     comparator: "mcq_exact",

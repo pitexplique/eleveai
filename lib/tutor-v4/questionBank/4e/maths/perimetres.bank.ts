@@ -743,7 +743,12 @@ export const perimetresBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Pour calculer le périmètre d’un polygone, on…",
     format: "qcm",
-    choices: ["additionne les longueurs de tous ses côtés", "multiplie ses côtés", "compte ses sommets", "mesure sa surface"],
+    choices: [
+      "additionne les longueurs de tous ses côtés",
+      "multiplie les longueurs de tous ses côtés",
+      "additionne les longueurs de deux côtés voisins",
+      "additionne les longueurs de ses côtés puis divise",
+    ],
     expected: ["additionne les longueurs de tous ses côtés"],
     comparator: "mcq_exact",
     hint: "Le tour complet.",

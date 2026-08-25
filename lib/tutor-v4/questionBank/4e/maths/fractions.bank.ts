@@ -2982,8 +2982,8 @@ export const fractionsBank: TutorBankItemV4[] = [
     choices: [
       "l’opposé est $-\\frac{3}{4}$, l’inverse est $\\frac{4}{3}$",
       "l’opposé est $\\frac{4}{3}$, l’inverse est $-\\frac{3}{4}$",
-      "ce sont les mêmes",
-      "les deux valent $\\frac{3}{4}$",
+      "l’opposé est $-\\frac{3}{4}$, l’inverse est $-\\frac{4}{3}$",
+      "l’opposé est $\\frac{4}{3}$, l’inverse est $\\frac{3}{4}$",
     ],
     expected: ["l’opposé est $-\\frac{3}{4}$, l’inverse est $\\frac{4}{3}$"],
     comparator: "mcq_exact",

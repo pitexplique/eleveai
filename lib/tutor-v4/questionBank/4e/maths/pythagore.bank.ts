@@ -1160,9 +1160,9 @@ generate: () => {
     format: "qcm",
     choices: [
       "Dans le triangle ABC rectangle en A, d’après le théorème de Pythagore…",
-      "Dans le quadrilatère ABCD, d’après Pythagore…",
-      "Comme les côtés sont parallèles…",
-      "On additionne toutes les longueurs.",
+      "Dans le triangle ABC rectangle en A, d’après la réciproque de Pythagore…",
+      "Dans le triangle ABC isocèle en A, d’après le théorème de Pythagore…",
+      "Dans le triangle ABC, d’après le théorème de Pythagore appliqué en A…",
     ],
     expected: [
       "Dans le triangle ABC rectangle en A, d’après le théorème de Pythagore…",
@@ -1189,9 +1189,9 @@ generate: () => {
     format: "qcm",
     choices: [
       "On compare la somme des carrés des deux plus petits côtés avec le carré du plus grand côté.",
-      "On additionne les trois côtés.",
-      "On regarde seulement le dessin.",
-      "On utilise l’aire du triangle.",
+      "On compare la somme des carrés des trois côtés avec le carré du plus grand côté.",
+      "On compare le produit des deux plus petits côtés avec le carré du plus grand côté.",
+      "On compare la somme des deux plus petits côtés avec la longueur du plus grand côté.",
     ],
     expected: [
       "On compare la somme des carrés des deux plus petits côtés avec le carré du plus grand côté.",
@@ -2086,9 +2086,9 @@ generate: () => {
     format: "qcm",
     choices: [
       "donc, d’après la réciproque de Pythagore, le triangle est rectangle",
-      "donc le triangle est isocèle",
-      "donc le périmètre vaut 36",
-      "donc les côtés sont parallèles",
+      "donc, d’après le théorème de Pythagore, le triangle est rectangle",
+      "donc, d’après la réciproque de Pythagore, le triangle est isocèle",
+      "donc, d’après la réciproque de Thalès, le triangle est rectangle",
     ],
     expected: ["donc, d’après la réciproque de Pythagore, le triangle est rectangle"],
     comparator: "mcq_exact",
@@ -2113,9 +2113,9 @@ generate: () => {
     format: "qcm",
     choices: [
       "annoncer le triangle rectangle, écrire l’égalité de Pythagore, calculer",
-      "calculer d’abord, puis vérifier l’angle droit",
-      "mesurer les angles, puis additionner",
-      "tracer un cercle, puis conclure",
+      "écrire l’égalité de Pythagore, calculer, vérifier que l’angle est droit",
+      "annoncer le triangle rectangle, mesurer les côtés, comparer les carrés",
+      "calculer la longueur cherchée, annoncer le triangle rectangle, conclure",
     ],
     expected: ["annoncer le triangle rectangle, écrire l’égalité de Pythagore, calculer"],
     comparator: "mcq_exact",

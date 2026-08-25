@@ -1955,9 +1955,9 @@ export const probabilitesBank: TutorBankItemV4[] = [
     format: "qcm",
     choices: [
       "plus de chances que l’événement se produise",
-      "moins de chances",
-      "un événement impossible",
-      "rien de particulier",
+      "moins de chances que l’événement se produise",
+      "que l’événement se produira à coup sûr",
+      "que l’événement s’est déjà produit souvent",
     ],
     expected: ["plus de chances que l’événement se produise"],
     comparator: "mcq_exact",
