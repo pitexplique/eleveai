@@ -131,6 +131,40 @@ attendant `networkidle`. Le relancer suffit — ce n'est jamais le code.
 
 ---
 
+## ⏸️ EN ATTENTE — 86 PDF périmés, et c'est voulu (25/08/2026)
+
+Le h1 et les onze h2 de **toutes** les fiches ont changé le 25/08 (commit
+`ba5cbb43`) : titre explicite, et chaque h2 nomme la notion. **Un seul PDF a été
+reconstruit** (`nombres-decimaux-6e`), pour vérifier que le nom de fichier ne
+bougeait pas. Les 86 autres affichent encore les anciens titres.
+
+⚠️ **`verifier:pdf` ne le voit pas** : il compare les dates de commit de la FICHE
+et de son PDF, or c'est le composant partagé qui a changé, pas les fiches. Le
+contrôle est au vert alors que le contenu est périmé. Ne pas s'y fier ici.
+
+**Pourquoi on ne reconstruit pas tout de suite** : une autre session écrit un
+générateur de fiches, et Frédéric veut une règle d'indexation unique pour les
+maths et le français — **classe, matière, notion, micro-compétence**. Les titres
+vont donc bouger une seconde fois. On reconstruit **une fois**, quand la règle
+sera fixée :
+
+```bash
+npm run build:fiches-pdf -- http://localhost:3000 <route> <route> …
+npm run verifier:pdf
+```
+
+Les 87 routes se listent avec
+`find app/fiches-cours -name page.tsx -path "*/*/*/*" | sed 's|^app||; s|/page.tsx$||' | grep -v "/ia/"`.
+Compter un quart d'heure, et relancer le serveur de dev à mi-parcours.
+
+⛔ **Le trou de la règle** : la micro-compétence n'existe **ni dans
+`FicheCoursData`, ni sur la page**. Elle ne vit que dans les commentaires
+d'en-tête des fichiers de fiche et dans la banque du coach. Classe, matière et
+notion sont dans l'URL, le titre et les h2 ; la micro, non. L'indexer suppose
+d'abord de la faire remonter dans la donnée.
+
+---
+
 ## Ce qui vient après
 
 **La 4ᵉ**, et les analytics Vercel du 24/08 le disent :
