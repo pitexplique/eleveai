@@ -22,6 +22,15 @@ import { vocabulaire4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/vocab
 // Les quatre questionnements de 4e, plus le complémentaire. La 4e était la
 // seule classe du collège sans aucune entrée littéraire nommée.
 import { cultureLitteraire4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/culture-litteraire.bank";
+/* ⛔ LES CINQ NOTIONS TRANSVERSALES, RESTÉES SUR LE SEUL GÉNÉRATEUR (25/08/2026).
+   Mesuré avec `verifier-variete.mjs` : dix-huit micros sur 68 servaient moins de
+   dix énoncés distincts — le seuil de Frédéric, « un élève ne doit pas retomber
+   sur la même question en dix minutes ». Elles n'étaient pas dispersées : c'était
+   exactement `lecture_comprehension`, `lecture_voix_haute`, `culture_litteraire`,
+   `ecriture` et `oral`, les cinq notions à qui aucune banque dédiée n'avait été
+   écrite depuis le 12/08. Signature : « 4 items, dont 1 fixe ». */
+import { lectureCulture4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/lecture-culture.bank";
+import { ecritureOral4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/ecriture-oral.bank";
 
 /**
  * ⭐ LA NOTION D'UN ITEM SE DÉDUIT DE SA MICRO (24/08/2026).
@@ -58,6 +67,8 @@ export const francais4eQuestionBank: TutorBankItemV4[] = recalerNotions([
   ...documentsComposites4eBank,
   ...vocabulaire4eBank,
   ...cultureLitteraire4eBank,
+  ...lectureCulture4eBank,
+  ...ecritureOral4eBank,
 ]);
 
 export function getFrancais4eQuestionBank(args?: {

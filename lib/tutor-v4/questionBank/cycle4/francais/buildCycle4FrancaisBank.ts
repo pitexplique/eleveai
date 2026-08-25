@@ -1198,7 +1198,11 @@ function ecrit_invention(level: Cycle4Level): QcmItem[] {
       {
         text: "Pour montrer qu'une action se passe APRÈS une autre, on écrit...",
         correct: "« ensuite » ou « plus tard »",
-        wrongs: ["« en même temps »", "« pendant ce temps »", "« au même moment »"],
+        // ⚠️ Les trois pièges faisaient 17 à 20 caractères contre 28 à la bonne
+        // réponse : elle se reconnaissait à sa forme, deux connecteurs au lieu
+        // d'un. Ils en donnent deux eux aussi, et disent chacun un autre rapport
+        // de temps — antériorité, simultanéité, ouverture.
+        wrongs: ["« avant » ou « auparavant »", "« pendant » ou « alors que »", "« d'abord » ou « au début »"],
         methode: "Les connecteurs de temps marquent la succession des actions.",
       },
       {

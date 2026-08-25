@@ -71,24 +71,32 @@ type Classement = { readonly phrase: string; readonly rep: string };
    ---------------------------------------------------------------------------
    ⚠️ Le conditionnel figure ici comme MODE : c'est ce que dit la terminologie
    exigible de ce programme.
+
+   ⛔ LES SIX RÉPONSES FONT LA MÊME LONGUEUR — 60 à 65 caractères (25/08/2026).
+   Elles ne l'ont pas toujours fait : « le conditionnel : … comme soumis à une
+   condition » pesait 85 caractères contre 44 pour l'impératif, et l'écart
+   dépassait de deux fois le seuil de `verifier-devinabilite-runtime.ts`. Un
+   élève qui ne sait rien répondait juste en prenant la ligne la plus longue.
+   ⛔ On n'a PAS raccourci la bonne réponse : on a rendu les autres aussi
+   précises. Toute ligne ajoutée ici doit tenir dans la même fourchette.
    ========================================================================== */
 
 const MODES: readonly Classement[] = [
   { phrase: "Il viendra demain sans faute.", rep: "l'indicatif : un mode personnel, qui présente le fait comme réel" },
-  { phrase: "Je veux qu'il vienne demain.", rep: "le subjonctif : un mode personnel, qui présente le fait comme envisagé" },
-  { phrase: "Viens tout de suite.", rep: "l'impératif : un mode personnel, qui commande" },
-  { phrase: "Il viendrait s'il le pouvait.", rep: "le conditionnel : un mode personnel, qui présente le fait comme soumis à une condition" },
+  { phrase: "Je veux qu'il vienne demain.", rep: "le subjonctif : un mode personnel, qui présente le fait envisagé" },
+  { phrase: "Viens tout de suite.", rep: "l'impératif : un mode personnel, qui donne un ordre ou un conseil" },
+  { phrase: "Il viendrait s'il le pouvait.", rep: "le conditionnel : un mode personnel, qui suppose une condition" },
   { phrase: "Partir seul lui faisait peur.", rep: "l'infinitif : un mode non personnel, sans marque de personne" },
   { phrase: "Marchant vite, il arriva le premier.", rep: "le participe : un mode non personnel, sans marque de personne" },
   { phrase: "Nous partions avant l'aube.", rep: "l'indicatif : un mode personnel, qui présente le fait comme réel" },
-  { phrase: "Il faut que tu partes maintenant.", rep: "le subjonctif : un mode personnel, qui présente le fait comme envisagé" },
-  { phrase: "Partez sans moi.", rep: "l'impératif : un mode personnel, qui commande" },
-  { phrase: "J'aimerais te croire sur parole.", rep: "le conditionnel : un mode personnel, qui présente le fait comme soumis à une condition" },
+  { phrase: "Il faut que tu partes maintenant.", rep: "le subjonctif : un mode personnel, qui présente le fait envisagé" },
+  { phrase: "Partez sans moi.", rep: "l'impératif : un mode personnel, qui donne un ordre ou un conseil" },
+  { phrase: "J'aimerais te croire sur parole.", rep: "le conditionnel : un mode personnel, qui suppose une condition" },
   { phrase: "Elle sait qu'il ment depuis longtemps.", rep: "l'indicatif : un mode personnel, qui présente le fait comme réel" },
-  { phrase: "Je doute qu'il sache la vérité.", rep: "le subjonctif : un mode personnel, qui présente le fait comme envisagé" },
-  { phrase: "Sois patient encore un peu.", rep: "l'impératif : un mode personnel, qui commande" },
+  { phrase: "Je doute qu'il sache la vérité.", rep: "le subjonctif : un mode personnel, qui présente le fait envisagé" },
+  { phrase: "Sois patient encore un peu.", rep: "l'impératif : un mode personnel, qui donne un ordre ou un conseil" },
   { phrase: "La porte, ouverte par le vent, claquait.", rep: "le participe : un mode non personnel, sans marque de personne" },
-  { phrase: "Il aurait pu nous prévenir.", rep: "le conditionnel : un mode personnel, qui présente le fait comme soumis à une condition" },
+  { phrase: "Il aurait pu nous prévenir.", rep: "le conditionnel : un mode personnel, qui suppose une condition" },
 ];
 
 const TOUS_MODES: readonly string[] = [...new Set(MODES.map((m) => m.rep))];

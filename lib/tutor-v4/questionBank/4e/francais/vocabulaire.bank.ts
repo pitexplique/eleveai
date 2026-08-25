@@ -89,20 +89,20 @@ const TOUTES_DERIVATIONS: readonly string[] = [...new Set(DERIVATION.map((d) => 
    ========================================================================== */
 
 const RACINES: readonly { readonly element: string; readonly langue: string; readonly sens: string; readonly mots: string }[] = [
-  { element: "chrono-", langue: "grec", sens: "le temps", mots: "chronologie, anachronisme" },
-  { element: "anthropo-", langue: "grec", sens: "l'être humain", mots: "anthropologie, philanthrope" },
-  { element: "démo-", langue: "grec", sens: "le peuple", mots: "démocratie, démographie" },
-  { element: "-cratie", langue: "grec", sens: "le pouvoir", mots: "démocratie, aristocratie" },
-  { element: "biblio-", langue: "grec", sens: "le livre", mots: "bibliothèque, bibliographie" },
-  { element: "path-", langue: "grec", sens: "la souffrance, le sentiment", mots: "sympathie, pathétique" },
+  { element: "chrono-", langue: "grec", sens: "le temps qui passe", mots: "chronologie, anachronisme" },
+  { element: "anthropo-", langue: "grec", sens: "l'homme, l'être humain", mots: "anthropologie, philanthrope" },
+  { element: "démo-", langue: "grec", sens: "le peuple, la foule", mots: "démocratie, démographie" },
+  { element: "-cratie", langue: "grec", sens: "le pouvoir, l'autorité", mots: "démocratie, aristocratie" },
+  { element: "biblio-", langue: "grec", sens: "le livre, l'écrit", mots: "bibliothèque, bibliographie" },
+  { element: "path-", langue: "grec", sens: "la souffrance, l'émotion", mots: "sympathie, pathétique" },
   { element: "phil-", langue: "grec", sens: "l'amour, l'amitié", mots: "philosophie, francophile" },
-  { element: "bene-", langue: "latin", sens: "le bien", mots: "bénéfique, bénévole" },
-  { element: "mal-", langue: "latin", sens: "le mal", mots: "malveillant, malédiction" },
-  { element: "voc-", langue: "latin", sens: "la voix, appeler", mots: "vocal, convoquer" },
-  { element: "script-", langue: "latin", sens: "écrire", mots: "manuscrit, inscription" },
-  { element: "duc-", langue: "latin", sens: "conduire, mener", mots: "conduire, éduquer" },
-  { element: "spect-", langue: "latin", sens: "regarder", mots: "spectateur, inspecter" },
-  { element: "-cide", langue: "latin", sens: "tuer", mots: "homicide, insecticide" },
+  { element: "bene-", langue: "latin", sens: "le bien, le bienfait", mots: "bénéfique, bénévole" },
+  { element: "mal-", langue: "latin", sens: "le mal, le malheur", mots: "malveillant, malédiction" },
+  { element: "voc-", langue: "latin", sens: "la voix et l'appel", mots: "vocal, convoquer" },
+  { element: "script-", langue: "latin", sens: "écrire, l'écriture", mots: "manuscrit, inscription" },
+  { element: "duc-", langue: "latin", sens: "conduire, mener, guider", mots: "conduire, éduquer" },
+  { element: "spect-", langue: "latin", sens: "regarder, observer", mots: "spectateur, inspecter" },
+  { element: "-cide", langue: "latin", sens: "tuer, mettre à mort", mots: "homicide, insecticide" },
 ];
 
 const SENS_RACINES: readonly string[] = [...new Set(RACINES.map((r) => r.sens))];
@@ -171,20 +171,20 @@ const TOUTES_CONNOTATIONS: readonly string[] = [...new Set(CONNOTATIONS.map((c) 
    ========================================================================== */
 
 const RELATIONS: readonly Cas[] = [
-  { gauche: "« la souris de l'ordinateur » et « la souris grise »", droite: "la polysémie : un seul mot, dont les sens se tiennent" },
-  { gauche: "« le ver de terre » et « le verre d'eau »", droite: "l'homonymie : deux mots différents que le hasard fait sonner pareil" },
-  { gauche: "« content » et « satisfait »", droite: "la synonymie : deux mots de sens très proche" },
-  { gauche: "« content » et « mécontent »", droite: "l'antonymie : deux mots de sens contraire" },
-  { gauche: "« le pied de la table » et « le pied du coureur »", droite: "la polysémie : un seul mot, dont les sens se tiennent" },
-  { gauche: "« le mousse du bateau » et « la mousse au chocolat »", droite: "l'homonymie : deux mots différents que le hasard fait sonner pareil" },
-  { gauche: "« rapide » et « lent »", droite: "l'antonymie : deux mots de sens contraire" },
-  { gauche: "« débuter » et « commencer »", droite: "la synonymie : deux mots de sens très proche" },
-  { gauche: "« l'aile de l'oiseau » et « l'aile du bâtiment »", droite: "la polysémie : un seul mot, dont les sens se tiennent" },
-  { gauche: "« la tour du château » et « le tour de magie »", droite: "l'homonymie : deux mots différents que le hasard fait sonner pareil" },
-  { gauche: "« obscur » et « lumineux »", droite: "l'antonymie : deux mots de sens contraire" },
-  { gauche: "« achever » et « terminer »", droite: "la synonymie : deux mots de sens très proche" },
-  { gauche: "« la bouche d'égout » et « la bouche de l'enfant »", droite: "la polysémie : un seul mot, dont les sens se tiennent" },
-  { gauche: "« le pêcheur en mer » et « le pécheur repentant »", droite: "l'homonymie : deux mots différents que le hasard fait sonner pareil" },
+  { gauche: "« la souris de l'ordinateur » et « la souris grise »", droite: "la polysémie : un seul mot dont les sens se tiennent" },
+  { gauche: "« le ver de terre » et « le verre d'eau »", droite: "l'homonymie : deux mots que le hasard fait sonner pareil" },
+  { gauche: "« content » et « satisfait »", droite: "la synonymie : deux mots distincts, de sens très proche" },
+  { gauche: "« content » et « mécontent »", droite: "l'antonymie : deux mots distincts, de sens contraire" },
+  { gauche: "« le pied de la table » et « le pied du coureur »", droite: "la polysémie : un seul mot dont les sens se tiennent" },
+  { gauche: "« le mousse du bateau » et « la mousse au chocolat »", droite: "l'homonymie : deux mots que le hasard fait sonner pareil" },
+  { gauche: "« rapide » et « lent »", droite: "l'antonymie : deux mots distincts, de sens contraire" },
+  { gauche: "« débuter » et « commencer »", droite: "la synonymie : deux mots distincts, de sens très proche" },
+  { gauche: "« l'aile de l'oiseau » et « l'aile du bâtiment »", droite: "la polysémie : un seul mot dont les sens se tiennent" },
+  { gauche: "« la tour du château » et « le tour de magie »", droite: "l'homonymie : deux mots que le hasard fait sonner pareil" },
+  { gauche: "« obscur » et « lumineux »", droite: "l'antonymie : deux mots distincts, de sens contraire" },
+  { gauche: "« achever » et « terminer »", droite: "la synonymie : deux mots distincts, de sens très proche" },
+  { gauche: "« la bouche d'égout » et « la bouche de l'enfant »", droite: "la polysémie : un seul mot dont les sens se tiennent" },
+  { gauche: "« le pêcheur en mer » et « le pécheur repentant »", droite: "l'homonymie : deux mots que le hasard fait sonner pareil" },
 ];
 
 const TOUTES_RELATIONS: readonly string[] = [...new Set(RELATIONS.map((r) => r.droite))];
@@ -200,18 +200,18 @@ const TOUTES_RELATIONS: readonly string[] = [...new Set(RELATIONS.map((r) => r.d
 
 const CONSTRUCTIONS: readonly { readonly phrase: string; readonly verbe: string; readonly sens: string }[] = [
   { phrase: "Il manque de sel.", verbe: "manquer", sens: "il n'y en a pas assez" },
-  { phrase: "Il manque son train.", verbe: "manquer", sens: "il le rate" },
-  { phrase: "Elle tient à toi.", verbe: "tenir", sens: "elle t'est attachée" },
+  { phrase: "Il manque son train.", verbe: "manquer", sens: "il le rate, il ne l'a pas" },
+  { phrase: "Elle tient à toi.", verbe: "tenir", sens: "elle est attachée à toi" },
   { phrase: "Elle tient un journal.", verbe: "tenir", sens: "elle l'écrit régulièrement" },
   { phrase: "Il joue du piano.", verbe: "jouer", sens: "il pratique cet instrument" },
-  { phrase: "Il joue au football.", verbe: "jouer", sens: "il pratique ce sport" },
+  { phrase: "Il joue au football.", verbe: "jouer", sens: "il pratique ce sport-là" },
   { phrase: "Elle pense à toi.", verbe: "penser", sens: "tu occupes ses pensées" },
-  { phrase: "Elle pense que tu as raison.", verbe: "penser", sens: "c'est son opinion" },
-  { phrase: "Il use ses chaussures.", verbe: "user", sens: "il les abime à force de s'en servir" },
-  { phrase: "Il use de son droit.", verbe: "user", sens: "il s'en sert" },
+  { phrase: "Elle pense que tu as raison.", verbe: "penser", sens: "c'est son opinion à elle" },
+  { phrase: "Il use ses chaussures.", verbe: "user", sens: "il les abime en s'en servant" },
+  { phrase: "Il use de son droit.", verbe: "user", sens: "il s'en sert, il l'exerce" },
   { phrase: "Elle répond à la question.", verbe: "répondre", sens: "elle donne la réponse" },
-  { phrase: "Elle répond de ses actes.", verbe: "répondre", sens: "elle en assume la responsabilité" },
-  { phrase: "Il croit en toi.", verbe: "croire", sens: "il te fait confiance" },
+  { phrase: "Elle répond de ses actes.", verbe: "répondre", sens: "elle en assume la charge" },
+  { phrase: "Il croit en toi.", verbe: "croire", sens: "il a confiance en toi" },
   { phrase: "Il croit ce qu'on lui dit.", verbe: "croire", sens: "il le tient pour vrai" },
 ];
 

@@ -92,28 +92,28 @@ const TOUTES_SORTES: readonly string[] = [...new Set(SIMPLE_COMPLEXE.map((s) => 
    ========================================================================== */
 
 const LIENS: readonly Cas[] = [
-  { gauche: "Il rentra, il posa son sac.", droite: "la juxtaposition : les propositions sont séparées par un signe de ponctuation" },
+  { gauche: "Il rentra, il posa son sac.", droite: "la juxtaposition : les propositions sont séparées par la ponctuation" },
   { gauche: "Il rentra et il posa son sac.", droite: "la coordination : un mot de liaison met les propositions à égalité" },
-  { gauche: "Il rentra dès qu'il posa son sac.", droite: "la subordination : une proposition dépend de l'autre" },
-  { gauche: "Le vent se leva ; les volets claquèrent.", droite: "la juxtaposition : les propositions sont séparées par un signe de ponctuation" },
+  { gauche: "Il rentra dès qu'il posa son sac.", droite: "la subordination : une proposition dépend grammaticalement de l'autre" },
+  { gauche: "Le vent se leva ; les volets claquèrent.", droite: "la juxtaposition : les propositions sont séparées par la ponctuation" },
   { gauche: "Le vent se leva, donc les volets claquèrent.", droite: "la coordination : un mot de liaison met les propositions à égalité" },
-  { gauche: "Les volets claquèrent parce que le vent se leva.", droite: "la subordination : une proposition dépend de l'autre" },
-  { gauche: "Elle appela, personne ne répondit.", droite: "la juxtaposition : les propositions sont séparées par un signe de ponctuation" },
+  { gauche: "Les volets claquèrent parce que le vent se leva.", droite: "la subordination : une proposition dépend grammaticalement de l'autre" },
+  { gauche: "Elle appela, personne ne répondit.", droite: "la juxtaposition : les propositions sont séparées par la ponctuation" },
   { gauche: "Elle appela mais personne ne répondit.", droite: "la coordination : un mot de liaison met les propositions à égalité" },
-  { gauche: "Elle appela bien qu'il fût tard.", droite: "la subordination : une proposition dépend de l'autre" },
-  { gauche: "Je sais qu'il viendra.", droite: "la subordination : une proposition dépend de l'autre" },
+  { gauche: "Elle appela bien qu'il fût tard.", droite: "la subordination : une proposition dépend grammaticalement de l'autre" },
+  { gauche: "Je sais qu'il viendra.", droite: "la subordination : une proposition dépend grammaticalement de l'autre" },
   { gauche: "Il faut partir tôt, car la route est longue.", droite: "la coordination : un mot de liaison met les propositions à égalité" },
-  { gauche: "Le jour tombait : la mer devenait noire.", droite: "la juxtaposition : les propositions sont séparées par un signe de ponctuation" },
-  { gauche: "Nous attendrons jusqu'à ce que le car arrive.", droite: "la subordination : une proposition dépend de l'autre" },
+  { gauche: "Le jour tombait : la mer devenait noire.", droite: "la juxtaposition : les propositions sont séparées par la ponctuation" },
+  { gauche: "Nous attendrons jusqu'à ce que le car arrive.", droite: "la subordination : une proposition dépend grammaticalement de l'autre" },
   { gauche: "Il ne dit rien ni ne bougea.", droite: "la coordination : un mot de liaison met les propositions à égalité" },
   // ⚠️ QUATRIÈME CATÉGORIE, ajoutée après mesure : la table n'en comptait que
   // trois, et le QCM ne sortait donc que trois propositions — un enfant qui
   // répond au hasard réussit une fois sur trois au lieu d'une sur quatre.
   // Ces phrases-là sont SIMPLES : un complément ou une énumération de groupes
   // n'est pas une proposition. C'est l'erreur que la virgule fait commettre.
-  { gauche: "Il rentra chez lui avant la nuit.", droite: "aucun lien : la phrase ne compte qu'une seule proposition" },
-  { gauche: "Le vent, la pluie et le froid les arrêtèrent.", droite: "aucun lien : la phrase ne compte qu'une seule proposition" },
-  { gauche: "Malgré la fatigue, elle continua sans s'arrêter.", droite: "aucun lien : la phrase ne compte qu'une seule proposition" },
+  { gauche: "Il rentra chez lui avant la nuit.", droite: "aucun lien : la phrase ne compte qu'une seule proposition conjuguée" },
+  { gauche: "Le vent, la pluie et le froid les arrêtèrent.", droite: "aucun lien : la phrase ne compte qu'une seule proposition conjuguée" },
+  { gauche: "Malgré la fatigue, elle continua sans s'arrêter.", droite: "aucun lien : la phrase ne compte qu'une seule proposition conjuguée" },
 ];
 
 const TOUS_LIENS: readonly string[] = [...new Set(LIENS.map((l) => l.droite))];
@@ -155,19 +155,19 @@ const TOUTES_SUB: readonly string[] = [...new Set(SUBORDONNEES.map((s) => s.droi
    ========================================================================== */
 
 const FONCTIONS: readonly Cas[] = [
-  { gauche: "Je crois [qu'il viendra].", droite: "complément d'objet direct du verbe" },
-  { gauche: "[Quand la cloche sonna], les élèves sortirent.", droite: "complément circonstanciel de temps" },
+  { gauche: "Je crois [qu'il viendra].", droite: "complément d'objet direct du verbe principal" },
+  { gauche: "[Quand la cloche sonna], les élèves sortirent.", droite: "complément circonstanciel de temps du verbe principal" },
   { gauche: "Le livre [que tu m'as prêté] est passionnant.", droite: "complément de l'antécédent : elle complète un nom" },
-  { gauche: "Il partit [parce que la nuit tombait].", droite: "complément circonstanciel de cause" },
-  { gauche: "Elle affirme [qu'elle a tout vérifié].", droite: "complément d'objet direct du verbe" },
-  { gauche: "[Dès que le car arriva], nous sommes montés.", droite: "complément circonstanciel de temps" },
+  { gauche: "Il partit [parce que la nuit tombait].", droite: "complément circonstanciel de cause du verbe principal" },
+  { gauche: "Elle affirme [qu'elle a tout vérifié].", droite: "complément d'objet direct du verbe principal" },
+  { gauche: "[Dès que le car arriva], nous sommes montés.", droite: "complément circonstanciel de temps du verbe principal" },
   { gauche: "La maison [où j'ai grandi] a été vendue.", droite: "complément de l'antécédent : elle complète un nom" },
-  { gauche: "Nous rentrons [puisque la pluie redouble].", droite: "complément circonstanciel de cause" },
-  { gauche: "Je sais [que tu as raison].", droite: "complément d'objet direct du verbe" },
-  { gauche: "[Pendant qu'il lisait], la nuit est tombée.", droite: "complément circonstanciel de temps" },
+  { gauche: "Nous rentrons [puisque la pluie redouble].", droite: "complément circonstanciel de cause du verbe principal" },
+  { gauche: "Je sais [que tu as raison].", droite: "complément d'objet direct du verbe principal" },
+  { gauche: "[Pendant qu'il lisait], la nuit est tombée.", droite: "complément circonstanciel de temps du verbe principal" },
   { gauche: "L'élève [qui a répondu] s'est levé.", droite: "complément de l'antécédent : elle complète un nom" },
-  { gauche: "Il se tut [car personne ne l'écoutait].", droite: "complément circonstanciel de cause" },
-  { gauche: "Ils espèrent [que le vent tombera].", droite: "complément d'objet direct du verbe" },
+  { gauche: "Il se tut [car personne ne l'écoutait].", droite: "complément circonstanciel de cause du verbe principal" },
+  { gauche: "Ils espèrent [que le vent tombera].", droite: "complément d'objet direct du verbe principal" },
   { gauche: "Le sentier [que nous avons suivi] montait dur.", droite: "complément de l'antécédent : elle complète un nom" },
 ];
 
@@ -182,20 +182,20 @@ const TOUTES_FONCTIONS: readonly string[] = [...new Set(FONCTIONS.map((f) => f.d
    ========================================================================== */
 
 const RELATIFS: readonly Cas[] = [
-  { gauche: "L'élève [qui a répondu] avait raison.", droite: "sujet du verbe de la subordonnée" },
-  { gauche: "Le livre [que tu m'as prêté] est passionnant.", droite: "complément d'objet direct du verbe de la subordonnée" },
-  { gauche: "La maison [où j'ai grandi] a été vendue.", droite: "complément circonstanciel de lieu" },
-  { gauche: "L'année [où nous sommes partis] fut la plus sèche.", droite: "complément circonstanciel de temps" },
-  { gauche: "Le pêcheur [qui rentrait] nous fit signe.", droite: "sujet du verbe de la subordonnée" },
-  { gauche: "Le sentier [que nous avons suivi] montait dur.", droite: "complément d'objet direct du verbe de la subordonnée" },
-  { gauche: "Le village [où le car s'arrête] est minuscule.", droite: "complément circonstanciel de lieu" },
-  { gauche: "Le jour [où elle est née] était un dimanche.", droite: "complément circonstanciel de temps" },
-  { gauche: "Les enfants [qui jouaient] se sont tus.", droite: "sujet du verbe de la subordonnée" },
-  { gauche: "La lettre [qu'il a écrite] n'est jamais partie.", droite: "complément d'objet direct du verbe de la subordonnée" },
-  { gauche: "La grotte [où ils se sont abrités] était sèche.", droite: "complément circonstanciel de lieu" },
-  { gauche: "Le soir [où l'orage éclata], tout le monde dormait.", droite: "complément circonstanciel de temps" },
-  { gauche: "L'homme [qui parle] est mon oncle.", droite: "sujet du verbe de la subordonnée" },
-  { gauche: "Les photos [que j'ai prises] sont floues.", droite: "complément d'objet direct du verbe de la subordonnée" },
+  { gauche: "L'élève [qui a répondu] avait raison.", droite: "sujet du verbe, dans la subordonnée" },
+  { gauche: "Le livre [que tu m'as prêté] est passionnant.", droite: "complément d'objet direct, dans la subordonnée" },
+  { gauche: "La maison [où j'ai grandi] a été vendue.", droite: "complément circonstanciel de lieu, dans la subordonnée" },
+  { gauche: "L'année [où nous sommes partis] fut la plus sèche.", droite: "complément circonstanciel de temps, dans la subordonnée" },
+  { gauche: "Le pêcheur [qui rentrait] nous fit signe.", droite: "sujet du verbe, dans la subordonnée" },
+  { gauche: "Le sentier [que nous avons suivi] montait dur.", droite: "complément d'objet direct, dans la subordonnée" },
+  { gauche: "Le village [où le car s'arrête] est minuscule.", droite: "complément circonstanciel de lieu, dans la subordonnée" },
+  { gauche: "Le jour [où elle est née] était un dimanche.", droite: "complément circonstanciel de temps, dans la subordonnée" },
+  { gauche: "Les enfants [qui jouaient] se sont tus.", droite: "sujet du verbe, dans la subordonnée" },
+  { gauche: "La lettre [qu'il a écrite] n'est jamais partie.", droite: "complément d'objet direct, dans la subordonnée" },
+  { gauche: "La grotte [où ils se sont abrités] était sèche.", droite: "complément circonstanciel de lieu, dans la subordonnée" },
+  { gauche: "Le soir [où l'orage éclata], tout le monde dormait.", droite: "complément circonstanciel de temps, dans la subordonnée" },
+  { gauche: "L'homme [qui parle] est mon oncle.", droite: "sujet du verbe, dans la subordonnée" },
+  { gauche: "Les photos [que j'ai prises] sont floues.", droite: "complément d'objet direct, dans la subordonnée" },
 ];
 
 const TOUTES_RELATIF: readonly string[] = [...new Set(RELATIFS.map((r) => r.droite))];
@@ -208,20 +208,20 @@ const TOUTES_RELATIF: readonly string[] = [...new Set(RELATIFS.map((r) => r.droi
    ========================================================================== */
 
 const PONCTUATION: readonly Cas[] = [
-  { gauche: "Le vent se leva ; les volets claquèrent.", droite: "il juxtapose deux propositions, sans mot de liaison" },
+  { gauche: "Le vent se leva ; les volets claquèrent.", droite: "il juxtapose deux propositions, sans aucun mot de liaison" },
   { gauche: "Une seule chose l'inquiétait : la nuit tombait.", droite: "il annonce ce qui suit — explication, cause ou conséquence" },
-  { gauche: "Ce matin-là, la mer était plate.", droite: "elle détache un complément placé en tête de phrase" },
-  { gauche: "Mon oncle, qui vivait à Cilaos, ne descendait jamais.", droite: "elles encadrent un groupe qu'on pourrait retirer sans casser la phrase" },
-  { gauche: "Il rentra, il posa son sac, il s'assit.", droite: "il juxtapose deux propositions, sans mot de liaison" },
+  { gauche: "Ce matin-là, la mer était plate.", droite: "elle détache un complément placé en tête, avant le sujet" },
+  { gauche: "Mon oncle, qui vivait à Cilaos, ne descendait jamais.", droite: "elles encadrent un groupe qu'on pourrait retirer sans dommage" },
+  { gauche: "Il rentra, il posa son sac, il s'assit.", droite: "il juxtapose deux propositions, sans aucun mot de liaison" },
   { gauche: "La réponse était simple : personne n'avait vérifié.", droite: "il annonce ce qui suit — explication, cause ou conséquence" },
-  { gauche: "Dès l'aube, les pêcheurs poussaient les barques.", droite: "elle détache un complément placé en tête de phrase" },
-  { gauche: "Le maitre (celui de l'an dernier) est revenu.", droite: "elles encadrent un groupe qu'on pourrait retirer sans casser la phrase" },
-  { gauche: "Le jour tombait ; la mer devenait noire.", droite: "il juxtapose deux propositions, sans mot de liaison" },
+  { gauche: "Dès l'aube, les pêcheurs poussaient les barques.", droite: "elle détache un complément placé en tête, avant le sujet" },
+  { gauche: "Le maitre (celui de l'an dernier) est revenu.", droite: "elles encadrent un groupe qu'on pourrait retirer sans dommage" },
+  { gauche: "Le jour tombait ; la mer devenait noire.", droite: "il juxtapose deux propositions, sans aucun mot de liaison" },
   { gauche: "Il ne restait qu'une solution : attendre.", droite: "il annonce ce qui suit — explication, cause ou conséquence" },
-  { gauche: "Au bout du chemin, la maison apparut.", droite: "elle détache un complément placé en tête de phrase" },
-  { gauche: "Sa sœur — la plus jeune — avait tout deviné.", droite: "elles encadrent un groupe qu'on pourrait retirer sans casser la phrase" },
-  { gauche: "Elle appela, personne ne répondit.", droite: "il juxtapose deux propositions, sans mot de liaison" },
-  { gauche: "Pendant la nuit, le vent avait tout emporté.", droite: "elle détache un complément placé en tête de phrase" },
+  { gauche: "Au bout du chemin, la maison apparut.", droite: "elle détache un complément placé en tête, avant le sujet" },
+  { gauche: "Sa sœur — la plus jeune — avait tout deviné.", droite: "elles encadrent un groupe qu'on pourrait retirer sans dommage" },
+  { gauche: "Elle appela, personne ne répondit.", droite: "il juxtapose deux propositions, sans aucun mot de liaison" },
+  { gauche: "Pendant la nuit, le vent avait tout emporté.", droite: "elle détache un complément placé en tête, avant le sujet" },
 ];
 
 const TOUS_ROLES: readonly string[] = [...new Set(PONCTUATION.map((p) => p.droite))];
