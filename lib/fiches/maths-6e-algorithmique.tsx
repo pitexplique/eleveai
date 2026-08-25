@@ -306,18 +306,21 @@ export const ficheAlgorithmique6e: FicheCoursData = {
   proprietes: [
     {
       titre: "L'ordre compte",
+      micros: ["algo_sequence"],
       texte:
         "Les instructions s'exécutent dans l'ordre, de haut en bas. Si on change l'ordre, le résultat peut changer : « avancer puis tourner » ne mène pas au même endroit que « tourner puis avancer ».",
       schema: lesDeuxOrdres,
     },
     {
       titre: "La répétition raccourcit",
+      micros: ["algo_repetition"],
       texte:
         "Quand une même action revient plusieurs fois, on utilise une boucle « répéter … fois » au lieu de tout réécrire. « Répéter 4 fois : avancer, tourner de 90° » trace un carré avec quelques blocs seulement.",
       schema: longEtCourt,
     },
     {
       titre: "L'ordinateur exécute sans deviner",
+      micros: ["algo_lire_programme"],
       texte:
         "La machine ne comprend pas ce qu'on voulait faire : elle applique les instructions telles quelles. Si un bloc est faux ou mal placé, elle exécute l'erreur sans la corriger. C'est à nous d'être précis.",
       schema: leProgrammeQuiObeit,
@@ -334,18 +337,21 @@ export const ficheAlgorithmique6e: FicheCoursData = {
   methode: [
     {
       titre: "Lire dans l'ordre",
+      micros: ["algo_sequence", "algo_lire_programme"],
       texte:
         "On lit le programme de haut en bas, comme un texte. On repère d'abord le bloc de départ (« quand le drapeau vert est cliqué »), puis chaque instruction dans l'ordre.",
       schema: parOuCommencer,
     },
     {
       titre: "Exécuter pas à pas",
+      micros: ["algo_deplacement"],
       texte:
         "On fait comme si on était la machine : on suit chaque instruction une par une et on note ce qui se passe (position, direction). On ne saute aucune étape.",
       schema: tableauDExecution,
     },
     {
       titre: "Chercher les répétitions",
+      micros: ["algo_repetition"],
       texte:
         "On repère les blocs à l'intérieur d'un « répéter … fois » : ils sont exécutés plusieurs fois. On multiplie l'action par le nombre de tours pour trouver le résultat total.",
       schema: laBoucleEstUneMultiplication,
@@ -354,16 +360,19 @@ export const ficheAlgorithmique6e: FicheCoursData = {
   usages: [
     {
       titre: "Suivre ou écrire un déplacement",
+      micros: ["algo_deplacement"],
       detail:
         "Faire avancer un lutin (« avancer de 10 ») ou le faire tourner (« tourner de 90° »). Avancer change la position, tourner change la direction : ce sont deux actions différentes.",
     },
     {
       titre: "Utiliser une répétition",
+      micros: ["algo_repetition"],
       detail:
         "Regrouper une action qui se répète dans une boucle : « répéter 3 fois : avancer de 20 » fait avancer de 3 × 20 = 60 pas, en trois blocs au lieu de six.",
     },
     {
       titre: "Prévoir le résultat",
+      micros: ["algo_lire_programme"],
       detail:
         "Lire un programme pour dire à l'avance ce que fait le lutin : quelle distance il parcourt, quelle figure il trace, ce qu'il dit à la fin.",
     },
@@ -371,6 +380,7 @@ export const ficheAlgorithmique6e: FicheCoursData = {
   exemples: [
     {
       titre: "Suivre un déplacement sur un quadrillage",
+      micros: ["algo_deplacement"],
       donnees:
         "Un lutin part d'une case et suit ce programme : avance de 3 cases, tourne à droite (quart de tour), avance de 2 cases.",
       question: "Combien de cases le lutin a-t-il parcourues en tout, et a-t-il changé de direction ?",
@@ -380,6 +390,7 @@ export const ficheAlgorithmique6e: FicheCoursData = {
     },
     {
       titre: "Comprendre une répétition",
+      micros: ["algo_repetition"],
       donnees:
         "Un lutin suit le programme : répéter 4 fois « avancer de 10 pas ».",
       question: "Quelle distance totale le lutin parcourt-il ?",
@@ -414,6 +425,7 @@ export const ficheAlgorithmique6e: FicheCoursData = {
         "Un élève veut tracer un carré. Il écrit : répéter 3 fois « avancer de 50, tourner de 90° ». Son programme est-il correct ? Sinon, comment le corriger ?",
       correction:
         "Un carré a 4 côtés et 4 angles droits. Le programme ne répète que 3 fois : il ne trace donc que 3 côtés, la figure reste ouverte. Le programme n'est pas correct. Pour le corriger, il faut remplacer « répéter 3 fois » par « répéter 4 fois » : ainsi le lutin trace les 4 côtés et referme le carré. L'angle de 90° est bien le bon.",
+      micros: ["algo_figure", "algo_defi"],
     },
   ],
   coachHref: "/coach-ia/maths?classe=6e",

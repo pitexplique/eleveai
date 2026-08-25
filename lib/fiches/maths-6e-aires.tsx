@@ -278,6 +278,7 @@ export const ficheAires6e: FicheCoursData = {
     },
     {
       titre: "Comparer sans mesurer",
+      micros: ["aire_comparer"],
       texte:
         "Deux figures se comparent par superposition, ou par découpage et recollement : si les morceaux de l'une remplissent exactement l'autre, elles ont la même aire.",
       // Les MÊMES douze carreaux, rangés autrement : l'aire n'a pas bougé, et
@@ -291,12 +292,14 @@ export const ficheAires6e: FicheCoursData = {
     },
     {
       titre: "L'aire du rectangle",
+      micros: ["aire_rectangle"],
       texte:
         "Aire du rectangle = longueur × largeur. Un rectangle de 6 cm sur 4 cm a une aire de 6 × 4 = 24 cm².",
       schema: rectangleCote(186, 124, { AB: "6 cm", BC: "4 cm" }),
     },
     {
       titre: "L'aire du carré",
+      micros: ["aire_carre"],
       texte:
         "Dans un carré, tous les côtés sont égaux. Aire du carré = côté × côté. Un carré de côté 5 cm a une aire de 5 × 5 = 25 cm².",
       schema: rectangleCote(150, 150, {
@@ -314,6 +317,7 @@ export const ficheAires6e: FicheCoursData = {
     },
     {
       titre: "Décomposer une figure",
+      micros: ["aire_decomposer"],
       texte:
         "Une figure tordue (en L, en escalier, en zigzag) se découpe en rectangles et en carrés. L'aire totale est la somme des aires des morceaux, s'ils ne se chevauchent pas.",
       schema: grille(4, 4, escalier, { contour: true }),
@@ -352,6 +356,7 @@ export const ficheAires6e: FicheCoursData = {
     },
     {
       titre: "Calculer avec la bonne formule",
+      micros: ["aire_rectangle", "aire_carre"],
       texte:
         "Rectangle : longueur × largeur. Carré : côté × côté. Sur quadrillage : compter les carreaux unités recouverts.",
       schema: (
@@ -378,6 +383,7 @@ export const ficheAires6e: FicheCoursData = {
   usages: [
     {
       titre: "Compter les carreaux",
+      micros: ["aire_comparer"],
       detail:
         "Sur un quadrillage, on compte les carreaux unités recouverts par la figure. 9 carreaux recouverts donnent une aire de 9 unités d'aire.",
       // Une figure SANS forme usuelle : compter marche quand même. C'est ce que
@@ -386,6 +392,7 @@ export const ficheAires6e: FicheCoursData = {
     },
     {
       titre: "Calculer rectangle ou carré",
+      micros: ["aire_rectangle", "aire_carre"],
       detail:
         "On connaît les dimensions : rectangle = longueur × largeur, carré = côté × côté. On n'oublie pas l'unité carrée à la fin.",
       schema: empiler(
@@ -397,6 +404,7 @@ export const ficheAires6e: FicheCoursData = {
     },
     {
       titre: "Découper la figure",
+      micros: ["aire_decomposer"],
       detail:
         "La figure n'est ni un rectangle ni un carré ? On la découpe en morceaux simples, on calcule l'aire de chaque morceau, puis on additionne.",
       schema: grille(3, 4, zigzag, { contour: true }),
@@ -405,6 +413,7 @@ export const ficheAires6e: FicheCoursData = {
   exemples: [
     {
       titre: "L'aire d'un rectangle",
+      micros: ["aire_rectangle"],
       donnees: "Un rectangle mesure 8 cm de longueur et 5 cm de largeur.",
       question: "Calculer son aire.",
       // L'énoncé donne des DIMENSIONS, pas un quadrillage : le dessin dit la
@@ -415,6 +424,7 @@ export const ficheAires6e: FicheCoursData = {
     },
     {
       titre: "Une figure en L",
+      micros: ["aire_decomposer"],
       donnees:
         "Une figure en L est formée d'un rectangle de 4 cm sur 3 cm et d'un carré de côté 2 cm, sans chevauchement.",
       question: "Calculer son aire totale.",
@@ -424,6 +434,7 @@ export const ficheAires6e: FicheCoursData = {
     },
     {
       titre: "Une figure biscornue",
+      micros: ["aire_decomposer"],
       donnees:
         "Une figure tracée sur un quadrillage (carreaux de 1 cm²) : elle n'est ni un rectangle, ni un carré, et son contour fait trois décrochements.",
       question: "Quelle est son aire ?",
@@ -433,6 +444,7 @@ export const ficheAires6e: FicheCoursData = {
     },
     {
       titre: "Comparer deux aires",
+      micros: ["aire_comparer"],
       donnees: "Une affiche a une aire de 250 cm². Une feuille a une aire de 3 dm².",
       question: "Laquelle occupe la plus grande surface ?",
       schema: tableauComparaison,
@@ -465,6 +477,7 @@ export const ficheAires6e: FicheCoursData = {
         "Défi : deux rectangles peuvent-ils avoir la même aire mais des périmètres différents ?",
       correction:
         "Oui. Un rectangle de 3 cm sur 4 cm et un rectangle de 2 cm sur 6 cm ont tous les deux une aire de 12 cm². Mais leurs périmètres valent 14 cm et 16 cm : l'aire et le périmètre sont deux grandeurs différentes.",
+      micros: ["aire_defi"],
     },
     {
       question: "Convertis 3,7 m² en dm², puis 370 cm² en dm².",
@@ -476,6 +489,7 @@ export const ficheAires6e: FicheCoursData = {
         "Problème : un jardin rectangulaire mesure 7 m de long et 3 m de large. On veut le comparer à un potager carré de côté 5 m. Lequel a la plus grande aire ?",
       correction:
         "Aire du jardin : 7 × 3 = 21 m². Aire du potager : 5 × 5 = 25 m². Les deux aires sont en m², on compare les nombres : 25 est plus grand que 21. C'est le potager carré qui a la plus grande aire.",
+      micros: ["aire_probleme"],
     },
   ],
   coachHref: "/coach-ia/maths?classe=6e",
