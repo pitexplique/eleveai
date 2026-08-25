@@ -310,24 +310,28 @@ export const ficheTriangles6e: FicheCoursData = {
   proprietes: [
     {
       titre: "Sommets, côtés et angles",
+      micros: ["triangle_sommet_cote"],
       texte:
         "Un triangle a exactement 3 sommets (des points), 3 côtés (des segments) et 3 angles. Le côté opposé à un sommet est celui qui ne le contient pas : dans le triangle ABC, le côté opposé au sommet A est BC.",
       schema: anatomie,
     },
     {
       titre: "Les familles selon les côtés",
+      micros: ["triangle_type_cote"],
       texte:
         "On reconnaît un triangle à ses côtés : équilatéral si ses trois côtés sont de même longueur, isocèle s'il a au moins deux côtés de même longueur, et quelconque si ses trois côtés ont des longueurs toutes différentes. Un triangle équilatéral est un cas particulier de triangle isocèle.",
       schema: famillesCotes,
     },
     {
       titre: "Les familles selon les angles",
+      micros: ["triangle_type_angle"],
       texte:
         "On reconnaît aussi un triangle à son plus grand angle : rectangle s'il a un angle droit (90°), obtusangle s'il a un angle supérieur à 90°, et aigu si ses trois angles sont inférieurs à 90°.",
       schema: famillesAngles,
     },
     {
       titre: "La somme des angles et l'inégalité triangulaire",
+      micros: ["triangle_defi"],
       texte:
         "Dans tout triangle, la somme des trois angles est toujours égale à 180°. Et pour qu'un triangle existe, la longueur de chaque côté doit être plus petite que la somme des deux autres : c'est l'inégalité triangulaire.",
       schema: inegaliteTriangulaire,
@@ -344,18 +348,21 @@ export const ficheTriangles6e: FicheCoursData = {
   methode: [
     {
       titre: "Nommer et repérer",
+      micros: ["triangle_nommer", "triangle_sommet_cote"],
       texte:
         "On nomme un triangle avec ses trois sommets, peu importe l'ordre : triangle ABC ou triangle CBA désignent la même figure. On repère bien les sommets (les points), les côtés (les segments) et les angles avant de répondre.",
       schema: trianglePourNommer,
     },
     {
       titre: "Reconnaître la nature",
+      micros: ["triangle_type_cote", "triangle_type_angle"],
       texte:
         "On observe d'abord les côtés (les codages en traits égaux) pour savoir s'il est équilatéral, isocèle ou quelconque, puis les angles (le petit carré signale l'angle droit) pour savoir s'il est rectangle, aigu ou obtusangle.",
       schema: rectangleEtIsocele,
     },
     {
       titre: "Calculer un angle",
+      micros: ["triangle_defi"],
       texte:
         "Pour trouver un angle manquant, on part de 180° et on enlève les deux angles connus : troisième angle = 180 − angle 1 − angle 2. On vérifie toujours que les trois angles additionnés font bien 180°.",
       schema: angleManquantPose,
@@ -364,16 +371,19 @@ export const ficheTriangles6e: FicheCoursData = {
   usages: [
     {
       titre: "Nommer et décrire",
+      micros: ["triangle_nommer"],
       detail:
         "Passer des sommets au nom du triangle et repérer ses éléments : le triangle de sommets D, E et F se note triangle DEF ; le côté opposé au sommet F est DE.",
     },
     {
       titre: "Reconnaître la nature",
+      micros: ["triangle_type_cote"],
       detail:
         "Classer le triangle selon ses côtés (équilatéral, isocèle, quelconque) et selon ses angles (rectangle, aigu, obtusangle). Un même triangle peut cumuler deux natures : rectangle isocèle.",
     },
     {
       titre: "Calculer et vérifier",
+      micros: ["triangle_defi"],
       detail:
         "Retrouver un angle manquant avec 180° (troisième = 180 − les deux autres) ou vérifier si un triangle est constructible en comparant la somme de deux côtés au troisième.",
     },
@@ -381,6 +391,7 @@ export const ficheTriangles6e: FicheCoursData = {
   exemples: [
     {
       titre: "Nommer un triangle et reconnaître sa nature",
+      micros: ["triangle_nommer", "triangle_type_cote"],
       donnees:
         "Un triangle a pour sommets K, L et M. Ses côtés KL et LM sont marqués du même codage : ils ont la même longueur.",
       question: "Comment se nomme ce triangle, et quelle est sa nature selon ses côtés ?",
@@ -390,6 +401,7 @@ export const ficheTriangles6e: FicheCoursData = {
     },
     {
       titre: "Calculer un angle manquant",
+      micros: ["triangle_type_angle"],
       donnees: "Dans un triangle, deux angles mesurent 60° et 70°.",
       question: "Combien mesure le troisième angle ?",
       schema: triangleAngles,

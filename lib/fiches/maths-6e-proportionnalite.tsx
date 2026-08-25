@@ -227,16 +227,19 @@ export const ficheProportionnalite6e: FicheCoursData = {
   proprietes: [
     {
       titre: "Le coefficient",
+      micros: ["prop_coeff"],
       texte: "On passe d'une ligne à l'autre en multipliant par le même nombre (ici × 2).",
       schema: leCoefficient,
     },
     {
       titre: "Reconnaître",
+      micros: ["prop_reconnaitre"],
       texte: "Si une grandeur double, l'autre double ; si elle triple, l'autre triple.",
       schema: proportionnelOuPas,
     },
     {
       titre: "Passer par l'unité",
+      micros: ["prop_unite"],
       texte: "On cherche la valeur pour 1, puis on multiplie par la quantité voulue.",
       schema: leToutEnCinqParts,
     },
@@ -262,18 +265,19 @@ export const ficheProportionnalite6e: FicheCoursData = {
     ),
   },
   methode: [
-    { titre: "Je lis", texte: "Les deux grandeurs : objets et prix, personnes et masse, temps et distance…" , schema: lesDeuxGrandeurs },
-    { titre: "Je reviens à 1", texte: "Je cherche la valeur pour 1 unité (une division)." , schema: laColonneDeLUnite },
-    { titre: "Je multiplie", texte: "Je multiplie cette valeur par la quantité demandée." , schema: septPartsRecollees },
+    { titre: "Je lis", texte: "Les deux grandeurs : objets et prix, personnes et masse, temps et distance…" , schema: lesDeuxGrandeurs , micros: ["prop_reconnaitre"] },
+    { titre: "Je reviens à 1", texte: "Je cherche la valeur pour 1 unité (une division)." , schema: laColonneDeLUnite , micros: ["prop_unite"] },
+    { titre: "Je multiplie", texte: "Je multiplie cette valeur par la quantité demandée." , schema: septPartsRecollees , micros: ["prop_direct"] },
   ],
   usages: [
-    { titre: "Reconnaître", detail: "On double une quantité → l'autre double aussi." },
-    { titre: "Revenir à l'unité", detail: "Valeur pour 1, puis × la quantité : 1 cahier = 2 €, 5 cahiers = 10 €." },
-    { titre: "Compléter un tableau", detail: "On trouve la case « ? » avec le coefficient ou l'unité." },
+    { titre: "Reconnaître", detail: "On double une quantité → l'autre double aussi." , micros: ["prop_reconnaitre"] },
+    { titre: "Revenir à l'unité", detail: "Valeur pour 1, puis × la quantité : 1 cahier = 2 €, 5 cahiers = 10 €." , micros: ["prop_unite"] },
+    { titre: "Compléter un tableau", detail: "On trouve la case « ? » avec le coefficient ou l'unité." , micros: ["prop_table"] },
   ],
   exemples: [
     {
       titre: "Reconnaître",
+      micros: ["prop_reconnaitre"],
       donnees: "1 cahier → 2 €, 2 cahiers → 4 €, 3 cahiers → 6 €.",
       question: "Est-ce proportionnel ?",
       schema: tableauProp(
@@ -287,6 +291,7 @@ export const ficheProportionnalite6e: FicheCoursData = {
     },
     {
       titre: "Compléter un tableau",
+      micros: ["prop_table"],
       donnees: "3 cahiers coûtent 6 €.",
       question: "Combien coûtent 5 cahiers ?",
       schema: tableauProp(
@@ -301,6 +306,7 @@ export const ficheProportionnalite6e: FicheCoursData = {
     },
     {
       titre: "Recette (passage par l'unité)",
+      micros: ["prop_unite", "prop_direct"],
       donnees: "Pour 4 personnes, il faut 200 g de riz.",
       question: "Combien pour 6 personnes ?",
       schema: tableauProp(
@@ -332,6 +338,7 @@ export const ficheProportionnalite6e: FicheCoursData = {
     {
       question: "Un cycliste parcourt 12 km en 30 min à vitesse régulière. Quelle distance en 1 h ?",
       correction: "1 h = 2 × 30 min, donc il parcourt 2 × 12 = 24 km.",
+      micros: ["prop_defi"],
     },
   ],
   coachHref: "/coach-ia/maths?classe=6e",

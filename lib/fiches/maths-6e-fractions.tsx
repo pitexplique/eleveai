@@ -252,21 +252,25 @@ export const ficheFractions6e: FicheCoursData = {
   proprietes: [
     {
       titre: "Numérateur et dénominateur",
+      micros: ["fraction_lire_ecrire"],
       texte: "En haut, les parts prises ; en bas, le nombre total de parts égales.",
       schema: barre25,
     },
     {
       titre: "Toujours des parts égales",
+      micros: ["fraction_representer"],
       texte: "Sans parts égales, on ne peut pas écrire de fraction.",
       schema: partsInegales,
     },
     {
       titre: "Comparer",
+      micros: ["fraction_comparer"],
       texte: "Même dénominateur → plus grand numérateur ; même numérateur → plus petit dénominateur.",
       schema: compare3545,
     },
     {
       titre: "Écriture décimale",
+      micros: ["fraction_decimal"],
       texte: "À connaître : 1/2 = 0,5 ; 1/4 = 0,25 ; 3/4 = 0,75.",
       schema: fractionsSurLaDroite,
     },
@@ -286,18 +290,19 @@ export const ficheFractions6e: FicheCoursData = {
     schema: barre34,
   },
   methode: [
-    { titre: "Je repère", texte: "Numérateur en haut (parts prises), dénominateur en bas (parts du partage)." , schema: anatomieDeLEcriture },
-    { titre: "Je dessine", texte: "Autant de parts égales que le dénominateur, je colorie le numérateur." , schema: grille46 },
+    { titre: "Je repère", texte: "Numérateur en haut (parts prises), dénominateur en bas (parts du partage)." , schema: anatomieDeLEcriture , micros: ["fraction_lire_ecrire"] },
+    { titre: "Je dessine", texte: "Autant de parts égales que le dénominateur, je colorie le numérateur." , schema: grille46 , micros: ["fraction_representer"] },
     { titre: "Je calcule", texte: "Fraction d'une quantité : je divise par le bas, je multiplie par le haut." , schema: troisQuartsDeDouze },
   ],
   usages: [
-    { titre: "Lire → écrire", detail: "3 parts prises sur 5 parts égales s'écrit 3/5." },
-    { titre: "Représenter", detail: "Pour 4/6 : 6 parts égales, on en colorie 4." },
+    { titre: "Lire → écrire", detail: "3 parts prises sur 5 parts égales s'écrit 3/5." , micros: ["fraction_lire_ecrire"] },
+    { titre: "Représenter", detail: "Pour 4/6 : 6 parts égales, on en colorie 4." , micros: ["fraction_representer"] },
     { titre: "Une quantité", detail: "Les 3/4 de 12 : (12 ÷ 4) × 3 = 9." },
   ],
   exemples: [
     {
       titre: "Lire et écrire",
+      micros: ["fraction_lire_ecrire"],
       donnees: "Un gâteau est partagé en 6 parts égales, on en prend 5.",
       question: "Quelle fraction a-t-on prise ?",
       schema: disque56,
@@ -305,6 +310,7 @@ export const ficheFractions6e: FicheCoursData = {
     },
     {
       titre: "Représenter",
+      micros: ["fraction_representer"],
       donnees: "On veut représenter 3/4 d'une figure.",
       question: "Combien de parts colorier, et sur combien ?",
       schema: grille34,
@@ -312,6 +318,7 @@ export const ficheFractions6e: FicheCoursData = {
     },
     {
       titre: "Comparer",
+      micros: ["fraction_comparer"],
       donnees: "On compare 1/3 et 1/5.",
       question: "Laquelle est la plus grande ?",
       schema: compare1315,
@@ -335,6 +342,7 @@ export const ficheFractions6e: FicheCoursData = {
     {
       question: "Une pizza est partagée en 8 parts égales, tu en manges 3. Quelle fraction ?",
       correction: "8 parts égales → dénominateur 8. 3 parts mangées → numérateur 3. Tu as mangé 3/8.",
+      micros: ["fraction_lire_ecrire"],
     },
     {
       question: "Combien de parts colorier pour 2/4 d'une figure en 4 parts ? Quelle fraction égale ?",
@@ -343,10 +351,12 @@ export const ficheFractions6e: FicheCoursData = {
     {
       question: "Les 3/4 de 12, c'est combien ?",
       correction: "12 ÷ 4 = 3 (une part), puis 3 × 3 = 9. Les 3/4 de 12, c'est 9.",
+      micros: ["fraction_decimal"],
     },
     {
       question: "Compare 2/3 et 3/4.",
       correction: "En décimal : 3/4 = 0,75 et 2/3 ≈ 0,67. Comme 0,75 > 0,67, la plus grande est 3/4.",
+      micros: ["fraction_comparer", "fraction_defi"],
     },
   ],
   coachHref: "/coach-ia/maths?classe=6e",

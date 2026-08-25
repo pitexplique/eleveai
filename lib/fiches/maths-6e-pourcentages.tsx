@@ -236,16 +236,19 @@ export const fichePourcentages6e: FicheCoursData = {
   proprietes: [
     {
       titre: "% veut dire sur 100",
+      micros: ["pourcentage_comprendre"],
       texte: "p % = p sur 100 = la fraction p/100. Ainsi 25 % = 25/100.",
       schema: barreSurCent,
     },
     {
       titre: "Trois écritures",
+      micros: ["pourcentage_fraction", "pourcentage_decimal"],
       texte: "Un même nombre s'écrit de 3 façons : 25 % = 25/100 = 0,25.",
       schema: lesTroisEcritures,
     },
     {
       titre: "Les repères",
+      micros: ["pourcentage_calcul_simple"],
       texte: "50 % = la moitié, 25 % = le quart, 10 % = le dixième.",
       schema: lesReperes,
     },
@@ -264,18 +267,19 @@ export const fichePourcentages6e: FicheCoursData = {
     legende: "10 % de 60 = 60 × 10 ÷ 100 = 6. Plus rapide avec le repère : 10 %, c'est le dixième.",
   },
   methode: [
-    { titre: "Je lis", texte: "Je traduis % par « sur 100 » : 20 % = 20 sur 100." , schema: grilleDeLecture },
-    { titre: "Je traduis", texte: "En fraction sur 100, et en décimal : 25 % = 25/100 = 0,25." , schema: surLaDroiteDesDecimaux },
-    { titre: "Je calcule", texte: "Un repère (moitié, quart, dixième), sinon × p ÷ 100." , schema: calculerParProportion },
+    { titre: "Je lis", texte: "Je traduis % par « sur 100 » : 20 % = 20 sur 100." , schema: grilleDeLecture , micros: ["pourcentage_lire"] },
+    { titre: "Je traduis", texte: "En fraction sur 100, et en décimal : 25 % = 25/100 = 0,25." , schema: surLaDroiteDesDecimaux , micros: ["pourcentage_fraction", "pourcentage_decimal"] },
+    { titre: "Je calcule", texte: "Un repère (moitié, quart, dixième), sinon × p ÷ 100." , schema: calculerParProportion , micros: ["pourcentage_calcul_simple"] },
   ],
   usages: [
-    { titre: "Comprendre", detail: "« sur 100 » : 75 % veut dire 75 sur 100." },
-    { titre: "Fraction et décimal", detail: "p % = p/100, puis ÷ 100 : 10 % = 10/100 = 0,1." },
-    { titre: "Calcul simple", detail: "Par un repère : 25 % de 20, c'est le quart, donc 5." },
+    { titre: "Comprendre", detail: "« sur 100 » : 75 % veut dire 75 sur 100." , micros: ["pourcentage_comprendre"] },
+    { titre: "Fraction et décimal", detail: "p % = p/100, puis ÷ 100 : 10 % = 10/100 = 0,1." , micros: ["pourcentage_fraction", "pourcentage_decimal"] },
+    { titre: "Calcul simple", detail: "Par un repère : 25 % de 20, c'est le quart, donc 5." , micros: ["pourcentage_calcul_simple"] },
   ],
   exemples: [
     {
       titre: "Trois écritures",
+      micros: ["pourcentage_fraction"],
       donnees: "On s'intéresse à 75 %.",
       question: "Écris 75 % en fraction, puis en décimal.",
       schema: grillePourcent(75),
@@ -283,6 +287,7 @@ export const fichePourcentages6e: FicheCoursData = {
     },
     {
       titre: "Lire une situation",
+      micros: ["pourcentage_lire"],
       donnees: "Sur 100 bonbons, 60 % sont rouges.",
       question: "Combien de bonbons rouges ?",
       schema: grillePourcent(60),
@@ -290,6 +295,7 @@ export const fichePourcentages6e: FicheCoursData = {
     },
     {
       titre: "Calculer avec un repère",
+      micros: ["pourcentage_calcul_simple"],
       donnees: "On veut 50 % de 18.",
       question: "Combien font 50 % de 18 ?",
       schema: barreMoitie,
@@ -310,6 +316,7 @@ export const fichePourcentages6e: FicheCoursData = {
     {
       question: "Dans une collection de 100 cartes, 8 % sont brillantes. Combien y en a-t-il ?",
       correction: "8 % = 8 sur 100. La collection compte 100 cartes, donc il y a 8 cartes brillantes.",
+      micros: ["pourcentage_defi"],
     },
     {
       question: "Calcule 10 % de 60, puis 50 % de 18.",

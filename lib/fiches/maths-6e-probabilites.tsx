@@ -286,24 +286,28 @@ export const ficheProbabilites6e: FicheCoursData = {
   proprietes: [
     {
       titre: "Certain, possible, impossible",
+      micros: ["proba_vocabulaire"],
       texte:
         "Un événement impossible ne peut jamais se produire (obtenir 7 avec un dé classique). Un événement certain se produit toujours (obtenir un nombre entre 1 et 6). Entre les deux, un événement possible peut arriver, sans être garanti (obtenir 6).",
       schema: sacUneSeuleCouleur,
     },
     {
       titre: "Lister toutes les issues",
+      micros: ["proba_issue"],
       texte:
         "Avant tout, on cherche tous les résultats possibles. Un dé a 6 issues, une pièce en a 2 (pile ou face), un sac de billes en a autant que de billes. Si on en oublie une, la suite est faussée.",
       schema: tableauDesIssues,
     },
     {
       titre: "Plus, moins ou aussi probable",
+      micros: ["proba_comparer"],
       texte:
         "Un événement est d'autant plus probable qu'il a de résultats qui le réalisent. Sur un dé, « obtenir un nombre pair » (2, 4 ou 6) est plus probable qu'« obtenir 6 » tout seul. Deux événements sont aussi probables quand ils ont autant de chances chacun.",
       schema: roueInegale,
     },
     {
       titre: "L'échelle de 0 à 1",
+      micros: ["proba_estimer"],
       texte:
         "On mesure une chance entre 0 et 1. 0, c'est impossible ; 1, c'est certain. Un événement qui a beaucoup de chances est proche de 1 ; un événement qui en a peu est proche de 0. Une chance n'est jamais plus grande que 1.",
       schema: echelleDesChances,
@@ -320,18 +324,21 @@ export const ficheProbabilites6e: FicheCoursData = {
   methode: [
     {
       titre: "Lister les issues",
+      micros: ["proba_issue"],
       texte:
         "On écrit tous les résultats possibles de l'expérience : les 6 faces d'un dé, les 2 côtés d'une pièce, les billes du sac. On vérifie qu'on n'en oublie aucun.",
       schema: roueEgale,
     },
     {
       titre: "Compter",
+      micros: ["proba_lire"],
       texte:
         "On compte combien d'issues au total, puis combien réalisent l'événement qui nous intéresse (les issues favorables). Sur un dé, « nombre pair » a 3 issues favorables : 2, 4 et 6.",
       schema: barreDesIssues,
     },
     {
       titre: "Comparer",
+      micros: ["proba_comparer"],
       texte:
         "Pour dire quel événement est le plus probable, on compare le nombre d'issues favorables : le plus de chances gagne. On peut aussi situer une chance sur l'échelle de 0 à 1.",
       schema: barresAComparer,
@@ -340,16 +347,19 @@ export const ficheProbabilites6e: FicheCoursData = {
   usages: [
     {
       titre: "Utiliser les bons mots",
+      micros: ["proba_vocabulaire"],
       detail:
         "Choisir entre impossible, possible, probable et certain selon la situation : obtenir un nombre entre 1 et 6 avec un dé est certain ; obtenir 7 est impossible.",
     },
     {
       titre: "Identifier les issues",
+      micros: ["proba_issue"],
       detail:
         "Repérer et compter tous les résultats possibles : combien de faces sur un dé, combien de secteurs sur une roue, combien de billes dans un sac.",
     },
     {
       titre: "Comparer et estimer",
+      micros: ["proba_comparer", "proba_estimer"],
       detail:
         "Dire quel événement a le plus de chances, ou situer une chance entre 0 (impossible) et 1 (certain) : « proche de 1 » quand c'est très probable.",
     },
@@ -357,6 +367,7 @@ export const ficheProbabilites6e: FicheCoursData = {
   exemples: [
     {
       titre: "Compter les issues d'un dé",
+      micros: ["proba_issue", "proba_lire"],
       donnees: "On lance un dé classique à 6 faces.",
       question: "Combien y a-t-il d'issues possibles ? Combien réalisent l'événement « obtenir un nombre pair » ?",
       schema: dePairs,
@@ -365,6 +376,7 @@ export const ficheProbabilites6e: FicheCoursData = {
     },
     {
       titre: "Comparer dans un sac de billes",
+      micros: ["proba_comparer"],
       donnees: "Un sac contient 4 billes rouges, 2 billes bleues et 1 bille verte. On tire une bille au hasard.",
       question: "Quelle couleur a le plus de chances d'être tirée ? Laquelle en a le moins ?",
       schema: sacBilles,
@@ -394,6 +406,7 @@ export const ficheProbabilites6e: FicheCoursData = {
       question: "Défi : un camarade dit « la probabilité de gagner est 1,5 ». Pourquoi est-ce impossible ? Que dois-tu toujours vérifier avant de le croire ?",
       correction:
         "Une chance se mesure entre 0 et 1 : 0 pour impossible, 1 pour certain. La valeur 1 correspond déjà à un événement certain, donc rien ne peut dépasser 1 : une probabilité de 1,5 n'a pas de sens. Avant de croire qu'un événement est « très probable », on ne se fie pas à une impression : on liste toutes les issues, on compte les issues favorables et on compare au total.",
+      micros: ["proba_defi"],
     },
   ],
   coachHref: "/coach-ia/maths?classe=6e",

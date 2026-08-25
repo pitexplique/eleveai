@@ -330,24 +330,28 @@ export const ficheSymetrie6e: FicheCoursData = {
   proprietes: [
     {
       titre: "L'image d'un point",
+      micros: ["sym_point"],
       texte:
         "L'image d'un point A est le point A', placé de l'autre côté de l'axe, à la même distance de l'axe. Si A est déjà sur l'axe, il ne bouge pas : son image est lui-même.",
       schema: pointSurLAxe,
     },
     {
       titre: "L'axe est la médiatrice",
+      micros: ["sym_point"],
       texte:
         "Le segment [AA'] qui relie un point à son image est toujours perpendiculaire à l'axe, et l'axe le coupe en son milieu. Autrement dit, l'axe est la médiatrice de [AA'].",
       schema: laMediatrice,
     },
     {
       titre: "La symétrie conserve les mesures",
+      micros: ["sym_propriete"],
       texte:
         "Une symétrie axiale ne déforme pas la figure : elle conserve les longueurs, les mesures d'angles, les aires, les périmètres et l'alignement des points. Un segment de 7 cm a une image de 7 cm ; un angle de 40° a une image de 40°.",
       schema: cequiSeConserve,
     },
     {
       titre: "Les axes des figures usuelles",
+      micros: ["sym_axe"],
       texte:
         "Un rectangle non carré possède 2 axes de symétrie, un carré en possède 4 (les deux médianes et les deux diagonales), un triangle équilatéral en possède 3, un triangle isocèle non équilatéral en possède 1 et un cercle en possède une infinité.",
       schema: lesQuatreAxesDuCarre,
@@ -364,18 +368,21 @@ export const ficheSymetrie6e: FicheCoursData = {
   methode: [
     {
       titre: "Plier en pensée",
+      micros: ["sym_reconnaitre"],
       texte:
         "Pour reconnaître une symétrie, on imagine que l'on plie la feuille le long de l'axe. Si la figure et son image se superposent exactement, c'est bien une symétrie axiale.",
       schema: leProblemeDuPliage,
     },
     {
       titre: "Tracer la perpendiculaire",
+      micros: ["sym_point"],
       texte:
         "Pour construire l'image d'un point A, on trace la droite perpendiculaire à l'axe qui passe par A. C'est sur cette droite que se trouvera l'image A'.",
       schema: laPerpendiculaire,
     },
     {
       titre: "Reporter la distance",
+      micros: ["sym_point", "sym_figure"],
       texte:
         "On mesure la distance de A à l'axe, puis on reporte cette même distance de l'autre côté, sur la perpendiculaire. On obtient A'. Pour une figure, on répète ce geste pour chaque sommet.",
       schema: reporterLaDistance,
@@ -384,16 +391,19 @@ export const ficheSymetrie6e: FicheCoursData = {
   usages: [
     {
       titre: "Reconnaître une symétrie",
+      micros: ["sym_reconnaitre"],
       detail:
         "Vérifier qu'une figure est bien l'image d'une autre par symétrie axiale : on contrôle que chaque point et son image sont à la même distance de l'axe, de part et d'autre.",
     },
     {
       titre: "Construire l'image",
+      micros: ["sym_figure"],
       detail:
         "Construire l'image d'un point ou d'une figure : perpendiculaire à l'axe, même distance de l'autre côté. Pour un triangle ABC, on construit A', B', C' puis on relie les points.",
     },
     {
       titre: "Trouver les axes",
+      micros: ["sym_axe"],
       detail:
         "Chercher les axes de symétrie d'une figure : on teste mentalement les pliages possibles. Rectangle : 2 axes, carré : 4, triangle équilatéral : 3, cercle : une infinité.",
     },
@@ -401,6 +411,7 @@ export const ficheSymetrie6e: FicheCoursData = {
   exemples: [
     {
       titre: "Reconnaître une symétrie axiale",
+      micros: ["sym_reconnaitre"],
       donnees:
         "Sur un quadrillage, une figure bleue est reflétée de l'autre côté d'une droite verticale, comme dans un miroir.",
       question: "Quelle transformation relie la figure bleue à son reflet ?",
@@ -410,6 +421,7 @@ export const ficheSymetrie6e: FicheCoursData = {
     },
     {
       titre: "Construire l'image d'un point",
+      micros: ["sym_point"],
       donnees: "Le point A est à 3 carreaux à gauche d'un axe vertical.",
       question: "Où placer son image A' par symétrie axiale ?",
       schema: symPoint,
@@ -437,12 +449,14 @@ export const ficheSymetrie6e: FicheCoursData = {
         "Pour construire l'image d'un triangle ABC par symétrie axiale, que faut-il faire ? Puis : combien d'axes de symétrie possède un carré ?",
       correction:
         "On construit l'image de chacun des trois sommets : A', B' et C', chacun de l'autre côté de l'axe et à la même distance que le sommet de départ. On relie ensuite A', B' et C' pour obtenir le triangle image. Un carré possède 4 axes de symétrie : les deux médianes (qui passent par les milieux des côtés opposés) et les deux diagonales.",
+      micros: ["sym_figure"],
     },
     {
       question:
         "Défi : un segment [AB] mesure 6 cm et un carré a une aire de 16 cm². Que valent la longueur de l'image [A'B'] et l'aire de l'image du carré par symétrie axiale ?",
       correction:
         "La symétrie axiale conserve les longueurs et les aires : elle ne déforme rien. L'image du segment mesure donc 6 cm, et l'image du carré a une aire de 16 cm². Retenir : ce qui est conservé, ce sont les longueurs, les angles, les aires et l'alignement.",
+      micros: ["sym_propriete", "sym_defi"],
     },
   ],
   coachHref: "/coach-ia/maths?classe=6e",

@@ -220,12 +220,14 @@ export const fichePerimetres6e: FicheCoursData = {
   proprietes: [
     {
       titre: "C'est une longueur",
+      micros: ["aire_perimetre_comprendre"],
       texte:
         "Mis bout à bout, les côtés d'une figure font une seule longueur : le périmètre. Il se mesure en cm ou en m, jamais en cm².",
       schema: tourDeplie,
     },
     {
       titre: "Le carré",
+      micros: ["aire_perimetre_carre"],
       texte:
         "Un carré a 4 côtés de la même longueur. Son périmètre vaut donc 4 fois la longueur d'un côté : P = 4 × c. Exemple : un carré de côté 5 cm a un périmètre de 4 × 5 = 20 cm.",
       schema: rectangleCote(150, 150, {
@@ -237,18 +239,21 @@ export const fichePerimetres6e: FicheCoursData = {
     },
     {
       titre: "Le rectangle",
+      micros: ["aire_perimetre_rectangle"],
       texte:
         "Un rectangle a 2 longueurs et 2 largeurs. Son périmètre vaut P = 2 × (L + l). Exemple : pour 8 cm sur 3 cm, on calcule 2 × (8 + 3) = 2 × 11 = 22 cm.",
       schema: rectangleCote(192, 72, { AB: "L = 8 cm", BC: "l = 3 cm" }),
     },
     {
       titre: "Une figure quelconque",
+      micros: ["aire_perimetre_figure"],
       texte:
         "Quand la figure n'a pas de formule, on additionne les longueurs de tous les côtés du contour. On ne compte que le contour extérieur, jamais les traits à l'intérieur de la figure.",
       schema: legende(grille(3, 4, zigzag), "on suit le rouge, jamais le gris"),
     },
     {
       titre: "Deux morceaux recollés",
+      micros: ["aire_perimetre_figure"],
       texte:
         "En recollant deux figures, le périmètre n'est pas la somme des deux périmètres : le trait de recollement disparaît, il n'est plus un bord.",
       schema: empiler(
@@ -276,18 +281,21 @@ export const fichePerimetres6e: FicheCoursData = {
   methode: [
     {
       titre: "Repérer",
+      micros: ["aire_perimetre_comprendre"],
       texte:
         "On suit le contour de la figure avec le doigt et on repère la longueur de chaque côté. On ne garde que le tour extérieur.",
       schema: legende(grille(4, 4, escalier), "un tour complet, décrochement par décrochement"),
     },
     {
       titre: "Écrire",
+      micros: ["aire_perimetre_carre", "aire_perimetre_rectangle"],
       texte:
         "On choisit le bon calcul : 4 × c pour un carré, 2 × (L + l) pour un rectangle, la somme de tous les côtés sinon.",
       schema: rectangleCote(192, 72, { AB: "L = 8 cm", BC: "l = 3 cm" }),
     },
     {
       titre: "Calculer",
+      micros: ["aire_perimetre_probleme"],
       texte:
         "On effectue le calcul, puis on écrit la réponse avec son unité de longueur : cm, m... jamais cm².",
       // La MÊME addition que la propriété 1, mais posée : là c'était une
@@ -310,6 +318,7 @@ export const fichePerimetres6e: FicheCoursData = {
   usages: [
     {
       titre: "Le carré",
+      micros: ["aire_perimetre_carre"],
       detail:
         "Les 4 côtés sont égaux : périmètre = 4 × côté. Un carré de côté 7 cm a un périmètre de 4 × 7 = 28 cm.",
       schema: rectangleCote(140, 140, {
@@ -321,12 +330,14 @@ export const fichePerimetres6e: FicheCoursData = {
     },
     {
       titre: "Le rectangle",
+      micros: ["aire_perimetre_rectangle"],
       detail:
         "2 longueurs et 2 largeurs : périmètre = 2 × (L + l). Un rectangle de 6 cm sur 4 cm a un périmètre de 2 × (6 + 4) = 20 cm.",
       schema: rectangleCote(186, 124, { AB: "6 cm", BC: "4 cm" }),
     },
     {
       titre: "La figure quelconque",
+      micros: ["aire_perimetre_figure"],
       detail:
         "Pas de formule : on additionne tous les côtés du contour. Sur un quadrillage, on compte les traits rouges un à un.",
       schema: grille(4, 4, figureL),
@@ -335,6 +346,7 @@ export const fichePerimetres6e: FicheCoursData = {
   exemples: [
     {
       titre: "Le périmètre d'un carré",
+      micros: ["aire_perimetre_carre"],
       donnees: "Un carré a un côté de 9 cm.",
       question: "Calculer son périmètre.",
       schema: rectangleCote(150, 150, {
@@ -348,6 +360,7 @@ export const fichePerimetres6e: FicheCoursData = {
     },
     {
       titre: "Le périmètre d'un rectangle",
+      micros: ["aire_perimetre_rectangle"],
       donnees: "Un rectangle mesure 8 cm de longueur et 3 cm de largeur.",
       question: "Calculer son périmètre.",
       schema: rectangleCote(192, 72, { AB: "8 cm", BC: "3 cm" }),
@@ -356,6 +369,7 @@ export const fichePerimetres6e: FicheCoursData = {
     },
     {
       titre: "Une figure tordue sur quadrillage",
+      micros: ["aire_perimetre_figure"],
       donnees: "Une figure en L sur un quadrillage dont les carreaux mesurent 1 cm de côté.",
       question: "Calculer son périmètre.",
       schema: grille(4, 4, figureL),
@@ -364,6 +378,7 @@ export const fichePerimetres6e: FicheCoursData = {
     },
     {
       titre: "Deux carrés recollés",
+      micros: ["aire_perimetre_figure"],
       donnees: "On colle deux carrés de 3 cm de côté par un côté entier.",
       question: "Quel est le périmètre de la figure obtenue ?",
       schema: empiler(
@@ -400,6 +415,7 @@ export const fichePerimetres6e: FicheCoursData = {
         "Problème : un jardin rectangulaire mesure 8 m de long et 3 m de large. Quelle longueur de grillage faut-il pour faire tout le tour ?",
       correction:
         "Étape 1 : le grillage suit tout le tour du jardin, on cherche donc le périmètre. Étape 2 : P = 2 × (8 + 3) = 2 × 11 = 22 m. Étape 3 : il faut 22 m de grillage.",
+      micros: ["aire_perimetre_probleme"],
     },
     {
       question:
@@ -411,6 +427,7 @@ export const fichePerimetres6e: FicheCoursData = {
       question: "Défi : un carré a un périmètre de 28 cm. Combien mesure un côté ?",
       correction:
         "Étape 1 : le périmètre d'un carré vaut 4 × côté. Étape 2 : on fait le calcul à l'envers : côté = 28 ÷ 4. Étape 3 : un côté mesure 7 cm. Vérification : 4 × 7 = 28 cm.",
+      micros: ["aire_perimetre_defi"],
     },
   ],
   coachHref: "/coach-ia/maths?classe=6e",

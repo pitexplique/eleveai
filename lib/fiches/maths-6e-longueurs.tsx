@@ -248,18 +248,21 @@ export const ficheLongueurs6e: FicheCoursData = {
   proprietes: [
     {
       titre: "Les unités, du mm au km",
+      micros: ["aire_longueur_unite"],
       texte:
         "Du plus petit au plus grand : millimètre (mm), centimètre (cm), décimètre (dm), mètre (m), décamètre (dam), hectomètre (hm), kilomètre (km). On choisit l'unité adaptée : mm pour l'épaisseur d'une pièce, cm pour un crayon, m pour une salle, km pour la distance entre deux villes.",
       schema: aQuoiSertChaqueUnite,
     },
     {
       titre: "Le tableau de conversion",
+      micros: ["aire_longueur_convertir"],
       texte:
         "Chaque unité vaut 10 fois l'unité juste plus petite. Pour convertir, on multiplie par 10 à chaque colonne vers la droite (unité plus petite), on divise par 10 à chaque colonne vers la gauche (unité plus grande). Exemple : 2 m = 200 cm et 300 cm = 3 m.",
       schema: leMetreEnDixMorceaux,
     },
     {
       titre: "Comparer des longueurs",
+      micros: ["aire_longueur_comparer"],
       texte:
         "On ne peut comparer deux longueurs que dans la même unité. On convertit d'abord, puis on compare les nombres. Exemple : 1,5 m = 150 cm, donc 1,5 m est plus grand que 140 cm.",
       schema: comparerDansLaMemeUnite,
@@ -282,18 +285,21 @@ export const ficheLongueurs6e: FicheCoursData = {
   methode: [
     {
       titre: "Repérer",
+      micros: ["aire_longueur_mesurer"],
       texte:
         "On lit les longueurs données dans l'énoncé et on regarde bien leurs unités. Sont-elles toutes les mêmes ?",
       schema: lesUnitesMelangees,
     },
     {
       titre: "Convertir",
+      micros: ["aire_longueur_convertir"],
       texte:
         "Si les unités sont différentes, on met tout dans la même unité : on multiplie vers une unité plus petite, on divise vers une plus grande.",
       schema: convertirEnColonnes,
     },
     {
       titre: "Calculer",
+      micros: ["aire_longueur_probleme"],
       texte:
         "Une fois dans la même unité, on peut comparer, additionner ou soustraire les longueurs. On n'oublie pas l'unité dans la réponse.",
       schema: additionnerEnCentimetres,
@@ -302,16 +308,19 @@ export const ficheLongueurs6e: FicheCoursData = {
   usages: [
     {
       titre: "Mesurer",
+      micros: ["aire_longueur_mesurer"],
       detail:
         "On choisit l'unité adaptée à la taille de l'objet : mm pour ce qui est très fin, cm pour les petits objets, m pour une pièce, km pour les grandes distances.",
     },
     {
       titre: "Convertir",
+      micros: ["aire_longueur_convertir"],
       detail:
         "On change d'unité sans changer la longueur : 2 m = 200 cm, 4 km = 4 000 m, 70 mm = 7 cm. On multiplie ou on divise par 10, 100 ou 1 000.",
     },
     {
       titre: "Comparer",
+      micros: ["aire_longueur_comparer"],
       detail:
         "On met toutes les longueurs dans la même unité, puis on compare les nombres. La plus grande longueur est celle qui a le plus grand nombre.",
     },
@@ -319,6 +328,7 @@ export const ficheLongueurs6e: FicheCoursData = {
   exemples: [
     {
       titre: "Convertir des mètres en centimètres",
+      micros: ["aire_longueur_convertir"],
       donnees: "Une corde mesure 2,5 m.",
       question: "Quelle est sa longueur en cm ?",
       schema: tableDeuxCinq,
@@ -327,6 +337,7 @@ export const ficheLongueurs6e: FicheCoursData = {
     },
     {
       titre: "Un problème avec deux unités",
+      micros: ["aire_longueur_probleme"],
       donnees: "Un ruban mesure 2 m. On en coupe 50 cm.",
       question: "Quelle longueur reste-t-il, en cm ?",
       schema: barreRuban,
@@ -357,6 +368,7 @@ export const ficheLongueurs6e: FicheCoursData = {
         "Une planche de 3 m est partagée en 3 parts égales. Puis explique pourquoi on ne mesure pas une ville en centimètres.",
       correction:
         "Chaque part mesure 3 ÷ 3 = 1 m. Pour la ville : une ville est très grande, le centimètre est une unité trop petite. On choisit toujours une unité adaptée à la taille de ce qu'on mesure : ici, le kilomètre.",
+      micros: ["aire_longueur_probleme", "aire_longueur_defi"],
     },
   ],
   coachHref: "/coach-ia/maths?classe=6e",

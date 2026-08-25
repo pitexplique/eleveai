@@ -222,18 +222,21 @@ export const ficheVolumes6e: FicheCoursData = {
   proprietes: [
     {
       titre: "Compter les cubes",
+      micros: ["volume_compter"],
       texte:
         "Un solide construit avec des cubes unités a pour volume le nombre total de cubes. Pour un empilement régulier, on compte une couche, puis on multiplie par le nombre de couches. Exemple : 3 couches de 5 cubes, c'est 3 × 5 = 15 cubes.",
       schema: troisCouchesDeSix,
     },
     {
       titre: "Comparer deux solides",
+      micros: ["volume_comparer"],
       texte:
         "Pour comparer deux volumes écrits dans la même unité, on compare simplement les nombres. Deux solides de formes différentes peuvent avoir le même volume : ce qui compte, c'est le nombre de cubes.",
       schema: memeVolumeDeuxFormes,
     },
     {
       titre: "Assembler des solides",
+      micros: ["volume_assemblage"],
       texte:
         "Quand on colle deux solides, le volume total est la somme des deux volumes. Et si on coupe un solide en morceaux puis qu'on les recolle, le volume ne change pas : aucun cube n'a disparu.",
       schema: deuxSolidesSepares,
@@ -256,18 +259,21 @@ export const ficheVolumes6e: FicheCoursData = {
   methode: [
     {
       titre: "Repérer l'unité",
+      micros: ["volume_unite"],
       texte:
         "Le petit 3 signale un volume : cm³, m³. Sans lui, ce n'est pas un volume (cm est une longueur, cm² une aire).",
       schema: lesTroisUnites,
     },
     {
       titre: "Compter les cubes",
+      micros: ["volume_compter"],
       texte:
         "On compte les cubes unités couche par couche, sans oublier ceux cachés derrière ou en dessous. Couches identiques : on multiplie.",
       schema: tasIrregulier,
     },
     {
       titre: "Additionner si on assemble",
+      micros: ["volume_assemblage"],
       texte:
         "Deux solides collés : on additionne leurs volumes. Un solide coupé puis recollé garde le même volume.",
       schema: solideRecolleEnL,
@@ -276,16 +282,19 @@ export const ficheVolumes6e: FicheCoursData = {
   usages: [
     {
       titre: "Compter un volume",
+      micros: ["volume_compter"],
       detail:
         "Le solide est fait de cubes unités : son volume est le nombre de cubes. Empilement régulier : nombre de couches × cubes par couche.",
     },
     {
       titre: "Comparer deux volumes",
+      micros: ["volume_comparer"],
       detail:
         "Même unité : on compare les nombres. 14 cubes contre 12 cubes : le solide de 14 cubes a le plus grand volume.",
     },
     {
       titre: "Lire et assembler",
+      micros: ["volume_lire", "volume_assemblage"],
       detail:
         "Dans « 18 cm³ », le volume vaut 18, soit 18 cubes de 1 cm³. Si on réunit deux solides, on additionne : 4 cubes + 3 cubes = 7 cubes.",
     },
@@ -293,6 +302,7 @@ export const ficheVolumes6e: FicheCoursData = {
   exemples: [
     {
       titre: "Compter les cubes d'un pavé",
+      micros: ["volume_compter"],
       donnees: "Un pavé est formé de 3 couches de 5 cubes unités chacune.",
       question: "Quel est son volume en cubes unités ?",
       schema: paveTroisCouches,
@@ -301,6 +311,7 @@ export const ficheVolumes6e: FicheCoursData = {
     },
     {
       titre: "Remplir une boîte (défi)",
+      micros: ["volume_defi"],
       donnees: "Une boîte a pour dimensions 2 cm, 3 cm et 2 cm.",
       question: "Combien de cubes de 1 cm³ faut-il pour la remplir entièrement ?",
       schema: paveBoite,
@@ -315,6 +326,7 @@ export const ficheVolumes6e: FicheCoursData = {
       question: "Quelle unité choisir pour mesurer le volume d'un aquarium : cm, cm², cm³ ou kg ?",
       correction:
         "Un volume mesure la place occupée en 3 dimensions, donc une unité cube. cm est une longueur, cm² une aire, kg une masse. La bonne réponse est cm³.",
+      micros: ["volume_unite", "volume_lire"],
     },
     {
       question: "Un pavé est formé de 2 rangées de 4 cubes unités. Quel est son volume ?",

@@ -255,24 +255,28 @@ export const ficheQuadrilateres6e: FicheCoursData = {
   proprietes: [
     {
       titre: "Côtés opposés et consécutifs",
+      micros: ["quadrilatere_nommer_vocabulaire"],
       texte:
         "Deux côtés qui se touchent en un sommet sont consécutifs : AB et BC se touchent en B. Deux côtés qui ne se touchent pas sont opposés : dans ABCD, AB et CD sont opposés, ainsi que BC et AD.",
       schema: cotesNommes,
     },
     {
       titre: "Le rectangle",
+      micros: ["quadrilatere_identifier_nature"],
       texte:
         "Un rectangle est un quadrilatère qui a 4 angles droits. Ses côtés opposés sont parallèles deux à deux (2 paires) et de même longueur, mais les 4 côtés ne sont pas forcément tous égaux. Ses diagonales ont la même longueur.",
       schema: rectangleAffirme,
     },
     {
       titre: "Le losange",
+      micros: ["quadrilatere_identifier_nature"],
       texte:
         "Un losange est un quadrilatère qui a 4 côtés égaux. Ses côtés opposés sont parallèles, mais il n'a pas forcément d'angle droit. Ses diagonales sont perpendiculaires (elles se coupent à angle droit).",
       schema: losangeAffirme,
     },
     {
       titre: "Le carré",
+      micros: ["quadrilatere_distinguer"],
       texte:
         "Un carré est un quadrilatère qui a 4 angles droits ET 4 côtés égaux. Il cumule les propriétés du rectangle et du losange : ses diagonales sont à la fois de même longueur et perpendiculaires.",
       schema: carreAffirme,
@@ -289,18 +293,21 @@ export const ficheQuadrilateres6e: FicheCoursData = {
   methode: [
     {
       titre: "Observer les côtés",
+      micros: ["quadrilatere_identifier_nature"],
       texte:
         "On repère d'abord les côtés : sont-ils tous égaux (même codage) ? Un même petit trait sur des côtés signale qu'ils ont la même longueur. 4 côtés égaux orientent vers le losange ou le carré.",
       schema: seulementLesCotes,
     },
     {
       titre: "Observer les angles",
+      micros: ["quadrilatere_identifier_nature"],
       texte:
         "On regarde ensuite les angles : y a-t-il des angles droits ? Un petit carré à un sommet indique un angle droit. 4 angles droits orientent vers le rectangle ou le carré.",
       schema: seulementLesAngles,
     },
     {
       titre: "Conclure",
+      micros: ["quadrilatere_distinguer"],
       texte:
         "On croise les deux informations. 4 angles droits seuls : rectangle. 4 côtés égaux seuls : losange. Les deux ensemble : carré. Si une information manque, on ne peut pas conclure.",
       schema: tableauDesNatures,
@@ -309,16 +316,19 @@ export const ficheQuadrilateres6e: FicheCoursData = {
   usages: [
     {
       titre: "Nommer et décrire",
+      micros: ["quadrilatere_nommer_vocabulaire"],
       detail:
         "Donner le nom de la figure avec ses sommets (ABCD), repérer les côtés opposés, les côtés consécutifs et les 2 diagonales.",
     },
     {
       titre: "Identifier la nature",
+      micros: ["quadrilatere_identifier_nature"],
       detail:
         "Lire les codages pour reconnaître un rectangle (4 angles droits), un losange (4 côtés égaux), un carré (les deux) ou un quadrilatère quelconque (aucun codage particulier).",
     },
     {
       titre: "Compléter ou construire",
+      micros: ["quadrilatere_distinguer"],
       detail:
         "Trouver l'information manquante pour passer d'une figure à une autre : un rectangle devient un carré si l'on ajoute « 4 côtés égaux » ; un losange devient un carré si l'on ajoute « 4 angles droits ».",
     },
@@ -326,6 +336,7 @@ export const ficheQuadrilateres6e: FicheCoursData = {
   exemples: [
     {
       titre: "Nommer et repérer le vocabulaire",
+      micros: ["quadrilatere_nommer_vocabulaire"],
       donnees: "On donne un quadrilatère dont les sommets sont A, B, C et D.",
       question: "Comment se nomme cette figure ? Quel côté est opposé au côté AB ?",
       schema: schemaABCDcotes,
@@ -334,6 +345,7 @@ export const ficheQuadrilateres6e: FicheCoursData = {
     },
     {
       titre: "Quelle est la nature de cette figure ?",
+      micros: ["quadrilatere_identifier_nature"],
       donnees: "Une figure a ses 4 côtés codés égaux, mais aucun angle droit n'est marqué.",
       question: "Quelle est la nature de cette figure ? Est-ce un carré ?",
       schema: schemaLosange,
@@ -367,6 +379,7 @@ export const ficheQuadrilateres6e: FicheCoursData = {
         "Défi : peut-on dire qu'un carré est aussi un rectangle ? Et que faut-il ajouter à un rectangle pour être sûr que c'est un carré ?",
       correction:
         "Oui, un carré est aussi un rectangle, car il a 4 angles droits (c'est ce qui définit un rectangle). Pour qu'un rectangle soit un carré, il faut ajouter l'information « 4 côtés égaux » : il possède alors les deux propriétés du carré.",
+      micros: ["quadrilatere_defi"],
     },
   ],
   coachHref: "/coach-ia/maths?classe=6e",
