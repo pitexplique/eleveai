@@ -72,29 +72,29 @@ type Cas = { readonly gauche: string; readonly droite: string };
    ========================================================================== */
 
 const SE_RACONTER: readonly Cas[] = [
-  { gauche: "L'auteur signe de son nom, dit « je », et annonce en tête qu'il va raconter sa vie telle qu'il s'en souvient.", droite: "une autobiographie : auteur, narrateur et personnage sont la même personne, et le pacte est annoncé" },
-  { gauche: "Le narrateur porte le nom de l'auteur, et l'on suit son enfance depuis sa naissance.", droite: "une autobiographie : auteur, narrateur et personnage sont la même personne, et le pacte est annoncé" },
-  { gauche: "L'auteur prévient qu'il dira tout, y compris ce qui le dessert, et il signe.", droite: "une autobiographie : auteur, narrateur et personnage sont la même personne, et le pacte est annoncé" },
+  { gauche: "L'auteur signe de son nom, dit « je », et annonce en tête qu'il va raconter sa vie telle qu'il s'en souvient.", droite: "une autobiographie : auteur, narrateur et personnage ne font qu'un, et le disent" },
+  { gauche: "Le narrateur porte le nom de l'auteur, et l'on suit son enfance depuis sa naissance.", droite: "une autobiographie : auteur, narrateur et personnage ne font qu'un, et le disent" },
+  { gauche: "L'auteur prévient qu'il dira tout, y compris ce qui le dessert, et il signe.", droite: "une autobiographie : auteur, narrateur et personnage ne font qu'un, et le disent" },
 
-  { gauche: "Le héros s'appelle autrement que l'auteur, mais il a le même métier, la même ville et la même blessure.", droite: "un roman autobiographique : l'auteur prête sa vie à un personnage qui porte un autre nom" },
-  { gauche: "L'auteur reconnait en entretien qu'il a mis sa propre enfance dans ce personnage, sans l'avoir dit dans le livre.", droite: "un roman autobiographique : l'auteur prête sa vie à un personnage qui porte un autre nom" },
-  { gauche: "Le livre est présenté comme un roman ; le lecteur y reconnait pourtant l'auteur ligne après ligne.", droite: "un roman autobiographique : l'auteur prête sa vie à un personnage qui porte un autre nom" },
+  { gauche: "Le héros s'appelle autrement que l'auteur, mais il a le même métier, la même ville et la même blessure.", droite: "un roman autobiographique : l'auteur prête sa vie à un personnage d'un autre nom" },
+  { gauche: "L'auteur reconnait en entretien qu'il a mis sa propre enfance dans ce personnage, sans l'avoir dit dans le livre.", droite: "un roman autobiographique : l'auteur prête sa vie à un personnage d'un autre nom" },
+  { gauche: "Le livre est présenté comme un roman ; le lecteur y reconnait pourtant l'auteur ligne après ligne.", droite: "un roman autobiographique : l'auteur prête sa vie à un personnage d'un autre nom" },
 
-  { gauche: "Un historien raconte la vie d'une résistante, d'après ses lettres et les témoignages de ses proches.", droite: "une biographie : quelqu'un raconte la vie d'un autre" },
-  { gauche: "L'auteur écrit « il » et « elle » du début à la fin, et parle de quelqu'un qu'il n'a pas connu.", droite: "une biographie : quelqu'un raconte la vie d'un autre" },
-  { gauche: "Le livre retrace la vie d'un peintre mort il y a un siècle.", droite: "une biographie : quelqu'un raconte la vie d'un autre" },
+  { gauche: "Un historien raconte la vie d'une résistante, d'après ses lettres et les témoignages de ses proches.", droite: "une biographie : quelqu'un raconte la vie d'un autre, qu'il n'a pas vécue" },
+  { gauche: "L'auteur écrit « il » et « elle » du début à la fin, et parle de quelqu'un qu'il n'a pas connu.", droite: "une biographie : quelqu'un raconte la vie d'un autre, qu'il n'a pas vécue" },
+  { gauche: "Le livre retrace la vie d'un peintre mort il y a un siècle.", droite: "une biographie : quelqu'un raconte la vie d'un autre, qu'il n'a pas vécue" },
 
-  { gauche: "Chaque page porte une date, et l'auteur ignore encore ce qui arrivera le lendemain.", droite: "un journal : on écrit au jour le jour, sans connaitre la suite" },
-  { gauche: "On lit, jour après jour, ce qu'une adolescente pense de sa journée.", droite: "un journal : on écrit au jour le jour, sans connaitre la suite" },
-  { gauche: "Le texte s'arrête au milieu d'une phrase, sans conclusion ni bilan.", droite: "un journal : on écrit au jour le jour, sans connaitre la suite" },
+  { gauche: "Chaque page porte une date, et l'auteur ignore encore ce qui arrivera le lendemain.", droite: "un journal : on écrit au jour le jour, sans connaitre la suite ni la fin" },
+  { gauche: "On lit, jour après jour, ce qu'une adolescente pense de sa journée.", droite: "un journal : on écrit au jour le jour, sans connaitre la suite ni la fin" },
+  { gauche: "Le texte s'arrête au milieu d'une phrase, sans conclusion ni bilan.", droite: "un journal : on écrit au jour le jour, sans connaitre la suite ni la fin" },
 
-  { gauche: "Un ancien ministre raconte les négociations auxquelles il a participé, et parle très peu de lui.", droite: "des mémoires : on y raconte moins sa vie intérieure que les évènements auxquels on a pris part" },
-  { gauche: "L'auteur raconte la guerre qu'il a faite, en donnant plus de place aux évènements qu'à ses sentiments.", droite: "des mémoires : on y raconte moins sa vie intérieure que les évènements auxquels on a pris part" },
-  { gauche: "Un général écrit ce qu'il a vu de l'intérieur du pouvoir.", droite: "des mémoires : on y raconte moins sa vie intérieure que les évènements auxquels on a pris part" },
+  { gauche: "Un ancien ministre raconte les négociations auxquelles il a participé, et parle très peu de lui.", droite: "des mémoires : on y raconte moins sa vie intérieure que les évènements vécus" },
+  { gauche: "L'auteur raconte la guerre qu'il a faite, en donnant plus de place aux évènements qu'à ses sentiments.", droite: "des mémoires : on y raconte moins sa vie intérieure que les évènements vécus" },
+  { gauche: "Un général écrit ce qu'il a vu de l'intérieur du pouvoir.", droite: "des mémoires : on y raconte moins sa vie intérieure que les évènements vécus" },
 
-  { gauche: "L'auteur décrit son caractère, ses gouts et ses défauts, sans raconter le moindre épisode.", droite: "un autoportrait : on se peint tel qu'on est, sans raconter d'histoire" },
-  { gauche: "Le texte dresse la liste de ce que l'auteur aime et de ce qu'il déteste, et rien d'autre.", droite: "un autoportrait : on se peint tel qu'on est, sans raconter d'histoire" },
-  { gauche: "L'auteur se peint tel qu'il est aujourd'hui, sans dire comment il l'est devenu.", droite: "un autoportrait : on se peint tel qu'on est, sans raconter d'histoire" },
+  { gauche: "L'auteur décrit son caractère, ses gouts et ses défauts, sans raconter le moindre épisode.", droite: "un autoportrait : on se peint tel qu'on est, sans raconter aucune histoire" },
+  { gauche: "Le texte dresse la liste de ce que l'auteur aime et de ce qu'il déteste, et rien d'autre.", droite: "un autoportrait : on se peint tel qu'on est, sans raconter aucune histoire" },
+  { gauche: "L'auteur se peint tel qu'il est aujourd'hui, sans dire comment il l'est devenu.", droite: "un autoportrait : on se peint tel qu'on est, sans raconter aucune histoire" },
 ];
 
 const TOUS_RECITS: readonly string[] = [...new Set(SE_RACONTER.map((s) => s.droite))];
@@ -109,25 +109,25 @@ const TOUS_RECITS: readonly string[] = [...new Set(SE_RACONTER.map((s) => s.droi
    ========================================================================== */
 
 const DENONCER: readonly Cas[] = [
-  { gauche: "L'auteur écrit « je » et affirme que cette loi est injuste, dans un article qu'il signe.", droite: "l'argumentation directe : l'auteur dit lui-même ce qu'il pense, et l'assume" },
-  { gauche: "Un discours prononcé devant l'assemblée demande l'abolition d'une pratique, sans détour.", droite: "l'argumentation directe : l'auteur dit lui-même ce qu'il pense, et l'assume" },
-  { gauche: "Une lettre ouverte accuse nommément et argumente point par point.", droite: "l'argumentation directe : l'auteur dit lui-même ce qu'il pense, et l'assume" },
+  { gauche: "L'auteur écrit « je » et affirme que cette loi est injuste, dans un article qu'il signe.", droite: "l'argumentation directe : l'auteur dit lui-même ce qu'il pense, et il l'assume" },
+  { gauche: "Un discours prononcé devant l'assemblée demande l'abolition d'une pratique, sans détour.", droite: "l'argumentation directe : l'auteur dit lui-même ce qu'il pense, et il l'assume" },
+  { gauche: "Une lettre ouverte accuse nommément et argumente point par point.", droite: "l'argumentation directe : l'auteur dit lui-même ce qu'il pense, et il l'assume" },
 
-  { gauche: "Le lecteur suit un personnage qui subit l'injustice, et referme le livre révolté sans qu'on lui ait rien demandé.", droite: "l'argumentation indirecte par une histoire réaliste : rien ne signale la critique, le lecteur conclut seul" },
-  { gauche: "Une pièce montre un maitre et son valet ; personne n'y explique la morale, chacun la tire.", droite: "l'argumentation indirecte par une histoire réaliste : rien ne signale la critique, le lecteur conclut seul" },
-  { gauche: "Un roman suit la vie d'une ouvrière jour après jour, et ne conclut jamais à la place du lecteur.", droite: "l'argumentation indirecte par une histoire réaliste : rien ne signale la critique, le lecteur conclut seul" },
+  { gauche: "Le lecteur suit un personnage qui subit l'injustice, et referme le livre révolté sans qu'on lui ait rien demandé.", droite: "l'argumentation indirecte : rien ne signale la critique, le lecteur conclut seul" },
+  { gauche: "Une pièce montre un maitre et son valet ; personne n'y explique la morale, chacun la tire.", droite: "l'argumentation indirecte : rien ne signale la critique, le lecteur conclut seul" },
+  { gauche: "Un roman suit la vie d'une ouvrière jour après jour, et ne conclut jamais à la place du lecteur.", droite: "l'argumentation indirecte : rien ne signale la critique, le lecteur conclut seul" },
 
-  { gauche: "Un visiteur venu de très loin s'étonne qu'on porte une perruque, et la perruque devient ridicule.", droite: "le détour par un regard étranger : un nouveau venu découvre nos usages et les rend absurdes" },
-  { gauche: "Un personnage naïf demande pourquoi l'on juge un homme sur ses habits, et personne ne sait répondre.", droite: "le détour par un regard étranger : un nouveau venu découvre nos usages et les rend absurdes" },
-  { gauche: "Le narrateur découvre nos usages sans les connaitre, et les décrit comme des rites incompréhensibles.", droite: "le détour par un regard étranger : un nouveau venu découvre nos usages et les rend absurdes" },
+  { gauche: "Un visiteur venu de très loin s'étonne qu'on porte une perruque, et la perruque devient ridicule.", droite: "le détour par un regard étranger : un nouveau venu rend nos usages absurdes" },
+  { gauche: "Un personnage naïf demande pourquoi l'on juge un homme sur ses habits, et personne ne sait répondre.", droite: "le détour par un regard étranger : un nouveau venu rend nos usages absurdes" },
+  { gauche: "Le narrateur découvre nos usages sans les connaitre, et les décrit comme des rites incompréhensibles.", droite: "le détour par un regard étranger : un nouveau venu rend nos usages absurdes" },
 
-  { gauche: "Dans le pays décrit, on soigne d'abord les plus pauvres, et l'or ne sert qu'aux chaines des prisonniers.", droite: "le monde renversé : on montre l'inverse de ce qui est, pour faire voir ce qui est" },
-  { gauche: "Sur cette île, les enfants gouvernent et les adultes obéissent ; on rit, puis on réfléchit.", droite: "le monde renversé : on montre l'inverse de ce qui est, pour faire voir ce qui est" },
-  { gauche: "Le texte décrit une société parfaite, et l'on mesure au passage tout ce qui manque à la nôtre.", droite: "le monde renversé : on montre l'inverse de ce qui est, pour faire voir ce qui est" },
+  { gauche: "Dans le pays décrit, on soigne d'abord les plus pauvres, et l'or ne sert qu'aux chaines des prisonniers.", droite: "le monde renversé : on montre l'exact inverse du réel, pour faire voir le réel" },
+  { gauche: "Sur cette île, les enfants gouvernent et les adultes obéissent ; on rit, puis on réfléchit.", droite: "le monde renversé : on montre l'exact inverse du réel, pour faire voir le réel" },
+  { gauche: "Le texte décrit une société parfaite, et l'on mesure au passage tout ce qui manque à la nôtre.", droite: "le monde renversé : on montre l'exact inverse du réel, pour faire voir le réel" },
 
-  { gauche: "Un loup et un agneau se rencontrent au bord d'une rivière ; personne n'ignore de qui l'on parle.", droite: "l'animal comme masque : des bêtes tiennent les rôles des hommes, et l'on reconnait qui est qui" },
-  { gauche: "Le renard flatte, le corbeau tombe, et le lecteur reconnait aussitôt une scène qu'il a vécue.", droite: "l'animal comme masque : des bêtes tiennent les rôles des hommes, et l'on reconnait qui est qui" },
-  { gauche: "Les bêtes d'une ferme tiennent conseil, et la fable dit ce qu'un article n'aurait pas pu dire.", droite: "l'animal comme masque : des bêtes tiennent les rôles des hommes, et l'on reconnait qui est qui" },
+  { gauche: "Un loup et un agneau se rencontrent au bord d'une rivière ; personne n'ignore de qui l'on parle.", droite: "l'animal comme masque : des bêtes tiennent les rôles, et l'on voit qui est qui" },
+  { gauche: "Le renard flatte, le corbeau tombe, et le lecteur reconnait aussitôt une scène qu'il a vécue.", droite: "l'animal comme masque : des bêtes tiennent les rôles, et l'on voit qui est qui" },
+  { gauche: "Les bêtes d'une ferme tiennent conseil, et la fable dit ce qu'un article n'aurait pas pu dire.", droite: "l'animal comme masque : des bêtes tiennent les rôles, et l'on voit qui est qui" },
 ];
 
 const TOUS_DETOURS: readonly string[] = [...new Set(DENONCER.map((d) => d.droite))];
@@ -141,25 +141,25 @@ const TOUS_DETOURS: readonly string[] = [...new Set(DENONCER.map((d) => d.droite
    ========================================================================== */
 
 const POESIE: readonly Cas[] = [
-  { gauche: "Le vieux mur porte une écharpe de lichen", droite: "l'image transforme : un objet ordinaire devient autre chose que lui-même" },
-  { gauche: "La rue, ce matin, est un couloir d'aquarium", droite: "l'image transforme : un objet ordinaire devient autre chose que lui-même" },
-  { gauche: "Les grues du port sont des hérons de fer", droite: "l'image transforme : un objet ordinaire devient autre chose que lui-même" },
+  { gauche: "Le vieux mur porte une écharpe de lichen", droite: "l'image transforme : un objet ordinaire y devient tout autre chose que lui" },
+  { gauche: "La rue, ce matin, est un couloir d'aquarium", droite: "l'image transforme : un objet ordinaire y devient tout autre chose que lui" },
+  { gauche: "Les grues du port sont des hérons de fer", droite: "l'image transforme : un objet ordinaire y devient tout autre chose que lui" },
 
-  { gauche: "Un bleu qui sonne comme une cloche lointaine", droite: "les correspondances : une sensation en appelle une autre, la couleur devient son, l'odeur devient souvenir" },
-  { gauche: "L'odeur du vétiver a le gout de mes huit ans", droite: "les correspondances : une sensation en appelle une autre, la couleur devient son, l'odeur devient souvenir" },
-  { gauche: "Le silence, ici, a la couleur du sable mouillé", droite: "les correspondances : une sensation en appelle une autre, la couleur devient son, l'odeur devient souvenir" },
+  { gauche: "Un bleu qui sonne comme une cloche lointaine", droite: "les correspondances : une sensation en appelle une autre, la couleur devient son" },
+  { gauche: "L'odeur du vétiver a le gout de mes huit ans", droite: "les correspondances : une sensation en appelle une autre, la couleur devient son" },
+  { gauche: "Le silence, ici, a la couleur du sable mouillé", droite: "les correspondances : une sensation en appelle une autre, la couleur devient son" },
 
-  { gauche: "Il marche. Il marche. Il marche encore. Et la crête ne vient pas.", droite: "le rythme fait le sens : la coupe et la répétition disent ce que les mots ne disent pas" },
-  { gauche: "La mer — puis rien — puis la mer — puis rien encore", droite: "le rythme fait le sens : la coupe et la répétition disent ce que les mots ne disent pas" },
-  { gauche: "Un vers qui s'étire et n'en finit pas de s'étirer, puis trois mots.", droite: "le rythme fait le sens : la coupe et la répétition disent ce que les mots ne disent pas" },
+  { gauche: "Il marche. Il marche. Il marche encore. Et la crête ne vient pas.", droite: "le rythme fait le sens : la coupe et la reprise disent ce que les mots taisent" },
+  { gauche: "La mer — puis rien — puis la mer — puis rien encore", droite: "le rythme fait le sens : la coupe et la reprise disent ce que les mots taisent" },
+  { gauche: "Un vers qui s'étire et n'en finit pas de s'étirer, puis trois mots.", droite: "le rythme fait le sens : la coupe et la reprise disent ce que les mots taisent" },
 
-  { gauche: "Bleue est l'heure où la ville se tait", droite: "l'ordre des mots est bousculé : l'inversion met en avant ce qui compte" },
-  { gauche: "Sur la crête, longtemps, seul, il attendit", droite: "l'ordre des mots est bousculé : l'inversion met en avant ce qui compte" },
-  { gauche: "De ce voyage, rien ne me reste que le vent", droite: "l'ordre des mots est bousculé : l'inversion met en avant ce qui compte" },
+  { gauche: "Bleue est l'heure où la ville se tait", droite: "l'ordre des mots est bousculé : l'inversion met en avant le mot qui compte" },
+  { gauche: "Sur la crête, longtemps, seul, il attendit", droite: "l'ordre des mots est bousculé : l'inversion met en avant le mot qui compte" },
+  { gauche: "De ce voyage, rien ne me reste que le vent", droite: "l'ordre des mots est bousculé : l'inversion met en avant le mot qui compte" },
 
-  { gauche: "Le poème n'a ni rime ni mètre régulier, et les lignes s'arrêtent où le souffle s'arrête.", droite: "la forme libérée : ni rime ni mètre, et la poésie tient quand même" },
-  { gauche: "Le texte est écrit d'un seul bloc, comme un paragraphe, et pourtant chaque mot y pèse.", droite: "la forme libérée : ni rime ni mètre, et la poésie tient quand même" },
-  { gauche: "Les vers n'ont pas la même longueur, aucun ne rime, et rien ne manque.", droite: "la forme libérée : ni rime ni mètre, et la poésie tient quand même" },
+  { gauche: "Le poème n'a ni rime ni mètre régulier, et les lignes s'arrêtent où le souffle s'arrête.", droite: "la forme libérée : ni rime ni mètre régulier, et la poésie tient debout" },
+  { gauche: "Le texte est écrit d'un seul bloc, comme un paragraphe, et pourtant chaque mot y pèse.", droite: "la forme libérée : ni rime ni mètre régulier, et la poésie tient debout" },
+  { gauche: "Les vers n'ont pas la même longueur, aucun ne rime, et rien ne manque.", droite: "la forme libérée : ni rime ni mètre régulier, et la poésie tient debout" },
 ];
 
 const TOUTES_VISIONS: readonly string[] = [...new Set(POESIE.map((p) => p.droite))];
@@ -207,25 +207,25 @@ const TOUS_ENGAGEMENTS: readonly string[] = [...new Set(AGIR.map((a) => a.droite
    ========================================================================== */
 
 const PROGRES: readonly Cas[] = [
-  { gauche: "Le récit se passe en 2090 ; tout ce qu'on y voit existe déjà, en plus poussé.", droite: "l'anticipation : le récit se passe demain, et prolonge une tendance d'aujourd'hui" },
-  { gauche: "L'auteur prend une habitude d'aujourd'hui et la pousse à son terme, trente ans plus tard.", droite: "l'anticipation : le récit se passe demain, et prolonge une tendance d'aujourd'hui" },
-  { gauche: "L'histoire décrit une ville où tout ce qui se prépare aujourd'hui a été mené jusqu'au bout.", droite: "l'anticipation : le récit se passe demain, et prolonge une tendance d'aujourd'hui" },
+  { gauche: "Le récit se passe en 2090 ; tout ce qu'on y voit existe déjà, en plus poussé.", droite: "l'anticipation : le récit se passe demain, et prolonge une tendance actuelle" },
+  { gauche: "L'auteur prend une habitude d'aujourd'hui et la pousse à son terme, trente ans plus tard.", droite: "l'anticipation : le récit se passe demain, et prolonge une tendance actuelle" },
+  { gauche: "L'histoire décrit une ville où tout ce qui se prépare aujourd'hui a été mené jusqu'au bout.", droite: "l'anticipation : le récit se passe demain, et prolonge une tendance actuelle" },
 
-  { gauche: "Tout le monde est nourri, soigné, distrait — et personne n'a le droit de se taire.", droite: "la dystopie : le progrès a tout amélioré, et l'on y étouffe" },
-  { gauche: "La société décrite n'a plus ni maladie ni pauvreté, et plus personne n'y choisit rien.", droite: "la dystopie : le progrès a tout amélioré, et l'on y étouffe" },
-  { gauche: "Le confort y est parfait, et c'est exactement cela qui fait peur.", droite: "la dystopie : le progrès a tout amélioré, et l'on y étouffe" },
+  { gauche: "Tout le monde est nourri, soigné, distrait — et personne n'a le droit de se taire.", droite: "la dystopie : le progrès a tout amélioré, et c'est là qu'on étouffe" },
+  { gauche: "La société décrite n'a plus ni maladie ni pauvreté, et plus personne n'y choisit rien.", droite: "la dystopie : le progrès a tout amélioré, et c'est là qu'on étouffe" },
+  { gauche: "Le confort y est parfait, et c'est exactement cela qui fait peur.", droite: "la dystopie : le progrès a tout amélioré, et c'est là qu'on étouffe" },
 
-  { gauche: "Le savant réussit son expérience, et comprend trop tard qu'il ne peut plus l'arrêter.", droite: "l'apprenti sorcier : c'est le PROCESSUS qui échappe, et le savant ne sait plus l'arrêter" },
-  { gauche: "La découverte est un succès complet ; ce sont ses conséquences qui échappent à tous.", droite: "l'apprenti sorcier : c'est le PROCESSUS qui échappe, et le savant ne sait plus l'arrêter" },
-  { gauche: "Il a passé dix ans à obtenir ce résultat, et il passera le reste à tenter de le défaire.", droite: "l'apprenti sorcier : c'est le PROCESSUS qui échappe, et le savant ne sait plus l'arrêter" },
+  { gauche: "Le savant réussit son expérience, et comprend trop tard qu'il ne peut plus l'arrêter.", droite: "l'apprenti sorcier : c'est le PROCESSUS qui échappe, et nul ne sait l'arrêter" },
+  { gauche: "La découverte est un succès complet ; ce sont ses conséquences qui échappent à tous.", droite: "l'apprenti sorcier : c'est le PROCESSUS qui échappe, et nul ne sait l'arrêter" },
+  { gauche: "Il a passé dix ans à obtenir ce résultat, et il passera le reste à tenter de le défaire.", droite: "l'apprenti sorcier : c'est le PROCESSUS qui échappe, et nul ne sait l'arrêter" },
 
-  { gauche: "L'être fabriqué revient trouver celui qui l'a fait, et lui demande pourquoi.", droite: "la créature qui échappe : l'être fabriqué se retourne vers son fabricant, lui désobéit ou lui demande des comptes" },
-  { gauche: "La machine qu'on a rendue intelligente refuse la tâche qu'on lui donne.", droite: "la créature qui échappe : l'être fabriqué se retourne vers son fabricant, lui désobéit ou lui demande des comptes" },
-  { gauche: "Un homme construit son double, et le double lui reproche son existence.", droite: "la créature qui échappe : l'être fabriqué se retourne vers son fabricant, lui désobéit ou lui demande des comptes" },
+  { gauche: "L'être fabriqué revient trouver celui qui l'a fait, et lui demande pourquoi.", droite: "la créature qui échappe : l'être fabriqué se retourne contre son fabricant" },
+  { gauche: "La machine qu'on a rendue intelligente refuse la tâche qu'on lui donne.", droite: "la créature qui échappe : l'être fabriqué se retourne contre son fabricant" },
+  { gauche: "Un homme construit son double, et le double lui reproche son existence.", droite: "la créature qui échappe : l'être fabriqué se retourne contre son fabricant" },
 
-  { gauche: "Le récit raconte une première descente en scaphandre, et l'on partage la stupeur du narrateur.", droite: "l'émerveillement : la science ouvre un monde, et le récit s'en réjouit" },
-  { gauche: "Le personnage voit pour la première fois ce qu'un microscope révèle, et le texte s'émerveille.", droite: "l'émerveillement : la science ouvre un monde, et le récit s'en réjouit" },
-  { gauche: "Le voyage vers un monde inconnu est raconté comme une fête de l'intelligence.", droite: "l'émerveillement : la science ouvre un monde, et le récit s'en réjouit" },
+  { gauche: "Le récit raconte une première descente en scaphandre, et l'on partage la stupeur du narrateur.", droite: "l'émerveillement : la science ouvre un monde neuf, et le récit s'en réjouit" },
+  { gauche: "Le personnage voit pour la première fois ce qu'un microscope révèle, et le texte s'émerveille.", droite: "l'émerveillement : la science ouvre un monde neuf, et le récit s'en réjouit" },
+  { gauche: "Le voyage vers un monde inconnu est raconté comme une fête de l'intelligence.", droite: "l'émerveillement : la science ouvre un monde neuf, et le récit s'en réjouit" },
 ];
 
 const TOUS_PROGRES: readonly string[] = [...new Set(PROGRES.map((p) => p.droite))];
@@ -452,7 +452,7 @@ export const cultureLitteraire3eBank: TutorBankItemV4[] = [
     "Que ce moyen demande-t-il au lecteur ?",
     2,
     "Plus le détour est grand, plus le lecteur a de travail — et plus il croit la conclusion sienne.",
-    "Dénoncer directement coûte peu au lecteur : on lui dit ce qu'il faut penser. Les détours, eux, lui confient le travail — et c'est leur force, car on résiste mal à une idée qu'on croit avoir eue soi-même. Le regard étranger lui fait redécouvrir ses propres usages ; le monde renversé lui demande de retourner l'image ; l'animal lui demande de reconnaitre les hommes.",
+    "Dénoncer directement coute peu au lecteur : on lui dit ce qu'il faut penser. Les détours, eux, lui confient le travail — et c'est leur force, car on résiste mal à une idée qu'on croit avoir eue soi-même. Le regard étranger lui fait redécouvrir ses propres usages ; le monde renversé lui demande de retourner l'image ; l'animal lui demande de reconnaitre les hommes.",
     "Demande-toi ce que le lecteur doit faire pour comprendre. S'il n'a rien à faire, l'argumentation est directe.",
     ["3e", "culture", "denoncer", "satire", "argumentation", "template"],
   ),
@@ -476,7 +476,7 @@ export const cultureLitteraire3eBank: TutorBankItemV4[] = [
     "Quelle question permet de le reconnaitre ?",
     2,
     "Une seule question suffit pour chaque statut. Cherche celle qui ne convient qu'à lui.",
-    "Avant de lire un texte sur l'histoire, il faut savoir d'où il vient : c'est cela qui décide de ce qu'on peut en tirer. Le témoignage vient de quelqu'un qui était là. La fiction invente des personnages sans inventer les évènements. L'archive n'a pas été écrite pour nous. L'écriture engagée prend parti, et cela lui coûte parfois. La transmission reprend une histoire vécue par un autre.",
+    "Avant de lire un texte sur l'histoire, il faut savoir d'où il vient : c'est cela qui décide de ce qu'on peut en tirer. Le témoignage vient de quelqu'un qui était là. La fiction invente des personnages sans inventer les évènements. L'archive n'a pas été écrite pour nous. L'écriture engagée prend parti, et cela lui coute parfois. La transmission reprend une histoire vécue par un autre.",
     "Ne cherche pas le ton du texte : cherche la position de celui qui l'a écrit par rapport aux faits.",
     ["3e", "culture", "agir-dans-la-cite", "engagement", "template"],
   ),

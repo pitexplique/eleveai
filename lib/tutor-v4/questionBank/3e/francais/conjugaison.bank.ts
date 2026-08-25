@@ -84,29 +84,29 @@ type Passage = { readonly texte: string; readonly forme: string; readonly rep: s
    vînt » en contient deux — un imparfait de l'indicatif et un imparfait du
    subjonctif —, et deux lignes seraient vraies à la fois. */
 const SUBJONCTIFS: readonly Passage[] = [
-  { texte: "Il fallait qu'il vînt sur-le-champ.", forme: "vînt", rep: "l'imparfait du subjonctif" },
+  { texte: "Il fallait qu'il vînt sur-le-champ.", forme: "vînt", rep: "l'imparfait du mode subjonctif" },
   { texte: "Il fallait qu'il fût venu avant la nuit.", forme: "fût venu", rep: "le plus-que-parfait du subjonctif" },
   { texte: "Il vint sur-le-champ, sans qu'on l'appelle.", forme: "vint", rep: "le passé simple de l'indicatif" },
-  { texte: "Il faut qu'il vienne sur-le-champ.", forme: "vienne", rep: "le subjonctif présent" },
-  { texte: "Il faut qu'il soit venu avant la nuit.", forme: "soit venu", rep: "le passé du subjonctif" },
+  { texte: "Il faut qu'il vienne sur-le-champ.", forme: "vienne", rep: "le présent du mode subjonctif" },
+  { texte: "Il faut qu'il soit venu avant la nuit.", forme: "soit venu", rep: "le passé du mode subjonctif" },
 
-  { texte: "Je craignais qu'elle ne partît sans nous.", forme: "partît", rep: "l'imparfait du subjonctif" },
+  { texte: "Je craignais qu'elle ne partît sans nous.", forme: "partît", rep: "l'imparfait du mode subjonctif" },
   { texte: "Je craignais qu'elle ne fût partie sans nous.", forme: "fût partie", rep: "le plus-que-parfait du subjonctif" },
   { texte: "Elle partit sans nous, à la nuit tombée.", forme: "partit", rep: "le passé simple de l'indicatif" },
-  { texte: "Je crains qu'elle ne parte sans nous.", forme: "parte", rep: "le subjonctif présent" },
-  { texte: "Je crains qu'elle ne soit partie sans nous.", forme: "soit partie", rep: "le passé du subjonctif" },
+  { texte: "Je crains qu'elle ne parte sans nous.", forme: "parte", rep: "le présent du mode subjonctif" },
+  { texte: "Je crains qu'elle ne soit partie sans nous.", forme: "soit partie", rep: "le passé du mode subjonctif" },
 
-  { texte: "Bien qu'il fît nuit, ils continuèrent de monter.", forme: "fît", rep: "l'imparfait du subjonctif" },
+  { texte: "Bien qu'il fît nuit, ils continuèrent de monter.", forme: "fît", rep: "l'imparfait du mode subjonctif" },
   { texte: "On eût dit que la mer allait tout emporter.", forme: "eût dit", rep: "le plus-que-parfait du subjonctif" },
   { texte: "Il fit nuit très tôt ce soir-là.", forme: "fit", rep: "le passé simple de l'indicatif" },
-  { texte: "Bien qu'il fasse nuit, ils continuent de monter.", forme: "fasse", rep: "le subjonctif présent" },
-  { texte: "Bien qu'il ait fait nuit très tôt, ils ont continué.", forme: "ait fait", rep: "le passé du subjonctif" },
+  { texte: "Bien qu'il fasse nuit, ils continuent de monter.", forme: "fasse", rep: "le présent du mode subjonctif" },
+  { texte: "Bien qu'il ait fait nuit très tôt, ils ont continué.", forme: "ait fait", rep: "le passé du mode subjonctif" },
 
-  { texte: "Nous voulions qu'ils prissent le premier car.", forme: "prissent", rep: "l'imparfait du subjonctif" },
+  { texte: "Nous voulions qu'ils prissent le premier car.", forme: "prissent", rep: "l'imparfait du mode subjonctif" },
   { texte: "Nous voulions qu'ils eussent terminé avant midi.", forme: "eussent terminé", rep: "le plus-que-parfait du subjonctif" },
   { texte: "Ils prirent le premier car, à cinq heures.", forme: "prirent", rep: "le passé simple de l'indicatif" },
   { texte: "Elle exigea qu'il eût rendu sa copie avant midi.", forme: "eût rendu", rep: "le plus-que-parfait du subjonctif" },
-  { texte: "Il faut qu'il fasse beau demain matin.", forme: "fasse", rep: "le subjonctif présent" },
+  { texte: "Il faut qu'il fasse beau demain matin.", forme: "fasse", rep: "le présent du mode subjonctif" },
 ];
 
 const TOUS_SUBJONCTIFS: readonly string[] = [...new Set(SUBJONCTIFS.map((s) => s.rep))];
@@ -150,29 +150,29 @@ const CONCORDANCE: readonly Forme[] = [
    ========================================================================== */
 
 const MODALES: readonly Classement[] = [
-  { phrase: "Selon la mairie, le sentier rouvrirait la semaine prochaine.", rep: "le conditionnel d'information non confirmée : le fait est donné sans être garanti" },
-  { phrase: "D'après le journal, il y aurait eu trois blessés.", rep: "le conditionnel d'information non confirmée : le fait est donné sans être garanti" },
-  { phrase: "Le suspect se serait enfui par les toits.", rep: "le conditionnel d'information non confirmée : le fait est donné sans être garanti" },
+  { phrase: "Selon la mairie, le sentier rouvrirait la semaine prochaine.", rep: "le conditionnel d'information non confirmée : le fait est donné sans garantie" },
+  { phrase: "D'après le journal, il y aurait eu trois blessés.", rep: "le conditionnel d'information non confirmée : le fait est donné sans garantie" },
+  { phrase: "Le suspect se serait enfui par les toits.", rep: "le conditionnel d'information non confirmée : le fait est donné sans garantie" },
 
-  { phrase: "Pourriez-vous fermer la fenêtre ?", rep: "le conditionnel de politesse : il adoucit une demande" },
-  { phrase: "J'aimerais vous poser une question.", rep: "le conditionnel de politesse : il adoucit une demande" },
-  { phrase: "Je voudrais un renseignement sur les horaires.", rep: "le conditionnel de politesse : il adoucit une demande" },
+  { phrase: "Pourriez-vous fermer la fenêtre ?", rep: "le conditionnel de politesse : il adoucit une demande qu'on n'ose pas faire" },
+  { phrase: "J'aimerais vous poser une question.", rep: "le conditionnel de politesse : il adoucit une demande qu'on n'ose pas faire" },
+  { phrase: "Je voudrais un renseignement sur les horaires.", rep: "le conditionnel de politesse : il adoucit une demande qu'on n'ose pas faire" },
 
-  { phrase: "Tu me rendras ce livre demain, sans faute.", rep: "le futur d'ordre atténué : il commande sans en avoir l'air" },
-  { phrase: "Vous rendrez vos copies à la fin de l'heure.", rep: "le futur d'ordre atténué : il commande sans en avoir l'air" },
-  { phrase: "Vous serez à l'heure lundi matin.", rep: "le futur d'ordre atténué : il commande sans en avoir l'air" },
+  { phrase: "Tu me rendras ce livre demain, sans faute.", rep: "le futur d'ordre atténué : il commande sans en avoir l'air, et sans cri" },
+  { phrase: "Vous rendrez vos copies à la fin de l'heure.", rep: "le futur d'ordre atténué : il commande sans en avoir l'air, et sans cri" },
+  { phrase: "Vous serez à l'heure lundi matin.", rep: "le futur d'ordre atténué : il commande sans en avoir l'air, et sans cri" },
 
-  { phrase: "L'eau bout à cent degrés.", rep: "le présent de vérité générale : le fait vaut en tout temps" },
-  { phrase: "La Terre tourne autour du Soleil.", rep: "le présent de vérité générale : le fait vaut en tout temps" },
-  { phrase: "Qui vole un œuf vole un bœuf.", rep: "le présent de vérité générale : le fait vaut en tout temps" },
+  { phrase: "L'eau bout à cent degrés.", rep: "le présent de vérité générale : le fait vaut en tout temps et en tout lieu" },
+  { phrase: "La Terre tourne autour du Soleil.", rep: "le présent de vérité générale : le fait vaut en tout temps et en tout lieu" },
+  { phrase: "Qui vole un œuf vole un bœuf.", rep: "le présent de vérité générale : le fait vaut en tout temps et en tout lieu" },
 
-  { phrase: "Relis bien ta copie avant de la rendre.", rep: "l'impératif de conseil : il ne commande pas, il recommande" },
-  { phrase: "Prends une veste avant de sortir.", rep: "l'impératif de conseil : il ne commande pas, il recommande" },
-  { phrase: "Méfie-toi des courants près de la barrière.", rep: "l'impératif de conseil : il ne commande pas, il recommande" },
+  { phrase: "Relis bien ta copie avant de la rendre.", rep: "l'impératif de conseil : il ne commande pas vraiment, il te recommande" },
+  { phrase: "Prends une veste avant de sortir.", rep: "l'impératif de conseil : il ne commande pas vraiment, il te recommande" },
+  { phrase: "Méfie-toi des courants près de la barrière.", rep: "l'impératif de conseil : il ne commande pas vraiment, il te recommande" },
 
-  { phrase: "Qu'il repose en paix.", rep: "le subjonctif de souhait : il présente le fait comme désiré" },
-  { phrase: "Puissiez-vous réussir.", rep: "le subjonctif de souhait : il présente le fait comme désiré" },
-  { phrase: "Que la chance soit avec vous.", rep: "le subjonctif de souhait : il présente le fait comme désiré" },
+  { phrase: "Qu'il repose en paix.", rep: "le subjonctif de souhait : il présente le fait comme désiré, non réalisé" },
+  { phrase: "Puissiez-vous réussir.", rep: "le subjonctif de souhait : il présente le fait comme désiré, non réalisé" },
+  { phrase: "Que la chance soit avec vous.", rep: "le subjonctif de souhait : il présente le fait comme désiré, non réalisé" },
 ];
 
 const TOUTES_MODALES: readonly string[] = [...new Set(MODALES.map((m) => m.rep))];
@@ -263,13 +263,13 @@ const TOUS_ANT: readonly string[] = [...new Set(ANT.map((a) => a.rep))];
    ========================================================================== */
 
 const IRREGULIERS: readonly Forme[] = [
-  { consigne: "« venir », imparfait du subjonctif, avec « il »", juste: "vînt", autres: ["vint", "vienne", "viendrait"], pourquoi: "l'imparfait du subjonctif se construit sur le passé simple, avec un accent circonflexe à la troisième personne" },
-  { consigne: "« faire », imparfait du subjonctif, avec « nous »", juste: "fissions", autres: ["fîmes", "fassions", "faisions"], pourquoi: "le passé simple « nous fîmes » donne l'imparfait du subjonctif « que nous fissions »" },
+  { consigne: "« venir », imparfait du subjonctif, avec « il »", juste: "vînt", autres: ["vint", "vienne", "viendrait"], pourquoi: "l'imparfait du mode subjonctif se construit sur le passé simple, avec un accent circonflexe à la troisième personne" },
+  { consigne: "« faire », imparfait du subjonctif, avec « nous »", juste: "fissions", autres: ["fîmes", "fassions", "faisions"], pourquoi: "le passé simple « nous fîmes » donne l'imparfait du mode subjonctif « que nous fissions »" },
   { consigne: "« pouvoir », passé simple, avec « vous »", juste: "pûtes", autres: ["pouviez", "pourrez", "puissiez"], pourquoi: "« pouvoir » a un passé simple en -u- : je pus, nous pûmes, vous pûtes" },
   { consigne: "« savoir », passé simple, avec « nous »", juste: "sûmes", autres: ["savions", "saurons", "sachions"], pourquoi: "« savoir » a un passé simple en -u- : je sus, nous sûmes" },
   { consigne: "« vouloir », imparfait du subjonctif, avec « il »", juste: "voulût", autres: ["voulut", "veuille", "voudrait"], pourquoi: "« qu'il voulût » prend l'accent circonflexe ; « il voulut » sans accent est un passé simple" },
   { consigne: "« voir », passé simple, avec « vous »", juste: "vîtes", autres: ["voyiez", "verrez", "voyez"], pourquoi: "« voir » fait au passé simple je vis, nous vîmes, vous vîtes" },
-  { consigne: "« prendre », imparfait du subjonctif, avec « ils »", juste: "prissent", autres: ["prirent", "prennent", "prendraient"], pourquoi: "le passé simple « ils prirent » donne l'imparfait du subjonctif « qu'ils prissent »" },
+  { consigne: "« prendre », imparfait du subjonctif, avec « ils »", juste: "prissent", autres: ["prirent", "prennent", "prendraient"], pourquoi: "le passé simple « ils prirent » donne l'imparfait du mode subjonctif « qu'ils prissent »" },
   { consigne: "« aller », imparfait du subjonctif, avec « je »", juste: "allasse", autres: ["allai", "aille", "irais"], pourquoi: "« aller » a un passé simple en -a- : j'allai, donc « que j'allasse »" },
   { consigne: "« dire », passé simple, avec « nous »", juste: "dîmes", autres: ["disions", "dirons", "disons"], pourquoi: "« dire » fait au passé simple je dis, nous dîmes, avec l'accent circonflexe" },
   { consigne: "« falloir », imparfait du subjonctif", juste: "fallût", autres: ["fallut", "faille", "faudrait"], pourquoi: "« qu'il fallût » prend l'accent ; « il fallut » sans accent est un passé simple" },

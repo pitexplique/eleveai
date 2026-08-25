@@ -96,7 +96,7 @@ const PARTICIPE_INFINITIF: readonly Accord[] = [
   { phrase: "Les élèves que j'ai ___ lire à voix haute étaient à l'aise.", juste: "écoutés", autres: ["écouté", "écoutée", "écoutées"], pourquoi: "ce sont les élèves qui lisent : on accorde" },
   { phrase: "Les textes que j'ai ___ lire à voix haute étaient longs.", juste: "écouté", autres: ["écoutés", "écoutée", "écoutées"], pourquoi: "les textes ne lisent pas, ils sont lus : pas d'accord" },
   { phrase: "Les vagues que nous avons ___ monter nous ont inquiétés.", juste: "senties", autres: ["senti", "sentie", "sentis"], pourquoi: "ce sont les vagues qui montent : on accorde au féminin pluriel" },
-  { phrase: "Les travaux qu'ils ont ___ faire ont couté très cher.", juste: "fait", autres: ["faits", "faite", "faites"], pourquoi: "« fait » suivi d'un infinitif est toujours invariable" },
+  { phrase: "Les travaux qu'ils ont ___ faire ont couté très cher.", juste: "fait", autres: ["faits", "faite", "faites"], pourquoi: "« fait » suivi d'un infinitif reste toujours invariable : l'infinitif agit" },
   { phrase: "La maison qu'ils ont ___ construire est immense.", juste: "fait", autres: ["faits", "faite", "faites"], pourquoi: "« fait » suivi d'un infinitif reste invariable, même devant un féminin" },
   { phrase: "Les photos qu'elle a ___ agrandir sont superbes.", juste: "fait", autres: ["faits", "faite", "faites"], pourquoi: "« fait » suivi d'un infinitif reste invariable, même devant un féminin pluriel" },
   { phrase: "Les acteurs que le metteur en scène a ___ répéter sont prêts.", juste: "fait", autres: ["faits", "faite", "faites"], pourquoi: "ce sont pourtant les acteurs qui répètent — mais « fait » suivi d'un infinitif ne s'accorde jamais" },
@@ -115,27 +115,27 @@ const PARTICIPE_INFINITIF: readonly Accord[] = [
 type Invariable = { readonly phrase: string; readonly participe: string; readonly rep: string };
 
 const INVARIABLES: readonly Invariable[] = [
-  { phrase: "Elle a écrit trois lettres hier soir.", participe: "écrit", rep: "le complément d'objet direct est placé APRÈS le verbe" },
-  { phrase: "Nous avons cueilli des mangues au fond du jardin.", participe: "cueilli", rep: "le complément d'objet direct est placé APRÈS le verbe" },
-  { phrase: "Il a repeint les volets de la case.", participe: "repeint", rep: "le complément d'objet direct est placé APRÈS le verbe" },
+  { phrase: "Elle a écrit trois lettres hier soir.", participe: "écrit", rep: "le complément d'objet direct est placé APRÈS le verbe : rien ne l'accorde" },
+  { phrase: "Nous avons cueilli des mangues au fond du jardin.", participe: "cueilli", rep: "le complément d'objet direct est placé APRÈS le verbe : rien ne l'accorde" },
+  { phrase: "Il a repeint les volets de la case.", participe: "repeint", rep: "le complément d'objet direct est placé APRÈS le verbe : rien ne l'accorde" },
 
-  { phrase: "Les amis à qui j'ai écrit n'ont jamais répondu.", participe: "écrit", rep: "le complément placé avant est INDIRECT : on écrit, on parle, on téléphone À quelqu’un" },
-  { phrase: "Ses parents, je leur ai parlé longuement.", participe: "parlé", rep: "le complément placé avant est INDIRECT : on écrit, on parle, on téléphone À quelqu’un" },
-  { phrase: "Les voisins à qui elle a téléphoné étaient absents.", participe: "téléphoné", rep: "le complément placé avant est INDIRECT : on écrit, on parle, on téléphone À quelqu’un" },
+  { phrase: "Les amis à qui j'ai écrit n'ont jamais répondu.", participe: "écrit", rep: "le complément placé avant est INDIRECT : on écrit, on parle À quelqu'un" },
+  { phrase: "Ses parents, je leur ai parlé longuement.", participe: "parlé", rep: "le complément placé avant est INDIRECT : on écrit, on parle À quelqu'un" },
+  { phrase: "Les voisins à qui elle a téléphoné étaient absents.", participe: "téléphoné", rep: "le complément placé avant est INDIRECT : on écrit, on parle À quelqu'un" },
 
-  { phrase: "Des mangues, j'en ai cueilli plein le panier.", participe: "cueilli", rep: "le pronom « en » ne commande jamais l'accord" },
-  { phrase: "Des conseils, il en a reçu beaucoup cette année.", participe: "reçu", rep: "le pronom « en » ne commande jamais l'accord" },
-  { phrase: "Des livres, elle en a lu toute l'année.", participe: "lu", rep: "le pronom « en » ne commande jamais l'accord" },
+  { phrase: "Des mangues, j'en ai cueilli plein le panier.", participe: "cueilli", rep: "le pronom « en » ne commande jamais l'accord, où qu'il soit placé" },
+  { phrase: "Des conseils, il en a reçu beaucoup cette année.", participe: "reçu", rep: "le pronom « en » ne commande jamais l'accord, où qu'il soit placé" },
+  { phrase: "Des livres, elle en a lu toute l'année.", participe: "lu", rep: "le pronom « en » ne commande jamais l'accord, où qu'il soit placé" },
 
-  { phrase: "Les efforts qu'il a fallu pour y arriver étaient immenses.", participe: "fallu", rep: "le verbe est impersonnel : le « il » ne désigne personne" },
-  { phrase: "Les averses qu'il y a eu hier ont tout trempé.", participe: "eu", rep: "le verbe est impersonnel : le « il » ne désigne personne" },
+  { phrase: "Les efforts qu'il a fallu pour y arriver étaient immenses.", participe: "fallu", rep: "le verbe est impersonnel : le « il » ne désigne ici personne du tout" },
+  { phrase: "Les averses qu'il y a eu hier ont tout trempé.", participe: "eu", rep: "le verbe est impersonnel : le « il » ne désigne ici personne du tout" },
 
-  { phrase: "Les élèves que le professeur a fait sortir sont revenus.", participe: "fait", rep: "« fait » suivi d'un infinitif est toujours invariable" },
-  { phrase: "La lettre qu'elle a fait taper faisait quatre pages.", participe: "fait", rep: "« fait » suivi d'un infinitif est toujours invariable" },
-  { phrase: "Les arbres qu'on a fait abattre gênaient la route.", participe: "fait", rep: "« fait » suivi d'un infinitif est toujours invariable" },
+  { phrase: "Les élèves que le professeur a fait sortir sont revenus.", participe: "fait", rep: "« fait » suivi d'un infinitif reste toujours invariable : l'infinitif agit" },
+  { phrase: "La lettre qu'elle a fait taper faisait quatre pages.", participe: "fait", rep: "« fait » suivi d'un infinitif reste toujours invariable : l'infinitif agit" },
+  { phrase: "Les arbres qu'on a fait abattre gênaient la route.", participe: "fait", rep: "« fait » suivi d'un infinitif reste toujours invariable : l'infinitif agit" },
 
-  { phrase: "Cette épreuve fut plus dure que je ne l'avais cru.", participe: "cru", rep: "le « l' » reprend toute une proposition, pas un nom" },
-  { phrase: "La route est plus longue qu'elle ne l'avait imaginé.", participe: "imaginé", rep: "le « l' » reprend toute une proposition, pas un nom" },
+  { phrase: "Cette épreuve fut plus dure que je ne l'avais cru.", participe: "cru", rep: "le « l' » reprend toute une proposition, et non pas un nom seul" },
+  { phrase: "La route est plus longue qu'elle ne l'avait imaginé.", participe: "imaginé", rep: "le « l' » reprend toute une proposition, et non pas un nom seul" },
 ];
 
 const TOUTES_RAISONS: readonly string[] = [...new Set(INVARIABLES.map((i) => i.rep))];
@@ -245,26 +245,26 @@ const HOMOPHONES: readonly Accord[] = [
 type Tournure = { readonly phrase: string; readonly rep: string };
 
 const TOURNURES: readonly Tournure[] = [
-  { phrase: "Le toit a été emporté par le cyclone.", rep: "un passif AVEC complément d'agent : on sait qui agit, mais l'accent porte sur ce qui subit" },
-  { phrase: "La loi a été votée par les députés.", rep: "un passif AVEC complément d'agent : on sait qui agit, mais l'accent porte sur ce qui subit" },
-  { phrase: "Ces sentiers sont entretenus par la commune.", rep: "un passif AVEC complément d'agent : on sait qui agit, mais l'accent porte sur ce qui subit" },
+  { phrase: "Le toit a été emporté par le cyclone.", rep: "un passif AVEC complément d'agent : on sait qui agit, l'accent porte sur qui subit" },
+  { phrase: "La loi a été votée par les députés.", rep: "un passif AVEC complément d'agent : on sait qui agit, l'accent porte sur qui subit" },
+  { phrase: "Ces sentiers sont entretenus par la commune.", rep: "un passif AVEC complément d'agent : on sait qui agit, l'accent porte sur qui subit" },
 
-  { phrase: "Des mesures ont été prises.", rep: "un passif SANS complément d'agent : celui qui agit disparait de la phrase" },
-  { phrase: "Le sentier a été fermé sans explication.", rep: "un passif SANS complément d'agent : celui qui agit disparait de la phrase" },
-  { phrase: "Trois postes seront supprimés à la rentrée.", rep: "un passif SANS complément d'agent : celui qui agit disparait de la phrase" },
-  { phrase: "La décision a été annulée hier soir.", rep: "un passif SANS complément d'agent : celui qui agit disparait de la phrase" },
+  { phrase: "Des mesures ont été prises.", rep: "un passif SANS complément d'agent : celui qui agit disparait entièrement de la phrase" },
+  { phrase: "Le sentier a été fermé sans explication.", rep: "un passif SANS complément d'agent : celui qui agit disparait entièrement de la phrase" },
+  { phrase: "Trois postes seront supprimés à la rentrée.", rep: "un passif SANS complément d'agent : celui qui agit disparait entièrement de la phrase" },
+  { phrase: "La décision a été annulée hier soir.", rep: "un passif SANS complément d'agent : celui qui agit disparait entièrement de la phrase" },
 
-  { phrase: "Il faut fermer le sentier avant la nuit.", rep: "une tournure impersonnelle : le « il » ne désigne personne, aucun responsable n'apparait" },
-  { phrase: "Il convient de prévenir les familles.", rep: "une tournure impersonnelle : le « il » ne désigne personne, aucun responsable n'apparait" },
-  { phrase: "Il est nécessaire de revoir tout le dossier.", rep: "une tournure impersonnelle : le « il » ne désigne personne, aucun responsable n'apparait" },
+  { phrase: "Il faut fermer le sentier avant la nuit.", rep: "une tournure impersonnelle : le « il » ne désigne personne, nul responsable n'apparait" },
+  { phrase: "Il convient de prévenir les familles.", rep: "une tournure impersonnelle : le « il » ne désigne personne, nul responsable n'apparait" },
+  { phrase: "Il est nécessaire de revoir tout le dossier.", rep: "une tournure impersonnelle : le « il » ne désigne personne, nul responsable n'apparait" },
 
-  { phrase: "Le cyclone a emporté le toit.", rep: "une phrase à la voix active : le sujet fait l'action, et on le voit" },
-  { phrase: "Les députés ont voté la loi.", rep: "une phrase à la voix active : le sujet fait l'action, et on le voit" },
-  { phrase: "La commune entretient ces sentiers.", rep: "une phrase à la voix active : le sujet fait l'action, et on le voit" },
+  { phrase: "Le cyclone a emporté le toit.", rep: "une phrase à la voix active : le sujet fait l'action, et l'on voit qui c'est" },
+  { phrase: "Les députés ont voté la loi.", rep: "une phrase à la voix active : le sujet fait l'action, et l'on voit qui c'est" },
+  { phrase: "La commune entretient ces sentiers.", rep: "une phrase à la voix active : le sujet fait l'action, et l'on voit qui c'est" },
 
-  { phrase: "On a fermé le sentier sans explication.", rep: "une active à sujet indéfini : quelqu'un agit, mais « on » ne dit pas qui" },
-  { phrase: "On supprimera trois postes à la rentrée.", rep: "une active à sujet indéfini : quelqu'un agit, mais « on » ne dit pas qui" },
-  { phrase: "On a pris des mesures.", rep: "une active à sujet indéfini : quelqu'un agit, mais « on » ne dit pas qui" },
+  { phrase: "On a fermé le sentier sans explication.", rep: "une active à sujet indéfini : quelqu'un agit, mais « on » ne dit jamais qui" },
+  { phrase: "On supprimera trois postes à la rentrée.", rep: "une active à sujet indéfini : quelqu'un agit, mais « on » ne dit jamais qui" },
+  { phrase: "On a pris des mesures.", rep: "une active à sujet indéfini : quelqu'un agit, mais « on » ne dit jamais qui" },
 ];
 
 const TOUTES_TOURNURES: readonly string[] = [...new Set(TOURNURES.map((t) => t.rep))];

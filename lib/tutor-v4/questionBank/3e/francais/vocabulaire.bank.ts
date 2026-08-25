@@ -159,13 +159,13 @@ const NOMINALISATIONS: readonly Notion[] = [
    ========================================================================== */
 
 const FIGURES: readonly Cas[] = [
-  { gauche: "Il a essuyé une tempête de reproches.", droite: "une métaphore : on nomme une chose par une autre, sans « comme »" },
-  { gauche: "Ce quartier est un désert le dimanche.", droite: "une métaphore : on nomme une chose par une autre, sans « comme »" },
-  { gauche: "Elle a bâti son argumentation pierre par pierre.", droite: "une métaphore : on nomme une chose par une autre, sans « comme »" },
+  { gauche: "Il a essuyé une tempête de reproches.", droite: "une métaphore : on nomme une chose par une autre, sans « comme » ni outil" },
+  { gauche: "Ce quartier est un désert le dimanche.", droite: "une métaphore : on nomme une chose par une autre, sans « comme » ni outil" },
+  { gauche: "Elle a bâti son argumentation pierre par pierre.", droite: "une métaphore : on nomme une chose par une autre, sans « comme » ni outil" },
 
-  { gauche: "Le sentier montait, raide comme une échelle.", droite: "une comparaison : les deux termes sont là, reliés par « comme », « tel », « pareil à »" },
-  { gauche: "Il est resté droit tel un piton dans la brume.", droite: "une comparaison : les deux termes sont là, reliés par « comme », « tel », « pareil à »" },
-  { gauche: "Sa voix, pareille à un galet roulé, râpait un peu.", droite: "une comparaison : les deux termes sont là, reliés par « comme », « tel », « pareil à »" },
+  { gauche: "Le sentier montait, raide comme une échelle.", droite: "une comparaison : les deux termes sont là, reliés par « comme » ou « tel »" },
+  { gauche: "Il est resté droit tel un piton dans la brume.", droite: "une comparaison : les deux termes sont là, reliés par « comme » ou « tel »" },
+  { gauche: "Sa voix, pareille à un galet roulé, râpait un peu.", droite: "une comparaison : les deux termes sont là, reliés par « comme » ou « tel »" },
 
   { gauche: "La mer s'est mise en colère vers midi.", droite: "une personnification : une chose ou une idée reçoit des traits humains" },
   { gauche: "Le vieux phare veille encore sur la baie.", droite: "une personnification : une chose ou une idée reçoit des traits humains" },
@@ -175,13 +175,13 @@ const FIGURES: readonly Cas[] = [
   { gauche: "Il a bu un verre avant de repartir.", droite: "une métonymie : on nomme le contenu par le contenant, ou le tout par la partie" },
   { gauche: "La mairie a répondu ce matin.", droite: "une métonymie : on nomme le contenu par le contenant, ou le tout par la partie" },
 
-  { gauche: "Je te l'ai dit mille fois.", droite: "une hyperbole : le mot exagère volontairement" },
-  { gauche: "Ce sac pèse une tonne.", droite: "une hyperbole : le mot exagère volontairement" },
-  { gauche: "Il a attendu une éternité devant le guichet.", droite: "une hyperbole : le mot exagère volontairement" },
+  { gauche: "Je te l'ai dit mille fois.", droite: "une hyperbole : le mot exagère volontairement, et nul n'y croit" },
+  { gauche: "Ce sac pèse une tonne.", droite: "une hyperbole : le mot exagère volontairement, et nul n'y croit" },
+  { gauche: "Il a attendu une éternité devant le guichet.", droite: "une hyperbole : le mot exagère volontairement, et nul n'y croit" },
 
-  { gauche: "La mer était calme et l'eau très claire.", droite: "un emploi propre : le mot est employé dans son sens premier" },
-  { gauche: "Le phare se trouve à deux kilomètres du port.", droite: "un emploi propre : le mot est employé dans son sens premier" },
-  { gauche: "Elle a bu un verre d'eau fraiche.", droite: "un emploi propre : le mot est employé dans son sens premier" },
+  { gauche: "La mer était calme et l'eau très claire.", droite: "un emploi propre : le mot est employé dans son sens premier, sans image" },
+  { gauche: "Le phare se trouve à deux kilomètres du port.", droite: "un emploi propre : le mot est employé dans son sens premier, sans image" },
+  { gauche: "Elle a bu un verre d'eau fraiche.", droite: "un emploi propre : le mot est employé dans son sens premier, sans image" },
 ];
 
 const TOUTES_FIGURES: readonly string[] = [...new Set(FIGURES.map((f) => f.droite))];

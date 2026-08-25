@@ -24,6 +24,17 @@ import { vocabulaire3eBank } from "@/lib/tutor-v4/questionBank/3e/francais/vocab
 // Les quatre questionnements de 3e que le programme nomme, plus le
 // complémentaire. ⚠️ Ils ont trois ans de vie devant eux, jusqu'en 2028.
 import { cultureLitteraire3eBank } from "@/lib/tutor-v4/questionBank/3e/francais/culture-litteraire.bank";
+// ⛔ LES CINQ NOTIONS TRANSVERSALES (25/08/2026). `lecture_comprehension`,
+// `lecture_voix_haute`, `culture_litteraire`, `ecriture` et `oral` n'avaient
+// jamais eu de banque dédiée : leurs dix-huit micros vivaient du seul
+// `buildCycle4FrancaisBank`, dont les pools font cinq ou six énoncés PARTAGÉS
+// par les trois niveaux du cycle. Mesuré : dix-huit micros sous le seuil de dix
+// énoncés, signature « 4 items, dont 1 fixe ». Les deux banques ci-dessous les
+// remontent, un gabarit par micro sur une table de quinze cas.
+// ⛔ Elles ne recopient pas la 4e : mêmes micros, cas de niveau terminal —
+// argumentation, thèse et arguments, ironie, modalisateurs, concordance.
+import { lectureCulture3eBank } from "@/lib/tutor-v4/questionBank/3e/francais/lecture-culture.bank";
+import { ecritureOral3eBank } from "@/lib/tutor-v4/questionBank/3e/francais/ecriture-oral.bank";
 
 /**
  * ⭐ LA NOTION D'UN ITEM SE DÉDUIT DE SA MICRO (24/08/2026).
@@ -60,6 +71,8 @@ export const francais3eQuestionBank: TutorBankItemV4[] = recalerNotions([
   ...argumentationPresse3eBank,
   ...vocabulaire3eBank,
   ...cultureLitteraire3eBank,
+  ...lectureCulture3eBank,
+  ...ecritureOral3eBank,
 ]);
 
 export function getFrancais3eQuestionBank(args?: {

@@ -58,22 +58,22 @@ type Cas = { readonly gauche: string; readonly droite: string };
    ========================================================================== */
 
 const DECOUPAGE: readonly Cas[] = [
-  { gauche: "Le vieux gardien du phare, que personne n'avait vu depuis trois jours, descendit enfin au village.", droite: "deux propositions" },
-  { gauche: "Il savait qu'elle mentait, mais il ne dit rien.", droite: "trois propositions" },
-  { gauche: "Quand la pluie cessa, le vent se leva et la mer devint blanche.", droite: "trois propositions" },
+  { gauche: "Le vieux gardien du phare, que personne n'avait vu depuis trois jours, descendit enfin au village.", droite: "deux propositions : la phrase est complexe" },
+  { gauche: "Il savait qu'elle mentait, mais il ne dit rien.", droite: "trois propositions : la phrase est complexe" },
+  { gauche: "Quand la pluie cessa, le vent se leva et la mer devint blanche.", droite: "trois propositions : la phrase est complexe" },
   { gauche: "Malgré les avertissements du maire et la fermeture du sentier, quelques promeneurs montèrent jusqu'au cratère.", droite: "une seule proposition : la phrase est simple" },
-  { gauche: "Personne ne comprit pourquoi il était parti si vite.", droite: "deux propositions" },
-  { gauche: "Elle affirme qu'elle a tout vérifié et qu'elle ne s'est trompée nulle part.", droite: "trois propositions" },
-  { gauche: "Le car qui dessert les hauts arrive à six heures.", droite: "deux propositions" },
-  { gauche: "Il pleuvait ; les volets claquaient ; personne ne dormait ; la nuit n'en finissait pas.", droite: "quatre propositions" },
-  { gauche: "Le rapport que le principal avait demandé et que les professeurs avaient rédigé fut perdu.", droite: "trois propositions" },
+  { gauche: "Personne ne comprit pourquoi il était parti si vite.", droite: "deux propositions : la phrase est complexe" },
+  { gauche: "Elle affirme qu'elle a tout vérifié et qu'elle ne s'est trompée nulle part.", droite: "trois propositions : la phrase est complexe" },
+  { gauche: "Le car qui dessert les hauts arrive à six heures.", droite: "deux propositions : la phrase est complexe" },
+  { gauche: "Il pleuvait ; les volets claquaient ; personne ne dormait ; la nuit n'en finissait pas.", droite: "quatre propositions : la phrase est complexe" },
+  { gauche: "Le rapport que le principal avait demandé et que les professeurs avaient rédigé fut perdu.", droite: "trois propositions : la phrase est complexe" },
   { gauche: "Dans le silence du matin, le bruit régulier des vagues berçait tout le quartier.", droite: "une seule proposition : la phrase est simple" },
-  { gauche: "Je crois qu'il viendra si le temps le permet.", droite: "trois propositions" },
-  { gauche: "Nous avons attendu, nous avons appelé, nous sommes repartis, et personne n'a répondu.", droite: "quatre propositions" },
-  { gauche: "L'homme dont je te parle habite au bout du chemin.", droite: "deux propositions" },
+  { gauche: "Je crois qu'il viendra si le temps le permet.", droite: "trois propositions : la phrase est complexe" },
+  { gauche: "Nous avons attendu, nous avons appelé, nous sommes repartis, et personne n'a répondu.", droite: "quatre propositions : la phrase est complexe" },
+  { gauche: "L'homme dont je te parle habite au bout du chemin.", droite: "deux propositions : la phrase est complexe" },
   { gauche: "Après trois heures de marche sous un soleil brulant, les élèves atteignirent la crête.", droite: "une seule proposition : la phrase est simple" },
-  { gauche: "Elle raconta ce qu'elle avait vu, puis elle se tut.", droite: "trois propositions" },
-  { gauche: "Il faut que tu partes avant que la nuit tombe.", droite: "trois propositions" },
+  { gauche: "Elle raconta ce qu'elle avait vu, puis elle se tut.", droite: "trois propositions : la phrase est complexe" },
+  { gauche: "Il faut que tu partes avant que la nuit tombe.", droite: "trois propositions : la phrase est complexe" },
 ];
 
 const TOUS_DECOUPAGES: readonly string[] = [...new Set(DECOUPAGE.map((d) => d.droite))];
@@ -91,27 +91,27 @@ const TOUS_DECOUPAGES: readonly string[] = [...new Set(DECOUPAGE.map((d) => d.dr
    ========================================================================== */
 
 const ENCHASSEMENT: readonly Cas[] = [
-  { gauche: "Je crois [qu'il viendra] demain.", droite: "de la proposition principale, directement : elle est au premier degré" },
-  { gauche: "Il affirme [qu'il a tout vérifié].", droite: "de la proposition principale, directement : elle est au premier degré" },
-  { gauche: "Elle ignore [pourquoi le sentier est fermé].", droite: "de la proposition principale, directement : elle est au premier degré" },
-  { gauche: "Nous partirons [si le temps le permet].", droite: "de la proposition principale, directement : elle est au premier degré" },
-  { gauche: "Je crois qu'il viendra et [qu'il restera jusqu'au soir].", droite: "de la proposition principale, directement : elle est au premier degré" },
+  { gauche: "Je crois [qu'il viendra] demain.", droite: "de la proposition principale, directement : elle est au premier degré seulement" },
+  { gauche: "Il affirme [qu'il a tout vérifié].", droite: "de la proposition principale, directement : elle est au premier degré seulement" },
+  { gauche: "Elle ignore [pourquoi le sentier est fermé].", droite: "de la proposition principale, directement : elle est au premier degré seulement" },
+  { gauche: "Nous partirons [si le temps le permet].", droite: "de la proposition principale, directement : elle est au premier degré seulement" },
+  { gauche: "Je crois qu'il viendra et [qu'il restera jusqu'au soir].", droite: "de la proposition principale, directement : elle est au premier degré seulement" },
 
-  { gauche: "Je crois qu'il viendra [dès que la pluie cessera].", droite: "d'une autre subordonnée : elle est enchâssée au second degré" },
-  { gauche: "Il affirme qu'il a relu le dossier [que le principal lui avait remis].", droite: "d'une autre subordonnée : elle est enchâssée au second degré" },
-  { gauche: "Elle ignore pourquoi le sentier [qui mène au cratère] est fermé.", droite: "d'une autre subordonnée : elle est enchâssée au second degré" },
-  { gauche: "On raconte que le pêcheur [qui a trouvé l'épave] n'a rien dit.", droite: "d'une autre subordonnée : elle est enchâssée au second degré" },
-  { gauche: "Tout le monde savait qu'elle partirait [quand l'année serait finie].", droite: "d'une autre subordonnée : elle est enchâssée au second degré" },
+  { gauche: "Je crois qu'il viendra [dès que la pluie cessera].", droite: "d'une autre subordonnée : elle est enchâssée au second degré, plus bas" },
+  { gauche: "Il affirme qu'il a relu le dossier [que le principal lui avait remis].", droite: "d'une autre subordonnée : elle est enchâssée au second degré, plus bas" },
+  { gauche: "Elle ignore pourquoi le sentier [qui mène au cratère] est fermé.", droite: "d'une autre subordonnée : elle est enchâssée au second degré, plus bas" },
+  { gauche: "On raconte que le pêcheur [qui a trouvé l'épave] n'a rien dit.", droite: "d'une autre subordonnée : elle est enchâssée au second degré, plus bas" },
+  { gauche: "Tout le monde savait qu'elle partirait [quand l'année serait finie].", droite: "d'une autre subordonnée : elle est enchâssée au second degré, plus bas" },
 
-  { gauche: "[Je crois] qu'il viendra demain.", droite: "de rien : c'est elle qui porte les subordonnées, elle est la principale" },
-  { gauche: "[Le car partira] quand tout le monde sera monté.", droite: "de rien : c'est elle qui porte les subordonnées, elle est la principale" },
-  { gauche: "[Personne ne savait] où il était passé.", droite: "de rien : c'est elle qui porte les subordonnées, elle est la principale" },
-  { gauche: "[Il faut] que tu partes maintenant.", droite: "de rien : c'est elle qui porte les subordonnées, elle est la principale" },
+  { gauche: "[Je crois] qu'il viendra demain.", droite: "de rien : c'est elle qui porte toutes les subordonnées, elle est principale" },
+  { gauche: "[Le car partira] quand tout le monde sera monté.", droite: "de rien : c'est elle qui porte toutes les subordonnées, elle est principale" },
+  { gauche: "[Personne ne savait] où il était passé.", droite: "de rien : c'est elle qui porte toutes les subordonnées, elle est principale" },
+  { gauche: "[Il faut] que tu partes maintenant.", droite: "de rien : c'est elle qui porte toutes les subordonnées, elle est principale" },
 
-  { gauche: "Il ferma le cahier et [il éteignit la lampe].", droite: "de rien : elle est indépendante, coordonnée ou juxtaposée à une proposition de même rang" },
-  { gauche: "Le vent se leva ; [les volets claquèrent] ; la maison trembla.", droite: "de rien : elle est indépendante, coordonnée ou juxtaposée à une proposition de même rang" },
-  { gauche: "Elle appela, [personne ne répondit], et elle raccrocha.", droite: "de rien : elle est indépendante, coordonnée ou juxtaposée à une proposition de même rang" },
-  { gauche: "La nuit tombait et [la mer devenait noire].", droite: "de rien : elle est indépendante, coordonnée ou juxtaposée à une proposition de même rang" },
+  { gauche: "Il ferma le cahier et [il éteignit la lampe].", droite: "de rien : elle est indépendante, coordonnée ou juxtaposée à une autre de même rang" },
+  { gauche: "Le vent se leva ; [les volets claquèrent] ; la maison trembla.", droite: "de rien : elle est indépendante, coordonnée ou juxtaposée à une autre de même rang" },
+  { gauche: "Elle appela, [personne ne répondit], et elle raccrocha.", droite: "de rien : elle est indépendante, coordonnée ou juxtaposée à une autre de même rang" },
+  { gauche: "La nuit tombait et [la mer devenait noire].", droite: "de rien : elle est indépendante, coordonnée ou juxtaposée à une autre de même rang" },
 ];
 
 const TOUS_ENCHASSEMENTS: readonly string[] = [...new Set(ENCHASSEMENT.map((e) => e.droite))];
@@ -125,15 +125,15 @@ const TOUS_ENCHASSEMENTS: readonly string[] = [...new Set(ENCHASSEMENT.map((e) =
    ========================================================================== */
 
 const DEPENDANCE: readonly Cas[] = [
-  { gauche: "[Le vent se leva] ; les volets claquèrent.", droite: "indépendante : elle se suffit à elle-même" },
-  { gauche: "Il ferma le cahier et [il éteignit la lampe].", droite: "indépendante : elle se suffit à elle-même" },
-  { gauche: "[La mer était calme] ce matin-là.", droite: "indépendante : elle se suffit à elle-même" },
-  { gauche: "Elle relut la lettre, puis [elle la déchira].", droite: "indépendante : elle se suffit à elle-même" },
+  { gauche: "[Le vent se leva] ; les volets claquèrent.", droite: "indépendante : elle se suffit à elle-même, et aucune autre ne la commande" },
+  { gauche: "Il ferma le cahier et [il éteignit la lampe].", droite: "indépendante : elle se suffit à elle-même, et aucune autre ne la commande" },
+  { gauche: "[La mer était calme] ce matin-là.", droite: "indépendante : elle se suffit à elle-même, et aucune autre ne la commande" },
+  { gauche: "Elle relut la lettre, puis [elle la déchira].", droite: "indépendante : elle se suffit à elle-même, et aucune autre ne la commande" },
 
-  { gauche: "[Je sais] que tu as raison.", droite: "principale : elle porte une ou plusieurs subordonnées" },
-  { gauche: "[Le car partira] dès que tout le monde sera monté.", droite: "principale : elle porte une ou plusieurs subordonnées" },
-  { gauche: "[Elle relut la copie] que l'élève avait rendue.", droite: "principale : elle porte une ou plusieurs subordonnées" },
-  { gauche: "[Il faut] que tu partes avant la nuit.", droite: "principale : elle porte une ou plusieurs subordonnées" },
+  { gauche: "[Je sais] que tu as raison.", droite: "principale : elle porte une ou plusieurs subordonnées, et ne dépend de rien" },
+  { gauche: "[Le car partira] dès que tout le monde sera monté.", droite: "principale : elle porte une ou plusieurs subordonnées, et ne dépend de rien" },
+  { gauche: "[Elle relut la copie] que l'élève avait rendue.", droite: "principale : elle porte une ou plusieurs subordonnées, et ne dépend de rien" },
+  { gauche: "[Il faut] que tu partes avant la nuit.", droite: "principale : elle porte une ou plusieurs subordonnées, et ne dépend de rien" },
 
   { gauche: "Je sais [que tu as raison].", droite: "subordonnée essentielle : on ne peut pas la supprimer, la phrase serait incomplète" },
   { gauche: "Il faut [que tu partes avant la nuit].", droite: "subordonnée essentielle : on ne peut pas la supprimer, la phrase serait incomplète" },
@@ -141,11 +141,11 @@ const DEPENDANCE: readonly Cas[] = [
   { gauche: "Tout dépend de [ce que le jury décidera].", droite: "subordonnée essentielle : on ne peut pas la supprimer, la phrase serait incomplète" },
   { gauche: "Le problème est [que personne n'a vérifié].", droite: "subordonnée essentielle : on ne peut pas la supprimer, la phrase serait incomplète" },
 
-  { gauche: "Le car partira [dès que tout le monde sera monté].", droite: "subordonnée accessoire : on peut la supprimer, la phrase reste correcte" },
-  { gauche: "Elle rentra [parce que la nuit tombait].", droite: "subordonnée accessoire : on peut la supprimer, la phrase reste correcte" },
-  { gauche: "Mon oncle, [qui vivait à Cilaos], ne descendait jamais.", droite: "subordonnée accessoire : on peut la supprimer, la phrase reste correcte" },
-  { gauche: "Nous continuerons [même s'il pleut].", droite: "subordonnée accessoire : on peut la supprimer, la phrase reste correcte" },
-  { gauche: "[Quand la cloche sonna], les élèves sortirent.", droite: "subordonnée accessoire : on peut la supprimer, la phrase reste correcte" },
+  { gauche: "Le car partira [dès que tout le monde sera monté].", droite: "subordonnée accessoire : on peut la supprimer, et la phrase reste correcte" },
+  { gauche: "Elle rentra [parce que la nuit tombait].", droite: "subordonnée accessoire : on peut la supprimer, et la phrase reste correcte" },
+  { gauche: "Mon oncle, [qui vivait à Cilaos], ne descendait jamais.", droite: "subordonnée accessoire : on peut la supprimer, et la phrase reste correcte" },
+  { gauche: "Nous continuerons [même s'il pleut].", droite: "subordonnée accessoire : on peut la supprimer, et la phrase reste correcte" },
+  { gauche: "[Quand la cloche sonna], les élèves sortirent.", droite: "subordonnée accessoire : on peut la supprimer, et la phrase reste correcte" },
 ];
 
 const TOUTES_DEPENDANCES: readonly string[] = [...new Set(DEPENDANCE.map((d) => d.droite))];
@@ -161,33 +161,33 @@ const TOUTES_DEPENDANCES: readonly string[] = [...new Set(DEPENDANCE.map((d) => 
    ========================================================================== */
 
 const RAPPORTS: readonly Cas[] = [
-  { gauche: "Il rentra [parce que la nuit tombait].", droite: "la cause : elle dit pourquoi le fait a lieu" },
-  { gauche: "[Puisque personne ne répond], nous partons.", droite: "la cause : elle dit pourquoi le fait a lieu" },
-  { gauche: "[Comme il n'avait plus d'essence], il s'arrêta au bord de la route.", droite: "la cause : elle dit pourquoi le fait a lieu" },
+  { gauche: "Il rentra [parce que la nuit tombait].", droite: "la cause : elle dit pour quelle raison le fait a lieu" },
+  { gauche: "[Puisque personne ne répond], nous partons.", droite: "la cause : elle dit pour quelle raison le fait a lieu" },
+  { gauche: "[Comme il n'avait plus d'essence], il s'arrêta au bord de la route.", droite: "la cause : elle dit pour quelle raison le fait a lieu" },
 
-  { gauche: "Il faisait si sombre [qu'on ne voyait plus le sentier].", droite: "la conséquence : elle dit ce que le fait entraine" },
-  { gauche: "Il criait tellement fort [que la classe entière se retourna].", droite: "la conséquence : elle dit ce que le fait entraine" },
-  { gauche: "La nuit était si noire [qu'on avançait à tâtons].", droite: "la conséquence : elle dit ce que le fait entraine" },
+  { gauche: "Il faisait si sombre [qu'on ne voyait plus le sentier].", droite: "la conséquence : elle dit ce que le fait finit par entrainer" },
+  { gauche: "Il criait tellement fort [que la classe entière se retourna].", droite: "la conséquence : elle dit ce que le fait finit par entrainer" },
+  { gauche: "La nuit était si noire [qu'on avançait à tâtons].", droite: "la conséquence : elle dit ce que le fait finit par entrainer" },
 
-  { gauche: "Elle parla lentement [pour que tout le monde comprenne].", droite: "le but : elle dit dans quelle intention on agit" },
-  { gauche: "Il baissa la voix [afin que personne ne l'entende].", droite: "le but : elle dit dans quelle intention on agit" },
-  { gauche: "Elle ferma la porte [de peur que le chat ne sorte].", droite: "le but : elle dit dans quelle intention on agit" },
+  { gauche: "Elle parla lentement [pour que tout le monde comprenne].", droite: "le but : elle dit dans quelle intention le sujet agit" },
+  { gauche: "Il baissa la voix [afin que personne ne l'entende].", droite: "le but : elle dit dans quelle intention le sujet agit" },
+  { gauche: "Elle ferma la porte [de peur que le chat ne sorte].", droite: "le but : elle dit dans quelle intention le sujet agit" },
 
-  { gauche: "Nous sortirons [quand la pluie aura cessé].", droite: "le temps : elle situe le fait par rapport à un autre" },
-  { gauche: "[Dès que le car arriva], nous sommes montés.", droite: "le temps : elle situe le fait par rapport à un autre" },
-  { gauche: "[Pendant que le maitre expliquait], la pluie battait les vitres.", droite: "le temps : elle situe le fait par rapport à un autre" },
+  { gauche: "Nous sortirons [quand la pluie aura cessé].", droite: "le temps : elle situe le fait par rapport à un autre fait" },
+  { gauche: "[Dès que le car arriva], nous sommes montés.", droite: "le temps : elle situe le fait par rapport à un autre fait" },
+  { gauche: "[Pendant que le maitre expliquait], la pluie battait les vitres.", droite: "le temps : elle situe le fait par rapport à un autre fait" },
 
-  { gauche: "Nous sortirons [si la pluie cesse].", droite: "la condition : elle dit à quoi le fait est suspendu" },
-  { gauche: "[À condition que tu révises], tu réussiras.", droite: "la condition : elle dit à quoi le fait est suspendu" },
-  { gauche: "Nous partirons [au cas où le vent forcirait].", droite: "la condition : elle dit à quoi le fait est suspendu" },
+  { gauche: "Nous sortirons [si la pluie cesse].", droite: "la condition : elle dit à quoi le fait se trouve suspendu" },
+  { gauche: "[À condition que tu révises], tu réussiras.", droite: "la condition : elle dit à quoi le fait se trouve suspendu" },
+  { gauche: "Nous partirons [au cas où le vent forcirait].", droite: "la condition : elle dit à quoi le fait se trouve suspendu" },
 
-  { gauche: "Il sortit [bien qu'il pleuve à verse].", droite: "la concession : elle dit ce qui aurait dû empêcher le fait" },
-  { gauche: "[Quoiqu'il soit très jeune], il dirige déjà l'atelier.", droite: "la concession : elle dit ce qui aurait dû empêcher le fait" },
-  { gauche: "[Même si tu insistes], je ne changerai pas d'avis.", droite: "la concession : elle dit ce qui aurait dû empêcher le fait" },
+  { gauche: "Il sortit [bien qu'il pleuve à verse].", droite: "la concession : elle dit ce qui aurait dû empêcher ce fait" },
+  { gauche: "[Quoiqu'il soit très jeune], il dirige déjà l'atelier.", droite: "la concession : elle dit ce qui aurait dû empêcher ce fait" },
+  { gauche: "[Même si tu insistes], je ne changerai pas d'avis.", droite: "la concession : elle dit ce qui aurait dû empêcher ce fait" },
 
-  { gauche: "Elle courait [plus vite que je ne l'avais imaginé].", droite: "la comparaison : elle met le fait en regard d'un autre" },
-  { gauche: "Le sentier montait [autant qu'il descendait].", droite: "la comparaison : elle met le fait en regard d'un autre" },
-  { gauche: "Il connait l'île [mieux que personne ne la connaitra jamais].", droite: "la comparaison : elle met le fait en regard d'un autre" },
+  { gauche: "Elle courait [plus vite que je ne l'avais imaginé].", droite: "la comparaison : elle met le fait en regard d'un autre fait" },
+  { gauche: "Le sentier montait [autant qu'il descendait].", droite: "la comparaison : elle met le fait en regard d'un autre fait" },
+  { gauche: "Il connait l'île [mieux que personne ne la connaitra jamais].", droite: "la comparaison : elle met le fait en regard d'un autre fait" },
 ];
 
 const TOUS_RAPPORTS: readonly string[] = [...new Set(RAPPORTS.map((r) => r.droite))];

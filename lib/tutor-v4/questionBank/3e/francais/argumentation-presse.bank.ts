@@ -70,27 +70,27 @@ type Cas = { readonly gauche: string; readonly droite: string };
 type Role = { readonly these: string; readonly phrase: string; readonly rep: string };
 
 const ROLES: readonly Role[] = [
-  { these: "il faut interdire le téléphone au collège", phrase: "Le téléphone n'a pas sa place dans un collège.", rep: "la thèse : c'est l'opinion que l'auteur défend" },
-  { these: "il faut interdire le téléphone au collège", phrase: "Il empêche les élèves de se parler pendant la récréation.", rep: "un argument : c'est une raison donnée à l'appui de la thèse" },
-  { these: "il faut interdire le téléphone au collège", phrase: "Dans une classe de 4e de Saint-Pierre, dix élèves sur vingt-huit ont déjà été filmés sans leur accord.", rep: "un exemple : c'est un cas précis qui illustre un argument" },
-  { these: "il faut interdire le téléphone au collège", phrase: "Certains diront que le téléphone permet de joindre ses parents.", rep: "la thèse adverse : c'est l'opinion que l'auteur combat" },
-  { these: "il faut interdire le téléphone au collège", phrase: "Il est vrai qu'un téléphone rassure les familles ; cela ne justifie pas qu'on l'utilise en cours.", rep: "une concession : l'auteur accorde un point à l'adversaire avant de le réfuter" },
+  { these: "il faut interdire le téléphone au collège", phrase: "Le téléphone n'a pas sa place dans un collège.", rep: "la thèse : c'est l'opinion que l'auteur défend d'un bout à l'autre" },
+  { these: "il faut interdire le téléphone au collège", phrase: "Il empêche les élèves de se parler pendant la récréation.", rep: "un argument : c'est une raison donnée à l'appui de la thèse défendue" },
+  { these: "il faut interdire le téléphone au collège", phrase: "Dans une classe de 4e de Saint-Pierre, dix élèves sur vingt-huit ont déjà été filmés sans leur accord.", rep: "un exemple : c'est un cas précis, qui rend un argument sensible" },
+  { these: "il faut interdire le téléphone au collège", phrase: "Certains diront que le téléphone permet de joindre ses parents.", rep: "la thèse adverse : c'est l'opinion que l'auteur combat tout du long" },
+  { these: "il faut interdire le téléphone au collège", phrase: "Il est vrai qu'un téléphone rassure les familles ; cela ne justifie pas qu'on l'utilise en cours.", rep: "une concession : l'auteur accorde un point à l'adversaire, puis le réfute" },
 
-  { these: "il faut protéger le lagon", phrase: "Le lagon ne survivra pas à dix ans de plus de ce régime.", rep: "la thèse : c'est l'opinion que l'auteur défend" },
-  { these: "il faut protéger le lagon", phrase: "Le corail meurt dès que l'eau dépasse durablement trente degrés.", rep: "un argument : c'est une raison donnée à l'appui de la thèse" },
-  { these: "il faut protéger le lagon", phrase: "À l'Ermitage, la couverture corallienne est passée de 40 % à 15 % en vingt ans.", rep: "un exemple : c'est un cas précis qui illustre un argument" },
-  { these: "il faut protéger le lagon", phrase: "On objectera que le tourisme fait vivre la côte.", rep: "la thèse adverse : c'est l'opinion que l'auteur combat" },
-  { these: "il faut protéger le lagon", phrase: "Le tourisme fait vivre la côte, c'est entendu — encore faut-il qu'il reste quelque chose à voir.", rep: "une concession : l'auteur accorde un point à l'adversaire avant de le réfuter" },
+  { these: "il faut protéger le lagon", phrase: "Le lagon ne survivra pas à dix ans de plus de ce régime.", rep: "la thèse : c'est l'opinion que l'auteur défend d'un bout à l'autre" },
+  { these: "il faut protéger le lagon", phrase: "Le corail meurt dès que l'eau dépasse durablement trente degrés.", rep: "un argument : c'est une raison donnée à l'appui de la thèse défendue" },
+  { these: "il faut protéger le lagon", phrase: "À l'Ermitage, la couverture corallienne est passée de 40 % à 15 % en vingt ans.", rep: "un exemple : c'est un cas précis, qui rend un argument sensible" },
+  { these: "il faut protéger le lagon", phrase: "On objectera que le tourisme fait vivre la côte.", rep: "la thèse adverse : c'est l'opinion que l'auteur combat tout du long" },
+  { these: "il faut protéger le lagon", phrase: "Le tourisme fait vivre la côte, c'est entendu — encore faut-il qu'il reste quelque chose à voir.", rep: "une concession : l'auteur accorde un point à l'adversaire, puis le réfute" },
 
-  { these: "lire des romans sert à quelque chose", phrase: "Lire des romans n'est pas du temps perdu.", rep: "la thèse : c'est l'opinion que l'auteur défend" },
-  { these: "lire des romans sert à quelque chose", phrase: "Un roman fait entrer dans une tête qui n'est pas la sienne.", rep: "un argument : c'est une raison donnée à l'appui de la thèse" },
-  { these: "lire des romans sert à quelque chose", phrase: "Un élève de 3e qui avait lu quinze romans dans l'année a rendu la meilleure copie du brevet blanc.", rep: "un exemple : c'est un cas précis qui illustre un argument" },
-  { these: "lire des romans sert à quelque chose", phrase: "Beaucoup pensent qu'un documentaire apprend davantage.", rep: "la thèse adverse : c'est l'opinion que l'auteur combat" },
-  { these: "lire des romans sert à quelque chose", phrase: "Un documentaire apprend des faits, sans doute ; il n'apprend pas ce que l'on ressent.", rep: "une concession : l'auteur accorde un point à l'adversaire avant de le réfuter" },
+  { these: "lire des romans sert à quelque chose", phrase: "Lire des romans n'est pas du temps perdu.", rep: "la thèse : c'est l'opinion que l'auteur défend d'un bout à l'autre" },
+  { these: "lire des romans sert à quelque chose", phrase: "Un roman fait entrer dans une tête qui n'est pas la sienne.", rep: "un argument : c'est une raison donnée à l'appui de la thèse défendue" },
+  { these: "lire des romans sert à quelque chose", phrase: "Un élève de 3e qui avait lu quinze romans dans l'année a rendu la meilleure copie du brevet blanc.", rep: "un exemple : c'est un cas précis, qui rend un argument sensible" },
+  { these: "lire des romans sert à quelque chose", phrase: "Beaucoup pensent qu'un documentaire apprend davantage.", rep: "la thèse adverse : c'est l'opinion que l'auteur combat tout du long" },
+  { these: "lire des romans sert à quelque chose", phrase: "Un documentaire apprend des faits, sans doute ; il n'apprend pas ce que l'on ressent.", rep: "une concession : l'auteur accorde un point à l'adversaire, puis le réfute" },
 
-  { these: "le sentier du Piton doit rester fermé", phrase: "Ce sentier doit rester fermé tant que la paroi n'est pas stabilisée.", rep: "la thèse : c'est l'opinion que l'auteur défend" },
-  { these: "le sentier du Piton doit rester fermé", phrase: "Chaque année, les secours y interviennent une dizaine de fois.", rep: "un argument : c'est une raison donnée à l'appui de la thèse" },
-  { these: "le sentier du Piton doit rester fermé", phrase: "En 2024, deux randonneurs y ont passé la nuit à attendre l'hélicoptère.", rep: "un exemple : c'est un cas précis qui illustre un argument" },
+  { these: "le sentier du Piton doit rester fermé", phrase: "Ce sentier doit rester fermé tant que la paroi n'est pas stabilisée.", rep: "la thèse : c'est l'opinion que l'auteur défend d'un bout à l'autre" },
+  { these: "le sentier du Piton doit rester fermé", phrase: "Chaque année, les secours y interviennent une dizaine de fois.", rep: "un argument : c'est une raison donnée à l'appui de la thèse défendue" },
+  { these: "le sentier du Piton doit rester fermé", phrase: "En 2024, deux randonneurs y ont passé la nuit à attendre l'hélicoptère.", rep: "un exemple : c'est un cas précis, qui rend un argument sensible" },
 ];
 
 const TOUS_ROLES: readonly string[] = [...new Set(ROLES.map((r) => r.rep))];
@@ -105,26 +105,26 @@ const TOUS_ROLES: readonly string[] = [...new Set(ROLES.map((r) => r.rep))];
    ========================================================================== */
 
 const PROCEDES: readonly Cas[] = [
-  { gauche: "En vingt ans, la couverture corallienne est passée de 40 % à 15 %.", droite: "convaincre par la preuve seule : il avance un chiffre ou un constat, sans reprendre personne" },
-  { gauche: "Trois établissements sur quatre ont déjà franchi le seuil.", droite: "convaincre par la preuve seule : il avance un chiffre ou un constat, sans reprendre personne" },
-  { gauche: "Les études menées depuis dix ans concordent toutes.", droite: "convaincre par la preuve seule : il avance un chiffre ou un constat, sans reprendre personne" },
-  { gauche: "Le taux d'absentéisme a baissé de douze points en deux ans.", droite: "convaincre par la preuve seule : il avance un chiffre ou un constat, sans reprendre personne" },
+  { gauche: "En vingt ans, la couverture corallienne est passée de 40 % à 15 %.", droite: "convaincre par la preuve seule : il avance un chiffre ou un constat, et ne réfute rien" },
+  { gauche: "Trois établissements sur quatre ont déjà franchi le seuil.", droite: "convaincre par la preuve seule : il avance un chiffre ou un constat, et ne réfute rien" },
+  { gauche: "Les études menées depuis dix ans concordent toutes.", droite: "convaincre par la preuve seule : il avance un chiffre ou un constat, et ne réfute rien" },
+  { gauche: "Le taux d'absentéisme a baissé de douze points en deux ans.", droite: "convaincre par la preuve seule : il avance un chiffre ou un constat, et ne réfute rien" },
 
   { gauche: "Il ne restera rien à montrer à nos petits-enfants.", droite: "persuader par l'émotion : il choisit des mots qui touchent, sans interpeller personne" },
   { gauche: "Ceux qui ont grandi ici se souviennent d'une eau claire ; leurs enfants ne la connaitront pas.", droite: "persuader par l'émotion : il choisit des mots qui touchent, sans interpeller personne" },
   { gauche: "Un enfant filmé sans le savoir n'oublie jamais tout à fait cette journée-là.", droite: "persuader par l'émotion : il choisit des mots qui touchent, sans interpeller personne" },
 
-  { gauche: "Voulez-vous vraiment que vos enfants nagent dans une eau morte ?", droite: "persuader en prenant le lecteur à partie : il s'adresse à lui directement, par « vous » ou par « nous »" },
-  { gauche: "Nous savons tous, au fond, ce qu'il faudrait faire.", droite: "persuader en prenant le lecteur à partie : il s'adresse à lui directement, par « vous » ou par « nous »" },
-  { gauche: "Et vous, qu'auriez-vous fait à sa place ?", droite: "persuader en prenant le lecteur à partie : il s'adresse à lui directement, par « vous » ou par « nous »" },
+  { gauche: "Voulez-vous vraiment que vos enfants nagent dans une eau morte ?", droite: "persuader en prenant le lecteur à partie : il s'adresse à lui par « vous » ou « nous »" },
+  { gauche: "Nous savons tous, au fond, ce qu'il faudrait faire.", droite: "persuader en prenant le lecteur à partie : il s'adresse à lui par « vous » ou « nous »" },
+  { gauche: "Et vous, qu'auriez-vous fait à sa place ?", droite: "persuader en prenant le lecteur à partie : il s'adresse à lui par « vous » ou « nous »" },
 
-  { gauche: "On nous dit que le tourisme fait vivre la côte. Vivre de quoi, quand il n'y aura plus rien à voir ?", droite: "convaincre en réfutant : il reprend l'objection de l'adversaire pour la démonter" },
-  { gauche: "Certains prétendent que le problème vient d'ailleurs. Les mesures faites au large disent le contraire.", droite: "convaincre en réfutant : il reprend l'objection de l'adversaire pour la démonter" },
-  { gauche: "On oppose souvent la liberté à la règle. La règle est pourtant ce qui rend la liberté possible.", droite: "convaincre en réfutant : il reprend l'objection de l'adversaire pour la démonter" },
+  { gauche: "On nous dit que le tourisme fait vivre la côte. Vivre de quoi, quand il n'y aura plus rien à voir ?", droite: "convaincre en réfutant : il reprend l'objection de l'adversaire, puis la démonte" },
+  { gauche: "Certains prétendent que le problème vient d'ailleurs. Les mesures faites au large disent le contraire.", droite: "convaincre en réfutant : il reprend l'objection de l'adversaire, puis la démonte" },
+  { gauche: "On oppose souvent la liberté à la règle. La règle est pourtant ce qui rend la liberté possible.", droite: "convaincre en réfutant : il reprend l'objection de l'adversaire, puis la démonte" },
 
-  { gauche: "Le lagon est un poumon : on ne coupe pas la respiration d'une île.", droite: "frapper par une image : il fait voir l'idée au lieu de la démontrer" },
-  { gauche: "Ce collège n'est pas une usine, et les élèves ne sont pas des pièces.", droite: "frapper par une image : il fait voir l'idée au lieu de la démontrer" },
-  { gauche: "Interdire sans expliquer, c'est bâtir un mur sans porte.", droite: "frapper par une image : il fait voir l'idée au lieu de la démontrer" },
+  { gauche: "Le lagon est un poumon : on ne coupe pas la respiration d'une île.", droite: "frapper par une image : il fait voir l'idée au lieu de la démontrer, et l'on retient" },
+  { gauche: "Ce collège n'est pas une usine, et les élèves ne sont pas des pièces.", droite: "frapper par une image : il fait voir l'idée au lieu de la démontrer, et l'on retient" },
+  { gauche: "Interdire sans expliquer, c'est bâtir un mur sans porte.", droite: "frapper par une image : il fait voir l'idée au lieu de la démontrer, et l'on retient" },
 ];
 
 const TOUS_PROCEDES: readonly string[] = [...new Set(PROCEDES.map((p) => p.droite))];
@@ -138,29 +138,29 @@ const TOUS_PROCEDES: readonly string[] = [...new Set(PROCEDES.map((p) => p.droit
    ========================================================================== */
 
 const TITRAILLE: readonly Cas[] = [
-  { gauche: "En haut de l'article, en gros caractères : « Le lagon perd son corail ».", droite: "le titre : il annonce le sujet et donne l'angle" },
-  { gauche: "Trois mots en très grand, en haut de la page : « Le sentier rouvre ».", droite: "le titre : il annonce le sujet et donne l'angle" },
-  { gauche: "Une phrase courte tout en haut, qui donne l'angle : « Trop de collégiens dorment mal ».", droite: "le titre : il annonce le sujet et donne l'angle" },
+  { gauche: "En haut de l'article, en gros caractères : « Le lagon perd son corail ».", droite: "le titre : il annonce le sujet de l'article et lui donne son angle" },
+  { gauche: "Trois mots en très grand, en haut de la page : « Le sentier rouvre ».", droite: "le titre : il annonce le sujet de l'article et lui donne son angle" },
+  { gauche: "Une phrase courte tout en haut, qui donne l'angle : « Trop de collégiens dorment mal ».", droite: "le titre : il annonce le sujet de l'article et lui donne son angle" },
 
-  { gauche: "Sous le titre, cinq lignes en gras qui résument toute l'enquête.", droite: "le chapô : il résume l'essentiel en quelques lignes, sous le titre" },
-  { gauche: "Un paragraphe court, en italique, qui donne l'essentiel avant que l'article commence.", droite: "le chapô : il résume l'essentiel en quelques lignes, sous le titre" },
-  { gauche: "Quelques lignes qui répondent à qui, quoi, où et quand, avant le premier paragraphe.", droite: "le chapô : il résume l'essentiel en quelques lignes, sous le titre" },
+  { gauche: "Sous le titre, cinq lignes en gras qui résument toute l'enquête.", droite: "le chapô : il résume l'essentiel en quelques lignes, juste sous le titre" },
+  { gauche: "Un paragraphe court, en italique, qui donne l'essentiel avant que l'article commence.", droite: "le chapô : il résume l'essentiel en quelques lignes, juste sous le titre" },
+  { gauche: "Quelques lignes qui répondent à qui, quoi, où et quand, avant le premier paragraphe.", droite: "le chapô : il résume l'essentiel en quelques lignes, juste sous le titre" },
 
-  { gauche: "Au milieu de l'article, en gras : « Des mesures encore insuffisantes ».", droite: "l'intertitre : il découpe l'article et relance la lecture" },
-  { gauche: "Une ligne en gras qui coupe l'article en deux et annonce la suite.", droite: "l'intertitre : il découpe l'article et relance la lecture" },
-  { gauche: "Un titre secondaire au milieu de la page : « Ce qu'en disent les familles ».", droite: "l'intertitre : il découpe l'article et relance la lecture" },
+  { gauche: "Au milieu de l'article, en gras : « Des mesures encore insuffisantes ».", droite: "l'intertitre : il découpe l'article en parties et relance la lecture" },
+  { gauche: "Une ligne en gras qui coupe l'article en deux et annonce la suite.", droite: "l'intertitre : il découpe l'article en parties et relance la lecture" },
+  { gauche: "Un titre secondaire au milieu de la page : « Ce qu'en disent les familles ».", droite: "l'intertitre : il découpe l'article en parties et relance la lecture" },
 
-  { gauche: "Sous la photographie : « L'Ermitage, le 4 mars 2026. Photo B. Hoarau ».", droite: "la légende : elle dit ce que l'image montre et d'où elle vient" },
-  { gauche: "Sous l'image : « Vue du piton depuis Cilaos. AFP ».", droite: "la légende : elle dit ce que l'image montre et d'où elle vient" },
-  { gauche: "Sous le dessin : « Illustration de Tehem, publiée le 12 mai ».", droite: "la légende : elle dit ce que l'image montre et d'où elle vient" },
+  { gauche: "Sous la photographie : « L'Ermitage, le 4 mars 2026. Photo B. Hoarau ».", droite: "la légende : elle dit ce que l'image montre, et aussi d'où elle vient" },
+  { gauche: "Sous l'image : « Vue du piton depuis Cilaos. AFP ».", droite: "la légende : elle dit ce que l'image montre, et aussi d'où elle vient" },
+  { gauche: "Sous le dessin : « Illustration de Tehem, publiée le 12 mai ».", droite: "la légende : elle dit ce que l'image montre, et aussi d'où elle vient" },
 
-  { gauche: "La toute première phrase : « Il y a vingt ans, on y voyait les poissons depuis la plage. »", droite: "l'accroche : la première phrase de l'article, qui doit retenir le lecteur" },
-  { gauche: "L'article s'ouvre sur : « Personne, ce matin-là, n'avait prévu le vent. »", droite: "l'accroche : la première phrase de l'article, qui doit retenir le lecteur" },
-  { gauche: "La première ligne : « Trois cents. C'est le nombre de dossiers en attente. »", droite: "l'accroche : la première phrase de l'article, qui doit retenir le lecteur" },
+  { gauche: "La toute première phrase : « Il y a vingt ans, on y voyait les poissons depuis la plage. »", droite: "l'accroche : la première phrase de l'article, celle qui retient le lecteur" },
+  { gauche: "L'article s'ouvre sur : « Personne, ce matin-là, n'avait prévu le vent. »", droite: "l'accroche : la première phrase de l'article, celle qui retient le lecteur" },
+  { gauche: "La première ligne : « Trois cents. C'est le nombre de dossiers en attente. »", droite: "l'accroche : la première phrase de l'article, celle qui retient le lecteur" },
 
-  { gauche: "En fin d'article : « Marie Payet, envoyée spéciale ».", droite: "la signature : elle dit qui a écrit, et engage sa responsabilité" },
-  { gauche: "Sous le titre, un nom et une fonction : « Par Karim Dijoux, correspondant ».", droite: "la signature : elle dit qui a écrit, et engage sa responsabilité" },
-  { gauche: "Au bas de la page : « Reportage de l'équipe locale ».", droite: "la signature : elle dit qui a écrit, et engage sa responsabilité" },
+  { gauche: "En fin d'article : « Marie Payet, envoyée spéciale ».", droite: "la signature : elle dit qui a écrit l'article, et engage sa responsabilité" },
+  { gauche: "Sous le titre, un nom et une fonction : « Par Karim Dijoux, correspondant ».", droite: "la signature : elle dit qui a écrit l'article, et engage sa responsabilité" },
+  { gauche: "Au bas de la page : « Reportage de l'équipe locale ».", droite: "la signature : elle dit qui a écrit l'article, et engage sa responsabilité" },
 ];
 
 const TOUTE_TITRAILLE: readonly string[] = [...new Set(TITRAILLE.map((t) => t.droite))];
@@ -174,25 +174,25 @@ const TOUTE_TITRAILLE: readonly string[] = [...new Set(TITRAILLE.map((t) => t.dr
    ========================================================================== */
 
 const IMAGES: readonly Cas[] = [
-  { gauche: "La photo montre une plage déserte ; à trois mètres à gauche, hors champ, un parking plein.", droite: "le cadrage exclut : ce qui reste hors du cadre fait partie de l'argument" },
-  { gauche: "On voit dix manifestants serrés ; le cadre s'arrête juste avant la place vide.", droite: "le cadrage exclut : ce qui reste hors du cadre fait partie de l'argument" },
-  { gauche: "Le cliché montre une salle de classe pleine ; les rangées vides du fond ont été coupées.", droite: "le cadrage exclut : ce qui reste hors du cadre fait partie de l'argument" },
+  { gauche: "La photo montre une plage déserte ; à trois mètres à gauche, hors champ, un parking plein.", droite: "le cadrage exclut : ce qui reste en dehors du cadre fait partie de l'argument" },
+  { gauche: "On voit dix manifestants serrés ; le cadre s'arrête juste avant la place vide.", droite: "le cadrage exclut : ce qui reste en dehors du cadre fait partie de l'argument" },
+  { gauche: "Le cliché montre une salle de classe pleine ; les rangées vides du fond ont été coupées.", droite: "le cadrage exclut : ce qui reste en dehors du cadre fait partie de l'argument" },
 
-  { gauche: "Le même cliché d'une foule parait sous deux légendes : « soutien massif » ici, « rassemblement clairsemé » là.", droite: "la légende oriente : le même cliché change de sens selon ce qu'on écrit dessous" },
-  { gauche: "Sous une photo d'enfants qui courent : « la joie de la rentrée » — ou bien « une cour saturée ».", droite: "la légende oriente : le même cliché change de sens selon ce qu'on écrit dessous" },
-  { gauche: "Une photo de barque échouée, légendée « après le cyclone », puis « chantier à l'abandon ».", droite: "la légende oriente : le même cliché change de sens selon ce qu'on écrit dessous" },
+  { gauche: "Le même cliché d'une foule parait sous deux légendes : « soutien massif » ici, « rassemblement clairsemé » là.", droite: "la légende oriente : le même cliché change de sens selon ce qu'on écrit au-dessous" },
+  { gauche: "Sous une photo d'enfants qui courent : « la joie de la rentrée » — ou bien « une cour saturée ».", droite: "la légende oriente : le même cliché change de sens selon ce qu'on écrit au-dessous" },
+  { gauche: "Une photo de barque échouée, légendée « après le cyclone », puis « chantier à l'abandon ».", droite: "la légende oriente : le même cliché change de sens selon ce qu'on écrit au-dessous" },
 
-  { gauche: "À gauche, la courbe des températures ; à droite, la photo d'un corail blanchi.", droite: "le rapprochement conclut : deux images côte à côte suggèrent un lien qu'aucune ne prouve" },
-  { gauche: "Sur la même page, le portrait d'un élu et l'image d'un chantier arrêté.", droite: "le rapprochement conclut : deux images côte à côte suggèrent un lien qu'aucune ne prouve" },
-  { gauche: "Deux photos côte à côte : la plage en 1990, la plage aujourd'hui.", droite: "le rapprochement conclut : deux images côte à côte suggèrent un lien qu'aucune ne prouve" },
+  { gauche: "À gauche, la courbe des températures ; à droite, la photo d'un corail blanchi.", droite: "le rapprochement conclut : deux images côte à côte suggèrent un lien que nul ne prouve" },
+  { gauche: "Sur la même page, le portrait d'un élu et l'image d'un chantier arrêté.", droite: "le rapprochement conclut : deux images côte à côte suggèrent un lien que nul ne prouve" },
+  { gauche: "Deux photos côte à côte : la plage en 1990, la plage aujourd'hui.", droite: "le rapprochement conclut : deux images côte à côte suggèrent un lien que nul ne prouve" },
 
-  { gauche: "Les personnes ont été placées, la lumière installée, et l'on a attendu le bon moment.", droite: "la mise en scène compose : la photo n'a pas été prise, elle a été fabriquée" },
-  { gauche: "Tout le monde regarde l'objectif, aligné devant le bâtiment neuf.", droite: "la mise en scène compose : la photo n'a pas été prise, elle a été fabriquée" },
-  { gauche: "La table a été dressée et les dossiers posés avant que le photographe entre.", droite: "la mise en scène compose : la photo n'a pas été prise, elle a été fabriquée" },
+  { gauche: "Les personnes ont été placées, la lumière installée, et l'on a attendu le bon moment.", droite: "la mise en scène compose : la photo n'a pas été prise, elle a été fabriquée de A à Z" },
+  { gauche: "Tout le monde regarde l'objectif, aligné devant le bâtiment neuf.", droite: "la mise en scène compose : la photo n'a pas été prise, elle a été fabriquée de A à Z" },
+  { gauche: "La table a été dressée et les dossiers posés avant que le photographe entre.", droite: "la mise en scène compose : la photo n'a pas été prise, elle a été fabriquée de A à Z" },
 
-  { gauche: "L'image saisit le maire les yeux fermés, au milieu d'un discours d'une heure.", droite: "le choix de l'instant juge : une fraction de seconde passe pour un caractère" },
-  { gauche: "Le joueur est photographié au moment exact où il grimace.", droite: "le choix de l'instant juge : une fraction de seconde passe pour un caractère" },
-  { gauche: "Sur les deux cents clichés pris ce jour-là, celui-ci est le seul où elle ne sourit pas.", droite: "le choix de l'instant juge : une fraction de seconde passe pour un caractère" },
+  { gauche: "L'image saisit le maire les yeux fermés, au milieu d'un discours d'une heure.", droite: "le choix de l'instant juge : une simple fraction de seconde passe pour un caractère" },
+  { gauche: "Le joueur est photographié au moment exact où il grimace.", droite: "le choix de l'instant juge : une simple fraction de seconde passe pour un caractère" },
+  { gauche: "Sur les deux cents clichés pris ce jour-là, celui-ci est le seul où elle ne sourit pas.", droite: "le choix de l'instant juge : une simple fraction de seconde passe pour un caractère" },
 ];
 
 const TOUTES_IMAGES: readonly string[] = [...new Set(IMAGES.map((i) => i.droite))];
@@ -207,29 +207,29 @@ const TOUTES_IMAGES: readonly string[] = [...new Set(IMAGES.map((i) => i.droite)
    ========================================================================== */
 
 const FIABILITE: readonly Cas[] = [
-  { gauche: "Une capture d'écran circule, sans nom de journal ni date.", droite: "invérifiable : plus rien ne permet de remonter à la source" },
-  { gauche: "Un chiffre est repris dans un message vocal, sans que personne sache qui l'a mesuré.", droite: "invérifiable : plus rien ne permet de remonter à la source" },
-  { gauche: "Une vidéo est publiée par un compte créé la semaine dernière, sans aucune autre publication.", droite: "invérifiable : plus rien ne permet de remonter à la source" },
+  { gauche: "Une capture d'écran circule, sans nom de journal ni date.", droite: "invérifiable : plus rien, dans ce qui est publié, ne mène à la source" },
+  { gauche: "Un chiffre est repris dans un message vocal, sans que personne sache qui l'a mesuré.", droite: "invérifiable : plus rien, dans ce qui est publié, ne mène à la source" },
+  { gauche: "Une vidéo est publiée par un compte créé la semaine dernière, sans aucune autre publication.", droite: "invérifiable : plus rien, dans ce qui est publié, ne mène à la source" },
 
-  { gauche: "Un article dit « selon une étude de l'IRD publiée en janvier », sans lien vers l'étude.", droite: "invérifiée mais vérifiable : la source est nommée, il reste à la consulter" },
-  { gauche: "Un message renvoie à un rapport officiel dont il donne le titre exact, mais pas le passage.", droite: "invérifiée mais vérifiable : la source est nommée, il reste à la consulter" },
-  { gauche: "Une infographie porte « INSEE, 2025 » en tout petit sous le graphique.", droite: "invérifiée mais vérifiable : la source est nommée, il reste à la consulter" },
+  { gauche: "Un article dit « selon une étude de l'IRD publiée en janvier », sans lien vers l'étude.", droite: "invérifiée mais vérifiable : la source est nommée, il ne reste qu'à la lire" },
+  { gauche: "Un message renvoie à un rapport officiel dont il donne le titre exact, mais pas le passage.", droite: "invérifiée mais vérifiable : la source est nommée, il ne reste qu'à la lire" },
+  { gauche: "Une infographie porte « INSEE, 2025 » en tout petit sous le graphique.", droite: "invérifiée mais vérifiable : la source est nommée, il ne reste qu'à la lire" },
 
-  { gauche: "Quarante comptes publient la même phrase, mot pour mot, en une heure.", droite: "une apparence de nombre : c'est une seule source recopiée, pas plusieurs confirmations" },
-  { gauche: "Cinq sites reprennent l'information ; tous citent le même communiqué de presse.", droite: "une apparence de nombre : c'est une seule source recopiée, pas plusieurs confirmations" },
-  { gauche: "L'information est « partout », mais chaque page renvoie à la précédente.", droite: "une apparence de nombre : c'est une seule source recopiée, pas plusieurs confirmations" },
+  { gauche: "Quarante comptes publient la même phrase, mot pour mot, en une heure.", droite: "une apparence de nombre : c'est une seule source recopiée, et non des preuves" },
+  { gauche: "Cinq sites reprennent l'information ; tous citent le même communiqué de presse.", droite: "une apparence de nombre : c'est une seule source recopiée, et non des preuves" },
+  { gauche: "L'information est « partout », mais chaque page renvoie à la précédente.", droite: "une apparence de nombre : c'est une seule source recopiée, et non des preuves" },
 
-  { gauche: "En haut du résultat de recherche, une mention discrète : « Annonce ».", droite: "un contenu sponsorisé : quelqu'un a payé pour qu'il apparaisse là" },
-  { gauche: "Une vidéo vante un produit, et la description porte « en partenariat avec la marque ».", droite: "un contenu sponsorisé : quelqu'un a payé pour qu'il apparaisse là" },
-  { gauche: "Un billet de blog se termine par un lien d'achat et un code de réduction.", droite: "un contenu sponsorisé : quelqu'un a payé pour qu'il apparaisse là" },
+  { gauche: "En haut du résultat de recherche, une mention discrète : « Annonce ».", droite: "un contenu sponsorisé : quelqu'un a payé pour qu'il apparaisse ici même" },
+  { gauche: "Une vidéo vante un produit, et la description porte « en partenariat avec la marque ».", droite: "un contenu sponsorisé : quelqu'un a payé pour qu'il apparaisse ici même" },
+  { gauche: "Un billet de blog se termine par un lien d'achat et un code de réduction.", droite: "un contenu sponsorisé : quelqu'un a payé pour qu'il apparaisse ici même" },
 
-  { gauche: "La page des horaires du car date de 2019, et la ligne a été réorganisée depuis.", droite: "une information périmée : elle a pu être juste, elle ne l'est plus" },
-  { gauche: "Une carte des zones interdites circule sans qu'on voie qu'elle a trois ans.", droite: "une information périmée : elle a pu être juste, elle ne l'est plus" },
-  { gauche: "Un tarif est repris d'une page mise à jour pour la dernière fois en 2021.", droite: "une information périmée : elle a pu être juste, elle ne l'est plus" },
+  { gauche: "La page des horaires du car date de 2019, et la ligne a été réorganisée depuis.", droite: "une information périmée : elle a pu être juste en son temps, plus depuis" },
+  { gauche: "Une carte des zones interdites circule sans qu'on voie qu'elle a trois ans.", droite: "une information périmée : elle a pu être juste en son temps, plus depuis" },
+  { gauche: "Un tarif est repris d'une page mise à jour pour la dernière fois en 2021.", droite: "une information périmée : elle a pu être juste en son temps, plus depuis" },
 
-  { gauche: "L'article nomme l'organisme, donne la date de mesure et explique comment le comptage a été fait.", droite: "vérifiable et vérifiée : source nommée, date, et méthode expliquée" },
-  { gauche: "La page indique l'auteur, la date de publication et la date de dernière mise à jour.", droite: "vérifiable et vérifiée : source nommée, date, et méthode expliquée" },
-  { gauche: "Le graphique porte son unité, sa source et l'échantillon sur lequel il a été construit.", droite: "vérifiable et vérifiée : source nommée, date, et méthode expliquée" },
+  { gauche: "L'article nomme l'organisme, donne la date de mesure et explique comment le comptage a été fait.", droite: "vérifiable et vérifiée : source nommée, date donnée, méthode expliquée" },
+  { gauche: "La page indique l'auteur, la date de publication et la date de dernière mise à jour.", droite: "vérifiable et vérifiée : source nommée, date donnée, méthode expliquée" },
+  { gauche: "Le graphique porte son unité, sa source et l'échantillon sur lequel il a été construit.", droite: "vérifiable et vérifiée : source nommée, date donnée, méthode expliquée" },
 ];
 
 const TOUTES_FIABILITES: readonly string[] = [...new Set(FIABILITE.map((f) => f.droite))];
@@ -244,26 +244,26 @@ const TOUTES_FIABILITES: readonly string[] = [...new Set(FIABILITE.map((f) => f.
    ========================================================================== */
 
 const IRONIE: readonly Cas[] = [
-  { gauche: "Quelle excellente idée d'avoir supprimé le seul car qui montait aux hauts !", droite: "l'ironie : la phrase dit le contraire de ce qu'elle veut faire entendre" },
-  { gauche: "Bravo : trois heures de queue pour un formulaire qu'on remplit en deux minutes.", droite: "l'ironie : la phrase dit le contraire de ce qu'elle veut faire entendre" },
-  { gauche: "On nous explique qu'il n'y a pas d'argent. Heureusement, la nouvelle façade est magnifique.", droite: "l'ironie : la phrase dit le contraire de ce qu'elle veut faire entendre" },
-  { gauche: "Rien de tel qu'une salle sans fenêtre pour donner le gout d'apprendre.", droite: "l'ironie : la phrase dit le contraire de ce qu'elle veut faire entendre" },
+  { gauche: "Quelle excellente idée d'avoir supprimé le seul car qui montait aux hauts !", droite: "l'ironie : la phrase dit tout le contraire de ce qu'elle veut faire entendre" },
+  { gauche: "Bravo : trois heures de queue pour un formulaire qu'on remplit en deux minutes.", droite: "l'ironie : la phrase dit tout le contraire de ce qu'elle veut faire entendre" },
+  { gauche: "On nous explique qu'il n'y a pas d'argent. Heureusement, la nouvelle façade est magnifique.", droite: "l'ironie : la phrase dit tout le contraire de ce qu'elle veut faire entendre" },
+  { gauche: "Rien de tel qu'une salle sans fenêtre pour donner le gout d'apprendre.", droite: "l'ironie : la phrase dit tout le contraire de ce qu'elle veut faire entendre" },
 
-  { gauche: "Il n'y a pas un mètre carré de la côte qui n'ait été bétonné dix fois.", droite: "l'exagération : elle grossit le trait pour rendre le défaut visible" },
-  { gauche: "Le dossier a traversé quatorze bureaux, deux ministères et un océan avant de revenir vide.", droite: "l'exagération : elle grossit le trait pour rendre le défaut visible" },
-  { gauche: "Chaque matin, l'île entière semble s'être donné rendez-vous sur la même route.", droite: "l'exagération : elle grossit le trait pour rendre le défaut visible" },
+  { gauche: "Il n'y a pas un mètre carré de la côte qui n'ait été bétonné dix fois.", droite: "l'exagération : elle grossit le trait pour rendre le défaut bien visible" },
+  { gauche: "Le dossier a traversé quatorze bureaux, deux ministères et un océan avant de revenir vide.", droite: "l'exagération : elle grossit le trait pour rendre le défaut bien visible" },
+  { gauche: "Chaque matin, l'île entière semble s'être donné rendez-vous sur la même route.", droite: "l'exagération : elle grossit le trait pour rendre le défaut bien visible" },
 
-  { gauche: "Je ne comprends pas : si l'eau est potable, pourquoi les bureaux reçoivent-ils des bouteilles ?", droite: "la fausse naïveté : il feint de ne pas comprendre pour obliger à s'expliquer" },
-  { gauche: "Quelqu'un pourrait-il m'expliquer pourquoi il faut un justificatif de domicile pour prouver qu'on n'en a pas ?", droite: "la fausse naïveté : il feint de ne pas comprendre pour obliger à s'expliquer" },
-  { gauche: "J'aimerais qu'on m'explique comment on révise sans manuel.", droite: "la fausse naïveté : il feint de ne pas comprendre pour obliger à s'expliquer" },
+  { gauche: "Je ne comprends pas : si l'eau est potable, pourquoi les bureaux reçoivent-ils des bouteilles ?", droite: "la fausse naïveté : il feint de ne pas comprendre pour forcer à s'expliquer" },
+  { gauche: "Quelqu'un pourrait-il m'expliquer pourquoi il faut un justificatif de domicile pour prouver qu'on n'en a pas ?", droite: "la fausse naïveté : il feint de ne pas comprendre pour forcer à s'expliquer" },
+  { gauche: "J'aimerais qu'on m'explique comment on révise sans manuel.", droite: "la fausse naïveté : il feint de ne pas comprendre pour forcer à s'expliquer" },
 
-  { gauche: "Le sentier est fermé depuis le 3 mars pour raisons de sécurité.", droite: "le premier degré : la phrase dit exactement ce qu'elle veut dire" },
-  { gauche: "Trois classes de 3e ont participé au projet cette année.", droite: "le premier degré : la phrase dit exactement ce qu'elle veut dire" },
-  { gauche: "La collecte des déchets a lieu le mardi et le vendredi.", droite: "le premier degré : la phrase dit exactement ce qu'elle veut dire" },
+  { gauche: "Le sentier est fermé depuis le 3 mars pour raisons de sécurité.", droite: "le premier degré : la phrase dit exactement ce qu'elle veut faire entendre" },
+  { gauche: "Trois classes de 3e ont participé au projet cette année.", droite: "le premier degré : la phrase dit exactement ce qu'elle veut faire entendre" },
+  { gauche: "La collecte des déchets a lieu le mardi et le vendredi.", droite: "le premier degré : la phrase dit exactement ce qu'elle veut faire entendre" },
 
-  { gauche: "L'établissement connait « quelques tensions » depuis la rentrée.", droite: "l'euphémisme : il atténue pour ne pas nommer la chose" },
-  { gauche: "On parle d'une « réorganisation » du service ; quatre postes sur cinq ont disparu.", droite: "l'euphémisme : il atténue pour ne pas nommer la chose" },
-  { gauche: "Il nous a quittés la semaine dernière.", droite: "l'euphémisme : il atténue pour ne pas nommer la chose" },
+  { gauche: "L'établissement connait « quelques tensions » depuis la rentrée.", droite: "l'euphémisme : il atténue les mots pour ne pas nommer la chose" },
+  { gauche: "On parle d'une « réorganisation » du service ; quatre postes sur cinq ont disparu.", droite: "l'euphémisme : il atténue les mots pour ne pas nommer la chose" },
+  { gauche: "Il nous a quittés la semaine dernière.", droite: "l'euphémisme : il atténue les mots pour ne pas nommer la chose" },
 ];
 
 const TOUTES_IRONIES: readonly string[] = [...new Set(IRONIE.map((i) => i.droite))];
