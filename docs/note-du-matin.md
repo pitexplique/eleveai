@@ -272,6 +272,44 @@ coach. Le volume est petit, c'est la **forme** qui engage.
 
 ---
 
+## 📏 LE CHIFFRAGE DU SITE ENTIER (25/08/2026)
+
+Frédéric : « je me laisse 4-5 mois pour que les coachs du CP à la Terminale
+soient parfaits, plus les fiches, plus les vidéos Manim. » Et : « je préfère bien
+faire les choses. »
+
+```
+matière      notions   avec fiche   à écrire
+maths          409         66          343
+français       170         24          146
+                          ─────────────────
+maths + français                      489
+(+ anglais 70, espagnol 47, IA 15, éco 7 → 628 en tout)
+```
+
+**489 fiches à écrire** pour finir maths + français du CP à la Terminale. Sur
+100 jours ouvrés, cela ferait cinq fiches par jour, tous les jours, sans compter
+les coachs ni les vidéos. La mesure dit 2 à 4 par jour depuis zéro — soit environ
+**huit mois pour les fiches seules**.
+
+⭐ **MAIS LE RYTHME DE LA 6ᵉ N'EST PAS LE BON ÉTALON.** Sur cette journée, la
+moitié du temps est partie à rendre les dessins lisibles — et ces défauts étaient
+dans les CANVAS, pas dans les fiches : le rapporteur à 8,7 px, les solides, les
+symétries, les trois colonnes qui s'ouvraient dès 768 px. Corrigés une fois, pour
+les 109 fiches. Les classes suivantes ne les repaieront pas.
+
+⭐ **LE VRAI ÉTALON SERA LA 4ᵉ.** À 4-5 fiches par jour, l'horizon tient pour le
+collège. À 2, il faudra choisir : le collège seul, ou un standard différent pour
+le primaire. ⛔ Ne pas trancher avant d'avoir le chiffre — c'est exactement ce que
+la campagne de la 6ᵉ était censée produire, et elle l'a produit pour un cas
+particulier (des fiches qui existaient déjà).
+
+⚠️ Et sur le trafic, qui monte : 400 visiteurs/jour au 25/08, peut-être 1000 sous
+dix jours. Une part est SAISONNIÈRE — la rentrée est à six jours. Le chiffre qui
+comptera est celui de mi-septembre, quand le pic sera retombé.
+
+---
+
 ## Ce qui vient après
 
 **La 4ᵉ**, et les analytics Vercel du 24/08 le disent :
