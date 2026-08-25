@@ -456,6 +456,24 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
       "Le nom noyau et ses trois expansions, déterminant ou pronom, préposition ou adverbe : la classe d'un mot se lit sur ce qui le suit.",
   },
 
+  /* ⭐ LA CONJUGAISON DE LA 5e TIENT EN UNE NOTION, ET C'EST UNE DÉCISION DU
+     25/08/2026. Le découpage de la veille avait produit « temps simples » et
+     « temps composés », deux micros chacune ; la règle pose un maximum de cinq,
+     pas un minimum de deux, et une notion de deux micros ne porte pas une fiche.
+     Refondues en `conjugaison_temps` — le nom que la 4e et la 3e portaient déjà,
+     ce qui est la condition pour qu'une fiche se compare d'un niveau à l'autre. */
+  "francais/5e/conjugaison-temps": {
+    titre: "Le passé simple, le conditionnel et les temps composés (2026-2027)",
+    resume:
+      "Aucun de ces temps ne s'apprend en entier : le passé simple se pose sur le radical, le conditionnel emprunte au futur et à l'imparfait, et les quatre temps composés n'ont qu'un auxiliaire qui bouge.",
+  },
+
+  "francais/5e/discours-paroles-rapportees": {
+    titre: "Le discours direct et le discours indirect (2026-2027)",
+    resume:
+      "Citer entre guillemets ou rapporter dans une subordonnée, déplacer le pronom, le temps et l'indication de temps, et ponctuer un dialogue avec ses incises et ses tirets.",
+  },
+
   "ia/fondements/definir-l-ia": { titre: "Qu'est-ce que l'intelligence artificielle ?" },
   "ia/fondements/apprentissage-automatique": { titre: "L'apprentissage automatique" },
   "ia/fondements/modeles-apprentissage": { titre: "Les modèles d'apprentissage" },
