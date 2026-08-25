@@ -131,37 +131,45 @@ attendant `networkidle`. Le relancer suffit — ce n'est jamais le code.
 
 ---
 
-## ⏸️ EN ATTENTE — 86 PDF périmés, et c'est voulu (25/08/2026)
+## ✅ FAIT — les 67 PDF de maths sont à jour (25/08/2026)
 
-Le h1 et les onze h2 de **toutes** les fiches ont changé le 25/08 (commit
-`ba5cbb43`) : titre explicite, et chaque h2 nomme la notion. **Un seul PDF a été
-reconstruit** (`nombres-decimaux-6e`), pour vérifier que le nom de fichier ne
-bougeait pas. Les 86 autres affichent encore les anciens titres.
+Le h1 et les onze h2 ont changé dans le composant partagé (`ba5cbb43`, puis
+`b4b3fe07` : le libellé de classe, pas le slug d'URL). Un PDF étant une photo de
+la page, les 90 fichiers portaient encore l'ancien en-tête. **Les 67 de maths ont
+été refaits en une passe** (`8b62136e`) ; le français est traité par l'autre
+session. `verifier:pdf` : 90 fiches examinées, tous les PDF à jour.
 
-⚠️ **`verifier:pdf` ne le voit pas** : il compare les dates de commit de la FICHE
-et de son PDF, or c'est le composant partagé qui a changé, pas les fiches. Le
-contrôle est au vert alors que le contenu est périmé. Ne pas s'y fier ici.
+⚠️ **Le contrôle ne voit PAS ce genre de péremption.** Il compare les dates de
+commit de la FICHE et de son PDF : quand c'est le composant partagé qui change,
+il reste au vert alors que les 90 fichiers sont périmés. À retenir pour la
+prochaine fois qu'on touche `FicheCoursClient`.
 
-**Pourquoi on ne reconstruit pas tout de suite** : une autre session écrit un
-générateur de fiches, et Frédéric veut une règle d'indexation unique pour les
-maths et le français — **classe, matière, notion, micro-compétence**. Les titres
-vont donc bouger une seconde fois. On reconstruit **une fois**, quand la règle
-sera fixée :
+**Trois pièges de la passe**, qui resserviront :
 
-```bash
-npm run build:fiches-pdf -- http://localhost:3000 <route> <route> …
-npm run verifier:pdf
-```
+1. ⛔ **La liste de routes ne doit contenir que des FICHES.**
+   `find … -path "*/*/*/*"` ramène aussi `/fiches-cours/francais`, la page
+   d'index d'une matière : pas d'en-tête de site à masquer, donc l'attente du
+   script ne se termine jamais et le lot entier tombe en `TimeoutError`. Le
+   symptôme ressemble à s'y méprendre à la dégradation du serveur — ce n'en est
+   pas une. Le bon filtre compte les segments :
+   ```bash
+   find app/fiches-cours -name page.tsx | sed 's|^app||; s|/page.tsx$||'      | awk -F/ 'NF==5' | grep -v "/ia/"
+   ```
+2. ⚠️ **Git Bash réécrit les chemins commençant par une barre** :
+   `/fiches-cours/…` devient `C:/Program Files/Git/fiches-cours/…`. Mettre
+   `MSYS_NO_PATHCONV=1` devant le `npm run`.
+3. Des **lots de quinze** passent mieux que des lots de vingt ; le serveur s'est
+   dégradé deux fois sur cinq lots, et le relancer suffit.
 
-Les 87 routes se listent avec
-`find app/fiches-cours -name page.tsx -path "*/*/*/*" | sed 's|^app||; s|/page.tsx$||' | grep -v "/ia/"`.
-Compter un quart d'heure, et relancer le serveur de dev à mi-parcours.
+⛔ **Le trou de la règle d'indexation** reste ouvert : la micro-compétence
+n'existe **ni dans `FicheCoursData`, ni sur la page**. Elle ne vit que dans les
+commentaires d'en-tête des fichiers de fiche et dans la banque du coach. Classe,
+matière et notion sont dans l'URL, le titre et les h2 ; la micro, non.
 
-⛔ **Le trou de la règle** : la micro-compétence n'existe **ni dans
-`FicheCoursData`, ni sur la page**. Elle ne vit que dans les commentaires
-d'en-tête des fichiers de fiche et dans la banque du coach. Classe, matière et
-notion sont dans l'URL, le titre et les h2 ; la micro, non. L'indexer suppose
-d'abord de la faire remonter dans la donnée.
+⚠️ **Et le point faible mesuré du référencement, c'est l'URL** :
+`/fiches-cours/maths/6e/decimal-nombre` affiche le `notionId` interne du coach.
+« nombres-decimaux » serait l'expression tapée. ⛔ Ne pas le changer sans poser
+les redirections 301 — sinon on perd l'indexation acquise.
 
 ---
 
