@@ -14,8 +14,14 @@
 //                           (3/4, grille), usages 2, piège 3, entraînement 2
 // - fraction_comparer     → propriété « Comparer », exemple « Comparer » (1/3 vs
 //                           1/5, barres), piège 2, entraînement 4
-// - fraction_quantite     → formule + schéma (barre 3/4), exemple « Une quantité »
-//                           (2/3 de 15), usages 3, entraînement 3
+// ⚠️ CET EN-TÊTE N'EST PLUS LA SOURCE : depuis le 25/08, chaque bloc porte son
+// champ `micros`, et `npm run verifier:micros` le vérifie contre la banque. Il
+// citait `fraction_quantite`, un identifiant de l'ANCIEN modèle de connaissances
+// (`lib/tutor-v4/knowledge/6e.maths.knowledge.json`, figé au 14/08 et lu par
+// `lib/tutor/`, le tuteur d'avant). La banque vive — celle que le coach utilise,
+// via `catalog.ts` → `buildKnowledge6eMaths()` → `microSkills.ts` — dit
+// `fraction_mixte`, `fraction_comparer` et `fraction_defi`. Un commentaire peut
+// vieillir sans que rien ne le signale ; un champ, non.
 // - fraction_decimal      → propriété « Écriture décimale », entraînement 4
 // - fraction_defi         → propriété « Fractions égales » (2/4 = 1/2), aRetenir 3,
 //                           entraînement 2 + slide « exercice flash »
@@ -160,6 +166,35 @@ const fractionsSurLaDroite = legende(
   "1/4 = 0,25 · 1/2 = 0,5 · 3/4 = 0,75"
 );
 
+// ⭐ UNE FRACTION PEUT DÉPASSER 1, ET C'EST CE QUI SURPREND. Tous les autres
+// dessins de la fiche découpent UN objet, donc restent sous 1. Celui-ci pose la
+// fraction sur une droite qui va jusqu'à 3 : on voit 7/4 coincé entre 1 et 2, et
+// l'on comprend du même coup pourquoi il s'écrit aussi « 1 et 3/4 ».
+const septQuartsEncadre = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min: 0,
+      max: 3,
+      step: 1,
+      points: [
+        { value: 1, label: "1", color: "#2563eb" },
+        { value: 1.75, label: "7/4", color: "#16a34a" },
+        { value: 2, label: "2", color: "#2563eb" },
+      ],
+      display: {
+        showTicks: true,
+        showValues: true,
+        showPoints: true,
+        showPointLabels: true,
+        showZero: true,
+      },
+      size: { width: 260, height: 95 },
+    }}
+  />,
+  "7/4 est entre 1 et 2 : c'est 1 entier et 3/4"
+);
+
 // DÉCODER L'ÉCRITURE, PAS LE GÂTEAU. Toutes les autres images de la fiche
 // découpent quelque chose ; celle-ci lit les deux nombres, l'un après l'autre.
 const anatomieDeLEcriture = (
@@ -273,6 +308,13 @@ export const ficheFractions6e: FicheCoursData = {
       micros: ["fraction_decimal"],
       texte: "À connaître : 1/2 = 0,5 ; 1/4 = 0,25 ; 3/4 = 0,75.",
       schema: fractionsSurLaDroite,
+    },
+    {
+      titre: "Plus grand qu'un entier",
+      micros: ["fraction_mixte"],
+      texte:
+        "Une fraction peut dépasser 1 : 7/4 se place entre 1 et 2, et s'écrit aussi « 1 et 3/4 ».",
+      schema: septQuartsEncadre,
     },
   ],
   reel: {

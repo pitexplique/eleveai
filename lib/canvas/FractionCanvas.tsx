@@ -310,7 +310,13 @@ export default function FractionCanvas({ figure }: Props) {
             fontWeight="900"
             fill={RED}
           >
-            Attention : les parts ne sont pas égales
+            {/* ⚠️ RACCOURCIE LE 25/08/2026. « Attention : les parts ne sont pas
+                égales » fait 39 signes, soit ~254 px en 13 px de police : sur la
+                seule fiche qui emploie `unequalParts` (les fractions de 6e), le
+                cadre mesure 250 et la phrase SORTAIT du <svg> des deux côtés.
+                Invisible, puisqu'elle débordait sur du blanc — mesuré au rendu,
+                rectangle du texte contre rectangle du svg. */}
+            les parts ne sont pas égales
           </text>
         ) : null}
       </svg>
