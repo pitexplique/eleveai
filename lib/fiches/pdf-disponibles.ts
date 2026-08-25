@@ -90,6 +90,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "symetrie-centrale-5e-cours-exercices-corriges.pdf",
   "temps-composes-passe-compose-et-plus-que-parfait-6e-cours-exercices-corriges.pdf",
   "temps-du-recit-passe-compose-passe-simple-plus-que-parfait-cm2-cours-exercices-corriges.pdf",
+  "theoreme-de-pythagore-4e-cours-exercices-corriges.pdf",
   "triangles-5e-cours-exercices-corriges.pdf",
   "triangles-6e-cours-exercices-corriges.pdf",
   "valeur-des-temps-raconter-ou-parler-6e-cours-exercices-corriges.pdf",

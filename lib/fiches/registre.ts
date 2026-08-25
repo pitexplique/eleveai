@@ -270,6 +270,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Calculer avec les fractions",
     resume: "Additionner, soustraire, multiplier, et prendre une fraction d'une quantité.",
   },
+  "maths/4e/pythagore-theoreme": {
+    titre: "Le théorème de Pythagore",
+    resume: "Reconnaître l'hypoténuse, calculer une longueur, et utiliser la réciproque pour prouver un angle droit.",
+  },
   "maths/premiere-spe/derivation": {
     titre: "La dérivation",
     resume: "Taux de variation, nombre dérivé, dérivées usuelles et équation de la tangente.",

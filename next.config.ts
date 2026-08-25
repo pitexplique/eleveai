@@ -46,8 +46,13 @@ const nextConfig = {
       // 308 vers le hub des maths plutôt que cinq 404 : elles étaient au
       // sitemap depuis juillet. `permanent: false` — ces adresses reviendront
       // quand les deux classes seront réécrites.
+      //
+      // ⭐ ET ELLES REVIENNENT, UNE PAR UNE (25/08/2026). Une notion réécrite au
+      // standard sort de cette liste le jour où sa fiche est publiée, sinon
+      // l'adresse continue de rediriger et la fiche neuve est invisible.
+      // Sorties à ce jour : pythagore-theoreme.
       {
-        source: "/fiches-cours/maths/4e/:notion(pythagore-theoreme|trigo-cosinus|stat-statistique|proba-experience)",
+        source: "/fiches-cours/maths/4e/:notion(trigo-cosinus|stat-statistique|proba-experience)",
         destination: "/fiches-cours/maths",
         permanent: false,
       },
