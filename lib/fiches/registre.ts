@@ -418,6 +418,20 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Prouver une fonction au lieu de la deviner : COD et COI même placés avant le verbe, attribut du sujet, verbes attributifs par occasion, circonstanciels.",
   },
+  /* ⭐ LA FICHE QUI VISE LE POINT LE PLUS BAS QU'ON MESURE (25/08/2026).
+     L'évaluation nationale de 5e teste « maîtriser la chaine anaphorique et
+     l'emploi des pronoms représentants » sur six items : 19 %, 24 % et 43 % de
+     réussite dans un collège de l'île, français et maths confondus. Aucune
+     autre notion de la classe n'est aussi mal tenue.
+     ⚠️ Ce n'est PAS la fiche des pronoms : reconnaître un pronom démonstratif
+     est une question de classe de mot, retrouver ce qu'il reprend deux phrases
+     plus haut est une question de texte. */
+  "francais/5e/grammaire-reprises": {
+    titre: "Les reprises et la chaîne anaphorique (2026-2027)",
+    resume:
+      "Retrouver ce qu'un pronom reprend, reconnaître une reprise nominale quand le mot change, et suivre deux chaînes qui courent en même temps.",
+  },
+
   "francais/5e/grammaire-groupe-nominal": {
     titre: "Le groupe nominal et les classes de mots (2026-2027)",
     resume:
