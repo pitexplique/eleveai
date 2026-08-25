@@ -269,12 +269,14 @@ export const ficheAngles6e: FicheCoursData = {
   proprietes: [
     {
       titre: "L'angle droit",
+      micros: ["angle_droit"],
       texte:
         "Un angle droit mesure exactement 90°. C'est l'angle des coins d'un carré ou d'un rectangle. On le vérifie avec une équerre.",
       schema: carreCoins,
     },
     {
       titre: "Aigu ou obtus",
+      micros: ["angle_comparer"],
       texte:
         "Un angle aigu mesure moins de 90° : il est plus petit qu'un angle droit. Un angle obtus mesure entre 90° et 180° : il est plus grand qu'un angle droit.",
       // ⚠️ Le canvas `angle` ne montre QU'UN angle (CATALOGUE.md) : deux ouvertures
@@ -286,6 +288,7 @@ export const ficheAngles6e: FicheCoursData = {
     },
     {
       titre: "L'angle plat",
+      micros: ["angle_reconnaitre"],
       texte:
         "Un angle plat mesure 180°. Ses deux côtés sont alignés : ils forment une ligne droite qui passe par le sommet.",
       // Le seul angle de la fiche dont le dessin est une LIGNE DROITE : c'est
@@ -294,6 +297,7 @@ export const ficheAngles6e: FicheCoursData = {
     },
     {
       titre: "Le degré",
+      micros: ["angle_mesurer"],
       texte:
         "On mesure les angles en degrés, notés °. Comparer deux angles donnés en degrés, c'est comparer leurs mesures : 80° est plus grand que 30°.",
       schema: echelleDesDegres,
@@ -316,12 +320,14 @@ export const ficheAngles6e: FicheCoursData = {
   methode: [
     {
       titre: "Reconnaître",
+      micros: ["angle_reconnaitre"],
       texte:
         "On repère les deux demi-droites et leur point commun : le sommet. Puis on classe l'angle en le comparant à l'angle droit : aigu, droit, obtus ou plat.",
       schema: legende(deuxDemiDroites, "deux demi-droites, un point commun"),
     },
     {
       titre: "Mesurer",
+      micros: ["angle_mesurer"],
       texte:
         "On place le centre du rapporteur sur le sommet, le zéro sur un côté, puis on lit la graduation traversée par l'autre côté.",
       // Le geste « reading » : le rapporteur en place, la graduation atteinte
@@ -330,6 +336,7 @@ export const ficheAngles6e: FicheCoursData = {
     },
     {
       titre: "Tracer",
+      micros: ["angle_tracer"],
       texte:
         "On commence par placer le sommet et un premier côté. Ensuite, avec le rapporteur, on marque la mesure voulue et on trace le deuxième côté.",
       // Le geste « zero » : le premier côté est déjà là, le 0 vient se poser
@@ -340,16 +347,19 @@ export const ficheAngles6e: FicheCoursData = {
   usages: [
     {
       titre: "Reconnaître et comparer",
+      micros: ["angle_reconnaitre", "angle_comparer"],
       detail:
         "On identifie le sommet et les côtés, puis on compare les angles : celui qui a la plus grande mesure en degrés est le plus grand.",
     },
     {
       titre: "Mesurer un angle",
+      micros: ["angle_mesurer"],
       detail:
         "On utilise le rapporteur : centre sur le sommet, zéro sur un côté, lecture sur l'autre côté. Le résultat est en degrés.",
     },
     {
       titre: "Tracer un angle",
+      micros: ["angle_tracer"],
       detail:
         "On place d'abord le sommet, on trace un premier côté, puis on utilise le rapporteur pour placer le deuxième côté à la bonne mesure.",
     },
@@ -357,6 +367,7 @@ export const ficheAngles6e: FicheCoursData = {
   exemples: [
     {
       titre: "Reconnaître un angle",
+      micros: ["angle_reconnaitre"],
       donnees: "Sur une figure, deux demi-droites partent du même point O.",
       question: "Que forment-elles, et comment s'appelle le point O ?",
       // L'énoncé dessiné : l'angle AOB, ses trois lettres, sans mesure — la
@@ -370,6 +381,7 @@ export const ficheAngles6e: FicheCoursData = {
     },
     {
       titre: "Comparer à l'angle droit",
+      micros: ["angle_droit", "angle_comparer"],
       donnees: "Un angle mesure 118°.",
       question: "Est-il aigu, droit ou obtus ?",
       schema: schemaAngleObtus,
@@ -385,23 +397,27 @@ export const ficheAngles6e: FicheCoursData = {
         "Combien de demi-droites forment un angle, et comment s'appelle leur point commun ?",
       correction:
         "Un angle est formé par deux demi-droites. Elles partent du même point, et ce point commun s'appelle le sommet de l'angle.",
+      micros: ["angle_reconnaitre"],
     },
     {
       question: "Quel angle est le plus grand : 35° ou 80° ?",
       correction:
         "On compare les mesures : 80 est plus grand que 35. Donc l'angle de 80° est le plus grand. La longueur des côtés dessinés ne compte pas, seule la mesure en degrés compte.",
+      micros: ["angle_comparer"],
     },
     {
       question:
         "Pour tracer un angle de 40°, quel instrument utilises-tu et par quoi commences-tu ?",
       correction:
         "On utilise un rapporteur, car il est gradué en degrés. On commence par placer le sommet et tracer un premier côté. Puis on met le centre du rapporteur sur le sommet, le zéro sur ce côté, on marque 40° et on trace le deuxième côté.",
+      micros: ["angle_tracer"],
     },
     {
       question:
         "Un angle de 120° est-il plus petit, égal ou plus grand qu'un angle droit ?",
       correction:
         "Un angle droit mesure 90°. On compare : 120 est plus grand que 90, et plus petit que 180. Donc un angle de 120° est plus grand qu'un angle droit : c'est un angle obtus.",
+      micros: ["angle_droit", "angle_defi"],
     },
   ],
   coachHref: "/coach-ia/maths?classe=6e",
