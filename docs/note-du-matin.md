@@ -243,11 +243,17 @@ session au fil de son générateur.
 
 ## ⏭️ DÉCIDÉ, PAS ENCORE FAIT
 
-**L'ancre par bloc** — `#micro-angle_tracer`. Le prompt complet, autonome, est
-dans **`docs/prompt-ancres-micros.md`** : la décision (une micro = une ancre, sur
-le premier bloc dans l'ordre CANONIQUE) et les deux pièges mesurés. Le code se
-fait une fois dans le composant partagé et vaut pour les 109 fiches ; l'effet ne
-vaut que sur les 20 annotées.
+⛔ **L'ancre par bloc — ABANDONNÉ le 25/08.** Une ancre publique doit porter un
+texte lisible ; aucune des deux sources ne convient. Les `label` de micros sont
+lisibles en maths (« Tracer un angle ») mais illisibles en français — ce sont des
+objectifs du BO. Les `titre` de blocs, eux, sont écrits pour un élève, mais
+**64 fiches sur 109 ont un doublon** (« Le défi » revient partout). Il aurait
+fallu désambiguïser par un identifiant technique, dans une URL publique.
+Le raisonnement complet est dans `docs/prompt-ancres-micros.md`, marqué abandonné
+pour qu'on ne le recommence pas.
+
+⭐ Le niveau utile est déjà couvert : classe, matière et notion sont dans l'URL,
+le `<title>`, le H1 et les onze H2.
 
 **Le graphe des prérequis** — reporté par Frédéric, et voici ce qu'on sait :
 

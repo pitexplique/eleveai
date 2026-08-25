@@ -1,4 +1,42 @@
-# Prompt — poser une ancre par micro-compétence
+# ⛔ ABANDONNÉ — ancre par micro-compétence
+
+> **Décision de Frédéric, 25/08/2026 : on n'ancre pas au niveau de la micro.**
+> Ce document est gardé pour qu'on ne recommence pas, et pour la mesure qui a
+> tranché. Ne pas exécuter le prompt ci-dessous.
+
+## Pourquoi c'est abandonné
+
+Une ancre publique doit porter un texte **lisible**. Deux sources possibles, les
+deux mesurées, aucune ne convient :
+
+| source | verdict |
+|---|---|
+| le `label` de la micro | lisible en maths (« Tracer un angle »), **illisible en français** — ce sont des objectifs du BO : « Formuler une appréciation fondée sur le texte », « Contrôler sa compréhension et se débloquer ». Personne ne tape ça. |
+| le `titre` du bloc | écrit pour un élève, 1 % seulement dépassent 45 signes — mais **64 fiches sur 109 ont un doublon** dans la même fiche (« Le défi » revient partout). |
+
+Il aurait donc fallu une règle de désambiguïsation, c'est-à-dire retomber sur un
+identifiant technique dans une URL publique — exactement le défaut qu'on reproche
+déjà au slug de route (`decimal-nombre` au lieu de `nombres-decimaux`).
+
+⭐ **Et le niveau utile est déjà couvert.** La page porte classe, matière et
+notion dans son URL, son `<title>`, son H1 et ses onze H2. C'est ce que Google
+indexe, et c'est complet depuis le 25/08.
+
+## Ce qui reste valable du travail fait
+
+Le champ `micros` sur les blocs **n'était pas pour l'ancre**. Il sert toujours :
+
+- le **contrôle** (`npm run verifier:micros`) — une micro sans bloc est un trou
+  visible, une micro inconnue une erreur ;
+- le **lien profond depuis le coach** — l'élève échoue sur une micro, le coach
+  connaît le bloc qui l'enseigne. Ça ne demande aucune ancre publique : un
+  `scrollIntoView` sur un `id` interne suffit, et il peut rester technique.
+
+---
+
+<details>
+<summary>Le prompt d'origine, conservé pour mémoire — ne pas exécuter</summary>
+
 
 > Écrit le 25/08/2026 par la session maths, pour la session qui prendra ce
 > chantier. **Autonome** : elle n'aura rien de la conversation qui l'a produit.
@@ -88,3 +126,5 @@ reviendra sans qu'on le voie.
   une photo de la page.)
 • Lire docs/note-du-matin.md avant de commencer.
 ```
+
+</details>
