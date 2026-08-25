@@ -24,6 +24,37 @@ const { microsDe, testDeSurvie } = kitHelpers(microSkills);
 
 type Condense = Omit<KitNotion, "micros" | "exos">;
 
+/**
+ * ⭐ UN CHAPITRE DU GUIDE COUVRE PLUSIEURS NOTIONS DU COACH (24/08/2026).
+ *
+ * Les onze notions du cycle 4 ont été découpées en dix-neuf le 24/08 (cinq
+ * micros par notion au maximum). Le guide, lui, ne peut pas suivre : un guide de
+ * survie de dix-neuf fiches n'est plus un guide, c'est un manuel — et il est
+ * fait pour être imprimé et glissé dans un classeur.
+ *
+ * Les deux granularités sont donc assumées, et reliées ici : le coach travaille
+ * notion par notion, le guide révise domaine par domaine. Sans cette table,
+ * `microsDe(c.id)` ne trouvait plus rien et les checklists « je sais… » se
+ * vidaient en silence.
+ */
+const NOTIONS_DU_CHAPITRE: Record<string, string[]> = {
+  lecture_comprehension: ["lecture_comprehension", "lecture_documents"],
+  lecture_voix_haute: ["lecture_voix_haute"],
+  culture_litteraire: ["culture_litteraire", "culture_questionnements"],
+  ecriture: ["ecriture"],
+  oral: ["oral"],
+  vocabulaire: ["vocabulaire_sens", "vocabulaire_formation", "vocabulaire_orthographe"],
+  grammaire_phrase: [
+    "grammaire_phrase",
+    "phrase_complexe",
+    "phrase_subordonnees",
+    "orthographe_accords",
+    "orthographe_participe",
+  ],
+  analyse_discours: ["analyse_discours"],
+  conjugaison: ["conjugaison_formes", "conjugaison_temps", "conjugaison_valeurs"],
+};
+
 const CONDENSES: Condense[] = [
   {
     id: "lecture_comprehension",
@@ -270,9 +301,13 @@ const CONDENSES: Condense[] = [
 ];
 
 // Couche "fixed" imprimable groupée par notion (source des tests de survie).
+const NOTION_PAR_MICRO = new Map(microSkills.map((micro) => [micro.id, micro.notionId]));
 const BANQUES: Record<string, TutorBankItemV4[]> = {};
 for (const item of francais3eFixedBank) {
-  (BANQUES[item.notionId] ??= []).push(item);
+  // ⚠️ On range par la notion de la MICRO, pas par celle écrite dans l'item :
+  // les banques portent encore les onze notionId d'avant le découpage.
+  const notionId = NOTION_PAR_MICRO.get(item.microId) ?? item.notionId;
+  (BANQUES[notionId] ??= []).push(item);
 }
 
 export const KIT_FRANCAIS_3E: KitData = {
@@ -283,9 +318,12 @@ export const KIT_FRANCAIS_3E: KitData = {
   matiere: "francais",
   classeLabel: "3e · brevet",
   coachClasse: "3e",
-  notions: CONDENSES.map((c) => ({
-    ...c,
-    micros: microsDe(c.id),
-    exos: testDeSurvie(BANQUES[c.id] ?? []),
-  })),
+  notions: CONDENSES.map((c) => {
+    const ids = NOTIONS_DU_CHAPITRE[c.id] ?? [c.id];
+    return {
+      ...c,
+      micros: ids.flatMap((id) => microsDe(id)),
+      exos: testDeSurvie(ids.flatMap((id) => BANQUES[id] ?? [])),
+    };
+  }),
 };

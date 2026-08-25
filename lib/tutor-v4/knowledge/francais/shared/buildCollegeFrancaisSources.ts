@@ -72,15 +72,59 @@ export function buildCollegeFrancaisBo(level: CollegeFrancaisLevel): KnowledgeBo
   ];
 }
 
+/* ─── DIX-NEUF NOTIONS, ET AUCUNE AU-DESSUS DE CINQ MICROS (24/08/2026) ───────
+   Règle de Frédéric, posée pour le CM2 le 20/08, la 6e le 22/08 et la 5e ce
+   matin : « 3-4 micros par notion, 5 au maximum », « il faut DÉCOUPER, pas
+   enlever ». La 4e et la 3e étaient les dernières classes de collège au-dessus,
+   et c'est la 4e qui se voyait à l'écran — mesuré avant le découpage :
+
+     vocabulaire              11 micros   ⛔ dans les deux classes
+     conjugaison            10 et 9       ⛔
+     culture_litteraire        9          ⛔
+     lecture_comprehension   8 et 9       ⛔
+     phrase_complexe           6          ⛔
+     orthographe_grammaticale 5 et 6
+
+   ⛔ AUCUNE MICRO SUPPRIMÉE : les 68 de la 4e et les 69 de la 3e sont toutes là,
+   aux mêmes id. Seul leur `notionId` change.
+
+   ⚠️ LE DÉCOUPAGE SUIT LEUR PROGRAMME À ELLES, PAS CELUI DE LA 5e. Ces deux
+   classes relèvent de l'arrêté du 9 novembre 2015, version consolidée au BO
+   n° 31 du 30 juillet 2020, jusqu'en septembre 2027 et 2028. Les frontières
+   choisies sont celles que ce texte nomme : « Lire des textes non littéraires,
+   des images et des documents composites » est une compétence travaillée
+   entière, distincte de l'interprétation des textes littéraires ; les quatre
+   questionnements de l'année sont nommés un par un, à côté des gestes de
+   culture générale ; « Fonctionnement de la phrase complexe » sépare le repérage
+   des propositions de l'analyse des subordonnées ; « Connaître le fonctionnement
+   des chaînes d'accord » met le participe passé à part.
+
+   ⭐ LES NOMS SONT CEUX DE LA 5e quand la notion est la même —
+   `orthographe_accords`, `orthographe_participe`, `conjugaison_formes`,
+   `conjugaison_valeurs`. Deux classes qui font la même chose doivent l'appeler
+   pareil, sinon aucune fiche ne peut se comparer d'un niveau à l'autre. */
 export function buildCollegeFrancaisNotions(level: CollegeFrancaisLevel): NotionSource[] {
   const p = labels[level].boPrefix;
 
   return [
+    // ══ LECTURE ══════════════════════════════════════════════════════════════
+    // Le programme distingue DEUX compétences travaillées : « élaborer une
+    // interprétation de textes littéraires » et « lire des textes non
+    // littéraires, des images et des documents composites ». La seconde n'avait
+    // aucune notion : ses micros étaient versées dans la première, qui montait
+    // ainsi à huit et à neuf.
     {
       id: "lecture_comprehension",
-      label: "Comprendre, interpréter et apprécier",
+      label: "Comprendre, interpréter et apprécier un texte",
       boId: `${p}L`,
       prerequis: [],
+      levels: [1, 2, 3],
+    },
+    {
+      id: "lecture_documents",
+      label: "Lire des images, la presse et des documents composites",
+      boId: `${p}L`,
+      prerequis: ["lecture_comprehension"],
       levels: [1, 2, 3],
     },
     {
@@ -90,13 +134,28 @@ export function buildCollegeFrancaisNotions(level: CollegeFrancaisLevel): Notion
       prerequis: ["lecture_comprehension"],
       levels: [1, 2, 3],
     },
+
+    // ══ CULTURE LITTÉRAIRE ═══════════════════════════════════════════════════
+    // Les gestes d'un côté — reconnaître un genre, situer, mettre en réseau,
+    // garder une trace —, les QUESTIONNEMENTS de l'année de l'autre. Ce sont
+    // deux choses différentes, et les mélanger faisait une notion de neuf.
     {
       id: "culture_litteraire",
-      label: `Culture littéraire — ${cycle4Perspectives[level]}`,
+      label: "Situer une œuvre et garder trace de ses lectures",
       boId: `${p}C`,
       prerequis: ["lecture_comprehension"],
       levels: [1, 2, 3],
     },
+    {
+      id: "culture_questionnements",
+      label: `Les questionnements de l'année — ${cycle4Perspectives[level]}`,
+      boId: `${p}C`,
+      prerequis: ["culture_litteraire"],
+      levels: [1, 2, 3],
+    },
+
+    // ══ ÉCRITURE ET ORAL ═════════════════════════════════════════════════════
+    // Quatre micros chacune : elles tenaient déjà la règle, on n'y touche pas.
     {
       id: "ecriture",
       label: "Écrire pour apprendre, inventer et réfléchir",
@@ -111,18 +170,77 @@ export function buildCollegeFrancaisNotions(level: CollegeFrancaisLevel): Notion
       prerequis: [],
       levels: [1, 2, 3],
     },
+
+    // ══ VOCABULAIRE ══════════════════════════════════════════════════════════
+    // Onze micros dans une seule notion : c'est elle qu'on voyait déborder sur
+    // la capture de la 4e. « Enrichir et structurer le lexique » se décline dans
+    // le programme en relations de SENS et en MORPHOLOGIE ; « acquérir
+    // l'orthographe lexicale » est un objectif à part.
     {
-      id: "vocabulaire",
-      label: "Vocabulaire et orthographe lexicale",
+      id: "vocabulaire_sens",
+      label: "Les relations de sens entre les mots",
       boId: `${p}V`,
       prerequis: ["lecture_comprehension"],
       levels: [1, 2, 3],
     },
     {
+      id: "vocabulaire_formation",
+      label: "La formation des mots et leur histoire",
+      boId: `${p}V`,
+      prerequis: ["vocabulaire_sens"],
+      levels: [1, 2, 3],
+    },
+    {
+      id: "vocabulaire_orthographe",
+      label: "Réemployer et écrire avec justesse",
+      boId: `${p}V`,
+      prerequis: ["vocabulaire_formation"],
+      levels: [1, 2, 3],
+    },
+
+    // ══ GRAMMAIRE ════════════════════════════════════════════════════════════
+    {
       id: "grammaire_phrase",
       label: "Phrase, constituants et accords",
       boId: `${p}G`,
       prerequis: ["lecture_comprehension"],
+      levels: [1, 2, 3],
+    },
+    /* « Fonctionnement de la phrase complexe » est une section entière du
+       programme, et elle porte six micros : on la coupe là où le texte change
+       d'objet — REPÉRER les propositions et leur lien d'un côté, ANALYSER les
+       subordonnées de l'autre.
+       ⛔ Les micros ne sont pas les mêmes en 4e et en 3e : la 3e est le niveau
+       terminal, celui où la maitrise est exigée. */
+    {
+      id: "phrase_complexe",
+      label: "Repérer les propositions et ce qui les relie",
+      boId: `${p}G`,
+      prerequis: ["grammaire_phrase"],
+      levels: [1, 2, 3],
+    },
+    {
+      id: "phrase_subordonnees",
+      label: "Analyser les propositions subordonnées",
+      boId: `${p}G`,
+      prerequis: ["phrase_complexe"],
+      levels: [1, 2, 3],
+    },
+    /* « Connaître le fonctionnement des chaînes d'accord ». Le participe passé a
+       sa notion, comme en 5e : c'est là que se joue l'essentiel des erreurs, et
+       une règle noyée dans six autres ne se travaille pas. */
+    {
+      id: "orthographe_accords",
+      label: "Les chaînes d'accord et l'accord sujet-verbe",
+      boId: `${p}G`,
+      prerequis: ["grammaire_phrase"],
+      levels: [1, 2, 3],
+    },
+    {
+      id: "orthographe_participe",
+      label: "L'accord du participe passé",
+      boId: `${p}G`,
+      prerequis: ["orthographe_accords"],
       levels: [1, 2, 3],
     },
     {
@@ -132,50 +250,30 @@ export function buildCollegeFrancaisNotions(level: CollegeFrancaisLevel): Notion
       prerequis: ["grammaire_phrase"],
       levels: [2, 3],
     },
-    /* LA 4e N'AVAIT PAS DE NOTION `phrase_complexe` — alors que le CM2 et la 6e
-       en ont une. Le programme de cycle 4 encore en vigueur pour elle (arrêté
-       du 9 novembre 2015, version consolidée au BO n° 31 du 30 juillet 2020) y
-       consacre une section entière : « Fonctionnement de la phrase complexe ».
-       ⛔ Ouverte à la 4e ET à la 3e : elles suivent le même texte jusqu'en 2027
-       et 2028. Les micros et les items ne sont PAS les mêmes — la 3e est le
-       niveau terminal, celui où la maitrise est exigée : subordonnées
-       enchâssées, degré de dépendance, analyse propositionnelle complète. */
-    ...(level === "4e" || level === "3e"
-      ? [
-          {
-            id: "phrase_complexe",
-            label: "Fonctionnement de la phrase complexe",
-            boId: `${p}G`,
-            prerequis: ["grammaire_phrase"],
-            levels: [1, 2, 3],
-          } satisfies NotionSource,
-        ]
-      : []),
 
-    /* « Savoir accorder les mots dans la phrase et expliquer ses choix » est,
-       dans le BO n° 10 du 5 mars 2026, un OBJECTIF À PART de la grammaire. Il
-       était replié dans `grammaire_phrase`, derrière une seule micro :
-       « Accorder les mots dans la phrase ».
-       ⛔ Ouvert à la 4e et à la 3e parce que leur propre programme — cycle 4 de
-       2015, consolidé en 2020 — exige les mêmes chaines d'accord sans que la
-       moindre notion les porte. Les micros et les items ne sont PAS les mêmes :
-       ceux de la 4e vont jusqu'au groupe nominal complexe, au participe apposé
-       et au passif ; ceux de la 3e vont plus loin encore — participe passé suivi
-       d'un infinitif, cas où il reste invariable, pronominaux réciproques,
-       homophones. (La 5e a les siens dans `knowledge/francais/5e/`, coupés en
-       deux notions : les chaines d'accord et le participe passé.) */
+    // ══ CONJUGAISON ══════════════════════════════════════════════════════════
+    // « Maîtriser la morphologie verbale écrite » et « mettre en évidence le
+    // lien entre le temps employé et le sens » : deux objectifs, et la forme se
+    // sépare des temps qu'on construit avec elle.
     {
-      id: "orthographe_grammaticale",
-      label: "Accorder les mots dans la phrase et expliquer ses choix",
+      id: "conjugaison_formes",
+      label: "Lire et former un verbe conjugué",
       boId: `${p}G`,
       prerequis: ["grammaire_phrase"],
       levels: [1, 2, 3],
     },
     {
-      id: "conjugaison",
-      label: "Formes verbales, temps et modes",
+      id: "conjugaison_temps",
+      label: "Les temps et les modes à construire",
       boId: `${p}G`,
-      prerequis: ["grammaire_phrase"],
+      prerequis: ["conjugaison_formes"],
+      levels: [1, 2, 3],
+    },
+    {
+      id: "conjugaison_valeurs",
+      label: "Ce qu'un temps exprime dans un texte",
+      boId: `${p}G`,
+      prerequis: ["conjugaison_temps"],
       levels: [1, 2, 3],
     },
   ];
@@ -214,20 +312,20 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
     { id: `${prefix}_oral_argumenter`, label: "Justifier son point de vue à l'oral", notionId: "oral", prerequis: [`${prefix}_oral_presenter`] },
     { id: `${prefix}_oral_jouer`, label: "Dire, lire ou jouer un texte", notionId: "oral", prerequis: [`${prefix}_oral_argumenter`] },
 
-    { id: `${prefix}_voc_contexte`, label: "Inférer le sens d'un mot par le contexte", notionId: "vocabulaire", prerequis: [`${prefix}_comp_indices`] },
-    { id: `${prefix}_voc_relations`, label: "Identifier synonymie, antonymie, champ lexical et famille", notionId: "vocabulaire", prerequis: [`${prefix}_voc_contexte`] },
-    { id: `${prefix}_voc_formation`, label: "Comprendre la formation des mots", notionId: "vocabulaire", prerequis: [`${prefix}_voc_relations`] },
-    { id: `${prefix}_voc_reemploi`, label: "Réemployer un lexique précis à l'écrit ou à l'oral", notionId: "vocabulaire", prerequis: [`${prefix}_voc_formation`] },
-    { id: `${prefix}_voc_orthographe`, label: "Écrire avec justesse les mots étudiés", notionId: "vocabulaire", prerequis: [`${prefix}_voc_reemploi`] },
+    { id: `${prefix}_voc_contexte`, label: "Inférer le sens d'un mot par le contexte", notionId: "vocabulaire_sens", prerequis: [`${prefix}_comp_indices`] },
+    { id: `${prefix}_voc_relations`, label: "Identifier synonymie, antonymie, champ lexical et famille", notionId: "vocabulaire_sens", prerequis: [`${prefix}_voc_contexte`] },
+    { id: `${prefix}_voc_formation`, label: "Comprendre la formation des mots", notionId: "vocabulaire_formation", prerequis: [`${prefix}_voc_relations`] },
+    { id: `${prefix}_voc_reemploi`, label: "Réemployer un lexique précis à l'écrit ou à l'oral", notionId: "vocabulaire_orthographe", prerequis: [`${prefix}_voc_formation`] },
+    { id: `${prefix}_voc_orthographe`, label: "Écrire avec justesse les mots étudiés", notionId: "vocabulaire_orthographe", prerequis: [`${prefix}_voc_reemploi`] },
 
     { id: `${prefix}_gram_constituants`, label: "Identifier les constituants de la phrase", notionId: "grammaire_phrase", prerequis: [`${prefix}_comp_sens_global`] },
     { id: `${prefix}_gram_fonctions`, label: "Repérer sujet, verbe, compléments et groupes", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_constituants`] },
     { id: `${prefix}_gram_accords`, label: "Accorder les mots dans la phrase et expliquer ses choix", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_fonctions`] },
     { id: `${prefix}_gram_oral_ecrit`, label: "Distinguer usages de l'oral et de l'écrit", notionId: "grammaire_phrase", prerequis: [`${prefix}_gram_accords`] },
 
-    { id: `${prefix}_conj_identifier`, label: "Identifier temps, mode, personne et radical", notionId: "conjugaison", prerequis: [`${prefix}_gram_fonctions`] },
-    { id: `${prefix}_conj_composer`, label: "Composer et conjuguer les formes verbales attendues", notionId: "conjugaison", prerequis: [`${prefix}_conj_identifier`] },
-    { id: `${prefix}_conj_employer`, label: "Employer les temps et modes selon le sens", notionId: "conjugaison", prerequis: [`${prefix}_conj_composer`] },
+    { id: `${prefix}_conj_identifier`, label: "Identifier temps, mode, personne et radical", notionId: "conjugaison_formes", prerequis: [`${prefix}_gram_fonctions`] },
+    { id: `${prefix}_conj_composer`, label: "Composer et conjuguer les formes verbales attendues", notionId: "conjugaison_formes", prerequis: [`${prefix}_conj_identifier`] },
+    { id: `${prefix}_conj_employer`, label: "Employer les temps et modes selon le sens", notionId: "conjugaison_valeurs", prerequis: [`${prefix}_conj_composer`] },
   ];
 
   base.push(
@@ -258,11 +356,11 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
          quatre autres, déjà connues mot pour mot. La session du 13/08 les
          avait écartées pour cette raison ; une année, c'est une cohorte
          entière, et la 3e tourne déjà sur ce même texte de 2020. */
-      { id: `${prefix}_cult_dire_amour`, label: "Dire l'amour", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
-      { id: `${prefix}_cult_individu_societe`, label: "Individu et société : confrontations de valeurs ?", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
-      { id: `${prefix}_cult_fiction_reel`, label: "La fiction pour interroger le réel", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
-      { id: `${prefix}_cult_informer_deformer`, label: "Informer, s'informer, déformer ?", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_reseau`] },
-      { id: `${prefix}_cult_ville`, label: "La ville, lieu de tous les possibles ?", notionId: "culture_litteraire", prerequis: [`${prefix}_cult_fiction_reel`] },
+      { id: `${prefix}_cult_dire_amour`, label: "Dire l'amour", notionId: "culture_questionnements", prerequis: [`${prefix}_culture_genres`] },
+      { id: `${prefix}_cult_individu_societe`, label: "Individu et société : confrontations de valeurs ?", notionId: "culture_questionnements", prerequis: [`${prefix}_culture_genres`] },
+      { id: `${prefix}_cult_fiction_reel`, label: "La fiction pour interroger le réel", notionId: "culture_questionnements", prerequis: [`${prefix}_culture_genres`] },
+      { id: `${prefix}_cult_informer_deformer`, label: "Informer, s'informer, déformer ?", notionId: "culture_questionnements", prerequis: [`${prefix}_culture_reseau`] },
+      { id: `${prefix}_cult_ville`, label: "La ville, lieu de tous les possibles ?", notionId: "culture_questionnements", prerequis: [`${prefix}_cult_fiction_reel`] },
 
       // « Distinguer phrase simple / complexe. »
       { id: `${prefix}_phrc_simple_complexe`, label: "Distinguer phrase simple, phrase complexe et phrase non verbale", notionId: "phrase_complexe", prerequis: [`${prefix}_gram_constituants`] },
@@ -270,11 +368,11 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
       { id: `${prefix}_phrc_juxta_coord_sub`, label: "Distinguer juxtaposition, coordination et subordination", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_simple_complexe`] },
       // « Analyser les positions des propositions subordonnées (conjonctive,
       //   interrogative indirecte, relative, infinitive, participiale). »
-      { id: `${prefix}_phrc_subordonnees`, label: "Reconnaitre les cinq sortes de propositions subordonnées", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_juxta_coord_sub`] },
+      { id: `${prefix}_phrc_subordonnees`, label: "Reconnaitre les cinq sortes de propositions subordonnées", notionId: "phrase_subordonnees", prerequis: [`${prefix}_phrc_juxta_coord_sub`] },
       // « Comprendre la fonction grammaticale des propositions subordonnées. »
-      { id: `${prefix}_phrc_fonction_subordonnee`, label: "Donner la fonction d'une subordonnée dans la phrase", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_subordonnees`] },
+      { id: `${prefix}_phrc_fonction_subordonnee`, label: "Donner la fonction d'une subordonnée dans la phrase", notionId: "phrase_subordonnees", prerequis: [`${prefix}_phrc_subordonnees`] },
       // « …identifier la fonction du pronom relatif dans la subordonnée. »
-      { id: `${prefix}_phrc_pronom_relatif`, label: "Identifier la fonction du pronom relatif dans sa subordonnée", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_subordonnees`] },
+      { id: `${prefix}_phrc_pronom_relatif`, label: "Identifier la fonction du pronom relatif dans sa subordonnée", notionId: "phrase_subordonnees", prerequis: [`${prefix}_phrc_subordonnees`] },
       // « Analyser le rôle syntaxique des signes de ponctuation. »
       { id: `${prefix}_phrc_ponctuation`, label: "Analyser le rôle syntaxique d'un signe de ponctuation", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_juxta_coord_sub`] },
 
@@ -283,33 +381,33 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
          groupe nominal complexe, participe passé avec être et avec avoir,
          participe passé en apposition, accord sujet-verbe dans les cas
          complexes, et construction du passif. */
-      { id: `${prefix}_orth_chaine_gn_complexe`, label: "Tenir la chaine d'accord dans un groupe nominal complexe", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_gram_accords`] },
-      { id: `${prefix}_orth_participe_etre_avoir`, label: "Accorder le participe passé avec être et avec avoir", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_chaine_gn_complexe`] },
-      { id: `${prefix}_orth_participe_appose`, label: "Accorder le participe passé mis en apposition", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_participe_etre_avoir`] },
-      { id: `${prefix}_orth_sujet_verbe_complexe`, label: "Accorder le verbe dans les cas complexes", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_gram_accords`] },
-      { id: `${prefix}_orth_passif`, label: "Construire le passif et accorder le participe", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_participe_etre_avoir`] },
+      { id: `${prefix}_orth_chaine_gn_complexe`, label: "Tenir la chaine d'accord dans un groupe nominal complexe", notionId: "orthographe_accords", prerequis: [`${prefix}_gram_accords`] },
+      { id: `${prefix}_orth_participe_etre_avoir`, label: "Accorder le participe passé avec être et avec avoir", notionId: "orthographe_participe", prerequis: [`${prefix}_orth_chaine_gn_complexe`] },
+      { id: `${prefix}_orth_participe_appose`, label: "Accorder le participe passé mis en apposition", notionId: "orthographe_participe", prerequis: [`${prefix}_orth_participe_etre_avoir`] },
+      { id: `${prefix}_orth_sujet_verbe_complexe`, label: "Accorder le verbe dans les cas complexes", notionId: "orthographe_accords", prerequis: [`${prefix}_gram_accords`] },
+      { id: `${prefix}_orth_passif`, label: "Construire le passif et accorder le participe", notionId: "orthographe_accords", prerequis: [`${prefix}_orth_participe_etre_avoir`] },
 
       /* « Maîtriser la morphologie verbale écrite » — trois micros génériques
          portaient onze temps et onze verbes irréguliers nommés.
          ⚠️ DANS CE PROGRAMME, LE CONDITIONNEL EST UN MODE : la terminologie
          exigible dit « mode conditionnel présent, passé ». C'est l'inverse du
          programme suivi par la 5e, où il est un temps de l'indicatif. */
-      { id: `${prefix}_conj_modes_personnels`, label: "Distinguer les modes personnels et non personnels", notionId: "conjugaison", prerequis: [`${prefix}_conj_identifier`] },
-      { id: `${prefix}_conj_subjonctif`, label: "Former et employer le subjonctif présent", notionId: "conjugaison", prerequis: [`${prefix}_conj_modes_personnels`] },
-      { id: `${prefix}_conj_conditionnel`, label: "Former le conditionnel présent et le conditionnel passé", notionId: "conjugaison", prerequis: [`${prefix}_conj_modes_personnels`] },
-      { id: `${prefix}_conj_temps_composes`, label: "Construire les temps composés et écrire les participes passés", notionId: "conjugaison", prerequis: [`${prefix}_conj_modes_personnels`] },
-      { id: `${prefix}_conj_pronominaux`, label: "Accorder les verbes pronominaux", notionId: "conjugaison", prerequis: [`${prefix}_conj_temps_composes`, `${prefix}_orth_participe_etre_avoir`] },
-      { id: `${prefix}_conj_irreguliers`, label: "Conjuguer les onze verbes irréguliers du 3e groupe", notionId: "conjugaison", prerequis: [`${prefix}_conj_subjonctif`] },
-      { id: `${prefix}_conj_valeurs_aspect`, label: "Reconnaitre ce qu'exprime un temps dans le récit", notionId: "conjugaison", prerequis: [`${prefix}_conj_temps_composes`] },
+      { id: `${prefix}_conj_modes_personnels`, label: "Distinguer les modes personnels et non personnels", notionId: "conjugaison_formes", prerequis: [`${prefix}_conj_identifier`] },
+      { id: `${prefix}_conj_subjonctif`, label: "Former et employer le subjonctif présent", notionId: "conjugaison_temps", prerequis: [`${prefix}_conj_modes_personnels`] },
+      { id: `${prefix}_conj_conditionnel`, label: "Former le conditionnel présent et le conditionnel passé", notionId: "conjugaison_temps", prerequis: [`${prefix}_conj_modes_personnels`] },
+      { id: `${prefix}_conj_temps_composes`, label: "Construire les temps composés et écrire les participes passés", notionId: "conjugaison_temps", prerequis: [`${prefix}_conj_modes_personnels`] },
+      { id: `${prefix}_conj_pronominaux`, label: "Accorder les verbes pronominaux", notionId: "conjugaison_temps", prerequis: [`${prefix}_conj_temps_composes`, `${prefix}_orth_participe_etre_avoir`] },
+      { id: `${prefix}_conj_irreguliers`, label: "Conjuguer les onze verbes irréguliers du 3e groupe", notionId: "conjugaison_formes", prerequis: [`${prefix}_conj_subjonctif`] },
+      { id: `${prefix}_conj_valeurs_aspect`, label: "Reconnaitre ce qu'exprime un temps dans le récit", notionId: "conjugaison_valeurs", prerequis: [`${prefix}_conj_temps_composes`] },
 
       /* « Lire des textes non littéraires, des images et des documents
          composites (y compris numériques) » est une COMPÉTENCE TRAVAILLÉE
          entière du programme, au même rang que « élaborer une interprétation
          de textes littéraires ». Elle n'existait nulle part en 4e. */
-      { id: `${prefix}_lect_documents_types`, label: "Reconnaitre la nature d'un document et ce qu'elle implique", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_indices`] },
-      { id: `${prefix}_lect_sources_croiser`, label: "Identifier la source d'un document et croiser plusieurs documents", notionId: "lecture_comprehension", prerequis: [`${prefix}_lect_documents_types`] },
-      { id: `${prefix}_lect_image_fixe`, label: "Lire une image fixe : cadrage, plan, angle, lumière", notionId: "lecture_comprehension", prerequis: [`${prefix}_lect_documents_types`] },
-      { id: `${prefix}_lect_dessin_presse`, label: "Interpréter un dessin de presse ou une caricature", notionId: "lecture_comprehension", prerequis: [`${prefix}_lect_image_fixe`] },
+      { id: `${prefix}_lect_documents_types`, label: "Reconnaitre la nature d'un document et ce qu'elle implique", notionId: "lecture_documents", prerequis: [`${prefix}_comp_indices`] },
+      { id: `${prefix}_lect_sources_croiser`, label: "Identifier la source d'un document et croiser plusieurs documents", notionId: "lecture_documents", prerequis: [`${prefix}_lect_documents_types`] },
+      { id: `${prefix}_lect_image_fixe`, label: "Lire une image fixe : cadrage, plan, angle, lumière", notionId: "lecture_documents", prerequis: [`${prefix}_lect_documents_types`] },
+      { id: `${prefix}_lect_dessin_presse`, label: "Interpréter un dessin de presse ou une caricature", notionId: "lecture_documents", prerequis: [`${prefix}_lect_image_fixe`] },
 
       // « paroles rapportées : discours direct, indirect, INDIRECT LIBRE » —
       // la terminologie l'exige, et il n'était nulle part.
@@ -317,12 +415,12 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
 
       /* « Enrichir et structurer le lexique » — cinq micros génériques pour un
          objectif qui énumère sept attendus. On ouvre ce qui n'était nulle part. */
-      { id: `${prefix}_voc_derivation_categorie`, label: "Voir le changement de classe qu'opère la dérivation", notionId: "vocabulaire", prerequis: [`${prefix}_voc_formation`] },
-      { id: `${prefix}_voc_racines`, label: "Reconnaitre une racine latine ou grecque", notionId: "vocabulaire", prerequis: [`${prefix}_voc_formation`] },
-      { id: `${prefix}_voc_intensite_generalite`, label: "Classer des mots par degré d'intensité et de généralité", notionId: "vocabulaire", prerequis: [`${prefix}_voc_relations`] },
-      { id: `${prefix}_voc_denotation_connotation`, label: "Distinguer ce qu'un mot désigne de ce qu'il suggère", notionId: "vocabulaire", prerequis: [`${prefix}_voc_relations`] },
-      { id: `${prefix}_voc_homonymie_polysemie`, label: "Distinguer polysémie, homonymie, synonymie et antonymie", notionId: "vocabulaire", prerequis: [`${prefix}_voc_relations`] },
-      { id: `${prefix}_voc_construction_verbe`, label: "Voir comment la construction d'un verbe change son sens", notionId: "vocabulaire", prerequis: [`${prefix}_voc_contexte`] },
+      { id: `${prefix}_voc_derivation_categorie`, label: "Voir le changement de classe qu'opère la dérivation", notionId: "vocabulaire_formation", prerequis: [`${prefix}_voc_formation`] },
+      { id: `${prefix}_voc_racines`, label: "Reconnaitre une racine latine ou grecque", notionId: "vocabulaire_formation", prerequis: [`${prefix}_voc_formation`] },
+      { id: `${prefix}_voc_intensite_generalite`, label: "Classer des mots par degré d'intensité et de généralité", notionId: "vocabulaire_sens", prerequis: [`${prefix}_voc_relations`] },
+      { id: `${prefix}_voc_denotation_connotation`, label: "Distinguer ce qu'un mot désigne de ce qu'il suggère", notionId: "vocabulaire_sens", prerequis: [`${prefix}_voc_relations`] },
+      { id: `${prefix}_voc_homonymie_polysemie`, label: "Distinguer polysémie, homonymie, synonymie et antonymie", notionId: "vocabulaire_sens", prerequis: [`${prefix}_voc_relations`] },
+      { id: `${prefix}_voc_construction_verbe`, label: "Voir comment la construction d'un verbe change son sens", notionId: "vocabulaire_formation", prerequis: [`${prefix}_voc_contexte`] },
     );
   }
 
@@ -356,11 +454,11 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
       { id: `${prefix}_phrc_degre_dependance`, label: "Mesurer le degré de dépendance d'une proposition", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_analyse_complete`] },
       // « Utiliser le mode et le temps qui conviennent » / « exprimer un rapport
       //   logique » : la circonstancielle dit une cause, un but, une concession.
-      { id: `${prefix}_phrc_circonstancielles_logique`, label: "Reconnaitre le rapport logique qu'exprime une circonstancielle", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_degre_dependance`] },
-      { id: `${prefix}_phrc_relative_determinative`, label: "Distinguer la relative déterminative de la relative explicative", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_analyse_complete`] },
+      { id: `${prefix}_phrc_circonstancielles_logique`, label: "Reconnaitre le rapport logique qu'exprime une circonstancielle", notionId: "phrase_subordonnees", prerequis: [`${prefix}_phrc_degre_dependance`] },
+      { id: `${prefix}_phrc_relative_determinative`, label: "Distinguer la relative déterminative de la relative explicative", notionId: "phrase_subordonnees", prerequis: [`${prefix}_phrc_analyse_complete`] },
       // « L'expression de la condition et de l'hypothèse » — nommée par le
       //   programme, et c'est là que le mode conditionnel prend son sens.
-      { id: `${prefix}_phrc_condition_hypothese`, label: "Analyser l'expression de la condition et de l'hypothèse", notionId: "phrase_complexe", prerequis: [`${prefix}_phrc_circonstancielles_logique`] },
+      { id: `${prefix}_phrc_condition_hypothese`, label: "Analyser l'expression de la condition et de l'hypothèse", notionId: "phrase_subordonnees", prerequis: [`${prefix}_phrc_circonstancielles_logique`] },
 
       /* « Connaître le fonctionnement des chaînes d'accord » — la 3e n'avait
          aucune notion d'orthographe grammaticale non plus. Les cas retenus sont
@@ -368,34 +466,34 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
          d'invariabilité, les pronominaux réciproques, les homophones.
          ⛔ Aucun cas où l'usage hésite : « un tas de feuilles couvrait /
          couvraient » se dit des deux façons, un QCM ne peut pas le trancher. */
-      { id: `${prefix}_orth_participe_infinitif`, label: "Accorder le participe passé suivi d'un infinitif", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_gram_accords`] },
-      { id: `${prefix}_orth_participe_invariable`, label: "Reconnaitre les cas où le participe passé reste invariable", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_participe_infinitif`] },
-      { id: `${prefix}_orth_pronominaux_reciproques`, label: "Accorder le participe des pronominaux réfléchis et réciproques", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_participe_invariable`] },
-      { id: `${prefix}_orth_accord_distance`, label: "Tenir l'accord quand le sujet est loin ou repris par un pronom", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_gram_accords`] },
-      { id: `${prefix}_orth_homophones`, label: "Trancher entre les homophones grammaticaux", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_gram_accords`] },
-      { id: `${prefix}_orth_passif_agent`, label: "Construire le passif et mesurer l'effacement de l'agent", notionId: "orthographe_grammaticale", prerequis: [`${prefix}_orth_accord_distance`] },
+      { id: `${prefix}_orth_participe_infinitif`, label: "Accorder le participe passé suivi d'un infinitif", notionId: "orthographe_participe", prerequis: [`${prefix}_gram_accords`] },
+      { id: `${prefix}_orth_participe_invariable`, label: "Reconnaitre les cas où le participe passé reste invariable", notionId: "orthographe_participe", prerequis: [`${prefix}_orth_participe_infinitif`] },
+      { id: `${prefix}_orth_pronominaux_reciproques`, label: "Accorder le participe des pronominaux réfléchis et réciproques", notionId: "orthographe_participe", prerequis: [`${prefix}_orth_participe_invariable`] },
+      { id: `${prefix}_orth_accord_distance`, label: "Tenir l'accord quand le sujet est loin ou repris par un pronom", notionId: "orthographe_accords", prerequis: [`${prefix}_gram_accords`] },
+      { id: `${prefix}_orth_homophones`, label: "Trancher entre les homophones grammaticaux", notionId: "orthographe_accords", prerequis: [`${prefix}_gram_accords`] },
+      { id: `${prefix}_orth_passif_agent`, label: "Construire le passif et mesurer l'effacement de l'agent", notionId: "orthographe_accords", prerequis: [`${prefix}_orth_accord_distance`] },
 
       /* « Maîtriser la morphologie verbale écrite » et « mettre en évidence le
          lien entre le temps employé et le sens » — trois micros génériques
          portaient tout cela. En 3e : les temps du subjonctif que le récit
          littéraire emploie, la concordance, les valeurs modales, et le système
          des temps tenu à l'échelle d'un texte entier. */
-      { id: `${prefix}_conj_subjonctif_imparfait_pqp`, label: "Reconnaitre l'imparfait et le plus-que-parfait du subjonctif", notionId: "conjugaison", prerequis: [`${prefix}_conj_composer`] },
-      { id: `${prefix}_conj_concordance`, label: "Respecter la concordance des temps dans la subordonnée", notionId: "conjugaison", prerequis: [`${prefix}_conj_subjonctif_imparfait_pqp`] },
-      { id: `${prefix}_conj_valeurs_modales`, label: "Reconnaitre la valeur modale d'une forme verbale", notionId: "conjugaison", prerequis: [`${prefix}_conj_employer`] },
-      { id: `${prefix}_conj_systeme_temps_texte`, label: "Repérer le système des temps d'un texte", notionId: "conjugaison", prerequis: [`${prefix}_conj_valeurs_modales`] },
-      { id: `${prefix}_conj_participe_gerondif`, label: "Distinguer participe présent, adjectif verbal et gérondif", notionId: "conjugaison", prerequis: [`${prefix}_conj_identifier`] },
-      { id: `${prefix}_conj_irreguliers_temps_rares`, label: "Conjuguer les verbes irréguliers aux temps les moins fréquents", notionId: "conjugaison", prerequis: [`${prefix}_conj_subjonctif_imparfait_pqp`] },
+      { id: `${prefix}_conj_subjonctif_imparfait_pqp`, label: "Reconnaitre l'imparfait et le plus-que-parfait du subjonctif", notionId: "conjugaison_temps", prerequis: [`${prefix}_conj_composer`] },
+      { id: `${prefix}_conj_concordance`, label: "Respecter la concordance des temps dans la subordonnée", notionId: "conjugaison_temps", prerequis: [`${prefix}_conj_subjonctif_imparfait_pqp`] },
+      { id: `${prefix}_conj_valeurs_modales`, label: "Reconnaitre la valeur modale d'une forme verbale", notionId: "conjugaison_valeurs", prerequis: [`${prefix}_conj_employer`] },
+      { id: `${prefix}_conj_systeme_temps_texte`, label: "Repérer le système des temps d'un texte", notionId: "conjugaison_valeurs", prerequis: [`${prefix}_conj_valeurs_modales`] },
+      { id: `${prefix}_conj_participe_gerondif`, label: "Distinguer participe présent, adjectif verbal et gérondif", notionId: "conjugaison_formes", prerequis: [`${prefix}_conj_identifier`] },
+      { id: `${prefix}_conj_irreguliers_temps_rares`, label: "Conjuguer les verbes irréguliers aux temps les moins fréquents", notionId: "conjugaison_formes", prerequis: [`${prefix}_conj_subjonctif_imparfait_pqp`] },
 
       /* « Lire des textes non littéraires, des images et des documents
          composites (y compris numériques) » : compétence travaillée ENTIÈRE du
          programme, absente en 3e comme elle l'était en 4e. En 3e, le texte
          insiste sur l'ARGUMENTATION — dans la presse et dans l'image. */
-      { id: `${prefix}_lect_these_arguments`, label: "Repérer la thèse, les arguments et les exemples", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_indices`] },
-      { id: `${prefix}_lect_procedes_argumentatifs`, label: "Reconnaitre un procédé qui cherche à convaincre ou à persuader", notionId: "lecture_comprehension", prerequis: [`${prefix}_lect_these_arguments`] },
-      { id: `${prefix}_lect_titraille`, label: "Lire la titraille d'un article et ce qu'elle oriente", notionId: "lecture_comprehension", prerequis: [`${prefix}_comp_indices`] },
-      { id: `${prefix}_lect_image_argument`, label: "Voir comment une image argumente", notionId: "lecture_comprehension", prerequis: [`${prefix}_lect_procedes_argumentatifs`] },
-      { id: `${prefix}_lect_fiabilite_numerique`, label: "Évaluer la fiabilité d'une information numérique", notionId: "lecture_comprehension", prerequis: [`${prefix}_lect_titraille`] },
+      { id: `${prefix}_lect_these_arguments`, label: "Repérer la thèse, les arguments et les exemples", notionId: "lecture_documents", prerequis: [`${prefix}_comp_indices`] },
+      { id: `${prefix}_lect_procedes_argumentatifs`, label: "Reconnaitre un procédé qui cherche à convaincre ou à persuader", notionId: "lecture_documents", prerequis: [`${prefix}_lect_these_arguments`] },
+      { id: `${prefix}_lect_titraille`, label: "Lire la titraille d'un article et ce qu'elle oriente", notionId: "lecture_documents", prerequis: [`${prefix}_comp_indices`] },
+      { id: `${prefix}_lect_image_argument`, label: "Voir comment une image argumente", notionId: "lecture_documents", prerequis: [`${prefix}_lect_procedes_argumentatifs`] },
+      { id: `${prefix}_lect_fiabilite_numerique`, label: "Évaluer la fiabilité d'une information numérique", notionId: "lecture_documents", prerequis: [`${prefix}_lect_titraille`] },
 
       // « Dénoncer les travers de la société » demande l'ironie, et la
       //   terminologie du programme la range dans les procédés du discours.
@@ -407,12 +505,12 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
       // ⛔ Aucune de ces six ne reprend celles de la 4e — dérivation, racines,
       //    intensité, connotation, polysémie, construction du verbe. Ce sont
       //    celles dont l'argumentation de 3e a besoin.
-      { id: `${prefix}_voc_modalisateurs`, label: "Repérer les mots qui disent le degré de certitude", notionId: "vocabulaire", prerequis: [`${prefix}_voc_relations`] },
-      { id: `${prefix}_voc_notions_abstraites`, label: "Distinguer des mots proches qui nomment des idées", notionId: "vocabulaire", prerequis: [`${prefix}_voc_modalisateurs`] },
-      { id: `${prefix}_voc_nominalisation`, label: "Nominaliser pour passer du fait à l'idée", notionId: "vocabulaire", prerequis: [`${prefix}_voc_formation`] },
-      { id: `${prefix}_voc_sens_figure`, label: "Comprendre l'emploi figuré d'un mot", notionId: "vocabulaire", prerequis: [`${prefix}_voc_contexte`] },
-      { id: `${prefix}_voc_connecteurs`, label: "Reconnaitre ce qu'un connecteur fait dans un raisonnement", notionId: "vocabulaire", prerequis: [`${prefix}_voc_relations`] },
-      { id: `${prefix}_voc_histoire_mots`, label: "Suivre l'histoire d'un mot : emprunts et évolutions", notionId: "vocabulaire", prerequis: [`${prefix}_voc_formation`] },
+      { id: `${prefix}_voc_modalisateurs`, label: "Repérer les mots qui disent le degré de certitude", notionId: "vocabulaire_sens", prerequis: [`${prefix}_voc_relations`] },
+      { id: `${prefix}_voc_notions_abstraites`, label: "Distinguer des mots proches qui nomment des idées", notionId: "vocabulaire_sens", prerequis: [`${prefix}_voc_modalisateurs`] },
+      { id: `${prefix}_voc_nominalisation`, label: "Nominaliser pour passer du fait à l'idée", notionId: "vocabulaire_formation", prerequis: [`${prefix}_voc_formation`] },
+      { id: `${prefix}_voc_sens_figure`, label: "Comprendre l'emploi figuré d'un mot", notionId: "vocabulaire_sens", prerequis: [`${prefix}_voc_contexte`] },
+      { id: `${prefix}_voc_connecteurs`, label: "Reconnaitre ce qu'un connecteur fait dans un raisonnement", notionId: "analyse_discours", prerequis: [`${prefix}_voc_relations`] },
+      { id: `${prefix}_voc_histoire_mots`, label: "Suivre l'histoire d'un mot : emprunts et évolutions", notionId: "vocabulaire_formation", prerequis: [`${prefix}_voc_formation`] },
 
       /* ── LES QUATRE QUESTIONNEMENTS DE 3e, PLUS LE COMPLÉMENTAIRE ───────────
          Le programme les nomme un par un. Contrairement à ceux de la 4e, ils
@@ -420,11 +518,11 @@ export function buildCollegeFrancaisMicroSkills(level: CollegeFrancaisLevel): Mi
          pas la rentrée prochaine : ça vaut le coup de les écrire.
          ⛔ On interroge les NOTIONS, jamais une œuvre : les livres sont choisis
          par le professeur. */
-      { id: `${prefix}_cult_se_raconter`, label: "Se raconter, se représenter", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
-      { id: `${prefix}_cult_denoncer`, label: "Dénoncer les travers de la société", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
-      { id: `${prefix}_cult_visions_poetiques`, label: "Visions poétiques du monde", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_genres`] },
-      { id: `${prefix}_cult_agir_cite`, label: "Agir dans la cité : individu et pouvoir", notionId: "culture_litteraire", prerequis: [`${prefix}_cult_denoncer`] },
-      { id: `${prefix}_cult_progres_reves`, label: "Progrès et rêves scientifiques", notionId: "culture_litteraire", prerequis: [`${prefix}_culture_reseau`] },
+      { id: `${prefix}_cult_se_raconter`, label: "Se raconter, se représenter", notionId: "culture_questionnements", prerequis: [`${prefix}_culture_genres`] },
+      { id: `${prefix}_cult_denoncer`, label: "Dénoncer les travers de la société", notionId: "culture_questionnements", prerequis: [`${prefix}_culture_genres`] },
+      { id: `${prefix}_cult_visions_poetiques`, label: "Visions poétiques du monde", notionId: "culture_questionnements", prerequis: [`${prefix}_culture_genres`] },
+      { id: `${prefix}_cult_agir_cite`, label: "Agir dans la cité : individu et pouvoir", notionId: "culture_questionnements", prerequis: [`${prefix}_cult_denoncer`] },
+      { id: `${prefix}_cult_progres_reves`, label: "Progrès et rêves scientifiques", notionId: "culture_questionnements", prerequis: [`${prefix}_culture_reseau`] },
     );
   }
 

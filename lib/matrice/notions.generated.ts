@@ -13,7 +13,7 @@
 // liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
 // par où l'année peut commencer.
 //
-// 767 notions, 40 paquets.
+// 783 notions, 40 paquets.
 
 export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
@@ -2844,8 +2844,15 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
     "3e": [
       {
         "id": "lecture_comprehension",
-        "label": "Comprendre, interpréter et apprécier",
+        "label": "Comprendre, interpréter et apprécier un texte",
         "prerequis": []
+      },
+      {
+        "id": "lecture_documents",
+        "label": "Lire des images, la presse et des documents composites",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
       },
       {
         "id": "lecture_voix_haute",
@@ -2856,9 +2863,16 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "culture_litteraire",
-        "label": "Culture littéraire — Engagement humaniste et émancipation",
+        "label": "Situer une œuvre et garder trace de ses lectures",
         "prerequis": [
           "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "culture_questionnements",
+        "label": "Les questionnements de l'année — Engagement humaniste et émancipation",
+        "prerequis": [
+          "culture_litteraire"
         ]
       },
       {
@@ -2872,10 +2886,24 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         "prerequis": []
       },
       {
-        "id": "vocabulaire",
-        "label": "Vocabulaire et orthographe lexicale",
+        "id": "vocabulaire_sens",
+        "label": "Les relations de sens entre les mots",
         "prerequis": [
           "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "vocabulaire_formation",
+        "label": "La formation des mots et leur histoire",
+        "prerequis": [
+          "vocabulaire_sens"
+        ]
+      },
+      {
+        "id": "vocabulaire_orthographe",
+        "label": "Réemployer et écrire avec justesse",
+        "prerequis": [
+          "vocabulaire_formation"
         ]
       },
       {
@@ -2886,6 +2914,34 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "phrase_complexe",
+        "label": "Repérer les propositions et ce qui les relie",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "phrase_subordonnees",
+        "label": "Analyser les propositions subordonnées",
+        "prerequis": [
+          "phrase_complexe"
+        ]
+      },
+      {
+        "id": "orthographe_accords",
+        "label": "Les chaînes d'accord et l'accord sujet-verbe",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "orthographe_participe",
+        "label": "L'accord du participe passé",
+        "prerequis": [
+          "orthographe_accords"
+        ]
+      },
+      {
         "id": "analyse_discours",
         "label": "Discours, registres et paroles rapportées",
         "prerequis": [
@@ -2893,32 +2949,39 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
-        "id": "phrase_complexe",
-        "label": "Fonctionnement de la phrase complexe",
+        "id": "conjugaison_formes",
+        "label": "Lire et former un verbe conjugué",
         "prerequis": [
           "grammaire_phrase"
         ]
       },
       {
-        "id": "orthographe_grammaticale",
-        "label": "Accorder les mots dans la phrase et expliquer ses choix",
+        "id": "conjugaison_temps",
+        "label": "Les temps et les modes à construire",
         "prerequis": [
-          "grammaire_phrase"
+          "conjugaison_formes"
         ]
       },
       {
-        "id": "conjugaison",
-        "label": "Formes verbales, temps et modes",
+        "id": "conjugaison_valeurs",
+        "label": "Ce qu'un temps exprime dans un texte",
         "prerequis": [
-          "grammaire_phrase"
+          "conjugaison_temps"
         ]
       }
     ],
     "4e": [
       {
         "id": "lecture_comprehension",
-        "label": "Comprendre, interpréter et apprécier",
+        "label": "Comprendre, interpréter et apprécier un texte",
         "prerequis": []
+      },
+      {
+        "id": "lecture_documents",
+        "label": "Lire des images, la presse et des documents composites",
+        "prerequis": [
+          "lecture_comprehension"
+        ]
       },
       {
         "id": "lecture_voix_haute",
@@ -2929,9 +2992,16 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "culture_litteraire",
-        "label": "Culture littéraire — Jugement, valeurs et vérité",
+        "label": "Situer une œuvre et garder trace de ses lectures",
         "prerequis": [
           "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "culture_questionnements",
+        "label": "Les questionnements de l'année — Jugement, valeurs et vérité",
+        "prerequis": [
+          "culture_litteraire"
         ]
       },
       {
@@ -2945,10 +3015,24 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         "prerequis": []
       },
       {
-        "id": "vocabulaire",
-        "label": "Vocabulaire et orthographe lexicale",
+        "id": "vocabulaire_sens",
+        "label": "Les relations de sens entre les mots",
         "prerequis": [
           "lecture_comprehension"
+        ]
+      },
+      {
+        "id": "vocabulaire_formation",
+        "label": "La formation des mots et leur histoire",
+        "prerequis": [
+          "vocabulaire_sens"
+        ]
+      },
+      {
+        "id": "vocabulaire_orthographe",
+        "label": "Réemployer et écrire avec justesse",
+        "prerequis": [
+          "vocabulaire_formation"
         ]
       },
       {
@@ -2959,6 +3043,34 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
+        "id": "phrase_complexe",
+        "label": "Repérer les propositions et ce qui les relie",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "phrase_subordonnees",
+        "label": "Analyser les propositions subordonnées",
+        "prerequis": [
+          "phrase_complexe"
+        ]
+      },
+      {
+        "id": "orthographe_accords",
+        "label": "Les chaînes d'accord et l'accord sujet-verbe",
+        "prerequis": [
+          "grammaire_phrase"
+        ]
+      },
+      {
+        "id": "orthographe_participe",
+        "label": "L'accord du participe passé",
+        "prerequis": [
+          "orthographe_accords"
+        ]
+      },
+      {
         "id": "analyse_discours",
         "label": "Discours, registres et paroles rapportées",
         "prerequis": [
@@ -2966,24 +3078,24 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
-        "id": "phrase_complexe",
-        "label": "Fonctionnement de la phrase complexe",
+        "id": "conjugaison_formes",
+        "label": "Lire et former un verbe conjugué",
         "prerequis": [
           "grammaire_phrase"
         ]
       },
       {
-        "id": "orthographe_grammaticale",
-        "label": "Accorder les mots dans la phrase et expliquer ses choix",
+        "id": "conjugaison_temps",
+        "label": "Les temps et les modes à construire",
         "prerequis": [
-          "grammaire_phrase"
+          "conjugaison_formes"
         ]
       },
       {
-        "id": "conjugaison",
-        "label": "Formes verbales, temps et modes",
+        "id": "conjugaison_valeurs",
+        "label": "Ce qu'un temps exprime dans un texte",
         "prerequis": [
-          "grammaire_phrase"
+          "conjugaison_temps"
         ]
       }
     ],

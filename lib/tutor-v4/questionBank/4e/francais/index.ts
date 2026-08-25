@@ -23,10 +23,32 @@ import { vocabulaire4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/vocab
 // seule classe du collège sans aucune entrée littéraire nommée.
 import { cultureLitteraire4eBank } from "@/lib/tutor-v4/questionBank/4e/francais/culture-litteraire.bank";
 
+/**
+ * ⭐ LA NOTION D'UN ITEM SE DÉDUIT DE SA MICRO (24/08/2026).
+ *
+ * Le 24/08, les onze notions du cycle 4 ont été découpées en dix-neuf (règle de
+ * Frédéric : cinq micros par notion au maximum ; `vocabulaire` en portait onze).
+ * Or le `notionId` est RECOPIÉ À LA MAIN dans les items des banques ci-dessus.
+ * Les mettre à jour un par un, c'était garantir qu'un oubli reste : un item dont
+ * la notion n'existe plus n'échoue pas, il disparaît du coach, en silence.
+ *
+ * On le déduit donc du `microId`, qui est la vraie clé et qui n'a pas bougé.
+ * `microSkills` reste la source de vérité unique, et il n'y a plus qu'un seul
+ * endroit à corriger au prochain découpage.
+ */
+const NOTION_PAR_MICRO = new Map(microSkills.map((micro) => [micro.id, micro.notionId]));
+
+function recalerNotions(items: TutorBankItemV4[]): TutorBankItemV4[] {
+  return items.map((item) => {
+    const notionId = NOTION_PAR_MICRO.get(item.microId);
+    return notionId && notionId !== item.notionId ? { ...item, notionId } : item;
+  });
+}
+
 // Banque du coach = gabarits générés (variété) + couche "fixed" imprimable
 // (≥5 QCM fixes par notion). La couche "fixed" enrichit le coach ET sert de
 // source aux tests du guide de survie (testDeSurvie ne garde que les "fixed").
-export const francais4eQuestionBank: TutorBankItemV4[] = [
+export const francais4eQuestionBank: TutorBankItemV4[] = recalerNotions([
   ...buildCycle4FrancaisBank("4e", microSkills),
   ...francais4eFixedBank,
   ...complementsEtudeLangue4eBank,
@@ -36,7 +58,7 @@ export const francais4eQuestionBank: TutorBankItemV4[] = [
   ...documentsComposites4eBank,
   ...vocabulaire4eBank,
   ...cultureLitteraire4eBank,
-];
+]);
 
 export function getFrancais4eQuestionBank(args?: {
   notionId?: string | null;
