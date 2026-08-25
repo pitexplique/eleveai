@@ -365,11 +365,12 @@ export const fichePythagore4e: FicheCoursData = {
     {
       titre: "Rédiger",
       micros: ["pythagore_rediger"],
-      // ⛔ PAS DE DESSIN ICI, ET C'EST VOULU. Une rédaction est du TEXTE en trois
-      // lignes ; le seul canvas qui empile des lignes est `scratch`, qui dessine
-      // des blocs de programmation — sur une fiche de géométrie, il ferait croire
-      // à un algorithme. On écrit donc les trois lignes exactes, qui sont
-      // elles-mêmes le modèle à recopier.
+      // ⛔ LE SEUL BLOC SANS DESSIN DE LA FICHE, et c'est un arbitrage de Frédéric
+      // (25/08) : « tu peux avoir un bloc sans schéma, surtout rédiger ». Un
+      // tableau a été essayé ici, puis retiré — il ne faisait que redire les trois
+      // lignes du texte. Un dessin qui répète n'apprend rien.
+      // ⭐ La règle générale ne bouge pas pour autant : « les élèves ont besoin de
+      // dessins ». Onze visuels sur les douze blocs de cette fiche.
       texte:
         "Trois lignes, toujours les mêmes. 1) « Dans le triangle ABC rectangle en A… » — on annonce l'angle droit. 2) « …d'après le théorème de Pythagore, BC² = AB² + AC² » — on écrit l'égalité avant de calculer. 3) On calcule, puis on conclut par une phrase avec l'unité.",
     },
