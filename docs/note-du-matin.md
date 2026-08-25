@@ -173,6 +173,40 @@ les redirections 301 — sinon on perd l'indexation acquise.
 
 ---
 
+## ⏳ EN COURS — les micro-compétences entrent dans la donnée (25/08/2026)
+
+**15 fiches de 6ᵉ maths restent à annoter.** Faites : angles, aires,
+algorithmique. Le contrôle est `npm run verifier:micros` (ou
+`node scripts/verifier-micros.mjs maths 6e`).
+
+**La méthode, fiche par fiche :**
+
+1. lister les micros de la notion — le rapport se réécrit en vingt lignes, il lit
+   `lib/tutor-v4/knowledge/maths/6e/microSkills.ts` et filtre sur le `notionId`
+   (⚠️ la route écrit `angle-mesure`, la banque `angle_mesure`) ;
+2. poser `micros: ["…"]` sur chaque bloc qui enseigne vraiment cette micro ;
+3. relancer le contrôle : il veut **toutes** les micros de la notion couvertes.
+
+⭐ **NE PAS TOUT ANNOTER.** Quand la banque n'a pas de micro pour ce qu'un bloc
+enseigne — la conversion d'unités d'aire, le comptage de carreaux — le bloc reste
+**sans** micro. Coller la plus proche produit exactement ce que le contrôle est
+censé empêcher : une annotation qui a l'air juste. Un bloc sans micro se lit ; un
+bloc mal étiqueté trompe.
+
+⚠️ **Deux pièges d'écriture rencontrés :**
+
+- les blocs de méthode sont parfois **sur une seule ligne**
+  (`{ titre: "Observer", texte: "…" },`) et parfois sur plusieurs. Un script
+  d'insertion qui ne prévoit que la forme longue échoue — sans rien écrire, ce
+  qui est le bon comportement, mais il faut traiter les deux ;
+- les **exercices n'ont pas de `titre`** : on les repère par le début de leur
+  `question`.
+
+⛔ **Et le français n'est pas de notre ressort** : l'autre session l'annote au fil
+de son générateur, et en a déjà deux. Ne pas y toucher.
+
+---
+
 ## Ce qui vient après
 
 **La 4ᵉ**, et les analytics Vercel du 24/08 le disent :
