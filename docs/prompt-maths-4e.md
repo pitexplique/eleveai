@@ -7,8 +7,24 @@
 Tu travailles sur eleveai (C:\Users\FRED\Documents\eleveai).
 Deux phases, dans cet ordre. NE PAS commencer par la seconde.
 
-════ L'OBJECTIF DE FRÉDÉRIC, ET SON ARITHMÉTIQUE ════════════════════
-« Finir le collège en maths et en français dans la semaine. »
+════ L'OBJECTIF, ET IL A CHANGÉ LE 25/08 AU SOIR ════════════════════
+⭐ FRÉDÉRIC A TRANCHÉ : « le principal est la qualité, je ne suis pas
+pressé. » Il avait d'abord dit « finir le collège dans la semaine » ; il
+y a renoncé le soir même, en voyant l'arithmétique ci-dessous.
+
+IL N'Y A DONC AUCUNE ÉCHÉANCE. Une fiche finie et vérifiée vaut mieux que
+trois commencées. Ne pas accélérer, ne pas grouper, ne pas sauter la
+mesure — et le dire s'il redemande un calendrier.
+
+Le contexte qui l'a décidé : le site est passé à 400 visiteurs par jour
+(24-25/08), peut-être 1000 sous dix jours. Mille visiteurs par jour sur
+des fiches inachevées, c'est pire que quatre cents sur des fiches finies :
+le trafic amplifie ce qui existe, il ne le répare pas.
+⚠️ Réserve de mesure : une part de cette croissance est SAISONNIÈRE — on
+est à six jours de la rentrée. Le chiffre qui comptera est celui de
+mi-septembre, quand le pic sera retombé.
+
+L'ARITHMÉTIQUE, GARDÉE PARCE QU'ELLE EXPLIQUE LA DÉCISION :
 
 ⚠️ CE QUE DIT LA MESURE, ET IL FAUT LE DIRE À FRÉDÉRIC :
    maths 4e : 0 fiche · 136 micros · 19 notions
@@ -18,7 +34,8 @@ Deux phases, dans cet ordre. NE PAS commencer par la seconde.
 La 6e a coûté UNE JOURNÉE pour 16 fiches QUI EXISTAIENT DÉJÀ — il ne
 s'agissait que d'ajouter 105 dessins. Écrire une fiche depuis rien, c'est
 le contenu, puis les dessins, puis la mesure, puis le PDF. 41 fiches ne
-tiennent pas dans une semaine à ce standard.
+tiennent pas dans une semaine à ce standard — c'est ce constat qui a fait
+abandonner l'échéance, et non l'inverse.
 
 ⭐ PRIORITÉ : LA 4e D'ABORD. Son cahier de vacances est la page la plus
 vue et la plus téléchargée du site (507 visiteurs le 24/08, contre 177
