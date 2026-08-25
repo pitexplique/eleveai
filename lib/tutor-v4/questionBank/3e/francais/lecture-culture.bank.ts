@@ -84,6 +84,39 @@ Conclusion : ${conclusion}`;
 type Cas = { readonly gauche: string; readonly droite: string };
 
 /* =============================================================================
+   0. CE QUE LE TEXTE VEUT DE SON LECTEUR       → 3e_comp_sens_global
+   ---------------------------------------------------------------------------
+   « Dégager le sens global d'un texte. » Cette micro n'était pas sous le seuil,
+   mais elle ne servait que ONZE énoncés générés — ajoutée ici le 25/08 quand
+   Frédéric a redit la règle : « il faut des générateurs, un élève doit pouvoir
+   rester sans les mêmes questions pendant des minutes. »
+   ⛔ La 4e demande ce que le texte FAIT — raconter, décrire, faire un portrait.
+   La 3e demande ce qu'il VEUT DE SON LECTEUR, et c'est autre chose : deux textes
+   peuvent raconter la même histoire, l'un pour faire savoir, l'autre pour faire
+   admettre. C'est la question que le brevet pose sous le nom de « visée ».
+   ========================================================================== */
+
+const VISEE: readonly Cas[] = [
+  { gauche: "Le texte pose une idée, donne deux raisons, puis répond à une objection.", droite: "il veut faire admettre une idée : le lecteur doit changer d'avis" },
+  { gauche: "L'auteur réclame une loi et explique pourquoi elle manque au pays.", droite: "il veut faire admettre une idée : le lecteur doit changer d'avis" },
+  { gauche: "Chaque paragraphe démonte une objection avant de revenir à la thèse.", droite: "il veut faire admettre une idée : le lecteur doit changer d'avis" },
+  { gauche: "Le récit montre un enfant à l'usine, sans un mot de commentaire.", droite: "il veut faire voir : le lecteur regarde, et juge par lui-même" },
+  { gauche: "Le texte décrit une journée ordinaire dans un quartier oublié.", droite: "il veut faire voir : le lecteur regarde, et juge par lui-même" },
+  { gauche: "Une scène se déroule sous nos yeux, et personne ne la juge pour nous.", droite: "il veut faire voir : le lecteur regarde, et juge par lui-même" },
+  { gauche: "Le texte donne des dates, des chiffres et le nom de ses sources.", droite: "il veut faire savoir : le lecteur apprend un fait qu'il ignorait" },
+  { gauche: "L'article explique comment la loi a été votée, étape par étape.", droite: "il veut faire savoir : le lecteur apprend un fait qu'il ignorait" },
+  { gauche: "Le passage expose le fonctionnement d'une machine, sans rien défendre.", droite: "il veut faire savoir : le lecteur apprend un fait qu'il ignorait" },
+  { gauche: "Le texte accumule les images du froid, de la faim et de l'attente.", droite: "il veut faire sentir : le lecteur éprouve avant de comprendre" },
+  { gauche: "Le poème répète le même vers jusqu'à ce que la douleur s'entende.", droite: "il veut faire sentir : le lecteur éprouve avant de comprendre" },
+  { gauche: "Rien n'est expliqué : on entend un souffle, un pas, puis le silence.", droite: "il veut faire sentir : le lecteur éprouve avant de comprendre" },
+  { gauche: "Le narrateur dit « je », revient sur un souvenir et se demande pourquoi.", droite: "il veut se dire : celui qui écrit se cherche autant qu'il raconte" },
+  { gauche: "L'auteur relit sa propre enfance et ne sait pas quoi en penser.", droite: "il veut se dire : celui qui écrit se cherche autant qu'il raconte" },
+  { gauche: "Le texte hésite entre deux versions d'un même souvenir d'enfance.", droite: "il veut se dire : celui qui écrit se cherche autant qu'il raconte" },
+];
+
+const TOUTES_VISEES: readonly string[] = [...new Set(VISEE.map((c) => c.droite))];
+
+/* =============================================================================
    1. CE QUE VAUT UN RELEVÉ                     → 3e_comp_indices
    ---------------------------------------------------------------------------
    « Relever des indices précis dans le texte. » En 4e, on demandait de quelle
@@ -441,6 +474,19 @@ function gabarit(
 }
 
 export const lectureCulture3eBank: TutorBankItemV4[] = [
+  gabarit(
+    "3e_comp_sens_global_tpl_1",
+    "3e_comp_sens_global",
+    "lecture_comprehension",
+    VISEE,
+    TOUTES_VISEES,
+    "Que ce texte veut-il de son lecteur ?",
+    3,
+    "Ne cherche pas de quoi il parle, ni même ce qu'il fait : cherche ce qu'il attend de toi.",
+    "La visée d'un texte, c'est ce qu'il attend du lecteur. Faire admettre demande un changement d'avis ; faire voir laisse juger ; faire savoir instruit ; faire sentir touche avant d'expliquer ; se dire cherche celui qui écrit. Deux textes peuvent raconter la même histoire pour deux visées différentes.",
+    "Demande-toi ce qui aurait changé chez toi si le texte avait réussi. Un avis retourné, une image restée, un fait appris, une émotion, une personne entrevue : la réponse nomme la visée.",
+    ["3e", "lecture", "visee", "brevet", "template"],
+  ),
   gabarit(
     "3e_comp_indices_tpl_1",
     "3e_comp_indices",

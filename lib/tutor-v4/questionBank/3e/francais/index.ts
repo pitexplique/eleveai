@@ -35,6 +35,16 @@ import { cultureLitteraire3eBank } from "@/lib/tutor-v4/questionBank/3e/francais
 // argumentation, thèse et arguments, ironie, modalisateurs, concordance.
 import { lectureCulture3eBank } from "@/lib/tutor-v4/questionBank/3e/francais/lecture-culture.bank";
 import { ecritureOral3eBank } from "@/lib/tutor-v4/questionBank/3e/francais/ecriture-oral.bank";
+// ⛔⛔ QUINZE MICROS NE SE RENOUVELAIENT PAS, ET LE VÉRIFICATEUR NE LE VOYAIT
+// PAS (25/08/2026). Frédéric : « il faut des générateurs, un élève doit pouvoir
+// rester sans les mêmes questions pendant des minutes. » `verifier-variete.mjs`
+// ADDITIONNE les énoncés fixes et générés : ces quinze micros passaient le
+// seuil avec 13 à 15 énoncés, en n'ayant que 5 à 9 énoncés GÉNÉRÉS et 7 à 8
+// questions figées. Un `fixed` compte pour une question et puis plus rien : la
+// couche figée masquait le vide au lieu de le combler.
+// Les deux banques ci-dessous donnent à chacune un gabarit de quinze cas.
+import { socleGrammaireConjugaison3eBank } from "@/lib/tutor-v4/questionBank/3e/francais/socle-grammaire-conjugaison.bank";
+import { socleLexiqueDiscours3eBank } from "@/lib/tutor-v4/questionBank/3e/francais/socle-lexique-discours.bank";
 
 /**
  * ⭐ LA NOTION D'UN ITEM SE DÉDUIT DE SA MICRO (24/08/2026).
@@ -73,6 +83,8 @@ export const francais3eQuestionBank: TutorBankItemV4[] = recalerNotions([
   ...cultureLitteraire3eBank,
   ...lectureCulture3eBank,
   ...ecritureOral3eBank,
+  ...socleGrammaireConjugaison3eBank,
+  ...socleLexiqueDiscours3eBank,
 ]);
 
 export function getFrancais3eQuestionBank(args?: {
