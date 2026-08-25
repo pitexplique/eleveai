@@ -270,6 +270,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Calculer avec les fractions",
     resume: "Additionner, soustraire, multiplier, et prendre une fraction d'une quantité.",
   },
+  "maths/4e/trigo-cosinus": {
+    titre: "Le cosinus d'un angle aigu",
+    resume: "Côté adjacent et hypoténuse, la définition du cosinus, calculer une longueur puis un angle.",
+  },
   "maths/4e/thales-theoreme": {
     titre: "Le théorème de Thalès",
     resume: "Les deux configurations, l'égalité des rapports, le produit en croix et la réciproque.",

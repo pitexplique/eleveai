@@ -27,6 +27,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "construire-un-programme-5e-cours-exercices-corriges.pdf",
   "contenances-cm2-cours-exercices-corriges.pdf",
   "convertir-les-grandeurs-5e-cours-exercices-corriges.pdf",
+  "cosinus-d-un-angle-aigu-4e-cours-exercices-corriges.pdf",
   "debuts-de-l-algebre-cm2-cours-exercices-corriges.pdf",
   "derivation-premiere-spe-cours-exercices-corriges.pdf",
   "discours-direct-et-le-discours-indirect-2026-2027-5e-cours-exercices-corriges.pdf",
