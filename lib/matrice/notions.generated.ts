@@ -13,7 +13,7 @@
 // liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
 // par où l'année peut commencer.
 //
-// 783 notions, 40 paquets.
+// 782 notions, 40 paquets.
 
 export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
@@ -3277,15 +3277,8 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         ]
       },
       {
-        "id": "conjugaison_temps_simples",
-        "label": "Les temps simples : passé simple, conditionnel, impératif",
-        "prerequis": [
-          "conjugaison_formes"
-        ]
-      },
-      {
-        "id": "conjugaison_temps_composes",
-        "label": "Les temps composés et les temps antérieurs",
+        "id": "conjugaison_temps",
+        "label": "Les temps à bâtir : passé simple, conditionnel, temps composés",
         "prerequis": [
           "conjugaison_formes"
         ]
@@ -3294,8 +3287,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         "id": "conjugaison_valeurs",
         "label": "L'emploi des temps et des modes",
         "prerequis": [
-          "conjugaison_temps_simples",
-          "conjugaison_temps_composes"
+          "conjugaison_temps"
         ]
       }
     ],

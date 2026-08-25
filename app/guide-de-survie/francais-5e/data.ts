@@ -69,8 +69,7 @@ const NOTIONS_DU_CHAPITRE: Record<string, string[]> = {
   analyse_discours: ["discours_registres", "discours_paroles_rapportees"],
   conjugaison: [
     "conjugaison_formes",
-    "conjugaison_temps_simples",
-    "conjugaison_temps_composes",
+    "conjugaison_temps",
     "conjugaison_valeurs",
   ],
 };

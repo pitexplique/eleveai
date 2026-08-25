@@ -281,18 +281,22 @@ export const microSkills: MicroSkillSource[] = [
   // verbes irréguliers en fonction de la variation de leur radical. »
   { id: "5e_conj_radical_variable", label: "Conjuguer les verbes dont le radical change", notionId: "conjugaison_formes", prerequis: ["5e_conj_radical_terminaison"] },
 
-  // ── « Maitriser la composition des formes verbales » · les temps simples ───
+  // ── « Maitriser la composition des formes verbales » · les temps à bâtir ──
+  // ⚠️ FUSIONNÉES LE 25/08/2026. Le découpage de la veille avait fait DEUX
+  // notions de deux micros — « temps simples » et « temps composés ». La règle
+  // dit cinq au maximum, elle ne dit pas deux au minimum : une notion de deux
+  // micros ne porte pas une fiche, et la 4e comme la 3e nomment déjà la leur
+  // `conjugaison_temps`. Quatre micros, et le même nom dans les trois classes.
   // BO : « …la morphologie des temps simples (présent, futur simple, imparfait,
   // passé simple de l'indicatif, conditionnel et présent de l'impératif). »
-  { id: "5e_conj_passe_simple", label: "Conjuguer au passé simple de l'indicatif", notionId: "conjugaison_temps_simples", prerequis: ["5e_conj_radical_terminaison"] },
-  { id: "5e_conj_conditionnel_imperatif", label: "Conjuguer au conditionnel présent et à l'impératif présent", notionId: "conjugaison_temps_simples", prerequis: ["5e_conj_radical_terminaison"] },
+  { id: "5e_conj_passe_simple", label: "Conjuguer au passé simple de l'indicatif", notionId: "conjugaison_temps", prerequis: ["5e_conj_radical_terminaison"] },
+  { id: "5e_conj_conditionnel_imperatif", label: "Conjuguer au conditionnel présent et à l'impératif présent", notionId: "conjugaison_temps", prerequis: ["5e_conj_radical_terminaison"] },
 
-  // ── « Maitriser la composition des formes verbales » · les temps composés ──
   // BO : « …et des temps composés (passé composé et plus-que-parfait). »
-  { id: "5e_conj_temps_composes", label: "Former le passé composé et le plus-que-parfait", notionId: "conjugaison_temps_composes", prerequis: ["5e_conj_radical_terminaison"] },
+  { id: "5e_conj_temps_composes", label: "Former le passé composé et le plus-que-parfait", notionId: "conjugaison_temps", prerequis: ["5e_conj_radical_terminaison"] },
   // BO : « Conjuguer un verbe par imitation, au passé antérieur et au futur
   // antérieur de l'indicatif. »
-  { id: "5e_conj_anterieurs", label: "Conjuguer au passé antérieur et au futur antérieur", notionId: "conjugaison_temps_composes", prerequis: ["5e_conj_temps_composes"] },
+  { id: "5e_conj_anterieurs", label: "Conjuguer au passé antérieur et au futur antérieur", notionId: "conjugaison_temps", prerequis: ["5e_conj_temps_composes"] },
 
   // ── « Maitriser l'emploi des temps et des modes » ──────────────────────────
   // BO : « Approfondir sa maitrise des valeurs temporelles et aspectuelles des

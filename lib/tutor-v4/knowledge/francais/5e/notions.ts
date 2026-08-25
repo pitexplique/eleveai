@@ -300,16 +300,16 @@ export const notions: NotionSource[] = [
     prerequis: ["grammaire_fonctions"],
     levels: [1, 2, 3],
   },
+  // ⚠️ UNE SEULE NOTION POUR LES TEMPS, ET NON DEUX (25/08/2026). Le découpage
+  // de la veille avait produit « temps simples » et « temps composés », deux
+  // micros chacune. La règle pose un maximum de cinq, pas un minimum de deux —
+  // et une notion de deux micros ne porte pas une fiche de cours. La 4e et la 3e
+  // nomment déjà la leur `conjugaison_temps` : les trois classes s'appellent
+  // désormais pareil, ce qui est la condition pour qu'une fiche se compare d'un
+  // niveau à l'autre.
   {
-    id: "conjugaison_temps_simples",
-    label: "Les temps simples : passé simple, conditionnel, impératif",
-    boId: "BO5EFRG",
-    prerequis: ["conjugaison_formes"],
-    levels: [1, 2, 3],
-  },
-  {
-    id: "conjugaison_temps_composes",
-    label: "Les temps composés et les temps antérieurs",
+    id: "conjugaison_temps",
+    label: "Les temps à bâtir : passé simple, conditionnel, temps composés",
     boId: "BO5EFRG",
     prerequis: ["conjugaison_formes"],
     levels: [1, 2, 3],
@@ -318,7 +318,7 @@ export const notions: NotionSource[] = [
     id: "conjugaison_valeurs",
     label: "L'emploi des temps et des modes",
     boId: "BO5EFRG",
-    prerequis: ["conjugaison_temps_simples", "conjugaison_temps_composes"],
+    prerequis: ["conjugaison_temps"],
     levels: [1, 2, 3],
   },
 ];
