@@ -751,7 +751,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       return {
         text: `${p} % correspond à quelle fraction ?`,
         format: "qcm",
-        choices: makeChoices(correct, [`100/${p}`, `${p}/10`, `${100 - p}/100`]),
+        // « (100 - p)/100 » tombe sur la bonne réponse à 50 % — une fois sur six.
+        // Le piège de réserve « 1/p » est de toute façon le meilleur des quatre :
+        // « 5 %, c'est 1/5 » est l'erreur qu'on entend vraiment en classe.
+        choices: makeChoices(correct, [`100/${p}`, `${p}/10`, `${100 - p}/100`, `1/${p}`]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +

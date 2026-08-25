@@ -1698,6 +1698,10 @@ export const transformationsBank: TutorBankItemV4[] = [
           `(${x + dx};${y - dy})`,
           `(${dx};${dy})`,
           `(${y + dy};${x + dx})`,
+          // Cinquième piège : sur le tirage A(0;0) avec dx = dy, les DEUX
+          // précédents tombent en même temps sur la bonne réponse. Celui-ci —
+          // « on a soustrait des deux côtés » — n'y tombe jamais.
+          `(${x - dx};${y - dy})`,
         ]),
         expected: [`(${x + dx};${y + dy})`],
         comparator: "mcq_exact",

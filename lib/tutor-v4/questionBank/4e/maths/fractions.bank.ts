@@ -2278,12 +2278,15 @@ export const fractionsBank: TutorBankItemV4[] = [
       return {
         text: `Calculer $\\frac{${a}}{${b}} \\times ${k}$.`,
         format: "qcm",
+        // Piège de RÉSERVE en dernier, puis coupe à quatre : sur le tirage
+        // a = 2, k = 2, « on a additionné » s'écrit comme la bonne réponse.
         choices: [
           correct,
           `$\\frac{${a}}{${b * k}}$`,
           `$\\frac{${a * k}}{${b * k}}$`,
           `$\\frac{${a + k}}{${b}}$`,
-        ].filter((v, i, arr) => arr.indexOf(v) === i),
+          `$\\frac{${a}}{${b}}$`,
+        ].filter((v, i, arr) => arr.indexOf(v) === i).slice(0, 4),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
@@ -2447,7 +2450,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     tags: ["fraction_nombre", "inverse", "qcm", "template"],
     generate: () => {
       const a = randomInt(2, 9);
-      const b = randomInt(2, 9);
+      // ⚠️ a = b donnerait la fraction 1 : son inverse S'ÉCRIT comme elle, donc
+      // le piège « on n'a rien échangé » tombe sur la bonne réponse et le QCM
+      // n'a plus que trois lignes. Une fraction égale à 1 ne fait de toute façon
+      // rien travailler ici.
+      let b = randomInt(2, 9);
+      while (b === a) b = randomInt(2, 9);
       return {
         text: `Quel est l’inverse de $\\frac{${a}}{${b}}$ ?`,
         format: "qcm",
@@ -2595,10 +2603,23 @@ export const fractionsBank: TutorBankItemV4[] = [
     hint: "Multiplie par l’inverse de la deuxième fraction.",
     tags: ["fraction_nombre", "division", "qcm", "template"],
     generate: () => {
-      const a = randomInt(1, 5);
-      const b = randomInt(2, 7);
-      const c = randomInt(1, 5);
-      const d = randomInt(2, 7);
+      // ⚠️ Trois tirages abîmaient ce QCM, et aucun ne se voyait au rendu :
+      //  · c = d  → « on a multiplié » et « on n'a rien fait » tombent tous les
+      //    deux sur la bonne réponse, il ne reste que deux pièges ;
+      //  · a = b  → les deux premiers pièges s'écrivent à l'identique ;
+      //  · a/b = c/d → le piège inversé VAUT la bonne réponse (les deux écrivent
+      //    1 sous des formes différentes) : l'élève avait deux lignes justes et
+      //    rien ne le signalait, puisque `expected` était bien dans les choix.
+      let a = randomInt(1, 5);
+      let b = randomInt(2, 7);
+      let c = randomInt(1, 5);
+      let d = randomInt(2, 7);
+      while (a === b || c === d || a * d === b * c) {
+        a = randomInt(1, 5);
+        b = randomInt(2, 7);
+        c = randomInt(1, 5);
+        d = randomInt(2, 7);
+      }
       const s = simplify(a * d, b * c);
       const correct = `$\\frac{${s.n}}{${s.d}}$`;
       return {
@@ -2640,12 +2661,18 @@ export const fractionsBank: TutorBankItemV4[] = [
       return {
         text: `Calculer $\\frac{${a}}{${b}} \\div ${k}$.`,
         format: "qcm",
+        // Un piège de RÉSERVE, puis on coupe à quatre. Il ne sert que sur le
+        // tirage b = 2, k = 2, où « on a ajouté au dénominateur » s'écrit
+        // exactement comme la bonne réponse et disparaît au dédoublonnage.
+        // ⚠️ Le `slice` n'est pas décoratif : sans lui le QCM passerait à cinq
+        // lignes sur tous les autres tirages.
         choices: [
           correct,
           `$\\frac{${a * k}}{${b}}$`,
           `$\\frac{${a}}{${b}}$`,
           `$\\frac{${a}}{${b + k}}$`,
-        ].filter((v, i, arr) => arr.indexOf(v) === i),
+          `$\\frac{${a + k}}{${b}}$`,
+        ].filter((v, i, arr) => arr.indexOf(v) === i).slice(0, 4),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:

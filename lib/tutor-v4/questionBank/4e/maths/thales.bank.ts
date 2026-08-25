@@ -240,16 +240,24 @@ export const thalesBank: TutorBankItemV4[] = [
     generate: () => {
       const am = randomInt(2, 6);
       const ab = am * 2;
-      const an = randomInt(3, 7);
+      // ⚠️ AM = AN rendrait AB = AC : le piège « AM/AC = AN/AB » s'écrirait alors
+      // comme la bonne réponse et le QCM tomberait à trois lignes.
+      let an = randomInt(3, 7);
+      while (an === am) an = randomInt(3, 7);
       const ac = an * 2;
 
       return {
         text: `On sait que AM = ${am} cm, AB = ${ab} cm, AN = ${an} cm et AC = ${ac} cm. Quelle comparaison correspond à Thalès ?`,
         format: "qcm",
+        // ⛔ Le troisième piège était « AM/AN = AB/AC » — et cette égalité est
+        // VRAIE : c'est la forme obtenue en produit en croix depuis Thalès.
+        // Le QCM avait donc deux bonnes réponses, et rien ne pouvait le dire :
+        // `expected` figurait bien dans les choix. Remplacé par une égalité dont
+        // un membre est renversé, fausse à tous les tirages.
         choices: makeChoices(`${am}/${ab} = ${an}/${ac}`, [
           `${ab}/${am} = ${an}/${ac}`,
           `${am}/${ac} = ${an}/${ab}`,
-          `${am}/${an} = ${ab}/${ac}`,
+          `${am}/${ab} = ${ac}/${an}`,
         ]),
         expected: [`${am}/${ab} = ${an}/${ac}`],
         comparator: "mcq_exact",
@@ -1166,15 +1174,20 @@ export const thalesBank: TutorBankItemV4[] = [
     generate: () => {
       const k = randomChoice([2, 3]);
       const am = randomInt(2, 6);
-      const an = randomInt(2, 7);
+      // AM = AN donnerait AB = AC, et le piège « AM/AC = AN/AB » s'écrirait
+      // comme la bonne réponse (voir thales_theoreme_rapport_tpl_2).
+      let an = randomInt(2, 7);
+      while (an === am) an = randomInt(2, 7);
       const ab = am * k;
       const ac = an * k;
       return {
         text: `On a AM = ${am}, AB = ${ab}, AN = ${an}, AC = ${ac}. Quelle égalité de Thalès est correcte ?`,
         format: "qcm",
+        // ⛔ Même défaut qu'au gabarit 2 : « AM/AN = AB/AC » est une égalité VRAIE
+        // (produit en croix de Thalès), donc une seconde bonne réponse.
         choices: makeChoices(`${am}/${ab} = ${an}/${ac}`, [
           `${ab}/${am} = ${an}/${ac}`,
-          `${am}/${an} = ${ab}/${ac}`,
+          `${am}/${ab} = ${ac}/${an}`,
           `${am}/${ac} = ${an}/${ab}`,
         ]),
         expected: [`${am}/${ab} = ${an}/${ac}`],

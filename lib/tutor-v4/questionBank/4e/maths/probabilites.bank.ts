@@ -495,7 +495,10 @@ export const probabilitesBank: TutorBankItemV4[] = [
     tags: ["proba_experience", "billes", "fraction", "template"],
     generate: () => {
       const rouges = randomInt(1, 5);
-      const bleues = randomInt(1, 5);
+      // ⚠️ Un sac « 1 rouge, 1 bleue » fait fondre les pièges les uns dans les
+      // autres — 1/1 des deux côtés — et le QCM tombait à trois lignes. C'est le
+      // SEUL tirage dégénéré : on le repousse, les vingt-quatre autres restent.
+      const bleues = rouges === 1 ? randomInt(2, 5) : randomInt(1, 5);
       const total = rouges + bleues;
       const result = `${rouges}/${total}`;
 
@@ -511,6 +514,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
           `${bleues}/${total}`,
           `${rouges}/${bleues}`,
           `${total}/${rouges}`,
+          `1/${total}`,
         ]),
         expected: [result],
         comparator: "mcq_exact",
@@ -534,9 +538,15 @@ export const probabilitesBank: TutorBankItemV4[] = [
     hint: "Additionne les poids des secteurs favorables, puis divise par le poids total.",
     tags: ["proba_experience", "roue", "fraction", "template"],
     generate: () => {
-      const poidsRouge = randomChoice([1, 2, 3]);
-      const poidsBleu = randomChoice([1, 2]);
-      const poidsVert = randomChoice([1, 2]);
+      // Trois poids DISTINCTS. Deux secteurs de même poids faisaient fondre le
+      // piège « on a lu le mauvais secteur » sur la bonne réponse, et le QCM
+      // tombait à trois lignes une fois sur trois. Distincts, les quatre pièges
+      // tiennent toujours — et une roue à secteurs inégaux est justement ce que
+      // ce gabarit veut faire travailler.
+      const poidsRouge = randomChoice([1, 2, 3, 4]);
+      const restants = [1, 2, 3, 4].filter((p) => p !== poidsRouge);
+      const poidsBleu = randomChoice(restants);
+      const poidsVert = randomChoice(restants.filter((p) => p !== poidsBleu));
       const total = poidsRouge + poidsBleu + poidsVert;
       const result = `${poidsRouge}/${total}`;
 
@@ -545,6 +555,7 @@ export const probabilitesBank: TutorBankItemV4[] = [
         format: "qcm",
         choices: makeChoices(result, [
           `${poidsBleu}/${total}`,
+          `${poidsVert}/${total}`,
           `${poidsRouge}/${poidsBleu}`,
           `${total}/${poidsRouge}`,
         ]),
@@ -1626,7 +1637,9 @@ export const probabilitesBank: TutorBankItemV4[] = [
       return {
         text: `Un sac contient ${vertes} billes vertes et ${autres} billes bleues. Quelle est la probabilité de tirer une bille verte ?`,
         format: "qcm",
-        choices: makeChoices(result, [`${autres}/${total}`, `${vertes}/${autres}`, `${total}/${vertes}`]),
+        // Le quatrième piège est là pour le tirage « autant de vertes que de
+        // bleues », où le premier tombe sur la bonne réponse et disparaît.
+        choices: makeChoices(result, [`${autres}/${total}`, `${vertes}/${autres}`, `${total}/${vertes}`, `1/${total}`]),
         expected: [result],
         comparator: "mcq_exact",
         explanation:
@@ -1690,7 +1703,15 @@ export const probabilitesBank: TutorBankItemV4[] = [
       return {
         text: `Dans un jeu de ${total} cartes, ${favorables} cartes sont gagnantes. Quelle est la probabilité de tirer une carte gagnante ?`,
         format: "qcm",
-        choices: makeChoices(result, [`${total}/${favorables}`, `${favorables}/${total - favorables}`, `1/${total}`]),
+        // « 1/total » tombe sur la bonne réponse dès qu'il n'y a qu'une carte
+        // gagnante — une fois sur quatre. Le piège des cartes perdantes prend
+        // alors le relais.
+        choices: makeChoices(result, [
+          `${total}/${favorables}`,
+          `${favorables}/${total - favorables}`,
+          `1/${total}`,
+          `${total - favorables}/${total}`,
+        ]),
         expected: [result],
         comparator: "mcq_exact",
         explanation:
@@ -2146,7 +2167,9 @@ export const probabilitesBank: TutorBankItemV4[] = [
       return {
         text: `Une urne contient ${noires} jetons violets et ${blanches} jetons jaunes. Quelle est la probabilité de tirer un jeton jaune ?`,
         format: "qcm",
-        choices: makeChoices(result, [`${noires}/${total}`, `${blanches}/${noires}`, `${total}/${blanches}`]),
+        // Quatrième piège pour le tirage « autant de violets que de jaunes »,
+        // où le premier tombe sur la bonne réponse.
+        choices: makeChoices(result, [`${noires}/${total}`, `${blanches}/${noires}`, `${total}/${blanches}`, `1/${total}`]),
         expected: [result],
         comparator: "mcq_exact",
         explanation:
@@ -2176,7 +2199,18 @@ export const probabilitesBank: TutorBankItemV4[] = [
       return {
         text: `La probabilité d’un événement est ${fav}/${total}. Quelle est la probabilité de l’événement contraire ?`,
         format: "qcm",
-        choices: makeChoices(contraire, [`${fav}/${total}`, `${total}/${fav}`, `1/${total}`]),
+        // ⚠️ Le gabarit le plus fragile de la banque : une fois sur deux il ne
+        // servait que trois lignes. Trois causes se cumulaient — « fav/total »
+        // devient la bonne réponse quand l'événement vaut la moitié, « 1/total »
+        // aussi quand il ne reste qu'un cas, et les deux se confondent quand
+        // fav = 1. Les deux derniers pièges, eux, ne coïncident jamais.
+        choices: makeChoices(contraire, [
+          `${fav}/${total}`,
+          `${total}/${fav}`,
+          `1/${total}`,
+          `${fav}/${total - fav}`,
+          `${total - fav}/${fav}`,
+        ]),
         expected: [contraire],
         comparator: "mcq_exact",
         explanation:
