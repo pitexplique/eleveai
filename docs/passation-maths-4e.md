@@ -10,7 +10,7 @@
 ## Où on en est
 
 ```
-maths 4e   4 fiches sur 19   ·   micros 28/28   ·   4 PDF   ·   banque réparée
+maths 4e   5 fiches sur 19   ·   micros 34/34   ·   5 PDF   ·   banque réparée
 ```
 
 | fiche | notion | état |
@@ -19,12 +19,22 @@ maths 4e   4 fiches sur 19   ·   micros 28/28   ·   4 PDF   ·   banque répar
 | Thalès | `thales-theoreme` | ✅ publiée, mesurée, PDF |
 | Cosinus | `trigo-cosinus` | ✅ publiée, mesurée, PDF |
 | Parallélogramme | `quadrilatere-parallelogramme` | ✅ publiée, mesurée, PDF |
+| Transformations | `sym-transformation` | ✅ publiée, mesurée, PDF |
 
-**Restent 15 notions** : `relatif_operation`, `fraction_nombre`,
-`prop_proportionnalite`, `litteral_expression`, `litteral_distributivite`,
-`litteral_identite_remarquable`, `litteral_factorisation`, `equation_resolution`,
-`sym_transformation`, `aire_perimetre`, `aire_surface`, `volume_solide`,
-`stat_statistique`, `proba_experience`, `algo_programmation`.
+⭐ **La géométrie de 4ᵉ est terminée.** Les cinq notions de `BO4G1` et de
+`sym_transformation` ont leur fiche.
+
+**Restent 14 notions**, toutes hors géométrie : `relatif_operation`,
+`fraction_nombre`, `prop_proportionnalite`, `litteral_expression`,
+`litteral_distributivite`, `litteral_identite_remarquable`,
+`litteral_factorisation`, `equation_resolution`, `aire_perimetre`,
+`aire_surface`, `volume_solide`, `stat_statistique`, `proba_experience`,
+`algo_programmation`.
+
+⭐ **Le rythme mesuré** : les deux premières fiches ont demandé **trois passes de
+mesure chacune** ; les trois suivantes sont passées **du premier coup ou en une
+retouche**. Ce qui a coûté, ce n'est pas d'écrire les fiches, c'est d'apprendre
+les six règles ci-dessous.
 
 ---
 
@@ -138,7 +148,21 @@ laisse les textes se toucher.
 ⛔ Et **pas de `showFormula`** dans une fiche : sa police interne est de 10,5 px,
 soit 9,7 dans une carte.
 
-### 5. Le PDF, et le serveur
+### 5. `transformation` : sa largeur se DÉDUIT, elle ne se règle pas
+
+`largeur = cols × cellSize + 2 × padding`. La seule commande est donc `cellSize`
+— jamais `width`, qui rognerait la grille. Huit colonnes à 22 px plus 2 × 26 de
+marge font les 228 px d'une carte.
+
+⚠️ **`padding` à 26 et non 20** : l'étiquette de l'axe est écrite AU-DESSUS de la
+grille et sortait du cadre de 1,8 px — visible en 1280 seulement.
+
+⚠️ **Le libellé d'un vecteur se compte en caractères**, comme la phrase du bas
+d'un schéma. « 4 à droite, 2 en bas » (vingt signes) touche le nom de la figure
+image ; « 4 à droite » (dix signes) le touche encore d'un dixième de pixel.
+Écrire `(+4 ; +2)` — c'est de toute façon la notation de la 3ᵉ.
+
+### 6. Le PDF, et le serveur
 
 - Redémarrer le serveur **avant** une fournée : le rechargement à chaud perd la
   feuille d'impression. Il s'est dégradé **deux fois** le 25/08 —
