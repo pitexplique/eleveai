@@ -270,6 +270,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Calculer avec les fractions",
     resume: "Additionner, soustraire, multiplier, et prendre une fraction d'une quantité.",
   },
+  "maths/4e/thales-theoreme": {
+    titre: "Le théorème de Thalès",
+    resume: "Les deux configurations, l'égalité des rapports, le produit en croix et la réciproque.",
+  },
   "maths/4e/pythagore-theoreme": {
     titre: "Le théorème de Pythagore",
     resume: "Reconnaître l'hypoténuse, calculer une longueur, et utiliser la réciproque pour prouver un angle droit.",

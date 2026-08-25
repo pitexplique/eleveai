@@ -161,6 +161,28 @@ export default function ThalesCanvas({ figure }: Props) {
   const height = figure.size?.height ?? 270;
   const isCompact = width <= 340;
 
+  // ─── L'ÉCHELLE DU DESSIN, ET POURQUOI ELLE EXISTE (25/08/2026) ──────────────
+  //
+  // ⛔ CE CANVAS NE SE LAISSAIT PAS RÉTRÉCIR, et le défaut ne se lisait pas dans
+  // le code. Ses points par défaut et TOUS les décalages d'étiquettes (A.y + 26,
+  // A.y + 40, − 20, − 28, + 24…) sont des pixels ABSOLUS, calés sur le cadre de
+  // référence de 340 × 270. Demander `size: { width: 240 }` pour tenir dans une
+  // carte de fiche laissait donc la figure à sa taille d'origine — elle sortait du
+  // cadre — et si l'appelant rapetissait aussi les points, les décalages, eux, ne
+  // bougeaient pas : les six étiquettes de côtés se rentraient dedans.
+  //
+  // Mesuré sur la fiche de Thalès de 4e, dans une carte de 222 px sur un téléphone
+  // de 375 : 21 textes sous 11 px (jusqu'à 9,6) et 33 chevauchements.
+  //
+  // ⭐ `k` met le DESSIN à l'échelle du cadre demandé — points par défaut et
+  // décalages ensemble. Les POLICES ne sont volontairement PAS multipliées : dans
+  // un cadre plus petit affiché à la même largeur, elles doivent rester grandes
+  // par rapport à la figure, et c'est tout l'objet de la réparation.
+  //
+  // ⚠️ À 340 de large, k vaut 1 : tous les calculs redonnent EXACTEMENT les
+  // valeurs d'avant. Le coach, qui ne passe aucune `size`, est inchangé au pixel.
+  const k = width / 340;
+
   const labelFontSize = isCompact ? 12 : 13;
   const sideFontSize = isCompact ? 12 : 13;
   const formulaFontSize = isCompact ? 10.5 : 12;
@@ -197,11 +219,13 @@ export default function ThalesCanvas({ figure }: Props) {
   const getSideLabel = (key: SideKey) => figure.sideLabels?.[key];
 
   if (variant === "papillon") {
-    const A = figure.points?.A ?? { x: 170, y: 135 };
-    const B = figure.points?.B ?? { x: 55, y: 225 };
-    const C = figure.points?.C ?? { x: 285, y: 55 };
-    const M = figure.points?.M ?? { x: 65, y: 55 };
-    const N = figure.points?.N ?? { x: 275, y: 225 };
+    // Voir le commentaire de `k` plus bas, dans la variante « triangle » : mêmes
+    // décalages en pixels absolus, même réparation. À 340 de large, k vaut 1.
+    const A = figure.points?.A ?? { x: 170 * k, y: 135 * k };
+    const B = figure.points?.B ?? { x: 55 * k, y: 225 * k };
+    const C = figure.points?.C ?? { x: 285 * k, y: 55 * k };
+    const M = figure.points?.M ?? { x: 65 * k, y: 55 * k };
+    const N = figure.points?.N ?? { x: 275 * k, y: 225 * k };
 
     return (
       <div className="mx-auto w-full max-w-[390px] rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
@@ -232,33 +256,33 @@ export default function ThalesCanvas({ figure }: Props) {
 
           {showLabels ? (
             <>
-              {labelText(A.x, A.y - 10, getLabel("A", "A"), labelFill, "middle", labelFontSize, textStrokeWidth)}
-              {labelText(B.x - 8, B.y + 18, getLabel("B", "B"), labelFill, "end", labelFontSize, textStrokeWidth)}
-              {labelText(C.x + 8, C.y - 8, getLabel("C", "C"), labelFill, "start", labelFontSize, textStrokeWidth)}
-              {labelText(M.x - 8, M.y - 8, getLabel("M", "M"), labelFill, "end", labelFontSize, textStrokeWidth)}
-              {labelText(N.x + 8, N.y + 18, getLabel("N", "N"), labelFill, "start", labelFontSize, textStrokeWidth)}
+              {labelText(A.x, A.y - 10 * k, getLabel("A", "A"), labelFill, "middle", labelFontSize, textStrokeWidth)}
+              {labelText(B.x - 8 * k, B.y + 18 * k, getLabel("B", "B"), labelFill, "end", labelFontSize, textStrokeWidth)}
+              {labelText(C.x + 8 * k, C.y - 8 * k, getLabel("C", "C"), labelFill, "start", labelFontSize, textStrokeWidth)}
+              {labelText(M.x - 8 * k, M.y - 8 * k, getLabel("M", "M"), labelFill, "end", labelFontSize, textStrokeWidth)}
+              {labelText(N.x + 8 * k, N.y + 18 * k, getLabel("N", "N"), labelFill, "start", labelFontSize, textStrokeWidth)}
             </>
           ) : null}
 
           {showSideLabels ? (
             <>
               {getSideLabel("AB")
-                ? labelText(mid(A, B).x - 12, mid(A, B).y + 10, getSideLabel("AB")!, sideLabelFill, "middle", sideFontSize, textStrokeWidth)
+                ? labelText(mid(A, B).x - 12 * k, mid(A, B).y + 10 * k, getSideLabel("AB")!, sideLabelFill, "middle", sideFontSize, textStrokeWidth)
                 : null}
               {getSideLabel("AC")
-                ? labelText(mid(A, C).x + 14, mid(A, C).y - 8, getSideLabel("AC")!, sideLabelFill, "middle", sideFontSize, textStrokeWidth)
+                ? labelText(mid(A, C).x + 14 * k, mid(A, C).y - 8 * k, getSideLabel("AC")!, sideLabelFill, "middle", sideFontSize, textStrokeWidth)
                 : null}
               {getSideLabel("AM")
-                ? labelText(mid(A, M).x - 14, mid(A, M).y - 8, getSideLabel("AM")!, sideLabelFill, "middle", sideFontSize, textStrokeWidth)
+                ? labelText(mid(A, M).x - 14 * k, mid(A, M).y - 8 * k, getSideLabel("AM")!, sideLabelFill, "middle", sideFontSize, textStrokeWidth)
                 : null}
               {getSideLabel("AN")
-                ? labelText(mid(A, N).x + 14, mid(A, N).y + 12, getSideLabel("AN")!, sideLabelFill, "middle", sideFontSize, textStrokeWidth)
+                ? labelText(mid(A, N).x + 14 * k, mid(A, N).y + 12 * k, getSideLabel("AN")!, sideLabelFill, "middle", sideFontSize, textStrokeWidth)
                 : null}
               {getSideLabel("BM")
-                ? labelText(mid(B, M).x - 22, mid(B, M).y, getSideLabel("BM")!, parallelColor, "middle", sideFontSize, textStrokeWidth)
+                ? labelText(mid(B, M).x - 22 * k, mid(B, M).y, getSideLabel("BM")!, parallelColor, "middle", sideFontSize, textStrokeWidth)
                 : null}
               {getSideLabel("CN")
-                ? labelText(mid(C, N).x + 22, mid(C, N).y, getSideLabel("CN")!, parallelColor, "middle", sideFontSize, textStrokeWidth)
+                ? labelText(mid(C, N).x + 22 * k, mid(C, N).y, getSideLabel("CN")!, parallelColor, "middle", sideFontSize, textStrokeWidth)
                 : null}
             </>
           ) : null}
@@ -267,10 +291,10 @@ export default function ThalesCanvas({ figure }: Props) {
     );
   }
 
-  const A = figure.points?.A ?? { x: 55, y: 230 };
-  const B = figure.points?.B ?? { x: 285, y: 230 };
-  const C = figure.points?.C ?? { x: 180, y: 70 };
-  const M = figure.points?.M ?? { x: 120, y: 230 };
+  const A = figure.points?.A ?? { x: 55 * k, y: 230 * k };
+  const B = figure.points?.B ?? { x: 285 * k, y: 230 * k };
+  const C = figure.points?.C ?? { x: 180 * k, y: 70 * k };
+  const M = figure.points?.M ?? { x: 120 * k, y: 230 * k };
 
   const t = B.x !== A.x ? (M.x - A.x) / (B.x - A.x) : 0.3;
   const N = figure.points?.N ?? pointOnSegment(A, C, t);
@@ -325,33 +349,33 @@ export default function ThalesCanvas({ figure }: Props) {
 
         {showLabels ? (
           <>
-            {labelText(A.x - 8, A.y + 18, getLabel("A", "A"), labelFill, "end", labelFontSize, textStrokeWidth)}
-            {labelText(B.x + 4, B.y + 14, getLabel("B", "B"), labelFill, "start", labelFontSize, textStrokeWidth)}
-            {labelText(C.x, C.y - 10, getLabel("C", "C"), labelFill, "middle", labelFontSize, textStrokeWidth)}
-            {labelText(M.x, M.y + 18, getLabel("M", "M"), labelFill, "middle", labelFontSize, textStrokeWidth)}
-            {labelText(N.x - 8, N.y - 8, getLabel("N", "N"), labelFill, "end", labelFontSize, textStrokeWidth)}
+            {labelText(A.x - 8 * k, A.y + 18 * k, getLabel("A", "A"), labelFill, "end", labelFontSize, textStrokeWidth)}
+            {labelText(B.x + 4 * k, B.y + 14 * k, getLabel("B", "B"), labelFill, "start", labelFontSize, textStrokeWidth)}
+            {labelText(C.x, C.y - 10 * k, getLabel("C", "C"), labelFill, "middle", labelFontSize, textStrokeWidth)}
+            {labelText(M.x, M.y + 18 * k, getLabel("M", "M"), labelFill, "middle", labelFontSize, textStrokeWidth)}
+            {labelText(N.x - 8 * k, N.y - 8 * k, getLabel("N", "N"), labelFill, "end", labelFontSize, textStrokeWidth)}
           </>
         ) : null}
 
         {showSideLabels ? (
           <>
             {getSideLabel("AM")
-              ? labelText(mid(A, M).x, A.y + 26, getSideLabel("AM")!, sideLabelFill, "middle", sideFontSize, textStrokeWidth)
+              ? labelText(mid(A, M).x, A.y + 26 * k, getSideLabel("AM")!, sideLabelFill, "middle", sideFontSize, textStrokeWidth)
               : null}
             {getSideLabel("AB")
-              ? labelText(mid(A, B).x, A.y + 40, getSideLabel("AB")!, sideLabelFill, "middle", sideFontSize, textStrokeWidth)
+              ? labelText(mid(A, B).x, A.y + 40 * k, getSideLabel("AB")!, sideLabelFill, "middle", sideFontSize, textStrokeWidth)
               : null}
             {getSideLabel("AN")
-              ? labelText(mid(A, N).x - 20, mid(A, N).y - 4, getSideLabel("AN")!, sideLabelFill, "middle", sideFontSize, textStrokeWidth)
+              ? labelText(mid(A, N).x - 20 * k, mid(A, N).y - 4 * k, getSideLabel("AN")!, sideLabelFill, "middle", sideFontSize, textStrokeWidth)
               : null}
             {getSideLabel("AC")
-              ? labelText(mid(A, C).x - 28, mid(A, C).y - 16, getSideLabel("AC")!, sideLabelFill, "middle", sideFontSize, textStrokeWidth)
+              ? labelText(mid(A, C).x - 28 * k, mid(A, C).y - 16 * k, getSideLabel("AC")!, sideLabelFill, "middle", sideFontSize, textStrokeWidth)
               : null}
             {getSideLabel("MN")
-              ? labelText(mid(M, N).x - 18, mid(M, N).y + 4, getSideLabel("MN")!, parallelColor, "middle", sideFontSize, textStrokeWidth)
+              ? labelText(mid(M, N).x - 18 * k, mid(M, N).y + 4 * k, getSideLabel("MN")!, parallelColor, "middle", sideFontSize, textStrokeWidth)
               : null}
             {getSideLabel("BC")
-              ? labelText(mid(B, C).x + 24, mid(B, C).y + 2, getSideLabel("BC")!, parallelColor, "middle", sideFontSize, textStrokeWidth)
+              ? labelText(mid(B, C).x + 24 * k, mid(B, C).y + 2 * k, getSideLabel("BC")!, parallelColor, "middle", sideFontSize, textStrokeWidth)
               : null}
           </>
         ) : null}
