@@ -41,6 +41,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "fractions-5e-cours-exercices-corriges.pdf",
   "fractions-6e-cours-exercices-corriges.pdf",
   "fractions-cm2-cours-exercices-corriges.pdf",
+  "fractions-et-nombres-rationnels-4e-cours-exercices-corriges.pdf",
   "groupe-nominal-epithete-et-complement-du-nom-6e-cours-exercices-corriges.pdf",
   "groupe-nominal-et-les-classes-de-mots-2026-2027-5e-cours-exercices-corriges.pdf",
   "imperatif-et-le-conditionnel-present-6e-cours-exercices-corriges.pdf",
