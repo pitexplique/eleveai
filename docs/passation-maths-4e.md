@@ -10,8 +10,11 @@
 ## Où on en est
 
 ```
-maths 4e   5 fiches sur 19   ·   micros 34/34   ·   5 PDF   ·   banque réparée
+maths 4e   10 fiches sur 20   ·   micros 71/71   ·   10 PDF   ·   banque réparée
 ```
+
+⚠️ **VINGT et non plus dix-neuf** : les fractions ont été scindées en deux le
+26/08 (voir plus bas).
 
 | fiche | notion | état |
 |---|---|---|
@@ -20,21 +23,89 @@ maths 4e   5 fiches sur 19   ·   micros 34/34   ·   5 PDF   ·   banque répar
 | Cosinus | `trigo-cosinus` | ✅ publiée, mesurée, PDF |
 | Parallélogramme | `quadrilatere-parallelogramme` | ✅ publiée, mesurée, PDF |
 | Transformations | `sym-transformation` | ✅ publiée, mesurée, PDF |
+| Statistiques | `stat-statistique` | ✅ publiée, mesurée, PDF |
+| Probabilités | `proba-experience` | ✅ publiée, mesurée, PDF |
+| Opérations sur les relatifs | `relatif-operation` | ✅ publiée, mesurée, PDF |
+| Fractions et rationnels | `fraction-nombre` | ✅ publiée, mesurée, PDF |
+| Calculer avec les fractions | `fraction-calcul` | ✅ publiée, mesurée, PDF |
 
-⭐ **La géométrie de 4ᵉ est terminée.** Les cinq notions de `BO4G1` et de
-`sym_transformation` ont leur fiche.
+⭐ **La géométrie, les données et les nombres sont finis.** Le redirect du 21/08
+est **entièrement levé pour la 4ᵉ** : les quatre adresses éteintes sont revenues.
+Seule la 3ᵉ y reste.
 
-**Restent 14 notions**, toutes hors géométrie : `relatif_operation`,
-`fraction_nombre`, `prop_proportionnalite`, `litteral_expression`,
+**Restent 10 notions** : `prop_proportionnalite`, `litteral_expression`,
 `litteral_distributivite`, `litteral_identite_remarquable`,
 `litteral_factorisation`, `equation_resolution`, `aire_perimetre`,
-`aire_surface`, `volume_solide`, `stat_statistique`, `proba_experience`,
-`algo_programmation`.
+`aire_surface`, `volume_solide`, `algo_programmation`.
+👉 Cinq d'entre elles sont le **bloc algèbre**, qui s'enchaîne : expressions →
+distributivité → identités → factorisation → équations. Les écrire à la suite
+permet de partager les canvas (`algebre`, `calcul_pose`, `tableau_donnees`).
 
 ⭐ **Le rythme mesuré** : les deux premières fiches ont demandé **trois passes de
-mesure chacune** ; les trois suivantes sont passées **du premier coup ou en une
+mesure chacune** ; toutes les suivantes sont passées **du premier coup ou en une
 retouche**. Ce qui a coûté, ce n'est pas d'écrire les fiches, c'est d'apprendre
-les six règles ci-dessous.
+les règles ci-dessous.
+
+---
+
+## ⛔ CE QU'IL FAUT SAVOIR AVANT D'ÉCRIRE UNE LIGNE (26/08)
+
+### 1. Lire les micros ET leurs énoncés, jamais son idée du programme
+
+Frédéric : « **avant de faire la fiche il faut bien lire les micro id des
+notions** ». Dit après une vraie erreur : un **arbre de probabilités** avait été
+mis dans la fiche de 4ᵉ. Il n'y est pas au programme — les attendus s'arrêtent
+avant, et les huit énoncés de `proba_defi` ne parlent que de l'événement
+contraire. **La banque le disait déjà**, je ne l'avais pas assez lue.
+
+👉 Avant d'écrire : lire les `microId` de la notion, puis les **énoncés réels**
+des micros floues — surtout celles nommées `*_defi` ou `*_probleme`, dont le nom
+ne dit pas le contenu. Relever au passage **les nombres**, qui doivent être ceux
+de la banque.
+
+### 2. Les fiches rendent le LaTeX depuis le 26/08 — mais pas partout
+
+`components/fiches/TexteMath.tsx` est branché sur les **23 points d'affichage**
+de `FicheCoursClient`. On écrit donc `$\\frac{2}{3}$` et non « 2/3 ».
+⭐ Il est **l'identité sur un texte sans `$`** : les 109 fiches antérieures ne
+bougent pas (vérifié en rendant la 6ᵉ après coup — 0 nœud KaTeX, 0 dollar).
+⛔ On n'a **pas** utilisé `MarkdownMath`, qui existe : il interprète aussi le
+markdown, et un `*` au milieu d'une phrase aurait changé des fiches déjà écrites.
+
+**Les trois endroits où le LaTeX ne se rend PAS :**
+
+| Où | Pourquoi |
+|---|---|
+| Les libellés **dans** un canvas (`label`, `total`, `values`, `caption`, `questionLabel`) | tracés en `<text>` SVG, hors de React |
+| Les **diapos du mode classe** (`ClasseSlide[]`) | `ModeClasse.tsx` n'a aucun rendu KaTeX — le code serait **projeté en clair au tableau** |
+| Une légende sous un dessin | seulement si le helper `legende()` de la fiche passe par `TexteMath` — à faire fiche par fiche |
+
+⚠️ **DEUX ANTISLASHS DANS LE SOURCE.** Avec un seul, `\t` est la tabulation et
+`\d` perd son antislash : l'écran affichait « imes » et « div » au lieu de × et ÷.
+**Invisible au typecheck.** Ça se voit en comptant les `.katex-error` dans la
+page — le mesureur du § suivant les compte désormais.
+
+⭐ **Et le PDF suit** : `KaTeX_Main-Regular` est **embarquée** dans le fichier
+téléchargeable (vérifié en listant ses `/BaseFont`). Les formules y sont dans la
+vraie police mathématique.
+
+### 3. Les fractions ont été scindées, et le seuil est posé
+
+`fraction_nombre` portait **douze** micros contre une médiane de sept. Frédéric :
+« une notion ne doit pas avoir 12 micro-compétences ». Découpage suivant la ligne
+de fracture déjà présente dans les prérequis, et **identique à celui de la 5ᵉ** :
+
+```
+fraction_nombre  « Fractions et nombres rationnels »   5 micros   (garde son id)
+fraction_calcul  « Calculer avec les fractions »       7 micros
+```
+
+⚠️ **`stat_statistique` en a dix et RESTE en l'état** — Frédéric : « ça me parait
+cohérent ». Le seuil n'est donc pas mécanique.
+⚠️ `fraction_nombre` **garde son identifiant** : dix fichiers le citent, dont
+`lib/matrice/coach.ts`. Après un découpage, **régénérer**
+`node scripts/generer-notions-matrice.mjs` et vérifier que le diff ne contient
+que la nouvelle notion.
 
 ---
 
@@ -227,6 +298,55 @@ prive d'un dessin que là où il redirait le texte.** Onze visuels sur douze blo
 - **Mon serveur est `eleveai-2`** (port 3100, dossier compilé `.next-2`), jamais
   celui d'un autre.
 - **Fichiers partagés touchés jusqu'ici**, tous de façon additive et tous imposés
-  par REGLES.md : `registre.ts`, `sitemap.ts`, `pdf-disponibles.ts`,
-  `next.config.ts`, et `lib/canvas/ThalesCanvas.tsx` (avec accord explicite).
-  Aucune ligne existante d'un autre chantier modifiée.
+  par REGLES.md ou autorisés explicitement : `registre.ts`, `sitemap.ts`,
+  `pdf-disponibles.ts`, `next.config.ts`, `lib/canvas/ThalesCanvas.tsx`,
+  `components/fiches/FicheCoursClient.tsx` et le nouveau
+  `components/fiches/TexteMath.tsx`. Aucune ligne existante d'un autre chantier
+  modifiée.
+
+⛔ **EN SUSPENS AU 26/08, À REPRENDRE** : `lib/fiches/registre.ts` et
+`app/sitemap.ts` contenaient, en fin de session, le **travail non commité de la
+session de français** — seize fiches de 4ᵉ, trois alias, de longs commentaires.
+Committer ces fichiers par chemin aurait emporté leur travail dans un commit de
+maths. Ils ont donc été laissés de côté, et **les deux lignes de
+`maths/4e/fraction-calcul` y sont écrites mais PAS COMMITÉES**.
+👉 À la reprise : `git pull`, vérifier si le français a commité, puis committer
+ces deux lignes — ou constater qu'elles sont parties avec leur commit. Vérifier
+d'un coup d'œil que `/fiches-cours/maths/4e/fraction-calcul` figure bien au
+sitemap et au registre.
+
+---
+
+## Le mesureur à coller dans la console
+
+Il compte maintenant les erreurs KaTeX, en plus des trois contrôles habituels.
+À passer **en 375 ET en 1280** sur chaque fiche.
+
+```js
+(() => {
+  const out = { largeur: innerWidth, nbSvg: 0, minPx: 99, petites: 0, chev: 0, deb: 0,
+    erreursKatex: document.querySelectorAll(".katex-error").length,
+    dollars: (document.body.innerText.match(/\$/g) || []).length };
+  document.querySelectorAll("svg").forEach((svg) => {
+    const r = svg.getBoundingClientRect();
+    if (r.width < 60 || svg.closest(".katex")) return;   // ⚠️ ignorer les SVG internes de KaTeX
+    out.nbSvg++;
+    const vb = svg.viewBox?.baseVal?.width || r.width, ratio = r.width / vb;
+    const T = [...svg.querySelectorAll("text")];
+    T.forEach((t) => {
+      const f = (parseFloat(getComputedStyle(t).fontSize) || 0) * ratio;
+      if (f > 0 && f < out.minPx) out.minPx = +f.toFixed(1);
+      if (f < 11) out.petites++;
+      const b = t.getBoundingClientRect();
+      if (b.width && (b.left < r.left-1 || b.right > r.right+1 || b.top < r.top-1 || b.bottom > r.bottom+1)) out.deb++;
+    });
+    for (let a = 0; a < T.length; a++) for (let b = a+1; b < T.length; b++) {
+      const x = T[a].getBoundingClientRect(), y = T[b].getBoundingClientRect();
+      if (x.width && y.width && x.left < y.right && y.left < x.right && x.top < y.bottom && y.top < x.bottom) out.chev++;
+    }
+  });
+  return out;
+})()
+```
+
+**La cible : `petites: 0`, `chev: 0`, `deb: 0`, `erreursKatex: 0`, `dollars: 0`.**
