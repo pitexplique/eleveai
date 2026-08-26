@@ -22,6 +22,47 @@ standard des seize fiches de 4e écrites le 26/08/2026.
 fiches de LANGUE : tout le vocabulaire, les registres, la conjugaison des formes
 et des valeurs. Liste exacte : `npx --yes tsx@4 scripts/couverture-fiches.ts --manquantes`.
 
+### ⭐ Avancement au soir du 26/08/2026 : le domaine lexical de la 5e est ENTIER
+
+Cinq fiches écrites dans la foulée de cette passation, une par objectif du BO :
+
+| notion | ce qu'elle porte |
+|---|---|
+| `vocabulaire_enrichir` | contexte, dictionnaire, réemploi |
+| `vocabulaire_relations` | synonymes, familles, préfixes et suffixes |
+| `vocabulaire_jouer` | sens propre et figuré, les quatre portes d'un mot neuf |
+| `vocabulaire_formation` | fabriquer un mot, éléments grecs et latins |
+| `vocabulaire_orthographe` | lettres muettes et homophones |
+
+**La 5e est donc à 13 notions fichées sur 28.** Reste : `discours_registres`,
+`conjugaison_formes`, `conjugaison_valeurs`, puis les douze transversales
+(lecture ×4, culture ×2, écriture ×3, oral ×3). La 6e n'est pas commencée.
+
+⛔ **AVANT D'ÉCRIRE UNE FICHE DE LEXIQUE, LIRE L'EN-TÊTE DES DEUX BANQUES.**
+Elles se partagent le domaine explicitement, et ne pas le lire fait écrire quatre
+fois la même fiche : `relations` = le SENS d'un affixe ; `formation` = le GESTE
+DE PRODUCTION et l'origine ; `orthographe` = ce que la dérivation impose à
+l'écriture ; `jouer` = choisir le sens qui va avec la phrase.
+
+⛔ **ET LA RÈGLE QUI SÉPARE LA 5e DE LA 4e SUR LES MÊMES OBJETS : la 5e ne NOMME
+pas, elle FAIT.** La 4e demande « quelle relation lie ces mots ? » ou
+« polysémie ou homonymie ? » — des questions d'étiquette. Le BO de 2026 demande à
+la 5e l'OPÉRATION : remplacer le mot et relire la phrase entière, choisir le sens
+qui la laisse debout. Les banques de 5e sont bâties là-dessus — table REMPLACER,
+table VARIATIONS rangée par paires. Une fiche de 5e qui fait classer au lieu de
+faire manipuler est hors programme, même si son contenu est juste.
+
+⭐ **Trois découvertes de dessin, toutes avec des canvas qui existaient déjà :**
+
+- **Un ARTICLE DE DICTIONNAIRE se dessine avec `phrase`** — c'est une suite de
+  morceaux étiquetés (le mot, sa classe, son sens, son exemple), donc un `groupe`
+  d'un seul mot par morceau.
+- **La LETTRE MUETTE se voit dans les wagons** : elle est dans le radical, et le
+  suffixe la réveille au joint des deux wagons — « tapis » + « ser ».
+- **La bande `nature` peut dire ce que le mot FAIT** (« la qualité », « la
+  personne », « l'action ») plutôt que sa classe : trois mots d'une même famille
+  cessent alors d'être trois mots qui se ressemblent.
+
 ---
 
 ## ⚠️⚠️ TROIS PROGRAMMES DIFFÉRENTS — NE JAMAIS TRANSPOSER
@@ -220,6 +261,33 @@ partagés, et une autre session y aura probablement des lignes non commitées. U
 La parade : trier les hunks (`git diff -U0`, filtrer, `git apply --cached
 --unidiff-zero`), puis committer **depuis l'index**, sans pathspec. Fait le
 26/08 : cinq hunks stagés, deux laissés intacts.
+
+### ⛔⛔ ET `git add <fichier>` NE SUFFIT PAS NON PLUS — MESURÉ LE 26/08 AU SOIR
+
+Vérifier `git diff -U0` juste avant, puis faire `git add <fichier>`, **ne
+protège de rien** : `git add` prend le fichier TEL QU'IL EST à cet instant, et
+l'autre session écrit entre les deux. C'est arrivé (commit `336fc2f9`) : quatre
+de ses lignes sont parties dans mon commit, dont une entrée de registre qui
+pointait vers une page **pas encore commitée**. Poussé tel quel, cela publiait un
+404 dans le hub et une URL morte dans le sitemap.
+
+**La parade est de ne jamais stager depuis l'arbre de travail.** On construit un
+patch de ses seuls hunks à partir d'un instantané, et on l'applique à l'INDEX :
+
+```
+git diff -U0 -- <fichiers>          # filtrer les hunks qui portent MON slug
+git apply --cached --unidiff-zero <patch>
+git commit -F message.txt           # depuis l'index, SANS pathspec
+```
+
+L'index reflète HEAD : les lignes non commitées d'une autre session n'y sont pas
+et ne peuvent pas s'y glisser. Et si le fichier a bougé entretemps, `git apply`
+**échoue** au lieu de prendre en silence — c'est tout l'intérêt.
+
+⭐ **Et un contrôle à passer avant chaque push**, celui qui aurait attrapé le
+404 : pour chaque entrée de `FICHES_REGISTRE` et chaque route de fiche du
+sitemap, vérifier que `app/fiches-cours/<clé>/page.tsx` est **suivi par git**
+(`git ls-files`), pas seulement présent sur le disque.
 
 ---
 
