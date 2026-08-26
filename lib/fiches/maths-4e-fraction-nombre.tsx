@@ -31,15 +31,23 @@
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+import TexteMath from "@/components/fiches/TexteMath";
 
 const BLEU = "#2563eb";
 const ROUGE = "#dc2626";
 
-/** Un dessin et sa phrase, sous lui. */
+/**
+ * Un dessin et sa phrase, sous lui.
+ * ⭐ La phrase passe par `TexteMath` : c'est ce qui lui permet de porter une
+ * vraie fraction. Les LIBELLÉS À L'INTÉRIEUR du dessin, eux, restent en écriture
+ * simple — ils sont tracés en <text> SVG, où le LaTeX apparaîtrait en clair.
+ */
 const legende = (dessin: React.ReactNode, texte: string) => (
   <div>
     {dessin}
-    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+    <p className="mt-1 text-center text-xs font-black text-slate-600">
+      <TexteMath>{texte}</TexteMath>
+    </p>
   </div>
 );
 
@@ -128,13 +136,13 @@ const divisionDecimale = (
 
 const pieges = [
   "Ne simplifier qu'un seul des deux nombres : on divise le numérateur ET le dénominateur par le même nombre, sinon la valeur change.",
-  "Croire qu'une fraction est plus grande parce que son dénominateur l'est : 1/5 est plus PETIT que 1/2, parce qu'on partage en plus de parts.",
+  "Croire qu'une fraction est plus grande parce que son dénominateur l'est : $\\frac{1}{5}$ est plus PETIT que $\\frac{1}{2}$, parce qu'on partage en plus de parts.",
   "Comparer deux fractions de dénominateurs différents sans rien faire : il faut d'abord les mettre au même dénominateur, ou passer par leur écriture décimale.",
 ];
 
 const aRetenir = [
   "Deux fractions sont égales quand on passe de l'une à l'autre en multipliant — ou en divisant — le numérateur et le dénominateur par le même nombre non nul.",
-  "Un nombre rationnel est un nombre qui peut s'écrire a/b, avec a et b entiers et b non nul. Tous les décimaux en sont, puisque 0,5 = 1/2.",
+  "Un nombre rationnel est un nombre qui peut s'écrire $\\frac{a}{b}$, avec a et b entiers et b non nul. Tous les décimaux en sont, puisque 0,5 = $\\frac{1}{2}$.",
   "À numérateurs égaux, la plus grande fraction est celle qui a le plus PETIT dénominateur : plus on partage, plus les parts sont petites.",
 ];
 
@@ -145,29 +153,29 @@ export const ficheFractionNombre4e: FicheCoursData = {
   notion: "fraction-nombre",
   titre: "Fractions et nombres rationnels",
   accroche:
-    "Une même quantité s'écrit d'une infinité de façons : 1/2, 2/4, 50/100, 0,5. Savoir reconnaître que ce sont le même nombre, choisir l'écriture la plus commode et ranger des fractions, c'est tout l'objet de cette fiche — avant de savoir calculer avec.",
+    "Une même quantité s'écrit d'une infinité de façons : $\\frac{1}{2}$, $\\frac{2}{4}$, $\\frac{50}{100}$, 0,5. Savoir reconnaître que ce sont le même nombre, choisir l'écriture la plus commode et ranger des fractions, c'est tout l'objet de cette fiche — avant de savoir calculer avec.",
   identite: [
-    { label: "Le mot de 4e", valeur: "Rationnel : tout nombre qui s'écrit a/b, b non nul" },
+    { label: "Le mot de 4e", valeur: "Rationnel : tout nombre qui s'écrit $\\frac{a}{b}$, b non nul" },
     { label: "La propriété clé", valeur: "On multiplie ou divise en HAUT et en BAS" },
     { label: "Le piège", valeur: "Un grand dénominateur fait une petite fraction" },
   ],
   definition: {
     texte:
-      "Une fraction a/b, c'est le partage d'un tout en b parts égales dont on prend a. C'est aussi un quotient : le nombre qui, multiplié par b, donne a. Un nombre est dit rationnel lorsqu'il peut s'écrire sous la forme d'une fraction de deux entiers, avec un dénominateur non nul.",
+      "Une fraction $\\frac{a}{b}$, c'est le partage d'un tout en b parts égales dont on prend a. C'est aussi un quotient : le nombre qui, multiplié par b, donne a. Un nombre est dit rationnel lorsqu'il peut s'écrire sous la forme d'une fraction de deux entiers, avec un dénominateur non nul.",
   },
   figure: {
     schema: fraction({
       model: "circle",
       fraction: { numerator: 3, denominator: 4, label: "3/4" },
     }),
-    legende: "3/4 : le tout est partagé en 4 parts égales, et on en prend 3.",
+    legende: "$\\frac{3}{4}$ : le tout est partagé en 4 parts égales, et on en prend 3.",
   },
   proprietes: [
     {
       titre: "Deux écritures, un seul nombre",
       micros: ["fraction_egale"],
       texte:
-        "1/2 et 2/4 recouvrent exactement la même surface : ce sont deux écritures du même nombre. On passe de l'une à l'autre en multipliant en haut et en bas par 2.",
+        "$\\frac{1}{2}$ et $\\frac{2}{4}$ recouvrent exactement la même surface : ce sont deux écritures du même nombre. On passe de l'une à l'autre en multipliant en haut et en bas par 2.",
       schema: legende(
         fraction({
           model: "compare",
@@ -201,27 +209,27 @@ export const ficheFractionNombre4e: FicheCoursData = {
           1,
           0.2
         ),
-        "1/5 est plus PETIT que 1/2"
+        "$\\frac{1}{5}$ est plus PETIT que $\\frac{1}{2}$"
       ),
     },
     {
       titre: "L'écriture décimale",
       micros: ["fraction_decimal"],
       texte:
-        "Une fraction est un quotient : en posant la division, on obtient son écriture décimale. 1/2 donne 0,5, et 1/4 donne 0,25.",
+        "Une fraction est un quotient : en posant la division, on obtient son écriture décimale. $\\frac{1}{2}$ donne 0,5, et $\\frac{1}{4}$ donne 0,25.",
       schema: divisionDecimale,
     },
     {
       titre: "Les nombres rationnels",
       micros: ["fraction_rationnel"],
       texte:
-        "Un décimal est toujours un rationnel : 0,5 vaut 50 carreaux sur 100, donc 50/100, c'est-à-dire 1/2. L'inverse est faux — 1/3 n'a pas d'écriture décimale exacte.",
+        "Un décimal est toujours un rationnel : 0,5 vaut 50 carreaux sur 100, donc $\\frac{50}{100}$, c'est-à-dire $\\frac{1}{2}$. L'inverse est faux — $\\frac{1}{3}$ n'a pas d'écriture décimale exacte.",
       schema: legende(
         fraction({
           model: "grid",
           grid: { rows: 10, cols: 10, shaded: 50 },
         }),
-        "0,5 = 50/100 = 1/2"
+        "0,5 = $\\frac{50}{100}$ = $\\frac{1}{2}$"
       ),
     },
   ],
@@ -231,7 +239,7 @@ export const ficheFractionNombre4e: FicheCoursData = {
   },
   historique: {
     texte:
-      "Les Égyptiens, il y a quatre mille ans, n'écrivaient que des fractions de numérateur 1 : pour dire 3/4, ils écrivaient 1/2 + 1/4. Le papyrus Rhind contient une table entière pour décomposer les autres fractions de cette façon. Notre barre de fraction, elle, vient des mathématiciens arabes du XIIe siècle, et le mot « rationnel » ne vient pas de « raison » mais de « ratio », le rapport.",
+      "Les Égyptiens, il y a quatre mille ans, n'écrivaient que des fractions de numérateur 1 : pour dire $\\frac{3}{4}$, ils écrivaient $\\frac{1}{2}$ + $\\frac{1}{4}$. Le papyrus Rhind contient une table entière pour décomposer les autres fractions de cette façon. Notre barre de fraction, elle, vient des mathématiciens arabes du XIIe siècle, et le mot « rationnel » ne vient pas de « raison » mais de « ratio », le rapport.",
   },
   formule: {
     contexte: "Pour tout entier k non nul",
@@ -272,7 +280,7 @@ export const ficheFractionNombre4e: FicheCoursData = {
       titre: "Comparer",
       micros: ["fraction_comparer"],
       texte:
-        "Si les dénominateurs sont les mêmes, on compare les numérateurs : 2/5 est plus petit que 3/5. Sinon, on met au même dénominateur, ou on passe par l'écriture décimale.",
+        "Si les dénominateurs sont les mêmes, on compare les numérateurs : $\\frac{2}{5}$ est plus petit que $\\frac{3}{5}$. Sinon, on met au même dénominateur, ou on passe par l'écriture décimale.",
       schema: legende(
         fraction({
           model: "compare",
@@ -291,7 +299,7 @@ export const ficheFractionNombre4e: FicheCoursData = {
       // (arbitrage de Frédéric, 25/08) : la grille de cent carreaux de la
       // propriété « Les nombres rationnels » montre déjà exactement cela.
       texte:
-        "On se demande si le nombre peut s'écrire comme un quotient de deux entiers. Tout entier en est un — 7 vaut 7/1 — et tout décimal aussi, en le mettant sur 10, 100 ou 1000.",
+        "On se demande si le nombre peut s'écrire comme un quotient de deux entiers. Tout entier en est un — 7 vaut $\\frac{7}{1}$ — et tout décimal aussi, en le mettant sur 10, 100 ou 1000.",
     },
   ],
   usages: [
@@ -316,10 +324,10 @@ export const ficheFractionNombre4e: FicheCoursData = {
   ],
   exemples: [
     {
-      titre: "Laquelle est égale à 1/2 ?",
+      titre: "Laquelle est égale à $\\frac{1}{2}$ ?",
       micros: ["fraction_egale", "fraction_simplifier"],
-      donnees: "On propose quatre fractions : 2/4, 1/3, 3/5 et 2/3.",
-      question: "Laquelle est égale à 1/2 ?",
+      donnees: "On propose quatre fractions : $\\frac{2}{4}$, $\\frac{1}{3}$, $\\frac{3}{5}$ et $\\frac{2}{3}$.",
+      question: "Laquelle est égale à $\\frac{1}{2}$ ?",
       schema: fraction(
         {
           model: "compare",
@@ -331,12 +339,12 @@ export const ficheFractionNombre4e: FicheCoursData = {
         "exemple"
       ),
       solution:
-        "C'est 2/4. On passe de 1/2 à 2/4 en multipliant le numérateur et le dénominateur par 2 : 1 × 2 = 2 et 2 × 2 = 4. Les trois autres ne se simplifient pas en 1/2 — pour 1/3, il faudrait que le dénominateur soit le double du numérateur, ce qui n'est pas le cas.",
+        "C'est $\\frac{2}{4}$. On passe de $\\frac{1}{2}$ à $\\frac{2}{4}$ en multipliant le numérateur et le dénominateur par 2 : 1 × 2 = 2 et 2 × 2 = 4. Les trois autres ne se simplifient pas en $\\frac{1}{2}$ — pour $\\frac{1}{3}$, il faudrait que le dénominateur soit le double du numérateur, ce qui n'est pas le cas.",
     },
     {
       titre: "La plus grande",
       micros: ["fraction_comparer"],
-      donnees: "On compare 1/2, 1/3, 1/4 et 1/5.",
+      donnees: "On compare $\\frac{1}{2}$, $\\frac{1}{3}$, $\\frac{1}{4}$ et $\\frac{1}{5}$.",
       question: "Laquelle est la plus grande ?",
       schema: droite(
         [
@@ -348,7 +356,7 @@ export const ficheFractionNombre4e: FicheCoursData = {
         0.2
       ),
       solution:
-        "C'est 1/2. Les quatre fractions ont le même numérateur, 1 : on partage donc le même tout en 2, 3, 4 ou 5 parts. Plus on partage, plus chaque part est petite. La plus grande est celle qui a le plus PETIT dénominateur, donc 1/2. ⚠️ C'est l'inverse de ce que l'intuition dit.",
+        "C'est $\\frac{1}{2}$. Les quatre fractions ont le même numérateur, 1 : on partage donc le même tout en 2, 3, 4 ou 5 parts. Plus on partage, plus chaque part est petite. La plus grande est celle qui a le plus PETIT dénominateur, donc $\\frac{1}{2}$. ⚠️ C'est l'inverse de ce que l'intuition dit.",
     },
     {
       titre: "Pourquoi 0,5 est rationnel",
@@ -357,35 +365,35 @@ export const ficheFractionNombre4e: FicheCoursData = {
       question: "Est-ce un nombre rationnel ? Justifie.",
       schema: divisionDecimale,
       solution:
-        "Oui. Un nombre est rationnel s'il peut s'écrire comme quotient de deux entiers avec un dénominateur non nul. Or 0,5 se lit « cinq dixièmes », donc 0,5 = 5/10, qui se simplifie en 1/2 en divisant en haut et en bas par 5. C'est bien un quotient de deux entiers, donc 0,5 est rationnel. La division posée fait le chemin inverse : 1 ÷ 2 = 0,5.",
+        "Oui. Un nombre est rationnel s'il peut s'écrire comme quotient de deux entiers avec un dénominateur non nul. Or 0,5 se lit « cinq dixièmes », donc 0,5 = $\\frac{5}{10}$, qui se simplifie en $\\frac{1}{2}$ en divisant en haut et en bas par 5. C'est bien un quotient de deux entiers, donc 0,5 est rationnel. La division posée fait le chemin inverse : 1 ÷ 2 = 0,5.",
     },
   ],
   pieges,
   aRetenir,
   entrainement: [
     {
-      question: "Simplifier 6/8 au maximum.",
+      question: "Simplifier $\\frac{6}{8}$ au maximum.",
       correction:
-        "6 et 8 sont tous les deux divisibles par 2 : on divise en haut et en bas, ce qui donne 3/4. Ensuite, plus aucun nombre ne divise à la fois 3 et 4 : la fraction est irréductible. Donc 6/8 = 3/4.",
+        "6 et 8 sont tous les deux divisibles par 2 : on divise en haut et en bas, ce qui donne $\\frac{3}{4}$. Ensuite, plus aucun nombre ne divise à la fois 3 et 4 : la fraction est irréductible. Donc $\\frac{6}{8}$ = $\\frac{3}{4}$.",
       micros: ["fraction_simplifier"],
     },
     {
-      question: "Quelle fraction est la plus grande : 2/5 ou 3/5 ?",
+      question: "Quelle fraction est la plus grande : $\\frac{2}{5}$ ou $\\frac{3}{5}$ ?",
       correction:
-        "Les deux fractions ont le même dénominateur : les parts sont donc de la même taille, et il suffit de comparer les numérateurs. Comme 3 est plus grand que 2, c'est 3/5 la plus grande.",
+        "Les deux fractions ont le même dénominateur : les parts sont donc de la même taille, et il suffit de comparer les numérateurs. Comme 3 est plus grand que 2, c'est $\\frac{3}{5}$ la plus grande.",
       micros: ["fraction_comparer"],
     },
     {
-      question: "À quel nombre décimal correspond 1/4 ?",
+      question: "À quel nombre décimal correspond $\\frac{1}{4}$ ?",
       correction:
-        "Une fraction est un quotient : on pose 1 ÷ 4, ce qui donne 0,25. On peut aussi le retrouver par les fractions égales : 1/4 = 25/100, et 25/100 se lit 0,25.",
+        "Une fraction est un quotient : on pose 1 ÷ 4, ce qui donne 0,25. On peut aussi le retrouver par les fractions égales : $\\frac{1}{4}$ = $\\frac{25}{100}$, et $\\frac{25}{100}$ se lit 0,25.",
       micros: ["fraction_decimal"],
     },
     {
       question:
         "Un nombre rationnel peut s'écrire sous quelle forme ? Le nombre 7 en est-il un ?",
       correction:
-        "Un nombre rationnel s'écrit a/b, avec a et b entiers et b NON NUL — la condition sur le dénominateur est essentielle, puisqu'on ne divise jamais par zéro. Et oui, 7 est rationnel : il s'écrit 7/1. Tous les entiers et tous les décimaux sont des rationnels.",
+        "Un nombre rationnel s'écrit $\\frac{a}{b}$, avec a et b entiers et b NON NUL — la condition sur le dénominateur est essentielle, puisqu'on ne divise jamais par zéro. Et oui, 7 est rationnel : il s'écrit $\\frac{7}{1}$. Tous les entiers et tous les décimaux sont des rationnels.",
       micros: ["fraction_rationnel"],
     },
   ],

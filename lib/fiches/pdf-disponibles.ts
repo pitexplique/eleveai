@@ -20,6 +20,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "calcul-litteral-5e-cours-exercices-corriges.pdf",
   "calcul-mental-6e-cours-exercices-corriges.pdf",
   "calcul-pose-6e-cours-exercices-corriges.pdf",
+  "calculer-avec-les-fractions-4e-cours-exercices-corriges.pdf",
   "calculer-avec-les-fractions-5e-cours-exercices-corriges.pdf",
   "chaines-d-accord-dans-la-phrase-2026-2027-5e-cours-exercices-corriges.pdf",
   "complements-du-verbe-cm2-cours-exercices-corriges.pdf",

@@ -41,6 +41,7 @@ import EncartsFiche from "@/components/fiches/EncartsFiche";
 import { libelleClasse } from "@/lib/fiches/registre";
 import { DOSSIER_PDF, nomPdf } from "@/lib/fiches/pdf";
 import { PDF_DISPONIBLES } from "@/lib/fiches/pdf-disponibles";
+import TexteMath from "@/components/fiches/TexteMath";
 import {
   ORDRE_CANONIQUE,
   RUBRIQUES_LABELS,
@@ -298,7 +299,7 @@ export default function FicheCoursClient({
                   {item.label}
                 </span>
                 <span className="mt-1 block font-black text-slate-900">
-                  {item.valeur}
+                  <TexteMath>{item.valeur}</TexteMath>
                 </span>
               </div>
             ))}
@@ -314,7 +315,7 @@ export default function FicheCoursClient({
                 À quoi ça sert : {apresDeuxPoints(fiche.titre)}
               </h2>
               <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">
-                {fiche.reel.texte}
+                <TexteMath>{fiche.reel.texte}</TexteMath>
               </p>
             </div>
           </section>
@@ -329,7 +330,7 @@ export default function FicheCoursClient({
                 Un peu d&apos;histoire : {apresDeuxPoints(fiche.titre)}
               </h2>
               <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">
-                {fiche.historique.texte}
+                <TexteMath>{fiche.historique.texte}</TexteMath>
               </p>
             </div>
           </section>
@@ -349,7 +350,7 @@ export default function FicheCoursClient({
                   Définition : {apresDeuxPoints(fiche.titre)}
                 </h2>
                 <p className="mt-3 text-base font-bold leading-7 text-slate-900 print:text-sm">
-                  {fiche.definition.texte}
+                  <TexteMath>{fiche.definition.texte}</TexteMath>
                 </p>
               </div>
               {fiche.figure ? (
@@ -357,7 +358,7 @@ export default function FicheCoursClient({
                   {fiche.figure.schema}
                   {fiche.figure.legende ? (
                     <figcaption className="mt-2 text-center text-xs font-bold text-slate-500">
-                      {fiche.figure.legende}
+                      <TexteMath>{fiche.figure.legende}</TexteMath>
                     </figcaption>
                   ) : null}
                 </figure>
@@ -386,9 +387,9 @@ export default function FicheCoursClient({
                   key={p.titre}
                   className="rounded-2xl border border-slate-200 bg-white p-4"
                 >
-                  <h3 className="font-black text-slate-900">{p.titre}</h3>
+                  <h3 className="font-black text-slate-900"><TexteMath>{p.titre}</TexteMath></h3>
                   <p className="mt-2 text-sm leading-6 text-slate-600 print:text-xs">
-                    {p.texte}
+                    <TexteMath>{p.texte}</TexteMath>
                   </p>
                   {/* ⭐ LE SCHÉMA DE LA PROPRIÉTÉ (19/08). Trois pavés de texte
                       côte à côte, c'est le bloc qu'un élève survole — un dessin
@@ -411,13 +412,13 @@ export default function FicheCoursClient({
             <div className="mt-4 grid gap-4 md:grid-cols-[1fr_1.25fr] print:grid-cols-[1fr_1.25fr]">
               <div className="rounded-2xl border border-sky-200 bg-sky-50 p-5 text-center">
                 <p className="text-sm font-bold uppercase text-sky-600">
-                  {fiche.formule.contexte}
+                  <TexteMath>{fiche.formule.contexte}</TexteMath>
                 </p>
                 <p className="mt-4 text-2xl font-black text-slate-900 print:text-xl">
-                  {fiche.formule.expression}
+                  <TexteMath>{fiche.formule.expression}</TexteMath>
                 </p>
                 <p className="mt-4 text-sm font-bold text-slate-600">
-                  {fiche.formule.legende}
+                  <TexteMath>{fiche.formule.legende}</TexteMath>
                 </p>
               </div>
               {fiche.formule.schema ? (
@@ -455,10 +456,10 @@ export default function FicheCoursClient({
                 >
                   <Icone className={`h-5 w-5 print:hidden ${style.icone}`} />
                   <h3 className="mt-3 text-lg font-black text-slate-900 print:mt-0 print:text-base">
-                    {i + 1}. {etape.titre}
+                    {i + 1}. <TexteMath>{etape.titre}</TexteMath>
                   </h3>
                   <p className="mt-2 text-sm leading-6 text-slate-600 print:text-xs">
-                    {etape.texte}
+                    <TexteMath>{etape.texte}</TexteMath>
                   </p>
                   {etape.schema && <div className="mt-3">{etape.schema}</div>}
                 </div>
@@ -482,9 +483,9 @@ export default function FicheCoursClient({
                   key={usage.titre}
                   className="rounded-2xl border border-slate-200 bg-white p-4"
                 >
-                  <h3 className="font-black text-slate-900">{usage.titre}</h3>
+                  <h3 className="font-black text-slate-900"><TexteMath>{usage.titre}</TexteMath></h3>
                   <p className="mt-2 text-sm leading-6 text-slate-600 print:text-xs">
-                    {usage.detail}
+                    <TexteMath>{usage.detail}</TexteMath>
                   </p>
                   {usage.schema && <div className="mt-3">{usage.schema}</div>}
                 </div>
@@ -506,12 +507,12 @@ export default function FicheCoursClient({
                   key={exemple.titre}
                   className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
                 >
-                  <h3 className="font-black text-slate-900">{exemple.titre}</h3>
+                  <h3 className="font-black text-slate-900"><TexteMath>{exemple.titre}</TexteMath></h3>
                   <p className="mt-2 text-sm text-slate-600 print:text-xs">
-                    {exemple.donnees}
+                    <TexteMath>{exemple.donnees}</TexteMath>
                   </p>
                   <p className="mt-1 text-sm font-bold text-slate-900 print:text-xs">
-                    {exemple.question}
+                    <TexteMath>{exemple.question}</TexteMath>
                   </p>
                   {exemple.schema ? (
                     <div className="mt-3 flex justify-center rounded-xl border border-slate-200 bg-white p-3">
@@ -519,7 +520,7 @@ export default function FicheCoursClient({
                     </div>
                   ) : null}
                   <p className="mt-3 rounded-xl border border-sky-100 bg-sky-50 p-3 text-sm leading-6 text-sky-800 print:text-xs">
-                    {exemple.solution}
+                    <TexteMath>{exemple.solution}</TexteMath>
                   </p>
                 </div>
               ))}
@@ -538,7 +539,7 @@ export default function FicheCoursClient({
               </h2>
               <ul className="mt-3 grid gap-2 text-sm leading-6 text-slate-700 print:text-xs">
                 {fiche.pieges.map((piege) => (
-                  <li key={piege}>{piege}</li>
+                  <li key={piege}><TexteMath>{piege}</TexteMath></li>
                 ))}
               </ul>
             </div>
@@ -556,7 +557,7 @@ export default function FicheCoursClient({
               </h2>
               <ul className="mt-3 grid gap-2 text-sm leading-6 text-slate-700 print:text-xs">
                 {fiche.aRetenir.map((point) => (
-                  <li key={point}>{point}</li>
+                  <li key={point}><TexteMath>{point}</TexteMath></li>
                 ))}
               </ul>
             </div>
@@ -578,14 +579,14 @@ export default function FicheCoursClient({
                   className="rounded-2xl border border-slate-200 bg-white p-4"
                 >
                   <p className="font-bold text-slate-900">
-                    {index + 1}. {item.question}
+                    {index + 1}. <TexteMath>{item.question}</TexteMath>
                   </p>
                   <details className="fiche-correction mt-2">
                     <summary className="cursor-pointer text-sm font-bold text-sky-600">
                       Voir la correction
                     </summary>
                     <p className="mt-2 rounded-xl border border-sky-100 bg-sky-50 p-3 text-sm leading-6 text-sky-800">
-                      {item.correction}
+                      <TexteMath>{item.correction}</TexteMath>
                     </p>
                   </details>
                 </li>
@@ -876,7 +877,7 @@ export default function FicheCoursClient({
                 {libelleClasse(fiche.classe)}
               </h1>
               <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600 print:text-sm">
-                {fiche.accroche}
+                <TexteMath>{fiche.accroche}</TexteMath>
               </p>
               <VideoNotion
                 matiere={fiche.matiere}
