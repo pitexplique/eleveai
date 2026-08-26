@@ -91,6 +91,9 @@ const PORTES_ELEVE_DES_LA_6E = ["type:coach", "*", "photo-cours"];
  * dans les deux matières — 17 en maths, 9 en français, écrites sur le BO. La
  * 5ᵉ et le CM2 en ont aussi, la Première en a une ; aucune des trois n'a la
  * paire. Le jour où la 5ᵉ l'aura, elle prendra la même liste, pas avant.
+ * ✅ FAIT LE 26/08/2026 — la 5ᵉ a sa paire (20 maths, 14 français) et prend
+ *    cette forme exacte : voir PORTES_5E. La 4ᵉ, elle, en prend une autre,
+ *    parce que Frédéric a demandé un ordre différent — voir PORTES_4E.
  *
  * L'ORDRE, ET CE QU'IL DIT :
  *   1. le coach          — on explique quand ça coince ;
@@ -223,7 +226,66 @@ const PORTES_CM2 = [
   "dictee-du-jour",
 ];
 
-const PORTES_5E = ["type:coach", "*", "parcours", "fiches-maths-5e", "photo-cours"];
+/**
+ * ⭐ 26/08/2026 — LA 5ᵉ PREND ENFIN LA LISTE DE LA 6ᵉ, COMME PROMIS.
+ * La note de PORTES_6E disait, le 23/08 : « Le jour où la 5ᵉ [aura la paire
+ * de collections], elle prendra la même liste, pas avant. » Ce jour est venu —
+ * 20 fiches de maths et 14 de français. On applique la promesse, à la lettre :
+ * même forme, même ordre, avec ses deux identifiants à elle.
+ */
+const PORTES_5E = [
+  "type:coach",
+  "*",
+  "parcours",
+  "fiches-maths-5e",
+  "fiches-francais-5e",
+  "photo-cours",
+];
+
+/**
+ * ⭐ 26/08/2026 — LA 4ᵉ SORT DU RANG COMMUN, ET L'ORDRE EST CELUI DE FRÉDÉRIC.
+ * « quand je tape élève 4e français les fiches de cours et exercices corrigés
+ * n'apparaissent pas dans les cards, mets-la après coach et parcours ».
+ *
+ * D'où COACH · PARCOURS · FICHE, et pas la forme de la 6ᵉ : celle-ci glisse un
+ * joker en 2ᵉ place (la saison), ce qui repousse la fiche au rang 4. La demande
+ * dit rang 3, on écrit rang 3.
+ *
+ * ⛔ CE QUE CETTE LISTE NE FAIT PAS, ET IL FAUT LE SAVOIR AVANT DE LA LIRE.
+ * Elle ne s'applique QUE quand l'élève n'a encore rien dit. `moteur.ts` :
+ *     const portes = repliSurLeNiveau ? PORTES_ECRITES[profil.id] : undefined;
+ * et `repliSurLeNiveau` exige notion, intention ET matière muettes. CLIQUER
+ * « Français » EST UNE DEMANDE : à partir de là, l'ordre des six cartes est
+ * celui du SCORE, et aucune ligne écrite ici ne le change. (Règle posée le
+ * 22/08 lors de l'épisode IA — voir le long commentaire de moteur.ts au-dessus
+ * de cette ligne.) ⚠️ NE PAS ESPÉRER RÉGLER UN ORDRE « APRÈS CLIC MATIÈRE » EN
+ * ÉCRIVANT ICI : ce qui rend une fiche visible sur un clic de matière, c'est sa
+ * DÉCLARATION dans RESSOURCES, pas sa présence dans une porte.
+ *
+ * ⛔ TROIS JETONS `type:`, ET SURTOUT PAS TROIS IDENTIFIANTS. Écrire
+ * `["type:coach", "parcours", "fiches-maths-4e", "fiches-francais-4e"]` a été
+ * essayé et MESURÉ le 26/08 : les deux défauts sont réels.
+ *
+ *   1. `parcours` EST UN IDENTIFIANT DE MATHS (`matiere: "maths"`, ligne ~517),
+ *      pas un mot générique. Frédéric, le 26/08 : « il y a des parcours en
+ *      maths et en français » — exactement, et le second s'appelle
+ *      `parcours-francais`. Un id figé ne sert donc qu'une des deux matières ;
+ *      `type:parcours` rend le parcours de la matière lue, quelle qu'elle soit.
+ *
+ *   2. LE FILTRE PAR MATIÈRE N'EST PAS SYMÉTRIQUE. Une demande de FRANÇAIS
+ *      écarte bien les ressources de maths ; une demande de MATHS n'écarte pas
+ *      celles de français (visible aussi sur `coach-francais`, qui sort au
+ *      rang 2 d'un 5ᵉ venu pour les maths). Avec deux ids de fiche écrits, un
+ *      4ᵉ venu pour les maths recevait `fiches-maths-4e` au rang 3 PUIS
+ *      `fiches-francais-4e` au rang 4 — deux cartes de fiches, dont une hors
+ *      sujet. `type:fiche` n'en rend qu'UNE, la mieux classée, et la mieux
+ *      classée est celle de la matière lue.
+ *
+ * ⚠️ TROIS ENTRÉES, PAS SIX. Les places 4 à 6 restent au score, selon la règle
+ * posée en tête de ce fichier : ce qu'un prof sait mieux que le calcul, c'est
+ * par où on COMMENCE. On n'écrit pas la fin d'un écran par symétrie.
+ */
+const PORTES_4E = ["type:coach", "type:parcours", "type:fiche"];
 
 export const PORTES_ECRITES: Partial<Record<ProfilId, string[]>> = {
   adulte: PORTES_ADULTE,
@@ -291,7 +353,7 @@ export const PORTES_ECRITES: Partial<Record<ProfilId, string[]>> = {
   cm2: PORTES_CM2,
   "6e": PORTES_6E,
   "5e": PORTES_5E,
-  "4e": PORTES_ELEVE_DES_LA_6E,
+  "4e": PORTES_4E,
   "3e": PORTES_ELEVE_DES_LA_6E,
   seconde: PORTES_ELEVE_DES_LA_6E,
   premiere: PORTES_ELEVE_DES_LA_6E,
@@ -1065,10 +1127,9 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // CM2, 20 de maths en 5ᵉ, toutes avec leur PDF depuis le 23/08.
     // ⛔ PAS DE FRANÇAIS EN 5ᵉ : le dossier est vide, zéro fiche. La 5ᵉ n'a donc
     // qu'une carte, et c'est exactement ce que la règle demande.
-    // ⏳ CETTE DERNIÈRE LIGNE N'EST PLUS VRAIE (26/08/2026) : le français de 5ᵉ
-    //    compte 14 fiches, et celui de 4ᵉ 16. Elles ne sont pourtant toujours
-    //    pas déclarées, et c'est une décision en attente, pas un oubli — voir
-    //    la note « ⏳ LE FRANÇAIS DE 5ᵉ ET DE 4ᵉ » sous fiches-maths-4e.
+    // ✅ CETTE DERNIÈRE LIGNE N'EST PLUS VRAIE (26/08/2026) : le français de 5ᵉ
+    //    compte 14 fiches, celui de 4ᵉ en compte 16, et les deux sont déclarés
+    //    depuis ce jour-là — voir `fiches-francais-4e` et sa note.
     // ⚠️ `niveaux` NE PORTE QUE LA CLASSE — jamais « prof » ni « parent ». Le
     // moteur essaie deux portes (le rôle, la classe dite) : « cm2 » suffit à
     // servir le parent et l'enseignant qui ont cliqué CM2, et à n'écarter
@@ -1101,11 +1162,12 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // ajouter `fiches-francais-5e` « pour la symétrie » — il n'y a rien
     // derrière, et une carte qui ouvre un sommaire sans sa classe est pire
     // qu'une carte absente.
-    // ⏳ LES DEUX MOITIÉS DE CE MOTIF ONT CHANGÉ (26/08/2026). « Il n'y a rien
-    //    derrière » est faux : 14 fiches de français en 5ᵉ. Et « un sommaire
-    //    sans sa classe » n'existe plus : /fiches-cours/francais/5e est une
-    //    page. Ce qui reste à trancher est ailleurs — le PDF. Voir la note
-    //    sous fiches-maths-4e.
+    // ⛔ CETTE CONSIGNE EST CADUQUE (26/08/2026) — ses deux moitiés sont
+    //    tombées. « Il n'y a rien derrière » : 14 fiches de français en 5ᵉ.
+    //    « Un sommaire sans sa classe » : /fiches-cours/francais/5e existe.
+    //    `fiches-francais-5e` est déclarée juste plus bas, et elle n'a rien
+    //    d'une symétrie — elle remplaçait la fiche de 6ᵉ, que le moteur servait
+    //    en repli à un élève de 5ᵉ. Voir sa note.
     id: "fiches-maths-5e",
     titre: "Maths 5e — cours et exercices corrigés",
     promesse: "La notion en une page, un dessin par idée, un exemple par règle.",
@@ -1147,28 +1209,54 @@ export const RESSOURCES: RessourceEleveAI[] = [
     type: "fiche",
     statut: "validee",
   },
-  /* ⏳ LE FRANÇAIS DE 5ᵉ ET DE 4ᵉ : ÉCRIT, RENDU, MAIS PAS ENCORE DÉCLARÉ.
-     Ce n'est pas un oubli, c'est la seule question que ce chantier n'a pas
-     tranchée — et elle appartient à Frédéric, parce qu'elle porte sur l'offre.
+  {
+    /* ─── ⭐ 26/08/2026 — LE FRANÇAIS DE 4ᵉ ET DE 5ᵉ ENTRE, ET C'EST FRÉDÉRIC ──
+       Sa demande, le 26/08 : « quand je tape élève 4e français les fiches de
+       cours et exercices corrigés n'apparaissent pas dans les cards, mets-la
+       après coach et parcours ».
 
-     La mesure, au 26/08/2026 :
-         français 5ᵉ  ·  14 fiches  ·   8 PDF   ← 6 manquants
-         français 4ᵉ  ·  16 fiches  ·   0 PDF   ← aucun
-     Les pages, elles, sont complètes : définition, propriétés dessinées,
-     exemples corrigés, exercices. Le bouton de téléchargement ne s'affiche que
-     pour les fiches présentes dans PDF_DISPONIBLES — donc une fiche sans PDF ne
-     promet pas un PDF, elle n'en propose simplement pas.
+       La question laissée ouverte quelques heures plus tôt — déclarer une
+       collection dont les PDF manquent — est donc tranchée dans le sens du
+       COURS : ce qu'on promet, c'est la leçon, pas le fichier.
+           français 4ᵉ  ·  16 fiches  ·   0 PDF
+           français 5ᵉ  ·  14 fiches  ·   8 PDF sur 14
+       ✅ ET LA PROMESSE TIENT QUAND MÊME, parce que le bouton de
+       téléchargement ne s'affiche que pour les fiches présentes dans
+       PDF_DISPONIBLES : une fiche sans PDF n'en promet pas un, elle n'en
+       propose simplement pas. Les pages, elles, sont complètes — définition,
+       propriétés dessinées, exemples corrigés, exercices.
 
-     Deux lectures, et elles ne donnent pas le même geste :
-     — la promesse porte sur le COURS : alors les deux cartes s'écrivent
-       aujourd'hui, et 30 fiches cessent d'être invisibles ;
-     — la promesse porte sur la COLLECTION COMPLÈTE, PDF compris : alors on
-       attend la fournée de PDF, comme le CM2 et la 5ᵉ de maths ont attendu la
-       leur le 23/08 avant d'entrer ici le 24.
-     ⛔ NE PAS TRANCHER SEUL. La carte à écrire est prête, il ne manque que la
-        décision : `fiches-francais-5e` et `fiches-francais-4e`, sur le modèle
-        exact de `fiches-francais-cm2`, url `/fiches-cours/francais/5e` et
-        `/fiches-cours/francais/4e` (les deux pages existent et répondent). */
+       ⚠️ LA 5ᵉ N'EST PAS UN AJOUT « PAR SYMÉTRIE », ELLE RÉPARE PIRE QUE LE
+       SILENCE DE LA 4ᵉ. Frédéric : « par contre si je mets 5e ça fonctionne ».
+       Mesuré : ce qui sortait en 5ᵉ était `fiches-francais-6e`, la fiche de
+       l'ANNÉE D'EN DESSOUS — le repli du moteur quand la classe n'a rien de
+       déclaré. Un élève de 5ᵉ cliquait « Français », recevait une carte, et
+       ouvrait le programme de 6ᵉ pendant que ses 14 fiches de 5ᵉ existaient.
+       La 4ᵉ ne montrait rien ; la 5ᵉ montrait le mauvais niveau. Le second
+       défaut est le plus coûteux : il ne se voit pas. */
+    id: "fiches-francais-4e",
+    titre: "Français 4e — cours et exercices corrigés",
+    promesse: "La règle en une page, avec la phrase dessinée.",
+    url: "/fiches-cours/francais/4e",
+    niveaux: ["4e"],
+    matiere: "francais",
+    notions: ["*"],
+    intentions: ["comprendre"],
+    type: "fiche",
+    statut: "validee",
+  },
+  {
+    id: "fiches-francais-5e",
+    titre: "Français 5e — cours et exercices corrigés",
+    promesse: "La règle en une page, avec la phrase dessinée.",
+    url: "/fiches-cours/francais/5e",
+    niveaux: ["5e"],
+    matiere: "francais",
+    notions: ["*"],
+    intentions: ["comprendre"],
+    type: "fiche",
+    statut: "validee",
+  },
   {
     id: "fiches-maths-6e",
     // ⭐ « COURS ET EXERCICES CORRIGÉS », ET PAS « FICHE DE COURS » (23/08/2026).
