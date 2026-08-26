@@ -50,9 +50,9 @@ const nextConfig = {
       // ⭐ ET ELLES REVIENNENT, UNE PAR UNE (25/08/2026). Une notion réécrite au
       // standard sort de cette liste le jour où sa fiche est publiée, sinon
       // l'adresse continue de rediriger et la fiche neuve est invisible.
-      // Sorties à ce jour : pythagore-theoreme, trigo-cosinus.
+      // Sorties à ce jour : pythagore-theoreme, trigo-cosinus, stat-statistique.
       {
-        source: "/fiches-cours/maths/4e/:notion(stat-statistique|proba-experience)",
+        source: "/fiches-cours/maths/4e/proba-experience",
         destination: "/fiches-cours/maths",
         permanent: false,
       },

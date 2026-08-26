@@ -85,6 +85,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "resoudre-un-probleme-cm2-cours-exercices-corriges.pdf",
   "se-reperer-dans-la-phrase-complexe-6e-cours-exercices-corriges.pdf",
   "solides-cm2-cours-exercices-corriges.pdf",
+  "statistiques-4e-cours-exercices-corriges.pdf",
   "statistiques-5e-cours-exercices-corriges.pdf",
   "suites-de-nombres-cm2-cours-exercices-corriges.pdf",
   "symetrie-axiale-6e-cours-exercices-corriges.pdf",

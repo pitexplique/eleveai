@@ -270,6 +270,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Calculer avec les fractions",
     resume: "Additionner, soustraire, multiplier, et prendre une fraction d'une quantité.",
   },
+  "maths/4e/stat-statistique": {
+    titre: "Les statistiques",
+    resume: "Effectif et fréquence, moyenne pondérée, médiane, étendue, et comparer deux séries.",
+  },
   "maths/4e/sym-transformation": {
     titre: "Les transformations",
     resume: "Symétrie axiale, symétrie centrale, translation, rotation, et ce que toutes conservent.",
@@ -312,6 +316,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "La phrase complexe",
     resume:
       "Compter les propositions, distinguer juxtaposition, coordination et subordination, choisir qui, que, où.",
+  },
+  "francais/cm2/grammaire-complements": {
+    titre: "Les compléments du verbe",
+    resume:
+      "Poser « quoi ? » puis « à qui ? », déplacer le complément pour voir s'il est circonstanciel, et ne pas confondre l'attribut avec un COD.",
   },
 
   /* ⭐ LA CONJUGAISON DU CM2 (23/08/2026). La classe avait trois fiches, toutes
@@ -492,6 +501,29 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Le discours direct et le discours indirect (2026-2027)",
     resume:
       "Citer entre guillemets ou rapporter dans une subordonnée, déplacer le pronom, le temps et l'indication de temps, et ponctuer un dialogue avec ses incises et ses tirets.",
+  },
+
+  /* ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées, mais
+     ni le registre ni le sitemap ne les déclaraient : le coach n'affichait
+     donc aucun badge « Fiche » sur les micros de 4e, et Google ne savait pas
+     qu'elles existaient. Elles portent l'année comme celles de la 5e — même
+     programme du 5 mars 2026, même requête tapée à la rentrée. */
+  "francais/4e/grammaire-phrase": {
+    titre: "Les groupes de la phrase : nature et fonction (2026-2027)",
+    resume:
+      "La nature d'un groupe ne change jamais, sa fonction change à chaque phrase — et les trois manipulations le prouvent, même quand le sujet est loin ou inversé.",
+  },
+
+  "francais/4e/phrase-complexe": {
+    titre: "La phrase complexe et ses subordonnées (2026-2027)",
+    resume:
+      "Compter les verbes conjugués, séparer juxtaposition, coordination et subordination, puis nommer les cinq sortes de subordonnées et dire leur fonction.",
+  },
+
+  "francais/4e/orthographe-participe": {
+    titre: "L'accord du participe passé : être, avoir, pronominaux (2026-2027)",
+    resume:
+      "Avec avoir, tout se joue sur la place du COD et sur les trois façons dont il passe devant — et « se » complément d'objet indirect ne fait jamais accorder.",
   },
 
   "ia/fondements/definir-l-ia": { titre: "Qu'est-ce que l'intelligence artificielle ?" },
