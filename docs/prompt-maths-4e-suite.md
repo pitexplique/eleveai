@@ -12,7 +12,7 @@ Tu es la session MATHS 4e. Deux autres sessions travaillent dans le même dossie
    mesure à découvrir, et elles font gagner une fiche sur deux.
 
 ════ OÙ ON EN EST ═══════════════════════════════════════════════════
-maths 4e   11 fiches sur 20   ·   micros 80/80   ·   11 PDF
+maths 4e   12 fiches sur 20   ·   micros 85/85   ·   12 PDF   ·   tout est POUSSÉ
 
 ⚠️ VINGT et non dix-neuf : les fractions ont été scindées en deux le 26/08
 (fraction_nombre, 5 micros · fraction_calcul, 7 micros), parce que la notion en
@@ -22,17 +22,23 @@ présente dans les prérequis, et il copie celui de la 5e.
 ⚠️ stat_statistique en a dix et RESTE en l'état : « ça me parait cohérent ».
 Le seuil n'est donc pas mécanique — demander avant de scinder autre chose.
 
-FAIT (11) : pythagore-theoreme · thales-theoreme · trigo-cosinus ·
+FAIT (12) : pythagore-theoreme · thales-theoreme · trigo-cosinus ·
 quadrilatere-parallelogramme · sym-transformation · stat-statistique ·
 proba-experience · relatif-operation · fraction-nombre · fraction-calcul ·
-prop-proportionnalite
+prop-proportionnalite · litteral-expression
 
-RESTE (9), et cinq d'entre elles s'enchaînent :
-  ⭐ LE BLOC ALGÈBRE, à écrire à la suite : litteral_expression →
-     litteral_distributivite → litteral_identite_remarquable →
-     litteral_factorisation → equation_resolution. Elles partagent les mêmes
-     canvas (`algebre`, `calcul_pose`, `tableau_donnees`) et le même vocabulaire.
-  · aire_perimetre · aire_surface · volume_solide  (grandeurs et espace)
+RESTE (8) :
+  ⭐ LA SUITE DU BLOC ALGÈBRE, à écrire dans cet ordre : litteral_distributivite
+     → litteral_identite_remarquable → litteral_factorisation →
+     equation_resolution. Elles partagent le vocabulaire posé par
+     `litteral-expression` (la lettre, le coefficient, le terme constant, les
+     termes semblables) : LIRE SON EN-TÊTE AVANT, et ne pas le redéfinir.
+     ⭐ Et elles partagent ses canvas : `algebre` pour l'inconnue rendue
+     concrète, `calcul_pose`, `tableau_donnees`. La distributivité se dessine
+     naturellement en `figure_libre` — l'aire d'un rectangle découpé en deux.
+  · aire_perimetre · aire_surface · volume_solide  (grandeurs et espace ;
+    `figure_libre` pour les aires, `solide_3d` pour les volumes — ⛔ ce dernier
+    ne se laisse pas rétrécir, la seule commande est la POLICE)
   · algo_programmation                              (le canvas `scratch`)
 
 ════ LA RÈGLE QUE FRÉDÉRIC A POSÉE LE 26/08 ═════════════════════════
@@ -95,6 +101,29 @@ téléchargeable, vérifié en listant ses /BaseFont.
 6. Une ÉTIQUETTE DE POINT est centrée sur sa valeur : un mot posé sur le minimum
    d'une number_line sort du cadre. Les mots vont dans la légende.
 7. Le libellé d'un VECTEUR se compte en caractères, comme la phrase du bas.
+8. ⛔ `algebre` N'A PAS DE CHAMP `size`, seul canvas du catalogue dans ce cas, et
+   il rend en HTML et non en SVG. On ne peut rien régler — seulement mesurer. Ses
+   étiquettes de thème (« score inconnu », « niveau ») sont en 10 px FIXES, donc
+   10 px sur tous les écrans. C'est le style du composant, partagé avec le coach :
+   signalé, pas touché. ⚠️ Le mesureur de console ne les voit pas : il ne lit que
+   les `<text>` des SVG. Pour ce canvas, contrôler à l'œil.
+
+════ ⛔ CE QUI A FAILLI PUBLIER UN 404, ET LA RÈGLE QUI EN SORT ═════
+Le 26/08, la session de français a commité `registre.ts` et `sitemap.ts` en
+emportant sans le vouloir quatre lignes de maths : entre sa vérification du diff
+et son `git add`, la session maths avait écrit dans les mêmes fichiers. `git add`
+prend le fichier tel qu'il est À CET INSTANT, pas tel qu'on l'a lu.
+
+Résultat : le tip de `main` déclarait la route `maths/4e/litteral-expression`
+alors que ni la fiche ni la page n'étaient encore suivies. Pousser aurait publié
+une entrée de hub menant à un 404 et une URL morte au sitemap.
+
+⭐ LA RÈGLE : COMMITER LA FICHE ET SA PAGE **AVANT** LE CÂBLAGE, jamais l'inverse.
+Une route déclarée sans fichier casse le site ; un fichier sans route ne fait
+qu'attendre. Et contrôler avant de pousser :
+    git show HEAD:lib/fiches/registre.ts | grep -c '"maths/4e/'
+    git ls-files app/fiches-cours/maths/4e/ | wc -l
+Les deux nombres doivent être égaux.
 
 ════ LA BOUCLE, FICHE PAR FICHE ═════════════════════════════════════
 1. Lire les micros ET leurs énoncés (voir plus haut).
@@ -111,20 +140,14 @@ le code. C'est arrivé cinq fois le 26/08.
 ⚠️ tsc peut échouer sur .next-2/types/validator.ts en citant une route d'une
 AUTRE matière : c'est le cache de Next. rm -rf .next-2/types.
 
-════ ⛔ LE POINT LAISSÉ EN SUSPENS, À TRAITER EN PREMIER ═════════════
-lib/fiches/registre.ts et app/sitemap.ts contenaient en fin de session le
-TRAVAIL NON COMMITÉ de la session de français — seize fiches de 4e, trois alias,
-de longs commentaires. Les committer par chemin aurait emporté leur travail dans
-un commit de maths.
+════ ✅ RIEN N'EST EN SUSPENS ═══════════════════════════════════════
+Au 26/08, tout est commité ET poussé. Contrôlé : 12 entrées `maths/4e/` au
+registre, 12 routes suivies sous app/fiches-cours/maths/4e/, mêmes noms, arbre de
+travail vide, tsc propre.
 
-Ils ont donc été laissés de côté, MAIS les lignes de maths y sont écrites :
-  · maths/4e/fraction-calcul        (registre + sitemap)
-  · maths/4e/prop-proportionnalite  (registre + sitemap)
-
-👉 À LA REPRISE : git pull, regarder si le français a commité. Si oui, ces deux
-paires de lignes sont peut-être déjà parties avec leur commit — vérifier, et
-committer ce qui reste. Contrôle rapide : les deux adresses doivent figurer au
-sitemap ET au registre, sinon les fiches n'apparaissent pas au hub des maths.
+⚠️ Le déploiement du 26/08 a publié quarante commits d'un coup — dont la
+réparation du coach de 4e, la scission des fractions et le rendu KaTeX des
+109 fiches. Si quelque chose cloche en ligne, c'est là qu'il faut regarder.
 
 ════ CE QU'IL NE FAUT PAS FAIRE ═════════════════════════════════════
 ⛔ Le graphe des PRÉREQUIS : reporté par Frédéric.
