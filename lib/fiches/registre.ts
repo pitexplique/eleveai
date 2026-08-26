@@ -270,6 +270,14 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Calculer avec les fractions",
     resume: "Additionner, soustraire, multiplier, et prendre une fraction d'une quantité.",
   },
+  "maths/4e/prop-proportionnalite": {
+    titre: "La proportionnalité",
+    resume: "Reconnaître, le coefficient, le produit en croix, les pourcentages et les évolutions.",
+  },
+  "maths/4e/fraction-calcul": {
+    titre: "Calculer avec les fractions",
+    resume: "Additionner, multiplier, une fraction d'une quantité, l'inverse, l'opposé et la division.",
+  },
   "maths/4e/fraction-nombre": {
     titre: "Fractions et nombres rationnels",
     resume: "Fractions égales, simplifier, comparer, écriture décimale et nombres rationnels.",
@@ -515,14 +523,6 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
       "Citer entre guillemets ou rapporter dans une subordonnée, déplacer le pronom, le temps et l'indication de temps, et ponctuer un dialogue avec ses incises et ses tirets.",
   },
 
-  /* ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées, mais
-     ni le registre ni le sitemap ne les déclaraient : le coach n'affichait
-     donc aucun badge « Fiche » sur les micros de 4e, et Google ne savait pas
-     qu'elles existaient. Elles portent l'année comme celles de la 5e — même
-     programme du 5 mars 2026, même requête tapée à la rentrée. */
-  "francais/4e/grammaire-phrase": {
-    titre: "Les groupes de la phrase : nature et fonction (2026-2027)",
-    resume:
   /* ⭐ LE VOCABULAIRE DE LA 5e (26/08/2026). Le domaine manquait EN ENTIER — cinq
      notions, aucune fiche — alors que le BO de 2026 lui donne cinq objectifs
      nommés. Celle-ci ouvre le chantier par le premier d'entre eux. */
@@ -532,6 +532,14 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
       "Trouver le sens d'un mot inconnu en le remplaçant par un blanc, lire un article de dictionnaire jusqu'à ses sens numérotés, et sortir de « dire » en se demandant à quel volume et pour quoi faire.",
   },
 
+  /* ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées, mais
+     ni le registre ni le sitemap ne les déclaraient : le coach n'affichait
+     donc aucun badge « Fiche » sur les micros de 4e, et Google ne savait pas
+     qu'elles existaient. Elles portent l'année comme celles de la 5e — même
+     programme du 5 mars 2026, même requête tapée à la rentrée. */
+  "francais/4e/grammaire-phrase": {
+    titre: "Les groupes de la phrase : nature et fonction (2026-2027)",
+    resume:
       "La nature d'un groupe ne change jamais, sa fonction change à chaque phrase — et les trois manipulations le prouvent, même quand le sujet est loin ou inversé.",
   },
 
@@ -547,10 +555,6 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
       "Avec avoir, tout se joue sur la place du COD et sur les trois façons dont il passe devant — et « se » complément d'objet indirect ne fait jamais accorder.",
   },
 
-  "ia/fondements/definir-l-ia": { titre: "Qu'est-ce que l'intelligence artificielle ?" },
-  "ia/fondements/apprentissage-automatique": { titre: "L'apprentissage automatique" },
-  "ia/fondements/modeles-apprentissage": { titre: "Les modèles d'apprentissage" },
-  "ia/fondements/grands-modeles-de-langage": { titre: "Les grands modèles de langage" },
   /* ⭐ LA 4e EST LA PREMIÈRE CLASSE DE FRANÇAIS ENTIÈREMENT FICHÉE (26/08/2026) :
      dix-neuf notions, seize fiches. Le CM2 est à 7 sur 27, la 6e à 9 sur 29, la
      5e à 8 sur 28 — et toutes les trois n'ont QUE de l'étude de la langue.
@@ -643,6 +647,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
       "Écouter, c'est ranger. Et pour un argument : je retire le ton, et je regarde ce qui reste — un nombre de gens d'accord n'est pas une raison.",
   },
 
+  "ia/fondements/definir-l-ia": { titre: "Qu'est-ce que l'intelligence artificielle ?" },
+  "ia/fondements/apprentissage-automatique": { titre: "L'apprentissage automatique" },
+  "ia/fondements/modeles-apprentissage": { titre: "Les modèles d'apprentissage" },
+  "ia/fondements/grands-modeles-de-langage": { titre: "Les grands modèles de langage" },
   "ia/fondements/algorithmes-de-recommandation": { titre: "Les algorithmes de recommandation" },
   "ia/fondements/ia-incarnee-robotique": { titre: "L'IA incarnée et la robotique" },
   "ia/usages/familles-de-taches": { titre: "Ce que l'IA sait faire" },
@@ -705,10 +713,6 @@ export const FICHES_ALIAS: Record<string, string> = {
   //  leur au CM2, et le coach continue donc de les envoyer sur l'orthographe.)
   "francais/cm2/grammaire-groupe-nominal": "francais/cm2/grammaire-orthographe",
   "francais/cm2/grammaire-accords": "francais/cm2/grammaire-orthographe",
-};
-
-/** La classe où la fiche est réellement rangée, quand elle diffère de celle
- *  demandée — pour l'afficher à l'élève (« Fiche · 4e ») plutôt que de lui
 
   /* ⭐ TROIS ALIAS DE 4e QUI NE SONT PAS PROVISOIRES (26/08/2026), et c'est ce
      qui les distingue de ceux du CM2 : ils ne s'effaceront jamais, parce que la
@@ -728,6 +732,10 @@ export const FICHES_ALIAS: Record<string, string> = {
   "francais/4e/phrase-subordonnees": "francais/4e/phrase-complexe",
   "francais/4e/vocabulaire-orthographe": "francais/4e/vocabulaire-formation",
   "francais/4e/conjugaison-valeurs": "francais/4e/conjugaison-temps",
+};
+
+/** La classe où la fiche est réellement rangée, quand elle diffère de celle
+ *  demandée — pour l'afficher à l'élève (« Fiche · 4e ») plutôt que de lui
  *  ouvrir en silence le cours d'une autre année. `null` si pas d'alias. */
 export function ficheClasseSource(
   matiere: string,
