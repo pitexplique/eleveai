@@ -274,6 +274,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les expressions littérales",
     resume: "La lettre, le coefficient, traduire une phrase, substituer une valeur et réduire.",
   },
+  "maths/4e/litteral-distributivite": {
+    titre: "La distributivité",
+    resume: "Développer un produit en somme, la double distributivité, réduire, et reconnaître la forme.",
+  },
   "maths/4e/prop-proportionnalite": {
     titre: "La proportionnalité",
     resume: "Reconnaître, le coefficient, le produit en croix, les pourcentages et les évolutions.",
