@@ -19,7 +19,7 @@
 // (`--manquantes` liste les notions sans fiche au lieu du seul décompte.)
 
 import { getKnowledgePack, type Classe, type Matiere } from "@/lib/tutor-v4/catalog";
-import { FICHES_REGISTRE } from "@/lib/fiches/registre";
+import { FICHES_REGISTRE, FICHES_ALIAS } from "@/lib/fiches/registre";
 
 const CLASSES_MATHS: Classe[] = [
   "cp", "ce1", "ce2", "cm1", "cm2",
@@ -54,7 +54,14 @@ function mesurer(matiere: Matiere, classe: Classe): Ligne {
   let avecFiche = 0;
   for (const n of notions) {
     const cle = `${matiere}/${classe}/${slug(n.id)}`;
-    if (FICHES_REGISTRE[cle]) avecFiche += 1;
+    /* ⛔ LES ALIAS COMPTENT, ET LES OUBLIER FAISAIT MENTIR LA MESURE (26/08/2026).
+       Une notion peut être couverte par la fiche d'une notion voisine : c'est le
+       cas quand le découpage a coupé en deux un objectif que le programme traite
+       d'un bloc — « phrase complexe » et « subordonnées » en 4e, par exemple. Le
+       coach affiche alors le badge « Fiche » sur les deux lignes, via
+       `FICHES_ALIAS`. Ce script ne lisait que le registre : il annonçait 16
+       notions fichées sur 19 en 4e quand l'élève en voyait dix-neuf. */
+    if (FICHES_REGISTRE[cle] || FICHES_REGISTRE[FICHES_ALIAS[cle] ?? ""]) avecFiche += 1;
     else manquantes.push(n.id);
   }
   return { matiere, classe, notions: notions.length, micros: micros.length, avecFiche, manquantes };

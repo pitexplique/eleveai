@@ -542,6 +542,98 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
   "ia/fondements/apprentissage-automatique": { titre: "L'apprentissage automatique" },
   "ia/fondements/modeles-apprentissage": { titre: "Les modèles d'apprentissage" },
   "ia/fondements/grands-modeles-de-langage": { titre: "Les grands modèles de langage" },
+  /* ⭐ LA 4e EST LA PREMIÈRE CLASSE DE FRANÇAIS ENTIÈREMENT FICHÉE (26/08/2026) :
+     dix-neuf notions, seize fiches. Le CM2 est à 7 sur 27, la 6e à 9 sur 29, la
+     5e à 8 sur 28 — et toutes les trois n'ont QUE de l'étude de la langue.
+     ⛔ La 4e est aussi la première à ficher la lecture, l'écriture, l'oral et la
+     culture, longtemps laissés de côté au motif qu'« il n'y a rien à dessiner ».
+     Il y avait : l'arc de question pour la justification, la grille de
+     `figure_libre` pour le cadrage d'une image puis pour la silhouette d'un
+     genre sur la page, les deux groupes opposés pour une tension. Voir les
+     en-têtes de `francais-4e-lecture-comprehension.tsx` et de
+     `francais-4e-lecture-documents.tsx`.
+     ⚠️ `culture-questionnements` sera à refaire ENTIÈREMENT à la bascule de
+     septembre 2027 : les cinq entrées de l'année changent. Les quinze autres
+     tiennent sur des notions qui ne changent pas de nom. */
+
+  "francais/4e/orthographe-accords": {
+    titre: "Les chaines d'accord et le passif (2026-2027)",
+    resume:
+      "Le noyau du sujet commande, jamais le mot le plus proche : « le bruit des vagues berçait » — et deux noms coordonnés commandent ensemble.",
+  },
+
+  "francais/4e/conjugaison-formes": {
+    titre: "Lire et former un verbe conjugué (2026-2027)",
+    resume:
+      "Radical, marque de temps, marque de personne : chaque temps va chercher sa base ailleurs, et le « r » du futur sépare l'imparfait du conditionnel.",
+  },
+
+  "francais/4e/conjugaison-temps": {
+    titre: "Les temps, les modes et ce qu'ils expriment (2026-2027)",
+    resume:
+      "Le mot qui précède commande le mode, l'imparfait étend quand le passé simple pique — et « le suspect aurait fui » rapporte sans garantir.",
+  },
+
+  "francais/4e/analyse-discours": {
+    titre: "Registres, paroles rapportées et argumentation (2026-2027)",
+    resume:
+      "Direct, indirect, indirect libre : la troisième forme n'a aucune marque, et c'est pourtant le personnage qui pense. Trois transpositions, jamais deux.",
+  },
+
+  "francais/4e/vocabulaire-sens": {
+    titre: "Le sens des mots et leurs relations (2026-2027)",
+    resume:
+      "Deux axes qu'on confond : l'intensité est une échelle, la généralité un emboitement. Et « logement, taudis, demeure » désignent le même endroit.",
+  },
+
+  "francais/4e/vocabulaire-formation": {
+    titre: "La formation des mots et l'orthographe lexicale (2026-2027)",
+    resume:
+      "Préfixe, radical, suffixe : un mot se démonte comme un verbe. Et le « d » de « grand », qu'on n'entend pas, s'entend dans « grandeur ».",
+  },
+
+  "francais/4e/lecture-comprehension": {
+    titre: "Comprendre, interpréter et apprécier un texte (2026-2027)",
+    resume:
+      "Une interprétation se prouve : qu'est-ce qui, dans le texte, me le fait dire ? Six familles d'indices, et l'implicite qui se trouve en récrivant franchement.",
+  },
+
+  "francais/4e/lecture-documents": {
+    titre: "Lire des images, la presse et des documents (2026-2027)",
+    resume:
+      "Le cadre décide surtout de ce qu'on ne verra pas. Un graphique peut être exact et trompeur, et répéter n'est jamais confirmer.",
+  },
+
+  "francais/4e/lecture-voix-haute": {
+    titre: "Lire à voix haute et mettre en voix (2026-2027)",
+    resume:
+      "Un texte pour la voix s'annote comme une partition : groupes de souffle, mots à détacher. Et l'accident se prépare — un trou, on repart au vers suivant.",
+  },
+
+  "francais/4e/culture-litteraire": {
+    titre: "Situer une œuvre et garder trace de ses lectures (2026-2027)",
+    resume:
+      "Le genre se voit à la forme du texte sur la page. Les objets datent, les sentiments jamais — et une trace utile porte trois pièces : où, quoi, pourquoi.",
+  },
+
+  "francais/4e/culture-questionnements": {
+    titre: "Les questionnements de l'année de 4e (2026-2027)",
+    resume:
+      "Une entrée n'est pas un thème, c'est une tension : le sentiment contre les mots, ce que je veux contre ce qu'on attend, inventer contre dire vrai.",
+  },
+
+  "francais/4e/ecriture": {
+    titre: "Écrire pour apprendre, inventer et réfléchir (2026-2027)",
+    resume:
+      "Un paragraphe se compte : l'idée, l'exemple, ce qu'il prouve. Il manque presque toujours le troisième — celui qui écrit l'a dans la tête.",
+  },
+
+  "francais/4e/oral": {
+    titre: "Prendre la parole, écouter et interagir (2026-2027)",
+    resume:
+      "Écouter, c'est ranger. Et pour un argument : je retire le ton, et je regarde ce qui reste — un nombre de gens d'accord n'est pas une raison.",
+  },
+
   "ia/fondements/algorithmes-de-recommandation": { titre: "Les algorithmes de recommandation" },
   "ia/fondements/ia-incarnee-robotique": { titre: "L'IA incarnée et la robotique" },
   "ia/usages/familles-de-taches": { titre: "Ce que l'IA sait faire" },
@@ -608,6 +700,25 @@ export const FICHES_ALIAS: Record<string, string> = {
 
 /** La classe où la fiche est réellement rangée, quand elle diffère de celle
  *  demandée — pour l'afficher à l'élève (« Fiche · 4e ») plutôt que de lui
+
+  /* ⭐ TROIS ALIAS DE 4e QUI NE SONT PAS PROVISOIRES (26/08/2026), et c'est ce
+     qui les distingue de ceux du CM2 : ils ne s'effaceront jamais, parce que la
+     fiche manquante n'est pas à écrire — elle serait un doublon.
+
+     Le découpage des notions du 24/08 a coupé en deux des objectifs que le
+     programme traite d'un bloc, pour tenir la règle « 3-4 micros par notion,
+     5 au maximum ». « Fonctionnement de la phrase complexe » porte six micros :
+     repérer les propositions d'un côté, analyser les subordonnées de l'autre.
+     Mais c'est UNE section du programme, et elle s'enseigne d'une traite : la
+     couper en deux fiches obligerait l'élève à ouvrir deux pages pour une seule
+     leçon, et à lire deux fois la même définition.
+     ⛔ Donc : une fiche, deux notions, et un alias pour que le coach affiche le
+     badge « Fiche » sur les deux lignes. Sans lui, la seconde notion s'affiche
+     sans fiche alors que son cours existe — le défaut exact que ces alias ont
+     été créés pour réparer au CM2. */
+  "francais/4e/phrase-subordonnees": "francais/4e/phrase-complexe",
+  "francais/4e/vocabulaire-orthographe": "francais/4e/vocabulaire-formation",
+  "francais/4e/conjugaison-valeurs": "francais/4e/conjugaison-temps",
  *  ouvrir en silence le cours d'une autre année. `null` si pas d'alias. */
 export function ficheClasseSource(
   matiere: string,

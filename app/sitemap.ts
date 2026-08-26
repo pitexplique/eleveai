@@ -160,6 +160,23 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours/francais/4e/grammaire-phrase", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   { path: "/fiches-cours/francais/4e/phrase-complexe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   { path: "/fiches-cours/francais/4e/orthographe-participe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  /* ⭐ LES TREIZE AUTRES FICHES DE 4e (26/08/2026) : la classe couvre ses
+     dix-neuf notions, seize fiches. Première classe de français complète du
+     site — et la première à ficher la lecture, l'écriture, l'oral et la
+     culture, qu'aucune classe n'avait jamais fichés. */
+  { path: "/fiches-cours/francais/4e/orthographe-accords", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/4e/conjugaison-formes", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/4e/conjugaison-temps", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/4e/analyse-discours", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/4e/vocabulaire-sens", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/4e/vocabulaire-formation", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/4e/lecture-comprehension", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/4e/lecture-documents", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/4e/lecture-voix-haute", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/4e/culture-litteraire", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/4e/culture-questionnements", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/4e/ecriture", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/4e/oral", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   // Fiches maths — refaites « en blocs » le 11/07, + les fiches 6e créées
   // le 12/07 (une par banque du coach) : fiche + flashcards + composeur.
   { path: "/fiches-cours/maths/6e/entier-nombre",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
