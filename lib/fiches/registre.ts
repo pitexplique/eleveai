@@ -554,6 +554,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Fabriquer le mot qu'une définition demande, comprendre que le suffixe donne au mot son métier, et reconnaitre les éléments latins et grecs qui ouvrent les mots savants.",
   },
+  "francais/5e/vocabulaire-orthographe": {
+    titre: "Écrire les mots avec justesse (2026-2027)",
+    resume:
+      "Réveiller une lettre muette avec un mot de la même famille, et trancher les homophones en remplaçant le mot par sa définition : sont ou son, où ou ou, plutôt ou plus tôt.",
+  },
 
   /* ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées, mais
      ni le registre ni le sitemap ne les déclaraient : le coach n'affichait
