@@ -523,6 +523,15 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
   "francais/4e/grammaire-phrase": {
     titre: "Les groupes de la phrase : nature et fonction (2026-2027)",
     resume:
+  /* ⭐ LE VOCABULAIRE DE LA 5e (26/08/2026). Le domaine manquait EN ENTIER — cinq
+     notions, aucune fiche — alors que le BO de 2026 lui donne cinq objectifs
+     nommés. Celle-ci ouvre le chantier par le premier d'entre eux. */
+  "francais/5e/vocabulaire-enrichir": {
+    titre: "Enrichir son vocabulaire (2026-2027)",
+    resume:
+      "Trouver le sens d'un mot inconnu en le remplaçant par un blanc, lire un article de dictionnaire jusqu'à ses sens numérotés, et sortir de « dire » en se demandant à quel volume et pour quoi faire.",
+  },
+
       "La nature d'un groupe ne change jamais, sa fonction change à chaque phrase — et les trois manipulations le prouvent, même quand le sujet est loin ou inversé.",
   },
 

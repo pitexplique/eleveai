@@ -154,6 +154,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours/francais/5e/orthographe-participe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   { path: "/fiches-cours/francais/5e/conjugaison-temps", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   { path: "/fiches-cours/francais/5e/discours-paroles-rapportees", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/5e/vocabulaire-enrichir", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   // ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées depuis
   // plusieurs jours sans être déclarées ici : aucune n'était donc soumise à
   // l'indexation. Elles suivent la 5e, même programme du 5 mars 2026.
