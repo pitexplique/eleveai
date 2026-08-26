@@ -270,6 +270,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Calculer avec les fractions",
     resume: "Additionner, soustraire, multiplier, et prendre une fraction d'une quantité.",
   },
+  "maths/4e/relatif-operation": {
+    titre: "Les opérations sur les nombres relatifs",
+    resume: "Additionner, soustraire, et surtout multiplier et diviser : la règle des signes.",
+  },
   "maths/4e/proba-experience": {
     titre: "Les probabilités",
     resume: "Issues, événement contraire, équiprobabilité, calcul en fraction et en pourcentage.",

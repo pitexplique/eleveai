@@ -58,6 +58,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "nombres-entiers-6e-cours-exercices-corriges.pdf",
   "nombres-entiers-cm2-cours-exercices-corriges.pdf",
   "nombres-relatifs-5e-cours-exercices-corriges.pdf",
+  "operations-sur-les-nombres-relatifs-4e-cours-exercices-corriges.pdf",
   "operations-sur-les-nombres-relatifs-5e-cours-exercices-corriges.pdf",
   "parallelogramme-4e-cours-exercices-corriges.pdf",
   "parallelogramme-5e-cours-exercices-corriges.pdf",
