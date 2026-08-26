@@ -10,14 +10,81 @@
 ## Où on en est
 
 ```
-maths 4e   10 fiches sur 20   ·   micros 71/71   ·   10 PDF   ·   banque réparée
+maths 4e   15 fiches sur 20   ·   micros 100/100   ·   15 PDF   ·   tout est poussé
 ```
 
 ⚠️ **VINGT et non plus dix-neuf** : les fractions ont été scindées en deux le
 26/08 (voir plus bas).
 
+### ⭐ LE BLOC ALGÈBRE EST ÉCRIT AUX QUATRE CINQUIÈMES (26/08, seconde session)
+
+`litteral-expression` · `litteral-distributivite` ·
+`litteral-identite-remarquable` · `litteral-factorisation` sont publiées,
+mesurées, câblées et en PDF. **Reste `equation-resolution`**, puis les trois
+fiches de grandeurs (`aire-perimetre`, `aire-surface`, `volume-solide`) et
+`algo-programmation`.
+
+⭐ **CE QUE LES QUATRE FICHES D'ALGÈBRE ONT APPRIS, ET QUI SERT AUX SUIVANTES.**
+
+1. **Les dessins se RETOURNENT d'une fiche à l'autre, et c'est le meilleur
+   enseignement de la série.** Le rectangle d'aire `3(x + 4)` sert deux fois : en
+   distributivité on connaît les côtés et on cherche l'aire, en factorisation
+   l'aire est donnée en deux morceaux et il faut remonter aux côtés. Le carré de
+   côté `x + 3` sert deux fois aussi : on le développe, puis on le reconstitue.
+   **Le dessin ne change pas ; la question, si.** Un élève qui retrouve la figure
+   comprend d'un regard que ce n'est pas une notion de plus.
+2. ⭐ **LES DEUX ERREURS DE LA BANQUE SONT LA MÊME, VUE DES DEUX CÔTÉS.**
+   `3(x + 4) = 3x + 4` (on oublie de MULTIPLIER le second terme) et
+   `5x + 20 = 5(x + 20)` (on oublie de le DIVISER). La fiche de factorisation le
+   dit explicitement à l'élève — aucune des deux fiches ne pouvait le dire seule.
+3. ⚠️ **LA BANQUE DES IDENTITÉS NE DEMANDE PAS DE RÉCITER LES FORMULES.** La
+   bonne réponse du QCM de `litteral_identite_choisir` est « écrire
+   `(x + 7)(x + 7)`, PUIS appliquer la double distributivité ». La méthode de la
+   fiche passe donc par le produit, et les trois formules restent cantonnées au
+   bloc « La formule ». **C'est la lecture des énoncés qui a tranché, pas mon
+   idée du programme.**
+4. ⭐ **`figure_libre` SAIT FAIRE QUATRE CASES**, ce que la note du 24/08 ne
+   disait pas. `buildPathFromGridPoints` ne connaît qu'un `M` suivi de `L` : le
+   `perimeterPath` repasse donc sur trois bords déjà tracés pour atteindre les
+   deux traits intérieurs. Rouge sur rouge, **invisible**. C'est le seul moyen
+   d'obtenir un carré coupé en quatre avec ce canvas.
+   ```
+   perimeterPath: [[0,0],[0,8],[8,8],[8,0],[0,0],  // le grand carré
+                   [0,5],[8,5],                     // le trait vertical
+                   [8,8],[5,8],[5,0]]               // puis l'horizontal
+   ```
+5. ⚠️ **`vertices` EST UN `Record`, DONC DEUX ÉTIQUETTES IDENTIQUES SE MANGENT.**
+   Les deux bandes d'un carré remarquable valent toutes deux `3x`. La seconde
+   clé porte une **espace finale** : elle distingue les clés et ne change rien à
+   l'écran (SVG replie l'espace finale). `{ "3x": [...], "3x ": [...] }`
+6. ⭐ **`showGrid: false` EST UN CHOIX DE FOND, PAS UN RÉGLAGE.** Avec le
+   quadrillage, la partie « x » d'un rectangle devient cinq cases comptables,
+   c'est-à-dire `x = 5`. Sans lui, elle reste une surface blanche dont on ne
+   sait rien — **exactement ce qu'est une inconnue**. Seule la partie constante
+   est carrelée, parce que c'est la seule qu'on sache compter.
+7. ⚠️ **`algebre` : METTRE `showLabels: false`.** Ses étiquettes de thème sont en
+   10 px FIXES (téléphone comme vidéoprojecteur). Sans elles, **aucun texte de
+   la page ne descend sous 11 px** — mesuré. Les icônes et le badge du symbole
+   suffisent à dire ce qu'est un groupe caché.
+8. `calcul_pose` **accepte des termes littéraux** : `numbers: ["2x","3x"]`,
+   `result: "5x"` rend une case par caractère, et c'est parfaitement lisible.
+   C'est le seul canvas qui montre que réduire, c'est ADDITIONNER des
+   coefficients.
+
+⚠️ **Le serveur s'est dégradé une fois de plus au début de cette session** :
+`build:fiches-pdf` expirait sur `waitForFunction`, et le navigateur rendait un
+**404 sur une route qui venait d'être rendue correctement**. Relancer a suffi, et
+les trois PDF suivants sont sortis de la même instance sans un raté. **Recharger
+la route dans le navigateur avant de relancer le script** : c'est ce qui
+distingue la dégradation du serveur d'un vrai défaut de la fiche.
+
 | fiche | notion | état |
 |---|---|---|
+| Distributivité | `litteral-distributivite` | ✅ publiée, mesurée, PDF (26/08) |
+| Identités remarquables | `litteral-identite-remarquable` | ✅ publiée, mesurée, PDF (26/08) |
+| Factorisation | `litteral-factorisation` | ✅ publiée, mesurée, PDF (26/08) |
+| Expressions littérales | `litteral-expression` | ✅ publiée, mesurée, PDF |
+| Proportionnalité | `prop-proportionnalite` | ✅ publiée, mesurée, PDF |
 | Pythagore | `pythagore-theoreme` | ✅ publiée, mesurée, PDF |
 | Thalès | `thales-theoreme` | ✅ publiée, mesurée, PDF |
 | Cosinus | `trigo-cosinus` | ✅ publiée, mesurée, PDF |
@@ -33,13 +100,16 @@ maths 4e   10 fiches sur 20   ·   micros 71/71   ·   10 PDF   ·   banque rép
 est **entièrement levé pour la 4ᵉ** : les quatre adresses éteintes sont revenues.
 Seule la 3ᵉ y reste.
 
-**Restent 10 notions** : `prop_proportionnalite`, `litteral_expression`,
-`litteral_distributivite`, `litteral_identite_remarquable`,
-`litteral_factorisation`, `equation_resolution`, `aire_perimetre`,
+**Restent 5 notions** : `equation_resolution`, `aire_perimetre`,
 `aire_surface`, `volume_solide`, `algo_programmation`.
-👉 Cinq d'entre elles sont le **bloc algèbre**, qui s'enchaîne : expressions →
-distributivité → identités → factorisation → équations. Les écrire à la suite
-permet de partager les canvas (`algebre`, `calcul_pose`, `tableau_donnees`).
+👉 ⭐ **`equation_resolution` D'ABORD** : elle ferme le bloc algèbre et s'appuie
+sur les quatre fiches déjà écrites (`equation_resoudre_distributivite` cite la
+distributivité, `equation_verifier` cite la substitution). Elle porte **huit
+micros**, dont `equation_probleme` et `equation_defi` — ⚠️ lire leurs énoncés,
+leur nom ne dit pas leur contenu.
+👉 Puis les trois fiches de grandeurs : `figure_libre` pour les aires, et
+⛔ `solide_3d` pour les volumes — **il ne se laisse pas rétrécir, la seule
+commande est la POLICE**. Enfin `algo_programmation`, avec le canvas `scratch`.
 
 ⭐ **Le rythme mesuré** : les deux premières fiches ont demandé **trois passes de
 mesure chacune** ; toutes les suivantes sont passées **du premier coup ou en une
@@ -304,9 +374,28 @@ prive d'un dessin que là où il redirait le texte.** Onze visuels sur douze blo
   `components/fiches/TexteMath.tsx`. Aucune ligne existante d'un autre chantier
   modifiée.
 
-⛔ **EN SUSPENS AU 26/08, À REPRENDRE** : `lib/fiches/registre.ts` et
-`app/sitemap.ts` contenaient, en fin de session, le **travail non commité de la
-session de français** — seize fiches de 4ᵉ, trois alias, de longs commentaires.
+## ⭐ LA RÈGLE DU CÂBLAGE, ÉCRITE APRÈS UN 404 ÉVITÉ DE JUSTESSE
+
+**Committer la fiche ET sa page AVANT le câblage, jamais l'inverse.** Une route
+déclarée au registre sans fichier suivi casse le site — le hub mène à un 404 et
+le sitemap porte une URL morte. Un fichier sans route ne fait qu'attendre.
+Le contrôle, avant chaque `push` :
+```
+git show HEAD:lib/fiches/registre.ts | grep -c '"maths/4e/'
+git ls-files app/fiches-cours/maths/4e/ | wc -l
+```
+**Les deux nombres doivent être égaux** — 15 et 15 au soir du 26/08.
+
+⚠️ Et **relire le diff d'un fichier partagé JUSTE AVANT le `git commit`** :
+`git add` prend le fichier tel qu'il est à cet instant, pas tel qu'on l'a lu. Les
+trois câblages de cette session ont été relus ainsi ; chaque fois, `registre.ts`
+avait bougé entre-temps sous la main d'une session de français.
+
+---
+
+⛔ **ANCIEN POINT EN SUSPENS, RÉGLÉ** : `lib/fiches/registre.ts` et
+`app/sitemap.ts` contenaient, en fin de session du 26/08 au matin, le **travail
+non commité de la session de français** — seize fiches de 4ᵉ, trois alias, de longs commentaires.
 Committer ces fichiers par chemin aurait emporté leur travail dans un commit de
 maths. Ils ont donc été laissés de côté, et **les deux lignes de
 `maths/4e/fraction-calcul` y sont écrites mais PAS COMMITÉES**.
