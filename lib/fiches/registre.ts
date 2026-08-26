@@ -540,6 +540,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Vérifier un synonyme en récrivant la phrase entière, trouver l'antonyme, séparer la famille du champ lexical, et démonter un mot en préfixe, radical et suffixe.",
   },
+  "francais/5e/vocabulaire-jouer": {
+    titre: "Sens propre, sens figuré et mots nouveaux (2026-2027)",
+    resume:
+      "Le test de la photographie pour séparer le propre du figuré, et les quatre portes par lesquelles un mot neuf entre dans la langue : fabriqué, sens neuf, emprunté, sigle.",
+  },
 
   /* ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées, mais
      ni le registre ni le sitemap ne les déclaraient : le coach n'affichait
