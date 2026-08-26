@@ -278,6 +278,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "La distributivité",
     resume: "Développer un produit en somme, la double distributivité, réduire, et reconnaître la forme.",
   },
+  "maths/4e/litteral-identite-remarquable": {
+    titre: "Les identités remarquables",
+    resume: "Le carré d'une somme, le carré d'une différence, la différence de deux carrés, et le double produit.",
+  },
   "maths/4e/prop-proportionnalite": {
     titre: "La proportionnalité",
     resume: "Reconnaître, le coefficient, le produit en croix, les pourcentages et les évolutions.",
