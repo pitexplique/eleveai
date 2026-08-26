@@ -36,6 +36,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "droites-segments-et-demi-droites-cm2-cours-exercices-corriges.pdf",
   "durees-cm2-cours-exercices-corriges.pdf",
   "echelles-cm2-cours-exercices-corriges.pdf",
+  "expressions-litterales-4e-cours-exercices-corriges.pdf",
   "figures-planes-cm2-cours-exercices-corriges.pdf",
   "fonctions-dans-la-phrase-2026-2027-5e-cours-exercices-corriges.pdf",
   "forme-d-un-verbe-radical-temps-personne-cm2-cours-exercices-corriges.pdf",
