@@ -14,7 +14,7 @@ import { listerFiches } from "@/lib/fiches/registre";
 // l'empilement de mots-clés, et Google le lit comme tel. Il est écrit UNE fois
 // par sommaire, dans une phrase qui se lit.
 export const metadata: Metadata = {
-  title: "Maths : cours et exercices corrigés (CM2, 6e, 5e, 1re)",
+  title: "Maths : cours et exercices corrigés (CM2, 6e, 5e, 4e, 1re)",
   description:
     "Cours, méthodes et exercices corrigés (ou exercices résolus) en maths, du CM2 à la Première : à lire en ligne ou à imprimer en PDF.",
 };
