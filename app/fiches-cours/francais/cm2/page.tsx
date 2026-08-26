@@ -17,5 +17,5 @@ export const metadata: Metadata = {
 };
 
 export default function FichesFrancaisCm2Page() {
-  return <SommaireClasse matiere="francais" classe="cm2" />;
+  return <SommaireClasse matiere="francais" niveau="cm2" />;
 }

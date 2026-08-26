@@ -17,5 +17,5 @@ export const metadata: Metadata = {
 };
 
 export default function FichesMathsCinquiemePage() {
-  return <SommaireClasse matiere="maths" classe="5e" />;
+  return <SommaireClasse matiere="maths" niveau="5e" />;
 }

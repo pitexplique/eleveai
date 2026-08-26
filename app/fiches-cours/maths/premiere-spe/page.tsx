@@ -17,5 +17,5 @@ export const metadata: Metadata = {
 };
 
 export default function FichesMathsPremiereSpePage() {
-  return <SommaireClasse matiere="maths" classe="premiere-spe" />;
+  return <SommaireClasse matiere="maths" niveau="premiere-spe" />;
 }

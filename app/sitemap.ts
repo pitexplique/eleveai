@@ -146,6 +146,13 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours/francais/6e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
   { path: "/fiches-cours/francais/5e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
   { path: "/fiches-cours/francais/4e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
+  // ⚠️ EN IA LE SEGMENT N'EST PAS UNE CLASSE, C'EST UN DOMAINE Pix. Les 16
+  // fiches d'IA ne se rangent par aucune annee (Frederic, 26/08 : « les fiches
+  // existent en IA mais pas par classe, mais par niveau »). Meme palier
+  // d'indexation, meme page — voir SommaireClasse.
+  { path: "/fiches-cours/ia/fondements",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
+  { path: "/fiches-cours/ia/usages",          priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
+  { path: "/fiches-cours/ia/enjeux",          priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
 
   { path: "/fiches-cours/francais/cm2/grammaire-orthographe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   { path: "/fiches-cours/francais/cm2/phrase-complexe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },

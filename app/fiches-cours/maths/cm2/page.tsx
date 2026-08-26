@@ -17,5 +17,5 @@ export const metadata: Metadata = {
 };
 
 export default function FichesMathsCm2Page() {
-  return <SommaireClasse matiere="maths" classe="cm2" />;
+  return <SommaireClasse matiere="maths" niveau="cm2" />;
 }

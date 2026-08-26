@@ -17,5 +17,5 @@ export const metadata: Metadata = {
 };
 
 export default function FichesMathsQuatriemePage() {
-  return <SommaireClasse matiere="maths" classe="4e" />;
+  return <SommaireClasse matiere="maths" niveau="4e" />;
 }

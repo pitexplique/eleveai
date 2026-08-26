@@ -17,5 +17,5 @@ export const metadata: Metadata = {
 };
 
 export default function FichesFrancaisQuatriemePage() {
-  return <SommaireClasse matiere="francais" classe="4e" />;
+  return <SommaireClasse matiere="francais" niveau="4e" />;
 }

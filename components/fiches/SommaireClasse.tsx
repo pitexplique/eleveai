@@ -30,7 +30,18 @@ import { listerFiches, libelleClasse } from "@/lib/fiches/registre";
 // connaît aucune fiche. Une page de classe qui s'ouvre sur zéro fiche est pire
 // qu'un 404 — le 404 dit « pas encore », la page vide dit « on t'a menti ».
 
-type Matiere = "maths" | "francais";
+// ⭐ 26/08/2026 — « LE NIVEAU » N'EST PAS TOUJOURS UNE CLASSE (Frédéric) :
+// « les fiches existent en IA mais pas par classe, mais par niveau ». En maths
+// et en français, le second segment de l'URL est une CLASSE (4e, cm2…) ; en IA
+// c'est un DOMAINE Pix (fondements, usages, enjeux), et les 16 fiches ne se
+// rangent par aucune année. Le registre le savait déjà — `ORDRE_CLASSES` y
+// range « fondements, usages, enjeux » à la suite des classes, sous le
+// commentaire « IA : par thème ».
+// ⛔ D'où le mot `niveau` dans ce fichier, et pas `classe` : c'est ce que le
+// segment porte VRAIMENT. Les deux cas se rendent avec la même page parce
+// qu'ils posent la même question — « donne-moi les fiches de CE groupe-là,
+// et rien d'autre ».
+type Matiere = "maths" | "francais" | "ia";
 
 // ⚠️ CLASSES TAILWIND ÉCRITES EN ENTIER, JAMAIS CONCATÉNÉES. Tailwind lit le
 // source en texte : `bg-${accent}-50` ne produirait aucune règle CSS.
@@ -71,25 +82,56 @@ const ACCENTS: Record<
     carte: "hover:border-violet-300 hover:shadow-violet-200/40",
     lien: "text-violet-600",
   },
+  // L'indigo est déjà la couleur des fiches d'IA sur /fiches-cours/ia : les
+  // trois pages de domaine doivent se lire comme la suite de ce sommaire-là,
+  // pas comme une quatrième matière.
+  ia: {
+    nom: "Intelligence artificielle",
+    banniere: "bg-gradient-to-br from-indigo-50 via-white to-violet-50",
+    pastille: "border-indigo-200 bg-indigo-50 text-indigo-700",
+    pastilleNiveau: "bg-indigo-100 text-indigo-700",
+    encart: "border-indigo-200 bg-indigo-50",
+    icone: "text-indigo-500",
+    bouton: "bg-indigo-600 shadow-indigo-500/30 hover:bg-indigo-500",
+    carte: "hover:border-indigo-300 hover:shadow-indigo-200/40",
+    lien: "text-indigo-600",
+  },
 };
 
 const LIBELLE_MATIERE: Record<Matiere, string> = {
   maths: "Maths",
   francais: "Français",
+  ia: "IA",
+};
+
+// Les trois domaines Pix, tels qu'ils s'écrivent. `libelleClasse` ne les
+// connaît pas — il traduit des slugs de CLASSE (« cm2 » → « CM2 »), et ce
+// n'en sont pas.
+const LIBELLE_DOMAINE_IA: Record<string, string> = {
+  fondements: "Fondements",
+  usages: "Usages",
+  enjeux: "Enjeux",
 };
 
 export default function SommaireClasse({
   matiere,
-  classe,
+  /** Une CLASSE en maths et en français (« 4e », « cm2 »), un DOMAINE Pix en
+   *  IA (« fondements », « usages », « enjeux ») — voir la note en tête. */
+  niveau: slugNiveau,
 }: {
   matiere: Matiere;
-  classe: string;
+  niveau: string;
 }) {
-  const fiches = listerFiches(matiere).filter((f) => f.classe === classe);
+  // `f.classe` est le deuxième segment de la clé du registre : il porte la
+  // classe en maths/français et le domaine en IA. Le filtre est donc le même.
+  const fiches = listerFiches(matiere).filter((f) => f.classe === slugNiveau);
   if (fiches.length === 0) notFound();
 
   const a = ACCENTS[matiere];
-  const niveau = libelleClasse(classe);
+  const niveau =
+    matiere === "ia"
+      ? LIBELLE_DOMAINE_IA[slugNiveau] ?? slugNiveau
+      : libelleClasse(slugNiveau);
   const nbFiches = fiches.length;
 
   return (
@@ -118,16 +160,26 @@ export default function SommaireClasse({
           </div>
           <div className="max-w-3xl">
             <h1 className="text-3xl font-black tracking-normal text-slate-900 sm:text-5xl">
-              Fiches de cours {LIBELLE_MATIERE[matiere]} {niveau}
+              {/* « Fiches de cours Maths 4e » se lit d'un trait — la classe
+                  qualifie la matière. « Fiches de cours IA Enjeux » non : deux
+                  noms communs collés, sans lien lisible. Le tiret le pose. */}
+              Fiches de cours {LIBELLE_MATIERE[matiere]}
+              {matiere === "ia" ? " — " : " "}
+              {niveau}
             </h1>
             {/* ⚠️ LE SINGULIER EST UN VRAI CAS, PAS UNE COQUETTERIE : la 1re
                 spé n'a qu'UNE fiche (la dérivation). « Les 1 notions du
                 programme », et surtout les accords qui suivent, s'afficheraient
-                tels quels. Les deux phrases sont donc écrites en entier. */}
+                tels quels. Les phrases sont donc écrites en entier.
+                ⛔ ET L'IA NE DIT PAS « LE PROGRAMME DE FONDEMENTS » : ses fiches
+                ne suivent aucune année, elles couvrent un domaine du cadre Pix.
+                Reprendre la phrase des classes ici écrirait une phrase fausse. */}
             <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">
-              {nbFiches > 1
-                ? `Les ${nbFiches} notions du programme de ${niveau}, une par fiche : courtes, colorées, lisibles sur téléphone et imprimables en PDF depuis le navigateur.`
-                : `Une fiche pour l'instant en ${niveau} : courte, colorée, lisible sur téléphone et imprimable en PDF depuis le navigateur.`}
+              {matiere === "ia"
+                ? `Les ${nbFiches} fiches du domaine ${niveau} : courtes, colorées, lisibles sur téléphone et imprimables en PDF depuis le navigateur.`
+                : nbFiches > 1
+                  ? `Les ${nbFiches} notions du programme de ${niveau}, une par fiche : courtes, colorées, lisibles sur téléphone et imprimables en PDF depuis le navigateur.`
+                  : `Une fiche pour l'instant en ${niveau} : courte, colorée, lisible sur téléphone et imprimable en PDF depuis le navigateur.`}
             </p>
           </div>
         </div>
@@ -208,8 +260,9 @@ export default function SommaireClasse({
             href={`/fiches-cours/${matiere}`}
             className="underline decoration-slate-300 underline-offset-4 hover:text-slate-700"
           >
-            Voir toutes les fiches de {LIBELLE_MATIERE[matiere].toLowerCase()},
-            tous niveaux →
+            {matiere === "ia"
+              ? "Voir les 16 fiches d'IA, les trois domaines →"
+              : `Voir toutes les fiches de ${LIBELLE_MATIERE[matiere].toLowerCase()}, tous niveaux →`}
           </Link>
         </p>
       </section>
