@@ -270,6 +270,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Calculer avec les fractions",
     resume: "Additionner, soustraire, multiplier, et prendre une fraction d'une quantité.",
   },
+  "maths/4e/litteral-expression": {
+    titre: "Les expressions littérales",
+    resume: "La lettre, le coefficient, traduire une phrase, substituer une valeur et réduire.",
+  },
   "maths/4e/prop-proportionnalite": {
     titre: "La proportionnalité",
     resume: "Reconnaître, le coefficient, le produit en croix, les pourcentages et les évolutions.",
@@ -530,6 +534,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Enrichir son vocabulaire (2026-2027)",
     resume:
       "Trouver le sens d'un mot inconnu en le remplaçant par un blanc, lire un article de dictionnaire jusqu'à ses sens numérotés, et sortir de « dire » en se demandant à quel volume et pour quoi faire.",
+  },
+  "francais/5e/vocabulaire-relations": {
+    titre: "Les relations entre les mots (2026-2027)",
+    resume:
+      "Vérifier un synonyme en récrivant la phrase entière, trouver l'antonyme, séparer la famille du champ lexical, et démonter un mot en préfixe, radical et suffixe.",
   },
 
   /* ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées, mais

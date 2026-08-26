@@ -155,6 +155,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours/francais/5e/conjugaison-temps", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   { path: "/fiches-cours/francais/5e/discours-paroles-rapportees", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   { path: "/fiches-cours/francais/5e/vocabulaire-enrichir", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  { path: "/fiches-cours/francais/5e/vocabulaire-relations", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   // ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées depuis
   // plusieurs jours sans être déclarées ici : aucune n'était donc soumise à
   // l'indexation. Elles suivent la 5e, même programme du 5 mars 2026.
@@ -257,6 +258,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours/maths/4e/fraction-nombre",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/4e/fraction-calcul",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/4e/prop-proportionnalite",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
+  { path: "/fiches-cours/maths/4e/litteral-expression",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/maths/premiere-spe/derivation",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/ia",   priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
   { path: "/fiches-cours/ia/livre", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
