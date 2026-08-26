@@ -5,6 +5,7 @@ import { getAllBlogPosts } from "@/data/blogPosts";
 import { NIVEAUX, motsDeLaClasse } from "@/lib/dico";
 import { cgvEnVigueur } from "@/lib/legal/editeur";
 import { PDF_DISPONIBLES } from "@/lib/fiches/pdf-disponibles";
+import { FICHES_REGISTRE } from "@/lib/fiches/registre";
 
 // ⚠️ AVEC LE www : `eleveai.fr` répond 308 vers `www.eleveai.fr`. Sans lui,
 // les 270 lignes de ce fichier désignaient des adresses qui redirigent.
@@ -137,183 +138,26 @@ const ROUTES: RouteConfig[] = [
   // un 404 quand le registre ne connaît aucune fiche du niveau : une ligne
   // écrite ici pour une classe vide mettrait une 404 au sitemap. Une classe
   // s'ajoute le jour où sa première fiche entre au registre, pas avant.
-  { path: "/fiches-cours/maths/cm2",          priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
-  { path: "/fiches-cours/maths/6e",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
-  { path: "/fiches-cours/maths/5e",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
-  { path: "/fiches-cours/maths/4e",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
-  { path: "/fiches-cours/maths/premiere-spe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
-  { path: "/fiches-cours/francais/cm2",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
-  { path: "/fiches-cours/francais/6e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
-  { path: "/fiches-cours/francais/5e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
-  { path: "/fiches-cours/francais/4e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
   // ⚠️ EN IA LE SEGMENT N'EST PAS UNE CLASSE, C'EST UN DOMAINE Pix. Les 16
   // fiches d'IA ne se rangent par aucune annee (Frederic, 26/08 : « les fiches
   // existent en IA mais pas par classe, mais par niveau »). Meme palier
   // d'indexation, meme page — voir SommaireClasse.
-  { path: "/fiches-cours/ia/fondements",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
-  { path: "/fiches-cours/ia/usages",          priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
-  { path: "/fiches-cours/ia/enjeux",          priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
 
-  { path: "/fiches-cours/francais/cm2/grammaire-orthographe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/cm2/phrase-complexe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/cm2/grammaire-complements", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/cm2/grammaire-phrase", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/cm2/conjugaison-temps-simples", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/cm2/conjugaison-formes", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/cm2/conjugaison-recit", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/cm2/conjugaison-participe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/6e/grammaire-complements", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/6e/grammaire-groupe-nominal", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/6e/grammaire-pronoms", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/6e/phrase-complexe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/6e/grammaire-accords", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/6e/conjugaison-formes", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/6e/conjugaison-temps-composes", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/6e/conjugaison-modes", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/6e/conjugaison-valeurs", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   // ⭐ LA 5e OUVRE EN FRANÇAIS (24/08/2026). Elle est la seule classe déjà
   // passée au programme du 5 mars 2026 : ses trois fiches portent l'année
   // scolaire dans leur titre, parce que la requête tapée à la rentrée est
   // « français 5e 2026-2027 » et que les sites qui nous devancent l'écrivent.
-  { path: "/fiches-cours/francais/5e/grammaire-phrase", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/5e/grammaire-fonctions", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/5e/grammaire-groupe-nominal", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/5e/grammaire-reprises", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/5e/orthographe-accords", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/5e/orthographe-participe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/5e/conjugaison-temps", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/5e/discours-paroles-rapportees", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/5e/vocabulaire-enrichir", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/5e/vocabulaire-relations", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/5e/vocabulaire-jouer", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/5e/vocabulaire-formation", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/5e/vocabulaire-orthographe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/5e/discours-registres", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   // ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées depuis
   // plusieurs jours sans être déclarées ici : aucune n'était donc soumise à
   // l'indexation. Elles suivent la 5e, même programme du 5 mars 2026.
-  { path: "/fiches-cours/francais/4e/grammaire-phrase", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/4e/phrase-complexe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/4e/orthographe-participe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   /* ⭐ LES TREIZE AUTRES FICHES DE 4e (26/08/2026) : la classe couvre ses
      dix-neuf notions, seize fiches. Première classe de français complète du
      site — et la première à ficher la lecture, l'écriture, l'oral et la
      culture, qu'aucune classe n'avait jamais fichés. */
-  { path: "/fiches-cours/francais/4e/orthographe-accords", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/4e/conjugaison-formes", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/4e/conjugaison-temps", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/4e/analyse-discours", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/4e/vocabulaire-sens", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/4e/vocabulaire-formation", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/4e/lecture-comprehension", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/4e/lecture-documents", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/4e/lecture-voix-haute", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/4e/culture-litteraire", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/4e/culture-questionnements", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/4e/ecriture", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
-  { path: "/fiches-cours/francais/4e/oral", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   // Fiches maths — refaites « en blocs » le 11/07, + les fiches 6e créées
   // le 12/07 (une par banque du coach) : fiche + flashcards + composeur.
-  { path: "/fiches-cours/maths/6e/entier-nombre",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/maths/6e/decimal-nombre",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/maths/6e/fraction-nombre",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/maths/6e/pourcentage-nombre",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/maths/6e/prop-proportionnalite",    priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/6e/entier-calcul-mental",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/maths/6e/entier-calcul-pose",         priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/maths/6e/aire-longueur",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/maths/6e/aire-perimetre",          priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/maths/6e/aire-surface",               priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/maths/6e/volume-solide",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/maths/6e/angle-mesure",              priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/maths/6e/triangle-figure",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/maths/6e/quadrilatere-figure",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/maths/6e/sym-axiale",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/maths/6e/stat-donnee",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/maths/6e/proba-experience",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/maths/6e/algo-programmation",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/maths/cm2/nombre-entier",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/calcul",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/duree",              priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/pourcentage",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/masse",              priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/contenance",         priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/longueur",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/tableau",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/graphique",          priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/reperage",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/nombre-decimal",     priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/fraction",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/multiplication",     priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/division",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/proportionnalite",   priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/perimetre",          priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/aire",               priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/symetrie",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/angle",              priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/solide",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/suite",              priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/probleme",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/algorithmique",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/algebre",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/droite",             priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/figure-plane",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/echelle",            priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/cm2/probabilite",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/relatif-nombre",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/relatif-operation",   priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/litteral-calcul",     priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/prop-proportionnalite", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/stat-statistique",     priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/proba-experience",     priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/angle-mesure",         priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/triangle-figure",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/sym-centrale",         priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/aire-surface",         priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/volume-solide",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/algo-programmation",   priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/pourcentages",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/fraction-nombre",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/fraction-calcul",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/parallelogramme",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/divisibilite",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/algo-construire",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/prop-ratio-pourcentage",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/5e/grandeur-conversion",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/4e/pythagore-theoreme",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/4e/thales-theoreme",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/4e/trigo-cosinus",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/4e/quadrilatere-parallelogramme",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/4e/sym-transformation",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/4e/stat-statistique",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/4e/proba-experience",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/4e/relatif-operation",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/4e/fraction-nombre",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/4e/fraction-calcul",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/4e/prop-proportionnalite",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/4e/litteral-expression",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/4e/litteral-distributivite",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/4e/litteral-identite-remarquable",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/4e/litteral-factorisation",  priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
-  { path: "/fiches-cours/maths/premiere-spe/derivation",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/ia",   priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
   { path: "/fiches-cours/ia/livre", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
-  { path: "/fiches-cours/ia/fondements/definir-l-ia", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/ia/fondements/apprentissage-automatique", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/ia/fondements/modeles-apprentissage", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/ia/fondements/grands-modeles-de-langage", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/ia/fondements/algorithmes-de-recommandation", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/ia/fondements/ia-incarnee-robotique", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/ia/usages/familles-de-taches", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/ia/usages/utiliser-ia-generative", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/ia/usages/evaluer-l-information", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/ia/usages/services-de-recommandation", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/ia/usages/ia-dans-une-organisation", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/ia/enjeux/empreinte-environnementale", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/ia/enjeux/gouvernance", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/ia/enjeux/ethique-et-transparence", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/ia/enjeux/emploi-et-formation", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
-  { path: "/fiches-cours/ia/enjeux/enjeux-culturels-societaux", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_IA },
 
   { path: "/dictee-du-jour",  priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_HOME },
   // Les rituels de langue (25/07) — « 5 mots par jour » A1→B2, répétition espacée.
@@ -573,6 +417,60 @@ const ROUTES: RouteConfig[] = [
 // bouton d'une carte : rien n'est cassé. On cesse seulement de les déclarer.
 // Les 9 pages nues (`/coach-ia/maths`, `/parcours-ia`, …) restent dans ROUTES.
 
+/* ─── ⭐ 26/08/2026 — LES FICHES SE GÉNÈRENT, ELLES NE S'ÉCRIVENT PLUS ────────
+   Frédéric : « et ça se mettra à jour même si on crée de nouvelles fiches ? »
+   Jusqu'ici : non. Les 145 adresses de fiches et les 12 sommaires de niveau
+   étaient écrits ici À LA MAIN, une ligne chacun. Une fiche ajoutée au registre
+   s'affichait partout sur le site — son sommaire de niveau, son sommaire de
+   matière, le badge « Fiche » du coach — mais restait INVISIBLE POUR GOOGLE
+   tant que personne ne venait ajouter sa ligne dans ce fichier.
+
+   ✅ MESURÉ AVANT DE TOUCHER : les deux listes étaient à 145 contre 145, zéro
+   écart dans les deux sens. Rien n'avait été oublié — c'était de la discipline,
+   pas un mécanisme. On remplace la discipline par le mécanisme.
+
+   Même patron que `jeuxCartesRoutes` juste en dessous, et même promesse : une
+   ligne au registre, et la fiche est sur le site ET au sitemap.
+
+   ⛔ CE QUI RESTE ÉCRIT À LA MAIN DANS ROUTES, ET DOIT Y RESTER : les quatre
+   portes (/fiches-cours et les trois sommaires de matière) et /fiches-cours/ia/
+   livre. Ce ne sont pas des entrées du registre — les générer d'ici les ferait
+   disparaître le jour où une matière n'aurait plus de fiche.
+
+   ⚠️ LES VIDÉOS SUIVENT. `VIDEOS_FICHES` est indexé par chemin, et ces routes
+   passent par le même `.map()` que ROUTES : les 13 fiches de 6ᵉ qui portent une
+   vidéo gardent leur balise vidéo. Vérifié, pas supposé. */
+const LASTMOD_PAR_MATIERE: Record<string, Date> = {
+  maths: LASTMOD_FICHES,
+  francais: LASTMOD_FICHES_FR,
+  ia: LASTMOD_FICHES_IA,
+};
+
+const clesFiches = Object.keys(FICHES_REGISTRE);
+
+// Une entrée par fiche : /fiches-cours/<matiere>/<niveau>/<notion>
+const fichesRoutes: RouteConfig[] = clesFiches.map((cle) => ({
+  path: `/fiches-cours/${cle}`,
+  priority: 0.85,
+  changeFrequency: "weekly" as const,
+  lastMod: LASTMOD_PAR_MATIERE[cle.split("/")[0]] ?? LASTMOD_FICHES,
+}));
+
+/* Un sommaire par NIVEAU réellement peuplé — une classe en maths et en
+   français, un domaine Pix en IA (voir SommaireClasse). Déduit des clés, donc
+   il apparaît le jour où la première fiche du niveau entre au registre, et pas
+   avant : `SommaireClasse` rend un 404 sur un niveau vide, et un 404 au
+   sitemap est un défaut qu'on se refuse. C'est aussi pourquoi la 3ᵉ n'y est
+   pas — elle est éteinte, elle n'a aucune fiche. */
+const niveauxRoutes: RouteConfig[] = [
+  ...new Set(clesFiches.map((cle) => cle.split("/").slice(0, 2).join("/"))),
+].map((mn) => ({
+  path: `/fiches-cours/${mn}`,
+  priority: 0.85,
+  changeFrequency: "weekly" as const,
+  lastMod: LASTMOD_FICHES_CLASSE,
+}));
+
 // Jeu « Qui suis-je ? » — un paquet par classe, généré depuis les classes qui ont
 // du contenu (GS-CP → Terminale au fur et à mesure). Toute nouvelle classe s'ajoute
 // ici automatiquement, sans toucher ce fichier.
@@ -727,7 +625,12 @@ const VIDEOS_FICHES: Record<
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Routes statiques
-  const staticRoutes = [...ROUTES, ...jeuxCartesRoutes].map((route) => {
+  const staticRoutes = [
+    ...ROUTES,
+    ...jeuxCartesRoutes,
+    ...fichesRoutes,
+    ...niveauxRoutes,
+  ].map((route) => {
     const videos = VIDEOS_FICHES[route.path];
     return {
       url: u(route.path),

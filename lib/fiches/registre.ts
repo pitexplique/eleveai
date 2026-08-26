@@ -688,22 +688,70 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
       "Écouter, c'est ranger. Et pour un argument : je retire le ton, et je regarde ce qui reste — un nombre de gens d'accord n'est pas une raison.",
   },
 
-  "ia/fondements/definir-l-ia": { titre: "Qu'est-ce que l'intelligence artificielle ?" },
-  "ia/fondements/apprentissage-automatique": { titre: "L'apprentissage automatique" },
-  "ia/fondements/modeles-apprentissage": { titre: "Les modèles d'apprentissage" },
-  "ia/fondements/grands-modeles-de-langage": { titre: "Les grands modèles de langage" },
-  "ia/fondements/algorithmes-de-recommandation": { titre: "Les algorithmes de recommandation" },
-  "ia/fondements/ia-incarnee-robotique": { titre: "L'IA incarnée et la robotique" },
-  "ia/usages/familles-de-taches": { titre: "Ce que l'IA sait faire" },
-  "ia/usages/utiliser-ia-generative": { titre: "Utiliser une IA générative" },
-  "ia/usages/evaluer-l-information": { titre: "Évaluer l'information à l'ère de l'IA" },
-  "ia/usages/services-de-recommandation": { titre: "Utiliser les services de recommandation" },
-  "ia/usages/ia-dans-une-organisation": { titre: "Utiliser l'IA dans une organisation" },
-  "ia/enjeux/empreinte-environnementale": { titre: "L'empreinte environnementale de l'IA" },
-  "ia/enjeux/gouvernance": { titre: "La gouvernance de l'IA" },
-  "ia/enjeux/ethique-et-transparence": { titre: "Éthique et transparence de l'IA" },
-  "ia/enjeux/emploi-et-formation": { titre: "IA, emploi et formation" },
-  "ia/enjeux/enjeux-culturels-societaux": { titre: "Enjeux culturels et sociétaux de l'IA" },
+  "ia/fondements/definir-l-ia": {
+    titre: "Qu'est-ce que l'intelligence artificielle ?",
+    resume: "Définir l'IA, ses deux approches et pourquoi elle a explosé récemment.",
+  },
+  "ia/fondements/apprentissage-automatique": {
+    titre: "L'apprentissage automatique",
+    resume: "Apprendre à partir de données : supervisé, non supervisé, renforcement.",
+  },
+  "ia/fondements/modeles-apprentissage": {
+    titre: "Les modèles d'apprentissage",
+    resume: "Arbre de décision, régression, réseau de neurones et « boîte noire ».",
+  },
+  "ia/fondements/grands-modeles-de-langage": {
+    titre: "Les grands modèles de langage",
+    resume: "Prédire le mot suivant, l'entraînement, et les hallucinations.",
+  },
+  "ia/fondements/algorithmes-de-recommandation": {
+    titre: "Les algorithmes de recommandation",
+    resume: "Comment on te recommande des contenus, et la bulle de filtre.",
+  },
+  "ia/fondements/ia-incarnee-robotique": {
+    titre: "L'IA incarnée et la robotique",
+    resume: "Percevoir, décider, agir : l'IA dans les robots du monde réel.",
+  },
+  "ia/usages/familles-de-taches": {
+    titre: "Ce que l'IA sait faire",
+    resume: "Reconnaissance, prédiction, recommandation, génération de contenu.",
+  },
+  "ia/usages/utiliser-ia-generative": {
+    titre: "Utiliser une IA générative",
+    resume: "Écrire un bon prompt, itérer, vérifier les réponses et rester responsable.",
+  },
+  "ia/usages/evaluer-l-information": {
+    titre: "Évaluer l'information à l'ère de l'IA",
+    resume: "Hypertrucages, bots, et comment vérifier une information.",
+  },
+  "ia/usages/services-de-recommandation": {
+    titre: "Utiliser les services de recommandation",
+    resume: "Avantages, limites et contrôle de la personnalisation.",
+  },
+  "ia/usages/ia-dans-une-organisation": {
+    titre: "Utiliser l'IA dans une organisation",
+    resume: "Identifier le besoin, protéger les données, charte d'usage et RAG.",
+  },
+  "ia/enjeux/empreinte-environnementale": {
+    titre: "L'empreinte environnementale de l'IA",
+    resume: "Énergie des calculs, ressources rares et IA frugale.",
+  },
+  "ia/enjeux/gouvernance": {
+    titre: "La gouvernance de l'IA",
+    resume: "Qui régule l'IA, l'IA Act, souveraineté et valeurs encodées.",
+  },
+  "ia/enjeux/ethique-et-transparence": {
+    titre: "Éthique et transparence de l'IA",
+    resume: "Transparence, non-discrimination, responsabilité, RGPD et IA Act.",
+  },
+  "ia/enjeux/emploi-et-formation": {
+    titre: "IA, emploi et formation",
+    resume: "Métiers qui changent, nouveaux métiers, travailleurs du clic.",
+  },
+  "ia/enjeux/enjeux-culturels-societaux": {
+    titre: "Enjeux culturels et sociétaux de l'IA",
+    resume: "Biais, désinformation, diversité culturelle et droits des créateurs.",
+  },
 };
 
 // =========================
