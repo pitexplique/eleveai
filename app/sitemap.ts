@@ -6,6 +6,7 @@ import { NIVEAUX, motsDeLaClasse } from "@/lib/dico";
 import { cgvEnVigueur } from "@/lib/legal/editeur";
 import { PDF_DISPONIBLES } from "@/lib/fiches/pdf-disponibles";
 import { FICHES_REGISTRE } from "@/lib/fiches/registre";
+import { listerNotionsAvecPage } from "@/lib/programme";
 
 // ⚠️ AVEC LE www : `eleveai.fr` répond 308 vers `www.eleveai.fr`. Sans lui,
 // les 270 lignes de ce fichier désignaient des adresses qui redirigent.
@@ -471,6 +472,32 @@ const niveauxRoutes: RouteConfig[] = [
   lastMod: LASTMOD_FICHES_CLASSE,
 }));
 
+/* ─── ⭐ 26/08/2026 — L'ÉTAGE DE LA NOTION, MÊME GÉNÉRATEUR QUE LES PAGES ────
+   Frédéric : « il faut créer un moteur classe / matière / notion / libellé
+   micro et coach ou parcours ou fiches de cours ». Le voici — et c'est LA MÊME
+   fonction qui nourrit `generateStaticParams` de la route : une seule liste,
+   deux sorties, jamais de décalage entre ce qui existe et ce qui est déclaré.
+
+   ⛔ ET PAS UNE LIGNE POUR UNE NOTION QUI A SA FICHE. `listerNotionsAvecPage`
+   les écarte : leur page de programme REDIRIGE vers la fiche, et déclarer une
+   redirection au sitemap est exactement ce qu'on a retiré le 10/08. Les 608
+   adresses restent toutes ACCESSIBLES — 481 servent leur page, 127 conduisent à
+   leur fiche — mais on n'en déclare que celles qui ont un contenu propre.
+   ✅ Le jour où une fiche est écrite, sa notion sort d'ici toute seule, et la
+   fiche y est déjà. Rien à retirer à la main.
+
+   ⚠️ CE N'EST PAS LE RETOUR DES ADRESSES À « ? ». Celles-là ne changeaient rien
+   à ce que le robot lisait ; ces pages-ci portent chacune ses libellés de
+   micro-compétences en texte rendu côté serveur, et leur propre canonique. */
+const LASTMOD_NOTIONS = new Date("2026-08-26");
+
+const notionsRoutes: RouteConfig[] = listerNotionsAvecPage().map((n) => ({
+  path: `/programme/${n.classeSlug}/${n.matiere}/${n.notionSlug}`,
+  priority: 0.7,
+  changeFrequency: "monthly" as const,
+  lastMod: LASTMOD_NOTIONS,
+}));
+
 // Jeu « Qui suis-je ? » — un paquet par classe, généré depuis les classes qui ont
 // du contenu (GS-CP → Terminale au fur et à mesure). Toute nouvelle classe s'ajoute
 // ici automatiquement, sans toucher ce fichier.
@@ -630,6 +657,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...jeuxCartesRoutes,
     ...fichesRoutes,
     ...niveauxRoutes,
+    ...notionsRoutes,
   ].map((route) => {
     const videos = VIDEOS_FICHES[route.path];
     return {

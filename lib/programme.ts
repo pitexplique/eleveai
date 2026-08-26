@@ -15,6 +15,7 @@
 // importer depuis un composant client.
 
 import { getKnowledgePack, type Classe } from "@/lib/tutor-v4/catalog";
+import { ficheHrefSiExiste } from "@/lib/fiches/registre";
 
 export type ProgrammeClasse = {
   slug: Classe;
@@ -127,4 +128,123 @@ export function getProgrammeMatiere(
     // Banque absente pour ce couple classe/matière : pas de section.
     return null;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ⭐ 26/08/2026 — L'ÉTAGE DE LA NOTION, ET SON GÉNÉRATEUR UNIQUE
+   ═══════════════════════════════════════════════════════════════════════════
+
+   Frédéric : « il faut créer un moteur classe / matière / notion / libellé
+   micro et coach ou parcours ou fiches de cours », puis « par rapport à
+   Kartable on pourrait inclure les libellés des micro-compétences et là on les
+   dépasse ».
+
+   CE QUI MANQUAIT, MESURÉ. Les 3 126 libellés de micros sont déjà publiés en
+   texte — mais tous sur 12 pages seulement, une par classe. `/programme/4e`
+   en porte 205 d'un coup. C'est le même défaut que les fiches avaient le matin
+   même : un sommaire géant, et rien entre lui et la notion. La requête d'un
+   élève ne porte pas sur « le programme de 4e », elle porte sur « calculer une
+   longueur avec Pythagore ».
+
+   ⛔ CE N'EST PAS UN RETOUR DES ADRESSES À « ? » (retirées le 10/08, voir la
+   note dans app/sitemap.ts). Celles-là étaient des DOUBLONS : le coach est
+   rendu côté client, le paramètre ne changeait pas une ligne de ce que le
+   robot lit, et la page déclarait sa canonique sans paramètre. Ici on crée de
+   VRAIES pages, rendues côté serveur, avec chacune son texte et sa canonique.
+
+   ⭐ ET UNE PAGE DE NOTION NE CONCURRENCE JAMAIS UNE FICHE. C'est la décision
+   du 26/08, confirmée par Frédéric : là où une fiche de cours existe, c'est
+   ELLE la page de la notion — la page de programme se contente de rediriger
+   vers elle. Deux pages sur « Thalès 4e » se cannibaliseraient, et Google en
+   choisirait une au hasard.
+   ✅ Conséquence gratuite, et c'est tout l'intérêt de passer par le registre :
+   le jour où une fiche est écrite, la page de programme correspondante cesse
+   d'exister d'elle-même et son adresse redirige vers la fiche. Rien à retirer
+   du sitemap, rien à supprimer. Une ligne au registre, et l'étage se réorganise
+   tout seul. */
+
+
+export type NotionProgramme = {
+  classeSlug: string;
+  classeLabel: string;
+  enClasse: string;
+  matiere: "maths" | "francais";
+  matiereLabel: string;
+  /** L'identifiant du coach (underscores), tel qu'il vit dans les banques. */
+  notionId: string;
+  /** Le même, en slug d'URL (tirets) — la règle d'or partagée avec les fiches. */
+  notionSlug: string;
+  label: string;
+  micros: string[];
+  /** Le domaine du BO qui porte la notion : le contexte, en une ligne. */
+  boLabel: string;
+  coachHref: string;
+  parcoursHref: string;
+  /** Non nul ⇒ CETTE PAGE N'EXISTE PAS, elle redirige vers la fiche. */
+  ficheHref: string | null;
+};
+
+const slugNotion = (id: string) => id.replace(/_/g, "-");
+
+const PARCOURS_HREF: Record<"maths" | "francais", string> = {
+  maths: "/parcours",
+  francais: "/parcours-francais",
+};
+
+/** TOUTES les notions du programme, fiche comprise — la source unique. */
+export function listerToutesLesNotions(): NotionProgramme[] {
+  const out: NotionProgramme[] = [];
+  for (const classe of PROGRAMME_CLASSES) {
+    for (const matiere of classe.matieres) {
+      const p = getProgrammeMatiere(classe, matiere);
+      if (!p) continue;
+      for (const d of p.domaines) {
+        for (const n of d.notions) {
+          out.push({
+            classeSlug: classe.slug,
+            classeLabel: classe.label,
+            enClasse: classe.enClasse,
+            matiere,
+            matiereLabel: p.label,
+            notionId: n.id,
+            notionSlug: slugNotion(n.id),
+            label: n.label,
+            micros: n.micros,
+            boLabel: d.label,
+            coachHref: p.coachHref,
+            parcoursHref: PARCOURS_HREF[matiere],
+            ficheHref: ficheHrefSiExiste(matiere, classe.slug, slugNotion(n.id)),
+          });
+        }
+      }
+    }
+  }
+  return out;
+}
+
+/** Celles qui MÉRITENT une page : sans fiche, et avec au moins un micro à lire.
+ *  ⛔ LE FILTRE SUR LES MICROS N'EST PAS COSMÉTIQUE. Une notion sans micro
+ *  donnerait une page sans une phrase à lire — exactement la page mince que
+ *  Google déclasse, et qu'on se refuse depuis la règle des sommaires vides. */
+export function listerNotionsAvecPage(): NotionProgramme[] {
+  return listerToutesLesNotions().filter(
+    (n) => !n.ficheHref && n.micros.length > 0
+  );
+}
+
+/** Une notion précise, depuis les segments de l'URL. */
+export function getNotionProgramme(
+  classeSlug: string,
+  matiere: string,
+  notionSlug: string
+): NotionProgramme | null {
+  if (matiere !== "maths" && matiere !== "francais") return null;
+  return (
+    listerToutesLesNotions().find(
+      (n) =>
+        n.classeSlug === classeSlug &&
+        n.matiere === matiere &&
+        n.notionSlug === notionSlug
+    ) ?? null
+  );
 }
