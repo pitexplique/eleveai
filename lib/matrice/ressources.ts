@@ -1032,10 +1032,31 @@ export const RESSOURCES: RessourceEleveAI[] = [
   // c'est lui, la porte. Une carte « Fiches de cours » menait donc à une page
   // d'erreur depuis le jour où elle a été écrite, pour la 6ᵉ, la 3ᵉ et la 1re.
   //
-  // ⛔ NE PAS « CORRIGER » EN RECRÉANT /fiches-cours/maths/6e. Ce serait une
-  // page de plus à tenir pour chaque classe et chaque matière ; le sommaire
-  // fait déjà le travail. Si un jour l'ancre par classe manque vraiment, elle
-  // se pose sur le sommaire (`#6e`), elle ne se refait pas en route.
+  // ── ⭐ 26/08/2026 — LA CONSIGNE DU 23/08 EST RENVERSÉE, PAR FRÉDÉRIC ────────
+  // Elle disait : « ⛔ NE PAS CORRIGER EN RECRÉANT /fiches-cours/maths/6e — ce
+  // serait une page de plus à tenir pour chaque classe et chaque matière ; le
+  // sommaire fait déjà le travail. » Elle avait raison sur le coût et tort sur
+  // le trajet. Frédéric, le 26/08 : « si l'élève clique 4e Maths il se retrouve
+  // sur un hub qui propose maths français IA et doit aller chercher la fiche ».
+  //
+  // Ce que l'argument de 23/08 n'avait pas pesé : le sommaire de matière tient
+  // maintenant 82 fiches de maths, du CM2 à la 1re. Envoyer un élève de 4ᵉ
+  // dessus, ce n'est plus lui offrir une porte, c'est lui demander de trier
+  // 82 cartes pour trouver ses 15. La carte promet « Maths 4e » et livre tout
+  // le site : l'écart entre la promesse et la page EST le défaut.
+  //
+  // ✅ ET LE COÛT REDOUTÉ N'EXISTE PAS. Les 9 pages de classe ne tiennent
+  // aucune liste : `components/fiches/SommaireClasse.tsx` relit
+  // `FICHES_REGISTRE` et filtre sur la classe, exactement comme les deux
+  // sommaires de matière. Une page de classe = 14 lignes de métadonnées SEO.
+  // Le registre reste la source de vérité unique — une fiche ajoutée apparaît
+  // dans les trois endroits toute seule.
+  //
+  // ⛔ CE QUI RESTE VRAI DE LA CONSIGNE DE 23/08 : pas de page pour une classe
+  // sans fiche. `SommaireClasse` appelle `notFound()` si le registre est vide
+  // pour ce niveau — le 404 dit « pas encore », une page vide dirait « on t'a
+  // menti ». C'est pour ça que `/fiches-cours/maths/3e` reste un 404 : la 3ᵉ
+  // est éteinte depuis le 21/08, et le rester est la bonne réponse.
   {
     // ⭐ 24/08/2026 — LE CM2 ET LA 5ᵉ ENTRENT À LEUR TOUR.
     // La règle du 16/08 n'a pas bougé — « une ressource déclarée est une
@@ -1044,6 +1065,10 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // CM2, 20 de maths en 5ᵉ, toutes avec leur PDF depuis le 23/08.
     // ⛔ PAS DE FRANÇAIS EN 5ᵉ : le dossier est vide, zéro fiche. La 5ᵉ n'a donc
     // qu'une carte, et c'est exactement ce que la règle demande.
+    // ⏳ CETTE DERNIÈRE LIGNE N'EST PLUS VRAIE (26/08/2026) : le français de 5ᵉ
+    //    compte 14 fiches, et celui de 4ᵉ 16. Elles ne sont pourtant toujours
+    //    pas déclarées, et c'est une décision en attente, pas un oubli — voir
+    //    la note « ⏳ LE FRANÇAIS DE 5ᵉ ET DE 4ᵉ » sous fiches-maths-4e.
     // ⚠️ `niveaux` NE PORTE QUE LA CLASSE — jamais « prof » ni « parent ». Le
     // moteur essaie deux portes (le rôle, la classe dite) : « cm2 » suffit à
     // servir le parent et l'enseignant qui ont cliqué CM2, et à n'écarter
@@ -1051,7 +1076,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     id: "fiches-maths-cm2",
     titre: "Maths CM2 — cours et exercices corrigés",
     promesse: "La notion en une page, un dessin par idée, un exemple par règle.",
-    url: "/fiches-cours/maths",
+    url: "/fiches-cours/maths/cm2",
     niveaux: ["cm2"],
     matiere: "maths",
     notions: ["*"],
@@ -1063,7 +1088,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     id: "fiches-francais-cm2",
     titre: "Français CM2 — cours et exercices corrigés",
     promesse: "La règle en une page, avec la phrase dessinée.",
-    url: "/fiches-cours/francais",
+    url: "/fiches-cours/francais/cm2",
     niveaux: ["cm2"],
     matiere: "francais",
     notions: ["*"],
@@ -1076,10 +1101,15 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // ajouter `fiches-francais-5e` « pour la symétrie » — il n'y a rien
     // derrière, et une carte qui ouvre un sommaire sans sa classe est pire
     // qu'une carte absente.
+    // ⏳ LES DEUX MOITIÉS DE CE MOTIF ONT CHANGÉ (26/08/2026). « Il n'y a rien
+    //    derrière » est faux : 14 fiches de français en 5ᵉ. Et « un sommaire
+    //    sans sa classe » n'existe plus : /fiches-cours/francais/5e est une
+    //    page. Ce qui reste à trancher est ailleurs — le PDF. Voir la note
+    //    sous fiches-maths-4e.
     id: "fiches-maths-5e",
     titre: "Maths 5e — cours et exercices corrigés",
     promesse: "La notion en une page, un dessin par idée, un exemple par règle.",
-    url: "/fiches-cours/maths",
+    url: "/fiches-cours/maths/5e",
     niveaux: ["5e"],
     matiere: "maths",
     notions: ["*"],
@@ -1087,6 +1117,58 @@ export const RESSOURCES: RessourceEleveAI[] = [
     type: "fiche",
     statut: "validee",
   },
+  {
+    // ─── ⭐ 26/08/2026 — LA 4ᵉ REVIENT, TROIS SEMAINES APRÈS AVOIR ÉTÉ ÉTEINTE ─
+    // Le 21/08, Frédéric : « on éteint toute la 4e et la 3e, on repart au
+    // propre ». Cinq fiches de juin sont parties, leurs alias aussi, et
+    // next.config.ts a redirigé leurs adresses. La 4ᵉ a été réécrite depuis, au
+    // standard du 19/08 — une propriété illustrée par bloc, un dessin par idée.
+    //
+    // ✅ MESURÉ AVANT DE L'ÉCRIRE, parce que c'est ce que la règle du 16/08
+    // exige (« une ressource déclarée est une ressource promise ») :
+    //     15 notions au registre  ·  15 pages servies  ·  15 PDF dans public/
+    // Aucun trou. Et les quatre dernières redirections d'extinction sont
+    // tombées le 26/08 (pythagore, cosinus, statistiques, probabilités) : plus
+    // une seule adresse de 4ᵉ ne renvoie ailleurs. Seule la 3ᵉ reste éteinte.
+    //
+    // ⚠️ ELLE N'AVAIT JAMAIS ÉTÉ REDÉCLARÉE. Les fiches sont revenues une par
+    // une dans le dépôt, mais rien ne les annonçait dans la matrice : un élève
+    // de 4ᵉ qui cliquait « Comprendre une notion » ne voyait aucune fiche, alors
+    // que les quinze siennes existaient et avaient leur PDF. C'est ce silence-là
+    // qu'on lève, et il ne demande aucune vérification de plus.
+    id: "fiches-maths-4e",
+    titre: "Maths 4e — cours et exercices corrigés",
+    promesse: "La notion en une page, un dessin par idée, un exemple par règle.",
+    url: "/fiches-cours/maths/4e",
+    niveaux: ["4e"],
+    matiere: "maths",
+    notions: ["*"],
+    intentions: ["comprendre"],
+    type: "fiche",
+    statut: "validee",
+  },
+  /* ⏳ LE FRANÇAIS DE 5ᵉ ET DE 4ᵉ : ÉCRIT, RENDU, MAIS PAS ENCORE DÉCLARÉ.
+     Ce n'est pas un oubli, c'est la seule question que ce chantier n'a pas
+     tranchée — et elle appartient à Frédéric, parce qu'elle porte sur l'offre.
+
+     La mesure, au 26/08/2026 :
+         français 5ᵉ  ·  14 fiches  ·   8 PDF   ← 6 manquants
+         français 4ᵉ  ·  16 fiches  ·   0 PDF   ← aucun
+     Les pages, elles, sont complètes : définition, propriétés dessinées,
+     exemples corrigés, exercices. Le bouton de téléchargement ne s'affiche que
+     pour les fiches présentes dans PDF_DISPONIBLES — donc une fiche sans PDF ne
+     promet pas un PDF, elle n'en propose simplement pas.
+
+     Deux lectures, et elles ne donnent pas le même geste :
+     — la promesse porte sur le COURS : alors les deux cartes s'écrivent
+       aujourd'hui, et 30 fiches cessent d'être invisibles ;
+     — la promesse porte sur la COLLECTION COMPLÈTE, PDF compris : alors on
+       attend la fournée de PDF, comme le CM2 et la 5ᵉ de maths ont attendu la
+       leur le 23/08 avant d'entrer ici le 24.
+     ⛔ NE PAS TRANCHER SEUL. La carte à écrire est prête, il ne manque que la
+        décision : `fiches-francais-5e` et `fiches-francais-4e`, sur le modèle
+        exact de `fiches-francais-cm2`, url `/fiches-cours/francais/5e` et
+        `/fiches-cours/francais/4e` (les deux pages existent et répondent). */
   {
     id: "fiches-maths-6e",
     // ⭐ « COURS ET EXERCICES CORRIGÉS », ET PAS « FICHE DE COURS » (23/08/2026).
@@ -1116,7 +1198,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // 19/08 — un visuel par bloc, et un exemple pris dans le monde de l'élève —
     // et c'est précisément ce qui les distingue d'un cours recopié.
     promesse: "La notion en une page, un dessin par idée, un exemple par règle.",
-    url: "/fiches-cours/maths",
+    url: "/fiches-cours/maths/6e",
     // ⭐ QUATRE PUBLICS, MAIS DEUX ENTRÉES SEULEMENT (Frédéric, 23/08 : « pour
     // les élèves, profs et parents et adulte », puis « ainsi que pour parents
     // et profs EN 6ᵉ »). Une fiche de cours n'est pas un exercice : elle se
@@ -1159,7 +1241,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // fonction en couleur et l'accord en arc. Le dire ici, c'est la seule
     // manière de ne pas passer pour un cours recopié de plus.
     promesse: "La règle en une page, avec la phrase dessinée.",
-    url: "/fiches-cours/francais",
+    url: "/fiches-cours/francais/6e",
     // ⚠️ Deux entrées, pas quatre — voir la note de `fiches-maths-6e` juste
     // au-dessus : « prof » et « parent » sont des rôles, et les écrire ici
     // servait la fiche de 6ᵉ au parent d'un CP.
@@ -1223,13 +1305,18 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // de 3ᵉ qui cliquait « Comprendre une notion » recevait une carte
     // « Fiches de cours — maths 3e » qui ouvrait un 404. Ce n'est pas une
     // décision nouvelle, c'est celle du 21/08 qu'on finit d'appliquer.
-    // ✅ À rallumer le jour où la 3ᵉ est réécrite — en pointant sur
-    //    /fiches-cours/maths, pas sur /fiches-cours/maths/3e.
+    // ✅ À rallumer le jour où la 3ᵉ est réécrite — et depuis le 26/08/2026 en
+    //    pointant sur /fiches-cours/maths/3e, PAS sur /fiches-cours/maths.
+    //    (La consigne inverse écrite ici le 23/08 valait tant qu'aucune page de
+    //    classe n'existait ; elles existent toutes maintenant. Celle de la 3ᵉ
+    //    apparaîtra d'elle-même dès que le registre aura une fiche de 3ᵉ —
+    //    `SommaireClasse` rend un 404 tant qu'il n'y en a aucune, ce qui est
+    //    précisément ce qu'on veut lire aujourd'hui.)
     // {
     //   id: "fiches-maths-3e",
     //   titre: "Fiches de cours — maths 3e",
     //   promesse: "La notion expliquée court, avec un exemple.",
-    //   url: "/fiches-cours/maths",
+    //   url: "/fiches-cours/maths/3e",
     //   niveaux: ["3e"],
     //   matiere: "maths",
     //   notions: ["*"],
@@ -1247,10 +1334,20 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // retire pas de moi-même, parce qu'une fiche existe vraiment et que c'est à
     // Frédéric de dire si elle suffit ; mais tant qu'il n'y en a qu'une, cette
     // carte est la plus fragile du fichier.
+    //
+    // ✅ 26/08/2026 — LA MOITIÉ « CHERCHER AU MILIEU DE DEUX CENTS » EST RÉGLÉE.
+    // L'url pointe maintenant sur /fiches-cours/maths/premiere-spe, qui n'ouvre
+    // que la Première. Le lycéen ne trie plus rien : il voit sa seule fiche, et
+    // il la voit tout de suite. ⚠️ CE QUI RESTE ENTIER, C'EST L'AUTRE MOITIÉ —
+    // une carte au pluriel (« Fiches de cours ») pour une collection de UNE. La
+    // page le dit désormais au singulier et sans arrondir (« Une fiche pour
+    // l'instant en 1re spé »), ce qui rend l'écart visible au lieu de le
+    // masquer ; mais c'est toujours à Frédéric de trancher si une fiche suffit
+    // à mériter une carte. Cette entrée reste la plus fragile du fichier.
     id: "fiches-maths-premiere",
     titre: "Fiches de cours — maths Première spé",
     promesse: "La notion expliquée court, avec un exemple.",
-    url: "/fiches-cours/maths",
+    url: "/fiches-cours/maths/premiere-spe",
     niveaux: ["premiere"],
     matiere: "maths",
     notions: ["*"],

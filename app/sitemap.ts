@@ -37,6 +37,12 @@ const LASTMOD_FICHES_IA = new Date("2026-07-12");
 const LASTMOD_FICHES_FR = new Date("2026-08-25");
 // 23/08 : les fiches deviennent de vrais PDF, fabriques par Chrome depuis la page.
 const LASTMOD_FICHES_PDF = new Date("2026-08-23");
+// 26/08 : les sommaires PAR CLASSE ouvrent (/fiches-cours/maths/4e...). Ils
+// n'existaient pas : seuls les deux sommaires de matiere et les fiches elles-
+// memes etaient indexables. C'est le palier qui manquait entre « Maths » et
+// « Le theoreme de Thales », et c'est exactement ce qu'on tape (« maths 4e
+// cours et exercices corriges »).
+const LASTMOD_FICHES_CLASSE = new Date("2026-08-26");
 // 25/07 : lancement des kits de survie lycée (Première spé maths en premier)
 const LASTMOD_KIT = new Date("2026-07-28");
 const LASTMOD_AUDIENCES = new Date("2026-07-05");
@@ -125,6 +131,22 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/fiches-cours/maths", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/francais", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+
+  // ── Les sommaires PAR CLASSE (26/08/2026) ──────────────────────────────────
+  // ⛔ PAS DE 3ᵉ, ET PAS DE CLASSE SANS FICHE EN GÉNÉRAL. `SommaireClasse` rend
+  // un 404 quand le registre ne connaît aucune fiche du niveau : une ligne
+  // écrite ici pour une classe vide mettrait une 404 au sitemap. Une classe
+  // s'ajoute le jour où sa première fiche entre au registre, pas avant.
+  { path: "/fiches-cours/maths/cm2",          priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
+  { path: "/fiches-cours/maths/6e",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
+  { path: "/fiches-cours/maths/5e",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
+  { path: "/fiches-cours/maths/4e",           priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
+  { path: "/fiches-cours/maths/premiere-spe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
+  { path: "/fiches-cours/francais/cm2",       priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
+  { path: "/fiches-cours/francais/6e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
+  { path: "/fiches-cours/francais/5e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
+  { path: "/fiches-cours/francais/4e",        priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_CLASSE },
+
   { path: "/fiches-cours/francais/cm2/grammaire-orthographe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   { path: "/fiches-cours/francais/cm2/phrase-complexe", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
   { path: "/fiches-cours/francais/cm2/grammaire-complements", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
