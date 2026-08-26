@@ -545,6 +545,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Le test de la photographie pour séparer le propre du figuré, et les quatre portes par lesquelles un mot neuf entre dans la langue : fabriqué, sens neuf, emprunté, sigle.",
   },
+  "francais/5e/vocabulaire-formation": {
+    titre: "La formation des mots (2026-2027)",
+    resume:
+      "Fabriquer le mot qu'une définition demande, comprendre que le suffixe donne au mot son métier, et reconnaitre les éléments latins et grecs qui ouvrent les mots savants.",
+  },
 
   /* ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées, mais
      ni le registre ni le sitemap ne les déclaraient : le coach n'affichait
