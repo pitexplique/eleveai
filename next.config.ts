@@ -50,12 +50,9 @@ const nextConfig = {
       // ⭐ ET ELLES REVIENNENT, UNE PAR UNE (25/08/2026). Une notion réécrite au
       // standard sort de cette liste le jour où sa fiche est publiée, sinon
       // l'adresse continue de rediriger et la fiche neuve est invisible.
-      // Sorties à ce jour : pythagore-theoreme, trigo-cosinus, stat-statistique.
-      {
-        source: "/fiches-cours/maths/4e/proba-experience",
-        destination: "/fiches-cours/maths",
-        permanent: false,
-      },
+      // ✅ 26/08/2026 — LES QUATRE ADRESSES DE 4e SONT TOUTES REVENUES :
+      // pythagore-theoreme, trigo-cosinus, stat-statistique, proba-experience.
+      // Il ne reste plus que la 3e, qui n'a pas encore été réécrite.
       {
         source: "/fiches-cours/maths/3e/thales-theoreme",
         destination: "/fiches-cours/maths",

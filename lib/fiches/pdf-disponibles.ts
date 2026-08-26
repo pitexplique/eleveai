@@ -72,6 +72,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "pourcentages-6e-cours-exercices-corriges.pdf",
   "pourcentages-cm2-cours-exercices-corriges.pdf",
   "premiers-pas-en-probabilites-6e-cours-exercices-corriges.pdf",
+  "probabilites-4e-cours-exercices-corriges.pdf",
   "probabilites-5e-cours-exercices-corriges.pdf",
   "probabilites-cm2-cours-exercices-corriges.pdf",
   "pronoms-personnels-et-leur-antecedent-6e-cours-exercices-corriges.pdf",
