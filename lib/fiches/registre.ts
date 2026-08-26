@@ -567,6 +567,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Réveiller une lettre muette avec un mot de la même famille, et trancher les homophones en remplaçant le mot par sa définition : sont ou son, où ou ou, plutôt ou plus tôt.",
   },
+  "francais/5e/discours-registres": {
+    titre: "L'oral, l'écrit et les registres (2026-2027)",
+    resume:
+      "Deux grammaires et aucune n'est fautive : rétablir à l'écrit ce que l'oral avale, redire une phrase à trois étages de registre, et séparer un fait d'un avis.",
+  },
 
   /* ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées, mais
      ni le registre ni le sitemap ne les déclaraient : le coach n'affichait
