@@ -13,7 +13,7 @@
 // liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
 // par où l'année peut commencer.
 //
-// 782 notions, 40 paquets.
+// 783 notions, 40 paquets.
 
 export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
@@ -183,6 +183,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         "label": "Fractions et nombres rationnels",
         "prerequis": [
           "relatif_operation"
+        ]
+      },
+      {
+        "id": "fraction_calcul",
+        "label": "Calculer avec les fractions",
+        "prerequis": [
+          "fraction_nombre"
         ]
       },
       {

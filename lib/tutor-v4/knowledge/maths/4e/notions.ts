@@ -34,11 +34,31 @@ export const notions: NotionSource[] = [
     prerequis: [],
     levels: [1, 2, 3],
   },
+  // ⭐ LES FRACTIONS SONT SCINDÉES EN DEUX (26/08/2026). Elles portaient DOUZE
+  // micro-compétences, contre une médiane de sept sur les dix-neuf notions de la
+  // classe — Frédéric : « une notion ne doit pas avoir 12 micro-compétences ».
+  //
+  // Le découpage suit la ligne de fracture déjà présente dans les PRÉREQUIS :
+  // aucun des sept micros de calcul n'est prérequis d'un des cinq micros de
+  // nombre, donc la coupure ne crée aucun cycle et ne casse aucune progression.
+  //
+  // ⭐ ET C'EST LE DÉCOUPAGE DE LA 5e, à l'identique : elle sépare déjà
+  // `fraction_nombre` de `fraction_calcul`, chacune avec sa fiche. L'élève
+  // retrouve la même coupure d'une année sur l'autre.
+  // ⚠️ `fraction_nombre` GARDE son identifiant : dix fichiers le citent, dont
+  // `lib/matrice/coach.ts` qui associe une notion de fractions à chaque classe.
   {
     id: "fraction_nombre",
     label: "Fractions et nombres rationnels",
     boId: "BO4N2",
     prerequis: ["relatif_operation"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "fraction_calcul",
+    label: "Calculer avec les fractions",
+    boId: "BO4N2",
+    prerequis: ["fraction_nombre"],
     levels: [1, 2, 3],
   },
 
