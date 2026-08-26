@@ -266,11 +266,25 @@ const PORTES_5E = [
  * `["type:coach", "parcours", "fiches-maths-4e", "fiches-francais-4e"]` a été
  * essayé et MESURÉ le 26/08 : les deux défauts sont réels.
  *
- *   1. `parcours` EST UN IDENTIFIANT DE MATHS (`matiere: "maths"`, ligne ~517),
+ *   1. `parcours` EST UN IDENTIFIANT DE MATHS (`matiere: "maths"`, ligne ~535),
  *      pas un mot générique. Frédéric, le 26/08 : « il y a des parcours en
- *      maths et en français » — exactement, et le second s'appelle
- *      `parcours-francais`. Un id figé ne sert donc qu'une des deux matières ;
- *      `type:parcours` rend le parcours de la matière lue, quelle qu'elle soit.
+ *      maths et en français », puis « les parcours sont basés sur les coachs ».
+ *      Un id figé ne sert donc qu'UNE matière ; `type:parcours` rend celui de
+ *      la matière lue.
+ *      ✅ VÉRIFIÉ MATIÈRE PAR MATIÈRE, LES CINQ DU PÉRIMÈTRE ONT LA PAIRE :
+ *          maths     coach-maths     · parcours          · /parcours
+ *          français  coach-francais  · parcours-francais · /parcours-francais
+ *          anglais   coach-anglais   · parcours-anglais  · /parcours-english-maths
+ *          espagnol  coach-espagnol  · parcours-espagnol · /parcours-espagnol
+ *          IA        coach-ia        · parcours-ia       · /parcours-ia
+ *      Les dix pages répondent en 200. `type:coach` et `type:parcours` ne
+ *      tombent donc jamais à vide sur une de ces cinq matières.
+ *      ⛔ L'ÉCONOMIE EST HORS PÉRIMÈTRE, ET CE N'EST PAS UN OUBLI. Frédéric,
+ *      26/08 : « pour le moment je n'ai pas intégré économie, on s'occupe maths
+ *      français anglais espagnol et IA ». État mesuré le jour même, pour le
+ *      jour où elle entrera : /coach-ia/economie répond 200 mais aucune
+ *      ressource `coach-economie` n'est déclarée ici, et /parcours-economie
+ *      n'existe pas (404). Il y a donc DEUX gestes à faire, pas un.
  *
  *   2. LE FILTRE PAR MATIÈRE N'EST PAS SYMÉTRIQUE. Une demande de FRANÇAIS
  *      écarte bien les ressources de maths ; une demande de MATHS n'écarte pas
