@@ -14,9 +14,9 @@ import { listerFiches } from "@/lib/fiches/registre";
 // l'empilement de mots-clés, et Google le lit comme tel. Il est écrit UNE fois
 // par sommaire, dans une phrase qui se lit.
 export const metadata: Metadata = {
-  title: "Français : cours et exercices corrigés (CM2, 6e, 5e)",
+  title: "Français : cours et exercices corrigés (CM2, 6e, 5e, 4e)",
   description:
-    "Cours, règles et exercices corrigés (ou exercices résolus) en français, du CM2 à la 5e : grammaire, conjugaison, orthographe. La 5e suit le programme 2026-2027. À lire ou à imprimer en PDF.",
+    "Cours, règles et exercices corrigés (ou exercices résolus) en français, du CM2 à la 4e : grammaire, conjugaison, orthographe, vocabulaire, lecture et écriture. La 5e et la 4e suivent le programme 2026-2027. À lire ou à imprimer en PDF.",
 };
 
 // Généré depuis le registre, comme le hub de maths : toute fiche ajoutée à
