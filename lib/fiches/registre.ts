@@ -652,6 +652,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Trois places — radical, marque de temps, marque de personne —, l'infinitif qui se cache au passé simple, et les radicaux qui changent selon la personne.",
   },
+  "francais/5e/conjugaison-valeurs": {
+    titre: "L'emploi des temps et des modes (2026-2027)",
+    resume:
+      "L'imparfait installe, le passé simple fait avancer, le temps composé dit l'accompli — et le mode se choisit sur l'intention : ordonner, supposer, souhaiter.",
+  },
 
   /* ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées, mais
      ni le registre ni le sitemap ne les déclaraient : le coach n'affichait
