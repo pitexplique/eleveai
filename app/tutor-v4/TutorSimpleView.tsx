@@ -300,7 +300,14 @@ export default function TutorSimpleView({
                 elle se construisait sur les items `fixed`. Reste la vidéo, et
                 le Coach IA quand l'élève se trompe. */}
             {learningVideoHref ? (
-              <div className="mb-5 flex justify-center gap-2">
+              /* ⚠️ HORS APERÇU (27/08/2026) — scripts/capturer-apercus-coach.ts
+                 retire cette pastille avant de photographier. Elle reste sur le
+                 site : c'est un raccourci utile QUAND ON TRAVAILLE. Mais dans un
+                 aperçu de 380 px, ce rond bleu tombe entre le libellé de la
+                 notion et l'énoncé, où il ne se lit ni comme un bouton ni comme
+                 un dessin — juste comme une tache. Frédéric, 27/08 : « il faut
+                 juste enlever une icône que je vois sur la 3e ligne ». */
+              <div className="mb-5 flex justify-center gap-2" data-hors-apercu="">
                 <a
                   href={learningVideoHref}
                   target="_blank"

@@ -92,7 +92,22 @@ const affichage = await import(pathToFileURL(path.join(RACINE, "lib/tutor-v4/dis
 const SORTIE = path.join(RACINE, "public", "apercus", "coach");
 const MANIFESTE = path.join(RACINE, "lib", "tutor-v4", "apercus.generated.ts");
 
-/** Même géométrie que les aperçus de l'accueil : 16:10, fenêtre réduite. */
+/**
+ * LA FENÊTRE DE CAPTURE — 800 × 500, comme les aperçus des cartes de l'accueil.
+ *
+ * 16:10, le rapport que le panneau annonce en une ligne (`aspect-ratio: 16 / 10`
+ * dans FenetreApercu.tsx). Le changer ici sans le changer là-bas ferait glisser
+ * les écrans les uns sur les autres.
+ *
+ * ⛔ NE PAS ÉLARGIR POUR FAIRE ENTRER LE PANNEAU « QUESTIONS · TEMPS · SCORE ».
+ * Il a été demandé le 27/08 (« si tu pouvais rajouter — pas tout l'écran — la
+ * partie droite »), puis reposé le jour même. La raison est mécanique : ce
+ * panneau latéral du tutor est en `lg:grid-cols-[1fr_340px]`, donc il N'EXISTE
+ * PAS sous 1024 px. Le faire apparaître demandait de capturer en 1120 px, ce qui
+ * fait tomber la réduction de 47 % à 34 % — un texte nettement plus petit dans
+ * les 380 px du panneau. Frédéric, après l'essai : « on laisse comme ça ».
+ * L'énoncé lisible vaut mieux qu'un compteur de score illisible.
+ */
 const LARGEUR = 800;
 const HAUTEUR = 500;
 const LARGEUR_SERVIE = 760;
@@ -138,6 +153,38 @@ const base = (args.find((a) => a.startsWith("http")) ?? "http://localhost:3000")
 const tout = args.includes("--tout");
 /** « maths » = toute la matière ; « maths:5e » = une seule classe. */
 const filtres = args.filter((a) => !a.startsWith("http") && !a.startsWith("--"));
+
+/**
+ * QUEL ÉCRAN VIENT EN PREMIER — `--ordre=…`, et par défaut `complet-simple`.
+ *
+ * ⚠️ LE DÉFAUT SUIT CE QUI EST EN LIGNE, pas ce qu'on préfère. Les aperçus
+ * publiés montrent le mode complet en premier, et les libellés de
+ * NotionAvecApercu.tsx annoncent « Mode complet » puis « Mode simple ». Tant que
+ * l'arbitrage n'est pas rendu, changer ce défaut ferait produire des captures
+ * que les pastilles décriraient à l'envers.
+ *
+ * Trois montages ont été essayés le 27/08, et aucun ne s'impose sur le papier :
+ *   simple-complet       la question posée d'abord, le menu des deux énoncés
+ *                        ensuite. Le premier écran est celui que TOUT LE MONDE
+ *                        voit ; le second, seulement qui laisse la souris deux
+ *                        secondes. Une question convainc mieux qu'un menu.
+ *   complet-simple       l'inverse, et c'est le plus FIDÈLE : un élève de 5e qui
+ *                        clique atterrit en mode complet, c'est son défaut.
+ *   complet-invitation   le menu, puis « Prêt pour une question ? » et son
+ *                        bouton vert. L'aperçu finit sur une porte au lieu de
+ *                        finir sur plus de devoirs. Né d'un clic oublié.
+ *
+ * ⚠️ CE RÉGLAGE EXISTE POUR COMPARER, pas pour hésiter éternellement. Les trois
+ * se regardent côte à côte sur une même notion ; une fois tranché, le défaut
+ * change ici et la fournée s'aligne.
+ * ⚠️ ET L'ORDRE DES LIBELLÉS SUIT : components/coach/NotionAvecApercu.tsx écrit
+ * « Mode simple » puis « Mode complet ». Inverser ici sans inverser là-bas ferait
+ * annoncer un mode au-dessus de l'autre.
+ */
+const ORDRE = (args.find((a) => a.startsWith("--ordre="))?.slice(8) ?? "complet-simple") as
+  | "simple-complet"
+  | "complet-simple"
+  | "complet-invitation";
 
 function fichier(c: Cible, ecrans: number) {
   return path.join(SORTIE, c.matiere, c.classe, `${c.notion}.${ecrans}.webp`);
@@ -250,13 +297,44 @@ if (rates.length) console.log("Échecs : " + rates.join(" "));
  */
 async function capturer(page: Page, c: Cible): Promise<{ octets: Buffer; ecrans: number }> {
   const defaut = affichage.defaultDisplayModeForClasse(c.classe);
-  // La vue par défaut D'ABORD : c'est celle qu'un clic ouvre vraiment.
-  const vues: string[] = defaut === "complete" ? ["complete", "simple"] : ["simple"];
+
+  /**
+   * ⭐ LE MODE SIMPLE PASSE EN PREMIER, AVEC SA QUESTION (Frédéric, 27/08 :
+   * « mode simple en premier avec la question, on ne touche à rien d'autre, puis
+   * on affiche mode complet »).
+   *
+   * L'ordre n'est pas cosmétique : c'est le PREMIER écran qu'on voit en
+   * survolant, et souvent le seul si la souris repart. Il doit donc porter ce
+   * qu'il y a de plus convaincant — une question, posée, qu'on peut lire tout de
+   * suite. Le mode complet vient ensuite dire qu'on a le choix entre deux
+   * énoncés.
+   *
+   * ⛔ CE FUT L'INVERSE, ET DEUX FOIS. D'abord « complet puis simple avec une
+   * question » ; puis « complet puis l'invitation Prêt pour une question ? »,
+   * née d'un clic oublié et retenue exprès (« c'est comme Marie Curie »). Les
+   * deux ont été essayées EN LIGNE, sur deux étalons, avant d'arriver ici. Ne
+   * pas ré-inverser sans les avoir revues.
+   *
+   * ⚠️ UNE SEULE VUE POUR LE PRIMAIRE. Du CP au CM2 et sur les niveaux du CECRL,
+   * la vue complète n'existe pas (lib/tutor-v4/displayMode.ts) : la notion garde
+   * une pastille, et c'est honnête — il n'y a rien d'autre à montrer.
+   */
+  const vues: string[] =
+    defaut !== "complete"
+      ? ["simple"]
+      : ORDRE === "complet-invitation"
+        ? ["complete", "simple"]
+        : ORDRE === "complet-simple"
+          ? ["complete", "simple"]
+          : ["simple", "complete"];
 
   const bandes: Buffer[] = [];
   for (const vue of vues) {
-    // Le mode simple ne s'arrête sur l'invitation que s'il a un écran devant lui.
-    const demarrer = !(vue === "simple" && vues.length > 1);
+    /**
+     * On démarre partout, SAUF pour l'invitation : là on s'arrête volontairement
+     * sur « Prêt pour une question ? » (voir `ORDRE`).
+     */
+    const demarrer = !(ORDRE === "complet-invitation" && vue === "simple" && vues.length > 1);
     bandes.push(await capturerUneVue(page, c, vue, demarrer));
   }
   return { octets: await empiler(bandes), ecrans: bandes.length };
@@ -487,7 +565,12 @@ async function capturerUneVue(
         undefined,
         { timeout: 20000 },
       );
-      // Le temps que l'énoncé se pose et que ses dessins se rendent.
+      /* Le temps que l'énoncé se pose et que ses dessins se rendent.
+         ⚠️ UNE SECONDE, ET C'ÉTAIT 2,5 (Frédéric, 27/08 : « raccourcis le temps,
+         1 seconde pas 2,5 »). Ce délai ne sert plus à ATTENDRE le démarrage —
+         c'est la vérification juste au-dessus qui s'en charge — mais seulement à
+         laisser les dessins se poser. Deux secondes et demie de plus par notion,
+         c'est une demi-heure sur une fournée de 768. */
       await page.waitForTimeout(1000);
     }
   }

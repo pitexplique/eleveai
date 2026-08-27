@@ -77,6 +77,27 @@ const MODE_COMPLET: Libelle = {
   encre: "#4338ca",
 };
 
+/**
+ * ⚠️ L'ORDRE SUIT CELUI DE LA CAPTURE, ET RIEN NE LE VÉRIFIE.
+ *
+ * Le mode COMPLET est en premier, parce que c'est l'ordre des aperçus publiés
+ * (`--ordre=complet-simple`, le défaut de scripts/capturer-apercus-coach.ts).
+ *
+ * ⛔ SI L'ORDRE DES VUES CHANGE LÀ-BAS, IL DOIT CHANGER ICI. Rien ne relie les
+ * deux à part cette note : une pastille qui annonce « Mode complet » au-dessus
+ * d'un écran simple ne se voit dans aucun test, seulement à l'œil.
+ *
+ * ── ARBITRAGE EN COURS AU 27/08/2026 ─────────────────────────────────────────
+ * Trois montages ont été fabriqués et comparés en images sur une notion chacun :
+ *   complet → simple        le plus FIDÈLE : le premier écran est celui que le
+ *                           clic ouvre vraiment (c'est l'ordre actuel) ;
+ *   simple → complet        le plus CONVAINCANT : une question posée d'abord,
+ *                           mais elle montre un écran que le clic ne donne pas ;
+ *   complet → invitation    finit sur « Prêt pour une question ? » et son bouton
+ *                           vert, donc sur une porte plutôt que sur des devoirs.
+ * Frédéric réfléchit. Tant que ce n'est pas tranché, on ne bouge NI l'ordre de
+ * capture NI celui-ci — les deux se déplacent ensemble ou pas du tout.
+ */
 const LIBELLES: Record<number, Libelle[]> = {
   1: [MODE_SIMPLE],
   2: [MODE_COMPLET, MODE_SIMPLE],
