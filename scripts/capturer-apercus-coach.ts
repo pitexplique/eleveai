@@ -1,0 +1,377 @@
+/**
+ * Fabrique les APERÇUS DE SURVOL DES NOTIONS DU COACH — l'exercice qui attend
+ * l'élève, photographié sur le tutor, une image par notion.
+ *
+ * ── LE CHIFFRE QUI COMMANDE CE CHANTIER ──────────────────────────────────────
+ * Frédéric, 27/08/2026 : « un élève sur deux quitte le coach et ne va pas sur
+ * tutor ». La page /coach-ia/<matiere>?classe=… liste des titres — « Opérations
+ * sur les nombres relatifs », « Pythagore et sa réciproque » — et la moitié des
+ * gens n'y donnent pas suite. Un titre ne dit pas ce qu'on va FAIRE : ni si
+ * c'est un cours ou un exercice, ni à quoi ressemblera l'écran, ni combien ça
+ * dure. L'aperçu au survol répond avant le clic.
+ *
+ * C'est le même pari que sur les cartes de l'accueil (scripts/capturer-apercus.ts),
+ * et le même composant l'affiche (components/matrice/FenetreApercu.tsx). Ce qui
+ * change ici, c'est CE QU'ON PHOTOGRAPHIE : pas une page qu'une URL suffit à
+ * ouvrir, mais un exercice qu'il faut faire démarrer.
+ *
+ * ── ⚠️ POURQUOI IL FAUT CLIQUER, ET PAS SEULEMENT NAVIGUER ───────────────────
+ * `/tutor-v4?classe=5e&matiere=maths&notion=nombre_relatif` PRÉSÉLECTIONNE bien
+ * la notion — vérifié, le `<select>` porte la bonne valeur. Mais l'écran affiche
+ * alors « Clique sur Démarrer une mission. » et rien d'autre. Une campagne qui
+ * se contenterait de l'URL produirait 768 fois le même écran vide, et personne
+ * ne s'en apercevrait avant de les regarder une par une.
+ * Le scénario est donc : ouvrir, attendre le bouton, cliquer, attendre l'énoncé.
+ * Il est IDENTIQUE pour les cinq coachs — ils partagent tous TutorV4Client.
+ *
+ * ── ⛔ LE GARDE-FOU QUI NE SERT À RIEN AUJOURD'HUI ───────────────────────────
+ * `/api/chat` est coupée à la racine. Aujourd'hui c'est inutile : aucune des
+ * quatre routes du tutor (start, choose, jump, answer) n'appelle l'IA, et un
+ * robot sans session ne peut de toute façon pas ouvrir le coach conversationnel.
+ * Mais une campagne fait 768 passages, et le jour où quelqu'un branchera un
+ * appel IA quelque part dans le tutor, cette ligne empêchera une fournée de
+ * captures de facturer 768 fois sans que personne l'ait voulu.
+ *
+ * ── USAGE ────────────────────────────────────────────────────────────────────
+ *   npm run capturer:apercus-coach -- http://localhost:3000 maths:5e
+ *   npm run capturer:apercus-coach -- http://localhost:3000 maths        (toutes les classes)
+ *   npm run capturer:apercus-coach -- http://localhost:3000 --tout
+ *
+ * Sans cible, seules les notions sans fichier sont capturées : relancer après
+ * une coupure ne recommence pas tout.
+ *
+ * ⚠️ RELANCER LE SERVEUR avant une grosse fournée — le rechargement à chaud
+ * perd des feuilles de style, et une capture ne dit pas pourquoi elle est laide.
+ */
+import fs from "node:fs";
+import path from "node:path";
+import { registerHooks } from "node:module";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { chromium, type Page } from "playwright-core";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const RACINE = path.join(__dirname, "..");
+
+/**
+ * ⚠️ DEUX CROCHETS DE RÉSOLUTION, ET AUCUN N'EST DÉCORATIF.
+ *
+ * `--experimental-strip-types` retire les types, il ne fait pas la résolution de
+ * modules de TypeScript. Or le catalogue du coach importe `@/lib/...` (l'alias
+ * du projet) et `./notions` (sans extension). Sans ces deux crochets, l'import
+ * du catalogue échoue avant la première capture.
+ *
+ * L'alternative aurait été de recopier ici la liste des notions. C'est
+ * exactement la liste qui se met à mentir : une notion ajoutée au catalogue
+ * n'aurait pas d'aperçu, et rien ne le dirait.
+ */
+registerHooks({
+  resolve(specifier, context, next) {
+    if (specifier.startsWith("@/")) {
+      for (const suffixe of [".ts", ".tsx", "/index.ts", ""]) {
+        try {
+          return next(pathToFileURL(path.join(RACINE, specifier.slice(2) + suffixe)).href, context);
+        } catch {
+          /* on essaie le suivant */
+        }
+      }
+    }
+    if (specifier.startsWith(".") && !/\.[a-z]+$/i.test(specifier)) {
+      try {
+        return next(specifier + ".ts", context);
+      } catch {
+        return next(specifier + ".tsx", context);
+      }
+    }
+    return next(specifier, context);
+  },
+});
+
+const cat = await import(pathToFileURL(path.join(RACINE, "lib/tutor-v4/catalog.ts")).href);
+
+const SORTIE = path.join(RACINE, "public", "apercus", "coach");
+const MANIFESTE = path.join(RACINE, "lib", "tutor-v4", "apercus.generated.ts");
+
+/** Même géométrie que les aperçus de l'accueil : 16:10, fenêtre réduite. */
+const LARGEUR = 800;
+const HAUTEUR = 500;
+const LARGEUR_SERVIE = 760;
+const QUALITE = 0.72;
+
+/**
+ * LES NIVEAUX DE CHAQUE COACH — recopiés de app/coach-ia/[matiere]/page.tsx et
+ * app/coach-ia/english-maths/page.tsx, c'est-à-dire de ce que la page PROPOSE.
+ *
+ * ⚠️ NE PAS croiser toutes les matières avec toutes les classes.
+ * `getNotionOptions()` ne lève pas d'erreur sur une paire qui n'existe pas : il
+ * RETOMBE silencieusement sur un niveau par défaut. Interrogé sur « maths en
+ * a1 », il rend les 35 notions de 6e. Un comptage naïf annonçait ainsi 1 609
+ * notions au lieu de 768 — près du double, uniquement en doublons invisibles.
+ */
+const NIVEAUX: Record<string, string[]> = {
+  maths: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde",
+          "premiere", "premiere-spe", "terminale-spe", "stmg", "adulte"],
+  francais: ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde"],
+  espagnol: ["a1", "a2", "b1", "b2"],
+  ia: ["pix-college", "pix-lycee"],
+  "english-maths": ["a1", "a2", "b1", "b2"],
+};
+
+type Cible = { matiere: string; classe: string; notion: string };
+
+const TOUTES: Cible[] = [];
+for (const [matiere, classes] of Object.entries(NIVEAUX)) {
+  for (const classe of classes) {
+    let notions: string[] = [];
+    try {
+      notions = cat.getNotionOptions(classe, matiere);
+    } catch {
+      notions = [];
+    }
+    for (const notion of notions) TOUTES.push({ matiere, classe, notion });
+  }
+}
+
+// ── Les arguments ────────────────────────────────────────────────────────────
+const args = process.argv.slice(2);
+const base = (args.find((a) => a.startsWith("http")) ?? "http://localhost:3000").replace(/\/$/, "");
+const tout = args.includes("--tout");
+/** « maths » = toute la matière ; « maths:5e » = une seule classe. */
+const filtres = args.filter((a) => !a.startsWith("http") && !a.startsWith("--"));
+
+function fichier(c: Cible, ecrans: number) {
+  return path.join(SORTIE, c.matiere, c.classe, `${c.notion}.${ecrans}.webp`);
+}
+function dejaLa(c: Cible): string | null {
+  const dir = path.join(SORTIE, c.matiere, c.classe);
+  if (!fs.existsSync(dir)) return null;
+  const f = fs.readdirSync(dir).find((n) => new RegExp(`^${c.notion}\\.\\d\\.webp$`).test(n));
+  return f ? path.join(dir, f) : null;
+}
+
+/**
+ * ⚠️ LE FILTRE CHOISIT LE PÉRIMÈTRE, `--tout` CHOISIT DE REFAIRE.
+ *
+ * Les deux étaient confondus au départ : nommer « maths:5e » refaisait les 19,
+ * y compris les 18 déjà bonnes. Sur une fournée où une notion échoue au hasard,
+ * ça rendait le rattrapage impossible — chaque relance rejouait tout et
+ * fabriquait un nouvel échec ailleurs. Par défaut on ne fait donc que les
+ * manquantes, dans le périmètre demandé.
+ */
+const aFaire = TOUTES.filter((c) => {
+  if (filtres.length > 0) {
+    const cle = `${c.matiere}:${c.classe}`;
+    if (!filtres.some((f) => f === c.matiere || f === cle)) return false;
+  }
+  return tout ? true : !dejaLa(c);
+});
+
+console.log(`${TOUTES.length} notions au catalogue · ${aFaire.length} à capturer depuis ${base}`);
+if (aFaire.length === 0) {
+  ecrireManifeste();
+  process.exit(0);
+}
+
+// ── Le navigateur ────────────────────────────────────────────────────────────
+const navigateur = await chromium.launch({ channel: "chrome" });
+const contexte = await navigateur.newContext({
+  viewport: { width: LARGEUR, height: HAUTEUR },
+  deviceScaleFactor: 1,
+  locale: "fr-FR",
+  reducedMotion: "reduce",
+});
+const page = await contexte.newPage();
+// ⛔ Voir la note en tête de fichier : le garde-fou qui ne sert à rien aujourd'hui.
+await page.route("**/api/chat", (r) => r.abort());
+const encodeur = await contexte.newPage();
+await encodeur.goto("about:blank");
+
+let faits = 0;
+const rates: string[] = [];
+
+for (const c of aFaire) {
+  const t0 = Date.now();
+  try {
+    const octets = await capturer(page, c);
+    const ancien = dejaLa(c);
+    if (ancien) fs.rmSync(ancien);
+    const dest = fichier(c, 1);
+    fs.mkdirSync(path.dirname(dest), { recursive: true });
+    fs.writeFileSync(dest, octets);
+    faits += 1;
+    console.log(
+      `  ✓ ${`${c.matiere}/${c.classe}/${c.notion}`.padEnd(46)} ${(octets.length / 1024).toFixed(0).padStart(3)} Ko  ${((Date.now() - t0) / 1000).toFixed(1)}s`,
+    );
+  } catch (e) {
+    const cle = `${c.matiere}/${c.classe}/${c.notion}`;
+    rates.push(cle);
+    console.error(`  ✖ ${cle.padEnd(46)} ${(e as Error).message.split("\n")[0].slice(0, 60)}`);
+  }
+}
+
+await navigateur.close();
+ecrireManifeste();
+console.log(`\n${faits} aperçu(s) écrits, ${rates.length} en échec.`);
+if (rates.length) console.log("Échecs : " + rates.join(" "));
+
+// ── La capture d'une notion ──────────────────────────────────────────────────
+async function capturer(page: Page, c: Cible): Promise<Buffer> {
+  const url = `${base}/tutor-v4?classe=${c.classe}&matiere=${c.matiere}&notion=${encodeURIComponent(c.notion)}`;
+  await page.goto(url, { waitUntil: "load", timeout: 45000 });
+
+  /**
+   * ⚠️ ON ATTEND LE BOUTON, PAS UN DÉLAI.
+   *
+   * Il n'apparaît qu'après l'hydratation de React. Un `waitForTimeout` généreux
+   * marcherait la plupart du temps et laisserait des trous AU HASARD dans une
+   * fournée de 768 — le pire des défauts, parce qu'il ne se reproduit pas.
+   */
+  const bouton = page.getByRole("button", { name: "Démarrer une mission" }).first();
+  await bouton.waitFor({ state: "visible", timeout: 30000 });
+  /**
+   * ⚠️ PAS DE `scrollIntoViewIfNeeded` AVANT LE CLIC.
+   *
+   * Il y en avait un, et il faisait échouer une notion au hasard à chaque
+   * fournée — jamais la même, ce qui est le pire des défauts : ça ressemble à
+   * une page cassée alors que c'est un chronomètre. `click()` fait DÉJÀ défiler
+   * jusqu'à l'élément et attend qu'il soit stable ; l'appel précédent exigeait
+   * en plus que le défilement soit terminé dans SON propre délai, sur une page
+   * que React est encore en train de peupler.
+   * Un seul délai, plus large, et il n'y a plus qu'une chose qui attend.
+   */
+  await bouton.click({ timeout: 20000 });
+
+  /**
+   * ⚠️ ON ATTEND QUE L'ÉCRAN D'ATTENTE DISPARAISSE, pas qu'un délai s'écoule.
+   * Sans ça, la capture peut saisir le moment entre le clic et l'énoncé — et
+   * photographier « Clique sur Démarrer une mission », c'est-à-dire l'inverse
+   * exact de ce qu'on promet.
+   */
+  await page.waitForFunction(
+    () => !document.body.innerText.includes("Clique sur Démarrer une mission"),
+    undefined,
+    { timeout: 20000 },
+  );
+
+  /**
+   * ⚠️ LE CHROME PART ICI, ET PAS UNE LIGNE PLUS HAUT.
+   *
+   * Le bouton « Démarrer une mission » vit DANS le bandeau qu'on retire
+   * (TutorV4Client.tsx). Injecter ce style avant le clic, c'est supprimer ce
+   * qu'on venait chercher — le bogue du 27/08, qui faisait échouer chaque
+   * notion sans dire pourquoi.
+   *
+   * Ce qui part : le chrome que le site DÉSIGNE (`data-hors-apercu` — l'en-tête,
+   * le pied, le bandeau d'installation, la barre d'outils du tutor et son
+   * bandeau de mission), et TOUT CE QUI EST `fixed`.
+   *
+   * ⭐ La règle sur `fixed` est nouvelle, et elle se démontre : sur une page
+   * capturée, un élément fixe n'est jamais du contenu — il flotte au-dessus. Ce
+   * sont la calculatrice, le coach flottant, l'avatar. Sur les premières
+   * captures de 5e, « Calculatrice » et « Coach IA » se posaient en plein milieu
+   * du cadre et recouvraient le texte des deux questions. On ne les nomme pas un
+   * par un : la liste changerait sans prévenir, et `position: fixed` les décrit
+   * tous, y compris ceux qui n'existent pas encore.
+   */
+  await page.addStyleTag({
+    content: `
+      [data-hors-apercu] { display: none !important; }
+      html { scroll-behavior: auto !important; }
+      *, *::before, *::after {
+        animation-duration: 0s !important;
+        transition-duration: 0s !important;
+      }
+    `,
+  });
+  await page.evaluate(() => {
+    for (const el of Array.from(document.body.querySelectorAll<HTMLElement>("*"))) {
+      if (getComputedStyle(el).position === "fixed") el.style.display = "none";
+    }
+  });
+
+  await page.evaluate(() => (document as unknown as { fonts: FontFaceSet }).fonts.ready);
+  await page.waitForTimeout(700);
+
+  return encoder(await page.screenshot({ type: "png" }));
+}
+
+/** PNG → WebP à la largeur servie, par Chrome — le projet n'a pas `sharp`. */
+async function encoder(png: Buffer): Promise<Buffer> {
+  const sortie = await encodeur.evaluate(
+    async ({ src, largeur, ls, hs, qualite }) => {
+      const img = new Image();
+      img.src = src;
+      await img.decode();
+      const canvas = document.createElement("canvas");
+      canvas.width = largeur;
+      canvas.height = Math.round((hs * largeur) / ls);
+      const ctx = canvas.getContext("2d")!;
+      ctx.imageSmoothingQuality = "high";
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      return canvas.toDataURL("image/webp", qualite);
+    },
+    {
+      src: `data:image/png;base64,${png.toString("base64")}`,
+      largeur: LARGEUR_SERVIE,
+      ls: LARGEUR,
+      hs: HAUTEUR,
+      qualite: QUALITE,
+    },
+  );
+  if (!sortie.startsWith("data:image/webp")) throw new Error("Chrome n'a pas encodé en WebP");
+  return Buffer.from(sortie.split(",")[1], "base64");
+}
+
+/**
+ * LE MANIFESTE — reconstruit depuis le DOSSIER, jamais depuis ce qui vient
+ * d'être fait : une fournée partielle ne doit pas effacer le reste.
+ *
+ * ⚠️ La clé est le TRIPLET, et c'est indispensable : un identifiant de notion
+ * n'est unique qu'à l'intérieur d'une classe. « fraction » en CM2,
+ * « fraction_nombre » en 6e, « fraction_rationnel » en 3e (voir la note de
+ * lib/matrice/coach.ts). Un dossier à plat obligerait à inventer une clé
+ * composée ; l'arborescence la porte toute seule.
+ */
+function ecrireManifeste() {
+  const lignes: string[] = [];
+  if (fs.existsSync(SORTIE)) {
+    for (const matiere of fs.readdirSync(SORTIE).sort()) {
+      for (const classe of fs.readdirSync(path.join(SORTIE, matiere)).sort()) {
+        for (const f of fs.readdirSync(path.join(SORTIE, matiere, classe)).sort()) {
+          const cor = /^(.+)\.(\d)\.webp$/.exec(f);
+          if (cor) lignes.push(`  ${JSON.stringify(`${matiere}/${classe}/${cor[1]}`)}: ${cor[2]},`);
+        }
+      }
+    }
+  }
+
+  const contenu = `// lib/tutor-v4/apercus.generated.ts
+//
+// ⚠️ FICHIER GÉNÉRÉ — ne pas modifier à la main.
+//     npm run capturer:apercus-coach -- http://localhost:3000 --tout
+//
+// Les notions qui ont un aperçu dans public/apercus/coach/, et le nombre
+// d'écrans de chacune. La clé est « matiere/classe/notion » : un identifiant de
+// notion n'est unique qu'à l'intérieur d'une classe.
+//
+// Une notion absente d'ici n'ouvre pas de fenêtre au survol — sa ligne reste
+// exactement ce qu'elle était.
+
+export const APERCUS_COACH: Readonly<Record<string, number>> = {
+${lignes.join("\n")}
+};
+
+/** Le chemin de l'aperçu d'une notion, ou \`null\` si elle n'en a pas. */
+export function apercuNotion(
+  matiere: string,
+  classe: string,
+  notion: string,
+): { src: string; ecrans: number } | null {
+  const cle = \`\${matiere}/\${classe}/\${notion}\`;
+  const ecrans = APERCUS_COACH[cle];
+  if (!ecrans) return null;
+  return { src: \`/apercus/coach/\${cle}.\${ecrans}.webp\`, ecrans };
+}
+`;
+  fs.writeFileSync(MANIFESTE, contenu, "utf8");
+  console.log(`Manifeste : ${lignes.length} aperçu(s) → lib/tutor-v4/apercus.generated.ts`);
+}

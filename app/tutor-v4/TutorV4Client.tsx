@@ -1538,7 +1538,16 @@ function handleInputKeyDown(
         <div className="space-y-4">
           {/* Contrôles + notion sur une seule ligne pour garder la question
               dans l'écran sans avoir à scroller. */}
-          <section className="flex flex-col gap-2 sm:flex-row sm:items-center">
+          {/* ⚠️ HORS APERÇU (27/08/2026) — scripts/capturer-apercus-coach.ts
+              retire cette rangée avant de photographier l'exercice, APRÈS avoir
+              cliqué. Elle est identique sur les 768 captures (« ← Retour Coach ·
+              Classe : 5e · Mode simple »), elle ne dit rien de la notion, et
+              elle coûtait 60 px sur les 500 d'un aperçu. Ce sont les commandes
+              du tutor, pas l'exercice — et l'aperçu promet l'exercice. */}
+          <section
+            className="flex flex-col gap-2 sm:flex-row sm:items-center"
+            data-hors-apercu=""
+          >
             <button
               onClick={retourCoach}
               className="flex items-center justify-center rounded-2xl bg-orange-500 px-4 py-2.5 text-sm font-black text-white shadow hover:bg-orange-600"
@@ -1613,7 +1622,18 @@ function handleInputKeyDown(
             </div>
           </section>
 
-          <header className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-lg sm:rounded-[28px]">
+          {/* ⚠️ HORS APERÇU (27/08/2026), ET L'ORDRE COMPTE.
+              Ce bandeau — « MODE MISSION · Tutor Maths V4 · Démarrer une
+              mission » — est le même sur les 768 aperçus et mangeait 110 px des
+              500. Il part donc avant la photo, mais SEULEMENT APRÈS LE CLIC :
+              le bouton « Démarrer une mission » est DEDANS. Le cacher trop tôt,
+              c'est supprimer ce qu'on venait chercher — c'est précisément le
+              bogue du 27/08, quand le script cachait la balise `header` en bloc
+              et échouait sur chaque notion sans dire pourquoi. */}
+          <header
+            className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-lg sm:rounded-[28px]"
+            data-hors-apercu=""
+          >
             <div className="bg-gradient-to-r from-indigo-600 via-sky-600 to-cyan-500 px-4 py-4 text-white sm:px-6">
               <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                 {/* Tout le bandeau mission sur une seule ligne. Les pastilles

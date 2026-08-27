@@ -61,7 +61,7 @@ import Link from "next/link";
 import { track } from "@vercel/analytics";
 import ApercuRessource, { LIBELLE_RESULTAT, LIBELLE_TYPE } from "./ApercuRessource";
 import FenetreApercu from "./FenetreApercu";
-import { APERCUS } from "@/lib/matrice/apercus.generated";
+import { bandeApercu } from "@/lib/matrice/apercus.generated";
 import type { ProfilId, Recommandation } from "@/lib/matrice/types";
 
 /**
@@ -162,10 +162,10 @@ export default function CarteRessource({
    */
   const [montee, setMontee] = useState(false);
   const [ouverte, setOuverte] = useState(false);
-  const aUnApercu = Boolean(APERCUS[r.ressource.id]);
+  const bande = bandeApercu(r.ressource.id);
 
   function survoler() {
-    if (!aUnApercu || !peutSurvoler()) return;
+    if (!bande || !peutSurvoler()) return;
     setMontee(true);
     setOuverte(true);
   }
@@ -297,7 +297,9 @@ export default function CarteRessource({
           d'élément interactif, et surtout : la fenêtre déborde du rectangle
           cliquable. Posée dedans, elle agrandirait la zone de clic de 95 px vers
           la droite — un clic dans la gouttière ouvrirait la ressource. */}
-      {montee && <FenetreApercu id={r.ressource.id} ouverte={ouverte} />}
+      {montee && bande && (
+        <FenetreApercu src={bande.src} ecrans={bande.ecrans} ouverte={ouverte} />
+      )}
     </li>
   );
 }

@@ -11,6 +11,7 @@
     "build:fiches-pdf": "node --experimental-strip-types scripts/build-fiches-pdf.ts",
     "verifier:pdf": "node --experimental-strip-types scripts/verifier-pdf-a-jour.ts",
     "capturer:apercus": "node --experimental-strip-types scripts/capturer-apercus.ts",
+    "capturer:apercus-coach": "node --experimental-strip-types scripts/capturer-apercus-coach.ts",
     "verifier:micros": "node scripts/verifier-micros.mjs",
     "dev:2": "node scripts/dev-second-poste.mjs",
     "verifier:fiches": "node scripts/verifier-fiches-francais.mjs",

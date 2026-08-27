@@ -54,7 +54,6 @@
 //    reste exactement ce qu'elle était. Aucune carte n'attend un fichier.
 
 import { useEffect, useState } from "react";
-import { bandeApercu } from "@/lib/matrice/apercus.generated";
 
 /** ~2,2 s par écran : le temps de lire une question, pas celui de s'ennuyer. */
 const DUREE = 2200;
@@ -98,13 +97,31 @@ const DUREE = 2200;
 const LARGEUR = 380;
 const RAPPORT = "16 / 10";
 
-export default function FenetreApercu({ id, ouverte }: { id: string; ouverte: boolean }) {
-  const bande = bandeApercu(id);
-  // ⚠️ Les deux valeurs sont extraites AVANT l'effet, et c'est volontaire :
-  // `bande` est un objet neuf à chaque rendu, le mettre en dépendance
-  // relancerait le minuteur à chaque fois que React repasse par ici.
-  const src = bande?.src ?? null;
-  const ecrans = bande?.ecrans ?? 0;
+/**
+ * ⚠️ LE PANNEAU NE CONNAÎT PLUS AUCUN MANIFESTE (27/08, seconde vie).
+ *
+ * Il lisait `bandeApercu(id)` depuis le registre des ressources de l'accueil.
+ * Ça marchait tant qu'il n'y avait qu'un appelant — et ça l'aurait rendu
+ * inutilisable pour le second, les notions du coach, qui sont indexées par un
+ * TRIPLET (matière / classe / notion) et non par un identifiant de ressource.
+ *
+ * Chaque appelant résout donc son chemin chez lui — `bandeApercu()` pour les
+ * cartes, `apercuNotion()` pour le coach — et ce composant ne sait plus qu'une
+ * chose : afficher `ecrans` écrans empilés dans une image, l'un après l'autre.
+ */
+export default function FenetreApercu({
+  src,
+  ecrans,
+  ouverte,
+  /** Où la fenêtre se pose dans son parent `relative`. Les cartes de l'accueil
+   *  la centrent sur leur bord droit ; le coach la pose sous le titre. */
+  position = "absolute right-3 top-1/2 -translate-y-1/2",
+}: {
+  src: string;
+  ecrans: number;
+  ouverte: boolean;
+  position?: string;
+}) {
   const [index, setIndex] = useState(0);
 
   /**
@@ -135,7 +152,7 @@ export default function FenetreApercu({ id, ouverte }: { id: string; ouverte: bo
          censée provoquer. */
       aria-hidden="true"
       style={{ width: LARGEUR }}
-      className={`pointer-events-none absolute right-3 top-1/2 z-30 hidden -translate-y-1/2 transition-all duration-200 lg:block ${
+      className={`pointer-events-none z-30 hidden transition-all duration-200 lg:block ${position} ${
         ouverte ? "scale-100 opacity-100" : "scale-95 opacity-0"
       }`}
     >

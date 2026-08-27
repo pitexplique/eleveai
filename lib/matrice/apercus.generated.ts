@@ -41,7 +41,7 @@ export const APERCUS: Readonly<Record<string, number>> = {
   "coach-maths": 2,
   "concours-avenir": 2,
   "concours-general": 2,
-  "defis-du-jour": 1,
+  "defis-du-jour": 2,
   "diagonale-des-fous": 2,
   "dico": 2,
   "dictee-du-jour": 2,

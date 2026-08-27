@@ -289,28 +289,31 @@ async function capturer(page: Page, cible: Cible): Promise<{ octets: Buffer; ecr
   await page.waitForLoadState("networkidle", { timeout: 8000 }).catch(() => {});
 
   /**
-   * ⚠️ L'EN-TÊTE ET LE PIED PARTENT AVANT LA CAPTURE.
+   * ⚠️ LE CHROME PART AVANT LA CAPTURE — ET IL SE DÉSIGNE, IL NE SE DEVINE PAS.
    *
-   * L'en-tête du site est `sticky top-0` : il serait présent sur chacune des
-   * captures, donc deux fois dans la bande, et il mangerait 66 px de chacun des
-   * écrans qu'on a justement choisi de montrer. Le pied, lui, est le même sur
-   * toutes les pages : il n'apprend rien et remplit le second écran.
-   * Ce qu'on montre, c'est ce qui DISTINGUE la ressource.
-   */
-  /**
-   * ⚠️ `[data-hors-apercu]` — LE CHROME QUE LE SITE DÉCLARE LUI-MÊME.
+   * Trois éléments n'ont rien à faire dans un aperçu : l'en-tête du site (il est
+   * `sticky top-0`, donc présent sur chacun des écrans capturés, à manger 66 px
+   * de ce qui distingue la ressource), le pied de page (le même partout, il
+   * remplit le second écran), et le bandeau « Installer l'app » (posé dans
+   * app/layout.tsx, donc en tête de TOUTES les pages).
    *
-   * Le bandeau « Installer l'app » vit dans app/layout.tsx : il est donc en tête
-   * de TOUTES les pages, et il occupait le haut de chacun des écrans capturés.
-   * Il n'est ni `sticky` ni `fixed` — le filtre des voiles ne le voyait pas — et
-   * il n'est pas assez grand pour se faire remarquer autrement.
-   * On ne le nomme pas par sa classe : c'est LUI qui porte l'attribut, dans
-   * components/DevBanner.tsx. Un futur bandeau n'aura qu'à faire pareil, et
-   * personne n'aura à revenir modifier ce script.
+   * ⛔ ET ON NE LES CIBLE PAS PAR LEUR BALISE. La première version écrivait
+   * `header, footer { display: none }`. C'était un bogue silencieux, et l'audit
+   * du 27/08 l'a chiffré : `<header>` sert de conteneur de CONTENU dans une
+   * trentaine de fichiers — le titre et le compteur de notions des pages de
+   * coach (app/coach-ia/[matiere]/page.tsx:543), la manchette des défis du jour,
+   * le panneau de mission ENTIER du tutor (TutorV4Client.tsx:1616). Les 99
+   * premières captures ont donc perdu des blocs, sans que rien ne le signale :
+   * une capture ne dit pas ce qui lui manque.
+   *
+   * Chaque élément de chrome porte donc `data-hors-apercu` chez lui —
+   * components/Header.tsx, components/Footer.tsx, components/DevBanner.tsx. Un
+   * futur bandeau n'aura qu'à faire pareil, et personne n'aura à revenir
+   * modifier ce script. L'attribut désigne ; la balise, elle, ne dit rien.
    */
   await page.addStyleTag({
     content: `
-      header, footer, [data-hors-apercu] { display: none !important; }
+      [data-hors-apercu] { display: none !important; }
       html { scroll-behavior: auto !important; }
       *, *::before, *::after {
         animation-duration: 0s !important;
@@ -321,20 +324,21 @@ async function capturer(page: Page, cible: Cible): Promise<{ octets: Buffer; ecr
   });
 
   /**
-   * LES VOILES : tout ce qui est `fixed` et couvre un quart de l'écran.
+   * TOUT CE QUI EST `fixed` PART — une modale, une invitation à s'inscrire, la
+   * calculatrice, le coach flottant, l'avatar.
    *
-   * Le bandeau « Installer l'app », une invitation à s'inscrire, un coach
-   * flottant. Ils sont légitimes sur le site et ruinent une capture : on
-   * photographierait la modale, pas la ressource. On ne les nomme pas un par
-   * un — la liste changerait sans prévenir. On retire ce qui est fixe ET large.
+   * ⭐ TOUT, ET PLUS SEULEMENT CE QUI COUVRE UN QUART DE L'ÉCRAN (27/08). Le
+   * seuil de 25 % visait les modales et laissait passer les petits boutons
+   * flottants : « Calculatrice » et « Coach IA » se posaient au milieu du cadre
+   * et recouvraient le texte. La règle sans seuil se démontre — sur une page
+   * capturée, un élément fixe n'est jamais du contenu : il flotte au-dessus.
+   *
+   * On ne les nomme pas un par un : la liste changerait sans prévenir, et
+   * `position: fixed` les décrit tous, y compris ceux qui n'existent pas encore.
    */
   await page.evaluate(() => {
     for (const el of Array.from(document.body.querySelectorAll<HTMLElement>("*"))) {
-      if (getComputedStyle(el).position !== "fixed") continue;
-      const r = el.getBoundingClientRect();
-      if (r.width * r.height > window.innerWidth * window.innerHeight * 0.25) {
-        el.style.display = "none";
-      }
+      if (getComputedStyle(el).position === "fixed") el.style.display = "none";
     }
   });
 

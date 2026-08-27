@@ -20,6 +20,7 @@ import { useEleve } from "@/context/EleveContext";
 import Link from "next/link";
 import { BookOpen, CirclePlay, Play } from "lucide-react";
 import { ficheClasseSource, ficheHrefPourCoach } from "@/lib/fiches/registre";
+import NotionAvecApercu from "@/components/coach/NotionAvecApercu";
 import {
   youtubeSearchUrl,
   CLASSE_YOUTUBE_LABEL,
@@ -721,7 +722,20 @@ export default function CoachIA() {
                       const ficheAutreClasse = ficheClasseSource(matiere, classe, notionId);
                       const videos = videosParNotion[notionId] ?? [];
                       return (
-                      <article key={notionId}>
+                      /* ⭐ 27/08/2026 — LA NOTION MONTRE SON EXERCICE AU SURVOL.
+                         « Un élève sur deux quitte le coach et ne va pas sur
+                         tutor » (Frédéric). Cette liste ne dit que des titres ;
+                         la fenêtre montre l'écran d'après, avant le clic.
+                         Le composant ne fait que porter l'état de survol et la
+                         fenêtre — tout le contenu de la notion est inchangé.
+                         ⚠️ Une notion sans capture ne change RIEN : il rend
+                         alors exactement l'`<article>` d'avant. */
+                      <NotionAvecApercu
+                        key={notionId}
+                        matiere={matiere}
+                        classe={classe}
+                        notionId={notionId}
+                      >
                         <div className="mb-2 flex flex-wrap items-center gap-2">
                           <h3 className="text-base font-bold text-slate-800">
                             {libelleNotion(notionId)}
@@ -846,7 +860,7 @@ export default function CoachIA() {
                             );
                           })}
                         </ol>
-                      </article>
+                      </NotionAvecApercu>
                       );
                     })}
                   </div>

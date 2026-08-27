@@ -521,6 +521,19 @@ export default function Header() {
           ? "sticky top-0 z-50 border-b border-[#1d1c16]/25 bg-[#d8e9ee]/95 backdrop-blur-xl"
           : "sticky top-0 z-50 border-b border-cyan-300/20 bg-gradient-to-r from-[#041B33]/95 via-[#062A4F]/95 to-[#073B63]/95 shadow-[0_8px_30px_rgba(0,0,0,0.25)] backdrop-blur-xl"
       }
+      /* ⚠️ HORS APERÇU — scripts/capturer-apercus.ts retire cet élément avant de
+         photographier une page. Il est `sticky top-0` : il resterait collé en
+         haut de CHAQUE écran capturé, deux fois dans la bande, à manger 66 px de
+         ce qui distingue la ressource. Et la fenêtre du survol porte déjà son
+         propre cadre.
+         ⛔ NE PAS revenir à un sélecteur `header` dans le script. L'audit du
+         27/08 a montré que la balise sert AUSSI de conteneur de contenu, et
+         souvent : le titre des pages de coach (app/coach-ia/[matiere]/page.tsx),
+         le panneau de mission entier du tutor (TutorV4Client.tsx:1616), la
+         manchette des défis du jour. Les premières captures effaçaient donc du
+         contenu — silencieusement, puisqu'une capture ne dit pas ce qui lui
+         manque. L'attribut désigne le chrome ; la balise, elle, ne dit rien. */
+      data-hors-apercu=""
     >
       {/* ⭐ TROIS ZONES, ET LA DU MILIEU EST VRAIMENT AU MILIEU (07/08).
           Le header était un `justify-between` : la marque à gauche, TOUT le

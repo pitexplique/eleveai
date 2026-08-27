@@ -208,7 +208,19 @@ const francaisClasses = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-800 bg-[#041B33]">
+    <footer
+      className="border-t border-slate-800 bg-[#041B33]"
+      /* ⚠️ HORS APERÇU — scripts/capturer-apercus.ts retire cet élément avant de
+         photographier une page. C'est LE pied de page du site : il est le même
+         partout, il n'apprend rien sur la ressource, et il remplit le second
+         écran de l'aperçu.
+         ⛔ NE PAS revenir à un sélecteur `footer` dans le script. L'audit du
+         27/08 a montré que la balise sert AUSSI de conteneur de contenu — par
+         exemple app/audit-commission/AuditClient.tsx:238. Cacher la balise,
+         c'était effacer du contenu sur une page au hasard, sans que rien ne le
+         signale. L'attribut désigne le chrome, la balise ne le fait pas. */
+      data-hors-apercu=""
+    >
       <div className="mx-auto max-w-6xl px-4 py-10 sm:py-12">
 
         {/* Bandeau des rituels — en tête du footer. Rend visibles pour Google
