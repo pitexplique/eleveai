@@ -218,6 +218,50 @@ vert — ce serait remettre le mensonge dans le fichier censé l'empêcher. »
 ⚠️ Donc : ouvrir le PDF et recopier. Une extraction automatique perd les
 formules (√, exposants, fractions) et quelques puces entières.
 
+════ ⚠️ L'HORIZON 2027, ET CE QU'IL CHANGE À L'ORDRE D'INVESTISSEMENT ═
+Il existe DEUX programmes, et on sait désormais les distinguer SANS chercher de
+date — aucun des deux n'en porte. On les reconnaît à leur STRUCTURE :
+
+  · « Annexe 3 — Programme du cycle des approfondissements (cycle 4) »
+    → organisé par CYCLE, cinq thèmes A→E, Thalès et trigonométrie ensemble.
+    → C'est le programme APPLICABLE à la 4ᵉ en 2026-2027. C'est LUI qui commande
+      tout ce qui précède dans ce prompt.
+
+  · « Annexe 2 — Programme de mathématiques pour le cycle 4 »
+    → organisé PAR ANNÉE (Cinquième / Quatrième / Troisième), sections
+      « Automatismes », orthographe rectifiée (« connaitre », « maitrise »),
+      VECTEURS en 3ᵉ.
+    → C'est le NOUVEAU programme. Il ne concerne la 4ᵉ qu'en SEPTEMBRE 2027.
+
+⭐ CE QUE LE NOUVEAU DÉPLACE, ET POURQUOI ÇA COMPTE MAINTENANT :
+
+    en 4ᵉ                    2026-2027        à partir de 2027
+    puissances, racine carrée   ✅               ✅  (reste)
+    MULTIPLES ET DIVISEURS      ✅               ⚠️ PASSE EN 3ᵉ
+    Thalès, cosinus             ✅               ⛔ passent en 3ᵉ
+    droite des milieux          —                ⭐ arrive en 4ᵉ
+    volume pyramide et cône     —                ⭐ arrive en 4ᵉ
+    fonctions                   dépendance,      ⚠️ réduit au PROGRAMME DE
+                                tableau,            CALCUL : « appliquer un
+                                formule,            programme de calcul à deux
+                                graphique           étapes … retrouver le nombre
+                                                    de départ ». Le vocabulaire
+                                                    image / antécédent monte en 3ᵉ.
+
+👉 CONSÉQUENCE PRATIQUE, à dire à Frédéric avant d'investir : la banque
+d'ARITHMÉTIQUE (divisibilité, nombres premiers) ne servira la 4ᵉ QU'UN AN. En
+2027 elle remonte en 3ᵉ. Ça ne l'annule pas — 2026-2027 est l'année qu'on sert,
+et la 3ᵉ en héritera telle quelle — mais si l'on doit choisir par quoi commencer,
+PUISSANCES et RACINE CARRÉE sont les deux valeurs sûres : elles restent en 4ᵉ
+dans les deux programmes.
+
+⭐ ET UNE BONNE NOUVELLE DÉJÀ ACQUISE. Le nouveau programme dit, pour « La pensée
+informatique — Quatrième » : « Représenter des conditions simples. Écrire des
+instructions conditionnelles. Manipuler une variable. Écrire un programme simple
+donné pour réaliser un objectif ou résoudre un problème. Modifier un programme
+donné pour changer son comportement. » C'est MOT POUR MOT les cinq micros de
+`algo_programmation`, donc la fiche du 27/08 est déjà alignée sur 2027.
+
 ════ CE QU'IL NE FAUT PAS FAIRE ═════════════════════════════════════
 ⛔ Écrire une fiche avant que la banque de sa notion soit verte.
 ⛔ Faire descendre de la 3ᵉ ce que le BO y garde (f(x), linéaire, affine,
