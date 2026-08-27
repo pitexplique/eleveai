@@ -40,8 +40,43 @@ Puis `discours_registres`, et **LE DOMAINE DE L'ORAL EN ENTIER** —
 **La 5e est donc à 18 notions fichées sur 28.** Reste : `conjugaison_formes`,
 `conjugaison_valeurs`, `lecture_comprehension`, `lecture_apprecier`,
 `lecture_oeuvre_contextes`, `culture_connaissances`, `culture_entrees_5e`,
-`ecriture_reflechir`, `ecriture_produire`, `ecriture_reviser`. La 6e n'est pas
-commencée.
+`ecriture_reflechir`, `ecriture_produire`, `ecriture_reviser`.
+
+### ⭐ La 6e est ouverte, et son lexique est entier — 12 notions sur 29
+
+⛔ **PREMIER RÉFLEXE, ET IL NE DONNE RIEN ICI : chercher les alias.** Sur la 4e
+ils ont fait passer le compteur de 16 à 19 sans écrire une ligne, et le CM2 de 7
+à 9. En 6e, comparaison faite micro par micro : chacune des neuf fiches
+existantes couvre exactement les micros de sa propre notion. **Les manquantes le
+sont vraiment.** Le contrôle vaut la peine d'être refait sur toute classe neuve.
+
+⚠️ **Les neuf premières fiches de 6e étaient toutes de l'étude de la langue.**
+Rien sur la lecture, la culture, l'écriture, l'oral, le lexique — c'est là qu'est
+tout le travail.
+
+⛔⛔ **ET LE PIÈGE DE CLASSE SE TOUCHE DU DOIGT EN 6e.** `vocabulaire_enrichir`
+et `vocabulaire_relations` existent en 5e ET en 6e, **sous le même nom**, avec
+des contenus différents :
+
+| | 5e (BO 2026, cycle 4) | 6e (BO 2025, cycle 3) |
+|---|---|---|
+| `vocabulaire_enrichir` | contexte · dictionnaire · réemploi | contexte · **choisir sa stratégie** · **sens figuré** · défi |
+| `vocabulaire_relations` | vérifier un synonyme en récrivant · sens des affixes | antonyme **de la même classe** · simple/dérivé/**composé** · racines |
+
+Le mot COMPOSÉ n'est pas au programme de 5e. Le dictionnaire n'est pas au
+programme de 6e — il n'y est que la troisième stratégie. **Copier une fiche de 5e
+produit un hors-programme parfaitement crédible, que rien ne signalera.**
+
+⭐ **LE CYCLE 3 A UNE MICRO « DÉFI » PAR NOTION**, que le cycle 4 n'a pas. REGLES
+dit que le défi a son propre dessin : chaque fiche de 6e porte donc un bloc de
+plus, et c'est le moment où l'élève choisit seul.
+
+⭐ **Le coach de 6e a la matière pour les dix-sept restantes** :
+`questionBank/6e/francais/fixed.bank.ts` (79 Ko, 145 items, ≥ 5 par notion,
+réécrits le 22/08 objectif par objectif contre le BO du cycle 3) plus le
+générateur `buildCycle3FrancaisBank`. On écrit depuis les items fixes.
+
+Reste en 6e : lecture ×6, écriture ×4, culture ×3, oral ×3, `grammaire_phrase`.
 
 ### ⭐⭐ LE CROCHET DU CANVAS `phrase` A CINQ SENS — la découverte la plus rentable
 
