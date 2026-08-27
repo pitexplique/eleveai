@@ -572,6 +572,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Deux grammaires et aucune n'est fautive : rétablir à l'écrit ce que l'oral avale, redire une phrase à trois étages de registre, et séparer un fait d'un avis.",
   },
+  "francais/5e/lecture-voix-haute": {
+    titre: "Lire à voix haute (2026-2027)",
+    resume:
+      "Annoter un texte comme une partition : groupes de souffle, mots à détacher, changements de voix — et lire la ponctuation comme une consigne.",
+  },
 
   /* ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées, mais
      ni le registre ni le sitemap ne les déclaraient : le coach n'affichait
