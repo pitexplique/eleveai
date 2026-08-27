@@ -206,8 +206,16 @@ POUR CHAQUE NOTION :
  1. Lire ses entrées dans `bo-objectifs.ts` (elles citent la page du BO), puis
     les micros de la notion sœur en 3ᵉ ou en 6ᵉ.
  2. Écrire les MICROS dans knowledge/maths/4e/microSkills.ts et la NOTION dans
-    notions.ts. ⚠️ Médiane de sept micros — Frédéric : « une notion ne doit pas
-    avoir 12 micro-compétences ».
+    notions.ts.
+    ⛔⛔ IL N'Y A PAS DE NOMBRE DE MICROS À VISER. Frédéric, 27/08 : « on peut en
+    avoir 7 ou 3, mais le but c'est d'être COHÉRENT. » Le nombre SUIT la notion,
+    il ne la commande pas. Une notion = UN objet que l'élève clique, décomposé
+    d'un seul grain. ⭐ Et le mode complet permet de RESTER SUR UNE MICRO : un
+    découpage fin ne disperse donc pas, il précise.
+    👉 Le test n'est pas « combien ? » mais « est-ce qu'une seule ligne de
+    fracture traverse la liste ? ». Si oui, c'est deux notions — et elle se lit
+    dans les PRÉREQUIS, comme pour `fraction_nombre` / `fraction_calcul` le
+    26/08 et pour `stat_statistique` le 27/08.
  3. Écrire la BANQUE dans questionBank/4e/maths/<notion>.bank.ts, la brancher
     dans index.ts.
  4. ⭐ ACCROCHER les nouvelles micros aux objectifs dans `bo-objectifs.ts` —
@@ -289,10 +297,52 @@ la réponse — et un leurre allongé peut devenir VRAI : relire l'en-tête du p
 et le 1 est entré dans les carrés parfaits. Le prochain trou est désormais
 impossible à rater.
 
-⭐ REPRISE : commencer par les PUISSANCES (point 1 ci-dessous). Tout est prêt —
-la banque de 3ᵉ à descendre, les six puces du thème A qu'elles ferment, et les
-entrées de `bo-objectifs.ts` qui les attendent (4e-A-calcul-2, 4e-A-calcul-3,
-4e-A-calcul-6, 4e-A-nombres-5, 4e-A-nombres-6, 4e-A-comparaisons-3 et -5).
+⭐⭐ NOTION 1 — « PUISSANCES ET NOTATION SCIENTIFIQUE », VALIDÉE PAR FRÉDÉRIC
+LE 27/08. ⛔ Ne pas la rediscuter : les sept micros sont arrêtées, dans cet
+ordre, et le découpage a sa raison.
+
+    micro                             ce que l'élève fait
+    ───────────────────────────────────────────────────────────────────────
+    puissance_comprendre              lire 5⁴ = 5×5×5×5 ; a¹ = a ; a⁰ = 1
+    puissance_calculer                exposant positif ⚠️ piège (−2)³ vs −2³
+    puissance_exposant_negatif        10⁻³ = 1/10³
+    puissance_dix                     10ⁿ et 10⁻ⁿ, multiplier et diviser par
+    puissance_notation_scientifique   a × 10ⁿ avec 1 ⩽ a < 10
+    puissance_comparer                comparer et ranger en écriture scientifique
+    puissance_calcul                  calculs simples mêlant les deux
+    puissance_defi                    le bloc de défis
+
+⭐ POURQUOI SEPT ET NON LES SIX DE LA 3ᵉ — c'est l'argument de Frédéric, et il
+vaut pour toutes les notions à venir : « en mode complet on peut RESTER SUR LA
+MICRO ». Un découpage plus fin ne disperse donc pas l'élève, il lui donne un
+grain de travail plus précis. Et le BO de 4ᵉ ajoute l'exposant négatif comme
+connaissance à part entière (« exposants entiers, positifs OU NÉGATIFS »).
+
+⛔ CE QUI RESTE DEHORS, ET NE DOIT PAS Y ENTRER :
+  · les FORMULES a^m × a^n = a^(m+n) et les quotients de même base → 3ᵉ. Le BO :
+    elles « résultent de l'application de la définition plutôt que de celle
+    d'une formule ». En 4ᵉ on redescend à la définition, on n'apprend pas la règle.
+  · les PRÉFIXES nano→giga et les ORDRES DE GRANDEUR → ce n'est pas le même
+    objet. Une puissance est une ÉCRITURE, un ordre de grandeur est une MESURE.
+    ⭐ Ils feront la NOTION 2, « Ordres de grandeur », 3 micros + défi : préfixes,
+    associer un ordre de grandeur à un objet, vérifier la vraisemblance d'un
+    résultat. Elle ferme à elle seule trois autres puces, dont 4e-A-calcul-5
+    (« Vérifier la vraisemblance d'un résultat ») qui est un trou séparé.
+
+Puces de `bo-objectifs.ts` que la notion 1 ferme : 4e-A-calcul-2, 4e-A-calcul-3,
+4e-A-calcul-6, 4e-A-nombres-6, 4e-A-comparaisons-3.
+Puces que la notion 2 fermera : 4e-A-nombres-5, 4e-A-comparaisons-5, 4e-A-calcul-5.
+
+⚠️ EN ATTENTE DE FRÉDÉRIC — `stat_statistique` porte DIX micros, et c'est deux
+objets. La coupure est dans les prérequis (aucun micro d'indicateur n'est
+prérequis d'un micro de lecture) et c'est celle du BO lui-même :
+  · `stat_statistique` GARDE son id — moyenne, médiane, étendue, interpréter,
+    problème, défi (6). ⛔ Il le doit : `lib/fiches/registre.ts` porte l'URL
+    indexée `maths/4e/stat-statistique`, et `lib/matrice/coach.ts` l'associe à
+    la 4ᵉ, à la 5ᵉ et à la 3ᵉ.
+  · `stat_donnees` NEUVE — lire_tableau, lire_graphique, effectif, fréquence,
+    + un défi (5). Fiche neuve, URL neuve, donc pas de 301.
+La 5ᵉ et la 3ᵉ ont 8 micros sur la même notion, avec la même ligne de fracture.
 
 Ordre proposé, du plus sûr au plus incertain :
 
