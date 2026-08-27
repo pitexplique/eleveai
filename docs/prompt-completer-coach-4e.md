@@ -238,9 +238,61 @@ intégralement fixed ». Médiane du dépôt : 310.
     ALLONGE les leurres, on ne raccourcit pas la réponse. ⚠️ Et allonger un
     leurre le rapproche de la vérité : il peut devenir VRAI.
 
+════ ⭐ LES CANVAS SONT DÉJÀ LÀ POUR LES TROUS ══════════════════════
+Le moteur dessine 30 figures (`lib/tutor-v4/types_canvas.ts`). ⛔ NE PAS EN
+ÉCRIRE UNE À LA MAIN avant d'avoir vérifié dans cette liste — plusieurs trous de
+la 4ᵉ ont déjà leur dessin qui attend :
+
+    trou du BO                        canvas qui l'attend
+    ──────────────────────────────────────────────────────────────────
+    fonctions (image, antécédent)     `fonction_tableau`, `fonctionGraphique`
+    échelle d'une carte               `echelle` (3 variantes)
+    repérage, abscisse/ordonnée       `reperage`, `repere3d`, `number_line`
+    reconnaître un solide, patrons    `solide_3d` (7 solides), `section_solide`
+    ratio, partage d'une quantité     `schema_barre`, `tableau_proportionnalite`
+    fréquence ↔ probabilité           `probabilites`, `arbre_proba`
+    triangle (angles, cas d'égalité)  `triangle`, `droites` (marques d'angles)
+    agrandissement / homothétie       `transformation` (l'homothétie y est)
+
+⚠️ ET LE PIÈGE QUI A COÛTÉ TROIS PASSES SUR LES FICHES DE 4ᵉ : beaucoup de
+canvas dessinent sur des POINTS FIXES. Réduire leur `size` ne met pas à
+l'échelle, ça ROGNE — et c'est invisible au typecheck. Resserrer les POINTS,
+jamais le cadre. Concernés : `triangle`, `quadrilatere`, `thales`,
+`transformation`, `solide_3d`, `fonctionGraphique`. L'étalon de helper :
+`questionBank/seconde/maths/reels-intervalles.bank.ts`, un helper par canvas en
+tête de fichier, `size` choisie et non subie.
+
+════ ⭐ LA POSITION DE LA BONNE RÉPONSE : VÉRIFIÉE, ELLE EST JUSTE ══
+Mesuré le 27/08 parce que la question s'est posée. ⛔ NE PAS LA REPOSER, et
+surtout ne pas « corriger » l'ordre dans les fichiers source :
+
+  · dans la SOURCE, 87 % des QCM figés ont la bonne réponse en 1ʳᵉ ligne ;
+  · à l'AFFICHAGE, `shuffleChoices` (`questionPairBuilder.ts`) remélange chaque
+    item — figé comme généré — avec une graine par question.
+
+    npx --yes tsx@4 scripts/verifier-propositions-qcm.ts --matiere maths 4e
+    → 24.5 % · 25.2 % · 25.0 % · 25.3 %   sur 23 580 tirages, max 1.9σ
+
+⚠️ `verifier-devinabilite-runtime.ts` affiche, lui, un rang 4 à 21 % : c'est un
+ARTEFACT connu, pas un défaut. Il ne peuple les rangs 3 et 4 qu'avec les tirages
+à QUATRE lignes, et la banque mélange des QCM à 2, 3 et 4 lignes (83 · 5 · 393).
+⭐ Deux, trois ou quatre propositions sont toutes légitimes — quatre est un
+maximum, jamais une norme.
+
+⛔ CE QUI RESTE VRAI À CORRIGER : 28 items de 4ᵉ dont la bonne réponse dépasse
+le plus long leurre de 8 caractères ou plus (jusqu'à +17 sur
+`proba_equiprobabilite_fixed_4`). On ALLONGE les leurres, on ne raccourcit pas
+la réponse — et un leurre allongé peut devenir VRAI : relire l'en-tête du pool.
+
 ════ PAR OÙ COMMENCER ═══════════════════════════════════════════════
-✅ FAIT LE 27/08 — `bo-objectifs.ts` est écrit, et `verifier-bo.ts` a gagné la
-4ᵉ. Le prochain trou est désormais impossible à rater.
+✅ FAIT LE 27/08 — `bo-objectifs.ts` est écrit, `verifier-bo.ts` a gagné la 4ᵉ,
+et le 1 est entré dans les carrés parfaits. Le prochain trou est désormais
+impossible à rater.
+
+⭐ REPRISE : commencer par les PUISSANCES (point 1 ci-dessous). Tout est prêt —
+la banque de 3ᵉ à descendre, les six puces du thème A qu'elles ferment, et les
+entrées de `bo-objectifs.ts` qui les attendent (4e-A-calcul-2, 4e-A-calcul-3,
+4e-A-calcul-6, 4e-A-nombres-5, 4e-A-nombres-6, 4e-A-comparaisons-3 et -5).
 
 Ordre proposé, du plus sûr au plus incertain :
 
