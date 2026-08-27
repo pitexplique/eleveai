@@ -1,6 +1,6 @@
-# Passation — la 6ᵉ maths, chantier ouvert le 26/08/2026
+# Passation — la 6ᵉ maths, chantier ouvert le 27/08/2026
 
-> Ouverte à la fin de la journée qui a terminé la 4ᵉ (voir
+> Ouverte dans la foulée de la matinée qui a terminé la 4ᵉ (voir
 > `passation-maths-4e.md`, qui contient TOUTES les règles de dessin et de
 > mesure — celle-ci ne redit rien de ce qui y est déjà écrit).
 > Commencer par `git pull`.
@@ -11,6 +11,7 @@
 
 ```
 maths 6e   19 fiches sur 35   ·   verifier-micros 111/111   ·   tout est poussé
+(état du 27/08/2026, 10 h)
 ```
 
 Une seule fiche écrite ce jour-là : **`cercle-disque`**. Les dix-huit autres
@@ -129,7 +130,7 @@ Identique à celle de la 4ᵉ (voir `passation-maths-4e.md`), avec deux ajouts :
    git ls-files app/fiches-cours/maths/6e/ \
      | grep -v '^app/fiches-cours/maths/6e/page.tsx$' | grep -c '/page.tsx$'
    ```
-   19 et 19 au soir du 26/08.
+   19 et 19 au matin du 27/08.
 
 ⚠️ **DEUX PANNES DIFFÉRENTES DONNENT LE MÊME SYMPTÔME** quand
 `build:fiches-pdf` expire, et une seule se soigne par une relance :

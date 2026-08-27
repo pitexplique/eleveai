@@ -4,7 +4,7 @@
 > sessions travaillent dans le dossier, et la note commune ne m'appartient pas.
 > Celle-ci ne parle que des maths de 4ᵉ. Commencer par `git pull`.
 >
-> ⚠️ **L'ATTELAGE A CHANGÉ DANS LA JOURNÉE DU 26/08** (Frédéric) : ce n'est plus
+> ⚠️ **L'ATTELAGE A CHANGÉ LE 27/08** (Frédéric) : ce n'est plus
 > « français 4ᵉ + français 3ᵉ + maths 4ᵉ », mais **écran d'accueil + français +
 > maths 4ᵉ**. Ça compte, parce que la session d'accueil ne touche pas aux mêmes
 > fichiers qu'une session de fiches : elle vit dans `app/page.tsx` et les
@@ -28,7 +28,13 @@ maths 4e   ✅ 20 fiches sur 20   ·   micros 136/136   ·   20 PDF   ·   tout 
 ⚠️ **VINGT et non plus dix-neuf** : les fractions ont été scindées en deux le
 26/08 (voir plus bas).
 
-## ✅✅ LE CHANTIER EST TERMINÉ (26/08/2026, en fin de journée)
+## ✅✅ LE CHANTIER EST TERMINÉ (27/08/2026, au matin)
+
+⚠️ **CETTE NOTE COUVRE DEUX JOURNÉES, et les dates ci-dessous le disent.** La
+session qui a fini la 4ᵉ a commencé le **26/08 à 13 h 30** et s'est achevée le
+**27/08 à 10 h**. Les trois premières fiches d'algèbre sont donc du 26, les cinq
+suivantes du 27 — le tableau plus bas porte la date de chacune. Vérifiable :
+`git log --date=format:'%d/%m %H:%M'`.
 
 **Les vingt notions de la 4ᵉ maths ont leur fiche**, mesurée aux deux largeurs,
 câblée au registre et livrée en PDF. `verifier-micros` répond **136/136** : plus
@@ -44,7 +50,7 @@ pas par des dessins.
 
 ---
 
-### ✅ LE BLOC ALGÈBRE EST COMPLET (26/08, seconde session)
+### ✅ LE BLOC ALGÈBRE EST COMPLET (26 et 27/08)
 
 `litteral-expression` · `litteral-distributivite` ·
 `litteral-identite-remarquable` · `litteral-factorisation` ·
@@ -127,11 +133,11 @@ distingue la dégradation du serveur d'un vrai défaut de la fiche.
 
 | fiche | notion | état |
 |---|---|---|
-| Algorithmique | `algo-programmation` | ✅ publiée, mesurée, PDF (26/08) |
-| Volumes | `volume-solide` | ✅ publiée, mesurée, PDF (26/08) |
-| Aires | `aire-surface` | ✅ publiée, mesurée, PDF (26/08) |
-| Périmètres | `aire-perimetre` | ✅ publiée, mesurée, PDF (26/08) |
-| Équations | `equation-resolution` | ✅ publiée, mesurée, PDF (26/08) |
+| Algorithmique | `algo-programmation` | ✅ publiée, mesurée, PDF (27/08) |
+| Volumes | `volume-solide` | ✅ publiée, mesurée, PDF (27/08) |
+| Aires | `aire-surface` | ✅ publiée, mesurée, PDF (27/08) |
+| Périmètres | `aire-perimetre` | ✅ publiée, mesurée, PDF (27/08) |
+| Équations | `equation-resolution` | ✅ publiée, mesurée, PDF (27/08) |
 | Distributivité | `litteral-distributivite` | ✅ publiée, mesurée, PDF (26/08) |
 | Identités remarquables | `litteral-identite-remarquable` | ✅ publiée, mesurée, PDF (26/08) |
 | Factorisation | `litteral-factorisation` | ✅ publiée, mesurée, PDF (26/08) |
@@ -508,7 +514,8 @@ git show HEAD:lib/fiches/registre.ts | grep -c '"maths/4e/'
 git ls-files app/fiches-cours/maths/4e/ \
   | grep -v '^app/fiches-cours/maths/4e/page.tsx$' | grep -c '/page.tsx$'
 ```
-**Les deux nombres doivent être égaux** — 15 et 15, mesuré au soir du 26/08.
+**Les deux nombres doivent être égaux** — 15 et 15 au soir du 26/08, puis
+20 et 20 au matin du 27/08.
 
 ⚠️ **LA SECONDE COMMANDE A ÉTÉ CORRIGÉE DEUX FOIS, ET LES DEUX PREMIÈRES
 VERSIONS MENTAIENT.** La v1 comptait `… | wc -l` tout court et répondait **16
