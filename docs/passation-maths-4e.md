@@ -22,21 +22,22 @@
 ## Où on en est
 
 ```
-maths 4e   15 fiches sur 20   ·   micros 100/100   ·   15 PDF   ·   tout est poussé
+maths 4e   16 fiches sur 20   ·   micros 108/108   ·   16 PDF   ·   tout est poussé
 ```
 
 ⚠️ **VINGT et non plus dix-neuf** : les fractions ont été scindées en deux le
 26/08 (voir plus bas).
 
-### ⭐ LE BLOC ALGÈBRE EST ÉCRIT AUX QUATRE CINQUIÈMES (26/08, seconde session)
+### ✅ LE BLOC ALGÈBRE EST COMPLET (26/08, seconde session)
 
 `litteral-expression` · `litteral-distributivite` ·
-`litteral-identite-remarquable` · `litteral-factorisation` sont publiées,
-mesurées, câblées et en PDF. **Reste `equation-resolution`**, puis les trois
-fiches de grandeurs (`aire-perimetre`, `aire-surface`, `volume-solide`) et
-`algo-programmation`.
+`litteral-identite-remarquable` · `litteral-factorisation` ·
+`equation-resolution` : **les cinq** sont publiées, mesurées, câblées et en PDF.
+Elles se citent l'une l'autre sans jamais se redéfinir.
+**Restent quatre notions**, toutes hors algèbre : `aire-perimetre`,
+`aire-surface`, `volume-solide`, `algo-programmation`.
 
-⭐ **CE QUE LES QUATRE FICHES D'ALGÈBRE ONT APPRIS, ET QUI SERT AUX SUIVANTES.**
+⭐ **CE QUE LES CINQ FICHES D'ALGÈBRE ONT APPRIS, ET QUI SERT AUX SUIVANTES.**
 
 1. **Les dessins se RETOURNENT d'une fiche à l'autre, et c'est le meilleur
    enseignement de la série.** Le rectangle d'aire `3(x + 4)` sert deux fois : en
@@ -81,7 +82,25 @@ fiches de grandeurs (`aire-perimetre`, `aire-surface`, `volume-solide`) et
 8. `calcul_pose` **accepte des termes littéraux** : `numbers: ["2x","3x"]`,
    `result: "5x"` rend une case par caractère, et c'est parfaitement lisible.
    C'est le seul canvas qui montre que réduire, c'est ADDITIONNER des
-   coefficients.
+   coefficients. Sa branche `division` rend en plus une ligne « Vérification :
+   dividende = diviseur × quotient + reste » — utile pile pour une équation.
+9. ⭐ **`schema_barre` SAIT DESSINER CE QU'ON NE CONNAÎT PAS.** Son champ
+   `part.unknown` trace une case ROUGE avec un « ? » de 22 px, à la place de la
+   valeur. C'est le seul canvas du catalogue qui le fasse, et c'est exactement
+   ce qu'une équation demande : un tout connu, un morceau connu, un trou.
+   ⭐ **Et il refuse alors de mettre les parts à l'échelle** : le proportionnel
+   ne s'applique que si TOUTES les parts portent un nombre, sinon il revient aux
+   tranches égales. Autrement dit le dessin ne fait pas semblant de connaître
+   `x`. **C'est le comportement voulu du composant** (lu dans son code avant de
+   l'employer), et il faut l'écrire dans la fiche pour qu'on ne le prenne pas
+   pour un défaut à la relecture.
+10. ⭐ **LE PLUS BEL ITEM DE TOUTE LA SÉRIE EST DANS `equation_defi`**, et il
+   était invisible depuis le nom de la micro : « Léo dit : dans 2x + 3 = 11,
+   x = 4 car 2 + 3 + 4 = 9 » → l'explication de la banque dit **« MÊME SI x = 4
+   EST BIEN SOLUTION, le raisonnement de Léo est faux »**. Un élève qui a juste
+   et qui se trompe quand même : c'est le seul endroit du bloc où la
+   VÉRIFICATION prouve son utilité. Rien de tout cela ne se devine sans ouvrir
+   l'énoncé — c'est l'argument le plus net pour la règle de Frédéric.
 
 ⚠️ **Le serveur s'est dégradé une fois de plus au début de cette session** :
 `build:fiches-pdf` expirait sur `waitForFunction`, et le navigateur rendait un
@@ -92,6 +111,7 @@ distingue la dégradation du serveur d'un vrai défaut de la fiche.
 
 | fiche | notion | état |
 |---|---|---|
+| Équations | `equation-resolution` | ✅ publiée, mesurée, PDF (26/08) |
 | Distributivité | `litteral-distributivite` | ✅ publiée, mesurée, PDF (26/08) |
 | Identités remarquables | `litteral-identite-remarquable` | ✅ publiée, mesurée, PDF (26/08) |
 | Factorisation | `litteral-factorisation` | ✅ publiée, mesurée, PDF (26/08) |
@@ -112,16 +132,18 @@ distingue la dégradation du serveur d'un vrai défaut de la fiche.
 est **entièrement levé pour la 4ᵉ** : les quatre adresses éteintes sont revenues.
 Seule la 3ᵉ y reste.
 
-**Restent 5 notions** : `equation_resolution`, `aire_perimetre`,
-`aire_surface`, `volume_solide`, `algo_programmation`.
-👉 ⭐ **`equation_resolution` D'ABORD** : elle ferme le bloc algèbre et s'appuie
-sur les quatre fiches déjà écrites (`equation_resoudre_distributivite` cite la
-distributivité, `equation_verifier` cite la substitution). Elle porte **huit
-micros**, dont `equation_probleme` et `equation_defi` — ⚠️ lire leurs énoncés,
-leur nom ne dit pas leur contenu.
-👉 Puis les trois fiches de grandeurs : `figure_libre` pour les aires, et
-⛔ `solide_3d` pour les volumes — **il ne se laisse pas rétrécir, la seule
-commande est la POLICE**. Enfin `algo_programmation`, avec le canvas `scratch`.
+**Restent 4 notions**, et l'algèbre n'y est plus pour rien :
+`aire_perimetre`, `aire_surface`, `volume_solide`, `algo_programmation`.
+👉 ⭐ **LES TROIS FICHES DE GRANDEURS D'ABORD**, et dans cet ordre — périmètre,
+aire, volume — parce qu'elles s'enchaînent comme l'algèbre s'est enchaînée : le
+tour d'une figure, puis sa surface, puis son volume. `figure_libre` sait
+carreler une surface et en tracer le contour d'un seul trait, donc **le même
+dessin peut porter le périmètre ET l'aire** — c'est la parade éprouvée cinq fois
+aujourd'hui, garder l'objet et changer l'information.
+⛔ **`solide_3d` NE SE LAISSE PAS RÉTRÉCIR** : réduire sa `size` ROGNE au lieu de
+mettre à l'échelle, la seule commande est la POLICE.
+👉 Enfin `algo_programmation`, avec le canvas `scratch` — le seul de la liste qui
+n'ait encore jamais servi en 4ᵉ. **Le mesurer tôt**, pas à la fin.
 
 ⭐ **Le rythme mesuré** : les deux premières fiches ont demandé **trois passes de
 mesure chacune** ; toutes les suivantes sont passées **du premier coup ou en une
