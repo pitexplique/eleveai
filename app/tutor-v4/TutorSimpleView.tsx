@@ -154,7 +154,17 @@ export default function TutorSimpleView({
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-100 via-cyan-50 to-emerald-100 px-3 py-4 text-slate-950 sm:px-5">
       <div className="mx-auto max-w-6xl">
-        <header className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        {/* ⚠️ HORS APERÇU (27/08/2026) — la barre d'outils du mode simple, comme
+            celle du mode complet. Identique sur toutes les captures (« Retour
+            Coach · Mode complet · Affichage classe · Lecture auto »), elle ne
+            dit rien de la notion et mangeait le haut de chaque aperçu.
+            ⛔ Ne pas cacher la balise `header` côté script pour ça : elle sert
+            de conteneur de CONTENU ailleurs sur le site, et c'est le bogue qui a
+            amputé les 99 premières captures. C'est l'attribut qui désigne. */}
+        <header
+          className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+          data-hors-apercu=""
+        >
           {/* ⭐ LE RETOUR AU COACH PASSE À GAUCHE, EN ORANGE (18/08/2026).
               Frédéric : « en mode simple il n'y a pas la puce retour au coach »,
               puis « si il y a retour coach mais je le voyais pas ». Elle y
@@ -258,7 +268,15 @@ export default function TutorSimpleView({
         ) : null}
 
         {/* Bandeau mission sur une seule ligne (identique au mode complet). */}
-        <div className="mb-4 flex flex-wrap items-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-600 via-sky-600 to-cyan-500 px-4 py-2 text-white shadow-sm">
+        {/* ⚠️ HORS APERÇU (27/08/2026) — scripts/capturer-apercus-coach.ts le
+            retire avant de photographier, comme son jumeau du mode complet
+            (TutorV4Client.tsx). Il est identique sur les 768 aperçus et ne dit
+            rien de la notion ; dans un panneau de 380 px, il coûtait un tiers de
+            l'image à ce qu'on vient justement montrer — l'exercice. */}
+        <div
+          className="mb-4 flex flex-wrap items-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-600 via-sky-600 to-cyan-500 px-4 py-2 text-white shadow-sm"
+          data-hors-apercu=""
+        >
           <span className="rounded-full bg-white/20 px-3 py-1 text-[11px] font-bold tracking-wide">
             MODE MISSION
           </span>

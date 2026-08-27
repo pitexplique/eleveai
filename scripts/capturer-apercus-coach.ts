@@ -87,6 +87,7 @@ registerHooks({
 });
 
 const cat = await import(pathToFileURL(path.join(RACINE, "lib/tutor-v4/catalog.ts")).href);
+const affichage = await import(pathToFileURL(path.join(RACINE, "lib/tutor-v4/displayMode.ts")).href);
 
 const SORTIE = path.join(RACINE, "public", "apercus", "coach");
 const MANIFESTE = path.join(RACINE, "lib", "tutor-v4", "apercus.generated.ts");
@@ -191,10 +192,10 @@ const rates: string[] = [];
 for (const c of aFaire) {
   const t0 = Date.now();
   try {
-    const octets = await capturer(page, c);
+    const { octets, ecrans } = await capturer(page, c);
     const ancien = dejaLa(c);
     if (ancien) fs.rmSync(ancien);
-    const dest = fichier(c, 1);
+    const dest = fichier(c, ecrans);
     fs.mkdirSync(path.dirname(dest), { recursive: true });
     fs.writeFileSync(dest, octets);
     faits += 1;
@@ -214,8 +215,57 @@ console.log(`\n${faits} aperçu(s) écrits, ${rates.length} en échec.`);
 if (rates.length) console.log("Échecs : " + rates.join(" "));
 
 // ── La capture d'une notion ──────────────────────────────────────────────────
-async function capturer(page: Page, c: Cible): Promise<Buffer> {
-  const url = `${base}/tutor-v4?classe=${c.classe}&matiere=${c.matiere}&notion=${encodeURIComponent(c.notion)}`;
+/**
+ * ⭐ LES DEUX ÉCRANS SONT LES DEUX VUES, PAS LES DEUX MOITIÉS D'UNE PAGE.
+ *
+ * Frédéric, 27/08 : « ça serait bien d'avoir un screenshot mode complet et un
+ * mode simple, t'en penses quoi ? ». Une première version faisait comme sur
+ * l'accueil — le haut de la page, puis un écran plus bas. Le rendu l'a
+ * tranché : la page d'un exercice fait à peine plus d'une hauteur d'écran, donc
+ * la seconde bande recopiait 80 % de la première. Deux pastilles pour la même
+ * image, c'est pire qu'une seule.
+ *
+ * Les deux VUES, elles, montrent deux choses différentes : la complète propose
+ * deux énoncés au choix et le détail des micro-compétences, la simple pose une
+ * question sur un écran nu. Et les deux sont atteignables — le bouton « Mode
+ * simple » est dans la barre du tutor. On ne montre donc pas un écran que
+ * l'élève n'aura jamais : on montre les deux visages qu'il peut demander.
+ *
+ * ⚠️ UNE SEULE VUE POUR LE PRIMAIRE. Du CP au CM2 et sur les niveaux du CECRL,
+ * la vue complète n'existe pas (lib/tutor-v4/displayMode.ts) : la notion garde
+ * une pastille, et c'est honnête — il n'y a rien d'autre à montrer.
+ */
+async function capturer(page: Page, c: Cible): Promise<{ octets: Buffer; ecrans: number }> {
+  const defaut = affichage.defaultDisplayModeForClasse(c.classe);
+  // La vue par défaut D'ABORD : c'est celle qu'un clic ouvre vraiment.
+  const vues: string[] = defaut === "complete" ? ["complete", "simple"] : ["simple"];
+
+  const bandes: Buffer[] = [];
+  for (const vue of vues) bandes.push(await capturerUneVue(page, c, vue));
+  return { octets: await empiler(bandes), ecrans: bandes.length };
+}
+
+async function capturerUneVue(page: Page, c: Cible, vue: string): Promise<Buffer> {
+  /**
+   * ⚠️ L'URL EST CELLE DU CLIC, `display` COMPRIS — sinon l'aperçu ment.
+   *
+   * Le tutor a deux visages (lib/tutor-v4/displayMode.ts) : la vue SIMPLE pose
+   * une question sur un écran nu, la vue COMPLÈTE propose deux énoncés et le
+   * détail des micro-compétences. La bascule se fait au collège : le primaire et
+   * les niveaux du CECRL restent en simple, la 6e passe en complète.
+   *
+   * La page du coach passe donc `display=` dans son lien (voir `handleClick`
+   * dans app/coach-ia/[matiere]/page.tsx). Capturer sans ce paramètre, c'est
+   * laisser le tutor choisir tout seul — et prendre le risque de photographier
+   * un écran que l'élève de CE2 n'aura jamais, alors que l'aperçu promet
+   * précisément « voilà ce qui t'attend ».
+   * On construit l'URL avec la MÊME fonction que la page. Pas de recopie.
+   */
+  const url =
+    `${base}/tutor-v4?classe=${encodeURIComponent(c.classe)}` +
+    `&matiere=${encodeURIComponent(c.matiere)}` +
+    `&notion=${encodeURIComponent(c.notion)}` +
+    `&display=${vue}`;
   await page.goto(url, { waitUntil: "load", timeout: 45000 });
 
   /**
@@ -225,20 +275,106 @@ async function capturer(page: Page, c: Cible): Promise<Buffer> {
    * marcherait la plupart du temps et laisserait des trous AU HASARD dans une
    * fournée de 768 — le pire des défauts, parce qu'il ne se reproduit pas.
    */
-  const bouton = page.getByRole("button", { name: "Démarrer une mission" }).first();
-  await bouton.waitFor({ state: "visible", timeout: 30000 });
   /**
-   * ⚠️ PAS DE `scrollIntoViewIfNeeded` AVANT LE CLIC.
+   * ⚠️ LES DEUX VISAGES DU TUTOR N'ONT PAS LE MÊME SCÉNARIO.
    *
-   * Il y en avait un, et il faisait échouer une notion au hasard à chaque
-   * fournée — jamais la même, ce qui est le pire des défauts : ça ressemble à
-   * une page cassée alors que c'est un chronomètre. `click()` fait DÉJÀ défiler
-   * jusqu'à l'élément et attend qu'il soit stable ; l'appel précédent exigeait
-   * en plus que le défilement soit terminé dans SON propre délai, sur une page
-   * que React est encore en train de peupler.
-   * Un seul délai, plus large, et il n'y a plus qu'une chose qui attend.
+   * En vue COMPLÈTE (le collège et au-delà), l'écran affiche « Clique sur
+   * Démarrer une mission. » et attend le clic. En vue SIMPLE (le primaire, les
+   * niveaux du CECRL), le tutor active la question tout seul — il n'y a pas de
+   * bouton à cliquer, et l'attendre ferait échouer TOUTES les classes de
+   * primaire, sur un délai, donc sans dire pourquoi.
+   *
+   * On attend donc la première des deux choses qui arrive : le bouton, ou
+   * l'énoncé. Un seul scénario couvre les cinq coachs et les deux vues.
    */
-  await bouton.click({ timeout: 20000 });
+  /**
+   * ⛔ D'ABORD L'HYDRATATION, ET SANS ÇA TOUT LE RESTE MENT.
+   *
+   * Le piège, payé comptant : les deux attentes ci-dessous sont « le bouton
+   * apparaît » OU « le texte d'attente a disparu ». Avant que React ait monté
+   * quoi que ce soit, le texte d'attente n'est PAS dans la page — donc « il a
+   * disparu » est vrai immédiatement. Les deux gardes tombaient ensemble, en
+   * 2,4 s, et le script photographiait « Clique sur Démarrer une mission »,
+   * c'est-à-dire l'inverse exact de ce que l'aperçu promet. Une capture de 4 Ko
+   * au lieu de 14 : le poids était le seul indice.
+   *
+   * « Retour Coach » est le repère : c'est la barre d'outils du tutor, présente
+   * dans les DEUX vues, et elle n'existe qu'une fois le composant monté.
+   */
+  await page
+    .getByRole("button", { name: /Retour Coach/i })
+    .first()
+    .waitFor({ state: "visible", timeout: 30000 });
+
+  /**
+   * ⛔ ON ATTEND LE BOUTON POUR DE BON — PAS « LUI OU AUTRE CHOSE ».
+   *
+   * Il y a eu ici une `Promise.race` entre « le bouton apparaît » et « le texte
+   * d'attente a disparu ». Elle avait l'air maligne et elle était fausse : au
+   * moment où la course démarre, le bouton n'est pas ENCORE monté, donc le
+   * `isVisible()` juste après rendait faux, donc on ne cliquait pas — et le
+   * garde suivant passait tout aussi vite. Résultat : des captures de 4 Ko en
+   * 2,5 s montrant « Clique sur Démarrer une mission », c'est-à-dire l'inverse
+   * exact de ce que l'aperçu promet. Le poids était le seul indice.
+   *
+   * Ici on ATTEND le bouton, jusqu'à 15 s. S'il n'arrive pas, ce n'est pas une
+   * erreur : c'est la vue SIMPLE (le primaire, les niveaux du CECRL), où le
+   * tutor active la question tout seul.
+   */
+  /**
+   * ⛔ ON ATTEND LE BOUTON, ET ON NE SE FIE PAS À L'ABSENCE DU TEXTE D'ATTENTE.
+   *
+   * Frédéric, 27/08 : « il ne faut pas cliquer sur Démarrer une mission, il
+   * faut attendre deux secondes que ça s'affiche ». Une version l'a fait — et
+   * elle a échoué sur 18 notions de 5e sur 19. Le diagnostic explique les deux :
+   *
+   *   — la barre « Retour Coach » s'affiche AVANT le panneau de mission. Dans
+   *     cet intervalle, ni le texte d'attente ni le bouton n'existent (mesuré :
+   *     `boutons trouvés : 0`). Un garde du type « le texte d'attente n'est plus
+   *     là » est donc vrai À TORT pendant ce trou, et on repart sans avoir
+   *     cliqué. L'écran d'attente arrive juste après, et c'est lui qu'on
+   *     photographie ;
+   *   — en vue COMPLÈTE, le tutor ne démarre pas tout seul. Les 18 échecs le
+   *     disent, et le garde-fou de fin les a tous attrapés.
+   *
+   * Le seul repère fiable est donc POSITIF : le bouton apparaît. On l'attend
+   * jusqu'à 15 s. S'il n'arrive jamais, ce n'est pas une erreur — c'est la vue
+   * SIMPLE (le primaire, les niveaux du CECRL), où la question s'affiche seule.
+   */
+  /**
+   * ⭐ LA VUE DIT S'IL FAUT CLIQUER — on ne le découvre plus par un délai.
+   *
+   * Frédéric, 27/08, après vérification à la main : « le mode simple, il faut
+   * attendre deux secondes et la question s'affiche » ; « mode simple primaire
+   * et mode complet collège lycée ».
+   *
+   * Les deux vues ne se comportent donc pas pareil, et on SAIT laquelle on
+   * ouvre puisqu'on l'a mise dans l'URL :
+   *   — SIMPLE : rien à cliquer, la question vient seule. Attendre le bouton
+   *     ici, ce serait perdre quinze secondes par notion à guetter un élément
+   *     qui n'existe pas — sur le primaire, c'est une demi-heure de fournée
+   *     pour rien.
+   *   — COMPLÈTE : le tutor ne démarre pas seul. Mesuré : 18 notions de 5e sur
+   *     19 photographiées sur l'écran d'attente le jour où on a cru le
+   *     contraire. Le bouton est le repère, et il est POSITIF — l'absence du
+   *     texte d'attente, elle, est vraie à tort pendant que la page se monte.
+   */
+  const attendu = "Clique sur Démarrer une mission";
+  if (vue === "complete") {
+    const bouton = page.getByRole("button", { name: "Démarrer une mission" }).first();
+    await bouton.waitFor({ state: "visible", timeout: 20000 });
+    /**
+     * ⚠️ PAS DE `scrollIntoViewIfNeeded` AVANT LE CLIC.
+     *
+     * Il y en avait un, et il faisait échouer une notion au hasard à chaque
+     * fournée — jamais la même, ce qui est le pire des défauts : ça ressemble à
+     * une page cassée alors que c'est un chronomètre. `click()` fait DÉJÀ
+     * défiler jusqu'à l'élément et attend qu'il soit stable ; l'appel précédent
+     * exigeait en plus que le défilement finisse dans SON propre délai, sur une
+     * page que React est encore en train de peupler.
+     */
+    await bouton.click({ timeout: 20000 });
+  }
 
   /**
    * ⚠️ ON ATTEND QUE L'ÉCRAN D'ATTENTE DISPARAISSE, pas qu'un délai s'écoule.
@@ -246,11 +382,41 @@ async function capturer(page: Page, c: Cible): Promise<Buffer> {
    * photographier « Clique sur Démarrer une mission », c'est-à-dire l'inverse
    * exact de ce qu'on promet.
    */
-  await page.waitForFunction(
-    () => !document.body.innerText.includes("Clique sur Démarrer une mission"),
-    undefined,
-    { timeout: 20000 },
-  );
+  await page.waitForFunction((t) => !document.body.innerText.includes(t), attendu, {
+    timeout: 25000,
+  });
+
+  /**
+   * ⚠️ EN VUE SIMPLE, CE GARDE-LÀ NE GARDE RIEN — d'où les deux secondes.
+   *
+   * Le texte « Clique sur Démarrer une mission » n'apparaît JAMAIS en vue
+   * simple : la condition ci-dessus est donc vraie dès la première tentative,
+   * y compris avant que la question soit rendue. C'est le même piège qui a
+   * produit des captures de 4 Ko de l'écran d'attente en vue complète, à ceci
+   * près qu'ici aucun texte ne trahit l'erreur.
+   * Frédéric l'a chronométré à la main : « le mode simple, il faut attendre
+   * deux secondes et la question s'affiche ». On les attend, et le garde-fou de
+   * fin vérifie qu'il y a bien quelque chose à voir.
+   */
+  /**
+   * ⚠️ LA VUE SIMPLE A SON PROPRE ÉCRAN DE DÉPART, ET SON PROPRE BOUTON.
+   *
+   * Elle n'affiche pas « Clique sur Démarrer une mission » mais « Prêt pour une
+   * question ? » avec un bouton COMMENCER — un autre libellé, dans une autre
+   * branche de rendu (TutorV4Client.tsx, `if (displayMode === "simple")`).
+   * Le garde du dessus ne la voyait donc pas, et la seconde bande de chaque
+   * notion montrait un écran de départ au lieu d'une question.
+   *
+   * Les deux secondes que Frédéric a chronométrées restent : elles laissent la
+   * question se poser une fois le départ donné.
+   */
+  if (vue === "simple") {
+    const commencer = page.getByRole("button", { name: /^Commencer$/i }).first();
+    if (await commencer.isVisible().catch(() => false)) {
+      await commencer.click({ timeout: 15000 });
+    }
+    await page.waitForTimeout(2500);
+  }
 
   /**
    * ⚠️ LE CHROME PART ICI, ET PAS UNE LIGNE PLUS HAUT.
@@ -291,31 +457,57 @@ async function capturer(page: Page, c: Cible): Promise<Buffer> {
   await page.evaluate(() => (document as unknown as { fonts: FontFaceSet }).fonts.ready);
   await page.waitForTimeout(700);
 
-  return encoder(await page.screenshot({ type: "png" }));
+  /**
+   * ⛔ LE GARDE-FOU FINAL — une capture fausse doit ÉCHOUER, pas s'écrire.
+   *
+   * Deux fois dans la même heure, un défaut d'attente a produit des fichiers
+   * parfaitement valides montrant l'écran d'attente. Ils s'écrivaient sans un
+   * mot, et rien dans le journal ne les distinguait des bons : sur une fournée
+   * de 768, personne ne les aurait vus avant de les regarder un par un.
+   * On relit donc ce qu'on vient de photographier. Un aperçu qui montre encore
+   * « Clique sur Démarrer une mission » n'est pas un aperçu dégradé, c'est le
+   * contraire de ce qu'on promet : il part en échec, et le script le nomme.
+   */
+  const texte = await page.evaluate(() => document.body.innerText.replace(/\s+/g, " ").trim());
+  if (texte.includes(attendu)) {
+    throw new Error(`vue ${vue} : l'écran d'attente est encore affiché — rien n'a démarré`);
+  }
+  /**
+   * ⚠️ ET UNE PAGE PRESQUE VIDE EST AUSSI UN ÉCHEC.
+   *
+   * En vue simple, rien dans le texte ne dit « je n'ai pas démarré » : on
+   * photographierait un cadre blanc sans un mot d'avertissement. Le seul signe
+   * qui reste est la QUANTITÉ. 120 caractères, c'est bien en dessous du moindre
+   * énoncé — mais bien au-dessus d'un écran vide.
+   */
+  if (texte.length < 120) {
+    throw new Error(`vue ${vue} : écran quasi vide (${texte.length} caractères)`);
+  }
+
+  await page.evaluate(() => window.scrollTo(0, 0));
+  return page.screenshot({ type: "png" });
 }
 
-/** PNG → WebP à la largeur servie, par Chrome — le projet n'a pas `sharp`. */
-async function encoder(png: Buffer): Promise<Buffer> {
+/** Les écrans, recollés de haut en bas et encodés en WebP — par Chrome. */
+async function empiler(bandes: Buffer[]): Promise<Buffer> {
+  const sources = bandes.map((b) => `data:image/png;base64,${b.toString("base64")}`);
   const sortie = await encodeur.evaluate(
-    async ({ src, largeur, ls, hs, qualite }) => {
-      const img = new Image();
-      img.src = src;
-      await img.decode();
+    async ({ sources, largeur, ls, hs, qualite }) => {
+      const hBande = Math.round((hs * largeur) / ls);
       const canvas = document.createElement("canvas");
       canvas.width = largeur;
-      canvas.height = Math.round((hs * largeur) / ls);
+      canvas.height = hBande * sources.length;
       const ctx = canvas.getContext("2d")!;
       ctx.imageSmoothingQuality = "high";
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < sources.length; i += 1) {
+        const img = new Image();
+        img.src = sources[i];
+        await img.decode();
+        ctx.drawImage(img, 0, i * hBande, largeur, hBande);
+      }
       return canvas.toDataURL("image/webp", qualite);
     },
-    {
-      src: `data:image/png;base64,${png.toString("base64")}`,
-      largeur: LARGEUR_SERVIE,
-      ls: LARGEUR,
-      hs: HAUTEUR,
-      qualite: QUALITE,
-    },
+    { sources, largeur: LARGEUR_SERVIE, ls: LARGEUR, hs: HAUTEUR, qualite: QUALITE },
   );
   if (!sortie.startsWith("data:image/webp")) throw new Error("Chrome n'a pas encodé en WebP");
   return Buffer.from(sortie.split(",")[1], "base64");
