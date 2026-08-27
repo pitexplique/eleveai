@@ -80,10 +80,20 @@ const DUREE = 2200;
  * L'autre moitié du gain est dans le script, qui capture désormais en fenêtre
  * réduite au lieu de 1200 px.
  *
- * ⛔ 380 px ET PAS PLUS. La carte fait ~900 px et le panneau déborde de 28 % à
- * sa droite : à 1536 px, son bord droit tombe à ~1426 px. Un panneau plus large
- * sortirait de la page et fabriquerait une barre de défilement horizontale sur
- * l'accueil — mesuré, pas estimé.
+ * ⭐ IL NE DÉBORDE PLUS DE LA CARTE (27/08/2026), et c'est ce qui a permis de
+ * l'ouvrir aux portables. La première version le décalait de 28 % vers la
+ * droite, dans la gouttière de la page. Joli, et payé cher : pour que ces 106 px
+ * ne fabriquent pas une barre de défilement horizontale sur l'accueil, il fallait
+ * ~1536 px de large — donc pas de panneau sur un portable, c'est-à-dire pas de
+ * panneau pour l'essentiel des gens qui ont une souris (Frédéric, 27/08 : « ça
+ * s'affiche bien sur grand écran mais pas sur mon ordinateur portable »).
+ * Posé À L'INTÉRIEUR du bord droit de la carte, il ne peut plus déborder de quoi
+ * que ce soit, à aucune largeur. Le seuil devient un choix de lisibilité (`lg`)
+ * au lieu d'une contrainte de place.
+ *
+ * ⛔ 380 px ET PAS PLUS. À 1024 px — le seuil — la carte fait ~730 px : le
+ * panneau en occupe déjà la moitié droite. Plus large, il ne couvrirait plus le
+ * texte, il le remplacerait.
  */
 const LARGEUR = 380;
 const RAPPORT = "16 / 10";
@@ -125,7 +135,7 @@ export default function FenetreApercu({ id, ouverte }: { id: string; ouverte: bo
          censée provoquer. */
       aria-hidden="true"
       style={{ width: LARGEUR }}
-      className={`pointer-events-none absolute right-0 top-1/2 z-30 hidden -translate-y-1/2 translate-x-[28%] transition-all duration-200 2xl:block ${
+      className={`pointer-events-none absolute right-3 top-1/2 z-30 hidden -translate-y-1/2 transition-all duration-200 lg:block ${
         ouverte ? "scale-100 opacity-100" : "scale-95 opacity-0"
       }`}
     >

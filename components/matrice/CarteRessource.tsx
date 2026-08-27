@@ -73,20 +73,45 @@ import type { ProfilId, Recommandation } from "@/lib/matrice/types";
  * (hydratation). Ici elle n'est appelée que depuis `onMouseEnter`, c'est-à-dire
  * dans un navigateur, par quelqu'un qui a une souris.
  *
- * `(hover: hover)` écarte les téléphones : sur un écran tactile, `mouseenter`
- * se déclenche À L'APPUI, juste avant que le lien s'ouvre. Sans ce garde-fou,
- * chaque tap sur une carte téléchargerait une capture de 60 Ko que personne ne
- * verrait jamais — l'aperçu est un supplément de bureau (décision du 26/08).
+ * ⭐ `any-hover` ET NON `hover` (27/08/2026), ET C'EST UN BOGUE RÉEL.
+ * Frédéric : « ça s'affiche bien sur grand écran mais pas sur mon ordinateur
+ * portable Samsung ». Ces portables-là ont un écran TACTILE. Sur une machine
+ * qui a les deux, Chrome peut déclarer `hover: none` — le média `hover` décrit
+ * le pointeur PRINCIPAL, et le tactile peut l'être même quand un pavé tactile
+ * est branché. `any-hover: hover` demande la bonne chose : « est-ce qu'AU MOINS
+ * UN pointeur sait survoler ? ». Un téléphone répond non, un portable tactile
+ * répond oui — c'est exactement la ligne qu'on voulait tracer.
  *
- * ⚠️ 1536 px, C'EST `2xl` — le même seuil que le `2xl:block` de la fenêtre
+ * Ce garde-fou reste indispensable : sur un écran purement tactile, `mouseenter`
+ * se déclenche À L'APPUI, juste avant que le lien s'ouvre. Sans lui, chaque tap
+ * sur une carte téléchargerait une capture de 50 Ko que personne ne verrait.
+ *
+ * ⭐ ET 1024 px, PAS 1536 (27/08/2026). Le seuil d'origine était `2xl`, choisi
+ * pour que le panneau tienne dans la gouttière à droite de la carte. C'était
+ * régler la visibilité sur une contrainte de placement — et ça excluait tous
+ * les portables, c'est-à-dire l'essentiel des gens qui ont une souris. La
+ * contrainte a disparu : le panneau ne déborde plus (FenetreApercu.tsx), il se
+ * pose à l'intérieur du bord droit de la carte.
+ *
+ * LA RÈGLE DEMANDÉE, MOT POUR MOT (Frédéric, 27/08) : « ça doit fonctionner même
+ * sur un 13 pouces portable mais pas sur un téléphone ». 1024 px trace
+ * exactement cette ligne, et les deux bords sont larges :
+ *   — un 13 pouces fait 1280 ou 1366 px de large en CSS ; même à 250 % de mise
+ *     à l'échelle sur une dalle 2880, il reste à 1152. Il passe.
+ *   — un téléphone plafonne à ~430 px debout, et à ~930 px couché sur le plus
+ *     grand modèle vendu. Il ne passe pas.
+ *   — une tablette posée en paysage tombe pile sur 1024, et c'est `any-hover`
+ *     qui l'écarte : sans souris branchée, rien chez elle ne sait survoler.
+ *
+ * ⚠️ 1024 px, C'EST `lg` — le même seuil que le `lg:block` de la fenêtre
  * (FenetreApercu.tsx). Les deux disent la même chose à deux endroits, et il le
  * faut : le CSS décide de ce qui se VOIT, ce test décide de ce qui se CHARGE.
- * Sans lui, un écran de 1200 px téléchargerait des captures qu'il n'affiche
- * jamais. Si l'un des deux chiffres bouge, l'autre bouge avec.
+ * Sans lui, un téléphone téléchargerait des captures qu'il n'affiche jamais.
+ * Si l'un des deux chiffres bouge, l'autre bouge avec.
  */
 function peutSurvoler() {
   return typeof window !== "undefined"
-    ? window.matchMedia("(hover: hover) and (min-width: 1536px)").matches
+    ? window.matchMedia("(any-hover: hover) and (min-width: 1024px)").matches
     : false;
 }
 
