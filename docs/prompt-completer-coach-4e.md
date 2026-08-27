@@ -427,9 +427,21 @@ Ordre proposé, du plus sûr au plus incertain :
    rendez-vous du 26/09 se joue là-dessus.
 
 ════ LES RÈGLES DU DÉPÔT À PLUSIEURS SESSIONS ═══════════════════════
+• ⛔⛔ TROIS SESSIONS TOURNENT EN MÊME TEMPS DANS CE DOSSIER (27/08) : maths,
+  français, et les cartes de l'écran d'accueil.
 • git commit -F message.txt -- <fichiers>  ⭐ TOUJOURS par chemin.
-  ⚠️ RELIRE LE DIFF d'un fichier partagé JUSTE AVANT de committer : il a bougé
-  trois fois sur trois câblages le 27/08.
+  ⛔ ET LA PARADE PAR CHEMIN A UN TROU : `git commit -- <fichier>` committe
+  l'ÉTAT COMPLET du fichier, pas mes lignes. Sur un fichier partagé, je
+  committe le travail en cours d'une autre session sous mon message. Constaté
+  le 27/08 : `registre.ts` portait cinq lignes non committées du français
+  (`francais/5e/lecture-apprecier`). Et `git add -p` n'est pas disponible.
+  👉 AVANT de committer un fichier partagé : `git diff -- <fichier>`, et
+  vérifier que TOUT ce qu'il contient est à moi. Sinon, ne pas le committer :
+  laisser la ligne dans l'arbre et attendre que l'autre session pousse.
+  LES FICHIERS CONCERNÉS : `lib/fiches/registre.ts`, `lib/matrice/coach.ts`,
+  `lib/matrice/notions.generated.ts`, `lib/tutor-v4/apercus.generated.ts`,
+  `app/tutor-v4/TutorSimpleView.tsx`, `scripts/capturer-apercus-coach.ts`.
+  ⭐ `knowledge/maths/4e/*` et `questionBank/4e/maths/*` sont à moi seul.
 • ⛔ Jamais --amend, reset --hard, checkout -- .
 • Le SITEMAP est génératif : une ligne au registre suffit.
 • Parité avant push :
