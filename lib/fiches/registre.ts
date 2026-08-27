@@ -599,6 +599,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Cinq lignes à noter en écoutant — le sujet, son avis, ses exemples, mes trous, mon désaccord — et les quatre visées : informer, convaincre, émouvoir, faire agir.",
   },
+  "francais/5e/oral-prendre-parole": {
+    titre: "Prendre la parole et interagir (2026-2027)",
+    resume:
+      "Présenter une lecture sans raconter la fin, justifier avec les trois pièces — l'avis, la raison, le passage —, enchainer dans un dialogue et tenir les règles du débat.",
+  },
 
   /* ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées, mais
      ni le registre ni le sitemap ne les déclaraient : le coach n'affichait
