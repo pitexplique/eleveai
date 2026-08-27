@@ -36,11 +36,59 @@
 //       Le champ existe depuis le 07/08 et ne servait qu'au filtre du
 //       professeur. C'est pourtant la seule ligne qui réponde à « et après ? »,
 //       et « et après ? » est la question de quelqu'un qui hésite à cliquer.
+//
+// ── ⭐ ET AU SURVOL, DE VRAIES CAPTURES (26/08/2026) ─────────────────────────
+// Frédéric : « quand la souris passe sur les cards il faut trois screenshots de
+// ce qui les attend », « un peu comme IXL lorsqu'on passe la souris sur une
+// compétence » — puis, une heure plus tard : « déjà un screenshot, voire deux
+// maximum ».
+//
+// Le « screenshot à gauche » de la demande du 22/08 avait été traité par un
+// DESSIN, et pour trois raisons chiffrées qui sont toujours en tête
+// d'ApercuRessource.tsx. Elles valent pour la vignette, qui s'affiche six fois
+// par écran, à tout le monde, à chaque question. Elles ne valent pas pour le
+// survol : celui-là ne coûte un octet qu'à qui a déjà choisi de regarder.
+//
+// La vignette dessinée reste donc exactement où elle était. Ce qui s'ajoute,
+// c'est une fenêtre qui s'ouvre à droite de la carte au passage de la souris —
+// et rien d'autre ne bouge : pas de décalage de mise en page, pas de clic à
+// donner, rien sur téléphone, rien pour les ressources sans capture.
+// Le détail est dans FenetreApercu.tsx, la fabrique dans
+// scripts/capturer-apercus.ts.
 
+import { useState } from "react";
 import Link from "next/link";
 import { track } from "@vercel/analytics";
 import ApercuRessource, { LIBELLE_RESULTAT, LIBELLE_TYPE } from "./ApercuRessource";
+import FenetreApercu from "./FenetreApercu";
+import { APERCUS } from "@/lib/matrice/apercus.generated";
 import type { ProfilId, Recommandation } from "@/lib/matrice/types";
+
+/**
+ * LA CONDITION DU SURVOL, POSÉE UNE FOIS — et elle est lue au MOMENT du survol,
+ * jamais au rendu.
+ *
+ * Interrogée pendant le rendu, elle mentirait : le serveur n'a pas de
+ * `window`, et React reprocherait au client de dire autre chose que lui
+ * (hydratation). Ici elle n'est appelée que depuis `onMouseEnter`, c'est-à-dire
+ * dans un navigateur, par quelqu'un qui a une souris.
+ *
+ * `(hover: hover)` écarte les téléphones : sur un écran tactile, `mouseenter`
+ * se déclenche À L'APPUI, juste avant que le lien s'ouvre. Sans ce garde-fou,
+ * chaque tap sur une carte téléchargerait une capture de 60 Ko que personne ne
+ * verrait jamais — l'aperçu est un supplément de bureau (décision du 26/08).
+ *
+ * ⚠️ 1536 px, C'EST `2xl` — le même seuil que le `2xl:block` de la fenêtre
+ * (FenetreApercu.tsx). Les deux disent la même chose à deux endroits, et il le
+ * faut : le CSS décide de ce qui se VOIT, ce test décide de ce qui se CHARGE.
+ * Sans lui, un écran de 1200 px téléchargerait des captures qu'il n'affiche
+ * jamais. Si l'un des deux chiffres bouge, l'autre bouge avec.
+ */
+function peutSurvoler() {
+  return typeof window !== "undefined"
+    ? window.matchMedia("(hover: hover) and (min-width: 1536px)").matches
+    : false;
+}
 
 export default function CarteRessource({
   r,
@@ -68,8 +116,51 @@ export default function CarteRessource({
   const resultat = r.ressource.resultat ? LIBELLE_RESULTAT[r.ressource.resultat] : null;
   const ouvreSur = r.ciblee && notionLabel ? notionLabel : null;
 
+  /**
+   * DEUX ÉTATS, ET PAS UN — c'est ce qui fait qu'un aperçu ne se paie qu'une
+   * fois et ne clignote jamais.
+   *
+   * `montee` : la fenêtre a été demandée au moins une fois. Elle reste montée
+   *   ensuite, donc l'image reste dans le cache du navigateur : un second survol
+   *   sur la même carte est instantané, et ne redemande rien au réseau.
+   * `ouverte` : la souris est DESSUS en ce moment. C'est ce booléen-là qui pilote
+   *   l'opacité et le minuteur des pastilles.
+   *
+   * ⚠️ Ne pas fusionner les deux en un seul. Avec un seul état, quitter la carte
+   * démonterait la fenêtre — et la revenir la ferait réapparaître par une image
+   * qui recharge, c'est-à-dire un blanc de 100 ms à chaque aller-retour de
+   * souris dans une pile de six cartes.
+   * ⚠️ Et ne pas monter la fenêtre d'avance « puisqu'elle est invisible » : une
+   * image dans le champ de vision est chargée, `lazy` ou pas. Six captures sur
+   * la page la plus vue du site, c'est exactement la facture qu'ApercuRessource
+   * refusait en tête de fichier.
+   */
+  const [montee, setMontee] = useState(false);
+  const [ouverte, setOuverte] = useState(false);
+  const aUnApercu = Boolean(APERCUS[r.ressource.id]);
+
+  function survoler() {
+    if (!aUnApercu || !peutSurvoler()) return;
+    setMontee(true);
+    setOuverte(true);
+  }
+
   return (
-    <li>
+    <li
+      // `relative` porte la fenêtre du survol, qui déborde à droite de la carte.
+      // ⚠️ Le survol est écouté sur le <li> et non sur le <Link> : le <Link> est
+      // le rectangle entier, mais c'est le <li> qui contient AUSSI la fenêtre.
+      // Accroché au lien, `onMouseLeave` se déclencherait au moment où la souris
+      // entre dans la fenêtre — sur une carte étroite, l'aperçu se fermerait
+      // sous le curseur.
+      className="relative"
+      onMouseEnter={survoler}
+      onMouseLeave={() => setOuverte(false)}
+      // Le clavier y a droit aussi : `focus` monte la même fenêtre. Elle reste
+      // `aria-hidden` — elle ne se lit pas, elle se regarde.
+      onFocus={survoler}
+      onBlur={() => setOuverte(false)}
+    >
       <Link
         // Une ressource externe s'ouvre dans un nouvel onglet et ne porte pas
         // `?from=ia` : ce paramètre ne sert qu'à notre suivi interne, et on ne
@@ -176,6 +267,12 @@ export default function CarteRessource({
           →
         </span>
       </Link>
+
+      {/* ⚠️ HORS DU <Link>, ET C'EST OBLIGATOIRE. Un <a> ne peut pas contenir
+          d'élément interactif, et surtout : la fenêtre déborde du rectangle
+          cliquable. Posée dedans, elle agrandirait la zone de clic de 95 px vers
+          la droite — un clic dans la gouttière ouvrirait la ressource. */}
+      {montee && <FenetreApercu id={r.ressource.id} ouverte={ouverte} />}
     </li>
   );
 }

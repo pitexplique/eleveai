@@ -63,6 +63,16 @@ export default function DevBanner({
         ].join(" ")}
         role="status"
         aria-live="polite"
+        /* ⚠️ HORS APERÇU (26/08/2026) — scripts/capturer-apercus.ts retire cet
+           élément avant de photographier une page. Ce bandeau est posé dans
+           app/layout.tsx, donc sur TOUTES les pages : sans ça, les aperçus de
+           survol des cartes de l'accueil montrent tous la même invitation à
+           installer l'application, en haut de chacun de leurs écrans, à la place
+           de ce qui distingue la ressource.
+           ⛔ Ne pas se contenter de `print:hidden` pour ça côté script : sur une
+           fiche de cours, `print:hidden` porte aussi le bouton PDF, la vidéo et
+           le pont vers le coach — qui sont, eux, ce que l'élève va trouver. */
+        data-hors-apercu=""
       >
         <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-3">
           {/* Message */}
