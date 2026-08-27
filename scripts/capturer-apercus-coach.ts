@@ -160,8 +160,21 @@ function dejaLa(c: Cible): string | null {
  */
 const aFaire = TOUTES.filter((c) => {
   if (filtres.length > 0) {
+    /**
+     * ⭐ TROIS GRAINS DE FILTRE, ET LE PLUS FIN EST LE PLUS UTILE.
+     *   « maths »                  toute la matière
+     *   « maths:5e »               une classe
+     *   « maths:5e:sym_centrale »  UNE notion
+     *
+     * Le troisième a été ajouté pour comparer deux façons de capturer sans
+     * refaire les 47 aperçus déjà bons — et il resservira à chaque fois qu'une
+     * notion seule échouera dans une grande fournée. Sans lui, la plus petite
+     * unité de travail était la classe, donc dix-neuf fichiers réécrits pour en
+     * corriger un.
+     */
     const cle = `${c.matiere}:${c.classe}`;
-    if (!filtres.some((f) => f === c.matiere || f === cle)) return false;
+    const cleNotion = `${cle}:${c.notion}`;
+    if (!filtres.some((f) => f === c.matiere || f === cle || f === cleNotion)) return false;
   }
   return tout ? true : !dejaLa(c);
 });
@@ -241,11 +254,30 @@ async function capturer(page: Page, c: Cible): Promise<{ octets: Buffer; ecrans:
   const vues: string[] = defaut === "complete" ? ["complete", "simple"] : ["simple"];
 
   const bandes: Buffer[] = [];
-  for (const vue of vues) bandes.push(await capturerUneVue(page, c, vue));
+  for (const vue of vues) {
+    // Le mode simple ne s'arrête sur l'invitation que s'il a un écran devant lui.
+    const demarrer = !(vue === "simple" && vues.length > 1);
+    bandes.push(await capturerUneVue(page, c, vue, demarrer));
+  }
   return { octets: await empiler(bandes), ecrans: bandes.length };
 }
 
-async function capturerUneVue(page: Page, c: Cible, vue: string): Promise<Buffer> {
+async function capturerUneVue(
+  page: Page,
+  c: Cible,
+  vue: string,
+  /**
+   * ⚠️ FAUT-IL DÉMARRER L'EXERCICE, OU S'ARRÊTER SUR L'INVITATION ?
+   *
+   * `true` partout, SAUF pour le mode simple quand il est le SECOND écran.
+   * La nuance n'est pas cosmétique : au primaire et sur les niveaux du CECRL,
+   * la vue simple est le SEUL écran. S'y arrêter sur l'invitation, ce serait
+   * montrer un bouton vert et rien d'autre — une notion qui ne montrerait
+   * aucun exercice. L'invitation est un BON DERNIER MOT ; elle ne peut pas
+   * être le seul mot.
+   */
+  demarrer: boolean,
+): Promise<Buffer> {
   /**
    * ⚠️ L'URL EST CELLE DU CLIC, `display` COMPRIS — sinon l'aperçu ment.
    *
@@ -411,39 +443,53 @@ async function capturerUneVue(page: Page, c: Cible, vue: string): Promise<Buffer
    * question se poser une fois le départ donné.
    */
   if (vue === "simple") {
-    /**
-     * ⚠️ ON ATTEND LE BOUTON, ON NE DEMANDE PAS S'IL EST DÉJÀ LÀ.
-     *
-     * Un `isVisible()` posé à l'arrivée sur la page ne mesure pas l'état de la
-     * page : il mesure à quel moment on a posé la question. React n'a pas fini
-     * de monter la vue, la réponse est « non », on ne clique pas — et on
-     * photographie l'écran de départ.
-     */
     const commencer = page.getByRole("button", { name: /^Commencer$/i }).first();
     const aDemarrer = await commencer
       .waitFor({ state: "visible", timeout: 12000 })
       .then(() => true)
       .catch(() => false);
-    if (aDemarrer) await commencer.click({ timeout: 15000 });
 
     /**
-     * ⚠️ PUIS ON ATTEND QUE L'ÉCRAN DE DÉPART S'EFFACE, PAS DEUX SECONDES.
+     * ⭐ ON S'ARRÊTE SUR L'INVITATION QUAND ELLE N'EST PAS LE SEUL MOT.
      *
-     * Il y avait ici un `waitForTimeout(2500)`, chronométré à la main. Ça
-     * marchait la plupart du temps et laissait des trous AU HASARD : sur le
-     * français de 5e, la seconde bande montrait « Prêt pour une question ? » et
-     * son bouton « Commencer » au lieu d'un exercice — la moitié du panneau ne
-     * montrait rien, et le fichier était d'un poids normal.
-     * La procédure ne change pas — ouvrir, cliquer, photographier ; c'est le
-     * chronomètre qui devient une vérification.
+     * « Prêt pour une question ? » et son bouton vert : c'est la PORTE, pas le
+     * travail. Quand le panneau a déjà montré deux énoncés au choix sur son
+     * premier écran, le second finit alors sur une invitation au lieu de finir
+     * sur plus de devoirs. Pour un panneau dont le seul travail est de faire
+     * cliquer, c'est le meilleur dernier mot.
+     *
+     * ⛔ CETTE IDÉE EST NÉE D'UN BOGUE, et il faut le savoir pour ne pas la
+     * « corriger » par mégarde. Une fournée interrompue a produit 58 captures de
+     * lycée montrant cet écran, avec une version du script qui oubliait de
+     * cliquer. Frédéric, 27/08 : « j'adore le Prêt pour une question », puis
+     * « c'est comme Marie Curie, j'ai l'impression qu'une erreur a donné la
+     * solution pour le mode simple ».
+     *
+     * ⚠️ ON NE SORT PAS D'ICI EN COURT-CIRCUIT. Une première écriture rendait la
+     * capture tout de suite — donc AVANT le retrait du chrome, et la bande
+     * montrait le bandeau d'installation, l'en-tête du site et la barre du
+     * tutor. On se contente de sauter le clic ; la suite de la fonction fait son
+     * travail habituel.
      */
-    await page.waitForFunction(
-      () => !document.body.innerText.includes("Prêt pour une question"),
-      undefined,
-      { timeout: 20000 },
-    );
-    // Le temps que l'énoncé se pose et que ses dessins se rendent.
-    await page.waitForTimeout(1000);
+    if (demarrer) {
+      if (aDemarrer) await commencer.click({ timeout: 15000 });
+
+      /**
+       * ⚠️ ON ATTEND QUE L'ÉCRAN DE DÉPART S'EFFACE, PAS DEUX SECONDES.
+       *
+       * Il y avait ici un `waitForTimeout(2500)`, chronométré à la main. Ça
+       * marchait la plupart du temps et laissait des trous AU HASARD : sur le
+       * français de 5e, la seconde bande montrait l'écran de départ au lieu d'un
+       * exercice — dans un fichier d'un poids parfaitement normal.
+       */
+      await page.waitForFunction(
+        () => !document.body.innerText.includes("Prêt pour une question"),
+        undefined,
+        { timeout: 20000 },
+      );
+      // Le temps que l'énoncé se pose et que ses dessins se rendent.
+      await page.waitForTimeout(1000);
+    }
   }
 
   /**
@@ -469,6 +515,14 @@ async function capturerUneVue(page: Page, c: Cible, vue: string): Promise<Buffer
   await page.addStyleTag({
     content: `
       [data-hors-apercu] { display: none !important; }
+      /* La console de developpement de Next : le badge N/1 Issue en bas a
+         gauche. Il vit dans un nextjs-portal avec un shadow DOM, donc le filtre
+         des elements fixes ne le voit pas (querySelectorAll ne traverse pas un
+         shadow root). Il n existe qu en developpement, mais les captures sont
+         fabriquees en developpement et partiraient en production avec lui.
+         ATTENTION : pas d accent grave dans ce commentaire, il est dans un
+         gabarit de chaine et le refermerait. */
+      nextjs-portal { display: none !important; }
       html { scroll-behavior: auto !important; }
       *, *::before, *::after {
         animation-duration: 0s !important;

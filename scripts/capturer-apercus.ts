@@ -314,6 +314,14 @@ async function capturer(page: Page, cible: Cible): Promise<{ octets: Buffer; ecr
   await page.addStyleTag({
     content: `
       [data-hors-apercu] { display: none !important; }
+      /* La console de developpement de Next : le badge N/1 Issue en bas a
+         gauche. Il vit dans un nextjs-portal avec un shadow DOM, donc le filtre
+         des elements fixes ne le voit pas (querySelectorAll ne traverse pas un
+         shadow root). Il n existe qu en developpement, mais les captures sont
+         fabriquees en developpement et partiraient en production avec lui.
+         ATTENTION : pas d accent grave dans ce commentaire, il est dans un
+         gabarit de chaine et le refermerait. */
+      nextjs-portal { display: none !important; }
       html { scroll-behavior: auto !important; }
       *, *::before, *::after {
         animation-duration: 0s !important;
