@@ -34,9 +34,55 @@ Cinq fiches écrites dans la foulée de cette passation, une par objectif du BO 
 | `vocabulaire_formation` | fabriquer un mot, éléments grecs et latins |
 | `vocabulaire_orthographe` | lettres muettes et homophones |
 
-**La 5e est donc à 13 notions fichées sur 28.** Reste : `discours_registres`,
-`conjugaison_formes`, `conjugaison_valeurs`, puis les douze transversales
-(lecture ×4, culture ×2, écriture ×3, oral ×3). La 6e n'est pas commencée.
+Puis `discours_registres`, et **LE DOMAINE DE L'ORAL EN ENTIER** —
+`lecture_voix_haute`, `oral_dire_jouer`, `oral_ecouter`, `oral_prendre_parole`.
+
+**La 5e est donc à 18 notions fichées sur 28.** Reste : `conjugaison_formes`,
+`conjugaison_valeurs`, `lecture_comprehension`, `lecture_apprecier`,
+`lecture_oeuvre_contextes`, `culture_connaissances`, `culture_entrees_5e`,
+`ecriture_reflechir`, `ecriture_produire`, `ecriture_reviser`. La 6e n'est pas
+commencée.
+
+### ⭐⭐ LE CROCHET DU CANVAS `phrase` A CINQ SENS — la découverte la plus rentable
+
+C'est ce qui a permis de ficher la voix et l'oral, que personne n'avait fichés :
+
+| ce que le crochet marque | où il a servi |
+|---|---|
+| une FONCTION grammaticale | toutes les fiches de langue |
+| une RESPIRATION (groupe de souffle) | la partition, 4e et 5e |
+| un DÉFAUT à nommer | « lu d'un trait » enjambant deux points |
+| LE CORPS sous la réplique | « il recule » sous « je n'ai peur de rien ! » |
+| CE QUE L'AUDITEUR DOIT FAIRE | « je sais », « j'adhère », « je fais » |
+
+Et **le crochet ABSENT est un diagnostic** : sur « il est courageux, voilà », un
+seul crochet au lieu de trois montre ce qui manque sans qu'on l'explique.
+
+⭐ **`tableau_donnees` est entré en français** (la grille de prise de notes). La
+matière n'avait que `phrase` et `conjugaison`. ⚠️ Cellules très courtes : à la
+largeur d'un bloc, vingt signes tombent sous le plancher de 11 px.
+
+### ⛔⛔ LA RÈGLE DE COULEUR, ET LE DÉFAUT QU'ELLE A ATTRAPÉ
+
+**Un crochet qui n'est pas une fonction DOIT RESTER GRIS.** `couleurFonction`
+déduit la couleur du `label` — et une étiquette « le sujet », posée sur le THÈME
+d'un exposé, est sortie en BLEU : le test est `includes("sujet")`. L'élève lisait
+la couleur de la fonction grammaticale sur un crochet qui n'en était pas une.
+
+⛔ Invisible dans le code, invisible au typecheck, invisible au vérificateur de
+dessins — **seul le rendu le montre.** Le contrôle à passer sur chaque fiche qui
+détourne le crochet, dans la console, page ouverte en 375 px :
+
+```js
+document.querySelectorAll('svg text').forEach(t => {
+  // toute étiquette de groupe non grammaticale doit valoir rgb(71, 85, 105)
+  console.log(t.textContent.trim(), getComputedStyle(t).fill);
+});
+```
+
+Renommer suffit : « le thème » ne tombe dans aucun test. ⚠️ Les mots piégés sont
+ceux des tests de `couleurFonction` : sujet, verbe, objet, cod, coi,
+circonstanciel, attribut, nom, épithète, expansion, proposition, coordination…
 
 ⛔ **AVANT D'ÉCRIRE UNE FICHE DE LEXIQUE, LIRE L'EN-TÊTE DES DEUX BANQUES.**
 Elles se partagent le domaine explicitement, et ne pas le lire fait écrire quatre
