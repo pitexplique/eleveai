@@ -220,8 +220,27 @@ POUR CHAQUE NOTION :
     dans index.ts.
  4. ⭐ ACCROCHER les nouvelles micros aux objectifs dans `bo-objectifs.ts` —
     sinon `verifier-bo.ts` les déclare hors programme, et il a raison.
- 5. FAIRE PASSER LES SEPT VÉRIFICATEURS — pas six.
- 6. Seulement ensuite : fiche, page, registre, PDF (voir la passation).
+ 5. ⭐⭐ LA MATRICE — l'étape la plus facile à oublier, et sans elle la notion
+    existe dans le coach mais personne ne peut y arriver. DEUX fichiers, tous
+    deux PARTAGÉS (donc `git diff -- <fichier>` avant de committer) :
+      a. `lib/matrice/coach.ts` — le pont « thème tapé » → notion ouverte, par
+         classe. ⛔ VÉRIFIÉ LE 27/08 : il n'existe AUCUN thème « puissances », et
+         le thème `calcul` s'arrête à la 6ᵉ. Un élève de 4ᵉ — ET DE 3ᵉ — qui tape
+         « puissances » n'ouvre rien, alors que la 3ᵉ a `entier_puissance` avec
+         59 items. Ajouter le thème avec LES DEUX classes d'un coup.
+         ⚠️ Ne jamais inventer un identifiant : les lire dans `notions.ts`.
+         `normalizeClasse()` a une whitelist et retombe EN SILENCE sur la 6ᵉ.
+      b. `node scripts/generer-notions-matrice.mjs` — régénère
+         `lib/matrice/notions.generated.ts` depuis les `notions.ts`.
+         ⛔ NE JAMAIS l'éditer à la main, l'en-tête le dit.
+ 6. FAIRE PASSER LES SEPT VÉRIFICATEURS — pas six.
+ 7. Seulement ensuite : fiche, page, registre, PDF (voir la passation).
+
+⚠️ LES APERÇUS NE SONT PAS DE CETTE SESSION. `public/apercus/coach/maths/4e/`
+est VIDE — zéro aperçu pour toute la 4ᵉ, alors qu'un élève sur deux quitte le
+coach. C'est le chantier de la session ÉCRAN (`scripts/capturer-apercus-coach.ts`,
+en cours sur la 5ᵉ le 27/08). ⛔ Ne pas y toucher : signaler la notion neuve et
+la laisser faire.
 
 ⚠️ Les `.mjs` de banque se lancent avec **tsx**, et leur ordre d'arguments est
 **<classe> <matière>** — l'INVERSE de `verifier-micros.mjs` :
