@@ -41,7 +41,19 @@ function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
 
+// ⭐ « LES CARRÉS PARFAITS DE 1 À 144 » EST UNE CONNAISSANCE DU BO (cycle 4,
+// p. 130) : ce sont les carrés de 1 à 12, et LE 1 EN FAIT PARTIE. Il manquait
+// ici — la table commençait à 2² — jusqu'au 27/08/2026. Ce n'est pas un détail
+// de complétude : 1² = 1 et √1 = 1 sont un point d'achoppement réel (beaucoup
+// d'élèves cherchent un nombre « plus petit »), et c'est le seul carré parfait
+// qu'aucun autre item du dépôt ne fait rencontrer.
+//
+// ⚠️ Au-delà de 144, la table ne sert plus la connaissance mais le THÉORÈME :
+// 13² = 169 est indispensable au triplet 5-12-13, et 14² et 15² accompagnent
+// les longueurs des figures. On les garde pour cette raison-là, pas au titre
+// des carrés parfaits du programme.
 const knownSquares = [
+  { n: 1, square: 1 },
   { n: 2, square: 4 },
   { n: 3, square: 9 },
   { n: 4, square: 16 },

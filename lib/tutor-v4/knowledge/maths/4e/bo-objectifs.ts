@@ -83,7 +83,7 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif: "Les carrés parfaits de 1 à 144.",
     page: 130,
     micros: ["pythagore_carre_racine"],
-    note: "⭐ COUVERT — et c'est une correction. `pythagore.bank.ts` porte une table `knownSquares` qui va de 2² à 15², donc au-delà des 144 du BO. ⚠️ Mais la micro est logée dans la notion `pythagore_theoreme` : les carrés parfaits ne s'y travaillent qu'au service du théorème, jamais comme objet de la notion « nombres ».",
+    note: "⭐ COUVERT par `pythagore.bank.ts` (table `knownSquares`). ⛔ MAIS ELLE COMMENÇAIT À 2² : « de 1 à 144 » inclut le 1, et il manquait — corrigé le 27/08/2026. Au-delà de 144 la table garde 13², 14² et 15², qui servent le THÉORÈME (le triplet 5-12-13) et non la connaissance du programme. ⚠️ Et la micro reste logée dans la notion `pythagore_theoreme` : les carrés parfaits ne s'y travaillent qu'au service du théorème, jamais comme objet de la notion « nombres ».",
   },
   {
     id: "4e-A-nombres-4",
