@@ -469,6 +469,17 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
       "Opposer les temps du récit et ceux du discours, séparer le décor de l'action, et choisir le temps qui convient au sens de la phrase.",
   },
 
+  /* ⭐ LA 6e SORT DE L'ÉTUDE DE LA LANGUE (26/08/2026). Ses neuf premières
+     fiches étaient toutes de grammaire ou de conjugaison ; les vingt notions
+     sans fiche sont la lecture, la culture, l'écriture, l'oral et le lexique.
+     ⛔ Programme du CYCLE 3 (BO n° 16 du 17 avril 2025) : ne jamais transposer
+     depuis la 5e, même quand la notion porte le même nom. */
+  "francais/6e/vocabulaire-enrichir": {
+    titre: "Comprendre un mot inconnu",
+    resume:
+      "Déduire le sens par la phrase ou par les morceaux du mot, vérifier avant de continuer, chercher en dernier — et reconnaitre un emploi au sens figuré.",
+  },
+
   /* ⭐ LA 5e OUVRE EN FRANÇAIS (24/08/2026). Elle avait vingt fiches de maths et
      aucune de français — alors qu'elle est la SEULE classe du collège déjà
      passée au programme neuf (BO n° 10 du 5 mars 2026, applicable à la rentrée
