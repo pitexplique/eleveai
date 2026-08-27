@@ -298,6 +298,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les aires",
     resume: "La surface occupée : rectangle, carré, triangle, parallélogramme, figures composées et unités.",
   },
+  "maths/4e/volume-solide": {
+    titre: "Les volumes",
+    resume: "Aire de base × hauteur : pavé droit, prisme, cylindre, cubes unités et unités de volume.",
+  },
   "maths/4e/prop-proportionnalite": {
     titre: "La proportionnalité",
     resume: "Reconnaître, le coefficient, le produit en croix, les pourcentages et les évolutions.",
