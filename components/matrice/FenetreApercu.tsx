@@ -116,11 +116,26 @@ export default function FenetreApercu({
   /** Où la fenêtre se pose dans son parent `relative`. Les cartes de l'accueil
    *  la centrent sur leur bord droit ; le coach la pose sous le titre. */
   position = "absolute right-3 top-1/2 -translate-y-1/2",
+  /**
+   * CE QUE MONTRE CHAQUE ÉCRAN, quand ça ne va pas de soi.
+   *
+   * Frédéric, 27/08 : « et si on rajoutait en en-tête Mode complet / Mode
+   * simple ? ». Sur le coach, les deux écrans ne sont pas deux moitiés d'une
+   * page mais DEUX VUES du tutor — et rien ne le disait. Les pastilles
+   * annoncent qu'il y a une suite, pas ce qu'elle contient : on regardait deux
+   * écrans différents sans savoir qu'on avait le choix entre les deux.
+   *
+   * ⚠️ Sur les cartes de l'accueil, on ne met rien : les deux écrans y sont le
+   * haut et le bas d'une même page, et « Écran 1 / Écran 2 » n'apprendrait rien
+   * à personne. Le libellé sert quand il NOMME quelque chose.
+   */
+  libelles,
 }: {
   src: string;
   ecrans: number;
   ouverte: boolean;
   position?: string;
+  libelles?: string[];
 }) {
   const [index, setIndex] = useState(0);
 
@@ -161,8 +176,12 @@ export default function FenetreApercu({
           arrivée d'un autre site. */}
       <div className="overflow-hidden border-2 border-[#1d1c16] bg-white shadow-[6px_6px_0_#1d1c16]">
         <div className="flex items-center justify-between gap-2 border-b-2 border-[#1d1c16]/15 bg-[#f6f4ee] px-2.5 py-1.5">
-          <span className="text-[10px] font-bold uppercase tracking-wide text-[#1d1c16]/55">
-            Aperçu
+          {/* ⚠️ Le libellé de l'écran COURANT, sinon « Aperçu ». Il change en
+              même temps que l'image : c'est lui qui fait comprendre que la
+              seconde pastille n'est pas la suite de la première, mais l'autre
+              façon de voir la même notion. */}
+          <span className="truncate text-[10px] font-bold uppercase tracking-wide text-[#1d1c16]/55">
+            {libelles?.[index] ?? "Aperçu"}
           </span>
           {/* Les pastilles. Une seule capture = une seule pastille, et elle dit
               alors « c'est tout », ce qui est une information honnête. */}

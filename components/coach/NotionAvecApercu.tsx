@@ -41,6 +41,26 @@ import { apercuNotion } from "@/lib/tutor-v4/apercus.generated";
  * ⚠️ 1024 px, c'est le `lg:block` de FenetreApercu. Le CSS décide de ce qui se
  * VOIT, ce test décide de ce qui se CHARGE. Si l'un bouge, l'autre bouge avec.
  */
+/**
+ * CE QUE DIT L'EN-TÊTE DE CHAQUE ÉCRAN (Frédéric, 27/08 : « et si on rajoutait
+ * en en-tête Mode complet / Mode simple ? »).
+ *
+ * ⚠️ LE NOMBRE D'ÉCRANS SUFFIT À SAVOIR LESQUELS, et ce n'est pas une devinette :
+ * c'est la règle de fabrication (scripts/capturer-apercus-coach.ts). Une notion
+ * dont la classe ouvre en vue complète est capturée deux fois, la vue par défaut
+ * d'abord — donc deux écrans, toujours dans cet ordre. Une classe qui n'a que la
+ * vue simple (le primaire, les niveaux du CECRL) n'en a qu'un, et c'est la
+ * simple. Il n'y a pas de troisième cas.
+ *
+ * ⛔ Ne pas remplacer ça par un champ dans le manifeste « pour être sûr » : un
+ * chiffre recopié à deux endroits finit par se contredire, alors qu'ici les deux
+ * faits n'en sont qu'un.
+ */
+const LIBELLES: Record<number, string[]> = {
+  1: ["Mode simple"],
+  2: ["Mode complet", "Mode simple"],
+};
+
 function peutSurvoler() {
   return typeof window !== "undefined"
     ? window.matchMedia("(any-hover: hover) and (min-width: 1024px)").matches
@@ -98,6 +118,7 @@ export default function NotionAvecApercu({
           ecrans={apercu.ecrans}
           ouverte={ouverte}
           position="absolute right-0 top-9"
+          libelles={LIBELLES[apercu.ecrans] ?? LIBELLES[1]}
         />
       )}
     </article>

@@ -411,11 +411,39 @@ async function capturerUneVue(page: Page, c: Cible, vue: string): Promise<Buffer
    * question se poser une fois le départ donné.
    */
   if (vue === "simple") {
+    /**
+     * ⚠️ ON ATTEND LE BOUTON, ON NE DEMANDE PAS S'IL EST DÉJÀ LÀ.
+     *
+     * Un `isVisible()` posé à l'arrivée sur la page ne mesure pas l'état de la
+     * page : il mesure à quel moment on a posé la question. React n'a pas fini
+     * de monter la vue, la réponse est « non », on ne clique pas — et on
+     * photographie l'écran de départ.
+     */
     const commencer = page.getByRole("button", { name: /^Commencer$/i }).first();
-    if (await commencer.isVisible().catch(() => false)) {
-      await commencer.click({ timeout: 15000 });
-    }
-    await page.waitForTimeout(2500);
+    const aDemarrer = await commencer
+      .waitFor({ state: "visible", timeout: 12000 })
+      .then(() => true)
+      .catch(() => false);
+    if (aDemarrer) await commencer.click({ timeout: 15000 });
+
+    /**
+     * ⚠️ PUIS ON ATTEND QUE L'ÉCRAN DE DÉPART S'EFFACE, PAS DEUX SECONDES.
+     *
+     * Il y avait ici un `waitForTimeout(2500)`, chronométré à la main. Ça
+     * marchait la plupart du temps et laissait des trous AU HASARD : sur le
+     * français de 5e, la seconde bande montrait « Prêt pour une question ? » et
+     * son bouton « Commencer » au lieu d'un exercice — la moitié du panneau ne
+     * montrait rien, et le fichier était d'un poids normal.
+     * La procédure ne change pas — ouvrir, cliquer, photographier ; c'est le
+     * chronomètre qui devient une vérification.
+     */
+    await page.waitForFunction(
+      () => !document.body.innerText.includes("Prêt pour une question"),
+      undefined,
+      { timeout: 20000 },
+    );
+    // Le temps que l'énoncé se pose et que ses dessins se rendent.
+    await page.waitForTimeout(1000);
   }
 
   /**
