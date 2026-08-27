@@ -42,7 +42,7 @@ Puis `discours_registres`, et **LE DOMAINE DE L'ORAL EN ENTIER** —
 `lecture_oeuvre_contextes`, `culture_connaissances`, `culture_entrees_5e`,
 `ecriture_reflechir`, `ecriture_produire`, `ecriture_reviser`.
 
-### ⭐ La 6e est ouverte, et son lexique est entier — 12 notions sur 29
+### ⭐ La 6e est ouverte : lexique ET étude de la langue entiers — 14 notions sur 29
 
 ⛔ **PREMIER RÉFLEXE, ET IL NE DONNE RIEN ICI : chercher les alias.** Sur la 4e
 ils ont fait passer le compteur de 16 à 19 sans écrire une ligne, et le CM2 de 7
@@ -76,7 +76,18 @@ plus, et c'est le moment où l'élève choisit seul.
 réécrits le 22/08 objectif par objectif contre le BO du cycle 3) plus le
 générateur `buildCycle3FrancaisBank`. On écrit depuis les items fixes.
 
-Reste en 6e : lecture ×6, écriture ×4, culture ×3, oral ×3, `grammaire_phrase`.
+Reste en 6e : lecture ×5, écriture ×4, culture ×3, oral ×3 — **tout est hors langue**.
+
+⭐⭐ **ET UNE NOTION QUI N'EXISTAIT NULLE PART : LA FLUENCE.** Aucune classe, du
+CP à la seconde, n'avait de fiche de fluidité de lecture — parce qu'elle
+n'existe qu'au CYCLE 3 et que les fiches de français se sont écrites de la 4e
+vers le bas. Une notion sans écho au cycle 4 n'a jamais croisé le chemin de
+personne. ⚠️ Chercher les autres notions dans ce cas avant d'attaquer le CM1 et
+le CM2.
+
+⭐ Sa découverte : **les groupes de SOUFFLE de la partition et les groupes de
+SENS de la fluence sont les mêmes groupes**. Le découpage inventé pour la voix en
+4e explique la vitesse de lecture, y compris silencieuse.
 
 ### ⭐⭐ LE CROCHET DU CANVAS `phrase` A CINQ SENS — la découverte la plus rentable
 
