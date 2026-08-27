@@ -1,9 +1,21 @@
 # Passation — la 4ᵉ maths, chantier en cours
 
 > Ouverte le 25/08/2026. **Cette note ne remplace pas `note-du-matin.md`** : trois
-> sessions travaillent dans le dossier (français 4ᵉ, français 3ᵉ, maths 4ᵉ), et la
-> note commune ne m'appartient pas. Celle-ci ne parle que des maths de 4ᵉ.
-> Commencer par `git pull`.
+> sessions travaillent dans le dossier, et la note commune ne m'appartient pas.
+> Celle-ci ne parle que des maths de 4ᵉ. Commencer par `git pull`.
+>
+> ⚠️ **L'ATTELAGE A CHANGÉ DANS LA JOURNÉE DU 26/08** (Frédéric) : ce n'est plus
+> « français 4ᵉ + français 3ᵉ + maths 4ᵉ », mais **écran d'accueil + français +
+> maths 4ᵉ**. Ça compte, parce que la session d'accueil ne touche pas aux mêmes
+> fichiers qu'une session de fiches : elle vit dans `app/page.tsx` et les
+> composants de la page d'entrée, là où les sessions de fiches vivent dans
+> `lib/fiches/` et `app/fiches-cours/`. Le seul terrain vraiment commun est
+> `lib/fiches/registre.ts` — et c'est justement lui qui a bougé sous ma main
+> trois fois aujourd'hui.
+>
+> ⛔ **NE PAS TOUCHER À L'ACCUEIL.** Une session y travaille, et le rebond de
+> 62 % est le chiffre qui l'arbitre : ce n'est pas un terrain qu'on modifie en
+> passant.
 
 ---
 
@@ -349,10 +361,20 @@ prive d'un dessin que là où il redirait le texte.** Onze visuels sur douze blo
 1. Lire les micros de la notion dans `knowledge/maths/4e/microSkills.ts`, et les
    nombres dans la banque (⚠️ **les nombres de la fiche sont ceux de la banque**).
 2. Écrire `lib/fiches/maths-4e-<notion>.tsx` + la page mince.
-3. Ajouter au **registre**, au **sitemap**, et ⛔ **retirer la notion du redirect
-   de `next.config.ts`** si elle y est — sinon l'adresse redirige vers le hub et
-   la fiche neuve est invisible. Sorties à ce jour : `pythagore-theoreme`,
-   `trigo-cosinus`. Restent éteintes : `stat-statistique`, `proba-experience`.
+3. Ajouter au **registre**, et ⛔ **retirer la notion du redirect de
+   `next.config.ts`** si elle y est — sinon l'adresse redirige vers le hub et la
+   fiche neuve est invisible. ✅ Plus aucune notion de 4ᵉ n'y est : les quatre
+   adresses éteintes sont revenues, seule la 3ᵉ reste.
+   ⭐ **LE SITEMAP N'EST PLUS À TOUCHER (26/08, seconde moitié de journée).** Une
+   autre session l'a rendu GÉNÉRATIF : `app/sitemap.ts` fait désormais
+   `Object.keys(FICHES_REGISTRE).map(...)`, et les sommaires de niveau se
+   déduisent des mêmes clés. **Une ligne au registre suffit** — la fiche est sur
+   le site ET au sitemap. Les lignes que j'y avais écrites à la main pour la
+   distributivité, les identités et la factorisation ont été remplacées par le
+   générateur : c'est normal, et il ne faut pas les remettre.
+   ⛔ Ce qui reste écrit à la main dans `ROUTES` et doit y rester : les quatre
+   portes (`/fiches-cours` et les trois sommaires de matière) et
+   `/fiches-cours/ia/livre`.
 4. `npx tsc --noEmit`, puis `node scripts/verifier-micros.mjs maths 4e`.
 5. **Rendre la page et la MESURER en 375 ET en 1280** : polices sous 11 px,
    chevauchements de `<text>`, débordements hors du `<svg>`.
@@ -373,6 +395,17 @@ prive d'un dessin que là où il redirait le texte.** Onze visuels sur douze blo
   `components/fiches/FicheCoursClient.tsx` et le nouveau
   `components/fiches/TexteMath.tsx`. Aucune ligne existante d'un autre chantier
   modifiée.
+  ⭐ **`sitemap.ts` SORT DE CETTE LISTE depuis qu'il est génératif** : il n'y a
+  plus rien à y ajouter pour une fiche. Le seul fichier vraiment disputé est
+  donc `registre.ts`, plus `pdf-disponibles.ts` que le script réécrit seul.
+- ⭐ **CE QUI REND LA COHABITATION SUPPORTABLE, mesuré sur trois câblages** : les
+  trois chantiers n'écrivent presque jamais dans les mêmes fichiers. L'accueil
+  vit dans `app/page.tsx`, les fiches dans `lib/fiches/` et `app/fiches-cours/`.
+  L'unique point de contact est `registre.ts`, et une relecture du diff juste
+  avant `git commit` a suffi à chaque fois — le fichier avait bougé les trois
+  fois, et les trois fois le diff ne contenait que mes lignes.
+  👉 **Il n'y a donc pas lieu d'arrêter les autres sessions** pour écrire une
+  fiche de maths : le coût de la cohabitation est une commande `git diff`.
 
 ## ⭐ LA RÈGLE DU CÂBLAGE, ÉCRITE APRÈS UN 404 ÉVITÉ DE JUSTESSE
 
@@ -382,9 +415,24 @@ le sitemap porte une URL morte. Un fichier sans route ne fait qu'attendre.
 Le contrôle, avant chaque `push` :
 ```
 git show HEAD:lib/fiches/registre.ts | grep -c '"maths/4e/'
-git ls-files app/fiches-cours/maths/4e/ | wc -l
+git ls-files app/fiches-cours/maths/4e/ \
+  | grep -v '^app/fiches-cours/maths/4e/page.tsx$' | grep -c '/page.tsx$'
 ```
-**Les deux nombres doivent être égaux** — 15 et 15 au soir du 26/08.
+**Les deux nombres doivent être égaux** — 15 et 15, mesuré au soir du 26/08.
+
+⚠️ **LA SECONDE COMMANDE A ÉTÉ CORRIGÉE DEUX FOIS, ET LES DEUX PREMIÈRES
+VERSIONS MENTAIENT.** La v1 comptait `… | wc -l` tout court et répondait **16
+contre 15** : non parce qu'une fiche manquait au registre, mais parce qu'une
+autre session a ajouté **`app/fiches-cours/maths/4e/page.tsx`, le sommaire de la
+classe**, qui vit dans le même dossier sans être une fiche. La v2 filtrait sur
+`/page.tsx$` — et le sommaire finit lui aussi par `/page.tsx`, donc elle
+répondait 16 elle aussi. **Il faut exclure le chemin exact du sommaire, pas un
+motif.** La v3 ci-dessus a été LANCÉE avant d'être écrite ici.
+
+⭐ La leçon vaut plus que la commande : **un contrôle se re-mesure le jour où le
+dossier qu'il compte change de contenu**, et une correction de contrôle se
+vérifie en la lançant. Un contrôle qui crie au loup pour une raison saine est
+pire qu'aucun contrôle — le prochain qui le verra rouge le désactivera.
 
 ⚠️ Et **relire le diff d'un fichier partagé JUSTE AVANT le `git commit`** :
 `git add` prend le fichier tel qu'il est à cet instant, pas tel qu'on l'a lu. Les
