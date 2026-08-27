@@ -111,6 +111,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "triangles-5e-cours-exercices-corriges.pdf",
   "triangles-6e-cours-exercices-corriges.pdf",
   "valeur-des-temps-raconter-ou-parler-6e-cours-exercices-corriges.pdf",
+  "volumes-4e-cours-exercices-corriges.pdf",
   "volumes-5e-cours-exercices-corriges.pdf",
   "volumes-6e-cours-exercices-corriges.pdf",
 ]);
