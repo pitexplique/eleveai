@@ -647,6 +647,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Présenter une lecture sans raconter la fin, justifier avec les trois pièces — l'avis, la raison, le passage —, enchainer dans un dialogue et tenir les règles du débat.",
   },
+  "francais/5e/conjugaison-formes": {
+    titre: "La composition d'une forme verbale (2026-2027)",
+    resume:
+      "Trois places — radical, marque de temps, marque de personne —, l'infinitif qui se cache au passé simple, et les radicaux qui changent selon la personne.",
+  },
 
   /* ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées, mais
      ni le registre ni le sitemap ne les déclaraient : le coach n'affichait
