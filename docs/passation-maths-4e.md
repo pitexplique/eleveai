@@ -22,11 +22,27 @@
 ## Où on en est
 
 ```
-maths 4e   16 fiches sur 20   ·   micros 108/108   ·   16 PDF   ·   tout est poussé
+maths 4e   ✅ 20 fiches sur 20   ·   micros 136/136   ·   20 PDF   ·   tout est poussé
 ```
 
 ⚠️ **VINGT et non plus dix-neuf** : les fractions ont été scindées en deux le
 26/08 (voir plus bas).
+
+## ✅✅ LE CHANTIER EST TERMINÉ (26/08/2026, en fin de journée)
+
+**Les vingt notions de la 4ᵉ maths ont leur fiche**, mesurée aux deux largeurs,
+câblée au registre et livrée en PDF. `verifier-micros` répond **136/136** : plus
+une seule micro-compétence de la banque de 4ᵉ n'est sans bloc de cours.
+
+⭐ **CE QU'IL RESTE À FAIRE N'EST PLUS DE LA RÉDACTION.** Les quatre trous mesurés
+dans la BANQUE (puissances et notation scientifique, racine carrée, divisibilité
+et nombres premiers, fonctions) sont toujours là, et la décision de Frédéric
+tient : **banque d'abord, fiche ensuite**. Une fiche sans banque ne s'allume pas
+dans le coach. Idem pour les deux compléments — cas d'égalité des triangles,
+repérage dans l'espace. Le prochain chantier de 4ᵉ commence donc par des énoncés,
+pas par des dessins.
+
+---
 
 ### ✅ LE BLOC ALGÈBRE EST COMPLET (26/08, seconde session)
 
@@ -111,6 +127,10 @@ distingue la dégradation du serveur d'un vrai défaut de la fiche.
 
 | fiche | notion | état |
 |---|---|---|
+| Algorithmique | `algo-programmation` | ✅ publiée, mesurée, PDF (26/08) |
+| Volumes | `volume-solide` | ✅ publiée, mesurée, PDF (26/08) |
+| Aires | `aire-surface` | ✅ publiée, mesurée, PDF (26/08) |
+| Périmètres | `aire-perimetre` | ✅ publiée, mesurée, PDF (26/08) |
 | Équations | `equation-resolution` | ✅ publiée, mesurée, PDF (26/08) |
 | Distributivité | `litteral-distributivite` | ✅ publiée, mesurée, PDF (26/08) |
 | Identités remarquables | `litteral-identite-remarquable` | ✅ publiée, mesurée, PDF (26/08) |
@@ -132,18 +152,66 @@ distingue la dégradation du serveur d'un vrai défaut de la fiche.
 est **entièrement levé pour la 4ᵉ** : les quatre adresses éteintes sont revenues.
 Seule la 3ᵉ y reste.
 
-**Restent 4 notions**, et l'algèbre n'y est plus pour rien :
-`aire_perimetre`, `aire_surface`, `volume_solide`, `algo_programmation`.
-👉 ⭐ **LES TROIS FICHES DE GRANDEURS D'ABORD**, et dans cet ordre — périmètre,
-aire, volume — parce qu'elles s'enchaînent comme l'algèbre s'est enchaînée : le
-tour d'une figure, puis sa surface, puis son volume. `figure_libre` sait
-carreler une surface et en tracer le contour d'un seul trait, donc **le même
-dessin peut porter le périmètre ET l'aire** — c'est la parade éprouvée cinq fois
-aujourd'hui, garder l'objet et changer l'information.
-⛔ **`solide_3d` NE SE LAISSE PAS RÉTRÉCIR** : réduire sa `size` ROGNE au lieu de
-mettre à l'échelle, la seule commande est la POLICE.
-👉 Enfin `algo_programmation`, avec le canvas `scratch` — le seul de la liste qui
-n'ait encore jamais servi en 4ᵉ. **Le mesurer tôt**, pas à la fin.
+**Il ne reste aucune notion.** Les vingt sont écrites.
+
+⭐ **CE QUE LES TROIS FICHES DE GRANDEURS ONT APPRIS.** Elles ont été écrites dans
+l'ordre périmètre → aire → volume, et cet ordre EST le contenu :
+
+1. ⭐ **LE MÊME DESSIN PORTE DEUX GRANDEURS.** La figure en L et le rectangle
+   8 × 3 servent dans la fiche des périmètres ET dans celle des aires. Là-bas on
+   compte le trait rouge (18 et 22) ; ici on compte les carreaux (14 et 24), et
+   le contour est ÉTEINT (`showPerimeter: false`) pour que le regard aille à
+   l'intérieur. **C'est la seule façon de tuer la confusion pour de bon** : deux
+   nombres différents lus sur la même figure.
+2. ⭐ **`figure_libre` NE MONTRE PAS LA PROPRIÉTÉ, IL LA FAIT.** `showPerimeter`
+   SANS `perimeterPath` trace le contour arête par arête, en ne gardant que
+   celles qui n'ont pas de voisine remplie. Deux formes séparées → deux contours.
+   Deux formes accolées → **le côté commun saute tout seul**. La propriété « les
+   côtés cachés ne comptent pas » est donc exécutée par le canvas, pas illustrée.
+3. ⭐ **ON COMPTE LES SEGMENTS ROUGES DU DOM POUR VÉRIFIER UN PÉRIMÈTRE**, plutôt
+   que de se relire :
+   ```js
+   [...svg.querySelectorAll('line')].filter(l => l.getAttribute('stroke') === '#dc2626').length
+   ```
+   Cela a confirmé 18, 22, 26 et 40 = 20 + 20. **Un nombre annoncé dans une
+   légende doit être compté dans le DOM.**
+4. ⛔ **UN DÉFAUT QUE LE MESUREUR NE VOIT PAS : L'ÉTIQUETTE DANS LA MAUVAISE
+   RÉGION.** Les deux « 20 » du triangle coupé par sa diagonale tombaient dans la
+   MÊME moitié. Le mesureur compte les polices, les chevauchements et les
+   débordements du CADRE — il ignore l'appartenance à une région. Il faut
+   comparer à la main l'ordonnée du libellé à celle de la diagonale au même x.
+5. ⛔⛔ **`solide_3d` : NE JAMAIS PASSER DE `size`.** Ses sommets sont des
+   constantes en pixels ; réduire `size.width` ROGNE au lieu de mettre à
+   l'échelle, en silence et sans faire baisser la police. On garde le 340 par
+   défaut, et c'est la carte qui met le SVG entier à l'échelle : 19 × 222/340 =
+   12,4 px. ⚠️ Et ses libellés se touchent — sur un cylindre, celui de la base est
+   à 20 px de celui du rayon, **quel que soit le texte**. La seule sortie est
+   `showLabels: false`, qui n'éteint QUE l'étiquette de base : les cotes passent
+   par `showDimensions`, la face reste colorée par `highlight.base`. Sur le pavé,
+   imposer un `labels.aireBase` court (« base 4 × 3 ») suffit — le défaut « base
+   rectangulaire », 18 signes, débordait sur la cote de largeur.
+6. ⛔⛔ **`scratch` REND EN HTML : LE MESUREUR NE VOIT RIEN.** Sur la fiche
+   d'algorithmique il compte **0 SVG** et répond « 0 petite, 0 chevauchement, 0
+   débordement » sans avoir regardé un seul bloc. Le danger n'y est pas la police
+   (14 et 12 px, fixes) mais le DÉBORDEMENT : chaque bloc est en `w-fit`, son
+   retrait vaut `profondeur × 14` pixels, et rien ne le contraint à sa carte.
+   👉 **Contrôle dédié**, à passer sur toute fiche qui emploie `scratch` :
+   ```js
+   (() => { let marge = 1e9, quoi = '', deborde = 0, blocs = 0;
+     document.querySelectorAll('div.max-w-\[380px\]').forEach((carte) => {
+       const cs = getComputedStyle(carte), r = carte.getBoundingClientRect();
+       const droite = r.right - parseFloat(cs.paddingRight) - parseFloat(cs.borderRightWidth);
+       carte.querySelectorAll('div').forEach((b) => {
+         if (!b.className.includes('w-fit')) return; blocs++;
+         const m = +(droite - b.getBoundingClientRect().right).toFixed(1);
+         if (m < 0) deborde++;
+         if (m < marge) { marge = m; quoi = b.textContent.trim().slice(0, 40); } }); });
+     return { blocs, deborde, margeLaPlusFaible: marge, blocLePlusLarge: quoi }; })()
+   ```
+   Mesuré sur la fiche : 56 blocs, 0 débordement, marge minimale **20,1 px** en
+   375 et **22,4 px** en 1280. Le libellé par défaut de `event` — « 🟩 quand
+   drapeau vert cliqué », 28 signes — était le seul à déborder ; remplacé partout
+   par « 🟩 quand on clique ».
 
 ⭐ **Le rythme mesuré** : les deux premières fiches ont demandé **trois passes de
 mesure chacune** ; toutes les suivantes sont passées **du premier coup ou en une
