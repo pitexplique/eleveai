@@ -483,6 +483,16 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Déduire le sens par la phrase ou par les morceaux du mot, vérifier avant de continuer, chercher en dernier — et reconnaitre un emploi au sens figuré.",
   },
+  "francais/6e/vocabulaire-relations": {
+    titre: "Les mots entre eux, et comment ils sont faits",
+    resume:
+      "Le contraire garde la classe du mot, le champ lexical mélange les classes — et un mot est simple, dérivé ou composé selon que ses morceaux existent seuls.",
+  },
+  "francais/6e/vocabulaire-emploi": {
+    titre: "Employer le mot juste",
+    resume:
+      "La place de chaque classe de mot, le registre choisi d'après le destinataire, le sens que la phrase désigne, et les pièges des mots fréquents.",
+  },
 
   /* ⭐ LA 5e OUVRE EN FRANÇAIS (24/08/2026). Elle avait vingt fiches de maths et
      aucune de français — alors qu'elle est la SEULE classe du collège déjà
