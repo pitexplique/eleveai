@@ -520,15 +520,64 @@ Mesuré micro par micro contre les **douze attendus de fin de cycle** :
 
 ⚠️ **LA LECTURE FIDÈLE DU BO A FAIT APPARAÎTRE CINQ TROUS DE PLUS** que les
 quatre connus (ratio, grandeurs produit/quotient, agrandissement-réduction,
-repérage dans l'espace, cas d'égalité des triangles). Le chiffre de « 75 % »
-retenu jusqu'ici reposait sur une lecture plus grossière ; en comptant les
-partiels pour moitié, on tombe plutôt autour de **60 %**.
+repérage dans l'espace, cas d'égalité des triangles).
 ⛔ Mais le pourcentage vaut moins que la LISTE : c'est elle qui se traite.
-- Thème C : Grandeurs et mesures
-- Thème D : Espace et géométrie
-  ⭐ **PRIORITÉ** : la 4ᵉ puce de « Triangle », que l'extraction perd dans les
-  deux PDF (`- Triangle : o … ; o hauteurs et médiatrices ; o inégalité
-  triangulaire ; o ??? ; o triangles semblables`). C'est le dernier point du
-  programme qui reste inconnu — il décide si les CAS D'ÉGALITÉ DES TRIANGLES
-  sont au programme du cycle 4.
-- Thème E : Algorithmique et programmation
+
+---
+
+# ⭐ CE TABLEAU EST PÉRIMÉ — LA MESURE EST DÉSORMAIS DANS LE DÉPÔT
+
+Le 27/08/2026, ce document a été transposé en donnée :
+**`lib/tutor-v4/knowledge/maths/4e/bo-objectifs.ts`**, une entrée par PUCE du BO,
+connaissances ET compétences associées, avec la page.
+
+```
+npx --yes tsx@4 scripts/verifier-bo.ts 4e
+→ 111 objectifs d'apprentissage · 136 micro-compétences
+  59/111 objectifs couverts (53 %) — 52 trous
+  0 micro citée mais inexistante · 0 micro hors programme
+```
+
+⛔ **NE PLUS ESTIMER LE POURCENTAGE À LA MAIN.** Les trois chiffres successifs
+— 75 %, puis ~60 %, puis 53 % — ne mesuraient pas la même chose et aucun n'était
+reproductible. Celui-là se rejoue en une commande, et il descend au grain de la
+puce : « cas d'égalité des triangles » est une puce, et c'est en tant que puce
+qu'elle manque.
+
+## ⚠️ Deux entrées de la liste des neuf étaient FAUSSES
+
+Vérifié item par item dans les banques, pas seulement par recherche de mot :
+
+| annoncé absent | réalité |
+|---|---|
+| racine carrée, carrés parfaits de 1 à 144 | ⭐ **COUVERT.** `pythagore_carre_racine` a six items et un gabarit ; la table `knownSquares` va de 2² à 15², donc **au-delà** des 144 du BO. ⚠️ Mais la micro vit dans la notion `pythagore_theoreme` : les carrés ne s'y travaillent qu'au service du théorème. |
+| fraction irréductible | ⭐ **COUVERT.** `fraction_simplifier` définit l'irréductibilité et fait reconnaître une fraction déjà irréductible. C'est le seul point de tout l'attendu « divisibilité » qui existe. |
+
+👉 **Conséquence sur l'ordre d'attaque** : les PUISSANCES restent la valeur sûre
+à créer ; la RACINE CARRÉE n'est plus une création mais une **consolidation** —
+sortir la micro de Pythagore, ou lui ajouter le hors-géométrie (x² = a).
+
+## ⚠️ Et le BO en a fait apparaître d'autres, jamais listés
+
+Trous que ni la liste des quatre ni celle des neuf ne contenaient :
+
+- ordres de grandeur associés à des objets ; vraisemblance d'un résultat ;
+- **annulation d'un produit**, équations produits, équations du type x² = a ;
+- recueillir et organiser des données ; **histogramme** ; lien **fréquence ↔ probabilité** ;
+- conversions de **longueurs et d'aires** (seuls les volumes convertissent) ;
+- vérifier la **cohérence des unités** ;
+- **reconnaître** un solide ; patrons et perspective cavalière ;
+- **angles alternes internes et correspondants** ; somme des angles du triangle en 4ᵉ ;
+- **hauteurs et médiatrices** du triangle ; inégalité triangulaire ; triangles semblables ;
+- **homothétie** ; protocole de construction ;
+- déclenchement d'une action par un **événement** ; latitude et longitude.
+
+## ⛔ Un bogue de coordonnées à corriger AVANT d'ouvrir le repérage
+
+`4e_sym_translation_tpl_2_coordonnees` et `4e_sym_translation_tpl_4`
+(`transformations.bank.ts`) comptent l'ordonnée **vers le bas** — « ordonnée
+écran ». Dans un repère, « vers le haut » AUGMENTE l'ordonnée. Résultat : la
+réponse mathématiquement juste est proposée comme **leurre**, et l'élève qui a
+raison est compté faux. C'est aussi le seul endroit du coach de 4ᵉ où les mots
+« abscisse » et « ordonnée » apparaissent — donc le trou du repérage se
+comblerait par-dessus une erreur.

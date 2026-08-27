@@ -30,7 +30,7 @@
 import { loadKnowledgeV4 } from "@/lib/tutor-v4/loaders/loadKnowledgeV4";
 
 /** Les classes dont le programme a été écrit comme une donnée. */
-const CLASSES_OUTILLEES = ["cm2", "6e"] as const;
+const CLASSES_OUTILLEES = ["cm2", "6e", "4e"] as const;
 
 type ObjectifBO = {
   id: string;
@@ -52,9 +52,18 @@ type Programme = {
 async function chargerProgramme(classe: string): Promise<Programme | null> {
   try {
     const mod = await import(`@/lib/tutor-v4/knowledge/maths/${classe}/bo-objectifs`);
+    // ⚠️ `v.length > 0` N'EST PAS UNE PRÉCAUTION DÉCORATIVE (27/08/2026). Les
+    // exports d'un module sont énumérés dans l'ORDRE ALPHABÉTIQUE, donc
+    // `microsHorsProgramme…` passe avant `objectifsBO…` — et un tableau VIDE
+    // satisfait `every()`. Sans ce garde-fou, une classe sans dette déclarée
+    // lisait zéro objectif, annonçait « 0/0 » et déclarait tout le coach hors
+    // programme. C'est exactement le genre de silence que ce script existe pour
+    // interdire : il l'a produit lui-même sur la 4e.
     const objectifs = Object.values(mod).find(
       (v): v is ObjectifBO[] =>
-        Array.isArray(v) && v.every((o) => o && typeof o === "object" && "objectif" in o)
+        Array.isArray(v) &&
+        v.length > 0 &&
+        v.every((o) => o && typeof o === "object" && "objectif" in o)
     );
     const horsProgramme =
       Object.values(mod).find(
