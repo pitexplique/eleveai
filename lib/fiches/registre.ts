@@ -657,6 +657,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "L'imparfait installe, le passé simple fait avancer, le temps composé dit l'accompli — et le mode se choisit sur l'intention : ordonner, supposer, souhaiter.",
   },
+  "francais/5e/lecture-comprehension": {
+    titre: "Comprendre et interpréter un texte (2026-2027)",
+    resume:
+      "Les cinq moments du récit, l'endroit où retourner chercher selon la question, et ce que le texte fait comprendre sans l'écrire — avec l'endroit qui le prouve.",
+  },
 
   /* ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées, mais
      ni le registre ni le sitemap ne les déclaraient : le coach n'affichait
