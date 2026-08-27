@@ -26,7 +26,7 @@
 // c'est la façon normale de le dire.
 
 import { useState } from "react";
-import FenetreApercu from "@/components/matrice/FenetreApercu";
+import FenetreApercu, { type Libelle } from "@/components/matrice/FenetreApercu";
 import { apercuNotion } from "@/lib/tutor-v4/apercus.generated";
 
 /**
@@ -41,6 +41,12 @@ import { apercuNotion } from "@/lib/tutor-v4/apercus.generated";
  * ⚠️ 1024 px, c'est le `lg:block` de FenetreApercu. Le CSS décide de ce qui se
  * VOIT, ce test décide de ce qui se CHARGE. Si l'un bouge, l'autre bouge avec.
  */
+function peutSurvoler() {
+  return typeof window !== "undefined"
+    ? window.matchMedia("(any-hover: hover) and (min-width: 1024px)").matches
+    : false;
+}
+
 /**
  * CE QUE DIT L'EN-TÊTE DE CHAQUE ÉCRAN (Frédéric, 27/08 : « et si on rajoutait
  * en en-tête Mode complet / Mode simple ? »).
@@ -56,16 +62,25 @@ import { apercuNotion } from "@/lib/tutor-v4/apercus.generated";
  * chiffre recopié à deux endroits finit par se contredire, alors qu'ici les deux
  * faits n'en sont qu'un.
  */
-const LIBELLES: Record<number, string[]> = {
-  1: ["Mode simple"],
-  2: ["Mode complet", "Mode simple"],
+const MODE_SIMPLE: Libelle = {
+  texte: "Mode simple",
+  icone: "une-question",
+  // L'olive du badge « testée en classe » : la couleur du travail relu.
+  fond: "#ecf2e2",
+  encre: "#3f6b0c",
+};
+const MODE_COMPLET: Libelle = {
+  texte: "Mode complet",
+  icone: "manette",
+  // L'indigo du bandeau de mission du tutor — c'est l'écran qu'on montre.
+  fond: "#e6e8fb",
+  encre: "#4338ca",
 };
 
-function peutSurvoler() {
-  return typeof window !== "undefined"
-    ? window.matchMedia("(any-hover: hover) and (min-width: 1024px)").matches
-    : false;
-}
+const LIBELLES: Record<number, Libelle[]> = {
+  1: [MODE_SIMPLE],
+  2: [MODE_COMPLET, MODE_SIMPLE],
+};
 
 export default function NotionAvecApercu({
   matiere,

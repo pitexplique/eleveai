@@ -39,24 +39,109 @@
 // le premier écran — celui qui dit ce que c'est — n'est visible qu'une fois.
 //
 // ── CE QUI NE S'AFFICHE PAS, ET CE N'EST PAS UN OUBLI ────────────────────────
-// ⛔ RIEN SOUS 1536 px (`2xl`). Deux raisons, et la seconde est mécanique :
-//    — sous cette largeur, une fenêtre de 340 px couvre la moitié de la carte
-//      qu'on est en train de lire ;
-//    — la fenêtre déborde de 28 % à droite de la carte, dans la gouttière. À
-//      1536 px cette gouttière fait ~150 px et la fenêtre y tient. Plus étroit,
-//      elle sortirait de la page et fabriquerait une barre de défilement
-//      horizontale sur l'accueil.
-// ⛔ RIEN AU DOIGT. `(hover: hover)` : sur téléphone, le premier appui doit
-//    OUVRIR la ressource, pas déplier un aperçu. C'est la décision du 26/08 —
-//    l'aperçu est un supplément de bureau, et l'écran d'un téléphone n'a pas
-//    300 px à donner à une image que personne n'a demandée.
-// ⛔ RIEN POUR QUI N'A PAS DE CAPTURE. `bandeApercu()` rend `null` : la carte
-//    reste exactement ce qu'elle était. Aucune carte n'attend un fichier.
+// ⛔ RIEN SOUS 1024 px (`lg`). Le seuil a été 1536 px (`2xl`) pendant une demi-
+//    journée, et c'était un mauvais réglage déguisé en décision : la fenêtre
+//    débordait alors de 28 % dans la gouttière de la page, et il fallait un
+//    grand écran pour que ce débordement ne fabrique pas une barre de
+//    défilement horizontale. On réglait ce qui SE VOIT sur une contrainte de
+//    PLACEMENT — et on excluait tous les portables, c'est-à-dire l'essentiel
+//    des gens qui ont une souris. La fenêtre se pose maintenant à l'intérieur de
+//    son parent : le seuil est redevenu une question de lisibilité.
+// ⛔ RIEN AU DOIGT. Les appelants testent `any-hover: hover` avant de monter
+//    quoi que ce soit : sur un écran tactile, `mouseenter` se déclenche À
+//    L'APPUI, juste avant que le lien s'ouvre — chaque tap téléchargerait une
+//    capture que personne ne verrait. `any-hover` et non `hover` : un portable
+//    tactile déclare parfois son pointeur principal comme tactile, et l'aperçu
+//    ne se montait alors jamais sur ces machines-là.
+// ⛔ RIEN POUR QUI N'A PAS DE CAPTURE. L'appelant résout son chemin et ne monte
+//    rien s'il n'y en a pas : la carte reste exactement ce qu'elle était.
 
 import { useEffect, useState } from "react";
 
 /** ~2,2 s par écran : le temps de lire une question, pas celui de s'ennuyer. */
 const DUREE = 2200;
+
+/**
+ * CE QUE DIT L'EN-TÊTE D'UN ÉCRAN — un mot, un dessin, une couleur.
+ *
+ * Frédéric, 27/08 : « change aussi la couleur, que ce soit plus fun ».
+ *
+ * Le gris de départ disait « métadonnée ». Or ce libellé porte une INFORMATION
+ * que l'élève peut utiliser : il y a deux façons de travailler cette notion, et
+ * il a le droit de choisir. Une pastille colorée avec un dessin se lit d'un
+ * coup d'œil ; « APERÇU » en gris à 10 px ne se lisait pas du tout.
+ *
+ * ⚠️ Les couleurs sortent de ce qui existe déjà : l'olive du badge « testée en
+ * classe » pour le mode simple, et l'indigo du bandeau de mission du tutor pour
+ * le mode complet — parce que c'est littéralement l'écran qu'on montre.
+ */
+export type Libelle = {
+  texte: string;
+  icone?: "une-question" | "manette";
+  /** Le fond de la pastille et son encre — écrits en dur, pas en opacité : la
+   *  fenêtre a une ombre portée pleine, et une pastille translucide y laisserait
+   *  transparaître la carte au survol. */
+  fond?: string;
+  encre?: string;
+};
+
+/**
+ * LE CHIFFRE 1 — une question à la fois, et c'est TOUTE la différence.
+ *
+ * Le mode complet propose deux énoncés au choix ; le mode simple en pose un,
+ * choisi pour l'élève. Ce chiffre dit exactement ça, et rien d'autre : ni un
+ * niveau, ni une facilité.
+ *
+ * ⚠️ ET SURTOUT PAS UNE ICÔNE DE « DÉBUTANT ». Frédéric, 27/08 : « faut pas
+ * oublier que même dans le mode simple il y a un score ». Un sablier, une plume,
+ * une roue d'entraînement laisseraient croire à un bac à sable où rien ne
+ * compte — c'est faux, et ça découragerait précisément l'élève qu'on veut faire
+ * entrer.
+ *
+ * ⛔ TROIS DESSINS ONT ÉTÉ ESSAYÉS PUIS REPOSÉS, à ne pas retenter :
+ *   — un margouillat en aplat, puis au trait (« un margouillat en svg », puis
+ *     « pas obligatoirement margouillat »). À 14 px on lisait un gribouillis,
+ *     puis une clé. Ce n'est pas le trait qui manquait : la silhouette d'un
+ *     lézard a besoin de place pour se dire. Ti Margo garde ses PNG, où il a la
+ *     taille de vivre (public/cahier-vacances/) ;
+ *   — un point d'interrogation : « mauvaise idée » ;
+ *   — une cible avec sa flèche, dessinée en trois variantes. Lisible, mais
+ *     c'est DÉJÀ le dessin des défis sur l'accueil (ApercuRessource.tsx,
+ *     `case "defi"`). Le même dessin aurait voulu dire deux choses sur le même
+ *     site.
+ *
+ * Le tracé est écrit à la main plutôt qu'importé de lucide : ce composant sert
+ * AUSSI aux cartes de l'accueil, la page dont on surveille le rebond, et on n'y
+ * ajoute pas un import pour deux traits.
+ */
+function UneQuestion({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="12" cy="12" r="10" />
+      {/* Le 1 avec son empattement d'attaque : sans lui, un simple trait
+          vertical se lit comme une barre, pas comme un chiffre. */}
+      <path d="M10.6 8.6 12.6 7.4V17" />
+    </svg>
+  );
+}
+
+/** Une manette : le mode complet, c'est celui où on a les commandes. */
+function Manette({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="currentColor">
+      <path d="M7.5 6h9a5.5 5.5 0 0 1 5.4 4.5l.9 5a3.1 3.1 0 0 1-5.6 2.3l-1.5-2H8.3l-1.5 2A3.1 3.1 0 0 1 1.2 15.5l.9-5A5.5 5.5 0 0 1 7.5 6zm-.8 3.3v1.5H5.2v1.6h1.5v1.5h1.6v-1.5h1.5v-1.6H8.3V9.3H6.7zm9.1.4a1 1 0 1 0 0 2.1 1 1 0 0 0 0-2.1zm2.1 2.1a1 1 0 1 0 0 2.1 1 1 0 0 0 0-2.1z" />
+    </svg>
+  );
+}
 
 /**
  * LA TAILLE DU PANNEAU — 380 px de large, et le reste s'en déduit.
@@ -135,7 +220,7 @@ export default function FenetreApercu({
   ecrans: number;
   ouverte: boolean;
   position?: string;
-  libelles?: string[];
+  libelles?: Libelle[];
 }) {
   const [index, setIndex] = useState(0);
 
@@ -155,6 +240,8 @@ export default function FenetreApercu({
   }, [ouverte, ecrans, src]);
 
   if (!src) return null;
+
+  const libelle = libelles?.[index];
 
   return (
     <div
@@ -179,16 +266,35 @@ export default function FenetreApercu({
           {/* ⚠️ Le libellé de l'écran COURANT, sinon « Aperçu ». Il change en
               même temps que l'image : c'est lui qui fait comprendre que la
               seconde pastille n'est pas la suite de la première, mais l'autre
-              façon de voir la même notion. */}
-          <span className="truncate text-[10px] font-bold uppercase tracking-wide text-[#1d1c16]/55">
-            {libelles?.[index] ?? "Aperçu"}
-          </span>
+              façon de voir la même notion.
+              ⚠️ `min-w-0` sur la pastille et `shrink-0` sur les points : sans
+              ça, un libellé long pousse les pastilles hors du cadre au lieu de
+              se tronquer. */}
+          {libelle ? (
+            <span
+              className="flex min-w-0 items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-black uppercase tracking-wide"
+              style={{ backgroundColor: libelle.fond, color: libelle.encre }}
+            >
+              {libelle.icone === "une-question" && <UneQuestion className="h-3.5 w-3.5 shrink-0" />}
+              {libelle.icone === "manette" && <Manette className="h-3.5 w-3.5 shrink-0" />}
+              <span className="truncate">{libelle.texte}</span>
+            </span>
+          ) : (
+            <span className="truncate text-[10px] font-bold uppercase tracking-wide text-[#1d1c16]/55">
+              Aperçu
+            </span>
+          )}
           {/* Les pastilles. Une seule capture = une seule pastille, et elle dit
               alors « c'est tout », ce qui est une information honnête. */}
-          <span className="flex items-center gap-1">
+          <span className="flex shrink-0 items-center gap-1">
             {Array.from({ length: ecrans }, (_, i) => (
               <span
                 key={i}
+                /* La pastille active prend l'encre du mode qu'elle désigne :
+                   olive pour le mode simple, indigo pour le complet. Elle
+                   change donc de couleur en même temps que le libellé, et les
+                   deux se répondent au lieu de se croiser. */
+                style={i === index && libelle?.encre ? { backgroundColor: libelle.encre } : undefined}
                 className={`h-1.5 w-1.5 rounded-full transition-colors duration-200 ${
                   i === index ? "bg-[#0e7490]" : "bg-[#1d1c16]/20"
                 }`}
