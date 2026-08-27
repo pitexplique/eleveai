@@ -294,6 +294,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les périmètres",
     resume: "Le contour d'une figure : rectangle, carré, triangle, figures composées, et pourquoi ce n'est pas l'aire.",
   },
+  "maths/4e/aire-surface": {
+    titre: "Les aires",
+    resume: "La surface occupée : rectangle, carré, triangle, parallélogramme, figures composées et unités.",
+  },
   "maths/4e/prop-proportionnalite": {
     titre: "La proportionnalité",
     resume: "Reconnaître, le coefficient, le produit en croix, les pourcentages et les évolutions.",
