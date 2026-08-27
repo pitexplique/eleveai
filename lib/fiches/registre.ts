@@ -594,6 +594,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "L'écart entre ce que la voix affirme et ce que le corps fait, les cinq gestes de la comédie, et les ressources du silence, du regard et du débit.",
   },
+  "francais/5e/oral-ecouter": {
+    titre: "Écouter, comprendre et interpréter (2026-2027)",
+    resume:
+      "Cinq lignes à noter en écoutant — le sujet, son avis, ses exemples, mes trous, mon désaccord — et les quatre visées : informer, convaincre, émouvoir, faire agir.",
+  },
 
   /* ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées, mais
      ni le registre ni le sitemap ne les déclaraient : le coach n'affichait
