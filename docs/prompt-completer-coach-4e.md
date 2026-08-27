@@ -333,16 +333,55 @@ Puces de `bo-objectifs.ts` que la notion 1 ferme : 4e-A-calcul-2, 4e-A-calcul-3,
 4e-A-calcul-6, 4e-A-nombres-6, 4e-A-comparaisons-3.
 Puces que la notion 2 fermera : 4e-A-nombres-5, 4e-A-comparaisons-5, 4e-A-calcul-5.
 
-⚠️ EN ATTENTE DE FRÉDÉRIC — `stat_statistique` porte DIX micros, et c'est deux
-objets. La coupure est dans les prérequis (aucun micro d'indicateur n'est
-prérequis d'un micro de lecture) et c'est celle du BO lui-même :
-  · `stat_statistique` GARDE son id — moyenne, médiane, étendue, interpréter,
-    problème, défi (6). ⛔ Il le doit : `lib/fiches/registre.ts` porte l'URL
-    indexée `maths/4e/stat-statistique`, et `lib/matrice/coach.ts` l'associe à
-    la 4ᵉ, à la 5ᵉ et à la 3ᵉ.
-  · `stat_donnees` NEUVE — lire_tableau, lire_graphique, effectif, fréquence,
-    + un défi (5). Fiche neuve, URL neuve, donc pas de 301.
-La 5ᵉ et la 3ᵉ ont 8 micros sur la même notion, avec la même ligne de fracture.
+════ ⭐⭐ NOTION 3 — SCINDER `stat_statistique`, VALIDÉE LE 27/08 ════
+⛔ Ne pas la rediscuter, et ⛔ NE PAS LA FAIRE PASSER DEVANT LES PUISSANCES :
+à moitié faite, elle casse les vérificateurs (une micro sans item, une notion
+sans fiche). C'est un chantier de notion entier, pas un renommage.
+
+`stat_statistique` porte DIX micros et c'est DEUX objets. La coupure est dans
+les prérequis — aucun micro d'indicateur n'est prérequis d'un micro de lecture,
+donc elle est à SENS UNIQUE — et c'est celle du BO lui-même, qui énumère
+séparément « effectifs, fréquences » et « indicateurs de position et de
+dispersion ».
+
+    notion                   micros                                    n
+    ─────────────────────────────────────────────────────────────────────
+    stat_statistique         moyenne · médiane · étendue ·             6
+    (GARDE son id)           interpréter · problème · défi
+    stat_donnees             lire_tableau · lire_graphique ·           5
+    (NEUVE)                  effectif · fréquence · stat_donnees_defi
+
+⛔ POURQUOI L'ID RESTE SUR LES INDICATEURS, et ce n'est pas négociable :
+  · `lib/fiches/registre.ts` porte l'URL INDEXÉE `maths/4e/stat-statistique`
+    — sans 301 on la perd, et le rendez-vous du 26/09 se joue là-dessus ;
+  · `lib/matrice/coach.ts` (l. 121-122) associe `stat_statistique` à la 5ᵉ, à
+    la 4ᵉ ET à la 3ᵉ : changer l'id casserait aussi les deux autres classes ;
+  · `lib/eval-nationale/4e-maths.ts` le cite.
+  ⭐ Et le mot tranche : « statistiques » nomme les INDICATEURS, pas la lecture
+  d'un tableau. La 6ᵉ a déjà `stat_donnee` dans `coach.ts` — le vocabulaire
+  existe une classe plus bas.
+
+L'ORDRE DES OPÉRATIONS, et aucune étape ne se saute :
+ 1. `microSkills.ts` — basculer le `notionId` des QUATRE micros de lecture vers
+    `stat_donnees`, et AJOUTER `stat_donnees_defi`. On passe à 137 micros.
+ 2. `notions.ts` — créer `stat_donnees` (boId `BO4D1`, `prerequis: []`), et
+    donner à `stat_statistique` `prerequis: ["stat_donnees"]`. ⚠️ Sens unique :
+    jamais l'inverse, sinon cycle.
+ 3. `statistiques.bank.ts` — basculer le `notionId` des items concernés, et
+    ÉCRIRE les items de `stat_donnees_defi`. ⛔ Deux items distincts minimum
+    (le mode complet oppose deux questions), et un GÉNÉRATEUR, pas du figé :
+    dix énoncés distincts, seuil de `verifier-variete`.
+ 4. `bo-objectifs.ts` — accrocher `stat_donnees_defi`, sinon le vérificateur le
+    déclare hors programme, et il a raison.
+ 5. Les SEPT vérificateurs.
+ 6. Seulement ensuite la FICHE de `stat_donnees` : fiche neuve, URL neuve, donc
+    pas de 301 à poser — mais registre + page + PDF, et la parité 21/21.
+    ⚠️ `verifier-micros` exige que les 137 micros aient un bloc : la fiche
+    `stat-statistique` garde les siens, la neuve prend les cinq autres.
+
+⚠️ LA 5ᵉ ET LA 3ᵉ ont 8 micros sur la même notion, avec la même ligne de
+fracture. La continuité verticale voudra le même découpage — mais c'est une
+décision par classe, et d'autres sessions y travaillent : ne pas la prendre ici.
 
 Ordre proposé, du plus sûr au plus incertain :
 
