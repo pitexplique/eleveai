@@ -493,6 +493,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "La place de chaque classe de mot, le registre choisi d'après le destinataire, le sens que la phrase désigne, et les pièges des mots fréquents.",
   },
+  "francais/6e/grammaire-phrase": {
+    titre: "La phrase et ses groupes",
+    resume:
+      "Trouver le verbe, poser les questions, et prouver une fonction en déplaçant, supprimant ou remplaçant le groupe — au lieu de réciter une définition.",
+  },
 
   /* ⭐ LA 5e OUVRE EN FRANÇAIS (24/08/2026). Elle avait vingt fiches de maths et
      aucune de français — alors qu'elle est la SEULE classe du collège déjà
