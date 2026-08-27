@@ -302,6 +302,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les volumes",
     resume: "Aire de base × hauteur : pavé droit, prisme, cylindre, cubes unités et unités de volume.",
   },
+  "maths/4e/algo-programmation": {
+    titre: "Algorithmique et programmation",
+    resume: "Conditions vraies ou fausses, si… alors… sinon, variables, et traduire un objectif en condition.",
+  },
   "maths/4e/prop-proportionnalite": {
     titre: "La proportionnalité",
     resume: "Reconnaître, le coefficient, le produit en croix, les pourcentages et les évolutions.",
