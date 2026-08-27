@@ -286,6 +286,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "La factorisation",
     resume: "Le facteur commun, diviser chaque terme, les identités lues à l'envers, et vérifier en développant.",
   },
+  "maths/4e/equation-resolution": {
+    titre: "Les équations",
+    resume: "Reconnaître, traduire, isoler l'inconnue des deux côtés, réduire, la parenthèse, et vérifier.",
+  },
   "maths/4e/prop-proportionnalite": {
     titre: "La proportionnalité",
     resume: "Reconnaître, le coefficient, le produit en croix, les pourcentages et les évolutions.",
