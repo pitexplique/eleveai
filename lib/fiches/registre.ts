@@ -502,6 +502,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Trouver le verbe, poser les questions, et prouver une fonction en déplaçant, supprimant ou remplaçant le groupe — au lieu de réciter une définition.",
   },
+  "francais/6e/fluence-lecture": {
+    titre: "Lire avec fluidité",
+    resume:
+      "Lire par groupes de sens au lieu de lire mot à mot, tenir la ponctuation, ne rien prononcer — et viser les 130 mots par minute attendus en 6e.",
+  },
 
   /* ⭐ LA 5e OUVRE EN FRANÇAIS (24/08/2026). Elle avait vingt fiches de maths et
      aucune de français — alors qu'elle est la SEULE classe du collège déjà
