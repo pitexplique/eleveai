@@ -290,6 +290,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les équations",
     resume: "Reconnaître, traduire, isoler l'inconnue des deux côtés, réduire, la parenthèse, et vérifier.",
   },
+  "maths/4e/aire-perimetre": {
+    titre: "Les périmètres",
+    resume: "Le contour d'une figure : rectangle, carré, triangle, figures composées, et pourquoi ce n'est pas l'aire.",
+  },
   "maths/4e/prop-proportionnalite": {
     titre: "La proportionnalité",
     resume: "Reconnaître, le coefficient, le produit en croix, les pourcentages et les évolutions.",
