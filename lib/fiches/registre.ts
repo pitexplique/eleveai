@@ -585,6 +585,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Annoter un texte comme une partition : groupes de souffle, mots à détacher, changements de voix — et lire la ponctuation comme une consigne.",
   },
+  "francais/5e/oral-dire-jouer": {
+    titre: "Dire, lire et jouer un texte (2026-2027)",
+    resume:
+      "L'écart entre ce que la voix affirme et ce que le corps fait, les cinq gestes de la comédie, et les ressources du silence, du regard et du débit.",
+  },
 
   /* ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées, mais
      ni le registre ni le sitemap ne les déclaraient : le coach n'affichait
