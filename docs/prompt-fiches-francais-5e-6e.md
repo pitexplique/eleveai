@@ -1,7 +1,54 @@
 # Prompt — les fiches de français de 5e et de 6e
 
 > Écrit le 26/08/2026, au terme de la session qui a fiché la 4e entière.
+> Mis à jour le 28/08/2026 : **la 5e est ENTIÈRE**, et la 6e est à 16 sur 29.
 > À coller tel quel dans une session neuve.
+
+---
+
+## ⭐⭐ ÉTAT AU SOIR DU 28/08/2026 — LIS CECI D'ABORD
+
+```
+francais 4e     19 notions   19 fichées   100 %
+francais 5e     28 notions   28 fichées   100 %   ⭐ FERMÉE
+francais 6e     29 notions   16 fichées    55 %
+francais cm2    27 notions    9 fichées    33 %
+```
+
+**La 5e est finie.** Les cinq dernières fiches du 28/08 : `culture_connaissances`,
+`culture_entrees_5e`, `ecriture_reflechir`, `ecriture_produire`,
+`ecriture_reviser` — les domaines de la culture et de l'écriture sont fermés.
+
+**Reste en 6e : TREIZE notions, toutes hors langue.**
+
+```
+lecture   ×3   comprehension_reprises · comprehension_documents · lecture_oeuvres
+culture   ×3   culture_recits · culture_poesie_theatre · culture_reperes
+écriture  ×4   ecriture_main · ecriture_apprendre · ecriture_produire · ecriture_reviser
+oral      ×3   oral_ecouter · oral_dire · oral_echanger
+```
+
+Faites le 28/08 en 6e : `lecture_voix_haute` et `comprehension_textes`.
+
+### ⛔⛔ LE PIÈGE DE CLASSE EST MAXIMAL SUR CE QUI RESTE
+
+**Quatre des treize notions restantes de 6e portent un nom qui existe AUSSI en
+5e**, avec un contenu entièrement différent — `ecriture_produire`,
+`ecriture_reviser`, et déjà `lecture_voix_haute` (fait). Copier la fiche de 5e
+produit un hors-programme parfaitement crédible, que rien ne signalera.
+
+| | 5e (cycle 4, BO 2026) | 6e (cycle 3, BO 2025) |
+|---|---|---|
+| `lecture_voix_haute` | la PARTITION : groupes de souffle, diagnostic d'une lecture entendue | l'INDICE : ce qui, dans le texte, commande le ton ; regarder l'auditoire |
+| `ecriture_produire` | invention, narratif, argumentatif, réponse rédigée | « produire des écrits variés » — cycle 3, à relire |
+| `ecriture_reviser` | cinq relectures + le brouillon | quatre objectifs BO : brouillon, cohérence, autoévaluation, normes |
+
+⚠️ Et la 6e a `ecriture_main` — écrire à la main de manière fluide — **qui
+n'existe dans aucune autre classe du collège**. Pool `ECRIRE_MAIN`.
+
+### ⭐ CHAQUE NOTION DE 6e A UNE MICRO « DÉFI », le cycle 4 n'en a pas
+
+Elle vaut un bloc de plus dans la fiche, et c'est le moment où l'élève fait seul.
 
 ---
 
@@ -442,3 +489,67 @@ se mesurent au rendu**, jamais au jugement.
 à 10,9 px dans une carte de MÉTHODE (201 px, le bloc le plus étroit). Deux mots
 trop longs sur un dessin qui touchait `largeurMax`. Correctif : raccourcir les
 étiquettes, la légende porte la phrase entière.
+
+---
+
+## ⭐ Quatre règles nées de la journée du 28/08, à ne pas repayer
+
+**1. LE PLAFOND D'UNE BOITE DU CANVAS `phrase` EST D'ENVIRON VINGT SIGNES —
+mesuré, et le prix est brutal.** Une SEULE boite de vingt-huit signes (« des
+élèves ont perdu le leur ») a poussé le viewBox à 294 px pour un bloc de 218, et
+**tout le dessin est tombé à 8,9 px** — étiquettes ET légende, puisque la légende
+vit dans le SVG. `largeurMax` dit où la phrase passe à la ligne ; **il ne coupe
+pas une boite trop longue**. ⚠️ Et la bande `nature` compte dans la largeur,
+puisqu'elle se pose au-dessus du mot : les deux doivent tenir sous vingt signes.
+
+**2. `number_line` DÉCALE SES ÉTIQUETTES EN HAUTEUR — donc il accepte des noms
+longs, et comparer deux extensions horizontales ne prouve RIEN.** Sur 235 px avec
+quatre points, chaque repère ne dispose que de 47 px ; « Renaissance » en fait
+100. Le canvas ne les tasse pas : il les met sur des lignes de base différentes
+(y = 62, 40, 18, 4). ⛔ J'ai cru à un défaut en mesurant « Moyen Âge » finissant à
+179 px et « Renaissance » commençant à 123 — cinquante-six pixels de recouvrement
+APPARENT, aucun pixel partagé. **Ne comparer que des textes de même `y`.**
+
+**3. LE VÉRIFICATEUR A UNE TROISIÈME MESURE DEPUIS LE 28/08 : la superposition.**
+`verifier-fiches-francais.mjs` compare désormais, sur chaque ligne de base, les
+textes voisins. Les deux mesures d'avant — police et débordement — laissaient
+passer ce défaut entièrement : un texte peut être à 12 px, tenir dans le cadre, et
+être illisible parce qu'un autre occupe les mêmes pixels.
+⚠️ **Il a trouvé des défauts RÉELS dans cinq fiches déjà en ligne**, vérifiés au
+navigateur (les pronoms de 6e : deux étiquettes « pronom » recouvertes de 11 px ;
+`francais-6e-conjugaison-modes` : « futur » et « imparfait » sur 11 px ;
+`francais-6e-conjugaison-temps-composes`, `francais-cm2-conjugaison-formes`,
+`francais-cm2-grammaire-orthographe`). **Ces fiches ne sont pas corrigées** : ce
+sont des dessins de conjugaison et de langue d'autres chantiers. À reprendre.
+
+**4. LA BASCULE DE COULEUR SE JOUE AUSSI DANS UNE FICHE QUI N'EST PAS DE LANGUE.**
+`francais-5e-ecriture-reviser` porte un dessin d'accord sujet-verbe : l'étiquette
+« le sujet » EST une fonction, donc la couleur DOIT s'appliquer — vérifié au
+rendu, `rgb(29, 78, 216)`, et l'arc est de type `accord`. La règle n'est jamais
+« gris dans telle famille de fiches » : elle est **« gris quand ce n'est pas une
+fonction »**, et elle se mesure au rendu.
+
+### ⭐ Trois emplois de canvas trouvés le 28/08, tous réutilisables
+
+- **`figure_libre` DESSINE UNE COPIE**, et c'est son meilleur emploi jusqu'ici :
+  un bloc plein contre des blocs séparés montre « aller à la ligne » sans un mot,
+  et **une ligne remplie sur deux montre le brouillon aéré exprès** pour qu'on
+  corrige dedans. Rien d'autre ne dessine cela.
+- **DEUX ARCS QUI CONVERGENT DESSINENT UNE INFÉRENCE** — deux indices, une
+  conclusion. La même figure sert au sens global (« la pluie » et « le froid »
+  convergent sur « elle continue ») et à l'implicite (« il cache sa copie »,
+  « joues rouges » → « mauvaise note »). Elle sert aussi au ton d'une réplique
+  (le verbe donne le TON, le « ! » donne le VOLUME) et au réseau de deux textes.
+- **LA PIÈCE MANQUANTE SE DESSINE PAR SON ABSENCE** : trois boites au lieu de
+  quatre, et le vide se compte. Même geste que le crochet absent.
+
+### ⚠️ Deux dettes laissées ouvertes, à arbitrer avec Frédéric
+
+1. **Treize des quatorze fiches de 6e écrites avant le 28/08 n'ont PAS l'année
+   dans leur titre** (« Lire avec fluidité en 6e »), alors que la règle SEO
+   mesurée le 26/08 l'exige. Les trois fiches du 28/08 la portent. Retitrer les
+   anciennes **rend leurs PDF orphelins** (`npm run verifier:pdf` le signale) :
+   c'est un arbitrage, pas une correction à faire en passant.
+2. **`npx tsc --noEmit` échouait le 28/08 au soir** sur
+   `lib/fiches/maths-4e-ratio-pourcentage.tsx(337)` — `size` n'existe pas sur
+   `TableauDonneesCanvasData`. Fichier de la session maths, laissé intact.
