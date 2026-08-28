@@ -692,6 +692,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Les quatre pièces d'un récit et les quatre d'une argumentation, la description qui montre au lieu de nommer, et les règles de la réponse rédigée.",
   },
+  "francais/5e/ecriture-reviser": {
+    titre: "Évaluer son écrit et savoir le faire évoluer (2026-2027)",
+    resume:
+      "L'ordre des relectures — la consigne, le plan, les phrases, l'orthographe en dernier —, les cinq relectures fondatrices, et le brouillon comme écrit à retravailler.",
+  },
   "francais/5e/culture-entrees-5e": {
     titre: "Les quatre entrées de culture littéraire (2026-2027)",
     resume:
