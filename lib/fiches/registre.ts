@@ -667,6 +667,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Nommer ce qui, dans le texte, a produit l'effet ressenti ; dire sur quoi le jugement s'appuie — émotion, écriture, idées, ou simple gout — et choisir l'outil d'analyse.",
   },
+  "francais/5e/lecture-oeuvre-contextes": {
+    titre: "Appréhender une œuvre dans son contexte (2026-2027)",
+    resume:
+      "Suivre le parcours d'un personnage en comparant la fin au premier chapitre, comparer ce que peuvent les mots, l'image, la musique et la scène, et lire le contexte.",
+  },
 
   /* ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées, mais
      ni le registre ni le sitemap ne les déclaraient : le coach n'affichait
