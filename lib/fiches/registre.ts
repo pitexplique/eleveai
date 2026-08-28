@@ -507,6 +507,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Trouver le verbe, poser les questions, et prouver une fonction en déplaçant, supprimant ou remplaçant le groupe — au lieu de réciter une définition.",
   },
+  "francais/6e/lecture-voix-haute": {
+    titre: "Lire à voix haute et mettre en voix en 6e (2026-2027)",
+    resume:
+      "Préparer sa lecture en silence, regarder l'auditoire, et trouver le ton là où il est écrit : le verbe de parole, la ponctuation, les mots du récit — et le tiret qui change de voix.",
+  },
   "francais/6e/fluence-lecture": {
     titre: "Lire avec fluidité",
     resume:
