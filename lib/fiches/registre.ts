@@ -682,6 +682,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Reconnaitre un genre dès son ouverture, situer une œuvre parmi quatre périodes, savoir ce qu'il faut connaitre pour comprendre une scène, et tenir un carnet qui se relit.",
   },
+  "francais/5e/ecriture-reflechir": {
+    titre: "Écrire pour réfléchir, apprendre et mémoriser (2026-2027)",
+    resume:
+      "Planifier en partant de la fin qu'on veut atteindre, repérer l'idée qui commande plutôt que le détail qui frappe, et récrire une leçon avec ses mots pour la retenir.",
+  },
   "francais/5e/culture-entrees-5e": {
     titre: "Les quatre entrées de culture littéraire (2026-2027)",
     resume:
