@@ -220,19 +220,39 @@ POUR CHAQUE NOTION :
     dans index.ts.
  4. ⭐ ACCROCHER les nouvelles micros aux objectifs dans `bo-objectifs.ts` —
     sinon `verifier-bo.ts` les déclare hors programme, et il a raison.
- 5. ⭐⭐ LA MATRICE — l'étape la plus facile à oublier, et sans elle la notion
-    existe dans le coach mais personne ne peut y arriver. DEUX fichiers, tous
-    deux PARTAGÉS (donc `git diff -- <fichier>` avant de committer) :
-      a. `lib/matrice/coach.ts` — le pont « thème tapé » → notion ouverte, par
-         classe. ⛔ VÉRIFIÉ LE 27/08 : il n'existe AUCUN thème « puissances », et
-         le thème `calcul` s'arrête à la 6ᵉ. Un élève de 4ᵉ — ET DE 3ᵉ — qui tape
-         « puissances » n'ouvre rien, alors que la 3ᵉ a `entier_puissance` avec
-         59 items. Ajouter le thème avec LES DEUX classes d'un coup.
-         ⚠️ Ne jamais inventer un identifiant : les lire dans `notions.ts`.
-         `normalizeClasse()` a une whitelist et retombe EN SILENCE sur la 6ᵉ.
-      b. `node scripts/generer-notions-matrice.mjs` — régénère
-         `lib/matrice/notions.generated.ts` depuis les `notions.ts`.
-         ⛔ NE JAMAIS l'éditer à la main, l'en-tête le dit.
+ 5. ⭐⭐ LA MATRICE — l'étape la plus facile à oublier.
+    ⛔⛔ ATTENTION, IL Y EN A **DEUX**, et elles n'ont rien à voir. Les
+    confondre fait rater la bonne (erreur commise le 27/08) :
+
+      A. `lib/tutor-v4/matrix/matrix4eMaths.ts` — **LA MATRICE DU COACH**, la
+         `SkillMatrix` qui dit au moteur comment les micros s'appuient les unes
+         sur les autres. C'est CELLE-LÀ qu'on complète en même temps que
+         `microSkills.ts`. ⭐ Elle n'appartient qu'à cette session.
+         Trois blocs, et **un seul est à écrire à la main** :
+           · `microSkillIndex4eMaths` — dérivé de `microSkills`, RIEN À FAIRE ;
+           · `directParents` — dérivé des `prerequis`, RIEN À FAIRE ;
+           · `supportLinks` — ⛔ ÉCRIT À LA MAIN, un tableau de liens faibles
+             par micro. C'est la seule chose à ajouter, et rien ne la vérifie.
+         ⚠️ MESURÉ LE 27/08 : 112 clés pour 136 micros — **24 micros n'ont
+         aucun `supportLinks`** (les six du cosinus, les six des
+         transformations, et les entrées de chaque notion). Zéro clé fantôme,
+         donc pas de faute de frappe : c'est un manque, pas une erreur. Ne pas
+         l'aggraver avec la notion neuve.
+
+      B. `lib/matrice/` — **LA MATRICE D'ENTRÉE** du site, celle où l'élève tape
+         ce qu'il cherche. Deux fichiers, tous deux PARTAGÉS avec les autres
+         sessions (donc `git diff -- <fichier>` avant de committer) :
+           · `lib/matrice/coach.ts` — le pont « thème tapé » → notion ouverte,
+             par classe. ⛔ VÉRIFIÉ LE 27/08 : il n'existe AUCUN thème
+             « puissances », et le thème `calcul` s'arrête à la 6ᵉ. Un élève de
+             4ᵉ — ET DE 3ᵉ — qui tape « puissances » n'ouvre rien, alors que la
+             3ᵉ a `entier_puissance` avec 59 items. Ajouter le thème avec LES
+             DEUX classes d'un coup.
+             ⚠️ Ne jamais inventer un identifiant : les lire dans `notions.ts`.
+             `normalizeClasse()` a une whitelist et retombe EN SILENCE sur la 6ᵉ.
+           · `node scripts/generer-notions-matrice.mjs` — régénère
+             `lib/matrice/notions.generated.ts` depuis les `notions.ts`.
+             ⛔ NE JAMAIS l'éditer à la main, l'en-tête le dit.
  6. FAIRE PASSER LES SEPT VÉRIFICATEURS — pas six.
  7. Seulement ensuite : fiche, page, registre, PDF (voir la passation).
 
