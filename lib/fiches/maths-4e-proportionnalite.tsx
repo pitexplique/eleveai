@@ -8,9 +8,12 @@
 //   prop_table                → « si 2 → 10, alors 4 → ? »
 //   prop_coeff                → « Si 4 → 20, quel est le coefficient ? »
 //   prop_quatrieme            → « Si 3 kg coûtent 12 €, combien coûtent 5 kg ? »
-//   prop_pourcentage          → « 25 % d'une quantité correspond à… »
-//   prop_coeff_multiplicateur → « Une augmentation de 20 % correspond à multiplier par… »
-//   prop_evolution            → « Un prix de 100 € augmente de 15 %. Nouveau prix ? »
+// ⭐ SCINDÉE LE 28/08/2026 : les micros `prop_pourcentage`,
+// `prop_coeff_multiplicateur` et `prop_evolution` sont passées dans la notion
+// `prop_ratio_pourcentage`, et leurs blocs les ont suivies dans la fiche
+// `maths-4e-ratio-pourcentage.tsx` — avec leurs dessins déjà mesurés.
+// ⛔ Rien n'a été supprimé : un bloc ne peut citer que des micros de SA
+// notion, et `verifier-micros` le refuse.
 //   prop_probleme             → « 4 cahiers coûtent 12 €. Combien coûtent… »
 //   prop_defi                 → « Un élève dit : si 2 → 6, alors 5 → 9 car j'ajoute 3 »
 // Tous les nombres de la fiche sortent de cette liste, sans exception.
@@ -113,76 +116,10 @@ const produitEnCroix = (
   />
 );
 
-// « POUR CENT » SE COMPTE SUR CENT, et la grille de cent carreaux le dit mieux
-// que la formule. 25 carreaux coloriés sur 100 : c'est un quart.
-const grilleDe25 = legende(
-  <CanvasRenderer
-    figure={{
-      kind: "fraction",
-      model: "grid",
-      size: { width: 200, height: 190 },
-      grid: { rows: 10, cols: 10, shaded: 25 },
-    }}
-  />,
-  "25 sur 100, soit $\\frac{1}{4}$"
-);
-
-// UNE HAUSSE EST UNE PART AJOUTÉE AU TOUT. 100 € qui augmentent de 15 %, c'est
-// 100 puis 15 bout à bout — et le total, 115, s'obtient d'un coup en multipliant
-// par 1,15. La barre montre pourquoi le coefficient dépasse 1.
-// ⚠️ Hauteur 200 : les étiquettes de parts sont posées à 144 px du haut et la
-// phrase du bas à 18 px du bas — sous 180, elles se frôlent (mesuré en 1280).
-// ⚠️ LA LARGEUR DÉPEND DU BLOC, parce que ce dessin sert DEUX FOIS : dans une
-// carte de propriété (222 px) et dans un exemple (200 px). Avec un seul cadre,
-// ses étiquettes tombaient à 10,6 px dans l'exemple — sous le plancher de 11.
-// Un dessin réutilisé se redimensionne à chaque emploi.
-const hausseDe15 = (bloc: "carte" | "exemple" = "carte") => (
-  <CanvasRenderer
-    figure={{
-      kind: "schema_barre",
-      size: { width: bloc === "exemple" ? 206 : 228, height: 200 },
-      total: "115 €",
-      parts: [
-        { label: "prix", value: "100", color: BLEU },
-        { label: "+ 15 %", value: "15", color: ROUGE },
-      ],
-      questionLabel: "d'un coup : 100 × 1,15",
-      display: { showTotal: true, showPartLabels: true, showValues: true, showQuestion: true },
-    }}
-  />
-);
-
-// AVANT ET APRÈS, SUR LA MÊME RÈGLE. La droite graduée montre que la hausse est
-// un DÉPLACEMENT, et surtout qu'une baisse de 15 % après une hausse de 15 % ne
-// ramène pas au point de départ — l'erreur classique des évolutions successives.
-const avantApres = legende(
-  <CanvasRenderer
-    figure={{
-      kind: "number_line",
-      min: 80,
-      max: 130,
-      step: 10,
-      points: [
-        { value: 100, label: "avant", color: BLEU },
-        { value: 115, label: "après", color: ROUGE },
-      ],
-      display: {
-        showTicks: true,
-        showValues: true,
-        showPoints: true,
-        showPointLabels: true,
-        showZero: false,
-      },
-      size: { width: 260, height: 95 },
-    }}
-  />,
-  "+ 15 % puis − 15 % ne ramène PAS à 100"
-);
-
 const pieges = [
   "Prendre un tableau régulier pour un tableau proportionnel : ajouter toujours le même nombre n'est PAS multiplier toujours par le même nombre.",
-  "Ajouter le pourcentage au coefficient : une hausse de 20 % ne se fait pas en multipliant par 20, ni par 0,20, mais par 1,20.",
-  "Croire qu'une baisse de 15 % annule une hausse de 15 % : 100 devient 115, puis 115 × 0,85 = 97,75. On ne revient pas au départ.",
+  "Appliquer le produit en croix SANS avoir vérifié que la situation est proportionnelle : le calcul donne alors un résultat faux sans prévenir.",
+  "Confondre le coefficient et l'écart : de 2 à 10 on multiplie par 5, on n'ajoute pas 8. C'est le rapport qui doit être constant, pas la différence.",
 ];
 
 const aRetenir = [
@@ -235,26 +172,27 @@ export const ficheProportionnalite4e: FicheCoursData = {
         "Trois valeurs connues, une manquante : on multiplie les deux nombres placés en diagonale, puis on divise par le troisième. C'est le produit en croix.",
       schema: produitEnCroix,
     },
+    // ⭐ TROIS PROPRIÉTÉS SONT PARTIES LE 28/08/2026 vers la fiche « Ratios et
+    // pourcentages » : « Pour cent se compte sur cent », « Le coefficient
+    // multiplicateur » et « Deux évolutions ne s'additionnent pas ». Leurs
+    // micros ont changé de notion avec la scission, et un bloc ne peut citer
+    // que des micros de SA notion — `verifier-micros` le refuse.
+    // ⛔ Rien n'a été supprimé : les trois blocs sont dans la fiche voisine,
+    // avec leurs dessins mesurés.
     {
-      titre: "« Pour cent » se compte sur cent",
-      micros: ["prop_pourcentage"],
+      titre: "Le coefficient de proportionnalité",
+      micros: ["prop_coeff"],
       texte:
-        "25 %, c'est 25 parts sur 100. C'est aussi une fraction — un quart — et un coefficient : multiplier par 0,25.",
-      schema: grilleDe25,
-    },
-    {
-      titre: "Le coefficient multiplicateur",
-      micros: ["prop_coeff", "prop_coeff_multiplicateur"],
-      texte:
-        "Augmenter de 15 %, c'est garder le tout ET ajouter 15 parts sur 100 : on multiplie donc par 1,15, pas par 0,15. Une baisse de 15 % donne 1 − 0,15 = 0,85.",
-      schema: hausseDe15(),
-    },
-    {
-      titre: "Deux évolutions ne s'additionnent pas",
-      micros: ["prop_evolution"],
-      texte:
-        "Une hausse de 15 % suivie d'une baisse de 15 % ne ramène pas au prix de départ : on multiplie par 1,15 puis par 0,85, soit par 0,9775. Il manque 2,25 %.",
-      schema: avantApres,
+        "C'est LE nombre de la notion : celui par lequel on multiplie pour passer d'une ligne à l'autre. On le trouve en divisant une valeur de la seconde ligne par celle du dessus — et il doit donner le même résultat sur toutes les colonnes, sinon la situation n'est pas proportionnelle.",
+      schema: tableauProp(
+        [
+          ["2", "4"],
+          ["10", "20"],
+        ],
+        [],
+        ["A", "B"],
+        ["quantité", "prix (€)"]
+      ),
     },
   ],
   reel: {
@@ -299,22 +237,25 @@ export const ficheProportionnalite4e: FicheCoursData = {
       ),
     },
     {
-      titre: "Passer par le coefficient",
-      micros: ["prop_coeff_multiplicateur", "prop_evolution"],
+      // ⭐ Ce bloc portait « Passer par le coefficient » (multiplicateur), parti
+      // avec les pourcentages. Il traite désormais le RETOUR À L'UNITÉ, qui est
+      // l'autre chemin de la proportionnalité et appartient bien à cette notion.
+      titre: "Revenir à l'unité",
+      micros: ["prop_coeff", "prop_table"],
       texte:
-        "Pour une évolution, on ne calcule pas la part puis la somme : on trouve directement le coefficient. On part de 1, on ajoute ou on retire le pourcentage écrit en décimal, et une seule multiplication suffit.",
+        "Quand le produit en croix intimide, on cherche ce que vaut UNE unité : on divise, puis on multiplie par la quantité voulue. C'est plus long d'un calcul, mais on comprend chaque étape — et c'est la méthode à utiliser quand on doit calculer plusieurs valeurs de suite.",
       schema: (
         <CanvasRenderer
           figure={{
             kind: "tableau_donnees",
-            headers: ["évolution", "le coefficient"],
+            headers: ["masse", "prix", "on fait"],
             rows: [
-              { values: ["+ 20 %", "× 1,20"] },
-              { values: ["+ 15 %", "× 1,15"] },
-              { values: ["− 15 %", "× 0,85"] },
-              { values: ["− 30 %", "× 0,70"] },
+              { values: ["3 kg", "12 €", "on part de là"] },
+              { values: ["1 kg", "4 €", "÷ 3"] },
+              { values: ["5 kg", "20 €", "× 5"] },
             ],
-            caption: "on part toujours de 1",
+            highlight: { row: 1 },
+            caption: "l'unité d'abord, la quantité ensuite",
             display: { compact: true, striped: true },
           }}
         />
@@ -335,10 +276,10 @@ export const ficheProportionnalite4e: FicheCoursData = {
         "On utilise le produit en croix, ou le coefficient si on l'a déjà trouvé. Les deux donnent le même résultat — le coefficient est plus rapide quand on a plusieurs valeurs à calculer.",
     },
     {
-      titre: "Faire évoluer un prix",
-      micros: ["prop_pourcentage", "prop_coeff_multiplicateur", "prop_probleme"],
+      titre: "Le problème n'annonce pas qu'il est proportionnel",
+      micros: ["prop_probleme", "prop_defi"],
       detail:
-        "On transforme le pourcentage en coefficient multiplicateur, puis on multiplie. Pour deux évolutions successives, on multiplie les deux coefficients entre eux.",
+        "C'est à l'élève de le décider. On cherche si doubler l'une double l'autre : le prix suit la masse, mais l'âge ne suit pas la taille. Sans cette vérification, toutes les règles suivantes donnent un résultat faux sans prévenir.",
     },
   ],
   exemples: [
@@ -360,22 +301,36 @@ export const ficheProportionnalite4e: FicheCoursData = {
         "Le prix est proportionnel à la masse. On range les valeurs dans un tableau, puis on fait le produit en croix : 5 × 12 = 60, et 60 ÷ 3 = 20. Les 5 kg coûtent 20 €. Contrôle par le coefficient : 12 ÷ 3 = 4 € le kilo, et 5 × 4 = 20 €. Les deux chemins donnent le même résultat.",
     },
     {
-      titre: "Vingt-cinq pour cent",
-      micros: ["prop_pourcentage"],
-      donnees: "On veut prendre 25 % d'une quantité.",
-      question: "À quoi cela correspond-il ?",
-      schema: grilleDe25,
+      // ⭐ Remplace « Vingt-cinq pour cent », parti avec les pourcentages. Le
+      // contre-exemple est le meilleur exercice de cette notion : la
+      // proportionnalité se décide AVANT de calculer.
+      titre: "Est-ce seulement proportionnel ?",
+      micros: ["prop_reconnaitre", "prop_defi"],
+      donnees: "Un plombier facture 50 € de déplacement, puis 30 € par heure. Pour 2 h il demande 110 €, pour 4 h il demande 170 €.",
+      question: "Le prix est-il proportionnel à la durée ?",
+      schema: tableauQuiTrompe,
       solution:
-        "25 %, c'est 25 parts sur 100, donc la fraction $\\frac{25}{100}$, qui se simplifie en $\\frac{1}{4}$. Prendre 25 % d'une quantité revient donc à en prendre le quart, c'est-à-dire à multiplier par 0,25 — ou, plus simple de tête, à diviser par 4.",
+        "Non. On divise chaque prix par sa durée : 110 ÷ 2 = 55, mais 170 ÷ 4 = 42,5. Le rapport change, donc ce n'est pas proportionnel.\n\nLa cause est le forfait de 50 € : il ne double pas quand la durée double. ⚠️ Aucune règle de proportionnalité ne s'applique ici — ni produit en croix, ni coefficient. C'est pourquoi la vérification passe TOUJOURS avant le calcul.",
     },
     {
-      titre: "Le prix qui augmente",
-      micros: ["prop_evolution", "prop_coeff_multiplicateur"],
-      donnees: "Un article coûte 100 €. Son prix augmente de 15 %.",
-      question: "Quel est le nouveau prix ?",
-      schema: hausseDe15("exemple"),
+      titre: "Le retour à l'unité",
+      micros: ["prop_coeff", "prop_table"],
+      donnees: "Six bouteilles d'eau coûtent 4,50 €.",
+      question: "Combien coûtent dix bouteilles ?",
+      schema: tableauProp(
+        [
+          ["6", "1", "10"],
+          ["4,50", "?", "?"],
+        ],
+        [
+          { row: 1, col: 1 },
+          { row: 1, col: 2 },
+        ],
+        ["six", "une", "dix"],
+        ["bouteilles", "prix (€)"]
+      ),
       solution:
-        "Augmenter de 15 %, c'est garder les 100 % du prix et ajouter 15 % : le coefficient multiplicateur vaut 1 + 0,15 = 1,15. On calcule 100 × 1,15 = 115. Le nouveau prix est de 115 €. ⚠️ On ne multiplie pas par 0,15, ce qui donnerait seulement la hausse, ni par 15, qui n'a aucun sens.",
+        "On cherche d'abord le prix d'UNE bouteille : 4,50 ÷ 6 = 0,75 €. Puis on multiplie par dix : 0,75 × 10 = 7,50 €.\n\nContrôle par le coefficient : il vaut 0,75 € par bouteille, et il est le même sur les trois colonnes — la situation est bien proportionnelle.",
     },
   ],
   pieges,
@@ -395,17 +350,20 @@ export const ficheProportionnalite4e: FicheCoursData = {
       micros: ["prop_reconnaitre", "prop_defi"],
     },
     {
-      question: "Une augmentation de 20 % correspond à multiplier par combien ?",
+      // Les deux exercices de pourcentage sont partis avec leur notion ; ceux-ci
+      // travaillent ce qui reste : le coefficient et le problème.
+      question:
+        "Un cycliste roule à vitesse constante et parcourt 24 km en 2 h. Quelle distance parcourt-il en 5 h ?",
       correction:
-        "Par 1,20. On part de 1, qui représente le prix entier qu'on garde, et on ajoute 20 % écrit en décimal, soit 0,20. Attention : multiplier par 0,20 donnerait seulement le montant de la hausse, pas le nouveau prix.",
-      micros: ["prop_coeff_multiplicateur"],
+        "À vitesse constante, la distance est proportionnelle au temps. Le coefficient vaut 24 ÷ 2 = 12 km par heure. Donc 5 × 12 = 60 km. Par le produit en croix : 5 × 24 = 120, puis 120 ÷ 2 = 60 km.",
+      micros: ["prop_coeff", "prop_probleme"],
     },
     {
       question:
-        "Un prix de 100 € augmente de 15 %, puis baisse de 15 %. Revient-on à 100 € ?",
+        "Un abonnement coûte 15 € par mois, plus 20 € d'inscription payés une fois. Le prix total est-il proportionnel au nombre de mois ?",
       correction:
-        "Non. La hausse donne 100 × 1,15 = 115 €. La baisse s'applique ensuite sur 115, et non sur 100 : 115 × 0,85 = 97,75 €. On perd 2,25 € au passage, parce que les deux pourcentages ne portent pas sur la même somme. Deux évolutions se multiplient, elles ne s'additionnent pas.",
-      micros: ["prop_evolution", "prop_probleme"],
+        "Non. Pour 2 mois : 20 + 30 = 50 €, soit 25 € par mois. Pour 4 mois : 20 + 60 = 80 €, soit 20 € par mois. Le rapport change, donc ce n'est pas proportionnel — c'est l'inscription, payée une seule fois, qui casse la proportionnalité.",
+      micros: ["prop_reconnaitre", "prop_defi"],
     },
   ],
   coachHref: "/coach-ia/maths?classe=4e",
