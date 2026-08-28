@@ -240,9 +240,30 @@ const contexte = await navigateur.newContext({
   locale: "fr-FR",
   reducedMotion: "reduce",
 });
-const page = await contexte.newPage();
-// ⛔ Voir la note en tête de fichier : le garde-fou qui ne sert à rien aujourd'hui.
-await page.route("**/api/chat", (r) => r.abort());
+/**
+ * ⭐ UN ONGLET NEUF PAR NOTION, ET C'EST CE QUI A SAUVÉ LES FOURNÉES.
+ *
+ * Le script réutilisait UN onglet pour tout le lot. Résultat mesuré le 27/08 :
+ * 36 % d'échecs sur la 6e, et 9 sur 10 sur la 1re — toujours le même message,
+ * « l'écran de départ ne disparaît pas ». Or, ouvertes SEULES, ces mêmes notions
+ * affichent leur question en 2 à 8 secondes. Ce n'était donc ni le contenu ni le
+ * réseau : c'est le tutor qui s'alourdit navigation après navigation dans un
+ * onglet qui ne se vide jamais (minuteurs, écouteurs, état React accumulé).
+ *
+ * Rallonger le délai ne soignait que le symptôme, et de moins en moins bien :
+ * 20 s puis 35 s, pour un taux d'échec qui remontait avec la longueur du lot.
+ * Un onglet neuf coûte ~200 ms et fait repartir de zéro à chaque fois.
+ *
+ * ⚠️ L'ONGLET ENCODEUR, LUI, RESTE — il ne navigue jamais, il ne porte qu'un
+ * canvas. C'est justement l'absence de navigation qui le garde propre.
+ */
+async function ongletNeuf() {
+  const p = await contexte.newPage();
+  // ⛔ Voir la note en tête de fichier : le garde-fou qui ne sert à rien aujourd'hui.
+  await p.route("**/api/chat", (r) => r.abort());
+  return p;
+}
+
 const encodeur = await contexte.newPage();
 await encodeur.goto("about:blank");
 
@@ -251,6 +272,7 @@ const rates: string[] = [];
 
 for (const c of aFaire) {
   const t0 = Date.now();
+  const page = await ongletNeuf();
   try {
     const { octets, ecrans } = await capturer(page, c);
     const ancien = dejaLa(c);
@@ -266,6 +288,18 @@ for (const c of aFaire) {
     const cle = `${c.matiere}/${c.classe}/${c.notion}`;
     rates.push(cle);
     console.error(`  ✖ ${cle.padEnd(46)} ${(e as Error).message.split("\n")[0].slice(0, 60)}`);
+  } finally {
+    /**
+     * ⛔ DANS UN `finally`, ET C'EST VITAL. Un onglet neuf par notion ne vaut
+     * que si l'ancien se ferme : sans cette ligne, la fournée en accumule un par
+     * notion. Mesuré le 27/08 en oubliant de l'ajouter — UNE capture en dix
+     * minutes, contre une toutes les douze secondes. Le remède devenait pire que
+     * le mal qu'il soignait.
+     * Et dans `finally` plutôt qu'à la fin du `try` : une notion en échec doit
+     * fermer son onglet comme les autres, sinon ce sont les échecs qui remplissent
+     * le navigateur.
+     */
+    await page.close().catch(() => {});
   }
 }
 
@@ -560,10 +594,20 @@ async function capturerUneVue(
        * français de 5e, la seconde bande montrait l'écran de départ au lieu d'un
        * exercice — dans un fichier d'un poids parfaitement normal.
        */
+      /**
+       * ⚠️ 35 s, ET C'ÉTAIT 20 (27/08). Mesuré sur la 6e : 6 notions sur 19
+       * échouaient ici, toutes avec le même message. En OUVRANT CES NOTIONS
+       * SEULES, la question s'affiche en 2 s — le bouton est même vu
+       * instantanément. L'échec ne vient donc pas d'elles : il vient de
+       * l'enchaînement des deux vues sur la même page, où la seconde met
+       * parfois beaucoup plus longtemps à rendre son énoncé.
+       * Un délai trop court ne signale pas un défaut, il en fabrique un — et
+       * chaque échec coûte plus cher qu'une attente, puisqu'il faut repasser.
+       */
       await page.waitForFunction(
         () => !document.body.innerText.includes("Prêt pour une question"),
         undefined,
-        { timeout: 20000 },
+        { timeout: 35000 },
       );
       /* Le temps que l'énoncé se pose et que ses dessins se rendent.
          ⚠️ UNE SECONDE, ET C'ÉTAIT 2,5 (Frédéric, 27/08 : « raccourcis le temps,
