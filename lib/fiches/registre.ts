@@ -687,6 +687,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Planifier en partant de la fin qu'on veut atteindre, repérer l'idée qui commande plutôt que le détail qui frappe, et récrire une leçon avec ses mots pour la retenir.",
   },
+  "francais/5e/ecriture-produire": {
+    titre: "Écrire des textes d'invention et de réflexion (2026-2027)",
+    resume:
+      "Les quatre pièces d'un récit et les quatre d'une argumentation, la description qui montre au lieu de nommer, et les règles de la réponse rédigée.",
+  },
   "francais/5e/culture-entrees-5e": {
     titre: "Les quatre entrées de culture littéraire (2026-2027)",
     resume:
