@@ -94,6 +94,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "proportionnalite-cm2-cours-exercices-corriges.pdf",
   "puissances-et-notation-scientifique-4e-cours-exercices-corriges.pdf",
   "quadrilateres-6e-cours-exercices-corriges.pdf",
+  "ratios-et-pourcentages-4e-cours-exercices-corriges.pdf",
   "ratios-pourcentages-et-coefficient-5e-cours-exercices-corriges.pdf",
   "reperage-cm2-cours-exercices-corriges.pdf",
   "reprises-et-la-chaine-anaphorique-2026-2027-5e-cours-exercices-corriges.pdf",

@@ -354,6 +354,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Le théorème de Pythagore",
     resume: "Reconnaître l'hypoténuse, calculer une longueur, et utiliser la réciproque pour prouver un angle droit.",
   },
+  "maths/4e/prop-ratio-pourcentage": {
+    titre: "Ratios et pourcentages",
+    resume:
+      "Le ratio dit « tant contre tant », le pourcentage « tant sur cent » : exprimer et simplifier un ratio, le relier à l'égalité de quotients, partager une quantité selon deux ou trois parts, et manier le coefficient multiplicateur.",
+  },
   "maths/4e/puissance-ecriture": {
     titre: "Puissances et notation scientifique",
     resume:
