@@ -113,8 +113,25 @@ for (const fichier of fichiers) {
   let mini = Infinity;
   const tropPetits = [];
   const debordements = [];
+  const chevauchements = [];
 
   for (const { rubrique, html } of dessins) {
+    // ⛔ TROISIÈME MESURE, AJOUTÉE LE 28/08/2026 : DEUX ÉTIQUETTES QUI S'ÉCRIVENT
+    // L'UNE SUR L'AUTRE. Les deux mesures d'avant — la taille de police et le
+    // débordement du cadre — la laissaient passer entièrement : un texte peut
+    // être à 12 px, tenir dans le cadre, et être illisible parce qu'un autre
+    // texte occupe les mêmes pixels. Vérifié au navigateur sur la fiche des
+    // pronoms de 6e : deux étiquettes « pronom » se recouvrent de 11 px, ligne
+    // des natures, et rien ne le signalait.
+    //
+    // ⛔⛔ ON NE COMPARE QUE DES TEXTES DE MÊME LIGNE DE BASE (même `y`), ET
+    // C'EST TOUT L'INTÉRÊT. Comparer les extensions horizontales sans regarder le
+    // `y` fait crier au loup : `number_line` DÉCALE EN HAUTEUR les étiquettes qui
+    // ne tiendraient pas côte à côte (y = 62, 40, 18, 4), et une frise de quatre
+    // périodes affiche ainsi « Moyen Âge » et « Renaissance » sur des extensions
+    // qui se recouvrent de 56 px sans qu'un seul pixel soit partagé.
+    const surLaLigne = new Map();
+
     const vb = /viewBox="0 0 ([\d.]+) ([\d.]+)"/.exec(html);
     if (!vb) continue;
     const largeurVb = Number(vb[1]);
@@ -150,10 +167,33 @@ for (const fichier of fichiers) {
         );
       }
 
+      const y = /\by="([\d.-]+)"/.exec(attrs)?.[1];
+      if (y !== undefined) {
+        if (!surLaLigne.has(y)) surLaLigne.set(y, []);
+        surLaLigne.get(y).push({ texte, gauche, droite: gauche + large, echelle });
+      }
+    }
+
+    // Sur chaque ligne de base, deux voisins ne doivent pas se recouvrir. Le
+    // recouvrement est ramené à l'échelle du bloc : deux pixels dans le viewBox
+    // d'un dessin réduit de moitié n'en font qu'un sous les yeux de l'élève.
+    for (const [, textes] of surLaLigne) {
+      const tries = [...textes].sort((a, b) => a.gauche - b.gauche);
+      for (let i = 1; i < tries.length; i += 1) {
+        const avant = tries[i - 1];
+        const apres = tries[i];
+        const recouvrement = (avant.droite - apres.gauche) * apres.echelle;
+        if (recouvrement > MARGE_DEBORDEMENT) {
+          chevauchements.push(
+            `« ${avant.texte.slice(0, 20)} » et « ${apres.texte.slice(0, 20)} » ` +
+              `se superposent sur ${recouvrement.toFixed(0)} px dans le bloc ${rubrique}`
+          );
+        }
+      }
     }
   }
 
-  const ok = !tropPetits.length && !debordements.length;
+  const ok = !tropPetits.length && !debordements.length && !chevauchements.length;
   console.log(
     `\n${ok ? "✅" : "⛔"} ${basename(fichier)} — ${dessins.length} dessins, ` +
       `police minimale ${Number.isFinite(mini) ? mini.toFixed(1) : "—"} px`
@@ -162,7 +202,9 @@ for (const fichier of fichiers) {
   if (tropPetits.length > 6) console.log(`   ⛔ … et ${tropPetits.length - 6} autres`);
   for (const d of [...new Set(debordements)].slice(0, 6)) console.log(`   ⛔ hors cadre : ${d}`);
   if (debordements.length > 6) console.log(`   ⛔ … et ${debordements.length - 6} autres`);
-  fautes += tropPetits.length + debordements.length;
+  for (const c of [...new Set(chevauchements)].slice(0, 6)) console.log(`   ⛔ superposé : ${c}`);
+  if (chevauchements.length > 6) console.log(`   ⛔ … et ${chevauchements.length - 6} autres`);
+  fautes += tropPetits.length + debordements.length + chevauchements.length;
 }
 
 console.log(

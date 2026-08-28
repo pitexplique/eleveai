@@ -672,6 +672,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Suivre le parcours d'un personnage en comparant la fin au premier chapitre, comparer ce que peuvent les mots, l'image, la musique et la scène, et lire le contexte.",
   },
+  "francais/5e/culture-connaissances": {
+    titre: "Acquérir des connaissances littéraires (2026-2027)",
+    resume:
+      "Reconnaitre un genre dès son ouverture, situer une œuvre parmi quatre périodes, savoir ce qu'il faut connaitre pour comprendre une scène, et tenir un carnet qui se relit.",
+  },
 
   /* ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées, mais
      ni le registre ni le sitemap ne les déclaraient : le coach n'affichait
