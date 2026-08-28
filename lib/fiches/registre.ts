@@ -677,6 +677,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Reconnaitre un genre dès son ouverture, situer une œuvre parmi quatre périodes, savoir ce qu'il faut connaitre pour comprendre une scène, et tenir un carnet qui se relit.",
   },
+  "francais/5e/culture-entrees-5e": {
+    titre: "Les quatre entrées de culture littéraire (2026-2027)",
+    resume:
+      "Le héros qui perd en superbe et gagne en banalité, le voyage que fait la langue d'un poème, les ressorts du théâtre renversé, et ce qu'incarne chaque figure de fable.",
+  },
 
   /* ⭐ LA 4e (25/08/2026). Ses trois fiches étaient en ligne et routées, mais
      ni le registre ni le sitemap ne les déclaraient : le coach n'affichait
