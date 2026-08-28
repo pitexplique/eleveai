@@ -507,6 +507,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Trouver le verbe, poser les questions, et prouver une fonction en déplaçant, supprimant ou remplaçant le groupe — au lieu de réciter une définition.",
   },
+  "francais/6e/comprehension-textes": {
+    titre: "Comprendre et interpréter un texte en 6e (2026-2027)",
+    resume:
+      "Dégager le sens global, rattacher un texte à son genre, comprendre l'implicite — la réponse peut manquer, jamais l'indice — et justifier en citant le passage.",
+  },
   "francais/6e/lecture-voix-haute": {
     titre: "Lire à voix haute et mettre en voix en 6e (2026-2027)",
     resume:
