@@ -466,8 +466,11 @@ Ordre proposé, du plus sûr au plus incertain :
    rendez-vous du 26/09 se joue là-dessus.
 
 ════ LES RÈGLES DU DÉPÔT À PLUSIEURS SESSIONS ═══════════════════════
-• ⛔⛔ TROIS SESSIONS TOURNENT EN MÊME TEMPS DANS CE DOSSIER (27/08) : maths,
-  français, et les cartes de l'écran d'accueil.
+• ⛔⛔ PLUSIEURS SESSIONS TOURNENT EN MÊME TEMPS DANS CE DOSSIER, et leur nombre
+  CHANGE DANS LA JOURNÉE. Le 27/08 : trois le matin (maths, français, cartes de
+  l'écran), deux ensuite (maths et français). ⚠️ Ne pas le supposer : elles
+  partagent le même `.git`, donc un commit d'une autre session apparaît dans
+  `main` entre deux commandes. `git log --oneline -5` avant de conclure.
 • git commit -F message.txt -- <fichiers>  ⭐ TOUJOURS par chemin.
   ⛔ ET LA PARADE PAR CHEMIN A UN TROU : `git commit -- <fichier>` committe
   l'ÉTAT COMPLET du fichier, pas mes lignes. Sur un fichier partagé, je
