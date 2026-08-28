@@ -650,8 +650,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Résoudre des problèmes de proportionnalité",
     objectif: "Notion de ratio.",
     page: 134,
-    micros: [],
-    note: "⛔ TROU. Zéro occurrence du mot « ratio » dans les vingt banques de 4e. Le BO en donne la notation standardisée : a et b sont dans le ratio 2 : 3 si a/2 = b/3 ; a, b, c dans le ratio 2 : 3 : 7 si a/2 = b/3 = c/7. ⭐ Se greffe sur la notion EXISTANTE `prop_proportionnalite` : quelques micros et des énoncés, pas une fiche entière.",
+    micros: ["prop_rapport", "prop_ratio_quotients", "prop_ratio_trois"],
+    note: "✅ COMBLÉ LE 28/08/2026 par la notion `prop_ratio_pourcentage`, scindée de `prop_proportionnalite` comme l'avait déjà fait la 5e. ⭐ Les DEUX notations du BO sont couvertes, y compris celle à trois termes (a/2 = b/3 = c/7) dont la 5e n'a aucun item — vérifié, zéro occurrence.",
   },
   {
     id: "4e-B-proportionnalite-4",
@@ -676,8 +676,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Partager une quantité (par exemple une somme d'argent) en deux ou trois parts selon un ratio donné.",
     page: 134,
-    micros: [],
-    note: "⛔ TROU. Compagnon de 4e-B-proportionnalite-3 : c'est l'usage qui donne son sens au ratio.",
+    micros: ["prop_ratio_partager", "prop_ratio_defi"],
+    note: "✅ COMBLÉ LE 28/08/2026. ⭐ « En deux OU TROIS parts » : les deux cas ont leur gabarit, et le canvas `schema_barre` montre pourquoi on divise d'abord par la SOMME des parts — l'erreur classique étant de diviser par 3 quand le ratio 2 : 3 : 7 en compte douze.",
   },
   {
     id: "4e-B-proportionnalite-7",

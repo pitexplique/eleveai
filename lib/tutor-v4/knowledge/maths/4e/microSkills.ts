@@ -237,39 +237,96 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["prop_table", "prop_coeff"],
   },
   {
+    id: "prop_probleme",
+    label: "Résoudre un problème de proportionnalité",
+    notionId: "prop_proportionnalite",
+    // ⚠️ PRÉREQUIS ALLÉGÉS LE 28/08/2026, ET C'EST CE QUI REND LA SCISSION
+    // POSSIBLE. Ils citaient `prop_pourcentage` et `prop_evolution`, qui
+    // partent dans `prop_ratio_pourcentage` : la notion qui reste aurait alors
+    // dépendu de la notion neuve, laquelle dépend d'elle — un CYCLE.
+    // ⭐ La 5e avait déjà tranché de la même façon : son `prop_probleme` ne
+    // dépend que de la quatrième proportionnelle et du coefficient. Un problème
+    // de proportionnalité n'a pas besoin des pourcentages pour se poser.
+    prerequis: ["prop_quatrieme", "prop_coeff"],
+  },
+  {
+    id: "prop_defi",
+    // Le libellé disait « et les pourcentages » : ils ne sont plus ici.
+    label: "Défis sur la proportionnalité",
+    notionId: "prop_proportionnalite",
+    prerequis: ["prop_quatrieme", "prop_probleme"],
+  },
+
+  /* =========================
+     RATIOS ET POURCENTAGES
+  ========================= */
+  // ⭐ NOTION OUVERTE LE 28/08/2026, et c'est une SCISSION doublée d'un ajout.
+  //
+  // ⛔ LE TROU : le mot « ratio » avait ZÉRO occurrence dans les vingt banques
+  // de 4e, alors que le BO du cycle 4 (p. 134) en fait une connaissance et lui
+  // consacre une compétence (« Partager une quantité en deux ou trois parts
+  // selon un ratio donné »). La 5e, elle, l'a déjà : dix items.
+  //
+  // ⭐ LE DÉCOUPAGE EST CELUI DE LA 5e, À L'IDENTIQUE — mêmes identifiants,
+  // donc l'élève retrouve la même coupure d'une année sur l'autre. Et les six
+  // micros qui restent dans `prop_proportionnalite` correspondent UNE À UNE aux
+  // six de la 5e : reconnaître, tableau, quatrième, coefficient, problème,
+  // défis. C'est le signe que la ligne de fracture est la bonne.
+  //
+  // ⭐ CE QUE LA 4e AJOUTE, et qui n'existe nulle part ailleurs dans le dépôt :
+  //   · la DÉFINITION PAR QUOTIENTS ÉGAUX (a et b dans le ratio 2 : 3 si
+  //     a/2 = b/3). La 5e enseigne le ratio comme une DESCRIPTION ; c'est cette
+  //     égalité qui le rend CALCULABLE ;
+  //   · le ratio à TROIS TERMES (2 : 3 : 7), que le BO écrit noir sur blanc et
+  //     dont la 5e n'a aucun item — vérifié, zéro occurrence ;
+  //   · le PARTAGE d'une quantité selon un ratio, la compétence du programme.
+  {
+    id: "prop_rapport",
+    label: "Exprimer et utiliser un ratio",
+    notionId: "prop_ratio_pourcentage",
+    prerequis: ["prop_reconnaitre", "fraction_simplifier"],
+  },
+  {
+    id: "prop_ratio_quotients",
+    label: "Relier un ratio à une égalité de quotients",
+    notionId: "prop_ratio_pourcentage",
+    prerequis: ["prop_rapport", "fraction_egale"],
+  },
+  {
+    id: "prop_ratio_trois",
+    label: "Utiliser un ratio à trois termes",
+    notionId: "prop_ratio_pourcentage",
+    prerequis: ["prop_ratio_quotients"],
+  },
+  {
+    id: "prop_ratio_partager",
+    label: "Partager une quantité selon un ratio",
+    notionId: "prop_ratio_pourcentage",
+    prerequis: ["prop_ratio_trois", "prop_quatrieme"],
+  },
+  {
     id: "prop_pourcentage",
     label: "Calculer et interpréter un pourcentage",
-    notionId: "prop_proportionnalite",
+    notionId: "prop_ratio_pourcentage",
     prerequis: ["prop_coeff"],
   },
   {
     id: "prop_coeff_multiplicateur",
     label: "Utiliser un coefficient multiplicateur",
-    notionId: "prop_proportionnalite",
+    notionId: "prop_ratio_pourcentage",
     prerequis: ["prop_pourcentage", "prop_coeff"],
   },
   {
     id: "prop_evolution",
     label: "Interpréter une évolution en pourcentage",
-    notionId: "prop_proportionnalite",
+    notionId: "prop_ratio_pourcentage",
     prerequis: ["prop_pourcentage", "prop_coeff_multiplicateur"],
   },
   {
-    id: "prop_probleme",
-    label: "Résoudre un problème de proportionnalité",
-    notionId: "prop_proportionnalite",
-    prerequis: [
-      "prop_quatrieme",
-      "prop_coeff",
-      "prop_pourcentage",
-      "prop_evolution",
-    ],
-  },
-  {
-    id: "prop_defi",
-    label: "Défis sur la proportionnalité et les pourcentages",
-    notionId: "prop_proportionnalite",
-    prerequis: ["prop_evolution", "prop_probleme"],
+    id: "prop_ratio_defi",
+    label: "Défis sur les ratios et les pourcentages",
+    notionId: "prop_ratio_pourcentage",
+    prerequis: ["prop_ratio_partager", "prop_evolution"],
   },
 
   /* =========================

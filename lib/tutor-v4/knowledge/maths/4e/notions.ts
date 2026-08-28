@@ -91,6 +91,30 @@ export const notions: NotionSource[] = [
     prerequis: ["fraction_nombre"],
     levels: [1, 2, 3],
   },
+  // ⭐ SCINDÉE LE 28/08/2026, EXACTEMENT COMME LA 5e. `prop_proportionnalite`
+  // portait NEUF micros et deux objets : la proportionnalité elle-même
+  // (reconnaître, tableau, quatrième, coefficient, problème) et les RAPPORTS
+  // (pourcentage, coefficient multiplicateur, évolution). La 5e a déjà cette
+  // coupure, avec les mêmes identifiants — l'élève la retrouve d'une année sur
+  // l'autre, et les six micros qui restent ici correspondent une à une aux six
+  // de la 5e.
+  //
+  // ⛔ ET C'EST AUSSI UN TROU DU BO QUI SE FERME : le mot « ratio » n'existait
+  // nulle part en 4e, alors que le programme du cycle 4 (p. 134) en fait une
+  // connaissance — « deux nombres a et b sont dans le ratio 2 : 3 si
+  // a/2 = b/3 » — et lui consacre une compétence de partage.
+  //
+  // ⚠️ LE SENS DES PRÉREQUIS EST À SENS UNIQUE, et il a fallu l'obtenir : les
+  // prérequis de `prop_probleme` citaient `prop_pourcentage` et
+  // `prop_evolution`, qui partent ici. Ils ont été allégés (voir microSkills),
+  // sans quoi les deux notions se seraient mutuellement dépendantes.
+  {
+    id: "prop_ratio_pourcentage",
+    label: "Ratios et pourcentages",
+    boId: "BO4P1",
+    prerequis: ["prop_proportionnalite"],
+    levels: [1, 2, 3],
+  },
 
   // =========================
   // ALGÈBRE

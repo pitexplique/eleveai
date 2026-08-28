@@ -88,6 +88,13 @@ export const NOTION_COACH_MATHS: TableNotions = {
   puissances: {
     "4e": "puissance_ecriture", "3e": "entier_puissance",
   },
+  // ⭐ AJOUTÉ LE 28/08/2026 avec la notion de 4e. La 5e avait déjà
+  // `prop_ratio_pourcentage` — mais aucun thème ne pointait dessus : un élève
+  // de 5e qui tapait « ratio » ouvrait la proportionnalité générale, pas les
+  // ratios. Les deux classes entrent donc ensemble, comme pour les puissances.
+  ratio: {
+    "5e": "prop_ratio_pourcentage", "4e": "prop_ratio_pourcentage",
+  },
   relatifs: { "5e": "relatif_nombre", "4e": "relatif_operation" },
   proportionnalite: {
     cm1: "proportionnalite", cm2: "proportionnalite",

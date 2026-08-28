@@ -87,6 +87,28 @@ const supportLinks: Record<string, string[]> = {
   ],
 
   // =========================
+  // RATIOS ET POURCENTAGES
+  // =========================
+  // ⭐ Ajoutés le 28/08/2026 avec la scission. Les liens FORTS viennent des
+  // `prerequis` de microSkills et se dérivent seuls ; ceux-ci sont les liens
+  // FAIBLES, qui disent au moteur sur quoi s'appuyer pour remédier.
+  // ⚠️ Les trois micros de pourcentage gardent les leurs, écrits plus bas sous
+  // « PROPORTIONNALITÉ » : elles ont changé de notion, pas d'identifiant.
+  // Un ratio se lit comme un tableau de proportionnalité à deux colonnes :
+  // c'est là qu'on renvoie un élève qui bute sur l'écriture 2 : 3.
+  prop_rapport: ["prop_table", "prop_coeff"],
+  prop_ratio_quotients: ["prop_rapport", "fraction_egale", "fraction_simplifier"],
+  prop_ratio_trois: ["prop_ratio_quotients", "prop_rapport"],
+  // Partager, c'est d'abord diviser par la SOMME des parts : la quatrième
+  // proportionnelle et le retour à l'unité sont les appuis de remédiation.
+  prop_ratio_partager: ["prop_ratio_trois", "prop_quatrieme", "prop_coeff"],
+  prop_ratio_defi: [
+    "prop_ratio_partager",
+    "prop_evolution",
+    "prop_pourcentage",
+  ],
+
+  // =========================
   // PROPORTIONNALITÉ
   // =========================
   prop_table: ["prop_reconnaitre", "fraction_comparer"],
