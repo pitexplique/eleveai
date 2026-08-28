@@ -79,6 +79,15 @@ export const NOTION_COACH_MATHS: TableNotions = {
     cp: "calcul_mental", ce1: "calcul_mental", ce2: "calcul_mental",
     cm1: "calcul", cm2: "calcul", "6e": "entier_calcul_mental",
   },
+  // ⭐ AJOUTÉ LE 28/08/2026 avec la notion `puissance_ecriture` de 4e.
+  // ⛔ MAIS LE TROU NE DATAIT PAS DE LA 4e : il n'existait AUCUN thème
+  // « puissances » ici, et `calcul` s'arrête à la 6e. Un élève de 3e qui tapait
+  // « puissances » dans la matrice n'ouvrait donc RIEN — alors que la 3e a
+  // `entier_puissance` avec sa banque de 59 items depuis longtemps. Les deux
+  // classes entrent ensemble, sinon on répare une moitié du problème.
+  puissances: {
+    "4e": "puissance_ecriture", "3e": "entier_puissance",
+  },
   relatifs: { "5e": "relatif_nombre", "4e": "relatif_operation" },
   proportionnalite: {
     cm1: "proportionnalite", cm2: "proportionnalite",

@@ -110,8 +110,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Utiliser diverses représentations d'un même nombre (écriture décimale ou fractionnaire, notation scientifique, repérage sur une droite graduée).",
     page: 130,
-    micros: ["fraction_decimal", "fraction_rationnel"],
-    note: "⚠️ Deux des quatre représentations seulement. La NOTATION SCIENTIFIQUE et le REPÉRAGE SUR UNE DROITE GRADUÉE ont zéro item en 4e.",
+    micros: ["fraction_decimal", "fraction_rationnel", "puissance_notation_scientifique"],
+    note: "⚠️ Trois des quatre représentations depuis le 28/08/2026 : la NOTATION SCIENTIFIQUE est entrée avec `puissance_ecriture`. Reste le REPÉRAGE SUR UNE DROITE GRADUÉE, qui n'a toujours aucun item en 4e (voir 4e-A-comparaisons-4).",
   },
   {
     id: "4e-A-nombres-7",
@@ -150,8 +150,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Comparer, ranger, encadrer des nombres rationnels en écriture décimale, fractionnaire ou scientifique",
     page: 131,
-    micros: ["fraction_comparer"],
-    note: "⚠️ Comparer et ranger seulement. ENCADRER n'a aucun item en 4e, et l'écriture SCIENTIFIQUE n'existe pas.",
+    micros: ["fraction_comparer", "puissance_comparer"],
+    note: "⚠️ Comparer et ranger, en écriture décimale, fractionnaire ET scientifique depuis le 28/08/2026 (`puissance_comparer` : l'exposant décide d'abord, la mantisse ensuite). Reste ENCADRER, qui n'a aucun item en 4e.",
   },
   {
     id: "4e-A-comparaisons-4",
@@ -201,8 +201,13 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
       "Utiliser les nombres pour comparer, calculer et résoudre des problèmes — Pratiquer le calcul exact ou approché, mental, à la main ou instrumenté",
     objectif: "Puissance d'un nombre (exposants entiers, positifs ou négatifs).",
     page: 131,
-    micros: [],
-    note: "⛔ TROU, et c'est la première valeur sûre à combler : les puissances restent en 4e dans le programme 2020 ET dans celui de 2027. La 3e a `entier_puissance` (6 micros, `puissances.bank.ts`, 59 items) — le travail est de DESCENDRE, pas d'inventer.",
+    micros: [
+      "puissance_comprendre",
+      "puissance_calculer",
+      "puissance_exposant_negatif",
+      "puissance_dix",
+    ],
+    note: "✅ COMBLÉ LE 28/08/2026 par la notion `puissance_ecriture`. ⭐ Le « ou négatifs » du BO a sa micro dédiée (`puissance_exposant_negatif`), là où la 3e le noie dans le calcul : c'est ce qui fait sept micros en 4e contre six en 3e.",
   },
   {
     id: "4e-A-calcul-3",
@@ -211,8 +216,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
       "Utiliser les nombres pour comparer, calculer et résoudre des problèmes — Pratiquer le calcul exact ou approché, mental, à la main ou instrumenté",
     objectif: "Notation scientifique.",
     page: 131,
-    micros: [],
-    note: "⛔ TROU. Se traite avec les puissances (4e-A-calcul-2) et les préfixes (4e-A-nombres-5).",
+    micros: ["puissance_notation_scientifique"],
+    note: "✅ COMBLÉ LE 28/08/2026. ⚠️ Restent les PRÉFIXES nano→giga (4e-A-nombres-5) : ils ne sont pas de cette notion — une puissance est une écriture, un ordre de grandeur est une mesure.",
   },
   {
     id: "4e-A-calcul-4",
@@ -242,8 +247,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Effectuer des calculs numériques simples impliquant des puissances, notamment en utilisant la notation scientifique.",
     page: 131,
-    micros: [],
-    note: "⛔ TROU. ⚠️ Calibrage 4e : le BO précise que « la mise en acte de produits et de quotients de puissances de même base résulte de l'application de la définition plutôt que de celle d'une formule ». Les formules générales restent en 3e.",
+    micros: ["puissance_calcul", "puissance_defi"],
+    note: "✅ COMBLÉ LE 28/08/2026. ⛔ CALIBRAGE RESPECTÉ : le BO précise que « la mise en acte de produits et de quotients de puissances de même base résulte de l'application de la DÉFINITION plutôt que de celle d'une formule ». Aucun item n'énonce a^m × a^n = a^(m+n) — quand un produit de même base apparaît, l'explication réécrit le produit en entier. Les formules restent en 3e.",
   },
   {
     id: "4e-A-calcul-7",

@@ -55,6 +55,38 @@ const supportLinks: Record<string, string[]> = {
   fraction_defi: ["fraction_quantite", "fraction_diviser", "fraction_oppose"],
 
   // =========================
+  // PUISSANCES ET NOTATION SCIENTIFIQUE
+  // =========================
+  // ⭐ Ajouté le 28/08/2026 avec la notion. Les liens FORTS viennent déjà des
+  // `prerequis` de microSkills.ts et se dérivent tout seuls ; ceux-ci sont les
+  // liens FAIBLES, qui disent au moteur sur quoi s'appuyer pour remédier.
+  // ⚠️ Rien ne vérifie ce tableau : une micro oubliée ici ne casse rien, elle
+  // rend seulement la progression plus pauvre. 24 des 136 micros de la classe
+  // n'en ont aucun (mesuré le 27/08) — ne pas grossir ce chiffre.
+  puissance_calculer: ["puissance_comprendre", "relatif_multiplication"],
+  // Le piège du signe ((−2)³ contre −2³) se remédie par les relatifs.
+  puissance_exposant_negatif: [
+    "puissance_calculer",
+    "fraction_inverse",
+    "fraction_decimal",
+  ],
+  puissance_dix: ["puissance_calculer", "puissance_comprendre"],
+  puissance_notation_scientifique: [
+    "puissance_dix",
+    "puissance_exposant_negatif",
+    "fraction_decimal",
+  ],
+  // Comparer deux écritures scientifiques, c'est comparer des nombres : la
+  // remédiation passe par la comparaison de fractions et de décimaux.
+  puissance_comparer: ["puissance_notation_scientifique", "fraction_comparer"],
+  puissance_calcul: ["puissance_calculer", "puissance_dix", "relatif_calcul"],
+  puissance_defi: [
+    "puissance_calcul",
+    "puissance_comparer",
+    "puissance_notation_scientifique",
+  ],
+
+  // =========================
   // PROPORTIONNALITÉ
   // =========================
   prop_table: ["prop_reconnaitre", "fraction_comparer"],

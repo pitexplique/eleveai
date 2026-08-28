@@ -138,6 +138,77 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["fraction_quantite", "fraction_diviser", "fraction_oppose"],
   },
 
+  /* =========================
+     PUISSANCES ET NOTATION SCIENTIFIQUE
+  ========================= */
+  // ⭐ NOTION OUVERTE LE 28/08/2026, validée micro par micro. Elle ferme cinq
+  // puces du BO qui n'avaient AUCUNE micro (voir bo-objectifs.ts) :
+  // 4e-A-calcul-2, 4e-A-calcul-3, 4e-A-calcul-6, 4e-A-nombres-6, 4e-A-comparaisons-3.
+  //
+  // ⭐ SEPT MICROS ET NON LES SIX DE LA 3e (`entier_puissance`), et c'est
+  // délibéré. Frédéric, 27/08 : « en mode complet on peut RESTER SUR LA MICRO »
+  // — un découpage plus fin ne disperse donc pas l'élève, il lui donne un grain
+  // de travail plus précis. Et le BO du cycle 4 fait de l'exposant négatif une
+  // connaissance à part entière (« exposants entiers, positifs OU NÉGATIFS »),
+  // là où la 3e le noie dans `entier_puissance_calculer`.
+  //
+  // ⛔ CE QUI RESTE EN 3e ET NE DOIT PAS DESCENDRE ICI : les FORMULES
+  // a^m × a^n = a^(m+n) et les quotients de même base. Le BO est explicite —
+  // leur mise en acte « résulte de l'application de la DÉFINITION plutôt que de
+  // celle d'une formule ». En 4e on redescend au produit écrit en entier.
+  //
+  // ⛔ ET CE QUI N'EST PAS DE CETTE NOTION : les préfixes nano→giga et les
+  // ordres de grandeur. Une puissance est une ÉCRITURE, un ordre de grandeur
+  // est une MESURE — ils feront leur propre notion.
+  {
+    id: "puissance_comprendre",
+    label: "Comprendre l’écriture d’une puissance",
+    notionId: "puissance_ecriture",
+    prerequis: [],
+  },
+  {
+    id: "puissance_calculer",
+    label: "Calculer une puissance",
+    notionId: "puissance_ecriture",
+    prerequis: ["puissance_comprendre"],
+  },
+  {
+    id: "puissance_exposant_negatif",
+    label: "Comprendre et calculer une puissance d’exposant négatif",
+    notionId: "puissance_ecriture",
+    prerequis: ["puissance_calculer", "fraction_inverse"],
+  },
+  {
+    id: "puissance_dix",
+    label: "Utiliser les puissances de 10",
+    notionId: "puissance_ecriture",
+    prerequis: ["puissance_calculer"],
+  },
+  {
+    id: "puissance_notation_scientifique",
+    label: "Écrire un nombre en notation scientifique",
+    notionId: "puissance_ecriture",
+    prerequis: ["puissance_dix", "puissance_exposant_negatif"],
+  },
+  {
+    id: "puissance_comparer",
+    label: "Comparer et ranger des nombres en notation scientifique",
+    notionId: "puissance_ecriture",
+    prerequis: ["puissance_notation_scientifique"],
+  },
+  {
+    id: "puissance_calcul",
+    label: "Effectuer des calculs avec des puissances",
+    notionId: "puissance_ecriture",
+    prerequis: ["puissance_calculer", "puissance_dix"],
+  },
+  {
+    id: "puissance_defi",
+    label: "Défis sur les puissances et la notation scientifique",
+    notionId: "puissance_ecriture",
+    prerequis: ["puissance_calcul", "puissance_comparer"],
+  },
+
     /* =========================
      PROPORTIONNALITÉ
   ========================= */

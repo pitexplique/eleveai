@@ -33,6 +33,7 @@ import { thalesBank } from "./thales.bank";
 import { statistiquesBank} from "./statistiques.bank"
 import { algorithmiqueBank } from "./algorithmique.bank";
 import { cosinusBank } from "./cosinus.bank";
+import { puissancesBank } from "./puissances.bank";
 
 
 // =========================
@@ -51,6 +52,7 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...probabilitesBank,
   ...fractionsBank,
   ...operationsRelatifsBank,
+  ...puissancesBank,
   ...identitesRemarquablesBank,
   ...factorisationBank,
   ...proportionnaliteBank,

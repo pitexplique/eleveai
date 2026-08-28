@@ -61,6 +61,25 @@ export const notions: NotionSource[] = [
     prerequis: ["fraction_nombre"],
     levels: [1, 2, 3],
   },
+  // ⭐ OUVERTE LE 28/08/2026. Le programme du cycle 4 (BOEN n° 31 du 30 juillet
+  // 2020, p. 130-131) porte trois puces que la 4e ne couvrait PAS : « Puissance
+  // d'un nombre (exposants entiers, positifs ou négatifs) », « Notation
+  // scientifique », et « Effectuer des calculs numériques simples impliquant des
+  // puissances ». Zéro occurrence du mot « puissance » dans les vingt banques.
+  //
+  // ⭐ C'EST LA VALEUR SÛRE DU CHANTIER : les puissances restent en 4e dans le
+  // programme 2020 ET dans celui qui s'applique à partir de septembre 2027,
+  // contrairement à Thalès et au cosinus, qui passent en 3e.
+  //
+  // PRÉREQUIS : les relatifs pour l'exposant négatif et le signe de la base
+  // ((−2)³ contre −2³), les fractions pour lire 10⁻³ comme 1/1000.
+  {
+    id: "puissance_ecriture",
+    label: "Puissances et notation scientifique",
+    boId: "BO4N3",
+    prerequis: ["relatif_operation", "fraction_nombre"],
+    levels: [1, 2, 3],
+  },
 
   // =========================
   // PROPORTIONNALITÉ

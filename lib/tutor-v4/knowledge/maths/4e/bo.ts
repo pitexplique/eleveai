@@ -23,6 +23,15 @@ export const bo: KnowledgeBoCompetence[] = [
     boId: "BO4N2",
     label: "Fractions et nombres rationnels",
   },
+  // ⭐ AJOUTÉ LE 28/08/2026 avec la notion `puissance_ecriture`. Elles auraient
+  // pu se ranger sous BO4N1, mais « Nombres relatifs et calculs » ne nomme pas
+  // ce que l'élève travaille : le BO du cycle 4 énonce « Puissance d'un nombre »
+  // et « Notation scientifique » comme deux connaissances distinctes des
+  // relatifs. Une compétence qui ne se lit pas est une compétence qui ment.
+  {
+    boId: "BO4N3",
+    label: "Puissances et notation scientifique",
+  },
   {
     boId: "BO4P1",
     label: "Proportionnalité",
