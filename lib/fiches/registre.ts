@@ -354,6 +354,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Le théorème de Pythagore",
     resume: "Reconnaître l'hypoténuse, calculer une longueur, et utiliser la réciproque pour prouver un angle droit.",
   },
+  "maths/4e/puissance-ecriture": {
+    titre: "Puissances et notation scientifique",
+    resume:
+      "L'exposant compte les facteurs, il ne multiplie pas ; un exposant négatif donne un inverse et non un opposé ; et la notation scientifique donne à chaque nombre une forme unique, qui rend la comparaison immédiate.",
+  },
   "maths/premiere-spe/derivation": {
     titre: "La dérivation",
     resume: "Taux de variation, nombre dérivé, dérivées usuelles et équation de la tangente.",
