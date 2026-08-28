@@ -37,9 +37,9 @@ Cinq fiches écrites dans la foulée de cette passation, une par objectif du BO 
 Puis `discours_registres`, et **LE DOMAINE DE L'ORAL EN ENTIER** —
 `lecture_voix_haute`, `oral_dire_jouer`, `oral_ecouter`, `oral_prendre_parole`.
 
-**La 5e est donc à 18 notions fichées sur 28.** Reste : `conjugaison_formes`,
-`conjugaison_valeurs`, `lecture_comprehension`, `lecture_apprecier`,
-`lecture_oeuvre_contextes`, `culture_connaissances`, `culture_entrees_5e`,
+**La 5e est à 23 notions fichées sur 28.** Ses domaines ENTIERS : le lexique (5),
+l'oral (3), la conjugaison (3), la lecture (4). **Reste CINQ notions, et deux
+domaines seulement** : `culture_connaissances`, `culture_entrees_5e`,
 `ecriture_reflechir`, `ecriture_produire`, `ecriture_reviser`.
 
 ### ⭐ La 6e est ouverte : lexique ET étude de la langue entiers — 14 notions sur 29
@@ -407,3 +407,38 @@ ci-dessus. La 6e ensuite — en relisant son programme à elle, celui du cycle 3
 
 **Une fiche à la fois, vérifiée et commitée avant la suivante.** C'est ce rythme
 qui a permis d'en écrire seize en une journée sans qu'aucune ne soit à reprendre.
+
+---
+
+## ⭐ Trois règles nées de la journée du 27/08, à ne pas repayer
+
+**1. Le crochet a SIX emplois, pas cinq.** Au cinq déjà listés s'ajoute : **ce
+que l'auditeur doit faire** (« je sais », « j'adhère », « je fais »). Et l'arc de
+question, lui, sert dans TROIS directions selon la fiche —
+de ce qu'on comprend vers ce qui le montre (`lecture_comprehension`),
+de l'effet vers ce qui l'a produit (`lecture_apprecier`),
+et **de la fin vers le début** (`lecture_oeuvre_contextes`, où il remonte le
+temps pour comparer le dernier chapitre au premier). Un seul geste, trois sens.
+
+**2. La règle de couleur a une BASCULE, et je l'avais mal énoncée.** Ce n'est pas
+« toujours gris » : c'est **« gris quand ce n'est pas une fonction »**. Dans une
+fiche de LANGUE (`grammaire_phrase` 6e), les étiquettes SONT des fonctions et les
+couleurs DOIVENT s'appliquer — sujet bleu, verbe rouge, COD vert, CC orange,
+propositions indigo et sarcelle, vérifié au rendu. Dans une fiche de lexique,
+d'oral ou de lecture, elles n'en sont pas et doivent rester grises. **Les deux cas
+se mesurent au rendu**, jamais au jugement.
+
+**3. Deux contrôles qui crient au loup — savoir les lire.**
+- ⛔ **`window.innerWidth === 0` fausse TOUTE mesure de police.** Un contrôle a
+  rendu « 5,01 px, débordement » sur une fiche parfaitement saine : la fenêtre
+  n'avait plus de largeur. **Toujours vérifier le viewport avant de croire un
+  chiffre** — refait à 375 px, la même page donnait 13,02.
+- ⛔ **Chercher la chaine « infinitif : » ne prouve rien**, même dans un SVG :
+  elle apparait légitimement dans une légende (« L'infinitif : la consigne vaut
+  pour tous »). Le piège du canvas n'existe que si la fiche utilise le canvas
+  `conjugaison` ET lui envoie le champ `infinitif`. Vérifier ça, pas la chaine.
+
+⚠️ **Et le vérificateur, lui, ne crie jamais à tort** : il a attrapé une étiquette
+à 10,9 px dans une carte de MÉTHODE (201 px, le bloc le plus étroit). Deux mots
+trop longs sur un dessin qui touchait `largeurMax`. Correctif : raccourcir les
+étiquettes, la légende porte la phrase entière.
