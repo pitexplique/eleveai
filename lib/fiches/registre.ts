@@ -354,6 +354,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Le théorème de Pythagore",
     resume: "Reconnaître l'hypoténuse, calculer une longueur, et utiliser la réciproque pour prouver un angle droit.",
   },
+  "maths/4e/fonction-dependance": {
+    titre: "Dépendance entre deux grandeurs",
+    resume:
+      "Connaître une grandeur suffit-il à trouver l'autre ? Programme de calcul, tableau et graphique lus dans les deux sens — et pourquoi le prix d'un taxi dépend de la distance sans lui être proportionnel.",
+  },
   "maths/4e/grandeur-composee": {
     titre: "Grandeurs composées et unités",
     resume:

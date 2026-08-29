@@ -34,6 +34,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "convertir-les-grandeurs-5e-cours-exercices-corriges.pdf",
   "cosinus-d-un-angle-aigu-4e-cours-exercices-corriges.pdf",
   "debuts-de-l-algebre-cm2-cours-exercices-corriges.pdf",
+  "dependance-entre-deux-grandeurs-4e-cours-exercices-corriges.pdf",
   "derivation-premiere-spe-cours-exercices-corriges.pdf",
   "discours-direct-et-le-discours-indirect-2026-2027-5e-cours-exercices-corriges.pdf",
   "distributivite-4e-cours-exercices-corriges.pdf",
