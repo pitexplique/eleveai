@@ -401,6 +401,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Ce qu'on fait quand ça bloque et qu'on est seul, le test des « peu de mots » pour restituer l'essentiel, l'implicite dont les indices sont écrits, et le genre qui dit comment lire.",
   },
+  "francais/cm2/comprehension-documents": {
+    titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
+    resume:
+      "Nommer les éléments d'un document composite, croiser deux documents pour compléter — la réponse n'est souvent dans aucun des deux — et prélever en partant de la question.",
+  },
   "francais/cm2/grammaire-orthographe": {
     titre: "Analyser une phrase : nature, fonction, accords",
     resume:
