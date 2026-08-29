@@ -517,6 +517,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Dégager le sens global, rattacher un texte à son genre, comprendre l'implicite — la réponse peut manquer, jamais l'indice — et justifier en citant le passage.",
   },
+  "francais/6e/comprehension-reprises": {
+    titre: "Suivre les reprises et les liens logiques d'un texte (2026-2027)",
+    resume:
+      "Les deux fils d'un texte : les reprises disent de qui on parle — et une reprise n'est pas toujours un pronom —, les mots de liaison disent comment les idées se tiennent.",
+  },
   "francais/6e/lecture-voix-haute": {
     titre: "Lire à voix haute et mettre en voix en 6e (2026-2027)",
     resume:
