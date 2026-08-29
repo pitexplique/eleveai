@@ -577,6 +577,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Présenter en suivant un plan et en regardant la classe, jouer un texte en l'interprétant, expliquer sans notes en retenant l'ordre — et l'oral qui sert à réfléchir.",
   },
+  "francais/6e/oral-echanger": {
+    titre: "Participer à un échange en 6e (2026-2027)",
+    resume:
+      "Un échange n'est pas une suite de monologues : le tour de parole, l'argument qui est une raison, reprendre avant d'ajouter, et la remarque qui désigne un endroit.",
+  },
   "francais/6e/culture-recits": {
     titre: "Récits des origines, aventure et monstres en 6e (2026-2027)",
     resume:
