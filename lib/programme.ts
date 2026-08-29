@@ -317,6 +317,46 @@ export function listerToutesLesNotions(): NotionProgramme[] {
   return out;
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   ⛔⛔ 29/08/2026 — CE QUI SORT LES 444 NOTIONS DE LEUR ÎLE
+   ═══════════════════════════════════════════════════════════════════════════
+
+   Mesuré ce jour-là : les pages de notion se liaient ENTRE ELLES (les voisines
+   du même domaine du BO) et remontaient vers leur page de classe — mais rien du
+   site n'y descendait. `/programme/<classe>` affichait le libellé de chaque
+   notion en texte mort. Le seul lien entrant du site vers les 444 adresses
+   n'existait pas : seul le sitemap les annonçait.
+
+   ⛔ ET UNE PAGE QUE SEUL LE SITEMAP ANNONCE EST CRAWLÉE TARD ET CLASSÉE BAS.
+   Elle n'hérite d'aucune autorité interne, faute d'un lien qui lui en
+   transmette. Déclarer n'est pas relier.
+
+   ⚠️ LE LIEN NE MÈNE PAS TOUJOURS À UNE PAGE DE PROGRAMME, et c'est voulu : là
+   où une fiche existe, c'est ELLE la page de la notion (décision du 26/08) et
+   la page de programme ne fait que rediriger. On pointe donc directement sur la
+   fiche — un lien de moins à suivre pour le robot, et pas une redirection
+   annoncée dans le corps du site.
+
+   ⛔ UNE NOTION SANS FICHE ET SANS MICRO N'EST PAS LIÉE. Elle n'a pas de page :
+   `listerNotionsAvecPage` l'écarte, `generateStaticParams` ne la pré-rend pas.
+   La lier fabriquerait un lien vers une page mince servie à la demande — très
+   exactement ce que le filtre existe pour éviter. */
+export function liensNotionsDeLaClasse(classeSlug: string): Map<string, string> {
+  const liens = new Map<string, string>();
+  for (const n of listerToutesLesNotions()) {
+    if (n.classeSlug !== classeSlug) continue;
+    if (n.ficheHref) {
+      liens.set(`${n.matiere}/${n.notionId}`, n.ficheHref);
+    } else if (n.micros.length > 0) {
+      liens.set(
+        `${n.matiere}/${n.notionId}`,
+        `/programme/${n.classeSlug}/${n.matiere}/${n.notionSlug}`
+      );
+    }
+  }
+  return liens;
+}
+
 /** Celles qui MÉRITENT une page : sans fiche, et avec au moins un micro à lire.
  *  ⛔ LE FILTRE SUR LES MICROS N'EST PAS COSMÉTIQUE. Une notion sans micro
  *  donnerait une page sans une phrase à lire — exactement la page mince que

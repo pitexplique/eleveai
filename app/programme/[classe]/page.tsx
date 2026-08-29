@@ -15,6 +15,7 @@ import {
   getProgrammeClasse,
   getProgrammeMatiere,
   getProgrammeNiveau,
+  liensNotionsDeLaClasse,
   packIa,
   type ProgrammeMatiere,
   type ProgrammeNiveau,
@@ -70,6 +71,7 @@ export default async function ProgrammePage({
     .filter(Boolean) as ProgrammeMatiere[];
   const nbMicros = matieres.reduce((s, m) => s + m.nbMicros, 0);
   const aLangues = Boolean(classe.anglais || classe.espagnol || classe.ia);
+  const liensNotions = liensNotionsDeLaClasse(classe.slug);
 
   // ⭐ Les quatre niveaux, pas celui de la classe : décision du 29/08, un enfant
   // bilingue en 5e lit du B2. Voir la note dans lib/programme.ts.
@@ -163,9 +165,23 @@ export default async function ProgrammePage({
                 <div key={d.boId} className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
                   <h3 className="text-lg font-black text-slate-900">{d.label}</h3>
                   <div className="mt-3 space-y-4">
-                    {d.notions.map((n) => (
+                    {d.notions.map((n) => {
+                      // ⛔ LE LIEN QUI SORT LES NOTIONS DE LEUR ÎLE — voir la
+                      // note dans lib/programme.ts. Absent = la notion n'a pas
+                      // de page, on laisse le libellé en texte.
+                      const href = liensNotions.get(`${m.matiere}/${n.id}`);
+                      return (
                       <div key={n.id}>
-                        <p className="font-bold text-teal-800">{n.label}</p>
+                        {href ? (
+                          <Link
+                            href={href}
+                            className="font-bold text-teal-800 underline decoration-teal-300 underline-offset-2 transition hover:text-teal-600 hover:decoration-teal-500"
+                          >
+                            {n.label}
+                          </Link>
+                        ) : (
+                          <p className="font-bold text-teal-800">{n.label}</p>
+                        )}
                         {n.micros.length > 0 && (
                           <ul className="mt-1.5 grid gap-x-6 gap-y-1 sm:grid-cols-2">
                             {n.micros.map((micro) => (
@@ -177,7 +193,8 @@ export default async function ProgrammePage({
                           </ul>
                         )}
                       </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               ))}
