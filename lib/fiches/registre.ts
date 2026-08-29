@@ -381,6 +381,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
   // ─── Français ───────────────────────────────────────────────────────────────
   // La matière s'ouvre au cycle 3 : c'est le programme du CM2, et c'est aussi
   // celui sur lequel porte l'écrit de français du CRPE.
+  "francais/cm2/fluence-lecture": {
+    titre: "Lire avec fluidité en CM2 (2026-2027)",
+    resume:
+      "La fluence se prépare : ce qu'on regarde en deux minutes, la pause à la virgule, la liaison que la page ne montre pas, et le palier de 120 mots par minute.",
+  },
   "francais/cm2/grammaire-orthographe": {
     titre: "Analyser une phrase : nature, fonction, accords",
     resume:
