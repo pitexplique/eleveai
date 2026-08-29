@@ -426,6 +426,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Interroger une morale, c'est se demander si l'on est d'accord — et pourquoi. Le conflit révèle les valeurs, s'affirmer n'est pas s'imposer, et la poésie donne le gout des mots.",
   },
+  "francais/cm2/culture-lecteur": {
+    titre: "Choisir un livre et aller au bout en CM2 (2026-2027)",
+    resume:
+      "On ne persévère pas dans un livre qu'on n'a pas choisi : justifier son choix, tenir trois lignes par livre dans son carnet, et s'en servir pour mieux choisir le suivant.",
+  },
   "francais/cm2/grammaire-orthographe": {
     titre: "Analyser une phrase : nature, fonction, accords",
     resume:
