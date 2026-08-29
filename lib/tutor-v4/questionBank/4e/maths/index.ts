@@ -36,6 +36,7 @@ import { cosinusBank } from "./cosinus.bank";
 import { puissancesBank } from "./puissances.bank";
 import { ratiosBank } from "./ratios.bank";
 import { echellesBank } from "./echelles.bank";
+import { frequencesBank } from "./frequences.bank";
 
 
 // =========================
@@ -52,6 +53,7 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...pythagoreBank,
   ...transformationsBank,
   ...probabilitesBank,
+  ...frequencesBank,
   ...fractionsBank,
   ...operationsRelatifsBank,
   ...puissancesBank,

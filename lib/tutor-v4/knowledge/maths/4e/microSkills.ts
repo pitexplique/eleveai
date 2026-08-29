@@ -1099,6 +1099,56 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     FRÉQUENCES OBSERVÉES ET PROBABILITÉ
+  ========================= */
+  // ⭐ OUVERTE LE 28/08/2026. Elle ferme la puce 4e-B-probabilites-7 du BO,
+  // « Faire le lien entre fréquence et probabilité », qui était vide — le mot
+  // « fréquence » n'existait dans la banque de probabilités que comme LEURRE
+  // d'un QCM de vocabulaire.
+  //
+  // ⭐ LES TROIS PREMIÈRES RÉACTIVENT LA 6e, avec ses identifiants exacts. La
+  // règle est posée depuis les échelles : renvoyer un élève de 4e vers une
+  // fiche de 6e serait un jugement, et le moteur d'étoiles fait le tri.
+  //
+  // ⭐ LA QUATRIÈME EST LE SAUT DE LA 4e, et c'est le premier raisonnement
+  // STATISTIQUE de la scolarité : la 6e constate que l'écart se réduit quand on
+  // répète ; la 4e dit pourquoi ça compte. Six lancers donnant quatre « pile »
+  // ne prouvent rien ; six cents lancers donnant quatre cents « pile » prouvent
+  // que la pièce est truquée. C'est la taille de l'échantillon qui décide de ce
+  // qu'on a le droit de conclure — et cette idée-là ne se redit nulle part
+  // ailleurs dans le programme.
+  {
+    id: "proba_frequence_calculer",
+    label: "Calculer une fréquence observée",
+    notionId: "proba_frequence",
+    prerequis: ["stat_frequence", "proba_calculer_fraction"],
+  },
+  {
+    id: "proba_frequence_comparer",
+    label: "Comparer l’observé au calculé",
+    notionId: "proba_frequence",
+    prerequis: ["proba_frequence_calculer", "proba_convertir"],
+  },
+  {
+    id: "proba_frequence_repeter",
+    label: "Répéter : l’écart se réduit",
+    notionId: "proba_frequence",
+    prerequis: ["proba_frequence_comparer"],
+  },
+  {
+    id: "proba_frequence_echantillon",
+    label: "Ce qu’un petit échantillon ne prouve pas",
+    notionId: "proba_frequence",
+    prerequis: ["proba_frequence_repeter", "stat_effectif"],
+  },
+  {
+    id: "proba_frequence_defi",
+    label: "Défis sur les fréquences et les probabilités",
+    notionId: "proba_frequence",
+    prerequis: ["proba_frequence_echantillon", "proba_frequence_repeter"],
+  },
+
+  /* =========================
    ALGORITHMIQUE
 ========================= */
 

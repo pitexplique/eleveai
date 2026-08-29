@@ -269,6 +269,31 @@ export const notions: NotionSource[] = [
     prerequis: ["fraction_nombre", "stat_statistique"],
     levels: [1, 2],
   },
+  // ⭐ OUVERTE LE 28/08/2026. Elle ferme la puce 4e-B-probabilites-7 du BO,
+  // « Faire le lien entre fréquence et probabilité », qui était vide : le mot
+  // « fréquence » n'apparaissait dans `probabilites.bank.ts` que comme LEURRE
+  // d'un QCM de vocabulaire.
+  //
+  // ⭐ NOTION À PART, PAS GREFFE, et pour deux raisons qui vont ensemble :
+  // `proba_experience` porte déjà huit micros, et la 6e a fait exactement cette
+  // coupure (`proba_frequence`, trois micros, 60 items). Même identifiant, donc
+  // l'élève retrouve la même séparation d'une année sur l'autre.
+  //
+  // ⭐ CE QUE LA 4e AJOUTE : la 6e CONSTATE que l'écart se réduit quand on
+  // répète ; la 4e dit POURQUOI ça compte. Six lancers donnant quatre « pile »
+  // ne prouvent rien ; six cents lancers donnant quatre cents « pile » prouvent
+  // que la pièce est truquée. C'est le premier raisonnement statistique de la
+  // scolarité, et il tient dans une micro.
+  //
+  // ⚠️ Le sens des prérequis est à SENS UNIQUE : `proba_frequence` dépend de
+  // `proba_experience` et de `stat_statistique`, jamais l'inverse.
+  {
+    id: "proba_frequence",
+    label: "Fréquences observées et probabilité",
+    boId: "BO4D2",
+    prerequis: ["proba_experience", "stat_statistique"],
+    levels: [1, 2],
+  },
 
 
 ];

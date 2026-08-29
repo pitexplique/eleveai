@@ -623,8 +623,14 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Comprendre et utiliser des notions élémentaires de probabilités",
     objectif: "Faire le lien entre fréquence et probabilité.",
     page: 133,
-    micros: [],
-    note: "⛔ TROU. Le mot « fréquence » n'apparaît dans `probabilites.bank.ts` que comme LEURRE d'un QCM de vocabulaire. La 6e, elle, a la notion `proba_frequence` entière (répéter, calculer, comparer).",
+    micros: [
+      "proba_frequence_calculer",
+      "proba_frequence_comparer",
+      "proba_frequence_repeter",
+      "proba_frequence_echantillon",
+      "proba_frequence_defi",
+    ],
+    note: "✅ COMBLÉ LE 28/08/2026 par la notion `proba_frequence`, qui reprend les trois micros de la 6e et en ajoute une : ce qu'un PETIT ÉCHANTILLON ne prouve pas. ⭐ C'est le premier raisonnement statistique de la scolarité — un même pourcentage ne dit pas la même chose sur 10 essais et sur 1 000 —, et il ne se redit nulle part ailleurs au programme. ⛔ Les items traitent les DEUX erreurs symétriques : exiger que l'expérience donne le résultat calculé, et en déduire que le calcul est faux quand elle ne le donne pas.",
   },
 
   // ─── Résoudre des problèmes de proportionnalité ────────────────────────────

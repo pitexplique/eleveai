@@ -98,6 +98,14 @@ export const NOTION_COACH_MATHS: TableNotions = {
   echelles: {
     cm2: "echelle", "6e": "prop_echelle", "4e": "prop_echelle",
   },
+  // ⭐ AJOUTÉ LE 28/08/2026 avec la notion `proba_frequence` de 4e.
+  // ⚠️ CE THÈME NE DOUBLE PAS `probabilites`, qui ouvre à juste titre la notion
+  // d'ENTRÉE (`proba_experience`) : celui-ci ouvre le lien entre l'observé et le
+  // calculé, qui est un autre objet. Le mot « fréquence » n'était reconnu nulle
+  // part — ni ici, ni au lexique — alors que la 6e a sa notion depuis longtemps.
+  frequences: {
+    "6e": "proba_frequence", "4e": "proba_frequence",
+  },
   // ⭐ AJOUTÉ LE 28/08/2026 avec la notion de 4e. La 5e avait déjà
   // `prop_ratio_pourcentage` — mais aucun thème ne pointait dessus : un élève
   // de 5e qui tapait « ratio » ouvrait la proportionnalité générale, pas les

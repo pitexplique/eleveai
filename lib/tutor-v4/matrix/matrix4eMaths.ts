@@ -109,6 +109,24 @@ const supportLinks: Record<string, string[]> = {
   ],
 
   // =========================
+  // FRÉQUENCES OBSERVÉES ET PROBABILITÉ
+  // =========================
+  // ⭐ Ajouté le 28/08/2026. Une fréquence est une STATISTIQUE avant d'être une
+  // probabilité : quand l'élève bute ici, c'est presque toujours vers
+  // `stat_frequence` qu'il faut redescendre, pas vers le vocabulaire du hasard.
+  proba_frequence_calculer: ["stat_frequence", "stat_effectif", "proba_calculer_fraction"],
+  proba_frequence_comparer: ["proba_frequence_calculer", "proba_convertir", "proba_equiprobabilite"],
+  proba_frequence_repeter: ["proba_frequence_comparer", "proba_comparer"],
+  // ⭐ Le raisonnement sur l'échantillon s'appuie sur les EFFECTIFS : ce qui
+  // trompe, c'est un petit nombre d'essais, et ça se voit dans le tableau.
+  proba_frequence_echantillon: ["proba_frequence_repeter", "stat_effectif", "stat_interpreter"],
+  proba_frequence_defi: [
+    "proba_frequence_echantillon",
+    "proba_frequence_repeter",
+    "proba_defi",
+  ],
+
+  // =========================
   // AGRANDISSEMENT, RÉDUCTION ET ÉCHELLES
   // =========================
   // ⭐ Ajouté le 28/08/2026 avec la notion. Les liens FORTS se dérivent des
