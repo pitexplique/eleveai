@@ -391,6 +391,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "On lit POUR quelqu'un, et c'est lui qui juge : articuler les fins de mots, régler son rythme sur l'auditoire, faire varier — et le plaisir que le programme demande.",
   },
+  "francais/cm2/comprehension-textes": {
+    titre: "Comprendre un texte seul en CM2 (2026-2027)",
+    resume:
+      "Ce qu'on fait quand ça bloque et qu'on est seul, le test des « peu de mots » pour restituer l'essentiel, l'implicite dont les indices sont écrits, et le genre qui dit comment lire.",
+  },
   "francais/cm2/grammaire-orthographe": {
     titre: "Analyser une phrase : nature, fonction, accords",
     resume:
