@@ -208,6 +208,42 @@ export const notions: NotionSource[] = [
     prerequis: ["pythagore_theoreme"],
     levels: [1, 2, 3],
   },
+  // ⭐ OUVERTE LE 28/08/2026. Elle ferme SIX puces du BO d'un coup, ce qui en
+  // fait le meilleur rapport de tout ce qui restait après les fonctions :
+  //   · 4e-D-geometrie-2  somme des angles d'un triangle
+  //   · 4e-D-geometrie-3  hauteurs et médiatrices
+  //   · 4e-D-geometrie-4  inégalité triangulaire
+  //   · 4e-D-geometrie-5  CAS D'ÉGALITÉ DES TRIANGLES
+  //   · 4e-D-geometrie-6  triangles semblables
+  //   · 4e-D-geometrie-11 écrire un protocole de construction
+  //   · 4e-D-geometrie-12 le lien entre les cas d'égalité et la construction
+  //
+  // ⭐ ET C'EST UN SEUL OBJET PARCE QUE LE BO LE DIT : sa puce « Triangle »
+  // porte les cinq premiers points en sous-puces d'une même ligne. La notion
+  // suit le programme, elle ne le redécoupe pas.
+  //
+  // ⭐ LE CAS D'ÉGALITÉ EST LA PUCE QUE L'EXTRACTION AUTOMATIQUE DU PDF PERDAIT
+  // dans les deux fichiers testés le 27/08 — seule une capture d'écran l'a
+  // rendue lisible. Elle est au programme, et la compétence 4e-D-geometrie-12
+  // le confirme.
+  //
+  // ⚠️ CE QUI RESTE DEHORS : les angles alternes internes et correspondants. Le
+  // BO en fait une puce SÉPARÉE (« caractérisation angulaire du parallélisme »),
+  // et c'est un objet de DROITES PARALLÈLES, pas de triangle — même si le
+  // programme en fait l'outil de la démonstration de la somme des angles.
+  //
+  // ⭐ IDENTIFIANTS REPRIS DE LA 5e (`triangle_figure`, `triangle_inegalite`,
+  // `triangle_somme_angle`, `triangle_construire`, `triangle_defi`) : l'élève
+  // retrouve la même notion d'une année sur l'autre, et la 4e y ajoute ce que
+  // le cycle 4 demande — les droites du triangle, les cas d'égalité, les
+  // triangles semblables.
+  {
+    id: "triangle_figure",
+    label: "Le triangle pour démontrer",
+    boId: "BO4G1",
+    prerequis: ["pythagore_theoreme"],
+    levels: [1, 2, 3],
+  },
   {
     id: "quadrilatere_parallelogramme",
     label: "Parallélogrammes",

@@ -730,6 +730,71 @@ export const microSkills: MicroSkillSource[] = [
   /* =========================
      PARALLÉLOGRAMMES
   ========================= */
+  /* =========================
+     LE TRIANGLE POUR DÉMONTRER
+  ========================= */
+  // ⭐ OUVERTE LE 28/08/2026. Six puces du BO fermées d'un coup, et c'est un
+  // SEUL objet parce que le programme le dit : sa puce « Triangle » porte cinq
+  // sous-puces sur une même ligne.
+  //
+  // ⭐ TROIS MICROS RÉACTIVENT LA 5e, avec ses identifiants exacts
+  // (`triangle_inegalite`, `triangle_somme_angle`, `triangle_construire`). La
+  // règle est posée depuis les échelles : renvoyer un élève de 4e vers une
+  // fiche de 5e serait un jugement.
+  //
+  // ⭐⭐ ET TROIS SONT NEUVES, dont celle qui a failli manquer au programme :
+  // les CAS D'ÉGALITÉ. C'est la puce que l'extraction automatique du PDF
+  // perdait dans les deux fichiers testés le 27/08 — seule une capture d'écran
+  // l'a rendue lisible.
+  //
+  // ⚠️ `triangle_construire` est ÉTENDUE par rapport à la 5e : le BO de 4e ne
+  // demande plus seulement de construire, mais d'« écrire un protocole de
+  // construction » (4e-D-geometrie-11) et de le relier aux cas d'égalité
+  // (4e-D-geometrie-12). Une construction ne se rend pas en QCM ; un PROTOCOLE
+  // s'écrit, se lit et se compare — c'est lui qu'on interroge.
+  {
+    id: "triangle_inegalite",
+    label: "Reconnaître un triangle constructible (inégalité triangulaire)",
+    notionId: "triangle_figure",
+    prerequis: ["relatif_calcul"],
+  },
+  {
+    id: "triangle_somme_angle",
+    label: "Utiliser la somme des angles d’un triangle",
+    notionId: "triangle_figure",
+    prerequis: ["triangle_inegalite"],
+  },
+  {
+    id: "triangle_droites",
+    label: "Reconnaître une hauteur et une médiatrice dans un triangle",
+    notionId: "triangle_figure",
+    prerequis: ["triangle_somme_angle", "aire_triangle"],
+  },
+  {
+    id: "triangle_egalite",
+    label: "Utiliser les cas d’égalité des triangles",
+    notionId: "triangle_figure",
+    prerequis: ["triangle_somme_angle", "sym_transformation_propriete"],
+  },
+  {
+    id: "triangle_construire",
+    label: "Écrire un protocole de construction d’un triangle",
+    notionId: "triangle_figure",
+    prerequis: ["triangle_egalite", "triangle_inegalite"],
+  },
+  {
+    id: "triangle_semblable",
+    label: "Reconnaître des triangles semblables",
+    notionId: "triangle_figure",
+    prerequis: ["triangle_egalite", "agrandissement_rapport"],
+  },
+  {
+    id: "triangle_defi",
+    label: "Défis sur le triangle et la démonstration",
+    notionId: "triangle_figure",
+    prerequis: ["triangle_semblable", "triangle_construire", "triangle_droites"],
+  },
+
   {
     id: "quadrilatere_parallelogramme_reconnaitre",
     label: "Reconnaître un parallélogramme",

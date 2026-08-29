@@ -13,7 +13,7 @@
 // liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
 // par où l'année peut commencer.
 //
-// 790 notions, 40 paquets.
+// 791 notions, 40 paquets.
 
 export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
@@ -274,6 +274,13 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       {
         "id": "trigo_cosinus",
         "label": "Cosinus dans le triangle rectangle",
+        "prerequis": [
+          "pythagore_theoreme"
+        ]
+      },
+      {
+        "id": "triangle_figure",
+        "label": "Le triangle pour démontrer",
         "prerequis": [
           "pythagore_theoreme"
         ]

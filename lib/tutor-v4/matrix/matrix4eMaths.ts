@@ -109,6 +109,22 @@ const supportLinks: Record<string, string[]> = {
   ],
 
   // =========================
+  // LE TRIANGLE POUR DÉMONTRER
+  // =========================
+  // ⭐ Ajouté le 28/08/2026. La remédiation d'un cas d'égalité passe par les
+  // TRANSFORMATIONS — deux triangles égaux sont superposables — et non par
+  // Pythagore, qui mesure au lieu de comparer.
+  triangle_somme_angle: ["triangle_inegalite", "sym_transformation_propriete"],
+  triangle_droites: ["aire_triangle", "aire_perimetre_triangle", "triangle_somme_angle"],
+  triangle_egalite: ["sym_transformation_propriete", "sym_axiale", "triangle_somme_angle"],
+  triangle_construire: ["triangle_egalite", "triangle_inegalite", "triangle_somme_angle"],
+  // ⭐ Des triangles semblables sont un AGRANDISSEMENT l'un de l'autre : c'est
+  // là qu'il faut redescendre, et c'est aussi le lien que le BO demande entre
+  // la proportionnalité et les configurations géométriques.
+  triangle_semblable: ["agrandissement_rapport", "thales_configuration", "prop_coeff"],
+  triangle_defi: ["triangle_semblable", "triangle_construire", "pythagore_rediger"],
+
+  // =========================
   // DÉPENDANCE ENTRE DEUX GRANDEURS
   // =========================
   // ⭐ Ajouté le 28/08/2026. La remédiation d'une dépendance ne passe PAS par

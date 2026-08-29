@@ -39,6 +39,7 @@ import { echellesBank } from "./echelles.bank";
 import { frequencesBank } from "./frequences.bank";
 import { grandeursBank } from "./grandeurs.bank";
 import { fonctionsBank } from "./fonctions.bank";
+import { trianglesBank } from "./triangles.bank";
 
 
 // =========================
@@ -53,6 +54,7 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...airesBank,
   ...parallelogrammesBank,
   ...pythagoreBank,
+  ...trianglesBank,
   ...transformationsBank,
   ...probabilitesBank,
   ...frequencesBank,

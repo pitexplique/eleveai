@@ -1041,8 +1041,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Somme des angles d'un triangle (démonstration possible en utilisant les angles correspondants).",
     page: 136,
-    micros: [],
-    note: "⛔ TROU EN 4e. Couvert en 6e (`triangle_somme_angle`, `triangle_angle_manquant`) ; aucune micro de 4e ne le réactive, et la 4e ne dispose d'aucune notion « triangle ».",
+    micros: ["triangle_somme_angle"],
+    note: "✅ COMBLÉ LE 28/08/2026 par la notion `triangle_figure`, qui reprend l'identifiant de la 5e. ⚠️ La DÉMONSTRATION que le BO suggère — par les angles correspondants — reste hors d'atteinte tant que 4e-D-geometrie-1 (caractérisation angulaire du parallélisme) n'a pas sa micro. La propriété est utilisée, elle n'est pas encore prouvée.",
   },
   {
     id: "4e-D-geometrie-3",
@@ -1050,8 +1050,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Utiliser les notions de géométrie plane pour démontrer — Triangle",
     objectif: "Hauteurs et médiatrices.",
     page: 136,
-    micros: [],
-    note: "⛔ TROU. Le mot « hauteur » est partout en 4e, mais toujours comme LONGUEUR d'une formule d'aire ou de volume, jamais comme droite du triangle. « Médiatrice » n'apparaît que dans la définition de la symétrie axiale.",
+    micros: ["triangle_droites"],
+    note: "✅ COMBLÉ LE 28/08/2026. ⭐ La micro traite les trois droites que les élèves confondent — hauteur, médiatrice et médiane — en les définissant chacune par DEUX conditions : par où elle passe, et comment elle coupe. C'est en oubliant l'une des deux qu'on les mélange. Le canvas `triangle` trace la hauteur en pointillés avec sa marque d'angle droit.",
   },
   {
     id: "4e-D-geometrie-4",
@@ -1059,8 +1059,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Utiliser les notions de géométrie plane pour démontrer — Triangle",
     objectif: "Inégalité triangulaire.",
     page: 136,
-    micros: [],
-    note: "⛔ TROU EN 4e. Couvert en 6e (`distance_inegalite`, `triangle_possible_ou_non`).",
+    micros: ["triangle_inegalite"],
+    note: "✅ COMBLÉ LE 28/08/2026, avec les deux bornes : le troisième côté est plus petit que la somme ET plus grand que la différence. ⭐ Un item figé traite le cas limite du triangle PLAT, où l'inégalité devient une égalité — c'est ce qui rend l'inégalité stricte.",
   },
   {
     id: "4e-D-geometrie-5",
@@ -1068,8 +1068,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Utiliser les notions de géométrie plane pour démontrer — Triangle",
     objectif: "Cas d'égalité des triangles.",
     page: 136,
-    micros: [],
-    note: "⛔⭐ TROU, ET C'EST LA PUCE QUE L'EXTRACTION AUTOMATIQUE PERDAIT dans les deux PDF testés. Seule une capture d'écran l'a rendue lisible. Elle est bien au programme du cycle 4, et la compétence 4e-D-geometrie-12 la confirme. Zéro occurrence en 4e.",
+    micros: ["triangle_egalite","triangle_construire"],
+    note: "✅⭐ COMBLÉ LE 28/08/2026 — et c'est LA PUCE QUE L'EXTRACTION AUTOMATIQUE DU PDF PERDAIT, dans les deux fichiers testés le 27/08. Seule une capture d'écran l'a rendue lisible. Les trois cas sont enseignés, et le contre-exemple des trois ANGLES (qui donnent des triangles semblables, pas égaux) est traité comme tel.",
   },
   {
     id: "4e-D-geometrie-6",
@@ -1077,8 +1077,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Utiliser les notions de géométrie plane pour démontrer — Triangle",
     objectif: "Triangles semblables (une définition et une propriété caractéristique).",
     page: 136,
-    micros: [],
-    note: "⛔ TROU. ⚠️ Piège de recherche : les 56 occurrences de « semblables » en 4e sont toutes des TERMES semblables du calcul littéral.",
+    micros: ["triangle_semblable"],
+    note: "✅ COMBLÉ LE 28/08/2026. ⭐ La micro s'appuie sur `agrandissement_rapport` : deux triangles semblables sont un agrandissement l'un de l'autre, ce qui est exactement le lien que 4e-C-transformations-5 demande entre la proportionnalité et les configurations géométriques.",
   },
   {
     id: "4e-D-geometrie-7",
@@ -1139,8 +1139,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Mettre en œuvre ou écrire un protocole de construction d'une figure géométrique.",
     page: 136,
-    micros: [],
-    note: "⛔ TROU. Une construction ne se rend pas en QCM, mais un PROTOCOLE s'écrit et se relit : la 6e le fait (`bissectrice_construire`, `mediatrice_construire`).",
+    micros: ["triangle_construire"],
+    note: "✅ COMBLÉ LE 28/08/2026. ⭐ Une construction ne se rend pas en QCM, mais un PROTOCOLE s'écrit, se lit et se compare — et c'est le mot du BO. Les items interrogent l'ORDRE des étapes et le caractère suffisant des données.",
   },
   {
     id: "4e-D-geometrie-12",
@@ -1149,8 +1149,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Faire le lien entre les cas d'égalité des triangles et la construction d'un triangle à partir de la donnée de longueurs des côtés et/ou de mesures d'angles.",
     page: 136,
-    micros: [],
-    note: "⛔ TROU. C'est la compétence qui confirme que les cas d'égalité (4e-D-geometrie-5) sont bien au programme.",
+    micros: ["triangle_construire", "triangle_egalite", "triangle_defi"],
+    note: "✅ COMBLÉ LE 28/08/2026. ⭐ C'est la puce qui dit POURQUOI les deux vont ensemble : les données qui suffisent à construire UN SEUL triangle sont exactement celles des cas d'égalité. Construire et démontrer sont le même savoir vu des deux côtés, et un gabarit le fait éprouver — on demande si les données laissent le choix.",
   },
   {
     id: "4e-D-geometrie-13",
