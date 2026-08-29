@@ -354,6 +354,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Le théorème de Pythagore",
     resume: "Reconnaître l'hypoténuse, calculer une longueur, et utiliser la réciproque pour prouver un angle droit.",
   },
+  "maths/4e/prop-echelle": {
+    titre: "Agrandissement, réduction et échelles",
+    resume:
+      "Lire une échelle et passer du plan à la réalité, utiliser un rapport d'agrandissement — et comprendre pourquoi doubler les longueurs quadruple l'aire et multiplie le volume par huit.",
+  },
   "maths/4e/prop-ratio-pourcentage": {
     titre: "Ratios et pourcentages",
     resume:
