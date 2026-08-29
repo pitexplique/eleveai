@@ -26,7 +26,10 @@ import EntreeMatrice from "@/components/matrice/EntreeMatrice";
 const PIED = [
   { label: "Comment ça marche", href: "/pourquoi-eleveai" },
   { label: "Enseignants", href: "/espace-profs" },
-  { label: "Établissements", href: "/espace-ecoles" },
+  // ⛔⛔ « ÉTABLISSEMENTS » RETIRÉ LE 29/08/2026 (on ne vend plus aux
+  // établissements : voir la note du pied de page commun, components/Footer.tsx).
+  // ⚠️ Ce pied-ci et l'autre sont deux listes DISTINCTES — en nettoyer une ne
+  // touche pas l'autre, et c'est par là que le lien serait revenu.
   { label: "Parents", href: "/parents" },
   // ⭐ 23/08/2026 — LES FICHES ENTRENT DANS LE PIED DE L'ACCUEIL.
   // Elles n'avaient aucun lien de navigation sur tout le site (voir la note du

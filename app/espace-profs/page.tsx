@@ -136,12 +136,15 @@ export default function EnseignantsPage() {
             >
               📊 Accéder à mon tableau de bord
             </Link>
-            <Link
-              href="/espace-ecoles"
-              className="rounded-2xl bg-white px-7 py-3.5 text-base font-black text-slate-800 ring-1 ring-slate-200 transition hover:bg-slate-50"
-            >
-              Déployer dans mon collège
-            </Link>
+            {/* ⛔⛔ « DÉPLOYER DANS MON COLLÈGE » RETIRÉ LE 29/08/2026 — on ne
+                vend plus aux établissements (Frédéric : « c'est du pénal »).
+                ⚠️ LA PAGE PROF, ELLE, NE BOUGE PAS : c'est une décision explicite
+                (« on n'enlève pas profs »). Ce qui part n'est pas un contenu
+                professeur, c'est un appel à vendre à SA DIRECTION posé dans sa
+                page — et il rouvrait la porte que le pied de page, le sitemap et
+                le `noindex` viennent de fermer. Le professeur garde tout : son
+                tableau de bord, ses ressources, et le tarif classe qu'il ouvre
+                lui-même sans passer par personne. */}
           </div>
         </section>
 
@@ -371,12 +374,18 @@ export default function EnseignantsPage() {
         {/* ── COMMENT DÉMARRER ── */}
         <section className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-md">
           <h2 className="text-2xl font-black">Comment démarrer avec votre classe</h2>
+          {/* ⚠️ « IL Y A DEUX CHEMINS » EST TOMBÉ LE 29/08 avec la carte
+              établissement : il n'en reste qu'un. Et la phrase gardait tout son
+              sens en perdant sa moitié — ce qui comptait, c'était « sans demander
+              l'autorisation de personne », pas le compte. */}
           <p className="mt-2 text-sm font-semibold leading-relaxed text-slate-600">
-            Il y a deux chemins, et le premier ne demande l&apos;autorisation de
-            personne.
+            Vous n&apos;avez l&apos;autorisation de personne à demander.
           </p>
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          {/* ⚠️ Une colonne, et non `sm:grid-cols-2` : il ne reste qu'une carte,
+              et la grille aurait dessiné en creux la place de celle qu'on vient
+              de retirer. */}
+          <div className="mt-6 grid gap-4">
             {/* Le chemin du prof seul — celui pour lequel le forfait existe. */}
             <div className="rounded-2xl border-2 border-sky-200 bg-sky-50/60 p-5">
               <p className="text-xs font-black uppercase tracking-wide text-sky-700">
@@ -439,27 +448,16 @@ export default function EnseignantsPage() {
               )}
             </div>
 
-            {/* Le chemin établissement — il reste, il n'est plus le seul. */}
-            <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5">
-              <p className="text-xs font-black uppercase tracking-wide text-slate-600">
-                Ou tout votre établissement
-              </p>
-              <p className="mt-2 text-sm font-semibold leading-relaxed text-slate-600">
-                Un code établissement, un code par élève et par professeur, sans
-                installation ni adresse e-mail. Tous les niveaux, toutes les
-                classes, tous les collègues, plus la vue complète de la direction.
-                La mise en place se fait avec votre collège — souvent en quelques
-                heures.
-              </p>
-              <div className="mt-4 flex flex-wrap gap-3">
-                <Link
-                  href="/espace-ecoles"
-                  className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-black text-white transition hover:bg-slate-700"
-                >
-                  🏫 Déployer dans mon établissement
-                </Link>
-              </div>
-            </div>
+            {/* ⛔⛔ LA CARTE « OU TOUT VOTRE ÉTABLISSEMENT » EST RETIRÉE LE
+                29/08/2026, avec son bouton et son paragraphe — celui-ci vendait
+                le déploiement complet, « tous les collègues, plus la vue
+                complète de la direction ». Retirer le seul bouton en laissant le
+                texte aurait gardé l'offre en vitrine sans même la rendre
+                cliquable : le pire des deux.
+                ⚠️ La note qu'elle portait — « le chemin établissement : il
+                reste, il n'est plus le seul » — datait du jour où l'offre classe
+                est née à côté de lui. Il n'y a plus qu'un chemin, et c'est la
+                classe. */}
           </div>
 
           <div className="mt-6 flex flex-wrap gap-3">
@@ -473,7 +471,10 @@ export default function EnseignantsPage() {
               href="/tarifs"
               className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-5 py-2.5 text-sm font-black text-slate-800 transition hover:bg-slate-50"
             >
-              Les trois offres en détail
+              {/* ⚠️ « LES TROIS OFFRES » comptait la famille, la classe et
+                  l'établissement — il en reste deux depuis le 29/08. Un libellé
+                  qui compte se dément tout seul dès qu'on clique. */}
+              Les offres en détail
             </Link>
           </div>
         </section>

@@ -25,6 +25,17 @@ export const metadata: Metadata = {
     PRIX_ETABLISSEMENT_ELEVE_MOIS,
   )} par élève et par mois, jamais plus de ${euros(PLAFOND_ETABLISSEMENT_AN)} par an — les familles ne paient rien. RGPD maîtrisé, conçu par un enseignant.`,
   alternates: { canonical: "https://www.eleveai.fr/espace-ecoles" },
+  // ⛔⛔ NOINDEX POSÉ LE 29/08/2026 — Frédéric : « je ne vends plus aux
+  // établissements, c'est du pénal ». Retirer la page du sitemap ne suffisait
+  // pas : un sitemap PROPOSE à l'indexation, il ne retire pas ce que Google
+  // connaît déjà — et cette page y était en priorité 0,95 depuis des semaines.
+  // Sans ce `noindex`, la description ci-dessus continue de s'afficher dans les
+  // résultats de recherche avec le prix par élève et le plafond annuel.
+  // ⚠️ `follow: true` : la page reste liée à /tarifs et aux évaluations
+  // nationales, et rien ne justifie de couper le jus de ces liens-là.
+  // ⚠️ LA PAGE RÉPOND TOUJOURS — les établissements déjà installés gardent leur
+  // adresse. C'est son référencement qui s'éteint, pas elle.
+  robots: { index: false, follow: true },
   openGraph: {
     title: "EleveAI pour les établissements scolaires",
     description: `Coach IA multi-matières + suivi élève par élève. ${montant(
