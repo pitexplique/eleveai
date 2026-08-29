@@ -6,7 +6,7 @@ import { NIVEAUX, motsDeLaClasse } from "@/lib/dico";
 import { cgvEnVigueur } from "@/lib/legal/editeur";
 import { PDF_DISPONIBLES } from "@/lib/fiches/pdf-disponibles";
 import { FICHES_REGISTRE } from "@/lib/fiches/registre";
-import { listerNotionsAvecPage } from "@/lib/programme";
+import { PROGRAMME_CLASSES, listerNotionsAvecPage } from "@/lib/programme";
 
 // ⚠️ AVEC LE www : `eleveai.fr` répond 308 vers `www.eleveai.fr`. Sans lui,
 // les 270 lignes de ce fichier désignaient des adresses qui redirigent.
@@ -334,8 +334,18 @@ const ROUTES: RouteConfig[] = [
 
   // ── PROGRAMME PAR CLASSE (moteur SEO n°2 : les compétences des banques
   //    exposées en texte, façon pages « skills » d'IXL) ──────────────────────
-  ...["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere-spe", "terminale-spe"].map((c) => (
-    { path: `/programme/${c}`, priority: 0.9, changeFrequency: "monthly" as const, lastMod: new Date("2026-07-11") }
+  /* ⛔ CETTE LISTE NE S'ÉCRIT PLUS À LA MAIN (29/08/2026). Elle nommait douze
+     classes quand `PROGRAMME_CLASSES` en compte quatorze : « premiere » (la 1re
+     SANS spé maths) et « stmg » manquaient. Leurs pages répondaient, et leurs
+     pages de NOTION étaient déclarées plus bas — 57 et 86 — mais la page de
+     classe qui les chapeaute, non. On annonçait les enfants sans le parent.
+     ⚠️ C'EST LA TROISIÈME FOIS : les évaluations nationales livrées le 08 et
+     déclarées le 14, les quarante fiches routées sans être au sitemap avant le
+     26. Chaque fois, une liste recopiée à la main à côté d'un registre qui
+     savait déjà. Une classe entre maintenant au sitemap le jour où elle entre
+     dans `PROGRAMME_CLASSES`, sans que personne ait à y penser. */
+  ...PROGRAMME_CLASSES.map((c) => (
+    { path: `/programme/${c.slug}`, priority: 0.9, changeFrequency: "monthly" as const, lastMod: new Date("2026-07-11") }
   )),
   // ⛔⛔ `/espace-ecoles` EST RETIRÉE DU SITEMAP LE 29/08/2026 — décision de
   // Frédéric : « je ne vends plus aux établissements, c'est du pénal ». Elle y
