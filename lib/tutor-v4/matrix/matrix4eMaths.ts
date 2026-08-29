@@ -109,6 +109,28 @@ const supportLinks: Record<string, string[]> = {
   ],
 
   // =========================
+  // AGRANDISSEMENT, RÉDUCTION ET ÉCHELLES
+  // =========================
+  // ⭐ Ajouté le 28/08/2026 avec la notion. Les liens FORTS se dérivent des
+  // `prerequis` ; ceux-ci sont les liens FAIBLES, qui disent au moteur sur quoi
+  // s'appuyer pour remédier. ⚠️ Rien ne vérifie ce tableau.
+  echelle_distance_reelle: ["echelle_comprendre", "prop_coeff", "aire_longueur_convertir"],
+  echelle_distance_plan: ["echelle_comprendre", "echelle_distance_reelle", "fraction_diviser"],
+  // Un rapport d'agrandissement est un coefficient de proportionnalité : quand
+  // l'élève bute ici, c'est presque toujours là qu'il faut redescendre.
+  agrandissement_rapport: ["prop_coeff", "prop_quatrieme", "echelle_comprendre"],
+  // ⭐ Le k² ne se remédie PAS par la proportionnalité — c'est justement ce
+  // qu'il contredit. On redescend vers l'AIRE, où l'élève voit les carreaux.
+  agrandissement_aire: ["aire_rectangle", "aire_carre", "aire_comprendre"],
+  agrandissement_volume: ["volume_pave", "volume_lien_aire", "agrandissement_aire"],
+  echelle_defi: [
+    "echelle_distance_reelle",
+    "echelle_distance_plan",
+    "agrandissement_aire",
+    "agrandissement_volume",
+  ],
+
+  // =========================
   // PROPORTIONNALITÉ
   // =========================
   prop_table: ["prop_reconnaitre", "fraction_comparer"],

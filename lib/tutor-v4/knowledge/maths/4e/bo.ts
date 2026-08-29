@@ -52,6 +52,16 @@ export const bo: KnowledgeBoCompetence[] = [
     boId: "BO4M1",
     label: "Grandeurs et mesures",
   },
+  // ⭐ AJOUTÉ LE 28/08/2026 avec la notion `prop_echelle`. Le BO range bien
+  // l'échelle et l'agrandissement sous « Grandeurs et mesures » (thème C,
+  // chapitre « Comprendre l'effet de quelques transformations sur les figures »),
+  // mais ce libellé-là ne NOMME pas ce que l'élève travaille. Même raison que
+  // BO4N3 pour les puissances : une compétence qui ne se lit pas est une
+  // compétence qui ment.
+  {
+    boId: "BO4M2",
+    label: "Agrandissement, réduction et échelles",
+  },
   {
     boId: "BO4D1",
     label: "Statistiques",

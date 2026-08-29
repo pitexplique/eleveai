@@ -88,6 +88,16 @@ export const NOTION_COACH_MATHS: TableNotions = {
   puissances: {
     "4e": "puissance_ecriture", "3e": "entier_puissance",
   },
+  // ⭐ AJOUTÉ LE 28/08/2026 avec la notion `prop_echelle` de 4e. ⛔ Et là encore
+  // le trou dépassait la 4e : « échelle » n'était un thème NULLE PART, alors que
+  // le CM2 (`echelle`) et la 6e (`prop_echelle`) ont chacun leur notion depuis
+  // longtemps. Un élève qui tapait « échelle » n'ouvrait rien, quelle que soit
+  // sa classe. Les trois entrent ensemble.
+  // ⚠️ L'identifiant change entre le CM2 et le collège : `echelle` contre
+  // `prop_echelle`. Ils se LISENT dans les `notions.ts`, ils ne se devinent pas.
+  echelles: {
+    cm2: "echelle", "6e": "prop_echelle", "4e": "prop_echelle",
+  },
   // ⭐ AJOUTÉ LE 28/08/2026 avec la notion de 4e. La 5e avait déjà
   // `prop_ratio_pourcentage` — mais aucun thème ne pointait dessus : un élève
   // de 5e qui tapait « ratio » ouvrait la proportionnalité générale, pas les

@@ -330,6 +330,65 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     AGRANDISSEMENT, RÉDUCTION ET ÉCHELLES
+  ========================= */
+  // ⭐ OUVERTE LE 28/08/2026. Deux trous du BO fermés, deux partiels complétés.
+  //
+  // ⭐ LES TROIS PREMIÈRES RÉACTIVENT LA 6e, avec ses identifiants exacts —
+  // l'élève retrouve le même geste d'une année sur l'autre, et les énoncés,
+  // eux, sont de 4e (cartes IGN, maquettes, plans d'architecte).
+  // ⛔ Frédéric, 28/08 : « on garde le rappel de 6e ». Renvoyer un élève de 4e
+  // à une fiche de 6e serait un jugement — et le moteur d'étoiles fait déjà le
+  // tri : qui maîtrise passe, qui bute travaille.
+  //
+  // ⭐ LES TROIS SUIVANTES SONT LE SAUT DE LA 4e, et elles se déroulent dans cet
+  // ordre parce que c'est la même idée qui monte d'une dimension à chaque fois :
+  // les LONGUEURS sont multipliées par k, donc les AIRES par k², donc les
+  // VOLUMES par k³. C'est le k² qui coûte le plus cher à admettre.
+  {
+    id: "echelle_comprendre",
+    label: "Comprendre ce que dit une échelle",
+    notionId: "prop_echelle",
+    prerequis: ["prop_coeff", "fraction_simplifier"],
+  },
+  {
+    id: "echelle_distance_reelle",
+    label: "Du plan vers la réalité",
+    notionId: "prop_echelle",
+    prerequis: ["echelle_comprendre"],
+  },
+  {
+    id: "echelle_distance_plan",
+    label: "De la réalité vers le plan",
+    notionId: "prop_echelle",
+    prerequis: ["echelle_comprendre"],
+  },
+  {
+    id: "agrandissement_rapport",
+    label: "Utiliser un rapport d’agrandissement ou de réduction",
+    notionId: "prop_echelle",
+    prerequis: ["echelle_comprendre", "prop_quatrieme"],
+  },
+  {
+    id: "agrandissement_aire",
+    label: "L’effet d’un agrandissement sur les aires",
+    notionId: "prop_echelle",
+    prerequis: ["agrandissement_rapport", "aire_rectangle"],
+  },
+  {
+    id: "agrandissement_volume",
+    label: "L’effet d’un agrandissement sur les volumes",
+    notionId: "prop_echelle",
+    prerequis: ["agrandissement_aire", "volume_pave"],
+  },
+  {
+    id: "echelle_defi",
+    label: "Défis sur les échelles et les agrandissements",
+    notionId: "prop_echelle",
+    prerequis: ["echelle_distance_reelle", "echelle_distance_plan", "agrandissement_volume"],
+  },
+
+  /* =========================
      EXPRESSIONS LITTÉRALES
   ========================= */
   {

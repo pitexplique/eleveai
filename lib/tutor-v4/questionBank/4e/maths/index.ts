@@ -35,6 +35,7 @@ import { algorithmiqueBank } from "./algorithmique.bank";
 import { cosinusBank } from "./cosinus.bank";
 import { puissancesBank } from "./puissances.bank";
 import { ratiosBank } from "./ratios.bank";
+import { echellesBank } from "./echelles.bank";
 
 
 // =========================
@@ -58,6 +59,7 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...factorisationBank,
   ...proportionnaliteBank,
   ...ratiosBank,
+  ...echellesBank,
   ...volumesBank,
   ...thalesBank,
   ...statistiquesBank,

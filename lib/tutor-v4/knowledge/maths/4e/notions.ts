@@ -115,6 +115,34 @@ export const notions: NotionSource[] = [
     prerequis: ["prop_proportionnalite"],
     levels: [1, 2, 3],
   },
+  // ⭐ OUVERTE LE 28/08/2026. Elle ferme DEUX trous du BO et complète DEUX
+  // partiels, ce qui en fait le meilleur rapport de tout ce qui restait :
+  //   · 4e-C-transformations-2 « Utiliser un rapport de réduction ou
+  //     d'agrandissement (architecture, maquettes) pour calculer des longueurs,
+  //     des aires, des volumes » — TROU ;
+  //   · 4e-C-transformations-3 « Utiliser l'échelle d'une carte » — TROU ;
+  //   · 4e-C-transformations-1, dont l'effet sur les AIRES et les VOLUMES
+  //     manquait ; 4e-B-proportionnalite-8, qui n'avait que les pourcentages.
+  //
+  // ⭐ UN SEUL OBJET, ET LE BO LE DIT : une échelle EST une réduction de rapport
+  // 1/k, et le programme cite « pourcentages, échelles, agrandissement
+  // réduction » dans la même compétence. Les trois micros neuves sont une seule
+  // idée déroulée — on multiplie les longueurs par k, donc les aires par k² et
+  // les volumes par k³.
+  //
+  // ⭐ MÊME IDENTIFIANT QU'EN 6e, où la notion existe déjà avec ses quatre
+  // micros et 76 items (`echelles.bank.ts`). Les trois micros de lecture d'une
+  // échelle sont RÉACTIVÉES ici, avec des énoncés de 4e — cartes, maquettes,
+  // plans d'architecte. ⛔ Frédéric, 28/08 : on garde le rappel de 6e. Renvoyer
+  // un élève de 4e vers une fiche de 6e serait un jugement ; le moteur
+  // d'étoiles, lui, fait le tri sans rien dire à personne.
+  {
+    id: "prop_echelle",
+    label: "Agrandissement, réduction et échelles",
+    boId: "BO4M2",
+    prerequis: ["prop_proportionnalite", "aire_surface"],
+    levels: [1, 2, 3],
+  },
 
   // =========================
   // ALGÈBRE

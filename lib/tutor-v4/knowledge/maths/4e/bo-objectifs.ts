@@ -696,8 +696,15 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Résoudre des problèmes utilisant la proportionnalité (pourcentages, échelles, agrandissement réduction).",
     page: 134,
-    micros: ["prop_pourcentage", "prop_probleme", "prop_defi"],
-    note: "⚠️ Un tiers de l'objectif. Les POURCENTAGES sont solides ; les ÉCHELLES n'ont aucun item dans `proportionnalite.bank.ts` (les occurrences du mot « échelle » du dépôt sont dans Pythagore et cosinus, au sens « à l'échelle ») ; l'AGRANDISSEMENT-RÉDUCTION non plus — voir 4e-C-transformations-2.",
+    micros: [
+      "prop_pourcentage",
+      "prop_probleme",
+      "prop_defi",
+      "echelle_distance_reelle",
+      "echelle_distance_plan",
+      "agrandissement_rapport",
+    ],
+    note: "✅ COMPLÉTÉ LE 28/08/2026, et la puce en nommait TROIS. Les pourcentages étaient solides ; les ÉCHELLES et l'AGRANDISSEMENT-RÉDUCTION sont arrivés avec `prop_echelle`. ⭐ Le BO les cite ensemble parce que c'est le même objet : une échelle EST une réduction de rapport 1/k.",
   },
 
   // ─── Comprendre et utiliser la notion de fonction ──────────────────────────
@@ -897,8 +904,13 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Effet d'un déplacement, d'un agrandissement ou d'une réduction sur les longueurs, les angles, les aires et les volumes.",
     page: 135,
-    micros: ["sym_transformation_propriete"],
-    note: "⚠️ Le DÉPLACEMENT seulement (les transformations conservent longueurs et angles). L'agrandissement-réduction tient à DEUX items isolés dans des blocs de défis : `4e_aire_defi_x2_agrandissement` (aire × k²) et un défi de Thalès. Rien sur les volumes (× k³).",
+    micros: [
+      "sym_transformation_propriete",
+      "agrandissement_rapport",
+      "agrandissement_aire",
+      "agrandissement_volume",
+    ],
+    note: "✅ COMPLÉTÉ LE 28/08/2026. Le DÉPLACEMENT était couvert (les transformations conservent longueurs et angles) ; l'agrandissement-réduction ne tenait qu'à deux items isolés dans des blocs de défis. Les quatre grandeurs de la puce sont désormais là — longueurs × k, angles inchangés, aires × k², volumes × k³.",
   },
   {
     id: "4e-C-transformations-2",
@@ -907,8 +919,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Utiliser un rapport de réduction ou d'agrandissement (architecture, maquettes) pour calculer des longueurs, des aires, des volumes.",
     page: 135,
-    micros: [],
-    note: "⛔ TROU. Un item de défi ne fait pas un objectif : `4e_aire_defi_x2_agrandissement` est seul, sans micro dédiée, donc l'élève ne peut pas le travailler.",
+    micros: ["agrandissement_rapport", "agrandissement_aire", "agrandissement_volume"],
+    note: "✅ COMBLÉ LE 28/08/2026 par la notion `prop_echelle`, et les TROIS grandeurs de la puce ont chacune leur micro — c'est ce que « longueurs, aires, volumes » exige. ⭐ Le k² est le point cher : un item figé le fait COMPTER sur un dessin (un carré de côté 2 tient quatre fois dans un carré de côté 4) plutôt que l'énoncer.",
   },
   {
     id: "4e-C-transformations-3",
@@ -916,8 +928,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Comprendre l'effet de quelques transformations sur les figures géométriques",
     objectif: "Utiliser l'échelle d'une carte.",
     page: 135,
-    micros: [],
-    note: "⛔ TROU. La 6e a la notion `prop_echelle` entière (`echelle_comprendre`, `echelle_distance_reelle`, `echelle_distance_plan`, `echelle_defi`) ; la 4e n'a rien. ⭐ Le modèle existe donc déjà une classe plus bas.",
+    micros: ["echelle_comprendre", "echelle_distance_reelle", "echelle_distance_plan", "echelle_defi"],
+    note: "✅ COMBLÉ LE 28/08/2026. La 4e reprend les identifiants de la 6e — l'élève retrouve le même geste d'une année sur l'autre — mais les énoncés sont de 4e : cartes IGN, maquettes d'architecte, plans de terrain.",
   },
   {
     id: "4e-C-transformations-4",
