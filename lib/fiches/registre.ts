@@ -522,11 +522,6 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Les deux fils d'un texte : les reprises disent de qui on parle — et une reprise n'est pas toujours un pronom —, les mots de liaison disent comment les idées se tiennent.",
   },
-  "francais/6e/lecture-voix-haute": {
-    titre: "Lire à voix haute et mettre en voix en 6e (2026-2027)",
-    resume:
-      "Préparer sa lecture en silence, regarder l'auditoire, et trouver le ton là où il est écrit : le verbe de parole, la ponctuation, les mots du récit — et le tiret qui change de voix.",
-  },
   "francais/6e/comprehension-documents": {
     titre: "Lire des documents et des images en 6e (2026-2027)",
     resume:

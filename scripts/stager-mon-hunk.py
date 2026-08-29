@@ -38,3 +38,22 @@ with open(chemin, "w", encoding="utf-8", newline="") as f:
     f.write(patch)
 subprocess.run(["git", "apply", "--cached", "--unidiff-zero", chemin], check=True)
 print("applique a l'index")
+
+# ⛔ ET LE CONTROLE QUI MANQUAIT, PAYE LE 29/08 : L'INDEX PEUT SORTIR AVEC UNE
+# CLE EN DOUBLE. `git diff -U0` aligne parfois une insertion en REEMETTANT le
+# bloc d'ancrage : le hunk dit alors « ajoute dix lignes » la ou l'arbre n'en
+# ajoutait que cinq, et `git apply --cached` ecrit les deux. L'arbre de travail
+# reste juste, l'index non — et rien ne le signale, parce que TypeScript ne
+# refuse pas une cle repetee dans un objet type `Record<string, …>`.
+# On relit donc l'index apres coup, et on refuse de rendre la main s'il double.
+import re
+
+contenu = subprocess.run(["git", "show", f":{fichier}"],
+                         capture_output=True, text=True, encoding="utf-8").stdout
+cles = re.findall(r'^  "([^"]+)": \{', contenu, re.M)
+doublons = sorted({c for c in cles if cles.count(c) > 1})
+if doublons:
+    subprocess.run(["git", "restore", "--staged", fichier], check=True)
+    sys.exit(f"⛔ l'index sortait avec {len(doublons)} cle(s) en double : {doublons}\n"
+             f"   index remis a HEAD. Reprends l'insertion a un autre point d'ancrage.")
+print(f"index verifie : {len(cles)} cles, aucune en double")
