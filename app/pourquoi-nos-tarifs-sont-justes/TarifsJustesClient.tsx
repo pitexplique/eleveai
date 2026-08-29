@@ -198,13 +198,24 @@ export default function TarifsJustesClient() {
         <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 sm:p-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-2">
+              {/* ⛔⛔ 29/08/2026 — TOUT CE QUI CONCERNAIT L'ÉTABLISSEMENT EST
+                  PARTI D'ICI (Frédéric : « je ne vends plus aux établissements,
+                  c'est du pénal », puis « enlève tout ce qui concerne
+                  établissement » sur cette page).
+                  Trois choses tombaient ensemble et devaient tomber ensemble :
+                  le compte (« trois offres », « trois forfaits » — il en reste
+                  deux), l'adresse au lecteur (« si vous représentez un collège
+                  ou un lycée »), et le bouton « Pour un établissement » qui
+                  menait à /espace-ecoles, désormais en `noindex` et sans lien
+                  ailleurs sur le site.
+                  ⚠️ Le reste de la page ne bouge pas : son sujet est le COÛT et
+                  ce qui le justifie, pas le canal de vente. */}
               <h2 className="text-lg font-semibold text-slate-50">
-                Le détail des trois offres est sur la page tarifs
+                Le détail des offres est sur la page tarifs
               </h2>
               <p className="text-sm text-slate-300 max-w-2xl">
-                Une famille, une classe, un établissement — trois forfaits, et pas
-                un élève à compter. Si vous représentez un collège ou un lycée,
-                la page qui vous concerne dit comment ça se déploie.
+                Une famille, ou une classe que son professeur organise — et pas
+                un élève à compter. L&apos;élève, lui, ne paie jamais.
               </p>
             </div>
 
@@ -214,13 +225,6 @@ export default function TarifsJustesClient() {
                 className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 hover:bg-emerald-400 transition"
               >
                 Voir les tarifs
-              </Link>
-
-              <Link
-                href="/espace-ecoles"
-                className="inline-flex items-center justify-center rounded-full border border-slate-700 bg-slate-950/40 px-5 py-2.5 text-sm font-semibold text-slate-100 hover:bg-slate-900 transition"
-              >
-                Pour un établissement
               </Link>
             </div>
           </div>
