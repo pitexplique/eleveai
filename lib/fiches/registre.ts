@@ -411,6 +411,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Le thème tient en un mot et n'est pas l'histoire : c'est par lui qu'on relie deux œuvres, et par l'émotion qu'on se relie à un personnage. Plus les personnages et les enjeux.",
   },
+  "francais/cm2/culture-personnages": {
+    titre: "Héros, merveilleux et autres vies en CM2 (2026-2027)",
+    resume:
+      "Le héros se définit par l'épreuve et le choix, pas par la force ; le merveilleux par une magie que personne ne discute — et lire d'autres vies n'est pas fuir la sienne.",
+  },
   "francais/cm2/grammaire-orthographe": {
     titre: "Analyser une phrase : nature, fonction, accords",
     resume:
