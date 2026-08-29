@@ -532,6 +532,16 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "La nature et la source avant le contenu, le cadrage comme choix — ce qui est dehors a été écarté par quelqu'un —, décrire avant d'interpréter, et croiser deux documents.",
   },
+  "francais/6e/lecture-oeuvres": {
+    titre: "Lire une œuvre et se l'approprier en 6e (2026-2027)",
+    resume:
+      "Tenir le fil d'une œuvre longue, la relier à ce qu'on a vécu, fonder son interprétation sur un passage précis — et débattre d'une fin sans que l'un des deux ait tort.",
+  },
+  "francais/6e/lecture-voix-haute": {
+    titre: "Lire à voix haute et mettre en voix en 6e (2026-2027)",
+    resume:
+      "Préparer sa lecture en silence, regarder l'auditoire, et trouver le ton là où il est écrit : le verbe de parole, la ponctuation, les mots du récit — et le tiret qui change de voix.",
+  },
   "francais/6e/fluence-lecture": {
     titre: "Lire avec fluidité",
     resume:
