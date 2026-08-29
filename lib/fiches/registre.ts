@@ -557,6 +557,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Écrire pour apprendre, c'est trier — et trier, c'est jeter : ce qu'un résumé garde, le test du détail, le présent, trois phrases pour une page, et classer avant de rédiger.",
   },
+  "francais/6e/ecriture-produire": {
+    titre: "Écrire un texte qui se tient en 6e (2026-2027)",
+    resume:
+      "La cohérence, c'est ce qui ne doit pas changer en route — personnages, temps, lieu, narrateur — et la casse est entre les phrases, pas dedans. Plus les codes de l'écrit.",
+  },
   "francais/6e/culture-recits": {
     titre: "Récits des origines, aventure et monstres en 6e (2026-2027)",
     resume:
