@@ -446,6 +446,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Où couper — une idée neuve, on va à la ligne — et comment tenir : les connecteurs. Quatre sortes de textes, et la marque d'écriture de chacune.",
   },
+  "francais/cm2/ecriture-reviser": {
+    titre: "Réviser son texte et son brouillon en CM2 (2026-2027)",
+    resume:
+      "Réviser ajoute quelque chose au texte ; recopier ne fait que le déplacer. Un brouillon sans une seule rature n'a rien retravaillé.",
+  },
   "francais/cm2/grammaire-orthographe": {
     titre: "Analyser une phrase : nature, fonction, accords",
     resume:
