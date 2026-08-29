@@ -191,10 +191,25 @@ export default function ResumeEleve() {
           tombe dès qu'on attaque du neuf, et l'élève la relirait à chaque
           ouverture de l'accueil. La maîtrise, elle, est pondérée par la récence
           et dit où l'on en est — pas ce que l'on vaut. */}
-      {matieres.length > 0 && (
+      {/* ⭐⭐ LE BLOC S'OUVRE DÈS QU'ON EST CONNECTÉ, ET NON PLUS SEULEMENT QUAND
+          IL Y A DES BARRES (Frédéric, 29/08/2026 : « il y a bien les chips mais
+          on ne voit pas la progression ou l'activité »).
+          ⛔ LE DÉFAUT ÉTAIT DANS LA CONDITION, PAS DANS LES DONNÉES. La série,
+          le total d'activités et le lien vers le tableau de bord étaient
+          enfermés dans `matieres.length > 0` — or `par_matiere` ne vient QUE du
+          coach, et il faut deux passages sur une même matière pour qu'une barre
+          s'écrive. Un élève qui a fait dix dictées et trois défis n'avait donc
+          rien : ni barre (normal, il n'a pas fait de coach), ni série (alors
+          qu'elle existait, et que l'engagement, lui, compte TOUTES les tables).
+          On affichait un blanc là où le profil avait des chiffres à donner. */}
+      {profil && (matieres.length > 0 || rythme) && (
         <div className="mb-4">
           <p className="mb-2 px-1 text-[11px] font-medium uppercase tracking-wide text-slate-400">
-            Où tu en es
+            {/* ⚠️ « TON RYTHME » ET NON « TON ACTIVITÉ » : le bloc des portes,
+                douze pixels plus bas, s'appelle « Tes activités ». Deux titres
+                à un mot près dans la même colonne, et on ne sait plus lequel
+                dit où l'on en est et lequel ouvre quelque chose. */}
+            {matieres.length > 0 ? "Où tu en es" : "Ton rythme"}
           </p>
           <ul className="space-y-1.5 px-1">
             {matieres.map((m) => (
