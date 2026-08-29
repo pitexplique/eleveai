@@ -1,52 +1,63 @@
-# Prompt — les fiches de français de 5e et de 6e
+# Prompt — les fiches de français du collège (et ce qui reste)
 
 > Écrit le 26/08/2026, au terme de la session qui a fiché la 4e entière.
-> Mis à jour le 28/08/2026 : **la 5e est ENTIÈRE**, et la 6e est à 16 sur 29.
+> Mis à jour le 29/08/2026 : **la 4e, la 5e ET la 6e sont entières.**
 > À coller tel quel dans une session neuve.
 
 ---
 
-## ⭐⭐ ÉTAT AU SOIR DU 28/08/2026 — LIS CECI D'ABORD
+## ⭐⭐ ÉTAT AU 29/08/2026 — LIS CECI D'ABORD
 
 ```
-francais 4e     19 notions   19 fichées   100 %
+francais 4e     19 notions   19 fichées   100 %   ⭐ FERMÉE
 francais 5e     28 notions   28 fichées   100 %   ⭐ FERMÉE
-francais 6e     29 notions   16 fichées    55 %
-francais cm2    27 notions    9 fichées    33 %
+francais 6e     29 notions   29 fichées   100 %   ⭐ FERMÉE
+francais cm2    27 notions    9 fichées    33 %   ← LE CHANTIER SUIVANT
+francais cm1    25 notions    0 fichées     0 %
+francais 3e     19 notions    0 fichées     0 %
+francais 2de    16 notions    0 fichées     0 %
 ```
 
-**La 5e est finie.** Les cinq dernières fiches du 28/08 : `culture_connaissances`,
-`culture_entrees_5e`, `ecriture_reflechir`, `ecriture_produire`,
-`ecriture_reviser` — les domaines de la culture et de l'écriture sont fermés.
+**Le collège de cycle 4 haut (3e) et le lycée n'ont rien ; le cycle 3 est à
+moitié fait.** Le CM2 est la suite naturelle, et pour une raison technique :
 
-**Reste en 6e : TREIZE notions, toutes hors langue.**
+⭐⭐ **LE CM2 PARTAGE LE PROGRAMME ET LES BANQUES DE LA 6e.** Même BO (cycle 3,
+n° 16 du 17 avril 2025), même générateur `buildCycle3FrancaisBank.ts`, mêmes
+pools. Les treize fiches de 6e écrites les 28 et 29/08 ont épuisé ces pools un
+par un — `OEUVRE`, `DOCUMENTS`, `IMAGE`, `REPRISES`, `LIENS_LOGIQUES`,
+`ORIGINES`, `AVENTURE`, `MONSTRES`, `POESIE`, `THEATRE`, `ECRIRE_MAIN`,
+`ECRIT_RESUMER`, `ECRIT_COHERENCE`, `ECRIT_REVISER`, `ORAL`. Une session qui
+attaque le CM2 relit donc surtout des choses déjà lues : le travail est un
+RENIVELLEMENT, pas une découverte.
 
-```
-lecture   ×3   comprehension_reprises · comprehension_documents · lecture_oeuvres
-culture   ×3   culture_recits · culture_poesie_theatre · culture_reperes
-écriture  ×4   ecriture_main · ecriture_apprendre · ecriture_produire · ecriture_reviser
-oral      ×3   oral_ecouter · oral_dire · oral_echanger
-```
+⚠️ **MAIS LE CM1 GARDE UNE NOTION FOURRE-TOUT**, `comprehension_textes_documents`,
+et le générateur y tire à pile ou face entre deux pools — c'est écrit et assumé
+dans `questionForNotion`. À traiter avant de ficher le CM1.
 
-Faites le 28/08 en 6e : `lecture_voix_haute` et `comprehension_textes`.
+### ⛔⛔ LE PIÈGE DE CLASSE, MESURÉ SEPT FOIS SUR SEPT
 
-### ⛔⛔ LE PIÈGE DE CLASSE EST MAXIMAL SUR CE QUI RESTE
+Sept notions de 6e portent un nom qui existe AUSSI en 5e ou en 4e, avec un
+contenu entièrement différent. Chaque fiche de 6e porte en tête le TABLEAU DE
+SÉPARATION correspondant — le lire avant d'écrire la sœur d'une notion déjà
+fichée. Les cas :
 
-**Quatre des treize notions restantes de 6e portent un nom qui existe AUSSI en
-5e**, avec un contenu entièrement différent — `ecriture_produire`,
-`ecriture_reviser`, et déjà `lecture_voix_haute` (fait). Copier la fiche de 5e
-produit un hors-programme parfaitement crédible, que rien ne signalera.
-
-| | 5e (cycle 4, BO 2026) | 6e (cycle 3, BO 2025) |
+| notion | 5e ou 4e (cycle 4) | 6e (cycle 3) |
 |---|---|---|
-| `lecture_voix_haute` | la PARTITION : groupes de souffle, diagnostic d'une lecture entendue | l'INDICE : ce qui, dans le texte, commande le ton ; regarder l'auditoire |
-| `ecriture_produire` | invention, narratif, argumentatif, réponse rédigée | « produire des écrits variés » — cycle 3, à relire |
-| `ecriture_reviser` | cinq relectures + le brouillon | quatre objectifs BO : brouillon, cohérence, autoévaluation, normes |
+| `lecture_voix_haute` | la PARTITION : groupes de souffle, diagnostic | l'INDICE : ce qui, dans le texte, commande le ton |
+| `culture_connaissances` / `culture_reperes` | genre à l'OUVERTURE, quatre PÉRIODES | genre à une MARQUE, le CADRE (où et quand) |
+| `ecriture_reflechir` / `ecriture_apprendre` | planifier, idée principale d'un message | RÉSUMER, hiérarchiser, justifier |
+| `ecriture_produire` | ce qui MANQUE : lieu, obstacle, ordre, fin | ce qui CHANGE en route : cohérence |
+| `ecriture_reviser` | dans quel ORDRE relire | POURQUOI relire seul échoue |
+| `oral_ecouter` | ranger en thèse/argument/exemple | le BUT qui oriente l'écoute |
+| `comprehension_documents` (4e) | informer, s'informer, déformer | nature, source, décrire avant d'interpréter |
 
-⚠️ Et la 6e a `ecriture_main` — écrire à la main de manière fluide — **qui
-n'existe dans aucune autre classe du collège**. Pool `ECRIRE_MAIN`.
+⭐ **ET DEUX NOTIONS DE 6e N'EXISTENT DANS AUCUNE AUTRE CLASSE** : `fluence_lecture`
+et `ecriture_main`. Toutes deux propres au cycle 3, que le cycle 4 suppose
+acquis. ⚠️ **Chercher les autres avant d'attaquer le CM1 et le CM2** : une notion
+sans écho au cycle 4 ne croise jamais le chemin de personne quand on fiche du
+haut vers le bas.
 
-### ⭐ CHAQUE NOTION DE 6e A UNE MICRO « DÉFI », le cycle 4 n'en a pas
+### ⭐ CHAQUE NOTION DE CYCLE 3 A UNE MICRO « DÉFI », le cycle 4 n'en a pas
 
 Elle vaut un bloc de plus dans la fiche, et c'est le moment où l'élève fait seul.
 
@@ -542,6 +553,58 @@ fonction »**, et elle se mesure au rendu.
   (le verbe donne le TON, le « ! » donne le VOLUME) et au réseau de deux textes.
 - **LA PIÈCE MANQUANTE SE DESSINE PAR SON ABSENCE** : trois boites au lieu de
   quatre, et le vide se compte. Même geste que le crochet absent.
+
+---
+
+## ⭐ Ce que la journée du 29/08 a ajouté (treize fiches de 6e)
+
+**1. LE STAGE SUR `registre.ts` EST UN SCRIPT, ET IL A ATTRAPÉ SA PROPRE CAUSE.**
+`node scripts/stager-mon-hunk.mjs lib/fiches/registre.ts "<mon-slug>"` extrait le
+diff en **-U3**, ne stage que les hunks portant le slug, annonce combien il en
+laisse, puis **relit l'INDEX et le remet à HEAD s'il en sort une clé en double**.
+⛔ Les deux raisons, toutes deux payées le 29 :
+- avec **`-U0`**, git réémet parfois le bloc d'ancrage pour représenter une
+  insertion — un ajout de cinq lignes sort en hunk de dix, `git apply --cached`
+  écrit les deux, et l'index part avec une clé DOUBLÉE que l'arbre de travail
+  n'a pas. C'est arrivé, c'est parti dans un commit poussé, et **`tsc --noEmit`
+  ne dit rien** : TypeScript accepte une clé répétée dans un `Record<string, …>` ;
+- appliquer le patch ENTIER emporte les hunks des autres sessions. Le script a
+  laissé intacte une entrée `maths/4e/prop-echelle` cinq fois de suite.
+
+⭐ Contrôle plus court, sans outil, donné par la session maths :
+`grep -oP '^\s{2}"[^"]+":' lib/fiches/registre.ts | sort | uniq -d`
+
+**2. LE PLAFOND DE VINGT SIGNES PAR BOITE S'EST VÉRIFIÉ TROIS FOIS.** « je ne
+suis pas d'accord » (23), « trop vite au début » (21), « des élèves ont perdu le
+leur » (28) ont chacune fait tomber un dessin entier sous 11 px — jusqu'à 8,9 px.
+La légende vit dans le SVG : elle tombe avec.
+
+**3. LA BANDE `nature` EST CENTRÉE SUR SON MOT** et ne se plie pas à la largeur
+de la boite. Au-dessus de mots de deux à quatre lettres (« Elle », « la »,
+« lui »), les étiquettes se recouvraient de 12 et 17 px — police à 12 px, dessin
+dans son cadre, et illisible. **Chaque mot doit être au moins aussi large que son
+étiquette** ; des guillemets suffisent à l'élargir.
+
+**4. `number_line` A LA CASSE INVERSE**, mesuré par la session maths : il décale
+ses étiquettes en HAUTEUR (donc il tolère les noms longs), mais il les CENTRE sur
+la valeur — **un point posé sur le minimum ou le maximum déborde de la moitié de
+sa largeur**. Poser les points en 1..n dans un axe 0..(n+1).
+
+⭐ **Et trois emplois de canvas trouvés le 29** :
+- `figure_libre` comme **cadre photographique montrant le HORS-CHAMP** (les cases
+  vides sont ce que quelqu'un a laissé dehors) et comme **silhouette de genre**
+  (la colonne de noms à gauche n'existe qu'au théâtre) ;
+- **deux arcs qui convergent dessinent une INFÉRENCE** — deux indices, une
+  conclusion. La même figure sert au sens global, à l'implicite, au ton d'une
+  réplique et au réseau de deux œuvres ;
+- **l'arc `reprise`** (pointillé, sous la phrase) sur une reprise NOMINALE et non
+  un pronom, et **deux arcs de reprise partant du même mot** pour l'ambiguïté.
+
+⭐⭐ **UN FIL QUI TRAVERSE TROIS DOMAINES DE LA 6e, à dire tel quel à l'élève :
+UNE REMARQUE N'EST UTILE QUE SI ELLE DÉSIGNE UN ENDROIT.** Les banques le
+formulent trois fois — en écriture (« on ne comprend pas qui parle » → on agit
+là), en lecture (« c'est nul » ne se discute pas, « au chapitre 3 » se discute),
+à l'oral (« je parlais trop vite au début », jamais « c'était nul »).
 
 ### ⚠️ Deux dettes laissées ouvertes, à arbitrer avec Frédéric
 
