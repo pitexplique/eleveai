@@ -562,6 +562,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "La cohérence, c'est ce qui ne doit pas changer en route — personnages, temps, lieu, narrateur — et la casse est entre les phrases, pas dedans. Plus les codes de l'écrit.",
   },
+  "francais/6e/ecriture-reviser": {
+    titre: "Réviser son texte et son brouillon en 6e (2026-2027)",
+    resume:
+      "Sans critères, on relit ce qu'on croit avoir écrit : les trois façons de sortir de sa tête, le brouillon comme lieu de ratures, et l'accord du verbe en premier.",
+  },
   "francais/6e/culture-recits": {
     titre: "Récits des origines, aventure et monstres en 6e (2026-2027)",
     resume:
