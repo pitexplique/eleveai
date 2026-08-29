@@ -127,7 +127,13 @@ const unPeuDeMaths = [
 ];
 
 const espaces = [
-  { label: "Établissements scolaires", href: "/espace-ecoles" },
+  // ⛔⛔ « ÉTABLISSEMENTS SCOLAIRES » EST RETIRÉ LE 29/08/2026 — Frédéric : « je
+  // ne vends plus aux établissements, c'est du pénal ». Ce lien-ci était le plus
+  // lourd des huit : il s'affichait dans le pied de TOUTES les pages du site,
+  // c'est-à-dire qu'il envoyait du monde sur l'offre depuis n'importe où.
+  // ⚠️ LES TROIS GESTES VONT ENSEMBLE, comme pour /formation-crpe plus bas mais
+  // dans l'autre sens : ce lien, la ligne du sitemap, et le `noindex` posé sur
+  // la page. En retirer un sans les deux autres laisse une porte ouverte.
   { label: "Espace élèves", href: "/espace-eleves" },
   { label: "Espace parents", href: "/espace-parents" },
   { label: "Enseignants", href: "/espace-profs" },
