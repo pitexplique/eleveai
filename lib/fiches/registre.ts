@@ -431,6 +431,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "On ne persévère pas dans un livre qu'on n'a pas choisi : justifier son choix, tenir trois lignes par livre dans son carnet, et s'en servir pour mieux choisir le suivant.",
   },
+  "francais/cm2/ecriture-preparer": {
+    titre: "Préparer un écrit en CM2 (2026-2027)",
+    resume:
+      "Quatre écrits qui ne se rendent pas et sans lesquels rien ne se rend — copier par groupes, noter en abrégé, ranger dans l'ordre, comparer en deux colonnes.",
+  },
   "francais/cm2/grammaire-orthographe": {
     titre: "Analyser une phrase : nature, fonction, accords",
     resume:
