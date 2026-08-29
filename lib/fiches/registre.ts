@@ -567,6 +567,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Sans critères, on relit ce qu'on croit avoir écrit : les trois façons de sortir de sa tête, le brouillon comme lieu de ratures, et l'accord du verbe en premier.",
   },
+  "francais/6e/oral-ecouter": {
+    titre: "Écouter pour comprendre en 6e (2026-2027)",
+    resume:
+      "Savoir ce qu'on cherche change ce qu'on entend : l'écoute orientée par un but, reformuler avec ses mots, reconnaitre un genre de discours, et noter des mots clés.",
+  },
   "francais/6e/culture-recits": {
     titre: "Récits des origines, aventure et monstres en 6e (2026-2027)",
     resume:
