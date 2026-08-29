@@ -9,10 +9,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
+  LABEL_NIVEAU_LANGUE,
+  NIVEAUX_LANGUE,
   PROGRAMME_CLASSES,
   getProgrammeClasse,
   getProgrammeMatiere,
+  getProgrammeNiveau,
+  packIa,
   type ProgrammeMatiere,
+  type ProgrammeNiveau,
 } from "@/lib/programme";
 
 const SITE_URL = "https://www.eleveai.fr";
@@ -65,6 +70,21 @@ export default async function ProgrammePage({
     .filter(Boolean) as ProgrammeMatiere[];
   const nbMicros = matieres.reduce((s, m) => s + m.nbMicros, 0);
   const aLangues = Boolean(classe.anglais || classe.espagnol || classe.ia);
+
+  // ⭐ Les quatre niveaux, pas celui de la classe : décision du 29/08, un enfant
+  // bilingue en 5e lit du B2. Voir la note dans lib/programme.ts.
+  const anglais = classe.anglais
+    ? (NIVEAUX_LANGUE.map((n) => getProgrammeNiveau("english-maths", n)).filter(
+        Boolean
+      ) as ProgrammeNiveau[])
+    : [];
+  const espagnol = classe.espagnol
+    ? (NIVEAUX_LANGUE.map((n) => getProgrammeNiveau("espagnol", n)).filter(
+        Boolean
+      ) as ProgrammeNiveau[])
+    : [];
+  const paletteIa = packIa(classe.slug);
+  const ia = paletteIa ? getProgrammeNiveau("ia", paletteIa) : null;
 
   return (
     <main className="min-h-screen bg-[#f5f8ff] text-slate-800">
@@ -172,7 +192,9 @@ export default async function ProgrammePage({
             <p className="mt-1 text-sm leading-6 text-slate-600">
               Les langues ne progressent pas par classe mais par{" "}
               <span className="font-bold">niveaux (A1 → B2)</span> — chacun
-              avance à son rythme. Voici le niveau visé {classe.enClasse} :
+              avance à son rythme. Le niveau visé {classe.enClasse} est indiqué,
+              mais <span className="font-bold">les quatre sont ouverts</span> :
+              un élève déjà bilingue n&apos;a aucune raison d&apos;attendre.
             </p>
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
               {classe.anglais && (
@@ -194,6 +216,30 @@ export default async function ProgrammePage({
                 </Link>
               )}
             </div>
+
+            {anglais.length > 0 && (
+              <BlocNiveaux
+                titre="🗣️ Anglais — les compétences, du A1 au B2"
+                niveaux={anglais}
+                coachHref="/coach-ia/english-maths"
+              />
+            )}
+            {espagnol.length > 0 && (
+              <BlocNiveaux
+                titre="Español — las competencias, del A1 al B2"
+                niveaux={espagnol}
+                coachHref="/coach-ia/espagnol"
+              />
+            )}
+            {ia && (
+              <BlocNiveaux
+                titre={`🤖 Culture IA — le référentiel Pix ${
+                  paletteIa === "pix-college" ? "collège" : "lycée"
+                }`}
+                niveaux={[ia]}
+                coachHref="/coach-ia/ia"
+              />
+            )}
           </section>
         )}
 
@@ -257,5 +303,72 @@ export default async function ProgrammePage({
         </section>
       </div>
     </main>
+  );
+}
+
+/* ── UN BLOC « MATIÈRE SANS CLASSE » ────────────────────────────────────────
+   Les langues et l'IA ne se rangent pas par année : anglais et espagnol sortent
+   quatre niveaux, l'IA un palier Pix. Le rendu est donc le même à un détail
+   près — le titre du niveau n'apparaît que s'il y en a plusieurs, sinon il
+   répète le titre du bloc. */
+function BlocNiveaux({
+  titre,
+  niveaux,
+  coachHref,
+}: {
+  titre: string;
+  niveaux: ProgrammeNiveau[];
+  coachHref: string;
+}) {
+  const total = niveaux.reduce((s, n) => s + n.nbMicros, 0);
+  return (
+    <div className="mt-6 rounded-2xl border border-sky-200 bg-white p-5 sm:p-6">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h3 className="text-lg font-black text-slate-900">{titre}</h3>
+        <Link
+          href={coachHref}
+          className="inline-flex items-center gap-2 rounded-full bg-sky-500 px-4 py-2 text-sm font-black text-white shadow-md shadow-sky-500/25 transition hover:bg-sky-400"
+        >
+          S&apos;entraîner — gratuit →
+        </Link>
+      </div>
+      <p className="mt-1 text-sm font-semibold text-slate-500">
+        {niveaux.reduce((s, n) => s + n.nbNotions, 0)} notions · {total} compétences
+      </p>
+
+      <div className="mt-4 space-y-5">
+        {niveaux.map((niv) => (
+          <div key={niv.niveau}>
+            {niveaux.length > 1 && (
+              <h4 className="mb-2 inline-block rounded-full bg-sky-100 px-3 py-1 text-sm font-black text-sky-800">
+                {LABEL_NIVEAU_LANGUE[niv.niveau] ?? niv.niveau}
+              </h4>
+            )}
+            <div className="space-y-3">
+              {niv.notions.map((n) => (
+                <div key={`${niv.niveau}-${n.id}`}>
+                  <p className="font-bold text-sky-900">{n.label}</p>
+                  {n.micros.length > 0 && (
+                    <ul className="mt-1.5 grid gap-x-6 gap-y-1 sm:grid-cols-2">
+                      {n.micros.map((micro) => (
+                        <li
+                          key={micro}
+                          className="flex items-start gap-2 text-sm leading-6 text-slate-600"
+                        >
+                          <span className="mt-0.5 shrink-0 text-sky-500" aria-hidden>
+                            ✓
+                          </span>
+                          {micro}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
