@@ -12,7 +12,7 @@
 francais 4e     19 notions   19 fichées   100 %   ⭐ FERMÉE
 francais 5e     28 notions   28 fichées   100 %   ⭐ FERMÉE
 francais 6e     29 notions   29 fichées   100 %   ⭐ FERMÉE
-francais cm2    27 notions    9 fichées    33 %   ← LE CHANTIER SUIVANT
+francais cm2    27 notions   20 fichées    74 %   ← LE CHANTIER EN COURS
 francais cm1    25 notions    0 fichées     0 %
 francais 3e     19 notions    0 fichées     0 %
 francais 2de    16 notions    0 fichées     0 %
@@ -20,6 +20,41 @@ francais 2de    16 notions    0 fichées     0 %
 
 **Le collège de cycle 4 haut (3e) et le lycée n'ont rien ; le cycle 3 est à
 moitié fait.** Le CM2 est la suite naturelle, et pour une raison technique :
+
+---
+
+## ⭐⭐ CE QUI RESTE AU CM2 — SEPT NOTIONS, DEUX GROUPES
+
+La **lecture** (5), la **culture** (3) et l'**écriture** (3) sont closes au
+29/08. Reste :
+
+```
+oral    ×2   oral-ecouter · oral-echanger
+langue  ×5   vocabulaire-sens · vocabulaire-formation · vocabulaire-emploi
+             grammaire-nature-fonction · grammaire-pronoms
+```
+
+⚠️ Deux fiches CM2 de langue existent déjà mais sont **antérieures au chantier**
+(`francais-cm2-conjugaison-formes`, `francais-cm2-grammaire-orthographe`) : voir
+plus bas, elles ne sont pas au format actuel.
+
+## ⭐⭐ LA SIGNATURE DU CM2, REPÉRÉE EN ÉCRIVANT L'ÉCRITURE
+
+**Le CM2 est la classe où l'on apprend à FAIRE COURT, et où la brièveté est un
+TEST plutôt qu'un style.** Cinq notions déjà fichées le répètent, chaque fois
+avec la même mécanique — *celui qui n'a pas compris ne peut pas faire court* :
+
+| Notion | La mesure |
+|---|---|
+| `comprehension_textes` | restituer l'essentiel **en peu de mots** |
+| `lecture_oeuvres` | le thème **tient en un mot** |
+| `culture_lecteur` | **trois lignes** par livre au carnet |
+| `ecriture_preparer` | l'écrit de préparation est **plus court** que ce qu'il prépare |
+| `ecriture_reviser` | *(l'inverse, et c'est le même geste)* un brouillon **sans ratures** n'a rien fait |
+
+⭐ **À réutiliser pour les sept notions restantes** : chercher, dans chaque pool,
+la ligne qui donne une mesure visible sans juger de rien. C'est ce qui a donné
+les meilleures accroches du CM2, et c'est reproductible.
 
 ⭐⭐ **LE CM2 PARTAGE LE PROGRAMME ET LES BANQUES DE LA 6e.** Même BO (cycle 3,
 n° 16 du 17 avril 2025), même générateur `buildCycle3FrancaisBank.ts`, mêmes
