@@ -552,6 +552,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Le temps se perd dans les allers-retours, pas dans la main : copier par groupes, retenir son dernier mot écrit, se relire sur sa feuille — et régler la mise en forme.",
   },
+  "francais/6e/ecriture-apprendre": {
+    titre: "Résumer, hiérarchiser et justifier en 6e (2026-2027)",
+    resume:
+      "Écrire pour apprendre, c'est trier — et trier, c'est jeter : ce qu'un résumé garde, le test du détail, le présent, trois phrases pour une page, et classer avant de rédiger.",
+  },
   "francais/6e/culture-recits": {
     titre: "Récits des origines, aventure et monstres en 6e (2026-2027)",
     resume:
