@@ -136,7 +136,18 @@ export default function ResumeEleve() {
           <span className="mt-0.5 block text-sm font-medium leading-snug text-slate-900">
             {reco.titre}
           </span>
-          <span className="mt-1 block text-xs text-teal-800">{reco.cta}</span>
+          {/* ⭐ LE MOTIF, ET PAS SEULEMENT LA DESTINATION (29/08/2026).
+              « Reprendre — Les fractions » est ce que propose n'importe quelle
+              bibliothèque de cours : la reprise d'un chapitre là où on l'avait
+              laissé. Le `message` dit autre chose — « ta maîtrise sur ce point
+              est autour de 42/100 » — parce qu'il vient d'une maîtrise calculée
+              par notion et pondérée par la récence, pas d'un signet. Sans lui,
+              la ligne ressemble à un signet, et tout ce qui la distingue reste
+              invisible. */}
+          <span className="mt-1 block text-xs leading-snug text-slate-600 line-clamp-3">
+            {reco.message}
+          </span>
+          <span className="mt-1.5 block text-xs font-medium text-teal-800">{reco.cta}</span>
         </Link>
       )}
 
