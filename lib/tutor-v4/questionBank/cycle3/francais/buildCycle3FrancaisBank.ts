@@ -8158,6 +8158,51 @@ const HOMONYMIE: QcmItem[] = [
     wrongs: ["des synonymes", "des mots de la même famille", "le même mot"],
     methode: "Même son, sens et orthographe différents : c'est la définition de l'homonymie.",
   },
+  /* ── Portée de dix à seize cas le 29/08/2026. `verifier-renouvellement.ts`
+     mesurait DIX énoncés générés pour `cm2_voc_homonymie`, sous le seuil de
+     douze — et c'était exact : la table comptait dix lignes, donc dix questions,
+     et l'élève les revoyait toutes en dix minutes. ⛔ On ne comble pas cela avec
+     des items figés : ils ne se renouvellent jamais. On allonge la TABLE, comme
+     le script le demande — « au moins quinze cas ».
+     ⚠️ Chaque ligne tient les deux règles de ces pools : les quatre propositions
+     s'excluent (une seule convient à la phrase), et la bonne réponse n'est pas
+     la plus longue — ce sont tous des mots courts et comparables. */
+  {
+    text: "Complète : « Il a bu un ___ d'eau fraiche. »",
+    correct: "verre",
+    wrongs: ["vert", "vers", "ver"],
+    methode: "« Verre » est l'objet ; « vert » est la couleur, « vers » une direction, « ver » l'animal.",
+  },
+  {
+    text: "Complète : « Il a reçu un ___ sur l'épaule. »",
+    correct: "coup",
+    wrongs: ["cou", "coût", "coups"],
+    methode: "« Un coup » se reçoit ; « le cou » porte la tête, et « le coût » est un prix.",
+  },
+  {
+    text: "Complète : « Le fermier traverse son ___ de blé. »",
+    correct: "champ",
+    wrongs: ["chant", "chants", "chante"],
+    methode: "« Le champ » est le terrain ; « le chant » est ce qu'on chante. Même son, sens opposés.",
+  },
+  {
+    text: "Complète : « Ces deux chaussures forment une ___ . »",
+    correct: "paire",
+    wrongs: ["père", "perd", "pères"],
+    methode: "« Une paire » compte deux objets ; « le père » est une personne, « il perd » un verbe.",
+  },
+  {
+    text: "Complète : « Il serra le ___ et frappa sur la table. »",
+    correct: "poing",
+    wrongs: ["point", "points", "poings"],
+    methode: "« Le poing » est la main fermée ; « le point » termine une phrase.",
+  },
+  {
+    text: "Complète : « Elle raconte un ___ à sa petite sœur. »",
+    correct: "conte",
+    wrongs: ["compte", "comte", "contes"],
+    methode: "« Un conte » se raconte ; « un compte » se calcule, « un comte » est un titre.",
+  },
 ];
 
 function questionParMicro(microId: string): Generated | null {

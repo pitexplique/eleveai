@@ -172,6 +172,36 @@ const FIGURES: readonly Trait[] = [
 
 const TOUTES_FIGURES: readonly string[] = [...new Set(FIGURES.map((f) => f.rep))];
 
+/* ⭐⭐ LE GABARIT INVERSE — AJOUTÉ LE 29/08/2026, ET IL RÉPARE UNE PANNE RÉELLE.
+   Mesuré par `scripts/verifier-demarrage.ts` : cliquer « Voyager en poésie »
+   servait une question sur LES HÉROS. C'est le cas que ce script décrit comme le
+   plus traitre — « une ligne qui en ouvre une autre n'est pas une ligne qui
+   marche » — parce que rien ne le signale à l'élève.
+
+   ⛔ LA CAUSE : `5e_cult_voyage_poesie` était la seule des quatre micros à
+   n'avoir QU'UN item. Les trois autres ont un gabarit ET un item figé ; elle
+   n'avait que son gabarit, et `buildQuestionPair`, qui propose deux énoncés au
+   choix, ne trouvait pas de quoi faire la paire — il repliait donc sur une micro
+   voisine de la même notion.
+
+   ⭐ Et `scripts/verifier-renouvellement.ts` signalait la même chose autrement :
+   les QUATRE micros n'avaient qu'un seul gabarit. On ne comble pas cela avec des
+   questions figées — elles ne se renouvellent jamais. On écrit un SECOND
+   GABARIT, et l'on prend la question par l'autre bout : au lieu de donner le cas
+   et de demander la catégorie, on donne la catégorie et l'on demande le cas.
+
+   ⚠️ Les quatre propositions sortent toutes de la MÊME table de traits : elles
+   ont donc des longueurs comparables par construction, et la bonne réponse n'est
+   pas systématiquement la plus longue. */
+function inverse(table: readonly Trait[]) {
+  const rep = randomChoice([...new Set(table.map((t) => t.rep))]);
+  const bon = randomChoice(table.filter((t) => t.rep === rep));
+  const faux = shuffle(table.filter((t) => t.rep !== rep))
+    .slice(0, 3)
+    .map((t) => t.trait);
+  return { rep, correct: bon.trait, faux };
+}
+
 export const cultureLitteraire5eBank: TutorBankItemV4[] = [
   /* ── 1. DEVENIR HÉROÏNE, HÉROS ──────────────────────────────────────────── */
   {
@@ -377,5 +407,119 @@ export const cultureLitteraire5eBank: TutorBankItemV4[] = [
       "Parce qu'on accepte d'un animal une leçon qu'on refuserait d'un semblable.",
     ),
     tags: ["5e", "culture-litteraire", "fable", "methode", "qcm"],
+  },
+
+  /* ══ SECONDS GABARITS (29/08/2026) — voir la note sur `inverse` ══════════ */
+  {
+    kind: "template",
+    id: "5e_cult_heros_tpl_2",
+    niveau: "5e",
+    matiere: "francais",
+    notionId: "culture_litteraire",
+    microId: "5e_cult_heros",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Chaque figure a ses marques : l'ascendance, l'aide reçue, le masque, ou l'absence d'exploit.",
+    tags: ["5e", "culture-litteraire", "heros", "inverse", "template"],
+    generate: () => {
+      const { rep, correct, faux } = inverse(HEROS);
+      return {
+        text: `Lequel de ces traits est celui ${rep} ?`,
+        format: "qcm" as const,
+        choices: makeChoices(correct, faux),
+        expected: [correct],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Une figure héroïque se reconnait à un seul trait : d'où lui vient sa force, et devant qui il agit.",
+          "Prends chaque proposition et demande-toi d'où vient la force du personnage.",
+          `${correct}`,
+          `C'est ${rep}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "5e_cult_voyage_poesie_tpl_2",
+    niveau: "5e",
+    matiere: "francais",
+    notionId: "culture_litteraire",
+    microId: "5e_cult_voyage_poesie",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Lis les quatre à voix basse : l'un d'eux emploie ce procédé, les autres non.",
+    tags: ["5e", "culture-litteraire", "poesie", "voyage", "inverse", "template"],
+    generate: () => {
+      const { rep, correct, faux } = inverse(POESIE);
+      return {
+        text: `Dans lequel de ces vers le voyage vient-il ${rep} ?`,
+        format: "qcm" as const,
+        choices: makeChoices(correct, faux),
+        expected: [correct],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Le voyage d'un poème tient à sa langue, pas à son sujet : les sonorités imitent, l'image fait voir, le rythme fait avancer, et les noms de lieux déplacent seuls.",
+          "Dis chaque vers tout bas. Le procédé cherché s'entend avant de se raisonner.",
+          `${correct}`,
+          `C'est ${rep}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "5e_cult_theatre_tpl_2",
+    niveau: "5e",
+    matiere: "francais",
+    notionId: "culture_litteraire",
+    microId: "5e_cult_theatre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Les ressorts du comique se retrouvent d'une pièce à l'autre : cherche celui qu'on te nomme.",
+    tags: ["5e", "culture-litteraire", "theatre", "inverse", "template"],
+    generate: () => {
+      const { rep, correct, faux } = inverse(THEATRE);
+      return {
+        text: `Dans laquelle de ces scènes reconnait-on ${rep} ?`,
+        format: "qcm" as const,
+        choices: makeChoices(correct, faux),
+        expected: [correct],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "La comédie renverse la société avec quelques ressorts qui reviennent toujours : le renversement des rôles, le quiproquo, la répétition, le déguisement, le mot d'esprit.",
+          "Demande-toi qui commande dans la scène, et qui sait quoi.",
+          `${correct}`,
+          `C'est ${rep}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "5e_cult_plaire_instruire_tpl_2",
+    niveau: "5e",
+    matiere: "francais",
+    notionId: "culture_litteraire",
+    microId: "5e_cult_plaire_instruire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un animal de fable n'est pas un animal : c'est une facette de l'être humain.",
+    tags: ["5e", "culture-litteraire", "fable", "figures", "inverse", "template"],
+    generate: () => {
+      const { rep, correct, faux } = inverse(FIGURES);
+      return {
+        text: `Quelle figure de fable incarne ${rep} ?`,
+        format: "qcm" as const,
+        choices: makeChoices(correct, faux),
+        expected: [correct],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "Les personnages de fable incarnent chacun une facette de l'être humain, et ils ne valent que les uns contre les autres.",
+          "Ne cherche pas l'animal : cherche la personne qu'il représente.",
+          `${correct}`,
+          `C'est ${rep}.`,
+        ),
+      };
+    },
   },
 ];
