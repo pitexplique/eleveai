@@ -354,6 +354,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Le théorème de Pythagore",
     resume: "Reconnaître l'hypoténuse, calculer une longueur, et utiliser la réciproque pour prouver un angle droit.",
   },
+  "maths/4e/grandeur-composee": {
+    titre: "Grandeurs composées et unités",
+    resume:
+      "Une unité n'est pas une étiquette, c'est un calcul écrit : grandeur produit et grandeur quotient, lire un km/h, convertir en comprenant pourquoi 1 m² vaut 10 000 cm², et contrôler un résultat par son unité.",
+  },
   "maths/4e/proba-frequence": {
     titre: "Fréquences observées et probabilité",
     resume:
