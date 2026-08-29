@@ -537,15 +537,20 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Préparer sa lecture en silence, regarder l'auditoire, et trouver le ton là où il est écrit : le verbe de parole, la ponctuation, les mots du récit — et le tiret qui change de voix.",
   },
-  "francais/6e/fluence-lecture": {
-    titre: "Lire avec fluidité",
-    resume:
-      "Lire par groupes de sens au lieu de lire mot à mot, tenir la ponctuation, ne rien prononcer — et viser les 130 mots par minute attendus en 6e.",
-  },
   "francais/6e/culture-recits": {
     titre: "Récits des origines, aventure et monstres en 6e (2026-2027)",
     resume:
       "Trois entrées et une seule question : ce que le récit explique de nous. Le mythe qui explique et qui fait payer, les trois pièces de l'aventure, et le monstre qui n'est pas un méchant.",
+  },
+  "francais/6e/culture-poesie-theatre": {
+    titre: "Poésie et théâtre en 6e (2026-2027) : mots, merveilles et ruses",
+    resume:
+      "Les deux genres où le texte attend une voix : la forme du poème, la rime qui est un son, l'image — et au théâtre la didascalie, l'aparté, et le rire qui vient d'un écart de savoir.",
+  },
+  "francais/6e/fluence-lecture": {
+    titre: "Lire avec fluidité",
+    resume:
+      "Lire par groupes de sens au lieu de lire mot à mot, tenir la ponctuation, ne rien prononcer — et viser les 130 mots par minute attendus en 6e.",
   },
 
   /* ⭐ LA 5e OUVRE EN FRANÇAIS (24/08/2026). Elle avait vingt fiches de maths et

@@ -11,7 +11,17 @@
 import subprocess, sys, tempfile, os
 
 fichier, slug = sys.argv[1], sys.argv[2]
-diff = subprocess.run(["git", "diff", "-U0", "--", fichier],
+
+# ⛔ TROIS LIGNES DE CONTEXTE, ET PAS ZERO — PAYE LE 29/08.
+# Avec `-U0`, git n'a aucun point d'ancrage : pour representer une insertion, il
+# lui arrive de REEMETTRE le bloc suivant, si bien qu'un ajout de cinq lignes
+# sort en hunk de dix. `git apply --cached` ecrit alors les deux, et l'index
+# repart avec une cle en double que l'arbre de travail n'a pas. C'est arrive une
+# fois, c'est parti dans un commit pousse, et rien ne l'a signale.
+# Avec `-U3`, le hunk porte son contexte : git apply le POSITIONNE au lieu de le
+# deviner, et il ECHOUE bruyamment si le fichier a bouge — ce qui est le
+# comportement voulu sur un fichier partage entre trois sessions.
+diff = subprocess.run(["git", "diff", "-U3", "--", fichier],
                       capture_output=True, text=True, encoding="utf-8").stdout
 lignes = diff.splitlines(keepends=True)
 entete = lignes[:4]
@@ -36,7 +46,7 @@ patch = "".join(entete) + "".join("".join(h) for h in miens)
 chemin = os.path.join(tempfile.gettempdir(), "mon-hunk.patch")
 with open(chemin, "w", encoding="utf-8", newline="") as f:
     f.write(patch)
-subprocess.run(["git", "apply", "--cached", "--unidiff-zero", chemin], check=True)
+subprocess.run(["git", "apply", "--cached", chemin], check=True)
 print("applique a l'index")
 
 # ⛔ ET LE CONTROLE QUI MANQUAIT, PAYE LE 29/08 : L'INDEX PEUT SORTIR AVEC UNE
