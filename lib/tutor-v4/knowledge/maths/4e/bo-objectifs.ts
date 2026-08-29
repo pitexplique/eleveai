@@ -819,8 +819,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
       "Calculer avec des grandeurs mesurables ; exprimer les résultats dans les unités adaptées",
     objectif: "Notion de grandeur produit et de grandeur quotient.",
     page: 135,
-    micros: [],
-    note: "⛔ TROU. Une vitesse est CALCULÉE dans `prop_probleme` (km/h), mais jamais NOMMÉE comme grandeur quotient, et aucun item ne compose des unités (m × m = m², km ÷ h = km/h). ⭐ Se greffe sur les notions EXISTANTES `aire_surface`, `volume_solide` et `prop_proportionnalite`.",
+    micros: ["grandeur_produit", "grandeur_quotient", "grandeur_unite_composee"],
+    note: "✅ COMBLÉ LE 28/08/2026 par la notion `grandeur_composee`. ⭐ Le nom des DEUX familles est enseigné, et l'unité sert de preuve : un exposant trahit un produit, une barre de fraction trahit un quotient. Une vitesse était auparavant calculée dans `prop_probleme` sans jamais être nommée.",
   },
   {
     id: "4e-C-grandeurs-2",
@@ -878,8 +878,11 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
       "aire_perimetre_defi",
       "volume_comprendre",
       "volume_defi",
+      "grandeur_produit",
+      "grandeur_quotient",
+      "grandeur_defi",
     ],
-    note: "⚠️ Longueurs, aires et volumes sont bien couverts. Le mot qui manque est « COMPOSÉES » : voir 4e-C-grandeurs-1.",
+    note: "✅ COMPLÉTÉ LE 28/08/2026. Longueurs, aires et volumes étaient couverts ; le mot qui manquait était « COMPOSÉES », et il l'est depuis l'ouverture de `grandeur_composee` — vitesse, débit, prix au kilo, énergie en kWh.",
   },
   {
     id: "4e-C-grandeurs-6",
@@ -888,8 +891,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
       "Calculer avec des grandeurs mesurables ; exprimer les résultats dans les unités adaptées",
     objectif: "Vérifier la cohérence des résultats du point de vue des unités.",
     page: 135,
-    micros: [],
-    note: "⛔ TROU. Aucun item ne demande de juger un résultat SUR SON UNITÉ (« 12 cm³ pour une aire », « 5 m pour un volume »). C'est le contrôle qui accompagne 4e-C-grandeurs-1.",
+    micros: ["grandeur_coherence"],
+    note: "✅ COMBLÉ LE 28/08/2026. ⭐ C'est un CONTRÔLE, pas un calcul : « 12 cm³ » ne peut pas être une aire, et l'unité seule suffit à rejeter le résultat sans rien recalculer. La micro traite aussi le second contrôle, distinct — l'ORDRE DE GRANDEUR (« un cycliste à 250 km/h »), où l'unité est juste mais la valeur absurde.",
   },
   {
     id: "4e-C-grandeurs-7",
@@ -898,8 +901,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
       "Calculer avec des grandeurs mesurables ; exprimer les résultats dans les unités adaptées",
     objectif: "Effectuer des conversions d'unités.",
     page: 135,
-    micros: ["volume_unite"],
-    note: "⚠️ Les VOLUMES seulement. Aucune micro de 4e ne convertit une longueur ni une aire — la 6e a `aire_longueur_convertir` et `aire_convertir`, la 4e n'a rien d'équivalent.",
+    micros: ["volume_unite", "grandeur_convertir"],
+    note: "✅ COMPLÉTÉ LE 28/08/2026. Les volumes étaient seuls ; les LONGUEURS et les AIRES sont arrivées avec `grandeur_composee`. ⭐ Et elles y sont rangées exprès : dans « aires », « 1 m² = 10 000 cm² » serait une recette ; ici c'est une CONSÉQUENCE — si 1 m = 100 cm, alors 1 m² = 100 × 100 cm². L'élève refait le raisonnement au lieu de mémoriser un tableau, et il cesse de se tromper d'un facteur 100.",
   },
 
   // ─── Comprendre l'effet de quelques transformations ────────────────────────

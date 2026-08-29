@@ -109,6 +109,21 @@ const supportLinks: Record<string, string[]> = {
   ],
 
   // =========================
+  // GRANDEURS COMPOSÉES ET UNITÉS
+  // =========================
+  // ⭐ Ajouté le 28/08/2026. La remédiation ne passe PAS par le calcul mais par
+  // la grandeur concrète : quand l'élève bute sur une unité composée, c'est
+  // qu'il a perdu de vue ce qu'il mesure.
+  grandeur_produit: ["aire_rectangle", "aire_comprendre", "volume_lien_aire"],
+  grandeur_quotient: ["prop_coeff", "prop_probleme", "fraction_diviser"],
+  grandeur_unite_composee: ["grandeur_produit", "grandeur_quotient", "volume_unite"],
+  // ⭐ La conversion d'une aire se remédie par les PUISSANCES DE 10, pas par un
+  // tableau : 1 m² = 100 × 100 cm² parce que 1 m = 100 cm.
+  grandeur_convertir: ["puissance_dix", "volume_unite", "grandeur_produit"],
+  grandeur_coherence: ["grandeur_unite_composee", "grandeur_convertir", "aire_comprendre"],
+  grandeur_defi: ["grandeur_coherence", "grandeur_quotient", "grandeur_convertir"],
+
+  // =========================
   // FRÉQUENCES OBSERVÉES ET PROBABILITÉ
   // =========================
   // ⭐ Ajouté le 28/08/2026. Une fréquence est une STATISTIQUE avant d'être une

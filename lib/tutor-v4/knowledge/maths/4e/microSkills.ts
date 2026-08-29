@@ -974,6 +974,64 @@ export const microSkills: MicroSkillSource[] = [
   ],
 },
 
+  /* =========================
+     GRANDEURS COMPOSÉES ET UNITÉS
+  ========================= */
+  // ⭐ OUVERTE LE 28/08/2026. Deux trous du BO fermés, deux partiels complétés.
+  //
+  // ⭐ CE QUE LA NOTION ENSEIGNE TIENT EN UNE PHRASE : les unités ne SUIVENT pas
+  // le calcul, elles SE CALCULENT. Multiplier des mètres par des mètres donne
+  // des mètres carrés ; diviser des kilomètres par des heures donne des km/h.
+  // C'est la même idée que le k² des agrandissements, prise par l'autre bout.
+  //
+  // ⛔ POURQUOI LA CONVERSION EST ICI ET NON DANS « AIRES ». Rangée dans les
+  // aires, « 1 m² = 10 000 cm² » est une recette à retenir. Rangée ici, elle
+  // devient une CONSÉQUENCE : si 1 m = 100 cm, alors 1 m² = 100 × 100 cm².
+  // L'élève ne mémorise plus un tableau, il refait le raisonnement.
+  // ⚠️ Et c'était un vrai manque : aucune micro de 4e ne convertissait une
+  // longueur ni une aire — seuls les volumes le faisaient (`volume_unite`).
+  //
+  // ⭐ LA DERNIÈRE MICRO EST UN CONTRÔLE, PAS UN CALCUL. « 12 cm³ » ne peut pas
+  // être une aire, « 5 m » ne peut pas être un volume : l'unité seule suffit à
+  // rejeter un résultat. Le BO en fait une compétence à part
+  // (4e-C-grandeurs-6), et il a raison — c'est un réflexe, pas une technique.
+  {
+    id: "grandeur_produit",
+    label: "Reconnaître et calculer une grandeur produit",
+    notionId: "grandeur_composee",
+    prerequis: ["aire_rectangle", "volume_pave"],
+  },
+  {
+    id: "grandeur_quotient",
+    label: "Reconnaître et calculer une grandeur quotient",
+    notionId: "grandeur_composee",
+    prerequis: ["prop_coeff", "fraction_diviser"],
+  },
+  {
+    id: "grandeur_unite_composee",
+    label: "Lire et écrire l’unité d’une grandeur composée",
+    notionId: "grandeur_composee",
+    prerequis: ["grandeur_produit", "grandeur_quotient"],
+  },
+  {
+    id: "grandeur_convertir",
+    label: "Convertir des longueurs et des aires",
+    notionId: "grandeur_composee",
+    prerequis: ["grandeur_produit", "puissance_dix"],
+  },
+  {
+    id: "grandeur_coherence",
+    label: "Vérifier un résultat par son unité",
+    notionId: "grandeur_composee",
+    prerequis: ["grandeur_unite_composee", "grandeur_convertir"],
+  },
+  {
+    id: "grandeur_defi",
+    label: "Défis sur les grandeurs composées",
+    notionId: "grandeur_composee",
+    prerequis: ["grandeur_coherence", "grandeur_quotient"],
+  },
+
 /* =========================
    STATISTIQUES
 ========================= */

@@ -251,6 +251,29 @@ export const notions: NotionSource[] = [
     prerequis: ["aire_surface"],
     levels: [1, 2],
   },
+  // ⭐ OUVERTE LE 28/08/2026. Elle ferme DEUX trous du BO et complète DEUX
+  // partiels — même profil que `prop_echelle` :
+  //   · 4e-C-grandeurs-1 « Notion de grandeur produit et de grandeur
+  //     quotient » — TROU. Une vitesse était CALCULÉE dans `prop_probleme`,
+  //     jamais NOMMÉE, et aucun item ne composait des unités ;
+  //   · 4e-C-grandeurs-6 « Vérifier la cohérence des résultats du point de vue
+  //     des unités » — TROU ;
+  //   · 4e-C-grandeurs-5, dont le mot « composées » n'était pas couvert ;
+  //   · 4e-C-grandeurs-7, où seuls les VOLUMES se convertissaient — aucune
+  //     micro de 4e ne convertissait une longueur ni une aire.
+  //
+  // ⭐ UN SEUL OBJET, ET C'EST CE QUI JUSTIFIE DE METTRE LA CONVERSION ICI : les
+  // unités ne SUIVENT pas le calcul, elles SE CALCULENT. Composer (m × m = m²,
+  // km ÷ h = km/h), convertir, contrôler : c'est le même geste vu trois fois.
+  // Une conversion rangée dans « aires » serait une recette ; rangée ici, elle
+  // est une conséquence.
+  {
+    id: "grandeur_composee",
+    label: "Grandeurs composées et unités",
+    boId: "BO4M1",
+    prerequis: ["aire_surface", "volume_solide", "prop_proportionnalite"],
+    levels: [1, 2, 3],
+  },
 
   // =========================
   // DONNÉES
