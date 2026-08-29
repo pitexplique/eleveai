@@ -547,6 +547,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Les mots pour parler d'un livre — narrateur, héros, adversaire, cadre —, pourquoi l'auteur n'est pas le narrateur, et un carnet qui garde un avis avec le passage qui le justifie.",
   },
+  "francais/6e/ecriture-main": {
+    titre: "Écrire à la main de manière fluide et efficace en 6e (2026-2027)",
+    resume:
+      "Le temps se perd dans les allers-retours, pas dans la main : copier par groupes, retenir son dernier mot écrit, se relire sur sa feuille — et régler la mise en forme.",
+  },
   "francais/6e/culture-recits": {
     titre: "Récits des origines, aventure et monstres en 6e (2026-2027)",
     resume:
