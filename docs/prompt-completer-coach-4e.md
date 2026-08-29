@@ -24,14 +24,16 @@ Tu es la session MATHS 4e. D'autres sessions travaillent dans le même dossier.
       et de dépôt. Ce prompt ne les redit pas.
 
 ════ OÙ ON EN EST (28/08/2026, au soir) ═════════════════════════════
-maths 4e   26 notions · 174 micros · 26 fiches · 26 PDF   ·   tout est poussé
+maths 4e   27 notions · 182 micros · 27 fiches · 27 PDF   ·   tout est poussé
+           ⚠️ SAUF UNE : `triangle_figure` a sa banque poussée et verte,
+           MAIS PAS ENCORE SA FICHE. C'est la seule dette ouverte.
 
     npx --yes tsx@4 scripts/verifier-bo.ts 4e
-    → 111 objectifs d'apprentissage · 174 micro-compétences
-      74/111 objectifs couverts (67 %) — 37 trous
+    → 111 objectifs d'apprentissage · 182 micro-compétences
+      81/111 objectifs couverts (73 %) — 30 trous
       0 micro citée mais inexistante · 0 micro hors programme
 
-⭐ LA JOURNÉE DU 28/08 : de 53 % à 67 %, SIX NOTIONS ouvertes de bout en bout —
+⭐ LA JOURNÉE DU 28/08 : de 53 % à 73 %, SEPT NOTIONS ouvertes de bout en bout —
 `bo.ts`, `notions.ts`, `microSkills.ts`, la matrice du coach, la banque, la
 matrice d'entrée, `bo-objectifs.ts`, les huit vérificateurs, la fiche, le PDF :
 
@@ -41,6 +43,21 @@ matrice d'entrée, `bo-objectifs.ts`, les huit vérificateurs, la fiche, le PDF 
     proba_frequence         Fréquences observées et probabilité
     grandeur_composee       Grandeurs composées et unités
     fonction_dependance     Dépendance entre deux grandeurs
+    triangle_figure         Le triangle pour démontrer   ⚠️ FICHE À FAIRE
+
+⭐ LA SEPTIÈME A FERMÉ SEPT PUCES D'UN COUP, le record de la journée, et ce
+n'est pas un forçage : la ligne « Triangle » du BO porte elle-même la somme des
+angles, les hauteurs et médiatrices, l'inégalité, les cas d'égalité et les
+triangles semblables en SOUS-PUCES D'UN MÊME POINT — plus le protocole de
+construction (4e-D-geometrie-11) et le lien cas d'égalité ↔ construction (-12).
+La notion suit ce découpage, elle ne le refait pas.
+👉 Trois micros reprennent les IDENTIFIANTS DE LA 5e (`triangle_inegalite`,
+`triangle_somme_angle`, `triangle_construire`) : c'est le motif qui a marché
+sept fois — trouver la notion sœur dans une autre classe, reprendre ses
+identifiants pour la continuité verticale, puis ajouter ce que le BO place ici.
+⛔ Les ANGLES ALTERNES INTERNES sont restés dehors : le BO en fait une puce
+distincte (4e-D-geometrie-1). Conséquence écrite dans la note de -2 : la somme
+des angles est UTILISÉE, elle n'est pas encore PROUVÉE.
 
 ⭐ LE POINT AVEUGLE DU PROGRAMME EST FERMÉ depuis le 27/08 : les six
 vérificateurs de banque comptent les items d'une micro EXISTANTE, donc un trou
@@ -466,10 +483,13 @@ Ordre proposé, du plus sûr au plus incertain :
  3. FONCTIONS — attendu absent en entier, gros morceau. ⚠️ Calibrer sur les
     repères : pas de f(x), pas de linéaire ni d'affine. Dépendance de deux
     grandeurs par tableau, graphique et PROGRAMME DE CALCUL.
- 4. GÉOMÉTRIE DU TRIANGLE — une notion `triangle` à créer, qui ferme cinq puces
-    d'un coup : somme des angles, hauteurs et médiatrices, inégalité
-    triangulaire, CAS D'ÉGALITÉ, triangles semblables. ⭐ Les angles alternes
-    internes viennent avec, puisque le BO en fait l'outil de la démonstration.
+ 4. ✅ GÉOMÉTRIE DU TRIANGLE — FAIT LE 28/08, banque poussée et verte.
+    ⚠️ IL RESTE SA FICHE : `triangle_figure`, 7 micros à couvrir en blocs
+    (`verifier-micros.mjs maths 4e` ne le voit pas encore, il n'inspecte que
+    les fiches EXISTANTES — c'est son angle mort, ne pas s'y fier ici).
+    ⚠️ Le canvas `triangle` est à POINTS FIXES : il tient dans la zone large
+    du coach, il ROGNERAIT dans une carte de fiche à 222 px. Pour la fiche,
+    passer par `tableau_donnees` ou par une figure retaillée à la main.
  5. REPÉRAGE (abscisse, ordonnée, altitude ; latitude, longitude ; solides et
     patrons) — ⛔ corriger d'abord les deux gabarits de translation.
  6. ARITHMÉTIQUE (divisibilité, premiers) — en dernier : elle ne sert la 4ᵉ
