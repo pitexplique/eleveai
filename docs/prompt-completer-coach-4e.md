@@ -23,23 +23,38 @@ Tu es la session MATHS 4e. D'autres sessions travaillent dans le même dossier.
    5. LIRE docs/passation-maths-4e.md — toutes les règles de dessin, de mesure
       et de dépôt. Ce prompt ne les redit pas.
 
-════ OÙ ON EN EST ═══════════════════════════════════════════════════
-maths 4e   20 notions · 136 micros · 20 fiches · 20 PDF   ·   tout est poussé
-
-Les six vérificateurs de banque passent (validité ✅, générateurs ✅, variété ✅
-médiane 310 minimum 11, devinabilité ✅, canvas ✅, couverture 136/136).
-
-⭐ ET DEPUIS LE 27/08 IL Y EN A UN SEPTIÈME, celui qui regarde le PROGRAMME :
+════ OÙ ON EN EST (28/08/2026, au soir) ═════════════════════════════
+maths 4e   26 notions · 174 micros · 26 fiches · 26 PDF   ·   tout est poussé
 
     npx --yes tsx@4 scripts/verifier-bo.ts 4e
-    → 111 objectifs d'apprentissage · 136 micro-compétences
-      59/111 objectifs couverts (53 %) — 52 trous
+    → 111 objectifs d'apprentissage · 174 micro-compétences
+      74/111 objectifs couverts (67 %) — 37 trous
       0 micro citée mais inexistante · 0 micro hors programme
 
-⭐ LE POINT AVEUGLE EST FERMÉ. Les six autres comptent les items d'une micro
-EXISTANTE : un trou n'a rien à compter, donc il ne déclenchait rien. C'est ce
-silence qui a laissé la 4e annoncer « 75 % » avec neuf chapitres absents.
-Désormais chaque puce du BO a sa ligne, et `micros: []` allume le rouge.
+⭐ LA JOURNÉE DU 28/08 : de 53 % à 67 %, SIX NOTIONS ouvertes de bout en bout —
+`bo.ts`, `notions.ts`, `microSkills.ts`, la matrice du coach, la banque, la
+matrice d'entrée, `bo-objectifs.ts`, les huit vérificateurs, la fiche, le PDF :
+
+    puissance_ecriture      Puissances et notation scientifique
+    prop_ratio_pourcentage  Ratios et pourcentages (scission, comme la 5e)
+    prop_echelle            Agrandissement, réduction et échelles
+    proba_frequence         Fréquences observées et probabilité
+    grandeur_composee       Grandeurs composées et unités
+    fonction_dependance     Dépendance entre deux grandeurs
+
+⭐ LE POINT AVEUGLE DU PROGRAMME EST FERMÉ depuis le 27/08 : les six
+vérificateurs de banque comptent les items d'une micro EXISTANTE, donc un trou
+ne déclenchait rien. `verifier-bo.ts` compare deux listes, et c'est lui qui a
+rendu cette journée possible.
+
+⛔⛔ ET IL A FAILLI ÊTRE TRAHI LE 28/08, PAR MOI. En raccrochant les puces des
+fonctions, j'avais mis deux micros sur « Vocabulaire : variable, fonction,
+antécédent, image » — le compteur passait de 74 à 75. Or les repères annuels
+disent que ce vocabulaire N'EST PAS formalisé en 4e. C'est exactement ce que le
+fichier interdit : « ne jamais y mettre une micro qui s'en rapproche pour faire
+passer le vérificateur au vert ». La ligne est revenue à `micros: []`.
+👉 **Un chiffre qui monte parce qu'on a raccroché une micro douteuse est pire
+qu'un chiffre qui stagne : il éteint l'alarme sans combler le trou.**
 
 ⛔ AUCUNE MICRO N'EST HORS PROGRAMME EN 4e (0 dette), et aucune micro citée
 n'est inexistante. La carte est donc exacte des deux côtés : ce qui reste, ce
@@ -59,40 +74,42 @@ Vérifiées item par item dans les banques, pas par recherche de mot :
     définit l'irréductibilité et fait reconnaître une fraction déjà irréductible.
     C'est le seul point de tout l'attendu « divisibilité » qui existe.
 
-👉 Ça change l'ordre d'attaque : les PUISSANCES restent seules en tête.
+👉 ⭐ HISTORIQUE : c'est ce qui avait mis les puissances en tête de l'ordre
+d'attaque le 27/08. Elles ont été faites le 28. La leçon reste : une recherche
+de MOT ne vaut pas une lecture d'items, et elle ment dans les deux sens.
 
-════ CE QUI MANQUE VRAIMENT ═════════════════════════════════════════
-⛔ NE PAS RECOPIER CETTE LISTE DANS UN COMMIT : elle vieillit. La liste vivante
-est la sortie de `verifier-bo.ts 4e`. Ce qui suit n'est qu'une carte de lecture.
+════ CE QUI MANQUE ENCORE (au soir du 28/08) ════════════════════════
+⛔ NE PAS RECOPIER CETTE LISTE DANS UN COMMIT : elle vieillit en une journée —
+celle-ci a déjà été refaite une fois. La liste vivante est la sortie de
+`verifier-bo.ts 4e`. Ce qui suit n'est qu'une carte de lecture.
 
-Les DEUX attendus de fin de cycle entièrement absents :
+Un attendu de fin de cycle reste ENTIÈREMENT absent :
     · divisibilité et nombres premiers   (11 puces sur 12 vides)
-    · fonction                            (10 puces sur 10 vides)
 
-Les gros blocs manquants, par thème :
-  A · puissances, notation scientifique, préfixes nano→giga, ordres de grandeur
-      vraisemblance d'un résultat ; annulation d'un produit, équations produits,
-      équations du type x² = a
-  B · notion de RATIO (notation 2 : 3) et partage selon un ratio
-      recueillir et organiser des données ; histogramme
-      lien FRÉQUENCE ↔ PROBABILITÉ (la 6e a la notion `proba_frequence` entière)
-  C · grandeur produit, grandeur quotient ; cohérence des unités
-      conversions de LONGUEURS et d'AIRES (seuls les volumes convertissent)
-      agrandissement / réduction ; ÉCHELLE d'une carte (la 6e a `prop_echelle`)
-      volume de la pyramide, du cône, de la boule
+⭐ L'attendu « fonction », entièrement absent le matin, est majoritairement
+couvert le soir — il ne reste que ce que le BO garde pour la 3e.
+
+Les blocs manquants, par thème :
+  A · ordres de grandeur et préfixes nano→giga ; vraisemblance d'un résultat ;
+      annulation d'un produit, équations produits, équations du type x² = a ;
+      repérer un rationnel sur une droite graduée ; encadrer
+  B · recueillir et organiser des données ; HISTOGRAMME ; tableur-grapheur
+      (assumé : un geste de logiciel ne s'évalue pas en QCM)
+  C · volume de la pyramide, du cône, de la boule ; triangles semblables et
+      homothéties (le lien proportionnalité repose encore sur Thalès seul)
   D · abscisse, ordonnée, altitude ; latitude, longitude ; tout le REPÉRAGE
       reconnaître un solide ; patrons, perspective cavalière
       angles alternes internes et correspondants
       somme des angles du triangle en 4e ; hauteurs et médiatrices ;
-      inégalité triangulaire ; CAS D'ÉGALITÉ DES TRIANGLES ; triangles semblables
-      homothétie ; protocole de construction
+      inégalité triangulaire ; CAS D'ÉGALITÉ DES TRIANGLES
+      protocole de construction
   E · déclenchement d'une action par un événement (le reste est complet)
 
-⭐ Quatre trous sont ASSUMÉS et doivent le rester — ils sont notés comme tels
-dans `bo-objectifs.ts` : le tableur-grapheur et le logiciel de géométrie
-dynamique (un geste de logiciel ne s'évalue pas en QCM), et les notations
-f(x) / x ↦ f(x) ainsi que les fonctions linéaire et affine (repères annuels :
-« La notation et le vocabulaire fonctionnels NE SONT PAS FORMALISÉS EN 4e »).
+⭐ Six trous sont ASSUMÉS et doivent le rester — ils portent leur raison dans
+`bo-objectifs.ts` : le tableur-grapheur et le logiciel de géométrie dynamique ;
+les notations f(x) et x ↦ f(x) ; les fonctions linéaire et affine ; et le
+VOCABULAIRE fonctionnel (variable, fonction, antécédent, image), que les repères
+annuels réservent explicitement à la 3e.
 
 ════ ⛔ UN BOGUE À CORRIGER AVANT D'OUVRIR LE REPÉRAGE ═══════════════
 `4e_sym_translation_tpl_2_coordonnees` et `4e_sym_translation_tpl_4`
@@ -332,45 +349,52 @@ le plus long leurre de 8 caractères ou plus (jusqu'à +17 sur
 la réponse — et un leurre allongé peut devenir VRAI : relire l'en-tête du pool.
 
 ════ PAR OÙ COMMENCER ═══════════════════════════════════════════════
-✅ FAIT LE 27/08 — `bo-objectifs.ts` est écrit, `verifier-bo.ts` a gagné la 4ᵉ,
-et le 1 est entré dans les carrés parfaits. Le prochain trou est désormais
-impossible à rater.
+✅ SIX NOTIONS FAITES LE 28/08, toutes de bout en bout et toutes poussées.
+⛔ NE PAS LES ROUVRIR : leurs micros sont validées, leurs banques vertes, leurs
+fiches mesurées aux deux largeurs, leurs PDF construits.
 
-⭐⭐ NOTION 1 — « PUISSANCES ET NOTATION SCIENTIFIQUE », VALIDÉE PAR FRÉDÉRIC
-LE 27/08. ⛔ Ne pas la rediscuter : les sept micros sont arrêtées, dans cet
-ordre, et le découpage a sa raison.
+    ✅ puissance_ecriture      7 micros + défi   ferme 3 trous
+    ✅ prop_ratio_pourcentage  8 micros          ferme 2 trous (scission 5e)
+    ✅ prop_echelle            7 micros          ferme 2 trous, complète 2 partiels
+    ✅ proba_frequence         5 micros          ferme 1 trou
+    ✅ grandeur_composee       6 micros          ferme 2 trous, complète 2 partiels
+    ✅ fonction_dependance     7 micros          ferme 5 puces — le plus gros trou
 
-    micro                             ce que l'élève fait
-    ───────────────────────────────────────────────────────────────────────
-    puissance_comprendre              lire 5⁴ = 5×5×5×5 ; a¹ = a ; a⁰ = 1
-    puissance_calculer                exposant positif ⚠️ piège (−2)³ vs −2³
-    puissance_exposant_negatif        10⁻³ = 1/10³
-    puissance_dix                     10ⁿ et 10⁻ⁿ, multiplier et diviser par
-    puissance_notation_scientifique   a × 10ⁿ avec 1 ⩽ a < 10
-    puissance_comparer                comparer et ranger en écriture scientifique
-    puissance_calcul                  calculs simples mêlant les deux
-    puissance_defi                    le bloc de défis
+⭐ LES SIX PARTAGENT LE MÊME MOTIF, ET IL A ÉTÉ PAYANT SIX FOIS : chercher la
+notion SŒUR dans une autre classe (la 3e pour les puissances, la 5e pour les
+ratios, la 6e pour les échelles et les fréquences), REPRENDRE SES IDENTIFIANTS
+pour la continuité verticale, puis ajouter ce que le BO place en 4e. On ne part
+jamais de zéro, et l'élève retrouve la même coupure d'une année sur l'autre.
 
-⭐ POURQUOI SEPT ET NON LES SIX DE LA 3ᵉ — c'est l'argument de Frédéric, et il
-vaut pour toutes les notions à venir : « en mode complet on peut RESTER SUR LA
-MICRO ». Un découpage plus fin ne disperse donc pas l'élève, il lui donne un
-grain de travail plus précis. Et le BO de 4ᵉ ajoute l'exposant négatif comme
-connaissance à part entière (« exposants entiers, positifs OU NÉGATIFS »).
+⭐ ET FRÉDÉRIC A TRANCHÉ LE 28/08 : « on garde le rappel de 6e ». Renvoyer un
+élève de 4e vers une fiche de 6e serait un JUGEMENT ; le moteur d'étoiles fait
+le tri sans rien dire à personne.
 
-⛔ CE QUI RESTE DEHORS, ET NE DOIT PAS Y ENTRER :
-  · les FORMULES a^m × a^n = a^(m+n) et les quotients de même base → 3ᵉ. Le BO :
-    elles « résultent de l'application de la définition plutôt que de celle
-    d'une formule ». En 4ᵉ on redescend à la définition, on n'apprend pas la règle.
-  · les PRÉFIXES nano→giga et les ORDRES DE GRANDEUR → ce n'est pas le même
-    objet. Une puissance est une ÉCRITURE, un ordre de grandeur est une MESURE.
-    ⭐ Ils feront la NOTION 2, « Ordres de grandeur », 3 micros + défi : préfixes,
-    associer un ordre de grandeur à un objet, vérifier la vraisemblance d'un
-    résultat. Elle ferme à elle seule trois autres puces, dont 4e-A-calcul-5
-    (« Vérifier la vraisemblance d'un résultat ») qui est un trou séparé.
+════ CE QUI RESTE, DU PLUS SÛR AU PLUS INCERTAIN ════════════════════
+ 1. LA SCISSION DES STATISTIQUES — validée le 27/08, écrite, jamais exécutée.
+    Voir la section dédiée plus bas : elle est prête à lancer, six étapes.
+ 2. LES CAS D'ÉGALITÉ DES TRIANGLES et la géométrie du triangle. ⭐ Une notion
+     à créer fermerait CINQ puces d'un coup : somme des angles,
+    hauteurs et médiatrices, inégalité triangulaire, cas d'égalité, triangles
+    semblables. Les angles alternes internes viennent avec, puisque le BO en
+    fait l'outil de la démonstration.
+ 3. LES ORDRES DE GRANDEUR — préfixes nano→giga, associer un ordre de grandeur,
+    vérifier la vraisemblance. 3 micros + défi, ferme 3 puces.
+ 4. LE REPÉRAGE (abscisse, ordonnée, altitude ; latitude, longitude ; solides et
+    patrons). ⛔ CORRIGER D'ABORD les deux gabarits de translation qui comptent
+    l'ordonnée vers le bas — voir la section dédiée.
+ 5. ARITHMÉTIQUE (divisibilité, premiers) — en dernier : elle ne sert la 4e
+    qu'un an avant de passer en 3e, et la banque de 3e est trop maigre.
 
-Puces de `bo-objectifs.ts` que la notion 1 ferme : 4e-A-calcul-2, 4e-A-calcul-3,
-4e-A-calcul-6, 4e-A-nombres-6, 4e-A-comparaisons-3.
-Puces que la notion 2 fermera : 4e-A-nombres-5, 4e-A-comparaisons-5, 4e-A-calcul-5.
+⛔ UN CONTRÔLE À FAIRE AVANT DE CLORE CHAQUE NOTION, appris trois fois le 28/08 :
+    grep -n "<le mot que l'élève taperait>" lib/matrice/coach.ts lib/matrice/lexique.ts
+Trois mots — « puissances », « échelle », « fréquence » — n'ouvraient RIEN, dans
+AUCUNE classe, alors que la 3e, le CM2 et la 6e avaient leurs notions depuis des
+mois. Aucun des huit vérificateurs ne regarde ce fichier.
+⚠️ Et savoir s'arrêter : pour , « vitesse » et « unité »
+étaient déjà des alias du lexique — je n'ai rien ajouté. Un thème que personne
+ne tape est du code mort.
+
 
 ════ ⭐⭐ NOTION 3 — SCINDER `stat_statistique`, VALIDÉE LE 27/08 ════
 ⛔ Ne pas la rediscuter, et ⛔ NE PAS LA FAIRE PASSER DEVANT LES PUISSANCES :
