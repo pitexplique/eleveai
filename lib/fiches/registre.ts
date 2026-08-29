@@ -386,6 +386,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "La fluence se prépare : ce qu'on regarde en deux minutes, la pause à la virgule, la liaison que la page ne montre pas, et le palier de 120 mots par minute.",
   },
+  "francais/cm2/lecture-voix-haute": {
+    titre: "Lire à voix haute avec expressivité en CM2 (2026-2027)",
+    resume:
+      "On lit POUR quelqu'un, et c'est lui qui juge : articuler les fins de mots, régler son rythme sur l'auditoire, faire varier — et le plaisir que le programme demande.",
+  },
   "francais/cm2/grammaire-orthographe": {
     titre: "Analyser une phrase : nature, fonction, accords",
     resume:
