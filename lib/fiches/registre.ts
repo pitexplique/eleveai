@@ -406,6 +406,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Nommer les éléments d'un document composite, croiser deux documents pour compléter — la réponse n'est souvent dans aucun des deux — et prélever en partant de la question.",
   },
+  "francais/cm2/lecture-oeuvres": {
+    titre: "Le thème d'une œuvre en CM2 (2026-2027)",
+    resume:
+      "Le thème tient en un mot et n'est pas l'histoire : c'est par lui qu'on relie deux œuvres, et par l'émotion qu'on se relie à un personnage. Plus les personnages et les enjeux.",
+  },
   "francais/cm2/grammaire-orthographe": {
     titre: "Analyser une phrase : nature, fonction, accords",
     resume:
