@@ -6,7 +6,11 @@ import { NIVEAUX, motsDeLaClasse } from "@/lib/dico";
 import { cgvEnVigueur } from "@/lib/legal/editeur";
 import { PDF_DISPONIBLES } from "@/lib/fiches/pdf-disponibles";
 import { FICHES_REGISTRE } from "@/lib/fiches/registre";
-import { PROGRAMME_CLASSES, listerNotionsAvecPage } from "@/lib/programme";
+import {
+  PROGRAMME_CLASSES,
+  listerNiveauxHorsClasse,
+  listerNotionsAvecPage,
+} from "@/lib/programme";
 
 // ⚠️ AVEC LE www : `eleveai.fr` répond 308 vers `www.eleveai.fr`. Sans lui,
 // les 270 lignes de ce fichier désignaient des adresses qui redirigent.
@@ -516,6 +520,33 @@ const notionsRoutes: RouteConfig[] = listerNotionsAvecPage().map((n) => ({
   lastMod: LASTMOD_NOTIONS,
 }));
 
+/* ⭐ LES DIX NIVEAUX HORS CLASSE (29/08/2026) — anglais et espagnol A1→B2, IA
+   collège et lycée. Frédéric : « on peut faire un moteur qui index les notions
+   comme dans coach-maths », après avoir vu que /coach-ia/english-maths n'offre
+   rien à indexer (144 caractères servis à un robot, tout le reste rendu côté
+   client).
+
+   ⛔ LE NIVEAU, PAS LA NOTION, et c'est la seule différence avec l'étage du
+   dessus. En maths une notion porte dix à vingt micros ; en anglais « Digits »
+   en porte trois. Soixante-dix pages de trois lignes seraient soixante-dix
+   pages minces — la règle qui écarte déjà les notions sans micro, un cran plus
+   haut. `anglais/a1` réunit 19 notions et 57 compétences, et c'est aussi ce
+   qu'on tape.
+
+   ⚠️ MÊME PRINCIPE QUE PARTOUT AILLEURS ICI : la liste vient de
+   `listerNiveauxHorsClasse()`, la même fonction qui nourrit les
+   `generateStaticParams` des trois routes. Un niveau ajouté à une banque entre
+   au sitemap sans que personne y pense — et un niveau dont la banque serait
+   vide n'y entre pas, la fonction ne rendant que les couples qui répondent. */
+const niveauxHorsClasseRoutes: RouteConfig[] = listerNiveauxHorsClasse().map(
+  ({ matiere, niveau }) => ({
+    path: `/programme/${matiere}/${niveau}`,
+    priority: 0.85,
+    changeFrequency: "monthly" as const,
+    lastMod: new Date("2026-08-29"),
+  })
+);
+
 // Jeu « Qui suis-je ? » — un paquet par classe, généré depuis les classes qui ont
 // du contenu (GS-CP → Terminale au fur et à mesure). Toute nouvelle classe s'ajoute
 // ici automatiquement, sans toucher ce fichier.
@@ -676,6 +707,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...fichesRoutes,
     ...niveauxRoutes,
     ...notionsRoutes,
+    ...niveauxHorsClasseRoutes,
   ].map((route) => {
     const videos = VIDEOS_FICHES[route.path];
     return {

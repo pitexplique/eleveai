@@ -170,14 +170,95 @@ export type ProgrammeNiveau = {
 
 export const NIVEAUX_LANGUE = ["a1", "a2", "b1", "b2"] as const;
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   ⭐ 29/08/2026, PLUS TARD — LE MOTEUR DES NIVEAUX : DIX PAGES, PAS CENT CINQUANTE
+   ═══════════════════════════════════════════════════════════════════════════
+
+   Frédéric : « on peut faire un moteur qui index les notions comme dans
+   coach-maths », après avoir constaté deux choses le même jour — que les mêmes
+   414 compétences se répétaient sur onze pages de classe, et que
+   /coach-ia/english-maths n'offrait rien à indexer.
+
+   ⛔⛔ MAIS PAS UNE PAGE PAR NOTION, ET C'EST LA DIFFÉRENCE AVEC LES MATHS.
+   En maths une notion porte dix à vingt micro-compétences : il y a de quoi
+   lire, d'où les 442 pages de notion. En anglais « Digits » en porte TROIS.
+   Soixante-dix pages de trois lignes, c'est la page mince que Google déclasse
+   — la règle qui écarte déjà les notions sans micro, appliquée un cran plus
+   haut. Le bon étage ici est LE NIVEAU : `anglais/a1` réunit 19 notions et 57
+   compétences, et c'est aussi la requête qu'on tape.
+
+   ⭐ CE QUE ÇA RÈGLE EN MÊME TEMPS. La page de classe rendait ces 414
+   compétences en entier, à l'identique sur onze pages, et /programme/5e
+   mesurait 98 000 pixels de haut pour 40 % de trafic mobile. Elle ne garde
+   maintenant que ses pastilles de niveau, chacune LIÉE à sa page. Le contenu
+   ne disparaît pas : il déménage là où il est unique. */
+
+export type MatiereHorsClasse = "anglais" | "espagnol" | "ia";
+
+/** Le segment d'URL → la matière telle qu'elle vit dans les banques. */
+export const BANQUE_HORS_CLASSE: Record<MatiereHorsClasse, "english-maths" | "espagnol" | "ia"> = {
+  anglais: "english-maths",
+  espagnol: "espagnol",
+  ia: "ia",
+};
+
+/** Les niveaux publiés pour chaque matière — l'ordre est celui de la page. */
+export const NIVEAUX_HORS_CLASSE: Record<MatiereHorsClasse, readonly string[]> = {
+  anglais: ["a1", "a2", "b1", "b2"],
+  espagnol: ["a1", "a2", "b1", "b2"],
+  ia: ["college", "lycee"],
+};
+
+/* ⚠️ L'IA A DEUX NOMS, ET IL FAUT LES DEUX. Les banques s'appellent
+   `pix-college` et `pix-lycee` ; l'URL, elle, dit `college` et `lycee` — le
+   préfixe Pix n'apprend rien à un lecteur et alourdit l'adresse. Cette table
+   est le seul endroit où la traduction a lieu. */
+const BANQUE_NIVEAU: Record<string, string> = {
+  college: "pix-college",
+  lycee: "pix-lycee",
+};
+
+export const bankeNiveau = (niveau: string) => BANQUE_NIVEAU[niveau] ?? niveau;
+
+export const LABEL_MATIERE_HORS_CLASSE: Record<MatiereHorsClasse, string> = {
+  anglais: "Anglais",
+  espagnol: "Espagnol",
+  ia: "Culture IA",
+};
+
 export const LABEL_NIVEAU_LANGUE: Record<string, string> = {
   a1: "A1 — débutant",
   a2: "A2 — élémentaire",
   b1: "B1 — intermédiaire",
   b2: "B2 — avancé",
+  college: "Collège",
+  lycee: "Lycée",
   "pix-college": "Collège",
   "pix-lycee": "Lycée",
 };
+
+/** Le pack d'un couple matière/niveau, en passant par les deux traductions. */
+export function getNiveauHorsClasse(
+  matiere: MatiereHorsClasse,
+  niveau: string
+): ProgrammeNiveau | null {
+  if (!NIVEAUX_HORS_CLASSE[matiere].includes(niveau)) return null;
+  return getProgrammeNiveau(BANQUE_HORS_CLASSE[matiere], bankeNiveau(niveau));
+}
+
+/** Les dix couples publiés — c'est ce que lisent le sitemap et les routes. */
+export function listerNiveauxHorsClasse(): {
+  matiere: MatiereHorsClasse;
+  niveau: string;
+}[] {
+  const out: { matiere: MatiereHorsClasse; niveau: string }[] = [];
+  for (const matiere of Object.keys(NIVEAUX_HORS_CLASSE) as MatiereHorsClasse[]) {
+    for (const niveau of NIVEAUX_HORS_CLASSE[matiere]) {
+      if (getNiveauHorsClasse(matiere, niveau)) out.push({ matiere, niveau });
+    }
+  }
+  return out;
+}
 
 /**
  * Le palier Pix d'une classe, ou `null` quand la question ne se pose pas.

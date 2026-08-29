@@ -10,15 +10,15 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   LABEL_NIVEAU_LANGUE,
-  NIVEAUX_LANGUE,
+  NIVEAUX_HORS_CLASSE,
   PROGRAMME_CLASSES,
+  getNiveauHorsClasse,
   getProgrammeClasse,
   getProgrammeMatiere,
-  getProgrammeNiveau,
   liensNotionsDeLaClasse,
   packIa,
+  type MatiereHorsClasse,
   type ProgrammeMatiere,
-  type ProgrammeNiveau,
 } from "@/lib/programme";
 
 const SITE_URL = "https://www.eleveai.fr";
@@ -73,20 +73,71 @@ export default async function ProgrammePage({
   const aLangues = Boolean(classe.anglais || classe.espagnol || classe.ia);
   const liensNotions = liensNotionsDeLaClasse(classe.slug);
 
-  // ⭐ Les quatre niveaux, pas celui de la classe : décision du 29/08, un enfant
-  // bilingue en 5e lit du B2. Voir la note dans lib/programme.ts.
-  const anglais = classe.anglais
-    ? (NIVEAUX_LANGUE.map((n) => getProgrammeNiveau("english-maths", n)).filter(
-        Boolean
-      ) as ProgrammeNiveau[])
-    : [];
-  const espagnol = classe.espagnol
-    ? (NIVEAUX_LANGUE.map((n) => getProgrammeNiveau("espagnol", n)).filter(
-        Boolean
-      ) as ProgrammeNiveau[])
-    : [];
+  /* ⭐ LES QUATRE NIVEAUX, PAS CELUI DE LA CLASSE — décision du 29/08, et elle
+     ne vient pas du SEO : un enfant bilingue en 5e lit du B2. Le niveau visé
+     est seulement MIS EN AVANT, jamais le seul offert.
+     ⚠️ Ce ne sont plus les compétences qu'on rend ici, seulement les portes :
+     chaque niveau a sa page depuis le moteur du 29/08 au soir. */
+  const niveauxDe = (
+    matiere: MatiereHorsClasse,
+    vise: string | null,
+    /* ⛔ L'IA NE PROPOSE QUE LE PALIER DE LA CLASSE. Les langues offrent leurs
+       quatre niveaux parce qu'un bilingue de 5e a le droit du B2 ; l'IA, elle,
+       n'a pas de bilingues — servir « Pix lycée » sur une page de 5e ferait
+       passer un autre programme pour le sien. Les langues laissent ce filtre
+       vide et gardent donc tout. */
+    seulement?: string
+  ) =>
+    NIVEAUX_HORS_CLASSE[matiere]
+      .filter((niveau) => !seulement || niveau === seulement)
+      .map((niveau) => {
+        const pack = getNiveauHorsClasse(matiere, niveau);
+        if (!pack) return null;
+        const label = (LABEL_NIVEAU_LANGUE[niveau] ?? niveau).split(" — ")[0];
+        return {
+          niveau,
+          label,
+          nbMicros: pack.nbMicros,
+          vise: Boolean(vise && vise.toUpperCase().includes(label.toUpperCase())),
+        };
+      })
+      .filter(Boolean) as {
+      niveau: string;
+      label: string;
+      nbMicros: number;
+      vise: boolean;
+    }[];
+
   const paletteIa = packIa(classe.slug);
-  const ia = paletteIa ? getProgrammeNiveau("ia", paletteIa) : null;
+  const blocsLangues = [
+    classe.anglais && {
+      matiere: "anglais" as const,
+      titre: "🗣️ Anglais",
+      vise: `Niveau visé : ${classe.anglais}`,
+      niveaux: niveauxDe("anglais", classe.anglais),
+    },
+    classe.espagnol && {
+      matiere: "espagnol" as const,
+      titre: "💬 Español",
+      vise: `Niveau visé : ${classe.espagnol}`,
+      niveaux: niveauxDe("espagnol", classe.espagnol),
+    },
+    paletteIa && {
+      matiere: "ia" as const,
+      titre: "🤖 Culture IA",
+      vise: `Référentiel Pix ${paletteIa === "pix-college" ? "collège" : "lycée"}`,
+      niveaux: niveauxDe(
+        "ia",
+        paletteIa === "pix-college" ? "Collège" : "Lycée",
+        paletteIa === "pix-college" ? "college" : "lycee"
+      ),
+    },
+  ].filter(Boolean) as {
+    matiere: MatiereHorsClasse;
+    titre: string;
+    vise: string;
+    niveaux: { niveau: string; label: string; nbMicros: number; vise: boolean }[];
+  }[];
 
   return (
     <main className="min-h-screen bg-[#f5f8ff] text-slate-800">
@@ -213,50 +264,38 @@ export default async function ProgrammePage({
               mais <span className="font-bold">les quatre sont ouverts</span> :
               un élève déjà bilingue n&apos;a aucune raison d&apos;attendre.
             </p>
-            <div className="mt-4 grid gap-3 sm:grid-cols-3">
-              {classe.anglais && (
-                <Link href="/coach-ia/english-maths" className="rounded-xl border border-sky-200 bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-md">
-                  <p className="font-black text-slate-900">🗣️ Anglais</p>
-                  <p className="mt-1 text-sm font-bold text-sky-700">Niveau visé : {classe.anglais}</p>
-                </Link>
-              )}
-              {classe.espagnol && (
-                <Link href="/coach-ia/espagnol" className="rounded-xl border border-sky-200 bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-md">
-                  <p className="font-black text-slate-900">Español</p>
-                  <p className="mt-1 text-sm font-bold text-sky-700">Niveau visé : {classe.espagnol}</p>
-                </Link>
-              )}
-              {classe.ia && (
-                <Link href="/coach-ia/ia" className="rounded-xl border border-sky-200 bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-md">
-                  <p className="font-black text-slate-900">🤖 Culture IA</p>
-                  <p className="mt-1 text-sm font-bold text-sky-700">Commence en {classe.ia}</p>
-                </Link>
-              )}
+            {/* ⛔ LES COMPÉTENCES NE SONT PLUS RENDUES ICI. Elles l'ont été le
+                29/08 au matin : les mêmes 414, à l'identique sur onze pages de
+                classe, et /programme/5e montait à 98 000 pixels pour 40 % de
+                trafic mobile. Elles vivent maintenant sur /programme/<matière>/
+                <niveau>, où chacune n'existe qu'une fois. Cette section est
+                redevenue ce qu'elle était — un PONT — mais un pont qui mène
+                quelque part. */}
+            <div className="mt-4 space-y-3">
+              {blocsLangues.map((b) => (
+                <div key={b.matiere} className="rounded-xl border border-sky-200 bg-white p-4">
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <p className="font-black text-slate-900">{b.titre}</p>
+                    <p className="text-sm font-bold text-sky-700">{b.vise}</p>
+                  </div>
+                  <div className="mt-3 flex flex-wrap gap-2 text-sm font-bold">
+                    {b.niveaux.map((n) => (
+                      <Link
+                        key={n.niveau}
+                        href={`/programme/${b.matiere}/${n.niveau}`}
+                        className={`rounded-full border px-4 py-1.5 transition ${
+                          n.vise
+                            ? "border-sky-400 bg-sky-100 text-sky-900 hover:bg-sky-200"
+                            : "border-sky-200 bg-sky-50 text-sky-700 hover:bg-sky-100"
+                        }`}
+                      >
+                        {n.label} · {n.nbMicros} compétences
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
-
-            {anglais.length > 0 && (
-              <BlocNiveaux
-                titre="🗣️ Anglais — les compétences, du A1 au B2"
-                niveaux={anglais}
-                coachHref="/coach-ia/english-maths"
-              />
-            )}
-            {espagnol.length > 0 && (
-              <BlocNiveaux
-                titre="Español — las competencias, del A1 al B2"
-                niveaux={espagnol}
-                coachHref="/coach-ia/espagnol"
-              />
-            )}
-            {ia && (
-              <BlocNiveaux
-                titre={`🤖 Culture IA — le référentiel Pix ${
-                  paletteIa === "pix-college" ? "collège" : "lycée"
-                }`}
-                niveaux={[ia]}
-                coachHref="/coach-ia/ia"
-              />
-            )}
           </section>
         )}
 
@@ -320,72 +359,5 @@ export default async function ProgrammePage({
         </section>
       </div>
     </main>
-  );
-}
-
-/* ── UN BLOC « MATIÈRE SANS CLASSE » ────────────────────────────────────────
-   Les langues et l'IA ne se rangent pas par année : anglais et espagnol sortent
-   quatre niveaux, l'IA un palier Pix. Le rendu est donc le même à un détail
-   près — le titre du niveau n'apparaît que s'il y en a plusieurs, sinon il
-   répète le titre du bloc. */
-function BlocNiveaux({
-  titre,
-  niveaux,
-  coachHref,
-}: {
-  titre: string;
-  niveaux: ProgrammeNiveau[];
-  coachHref: string;
-}) {
-  const total = niveaux.reduce((s, n) => s + n.nbMicros, 0);
-  return (
-    <div className="mt-6 rounded-2xl border border-sky-200 bg-white p-5 sm:p-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <h3 className="text-lg font-black text-slate-900">{titre}</h3>
-        <Link
-          href={coachHref}
-          className="inline-flex items-center gap-2 rounded-full bg-sky-500 px-4 py-2 text-sm font-black text-white shadow-md shadow-sky-500/25 transition hover:bg-sky-400"
-        >
-          S&apos;entraîner — gratuit →
-        </Link>
-      </div>
-      <p className="mt-1 text-sm font-semibold text-slate-500">
-        {niveaux.reduce((s, n) => s + n.nbNotions, 0)} notions · {total} compétences
-      </p>
-
-      <div className="mt-4 space-y-5">
-        {niveaux.map((niv) => (
-          <div key={niv.niveau}>
-            {niveaux.length > 1 && (
-              <h4 className="mb-2 inline-block rounded-full bg-sky-100 px-3 py-1 text-sm font-black text-sky-800">
-                {LABEL_NIVEAU_LANGUE[niv.niveau] ?? niv.niveau}
-              </h4>
-            )}
-            <div className="space-y-3">
-              {niv.notions.map((n) => (
-                <div key={`${niv.niveau}-${n.id}`}>
-                  <p className="font-bold text-sky-900">{n.label}</p>
-                  {n.micros.length > 0 && (
-                    <ul className="mt-1.5 grid gap-x-6 gap-y-1 sm:grid-cols-2">
-                      {n.micros.map((micro) => (
-                        <li
-                          key={micro}
-                          className="flex items-start gap-2 text-sm leading-6 text-slate-600"
-                        >
-                          <span className="mt-0.5 shrink-0 text-sky-500" aria-hidden>
-                            ✓
-                          </span>
-                          {micro}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
   );
 }
