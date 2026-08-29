@@ -337,7 +337,15 @@ const ROUTES: RouteConfig[] = [
   ...["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere-spe", "terminale-spe"].map((c) => (
     { path: `/programme/${c}`, priority: 0.9, changeFrequency: "monthly" as const, lastMod: new Date("2026-07-11") }
   )),
-  { path: "/espace-ecoles",   priority: 0.95, changeFrequency: "monthly", lastMod: LASTMOD_TARIFS },
+  // ⛔⛔ `/espace-ecoles` EST RETIRÉE DU SITEMAP LE 29/08/2026 — décision de
+  // Frédéric : « je ne vends plus aux établissements, c'est du pénal ». Elle y
+  // était en priorité 0,95, la plus haute du fichier après l'accueil : c'était
+  // la page qu'on poussait le plus fort à indexer.
+  // ⚠️ LA PAGE N'EST PAS SUPPRIMÉE et répond toujours — la retirer du sitemap
+  // dit seulement qu'on ne la propose plus à l'indexation. Google peut la garder
+  // un temps s'il la connaît déjà ; la faire disparaître des résultats demande
+  // un `noindex` sur la page, ce qui est une DEUXIÈME décision (et une décision
+  // à prendre les yeux ouverts : elle est référencée depuis le pied de page).
   { path: "/espace-eleves",   priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/espace-parents",  priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
 

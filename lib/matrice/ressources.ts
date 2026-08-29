@@ -1798,22 +1798,19 @@ export const RESSOURCES: RessourceEleveAI[] = [
     type: "page",
     statut: "validee",
   },
-  // ⚠️ L'ORDRE COMPTE POUR LA DIRECTION : à score égal, le moteur garde l'ordre
-  // de ce fichier. L'espace établissement passe donc devant le tableau de bord
-  // (Frédéric, 05/08) — un chef d'établissement qui arrive veut d'abord savoir
-  // ce que c'est, comment ça se déploie et ce que ça coûte ; le suivi vient
-  // après, quand ses classes sont inscrites.
-  {
-    id: "espace-ecoles",
-    titre: "L'espace établissement",
-    promesse: "Financement, RGPD, déploiement : tout ce qu'il faut avant de dire oui.",
-    url: "/espace-ecoles",
-    niveaux: ["direction"],
-    notions: ["*"],
-    intentions: ["suivre", "enseigner", "comprendre"],
-    type: "page",
-    statut: "validee",
-  },
+  // ⛔⛔ RETIRÉS LE 29/08/2026 — « L'espace établissement » et « Le tableau de
+  // bord de l'établissement » (Frédéric : « j'ai décidé de ne plus vendre aux
+  // établissements, c'est du pénal »). Ce ne sont pas des pages cassées : elles
+  // répondent toujours à `/espace-ecoles` et `/dashboard-principal`, et le
+  // dashboard reste l'outil des établissements déjà là. Elles ne sont plus
+  // PROPOSÉES par le moteur de l'accueil, c'est tout — on ne met pas en vitrine
+  // une offre qu'on ne veut plus vendre.
+  // ⚠️ Il reste donc DEUX ressources au profil `direction` : l'éval blanche Pix
+  // IA et le hub des évaluations nationales. Aucune des deux n'est une vente, et
+  // ce sont celles sur lesquelles un chef d'établissement est attendu — l'écran
+  // n'est pas vide, il ne propose simplement plus de contrat.
+  // ⚠️ L'ancienne note sur l'ORDRE (05/08 : l'espace devant le tableau de bord,
+  // « savoir ce que c'est avant de suivre ») tombe avec ses deux entrées.
   {
     // Ce qui l'intéresse vraiment (Frédéric, 03/08) : il est jugé là-dessus.
     id: "eval-nationales-hub",
@@ -1825,18 +1822,6 @@ export const RESSOURCES: RessourceEleveAI[] = [
     intentions: ["preparer", "suivre", "enseigner", "comprendre"],
     type: "evaluation",
     resultat: "score",
-    statut: "validee",
-  },
-  {
-    id: "dashboard-principal",
-    titre: "Le tableau de bord de l'établissement",
-    promesse: "L'activité de l'établissement, en un écran.",
-    url: "/dashboard-principal",
-    niveaux: ["direction"],
-    notions: ["*"],
-    intentions: ["suivre"],
-    type: "suivi",
-    resultat: "progression",
     statut: "validee",
   },
 ];
