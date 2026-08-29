@@ -537,6 +537,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Préparer sa lecture en silence, regarder l'auditoire, et trouver le ton là où il est écrit : le verbe de parole, la ponctuation, les mots du récit — et le tiret qui change de voix.",
   },
+  "francais/6e/culture-reperes": {
+    titre: "Genres, contexte et carnet de lecture en 6e (2026-2027)",
+    resume:
+      "Les mots pour parler d'un livre — narrateur, héros, adversaire, cadre —, pourquoi l'auteur n'est pas le narrateur, et un carnet qui garde un avis avec le passage qui le justifie.",
+  },
   "francais/6e/culture-recits": {
     titre: "Récits des origines, aventure et monstres en 6e (2026-2027)",
     resume:
