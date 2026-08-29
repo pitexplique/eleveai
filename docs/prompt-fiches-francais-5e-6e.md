@@ -606,6 +606,58 @@ formulent trois fois — en écriture (« on ne comprend pas qui parle » → on
 là), en lecture (« c'est nul » ne se discute pas, « au chapitre 3 » se discute),
 à l'oral (« je parlais trop vite au début », jamais « c'était nul »).
 
+---
+
+## ⭐ La ROBUSTESSE d'une notion : ce qu'il faut mesurer, et dans quel ordre
+
+« Robuste » a un sens précis ici, et ce n'est pas un total d'énoncés. Trois
+scripts, trois grandeurs différentes — les lancer dans cet ordre :
+
+```bash
+npx --yes tsx@4 scripts/verifier-demarrage.ts <classe> francais
+npx --yes tsx@4 scripts/verifier-renouvellement.ts <classe> francais
+node --experimental-strip-types scripts/verifier-generateurs.mjs <classe> francais
+```
+
+**1. `verifier-demarrage` — est-ce que la ligne cliquée ouvre la sienne ?** C'est
+le plus important et le plus traitre : quand une micro ne peut pas servir, le
+moteur sert une VOISINE sans le dire. Mesuré le 29/08 : cliquer « Voyager en
+poésie » en 5e donnait une question sur les héros. ⛔ La cause était une micro à
+UN SEUL ITEM — `buildQuestionPair` propose deux énoncés au choix et ne trouvait
+pas de quoi faire la paire.
+
+**2. `verifier-renouvellement` — combien d'énoncés le coach FABRIQUE-t-il ?**
+Seuil : 12. ⛔ Il compte les générés SEULS : un `fixed` ne se renouvelle jamais.
+Quand il crie, la réparation n'est jamais d'ajouter des items figés — c'est
+d'allonger la TABLE d'un gabarit (« au moins quinze cas »), ou d'écrire un
+SECOND GABARIT qui prend la question par l'autre bout : au lieu de donner le cas
+et demander la catégorie, donner la catégorie et demander le cas.
+
+**3. `verifier-generateurs` — la bonne réponse est-elle dans les choix ?** Il
+exécute les gabarits soixante fois au lieu de lire le source.
+
+### ⛔⛔ ET UN FAUX POSITIF DU TROISIÈME, À NE SURTOUT PAS « CORRIGER »
+
+`verifier-generateurs` signale **34 gabarits de 5e qui « tombent à deux
+propositions »** et parle de régression. **Ce n'est pas un défaut.** Les quatre
+banques `socle-*.bank.ts` de 5e partagent une constante :
+
+```ts
+const TAILLES: readonly number[] = [2, 3, 3, 4, 4, 4];
+```
+
+La taille du QCM est tirée au sort à chaque question, et c'est la décision de
+Frédéric du 25/08 — « deux, trois ou quatre propositions, quatre au maximum ».
+Le script ne sait pas distinguer une taille VOULUE d'un effondrement accidentel
+(son propre en-tête le concède : « un oui / non en a deux, et c'est très bien »).
+⚠️ Conséquence pratique : sa sortie est à 1 sur la 5e en français, donc il ne
+peut pas servir de garde-fou automatique sur cette classe tel quel.
+
+⚠️ Ce qui resterait à arbitrer avec Frédéric, et qui est une vraie question :
+un tirage sur six donne DEUX propositions, y compris sur des questions qui ne
+sont pas binaires — « Où en est l'histoire ? » a quatre réponses possibles, et
+une chance sur deux au hasard quand la taille tombe à deux.
+
 ### ⚠️ Deux dettes laissées ouvertes, à arbitrer avec Frédéric
 
 1. **Treize des quatorze fiches de 6e écrites avant le 28/08 n'ont PAS l'année
