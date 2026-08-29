@@ -421,6 +421,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Le héros se définit par l'épreuve et le choix, pas par la force ; le merveilleux par une magie que personne ne discute — et lire d'autres vies n'est pas fuir la sienne.",
   },
+  "francais/cm2/culture-soi-et-les-autres": {
+    titre: "Morale, poésie et rapport aux autres en CM2 (2026-2027)",
+    resume:
+      "Interroger une morale, c'est se demander si l'on est d'accord — et pourquoi. Le conflit révèle les valeurs, s'affirmer n'est pas s'imposer, et la poésie donne le gout des mots.",
+  },
   "francais/cm2/grammaire-orthographe": {
     titre: "Analyser une phrase : nature, fonction, accords",
     resume:
