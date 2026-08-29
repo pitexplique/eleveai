@@ -441,6 +441,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Quatre écrits qui ne se rendent pas et sans lesquels rien ne se rend — copier par groupes, noter en abrégé, ranger dans l'ordre, comparer en deux colonnes.",
   },
+  "francais/cm2/ecriture-produire": {
+    titre: "Écrire un texte à plusieurs paragraphes en CM2 (2026-2027)",
+    resume:
+      "Où couper — une idée neuve, on va à la ligne — et comment tenir : les connecteurs. Quatre sortes de textes, et la marque d'écriture de chacune.",
+  },
   "francais/cm2/grammaire-orthographe": {
     titre: "Analyser une phrase : nature, fonction, accords",
     resume:
