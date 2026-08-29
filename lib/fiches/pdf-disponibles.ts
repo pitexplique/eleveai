@@ -5,6 +5,7 @@
 export const PDF_DISPONIBLES = new Set<string>([
   "accord-du-participe-passe-2026-2027-5e-cours-exercices-corriges.pdf",
   "accords-et-les-homophones-6e-cours-exercices-corriges.pdf",
+  "agrandissement-reduction-et-echelles-4e-cours-exercices-corriges.pdf",
   "aires-4e-cours-exercices-corriges.pdf",
   "aires-5e-cours-exercices-corriges.pdf",
   "aires-6e-cours-exercices-corriges.pdf",
