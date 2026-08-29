@@ -30,15 +30,50 @@ import type { ProfilEleve } from "@/lib/profil-eleve/types";
 /**
  * LES PORTES, POUR TOUT LE MONDE.
  *
- * ⚠️ AUCUNE MATIÈRE N'EST NOMMÉE ICI, et c'est délibéré : le coach d'anglais
- * est encore une coquille vide, et une colonne présente sur la page la plus vue
- * du site est le pire endroit où promettre une porte qui ne s'ouvre pas. « Coach »
- * mène au coach de maths — le plus fourni — et le choix de la matière se fait sur
- * l'écran d'à côté, qui est fait pour ça.
+ * ⭐ LE COACH ET LES PARCOURS PORTENT LEURS CINQ MATIÈRES (Frédéric, 29/08/2026 :
+ * « tu as mis Coach et Parcours qui pointent sur maths, or il y a français,
+ * anglais, espagnol, IA »). Une seule ligne « Coach » menait au coach de maths :
+ * la colonne annonçait une activité et en ouvrait une cinquième. Quatre matières
+ * sur cinq n'avaient aucune porte, alors qu'elles ont chacune la leur.
+ *
+ * ⚠️ LES DEUX FAMILLES N'ONT PAS LA MÊME FORME D'URL, et il n'y a rien à
+ * uniformiser ici : le coach est UNE route dynamique (`/coach-ia/<matiere>`),
+ * les parcours sont CINQ routes distinctes, dont celle des maths s'appelle
+ * `/parcours` tout court. Écrire `/parcours-maths` par symétrie donnerait un 404.
+ * ⚠️ L'anglais s'appelle `english-maths` partout dans le code (c'est le nom du
+ * type `Matiere` dans `lib/tutor-v4/catalog.ts`), jamais `anglais` — sauf à
+ * l'écran, où l'élève lit « Anglais ».
+ * ⚠️ Le coach d'anglais reste maigre (voir la note de l'audit SEO) : la porte est
+ * ouverte parce qu'elle existe, pas parce qu'elle est prête.
  */
-const ACTIVITES: { label: string; href: string }[] = [
-  { label: "Coach", href: "/coach-ia/maths" },
-  { label: "Parcours", href: "/parcours" },
+type Activite = {
+  label: string;
+  href?: string;
+  /** Les matières de cette activité, quand elle en a. */
+  matieres?: { label: string; href: string }[];
+};
+
+const ACTIVITES: Activite[] = [
+  {
+    label: "Coach",
+    matieres: [
+      { label: "Maths", href: "/coach-ia/maths" },
+      { label: "Français", href: "/coach-ia/francais" },
+      { label: "Anglais", href: "/coach-ia/english-maths" },
+      { label: "Espagnol", href: "/coach-ia/espagnol" },
+      { label: "IA", href: "/coach-ia/ia" },
+    ],
+  },
+  {
+    label: "Parcours",
+    matieres: [
+      { label: "Maths", href: "/parcours" },
+      { label: "Français", href: "/parcours-francais" },
+      { label: "Anglais", href: "/parcours-english-maths" },
+      { label: "Espagnol", href: "/parcours-espagnol" },
+      { label: "IA", href: "/parcours-ia" },
+    ],
+  },
   { label: "Calcul rapide", href: "/calcul-rapide" },
   { label: "Dictée du jour", href: "/dictee-du-jour" },
   { label: "Défis du jour", href: "/defis-du-jour" },
@@ -199,14 +234,39 @@ export default function ResumeEleve() {
       </p>
       <ul className="space-y-0.5">
         {ACTIVITES.map((a) => (
-          <li key={a.href}>
-            <Link
-              href={a.href}
-              prefetch={false}
-              className="block rounded-lg px-2 py-1.5 text-sm text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
-            >
-              {a.label}
-            </Link>
+          <li key={a.label}>
+            {/* Une activité à matières n'est PAS un lien : son intitulé est un
+                titre, et ce sont les matières qui s'ouvrent. Le rendre cliquable
+                obligerait à en élire une — c'est exactement ce qui envoyait tout
+                le monde en maths. */}
+            {a.href ? (
+              <Link
+                href={a.href}
+                prefetch={false}
+                className="block rounded-lg px-2 py-1.5 text-sm text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+              >
+                {a.label}
+              </Link>
+            ) : (
+              <div className="px-2 pb-1 pt-1.5">
+                <span className="block text-sm text-slate-600">{a.label}</span>
+                {/* ⚠️ `flex-wrap` et non une rangée qui défile : cinq matières ne
+                    tiennent pas dans 256 px, et une rangée à faire glisser cache
+                    l'espagnol et l'IA derrière un geste que personne ne devine. */}
+                <div className="mt-1 flex flex-wrap gap-1">
+                  {a.matieres?.map((m) => (
+                    <Link
+                      key={m.href}
+                      href={m.href}
+                      prefetch={false}
+                      className="rounded-full bg-white px-2 py-0.5 text-[11px] text-slate-500 transition hover:bg-teal-700 hover:text-white"
+                    >
+                      {m.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </li>
         ))}
       </ul>
