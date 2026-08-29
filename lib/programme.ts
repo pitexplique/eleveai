@@ -39,7 +39,12 @@ export const PROGRAMME_CLASSES: ProgrammeClasse[] = [
   { slug: "ce2", label: "CE2", enClasse: "en CE2", matieres: ["maths", "francais"], anglais: null, espagnol: null, ia: null, cahierSlug: "vers-le-ce2", calculRapide: false },
   { slug: "cm1", label: "CM1", enClasse: "en CM1", matieres: ["maths", "francais"], anglais: "découverte → A1", espagnol: null, ia: null, cahierSlug: "vers-le-cm1", calculRapide: true },
   { slug: "cm2", label: "CM2", enClasse: "en CM2", matieres: ["maths", "francais"], anglais: "découverte → A1", espagnol: null, ia: null, cahierSlug: "vers-le-cm2", calculRapide: true },
-  { slug: "6e",  label: "6e",  enClasse: "en 6e",  matieres: ["maths", "francais"], anglais: "A1",       espagnol: null,       ia: "A1",   cahierSlug: "vers-la-6e", calculRapide: true },
+  /* ⭐ L'ESPAGNOL OUVRE EN 6e (29/08/2026). Frédéric : « espagnol ok 6e car ça
+     peut être la première langue ». Ce n'était pas un oubli mais une hypothèse
+     fausse — celle de l'espagnol LV2, qui commence en 5e. L'espagnol PEUT être
+     la LV1 d'un collégien, et l'était déjà pour les élèves qui arrivent
+     hispanophones. Même niveau que l'anglais, pour la même raison. */
+  { slug: "6e",  label: "6e",  enClasse: "en 6e",  matieres: ["maths", "francais"], anglais: "A1",       espagnol: "A1",       ia: "A1",   cahierSlug: "vers-la-6e", calculRapide: true },
   { slug: "5e",  label: "5e",  enClasse: "en 5e",  matieres: ["maths", "francais"], anglais: "A1 → A2",  espagnol: "A1",       ia: "A1",   cahierSlug: "vers-la-5e", calculRapide: true },
   { slug: "4e",  label: "4e",  enClasse: "en 4e",  matieres: ["maths", "francais"], anglais: "A2",       espagnol: "A1 → A2",  ia: "A2",   cahierSlug: "vers-la-4e", calculRapide: true },
   { slug: "3e",  label: "3e",  enClasse: "en 3e",  matieres: ["maths", "francais"], anglais: "A2 (B1 pour les plus à l'aise)", espagnol: "A2", ia: "A2", cahierSlug: "vers-la-3e", calculRapide: true },
@@ -126,6 +131,96 @@ export function getProgrammeMatiere(
     };
   } catch {
     // Banque absente pour ce couple classe/matière : pas de section.
+    return null;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ⭐ 29/08/2026 — L'ANGLAIS, L'ESPAGNOL ET L'IA ENTRENT DANS LE PROGRAMME
+   ═══════════════════════════════════════════════════════════════════════════
+
+   Frédéric : « pour anglais et espagnol on affiche tout le coach du A1 au B2 il
+   peut y avoir des enfants bilingues ! Pour IA on l'affiche pour college et
+   lycée ».
+
+   CE QUI MANQUAIT, MESURÉ. Ces trois matières n'existaient sur la page de
+   classe que sous forme d'une PASTILLE DE NIVEAU — « Niveau visé : A1 → A2 »,
+   et un lien vers le coach. Pas une compétence en texte, donc rien à lire pour
+   un moteur : 150 notions et 453 micro-compétences, déjà écrites en banque,
+   invisibles. Le moteur SEO tournait pour les maths et le français seulement.
+
+   ⭐ POURQUOI LES QUATRE NIVEAUX, ET PAS LE NIVEAU DE LA CLASSE. C'est la
+   décision de Frédéric, et elle ne vient pas du SEO : une langue ne se range
+   pas par année. Un enfant bilingue en 5e lit du B2, un autre consolide son A1
+   — servir le seul « niveau visé » leur mentirait à tous les deux. Les langues
+   sont donc les seules sections de cette page à ignorer la classe.
+
+   ⚠️ L'IA, ELLE, SE RANGE — mais en deux paliers, pas en années : le référentiel
+   Pix distingue le collège du lycée, et les banques portent exactement ces deux
+   noms. `packIa()` ne fait que lire ce découpage-là ; il n'en invente pas un.
+   Le primaire n'a pas de palier Pix, et n'affiche donc rien. */
+
+export type ProgrammeNiveau = {
+  /** La clé de banque : « a1 »…« b2 », ou « pix-college » / « pix-lycee ». */
+  niveau: string;
+  nbNotions: number;
+  nbMicros: number;
+  notions: { id: string; label: string; micros: string[] }[];
+};
+
+export const NIVEAUX_LANGUE = ["a1", "a2", "b1", "b2"] as const;
+
+export const LABEL_NIVEAU_LANGUE: Record<string, string> = {
+  a1: "A1 — débutant",
+  a2: "A2 — élémentaire",
+  b1: "B1 — intermédiaire",
+  b2: "B2 — avancé",
+  "pix-college": "Collège",
+  "pix-lycee": "Lycée",
+};
+
+/**
+ * Le palier Pix d'une classe, ou `null` quand la question ne se pose pas.
+ * ⛔ NE PAS REMPLACER PAR `classe.ia !== null` : ce champ dit à quel niveau
+ * l'IA COMMENCE, il ne dit pas quelle banque servir. Les deux banques d'IA
+ * s'appellent « pix-college » et « pix-lycee », et c'est tout le découpage.
+ */
+export function packIa(classeSlug: string): "pix-college" | "pix-lycee" | null {
+  if (["6e", "5e", "4e", "3e"].includes(classeSlug)) return "pix-college";
+  if (["seconde", "premiere", "premiere-spe", "terminale-spe", "stmg"].includes(classeSlug))
+    return "pix-lycee";
+  return null;
+}
+
+/**
+ * Les compétences d'une banque qui n'est PAS rangée par classe : les langues
+ * (par niveau CECRL) et l'IA (par palier Pix). Les notions sont rendues à plat
+ * — pour ces banques le domaine et la notion se confondent presque toujours
+ * (19 domaines pour 19 notions en anglais A1), et un étage de titres vides
+ * n'apporterait rien à lire.
+ */
+export function getProgrammeNiveau(
+  matiere: "english-maths" | "espagnol" | "ia",
+  niveau: string
+): ProgrammeNiveau | null {
+  try {
+    const pack = getKnowledgePack(niveau as never, matiere as never);
+    const notions = pack.notions.map((n) => ({
+      id: n.id,
+      label: n.label,
+      micros: pack.microSkills
+        .filter((m) => m.notionId === n.id)
+        .map((m) => m.label),
+    }));
+    if (notions.length === 0) return null;
+    return {
+      niveau,
+      nbNotions: notions.length,
+      nbMicros: pack.microSkills.length,
+      notions,
+    };
+  } catch {
+    // Banque absente : pas de bloc. Même règle que pour maths/français.
     return null;
   }
 }
