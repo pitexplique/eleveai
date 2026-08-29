@@ -721,7 +721,7 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif: "Vocabulaire : variable, fonction, antécédent, image.",
     page: 134,
     micros: [],
-    note: "⛔ TROU. Attendu de fin de cycle ENTIÈREMENT absent. ⚠️ Calibrage 4e : les repères annuels tranchent — « La notation et le vocabulaire fonctionnels ne sont pas formalisés en 4e ». En 4e, la DÉPENDANCE de deux grandeurs par tableau, formule et graphique ; la lecture d'images et d'antécédents ; rien de plus.",
+    note: "⛔ TROU VOLONTAIRE, ET IL DOIT LE RESTER EN 4e. ⚠️ J'ai failli y accrocher `fonction_reconnaitre` et `fonction_tableau_lire` le 28/08 : elles s'en approchent, et le vérificateur serait passé au vert. C'est exactement ce que ce fichier interdit. Les repères annuels tranchent — « La notation et LE VOCABULAIRE fonctionnels ne sont pas formalisés en 4e ». ⭐ La notion `fonction_dependance` enseigne donc le GESTE (lire dans les deux sens, suivre un programme, passer d'une représentation à l'autre) sans jamais poser les mots « fonction », « image » et « antécédent » comme des définitions à retenir. Le vocabulaire se formalisera en 3e, et cette ligne restera rouge d'ici là — c'est un constat juste, pas un manque.",
   },
   {
     id: "4e-B-fonction-2",
@@ -730,7 +730,7 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Différents modes de représentation d'une fonction (expression symbolique, tableau de valeurs, représentation graphique, programme de calcul).",
     page: 134,
-    micros: [],
+    micros: ["fonction_programme", "fonction_tableau_lire", "fonction_graphique_lire"],
     note: "⛔ TROU. ⭐ Le PROGRAMME DE CALCUL est le mode le plus accessible en 4e, et c'est celui que le nouveau programme retient : il se branche sur `algo_programmation` et sur `litteral_expression_substituer`.",
   },
   {
@@ -757,7 +757,7 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Comprendre et utiliser la notion de fonction",
     objectif: "Passer d'un mode de représentation d'une fonction à un autre.",
     page: 134,
-    micros: [],
+    micros: ["fonction_changer_mode"],
     note: "⛔ TROU. Faisable en 4e sans f(x) : d'un tableau de valeurs à un graphique, d'un programme de calcul à un tableau.",
   },
   {
@@ -767,7 +767,7 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Déterminer, à partir d'un mode de représentation, l'image ou un antécédent d'un nombre par une fonction.",
     page: 134,
-    micros: [],
+    micros: ["fonction_tableau_lire", "fonction_graphique_lire"],
     note: "⛔ TROU. Faisable en 4e par LECTURE de tableau ou de graphique, sans notation fonctionnelle.",
   },
   {
@@ -785,7 +785,7 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Comprendre et utiliser la notion de fonction",
     objectif: "Modéliser un phénomène continu par une fonction.",
     page: 134,
-    micros: [],
+    micros: ["fonction_probleme"],
     note: "⛔ TROU.",
   },
   {
@@ -803,7 +803,7 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Comprendre et utiliser la notion de fonction",
     objectif: "Résoudre des problèmes modélisés par des fonctions.",
     page: 134,
-    micros: [],
+    micros: ["fonction_probleme", "fonction_defi"],
     note: "⛔ TROU.",
   },
 

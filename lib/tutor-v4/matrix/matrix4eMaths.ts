@@ -109,6 +109,26 @@ const supportLinks: Record<string, string[]> = {
   ],
 
   // =========================
+  // DÉPENDANCE ENTRE DEUX GRANDEURS
+  // =========================
+  // ⭐ Ajouté le 28/08/2026. La remédiation d'une dépendance ne passe PAS par
+  // « les fonctions » — la notion n'existe pas encore pour l'élève — mais par
+  // les deux objets qu'il connaît déjà : le TABLEAU de proportionnalité et
+  // l'EXPRESSION littérale à substituer.
+  fonction_programme: ["litteral_expression_substituer", "algo_variable", "relatif_calcul"],
+  fonction_tableau_lire: ["prop_table", "fonction_programme", "stat_lire_tableau"],
+  // ⭐ Lire un graphique de dépendance, c'est d'abord lire un graphique tout
+  // court : quand ça bloque, on redescend vers les statistiques.
+  fonction_graphique_lire: ["stat_lire_graphique", "fonction_tableau_lire"],
+  fonction_changer_mode: [
+    "fonction_tableau_lire",
+    "fonction_graphique_lire",
+    "fonction_programme",
+  ],
+  fonction_probleme: ["fonction_changer_mode", "prop_probleme", "equation_probleme"],
+  fonction_defi: ["fonction_probleme", "fonction_graphique_lire", "fonction_changer_mode"],
+
+  // =========================
   // GRANDEURS COMPOSÉES ET UNITÉS
   // =========================
   // ⭐ Ajouté le 28/08/2026. La remédiation ne passe PAS par le calcul mais par

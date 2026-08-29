@@ -127,6 +127,15 @@ export const NOTION_COACH_MATHS: TableNotions = {
     premiere: "auto_equations",
   },
   fonctions: {
+    // ⭐ LA 4e ENTRE LE 28/08/2026, et c'est un arbitrage. Le programme dit que
+    // « le vocabulaire fonctionnel n'est pas formalisé en 4e » — mais la matrice
+    // répond à ce que l'élève TAPE, elle ne lui enseigne pas de vocabulaire. Un
+    // élève de 4e qui écrit « fonctions », parce qu'il a entendu le mot, doit
+    // atterrir sur `fonction_dependance` plutôt que sur rien du tout.
+    // ⚠️ La notion, elle, s'appelle « Dépendance entre deux grandeurs » et ne
+    // pose jamais le mot en définition : la limite du BO est tenue là où elle
+    // compte, dans le contenu.
+    "4e": "fonction_dependance",
     "3e": "fonction_generalite", seconde: "fonction_vocabulaire_2de",
     premiere: "lin_affine",
     "premiere-spe": "variations_fonctions", "terminale-spe": "limite_fonction",

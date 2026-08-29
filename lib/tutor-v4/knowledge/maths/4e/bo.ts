@@ -70,5 +70,13 @@ export const bo: KnowledgeBoCompetence[] = [
     boId: "BO4D2",
     label: "Probabilités",
   },
+  // ⭐ AJOUTÉ LE 28/08/2026 avec la notion `fonction_dependance`. Le BO range les
+  // fonctions dans le thème B, « Organisation et gestion de données, FONCTIONS »,
+  // et aucun des libellés existants ne les nommait — ni « Statistiques », ni
+  // « Probabilités ». Même raison que BO4N3 pour les puissances.
+  {
+    boId: "BO4D3",
+    label: "Fonctions",
+  },
   { boId: "BO4I1", label: "Pensée informatique et algorithmique" }
 ];

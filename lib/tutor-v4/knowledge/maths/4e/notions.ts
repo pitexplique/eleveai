@@ -317,6 +317,32 @@ export const notions: NotionSource[] = [
     prerequis: ["proba_experience", "stat_statistique"],
     levels: [1, 2],
   },
+  // ⭐ OUVERTE LE 28/08/2026. C'est le plus gros trou qui restait : l'attendu
+  // « fonction » du BO était ENTIÈREMENT absent — dix puces, zéro micro.
+  //
+  // ⛔⛔ ET C'EST LA NOTION LA PLUS FACILE À FAIRE TROP GRANDE. Les repères
+  // annuels sont formels, et c'est la SEULE phrase du document à nommer une
+  // année : « La notation et le vocabulaire fonctionnels NE SONT PAS FORMALISÉS
+  // EN 4e. » Donc, nulle part dans cette notion :
+  //   · la notation f(x) ni x ↦ f(x) ;
+  //   · les fonctions linéaires et affines ;
+  //   · le mot « fonction » posé comme une définition à retenir.
+  // Ce qui reste, et que le BO autorise : la DÉPENDANCE de deux grandeurs, par
+  // tableau, par formule, par graphique et par programme de calcul ; et la
+  // lecture d'une valeur dans les deux sens. C'est le nom de la notion —
+  // « dépendance » et non « fonction » — qui tient cette limite.
+  //
+  // ⭐ LE PROGRAMME DE CALCUL EST LA PORTE D'ENTRÉE, et c'est aussi celle que
+  // retient le programme applicable à partir de 2027. Il se branche sur
+  // `algo_programmation` et sur `litteral_expression_substituer`, deux notions
+  // que la classe possède déjà.
+  {
+    id: "fonction_dependance",
+    label: "Dépendance entre deux grandeurs",
+    boId: "BO4D3",
+    prerequis: ["prop_proportionnalite", "litteral_expression", "stat_statistique"],
+    levels: [1, 2, 3],
+  },
 
 
 ];

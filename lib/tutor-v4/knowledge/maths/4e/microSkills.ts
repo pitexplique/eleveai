@@ -1207,6 +1207,70 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     DÉPENDANCE ENTRE DEUX GRANDEURS
+  ========================= */
+  // ⭐ OUVERTE LE 28/08/2026. L'attendu « fonction » du BO était ENTIÈREMENT
+  // absent : dix puces, zéro micro. C'était le plus gros trou de la classe.
+  //
+  // ⛔⛔ LA LIMITE EST ÉCRITE DANS LES REPÈRES ANNUELS, et c'est la seule phrase
+  // du document à nommer une année : « La notation et le vocabulaire
+  // fonctionnels NE SONT PAS FORMALISÉS EN 4e. » Aucune micro ici ne porte donc
+  // f(x), ni la fonction linéaire, ni la fonction affine. Les libellés disent
+  // « une valeur », « une grandeur », jamais « l'image de x par f ».
+  //
+  // ⭐ LES QUATRE MODES DE REPRÉSENTATION DU BO ONT CHACUN LEUR MICRO — c'est
+  // ce qui fait quatre micros de lecture là où une seule aurait suffi à
+  // « couvrir » la puce : le programme de calcul, le tableau, le graphique, et
+  // le passage de l'un à l'autre. La puce 4e-B-fonction-5 demande précisément
+  // ce passage, et il ne s'apprend pas en apprenant les modes séparément.
+  //
+  // ⭐ `fonction_tableau_lire` couvre les DEUX SENS — trouver la valeur qui
+  // correspond, et retrouver de quelle valeur on est parti. C'est ce que le BO
+  // appelle image et antécédent, sans en faire du vocabulaire à réciter.
+  {
+    id: "fonction_reconnaitre",
+    label: "Reconnaître qu’une grandeur dépend d’une autre",
+    notionId: "fonction_dependance",
+    prerequis: ["prop_reconnaitre"],
+  },
+  {
+    id: "fonction_programme",
+    label: "Suivre un programme de calcul",
+    notionId: "fonction_dependance",
+    prerequis: ["litteral_expression_substituer", "algo_programme_objectif"],
+  },
+  {
+    id: "fonction_tableau_lire",
+    label: "Lire un tableau de valeurs dans les deux sens",
+    notionId: "fonction_dependance",
+    prerequis: ["fonction_programme", "prop_table"],
+  },
+  {
+    id: "fonction_graphique_lire",
+    label: "Lire une valeur sur un graphique",
+    notionId: "fonction_dependance",
+    prerequis: ["fonction_tableau_lire", "stat_lire_graphique"],
+  },
+  {
+    id: "fonction_changer_mode",
+    label: "Passer d’une représentation à une autre",
+    notionId: "fonction_dependance",
+    prerequis: ["fonction_tableau_lire", "fonction_graphique_lire"],
+  },
+  {
+    id: "fonction_probleme",
+    label: "Résoudre un problème de dépendance",
+    notionId: "fonction_dependance",
+    prerequis: ["fonction_changer_mode", "fonction_programme"],
+  },
+  {
+    id: "fonction_defi",
+    label: "Défis sur les dépendances entre grandeurs",
+    notionId: "fonction_dependance",
+    prerequis: ["fonction_probleme", "fonction_graphique_lire"],
+  },
+
+  /* =========================
    ALGORITHMIQUE
 ========================= */
 

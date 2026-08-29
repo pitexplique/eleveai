@@ -38,6 +38,7 @@ import { ratiosBank } from "./ratios.bank";
 import { echellesBank } from "./echelles.bank";
 import { frequencesBank } from "./frequences.bank";
 import { grandeursBank } from "./grandeurs.bank";
+import { fonctionsBank } from "./fonctions.bank";
 
 
 // =========================
@@ -65,6 +66,7 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...echellesBank,
   ...volumesBank,
   ...grandeursBank,
+  ...fonctionsBank,
   ...thalesBank,
   ...statistiquesBank,
   ...algorithmiqueBank,
