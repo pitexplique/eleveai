@@ -572,6 +572,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Savoir ce qu'on cherche change ce qu'on entend : l'écoute orientée par un but, reformuler avec ses mots, reconnaitre un genre de discours, et noter des mots clés.",
   },
+  "francais/6e/oral-dire": {
+    titre: "Dire pour être compris en 6e (2026-2027)",
+    resume:
+      "Présenter en suivant un plan et en regardant la classe, jouer un texte en l'interprétant, expliquer sans notes en retenant l'ordre — et l'oral qui sert à réfléchir.",
+  },
   "francais/6e/culture-recits": {
     titre: "Récits des origines, aventure et monstres en 6e (2026-2027)",
     resume:
