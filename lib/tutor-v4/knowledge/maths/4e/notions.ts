@@ -278,11 +278,36 @@ export const notions: NotionSource[] = [
   // =========================
   // DONNÉES
   // =========================
+  // ⭐ SCINDÉE LE 28/08/2026. `stat_statistique` portait DIX micros et deux
+  // objets : ce qu'on LIT et compte (tableau, graphique, effectifs, fréquences)
+  // et ce qu'on CALCULE et interprète (moyenne, médiane, étendue).
+  //
+  // ⭐ ET C'EST LA COUPURE DU BO LUI-MÊME : l'attendu « Interpréter, représenter
+  // et traiter des données » énumère séparément « effectifs, fréquences »,
+  // « indicateurs de position », « indicateur de dispersion ». Le programme
+  // sépare ce que la notion mélangeait.
+  //
+  // ⭐ MÊME IDENTIFIANT QU'EN 6e — `stat_donnee`, au singulier, comme sa notion
+  // « Lire et interpréter des données ». L'élève retrouve la même coupure d'une
+  // année sur l'autre. ⚠️ Le brouillon du 27/08 disait `stat_donnees` : la
+  // continuité verticale a tranché.
+  //
+  // ⚠️ LE SENS EST À SENS UNIQUE, et il a été vérifié micro par micro : aucun
+  // micro de lecture ne dépend d'un micro d'indicateur. `stat_moyenne` dépend de
+  // `stat_effectif`, `stat_etendue` de `stat_lire_tableau` — tout va des
+  // indicateurs VERS les données, jamais l'inverse.
   {
-    id: "stat_statistique",
-    label: "Statistiques",
+    id: "stat_donnee",
+    label: "Lire et interpréter des données",
     boId: "BO4D1",
     prerequis: [],
+    levels: [1, 2],
+  },
+  {
+    id: "stat_statistique",
+    label: "Indicateurs statistiques",
+    boId: "BO4D1",
+    prerequis: ["stat_donnee"],
     levels: [1, 2],
   },
   {

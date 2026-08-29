@@ -553,7 +553,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Interpréter, représenter et traiter des données",
     objectif: "Calculer des effectifs, des fréquences.",
     page: 133,
-    micros: ["stat_effectif", "stat_frequence"],
+    micros: ["stat_effectif", "stat_frequence", "stat_donnee_defi"],
+    note: "⭐ Le bloc de défis de `stat_donnee` est rangé ici plutôt que sur la lecture (4e-B-donnees-5), et c'est délibéré : ses trois gabarits font tous CALCULER — une fréquence rapportée au bon total, un effectif manquant retrouvé par la somme, un écart lu entre deux barres.",
   },
   {
     id: "4e-B-donnees-8",
@@ -785,8 +786,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Comprendre et utiliser la notion de fonction",
     objectif: "Modéliser un phénomène continu par une fonction.",
     page: 134,
-    micros: ["fonction_probleme"],
-    note: "⛔ TROU.",
+    micros: ["fonction_reconnaitre", "fonction_probleme"],
+    note: "⚠️ Couverture partielle, et assumée. Modéliser commence par RECONNAÎTRE qu'une grandeur en détermine une autre — c'est le premier acte, et `fonction_reconnaitre` le travaille (le taxi dépend de la distance sans lui être proportionnel). ⛔ Ce qui manque est le mot « CONTINU » : la 4e ne travaille que des valeurs isolées, en tableau ou en nuage de points. La modélisation d'un phénomène continu suppose une courbe, donc la notation fonctionnelle — elle est de 3e.",
   },
   {
     id: "4e-B-fonction-9",

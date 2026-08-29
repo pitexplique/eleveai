@@ -426,6 +426,9 @@ const supportLinks: Record<string, string[]> = {
   stat_lire_graphique: ["stat_lire_tableau"],
   stat_effectif: ["stat_lire_tableau"],
   stat_frequence: ["stat_effectif"],
+  // ⭐ Ajouté le 28/08 avec la scission : le défi de la notion neuve s'appuie
+  // sur la LECTURE, jamais sur les indicateurs — c'est toute la coupure.
+  stat_donnee_defi: ["stat_frequence", "stat_lire_graphique", "stat_lire_tableau"],
   stat_moyenne: ["stat_effectif", "relatif_calcul"],
   stat_mediane: ["stat_effectif"],
   stat_etendue: ["stat_lire_tableau"],

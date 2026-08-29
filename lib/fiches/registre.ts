@@ -354,6 +354,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Le théorème de Pythagore",
     resume: "Reconnaître l'hypoténuse, calculer une longueur, et utiliser la réciproque pour prouver un angle droit.",
   },
+  "maths/4e/stat-donnee": {
+    titre: "Lire et interpréter des données",
+    resume:
+      "Un effectif compte, une fréquence compare : lire un tableau et un diagramme, rapporter une part au bon total, retrouver un effectif effacé par la somme — et choisir entre tableau, barres et camembert.",
+  },
   "maths/4e/fonction-dependance": {
     titre: "Dépendance entre deux grandeurs",
     resume:

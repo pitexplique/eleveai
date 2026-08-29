@@ -35,6 +35,25 @@
 // Les nombres sont ceux de la banque : la série 4 ; 7 ; 10 ; 15 (moyenne 9,
 // médiane 8,5, étendue 11) et le graphique à quatre barres 20, 25, 40, 50.
 
+// ⭐⭐ NOTION SCINDÉE LE 28/08/2026, et cette fiche n'en garde qu'une moitié.
+// `stat_statistique` portait DIX micros et deux objets : ce qu'on LIT et compte
+// (tableau, graphique, effectifs, fréquences) et ce qu'on CALCULE et interprète
+// (moyenne, médiane, étendue). C'est la coupure du BO lui-même, qui énumère
+// séparément « effectifs, fréquences », « indicateurs de position » et
+// « indicateur de dispersion ».
+//
+// ⛔ CE QUI EST PARTI, ET OÙ : les blocs « Lire un graphique », « Effectif et
+// fréquence », l'usage de lecture, l'exemple du tableau et l'exercice
+// d'effectif sont dans `maths-4e-donnees.tsx` (notion `stat_donnee`, même
+// identifiant qu'en 6e). Rien n'a été supprimé — un bloc ne peut citer que des
+// micros de SA notion, et `verifier-micros` le refuse.
+//
+// ⭐ CE QUI RESTE ICI est cohérent : moyenne, médiane, étendue, interprétation,
+// problèmes, défis. Le titre de la notion a d'ailleurs changé — « Statistiques »
+// est devenu « Indicateurs statistiques », qui dit ce qu'elle fait.
+// ⚠️ L'URL, elle, ne bouge PAS : `maths/4e/stat-statistique` est indexée, et
+// `lib/matrice/coach.ts` associe cet identifiant à la 5e, à la 4e ET à la 3e.
+
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
@@ -98,26 +117,6 @@ const graphique = (
         showValues: true,
         highlightIndex: opts.enAvant,
       },
-    }}
-  />
-);
-
-// UNE FRÉQUENCE EST UNE PART DU TOUT, pas un nombre de plus. L'effectif compte,
-// la fréquence compare — et `schema_barre` est le canvas du « tout découpé ».
-// ⚠️ Hauteur 200 : les étiquettes de parts sont posées à 144 px du haut et la
-// phrase du bas à 18 px du bas. Sous 180, elles se frôlent (mesuré en 1280).
-const effectifEtFrequence = (
-  <CanvasRenderer
-    figure={{
-      kind: "schema_barre",
-      size: { width: 228, height: 200 },
-      total: "25 élèves",
-      parts: [
-        { label: "vélo", value: "10", color: BLEU },
-        { label: "les autres", value: "15", color: "#e2e8f0" },
-      ],
-      questionLabel: "10 sur 25, soit 0,4",
-      display: { showTotal: true, showPartLabels: true, showValues: true, showQuestion: true },
     }}
   />
 );
@@ -237,11 +236,16 @@ export const ficheStatistiques4e: FicheCoursData = {
     legende: "Chaque ligne associe une valeur à son effectif. Le total, c'est l'effectif de la série.",
   },
   proprietes: [
+    // ⭐ « Lire un graphique » et « Effectif et fréquence » sont parties le
+    // 28/08 vers la fiche « Lire et interpréter des données » : leurs micros ont
+    // changé de notion avec la scission. Rien n'est perdu — elles y sont, avec
+    // leurs dessins déjà mesurés. Ce bloc-ci les remplace en restant du côté des
+    // INDICATEURS, qui est ce que cette fiche garde.
     {
-      titre: "Lire un graphique",
-      micros: ["stat_lire_graphique"],
+      titre: "Ce qu'un indicateur résume, et ce qu'il perd",
+      micros: ["stat_interpreter"],
       texte:
-        "Le graphique dit la même chose que le tableau, mais il montre les écarts d'un coup d'œil. On lit la hauteur d'une barre sur l'axe vertical.",
+        "Un indicateur remplace toute une série par UN seul nombre : c'est sa force et sa limite. La moyenne dit où se situe le centre, mais elle ne dit rien de la dispersion — deux séries très différentes peuvent avoir exactement la même.",
       schema: legende(
         graphique(
           [
@@ -254,13 +258,6 @@ export const ficheStatistiques4e: FicheCoursData = {
         ),
         "la barre la plus haute : 50 élèves"
       ),
-    },
-    {
-      titre: "Effectif et fréquence",
-      micros: ["stat_effectif", "stat_frequence"],
-      texte:
-        "L'effectif compte : 10 élèves viennent à vélo. La fréquence compare cet effectif au total : 10 sur 25, soit 0,4 — c'est-à-dire 40 %.",
-      schema: effectifEtFrequence,
     },
     {
       titre: "La moyenne égalise",
@@ -322,9 +319,9 @@ export const ficheStatistiques4e: FicheCoursData = {
     },
     {
       titre: "Calculer",
-      micros: ["stat_moyenne", "stat_frequence"],
+      micros: ["stat_moyenne"],
       texte:
-        "On dresse le tableau valeur / effectif, on ajoute la colonne des produits, puis on divise par le total des effectifs. Une fréquence se calcule de la même façon : l'effectif d'une valeur divisé par le total.",
+        "On dresse le tableau valeur / effectif, on ajoute la colonne des produits, puis on divise par le TOTAL DES EFFECTIFS — et non par le nombre de valeurs distinctes, qui est l'erreur la plus fréquente de la moyenne pondérée.",
       schema: moyennePonderee,
     },
     {
@@ -336,10 +333,10 @@ export const ficheStatistiques4e: FicheCoursData = {
   ],
   usages: [
     {
-      titre: "Lire un tableau ou un graphique",
-      micros: ["stat_lire_tableau", "stat_lire_graphique"],
+      titre: "La série contient une valeur extrême",
+      micros: ["stat_mediane", "stat_interpreter"],
       detail:
-        "On repère la valeur cherchée dans la première colonne, ou la barre correspondante, puis on lit son effectif. Le total se lit à part, il n'est pas une valeur de plus.",
+        "On préfère la MÉDIANE à la moyenne : un seul salaire très élevé tire la moyenne vers le haut sans déplacer la médiane. C'est le cas où les deux indicateurs se séparent le plus.",
       // ⭐ LA TROISIÈME REPRÉSENTATION DU MÊME RELEVÉ. Le tableau donne les
       // nombres, les barres donnent les écarts, le camembert donne les PARTS —
       // c'est le seul des trois où le total est visible d'un coup d'œil, puisque
@@ -373,11 +370,14 @@ export const ficheStatistiques4e: FicheCoursData = {
   ],
   exemples: [
     {
-      titre: "Lire le tableau",
-      micros: ["stat_lire_tableau", "stat_effectif"],
+      // ⭐ La série est la même que sur la fiche « Lire et interpréter des
+      // données » — l'élève garde ses repères — mais la question change de
+      // nature : on ne lit plus, on RÉSUME.
+      titre: "Un seul nombre pour toute la série",
+      micros: ["stat_moyenne", "stat_interpreter"],
       donnees:
         "On a demandé à 135 élèves comment ils viennent au collège. 20 viennent à pied, 25 à vélo, 40 en bus et 50 en voiture.",
-      question: "Quel est l'effectif de « bus », et quelle est sa fréquence ?",
+      question: "Une moyenne a-t-elle un sens ici ?",
       schema: graphique(
         [
           { label: "pied", value: 20 },
@@ -388,7 +388,7 @@ export const ficheStatistiques4e: FicheCoursData = {
         { bloc: "exemple", enAvant: 2 }
       ),
       solution:
-        "L'effectif de « bus » se lit directement : 40 élèves. Pour la fréquence, on compare cet effectif au total : 40 ÷ 135 ≈ 0,30, soit environ 30 %. Contrôle : les quatre fréquences doivent faire 1 en tout, soit 100 %.",
+        "Non, et c'est important. On peut calculer 135 ÷ 4 ≈ 34, mais ce nombre ne veut RIEN dire : « à pied », « à vélo », « en bus » et « en voiture » ne sont pas des valeurs numériques, ce sont des CATÉGORIES.\n\n⭐ Une moyenne suppose des nombres qu'on peut additionner. Sur des catégories, les seuls résumés qui aient un sens sont l'effectif le plus grand — ici la voiture — et les fréquences.\n\n⚠️ C'est le premier réflexe à avoir devant un indicateur : la série s'y prête-t-elle ?",
     },
     {
       titre: "La moyenne pondérée",
@@ -424,10 +424,10 @@ export const ficheStatistiques4e: FicheCoursData = {
   entrainement: [
     {
       question:
-        "Dans une série, la valeur 12 apparaît 7 fois sur 40 relevés. Quel est son effectif, et quelle est sa fréquence ?",
+        "Une série contient 3 ; 8 ; 8 ; 9 ; 12. Calcule sa moyenne, sa médiane et son étendue.",
       correction:
-        "L'effectif est 7 : c'est le nombre de fois où la valeur apparaît. La fréquence compare cet effectif au total : 7 ÷ 40 = 0,175, soit 17,5 %.",
-      micros: ["stat_effectif", "stat_frequence"],
+        "Moyenne : (3 + 8 + 8 + 9 + 12) ÷ 5 = 40 ÷ 5 = 8. Médiane : la série est rangée et compte 5 valeurs, la troisième est donc au milieu — c'est 8. Étendue : 12 − 3 = 9. ⭐ Ici moyenne et médiane coïncident, ce qui n'arrive que sur des séries assez régulières.",
+      micros: ["stat_moyenne", "stat_mediane", "stat_etendue"],
     },
     {
       question:

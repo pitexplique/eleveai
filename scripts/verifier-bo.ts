@@ -72,7 +72,22 @@ async function chargerProgramme(classe: string): Promise<Programme | null> {
       ) ?? [];
     if (!objectifs) return null;
     return { objectifs, horsProgramme };
-  } catch {
+  } catch (e) {
+    // ⛔⛔ NE JAMAIS AVALER CETTE ERREUR EN SILENCE (28/08/2026). Le `catch {}`
+    // muet d'origine rendait `null`, et l'appelant affichait alors « pas de
+    // bo-objectifs.ts — programme pas encore écrit ». Or le fichier existait :
+    // il avait une accolade manquante, et le script a répondu « ⏭️ » d'un ton
+    // rassurant sur un programme devenu ILLISIBLE. C'est exactement le silence
+    // que ce script existe pour interdire, et il l'a produit une seconde fois
+    // sur lui-même.
+    // 👉 Une erreur de CHARGEMENT n'est pas une absence de fichier : on la dit,
+    // et on la distingue.
+    console.error(
+      `\n⛔ ${classe} · le programme existe mais NE SE CHARGE PAS.\n` +
+        `   ${e instanceof Error ? e.message : String(e)}\n` +
+        `   👉 Ce n'est PAS « pas encore écrit » : c'est un fichier cassé.\n` +
+        `   Lancer \`npx tsc --noEmit\` — l'erreur y est nommée avec sa ligne.\n`
+    );
     return null;
   }
 }

@@ -1038,25 +1038,25 @@ export const microSkills: MicroSkillSource[] = [
   {
     id: "stat_lire_tableau",
     label: "Lire un tableau statistique",
-    notionId: "stat_statistique",
+    notionId: "stat_donnee",
     prerequis: [],
   },
   {
     id: "stat_lire_graphique",
     label: "Lire un graphique statistique",
-    notionId: "stat_statistique",
+    notionId: "stat_donnee",
     prerequis: ["stat_lire_tableau"],
   },
   {
     id: "stat_effectif",
     label: "Déterminer un effectif",
-    notionId: "stat_statistique",
+    notionId: "stat_donnee",
     prerequis: ["stat_lire_tableau"],
   },
   {
     id: "stat_frequence",
     label: "Calculer une fréquence",
-    notionId: "stat_statistique",
+    notionId: "stat_donnee",
     prerequis: ["stat_effectif"],
   },
   {
@@ -1094,8 +1094,14 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["stat_interpreter"],
   },
   {
+    id: "stat_donnee_defi",
+    label: "Défis sur la lecture de données",
+    notionId: "stat_donnee",
+    prerequis: ["stat_frequence", "stat_lire_graphique"],
+  },
+  {
     id: "stat_defi",
-    label: "Défis sur les statistiques",
+    label: "Défis sur les indicateurs statistiques",
     notionId: "stat_statistique",
     prerequis: ["stat_probleme"],
   },
