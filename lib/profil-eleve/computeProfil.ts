@@ -50,7 +50,14 @@ const SERIE_MINI = 2;
 
 // ⚠️ Drapeau SAISONNIER : true pendant les vacances (repasser à false à la
 // rentrée — cf. checklist maintenance « fraîcheur des contenus saisonniers »).
-const EN_VACANCES = true;
+// Repassé à FALSE le 29/08/2026 : la rentrée de La Réunion est mi-août, et le
+// drapeau était resté levé. Tant qu'il l'était, le 🧭 sortait le cahier de
+// vacances un jour sur sept à chaque élève, en pleine période de cours.
+// ⚠️ L'EFFET EST DIFFÉRÉ : /api/profil-eleve sert le SNAPSHOT `profil_eleve`
+// déjà calculé, et ne le recalcule que s'il n'existe pas. Les profils écrits
+// avant aujourd'hui gardent donc leur reco jusqu'à la prochaine activité de
+// l'élève — c'est elle qui déclenche mettreAJourProfil().
+const EN_VACANCES = false;
 
 // En vacances, le CAHIER (📥 hors-ligne) apparaît dans le 🧭 — PAS tous les jours,
 // et JAMAIS pour tout le monde le même jour : chaque élève a SON jour de la semaine

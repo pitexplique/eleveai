@@ -1,30 +1,35 @@
 "use client";
 
-// La colonne de gauche : navigation légère, historique, et le compte en bas.
+// La colonne de gauche : navigation légère, le résumé de l'élève, et le compte
+// en bas.
 //
-// Règle de poids : cette colonne ne déclenche AUCUNE requête. Le compte se lit
-// dans le contexte élève déjà monté (localStorage → EleveContext), l'historique
-// dans le même localStorage que l'entrée. Les données lourdes — progression,
-// bulletins, abonnement — restent sur leurs pages et ne se chargent qu'au clic.
+// Règle de poids : sans compte, cette colonne ne déclenche AUCUNE requête. Le
+// compte se lit dans le contexte élève déjà monté (localStorage →
+// EleveContext) ; le résumé, lui, fait UNE lecture d'un snapshot déjà calculé,
+// et seulement pour un élève connecté (voir ResumeEleve.tsx). Les données
+// lourdes — progression détaillée, bulletins, abonnement — restent sur leurs
+// pages et ne se chargent qu'au clic.
+//
+// ⛔ LE RÉCENT A ÉTÉ RETIRÉ LE 29/08/2026 (Frédéric : « est-ce vraiment utile de
+// garder l'historique ? »). Il ne s'écrivait que lorsqu'on TAPAIT une question —
+// le parcours en pastilles, celui que l'entrée est faite pour provoquer,
+// n'enregistrait rien — donc il restait vide chez presque tout le monde, et il
+// ne montrait de toute façon que des gestes passés. Le résumé prend sa place :
+// il dit où l'on en est, et il montre les portes à ceux qui n'ont pas de compte.
+// ⚠️ L'ÉCRITURE, ELLE, N'A PAS ÉTÉ TOUCHÉE : EntreeMatrice enregistre toujours
+// dans `eleveai.ia.historique`, et `/accueil?d=<horodatage>` rouvre toujours une
+// demande. C'est un essai, et il se défait en remettant ce bloc.
 //
 // Sur téléphone, elle devient un tiroir : rien n'est rendu tant qu'on ne l'ouvre
 // pas, et le bouton reste atteignable au pouce.
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEleve } from "@/context/EleveContext";
 import { ouvrirEcrireAuProf } from "@/lib/ecrireAuProf";
 import { PROFILS } from "@/lib/matrice/profils";
-import {
-  EVENEMENT_HISTORIQUE,
-  EVENEMENT_NOUVELLE_DEMANDE,
-  FILTRES_MATIERE,
-  correspondAuFiltre,
-  lireHistorique,
-  oublierDemande,
-  type EntreeHistorique,
-} from "@/lib/matrice/historique";
+import ResumeEleve from "@/components/accueil/ResumeEleve";
+import { EVENEMENT_NOUVELLE_DEMANDE } from "@/lib/matrice/historique";
 
 // ⛔ CETTE COLONNE NE LIT PLUS `eleveai.ia.profil` (17/08/2026). Elle en gardait
 // une copie pour écrire la classe sous le nom du compte, et cette clé ne dit pas
@@ -35,18 +40,6 @@ import {
 // Replier la colonne est un choix qui doit SURVIVRE à la navigation : quelqu'un
 // qui la ferme veut de la place, pas la refermer à chaque page.
 const CLE_COLONNE = "eleveai.ia.colonne";
-
-/** Ce qu'on montre sans rien demander. Le reste attend « Afficher plus ». */
-const VISIBLES = 10;
-
-/** « 4 août » — la date seule, sans l'année tant qu'on est dans la même. */
-function jourCourt(quand: number): string {
-  try {
-    return new Date(quand).toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
-  } catch {
-    return "";
-  }
-}
 
 /** L'icône « panneau latéral » — un rectangle et son montant, comme partout. */
 function IconePanneau({ className = "" }: { className?: string }) {
@@ -67,37 +60,16 @@ function IconePanneau({ className = "" }: { className?: string }) {
 
 export default function ColonneGauche() {
   const { eleve, logout } = useEleve();
-  const router = useRouter();
-  const [historique, setHistorique] = useState<EntreeHistorique[]>([]);
   const [menuOuvert, setMenuOuvert] = useState(false);
   const [tiroirOuvert, setTiroirOuvert] = useState(false);
-  const [toutAfficher, setToutAfficher] = useState(false);
   const [replie, setReplie] = useState(false);
-  /** Le filtre du RÉCENT. `null` = « Toutes » — la vue principale. */
-  const [filtre, setFiltre] = useState<string | null>(null);
 
   useEffect(() => {
-    // ⭐ ON RELIT À CHAQUE DEMANDE, pas seulement au montage. L'entrée pose sa
-    // question sans changer de page : sans cette écoute, la demande qu'on vient
-    // de faire n'apparaissait dans le RÉCENT qu'au chargement suivant — on
-    // écrivait, et rien ne bougeait à gauche.
-    // `storage` en plus : il couvre les AUTRES onglets, que l'événement maison
-    // ne traverse pas.
-    const relire = () => setHistorique(lireHistorique());
-    relire();
-    window.addEventListener(EVENEMENT_HISTORIQUE, relire);
-    window.addEventListener("storage", relire);
-
     try {
       setReplie(localStorage.getItem(CLE_COLONNE) === "repliee");
     } catch {
       /* navigation privée : la colonne vit sans */
     }
-
-    return () => {
-      window.removeEventListener(EVENEMENT_HISTORIQUE, relire);
-      window.removeEventListener("storage", relire);
-    };
   }, []);
 
   /** Le pli se retient. Sans ça, il faudrait refermer à chaque page. */
@@ -140,57 +112,6 @@ export default function ColonneGauche() {
     return PROFILS.find((p) => p.id === id)?.label ?? null;
   }, [eleve?.classe]);
 
-  // ⭐ LES FILTRES DU RÉCENT (07/08). Trente demandes de quatre matières dans
-  // une seule liste, c'est un tas : retrouver « la question de conjugaison de
-  // mardi » demandait de tout relire.
-  // ⚠️ On n'affiche QUE les filtres qui ont quelque chose derrière — même règle
-  // que les chips de l'entrée. Un onglet « Espagnol » vide dirait qu'on n'a rien
-  // fait en espagnol, alors qu'il dit seulement qu'on n'a rien DEMANDÉ.
-  const filtresUtiles = useMemo(() => {
-    const presents = FILTRES_MATIERE.filter(
-      (f) => f.id !== null && historique.some((h) => correspondAuFiltre(h, f.id)),
-    );
-    // Un seul rayon rempli : le filtre ne trierait rien, il ferait du bruit.
-    return presents.length >= 2 ? [FILTRES_MATIERE[0], ...presents] : [];
-  }, [historique]);
-
-  const listeFiltree = useMemo(
-    () => historique.filter((h) => correspondAuFiltre(h, filtre)),
-    [historique, filtre],
-  );
-  const listeVisible = toutAfficher ? listeFiltree : listeFiltree.slice(0, VISIBLES);
-  const reste = listeFiltree.length - listeVisible.length;
-
-  /**
-   * Le libellé lisible d'une matière enregistrée dans l'historique.
-   *
-   * ⚠️ LE GARDE-FOU SUR `null` N'EST PAS DÉFENSIF, IL CORRIGE UN AFFICHAGE FAUX.
-   * Le premier filtre de la liste s'appelle « Toutes » et porte `id: null` —
-   * c'est la vue d'ensemble, pas une matière. Une demande sans matière tombait
-   * donc pile dessus, et huit lignes sur dix annonçaient « Toutes · 5e ·
-   * 17 août », comme si « Toutes » était la matière de la demande.
-   */
-  const libelleMatiere = (id?: string | null) =>
-    id == null ? null : (FILTRES_MATIERE.find((f) => f.id === id)?.label ?? null);
-
-  /**
-   * Oublier une demande. Le clic ne doit PAS ouvrir la ligne qu'il supprime :
-   * le bouton est posé À CÔTÉ du lien et non dedans — un bouton dans un lien
-   * n'est pas du HTML valide, et le navigateur suivrait le lien de toute façon.
-   */
-  function supprimer(entree: EntreeHistorique) {
-    oublierDemande(entree.quand);
-    // Si c'est justement celle qu'on est en train de lire, on ne laisse pas
-    // l'écran de droite afficher une demande qui n'existe plus.
-    try {
-      if (new URLSearchParams(window.location.search).get("d") === String(entree.quand)) {
-        router.replace("/accueil");
-      }
-    } catch {
-      /* rien à rattraper : la ligne est déjà partie de la liste */
-    }
-  }
-
   const contenu = (
     <div className="flex min-h-full flex-col">
       <div className="flex-1 px-3 py-4">
@@ -229,117 +150,11 @@ export default function ColonneGauche() {
           </button>
         </div>
 
-        {historique.length > 0 && (
-          <>
-            <p className="mb-2 px-1 text-[11px] font-medium uppercase tracking-wide text-slate-400">
-              Récent
-            </p>
-
-            {filtresUtiles.length > 0 && (
-              <div className="rangee-defilante mb-2 gap-1" role="group" aria-label="Filtrer par matière">
-                {filtresUtiles.map((f) => {
-                  const actif = filtre === f.id;
-                  return (
-                    <button
-                      key={f.label}
-                      type="button"
-                      onClick={() => {
-                        setFiltre(f.id);
-                        setToutAfficher(false);
-                      }}
-                      aria-pressed={actif}
-                      className={`rounded-full px-2 py-0.5 text-[11px] transition ${
-                        actif
-                          ? "bg-teal-700 text-white"
-                          : "bg-white text-slate-500 hover:bg-slate-200 hover:text-slate-800"
-                      }`}
-                    >
-                      {/* « Mathématiques » ne tient pas dans 256 px de colonne
-                          à côté de cinq autres : ici, et ici seulement, on dit
-                          « Maths ». */}
-                      {f.id === "maths" ? "Maths" : f.label}
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-
-            <ul className="space-y-0.5">
-              {listeVisible.map((h) => {
-                const matiere = libelleMatiere(h.matiere);
-                // La ligne du dessous ne s'affiche que si elle dit quelque
-                // chose : les demandes d'avant le 07/08 n'ont ni matière ni
-                // niveau, et une ligne vide sous chacune ferait une liste deux
-                // fois plus haute pour rien.
-                const contexte = [matiere, h.niveau, jourCourt(h.quand)].filter(Boolean).join(" · ");
-                return (
-                  <li key={h.quand} className="group relative">
-                    {/* ⭐ `?d=<horodatage>` ET NON `?q=<la question>` (17/08).
-                        Le lien ne portait que le texte : on repartait du profil
-                        du jour, sans la classe ni les boutons de l'époque — et
-                        il visait `/`, qui redirige vers `/accueil`, un aller-
-                        retour serveur pour rien. L'horodatage désigne LA
-                        demande, avec tout ce qui l'entourait.
-                        ⚠️ `pr-8` : la place de la croix. Sans elle, les titres
-                        longs passent dessous et on lit du texte à travers. */}
-                    <Link
-                      href={`/accueil?d=${h.quand}`}
-                      prefetch={false}
-                      onClick={() => setTiroirOuvert(false)}
-                      className="block rounded-lg px-2 py-1.5 pr-8 transition hover:bg-slate-100"
-                      title={h.question}
-                    >
-                      <span className="block truncate text-sm text-slate-600">{h.question}</span>
-                      {contexte && (
-                        <span className="block truncate text-[11px] text-slate-400">{contexte}</span>
-                      )}
-                    </Link>
-                    {/* ⚠️ VISIBLE D'EMBLÉE SUR TÉLÉPHONE, au survol seulement sur
-                        ordinateur. Un tiroir tactile n'a pas de survol : cachée
-                        derrière `group-hover`, la croix n'y serait jamais
-                        apparue, et supprimer serait resté impossible là où le
-                        geste est le plus courant. */}
-                    <button
-                      type="button"
-                      onClick={() => supprimer(h)}
-                      aria-label={`Supprimer la demande « ${h.question} »`}
-                      title="Supprimer"
-                      className="absolute right-1 top-1.5 rounded-md px-1.5 py-0.5 text-slate-400 transition hover:bg-slate-200 hover:text-slate-700 focus-visible:opacity-100 lg:opacity-0 lg:group-hover:opacity-100"
-                    >
-                      <span aria-hidden="true">✕</span>
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-
-            {/* « Afficher plus » n'apparaît QUE s'il y a vraiment autre chose
-                derrière : un bouton qui ne révèle rien est une petite trahison. */}
-            {reste > 0 && (
-              <button
-                type="button"
-                onClick={() => setToutAfficher(true)}
-                className="mt-1 block w-full rounded-lg px-2 py-1.5 text-left text-sm text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
-              >
-                Afficher plus
-              </button>
-            )}
-            {toutAfficher && listeFiltree.length > VISIBLES && (
-              <button
-                type="button"
-                onClick={() => setToutAfficher(false)}
-                className="mt-1 block w-full rounded-lg px-2 py-1.5 text-left text-sm text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
-              >
-                Afficher moins
-              </button>
-            )}
-            {listeFiltree.length === 0 && (
-              <p className="px-2 py-1.5 text-sm text-slate-400">
-                Rien dans cette matière pour l&apos;instant.
-              </p>
-            )}
-          </>
-        )}
+        {/* ⭐ LE RÉSUMÉ, À LA PLACE DU RÉCENT (29/08/2026). Il porte les portes
+            pour tout le monde, et les chiffres pour qui a un compte. Voir
+            l'en-tête de ce fichier pour le pourquoi, et ResumeEleve.tsx pour la
+            règle de poids. */}
+        <ResumeEleve />
       </div>
 
       {/* ── Le compte, collé en bas de la FENÊTRE (pas de la colonne) ────── */}
@@ -505,8 +320,8 @@ export default function ColonneGauche() {
         <button
           type="button"
           onClick={() => basculerPli(false)}
-          aria-label="Afficher mes demandes"
-          title="Afficher mes demandes"
+          aria-label="Afficher mes activités"
+          title="Afficher mes activités"
           className="fixed left-2 top-1/2 z-40 hidden -translate-y-1/2 rounded-xl border border-slate-200 bg-white/70 p-2 text-slate-400 opacity-60 shadow-sm transition hover:border-slate-300 hover:bg-white hover:text-slate-800 hover:opacity-100 lg:block"
         >
           <IconePanneau className="h-5 w-5" />
@@ -523,11 +338,15 @@ export default function ColonneGauche() {
           ⚠️ IL Y A DÉJÀ UN HAMBURGER SUR CETTE PAGE — celui du header, à droite.
           Les deux portaient le même nom « Ouvrir le menu » : au lecteur d'écran,
           la page proposait deux fois le même geste pour deux contenus
-          différents. Celui-ci ouvre les demandes, pas le site — il le dit. */}
+          différents. Celui-ci ouvre les activités, pas le site — il le dit.
+          ⚠️ « MES ACTIVITÉS » ET NON « MES DEMANDES » (29/08) : le tiroir ne
+          porte plus l'historique des questions tapées. Un nom qui survit à ce
+          qu'il désignait est un nom faux, et c'est au lecteur d'écran qu'il
+          ment en premier. */}
       <button
         type="button"
         onClick={() => setTiroirOuvert(true)}
-        aria-label="Ouvrir mes demandes"
+        aria-label="Ouvrir mes activités"
         className="fixed bottom-4 left-3 z-40 rounded-full border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-600 shadow-lg lg:hidden print:hidden"
       >
         ☰
