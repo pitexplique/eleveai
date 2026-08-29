@@ -542,6 +542,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Lire par groupes de sens au lieu de lire mot à mot, tenir la ponctuation, ne rien prononcer — et viser les 130 mots par minute attendus en 6e.",
   },
+  "francais/6e/culture-recits": {
+    titre: "Récits des origines, aventure et monstres en 6e (2026-2027)",
+    resume:
+      "Trois entrées et une seule question : ce que le récit explique de nous. Le mythe qui explique et qui fait payer, les trois pièces de l'aventure, et le monstre qui n'est pas un méchant.",
+  },
 
   /* ⭐ LA 5e OUVRE EN FRANÇAIS (24/08/2026). Elle avait vingt fiches de maths et
      aucune de français — alors qu'elle est la SEULE classe du collège déjà
