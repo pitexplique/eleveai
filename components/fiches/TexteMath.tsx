@@ -29,6 +29,11 @@
 
 import React from "react";
 import katex from "katex";
+// La CSS de KaTeX suit le composant qui la rend, et non plus le layout (voir
+// l'explication complète dans `components/MarkdownMath.tsx`). Sans cette ligne,
+// `renderToString` ci-dessous produit son balisage mais les fractions sortent à
+// plat — c'est-à-dire exactement le « 2/3 » que ce composant existe pour éviter.
+import "katex/dist/katex.min.css";
 
 /** Découpe un texte en morceaux littéraux et en formules `$…$`. */
 function decouper(texte: string): { math: boolean; contenu: string }[] {
