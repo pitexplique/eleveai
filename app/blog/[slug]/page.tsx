@@ -8,6 +8,10 @@ import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
+// La CSS de KaTeX suit ce qui la rend, et cette page rend son markdown elle-même
+// (voir `components/MarkdownMath.tsx`). Les articles sans formule la chargent
+// aussi — c'est le prix d'un import de route, et il ne pèse que sur /blog/*.
+import "katex/dist/katex.min.css";
 
 import type { Metadata } from "next";
 

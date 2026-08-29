@@ -5,6 +5,8 @@ import ReactMarkdown from "react-markdown";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
+// La CSS de KaTeX suit le composant qui la rend (voir `components/MarkdownMath.tsx`).
+import "katex/dist/katex.min.css";
 
 type Props = {
   content: string;

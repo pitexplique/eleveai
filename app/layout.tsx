@@ -2,7 +2,14 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import "katex/dist/katex.min.css";
+// ⛔ PAS DE `katex/dist/katex.min.css` ICI, PLUS JAMAIS (retirée le 29/08/2026).
+// Elle était bloquante sur TOUTES les pages, dont les 450+ qui n'affichent aucune
+// formule. Chaque composant qui rend du KaTeX importe désormais la sienne :
+// `components/MarkdownMath.tsx` (coach maths, parcours, évaluations, concours,
+// kit), `components/fiches/TexteMath.tsx` (les fiches), `BlogMarkdownMath` et
+// `app/blog/[slug]/page.tsx`. Le raisonnement complet est en tête du premier.
+// ⚠️ Si des formules sortent à plat quelque part, la réponse n'est pas de
+// remettre cette ligne : c'est qu'un composant rend du KaTeX sans importer sa CSS.
 import { Analytics } from "@vercel/analytics/next";
 import DevBanner from "@/components/DevBanner";
 import Header from "@/components/Header";
