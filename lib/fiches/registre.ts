@@ -354,6 +354,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Le théorème de Pythagore",
     resume: "Reconnaître l'hypoténuse, calculer une longueur, et utiliser la réciproque pour prouver un angle droit.",
   },
+  "maths/4e/proba-frequence": {
+    titre: "Fréquences observées et probabilité",
+    resume:
+      "La probabilité se calcule avant, la fréquence se mesure après : lire l'écart entre les deux, comprendre pourquoi il rétrécit quand on répète — et ce qu'un petit échantillon ne prouve pas.",
+  },
   "maths/4e/prop-echelle": {
     titre: "Agrandissement, réduction et échelles",
     resume:
