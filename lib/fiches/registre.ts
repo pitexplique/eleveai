@@ -426,6 +426,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "110 mots par minute est un thermomètre, pas une consigne. Un mot irrégulier ne se déchiffre pas : il se reconnait d'un bloc.",
   },
+  "francais/cm1/lecture-voix-haute": {
+    titre: "Lire à voix haute en CM1 (2026-2027)",
+    resume:
+      "Le volume, le débit et le rythme sont trois boutons différents. Plus fort ne veut pas dire plus clair — et le dernier rang donne la mesure.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
