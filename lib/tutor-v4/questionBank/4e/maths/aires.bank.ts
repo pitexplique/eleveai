@@ -1028,16 +1028,53 @@ export const airesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Compte les petits carrés.",
     tags: ["aire", "comprendre", "figure_libre", "template"],
+    // ⛔ RÉPARÉ LE 30/08/2026. Ce gabarit ne fabriquait qu'UN SEUL énoncé : son
+    // texte était constant et sa réponse libre, si bien que seul le DESSIN
+    // changeait. Le vérificateur de renouvellement ne voit pas les canvas, et
+    // il compte juste : l'élève relisait la même phrase à chaque tirage.
+    // ⭐ Deux réparations d'un coup. Le CONTEXTE entre dans le texte — un
+    // carrelage, une mosaïque, un potager — et surtout la QUESTION alterne
+    // entre l'AIRE et le PÉRIMÈTRE. C'est la confusion centrale de la notion :
+    // l'élève qui compte les carrés sans lire la consigne se trompe une fois
+    // sur deux, et c'est exactement ce qu'il faut lui apprendre à voir.
     generate: () => {
-      const h = randomInt(2, 4), w = randomInt(2, 5);
+      const h = randomInt(2, 4);
+      const w = randomInt(2, 5);
       const cells = rectangleCells(h, w);
+      const contexte = randomChoice([
+        "Un carrelage",
+        "Une mosaïque",
+        "Un potager en carrés",
+        "Un damier",
+        "Un plan de terrasse",
+        "Une plaque de chocolat",
+      ]);
+      const perimetre = 2 * (h + w);
+      const demandeAire = Math.random() < 0.6;
+      if (demandeAire) {
+        return {
+          text: `${contexte} est formé de petits carrés de $1$ unité de côté. Quelle est son AIRE, en unités² ?`,
+          format: "short",
+          expected: [String(cells.length)],
+          comparator: "number_equal",
+          explanation:
+            "Définition : l'aire est le nombre de carrés unité qui recouvrent la surface.\n\n" +
+            "Méthode : on compte les carrés — ou, pour un rectangle, on multiplie les deux côtés.\n\n" +
+            `Calcul : $${w} \\times ${h} = ${cells.length}$ carrés.\n\n` +
+            `Conclusion : l'aire vaut $${cells.length}$ unités². ⚠️ À ne pas confondre avec le PÉRIMÈTRE, qui vaut ici $${perimetre}$ unités : l'un mesure la surface, l'autre le tour.`,
+          canvas: figureLibreFromCells(h, w, cells, false),
+        };
+      }
       return {
-        text: "Chaque petit carré a une aire de $1$ unité². Quelle est l’aire de la figure ?",
+        text: `${contexte} est formé de petits carrés de $1$ unité de côté. Quel est son PÉRIMÈTRE, en unités ?`,
         format: "short",
-        expected: [String(cells.length)],
+        expected: [String(perimetre)],
         comparator: "number_equal",
         explanation:
-          `Définition : l’aire est le nombre de carrés unité.\n\nMéthode : on compte les carrés.\n\nCalcul : il y en a $${cells.length}$.\n\nConclusion : l’aire est $${cells.length}$ unités².`,
+          "Définition : le périmètre est la longueur du TOUR de la figure, pas la surface qu'elle couvre.\n\n" +
+          "Méthode : on fait le tour en comptant les côtés des carrés du bord — ou, pour un rectangle, on ajoute la longueur et la largeur, puis on double.\n\n" +
+          `Calcul : $(${w} + ${h}) \\times 2 = ${perimetre}$ unités.\n\n` +
+          `Conclusion : le périmètre vaut $${perimetre}$ unités. ⚠️ L'aire, elle, vaut $${cells.length}$ unités². ⭐ Deux figures peuvent avoir le même périmètre et des aires très différentes — c'est ce qui prouve que ce sont deux grandeurs distinctes.`,
         canvas: figureLibreFromCells(h, w, cells, false),
       };
     },

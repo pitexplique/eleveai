@@ -342,26 +342,39 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Un événement contraire contient toutes les issues qui ne réalisent pas l’événement.",
     tags: ["proba_experience", "contraire", "template"],
+    // ⛔ RÉPARÉ LE 30/08/2026. Ce gabarit ne fabriquait que DEUX énoncés : il
+    // n'avait que « pair » et « impair » dans sa table, et exactement trois
+    // leurres — donc un seul jeu de propositions par cas.
+    // 👉 Six événements, et un vivier de six leurres dont `makeChoices` tire
+    // trois : la table et les propositions varient toutes les deux.
     generate: () => {
-      const mode = randomChoice(["pair", "impair"]);
-      const favorables = mode === "pair" ? [2, 4, 6] : [1, 3, 5];
-      const contraire = mode === "pair" ? "obtenir un nombre impair" : "obtenir un nombre pair";
-
+      const cas = randomChoice([
+        { evenement: "obtenir un nombre pair", contraire: "obtenir un nombre impair", faces: [2, 4, 6] },
+        { evenement: "obtenir un nombre impair", contraire: "obtenir un nombre pair", faces: [1, 3, 5] },
+        { evenement: "obtenir un nombre inférieur à 3", contraire: "obtenir un nombre supérieur ou égal à 3", faces: [1, 2] },
+        { evenement: "obtenir un nombre supérieur à 4", contraire: "obtenir un nombre inférieur ou égal à 4", faces: [5, 6] },
+        { evenement: "obtenir un multiple de 3", contraire: "ne pas obtenir un multiple de 3", faces: [3, 6] },
+        { evenement: "obtenir 6", contraire: "ne pas obtenir 6", faces: [6] },
+      ]);
       return {
-        text: `Au lancer d’un dé, quel est l’événement contraire de « obtenir un nombre ${mode} » ?`,
+        text: `Au lancer d'un dé, quel est l'événement contraire de « ${cas.evenement} » ?`,
         format: "qcm",
-        choices: makeChoices(contraire, [
+        choices: makeChoices(cas.contraire, [
           "obtenir 6",
           "obtenir un nombre inférieur à 3",
           "obtenir un nombre supérieur à 6",
+          "obtenir un nombre pair",
+          "obtenir un nombre premier",
+          "obtenir 1 ou 2",
         ]),
-        expected: [contraire],
+        expected: [cas.contraire],
         comparator: "mcq_exact",
-        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
-          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
-          (`Le contraire de « obtenir un nombre ${mode} » est « ${contraire} ».`) +
-          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
-        canvas: deCanvas(favorables),
+        explanation:
+          "Définition : l'événement contraire regroupe TOUTES les issues qui ne réalisent pas l'événement — ni plus, ni moins.\n\n" +
+          "Méthode : on liste les issues de l'événement, puis on prend celles qui restent.\n\n" +
+          `Calcul : « ${cas.evenement} » se réalise sur ${cas.faces.join(", ")}. Il reste ${[1, 2, 3, 4, 5, 6].filter((f) => !cas.faces.includes(f)).join(", ")}, soit « ${cas.contraire} ».\n\n` +
+          "Conclusion : ⚠️ un contraire n'est pas « une autre issue » : c'est TOUT le reste. Les deux événements se partagent les six faces sans en oublier ni en compter deux fois.",
+        canvas: deCanvas(cas.faces),
       };
     },
   },
@@ -424,35 +437,70 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Regarde si toutes les zones ont le même poids.",
     tags: ["proba_experience", "roue", "equiprobabilite", "template"],
+    // ⛔ RÉPARÉ LE 30/08/2026. Ce gabarit ne fabriquait qu'UN SEUL énoncé : son
+    // texte et ses propositions étaient constants, et seul le DESSIN changeait.
+    // Le vérificateur de renouvellement signe une question par son énoncé et
+    // ses propositions triées — il ne voit pas les canvas, et il a raison de
+    // compter ainsi : l'élève relisait bien la même phrase à chaque tirage.
+    // 👉 Le contexte et le nombre de zones entrent donc dans le TEXTE, et la
+    // table fait dix-huit cas.
     generate: () => {
-      const equal = randomChoice([true, false]);
-
-      const segments = equal
-        ? [
+      const lieu = randomChoice([
+        "d'une kermesse d'école",
+        "d'une fête foraine",
+        "d'un jeu télévisé",
+        "d'une tombola de collège",
+        "d'un stand de la fête du village",
+        "d'un jeu de société",
+      ]);
+      const cas = randomChoice([
+        {
+          equal: true,
+          nb: 4,
+          segments: [
             { label: "A", poids: 1, couleur: couleurs.rouge },
             { label: "B", poids: 1, couleur: couleurs.bleu },
             { label: "C", poids: 1, couleur: couleurs.vert },
             { label: "D", poids: 1, couleur: couleurs.jaune },
-          ]
-        : [
+          ],
+          pourquoi: "les quatre secteurs ont exactement la même ouverture",
+        },
+        {
+          equal: false,
+          nb: 3,
+          segments: [
             { label: "A", poids: 2, couleur: couleurs.rouge },
             { label: "B", poids: 1, couleur: couleurs.bleu },
             { label: "C", poids: 1, couleur: couleurs.vert },
-          ];
+          ],
+          pourquoi: "le secteur A est deux fois plus large que les autres",
+        },
+        {
+          equal: true,
+          nb: 3,
+          segments: [
+            { label: "A", poids: 1, couleur: couleurs.rouge },
+            { label: "B", poids: 1, couleur: couleurs.bleu },
+            { label: "C", poids: 1, couleur: couleurs.vert },
+          ],
+          pourquoi: "les trois secteurs sont identiques",
+        },
+      ]);
 
       return {
-        text: "La roue représentée correspond-elle à une situation d’équiprobabilité ?",
+        text: `La roue ${lieu} est partagée en ${cas.nb} secteurs. Correspond-elle à une situation d'équiprobabilité ?`,
         format: "qcm",
         choices: ["oui", "non"],
-        expected: [equal ? "oui" : "non"],
+        expected: [cas.equal ? "oui" : "non"],
         comparator: "mcq_exact",
-        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
-          "Méthode : on compare les cas favorables à tous les cas possibles dans l’expérience aléatoire.\n\nCalcul : " +
-          (equal
-          ? "Oui. Toutes les zones ont le même poids."
-          : "Non. Les zones n’ont pas toutes le même poids.") +
-          "\n\nConclusion : la probabilité obtenue correspond à l’événement demandé.",
-        canvas: roueCanvas(segments),
+        explanation:
+          "Définition : il y a équiprobabilité quand toutes les issues ont exactement la MÊME chance de se produire.\n\n" +
+          "Méthode : sur une roue, on ne compte pas les secteurs — on compare leur OUVERTURE. Deux secteurs de tailles différentes n'ont pas la même chance.\n\n" +
+          `Calcul : ici, ${cas.pourquoi}.\n\n` +
+          (cas.equal
+            ? "Conclusion : la situation est équiprobable, et chaque secteur a donc la même probabilité."
+            : "Conclusion : ⚠️ la situation n'est PAS équiprobable. Compter les secteurs ne suffit jamais : c'est leur taille qui décide."),
+        canvas: roueCanvas(cas.segments),
       };
     },
   },
@@ -1313,23 +1361,40 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Certain = toujours ; impossible = jamais.",
     tags: ["proba_experience", "evenement", "template"],
+    // ⛔ RÉPARÉ LE 30/08/2026 : la table ne contenait que TROIS cas.
+    // ⭐ Elle en contient quinze, et surtout elle ajoute la troisième réponse
+    // qui manquait — POSSIBLE. Avec seulement « certain » et « impossible »,
+    // l'élève apprenait un faux dilemme : la plupart des événements ne sont ni
+    // l'un ni l'autre, et c'est ce qui rend la probabilité intéressante.
     generate: () => {
       const cas = randomChoice([
         { texte: "obtenir un nombre inférieur à 10", rep: "certain", faces: [1, 2, 3, 4, 5, 6] },
+        { texte: "obtenir un nombre compris entre 1 et 6", rep: "certain", faces: [1, 2, 3, 4, 5, 6] },
+        { texte: "obtenir un nombre entier", rep: "certain", faces: [1, 2, 3, 4, 5, 6] },
+        { texte: "obtenir un nombre positif", rep: "certain", faces: [1, 2, 3, 4, 5, 6] },
         { texte: "obtenir 0", rep: "impossible", faces: [] },
         { texte: "obtenir un nombre supérieur à 6", rep: "impossible", faces: [] },
+        { texte: "obtenir 7", rep: "impossible", faces: [] },
+        { texte: "obtenir un nombre négatif", rep: "impossible", faces: [] },
+        { texte: "obtenir un nombre à deux chiffres", rep: "impossible", faces: [] },
+        { texte: "obtenir 4", rep: "possible, sans être certain", faces: [4] },
+        { texte: "obtenir un nombre pair", rep: "possible, sans être certain", faces: [2, 4, 6] },
+        { texte: "obtenir un multiple de 3", rep: "possible, sans être certain", faces: [3, 6] },
+        { texte: "obtenir un nombre supérieur à 4", rep: "possible, sans être certain", faces: [5, 6] },
+        { texte: "obtenir 1 ou 2", rep: "possible, sans être certain", faces: [1, 2] },
+        { texte: "obtenir un nombre premier", rep: "possible, sans être certain", faces: [2, 3, 5] },
       ]);
       return {
-        text: `Au lancer d’un dé, l’événement « ${cas.texte} » est…`,
+        text: `Au lancer d'un dé à six faces, l'événement « ${cas.texte} » est…`,
         format: "qcm",
-        choices: ["certain", "impossible"],
+        choices: shuffle(["certain", "impossible", "possible, sans être certain"]),
         expected: [cas.rep],
         comparator: "mcq_exact",
         explanation:
-          "Définition : un événement certain se réalise toujours, un impossible jamais.\n\n" +
-          "Méthode : on regarde si des issues réalisent l’événement.\n\n" +
-          `Calcul : « ${cas.texte} » est ${cas.rep}.\n\n` +
-          `Conclusion : l’événement est ${cas.rep}.`,
+          "Définition : un événement CERTAIN se réalise à tous les coups (probabilité 1), un événement IMPOSSIBLE ne se réalise jamais (probabilité 0). Entre les deux, tous les autres.\n\n" +
+          "Méthode : on cherche quelles faces réalisent l'événement. Les six ? certain. Aucune ? impossible. Quelques-unes ? possible sans être certain.\n\n" +
+          `Calcul : « ${cas.texte} » se réalise sur ${cas.faces.length === 0 ? "aucune face" : cas.faces.length === 6 ? "les six faces" : `les faces ${cas.faces.join(", ")}`}.\n\n` +
+          `Conclusion : l'événement est ${cas.rep}. ⭐ La plupart des événements sont dans ce troisième cas — c'est justement pour eux qu'on calcule une probabilité.`,
         canvas: deCanvas(cas.faces),
       };
     },
@@ -1345,24 +1410,39 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le contraire est tout ce qui n’est pas l’événement.",
     tags: ["proba_experience", "evenement", "contraire", "template"],
+    // ⛔ RÉPARÉ LE 30/08/2026 : le gabarit ne faisait varier que le nombre tiré,
+    // soit six énoncés, et ses trois leurres étaient toujours les mêmes.
+    // ⭐ L'EXPÉRIENCE change maintenant aussi — dé, roue, sac, jeu de cartes —
+    // et c'est ce qui compte pédagogiquement : le contraire n'est pas une
+    // propriété du dé, c'est une opération sur n'importe quel univers.
     generate: () => {
-      const n = randomInt(1, 6);
-      const contraire = `ne pas obtenir ${n}`;
+      const exp = randomChoice([
+        { ou: "au lancer d'un dé", quoi: (n: number) => `obtenir ${n}`, max: 6 },
+        { ou: "sur une roue numérotée de 1 à 8", quoi: (n: number) => `tomber sur le ${n}`, max: 8 },
+        { ou: "dans un sac de jetons numérotés de 1 à 10", quoi: (n: number) => `tirer le jeton ${n}`, max: 10 },
+        { ou: "dans une urne de boules numérotées de 1 à 12", quoi: (n: number) => `tirer la boule ${n}`, max: 12 },
+      ]);
+      const n = randomInt(1, exp.max);
+      const evenement = exp.quoi(n);
+      const contraire = `ne pas ${evenement}`;
       return {
-        text: `Quel est l’événement contraire de « obtenir ${n} » au lancer d’un dé ?`,
+        text: `Quel est l'événement contraire de « ${evenement} » ${exp.ou} ?`,
         format: "qcm",
         choices: makeChoices(contraire, [
-          `obtenir ${n}`,
+          evenement,
           "obtenir un nombre pair",
-          "obtenir un nombre supérieur à 6",
+          "obtenir un nombre impair",
+          `obtenir un nombre supérieur à ${exp.max}`,
+          `obtenir un nombre différent de ${n} et de 1`,
+          "obtenir le plus grand nombre",
         ]),
         expected: [contraire],
         comparator: "mcq_exact",
         explanation:
-          "Définition : l’événement contraire regroupe les issues restantes.\n\n" +
-          `Méthode : on retire l’issue ${n}.\n\n` +
-          `Calcul : le contraire de « obtenir ${n} » est « ${contraire} ».\n\n` +
-          `Conclusion : c’est « ${contraire} ».`,
+          "Définition : l'événement contraire regroupe toutes les issues qui ne réalisent PAS l'événement.\n\n" +
+          `Méthode : on retire l'issue « ${n} » de l'univers, et tout ce qui reste forme le contraire.\n\n` +
+          `Calcul : il y a ${exp.max} issues possibles ; une seule réalise l'événement, donc ${exp.max - 1} réalisent son contraire.\n\n` +
+          `Conclusion : c'est « ${contraire} ». ⭐ Un événement et son contraire couvrent TOUT l'univers, sans recouvrement — c'est pourquoi leurs probabilités s'additionnent pour faire 1.`,
       };
     },
   },
@@ -1521,26 +1601,57 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Regarde si toutes les billes sont en même quantité par couleur.",
     tags: ["proba_experience", "equiprobabilite", "billes", "template"],
+    // ⛔ RÉPARÉ LE 30/08/2026, même cause que `proba_equiprobabilite_tpl_1` :
+    // texte et propositions constants, seul le dessin changeait — un seul
+    // énoncé fabriqué.
+    // ⭐ Ici la réparation va plus loin que le contexte : la QUESTION change de
+    // geste. Tantôt on demande si c'est équiprobable, tantôt COMBIEN il faut
+    // ajouter pour que ça le devienne — et ce second geste est celui qui
+    // prouve que l'élève a compris, parce qu'il ne se devine pas.
     generate: () => {
+      const contenant = randomChoice([
+        "Un sac de billes",
+        "Une urne",
+        "Une boîte de jetons",
+        "Un sachet de bonbons",
+        "Une trousse de perles",
+      ]);
       const equal = randomChoice([true, false]);
-      const n = randomInt(2, 4);
-      const rouges = n;
-      const bleues = equal ? n : n + randomInt(1, 2);
+      const rouges = randomInt(2, 5);
+      const bleues = equal ? rouges : rouges + randomInt(1, 3);
       const elements = [
         ...Array.from({ length: rouges }, () => ({ couleur: couleurs.rouge })),
         ...Array.from({ length: bleues }, () => ({ couleur: couleurs.bleu })),
       ];
+      // Le second geste : compléter pour rendre la situation équiprobable.
+      const completer = !equal && Math.random() < 0.5;
+      if (completer) {
+        return {
+          text: `${contenant} contient des rouges et des bleues, comme sur le dessin. Combien faut-il AJOUTER de rouges pour que les deux couleurs aient les mêmes chances ?`,
+          format: "short",
+          expected: [String(bleues - rouges)],
+          comparator: "number_equal",
+          explanation:
+            "Définition : il y a équiprobabilité quand chaque couleur offre le même nombre de cas favorables.\n\n" +
+            "Méthode : on compte les deux couleurs, puis on cherche l'écart.\n\n" +
+            `Calcul : il y a ${rouges} rouges et ${bleues} bleues, donc il en manque ${bleues - rouges}.\n\n` +
+            `Conclusion : en ajoutant ${bleues - rouges} rouge(s), on obtient ${bleues} de chaque couleur. ⭐ Rendre une situation équiprobable, c'est égaliser les EFFECTIFS — pas ajouter au hasard.`,
+          canvas: billesCanvas(elements),
+        };
+      }
       return {
-        text: "En tirant une bille au hasard, a-t-on autant de chances d’avoir une rouge qu’une bleue ?",
+        text: `${contenant} contient des billes rouges et bleues. En en tirant une au hasard, a-t-on autant de chances d'avoir une rouge qu'une bleue ?`,
         format: "qcm",
         choices: ["oui", "non"],
         expected: [equal ? "oui" : "non"],
         comparator: "mcq_exact",
         explanation:
-          "Définition : l’équiprobabilité demande le même nombre de cas favorables.\n\n" +
-          "Méthode : on compare le nombre de billes de chaque couleur.\n\n" +
+          "Définition : l'équiprobabilité demande le même nombre de cas favorables pour chaque issue.\n\n" +
+          "Méthode : on compte les billes de chaque couleur, et on compare.\n\n" +
           `Calcul : ${rouges} rouges et ${bleues} bleues.\n\n` +
-          `Conclusion : ${equal ? "oui, les chances sont égales" : "non, une couleur est plus probable"}.`,
+          (equal
+            ? "Conclusion : les effectifs sont égaux, les chances le sont donc aussi."
+            : `Conclusion : ⚠️ non. Il y a ${bleues > rouges ? "plus de bleues" : "plus de rouges"}, donc cette couleur est plus probable. Une différence d'une seule bille suffit à casser l'équiprobabilité.`),
         canvas: billesCanvas(elements),
       };
     },

@@ -40,12 +40,51 @@ function formatNumber(n: number) {
 
 // Triangle rectangle en A. Angle aigu étudié en B (par défaut).
 // Adjacent à B : AB ; opposé à B : AC ; hypoténuse : BC.
+/**
+ * ⭐ LES NOMS DU TRIANGLE, ajoutés le 30/08/2026. Le sommet `A` porte toujours
+ * l'angle droit — c'est la géométrie du canvas —, mais son NOM change. C'est ce
+ * qui empêche d'apprendre « l'hypoténuse, c'est [BC] » au lieu de « c'est le
+ * côté en face de l'angle droit ».
+ * ⚠️ Les lettres sont choisies pour rester lisibles à 11 px et ne pas se
+ * confondre entre elles : pas de I ni de O, jamais deux lettres voisines de
+ * l'alphabet dans un même triangle.
+ */
+const NOMMAGES: { A: string; B: string; C: string }[] = [
+  { A: "A", B: "B", C: "C" },
+  { A: "R", B: "S", C: "T" },
+  { A: "M", B: "N", C: "P" },
+  { A: "E", B: "F", C: "G" },
+  { A: "K", B: "L", C: "H" },
+  { A: "D", B: "U", C: "V" },
+];
+
+/**
+ * Le triangle rectangle du cosinus.
+ *
+ * ⛔⛔ DEUX FAUTES CORRIGÉES LE 30/08/2026.
+ *
+ * 1. `sideLabels` s'écrivait `AC` — or le type ne connaît que `AB`, `BC` et
+ *    `CA`, et `TriangleCanvas` ne lit QUE ces trois-là. Le `as any` de la fin
+ *    masquait l'erreur au typecheck : l'étiquette « opposé » n'a JAMAIS été
+ *    affichée dans une question de cosinus. Elle l'est maintenant, sur `CA`.
+ *
+ * 2. Les sommets s'appelaient toujours A, B, C, avec l'angle droit toujours
+ *    en A. Un élève y apprenait « l'hypoténuse, c'est [BC] » au lieu de « c'est
+ *    le côté en face de l'angle droit ». Les noms sont donc un paramètre, et
+ *    les gabarits en tirent une table.
+ *
+ * ⚠️ Le viewBox fait 280 pour un rendu plafonné à 240 px : l'échelle vaut
+ * 0,857, et la plus petite police du canvas (13) sort à 11,1 px — juste
+ * au-dessus du plancher. Ne pas élargir ce viewBox sans remesurer.
+ */
 function triangleCosCanvas(params?: {
   angleAt?: "B" | "C";
-  sideLabels?: { AB?: string; AC?: string; BC?: string };
+  sideLabels?: { AB?: string; CA?: string; BC?: string };
   angleLabel?: string;
+  noms?: { A: string; B: string; C: string };
 }) {
   const angleAt = params?.angleAt ?? "B";
+  const noms = params?.noms ?? { A: "A", B: "B", C: "C" };
   return {
     kind: "triangle",
     points: {
@@ -53,10 +92,10 @@ function triangleCosCanvas(params?: {
       B: { x: 230, y: 190 },
       C: { x: 55, y: 70 },
     },
-    labels: { A: "A", B: "B", C: "C" },
+    labels: { A: noms.A, B: noms.B, C: noms.C },
     sideLabels: params?.sideLabels ?? {
       AB: "adjacent",
-      AC: "opposé",
+      CA: "opposé",
       BC: "hypoténuse",
     },
     angleLabels:
@@ -162,21 +201,41 @@ export const cosinusBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Adjacent = touche l’angle ; hypoténuse = opposée à l’angle droit.",
     tags: ["trigo_cosinus", "cotes", "canvas", "template"],
+    // ⛔ RÉPARÉ LE 30/08/2026 : deux énoncés seulement, parce que le triangle
+    // s'appelait toujours ABC avec l'angle droit en A.
+    // ⭐ Et ce n'était pas qu'un problème de compteur : un élève qui ne voit
+    // jamais que ce triangle-là retient « l'adjacent, c'est [AB] » au lieu de
+    // « c'est le côté qui touche l'angle sans être l'hypoténuse ». La table de
+    // nommages est donc la vraie réparation, le renouvellement vient avec.
     generate: () => {
+      const t = randomChoice(NOMMAGES);
       const angleAt = randomChoice<"B" | "C">(["B", "C"]);
-      const adjacent = angleAt === "B" ? "$[AB]$" : "$[AC]$";
+      // Le sommet de l'angle droit est toujours le point A du canvas ; seuls
+      // les NOMS changent. L'adjacent touche l'angle sans être l'hypoténuse.
+      const sommet = angleAt === "B" ? t.B : t.C;
+      const adjacent = angleAt === "B" ? `$[${t.A}${t.B}]$` : `$[${t.A}${t.C}]$`;
+      const oppose = angleAt === "B" ? `$[${t.A}${t.C}]$` : `$[${t.A}${t.B}]$`;
+      const hyp = `$[${t.B}${t.C}]$`;
       return {
-        text: `Dans le triangle rectangle en $A$, quel est le côté adjacent à l’angle $\\widehat{${angleAt}}$ ?`,
+        text: `Dans le triangle rectangle en $${t.A}$, quel est le côté adjacent à l'angle $\\widehat{${sommet}}$ ?`,
         format: "qcm",
-        choices: shuffle(["$[AB]$", "$[AC]$", "$[BC]$"]),
+        choices: shuffle([adjacent, oppose, hyp]),
         expected: [adjacent],
         comparator: "mcq_exact",
         explanation:
-          `Définition : le côté adjacent touche l’angle sans être l’hypoténuse.\n\n` +
-          `Méthode : on se place sur $\\widehat{${angleAt}}$ et on écarte l’hypoténuse $[BC]$.\n\n` +
-          `Calcul : le côté adjacent est ${adjacent}.\n\n` +
-          `Conclusion : le côté adjacent à $\\widehat{${angleAt}}$ est ${adjacent}.`,
-        canvas: triangleCosCanvas({ angleAt }),
+          "Définition : le côté ADJACENT à un angle est celui qui le touche SANS être l'hypoténuse.\n\n" +
+          `Méthode : on se place sur $\\widehat{${sommet}}$, on écarte d'abord l'hypoténuse ${hyp} — elle est en face de l'angle droit — puis on garde celui des deux restants qui touche l'angle.\n\n` +
+          `Calcul : les deux côtés qui touchent $\\widehat{${sommet}}$ sont ${adjacent} et ${hyp}. Comme ${hyp} est l'hypoténuse, l'adjacent est ${adjacent}.\n\n` +
+          `Conclusion : ⚠️ « adjacent » n'est jamais le nom d'un côté fixe : il change avec l'ANGLE qu'on regarde. Ici ${oppose} est l'opposé, et il deviendrait l'adjacent si l'on changeait d'angle.`,
+        canvas: triangleCosCanvas({
+          angleAt,
+          noms: t,
+          sideLabels: {
+            AB: angleAt === "B" ? "adjacent" : "opposé",
+            CA: angleAt === "B" ? "opposé" : "adjacent",
+            BC: "hypoténuse",
+          },
+        }),
       };
     },
   },
@@ -259,19 +318,24 @@ export const cosinusBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "L’hypoténuse est opposée à l’angle droit (en $A$).",
     tags: ["trigo_cosinus", "cotes", "canvas", "template"],
+    // ⛔ RÉPARÉ LE 30/08/2026 : ce gabarit ne fabriquait qu'UN SEUL énoncé —
+    // toujours le même triangle, toujours la même réponse $[BC]$. Un élève
+    // pouvait le réussir sans jamais chercher où était l'angle droit.
     generate: () => {
+      const t = randomChoice(NOMMAGES);
+      const hyp = `$[${t.B}${t.C}]$`;
       return {
-        text: "Dans le triangle rectangle en $A$, quel côté est l’hypoténuse ?",
+        text: `Dans le triangle rectangle en $${t.A}$, quel côté est l'hypoténuse ?`,
         format: "qcm",
-        choices: shuffle(["$[BC]$", "$[AB]$", "$[AC]$"]),
-        expected: ["$[BC]$"],
+        choices: shuffle([hyp, `$[${t.A}${t.B}]$`, `$[${t.A}${t.C}]$`]),
+        expected: [hyp],
         comparator: "mcq_exact",
         explanation:
-          "Définition : l’hypoténuse est opposée à l’angle droit.\n\n" +
-          "Méthode : l’angle droit est en $A$, on cherche le côté en face.\n\n" +
-          "Calcul : le côté opposé à $A$ est $[BC]$.\n\n" +
-          "Conclusion : l’hypoténuse est $[BC]$.",
-        canvas: triangleCosCanvas(),
+          "Définition : l'hypoténuse est le côté OPPOSÉ à l'angle droit — c'est aussi le plus long des trois.\n\n" +
+          `Méthode : on repère l'angle droit, ici en $${t.A}$, puis on prend le côté qui ne le touche pas.\n\n` +
+          `Calcul : les deux côtés qui touchent $${t.A}$ sont $[${t.A}${t.B}]$ et $[${t.A}${t.C}]$. Reste ${hyp}.\n\n` +
+          `Conclusion : l'hypoténuse est ${hyp}. ⚠️ Elle ne s'appelle pas toujours $[BC]$ : elle se repère par l'ANGLE DROIT, jamais par les lettres.`,
+        canvas: triangleCosCanvas({ noms: t }),
       };
     },
   },
@@ -425,7 +489,7 @@ export const cosinusBank: TutorBankItemV4[] = [
           `Conclusion : $\\cos(\\theta) = \\dfrac{${adj}}{${hyp}}$.`,
         canvas: triangleCosCanvas({
           angleAt: "B",
-          sideLabels: { AB: `${adj} cm`, BC: `${hyp} cm`, AC: "" },
+          sideLabels: { AB: `${adj} cm`, BC: `${hyp} cm`, CA: "" },
         }),
       };
     },
@@ -512,22 +576,34 @@ export const cosinusBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Adjacent à l’angle choisi, sur l’hypoténuse.",
     tags: ["trigo_cosinus", "definition", "qcm", "canvas", "template"],
+    // ⛔ RÉPARÉ LE 30/08/2026 : deux énoncés, parce que le triangle s'appelait
+    // toujours ABC. Il prend maintenant ses noms dans `NOMMAGES`, et l'élève
+    // doit relire la figure au lieu de reconnaître une formule apprise.
     generate: () => {
+      const t = randomChoice(NOMMAGES);
       const angleAt = randomChoice<"B" | "C">(["B", "C"]);
-      const adj = angleAt === "B" ? "AB" : "AC";
-      const correct = `$\\dfrac{${adj}}{BC}$`;
+      const sommet = angleAt === "B" ? t.B : t.C;
+      const adj = angleAt === "B" ? `${t.A}${t.B}` : `${t.A}${t.C}`;
+      const opp = angleAt === "B" ? `${t.A}${t.C}` : `${t.A}${t.B}`;
+      const hyp = `${t.B}${t.C}`;
+      const correct = `$\\dfrac{${adj}}{${hyp}}$`;
       return {
-        text: `Dans le triangle rectangle en $A$, à quoi est égal $\\cos(\\widehat{${angleAt}})$ ?`,
+        text: `Dans le triangle rectangle en $${t.A}$, à quoi est égal $\\cos(\\widehat{${sommet}})$ ?`,
         format: "qcm",
-        choices: shuffle([correct, `$\\dfrac{BC}{${adj}}$`, `$\\dfrac{${angleAt === "B" ? "AC" : "AB"}}{BC}$`, `$\\dfrac{AB}{AC}$`]),
+        choices: shuffle([
+          correct,
+          `$\\dfrac{${hyp}}{${adj}}$`,
+          `$\\dfrac{${opp}}{${hyp}}$`,
+          `$\\dfrac{${adj}}{${opp}}$`,
+        ]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
-          `Définition : $\\cos = \\dfrac{\\text{adjacent}}{\\text{hypoténuse}}$.\n\n` +
-          `Méthode : l’adjacent à $\\widehat{${angleAt}}$ est $${adj}$, l’hypoténuse est $BC$.\n\n` +
-          `Calcul : $\\cos(\\widehat{${angleAt}}) = \\dfrac{${adj}}{BC}$.\n\n` +
-          `Conclusion : $\\cos(\\widehat{${angleAt}}) = \\dfrac{${adj}}{BC}$.`,
-        canvas: triangleCosCanvas({ angleAt }),
+          "Définition : $\\cos = \\dfrac{\\text{adjacent}}{\\text{hypoténuse}}$ — l'adjacent EN HAUT, toujours.\n\n" +
+          `Méthode : on repère l'hypoténuse par l'angle droit (en $${t.A}$), donc $${hyp}$. Puis l'adjacent à $\\widehat{${sommet}}$, c'est-à-dire le côté qui touche l'angle sans être l'hypoténuse : $${adj}$.\n\n` +
+          `Calcul : $\\cos(\\widehat{${sommet}}) = \\dfrac{${adj}}{${hyp}}$.\n\n` +
+          `Conclusion : ⚠️ $\\dfrac{${hyp}}{${adj}}$ est le piège — c'est la fraction retournée, et elle donne un nombre plus grand que 1, ce qu'un cosinus ne peut jamais être.`,
+        canvas: triangleCosCanvas({ angleAt, noms: t }),
       };
     },
   },
@@ -611,7 +687,7 @@ export const cosinusBank: TutorBankItemV4[] = [
         canvas: triangleCosCanvas({
           angleAt: "B",
           angleLabel: "60°",
-          sideLabels: { BC: `${hyp} cm`, AB: "?", AC: "" },
+          sideLabels: { BC: `${hyp} cm`, AB: "?", CA: "" },
         }),
       };
     },
@@ -644,7 +720,7 @@ export const cosinusBank: TutorBankItemV4[] = [
         canvas: triangleCosCanvas({
           angleAt: "B",
           angleLabel: `${angle}°`,
-          sideLabels: { BC: `${hyp} cm`, AB: "?", AC: "" },
+          sideLabels: { BC: `${hyp} cm`, AB: "?", CA: "" },
         }),
       };
     },
@@ -676,7 +752,7 @@ export const cosinusBank: TutorBankItemV4[] = [
         canvas: triangleCosCanvas({
           angleAt: "B",
           angleLabel: "60°",
-          sideLabels: { AB: `${adj} cm`, BC: "?", AC: "" },
+          sideLabels: { AB: `${adj} cm`, BC: "?", CA: "" },
         }),
       };
     },
@@ -703,7 +779,7 @@ export const cosinusBank: TutorBankItemV4[] = [
     canvas: triangleCosCanvas({
       angleAt: "B",
       angleLabel: "60°",
-      sideLabels: { BC: "10 cm", AB: "?", AC: "" },
+      sideLabels: { BC: "10 cm", AB: "?", CA: "" },
     }),
     tags: ["trigo_cosinus", "calculer_longueur", "short"],
   },
@@ -806,7 +882,7 @@ export const cosinusBank: TutorBankItemV4[] = [
         canvas: triangleCosCanvas({
           angleAt: "B",
           angleLabel: `${angle}°`,
-          sideLabels: { BC: `${hyp} cm`, AB: "?", AC: "" },
+          sideLabels: { BC: `${hyp} cm`, AB: "?", CA: "" },
         }),
       };
     },
@@ -864,7 +940,7 @@ export const cosinusBank: TutorBankItemV4[] = [
     canvas: triangleCosCanvas({
       angleAt: "B",
       angleLabel: "?",
-      sideLabels: { AB: "5 cm", BC: "10 cm", AC: "" },
+      sideLabels: { AB: "5 cm", BC: "10 cm", CA: "" },
     }),
     tags: ["trigo_cosinus", "calculer_angle", "short"],
   },
@@ -896,7 +972,7 @@ export const cosinusBank: TutorBankItemV4[] = [
         canvas: triangleCosCanvas({
           angleAt: "B",
           angleLabel: "?",
-          sideLabels: { AB: `${adj} cm`, BC: `${hyp} cm`, AC: "" },
+          sideLabels: { AB: `${adj} cm`, BC: `${hyp} cm`, CA: "" },
         }),
       };
     },
