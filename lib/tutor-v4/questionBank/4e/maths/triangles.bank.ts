@@ -56,13 +56,26 @@ function makeChoices(correct: string, wrongs: readonly string[]) {
   return shuffle([correct, ...distracteurs]);
 }
 
-/** Un triangle quelconque, assez ouvert pour que les marques restent lisibles. */
+/**
+ * Un triangle quelconque, assez ouvert pour que les marques restent lisibles.
+ *
+ * ⭐⭐ LA LARGEUR EST 240, ET C'EST MESURÉ, PAS CHOISI. `TriangleCanvas` enferme
+ * son SVG dans un `max-w-[240px]` : le dessin ne dépasse JAMAIS 240 px, ni dans
+ * le coach, ni dans une fiche. Or le `viewBox` vaut `size`, donc un viewBox de
+ * 320 se rendait à l'échelle 0,75 — et l'étiquette « hauteur », écrite en 13,
+ * s'affichait à 9,8 px, SOUS LE PLANCHER DE 11 px.
+ * 👉 En posant le viewBox à 240, l'échelle vaut 1 et les libellés sortent à
+ * leur taille nominale : 13, 15, 16 et 18 px. Les points ont été divisés par
+ * 0,75, donc la FIGURE est identique — seuls les textes ont grandi.
+ * ⚠️ Corollaire à ne pas oublier : ce canvas n'a pas de « zone large du coach ».
+ * Ce qui est illisible ici l'est partout.
+ */
 function triangle(data: Partial<TriangleCanvasData> = {}): TriangleCanvasData {
   return {
     kind: "triangle",
-    points: { A: { x: 40, y: 200 }, B: { x: 280, y: 200 }, C: { x: 150, y: 50 } },
+    points: { A: { x: 30, y: 150 }, B: { x: 210, y: 150 }, C: { x: 112, y: 38 } },
     display: { showPoints: true, showLabels: true, showSides: true },
-    size: { width: 320, height: 240 },
+    size: { width: 240, height: 180 },
     ...data,
   } as TriangleCanvasData;
 }

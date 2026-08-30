@@ -364,6 +364,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Connaître une grandeur suffit-il à trouver l'autre ? Programme de calcul, tableau et graphique lus dans les deux sens — et pourquoi le prix d'un taxi dépend de la distance sans lui être proportionnel.",
   },
+  "maths/4e/triangle-figure": {
+    titre: "Le triangle pour démontrer",
+    resume:
+      "Trois données bien choisies suffisent : les trois cas d'égalité, l'inégalité triangulaire et la somme des angles à 180° — et pourquoi trois angles ne donnent que des triangles semblables, jamais égaux.",
+  },
   "maths/4e/grandeur-composee": {
     titre: "Grandeurs composées et unités",
     resume:
