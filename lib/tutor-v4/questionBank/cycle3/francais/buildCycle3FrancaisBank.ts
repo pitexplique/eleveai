@@ -5589,12 +5589,41 @@ const MONSTRES: QcmItem[] = [
    La 6e, passée par la fabrique collège, avait perdu des attendus que le CM1
    et le CM2 portent pourtant. */
 
+/* ⭐⭐ CE POOL SERT LES TROIS CLASSES DEPUIS LE 30/08/2026, et son nom ment
+   désormais un peu : il s'appelle FLUENCE_130 parce qu'il est né pour la 6e.
+   ⛔ CE QUI A ÉTÉ TROUVÉ EN OUVRANT LE CM1 : son contenu est presque entièrement
+   GÉNÉRIQUE — « la vitesse est un moyen, la compréhension est le but », « on
+   progresse en relisant », « lire vite sans comprendre, c'est manquer le but ».
+   Sa propre méthode écrit même « Le CM1 vise 110, le CM2 120, la 6e 130 ».
+   Mais l'aiguillage était `microId.includes("flue_130")` : SEULE LA 6e Y
+   ACCÉDAIT. `cm1_flue_110_mots` et `cm2_flue_120_mots` tombaient sur le pool
+   LECTURE, c'est-à-dire sur des questions de compréhension — jamais sur ce qui
+   explique à quoi sert le nombre qu'on leur demande d'atteindre.
+   ⚠️ AUCUN VÉRIFICATEUR NE POUVAIT LE VOIR : LECTURE a de quoi passer le seuil
+   de renouvellement, et chaque micro ouvrait bien sa ligne. C'est exactement le
+   piège que `notions.ts` décrit — « un id mal choisi ne casse rien, il sert
+   simplement des questions hors sujet ».
+   Les deux repères manquants sont ajoutés ci-dessous et l'aiguillage accepte
+   maintenant les trois. Un élève de CM1 peut donc tomber sur le repère du CM2 :
+   c'est voulu, la méthode enseigne déjà la progression entière. */
 const FLUENCE_130: QcmItem[] = [
   {
     text: "Quel repère de fluence la classe de 6e vise-t-elle ?",
     correct: "environ 130 mots par minute",
     wrongs: ["60 mots par minute", "90 mots par minute", "200 mots par minute"],
     methode: "Le CM1 vise 110, le CM2 120, la 6e 130.",
+  },
+  {
+    text: "Quel repère de fluence la classe de CM1 vise-t-elle ?",
+    correct: "environ 110 mots par minute",
+    wrongs: ["60 mots par minute", "130 mots par minute", "200 mots par minute"],
+    methode: "Le CM1 vise 110, le CM2 120, la 6e 130 : dix mots de plus par an.",
+  },
+  {
+    text: "Quel repère de fluence la classe de CM2 vise-t-elle ?",
+    correct: "environ 120 mots par minute",
+    wrongs: ["90 mots par minute", "110 mots par minute", "150 mots par minute"],
+    methode: "Le CM1 vise 110, le CM2 120, la 6e 130 : dix mots de plus par an.",
   },
   {
     text: "Pourquoi viser un nombre de mots par minute ?",
@@ -8276,7 +8305,16 @@ function questionParMicro(microId: string): Generated | null {
     return qcm(MISE_EN_VOIX);
   }
   // Les trois trous de Lecture et Écriture relevés en 6e.
-  if (microId.includes("flue_130")) return qcm(FLUENCE_130);
+  /* ⭐ ÉLARGI AUX TROIS CLASSES LE 30/08/2026 : ce pool explique à quoi sert le
+     repère de mots par minute, et le CM1 comme le CM2 en ont autant besoin que
+     la 6e. Voir le commentaire au-dessus de FLUENCE_130. */
+  if (
+    microId.includes("flue_110") ||
+    microId.includes("flue_120") ||
+    microId.includes("flue_130")
+  ) {
+    return qcm(FLUENCE_130);
+  }
   if (microId.includes("comp_documents")) return qcm(DOCUMENTS);
   if (microId.includes("comp_image")) return qcm(IMAGE);
   /* ⚠️ `ecrit_copie` existe AUSSI au CM1 et au CM2, où il tombait jusqu'ici
