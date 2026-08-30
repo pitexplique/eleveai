@@ -255,13 +255,6 @@ export const ficheFluenceLectureCm1: FicheCoursData = {
     texte:
       "Si certains mots s'écrivent bizarrement, ce n'est pas pour t'embêter. Il y a très longtemps, des savants ont ajouté des lettres exprès. Ils ont mis un « g » dans « doigt ». Et un « d » dans « poids »... en se trompant. On écrit encore « poids » à cause de leur erreur, cinq cents ans après. Alors quand un mot te parait bizarre, tu as raison : il l'est vraiment.",
   },
-  formule: {
-    contexte: "Ce qui marche vraiment, et ça surprend.",
-    expression: "relis le même texte",
-    legende:
-      "À la deuxième fois, tu butes déjà moins. À la troisième, tu peux y mettre le ton. Si tu changes de texte, tu recommences tout à zéro.",
-    schema: relireLeMeme,
-  },
   methode: [
     {
       titre: "Note les mots qui te font buter",
@@ -282,26 +275,10 @@ export const ficheFluenceLectureCm1: FicheCoursData = {
       micros: ["cm1_flue_110_mots"],
     },
   ],
-  usages: [
-    {
-      titre: "Lire un livre sans abandonner",
-      detail: "Quand on arrête un livre, c'est souvent la fatigue. Pas l'histoire.",
-      schema: libererLaTete,
-      micros: ["cm1_flue_page"],
-    },
-    {
-      titre: "Lire à voix haute devant la classe",
-      detail: "Les points te disent où respirer. Sans eux, personne ne te suit.",
-      schema: parGroupes,
-      micros: ["cm1_flue_ponctuation"],
-    },
-    {
-      titre: "Ne plus trébucher sur les mêmes mots",
-      detail: "Ces mots reviennent sans arrêt. Les connaitre t'aide dans toutes tes lectures.",
-      schema: dechiffrerOuReconnaitre,
-      micros: ["cm1_flue_mots_irreguliers"],
-    },
-  ],
+  /* ⛔ VIDÉ LE 30/08 — voir l'entête. Au CM1 ce bloc redisait la méthode,
+     et douze blocs font une page de trente mille pixels. Le rendu saute un
+     tableau vide. */
+  usages: [],
   exemples: [
     {
       titre: "Essoufflé à la fin d'une page",

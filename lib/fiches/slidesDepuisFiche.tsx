@@ -38,16 +38,36 @@ export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
     },
   });
 
-  // 2. La définition, avec sa figure projetée à côté.
-  slides.push({
-    titre: "La définition",
-    badge: "À écrire dans le cahier",
-    schema: fiche.figure?.schema,
-    section: {
-      type: "objectif",
-      phrase: fiche.definition.texte,
-      ...(fiche.figure?.legende ? { sousPhrase: fiche.figure.legende } : {}),
-    },
+  /* 2. La définition, avec sa figure projetée à côté.
+     ⛔⛔ CORRIGÉ LE 30/08/2026. Frédéric, en projetant la fiche de CM1 :
+     « le deuxième écran de la fiche en mode classe, illisible ». Le champ
+     `phrase` d'une diapo `objectif` est rendu en TRÈS GROS — il est fait pour
+     une phrase, et l'on y déversait `fiche.definition.texte` en entier. Une
+     définition de cent mots donnait trois mots par ligne et défilait sans fin.
+     ⭐ Depuis que les définitions peuvent porter des sauts de ligne (voir
+     `whitespace-pre-line` dans `FicheCoursClient`, même jour), on projette UN
+     PARAGRAPHE PAR DIAPO au lieu de tout empiler. La figure et sa légende
+     restent sur la première, qui porte le titre ; les suivantes ne sont
+     numérotées que s'il y en a plusieurs.
+     ⚠️ Une définition sans saut de ligne retombe exactement sur l'ancien
+     comportement : une seule diapo, inchangée. */
+  const paragraphes = fiche.definition.texte
+    .split(/\n\s*\n/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+
+  (paragraphes.length ? paragraphes : [fiche.definition.texte]).forEach((p, i, tous) => {
+    slides.push({
+      titre: "La définition",
+      badge:
+        tous.length > 1 ? `À écrire dans le cahier · ${i + 1} / ${tous.length}` : "À écrire dans le cahier",
+      ...(i === 0 && fiche.figure?.schema ? { schema: fiche.figure.schema } : {}),
+      section: {
+        type: "objectif",
+        phrase: p,
+        ...(i === 0 && fiche.figure?.legende ? { sousPhrase: fiche.figure.legende } : {}),
+      },
+    });
   });
 
   // 3. UNE SLIDE PAR PROPRIÉTÉ — le bloc qui manquait entièrement.

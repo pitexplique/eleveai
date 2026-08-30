@@ -307,6 +307,15 @@ export default function FicheCoursClient({
         );
 
       case "reel":
+        /* ⭐ 30/08/2026 — les blocs à tableau savaient déjà disparaitre quand ils
+           étaient vides (`if (!fiche.proprietes.length) return null` et ses
+           frères) ; les deux blocs de TEXTE, non : ils rendaient une carte
+           colorée vide. Or c'est le seul levier qui raccourcit vraiment une
+           fiche — mesuré le même jour, les douze blocs du CM1 pèsent chacun
+           1 000 à 3 300 px et AUCUN ne domine : raccourcir ne suffit jamais, il
+           faut pouvoir en retirer. Une fiche qui laisse le texte vide ne montre
+           plus le bloc. */
+        if (!fiche.reel.texte.trim()) return null;
         return (
           <section className="pt-6 print:pt-4">
             <div className="rounded-2xl border border-sky-200 bg-sky-50 p-4">
@@ -322,6 +331,8 @@ export default function FicheCoursClient({
         );
 
       case "historique":
+        /* Même garde-fou que pour « reel » — voir le commentaire au-dessus. */
+        if (!fiche.historique.texte.trim()) return null;
         return (
           <section className="pt-4 print:pt-3">
             <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
