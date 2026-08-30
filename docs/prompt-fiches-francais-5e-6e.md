@@ -12,7 +12,7 @@
 francais 4e     19 notions   19 fichées   100 %   ⭐ FERMÉE
 francais 5e     28 notions   28 fichées   100 %   ⭐ FERMÉE
 francais 6e     29 notions   29 fichées   100 %   ⭐ FERMÉE
-francais cm2    27 notions   20 fichées    74 %   ← LE CHANTIER EN COURS
+francais cm2    27 notions   25 fichées    93 %   ← 2 EN ARBITRAGE, VOIR CI-DESSOUS
 francais cm1    25 notions    0 fichées     0 %
 francais 3e     19 notions    0 fichées     0 %
 francais 2de    16 notions    0 fichées     0 %
@@ -23,20 +23,31 @@ moitié fait.** Le CM2 est la suite naturelle, et pour une raison technique :
 
 ---
 
-## ⭐⭐ CE QUI RESTE AU CM2 — SEPT NOTIONS, DEUX GROUPES
+## ⛔⛔ CE QUI RESTE AU CM2 — UN ARBITRAGE, PAS DEUX FICHES À ÉCRIRE
 
-La **lecture** (5), la **culture** (3) et l'**écriture** (3) sont closes au
-29/08. Reste :
+Au 30/08, **25 des 27 notions ont leur propre fiche**. Lecture, culture,
+écriture, oral, vocabulaire et les deux notions de grammaire écrites ce jour-là
+sont closes. Les deux restantes ne s'écrivent pas sans une décision :
 
 ```
-oral    ×2   oral-ecouter · oral-echanger
-langue  ×5   vocabulaire-sens · vocabulaire-formation · vocabulaire-emploi
-             grammaire-nature-fonction · grammaire-pronoms
+grammaire_accords          5 micros   ⟍
+                                       ⟩→ REDIRIGENT toutes deux vers
+grammaire_groupe_nominal   5 micros   ⟋   francais/cm2/grammaire-orthographe
 ```
 
-⚠️ Deux fiches CM2 de langue existent déjà mais sont **antérieures au chantier**
-(`francais-cm2-conjugaison-formes`, `francais-cm2-grammaire-orthographe`) : voir
-plus bas, elles ne sont pas au format actuel.
+⛔ **Une seule fiche d'avant le chantier sert les deux notions** — 690 lignes,
+titrée « Analyser une phrase : nature, fonction, accords », atteinte par deux
+redirections déclarées dans `registre.ts` (~l. 1108). Cela contredit la règle
+« une notion = un objet cohérent », et depuis le 30/08 **son titre chevauche en
+plus `francais-cm2-grammaire-nature-fonction`**, qui traite la même distinction
+au format actuel.
+
+⚠️ **La découper n'est pas un travail d'écriture** : il faut décider ce que
+devient l'URL `francais/cm2/grammaire-orthographe`, qui a des PDF et compte dans
+les 481 pages soumises à l'indexation (échéance du 26/09). Ne rien faire sans
+Frédéric. La proposition à lui soumettre : deux fiches neuves
+(`grammaire-accords`, `grammaire-groupe-nominal`), et l'ancienne URL redirigée
+vers l'une des deux plutôt que supprimée.
 
 ## ⭐⭐ LA SIGNATURE DU CM2, REPÉRÉE EN ÉCRIVANT L'ÉCRITURE
 
@@ -52,9 +63,27 @@ avec la même mécanique — *celui qui n'a pas compris ne peut pas faire court*
 | `ecriture_preparer` | l'écrit de préparation est **plus court** que ce qu'il prépare |
 | `ecriture_reviser` | *(l'inverse, et c'est le même geste)* un brouillon **sans ratures** n'a rien fait |
 
-⭐ **À réutiliser pour les sept notions restantes** : chercher, dans chaque pool,
-la ligne qui donne une mesure visible sans juger de rien. C'est ce qui a donné
-les meilleures accroches du CM2, et c'est reproductible.
+⭐ **À réutiliser** : chercher, dans chaque pool, la ligne qui donne une mesure
+visible sans juger de rien. C'est ce qui a donné les meilleures accroches du CM2,
+et c'est reproductible. Les fiches du 30/08 l'ont confirmé six fois de plus —
+« plus court que ce qu'il prépare », « un brouillon sans ratures », « fais le
+dessin, est-il faux ? », « coupe : ça veut dire quelque chose ? », « cache le
+reste de la phrase », « devant le verbe ? c'est un pronom ».
+
+## ⭐⭐ LA SECONDE SIGNATURE DU CM2 : LA PHRASE DÉCIDE
+
+Repérée le 30/08 en écrivant la langue, et elle traverse quatre notions :
+
+| Notion | Ce que la phrase décide |
+|---|---|
+| `vocabulaire_sens` | le dictionnaire donne des sens, **la phrase en choisit un** |
+| `vocabulaire_formation` | sauf pour les **homonymes**, où couper le mot ne sert à rien : retour à la phrase |
+| `vocabulaire_emploi` | le sens ne suffit pas, **la place** compte aussi (adjectif-nom, adverbe-verbe) |
+| `grammaire_nature_fonction` | le dictionnaire donne la nature, **la phrase donne la fonction** |
+| `grammaire_pronoms` | l'**exception** qui rend la règle visible : le seul mot où la fonction se voit sur le mot |
+
+⭐ Les deux dernières se lisent **dans cet ordre** : la fiche des pronoms éclaire
+celle de la nature et de la fonction.
 
 ⭐⭐ **LE CM2 PARTAGE LE PROGRAMME ET LES BANQUES DE LA 6e.** Même BO (cycle 3,
 n° 16 du 17 avril 2025), même générateur `buildCycle3FrancaisBank.ts`, mêmes
