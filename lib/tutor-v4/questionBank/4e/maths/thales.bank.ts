@@ -11,6 +11,28 @@ function randomChoice<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+/**
+ * ⭐ LES NOMMAGES DE LA CONFIGURATION DE THALÈS, ajoutés le 30/08/2026.
+ *
+ * ⛔ Les trois gabarits de `thales_configuration` ne fabriquaient que deux
+ * énoncés chacun, parce qu'ils écrivaient toujours « le triangle ABC, M sur
+ * [AB], N sur [AC] ». Ce n'est pas qu'un problème de compteur : un élève qui ne
+ * voit jamais que ces lettres-là retient une IMAGE au lieu d'une configuration,
+ * et se bloque dès qu'un exercice nomme les points autrement.
+ *
+ * ⚠️ `A` est toujours le SOMMET commun aux deux droites sécantes — c'est la
+ * géométrie du canvas, seuls les noms changent. Pas de I ni de O, qui se
+ * confondent avec 1 et 0.
+ */
+const NOMS_THALES: { A: string; B: string; C: string; M: string; N: string }[] = [
+  { A: "A", B: "B", C: "C", M: "M", N: "N" },
+  { A: "S", B: "T", C: "U", M: "E", N: "F" },
+  { A: "R", B: "P", C: "Q", M: "K", N: "L" },
+  { A: "D", B: "G", C: "H", M: "V", N: "W" },
+  { A: "F", B: "J", C: "L", M: "P", N: "R" },
+  { A: "E", B: "X", C: "Y", M: "G", N: "H" },
+];
+
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
@@ -117,13 +139,20 @@ export const thalesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Thalès nécessite une droite parallèle à un côté du triangle.",
     tags: ["thales_theoreme_theoreme", "configuration", "template", "canvas"],
+    // ⛔ RÉPARÉ LE 30/08/2026 : ce gabarit ne fabriquait que DEUX énoncés, un
+    // par branche. Sa réponse variait déjà — c'était son seul mérite.
+    // ⭐ Les points sont maintenant tirés d'une table de nommages. Ce n'est pas
+    // cosmétique : un élève qui ne voit jamais que « ABC avec M et N » retient
+    // des LETTRES au lieu de la configuration, et se bloque dès qu'un exercice
+    // nomme les points autrement.
     generate: () => {
       const parallel = randomChoice([true, false]);
+      const n = randomChoice(NOMS_THALES);
 
       return {
         text: parallel
-          ? "Dans le triangle ABC, M est sur [AB], N est sur [AC] et (MN) est parallèle à (BC). Peut-on utiliser Thalès ?"
-          : "Dans le triangle ABC, M est sur [AB], N est sur [AC], mais on ne sait pas si (MN) est parallèle à (BC). Peut-on utiliser Thalès directement ?",
+          ? `Dans le triangle ${n.A}${n.B}${n.C}, ${n.M} est sur [${n.A}${n.B}], ${n.N} est sur [${n.A}${n.C}] et (${n.M}${n.N}) est parallèle à (${n.B}${n.C}). Peut-on utiliser Thalès ?`
+          : `Dans le triangle ${n.A}${n.B}${n.C}, ${n.M} est sur [${n.A}${n.B}] et ${n.N} est sur [${n.A}${n.C}], mais on ne sait pas si (${n.M}${n.N}) est parallèle à (${n.B}${n.C}). Peut-on utiliser Thalès directement ?`,
         format: "qcm",
         choices: ["oui", "non"],
         expected: [parallel ? "oui" : "non"],
