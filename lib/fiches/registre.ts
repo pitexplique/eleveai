@@ -481,6 +481,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Un mot n'est à toi que quand tu peux l'écrire dans une phrase à toi. Niveaux de langue, réemploi, orthographe des mots fréquents, dictionnaire.",
   },
+  "francais/cm2/grammaire-nature-fonction": {
+    titre: "Nature et fonction d'un mot en CM2 (2026-2027)",
+    resume:
+      "La nature est dans le dictionnaire, la fonction est dans la phrase. Le test du doigt : cache le reste — peux-tu encore répondre ?",
+  },
   "francais/cm2/grammaire-orthographe": {
     titre: "Analyser une phrase : nature, fonction, accords",
     resume:
