@@ -29,19 +29,88 @@ function shuffle<T>(items: readonly T[]): T[] {
   return [...items].sort(() => Math.random() - 0.5);
 }
 
+/** ⭐ DEUX, TROIS OU QUATRE PROPOSITIONS — quatre est un maximum, jamais une
+ *  norme. Le cycle 4 tire sa taille ainsi depuis le 25/08/2026 ; le cycle 3, non
+ *  — son `makeChoices` coupait à trois distracteurs sans jamais tirer, donc CM1,
+ *  CM2 et 6e servaient QUATRE propositions à toutes leurs questions. Aligné le
+ *  30/08/2026 sur décision de Frédéric. */
+const TAILLES: readonly number[] = [2, 3, 3, 4, 4, 4];
+
+/** ⭐⭐ UN SAC, PAS UN DÉ — Frédéric, le 30/08/2026 : « il faut que 2, 3 ou 4
+ *  soit alterné, non ? ». Tirer `TAILLES` au hasard à chaque question laisse les
+ *  tailles se regrouper : à une chance sur six pour le 2, un élève qui fait dix
+ *  questions a environ une chance sur six de n'en voir AUCUNE à deux
+ *  propositions. On distribue donc les six tailles mélangées et l'on remélange
+ *  quand le sac est vide : les proportions sont garanties toutes les six
+ *  questions, et l'ordre reste imprévisible à l'intérieur du sac. */
+let sacDeTailles: number[] = [];
+
+function tailleSuivante(): number {
+  if (!sacDeTailles.length) sacDeTailles = shuffle(TAILLES);
+  return sacDeTailles.pop() as number;
+}
+
+/** ⛔⛔ À DEUX PROPOSITIONS, C'EST L'ÉTENDUE ENTIÈRE DU POOL QUI SE DEVINE, et
+ *  non plus l'écart entre les deux plus longues lignes : un seul leurre est
+ *  tiré, et le pire cas oppose la ligne la plus longue à la plus courte. L'élève
+ *  choisit alors sans lire.
+ *  ⭐ Plutôt que de resserrer l'étendue de tous les pools du cycle 3 — gros
+ *  travail, et il coute des mots justes —, on supprime le tell là où il est
+ *  dangereux : à DEUX, le leurre se tire parmi les DEUX PLUS PROCHES EN LONGUEUR
+ *  de la bonne réponse. Deux et non un, sinon le même leurre reviendrait à
+ *  chaque service et la variété tomberait.
+ *  ⚠️ À trois et à quatre, on garde le tirage au hasard : il est mesuré juste
+ *  (`verifier-propositions-qcm.ts`, écart max 1.9σ), et l'y toucher serait du
+ *  travail pour rien. */
+function leurreLePlusProche(correct: string, candidats: readonly string[]): string[] {
+  const parEcart = [...candidats].sort(
+    (a, b) =>
+      Math.abs(a.length - correct.length) - Math.abs(b.length - correct.length),
+  );
+  return shuffle(parEcart.slice(0, 2)).slice(0, 1);
+}
+
+/** ⭐⭐ CE QUE MESURE LA DEVINABILITÉ : « la bonne réponse est-elle la plus
+ *  longue ? ». Réduire le nombre de propositions l'aggrave mécaniquement — moins
+ *  de concurrentes, plus de chances que la bonne l'emporte en longueur. Mesuré
+ *  le 30/08/2026 sur le CM1 : 36,0 % à quatre propositions partout, 38,6 % après
+ *  le passage au sac {2,3,4}, pour une cible de 35 %.
+ *  ⭐ LE REMÈDE NE TOUCHE PAS AU CONTENU : si le pool contient un leurre AU MOINS
+ *  AUSSI LONG que la bonne réponse, on s'assure qu'il en reste un dans le tirage.
+ *  On ne raccourcit jamais la bonne réponse et l'on n'invente aucun leurre — on
+ *  choisit seulement mieux parmi ceux qui sont déjà écrits.
+ *  ⚠️ Si le pool n'a que des leurres plus courts, il n'y a rien à faire ici :
+ *  c'est le pool qu'il faut réécrire, et `verifier-devinabilite-runtime.ts` le
+ *  nomme item par item. */
+function garderUnLeurreAussiLong(
+  correct: string,
+  tires: readonly string[],
+  candidats: readonly string[],
+): string[] {
+  if (tires.some((d) => d.length >= correct.length)) return [...tires];
+  const assezLongs = candidats.filter((c) => c.length >= correct.length);
+  if (!assezLongs.length || !tires.length) return [...tires];
+  // On remplace le PLUS COURT des tirés : c'est celui qui servait le moins.
+  const remplace = [...tires].sort((a, b) => a.length - b.length)[0];
+  return [pick(assezLongs), ...tires.filter((d) => d !== remplace)];
+}
+
 function makeChoices(correct: string, wrongs: readonly string[]) {
   // Jamais deux fois la même ligne. Un gabarit dont le piège coïncide avec la
   // bonne réponse (les coordonnées inversées quand x = y, un arrondi égal à la
   // valeur de départ…) affichait la même proposition deux fois, et l'élève
-  // voyait deux réponses justes. Dédupliquer AVANT de couper à quatre laisse
-  // aussi une chance aux distracteurs surnuméraires de prendre la place.
+  // voyait deux réponses justes. Dédupliquer AVANT de couper laisse aussi une
+  // chance aux distracteurs surnuméraires de prendre la place.
   // ⚠️ 04/08/2026 — la bonne réponse était jetée dans le même chapeau que les
   // pièges : à cinq pièges écrits, le mélange pouvait la laisser au fond et
   // le découpage à quatre l'emportait. L'élève voyait alors quatre pièges et
-  // rien d'autre. On la met de côté, on tire trois distracteurs, on mélange.
-  const distracteurs = shuffle(
-    Array.from(new Set(wrongs)).filter((w) => w !== correct),
-  ).slice(0, 3);
+  // rien d'autre. On la met de côté, on tire les distracteurs, on mélange.
+  const candidats = Array.from(new Set(wrongs)).filter((w) => w !== correct);
+  const taille = tailleSuivante();
+  const distracteurs =
+    taille === 2 && candidats.length > 1
+      ? leurreLePlusProche(correct, candidats)
+      : garderUnLeurreAussiLong(correct, shuffle(candidats).slice(0, taille - 1), candidats);
   return shuffle([correct, ...distracteurs]);
 }
 
