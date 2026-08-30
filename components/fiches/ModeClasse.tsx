@@ -71,6 +71,22 @@ export type ClasseSlide = {
 const BTN_REVELER =
   "mt-8 self-start rounded-full bg-emerald-500 px-8 py-5 text-2xl font-black text-white shadow-lg shadow-emerald-500/30 transition hover:bg-emerald-400";
 
+/** ⭐ LA TAILLE D'UNE PHRASE PROJETÉE DÉPEND DE SA LONGUEUR (30/08/2026).
+ *  Les seuils sont calés sur ce qui tient dans la colonne de gauche du mode
+ *  classe, la plus étroite : une phrase de quarante signes garde la pleine
+ *  taille, trois phrases descendent de deux crans.
+ *  ⚠️ On ne descend jamais sous `text-2xl` : au-delà, mieux vaut raccourcir le
+ *  texte de la fiche que le rendre illisible du fond de la classe. Le
+ *  conteneur garde son `overflow-y-auto` comme filet — il ne doit plus servir,
+ *  mais couper du texte serait pire que le faire défiler. */
+function tailleProjetee(texte: string): string {
+  const n = texte.length;
+  if (n <= 40) return "text-5xl";
+  if (n <= 90) return "text-4xl";
+  if (n <= 170) return "text-3xl";
+  return "text-2xl";
+}
+
 function Section({
   section,
   revealed,
@@ -81,15 +97,24 @@ function Section({
   reveal: () => void;
 }) {
   switch (section.type) {
+    // ⛔⛔ UNE DIAPO DOIT TENIR DANS L'ÉCRAN — Frédéric, le 30/08/2026, capture à
+    // l'appui : « pas bien, il faut une hauteur de section maximum ». Sur la
+    // propriété 4, le titre était coupé en haut et le texte débordait en bas.
+    // La cause : `phrase` était rendu à `text-5xl` QUELLE QUE SOIT SA LONGUEUR.
+    // Trois phrases à cette taille, dans une colonne étroite, ne peuvent pas
+    // tenir — et le conteneur se contentait de défiler.
+    // ⭐ `tailleProjetee` fait donc dépendre la taille du NOMBRE DE SIGNES. Pas
+    // de mesure au rendu, pas de JavaScript : le calcul est le même au premier
+    // affichage qu'au redimensionnement, et il ne peut pas osciller.
     case "objectif":
       return (
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <p className="text-5xl font-black leading-tight text-slate-950">
+            <p className={`${tailleProjetee(section.phrase)} font-black leading-tight text-slate-950`}>
               {section.phrase}
             </p>
             {section.sousPhrase ? (
-              <p className="mt-6 text-3xl font-bold leading-snug text-slate-700">
+              <p className="mt-6 text-2xl font-bold leading-snug text-slate-700 lg:text-3xl">
                 {section.sousPhrase}
               </p>
             ) : null}
@@ -389,9 +414,18 @@ export default function ModeClasse({
         </div>
       </header>
 
-      <section className="flex flex-1 items-center overflow-y-auto px-6 py-8">
-        <div className="mx-auto w-full max-w-7xl rounded-[2rem] border-4 border-white bg-white/90 p-10 shadow-2xl shadow-emerald-900/10">
-          <div className="mb-8 flex flex-wrap items-start justify-between gap-4">
+      {/* ⭐ HAUTEUR DE DIAPO — 30/08/2026, demande de Frédéric : « il faut une
+          hauteur de section maximum ». Mesure à 1280×800 AVANT de toucher à
+          quoi que ce soit : 11 diapos sur 28 débordaient, au pire de 196 px.
+          Le cout fixe venait des MARGES, pas du texte : `py-8` + `p-10` + `mb-8`
+          perdent à eux seuls plus de 200 px en haut et en bas. Ils se resserrent
+          donc sur les écrans courts et retrouvent leur ampleur en `lg`.
+          ⚠️ La toute première mesure, faite dans un panneau de 49 px de haut,
+          annonçait « les 28 débordent, jusqu'à 1978 px ». Un étalon cassé
+          invente un problème : fixer la fenêtre AVANT de conclure. */}
+      <section className="flex flex-1 items-center overflow-y-auto px-6 py-3 lg:py-6">
+        <div className="mx-auto w-full max-w-7xl rounded-[2rem] border-4 border-white bg-white/90 p-5 shadow-2xl shadow-emerald-900/10 lg:p-8">
+          <div className="mb-3 flex flex-wrap items-start justify-between gap-4 lg:mb-6">
             <div>
               <p className="text-2xl font-black uppercase text-emerald-700">
                 {slide.badge}

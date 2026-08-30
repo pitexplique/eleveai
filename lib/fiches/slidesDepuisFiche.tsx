@@ -82,15 +82,27 @@ export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
 
   // 4. Le réel et l'histoire : les deux blocs par lesquels Frédéric commence
   //    ses cours.
-  slides.push({
-    titre: "À quoi ça sert ?",
-    badge: "Utilité & histoire",
-    section: {
-      type: "duo",
-      gauche: { variante: "info", titre: "Au quotidien", contenu: fiche.reel.texte },
-      droite: { variante: "histoire", titre: "Le savais-tu ?", contenu: fiche.historique.texte },
-    },
-  });
+  /* ⛔ SCINDÉE LE 30/08/2026. Cette diapo empilait `reel` ET `historique` : 820
+     signes sur un seul écran, et elle débordait de 176 px à 1280×800 — le pire
+     cas de toute la fiche. Deux textes longs côte à côte ne tiennent pas, et
+     rien n'obligeait à les projeter ensemble. Une idée par écran.
+     ⚠️ Chacune ne parait que si son texte existe : les garde-fous ajoutés le
+     même jour dans `FicheCoursClient` permettent à une fiche de laisser un de
+     ces blocs vide, et le mode classe doit suivre. */
+  if (fiche.reel.texte.trim()) {
+    slides.push({
+      titre: "À quoi ça sert ?",
+      badge: "Au quotidien",
+      section: { type: "objectif", phrase: fiche.reel.texte },
+    });
+  }
+  if (fiche.historique.texte.trim()) {
+    slides.push({
+      titre: "Le savais-tu ?",
+      badge: "Un peu d'histoire",
+      section: { type: "objectif", phrase: fiche.historique.texte },
+    });
+  }
 
   // 5. La formule, quand la notion en a une.
   if (fiche.formule) {
@@ -165,36 +177,23 @@ export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
     });
   });
 
-  // 9. Pièges et à-retenir, face à face.
-  slides.push({
-    titre: "Pièges & à retenir",
-    badge: "Vigilance",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "piege",
-        titre: "Pièges à éviter",
-        contenu: (
-          <ul className="space-y-3">
-            {fiche.pieges.map((p) => (
-              <li key={p}>{p}</li>
-            ))}
-          </ul>
-        ),
-      },
-      droite: {
-        variante: "ok",
-        titre: "À retenir",
-        contenu: (
-          <ul className="space-y-3">
-            {fiche.aRetenir.map((a) => (
-              <li key={a}>{a}</li>
-            ))}
-          </ul>
-        ),
-      },
-    },
-  });
+  /* ⛔ SCINDÉE LE 30/08/2026, pour la même raison que « à quoi ça sert » : cinq
+     pièges ET cinq lignes d'à-retenir sur un écran font 678 signes, et la diapo
+     débordait de 158 px. Chaque liste a maintenant le sien. */
+  if (fiche.pieges.length) {
+    slides.push({
+      titre: "Pièges à éviter",
+      badge: "Vigilance",
+      section: { type: "etapes", etapes: fiche.pieges },
+    });
+  }
+  if (fiche.aRetenir.length) {
+    slides.push({
+      titre: "À retenir",
+      badge: "L'essentiel",
+      section: { type: "etapes", etapes: fiche.aRetenir },
+    });
+  }
 
   // 10. Les exercices, un par slide : de quoi finir l'heure au tableau.
   fiche.entrainement.forEach((ex, i) => {
