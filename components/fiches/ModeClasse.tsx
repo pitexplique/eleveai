@@ -441,8 +441,29 @@ export default function ModeClasse({
           {slide.schema ? (
             // Le dessin à gauche, le texte à droite : en vidéoprojection, la
             // figure est ce qu'on regarde, elle prend la moitié de l'écran.
-            <div className="grid gap-10 lg:grid-cols-2">
-              <div className="mx-auto w-full max-w-xl [&_svg]:w-full">{slide.schema}</div>
+            <div className="grid gap-6 lg:grid-cols-2 lg:gap-10">
+              {/* ⛔ LE DESSIN ÉTAIT LA VRAIE CAUSE DU DÉBORDEMENT — mesuré le
+                  30/08/2026 sur la diapo 20 : contenu 850 px pour 701 visibles,
+                  dont 355 px de SVG. J'avais d'abord accusé la longueur des
+                  textes et je les ai raccourcis pour rien : la mesure n'a bougé
+                  que de 7 px. Le canvas se rendait à sa taille naturelle.
+                  ⭐ Il est maintenant plafonné à 40 % de la hauteur d'écran et
+                  se met à l'échelle sans se déformer. Un dessin plus petit reste
+                  à sa taille : le plafond ne s'applique qu'aux grands. */}
+              {/* ⚠️ Plafonner le SVG pendant qu'il garde `w-full` ne sert à rien :
+                  la largeur impose la hauteur par le rapport d'image. C'est le
+                  CONTENEUR qu'il faut borner, en laissant le dessin s'y adapter.
+                  ⛔⛔ MAIS CE PLAFOND NE RÈGLE PAS LES DÉBORDEMENTS RESTANTS, et
+                  il ne faut pas le croire : mesuré le 30/08, les sept diapos qui
+                  dépassent encore (au pire 149 px) n'empruntent PAS ce chemin.
+                  Elles sont de type `exemple` et dessinent leur figure DANS la
+                  section, sous `grid gap-8 lg:grid-cols-[1fr_0.85fr]`. C'est là
+                  qu'il faudra porter le même plafond. Trois mesures identiques
+                  au pixel près m'ont mis sur la piste — quand un chiffre ne
+                  bouge pas d'un iota, le correctif n'atteint pas sa cible. */}
+              <div className="mx-auto flex max-h-[42vh] w-full max-w-xl items-center justify-center overflow-hidden [&_svg]:max-h-full [&_svg]:w-auto [&_svg]:max-w-full">
+                {slide.schema}
+              </div>
               <Section
                 section={slide.section}
                 revealed={revealed}

@@ -178,7 +178,7 @@ export const ficheFluenceLectureCm1: FicheCoursData = {
   notion: "fluence-lecture",
   titre: "Lire avec fluidité en CM1 (2026-2027)",
   accroche:
-    "On te dira peut-être « lis plus vite ». Ce conseil ne marche pas, et ce n'est pas ta faute. Personne n'apprend à lire vite en se dépêchant. Ce qui t'aide, c'est de reconnaitre les mots d'un seul coup d'œil — et ça, ça s'apprend.",
+    "On te dira peut-être « lis plus vite ». Ce conseil ne marche pas. Ce qui t'aide, c'est de reconnaitre les mots d'un coup d'œil. Et ça, ça s'apprend.",
   identite: [
     { label: "Mots clés", valeur: "Lire sans buter" },
     { label: "Le secret", valeur: "Lire vite ne s'apprend pas" },
@@ -249,11 +249,14 @@ export const ficheFluenceLectureCm1: FicheCoursData = {
   ],
   reel: {
     texte:
-      "Souviens-toi de ta première fois à vélo. Tu pensais aux pédales, au guidon, à l'équilibre. Tu ne voyais même pas la route. Aujourd'hui tu pédales sans y penser, et tu regardes où tu vas. La lecture, c'est pareil. Tant que tu déchiffres, il ne te reste plus de place pour l'histoire. Ça viendra, comme le vélo est venu. Et personne n'a jamais appris le vélo en pédalant plus vite.",
+      // ⚠️ 232 signes — plafond de 250 pour un texte projeté (mesuré le 30/08 :
+      // au-delà, la diapo du mode classe déborde de l'écran).
+      "Ta première fois à vélo, tu pensais aux pédales, au guidon, à l'équilibre. Tu ne voyais même pas la route. Aujourd'hui tu pédales sans y penser. La lecture, c'est pareil : ça viendra. Et personne n'apprend le vélo en pédalant plus vite.",
   },
   historique: {
     texte:
-      "Si certains mots s'écrivent bizarrement, ce n'est pas pour t'embêter. Il y a très longtemps, des savants ont ajouté des lettres exprès. Ils ont mis un « g » dans « doigt ». Et un « d » dans « poids »... en se trompant. On écrit encore « poids » à cause de leur erreur, cinq cents ans après. Alors quand un mot te parait bizarre, tu as raison : il l'est vraiment.",
+      // ⚠️ 228 signes — même plafond de 250.
+      "Si certains mots s'écrivent bizarrement, ce n'est pas pour t'embêter. Il y a très longtemps, des savants ont ajouté des lettres exprès : un « g » dans « doigt », un « d » dans « poids ». Quand un mot te parait bizarre, tu as raison.",
   },
   methode: [
     {
@@ -286,7 +289,7 @@ export const ficheFluenceLectureCm1: FicheCoursData = {
       schema: libererLaTete,
       question: "Qu'est-ce que ça montre ?",
       solution:
-        "Que lire te demande encore beaucoup d'efforts. Ce n'est pas ton souffle qui manque : c'est ta tête qui travaille trop sur les lettres. C'est normal, et ça va s'arranger.",
+        "Que lire te demande encore des efforts. Ce n'est pas ton souffle : c'est ta tête qui travaille sur les lettres. C'est normal.",
       micros: ["cm1_flue_page"],
     },
     {
@@ -295,7 +298,7 @@ export const ficheFluenceLectureCm1: FicheCoursData = {
       schema: dechiffrerOuReconnaitre,
       question: "Ça marche ?",
       solution:
-        "Non, et ce n'est pas toi le problème. Ce mot ne se découpe pas : on le reconnait d'un coup d'œil, comme une image. C'est pareil pour « femme », « oignon » et « temps ».",
+        "Non, et ce n'est pas toi le problème. Ce mot ne se découpe pas : on le reconnait d'un coup d'œil, comme une image.",
       micros: ["cm1_flue_mots_irreguliers"],
     },
     {
@@ -304,7 +307,7 @@ export const ficheFluenceLectureCm1: FicheCoursData = {
       schema: motsIrreguliers,
       question: "Pourquoi eux ?",
       solution:
-        "Parce que ces mots-là sont justement les plus courants. Ce ne sont pas des mots rares : ils reviennent presque à chaque ligne. Tout le monde bute dessus.",
+        "Parce que ce sont justement les plus courants. Ils reviennent presque à chaque ligne. Tout le monde bute dessus.",
       micros: ["cm1_flue_mots_irreguliers"],
     },
     {
@@ -313,22 +316,22 @@ export const ficheFluenceLectureCm1: FicheCoursData = {
       schema: troisReperes,
       question: "Pourquoi ?",
       solution:
-        "Parce que si lire devient facile, ta tête est libre pour suivre l'histoire. Ce n'est ni une course ni un classement. Comprendre, c'est ça qui compte.",
+        "Parce que si lire devient facile, ta tête est libre pour l'histoire. Ce n'est pas une course. Comprendre, c'est ça qui compte.",
       micros: ["cm1_flue_110_mots"],
     },
   ],
   pieges: [
-    "Se forcer à lire vite : tu vas vite, et tu ne retiens rien.",
-    "Découper un mot comme « femme » : ça ne donnera jamais « fem-me ».",
+    "Se forcer à lire vite : tu ne retiens rien.",
+    "Découper « femme » : ça ne donnera jamais « fem-me ».",
     "Lire mot à mot : la phrase est coupée en morceaux.",
-    "Ne pas voir les points : ce sont eux qui disent où respirer.",
-    "Changer de texte à chaque fois : c'est en relisant qu'on progresse.",
+    "Sauter les points : ce sont eux qui disent où respirer.",
+    "Changer de texte à chaque fois : on progresse en relisant.",
   ],
   aRetenir: [
-    "110 mots par minute, ça mesure. Ça ne te fait pas lire mieux.",
-    "Certains mots ne se découpent pas : on les reconnait d'un coup d'œil.",
-    "Et ce sont les mots les plus courants — donc tout le monde bute dessus.",
-    "On lit plusieurs mots d'un coup, et on respire aux points.",
+    "110 mots par minute, ça mesure. Ça n'apprend rien.",
+    "Certains mots ne se découpent pas : on les reconnait.",
+    "Et ce sont les plus courants : tout le monde bute dessus.",
+    "On lit plusieurs mots d'un coup. On respire aux points.",
     "On progresse en relisant le même texte.",
   ],
   entrainement: [
