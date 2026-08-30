@@ -81,6 +81,35 @@ export const notions: NotionSource[] = [
     levels: [1, 2, 3],
   },
   {
+    // ⭐ NOTION OUVERTE LE 30/08/2026. Elle REPREND L'IDENTIFIANT DE LA 5e, qui
+    // porte déjà `div_multiple_diviseur`, `div_critere_2_5_10`,
+    // `div_critere_3_9`, `div_lister_diviseurs` et `div_defi` : la progression
+    // verticale reste continue, et la 4e ajoute ce que le BO y place — la
+    // DIVISION EUCLIDIENNE et les PROBLÈMES de divisibilité.
+    // ⚠️ Le nouveau programme fait passer cet attendu en 3e à partir de
+    // septembre 2027 : il ne servira la 4e qu'une année. C'est pour cela qu'il
+    // a été traité en dernier — pas parce qu'il pesait peu, il pesait DIX
+    // puces, le plus gros bloc restant du programme.
+    id: "divisibilite",
+    label: "Multiples, diviseurs et division euclidienne",
+    boId: "BO4N5",
+    prerequis: ["relatif_operation"],
+    levels: [1, 2, 3],
+  },
+  {
+    // ⭐ SECONDE NOTION, ET LA FRACTURE EST À SENS UNIQUE : décomposer un nombre
+    // en facteurs premiers a BESOIN des diviseurs et des critères, alors que
+    // reconnaître un multiple n'a aucun besoin des nombres premiers.
+    // ⛔ Tout mettre dans `divisibilite` l'aurait portée à onze micros — et le
+    // fichier de la 5e le dit déjà : « au-delà de huit micro-compétences,
+    // l'élève ne voit plus où il en est ».
+    id: "nombre_premier",
+    label: "Nombres premiers et décomposition",
+    boId: "BO4N6",
+    prerequis: ["divisibilite"],
+    levels: [1, 2, 3],
+  },
+  {
     // ⭐ NOTION OUVERTE LE 30/08/2026, et le découpage se justifie par une LIGNE
     // DE FRACTURE À SENS UNIQUE dans les prérequis : un ordre de grandeur a
     // BESOIN de la notation scientifique pour s'écrire, alors que la notation

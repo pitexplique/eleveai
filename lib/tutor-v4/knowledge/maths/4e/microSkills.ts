@@ -210,6 +210,98 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     DIVISIBILITÉ  (ouverte le 30/08/2026)
+
+     ⭐ QUATRE MICROS REPRENNENT LEURS IDENTIFIANTS DE LA 5e, à l'identique —
+     `div_multiple_diviseur`, `div_critere_2_5_10`, `div_critere_3_9`,
+     `div_lister_diviseurs`. C'est le motif qui a marché huit fois : trouver la
+     notion sœur, reprendre ses identifiants pour la continuité verticale, puis
+     ajouter ce que le BO place ici.
+
+     ⭐ CE QUE LA 4e AJOUTE : la DIVISION EUCLIDIENNE, avec son quotient et son
+     reste, et les PROBLÈMES de divisibilité — engrenages, conjonction de
+     phénomènes. Les deux sont des puces du BO à part entière.
+
+     ⚠️ Le critère par 4 n'est PAS au programme : le BO n'énonce que 2, 3, 5, 9
+     dans les connaissances et 2, 3, 5, 9, 10 dans les compétences.
+  ========================= */
+  {
+    id: "div_multiple_diviseur",
+    label: "Reconnaître un multiple et un diviseur",
+    notionId: "divisibilite",
+    prerequis: [],
+  },
+  {
+    id: "div_critere_2_5_10",
+    label: "Utiliser les critères de divisibilité par 2, 5 et 10",
+    notionId: "divisibilite",
+    prerequis: ["div_multiple_diviseur"],
+  },
+  {
+    id: "div_critere_3_9",
+    label: "Utiliser les critères de divisibilité par 3 et 9",
+    notionId: "divisibilite",
+    prerequis: ["div_multiple_diviseur"],
+  },
+  {
+    id: "div_euclidienne",
+    label: "Poser une division euclidienne et lire son quotient et son reste",
+    notionId: "divisibilite",
+    prerequis: ["div_multiple_diviseur"],
+  },
+  {
+    id: "div_lister_diviseurs",
+    label: "Lister tous les diviseurs d'un nombre",
+    notionId: "divisibilite",
+    prerequis: ["div_critere_2_5_10", "div_critere_3_9"],
+  },
+  {
+    id: "div_probleme",
+    label: "Résoudre un problème de divisibilité",
+    notionId: "divisibilite",
+    prerequis: ["div_lister_diviseurs", "div_euclidienne"],
+  },
+  {
+    id: "div_defi",
+    label: "Défis sur les multiples et les diviseurs",
+    notionId: "divisibilite",
+    prerequis: ["div_probleme", "div_lister_diviseurs"],
+  },
+
+  /* =========================
+     NOMBRES PREMIERS  (ouverte le 30/08/2026)
+
+     ⭐ LA NUANCE DU BO À NE PAS RATER : la LISTE à connaître s'arrête à 30
+     (4e-A-divisibilite-4), mais la COMPÉTENCE demande de DÉTERMINER les
+     premiers jusqu'à 100 (4e-A-divisibilite-7). Retenir et savoir trouver sont
+     deux micros, pas une seule.
+  ========================= */
+  {
+    id: "premier_definition",
+    label: "Reconnaître un nombre premier et connaître la liste jusqu'à 30",
+    notionId: "nombre_premier",
+    prerequis: ["div_lister_diviseurs"],
+  },
+  {
+    id: "premier_determiner",
+    label: "Déterminer les nombres premiers jusqu'à 100",
+    notionId: "nombre_premier",
+    prerequis: ["premier_definition", "div_critere_3_9"],
+  },
+  {
+    id: "premier_decomposer",
+    label: "Décomposer un entier en produit de facteurs premiers",
+    notionId: "nombre_premier",
+    prerequis: ["premier_definition", "div_euclidienne"],
+  },
+  {
+    id: "premier_defi",
+    label: "Défis sur les nombres premiers",
+    notionId: "nombre_premier",
+    prerequis: ["premier_decomposer", "premier_determiner"],
+  },
+
+  /* =========================
      ORDRES DE GRANDEUR ET PRÉFIXES  (ouvert le 30/08/2026)
 
      ⭐ La notion ferme TROIS puces du thème A : les préfixes de nano à giga

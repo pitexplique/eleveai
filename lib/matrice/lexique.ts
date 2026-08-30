@@ -166,6 +166,28 @@ export const NOTIONS: NotionLexique[] = [
     id: "nombres-decimaux", label: "les nombres décimaux", matiere: "maths",
     alias: ["decimal", "decimaux", "virgule", "dixieme", "centieme", "nombre a virgule"],
   },
+  // ⛔ DEUX ENTRÉES AJOUTÉES LE 30/08/2026, ET LE TROU DÉPASSAIT LARGEMENT LA
+  // 4e. Mesuré en appelant `lireNotion` : « divisibilité », « diviseurs »,
+  // « nombre premier », « facteurs premiers » et « critère de divisibilité »
+  // renvoyaient tous `null` — alors que la 5e a `divisibilite` et la 3e
+  // `entier_arithmetique` depuis des mois, celle-ci portant même la
+  // décomposition en facteurs premiers. Les trois classes entrent ensemble.
+  //
+  // ⚠️ ELLES SONT PLACÉES AVANT `calcul`, PARCE QUE LE PREMIER QUI ACCROCHE
+  // GAGNE : « multiple », « diviseur » et « division euclidienne » tombaient
+  // dans le calcul, qui n'a AUCUNE entrée en 4e — l'élève arrivait donc sur la
+  // page générale du coach.
+  {
+    id: "divisibilite", label: "la divisibilité", matiere: "maths",
+    alias: ["divisibilite", "divisible", "diviseur", "diviseurs", "multiple", "multiples", "division euclidienne", "critere de divisibilite", "criteres de divisibilite", "quotient et reste"],
+  },
+  {
+    // ⚠️ « premier » SEUL n'est pas un alias, et « décomposition » non plus :
+    // le premier degré, le premier terme d'une suite, la décomposition additive
+    // du CM1 leur voleraient des questions. Il faut le mot entier.
+    id: "nombres_premiers", label: "les nombres premiers", matiere: "maths",
+    alias: ["nombre premier", "nombres premiers", "facteurs premiers", "decomposition en facteurs premiers", "decomposer en facteurs", "crible", "eratosthene"],
+  },
   {
     id: "calcul", label: "le calcul", matiere: "maths",
     alias: ["calcul", "calculs", "calculer", "addition", "additionner", "soustraction", "soustraire", "multiplication", "multiplier", "division", "diviser", "table", "tables", "tables de multiplication", "poser une operation", "compter"],

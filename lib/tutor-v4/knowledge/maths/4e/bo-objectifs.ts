@@ -282,8 +282,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Comprendre et utiliser les notions de divisibilité et de nombres premiers",
     objectif: "Multiples et diviseurs.",
     page: 132,
-    micros: [],
-    note: "⛔ TROU. Attendu de fin de cycle ENTIÈREMENT absent. ⚠️ Le nouveau programme le fait passer en 3e à partir de septembre 2027 : il ne servira la 4e qu'une année. À traiter en dernier.",
+    micros: ["div_multiple_diviseur"],
+    note: "✅ COMBLÉ LE 30/08/2026 par la notion `divisibilite`, qui reprend l'identifiant ET les micros de la 5e. ⭐ Multiple et diviseur sont une SEULE relation dite dans les deux sens — comme « parent » et « enfant » — et c'est ce que la micro fait travailler avant tout calcul.",
   },
   {
     id: "4e-A-divisibilite-2",
@@ -291,8 +291,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Comprendre et utiliser les notions de divisibilité et de nombres premiers",
     objectif: "Critères de divisibilité par 2, 3, 5, 9.",
     page: 132,
-    micros: [],
-    note: "⛔ TROU.",
+    micros: ["div_critere_2_5_10","div_critere_3_9"],
+    note: "✅ COMBLÉ LE 30/08/2026, en deux micros parce que les deux familles de critères n'ont pas la même MÉTHODE : 2, 5 et 10 ne regardent que le chiffre des unités, 3 et 9 passent par la somme des chiffres. Les confondre fait rater les deux. ⚠️ Le critère par 4 n'apparaît nulle part, pas même comme leurre : le BO ne l'énonce pas, et un leurre enseigne autant qu'une bonne réponse.",
   },
   {
     id: "4e-A-divisibilite-3",
@@ -300,8 +300,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Comprendre et utiliser les notions de divisibilité et de nombres premiers",
     objectif: "Division euclidienne (quotient, reste).",
     page: 132,
-    micros: [],
-    note: "⛔ TROU en 4e. Acquis de 6e (`entier_division_posee`), jamais réactivé ici.",
+    micros: ["div_euclidienne"],
+    note: "✅ COMBLÉ LE 30/08/2026. ⭐ Le canvas `calcul_pose` porte la potence avec son champ `division` — dividende, diviseur, quotient, reste — et MONTRE que le reste est ce qui n'a pas pu être distribué. ⚠️ Un item figé traite la seconde moitié de la définition, celle qu'on oublie : la condition 0 ⩽ r < b. C'est elle qui rend le couple (quotient, reste) UNIQUE.",
   },
   {
     id: "4e-A-divisibilite-4",
@@ -310,8 +310,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Définition d'un nombre premier ; liste des nombres premiers inférieurs ou égaux à 30.",
     page: 132,
-    micros: [],
-    note: "⛔ TROU. ⭐ La nuance à ne pas rater : la LISTE s'arrête à 30 pour les connaissances, mais la COMPÉTENCE (4e-A-divisibilite-7) demande de déterminer les premiers ≤ 100.",
+    micros: ["premier_definition"],
+    note: "✅ COMBLÉ LE 30/08/2026 par la notion `nombre_premier`. ⭐⭐ LA NUANCE DU BO EST RESPECTÉE : cette puce est une CONNAISSANCE et s'arrête à 30 ; la compétence 4e-A-divisibilite-7 demande de DÉTERMINER jusqu'à 100. Ce sont deux micros, pas une. ⚠️ Un item figé traite le cas de 1, qui n'est pas premier — et pas par convention : il n'a qu'UN diviseur alors que la définition en demande exactement deux. L'accepter détruirait l'unicité de la décomposition.",
   },
   {
     id: "4e-A-divisibilite-5",
@@ -329,8 +329,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Déterminer si un entier est ou n'est pas multiple ou diviseur d'un autre entier.",
     page: 132,
-    micros: [],
-    note: "⛔ TROU.",
+    micros: ["div_multiple_diviseur","div_critere_2_5_10"],
+    note: "✅ COMBLÉ LE 30/08/2026. C'est la compétence qui correspond à la connaissance -1 : reconnaître la relation d'un côté, la TESTER de l'autre. Le test passe par le reste de la division, et « presque divisible » n'existe pas.",
   },
   {
     id: "4e-A-divisibilite-7",
@@ -338,8 +338,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Comprendre et utiliser les notions de divisibilité et de nombres premiers",
     objectif: "Déterminer les nombres premiers inférieurs ou égaux à 100.",
     page: 132,
-    micros: [],
-    note: "⛔ TROU.",
+    micros: ["premier_determiner"],
+    note: "✅ COMBLÉ LE 30/08/2026, et le vrai contenu de la compétence est le POINT D'ARRÊT du crible : jusqu'à 100, quatre tests suffisent — 2, 3, 5 et 7 — parce que 11² = 121 dépasse déjà 100. Un item figé le traite comme la valeur particulière qu'il est. ⭐ Un élève qui teste jusqu'à 99 n'a pas compris le crible ; c'est le seul endroit où l'on peut mesurer s'il l'a compris.",
   },
   {
     id: "4e-A-divisibilite-8",
@@ -347,8 +347,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Comprendre et utiliser les notions de divisibilité et de nombres premiers",
     objectif: "Utiliser les critères de divisibilité par 2, 3, 5, 9, 10.",
     page: 132,
-    micros: [],
-    note: "⛔ TROU. ⚠️ Noter le 10, qui figure dans la compétence mais pas dans la connaissance (4e-A-divisibilite-2).",
+    micros: ["div_critere_2_5_10","div_critere_3_9","div_defi"],
+    note: "✅ COMBLÉ LE 30/08/2026. ⭐ Le défi fait appliquer les CINQ critères d'un coup sur un même nombre, ce qu'aucune micro isolée ne demande — et il fait travailler les implications : si 9 marche, 3 marche forcément ; si 10 marche, 2 et 5 marchent forcément.",
   },
   {
     id: "4e-A-divisibilite-9",
@@ -357,8 +357,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Déterminer les diviseurs d'un nombre à la main, à l'aide d'un tableur, d'une calculatrice.",
     page: 132,
-    micros: [],
-    note: "⛔ TROU.",
+    micros: ["div_lister_diviseurs"],
+    note: "✅ COMBLÉ LE 30/08/2026. ⭐ La méthode enseignée est la recherche PAR PAIRES, qui garantit de n'oublier aucun diviseur — chaque diviseur trouvé en donne un second, et on s'arrête quand les deux se croisent. ⚠️ TROU ASSUMÉ dans la puce : « à l'aide d'un tableur, d'une calculatrice » ne s'évalue pas en QCM. C'est un geste de classe.",
   },
   {
     id: "4e-A-divisibilite-10",
@@ -367,8 +367,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Décomposer un nombre entier en produit de facteurs premiers (à la main ou à l'aide d'un logiciel).",
     page: 132,
-    micros: [],
-    note: "⛔ TROU.",
+    micros: ["premier_decomposer", "premier_defi"],
+    note: "✅ COMBLÉ LE 30/08/2026. ⚠️ C'est une COMPÉTENCE ASSOCIÉE du BO, au même rang qu'« utiliser les critères » ou « simplifier une fraction » — et les attendus de fin d'année de 4e sur eduscol la citent nommément. Elle n'est donc pas un extra. ⭐ Un second gabarit lui donne son emploi : c'est en décomposant le haut et le bas qu'on voit d'un coup tout ce qui se barre dans une fraction.",
   },
   {
     id: "4e-A-divisibilite-11",
@@ -385,8 +385,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Modéliser et résoudre des problèmes mettant en jeu la divisibilité (engrenages, conjonction de phénomènes, etc.).",
     page: 132,
-    micros: [],
-    note: "⛔ TROU.",
+    micros: ["div_probleme","div_defi"],
+    note: "✅ COMBLÉ LE 30/08/2026, avec les DEUX familles que la puce nomme. Les lots à constituer sans reste appellent un DIVISEUR commun, le plus GRAND. Les bus qui se recroisent appellent un MULTIPLE commun, le plus PETIT. ⚠️ Les deux mots se ressemblent et les deux calculs sont inverses : c'est l'erreur centrale du chapitre, et chaque corrigé la nomme. Le PGCD et le PPCM ne sont pas au programme de 4e : la recherche se fait en listant.",
   },
 
   // ─── Utiliser le calcul littéral ───────────────────────────────────────────

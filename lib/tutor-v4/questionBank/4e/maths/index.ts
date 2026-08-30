@@ -41,6 +41,8 @@ import { grandeursBank } from "./grandeurs.bank";
 import { fonctionsBank } from "./fonctions.bank";
 import { trianglesBank } from "./triangles.bank";
 import { ordresGrandeurBank } from "./ordres-grandeur.bank";
+import { divisibiliteBank } from "./divisibilite.bank";
+import { nombresPremiersBank } from "./nombres-premiers.bank";
 
 
 // =========================
@@ -57,6 +59,8 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...pythagoreBank,
   ...trianglesBank,
   ...ordresGrandeurBank,
+  ...divisibiliteBank,
+  ...nombresPremiersBank,
   ...transformationsBank,
   ...probabilitesBank,
   ...frequencesBank,

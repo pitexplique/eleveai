@@ -87,6 +87,32 @@ const supportLinks: Record<string, string[]> = {
   ],
 
   // =========================
+  // DIVISIBILITÉ ET NOMBRES PREMIERS
+  // =========================
+  // ⭐ La remédiation descend vers les TABLES DE MULTIPLICATION et le calcul :
+  // c'est là que l'élève bloque quand un critère ou un diviseur lui échappe.
+  // ⚠️ `fraction_simplifier` est un SUPPORT, pas un enfant : simplifier une
+  // fraction, c'est chercher un diviseur commun — les deux se soutiennent.
+  div_critere_2_5_10: ["div_multiple_diviseur"],
+  div_critere_3_9: ["div_multiple_diviseur", "relatif_calcul"],
+  div_euclidienne: ["div_multiple_diviseur", "fraction_decimal"],
+  div_lister_diviseurs: [
+    "div_critere_2_5_10",
+    "div_critere_3_9",
+    "div_multiple_diviseur",
+  ],
+  div_probleme: ["div_lister_diviseurs", "div_euclidienne"],
+  div_defi: ["div_probleme", "div_lister_diviseurs", "div_critere_3_9"],
+  premier_definition: ["div_lister_diviseurs", "div_critere_2_5_10"],
+  premier_determiner: ["premier_definition", "div_critere_3_9"],
+  premier_decomposer: [
+    "premier_definition",
+    "div_euclidienne",
+    "fraction_simplifier",
+  ],
+  premier_defi: ["premier_decomposer", "premier_determiner"],
+
+  // =========================
   // ORDRES DE GRANDEUR ET PRÉFIXES
   // =========================
   // ⭐ Les liens de remédiation descendent tous vers les PUISSANCES DE DIX :

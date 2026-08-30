@@ -42,6 +42,17 @@ export const bo: KnowledgeBoCompetence[] = [
     boId: "BO4N4",
     label: "Ordres de grandeur et préfixes",
   },
+  // ⭐ AJOUTÉS LE 30/08/2026 avec les deux notions d'arithmétique. Le BO leur
+  // consacre un chapitre entier — « Comprendre et utiliser les notions de
+  // divisibilité et de nombres premiers » — et douze puces.
+  {
+    boId: "BO4N5",
+    label: "Multiples, diviseurs et division euclidienne",
+  },
+  {
+    boId: "BO4N6",
+    label: "Nombres premiers et décomposition",
+  },
   {
     boId: "BO4P1",
     label: "Proportionnalité",

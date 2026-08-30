@@ -127,6 +127,28 @@ export const NOTION_COACH_MATHS: TableNotions = {
   ratio: {
     "5e": "prop_ratio_pourcentage", "4e": "prop_ratio_pourcentage",
   },
+  // ⭐ AJOUTÉES LE 30/08/2026 avec les deux notions d'arithmétique de 4e. ⛔ Et
+  // le trou dépassait la 4e de loin : « divisibilité », « diviseurs » et
+  // « nombre premier » n'ouvraient RIEN, alors que la 5e a `divisibilite` et la
+  // 3e `entier_arithmetique` depuis des mois. Les trois classes entrent
+  // ensemble.
+  // ⚠️ Le CM1, le CM2 et la 6e y figurent aussi, et ce n'est pas un remplissage.
+  // « multiple » et « diviseur » étaient jusqu'ici des alias de `calcul`, et ils
+  // ouvraient donc quelque chose dans ces classes-là. Les omettre ici les aurait
+  // renvoyées à la page générale du coach : une régression.
+  divisibilite: {
+    cm1: "calcul",
+    cm2: "calcul",
+    "6e": "entier_calcul_mental",
+    "5e": "divisibilite",
+    "4e": "divisibilite",
+    "3e": "entier_arithmetique",
+  },
+  // ⚠️ Les nombres premiers n'existent qu'en 4e et en 3e : avant, ni notion ni
+  // micro. La case vide n'est pas un oubli, c'est le programme.
+  nombres_premiers: {
+    "4e": "nombre_premier", "3e": "entier_arithmetique",
+  },
   // ⭐ AJOUTÉ LE 30/08/2026 avec la notion `ordre_grandeur` de 4e. ⛔ Et là
   // encore le trou dépassait la 4e : « ordre de grandeur » n'ouvrait rien dans
   // AUCUNE classe, alors que la première a `auto_ordres_unites` depuis
