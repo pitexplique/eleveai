@@ -374,6 +374,16 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Nano, micro, milli, kilo, méga, giga : des puissances de dix écrites en un mot — associer un ordre de grandeur à un objet, estimer un calcul en arrondissant, et juger un résultat sans le refaire.",
   },
+  "maths/4e/divisibilite": {
+    titre: "Multiples, diviseurs et division euclidienne",
+    resume:
+      "Savoir si une division tombe juste sans la poser : les critères par 2, 3, 5, 9 et 10, le quotient et le reste — et pourquoi l'égalité seule ne suffit pas à écrire une division euclidienne.",
+  },
+  "maths/4e/nombre-premier": {
+    titre: "Nombres premiers et décomposition",
+    resume:
+      "Exactement deux diviseurs : la liste jusqu'à 30, le crible jusqu'à 100 — et pourquoi 91 a l'air premier alors qu'il vaut 7 × 13.",
+  },
   "maths/4e/grandeur-composee": {
     titre: "Grandeurs composées et unités",
     resume:
