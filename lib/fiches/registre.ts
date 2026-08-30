@@ -451,6 +451,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Réviser ajoute quelque chose au texte ; recopier ne fait que le déplacer. Un brouillon sans une seule rature n'a rien retravaillé.",
   },
+  "francais/cm2/oral-ecouter": {
+    titre: "Écouter pour comprendre en CM2 (2026-2027)",
+    resume:
+      "Reformuler prouve qu'on a compris ; synthétiser prouve qu'on a trié. Faire court par oubli fait court aussi — et ce n'est pas une synthèse.",
+  },
   "francais/cm2/grammaire-orthographe": {
     titre: "Analyser une phrase : nature, fonction, accords",
     resume:
