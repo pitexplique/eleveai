@@ -94,9 +94,24 @@ par un — `OEUVRE`, `DOCUMENTS`, `IMAGE`, `REPRISES`, `LIENS_LOGIQUES`,
 attaque le CM2 relit donc surtout des choses déjà lues : le travail est un
 RENIVELLEMENT, pas une découverte.
 
-⚠️ **MAIS LE CM1 GARDE UNE NOTION FOURRE-TOUT**, `comprehension_textes_documents`,
-et le générateur y tire à pile ou face entre deux pools — c'est écrit et assumé
-dans `questionForNotion`. À traiter avant de ficher le CM1.
+⭐ **~~LE CM1 GARDE UNE NOTION FOURRE-TOUT~~ — PLUS VRAI, vérifié le 30/08.** Le
+CM1 déclare aujourd'hui `comprehension_textes` ET `comprehension_documents`,
+comme le CM2 et la 6e : `grep -rn 'id: "comprehension_textes_documents"'
+lib/tutor-v4/knowledge/` ne renvoie plus rien. Le pile ou face de
+`questionForNotion` était donc une **branche morte**, dont le commentaire
+affirmait le contraire du code ; elle a été retirée le 30/08.
+
+⭐ **ET LA CLASSE EST MESURÉE PRÊTE** (30/08) : `105/105` micros ouvrent leur
+ligne, médiane de **16 énoncés générés** par micro (minimum 12), 18 900 tirages
+sans anomalie. Rien à réparer avant d'écrire.
+
+⛔⛔ **EN REVANCHE, LA VRAIE DIFFICULTÉ DU CM1 EST AILLEURS, ET ELLE EST INÉDITE :
+21 DE SES 25 NOTIONS PORTENT UN NOM DÉJÀ PRIS PAR LE CM2.** Quatre seulement lui
+sont propres — `grammaire_types_phrases`, `grammaire_classes_mots`,
+`vocabulaire_relations`, `conjugaison_passe_compose`. Chaque fiche de CM1 demande
+donc un tableau de séparation **à TROIS colonnes** (CM1 / CM2 / 6e), là où le CM2
+n'en demandait que deux. Une fiche de CM1 qui répète celle du CM2 ne vaut rien :
+c'est le point de vigilance n° 1 de ce chantier.
 
 ### ⛔⛔ LE PIÈGE DE CLASSE, MESURÉ SEPT FOIS SUR SEPT
 

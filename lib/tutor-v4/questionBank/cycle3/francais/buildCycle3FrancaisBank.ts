@@ -8299,10 +8299,16 @@ function questionForNotion(notionId: string, microId: string): Generated {
      6e distingue maintenant les deux, et le CM2 aussi (`comprehension_textes`
      et `comprehension_documents`). On sert le pool que la notion annonce. */
   if (notionId === "comprehension_documents") return qcm(DOCUMENT);
-  /* ⏳ LE CM1 GARDE LE MÉLANGE, ET C'EST VOLONTAIRE. Sa notion s'appelle encore
-     `comprehension_textes_documents` : elle porte les deux, le pile ou face y
-     est donc honnête. Il tombera quand le CM1 sera relu sur le BO à son tour. */
-  if (notionId.includes("textes_documents")) return Math.random() < 0.5 ? qcm(LECTURE) : qcm(DOCUMENT);
+  /* ⭐ LE PILE OU FACE EST TOMBÉ. Il servait la notion fourre-tout du CM1,
+     `comprehension_textes_documents`, qui portait les deux titres du BO à la
+     fois. Le CM1 a depuis été relu et découpé : il déclare `comprehension_textes`
+     et `comprehension_documents`, comme le CM2 et la 6e.
+     ⚠️ VÉRIFIÉ LE 30/08/2026 avant de retirer la branche —
+     `grep -rn 'id: "comprehension_textes_documents"' lib/tutor-v4/knowledge/`
+     ne renvoie plus rien, dans AUCUNE classe. La branche était donc morte, et
+     son commentaire affirmait le contraire de ce que le code faisait.
+     Les deux notions tombent maintenant où il faut : `comprehension_documents`
+     sur la ligne au-dessus, `comprehension_textes` sur celle en dessous. */
   if (notionId.includes("comprehension")) return qcm(LECTURE);
   if (notionId.includes("oeuvre")) return qcm(OEUVRE);
   if (notionId.includes("ecriture")) return qcm(ECRITURE);
