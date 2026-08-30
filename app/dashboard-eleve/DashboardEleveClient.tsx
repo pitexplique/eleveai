@@ -499,17 +499,13 @@ export default function DashboardEleveClient() {
             </p>
           </div>
 
-          <div className="mt-3 flex flex-wrap items-center gap-3">
-            <Link
-              href="/votre-avis"
-              className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-3 text-sm font-black text-white shadow-lg transition hover:bg-emerald-500"
-            >
-              🛠️ Donner mon avis sur EleveAI
-            </Link>
-            <p className="text-sm font-semibold text-slate-600">
-              Un bug, une idée, une note : chaque retour améliore la plateforme.
-            </p>
-          </div>
+          {/* ⛔ « DONNER MON AVIS » N'EST PLUS ICI (29/08/2026). Frédéric :
+              « donner mon avis est important mais peut-être pas en haut ».
+              Il occupait la ligne juste sous « Faire des exercices », dans le
+              bloc d'accueil : deux boutons pleins, côte à côte, dont un seul
+              mène à ce que l'élève est venu faire. L'appel n'est pas supprimé
+              — il descend en bas de page, après les outils. Voir la bande en
+              fin de composant. */}
         </div>
 
         {bulletin && (
@@ -562,45 +558,10 @@ export default function DashboardEleveClient() {
           </div>
         )}
 
-        {avisRepondus.length > 0 && (
-          <div className="mt-6 rounded-[2rem] border border-emerald-200 bg-white p-6 shadow-xl">
-            <h2 className="text-xl font-black text-slate-900">
-              💬 L&apos;équipe EleveAI a répondu à mes avis
-            </h2>
-            <p className="mt-1 text-sm font-semibold text-slate-500">
-              Tes avis, bugs et idées envoyés depuis « Donner mon avis », et la
-              réponse de l&apos;équipe EleveAI.
-            </p>
-            <ul className="mt-4 space-y-3">
-              {avisRepondus.map((a) => (
-                <li
-                  key={a.id}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
-                >
-                  <p className="text-xs font-bold text-slate-400">
-                    {TYPE_AVIS_LABEL[a.type ?? ""] ?? "Retour"}
-                    {a.note ? ` · ${"★".repeat(Math.round(a.note))}` : ""} ·{" "}
-                    {formatDate(a.created_at)}
-                  </p>
-                  {a.message ? (
-                    <p className="mt-1 whitespace-pre-wrap text-sm font-medium text-slate-800">
-                      {a.message}
-                    </p>
-                  ) : null}
-                  <div className="mt-3 rounded-xl border border-emerald-200 bg-emerald-50 p-3">
-                    <p className="text-xs font-black uppercase tracking-wide text-emerald-700">
-                      👩‍🏫 Réponse de l&apos;équipe EleveAI
-                      {a.reponse_at ? ` · ${formatDate(a.reponse_at)}` : ""}
-                    </p>
-                    <p className="mt-1 whitespace-pre-wrap text-sm font-semibold text-emerald-900">
-                      {a.reponse}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {/* ⛔ LE BLOC « L'ÉQUIPE A RÉPONDU À MES AVIS » EST DESCENDU EN BAS
+            (29/08/2026). Il s'ouvrait ici, avant même les résultats de
+            l'élève. Il est maintenant dans la zone d'avis en fin de page, avec
+            le bouton et les points — voir la fin de ce composant. */}
 
         {loading ? (
           <div className="mt-6 rounded-3xl bg-white p-6 font-black text-slate-700 shadow-xl">
@@ -694,21 +655,15 @@ export default function DashboardEleveClient() {
               </div>
             )}
 
-            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-6">
-              <div className="rounded-[2rem] bg-gradient-to-br from-fuchsia-500 to-violet-600 p-5 text-white shadow-xl">
-                <p className="text-sm font-black uppercase text-white/80">
-                  🏅 Mes points avis
-                </p>
-
-                <p className="mt-3 text-3xl font-black">{pointsAvis}</p>
-
-                <p className="mt-2 text-sm font-bold text-white/80">
-                  <a href="/votre-avis" className="underline underline-offset-2 hover:text-white">
-                    Donne ton avis pour en gagner →
-                  </a>
-                </p>
-              </div>
-
+            {/* ⛔ LA TUILE « MES POINTS AVIS » N'EST PLUS ICI (29/08/2026).
+                Frédéric : « enlève avis et mets-le que en bas ». Elle ouvrait
+                la rangée de statistiques — première tuile, la seule en dégradé
+                plein — devant « Dernier parcours » et les scores. Le compteur
+                n'est pas perdu : il est repris dans la bande d'avis en bas de
+                page, avec le bouton.
+                ⚠️ La grille passe de six colonnes à CINQ : sans ça, les cinq
+                tuiles restantes laissaient un trou en bout de rangée. */}
+            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
               <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-emerald-100">
                 <p className="text-sm font-black uppercase text-emerald-700">
                   Dernier parcours
@@ -1374,8 +1329,88 @@ export default function DashboardEleveClient() {
                 Dictée du jour
               </Link>
             </div>
+
           </>
         )}
+
+        {/* ═══ TOUT L'AVIS, ET RIEN QU'EN BAS (29/08/2026) ══════════════════
+            Frédéric : « donner mon avis est important mais peut-être pas en
+            haut », puis « enlève avis et mets-le que en bas ».
+
+            Trois morceaux vivaient en haut de page et se disputaient
+            l'attention avec ce que l'élève vient faire :
+              — le bouton plein « Donner mon avis », posé juste sous « Faire
+                des exercices », dans le bloc d'accueil ;
+              — la tuile « Mes points avis », première de la rangée de
+                statistiques, la seule en dégradé, devant « Dernier parcours » ;
+              — le bloc des réponses de l'équipe, ouvert avant les résultats.
+
+            ⭐ RIEN N'EST SUPPRIMÉ, tout est réuni ici, après les outils — le
+            coach, le parcours, le calcul rapide, la dictée. C'est-à-dire au
+            moment où l'élève a effectivement quelque chose à dire.
+
+            ⚠️ ET C'EST HORS DU TERNAIRE `loading`, volontairement : une
+            réponse de l'équipe doit s'afficher même pendant le chargement des
+            résultats, ou si leur chargement échoue. */}
+        {avisRepondus.length > 0 && (
+          <div className="mt-8 rounded-[2rem] border border-emerald-200 bg-white p-6 shadow-xl">
+            <h2 className="text-xl font-black text-slate-900">
+              💬 L&apos;équipe EleveAI a répondu à mes avis
+            </h2>
+            <p className="mt-1 text-sm font-semibold text-slate-500">
+              Tes avis, bugs et idées envoyés depuis « Donner mon avis », et la
+              réponse de l&apos;équipe EleveAI.
+            </p>
+            <ul className="mt-4 space-y-3">
+              {avisRepondus.map((a) => (
+                <li
+                  key={a.id}
+                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                >
+                  <p className="text-xs font-bold text-slate-400">
+                    {TYPE_AVIS_LABEL[a.type ?? ""] ?? "Retour"}
+                    {a.note ? ` · ${"★".repeat(Math.round(a.note))}` : ""} ·{" "}
+                    {formatDate(a.created_at)}
+                  </p>
+                  {a.message ? (
+                    <p className="mt-1 whitespace-pre-wrap text-sm font-medium text-slate-800">
+                      {a.message}
+                    </p>
+                  ) : null}
+                  <div className="mt-3 rounded-xl border border-emerald-200 bg-emerald-50 p-3">
+                    <p className="text-xs font-black uppercase tracking-wide text-emerald-700">
+                      👩‍🏫 Réponse de l&apos;équipe EleveAI
+                      {a.reponse_at ? ` · ${formatDate(a.reponse_at)}` : ""}
+                    </p>
+                    <p className="mt-1 whitespace-pre-wrap text-sm font-semibold text-emerald-900">
+                      {a.reponse}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <div className="mt-6 rounded-[2rem] border border-emerald-200 bg-emerald-50/60 p-5 shadow-sm">
+          <div className="flex flex-wrap items-center gap-4">
+            <Link
+              href="/votre-avis"
+              className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-3 text-sm font-black text-white shadow-lg transition hover:bg-emerald-500"
+            >
+              🛠️ Donner mon avis sur EleveAI
+            </Link>
+            <p className="text-sm font-semibold text-slate-600">
+              Un bug, une idée, une note : chaque retour améliore la plateforme.
+            </p>
+            {/* Le compteur reprend ce que portait la tuile retirée de la
+                rangée de statistiques — l'incitation aux points reste visible,
+                elle change juste de place. */}
+            <p className="ml-auto rounded-2xl bg-white px-4 py-2 text-sm font-black text-fuchsia-700 shadow-sm ring-1 ring-fuchsia-100">
+              🏅 {pointsAvis} point{pointsAvis > 1 ? "s" : ""} avis
+            </p>
+          </div>
+        </div>
       </section>
     </main>
   );
