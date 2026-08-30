@@ -476,6 +476,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Un mot est fait de morceaux, et c'est le sens du morceau qui compte, pas sa forme. Préfixes, suffixes, racines, mots composés et homonymes.",
   },
+  "francais/cm2/vocabulaire-emploi": {
+    titre: "Employer les mots en CM2 : niveaux de langue et dictionnaire (2026-2027)",
+    resume:
+      "Un mot n'est à toi que quand tu peux l'écrire dans une phrase à toi. Niveaux de langue, réemploi, orthographe des mots fréquents, dictionnaire.",
+  },
   "francais/cm2/grammaire-orthographe": {
     titre: "Analyser une phrase : nature, fonction, accords",
     resume:
