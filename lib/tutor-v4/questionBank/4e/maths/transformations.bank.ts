@@ -26,6 +26,39 @@ function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
 
+function randomInt(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+/**
+ * ⭐ LES FIGURES DES SYMÉTRIES, ajoutées le 30/08/2026.
+ *
+ * ⛔ Elles réparent un défaut qui dépassait le compteur de renouvellement :
+ * cinq gabarits sur six posaient LA MÊME question sur LA MÊME figure, et
+ * attendaient TOUJOURS « oui ». Un élève qui répondait « oui » sans regarder le
+ * dessin avait tout juste. La question ne mesurait rien.
+ *
+ * ⚠️ Les formes sont ASYMÉTRIQUES exprès. Une figure qui a déjà un axe de
+ * symétrie ne permet pas de distinguer un demi-tour d'un miroir : les deux
+ * donnent le même dessin, et le piège devient injuste.
+ *
+ * Les champs de langue évitent les « le/la » faux dans l'énoncé généré.
+ */
+const FIGURES_SYM: {
+  article: string;
+  pronom: string;
+  du: string;
+  e: string;
+  points: { x: number; y: number }[];
+}[] = [
+  { article: "Le triangle", pronom: "il", du: "du triangle", e: "", points: [{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 2 }] },
+  { article: "Le fanion", pronom: "il", du: "du fanion", e: "", points: [{ x: 0, y: 0 }, { x: 0, y: 2 }, { x: 2, y: 1 }] },
+  { article: "La flèche", pronom: "elle", du: "de la flèche", e: "e", points: [{ x: 0, y: 1 }, { x: 2, y: 0 }, { x: 2, y: 2 }] },
+  { article: "L'équerre", pronom: "elle", du: "de l'équerre", e: "e", points: [{ x: 0, y: 0 }, { x: 2, y: 0 }, { x: 0, y: 1 }] },
+  { article: "Le drapeau", pronom: "il", du: "du drapeau", e: "", points: [{ x: 0, y: 0 }, { x: 0, y: 2 }, { x: 1, y: 2 }] },
+  { article: "La voile", pronom: "elle", du: "de la voile", e: "e", points: [{ x: 0, y: 0 }, { x: 1, y: 2 }, { x: 2, y: 0 }, { x: 1, y: 1 }] },
+];
+
 function transformationCanvas(
   data: Omit<TransformationCanvasData, "kind">
 ): TransformationCanvasData {
@@ -92,39 +125,39 @@ export const transformationsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Dans une symétrie axiale, l’axe est au milieu entre un point et son image.",
     tags: ["transformation", "symetrie_axiale", "template", "canvas"],
+    // ⛔⛔ RÉPARÉ LE 30/08/2026, MÊME DÉFAUT QUE LES SYMÉTRIES CENTRALES : la
+    // réponse attendue était TOUJOURS « oui », sur une figure toujours
+    // identique. Répondre « oui » sans regarder donnait tout juste.
+    // ⭐ Le « non » enseigne ici l'erreur la plus fréquente de la symétrie
+    // axiale : la figure GLISSÉE au lieu d'être retournée. Elle est à la bonne
+    // distance de l'axe, mais elle a gardé son sens.
     generate: () => {
-      const axisX = randomChoice([4, 5]);
-
+      const fig = randomChoice(FIGURES_SYM);
+      const axisX = randomInt(4, 6);
+      const source = fig.points.map((p) => ({ x: axisX - 3 + p.x, y: 2 + p.y }));
+      const juste = source.map((p) => ({ x: 2 * axisX - p.x, y: p.y }));
+      const correcte = Math.random() < 0.5;
+      // La figure GLISSÉE : on la translate de l'autre côté de l'axe sans
+      // inverser son sens. C'est l'erreur la plus fréquente, et elle se
+      // reconnaît à ce que la figure « regarde » toujours du même côté.
+      const fausse = source.map((p) => ({ x: p.x + 5, y: p.y }));
       return {
-        text: "La figure rouge est-elle l’image de la figure bleue par symétrie axiale ?",
+        text: `${fig.article} rouge est-${fig.pronom} l'image ${fig.du} bleu${fig.e} par la symétrie d'axe vertical ?`,
         format: "qcm",
         choices: ["oui", "non"],
-        expected: ["oui"],
+        expected: [correcte ? "oui" : "non"],
         comparator: "mcq_exact",
         explanation:
-          "Définition : une symétrie axiale utilise un axe comme miroir.\n\n" +
-          "Méthode : on vérifie que chaque point et son image sont à la même distance de l’axe.\n\n" +
-          "Calcul : l’axe est la médiatrice des segments reliant les points à leurs images.\n\n" +
-          "Conclusion : la figure rouge est bien l’image par symétrie axiale.",
+          "Définition : dans une symétrie axiale, l'axe est un MIROIR : il est la médiatrice de chaque segment reliant un point à son image.\n\n" +
+          "Méthode : on compte les carreaux entre un point et l'axe, puis entre l'axe et l'image. Les deux doivent être égaux — et la figure doit avoir changé de SENS.\n\n" +
+          (correcte
+            ? "Calcul : chaque point est à la même distance de l'axe que son image, de l'autre côté.\n\nConclusion : oui, c'est bien l'image par cette symétrie."
+            : "Calcul : ⚠️ la figure a été GLISSÉE, pas retournée : elle a gardé son sens, et ses points ne sont pas à la bonne distance de l'axe.\n\nConclusion : non. ⭐ Une symétrie axiale INVERSE le sens — c'est ce qu'on vérifie en premier, avant même de compter les carreaux."),
         canvas: transformationCanvas({
           transformation: "symetrie_axiale",
-          grid: { rows: 8, cols: 10 },
-          source: {
-            label: "F",
-            points: [
-              { x: axisX - 3, y: 2 },
-              { x: axisX - 1, y: 2 },
-              { x: axisX - 2, y: 4 },
-            ],
-          },
-          image: {
-            label: "F'",
-            points: [
-              { x: axisX + 3, y: 2 },
-              { x: axisX + 1, y: 2 },
-              { x: axisX + 2, y: 4 },
-            ],
-          },
+          grid: { rows: 8, cols: 12 },
+          source: { label: "F", points: source },
+          image: { label: "F'", points: correcte ? juste : fausse },
           axis: { type: "vertical", x: axisX, label: "axe" },
         }),
       };
@@ -240,39 +273,48 @@ export const transformationsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le centre est le milieu entre chaque point et son image.",
     tags: ["transformation", "symetrie_centrale", "template", "canvas"],
-    generate: () => ({
-      text: "La figure rouge est-elle l’image de la figure bleue par symétrie centrale de centre O ?",
-      format: "qcm",
-      choices: ["oui", "non"],
-      expected: ["oui"],
-      comparator: "mcq_exact",
-      explanation:
-        "Définition : une symétrie centrale est un demi-tour autour d’un centre.\n\n" +
-        "Méthode : on vérifie que O est le milieu entre chaque point et son image.\n\n" +
-        "Calcul : les points correspondants sont alignés avec O et à la même distance de O.\n\n" +
-        "Conclusion : la figure rouge est bien l’image par symétrie centrale.",
-      canvas: transformationCanvas({
-        transformation: "symetrie_centrale",
-        grid: { rows: 8, cols: 8 },
-        source: {
-          label: "F",
-          points: [
-            { x: 2, y: 2 },
-            { x: 3, y: 2 },
-            { x: 2, y: 4 },
-          ],
-        },
-        image: {
-          label: "F'",
-          points: [
-            { x: 6, y: 6 },
-            { x: 5, y: 6 },
-            { x: 6, y: 4 },
-          ],
-        },
-        center: { point: { x: 4, y: 4 }, label: "O" },
-      }),
-    }),
+    // ⛔⛔ RÉPARÉ LE 30/08/2026, ET LE DÉFAUT DÉPASSAIT LE COMPTEUR. Ce gabarit
+    // attendait TOUJOURS « oui », sur une figure toujours identique : un élève
+    // qui répondait « oui » sans regarder le dessin avait tout juste, à chaque
+    // fois. La question ne mesurait rien.
+    // 👉 La réponse est maintenant TIRÉE AU SORT, et quand elle vaut « non »
+    // l'erreur est NOMMÉE dans le corrigé — c'est ce qui distingue un piège
+    // d'une question truquée.
+    generate: () => {
+      const fig = randomChoice(FIGURES_SYM);
+      const cx = randomInt(3, 5);
+      const cy = randomInt(3, 5);
+      const source = fig.points.map((p) => ({ x: cx - 2 + p.x, y: cy - 2 + p.y }));
+      // L'image juste : chaque point à l'opposé du centre, à la même distance.
+      const juste = source.map((p) => ({ x: 2 * cx - p.x, y: 2 * cy - p.y }));
+      const correcte = Math.random() < 0.5;
+      const faute = randomChoice([
+        { quoi: "un point est décalé d'un carreau : O n'en est plus le milieu", f: (p: {x:number;y:number}, i: number) => (i === 0 ? { x: p.x + 1, y: p.y } : p) },
+        { quoi: "la figure a été GLISSÉE au lieu d'être retournée : elle garde le même sens", f: (_p: {x:number;y:number}, i: number) => ({ x: source[i].x + 3, y: source[i].y + 3 }) },
+        { quoi: "la figure a été retournée dans un miroir, pas par un demi-tour", f: (_p: {x:number;y:number}, i: number) => ({ x: 2 * cx - source[i].x, y: source[i].y }) },
+      ]);
+      const image = correcte ? juste : juste.map(faute.f);
+      return {
+        text: `${fig.article} rouge est-${fig.pronom} l'image ${fig.du} bleu${fig.e} par la symétrie de centre O ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: [correcte ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : une symétrie centrale est un DEMI-TOUR autour d'un point. Le centre O doit être le milieu de chaque segment reliant un point à son image.\n\n" +
+          "Méthode : on prend un point, on trace le segment jusqu'à son image, et on vérifie que O tombe pile au milieu. Puis on recommence sur un autre point — un seul qui rate suffit.\n\n" +
+          (correcte
+            ? `Calcul : chaque point image est bien à l'opposé de O, à la même distance. La figure a aussi changé de SENS, ce qui est la signature du demi-tour.\n\nConclusion : oui, c'est bien l'image par la symétrie de centre O.`
+            : `Calcul : ⚠️ ${faute.quoi}.\n\nConclusion : non. ⭐ Vérifier UN seul point ne suffit jamais — c'est en testant le deuxième qu'on repère ce genre d'erreur.`),
+        canvas: transformationCanvas({
+          transformation: "symetrie_centrale",
+          grid: { rows: 10, cols: 10 },
+          source: { label: "F", points: source },
+          image: { label: "F'", points: image },
+          center: { point: { x: cx, y: cy }, label: "O" },
+        }),
+      };
+    },
   },
 
   {
@@ -1052,38 +1094,37 @@ export const transformationsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "L’axe horizontal joue le rôle d’un miroir.",
     tags: ["transformation", "symetrie_axiale", "axe_horizontal", "template", "canvas"],
+    // ⛔ RÉPARÉ LE 30/08/2026 : réponse toujours « oui », figure toujours la
+    // même. ⭐ Ce gabarit garde son rôle propre — l'axe HORIZONTAL, que les
+    // élèves traitent moins bien que le vertical parce qu'il faut compter en
+    // hauteur — et il fait maintenant varier sa réponse.
     generate: () => {
-      const axisY = randomChoice([4, 5]);
-
+      const fig = randomChoice(FIGURES_SYM);
+      const axisY = randomInt(4, 6);
+      const source = fig.points.map((p) => ({ x: 2 + p.x, y: axisY - 3 + p.y }));
+      const juste = source.map((p) => ({ x: p.x, y: 2 * axisY - p.y }));
+      const correcte = Math.random() < 0.5;
+      // La faute : un point mal reporté, donc une distance à l'axe qui diffère.
+      const fausse = juste.map((p, i) => (i === 1 ? { x: p.x, y: p.y + 1 } : p));
       return {
-        text: "La figure rouge est-elle l’image de la figure bleue par symétrie axiale d’axe horizontal ?",
+        text: `Par la symétrie d'axe horizontal, ${fig.article.toLowerCase()} bleu${fig.e} a-t-${fig.pronom} pour image ${fig.article.toLowerCase()} rouge ?`,
         format: "qcm",
         choices: ["oui", "non"],
-        expected: ["oui"],
+        expected: [correcte ? "oui" : "non"],
         comparator: "mcq_exact",
         explanation:
-          "Définition : une symétrie axiale utilise un axe comme miroir.\n\n" +
-          "Méthode : on vérifie que chaque point et son image sont à la même distance de l’axe.\n\n" +
-          "Calcul : ici, l’axe est horizontal et sépare la figure de son image.\n\n" +
-          "Conclusion : la figure rouge est bien l’image par symétrie axiale.",
+          "Définition : l'axe est un miroir, et il est la médiatrice de chaque segment reliant un point à son image.\n\n" +
+          "Méthode : avec un axe horizontal, on compte les carreaux EN HAUTEUR — au-dessus de l'axe, puis en dessous.\n\n" +
+          (correcte
+            ? "Calcul : chaque point est à la même hauteur de part et d'autre de l'axe.\n\nConclusion : oui, c'est bien l'image par cette symétrie."
+            : "Calcul : ⚠️ un point est reporté un carreau trop loin : sa distance à l'axe n'est pas la même de l'autre côté.\n\nConclusion : non. ⭐ Il faut vérifier TOUS les points : deux sur trois qui tombent juste ne prouvent rien."),
         canvas: transformationCanvas({
           transformation: "symetrie_axiale",
-          grid: { rows: 10, cols: 8 },
-          source: {
-            label: "F",
-            points: [
-              { x: 2, y: axisY - 3 },
-              { x: 4, y: axisY - 3 },
-              { x: 3, y: axisY - 1 },
-            ],
-          },
+          grid: { rows: 12, cols: 8 },
+          source: { label: "F", points: source },
           image: {
             label: "F'",
-            points: [
-              { x: 2, y: axisY + 3 },
-              { x: 4, y: axisY + 3 },
-              { x: 3, y: axisY + 1 },
-            ],
+            points: correcte ? juste : fausse,
           },
           axis: { type: "horizontal", y: axisY, label: "axe" },
         }),
@@ -1106,38 +1147,42 @@ export const transformationsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Vérifie si O est vraiment le milieu entre chaque point et son image.",
     tags: ["transformation", "symetrie_centrale", "piege", "template", "canvas"],
+    // ⛔ RÉPARÉ LE 30/08/2026. Ce gabarit attendait TOUJOURS « non » sur une
+    // figure toujours identique — le pendant exact du défaut de `tpl_1`, qui
+    // attendait toujours « oui ». Pris ensemble, les deux apprenaient à
+    // reconnaître un DESSIN, pas une symétrie.
+    // ⭐ Il garde son rôle de piège, mais il le prend par l'autre bout : c'est
+    // un ÉLÈVE qui affirme, et on demande s'il a raison. Le geste devient
+    // « juger un raisonnement », pas « regarder une figure ».
     generate: () => {
+      const fig = randomChoice(FIGURES_SYM);
+      const prenom = randomChoice(["Maëva", "Ryan", "Anaïs", "Loïc", "Shana", "Téo", "Naïla", "Kevin"]);
+      const cx = randomInt(3, 5);
+      const cy = randomInt(3, 5);
+      const source = fig.points.map((p) => ({ x: cx - 2 + p.x, y: cy - 2 + p.y }));
+      const juste = source.map((p) => ({ x: 2 * cx - p.x, y: 2 * cy - p.y }));
+      const aRaison = Math.random() < 0.5;
+      const image = aRaison
+        ? juste
+        : juste.map((p, i) => (i === 0 ? { x: p.x + 1, y: p.y } : p));
       return {
-        text: "La figure rouge est-elle l’image de la figure bleue par symétrie centrale de centre O ?",
+        text: `${prenom} affirme que ${fig.article.toLowerCase()} rouge est l'image ${fig.du} bleu${fig.e} par la symétrie de centre O. A-t-${prenom.endsWith("n") || prenom === "Loïc" || prenom === "Téo" ? "il" : "elle"} raison ?`,
         format: "qcm",
         choices: ["oui", "non"],
-        expected: ["non"],
+        expected: [aRaison ? "oui" : "non"],
         comparator: "mcq_exact",
         explanation:
-          "Définition : dans une symétrie centrale, le centre doit être le milieu entre chaque point et son image.\n\n" +
-          "Méthode : on vérifie l’alignement et les distances par rapport à O.\n\n" +
-          "Calcul : ici, au moins un point image n’est pas placé exactement en face du point de départ par rapport à O.\n\n" +
-          "Conclusion : la figure rouge n’est pas l’image par symétrie centrale.",
+          "Définition : O doit être le milieu de CHAQUE segment reliant un point à son image — pas seulement du premier qu'on regarde.\n\n" +
+          "Méthode : on vérifie point par point. Un seul qui rate suffit à conclure que ce n'est pas une symétrie.\n\n" +
+          (aRaison
+            ? `Calcul : les ${source.length} points sont tous à l'opposé de O, à la même distance.\n\nConclusion : ${prenom} a raison.`
+            : `Calcul : ⚠️ un point est décalé d'un carreau — O n'est pas le milieu de son segment.\n\nConclusion : ${prenom} a tort. ⭐ Le piège tient à ce que la figure RESSEMBLE à l'image : c'est pour cela qu'on vérifie, au lieu de regarder.`),
         canvas: transformationCanvas({
           transformation: "symetrie_centrale",
-          grid: { rows: 8, cols: 8 },
-          source: {
-            label: "F",
-            points: [
-              { x: 2, y: 2 },
-              { x: 3, y: 2 },
-              { x: 2, y: 4 },
-            ],
-          },
-          image: {
-            label: "F'",
-            points: [
-              { x: 6, y: 6 },
-              { x: 5, y: 6 },
-              { x: 5, y: 4 },
-            ],
-          },
-          center: { point: { x: 4, y: 4 }, label: "O" },
+          grid: { rows: 10, cols: 10 },
+          source: { label: "F", points: source },
+          image: { label: "F'", points: image },
+          center: { point: { x: cx, y: cy }, label: "O" },
         }),
       };
     },
@@ -1570,39 +1615,43 @@ export const transformationsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "O doit être le milieu entre chaque point et son image.",
     tags: ["transformation", "symetrie_centrale", "template", "canvas"],
-    generate: () => ({
-      text: "La figure rouge est-elle l’image de la figure bleue par symétrie centrale de centre O ?",
-      format: "qcm",
-      choices: ["oui", "non"],
-      expected: ["oui"],
-      comparator: "mcq_exact",
-      explanation:
-        "Définition : une symétrie centrale est un demi-tour autour de O.\n\n" +
-        "Méthode : on vérifie que O est le milieu entre chaque point et son image.\n\n" +
-        "Calcul : les points correspondants sont alignés avec O et à la même distance.\n\n" +
-        "Conclusion : oui, la figure rouge est l’image par symétrie centrale.",
-      canvas: transformationCanvas({
-        transformation: "symetrie_centrale",
-        grid: { rows: 8, cols: 8 },
-        source: {
-          label: "F",
-          points: [
-            { x: 1, y: 3 },
-            { x: 3, y: 3 },
-            { x: 1, y: 5 },
-          ],
-        },
-        image: {
-          label: "F'",
-          points: [
-            { x: 7, y: 5 },
-            { x: 5, y: 5 },
-            { x: 7, y: 3 },
-          ],
-        },
-        center: { point: { x: 4, y: 4 }, label: "O" },
-      }),
-    }),
+    // ⛔ RÉPARÉ LE 30/08/2026 : ce gabarit était le JUMEAU de `tpl_1` — même
+    // question, même figure, même réponse « oui » à chaque tirage. Deux
+    // gabarits identiques ne font pas deux questions.
+    // ⭐ Il porte maintenant la confusion qui coûte le plus cher dans ce
+    // chapitre : un DEMI-TOUR n'est pas un MIROIR. Les deux retournent la
+    // figure, mais pas de la même façon — et sur une figure asymétrique, la
+    // différence se voit.
+    generate: () => {
+      const fig = randomChoice(FIGURES_SYM);
+      const cx = randomInt(3, 5);
+      const cy = randomInt(3, 5);
+      const source = fig.points.map((p) => ({ x: cx - 2 + p.x, y: cy - 2 + p.y }));
+      const demiTour = source.map((p) => ({ x: 2 * cx - p.x, y: 2 * cy - p.y }));
+      // Le miroir vertical passant par O : il retourne aussi, mais autrement.
+      const miroir = source.map((p) => ({ x: 2 * cx - p.x, y: p.y }));
+      const cEstLeDemiTour = Math.random() < 0.5;
+      return {
+        text: `Par la symétrie de centre O, ${fig.article.toLowerCase()} bleu${fig.e} a-t-${fig.pronom} pour image ${fig.article.toLowerCase()} rouge ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: [cEstLeDemiTour ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : la symétrie centrale est un DEMI-TOUR. Chaque point traverse O et se retrouve de l'autre côté, à la même distance — en hauteur comme en largeur.\n\n" +
+          "Méthode : on suit un point. S'il n'a bougé que d'un côté (à gauche-droite, ou en haut-bas), ce n'est pas un demi-tour.\n\n" +
+          (cEstLeDemiTour
+            ? "Calcul : chaque point a traversé O dans les DEUX directions.\n\nConclusion : oui, c'est bien la symétrie de centre O."
+            : "Calcul : ⚠️ la figure a été retournée comme dans un MIROIR vertical : les points ont changé de côté à gauche-droite, mais pas en hauteur.\n\nConclusion : non. ⭐ Miroir et demi-tour retournent tous les deux la figure — c'est pourquoi on les confond, et c'est pourquoi il faut suivre un point plutôt que regarder l'allure générale."),
+        canvas: transformationCanvas({
+          transformation: "symetrie_centrale",
+          grid: { rows: 10, cols: 10 },
+          source: { label: "F", points: source },
+          image: { label: "F'", points: cEstLeDemiTour ? demiTour : miroir },
+          center: { point: { x: cx, y: cy }, label: "O" },
+        }),
+      };
+    },
   },
   {
     kind: "fixed",
