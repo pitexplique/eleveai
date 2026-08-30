@@ -349,7 +349,16 @@ export default function FicheCoursClient({
                   <BookMarked className="h-5 w-5 print:hidden" />
                   Définition : {apresDeuxPoints(fiche.titre)}
                 </h2>
-                <p className="mt-3 text-base font-bold leading-7 text-slate-900 print:text-sm">
+                {/* ⭐ `whitespace-pre-line` — ajouté le 30/08/2026. Frédéric, en
+                    lisant la définition du CM1 : « il faut des retours à la
+                    ligne ». `TexteMath` rend la chaîne telle quelle et le HTML
+                    écrasait les `\n` : une définition de cent mots arrivait en
+                    un seul pavé justifié, illisible pour un enfant.
+                    ⚠️ Sans risque pour l'existant : aucune fiche n'avait de `\n`
+                    dans sa définition, donc rien ne bouge là où l'on n'en met
+                    pas. La classe collapse les espaces et ne garde que les
+                    sauts de ligne voulus. */}
+                <p className="mt-3 whitespace-pre-line text-base font-bold leading-7 text-slate-900 print:text-sm">
                   <TexteMath>{fiche.definition.texte}</TexteMath>
                 </p>
               </div>

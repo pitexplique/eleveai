@@ -123,7 +123,7 @@ const troisReperes = batons({
     { label: "CM2", value: 120 },
     { label: "6e", value: 130 },
   ],
-  legende: "Dix mots de plus par an. Ce n'est pas une course.",
+  legende: "Dix mots de plus chaque année. Ce n'est pas une course.",
 });
 
 const pasPlusVite = phrase({
@@ -131,7 +131,7 @@ const pasPlusVite = phrase({
     { texte: "lis plus vite", barre: true },
     { texte: "lis mieux", focus: true },
   ],
-  legende: "Le nombre mesure. Il ne fabrique rien.",
+  legende: "Le nombre mesure. Il ne fait rien.",
 });
 
 const dechiffrerOuReconnaitre = phrase({
@@ -139,12 +139,12 @@ const dechiffrerOuReconnaitre = phrase({
     { texte: "fem-me", barre: true },
     { texte: "femme", focus: true },
   ],
-  legende: "Ce mot ne se découpe pas. Il se reconnait d'un coup d'œil.",
+  legende: "Ce mot ne se découpe pas. Tu le reconnais d'un coup d'œil.",
 });
 
 const motsIrreguliers = phrase({
   mots: [{ texte: "monsieur" }, { texte: "femme" }, { texte: "oignon" }],
-  legende: "Les plus fréquents du français. Et les plus traitres.",
+  legende: "Les mots les plus courants. Et les plus traitres.",
 });
 
 const parGroupes = phrase({
@@ -157,7 +157,7 @@ const parGroupes = phrase({
 
 const libererLaTete = phrase({
   mots: [{ texte: "déchiffrer" }, { texte: "comprendre", focus: true }],
-  legende: "Quand lire devient facile, la tête est libre pour l'histoire.",
+  legende: "Quand lire devient facile, ta tête suit l'histoire.",
 });
 
 const relireLeMeme = phrase({
@@ -166,7 +166,7 @@ const relireLeMeme = phrase({
     { texte: "le même", focus: true },
   ],
   liens: [{ de: 1, vers: 0, label: "trois fois", type: "question" }],
-  legende: "C'est la relecture qui rend les mots automatiques.",
+  legende: "À force de relire, les mots viennent tout seuls.",
 });
 
 // ─── La fiche ─────────────────────────────────────────────────────────────────
@@ -178,90 +178,106 @@ export const ficheFluenceLectureCm1: FicheCoursData = {
   notion: "fluence-lecture",
   titre: "Lire avec fluidité en CM1 (2026-2027)",
   accroche:
-    "« Lis plus vite » est le plus mauvais conseil du monde. Les 110 mots par minute MESURENT ta lecture — ils ne la fabriquent pas. Ce qui la fabrique : reconnaitre les mots d'un coup d'œil, au lieu de les déchiffrer.",
+    "On te dira peut-être « lis plus vite ». Ce conseil ne marche pas, et ce n'est pas ta faute. Personne n'apprend à lire vite en se dépêchant. Ce qui t'aide, c'est de reconnaitre les mots d'un seul coup d'œil — et ça, ça s'apprend.",
   identite: [
-    { label: "Mots clés", valeur: "Fluidité, mots irréguliers" },
-    { label: "Le secret", valeur: "La vitesse est un thermomètre" },
+    { label: "Mots clés", valeur: "Lire sans buter" },
+    { label: "Le secret", valeur: "Lire vite ne s'apprend pas" },
     { label: "Outil", valeur: "Relis le même texte" },
   ],
   definition: {
-    texte:
-      "Lire avec fluidité, c'est lire une PAGE sans effort : sans buter, sans s'essouffler. Trois choses aident. LA PONCTUATION : le point dit où respirer. LES GROUPES : on lit plusieurs mots d'un souffle, pas mot à mot. ET SURTOUT LES MOTS IRRÉGULIERS. « Femme » ne se déchiffre pas : découpé, cela donne « fem-me ». Il faut le reconnaitre d'un bloc, comme une image. Le piège ? Ce sont les mots les plus fréquents du français. Le repère est 110 mots par minute — et il sert à une seule chose : quand lire devient facile, la tête est libre pour comprendre.",
+    /* ⛔ RÉÉCRITE LE 30/08 EN REGISTRE ENFANT. La version d'avant faisait un
+       pavé de cent mots, avec des capitales à chaque ligne. Frédéric :
+       « illisible pour un enfant de CM1 », puis « il faut des retours à la
+       ligne », puis « fais comme si tu étais un psychologue pour enfant ».
+       ⭐⭐ ET LES CAPITALES ÉTAIENT LE PIRE : un mot en capitales perd sa
+       silhouette — plus de hampes, plus de jambages. J'avais donc cassé la
+       lecture globale DANS UNE FICHE QUI ENSEIGNE LA LECTURE GLOBALE.
+       Sept phrases courtes, une par ligne, aucune capitale d'emphase, aucun mot
+       d'adulte. Les `\n` sont rendus grâce à `whitespace-pre-line`, ajouté le
+       même jour dans `FicheCoursClient`. */
+    texte: [
+      "Bien lire, ce n'est pas lire vite.",
+      "C'est lire une page sans être fatigué.",
+      "Le point te dit où respirer.",
+      "Tu lis plusieurs mots d'un coup, pas un par un.",
+      "Et certains mots ne se découpent pas. « Femme » ne fait pas « fem-me ». Tu le reconnais, comme une photo.",
+      "Ce sont les mots les plus courants. C'est pour ça qu'ils t'embêtent souvent.",
+    ].join("\n\n"),
   },
   figure: {
     schema: pile(troisReperes, pasPlusVite),
     legende:
-      "Un thermomètre dit qu'on a de la fièvre. Le casser ne guérit personne. Les 110 mots par minute, c'est pareil : ils mesurent où tu en es.",
+      "Un thermomètre dit que tu as de la fièvre. Le casser ne te soigne pas. Ce nombre, c'est pareil : il mesure, il ne soigne pas.",
   },
   proprietes: [
     {
       titre: "Une page entière",
-      texte: "Pas trois lignes. Et sans être essoufflé à la fin.",
+      texte: "Pas trois lignes. Et sans être fatigué à la fin.",
       schema: libererLaTete,
       micros: ["cm1_flue_page"],
     },
     {
       titre: "On lit par groupes",
-      texte: "Mot à mot, la phrase est hachée — et on ne la comprend plus.",
+      texte: "Mot à mot, la phrase est hachée. On ne comprend plus rien.",
       schema: parGroupes,
       micros: ["cm1_flue_ponctuation"],
     },
     {
       titre: "Un mot irrégulier ne se déchiffre pas",
-      texte: "« Femme » découpé donne « fem-me ». « Monsieur » donne « mon-si-eur ».",
+      texte: "« Femme » donne « fem-me ». « Monsieur » donne « mon-si-eur ». Ça ne marche pas.",
       schema: dechiffrerOuReconnaitre,
       micros: ["cm1_flue_mots_irreguliers"],
     },
     {
       titre: "Et ce sont les plus fréquents",
-      texte: "Voilà le piège : ils reviennent toutes les deux lignes.",
+      texte: "Voilà le piège : ils reviennent tout le temps.",
       schema: motsIrreguliers,
       micros: ["cm1_flue_mots_irreguliers"],
     },
     {
       titre: "Le nombre sert à comprendre",
-      texte: "Lire vite sans comprendre, c'est manquer le but.",
+      texte: "Lire vite sans comprendre, ça ne sert à rien.",
       schema: troisReperes,
       micros: ["cm1_flue_110_mots"],
     },
     {
       titre: "On progresse en relisant",
-      texte: "Trois lectures du même texte valent mieux que trois textes.",
+      texte: "Lis trois fois le même texte. C'est ça qui marche.",
       schema: relireLeMeme,
       micros: ["cm1_flue_defi"],
     },
   ],
   reel: {
     texte:
-      "La première fois à vélo, tu pensais aux pédales, au guidon, à l'équilibre — et tu ne voyais pas la route. Aujourd'hui tu pédales sans y penser, alors tu regardes où tu vas. La lecture fait le même chemin. Et personne n'a appris le vélo en pédalant plus vite.",
+      "Souviens-toi de ta première fois à vélo. Tu pensais aux pédales, au guidon, à l'équilibre. Tu ne voyais même pas la route. Aujourd'hui tu pédales sans y penser, et tu regardes où tu vas. La lecture, c'est pareil. Tant que tu déchiffres, il ne te reste plus de place pour l'histoire. Ça viendra, comme le vélo est venu. Et personne n'a jamais appris le vélo en pédalant plus vite.",
   },
   historique: {
     texte:
-      "Certains mots sont devenus irréguliers EXPRÈS. Au XVIe siècle, des savants ont ajouté un « g » à « doit » pour rappeler le latin DIGITUM : on écrit DOIGT depuis. Ils ont aussi ajouté un « d » à « pois »… en se trompant sur son origine. On écrit POIDS à cause d'une erreur vieille de cinq siècles.",
+      "Si certains mots s'écrivent bizarrement, ce n'est pas pour t'embêter. Il y a très longtemps, des savants ont ajouté des lettres exprès. Ils ont mis un « g » dans « doigt ». Et un « d » dans « poids »... en se trompant. On écrit encore « poids » à cause de leur erreur, cinq cents ans après. Alors quand un mot te parait bizarre, tu as raison : il l'est vraiment.",
   },
   formule: {
     contexte: "Ce qui marche vraiment, et ça surprend.",
     expression: "relis le même texte",
     legende:
-      "À la deuxième lecture, tu ne butes plus. À la troisième, tu peux y mettre le ton. Changer de texte, c'est recommencer à déchiffrer.",
+      "À la deuxième fois, tu butes déjà moins. À la troisième, tu peux y mettre le ton. Si tu changes de texte, tu recommences tout à zéro.",
     schema: relireLeMeme,
   },
   methode: [
     {
       titre: "Note les mots qui te font buter",
-      texte: "Cinq suffisent. Regarde-les chaque jour jusqu'à les reconnaitre.",
+      texte: "Cinq suffisent. Regarde-les un peu chaque jour, jusqu'à les reconnaitre.",
       schema: motsIrreguliers,
       micros: ["cm1_flue_mots_irreguliers"],
     },
     {
       titre: "Repère les points avant de lire",
-      texte: "Tu sais alors où respirer, et tu ne t'essouffles plus.",
+      texte: "Tu sais alors où respirer. Tu arrives au bout sans être fatigué.",
       schema: parGroupes,
       micros: ["cm1_flue_ponctuation"],
     },
     {
       titre: "Relis trois fois, chronomètre après",
-      texte: "Dans cet ordre. Le chronomètre constate le progrès, il ne le fait pas.",
+      texte: "Dans cet ordre, jamais l'inverse. Le chronomètre regarde tes progrès. Il ne les fait pas.",
       schema: pasPlusVite,
       micros: ["cm1_flue_110_mots"],
     },
@@ -269,19 +285,19 @@ export const ficheFluenceLectureCm1: FicheCoursData = {
   usages: [
     {
       titre: "Lire un livre sans abandonner",
-      detail: "Beaucoup d'abandons viennent de la fatigue, pas de l'histoire.",
+      detail: "Quand on arrête un livre, c'est souvent la fatigue. Pas l'histoire.",
       schema: libererLaTete,
       micros: ["cm1_flue_page"],
     },
     {
       titre: "Lire à voix haute devant la classe",
-      detail: "La ponctuation donne les respirations : sans elles, on ne te suit pas.",
+      detail: "Les points te disent où respirer. Sans eux, personne ne te suit.",
       schema: parGroupes,
       micros: ["cm1_flue_ponctuation"],
     },
     {
       titre: "Ne plus trébucher sur les mêmes mots",
-      detail: "Les irréguliers reviennent sans arrêt. Les reconnaitre fait gagner partout.",
+      detail: "Ces mots reviennent sans arrêt. Les connaitre t'aide dans toutes tes lectures.",
       schema: dechiffrerOuReconnaitre,
       micros: ["cm1_flue_mots_irreguliers"],
     },
@@ -293,7 +309,7 @@ export const ficheFluenceLectureCm1: FicheCoursData = {
       schema: libererLaTete,
       question: "Qu'est-ce que ça montre ?",
       solution:
-        "QUE DÉCHIFFRER TE COUTE ENCORE. Ce n'est pas une question de souffle : c'est ta tête qui travaille trop sur les lettres.",
+        "Que lire te demande encore beaucoup d'efforts. Ce n'est pas ton souffle qui manque : c'est ta tête qui travaille trop sur les lettres. C'est normal, et ça va s'arranger.",
       micros: ["cm1_flue_page"],
     },
     {
@@ -302,7 +318,7 @@ export const ficheFluenceLectureCm1: FicheCoursData = {
       schema: dechiffrerOuReconnaitre,
       question: "Ça marche ?",
       solution:
-        "NON. Ce mot ne se découpe pas — il se RECONNAIT, d'un coup d'œil, comme une image. Pareil pour « femme », « oignon », « temps ».",
+        "Non, et ce n'est pas toi le problème. Ce mot ne se découpe pas : on le reconnait d'un coup d'œil, comme une image. C'est pareil pour « femme », « oignon » et « temps ».",
       micros: ["cm1_flue_mots_irreguliers"],
     },
     {
@@ -311,7 +327,7 @@ export const ficheFluenceLectureCm1: FicheCoursData = {
       schema: motsIrreguliers,
       question: "Pourquoi eux ?",
       solution:
-        "PARCE QUE LES MOTS IRRÉGULIERS SONT LES PLUS FRÉQUENTS. Ce ne sont pas des mots rares : ils reviennent toutes les deux lignes.",
+        "Parce que ces mots-là sont justement les plus courants. Ce ne sont pas des mots rares : ils reviennent presque à chaque ligne. Tout le monde bute dessus.",
       micros: ["cm1_flue_mots_irreguliers"],
     },
     {
@@ -320,23 +336,23 @@ export const ficheFluenceLectureCm1: FicheCoursData = {
       schema: troisReperes,
       question: "Pourquoi ?",
       solution:
-        "PARCE QU'UNE LECTURE FLUIDE LIBÈRE LA TÊTE POUR COMPRENDRE. Ni course, ni classement : la vitesse est un moyen, comprendre est le but.",
+        "Parce que si lire devient facile, ta tête est libre pour suivre l'histoire. Ce n'est ni une course ni un classement. Comprendre, c'est ça qui compte.",
       micros: ["cm1_flue_110_mots"],
     },
   ],
   pieges: [
-    "Se forcer à lire vite : ça donne une lecture rapide et vide.",
-    "Déchiffrer un mot irrégulier : « femme » ne donnera jamais « fem-me ».",
-    "Lire mot à mot : la phrase est hachée.",
-    "Sauter la ponctuation : c'est elle qui dit où respirer.",
-    "Changer de texte à chaque fois : c'est la relecture qui automatise.",
+    "Se forcer à lire vite : tu vas vite, et tu ne retiens rien.",
+    "Découper un mot comme « femme » : ça ne donnera jamais « fem-me ».",
+    "Lire mot à mot : la phrase est coupée en morceaux.",
+    "Ne pas voir les points : ce sont eux qui disent où respirer.",
+    "Changer de texte à chaque fois : c'est en relisant qu'on progresse.",
   ],
   aRetenir: [
-    "110 mots par minute, c'est un thermomètre. Pas une consigne.",
-    "Un mot irrégulier se reconnait d'un bloc, il ne se déchiffre pas.",
-    "Et ce sont les plus fréquents du français.",
-    "On lit par groupes, en respectant les points.",
-    "On progresse en relisant le MÊME texte.",
+    "110 mots par minute, ça mesure. Ça ne te fait pas lire mieux.",
+    "Certains mots ne se découpent pas : on les reconnait d'un coup d'œil.",
+    "Et ce sont les mots les plus courants — donc tout le monde bute dessus.",
+    "On lit plusieurs mots d'un coup, et on respire aux points.",
+    "On progresse en relisant le même texte.",
   ],
   entrainement: [
     {
