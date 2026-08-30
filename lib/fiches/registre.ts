@@ -421,6 +421,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Ce qu'on fait quand ça bloque et qu'on est seul, le test des « peu de mots » pour restituer l'essentiel, l'implicite dont les indices sont écrits, et le genre qui dit comment lire.",
   },
+  "francais/cm1/fluence-lecture": {
+    titre: "Lire avec fluidité en CM1 (2026-2027)",
+    resume:
+      "110 mots par minute est un thermomètre, pas une consigne. Un mot irrégulier ne se déchiffre pas : il se reconnait d'un bloc.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
