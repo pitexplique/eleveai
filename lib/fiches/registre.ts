@@ -456,6 +456,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Reformuler prouve qu'on a compris ; synthétiser prouve qu'on a trié. Faire court par oubli fait court aussi — et ce n'est pas une synthèse.",
   },
+  "francais/cm2/oral-echanger": {
+    titre: "Présenter un travail et participer à un débat en CM2 (2026-2027)",
+    resume:
+      "Argumenter est la charnière : le seul geste qui vaut en exposé comme en débat. Un avis sans « parce que » n'est pas un argument.",
+  },
   "francais/cm2/grammaire-orthographe": {
     titre: "Analyser une phrase : nature, fonction, accords",
     resume:
