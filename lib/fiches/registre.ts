@@ -486,6 +486,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "La nature est dans le dictionnaire, la fonction est dans la phrase. Le test du doigt : cache le reste — peux-tu encore répondre ?",
   },
+  "francais/cm2/grammaire-pronoms": {
+    titre: "Les pronoms personnels en CM2 (2026-2027)",
+    resume:
+      "Le seul mot de la langue qui change de forme selon son rôle. Sujet ou complément, et la place devant le verbe qui tranche tout.",
+  },
   "francais/cm2/grammaire-orthographe": {
     titre: "Analyser une phrase : nature, fonction, accords",
     resume:
