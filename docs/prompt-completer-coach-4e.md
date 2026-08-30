@@ -24,16 +24,18 @@ Tu es la session MATHS 4e. D'autres sessions travaillent dans le même dossier.
       et de dépôt. Ce prompt ne les redit pas.
 
 ════ OÙ ON EN EST (28/08/2026, au soir) ═════════════════════════════
-maths 4e   27 notions · 182 micros · 27 fiches · 27 PDF   ·   tout est poussé
-           ⚠️ SAUF UNE : `triangle_figure` a sa banque poussée et verte,
-           MAIS PAS ENCORE SA FICHE. C'est la seule dette ouverte.
+maths 4e   31 notions · 198 micros · 31 fiches · 31 PDF   ·   tout est poussé
+           ⭐ AUCUNE DETTE OUVERTE : chaque notion a sa banque verte, sa
+           fiche, son PDF et sa ligne de registre.
 
     npx --yes tsx@4 scripts/verifier-bo.ts 4e
-    → 111 objectifs d'apprentissage · 182 micro-compétences
-      81/111 objectifs couverts (73 %) — 30 trous
+    → 111 objectifs d'apprentissage · 198 micro-compétences
+      94/111 objectifs couverts (85 %) — 17 trous
       0 micro citée mais inexistante · 0 micro hors programme
 
-⭐ LA JOURNÉE DU 28/08 : de 53 % à 73 %, SEPT NOTIONS ouvertes de bout en bout —
+⭐ LE 28/08 : de 53 % à 73 %, SEPT NOTIONS. ⭐⭐ LE 30/08 : de 73 % à 85 %,
+QUATRE NOTIONS de plus — `ordre_grandeur`, `divisibilite`, `nombre_premier`,
+plus la fiche du triangle. Les onze notions ouvertes de bout en bout —
 `bo.ts`, `notions.ts`, `microSkills.ts`, la matrice du coach, la banque, la
 matrice d'entrée, `bo-objectifs.ts`, les huit vérificateurs, la fiche, le PDF :
 
@@ -43,7 +45,10 @@ matrice d'entrée, `bo-objectifs.ts`, les huit vérificateurs, la fiche, le PDF 
     proba_frequence         Fréquences observées et probabilité
     grandeur_composee       Grandeurs composées et unités
     fonction_dependance     Dépendance entre deux grandeurs
-    triangle_figure         Le triangle pour démontrer   ⚠️ FICHE À FAIRE
+    triangle_figure         Le triangle pour démontrer
+    ordre_grandeur          Ordres de grandeur et préfixes      (30/08)
+    divisibilite            Multiples, diviseurs, euclidienne   (30/08)
+    nombre_premier          Nombres premiers et décomposition   (30/08)
 
 ⭐ LA SEPTIÈME A FERMÉ SEPT PUCES D'UN COUP, le record de la journée, et ce
 n'est pas un forçage : la ligne « Triangle » du BO porte elle-même la somme des
@@ -483,18 +488,35 @@ Ordre proposé, du plus sûr au plus incertain :
  3. FONCTIONS — attendu absent en entier, gros morceau. ⚠️ Calibrer sur les
     repères : pas de f(x), pas de linéaire ni d'affine. Dépendance de deux
     grandeurs par tableau, graphique et PROGRAMME DE CALCUL.
- 4. ✅ GÉOMÉTRIE DU TRIANGLE — FAIT LE 28/08, banque poussée et verte.
-    ⚠️ IL RESTE SA FICHE : `triangle_figure`, 7 micros à couvrir en blocs
-    (`verifier-micros.mjs maths 4e` ne le voit pas encore, il n'inspecte que
-    les fiches EXISTANTES — c'est son angle mort, ne pas s'y fier ici).
-    ⚠️ Le canvas `triangle` est à POINTS FIXES : il tient dans la zone large
-    du coach, il ROGNERAIT dans une carte de fiche à 222 px. Pour la fiche,
-    passer par `tableau_donnees` ou par une figure retaillée à la main.
- 5. REPÉRAGE (abscisse, ordonnée, altitude ; latitude, longitude ; solides et
-    patrons) — ⛔ corriger d'abord les deux gabarits de translation.
- 6. ARITHMÉTIQUE (divisibilité, premiers) — en dernier : elle ne sert la 4ᵉ
-    qu'un an avant de passer en 3ᵉ, et la banque de 3ᵉ est trop maigre pour
-    servir de modèle.
+ 4. ✅ GÉOMÉTRIE DU TRIANGLE — FAIT LE 28/08, fiche et PDF le 30/08.
+    ⭐ Le canvas `triangle` est plafonné à `max-w-[240px]` PARTOUT, coach
+    compris : il n'a pas de « zone large » où se rattraper. Son viewBox vaut
+    son champ `size`, donc on le pose à la largeur du bloc — 240 dans la
+    banque, 222 dans une carte de fiche — et l'échelle vaut 1.
+ 5. ✅ ORDRES DE GRANDEUR — FAIT LE 30/08. Trois puces du thème A.
+ 6. ✅ ARITHMÉTIQUE — FAITE LE 30/08, en DEUX notions (`divisibilite` et
+    `nombre_premier`), dix puces d'un coup. C'était le plus gros bloc
+    restant, pas le plus petit : l'argument « à traiter en dernier » portait
+    sur sa DURÉE DE VIE (elle passe en 3ᵉ en septembre 2027), jamais sur son
+    poids.
+ 7. REPÉRAGE — LE SEUL BLOC QUI RESTE : abscisse, ordonnée, altitude ;
+    latitude, longitude ; reconnaître des solides ; patrons et vues.
+    ✅ Le préalable est levé : les deux gabarits de translation qui comptaient
+    l'ordonnée VERS LE BAS ont été corrigés le 30/08, sur décision de
+    Frédéric. Dans un repère, l'axe des ordonnées monte.
+    ⭐ La 6ᵉ a `vision_espace` (vues, perspective, patron) en modèle.
+    ⚠️ « Utiliser un logiciel de géométrie dynamique » restera un TROU ASSUMÉ :
+    un geste de logiciel ne s'évalue pas en QCM.
+
+ ⛔ ET LA DETTE QUI RESTE, MESURÉE MAIS PAS PAYÉE : dix micros de 4ᵉ sont
+ sous le seuil de renouvellement de douze énoncés GÉNÉRÉS — `aire_comprendre`
+ (1 seul, et un seul gabarit), `proba_equiprobabilite`, `cos_cotes`,
+ `sym_centrale`, `thales_configuration`, `sym_axiale`,
+ `quadrilatere_parallelogramme_reconnaitre`, `pythagore_reconnaitre`,
+ `proba_evenement`, `cos_definition`. Aucune n'appartient aux notions
+ ouvertes en août : c'est une dette antérieure, dans des notions qui ont déjà
+ leur fiche en ligne. La combler demande des GABARITS, pas des questions
+ figées — celles-ci ne se renouvellent pas.
 
 ════ CE QU'IL NE FAUT PAS FAIRE ═════════════════════════════════════
 ⛔ Écrire une fiche avant que la banque de sa notion soit verte.
