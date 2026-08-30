@@ -471,6 +471,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Un mot n'a pas son sens tout seul : c'est la phrase qui le lui donne. Contexte, polysémie, sens figuré, nuance — et le test du dessin.",
   },
+  "francais/cm2/vocabulaire-formation": {
+    titre: "La formation des mots en CM2 (2026-2027)",
+    resume:
+      "Un mot est fait de morceaux, et c'est le sens du morceau qui compte, pas sa forme. Préfixes, suffixes, racines, mots composés et homonymes.",
+  },
   "francais/cm2/grammaire-orthographe": {
     titre: "Analyser une phrase : nature, fonction, accords",
     resume:
