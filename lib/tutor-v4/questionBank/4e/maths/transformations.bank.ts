@@ -814,18 +814,18 @@ export const transformationsBank: TutorBankItemV4[] = [
         text: `Le point A(${x};${y}) est déplacé par translation de ${dx} carreaux vers la droite et ${dy} carreau(x) vers le haut. Quelles sont les coordonnées de A' ?`,
         format: "qcm",
         choices: shuffle([
-          `(${x + dx};${y - dy})`,
           `(${x + dx};${y + dy})`,
+          `(${x + dx};${y - dy})`,
           `(${x - dx};${y + dy})`,
           `(${dx};${dy})`,
         ]),
-        expected: [`(${x + dx};${y - dy})`],
+        expected: [`(${x + dx};${y + dy})`],
         comparator: "mcq_exact",
         explanation:
           "Définition : une translation déplace tous les points de la même façon.\n\n" +
-          "Méthode : vers la droite, on ajoute à l’abscisse ; vers le haut, on diminue l’ordonnée sur un quadrillage écran.\n\n" +
-          `Calcul : A(${x};${y}) devient A'(${x + dx};${y - dy}).\n\n` +
-          `Conclusion : les coordonnées de A' sont (${x + dx};${y - dy}).`,
+          "Méthode : vers la droite, on AJOUTE à l’abscisse ; vers le haut, on AJOUTE à l’ordonnée.\n\n" +
+          `Calcul : A(${x};${y}) devient A'(${x + dx};${y + dy}).\n\n` +
+          `Conclusion : les coordonnées de A' sont (${x + dx};${y + dy}). ⚠️ (${x + dx};${y - dy}) est le piège : c'est le résultat qu'on obtient en comptant l'ordonnée vers le BAS, comme sur un écran d'ordinateur. Dans un repère, l'axe des ordonnées monte.`,
       };
     },
   },
@@ -1680,36 +1680,41 @@ export const transformationsBank: TutorBankItemV4[] = [
     microId: "sym_translation",
     difficulty: 3,
     theme: "neutral",
-    hint: "Vers la droite : on ajoute à l’abscisse ; vers le bas : on ajoute à l’ordonnée écran.",
+    hint: "Vers la droite : on ajoute à l’abscisse ; vers le bas : on RETIRE à l’ordonnée.",
     tags: ["transformation", "translation", "coordonnees", "template"],
     generate: () => {
-      const x = randomChoice([0, 1, 2, 3]);
-      const y = randomChoice([0, 1, 2]);
-      const dx = randomChoice([2, 3, 4]);
+      // ⚠️ L'ORDONNÉE DE DÉPART MONTE À 4 depuis le 30/08/2026. Le déplacement
+      // se fait vers le BAS, donc on RETIRE : avec y ∈ {0,1,2} et dy jusqu'à 2,
+      // l'image serait tombée sous l'axe, ce qui n'est pas faux mais n'est plus
+      // la même question — les relatifs s'y invitent. On part donc assez haut
+      // pour rester dans le premier quadrant.
       const dy = randomChoice([1, 2]);
+      const x = randomChoice([0, 1, 2, 3]);
+      const y = randomChoice([dy, dy + 1, dy + 2]);
+      const dx = randomChoice([2, 3, 4]);
       return {
         text: `Le point A(${x};${y}) subit une translation de ${dx} carreaux vers la droite et ${dy} vers le bas. Quelles sont les coordonnées de A' ?`,
         format: "qcm",
         // Quand A est à l'origine, « on a pris le déplacement pour l'image »
         // tombe sur la bonne réponse : d'où le piège des coordonnées
         // interverties, gardé en réserve.
-        choices: makeChoices(`(${x + dx};${y + dy})`, [
-          `(${x - dx};${y + dy})`,
-          `(${x + dx};${y - dy})`,
-          `(${dx};${dy})`,
-          `(${y + dy};${x + dx})`,
-          // Cinquième piège : sur le tirage A(0;0) avec dx = dy, les DEUX
-          // précédents tombent en même temps sur la bonne réponse. Celui-ci —
-          // « on a soustrait des deux côtés » — n'y tombe jamais.
+        choices: makeChoices(`(${x + dx};${y - dy})`, [
           `(${x - dx};${y - dy})`,
+          `(${x + dx};${y + dy})`,
+          `(${dx};${dy})`,
+          `(${y - dy};${x + dx})`,
+          // Cinquième piège : sur certains tirages, les DEUX précédents tombent
+          // en même temps sur la bonne réponse. Celui-ci — « on a soustrait des
+          // deux côtés » — n'y tombe jamais.
+          `(${x - dx};${y + dy})`,
         ]),
-        expected: [`(${x + dx};${y + dy})`],
+        expected: [`(${x + dx};${y - dy})`],
         comparator: "mcq_exact",
         explanation:
           "Définition : une translation déplace tous les points de la même façon.\n\n" +
-          "Méthode : on ajoute le déplacement aux coordonnées (ordonnée écran vers le bas).\n\n" +
-          `Calcul : A(${x};${y}) devient A'(${x + dx};${y + dy}).\n\n` +
-          `Conclusion : les coordonnées de A' sont (${x + dx};${y + dy}).`,
+          "Méthode : vers la droite, on AJOUTE à l’abscisse ; vers le bas, on RETIRE à l’ordonnée.\n\n" +
+          `Calcul : A(${x};${y}) devient A'(${x + dx};${y - dy}).\n\n` +
+          `Conclusion : les coordonnées de A' sont (${x + dx};${y - dy}). ⚠️ (${x + dx};${y + dy}) est le piège : c'est ce qu'on obtient en comptant l'ordonnée vers le BAS, comme sur un écran d'ordinateur. Dans un repère, l'axe des ordonnées monte.`,
       };
     },
   },
