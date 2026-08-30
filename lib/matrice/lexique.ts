@@ -174,6 +174,52 @@ export const NOTIONS: NotionLexique[] = [
     id: "relatifs", label: "les nombres relatifs", matiere: "maths",
     alias: ["relatif", "relatifs", "negatif", "negatifs", "les moins et les plus", "moins moins", "nombre negatif"],
   },
+  // ⛔⛔ CINQ ENTRÉES AJOUTÉES LE 30/08/2026, ET C'EST UNE RÉPARATION.
+  // Le 28/08, cinq thèmes ont été ajoutés à `coach.ts` — `puissances`,
+  // `echelles`, `frequences`, `ratio` — pour combler des mots qui n'ouvraient
+  // rien. Ils étaient MORTS : `coach.ts` s'indexe par l'identifiant que rend
+  // `lireNotion`, et aucune entrée d'ici ne rendait ces identifiants-là.
+  // Mesuré le 30/08 : « puissances », « fréquence » et « ratio » renvoyaient
+  // encore `null`, et « échelle » partait vers `proportionnalite`.
+  // 👉 LA LEÇON : ajouter une ligne à `coach.ts` ne suffit JAMAIS. Le chemin
+  // complet est mot tapé → alias d'ici → identifiant → ligne de `coach.ts`, et
+  // il se teste en appelant `lireNotion`, pas en lisant les deux fichiers.
+  //
+  // ⚠️ ELLES SONT PLACÉES ICI, AVANT `proportionnalite`, PARCE QUE LE PREMIER
+  // QUI ACCROCHE GAGNE. Derrière, « échelle » serait repris par la
+  // proportionnalité avant d'atteindre sa propre ligne.
+  {
+    id: "puissances", label: "les puissances", matiere: "maths",
+    alias: ["puissance", "puissances", "exposant", "exposants", "notation scientifique", "puissance de dix", "au carre", "au cube"],
+  },
+  {
+    // ⚠️ « échelle » RESTE AUSSI dans les alias de la proportionnalité : les
+    // classes sans notion d'échelle (cm1, 5e, 3e, seconde, première) y sont
+    // renvoyées explicitement par `coach.ts`, si bien que personne ne perd le
+    // chemin qu'il avait.
+    id: "echelles", label: "les échelles et agrandissements", matiere: "maths",
+    alias: ["echelle", "echelles", "agrandissement", "reduction", "agrandir", "reduire", "maquette", "plan a l echelle"],
+  },
+  {
+    id: "ratio", label: "les ratios", matiere: "maths",
+    alias: ["ratio", "ratios", "partage selon un ratio", "partager selon un ratio"],
+  },
+  {
+    // ⚠️ « fréquence » ne double PAS les probabilités : celles-ci ouvrent la
+    // notion d'entrée, celle-ci ouvre le lien entre l'observé et le calculé.
+    id: "frequences", label: "les fréquences", matiere: "maths",
+    alias: ["frequence", "frequences", "frequence observee"],
+  },
+  {
+    // ⭐ AJOUTÉE LE 30/08/2026 avec la notion `ordre_grandeur` de 4e. ⛔ Et le
+    // trou dépassait la 4e : « ordre de grandeur » n'ouvrait RIEN nulle part,
+    // alors que la première a `auto_ordres_unites` depuis longtemps.
+    // ⚠️ « micro », « milli » et « kilo » sont volontairement ABSENTS des
+    // alias : ce sont des mots de masse et de longueur avant d'être des
+    // préfixes, et ils voleraient des questions aux grandeurs.
+    id: "ordres_grandeur", label: "les ordres de grandeur", matiere: "maths",
+    alias: ["ordre de grandeur", "ordres de grandeur", "prefixe", "prefixes", "nano", "giga", "gigaoctet", "megaoctet", "vraisemblance", "estimer un resultat", "ordre de grandeur d un calcul"],
+  },
   {
     id: "proportionnalite", label: "la proportionnalité", matiere: "maths",
     alias: ["proportionnalite", "proportionnel", "pourcentage", "pourcentages", "echelle", "produit en croix", "regle de trois", "vitesse"],

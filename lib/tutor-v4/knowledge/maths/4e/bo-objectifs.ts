@@ -100,8 +100,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Utiliser les nombres pour comparer, calculer et résoudre des problèmes — Nombres",
     objectif: "Les préfixes de nano à giga.",
     page: 130,
-    micros: [],
-    note: "⛔ TROU. Zéro occurrence de « nano », « micro », « giga », « méga » dans les vingt banques de 4e.",
+    micros: ["ordre_prefixe"],
+    note: "✅ COMBLÉ LE 30/08/2026 par la notion `ordre_grandeur`. Les six préfixes du programme y sont traités avec leur puissance de dix, et le canvas `number_line` sert d'ÉCHELLE D'EXPOSANTS : nano, micro, milli, kilo, méga et giga s'y répartissent régulièrement, de trois en trois. ⭐ Un item figé traite le piège de vocabulaire : « micro » veut dire « très petit » dans la langue courante, et exactement 10⁻⁶ en mathématiques.",
   },
   {
     id: "4e-A-nombres-6",
@@ -171,8 +171,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Associer à des objets des ordres de grandeur (par exemple taille d'un atome, d'une bactérie, d'une alvéole pulmonaire, longueur de l'intestin, capacité de stockage d'un disque dur, vitesses du son et de la lumière, populations française et mondiale, distance Terre-Lune, distance du Soleil à l'étoile la plus proche, etc.).",
     page: 131,
-    micros: [],
-    note: "⛔ TROU. C'est le compagnon naturel des puissances et de la notation scientifique : il se traitera avec elles, pas avant.",
+    micros: ["ordre_associer"],
+    note: "✅ COMBLÉ LE 30/08/2026. La table des objets suit la liste du BO — atome, bactérie, alvéole pulmonaire, intestin, disque dur, distance Terre-Lune, étoile la plus proche — et y ajoute deux repères locaux, l'altitude du Piton des Neiges et la largeur de l'île. ⚠️ Deux objets partagent l'exposant 10⁻⁴ (l'alvéole et le cheveu) : le gabarit de rangement n'en tire jamais deux du même rang, sinon deux rangements seraient corrects.",
   },
 
   // ─── Utiliser les nombres … — Pratiquer le calcul ──────────────────────────
@@ -236,8 +236,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Vérifier la vraisemblance d'un résultat, notamment en estimant son ordre de grandeur.",
     page: 131,
-    micros: [],
-    note: "⛔ TROU. La 6e le couvre (`entier_calcul_verifier`) ; la 4e n'a aucune micro d'estimation.",
+    micros: ["ordre_estimer","ordre_vraisemblance","ordre_defi"],
+    note: "✅ COMBLÉ LE 30/08/2026, et le BO nomme lui-même les deux gestes : « vérifier la vraisemblance, NOTAMMENT en estimant son ordre de grandeur ». Ils sont donc deux micros, comme en première (`auto_num_ordre_grandeur` et `auto_num_vraisemblance`) : ESTIMER produit une valeur, JUGER se prononce sur une valeur reçue. ⭐ Le second se fait sans refaire le calcul, et c'est ce qui en fait un automatisme.",
   },
   {
     id: "4e-A-calcul-6",

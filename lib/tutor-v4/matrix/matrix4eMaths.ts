@@ -87,6 +87,25 @@ const supportLinks: Record<string, string[]> = {
   ],
 
   // =========================
+  // ORDRES DE GRANDEUR ET PRÉFIXES
+  // =========================
+  // ⭐ Les liens de remédiation descendent tous vers les PUISSANCES DE DIX :
+  // c'est là que l'élève bloque quand un ordre de grandeur lui échappe, jamais
+  // dans l'estimation elle-même.
+  ordre_prefixe: ["puissance_dix", "puissance_exposant_negatif"],
+  ordre_associer: [
+    "puissance_notation_scientifique",
+    "puissance_comparer",
+    "ordre_prefixe",
+  ],
+  // ⚠️ Estimer, c'est arrondir PUIS multiplier des puissances de dix : quand
+  // l'estimation rate, c'est presque toujours l'addition des exposants qui a
+  // lâché, pas l'arrondi.
+  ordre_estimer: ["puissance_dix", "puissance_calcul"],
+  ordre_vraisemblance: ["ordre_estimer", "puissance_dix"],
+  ordre_defi: ["ordre_vraisemblance", "ordre_associer", "ordre_prefixe"],
+
+  // =========================
   // RATIOS ET POURCENTAGES
   // =========================
   // ⭐ Ajoutés le 28/08/2026 avec la scission. Les liens FORTS viennent des

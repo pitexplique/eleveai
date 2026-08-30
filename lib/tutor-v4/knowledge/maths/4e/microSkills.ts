@@ -209,6 +209,51 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["puissance_calcul", "puissance_comparer"],
   },
 
+  /* =========================
+     ORDRES DE GRANDEUR ET PRÉFIXES  (ouvert le 30/08/2026)
+
+     ⭐ La notion ferme TROIS puces du thème A : les préfixes de nano à giga
+     (4e-A-nombres-5), l'association d'un ordre de grandeur à un objet réel
+     (4e-A-comparaisons-5) et la vérification de la vraisemblance d'un résultat
+     (4e-A-calcul-5).
+
+     ⭐ LA NOTION SŒUR EST EN PREMIÈRE : `auto_ordres_unites` y porte
+     `auto_num_ordre_grandeur` et `auto_num_vraisemblance`, les deux MÊMES
+     gestes. Leurs identifiants ne se reprennent pas — ils sont préfixés
+     `auto_` parce qu'ils vivent dans les automatismes — mais leur découpage,
+     lui, est repris tel quel : ESTIMER est un geste, JUGER en est un autre.
+  ========================= */
+  {
+    id: "ordre_prefixe",
+    label: "Connaître les préfixes de nano à giga",
+    notionId: "ordre_grandeur",
+    prerequis: ["puissance_dix"],
+  },
+  {
+    id: "ordre_associer",
+    label: "Associer un ordre de grandeur à un objet réel",
+    notionId: "ordre_grandeur",
+    prerequis: ["puissance_notation_scientifique"],
+  },
+  {
+    id: "ordre_estimer",
+    label: "Estimer l'ordre de grandeur d'un calcul",
+    notionId: "ordre_grandeur",
+    prerequis: ["puissance_dix"],
+  },
+  {
+    id: "ordre_vraisemblance",
+    label: "Vérifier la vraisemblance d'un résultat annoncé",
+    notionId: "ordre_grandeur",
+    prerequis: ["ordre_estimer"],
+  },
+  {
+    id: "ordre_defi",
+    label: "Défis sur les ordres de grandeur",
+    notionId: "ordre_grandeur",
+    prerequis: ["ordre_vraisemblance", "ordre_associer", "ordre_prefixe"],
+  },
+
     /* =========================
      PROPORTIONNALITÉ
   ========================= */

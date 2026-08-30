@@ -32,6 +32,16 @@ export const bo: KnowledgeBoCompetence[] = [
     boId: "BO4N3",
     label: "Puissances et notation scientifique",
   },
+  // ⭐ AJOUTÉ LE 30/08/2026 avec la notion `ordre_grandeur`. Même raison que
+  // BO4N3 : le BO du cycle 4 énonce « Les préfixes de nano à giga » et
+  // « Associer à des objets des ordres de grandeur » comme des connaissances
+  // à part, et « Puissances et notation scientifique » ne les nomme pas.
+  // ⚠️ Et le contrôle est réel : inventer un `boId` absent d'ici fait échouer
+  // `buildKnowledge` — la compétence n'est pas une étiquette libre.
+  {
+    boId: "BO4N4",
+    label: "Ordres de grandeur et préfixes",
+  },
   {
     boId: "BO4P1",
     label: "Proportionnalité",

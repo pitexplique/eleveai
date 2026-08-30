@@ -80,6 +80,20 @@ export const notions: NotionSource[] = [
     prerequis: ["relatif_operation", "fraction_nombre"],
     levels: [1, 2, 3],
   },
+  {
+    // ⭐ NOTION OUVERTE LE 30/08/2026, et le découpage se justifie par une LIGNE
+    // DE FRACTURE À SENS UNIQUE dans les prérequis : un ordre de grandeur a
+    // BESOIN de la notation scientifique pour s'écrire, alors que la notation
+    // scientifique n'a aucun besoin des ordres de grandeur.
+    // ⛔ Greffer ces micros sur `puissance_ecriture` l'aurait portée à douze et
+    // aurait mélangé deux objets : l'ÉCRITURE d'un nombre d'un côté, la TAILLE
+    // DU MONDE de l'autre.
+    id: "ordre_grandeur",
+    label: "Ordres de grandeur et préfixes",
+    boId: "BO4N4",
+    prerequis: ["puissance_ecriture"],
+    levels: [1, 2, 3],
+  },
 
   // =========================
   // PROPORTIONNALITÉ

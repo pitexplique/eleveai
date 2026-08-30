@@ -40,6 +40,7 @@ import { frequencesBank } from "./frequences.bank";
 import { grandeursBank } from "./grandeurs.bank";
 import { fonctionsBank } from "./fonctions.bank";
 import { trianglesBank } from "./triangles.bank";
+import { ordresGrandeurBank } from "./ordres-grandeur.bank";
 
 
 // =========================
@@ -55,6 +56,7 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...parallelogrammesBank,
   ...pythagoreBank,
   ...trianglesBank,
+  ...ordresGrandeurBank,
   ...transformationsBank,
   ...probabilitesBank,
   ...frequencesBank,

@@ -95,8 +95,22 @@ export const NOTION_COACH_MATHS: TableNotions = {
   // sa classe. Les trois entrent ensemble.
   // ⚠️ L'identifiant change entre le CM2 et le collège : `echelle` contre
   // `prop_echelle`. Ils se LISENT dans les `notions.ts`, ils ne se devinent pas.
+  // ⚠️ COMPLÉTÉE LE 30/08/2026. Seuls le CM2, la 6e et la 4e ont une notion
+  // d'échelle. Mais « échelle » était jusqu'ici un alias de la
+  // proportionnalité, et il ouvrait donc quelque chose dans TOUTES les
+  // classes. Faire pointer le mot vers cette ligne sans y remettre les autres
+  // classes les aurait renvoyées à la page générale du coach : une régression.
+  // Les voici, explicitement — « où mène le mot échelle en 5e ? à la
+  // proportionnalité, parce que la 5e n'a pas de notion d'échelle ».
   echelles: {
-    cm2: "echelle", "6e": "prop_echelle", "4e": "prop_echelle",
+    cm1: "proportionnalite",
+    cm2: "echelle",
+    "6e": "prop_echelle",
+    "5e": "prop_proportionnalite",
+    "4e": "prop_echelle",
+    "3e": "prop_proportionnalite",
+    seconde: "information_chiffree_evolutions",
+    premiere: "auto_taux_evolution",
   },
   // ⭐ AJOUTÉ LE 28/08/2026 avec la notion `proba_frequence` de 4e.
   // ⚠️ CE THÈME NE DOUBLE PAS `probabilites`, qui ouvre à juste titre la notion
@@ -112,6 +126,15 @@ export const NOTION_COACH_MATHS: TableNotions = {
   // ratios. Les deux classes entrent donc ensemble, comme pour les puissances.
   ratio: {
     "5e": "prop_ratio_pourcentage", "4e": "prop_ratio_pourcentage",
+  },
+  // ⭐ AJOUTÉ LE 30/08/2026 avec la notion `ordre_grandeur` de 4e. ⛔ Et là
+  // encore le trou dépassait la 4e : « ordre de grandeur » n'ouvrait rien dans
+  // AUCUNE classe, alors que la première a `auto_ordres_unites` depuis
+  // longtemps. Les deux entrent ensemble.
+  // ⚠️ La STMG a la même notion, mais aucune classe de STMG n'est câblée dans
+  // cette table : c'est un autre chantier, et l'ajouter seule ici mentirait.
+  ordres_grandeur: {
+    "4e": "ordre_grandeur", premiere: "auto_ordres_unites",
   },
   relatifs: { "5e": "relatif_nombre", "4e": "relatif_operation" },
   proportionnalite: {
