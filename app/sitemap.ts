@@ -228,7 +228,17 @@ const ROUTES: RouteConfig[] = [
   { path: "/cahier-vacances/vers-le-bac-plus-1", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
   { path: "/cahier-vacances/aider-mon-enfant", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CAHIERS },
 
-  { path: "/concours-logo",   priority: 0.6,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  /* ⛔ /concours-logo EST SUPPRIMÉE (29/08/2026) — décision de Frédéric : « il
+     faut le supprimer, la page et toutes références ». La route, sa galerie,
+     son API et son script SQL sont partis avec.
+     ⚠️ LA DONNÉE, ELLE, RESTE : le bucket Storage `concours-logos` et la table
+     `public.concours_logos` vivent sur Supabase et ne sont pas touchés par un
+     commit. Ce sont des propositions envoyées par des élèves — les effacer est
+     une décision à prendre dans la console Supabase, pas ici.
+     ⚠️ Et retirer une adresse du sitemap ne la retire pas de Google, qui la
+     connaît déjà : elle rendra un 404, ce qui est le bon signal pour une page
+     réellement supprimée — à la différence de /espace-ecoles, qui existe
+     toujours et a donc reçu un `noindex`. */
   { path: "/podcast-maths",   priority: 0.85, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/concours-general",priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/concours-avenir", priority: 0.9,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
