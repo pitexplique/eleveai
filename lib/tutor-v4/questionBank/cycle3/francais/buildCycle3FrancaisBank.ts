@@ -5733,6 +5733,121 @@ const FLUENCE_130: QcmItem[] = [
   },
 ];
 
+/* ⭐⭐ RECONNAITRE UN GENRE À SA MISE EN PAGE — GÉNÉRATEUR ajouté le 30/08/2026,
+   en ouvrant le CM1.
+   ⛔ CE QUI MANQUAIT : `cm1_comp_genres` demande de « distinguer théâtre, poème
+   et texte narratif À LEUR MISE EN PAGE », et `cm2_comp_genres` de reconnaitre
+   les principaux genres. Ni l'une ni l'autre n'avait de branche : toutes deux
+   tombaient sur `notionId.includes("comprehension")` → pool LECTURE, c'est-à-dire
+   sur « à quel moment de la journée est-on ? ». Une question de compréhension ne
+   teste pas la reconnaissance d'un genre.
+   ⚠️ Le contenu existait pourtant, à un exemplaire : « à quoi reconnait-on un
+   poème du premier coup d'œil ? » vit dans POESIE — un pool de CULTURE, atteint
+   par `cult_poesie` seulement. Les deux micros de compréhension ne le voyaient
+   jamais.
+   ⛔⛔ ET C'EST UN GÉNÉRATEUR, PAS UN POOL FIGÉ. Première version écrite en douze
+   items fixes : le vérificateur de renouvellement disait vert (il compte les
+   énoncés distincts, et douze est son seuil) alors que l'élève aurait revu les
+   mêmes douze au second passage. C'est exactement le trou que décrit
+   `verifier-renouvellement.ts`. Quatre gabarits croisent ici trois genres et
+   leurs signes : la table fabrique des dizaines d'énoncés distincts, propositions
+   comprises.
+   ⚠️ LES SIGNES SONT CALIBRÉS EN LONGUEUR (41 à 55 signes) : dès qu'un QCM peut
+   tomber à deux propositions, c'est l'étendue entière du pool qui se devine, pas
+   seulement l'écart entre les deux plus longues.
+   ⛔ `6e_comp_genre` (au singulier) N'EST PAS aiguillé ici, et c'est voulu : son
+   micro demande le genre « d'après ses CARACTÉRISTIQUES », ce qui déborde la
+   mise en page. Il reste sur LECTURE — à traiter à part. */
+type GenrePage = {
+  readonly nom: string;
+  readonly signes: readonly string[];
+  readonly unite: string;
+  readonly parole: string;
+};
+
+const GENRES_PAGE: readonly GenrePage[] = [
+  {
+    nom: "un poème",
+    signes: [
+      "des lignes courtes, qui s'arrêtent avant le bord",
+      "des vers regroupés en strophes séparées par un blanc",
+      "beaucoup de blanc à droite de chaque ligne",
+    ],
+    unite: "les strophes",
+    parole: "personne ne parle : il n'y a pas de dialogue",
+  },
+  {
+    nom: "une pièce de théâtre",
+    signes: [
+      "un nom de personnage en colonne devant chaque parole",
+      "un nom suivi de deux points au début de chaque prise",
+      "des indications de jeu écrites entre parenthèses",
+    ],
+    unite: "les répliques",
+    parole: "le nom de celui qui parle est écrit devant",
+  },
+  {
+    nom: "un texte narratif",
+    signes: [
+      "des paragraphes pleins, qui vont jusqu'au bord",
+      "des alinéas qui creusent le début de certaines lignes",
+      "des tirets au début des lignes où quelqu'un parle",
+    ],
+    unite: "les paragraphes",
+    parole: "un tiret ouvre chaque prise de parole",
+  },
+];
+
+/** Des genres qui ne sont PAS au programme de la micro, mais qu'un élève peut
+ *  citer : ils servent de leurres au gabarit inverse. */
+const AUTRES_ECRITS: readonly string[] = [
+  "une lettre",
+  "un article de journal",
+  "une recette de cuisine",
+  "un article de dictionnaire",
+];
+
+function genreMiseEnPage(): Generated {
+  const g = pick(GENRES_PAGE);
+  const autres = GENRES_PAGE.filter((x) => x.nom !== g.nom);
+  const forme = pick([1, 2, 3, 4] as const);
+
+  if (forme === 1) {
+    return asQcm({
+      text: `Sans lire un seul mot, à quoi reconnais-tu ${g.nom} sur la page ?`,
+      correct: pick(g.signes),
+      wrongs: shuffle(autres.flatMap((a) => a.signes)),
+      methode: "La mise en page se voit avant la lecture : elle annonce le genre.",
+    });
+  }
+  if (forme === 2) {
+    /* Le gabarit INVERSE : on donne le signe, on demande le genre. */
+    return asQcm({
+      text: `Un texte où l'on voit ${pick(g.signes)} est…`,
+      correct: g.nom,
+      wrongs: shuffle([...autres.map((a) => a.nom), ...AUTRES_ECRITS]),
+      methode: "Poème, théâtre et récit ne se ressemblent pas, même de loin.",
+    });
+  }
+  if (forme === 3) {
+    return asQcm({
+      text: `Qu'est-ce qui découpe ${g.nom} ?`,
+      correct: g.unite,
+      wrongs: shuffle([...autres.map((a) => a.unite), "les chapitres", "les vers"]),
+      methode: "Chaque genre a son unité : la strophe, la réplique, le paragraphe.",
+    });
+  }
+  return asQcm({
+    text: `Dans ${g.nom}, comment sait-on que quelqu'un parle ?`,
+    correct: g.parole,
+    wrongs: shuffle([
+      ...autres.map((a) => a.parole),
+      "un numéro indique qui parle à chaque ligne",
+    ]),
+    methode: "Le tiret du récit et le nom en colonne du théâtre font le même travail.",
+  });
+}
+
 const DOCUMENTS: QcmItem[] = [
   {
     text: "Qu'est-ce qu'un document composite ?",
@@ -8241,6 +8356,12 @@ function questionParMicro(microId: string): Generated | null {
   if (microId.includes("voc_racines")) return qcm(RACINES);
   if (microId.includes("voc_composition")) return qcm(COMPOSITION);
   if (microId.includes("voc_homonymie")) return qcm(HOMONYMIE);
+  /* ⭐ AJOUTÉ LE 30/08/2026 : `cm1_comp_genres` et `cm2_comp_genres` tombaient
+     sur le pool LECTURE, donc sur des questions de compréhension, alors qu'elles
+     demandent de RECONNAITRE UN GENRE À SA MISE EN PAGE. Le `s` final compte :
+     `6e_comp_genre` est au singulier et n'est PAS capté ici — voir le bloc
+     au-dessus de GENRE_MISE_EN_PAGE. */
+  if (microId.includes("comp_genres")) return genreMiseEnPage();
   // Les six entrées du cours moyen.
   if (microId.includes("cult_heros")) return qcm(HEROS);
   if (microId.includes("cult_merveilleux")) return qcm(MERVEILLEUX);
