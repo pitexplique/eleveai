@@ -466,6 +466,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Argumenter est la charnière : le seul geste qui vaut en exposé comme en débat. Un avis sans « parce que » n'est pas un argument.",
   },
+  "francais/cm2/vocabulaire-sens": {
+    titre: "Le sens des mots en CM2 (2026-2027)",
+    resume:
+      "Un mot n'a pas son sens tout seul : c'est la phrase qui le lui donne. Contexte, polysémie, sens figuré, nuance — et le test du dessin.",
+  },
   "francais/cm2/grammaire-orthographe": {
     titre: "Analyser une phrase : nature, fonction, accords",
     resume:
