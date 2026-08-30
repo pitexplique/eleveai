@@ -10,11 +10,17 @@
 ## 1) Périmètre
 
 ### ✅ La Sidebar “Générateur” s’affiche uniquement sur :
-- `/espace-atelier-IA`
 - `/espace-profs`
 - `/espace-eleves`
 - `/espace-parents`
 (+ leurs sous-pages éventuelles)
+
+> ⛔ **`/espace-atelier-IA` et `/atelier-IA` N’EXISTENT PLUS** — supprimées le
+> 24/06/2026 (commit `3765686c`). Elles figuraient encore ici le 29/08, soit
+> deux mois pendant lesquels ce contrat décrivait un écran disparu. Ne pas les
+> réintroduire en lisant une vieille version de ce fichier : `/atelier-IA` rend
+> un 404, volontairement, et ne doit pas être redirigée (décision de Frédéric,
+> 29/08 : « faut enlever atelier-ia »).
 
 👉 Ces pages sont les **générateurs de prompts**.
 
@@ -31,7 +37,8 @@
 ## 2) Règles UX globales (Header vs Sidebar)
 
 ### Header global
-- Sert à naviguer entre les univers : Atelier-IA / Profs / Élèves / Parents (+ éventuellement Collèges).
+- Sert à naviguer entre les univers : Profs / Élèves / Parents. (L’univers
+  « Atelier-IA » a été retiré le 24/06/2026, voir le § 1.)
 - Évite les liens “en double” : si une route est déjà dans le Header, on n’a pas besoin de la remettre en gros dans la Sidebar.
 
 ### Sidebar Générateur

@@ -102,6 +102,9 @@ RLS bloque la clé anon.
 ## Reste à faire (hors périmètre)
 
 - Purger la colonne `mot_de_passe` en clair (étape commentée).
-- Supprimer les fichiers morts `EspaceProfsClient copy.tsx` /
-  `copy 2.tsx` / `AtelierIAClient copy.tsx` (seuls « utilisateurs » des
-  écritures sur `presets_eleveai` / `presets_email`).
+- ~~Supprimer les fichiers morts `EspaceProfsClient copy.tsx` / `copy 2.tsx` /
+  `AtelierIAClient copy.tsx`~~ — ✅ **fait**. Vérifié le 29/08/2026 : aucun
+  fichier `*copy*.tsx` ne subsiste sous `app/`, et tout l'atelier IA est parti
+  le 24/06 (commit `3765686c`). Une liste de « restes à faire » qui nomme des
+  fichiers déjà supprimés fait perdre du temps à celui qui la relit : elle est
+  barrée plutôt que retirée, pour que la vérification ne soit pas refaite.
