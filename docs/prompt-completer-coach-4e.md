@@ -508,15 +508,33 @@ Ordre proposé, du plus sûr au plus incertain :
     ⚠️ « Utiliser un logiciel de géométrie dynamique » restera un TROU ASSUMÉ :
     un geste de logiciel ne s'évalue pas en QCM.
 
- ⛔ ET LA DETTE QUI RESTE, MESURÉE MAIS PAS PAYÉE : dix micros de 4ᵉ sont
- sous le seuil de renouvellement de douze énoncés GÉNÉRÉS — `aire_comprendre`
- (1 seul, et un seul gabarit), `proba_equiprobabilite`, `cos_cotes`,
- `sym_centrale`, `thales_configuration`, `sym_axiale`,
- `quadrilatere_parallelogramme_reconnaitre`, `pythagore_reconnaitre`,
- `proba_evenement`, `cos_definition`. Aucune n'appartient aux notions
- ouvertes en août : c'est une dette antérieure, dans des notions qui ont déjà
- leur fiche en ligne. La combler demande des GABARITS, pas des questions
- figées — celles-ci ne se renouvellent pas.
+ ⛔ LA DETTE DE RENOUVELLEMENT — cinq micros restantes sur dix, au 30/08/2026 :
+ `sym_centrale` (6 générés), `thales_configuration` (6), `sym_axiale` (7),
+ `quadrilatere_parallelogramme_reconnaitre` (11), `pythagore_reconnaitre` (11).
+ Le minimum de la classe est passé de 1 à 6.
+
+ ⭐ LA CAUSE EST TOUJOURS LA MÊME, et elle ne se lit PAS dans le code : les
+ tables font trois à six cas, et plusieurs gabarits ont un TEXTE CONSTANT — seul
+ le dessin change. Le vérificateur signe une question par son énoncé et ses
+ propositions TRIÉES ; il ne voit pas les canvas, et il compte juste : l'élève
+ relit la même phrase à chaque tirage.
+ ⛔ La réparation n'est JAMAIS d'ajouter du figé. C'est d'allonger la table à
+ quinze cas, ou d'écrire un second gabarit qui prend la question par l'autre
+ bout.
+
+ ⭐⭐ ET CHERCHER LE COMPTEUR FAIT SORTIR DE VRAIS DÉFAUTS — deux le 30/08 :
+   · `sideLabels: { AC: … }` dans `cosinus.bank.ts`, masqué par un `as any`.
+     Le type ne connaît que `AB`, `BC`, `CA`, et le renderer ne lit que
+     ceux-là : l'étiquette « opposé » n'avait JAMAIS été affichée.
+   · Le triangle du cosinus s'appelait toujours ABC rectangle en A. L'élève y
+     apprenait « l'hypoténuse, c'est [BC] » au lieu de la règle. Six nommages.
+ 👉 Traiter cette dette comme une chasse au chiffre serait passer à côté :
+ c'est en regardant POURQUOI un gabarit ne varie pas qu'on trouve ce qu'il
+ enseigne de travers.
+
+ ⭐ Le diagnostic se fait avec un script jetable qui reprend LA CLÉ EXACTE du
+ vérificateur — texte + propositions triées. Une clé non triée compte chaque
+ mélange comme un énoncé de plus et ment de vingt à trente pour un.
 
 ════ CE QU'IL NE FAUT PAS FAIRE ═════════════════════════════════════
 ⛔ Écrire une fiche avant que la banque de sa notion soit verte.
