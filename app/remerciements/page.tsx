@@ -62,9 +62,14 @@ export default function RemerciementsPage() {
                     <div className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-yellow-300/10 opacity-0 blur-xl transition group-hover:opacity-100" />
 
                     <div className="relative flex items-center gap-3">
-                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gradient-to-br from-yellow-300 to-amber-500 text-base font-black text-slate-900 shadow">
-                        {eleve.prenom.charAt(0)}
-                      </span>
+                      {/* Même pastille décorative que dans RemerciementsBar, et
+                          rendue par CSS pour la même raison : en texte, elle se
+                          colle au prénom et tout extracteur lit « MMaëlle ». */}
+                      <span
+                        aria-hidden
+                        style={{ "--initiale": `"${eleve.prenom.charAt(0)}"` } as React.CSSProperties}
+                        className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gradient-to-br from-yellow-300 to-amber-500 text-base font-black text-slate-900 shadow before:content-[var(--initiale)]"
+                      />
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center justify-between gap-2">
                           <p className="truncate text-base font-black text-yellow-300">

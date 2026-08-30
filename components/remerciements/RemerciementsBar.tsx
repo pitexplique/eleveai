@@ -35,9 +35,22 @@ export default function RemerciementsBar() {
               key={`${eleve.prenom}-${eleve.action}`}
               className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] py-1.5 pl-2 pr-3.5 text-sm font-bold text-white/90 shadow-sm transition hover:-translate-y-0.5 hover:border-yellow-300/50 hover:bg-white/[0.12]"
             >
-              <span className="grid h-5 w-5 place-items-center rounded-full bg-gradient-to-br from-yellow-300 to-amber-500 text-[11px] font-black text-slate-900">
-                {eleve.prenom.charAt(0)}
-              </span>
+              {/* ⛔⛔ L'INITIALE NE DOIT PAS ÊTRE DU TEXTE. C'est une pastille,
+                  un décor — mais posée juste avant le prénom, tout ce qui
+                  extrait du texte la colle à lui et lit « MMaëlle », « KKeïla ».
+                  Ce n'est pas une hypothèse : c'est la description que Brave
+                  affiche pour /cahier-vacances/maths, mesurée le 29/08.
+                  ⚠️ `aria-hidden` SEUL NE SUFFIT PAS, et c'est le piège : il
+                  fait taire les lecteurs d'écran, mais la lettre reste dans le
+                  DOM et les extracteurs la prennent quand même. Elle est donc
+                  rendue par CSS (`content`), où aucun extracteur ne va — et
+                  `aria-hidden` reste, pour les rares qui liraient le
+                  pseudo-élément. */}
+              <span
+                aria-hidden
+                style={{ "--initiale": `"${eleve.prenom.charAt(0)}"` } as React.CSSProperties}
+                className="grid h-5 w-5 place-items-center rounded-full bg-gradient-to-br from-yellow-300 to-amber-500 text-[11px] font-black text-slate-900 before:content-[var(--initiale)]"
+              />
               <span className="text-[15px] font-black text-yellow-300">{eleve.prenom}</span>
               <span className="text-white/30">·</span>
               <span className="text-white/70">{eleve.action}</span>
