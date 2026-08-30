@@ -369,6 +369,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Trois données bien choisies suffisent : les trois cas d'égalité, l'inégalité triangulaire et la somme des angles à 180° — et pourquoi trois angles ne donnent que des triangles semblables, jamais égaux.",
   },
+  "maths/4e/ordre-grandeur": {
+    titre: "Ordres de grandeur et préfixes",
+    resume:
+      "Nano, micro, milli, kilo, méga, giga : des puissances de dix écrites en un mot — associer un ordre de grandeur à un objet, estimer un calcul en arrondissant, et juger un résultat sans le refaire.",
+  },
   "maths/4e/grandeur-composee": {
     titre: "Grandeurs composées et unités",
     resume:
