@@ -195,10 +195,18 @@ function Section({
         </div>
       );
 
+    /* ⛔⛔ EN LIGNES, PAS EN COLONNES (31/08/2026). Frédéric, capture à l'appui :
+       « pour les exercices corrigés en mode classe tu mets trois colonnes au lieu
+       de mettre 3 lignes, donc on comprend pas ». La diapo empilait le DESSIN,
+       l'ÉNONCÉ et la CORRECTION côte à côte : trois colonnes étroites, deux mots
+       par ligne, illisibles au vidéoprojecteur.
+       ⭐ Un énoncé et sa correction se lisent l'un APRÈS l'autre — c'est un
+       ordre, pas une comparaison. Les mettre côte à côte n'apportait rien et
+       coutait toute la largeur. */
     case "exemple":
       return (
-        <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr]">
-          <div className="rounded-3xl border-4 border-cyan-200 bg-cyan-50 p-10">
+        <div className="grid gap-6">
+          <div className="rounded-3xl border-4 border-cyan-200 bg-cyan-50 p-6 lg:p-8">
             <p className="text-4xl font-black leading-tight text-slate-950">
               {section.enonce}
             </p>
@@ -206,7 +214,7 @@ function Section({
               {section.question}
             </p>
           </div>
-          <div className="flex flex-col rounded-3xl border-4 border-emerald-200 bg-emerald-50 p-10">
+          <div className="flex flex-col rounded-3xl border-4 border-emerald-200 bg-emerald-50 p-6 lg:p-8">
             <p className="text-2xl font-black uppercase text-emerald-700">
               Correction
             </p>
@@ -223,10 +231,11 @@ function Section({
         </div>
       );
 
+    /* Même correction que pour « exemple » : en lignes, jamais en colonnes. */
     case "exercice":
       return (
-        <div className="grid gap-8 lg:grid-cols-[1fr_0.85fr]">
-          <div className="rounded-3xl border-4 border-cyan-200 bg-cyan-50 p-10">
+        <div className="grid gap-6">
+          <div className="rounded-3xl border-4 border-cyan-200 bg-cyan-50 p-6 lg:p-8">
             <p className="text-5xl font-black leading-tight text-slate-950">
               {section.enonce}
             </p>
@@ -236,7 +245,7 @@ function Section({
               </p>
             ) : null}
           </div>
-          <div className="flex flex-col rounded-3xl border-4 border-amber-200 bg-amber-50 p-10">
+          <div className="flex flex-col rounded-3xl border-4 border-amber-200 bg-amber-50 p-6 lg:p-8">
             <p className="text-3xl font-black uppercase text-amber-700">
               Consigne
             </p>
@@ -439,9 +448,21 @@ export default function ModeClasse({
             </p>
           </div>
           {slide.schema ? (
-            // Le dessin à gauche, le texte à droite : en vidéoprojection, la
-            // figure est ce qu'on regarde, elle prend la moitié de l'écran.
-            <div className="grid gap-6 lg:grid-cols-2 lg:gap-10">
+            /* Le dessin à gauche, le texte à droite : en vidéoprojection, la
+               figure est ce qu'on regarde, elle prend la moitié de l'écran.
+               ⛔⛔ SAUF POUR UN EXERCICE (31/08/2026). Là, la section se déplie
+               déjà en lignes — énoncé PUIS correction — et lui coller le dessin
+               à côté redonnait exactement les TROIS COLONNES que Frédéric a
+               signalées. Sur un exercice, tout s'empile : le dessin, l'énoncé,
+               la correction. Trois lignes, pleine largeur, dans l'ordre où on
+               les lit. */
+            <div
+              className={
+                slide.section.type === "exemple" || slide.section.type === "exercice"
+                  ? "grid gap-6"
+                  : "grid gap-6 lg:grid-cols-2 lg:gap-10"
+              }
+            >
               {/* ⛔ LE DESSIN ÉTAIT LA VRAIE CAUSE DU DÉBORDEMENT — mesuré le
                   30/08/2026 sur la diapo 20 : contenu 850 px pour 701 visibles,
                   dont 355 px de SVG. J'avais d'abord accusé la longueur des
