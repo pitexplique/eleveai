@@ -970,24 +970,84 @@ explanation:
   theme: "reunion",
   hint: "$f(x)$ donne le résultat correspondant à $x$.",
   tags: ["fonction", "vocabulaire", "reunion", "template"],
+  // ⛔ RÉPARÉ LE 01/09/2026 : quatre énoncés, tous sur la même location de
+  // kayak. Le contexte était unique, donc l'élève reconnaissait la question
+  // plutôt que de la lire.
+  // ⭐ Six situations, et surtout DEUX SENS DE LECTURE. Jusqu'ici on ne
+  // demandait que « que représente f(3) ? » ; on demande aussi ce que
+  // représente la VARIABLE, ce qui oblige à distinguer l'antécédent de l'image
+  // — c'est là que la confusion se loge.
   generate: () => {
-    const h = randomInt(2, 5);
+    const h = randomInt(2, 8);
+    const s = randomChoice([
+      { quoi: "Une location de kayak coûte", unite: "euros", pour: "heures", sortie: "le prix", entree: "la durée en heures" },
+      { quoi: "Un trajet en bus coûte", unite: "euros", pour: "kilomètres", sortie: "le prix", entree: "la distance en kilomètres" },
+      { quoi: "Une plante mesure", unite: "centimètres", pour: "semaines", sortie: "la hauteur", entree: "le nombre de semaines" },
+      { quoi: "Un réservoir contient", unite: "litres", pour: "minutes de remplissage", sortie: "le volume d'eau", entree: "la durée de remplissage" },
+      { quoi: "Une facture d'électricité s'élève à", unite: "euros", pour: "kilowattheures consommés", sortie: "le montant", entree: "la consommation" },
+      { quoi: "Un cycliste a parcouru", unite: "kilomètres", pour: "heures de route", sortie: "la distance parcourue", entree: "le temps de route" },
+    ]);
+    const demandeSortie = Math.random() < 0.6;
+    const correct = demandeSortie ? `${s.sortie} pour ${h} ${s.pour}` : s.entree;
     return {
-      text: `Une location de kayak coûte $f(x)$ euros pour $x$ heures. Que représente $f(${h})$ ?`,
+      text: demandeSortie
+        ? `${s.quoi} $f(x)$ ${s.unite} pour $x$ ${s.pour}. Que représente $f(${h})$ ?`
+        : `${s.quoi} $f(x)$ ${s.unite} pour $x$ ${s.pour}. Que représente $x$ ?`,
       format: "qcm",
       choices: shuffle([
-        `le prix pour ${h} heures`,
-        `le nombre d’heures`,
-        `le nom de la fonction`,
-        `${h} euros de réduction`,
+        `${s.sortie} pour ${h} ${s.pour}`,
+        s.entree,
+        "le nom de la fonction",
+        `${h} ${s.unite} de réduction`,
       ]),
-      expected: [`le prix pour ${h} heures`],
+      expected: [correct],
       comparator: "mcq_exact",
       explanation:
-        `Définition : $f(${h})$ est le résultat de $f$ pour la valeur ${h}.\n\n` +
-        `Méthode : ici $x$ est un nombre d’heures, donc $f(x)$ est un prix.\n\n` +
-        `Calcul : $f(${h})$ correspond à ${h} heures.\n\n` +
-        `Conclusion : $f(${h})$ représente le prix pour ${h} heures.`,
+        "Définition : dans l'écriture $f(x)$, la lettre entre parenthèses est ce qu'on DONNE — l'antécédent — et $f(x)$ est ce qu'on OBTIENT — l'image.\n\n" +
+        `Méthode : on lit les unités de l'énoncé. Ici, $x$ se compte en ${s.pour} et $f(x)$ en ${s.unite}.\n\n` +
+        (demandeSortie
+          ? `Calcul : $f(${h})$ est donc ${s.sortie} correspondant à ${h} ${s.pour}.\n\n`
+          : `Calcul : $x$ est donc ${s.entree}.\n\n`) +
+        `Conclusion : ⚠️ la confusion classique est d'échanger les deux. $f(${h})$ n'est pas ${h} : ${h} est ce qu'on met dans la machine, $f(${h})$ est ce qui en sort.`,
+    };
+  },
+},
+{
+  // ⭐ SECOND GABARIT AJOUTÉ LE 01/09/2026 : cette micro n'en avait qu'un, et le
+  // mode complet du coach en exige deux pour opposer ses questions.
+  // ⭐⭐ IL PORTE LE VOCABULAIRE PAR SON NOM — antécédent et image — que le
+  // premier gabarit fait travailler sans le nommer. La 3e formalise ces deux
+  // mots, et c'est leur SENS DE LECTURE qui pose problème : l'antécédent est
+  // ce qu'on donne, l'image ce qu'on obtient.
+  kind: "template",
+  id: "fonction_vocabulaire_tpl_2_antecedent_image",
+  niveau: "3e",
+  matiere: "maths",
+  notionId: "fonction_generalite",
+  microId: "fonction_vocabulaire",
+  difficulty: 3,
+  theme: "neutral",
+  hint: "L'antécédent est ce qu'on DONNE à la fonction ; l'image est ce qu'elle REND.",
+  tags: ["fonction", "vocabulaire", "antecedent", "image", "qcm", "template"],
+  generate: () => {
+    const a = randomInt(2, 9);
+    const k = randomInt(2, 5);
+    const b = randomInt(1, 9);
+    const img = k * a + b;
+    const demandeImage = Math.random() < 0.5;
+    const correct = demandeImage ? String(img) : String(a);
+    return {
+      text: demandeImage
+        ? `Une fonction $f$ vérifie $f(${a}) = ${img}$. Quelle est l'IMAGE de ${a} par $f$ ?`
+        : `Une fonction $f$ vérifie $f(${a}) = ${img}$. Quel est l'ANTÉCÉDENT de ${img} par $f$ ?`,
+      format: "short",
+      expected: [correct],
+      comparator: "number_equal",
+      explanation:
+        "Définition : dans l'égalité $f(a) = b$, le nombre $a$ est l'ANTÉCÉDENT et le nombre $b$ est l'IMAGE. L'antécédent est ce qu'on donne, l'image ce qu'on obtient.\n\n" +
+        "Méthode : on lit l'égalité de gauche à droite — ce qui est DANS les parenthèses est l'antécédent, ce qui est APRÈS le signe égal est l'image.\n\n" +
+        `Calcul : $f(${a}) = ${img}$, donc l'image de ${a} est ${img}, et l'antécédent de ${img} est ${a}.\n\n` +
+        `Conclusion : ⚠️ les deux mots se lisent dans des sens opposés, et c'est là que ça coince. On dit « l'image DE ${a} » et « l'antécédent DE ${img} » : le mot qui suit « de » change de camp selon le terme employé.`,
     };
   },
 },
