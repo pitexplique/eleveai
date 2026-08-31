@@ -25,6 +25,26 @@ function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+/**
+ * ⭐ LES NOMMAGES DU QUADRILATÈRE, ajoutés le 31/08/2026.
+ *
+ * ⛔ Les gabarits de `quadrilatere_parallelogramme_reconnaitre` écrivaient
+ * « la figure codée » sans jamais la nommer : un seul énoncé pour le premier
+ * d'entre eux. Nommer le quadrilatère n'est pas cosmétique — c'est ce qui
+ * oblige l'élève à LIRE la figure au lieu de reconnaître une image.
+ *
+ * ⚠️ L'ORDRE DES LETTRES COMPTE : dans un quadrilatère ABCD, les côtés opposés
+ * sont [AB] et [CD], [BC] et [DA]. Les quatre lettres se suivent donc dans le
+ * sens du tracé, jamais au hasard.
+ */
+const NOMS_QUADRI: { A: string; B: string; C: string; D: string }[] = [
+  { A: "A", B: "B", C: "C", D: "D" },
+  { A: "E", B: "F", C: "G", D: "H" },
+  { A: "M", B: "N", C: "P", D: "Q" },
+  { A: "R", B: "S", C: "T", D: "U" },
+  { A: "K", B: "L", C: "V", D: "W" },
+];
+
 function randomChoice<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -294,8 +314,12 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Observe le codage des côtés parallèles.",
     tags: ["parallelogramme", "canvas", "template"],
+    // ⛔ RÉPARÉ LE 31/08/2026 : ce gabarit ne fabriquait qu'UN SEUL énoncé — il
+    // écrivait « la figure codée » sans jamais la nommer. Sa réponse variait
+    // déjà, c'était son mérite ; il ne lui manquait que de désigner la figure.
     generate: () => {
       const yes = randomChoice([true, false]);
+      const n = randomChoice(NOMS_QUADRI);
 
       const canvas: QuadrilatereCanvasData = yes
         ? parallelogramFigure(randomInt(6, 12), randomInt(4, 8))
@@ -307,7 +331,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
               C: { x: 210, y: 180 },
               D: { x: 85, y: 180 },
             },
-            labels: { A: "A", B: "B", C: "C", D: "D" },
+            labels: { A: n.A, B: n.B, C: n.C, D: n.D },
             display: {
               showPoints: true,
               showLabels: true,
@@ -322,7 +346,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
           };
 
       return {
-        text: "La figure codée représente-t-elle un parallélogramme ?",
+        text: `Le quadrilatère ${n.A}${n.B}${n.C}${n.D}, tel qu'il est codé, est-il un parallélogramme ?`,
         format: "qcm",
         choices: ["oui", "non"],
         expected: [yes ? "oui" : "non"],

@@ -536,18 +536,23 @@ generate: () => {
       const isRight = randomChoice([true, false]);
       const labels = randomChoice(triangleNames);
 
+      // ⛔ RÉPARÉ LE 31/08/2026 : ce gabarit ne fabriquait qu'UN SEUL énoncé.
+      // Il tirait pourtant déjà ses `labels` dans `triangleNames` — mais il ne
+      // s'en servait QUE pour le dessin, jamais dans la question. Le nommage
+      // était là, inutilisé.
+      const nom = `${labels.A}${labels.B}${labels.C}`;
       return {
-        text: "Peut-on utiliser directement le théorème de Pythagore avec cette figure ?",
+        text: `Peut-on utiliser directement le théorème de Pythagore dans le triangle ${nom} ?`,
         format: "qcm",
         choices: ["oui", "non"],
         expected: [isRight ? "oui" : "non"],
         comparator: "mcq_exact",
-        explanation: "Définition : dans un triangle rectangle, le théorème de Pythagore relie les longueurs des trois côtés.\n\n" +
-          "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
+        explanation:
+          "Définition : le théorème de Pythagore ne s'applique QUE dans un triangle rectangle. C'est sa condition d'emploi, pas un détail.\n\n" +
+          "Méthode : avant tout calcul, on cherche l'angle droit CODÉ sur la figure — le petit carré. Puis on repère l'hypoténuse, en face de lui.\n\n" +
           (isRight
-          ? "Oui, le triangle est codé rectangle."
-          : "Non, aucun angle droit n’est codé sur la figure.") +
-          "\n\nConclusion : la longueur ou l’affirmation obtenue respecte le triangle rectangle.",
+            ? `Calcul : le triangle ${nom} porte bien un angle droit codé.\n\nConclusion : oui, on peut appliquer Pythagore.`
+            : `Calcul : ⚠️ aucun angle droit n'est codé sur ${nom}.\n\nConclusion : non. ⭐ Un triangle qui « a l'air » rectangle ne l'est pas : seul le codage le prouve. Sans lui, Pythagore ne s'applique pas — et la réciproque servirait justement à le démontrer.`),
         canvas: isRight
           ? rightTriangleFigure({ labels })
           : nonRightTriangleFigure({ labels }),
