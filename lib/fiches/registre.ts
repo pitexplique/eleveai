@@ -456,6 +456,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Quand on abandonne un livre, on n'a pas perdu l'histoire : on a perdu qui est qui. Le narrateur, le héros, l'adversaire.",
   },
+  "francais/cm1/culture-personnages": {
+    titre: "Héros et merveilleux en CM1 (2026-2027)",
+    resume:
+      "Ce n'est pas la magie qui fait le conte : c'est que personne ne s'en étonne. Le merveilleux, l'étrange, et le héros dépassé.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
