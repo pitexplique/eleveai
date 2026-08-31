@@ -471,6 +471,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Un carnet de lecture ne sert pas à prouver qu'on a lu. Ce qui compte : ce que tu as aimé, et l'endroit exact.",
   },
+  "francais/cm1/ecriture-preparer": {
+    titre: "Écrire pour apprendre en CM1 (2026-2027)",
+    resume:
+      "Recopier une leçon ne la fait pas entrer dans la tête. Reformulée avec tes mots, elle devient la tienne.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
