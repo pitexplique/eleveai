@@ -114,7 +114,7 @@ function Section({
               {section.phrase}
             </p>
             {section.sousPhrase ? (
-              <p className="mt-6 text-2xl font-bold leading-snug text-slate-700 lg:text-3xl">
+              <p className="mt-5 text-xl font-bold leading-snug text-slate-600 lg:text-2xl">
                 {section.sousPhrase}
               </p>
             ) : null}
@@ -124,7 +124,7 @@ function Section({
               <p className="text-2xl font-black uppercase text-emerald-700">
                 {section.encadre.titre}
               </p>
-              <p className="mt-5 text-4xl font-black leading-tight text-slate-950">
+              <p className="mt-3 text-xl font-bold leading-snug text-slate-700 lg:text-2xl">
                 {section.encadre.texte}
               </p>
             </div>
@@ -207,10 +207,10 @@ function Section({
       return (
         <div className="grid gap-6">
           <div className="rounded-3xl border-4 border-cyan-200 bg-cyan-50 p-6 lg:p-8">
-            <p className="text-4xl font-black leading-tight text-slate-950">
+            <p className="text-2xl font-black leading-tight text-slate-950 lg:text-3xl">
               {section.enonce}
             </p>
-            <p className="mt-8 text-4xl font-black leading-tight text-cyan-700">
+            <p className="mt-4 text-2xl font-black leading-tight text-cyan-700 lg:text-3xl">
               {section.question}
             </p>
           </div>
@@ -219,7 +219,7 @@ function Section({
               Correction
             </p>
             {revealed ? (
-              <p className="mt-6 text-3xl font-black leading-snug text-slate-950">
+              <p className="mt-4 text-2xl font-black leading-snug text-slate-950 lg:text-3xl">
                 {section.correction}
               </p>
             ) : (
@@ -236,11 +236,11 @@ function Section({
       return (
         <div className="grid gap-6">
           <div className="rounded-3xl border-4 border-cyan-200 bg-cyan-50 p-6 lg:p-8">
-            <p className="text-5xl font-black leading-tight text-slate-950">
+            <p className="text-2xl font-black leading-tight text-slate-950 lg:text-3xl">
               {section.enonce}
             </p>
             {section.question ? (
-              <p className="mt-8 text-5xl font-black leading-tight text-cyan-700">
+              <p className="mt-4 text-2xl font-black leading-tight text-cyan-700 lg:text-3xl">
                 {section.question}
               </p>
             ) : null}
@@ -255,7 +255,7 @@ function Section({
               </p>
             ) : null}
             {revealed ? (
-              <p className="mt-8 text-4xl font-black leading-tight text-emerald-700">
+              <p className="mt-4 text-2xl font-black leading-snug text-emerald-700 lg:text-3xl">
                 {section.correction}
               </p>
             ) : (
@@ -482,7 +482,16 @@ export default function ModeClasse({
                   qu'il faudra porter le même plafond. Trois mesures identiques
                   au pixel près m'ont mis sur la piste — quand un chiffre ne
                   bouge pas d'un iota, le correctif n'atteint pas sa cible. */}
-              <div className="mx-auto flex max-h-[42vh] w-full max-w-xl items-center justify-center overflow-hidden [&_svg]:max-h-full [&_svg]:w-auto [&_svg]:max-w-full">
+              {/* ⛔⛔ PLAFOND RETIRÉ LE 31/08/2026 — c'était une régression de ma
+                  main. J'avais borné le conteneur (`max-h-[42vh] overflow-hidden`)
+                  et mis `[&_svg]:w-auto` pour faire tenir les diapos. Deux
+                  constats : d'une part la mesure n'avait PAS bougé d'un pixel,
+                  donc ça ne corrigeait rien ; d'autre part, privé de largeur, le
+                  SVG s'effondrait — Frédéric a vu un cercle vide à la place du
+                  dessin. Un correctif qui ne corrige rien et qui casse s'enlève.
+                  ⭐ La vraie cause du débordement était ailleurs : les trois
+                  colonnes des exercices, corrigées le même jour. */}
+              <div className="mx-auto w-full max-w-xl [&_svg]:w-full">
                 {slide.schema}
               </div>
               <Section

@@ -205,10 +205,12 @@ export const ficheFluenceLectureCm1: FicheCoursData = {
       "Ce sont les mots les plus courants. C'est pour ça qu'ils t'embêtent souvent.",
     ].join("\n\n"),
   },
+  /* ⛔ PAS DE `legende` ICI — règle du 31/08/2026, « jamais 120 mots en police
+     10 ». Le dessin porte déjà sa propre légende, courte, dans le canvas ; celle
+     du bloc `figure` s'affichait en tout petit sous la figure ET servait de
+     sous-titre à la diapo de définition en mode classe, où elle débordait. */
   figure: {
     schema: pile(troisReperes, pasPlusVite),
-    legende:
-      "Un thermomètre dit que tu as de la fièvre. Le casser ne te soigne pas. Ce nombre, c'est pareil : il mesure, il ne soigne pas.",
   },
   proprietes: [
     {

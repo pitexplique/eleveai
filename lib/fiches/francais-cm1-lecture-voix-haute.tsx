@@ -200,8 +200,6 @@ export const ficheLectureVoixHauteCm1: FicheCoursData = {
   },
   figure: {
     schema: pile(troisBoutons, pasLeBonBouton),
-    legende:
-      "Trois problèmes différents, donc trois réglages différents. Être entendu n'est pas être compris, et être compris n'est pas être suivi. Voilà pourquoi on se trompe si souvent de bouton : on entend « je n'ai pas compris » et on monte le son, alors que la personne entendait très bien.",
   },
   proprietes: [
     {

@@ -446,6 +446,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Comprendre n'est pas un don : c'est une suite de gestes. Le premier surprend — on relit la question, pas le texte.",
   },
+  "francais/cm1/comprehension-documents": {
+    titre: "Lire un document en CM1 (2026-2027)",
+    resume:
+      "Personne ne lit un pot de yaourt en entier. Un document, on n'y lit pas tout : on y cherche une chose.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:

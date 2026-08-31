@@ -74,6 +74,17 @@ for (const classe of CLASSES) {
     if (usages) ecarts.push(`usages ${usages}>0`);
     if (/\n  formule: \{/.test(src)) ecarts.push("formule");
 
+    /* ⛔⛔ JAMAIS CENT VINGT MOTS EN CORPS DIX — règle de Frédéric, 31/08/2026 :
+       « tu venais d'écrire 120 mots en police 10, ne jamais faire ça ».
+       La `legende` du bloc `figure` était rendue en tout petit sous le dessin, et
+       j'y écrivais un commentaire d'adulte de cinq lignes. Deux dégâts pour un :
+       illisible sur la page, ET reprise telle quelle comme sous-titre de la
+       diapo de définition en mode classe, où elle débordait de l'écran.
+       ⭐ Le dessin porte déjà sa propre légende, courte, à l'intérieur du canvas.
+       Celle du bloc `figure` est donc supprimée : ce qui mérite d'être dit se dit
+       dans la définition, en grand. */
+    if (/\n  figure: \{[\s\S]*?\n    legende:/.test(src)) ecarts.push("légende de figure");
+
     // Capitales d'emphase dans ce que l'élève lit.
     const lus = ["texte", "solution", "detail", "legende", "correction", "accroche"]
       .flatMap((c) => champs(src, c));

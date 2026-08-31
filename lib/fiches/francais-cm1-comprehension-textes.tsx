@@ -187,8 +187,6 @@ export const ficheComprehensionTextesCm1: FicheCoursData = {
   },
   figure: {
     schema: pile(pasUnDon, relireLaQuestion),
-    legende:
-      "Beaucoup d'enfants croient qu'on comprend ou qu'on ne comprend pas, comme on a les yeux bleus. C'est faux, et c'est une bonne nouvelle : ce sont des gestes. En bas, le premier, et il surprend — quand on bloque, on relit le texte en boucle alors que très souvent, ce qu'on a mal lu, c'est ce qu'on nous demandait.",
   },
   proprietes: [
     {
