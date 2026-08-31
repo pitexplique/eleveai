@@ -27,8 +27,14 @@
 // comme du texte. C'est le même choix que `verifier-banque.mjs`, qui signale les
 // dollars non appariés sans faire échouer le rendu.
 
+// ⭐ CE COMPOSANT EST AUSSI L'ENDROIT DE LA TYPOGRAPHIE (31/08/2026). Il est déjà
+// le passage obligé de tout texte de fiche affiché — vingt-six appels dans
+// `FicheCoursClient`, plus les légendes de dessins des fiches de maths. Poser
+// l'espace insécable ici la pose donc partout, sans toucher une seule fiche.
+// La mesure qui a décidé de cette méthode est dans `lib/fiches/typographie.ts`.
 import React from "react";
 import katex from "katex";
+import { insecables } from "@/lib/fiches/typographie";
 // La CSS de KaTeX suit le composant qui la rend, et non plus le layout (voir
 // l'explication complète dans `components/MarkdownMath.tsx`). Sans cette ligne,
 // `renderToString` ci-dessous produit son balisage mais les fractions sortent à
@@ -61,12 +67,18 @@ function decouper(texte: string): { math: boolean; contenu: string }[] {
 }
 
 export default function TexteMath({ children }: { children: string }) {
-  if (!children || !children.includes("$")) return <>{children}</>;
+  // Le cas de loin le plus fréquent : un texte sans formule. Il ne reste que la
+  // typographie à poser.
+  if (!children || !children.includes("$")) return <>{insecables(children)}</>;
 
   return (
     <>
       {decouper(children).map((m, i) => {
-        if (!m.math) return <React.Fragment key={i}>{m.contenu}</React.Fragment>;
+        // ⚠️ La typographie ne s'applique QU'AUX morceaux littéraux : dans une
+        // formule, `:` et `!` sont des opérateurs et KaTeX doit les recevoir
+        // intacts.
+        if (!m.math)
+          return <React.Fragment key={i}>{insecables(m.contenu)}</React.Fragment>;
         let html: string;
         try {
           html = katex.renderToString(m.contenu, {
