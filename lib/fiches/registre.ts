@@ -521,6 +521,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Grand donne grande, chant donne chanter : la lettre muette se trouve. Cherche d'abord, apprends ce qui reste.",
   },
+  "francais/cm1/grammaire-types-phrases": {
+    titre: "Les types et les formes de phrases en CM1 (2026-2027)",
+    resume:
+      "L'exclamatif n'est pas un type : le type se lit à ce que la phrase attend de toi, pas au point final.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
