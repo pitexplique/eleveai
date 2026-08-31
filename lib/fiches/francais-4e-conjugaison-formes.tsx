@@ -41,6 +41,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   ConjugaisonLigne,
@@ -289,7 +290,7 @@ export const ficheConjugaisonFormes4e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "4e",
   notion: "conjugaison-formes",
-  titre: "Lire et former un verbe conjugué en 4e (2026-2027)",
+  titre: `Lire et former un verbe conjugué en 4e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Il chantait » et « il chanterait » ne diffèrent que d'une lettre. Et pourtant, ce n'est ni le même temps, ni même le même MODE : le premier raconte ce qui a duré, le second suppose ce qui n'a pas eu lieu. Toute la conjugaison tient dans ce « r » — celui du futur, qu'on entend à peine.",
   identite: [

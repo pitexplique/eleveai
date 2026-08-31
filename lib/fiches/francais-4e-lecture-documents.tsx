@@ -48,6 +48,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   FigureLibreCanvasGridCell,
@@ -277,7 +278,7 @@ export const ficheLectureDocuments4e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "4e",
   notion: "lecture-documents",
-  titre: "Lire des images, la presse et des documents en 4e (2026-2027)",
+  titre: `Lire des images, la presse et des documents en 4e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Une photographie ne montre jamais ce qui s'est passé : elle montre ce que quelqu'un a décidé de garder dans le cadre. Le même homme, cadré de près, occupe toute l'image et impose son visage ; cadré de loin, il devient un point dans une foule. Rien n'a été truqué, et pourtant les deux images ne disent pas la même chose.",
   identite: [

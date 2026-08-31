@@ -48,6 +48,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -233,7 +234,7 @@ export const ficheOralDire6e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "6e",
   notion: "oral-dire",
-  titre: "Dire pour être compris en 6e (2026-2027)",
+  titre: `Dire pour être compris en 6e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Je crois que… non, attends, en fait c'est plutôt… » — cette phrase-là n'est pas un raté. C'est quelqu'un qui PENSE EN PARLANT, et le programme lui donne un nom : l'oral réflexif. Hésiter à voix haute est un usage de la parole, pas un échec. Un élève qui croit devoir arriver avec sa pensée finie se tait — et il ne pense pas non plus.",
   identite: [

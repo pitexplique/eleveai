@@ -69,6 +69,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -246,7 +247,7 @@ export const ficheLectureOeuvres6e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "6e",
   notion: "lecture-oeuvres",
-  titre: "Lire une œuvre et se l'approprier en 6e (2026-2027)",
+  titre: `Lire une œuvre et se l'approprier en 6e (${ANNEE_SCOLAIRE})`,
   accroche:
     "C'est le seul endroit du programme où l'on te demande ce que TU ressens. « J'ai eu peur quand le loup est apparu » est une bonne réponse. Relier un livre à ce que tu as vécu est demandé, pas toléré. Et deux élèves qui ne comprennent pas la fin de la même façon ont raison tous les deux. À une seule condition, la même partout : pouvoir montrer le passage.",
   identite: [

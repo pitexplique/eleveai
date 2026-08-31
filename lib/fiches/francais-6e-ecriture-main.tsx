@@ -58,6 +58,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -248,7 +249,7 @@ export const ficheEcritureMain6e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "6e",
   notion: "ecriture-main",
-  titre: "Écrire à la main de manière fluide et efficace en 6e (2026-2027)",
+  titre: `Écrire à la main de manière fluide et efficace en 6e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Copier vite, ce n'est pas écrire vite : c'est LEVER LES YEUX MOINS SOUVENT. Le temps ne se perd pas dans la main, il se perd dans les allers-retours entre le modèle et ta feuille. Ce n'est donc pas une affaire d'application — c'est une affaire de taille du morceau que tu gardes en tête. Et le mot sauté, l'erreur la plus fréquente de toutes, n'est pas de l'inattention : c'est un défaut de repérage, et il a un remède.",
   identite: [

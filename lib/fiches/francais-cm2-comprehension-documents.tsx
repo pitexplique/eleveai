@@ -54,6 +54,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -238,7 +239,7 @@ export const ficheComprehensionDocumentsCm2: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm2",
   notion: "comprehension-documents",
-  titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
+  titre: `Lire des documents et croiser des informations en CM2 (${ANNEE_SCOLAIRE})`,
   accroche:
     "Une affiche dit que le musée ouvre à 9 h. Une autre qu'il est fermé le mardi. Peux-tu le visiter mardi à 10 h ? Non — et remarque bien : AUCUNE DES DEUX AFFICHES NE DIT « NON ». La première dit oui, la seconde parle d'un autre sujet. La réponse n'est écrite nulle part : elle nait de leur rencontre. C'est le geste le plus utile de toute la lecture de documents.",
   identite: [

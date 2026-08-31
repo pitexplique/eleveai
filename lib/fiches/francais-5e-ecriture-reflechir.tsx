@@ -51,6 +51,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -232,7 +233,7 @@ export const ficheEcritureReflechir5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "ecriture-reflechir",
-  titre: "Écrire pour réfléchir, apprendre et mémoriser en 5e (2026-2027)",
+  titre: `Écrire pour réfléchir, apprendre et mémoriser en 5e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Voici le seul écrit du programme que personne ne ramassera jamais : ni note, ni correction, ni remarque dans la marge. C'est pour cela qu'on ne le fait pas — et c'est exactement pour cela qu'il faut le faire. Un plan de quatre mots dans la marge, une leçon récrite avec tes mots, une idée principale notée en une ligne : trois minutes chacun, et le devoir change de tête.",
   identite: [

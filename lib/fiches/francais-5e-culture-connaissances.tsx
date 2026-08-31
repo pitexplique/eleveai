@@ -51,6 +51,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -305,7 +306,7 @@ export const ficheCultureConnaissances5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "culture-connaissances",
-  titre: "Acquérir des connaissances littéraires en 5e (2026-2027)",
+  titre: `Acquérir des connaissances littéraires en 5e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Une connaissance littéraire n'est pas une date apprise par cœur : c'est du DÉJÀ-VU qui sert. Tu reconnais un conte à sa première phrase parce que tu en as lu d'autres. Et ce déjà-vu, quelqu'un le fabrique : c'est ton carnet de lecture. Sans trace, tu relis tout à neuf chaque fois.",
   identite: [

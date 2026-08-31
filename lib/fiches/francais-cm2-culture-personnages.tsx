@@ -58,6 +58,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -242,7 +243,7 @@ export const ficheCulturePersonnagesCm2: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm2",
   notion: "culture-personnages",
-  titre: "Héros, merveilleux et autres vies en CM2 (2026-2027)",
+  titre: `Héros, merveilleux et autres vies en CM2 (${ANNEE_SCOLAIRE})`,
   accroche:
     "Trois entrées du programme, et une seule chose : VIVRE AUTRE CHOSE SANS QUITTER SA CHAISE. Affronter une épreuve plus grande que soi avec le héros. Éprouver la peur en sécurité avec le merveilleux. Se projeter dans une existence qui n'est pas la sienne avec les récits de vie. ⛔ Et attention : ce n'est PAS s'échapper de sa propre vie — le programme écarte cette idée deux fois.",
   identite: [

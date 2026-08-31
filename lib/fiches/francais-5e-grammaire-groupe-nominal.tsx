@@ -66,6 +66,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -382,7 +383,7 @@ export const ficheGroupeNominal5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "grammaire-groupe-nominal",
-  titre: "Le groupe nominal et les classes de mots (2026-2027)",
+  titre: `Le groupe nominal et les classes de mots (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Chaque élève a répondu » et « Chacun a répondu » disent la même chose. Pourtant « chaque » est un déterminant et « chacun » un pronom. La classe d'un mot ne se lit pas sur le mot : elle se lit sur ce qui l'entoure.",
   identite: [

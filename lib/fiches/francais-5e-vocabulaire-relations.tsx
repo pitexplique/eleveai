@@ -45,6 +45,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   ConjugaisonSegment,
@@ -251,7 +252,7 @@ export const ficheVocabulaireRelations5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "vocabulaire-relations",
-  titre: "Les relations entre les mots en 5e (2026-2027)",
+  titre: `Les relations entre les mots en 5e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Le chevalier était vaillant au combat. » Remplace « vaillant » par « courageux » : la phrase ne bouge pas. Remplace-le par « costaud » : elle glisse — le costaud a des muscles, le vaillant a du courage, et ce n'est pas la même histoire. Un synonyme ne se reconnait pas dans une liste : il se vérifie dans une phrase.",
   identite: [

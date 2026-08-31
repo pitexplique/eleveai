@@ -53,6 +53,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -244,7 +245,7 @@ export const ficheEcriturePreparerCm2: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm2",
   notion: "ecriture-preparer",
-  titre: "Préparer un écrit en CM2 (2026-2027)",
+  titre: `Préparer un écrit en CM2 (${ANNEE_SCOLAIRE})`,
   accroche:
     "Quatre écrits qui ne seront jamais rendus, et sans lesquels rien ne se rend : la copie, les notes, le plan, la comparaison. Ils ont tous la même propriété, et elle donne le test — ILS SONT PLUS COURTS QUE CE QU'ILS PRÉPARENT. Un plan aussi long que le devoir n'est pas un plan, et des notes qui recopient la leçon n'ont rien noté.",
   identite: [

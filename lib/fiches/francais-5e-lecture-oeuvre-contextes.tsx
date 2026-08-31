@@ -48,6 +48,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -222,7 +223,7 @@ export const ficheLectureOeuvreContextes5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "lecture-oeuvre-contextes",
-  titre: "Appréhender une œuvre dans son contexte en 5e (2026-2027)",
+  titre: `Appréhender une œuvre dans son contexte en 5e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Comment savoir ce qu'un livre raconte vraiment ? Compare le dernier chapitre au premier. Ce que le personnage n'aurait PAS PU faire au début — dire non, partir seul, donner ce qu'il gardait — c'est exactement ce que le livre raconte. Tout le reste n'est que ce qui lui arrive.",
   identite: [

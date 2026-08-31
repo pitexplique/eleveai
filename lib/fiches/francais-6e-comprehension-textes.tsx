@@ -57,6 +57,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -233,7 +234,7 @@ export const ficheComprehensionTextes6e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "6e",
   notion: "comprehension-textes",
-  titre: "Comprendre et interpréter un texte en 6e (2026-2027)",
+  titre: `Comprendre et interpréter un texte en 6e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Il y a deux sortes de réponses. Celles qui sont ÉCRITES — tu les relèves. Et celles qui ne le sont pas — tu les déduis, mais jamais au hasard : les INDICES, eux, sont toujours écrits. « Malo cacha vite sa copie, les joues rouges » ne dit nulle part qu'il a eu une mauvaise note, et pourtant tu le sais. Ce que tu n'as pas le droit de faire, c'est de répondre par ce que tu crois savoir du monde.",
   identite: [

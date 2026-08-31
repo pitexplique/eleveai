@@ -53,6 +53,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -283,7 +284,7 @@ export const ficheOralPrendreParole5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "oral-prendre-parole",
-  titre: "Prendre la parole et interagir en 5e (2026-2027)",
+  titre: `Prendre la parole et interagir en 5e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Moi je trouve que ce personnage est courageux, voilà. » Tout le monde a déjà dit une phrase comme celle-là, et tout le monde a senti qu'elle ne suffisait pas — sans savoir ce qui manquait. Il manque deux pièces sur trois : la raison, et l'endroit du texte. Une justification qui tient n'est pas plus longue ; elle est complète.",
   identite: [

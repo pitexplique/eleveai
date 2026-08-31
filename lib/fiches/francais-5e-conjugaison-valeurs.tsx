@@ -55,6 +55,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -242,7 +243,7 @@ export const ficheConjugaisonValeurs5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "conjugaison-valeurs",
-  titre: "L'emploi des temps et des modes en 5e (2026-2027)",
+  titre: `L'emploi des temps et des modes en 5e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Il pleuvait depuis trois jours quand la porte s'ouvrit. » Deux verbes dans une seule phrase, et deux métiers différents : le premier installe le décor, le second fait avancer l'histoire. Choisir un temps, ce n'est pas choisir un moment — c'est choisir ce que le verbe va FAIRE dans le récit.",
   identite: [

@@ -62,6 +62,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -245,7 +246,7 @@ export const ficheEcritureApprendre6e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "6e",
   notion: "ecriture-apprendre",
-  titre: "Résumer, hiérarchiser et justifier en 6e (2026-2027)",
+  titre: `Résumer, hiérarchiser et justifier en 6e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Écrire pour apprendre, c'est TRIER — et trier, c'est jeter. Un résumé garde les personnages, l'action et la fin : tout le reste sort. Hiérarchiser, c'est classer du plus important au moins important. Ce sont deux noms pour le même geste, et un élève qui n'ose rien jeter est bloqué sur les deux. Le test tient en une question : si l'histoire tient sans ce détail, il sort.",
   identite: [

@@ -51,6 +51,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -253,7 +254,7 @@ export const ficheOralDireJouer5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "oral-dire-jouer",
-  titre: "Dire, lire et jouer un texte en 5e (2026-2027)",
+  titre: `Dire, lire et jouer un texte en 5e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Je n'ai peur de rien ! » — et le personnage recule vers la porte. Personne n'a écrit « il recule » dans la réplique, et c'est pourtant là que se trouve le rire : dans l'écart entre ce que la bouche affirme et ce que le corps fait. Jouer un texte, ce n'est pas le dire avec plus d'énergie. C'est ajouter ce que les mots ne disent pas.",
   identite: [

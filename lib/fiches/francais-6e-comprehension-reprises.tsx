@@ -67,6 +67,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -280,7 +281,7 @@ export const ficheComprehensionReprises6e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "6e",
   notion: "comprehension-reprises",
-  titre: "Suivre les reprises et les liens logiques d'un texte en 6e (2026-2027)",
+  titre: `Suivre les reprises et les liens logiques d'un texte en 6e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Un texte tient par DEUX FILS, et tu peux perdre l'un sans perdre l'autre. Le premier dit DE QUI on parle : « le cyclope » devient « le monstre » deux lignes plus loin, et rien ne te prévient. Le second dit COMMENT LES IDÉES SE TIENNENT : « donc » et « pourtant » ne racontent rien, ils rangent. Lâche le premier fil et tu ne sais plus qui fait quoi ; lâche le second et tu comprends chaque phrase sans comprendre le texte.",
   identite: [

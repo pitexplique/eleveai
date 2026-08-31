@@ -53,6 +53,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -214,7 +215,7 @@ export const ficheLectureVoixHaute6e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "6e",
   notion: "lecture-voix-haute",
-  titre: "Lire à voix haute et mettre en voix en 6e (2026-2027)",
+  titre: `Lire à voix haute et mettre en voix en 6e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Mettre le ton », ce n'est pas inventer quelque chose : c'est LIRE UN INDICE. Le ton est écrit dans le texte, toujours aux trois mêmes endroits — le verbe de parole, la ponctuation de fin, et les mots du récit autour. « cria » plus « ! » commandent une voix forte. « sans un mot » et « doucement » commandent une voix retenue. Tu ne choisis pas : tu relèves.",
   identite: [

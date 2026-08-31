@@ -56,6 +56,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -330,7 +331,7 @@ export const ficheReprises5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "grammaire-reprises",
-  titre: "Les reprises et la chaîne anaphorique (2026-2027)",
+  titre: `Les reprises et la chaîne anaphorique (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Le marchand rencontra un voyageur. Celui-ci portait un sac trop lourd. » Qui porte le sac ? Le voyageur — et pas le marchand, même s'il est nommé le premier. Toute la difficulté du texte est là, dans un mot de deux syllabes.",
   identite: [

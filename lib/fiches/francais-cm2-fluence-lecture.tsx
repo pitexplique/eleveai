@@ -65,6 +65,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -249,7 +250,7 @@ export const ficheFluenceLectureCm2: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm2",
   notion: "fluence-lecture",
-  titre: "Lire avec fluidité en CM2 (2026-2027)",
+  titre: `Lire avec fluidité en CM2 (${ANNEE_SCOLAIRE})`,
   accroche:
     "LA FLUENCE SE PRÉPARE — elle ne se constate pas. Le programme demande de lire un texte long à voix haute « après préparation », et ces deux mots changent tout : on ne te tend pas un texte inconnu pour te chronométrer. Deux minutes avant, tu regardes quatre choses — la ponctuation, les groupes, les mots difficiles, et LES LIAISONS. Cette dernière est la seule qui n'est écrite nulle part.",
   identite: [

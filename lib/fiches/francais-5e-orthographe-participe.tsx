@@ -58,6 +58,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -283,7 +284,7 @@ export const ficheParticipe5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "orthographe-participe",
-  titre: "L'accord du participe passé (2026-2027)",
+  titre: `L'accord du participe passé (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Tu m'as parlé. » « Tu m'as appelée. » Même pronom, même auxiliaire, quatre mots chacune — et pourtant l'une s'accorde et l'autre non. Le programme donne cette paire comme exemple : tout l'accord du participe passé tient dans la différence entre les deux.",
   identite: [

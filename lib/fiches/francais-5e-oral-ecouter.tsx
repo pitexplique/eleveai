@@ -45,6 +45,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -235,7 +236,7 @@ export const ficheOralEcouter5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "oral-ecouter",
-  titre: "Écouter, comprendre et interpréter en 5e (2026-2027)",
+  titre: `Écouter, comprendre et interpréter en 5e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Celui qui note tout ne retient rien : il recopie sans écouter. Celui qui ne note rien n'a plus rien à dire quand vient son tour. Écouter n'est pas rester silencieux pendant que quelqu'un parle — c'est un travail, et il tient dans une grille de cinq lignes qu'on peut apprendre en une fois.",
   identite: [

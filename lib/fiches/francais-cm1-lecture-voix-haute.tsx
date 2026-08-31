@@ -54,6 +54,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -219,7 +220,7 @@ export const ficheLectureVoixHauteCm1: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm1",
   notion: "lecture-voix-haute",
-  titre: "Lire à voix haute en CM1 (2026-2027)",
+  titre: `Lire à voix haute en CM1 (${ANNEE_SCOLAIRE})`,
   accroche:
     "Quand quelqu'un ne te comprend pas, ton réflexe est de parler PLUS FORT. C'est le mauvais bouton — presque toujours, le problème est que tu parles TROP VITE. Le volume et le débit sont deux réglages différents, et il en existe un troisième que personne ne pense à toucher : LA RÉGULARITÉ. Trois boutons indépendants, et lire à voix haute consiste exactement à les régler.",
   identite: [

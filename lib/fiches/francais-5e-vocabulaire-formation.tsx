@@ -47,6 +47,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   ConjugaisonSegment,
@@ -224,7 +225,7 @@ export const ficheVocabulaireFormation5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "vocabulaire-formation",
-  titre: "La formation des mots en 5e (2026-2027)",
+  titre: `La formation des mots en 5e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Sur la porte d'un cabinet médical : « dermatologue ». Tu n'as jamais appris ce mot, et tu sais pourtant à quoi t'attendre — « -logue », c'est celui qui étudie, et « dermato- », c'est la peau. Le mot ne t'a rien caché : il était écrit en morceaux, et les morceaux ont deux mille ans.",
   identite: [

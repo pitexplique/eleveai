@@ -56,6 +56,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -314,7 +315,7 @@ export const ficheDiscoursRegistres5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "discours-registres",
-  titre: "L'oral, l'écrit et les registres en 5e (2026-2027)",
+  titre: `L'oral, l'écrit et les registres en 5e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Il a rien dit. » Personne ne parle autrement, et personne ne s'y trompe. Mais écris-le, et il manque quelque chose : « il n'a rien dit ». Tu ne viens pas de corriger une faute — tu viens de changer de grammaire. Le français en a deux, une pour la bouche et une pour la page, et savoir passer de l'une à l'autre est exactement ce qu'on te demande.",
   identite: [

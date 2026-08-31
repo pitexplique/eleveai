@@ -60,6 +60,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -236,7 +237,7 @@ export const ficheGrammairePronomsCm2: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm2",
   notion: "grammaire-pronoms",
-  titre: "Les pronoms personnels en CM2 (2026-2027)",
+  titre: `Les pronoms personnels en CM2 (${ANNEE_SCOLAIRE})`,
   accroche:
     "LE PRONOM EST LE SEUL MOT DE LA LANGUE QUI CHANGE DE FORME SELON SON RÔLE. Un nom ne bouge pas : « le chien dort », « je vois le chien » — même mot, deux fonctions. Le pronom, lui, se déforme : il devient LE, je devient ME, tu devient TE. C'est l'exception qui rend la règle visible — partout ailleurs, il faut lire la phrase pour connaitre la fonction ; ici, la forme du mot la dit.",
   identite: [

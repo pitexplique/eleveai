@@ -54,6 +54,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -238,7 +239,7 @@ export const ficheComprehensionTextesCm2: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm2",
   notion: "comprehension-textes",
-  titre: "Comprendre un texte seul en CM2 (2026-2027)",
+  titre: `Comprendre un texte seul en CM2 (${ANNEE_SCOLAIRE})`,
   accroche:
     "Au CM2, la question change. Ce n'est plus « as-tu compris ? » — c'est QUE FAIS-TU QUAND TU N'AS PAS COMPRIS, ET QUE PERSONNE N'EST LÀ ? Le programme demande de comprendre SEUL un texte plus long et plus complexe, et la réponse tient en trois mots : tu relis lentement. Les autres réactions possibles — sauter la suite, fermer le livre, changer d'histoire — disent toutes la même chose : abandonner.",
   identite: [

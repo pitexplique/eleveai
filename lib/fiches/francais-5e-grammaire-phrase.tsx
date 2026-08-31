@@ -64,6 +64,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -427,7 +428,7 @@ export const fichePhrase5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "grammaire-phrase",
-  titre: "La phrase, ses types et sa ponctuation (2026-2027)",
+  titre: `La phrase, ses types et sa ponctuation (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Rentrez tout de suite ! » finit par un point d'exclamation, et pourtant elle n'est pas exclamative : elle est impérative. Le point final ne donne pas le type d'une phrase — c'est ce qu'elle FAIT qui le donne.",
   identite: [

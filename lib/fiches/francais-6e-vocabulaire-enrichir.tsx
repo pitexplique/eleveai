@@ -57,6 +57,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   ConjugaisonSegment,
@@ -264,7 +265,7 @@ export const ficheVocabulaireEnrichir6e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "6e",
   notion: "vocabulaire-enrichir",
-  titre: "Comprendre un mot inconnu en 6e (2026-2027)",
+  titre: `Comprendre un mot inconnu en 6e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Le sentier serpentait entre les arbres. » Tu n'as peut-être jamais vu ce verbe, et tu sais déjà qu'il ne va pas droit — un sentier entre les arbres, ça tourne. Tu viens de deviner sans dictionnaire, et sans magie : tu as lu ce qu'il y avait autour. C'est un geste, il a des règles, et il s'apprend.",
   identite: [

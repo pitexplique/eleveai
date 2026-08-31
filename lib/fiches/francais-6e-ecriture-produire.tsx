@@ -53,6 +53,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -257,7 +258,7 @@ export const ficheEcritureProduire6e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "6e",
   notion: "ecriture-produire",
-  titre: "Écrire un texte qui se tient en 6e (2026-2027)",
+  titre: `Écrire un texte qui se tient en 6e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Un texte incohérent n'est pas mal écrit. Chaque phrase peut être juste, bien orthographiée, bien construite — et le texte est cassé quand même, parce que la casse est ENTRE les phrases. C'est pour cela qu'on ne la voit pas en relisant phrase par phrase. La cohérence, c'est simplement ce qui ne doit pas changer en route : les personnages, le temps, le lieu, celui qui raconte.",
   identite: [

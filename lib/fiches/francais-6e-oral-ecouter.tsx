@@ -55,6 +55,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -225,7 +226,7 @@ export const ficheOralEcouter6e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "6e",
   notion: "oral-ecouter",
-  titre: "Écouter pour comprendre en 6e (2026-2027)",
+  titre: `Écouter pour comprendre en 6e (${ANNEE_SCOLAIRE})`,
   accroche:
     "SAVOIR CE QU'ON CHERCHE CHANGE CE QU'ON ENTEND. Deux élèves également attentifs, devant le même enregistrement : celui à qui l'on a dit « cherche les causes » les entendra, l'autre non. Ce n'est pas une question d'effort — l'attention ne se commande pas. L'orientation, elle, se décide avant d'écouter, et elle coute une phrase.",
   identite: [

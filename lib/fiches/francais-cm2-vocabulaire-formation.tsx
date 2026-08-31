@@ -63,6 +63,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -231,7 +232,7 @@ export const ficheVocabulaireFormationCm2: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm2",
   notion: "vocabulaire-formation",
-  titre: "La formation des mots en CM2 (2026-2027)",
+  titre: `La formation des mots en CM2 (${ANNEE_SCOLAIRE})`,
   accroche:
     "Le programme dit de se servir du contexte ET DE LA MORPHOLOGIE. Deux outils, et ils ne regardent pas au même endroit : le contexte regarde AUTOUR du mot, la morphologie regarde DEDANS. Car un mot est fait de morceaux, et les morceaux ont un sens. Mais attention à la règle qui commande tout : C'EST LE SENS DU MORCEAU QUI COMPTE, PAS SA FORME.",
   identite: [

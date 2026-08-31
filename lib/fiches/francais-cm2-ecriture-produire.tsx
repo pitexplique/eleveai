@@ -52,6 +52,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -215,7 +216,7 @@ export const ficheEcritureProduireCm2: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm2",
   notion: "ecriture-produire",
-  titre: "Écrire un texte à plusieurs paragraphes en CM2 (2026-2027)",
+  titre: `Écrire un texte à plusieurs paragraphes en CM2 (${ANNEE_SCOLAIRE})`,
   accroche:
     "Le CM2 est l'année où UN TEXTE CESSE D'ÊTRE UN PARAGRAPHE. Et dès qu'il y en a plusieurs, deux questions apparaissent qui ne se posaient pas avant : OÙ COUPER, et COMMENT LES TENIR ENSEMBLE. Ce ne sont pas deux sujets — ce sont les deux faces du même seuil, et c'est pour cela que le programme les met dans la même compétence.",
   identite: [

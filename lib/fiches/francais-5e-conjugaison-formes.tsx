@@ -58,6 +58,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   ConjugaisonSegment,
@@ -238,7 +239,7 @@ export const ficheConjugaisonFormes5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "conjugaison-formes",
-  titre: "La composition d'une forme verbale en 5e (2026-2027)",
+  titre: `La composition d'une forme verbale en 5e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Nous chantions. » Six lettres après le radical, et elles disent DEUX choses en même temps : que c'est l'imparfait, et que c'est nous. Une forme verbale n'est pas un mot à retenir — c'est un mot ASSEMBLÉ, avec trois places. Qui voit les trois places peut conjuguer un verbe qu'il n'a jamais rencontré.",
   identite: [

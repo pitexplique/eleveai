@@ -64,6 +64,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -279,7 +280,7 @@ export const ficheComprehensionDocuments6e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "6e",
   notion: "comprehension-documents",
-  titre: "Lire des documents et des images en 6e (2026-2027)",
+  titre: `Lire des documents et des images en 6e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Le cadre d'une photo et la source d'un article posent la même question : QUELQU'UN A DÉCIDÉ DE CE QUE TU VOIS. Ce qui est hors du cadre a été écarté par le photographe ; ce qu'un article ne dit pas a été écarté par celui qui l'a écrit. Un document n'est jamais le monde — c'est ce que quelqu'un en a retenu. Ce n'est pas une raison de se méfier : c'est une question à poser en premier.",
   identite: [

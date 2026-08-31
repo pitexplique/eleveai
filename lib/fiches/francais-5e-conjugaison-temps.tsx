@@ -68,6 +68,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   ConjugaisonLigne,
@@ -321,7 +322,7 @@ export const ficheConjugaisonTemps5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "conjugaison-temps",
-  titre: "Le passé simple, le conditionnel et les temps composés (2026-2027)",
+  titre: `Le passé simple, le conditionnel et les temps composés (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Il ouvrit la porte et sortit sans un mot. » Personne ne dit cette phrase : on l'écrit. Le passé simple, le conditionnel, les temps composés — aucun de ces temps ne s'apprend en entier. Chacun se FABRIQUE à partir de deux choses que tu as déjà.",
   identite: [

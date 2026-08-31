@@ -40,6 +40,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -261,7 +262,7 @@ export const ficheEcriture4e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "4e",
   notion: "ecriture",
-  titre: "Écrire pour apprendre, inventer et réfléchir en 4e (2026-2027)",
+  titre: `Écrire pour apprendre, inventer et réfléchir en 4e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Sois clair », « fais des phrases courtes », « relis-toi » : ce ne sont pas des méthodes, ce sont des vœux. Un paragraphe de réflexion, lui, se compte — il tient sur trois pièces exactement, et si l'une manque, il ne prouve rien. Écrire s'apprend comme on apprend à monter un meuble : en sachant combien il y a de pièces, et où chacune va.",
   identite: [

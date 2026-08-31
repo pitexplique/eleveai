@@ -51,6 +51,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   ConjugaisonSegment,
@@ -230,7 +231,7 @@ export const ficheVocabulaireOrthographe5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "vocabulaire-orthographe",
-  titre: "Écrire les mots avec justesse en 5e (2026-2027)",
+  titre: `Écrire les mots avec justesse en 5e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Comment sais-tu qu'il y a un « s » à la fin de « tapis » ? Tu ne l'entends pas. Mais dis « tapisser », et le voilà. La lettre muette n'est pas un caprice : elle dort dans le mot, et un autre mot de la même famille vient la réveiller. L'orthographe d'un mot ne se retient pas — elle se retrouve.",
   identite: [

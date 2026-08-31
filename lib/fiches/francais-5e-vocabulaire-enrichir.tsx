@@ -51,6 +51,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -293,7 +294,7 @@ export const ficheVocabulaireEnrichir5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "vocabulaire-enrichir",
-  titre: "Enrichir son vocabulaire en 5e (2026-2027)",
+  titre: `Enrichir son vocabulaire en 5e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Le heaume lui couvrait la tête et cachait son visage. » Tu n'as jamais vu ce mot, et pourtant tu sais déjà ce que c'est : quelque chose qui se met sur la tête et qui cache le visage. La phrase vient de te l'apprendre. Enrichir son vocabulaire, ce n'est pas apprendre des listes — c'est prendre les mots là où on les rencontre, et savoir quoi en faire ensuite.",
   identite: [

@@ -55,6 +55,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -228,7 +229,7 @@ export const ficheCultureLecteurCm2: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm2",
   notion: "culture-lecteur",
-  titre: "Choisir un livre et aller au bout en CM2 (2026-2027)",
+  titre: `Choisir un livre et aller au bout en CM2 (${ANNEE_SCOLAIRE})`,
   accroche:
     "ON NE PERSÉVÈRE PAS DANS UN LIVRE QU'ON N'A PAS CHOISI. Le programme met « choisir une œuvre et justifier son choix » et « s'engager et persévérer » dans la même compétence — et le lien entre les deux explique presque tous les livres abandonnés au chapitre trois. Ce n'est pas un manque de volonté : c'est un choix fait sans raison.",
   identite: [

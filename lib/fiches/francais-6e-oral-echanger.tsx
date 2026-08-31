@@ -54,6 +54,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -226,7 +227,7 @@ export const ficheOralEchanger6e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "6e",
   notion: "oral-echanger",
-  titre: "Participer à un échange en 6e (2026-2027)",
+  titre: `Participer à un échange en 6e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Un échange n'est pas une suite de monologues. Dans la plupart des débats de classe, chacun attend son tour pour redire sa phrase — un peu plus fort. La formule qui change tout tient en six mots : « comme tu disais, mais j'ajouterais que… ». On REPREND avant d'ajouter, et c'est ce qui fait d'une série d'avis une véritable discussion.",
   identite: [

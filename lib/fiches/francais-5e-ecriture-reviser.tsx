@@ -55,6 +55,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -259,7 +260,7 @@ export const ficheEcritureReviser5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "ecriture-reviser",
-  titre: "Relire, corriger et enrichir son écrit en 5e (2026-2027)",
+  titre: `Relire, corriger et enrichir son écrit en 5e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Tu relis presque toujours dans le mauvais sens : tu commences par l'orthographe, et tu n'arrives jamais au plan. C'est l'inverse qu'il faut faire. Corriger l'accord d'un paragraphe que tu vas supprimer, c'est du travail jeté. La consigne d'abord, le plan ensuite, les phrases après — et l'orthographe en dernier, quand plus rien ne bougera.",
   identite: [

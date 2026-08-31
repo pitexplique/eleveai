@@ -61,6 +61,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -269,7 +270,7 @@ export const ficheCultureReperes6e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "6e",
   notion: "culture-reperes",
-  titre: "Genres, contexte et carnet de lecture en 6e (2026-2027)",
+  titre: `Genres, contexte et carnet de lecture en 6e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Quatre mots, et parler d'un livre devient possible : le NARRATEUR (qui raconte), le HÉROS (qui le vit), l'ADVERSAIRE (qui s'oppose), le CADRE (où et quand). Sans eux, tu ne peux que redire l'histoire. Et un cinquième, qui est le seuil du collège : l'AUTEUR n'est pas le narrateur. L'un a tenu le stylo, l'autre vit dans le livre.",
   identite: [

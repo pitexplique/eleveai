@@ -55,6 +55,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -304,7 +305,7 @@ export const ficheAccords5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "orthographe-accords",
-  titre: "Les chaînes d'accord dans la phrase (2026-2027)",
+  titre: `Les chaînes d'accord dans la phrase (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Le bruit des vagues berçait toute la nuit. » On entend « vagues » juste avant le verbe, et la main écrit « berçaient ». Le sujet, pourtant, c'est le bruit — et il est seul. Accorder, ce n'est pas écouter : c'est remonter au mot chef.",
   identite: [

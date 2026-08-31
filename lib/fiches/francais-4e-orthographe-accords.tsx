@@ -38,6 +38,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -343,7 +344,7 @@ export const ficheOrthographeAccords4e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "4e",
   notion: "orthographe-accords",
-  titre: "Les chaines d'accord et le passif en 4e (2026-2027)",
+  titre: `Les chaines d'accord et le passif en 4e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Le bruit des vagues berçait la nuit. » L'oreille réclame « berçaient » — elle vient d'entendre « vagues », et c'est le dernier mot qui reste. Mais ce ne sont pas les vagues qui berçaient : c'est le bruit, et il n'y en a qu'un. Presque toutes les fautes d'accord viennent de là : le cerveau accorde avec le mot le plus proche, et le mot le plus proche n'est presque jamais le bon.",
   identite: [

@@ -55,6 +55,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -236,7 +237,7 @@ export const ficheLectureOeuvresCm2: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm2",
   notion: "lecture-oeuvres",
-  titre: "Le thème d'une œuvre en CM2 (2026-2027)",
+  titre: `Le thème d'une œuvre en CM2 (${ANNEE_SCOLAIRE})`,
   accroche:
     "LE THÈME N'EST PAS L'HISTOIRE — C'EST UN MOT. L'amitié. Le courage. La peur. Un résumé tient en dix phrases ; un thème tient en un seul mot, et c'est justement ce qui le rend utile : on ne relie jamais deux livres par leur histoire — elles ne se ressemblent jamais — mais par leur thème. Le thème est la poignée par laquelle tu attrapes un livre pour le rapprocher d'un autre, ou de ta propre vie.",
   identite: [

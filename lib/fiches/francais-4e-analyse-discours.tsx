@@ -44,6 +44,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -305,7 +306,7 @@ export const ficheAnalyseDiscours4e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "4e",
   notion: "analyse-discours",
-  titre: "Registres, paroles rapportées et argumentation en 4e (2026-2027)",
+  titre: `Registres, paroles rapportées et argumentation en 4e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Il s'arrêta net. Il n'y arriverait jamais. » Aucun guillemet, aucun « que », et pourtant ce n'est plus le narrateur qui parle : c'est le personnage qui pense, et on l'entend. Cette forme sans marque a un nom — le discours indirect libre —, elle est au programme de 4e, et c'est celle que presque personne n'apprend à repérer.",
   identite: [

@@ -45,6 +45,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -218,7 +219,7 @@ export const ficheCultureQuestionnements4e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "4e",
   notion: "culture-questionnements",
-  titre: "Les questionnements de l'année de 4e (2026-2027)",
+  titre: `Les questionnements de l'année de 4e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Dire l'amour » n'est pas un thème, et ce n'est pas une liste de textes romantiques. C'est une question, et elle est difficile : peut-on dire ce qu'on ressent ? Le sentiment déborde toujours les mots dont on dispose — et c'est justement pour cela que des poètes s'y sont usés pendant huit siècles. Chacune des quatre entrées de ton année est une question de ce genre.",
   identite: [

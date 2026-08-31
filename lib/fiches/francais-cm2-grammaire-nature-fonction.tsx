@@ -61,6 +61,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -242,7 +243,7 @@ export const ficheGrammaireNatureFonctionCm2: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm2",
   notion: "grammaire-nature-fonction",
-  titre: "Nature et fonction d'un mot en CM2 (2026-2027)",
+  titre: `Nature et fonction d'un mot en CM2 (${ANNEE_SCOLAIRE})`,
   accroche:
     "On te pose deux questions sur le même mot, et c'est ce qui rend l'exercice difficile — mais les deux réponses ne se cherchent pas au même endroit. LA NATURE EST DANS LE DICTIONNAIRE, LA FONCTION EST DANS LA PHRASE. D'où un test qui se fait avec un doigt : cache le reste de la phrase. Si tu peux encore répondre, on te demandait la nature. Si tu dois enlever ton doigt, on te demandait la fonction.",
   identite: [

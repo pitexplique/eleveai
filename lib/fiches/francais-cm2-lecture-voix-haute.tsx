@@ -55,6 +55,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -237,7 +238,7 @@ export const ficheLectureVoixHauteCm2: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm2",
   notion: "lecture-voix-haute",
-  titre: "Lire à voix haute avec expressivité en CM2 (2026-2027)",
+  titre: `Lire à voix haute avec expressivité en CM2 (${ANNEE_SCOLAIRE})`,
   accroche:
     "ON NE LIT PAS À VOIX HAUTE POUR PROUVER QU'ON SAIT LIRE — ON LIT POUR QUELQU'UN. Et c'est lui qui décide si c'est réussi, pas le nombre d'erreurs. Chaque règle change alors de raison : tu mets le ton parce que sans lui il décroche, tu fais les pauses parce qu'elles lui laissent le temps de comprendre. Le programme va plus loin encore : il demande que tu y prennes PLAISIR.",
   identite: [

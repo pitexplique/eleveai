@@ -56,6 +56,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -361,7 +362,7 @@ export const ficheLectureComprehension4e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "4e",
   notion: "lecture-comprehension",
-  titre: "Comprendre, interpréter et apprécier un texte en 4e (2026-2027)",
+  titre: `Comprendre, interpréter et apprécier un texte en 4e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Ses mains tremblaient, sa gorge était sèche. » Le mot « peur » n'est écrit nulle part, et pourtant tout le monde le lit. Interpréter, ce n'est pas deviner ni imaginer : c'est montrer du doigt ce qui, dans le texte, vous l'a fait comprendre. Une interprétation qui ne peut pas se prouver n'est qu'une impression.",
   identite: [

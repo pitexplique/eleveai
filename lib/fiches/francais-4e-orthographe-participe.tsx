@@ -44,6 +44,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -316,7 +317,7 @@ export const ficheParticipe4e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "4e",
   notion: "orthographe-participe",
-  titre: "L'accord du participe passé en 4e (2026-2027)",
+  titre: `L'accord du participe passé en 4e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Tu m'as parlé » ne s'accorde pas. « Tu m'as appelée » s'accorde. Le même auxiliaire, le même « m' » devant le verbe — et pourtant l'un prend un e et l'autre non. Toute la règle tient dans une question : ce « m' », est-il l'objet du verbe, ou seulement celui à qui l'on parle ?",
   identite: [

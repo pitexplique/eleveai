@@ -58,6 +58,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -259,7 +260,7 @@ export const ficheEcritureReviser6e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "6e",
   notion: "ecriture-reviser",
-  titre: "Réviser son texte et son brouillon en 6e (2026-2027)",
+  titre: `Réviser son texte et son brouillon en 6e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Tu as relu trois fois et tu n'as rien vu. Ce n'est pas de la négligence, et voici pourquoi : SANS CRITÈRES, ON RELIT CE QU'ON CROIT AVOIR ÉCRIT. Ton œil ne lit pas la page, il lit ton intention — parce que c'est toi qui l'as écrite. Les trois remèdes font tous la même chose : ils te sortent de ta tête. Une liste de critères, ton oreille, ou quelqu'un d'autre.",
   identite: [

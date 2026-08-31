@@ -49,6 +49,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -228,7 +229,7 @@ export const ficheLectureApprecier5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "lecture-apprecier",
-  titre: "Apprécier un texte et fonder son jugement en 5e (2026-2027)",
+  titre: `Apprécier un texte et fonder son jugement en 5e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« On ne peut pas s'arrêter, les phrases vont très vite. » Voilà une vraie appréciation : elle dit un effet — on ne s'arrête pas — et elle nomme ce qui l'a produit — des phrases courtes. « C'était bien » ne dit ni l'un ni l'autre. Apprécier n'est pas noter un livre : c'est retrouver, dans le texte, ce qui t'a fait quelque chose.",
   identite: [

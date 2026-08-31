@@ -42,6 +42,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   FigureLibreCanvasGridCell,
@@ -314,7 +315,7 @@ export const ficheCultureLitteraire4e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "4e",
   notion: "culture-litteraire",
-  titre: "Situer une œuvre et garder trace de ses lectures en 4e (2026-2027)",
+  titre: `Situer une œuvre et garder trace de ses lectures en 4e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Ouvre un livre au hasard, sans lire une ligne : tu sais déjà si c'est un poème, une pièce de théâtre ou un roman. Les lignes courtes et la marge blanche à droite, les noms alignés en début de ligne, le texte qui va au bout — la forme du texte sur la page annonce le genre avant le premier mot. Reconnaitre, c'est d'abord regarder.",
   identite: [

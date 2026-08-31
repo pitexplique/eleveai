@@ -43,6 +43,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -289,7 +290,7 @@ export const ficheOral4e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "4e",
   notion: "oral",
-  titre: "Prendre la parole, écouter et interagir en 4e (2026-2027)",
+  titre: `Prendre la parole, écouter et interagir en 4e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Toute la classe le pense, on est douze à le dire. » Cette phrase a le ton d'un argument, la longueur d'un argument, l'assurance d'un argument — et ce n'en est pas un. Être nombreux ne prouve rien. Reconnaitre ce qui ressemble à une raison sans en être une est le vrai travail de l'oral, et il commence par savoir écouter.",
   identite: [

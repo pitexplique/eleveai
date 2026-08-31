@@ -48,6 +48,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   ConjugaisonSegment,
@@ -326,7 +327,7 @@ export const ficheConjugaisonTemps4e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "4e",
   notion: "conjugaison-temps",
-  titre: "Les temps, les modes et ce qu'ils expriment en 4e (2026-2027)",
+  titre: `Les temps, les modes et ce qu'ils expriment en 4e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Le suspect a pris la fuite » affirme. « Le suspect aurait pris la fuite » rapporte sans garantir. Une seule terminaison sépare une information d'une rumeur, et toute la prudence d'un journal tient dans cette lettre. Choisir un temps, ce n'est pas obéir à une règle de conjugaison : c'est décider de ce qu'on affirme.",
   identite: [

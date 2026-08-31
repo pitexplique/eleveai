@@ -64,6 +64,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -423,7 +424,7 @@ export const ficheFonctions5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "grammaire-fonctions",
-  titre: "Les fonctions dans la phrase (2026-2027)",
+  titre: `Les fonctions dans la phrase (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Il reste inquiet » et « il reste à la maison » : le même verbe, la même place, et deux fonctions qui n'ont rien à voir. En 5e, on ne devine plus une fonction — on la prouve, par un geste sur la phrase.",
   identite: [

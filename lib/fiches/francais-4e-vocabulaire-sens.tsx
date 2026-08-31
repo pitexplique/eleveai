@@ -45,6 +45,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -287,7 +288,7 @@ export const ficheVocabulaireSens4e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "4e",
   notion: "vocabulaire-sens",
-  titre: "Le sens des mots et leurs relations en 4e (2026-2027)",
+  titre: `Le sens des mots et leurs relations en 4e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Il habite un logement. » « Il habite un taudis. » « Il habite une demeure. » C'est le même endroit dans les trois phrases : rien n'a changé dehors. Ce qui change, c'est ce que le mot choisi fait entendre — et donc ce qu'on apprend, non pas sur le lieu, mais sur celui qui parle.",
   identite: [

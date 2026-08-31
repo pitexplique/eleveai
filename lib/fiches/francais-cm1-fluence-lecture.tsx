@@ -58,6 +58,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type { PhraseCanvasLien, PhraseCanvasMot } from "@/lib/tutor-v4/types";
 
@@ -176,7 +177,7 @@ export const ficheFluenceLectureCm1: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm1",
   notion: "fluence-lecture",
-  titre: "Lire avec fluidité en CM1 (2026-2027)",
+  titre: `Lire avec fluidité en CM1 (${ANNEE_SCOLAIRE})`,
   accroche:
     "On te dira peut-être « lis plus vite ». Ce conseil ne marche pas. Ce qui t'aide, c'est de reconnaitre les mots d'un coup d'œil. Et ça, ça s'apprend.",
   identite: [

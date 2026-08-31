@@ -54,6 +54,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -258,7 +259,7 @@ export const ficheLectureComprehension5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "lecture-comprehension",
-  titre: "Comprendre et interpréter un texte en 5e (2026-2027)",
+  titre: `Comprendre et interpréter un texte en 5e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Sa main tremblait si fort qu'il ne put ouvrir la porte. » Le mot « peur » n'est écrit nulle part, et pourtant tu l'as compris avant la fin de la phrase. Un récit dit rarement les choses en face : il les montre. Comprendre, ce n'est donc pas lire plus attentivement — c'est savoir OÙ le texte a mis ce qu'il ne dit pas.",
   identite: [

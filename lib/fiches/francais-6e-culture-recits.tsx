@@ -64,6 +64,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -274,7 +275,7 @@ export const ficheCultureRecits6e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "6e",
   notion: "culture-recits",
-  titre: "Récits des origines, aventure et monstres en 6e (2026-2027)",
+  titre: `Récits des origines, aventure et monstres en 6e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Trois entrées du programme, et une seule question posée trois fois : qu'est-ce que ce récit explique de NOUS ? Les origines disent d'où l'on vient. L'aventure dit de quoi l'on est capable — c'est à cela que sert l'obstacle. Et le monstre dit ce qui nous fait peur, et ce qu'il nous reste d'humain. Le programme l'écrit lui-même : « expérience de l'autre, expérience de soi ».",
   identite: [

@@ -50,6 +50,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   ConjugaisonSegment,
@@ -287,7 +288,7 @@ export const ficheVocabulaireJouer5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "vocabulaire-jouer",
-  titre: "Jouer avec les mots en 5e (2026-2027)",
+  titre: `Jouer avec les mots en 5e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« La note du restaurant était salée. » Personne n'a mis de sel dans l'addition. Le mot n'a pas bougé d'une lettre, et pourtant il ne dit plus la même chose — parce que la phrase autour de lui a changé. C'est le mouvement que fait la langue tous les jours : elle prête ses mots à des choses nouvelles plutôt que d'en inventer.",
   identite: [

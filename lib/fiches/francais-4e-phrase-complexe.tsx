@@ -72,6 +72,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -450,7 +451,7 @@ export const fichePhraseComplexe4e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "4e",
   notion: "phrase-complexe",
-  titre: "La phrase complexe et ses subordonnées en 4e (2026-2027)",
+  titre: `La phrase complexe et ses subordonnées en 4e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Le vieux pêcheur répara longuement son filet déchiré » fait sept mots et une virgule de moins que « Il rentra, il posa son sac ». Et pourtant, la longue est SIMPLE et la courte est COMPLEXE. Ce n'est jamais la longueur qui décide : c'est le nombre de verbes conjugués.",
   identite: [

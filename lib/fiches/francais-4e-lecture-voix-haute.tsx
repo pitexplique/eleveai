@@ -40,6 +40,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -240,7 +241,7 @@ export const ficheLectureVoixHaute4e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "4e",
   notion: "lecture-voix-haute",
-  titre: "Lire à voix haute et mettre en voix en 4e (2026-2027)",
+  titre: `Lire à voix haute et mettre en voix en 4e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Un élève qui lit mal n'a presque jamais un problème de voix : il a un texte qu'il n'a pas préparé. Lire à voix haute ne s'improvise pas plus qu'on ne joue un morceau à vue — cela s'annote, comme une partition. Où respirer, quel mot détacher, où baisser le ton : tout cela se décide avant, le crayon à la main, et se voit sur la feuille.",
   identite: [

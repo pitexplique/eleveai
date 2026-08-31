@@ -60,6 +60,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -230,7 +231,7 @@ export const ficheEcritureReviserCm2: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm2",
   notion: "ecriture-reviser",
-  titre: "Réviser son texte et son brouillon en CM2 (2026-2027)",
+  titre: `Réviser son texte et son brouillon en CM2 (${ANNEE_SCOLAIRE})`,
   accroche:
     "Tu passes une heure à recopier ton brouillon au propre, tu rends un texte magnifique — et c'est exactement le même texte, écrit deux fois. C'est l'erreur n° 1, et elle est redoutable parce qu'elle DONNE LE SENTIMENT D'AVOIR TRAVAILLÉ. RÉVISER AJOUTE QUELQUE CHOSE AU TEXTE ; RECOPIER NE FAIT QUE LE DÉPLACER. D'où la mesure, visible sans rien lire : un brouillon sans une seule rature n'a rien retravaillé.",
   identite: [

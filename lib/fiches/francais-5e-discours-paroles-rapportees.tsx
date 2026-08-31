@@ -63,6 +63,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -378,7 +379,7 @@ export const ficheParolesRapportees5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "discours-paroles-rapportees",
-  titre: "Le discours direct et le discours indirect (2026-2027)",
+  titre: `Le discours direct et le discours indirect (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Il dit : « Je pars demain. » » et « Il dit qu'il part le lendemain. » : les mêmes paroles, le même personnage, la même information. Entre les deux, quatre choses ont bougé — les guillemets, le pronom, le temps du verbe et le mot « demain ». Savoir passer de l'une à l'autre, c'est toute la notion.",
   identite: [

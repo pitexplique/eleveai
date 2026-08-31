@@ -59,6 +59,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -292,7 +293,7 @@ export const ficheCultureEntrees5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "culture-entrees-5e",
-  titre: "Les quatre entrées de culture littéraire en 5e (2026-2027)",
+  titre: `Les quatre entrées de culture littéraire en 5e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Le programme dit du théâtre qu'il tend « un miroir grossissant » à ceux qui regardent. La formule vaut pour les quatre entrées de l'année : la fable grossit un défaut humain jusqu'à en faire un animal, le héros grossit ce qu'on voudrait pouvoir, la poésie grossit un son jusqu'à faire entendre le sable. On lit pour se voir en plus grand.",
   identite: [

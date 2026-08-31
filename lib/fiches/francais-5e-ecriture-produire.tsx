@@ -61,6 +61,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -260,7 +261,7 @@ export const ficheEcritureProduire5e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "5e",
   notion: "ecriture-produire",
-  titre: "Écrire des textes d'invention et de réflexion en 5e (2026-2027)",
+  titre: `Écrire des textes d'invention et de réflexion en 5e (${ANNEE_SCOLAIRE})`,
   accroche:
     "Un récit, une argumentation et une réponse rédigée n'ont rien à voir — et se vérifient de la même façon : on COMPTE LES PIÈCES. Quatre pour le récit : le lieu, l'obstacle, l'ordre, la fin. Quatre pour l'argumentation : la thèse, l'argument, l'exemple, le connecteur. Un récit sans obstacle et une argumentation sans exemple ont le même défaut, et il se voit d'un coup d'œil.",
   identite: [

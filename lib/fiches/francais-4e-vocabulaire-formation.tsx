@@ -48,6 +48,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   ConjugaisonSegment,
@@ -263,7 +264,7 @@ export const ficheVocabulaireFormation4e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "4e",
   notion: "vocabulaire-formation",
-  titre: "La formation des mots et l'orthographe lexicale en 4e (2026-2027)",
+  titre: `La formation des mots et l'orthographe lexicale en 4e (${ANNEE_SCOLAIRE})`,
   accroche:
     "On n'entend pas le « d » de « grand ». Aucune règle ne peut le faire entendre, aucun effort d'oreille non plus. Mais on l'entend très bien dans « grandeur » et dans « grandir » — et c'est ainsi qu'on l'écrit. Un mot ne s'apprend pas seul : il s'apprend avec sa famille, et la famille répond aux questions que le mot ne peut pas trancher.",
   identite: [

@@ -54,6 +54,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -226,7 +227,7 @@ export const ficheOralEchangerCm2: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm2",
   notion: "oral-echanger",
-  titre: "Présenter un travail et participer à un débat en CM2 (2026-2027)",
+  titre: `Présenter un travail et participer à un débat en CM2 (${ANNEE_SCOLAIRE})`,
   accroche:
     "Parler SEUL devant la classe et parler AVEC les autres semblent deux exercices sans rapport. Le CM2 les range pourtant dans une même compétence, et la chaine du programme dit pourquoi : présenter → ARGUMENTER → débattre. Argumenter est LA CHARNIÈRE, le seul geste qui vaut des deux côtés. Sans lui, un exposé n'est qu'un récit de ce qu'on a fait, et un débat qu'une suite d'avis de plus en plus forts.",
   identite: [

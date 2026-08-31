@@ -57,6 +57,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -227,7 +228,7 @@ export const ficheCultureSoiEtLesAutresCm2: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm2",
   notion: "culture-soi-et-les-autres",
-  titre: "Morale, poésie et rapport aux autres en CM2 (2026-2027)",
+  titre: `Morale, poésie et rapport aux autres en CM2 (${ANNEE_SCOLAIRE})`,
   accroche:
     "Le programme te donne ici un droit rare : celui de NE PAS ÊTRE D'ACCORD. « Interroger la morale », c'est se demander si l'on est d'accord — et pourquoi. Pas seulement comprendre ce que la fable voulait dire : décider ce que TU en penses. Et pour cela il faut des mots ; c'est justement ce que la littérature donne, là où l'on n'en avait pas.",
   identite: [

@@ -41,6 +41,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -367,7 +368,7 @@ export const ficheGrammairePhrase4e: FicheCoursData = {
   matiereLabel: "Français",
   classe: "4e",
   notion: "grammaire-phrase",
-  titre: "Les groupes de la phrase et leurs fonctions en 4e (2026-2027)",
+  titre: `Les groupes de la phrase et leurs fonctions en 4e (${ANNEE_SCOLAIRE})`,
   accroche:
     "« Le vieux pêcheur » est un groupe nominal. Il l'est dans « le vieux pêcheur répara son filet », et il l'est encore dans « j'ai reconnu le vieux pêcheur ». Ce qui a changé entre les deux, ce n'est pas ce qu'il EST — c'est le rôle qu'il joue. La nature ne bouge jamais ; la fonction change à chaque phrase.",
   identite: [

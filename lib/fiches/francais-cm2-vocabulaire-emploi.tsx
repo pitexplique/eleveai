@@ -62,6 +62,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -229,7 +230,7 @@ export const ficheVocabulaireEmploiCm2: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm2",
   notion: "vocabulaire-emploi",
-  titre: "Employer les mots en CM2 : niveaux de langue et dictionnaire (2026-2027)",
+  titre: `Employer les mots en CM2 : niveaux de langue et dictionnaire (${ANNEE_SCOLAIRE})`,
   accroche:
     "Tu comprends beaucoup plus de mots que tu n'en emploies — c'est vrai de tout le monde, et c'est exactement cet écart que le CM2 travaille. UN MOT N'EST À TOI QUE QUAND TU PEUX L'ÉCRIRE DANS UNE PHRASE À TOI. Comprendre en lisant est passif ; le réemploi, le niveau de langue et l'orthographe sont trois preuves actives, et toutes les trois se voient dans ce que tu écris.",
   identite: [

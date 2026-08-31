@@ -58,6 +58,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -225,7 +226,7 @@ export const ficheOralEcouterCm2: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm2",
   notion: "oral-ecouter",
-  titre: "Écouter pour comprendre en CM2 (2026-2027)",
+  titre: `Écouter pour comprendre en CM2 (${ANNEE_SCOLAIRE})`,
   accroche:
     "Le CM2 ajoute un mot à ce que demandait la classe précédente, et ce mot change tout : REFORMULER ET SYNTHÉTISER. Ce ne sont pas deux façons de dire la même chose. Reformuler, c'est redire AVEC SES MOTS — cela prouve qu'on a compris. Synthétiser, c'est redire PLUS COURT — cela prouve qu'on a TRIÉ. On peut très bien reformuler sans avoir trié, et faire court en ayant simplement oublié la moitié.",
   identite: [

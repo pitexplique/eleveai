@@ -54,6 +54,7 @@
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
+import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type {
   PhraseCanvasGroupe,
@@ -232,7 +233,7 @@ export const ficheVocabulaireSensCm2: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cm2",
   notion: "vocabulaire-sens",
-  titre: "Le sens des mots en CM2 (2026-2027)",
+  titre: `Le sens des mots en CM2 (${ANNEE_SCOLAIRE})`,
   accroche:
     "Cinq choses à apprendre, et c'est en réalité UNE SEULE, vue de quatre côtés : UN MOT N'A PAS SON SENS TOUT SEUL — C'EST LA PHRASE QUI LE LUI DONNE. Un mot inconnu ? la phrase le devine pour toi. Un mot à deux sens ? la phrase choisit. Un mot ordinaire ? la phrase peut lui faire dire tout autre chose. Deux mots presque pareils ? la phrase décide lequel convient.",
   identite: [
