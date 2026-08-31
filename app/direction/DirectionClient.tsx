@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { EXEMPLE_ETABLISSEMENT, PLAFOND_ETABLISSEMENT_AN, euros } from "@/lib/tarifs";
+// ⛔ Plus aucun prix établissement n'est importé ici depuis le 31/08/2026 :
+// cette page ne propose plus rien, elle constate une consommation.
 
 export default function DirectionClient() {
   const [password, setPassword] = useState("");
@@ -57,18 +58,18 @@ export default function DirectionClient() {
               avec la grille. Ne reste derrière le mot de passe qu'un tableau
               de bord de consommation. Une page d'accueil qui annonce ce qu'elle
               ne contient pas déçoit exactement le lecteur qu'on veut garder.
-              L'offre établissement, elle, est publique : /espace-ecoles. */}
+              L'offre établissement, elle, est publique : /espace-ecoles.
+              ⛔ CE DERNIER MEMBRE DE PHRASE EST MORT LE 31/08/2026. Il n'y a
+              plus d'offre établissement, /espace-ecoles est supprimée, et le
+              prix qui s'affichait ici (le plafond annuel, et le total pour un
+              collège de 400 élèves) ne se publie plus nulle part : Frédéric est
+              enseignant contractuel en CDI, et n'a pas le droit de vendre à un
+              établissement. Cette page reste ce qu'elle est — un tableau de
+              bord de consommation derrière un mot de passe, pour ceux qui sont
+              déjà là. Elle ne propose plus rien. */}
           <p className="text-sm text-slate-300 max-w-xl">
             Réservé aux chefs d’établissement. Vous trouverez ici le tableau de
-            bord de consommation de votre établissement. L’offre, elle, est
-            publique et sans devis —{" "}
-            <Link
-              href="/espace-ecoles"
-              className="font-semibold text-emerald-300 underline underline-offset-2 hover:text-emerald-200"
-            >
-              jamais plus de {euros(PLAFOND_ETABLISSEMENT_AN)} par an — {euros(EXEMPLE_ETABLISSEMENT.total)} pour un collège de {EXEMPLE_ETABLISSEMENT.eleves} élèves
-            </Link>
-            .
+            bord de consommation de votre établissement.
           </p>
         </header>
 

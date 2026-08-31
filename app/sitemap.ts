@@ -237,8 +237,9 @@ const ROUTES: RouteConfig[] = [
      une décision à prendre dans la console Supabase, pas ici.
      ⚠️ Et retirer une adresse du sitemap ne la retire pas de Google, qui la
      connaît déjà : elle rendra un 404, ce qui est le bon signal pour une page
-     réellement supprimée — à la différence de /espace-ecoles, qui existe
-     toujours et a donc reçu un `noindex`. */
+     réellement supprimée. (/espace-ecoles a d'abord suivi l'autre chemin — un
+     `noindex`, la page laissée en ligne — puis a été supprimée le 31/08/2026 et
+     redirigée : c'est ce chemin-là qui referme vraiment une adresse.) */
   { path: "/podcast-maths",   priority: 0.85, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/concours-general",priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/concours-avenir", priority: 0.9,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
@@ -365,11 +366,15 @@ const ROUTES: RouteConfig[] = [
   // Frédéric : « je ne vends plus aux établissements, c'est du pénal ». Elle y
   // était en priorité 0,95, la plus haute du fichier après l'accueil : c'était
   // la page qu'on poussait le plus fort à indexer.
-  // ⚠️ LA PAGE N'EST PAS SUPPRIMÉE et répond toujours — la retirer du sitemap
-  // dit seulement qu'on ne la propose plus à l'indexation. Google peut la garder
-  // un temps s'il la connaît déjà ; la faire disparaître des résultats demande
-  // un `noindex` sur la page, ce qui est une DEUXIÈME décision (et une décision
-  // à prendre les yeux ouverts : elle est référencée depuis le pied de page).
+  // ✅ ET LA PAGE EST SUPPRIMÉE LE 31/08/2026, avec /offre-pilote et
+  // /periode-essai — 301 vers /espace-profs (voir `next.config.ts`). Le motif
+  // n'est pas commercial : « on n'a pas le droit de vendre à un établissement
+  // en tant que contractuel en CDI ».
+  // ⭐ CE QUE CES DEUX JOURS ONT MESURÉ, et c'est la note à garder : entre le
+  // 29 et le 31, la page a continué de répondre en 200 avec son prix et ses
+  // deux boutons commerciaux. Sortir une adresse d'ici ne ferme RIEN — le
+  // sitemap ne fait que proposer un crawl. Une page se ferme par une
+  // redirection, une 410 ou un `noindex`, jamais par une ligne en moins.
   { path: "/espace-eleves",   priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/espace-parents",  priority: 0.8,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
 
@@ -399,12 +404,21 @@ const ROUTES: RouteConfig[] = [
   // 20/07 : les pages de la PHILOSOPHIE qui manquaient au sitemap (audit
   // Frédéric « qu'il n'oublie pas notre philosophie ») — la charte d'usage de
   // l'IA (la confiance), les tarifs justes (gratuit pour l'élève, jamais la
-  // famille), le pilote gratuit, la presse et les partenaires (l'institution).
+  // famille), le pilote gratuit et la presse (l'institution).
+  // ⛔ /partenaires EST SORTIE LE 31/08/2026, et ne revient pas : « Partenaires
+  // & sponsors » appelait au mécénat, ce que le site ne fait plus depuis qu'il
+  // ne vend plus aux établissements. Elle est supprimée et redirigée (301) vers
+  // /contact — voir le bloc `redirects()` de `next.config.ts`, qui raconte
+  // pourquoi la sortir d'ici n'aurait PAS suffi à la désindexer.
+  // ⚠️ /entreprises reste : partenariat pédagogique gratuit, c'est d'elle que
+  // viennent les simulateurs (l'hôtel, la fromagerie). Ce n'est pas la même page.
   { path: "/charte",            priority: 0.7,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/pourquoi-nos-tarifs-sont-justes", priority: 0.65, changeFrequency: "monthly", lastMod: LASTMOD_TARIFS },
-  { path: "/offre-pilote",      priority: 0.7,  changeFrequency: "monthly", lastMod: LASTMOD_TARIFS },
+  // ⛔ /offre-pilote a quitté le sitemap ET le site le 31/08/2026 : « Collèges
+  // et lycées », 0,50 €/élève/mois, plafond 2 000 €. Elle était encore ici en
+  // priorité 0,7 deux jours après la décision de ne plus vendre aux
+  // établissements — personne n'avait pensé à la chercher.
   { path: "/presse",            priority: 0.6,  changeFrequency: "monthly", lastMod: LASTMOD_TARIFS },
-  { path: "/partenaires",       priority: 0.6,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/entreprises",       priority: 0.6,  changeFrequency: "monthly", lastMod: new Date("2026-07-22") },
   // 11/08 : les 50 places de la bêta 2026-2027. Priorité haute pour la rentrée,
   // puis elle retombera d'elle-même quand les places seront prises.

@@ -11,17 +11,22 @@ const WHATSAPP_DISPLAY = "+262 06 92 74 29 58";
 const WHATSAPP_COPY = "+262692742958";
 const WHATSAPP_WA_ME = `https://wa.me/${WHATSAPP_COPY.replace("+", "")}`;
 
-const ESPACE_ECOLES_URL = "/espace-ecoles";
-
+// ⛔ RIEN NE SE PROPOSE À UN ÉTABLISSEMENT DEPUIS LE 31/08/2026. Frédéric :
+// « on n'a pas le droit de vendre à un établissement en tant que contractuel en
+// CDI ». Ce fichier ouvrait le formulaire sur « Demande pilote établissement »
+// avec le rôle « Direction / Établissement » — c'est-à-dire qu'il PROPOSAIT la
+// démarche à qui n'était venu que poser une question.
+// ⚠️ Le rôle « Direction / Établissement » RESTE dans la liste, et il le doit :
+// un chef d'établissement a le droit d'écrire, et lui interdire de se nommer ne
+// protégerait rien. Ce qui change, c'est qu'aucun choix par défaut ne l'y invite.
 type Role =
-  | "Direction / Établissement"
   | "Professeur"
   | "Parent"
   | "Élève"
+  | "Direction / Établissement"
   | "Autre";
 
 type Topic =
-  | "Demande pilote établissement"
   | "Question sur EleveAI"
   | "Bug"
   | "Idée d'amélioration"
@@ -35,8 +40,8 @@ export default function ContactClient() {
   const [copiedWhatsapp, setCopiedWhatsapp] = useState(false);
 
   // Formulaire
-  const [role, setRole] = useState<Role>("Direction / Établissement");
-  const [topic, setTopic] = useState<Topic>("Demande pilote établissement");
+  const [role, setRole] = useState<Role>("Professeur");
+  const [topic, setTopic] = useState<Topic>("Question sur EleveAI");
   const [priority, setPriority] = useState<Priority>("Normal");
 
   const [name, setName] = useState("");
@@ -140,8 +145,8 @@ export default function ContactClient() {
       if (!res.ok) throw new Error(data?.error || "Erreur lors de l'envoi.");
 
       setSentOk("Message envoyé ✅ Merci !");
-      setRole("Direction / Établissement");
-      setTopic("Demande pilote établissement");
+      setRole("Professeur");
+      setTopic("Question sur EleveAI");
       setPriority("Normal");
       setName("");
       setOrg("");
@@ -165,9 +170,10 @@ export default function ContactClient() {
             <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/35 bg-emerald-500/10 px-3 py-1 font-semibold text-emerald-200">
               📩 Contact EleveAI
             </span>
-            <span className="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1 font-semibold text-slate-200">
-              🏫 Pilote établissements
-            </span>
+            {/* ⛔ « 🏫 Pilote établissements » retiré le 31/08/2026. Frédéric :
+                « on n'a pas le droit de vendre à un établissement en tant que
+                contractuel en CDI ». Une pastille qui annonce un pilote
+                établissement EST une proposition, même sans prix affiché. */}
             <span className="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1 font-semibold text-slate-200">
               🏝️ La Réunion
             </span>
@@ -177,21 +183,17 @@ export default function ContactClient() {
             <div className="space-y-3">
               <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight">
                 Nous contacter
-                <span className="block text-emerald-300">Pilote, question, partenariat…</span>
+                <span className="block text-emerald-300">Une question, un bug, une idée…</span>
               </h1>
 
               <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
-                Vous êtes un collège ou un lycée intéressé par EleveAI ? Un parent avec une question ?
-                Un professeur qui veut tester la plateforme avec sa classe ? Écrivez-nous.
+                Un professeur qui veut tester la plateforme avec sa classe ? Un parent avec une
+                question ? Un élève bloqué sur un exercice ? Écrivez-nous.
               </p>
 
+              {/* ⛔ Le bouton « 🏫 Offre établissements » menait à /espace-ecoles,
+                  supprimée le 31/08/2026 : il n'y a pas d'offre établissement. */}
               <div className="flex flex-wrap gap-2 pt-2">
-                <Link
-                  href={ESPACE_ECOLES_URL}
-                  className="inline-flex items-center gap-2 rounded-lg border border-emerald-500/40 bg-emerald-900/20 px-4 py-2 text-sm font-semibold text-emerald-200 hover:bg-emerald-900/30"
-                >
-                  🏫 Offre établissements
-                </Link>
                 <Link
                   href="/accueil"
                   className="inline-flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-900 px-4 py-2 text-sm font-semibold hover:bg-slate-800"
@@ -241,10 +243,10 @@ export default function ContactClient() {
                 onChange={(e) => setRole(e.target.value as Role)}
                 className="w-full rounded-xl border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100"
               >
-                <option>Direction / Établissement</option>
                 <option>Professeur</option>
                 <option>Parent</option>
                 <option>Élève</option>
+                <option>Direction / Établissement</option>
                 <option>Autre</option>
               </select>
             </div>
@@ -256,7 +258,6 @@ export default function ContactClient() {
                 onChange={(e) => setTopic(e.target.value as Topic)}
                 className="w-full rounded-xl border border-slate-700 bg-slate-950/40 px-3 py-2 text-sm text-slate-100"
               >
-                <option>Demande pilote établissement</option>
                 <option>Question sur EleveAI</option>
                 <option>Bug</option>
                 <option>Idée d'amélioration</option>
@@ -277,7 +278,7 @@ export default function ContactClient() {
                 <option>Urgent</option>
               </select>
               <p className="text-[11px] text-slate-500">
-                "Urgent" = bug bloquant / établissement / démo imminente.
+                "Urgent" = bug bloquant, ou classe en attente.
               </p>
             </div>
 
@@ -392,7 +393,7 @@ export default function ContactClient() {
               </button>
             </div>
             <p className="text-[11px] text-slate-500">
-              Préféré pour les demandes "établissement" (pilote, partenariat, démo).
+              Préféré pour tout ce qui demande une trace écrite.
             </p>
           </div>
 

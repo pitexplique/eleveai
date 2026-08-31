@@ -210,18 +210,17 @@ export default function PressePage() {
               <p className="mt-2 text-sm text-slate-200">
                 Pour interview, partenariat, démonstration établissement, etc.
               </p>
+              {/* ⛔ Le second bouton « 🤝 Devenir partenaire » menait à
+                  /partenaires, supprimée le 31/08/2026. Il n'est pas remplacé :
+                  le paragraphe ci-dessus dit déjà « interview, partenariat,
+                  démonstration », et /contact les reçoit tous les trois. Deux
+                  boutons vers la même page n'auraient rien ajouté. */}
               <div className="mt-4 flex flex-col gap-2">
                 <Link
                   href="/contact"
                   className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-500"
                 >
                   Contacter EleveAI
-                </Link>
-                <Link
-                  href="/partenaires"
-                  className="inline-flex items-center justify-center rounded-xl border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-200 hover:bg-slate-900"
-                >
-                  🤝 Devenir partenaire
                 </Link>
               </div>
             </div>
