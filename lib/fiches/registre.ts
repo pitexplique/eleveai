@@ -451,6 +451,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Personne ne lit un pot de yaourt en entier. Un document, on n'y lit pas tout : on y cherche une chose.",
   },
+  "francais/cm1/lecture-oeuvres": {
+    titre: "Lire une œuvre en CM1 (2026-2027)",
+    resume:
+      "Quand on abandonne un livre, on n'a pas perdu l'histoire : on a perdu qui est qui. Le narrateur, le héros, l'adversaire.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
