@@ -182,7 +182,7 @@ export const ficheFluenceLectureCm1: FicheCoursData = {
     "On te dira peut-être « lis plus vite ». Ce conseil ne marche pas. Ce qui t'aide, c'est de reconnaitre les mots d'un coup d'œil. Et ça, ça s'apprend.",
   identite: [
     { label: "Mots clés", valeur: "Lire sans buter" },
-    { label: "Le secret", valeur: "Lire vite ne s'apprend pas" },
+    { label: "Le secret", valeur: "Le nombre mesure, il n'apprend rien" },
     { label: "Outil", valeur: "Relis le même texte" },
   ],
   definition: {
@@ -196,13 +196,17 @@ export const ficheFluenceLectureCm1: FicheCoursData = {
        Sept phrases courtes, une par ligne, aucune capitale d'emphase, aucun mot
        d'adulte. Les `\n` sont rendus grâce à `whitespace-pre-line`, ajouté le
        même jour dans `FicheCoursClient`. */
+    /* ⭐ RÉÉCRITE LE 31/08 : la découverte de la fiche — le nombre est un
+       thermomètre — vivait dans l'accroche et dans le dessin, mais PAS dans la
+       définition. Un enfant qui ne lit que ce bloc passait à côté. Les six
+       phrases suivent maintenant un fil : ce que c'est, comment on y arrive,
+       et à quoi sert le chiffre. */
     texte: [
-      "Bien lire, ce n'est pas lire vite.",
-      "C'est lire une page sans être fatigué.",
-      "Le point te dit où respirer.",
-      "Tu lis plusieurs mots d'un coup, pas un par un.",
-      "Et certains mots ne se découpent pas. « Femme » ne fait pas « fem-me ». Tu le reconnais, comme une photo.",
-      "Ce sont les mots les plus courants. C'est pour ça qu'ils t'embêtent souvent.",
+      "Bien lire, c'est lire une page sans être fatigué.",
+      "Deux choses t'y aident. Le point te dit où respirer, et tu lis plusieurs mots d'un coup au lieu d'un par un.",
+      "Surtout, certains mots ne se découpent pas. « Femme » ne fait pas « fem-me » : tu le reconnais d'un coup d'œil, comme une photo.",
+      "Ce sont les mots les plus courants. C'est pour ça qu'ils t'embêtent si souvent.",
+      "Et le nombre — 110 mots par minute ? Il mesure où tu en es, comme un thermomètre. Il ne t'apprend rien.",
     ].join("\n\n"),
   },
   /* ⛔ PAS DE `legende` ICI — règle du 31/08/2026, « jamais 120 mots en police
