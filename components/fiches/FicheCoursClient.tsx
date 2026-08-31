@@ -42,6 +42,7 @@ import { libelleClasse } from "@/lib/fiches/registre";
 import { DOSSIER_PDF, nomPdf } from "@/lib/fiches/pdf";
 import { PDF_DISPONIBLES } from "@/lib/fiches/pdf-disponibles";
 import TexteMath from "@/components/fiches/TexteMath";
+import { insecables } from "@/lib/fiches/typographie";
 import {
   ORDRE_CANONIQUE,
   RUBRIQUES_LABELS,
@@ -318,6 +319,22 @@ export default function FicheCoursClient({
     return source.ordre.filter((id) => source.actives[id]);
   }, [eleve, compo]);
 
+  /**
+   * Le titre d'une rubrique : son libellé, puis la notion rappelée.
+   *
+   * ⭐ MESURÉ LE 31/08/2026, ET C'EST LE DERNIER DÉFAUT QUI RESTAIT. Une fois
+   * l'insécable posée dans `TexteMath`, les six coupures fautives encore
+   * visibles sur l'échantillon venaient d'ICI : ces onze titres ne passent par
+   * aucun composant de texte, ils sont écrits en dur dans le JSX. À 375 px,
+   * « Exercices corrigés : » laissait son deux-points seul en début de ligne.
+   *
+   * Les onze sites répétaient par ailleurs le même appel à `titreDeSection` ;
+   * ils tiennent maintenant en un endroit, qui pose aussi la typographie.
+   */
+  function titreRubrique(libelle: string): string {
+    return insecables(`${libelle} : ${titreDeSection(fiche.titre, fiche.classe)}`);
+  }
+
   // ── Les blocs de la fiche, rendus rubrique par rubrique ──
   function rendreRubrique(id: FicheRubriqueId) {
     switch (id) {
@@ -353,7 +370,7 @@ export default function FicheCoursClient({
             <div className="rounded-2xl border border-sky-200 bg-sky-50 p-4">
               <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
                 <Wrench className="h-5 w-5 text-sky-500 print:hidden" />
-                À quoi ça sert : {titreDeSection(fiche.titre, fiche.classe)}
+                {titreRubrique("À quoi ça sert")}
               </h2>
               <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">
                 <TexteMath>{fiche.reel.texte}</TexteMath>
@@ -370,7 +387,7 @@ export default function FicheCoursClient({
             <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
               <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
                 <Landmark className="h-5 w-5 text-amber-500 print:hidden" />
-                Un peu d&apos;histoire : {titreDeSection(fiche.titre, fiche.classe)}
+                {titreRubrique("Un peu d'histoire")}
               </h2>
               <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">
                 <TexteMath>{fiche.historique.texte}</TexteMath>
@@ -390,7 +407,7 @@ export default function FicheCoursClient({
               <div className="rounded-2xl border-2 border-sky-300 bg-white p-5">
                 <h2 className="flex items-center gap-2 text-lg font-black text-sky-700 print:text-base">
                   <BookMarked className="h-5 w-5 print:hidden" />
-                  Définition : {titreDeSection(fiche.titre, fiche.classe)}
+                  {titreRubrique("Définition")}
                 </h2>
                 {/* ⭐ `whitespace-pre-line` — ajouté le 30/08/2026. Frédéric, en
                     lisant la définition du CM1 : « il faut des retours à la
@@ -425,7 +442,7 @@ export default function FicheCoursClient({
           <section className="pt-6 print:pt-4">
             <h2 className="flex items-center gap-2 text-2xl font-black text-slate-900 print:text-xl">
               <ListChecks className="h-6 w-6 text-sky-500 print:hidden" />
-              Propriétés : {titreDeSection(fiche.titre, fiche.classe)}
+              {titreRubrique("Propriétés")}
             </h2>
             {/* ⚠️ TROIS COLONNES SEULEMENT À PARTIR DE 1024 (mesuré le 24/08/2026).
                 À `md` (768), la page tenait déjà trois cartes dans 820 px : chacune
@@ -459,7 +476,7 @@ export default function FicheCoursClient({
         return (
           <section className="border-t border-slate-200 py-6 print:py-4">
             <h2 className="text-2xl font-black text-slate-900 print:text-xl">
-              La formule : {titreDeSection(fiche.titre, fiche.classe)}
+              {titreRubrique("La formule")}
             </h2>
             <div className="mt-4 grid gap-4 md:grid-cols-[1fr_1.25fr] print:grid-cols-[1fr_1.25fr]">
               <div className="rounded-2xl border border-sky-200 bg-sky-50 p-5 text-center">
@@ -493,7 +510,7 @@ export default function FicheCoursClient({
                 requête, « 1. Je repère » n'en est pas une — et les étapes
                 passent en <h3>, ce qu'elles ont toujours été. */}
             <h2 className="text-2xl font-black text-slate-900 print:text-xl">
-              Méthode : {titreDeSection(fiche.titre, fiche.classe)}
+              {titreRubrique("Méthode")}
             </h2>
             {/* Même palier que les propriétés : les étapes de méthode portent
                 elles aussi un dessin. */}
@@ -526,7 +543,7 @@ export default function FicheCoursClient({
         return (
           <section className="border-t border-slate-200 py-6 print:py-4">
             <h2 className="text-2xl font-black text-slate-900 print:text-xl">
-              Selon ce que l&apos;on cherche : {titreDeSection(fiche.titre, fiche.classe)}
+              {titreRubrique("Selon ce que l'on cherche")}
             </h2>
             {/* Même palier : les usages portent un dessin dès la 5e. */}
             <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3 print:grid-cols-3 print:gap-3">
@@ -551,7 +568,7 @@ export default function FicheCoursClient({
         return (
           <section className="border-t border-slate-200 py-6 print:py-4">
             <h2 className="text-2xl font-black text-slate-900 print:text-xl">
-              Exemples corrigés : {titreDeSection(fiche.titre, fiche.classe)}
+              {titreRubrique("Exemples corrigés")}
             </h2>
             <div className="mt-4 grid gap-4 md:grid-cols-2 print:grid-cols-2 print:gap-3">
               {fiche.exemples.map((exemple) => (
@@ -587,7 +604,7 @@ export default function FicheCoursClient({
             <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
               <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
                 <AlertTriangle className="h-5 w-5 text-amber-500 print:hidden" />
-                Pièges à éviter : {titreDeSection(fiche.titre, fiche.classe)}
+                {titreRubrique("Pièges à éviter")}
               </h2>
               <ul className="mt-3 grid gap-2 text-sm leading-6 text-slate-700 print:text-xs">
                 {fiche.pieges.map((piege) => (
@@ -605,7 +622,7 @@ export default function FicheCoursClient({
             <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
               <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
                 <CheckCircle2 className="h-5 w-5 text-emerald-500 print:hidden" />
-                À retenir : {titreDeSection(fiche.titre, fiche.classe)}
+                {titreRubrique("À retenir")}
               </h2>
               <ul className="mt-3 grid gap-2 text-sm leading-6 text-slate-700 print:text-xs">
                 {fiche.aRetenir.map((point) => (
@@ -622,7 +639,7 @@ export default function FicheCoursClient({
           <section className="border-t border-slate-200 pt-6 print:pt-4">
             <h2 className="flex items-center gap-2 text-2xl font-black text-slate-900 print:text-xl">
               <Calculator className="h-6 w-6 text-sky-500 print:hidden" />
-              Exercices corrigés : {titreDeSection(fiche.titre, fiche.classe)}
+              {titreRubrique("Exercices corrigés")}
             </h2>
             <ol className="mt-4 grid gap-4 text-sm leading-6 text-slate-700 print:gap-2 print:text-xs">
               {fiche.entrainement.map((item, index) => (
@@ -714,7 +731,7 @@ export default function FicheCoursClient({
             <ChevronRight className="h-4 w-4 text-slate-400" />
             <span>{libelleClasse(fiche.classe)}</span>
             <ChevronRight className="h-4 w-4 text-slate-400" />
-            <span className="text-slate-900">{fiche.titre}</span>
+            <span className="text-slate-900">{insecables(fiche.titre)}</span>
           </nav>
           <div className="flex flex-wrap gap-2">
             {eleve && (
@@ -957,7 +974,10 @@ export default function FicheCoursClient({
                     du CM1 dit « Lire avec fluidité en CM1 : 110 mots par
                     minute »). Le mot ne survivrait alors que dans l'URL et la
                     pastille. */}
-                {fiche.titre}
+                {/* ⚠️ `insecables` ici, mais SURTOUT PAS sur `data-titre-pdf`
+                    ci-dessus : cet attribut sert à nommer le fichier PDF, et un
+                    caractère invisible dans un nom de fichier est un piège. */}
+                {insecables(fiche.titre)}
                 <span className="mt-1 block text-base font-bold text-slate-400 sm:text-lg print:text-sm">
                   cours et exercices corrigés de{" "}
                   {fiche.matiereLabel.toLowerCase()} {libelleClasse(fiche.classe)}

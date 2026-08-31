@@ -1,9 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { ArrowLeft, Maximize, Minimize, Monitor } from "lucide-react";
+// ⭐ Le mode classe ne passe PAS par `TexteMath` — il rend le texte brut. Il lui
+// faut donc sa propre pose d'insécables, et c'est l'écran qui compte le plus :
+// une coupure fautive projetée au tableau se voit de tout le fond de la classe.
+import { insecables, typographier } from "@/lib/fiches/typographie";
 
 /**
  * Mode classe : version vidéoprojetable d'une fiche de cours.
@@ -274,11 +278,19 @@ function Section({
 
 export default function ModeClasse({
   sousTitre,
-  slides,
+  slides: slidesBrutes,
 }: {
   sousTitre: string;
   slides: ClasseSlide[];
 }) {
+  // ⭐ LA TYPOGRAPHIE SE POSE À L'ENTRÉE, UNE FOIS POUR TOUTES LES SECTIONS.
+  // Les diapos arrivent de deux sources — `slidesDepuisFiche` pour la plupart,
+  // et le tableau `slides` écrit à la main dans certaines fiches. Les traiter
+  // ici les couvre toutes les deux, et couvrira les sections qu'on ajoutera.
+  // `typographier` ne descend pas dans les `ReactNode` : les dessins passent
+  // intacts.
+  const slides = useMemo(() => slidesBrutes.map(typographier), [slidesBrutes]);
+
   const [ouvert, setOuvert] = useState(false);
   const [index, setIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
@@ -385,7 +397,9 @@ export default function ModeClasse({
             <p className="text-sm font-black uppercase text-emerald-700">
               Mode classe
             </p>
-            <p className="text-xl font-black text-slate-950">{sousTitre}</p>
+            <p className="text-xl font-black text-slate-950">
+              {insecables(sousTitre)}
+            </p>
             <p className="mt-0.5 text-xs font-bold text-slate-400">
               ← → naviguer · Espace révéler · Échap quitter
             </p>
