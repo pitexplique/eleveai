@@ -501,6 +501,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Beaucoup d'exercices ratés ont simplement été commencés trop tôt. Écouter, redire avec ses mots, puis faire.",
   },
+  "francais/cm1/oral-echanger": {
+    titre: "Prendre la parole avec les autres en CM1 (2026-2027)",
+    resume:
+      "Participer, ce n'est pas donner la bonne réponse. Trois façons de prendre la parole, une seule demande de savoir.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
