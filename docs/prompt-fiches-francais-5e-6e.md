@@ -33,9 +33,7 @@ elles sont là pour 3 4 ans ».
 6 propriétés · 3 méthodes · 4 exemples · 5 pièges · 5 à retenir · 5 entrainements
 usages VIDÉS · aucune formule · AUCUNE capitale d'emphase
 aucune légende de figure · tout texte projeté SOUS 250 SIGNES
-définition en phrases courtes séparées par 
-
-
+définition en phrases courtes, écrites comme [...].join("\n\n")
 ```
 
 ⭐ **Et la découverte doit être DANS LA DÉFINITION**, pas seulement dans
