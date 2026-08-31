@@ -163,13 +163,8 @@ export default function FAQTarifs() {
           >
             Écrire à l&apos;équipe
           </Link>
-          {" · "}
-          <Link
-            href="/espace-ecoles"
-            className="text-emerald-300 font-semibold hover:text-emerald-200"
-          >
-            EleveAI dans un établissement
-          </Link>
+          {/* ⛔ « EleveAI dans un établissement » menait à /espace-ecoles,
+              supprimée le 31/08/2026 : rien ne se vend à un établissement. */}
           {" · "}
           <Link
             href="/tarifs"

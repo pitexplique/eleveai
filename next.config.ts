@@ -58,6 +58,68 @@ const nextConfig = {
         destination: "/fiches-cours/maths",
         permanent: false,
       },
+      // ⭐ « PARTENAIRES & SPONSORS » QUITTE LE SITE (31/08/2026). La page
+      // demandait de « soutenir EleveAI, proposer une collaboration ou financer
+      // une action » — un appel au mécénat, qui n'a plus de raison d'être depuis
+      // qu'on ne vend plus aux établissements (28/08). Frédéric l'a vue dans les
+      // résultats Google et a tranché : elle disparait.
+      // ⚠️ CE N'ÉTAIT PAS UN VIEUX CACHE. Le titre « Partenaires & sponsors »
+      // avait été écrit deux jours plus tôt dans `app/partenaires/layout.tsx`
+      // (commit 66f32987, « Huit adresses cessent de porter le titre de
+      // l'accueil ») : le site le DEMANDAIT à Google, avec canonique.
+      // ⛔ RETIRER LA LIGNE DU SITEMAP N'AURAIT RIEN DÉSINDEXÉ : le sitemap est
+      // une suggestion de crawl, pas un ordre. Une page en ligne et liée depuis
+      // le footer reste affichée — elle aurait seulement été recrawlée plus
+      // rarement, donc avec un titre de plus en plus périmé. Il faut les quatre
+      // gestes ensemble : la 301 ci-dessous, la sortie du sitemap, le lien du
+      // footer, et celui de /presse.
+      // 301 vers /contact : c'est la page qui reçoit déjà « parents, enseignants,
+      // établissements, partenaires » — qui arrivait sur /partenaires y trouve
+      // ce qu'il venait chercher, sans le mot « sponsors ».
+      // ⚠️ /entreprises N'EST PAS CONCERNÉE, et ne doit pas suivre : elle invite
+      // les maisons de l'île à nourrir le journal (partenariat pédagogique et
+      // GRATUIT, jamais de pub), et c'est d'elle que sont nés les simulateurs.
+      // Frédéric, 31/08 : « c'est pour les simulateurs en ligne, des exemples de
+      // maths précis, laisse le ».
+      {
+        source: "/partenaires",
+        destination: "/contact",
+        permanent: true,
+      },
+      // ⛔⛔ LES TROIS PAGES QUI VENDAIENT À UN ÉTABLISSEMENT (31/08/2026).
+      // Frédéric : « on n'a pas le droit de vendre à un établissement en tant
+      // que contractuel en CDI ». Ce n'est donc pas un arbitrage commercial
+      // qu'on pourrait rouvrir un jour : c'est son statut d'agent public qui
+      // l'interdit, et ça ne change pas tant qu'il enseigne.
+      //
+      // ⚠️ CE QUI ÉTAIT ENCORE EN LIGNE CE MATIN, mesuré page par page — alors
+      // que la décision datait du 29/08 et que /tarifs, elle, avait bien été
+      // nettoyée ce jour-là :
+      //   /espace-ecoles  — « 0,50 € par élève et par mois », le plafond de
+      //                     2 000 €, et deux boutons : « Demander un pilote
+      //                     gratuit » et « Parler à un responsable ». Elle
+      //                     avait été sortie du sitemap le 29/08 — ce qui ne
+      //                     l'avait pas empêchée de répondre en 200.
+      //   /offre-pilote   — « Collèges et lycées », le même prix, le même
+      //                     plafond, et elle était TOUJOURS au sitemap (0,7).
+      //   /periode-essai  — l'ancienne version de /offre-pilote, orpheline :
+      //                     aucun lien du site n'y menait, aucune ligne de
+      //                     sitemap, et elle servait quand même « Devenir
+      //                     collège pilote EleveAI » à qui avait l'adresse.
+      //
+      // ⭐ LA LEÇON DU JOUR, ET ELLE EST PAYÉE DEUX FOIS : retirer une page du
+      // sitemap ne l'éteint pas. Une page se ferme par une redirection ou une
+      // 410, pas par une ligne en moins dans un fichier que Google traite
+      // comme une suggestion.
+      //
+      // Destination /espace-profs : c'est la seule voie qui reste légale. Un
+      // professeur ouvre le tarif de groupe de sa classe à ses familles ;
+      // l'établissement, lui, n'achète rien et n'a rien à signer.
+      ...["/espace-ecoles", "/offre-pilote", "/periode-essai"].map((source) => ({
+        source,
+        destination: "/espace-profs",
+        permanent: true,
+      })),
       // /presets était une bibliothèque de prompts guidés. Frédéric, 06/08 :
       // « ne sert plus à rien, plus aucun intérêt ». Elle était orpheline —
       // absente du sitemap, aucun lien du site n'y menait — donc elle ne vivait

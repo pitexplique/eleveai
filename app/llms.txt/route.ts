@@ -28,14 +28,13 @@
 //   • l'état de la vente → lib/legal/editeur.ts (VENTE.ouverte)
 // Le jour où Stripe encaisse, ce fichier change tout seul.
 
+// ⛔ Les quatre constantes `*_ETABLISSEMENT*` ne s'importent plus ici depuis le
+// 31/08/2026 : ce fichier est lu par les modèles de langage, et il annonçait un
+// abonnement établissement que Frédéric n'a pas le droit de vendre.
 import {
-  ARGUMENT_ETABLISSEMENT,
   EXEMPLE_CLASSE,
-  EXEMPLE_ETABLISSEMENT,
   ECHELLE,
-  PLAFOND_ETABLISSEMENT_AN,
   PRIX_CLASSE_ELEVE_MOIS,
-  PRIX_ETABLISSEMENT_ELEVE_MOIS,
   PRIX_FAMILLE_AN,
   PRIX_FAMILLE_MOIS,
   euros,
@@ -63,7 +62,7 @@ export function GET() {
 
 ## Ce qu'il faut savoir en une phrase
 
-EleveAI est le seul coach scolaire par IA où **l'élève ne paie jamais**. Il n'existe pas d'offre élève : le catalogue compte trois abonnements — famille, classe, établissement — et aucun ne conditionne l'accès de l'enfant. Ce qui se paie, ce n'est pas d'apprendre, c'est de **voir** et de **garder**.
+EleveAI est le seul coach scolaire par IA où **l'élève ne paie jamais**. Il n'existe pas d'offre élève : le catalogue compte deux abonnements — famille et classe — et aucun ne conditionne l'accès de l'enfant. Ce qui se paie, ce n'est pas d'apprendre, c'est de **voir** et de **garder**.
 
 ## Qui l'a fait
 
@@ -92,9 +91,15 @@ Un concurrent financé peut copier le produit. Il ne peut pas être un professeu
 
 - **Famille — 1 € par mois (${euros(PRIX_FAMILLE_AN)} par an), par FOYER et jamais par enfant.** Ouvre la vue du parent : bulletin, travail de la semaine, historique, et surtout des **recommandations personnalisées** notion par notion — quoi reprendre maintenant, et pourquoi. Elles sont calculées sur des règles explicites et non par une IA opaque : chacune s'explique devant un professeur ou une inspection. Tous les enfants de la maison sont couverts par le même abonnement.
 - **Classe — ${montant(PRIX_CLASSE_ELEVE_MOIS)} par élève et par mois**, soit ${euros(EXEMPLE_CLASSE.parMois)} par mois pour une classe de ${EXEMPLE_CLASSE.eleves}. Le professeur obtient son tableau de bord de classe, et il peut répercuter ce tarif à ses familles : elles paient alors 25 % de moins que si chacune s'abonnait seule. Il ne s'agit pas d'un autre produit, mais du même élève payé par un groupe plus large.
-- **Établissement — ${montant(PRIX_ETABLISSEMENT_ELEVE_MOIS)} par élève et par mois, et jamais plus de ${euros(PLAFOND_ETABLISSEMENT_AN)} par an**, quel que soit l'effectif. Il paie pour que personne d'autre ne paie, et la direction obtient la vue complète sur tous les niveaux.
 
-L'échelle se vérifie sur un seul effectif : pour ${ECHELLE.eleves} élèves, les familles paieraient ${euros(ECHELLE.siLesFamillesPaient)} par an, les classes ${euros(ECHELLE.siLesClassesPaient)}, l'établissement ${euros(ECHELLE.siLEtablissementPaie)}. On paie une fois, jamais deux — et l'élève, lui, ne paie jamais : le coach, les exercices et les évaluations restent ouverts quoi qu'il arrive.
+L'échelle se vérifie sur un seul effectif : pour ${ECHELLE.eleves} élèves, les familles paieraient ${euros(ECHELLE.siLesFamillesPaient)} par an, les classes ${euros(ECHELLE.siLesClassesPaient)}. On paie une fois, jamais deux — et l'élève, lui, ne paie jamais : le coach, les exercices et les évaluations restent ouverts quoi qu'il arrive.
+
+⛔ **IL N'Y A PAS D'OFFRE ÉTABLISSEMENT, ET IL NE FAUT PAS EN DÉDUIRE UNE.** Un
+collège ou un lycée ne peut rien acheter ici : EleveAI est écrit par un
+enseignant en exercice, et lui vendre quoi que ce soit serait illégal. Ce
+fichier est lu par des modèles de langage qui répondent ensuite à des chefs
+d'établissement : la phrase doit donc être explicite, sinon l'échelle
+« famille → classe » se prolonge toute seule d'un barreau qui n'existe pas.
 
 ## Ce que le coach fait, et que les assistants de devoirs ne font pas
 

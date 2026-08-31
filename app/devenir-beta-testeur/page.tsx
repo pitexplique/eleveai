@@ -180,24 +180,18 @@ export default function DevenirBetaTesteurPage() {
           </div>
         </section>
 
-        {/* ── LES ÉTABLISSEMENTS ───────────────────────────────────────── */}
-        <section className="mt-10 rounded-2xl border border-sky-300/25 bg-sky-400/[0.08] p-5">
-          <h2 className="text-lg font-black text-sky-100">
-            Vous représentez un collège ou une école ?
-          </h2>
-          <p className="mt-2 text-sm font-semibold text-white/75">
-            Un établissement ne prend pas une des {TOTAL_PLACES} places — un
-            collège de 600 élèves avalerait la bêta entière à lui seul. Vous avez
-            une autre porte, faite pour ça : une période d’essai gratuite de
-            quatre semaines, pour tout l’établissement.
-          </p>
-          <Link
-            href="/offre-pilote"
-            className="mt-3 inline-block rounded-xl bg-sky-500 px-4 py-2 text-sm font-black text-white hover:bg-sky-400"
-          >
-            Voir la période d’essai
-          </Link>
-        </section>
+        {/* ⛔ LE BLOC « VOUS REPRÉSENTEZ UN COLLÈGE OU UNE ÉCOLE ? » EST RETIRÉ
+            LE 31/08/2026, ET NE REVIENT PAS. Il envoyait vers /offre-pilote une
+            « période d'essai gratuite de quatre semaines, pour tout
+            l'établissement ». Gratuite ou non, c'est une prestation proposée à
+            un établissement : Frédéric est enseignant contractuel en CDI, il
+            n'en a pas le droit. La page /offre-pilote est supprimée le même
+            jour.
+            ⚠️ L'argument qui justifiait le bloc reste vrai et n'a plus de
+            réponse à offrir : un collège de 600 élèves avalerait à lui seul les
+            places de la bêta. Si un chef d'établissement écrit, la seule voie
+            légale passe par les FAMILLES et les CLASSES — un professeur ouvre
+            le tarif de sa classe, l'établissement n'achète rien. */}
 
         <p className="mt-10 text-center text-xs font-semibold text-white/40">
           Prénom seul, jamais le nom de famille. Aucune candidature n’est

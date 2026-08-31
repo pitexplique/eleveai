@@ -160,7 +160,10 @@ const infos = [
   { label: "Tarifs", href: "/tarifs" },
   { label: "Pourquoi nos tarifs sont justes", href: "/pourquoi-nos-tarifs-sont-justes" },
   { label: "Presse", href: "/presse" },
-  { label: "Partenaires", href: "/partenaires" },
+  // ⛔ « Partenaires » retiré le 31/08/2026 : la page est supprimée et redirigée
+  // vers /contact. Le lien du pied de page était l'une des raisons pour
+  // lesquelles Google continuait de l'afficher — un sitemap qu'on modifie ne
+  // pèse rien contre un lien interne présent sur toutes les pages du site.
   { label: "Entreprises : participez à l'aventure", href: "/entreprises" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/faq" },

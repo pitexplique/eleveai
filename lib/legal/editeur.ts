@@ -23,8 +23,9 @@ export const EDITEUR = {
   /* ⚠️ UNE SEULE ADRESSE POUR LES TROIS PAGES (18/08/2026). Les mentions
      légales donnaient `academienumerique@gmail.com`, la politique de
      confidentialité `contact@eleveai.fr` — deux adresses pour exercer les mêmes
-     droits RGPD. Le site publie déjà la seconde sur /contact, /partenaires,
-     /qui-sommes-nous et /pourquoi-eleveai, et Resend expédie la newsletter
+     droits RGPD. Le site publie déjà la seconde sur /contact,
+     /qui-sommes-nous et /pourquoi-eleveai (et sur /partenaires jusqu'à sa
+     suppression le 31/08/2026), et Resend expédie la newsletter
      depuis elle : c'est celle-là qui fait foi.
      ⚠️ Resend n'expédie que du SORTANT : que le domaine y soit vérifié ne dit
      PAS que le courrier ENTRANT arrive. ✅ Frédéric a confirmé le 18/08/2026

@@ -113,7 +113,12 @@ export function useAudience(): AudienceState {
   else if (role === "principal" || role === "boss") space = "etablissement";
   else if (pathname.startsWith("/parents")) { space = "parent"; fromRoute = true; }
   else if (pathname.startsWith("/espace-profs")) { space = "enseignant"; fromRoute = true; }
-  else if (pathname.startsWith("/espace-ecoles")) { space = "etablissement"; fromRoute = true; }
+  // ⛔ La branche `/espace-ecoles` est retirée le 31/08/2026 : la page est
+  // supprimée et redirigée vers /espace-profs, donc `pathname` ne peut plus
+  // valoir cette route. L'audience `etablissement` reste, elle : elle s'atteint
+  // encore par le RÔLE (`principal`, `boss`, ligne au-dessus), qui sert le
+  // tableau de bord des établissements déjà installés. C'est la route
+  // commerciale qui disparait, pas le public.
   else space = remembered ?? "eleve";
 
   // Visiter une page d'espace « mémorise » le choix → reconnu au retour.
