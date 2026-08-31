@@ -530,17 +530,30 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Une coupe horizontale donne un disque ; une coupe verticale donne un rectangle.",
     tags: ["section", "cylindre", "template", "canvas"],
+    // ⛔ RÉPARÉ LE 31/08/2026 : deux énoncés seulement, un par orientation.
+    // ⭐ L'OBJET MODÉLISÉ entre dans l'énoncé, et ce n'est pas un habillage :
+    // c'est le geste « modéliser » du programme. On ne coupe jamais « un
+    // cylindre » dans la vie — on coupe une boîte de conserve, un tuyau, un
+    // réservoir. Six objets, deux orientations : douze énoncés.
     generate: () => {
       const horizontal = Math.random() < 0.5;
+      const objet = randomChoice([
+        "une boîte de conserve",
+        "un tuyau d'arrosage",
+        "un réservoir d'eau cylindrique",
+        "un rouleau de papier",
+        "une bougie cylindrique",
+        "un tronc d'arbre",
+      ]);
 
       return {
         text: horizontal
-          ? "On coupe un cylindre par un plan parallèle à sa base. Quelle est la forme de la section ?"
-          : "On coupe un cylindre par un plan parallèle à son axe. Quelle est la forme de la section ?",
+          ? `On modélise ${objet} par un cylindre, et on le coupe par un plan parallèle à sa base. Quelle est la forme de la section ?`
+          : `On modélise ${objet} par un cylindre, et on le coupe par un plan parallèle à son axe. Quelle est la forme de la section ?`,
         format: "qcm",
         choices: horizontal
-          ? makeChoices("un disque", ["un rectangle", "un triangle", "un cube"])
-          : makeChoices("un rectangle", ["un disque", "une boule", "un triangle"]),
+          ? makeChoices("un disque", ["un rectangle", "un triangle", "un carré", "un losange"])
+          : makeChoices("un rectangle", ["un disque", "un triangle", "un carré", "un losange"]),
         expected: [horizontal ? "un disque" : "un rectangle"],
         comparator: "mcq_exact",
         explanation:
@@ -755,20 +768,44 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Pour un cône ou une pyramide, une coupe parallèle à la base garde la forme de la base.",
     tags: ["section", "cone", "pyramide", "template", "canvas"],
+    // ⛔ RÉPARÉ LE 31/08/2026 : deux énoncés, un par solide.
+    // ⭐ L'OBJET MODÉLISÉ entre dans l'énoncé — c'est le geste « modéliser » du
+    // programme, et il rend la question concrète : on ne coupe pas « un cône »,
+    // on coupe un cornet, un chapeau, un tas de sable.
+    // ⚠️ Les leurres ont changé aussi : « une boule », « une sphère » et « un
+    // cylindre » ne sont pas des formes PLANES — un élève les écartait sans
+    // rien savoir des sections. Les nouveaux leurres sont tous des figures
+    // planes, ou des réponses plausibles sur la taille.
     generate: () => {
       const isCone = Math.random() < 0.5;
+      const objet = isCone
+        ? randomChoice([
+            "un cornet de glace",
+            "un chapeau de fête pointu",
+            "un tas de sable conique",
+            "un entonnoir",
+            "une maquette de volcan",
+          ])
+        : randomChoice([
+            "une pyramide d'Égypte",
+            "une tente à base carrée",
+            "un toit en pointe à base carrée",
+            "un presse-papier pyramidal",
+            "une maquette de pyramide",
+          ]);
 
       return {
         text: isCone
-          ? "On coupe un cône par un plan parallèle à sa base. Quelle est la forme de la section ?"
-          : "On coupe une pyramide par un plan parallèle à sa base. Que peut-on dire de la section ?",
+          ? `On modélise ${objet} par un cône et on le coupe par un plan parallèle à sa base. Quelle est la forme de la section ?`
+          : `On modélise ${objet} par une pyramide et on la coupe par un plan parallèle à sa base. Que peut-on dire de la section ?`,
         format: "qcm",
         choices: isCone
-          ? makeChoices("un disque", ["un rectangle", "une boule", "un carré"])
+          ? makeChoices("un disque", ["un rectangle", "un triangle", "un carré", "un losange"])
           : makeChoices("une réduction de la base", [
               "un disque",
-              "une sphère",
-              "un cylindre",
+              "un agrandissement de la base",
+              "une figure identique à la base",
+              "un triangle",
             ]),
         expected: [isCone ? "un disque" : "une réduction de la base"],
         comparator: "mcq_exact",
@@ -1255,18 +1292,33 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Une section parallèle à une face reproduit la forme de cette face.",
     tags: ["section", "reconnaitre", "canvas", "template"],
+    // ⛔ RÉPARÉ LE 31/08/2026 : un `template` sans aucun tirage — un seul
+    // énoncé, « un carré » servi dans 100 % des cas. Il aurait dû être déclaré
+    // `fixed`.
+    // ⭐ Il porte maintenant le tableau complet des cinq solides que le canvas
+    // sait couper, avec les DEUX orientations là où elles diffèrent. Et le
+    // corrige nomme ce qui distingue le cylindre du cône : la forme se
+    // conserve dans les deux cas, la TAILLE non.
     generate: () => {
+      const cas = randomChoice([
+        { nom: "un cube", plan: "parallèle à une face", forme: "un carré" },
+        { nom: "un pavé droit", plan: "parallèle à une face", forme: "un rectangle" },
+        { nom: "un cylindre", plan: "parallèle à sa base", forme: "un disque" },
+        { nom: "un cylindre", plan: "parallèle à son axe", forme: "un rectangle" },
+        { nom: "un cône", plan: "parallèle à sa base", forme: "un disque" },
+        { nom: "une pyramide à base carrée", plan: "parallèle à sa base", forme: "un carré" },
+      ]);
       return {
-        text: "On coupe un cube par un plan parallèle à une face. La section est…",
+        text: `On coupe ${cas.nom} par un plan ${cas.plan}. La section est…`,
         format: "qcm",
-        choices: shuffle(["un carré", "un triangle", "un disque", "un losange"]),
-        expected: ["un carré"],
+        choices: shuffle(["un carré", "un rectangle", "un disque", "un triangle"]),
+        expected: [cas.forme],
         comparator: "mcq_exact",
         explanation:
-          "Définition : une section parallèle à une face reproduit cette face.\n\n" +
-          "Méthode : on regarde la forme de la face du cube.\n\n" +
-          "Observation : les faces d’un cube sont des carrés.\n\n" +
-          "Conclusion : la section est un carré.",
+          "Définition : une section parallèle à la base — ou à une face — reproduit la FORME de cette base.\n\n" +
+          "Méthode : on regarde d'abord la forme de la base, puis on vérifie l'orientation du plan.\n\n" +
+          `Calcul : ${cas.nom} coupé par un plan ${cas.plan} donne ${cas.forme}.\n\n` +
+          "Conclusion : ⚠️ la forme se conserve, la TAILLE pas toujours. Pour un cylindre, la section parallèle à la base est identique à la base ; pour un CÔNE ou une PYRAMIDE, elle est plus petite — parce que le solide se resserre vers le sommet.",
         canvas: sectionSolideCanvas({
           solide: "cube",
           section: "parallele_face",
@@ -1550,24 +1602,34 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Parallèle aux bases → disque ; contenant l’axe → rectangle.",
     tags: ["section", "cylindre", "canvas", "template"],
+    // ⛔ RÉPARÉ LE 31/08/2026. Il posait la MÊME question que `tpl_1` — la forme
+    // de la section — ce qui n'en fait pas deux gabarits. Et son canvas portait
+    // encore `labels: { section: forme }`, c'est-à-dire la réponse écrite dans
+    // la figure : inoffensif tant que `showSectionName` vaut false, mais c'est
+    // une bombe à retardement si quelqu'un rallume le drapeau. Le libellé part.
+    // ⭐ Il porte maintenant les DIMENSIONS de la section, ce que la 3e ajoute
+    // à la simple reconnaissance : la section d'un cylindre parallèle aux bases
+    // est un disque de MÊME rayon — le cylindre ne rétrécit pas, contrairement
+    // au cône.
     generate: () => {
-      const base = randomChoice([true, false]);
-      const forme = base ? "un disque" : "un rectangle";
+      const rayon = randomChoice([2, 3, 4, 5, 6, 7]);
+      const hauteur = randomChoice([8, 10, 12, 15]);
+      const cherche = randomChoice(["rayon", "diametre"] as const);
+      const reponse = cherche === "rayon" ? rayon : 2 * rayon;
       return {
-        text: `On coupe un cylindre par un plan ${base ? "parallèle à ses bases" : "contenant son axe"}. La section est…`,
-        format: "qcm",
-        choices: shuffle(["un disque", "un rectangle", "un carré", "un triangle"]),
-        expected: [forme],
-        comparator: "mcq_exact",
+        text: `Un cylindre a un rayon de ${rayon} cm et une hauteur de ${hauteur} cm. On le coupe par un plan parallèle à ses bases. Quel est le ${cherche === "rayon" ? "RAYON" : "DIAMÈTRE"} du disque obtenu, en cm ?`,
+        format: "short",
+        expected: [String(reponse)],
+        comparator: "number_equal",
         explanation:
-          `Définition : la forme dépend de l’orientation du plan.\n\n` +
-          `Méthode : ${base ? "parallèle aux bases" : "contenant l’axe"}.\n\n` +
-          `Observation : on obtient ${forme}.\n\n` +
-          `Conclusion : la section est ${forme}.`,
+          "Définition : une section de cylindre parallèle aux bases est un disque IDENTIQUE aux bases — même rayon, même diamètre.\n\n" +
+          "Méthode : on ne calcule rien. On reconnaît que le cylindre a la même largeur sur toute sa hauteur, donc la coupe reproduit la base à l'identique.\n\n" +
+          `Calcul : le rayon vaut ${rayon} cm, donc le diamètre vaut $2 \\times ${rayon} = ${2 * rayon}$ cm. On cherche le ${cherche}, soit ${reponse} cm.\n\n` +
+          `Conclusion : ⚠️ la HAUTEUR de ${hauteur} cm ne sert à rien ici — elle est là pour voir si on la prend quand même. ⭐ Et c'est ce qui sépare le cylindre du CÔNE : une section de cône parallèle à la base est un disque PLUS PETIT, parce que le cône se resserre.`,
         canvas: sectionSolideCanvas({
           solide: "cylindre",
-          section: base ? "parallele_base" : "parallele_axe",
-          labels: { titre: "Section d’un cylindre", section: forme },
+          section: "parallele_base",
+          labels: { titre: "Section d'un cylindre" },
           display: { showLabels: true, showSectionName: false, showPlane: true },
         }),
       };
@@ -1664,24 +1726,34 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Parallèle à la base → même forme que la base, mais réduite.",
     tags: ["section", "cone", "pyramide", "canvas", "template"],
+    // ⛔ RÉPARÉ LE 31/08/2026. Il posait la MÊME question que `tpl_1` — la forme
+    // de la section — et son canvas portait encore la réponse dans
+    // `labels.section` : inoffensif tant que `showSectionName` vaut false, mais
+    // une bombe à retardement si le drapeau se rallume. Le libellé part.
+    // ⭐ Il porte maintenant la RÉDUCTION, qui est ce que la 3e ajoute : la
+    // section garde la forme mais pas la taille, et son coefficient se lit sur
+    // les hauteurs. C'est le pont entre les sections et l'agrandissement.
     generate: () => {
       const cone = randomChoice([true, false]);
-      const forme = cone ? "un disque (cercle)" : "un carré";
+      const H = randomChoice([12, 15, 18, 20, 24]);
+      const k = randomChoice([2, 3, 4]);
+      const h = H / k;
+      const baseDim = randomChoice([6, 8, 9, 12]);
+      const reduit = baseDim / k;
       return {
-        text: `On coupe ${cone ? "un cône" : "une pyramide à base carrée"} par un plan parallèle à la base. Quelle est la forme de la section ?`,
-        format: "qcm",
-        choices: shuffle(["un disque (cercle)", "un carré", "un rectangle", "un triangle"]),
-        expected: [forme],
-        comparator: "mcq_exact",
+        text: `${cone ? "Un cône" : "Une pyramide à base carrée"} a une hauteur de ${H} cm et ${cone ? `un rayon de base de ${baseDim} cm` : `un côté de base de ${baseDim} cm`}. On le coupe par un plan parallèle à la base, à ${h} cm du sommet. Quel est ${cone ? "le rayon" : "le côté"} de la section, en cm ?`,
+        format: "short",
+        expected: [String(reduit)],
+        comparator: "number_equal",
         explanation:
-          `Définition : une section parallèle à la base reprend la forme de la base, en réduit.\n\n` +
-          `Méthode : on regarde la base.\n\n` +
-          `Observation : ${cone ? "la base d’un cône est un disque" : "la base de la pyramide est un carré"}.\n\n` +
-          `Conclusion : la section est ${forme}.`,
+          "Définition : une section parallèle à la base est une RÉDUCTION de la base — même forme, taille plus petite.\n\n" +
+          "Méthode : le coefficient de réduction se lit sur les HAUTEURS, en partant du sommet. On l'applique ensuite à la dimension de la base.\n\n" +
+          `Calcul : la section est à ${h} cm du sommet sur une hauteur totale de ${H} cm, donc le coefficient vaut $\\dfrac{${h}}{${H}} = \\dfrac{1}{${k}}$. La dimension cherchée vaut $${baseDim} \\div ${k} = ${reduit}$ cm.\n\n` +
+          `Conclusion : ⚠️ le coefficient se prend depuis le SOMMET, pas depuis la base. Mesurer ${H - h} cm au lieu de ${h} donnerait $\\dfrac{${H - h}}{${H}}$ — et une section trop grande. ⭐ C'est le même agrandissement-réduction qu'en 4e, appliqué dans l'espace.`,
         canvas: sectionSolideCanvas({
           solide: cone ? "cone" : "pyramide",
           section: "parallele_base",
-          labels: { titre: "Section parallèle à la base", section: forme },
+          labels: { titre: "Section parallèle à la base" },
           display: { showLabels: true, showSectionName: false, showPlane: true },
         }),
       };
