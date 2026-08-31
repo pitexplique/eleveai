@@ -13,7 +13,7 @@ francais 4e     19 notions   19 fichées   100 %   ⭐ FERMÉE
 francais 5e     28 notions   28 fichées   100 %   ⭐ FERMÉE
 francais 6e     29 notions   29 fichées   100 %   ⭐ FERMÉE
 francais cm2    27 notions   25 fichées    93 %   ← 2 EN ARBITRAGE, VOIR CI-DESSOUS
-francais cm1    25 notions    0 fichées     0 %
+francais cm1    25 notions    9 fichées    36 %   ← LE CHANTIER EN COURS (31/08)
 francais 3e     19 notions    0 fichées     0 %
 francais 2de    16 notions    0 fichées     0 %
 ```
@@ -22,6 +22,64 @@ francais 2de    16 notions    0 fichées     0 %
 moitié fait.** Le CM2 est la suite naturelle, et pour une raison technique :
 
 ---
+
+## ⭐⭐ L'ÉTALON DU CYCLE 3 — décidé le 31/08, il commande tout le reste
+
+Frédéric, le 31/08 : « on utilise le même étalon que pour cm1 et cm2 et 6e »,
+« il faut privilégier la qualité pas la vitesse — une fois les fiches faites
+elles sont là pour 3 4 ans ».
+
+```
+6 propriétés · 3 méthodes · 4 exemples · 5 pièges · 5 à retenir · 5 entrainements
+usages VIDÉS · aucune formule · AUCUNE capitale d'emphase
+aucune légende de figure · tout texte projeté SOUS 250 SIGNES
+définition en phrases courtes séparées par 
+
+
+```
+
+⭐ **Et la découverte doit être DANS LA DÉFINITION**, pas seulement dans
+l'accroche. L'accroche attire ; la définition est ce qu'on recopie dans le cahier.
+
+⭐⭐ **La raison profonde de l'étalon est le MODE CLASSE, pas la page** :
+`slidesDepuisFiche` fabrique le diaporama DEPUIS la fiche. Dix propriétés et six
+exemples donnent trente diapos dont plusieurs débordent de l'écran. Le gabarit
+est donc ce qui rend la fiche **projetable**.
+
+⭐ **Le vérificateur applique tout ça** — c'est lui qui tient, pas ma mémoire :
+
+```bash
+node scripts/mesurer-etalon-cycle3.mjs cm1 --details
+```
+
+## ⭐ ÉTAT DU CM1 AU 31/08 — 9 sur 25, toutes conformes
+
+**Faites** : fluence-lecture · lecture-voix-haute · comprehension-textes ·
+comprehension-documents · lecture-oeuvres · culture-personnages ·
+culture-soi-et-les-autres · culture-lecteur · ecriture-preparer.
+La **lecture** et la **culture** sont closes.
+
+**Restent 16** : écriture ×2 (produire, reviser) · oral ×2 · vocabulaire ×3
+(sens, relations, emploi) · grammaire ×6 (types_phrases, phrase, complements,
+classes_mots, groupe_nominal, accords) · conjugaison ×3.
+
+⚠️ **Les PDF se génèrent À LA FIN de la classe**, quand les 25 fiches sont
+stables — les produire avant, c'est refaire le travail à chaque correction.
+
+⛔⛔ **LE PIÈGE N° 1 DU CM1, ET IL EST INÉDIT : 21 de ses 25 notions portent un
+nom déjà pris par le CM2**, qui est entièrement fiché. Chaque fiche demande un
+tableau de séparation à **trois colonnes** (CM1 / CM2 / 6e). Une fiche de CM1 qui
+répète celle du CM2 ne vaut rien.
+⭐ **Où trouver la ligne de partage quand les micros se ressemblent** : dans le
+POOL, et souvent dans ses MAUVAISES RÉPONSES. Pour `culture_lecteur`, les quatre
+leurres — résumé complet, liste des personnages, titre-auteur-date, poème
+recopié — sont quatre façons de *prouver qu'on a lu*, et c'est ça qui a donné le
+fil de la fiche.
+
+⚠️ **Toujours relire les identifiants de micros dans `microSkills.ts`**, jamais
+les déduire du libellé. J'ai écrit `cm1_ecrit_retenir` au lieu de
+`cm1_ecrit_notes` : rien ne le signale — ni typecheck, ni rendu, ni vérificateur.
+Ça rompt en silence le lien entre la fiche et le coach.
 
 ## ⛔⛔ CE QUI RESTE AU CM2 — UN ARBITRAGE, PAS DEUX FICHES À ÉCRIRE
 
