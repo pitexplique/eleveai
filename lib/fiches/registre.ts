@@ -516,6 +516,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Le contraire de content n'est ni joyeux ni ravi. Et tout cela sert au moment où tu te relis.",
   },
+  "francais/cm1/vocabulaire-emploi": {
+    titre: "La lettre qu'on n'entend pas en CM1 (2026-2027)",
+    resume:
+      "Grand donne grande, chant donne chanter : la lettre muette se trouve. Cherche d'abord, apprends ce qui reste.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
