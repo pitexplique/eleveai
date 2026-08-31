@@ -68,6 +68,33 @@ function thalesCanvas(data: {
   };
 }
 
+/**
+ * ⭐ LES NOMMAGES DE LA CONFIGURATION, ajoutés le 31/08/2026.
+ *
+ * ⛔ Les gabarits de `thales_configuration` et `thales_rapport` écrivaient
+ * toujours « A, B, C, M, N ». L'un d'eux ne variait sa « bonne réponse » qu'en
+ * PERMUTANT les deux noms — « (MN) et (BC) », puis « (BC) et (MN) » : la même
+ * réponse écrite deux fois, une variation en trompe-l'œil qui trompait le
+ * compteur sans rien enseigner.
+ *
+ * ⭐ Renommer n'est pas cosmétique : un élève qui ne voit jamais que ces
+ * lettres-là retient une IMAGE au lieu d'une configuration, et se bloque dès
+ * qu'un exercice de brevet nomme les points autrement.
+ *
+ * ⚠️ `A` est toujours le SOMMET commun aux deux sécantes, `M` et `N` les points
+ * sur les sécantes, `B` et `C` les points de la parallèle éloignée — c'est la
+ * géométrie du canvas, seuls les NOMS changent. Pas de I ni de O, qui se
+ * confondent avec 1 et 0.
+ */
+const NOMS_THALES: { A: string; B: string; C: string; M: string; N: string }[] = [
+  { A: "A", B: "B", C: "C", M: "M", N: "N" },
+  { A: "S", B: "T", C: "U", M: "E", N: "F" },
+  { A: "R", B: "P", C: "Q", M: "K", N: "L" },
+  { A: "D", B: "G", C: "H", M: "V", N: "W" },
+  { A: "F", B: "J", C: "L", M: "P", N: "R" },
+  { A: "E", B: "X", C: "Y", M: "G", N: "H" },
+];
+
 export const thalesBank: TutorBankItemV4[] = [
 
   /* =========================
@@ -148,23 +175,26 @@ export const thalesBank: TutorBankItemV4[] = [
     hint: "Repère les droites parallèles.",
     tags: ["thales_theoreme", "configuration", "template"],
 
+    // ⛔ RÉPARÉ LE 31/08/2026. Sa seule « variation » était de PERMUTER les deux
+    // noms de la bonne réponse — « (MN) et (BC) », puis « (BC) et (MN) ». La
+    // même réponse écrite deux fois : deux énoncés au compteur, rien de plus
+    // pour l'élève. Le nommage des points est maintenant tiré d'une table, et
+    // c'est lui qui fait varier la réponse.
     generate: () => {
-      const correct = randomChoice([
-        "(MN) et (BC)",
-        "(BC) et (MN)",
-      ]);
+      const n = randomChoice(NOMS_THALES);
+      const correct = `(${n.M}${n.N}) et (${n.B}${n.C})`;
 
       return {
         text:
-          "Dans cette figure, quelles droites sont parallèles ?",
+          `Dans cette figure, quelles droites sont parallèles ?`,
 
         format: "qcm",
 
         choices: shuffle([
           correct,
-          "(AB) et (AC)",
-          "(AM) et (AN)",
-          "(AC) et (BC)",
+          `(${n.A}${n.B}) et (${n.A}${n.C})`,
+          `(${n.A}${n.M}) et (${n.A}${n.N})`,
+          `(${n.A}${n.C}) et (${n.B}${n.C})`,
         ]),
 
         expected: [correct],
@@ -172,12 +202,13 @@ export const thalesBank: TutorBankItemV4[] = [
         comparator: "mcq_exact",
 
         explanation:
-          "Définition : dans une configuration de Thalès, deux droites parallèles sont coupées par deux sécantes.\n\n" +
-          "Méthode : on repère les marques de parallélisme.\n\n" +
-          "Calcul : les droites parallèles sont (MN) et (BC).\n\n" +
-          "Conclusion : la figure est bien une configuration de Thalès.",
+          "Définition : dans une configuration de Thalès, deux droites PARALLÈLES sont coupées par deux SÉCANTES qui se rencontrent en un point.\n\n" +
+          "Méthode : on repère les marques de parallélisme sur la figure — les petits chevrons identiques.\n\n" +
+          `Calcul : ici, les droites parallèles sont (${n.M}${n.N}) et (${n.B}${n.C}).\n\n` +
+          `Conclusion : ⚠️ (${n.A}${n.M}) et (${n.A}${n.N}) ne sont PAS parallèles — ce sont les deux sécantes, et elles se coupent en ${n.A}. Deux droites qui se coupent ne peuvent pas être parallèles.`,
 
         canvas: thalesCanvas({
+          labels: n,
           sideLabels: {
             AM: "4",
             AB: "8",
@@ -234,27 +265,39 @@ export const thalesBank: TutorBankItemV4[] = [
     hint: "Associe les côtés correspondants.",
     tags: ["thales_theoreme", "rapport", "template"],
 
+    // ⛔ RÉPARÉ LE 31/08/2026 : un seul énoncé, et la réponse valait « AN » dans
+    // 100 % des tirages. Les nombres du dessin changeaient, la question non.
+    // ⭐ Le nommage vient de la table, ET le TROU se déplace : tantôt le
+    // numérateur manque, tantôt le dénominateur. C'est ce déplacement qui
+    // oblige à comprendre la correspondance au lieu de retenir une place.
     generate: () => {
+      const n = randomChoice(NOMS_THALES);
       const a = randomChoice([2, 3, 4, 5]);
       const k = randomChoice([2, 3]);
+      const trou = randomChoice(["numerateur", "denominateur"] as const);
+      const enonce =
+        trou === "numerateur"
+          ? `${n.A}${n.M} / ${n.A}${n.B} = ... / ${n.A}${n.C}`
+          : `${n.A}${n.M} / ${n.A}${n.B} = ${n.A}${n.N} / ...`;
+      const reponse = trou === "numerateur" ? `${n.A}${n.N}` : `${n.A}${n.C}`;
 
       return {
-        text:
-          "Compléter l’égalité de Thalès : AM / AB = ... / AC",
+        text: `Compléter l'égalité de Thalès : ${enonce}`,
 
         format: "short",
 
-        expected: ["AN"],
+        expected: [reponse],
 
         comparator: "exact_text",
 
         explanation:
-          "Définition : dans le théorème de Thalès, les rapports comparent des côtés correspondants.\n\n" +
-          "Méthode : AM correspond à AB et AN correspond à AC.\n\n" +
-          "Calcul : on complète donc par AN.\n\n" +
-          "Conclusion : l’égalité correcte est AM/AB = AN/AC.",
+          "Définition : dans le théorème de Thalès, chaque rapport compare deux longueurs prises sur la MÊME sécante, et les deux rapports se correspondent.\n\n" +
+          `Méthode : ${n.A}${n.M} et ${n.A}${n.B} sont sur une sécante ; ${n.A}${n.N} et ${n.A}${n.C} sont sur l'autre. Le petit va avec le petit, le grand avec le grand.\n\n` +
+          `Calcul : on complète donc par ${reponse}.\n\n` +
+          `Conclusion : l'égalité est $\\dfrac{${n.A}${n.M}}{${n.A}${n.B}} = \\dfrac{${n.A}${n.N}}{${n.A}${n.C}}$. ⚠️ Mélanger les deux sécantes dans un même rapport est l'erreur la plus fréquente : $\\dfrac{${n.A}${n.M}}{${n.A}${n.C}}$ ne veut rien dire ici.`,
 
         canvas: thalesCanvas({
+          labels: n,
           sideLabels: {
             AM: String(a),
             AB: String(a * k),
@@ -1186,21 +1229,70 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_configuration",
     difficulty: 2,
     theme: "neutral",
-    hint: "Les parallèles sont $(MN)$ et $(BC)$.",
+    // ⛔⛔ RÉPARÉ LE 31/08/2026, ET IL AVAIT DEUX DÉFAUTS À LA FOIS. Il posait
+    // EXACTEMENT la même question que `tpl_1` — deux gabarits pour une seule
+    // question, ce qui n'en fait pas deux —, et son `hint` DONNAIT la réponse :
+    // « Les parallèles sont (MN) et (BC) ». L'indice servait le corrigé.
+    // ⭐ Il porte maintenant l'autre geste, celui qui compte au brevet : la
+    // configuration est-elle bien celle de Thalès ? Car le théorème ne
+    // s'applique QUE si les deux conditions sont réunies — deux sécantes qui se
+    // coupent, et deux droites parallèles.
+    hint: "Deux conditions, et il les faut toutes les deux : des sécantes qui se coupent, et des parallèles.",
     tags: ["thales_theoreme", "configuration", "canvas", "template"],
     generate: () => {
+      const n = randomChoice(NOMS_THALES);
+      const cas = randomChoice([
+        {
+          enonce: `(${n.M}${n.N}) est parallèle à (${n.B}${n.C})`,
+          ok: true,
+          pourquoi: "les deux sécantes se coupent en " + n.A + ", et les deux droites sont parallèles : les deux conditions sont réunies",
+        },
+        {
+          enonce: `on ne sait pas si (${n.M}${n.N}) et (${n.B}${n.C}) sont parallèles`,
+          ok: false,
+          pourquoi: "sans le parallélisme, il manque la moitié de l'hypothèse — les rapports ne sont pas égaux en général",
+        },
+        {
+          enonce: `(${n.M}${n.N}) et (${n.B}${n.C}) se coupent en un point`,
+          ok: false,
+          pourquoi: "deux droites qui se coupent ne sont pas parallèles : la configuration n'est pas celle de Thalès",
+        },
+        {
+          enonce: `${n.M} est sur [${n.A}${n.B}], ${n.N} est sur [${n.A}${n.C}], et (${n.M}${n.N}) // (${n.B}${n.C})`,
+          ok: true,
+          pourquoi: "les points sont sur les sécantes et le parallélisme est donné : c'est la configuration complète",
+        },
+        {
+          enonce: `${n.M} est sur [${n.A}${n.B}] et ${n.N} est sur [${n.B}${n.C}]`,
+          ok: false,
+          pourquoi: `${n.N} est sur le mauvais côté : les deux points doivent être sur les deux SÉCANTES issues de ${n.A}`,
+        },
+      ]);
+      const correct = cas.ok
+        ? "oui, on peut appliquer Thalès"
+        : "non, il manque une condition";
       return {
-        text: "Dans cette configuration de Thalès, quelles droites sont parallèles ?",
+        text: `Dans le triangle ${n.A}${n.B}${n.C}, ${cas.enonce}. Peut-on appliquer le théorème de Thalès ?`,
         format: "qcm",
-        choices: shuffle(["$(MN)$ et $(BC)$", "$(AB)$ et $(AC)$", "$(AM)$ et $(AN)$", "$(AB)$ et $(MN)$"]),
-        expected: ["$(MN)$ et $(BC)$"],
+        choices: shuffle([
+          "oui, on peut appliquer Thalès",
+          "non, il manque une condition",
+        ]),
+        expected: [correct],
         comparator: "mcq_exact",
         explanation:
-          "Définition : dans cette configuration, la parallèle coupe les deux côtés du triangle.\n\n" +
-          "Méthode : on repère les marques de parallélisme.\n\n" +
-          "Calcul : les droites parallèles sont $(MN)$ et $(BC)$.\n\n" +
-          "Conclusion : $(MN)$ et $(BC)$ sont parallèles.",
-        canvas: thalesCanvas({ sideLabels: { AM: "3", AB: "9", AN: "2", AC: "6" } }),
+          "Définition : le théorème de Thalès demande DEUX choses — deux droites sécantes qui se coupent en un point, et deux droites PARALLÈLES qui les coupent.\n\n" +
+          "Méthode : on vérifie les deux séparément. Une seule qui manque, et le théorème ne s'applique pas.\n\n" +
+          `Calcul : ici, ${cas.pourquoi}.\n\n` +
+          (cas.ok
+            ? "Conclusion : oui, la configuration est complète."
+            : "Conclusion : ⚠️ non. ⭐ C'est l'erreur qui coûte le plus cher au brevet : écrire les rapports de Thalès sur une figure qui n'est pas une configuration de Thalès. Les rapports seraient faux, et tout le calcul avec."),
+        canvas: thalesCanvas({
+          labels: n,
+          showParallelMarks: cas.ok,
+          highlightParallel: cas.ok,
+          sideLabels: { AM: "3", AB: "9", AN: "2", AC: "6" },
+        }),
       };
     },
   },
@@ -1318,19 +1410,45 @@ export const thalesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Associe les côtés correspondants sur les deux sécantes.",
     tags: ["thales_theoreme", "rapport", "qcm", "template"],
+    // ⛔ RÉPARÉ LE 31/08/2026 : un seul énoncé, une seule bonne réponse servie
+    // dans 100 % des tirages. ⭐ Le rapport DE DÉPART change maintenant — on
+    // peut partir de n'importe lequel des trois —, et c'est ce qui distingue un
+    // élève qui a compris la correspondance d'un élève qui a retenu une ligne.
     generate: () => {
+      const n = randomChoice(NOMS_THALES);
+      // Les trois rapports égaux de la configuration, dans le même ordre.
+      const R = [
+        `\\dfrac{${n.A}${n.M}}{${n.A}${n.B}}`,
+        `\\dfrac{${n.A}${n.N}}{${n.A}${n.C}}`,
+        `\\dfrac{${n.M}${n.N}}{${n.B}${n.C}}`,
+      ];
+      const i = randomInt(0, 2);
+      const j = randomChoice([0, 1, 2].filter((x) => x !== i));
+      const depart = R[i];
+      const correct = `$${R[j]}$`;
       return {
-        text: "Quel rapport est égal à $\\dfrac{AM}{AB}$ dans une configuration de Thalès ?",
+        text: `Quel rapport est égal à $${depart}$ dans cette configuration de Thalès ?`,
         format: "qcm",
-        choices: shuffle(["$\\dfrac{AN}{AC}$", "$\\dfrac{AC}{AN}$", "$\\dfrac{AB}{AM}$", "$\\dfrac{BC}{MN}$"]),
-        expected: ["$\\dfrac{AN}{AC}$"],
+        choices: makeChoices(correct, [
+          // Les leurres RETOURNENT un rapport ou MÉLANGENT les deux sécantes :
+          // ce sont les deux erreurs réelles, pas des réponses au hasard.
+          `$\\dfrac{${n.A}${n.C}}{${n.A}${n.N}}$`,
+          `$\\dfrac{${n.A}${n.B}}{${n.A}${n.M}}$`,
+          `$\\dfrac{${n.B}${n.C}}{${n.M}${n.N}}$`,
+          `$\\dfrac{${n.A}${n.M}}{${n.A}${n.C}}$`,
+          `$\\dfrac{${n.A}${n.N}}{${n.A}${n.B}}$`,
+        ]),
+        expected: [correct],
         comparator: "mcq_exact",
         explanation:
-          "Définition : les rapports de Thalès comparent des côtés correspondants dans le même ordre.\n\n" +
-          "Méthode : $AM$ correspond à $AB$ sur une sécante, $AN$ à $AC$ sur l’autre.\n\n" +
-          "Calcul : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$.\n\n" +
-          "Conclusion : le rapport égal est $\\dfrac{AN}{AC}$.",
-        canvas: thalesCanvas({ sideLabels: { AM: "3", AB: "6", AN: "4", AC: "8" } }),
+          "Définition : la configuration de Thalès donne TROIS rapports égaux, pas deux — celui de la première sécante, celui de la seconde, et celui des deux parallèles.\n\n" +
+          `Méthode : chaque rapport se lit sur UNE seule ligne. $${R[0]}$ et $${R[1]}$ sur les sécantes, $${R[2]}$ sur les parallèles. On peut partir de n'importe lequel.\n\n` +
+          `Calcul : $${depart} = ${R[j]}$.\n\n` +
+          `Conclusion : ⚠️ deux erreurs guettent, et les leurres les portent toutes deux — RETOURNER un rapport (le petit sur le grand devient le grand sur le petit), et MÉLANGER les deux sécantes dans une même fraction. $\\dfrac{${n.A}${n.M}}{${n.A}${n.C}}$ ne veut rien dire : ces deux longueurs ne sont pas sur la même droite.`,
+        canvas: thalesCanvas({
+          labels: n,
+          sideLabels: { AM: "3", AB: "6", AN: "4", AC: "8" },
+        }),
       };
     },
   },
