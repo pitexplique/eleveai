@@ -217,7 +217,7 @@ export const ficheCulturePersonnagesCm1: FicheCoursData = {
       titre: "Le défi : se mettre à sa place",
       texte: "Ressentir ce que ressent quelqu'un d'autre, ça s'appelle l'empathie.",
       schema: seMettreALaPlace,
-      micros: ["cm1_cult_autres_vies"],
+      micros: ["cm1_cult_personnages_defi"],
     },
   ],
   reel: {

@@ -486,6 +486,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Recopier une leçon ne la fait pas entrer dans la tête. Reformulée avec tes mots, elle devient la tienne.",
   },
+  "francais/cm1/ecriture-produire": {
+    titre: "Écrire un texte qui se tient en CM1 (2026-2027)",
+    resume:
+      "Des phrases justes mises bout à bout font une liste. Ce sont les connecteurs qui en font un texte.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
