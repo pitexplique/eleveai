@@ -99,6 +99,38 @@ function apresDeuxPoints(titre: string): string {
     : titre;
 }
 
+/** ⭐⭐ LE TITRE DE SECTION PERD LA CLASSE ET L'ANNÉE (31/08/2026).
+ *
+ *  Frédéric : « pourquoi après tu répètes 20 fois en CM1 (2026-2027) ? ».
+ *  Mesuré sur la fiche de CM1 : **neuf titres de section sur dix** reprenaient le
+ *  titre entier, soit 333 signes de redite sur une page. L'information utile de
+ *  chaque titre tient en un mot — Définition, Propriétés, Méthode.
+ *
+ *  ⭐ ET ICI, CONTRAIREMENT AU H1, LISIBILITÉ ET RÉFÉRENCEMENT VONT DANS LE MÊME
+ *  SENS : répéter onze fois la même expression exacte est du bourrage de
+ *  mots-clés, que Google pénalise. On ne protège pas un gain, on retire un
+ *  risque. Le grand titre, lui, garde tout — c'est lui le signal.
+ *
+ *  ⛔ SEULES 33 FICHES SUR 216 SONT CONCERNÉES, et ce sont les récentes : les
+ *  anciennes s'appellent « Les fractions » et donnaient déjà « Propriétés : les
+ *  fractions ». C'est l'ajout de la classe et de l'année dans le titre qui a
+ *  créé la redite.
+ *
+ *  ⚠️⚠️ ON NE DEVINE PAS PAR MOTIF, ON UTILISE LA CLASSE DE LA FICHE. Un titre
+ *  finit par « … en voix (2026-2027) », où « en voix » porte le sens : une regex
+ *  sur « en <mot> (année) » l'aurait amputé en « Mettre un texte ». On retire
+ *  donc exactement « en <libellé de CETTE classe> » et la parenthèse d'année,
+ *  rien d'autre.
+ */
+function titreDeSection(titre: string, classe: string): string {
+  const sansAnnee = titre.replace(/\s*\((?:20\d\d)(?:-20\d\d)?\)\s*$/, "");
+  const suffixe = ` en ${libelleClasse(classe)}`;
+  const nu = sansAnnee.endsWith(suffixe)
+    ? sansAnnee.slice(0, -suffixe.length)
+    : sansAnnee;
+  return apresDeuxPoints(nu.trim());
+}
+
 export default function FicheCoursClient({
   fiche,
   slides,
@@ -321,7 +353,7 @@ export default function FicheCoursClient({
             <div className="rounded-2xl border border-sky-200 bg-sky-50 p-4">
               <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
                 <Wrench className="h-5 w-5 text-sky-500 print:hidden" />
-                À quoi ça sert : {apresDeuxPoints(fiche.titre)}
+                À quoi ça sert : {titreDeSection(fiche.titre, fiche.classe)}
               </h2>
               <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">
                 <TexteMath>{fiche.reel.texte}</TexteMath>
@@ -338,7 +370,7 @@ export default function FicheCoursClient({
             <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
               <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
                 <Landmark className="h-5 w-5 text-amber-500 print:hidden" />
-                Un peu d&apos;histoire : {apresDeuxPoints(fiche.titre)}
+                Un peu d&apos;histoire : {titreDeSection(fiche.titre, fiche.classe)}
               </h2>
               <p className="mt-3 text-sm leading-6 text-slate-700 print:text-xs">
                 <TexteMath>{fiche.historique.texte}</TexteMath>
@@ -358,7 +390,7 @@ export default function FicheCoursClient({
               <div className="rounded-2xl border-2 border-sky-300 bg-white p-5">
                 <h2 className="flex items-center gap-2 text-lg font-black text-sky-700 print:text-base">
                   <BookMarked className="h-5 w-5 print:hidden" />
-                  Définition : {apresDeuxPoints(fiche.titre)}
+                  Définition : {titreDeSection(fiche.titre, fiche.classe)}
                 </h2>
                 {/* ⭐ `whitespace-pre-line` — ajouté le 30/08/2026. Frédéric, en
                     lisant la définition du CM1 : « il faut des retours à la
@@ -393,7 +425,7 @@ export default function FicheCoursClient({
           <section className="pt-6 print:pt-4">
             <h2 className="flex items-center gap-2 text-2xl font-black text-slate-900 print:text-xl">
               <ListChecks className="h-6 w-6 text-sky-500 print:hidden" />
-              Propriétés : {apresDeuxPoints(fiche.titre)}
+              Propriétés : {titreDeSection(fiche.titre, fiche.classe)}
             </h2>
             {/* ⚠️ TROIS COLONNES SEULEMENT À PARTIR DE 1024 (mesuré le 24/08/2026).
                 À `md` (768), la page tenait déjà trois cartes dans 820 px : chacune
@@ -427,7 +459,7 @@ export default function FicheCoursClient({
         return (
           <section className="border-t border-slate-200 py-6 print:py-4">
             <h2 className="text-2xl font-black text-slate-900 print:text-xl">
-              La formule : {apresDeuxPoints(fiche.titre)}
+              La formule : {titreDeSection(fiche.titre, fiche.classe)}
             </h2>
             <div className="mt-4 grid gap-4 md:grid-cols-[1fr_1.25fr] print:grid-cols-[1fr_1.25fr]">
               <div className="rounded-2xl border border-sky-200 bg-sky-50 p-5 text-center">
@@ -461,7 +493,7 @@ export default function FicheCoursClient({
                 requête, « 1. Je repère » n'en est pas une — et les étapes
                 passent en <h3>, ce qu'elles ont toujours été. */}
             <h2 className="text-2xl font-black text-slate-900 print:text-xl">
-              Méthode : {apresDeuxPoints(fiche.titre)}
+              Méthode : {titreDeSection(fiche.titre, fiche.classe)}
             </h2>
             {/* Même palier que les propriétés : les étapes de méthode portent
                 elles aussi un dessin. */}
@@ -494,7 +526,7 @@ export default function FicheCoursClient({
         return (
           <section className="border-t border-slate-200 py-6 print:py-4">
             <h2 className="text-2xl font-black text-slate-900 print:text-xl">
-              Selon ce que l&apos;on cherche : {apresDeuxPoints(fiche.titre)}
+              Selon ce que l&apos;on cherche : {titreDeSection(fiche.titre, fiche.classe)}
             </h2>
             {/* Même palier : les usages portent un dessin dès la 5e. */}
             <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3 print:grid-cols-3 print:gap-3">
@@ -519,7 +551,7 @@ export default function FicheCoursClient({
         return (
           <section className="border-t border-slate-200 py-6 print:py-4">
             <h2 className="text-2xl font-black text-slate-900 print:text-xl">
-              Exemples corrigés : {apresDeuxPoints(fiche.titre)}
+              Exemples corrigés : {titreDeSection(fiche.titre, fiche.classe)}
             </h2>
             <div className="mt-4 grid gap-4 md:grid-cols-2 print:grid-cols-2 print:gap-3">
               {fiche.exemples.map((exemple) => (
@@ -555,7 +587,7 @@ export default function FicheCoursClient({
             <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
               <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
                 <AlertTriangle className="h-5 w-5 text-amber-500 print:hidden" />
-                Pièges à éviter : {apresDeuxPoints(fiche.titre)}
+                Pièges à éviter : {titreDeSection(fiche.titre, fiche.classe)}
               </h2>
               <ul className="mt-3 grid gap-2 text-sm leading-6 text-slate-700 print:text-xs">
                 {fiche.pieges.map((piege) => (
@@ -573,7 +605,7 @@ export default function FicheCoursClient({
             <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
               <h2 className="flex items-center gap-2 text-lg font-black text-slate-900 print:text-base">
                 <CheckCircle2 className="h-5 w-5 text-emerald-500 print:hidden" />
-                À retenir : {apresDeuxPoints(fiche.titre)}
+                À retenir : {titreDeSection(fiche.titre, fiche.classe)}
               </h2>
               <ul className="mt-3 grid gap-2 text-sm leading-6 text-slate-700 print:text-xs">
                 {fiche.aRetenir.map((point) => (
@@ -590,7 +622,7 @@ export default function FicheCoursClient({
           <section className="border-t border-slate-200 pt-6 print:pt-4">
             <h2 className="flex items-center gap-2 text-2xl font-black text-slate-900 print:text-xl">
               <Calculator className="h-6 w-6 text-sky-500 print:hidden" />
-              Exercices corrigés : {apresDeuxPoints(fiche.titre)}
+              Exercices corrigés : {titreDeSection(fiche.titre, fiche.classe)}
             </h2>
             <ol className="mt-4 grid gap-4 text-sm leading-6 text-slate-700 print:gap-2 print:text-xs">
               {fiche.entrainement.map((item, index) => (
@@ -893,8 +925,43 @@ export default function FicheCoursClient({
                     route affiché en gros titre, dans le premier signal que
                     Google lit. La fonction existe depuis le 20/08 pour cette
                     raison exacte, et le bas de page s'en sert déjà (l. 909). */}
-                {fiche.titre} — cours de {fiche.matiereLabel.toLowerCase()}{" "}
-                {libelleClasse(fiche.classe)}
+                {/* ⭐⭐ LE SUFFIXE RESTE, MAIS IL CESSE DE CRIER (31/08/2026).
+                    Frédéric, capture à l'appui : « regarde le titre ». Sur la
+                    fiche de CM1 il donnait « Lire avec fluidité en CM1
+                    (2026-2027) — cours de français CM1 » : deux lignes, et
+                    « CM1 » écrit DEUX FOIS, juste sous trois pastilles qui
+                    annoncent déjà FRANÇAIS · CM1 · FICHE DE COURS. L'information
+                    utile fait quatre mots, noyés dans le reste — au moment le
+                    plus visible de la page, pour un enfant de neuf ans.
+                    ⛔ MAIS ON NE RETIRE RIEN : ce suffixe attrape la requête
+                    « cours de français CM1 », et le H1 est le premier signal que
+                    Google lit. À quatre semaines du rendez-vous d'indexation du
+                    26/09, changer le TEXTE de 216 fiches rendrait le verdict
+                    illisible — on ne saurait plus si le résultat vient des pages
+                    ou de ce changement.
+                    ⭐ D'où ce compromis : seule la HIÉRARCHIE VISUELLE change, le
+                    titre en grand et le reste en petit dessous. Vérifié : le
+                    sitemap ne transporte que des URL construites sur les clés du
+                    registre — aucun titre n'y figure, donc rien de tout cela ne
+                    le touche.
+                    ⭐⭐ ET LE SUFFIXE S'ENRICHIT SANS RIEN PERDRE (formulation de
+                    Frédéric) : « cours ET EXERCICES CORRIGÉS de français CM1 »
+                    contient mot pour mot l'ancien « cours de français CM1 », plus
+                    une requête réellement tapée. Avant un relevé d'indexation,
+                    AJOUTER est sans risque ; retirer ne l'est pas.
+                    ⚠️ Et c'est enfin la convention des PDF, qui s'appellent déjà
+                    `…-2026-2027-5e-cours-exercices-corriges.pdf` : le titre à
+                    l'écran dit désormais la même chose que le fichier.
+                    ⛔ Ne pas « simplifier » en retirant la matière : le `<title>`
+                    de plusieurs fiches ne contient PAS le nom de la matière (celle
+                    du CM1 dit « Lire avec fluidité en CM1 : 110 mots par
+                    minute »). Le mot ne survivrait alors que dans l'URL et la
+                    pastille. */}
+                {fiche.titre}
+                <span className="mt-1 block text-base font-bold text-slate-400 sm:text-lg print:text-sm">
+                  cours et exercices corrigés de{" "}
+                  {fiche.matiereLabel.toLowerCase()} {libelleClasse(fiche.classe)}
+                </span>
               </h1>
               <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600 print:text-sm">
                 <TexteMath>{fiche.accroche}</TexteMath>
