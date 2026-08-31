@@ -1,6 +1,8 @@
 // tutor-v4/components/CalculPoseCanvas.tsx
 "use client";
 
+import { INSECABLE, typographier } from "@/lib/fiches/typographie";
+
 type CalculOperation =
   | "addition"
   | "soustraction"
@@ -78,7 +80,21 @@ function isHighlighted(
   return false;
 }
 
-export default function CalculPoseCanvas({ figure }: Props) {
+export default function CalculPoseCanvas({ figure: brute }: Props) {
+  // ⛔ MESURÉ LE 31/08/2026 SUR LES 32 PAGES QUI PASSENT PAR CE CANVAS, à 375 px :
+  // 336 occurrences à risque, 15 coupures fautives (4,46 %) — et les QUINZE sont
+  // le même `quotient :` ci-dessous, coupé en « quotient / : 12 » parce que la
+  // colonne de la grille est étroite. Voir `lib/fiches/typographie.ts` pour le
+  // protocole et pour la raison de poser l'insécable au rendu.
+  //
+  // Deux gestes différents, parce que le texte arrive de deux façons :
+  //   • les LIBELLÉS ÉCRITS ICI portent `{INSECABLE}`, la constante nommée —
+  //     c'est justement le caractère qu'on ne verrait pas s'il était collé en
+  //     dur dans la chaine ;
+  //   • le texte qui vient de la FIGURE (`title`, `questionLabel`) passe par
+  //     `typographier`, comme dans `TableauDonneesCanvas`.
+  const figure = typographier(brute);
+
   const compact = figure.display?.compact ?? false;
   const showResult = figure.display?.showResult ?? true;
   const showRetenues = figure.display?.showRetenues ?? true;
@@ -106,17 +122,17 @@ export default function CalculPoseCanvas({ figure }: Props) {
           {showResult && d?.quotient ? (
             <div className="mt-3 grid grid-cols-2 gap-2 text-sm">
               <div className="rounded-xl bg-sky-100 px-3 py-2 text-center font-black text-slate-900">
-                quotient : {d.quotient}
+                quotient{INSECABLE}: {d.quotient}
               </div>
               <div className="rounded-xl bg-amber-100 px-3 py-2 text-center font-black text-slate-900">
-                reste : {d.reste ?? "0"}
+                reste{INSECABLE}: {d.reste ?? "0"}
               </div>
             </div>
           ) : null}
 
           {showResult && d?.quotient ? (
             <div className="mt-3 rounded-xl bg-white px-3 py-2 text-center text-sm font-bold text-slate-700">
-              Vérification : dividende = diviseur × quotient + reste
+              Vérification{INSECABLE}: dividende = diviseur × quotient + reste
             </div>
           ) : null}
         </div>

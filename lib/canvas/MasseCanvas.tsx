@@ -1,6 +1,8 @@
 // tutor-v4/components/MasseCanvas.tsx
 "use client";
 
+import { typographier } from "@/lib/fiches/typographie";
+
 import type {
   CanvasFigure,
   MasseCanvasData,
@@ -56,7 +58,15 @@ function compareMasses(
   return "egal";
 }
 
-export default function MasseCanvas({ figure }: Props) {
+export default function MasseCanvas({ figure: brute }: Props) {
+  // ⛔ MÊME DÉFAUT LATENT QUE `CalculPoseCanvas`, MÊME GESTE. Ce canvas dessine
+  // en SVG, mais son `questionLabel` est rendu dans un `<div>` HTML sous le
+  // dessin — donc coupé par le navigateur, donc concerné. Le SVG, lui, ne coupe
+  // jamais ses lignes : l'insécable y est inerte, et elle ne change aucune
+  // largeur (elle remplace une suite d'espaces, elle n'en ajoute jamais).
+  // Voir `lib/fiches/typographie.ts`.
+  const figure = typographier(brute);
+
   if (!isMasseCanvas(figure)) return null;
 
   const showMasses = figure.display?.showMasses ?? true;
