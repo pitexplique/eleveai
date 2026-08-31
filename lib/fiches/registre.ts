@@ -496,6 +496,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "On ne voit pas ses propres fautes, et au CM1 on ne te demande pas de les trouver seul. On te montre l'endroit : corrige là.",
   },
+  "francais/cm1/oral-ecouter": {
+    titre: "Écouter une consigne en CM1 (2026-2027)",
+    resume:
+      "Beaucoup d'exercices ratés ont simplement été commencés trop tôt. Écouter, redire avec ses mots, puis faire.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
