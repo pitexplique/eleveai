@@ -662,19 +662,33 @@ export const volumesBank: TutorBankItemV4[] = [
     hint: "Utilise V = (4/3)πr³.",
     tags: ["volume", "boule", "template", "pi", "canvas"],
     generate: () => {
-      const rayon = randomChoice([3, 6, 9]);
+      // ⛔ RÉPARÉ LE 01/09/2026 : trois rayons seulement — 3, 6 et 9 — tous
+      // multiples de 3. La division par 3 tombait donc TOUJOURS sur un entier,
+      // et l'élève ne rencontrait jamais le cas qui coince.
+      // ⭐ Neuf rayons, dont des non-multiples de 3, et l'objet modélisé entre
+      // dans l'énoncé — c'est le geste « modéliser » du programme.
+      const rayon = randomChoice([2, 3, 4, 5, 6, 7, 9, 10, 12]);
       const coeff = (4 * rayon * rayon * rayon) / 3;
+      const cube = rayon * rayon * rayon;
+      const objet = randomChoice([
+        "Un ballon",
+        "Une bille",
+        "Une boule de pétanque",
+        "Un globe terrestre",
+        "Une balle de tennis",
+        "Une boule de glace",
+      ]);
 
       return {
-        text: `Une boule a un rayon de ${rayon} cm. Donner son volume sous la forme aπ.`,
+        text: `${objet} est modélisé par une boule de rayon ${rayon} cm. Donner son volume sous la forme aπ.`,
         format: "short",
         expected: [`${formatNumber(coeff)}π`, `${formatNumber(coeff)} pi`, `${formatNumber(coeff)}`],
         comparator: "contains_keyword",
         explanation:
-          `Définition : le volume d’une boule dépend du cube du rayon.\n\n` +
-          `Méthode : on applique la formule V = (4/3)πr³.\n\n` +
-          `Calcul : V = (4/3)π × ${rayon}³ = ${formatNumber(coeff)}π cm³.\n\n` +
-          `Conclusion : le volume de la boule est ${formatNumber(coeff)}π cm³.`,
+          "Définition : le volume d'une boule vaut $V = \\dfrac{4}{3}\\pi r^3$ — il dépend du CUBE du rayon, pas du rayon.\n\n" +
+          "Méthode : on calcule d'abord le cube du rayon, puis on multiplie par 4 et on divise par 3. Garder $\\pi$ en facteur évite d'arrondir trop tôt.\n\n" +
+          `Calcul : $${rayon}^3 = ${cube}$, puis $\\dfrac{4 \\times ${cube}}{3} = ${formatNumber(coeff)}$.\n\n` +
+          `Conclusion : le volume vaut $${formatNumber(coeff)}\\pi$ cm³. ⚠️ Dépendre du CUBE change tout : doubler le rayon ne double pas le volume, il le multiplie par HUIT. Une boule de ${rayon * 2} cm de rayon aurait un volume de $${formatNumber(coeff * 8)}\\pi$ cm³.`,
         canvas: solideCanvas({
           solide: "boule",
           dimensions: { rayon },
