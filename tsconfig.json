@@ -39,5 +39,5 @@
     ".next-2/dev/types/**/*.ts"
   ],
 
-  "exclude": ["node_modules", "scripts"]
+  "exclude": ["node_modules", "scripts", "journal"]
 }
