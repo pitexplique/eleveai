@@ -51,7 +51,7 @@ function sectionCanvas(
     solide,
     section,
     labels: titre ? { titre } : undefined,
-    display: { showSectionName: true, showPlane: true, showLabels: true },
+    display: { showSectionName: false, showPlane: true, showLabels: true },
   };
 }
 
@@ -457,19 +457,75 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Une section parallèle à une face reproduit cette face.",
     tags: ["geometrie_espace", "section", "pave", "canvas", "template"],
+    // ⛔ RÉPARÉ LE 31/08/2026. Ce `template` n'en était un que par son type :
+    // aucun tirage, un seul énoncé, et « un rectangle » servi dans 100 % des
+    // cas. Il aurait dû être déclaré `fixed`.
+    // ⭐ La table couvre maintenant les cinq solides que `section_solide` sait
+    // dessiner, et surtout les DEUX orientations du plan — c'est l'orientation
+    // qui décide de la forme, pas le solide seul.
     generate: () => {
+      const cas = randomChoice([
+        { s: "pave_droit" as const, p: "parallele_base" as const, nom: "un pavé droit", plan: "parallèle à sa base", forme: "un rectangle", pourquoi: "la section reproduit la base, et la base d'un pavé est un rectangle" },
+        { s: "cube" as const, p: "parallele_base" as const, nom: "un cube", plan: "parallèle à une face", forme: "un carré", pourquoi: "la section reproduit la face, et les faces d'un cube sont des carrés" },
+        { s: "cylindre" as const, p: "parallele_base" as const, nom: "un cylindre", plan: "parallèle à sa base", forme: "un disque", pourquoi: "la section reproduit la base, qui est un disque — et de MÊME taille, contrairement au cône" },
+        { s: "cylindre" as const, p: "parallele_axe" as const, nom: "un cylindre", plan: "parallèle à son axe", forme: "un rectangle", pourquoi: "en coupant dans le sens de la hauteur, on obtient une surface plane rectangulaire" },
+        { s: "cone" as const, p: "parallele_base" as const, nom: "un cône", plan: "parallèle à sa base", forme: "un disque", pourquoi: "la forme se conserve, mais PAS la taille : le disque obtenu est plus petit que la base" },
+        { s: "pyramide" as const, p: "parallele_base" as const, nom: "une pyramide à base carrée", plan: "parallèle à sa base", forme: "un carré", pourquoi: "la forme de la base se conserve, réduite" },
+      ]);
       return {
-        text: "On coupe un pavé droit par un plan parallèle à l’une de ses faces. Quelle est la forme de la section ?",
+        text: `On coupe ${cas.nom} par un plan ${cas.plan}. Quelle est la forme de la section ?`,
         format: "qcm",
-        choices: shuffle(["un rectangle", "un triangle", "un disque", "un losange"]),
-        expected: ["un rectangle"],
+        choices: shuffle(["un rectangle", "un carré", "un disque", "un triangle"]),
+        expected: [cas.forme],
         comparator: "mcq_exact",
         explanation:
-          "Définition : une section parallèle à une face d’un pavé droit reproduit cette face.\n\n" +
-          "Méthode : on identifie la face parallèle au plan.\n\n" +
-          "Observation : les faces d’un pavé droit sont des rectangles.\n\n" +
-          "Conclusion : la section est un rectangle.",
-        canvas: sectionCanvas("pave_droit", "parallele_base", "Section d’un pavé droit"),
+          "Définition : la SECTION est la surface plane qu'on voit sur la tranche quand un plan coupe le solide.\n\n" +
+          "Méthode : quand le plan est PARALLÈLE à la base, la section a la forme de la base. Quand il est parallèle à l'AXE d'un cylindre, on coupe dans le sens de la hauteur.\n\n" +
+          `Calcul : ici, ${cas.pourquoi}.\n\n` +
+          `Conclusion : la section est ${cas.forme}. ⚠️ Une section n'est pas une propriété du solide SEUL : le même cylindre donne un disque ou un rectangle selon l'orientation du plan. C'est le couple solide + plan qui décide.`,
+        canvas: sectionCanvas(cas.s, cas.p, `Section : ${cas.nom}`),
+      };
+    },
+  },
+  {
+    // ⭐ SECOND GABARIT EXIGÉ PAR LE MODE COMPLET, qui oppose deux questions et
+    // ne peut pas le faire avec un seul. Il prend la section par l'autre bout :
+    // on donne la FORME obtenue et on demande quelle coupe l'a produite.
+    kind: "template",
+    id: "3e_volume_section_tpl_2_quelle_coupe",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_geometrie_espace",
+    microId: "volume_section",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Une section ronde vient d'une coupe parallèle à une base ronde ; une section rectangulaire d'une coupe dans le sens de la hauteur.",
+    tags: ["geometrie_espace", "section", "inverse", "qcm", "template"],
+    generate: () => {
+      const cas = randomChoice([
+        { solide: "un cylindre", forme: "un disque", rep: "une coupe parallèle à la base" },
+        { solide: "un cylindre", forme: "un rectangle", rep: "une coupe parallèle à l'axe" },
+        { solide: "un cube", forme: "un carré", rep: "une coupe parallèle à une face" },
+        { solide: "un pavé droit", forme: "un rectangle", rep: "une coupe parallèle à une face" },
+        { solide: "un cône", forme: "un disque", rep: "une coupe parallèle à la base" },
+        { solide: "une pyramide à base carrée", forme: "un carré", rep: "une coupe parallèle à la base" },
+      ]);
+      return {
+        text: `En coupant ${cas.solide}, on obtient ${cas.forme} comme section. De quelle coupe s'agit-il ?`,
+        format: "qcm",
+        choices: shuffle([
+          "une coupe parallèle à la base",
+          "une coupe parallèle à l'axe",
+          "une coupe parallèle à une face",
+          "une coupe en diagonale",
+        ]),
+        expected: [cas.rep],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : la forme de la section dépend de l'ORIENTATION du plan par rapport au solide, pas du solide seul.\n\n" +
+          "Méthode : on part de la forme obtenue et on cherche l'orientation qui la produit. Une forme ronde vient d'une coupe parallèle à une base ronde ; une forme droite d'une coupe dans le sens de la hauteur.\n\n" +
+          `Calcul : pour obtenir ${cas.forme} en coupant ${cas.solide}, il faut ${cas.rep}.\n\n` +
+          "Conclusion : ⭐ le cylindre est le meilleur exemple du chapitre : il donne DEUX formes très différentes — un disque à plat, un rectangle en long. C'est ce qui montre qu'une section appartient au couple solide + plan.",
       };
     },
   },
@@ -724,18 +780,85 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Un pavé droit a autant de faces qu’un cube.",
     tags: ["geometrie_espace", "representation", "faces", "canvas", "template"],
+    // ⛔ RÉPARÉ LE 31/08/2026, même défaut que son voisin : un `template` sans
+    // aucun tirage, « 6 » servi dans 100 % des cas.
+    // ⭐ Le solide ET l'élément comptés varient. Ce qu'on fait travailler, c'est
+    // le fait que la perspective CACHE : sur un pavé, on ne voit que la moitié
+    // des faces, et c'est en oubliant l'autre moitié qu'on se trompe.
     generate: () => {
+      const cas = randomChoice([
+        { s: "pave_droit" as const, nom: "un pavé droit", quoi: "faces", n: 6, detail: "3 visibles et 3 cachées" },
+        { s: "pave_droit" as const, nom: "un pavé droit", quoi: "arêtes", n: 12, detail: "4 en haut, 4 en bas, 4 verticales" },
+        { s: "pave_droit" as const, nom: "un pavé droit", quoi: "sommets", n: 8, detail: "4 en haut, 4 en bas" },
+        { s: "cube" as const, nom: "un cube", quoi: "faces", n: 6, detail: "3 visibles et 3 cachées, comme le pavé" },
+        { s: "cube" as const, nom: "un cube", quoi: "arêtes", n: 12, detail: "les mêmes que le pavé, toutes de même longueur" },
+        { s: "cube" as const, nom: "un cube", quoi: "sommets", n: 8, detail: "4 en haut, 4 en bas" },
+        { s: "prisme" as const, nom: "un prisme droit à base triangulaire", quoi: "faces", n: 5, detail: "2 triangles et 3 rectangles" },
+        { s: "prisme" as const, nom: "un prisme droit à base triangulaire", quoi: "sommets", n: 6, detail: "3 en haut, 3 en bas" },
+        { s: "prisme" as const, nom: "un prisme droit à base triangulaire", quoi: "arêtes", n: 9, detail: "3 en haut, 3 en bas, 3 verticales" },
+        { s: "pyramide" as const, nom: "une pyramide à base carrée", quoi: "faces", n: 5, detail: "1 carré et 4 triangles" },
+        { s: "pyramide" as const, nom: "une pyramide à base carrée", quoi: "sommets", n: 5, detail: "4 à la base, 1 au sommet" },
+        { s: "pyramide" as const, nom: "une pyramide à base carrée", quoi: "arêtes", n: 8, detail: "4 à la base, 4 qui montent vers le sommet" },
+      ]);
       return {
-        text: "Sur cette représentation d’un pavé droit, combien de faces possède le solide au total (visibles et cachées) ?",
+        text: `Sur cette représentation, combien ${cas.nom} possède-t-il de ${cas.quoi} au total, visibles et cachés compris ?`,
         format: "short",
-        expected: ["6"],
+        expected: [String(cas.n)],
         comparator: "number_equal",
         explanation:
-          "Définition : une représentation en perspective ne montre pas toutes les faces directement.\n\n" +
-          "Méthode : on compte les faces visibles et on ajoute les faces cachées.\n\n" +
-          "Observation : un pavé droit a $3$ faces visibles et $3$ faces cachées, soit $6$.\n\n" +
-          "Conclusion : le solide a $6$ faces.",
-        canvas: solideCanvas("pave_droit"),
+          "Définition : une FACE est une surface, une ARÊTE le segment où deux faces se rejoignent, un SOMMET un point où des arêtes se rencontrent.\n\n" +
+          "Méthode : on compte par groupes — le dessus, le dessous, puis les côtés — pour ne rien oublier de ce qui est derrière.\n\n" +
+          `Calcul : ${cas.detail}, soit ${cas.n}.\n\n` +
+          `Conclusion : ⚠️ une perspective CACHE la moitié du solide. Sur ce dessin, une partie des ${cas.quoi} est derrière — c'est en les oubliant qu'on se trompe, et c'est pour cela que les arêtes cachées se dessinent en pointillés.`,
+        canvas: solideCanvas(cas.s),
+      };
+    },
+  },
+  {
+    // ⭐ SECOND GABARIT EXIGÉ PAR LE MODE COMPLET. Il prend la représentation
+    // par l'autre bout : au lieu de compter sur un solide donné, on RECONNAÎT
+    // le solide à partir de ses nombres. C'est le geste qui prouve qu'on a
+    // compris ce que compte chaque mot.
+    kind: "template",
+    id: "3e_volume_representation_tpl_2_quel_solide",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_geometrie_espace",
+    microId: "volume_representation",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Le nombre de sommets sépare la pyramide du prisme mieux que le nombre de faces.",
+    tags: ["geometrie_espace", "representation", "reconnaitre", "qcm", "template"],
+    generate: () => {
+      const cas = randomChoice([
+        { faces: 6, sommets: 8, aretes: 12, rep: "un pavé droit ou un cube" },
+        { faces: 5, sommets: 6, aretes: 9, rep: "un prisme droit à base triangulaire" },
+        { faces: 5, sommets: 5, aretes: 8, rep: "une pyramide à base carrée" },
+        { faces: 4, sommets: 4, aretes: 6, rep: "une pyramide à base triangulaire" },
+      ]);
+      const quoi = randomChoice(["faces et sommets", "faces et arêtes", "sommets et arêtes"] as const);
+      const donnees =
+        quoi === "faces et sommets"
+          ? `${cas.faces} faces et ${cas.sommets} sommets`
+          : quoi === "faces et arêtes"
+            ? `${cas.faces} faces et ${cas.aretes} arêtes`
+            : `${cas.sommets} sommets et ${cas.aretes} arêtes`;
+      return {
+        text: `Un solide a ${donnees}. De quel solide s'agit-il ?`,
+        format: "qcm",
+        choices: shuffle([
+          "un pavé droit ou un cube",
+          "un prisme droit à base triangulaire",
+          "une pyramide à base carrée",
+          "une pyramide à base triangulaire",
+        ]),
+        expected: [cas.rep],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : chaque solide a sa signature chiffrée — faces, arêtes, sommets. Deux de ces trois nombres suffisent presque toujours à l'identifier.\n\n" +
+          "Méthode : on compare aux cas connus. ⚠️ Le nombre de FACES ne suffit pas : le prisme à base triangulaire et la pyramide à base carrée en ont cinq tous les deux. Ce sont les SOMMETS qui les séparent — six contre cinq.\n\n" +
+          `Calcul : ${cas.faces} faces, ${cas.aretes} arêtes et ${cas.sommets} sommets désignent ${cas.rep}.\n\n` +
+          "Conclusion : ⭐ le cube et le pavé droit ont exactement les mêmes nombres : 6, 12 et 8. Seule la FORME de leurs faces les distingue — et aucun décompte ne peut donc les séparer.",
       };
     },
   },

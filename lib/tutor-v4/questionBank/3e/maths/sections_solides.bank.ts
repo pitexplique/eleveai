@@ -86,7 +86,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
     },
     display: {
       showLabels: true,
-      showSectionName: true,
+      showSectionName: false,
       showPlane: true,
     },
   }),
@@ -121,7 +121,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
     },
     display: {
       showLabels: true,
-      showSectionName: true,
+      showSectionName: false,
       showPlane: true,
     },
   }),
@@ -162,7 +162,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
     },
     display: {
       showLabels: true,
-      showSectionName: true,
+      showSectionName: false,
       showPlane: true,
     },
   }),
@@ -227,7 +227,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
           },
           display: {
             showLabels: true,
-            showSectionName: true,
+            showSectionName: false,
             showPlane: true,
           },
         }),
@@ -268,7 +268,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
       },
       display: {
         showLabels: true,
-        showSectionName: true,
+        showSectionName: false,
         showPlane: true,
       },
     }),
@@ -304,7 +304,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
       },
       display: {
         showLabels: true,
-        showSectionName: true,
+        showSectionName: false,
         showPlane: true,
       },
     }),
@@ -377,7 +377,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
           },
           display: {
             showLabels: true,
-            showSectionName: true,
+            showSectionName: false,
             showPlane: true,
           },
         }),
@@ -414,7 +414,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
     },
     display: {
       showLabels: true,
-      showSectionName: true,
+      showSectionName: false,
       showPlane: true,
     },
   }),
@@ -454,7 +454,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
       },
       display: {
         showLabels: true,
-        showSectionName: true,
+        showSectionName: false,
         showPlane: true,
       },
     }),
@@ -490,7 +490,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
       },
       display: {
         showLabels: true,
-        showSectionName: true,
+        showSectionName: false,
         showPlane: true,
       },
     }),
@@ -561,7 +561,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
           },
           display: {
             showLabels: true,
-            showSectionName: true,
+            showSectionName: false,
             showPlane: true,
           },
         }),
@@ -598,7 +598,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
     },
     display: {
       showLabels: true,
-      showSectionName: true,
+      showSectionName: false,
       showPlane: true,
     },
   }),
@@ -638,7 +638,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
       },
       display: {
         showLabels: true,
-        showSectionName: true,
+        showSectionName: false,
         showPlane: true,
       },
     }),
@@ -679,7 +679,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
       },
       display: {
         showLabels: true,
-        showSectionName: true,
+        showSectionName: false,
         showPlane: true,
       },
     }),
@@ -715,7 +715,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
       },
       display: {
         showLabels: true,
-        showSectionName: true,
+        showSectionName: false,
         showPlane: true,
       },
     }),
@@ -792,7 +792,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
           },
           display: {
             showLabels: true,
-            showSectionName: true,
+            showSectionName: false,
             showPlane: true,
           },
         }),
@@ -843,7 +843,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
           },
           display: {
             showLabels: true,
-            showSectionName: true,
+            showSectionName: false,
             showPlane: true,
           },
         }),
@@ -893,7 +893,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
           },
           display: {
             showLabels: true,
-            showSectionName: true,
+            showSectionName: false,
             showPlane: true,
           },
         }),
@@ -929,7 +929,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
     },
     display: {
       showLabels: true,
-      showSectionName: true,
+      showSectionName: false,
       showPlane: true,
     },
   }),
@@ -965,7 +965,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
     },
     display: {
       showLabels: true,
-      showSectionName: true,
+      showSectionName: false,
       showPlane: true,
     },
   }),
@@ -1005,7 +1005,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
       },
       display: {
         showLabels: true,
-        showSectionName: true,
+        showSectionName: false,
         showPlane: true,
       },
     }),
@@ -1041,7 +1041,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
       },
       display: {
         showLabels: true,
-        showSectionName: true,
+        showSectionName: false,
         showPlane: true,
       },
     }),
@@ -1112,7 +1112,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
           },
           display: {
             showLabels: true,
-            showSectionName: true,
+            showSectionName: false,
             showPlane: true,
           },
         }),
@@ -1162,7 +1162,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
           },
           display: {
             showLabels: true,
-            showSectionName: true,
+            showSectionName: false,
             showPlane: true,
           },
         }),
@@ -1271,7 +1271,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
           solide: "cube",
           section: "parallele_face",
           labels: { titre: "Section d’un cube", section: "carré" },
-          display: { showLabels: true, showSectionName: true, showPlane: true },
+          display: { showLabels: true, showSectionName: false, showPlane: true },
         }),
       };
     },
@@ -1348,7 +1348,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
       solide: "pave_droit",
       section: "parallele_face",
       labels: { titre: "Section d’un pavé droit", section: "rectangle" },
-      display: { showLabels: true, showSectionName: true, showPlane: true },
+      display: { showLabels: true, showSectionName: false, showPlane: true },
     }),
     tags: ["section", "pave", "qcm", "canvas"],
   },
@@ -1376,7 +1376,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
       solide: "cube",
       section: "verticale",
       labels: { titre: "Section verticale d’un cube", section: "rectangle" },
-      display: { showLabels: true, showSectionName: true, showPlane: true },
+      display: { showLabels: true, showSectionName: false, showPlane: true },
     }),
     tags: ["section", "cube", "qcm", "canvas"],
   },
@@ -1409,7 +1409,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
           solide: cube ? "cube" : "pave_droit",
           section: "parallele_face",
           labels: { titre: "Section parallèle à une face", section: forme },
-          display: { showLabels: true, showSectionName: true, showPlane: true },
+          display: { showLabels: true, showSectionName: false, showPlane: true },
         }),
       };
     },
@@ -1485,7 +1485,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
       solide: "cylindre",
       section: "parallele_base",
       labels: { titre: "Section d’un cylindre", section: "disque" },
-      display: { showLabels: true, showSectionName: true, showPlane: true },
+      display: { showLabels: true, showSectionName: false, showPlane: true },
     }),
     tags: ["section", "cylindre", "qcm", "canvas"],
   },
@@ -1513,7 +1513,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
       solide: "cylindre",
       section: "parallele_axe",
       labels: { titre: "Section d’un cylindre", section: "rectangle" },
-      display: { showLabels: true, showSectionName: true, showPlane: true },
+      display: { showLabels: true, showSectionName: false, showPlane: true },
     }),
     tags: ["section", "cylindre", "axe", "qcm", "canvas"],
   },
@@ -1568,7 +1568,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
           solide: "cylindre",
           section: base ? "parallele_base" : "parallele_axe",
           labels: { titre: "Section d’un cylindre", section: forme },
-          display: { showLabels: true, showSectionName: true, showPlane: true },
+          display: { showLabels: true, showSectionName: false, showPlane: true },
         }),
       };
     },
@@ -1622,7 +1622,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
       solide: "pyramide",
       section: "parallele_base",
       labels: { titre: "Section d’une pyramide", section: "carré réduit" },
-      display: { showLabels: true, showSectionName: true, showPlane: true },
+      display: { showLabels: true, showSectionName: false, showPlane: true },
     }),
     tags: ["section", "pyramide", "qcm", "canvas"],
   },
@@ -1682,7 +1682,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
           solide: cone ? "cone" : "pyramide",
           section: "parallele_base",
           labels: { titre: "Section parallèle à la base", section: forme },
-          display: { showLabels: true, showSectionName: true, showPlane: true },
+          display: { showLabels: true, showSectionName: false, showPlane: true },
         }),
       };
     },
@@ -1924,7 +1924,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
           solide: cas.solide,
           section: cas.section,
           labels: { titre: "Section d’un solide", section: cas.forme },
-          display: { showLabels: true, showSectionName: true, showPlane: true },
+          display: { showLabels: true, showSectionName: false, showPlane: true },
         }),
       };
     },
