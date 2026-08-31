@@ -111,8 +111,108 @@ function tableauCanvas(
 export const probabilitesBank: TutorBankItemV4[] = [
   /* =========================
      PROBA_VOCABULAIRE
+
+     ⛔⛔ RÉPARÉE LE 31/08/2026, ET C'ÉTAIT LE CAS LE PLUS GRAVE DE LA CLASSE :
+     cette micro n'avait AUCUN GABARIT. Dix questions figées, et rien d'autre :
+     l'élève revoyait les mêmes dix, indéfiniment. Un `fixed` ne se renouvelle
+     jamais — c'est exactement ce que `verifier-renouvellement.ts` mesure, et
+     il affichait 0 énoncé généré.
+
+     ⭐ Les deux gabarits ajoutés ne récitent pas des définitions : ils font
+     TRIER du vocabulaire sur des situations concrètes. Le premier demande de
+     nommer ce qu'on désigne (issue, événement, univers) ; le second fait juger
+     si une expérience est aléatoire — et son intérêt est là, parce que la
+     plupart des situations de la vie ne le sont PAS.
   ========================= */
 
+  {
+    kind: "template",
+    id: "3e_proba_vocabulaire_tpl_1_nommer",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Une ISSUE est un résultat possible ; un ÉVÉNEMENT en regroupe plusieurs ; l'UNIVERS les contient tous.",
+    tags: ["proba_experience", "vocabulaire", "qcm", "template"],
+    generate: () => {
+      const cas = randomChoice([
+        { exp: "on lance un dé à six faces", quoi: "« obtenir 4 »", rep: "une issue", pourquoi: "c'est UN seul résultat possible" },
+        { exp: "on lance un dé à six faces", quoi: "« obtenir un nombre pair »", rep: "un événement", pourquoi: "il regroupe trois issues : 2, 4 et 6" },
+        { exp: "on lance un dé à six faces", quoi: "« 1, 2, 3, 4, 5, 6 »", rep: "l'univers", pourquoi: "c'est l'ensemble de TOUTES les issues" },
+        { exp: "on tire une carte d'un jeu de 32", quoi: "« tirer le roi de cœur »", rep: "une issue", pourquoi: "une seule carte convient" },
+        { exp: "on tire une carte d'un jeu de 32", quoi: "« tirer un cœur »", rep: "un événement", pourquoi: "huit cartes conviennent" },
+        { exp: "on lance une pièce", quoi: "« pile »", rep: "une issue", pourquoi: "c'est un seul résultat possible" },
+        { exp: "on lance une pièce", quoi: "« pile ou face »", rep: "l'univers", pourquoi: "les deux seules issues y sont" },
+        { exp: "on tire une bille dans un sac", quoi: "« tirer une bille rouge »", rep: "un événement", pourquoi: "il regroupe toutes les billes rouges" },
+        { exp: "on fait tourner une roue à huit secteurs", quoi: "« tomber sur le secteur 3 »", rep: "une issue", pourquoi: "un seul secteur convient" },
+        { exp: "on fait tourner une roue à huit secteurs", quoi: "« tomber sur un secteur pair »", rep: "un événement", pourquoi: "quatre secteurs conviennent" },
+      ]);
+      return {
+        text: `Dans l'expérience « ${cas.exp} », comment appelle-t-on ${cas.quoi} ?`,
+        format: "qcm",
+        choices: makeChoices(cas.rep, [
+          "une issue",
+          "un événement",
+          "l'univers",
+          "une probabilité",
+          "une fréquence",
+        ]),
+        expected: [cas.rep],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : une ISSUE est UN résultat possible. Un ÉVÉNEMENT regroupe une ou plusieurs issues. L'UNIVERS est l'ensemble de toutes les issues.\n\n" +
+          "Méthode : on compte combien de résultats sont concernés — un seul, quelques-uns, ou tous.\n\n" +
+          `Calcul : ici, ${cas.pourquoi}.\n\n` +
+          `Conclusion : c'est ${cas.rep}. ⚠️ Une PROBABILITÉ n'est aucun des trois : c'est un NOMBRE entre 0 et 1, pas un résultat.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "3e_proba_vocabulaire_tpl_2_aleatoire",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Aléatoire ne veut pas dire « compliqué » : cela veut dire qu'on ne peut pas prévoir le résultat.",
+    tags: ["proba_experience", "vocabulaire", "aleatoire", "qcm", "template"],
+    generate: () => {
+      const cas = randomChoice([
+        { situation: "lancer un dé et noter le résultat", alea: true, pourquoi: "on ne peut pas savoir quelle face sortira" },
+        { situation: "tirer une carte au hasard dans un jeu", alea: true, pourquoi: "aucune carte n'est prévisible" },
+        { situation: "mesurer la longueur d'une table avec un mètre", alea: false, pourquoi: "la table a une longueur fixe, on la trouve à chaque fois" },
+        { situation: "calculer 17 × 4", alea: false, pourquoi: "le résultat est toujours 68" },
+        { situation: "faire tourner une roue de loterie", alea: true, pourquoi: "le secteur d'arrivée n'est pas prévisible" },
+        { situation: "regarder si demain est un mardi, sachant qu'aujourd'hui est lundi", alea: false, pourquoi: "le calendrier le détermine à l'avance" },
+        { situation: "tirer une bille les yeux fermés dans un sac", alea: true, pourquoi: "on ne choisit pas laquelle" },
+        { situation: "compter les élèves présents dans une salle", alea: false, pourquoi: "il suffit de compter, le nombre est ce qu'il est" },
+        { situation: "lancer deux dés et faire la somme", alea: true, pourquoi: "la somme dépend de deux résultats imprévisibles" },
+        { situation: "peser un objet sur une balance", alea: false, pourquoi: "la masse de l'objet ne change pas" },
+      ]);
+      const correct = cas.alea ? "oui, c'est une expérience aléatoire" : "non, le résultat est prévisible";
+      return {
+        text: `« ${cas.situation.charAt(0).toUpperCase() + cas.situation.slice(1)} » : est-ce une expérience aléatoire ?`,
+        format: "qcm",
+        choices: shuffle([
+          "oui, c'est une expérience aléatoire",
+          "non, le résultat est prévisible",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : une expérience est ALÉATOIRE quand on ne peut pas prévoir son résultat, même en connaissant parfaitement les conditions.\n\n" +
+          "Méthode : on se demande si, en refaisant l'expérience à l'identique, on obtiendrait forcément la même chose.\n\n" +
+          `Calcul : ici, ${cas.pourquoi}.\n\n` +
+          (cas.alea
+            ? "Conclusion : oui, c'est une expérience aléatoire — et c'est pour ces expériences-là qu'on calcule des probabilités."
+            : "Conclusion : ⚠️ non. ⭐ La plupart des situations de la vie ne sont PAS aléatoires : mesurer, compter, calculer donnent toujours le même résultat. C'est ce qui rend les expériences aléatoires particulières, et dignes d'un chapitre."),
+      };
+    },
+  },
   {
     kind: "fixed",
     id: "3e_proba_vocabulaire_fixed_1",

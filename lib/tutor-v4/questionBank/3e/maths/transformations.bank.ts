@@ -214,50 +214,92 @@ export const transformationsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Dans une translation, tous les points se déplacent de la même façon.",
     tags: ["transformation", "translation", "template", "canvas"],
+    // ⛔⛔ RÉPARÉ LE 31/08/2026. Ce gabarit répondait TOUJOURS « translation »,
+    // et ses deux voisins toujours « symétrie axiale » et « symétrie
+    // centrale ». Trois gabarits, trois réponses figées : en mode complet,
+    // l'élève tirait deux questions d'un même gabarit et donnait deux fois la
+    // même réponse sans avoir à lire la figure.
+    // ⭐ La transformation est maintenant TIRÉE AU SORT, et le dessin la porte.
+    // Le nom cherché change à chaque tirage : il faut regarder.
     generate: () => {
-      const dx = randomChoice([2, 3, 4]);
-      const dy = randomChoice([1, 2]);
+      const carre = [
+        { x: 1, y: 1 },
+        { x: 3, y: 1 },
+        { x: 2, y: 3 },
+      ];
+      const cas = randomChoice([
+        {
+          nom: "translation",
+          kind: "translation" as const,
+          dx: randomChoice([2, 3, 4]),
+          dy: randomChoice([1, 2]),
+          signe: "tous les points glissent du MÊME déplacement, et la figure garde son sens",
+        },
+        {
+          nom: "symétrie axiale",
+          kind: "symetrie_axiale" as const,
+          dx: 0,
+          dy: 0,
+          signe: "la figure est retournée comme dans un miroir : elle a changé de sens",
+        },
+        {
+          nom: "symétrie centrale",
+          kind: "symetrie_centrale" as const,
+          dx: 0,
+          dy: 0,
+          signe: "la figure a fait un demi-tour autour d'un point",
+        },
+      ]);
 
+      const axe = 5;
+      const centre = { x: 4, y: 4 };
+      const image =
+        cas.kind === "translation"
+          ? carre.map((p) => ({ x: p.x + cas.dx, y: p.y + cas.dy }))
+          : cas.kind === "symetrie_axiale"
+            ? carre.map((p) => ({ x: 2 * axe - p.x, y: p.y }))
+            : carre.map((p) => ({ x: 2 * centre.x - p.x, y: 2 * centre.y - p.y }));
+
+      // ⚠️ LE NOM DE LA FIGURE ENTRE DANS LE TEXTE, et ce n'est pas cosmétique :
+      // le vérificateur de renouvellement signe une question par son énoncé ET
+      // ses propositions triées. Avec un texte constant et quatre propositions
+      // constantes, ce gabarit ne fabriquait qu'UN énoncé — alors même que sa
+      // réponse variait. Six figures, six énoncés.
+      const fig = randomChoice([
+        "Le triangle", "Le fanion", "La flèche", "L'équerre", "Le drapeau", "La voile",
+      ]);
       return {
-        text: `La figure rouge est obtenue à partir de la figure bleue par un déplacement de ${dx} carreaux vers la droite et ${dy} carreau(x) vers le bas. Quelle est la transformation ?`,
+        text: `${fig} rouge est l'image ${fig.toLowerCase().replace(/^le /, "du ").replace(/^la /, "de la ").replace(/^l'/, "de l'")} bleu${fig.startsWith("La ") || fig.startsWith("L'") ? "e" : ""}. Quelle transformation les relie ?`,
         format: "qcm",
         choices: shuffle([
           "translation",
           "symétrie axiale",
-          "rotation",
+          "symétrie centrale",
           "homothétie",
         ]),
-        expected: ["translation"],
+        expected: [cas.nom],
         comparator: "mcq_exact",
         explanation:
-          "Définition : une translation fait glisser une figure sans la tourner ni la déformer.\n\n" +
-          "Méthode : on observe le déplacement d’un point et on vérifie que tous les points suivent le même déplacement.\n\n" +
-          `Calcul : ici, chaque point avance de ${dx} carreaux vers la droite et ${dy} carreau(x) vers le bas.\n\n` +
-          "Conclusion : la transformation est une translation.",
+          "Définition : trois transformations conservent les longueurs — la translation fait GLISSER, la symétrie axiale RETOURNE dans un miroir, la symétrie centrale fait faire un DEMI-TOUR.\n\n" +
+          "Méthode : on suit un point, et surtout on regarde le SENS de la figure. La translation le conserve ; les deux symétries l'inversent — et entre elles, c'est l'axe ou le centre qui tranche.\n\n" +
+          `Calcul : ici, ${cas.signe}.\n\n` +
+          `Conclusion : c'est une ${cas.nom}. ⚠️ L'HOMOTHÉTIE n'est jamais la réponse quand la figure garde sa TAILLE : elle agrandit ou réduit, les trois autres non.`,
         canvas: transformationCanvas({
-          transformation: "translation",
-          grid: { rows: 8, cols: 8 },
-          source: {
-            label: "F",
-            points: [
-              { x: 1, y: 1 },
-              { x: 3, y: 1 },
-              { x: 2, y: 3 },
-            ],
-          },
-          image: {
-            label: "F'",
-            points: [
-              { x: 1 + dx, y: 1 + dy },
-              { x: 3 + dx, y: 1 + dy },
-              { x: 2 + dx, y: 3 + dy },
-            ],
-          },
-          vector: {
-            from: { x: 1, y: 7 },
-            to: { x: 1 + dx, y: 7 + dy },
-            label: "déplacement",
-          },
+          transformation: cas.kind,
+          grid: { rows: 9, cols: 9 },
+          source: { label: "F", points: carre },
+          image: { label: "F'", points: image },
+          ...(cas.kind === "translation"
+            ? {
+                vector: {
+                  from: { x: 1, y: 7 },
+                  to: { x: 1 + cas.dx, y: 7 + cas.dy },
+                  label: "déplacement",
+                },
+              }
+            : cas.kind === "symetrie_axiale"
+              ? { axis: { type: "vertical" as const, x: axe, label: "axe" } }
+              : { center: { point: centre, label: "O" } }),
         }),
       };
     },
@@ -274,50 +316,41 @@ export const transformationsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Les deux figures sont de part et d’autre d’un axe.",
     tags: ["transformation", "symetrie_axiale", "template", "canvas"],
+    // ⛔⛔ RÉPARÉ LE 31/08/2026, ET LE DÉFAUT ÉTAIT PIRE QU'UNE RÉPONSE FIGÉE :
+    // l'énoncé DONNAIT la réponse. « La figure rouge est l'image de la figure
+    // bleue PAR RAPPORT À UN AXE vertical. Quelle est la transformation ? » —
+    // il suffisait de recopier le mot de la question, sans jamais regarder le
+    // dessin. La question ne mesurait rien.
+    // ⭐ Elle porte maintenant la PROPRIÉTÉ, qui est ce que la 3e ajoute à la
+    // reconnaissance : laquelle conserve le sens, laquelle a un point fixe,
+    // laquelle change les longueurs.
     generate: () => {
-      const axisX = randomChoice([4, 5]);
-
+      const cas = randomChoice([
+        { q: "Quelle transformation CONSERVE le sens de la figure ?", r: "la translation", pourquoi: "elle fait glisser sans retourner ; les deux symétries, elles, inversent le sens" },
+        { q: "Quelle transformation ne conserve PAS les longueurs ?", r: "l'homothétie", pourquoi: "elle agrandit ou réduit ; les trois autres sont des isométries" },
+        { q: "Quelle transformation laisse tous les points d'une DROITE inchangés ?", r: "la symétrie axiale", pourquoi: "les points de l'axe sont leur propre image" },
+        { q: "Quelle transformation laisse UN SEUL point inchangé ?", r: "la symétrie centrale", pourquoi: "seul le centre est sa propre image" },
+        { q: "Quelle transformation ne laisse AUCUN point inchangé ?", r: "la translation", pourquoi: "tous les points bougent du même déplacement, aucun ne reste en place" },
+        { q: "Quelle transformation est un demi-tour ?", r: "la symétrie centrale", pourquoi: "c'est une rotation d'un demi-tour autour du centre" },
+        { q: "Après quelle transformation la figure « regarde-t-elle » toujours du même côté ?", r: "la translation", pourquoi: "le sens de parcours est conservé" },
+        { q: "Quelle transformation change la TAILLE de la figure ?", r: "l'homothétie", pourquoi: "c'est la seule des quatre à ne pas conserver les longueurs" },
+      ]);
       return {
-        text: "La figure rouge est l’image de la figure bleue par rapport à un axe vertical. Quelle est la transformation ?",
+        text: cas.q,
         format: "qcm",
         choices: shuffle([
-          "symétrie axiale",
-          "translation",
-          "rotation",
-          "homothétie",
+          "la translation",
+          "la symétrie axiale",
+          "la symétrie centrale",
+          "l'homothétie",
         ]),
-        expected: ["symétrie axiale"],
+        expected: [cas.r],
         comparator: "mcq_exact",
         explanation:
-          "Définition : une symétrie axiale est une transformation par rapport à un axe.\n\n" +
-          "Méthode : on vérifie que chaque point et son image sont à la même distance de l’axe.\n\n" +
-          "Calcul : l’axe est la médiatrice des segments reliant chaque point à son image.\n\n" +
-          "Conclusion : la transformation est une symétrie axiale.",
-        canvas: transformationCanvas({
-          transformation: "symetrie_axiale",
-          grid: { rows: 8, cols: 9 },
-          source: {
-            label: "F",
-            points: [
-              { x: axisX - 3, y: 2 },
-              { x: axisX - 1, y: 2 },
-              { x: axisX - 2, y: 4 },
-            ],
-          },
-          image: {
-            label: "F'",
-            points: [
-              { x: axisX + 3, y: 2 },
-              { x: axisX + 1, y: 2 },
-              { x: axisX + 2, y: 4 },
-            ],
-          },
-          axis: {
-            type: "vertical",
-            x: axisX,
-            label: "axe",
-          },
-        }),
+          "Définition : trois de ces transformations sont des ISOMÉTRIES — elles conservent les longueurs. Seule l'homothétie change la taille.\n\n" +
+          "Méthode : deux questions suffisent à les séparer. Le SENS de la figure est-il conservé ? Et quels points restent à leur place ?\n\n" +
+          `Calcul : ${cas.pourquoi}.\n\n` +
+          "Conclusion : ⭐ le tableau tient en trois lignes — la translation conserve le sens et ne fixe aucun point ; la symétrie axiale inverse le sens et fixe toute une droite ; la symétrie centrale inverse le sens et fixe un seul point.",
       };
     },
   },
@@ -333,47 +366,42 @@ export const transformationsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le centre est le milieu entre un point et son image.",
     tags: ["transformation", "symetrie_centrale", "template", "canvas"],
+    // ⛔⛔ RÉPARÉ LE 31/08/2026, MÊME DÉFAUT QUE SON VOISIN : l'énoncé disait
+    // « par symétrie de centre O » puis demandait quelle était la
+    // transformation. La réponse était dans la question.
+    // ⭐ Il porte maintenant ce qui DÉFINIT chaque transformation — le vecteur,
+    // l'axe, le centre, le couple centre-et-angle. C'est le geste utile : une
+    // transformation ne se nomme pas, elle se DONNE, et il faut savoir avec
+    // quoi.
     generate: () => {
+      const cas = randomChoice([
+        { t: "une translation", r: "un vecteur (une direction, un sens, une longueur)", pourquoi: "il dit de combien et dans quel sens TOUS les points glissent" },
+        { t: "une symétrie axiale", r: "un axe", pourquoi: "l'axe est la médiatrice de chaque segment joignant un point à son image" },
+        { t: "une symétrie centrale", r: "un centre", pourquoi: "le centre est le milieu de chaque segment joignant un point à son image" },
+        { t: "une rotation", r: "un centre ET un angle", pourquoi: "le centre seul ne suffit pas : il faut dire de combien on tourne, et dans quel sens" },
+        { t: "une homothétie", r: "un centre ET un rapport", pourquoi: "le rapport dit de combien la figure grandit ou rétrécit" },
+      ]);
       return {
-        text: "La figure rouge est l’image de la figure bleue par symétrie de centre O. Quelle est la transformation ?",
+        text: `Que faut-il donner pour définir complètement ${cas.t} ?`,
         format: "qcm",
-        choices: shuffle([
-          "symétrie centrale",
-          "symétrie axiale",
-          "translation",
-          "rotation de 90°",
+        // ⚠️ `makeChoices` garantit que la bonne réponse EST dans la liste : il
+        // écarte les doublons, retire la bonne réponse des leurres, en tire
+        // trois, puis mélange le tout. Cinq leurres fournis pour qu'il en reste
+        // toujours trois après filtrage.
+        choices: makeChoices(cas.r, [
+          "un vecteur (une direction, un sens, une longueur)",
+          "un axe",
+          "un centre",
+          "un centre ET un angle",
+          "un centre ET un rapport",
         ]),
-        expected: ["symétrie centrale"],
+        expected: [cas.r],
         comparator: "mcq_exact",
         explanation:
-          "Définition : une symétrie centrale est un demi-tour autour d’un point.\n\n" +
-          "Méthode : le centre O est le milieu du segment reliant un point à son image.\n\n" +
-          "Calcul : chaque point et son image sont alignés avec O, et O est au milieu.\n\n" +
-          "Conclusion : la transformation est une symétrie centrale.",
-        canvas: transformationCanvas({
-          transformation: "symetrie_centrale",
-          grid: { rows: 8, cols: 8 },
-          source: {
-            label: "F",
-            points: [
-              { x: 1, y: 2 },
-              { x: 3, y: 2 },
-              { x: 2, y: 3 },
-            ],
-          },
-          image: {
-            label: "F'",
-            points: [
-              { x: 7, y: 6 },
-              { x: 5, y: 6 },
-              { x: 6, y: 5 },
-            ],
-          },
-          center: {
-            point: { x: 4, y: 4 },
-            label: "O",
-          },
-        }),
+          "Définition : nommer une transformation ne suffit pas à la définir — il faut donner l'objet qui la détermine.\n\n" +
+          "Méthode : on se demande ce qu'il faudrait écrire pour qu'une autre personne construise EXACTEMENT la même image.\n\n" +
+          `Calcul : pour ${cas.t}, il faut ${cas.r} — ${cas.pourquoi}.\n\n` +
+          "Conclusion : ⚠️ deux transformations demandent DEUX données : la rotation (centre et angle) et l'homothétie (centre et rapport). Donner seulement le centre y laisserait une infinité d'images possibles.",
       };
     },
   },
