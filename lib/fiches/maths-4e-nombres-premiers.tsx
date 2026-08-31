@@ -239,7 +239,7 @@ export const ficheNombresPremiers4e: FicheCoursData = {
   },
   formule: {
     contexte: "Tout entier plus grand que 1",
-    expression: "n = p_1 \\times p_2 \\times \\ldots \\times p_k",
+    expression: "$n = p_1 \\times p_2 \\times \\ldots \\times p_k$",
     legende:
       "où chaque facteur est un nombre premier — et cette écriture est UNIQUE, à l'ordre près. C'est le théorème fondamental de l'arithmétique, et c'est lui qui fait des nombres premiers les briques élémentaires : tout nombre se construit avec, et d'une seule façon.",
     schema: tableau(

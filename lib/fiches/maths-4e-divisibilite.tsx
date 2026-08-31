@@ -249,7 +249,7 @@ export const ficheDivisibilite4e: FicheCoursData = {
   },
   formule: {
     contexte: "Division euclidienne de a par b",
-    expression: "a = b \\times q + r \\quad\\text{avec}\\quad 0 \\leqslant r < b",
+    expression: "$a = b \\times q + r$   avec   $0 \\leqslant r < b$",
     legende:
       "Les DEUX parties comptent. L'égalité dit comment le dividende se reconstruit ; la condition sur le reste est ce qui rend le quotient et le reste UNIQUES. Sans elle, on pourrait écrire une infinité d'égalités justes pour une même division.",
     schema: tableau(

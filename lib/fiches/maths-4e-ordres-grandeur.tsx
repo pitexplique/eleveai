@@ -245,7 +245,7 @@ export const ficheOrdresGrandeur4e: FicheCoursData = {
   },
   formule: {
     contexte: "Pour estimer un produit ou un quotient",
-    expression: "10^{a} \\times 10^{b} = 10^{a+b} \\quad\\text{et}\\quad 10^{a} \\div 10^{b} = 10^{a-b}",
+    expression: "$10^{a} \\times 10^{b} = 10^{a+b}$   et   $10^{a} \\div 10^{b} = 10^{a-b}$",
     legende:
       "Toute l'estimation tient dans ces deux règles : une fois les nombres remplacés par des puissances de dix, il ne reste qu'à ajouter ou soustraire les exposants. C'est ce qui permet d'estimer de tête un calcul qu'on ne saurait pas poser.",
     schema: tableau(

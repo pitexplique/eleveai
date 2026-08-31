@@ -384,6 +384,16 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Exactement deux diviseurs : la liste jusqu'à 30, le crible jusqu'à 100 — et pourquoi 91 a l'air premier alors qu'il vaut 7 × 13.",
   },
+  "maths/4e/reperage": {
+    titre: "Se repérer sur une droite, dans le plan, sur la Terre",
+    resume:
+      "L'abscisse d'abord, toujours : lire des coordonnées, placer un rationnel sur une droite graduée, se repérer dans un pavé et sur la Terre — et pourquoi un repère n'est pas un écran d'ordinateur.",
+  },
+  "maths/4e/vision-espace": {
+    titre: "Solides et représentations",
+    resume:
+      "Les sept solides et leur signature, les vues, le patron, la perspective et les sections — et pourquoi la boule n'a pas de patron, ce qui rend toute carte du monde fausse.",
+  },
   "maths/4e/grandeur-composee": {
     titre: "Grandeurs composées et unités",
     resume:

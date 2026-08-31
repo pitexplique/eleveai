@@ -241,7 +241,7 @@ export const ficheTriangle4e: FicheCoursData = {
   },
   formule: {
     contexte: "Dans n'importe quel triangle ABC",
-    expression: "\\widehat{A} + \\widehat{B} + \\widehat{C} = 180°",
+    expression: "$\\widehat{A} + \\widehat{B} + \\widehat{C} = 180°$",
     legende:
       "La somme des trois angles est constante, et cette constance en fait un outil à double emploi : on l'utilise pour CALCULER un angle manquant, et pour CONTRÔLER qu'un triangle annoncé peut exister. Le second usage est celui qu'on oublie, et c'est celui qui rapporte le plus de points.",
     schema: tableau(
