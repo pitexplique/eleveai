@@ -23,6 +23,27 @@ function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+/**
+ * ⭐ LES NOMS DU TRIANGLE RECTANGLE, ajoutés le 31/08/2026 — la même réparation
+ * que dans `cosinus.bank.ts` de 4e le 30/08.
+ *
+ * ⛔ Les gabarits écrivaient tous « le triangle rectangle en A », avec B et C.
+ * Un élève y apprend « l'adjacent, c'est AB » au lieu de « c'est le côté qui
+ * touche l'angle sans être l'hypoténuse ». Il se bloque dès qu'un sujet de
+ * brevet nomme les points autrement — et le brevet le fait.
+ *
+ * ⚠️ `A` porte toujours l'angle droit : c'est la géométrie de la figure, seuls
+ * les NOMS changent. Pas de I ni de O, qui se confondent avec 1 et 0.
+ */
+const NOMS_TRIANGLE: { A: string; B: string; C: string }[] = [
+  { A: "A", B: "B", C: "C" },
+  { A: "R", B: "S", C: "T" },
+  { A: "M", B: "N", C: "P" },
+  { A: "E", B: "F", C: "G" },
+  { A: "K", B: "L", C: "H" },
+  { A: "D", B: "U", C: "V" },
+];
+
 function randomChoice<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -43,16 +64,37 @@ function formatNumber(n: number) {
   return Number.isInteger(n) ? String(n) : String(round1(n)).replace(".", ",");
 }
 
+/**
+ * Le triangle rectangle de la trigonométrie.
+ *
+ * ⛔⛔ DEUX FAUTES CORRIGÉES LE 31/08/2026 — LES MÊMES QUE DANS `cosinus.bank.ts`
+ * DE 4e, RÉPARÉ LA VEILLE.
+ *
+ * 1. `sideLabels` s'écrivait `AC` — vingt-neuf fois. Or le type du canvas ne
+ *    connaît que `AB`, `BC` et `CA`, et `TriangleCanvas` ne lit QUE ces
+ *    trois-là. Le `as any` de la fin masquait l'erreur au typecheck :
+ *    l'étiquette « opposé » n'a JAMAIS été affichée dans une question de
+ *    trigonométrie de 3e. Elle l'est maintenant, sur `CA`.
+ *
+ * 2. Les sommets s'appelaient toujours A, B, C avec l'angle droit en A. Les
+ *    noms sont donc un paramètre, et les gabarits les tirent de `NOMS_TRIANGLE`.
+ *
+ * ⚠️ Le viewBox fait 280 pour un rendu plafonné à 240 px : l'échelle vaut
+ * 0,857, et la plus petite police du canvas (13) sort à 11,1 px — juste
+ * au-dessus du plancher. Ne pas élargir ce viewBox sans remesurer.
+ */
 function triangleTrigoCanvas(params?: {
   angleAt?: "B" | "C";
   sideLabels?: {
     AB?: string;
-    AC?: string;
+    CA?: string;
     BC?: string;
   };
   angleLabel?: string;
+  noms?: { A: string; B: string; C: string };
 }) {
   const angleAt = params?.angleAt ?? "B";
+  const noms = params?.noms ?? { A: "A", B: "B", C: "C" };
 
   return {
     kind: "triangle",
@@ -62,13 +104,13 @@ function triangleTrigoCanvas(params?: {
       C: { x: 55, y: 70 },
     },
     labels: {
-      A: "A",
-      B: "B",
-      C: "C",
+      A: noms.A,
+      B: noms.B,
+      C: noms.C,
     },
     sideLabels: params?.sideLabels ?? {
       AB: "adjacent",
-      AC: "opposé",
+      CA: "opposé",
       BC: "hypoténuse",
     },
     angleLabels:
@@ -156,41 +198,45 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Repère l’angle étudié, puis classe les côtés.",
     tags: ["trigo_trigonometrie", "cotes", "template", "canvas"],
+    // ⛔ RÉPARÉ LE 31/08/2026 : deux énoncés, parce que le triangle s'appelait
+    // toujours ABC rectangle en A. Le nommage vient maintenant d'une table —
+    // c'est la même réparation qu'en 4e le 30/08, et elle vaut d'abord pour ce
+    // qu'elle enseigne : l'adjacent n'est pas « AB », c'est le côté qui touche
+    // l'angle sans être l'hypoténuse.
     generate: () => {
+      const t = randomChoice(NOMS_TRIANGLE);
       const angleAt = randomChoice<"B" | "C">(["B", "C"]);
+      const sommet = angleAt === "B" ? t.B : t.C;
+      const opp = angleAt === "B" ? `${t.A}${t.C}` : `${t.A}${t.B}`;
+      const adj = angleAt === "B" ? `${t.A}${t.B}` : `${t.A}${t.C}`;
+      const hyp = `${t.B}${t.C}`;
 
-      const correct =
-        angleAt === "B"
-          ? "opposé : AC ; adjacent : AB ; hypoténuse : BC"
-          : "opposé : AB ; adjacent : AC ; hypoténuse : BC";
+      const correct = `opposé : ${opp} ; adjacent : ${adj} ; hypoténuse : ${hyp}`;
 
-      const choices =
-        angleAt === "B"
-          ? [
-              correct,
-              "opposé : AB ; adjacent : AC ; hypoténuse : BC",
-              "opposé : BC ; adjacent : AB ; hypoténuse : AC",
-              "opposé : AC ; adjacent : BC ; hypoténuse : AB",
-            ]
-          : [
-              correct,
-              "opposé : AC ; adjacent : AB ; hypoténuse : BC",
-              "opposé : BC ; adjacent : AC ; hypoténuse : AB",
-              "opposé : AB ; adjacent : BC ; hypoténuse : AC",
-            ];
+      // ⚠️ Les trois leurres portent les trois confusions RÉELLES : échanger
+      // opposé et adjacent, prendre l'hypoténuse pour un côté de l'angle
+      // droit, et croire que l'hypoténuse change avec l'angle regardé.
+      const choices = [
+        correct,
+        `opposé : ${adj} ; adjacent : ${opp} ; hypoténuse : ${hyp}`,
+        `opposé : ${hyp} ; adjacent : ${adj} ; hypoténuse : ${opp}`,
+        `opposé : ${opp} ; adjacent : ${hyp} ; hypoténuse : ${adj}`,
+      ];
 
       return {
-        text: `Dans le triangle rectangle en A, par rapport à l’angle ${angleAt}, quelle phrase est correcte ?`,
+        text: `Dans le triangle rectangle en ${t.A}, par rapport à l'angle ${sommet}, quelle phrase est correcte ?`,
         format: "qcm",
         choices: shuffle(choices),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
-          `Définition : dans un triangle rectangle, l’hypoténuse est le côté opposé à l’angle droit. Le côté opposé et le côté adjacent dépendent de l’angle choisi.\n\n` +
-          `Méthode : on se place sur l’angle ${angleAt}, puis on identifie le côté en face et le côté qui touche l’angle sans être l’hypoténuse.\n\n` +
+          "Définition : dans un triangle rectangle, l'HYPOTÉNUSE est le côté opposé à l'angle droit — elle ne change jamais. L'opposé et l'adjacent, eux, dépendent de l'angle qu'on regarde.\n\n" +
+          `Méthode : on se place sur l'angle ${sommet}, on écarte d'abord l'hypoténuse $${hyp}$, puis on distingue les deux autres — celui qui TOUCHE l'angle est l'adjacent, celui d'EN FACE est l'opposé.\n\n` +
           `Calcul : ici, ${correct}.\n\n` +
-          `Conclusion : il faut toujours identifier les côtés par rapport à l’angle étudié.`,
-        canvas: triangleTrigoCanvas({ angleAt }),
+          `Conclusion : ⚠️ « opposé » et « adjacent » ne sont pas les noms de côtés fixes : ils changent avec l'angle. Si l'on regardait l'autre angle aigu, $${opp}$ et $${adj}$ échangeraient leurs rôles — seule $${hyp}$ resterait l'hypoténuse.`,
+        // ⚠️ Le dessin porte LES MÊMES NOMS que l'énoncé : sans `noms`, la
+        // figure afficherait A, B, C pendant que le texte dirait R, S, T.
+        canvas: triangleTrigoCanvas({ angleAt, noms: t }),
       };
     },
   },
@@ -281,7 +327,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
         canvas: triangleTrigoCanvas({
           angleAt: "B",
           angleLabel: `${data.angle}°`,
-          sideLabels: { BC: `${data.hyp} cm`, AB: "?", AC: "" },
+          sideLabels: { BC: `${data.hyp} cm`, AB: "?", CA: "" },
         }),
       };
     },
@@ -349,7 +395,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
         canvas: triangleTrigoCanvas({
           angleAt: "B",
           angleLabel: `${angle}°`,
-          sideLabels: { BC: `${hyp} cm`, AC: "?", AB: "" },
+          sideLabels: { BC: `${hyp} cm`, CA: "?", AB: "" },
         }),
       };
     },
@@ -417,7 +463,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
         canvas: triangleTrigoCanvas({
           angleAt: "B",
           angleLabel: `${angle}°`,
-          sideLabels: { AB: `${adjacent} cm`, AC: "?", BC: "" },
+          sideLabels: { AB: `${adjacent} cm`, CA: "?", BC: "" },
         }),
       };
     },
@@ -486,8 +532,8 @@ export const trigonometrieBank: TutorBankItemV4[] = [
           angleLabel: `${c.angle}°`,
           sideLabels:
             c.ratio === "tangente"
-              ? { AB: `${c.adj} cm`, AC: "?", BC: "" }
-              : { BC: `${c.hyp} cm`, AB: c.ratio === "cosinus" ? "?" : "", AC: c.ratio === "sinus" ? "?" : "" },
+              ? { AB: `${c.adj} cm`, CA: "?", BC: "" }
+              : { BC: `${c.hyp} cm`, AB: c.ratio === "cosinus" ? "?" : "", CA: c.ratio === "sinus" ? "?" : "" },
         }),
       };
     },
@@ -537,21 +583,21 @@ export const trigonometrieBank: TutorBankItemV4[] = [
           value: 0.5,
           angle: 60,
           explanationRatio: "adjacent / hypoténuse",
-          sideLabels: { AB: "5 cm", BC: "10 cm", AC: "" },
+          sideLabels: { AB: "5 cm", BC: "10 cm", CA: "" },
         },
         {
           ratio: "sinus",
           value: 0.5,
           angle: 30,
           explanationRatio: "opposé / hypoténuse",
-          sideLabels: { AC: "5 cm", BC: "10 cm", AB: "" },
+          sideLabels: { CA: "5 cm", BC: "10 cm", AB: "" },
         },
         {
           ratio: "tangente",
           value: 1,
           angle: 45,
           explanationRatio: "opposé / adjacent",
-          sideLabels: { AC: "7 cm", AB: "7 cm", BC: "" },
+          sideLabels: { CA: "7 cm", AB: "7 cm", BC: "" },
         },
       ]);
 
@@ -840,21 +886,43 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le côté adjacent touche l’angle étudié sans être l’hypoténuse.",
     tags: ["trigo_trigonometrie", "adjacent", "canvas", "template"],
+    // ⛔ RÉPARÉ LE 31/08/2026. Il posait un SOUS-ENSEMBLE de la question de
+    // `tpl_1` — « quel est le côté adjacent » quand l'autre demandait les
+    // trois — sur un triangle toujours nommé ABC. Deux énoncés en tout.
+    // ⭐ Il porte maintenant le RAPPORT trigonométrique, qui est ce que la 3e
+    // ajoute au cosinus de la 4e : sinus et tangente arrivent, et c'est le
+    // choix entre les trois qui devient la difficulté.
     generate: () => {
+      const t = randomChoice(NOMS_TRIANGLE);
       const angleAt = randomChoice<"B" | "C">(["B", "C"]);
-      const adjacent = angleAt === "B" ? "AB" : "AC";
+      const sommet = angleAt === "B" ? t.B : t.C;
+      const opp = angleAt === "B" ? `${t.A}${t.C}` : `${t.A}${t.B}`;
+      const adj = angleAt === "B" ? `${t.A}${t.B}` : `${t.A}${t.C}`;
+      const hyp = `${t.B}${t.C}`;
+      const rapport = randomChoice([
+        { nom: "cosinus", haut: adj, bas: hyp, regle: "adjacent sur hypoténuse" },
+        { nom: "sinus", haut: opp, bas: hyp, regle: "opposé sur hypoténuse" },
+        { nom: "tangente", haut: opp, bas: adj, regle: "opposé sur adjacent" },
+      ]);
+      const correct = `$\\dfrac{${rapport.haut}}{${rapport.bas}}$`;
       return {
-        text: `Dans le triangle rectangle en A, par rapport à l’angle ${angleAt}, quel est le côté adjacent ?`,
+        text: `Dans le triangle rectangle en ${t.A}, à quoi est égal le ${rapport.nom} de l'angle ${sommet} ?`,
         format: "qcm",
-        choices: shuffle(["AB", "AC", "BC"]),
-        expected: [adjacent],
+        choices: makeChoices(correct, [
+          `$\\dfrac{${adj}}{${hyp}}$`,
+          `$\\dfrac{${opp}}{${hyp}}$`,
+          `$\\dfrac{${opp}}{${adj}}$`,
+          `$\\dfrac{${hyp}}{${adj}}$`,
+          `$\\dfrac{${adj}}{${opp}}$`,
+        ]),
+        expected: [correct],
         comparator: "mcq_exact",
         explanation:
-          `Définition : le côté adjacent touche l’angle étudié sans être l’hypoténuse.\n\n` +
-          `Méthode : on se place sur l’angle ${angleAt} et on écarte l’hypoténuse BC.\n\n` +
-          `Calcul : le côté qui touche ${angleAt} sans être BC est ${adjacent}.\n\n` +
-          `Conclusion : le côté adjacent est ${adjacent}.`,
-        canvas: triangleTrigoCanvas({ angleAt }),
+          "Définition : les trois rapports se lisent sur le même triangle — cosinus = adjacent/hypoténuse, sinus = opposé/hypoténuse, tangente = opposé/adjacent.\n\n" +
+          `Méthode : on repère d'abord l'hypoténuse par l'angle droit (en ${t.A}), donc $${hyp}$. Puis, par rapport à l'angle ${sommet} : l'ADJACENT le touche ($${adj}$), l'OPPOSÉ est en face ($${opp}$).\n\n` +
+          `Calcul : le ${rapport.nom}, c'est ${rapport.regle}, soit $\\dfrac{${rapport.haut}}{${rapport.bas}}$.\n\n` +
+          `Conclusion : ⚠️ seule la TANGENTE n'a pas l'hypoténuse au dénominateur — c'est ce qui la distingue des deux autres, et c'est aussi pourquoi elle peut dépasser 1, ce qu'un cosinus ou un sinus ne peuvent jamais faire.`,
+        canvas: triangleTrigoCanvas({ angleAt, noms: t }),
       };
     },
   },
@@ -942,7 +1010,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
         canvas: triangleTrigoCanvas({
           angleAt: "B",
           angleLabel: "60°",
-          sideLabels: { BC: `${hyp} cm`, AB: "?", AC: "" },
+          sideLabels: { BC: `${hyp} cm`, AB: "?", CA: "" },
         }),
       };
     },
@@ -975,7 +1043,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
         canvas: triangleTrigoCanvas({
           angleAt: "B",
           angleLabel: "60°",
-          sideLabels: { AB: `${adj} cm`, BC: "?", AC: "" },
+          sideLabels: { AB: `${adj} cm`, BC: "?", CA: "" },
         }),
       };
     },
@@ -1009,7 +1077,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
           `Conclusion : $\\cos(\\theta) = \\dfrac{${adj}}{${hyp}}$.`,
         canvas: triangleTrigoCanvas({
           angleAt: "B",
-          sideLabels: { AB: `${adj} cm`, BC: `${hyp} cm`, AC: "" },
+          sideLabels: { AB: `${adj} cm`, BC: `${hyp} cm`, CA: "" },
         }),
       };
     },
@@ -1066,7 +1134,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
         canvas: triangleTrigoCanvas({
           angleAt: "B",
           angleLabel: `${angle}°`,
-          sideLabels: { BC: `${hyp} cm`, AB: "?", AC: "" },
+          sideLabels: { BC: `${hyp} cm`, AB: "?", CA: "" },
         }),
       };
     },
@@ -1155,7 +1223,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
         canvas: triangleTrigoCanvas({
           angleAt: "B",
           angleLabel: "30°",
-          sideLabels: { BC: `${hyp} cm`, AC: "?", AB: "" },
+          sideLabels: { BC: `${hyp} cm`, CA: "?", AB: "" },
         }),
       };
     },
@@ -1189,7 +1257,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
         canvas: triangleTrigoCanvas({
           angleAt: "B",
           angleLabel: `${angle}°`,
-          sideLabels: { BC: `${hyp} cm`, AC: "?", AB: "" },
+          sideLabels: { BC: `${hyp} cm`, CA: "?", AB: "" },
         }),
       };
     },
@@ -1223,7 +1291,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
           `Conclusion : $\\sin(\\theta) = \\dfrac{${opp}}{${hyp}}$.`,
         canvas: triangleTrigoCanvas({
           angleAt: "B",
-          sideLabels: { AC: `${opp} cm`, BC: `${hyp} cm`, AB: "" },
+          sideLabels: { CA: `${opp} cm`, BC: `${hyp} cm`, AB: "" },
         }),
       };
     },
@@ -1335,7 +1403,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
         canvas: triangleTrigoCanvas({
           angleAt: "B",
           angleLabel: "45°",
-          sideLabels: { AB: `${adj} cm`, AC: "?", BC: "" },
+          sideLabels: { AB: `${adj} cm`, CA: "?", BC: "" },
         }),
       };
     },
@@ -1369,7 +1437,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
         canvas: triangleTrigoCanvas({
           angleAt: "B",
           angleLabel: `${angle}°`,
-          sideLabels: { AB: `${adj} cm`, AC: "?", BC: "" },
+          sideLabels: { AB: `${adj} cm`, CA: "?", BC: "" },
         }),
       };
     },
@@ -1410,7 +1478,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
           `Conclusion : $\\tan(\\theta) = \\dfrac{${opp}}{${adj}}$.`,
         canvas: triangleTrigoCanvas({
           angleAt: "B",
-          sideLabels: { AC: `${opp} cm`, AB: `${adj} cm`, BC: "" },
+          sideLabels: { CA: `${opp} cm`, AB: `${adj} cm`, BC: "" },
         }),
       };
     },
@@ -1493,7 +1561,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
         canvas: triangleTrigoCanvas({
           angleAt: "B",
           angleLabel: "60°",
-          sideLabels: { BC: `${hyp} cm`, AB: "?", AC: "" },
+          sideLabels: { BC: `${hyp} cm`, AB: "?", CA: "" },
         }),
       };
     },
@@ -1526,7 +1594,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
         canvas: triangleTrigoCanvas({
           angleAt: "B",
           angleLabel: "30°",
-          sideLabels: { BC: `${hyp} cm`, AC: "?", AB: "" },
+          sideLabels: { BC: `${hyp} cm`, CA: "?", AB: "" },
         }),
       };
     },
@@ -1559,7 +1627,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
         canvas: triangleTrigoCanvas({
           angleAt: "B",
           angleLabel: "45°",
-          sideLabels: { AB: `${adj} cm`, AC: "?", BC: "" },
+          sideLabels: { AB: `${adj} cm`, CA: "?", BC: "" },
         }),
       };
     },
@@ -1620,7 +1688,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
         canvas: triangleTrigoCanvas({
           angleAt: "B",
           angleLabel: "30°",
-          sideLabels: { AC: `${opp} cm`, BC: "?", AB: "" },
+          sideLabels: { CA: `${opp} cm`, BC: "?", AB: "" },
         }),
       };
     },
@@ -1648,7 +1716,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     canvas: triangleTrigoCanvas({
       angleAt: "B",
       angleLabel: "60°",
-      sideLabels: { BC: "10 cm", AB: "?", AC: "" },
+      sideLabels: { BC: "10 cm", AB: "?", CA: "" },
     }),
     tags: ["trigo_trigonometrie", "calcul_longueur", "short"],
   },
@@ -1670,9 +1738,9 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     tags: ["trigo_trigonometrie", "calcul_angle", "canvas", "template"],
     generate: () => {
       const data = randomChoice([
-        { adj: 5, hyp: 10, ratio: "\\cos", angle: 60, labels: { AB: "5 cm", BC: "10 cm", AC: "" } },
-        { opp: 5, hyp: 10, ratio: "\\sin", angle: 30, labels: { AC: "5 cm", BC: "10 cm", AB: "" } },
-        { opp: 7, adj: 7, ratio: "\\tan", angle: 45, labels: { AC: "7 cm", AB: "7 cm", BC: "" } },
+        { adj: 5, hyp: 10, ratio: "\\cos", angle: 60, labels: { AB: "5 cm", BC: "10 cm", CA: "" } },
+        { opp: 5, hyp: 10, ratio: "\\sin", angle: 30, labels: { CA: "5 cm", BC: "10 cm", AB: "" } },
+        { opp: 7, adj: 7, ratio: "\\tan", angle: 45, labels: { CA: "7 cm", AB: "7 cm", BC: "" } },
       ]);
       return {
         text: "Dans un triangle rectangle, à partir des longueurs indiquées sur la figure, calcule la mesure de l’angle marqué (en degrés).",
@@ -1770,7 +1838,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     canvas: triangleTrigoCanvas({
       angleAt: "B",
       angleLabel: "?",
-      sideLabels: { AB: "5 cm", BC: "10 cm", AC: "" },
+      sideLabels: { AB: "5 cm", BC: "10 cm", CA: "" },
     }),
     tags: ["trigo_trigonometrie", "calcul_angle", "qcm"],
   },
@@ -2068,7 +2136,7 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     canvas: triangleTrigoCanvas({
       angleAt: "B",
       angleLabel: "?",
-      sideLabels: { AC: "5 cm", BC: "10 cm", AB: "" },
+      sideLabels: { CA: "5 cm", BC: "10 cm", AB: "" },
     }),
     tags: ["trigo_trigonometrie", "defi", "brevet", "qcm"],
   },
