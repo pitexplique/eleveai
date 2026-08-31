@@ -430,7 +430,7 @@ export const slidesFluenceLectureCm1: ClasseSlide[] = [
       question: "Trois textes une fois, ou un texte trois fois ?",
       indice: "Ce n'est pas la nouveauté qui aide.",
       correction:
-        "UN TEXTE TROIS FOIS. À la deuxième, tu ne butes plus. À la troisième, tu y mets le ton.",
+        "Un texte trois fois. À la deuxième, tu ne butes plus. À la troisième, tu y mets le ton.",
     },
     schema: relireLeMeme,
   },

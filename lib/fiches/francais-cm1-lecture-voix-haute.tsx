@@ -1,42 +1,55 @@
 // ─── Fiche de cours : lire à voix haute (CM1) ─────────────────────────────────
-// DEUXIÈME FICHE DU CHANTIER CM1.
+// DEUXIÈME FICHE DU CHANTIER CM1 — refaite le 31/08/2026 au gabarit de l'étalon.
 //
 // ⚠️⚠️ RÉFÉRENCE : « Programme de français pour le CYCLE 3 », BO n° 16 du
 // 17 avril 2025, rubriques « Cours moyen première année ».
 //
-// ⛔⛔ SÉPARATION À TROIS COLONNES — obligatoire au CM1, où 21 notions sur 25
-// portent un nom déjà pris par le CM2. Ici les trois classes se partagent le même
-// pool MISE_EN_VOIX, et la ligne de partage est dans les micros :
+// ⛔⛔ POURQUOI CETTE FICHE A ÉTÉ REFAITE. Écrite le 30/08 au matin sur l'ancien
+// gabarit, elle mesurait : dix propriétés, quatre méthodes, six exemples, sept
+// pièges, une formule, quatre usages, SOIXANTE-HUIT capitales d'emphase et six
+// textes de plus de 250 signes. Frédéric, le 31/08 : « on utilise le même étalon
+// que pour cm1 et cm2 et 6e », « il faut privilégier la qualité pas la vitesse ».
+//
+// ⭐ L'ÉTALON, fixé sur `francais-cm1-fluence-lecture` :
+//   propriétés 6 · méthode 3 · exemples 4 · pièges 5 · à retenir 5
+//   entrainement 5 · usages vidés · aucune formule
+//   AUCUNE capitale d'emphase · tout texte projeté sous 250 signes
+//   définition en phrases courtes, une par ligne
+//
+// ⭐⭐ ET LA RAISON PROFONDE DE L'ÉTALON EST LE MODE CLASSE, pas la page :
+// `slidesDepuisFiche` fabrique le diaporama DEPUIS la fiche. Dix propriétés et
+// six exemples donnent trente diapos dont plusieurs débordent de l'écran. Le
+// gabarit n'est donc pas une préférence de mise en page — c'est ce qui rend la
+// fiche projetable, et « projetable en classe » est le principe fondateur.
+//
+// ⭐ LES CAPITALES SONT LE PIRE DÉFAUT, et il était partout ici : un mot en
+// capitales perd sa silhouette — plus de hampes, plus de jambages, plus rien à
+// reconnaitre d'un coup d'œil. Dans une fiche qui enseigne à lire à voix haute,
+// c'est exactement le geste qu'on demande à l'élève et qu'on lui rend impossible.
+//
+// ⛔ SÉPARATION À TROIS COLONNES, obligatoire au CM1 où 21 notions sur 25 portent
+// un nom déjà pris par le CM2 :
 //
 //   | | CM1 (ici) | CM2 | 6e |
 //   |---|---|---|---|
 //   | les micros | rythme RÉGULIER, VOLUME et DÉBIT | articulation, effets, PLAISIR | préparer, émotions, DIALOGUE |
 //   | le fil | ⭐ TROIS BOUTONS indépendants | on lit POUR QUELQU'UN, et il juge | le TON est ÉCRIT dans le texte |
-//   | ce qu'il apporte | régler l'instrument | la raison de chaque règle | où lire l'indice du ton |
 //
-// ⛔ NE PAS REPRENDRE : « on ne lit pas à voix haute pour prouver qu'on sait lire,
-// on lit pour quelqu'un » est l'accroche du CM2 — citée ici en UNE ligne, comme
-// un acquis, jamais développée. « Le ton est écrit dans le texte, aux trois mêmes
-// endroits » est celle de la 6e. Les deux blocs d'histoire sont pris aussi : le
-// lector des ateliers de cigares (CM2) et l'écriture sans espaces (6e).
+// ⛔ NE PAS REPRENDRE : « on ne lit pas pour prouver qu'on sait lire, on lit pour
+// quelqu'un » est l'accroche du CM2 ; « le ton est écrit dans le texte » celle de
+// la 6e. Leurs blocs d'histoire aussi — le lector des ateliers de cigares (CM2)
+// et l'écriture sans espaces (6e).
 //
-// ⭐⭐ LA DÉCOUVERTE, ET ELLE VIENT DU MICRO `cm1_voix_intensite` QUI NOMME DEUX
-// CHOSES ET NON UNE — « régler le VOLUME ET LE DÉBIT » : CE SONT DEUX BOUTONS
-// DIFFÉRENTS, ET TOUT LE MONDE LES CONFOND. Quand quelqu'un ne nous comprend pas,
-// le réflexe est de parler PLUS FORT — alors que le problème est presque toujours
-// qu'on parle TROP VITE. ⛔ Parler plus fort ne rend pas plus clair. On peut être
-// parfaitement audible et parfaitement incompréhensible.
+// ⭐⭐ LA DÉCOUVERTE, ET ELLE VIENT D'UN MICRO QUI NOMME DEUX CHOSES ET NON UNE —
+// `cm1_voix_intensite`, « régler le VOLUME ET LE DÉBIT » : ce sont deux boutons
+// différents, et tout le monde les confond. Quand on ne nous comprend pas, le
+// réflexe est de parler plus fort, alors que le problème est presque toujours
+// qu'on parle trop vite. Et `cm1_voix_rythme` en isole un troisième : la
+// RÉGULARITÉ, « pour que l'auditoire suive ».
 //
-// ⭐ ET IL Y EN A UN TROISIÈME, que `cm1_voix_rythme` isole : LA RÉGULARITÉ. Ce
-// n'est ni fort ni lent, c'est ÉGAL — et le micro dit pourquoi, « pour que
-// l'AUDITOIRE SUIVE ». Une lecture qui accélère puis ralentit épuise celui qui
-// écoute même sans être rapide, parce qu'il ne peut jamais se caler.
-//
-// ⭐⭐ D'OÙ LA RAISON PROFONDE, ET ELLE EXPLIQUE POURQUOI ON VA TOUJOURS TROP
-// VITE : LE LECTEUR EST LE SEUL DE LA SALLE À CONNAITRE DÉJÀ LA PHRASE. Il ne
-// lit pas, il REDIT ce que ses yeux viennent de prendre ; l'auditoire, lui,
-// découvre. Lire à la vitesse où l'on comprend soi-même, c'est donc aller trop
-// vite pour tous les autres.
+// ⭐ D'où la raison qui explique tout : le lecteur est le seul de la salle à
+// connaitre déjà la phrase. Il ne lit pas, il redit ce que ses yeux viennent de
+// prendre — les autres découvrent.
 //
 // ⚠️ RÈGLE DE COULEUR : aucune étiquette n'est une FONCTION grammaticale, toutes
 // restent grises.
@@ -45,36 +58,24 @@
 // lib/tutor-v4/questionBank/cycle3/francais/buildCycle3FrancaisBank.ts.
 //
 // Micro-compétences couvertes (les 4 de la notion `lecture_voix_haute`) :
-// - cm1_flue_expressive → propriétés 1 et 2, méthode 1, usage 1, exemple 1
-// - cm1_voix_rythme     → propriétés 3 à 5, méthode 2, usage 2, exemples 2 et 3
-// - cm1_voix_intensite  → figure, propriétés 6 à 8, formule, méthode 3,
-//                         usages 3 et 4, exemples 4 et 5
-// - cm1_voix_defi       → propriétés 9 et 10, méthode 4, exemple 6
+// - cm1_flue_expressive → propriété 1, méthode 1, exemple 1
+// - cm1_voix_rythme     → propriétés 2 et 3, méthode 2, exemples 2 et 3
+// - cm1_voix_intensite  → figure, propriétés 4 et 5, méthode 3, exemple 4
+// - cm1_voix_defi       → propriété 6
 
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
 import { ANNEE_SCOLAIRE } from "@/lib/fiches/annee-scolaire";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
-import type {
-  PhraseCanvasGroupe,
-  PhraseCanvasLien,
-  PhraseCanvasMot,
-} from "@/lib/tutor-v4/types";
+import type { PhraseCanvasMot } from "@/lib/tutor-v4/types";
 
-function phrase(opts: {
-  mots: (string | PhraseCanvasMot)[];
-  groupes?: PhraseCanvasGroupe[];
-  liens?: PhraseCanvasLien[];
-  legende?: string;
-}) {
+function phrase(opts: { mots: (string | PhraseCanvasMot)[]; legende?: string }) {
   return (
     <CanvasRenderer
       figure={{
         kind: "phrase",
         mots: opts.mots.map((m) => (typeof m === "string" ? { texte: m } : m)),
-        groupes: opts.groupes,
-        liens: opts.liens,
         legende: opts.legende,
         largeurMax: 190,
       }}
@@ -114,17 +115,16 @@ function pile(...blocs: ReactNode[]) {
   );
 }
 
-// ─── Ce qui se dessine quand on lit pour d'autres ─────────────────────────────
+// ─── Les dessins ──────────────────────────────────────────────────────────────
 
-// ── ⭐⭐ LA FIGURE DE RÉFÉRENCE : trois boutons, et on en tourne un pour l'autre.
-const grilleTroisBoutons = grille({
-  headers: ["Le bouton", "Ce qu'il règle"],
+const troisBoutons = grille({
+  headers: ["Le bouton", "Il sert à"],
   rows: [
     { values: ["le volume", "être entendu"] },
     { values: ["le débit", "être compris"] },
     { values: ["le rythme", "être suivi"] },
   ],
-  caption: "Trois réglages indépendants — et on confond les deux premiers.",
+  caption: "Trois réglages différents. On confond souvent les deux premiers.",
 });
 
 const pasLeBonBouton = phrase({
@@ -135,82 +135,41 @@ const pasLeBonBouton = phrase({
   legende: "Quand on ne te comprend pas, ce n'est presque jamais le volume.",
 });
 
-// ── AISANCE ET EXPRESSIVITÉ.
-const aisanceDabord = phrase({
-  mots: [
-    { texte: "sans buter" },
-    { texte: "avec le ton", focus: true },
-  ],
-  liens: [{ de: 0, vers: 1, label: "puis", type: "question" }],
-  legende: "On ne met pas le ton sur un mot qu'on est en train de déchiffrer.",
+const toiEtEux = phrase({
+  mots: [{ texte: "toi" }, { texte: "eux" }],
+  legende: "Tu connais déjà la phrase. Eux la découvrent en même temps.",
 });
 
-const avoirDejaLu = phrase({
-  mots: [
-    { texte: "découvrir devant", barre: true },
-    { texte: "avoir déjà lu", focus: true },
-  ],
-  legende: "On lit d'abord en silence, pour repérer les mots difficiles.",
-});
-
-// ── LE RYTHME.
 const rythmeRegulier = phrase({
   mots: [
     { texte: "ça accélère", barre: true },
-    { texte: "régulier", focus: true },
+    { texte: "toujours pareil", focus: true },
   ],
-  legende: "Une lecture qui accélère puis ralentit épuise, même sans être rapide.",
+  legende: "Une lecture qui accélère puis ralentit fatigue ceux qui écoutent.",
 });
 
-const leLecteurSaitDeja = phrase({
-  mots: [
-    { texte: "toi" },
-    { texte: "eux" },
-  ],
-  legende: "Tu connais déjà la phrase ; eux la découvrent. D'où la vitesse de trop.",
-});
-
-const pauseLaisseComprendre = phrase({
-  mots: [
-    { texte: "la pause" },
-    { texte: "laisser comprendre", focus: true },
-  ],
-  liens: [{ de: 0, vers: 1, label: "sert à", type: "question" }],
-  legende: "Elle marque la ponctuation ET laisse le temps de comprendre.",
-});
-
-// ── LE VOLUME ET LE DÉBIT.
-const audibleEtIncomprehensible = phrase({
-  mots: [
-    { texte: "on t'entend" },
-    { texte: "on ne suit pas" },
-  ],
-  legende: "On peut être parfaitement audible et parfaitement incompréhensible.",
-});
-
-const fondDeLaSalle = phrase({
+const dernierRang = phrase({
   mots: [
     { texte: "le premier rang", barre: true },
     { texte: "le dernier", focus: true },
   ],
-  legende: "Le volume se règle sur celui qui est le plus loin.",
+  legende: "Parle pour celui qui est le plus loin. Les autres entendront.",
 });
 
-const crierNestPasParler = phrase({
+const lireAvant = phrase({
+  mots: [
+    { texte: "découvrir devant", barre: true },
+    { texte: "l'avoir déjà lu", focus: true },
+  ],
+  legende: "On repère les mots difficiles en silence, avant de passer.",
+});
+
+const crierOuPorter = phrase({
   mots: [
     { texte: "crier", barre: true },
-    { texte: "porter", focus: true },
+    { texte: "poser sa voix", focus: true },
   ],
-  legende: "Une voix qui porte n'est pas une voix qui crie : elle est posée.",
-});
-
-// ── LE DÉFI.
-const troisReglagesEnsemble = phrase({
-  mots: [
-    { texte: "un seul bouton", barre: true },
-    { texte: "les trois", focus: true },
-  ],
-  legende: "Le défi du CM1 : régler les trois à la fois, et les tenir jusqu'au bout.",
+  legende: "Crier fatigue en trois minutes et déforme les mots.",
 });
 
 // ─── La fiche ─────────────────────────────────────────────────────────────────
@@ -222,264 +181,166 @@ export const ficheLectureVoixHauteCm1: FicheCoursData = {
   notion: "lecture-voix-haute",
   titre: `Lire à voix haute en CM1 (${ANNEE_SCOLAIRE})`,
   accroche:
-    "Quand quelqu'un ne te comprend pas, ton réflexe est de parler PLUS FORT. C'est le mauvais bouton — presque toujours, le problème est que tu parles TROP VITE. Le volume et le débit sont deux réglages différents, et il en existe un troisième que personne ne pense à toucher : LA RÉGULARITÉ. Trois boutons indépendants, et lire à voix haute consiste exactement à les régler.",
+    "Quand on ne te comprend pas, tu parles plus fort. C'est normal, tout le monde fait ça — et c'est presque toujours le mauvais bouton. Le problème n'est pas qu'on ne t'entend pas : c'est que tu vas trop vite.",
   identite: [
-    { label: "Mots clés", valeur: "Volume, débit, rythme, expressivité" },
-    { label: "Le secret", valeur: "Plus fort ne veut pas dire plus clair" },
+    { label: "Mots clés", valeur: "Voix, rythme, débit" },
+    { label: "Le secret", valeur: "Plus fort n'est pas plus clair" },
     { label: "Outil", valeur: "Le dernier rang t'entend-il ?" },
   ],
   definition: {
-    texte:
-      "LIRE À VOIX HAUTE, au CM1, c'est régler TROIS CHOSES qui n'ont rien à voir entre elles. LE VOLUME : assez fort pour le DERNIER RANG, pas pour le premier — et une voix qui porte n'est pas une voix qui crie, elle est posée. LE DÉBIT : assez lent pour qu'on te suive. ⛔ Et c'est là qu'est le piège : quand on ne te comprend pas, tu montes le volume, alors que c'est le débit qu'il faut baisser. On peut être parfaitement audible et parfaitement incompréhensible. LE RYTHME, enfin : RÉGULIER, pour que l'auditoire suive. Une lecture qui accélère puis ralentit épuise même sans être rapide, parce que celui qui écoute ne peut jamais se caler. ⭐ ET SI TU VAS TOUJOURS TROP VITE, VOICI POURQUOI : TU ES LE SEUL DE LA SALLE À CONNAITRE DÉJÀ LA PHRASE. Tes yeux l'ont prise avant ta bouche ; les autres la découvrent. Il faut donc lire plus lentement que la vitesse à laquelle tu comprends. L'AISANCE vient avant l'EXPRESSIVITÉ : on ne met pas le ton sur un mot qu'on est en train de déchiffrer — d'où la préparation, en silence d'abord.",
+    /* ⭐ Registre enfant, une phrase par ligne. Les `\n\n` sont rendus grâce à
+       `whitespace-pre-line`, posé dans `FicheCoursClient` le 30/08. */
+    texte: [
+      "Lire à voix haute, c'est régler trois choses.",
+      "Le volume : assez fort pour le dernier rang, pas pour le premier.",
+      "Le débit : assez lent pour qu'on te suive.",
+      "Le rythme : toujours pareil, sans accélérer ni ralentir.",
+      "Et si tu vas trop vite, voilà pourquoi : tu es le seul de la salle à connaitre déjà la phrase. Les autres la découvrent.",
+    ].join("\n\n"),
   },
   figure: {
-    schema: pile(grilleTroisBoutons, pasLeBonBouton),
+    schema: pile(troisBoutons, pasLeBonBouton),
     legende:
-      "Regarde la colonne de droite : trois problèmes différents, donc trois réglages différents. Être ENTENDU n'est pas être COMPRIS, et être compris n'est pas être SUIVI. C'est pour cela qu'on se trompe si souvent de bouton — on entend « je n'ai pas compris » et l'on monte le son, alors que la personne entendait très bien. En bas, la correction à retenir : neuf fois sur dix, ce n'est pas plus fort qu'il faut, c'est moins vite. Et cela ne coute rien : ralentir ne fatigue pas, crier si.",
+      "Trois problèmes différents, donc trois réglages différents. Être entendu n'est pas être compris, et être compris n'est pas être suivi. Voilà pourquoi on se trompe si souvent de bouton : on entend « je n'ai pas compris » et on monte le son, alors que la personne entendait très bien.",
   },
   proprietes: [
     {
-      titre: "L'aisance vient avant le ton",
-      texte:
-        "On ne met pas le ton sur un mot qu'on déchiffre. Tant que la lecture coute, toute l'attention y passe et il n'en reste pas pour la voix.",
-      schema: aisanceDabord,
+      titre: "On lit le texte en silence avant",
+      texte: "Tu repères les mots difficiles. Ils ne te surprendront plus devant la classe.",
+      schema: lireAvant,
       micros: ["cm1_flue_expressive"],
     },
     {
-      titre: "Donc on lit d'abord en silence",
-      texte:
-        "Pour repérer les mots difficiles avant qu'ils n'arrivent. Découvrir un texte devant la classe, c'est se condamner à buter en public.",
-      schema: avoirDejaLu,
-      micros: ["cm1_flue_expressive"],
-    },
-    {
-      titre: "Le rythme doit être régulier",
-      texte:
-        "Ni fort ni lent : ÉGAL. Une lecture qui accélère puis ralentit épuise l'auditoire, parce qu'il ne peut jamais se caler dessus.",
+      titre: "Le rythme reste le même",
+      texte: "Ni vite ni lent : régulier. Sinon ceux qui écoutent n'arrivent pas à se caler.",
       schema: rythmeRegulier,
       micros: ["cm1_voix_rythme"],
     },
     {
-      titre: "Tu es le seul à connaitre la phrase",
-      texte:
-        "Tes yeux l'ont prise avant ta bouche ; les autres la découvrent. C'est toute l'explication de la vitesse de trop.",
-      schema: leLecteurSaitDeja,
-      micros: ["cm1_voix_rythme"],
-    },
-    {
-      titre: "La pause laisse comprendre",
-      texte:
-        "Elle marque la ponctuation, et elle donne à l'auditoire le temps de rattraper. Un texte sans pause file sans qu'on le suive.",
-      schema: pauseLaisseComprendre,
+      titre: "Tu connais déjà la phrase",
+      texte: "Tes yeux l'ont lue avant ta bouche. C'est pour ça que tu vas trop vite.",
+      schema: toiEtEux,
       micros: ["cm1_voix_rythme"],
     },
     {
       titre: "Le volume se règle sur le dernier rang",
-      texte:
-        "Pas sur celui qui est devant toi, ni sur le maitre. Celui qui est le plus loin est la mesure — s'il entend, tout le monde entend.",
-      schema: fondDeLaSalle,
+      texte: "Choisis quelqu'un au fond et parle pour lui. Tout le monde entendra.",
+      schema: dernierRang,
       micros: ["cm1_voix_intensite"],
     },
     {
       titre: "Une voix qui porte ne crie pas",
-      texte:
-        "Elle est posée, appuyée sur le souffle. Crier fatigue en trois minutes et déforme les mots : on t'entend plus fort et l'on te comprend moins.",
-      schema: crierNestPasParler,
+      texte: "Crier fatigue vite et abime les mots. On t'entend plus fort et on te comprend moins.",
+      schema: crierOuPorter,
       micros: ["cm1_voix_intensite"],
     },
     {
-      titre: "Audible n'est pas compréhensible",
-      texte:
-        "Ce sont deux boutons. On peut t'entendre parfaitement et ne rien suivre — c'est même le cas le plus fréquent.",
-      schema: audibleEtIncomprehensible,
-      micros: ["cm1_voix_intensite"],
-    },
-    {
-      titre: "Le défi : tenir les trois à la fois",
-      texte:
-        "Le volume, le débit, la régularité. Chacun est facile seul ; c'est ensemble, et sur une page entière, que cela devient un exercice.",
-      schema: troisReglagesEnsemble,
-      micros: ["cm1_voix_defi"],
-    },
-    {
-      titre: "Et l'auditoire est le juge",
-      texte:
-        "C'est ce que le CM2 formulera pour de bon. Retiens déjà la conséquence : ce n'est pas le nombre d'erreurs qui dit si c'est réussi.",
-      schema: troisReglagesEnsemble,
+      titre: "Le défi : les trois en même temps",
+      texte: "Chacun est facile tout seul. C'est ensemble, sur une page entière, que ça devient un exercice.",
+      schema: troisBoutons,
       micros: ["cm1_voix_defi"],
     },
   ],
   reel: {
     texte:
-      "Tu as déjà vu la scène, et peut-être sans la comprendre : quelqu'un parle à une personne qui entend mal, ne se fait pas comprendre, et se met à crier. Cela ne marche presque jamais. Ce qui marche, c'est de ralentir et d'articuler — et souvent la personne répond alors du premier coup, sans qu'on ait élevé la voix d'un décibel. C'est la même erreur qu'en classe : « on ne t'entend pas » et « on ne te suit pas » sont deux phrases différentes, et l'on répond à la seconde comme à la première. Écoute bien ce qu'on te dit exactement la prochaine fois : la plainte t'indique le bouton.",
+      "Tu as déjà vu quelqu'un parler à une personne qui entend mal. Il ne se fait pas comprendre, alors il crie. Ça ne marche presque jamais. Ce qui marche, c'est de ralentir — et souvent l'autre répond du premier coup, sans qu'on ait élevé la voix.",
   },
   historique: {
     texte:
-      "Avant les micros, les acteurs devaient porter leur voix devant des milliers de personnes en plein air — et le problème a été résolu par L'ARCHITECTURE, pas par les cris. Le théâtre d'Épidaure, en Grèce, est construit en gradins de pierre très inclinés, et l'on y entend depuis les derniers rangs, à plus de cinquante mètres, une voix qui ne force pas. Les bancs eux-mêmes filtrent une partie des bruits de fond et renvoient le son vers le haut. Autrement dit, la civilisation qui a le plus eu besoin de se faire entendre n'a pas appris à hurler : elle a construit des salles où une voix posée suffisait. Le bon réglage n'a jamais été le volume.",
-  },
-  formule: {
-    contexte: "La question qui règle le volume, et il n'y en a qu'une.",
-    expression: "le dernier rang t'entend-il ?",
-    legende:
-      "Pas le premier rang, pas le maitre à côté de toi : celui qui est le plus loin. S'il entend, tout le monde entend, et tu peux arrêter de monter. Et si l'on te dit « on ne comprend pas », change de bouton — ce n'est pas le volume, c'est le débit.",
-    schema: fondDeLaSalle,
+      "Avant les micros, les acteurs devaient se faire entendre de milliers de gens en plein air. Ils n'ont pas appris à crier : on a construit des théâtres qui portent la voix. À Épidaure, on entend du dernier rang une voix qui ne force pas.",
   },
   methode: [
     {
-      titre: "Lire le texte en silence avant",
-      texte:
-        "Une fois suffit pour repérer les mots qui vont te faire buter. Tu les prépares, et ils n'arriveront plus par surprise devant la classe.",
-      schema: avoirDejaLu,
+      titre: "Lis le texte en silence, une fois",
+      texte: "Ça suffit pour repérer ce qui va te faire buter.",
+      schema: lireAvant,
       micros: ["cm1_flue_expressive"],
     },
     {
-      titre: "Se donner un tempo, et s'y tenir",
-      texte:
-        "Choisis une allure au début et garde-la. La régularité se sent tout de suite : l'auditoire se cale dessus sans y penser.",
+      titre: "Choisis une allure et garde-la",
+      texte: "L'auditoire se cale dessus sans y penser. S'il ne peut pas, il décroche.",
       schema: rythmeRegulier,
       micros: ["cm1_voix_rythme"],
     },
     {
-      titre: "Viser quelqu'un au fond",
-      texte:
-        "Choisis une personne au dernier rang et parle pour elle. Le volume se règle tout seul, sans que tu aies à y penser.",
-      schema: fondDeLaSalle,
-      micros: ["cm1_voix_intensite"],
-    },
-    {
-      titre: "Écouter la plainte qu'on te fait",
-      texte:
-        "« On ne t'entend pas » → monte le volume. « On ne comprend pas » → baisse le débit. Deux plaintes, deux boutons, jamais le même.",
-      schema: pasLeBonBouton,
-      micros: ["cm1_voix_defi"],
-    },
-  ],
-  usages: [
-    {
-      titre: "Pour lire un texte devant la classe",
-      detail:
-        "C'est l'exercice lui-même, et il commence avant : une lecture silencieuse préalable fait la moitié du travail.",
-      schema: avoirDejaLu,
-      micros: ["cm1_flue_expressive"],
-    },
-    {
-      titre: "Pour qu'on te suive jusqu'au bout",
-      detail:
-        "La régularité est ce qui évite le décrochage. Un auditoire décroche moins par ennui que par incapacité à se caler.",
-      schema: rythmeRegulier,
-      micros: ["cm1_voix_rythme"],
-    },
-    {
-      titre: "Pour ne pas s'épuiser en trois minutes",
-      detail:
-        "Crier fatigue vite et déforme les mots. Une voix posée tient une page entière sans que tu aies mal à la gorge.",
-      schema: crierNestPasParler,
-      micros: ["cm1_voix_intensite"],
-    },
-    {
-      titre: "Pour te faire comprendre partout, pas qu'en classe",
-      detail:
-        "Au téléphone, devant un guichet, avec quelqu'un qui entend mal : ralentir marche presque toujours mieux que hausser la voix.",
+      titre: "Écoute ce qu'on te dit exactement",
+      texte: "« On ne t'entend pas » : monte le volume. « On ne comprend pas » : ralentis.",
       schema: pasLeBonBouton,
       micros: ["cm1_voix_intensite"],
     },
   ],
+  usages: [],
   exemples: [
     {
-      titre: "Préparer une lecture",
-      donnees: "« Avant de lire un texte long devant la classe, la meilleure préparation est de… »",
-      schema: avoirDejaLu,
-      question: "De quoi faire ?",
+      titre: "Préparer sa lecture",
+      donnees: "Tu dois lire un texte devant la classe tout à l'heure.",
+      schema: lireAvant,
+      question: "Que fais-tu avant ?",
       solution:
-        "LE LIRE D'ABORD EN SILENCE POUR REPÉRER LES MOTS DIFFICILES. Pas l'apprendre par cœur, pas le lire une fois très vite. On repère ce qui va faire buter — et l'on ne bute plus en public, ce qui laisse enfin de la place pour le ton.",
+        "Tu le lis en silence, une fois, pour repérer les mots difficiles. Ils ne te surprendront plus, et tu auras de la place pour le ton.",
       micros: ["cm1_flue_expressive"],
     },
     {
-      titre: "Une lecture qui perd son auditoire",
-      donnees: "Tu lis fort et sans faute, et pourtant on décroche.",
+      titre: "On décroche",
+      donnees: "Tu lis fort et sans faute, et pourtant on ne te suit plus.",
       schema: rythmeRegulier,
       question: "Quel bouton n'est pas réglé ?",
       solution:
-        "LE RYTHME. Si ta lecture accélère puis ralentit, ceux qui écoutent ne peuvent jamais se caler dessus, et cela fatigue plus qu'une lecture rapide mais régulière. Le micro du programme le dit dans ses termes : un rythme régulier POUR QUE L'AUDITOIRE SUIVE.",
-      micros: ["cm1_voix_rythme"],
-    },
-    {
-      titre: "La pause",
-      donnees: "« À quoi sert une PAUSE dans une lecture à voix haute ? »",
-      schema: pauseLaisseComprendre,
-      question: "À quoi sert-elle ?",
-      solution:
-        "À MARQUER LA PONCTUATION ET À LAISSER COMPRENDRE. Les deux ensemble : ce n'est pas seulement un signe qu'on respecte, c'est du temps qu'on donne. Sans pauses, le texte file et l'auditoire reste une phrase en arrière.",
+        "Le rythme. Si ta lecture accélère puis ralentit, personne ne peut se caler dessus. C'est plus fatigant qu'une lecture rapide mais régulière.",
       micros: ["cm1_voix_rythme"],
     },
     {
       titre: "Le mauvais bouton",
-      donnees: "On te dit : « On ne comprend rien. » Tu montes la voix.",
+      donnees: "On te dit : « on ne comprend rien ». Tu montes la voix.",
       schema: pasLeBonBouton,
       question: "Est-ce le bon réglage ?",
       solution:
-        "NON. On te dit qu'on ne COMPREND pas, pas qu'on n'ENTEND pas. Ce sont deux boutons différents : la réponse est de RALENTIR. Monter le volume rendra la même chose incompréhensible, mais plus fort — et te fatiguera en trois minutes.",
+        "Non. On te dit qu'on ne comprend pas, pas qu'on n'entend pas. Il faut ralentir. Monter le son rend la même chose incompréhensible, mais plus fort.",
       micros: ["cm1_voix_intensite"],
     },
     {
-      titre: "Régler le volume",
+      titre: "Régler sa voix",
       donnees: "Tu ne sais pas si tu parles assez fort.",
-      schema: fondDeLaSalle,
+      schema: dernierRang,
       question: "Sur qui te règles-tu ?",
       solution:
-        "SUR LE DERNIER RANG. Choisis quelqu'un au fond et parle pour cette personne : si elle entend, tout le monde entend, et tu peux cesser de monter. Se régler sur le premier rang, c'est être inaudible pour la moitié de la classe.",
+        "Sur le dernier rang. Choisis quelqu'un au fond et parle pour lui : s'il entend, tout le monde entend, et tu peux arrêter de monter.",
       micros: ["cm1_voix_intensite"],
-    },
-    {
-      titre: "Le défi",
-      donnees: "Tu dois lire une page entière devant la classe.",
-      schema: troisReglagesEnsemble,
-      question: "Que dois-tu tenir en même temps ?",
-      solution:
-        "LES TROIS RÉGLAGES : le volume, le débit, la régularité. Chacun est facile tout seul ; c'est ensemble, et sur une page entière, que cela devient un exercice. Et n'oublie pas la raison de la lenteur : tu es le seul de la salle à connaitre déjà la phrase.",
-      micros: ["cm1_voix_defi"],
     },
   ],
   pieges: [
-    "Monter le volume quand on te dit qu'on ne comprend pas : mauvais bouton.",
-    "Crier au lieu de poser sa voix : cela fatigue et déforme les mots.",
+    "Monter le volume quand on te dit qu'on ne comprend pas.",
+    "Crier au lieu de poser sa voix : ça fatigue et ça abime les mots.",
     "Se régler sur le premier rang : la moitié de la classe n'entend pas.",
     "Lire à la vitesse où tu comprends : les autres découvrent la phrase.",
-    "Accélérer puis ralentir : l'auditoire ne peut jamais se caler.",
-    "Sauter les pauses : elles donnent le temps de comprendre.",
-    "Découvrir le texte devant la classe : on bute alors en public.",
+    "Découvrir le texte devant la classe : tu butes alors en public.",
   ],
   aRetenir: [
-    "Trois boutons indépendants : le volume, le débit, le rythme.",
-    "Plus fort ne veut pas dire plus clair — on peut être audible et incompris.",
-    "Le volume se règle sur le dernier rang ; une voix qui porte ne crie pas.",
-    "Tu es le seul à connaitre déjà la phrase : lis plus lentement que tu ne comprends.",
-    "L'aisance vient avant le ton : on lit en silence d'abord.",
+    "Trois boutons : le volume, le débit, le rythme.",
+    "Plus fort ne veut pas dire plus clair.",
+    "Le volume se règle sur le dernier rang.",
+    "Tu connais déjà la phrase : lis plus lentement que tu ne la comprends.",
+    "On lit le texte en silence avant de le dire.",
   ],
   entrainement: [
     {
-      question: "« Avant de lire un texte long devant la classe, la meilleure préparation est de… »",
-      correction: "Le lire d'abord en silence pour repérer les mots difficiles.",
+      question: "Avant de lire un texte devant la classe, que fais-tu ?",
+      correction: "Tu le lis en silence pour repérer les mots difficiles.",
       micros: ["cm1_flue_expressive"],
     },
     {
-      question: "« À quoi sert une PAUSE dans une lecture à voix haute ? »",
-      correction: "À marquer la ponctuation et à laisser comprendre.",
-      micros: ["cm1_voix_rythme"],
-    },
-    {
-      question: "Pourquoi le rythme doit-il être régulier ?",
-      correction: "Pour que l'auditoire puisse se caler dessus et suivre.",
+      question: "Pourquoi le rythme doit-il rester le même ?",
+      correction: "Pour que ceux qui écoutent puissent se caler dessus.",
       micros: ["cm1_voix_rythme"],
     },
     {
       question: "On te dit « on ne comprend rien ». Que règles-tu ?",
-      correction: "Le débit — tu ralentis. Pas le volume.",
+      correction: "Le débit : tu ralentis. Pas le volume.",
       micros: ["cm1_voix_intensite"],
     },
     {
       question: "Sur qui règles-tu ton volume ?",
-      correction: "Sur le dernier rang : s'il entend, tout le monde entend.",
+      correction: "Sur le dernier rang.",
       micros: ["cm1_voix_intensite"],
     },
     {
@@ -497,13 +358,9 @@ export const slidesLectureVoixHauteCm1: ClasseSlide[] = [
     badge: "Lire à voix haute - CM1",
     section: {
       type: "objectif",
-      phrase: "Plus fort ne veut pas dire plus clair",
-      sousPhrase:
-        "Le volume et le débit sont deux boutons différents. On les confond tout le temps.",
-      encadre: {
-        titre: "L'idée",
-        texte: "On peut être parfaitement audible et parfaitement incompréhensible.",
-      },
+      phrase: "Plus fort n'est pas plus clair",
+      sousPhrase: "Le volume et le débit sont deux boutons différents.",
+      encadre: { titre: "L'idée", texte: "On peut t'entendre parfaitement et ne rien suivre." },
     },
   },
   {
@@ -512,13 +369,12 @@ export const slidesLectureVoixHauteCm1: ClasseSlide[] = [
     section: {
       type: "cartes",
       cartes: [
-        { titre: "Le volume", texte: "Pour être ENTENDU. Se règle sur le dernier rang." },
-        { titre: "Le débit", texte: "Pour être COMPRIS. Se baisse quand on décroche." },
-        { titre: "Le rythme", texte: "Pour être SUIVI. Régulier, pas rapide ni lent." },
-        { titre: "⛔ L'erreur", texte: "Répondre à « je ne comprends pas » par du volume." },
+        { titre: "Le volume", texte: "Pour être entendu. Se règle sur le dernier rang." },
+        { titre: "Le débit", texte: "Pour être compris. Se baisse quand on décroche." },
+        { titre: "Le rythme", texte: "Pour être suivi. Toujours pareil." },
       ],
     },
-    schema: grilleTroisBoutons,
+    schema: troisBoutons,
   },
   {
     titre: "Pourquoi tu vas trop vite",
@@ -526,54 +382,23 @@ export const slidesLectureVoixHauteCm1: ClasseSlide[] = [
     section: {
       type: "etapes",
       etapes: [
-        "Tes yeux prennent la phrase avant ta bouche.",
-        "Tu ne lis pas : tu REDIS ce que tu viens de lire.",
-        "Les autres, eux, la découvrent au même instant.",
-        "⭐ Il faut donc lire plus lentement que tu ne comprends.",
+        "Tes yeux lisent la phrase avant ta bouche.",
+        "Tu ne la découvres pas : tu la redis.",
+        "Les autres, eux, l'entendent pour la première fois.",
       ],
     },
-    schema: leLecteurSaitDeja,
-  },
-  {
-    titre: "Une voix qui porte ne crie pas",
-    badge: "Lire à voix haute - CM1",
-    section: {
-      type: "duo",
-      gauche: {
-        titre: "Crier",
-        contenu: "Fatigue en trois minutes, et déforme les mots. Plus fort, moins clair.",
-      },
-      droite: {
-        titre: "Porter",
-        contenu: "Voix posée, appuyée sur le souffle. Tient une page entière.",
-      },
-    },
-    schema: crierNestPasParler,
-  },
-  {
-    titre: "Épidaure",
-    badge: "Lire à voix haute - CM1",
-    section: {
-      type: "etapes",
-      etapes: [
-        "Avant les micros, il fallait porter sa voix devant des milliers de gens.",
-        "Le théâtre d'Épidaure porte une voix posée à plus de cinquante mètres.",
-        "Les gradins de pierre filtrent les bruits et renvoient le son.",
-        "⭐ On a construit mieux plutôt que de crier plus fort.",
-      ],
-    },
-    schema: fondDeLaSalle,
+    schema: toiEtEux,
   },
   {
     titre: "À vous",
     badge: "Lire à voix haute - CM1",
     section: {
       type: "exercice",
-      enonce: "On te dit : « On ne comprend rien. » Tu montes la voix.",
+      enonce: "On te dit : « on ne comprend rien ». Tu montes la voix.",
       question: "Est-ce le bon réglage ?",
       indice: "Relis exactement ce qu'on t'a dit.",
       correction:
-        "NON. On te dit qu'on ne COMPREND pas, pas qu'on n'ENTEND pas. Il faut RALENTIR. Monter le volume rend la même chose incompréhensible, mais plus fort.",
+        "Non. On te dit qu'on ne comprend pas, pas qu'on n'entend pas. Il faut ralentir.",
     },
     schema: pasLeBonBouton,
   },
