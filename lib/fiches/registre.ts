@@ -461,6 +461,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Ce n'est pas la magie qui fait le conte : c'est que personne ne s'en étonne. Le merveilleux, l'étrange, et le héros dépassé.",
   },
+  "francais/cm1/culture-soi-et-les-autres": {
+    titre: "Morale, poésie et les autres en CM1 (2026-2027)",
+    resume:
+      "Une histoire ne dit pas ce qu'elle veut dire : elle le montre. Un drap pour la mer, un renard pour un flatteur.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
