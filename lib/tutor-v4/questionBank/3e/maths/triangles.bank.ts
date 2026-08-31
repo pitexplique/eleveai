@@ -45,7 +45,11 @@ function triangleCanvas(params: {
     C: { x: number; y: number };
   };
   labels?: { A?: string; B?: string; C?: string };
-  sideLabels?: { AB?: string; BC?: string; AC?: string };
+  // ⛔ `CA`, PAS `AC` — corrigé le 31/08/2026. `TriangleCanvas` ne lit que
+  // `AB`, `BC` et `CA` : une étiquette écrite sur `AC` était silencieusement
+  // ignorée, et le côté restait nu. Même faute qu'en 4e (cosinus, corrigé le
+  // 30/08) et dans la trigonométrie de 3e (vingt-neuf occurrences, ce jour).
+  sideLabels?: { AB?: string; BC?: string; CA?: string };
   angleLabels?: { A?: string; B?: string; C?: string };
   marks?: {
     equalSides?: string[][];
@@ -109,7 +113,7 @@ export const trianglesBank: TutorBankItemV4[] = [
               B: { x: 60, y: 205 },
               C: { x: 260, y: 205 },
             },
-            sideLabels: { AB: `${cote} cm`, BC: `${cote} cm`, AC: `${cote} cm` },
+            sideLabels: { AB: `${cote} cm`, BC: `${cote} cm`, CA: `${cote} cm` },
             marks: { equalSides: [["AB", "BC", "AC"]] },
           }),
         };
@@ -139,7 +143,7 @@ export const trianglesBank: TutorBankItemV4[] = [
               B: { x: 65, y: 205 },
               C: { x: 255, y: 205 },
             },
-            sideLabels: { AB: `${egal} cm`, AC: `${egal} cm`, BC: `${base} cm` },
+            sideLabels: { AB: `${egal} cm`, CA: `${egal} cm`, BC: `${base} cm` },
             marks: { equalSides: [["AB", "AC"]] },
           }),
         };
@@ -170,7 +174,7 @@ export const trianglesBank: TutorBankItemV4[] = [
             B: { x: 55, y: 205 },
             C: { x: 270, y: 190 },
           },
-          sideLabels: { AB: `${a} cm`, BC: `${b} cm`, AC: `${c} cm` },
+          sideLabels: { AB: `${a} cm`, BC: `${b} cm`, CA: `${c} cm` },
         }),
       };
     },
