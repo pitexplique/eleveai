@@ -466,6 +466,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Une histoire ne dit pas ce qu'elle veut dire : elle le montre. Un drap pour la mer, un renard pour un flatteur.",
   },
+  "francais/cm1/culture-lecteur": {
+    titre: "Devenir lecteur en CM1 (2026-2027)",
+    resume:
+      "Un carnet de lecture ne sert pas à prouver qu'on a lu. Ce qui compte : ce que tu as aimé, et l'endroit exact.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
