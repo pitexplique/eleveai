@@ -43,6 +43,8 @@ import { trianglesBank } from "./triangles.bank";
 import { ordresGrandeurBank } from "./ordres-grandeur.bank";
 import { divisibiliteBank } from "./divisibilite.bank";
 import { nombresPremiersBank } from "./nombres-premiers.bank";
+import { reperageBank } from "./reperage.bank";
+import { visionEspaceBank } from "./vision-espace.bank";
 
 
 // =========================
@@ -61,6 +63,8 @@ export const maths4eQuestionBank: TutorBankItemV4[] = [
   ...ordresGrandeurBank,
   ...divisibiliteBank,
   ...nombresPremiersBank,
+  ...reperageBank,
+  ...visionEspaceBank,
   ...transformationsBank,
   ...probabilitesBank,
   ...frequencesBank,

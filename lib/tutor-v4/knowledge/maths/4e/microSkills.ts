@@ -210,6 +210,99 @@ export const microSkills: MicroSkillSource[] = [
   },
 
   /* =========================
+     REPÉRAGE  (ouvert le 31/08/2026 — le dernier bloc du programme)
+
+     ⭐ TROIS MICROS REPRENNENT LEURS IDENTIFIANTS DE LA 6e :
+     `abscisse_lire`, `abscisse_placer`, `abscisse_fraction`. La 4e y ajoute ce
+     que le BO place ici — le plan muni d'un repère, le pavé, la sphère.
+
+     ⚠️ LE PRÉALABLE A ÉTÉ LEVÉ LE 30/08 : deux gabarits de translation
+     comptaient l'ordonnée VERS LE BAS. Dans un repère, l'axe des ordonnées
+     MONTE, et tous les items d'ici le disent.
+  ========================= */
+  {
+    id: "abscisse_lire",
+    label: "Lire l'abscisse d'un point sur une droite graduée",
+    notionId: "reperage",
+    prerequis: [],
+  },
+  {
+    id: "abscisse_placer",
+    label: "Placer un point d'abscisse donnée",
+    notionId: "reperage",
+    prerequis: ["abscisse_lire"],
+  },
+  {
+    id: "abscisse_fraction",
+    label: "Repérer un nombre rationnel sur une droite graduée",
+    notionId: "reperage",
+    prerequis: ["abscisse_lire", "fraction_decimal"],
+  },
+  {
+    id: "repere_plan",
+    label: "Lire et placer des coordonnées dans un repère du plan",
+    notionId: "reperage",
+    prerequis: ["abscisse_placer"],
+  },
+  {
+    id: "repere_espace",
+    label: "Se repérer dans un pavé droit avec trois coordonnées",
+    notionId: "reperage",
+    prerequis: ["repere_plan"],
+  },
+  {
+    id: "repere_terre",
+    label: "Se repérer sur la sphère : latitude et longitude",
+    notionId: "reperage",
+    prerequis: ["repere_plan"],
+  },
+  {
+    id: "repere_defi",
+    label: "Défis sur le repérage",
+    notionId: "reperage",
+    prerequis: ["repere_espace", "repere_terre", "abscisse_fraction"],
+  },
+
+  /* =========================
+     VISION DANS L'ESPACE  (ouverte le 31/08/2026)
+
+     ⭐ La notion reprend l'IDENTIFIANT DE LA 6e (`vision_espace`) et deux de
+     ses micros (`vision_vues`, `vision_representation`) : c'est le même objet,
+     un an plus tard. La 4e ajoute la RECONNAISSANCE nommée des sept solides du
+     BO et les SECTIONS PLANES.
+  ========================= */
+  {
+    id: "vision_reconnaitre",
+    label: "Reconnaître et nommer les solides usuels",
+    notionId: "vision_espace",
+    prerequis: [],
+  },
+  {
+    id: "vision_vues",
+    label: "Lire les vues de face, de dessus et de côté",
+    notionId: "vision_espace",
+    prerequis: ["vision_reconnaitre"],
+  },
+  {
+    id: "vision_representation",
+    label: "Perspective cavalière et patron",
+    notionId: "vision_espace",
+    prerequis: ["vision_reconnaitre"],
+  },
+  {
+    id: "vision_section",
+    label: "Reconnaître la section plane d'un solide",
+    notionId: "vision_espace",
+    prerequis: ["vision_representation"],
+  },
+  {
+    id: "vision_defi",
+    label: "Défis sur les solides et leurs représentations",
+    notionId: "vision_espace",
+    prerequis: ["vision_section", "vision_vues"],
+  },
+
+  /* =========================
      DIVISIBILITÉ  (ouverte le 30/08/2026)
 
      ⭐ QUATRE MICROS REPRENNENT LEURS IDENTIFIANTS DE LA 5e, à l'identique —

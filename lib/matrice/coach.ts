@@ -127,6 +127,37 @@ export const NOTION_COACH_MATHS: TableNotions = {
   ratio: {
     "5e": "prop_ratio_pourcentage", "4e": "prop_ratio_pourcentage",
   },
+  // ⭐ AJOUTÉES LE 31/08/2026 avec les deux notions du dernier bloc de 4e.
+  // ⛔⛔ Et c'est le plus gros trou de matrice trouvé : « repérage »,
+  // « coordonnées », « abscisse », « latitude », « solide », « cube »,
+  // « patron » — dix-huit mots n'ouvraient RIEN, alors que `reperage` existe au
+  // CP et se poursuit jusqu'en 4e, et qu'un solide se travaille dans six
+  // classes. Six ans de scolarité sans porte d'entrée.
+  // ⚠️ Le collège n'a pas de notion de repérage entre la 6e et la 3e : ces
+  // cases-là sont VIDES, et c'est le programme qui le dit, pas un oubli.
+  reperage: {
+    cp: "reperage",
+    ce1: "reperage",
+    ce2: "reperage",
+    cm1: "reperage",
+    cm2: "reperage",
+    "4e": "reperage",
+  },
+  // ⚠️ L'identifiant change trois fois selon la classe — `figures_solides` au
+  // CP, `solides` au CE1 et au CE2, `solide` au CM1 et au CM2, `vision_espace`
+  // en 6e et en 4e, `sections_solides` en 3e. Ils se LISENT dans les
+  // `notions.ts`, ils ne se devinent pas.
+  solides: {
+    cp: "figures_solides",
+    ce1: "solides",
+    ce2: "solides",
+    cm1: "solide",
+    cm2: "solide",
+    "6e": "vision_espace",
+    "5e": "volume_solide",
+    "4e": "vision_espace",
+    "3e": "sections_solides",
+  },
   // ⭐ AJOUTÉES LE 30/08/2026 avec les deux notions d'arithmétique de 4e. ⛔ Et
   // le trou dépassait la 4e de loin : « divisibilité », « diviseurs » et
   // « nombre premier » n'ouvraient RIEN, alors que la 5e a `divisibilite` et la

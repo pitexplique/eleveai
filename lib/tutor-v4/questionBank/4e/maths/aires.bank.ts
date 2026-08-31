@@ -27,6 +27,19 @@ function randomChoice<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+function shuffle<T>(arr: T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+// ⚠️ On écarte les doublons ET la bonne réponse, puis on coupe à trois : il faut
+// donc fournir PLUS de quatre leurres, sinon le QCM tombe à trois lignes.
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct)
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
 type GridCell = [row: number, col: number];
 
 function rectangleCells(height: number, width: number): GridCell[] {
@@ -1076,6 +1089,72 @@ export const airesBank: TutorBankItemV4[] = [
           `Calcul : $(${w} + ${h}) \\times 2 = ${perimetre}$ unités.\n\n` +
           `Conclusion : le périmètre vaut $${perimetre}$ unités. ⚠️ L'aire, elle, vaut $${cells.length}$ unités². ⭐ Deux figures peuvent avoir le même périmètre et des aires très différentes — c'est ce qui prouve que ce sont deux grandeurs distinctes.`,
         canvas: figureLibreFromCells(h, w, cells, false),
+      };
+    },
+  },
+  {
+    // ⭐ SECOND GABARIT AJOUTÉ LE 31/08/2026. `aire_comprendre` était la
+    // DERNIÈRE micro de la classe à n'en avoir qu'un — et le mode complet du
+    // coach oppose deux questions, donc il lui en faut deux.
+    // ⭐ Il porte la propriété qui sépare vraiment l'aire du périmètre : deux
+    // figures de MÊME PÉRIMÈTRE peuvent avoir des aires très différentes.
+    // C'est le seul argument qui convainc qu'il s'agit de deux grandeurs.
+    kind: "template",
+    id: "4e_aire_comprendre_x7_meme_perimetre",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_comprendre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Calcule les deux aires : le même tour n'oblige à rien.",
+    tags: ["aire", "comprendre", "perimetre", "qcm", "template", "canvas"],
+    generate: () => {
+      // Deux rectangles de même demi-périmètre, donc de même périmètre.
+      const somme = randomInt(9, 14);
+      const a1 = randomInt(1, Math.floor(somme / 2) - 1);
+      const b1 = somme - a1;
+      let a2 = randomInt(1, Math.floor(somme / 2));
+      while (a2 === a1) a2 = randomInt(1, Math.floor(somme / 2));
+      const b2 = somme - a2;
+      const aire1 = a1 * b1;
+      const aire2 = a2 * b2;
+      const correct =
+        aire1 === aire2
+          ? "elles ont la même aire"
+          : aire1 > aire2
+            ? "la première a la plus grande aire"
+            : "la seconde a la plus grande aire";
+      return {
+        text: `Deux rectangles ont le MÊME périmètre, ${2 * somme} unités. Le premier mesure ${a1} sur ${b1}, le second ${a2} sur ${b2}. Que peut-on dire de leurs aires ?`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          "elles ont la même aire",
+          "la première a la plus grande aire",
+          "la seconde a la plus grande aire",
+          "on ne peut pas comparer sans les dessiner",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : le PÉRIMÈTRE mesure le tour, l'AIRE mesure la surface. Ce sont deux grandeurs indépendantes.\n\n" +
+          "Méthode : on calcule les deux aires et on compare — le périmètre commun ne dit rien sur elles.\n\n" +
+          `Calcul : $${a1} \\times ${b1} = ${aire1}$ et $${a2} \\times ${b2} = ${aire2}$.\n\n` +
+          (aire1 === aire2
+            ? "Conclusion : ici les aires sont égales, mais c'est un hasard des dimensions choisies — pas une conséquence du périmètre commun."
+            : `Conclusion : ⭐ même tour, aires différentes. C'est LA preuve que ce sont deux grandeurs distinctes : plus un rectangle est allongé, plus son aire est petite à périmètre égal. Le carré est celui qui en attrape le plus.`),
+        canvas: {
+          kind: "tableau_donnees",
+          headers: ["rectangle", "périmètre", "aire"],
+          rows: [
+            { values: [`${a1} × ${b1}`, String(2 * somme), String(aire1)] },
+            { values: [`${a2} × ${b2}`, String(2 * somme), String(aire2)] },
+          ],
+          highlight: { col: 2 },
+          caption: "même tour, aires différentes",
+          display: { compact: true, striped: true },
+          size: { width: 320 },
+        },
       };
     },
   },

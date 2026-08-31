@@ -177,6 +177,27 @@ export const NOTIONS: NotionLexique[] = [
   // GAGNE : « multiple », « diviseur » et « division euclidienne » tombaient
   // dans le calcul, qui n'a AUCUNE entrée en 4e — l'élève arrivait donc sur la
   // page générale du coach.
+  // ⛔⛔ DEUX ENTRÉES AJOUTÉES LE 31/08/2026, ET C'EST LE PLUS GROS TROU DE LA
+  // MATRICE TROUVÉ JUSQU'ICI. Mesuré en appelant `lireNotion` : « repérage »,
+  // « coordonnées », « abscisse », « latitude », « solide », « cube »,
+  // « patron », « perspective » — DIX-HUIT MOTS renvoyaient `null`, alors que
+  // `reperage` existe au CP, au CE1, au CE2, au CM1, au CM2 et en 4e, et qu'un
+  // solide se travaille dans six classes dont la 3e avec `sections_solides`.
+  // Six ans de scolarité, et aucune porte d'entrée.
+  {
+    // ⚠️ « repère » seul n'est PAS un alias : « je ne me repère pas dans les
+    // fractions » est une phrase d'élève ordinaire, et elle ouvrirait la
+    // géométrie au lieu des fractions.
+    id: "reperage", label: "le repérage", matiere: "maths",
+    alias: ["reperage", "se reperer", "coordonnees", "abscisse", "ordonnee", "latitude", "longitude", "droite graduee", "repere orthogonal"],
+  },
+  {
+    // ⚠️ « boule » et « section » ne sont pas des alias : la boule de pétanque
+    // d'un énoncé de proportionnalité et la section d'un texte de français
+    // leur voleraient des questions.
+    id: "solides", label: "les solides", matiere: "maths",
+    alias: ["solide", "solides", "cube", "pave", "pave droit", "cylindre", "cone", "pyramide", "patron", "perspective", "perspective cavaliere", "section plane"],
+  },
   {
     id: "divisibilite", label: "la divisibilité", matiere: "maths",
     alias: ["divisibilite", "divisible", "diviseur", "diviseurs", "multiple", "multiples", "division euclidienne", "critere de divisibilite", "criteres de divisibilite", "quotient et reste"],

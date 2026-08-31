@@ -160,8 +160,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
       "Utiliser les nombres pour comparer, calculer et résoudre des problèmes — Comparaisons de nombres",
     objectif: "Repérer et placer un nombre rationnel sur une droite graduée.",
     page: 131,
-    micros: [],
-    note: "⛔ TROU. La 6e a `abscisse_lire`, `abscisse_placer`, `abscisse_fraction` ; la 4e n'a rien. Voir aussi 4e-D-espace-3 : le repérage est un trou de bout en bout.",
+    micros: ["abscisse_fraction","abscisse_lire","abscisse_placer"],
+    note: "✅ COMBLÉ LE 31/08/2026 par la notion `reperage`, qui reprend les trois identifiants de la 6e. ⭐ La 4e y ajoute ce que la puce demande vraiment : le RATIONNEL, c'est-à-dire l'unité découpée en parts et l'encadrement entre deux entiers par la division euclidienne. ⚠️ Le piège traité est la fraction RETOURNÉE — le dénominateur compte les parts d'UNE UNITÉ, jamais les parts comptées.",
   },
   {
     id: "4e-A-comparaisons-5",
@@ -971,8 +971,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Représenter l'espace",
     objectif: "Abscisse, ordonnée, altitude.",
     page: 136,
-    micros: [],
-    note: "⛔ TROU. Les mots n'existent en 4e que par accident : « altitude » dans des énoncés de nombres relatifs, « abscisse » et « ordonnée » dans deux gabarits de translation. ⚠️⚠️ ET CES DEUX GABARITS SONT FAUX POUR UN REPÈRE : `4e_sym_translation_tpl_2_coordonnees` et `4e_sym_translation_tpl_4` comptent l'ordonnée VERS LE BAS (« ordonnée écran »), si bien que la réponse mathématiquement juste y est proposée comme LEURRE. À corriger avant d'ouvrir le repérage, sinon le trou se comblera par-dessus une erreur.",
+    micros: ["repere_plan","repere_espace"],
+    note: "✅ COMBLÉ LE 31/08/2026. ⭐⭐ ET UN GABARIT NOMME EXPLICITEMENT L'ERREUR DE L'ÉCRAN : jusqu'au 30/08, deux gabarits de translation de cette classe comptaient l'ordonnée VERS LE BAS, si bien que l'élève a pu l'apprendre. Ils sont corrigés, et `4e_repere_plan_tpl_3_sens_des_axes` reprend le réflexe : dans un repère l'axe des ordonnées MONTE, sur un écran d'ordinateur il descend. ⭐ L'ALTITUDE est la troisième coordonnée, traitée avec le pavé droit.",
   },
   {
     id: "4e-D-espace-2",
@@ -980,8 +980,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Représenter l'espace",
     objectif: "Latitude, longitude.",
     page: 136,
-    micros: [],
-    note: "⛔ TROU. Zéro occurrence de « latitude » en 4e.",
+    micros: ["repere_terre"],
+    note: "✅ COMBLÉ LE 31/08/2026. ⭐ Le moyen de ne jamais les confondre est mesurable et non mnémotechnique : la LATITUDE ne dépasse jamais 90° puisque le pôle est le maximum, alors que la LONGITUDE monte à 180°. Un angle de plus de 90° ne peut donc être qu'une longitude. ⚠️ Et c'est la latitude qui porte NORD ou SUD, donc l'hémisphère — La Réunion à 21° SUD, d'où l'hiver en juillet.",
   },
   {
     id: "4e-D-espace-3",
@@ -990,8 +990,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "(Se) repérer sur une droite graduée, dans le plan muni d'un repère orthogonal, dans un parallélépipède rectangle, sur une sphère.",
     page: 136,
-    micros: [],
-    note: "⛔ TROU sur les quatre supports. Voir 4e-A-comparaisons-4 pour la droite graduée et 4e-D-espace-1 pour l'erreur d'orientation du plan.",
+    micros: ["abscisse_lire","repere_plan","repere_espace","repere_terre","repere_defi"],
+    note: "✅ COMBLÉ LE 31/08/2026 sur les QUATRE supports que la puce énumère — droite graduée, plan, parallélépipède, sphère. ⭐ Un gabarit dédié fait travailler ce qui les relie : le nombre de coordonnées est la DIMENSION DU SUPPORT, pas celle du monde autour. La surface de la Terre demande deux nombres alors qu'elle est dans l'espace, parce qu'on ne peut pas la quitter — un avion, lui, en demande trois.",
   },
   {
     id: "4e-D-espace-4",
@@ -1000,8 +1000,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Reconnaître des solides (pavé droit, cube, prisme, cylindre, pyramide, cône, boule).",
     page: 136,
-    micros: [],
-    note: "⛔ TROU. Le pavé, le prisme et le cylindre traversent `volume_solide`, mais toujours comme SUPPORT d'un calcul de volume : aucun item ne demande de reconnaître ou de nommer un solide.",
+    micros: ["vision_reconnaitre"],
+    note: "✅ COMBLÉ LE 31/08/2026 par la notion `vision_espace`, qui reprend l'identifiant de la 6e. ⭐⭐ LE TYPE `SolideKind` PORTE EXACTEMENT LES SEPT SOLIDES DE CETTE PUCE — cube, pavé droit, prisme, cylindre, cône, boule, pyramide — et le canvas les dessine tous les sept. La table de la banque EST la puce du programme. ⚠️ Un item figé traite l'inclusion : tout cube est un pavé droit, l'inverse est faux.",
   },
   {
     id: "4e-D-espace-5",
@@ -1010,8 +1010,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif:
       "Construire et mettre en relation des représentations de ces solides (vues en perspective cavalière, de face, de dessus, sections planes, patrons, etc.).",
     page: 136,
-    micros: [],
-    note: "⛔ TROU. La 6e a la notion `vision_espace` (vues, perspective, patron, dénombrement) ; la 4e n'a rien.",
+    micros: ["vision_vues","vision_representation","vision_section","vision_defi"],
+    note: "✅ COMBLÉ LE 31/08/2026 sur les quatre représentations citées — vues, perspective cavalière, sections planes, patrons. ⭐ Les SECTIONS sont ce que la 4e ajoute à la 6e. ⚠️ Deux faits que les items font travailler et qui ne sont pas des détails : la perspective cavalière MENT sur les longueurs et les angles qui fuient mais jamais sur le parallélisme, donc on ne mesure jamais dessus ; et LA BOULE N'A PAS DE PATRON, ce qui est la raison pour laquelle aucune carte du monde n'est exacte.",
   },
   {
     id: "4e-D-espace-6",

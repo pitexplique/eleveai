@@ -53,6 +53,17 @@ export const bo: KnowledgeBoCompetence[] = [
     boId: "BO4N6",
     label: "Nombres premiers et décomposition",
   },
+  // ⭐ AJOUTÉS LE 31/08/2026 avec le dernier bloc du programme, « Représenter
+  // l'espace ». Deux compétences et non une : LOCALISER avec des nombres d'un
+  // côté, VOIR dans l'espace de l'autre.
+  {
+    boId: "BO4E1",
+    label: "Se repérer sur une droite, dans le plan, sur la Terre",
+  },
+  {
+    boId: "BO4E2",
+    label: "Solides et représentations",
+  },
   {
     boId: "BO4P1",
     label: "Proportionnalité",

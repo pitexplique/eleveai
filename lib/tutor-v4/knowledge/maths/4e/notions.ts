@@ -81,6 +81,33 @@ export const notions: NotionSource[] = [
     levels: [1, 2, 3],
   },
   {
+    // ⭐ NOTION OUVERTE LE 31/08/2026 — le DERNIER bloc du programme de 4e.
+    // Elle reprend les identifiants de la 6e pour la droite graduée
+    // (`abscisse_lire`, `abscisse_placer`, `abscisse_fraction`) et ajoute ce
+    // que le BO place ici : le plan muni d'un repère, le pavé, la sphère.
+    // ⚠️ SON PRÉALABLE A ÉTÉ LEVÉ LE 30/08 : deux gabarits de translation
+    // comptaient l'ordonnée VERS LE BAS, si bien que la réponse juste y était
+    // un leurre. Ouvrir le repérage par-dessus aurait figé l'erreur.
+    id: "reperage",
+    label: "Se repérer sur une droite, dans le plan, sur la Terre",
+    boId: "BO4E1",
+    prerequis: ["relatif_operation", "fraction_nombre"],
+    levels: [1, 2, 3],
+  },
+  {
+    // ⭐ NOTION OUVERTE LE 31/08/2026, ET ELLE REPREND L'IDENTIFIANT DE LA 6e
+    // (`vision_espace`) : c'est le même objet, un an plus tard, avec les
+    // sections planes en plus.
+    // ⭐ LA FRACTURE AVEC `reperage` EST À SENS UNIQUE : se repérer DANS UN
+    // PAVÉ a besoin de savoir ce qu'est un pavé, alors que reconnaître un
+    // solide n'a aucun besoin de coordonnées.
+    id: "vision_espace",
+    label: "Solides et représentations",
+    boId: "BO4E2",
+    prerequis: ["volume_solide"],
+    levels: [1, 2, 3],
+  },
+  {
     // ⭐ NOTION OUVERTE LE 30/08/2026. Elle REPREND L'IDENTIFIANT DE LA 5e, qui
     // porte déjà `div_multiple_diviseur`, `div_critere_2_5_10`,
     // `div_critere_3_9`, `div_lister_diviseurs` et `div_defi` : la progression

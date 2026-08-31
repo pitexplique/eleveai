@@ -87,6 +87,25 @@ const supportLinks: Record<string, string[]> = {
   ],
 
   // =========================
+  // REPÉRAGE ET VISION DANS L'ESPACE
+  // =========================
+  // ⭐ Le repérage descend vers les RELATIFS et les FRACTIONS : c'est là que
+  // l'élève bloque, jamais dans la lecture du dessin. Une abscisse négative ou
+  // fractionnaire est un nombre avant d'être une position.
+  abscisse_placer: ["abscisse_lire", "relatif_calcul"],
+  abscisse_fraction: ["abscisse_lire", "fraction_decimal", "fraction_comparer"],
+  repere_plan: ["abscisse_placer", "abscisse_lire", "relatif_calcul"],
+  // ⚠️ Se repérer dans un pavé demande de VOIR le pavé : `vision_reconnaitre`
+  // est un support, et c'est la fracture qui sépare les deux notions.
+  repere_espace: ["repere_plan", "vision_reconnaitre", "volume_pave"],
+  repere_terre: ["repere_plan", "abscisse_lire"],
+  repere_defi: ["repere_espace", "repere_terre", "repere_plan"],
+  vision_vues: ["vision_reconnaitre"],
+  vision_representation: ["vision_reconnaitre", "aire_perimetre_rectangle"],
+  vision_section: ["vision_representation", "vision_reconnaitre"],
+  vision_defi: ["vision_section", "vision_vues", "vision_representation"],
+
+  // =========================
   // DIVISIBILITÉ ET NOMBRES PREMIERS
   // =========================
   // ⭐ La remédiation descend vers les TABLES DE MULTIPLICATION et le calcul :
