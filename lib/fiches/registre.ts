@@ -441,6 +441,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Le volume, le débit et le rythme sont trois boutons différents. Plus fort ne veut pas dire plus clair — et le dernier rang donne la mesure.",
   },
+  "francais/cm1/comprehension-textes": {
+    titre: "Comprendre un texte en CM1 (2026-2027)",
+    resume:
+      "Comprendre n'est pas un don : c'est une suite de gestes. Le premier surprend — on relit la question, pas le texte.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
