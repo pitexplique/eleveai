@@ -511,6 +511,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Il n'y a presque rien à deviner : l'explication est déjà dans la phrase, souvent juste après une virgule.",
   },
+  "francais/cm1/vocabulaire-relations": {
+    titre: "Familles de mots et contraires en CM1 (2026-2027)",
+    resume:
+      "Le contraire de content n'est ni joyeux ni ravi. Et tout cela sert au moment où tu te relis.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
