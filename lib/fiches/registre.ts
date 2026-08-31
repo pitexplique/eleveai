@@ -506,6 +506,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Participer, ce n'est pas donner la bonne réponse. Trois façons de prendre la parole, une seule demande de savoir.",
   },
+  "francais/cm1/vocabulaire-sens": {
+    titre: "Comprendre un mot inconnu en CM1 (2026-2027)",
+    resume:
+      "Il n'y a presque rien à deviner : l'explication est déjà dans la phrase, souvent juste après une virgule.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
