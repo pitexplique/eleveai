@@ -138,24 +138,64 @@ export default function FonctionGraphiqueCanvas({ figure }: Props) {
         <line x1={0} y1={xAxisY} x2={width} y2={xAxisY} stroke={COULEUR_AXES} strokeWidth={2.2} />
         <line x1={yAxisX} y1={0} x2={yAxisX} y2={height} stroke={COULEUR_AXES} strokeWidth={2.2} />
 
-        {Array.from({ length: xmax - xmin + 1 }, (_, i) => xmin + i).map((x) => {
-          const sx = toSvgX(x, xmin, xmax, width);
-          return (
-            <text key={`tx-${x}`} x={sx} y={xAxisY + 16} textAnchor="middle" fontSize="10" fill="#334155">
-              {x !== 0 ? formatNumber(x) : "0"}
-            </text>
-          );
-        })}
+        {/*
+          ⛔⛔ LES GRADUATIONS ÉTAIENT EN 10 px — CORRIGÉ LE 01/09/2026.
+          Le plancher de lisibilité mesuré sur téléphone de 375 px est de
+          11 px, et le `viewBox` de ce canvas vaut son champ `size` : réduire
+          la largeur ne rétrécissait pas davantage les chiffres, mais ne les
+          agrandissait pas non plus. Le défaut était donc DANS le canvas, et
+          il interdisait de l'employer dans une fiche — une fiche de fonctions
+          affines sans droite, ce qui n'avait aucun sens.
+          C'est le même remède que pour `solide_3d` le 24/08 : on monte la
+          police au lieu d'éviter le canvas.
 
-        {Array.from({ length: ymax - ymin + 1 }, (_, i) => ymin + i).map((y) => {
-          if (y === 0) return null;
-          const sy = toSvgY(y, ymin, ymax, height);
-          return (
-            <text key={`ty-${y}`} x={yAxisX + 5} y={sy - 4} fontSize="10" fill="#334155">
-              {formatNumber(y)}
-            </text>
-          );
-        })}
+          ⚠️ MAIS MONTER LA POLICE SEULE AURAIT FAIT CHEVAUCHER LES GRANDES
+          PLAGES. Ce canvas étiquette CHAQUE entier : sur −8..8 dans une carte
+          de 222 px, cela fait 17 étiquettes à 13,9 px d'intervalle, pour des
+          libellés comme « −8 » qui en mesurent 14. D'où le PAS ADAPTATIF :
+          on n'écrit un chiffre que s'il reste au moins 22 px depuis le
+          précédent, sinon on saute. Les traits de graduation, eux, restent
+          tous tracés — c'est le CHIFFRE qui s'espace, pas la graduation.
+        */}
+        {(() => {
+          const nbX = xmax - xmin + 1;
+          const ecartX = width / Math.max(1, nbX - 1);
+          const pasX = Math.max(1, Math.ceil(22 / ecartX));
+          return Array.from({ length: nbX }, (_, i) => xmin + i)
+            .filter((x) => x === 0 || (x - xmin) % pasX === 0)
+            .map((x) => {
+              const sx = toSvgX(x, xmin, xmax, width);
+              // ⚠️ L'ÉTIQUETTE EST CENTRÉE SUR SA VALEUR, et `toSvgX` envoie
+              // `xmin` sur 0 et `xmax` sur `width` : aux deux extrémités, la
+              // moitié du chiffre sortait du viewBox. Mesuré le 01/09/2026 —
+              // quatre graduations débordaient sur la fiche des fonctions
+              // affines. On les ramène dans le cadre plutôt que de les
+              // supprimer : un axe sans ses bornes se lit mal.
+              const marge = 10;
+              const sxClamp = Math.min(width - marge, Math.max(marge, sx));
+              return (
+                <text key={`tx-${x}`} x={sxClamp} y={xAxisY + 17} textAnchor="middle" fontSize="12" fill="#334155">
+                  {x !== 0 ? formatNumber(x) : "0"}
+                </text>
+              );
+            });
+        })()}
+
+        {(() => {
+          const nbY = ymax - ymin + 1;
+          const ecartY = height / Math.max(1, nbY - 1);
+          const pasY = Math.max(1, Math.ceil(16 / ecartY));
+          return Array.from({ length: nbY }, (_, i) => ymin + i)
+            .filter((y) => y !== 0 && (y - ymin) % pasY === 0)
+            .map((y) => {
+              const sy = toSvgY(y, ymin, ymax, height);
+              return (
+                <text key={`ty-${y}`} x={yAxisX + 5} y={sy - 4} fontSize="12" fill="#334155">
+                  {formatNumber(y)}
+                </text>
+              );
+            });
+        })()}
 
         {courbes.map((courbe) => (
           <path

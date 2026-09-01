@@ -46,6 +46,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "expressions-litterales-4e-cours-exercices-corriges.pdf",
   "factorisation-4e-cours-exercices-corriges.pdf",
   "figures-planes-cm2-cours-exercices-corriges.pdf",
+  "fonctions-affines-3e-cours-exercices-corriges.pdf",
   "fonctions-dans-la-phrase-2026-2027-5e-cours-exercices-corriges.pdf",
   "forme-d-un-verbe-radical-temps-personne-cm2-cours-exercices-corriges.pdf",
   "fractions-5e-cours-exercices-corriges.pdf",

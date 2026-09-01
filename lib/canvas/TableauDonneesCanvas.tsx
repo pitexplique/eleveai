@@ -74,6 +74,13 @@ export default function TableauDonneesCanvas({ figure: brute }: Props) {
 
   const compact = figure.display?.compact ?? false;
   const striped = figure.display?.striped ?? true;
+  /**
+   * La colonne de gauche n'a de raison d'être que si une ligne au moins la
+   * remplit. Un `label` vide ne compte pas : c'est une chaîne, pas une donnée.
+   */
+  const avecLabels = figure.rows.some(
+    (r) => typeof r.label === "string" && r.label.trim() !== ""
+  );
 
   const fontSize = compact ? "text-[12px]" : "text-sm";
   const padding = compact ? "px-2 py-1.5" : "px-3 py-2";
@@ -117,12 +124,25 @@ export default function TableauDonneesCanvas({ figure: brute }: Props) {
         <table className="w-full border-collapse overflow-hidden rounded-xl border border-slate-300">
           <thead>
             <tr>
-              {/* coin haut gauche */}
-              <th
-                className={`border border-slate-300 bg-slate-800 text-white ${padding} ${fontSize} font-black`}
-              >
-                Données
-              </th>
+              {/*
+                ⛔⛔ LA COLONNE « Données » S'AFFICHAIT TOUJOURS — corrigé le
+                01/09/2026. Le coin haut gauche et la première colonne étaient
+                rendus même quand AUCUNE ligne ne portait de `label` : le
+                tableau montrait alors un en-tête « Données » suivi d'une
+                colonne bleue entièrement vide. Mesuré : 121 fiches emploient
+                ce canvas, et l'écrasante majorité de leurs lignes n'ont pas de
+                `label` — c'est le cas par défaut, pas l'exception.
+                👉 La colonne ne s'affiche donc que si au moins une ligne a
+                quelque chose à y mettre. Les tableaux qui passent des `label`
+                (les tableaux croisés, notamment) ne changent pas d'un pixel.
+              */}
+              {avecLabels ? (
+                <th
+                  className={`border border-slate-300 bg-slate-800 text-white ${padding} ${fontSize} font-black`}
+                >
+                  Données
+                </th>
+              ) : null}
 
               {figure.headers.map((header, index) => (
                 <th
@@ -145,12 +165,14 @@ export default function TableauDonneesCanvas({ figure: brute }: Props) {
                     : "bg-white"
                 }
               >
-                {/* PREMIÈRE COLONNE */}
-                <td
-                  className={`border border-slate-300 bg-sky-100 text-slate-900 ${padding} ${fontSize} font-bold`}
-                >
-                  {row.label}
-                </td>
+                {/* PREMIÈRE COLONNE — seulement si des libellés existent. */}
+                {avecLabels ? (
+                  <td
+                    className={`border border-slate-300 bg-sky-100 text-slate-900 ${padding} ${fontSize} font-bold`}
+                  >
+                    {row.label}
+                  </td>
+                ) : null}
 
                 {row.values.map((value, colIndex) => {
                   const highlighted = isHighlighted(rowIndex, colIndex);

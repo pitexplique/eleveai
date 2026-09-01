@@ -394,6 +394,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Les sept solides et leur signature, les vues, le patron, la perspective et les sections — et pourquoi la boule n'a pas de patron, ce qui rend toute carte du monde fausse.",
   },
+  "maths/3e/affine-fonction": {
+    titre: "Fonctions affines",
+    resume:
+      "Ce qu'on décrivait en 4e s'écrit enfin : f(x) = ax + b. Le a incline la droite, le b dit où elle coupe l'axe — et le point de bascule décide entre deux offres.",
+  },
   "maths/4e/grandeur-composee": {
     titre: "Grandeurs composées et unités",
     resume:
