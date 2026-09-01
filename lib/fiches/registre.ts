@@ -566,6 +566,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "« Nous » finit toujours par -ons, aux trois temps : la marque de temps change, celle de personne tient bon.",
   },
+  "francais/cm1/conjugaison-passe-compose": {
+    titre: "Le passé composé et le choix du temps en CM1 (2026-2027)",
+    resume:
+      "Le temps ne se devine pas : « demain », « hier », « en ce moment » l'annoncent avant que tu écrives.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
