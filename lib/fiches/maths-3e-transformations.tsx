@@ -17,9 +17,20 @@
 // ⛔ On n'écrit donc NULLE PART « A' est le point tel que vecteur OA' = k·OA ».
 // ⭐ En revanche le « protocole de construction » EST au programme, nommément.
 // La fiche montre donc l'EFFET sur une figure et la CONSTRUCTION, et jamais la
-// définition. C'est aussi pourquoi le rapport négatif n'y est pas : ni le BO ni
-// aucun des 40 énoncés de la banque ne l'emploient. (Le canvas, lui, le sait
-// dessiner — le jour où le programme le demandera.)
+// définition.
+//
+// ⛔⛔ J'AVAIS ÉCARTÉ LE RAPPORT NÉGATIF, ET C'ÉTAIT UNE ERREUR DE RAISONNEMENT.
+// Argument d'origine : ni le BO ni aucun des 40 énoncés de la banque ne
+// l'emploient, donc il n'a pas sa place. Frédéric a répondu en une phrase :
+// « la configuration papillon, c'est où l'homothétie a un rapport négatif ».
+// 👉 Le papillon de Thalès EST au programme, il est interrogé trois fois par la
+// banque de 3e — et c'est exactement une homothétie de rapport négatif. Le
+// rapport négatif n'était donc pas absent du programme : il y était sous un
+// autre nom, dans un autre chapitre. Chercher le mot dans les banques ne
+// pouvait pas le trouver.
+// ⭐ Le centre est le point d'intersection des deux sécantes : O ici, A dans la
+// fiche de Thalès. Les deux fiches le disent maintenant, pour que l'élève voie
+// qu'il s'agit du même objet.
 //
 // ⭐ LES MICROS ONT ÉTÉ LUES AVANT D'ÉCRIRE. Les six, et tous les nombres de la
 // fiche sortent de la banque :
@@ -232,6 +243,26 @@ export const ficheTransformations3e: FicheCoursData = {
       ),
     },
     {
+      titre: "Un rapport négatif bascule la figure",
+      texte:
+        "Quand le rapport est négatif, l'image passe DE L'AUTRE CÔTÉ du centre : elle est retournée, et le centre se retrouve entre la figure et son image. Les longueurs, elles, sont multipliées par la valeur du rapport sans son signe. C'est cette configuration que l'on rencontre en géométrie sous le nom de PAPILLON, dans le théorème de Thalès : les deux triangles sont opposés par le sommet, et le sommet commun est justement le centre de l'homothétie.",
+      micros: ["sym_homothetie_reconnaitre", "sym_transformation_effet"],
+      schema: legende(
+        homothetie({
+          centre: { x: 4, y: 4, label: "O" },
+          rapport: -1,
+          source: {
+            points: [
+              { x: 1, y: 1, label: "A" },
+              { x: 3, y: 1, label: "B" },
+              { x: 1, y: 3, label: "C" },
+            ],
+          },
+        }),
+        "$k = -1$ : l'image bascule de l'autre côté de $O$",
+      ),
+    },
+    {
       titre: "Le rapport se lit sur deux longueurs",
       texte:
         "Pour trouver k, on divise une longueur de l'image par la longueur correspondante du départ. Si OA = 4 cm et OA' = 12 cm, alors k = 12 : 4 = 3. Si OA = 10 cm et OA' = 5 cm, alors k = 5 : 10 = 1/2. Le rapport est un QUOTIENT, jamais une différence.",
@@ -415,6 +446,7 @@ export const ficheTransformations3e: FicheCoursData = {
     "Le rapport est un quotient : k = OA' : OA.",
     "Longueurs × k, aires × k², volumes × k³.",
     "La forme et les angles sont conservés, quelle que soit la valeur de k.",
+    "Un rapport négatif renvoie l'image de l'autre côté du centre : c'est le papillon de Thalès.",
   ],
   entrainement: [
     {

@@ -52,12 +52,17 @@ const nextConfig = {
       // l'adresse continue de rediriger et la fiche neuve est invisible.
       // ✅ 26/08/2026 — LES QUATRE ADRESSES DE 4e SONT TOUTES REVENUES :
       // pythagore-theoreme, trigo-cosinus, stat-statistique, proba-experience.
-      // Il ne reste plus que la 3e, qui n'a pas encore été réécrite.
-      {
-        source: "/fiches-cours/maths/3e/thales-theoreme",
-        destination: "/fiches-cours/maths",
-        permanent: false,
-      },
+      // ✅ 01/09/2026 — LA DERNIÈRE, `3e/thales-theoreme`, REVIENT AUSSI. La
+      // fiche de 3e est écrite au standard : huit propriétés dessinées, les
+      // deux configurations, quatre exemples corrigés. La liste est désormais
+      // VIDE, et c'est bien ce qu'on veut : plus aucune adresse de fiche
+      // éteinte.
+      // ⛔ CETTE LIGNE EST CE QUI RENDAIT LA FICHE INVISIBLE. Publier le
+      // fichier, la route et l'entrée du registre ne suffit pas : la
+      // redirection s'applique AVANT la route, et la page neuve n'était jamais
+      // atteinte. Symptôme trompeur — la page répondait 200, mais sur
+      // /fiches-cours/maths. C'est exactement ce que le commentaire du 25/08
+      // annonçait ; il a fallu le lire.
       // ⭐ « PARTENAIRES & SPONSORS » QUITTE LE SITE (31/08/2026). La page
       // demandait de « soutenir EleveAI, proposer une collaboration ou financer
       // une action » — un appel au mécénat, qui n'a plus de raison d'être depuis

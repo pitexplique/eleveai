@@ -414,6 +414,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "La 4e cherchait LA solution ; la 3e apporte l'équation produit nul, et avec elle une équation peut en avoir deux. Le signe est le piège : (x + 5) s'annule en −5, pas en 5.",
   },
+  "maths/3e/thales-theoreme": {
+    titre: "Le théorème de Thalès",
+    resume:
+      "Le théorème de la 4e, mais au brevet il arrive retourné : la configuration en papillon, que la banque de 3e interroge et que personne ne reconnaît. Et la rédaction, qui vaut autant que le résultat.",
+  },
   "maths/3e/sym-transformation": {
     titre: "Transformations et homothétie",
     resume:
