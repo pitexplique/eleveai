@@ -546,6 +546,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Mets la phrase au pluriel et regarde qui a bougé : le déterminant change, l'adverbe jamais.",
   },
+  "francais/cm1/grammaire-groupe-nominal": {
+    titre: "Le groupe nominal et son noyau en CM1 (2026-2027)",
+    resume:
+      "On ne cherche pas le mot le plus important : on réduit le groupe, et le dernier mot debout est le noyau.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
