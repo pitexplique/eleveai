@@ -268,40 +268,53 @@ const FORMULES_MORTES: {
      rate toute phrase assez longue pour être coupée, c'est-à-dire les plus
      bavardes, c'est-à-dire les pages de vente. D'où les motifs qui tiennent
      debout sur un FRAGMENT : « établissement de votre enfant » ne veut rien
-     dire d'autre que ce qu'on interdit. */
+     dire d'autre que ce qu'on interdit.
+     ⛔⛔ ET LE PIÈGE QUI A LAISSÉ PASSER LA PIRE PHRASE DU SITE : `[a-z]` NE
+     CONTIENT PAS LES LETTRES ACCENTUÉES. Le motif s'écrivait `financ[a-z]*`, et
+     `/qui-sommes-nous` affichait « 🤝 Gratuit pour les familles — FINANCÉ par
+     l'établissement » : le `é` de « financé » arrêtait la classe, `\s+par` ne
+     trouvait plus rien, la règle se taisait. « finance par l'établissement »
+     était attrapé, « financé par l'établissement » non — c'est-à-dire la forme
+     que le français emploie réellement. ⛔ Dans ce fichier, tout quantificateur
+     de lettres s'écrit `\S*` ou inclut les accents ; jamais `[a-z]*`. Même
+     famille que la faute `de?` documentée plus haut : un motif qui a l'air
+     juste à la relecture et qui ne l'est qu'à l'exécution. */
   {
     motif:
-      /suggestion-etablissement|sugg[ée]r[a-z]*\s+[^.]{0,40}(coll[èe]ge|lyc[ée]e|[ée]tablissement)|(l.|votre\s+|son\s+)?[ée]tablissement\s+finance|financ[a-z]*\s+par\s+(l.|son\s+|votre\s+)?[ée]tablissement|(coll[èe]ge|lyc[ée]e|[ée]tablissement)\s+de\s+(votre|l.)\s*enfant|(votre|son)\s+(coll[èe]ge|lyc[ée]e|[ée]tablissement)\s+(l.utilise|participe|finance|ne l.a pas)/i,
+      /suggestion-etablissement|sugg\S*\s+[^.]{0,40}(coll[èe]ge|lyc[ée]e|[ée]tablissement)|(l.|votre\s+|son\s+)?[ée]tablissement\s+financ\S*|financ\S*\s+par\s+(l.|son\s+|votre\s+)?[ée]tablissement|(coll[èe]ge|lyc[ée]e|[ée]tablissement)\s+de\s+(votre|l.)\s*enfant|(votre|son)\s+(coll[èe]ge|lyc[ée]e|[ée]tablissement)\s+(l.utilise|participe|financ\S*|ne l.a pas)|pens\S*\s+pour\s+(les\s+)?([ée]coles|coll[èe]ges|lyc[ée]es)/i,
     pourquoi:
       "⛔ INTERDIT : le canal B2B établissement (financement par le collège, formulaire de suggestion) — vendre à un établissement est illégal pour un contractuel en CDI (31/08)",
     sauf:
       /ne (vend|vendons|propose|proposons) plus|on ne vend|il n.y a (ni|pas|plus)|aucune? (offre|vente)|rien n.est vendu|interdit/i,
   },
-  /* ⚠️⚠️ RÈGLE SÉPARÉE, ET LA SÉPARATION EST LE POINT. « Code établissement »
-     est apparu dans la règle B2B ci-dessus le 01/09, et elle criait dessus
-     « vendre à un établissement est illégal » — sur un CHAMP DE FORMULAIRE et
-     sur la POLITIQUE DE CONFIDENTIALITÉ. Un message faux posé sur un vrai
-     signalement est la façon la plus rapide de perdre un vérificateur : on
-     apprend à lire ⛔ comme « encore le faux positif du code ».
-     ⛔ CE N'EST PAS UNE VENTE, ET CE N'EST PAS RÉGLÉ POUR AUTANT. Plus aucun
-     établissement ne distribue de code puisque plus aucun ne peut souscrire :
-     ces pages décrivent un flux d'accès qui n'a plus de source. Trois fichiers
-     au 01/09 — `devenir-beta-testeur/FormulaireBeta.tsx` (le champ lui-même),
-     `politique-confidentialite` (« le prénom transmis par l'établissement ») et
-     `qui-sommes-nous/ManifesteClient` (« l'élève reçoit un code établissement de
-     son professeur »).
-     ⚠️ LA POLITIQUE DE CONFIDENTIALITÉ EST LE CAS SÉRIEUX : elle doit décrire ce
-     qui est RÉELLEMENT collecté. Si plus rien n'arrive par un établissement,
-     elle est inexacte — et une politique inexacte est un problème d'un autre
-     ordre qu'une page de vente périmée.
-     ⛔ NE PAS « CORRIGER » CES TROIS FICHIERS SANS DÉCISION : renommer le champ
-     touche la connexion des élèves, et réécrire la politique demande de savoir
-     par quel chemin un élève arrive vraiment aujourd'hui. C'est une question
-     produit, pas une relecture. */
+  /* ⚠️⚠️ RÈGLE SÉPARÉE, ET LA SÉPARATION EST LE POINT — mais ce n'est PAS le
+     mot « code établissement » qu'elle traque, et c'est la correction du 01/09
+     au soir.
+     ⛔ CE QUI A ÉTÉ CRU À TORT PENDANT UNE HEURE : que la fin de la vente aux
+     établissements rendait le code lui-même caduc. Vérification faite dans le
+     schéma, c'est faux. `code_etablissement` est une colonne `not null` qui
+     forme la CLÉ D'UNICITÉ de l'élève avec `code_utilisateur`
+     (`supabase/profil_eleve.sql`), indexée, présente dans une trentaine de
+     fichiers. Le champ de `devenir-beta-testeur/FormulaireBeta.tsx` fonctionne
+     et sert au professeur qui distribue des codes à sa classe — ce qui n'a
+     jamais eu besoin qu'un établissement achète quoi que ce soit. ⛔ Crier sur
+     un champ qui marche, c'est apprendre à ignorer le vérificateur.
+     ⭐ CE QUI ÉTAIT VRAIMENT FAUX, C'EST L'ATTRIBUTION : dire que le code, le
+     prénom ou la classe sont « fournis / transmis PAR L'ÉTABLISSEMENT ». Là un
+     établissement est présenté comme la SOURCE des données, et il n'y en a
+     plus. C'était le cas de la politique de confidentialité, qui décrivait
+     l'exception comme si c'était la règle alors que le chemin normal est
+     désormais l'inscription individuelle (`INDEPENDANT`, un établissement forgé
+     — « ce n'est pas un établissement, c'est un fourre-tout »,
+     `lib/server/session.ts`).
+     ⚠️ UNE POLITIQUE DE CONFIDENTIALITÉ INEXACTE EST D'UN AUTRE ORDRE qu'une
+     page de vente périmée : elle doit décrire ce qui est RÉELLEMENT collecté.
+     C'est pour elle que cette règle existe. */
   {
-    motif: /code\s+[ée]tablissement/i,
+    motif:
+      /(fournis?|transmis|remis|d[ée]livr[ée]s?|attribu[ée]s?)e?s?\s+par\s+(l.|son\s+|votre\s+)?[ée]tablissement|par\s+l.[ée]tablissement\s*,/i,
     pourquoi:
-      "⚠️ À TRANCHER (pas une vente) : plus aucun établissement ne distribue de code — soit le champ se renomme, soit la page décrit un flux d'accès sans source",
+      "⚠️ L'ÉTABLISSEMENT PRÉSENTÉ COMME SOURCE DES DONNÉES : plus aucun ne transmet rien (le chemin normal est l'inscription individuelle) — grave dans une politique de confidentialité, qui doit décrire ce qui est réellement collecté",
     sauf: /ne (vend|vendons|propose|proposons) plus|il n.y a (ni|pas|plus)|rien n.est vendu|interdit/i,
   },
   {

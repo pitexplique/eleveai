@@ -71,19 +71,42 @@ const sections = [
       <>
         <p>Le principe d&apos;EleveAI : collecter le minimum nécessaire.</p>
         <ul className="ml-5 list-disc space-y-2">
+          {/* ⛔⛔ CE PARAGRAPHE DÉCRIVAIT L'EXCEPTION COMME SI C'ÉTAIT LA RÈGLE,
+              et c'est une inexactitude dans une POLITIQUE DE CONFIDENTIALITÉ —
+              d'un autre ordre qu'une page de vente périmée. Il disait que le
+              code, le prénom et la classe étaient « fournis / transmis par
+              l'établissement », comme s'il n'existait qu'un seul chemin.
+              ⚠️ IL Y EN A DEUX, ET LE SECOND EST DEVENU LE NORMAL depuis qu'on
+              ne vend plus aux établissements (31/08) : `/api/email-session`
+              crée les comptes individuels et leur FORGE un établissement,
+              « INDEPENDANT », partagé par tous les inscrits — « ce n'est pas un
+              établissement, c'est un fourre-tout » (`lib/server/session.ts`).
+              Aucun établissement ne transmet quoi que ce soit dans ce cas.
+              ⛔ La colonne `code_etablissement` ne bouge pas pour autant : elle
+              est `not null` et forme la clé d'unicité de l'élève avec
+              `code_utilisateur` (`supabase/profil_eleve.sql`), dans une
+              trentaine de fichiers. Ce qui était faux, c'est le RÉCIT, pas le
+              schéma. */}
           <li>
-            <span className="font-semibold text-slate-50">Élèves</span> : un code établissement et un
-            code élève fournis par l&apos;établissement, le prénom transmis par
-            l&apos;établissement, la classe, et les résultats des exercices (scores, réponses,
-            progression notion par notion).
+            <span className="font-semibold text-slate-50">Élèves inscrits par un code</span> : un
+            code établissement et un code élève remis par leur professeur, le prénom, la classe,
+            et les résultats des exercices (scores, réponses, progression notion par notion).
+            Aucune adresse e-mail n&apos;est demandée sur ce chemin.
           </li>
           <li>
-            <span className="font-semibold text-slate-50">Aucune autre donnée élève</span> : pas
-            d&apos;adresse e-mail élève, pas de numéro de téléphone, pas d&apos;adresse postale,
-            pas de photo.
+            <span className="font-semibold text-slate-50">Comptes individuels</span> : une adresse
+            e-mail, qui sert à créer le compte et à le retrouver. Ces comptes ne dépendent
+            d&apos;aucun établissement — ils sont regroupés sous un identifiant technique commun,
+            et les résultats enregistrés sont les mêmes que ci-dessus.
           </li>
           <li>
-            <span className="font-semibold text-slate-50">Professeurs et établissements</span> : une
+            <span className="font-semibold text-slate-50">Aucune autre donnée</span> : pas de
+            numéro de téléphone, pas d&apos;adresse postale, pas de photo.
+          </li>
+          {/* ⛔ « ET ÉTABLISSEMENTS » RETIRÉ : on ne leur vend plus rien depuis
+              le 31/08, donc aucun compte d'établissement ne se crée. */}
+          <li>
+            <span className="font-semibold text-slate-50">Professeurs</span> : une
             adresse e-mail professionnelle pour la création et la gestion du compte.
           </li>
           <li>

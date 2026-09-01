@@ -37,12 +37,23 @@ const faqItems = [
   {
     question: "À qui s'adresse EleveAI ?",
     answer:
-      "EleveAI s'adresse aux élèves du CP au Bac, à leurs enseignants et à leurs familles. La plateforme est pensée pour les écoles, collèges et lycées qui veulent un outil de suivi simple et efficace.",
+      // ⛔ « PENSÉE POUR LES ÉCOLES, COLLÈGES ET LYCÉES » RETIRÉ : on ne vend
+      // plus à un établissement depuis le 31/08 (contractuel en CDI), donc la
+      // plateforme n'est plus pensée pour eux — elle est pensée pour l'élève,
+      // son professeur à titre personnel, et sa famille.
+      "EleveAI s'adresse aux élèves du CP au Bac, à leurs enseignants et à leurs familles. Un professeur l'utilise avec ses classes sans avoir l'autorisation de personne à demander.",
   },
   {
+    // ⛔ CETTE RÉPONSE NE DÉCRIVAIT QU'UN SEUL CHEMIN, ET C'ÉTAIT DEVENU
+    // L'EXCEPTION : « l'élève reçoit un code établissement de son professeur ».
+    // Depuis qu'on ne vend plus aux établissements, le chemin normal est
+    // l'inscription individuelle — celle qui ne demande de code à personne.
+    // ⚠️ Le chemin par code reste vrai et fonctionne : il sert au professeur qui
+    // distribue des codes à sa classe. Ce qui a changé, c'est lequel des deux se
+    // raconte en premier.
     question: "Comment un élève accède-t-il à EleveAI ?",
     answer:
-      "L'élève reçoit un code établissement et un code élève de son professeur. Il se connecte en quelques secondes et accède à tous les outils. Les résultats sont enregistrés automatiquement.",
+      "Le plus souvent sans rien demander à personne : les exercices, les parcours et le coach s'ouvrent directement, et créer un compte sert seulement à garder sa progression. Un élève dont le professeur lui a remis un code établissement et un code élève se connecte avec, et retrouve sa classe. Dans les deux cas les résultats sont enregistrés automatiquement.",
   },
   {
     question: "EleveAI remplace-t-elle les enseignants ?",
@@ -124,7 +135,17 @@ export default function ManifesteClient() {
                 "🏫 Utilisé en collège, à La Réunion",
                 "🧪 Construit en classe, avec les élèves",
                 "🔒 RGPD · sans publicité",
-                "🤝 Gratuit pour les familles — financé par l'établissement",
+                /* ⛔⛔ CE BADGE DISAIT « GRATUIT POUR LES FAMILLES — FINANCÉ PAR
+                   L'ÉTABLISSEMENT », et c'était la phrase la plus fausse du
+                   site : elle donnait la raison POUR LAQUELLE les familles ne
+                   paient pas, et cette raison est un canal interdit depuis le
+                   31/08. Elle contredisait en plus la grille — la famille paie
+                   2,50 €/mois pour sa fenêtre.
+                   ⚠️ IL ÉTAIT DANS UN TABLEAU DE BADGES, pas dans la FAQ que
+                   j'avais corrigée dix minutes plus tôt : une même page peut
+                   porter le modèle mort dans trois structures différentes, et
+                   corriger celle qu'on a lue ne prouve rien sur les autres. */
+                "🎒 L'élève ne paie jamais",
               ].map((badge) => (
                 <span
                   key={badge}
@@ -145,7 +166,9 @@ export default function ManifesteClient() {
                 <li>• Plusieurs portes : parcours, brevet, calcul rapide, dictée du jour, défis…</li>
                 <li>• Résultats enregistrés et visibles dans le tableau de bord élève.</li>
                 <li>• Ancré à La Réunion — contexte local, exemples du territoire.</li>
-                <li>• Pensé pour les écoles, collèges et lycées qui veulent un suivi simple.</li>
+                {/* ⛔ DEUXIÈME EXEMPLAIRE de « pensé pour les écoles, collèges et
+                    lycées », dans un tableau différent de celui de la FAQ. */}
+                <li>• Pensé pour l&apos;élève, son professeur et sa famille — sans passer par personne.</li>
               </ul>
             </div>
           </header>
