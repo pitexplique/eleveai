@@ -71,6 +71,53 @@
 // prix.
 // ─────────────────────────────────────────────────────────────────────────────
 
+// ─────────────────────────────────────────────────────────────────────────────
+// ⭐⭐ LA GRILLE DE RÉOUVERTURE — TRANCHÉE LE 01/09/2026, PAS ENCORE EN VIGUEUR.
+//
+// ⛔⛔ CES DEUX MONTANTS NE SONT PAS LE PRIX D'AUJOURD'HUI. Les constantes
+// ci-dessous n'ont pas bougé : le site affiche 2,50 €/mois et 19,90 €/année
+// scolaire tant que `VENTE.ouverte` est à false. Ce bloc est une DÉCISION prise
+// d'avance, écrite ici pour ne pas se rejouer.
+//
+//   • Mensuel  4,95 € par mois          (contre 2,50 € aujourd'hui)
+//   • Annuel  39,90 € par ANNÉE SCOLAIRE (contre 19,90 € aujourd'hui)
+//
+// ⚠️ LE MONTANT NE S'ÉCRIT JAMAIS SANS SON UNITÉ, pas même ici : les deux
+// nombres sont proches et vivent dans deux unités différentes. C'est le piège
+// qui a déjà coûté un facteur douze le 22/08.
+//
+// ⭐ POURQUOI 4,95 ET PAS MOINS, ET C'EST CONTRE-INTUITIF. Le marché relevé le
+// 01/09 : Kartable 14,99 €/mois, Schoolmouv 14,99 €/mois, Maxicours « à partir
+// de 4,95 €/mois » AVEC engagement. 4,95 € sans engagement est donc le plancher
+// du marché, pas un prix cher. À 2,50 € on est six fois sous Kartable, et un
+// parent qui achète de la réassurance lit « projet perso, il n'y a rien dedans »
+// avant de lire « bonne affaire ». ⚠️ Entre 2 € et 5 €, l'élasticité est quasi
+// nulle : le parent vient de voir 14,99 € ailleurs, les deux prix déclenchent la
+// même décision. On double la recette par abonné sans rien perdre en conversion.
+// ⚠️ Et la marche ne se descend pas : à 2,50 € on ne peut plus monter sans se
+// renier, à 4,95 € on reste le moins cher du marché pendant des années.
+//
+// ⭐ 39,90 € N'EST PAS UN CHOIX LIBRE, IL EST CONTRAINT PAR `MOIS_OFFERTS`.
+// Vérifié au calcul avant d'être décidé — c'est le seul montant annuel qui garde
+// l'offre inchangée dans ce qu'elle promet :
+//   douze mois au tarif mensuel  59,40 €   économie  19,50 €
+//   MOIS_OFFERTS  4  (identique à aujourd'hui)   REDUCTION  33 %  (contre 34 %)
+//   RAPPORT_IXL   6  (contre 12) — et 6 est CRÉDIBLE là où 12 ne l'est pas.
+//     Il a valu 20 le 22/08 (illisible), 10 le 01/09 au matin, 12 le soir. La
+//     trajectoire va dans le bon sens : plus le rapport baisse, plus il se croit.
+// ⛔ Ne pas « arrondir » l'annuel à 39 € ou 45 € sans relancer ce calcul :
+// `MOIS_OFFERTS` et `REDUCTION_ANNUEL_POURCENT` sont dérivés, et une grille qui
+// n'offre plus que trois mois affaiblit l'argument sans que personne le voie.
+//
+// **COMMENT LA METTRE EN VIGUEUR, LE JOUR VENU** : changer les deux littéraux de
+// `PRIX_MENSUEL` et `PRIX_ANNUEL` ci-dessous, et rien d'autre. Tout le reste est
+// calculé ou importé — `scripts/verifier-tarifs.ts` confirme qu'aucun prix n'est
+// écrit à la main dans les 234 fichiers de vitrine. Puis relire ce bloc et le
+// supprimer, pour qu'il ne reste pas à décrire un futur devenu le présent.
+// ⚠️ Ce jour-là seulement se rouvre la question de la gratuité enseignant, qui
+// n'est toujours pas branchée dans l'inscription (report décidé, pas un oubli).
+// ─────────────────────────────────────────────────────────────────────────────
+
 /**
  * ⭐ 2,50 € PAR MOIS, SANS ENGAGEMENT — par FOYER, jamais par enfant, sur une
  * seule adresse courriel. Le frère d'à côté ne coûte rien de plus.

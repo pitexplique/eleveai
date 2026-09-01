@@ -9,7 +9,34 @@ import type { Metadata } from "next";
 // ⛔ Et elle promettait un « prix de lancement bloqué » : il n'y a pas de prix
 // de lancement, le prix est ferme. Cette formule dit au lecteur qu'il achète
 // une remise temporaire, donc que le vrai prix est ailleurs et plus haut.
-import { PERIODE_ANNUELLE, PRIX_ANNUEL, PRIX_MENSUEL, montant } from "@/lib/tarifs";
+// ⛔⛔ CETTE PAGE A VENDU L'ÉTABLISSEMENT JUSQU'AU 01/09/2026, TROIS JOURS APRÈS
+// L'INTERDICTION. Elle était bâtie sur un « fork » à trois portes — « décision
+// CEO : établissement > famille > jamais l'élève » — avec une porte 1 « votre
+// collège finance pour tous ses élèves », une porte 3 « suggérer à votre
+// collège (lead B2B) », et deux boutons « j'ai un code établissement ». Or
+// vendre à un établissement est INTERDIT depuis le 31/08 (contractuel en CDI).
+// ⚠️ Et `scripts/verifier-tarifs.ts` PASSAIT AU VERT dessus : sa passe 2
+// traquait « échelle des payeurs », « forfait », « sur devis » — aucun motif ne
+// contenait le mot « établissement » dans ces tournures. Le garde-fou était
+// vert sur la seule page qui portait un risque pénal, et elle était au sitemap
+// en priorité 0.9. Les motifs manquants ont été ajoutés le même jour, dans le
+// même passage : corriger la page sans corriger le vérificateur, c'est ce qui a
+// déjà coûté deux jours.
+//
+// ⭐ CE QUI REMPLACE LE FORK, ET C'EST L'ARGUMENT LE PLUS FORT DE LA PAGE :
+// deux colonnes, l'enfant et le parent. Chez les concurrents (Allo6ème, du jour
+// même), la colonne « sans payer » est l'enfant BRIDÉ — corrections détaillées,
+// exercices ciblés et volumes d'aide passent derrière la caisse. Ici l'enfant a
+// tout, et ce qui s'achète est la fenêtre du PARENT. Ce n'est pas une nuance de
+// formulation : c'est la seule chose que la page a à dire.
+import { VENTE } from "@/lib/legal/editeur";
+import {
+  ENSEIGNANT,
+  PERIODE_ANNUELLE,
+  PRIX_ANNUEL,
+  PRIX_MENSUEL,
+  montant,
+} from "@/lib/tarifs";
 
 export const metadata: Metadata = {
   title: "Parents",
@@ -63,12 +90,29 @@ const faq = [
     a: "Non. EleveAI est un outil d'entraînement et de suivi. Le professeur reste la référence — EleveAI aide votre enfant à s'exercer entre les cours, et aide le prof à voir où il en est.",
   },
   {
+    // ⛔ CETTE RÉPONSE DISAIT « SI SON COLLÈGE PARTICIPE, VOUS N'AVEZ RIEN À
+    // PAYER NON PLUS ». Aucun collège ne participe et aucun ne le peut : la
+    // vente aux établissements est interdite depuis le 31/08. La phrase
+    // envoyait le parent demander un code qui n'existe pas.
     q: "Combien ça coûte, pour moi ?",
-    a: `Votre enfant, lui, ne paie jamais : le coach, les exercices, les parcours et les évaluations restent ouverts sans limite de temps. Si son collège participe, vous n'avez rien à payer non plus. Sinon, l'offre famille est à ${montant(
+    a: `Votre enfant, lui, ne paie jamais : le coach, les exercices, les parcours et les évaluations restent ouverts sans limite de temps. L'offre famille est à ${montant(
       PRIX_MENSUEL,
     )} par mois sans engagement, ou ${montant(
       PRIX_ANNUEL,
     )} ${PERIODE_ANNUELLE} — sur une seule adresse courriel et pour toute la maison quel que soit le nombre d'enfants. Elle ouvre votre vue à vous : son bulletin, sa semaine, et quoi reprendre ensuite.`,
+  },
+  {
+    // ⭐ LA QUESTION QUE POSE LA COMPARAISON AVEC LES CONCURRENTS, et la seule
+    // dont la réponse nous distingue : ailleurs, ne pas s'abonner rétrécit le
+    // travail de l'enfant (corrections détaillées, exercices ciblés, volumes
+    // d'aide). Ici, non. ⛔ Le jour où une limite apparaîtrait côté élève,
+    // c'est CETTE réponse qui devient un mensonge — la relire avant.
+    q: "Si je ne m'abonne pas, mon enfant est-il limité ?",
+    a: "Non, et c'est la règle qui gouverne tout le reste. Il a le coach en entier, tous les exercices, tous les parcours, les cahiers et les évaluations, sans compte et sans limite de temps. L'abonnement n'ajoute rien à son travail : il ouvre votre fenêtre à vous. Un enfant dont la famille ne s'abonne pas travaille exactement comme les autres.",
+  },
+  {
+    q: "Je suis enseignant — est-ce que ça change quelque chose ?",
+    a: `Votre compte à vous ne se paie pas, sur une adresse académique en ${ENSEIGNANT.verification}. ⚠️ Pour vous, à titre personnel : cela ne couvre pas les familles de vos élèves, qui s'abonnent comme les autres. Vos élèves, eux, n'ont jamais rien à payer.`,
   },
 ];
 
@@ -91,11 +135,16 @@ export default function ParentsPage() {
             enseignant, sans publicité, avec ses données protégées.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
+            {/* ⛔ LE BOUTON PRINCIPAL ÉTAIT « J'AI UN CODE ÉTABLISSEMENT ».
+                Il ouvrait la page sur un canal interdit depuis le 31/08, et il
+                demandait au parent de posséder quelque chose que personne ne
+                distribue. Le premier geste est maintenant celui qui ne coûte
+                rien et n'exige rien : essayer le coach. */}
             <Link
-              href="/auth/signin?mode=eleve"
+              href="/accueil"
               className="rounded-2xl bg-emerald-600 px-7 py-3.5 text-base font-black text-white shadow-lg transition hover:bg-emerald-500 hover:scale-105"
             >
-              🎓 J'ai un code établissement — c'est gratuit
+              Essayer le coach avec votre enfant
             </Link>
             <Link
               href="/tarifs"
@@ -265,78 +314,150 @@ export default function ParentsPage() {
           </p>
         </section>
 
-        {/* ── LE PRIX = LE FORK (décision CEO : établissement > famille > jamais l'élève) ── */}
+        {/* ── CE QUI EST OUVERT / CE QUE L'ABONNEMENT AJOUTE ──
+            ⛔ ICI SE TENAIT LE « FORK » À TROIS PORTES (voir l'entête du
+            fichier). Les deux colonnes ne sont pas « sans payer » contre
+            « avec » : ce sont DEUX PERSONNES. À gauche l'enfant, qui a tout ; à
+            droite le parent, qui achète sa fenêtre. C'est ce découpage qui rend
+            la page honnête — et c'est aussi le seul endroit du site où la
+            différence avec les concurrents se voit d'un coup d'œil. */}
         <section>
           <h2 className="text-center text-2xl font-black sm:text-3xl">
-            Combien ça vous coûte&nbsp;?
+            Votre enfant ne paie jamais. Vous, vous choisissez.
           </h2>
           <p className="mx-auto mt-2 max-w-2xl text-center text-sm font-semibold text-slate-500">
-            Notre principe : on cherche d'abord à vous le rendre <strong>gratuit</strong>.
+            Ailleurs, ne pas s&apos;abonner rétrécit le travail de l&apos;enfant.
+            Ici, l&apos;abonnement n&apos;ajoute rien à ce qu&apos;il fait — il
+            ouvre ce que vous, vous voyez.
           </p>
-          <div className="mt-8 grid gap-4 lg:grid-cols-3">
-            {/* Porte 1 — GRATUIT via l'établissement (mise en avant) */}
+
+          <div className="mt-8 grid gap-4 lg:grid-cols-2">
+            {/* Colonne 1 — L'ENFANT. Elle est mise en avant, et c'est voulu :
+                c'est la colonne qui surprend. */}
             <div className="relative rounded-3xl border-2 border-emerald-400 bg-white p-6 shadow-xl">
               <span className="absolute -top-3 left-6 rounded-full bg-emerald-500 px-3 py-1 text-[11px] font-black uppercase tracking-wide text-white">
-                Le plus simple
+                Pour votre enfant
               </span>
-              <p className="text-4xl font-black text-emerald-600">Gratuit</p>
-              <h3 className="mt-2 font-black">Votre collège l'utilise déjà</h3>
-              <p className="mt-2 text-sm font-semibold leading-relaxed text-slate-600">
-                L'établissement finance EleveAI pour tous ses élèves. Vous n'avez
-                rien à payer : votre enfant se connecte avec son code.
+              {/* ⛔ LE QUALIFIANT ÉTAIT UN <span> EN LIGNE, ET IL CRÉAIT UNE
+                  FAUSSE LECTURE EN 375 px. « Il ne paie rien » en 3xl remplit
+                  la largeur, si bien que la coupure tombait après le premier mot
+                  du span : on lisait « Il ne paie rien sans » en gros, puis
+                  « compte, sans limite » à la ligne — c'est-à-dire une
+                  CONDITION, exactement l'inverse de la phrase. Le défaut ne se
+                  voit pas au code, et pas non plus en large : il n'existe qu'en
+                  poche, là où la moitié des parents lisent.
+                  ⚠️ La colonne de droite pose déjà le prix puis son unité sur
+                  deux éléments distincts. Les deux colonnes suivent maintenant
+                  la même structure — un titre, une précision dessous. */}
+              <p className="mt-2 text-3xl font-black leading-tight text-emerald-600">
+                Il ne paie rien
               </p>
-              <Link
-                href="/auth/signin?mode=eleve"
-                className="mt-5 inline-flex rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-black text-white transition hover:bg-emerald-500"
-              >
-                J'ai un code →
-              </Link>
+              <p className="mt-1 text-base font-black text-slate-500">
+                sans compte, sans limite
+              </p>
+              <ul className="mt-4 space-y-2.5">
+                {[
+                  ["🧭", "Le coach qui explique, en entier"],
+                  ["✏️", "Tous les exercices et tous les parcours"],
+                  ["📕", "Les cahiers de vacances"],
+                  ["📋", "Les évaluations"],
+                  ["⏳", "Sans limite de temps, et sans adresse e-mail à donner"],
+                ].map(([emoji, texte]) => (
+                  <li key={texte} className="flex gap-2.5 text-sm font-semibold leading-relaxed text-slate-700">
+                    <span aria-hidden="true">{emoji}</span>
+                    <span>{texte}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 rounded-2xl bg-emerald-50 px-4 py-3 text-sm font-black leading-relaxed text-emerald-800">
+                Un enfant dont la famille ne s&apos;abonne pas travaille
+                exactement comme les autres.
+              </p>
             </div>
 
-            {/* Porte 2 — Offre famille (repli) */}
+            {/* Colonne 2 — LE PARENT. C'est la seule chose qui s'achète. */}
             <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md">
-              <p className="text-4xl font-black text-slate-900">
-                {montant(PRIX_MENSUEL)}
-                <span className="ml-1 text-base font-black text-slate-500">par mois</span>
-              </p>
-              <h3 className="mt-2 font-black">Votre collège ne l'a pas encore</h3>
+              <span className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-[11px] font-black uppercase tracking-wide text-slate-600">
+                Pour vous
+              </span>
               {/* ⛔ « UN EURO PAR MOIS » ÉTAIT ÉCRIT À LA MAIN À DEUX ENDROITS
                   DE CETTE PAGE, à côté d'un prix importé. Le chiffre juste et le
                   chiffre faux se touchaient, et c'est le faux qu'on lisait en
                   gros. C'est la panne que `lib/tarifs.ts` existe pour empêcher,
                   et une constante ne protège que la moitié de la phrase où elle
                   est appelée. */}
-              <p className="mt-2 text-sm font-semibold leading-relaxed text-slate-600">
-                Sans engagement, ou {montant(PRIX_ANNUEL)} {PERIODE_ANNUELLE}. Une
-                seule adresse courriel et jamais par enfant : le second de la
-                maison ne coûte rien de plus. Votre enfant,
-                lui, continue de travailler sans rien payer — ce que
-                l&apos;abonnement ouvre, c&apos;est votre vue à vous.
+              {/* ⛔ MÊME DÉFAUT QUE LA COLONNE DE GAUCHE, et il s'est produit
+                  pour la même raison : le span portait « par mois, sans
+                  engagement », trop long pour tenir derrière un prix en 3xl. En
+                  375 px la coupure tombait sur « sans / engagement », laissant
+                  le mot seul sur sa ligne avec l'interligne d'un titre.
+                  ⚠️ « par mois » RESTE en ligne — c'est l'unité, et un montant
+                  ne s'écrit jamais sans elle (le piège du facteur douze du
+                  22/08). Ce qui descend, c'est l'argument commercial, qui va
+                  rejoindre la formule annuelle. */}
+              <p className="mt-2 text-3xl font-black leading-tight text-slate-900">
+                {montant(PRIX_MENSUEL)}
+                <span className="ml-1 align-middle text-base font-black text-slate-500">
+                  par mois
+                </span>
               </p>
-              <Link
-                href="/tarifs"
-                className="mt-5 inline-flex rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-black text-white transition hover:bg-slate-700"
-              >
-                Voir l'offre famille →
-              </Link>
-            </div>
-
-            {/* Porte 3 — Suggérer à l'établissement (lead B2B) */}
-            <div className="rounded-3xl border border-sky-200 bg-sky-50 p-6 shadow-md">
-              <p className="text-4xl">🏫</p>
-              <h3 className="mt-2 font-black">Faites-le venir dans son collège</h3>
-              <p className="mt-2 text-sm font-semibold leading-relaxed text-slate-600">
-                La meilleure option pour toutes les familles : suggérez EleveAI à
-                l'établissement de votre enfant. Gratuit pour tout le monde.
+              {/* ⛔ MENTION OBLIGATOIRE : le prix annuel ne s'affiche jamais
+                  sans sa période — article 8 des CGV. */}
+              <p className="mt-1 text-sm font-bold text-slate-500">
+                Sans engagement, ou {montant(PRIX_ANNUEL)} {PERIODE_ANNUELLE}.
               </p>
-              <Link
-                href="/contact?sujet=suggestion-etablissement"
-                className="mt-5 inline-flex rounded-xl bg-sky-600 px-5 py-2.5 text-sm font-black text-white transition hover:bg-sky-500"
-              >
-                Suggérer à mon collège →
-              </Link>
+              <ul className="mt-4 space-y-2.5">
+                {[
+                  ["📊", "Son bulletin : où il en est, matière par matière"],
+                  ["🗓️", "Sa semaine : ce qu'il a travaillé, et quand"],
+                  ["📌", "Ce qu'il faut reprendre ensuite"],
+                  ["👪", "Une seule adresse courriel, quel que soit le nombre d'enfants"],
+                ].map(([emoji, texte]) => (
+                  <li key={texte} className="flex gap-2.5 text-sm font-semibold leading-relaxed text-slate-700">
+                    <span aria-hidden="true">{emoji}</span>
+                    <span>{texte}</span>
+                  </li>
+                ))}
+              </ul>
+              {VENTE.ouverte ? (
+                <Link
+                  href="/tarifs"
+                  className="mt-5 inline-flex rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-black text-white transition hover:bg-slate-700"
+                >
+                  Voir l&apos;offre famille →
+                </Link>
+              ) : (
+                <>
+                  <Link
+                    href="/tarifs"
+                    className="mt-5 inline-flex rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-black text-white transition hover:bg-slate-700"
+                  >
+                    Voir l&apos;offre famille →
+                  </Link>
+                  {/* ⚠️ MÊME FORMULE QUE /espace-profs ET /tarifs : le prix est
+                      ferme, et rien n'est encaissé tant que l'espace n'est pas
+                      prêt. Annoncer un prix n'engage pas ; encaisser, oui. */}
+                  <p className="mt-2 text-xs font-bold text-slate-500">
+                    L&apos;espace famille se construit en ce moment. Le prix
+                    ci-dessus est ferme, et rien n&apos;est encaissé tant
+                    qu&apos;il n&apos;est pas prêt.
+                  </p>
+                </>
+              )}
             </div>
           </div>
+
+          {/* ⛔ LES DEUX MOITIÉS NE SE SÉPARENT JAMAIS. « Gratuit pour les
+              enseignants » dit seul se comprend « gratuit pour ma classe », et
+              c'est ce qu'un professeur annoncera de bonne foi à ses familles —
+              qui découvriront le prix devant la caisse. La restriction est donc
+              dans la MÊME phrase, pas en bas de page. */}
+          <p className="mx-auto mt-6 max-w-3xl rounded-2xl border border-sky-200 bg-sky-50 px-5 py-4 text-center text-sm font-semibold leading-relaxed text-sky-900">
+            🧑‍🏫 <strong className="font-black">Vous êtes enseignant&nbsp;?</strong>{" "}
+            Votre compte ne se paie pas, sur {ENSEIGNANT.verification} — pour
+            vous, à titre personnel, et pas pour les familles de vos élèves, qui
+            s&apos;abonnent comme les autres.
+          </p>
         </section>
 
         {/* ── FAQ ── */}
@@ -370,22 +491,27 @@ export default function ParentsPage() {
           <h2 className="text-2xl font-black sm:text-3xl">
             Prêt à aider votre enfant, sereinement&nbsp;?
           </h2>
+          {/* ⛔ CE BLOC ENVOYAIT LE PARENT VERS DEUX CANAUX INTERDITS —
+              « j'ai un code établissement » et « suggérer EleveAI à mon
+              collège » (lead B2B). Le dernier geste de la page est maintenant
+              le même que le premier : essayer, sans rien devoir. */}
           <p className="mx-auto mt-3 max-w-xl font-semibold text-emerald-50">
-            Vérifiez d'abord si son collège l'utilise — c'est gratuit. Sinon,
-            l'offre famille ou une suggestion à l'établissement.
+            Commencez par le faire essayer — il n&apos;a ni compte à créer ni
+            rien à payer. L&apos;abonnement, c&apos;est pour vous, et plus tard
+            si vous le voulez.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link
-              href="/auth/signin?mode=eleve"
+              href="/accueil"
               className="rounded-2xl bg-white px-7 py-3.5 text-base font-black text-emerald-700 shadow-lg transition hover:bg-emerald-50"
             >
-              🎓 J'ai un code établissement
+              Essayer le coach
             </Link>
             <Link
-              href="/contact?sujet=suggestion-etablissement"
+              href="/tarifs"
               className="rounded-2xl border border-white/40 bg-white/10 px-7 py-3.5 text-base font-black text-white transition hover:bg-white/20"
             >
-              Suggérer EleveAI à mon collège
+              Voir l&apos;offre famille
             </Link>
           </div>
         </section>

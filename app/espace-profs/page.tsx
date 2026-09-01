@@ -140,8 +140,13 @@ export default function EnseignantsPage() {
                 professeur, c'est un appel à vendre à SA DIRECTION posé dans sa
                 page — et il rouvrait la porte que le pied de page, le sitemap et
                 le `noindex` viennent de fermer. Le professeur garde tout : son
-                tableau de bord, ses ressources, et le tarif classe qu'il ouvre
-                lui-même sans passer par personne. */}
+                tableau de bord et ses ressources, qu'il ouvre lui-même sans
+                passer par personne.
+                ⚠️ CETTE NOTE DISAIT « ET LE TARIF CLASSE QU'IL OUVRE LUI-MÊME »
+                jusqu'au 01/09 au soir : le tarif classe a été supprimé le matin
+                même, et le professeur ne paie plus rien du tout. Il ne reste
+                aucun tarif qu'un enseignant ouvre — c'est encore mieux, et la
+                phrase disait le contraire. */}
           </div>
         </section>
 
@@ -428,27 +433,30 @@ export default function EnseignantsPage() {
                 famille ne s&apos;abonne pas travaille exactement comme les
                 autres. Vos élèves, eux, n&apos;ont jamais rien à payer.
               </p>
-              {VENTE.ouverte ? (
-                <Link
-                  href="/tarifs#classe"
-                  className="mt-4 inline-flex items-center gap-2 rounded-full bg-sky-600 px-5 py-2.5 text-sm font-black text-white transition hover:bg-sky-500"
-                >
-                  Équiper ma classe
-                </Link>
-              ) : (
-                <>
-                  <Link
-                    href="/tarifs#classe"
-                    className="mt-4 inline-flex items-center gap-2 rounded-full bg-sky-600 px-5 py-2.5 text-sm font-black text-white transition hover:bg-sky-500"
-                  >
-                    Voir l&apos;offre classe
-                  </Link>
-                  <p className="mt-2 text-xs font-bold text-slate-500">
-                    Le tableau de bord professeur se construit en ce moment. Le
-                    prix ci-dessus est ferme, et rien n&apos;est encaissé tant
-                    qu&apos;il n&apos;est pas prêt.
-                  </p>
-                </>
+              {/* ⛔ LES DEUX BRANCHES POINTAIENT VERS `/tarifs#classe`, ET
+                  L'ANCRE N'EXISTE PLUS depuis la suppression du tarif classe le
+                  01/09 — `/tarifs` n'a plus qu'un seul `id`, `#famille`. Un lien
+                  vers une ancre morte ne casse rien de visible : il ouvre la page
+                  en haut, et personne ne s'aperçoit qu'on a perdu le lecteur en
+                  route. ⚠️ Les libellés mentaient autant que la cible :
+                  « Équiper ma classe » et « voir l'offre classe » proposaient
+                  d'acheter à un professeur qui ne paie plus rien.
+                  ⚠️ LA TERNAIRE EST TOMBÉE AVEC EUX : ses deux branches ne
+                  différaient que par le libellé d'une offre disparue. Ce qui
+                  dépend encore de `VENTE.ouverte`, c'est la note — et elle
+                  seule. */}
+              <Link
+                href="/tarifs"
+                className="mt-4 inline-flex items-center gap-2 rounded-full bg-sky-600 px-5 py-2.5 text-sm font-black text-white transition hover:bg-sky-500"
+              >
+                Voir la grille complète
+              </Link>
+              {!VENTE.ouverte && (
+                <p className="mt-2 text-xs font-bold text-slate-500">
+                  Le tableau de bord professeur se construit en ce moment. Les
+                  prix ci-dessus sont fermes, et rien n&apos;est encaissé tant
+                  qu&apos;il n&apos;est pas prêt.
+                </p>
               )}
             </div>
 

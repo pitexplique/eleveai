@@ -325,17 +325,29 @@ export default function EspaceParentsClient() {
           </div>
         </section>
 
-        {/* ── SI L'ÉCOLE PAIE ────────────────────────────────────────── */}
+        {/* ── L'ENFANT NE PAIE JAMAIS ──────────────────────────────────
+            ⛔ CETTE SECTION S'APPELAIT « SI L'ÉCOLE PAIE » et disait « si le
+            collège de votre enfant participe, vous ne payez rien », en invitant
+            le parent à en parler « au chef d'établissement ». Deux modèles morts
+            dans un seul encadré : le canal B2B, INTERDIT depuis le 31/08
+            (contractuel en CDI), et l'échelle des payeurs — « deux fois moins
+            cher pour une classe entière » — supprimée le 01/09. Aucun collège ne
+            participe et aucun ne le peut ; la phrase envoyait le parent demander
+            un code que personne ne distribue.
+            ⭐ CE QUI LA REMPLACE EST PLUS FORT QU'ELLE : l'enfant n'a jamais eu
+            besoin que quiconque paie. C'est vrai, c'est vérifiable en un clic,
+            et aucun concurrent ne peut l'écrire. */}
         <section className="rounded-[2rem] border border-white bg-gradient-to-br from-sky-50 via-white to-cyan-50 p-8 text-center shadow-xl ring-1 ring-sky-100">
-          <p className="text-4xl">🏫</p>
+          <p className="text-4xl">🎒</p>
           <h2 className="mt-2 text-2xl font-black text-slate-950">
-            Si le collège de votre enfant participe, vous ne payez rien
+            Votre enfant ne paie jamais
           </h2>
           <p className="mx-auto mt-2 max-w-2xl text-sm font-bold text-slate-600">
-            Avec un code remis par l&apos;établissement, votre enfant accède à tout — et le
-            suivi est compris. Vous pouvez en parler à son professeur ou au chef
-            d&apos;établissement&nbsp;: c&apos;est deux fois moins cher pour une classe
-            entière que si chaque famille s&apos;abonnait.
+            Le coach, les exercices, les parcours, les cahiers et les évaluations
+            lui sont ouverts sans compte et sans limite de temps. Ce que
+            l&apos;abonnement ouvre, c&apos;est votre vue à vous. Et si vous
+            enseignez, votre compte à vous ne se paie pas — à titre personnel,
+            pas pour les familles de vos élèves.
           </p>
           <div className="mt-5 flex flex-wrap justify-center gap-3">
             <Link
@@ -349,9 +361,16 @@ export default function EspaceParentsClient() {
                 supprimé. Un lien vers une ancre morte ne casse rien de visible :
                 il ouvre la page en haut, et personne ne s'aperçoit qu'on a perdu
                 le lecteur en route. C'est le vérificateur de tarifs qui l'a
-                trouvé, sur le LIBELLÉ et non sur l'ancre. */}
+                trouvé, sur le LIBELLÉ et non sur l'ancre.
+                ⚠️⚠️ ET LE REMPLAÇANT ÉTAIT MORT AUSSI : `#enseignant` n'existe
+                pas davantage. `/tarifs` ne porte plus qu'UN seul `id`, et c'est
+                `#famille` (`TarifsClient.tsx:442`) — vérifié le 01/09 au soir.
+                Corriger une ancre morte par une autre ancre morte ne se voit
+                pas : les deux ouvrent la page en haut, exactement pareil. ⛔ Ne
+                pas remettre d'ancre ici sans avoir grepé `id="` dans
+                `app/tarifs/`. */}
             <Link
-              href="/tarifs#enseignant"
+              href="/tarifs"
               className="rounded-2xl bg-white px-6 py-3 text-sm font-black text-slate-700 shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50"
             >
               Si vous enseignez

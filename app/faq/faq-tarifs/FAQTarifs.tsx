@@ -92,8 +92,13 @@ export default function FAQTarifs() {
       a: "Parce que la structure n'est pas la même : aucun investisseur à rémunérer, aucun commercial, des exercices écrits ici plutôt qu'achetés, et un élève de plus qui ne coûte presque rien. L'IA démultiplie le travail, et l'enseignant vérifie — les deux moitiés ne se séparent jamais. C'est un professeur en exercice qui relit ses propres exercices.",
     },
     {
+      // ⛔ CETTE RÉPONSE PROMETTAIT « SI SON ÉTABLISSEMENT PARTICIPE, LA
+      // FAMILLE N'A RIEN À PAYER DU TOUT ». Aucun établissement ne participe et
+      // aucun ne le peut : la vente à un établissement est interdite depuis le
+      // 31/08 (contractuel en CDI). La phrase donnait au parent une raison
+      // d'attendre au lieu d'essayer — la pire des deux issues.
       q: "Comment mon enfant se connecte-t-il ?",
-      a: "Le compte élève est gratuit et se crée en quelques secondes. Si son établissement participe, il reçoit un code établissement et un code élève de son professeur — et dans ce cas, la famille n'a rien à payer du tout.",
+      a: "Il n'a même pas besoin de compte : le coach, les exercices, les parcours et les évaluations sont ouverts tout de suite, sans adresse e-mail à donner. Créer un compte élève ne se paie pas non plus — ça sert à garder sa progression d'une fois sur l'autre.",
     },
     {
       q: "Puis-je arrêter quand je veux ?",

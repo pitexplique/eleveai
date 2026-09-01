@@ -245,6 +245,65 @@ const FORMULES_MORTES: {
     // sa crédibilité en une exécution.
     sauf: /ne (peut|peuvent) rien acheter|il n.y a (ni|pas)|aucune? (offre|vente)|rien n.est vendu/i,
   },
+  /* ⛔⛔ LA RÈGLE QUI MANQUAIT, ET SON ABSENCE A LAISSÉ /parents VENDRE
+     L'ÉTABLISSEMENT TROIS JOURS APRÈS L'INTERDICTION (constat du 01/09/2026).
+     La règle voisine ci-dessus traque les COLLECTIVITÉS et les PRESTATIONS —
+     « pack de comptes », « atelier de 3 h ». Aucun de ses motifs ne décrivait
+     le canal ordinaire vers un collège : un code distribué par l'établissement,
+     un établissement qui « finance pour tous ses élèves », un formulaire de
+     suggestion. `/parents` contenait les trois, en priorité 0.9 au sitemap, et
+     ce fichier passait au VERT dessus.
+     ⚠️ LA LEÇON DÉPASSE CETTE RÈGLE : un vérificateur vert est lu comme une
+     preuve, pas comme un silence. Tant qu'un motif n'existe pas, son absence
+     ressemble exactement à une page saine — c'est le même défaut que dans
+     [[retirer-du-sitemap-ne-ferme-rien]], et il s'est reproduit.
+     ⚠️ `sauf` innocente les phrases qui NIENT le canal : `/espace-profs` dit
+     « on ne vend plus aux établissements », et c'est la page qui fait le mieux
+     son travail.
+     ⚠️⚠️ LE PIÈGE QUI A COÛTÉ UN MOTIF DE PLUS, ET IL VAUT POUR TOUT CE
+     FICHIER : le balayage est LIGNE À LIGNE, et le formatage coupe les phrases.
+     « suggérez EleveAI à » finissait une ligne, « l'établissement de votre
+     enfant » commençait la suivante — le verbe et son complément ne se
+     rencontraient jamais. Un motif qui exige deux mots dans le même souffle
+     rate toute phrase assez longue pour être coupée, c'est-à-dire les plus
+     bavardes, c'est-à-dire les pages de vente. D'où les motifs qui tiennent
+     debout sur un FRAGMENT : « établissement de votre enfant » ne veut rien
+     dire d'autre que ce qu'on interdit. */
+  {
+    motif:
+      /suggestion-etablissement|sugg[ée]r[a-z]*\s+[^.]{0,40}(coll[èe]ge|lyc[ée]e|[ée]tablissement)|(l.|votre\s+|son\s+)?[ée]tablissement\s+finance|financ[a-z]*\s+par\s+(l.|son\s+|votre\s+)?[ée]tablissement|(coll[èe]ge|lyc[ée]e|[ée]tablissement)\s+de\s+(votre|l.)\s*enfant|(votre|son)\s+(coll[èe]ge|lyc[ée]e|[ée]tablissement)\s+(l.utilise|participe|finance|ne l.a pas)/i,
+    pourquoi:
+      "⛔ INTERDIT : le canal B2B établissement (financement par le collège, formulaire de suggestion) — vendre à un établissement est illégal pour un contractuel en CDI (31/08)",
+    sauf:
+      /ne (vend|vendons|propose|proposons) plus|on ne vend|il n.y a (ni|pas|plus)|aucune? (offre|vente)|rien n.est vendu|interdit/i,
+  },
+  /* ⚠️⚠️ RÈGLE SÉPARÉE, ET LA SÉPARATION EST LE POINT. « Code établissement »
+     est apparu dans la règle B2B ci-dessus le 01/09, et elle criait dessus
+     « vendre à un établissement est illégal » — sur un CHAMP DE FORMULAIRE et
+     sur la POLITIQUE DE CONFIDENTIALITÉ. Un message faux posé sur un vrai
+     signalement est la façon la plus rapide de perdre un vérificateur : on
+     apprend à lire ⛔ comme « encore le faux positif du code ».
+     ⛔ CE N'EST PAS UNE VENTE, ET CE N'EST PAS RÉGLÉ POUR AUTANT. Plus aucun
+     établissement ne distribue de code puisque plus aucun ne peut souscrire :
+     ces pages décrivent un flux d'accès qui n'a plus de source. Trois fichiers
+     au 01/09 — `devenir-beta-testeur/FormulaireBeta.tsx` (le champ lui-même),
+     `politique-confidentialite` (« le prénom transmis par l'établissement ») et
+     `qui-sommes-nous/ManifesteClient` (« l'élève reçoit un code établissement de
+     son professeur »).
+     ⚠️ LA POLITIQUE DE CONFIDENTIALITÉ EST LE CAS SÉRIEUX : elle doit décrire ce
+     qui est RÉELLEMENT collecté. Si plus rien n'arrive par un établissement,
+     elle est inexacte — et une politique inexacte est un problème d'un autre
+     ordre qu'une page de vente périmée.
+     ⛔ NE PAS « CORRIGER » CES TROIS FICHIERS SANS DÉCISION : renommer le champ
+     touche la connexion des élèves, et réécrire la politique demande de savoir
+     par quel chemin un élève arrive vraiment aujourd'hui. C'est une question
+     produit, pas une relecture. */
+  {
+    motif: /code\s+[ée]tablissement/i,
+    pourquoi:
+      "⚠️ À TRANCHER (pas une vente) : plus aucun établissement ne distribue de code — soit le champ se renomme, soit la page décrit un flux d'accès sans source",
+    sauf: /ne (vend|vendons|propose|proposons) plus|il n.y a (ni|pas|plus)|rien n.est vendu|interdit/i,
+  },
   {
     motif: /phase pilote|offre pilote|[ée]tablissements? partenaires?/i,
     pourquoi: "il n'y a plus de phase pilote : l'offre est publiée",
