@@ -561,6 +561,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Dans « je jouerai », le mot « jouer » est encore là en entier : l'infinitif est la clé des trois temps.",
   },
+  "francais/cm1/conjugaison-formes": {
+    titre: "La forme d'un verbe conjugué en CM1 (2026-2027)",
+    resume:
+      "« Nous » finit toujours par -ons, aux trois temps : la marque de temps change, celle de personne tient bon.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
