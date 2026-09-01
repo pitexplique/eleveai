@@ -205,20 +205,21 @@ export const ficheConjugaisonFormesCm2: FicheCoursData = {
   notion: "conjugaison-formes",
   titre: "La forme d'un verbe : radical, temps, personne",
   accroche:
-    "« tu chantais ». La terminaison « -ais » fait trois lettres, et elle dit DEUX choses : « -ai- » annonce l'imparfait, « -s » annonce que c'est toi. Une fois qu'on sait couper, on ne devine plus une conjugaison — on la lit.",
+    "« tu chantais ». La terminaison « -ais » fait trois lettres, et elle dit deux choses : « -ai- » annonce l'imparfait, « -s » annonce que c'est toi. Une fois qu'on sait couper, on ne devine plus une conjugaison — on la lit.",
   identite: [
     { label: "Mots clés", valeur: "Radical, terminaison, marque de temps, marque de personne" },
     { label: "Le secret", valeur: "Couper le verbe en morceaux au lieu de le réciter" },
     { label: "Outil", valeur: "Comparer les six personnes pour voir ce qui bouge" },
   ],
   definition: {
-    texte:
-      "Un verbe conjugué est un mot assemblé. Il commence par un radical, qui porte le sens et qu'on retrouve dans l'infinitif, et il finit par une terminaison. Cette terminaison se lit elle-même en deux morceaux : la marque de temps, qui dit quand l'action se passe, et la marque de personne, qui dit qui la fait. Et le radical n'est pas toujours immobile : au 1er groupe il change parfois d'orthographe, au 3e il change carrément.",
+    texte: [
+      "Un verbe conjugué est un mot assemblé : un radical, qui porte le sens, puis une terminaison.",
+      "Et cette terminaison se lit elle-même en deux morceaux : la marque de temps, qui dit quand, et la marque de personne, qui dit qui.",
+      "Le radical, lui, n'est pas toujours immobile : au 1er groupe il change parfois d'orthographe, au 3e il change carrément.",
+    ].join("\n\n"),
   },
   figure: {
     schema: trainReference,
-    legende:
-      "« nous chantions ». Le premier wagon, « chant- », est le radical : on le retrouve dans « chanter », « chanteur », « chanson ». Le deuxième, « -i- », est la marque de l'imparfait. Le troisième, « -ons », est la marque de la 1re personne du pluriel. Trois wagons, trois questions : quoi, quand, qui.",
   },
   proprietes: [
     {
@@ -254,18 +255,11 @@ export const ficheConjugaisonFormesCm2: FicheCoursData = {
   ],
   reel: {
     texte:
-      "Savoir démonter un verbe sert d'abord à l'écrire juste, mais surtout à LIRE. Devant une forme jamais rencontrée — « ils accoururent », « nous parviendrons » —, personne ne l'a apprise par cœur : on la comprend en repérant le radical et les marques. C'est ce qui permet, au CM2, d'ouvrir un roman écrit au passé simple sans en connaître toutes les formes, et de ne pas s'arrêter au premier verbe inconnu.",
+      "Devant « ils accoururent », personne n'a appris la forme par cœur : on la comprend en repérant le radical et les marques. C'est ce qui permet d'ouvrir un roman au passé simple sans s'arrêter au premier verbe inconnu.",
   },
   historique: {
     texte:
-      "Il n'existe que TROIS verbes en français dont la forme avec « vous » se termine par « -tes » : vous faites, vous dites, vous êtes. Tous les autres, sans exception, font « -ez ». Ces trois-là sont les plus anciens et les plus employés de la langue — et c'est justement parce qu'on les dit tout le temps qu'ils ont résisté : un mot très fréquent s'use, mais il ne se range pas. Les verbes rares, eux, finissent toujours par imiter les autres.",
-  },
-  formule: {
-    contexte: "La composition d'une forme verbale.",
-    expression: "radical + marque de temps + marque de personne",
-    legende:
-      "Le radical se retrouve dans l'infinitif. La marque de temps est le « r » au futur, le « -ai- » ou « -i- » à l'imparfait, et rien du tout au présent. La marque de personne ferme le mot : -s, -ons, -ez, -ent. Deux formes du même verbe ne diffèrent que par ce qu'on a changé de wagon.",
-    schema: pile(trainFutur, trainImparfait),
+      "Trois verbes seulement font « -tes » avec vous : vous faites, vous dites, vous êtes. Tous les autres font « -ez ». Ce sont les plus employés de la langue : un mot très fréquent s'use, mais il ne se range pas.",
   },
   methode: [
     {
@@ -284,23 +278,7 @@ export const ficheConjugaisonFormesCm2: FicheCoursData = {
       schema: trainImparfait,
     },
   ],
-  usages: [
-    {
-      titre: "Trouver le temps",
-      detail: "Je regarde le milieu du mot : le « r » donne le futur, le « -ai- » donne l'imparfait.",
-      schema: trainFutur,
-    },
-    {
-      titre: "Trouver le radical",
-      detail: "J'écris deux personnes et je garde ce qui ne bouge pas : « rang- » dans « range, rangeons ».",
-      schema: tableauRanger,
-    },
-    {
-      titre: "Repérer un radical qui change",
-      detail: "« je viens » face à « nous venons » : le verbe est le même, le radical non.",
-      schema: tableauVenir,
-    },
-  ],
+  usages: [],
   exemples: [
     {
       titre: "Les deux marques d'une terminaison",
@@ -319,20 +297,12 @@ export const ficheConjugaisonFormesCm2: FicheCoursData = {
         "Le « r ». Je chanteRAI, tu finiRAS, il viendRA : le futur porte toujours un « r » avant la marque de personne, dans tous les verbes. Le « a » final, lui, n'est pas la marque du temps — c'est celle de la personne.",
     },
     {
-      titre: "Isoler un radical",
-      donnees: "« je finissais »",
-      schema: trainImparfait,
-      question: "Quel est le radical ?",
-      solution:
-        "« finiss- ». C'est le morceau qui ne bouge pas d'une personne à l'autre : je finissais, tu finissais, nous finissions. Ce n'est ni « fin- », qui laisserait « -issais » comme terminaison, ni « je », qui n'est pas dans le verbe.",
-    },
-    {
       titre: "Un radical qui change",
       donnees: "« Je ___ à la fête, nous ___ ensemble. » (venir, au présent)",
       schema: tableauVenir,
       question: "Pourquoi les deux formes n'ont-elles pas le même radical ?",
       solution:
-        "« je viens » et « nous venons ». C'est le même verbe, mais il possède deux radicaux : « vien- » au singulier et à la 3e du pluriel, « ven- » avec nous et vous. Ce n'est pas une faute d'orthographe comme au 1er groupe — c'est le verbe lui-même qui change de forme. Les verbes du 3e groupe font souvent cela : je peux / nous pouvons, je veux / nous voulons.",
+        "« je viens » et « nous venons » : le même verbe, deux radicaux. Ce n'est pas une faute d'orthographe comme au 1er groupe — c'est le verbe qui change de forme.",
     },
     {
       titre: "Le défi",
@@ -340,7 +310,7 @@ export const ficheConjugaisonFormesCm2: FicheCoursData = {
       schema: trainDefi,
       question: "Quelle forme, et comment la retrouver ?",
       solution:
-        "« nous pouvons ». Le verbe « pouvoir » a même trois radicaux au présent : « peu- » (je peux, tu peux, il peut), « pouv- » (nous pouvons, vous pouvez) et « peuv- » (ils peuvent). Le réflexe est toujours le même : écrire les six personnes et regarder où la coupure se déplace.",
+        "« nous pouvons ». « Pouvoir » a même trois radicaux au présent : peu-, pouv-, peuv-. Le réflexe reste le même : écrire les six personnes et regarder où la coupure se déplace.",
     },
   ],
   pieges,
@@ -418,7 +388,7 @@ export const slidesConjugaisonFormesCm2: ClasseSlide[] = [
     },
   },
   {
-    titre: "Une terminaison dit DEUX choses",
+    titre: "Une terminaison dit deux choses",
     badge: "Marques",
     section: {
       type: "duo",
