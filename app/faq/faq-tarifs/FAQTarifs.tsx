@@ -18,17 +18,23 @@ import Link from "next/link";
 // et l'état de la vente de `lib/legal/editeur.ts`, exactement comme /tarifs et
 // le llms.txt. C'est ce couple-là qui s'était désaccordé en juin.
 import { VENTE } from "@/lib/legal/editeur";
+// ⛔⛔ LES QUATRE CONSTANTES `*_ETABLISSEMENT*` SONT PARTIES LE 01/09/2026 avec
+// la question qu'elles servaient. Cette FAQ ÉMET UN `FAQPage` : la réponse
+// « et pour un établissement entier ? » ne dormait pas dans une page peu
+// visitée, elle partait dans les résultats de Google et y proposait encore un
+// contrat qu'il est interdit de signer — six jours après la décision du 29/08.
+// C'est pour ça qu'on la SUPPRIME au lieu de la réécrire en « non » : une
+// réponse qui reste ici reste dans le JSON-LD.
 import {
-  EXEMPLE_CLASSE,
-  EXEMPLE_ETABLISSEMENT,
-  PLAFOND_ETABLISSEMENT_AN,
-  PRIX_CLASSE_ELEVE_MOIS,
-  PRIX_ETABLISSEMENT_ELEVE_MOIS,
-  PRIX_FAMILLE_AN,
-  PRIX_FAMILLE_MOIS,
-  centimes,
-  euros,
+  ANNUEL_AU_TARIF_MENSUEL,
+  ENSEIGNANT,
+  MOIS_OFFERTS,
+  PERIODE_ANNUELLE,
+  PRIX_ANNUEL,
+  PRIX_MENSUEL,
+  REDUCTION_ANNUEL_POURCENT,
   montant,
+  pourcent,
 } from "@/lib/tarifs";
 
 export default function FAQTarifs() {
@@ -49,32 +55,37 @@ export default function FAQTarifs() {
       a: "La fenêtre du parent. Votre enfant voit déjà sa progression ; ce que l'abonnement ouvre, c'est votre vue à vous — son bulletin, ce qu'il a travaillé cette semaine, son historique, et des recommandations qui vous disent quoi reprendre maintenant, notion par notion. Elles sont calculées sur des règles explicites et non par une IA opaque : chacune s'explique devant un professeur.",
     },
     {
-      q: `${euros(PRIX_FAMILLE_AN)} par enfant ou par famille ?`,
-      a: `Par famille, quel que soit le nombre d'enfants, sur une seule adresse e-mail. Le frère ou la sœur d'à côté n'a pas à apprendre moins parce qu'il est le deuxième. Cela fait un euro par mois pour toute la maison.`,
+      q: "Par enfant ou par famille ?",
+      a: `Par famille, quel que soit le nombre d'enfants, sur une seule adresse courriel. Le frère ou la sœur d'à côté n'a pas à apprendre moins parce qu'il est le deuxième. Cela fait ${montant(
+        PRIX_MENSUEL,
+      )} par mois pour toute la maison.`,
+    },
+    /* ⛔ LE NOMBRE DE MOIS OFFERTS SE CALCULE. La grille du 01/09 annonçait
+       « deux mois offerts » ; deux mois de 2,50 € font 25 € par an, pas 19,90 €.
+       L'offre est plus généreuse que sa propre formule — voir `MOIS_OFFERTS`. */
+    {
+      q: "Mensuel ou annuel ?",
+      a: `Au mois, c'est ${montant(
+        PRIX_MENSUEL,
+      )}, sans engagement, résiliable quand vous voulez. À l'année, c'est ${montant(
+        PRIX_ANNUEL,
+      )} au lieu de ${montant(
+        ANNUEL_AU_TARIF_MENSUEL,
+      )} : ${pourcent(REDUCTION_ANNUEL_POURCENT)} de moins, l'équivalent de ${MOIS_OFFERTS} mois offerts. En échange, l'abonnement annuel couvre l'année scolaire et non douze mois glissants — souscrit en janvier, il s'arrête à la fin de l'année scolaire en cours.`,
     },
     {
       q: "Et si je suis professeur ?",
-      a: `${montant(
-        PRIX_CLASSE_ELEVE_MOIS,
-      )} par élève et par mois, soit ${centimes(
-        EXEMPLE_CLASSE.parMois,
-      )} par mois pour une classe de ${
-        EXEMPLE_CLASSE.eleves
-      }. Vous ne sortez rien de votre poche : c'est le tarif de groupe que vous ouvrez à vos familles, qui paient alors 25 % de moins que si chacune s'abonnait seule à ${montant(
-        PRIX_FAMILLE_MOIS,
-      )}. Et vous ne savez pas qui a payé — votre tableau de bord affiche tous vos élèves sans distinction.`,
+      a: `Vous ne payez rien : le compte enseignant est gratuit, à titre personnel, et s'ouvre sur ${ENSEIGNANT.verification}. Tableau de bord de classe compris, sans demander l'autorisation de personne.`,
     },
+    /* ⭐ LA QUESTION QUI ÉVITE UN MALENTENDU EN SALLE DES PROFS, AJOUTÉE LE
+       01/09. « Gratuit pour les enseignants » se comprend spontanément
+       « gratuit pour ma classe » : un professeur de bonne foi l'annoncera à ses
+       familles, et ce sont elles qui découvriront le prix. Cette FAQ part dans
+       les résultats de Google, c'est-à-dire à l'endroit exact où la question se
+       pose — la réponse doit être celle qu'on donnerait en face. */
     {
-      q: "Et pour un établissement entier ?",
-      a: `${montant(
-        PRIX_ETABLISSEMENT_ELEVE_MOIS,
-      )} par élève et par mois, et jamais plus de ${euros(
-        PLAFOND_ETABLISSEMENT_AN,
-      )} par an quel que soit l'effectif : tous les niveaux, toutes les classes, tous les professeurs, plus la vue complète de la direction. Un collège de ${
-        EXEMPLE_ETABLISSEMENT.eleves
-      } élèves paie ${euros(EXEMPLE_ETABLISSEMENT.total)} par an, soit ${montant(
-        EXEMPLE_ETABLISSEMENT.parEleveAn,
-      )} par élève. Aucune famille ne paie, et il n'y a aucun paiement à gérer côté foyers.`,
+      q: "Mon professeur a EleveAI : est-ce gratuit pour ma classe ?",
+      a: "Votre enfant l'a déjà gratuitement, et tous les élèves : le coach, les exercices, les parcours et les évaluations ne se paient pas, avec ou sans professeur. Ce que le compte gratuit de l'enseignant ne débloque pas, c'est l'abonnement des parents — votre fenêtre à vous, celle qui montre le bulletin et dit quoi reprendre. Elle reste au tarif normal.",
     },
     {
       q: "Pourquoi est-ce à ce point moins cher qu'ailleurs ?",
@@ -133,10 +144,16 @@ export default function FAQTarifs() {
           FAQ Tarifs – EleveAI
         </h1>
 
+        {/* ⚠️ « CELUI D'UNE FAMILLE COMME CELUI D'UN PROFESSEUR » ÉTAIT FAUX
+            DEPUIS LE 22/08 et a tenu jusqu'au 01/09 : le professeur ne paie pas
+            de tableau de bord, il ouvre un tarif à ses familles. Une constante
+            protège d'un chiffre faux, jamais d'une phrase fausse — celle-ci
+            citait le bon montant à côté du mauvais payeur, et c'est ce qui l'a
+            rendue invisible à toutes les relectures. */}
         <p className="text-slate-300 text-sm leading-relaxed">
-          Un tableau de bord, c&apos;est {euros(PRIX_FAMILLE_AN)} par an — celui
-          d&apos;une famille comme celui d&apos;un professeur. L&apos;élève, lui, ne
-          paie jamais. {etatVente}
+          La vue du parent, c&apos;est {montant(PRIX_MENSUEL)} par mois pour toute
+          la maison, ou {montant(PRIX_ANNUEL)} {PERIODE_ANNUELLE}. Le professeur,
+          lui, ne paie rien. Et l&apos;élève ne paie jamais. {etatVente}
         </p>
 
         <section className="space-y-4">

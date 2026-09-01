@@ -9,13 +9,15 @@ import type { Metadata } from "next";
 // ⛔ Et elle promettait un « prix de lancement bloqué » : il n'y a pas de prix
 // de lancement, le prix est ferme. Cette formule dit au lecteur qu'il achète
 // une remise temporaire, donc que le vrai prix est ailleurs et plus haut.
-import { PRIX_FAMILLE_AN, euros } from "@/lib/tarifs";
+import { PERIODE_ANNUELLE, PRIX_ANNUEL, PRIX_MENSUEL, montant } from "@/lib/tarifs";
 
 export const metadata: Metadata = {
   title: "Parents",
-  description: `Une IA qui explique, jamais qui fait à la place. Encadrée par un enseignant, sans publicité, données protégées. Rien à payer si le collège l'utilise ; sinon ${euros(
-    PRIX_FAMILLE_AN,
-  )} par an et par famille, quel que soit le nombre d'enfants.`,
+  description: `Une IA qui explique, jamais qui fait à la place. Encadrée par un enseignant, sans publicité, données protégées. Votre enfant ne paie jamais ; la vue du parent est à ${montant(
+    PRIX_MENSUEL,
+  )} par mois ou ${montant(
+    PRIX_ANNUEL,
+  )} ${PERIODE_ANNUELLE}, sur une seule adresse courriel et quel que soit le nombre d'enfants.`,
   alternates: { canonical: "https://www.eleveai.fr/parents" },
 };
 
@@ -62,9 +64,11 @@ const faq = [
   },
   {
     q: "Combien ça coûte, pour moi ?",
-    a: `Votre enfant, lui, ne paie jamais : le coach, les exercices, les parcours et les évaluations restent ouverts sans limite de temps. Si son collège participe, vous n'avez rien à payer non plus. Sinon, l'offre famille est à ${euros(
-      PRIX_FAMILLE_AN,
-    )} par an — un euro par mois, pour toute la maison quel que soit le nombre d'enfants — et elle ouvre votre vue à vous : son bulletin, sa semaine, et quoi reprendre ensuite. Vous pouvez aussi suggérer EleveAI à son établissement.`,
+    a: `Votre enfant, lui, ne paie jamais : le coach, les exercices, les parcours et les évaluations restent ouverts sans limite de temps. Si son collège participe, vous n'avez rien à payer non plus. Sinon, l'offre famille est à ${montant(
+      PRIX_MENSUEL,
+    )} par mois sans engagement, ou ${montant(
+      PRIX_ANNUEL,
+    )} ${PERIODE_ANNUELLE} — sur une seule adresse courriel et pour toute la maison quel que soit le nombre d'enfants. Elle ouvre votre vue à vous : son bulletin, sa semaine, et quoi reprendre ensuite.`,
   },
 ];
 
@@ -292,13 +296,20 @@ export default function ParentsPage() {
             {/* Porte 2 — Offre famille (repli) */}
             <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-md">
               <p className="text-4xl font-black text-slate-900">
-                {euros(PRIX_FAMILLE_AN)}
-                <span className="ml-1 text-base font-black text-slate-500">par an</span>
+                {montant(PRIX_MENSUEL)}
+                <span className="ml-1 text-base font-black text-slate-500">par mois</span>
               </p>
               <h3 className="mt-2 font-black">Votre collège ne l'a pas encore</h3>
+              {/* ⛔ « UN EURO PAR MOIS » ÉTAIT ÉCRIT À LA MAIN À DEUX ENDROITS
+                  DE CETTE PAGE, à côté d'un prix importé. Le chiffre juste et le
+                  chiffre faux se touchaient, et c'est le faux qu'on lisait en
+                  gros. C'est la panne que `lib/tarifs.ts` existe pour empêcher,
+                  et une constante ne protège que la moitié de la phrase où elle
+                  est appelée. */}
               <p className="mt-2 text-sm font-semibold leading-relaxed text-slate-600">
-                Un euro par mois, par famille et jamais par enfant : le second de
-                la maison ne coûte rien de plus. Sans engagement. Votre enfant,
+                Sans engagement, ou {montant(PRIX_ANNUEL)} {PERIODE_ANNUELLE}. Une
+                seule adresse courriel et jamais par enfant : le second de la
+                maison ne coûte rien de plus. Votre enfant,
                 lui, continue de travailler sans rien payer — ce que
                 l&apos;abonnement ouvre, c&apos;est votre vue à vous.
               </p>

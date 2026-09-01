@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import { VENTE } from "@/lib/legal/editeur";
-import { PRIX_FAMILLE_AN, euros } from "@/lib/tarifs";
+import { PRIX_ANNUEL, montant } from "@/lib/tarifs";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // LA FENÊTRE DU PARENT, REFAITE LE 21/08/2026.
@@ -277,12 +277,18 @@ export default function EspaceParentsClient() {
 
               <p className="mt-4">
                 <span className="bg-gradient-to-r from-emerald-500 to-green-600 bg-clip-text text-4xl font-black text-transparent">
-                  {euros(PRIX_FAMILLE_AN)}
+                  {montant(PRIX_ANNUEL)}
                 </span>{" "}
-                <span className="text-lg font-black text-slate-900">par an</span>
+                {/* ⛔ « PAR AN » SEUL ÉTAIT INSUFFISANT DEPUIS LE 01/09 :
+                    l'abonnement annuel couvre l'ANNÉE SCOLAIRE, pas douze mois
+                    glissants, et c'est une mention obligatoire. Elle se colle au
+                    prix, elle ne se renvoie pas aux CGV. */}
+                <span className="text-lg font-black text-slate-900">
+                  pour l&apos;année scolaire
+                </span>
               </p>
               <p className="mt-1 text-sm font-black text-emerald-700">
-                Par famille, quel que soit le nombre d&apos;enfants
+                Une adresse courriel, tous les enfants de la maison
               </p>
 
               {venteOuverte ? (
@@ -290,7 +296,7 @@ export default function EspaceParentsClient() {
                   href="/tarifs#famille"
                   className="mt-5 inline-flex rounded-2xl bg-gradient-to-r from-emerald-400 to-green-500 px-8 py-4 text-base font-black text-white shadow-lg transition hover:-translate-y-0.5"
                 >
-                  S&apos;abonner — {euros(PRIX_FAMILLE_AN)} par an
+                  S&apos;abonner — {montant(PRIX_ANNUEL)} pour l&apos;année
                 </Link>
               ) : (
                 <>
@@ -338,11 +344,17 @@ export default function EspaceParentsClient() {
             >
               Se connecter avec un code
             </Link>
+            {/* ⛔ CE LIEN POINTAIT VERS `/tarifs#classe`, UNE ANCRE QUI
+                N'EXISTE PLUS depuis le 01/09/2026 — le tarif classe est
+                supprimé. Un lien vers une ancre morte ne casse rien de visible :
+                il ouvre la page en haut, et personne ne s'aperçoit qu'on a perdu
+                le lecteur en route. C'est le vérificateur de tarifs qui l'a
+                trouvé, sur le LIBELLÉ et non sur l'ancre. */}
             <Link
-              href="/tarifs#classe"
+              href="/tarifs#enseignant"
               className="rounded-2xl bg-white px-6 py-3 text-sm font-black text-slate-700 shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50"
             >
-              Le tarif classe
+              Si vous enseignez
             </Link>
             <Link
               href="/faq/faq-parents"

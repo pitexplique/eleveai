@@ -5,22 +5,18 @@ import FAQTarifs from "./FAQTarifs";
 // « essais gratuits » — il n'y en a pas : l'élève ne paie jamais, ce n'est pas
 // un essai qui expire. Et elle promettait « paiement Stripe » alors que la
 // caisse n'est pas ouverte.
-import {
-  PLAFOND_ETABLISSEMENT_AN,
-  PRIX_CLASSE_ELEVE_MOIS,
-  PRIX_ETABLISSEMENT_ELEVE_MOIS,
-  PRIX_FAMILLE_AN,
-  PRIX_FAMILLE_MOIS,
-  euros,
-  montant,
-} from "@/lib/tarifs";
+// ⛔⛔ LES TROIS CONSTANTES `*_ETABLISSEMENT*` SONT PARTIES LE 01/09/2026.
+// Cette description-là est ce que Google affiche : elle annonçait encore un
+// tarif établissement et son plafond six jours après le retrait de l'offre, sur
+// la page dont les réponses partent en plus dans un `FAQPage`. Retirer la carte
+// n'éteint rien tant que la description dit le contraire.
+import { PERIODE_ANNUELLE, PRIX_ANNUEL, PRIX_MENSUEL, montant } from "@/lib/tarifs";
 
 const resume =
   `L'élève ne paie jamais : le coach, les exercices, les parcours et les évaluations ne se paient pas. ` +
-  `Ce qui se paie, c'est la fenêtre du parent — ${euros(PRIX_FAMILLE_AN)} par an et par famille, ` +
-  `quel que soit le nombre d'enfants. Le prix suit une échelle : ${montant(PRIX_FAMILLE_MOIS)} par élève et par mois ` +
-  `pour une famille seule, ${montant(PRIX_CLASSE_ELEVE_MOIS)} quand son professeur organise la classe, ` +
-  `${montant(PRIX_ETABLISSEMENT_ELEVE_MOIS)} quand c'est l'établissement — jamais plus de ${euros(PLAFOND_ETABLISSEMENT_AN)} par an.`;
+  `Ce qui se paie, c'est la fenêtre du parent — ${montant(PRIX_MENSUEL)} par mois sans engagement, ou ${montant(PRIX_ANNUEL)} ${PERIODE_ANNUELLE}, ` +
+  `sur une seule adresse courriel et quel que soit le nombre d'enfants. ` +
+  `Les enseignants, eux, ont un compte gratuit à titre personnel, ouvert sur leur adresse académique.`;
 
 export const metadata: Metadata = {
   title: "FAQ Tarifs",

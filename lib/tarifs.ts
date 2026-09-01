@@ -1,198 +1,168 @@
 // lib/tarifs.ts
 //
-// UN SEUL ENDROIT POUR LES PRIX (grille du 22/08/2026).
+// UN SEUL ENDROIT POUR LES PRIX (grille du 01/09/2026).
 //
 // Ils vivaient en trois exemplaires : la carte de `/tarifs`, la FAQ de la même
 // page, et la description que Google affiche dans ses résultats. La grille a
-// changé trois fois depuis juin, et à chaque fois un des trois est resté en
+// changé quatre fois depuis juin, et à chaque fois un des trois est resté en
 // arrière — la SERP a annoncé « 4,90 €/mois » des semaines après que la carte
 // eut cessé de le dire. ⛔ Ne recopier un prix nulle part : l'importer.
 //
 // ─────────────────────────────────────────────────────────────────────────────
-// LA GRILLE : UNE ÉCHELLE, ET ELLE DIT QUI PAIE — PAS QUOI ON ACHÈTE.
+// LA GRILLE : DEUX FORMULES POUR LES FAMILLES, ET RIEN À PAYER POUR PERSONNE
+// D'AUTRE.
 //
-//   • Famille       1,00 € par élève et par MOIS
-//   • Classe        0,75 € par élève et par MOIS
-//   • Établissement 0,50 € par élève et par MOIS, JAMAIS PLUS DE 2 000 € PAR AN
+//   • Mensuel   2,50 € par mois, sans engagement
+//   • Annuel   19,90 € pour l'ANNÉE SCOLAIRE
+//   • Enseignant  0 € — gratuit à titre personnel, vérifié sur son adresse
+//     académique (`ac-*.fr`)
 //
-// ⭐ ON PAIE UNE FOIS, JAMAIS DEUX, et plus le payeur est large moins l'élève
-// coûte. Ce ne sont pas trois produits empilés : ce sont trois payeurs
-// possibles pour le même élève.
+// ⭐ L'ÉLÈVE NE PAIE JAMAIS, ET CE N'EST PAS UNE LIGNE DE LA GRILLE : c'est ce
+// qui la gouverne. Le coach, les exercices, les parcours, les cahiers et les
+// évaluations restent ouverts sans compte payant. Ce qui se paie est la fenêtre
+// du PARENT — voir, garder, savoir quoi reprendre.
 //
-// ⭐ ET C'EST LA PREMIÈRE GRILLE SANS FAILLE DANS AUCUN SENS — il en a fallu
-// cinq. Pour 400 élèves : les familles 4 800 €, les classes 3 600 €,
-// l'établissement 2 000 €. Strictement décroissant, donc aucun payeur n'a
-// intérêt à en contourner un autre. Toutes les versions précédentes avaient une
-// inversion quelque part, et c'est toujours par là qu'un principal entrait.
-// ⛔ TOUTE MODIFICATION D'UN DES TROIS TAUX SE VÉRIFIE SUR CES TROIS TOTAUX
-// avant d'être écrite. L'inversion ne se voit pas dans les taux, elle se voit
-// dans les totaux.
+// ⚠️⚠️ CE QUI A DISPARU LE 01/09/2026, ET IL FAUT LE SAVOIR AVANT DE LIRE UNE
+// VIEILLE PAGE : **L'ÉCHELLE DES PAYEURS N'EXISTE PLUS.** Pendant dix jours, le
+// site a raconté « plus le payeur est large, moins l'élève coûte » avec trois
+// barreaux — famille, classe, établissement. Les trois sont tombés :
+//   — l'ÉTABLISSEMENT le 29/08, puis déclaré INTERDIT le 31/08 (Frédéric : « on
+//     n'a pas le droit de vendre à un établissement en tant que contractuel en
+//     CDI, c'est du pénal ») ;
+//   — la CLASSE le 01/09, avec la nouvelle grille : il n'y a plus de tarif de
+//     groupe, plus de remise, plus de « prix d'un livre ».
+// ⛔ Il ne reste donc qu'UN payeur, la famille, et DEUX façons de payer. Toute
+// phrase du site qui parle d'échelle, de payeur plus large, de tarif de groupe
+// ou de « 25 % de moins » décrit un modèle mort. Elles ont été retirées le
+// 01/09 ; si une réapparaît, c'est une page qu'on a oublié de relire.
 //
-// ⭐ TOUT SE DIT AU MOIS (Frédéric, 22/08 : « on met tout par mois ! »). C'est
-// l'unité qui rend les prix comparables entre eux et comparables à la vie : 1 €
-// se compare à un café, 12 € à un abonnement. ⚠️ ET C'EST LE MOIS QUI FIXE LES
-// NOMBRES RONDS, pas l'année : à 5 € par an, l'établissement tombait sur
-// 0,42 € par mois, qu'on ne retient pas.
+// ⭐ L'ENSEIGNANT EST GRATUIT, ET C'EST LA SIMPLIFICATION DU 01/09. Les cinq
+// grilles mortes du 22/08 butaient toutes sur la même question — comment le
+// professeur paie-t-il, et avec l'argent de qui ? Elle ne se pose plus : il ne
+// paie pas. ⚠️ Sa gratuité est PERSONNELLE et ne se propage pas : les familles
+// de ses élèves paient l'abonnement comme les autres. Un professeur ne débloque
+// rien pour sa classe, il obtient son propre outil.
 //
-// ⚠️ LA FOURCHETTE, ET ELLE EST DE FRÉDÉRIC (22/08) : « on doit rester entre 1
-// et 2 euros par mois par élève, on est 10 fois moins cher que les autres ».
-// C'est le POSITIONNEMENT, et il ne se négocie pas vers le bas : sous 1 €, le
-// prix cesse de se lire comme une affaire et se lit comme un amateurisme.
+// ⚠️⚠️ L'ARITHMÉTIQUE DE L'OFFRE ANNUELLE NE DIT PAS « DEUX MOIS OFFERTS », ET
+// C'EST À VÉRIFIER AVANT DE L'ÉCRIRE. Deux mois offerts sur 2,50 € feraient
+// 25 € par an. À 19,90 €, l'économie réelle vaut 10,10 €, soit QUATRE mois —
+// l'annuel est donc plus généreux que la formule ne le dit. `MOIS_OFFERTS` le
+// calcule au lieu de le supposer ; c'est ce nombre-là qui s'affiche.
+// ⛔ Ne jamais réécrire « deux mois offerts » à la main : ou bien l'annuel passe
+// à 25 € et la phrase redevient vraie, ou bien la phrase suit le calcul.
 //
-// ⚠️ SA FOURCHETTE ET SON SEUIL DE 2 000 € SE CONTREDISENT au-delà de 167
-// élèves (2 000 ÷ 12). Ils tiennent ensemble d'une seule façon, celle retenue
-// ici : le PRIX AFFICHÉ reste dans la fourchette — 1 € par élève et par mois —
-// et le PLAFOND fait la remise de volume. Un collège de 400 élèves paierait
-// 4 800 € au tarif ; il paie 2 000 €.
+// ⚠️⚠️ « PAR AN » N'EST PAS « SUR L'ANNÉE SCOLAIRE », et la différence est
+// contractuelle. L'abonnement annuel couvre une ANNÉE SCOLAIRE, pas douze mois
+// glissants : souscrit en janvier, il s'arrête à la fin de l'année scolaire en
+// cours, il ne court pas jusqu'au janvier suivant. C'est une mention
+// obligatoire (`PERIODE_ANNUELLE`), elle s'affiche partout où le prix annuel
+// s'affiche, et elle est reprise à l'article 8 des CGV.
 //
-// ⭐ CE QUI A DÉBLOQUÉ TOUT LE RESTE (Frédéric, 22/08) : « un prof propose
-// parfois un livre à 12 euros », puis « je suis prêt à demander à mes élèves
-// 12 euros l'année ». LE PROFESSEUR N'EST PAS LE CLIENT, IL EST LE
-// PRESCRIPTEUR. Il ne paie pas le livre : il l'inscrit sur la liste, et les
-// familles l'achètent. Pas de coopérative, pas de réunion, pas de principal —
-// le blocage sur lequel butaient toutes les versions précédentes n'existe pas
-// dans ce modèle, parce qu'il n'y a rien à débloquer.
+// ⚠️⚠️ LE PIÈGE D'UNITÉ, ET IL A DÉJÀ COÛTÉ UN FACTEUR DOUZE : Frédéric s'est
+// trompé une fois le 22/08 — « ça fait un euro par élève et par mois en gros »,
+// alors que c'était par an. La grille tient maintenant deux nombres proches
+// dans deux unités (2,50 € par MOIS, 19,90 € par AN) : ⛔ NE JAMAIS ÉCRIRE UN
+// MONTANT SANS SON UNITÉ, pas même dans un commentaire.
 //
-// ⚠️ TROIS GRILLES SONT MORTES EN 24 H, NE PAS LES RESSUSCITER :
-//   1. Le dégressif 12 → 6 → 3 : facturait le prof à l'élève, 180 € la classe.
-//   2. Le forfait « un dashboard = 12 €, quel que soit le nombre d'élèves » :
-//      un seul professeur pouvait déclarer tout un collège, et l'offre
-//      établissement devenait indéfendable devant un principal qui calcule.
-//   3. La classe vendue au professeur (30 €, puis 300 €) : elle mettait l'offre
-//      famille et l'offre classe en concurrence frontale sur la même page, et
-//      disait au parent « n'achète pas, attends que ton prof paie ».
-//
-// ⚠️⚠️ LE PIÈGE D'UNITÉ, ET IL EST PIRE DEPUIS LE 22/08 AU SOIR : LA GRILLE
-// CONTIENT MAINTENANT TROIS « 1 € » DANS DEUX UNITÉS.
-//     famille       1 € par MOIS   (12 € l'an)
-//     classe        1 € par AN     (30 € la classe, 2,50 € par mois)
-//     établissement 0,50 € par MOIS (6 € l'an, plafonné)
-// Frédéric s'est déjà trompé une fois — « ça fait un euro par élève et par mois
-// en gros », alors que c'était par an — et l'erreur vaut un facteur douze sur
-// tout le chiffre d'affaires.
-// ⛔ NE JAMAIS ÉCRIRE « 1 € » SANS SON UNITÉ, nulle part, pas même dans un
-// commentaire. Et sur la page, TOUT S'AFFICHE AU MOIS : la classe se montre à
-// 2,50 € par mois, le « 1 € par élève et par an » ne vient qu'en dessous, comme
-// mécanique. C'est la seule protection qui ne dépend pas de la vigilance.
-//
-// ⛔ ET LA LIGNE QUI NE SE FRANCHIT PAS. Ce qui se prescrit, c'est LA FENÊTRE DU
-// PARENT — jamais l'accès de l'enfant. Le livre, lui, franchit cette ligne :
-// l'élève qui ne l'a pas ne suit pas, et ça se voit au premier rang. Ici
-// l'enfant dont la famille ne paie pas travaille à l'identique. Le risque n'est
-// pas dans le code, il est dans la salle : un professeur qui ramasse 12 € voit
-// les huit qui ne les ont pas. Donc les familles s'abonnent EN DIRECT, le
-// professeur ne ramasse rien, et son tableau de bord affiche ses 30 élèves sans
-// distinction. ⛔ AUCUN COMPTEUR « 14 abonnés sur 30 » NULLE PART — c'est
-// exactement le genre de chiffre qu'on ajoute un jour parce qu'il est facile.
+// ⛔ ET AUCUN TAUX NE S'ÉCRIT À LA MAIN. « 25 % de moins » vivait en dur dans
+// quatre fichiers le 01/09 — /tarifs, /espace-profs, la FAQ tarifs et le
+// llms.txt — et aucun n'aurait suivi un changement de grille. Les pourcentages
+// se calculent ici (`REDUCTION_ANNUEL_POURCENT`, `MOIS_OFFERTS`), comme les
+// prix.
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
- * ⭐ 1 € PAR MOIS ET PAR FAMILLE — jamais par enfant. Le frère d'à côté non plus.
+ * ⭐ 2,50 € PAR MOIS, SANS ENGAGEMENT — par FOYER, jamais par enfant, sur une
+ * seule adresse courriel. Le frère d'à côté ne coûte rien de plus.
  *
- * LE MOIS EST LA SOURCE, l'année s'en déduit. C'est l'inverse de ce que faisait
- * ce fichier jusqu'au 22/08, et ce n'est pas cosmétique : tant que l'année était
- * la source, le prix mensuel était un arrondi qu'on affichait, et Frédéric s'est
- * trompé d'un facteur douze en le relisant.
+ * C'est le prix d'entrée, celui qui se compare à la vie courante : un café.
+ * ⚠️ Il se dit toujours AU MOIS. « 30 € par an » est le même montant et le
+ * mauvais nombre — c'est celui qui fait renoncer.
  */
-export const PRIX_FAMILLE_MOIS = 1;
-export const PRIX_FAMILLE_AN = PRIX_FAMILLE_MOIS * 12;
-
-/** Gardé sous son ancien nom : il est importé par la page depuis juin. */
-export const PRIX_FAMILLE_MENSUEL_EQUIVALENT = PRIX_FAMILLE_MOIS;
+export const PRIX_MENSUEL = 2.5;
 
 /**
- * 0,75 € PAR ÉLÈVE ET PAR MOIS — le deuxième barreau de l'échelle.
+ * ⭐ 19,90 € POUR L'ANNÉE SCOLAIRE — la formule à recommander.
  *
- * ⚠️ ET C'EST LE CHIFFRE LE PLUS FRAGILE DE LA GRILLE. Une classe de 30 fait
- * 22,50 € par mois, soit 270 € l'année. Frédéric s'est dit prêt à payer 15 € par
- * mois pour une classe : on est à une fois et demie son propre plafond.
- * ⛔ LA CLASSE S'AFFICHE DONC AU MOIS, JAMAIS À L'ANNÉE. « 22,50 € par mois »
- * se décide seul ; « 270 € » renvoie à la coopérative, donc à une réunion, donc
- * à la rentrée suivante — c'est le mur sur lequel quatre grilles sont mortes le
- * 22/08. Ici le choix de l'unité ne décore pas, il décide si l'offre se vend.
+ * ⚠️ ET ELLE NE SE DIT PAS « PAR AN » TOUT COURT : voir `PERIODE_ANNUELLE`.
+ * Un abonnement annuel souscrit en janvier ne court pas jusqu'au janvier
+ * suivant, il s'arrête avec l'année scolaire. Le taire, c'est vendre onze mois
+ * pour cinq — et c'est le genre de silence qui se retrouve en litige.
  */
-export const PRIX_CLASSE_ELEVE_MOIS = 0.75;
+export const PRIX_ANNUEL = 19.9;
 
 /**
- * 0,50 € PAR ÉLÈVE ET PAR MOIS — la moitié du prix famille, au même compteur.
- *
- * ⭐ C'est le seul endroit de la grille où deux nombres se comparent
- * directement, et le rapport se retient. D'où 0,50 € plutôt qu'un montant annuel
- * rond, qui aurait donné 0,42 € par mois — qu'on ne retient pas.
+ * La période que couvre l'abonnement annuel. ⛔ MENTION OBLIGATOIRE : elle
+ * s'affiche partout où `PRIX_ANNUEL` s'affiche, sans exception.
  */
-export const PRIX_ETABLISSEMENT_ELEVE_MOIS = 0.5;
+export const PERIODE_ANNUELLE =
+  "sur l'année scolaire, et non sur douze mois glissants";
+
+/** Ce que coûterait une année entière payée au mois : 30 €. Sert au calcul. */
+export const ANNUEL_AU_TARIF_MENSUEL = PRIX_MENSUEL * 12;
+
+/** L'économie réelle de la formule annuelle : 10,10 €. */
+export const ECONOMIE_ANNUELLE = ANNUEL_AU_TARIF_MENSUEL - PRIX_ANNUEL;
 
 /**
- * ⭐ JAMAIS PLUS DE 2 000 € PAR AN, QUEL QUE SOIT L'EFFECTIF — et ce nombre est
- * de Frédéric (22/08) : « en dessous de 2 000 euros un établissement n'a pas de
- * pb ». C'est un seuil de friction d'achat, pas un arrondi commercial.
+ * ⭐ COMBIEN DE MOIS L'ANNUEL FAIT-IL ÉCONOMISER — quatre, et non deux.
  *
- * ⭐ ET LE SEUIL EST VÉRIFIÉ, PAS SUPPOSÉ : son ancien proviseur lui a débloqué
- * 1 500 € l'an dernier, plus 37 € de l'heure supplémentaire. Le circuit court
- * existe, il l'a déjà emprunté, et 2 000 € reste au-dessus de ce qui est passé.
- *
- * ⚠️ Le plafond mord dès 334 élèves : un petit collège paie au tarif, un gros ne
- * franchit jamais le seuil de son proviseur.
+ * ⛔ IL SE CALCULE. La grille du 01/09 annonçait « deux mois offerts » ; deux
+ * mois de 2,50 € feraient 25 € par an, pas 19,90 €. L'offre est plus généreuse
+ * que sa propre formule, et c'est le calcul qui a raison. Écrire « deux » à la
+ * main, c'est publier un argument commercial plus faible que la vérité, et le
+ * publier faux.
  */
-export const PLAFOND_ETABLISSEMENT_AN = 2000;
+export const MOIS_OFFERTS = Math.round(ECONOMIE_ANNUELLE / PRIX_MENSUEL);
 
-/** Ce que facture un établissement de `eleves` élèves, plafond compris. */
-export function factureEtablissement(eleves: number): number {
-  return Math.min(eleves * PRIX_ETABLISSEMENT_ELEVE_MOIS * 12, PLAFOND_ETABLISSEMENT_AN);
+/** « 34 % de moins qu'au mois » — calculé, jamais recopié. */
+export const REDUCTION_ANNUEL_POURCENT = Math.round(
+  (1 - PRIX_ANNUEL / ANNUEL_AU_TARIF_MENSUEL) * 100,
+);
+
+/**
+ * Ce que l'annuel revient par mois : 1,66 €.
+ * ⚠️ À n'afficher qu'À CÔTÉ du prix annuel, jamais seul — c'est un montant
+ * qu'on ne facture pas, et affiché seul il devient une troisième formule.
+ */
+export const ANNUEL_EQUIVALENT_MENSUEL = PRIX_ANNUEL / 12;
+
+/**
+ * ⭐ L'ENSEIGNANT NE PAIE RIEN, ET SA GRATUITÉ NE SE PROPAGE PAS.
+ *
+ * ⚠️ LES DEUX MOITIÉS NE SE SÉPARENT JAMAIS. « Gratuit pour les enseignants »
+ * dit seul se lit « gratuit pour ma classe », et c'est ce qu'un professeur
+ * annoncera à ses familles de bonne foi. Ce qui est gratuit, c'est SON compte à
+ * lui, à titre personnel. Les familles de ses élèves s'abonnent comme les
+ * autres — ce qu'elles achètent est leur propre fenêtre, pas l'accès de
+ * l'enfant, qui n'a jamais rien coûté.
+ */
+export const ENSEIGNANT = {
+  gratuit: true,
+  /** Ce qui ouvre la gratuité, et la seule chose qui l'ouvre. */
+  verification: "une adresse académique en ac-*.fr",
+  /** ⛔ Ne pas étendre sans décision : @education.gouv.fr, @ac-…-outremer, les
+      académies d'outre-mer en `ac-reunion.fr` passent déjà par la règle. */
+  perimetre:
+    "le compte du professeur, à titre personnel — les familles de ses élèves s'abonnent comme les autres",
+};
+
+/**
+ * L'adresse ouvre-t-elle la gratuité enseignant ?
+ *
+ * ⚠️ LA REGEX EST VOLONTAIREMENT ÉTROITE. `ac-reunion.fr`, `ac-paris.fr`,
+ * `ac-aix-marseille.fr` passent ; `ac-truc.fr.pirate.com` et
+ * `moi@monac-perso.fr` ne passent pas — d'où l'ancrage et le tiret exigé après
+ * `ac`. ⛔ Une vérification par simple `includes("ac-")` ouvrirait le compte
+ * gratuit à n'importe quel domaine contenant ces trois caractères.
+ *
+ * ⚠️ ELLE NE PROUVE RIEN À ELLE SEULE : elle dit que l'adresse a la bonne
+ * forme, pas que la personne la relève. Le jour où la gratuité se branche pour
+ * de bon, c'est un courriel de confirmation qui fait foi, pas cette fonction.
+ */
+export function estAdresseAcademique(courriel: string): boolean {
+  return /^[^\s@]+@ac-[a-z0-9-]+\.fr$/i.test(courriel.trim());
 }
-
-/** Une classe ordinaire : le nombre qui sert d'étalon à toute la page. */
-const CLASSE_EXEMPLE_ELEVES = 30;
-
-/** 400 et non 420 : c'est le nombre sur lequel Frédéric raisonne depuis le 21/08. */
-const ETABLISSEMENT_EXEMPLE_ELEVES = 400;
-
-export const EXEMPLE_CLASSE = {
-  eleves: CLASSE_EXEMPLE_ELEVES,
-  parMois: CLASSE_EXEMPLE_ELEVES * PRIX_CLASSE_ELEVE_MOIS,
-  parAn: CLASSE_EXEMPLE_ELEVES * PRIX_CLASSE_ELEVE_MOIS * 12,
-  /** 9 € — la seule unité qui se compare à Kwyk (72 €) et Mathia (96 €). */
-  parEleveAn: PRIX_CLASSE_ELEVE_MOIS * 12,
-};
-
-/**
- * Ce que le forfait établissement donne PAR ÉLÈVE, pour un collège ordinaire.
- *
- * ⭐ C'est un ARGUMENT, pas un mode de facturation — exactement le même rôle
- * que `EXEMPLE_CLASSE` pour le professeur. On ne facture plus à l'élève, mais
- * on montre ce que ça représente, parce que c'est ce chiffre qui fait dire oui.
- */
-export const EXEMPLE_ETABLISSEMENT = {
-  eleves: ETABLISSEMENT_EXEMPLE_ELEVES,
-  total: factureEtablissement(ETABLISSEMENT_EXEMPLE_ELEVES),
-  sansPlafond: ETABLISSEMENT_EXEMPLE_ELEVES * PRIX_ETABLISSEMENT_ELEVE_MOIS * 12,
-  parMois: factureEtablissement(ETABLISSEMENT_EXEMPLE_ELEVES) / 12,
-  /** 5 € — le tarif est de 6 €, le plafond ramène l'exemple à 5 €. */
-  parEleveAn: factureEtablissement(ETABLISSEMENT_EXEMPLE_ELEVES) / ETABLISSEMENT_EXEMPLE_ELEVES,
-};
-
-/**
- * ⭐ L'ÉCHELLE, CALCULÉE SUR UN SEUL EFFECTIF — c'est la démonstration de la
- * page, et c'est aussi le test de non-régression de la grille.
- *
- * ⛔ Les trois totaux DOIVENT rester strictement décroissants. Si une inversion
- * apparaît, un payeur a intérêt à en contourner un autre, et c'est toujours par
- * là qu'un principal est entré dans les versions précédentes. L'inversion ne se
- * voit jamais dans les taux — seulement ici.
- */
-export const ECHELLE = {
-  eleves: ETABLISSEMENT_EXEMPLE_ELEVES,
-  siLesFamillesPaient: ETABLISSEMENT_EXEMPLE_ELEVES * PRIX_FAMILLE_MOIS * 12,
-  siLesClassesPaient: ETABLISSEMENT_EXEMPLE_ELEVES * PRIX_CLASSE_ELEVE_MOIS * 12,
-  siLEtablissementPaie: factureEtablissement(ETABLISSEMENT_EXEMPLE_ELEVES),
-};
-
-/** L'argument de la carte Établissement : ce que les familles ne débourseront pas. */
-export const ARGUMENT_ETABLISSEMENT = {
-  eleves: ETABLISSEMENT_EXEMPLE_ELEVES,
-  siLesFamillesPaient: ECHELLE.siLesFamillesPaient,
-  siLEtablissementPaie: ECHELLE.siLEtablissementPaie,
-};
 
 /**
  * « 12 € », « 2 000 € » — un seul format d'écriture pour toute l'application.
@@ -216,10 +186,32 @@ export function centimes(montantEuros: number): string {
 }
 
 /**
- * Le bon des deux, choisi tout seul : « 5 € » pour un compte rond, « 0,40 € »
- * sinon. Les prix tombent juste aujourd'hui ; il n'y a aucune raison qu'ils
- * tombent juste après le prochain changement.
+ * Le bon des deux, choisi tout seul : « 5 € » pour un compte rond, « 2,50 € »
+ * sinon. ⚠️ Les deux prix de la grille du 01/09 ont des centimes : c'est
+ * `centimes()` qui sort de cette fonction dans les deux cas, et c'est voulu —
+ * « 19,9 € » ne s'écrit pas.
  */
 export function montant(valeur: number): string {
   return Number.isInteger(valeur) ? euros(valeur) : centimes(valeur);
+}
+
+/**
+ * « 34 % » — avec une ESPACE FINE INSÉCABLE (U+202F) avant le signe.
+ *
+ * ⚠️ CE DÉFAUT NE SE VOIT QUE DANS LE NAVIGATEUR, ET SEULEMENT EN ÉTROIT.
+ * Écrit avec une espace ordinaire, « 34 % de moins » se coupait en « 34 » à la
+ * fin d'une ligne et « % de moins » au début de la suivante, en 375 px, dans
+ * l'encadré du prix annuel — c'est-à-dire à l'endroit le plus lu de la page.
+ * Le code était juste, le rendu non.
+ *
+ * ⛔ RÉSERVÉ À L'AFFICHAGE. Ne pas s'en servir dans `/llms.txt` ni dans un
+ * JSON-LD : ce sont des sorties lues par des machines, et un caractère
+ * d'espacement exotique n'y apporte rien qu'un risque d'analyse.
+ * ⚠️ Le caractère est écrit en littéral, pas calculé : `toLocaleString` dépend
+ * de la bibliothèque ICU présente, qui n'est pas la même au rendu serveur et
+ * dans le navigateur — c'est un écart d'hydratation, et il ne se voit pas à la
+ * relecture.
+ */
+export function pourcent(valeur: number): string {
+  return `${valeur} %`;
 }

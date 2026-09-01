@@ -20,13 +20,10 @@ import type { Metadata } from "next";
 // silence : c'est la leçon du llms.txt qui prétendait que le coach ne demandait
 // pas de compte.
 import { VENTE } from "@/lib/legal/editeur";
-import {
-  EXEMPLE_CLASSE,
-  PRIX_CLASSE_ELEVE_MOIS,
-  PRIX_FAMILLE_MOIS,
-  centimes,
-  montant,
-} from "@/lib/tarifs";
+import { ENSEIGNANT, PRIX_MENSUEL, montant } from "@/lib/tarifs";
+
+/** L'effectif d'une classe ordinaire — sert d'illustration, plus de calcul. */
+const CLASSE_EXEMPLE_ELEVES = 30;
 
 // ⚠️ LA CANONIQUE SUIT LA REDIRECTION, ELLE NE LA CONTREDIT PAS (10/08/2026).
 // Cette page a vécu à `/enseignants` ; depuis le 08/08 c'est l'inverse qui est
@@ -391,21 +388,28 @@ export default function EnseignantsPage() {
               <p className="text-xs font-black uppercase tracking-wide text-sky-700">
                 Vous, pour votre ou vos classes
               </p>
+              {/* ⭐ ZÉRO EURO DEPUIS LE 01/09/2026, ET C'EST CE BLOC QUI A
+                  DÉCLENCHÉ LE CHANGEMENT. Le prix s'affichait au mois et par
+                  élève, ce qui invitait le professeur à multiplier par son
+                  effectif : 30 € par mois pour une classe, 150 € s'il en a
+                  cinq — 1 800 € par an. C'est le calcul que Frédéric a fait ce
+                  jour-là, et il est le bon : aucun enseignant ne sort ça de sa
+                  poche. Il n'y a plus rien à multiplier. */}
               <p className="mt-2 text-3xl font-black text-slate-900">
-                {montant(PRIX_CLASSE_ELEVE_MOIS)}
+                Gratuit
                 <span className="ml-1 text-base font-black text-slate-500">
-                  par élève et par mois
+                  à titre personnel
                 </span>
               </p>
-              {/* ⭐ CE QUE LE PROFESSEUR APPORTE, SANS PAYER POUR AUTANT : ses
-                  familles passent de 1 € à 0,75 €. C'est le tarif de groupe
-                  qu'il ouvre, comme pour une sortie scolaire. ⛔ Ne jamais
-                  afficher le total annuel d'une classe (270 €) : c'est le
-                  nombre qui renvoie un prof à sa coopérative. */}
+              {/* ⛔ LES DEUX MOITIÉS NE SE SÉPARENT PAS. « Gratuit » seul se lit
+                  « gratuit pour ma classe », et c'est ce qu'un professeur
+                  annoncera de bonne foi à ses familles — qui découvriront le
+                  prix devant la caisse. La restriction est donc sur la ligne
+                  d'après le mot, pas en bas de page. */}
               <p className="mt-1 text-sm font-black text-sky-800">
-                {centimes(EXEMPLE_CLASSE.parMois)} par mois pour{" "}
-                {EXEMPLE_CLASSE.eleves} élèves — 25 % de moins que si chaque
-                famille s&apos;abonnait seule à {montant(PRIX_FAMILLE_MOIS)}
+                Ouvert sur {ENSEIGNANT.verification} — gratuit pour vous, pas
+                pour les familles de vos élèves, qui restent à{" "}
+                {montant(PRIX_MENSUEL)} par mois
               </p>
               {/* ⛔ CETTE PHRASE DISAIT « LES FAMILLES DE VOTRE CLASSE NE PAIENT
                   RIEN » — vrai du forfait professeur du 21/08, faux depuis le 22.
@@ -417,10 +421,10 @@ export default function EnseignantsPage() {
                   l'enfant dont la famille ne s'abonne pas travaille à
                   l'identique — sans que vous sachiez lequel c'est. */}
               <p className="mt-3 text-sm font-semibold leading-relaxed text-slate-600">
-                Vous n&apos;avancez rien et vous ne ramassez rien : vos familles
-                s&apos;abonnent en direct, au tarif de votre classe. Vous ne
+                Vous n&apos;avancez rien et vous ne ramassez rien : les familles
+                qui s&apos;abonnent le font en direct, au tarif ordinaire. Vous ne
                 saurez pas qui a payé — votre tableau de bord affiche vos{" "}
-                {EXEMPLE_CLASSE.eleves} élèves sans distinction, et celui dont la
+                {CLASSE_EXEMPLE_ELEVES} élèves sans distinction, et celui dont la
                 famille ne s&apos;abonne pas travaille exactement comme les
                 autres. Vos élèves, eux, n&apos;ont jamais rien à payer.
               </p>

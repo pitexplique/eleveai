@@ -19,12 +19,10 @@ import { EleveProvider } from "@/context/EleveContext";
 import MasqueSurGuide from "@/components/MasqueSurGuide";
 import EcrireAuProf from "@/components/EcrireAuProf";
 import PageViewTracker from "@/components/PageViewTracker";
-import {
-  PRIX_ETABLISSEMENT_ELEVE_MOIS,
-  PRIX_FAMILLE_AN,
-  PLAFOND_ETABLISSEMENT_AN,
-  PRIX_CLASSE_ELEVE_MOIS,
-} from "@/lib/tarifs";
+// ⛔ `PRIX_ETABLISSEMENT_ELEVE_MOIS` et `PLAFOND_ETABLISSEMENT_AN` ont quitté
+// cet import le 01/09/2026 avec l'offre qu'ils déclaraient. Ce JSON-LD vit dans
+// le layout : il partait donc depuis TOUTES les pages du site.
+import { PRIX_ANNUEL, PRIX_MENSUEL } from "@/lib/tarifs";
 import { VENTE } from "@/lib/legal/editeur";
 
 const geistSans = Geist({
@@ -287,10 +285,11 @@ export default function RootLayout({
          « l'offre élève n'est pas à zéro euros »). Une première version en
          déclarait une, en tête, nommée « toujours gratuit ». Deux fautes.
 
-         La première est factuelle : le catalogue a TROIS offres — famille,
-         classe, établissement. L'élève n'y figure pas parce qu'il n'achète
-         rien ; il est le bénéficiaire, pas une ligne commerciale. En inventer
-         une, c'est décrire un catalogue qui n'existe pas.
+         La première est factuelle : le catalogue a DEUX offres — famille et
+         classe (l'établissement est parti le 01/09, voir plus bas). L'élève n'y
+         figure pas parce qu'il n'achète rien ; il est le bénéficiaire, pas une
+         ligne commerciale. En inventer une, c'est décrire un catalogue qui
+         n'existe pas.
 
          La seconde est éditoriale, et elle est plus grave : le mot « gratuit »
          a quitté /tarifs le matin même, où il apparaissait sept fois sur une
@@ -307,18 +306,18 @@ export default function RootLayout({
       offers: [
         {
           "@type": "Offer",
-          name: "Famille — par foyer, jamais par enfant",
+          name: "Famille, au mois — par foyer, jamais par enfant",
           description:
-            "Le coach, les exercices et les évaluations ne se paient pas, et l'élève garde ses résultats. Ce qui se paie, c'est que ça se souvienne de votre enfant : bulletin, travail de la semaine, historique. Un seul abonnement couvre tous les enfants du foyer.",
+            "Le coach, les exercices et les évaluations ne se paient pas, et l'élève garde ses résultats. Ce qui se paie, c'est que ça se souvienne de votre enfant : bulletin, travail de la semaine, historique. Un seul abonnement, sur une seule adresse courriel, couvre tous les enfants du foyer. Sans engagement.",
           priceSpecification: {
             "@type": "UnitPriceSpecification",
-            price: PRIX_FAMILLE_AN,
+            price: PRIX_MENSUEL,
             priceCurrency: "EUR",
             unitText: "foyer",
             referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitText: "foyer" },
-            billingDuration: 12,
+            billingDuration: 1,
             billingIncrement: 1,
-            unitCode: "ANN",
+            unitCode: "MON",
           },
           /* ⚠️ LA DISPONIBILITÉ SUIT LE VERROU DE VENTE, elle ne l'anticipe
              pas. Tant que `VENTE.ouverte` est faux, Stripe n'encaisse pas :
@@ -333,49 +332,65 @@ export default function RootLayout({
         },
         {
           "@type": "Offer",
-          name: "Classe — 0,75 € par élève et par mois",
+          /* ⛔ LE PRIX ÉTAIT ÉCRIT À LA MAIN DANS LE NOM DE L'OFFRE CLASSE —
+             « 0,75 € » — pendant que la ligne `price` juste dessous, elle,
+             s'importait. Le nom est ce qu'un moteur RECOPIE dans sa réponse ;
+             c'est donc le pire endroit où figer un montant, et c'est celui qui
+             a survécu au changement de grille. Aucun nom ne porte de chiffre.
+             ⚠️ L'OFFRE CLASSE ELLE-MÊME EST REMPLACÉE LE 01/09/2026 par la
+             seconde formule famille : il n'y a plus de tarif de groupe. */
+          name: "Famille, à l'année scolaire — par foyer, jamais par enfant",
           description:
-            "Le professeur suit sa classe compétence par compétence, sans corriger. Il ne paie rien lui-même : c'est le tarif de groupe qu'il ouvre à ses familles, qui paient 25 % de moins que si chacune s'abonnait seule. L'élève, lui, ne paie jamais.",
+            "La même chose au tarif annuel : l'abonnement couvre l'année scolaire, et non douze mois glissants. Une seule adresse courriel pour tous les enfants du foyer. Le coach, les exercices et les évaluations, eux, ne se paient jamais.",
           priceSpecification: {
             "@type": "UnitPriceSpecification",
-            price: PRIX_CLASSE_ELEVE_MOIS,
+            price: PRIX_ANNUEL,
             priceCurrency: "EUR",
-            unitText: "élève",
-            referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitText: "élève" },
-            billingDuration: 1,
+            unitText: "foyer",
+            referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitText: "foyer" },
+            /* ⚠️ L'ANNÉE, PAS LE MOIS — et `billingDuration: 12` avec elle. Un
+               moteur qui lirait 19,90 € en `MON` annoncerait 238,80 € par an à
+               un parent qui lui demande le prix, soit exactement le tarif du
+               concurrent auquel on se compare. */
+            billingDuration: 12,
             billingIncrement: 1,
-            unitCode: "MON",
+            unitCode: "ANN",
           },
           availability: VENTE.ouverte
             ? "https://schema.org/InStock"
             : "https://schema.org/PreOrder",
-          url: `${SITE_URL}/tarifs#classe`,
+          url: `${SITE_URL}/tarifs#famille`,
         },
+        /* ⭐ L'OFFRE ENSEIGNANT EST DÉCLARÉE À 0 €, ET C'EST VOLONTAIRE ICI
+           ALORS QUE L'ÉLÈVE, LUI, N'EST PAS UNE OFFRE. La distinction est celle
+           du 21/08 (Frédéric : « l'offre élève n'est pas à zéro euros ») :
+           l'élève ne souscrit rien, il bénéficie — d'où `isAccessibleForFree`
+           plus haut. Le professeur, lui, SOUSCRIT quelque chose : un compte, à
+           une condition vérifiable, avec un tableau de bord au bout. C'est une
+           offre, dont le prix se trouve être zéro.
+           ⛔ `availability` NE SUIT PAS `VENTE.ouverte` sur cette ligne : rien
+           n'est encaissé, donc rien n'attend Stripe. */
         {
           "@type": "Offer",
-          name: "Établissement — 0,50 € par élève et par mois, plafonné",
+          name: "Enseignant — gratuit, à titre personnel",
           description:
-            "Tous les niveaux, toutes les classes, tous les professeurs, et la vue complète du chef d'établissement. Jamais plus de 2 000 € par an quel que soit l'effectif. L'établissement paie pour que personne d'autre ne paie — rien aux familles, et aucun élève ne paie.",
-          priceSpecification: {
-            "@type": "UnitPriceSpecification",
-            price: PRIX_ETABLISSEMENT_ELEVE_MOIS,
-            priceCurrency: "EUR",
-            unitText: "élève",
-            referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitText: "élève" },
-            billingDuration: 1,
-            billingIncrement: 1,
-            unitCode: "MON",
-            /* Le plafond fait partie du prix : sans lui, un moteur qui
-               multiplie 0,50 € par un effectif annonce un montant que nous ne
-               demandons pas. `maxPrice` le dit dans le vocabulaire des
-               machines. */
-            maxPrice: PLAFOND_ETABLISSEMENT_AN,
-          },
-          availability: VENTE.ouverte
-            ? "https://schema.org/InStock"
-            : "https://schema.org/PreOrder",
-          url: `${SITE_URL}/tarifs#etablissement`,
+            "Le compte du professeur est gratuit, ouvert sur une adresse académique en ac-*.fr : tableau de bord de classe, devoirs suivis, évaluation sans correction. Sa gratuité est personnelle et ne s'étend pas aux familles de ses élèves, qui s'abonnent au tarif normal.",
+          price: 0,
+          priceCurrency: "EUR",
+          availability: "https://schema.org/InStock",
+          url: `${SITE_URL}/tarifs#enseignant`,
         },
+        /* ⛔⛔ L'OFFRE « ÉTABLISSEMENT » EST SUPPRIMÉE DE CE JSON-LD LE
+           01/09/2026, ET C'ÉTAIT LA DERNIÈRE OUVERTE. La carte est partie de
+           /tarifs le 29/08, la vente a été déclarée interdite le 31/08 — mais
+           ce bloc-ci la déclarait toujours aux moteurs, `availability` compris,
+           sur TOUTES les pages du site puisqu'il vit dans le layout. C'est le
+           quatrième endroit de `retirer-du-sitemap-ne-ferme-rien` : la carte,
+           la description, le llms.txt, ET le JSON-LD. Un chef d'établissement
+           qui demande à un assistant « combien coûte EleveAI pour mon collège »
+           recevait encore un prix et un plafond.
+           ⚠️ Ce qui n'est PAS touché : /dashboard-principal et l'audience
+           `etablissement`. L'outil déjà installé n'est pas une vente. */
       ],
     },
     {

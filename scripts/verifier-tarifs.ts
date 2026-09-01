@@ -29,16 +29,13 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 
 import {
-  ECHELLE,
-  EXEMPLE_CLASSE,
-  EXEMPLE_ETABLISSEMENT,
-  PLAFOND_ETABLISSEMENT_AN,
-  PRIX_CLASSE_ELEVE_MOIS,
-  PRIX_ETABLISSEMENT_ELEVE_MOIS,
-  PRIX_FAMILLE_AN,
-  PRIX_FAMILLE_MOIS,
+  ANNUEL_AU_TARIF_MENSUEL,
+  MOIS_OFFERTS,
+  PERIODE_ANNUELLE,
+  PRIX_ANNUEL,
+  PRIX_MENSUEL,
+  REDUCTION_ANNUEL_POURCENT,
   centimes,
-  euros,
   montant,
 } from "@/lib/tarifs";
 
@@ -148,14 +145,7 @@ const CONCURRENTS = /IXL|Kwyk|Mathia|Lumni|Khanmigo|Galac6|Nathan|concurrent/i;
  * veut une alerte — pas une absolution.
  */
 const NOS_MONTANTS = new Set(
-  [
-    PRIX_FAMILLE_AN,
-    PLAFOND_ETABLISSEMENT_AN,
-    EXEMPLE_ETABLISSEMENT.total,
-    ECHELLE.siLesFamillesPaient,
-    ECHELLE.siLesClassesPaient,
-    ECHELLE.siLEtablissementPaie,
-  ].map(String),
+  [PRIX_MENSUEL, PRIX_ANNUEL, ANNUEL_AU_TARIF_MENSUEL].map(String),
 );
 
 /* ── PASSE 2 — LE VOCABULAIRE D'UN MODÈLE ABANDONNÉ ───────────────────────── */
@@ -176,32 +166,84 @@ const FORMULES_MORTES: {
   // Ce qui reste vrai des deux versions : c'est la FORMULE qui diverge, jamais
   // le chiffre. Les règles ci-dessous traquent donc les formules mortes de la
   // grille actuelle.
+  /* ⛔⛔ LA RÈGLE LA PLUS IMPORTANTE DE CE FICHIER DEPUIS LE 01/09/2026, ET
+     ELLE NE CHERCHE AUCUN CHIFFRE. Le site a raconté pendant dix jours une
+     ÉCHELLE DE PAYEURS — famille, classe, établissement, « plus le payeur est
+     large moins l'élève coûte ». Les trois barreaux sont tombés (l'établissement
+     interdit le 31/08, la classe supprimée le 01/09) et il ne reste qu'un
+     payeur. Le vocabulaire, lui, était encore vivant dans huit fichiers, dont le
+     llms.txt et deux JSON-LD — c'est-à-dire dans ce que recopient les moteurs.
+     ⚠️ Aucune de ces phrases ne contenait un prix faux : elles décrivaient un
+     MODÈLE mort avec des montants justes, et c'est exactement ce qu'une
+     constante partagée ne peut pas attraper. */
   {
-    // Le professeur ne paie plus un forfait : son prix dépend de son effectif.
-    // Seul l'établissement a le droit de dire « quel que soit l'effectif », et
-    // seulement parce qu'un plafond le rend vrai.
-    motif: /forfait|quel que soit (le nombre d.[ée]l[èe]ves|l.effectif)/i,
+    motif:
+      /[ée]chelle des payeurs|plus le payeur est large|tarif de groupe|tarif classe|prix d.un livre|payeur plus large/i,
     pourquoi:
-      "le FORFAIT a été abandonné le 22/08 au soir : le prix suit une échelle par élève",
-    contexte: /€|euros?|tarif|prix|abonnement/i,
-    // ⚠️ TROIS FAUX POSITIFS À NE PAS RÉVEILLER, ils ont tous été vus le 22/08 :
-    // l'indemnité légale « forfaitaire de recouvrement de 40 € » des CGV, le
-    // « pas de forfait » d'une matinée de formation CRPE, et l'établissement,
-    // seul autorisé à dire « quel que soit l'effectif » parce qu'un plafond le
-    // rend vrai. Un vérificateur qui crie sur des lignes justes cesse d'être lu.
-    sauf: /plafond|jamais plus de|[ée]tablissement|recouvrement|pas de forfait/i,
+      "l'ÉCHELLE DES PAYEURS n'existe plus depuis le 01/09 : un seul payeur (la famille), deux formules",
   },
   {
-    // Vrai du forfait professeur, faux depuis : ce sont les familles qui paient,
-    // moins cher, et c'est tout l'intérêt de passer par la classe.
-    motif: /les familles (de (cette|votre|la) classe )?ne paient rien/i,
+    // ⚠️ Le mot « forfait » a survécu à DEUX changements de grille (22/08, puis
+    // 01/09) en restant sur un titre qu'on n'avait pas relu. Rien n'est
+    // forfaitaire : la famille paie au mois ou à l'année, l'enseignant ne paie
+    // pas.
+    motif: /forfait|quel que soit (le nombre d.[ée]l[èe]ves|l.effectif)/i,
+    pourquoi: "il n'y a aucun FORFAIT dans la grille du 01/09",
+    contexte: /€|euros?|tarif|prix|abonnement/i,
+    // ⚠️ DEUX FAUX POSITIFS À NE PAS RÉVEILLER : l'indemnité légale
+    // « forfaitaire de recouvrement de 40 € » des CGV, et la matinée de
+    // formation CRPE, qui se vend « sans forfait ». Un vérificateur qui crie sur
+    // des lignes justes cesse d'être lu.
+    // ⚠️ ÉCRIT `(de\s+)?` ET NON `de? ?` : `de?` exige un « d » suivi d'un « e »
+    // facultatif, donc il RÉCLAME la lettre d au lieu de la rendre optionnelle.
+    // La formule « sans forfait » restait accusée, et le motif avait l'air juste
+    // à la relecture. C'est le genre de faute qu'on ne voit qu'à l'exécution.
+    sauf: /recouvrement|(pas|sans)\s+(de\s+)?forfait/i,
+  },
+  /* ⛔ LA CONFUSION QUI COÛTE LE PLUS CHER DANS LA GRILLE DU 01/09, et elle se
+     fait de bonne foi : « gratuit pour les enseignants » se comprend « gratuit
+     pour ma classe ». Un professeur l'annonce à ses familles, et ce sont elles
+     qui découvrent le prix. Toute page qui parle de la gratuité enseignant doit
+     dire dans la même phrase qu'elle ne s'étend pas aux familles. */
+  {
+    motif: /gratuit (pour )?(les |aux )?(enseignants?|professeurs?|profs?)/i,
     pourquoi:
-      "faux depuis le 22/08 : dans une classe, ce sont les familles qui s'abonnent (25 % moins cher)",
-    sauf: /[ée]tablissement/i,
+      "la gratuité enseignant est PERSONNELLE : la même phrase doit dire qu'elle ne couvre pas les familles des élèves",
+    sauf: /titre personnel|pas pour les familles|ne s.[ée]tend pas|personnelle/i,
+  },
+  /* ⛔ LA MENTION OBLIGATOIRE DU 01/09 : l'abonnement annuel couvre l'ANNÉE
+     SCOLAIRE, pas douze mois glissants. Elle doit accompagner le prix annuel
+     partout où il s'affiche — pas seulement dans les CGV. */
+  {
+    motif: /19,90|19\.90/,
+    pourquoi:
+      "le prix annuel s'affiche sans sa période : « année scolaire, et non douze mois glissants » est obligatoire",
+    sauf: /ann[ée]e scolaire|PERIODE_ANNUELLE/i,
   },
   {
     motif: /sur devis|demander un devis|nous consulter pour un tarif/i,
-    pourquoi: "le prix établissement est FERME et public depuis le 22/08",
+    pourquoi:
+      "rien ne se vend sur devis aux particuliers : les deux prix sont fermes et publics",
+  },
+  /* ⛔⛔ CE QUI NE DOIT JAMAIS RÉAPPARAÎTRE, ET CE N'EST PAS UN ARBITRAGE
+     COMMERCIAL. Vendre à un établissement ou à une collectivité est INTERDIT à
+     un enseignant contractuel en CDI (Frédéric, 31/08 : « c'est du pénal »). Une
+     grille du 01/09 proposait des packs de comptes pour les mairies et des
+     ateliers facturés : elle n'a pas été mise en œuvre. Si le vocabulaire
+     réapparaît sur une page de vitrine, c'est qu'on l'a rouverte sans décision.
+     ⚠️ `sauf` innocente les phrases qui NIENT l'offre — le llms.txt en contient
+     une, exprès, pour les modèles de langage. */
+  {
+    motif:
+      /pack de comptes|comptes activ[ée]s|devis hors ligne|tarif pilote|collectivit[ée]s?|atelier de \d|cycle de \d+ s[ée]ances/i,
+    pourquoi:
+      "⛔ INTERDIT : ni vente à une collectivité, ni prestation facturée (contractuel en CDI, 31/08)",
+    // ⚠️ `nie`, le filtre général de négation, NE SUFFIT PAS ICI : il cherche
+    // « n'est pas / n'y a aucun », et rate « rien n'est vendu à une
+    // collectivité » — la phrase de /presse, qui dit exactement ce qu'on veut
+    // lire. Un vérificateur qui punit la page faisant le mieux son travail perd
+    // sa crédibilité en une exécution.
+    sauf: /ne (peut|peuvent) rien acheter|il n.y a (ni|pas)|aucune? (offre|vente)|rien n.est vendu/i,
   },
   {
     motif: /phase pilote|offre pilote|[ée]tablissements? partenaires?/i,
@@ -319,43 +361,54 @@ for (const fichier of tous) {
 console.log("LA GRILLE, telle que lib/tarifs.ts la calcule");
 console.log("──────────────────────────────────────────────────────────────");
 console.log(
-  `  Famille        ${euros(PRIX_FAMILLE_AN).padEnd(7)} / an   · ${centimes(
-    PRIX_FAMILLE_MOIS,
-  )} par mois · par FOYER`,
+  `  Famille · mois   ${centimes(PRIX_MENSUEL).padEnd(8)} par FOYER, sans engagement`,
 );
 console.log(
-  `  Classe         ${montant(PRIX_CLASSE_ELEVE_MOIS).padEnd(7)} / mois · par élève · ${centimes(
-    EXEMPLE_CLASSE.parMois,
-  )} par mois pour ${EXEMPLE_CLASSE.eleves}`,
+  `  Famille · année  ${centimes(PRIX_ANNUEL).padEnd(8)} ${PERIODE_ANNUELLE}`,
 );
 console.log(
-  `  Établissement  ${montant(PRIX_ETABLISSEMENT_ELEVE_MOIS).padEnd(7)} / mois · par élève · ${euros(
-    EXEMPLE_ETABLISSEMENT.total,
-  )} par an pour ${EXEMPLE_ETABLISSEMENT.eleves} (plafond ${euros(PLAFOND_ETABLISSEMENT_AN)})`,
+  `                   ${"".padEnd(8)} soit ${REDUCTION_ANNUEL_POURCENT} % de moins que ${centimes(
+    ANNUEL_AU_TARIF_MENSUEL,
+  )}, l'équivalent de ${MOIS_OFFERTS} mois offerts`,
 );
+console.log(`  Enseignant       ${"0 €".padEnd(8)} à titre personnel, adresse ac-*.fr`);
 
-/* ── L'ÉCHELLE DOIT RESTER STRICTEMENT DÉCROISSANTE ────────────────────────────
-   ⭐ LE SEUL TEST QUI DISTINGUE CETTE GRILLE DES CINQ QUI SONT MORTES LE 22/08.
-   Si un payeur plus large finit par coûter plus cher qu'un payeur plus étroit,
-   il a intérêt à le contourner — et c'est par là qu'un principal est entré dans
-   chacune des versions précédentes. L'inversion ne se voit JAMAIS dans les taux,
-   uniquement dans ces trois totaux : elle doit donc se tester, pas se relire. */
-const paliers = [
-  ECHELLE.siLesFamillesPaient,
-  ECHELLE.siLesClassesPaient,
-  ECHELLE.siLEtablissementPaie,
-];
-const decroissante = paliers.every((v, i) => i === 0 || v < paliers[i - 1]);
+/* ── LE TEST D'ARBITRAGE ENTRE LES DEUX FORMULES ───────────────────────────────
+   ⛔ CE BLOC A REMPLACÉ LE TEST DE L'ÉCHELLE le 01/09/2026. L'ancien vérifiait
+   que trois totaux annuels restaient strictement décroissants — famille, classe,
+   établissement : une inversion, et un payeur avait intérêt à en contourner un
+   autre. Cinq grilles sont mortes de cette inversion. Avec un seul payeur il n'y
+   a plus d'échelle, donc plus rien à inverser ; le test disparaît parce que le
+   risque disparaît.
+
+   ⭐ CE QUI LE REMPLACE EST LE RISQUE DE LA GRILLE ACTUELLE : l'annuel doit
+   rester strictement moins cher que douze mensualités. Si le rapport s'inverse
+   un jour — mensuel baissé, annuel oublié — la page recommanderait l'annuel en
+   affichant une remise négative, et personne ne le verrait dans les deux taux.
+   ⚠️ Le second test est arithmétique, pas commercial : « ${MOIS_OFFERTS} mois
+   offerts » doit correspondre à l'économie réelle. La grille annonçait « deux
+   mois offerts » à 19,90 € alors que le calcul en donne quatre. */
 console.log(
-  `\n  Échelle sur ${ECHELLE.eleves} élèves : ${paliers.map((v) => euros(v)).join("  >  ")}`,
+  `\n  Sur douze mois : ${centimes(ANNUEL_AU_TARIF_MENSUEL)} au mois  >  ${centimes(
+    PRIX_ANNUEL,
+  )} à l'année`,
 );
-if (!decroissante) {
+if (PRIX_ANNUEL >= ANNUEL_AU_TARIF_MENSUEL) {
   alertes.push({
     fichier: "lib/tarifs.ts",
     ligne: 0,
-    extrait: paliers.map((v) => euros(v)).join(" / "),
-    pourquoi:
-      "ÉCHELLE INVERSÉE : un payeur plus large coûte plus cher qu'un payeur plus étroit",
+    texte: `${centimes(PRIX_ANNUEL)} / ${centimes(ANNUEL_AU_TARIF_MENSUEL)}`,
+    motif:
+      "FORMULES INVERSÉES : l'abonnement annuel coûte autant ou plus que douze mensualités",
+  });
+}
+if (MOIS_OFFERTS < 1) {
+  alertes.push({
+    fichier: "lib/tarifs.ts",
+    ligne: 0,
+    texte: `${MOIS_OFFERTS} mois`,
+    motif:
+      "l'annuel ne fait pas gagner un mois entier : ne pas parler de « mois offerts »",
   });
 }
 console.log(`\n  ${tous.length} fichiers de vitrine balayés.\n`);

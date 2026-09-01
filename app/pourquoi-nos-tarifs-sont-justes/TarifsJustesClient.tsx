@@ -21,15 +21,7 @@ import Link from "next/link";
 // qualité »). Cette page est le seul endroit où la réponse tient au long.
 // ⛔ Elle ne répète pas /tarifs : là-bas on dit COMBIEN, ici on dit POURQUOI.
 // Aucun montant n'est écrit à la main — voir `lib/tarifs.ts`.
-import {
-  EXEMPLE_CLASSE,
-  PRIX_FAMILLE_AN,
-  PRIX_FAMILLE_MENSUEL_EQUIVALENT,
-  PRIX_CLASSE_ELEVE_MOIS,
-  centimes,
-  euros,
-  montant,
-} from "@/lib/tarifs";
+import { ENSEIGNANT, PRIX_ANNUEL, PRIX_MENSUEL, montant } from "@/lib/tarifs";
 
 export default function TarifsJustesClient() {
   return (
@@ -51,7 +43,7 @@ export default function TarifsJustesClient() {
             </p>
 
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-50">
-              Pourquoi {euros(PRIX_FAMILLE_AN)} par an, et pas dix fois plus
+              Pourquoi {montant(PRIX_ANNUEL)} par an, et pas dix fois plus
             </h1>
 
             <p className="max-w-3xl text-slate-300">
@@ -105,7 +97,7 @@ export default function TarifsJustesClient() {
             Les exercices, les corrections et les explications sont produits avec
             l&apos;aide de l&apos;intelligence artificielle. C&apos;est ce qui
             permet d&apos;écrire en un mois ce qui prenait des années, et donc de
-            demander {centimes(PRIX_FAMILLE_MENSUEL_EQUIVALENT)} par mois.
+            demander {montant(PRIX_MENSUEL)} par mois.
           </p>
           <p className="text-sm text-slate-200">
             Mais les deux moitiés de cette phrase ne se séparent jamais. Un
@@ -183,13 +175,19 @@ export default function TarifsJustesClient() {
                 ouvre un tarif de groupe. Une constante protège d'un chiffre
                 faux, jamais d'un verbe faux — c'est ce qui a fallu relire ici à
                 la main. */}
+            {/* ⛔ LE TOTAL DE LA CLASSE A DISPARU D'ICI LE 01/09 (il valait
+                22,50 € par mois, il vaudrait 30 €). Ce nombre-là fait faire au
+                professeur la multiplication qu'il ne doit justement pas faire :
+                cinq classes, 150 élèves, 1 800 € par an. Le repère du livre le
+                remplace, parce qu'un livre ne se multiplie pas — il se pose sur
+                une liste. */}
             <p className="text-sm text-slate-100">
-              C&apos;est aussi pour ça que le professeur qui équipe sa classe ne
-              sort rien de sa poche : il ouvre à ses familles un tarif de groupe à{" "}
-              {montant(PRIX_CLASSE_ELEVE_MOIS)} par élève et par mois —{" "}
-              {centimes(EXEMPLE_CLASSE.parMois)} par mois pour une classe de{" "}
-              {EXEMPLE_CLASSE.eleves} — et il n&apos;a besoin de
-              l&apos;autorisation de personne pour le faire.
+              C&apos;est aussi pour ça que le professeur ne paie rien du tout :
+              son compte est gratuit, à titre personnel, ouvert sur{" "}
+              {ENSEIGNANT.verification} — et il n&apos;a besoin de
+              l&apos;autorisation de personne pour s&apos;en servir. Sa gratuité
+              s&apos;arrête à lui : les familles de ses élèves s&apos;abonnent au
+              tarif ordinaire.
             </p>
           </div>
         </div>

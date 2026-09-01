@@ -268,13 +268,29 @@ export default function CgvPage() {
         </Article>
 
         <Article titre="8. Durée de l’abonnement">
+          {/* ⛔ « UNE ANNÉE SCOLAIRE OU UNE ANNÉE DE DATE À DATE » ÉTAIT DEVENU
+              FAUX LE 01/09/2026, et faux dans le sens qui se retourne contre le
+              vendeur : la grille ne connaît plus qu'une formule annuelle, et
+              elle court sur l'ANNÉE SCOLAIRE. Laisser l'alternative, c'est
+              laisser un Client soutenir qu'il avait souscrit douze mois de date
+              à date — et il aurait le texte pour lui. La formule mensuelle, qui
+              n'existait pas non plus dans cet article, y entre en même temps :
+              c'est elle qui porte le « sans engagement » annoncé sur /tarifs, et
+              une promesse commerciale sans contrepartie contractuelle ne vaut
+              rien. */}
           <p>
-            L’abonnement est souscrit pour la durée indiquée lors de la commande
-            — en règle générale une année scolaire ou une année de date à date.
+            L’abonnement mensuel est souscrit sans engagement de durée : il se
+            renouvelle de mois en mois tant que le Client le souhaite, et
+            s’interrompt à tout moment depuis son espace, sans motif ni frais.
           </p>
           <p>
-            Il ne fait l’objet d’aucune reconduction tacite : à son terme,
-            l’accès prend fin, sauf nouvelle commande du Client. Aucun
+            L’abonnement annuel est souscrit pour une <strong>année scolaire</strong>,
+            et non pour douze mois glissants : quelle que soit sa date de
+            souscription, il prend fin au terme de l’année scolaire en cours.
+          </p>
+          <p>
+            Ni l’un ni l’autre ne fait l’objet d’une reconduction tacite : à leur
+            terme, l’accès prend fin, sauf nouvelle commande du Client. Aucun
             prélèvement n’intervient sans une nouvelle commande de sa part.
           </p>
         </Article>

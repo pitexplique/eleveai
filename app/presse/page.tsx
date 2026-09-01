@@ -2,7 +2,13 @@
 "use client";
 
 import Link from "next/link";
-import { ECHELLE, PLAFOND_ETABLISSEMENT_AN, PRIX_FAMILLE_MOIS, euros, montant } from "@/lib/tarifs";
+// ⛔⛔ `ECHELLE` ET `PLAFOND_ETABLISSEMENT_AN` ONT QUITTÉ CET IMPORT LE
+// 01/09/2026. Cette page est celle que lit un JOURNALISTE : elle citait encore
+// le total d'un établissement de 400 élèves et le plafond de 2 000 €, pour une
+// offre retirée le 29/08 et déclarée interdite le 31/08. ⚠️ Un prix cité dans
+// un article ne se corrige plus jamais — c'est la leçon du « autour de 5 € »
+// corrigé ici le 22/08, et elle vient de se répéter à l'identique.
+import { PERIODE_ANNUELLE, PRIX_ANNUEL, PRIX_MENSUEL, montant } from "@/lib/tarifs";
 
 export default function PressePage() {
   return (
@@ -117,17 +123,14 @@ export default function PressePage() {
                   <p className="text-sm font-semibold">“Quel est le modèle économique ?”</p>
                   <p className="mt-1 text-sm text-slate-200">
                     L’élève ne paie jamais : le coach, les exercices, les parcours et
-                    les évaluations restent ouverts, sans publicité. Ce qui se paie,
-                    c’est de VOIR et de GARDER. Le prix suit une échelle, et
-                    c’est le payeur qui la descend : {montant(PRIX_FAMILLE_MOIS)}{" "}
-                    par élève et par mois pour une famille seule, moins quand sa
-                    classe s’en charge, moins encore quand c’est
-                    l’établissement — jamais plus de{" "}
-                    {euros(PLAFOND_ETABLISSEMENT_AN)} par an. Pour{" "}
-                    {ECHELLE.eleves} élèves : {euros(ECHELLE.siLesFamillesPaient)},{" "}
-                    {euros(ECHELLE.siLesClassesPaient)} ou{" "}
-                    {euros(ECHELLE.siLEtablissementPaie)}. On paie une fois, jamais
-                    deux.
+                    les évaluations restent ouverts, sans publicité. Les
+                    enseignants non plus — leur compte est gratuit, à titre
+                    personnel, ouvert sur une adresse académique. Ce qui se paie,
+                    c’est de VOIR et de GARDER : la fenêtre du parent, à{" "}
+                    {montant(PRIX_MENSUEL)} par mois sans engagement ou{" "}
+                    {montant(PRIX_ANNUEL)} {PERIODE_ANNUELLE}. Par foyer, sur une
+                    seule adresse courriel, quel que soit le nombre d’enfants.
+                    Rien n’est vendu à un établissement ni à une collectivité.
                   </p>
                 </div>
               </div>
