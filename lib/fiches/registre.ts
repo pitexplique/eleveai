@@ -409,6 +409,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "La 4e n'avait que le cosinus, donc rien à choisir. Avec le sinus et la tangente, le vrai exercice devient le choix du rapport — et il se lit sur les données, jamais au hasard.",
   },
+  "maths/3e/equation-resolution": {
+    titre: "Résoudre une équation",
+    resume:
+      "La 4e cherchait LA solution ; la 3e apporte l'équation produit nul, et avec elle une équation peut en avoir deux. Le signe est le piège : (x + 5) s'annule en −5, pas en 5.",
+  },
   "maths/3e/sym-transformation": {
     titre: "Transformations et homothétie",
     resume:
