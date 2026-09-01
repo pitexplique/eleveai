@@ -487,8 +487,20 @@ export const probabilitesBank: TutorBankItemV4[] = [
             { label: "C", poids: 1, couleur: couleurs.vert },
           ];
 
+      // ⛔ RÉPARÉ LE 01/09/2026, même défaut qu'en 4e la veille : le texte et
+      // les propositions étaient constants, seule la ROUE changeait. Un seul
+      // énoncé fabriqué — le vérificateur ne voit pas les canvas, et il compte
+      // juste : l'élève relisait la même phrase à chaque tirage.
+      const lieu = randomChoice([
+        "d'une kermesse d'école",
+        "d'une fête foraine",
+        "d'un jeu télévisé",
+        "d'une tombola de collège",
+        "d'un stand de la fête du village",
+        "d'un jeu de société",
+      ]);
       return {
-        text: "La roue représentée correspond-elle à une situation d’équiprobabilité ?",
+        text: `La roue ${lieu}, partagée en ${segments.length} secteurs, correspond-elle à une situation d'équiprobabilité ?`,
         format: "qcm",
         choices: ["oui", "non"],
         expected: [equal ? "oui" : "non"],
@@ -2212,8 +2224,22 @@ export const probabilitesBank: TutorBankItemV4[] = [
             { label: "B", poids: 1, couleur: couleurs.bleu },
             { label: "C", poids: 1, couleur: couleurs.vert },
           ];
+      // ⛔ RÉPARÉ LE 01/09/2026. Il posait la MÊME question que `tpl_1` avec un
+      // texte constant — deux gabarits pour une seule question, et un seul
+      // énoncé chacun.
+      // ⭐ Il porte maintenant la CONSÉQUENCE : quand la situation est
+      // équiprobable, la probabilité de chaque secteur se calcule d'un coup —
+      // et quand elle ne l'est pas, elle ne se calcule PAS en comptant les
+      // secteurs. C'est l'erreur que le chapitre doit empêcher.
+      const nb = segments.length;
       return {
-        text: "Cette roue correspond-elle à une situation d’équiprobabilité ?",
+        // ⚠️ Les deux branches doivent poser une question À RÉPONSE OUI/NON,
+        // puisque `expected` vaut `equal ? "oui" : "non"`. Une première version
+        // demandait « quelle est la probabilité ? » avec des choix oui/non :
+        // incohérent, et le typecheck ne l'aurait jamais dit.
+        text: equal
+          ? `Une roue est partagée en ${nb} secteurs identiques. Peut-on dire que chaque secteur a une probabilité de $\\dfrac{1}{${nb}}$ ?`
+          : `Une roue a ${nb} secteurs, mais l'un d'eux est plus large que les autres. Peut-on dire que chaque secteur a une probabilité de $\\dfrac{1}{${nb}}$ ?`,
         format: "qcm",
         choices: ["oui", "non"],
         expected: [equal ? "oui" : "non"],

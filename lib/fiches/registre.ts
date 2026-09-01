@@ -511,6 +511,26 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Il n'y a presque rien à deviner : l'explication est déjà dans la phrase, souvent juste après une virgule.",
   },
+  "francais/cm1/vocabulaire-relations": {
+    titre: "Familles de mots et contraires en CM1 (2026-2027)",
+    resume:
+      "Le contraire de content n'est ni joyeux ni ravi. Et tout cela sert au moment où tu te relis.",
+  },
+  "francais/cm1/vocabulaire-emploi": {
+    titre: "La lettre qu'on n'entend pas en CM1 (2026-2027)",
+    resume:
+      "Grand donne grande, chant donne chanter : la lettre muette se trouve. Cherche d'abord, apprends ce qui reste.",
+  },
+  "francais/cm1/grammaire-types-phrases": {
+    titre: "Les types et les formes de phrases en CM1 (2026-2027)",
+    resume:
+      "L'exclamatif n'est pas un type : le type se lit à ce que la phrase attend de toi, pas au point final.",
+  },
+  "francais/cm1/grammaire-phrase": {
+    titre: "Trouver le sujet et le verbe en CM1 (2026-2027)",
+    resume:
+      "Un sujet n'a ni allure fixe ni place fixe. On ne le devine pas : on le prouve par « c'est … qui ».",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:

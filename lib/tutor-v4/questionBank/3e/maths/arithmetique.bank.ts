@@ -580,12 +580,29 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     hint: "Décompose progressivement avec des facteurs premiers.",
     tags: ["entier_arithmetique", "decomposition", "template"],
     generate: () => {
+      // ⛔ RÉPARÉ LE 01/09/2026, ET LE CORRIGÉ ÉTAIT PIRE QUE LA TABLE. Cinq cas
+      // seulement — mais surtout un corrigé passe-partout : « on repère la
+      // propriété utile, puis on vérifie avec une égalité, un critère ou une
+      // décomposition » vaut pour n'importe quelle question d'arithmétique, et
+      // n'apprend donc rien sur celle-ci.
+      // ⭐ Quinze nombres, et le corrigé DÉROULE les divisions successives.
+      // Le contrôle final est nommé : refaire le produit.
       const items = [
-        { n: 18, expected: ["2×3^2", "2 × 3^2", "2×3²", "2 × 3²"], exp: "18 = 2 × 9 = 2 × 3²." },
-        { n: 20, expected: ["2^2×5", "2²×5", "2^2 × 5", "2² × 5"], exp: "20 = 4 × 5 = 2² × 5." },
-        { n: 28, expected: ["2^2×7", "2²×7", "2^2 × 7", "2² × 7"], exp: "28 = 4 × 7 = 2² × 7." },
-        { n: 30, expected: ["2×3×5", "2 × 3 × 5"], exp: "30 = 2 × 3 × 5." },
-        { n: 36, expected: ["2^2×3^2", "2²×3²", "2^2 × 3^2", "2² × 3²"], exp: "36 = 4 × 9 = 2² × 3²." },
+        { n: 12, expected: ["2^2×3", "2²×3", "2^2 × 3", "2² × 3"], etapes: "12 ÷ 2 = 6, puis 6 ÷ 2 = 3, puis 3 ÷ 3 = 1", res: "2² × 3" },
+        { n: 18, expected: ["2×3^2", "2 × 3^2", "2×3²", "2 × 3²"], etapes: "18 ÷ 2 = 9, puis 9 ÷ 3 = 3, puis 3 ÷ 3 = 1", res: "2 × 3²" },
+        { n: 20, expected: ["2^2×5", "2²×5", "2^2 × 5", "2² × 5"], etapes: "20 ÷ 2 = 10, puis 10 ÷ 2 = 5, puis 5 ÷ 5 = 1", res: "2² × 5" },
+        { n: 24, expected: ["2^3×3", "2³×3", "2^3 × 3", "2³ × 3"], etapes: "24 ÷ 2 = 12, puis 12 ÷ 2 = 6, puis 6 ÷ 2 = 3, puis 3 ÷ 3 = 1", res: "2³ × 3" },
+        { n: 28, expected: ["2^2×7", "2²×7", "2^2 × 7", "2² × 7"], etapes: "28 ÷ 2 = 14, puis 14 ÷ 2 = 7, puis 7 ÷ 7 = 1", res: "2² × 7" },
+        { n: 30, expected: ["2×3×5", "2 × 3 × 5"], etapes: "30 ÷ 2 = 15, puis 15 ÷ 3 = 5, puis 5 ÷ 5 = 1", res: "2 × 3 × 5" },
+        { n: 36, expected: ["2^2×3^2", "2²×3²", "2^2 × 3^2", "2² × 3²"], etapes: "36 ÷ 2 = 18, puis 18 ÷ 2 = 9, puis 9 ÷ 3 = 3, puis 3 ÷ 3 = 1", res: "2² × 3²" },
+        { n: 40, expected: ["2^3×5", "2³×5", "2^3 × 5", "2³ × 5"], etapes: "40 ÷ 2 = 20, puis 20 ÷ 2 = 10, puis 10 ÷ 2 = 5, puis 5 ÷ 5 = 1", res: "2³ × 5" },
+        { n: 42, expected: ["2×3×7", "2 × 3 × 7"], etapes: "42 ÷ 2 = 21, puis 21 ÷ 3 = 7, puis 7 ÷ 7 = 1", res: "2 × 3 × 7" },
+        { n: 45, expected: ["3^2×5", "3²×5", "3^2 × 5", "3² × 5"], etapes: "45 n'est pas pair : on essaie 3. 45 ÷ 3 = 15, puis 15 ÷ 3 = 5, puis 5 ÷ 5 = 1", res: "3² × 5" },
+        { n: 50, expected: ["2×5^2", "2×5²", "2 × 5^2", "2 × 5²"], etapes: "50 ÷ 2 = 25, puis 25 ÷ 5 = 5, puis 5 ÷ 5 = 1", res: "2 × 5²" },
+        { n: 60, expected: ["2^2×3×5", "2²×3×5", "2^2 × 3 × 5", "2² × 3 × 5"], etapes: "60 ÷ 2 = 30, puis 30 ÷ 2 = 15, puis 15 ÷ 3 = 5, puis 5 ÷ 5 = 1", res: "2² × 3 × 5" },
+        { n: 63, expected: ["3^2×7", "3²×7", "3^2 × 7", "3² × 7"], etapes: "63 n'est pas pair : on essaie 3. 63 ÷ 3 = 21, puis 21 ÷ 3 = 7, puis 7 ÷ 7 = 1", res: "3² × 7" },
+        { n: 84, expected: ["2^2×3×7", "2²×3×7", "2^2 × 3 × 7", "2² × 3 × 7"], etapes: "84 ÷ 2 = 42, puis 42 ÷ 2 = 21, puis 21 ÷ 3 = 7, puis 7 ÷ 7 = 1", res: "2² × 3 × 7" },
+        { n: 90, expected: ["2×3^2×5", "2×3²×5", "2 × 3^2 × 5", "2 × 3² × 5"], etapes: "90 ÷ 2 = 45, puis 45 ÷ 3 = 15, puis 15 ÷ 3 = 5, puis 5 ÷ 5 = 1", res: "2 × 3² × 5" },
       ];
       const item = randomChoice(items);
 
@@ -594,11 +611,11 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
         format: "short",
         expected: item.expected,
         comparator: "exact_text",
-        explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
-          `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
-          `Calcul : on utilise les données de la question pour justifier la réponse. ` +
-          (item.exp) +
-          `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
+        explanation:
+          "Définition : décomposer un entier, c'est l'écrire comme un produit de nombres PREMIERS — et cette écriture est unique, à l'ordre près.\n\n" +
+          "Méthode : on divise par le plus petit nombre premier possible, on recommence sur le quotient obtenu, et on s'arrête quand on tombe sur 1.\n\n" +
+          `Calcul : ${item.etapes}. On rassemble les diviseurs utilisés : ${item.res}.\n\n` +
+          `Conclusion : $${item.n} = ${item.res}$. ⚠️ Deux contrôles avant de conclure — chaque facteur doit être PREMIER, et leur produit doit redonner ${item.n}. Refaire le produit prend cinq secondes et attrape toutes les erreurs.`,
       };
     },
   },

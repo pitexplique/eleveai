@@ -40,11 +40,20 @@ type TriangleName = {
   C: string;
 };
 
+// ⭐ ÉLARGIE LE 31/08/2026 : quatre nommages donnaient quatre énoncés, sous le
+// seuil de renouvellement. Huit en donnent le double, et l'élève cesse de
+// reconnaître une figure apprise.
+// ⚠️ Pas de I ni de O, qui se confondent avec 1 et 0 ; jamais deux lettres
+// voisines de l'alphabet dans un même triangle.
 const triangleNames: TriangleName[] = [
   { A: "A", B: "B", C: "C" },
   { A: "M", B: "N", C: "P" },
   { A: "R", B: "S", C: "T" },
   { A: "E", B: "F", C: "G" },
+  { A: "K", B: "L", C: "H" },
+  { A: "D", B: "U", C: "V" },
+  { A: "J", B: "X", C: "Y" },
+  { A: "S", B: "E", C: "W" },
 ];
 
 function sideName(labels: TriangleName, side: "AB" | "BC" | "CA") {
@@ -1472,7 +1481,82 @@ export const pythagore3eBank: TutorBankItemV4[] = [
           `Définition : on commence par énoncer le triangle rectangle et le théorème.\n\n` +
           `Méthode : on précise « rectangle en ${labels.A} », puis l’égalité.\n\n` +
           `Calcul : $${sideName(labels, "BC")}^2 = ${sideName(labels, "AB")}^2 + ${sideName(labels, "CA")}^2$.\n\n` +
-          `Conclusion : la bonne phrase mentionne le triangle rectangle puis l’égalité de Pythagore.`,
+          `Conclusion : ⭐ une rédaction de Pythagore se juge sur trois points — le triangle est NOMMÉ, l'angle droit est PRÉCISÉ, et l'hypoténuse est SEULE à gauche du signe égal. Les trois, ou la démonstration ne vaut rien.`,
+      };
+    },
+  },
+  {
+    // ⭐ SECOND GABARIT AJOUTÉ LE 31/08/2026 : cette micro n'en avait qu'un, et
+    // le mode complet du coach en exige deux pour opposer ses questions.
+    // ⭐⭐ IL PORTE LE GESTE DU BREVET : on ne demande pas d'écrire une
+    // rédaction — un QCM ne sait pas la corriger — mais de REPÉRER ce qui
+    // cloche dans celle d'un autre. C'est le même savoir, évaluable, et c'est
+    // aussi ce qui se raconte le mieux en vidéo : une erreur qu'on montre du
+    // doigt vaut mieux qu'une règle qu'on énonce.
+    kind: "template",
+    id: "pythagore_theoreme_rediger_tpl_2_erreur",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "pythagore_theoreme",
+    microId: "pythagore_rediger",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Trois choses à vérifier : le triangle nommé, l'angle droit précisé, et l'hypoténuse seule à gauche.",
+    tags: ["pythagore_theoreme", "rediger", "erreur", "qcm", "template"],
+    generate: () => {
+      const l = randomChoice(triangleNames);
+      const AB = sideName(l, "AB");
+      const BC = sideName(l, "BC");
+      const CA = sideName(l, "CA");
+      const cas = randomChoice([
+        {
+          redaction: `Dans le triangle ${l.A}${l.B}${l.C} rectangle en ${l.A}, d'après le théorème de Pythagore : $${AB}^2 = ${BC}^2 + ${CA}^2$`,
+          faute: "l'hypoténuse n'est pas au bon endroit",
+          pourquoi: `l'angle droit est en ${l.A}, donc l'hypoténuse est $${BC}$ — c'est elle qui doit être seule à gauche, pas $${AB}$`,
+        },
+        {
+          redaction: `Dans le triangle ${l.A}${l.B}${l.C}, d'après le théorème de Pythagore : $${BC}^2 = ${AB}^2 + ${CA}^2$`,
+          faute: "l'angle droit n'est pas précisé",
+          pourquoi: "sans « rectangle en " + l.A + " », rien ne justifie d'appliquer le théorème : c'est son unique condition d'emploi",
+        },
+        {
+          redaction: `D'après le théorème de Pythagore : $${BC}^2 = ${AB}^2 + ${CA}^2$`,
+          faute: "le triangle n'est pas nommé",
+          pourquoi: "une démonstration doit dire DE QUOI elle parle ; sans le triangle, l'égalité tombe de nulle part",
+        },
+        {
+          redaction: `Dans le triangle ${l.A}${l.B}${l.C} rectangle en ${l.A}, d'après le théorème de Pythagore : $${BC} = ${AB} + ${CA}$`,
+          faute: "les carrés ont disparu",
+          pourquoi: `Pythagore relie les CARRÉS des longueurs. Sans eux, l'égalité est fausse — et elle dirait même que le chemin direct égale le détour, ce que l'inégalité triangulaire interdit`,
+        },
+        {
+          redaction: `Dans le triangle ${l.A}${l.B}${l.C} rectangle en ${l.A}, d'après le théorème de Pythagore : $${BC}^2 = ${AB}^2 + ${CA}^2$`,
+          faute: "rien : la rédaction est correcte",
+          pourquoi: "le triangle est nommé, l'angle droit précisé, et l'hypoténuse est seule à gauche",
+        },
+      ]);
+      return {
+        text: `Un élève écrit : « ${cas.redaction} ». Qu'est-ce qui cloche ?`,
+        format: "qcm",
+        // ⚠️ `makeChoices` de CETTE banque prend des NOMBRES (elle fabrique des
+        // longueurs voisines) — pas des chaînes. Les cinq réponses possibles
+        // sont donc listées telles quelles et mélangées : elles sont mutuellement
+        // exclusives, et les montrer toutes est ici la bonne pédagogie — c'est
+        // la grille de relecture d'une rédaction.
+        choices: shuffle([
+          "l'hypoténuse n'est pas au bon endroit",
+          "l'angle droit n'est pas précisé",
+          "le triangle n'est pas nommé",
+          "les carrés ont disparu",
+          "rien : la rédaction est correcte",
+        ]),
+        expected: [cas.faute],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : une rédaction de Pythagore tient en trois points — le triangle NOMMÉ, l'angle droit PRÉCISÉ, et l'hypoténuse SEULE à gauche du signe égal.\n\n" +
+          "Méthode : on relit la phrase en cochant les trois. Le premier qui manque est la faute.\n\n" +
+          `Calcul : ici, ${cas.pourquoi}.\n\n` +
+          `Conclusion : ⚠️ au brevet, ces trois points valent des points À EUX SEULS, avant même le calcul. Une égalité juste sans justification en perd, une justification complète avec une erreur de calcul en garde.`,
       };
     },
   },

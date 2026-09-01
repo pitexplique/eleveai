@@ -30,6 +30,7 @@ export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
   slides.push({
     titre: "Objectif du cours",
     badge: sousTitre,
+    teinte: "objectif",
     section: {
       type: "objectif",
       phrase: fiche.titre,
@@ -61,6 +62,7 @@ export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
       titre: "La définition",
       badge:
         tous.length > 1 ? `À écrire dans le cahier · ${i + 1} / ${tous.length}` : "À écrire dans le cahier",
+      teinte: "definition",
       ...(i === 0 && fiche.figure?.schema ? { schema: fiche.figure.schema } : {}),
       section: {
         type: "objectif",
@@ -75,6 +77,7 @@ export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
     slides.push({
       titre: p.titre,
       badge: `Propriété ${i + 1} / ${fiche.proprietes.length}`,
+      teinte: "propriete",
       schema: p.schema,
       section: { type: "objectif", phrase: p.texte },
     });
@@ -93,6 +96,7 @@ export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
     slides.push({
       titre: "À quoi ça sert ?",
       badge: "Au quotidien",
+      teinte: "reel",
       section: { type: "objectif", phrase: fiche.reel.texte },
     });
   }
@@ -100,6 +104,7 @@ export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
     slides.push({
       titre: "Le savais-tu ?",
       badge: "Un peu d'histoire",
+      teinte: "histoire",
       section: { type: "objectif", phrase: fiche.historique.texte },
     });
   }
@@ -109,6 +114,7 @@ export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
     slides.push({
       titre: fiche.formule.contexte,
       badge: "La formule",
+      teinte: "definition",
       schema: fiche.formule.schema,
       section: {
         type: "objectif",
@@ -124,6 +130,7 @@ export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
     slides.push({
       titre: "Les réflexes",
       badge: "Méthode",
+      teinte: "methode",
       section: {
         type: "cartes",
         cartes: fiche.methode.map((m) => ({ titre: m.titre, texte: m.texte })),
@@ -134,6 +141,7 @@ export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
       slides.push({
         titre: m.titre,
         badge: `Réflexe ${i + 1} / ${fiche.methode.length}`,
+        teinte: "methode",
         schema: m.schema,
         section: { type: "objectif", phrase: m.texte },
       });
@@ -145,6 +153,7 @@ export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
     slides.push({
       titre: "Selon ce que l'on cherche",
       badge: "Usages",
+      teinte: "reel",
       section: {
         type: "cartes",
         cartes: fiche.usages.map((u) => ({ titre: u.titre, texte: u.detail })),
@@ -155,6 +164,7 @@ export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
       slides.push({
         titre: u.titre,
         badge: `Usage ${i + 1} / ${fiche.usages.length}`,
+        teinte: "reel",
         schema: u.schema,
         section: { type: "objectif", phrase: u.detail },
       });
@@ -167,6 +177,7 @@ export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
     slides.push({
       titre: e.titre,
       badge: `Exemple ${i + 1} / ${fiche.exemples.length}`,
+      teinte: "exemple",
       schema: e.schema,
       section: {
         type: "exemple",
@@ -184,6 +195,7 @@ export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
     slides.push({
       titre: "Pièges à éviter",
       badge: "Vigilance",
+      teinte: "piege",
       section: { type: "etapes", etapes: fiche.pieges },
     });
   }
@@ -191,6 +203,7 @@ export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
     slides.push({
       titre: "À retenir",
       badge: "L'essentiel",
+      teinte: "essentiel",
       section: { type: "etapes", etapes: fiche.aRetenir },
     });
   }
@@ -200,6 +213,7 @@ export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
     slides.push({
       titre: "À toi de jouer",
       badge: `Exercice ${i + 1} / ${fiche.entrainement.length}`,
+      teinte: "exercice",
       section: {
         type: "exercice",
         enonce: ex.question,

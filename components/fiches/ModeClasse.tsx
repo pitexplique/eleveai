@@ -29,6 +29,45 @@ const VARIANTES: Record<Variante, { carte: string; label: string }> = {
   ok: { carte: "border-emerald-200 bg-emerald-50", label: "text-emerald-700" },
 };
 
+/* ⭐⭐ LES COULEURS DU MODE CLASSE — 31/08/2026, demande de Frédéric : « en mode
+   classe les élèves ont besoin de couleurs ! »
+   Le constat mesuré avant de toucher à quoi que ce soit : `slidesDepuisFiche`
+   rend la DÉFINITION, les PROPRIÉTÉS, la MÉTHODE, le RÉEL et l'HISTOIRE en
+   section `objectif`, c'est-à-dire du texte noir sur fond pâle. Soit environ
+   les deux tiers d'un diaporama sans une seule couleur, pendant que seuls les
+   exemples et les exercices en avaient.
+   ⭐ Une teinte par NATURE DE BLOC, pas par slide : l'élève apprend en trois
+   diapos que le violet est une propriété et le rose un piège. La couleur porte
+   une information, elle ne décore pas.
+   ⚠️ Le violet est celui des arcs du `PhraseCanvas`, gardé sur demande
+   explicite de Frédéric le même jour (« j'aime bien le violet »).
+   ⚠️ Palette pâle imposée : fond 50, bordure 200, texte 700. Un fond saturé
+   au vidéoprojecteur mange le texte noir. */
+export type TeinteSlide =
+  | "objectif"
+  | "definition"
+  | "propriete"
+  | "methode"
+  | "reel"
+  | "histoire"
+  | "piege"
+  | "essentiel"
+  | "exemple"
+  | "exercice";
+
+const TEINTES: Record<TeinteSlide, { carte: string; badge: string; accent: string }> = {
+  objectif: { carte: "border-emerald-200 bg-emerald-50", badge: "text-emerald-700", accent: "text-emerald-600" },
+  definition: { carte: "border-sky-200 bg-sky-50", badge: "text-sky-700", accent: "text-sky-600" },
+  propriete: { carte: "border-violet-200 bg-violet-50", badge: "text-violet-700", accent: "text-violet-600" },
+  methode: { carte: "border-amber-200 bg-amber-50", badge: "text-amber-700", accent: "text-amber-600" },
+  reel: { carte: "border-teal-200 bg-teal-50", badge: "text-teal-700", accent: "text-teal-600" },
+  histoire: { carte: "border-orange-200 bg-orange-50", badge: "text-orange-700", accent: "text-orange-600" },
+  piege: { carte: "border-rose-200 bg-rose-50", badge: "text-rose-700", accent: "text-rose-600" },
+  essentiel: { carte: "border-emerald-200 bg-emerald-50", badge: "text-emerald-700", accent: "text-emerald-600" },
+  exemple: { carte: "border-cyan-200 bg-cyan-50", badge: "text-cyan-700", accent: "text-cyan-600" },
+  exercice: { carte: "border-amber-200 bg-amber-50", badge: "text-amber-700", accent: "text-amber-600" },
+};
+
 export type ClasseSection =
   | {
       type: "objectif";
@@ -61,6 +100,8 @@ export type ClasseSlide = {
   titre: string;
   badge: string;
   section: ClasseSection;
+  /** La nature du bloc, qui décide de la couleur. Défaut : « objectif ». */
+  teinte?: TeinteSlide;
   /**
    * Le DESSIN de la slide, projeté à côté du texte.
    *
@@ -95,11 +136,14 @@ function Section({
   section,
   revealed,
   reveal,
+  teinte = "objectif",
 }: {
+  teinte?: TeinteSlide;
   section: ClasseSection;
   revealed: boolean;
   reveal: () => void;
 }) {
+  const t = TEINTES[teinte];
   switch (section.type) {
     // ⛔⛔ UNE DIAPO DOIT TENIR DANS L'ÉCRAN — Frédéric, le 30/08/2026, capture à
     // l'appui : « pas bien, il faut une hauteur de section maximum ». Sur la
@@ -113,7 +157,12 @@ function Section({
     case "objectif":
       return (
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-          <div>
+          {/* ⭐ La carte teintée remplace le texte nu (31/08/2026). C'était la
+              section la plus fréquente du diaporama et la seule sans couleur. */}
+          {/* ⚠️ Padding volontairement serré : mesuré le 31/08, une carte en
+              `p-5 lg:p-7` coutait une soixantaine de pixels de hauteur sur des
+              diapos déjà justes. La couleur ne demande pas d'espace. */}
+          <div className={`rounded-3xl border-4 p-3 lg:p-4 ${t.carte}`}>
             <p className={`${tailleProjetee(section.phrase)} font-black leading-tight text-slate-950`}>
               {section.phrase}
             </p>
@@ -164,9 +213,9 @@ function Section({
           {section.cartes.map((carte, index) => (
             <div
               key={carte.titre}
-              className="rounded-3xl border-4 border-slate-200 bg-white p-8 shadow-sm"
+              className={`rounded-3xl border-4 p-8 shadow-sm ${t.carte}`}
             >
-              <p className="text-6xl font-black text-emerald-600">
+              <p className={`text-6xl font-black ${t.accent}`}>
                 {index + 1}
               </p>
               <p className="mt-4 text-3xl font-black leading-tight text-slate-950">
@@ -186,9 +235,9 @@ function Section({
           {section.etapes.map((etape, index) => (
             <div
               key={etape}
-              className="grid items-center gap-5 rounded-3xl border-4 border-slate-200 bg-white p-7 shadow-sm md:grid-cols-[120px_1fr]"
+              className={`grid items-center gap-5 rounded-3xl border-4 p-7 shadow-sm md:grid-cols-[120px_1fr] ${t.carte}`}
             >
-              <p className="text-5xl font-black text-emerald-600">
+              <p className={`text-5xl font-black ${t.accent}`}>
                 {index + 1}
               </p>
               <p className="text-3xl font-black leading-tight text-slate-950">
@@ -450,7 +499,7 @@ export default function ModeClasse({
         <div className="mx-auto w-full max-w-7xl rounded-[2rem] border-4 border-white bg-white/90 p-5 shadow-2xl shadow-emerald-900/10 lg:p-8">
           <div className="mb-3 flex flex-wrap items-start justify-between gap-4 lg:mb-6">
             <div>
-              <p className="text-2xl font-black uppercase text-emerald-700">
+              <p className={`text-2xl font-black uppercase ${TEINTES[slide.teinte ?? "objectif"].badge}`}>
                 {slide.badge}
               </p>
               <h2 className="mt-3 text-6xl font-black tracking-normal text-slate-950">
@@ -510,6 +559,7 @@ export default function ModeClasse({
               </div>
               <Section
                 section={slide.section}
+                teinte={slide.teinte}
                 revealed={revealed}
                 reveal={() => setRevealed(true)}
               />
@@ -517,6 +567,7 @@ export default function ModeClasse({
           ) : (
             <Section
               section={slide.section}
+                teinte={slide.teinte}
               revealed={revealed}
               reveal={() => setRevealed(true)}
             />
