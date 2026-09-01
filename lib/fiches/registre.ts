@@ -541,6 +541,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Cette année tu n'as pas à nommer le groupe : deux gestes suffisent, l'enlever et le déplacer.",
   },
+  "francais/cm1/grammaire-classes-mots": {
+    titre: "Les petits mots et leur nature en CM1 (2026-2027)",
+    resume:
+      "Mets la phrase au pluriel et regarde qui a bougé : le déterminant change, l'adverbe jamais.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
