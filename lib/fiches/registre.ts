@@ -551,6 +551,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "On ne cherche pas le mot le plus important : on réduit le groupe, et le dernier mot debout est le noyau.",
   },
+  "francais/cm1/grammaire-accords": {
+    titre: "Les accords et les homophones en CM1 (2026-2027)",
+    resume:
+      "a/à, est/et, sont/son, ont/on : l'un des deux est un verbe. Mets la phrase à l'imparfait et tu sais lequel.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
