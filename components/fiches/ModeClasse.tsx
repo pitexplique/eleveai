@@ -8,6 +8,11 @@ import { ArrowLeft, Maximize, Minimize, Monitor } from "lucide-react";
 // faut donc sa propre pose d'insécables, et c'est l'écran qui compte le plus :
 // une coupure fautive projetée au tableau se voit de tout le fond de la classe.
 import { insecables, typographier } from "@/lib/fiches/typographie";
+import { LargeurProjetee } from "@/lib/canvas/largeur-projetee";
+
+/** ⭐ Largeur de repli des canvas projetés, en unités de viewBox. Réglée par la
+ *  mesure du 01/09/2026 : voir le commentaire du provider, plus bas. */
+const LARGEUR_PROJETEE = 320;
 
 /**
  * Mode classe : version vidéoprojetable d'une fiche de cours.
@@ -554,8 +559,15 @@ export default function ModeClasse({
                   dessin. Un correctif qui ne corrige rien et qui casse s'enlève.
                   ⭐ La vraie cause du débordement était ailleurs : les trois
                   colonnes des exercices, corrigées le même jour. */}
+              {/* ⭐ LE MODE CLASSE IMPOSE SA LARGEUR DE REPLI (01/09/2026).
+                  Les fiches écrivent `largeurMax: 190`, calé sur leur carte de
+                  222 px : projeté, le dessin se plie à un mot par ligne et
+                  monte à 702 px de haut dans une diapo qui en montre 621.
+                  Voir lib/canvas/largeur-projetee.tsx pour les mesures. */}
               <div className="mx-auto w-full max-w-xl [&_svg]:w-full">
-                {slide.schema}
+                <LargeurProjetee.Provider value={LARGEUR_PROJETEE}>
+                  {slide.schema}
+                </LargeurProjetee.Provider>
               </div>
               <Section
                 section={slide.section}

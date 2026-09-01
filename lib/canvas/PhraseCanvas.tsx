@@ -2,6 +2,7 @@
 "use client";
 
 import type { CanvasFigure, PhraseCanvasData } from "@/lib/tutor-v4/types";
+import { useLargeurProjetee } from "@/lib/canvas/largeur-projetee";
 
 // ─── LE CANVAS DU FRANÇAIS ────────────────────────────────────────────────────
 // Ce que la droite graduée est aux nombres, la phrase segmentée l'est à la
@@ -198,7 +199,12 @@ export default function PhraseCanvas({ figure }: Props) {
     return Math.max(15, brut + padding);
   });
 
-  const largeurMax = figure.size?.width ?? figure.largeurMax ?? LARGEUR_MAX_DEFAUT;
+  // ⭐ La surface passe avant la fiche : le mode classe impose sa largeur de
+  //   repli (voir lib/canvas/largeur-projetee.tsx). Sans contexte — donc sur
+  //   toutes les pages de fiches — le calcul est exactement celui d'avant.
+  const largeurImposee = useLargeurProjetee();
+  const largeurMax =
+    largeurImposee ?? figure.size?.width ?? figure.largeurMax ?? LARGEUR_MAX_DEFAUT;
   const largeurUtile = Math.max(120, largeurMax - 2 * PAD_X);
 
   // ⛔ ON NE COUPE PAS UN GROUPE EN DEUX (constaté au rendu, 20/08). La coupure
