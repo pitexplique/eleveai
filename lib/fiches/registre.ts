@@ -531,6 +531,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Un sujet n'a ni allure fixe ni place fixe. On ne le devine pas : on le prouve par « c'est … qui ».",
   },
+  "francais/cm1/grammaire-complements": {
+    titre: "Les compléments du verbe en CM1 (2026-2027)",
+    resume:
+      "Cette année tu n'as pas à nommer le groupe : deux gestes suffisent, l'enlever et le déplacer.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
