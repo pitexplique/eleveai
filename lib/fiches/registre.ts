@@ -424,6 +424,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Un cylindre donne un disque ou un rectangle selon la coupe : la question n'est jamais « quelle est la section de ce solide », mais « coupé comment ». Et dans la section, on calcule à plat.",
   },
+  "maths/3e/volume-geometrie-espace": {
+    titre: "La géométrie dans l'espace",
+    resume:
+      "Tout dessin de solide est un mensonge utile : la perspective cavalière dit ce qu'on déforme et ce qu'on garde. Trois arêtes du cube sont cachées, et une face dessinée en parallélogramme est un carré.",
+  },
   "maths/3e/sym-transformation": {
     titre: "Transformations et homothétie",
     resume:
