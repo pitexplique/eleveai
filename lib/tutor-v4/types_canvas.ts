@@ -297,6 +297,10 @@ export type SectionSolideCanvasData = {
     showLabels?: boolean;
     showSectionName?: boolean;
     showPlane?: boolean;
+    /** Les bulles « plan » et « section ». Séparées de `showPlane` le
+     *  01/09/2026 : elles réclament ~184 px de large à elles seules, ce
+     *  qu'une carte de fiche n'a pas. Défaut `true`. */
+    showCallouts?: boolean;
   };
 
   colors?: {

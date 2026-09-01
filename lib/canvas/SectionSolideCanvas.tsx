@@ -226,6 +226,15 @@ function drawPaveOrCube({
 }) {
   const isCube = figure.solide === "cube";
   const showPlane = figure.display?.showPlane ?? true;
+  // ⭐ LES BULLES SE COUPENT SÉPARÉMENT DE LA SECTION — ajouté le 01/09/2026.
+  // `showPlane` portait les DEUX : la zone orange (le cœur du dessin) et les
+  // deux bulles « plan » et « section ». Or celles-ci sont posées à des x
+  // ABSOLUS (62 et 278) prévus pour un cadre de 340, dans des boites de 92 px
+  // de large : deux boites côte à côte réclament plus de 184 px en plus du
+  // solide. Une fiche de 226 px ne peut pas les loger — et les éteindre avec
+  // `showPlane` aurait emporté la section orange avec elles.
+  // ⚠️ Défaut à `true` : les questions du coach ne bougent pas d'un pixel.
+  const showCallouts = figure.display?.showCallouts ?? true;
   const showSectionName = figure.display?.showSectionName ?? true;
 
   const frontA = { x: 82, y: 96 };
@@ -328,19 +337,23 @@ function drawPaveOrCube({
             opacity={0.86}
           />
 
-          <Callout
+          {showCallouts ? (
+            <Callout
             from={{ x: 278, y: 72 }}
             to={sectionPoints[1]}
             label="plan"
             color={colors.sectionStroke}
-          />
+            />
+          ) : null}
 
-          <Callout
+          {showCallouts ? (
+            <Callout
             from={{ x: 62, y: 72 }}
             to={sectionPoints[0]}
             label="section"
             color="#16a34a"
-          />
+            />
+          ) : null}
         </>
       ) : null}
 
@@ -361,6 +374,15 @@ function drawCylindre({
   colors: typeof DEFAULT_COLORS;
 }) {
   const showPlane = figure.display?.showPlane ?? true;
+  // ⭐ LES BULLES SE COUPENT SÉPARÉMENT DE LA SECTION — ajouté le 01/09/2026.
+  // `showPlane` portait les DEUX : la zone orange (le cœur du dessin) et les
+  // deux bulles « plan » et « section ». Or celles-ci sont posées à des x
+  // ABSOLUS (62 et 278) prévus pour un cadre de 340, dans des boites de 92 px
+  // de large : deux boites côte à côte réclament plus de 184 px en plus du
+  // solide. Une fiche de 226 px ne peut pas les loger — et les éteindre avec
+  // `showPlane` aurait emporté la section orange avec elles.
+  // ⚠️ Défaut à `true` : les questions du coach ne bougent pas d'un pixel.
+  const showCallouts = figure.display?.showCallouts ?? true;
   const showSectionName = figure.display?.showSectionName ?? true;
 
   const cx = 170;
@@ -421,19 +443,23 @@ function drawCylindre({
             opacity={0.88}
           />
 
-          <Callout
+          {showCallouts ? (
+            <Callout
             from={{ x: 278, y: 72 }}
             to={{ x: cx + 42, y: 128 }}
             label="plan"
             color={colors.sectionStroke}
-          />
+            />
+          ) : null}
 
-          <Callout
+          {showCallouts ? (
+            <Callout
             from={{ x: 62, y: 82 }}
             to={{ x: cx - 42, y: 128 }}
             label="section"
             color="#16a34a"
-          />
+            />
+          ) : null}
         </>
       ) : null}
 
@@ -452,19 +478,23 @@ function drawCylindre({
             opacity={0.84}
           />
 
-          <Callout
+          {showCallouts ? (
+            <Callout
             from={{ x: 278, y: 72 }}
             to={{ x: cx + 42, y: 116 }}
             label="plan"
             color={colors.sectionStroke}
-          />
+            />
+          ) : null}
 
-          <Callout
+          {showCallouts ? (
+            <Callout
             from={{ x: 62, y: 82 }}
             to={{ x: cx - 42, y: 116 }}
             label="section"
             color="#16a34a"
-          />
+            />
+          ) : null}
         </>
       ) : null}
 
@@ -485,6 +515,15 @@ function drawCone({
   colors: typeof DEFAULT_COLORS;
 }) {
   const showPlane = figure.display?.showPlane ?? true;
+  // ⭐ LES BULLES SE COUPENT SÉPARÉMENT DE LA SECTION — ajouté le 01/09/2026.
+  // `showPlane` portait les DEUX : la zone orange (le cœur du dessin) et les
+  // deux bulles « plan » et « section ». Or celles-ci sont posées à des x
+  // ABSOLUS (62 et 278) prévus pour un cadre de 340, dans des boites de 92 px
+  // de large : deux boites côte à côte réclament plus de 184 px en plus du
+  // solide. Une fiche de 226 px ne peut pas les loger — et les éteindre avec
+  // `showPlane` aurait emporté la section orange avec elles.
+  // ⚠️ Défaut à `true` : les questions du coach ne bougent pas d'un pixel.
+  const showCallouts = figure.display?.showCallouts ?? true;
   const showSectionName = figure.display?.showSectionName ?? true;
 
   const top = { x: 170, y: 48 };
@@ -530,19 +569,23 @@ function drawCone({
             opacity={0.88}
           />
 
-          <Callout
+          {showCallouts ? (
+            <Callout
             from={{ x: 278, y: 82 }}
             to={{ x: cx + 34, y: 120 }}
             label="plan"
             color={colors.sectionStroke}
-          />
+            />
+          ) : null}
 
-          <Callout
+          {showCallouts ? (
+            <Callout
             from={{ x: 62, y: 84 }}
             to={{ x: cx - 34, y: 120 }}
             label="section"
             color="#16a34a"
-          />
+            />
+          ) : null}
         </>
       ) : null}
 
@@ -560,19 +603,23 @@ function drawCone({
             opacity={0.84}
           />
 
-          <Callout
+          {showCallouts ? (
+            <Callout
             from={{ x: 278, y: 82 }}
             to={{ x: cx + 18, y: 112 }}
             label="plan"
             color={colors.sectionStroke}
-          />
+            />
+          ) : null}
 
-          <Callout
+          {showCallouts ? (
+            <Callout
             from={{ x: 62, y: 84 }}
             to={{ x: cx - 20, y: 126 }}
             label="section"
             color="#16a34a"
-          />
+            />
+          ) : null}
         </>
       ) : null}
 
@@ -593,6 +640,15 @@ function drawPyramide({
   colors: typeof DEFAULT_COLORS;
 }) {
   const showPlane = figure.display?.showPlane ?? true;
+  // ⭐ LES BULLES SE COUPENT SÉPARÉMENT DE LA SECTION — ajouté le 01/09/2026.
+  // `showPlane` portait les DEUX : la zone orange (le cœur du dessin) et les
+  // deux bulles « plan » et « section ». Or celles-ci sont posées à des x
+  // ABSOLUS (62 et 278) prévus pour un cadre de 340, dans des boites de 92 px
+  // de large : deux boites côte à côte réclament plus de 184 px en plus du
+  // solide. Une fiche de 226 px ne peut pas les loger — et les éteindre avec
+  // `showPlane` aurait emporté la section orange avec elles.
+  // ⚠️ Défaut à `true` : les questions du coach ne bougent pas d'un pixel.
+  const showCallouts = figure.display?.showCallouts ?? true;
   const showSectionName = figure.display?.showSectionName ?? true;
 
   const S = { x: 170, y: 46 };
@@ -661,19 +717,23 @@ function drawPyramide({
             opacity={0.86}
           />
 
-          <Callout
+          {showCallouts ? (
+            <Callout
             from={{ x: 278, y: 76 }}
             to={isHorizontal ? { x: 210, y: 132 } : { x: 210, y: 150 }}
             label="plan"
             color={colors.sectionStroke}
-          />
+            />
+          ) : null}
 
-          <Callout
+          {showCallouts ? (
+            <Callout
             from={{ x: 62, y: 82 }}
             to={isHorizontal ? { x: 138, y: 138 } : { x: 134, y: 160 }}
             label="section"
             color="#16a34a"
-          />
+            />
+          ) : null}
         </>
       ) : null}
 
@@ -698,7 +758,13 @@ export default function SectionSolideCanvas({ figure }: Props) {
   };
 
   const showLabels = figure.display?.showLabels ?? true;
-  const showMiniLegend = figure.display?.showPlane !== false;
+  // ⚠️ LA MINI-LÉGENDE N'AVAIT PAS DE DRAPEAU : elle suivait `showPlane`. Elle
+  // suit désormais AUSSI `showCallouts`, dont elle partage exactement le rôle —
+  // expliquer ce que la zone orange représente. Et elle a le même défaut : son
+  // cadre occupe y = 210 à 238, hors de tout cadre plus court que 240.
+  // Défaut inchangé, les deux valant `true`.
+  const showMiniLegend =
+    figure.display?.showPlane !== false && figure.display?.showCallouts !== false;
 
   return (
     <div className="mx-auto w-full max-w-[340px] rounded-xl border border-slate-200 bg-white p-2 shadow-sm">
@@ -709,27 +775,50 @@ export default function SectionSolideCanvas({ figure }: Props) {
       >
         <rect x={0} y={0} width={width} height={height} rx={14} fill="white" />
 
+        {/*
+          ⛔⛔ CE CANVAS ÉTAIT INUTILISABLE DANS UNE FICHE — corrigé le
+          01/09/2026. Tout y est en coordonnées ABSOLUES calées sur 340 px : le
+          cylindre est centré en x = 170, le pavé occupe [82 ; 282], la pyramide
+          [78 ; 270]. Deux issues, mauvaises toutes les deux :
+           · garder 340 dans une carte de 226 px → échelle 0,66, et les libellés
+             de 12 px tombent à 8 — très au-dessous du plancher de 11 ;
+           · demander 226 → le `viewBox` rétrécit mais le dessin ne bouge pas,
+             donc il SORT à droite. Même piège que `solide_3d` en août :
+             réduire ROGNE, ça ne met pas à l'échelle.
+
+          ⭐ LE REMÈDE EST UN DÉCALAGE, PAS UNE RÉÉCRITURE : on translate le
+          groupe de `width / 2 − 170`, ce qui recentre les QUATRE solides d'un
+          coup sans toucher une seule de leurs coordonnées.
+          ⚠️ ET LE CALAGE SUR 170 N'EST PAS ARBITRAIRE : à la largeur par défaut
+          de 340, le décalage vaut exactement ZÉRO. Les questions du coach
+          rendent donc au pixel près ce qu'elles rendaient avant.
+
+          ⚠️ La mini-légende reste HORS du groupe : elle est ancrée en bas à
+          gauche (x = 12), pas sur le solide, et la suivre l'aurait fait sortir.
+        */}
         {showLabels ? (
-          <Label x={170} y={24} color={colors.labelFill} size={13}>
+          <Label x={width / 2} y={24} color={colors.labelFill} size={13}>
             {figure.labels?.titre ?? `Section d’un ${getSolideName(figure)}`}
           </Label>
         ) : null}
 
-        {figure.solide === "cube" || figure.solide === "pave_droit"
-          ? drawPaveOrCube({ figure, colors })
-          : null}
+        <g transform={`translate(${width / 2 - 170}, 0)`}>
+          {figure.solide === "cube" || figure.solide === "pave_droit"
+            ? drawPaveOrCube({ figure, colors })
+            : null}
 
-        {figure.solide === "cylindre"
-          ? drawCylindre({ figure, colors })
-          : null}
+          {figure.solide === "cylindre"
+            ? drawCylindre({ figure, colors })
+            : null}
 
-        {figure.solide === "cone"
-          ? drawCone({ figure, colors })
-          : null}
+          {figure.solide === "cone"
+            ? drawCone({ figure, colors })
+            : null}
 
-        {figure.solide === "pyramide"
-          ? drawPyramide({ figure, colors })
-          : null}
+          {figure.solide === "pyramide"
+            ? drawPyramide({ figure, colors })
+            : null}
+        </g>
 
         {showMiniLegend ? <MiniLegend colors={colors} /> : null}
       </svg>

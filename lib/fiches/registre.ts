@@ -419,6 +419,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Le théorème de la 4e, mais au brevet il arrive retourné : la configuration en papillon, que la banque de 3e interroge et que personne ne reconnaît. Et la rédaction, qui vaut autant que le résultat.",
   },
+  "maths/3e/sections-solides": {
+    titre: "Les sections planes de solides",
+    resume:
+      "Un cylindre donne un disque ou un rectangle selon la coupe : la question n'est jamais « quelle est la section de ce solide », mais « coupé comment ». Et dans la section, on calcule à plat.",
+  },
   "maths/3e/sym-transformation": {
     titre: "Transformations et homothétie",
     resume:
