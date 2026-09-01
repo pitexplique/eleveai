@@ -169,8 +169,22 @@ export default function HomothetieCanvas({ figure }: Props) {
         {/* LES DROITES ISSUES DE O — c'est pour elles que ce canvas existe. */}
         {showRayons
           ? svgSource.map((p, i) => {
-              const bout = boutDuRayon(k < 0 ? svgImage[i] : p);
-              const autre = boutDuRayon(k < 0 ? p : svgImage[i]);
+              // ⛔⛔ CES DROITES ÉTAIENT INVISIBLES — corrigé le 01/09/2026, sur
+              // signalement de Frédéric (« tu as oublié de dessiner les droites
+              // OAA' »). Elles étaient bien tracées, mais de longueur NULLE.
+              // `boutDuRayon` prolonge jusqu'au bord DANS LA DIRECTION du point
+              // qu'on lui donne : quand k > 0, A et A' sont sur la MÊME
+              // demi-droite issue de O, donc les deux appels renvoyaient le
+              // même point du bord, et le segment allait de ce point à
+              // lui-même. Le contrôle automatique ne pouvait pas le voir : rien
+              // ne débordait, rien ne se chevauchait, aucune police n'était trop
+              // petite. Il fallait regarder le dessin.
+              // 👉 On part donc de O (le seul point sûrement sur la droite) et
+              // on prolonge au-delà du plus éloigné des deux points.
+              // ⚠️ Sauf si k < 0 : l'image bascule de l'autre côté du centre, et
+              // la droite doit alors traverser O de part en part.
+              const bout = k < 0 ? boutDuRayon(svgImage[i]) : svgO;
+              const autre = boutDuRayon(p);
               return (
                 <g key={`rayon-${i}`}>
                   <line

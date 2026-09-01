@@ -102,10 +102,15 @@ const tableau = (
 // (0,0) et k = 2, il faut donc que la figure tienne dans la moitié du cadre.
 // 👉 Le centre est mis dans un COIN : les droites s'ouvrent alors en éventail
 // sur toute la largeur, et l'alignement se lit d'un coup d'œil.
+// ⛔ ET LES COORDONNÉES NE SUFFISENT PAS À ÊTRE « DANS LE CADRE ». Deuxième
+// jet : A(1,1) B(3,1) C(1,3) — l'image A'(2,2) tombait EXACTEMENT sur le
+// segment [BC], dont la droite est x + y = 4. Un sommet de l'image posé sur un
+// côté de la figure de départ se lit comme une erreur de tracé. Il faut donc
+// aussi vérifier qu'aucune image ne vient se coucher sur une arête du départ.
 const TRIANGLE = [
   { x: 1, y: 1, label: "A" },
-  { x: 3, y: 1, label: "B" },
-  { x: 1, y: 3, label: "C" },
+  { x: 4, y: 2, label: "B" },
+  { x: 2, y: 4, label: "C" },
 ];
 const CENTRE = { x: 0, y: 0, label: "O" };
 
