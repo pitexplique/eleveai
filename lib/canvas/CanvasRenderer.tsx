@@ -17,6 +17,7 @@ import AngleCanvas from "./AngleCanvas";
 import FonctionGraphiqueCanvas from "./FonctionGraphiqueCanvas";
 import FonctionTableauCanvas from "./FonctionTableauCanvas";
 import TransformationCanvas from "./TransformationCanvas";
+import HomothetieCanvas from "./HomothetieCanvas";
 import TableauDonneesCanvas from "./TableauDonneesCanvas";
 import CalculPoseCanvas from "./CalculPoseCanvas";
 import FractionCanvas from "./FractionCanvas";
@@ -89,6 +90,8 @@ export default function CanvasRenderer({ figure }: Props) {
 
     case "transformation":
       return <TransformationCanvas figure={figure} />;
+    case "homothetie":
+      return <HomothetieCanvas figure={figure} />;
 
     case "tableau_donnees":
       return <TableauDonneesCanvas figure={figure} />;

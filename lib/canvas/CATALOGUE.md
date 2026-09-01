@@ -42,6 +42,7 @@ se pose sur `figure.schema`, `propriete.schema`, `exemple.schema`, `formule.sche
 | `droites` | Plusieurs droites, leurs intersections, parallèles et perpendiculaires marquées | Une droite graduée |
 | `cercle` | Cercle avec rayon, diamètre, corde, arcs | Un disque à colorier pour une fraction |
 | `transformation` | Une figure et son image : symétrie axiale, centrale, translation, rotation | Un agrandissement |
+| `homothetie` | Le centre, le rapport k, la figure et son image — et **les droites issues de O**, prolongées | Une transformation qui conserve les longueurs |
 | `reperage` | Un repère du plan, des points, un chemin | Une courbe de fonction |
 
 ## Espace

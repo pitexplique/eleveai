@@ -527,6 +527,75 @@ export type TransformationCanvasData = {
   };
 };
 
+/**
+ * ⭐ L'HOMOTHÉTIE A SON PROPRE CANVAS — ET C'EST UNE CORRECTION, PAS UN AJOUT.
+ *
+ * `TransformationCanvasData` accepte déjà `transformation: "homothetie"` : il
+ * en écrit le nom en titre, pose le centre O en point orange, et dessine les
+ * deux figures. Mais il ne trace AUCUNE des droites (OA), (OB), (OC) — or
+ * l'alignement de O, A et A' est TOUT le contenu de la notion. Sans elles,
+ * l'élève voit deux triangles et un point : rien ne dit qu'ils se répondent.
+ * Le catalogue le disait depuis le début — `transformation` : « ⛔ pas pour un
+ * agrandissement ».
+ *
+ * Ce que ce canvas montre et que l'autre ne peut pas :
+ *  - les droites issues de O, PROLONGÉES au-delà des deux figures, qui rendent
+ *    l'alignement visible et permettent de lire la construction au compas ;
+ *  - le rapport k porté sur le dessin, avec son signe : k < 0 renvoie l'image
+ *    de l'autre côté du centre, ce qui ne se devine pas d'une figure seule ;
+ *  - le rapport des longueurs, en option, pour le passage aux aires (× k²).
+ */
+export type HomothetieCanvasPoint = {
+  x: number;
+  y: number;
+  label?: string;
+};
+
+export type HomothetieCanvasData = {
+  kind: "homothetie";
+  /** Le centre. Toutes les droites en partent. */
+  centre: HomothetieCanvasPoint;
+  /** Le rapport k. Négatif = l'image bascule de l'autre côté du centre. */
+  rapport: number;
+  /** La figure de départ. Son image est CALCULÉE, jamais saisie à la main :
+   *  une image saisie peut contredire le rapport, et le dessin mentirait. */
+  source: {
+    points: HomothetieCanvasPoint[];
+    label?: string;
+    color?: string;
+    fill?: string;
+  };
+  image?: {
+    label?: string;
+    color?: string;
+    fill?: string;
+  };
+  grid?: {
+    rows: number;
+    cols: number;
+  };
+  size?: {
+    width?: number;
+    height?: number;
+    cellSize?: number;
+    padding?: number;
+  };
+  /** Une longueur à comparer entre la figure et son image (deux sommets). */
+  mesure?: {
+    de: number;
+    a: number;
+    longueur?: string;
+  };
+  display?: {
+    showGrid?: boolean;
+    showRayons?: boolean;
+    showLabels?: boolean;
+    /** ⚠️ Écrit « Homothétie — k = 2 » AU-DESSUS du dessin : à mettre à `false`
+     *  dès que la question porte sur la nature ou sur le rapport. */
+    showInfo?: boolean;
+  };
+};
+
 export type TableauDonneesCanvasData = {
   kind: "tableau_donnees";
   title?: string;
@@ -1568,6 +1637,7 @@ export type CanvasFigure =
   | ScratchCanvasData
   | AlgebreCanvasData
   | TransformationCanvasData
+  | HomothetieCanvasData
   | SuiteCanvasData
   | DureeCanvasData
   | ReperageCanvasData

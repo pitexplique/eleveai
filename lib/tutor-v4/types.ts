@@ -41,6 +41,8 @@ export type {
   TransformationKind,
   TransformationCanvasPoint,
   TransformationCanvasData,
+  HomothetieCanvasPoint,
+  HomothetieCanvasData,
   TableauDonneesCanvasData,
   CalculPoseCanvasData,
   FractionCanvasData,

@@ -404,6 +404,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Le chemin inverse du carré : ce qu'est √a, les carrés parfaits à connaître par cœur, encadrer une racine qui ne tombe pas juste — et pourquoi √(9 + 16) ne vaut pas √9 + √16.",
   },
+  "maths/3e/sym-transformation": {
+    titre: "Transformations et homothétie",
+    resume:
+      "Quatre transformations conservent les longueurs, une cinquième ne les conserve pas : reconnaître une homothétie à ses droites concourantes, construire l'image d'une figure, calculer le rapport — et pourquoi l'aire suit k² et le volume k³.",
+  },
   "maths/3e/affine-fonction": {
     titre: "Fonctions affines",
     resume:
@@ -660,6 +665,18 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Analyser une phrase : nature, fonction, accords",
     resume:
       "Sujet, verbe, compléments, attribut, groupe nominal et accords — chaque règle dessinée sur la phrase.",
+  },
+
+  "francais/cm2/grammaire-accords": {
+    titre: "Les accords en CM2 (2026-2027)",
+    resume:
+      "Au CM2, celui qui commande n'est plus à côté de celui qui reçoit : trace la flèche du donneur au receveur.",
+  },
+
+  "francais/cm2/grammaire-groupe-nominal": {
+    titre: "Le groupe nominal et ses expansions en CM2 (2026-2027)",
+    resume:
+      "Rien entre le nom et l'adjectif : épithète. Un verbe d'état : attribut. Une préposition : complément du nom.",
   },
 
   "francais/cm2/grammaire-phrase": {
@@ -1295,8 +1312,15 @@ export const FICHES_ALIAS: Record<string, string> = {
   //  partie d'ici le jour où sa fiche est entrée dans le dépôt. Il reste les
   //  deux du dessous : le groupe nominal et les accords n'ont toujours pas la
   //  leur au CM2, et le coach continue donc de les envoyer sur l'orthographe.)
-  "francais/cm2/grammaire-groupe-nominal": "francais/cm2/grammaire-orthographe",
-  "francais/cm2/grammaire-accords": "francais/cm2/grammaire-orthographe",
+  // ⭐ LES DEUX DERNIERS ALIAS DU CM2 SONT PARTIS LE 01/09/2026, comme leur
+  //   commentaire l'annonçait : `grammaire-groupe-nominal` et
+  //   `grammaire-accords` ont désormais LEUR fiche. Il ne reste plus rien à
+  //   rediriger vers `grammaire-orthographe`.
+  //   ⏳ RESTE À FAIRE : sortir `francais/cm2/grammaire-orthographe` du
+  //   registre et poser une 301 vers `grammaire-nature-fonction`
+  //   (décision de Frédéric du 01/09). Tant que ce n'est pas fait, l'ancienne
+  //   page vit encore — ce qui ne casse rien, mais fait quatre pages qui se
+  //   recoupent. Voir l'en-tête de `francais-cm2-grammaire-groupe-nominal`.
 
   /* ⭐ TROIS ALIAS DE 4e QUI NE SONT PAS PROVISOIRES (26/08/2026), et c'est ce
      qui les distingue de ceux du CM2 : ils ne s'effaceront jamais, parce que la
