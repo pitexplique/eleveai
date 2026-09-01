@@ -241,20 +241,23 @@ export const ficheComprehensionTextesCm2: FicheCoursData = {
   notion: "comprehension-textes",
   titre: `Comprendre un texte seul en CM2 (${ANNEE_SCOLAIRE})`,
   accroche:
-    "Au CM2, la question change. Ce n'est plus « as-tu compris ? » — c'est QUE FAIS-TU QUAND TU N'AS PAS COMPRIS, ET QUE PERSONNE N'EST LÀ ? Le programme demande de comprendre SEUL un texte plus long et plus complexe, et la réponse tient en trois mots : tu relis lentement. Les autres réactions possibles — sauter la suite, fermer le livre, changer d'histoire — disent toutes la même chose : abandonner.",
+    "Au CM2, la question change. Ce n'est plus « as-tu compris ? », c'est « que fais-tu quand tu n'as pas compris, et que personne n'est là ? ». La réponse tient en trois mots : tu relis lentement.",
   identite: [
     { label: "Mots clés", valeur: "Seul, relire, essentiel, implicite, genres" },
     { label: "Le secret", valeur: "Savoir quoi faire quand ça bloque" },
     { label: "Outil", valeur: "Peux-tu le redire en peu de mots ?" },
   ],
   definition: {
-    texte:
-      "Le CM2 lit SEUL des textes PLUS LONGS ET PLUS COMPLEXES, et c'est ce mot « seul » qui fait la différence : quand un passage résiste, personne ne vient. Le geste à connaitre est simple et il s'apprend — ON RELIT LE PASSAGE LENTEMENT, on repart quelques lignes plus haut si besoin, et l'on ne saute ni la suite ni le livre. Comprendre se prouve ensuite en RESTITUANT L'ESSENTIEL : dire les idées principales EN PEU DE MOTS, ce qui n'est ni recopier le texte, ni apprendre une phrase par cœur, ni raconter autre chose. Il faut aussi distinguer ce qui est ÉCRIT de ce qui ne l'est pas : « Kévin sortit de l'eau, rangea ses lunettes et remit son maillot trempé » ne dit jamais qu'il a nagé — mais les indices, eux, sont écrits, et deux suffisent. Enfin, RECONNAITRE LE GENRE d'un texte à ce qu'on en voit : des vers, des rimes et des strophes signent un poème ; une suite d'étapes, une recette ; des répliques, du théâtre.",
+    texte: [
+      "Au CM2, tu lis seul des textes plus longs. Et c'est ce mot « seul » qui change tout : quand un passage résiste, personne ne vient.",
+      "Le geste à connaitre tient en une phrase : on relit le passage lentement, en repartant trois lignes plus haut. On ne saute ni la suite ni le livre.",
+      "Comprendre se prouve ensuite : dire les idées principales en peu de mots. Ni recopier, ni réciter, ni raconter autre chose.",
+      "Tout n'est pas écrit. « Il sortit de l'eau, rangea ses lunettes, remit son maillot trempé » ne dit jamais qu'il a nagé — mais les indices, eux, sont écrits.",
+      "Enfin, le genre se voit avant d'être lu : des vers et des strophes font un poème, des étapes une recette, des répliques du théâtre.",
+    ].join("\n\n"),
   },
   figure: {
     schema: pile(quandCaBloque, grilleQuandCaBloque),
-    legende:
-      "L'arc va du blocage vers ce qu'on en fait, et c'est tout le CM2 : lire seul ne veut pas dire tout comprendre du premier coup — personne ne fait cela — mais savoir quoi faire quand on ne comprend pas. Le tableau met les deux colonnes en regard, et remarque que les mauvaises réponses se ressemblent toutes : sauter la suite, fermer le livre, changer d'histoire. Ce sont trois façons d'abandonner, et l'une d'elles te viendra à l'esprit. Relire lentement suffit presque toujours.",
   },
   proprietes: [
     {
@@ -267,142 +270,71 @@ export const ficheComprehensionTextesCm2: FicheCoursData = {
     {
       titre: "Quand ça bloque, on relit lentement",
       texte:
-        "C'est la réponse, et elle suffit presque toujours. Relire calmement un passage difficile aide à le comprendre — sans abandonner la lecture.",
-      schema: grilleQuandCaBloqueRelire,
-      micros: ["cm2_comp_autonomie"],
-    },
-    {
-      titre: "Les mauvaises réactions se ressemblent",
-      texte:
-        "Sauter le reste, fermer le livre, changer d'histoire : trois façons d'abandonner. L'une d'elles te viendra à l'esprit — c'est normal, et c'est le moment de relire.",
+        "Sauter le reste, fermer le livre, changer d'histoire : trois façons d'abandonner. Relire, en repartant plus haut, suffit presque toujours.",
       schema: grilleQuandCaBloque,
       micros: ["cm2_comp_autonomie"],
     },
     {
-      titre: "Restituer, c'est dire en PEU DE MOTS",
+      titre: "Restituer, c'est dire en peu de mots",
       texte:
-        "Les idées principales, brièvement. Ce n'est ni recopier tout le texte, ni retenir la première phrase, ni raconter une autre histoire.",
+        "Les idées principales, brièvement. Ce qui porte l'histoire reste ; le détail juste et joli, lui, peut tomber.",
       schema: enPeuDeMots,
       micros: ["cm2_comp_essentiel"],
     },
     {
       titre: "Faire court est le test",
       texte:
-        "Celui qui a compris peut redire court. Celui qui n'a pas compris redit tout — ou ne redit rien. La brièveté n'est pas un style : c'est une preuve.",
+        "Celui qui a compris redit court. Celui qui n'a pas compris redit tout — ou ne redit rien. La brièveté est une preuve, pas un style.",
       schema: redireEstUnTest,
       micros: ["cm2_comp_essentiel"],
     },
     {
-      titre: "On garde les idées, pas les détails",
+      titre: "Tout n'est pas écrit, les indices si",
       texte:
-        "Ce qui porte l'histoire reste ; ce qui l'accompagne tombe. Un détail juste et joli peut très bien ne pas avoir sa place dans l'essentiel.",
-      schema: idees,
-      micros: ["cm2_comp_essentiel"],
-    },
-    {
-      titre: "Tout n'est pas écrit dans le texte",
-      texte:
-        "« Il sortit de l'eau, rangea ses lunettes, remit son maillot trempé » ne dit jamais qu'il a nagé. Et pourtant tu le sais.",
+        "Le texte ne dit jamais qu'il a nagé, et pourtant tu le sais. Mais tu dois pouvoir montrer du doigt les mots d'où tu pars. Deux suffisent.",
       schema: deuxIndices,
       micros: ["cm2_comp_implicite"],
     },
     {
-      titre: "Mais les indices, eux, sont écrits",
+      titre: "Le genre se voit, et il dit comment lire",
       texte:
-        "C'est ce qui sépare comprendre de deviner : tu dois pouvoir montrer du doigt les mots d'où tu es parti. Deux suffisent.",
-      schema: indiceEcritReponseNon,
-      micros: ["cm2_comp_implicite"],
-    },
-    {
-      titre: "Le genre se voit avant la lecture",
-      texte:
-        "Des vers, des rimes et des strophes : un poème. Des étapes numérotées : une recette. Des répliques précédées d'un nom : du théâtre.",
+        "Des vers : un poème. Des étapes numérotées : une recette. Et on ne lit pas l'une comme l'autre — dans un cas on suit un ordre, dans l'autre on écoute les sons.",
       schema: grilleGenres,
-      micros: ["cm2_comp_genres"],
-    },
-    {
-      titre: "Et il dit comment lire",
-      texte:
-        "On ne lit pas une recette comme un poème : dans l'une on suit un ordre, dans l'autre on écoute les sons. Savoir le genre fait gagner du temps.",
-      schema: grilleGenresPoeme,
-      micros: ["cm2_comp_textes_defi"],
+      micros: ["cm2_comp_genres", "cm2_comp_textes_defi"],
     },
   ],
   reel: {
     texte:
-      "Tu fais déjà des inférences sans arrêt, et sur bien plus difficile qu'un texte. Quand quelqu'un rentre trempé et sans parapluie, tu sais qu'il pleut sans qu'on te le dise. Quand ton ami répond « ouais ouais » sans lever les yeux, tu sais qu'il n'écoute pas. Le texte marche pareil : les lunettes et le maillot trempé sont exactement les mêmes indices. Ce qui change à l'école, c'est qu'on te demande de MONTRER d'où tu es parti — et là, ça coince, parce que dans la vie personne ne te le demande. Quant à relire : personne ne relit spontanément, on préfère continuer en espérant que ça s'éclaircira. Ça ne s'éclaircit jamais tout seul, et relire coute trente secondes.",
+      "Quand quelqu'un rentre trempé sans parapluie, tu sais qu'il pleut sans qu'on te le dise. Le texte marche pareil : les lunettes et le maillot sont les mêmes indices. Ce qui change à l'école, c'est qu'on te demande de montrer d'où tu es parti.",
   },
   historique: {
     texte:
-      "Relire est en train de disparaitre, et c'est très récent. Pendant des siècles, une famille possédait deux ou trois livres — souvent un seul — et les lisait des dizaines de fois : on connaissait des pages par cœur sans les avoir apprises, on y revenait chaque hiver, et comprendre un texte voulait dire y retourner. Les historiens appellent cela la lecture intensive. Puis le livre est devenu bon marché, au XVIIIe siècle, et l'on s'est mis à lire beaucoup de livres une seule fois chacun — la lecture extensive. Le confort est réel, l'habitude perdue aussi : nous ne relisons plus, et nous croyons donc qu'un texte qui résiste est un texte trop difficile. Il est souvent seulement un texte lu une fois.",
-  },
-  formule: {
-    contexte: "Le test qui dit si tu as compris, et il se passe tout seul.",
-    expression: "peux-tu le redire en peu de mots ?",
-    legende:
-      "Si oui, tu as compris. Si tu ne peux le redire qu'en le recopiant presque entièrement, tu as suivi les phrases sans saisir l'idée. Et si tu ne peux rien en dire du tout, il faut relire — ce n'est pas grave, c'est même l'usage prévu.",
-    schema: redireEstUnTest,
+      "Pendant des siècles, une famille possédait deux ou trois livres et les relisait des dizaines de fois. Puis le livre est devenu bon marché, et on s'est mis à en lire beaucoup, une fois chacun. Nous avons gagné le choix, perdu l'habitude de relire.",
   },
   methode: [
     {
       titre: "Relire le passage, plus lentement",
       texte:
-        "Et repartir trois lignes plus haut, là où tu comprenais encore. C'est presque toujours entre ces trois lignes et le blocage que ça s'est perdu.",
+        "Et repartir trois lignes plus haut, là où tu comprenais encore. C'est presque toujours là que ça s'est perdu.",
       schema: quandCaBloque,
       micros: ["cm2_comp_autonomie"],
     },
     {
       titre: "Fermer le livre et redire",
       texte:
-        "À voix basse, en trois phrases. Ce que tu n'arrives pas à dire est exactement ce que tu n'as pas compris — et tu le sais en trente secondes.",
+        "À voix basse, en trois phrases. Ce que tu n'arrives pas à dire est ce que tu n'as pas compris.",
       schema: enPeuDeMots,
       micros: ["cm2_comp_essentiel"],
     },
     {
       titre: "Chercher deux indices avant de répondre",
       texte:
-        "Un seul peut tromper ; deux qui vont dans le même sens, presque jamais. Et tu dois pouvoir les montrer du doigt.",
+        "Un seul peut tromper ; deux qui vont dans le même sens, presque jamais. Et tu dois pouvoir les montrer.",
       schema: deuxIndices,
       micros: ["cm2_comp_implicite"],
     },
-    {
-      titre: "Regarder la page avant de lire",
-      texte:
-        "Des lignes courtes ? un poème. Des numéros ? une recette. Des noms suivis de tirets ? du théâtre. Trois secondes, et tu sais comment lire.",
-      schema: grilleGenres,
-      micros: ["cm2_comp_genres"],
-    },
   ],
-  usages: [
-    {
-      titre: "Pour finir un livre qu'on trouve difficile",
-      detail:
-        "Un passage qui résiste ne condamne pas le livre. Relis-le, et continue : la suite l'éclaire souvent mieux qu'une troisième relecture.",
-      schema: grilleQuandCaBloqueRelire,
-      micros: ["cm2_comp_autonomie"],
-    },
-    {
-      titre: "Pour répondre à « de quoi parle ce texte ? »",
-      detail:
-        "En deux ou trois phrases. Une réponse longue n'est pas plus complète : c'est le signe qu'on n'a pas trié — donc pas encore compris.",
-      schema: enPeuDeMots,
-      micros: ["cm2_comp_essentiel"],
-    },
-    {
-      titre: "Pour les questions qui commencent par « pourquoi »",
-      detail:
-        "Elles portent presque toujours sur ce qui n'est pas écrit. La réponse se déduit ; les indices, eux, se trouvent dans le texte.",
-      schema: indiceEcritReponseNon,
-      micros: ["cm2_comp_implicite"],
-    },
-    {
-      titre: "Pour savoir comment lire, avant de lire",
-      detail:
-        "Une recette se suit dans l'ordre, un poème s'écoute, un article s'interroge sur sa source. Le genre te dit quoi faire.",
-      schema: grilleGenresPoeme,
-      micros: ["cm2_comp_genres"],
-    },
-  ],
+  usages: [],
   exemples: [
     {
       titre: "Quand ça bloque",
@@ -410,16 +342,7 @@ export const ficheComprehensionTextesCm2: FicheCoursData = {
       schema: quandCaBloque,
       question: "Que fais-tu ?",
       solution:
-        "TU RELIS LE PASSAGE LENTEMENT. Pas sauter tout le reste du texte, pas fermer le livre, pas changer d'histoire — remarque que ces trois-là disent la même chose : abandonner. Relire calmement aide à comprendre SANS abandonner la lecture, et cela coute trente secondes.",
-      micros: ["cm2_comp_autonomie"],
-    },
-    {
-      titre: "Un texte plus long",
-      donnees: "Le livre fait quinze chapitres, et personne ne lit avec toi.",
-      schema: plusLongPlusComplexe,
-      question: "Qu'est-ce qui change par rapport au CM1 ?",
-      solution:
-        "TU ES SEUL DEVANT, ET C'EST TOUT LE PROGRAMME. Les textes s'allongent et se compliquent, mais surtout il n'y a plus d'adulte à côté pour expliquer au fil de la lecture. Le geste doit donc devenir le tien — et c'est celui-là qu'on t'apprend cette année.",
+        "Tu relis le passage lentement. Ni sauter le reste, ni fermer le livre, ni changer d'histoire : ces trois-là disent la même chose, abandonner. Relire coute trente secondes.",
       micros: ["cm2_comp_autonomie"],
     },
     {
@@ -428,7 +351,7 @@ export const ficheComprehensionTextesCm2: FicheCoursData = {
       schema: enPeuDeMots,
       question: "C'est quoi ?",
       solution:
-        "DIRE LES IDÉES PRINCIPALES EN PEU DE MOTS. Pas recopier tout le texte — cela ne prouve rien —, pas apprendre la première phrase par cœur, pas inventer une autre histoire. Et « en peu de mots » n'est pas une consigne de longueur : c'est le test lui-même.",
+        "Dire les idées principales en peu de mots. Ni recopier le texte, ni réciter la première phrase, ni inventer autre chose. Et « en peu de mots » n'est pas une consigne de longueur : c'est le test.",
       micros: ["cm2_comp_essentiel"],
     },
     {
@@ -437,41 +360,30 @@ export const ficheComprehensionTextesCm2: FicheCoursData = {
       schema: deuxIndices,
       question: "Que vient de faire Kévin ?",
       solution:
-        "IL A NAGÉ. Le texte ne le dit jamais — cherche, le mot n'y est pas. Mais trois indices y sont écrits : l'eau, les lunettes, le maillot trempé. C'est une information IMPLICITE : la réponse manque, les indices non, et tu peux les montrer du doigt.",
+        "Il a nagé. Le texte ne le dit jamais — cherche, le mot n'y est pas. Mais trois indices y sont écrits : l'eau, les lunettes, le maillot trempé. La réponse manque, les indices non.",
       micros: ["cm2_comp_implicite"],
     },
     {
-      titre: "Un genre",
-      donnees: "« Un texte écrit en vers, avec des rimes et des strophes, est… »",
-      schema: grilleGenresPoeme,
-      question: "Quel genre ?",
-      solution:
-        "UN POÈME. Ni un article de journal, ni une recette, ni un mode d'emploi. Les vers, les rimes et les strophes sont ses trois marques, et elles se voient de loin — avant même d'avoir lu un seul mot du texte.",
-      micros: ["cm2_comp_genres"],
-    },
-    {
-      titre: "Le défi",
+      titre: "Le défi : quel genre, et comment lire ?",
       donnees: "On te donne une page couverte de numéros et de verbes à l'infinitif.",
       schema: grilleGenres,
       question: "Quel genre, et comment le lis-tu ?",
       solution:
-        "UNE RECETTE, OU UNE NOTICE. Et cela change ta lecture : on ne la lit pas d'un trait comme une histoire — on suit les étapes dans l'ordre, une par une, en s'arrêtant à chacune. Reconnaitre le genre ne sert à rien tout seul : cela sert à savoir COMMENT lire.",
-      micros: ["cm2_comp_textes_defi"],
+        "Une recette, ou une notice. On ne la lit pas d'un trait comme une histoire : on suit les étapes dans l'ordre. Reconnaitre le genre ne sert à rien tout seul — cela sert à savoir comment lire.",
+      micros: ["cm2_comp_genres", "cm2_comp_textes_defi"],
     },
   ],
   pieges: [
-    "Continuer à lire en espérant que ça s'éclaircira : cela ne s'éclaircit jamais tout seul.",
+    "Continuer en espérant que ça s'éclaircira : ça ne s'éclaircit jamais seul.",
     "Sauter le passage difficile : on perd la suite, qui s'appuyait dessus.",
-    "Fermer le livre au premier blocage : relire coute trente secondes.",
     "Recopier le texte pour restituer l'essentiel : cela ne prouve rien.",
-    "Croire qu'une réponse longue est plus complète : c'est le signe qu'on n'a pas trié.",
+    "Croire qu'une réponse longue est plus complète : c'est qu'on n'a pas trié.",
     "Deviner au lieu de déduire : les indices doivent être montrables.",
-    "Sauter le genre : il dit comment lire, et cela se voit en trois secondes.",
   ],
   aRetenir: [
     "Lire seul, ce n'est pas tout comprendre : c'est savoir quoi faire quand non.",
-    "Quand ça bloque : on relit lentement, on ne saute rien, on n'abandonne pas.",
-    "Restituer l'essentiel : les idées principales, EN PEU DE MOTS.",
+    "Quand ça bloque : on relit lentement, on n'abandonne pas.",
+    "Restituer l'essentiel : les idées principales, en peu de mots.",
     "La réponse peut manquer dans le texte ; les indices, jamais.",
     "Le genre se voit avant la lecture, et il dit comment lire.",
   ],
@@ -489,11 +401,6 @@ export const ficheComprehensionTextesCm2: FicheCoursData = {
     {
       question: "« Léo n'avait rien mangé depuis le matin. Son ventre gargouillait. » Que ressent-il ?",
       correction: "Il a faim — et deux indices le montrent, sans que le mot y soit.",
-      micros: ["cm2_comp_implicite"],
-    },
-    {
-      question: "« La petite fille sourit en découvrant le cadeau. » Que ressent-elle ?",
-      correction: "De la joie : le sourire est écrit, le sentiment non.",
       micros: ["cm2_comp_implicite"],
     },
     {
@@ -592,7 +499,7 @@ export const slidesComprehensionTextesCm2: ClasseSlide[] = [
       question: "Que fais-tu maintenant ?",
       indice: "Le problème n'est peut-être pas dans ce paragraphe-là.",
       correction:
-        "TU REPARS PLUS HAUT — trois ou quatre lignes avant, là où tu comprenais encore. C'est presque toujours entre cet endroit et ton blocage que le fil s'est perdu.",
+        "Tu repars plus haut : trois ou quatre lignes avant, là où tu comprenais encore. C'est presque toujours là que le fil s'est perdu.",
     },
     schema: quandCaBloque,
   },
