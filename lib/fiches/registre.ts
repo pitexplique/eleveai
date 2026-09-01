@@ -404,6 +404,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Le chemin inverse du carré : ce qu'est √a, les carrés parfaits à connaître par cœur, encadrer une racine qui ne tombe pas juste — et pourquoi √(9 + 16) ne vaut pas √9 + √16.",
   },
+  "maths/3e/trigo-trigonometrie": {
+    titre: "Trigonométrie : sinus, cosinus, tangente",
+    resume:
+      "La 4e n'avait que le cosinus, donc rien à choisir. Avec le sinus et la tangente, le vrai exercice devient le choix du rapport — et il se lit sur les données, jamais au hasard.",
+  },
   "maths/3e/sym-transformation": {
     titre: "Transformations et homothétie",
     resume:
