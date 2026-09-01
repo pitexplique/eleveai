@@ -526,6 +526,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "L'exclamatif n'est pas un type : le type se lit à ce que la phrase attend de toi, pas au point final.",
   },
+  "francais/cm1/grammaire-phrase": {
+    titre: "Trouver le sujet et le verbe en CM1 (2026-2027)",
+    resume:
+      "Un sujet n'a ni allure fixe ni place fixe. On ne le devine pas : on le prouve par « c'est … qui ».",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
