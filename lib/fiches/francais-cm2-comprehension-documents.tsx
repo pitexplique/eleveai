@@ -44,12 +44,18 @@
 // les items `cm2_fr_fixed_comp_5` et `_6` de
 // lib/tutor-v4/questionBank/cm2/francais/fixed.bank.ts.
 //
+// ⭐ REPRISE À L'ÉTALON DU CYCLE 3, 02/09/2026. La fiche portait 10 propriétés,
+// 6 exemples, 4 usages, une formule, une légende de figure, 67 capitales
+// d'emphase et 5 textes projetés de plus de 250 signes — dont la définition, à
+// 879. Les propriétés allaient PAR PAIRES, une même micro disant la même chose
+// sous deux angles : les fusionner n'a rien retiré au fond. Voir
+// [[fiches-funs-peu-de-mots-adaptees-a-l-age]].
+//
 // Micro-compétences couvertes (les 4 de la notion `comprehension_documents`) :
-// - cm2_doc_composite        → propriétés 1 à 4, méthode 1, usage 1, exemples 1 et 2
-// - cm2_doc_croiser_infos    → figure, propriétés 5 à 7, formule, méthode 2,
-//                              usage 2, exemples 3 et 4
-// - cm2_doc_prelever_combiner → propriétés 8 et 9, méthode 3, usage 3, exemple 5
-// - cm2_comp_documents_defi  → propriété 10, méthode 4, usage 4, exemple 6
+// - cm2_doc_composite        → propriétés 1 et 2, méthode 1, exemple 1
+// - cm2_doc_croiser_infos    → figure, propriétés 3 et 4, méthode 2, exemple 2
+// - cm2_doc_prelever_combiner → propriété 5, méthode 3, exemple 3
+// - cm2_comp_documents_defi  → propriété 6, exemple 4
 
 import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
@@ -241,20 +247,23 @@ export const ficheComprehensionDocumentsCm2: FicheCoursData = {
   notion: "comprehension-documents",
   titre: `Lire des documents et croiser des informations en CM2 (${ANNEE_SCOLAIRE})`,
   accroche:
-    "Une affiche dit que le musée ouvre à 9 h. Une autre qu'il est fermé le mardi. Peux-tu le visiter mardi à 10 h ? Non — et remarque bien : AUCUNE DES DEUX AFFICHES NE DIT « NON ». La première dit oui, la seconde parle d'un autre sujet. La réponse n'est écrite nulle part : elle nait de leur rencontre. C'est le geste le plus utile de toute la lecture de documents.",
+    "Une affiche dit que le musée ouvre à 9 h. Une autre qu'il est fermé le mardi. Peux-tu y aller mardi à 10 h ? Non — et pourtant aucune des deux ne dit non. La réponse nait de leur rencontre.",
   identite: [
     { label: "Mots clés", valeur: "Composite, légende, croiser, prélever" },
     { label: "Le secret", valeur: "La réponse n'est dans aucun des deux" },
     { label: "Outil", valeur: "Qu'est-ce que je cherche, exactement ?" },
   ],
   definition: {
-    texte:
-      "Un DOCUMENT COMPOSITE mêle plusieurs éléments sur la même page, et chacun répond à une autre sorte de question : le TITRE donne le sujet, la LÉGENDE dit ce que l'image montre et d'où elle vient, le SCHÉMA montre une organisation ou un fonctionnement par l'image, le TABLEAU porte les chiffres, la SOURCE dit d'où vient le document, le SOMMAIRE dit à quelle page aller. Savoir lequel regarder fait gagner plus de temps que lire vite. CROISER DEUX DOCUMENTS, ce n'est pas vérifier qu'ils disent la même chose : c'est les faire se compléter — et souvent, la réponse cherchée n'est écrite ni dans l'un ni dans l'autre, elle nait de leur rencontre. Enfin PRÉLEVER PUIS COMBINER : l'ordre est dans le nom, et il commence par LA QUESTION. On va chercher une information en sachant ce qu'on cherche ; lire un document en entier avant de le savoir est la façon la plus sure de s'y perdre.",
+    texte: [
+      "Un document composite mêle plusieurs éléments sur la même page, et chacun répond à une autre sorte de question.",
+      "Le titre donne le sujet, la légende explique l'image, le schéma montre un fonctionnement, le tableau porte les chiffres, la source dit d'où ça vient.",
+      "Savoir lequel regarder fait gagner plus de temps que lire vite.",
+      "Croiser deux documents, ce n'est pas vérifier qu'ils disent la même chose : c'est les faire se compléter. Souvent la réponse n'est écrite ni dans l'un ni dans l'autre.",
+      "Et l'ordre est dans le nom du geste : prélever puis combiner. On part de la question, jamais du document.",
+    ].join("\n\n"),
   },
   figure: {
     schema: pile(reponseDansAucun, uneSeuleNeSuffitPas),
-    legende:
-      "Deux flèches partent de deux affiches et tombent sur une réponse qui n'est écrite sur aucune des deux. « Ouvre à 9 h » dirait plutôt oui ; « fermé le mardi » ne parle même pas d'horaires. Prises séparément, ni l'une ni l'autre ne répond à la question posée — c'est leur rencontre qui tranche, et c'est cela qu'on appelle croiser. En bas, la conséquence pratique : avec une seule des deux affiches, tu répondais oui en toute bonne foi, et tu trouvais porte close.",
   },
   proprietes: [
     {
@@ -265,59 +274,31 @@ export const ficheComprehensionDocumentsCm2: FicheCoursData = {
       micros: ["cm2_doc_composite"],
     },
     {
-      titre: "Un schéma montre et explique par l'image",
-      texte:
-        "Il dit en un dessin ce que le texte dirait en un paragraphe : une organisation, un fonctionnement, un ordre.",
-      schema: grilleCompositeSchema,
-      micros: ["cm2_doc_composite"],
-    },
-    {
-      titre: "Sans sa légende, un schéma ne fait que montrer",
-      texte:
-        "La légende nomme ce qu'on voit et explique les symboles. C'est elle qui transforme un dessin en information.",
-      schema: schemaEtLegende,
-      micros: ["cm2_doc_composite"],
-    },
-    {
       titre: "Chaque élément répond à une autre question",
       texte:
-        "Où aller dans le livre ? le sommaire. Que veut dire ce symbole ? la légende. D'où ça vient ? la source. Jusqu'à quand ? la date.",
+        "Où aller dans le livre ? le sommaire. Que veut dire ce symbole ? la légende. D'où ça vient ? la source. Sans sa légende, un schéma ne fait que montrer.",
       schema: ouTrouverQuoi,
       micros: ["cm2_doc_composite"],
     },
     {
       titre: "Croiser, ce n'est pas vérifier",
       texte:
-        "Deux documents ne servent pas à se confirmer l'un l'autre : ils servent à se compléter. Redire la même chose n'apporte rien de neuf.",
+        "Deux documents ne servent pas à se confirmer : ils servent à se compléter. Redire la même chose n'apporte rien.",
       schema: completerNestPasRepeter,
       micros: ["cm2_doc_croiser_infos"],
     },
     {
       titre: "La réponse n'est dans aucun des deux",
       texte:
-        "« Ouvre à 9 h » et « fermé le mardi » : ni l'une ni l'autre affiche ne dit non. C'est leur rencontre qui répond.",
+        "« Ouvre à 9 h » et « fermé le mardi » : aucune des deux affiches ne dit non. Avec une seule, tu répondais oui en toute bonne foi.",
       schema: reponseDansAucun,
-      micros: ["cm2_doc_croiser_infos"],
-    },
-    {
-      titre: "Une seule information peut tromper",
-      texte:
-        "Avec la première affiche seule, tu répondais oui en toute bonne foi. Ce n'est pas une erreur de lecture : c'est une information incomplète.",
-      schema: uneSeuleNeSuffitPas,
       micros: ["cm2_doc_croiser_infos"],
     },
     {
       titre: "On part de la question, pas du document",
       texte:
-        "Prélever, c'est aller chercher précisément, en sachant ce qu'on cherche. L'ordre est dans le nom du geste : prélever PUIS combiner.",
+        "Prélever, c'est chercher en sachant quoi. Un document long lu en entier sans le savoir ne laisse presque rien.",
       schema: partirDeLaQuestion,
-      micros: ["cm2_doc_prelever_combiner"],
-    },
-    {
-      titre: "Tout lire d'abord fait perdre le fil",
-      texte:
-        "Un document long lu en entier sans savoir ce qu'on y cherche ne laisse presque rien. La question, elle, tient l'attention.",
-      schema: toutLirePuisChercher,
       micros: ["cm2_doc_prelever_combiner"],
     },
     {
@@ -330,18 +311,11 @@ export const ficheComprehensionDocumentsCm2: FicheCoursData = {
   ],
   reel: {
     texte:
-      "Tu croises des documents plusieurs fois par semaine sans lui donner ce nom. Regarder les horaires d'un bus ET vérifier si c'est un jour férié : ni l'un ni l'autre ne dit « il n'y a pas de bus », et pourtant tu le sais. Vérifier qu'un jeu est en stock ET qu'il coute moins que ce que tu as : deux informations qui viennent de deux endroits, et une décision qui n'est écrite nulle part. C'est exactement le musée fermé le mardi. Et l'erreur, tu l'as faite aussi : partir sur une seule information, en toute bonne foi, et arriver devant une porte close. Ce n'est pas qu'on avait mal lu — c'est qu'on n'avait lu qu'une moitié.",
+      "Regarder les horaires d'un bus, puis vérifier si c'est un jour férié : ni l'un ni l'autre ne dit « il n'y a pas de bus », et pourtant tu le sais. Tu croises des documents plusieurs fois par semaine sans lui donner ce nom.",
   },
   historique: {
     texte:
-      "Le document composite a posé un problème pratique dès qu'on a voulu montrer et expliquer en même temps. Quand Diderot et d'Alembert publient leur Encyclopédie au XVIIIe siècle, ils la coupent en deux : dix-sept volumes de texte d'un côté, onze volumes de PLANCHES gravées de l'autre. Un lecteur qui voulait comprendre comment on fabriquait une épingle devait ouvrir deux volumes à la fois, sur la même table, et faire l'aller-retour entre le mot et l'image. C'était couteux, encombrant — et c'était le prix à payer, parce que graver une planche et imprimer un texte ne se font pas de la même façon. Croiser deux documents n'est donc pas un exercice scolaire : c'est ce qu'ont fait tous les lecteurs de l'Encyclopédie, page après page.",
-  },
-  formule: {
-    contexte: "La question à se poser AVANT d'ouvrir un document.",
-    expression: "qu'est-ce que je cherche, exactement ?",
-    legende:
-      "Un horaire ? un mot ? un chiffre ? une date ? La réponse te dit quel élément regarder — le sommaire, la légende, le tableau, la source — et t'évite de lire le reste. Sans elle, tu lis tout et tu ne retiens rien : c'est la question qui tient l'attention, pas la volonté.",
-    schema: partirDeLaQuestion,
+      "L'Encyclopédie de Diderot était coupée en deux : dix-sept volumes de texte, onze de planches gravées. Pour comprendre comment on fabriquait une épingle, il fallait ouvrir les deux à la fois sur la même table.",
   },
   methode: [
     {
@@ -365,61 +339,16 @@ export const ficheComprehensionDocumentsCm2: FicheCoursData = {
       schema: partirDeLaQuestion,
       micros: ["cm2_doc_prelever_combiner"],
     },
-    {
-      titre: "Noter ce que chaque document apporte",
-      texte:
-        "Un mot par document, séparément. Puis regarder ce que leur mise bout à bout permet de dire : c'est là qu'est la réponse.",
-      schema: chacunUnMorceau,
-      micros: ["cm2_comp_documents_defi"],
-    },
   ],
-  usages: [
-    {
-      titre: "Pour se repérer dans un livre documentaire",
-      detail:
-        "Le sommaire donne la page, la légende explique le dessin, la source dit d'où ça vient. Trois outils, et aucun ne demande de lire le livre.",
-      schema: ouTrouverQuoi,
-      micros: ["cm2_doc_composite"],
-    },
-    {
-      titre: "Pour ne pas se tromper sur un horaire",
-      detail:
-        "Cherche toujours la deuxième information : le jour de fermeture, le jour férié, la période de vacances. Elle est presque toujours ailleurs.",
-      schema: reponseDansAucun,
-      micros: ["cm2_doc_croiser_infos"],
-    },
-    {
-      titre: "Pour répondre à une question de recherche",
-      detail:
-        "Écris la question d'abord. Puis va la chercher — tu liras dix fois moins et tu trouveras plus vite.",
-      schema: toutLirePuisChercher,
-      micros: ["cm2_doc_prelever_combiner"],
-    },
-    {
-      titre: "Pour un exposé à partir de plusieurs sources",
-      detail:
-        "Note à part ce que chacune apporte. Ce qui reste après la mise en commun est ce que tu as vraiment appris en les croisant.",
-      schema: troisDocuments,
-      micros: ["cm2_comp_documents_defi"],
-    },
-  ],
+  usages: [],
   exemples: [
-    {
-      titre: "À quoi sert un schéma",
-      donnees: "« Dans un documentaire, à quoi sert surtout un schéma légendé ? »",
-      schema: grilleCompositeSchema,
-      question: "À quoi sert-il ?",
-      solution:
-        "À MONTRER ET EXPLIQUER PAR L'IMAGE. Pas à raconter une histoire, pas à donner la fin d'un roman, pas à remplacer le titre. Un schéma avec sa légende explique par le dessin ce que le texte dirait avec des mots — et souvent plus vite.",
-      micros: ["cm2_doc_composite"],
-    },
     {
       titre: "La légende d'un plan",
       donnees: "« Sur un plan de ville, à quoi sert la légende ? »",
       schema: schemaEtLegende,
       question: "À quoi sert-elle ?",
       solution:
-        "À EXPLIQUER CE QUE REPRÉSENTENT LES SYMBOLES. Sans elle, un plan montre des formes et des couleurs dont tu ne sais rien : un carré bleu peut être une piscine, une école ou un parking. La légende est ce qui transforme un dessin en information.",
+        "À expliquer ce que représentent les symboles. Sans elle, un carré bleu peut être une piscine, une école ou un parking. La légende transforme un dessin en information.",
       micros: ["cm2_doc_composite"],
     },
     {
@@ -428,16 +357,7 @@ export const ficheComprehensionDocumentsCm2: FicheCoursData = {
       schema: reponseDansAucun,
       question: "Peux-tu le visiter mardi à 10 h ?",
       solution:
-        "NON, IL EST FERMÉ LE MARDI. Et regarde bien où se trouve cette réponse : sur aucune des deux affiches. La première dit oui pour 10 h, la seconde ne parle pas d'horaires. Il a fallu les mettre ensemble — c'est cela, croiser deux documents.",
-      micros: ["cm2_doc_croiser_infos"],
-    },
-    {
-      titre: "Une seule information",
-      donnees: "Tu n'as vu que la première affiche : « Piscine ouverte de 9 h à 18 h. »",
-      schema: uneSeuleNeSuffitPas,
-      question: "Peux-tu conclure ?",
-      solution:
-        "NON, ET C'EST LE PIÈGE : tu peux répondre, mais tu ne peux pas CONCLURE. Rien dans cette affiche n'est faux, et rien ne t'avertit qu'il manque une information. Avant de répondre, demande-toi toujours si ce document seul suffit.",
+        "Non, il est fermé le mardi. Et regarde où se trouve cette réponse : sur aucune des deux affiches. Il a fallu les mettre ensemble — c'est cela, croiser.",
       micros: ["cm2_doc_croiser_infos"],
     },
     {
@@ -446,16 +366,16 @@ export const ficheComprehensionDocumentsCm2: FicheCoursData = {
       schema: partirDeLaQuestion,
       question: "Par quoi commences-tu ?",
       solution:
-        "PAR LA QUESTION, PAS PAR LA PREMIÈRE PAGE. Relis-la, décide ce que tu cherches — un chiffre ? une date ? un mot ? — puis va au bon endroit : sommaire, tableau, légende. Lire les six pages d'abord ne laisse presque rien.",
+        "Par la question, pas par la première page. Décide ce que tu cherches — un chiffre, une date — puis va au bon endroit. Lire les six pages d'abord ne laisse presque rien.",
       micros: ["cm2_doc_prelever_combiner"],
     },
     {
-      titre: "Le défi",
+      titre: "Le défi : trois documents",
       donnees: "Un texte, un tableau de chiffres et une photo légendée, sur le même sujet.",
       schema: troisDocuments,
       question: "Comment réponds-tu à une question qui les traverse ?",
       solution:
-        "EN NOTANT CE QUE CHACUN APPORTE, SÉPARÉMENT, PUIS EN LES METTANT BOUT À BOUT. Le tableau donne un chiffre, le texte dit ce qu'il signifie, la photo montre à quoi cela ressemble. Aucun ne répond seul — et la réponse ne se trouve que dans leur rencontre.",
+        "En notant ce que chacun apporte, séparément, puis en les mettant bout à bout. Le tableau donne un chiffre, le texte dit ce qu'il signifie. Aucun ne répond seul.",
       micros: ["cm2_comp_documents_defi"],
     },
   ],
@@ -465,7 +385,6 @@ export const ficheComprehensionDocumentsCm2: FicheCoursData = {
     "Chercher la réponse dans l'un des deux : souvent elle n'est écrite ni dans l'un ni dans l'autre.",
     "Lire un document en entier avant de savoir ce qu'on y cherche.",
     "Lire un schéma sans sa légende : il montre, mais il n'explique pas.",
-    "Ignorer le sommaire et la source : ce sont les deux éléments qui font gagner le plus de temps.",
   ],
   aRetenir: [
     "Un document composite a des éléments qui se nomment, et chacun sert à autre chose.",
@@ -499,11 +418,6 @@ export const ficheComprehensionDocumentsCm2: FicheCoursData = {
       question: "Un document indique une source et une date. Que donne la source ?",
       correction: "D'où vient le document.",
       micros: ["cm2_doc_prelever_combiner"],
-    },
-    {
-      question: "« Un graphique a pour titre : Nombre de livres lus par mois. » Que lit-on dessus ?",
-      correction: "Combien de livres sont lus chaque mois.",
-      micros: ["cm2_comp_documents_defi"],
     },
   ],
   coachHref: "/coach-ia/francais?classe=cm2",
@@ -591,7 +505,7 @@ export const slidesComprehensionDocumentsCm2: ClasseSlide[] = [
       question: "Comment réponds-tu à une question qui les traverse ?",
       indice: "Ne cherche pas la réponse dans l'un d'eux.",
       correction:
-        "EN NOTANT CE QUE CHACUN APPORTE, SÉPARÉMENT, PUIS EN LES METTANT BOUT À BOUT. Le tableau donne un chiffre, le texte dit ce qu'il signifie, la photo montre à quoi cela ressemble.",
+        "En notant ce que chacun apporte, séparément, puis en les mettant bout à bout. Le tableau donne un chiffre, le texte dit ce qu'il signifie.",
     },
     schema: chacunUnMorceau,
   },
