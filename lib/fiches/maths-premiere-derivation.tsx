@@ -29,15 +29,26 @@ const VERT = "#16a34a";
 // La parabole y = x² et sa tangente au point A d'abscisse a — le MÊME dessin
 // que dans les exercices du coach (canvas fonctionGraphique). f(a) = a²,
 // pente = 2a, ordonnée à l'origine = a² − 2a·a = −a² → tangente y = 2a·x − a².
-function courbeTangente(a: number) {
+// ⛔⛔ LES GRADUATIONS ÉTAIENT RENDUES À 8 px — corrigé le 01/09/2026.
+// Le `viewBox` de ce canvas vaut son champ `size` : demander 300 px de large
+// dans une carte qui n'en fait que 222 ne rétrécit pas la carte, il RÉDUIT
+// TOUT LE DESSIN de 26 %, police comprise. Mesuré à 375 px : 9,0 px dans le
+// bloc « définition », 8,7 dans « formule », 8,0 dans « exemple » — sous le
+// plancher de lisibilité de 11 px, sur une fiche de PREMIÈRE.
+// 👉 La largeur est donc celle DU BLOC, mesurée, et non un chiffre rond : le
+// canvas rend alors ses chiffres à leur taille réelle, 12 px.
+const LARGEUR_BLOC = { carte: 222, formule: 216, exemple: 200 } as const;
+
+function courbeTangente(a: number, bloc: keyof typeof LARGEUR_BLOC = "carte") {
   const fa = a * a;
   const pente = 2 * a;
   const ord = fa - pente * a; // = −a²
+  const cote = LARGEUR_BLOC[bloc];
   return (
     <CanvasRenderer
       figure={{
         kind: "fonctionGraphique",
-        size: { width: 300, height: 300 },
+        size: { width: cote, height: cote },
         xmin: -1,
         xmax: 4,
         ymin: -2,
@@ -118,7 +129,7 @@ export const ficheDerivationPremiere: FicheCoursData = {
     expression: "(xⁿ)' = n·xⁿ⁻¹",
     legende:
       "k' = 0  ·  (ax + b)' = a  ·  (x²)' = 2x  ·  (x³)' = 3x²  ·  (1/x)' = −1/x²  ·  (√x)' = 1/(2√x)",
-    schema: courbeTangente(2),
+    schema: courbeTangente(2, "formule"),
   },
   methode: [
     {
@@ -180,7 +191,7 @@ export const ficheDerivationPremiere: FicheCoursData = {
       titre: "L'équation de la tangente",
       donnees: "f(x) = x², au point d'abscisse a = 1.",
       question: "Donner l'équation de la tangente.",
-      schema: courbeTangente(1),
+      schema: courbeTangente(1, "exemple"),
       solution:
         "f(1) = 1 et f'(1) = 2. Tangente : y = f'(1)(x − 1) + f(1) = 2(x − 1) + 1 = 2x − 1.",
     },

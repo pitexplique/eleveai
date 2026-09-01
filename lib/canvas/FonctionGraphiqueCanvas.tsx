@@ -172,7 +172,13 @@ export default function FonctionGraphiqueCanvas({ figure }: Props) {
               // affines. On les ramène dans le cadre plutôt que de les
               // supprimer : un axe sans ses bornes se lit mal.
               const marge = 10;
-              const sxClamp = Math.min(width - marge, Math.max(marge, sx));
+              // Le « 0 » est centré sur l'origine, donc TRAVERSÉ par l'axe
+              // vertical, qui lui barre le ventre. On le décale de quelques
+              // pixels vers la droite : la place à gauche est prise par la
+              // colonne des ordonnées.
+              const decalZero = x === 0 ? 8 : 0;
+              const sxClamp =
+                Math.min(width - marge, Math.max(marge, sx)) + decalZero;
               return (
                 <text key={`tx-${x}`} x={sxClamp} y={xAxisY + 17} textAnchor="middle" fontSize="12" fill="#334155">
                   {x !== 0 ? formatNumber(x) : "0"}
@@ -189,8 +195,47 @@ export default function FonctionGraphiqueCanvas({ figure }: Props) {
             .filter((y) => y !== 0 && (y - ymin) % pasY === 0)
             .map((y) => {
               const sy = toSvgY(y, ymin, ymax, height);
+              // ⛔⛔ LE « −1 » DE L'AXE VERTICAL SE LISAIT COMME UNE ABSCISSE —
+              // corrigé le 01/09/2026, sur signalement de Frédéric. L'axe
+              // horizontal semblait porter « −2  −1  −1  0  1  2 » : le second
+              // « −1 » était l'ordonnée.
+              //
+              // ⚠️ ET LE CONTRÔLE AUTOMATIQUE DISAIT « AUCUN CHEVAUCHEMENT ».
+              // Il ne mentait pas — les boites ne se touchaient pas — mais il
+              // répondait à la mauvaise question. La gêne ne vient PAS d'un
+              // recouvrement : elle vient de ce que les deux étiquettes sont
+              // sur LA MÊME RANGÉE. Les ordonnées étaient écrites en `sy − 4`,
+              // ce qui place le « −1 » (un cran sous l'axe, ~22 px) en
+              // `xAxisY + 18` — quand les abscisses sont en `xAxisY + 17`. Un
+              // pixel d'écart : l'œil lit une seule ligne de chiffres.
+              //
+              // DEUX CORRECTIONS, ET IL FALLAIT LES DEUX :
+              // ⭐ 1. À GAUCHE de l'axe, alignées à droite — la convention des
+              //    manuels. Seule, elle ne suffisait pas : le « −1 » restait
+              //    dans la rangée des abscisses, simplement de l'autre côté.
+              // ⭐ 2. CENTRÉES SUR LEUR GRADUATION (`dominantBaseline`), et non
+              //    posées 4 px au-dessus. Le « −1 » descend alors à
+              //    `xAxisY + 25` tandis que les abscisses culminent vers
+              //    `xAxisY + 17` : deux rangées distinctes, et le regard suit
+              //    enfin une colonne verticale au lieu d'une ligne.
+              //
+              // ⚠️ Sauf quand l'axe vertical est collé au bord gauche — cas
+              // `xmin = 0`, fréquent dans les banques : il n'y a alors pas la
+              // place à gauche, et on revient à droite.
+              const placeAGauche = yAxisX > 26;
+              // Centrer sur la graduation sortirait la moitié du chiffre du
+              // cadre aux deux extrémités, exactement comme pour les abscisses.
+              const syClamp = Math.min(height - 7, Math.max(7, sy));
               return (
-                <text key={`ty-${y}`} x={yAxisX + 5} y={sy - 4} fontSize="12" fill="#334155">
+                <text
+                  key={`ty-${y}`}
+                  x={placeAGauche ? yAxisX - 6 : yAxisX + 6}
+                  y={syClamp}
+                  textAnchor={placeAGauche ? "end" : "start"}
+                  dominantBaseline="central"
+                  fontSize="12"
+                  fill="#334155"
+                >
                   {formatNumber(y)}
                 </text>
               );
