@@ -394,6 +394,16 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Les sept solides et leur signature, les vues, le patron, la perspective et les sections — et pourquoi la boule n'a pas de patron, ce qui rend toute carte du monde fausse.",
   },
+  "maths/3e/entier-arithmetique": {
+    titre: "Multiples, diviseurs et facteurs premiers",
+    resume:
+      "Ce que la 4e ne faisait pas : démonter un entier en briques premières, et s'en servir — le PGCD, les parts sans reste, la fraction irréductible.",
+  },
+  "maths/3e/entier-racine-carree": {
+    titre: "La racine carrée",
+    resume:
+      "Le chemin inverse du carré : ce qu'est √a, les carrés parfaits à connaître par cœur, encadrer une racine qui ne tombe pas juste — et pourquoi √(9 + 16) ne vaut pas √9 + √16.",
+  },
   "maths/3e/affine-fonction": {
     titre: "Fonctions affines",
     resume:
