@@ -42,6 +42,7 @@ const schemaSymetrie = (
       source: { points: [{ x: 1, y: 1 }, { x: 1, y: 4 }, { x: 3, y: 1 }], label: "figure" },
       image: { points: [{ x: 7, y: 1 }, { x: 7, y: 4 }, { x: 5, y: 1 }], label: "image" },
       display: {
+        showTransformationInfo: true,
         showGrid: true,
         showLabels: true,
         showPoints: true,
@@ -62,7 +63,7 @@ const symReflet = (
       axis: { type: "vertical", x: 4, label: "axe" },
       source: { points: [{ x: 1, y: 1 }, { x: 3, y: 2 }, { x: 1, y: 4 }], label: "figure" },
       image: { points: [{ x: 7, y: 1 }, { x: 5, y: 2 }, { x: 7, y: 4 }], label: "image" },
-      display: { showGrid: true, showLabels: true, showPoints: true, showDashedLinks: true },
+      display: { showTransformationInfo: true, showGrid: true, showLabels: true, showPoints: true, showDashedLinks: true },
     }}
   />
 );
@@ -78,7 +79,7 @@ const symPoint = (
       axis: { type: "vertical", x: 4, label: "axe" },
       source: { points: [{ x: 1, y: 3 }], label: "A" },
       image: { points: [{ x: 7, y: 3 }], label: "A'" },
-      display: { showGrid: true, showLabels: true, showPoints: true, showDashedLinks: true },
+      display: { showTransformationInfo: true, showGrid: true, showLabels: true, showPoints: true, showDashedLinks: true },
     }}
   />
 );
@@ -120,7 +121,7 @@ const pointSurLAxe = legende(
       // « A = A' », dit la chose mieux que deux textes empilés.
       source: { points: [{ x: 4, y: 2 }], label: "A = A'" },
       image: { points: [{ x: 4, y: 2 }], label: "" },
-      display: { showGrid: true, showLabels: true, showPoints: true, showDashedLinks: false },
+      display: { showTransformationInfo: true, showGrid: true, showLabels: true, showPoints: true, showDashedLinks: false },
     }}
   />,
   "A est sur l'axe : son image, c'est lui-même"
@@ -227,7 +228,7 @@ const leProblemeDuPliage = legende(
       // « axe » posé en haut de la droite (mesuré). La légende sous le dessin
       // dit la phrase entière, l'étiquette n'a qu'à désigner.
       image: { points: [{ x: 6, y: 1 }, { x: 5, y: 3 }, { x: 7, y: 4 }], label: "faux" },
-      display: { showGrid: true, showLabels: true, showPoints: true, showDashedLinks: false },
+      display: { showTransformationInfo: true, showGrid: true, showLabels: true, showPoints: true, showDashedLinks: false },
     }}
   />,
   "plié, ça ne se superpose pas : ce n'est pas une symétrie"
@@ -287,7 +288,7 @@ const reporterLaDistance = legende(
       axis: { type: "horizontal", y: 3, label: "" },
       source: { points: [{ x: 2, y: 1 }], label: "A" },
       image: { points: [{ x: 2, y: 5 }], label: "A'" },
-      display: { showGrid: true, showLabels: true, showPoints: true, showDashedLinks: true },
+      display: { showTransformationInfo: true, showGrid: true, showLabels: true, showPoints: true, showDashedLinks: true },
     }}
   />,
   "l'axe est couché : 2 carreaux au-dessus, 2 en dessous"

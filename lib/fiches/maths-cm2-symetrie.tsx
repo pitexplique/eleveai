@@ -18,7 +18,20 @@ import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 const AXE = { type: "vertical" as const, x: 4, label: "axe" };
 const GRID = { rows: 6, cols: 8 };
 const SIZE = { cellSize: 30, padding: 18 };
-const DISPLAY = { showGrid: true, showLabels: true, showPoints: true, showDashedLinks: true };
+// ⭐ LE TITRE EST DEMANDÉ EXPLICITEMENT — le défaut de `TransformationCanvas`
+// est passé à `false` le 01/09/2026, parce qu'il divulguait la réponse de
+// quatre questions du coach (« Quelle transformation retourne une figure comme
+// dans un miroir ? », avec « Symétrie axiale » écrit au-dessus du dessin).
+// ⚠️ Dans une FICHE, c'est l'inverse : ce titre est la seule étiquette du
+// dessin. Mesuré après l'inversion, avant ce correctif : 17 dessins de fiche
+// se retrouvaient sans aucun texte autour d'eux.
+const DISPLAY = {
+  showGrid: true,
+  showLabels: true,
+  showPoints: true,
+  showDashedLinks: true,
+  showTransformationInfo: true,
+};
 
 // Une figure bleue et son image de l'autre côté de l'axe (le miroir).
 const schemaSymetrie = (

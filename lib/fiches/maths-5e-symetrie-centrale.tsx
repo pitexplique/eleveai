@@ -30,7 +30,7 @@ const transfo = (
       source,
       ...(image ? { image } : {}),
       center,
-      display: { showDashedLinks: true },
+      display: { showDashedLinks: true, showTransformationInfo: true },
     }}
   />
 );
@@ -50,7 +50,7 @@ const axiale = (
       source,
       image,
       axis: { type: "vertical", x, label: "(d)" },
-      display: { showDashedLinks: true },
+      display: { showDashedLinks: true, showTransformationInfo: true },
     }}
   />
 );

@@ -146,8 +146,27 @@ export default function TransformationCanvas({ figure }: Props) {
   const showLabels = figure.display?.showLabels ?? true;
   const showPoints = figure.display?.showPoints ?? true;
   const showDashedLinks = figure.display?.showDashedLinks ?? true;
+  // ⛔⛔ CE DÉFAUT ÉTAIT À `true`, ET IL DIVULGUAIT DES RÉPONSES — inversé le
+  // 01/09/2026. Le titre écrit « Symétrie axiale » au-dessus du dessin ; quand
+  // la question est « Quelle transformation retourne une figure comme dans un
+  // miroir ? », le dessin répond à la place de l'élève.
+  //
+  // MESURÉ sur les items chargés (et non par grep : chaque banque passe par un
+  // helper, donc grep n'en voyait qu'un par fichier) — 57 items emploient ce
+  // canvas, 30 affichaient le titre, et 4 d'entre eux avaient ce titre POUR
+  // RÉPONSE : trois en 3e (`..._reactivation_fixed_1/2/3`) et un en 4e
+  // (`4e_sym_axiale_fixed_1`).
+  //
+  // ⭐ POURQUOI INVERSER LE DÉFAUT PLUTÔT QUE CORRIGER LES QUATRE. Rustiner les
+  // quatre laissait le piège intact : le prochain item qui demande la nature
+  // d'une transformation l'affichera encore, sauf si son auteur y pense. Avec
+  // le défaut à `false`, un oubli fait perdre une étiquette utile — jamais une
+  // réponse. C'est le sens sûr, et c'est déjà celui de `HomothetieCanvas`.
+  // ⚠️ Conséquence assumée : les 26 autres dessins perdent leur titre. Ils ne
+  // perdent pas leur sens — les fiches légendent déjà leurs figures elles-mêmes.
+  // Pour le retrouver, il suffit de passer `showTransformationInfo: true`.
   const showTransformationInfo =
-    figure.display?.showTransformationInfo ?? true;
+    figure.display?.showTransformationInfo ?? false;
 
   const sourceColor = figure.source.color ?? "#2563eb";
   const sourceFill = figure.source.fill ?? "#dbeafe";
