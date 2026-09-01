@@ -25,7 +25,20 @@ export const DOSSIER_PDF = "/fiches";
  * l'ordre — c'est le titre qui décide, pas nous.
  */
 export function nomPdf(titre: string, classe: string): string {
+  /**
+   * ⛔ LES LIGATURES NE SE DÉCOMPOSENT PAS EN NFD (01/09/2026).
+   *
+   * « œ » et « æ » ne sont pas une lettre + un accent : NFD les laisse
+   * intacts, et le filtre `[^a-z0-9]` les prend alors pour une ponctuation.
+   * « Lire une œuvre en CM1 » sortait en « lire-une-UVRE-en-cm1 » — mesuré au
+   * premier PDF du site dont le titre en contenait une, le 01/09. On les
+   * translittère donc AVANT, comme le ferait un dictionnaire.
+   */
   const base = titre
+    .replace(/œ/g, "oe")
+    .replace(/Œ/g, "OE")
+    .replace(/æ/g, "ae")
+    .replace(/Æ/g, "AE")
     .normalize("NFD")
     .replace(/[̀-ͯ]/g, "")
     .toLowerCase()
