@@ -163,11 +163,64 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
         expected: [cible.nom],
         comparator: "mcq_exact",
         explanation:
-          `Définition : chaque solide usuel a une forme caractéristique.\n\n` +
-          `Méthode : on observe les bases et les faces du solide représenté.\n\n` +
+          "Définition : chaque solide se reconnaît à ses BASES et à ses faces latérales — pas à son allure générale.\n\n" +
+          "Méthode : on compte d'abord les bases, puis on regarde leur forme, puis ce qui les relie.\n\n" +
           `Observation : la figure correspond à ${cible.nom}.\n\n` +
-          `Conclusion : le solide représenté est ${cible.nom}.`,
+          `Conclusion : c'est ${cible.nom}. ⚠️ Deux pièges de vocabulaire — le CUBE est un pavé droit particulier, celui dont les six faces sont des carrés ; et la BOULE est le seul solide sans aucune face plane, sans arête et sans sommet.`,
         canvas: solideCanvas(cible.kind),
+      };
+    },
+  },
+  {
+    // ⭐ SECOND GABARIT AJOUTÉ LE 01/09/2026 : c'était la DERNIÈRE micro de la
+    // classe à n'en avoir qu'un, et le mode complet du coach oppose deux
+    // questions — il ne peut pas le faire avec un seul item.
+    // ⭐ Il prend la reconnaissance par l'autre bout : au lieu de nommer un
+    // solide dessiné, on le retrouve à partir de sa DESCRIPTION. C'est le geste
+    // qui prouve qu'on a retenu la signature et pas l'image.
+    kind: "template",
+    id: "3e_volume_solide_reconnaitre_tpl_2_description",
+    niveau: "3e",
+    matiere: "maths",
+    notionId: "volume_geometrie_espace",
+    microId: "volume_solide_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compte les bases, regarde leur forme, puis ce qui les relie.",
+    tags: ["geometrie_espace", "reconnaitre", "description", "qcm", "template"],
+    generate: () => {
+      const cas = randomChoice([
+        { nom: "un cube", signe: "six faces carrées, toutes identiques", objet: "un dé, une boîte de sucre" },
+        { nom: "un pavé droit", signe: "six faces rectangulaires", objet: "une boîte à chaussures, une brique de lait" },
+        { nom: "un cylindre", signe: "deux disques identiques reliés par une surface courbe", objet: "une boîte de conserve, un rouleau" },
+        { nom: "un cône", signe: "un disque et une pointe", objet: "un cornet de glace, un chapeau de fête" },
+        { nom: "une boule", signe: "aucune arête, aucun sommet, aucune face plane", objet: "un ballon, une bille" },
+        { nom: "une pyramide", signe: "une base polygonale et une pointe", objet: "une pyramide d'Égypte, une tente canadienne" },
+        { nom: "un prisme droit", signe: "deux bases identiques et parallèles, reliées par des rectangles", objet: "une part de fromage, un toit à deux pentes" },
+      ]);
+      const tous = [
+        "un cube",
+        "un pavé droit",
+        "un cylindre",
+        "un cône",
+        "une boule",
+        "une pyramide",
+        "un prisme droit",
+      ];
+      return {
+        text: `Quel solide a ${cas.signe} ?`,
+        format: "qcm",
+        choices: shuffle([
+          cas.nom,
+          ...shuffle(tous.filter((n) => n !== cas.nom)).slice(0, 3),
+        ]),
+        expected: [cas.nom],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : reconnaître un solide à partir de sa description, c'est le geste inverse de le nommer sur un dessin — et c'est celui qui prouve qu'on a retenu la SIGNATURE, pas une image.\n\n" +
+          "Méthode : on traduit la description en bases et en faces latérales. Combien de bases ? De quelle forme ? Qu'est-ce qui les relie ?\n\n" +
+          `Observation : « ${cas.signe} » décrit ${cas.nom}.\n\n` +
+          `Conclusion : c'est ${cas.nom}. ⭐ Pour le retenir : ${cas.objet}.`,
       };
     },
   },
