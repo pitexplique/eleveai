@@ -556,6 +556,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "a/à, est/et, sont/son, ont/on : l'un des deux est un verbe. Mets la phrase à l'imparfait et tu sais lequel.",
   },
+  "francais/cm1/conjugaison-temps-simples": {
+    titre: "Les temps simples en CM1 (2026-2027)",
+    resume:
+      "Dans « je jouerai », le mot « jouer » est encore là en entier : l'infinitif est la clé des trois temps.",
+  },
   "francais/cm2/comprehension-documents": {
     titre: "Lire des documents et croiser des informations en CM2 (2026-2027)",
     resume:
