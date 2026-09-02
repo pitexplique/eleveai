@@ -123,11 +123,11 @@ export const microSkills: MicroSkillSource[] = [
   { id: "cp_gram_types_phrases",      label: "Reconnaître la phrase déclarative, interrogative, impérative", notionId: "grammaire_phrase", prerequis: ["cp_gram_majuscule_point"] },
   { id: "cp_gram_forme_negative",     label: "Reconnaître la forme négative (ne… pas)",              notionId: "grammaire_phrase", prerequis: ["cp_gram_types_phrases"] },
   { id: "cp_gram_forme_exclamative",  label: "Reconnaître la forme exclamative",                     notionId: "grammaire_phrase", prerequis: ["cp_gram_types_phrases"] },
-  { id: "cp_gram_nom_verbe",          label: "Identifier un nom et un verbe",                        notionId: "grammaire_phrase", prerequis: ["cp_gram_phrase_reconnaitre"] },
-  { id: "cp_gram_determinant",        label: "Reconnaître un déterminant (le, la, les, un, une)",    notionId: "grammaire_phrase", prerequis: ["cp_gram_nom_verbe"] },
-  { id: "cp_gram_adjectif",           label: "Reconnaître un adjectif",                              notionId: "grammaire_phrase", prerequis: ["cp_gram_nom_verbe"] },
-  { id: "cp_gram_pronom",             label: "Reconnaître un pronom personnel",                      notionId: "grammaire_phrase", prerequis: ["cp_gram_nom_verbe"] },
-  { id: "cp_gram_defi",               label: "Défi grammaire de la phrase",                          notionId: "grammaire_phrase", prerequis: ["cp_gram_determinant", "cp_gram_adjectif", "cp_gram_pronom", "cp_gram_forme_negative"] },
+  { id: "cp_gram_nom_verbe",          label: "Identifier un nom et un verbe",                        notionId: "classes_mots", prerequis: ["cp_gram_phrase_reconnaitre"] },
+  { id: "cp_gram_determinant",        label: "Reconnaître un déterminant (le, la, les, un, une)",    notionId: "classes_mots", prerequis: ["cp_gram_nom_verbe"] },
+  { id: "cp_gram_adjectif",           label: "Reconnaître un adjectif",                              notionId: "classes_mots", prerequis: ["cp_gram_nom_verbe"] },
+  { id: "cp_gram_pronom",             label: "Reconnaître un pronom personnel",                      notionId: "classes_mots", prerequis: ["cp_gram_nom_verbe"] },
+  { id: "cp_gram_defi",               label: "Défi grammaire de la phrase",                          notionId: "classes_mots", prerequis: ["cp_gram_determinant", "cp_gram_adjectif", "cp_gram_pronom", "cp_gram_forme_negative"] },
 
   // ── Orthographe grammaticale ──────────────────────────────────────────────
   { id: "cp_orth_masculin_feminin", label: "Distinguer le masculin et le féminin",                       notionId: "orthographe", prerequis: ["cp_gram_determinant"] },

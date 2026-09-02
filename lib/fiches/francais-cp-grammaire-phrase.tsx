@@ -40,11 +40,17 @@
 //
 // Elles ne se rejoignent qu'au `cp_gram_defi` final. Savoir où une phrase
 // commence et finit, et savoir nommer les mots qui la composent, sont deux
-// leçons. ⛔ La notion devra donc être DÉCOUPÉE — mais cela touche un `notionId`
-// du coach, donc l'URL de la fiche : c'est une décision de Frédéric, pas une
-// écriture. Rien ne se fait sans lui.
+// leçons.
 //
-// Cette fiche couvre donc TOUTE la branche PHRASE (6 micros sur 6) :
+// ✅ LA NOTION A ÉTÉ DÉCOUPÉE LE 02/09/2026, sur décision de Frédéric. Les cinq
+// micros de la branche MOTS (nom_verbe, determinant, adjectif, pronom, defi)
+// vivent maintenant sous `classes_mots`. ⭐ Et ce n'était pas une invention :
+// le CE1 et le CE2 ont `classes_mots` depuis toujours, même libellé, même
+// prérequis — le CP était la seule classe à ne pas séparer les deux.
+// ⚠️ Les identifiants des micros n'ont PAS changé (`cp_gram_*`) : seul leur
+// `notionId` a bougé, ce qui laisse intacts la banque et cette fiche.
+//
+// Cette fiche couvre donc TOUTE sa notion (6 micros sur 6) :
 // - cp_gram_phrase_reconnaitre → définition, propriété 1, exemple 1
 // - cp_gram_majuscule_point    → figure, propriété 2, méthode 2, exemple 1
 // - cp_gram_types_phrases      → propriété 3
@@ -52,9 +58,9 @@
 // - cp_gram_forme_negative     → propriété 4, à retenir, entrainement 5
 // - cp_gram_ordonner_phrase    → méthode 1, exemple 2
 //
-// ⚠️ Et AUCUNE de la branche MOTS (nom, verbe, déterminant, adjectif, pronom,
-// défi) : les entasser ici referait la fiche la plus lourde du site, cette fois
-// pour les plus jeunes. Elles attendent leur propre fiche.
+// ⚠️ La notion `classes_mots` du CP (nom, verbe, déterminant, adjectif, pronom,
+// défi) attend SA fiche — 5 micros, 11 énoncés déjà dans la banque, et le coach
+// l'ouvre correctement (96/96 micros vérifiées le 02/09).
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";

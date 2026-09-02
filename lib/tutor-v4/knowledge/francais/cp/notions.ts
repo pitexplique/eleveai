@@ -98,6 +98,30 @@ export const notions: NotionSource[] = [
     prerequis: ["lecture_syllabique"],
     levels: [1, 2, 3],
   },
+  /**
+   * ⭐⭐ SÉPARÉE DE `grammaire_phrase` LE 02/09/2026, ET CE N'EST PAS UNE
+   * INVENTION : LE CP ÉTAIT LA SEULE CLASSE À NE PAS LE FAIRE. Le CE1 et le CE2
+   * ont `classes_mots` depuis toujours, avec le même libellé et le même
+   * prérequis. Le découpage aligne le CP sur ses voisines.
+   *
+   * ⭐ Et c'est le GRAPHE DE PRÉRÉQUIS qui l'a montré, pas une impression : les
+   * onze micros de `grammaire_phrase` descendaient toutes de
+   * `cp_gram_phrase_reconnaitre`, qui avait DEUX enfants que rien ne reliait
+   * ensuite — `majuscule_point` (où une phrase commence et finit) d'un côté,
+   * `nom_verbe` (comment s'appellent les mots) de l'autre. Deux leçons, deux
+   * notions.
+   *
+   * ⚠️ Les identifiants des micros ne changent PAS (`cp_gram_*`) : ils sont
+   * cités par la banque de questions et par les fiches. Seul leur `notionId`
+   * bouge — c'est ce qui rend le découpage sûr.
+   */
+  {
+    id: "classes_mots",
+    label: "Classes de mots (nom, verbe, adjectif, déterminant, pronom)",
+    boId: "BOCPFG1",
+    prerequis: ["grammaire_phrase"],
+    levels: [1, 2, 3],
+  },
   {
     id: "orthographe",
     label: "Orthographe grammaticale",
