@@ -439,6 +439,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Ce qu'on décrivait en 4e s'écrit enfin : f(x) = ax + b. Le a incline la droite, le b dit où elle coupe l'axe — et le point de bascule décide entre deux offres.",
   },
+  "maths/3e/fonction-generalite": {
+    titre: "Fonctions : image et antécédent",
+    resume:
+      "Une machine à un seul bouton : un nombre entre, un nombre sort. Calculer une image, c'est remplacer ; chercher un antécédent, c'est résoudre — et un même résultat peut venir de deux départs.",
+  },
   "maths/4e/grandeur-composee": {
     titre: "Grandeurs composées et unités",
     resume:
