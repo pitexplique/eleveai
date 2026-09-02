@@ -22,9 +22,10 @@
 # geste se lisent (le rond part en haut à droite, tourne à gauche, redescend le
 # côté droit, sort vers la lettre suivante).
 #
-# Rendu 16:9   : python -m manim render -qh manim/scripts/cp/lettre_a.py LettreACp \
+# ⛔ TOUJOURS --disable_caching : sans lui, les sons sautent (voir `dire`).
+# Rendu 16:9   : python -m manim render -qh --disable_caching manim/scripts/cp/lettre_a.py LettreACp \
 #                  -o eleveai-francais-cp-lettre-a --media_dir manim/scripts/cp/media
-# Rendu 9:16   : python -m manim render -qh -r 1080,1920 manim/scripts/cp/lettre_a.py LettreACpShort \
+# Rendu 9:16   : python -m manim render -qh --disable_caching -r 1080,1920 manim/scripts/cp/lettre_a.py LettreACpShort \
 #                  -o eleveai-francais-cp-lettre-a-short --media_dir manim/scripts/cp/media
 
 import sys
@@ -264,9 +265,10 @@ def arbre_dessine() -> VGroup:
 # suivant, et personne ne le voit en lisant le code.
 VOIX = Path(__file__).resolve().parents[3] / "public" / "sons" / "cp-lettre-a"
 DUREE = {
-    "01-ecoute": 3.69, "02-regarde": 3.72, "03-depart": 8.21, "04-encore": 3.63,
-    "05-a-comme": 2.03, "06-arbre": 1.86, "07-avion": 1.84, "08-ami": 1.75,
-    "09-animal": 2.16, "10-abricot": 2.08, "11-relance": 4.30, "12-signature": 3.54,
+    "00-aujourdhui": 3.93, "01-ecoute": 3.69, "02-regarde": 3.72, "03-depart": 8.21,
+    "04-encore": 3.63, "05-cherchons": 5.00, "05-a-comme": 2.03, "06-arbre": 1.86,
+    "07-avion": 1.84, "08-ami": 1.75, "09-animal": 2.16, "10-abricot": 2.08,
+    "10-pareil": 5.99, "11-relance": 4.30, "12-signature": 3.54,
 }
 CLIPS_MOTS = ["06-arbre", "07-avion", "08-ami", "09-animal", "10-abricot"]
 
@@ -277,7 +279,18 @@ class _LettreABase(Scene):
     vertical = False
 
     def dire(self, nom: str) -> float:
-        """Joue un clip de voix ici, et rend sa durée pour caler l'attente."""
+        """Joue un clip de voix ici, et rend sa durée pour caler l'attente.
+
+        ⛔⛔ RENDRE **SANS CACHE**, SINON LE SON DISPARAIT SANS UN MOT.
+        `Scene.add_sound` commence par `if self.renderer.skip_animations:
+        return` — et `skip_animations` passe à True dès qu'une animation est
+        reprise du cache. Au deuxième rendu, la vidéo sortait donc avec 3,71 s
+        d'audio pour 48 s d'image : seul le premier clip, celui joué avant que
+        le cache ne s'active. Rien dans les journaux, rien à l'écran.
+        👉 Toujours `--disable_caching` sur cette vidéo (c'est dans les
+        commandes en tête de fichier), et VÉRIFIER la durée de la piste audio
+        après rendu.
+        """
         self.add_sound(str(VOIX / f"{nom}.wav"))
         return DUREE[nom]
 
@@ -305,6 +318,8 @@ class _LettreABase(Scene):
         else:
             margo.to_edge(RIGHT, buff=1.1)
 
+        d0 = self.dire("00-aujourdhui")
+        self.wait(d0)
         d = self.dire("01-ecoute")
         self.play(
             FadeIn(titre, shift=DOWN * 0.3),
@@ -418,6 +433,8 @@ class _LettreABase(Scene):
         bloc = VGroup(titre_mots, lignes_mots).arrange(DOWN, buff=0.5)
         bloc.move_to(ORIGIN).scale(0.95 if not self.vertical else 0.8)
 
+        dc = self.dire("05-cherchons")
+        self.wait(dc)
         d = self.dire("05-a-comme")
         self.play(FadeIn(titre_mots, shift=DOWN * 0.3))
         self.wait(max(0.2, d - 1.0))
@@ -438,7 +455,8 @@ class _LettreABase(Scene):
             self.play(ligne.animate.scale(1 / 1.22), run_time=0.3)
             # Le mot dit, puis un souffle : jamais l'un sur l'autre.
             self.wait(max(0.15, duree_mot - 1.45))
-        self.wait(1.0)
+        dp = self.dire("10-pareil")
+        self.wait(dp)
 
         # ── 4 bis. LA RELANCE ───────────────────────────────────────────────
         # ⭐ On ne finit pas sur une liste : on rend la main. « Un autre mot ? »
