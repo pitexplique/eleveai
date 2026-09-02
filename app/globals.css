@@ -209,4 +209,82 @@ body {
   [data-cycle="2"] [data-rubrique="entrainement"] {
     display: none !important;
   }
+
+  /* ⭐ ET LE RECTO SE GAGNE SUR LES MARGES, JAMAIS SUR LES DESSINS.
+     Après le retrait des blocs d'adulte, mesure en média print : 1 294 px de
+     contenu pour 1 033 px d'A4 utile. Les 261 px manquants se prennent là où
+     ils ne coutent rien à l'enfant —
+       · l'en-tête (217 px, dont 77 de marges et 24 de pastilles « Français /
+         cp / Fiche de cours », que le titre répète déjà) ;
+       · les espaces entre sections ;
+       · la LARGEUR des dessins, qui emporte leur hauteur avec elle.
+     ⛔ Et surtout PAS en plafonnant la hauteur d'un SVG : lui retirer sa
+     largeur ne réduit rien et l'effondre (règle du 31/08). On borne
+     `max-width`, la hauteur suit toute seule et le rapport est conservé. */
+  [data-cycle="2"] header > div:nth-of-type(2) {
+    display: none !important;
+  }
+  [data-cycle="2"] header {
+    padding-bottom: 8px !important;
+  }
+  [data-cycle="2"] h1 {
+    font-size: 22px !important;
+    line-height: 1.15 !important;
+  }
+  [data-cycle="2"] [data-rubrique] section {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+  }
+  /* Les titres de rubrique servent au maitre qui classe la feuille, pas à
+     l'enfant qui la fait : ils restent, en petit. */
+  [data-cycle="2"] [data-rubrique] > section > h2 {
+    font-size: 14px !important;
+    margin-bottom: 2px !important;
+  }
+  [data-cycle="2"] [data-rubrique] .mt-4,
+  [data-cycle="2"] [data-rubrique] .mt-5 {
+    margin-top: 6px !important;
+  }
+  /* Le rembourrage des cartes : 16 px en haut ET en bas de chaque carte, sur
+     deux rangées, c'est 32 px de papier pour de l'air. */
+  [data-cycle="2"] [data-rubrique] .p-4,
+  [data-cycle="2"] [data-rubrique] .p-5 {
+    padding: 8px !important;
+  }
+  [data-cycle="2"] [data-rubrique="definition"] svg {
+    max-width: 180px !important;
+  }
+  [data-cycle="2"] [data-rubrique="aRetenir"] li {
+    font-size: 12px !important;
+    line-height: 1.35 !important;
+  }
+  [data-cycle="2"] [data-rubrique="proprietes"] svg {
+    max-width: 190px !important;
+  }
+
+  /* ⛔ LA PHRASE D'EXPLICATION DE LA PROPRIÉTÉ NE S'IMPRIME PAS, ET C'EST UN
+     ARBITRAGE, pas une économie de place déguisée. Sur la feuille, la carte
+     garde son TITRE (« Une phrase dit quelque chose »), son DESSIN et sa
+     CONSIGNE (« Colorie Teo. Il dit une phrase entière. ») — l'enfant a tout ce
+     qu'il lui faut pour agir. « On la comprend sans rien ajouter » est une
+     nuance d'adulte, et l'adulte l'a sous les yeux à l'écran.
+     ⚠️ Si Frédéric la veut sur le papier, retirer ces trois lignes suffit — mais
+     la feuille repasse alors à deux pages. */
+  [data-cycle="2"] [data-rubrique="proprietes"] p {
+    display: none !important;
+  }
+  [data-cycle="2"] [data-rubrique="aRetenir"] section {
+    padding-top: 4px !important;
+  }
+
+  /* ⭐ LE SUFFIXE DU TITRE EST UNE PHRASE POUR GOOGLE, PAS POUR UN CP.
+     « cours et exercices corrigés de français CP » attrape une requête réelle
+     et doit rester dans la page — mais sur la feuille photocopiée, il occupe
+     24 px pour ne rien apprendre à personne. Ce sont les 16 derniers pixels qui
+     manquaient au recto.
+     ⚠️ Sans aucun risque pour l'indexation : une règle `@media print` n'est
+     jamais appliquée par un robot, et le texte reste dans le HTML. */
+  [data-cycle="2"] h1 > span {
+    display: none !important;
+  }
 }
