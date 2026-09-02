@@ -439,6 +439,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Ce qu'on décrivait en 4e s'écrit enfin : f(x) = ax + b. Le a incline la droite, le b dit où elle coupe l'axe — et le point de bascule décide entre deux offres.",
   },
+  "maths/3e/aire-surface": {
+    titre: "Aires : triangle, disque et figures composées",
+    resume:
+      "Ici on découpe la figure, là où le périmètre l'interdisait. Et agrandir deux fois ne double pas l'aire : ça la quadruple — une aire est le produit de deux longueurs.",
+  },
   "maths/3e/aire-perimetre": {
     titre: "Périmètres : polygones, cercle et figures composées",
     resume:
