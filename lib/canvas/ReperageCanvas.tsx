@@ -181,9 +181,35 @@ export default function ReperageCanvas({ figure }: Props) {
               markerEnd="url(#reperage-arrow)"
             />
 
+            {/*
+              ⛔ LES DEUX NOMS D'AXES SORTAIENT DU CADRE, et un `<svg>` rogne ce
+              qui dépasse : ils étaient donc COUPÉS, sur tous leurs emplois du
+              site. Corrigé le 02/09/2026, après la mesure de la classe de 4e.
+
+              C'était arithmétique, pas une question de taille demandée :
+                · le « x » était posé à `marginLeft + gridWidth + 12`, soit
+                  `width − 6`, et il mesure environ 8 px de large — il finissait
+                  donc à `width + 2`. Il est désormais ANCRÉ PAR LA FIN, à 4 px
+                  du bord : il ne peut plus sortir, quelle que soit sa largeur.
+                · le « y » avait sa ligne de base à `marginTop − 12`, soit 10 px,
+                  pour une police de 15 dont le jambage monte d'environ 11 px :
+                  son sommet était à −1. La base descend à `marginTop − 8`.
+
+              ⚠️ Mesuré avant : « x » dépassait de 4,4 px à droite, « y » de
+              7,1 px en haut. Aucun des deux ne faisait baisser la police ni ne
+              cassait quoi que ce soit — c'est exactement le genre de défaut qui
+              survit tant que personne ne mesure une fiche déjà publiée.
+            */}
+            {/*
+              ⚠️ Le « x » est AU-DESSUS de l'axe, pas dessous : sous l'axe court la
+              ligne des graduations, et l'y ramener le faisait chevaucher la
+              dernière d'entre elles. Au-dessus, il occupe la marge de droite, où
+              il n'y a rien.
+            */}
             <text
-              x={marginLeft + gridWidth + 12}
-              y={marginTop + gridHeight + 5}
+              x={width - 4}
+              y={marginTop + gridHeight - 6}
+              textAnchor="end"
               fontSize="15"
               fontWeight="900"
               fill={colors.axisX}
@@ -191,9 +217,18 @@ export default function ReperageCanvas({ figure }: Props) {
               x
             </text>
 
+            {/*
+              ⭐ LE « y » EST DESCENDU ET DÉCALÉ À DROITE (Frédéric, 02/09). Il
+              était posé au-dessus de l'axe et à sa gauche, là où il n'y a que la
+              marge : à cette hauteur, la boîte d'un « y » de 15 px — qui monte
+              d'environ 14 px au-dessus de sa ligne de base — sortait du cadre de
+              2,7 px, et le SVG la rognait.
+              Il est maintenant DANS le cadre, juste à droite de l'axe et sous sa
+              pointe : la place où un manuel écrit le nom d'un axe.
+            */}
             <text
-              x={marginLeft - 5}
-              y={marginTop - 12}
+              x={marginLeft + 6}
+              y={marginTop + 4}
               fontSize="15"
               fontWeight="900"
               fill={colors.axisY}
@@ -317,18 +352,37 @@ export default function ReperageCanvas({ figure }: Props) {
               />
 
               {showPointLabels && point.label ? (
-                <text
-                  x={px + 11}
-                  y={py - 10}
-                  fontSize="14"
-                  fontWeight="900"
-                  fill={colors.text}
-                  stroke="white"
-                  strokeWidth={3}
-                  paintOrder="stroke"
-                >
-                  {point.label}
-                </text>
+                // ⛔ L'ÉTIQUETTE BASCULE À GAUCHE PRÈS DU BORD DROIT (02/09/2026).
+                // Elle était TOUJOURS posée à `px + 11` : un point placé dans la
+                // dernière colonne la poussait donc hors du cadre, et le `<svg>`
+                // la rognait. Mesuré sur la fiche de repérage de 4e, où « (6 ; 2) »
+                // sortait aux deux largeurs — le point était pourtant à
+                // l'intérieur, seule sa légende dépassait.
+                //
+                // Le seuil compte en PIXELS DE TEXTE, pas en cases : on estime la
+                // largeur du libellé à 7 px par caractère, la mesure de REGLES.md.
+                // S'il ne tient pas à droite, on l'ancre par la fin et on la pose
+                // à gauche du point. Un libellé à gauche reste lisible ; un
+                // libellé coupé, non.
+                (() => {
+                  const largeurEstimee = (point.label?.length ?? 0) * 7;
+                  const tientADroite = px + 11 + largeurEstimee < width - 4;
+                  return (
+                    <text
+                      x={tientADroite ? px + 11 : px - 11}
+                      y={py - 10}
+                      textAnchor={tientADroite ? "start" : "end"}
+                      fontSize="14"
+                      fontWeight="900"
+                      fill={colors.text}
+                      stroke="white"
+                      strokeWidth={3}
+                      paintOrder="stroke"
+                    >
+                      {point.label}
+                    </text>
+                  );
+                })()
               ) : null}
             </g>
           );

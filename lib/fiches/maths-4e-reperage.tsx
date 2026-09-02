@@ -97,7 +97,14 @@ const droite = (
       kind: "number_line",
       min,
       max,
-      step,
+      // ⚠️ LE PAS DEMANDÉ EST UN MINIMUM, PAS UNE CONSIGNE (corrigé le 02/09).
+      // Deux appels traçaient `-10..10` au pas de 2, soit ONZE graduations : à
+      // 222 px de large, « -10 » et « -8 » se touchaient. La règle du 24/08 est
+      // de viser SEPT graduations au plus, et la fiche pilote de 5e la fait
+      // respecter par un pas adaptatif — (étendue ÷ 6). On la met ici DANS le
+      // helper, et non à chaque appel : un garde-fou qu'on peut oublier d'écrire
+      // ne garde rien. Les POINTS, eux, restent posés à leur valeur exacte.
+      step: Math.max(step, Math.ceil((max - min) / 6)),
       points,
       display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
       size: { width: bloc === "exemple" ? 200 : 222, height: 130 },
@@ -115,7 +122,14 @@ const plan = (
       kind: "reperage",
       grid: { rows: 7, cols: 7 },
       points,
-      size: { width: bloc === "exemple" ? 200 : 222, height: bloc === "exemple" ? 190 : 210 },
+      // ⚠️ PLUS HAUT QUE LARGE, ET C'EST MESURÉ (02/09). Sept lignes empilées
+      // dans 210 px laissaient 20 unités par case : sur un téléphone, les
+      // graduations « 0 », « 1 », « 2 » de l'axe vertical se touchaient, et une
+      // étiquette de point sortait du cadre. La LARGEUR, elle, est imposée par le
+      // bloc — 222 px pour une carte, 200 pour un exemple — mais la hauteur est
+      // libre : on la donne. Un repère carré n'a rien d'obligatoire, et un
+      // quadrillage lisible vaut mieux qu'un quadrillage carré.
+      size: { width: bloc === "exemple" ? 200 : 222, height: bloc === "exemple" ? 230 : 255 },
     }}
   />
 );

@@ -167,7 +167,12 @@ const egaliteDesAires = (
       //     parts sont posées à 144 px DU HAUT (barY + barHeight + 24), tandis que
       //     la phrase du bas est posée à 18 px DU BAS. Sous 170 de hauteur, les
       //     deux se rentrent dedans sans rien casser. 180 les sépare de 18 px.
-      size: { width: 240, height: 180 },
+      // ⚠️ 200 ET NON 180, corrigé le 02/09 après une mesure de la classe entière.
+      // 180 séparait les étiquettes de parts de la phrase du bas de 18 px — assez
+      // en 375, pas en 1280 : agrandi, « 4² » venait toucher « 9 + 16 = 25 ». Le
+      // défaut ne se voyait QUE sur grand écran, et il a survécu deux semaines
+      // parce que personne ne remesure une fiche déjà publiée.
+      size: { width: 240, height: 200 },
       total: "25",
       parts: [
         { label: "3²", value: "9", color: BLEU },
