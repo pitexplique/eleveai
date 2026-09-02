@@ -439,6 +439,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Ce qu'on décrivait en 4e s'écrit enfin : f(x) = ax + b. Le a incline la droite, le b dit où elle coupe l'axe — et le point de bascule décide entre deux offres.",
   },
+  "maths/3e/litteral-calcul": {
+    titre: "Calcul littéral : développer, réduire, factoriser",
+    resume:
+      "Trois verbes et trois directions : développer va du produit vers la somme, factoriser fait l'inverse, réduire range. Et une seule égalité à savoir par cœur, celle qui factorise une différence de deux carrés.",
+  },
   "maths/3e/fonction-generalite": {
     titre: "Fonctions : image et antécédent",
     resume:
