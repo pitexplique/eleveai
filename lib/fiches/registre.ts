@@ -439,6 +439,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Ce qu'on décrivait en 4e s'écrit enfin : f(x) = ax + b. Le a incline la droite, le b dit où elle coupe l'axe — et le point de bascule décide entre deux offres.",
   },
+  "maths/3e/prop-proportionnalite": {
+    titre: "Proportionnalité, pourcentages et grandeurs quotients",
+    resume:
+      "Une vitesse n'est ni une distance ni une durée : c'est le rapport des deux. Et deux évolutions successives se multiplient — +20 % puis −20 % ne ramène pas au prix de départ.",
+  },
   "maths/3e/algo-programmation": {
     titre: "Algorithmique : variables, boucles et programmes de calcul",
     resume:
@@ -716,6 +721,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Copier sans se tromper au CP (2026-2027)",
     resume:
       "On ne copie pas lettre à lettre : on retient un morceau et on l'écrit d'un trait. Le sens du tracé, la hauteur des lettres, et se relire du doigt.",
+  },
+  "francais/cp/classes-mots": {
+    titre: "Nom, verbe, adjectif au CP (2026-2027)",
+    resume:
+      "Un mot tout seul ne dit pas ce qu'il est : c'est la phrase qui décide. Le nom, le verbe, le déterminant, l'adjectif et le pronom, chacun avec son test.",
   },
   "francais/cm2/grammaire-nature-fonction": {
     titre: "Nature et fonction d'un mot en CM2 (2026-2027)",
