@@ -439,6 +439,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Ce qu'on décrivait en 4e s'écrit enfin : f(x) = ax + b. Le a incline la droite, le b dit où elle coupe l'axe — et le point de bascule décide entre deux offres.",
   },
+  "maths/3e/fraction-rationnel": {
+    titre: "Les nombres rationnels",
+    resume:
+      "Entiers, décimaux et fractions ne sont pas trois familles : ce sont trois écritures du même objet. Et entre deux d'entre eux, aussi proches soient-ils, il s'en cache toujours un autre.",
+  },
   "maths/3e/entier-puissance": {
     titre: "Puissances et écriture scientifique",
     resume:
