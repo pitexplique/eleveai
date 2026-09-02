@@ -349,6 +349,8 @@ export default function FicheCoursClient({
     return insecables(`${libelle} : ${titreDeSection(fiche.titre, fiche.classe)}`);
   }
 
+  const estCycle2 = CYCLE_2.has(fiche.classe.toLowerCase());
+
   // ── Les blocs de la fiche, rendus rubrique par rubrique ──
   function rendreRubrique(id: FicheRubriqueId) {
     switch (id) {
@@ -909,7 +911,7 @@ export default function FicheCoursClient({
         <Flashcards fiche={fiche} />
       ) : (
         <article
-          data-cycle={CYCLE_2.has(fiche.classe.toLowerCase()) ? "2" : undefined}
+          data-cycle={estCycle2 ? "2" : undefined}
           className="mx-auto max-w-5xl px-5 py-8 sm:px-8 print:max-w-none print:px-0 print:py-0"
         >
           <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-300/40 sm:p-8 print:rounded-none print:border-0 print:p-0 print:shadow-none">
@@ -930,8 +932,16 @@ export default function FicheCoursClient({
                 <span className="rounded-full bg-sky-100 px-3 py-1 text-sky-700">
                   {fiche.classe}
                 </span>
+                {/* ⭐⭐ AU CYCLE 2, CE N'EST PAS UNE FICHE DE COURS : C'EST UNE
+                    FICHE D'ACTIVITÉ (Frédéric, 02/09/2026). Le nom n'est pas
+                    cosmétique — il dit à l'enseignant ce qu'il tient. Un CP ne
+                    lit pas sa fiche : il la COLORIE, il TRACE dessus, il entoure.
+                    L'appeler « cours » promettait un texte à lire.
+                    ⚠️ L'URL, le titre et la description ne bougent PAS : ils
+                    portent l'indexation, et le rendez-vous du 26/09 juge le
+                    ratio indexées/soumises. On renomme l'objet, pas l'adresse. */}
                 <span className="rounded-full bg-slate-100 px-3 py-1 text-slate-600">
-                  Fiche de cours
+                  {estCycle2 ? "Fiche d'activité" : "Fiche de cours"}
                 </span>
               </div>
               {/* ⭐ UN H1 EXPLICITE (Frédéric, 25/08/2026). Il valait « Les
@@ -1043,7 +1053,7 @@ export default function FicheCoursClient({
             )}
 
             <footer className="mt-8 flex items-center justify-between border-t border-slate-200 pt-5 text-xs text-slate-500 print:mt-6">
-              <span>eleveai.fr - Fiche de cours</span>
+              <span>eleveai.fr - {estCycle2 ? "Fiche d'activité" : "Fiche de cours"}</span>
               <span>
                 {fiche.titre} - {libelleClasse(fiche.classe)}
               </span>
