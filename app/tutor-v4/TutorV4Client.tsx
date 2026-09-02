@@ -91,6 +91,8 @@ import {
 // `fixed` et rendait mal. En attendant de revoir le principe, l'aide passe par
 // le Coach IA proposé sur l'écran d'erreur (`CoachErrorHelp`).
 import TutorSimpleView from "./TutorSimpleView";
+
+const CYCLE_2_COACH = new Set(["cp", "ce1", "ce2"]);
 import {
   ListenButton,
   speakText,
@@ -1531,7 +1533,14 @@ function handleInputKeyDown(
   }
 
  return (
-  <main className="min-h-screen bg-[#f3f4f6] px-2 py-3 sm:px-4 sm:py-6">
+  <main
+    /* ⭐ LE CYCLE 2 LIT DANS LA POLICE DE L'ÉCOLE (02/09/2026). Le coach faisait
+       déchiffrer à un CP un `a` à DEUX ÉTAGES — la lettre qu'on venait de bannir
+       des fiches pour cette raison exacte. Même attribut que sur les fiches, même
+       règle dans `app/globals.css`. */
+    data-cycle={CYCLE_2_COACH.has(classe) ? "2" : undefined}
+    className="min-h-screen bg-[#f3f4f6] px-2 py-3 sm:px-4 sm:py-6"
+  >
     <div className="mx-auto max-w-7xl">
        {remediationBanner}
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">

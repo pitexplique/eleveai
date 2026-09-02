@@ -186,6 +186,16 @@ body {
   font-display: swap;
 }
 
+/* ⭐⭐ LE CYCLE 2 LIT DANS LA POLICE DE L'ÉCOLE, PARTOUT (02/09/2026).
+   Hors media print : c'est l'ÉCRAN que voit l'élève de CP quand il travaille au
+   coach. Les fiches avaient été corrigées, le coach non — il faisait déchiffrer
+   un `a` à deux étages sur l'énoncé même qu'on lui demande de comprendre.
+   ⚠️ La règle ne colore que le TEXTE : elle laisse les icônes, les nombres et
+   les formules à leur police, car Andika n'est pas faite pour eux. */
+[data-cycle="2"] {
+  font-family: "Andika", ui-sans-serif, system-ui, sans-serif;
+}
+
 /* Fiches de cours — à l'écran, la correction est repliée derrière
    « Voir la correction ». À l'impression / PDF, elle se déplie (géré dans
    chaque fiche) et le libellé devient « Correction : » (raffinement 24/06/2026,

@@ -57,6 +57,8 @@ type TutorSimpleViewProps = {
   onSave: () => void;
 };
 
+const CYCLE_2_COACH = new Set(["cp", "ce1", "ce2"]);
+
 function classLabel(classe: Classe) {
   return classe === "terminale-spe" ? "Terminale spé" : classe.toUpperCase();
 }
@@ -152,7 +154,11 @@ export default function TutorSimpleView({
     : "";
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-sky-100 via-cyan-50 to-emerald-100 px-3 py-4 text-slate-950 sm:px-5">
+    <main
+      /* ⭐ Voir TutorV4Client : le cycle 2 lit dans la police de l'école. */
+      data-cycle={CYCLE_2_COACH.has(classe) ? "2" : undefined}
+      className="min-h-screen bg-gradient-to-b from-sky-100 via-cyan-50 to-emerald-100 px-3 py-4 text-slate-950 sm:px-5"
+    >
       <div className="mx-auto max-w-6xl">
         {/* ⚠️ HORS APERÇU (27/08/2026) — la barre d'outils du mode simple, comme
             celle du mode complet. Identique sur toutes les captures (« Retour
