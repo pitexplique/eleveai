@@ -29,12 +29,12 @@ import type { CanvasFigure, ObjetId, ObjetsCanvasData } from "@/lib/tutor-v4/typ
  *
  * ⭐ LA RÈGLE VISÉE RESTE LA BONNE, elle attend seulement sa police : ON LIT EN
  * SCRIPT, ON ÉCRIT EN CURSIVE. Le modèle de la réglure est en cursive Marelle ;
- * ce qui se LIT reste ici en sans-empattement, dont le `b` et le `d` sont
- * droits. ⚠️ Son défaut connu : le `a` à DEUX ÉTAGES et le `g` ouvert ne sont
- * pas les lettres qu'un CP apprend. Une police d'alphabétisation (Andika, SIL,
- * OFL) les a à un étage — à embarquer, mais Marelle ne la fournit pas.
+ * ce qui se LIT est en ANDIKA (SIL, conçue pour l'alphabétisation, OFL) : son
+ * `a` et son `g` sont d'UN SEUL ÉTAGE — les lettres qu'un CP apprend — et son
+ * `b` est droit. Une police système a un `a` à deux étages, avec un crochet que
+ * l'enfant n'a jamais vu ailleurs. Déclarée dans `app/globals.css`.
  */
-const ECOLE = "ui-sans-serif, system-ui, sans-serif";
+const ECOLE = '"Andika", ui-sans-serif, system-ui, sans-serif';
 
 type Props = { figure: CanvasFigure };
 

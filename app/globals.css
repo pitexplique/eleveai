@@ -158,6 +158,26 @@ body {
   font-style: normal;
   font-display: swap;
 }
+/* ─── ANDIKA, LA POLICE D'IMPRESSION DU LECTEUR DÉBUTANT ──────────────────────
+   Conçue par SIL International POUR L'ALPHABÉTISATION : ses lettres sont
+   dessinées pour ne pas se confondre, et surtout son `a` et son `g` sont d'UN
+   SEUL ÉTAGE — les lettres qu'un CP apprend à reconnaitre. Une police système
+   a un `a` à deux étages, avec un crochet que l'enfant n'a jamais vu ailleurs.
+   ⚖️ SIL Open Font License 1.1, texte livré dans `public/fonts/andika/LICENSE.txt`.
+   Sous-ensemble latin (18,8 Ko) : il couvre é è ê à ç œ ù î, donc tout le français.
+
+   ⭐ AVEC MARELLE, ELLES FONT LA RÈGLE DE L'ÉCOLE : ON LIT EN ANDIKA, ON ÉCRIT
+   EN MARELLE. Ce que l'enfant déchiffre — bulles, étiquettes, consignes — est
+   en script ; ce qu'il recopie sur la réglure est en cursive.
+   ⛔ Et surtout PAS « Marelle Baton » pour lire : son nom trompe, son `b` a une
+   boucle et ses lettres s'attachent — c'est de la cursive (vérifié au rendu). */
+@font-face {
+  font-family: "Andika";
+  src: url("/fonts/andika/Andika-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 @font-face {
   font-family: "Marelle Baton";
   src: url("/fonts/marelle/MarelleBaton-Regular.woff2") format("woff2");
