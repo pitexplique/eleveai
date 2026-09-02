@@ -439,6 +439,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Ce qu'on décrivait en 4e s'écrit enfin : f(x) = ax + b. Le a incline la droite, le b dit où elle coupe l'axe — et le point de bascule décide entre deux offres.",
   },
+  "maths/3e/aire-perimetre": {
+    titre: "Périmètres : polygones, cercle et figures composées",
+    resume:
+      "On achète la clôture au mètre et le gazon au mètre carré : ce sont deux questions sur le même terrain. Et 2πr mesure un contour là où πr² mesure une surface.",
+  },
   "maths/3e/prop-proportionnalite": {
     titre: "Proportionnalité, pourcentages et grandeurs quotients",
     resume:
