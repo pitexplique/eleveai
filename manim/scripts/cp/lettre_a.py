@@ -248,21 +248,82 @@ def arbre_dessine() -> VGroup:
     return VGroup(tronc, feuillage)
 
 
+# ─── La voix ──────────────────────────────────────────────────────────────────
+# ⭐⭐ POURQUOI CETTE VIDÉO N'EST PAS MUETTE, alors que `manim/REGLES.md` pose que
+# « les vidéos sont muettes, le texte à l'écran doit tout expliquer ».
+# La règle tient du CP au lycée — sauf ici, et pour une raison qui la retourne :
+# UN ENFANT DE SIX ANS NE SAIT PAS LIRE. Le texte ne peut pas porter
+# l'explication puisqu'il est justement ce qu'on lui apprend à déchiffrer.
+# Frédéric, 02/09/2026 : « il faut mettre le script de la vidéo en son ».
+#
+# Les clips sont produits par `scripts/generer-voix.ps1` depuis
+# `manim/voix/cp-lettre-a.json` — une phrase change, on régénère en une commande.
+#
+# ⚠️ LES DURÉES SONT MESURÉES, PAS ESTIMÉES (lecture des en-têtes WAV). Elles
+# commandent les `wait()` : une phrase plus longue que son écran déborde sur le
+# suivant, et personne ne le voit en lisant le code.
+VOIX = Path(__file__).resolve().parents[3] / "public" / "sons" / "cp-lettre-a"
+DUREE = {
+    "01-ecoute": 3.69, "02-regarde": 3.72, "03-depart": 8.21, "04-encore": 3.63,
+    "05-a-comme": 2.03, "06-arbre": 1.86, "07-avion": 1.84, "08-ami": 1.75,
+    "09-animal": 2.16, "10-abricot": 2.08, "11-relance": 4.30, "12-signature": 3.54,
+}
+CLIPS_MOTS = ["06-arbre", "07-avion", "08-ami", "09-animal", "10-abricot"]
+
+
 class _LettreABase(Scene):
     """Le contenu, écrit une fois. Les deux formats n'en changent que le cadre."""
 
     vertical = False
+
+    def dire(self, nom: str) -> float:
+        """Joue un clip de voix ici, et rend sa durée pour caler l'attente."""
+        self.add_sound(str(VOIX / f"{nom}.wav"))
+        return DUREE[nom]
 
     def construct(self):
         # ── 1. LE SON D'ABORD, LA LETTRE ENSUITE ────────────────────────────
         # ⭐ Au CP on dit le SON, jamais le nom de la lettre. Pour « a » les deux
         # se confondent ; pour « b » le nom (« bé ») est l'erreur à ne pas
         # commettre. L'écran l'écrit donc en clair.
-        son = Text("[a]", font_size=140, color=JAUNE_TITRE)
+        # ⛔ PAS DE CROCHETS (Frédéric, 02/09) : « [a] » est la notation des
+        # phonéticiens, elle ne dit rien à un enfant de six ans — et elle
+        # ajoutait deux signes à lire là où on veut qu'il n'en lise qu'un.
+        son = Text("a", font_size=150, color=JAUNE_TITRE)
         titre = Text("le son", font_size=44, color=BLEU_CALCUL).next_to(son, UP, buff=0.5)
-        self.play(FadeIn(titre, shift=DOWN * 0.3), GrowFromCenter(son))
-        self.wait(1.4)
-        self.play(FadeOut(titre), son.animate.scale(0.42).to_edge(UP, buff=0.9))
+        # ⭐ TI-MARGO OUVRE ET FERME LA VIDÉO, ET RIEN ENTRE LES DEUX.
+        # `manim/REGLES.md` le veut « sur chaque écran » ; Frédéric a tranché
+        # autrement pour celle-ci (02/09) : « pas sur chaque écran, mais sur
+        # l'écran d'accueil et de fin ». ⭐ La raison se voit au rendu — pendant
+        # le tracé, l'oeil doit suivre le crayon et rien d'autre. Une mascotte
+        # dans le coin est un second point d'attention sur le seul écran qui
+        # n'en supporte pas.
+        # ⭐ Et il tient déjà un crayon : c'est lui qui va écrire.
+        margo = MascotteMargouillat().scale(0.85 if not self.vertical else 0.7)
+        if self.vertical:
+            margo.next_to(son, DOWN, buff=0.9)
+        else:
+            margo.to_edge(RIGHT, buff=1.1)
+
+        d = self.dire("01-ecoute")
+        self.play(
+            FadeIn(titre, shift=DOWN * 0.3),
+            GrowFromCenter(son),
+            FadeIn(margo, shift=LEFT * 0.4),
+        )
+        self.wait(d - 0.8)
+        # ⛔ LE SON SE RANGE DANS UN COIN, PAS EN HAUT AU CENTRE (corrigé au
+        # rendu du 02/09). Posé à `to_edge(UP)`, il restait pile là où
+        # « a comme… » vient s'écrire, et les deux se chevauchaient à l'écran.
+        # ⭐ Mais il RESTE affiché : le son est ce qu'on apprend, et le garder
+        # sous les yeux pendant tout l'exercice vaut mieux que le faire
+        # disparaitre dès qu'on trace.
+        # Il sort avec l'écran d'accueil, et laisse la place au geste.
+        self.play(
+            FadeOut(titre),
+            FadeOut(margo, shift=RIGHT * 0.4),
+            son.animate.scale(0.40).to_corner(UL, buff=0.55),
+        )
         self.wait(0.4)
 
         # ── 2. LE GESTE, LENTEMENT ──────────────────────────────────────────
@@ -271,10 +332,11 @@ class _LettreABase(Scene):
         groupe = VGroup(lignes, lettre)
         groupe.move_to(ORIGIN).shift(DOWN * 0.4)
 
+        d = self.dire("02-regarde")
         self.play(Create(lignes), run_time=0.8)
         point = Dot(lettre.get_start(), radius=0.14, color=VERT_OK)
         self.play(FadeIn(point, scale=2))
-        self.wait(0.6)
+        self.wait(max(0.4, d - 1.4))
 
         # ⭐ LE TRACÉ EST LENT, D'UN SEUL TENANT, ET LE STYLO LE MÈNE.
         # Un seul `ValueTracker` pilote les deux : le trait qui se dessine et le
@@ -299,7 +361,12 @@ class _LettreABase(Scene):
 
         self.remove(lettre)
         self.add(trace, stylo)
-        self.play(avance.animate.set_value(1.0), run_time=5, rate_func=linear)
+        # ⭐ LE TRACÉ DURE EXACTEMENT LE TEMPS DE LA PHRASE QUI LE DÉCRIT —
+        # « on part du point vert, on tourne à gauche, on redescend, et on
+        # sort ». Le geste et les mots avancent ensemble, sinon l'enfant entend
+        # « on redescend » quand le crayon est déjà sorti.
+        d = self.dire("03-depart")
+        self.play(avance.animate.set_value(1.0), run_time=d - 0.4, rate_func=linear)
         trace.clear_updaters()
         stylo.clear_updaters()
         self.play(FadeOut(stylo, scale=0.6))
@@ -308,6 +375,7 @@ class _LettreABase(Scene):
         # ── 3. ON REFAIT, PLUS VITE ─────────────────────────────────────────
         # Deux reprises : l'enfant a vu le geste, il le revoit au rythme où il
         # l'écrira. Sans stylo cette fois — c'est le trait qu'on regarde.
+        self.dire("04-encore")
         for duree in (2.0, 1.2):
             self.remove(trace)
             trace = chemin_a(stroke_width=14 if not self.vertical else 16)
@@ -350,8 +418,11 @@ class _LettreABase(Scene):
         bloc = VGroup(titre_mots, lignes_mots).arrange(DOWN, buff=0.5)
         bloc.move_to(ORIGIN).scale(0.95 if not self.vertical else 0.8)
 
+        d = self.dire("05-a-comme")
         self.play(FadeIn(titre_mots, shift=DOWN * 0.3))
-        for ligne in lignes_mots:
+        self.wait(max(0.2, d - 1.0))
+        for ligne, clip in zip(lignes_mots, CLIPS_MOTS):
+            duree_mot = self.dire(clip)
             # ⭐ ZOOM IN / ZOOM OUT (demande de Frédéric) : le mot arrive, se
             # rapproche pour qu'on le regarde, puis reprend sa place dans la
             # liste. C'est ce qui donne le rythme — sans lui, cinq lignes
@@ -365,6 +436,8 @@ class _LettreABase(Scene):
             self.play(ligne.animate.scale(1.22), run_time=0.35)
             self.wait(0.45)
             self.play(ligne.animate.scale(1 / 1.22), run_time=0.3)
+            # Le mot dit, puis un souffle : jamais l'un sur l'autre.
+            self.wait(max(0.15, duree_mot - 1.45))
         self.wait(1.0)
 
         # ── 4 bis. LA RELANCE ───────────────────────────────────────────────
@@ -372,20 +445,25 @@ class _LettreABase(Scene):
         # transforme un visionnage en devinette, et c'est ce qui fait rejouer.
         self.play(FadeOut(bloc))
         relance = Text("On essaie un autre mot ?", font_size=54, color=VERT_OK)
+        d = self.dire("11-relance")
         self.play(FadeIn(relance, scale=0.85))
         self.play(relance.animate.scale(1.08), run_time=0.5)
-        self.wait(1.6)
-        self.play(FadeOut(relance))
+        self.wait(max(0.8, d - 1.4))
+        self.play(FadeOut(relance), FadeOut(son))
 
         # ── 5. SIGNATURE ────────────────────────────────────────────────────
         # ⚠️ `MascotteMargouillat` ne prend PAS de `scale` en argument : son
         # `__init__` ne transmet que les kwargs d'ImageMobject et fixe la
         # hauteur. Tous les scripts existants font `.scale(...)` après coup.
-        margo = MascotteMargouillat().scale(0.55)
+        # ⚠️ On REPREND le même Ti-Margo, on n'en crée pas un second : il a
+        # accompagné toute la vidéo depuis son coin, il revient au centre.
         signe = Text("EleveAI — Ti Margo", font_size=40, color=BLEU_CALCUL)
-        bloc = Group(margo, signe).arrange(DOWN, buff=0.5).move_to(ORIGIN)
-        self.play(FadeIn(bloc, shift=UP * 0.3))
-        self.wait(1.8)
+        signe.move_to(DOWN * 2.3)
+        # ⚠️ On REPREND le même Ti-Margo — il ouvrait la vidéo, il la ferme.
+        margo.scale(0.75).move_to(UP * 0.7)
+        d = self.dire("12-signature")
+        self.play(FadeIn(margo, shift=UP * 0.3), FadeIn(signe, shift=UP * 0.3))
+        self.wait(max(1.2, d - 0.8))
 
 
 class LettreACp(_LettreABase):
