@@ -105,11 +105,35 @@ const modeleColoriage = perso({
   largeur: 320,
 });
 
+/**
+ * ⭐ LE QUATRIÈME GESTE DE LA FEUILLE : TRACER. Frédéric, en posant le format du
+ * cycle 2 : « avec l'importance aussi de la calligraphie ». La phrase modèle est
+ * juste au-dessus ; l'enfant la repasse en pointillé, puis l'écrit seul.
+ * Interligne de 3 mm, celui du cahier de CP.
+ */
+const laLigneAEcrire = (
+  <div className="reglure">
+    <CanvasRenderer
+      figure={{
+        kind: "reglure",
+        modele: "Le chat dort.",
+        lignes: 3,
+        interligne: 3,
+        aRepasser: true,
+        depart: true,
+        consigne: "Repasse, puis ecris la phrase tout seul.",
+        size: { width: 320 },
+      }}
+    />
+  </div>
+);
+
 const laPhraseModele = (
-  <>
+  <div className="grid gap-3">
     <div className="print:hidden">{modeleCouleur}</div>
     <div className="hidden print:block">{modeleColoriage}</div>
-  </>
+    {laLigneAEcrire}
+  </div>
 );
 
 const direQuelqueChose = perso({

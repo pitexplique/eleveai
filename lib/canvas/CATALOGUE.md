@@ -92,6 +92,7 @@ se pose sur `figure.schema`, `propriete.schema`, `exemple.schema`, `formule.sche
 |---|---|---|
 | `personnage` | **Le premier canvas qui ILLUSTRE** : un enfant de la troupe qui fait quelque chose, sa bulle de BD, et une consigne de coloriage. Rendu au trait noir fermé (mode `coloriage`) ou en couleurs (mode `couleur`) | Analyser une phrase (c'est `phrase`), démonter un verbe (c'est `conjugaison`), décorer une fiche de collège |
 | `objets` | **La bibliothèque** : 22 objets du quotidien, de la nature et des animaux, posés en grille, avec leur mot et le nombre d'exemplaires. Sert à NOMMER et à CLASSER | Une quantité à calculer (`schema_barre`, `fraction`), une figure géométrique |
+| `reglure` | **La réglure Seyès** : des lignes d'écriture aux millimètres du cahier, avec le modèle en cursive et sa reprise en pointillé. Le seul canvas qui ne montre rien — il se remplit | Montrer une lettre isolée, mesurer une longueur (`schema_barre`) |
 
 C'est à la grammaire ce que `number_line` est aux nombres : **un seul objet, dessiné
 toujours pareil, sur lequel toutes les notions viennent se poser**. Avant d'en écrire un
@@ -237,6 +238,35 @@ donc lui-même ses colonnes. ⭐ **Compter ~90 px par objet étiqueté.**
 sont gérés une fois pour toutes. Chaque dessin tient dans une boite de 60 × 60,
 en formes FERMÉES : un trait épais est un trait noir, et on ne colorie pas un
 trait.
+
+---
+
+### `reglure` — la calligraphie, aux millimètres du cahier
+
+Ajoutée le 02/09/2026. Frédéric, en posant le format du cycle 2 : « avec
+l'importance aussi de la calligraphie ». ⭐ **C'est le quatrième geste de la
+feuille** : regarder, écouter, colorier, TRACER. Sans elle, « la fiche se fait
+au crayon » restait un slogan — il n'y avait aucune place où écrire.
+
+⭐ **Le seul canvas qui ne montre rien : c'est un espace à remplir.** Il se juge
+donc sur une EXACTITUDE, pas sur une lisibilité. La géométrie du Seyès en une
+phrase : une bande d'écriture fait **quatre interlignes**, sa ligne du bas est
+forte, les trois autres sont fines, et des verticales tombent tous les 8 mm. Le
+corps de la minuscule occupe **un** interligne.
+
+| | |
+|---|---|
+| `interligne` | en mm — **3 au CP**, 2,5 au CE1, 2 au CE2, comme les cahiers |
+| `modele` | le mot ou la phrase, en cursive sur la première ligne |
+| `aRepasser` | le modèle en pointillé sur la deuxième : on lit, on repasse, on écrit seul |
+| `depart` | un point vert là où le crayon se pose |
+| `lignes` | 3 par défaut, 8 au maximum |
+
+⚠️ **LA POLICE CURSIVE N'EST PAS CELLE DE L'ÉCOLE.** Le modèle s'écrit avec la
+pile du système (Segoe Script sur Windows). Les vraies polices scolaires —
+**Cursive Standard**, **Belle Allure** — sont libres et devront être embarquées :
+la boucle du `b` et du `l` de l'école n'est pas celle de Segoe Script. ⛔ À faire
+avant de publier des fiches dont l'objet EST l'écriture.
 
 ---
 

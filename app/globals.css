@@ -169,6 +169,40 @@ body {
     page-break-inside: avoid;
   }
 
+  /* ⛔⛔ UN EXERCICE ET SA CORRECTION NE SE COUPENT JAMAIS — règle donnée par
+     Frédéric le 02/09/2026, capture à l'appui : « 1. Par quoi commence une
+     phrase ? » finissait la page 3, et « Correction : Par une grande lettre »
+     ouvrait la page 4. « Il faut qu'ils soient en 1 bloc pas coupés — à retenir
+     comme règle. »
+
+     ⚠️ POURQUOI LA RÈGLE DES CARTES NE LES ATTRAPAIT PAS : les exercices sont
+     des `<li>` dans une `<ol>` qui n'a AUCUNE classe `print:grid-cols-*`. Le
+     sélecteur des cartes visait `[class*="print:grid-cols-"] > div` — ni la
+     grille ni le tag ne correspondaient. Deux mises en page différentes pour le
+     même besoin : la règle porte donc maintenant sur ce qu'est l'objet (un
+     item de liste, une correction), pas sur la façon dont il est disposé.
+
+     ⭐ Et elle vaut pour TOUTES les fiches, pas seulement le cycle 2 : un
+     énoncé séparé de sa réponse ne s'est jamais lu, à aucun âge. */
+  [data-rubrique] li,
+  .fiche-correction {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* ⛔ ET LE DÉFAUT QUE LA RÈGLE CI-DESSUS A CRÉÉ, vu au rendu dans la minute :
+     « À retenir » gardait son cadre vert et son titre en bas de la page 1, et
+     ses trois lignes partaient en haut de la page 2 — un encadré vide suivi
+     d'un texte sans titre. Rendre les items insécables ne suffit pas quand
+     c'est le BLOC qui doit tenir d'un seul tenant.
+     ⚠️ Réservé aux blocs courts (« à retenir », « pièges ») : sur un bloc plus
+     haut qu'une page, `break-inside: avoid` fabriquerait une page blanche. */
+  [data-rubrique="aRetenir"] > section,
+  [data-rubrique="pieges"] > section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
   /* ⛔ ET LE DÉFAUT JUMEAU, DÉCOUVERT PAR LE CORRECTIF CI-DESSUS. Une fois les
      cartes rendues insécables, elles partaient toutes à la page suivante — et
      laissaient « Propriétés : la phrase au CP » SEUL en bas de la page 1, au
@@ -205,10 +239,20 @@ body {
   [data-cycle="2"] [data-rubrique="usages"],
   [data-cycle="2"] [data-rubrique="methode"],
   [data-cycle="2"] [data-rubrique="exemples"],
-  [data-cycle="2"] [data-rubrique="pieges"],
-  [data-cycle="2"] [data-rubrique="entrainement"] {
+  [data-cycle="2"] [data-rubrique="pieges"] {
     display: none !important;
   }
+  /* ⛔⛔ LES EXERCICES CORRIGÉS S'IMPRIMENT, EN CYCLE 2 COMME AILLEURS.
+     Frédéric, 02/09/2026 : « les exercices corrigés doivent être dans le format
+     imprimer et pdf avec correction ». Je les avais retirés d'ici — c'était ma
+     décision, et elle était mauvaise : elle servait surtout à tenir le recto.
+     ⭐ La feuille devient donc RECTO-VERSO, et c'est le bon objet : au recto ce
+     que l'enfant FAIT (l'image, la phrase, les coloriages, les lignes à
+     écrire) ; au verso ce que l'adulte LIT avec lui (les exercices et leurs
+     corrections). Une seule feuille de papier, deux lecteurs.
+     ⚠️ Ne jamais remettre `entrainement` dans la liste ci-dessus pour gagner
+     une page : le PDF d'une fiche EST le cours avec ses exercices corrigés,
+     c'est ce qui le distingue d'une capture d'écran. */
 
   /* ⭐ ET LE RECTO SE GAGNE SUR LES MARGES, JAMAIS SUR LES DESSINS.
      Après le retrait des blocs d'adulte, mesure en média print : 1 294 px de
@@ -253,6 +297,13 @@ body {
   }
   [data-cycle="2"] [data-rubrique="definition"] svg {
     max-width: 180px !important;
+  }
+  /* ⛔ SAUF LA RÉGLURE. Le plafond de largeur ci-dessus sert à raccourcir les
+     dessins pour gagner du papier — mais des lignes d'écriture rétrécies, c'est
+     une case où l'enfant ne peut plus écrire. La réglure est le seul dessin dont
+     la largeur EST la fonction : elle reprend toute la sienne. */
+  [data-cycle="2"] .reglure svg {
+    max-width: none !important;
   }
   [data-cycle="2"] [data-rubrique="aRetenir"] li {
     font-size: 12px !important;

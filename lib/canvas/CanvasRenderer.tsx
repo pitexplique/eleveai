@@ -38,6 +38,7 @@ import PhraseCanvas from "./PhraseCanvas";
 import ConjugaisonCanvas from "./ConjugaisonCanvas";
 import PersonnageCanvas from "./PersonnageCanvas";
 import ObjetsCanvas from "./ObjetsCanvas";
+import ReglureCanvas from "./ReglureCanvas";
 
 
 type Props = {
@@ -157,6 +158,10 @@ export default function CanvasRenderer({ figure }: Props) {
     // La bibliothèque d'objets : nommer, compter, classer.
     case "objets":
       return <ObjetsCanvas figure={figure} />;
+
+    // La réglure Seyès : le seul canvas qui ne montre rien — il se remplit.
+    case "reglure":
+      return <ReglureCanvas figure={figure} />;
 
     default:
       return null;

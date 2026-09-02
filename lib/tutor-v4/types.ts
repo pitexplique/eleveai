@@ -83,7 +83,8 @@ export type {
   PersonnageCanvasData,
   ObjetId,
   ObjetsElement,
-  ObjetsCanvasData
+  ObjetsCanvasData,
+  ReglureCanvasData
 } from "./types_canvas";
 
 import type { CanvasFigure } from "./types_canvas";

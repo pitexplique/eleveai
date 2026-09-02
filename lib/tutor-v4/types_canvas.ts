@@ -1792,7 +1792,46 @@ export type ObjetsCanvasData = {
   size?: { width?: number; height?: number };
 };
 
+// ─── LA RÉGLURE SEYÈS ─────────────────────────────────────────────────────────
+// Ajoutée le 02/09/2026. Frédéric, en posant le format du cycle 2 : « avec
+// l'importance aussi de la calligraphie ».
+//
+// ⭐ POURQUOI C'EST UN CANVAS ET NON UNE IMAGE. La réglure est le seul « dessin »
+// du site qui ne montre rien : c'est un ESPACE À REMPLIR. Elle doit donc être
+// exacte en millimètres — un enfant apprend la taille de ses lettres sur ces
+// interlignes-là — et elle change de taille selon la classe (3 mm au CP, 2,5 au
+// CE1, 2 au CE2, comme les cahiers). Une image ne saurait faire ni l'un ni
+// l'autre ; quatre lignes calculées, si.
+//
+// ⭐ ET C'EST LE QUATRIÈME GESTE DE LA FEUILLE. Le format du cycle 2 tient en
+// quatre verbes : regarder, écouter, colorier, TRACER. Sans réglure, la feuille
+// n'a pas de place où écrire, et « la fiche se fait au crayon » reste un slogan.
+//
+// ⚠️ LA POLICE CURSIVE N'EST PAS CELLE DE L'ÉCOLE. Le modèle s'écrit avec la
+// pile cursive du système (Segoe Script sur Windows). Les vraies polices
+// scolaires — Cursive Standard, Belle Allure — sont libres et devront être
+// embarquées : le `l` et le `b` de l'école ont une boucle que Segoe Script ne
+// forme pas pareil. À faire avant de publier des fiches d'écriture.
+
+export type ReglureCanvasData = {
+  kind: "reglure";
+  /** Le mot ou la phrase à recopier, écrit sur la première ligne. Sans lui, la
+   *  réglure est vide — ce qui est un usage légitime (« écris ta phrase »). */
+  modele?: string;
+  /** Nombre de lignes d'écriture, modèle compris. Défaut 3. */
+  lignes?: number;
+  /** L'interligne en millimètres : 3 au CP, 2,5 au CE1, 2 au CE2. */
+  interligne?: number;
+  /** Le modèle en pointillé sur la deuxième ligne, à repasser au crayon. */
+  aRepasser?: boolean;
+  /** Un point vert là où le crayon se pose, au début de chaque ligne. */
+  depart?: boolean;
+  consigne?: string;
+  size?: { width?: number };
+};
+
 export type CanvasFigure =
+  | ReglureCanvasData
   | ObjetsCanvasData
   | PersonnageCanvasData
   | ConjugaisonCanvasData
