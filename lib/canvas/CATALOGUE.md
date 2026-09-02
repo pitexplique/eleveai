@@ -86,6 +86,12 @@ se pose sur `figure.schema`, `propriete.schema`, `exemple.schema`, `formule.sche
 | `phrase` | **Le canvas du français** : les mots en étiquettes, les groupes sous un crochet coloré, la nature au-dessus, les flèches d'accord, de question et de reprise par-dessus | Un texte de plusieurs phrases (les reprises d'un paragraphe), un tableau de conjugaison |
 | `conjugaison` | **Le canvas du verbe** : la forme verbale démontée en wagons (radical, marque de temps, marque de personne), les temps composés en deux caisses accrochées, le tableau des six personnes, et la frise passé/présent/futur | Une phrase (c'est `phrase`), une durée sur une horloge (c'est `duree`) |
 
+## Illustration — le cycle 2
+
+| `kind` | Ce qu'il montre | ⛔ Pas pour |
+|---|---|---|
+| `personnage` | **Le premier canvas qui ILLUSTRE** : un enfant de la troupe qui fait quelque chose, sa bulle de BD, et une consigne de coloriage. Rendu au trait noir fermé (mode `coloriage`) ou en couleurs (mode `couleur`) | Analyser une phrase (c'est `phrase`), démonter un verbe (c'est `conjugaison`), décorer une fiche de collège |
+
 C'est à la grammaire ce que `number_line` est aux nombres : **un seul objet, dessiné
 toujours pareil, sur lequel toutes les notions viennent se poser**. Avant d'en écrire un
 autre, vérifier que celui-ci ne suffit pas — il porte déjà six façons de montrer :
@@ -148,6 +154,51 @@ le dessin à 303 px, donc à 11,2 px de police dans une carte de 250. Viser
 marque de temps orange, marque de personne verte, auxiliaire rouge (la même
 couleur que le verbe conjugué ailleurs), participe passé violet. Une fiche écrit
 `role: "temps"`, jamais une couleur.
+
+---
+
+### `personnage` — la troupe du cycle 2, en couleur ET en noir et blanc
+
+Ajouté le 01/09/2026. Frédéric : « apprendre les notions avec des personnes de BD
+à colorier », « ou de nature », « qu'elles puissent aussi être en couleur et noir
+et blanc ». C'est le **premier canvas illustratif** du site : les 32 autres sont
+mathématiques ou grammaticaux, et aucun ne dessine un être vivant.
+
+⭐ **Le coloriage est l'EXERCICE, pas la décoration.** C'est ce qui sépare ce
+canvas d'un cahier de vacances : « colorie en rouge ce que le personnage FAIT »
+est un repérage du verbe, et la couleur demandée est déjà celle de la matière
+(sujet bleu, verbe rouge, objet vert). L'enfant construit au CP le code qu'il
+relira au CM1 dans `phrase`.
+
+⭐ **Et il règle le problème de l'impression noir et blanc** — « les profs n'ont
+pas d'imprimante couleur ». Ailleurs la couleur porte la fonction et meurt au
+photocopieur ; ici elle n'est pas imprimée, elle est POSÉE par l'élève.
+
+| | |
+|---|---|
+| `personnage` | `nina` (couettes) · `teo` (épis) · `zoe` (boucles, lunettes) · `ravi` (casquette) · `pic`, le paille-en-queue |
+| `pose` | `debout` · `montre` (le bras tendu vers la bulle) · `bras_leves` · `marche` · `assis` (en tailleur) |
+| `expression` | `sourire` · `rire` · `surpris` · `pense` · `triste` |
+| `bulle.forme` | `parole` · `pensee` (nuage) · `cri` (en éclats) — ⭐ **la forme EST la leçon** : déclarative, pensée, exclamative |
+| `bulle.marques` | `majuscule` et/ou `point` : le signe est ENTOURÉ dans la bulle |
+| `mode` | `coloriage` (défaut) · `couleur` |
+
+⛔ **`pic` ignore `pose` et `expression`** — c'est un oiseau. Il tient dans 112
+unités de haut là où un enfant en occupe 150 ; le canvas le remonte lui-même.
+
+⭐ **TOUT EST FERMÉ, RIEN N'EST UN TRAIT.** Un membre dessiné au trait épais est
+un trait NOIR : on ne peut pas le colorier. Chaque membre est donc tracé deux
+fois — un trait sombre large, puis un trait clair plus fin par-dessus — ce qui
+donne une capsule cernée, donc une zone fermée, sur le papier comme à l'écran.
+
+⚠️ **Le texte de la bulle se pose MOT PAR MOT**, chaque mot contraint à sa
+largeur calculée (`textLength` + `lengthAdjust="spacingAndGlyphs"`). C'est la
+seule façon de faire tomber une marque sur une lettre précise. Deux réglages
+mesurés au rendu, pas estimés : la largeur moyenne d'un caractère vaut **0,52 ×
+la police** et non 0,58 (« Le chat dort. » était annoncé à 121 px pour 100
+réels, et le rond du point flottait 18 px à droite du point) ; et **chaque
+lettre a son poids** — un point occupe le quart d'un « d », une moyenne le
+décalait d'une demi-lettre.
 
 ---
 

@@ -31,4 +31,6 @@ export { default as ContenanceCanvas } from "./ContenanceCanvas";
 export { default as EchelleCanvas } from "./EchelleCanvas";
 export { default as SchemaBarreCanvas } from "./SchemaBarreCanvas";
 export { default as PhraseCanvas } from "./PhraseCanvas";
+export { default as ConjugaisonCanvas } from "./ConjugaisonCanvas";
+export { default as PersonnageCanvas } from "./PersonnageCanvas";
 

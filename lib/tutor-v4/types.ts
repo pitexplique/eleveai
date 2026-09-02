@@ -75,7 +75,12 @@ export type {
   ConjugaisonSegment,
   ConjugaisonLigne,
   ConjugaisonRepere,
-  ConjugaisonCanvasData
+  ConjugaisonCanvasData,
+  PersonnageId,
+  PersonnagePose,
+  PersonnageExpression,
+  PersonnageBulle,
+  PersonnageCanvasData
 } from "./types_canvas";
 
 import type { CanvasFigure } from "./types_canvas";

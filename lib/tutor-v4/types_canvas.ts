@@ -1617,7 +1617,112 @@ export type ConjugaisonCanvasData = {
   size?: { width?: number; height?: number };
 };
 
+// ─── LE PREMIER CANVAS ILLUSTRATIF ────────────────────────────────────────────
+// Ajouté le 01/09/2026, sur décision de Frédéric : « je pense qu'il faudrait
+// apprendre les notions avec des personnes de BD à colorier », « ou de nature »,
+// « avec l'importance aussi de la calligraphie », « il faut commencer à créer
+// des canvas illustratifs ».
+//
+// ⭐ POURQUOI IL A FALLU EN CRÉER UN. Les 32 canvas existants sont MATHÉMATIQUES
+// OU GRAMMATICAUX : pas un seul n'illustre. La fiche `francais-cm1-fluence-lecture`
+// l'a montré en creux — 27 dessins tirés de 2 kinds seulement, presque identiques,
+// et c'est cette monotonie autant que la densité qui la rendait « chargée ».
+// Pour le CP, le CE1 et le CE2 (45 notions, 349 micros, ZÉRO fiche au 01/09), le
+// problème n'est plus la monotonie : un enfant de six ans NE PEUT PAS LIRE SA
+// FICHE. Il faut donc un dessin qui porte la notion sans passer par le texte.
+//
+// ⭐ DESSINÉ EN CODE, PAS IMPORTÉ. Une troupe paramétrique coûte cher une fois,
+// puis chaque fiche ne coûte que de la donnée. Trois choses qu'une image
+// n'aurait pas données : la cohérence des personnages sur 45 fiches (garantie
+// par construction, pas par la main), la netteté à l'impression A4 (vectoriel),
+// et — la raison décisive — DE VRAIES ZONES FERMÉES. Une illustration
+// vectorisée donne des TRAITS ; on ne peut pas colorier un trait. Ici chaque
+// partie est une forme fermée, donc coloriable au crayon sur le papier ET au
+// clic à l'écran, ce qui la rend projetable en classe.
+//
+// ⭐ LE COLORIAGE EST L'EXERCICE, PAS LA DÉCORATION. C'est la condition qui
+// sépare ce canvas d'un cahier de vacances. « Colorie en rouge ce que le
+// personnage FAIT » = repérer le verbe. Et la couleur demandée est déjà celle de
+// toute la matière (sujet bleu, verbe rouge, objet vert) : l'enfant construit au
+// CP le code qu'il relira au CM1 dans `phrase`.
+//
+// ⭐ LA BULLE EST LE MEILLEUR DESSIN DE « PHRASE » POUR UN PETIT. `phrase` est un
+// diagramme à crochets — abstrait. Une bulle de BD est le même objet rendu
+// concret : elle commence par une majuscule, elle finit par un point, et sa
+// FORME dit son type (en éclats = on crie, en nuage = on pense). La ponctuation
+// y devient visible sans qu'on la nomme.
+//
+// ⛔ PAS POUR : analyser une phrase (c'est `phrase`), démonter un verbe (c'est
+// `conjugaison`), ni décorer une fiche de collège. Ici, l'objet est UN ENFANT
+// QUI FAIT QUELQUE CHOSE, et ce qu'il fait est la notion.
+
+/**
+ * LA TROUPE. Cinq personnages, pas cinquante : l'enfant doit les RECONNAITRE
+ * d'une fiche à l'autre — c'est ce qui fait une BD plutôt qu'un stock d'images.
+ * Quatre enfants et une mascotte, `pic` le paille-en-queue, qui donne à
+ * l'univers son accent réunionnais sans le rendre illisible ailleurs.
+ */
+export type PersonnageId = "nina" | "teo" | "zoe" | "ravi" | "pic";
+
+/** Ce que le personnage FAIT — et ce qu'il fait est souvent la notion elle-même
+ *  (le verbe qu'on cherche, l'action qu'on raconte). */
+export type PersonnagePose =
+  | "debout"
+  | "montre"
+  | "bras_leves"
+  | "marche"
+  | "assis";
+
+/** Ce que le personnage RESSENT. Sert aussi la notion : les types de phrases se
+ *  lisent sur le visage autant que dans la ponctuation. */
+export type PersonnageExpression =
+  | "sourire"
+  | "rire"
+  | "surpris"
+  | "pense"
+  | "triste";
+
+export type PersonnageBulle = {
+  texte: string;
+  /** `parole` (défaut) · `pensee` (nuage + petits ronds) · `cri` (en éclats).
+   *  ⭐ La forme EST la leçon : déclarative, pensée, exclamative. */
+  forme?: "parole" | "pensee" | "cri";
+  /**
+   * ENTOURE UN SIGNE DANS LA BULLE — la majuscule du début, le point de la fin.
+   * C'est ce qui transforme un décor en exercice : au CP, la notion « phrase »
+   * EST « ça commence par une majuscule et ça finit par un point ».
+   */
+  marques?: ("majuscule" | "point")[];
+};
+
+export type PersonnageCanvasData = {
+  kind: "personnage";
+  personnage: PersonnageId;
+  pose?: PersonnagePose;
+  expression?: PersonnageExpression;
+  bulle?: PersonnageBulle;
+  /**
+   * ⭐ `coloriage` : trait noir épais, aucun aplat — la feuille se photocopie en
+   * noir et blanc et l'enfant met la couleur. C'est le mode par défaut du cycle 2,
+   * et il RÈGLE le problème connu de l'impression : la couleur ne se perd plus au
+   * photocopieur puisqu'elle n'est pas imprimée, elle est posée par l'élève.
+   * `couleur` : le personnage rendu fini, pour l'écran et le mode classe.
+   */
+  mode?: "couleur" | "coloriage";
+  /** La consigne, sous le dessin. Courte : c'est un ordre, pas une explication.
+   *  ⛔ Jamais un commentaire d'adulte — voir la règle « jamais 120 mots en
+   *  corps 10 » (31/08/2026). */
+  consigne?: string;
+  /**
+   * ⭐ MÊME RÈGLE QUE `phrase` ET `conjugaison` : la largeur se règle, la hauteur
+   * se calcule. Défaut 250, pour que les lettres restent au-dessus de 11 px une
+   * fois le dessin mis à l'échelle de son bloc.
+   */
+  size?: { width?: number; height?: number };
+};
+
 export type CanvasFigure =
+  | PersonnageCanvasData
   | ConjugaisonCanvasData
   | PhraseCanvasData
   | TriangleCanvasData

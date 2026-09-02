@@ -676,6 +676,12 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Un mot n'est à toi que quand tu peux l'écrire dans une phrase à toi. Niveaux de langue, réemploi, orthographe des mots fréquents, dictionnaire.",
   },
+  // ─── Cycle 2 : le premier essai du format CP → CE2 (01/09/2026) ─────────────
+  "francais/cp/grammaire-phrase": {
+    titre: "La phrase au CP (2026-2027)",
+    resume:
+      "Une phrase se reconnait à ses deux bouts : une grande lettre au début, un point à la fin. Des dessins à colorier.",
+  },
   "francais/cm2/grammaire-nature-fonction": {
     titre: "Nature et fonction d'un mot en CM2 (2026-2027)",
     resume:
