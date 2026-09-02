@@ -145,4 +145,42 @@ body {
     font-weight: 700;
     color: #475569;
   }
+
+  /* ⛔ UNE CARTE NE SE COUPE PLUS À LA PLIURE (01/09/2026).
+     Mesuré sur le PDF de `francais/cp/grammaire-phrase` : les trois cartes de
+     propriétés gardaient leur titre et leur texte en bas de la page 1, et leurs
+     TROIS DESSINS partaient en haut de la page 2, sous un grand blanc. Sur une
+     fiche de cycle 2, où le dessin EST la leçon et le texte n'est là que pour
+     l'adulte, la coupure sépare précisément les deux moitiés qui doivent se
+     lire ensemble.
+
+     ⚠️ LA RÈGLE VISE LES GRILLES DE CARTES, PAS LES BLOCS. `break-inside:
+     avoid` posé sur un conteneur plus haut qu'une page ne l'empêche pas de se
+     couper — il fabrique une page blanche avant. Le sélecteur ne prend donc que
+     les enfants directs des grilles `print:grid-cols-*` (propriétés, méthode,
+     usages, exemples, entrainement) : chacune de ces cartes tient dans une
+     page, la contrainte est toujours satisfiable.
+
+     Le sélecteur s'appuie sur le nom de classe Tailwind tel qu'il est écrit
+     dans l'attribut — c'est un point d'accroche stable, et il évite d'ajouter
+     une classe de plus dans les cinq endroits du composant. */
+  [class*="print:grid-cols-"] > div {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* ⛔ ET LE DÉFAUT JUMEAU, DÉCOUVERT PAR LE CORRECTIF CI-DESSUS. Une fois les
+     cartes rendues insécables, elles partaient toutes à la page suivante — et
+     laissaient « Propriétés : la phrase au CP » SEUL en bas de la page 1, au
+     dessus d'un tiers de page blanche. On avait déplacé la coupure, pas
+     réparé la lecture.
+
+     Un titre n'a de sens qu'avec ce qu'il annonce : il voyage donc avec. Les
+     deux règles ne valent qu'ensemble — poser la première sans la seconde
+     fabrique des titres orphelins, c'est mesuré. */
+  h2,
+  h3 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
 }
