@@ -91,6 +91,7 @@ se pose sur `figure.schema`, `propriete.schema`, `exemple.schema`, `formule.sche
 | `kind` | Ce qu'il montre | ⛔ Pas pour |
 |---|---|---|
 | `personnage` | **Le premier canvas qui ILLUSTRE** : un enfant de la troupe qui fait quelque chose, sa bulle de BD, et une consigne de coloriage. Rendu au trait noir fermé (mode `coloriage`) ou en couleurs (mode `couleur`) | Analyser une phrase (c'est `phrase`), démonter un verbe (c'est `conjugaison`), décorer une fiche de collège |
+| `objets` | **La bibliothèque** : 22 objets du quotidien, de la nature et des animaux, posés en grille, avec leur mot et le nombre d'exemplaires. Sert à NOMMER et à CLASSER | Une quantité à calculer (`schema_barre`, `fraction`), une figure géométrique |
 
 C'est à la grammaire ce que `number_line` est aux nombres : **un seul objet, dessiné
 toujours pareil, sur lequel toutes les notions viennent se poser**. Avant d'en écrire un
@@ -199,6 +200,43 @@ la police** et non 0,58 (« Le chat dort. » était annoncé à 121 px pour 100
 réels, et le rond du point flottait 18 px à droite du point) ; et **chaque
 lettre a son poids** — un point occupe le quart d'un « d », une moyenne le
 décalait d'une demi-lettre.
+
+---
+
+### `objets` — la bibliothèque du cycle 2
+
+Ajoutée le 02/09/2026. Frédéric : « on pourrait rajouter bateau, un verre, des
+objets du quotidien non ? », « avoir une bibliothèque plus fournie ».
+
+⭐ **Pourquoi un second `kind` plutôt qu'élargir `personnage`.** Un verre n'a ni
+pose ni humeur : lui donner les champs d'un enfant, ce serait dire à la fiche
+qu'un verre peut être triste. Et les deux ne servent pas la même chose —
+`personnage` montre une **action** (le verbe, la phrase, le dialogue), `objets`
+sert à **nommer et classer** (vocabulaire, genre, familles de mots).
+
+Les 22 : `bateau` `verre` `tasse` `livre` `cartable` `cle` `ballon` `voiture`
+`maison` `chapeau` · `pomme` `banane` · `arbre` `fleur` `feuille` `soleil`
+`nuage` `etoile` · `poisson` `oiseau` `papillon` `chat`.
+
+⭐ **`nombre` est ce qui en fait un exercice.** Une pomme, puis trois pommes : le
+pluriel devient VISIBLE avant d'être une règle. Les exemplaires se chevauchent
+d'un tiers — trois objets côte à côte à pleine taille ne tiendraient pas.
+`marque: true` entoure une case en pointillés : c'est la réponse à trouver.
+
+⛔ **C'EST LE MOT LE PLUS LONG QUI DÉCIDE DU NOMBRE DE COLONNES.** Sur cinq
+colonnes de 360 px, chaque objet reçoit 73 px de pas — quand « une banane » en
+occupe 73 à lui seul, et « une maisonun chapeau » se lisait d'un bloc. Élargir
+l'écart puis rapetisser la police n'ont fait que déplacer le chevauchement : la
+ligne était **trop pleine**, il fallait retirer une colonne. Le canvas plafonne
+donc lui-même ses colonnes. ⭐ **Compter ~90 px par objet étiqueté.**
+⚠️ Et ce défaut-là, `apercu-canvas.mjs` ne le voit pas : les mots se touchaient
+**l'un l'autre**, pas le bord du cadre.
+
+⭐ **Ajouter un objet, c'est une entrée dans `DESSINS` et une couleur dans
+`TEINTES`** — le placement, l'échelle, la répétition, l'étiquette et la marque
+sont gérés une fois pour toutes. Chaque dessin tient dans une boite de 60 × 60,
+en formes FERMÉES : un trait épais est un trait noir, et on ne colorie pas un
+trait.
 
 ---
 

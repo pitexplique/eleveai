@@ -1721,7 +1721,79 @@ export type PersonnageCanvasData = {
   size?: { width?: number; height?: number };
 };
 
+// ─── LA BIBLIOTHÈQUE D'OBJETS ─────────────────────────────────────────────────
+// Ajoutée le 02/09/2026, sur demande de Frédéric : « les dessins sont pas mal,
+// on pourrait rajouter bateau, un verre, des objets du quotidien non ? », « avoir
+// une bibliothèque plus fournie ».
+//
+// ⭐ POURQUOI UN SECOND `kind` PLUTÔT QUE D'ÉLARGIR `personnage`. Un verre n'a
+// ni pose, ni humeur, ni bulle : lui donner les champs d'un enfant, ce serait
+// dire à la fiche qu'un verre peut être triste. Et surtout les deux ne servent
+// pas la même chose — `personnage` montre une ACTION (le verbe, la phrase, le
+// dialogue), `objets` sert à NOMMER et à CLASSER (vocabulaire, genre, familles
+// de mots).
+//
+// ⭐⭐ ET LE CHAMP QUI EN FAIT UN EXERCICE, C'EST `nombre`. Une pomme, puis trois
+// pommes : le pluriel devient VISIBLE avant d'être une règle. C'est la même
+// idée que le coloriage dans `personnage` — le dessin ne décore pas la leçon,
+// il la pose.
+//
+// ⛔ PAS POUR : une quantité à calculer (c'est `schema_barre` ou `fraction`),
+// ni une figure géométrique (chaque objet est un dessin, pas une forme mesurable).
+
+export type ObjetId =
+  // Le quotidien
+  | "bateau"
+  | "verre"
+  | "tasse"
+  | "livre"
+  | "cartable"
+  | "cle"
+  | "ballon"
+  | "voiture"
+  | "maison"
+  | "chapeau"
+  // Ce qui se mange
+  | "pomme"
+  | "banane"
+  // La nature
+  | "arbre"
+  | "fleur"
+  | "feuille"
+  | "soleil"
+  | "nuage"
+  | "etoile"
+  // Les animaux
+  | "poisson"
+  | "oiseau"
+  | "papillon"
+  | "chat";
+
+export type ObjetsElement = {
+  quoi: ObjetId;
+  /** Dessiné en `nombre` exemplaires côte à côte. ⭐ C'est ainsi qu'on montre le
+   *  pluriel : « une pomme » / « des pommes ». 1 par défaut, 5 au maximum —
+   *  au-delà, les dessins deviennent illisibles avant d'être instructifs. */
+  nombre?: number;
+  /** Le mot, écrit sous l'objet. C'est lui qui fait du dessin du vocabulaire. */
+  label?: string;
+  /** Entouré : c'est la réponse, ou ce qu'on demande de trouver. */
+  marque?: boolean;
+};
+
+export type ObjetsCanvasData = {
+  kind: "objets";
+  elements: ObjetsElement[];
+  /** Nombre de colonnes. Par défaut, le canvas en déduit un des éléments. */
+  colonnes?: number;
+  /** `coloriage` (défaut) : trait noir fermé, prêt à photocopier. */
+  mode?: "couleur" | "coloriage";
+  consigne?: string;
+  size?: { width?: number; height?: number };
+};
+
 export type CanvasFigure =
+  | ObjetsCanvasData
   | PersonnageCanvasData
   | ConjugaisonCanvasData
   | PhraseCanvasData

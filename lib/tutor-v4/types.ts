@@ -80,7 +80,10 @@ export type {
   PersonnagePose,
   PersonnageExpression,
   PersonnageBulle,
-  PersonnageCanvasData
+  PersonnageCanvasData,
+  ObjetId,
+  ObjetsElement,
+  ObjetsCanvasData
 } from "./types_canvas";
 
 import type { CanvasFigure } from "./types_canvas";

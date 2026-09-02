@@ -37,6 +37,7 @@ import SchemaBarreCanvas from "./SchemaBarreCanvas";
 import PhraseCanvas from "./PhraseCanvas";
 import ConjugaisonCanvas from "./ConjugaisonCanvas";
 import PersonnageCanvas from "./PersonnageCanvas";
+import ObjetsCanvas from "./ObjetsCanvas";
 
 
 type Props = {
@@ -152,6 +153,10 @@ export default function CanvasRenderer({ figure }: Props) {
     // Le premier canvas ILLUSTRATIF : la troupe du cycle 2, à colorier.
     case "personnage":
       return <PersonnageCanvas figure={figure} />;
+
+    // La bibliothèque d'objets : nommer, compter, classer.
+    case "objets":
+      return <ObjetsCanvas figure={figure} />;
 
     default:
       return null;
