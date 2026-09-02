@@ -655,7 +655,14 @@ export default function FicheCoursClient({
           <section className="border-t border-slate-200 pt-6 print:pt-4">
             <h2 className="flex items-center gap-2 text-2xl font-black text-slate-900 print:text-xl">
               <Calculator className="h-6 w-6 text-sky-500 print:hidden" />
-              {titreRubrique("Exercices corrigés")}
+              {/* ⭐⭐ AU CYCLE 2, LE BLOC S'APPELLE « FICHE D'ACTIVITÉ »
+                  (Frédéric, 02/09/2026 : « fiche d'activité doit être le titre
+                  des exercices »). Ailleurs, « Exercices corrigés » annonce ce
+                  qu'on lit — un énoncé et sa réponse. Ici, l'enfant ne lit pas :
+                  il colorie, il trace, il entoure. Le titre nomme donc ce qu'il
+                  FAIT, et c'est ce titre-là que l'enseignant cherche quand il
+                  imprime une feuille pour sa classe. */}
+              {titreRubrique(estCycle2 ? "Fiche d'activité" : "Exercices corrigés")}
             </h2>
             <ol className="mt-4 grid gap-4 text-sm leading-6 text-slate-700 print:gap-2 print:text-xs">
               {fiche.entrainement.map((item, index) => (

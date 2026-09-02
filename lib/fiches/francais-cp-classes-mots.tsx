@@ -211,7 +211,14 @@ export const ficheClassesMotsCp: FicheCoursData = {
   matiereLabel: "Français",
   classe: "cp",
   notion: "classes-mots",
-  titre: `Nom, verbe, adjectif : reconnaitre les mots au CP (${ANNEE_SCOLAIRE})`,
+  /* ⛔ PAS DE DEUX-POINTS DANS UN TITRE DE FICHE. Tous les h2 reprennent le
+     titre après un deux-points (« Définition : … ») : « Nom, verbe, adjectif :
+     reconnaitre les mots » donnait donc « Définition : Nom, verbe, adjectif :
+     reconnaitre les mots au CP » — deux fois deux-points, onze fois dans la
+     page. Le titre porte les mêmes mots, sans la ponctuation qui les coupe.
+     ⚠️ Le `<title>` de la page, lui, garde sa forme longue : c'est lui que
+     Google lit, et il n'est jamais réemployé en titre de section. */
+  titre: `Le nom, le verbe et l'adjectif au CP (${ANNEE_SCOLAIRE})`,
   accroche:
     "Un mot tout seul ne dit pas ce qu'il est. C'est sa place dans la phrase qui le dit.",
   // ⛔ VIDE EXPRÈS, comme sur les deux autres fiches du cycle 2.

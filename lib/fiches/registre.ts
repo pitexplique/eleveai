@@ -723,7 +723,7 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
       "On ne copie pas lettre à lettre : on retient un morceau et on l'écrit d'un trait. Le sens du tracé, la hauteur des lettres, et se relire du doigt.",
   },
   "francais/cp/classes-mots": {
-    titre: "Nom, verbe, adjectif au CP (2026-2027)",
+    titre: "Le nom, le verbe et l'adjectif au CP (2026-2027)",
     resume:
       "Un mot tout seul ne dit pas ce qu'il est : c'est la phrase qui décide. Le nom, le verbe, le déterminant, l'adjectif et le pronom, chacun avec son test.",
   },
