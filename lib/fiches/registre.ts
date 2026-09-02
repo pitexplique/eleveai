@@ -439,6 +439,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Ce qu'on décrivait en 4e s'écrit enfin : f(x) = ax + b. Le a incline la droite, le b dit où elle coupe l'axe — et le point de bascule décide entre deux offres.",
   },
+  "maths/3e/entier-puissance": {
+    titre: "Puissances et écriture scientifique",
+    resume:
+      "Le mot « carré » vient de la figure, et « cube » aussi : c'est ce qui empêche de croire que 2³ vaut 6. Puis les puissances de dix, qui rendent comparables la distance de la Lune et la taille d'un virus.",
+  },
   "maths/3e/litteral-calcul": {
     titre: "Calcul littéral : développer, réduire, factoriser",
     resume:
