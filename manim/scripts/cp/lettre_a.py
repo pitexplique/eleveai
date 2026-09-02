@@ -75,6 +75,11 @@ COURBES = [
 STEM_BAS = np.array([0.00, 0.00, 0])
 SORTIE = ((0.15, -0.05), (0.30, 0.10), (0.50, 0.35))
 
+# ⭐ Cinq mots, pas un : un seul exemple ne fait pas une règle. Tous commencent
+# par la LETTRE « a » ET par le SON [a] — « âne » aurait le son sans la lettre
+# nue, et brouillerait la leçon au lieu de l'élargir.
+MOTS_EN_A = ["arbre", "avion", "ami", "animal", "allons"]
+
 
 def chemin_a(stroke_width: float = 10, color: str = WHITE) -> VMobject:
     """⭐ UN SEUL TRAIT, dans le sens de l'écriture — pas un contour de police."""
@@ -238,28 +243,51 @@ class _LettreABase(Scene):
         self.play(FadeOut(point), FadeOut(lignes))
         lettre = trace
 
-        # ── 4. « a » COMME ARBRE ────────────────────────────────────────────
-        # ⭐ La boucle se ferme : le son, le geste, puis le MOT et l'image. Et
-        # c'est le meme arbre que l'enfant colorie sur sa fiche de vocabulaire.
-        mot = Text("arbre", font_size=88, color=WHITE)
-        initiale = Text("a", font_size=88, color=JAUNE_TITRE)
+        # ── 4. « a » COMME… CINQ MOTS ───────────────────────────────────────
+        # ⭐ La boucle se ferme : le son, le geste, puis les MOTS. Cinq, parce
+        # qu'un seul exemple ne fait pas une règle — et tous commencent par la
+        # LETTRE a ET par le SON [a], ce qui n'est pas la même chose (« âne »
+        # aurait le son sans la lettre nue).
+        # ⭐ Et « arbre » garde son dessin : c'est le même arbre que l'enfant
+        # colorie sur sa fiche de vocabulaire.
+        self.play(FadeOut(lettre), FadeOut(lignes), FadeOut(point))
+
+        titre_mots = Text("a comme…", font_size=52)
+        titre_mots[0].set_color(JAUNE_TITRE)
+        liste = VGroup()
+        for m in MOTS_EN_A:
+            t = Text(m, font_size=46)
+            t[0].set_color(JAUNE_TITRE)
+            liste.add(t)
+        liste.arrange(DOWN, buff=0.28)
         arbre = arbre_dessine()
 
         if self.vertical:
-            mot.to_edge(UP, buff=2.6)
-            arbre.scale(1.1).next_to(mot, DOWN, buff=1.0)
+            titre_mots.to_edge(UP, buff=1.2)
+            liste.next_to(titre_mots, DOWN, buff=0.6)
+            arbre.scale(0.85).next_to(liste, DOWN, buff=0.6)
         else:
-            mot.shift(LEFT * 2.6)
-            arbre.scale(1.2).shift(RIGHT * 2.8)
+            bloc = VGroup(titre_mots, liste).arrange(DOWN, buff=0.5)
+            bloc.shift(LEFT * 2.4)
+            arbre.scale(1.15).shift(RIGHT * 3.4)
 
-        self.play(FadeOut(lettre), FadeIn(mot, shift=UP * 0.3))
-        initiale.move_to(mot[0])
-        self.play(Transform(mot[0], initiale), Circumscribe(mot[0], color=JAUNE_TITRE))
-        self.play(Create(arbre), run_time=1.6)
-        self.wait(1.6)
+        self.play(FadeIn(titre_mots, shift=DOWN * 0.3))
+        self.play(Create(arbre), run_time=1.2)
+        for t in liste:
+            self.play(FadeIn(t, shift=RIGHT * 0.25), run_time=0.45)
+            self.wait(0.55)
+        self.wait(1.0)
+
+        # ── 4 bis. LA RELANCE ───────────────────────────────────────────────
+        # ⭐ On ne finit pas sur une liste : on rend la main. « Un autre mot ? »
+        # transforme un visionnage en devinette, et c'est ce qui fait rejouer.
+        self.play(FadeOut(titre_mots), FadeOut(liste), FadeOut(arbre))
+        relance = Text("On essaie un autre mot ?", font_size=54, color=VERT_OK)
+        self.play(FadeIn(relance, scale=0.9))
+        self.wait(2.0)
+        self.play(FadeOut(relance))
 
         # ── 5. SIGNATURE ────────────────────────────────────────────────────
-        self.play(FadeOut(mot), FadeOut(arbre))
         # ⚠️ `MascotteMargouillat` ne prend PAS de `scale` en argument : son
         # `__init__` ne transmet que les kwargs d'ImageMobject et fixe la
         # hauteur. Tous les scripts existants font `.scale(...)` après coup.
