@@ -1,0 +1,139 @@
+<meta charset="utf-8">
+<title>Création et écriture de la lettre a</title>
+<!--
+  ⭐ MAQUETTE D'ANIMATION, PAS LA VIDÉO. Elle sert à juger le geste, le rythme
+  et le son AVANT de lancer Manim — et elle a déjà servi : c'est elle qui a
+  montré que le stylo tenait la route, que la lettre restait affichée derrière
+  les mots, et que le zoom devait porter sur la ligne entière.
+
+  ⚠️ Le script de vérité est `manim/scripts/cp/lettre_a.py`. Toute correction
+  faite ici doit y être portée, sinon les deux divergent.
+
+  Page non liée, absente du sitemap : elle s'ouvre à la main sur
+  /apercu-video-lettre-a.html
+-->
+<style>
+ @font-face{font-family:"Andika";src:url("/fonts/andika/Andika-Regular.woff2") format("woff2")}
+ body{margin:0;background:#0f172a;font-family:"Andika",system-ui;color:#fff;
+      display:flex;align-items:center;justify-content:center;height:100vh}
+ .scene{width:960px;height:540px;background:#0f172a;position:relative;overflow:hidden}
+ .t{position:absolute;left:0;right:0;text-align:center;opacity:0;transition:opacity .5s}
+ #son{top:170px;font-size:120px;color:#FFD700;font-weight:700}
+ #lbl{top:110px;font-size:34px;color:#38BDF8}
+ #mot{top:44px;font-size:46px}
+ #relance{top:230px;font-size:48px;color:#00FF7F;transition:opacity .5s,transform .5s}
+ #sig{top:118px;font-size:34px;color:#38BDF8}
+ #margo{position:absolute;left:50%;top:150px;transform:translateX(-50%);
+        height:300px;opacity:0;transition:opacity .5s}
+ #mots{position:absolute;left:0;right:0;top:118px;display:flex;flex-direction:column;
+       align-items:center;gap:6px}
+ .row{display:flex;align-items:center;gap:22px;opacity:0;
+      transition:opacity .3s,transform .35s;transform-origin:center}
+ .row .w{font-size:40px;width:190px;text-align:left}
+ .row .w b{color:#FFD700;font-weight:400}
+ svg.piece{width:56px;height:56px;flex:0 0 56px}
+ #sv{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .4s}
+ button{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);
+        font:600 15px system-ui;padding:9px 20px;border-radius:999px;border:0;
+        background:#38BDF8;color:#0f172a;cursor:pointer}
+</style>
+<div class="scene">
+  <div class="t" id="lbl">le son</div>
+  <div class="t" id="son">[a]</div>
+  <div class="t" id="mot"><span style="color:#FFD700">a</span> comme…</div>
+  <div id="mots"></div>
+  <div class="t" id="relance">On essaie un autre mot ?</div>
+  <div class="t" id="sig">EleveAI — Ti Margo</div>
+  <img id="margo" src="/cahier-vacances/ti-margo.png" alt="Ti Margo">
+  <svg id="sv" viewBox="0 0 960 540">
+    <g id="lignes"></g>
+    <path id="fond" fill="none" stroke="#1e293b" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="trait" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle id="dep" r="10" fill="#00FF7F"/>
+    <g id="stylo" style="opacity:0">
+      <polygon points="0,0 -7,18 -7,80 7,80 7,18" fill="#38BDF8" stroke="#fff" stroke-width="3"/>
+      <polygon points="0,0 -7,18 7,18" fill="#FFD700" stroke="#fff" stroke-width="3"/>
+    </g>
+  </svg>
+</div>
+<button id="go">▶ Rejouer</button>
+<audio id="au" src="/sons/lettres/a.wav" preload="auto"></audio>
+<script>
+// ⭐ Chaque mot a SON dessin : un mot sans image serait le seul que l'enfant ne
+// pourrait relier à rien. C'est ce qui a fait sortir « allons » — un verbe ne
+// se dessine pas.
+const MOTS = [
+ ["arbre", `<rect x="20" y="28" width="8" height="18" stroke="#fff"/>
+            <circle cx="24" cy="19" r="11" stroke="#00FF7F"/>
+            <circle cx="13" cy="26" r="7" stroke="#00FF7F"/><circle cx="35" cy="26" r="7" stroke="#00FF7F"/>`],
+ ["avion", `<ellipse cx="24" cy="24" rx="5" ry="19" stroke="#fff"/>
+            <polygon points="3,26 45,26 33,36 15,36" stroke="#38BDF8"/>
+            <polygon points="16,40 32,40 28,46 20,46" stroke="#38BDF8"/>`],
+ ["ami",   `<circle cx="16" cy="16" r="6" stroke="#fff"/><rect x="10" y="24" width="12" height="17" rx="5" stroke="#fff"/>
+            <circle cx="33" cy="16" r="6" stroke="#38BDF8"/><rect x="27" y="24" width="12" height="17" rx="5" stroke="#38BDF8"/>`],
+ ["animal",`<circle cx="24" cy="27" r="12" stroke="#fff"/>
+            <polygon points="13,20 15,7 26,17" stroke="#fff"/><polygon points="35,20 33,7 22,17" stroke="#fff"/>
+            <circle cx="19" cy="25" r="1.8" fill="#fff" stroke="none"/><circle cx="29" cy="25" r="1.8" fill="#fff" stroke="none"/>
+            <polygon points="21,30 27,30 24,34" stroke="#fff"/>
+            <path d="M14 31 L4 29 M34 31 L44 29" stroke="#fff" stroke-width="1.6"/>`],
+ ["abricot",`<circle cx="24" cy="28" r="12" stroke="#F97316"/>
+            <path d="M24 17 A 9 9 0 0 0 17 25" stroke="#F97316" stroke-width="1.8"/>
+            <polygon points="25,16 37,7 27,7" stroke="#00FF7F"/>`],
+];
+document.getElementById("mots").innerHTML = MOTS.map(([m, svg]) =>
+ `<div class="row"><div class="w"><b>${m[0]}</b>${m.slice(1)}</div>
+   <svg class="piece" viewBox="0 0 48 48" fill="none" stroke-width="2.6"
+        stroke-linejoin="round" stroke-linecap="round">${svg}</svg></div>`).join("");
+
+const IL=88, B=400, X=470;
+const D=`M ${X} ${B-0.70*IL} C ${X-0.10*IL} ${B-1.05*IL} ${X-0.80*IL} ${B-1.00*IL} ${X-0.80*IL} ${B-0.50*IL}`
+      +` C ${X-0.80*IL} ${B-0.05*IL} ${X-0.15*IL} ${B-0.05*IL} ${X} ${B-0.60*IL}`
+      +` L ${X} ${B}`
+      +` C ${X+0.15*IL} ${B+0.05*IL} ${X+0.30*IL} ${B-0.10*IL} ${X+0.50*IL} ${B-0.35*IL}`;
+let g=""; for(let k=0;k<4;k++){const y=B-k*IL;g+=`<line x1="220" y1="${y}" x2="740" y2="${y}" stroke="${k?'#334155':'#64748b'}" stroke-width="${k?2:3}"/>`;}
+lignes.innerHTML=g; fond.setAttribute("d",D); trait.setAttribute("d",D);
+const L=trait.getTotalLength(); trait.style.strokeDasharray=L; trait.style.strokeDashoffset=L;
+const p0=trait.getPointAtLength(0); dep.setAttribute("cx",p0.x); dep.setAttribute("cy",p0.y);
+const el=id=>document.getElementById(id);
+const set=(id,v)=>el(id).style.opacity=v;
+// La normale d'une tangente (tx,ty) est (−ty,tx) : c'est elle qui incline le stylo.
+function pose(s){const d=Math.min(Math.max(s*L,.5),L-.5);
+  const p=trait.getPointAtLength(d),q=trait.getPointAtLength(Math.min(d+1,L));
+  const a=Math.atan2(q.x-p.x,-(q.y-p.y))*180/Math.PI;
+  stylo.setAttribute("transform",`translate(${p.x} ${p.y}) rotate(${a})`);}
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+async function trace(ms){const t0=performance.now();return new Promise(res=>{(function f(){
+  const s=Math.min((performance.now()-t0)/ms,1); trait.style.strokeDashoffset=L*(1-s); pose(s);
+  s<1?requestAnimationFrame(f):res();})();});}
+
+async function jouer(){
+  ["lbl","son","mot","sig","margo","relance"].forEach(i=>set(i,0));
+  const rows=[...document.querySelectorAll(".row")];
+  rows.forEach(r=>{r.style.opacity=0;r.style.transform="scale(1)";});
+  el("relance").style.transform="scale(1)";
+  trait.style.strokeDashoffset=L;
+  ["lignes","fond","trait","dep"].forEach(i=>el(i).style.opacity=1);
+
+  await wait(300); set("lbl",1); set("son",1);
+  el("au").currentTime=0; el("au").play().catch(()=>{});
+  await wait(1600); set("lbl",0); set("son",0);
+  await wait(400); sv.style.opacity=1; await wait(500); set("stylo",1);
+  await trace(4500); set("stylo",0); await wait(700);
+  trait.style.strokeDashoffset=L; await trace(1800); await wait(500);
+
+  sv.style.opacity=0; await wait(400); set("mot",1);
+  // ⭐ ZOOM IN / ZOOM OUT : le mot arrive, se rapproche pour qu'on le regarde,
+  // puis reprend sa place. Sans lui, cinq lignes s'empilent et l'œil ne sait
+  // plus laquelle est la nouvelle.
+  for(const r of rows){
+    r.style.opacity=1; await wait(60);
+    r.style.transform="scale(1.22)"; await wait(420);
+    r.style.transform="scale(1)"; await wait(330);
+  }
+  await wait(900); set("mot",0); rows.forEach(r=>r.style.opacity=0);
+  await wait(400); set("relance",1); el("relance").style.transform="scale(1.08)";
+  await wait(1900); set("relance",0);
+  await wait(400); set("sig",1); await wait(250); set("margo",1);
+}
+el("go").onclick=jouer; jouer();
+</script>

@@ -78,7 +78,12 @@ SORTIE = ((0.15, -0.05), (0.30, 0.10), (0.50, 0.35))
 # ⭐ Cinq mots, pas un : un seul exemple ne fait pas une règle. Tous commencent
 # par la LETTRE « a » ET par le SON [a] — « âne » aurait le son sans la lettre
 # nue, et brouillerait la leçon au lieu de l'élargir.
-MOTS_EN_A = ["arbre", "avion", "ami", "animal", "allons"]
+#
+# ⛔ ET CHACUN A SON DESSIN (Frédéric : « en face de chaque mot tu dessines,
+# pas l'arbre isolé »). C'est ce qui a fait sortir « allons » de la liste : un
+# verbe ne se dessine pas, et un mot sans image serait le seul que l'enfant ne
+# pourrait pas relier à quelque chose. Cinq noms concrets à la place.
+MOTS_EN_A = ["arbre", "avion", "ami", "animal", "abricot"]
 
 
 def chemin_a(stroke_width: float = 10, color: str = WHITE) -> VMobject:
@@ -152,6 +157,76 @@ def poser_stylo(stylo: VGroup, modele: VGroup, chemin: VMobject, s: float) -> No
     normale /= np.linalg.norm(normale)
     angle = np.arctan2(normale[1], normale[0])
     stylo.become(modele.copy().rotate(angle - PI / 2, about_point=ORIGIN).shift(p))
+
+
+def avion_dessine() -> VGroup:
+    """Un avion vu de dessus : fuselage, ailes, empennage."""
+    fuselage = Ellipse(width=0.35, height=1.5, stroke_color=WHITE, stroke_width=5)
+    ailes = Polygon(
+        np.array([-0.75, -0.05, 0]), np.array([0.75, -0.05, 0]),
+        np.array([0.28, -0.42, 0]), np.array([-0.28, -0.42, 0]),
+        stroke_color=BLEU_CALCUL, stroke_width=5,
+    )
+    queue = Polygon(
+        np.array([-0.32, -0.62, 0]), np.array([0.32, -0.62, 0]),
+        np.array([0.14, -0.80, 0]), np.array([-0.14, -0.80, 0]),
+        stroke_color=BLEU_CALCUL, stroke_width=5,
+    )
+    g = VGroup(ailes, queue, fuselage)
+    for m in g:
+        m.set_fill(opacity=0)
+    return g
+
+
+def ami_dessine() -> VGroup:
+    """Deux camarades côte à côte : l'ami, ça se dessine à deux."""
+    def bonhomme(dx, couleur):
+        tete = Circle(radius=0.26, stroke_color=couleur, stroke_width=5)
+        tete.set_fill(opacity=0).shift(UP * 0.5)
+        corps = RoundedRectangle(
+            width=0.42, height=0.62, corner_radius=0.16,
+            stroke_color=couleur, stroke_width=5,
+        )
+        corps.set_fill(opacity=0).shift(DOWN * 0.15)
+        return VGroup(tete, corps).shift(RIGHT * dx)
+
+    return VGroup(bonhomme(-0.32, WHITE), bonhomme(0.32, BLEU_CALCUL))
+
+
+def animal_dessine() -> VGroup:
+    """Un chat de face : la tête suffit à dire « animal »."""
+    tete = Circle(radius=0.48, stroke_color=WHITE, stroke_width=5)
+    tete.set_fill(opacity=0)
+    oreilles = VGroup(
+        Polygon(np.array([-0.42, 0.22, 0]), np.array([-0.34, 0.72, 0]),
+                np.array([-0.06, 0.38, 0]), stroke_color=WHITE, stroke_width=5),
+        Polygon(np.array([0.42, 0.22, 0]), np.array([0.34, 0.72, 0]),
+                np.array([0.06, 0.38, 0]), stroke_color=WHITE, stroke_width=5),
+    )
+    for o in oreilles:
+        o.set_fill(opacity=0)
+    yeux = VGroup(Dot(np.array([-0.17, 0.08, 0]), radius=0.06),
+                  Dot(np.array([0.17, 0.08, 0]), radius=0.06))
+    museau = Polygon(np.array([-0.09, -0.10, 0]), np.array([0.09, -0.10, 0]),
+                     np.array([0.0, -0.22, 0]), stroke_color=WHITE, stroke_width=4)
+    museau.set_fill(opacity=0)
+    moustaches = VGroup(
+        Line(np.array([-0.24, -0.14, 0]), np.array([-0.66, -0.20, 0]), stroke_width=3),
+        Line(np.array([0.24, -0.14, 0]), np.array([0.66, -0.20, 0]), stroke_width=3),
+    )
+    return VGroup(tete, oreilles, yeux, museau, moustaches)
+
+
+def abricot_dessine() -> VGroup:
+    """Un abricot : le fruit, sa rainure, sa feuille."""
+    fruit = Circle(radius=0.48, stroke_color=ORANGE_RETENUE, stroke_width=5)
+    fruit.set_fill(opacity=0)
+    rainure = Arc(radius=0.34, start_angle=PI / 2, angle=-PI / 2.6,
+                  stroke_color=ORANGE_RETENUE, stroke_width=3)
+    feuille = Polygon(np.array([0.05, 0.46, 0]), np.array([0.42, 0.78, 0]),
+                      np.array([0.10, 0.72, 0]), stroke_color=VERT_OK, stroke_width=4)
+    feuille.set_fill(opacity=0)
+    return VGroup(fruit, rainure, feuille)
 
 
 def arbre_dessine() -> VGroup:
@@ -243,48 +318,63 @@ class _LettreABase(Scene):
         self.play(FadeOut(point), FadeOut(lignes))
         lettre = trace
 
-        # ── 4. « a » COMME… CINQ MOTS ───────────────────────────────────────
+        # ── 4. « a » COMME… CINQ MOTS, CHACUN AVEC SON DESSIN ───────────────
         # ⭐ La boucle se ferme : le son, le geste, puis les MOTS. Cinq, parce
-        # qu'un seul exemple ne fait pas une règle — et tous commencent par la
-        # LETTRE a ET par le SON [a], ce qui n'est pas la même chose (« âne »
-        # aurait le son sans la lettre nue).
-        # ⭐ Et « arbre » garde son dessin : c'est le même arbre que l'enfant
-        # colorie sur sa fiche de vocabulaire.
+        # qu'un seul exemple ne fait pas une règle.
+        # ⛔ Et CHAQUE mot a son image, jamais un seul dessin pour toute la
+        # liste : un mot sans image serait le seul que l'enfant ne pourrait
+        # relier à rien. C'est ce qui a fait sortir « allons » — un verbe ne se
+        # dessine pas.
         self.play(FadeOut(lettre), FadeOut(lignes), FadeOut(point))
 
-        titre_mots = Text("a comme…", font_size=52)
+        titre_mots = Text("a comme…", font_size=50)
         titre_mots[0].set_color(JAUNE_TITRE)
-        liste = VGroup()
-        for m in MOTS_EN_A:
-            t = Text(m, font_size=46)
-            t[0].set_color(JAUNE_TITRE)
-            liste.add(t)
-        liste.arrange(DOWN, buff=0.28)
-        arbre = arbre_dessine()
 
-        if self.vertical:
-            titre_mots.to_edge(UP, buff=1.2)
-            liste.next_to(titre_mots, DOWN, buff=0.6)
-            arbre.scale(0.85).next_to(liste, DOWN, buff=0.6)
-        else:
-            bloc = VGroup(titre_mots, liste).arrange(DOWN, buff=0.5)
-            bloc.shift(LEFT * 2.4)
-            arbre.scale(1.15).shift(RIGHT * 3.4)
+        dessins = [
+            arbre_dessine(), avion_dessine(), ami_dessine(),
+            animal_dessine(), abricot_dessine(),
+        ]
+        echelle_dessin = 0.52 if not self.vertical else 0.46
+        lignes_mots = VGroup()
+        for mot, dessin in zip(MOTS_EN_A, dessins):
+            t = Text(mot, font_size=42 if not self.vertical else 38)
+            t[0].set_color(JAUNE_TITRE)
+            d = dessin.scale(echelle_dessin)
+            ligne = VGroup(t, d).arrange(RIGHT, buff=0.55)
+            lignes_mots.add(ligne)
+
+        # ⚠️ Les mots s'alignent à GAUCHE de leur ligne : centrer chaque ligne
+        # ferait danser les initiales d'une ligne à l'autre, et c'est justement
+        # l'initiale qu'on regarde.
+        lignes_mots.arrange(DOWN, buff=0.34, aligned_edge=LEFT)
+        bloc = VGroup(titre_mots, lignes_mots).arrange(DOWN, buff=0.5)
+        bloc.move_to(ORIGIN).scale(0.95 if not self.vertical else 0.8)
 
         self.play(FadeIn(titre_mots, shift=DOWN * 0.3))
-        self.play(Create(arbre), run_time=1.2)
-        for t in liste:
-            self.play(FadeIn(t, shift=RIGHT * 0.25), run_time=0.45)
-            self.wait(0.55)
+        for ligne in lignes_mots:
+            # ⭐ ZOOM IN / ZOOM OUT (demande de Frédéric) : le mot arrive, se
+            # rapproche pour qu'on le regarde, puis reprend sa place dans la
+            # liste. C'est ce qui donne le rythme — sans lui, cinq lignes
+            # s'empilent et l'oeil ne sait plus laquelle est la nouvelle.
+            # ⚠️ LE ZOOM PORTE SUR LA LIGNE ENTIÈRE, MOT **ET** IMAGE
+            # (Frédéric, 02/09 : « sur la ligne avec l'image »). Zoomer le seul
+            # mot a été essayé et écarté : le dessin restait petit à côté d'un
+            # mot grossi, et c'est justement le couple mot–image qu'on veut
+            # faire regarder ensemble.
+            self.play(FadeIn(ligne, shift=RIGHT * 0.3), run_time=0.35)
+            self.play(ligne.animate.scale(1.22), run_time=0.35)
+            self.wait(0.45)
+            self.play(ligne.animate.scale(1 / 1.22), run_time=0.3)
         self.wait(1.0)
 
         # ── 4 bis. LA RELANCE ───────────────────────────────────────────────
         # ⭐ On ne finit pas sur une liste : on rend la main. « Un autre mot ? »
         # transforme un visionnage en devinette, et c'est ce qui fait rejouer.
-        self.play(FadeOut(titre_mots), FadeOut(liste), FadeOut(arbre))
+        self.play(FadeOut(bloc))
         relance = Text("On essaie un autre mot ?", font_size=54, color=VERT_OK)
-        self.play(FadeIn(relance, scale=0.9))
-        self.wait(2.0)
+        self.play(FadeIn(relance, scale=0.85))
+        self.play(relance.animate.scale(1.08), run_time=0.5)
+        self.wait(1.6)
         self.play(FadeOut(relance))
 
         # ── 5. SIGNATURE ────────────────────────────────────────────────────
