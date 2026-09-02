@@ -439,6 +439,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Ce qu'on décrivait en 4e s'écrit enfin : f(x) = ax + b. Le a incline la droite, le b dit où elle coupe l'axe — et le point de bascule décide entre deux offres.",
   },
+  "maths/3e/proba-experience": {
+    titre: "Probabilités : issues, événements et deux épreuves",
+    resume:
+      "Une probabilité ne prédit pas un résultat, elle mesure une tendance. Et la 3e ajoute l'arbre : deux épreuves enchaînées, dont les chemins se comptent en multipliant.",
+  },
   "maths/3e/fraction-rationnel": {
     titre: "Les nombres rationnels",
     resume:
