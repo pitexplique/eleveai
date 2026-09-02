@@ -37,10 +37,21 @@ const DEPART = "#16a34a";
 const FONT_CONSIGNE = 13;
 const PAD = 8;
 
-/** ⚠️ La pile cursive du système, faute de mieux. Les polices scolaires
- *  (Cursive Standard, Belle Allure) sont libres et devront être embarquées :
- *  la boucle du `b` et du `l` de l'école n'est pas celle de Segoe Script. */
-const CURSIVE = '"Segoe Script", "Bradley Hand", "Comic Sans MS", cursive';
+/**
+ * ⭐ MARELLE, LA POLICE DE L'ÉCOLE (embarquée le 02/09/2026).
+ *
+ * Avant elle, le modèle s'écrivait avec la pile du système (Segoe Script) —
+ * une écriture manuscrite d'ADULTE, dont les boucles ne sont pas celles qu'on
+ * apprend à tracer. Sur une fiche dont l'objet EST l'écriture, le modèle était
+ * donc faux. Marelle est conçue pour l'enseignement de l'écriture à l'école
+ * élémentaire, sous licence OFL — voir l'en-tête de `app/globals.css`.
+ *
+ * ⭐ DEUX FAMILLES, parce que « cursive » désigne deux écritures que le CP
+ * apprend séparément : attachée, et « bâton » (script). Les replis restent,
+ * pour le cas où la police ne se charge pas.
+ */
+const CURSIVE = '"Marelle", "Segoe Script", "Bradley Hand", cursive';
+const BATON = '"Marelle Baton", "Segoe UI", system-ui, sans-serif';
 
 /**
  * ⛔ LA CONSIGNE SE PLIE — et j'avais oublié de le faire ici (rendu du 02/09).
@@ -95,11 +106,16 @@ export default function ReglureCanvas({ figure }: Props) {
   const y0 = PAD;
 
   // ⭐ Le corps de la minuscule occupe UN interligne : le modèle se dimensionne
-  // donc sur l'interligne, jamais sur la hauteur de la bande. Le facteur 1,9
-  // vient du rapport entre la hauteur de x et la taille de police d'une
-  // cursive (≈ 0,52) — écrire `interligne` directement donnerait des lettres
-  // deux fois trop petites.
-  const policeModele = interligne * 1.9;
+  // sur l'interligne, jamais sur la hauteur de la bande.
+  //
+  // ⛔ 1,55 ET NON 1,9 — LE FACTEUR DÉPEND DE LA POLICE, et j'avais gardé celui
+  // de Segoe Script après avoir embarqué Marelle. Résultat : les majuscules et
+  // les hautes lettres sortaient par le haut de la bande, ce qui est justement
+  // l'erreur que la réglure doit apprendre à ne pas faire. Marelle a une hauteur
+  // de x plus généreuse ; c'est elle qui commande, pas un réglage hérité.
+  // ⚠️ Toucher ce nombre en même temps que la police, jamais l'un sans l'autre.
+  const policeModele = interligne * 1.55;
+  const police = (figure.ecriture ?? "cursive") === "baton" ? BATON : CURSIVE;
 
   const verticales: number[] = [];
   for (let x = x0 + 8 * MM; x < x1; x += 8 * MM) verticales.push(x);
@@ -151,7 +167,7 @@ export default function ReglureCanvas({ figure }: Props) {
           y={y0 + bande}
           fontSize={policeModele}
           fill={ENCRE}
-          fontFamily={CURSIVE}
+          fontFamily={police}
         >
           {figure.modele}
         </text>
@@ -169,7 +185,7 @@ export default function ReglureCanvas({ figure }: Props) {
              VOIR — c'est le seul trait de la fiche que l'enfant suit du crayon. */
           strokeWidth={1.2}
           strokeDasharray="3 2"
-          fontFamily={CURSIVE}
+          fontFamily={police}
         >
           {figure.modele}
         </text>

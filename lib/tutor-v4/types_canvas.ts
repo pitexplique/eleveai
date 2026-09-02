@@ -1818,6 +1818,15 @@ export type ReglureCanvasData = {
   /** Le mot ou la phrase à recopier, écrit sur la première ligne. Sans lui, la
    *  réglure est vide — ce qui est un usage légitime (« écris ta phrase »). */
   modele?: string;
+  /**
+   * ⭐ « CURSIVE » RECOUVRE DEUX ÉCRITURES, ET LE CP LES APPREND SÉPARÉMENT :
+   * · `cursive` (défaut) — les lettres s'attachent, c'est l'écriture qu'on
+   *   apprend à tracer et celle du cahier ;
+   * · `baton` — les lettres sont détachées, c'est l'écriture SCRIPT des
+   *   premiers mois, celle qu'on lit dans les livres avant de savoir attacher.
+   * Les deux viennent de Marelle, la police de l'école (voir globals.css).
+   */
+  ecriture?: "cursive" | "baton";
   /** Nombre de lignes d'écriture, modèle compris. Défaut 3. */
   lignes?: number;
   /** L'interligne en millimètres : 3 au CP, 2,5 au CE1, 2 au CE2. */

@@ -131,6 +131,41 @@ body {
   overflow: visible;
 }
 
+/* ─── MARELLE, LA CURSIVE DE L'ÉCOLE ──────────────────────────────────────────
+   Police cursive libre conçue POUR L'ENSEIGNEMENT DE L'ÉCRITURE à l'école
+   élémentaire, par sept enseignants et designers, soutenue par la Direction du
+   numérique pour l'éducation et développée dans la Forge des communs numériques
+   éducatifs. https://marelle.forge.apps.education.fr/
+
+   ⚖️ SIL Open Font License 1.1 — Copyright 2026 Ministère de l'Éducation
+   nationale, de l'Enseignement supérieur et de la Recherche, Laurent
+   Bourcellier, Jonathan Fabreguettes et Rosalie Wagner, Reserved Font Name
+   « Marelle ». Le texte complet est livré avec les fichiers, dans
+   `public/fonts/marelle/LICENSE.txt` — l'OFL l'exige.
+   ⚠️ Le dépôt du site est en GPLv3 « à l'exception des polices, soumises à des
+   licences spécifiques » : c'est le fichier LICENSE, et lui seul, qui fait foi.
+
+   ⭐ POURQUOI ELLE REMPLACE LA PILE DU SYSTÈME. Segoe Script est une écriture
+   manuscrite d'adulte : ses boucles ne sont pas celles qu'on apprend à tracer,
+   et une fiche dont l'objet EST l'écriture montrait donc un modèle faux.
+   ⭐ DEUX FAMILLES, parce que « cursive » recouvre deux écritures que le CP
+   apprend séparément : `Marelle` attache les lettres, `Marelle Baton` les
+   détache (l'écriture script, celle des premiers mois). */
+@font-face {
+  font-family: "Marelle";
+  src: url("/fonts/marelle/Marelle-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Marelle Baton";
+  src: url("/fonts/marelle/MarelleBaton-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Fiches de cours — à l'écran, la correction est repliée derrière
    « Voir la correction ». À l'impression / PDF, elle se déplie (géré dans
    chaque fiche) et le libellé devient « Correction : » (raffinement 24/06/2026,

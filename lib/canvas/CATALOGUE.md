@@ -262,11 +262,30 @@ corps de la minuscule occupe **un** interligne.
 | `depart` | un point vert là où le crayon se pose |
 | `lignes` | 3 par défaut, 8 au maximum |
 
-⚠️ **LA POLICE CURSIVE N'EST PAS CELLE DE L'ÉCOLE.** Le modèle s'écrit avec la
-pile du système (Segoe Script sur Windows). Les vraies polices scolaires —
-**Cursive Standard**, **Belle Allure** — sont libres et devront être embarquées :
-la boucle du `b` et du `l` de l'école n'est pas celle de Segoe Script. ⛔ À faire
-avant de publier des fiches dont l'objet EST l'écriture.
+⭐⭐ **LA POLICE EST CELLE DE L'ÉCOLE : MARELLE**, embarquée le 02/09/2026.
+Cursive libre conçue **pour l'enseignement de l'écriture à l'école élémentaire**
+par sept enseignants et designers, soutenue par la Direction du numérique pour
+l'éducation, développée dans la Forge des communs numériques éducatifs.
+⚖️ **SIL Open Font License 1.1** — donc utilisable sur un site commercial, à
+condition de livrer le texte de licence : il est dans
+`public/fonts/marelle/LICENSE.txt`. ⚠️ Le dépôt de Marelle est en GPLv3 « à
+l'exception des polices » : c'est le fichier `LICENSE` qui fait foi, pas le
+README. Déclarée dans `app/globals.css`.
+
+⭐ **`ecriture` : `cursive` (défaut) ou `baton`** — « cursive » recouvre deux
+écritures que le CP apprend séparément : attachée, et script (« bâton »), celle
+qu'on lit dans les livres avant de savoir attacher.
+
+⛔ **LE FACTEUR DE TAILLE DÉPEND DE LA POLICE.** `policeModele = interligne ×
+1,55` est calé sur Marelle ; il valait 1,9 pour Segoe Script, et garder l'ancien
+faisait sortir les majuscules par le haut de la bande — l'erreur même que la
+réglure doit apprendre à éviter. ⚠️ Ne jamais changer la police sans rejuger ce
+nombre au rendu.
+
+⭐⭐ **TROIS LIGNES, JAMAIS DEUX** (Frédéric, 02/09/2026). Elles sont les trois
+temps du geste : la 1re porte le **modèle**, la 2e le **pointillé** qu'on
+repasse, la 3e est **vide** — c'est là que l'enfant écrit seul. À deux lignes,
+l'exercice s'arrête au repassage.
 
 ---
 

@@ -30,10 +30,10 @@
 // peut-être, mais elle ne s'attachera pas à la suivante ». Voilà pourquoi le
 // sens du tracé compte — pas pour la beauté, pour la SUITE.
 //
-// ⚠️ La police cursive du canvas `reglure` n'est PAS celle de l'école (pile du
-// système). Les modèles de cette fiche s'en accommodent, mais les vraies
-// polices scolaires — Cursive Standard, Belle Allure — restent à embarquer.
-// Voir lib/canvas/CATALOGUE.md, section `reglure`.
+// ⭐ Les modèles s'écrivent en MARELLE, la police cursive libre conçue pour
+// l'enseignement de l'écriture à l'école élémentaire (Forge des communs
+// numériques éducatifs, licence OFL) — embarquée le 02/09/2026. Avant elle, le
+// modèle d'une fiche dont l'objet EST l'écriture était une manuscrite d'adulte.
 //
 // Aligné sur le pool de `lib/tutor-v4/questionBank/cp/francais/ecriture.bank.ts`
 // (11 items sur les micros `cp_copie_*`). Le mot du pool est repris tel quel :
@@ -75,8 +75,16 @@ function perso(opts: {
   );
 }
 
-/** ⭐ La réglure échappe au plafond de largeur du cycle 2 grâce à cette classe :
- *  des lignes rétrécies sont des lignes où l'enfant ne peut plus écrire. */
+/**
+ * ⭐ La réglure échappe au plafond de largeur du cycle 2 grâce à cette classe :
+ * des lignes rétrécies sont des lignes où l'enfant ne peut plus écrire.
+ *
+ * ⭐⭐ TROIS LIGNES, JAMAIS DEUX (Frédéric, 02/09/2026 : « j'aime bien quand tu
+ * mets trois lignes, et pas 2 »). Les trois ne sont pas décoratives, elles sont
+ * les trois temps du geste : la 1re porte le MODÈLE, la 2e le pointillé qu'on
+ * REPASSE, la 3e est VIDE — c'est là que l'enfant écrit seul. À deux lignes,
+ * il n'a nulle part où écrire, et l'exercice s'arrête au repassage.
+ */
 function lignes(opts: {
   modele?: string;
   lignes?: number;
@@ -90,7 +98,7 @@ function lignes(opts: {
         figure={{
           kind: "reglure",
           modele: opts.modele,
-          lignes: opts.lignes ?? 2,
+          lignes: opts.lignes ?? 3,
           interligne: 3,
           aRepasser: opts.aRepasser,
           depart: true,
@@ -114,7 +122,6 @@ const laPhraseACopier = lignes({
 
 const leCheminDeLaLettre = lignes({
   modele: "a c d o q",
-  lignes: 2,
   aRepasser: true,
   consigne: "Pars du point vert. Ces lettres commencent par un petit tour.",
 });
@@ -123,7 +130,6 @@ const leCheminDeLaLettre = lignes({
  *  autres restent entre les deux. La réglure les montre sans un mot. */
 const lesTroisHauteurs = lignes({
   modele: "le jardin",
-  lignes: 2,
   aRepasser: true,
   consigne: "Entoure la lettre qui descend sous la ligne.",
 });
@@ -213,7 +219,6 @@ export const ficheCopieCp: FicheCoursData = {
       texte: "Je lis un morceau, je le garde dans ma tête, je l'écris.",
       schema: lignes({
         modele: "le margouillat",
-        lignes: 2,
         aRepasser: true,
         consigne: "Un morceau, puis un autre.",
       }),
