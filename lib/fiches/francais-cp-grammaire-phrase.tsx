@@ -29,15 +29,32 @@
 // ⭐ LA DÉCOUVERTE EST DANS LA DÉFINITION : une phrase SE RECONNAIT À SES DEUX
 // BOUTS. C'est ce qu'un enfant peut vérifier seul, sans savoir lire le milieu.
 //
-// Micro-compétences couvertes (5 des 11 de la notion `grammaire_phrase`) :
+// ⭐⭐ LA NOTION `grammaire_phrase` DU CP PORTE 11 MICROS, ET CE N'EST PAS UN
+// OBJET COHÉRENT — c'est son GRAPHE DE PRÉRÉQUIS qui le dit, pas une impression.
+// Toutes descendent de `cp_gram_phrase_reconnaitre`, qui a DEUX enfants que
+// rien ne relie ensuite :
+//
+//   branche PHRASE  : majuscule_point → types_phrases → forme_negative
+//                     · forme_exclamative, et ordonner_phrase
+//   branche MOTS    : nom_verbe → determinant · adjectif · pronom
+//
+// Elles ne se rejoignent qu'au `cp_gram_defi` final. Savoir où une phrase
+// commence et finit, et savoir nommer les mots qui la composent, sont deux
+// leçons. ⛔ La notion devra donc être DÉCOUPÉE — mais cela touche un `notionId`
+// du coach, donc l'URL de la fiche : c'est une décision de Frédéric, pas une
+// écriture. Rien ne se fait sans lui.
+//
+// Cette fiche couvre donc TOUTE la branche PHRASE (6 micros sur 6) :
 // - cp_gram_phrase_reconnaitre → définition, propriété 1, exemple 1
 // - cp_gram_majuscule_point    → figure, propriété 2, méthode 2, exemple 1
 // - cp_gram_types_phrases      → propriété 3
 // - cp_gram_forme_exclamative  → propriété 3
+// - cp_gram_forme_negative     → propriété 4, à retenir, entrainement 5
 // - cp_gram_ordonner_phrase    → méthode 1, exemple 2
-// ⚠️ Les six autres (nom, verbe, déterminant, adjectif, pronom, défi) sont
-// laissées de côté EXPRÈS : les entasser referait la fiche la plus lourde du
-// site, cette fois pour les plus jeunes. Elles demandent leur propre fiche.
+//
+// ⚠️ Et AUCUNE de la branche MOTS (nom, verbe, déterminant, adjectif, pronom,
+// défi) : les entasser ici referait la fiche la plus lourde du site, cette fois
+// pour les plus jeunes. Elles attendent leur propre fiche.
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
@@ -160,6 +177,20 @@ const leCri = perso({
   consigne: "Ici le point crie. Colorie-le en rouge.",
 });
 
+/**
+ * ⭐ « ne … pas » — la seule micro de la branche PHRASE qui manquait.
+ * Le dessin ne pouvait pas s'en charger seul : `marques` n'entoure que la
+ * majuscule et le point. C'est donc la CONSIGNE qui porte l'exercice, et elle
+ * demande un geste précis — colorier deux mots, pas « repérer la négation ».
+ */
+const direNon = perso({
+  personnage: "nina",
+  pose: "debout",
+  expression: "surpris",
+  bulle: { texte: "Je ne dors pas !", forme: "cri" },
+  consigne: "Colorie les deux petits mots qui disent non.",
+});
+
 const laQuestion = perso({
   personnage: "zoe",
   pose: "debout",
@@ -235,6 +266,12 @@ export const fichePhraseCp: FicheCoursData = {
       schema: leCri,
       micros: ["cp_gram_types_phrases", "cp_gram_forme_exclamative"],
     },
+    {
+      titre: "Pour dire non, deux petits mots",
+      texte: "« ne » devant le verbe, « pas » derrière.",
+      schema: direNon,
+      micros: ["cp_gram_forme_negative"],
+    },
   ],
   reel: {
     texte:
@@ -284,6 +321,7 @@ export const fichePhraseCp: FicheCoursData = {
     "Une phrase dit quelque chose en entier.",
     "Elle commence par une grande lettre.",
     "Elle finit par un point.",
+    "Pour dire non : ne … pas.",
   ],
   entrainement: [
     {
@@ -305,6 +343,11 @@ export const fichePhraseCp: FicheCoursData = {
       question: "Remets dans l'ordre : dort chat Le",
       correction: "Le chat dort.",
       micros: ["cp_gram_ordonner_phrase"],
+    },
+    {
+      question: "Comment dit-on non dans une phrase ?",
+      correction: "Avec deux petits mots : ne … pas.",
+      micros: ["cp_gram_forme_negative"],
     },
   ],
   coachHref: "/coach-ia/francais?classe=cp",

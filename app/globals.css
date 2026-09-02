@@ -312,6 +312,11 @@ body {
   [data-cycle="2"] [data-rubrique="proprietes"] svg {
     max-width: 190px !important;
   }
+  /* ⛔ ESSAI ÉCARTÉ, ET LA MESURE VAUT D'ÊTRE GARDÉE : passer la grille à DEUX
+     colonnes quand il y a quatre cartes ne gagne RIEN. Sur trois colonnes la
+     quatrième est seule sur sa rangée ; sur deux, il y a deux rangées pleines —
+     même nombre de rangées, même hauteur, toujours 3 pages. Ce qui coute la
+     page, c'est la QUATRIÈME CARTE elle-même, pas la place perdue à côté. */
 
   /* ⛔ LA PHRASE D'EXPLICATION DE LA PROPRIÉTÉ NE S'IMPRIME PAS, ET C'EST UN
      ARBITRAGE, pas une économie de place déguisée. Sur la feuille, la carte
