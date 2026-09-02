@@ -183,4 +183,30 @@ body {
     break-after: avoid;
     page-break-after: avoid;
   }
+
+  /* ─── LA FEUILLE DU CYCLE 2 (02/09/2026) ────────────────────────────────────
+     ⭐ UN CP NE LIT PAS SA FICHE. Sur l'écran, la page s'adresse à deux
+     personnes à la fois : l'enfant regarde les dessins, l'adulte lit le reste.
+     Sur le papier, il n'en reste qu'une — l'enfant, avec un crayon. Ce qui est
+     écrit pour l'adulte n'a donc rien à faire sur la feuille qu'on photocopie.
+
+     ⛔ MESURÉ AVANT D'ÉCRIRE CES LIGNES : la fiche `francais/cp/grammaire-phrase`
+     sortait en 4 pages A4, quand l'objet visé est UN RECTO. Et ce n'était pas
+     un problème de sauts de page — les quatre pages étaient bien découpées.
+     C'est le NOMBRE DE BLOCS imprimés qui faisait les quatre pages.
+
+     Ce qui reste : le titre, la définition et sa figure, les propriétés (donc
+     les dessins à colorier avec leur consigne), et « à retenir ».
+     Ce qui part : à quoi ça sert, méthode, exemples, pièges, exercices —
+     tous des textes que l'enfant ne peut pas déchiffrer, et que l'adulte a
+     déjà sous les yeux à l'écran. */
+  [data-cycle="2"] [data-rubrique="reel"],
+  [data-cycle="2"] [data-rubrique="historique"],
+  [data-cycle="2"] [data-rubrique="usages"],
+  [data-cycle="2"] [data-rubrique="methode"],
+  [data-cycle="2"] [data-rubrique="exemples"],
+  [data-cycle="2"] [data-rubrique="pieges"],
+  [data-cycle="2"] [data-rubrique="entrainement"] {
+    display: none !important;
+  }
 }

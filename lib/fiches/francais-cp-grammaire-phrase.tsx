@@ -77,8 +77,8 @@ function perso(opts: {
 
 // ─── Les dessins ──────────────────────────────────────────────────────────────
 
-/** ⭐ LE MODÈLE, EN COULEUR : la phrase entière, ses deux bouts entourés. */
-const laPhraseModele = perso({
+/** ⭐ LE MODÈLE : la phrase entière, ses deux bouts entourés. */
+const modeleCouleur = perso({
   personnage: "nina",
   pose: "montre",
   expression: "sourire",
@@ -86,6 +86,31 @@ const laPhraseModele = perso({
   bulle: { texte: "Le chat dort.", marques: ["majuscule", "point"] },
   largeur: 320,
 });
+
+/**
+ * ⛔ LE MÊME MODÈLE, AU TRAIT, POUR LE PAPIER — et c'est le PDF qui l'a montré.
+ *
+ * À l'écran et en mode classe, Nina en couleur est le modèle fini : voilà à
+ * quoi ressemble une phrase. Mais « les profs n'ont pas d'imprimante couleur » :
+ * photocopiée, elle devient un aplat gris où la robe, la peau et le pantalon se
+ * confondent. Sur le papier, le modèle sort donc au trait comme les exercices —
+ * et l'enfant peut le colorier lui aussi.
+ */
+const modeleColoriage = perso({
+  personnage: "nina",
+  pose: "montre",
+  expression: "sourire",
+  mode: "coloriage",
+  bulle: { texte: "Le chat dort.", marques: ["majuscule", "point"] },
+  largeur: 320,
+});
+
+const laPhraseModele = (
+  <>
+    <div className="print:hidden">{modeleCouleur}</div>
+    <div className="hidden print:block">{modeleColoriage}</div>
+  </>
+);
 
 const direQuelqueChose = perso({
   personnage: "teo",
@@ -283,7 +308,7 @@ export const slidesPhraseCp: ClasseSlide[] = [
         "Alors c'est une phrase.",
       ],
     },
-    schema: laPhraseModele,
+    schema: modeleCouleur,
   },
   {
     titre: "Le point crie, ou il demande",

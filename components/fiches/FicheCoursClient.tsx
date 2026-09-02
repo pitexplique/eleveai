@@ -64,6 +64,20 @@ function compositionParDefaut(): Composition {
   };
 }
 
+/**
+ * ⭐ LE CYCLE 2 S'IMPRIME AUTREMENT (02/09/2026).
+ *
+ * Un CP ne lit pas sa fiche : sur le papier, ce qu'il tient est une FEUILLE À
+ * FAIRE — le dessin, sa consigne de coloriage, la ligne à recopier. Les blocs
+ * écrits pour l'adulte (à quoi ça sert, méthode, exemples, pièges, exercices)
+ * restent à l'écran, où l'adulte les lit.
+ *
+ * ⚠️ C'est un attribut sur l'article, pas un réglage de la fiche : les 161
+ * fiches existantes n'ont rien à changer, et les 45 notions de CP, CE1 et CE2
+ * l'auront sans qu'on ait à y penser.
+ */
+const CYCLE_2 = new Set(["cp", "ce1", "ce2"]);
+
 const ICONES_METHODE = [BookOpen, Lightbulb, CheckCircle2];
 const STYLES_METHODE = [
   { carte: "border-sky-200 bg-sky-50", icone: "text-sky-500" },
@@ -894,7 +908,10 @@ export default function FicheCoursClient({
       {estEleveConnecte && mode === "cartes" ? (
         <Flashcards fiche={fiche} />
       ) : (
-        <article className="mx-auto max-w-5xl px-5 py-8 sm:px-8 print:max-w-none print:px-0 print:py-0">
+        <article
+          data-cycle={CYCLE_2.has(fiche.classe.toLowerCase()) ? "2" : undefined}
+          className="mx-auto max-w-5xl px-5 py-8 sm:px-8 print:max-w-none print:px-0 print:py-0"
+        >
           <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-300/40 sm:p-8 print:rounded-none print:border-0 print:p-0 print:shadow-none">
             <header className="border-b border-slate-200 pb-6">
               <div className="mb-4 flex flex-wrap items-center gap-x-2 gap-y-1">
@@ -995,8 +1012,15 @@ export default function FicheCoursClient({
               <EncartsFiche matiere={fiche.matiere} classe={fiche.classe} />
             </header>
 
+            {/* ⭐ `data-rubrique` EST LE SEUL POINT D'ACCROCHE D'UN BLOC (02/09/2026).
+                Aucune rubrique ne portait d'identifiant : la feuille d'impression
+                ne pouvait donc RIEN décider bloc par bloc, et c'est ce qui
+                empêchait de fabriquer une feuille propre au cycle 2. Posé ici,
+                en un seul endroit, plutôt que dans les onze `<section>`. */}
             {rubriquesVisibles.map((id) => (
-              <div key={id}>{rendreRubrique(id)}</div>
+              <div key={id} data-rubrique={id}>
+                {rendreRubrique(id)}
+              </div>
             ))}
 
             {!eleve && (
