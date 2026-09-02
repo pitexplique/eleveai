@@ -31,7 +31,7 @@ const ENCRE = "#111827";
 const LIGNE_FORTE = "#64748b";
 const LIGNE_FINE = "#cbd5e1";
 const VERTICALE = "#e2e8f0";
-const MODELE = "#94a3b8";
+const MODELE = "#64748b";
 const DEPART = "#16a34a";
 
 const FONT_CONSIGNE = 13;
@@ -42,6 +42,38 @@ const PAD = 8;
  *  la boucle du `b` et du `l` de l'école n'est pas celle de Segoe Script. */
 const CURSIVE = '"Segoe Script", "Bradley Hand", "Comic Sans MS", cursive';
 
+/**
+ * ⛔ LA CONSIGNE SE PLIE — et j'avais oublié de le faire ici (rendu du 02/09).
+ *
+ * `PersonnageCanvas` et `ObjetsCanvas` coupent la leur ; la réglure l'écrivait
+ * en UNE ligne centrée. Résultat sur la fiche `cp/copie` : « Pars du point vert.
+ * Ces lettres commencent par un petit tour. » s'affichait « point vert. Ces
+ * lettres commencent par un p » — coupée aux DEUX bouts, parce qu'un SVG masque
+ * ce qui sort de son cadre et que le texte débordait des deux côtés du centre.
+ * ⚠️ Le vérificateur `apercu-canvas.mjs` l'aurait dit : je ne l'avais pas passé
+ * sur ce canvas-là.
+ */
+function largeurTexte(texte: string, fontSize: number) {
+  return texte.length * fontSize * 0.52;
+}
+
+function couper(texte: string, largeurDispo: number, fontSize: number, maxLignes = 3) {
+  if (largeurTexte(texte, fontSize) <= largeurDispo) return [texte];
+  const lignes: string[] = [];
+  let courante = "";
+  for (const mot of texte.split(" ")) {
+    const essai = courante ? `${courante} ${mot}` : mot;
+    if (courante && largeurTexte(essai, fontSize) > largeurDispo) {
+      lignes.push(courante);
+      courante = mot;
+    } else {
+      courante = essai;
+    }
+  }
+  if (courante) lignes.push(courante);
+  return lignes.slice(0, maxLignes);
+}
+
 export default function ReglureCanvas({ figure }: Props) {
   if (!isReglureCanvas(figure)) return null;
 
@@ -50,8 +82,10 @@ export default function ReglureCanvas({ figure }: Props) {
   const bande = interligne * 4;
   const width = Math.max(160, figure.size?.width ?? 250);
 
-  const lignesConsigne = figure.consigne ? [figure.consigne] : [];
-  const hConsigne = lignesConsigne.length ? FONT_CONSIGNE + 10 : 0;
+  const lignesConsigne = figure.consigne
+    ? couper(figure.consigne, width - 2 * PAD, FONT_CONSIGNE, 3)
+    : [];
+  const hConsigne = lignesConsigne.length ? lignesConsigne.length * 16 + 8 : 0;
 
   const hauteurGrille = lignes * bande;
   const height = PAD + hauteurGrille + hConsigne + PAD;
@@ -129,8 +163,12 @@ export default function ReglureCanvas({ figure }: Props) {
           fontSize={policeModele}
           fill="none"
           stroke={MODELE}
-          strokeWidth={0.8}
-          strokeDasharray="2 2"
+          /* ⛔ 1,2 et non 0,8, et des tirets plus longs que leurs trous : à
+             3 mm d'interligne, le premier réglage donnait une trace si pâle
+             qu'on ne savait pas quoi repasser. Un modèle à repasser doit se
+             VOIR — c'est le seul trait de la fiche que l'enfant suit du crayon. */
+          strokeWidth={1.2}
+          strokeDasharray="3 2"
           fontFamily={CURSIVE}
         >
           {figure.modele}

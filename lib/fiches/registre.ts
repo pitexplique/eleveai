@@ -697,6 +697,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Une phrase se reconnait à ses deux bouts : une grande lettre au début, un point à la fin. Des dessins à colorier.",
   },
+  "francais/cp/copie": {
+    titre: "Copier sans se tromper au CP (2026-2027)",
+    resume:
+      "On ne copie pas lettre à lettre : on retient un morceau et on l'écrit d'un trait. Le sens du tracé, la hauteur des lettres, et se relire du doigt.",
+  },
   "francais/cm2/grammaire-nature-fonction": {
     titre: "Nature et fonction d'un mot en CM2 (2026-2027)",
     resume:

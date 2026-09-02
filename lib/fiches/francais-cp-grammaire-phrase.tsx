@@ -138,7 +138,7 @@ const laLigneAEcrire = (
         interligne: 3,
         aRepasser: true,
         depart: true,
-        consigne: "Repasse, puis ecris la phrase tout seul.",
+        consigne: "Repasse, puis écris la phrase tout seul.",
         size: { width: 320 },
       }}
     />
@@ -158,7 +158,7 @@ const direQuelqueChose = perso({
   pose: "marche",
   expression: "sourire",
   bulle: { texte: "Je range mes billes." },
-  consigne: "Colorie Teo. Il dit une phrase entiere.",
+  consigne: "Colorie Téo. Il dit une phrase entière.",
 });
 
 const lesDeuxBouts = perso({
@@ -195,7 +195,7 @@ const laQuestion = perso({
   personnage: "zoe",
   pose: "debout",
   expression: "pense",
-  bulle: { texte: "Ou est mon cartable ?", forme: "pensee", marques: ["point"] },
+  bulle: { texte: "Où est mon cartable ?", forme: "pensee", marques: ["point"] },
   consigne: "Ici le point demande. Entoure-le.",
 });
 
