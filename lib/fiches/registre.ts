@@ -737,6 +737,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Un mot tout seul ne dit pas ce qu'il est : c'est la phrase qui décide. Le nom, le verbe, le déterminant, l'adjectif et le pronom, chacun avec son test.",
   },
+  "francais/cp/vocabulaire": {
+    titre: "Le sens des mots au CP (2026-2027)",
+    resume:
+      "Se ressembler ne suffit pas : « chapeau » n'est pas de la famille de « chat ». Familles de mots, contraires, intrus, et deviner un mot grâce à la phrase.",
+  },
   "francais/cm2/grammaire-nature-fonction": {
     titre: "Nature et fonction d'un mot en CM2 (2026-2027)",
     resume:
