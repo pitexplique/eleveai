@@ -90,6 +90,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "multiples-diviseurs-et-division-euclidienne-4e-cours-exercices-corriges.pdf",
   "multiples-diviseurs-et-facteurs-premiers-3e-cours-exercices-corriges.pdf",
   "multiplication-cm2-cours-exercices-corriges.pdf",
+  "nom-verbe-adjectif-reconnaitre-les-mots-au-cp-2026-2027-cours-exercices-corriges.pdf",
   "nombres-decimaux-6e-cours-exercices-corriges.pdf",
   "nombres-decimaux-cm2-cours-exercices-corriges.pdf",
   "nombres-entiers-6e-cours-exercices-corriges.pdf",
