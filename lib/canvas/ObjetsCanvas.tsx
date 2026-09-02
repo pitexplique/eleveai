@@ -18,6 +18,24 @@ import type { CanvasFigure, ObjetId, ObjetsCanvasData } from "@/lib/tutor-v4/typ
 // épais est un trait NOIR, et on ne colorie pas un trait. Les détails qui
 // doivent rester noirs (un œil, une nervure) sont dessinés APRÈS, en trait fin.
 
+/**
+ * ⛔⛔ « MARELLE BÂTON » N'EST PAS UNE POLICE D'IMPRESSION — vérifié au rendu le
+ * 02/09/2026, après l'avoir employée ici par erreur pendant une heure.
+ *
+ * Son nom trompe : son `b` porte une BOUCLE cursive, et « billes » en sort
+ * entièrement ATTACHÉ. C'est une variante de la cursive, pas le script des
+ * livres. Employée dans les bulles, elle donnait à lire à un CP la seule
+ * écriture qu'il ne sait pas encore lire.
+ *
+ * ⭐ LA RÈGLE VISÉE RESTE LA BONNE, elle attend seulement sa police : ON LIT EN
+ * SCRIPT, ON ÉCRIT EN CURSIVE. Le modèle de la réglure est en cursive Marelle ;
+ * ce qui se LIT reste ici en sans-empattement, dont le `b` et le `d` sont
+ * droits. ⚠️ Son défaut connu : le `a` à DEUX ÉTAGES et le `g` ouvert ne sont
+ * pas les lettres qu'un CP apprend. Une police d'alphabétisation (Andika, SIL,
+ * OFL) les a à un étage — à embarquer, mais Marelle ne la fournit pas.
+ */
+const ECOLE = "ui-sans-serif, system-ui, sans-serif";
+
 type Props = { figure: CanvasFigure };
 
 function isObjetsCanvas(figure: CanvasFigure): figure is ObjetsCanvasData {
@@ -466,7 +484,7 @@ export default function ObjetsCanvas({ figure }: Props) {
                     fontSize={police}
                     fill={ENCRE}
                     textAnchor="middle"
-                    fontFamily="ui-sans-serif, system-ui, sans-serif"
+                    fontFamily={ECOLE}
                   >
                     {el.label}
                   </text>
@@ -485,7 +503,7 @@ export default function ObjetsCanvas({ figure }: Props) {
           fontSize={FONT_CONSIGNE}
           fill="#334155"
           textAnchor="middle"
-          fontFamily="ui-sans-serif, system-ui, sans-serif"
+          fontFamily={ECOLE}
         >
           {ligne}
         </text>
