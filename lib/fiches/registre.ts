@@ -454,6 +454,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Une vitesse n'est ni une distance ni une durée : c'est le rapport des deux. Et deux évolutions successives se multiplient — +20 % puis −20 % ne ramène pas au prix de départ.",
   },
+  "maths/3e/triangle-figure": {
+    titre: "Les triangles : angles, familles et existence",
+    resume:
+      "Trois longueurs peuvent se refuser à former un triangle, et trois angles aussi — pour des raisons différentes. Deux verrous indépendants, dont la somme à 180° est celui de la 3e.",
+  },
   "maths/3e/volume-solide": {
     titre: "Calculer un volume : du pavé à la boule",
     resume:
