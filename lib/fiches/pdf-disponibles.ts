@@ -78,6 +78,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "lettres-aux-sons-au-cp-2026-2027-cours-exercices-corriges.pdf",
   "lire-a-voix-haute-en-cm1-2026-2027-cours-exercices-corriges.pdf",
   "lire-avec-fluidite-en-cm1-2026-2027-cours-exercices-corriges.pdf",
+  "lire-en-assemblant-les-syllabes-au-cp-2026-2027-cours-exercices-corriges.pdf",
   "lire-et-interpreter-des-donnees-4e-cours-exercices-corriges.pdf",
   "lire-et-interpreter-des-donnees-6e-cours-exercices-corriges.pdf",
   "lire-un-document-en-cm1-2026-2027-cours-exercices-corriges.pdf",

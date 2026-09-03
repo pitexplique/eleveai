@@ -777,6 +777,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Un son s'écrit de plusieurs façons, une lettre se lit de plusieurs façons. Les voyelles, les jumeaux b et d, et ou ch on oi.",
   },
+  "francais/cp/lecture-syllabique": {
+    titre: "Lire en assemblant les syllabes au CP (2026-2027)",
+    resume:
+      "« cha… », c'est chat ou chapeau ? Faire glisser les sons, coller les morceaux, et lire le mot jusqu'au bout.",
+  },
   "francais/cm2/grammaire-nature-fonction": {
     titre: "Nature et fonction d'un mot en CM2 (2026-2027)",
     resume:
