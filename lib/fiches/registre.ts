@@ -454,6 +454,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Une vitesse n'est ni une distance ni une durée : c'est le rapport des deux. Et deux évolutions successives se multiplient — +20 % puis −20 % ne ramène pas au prix de départ.",
   },
+  "maths/3e/volume-solide": {
+    titre: "Calculer un volume : du pavé à la boule",
+    resume:
+      "Presque tous les solides se calculent en empilant une base sur une hauteur. La boule échappe à la règle, faute de base — et agrandir de k multiplie le volume par k³, jamais par k.",
+  },
   "maths/3e/algo-programmation": {
     titre: "Algorithmique : variables, boucles et programmes de calcul",
     resume:
