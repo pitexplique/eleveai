@@ -454,6 +454,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Une vitesse n'est ni une distance ni une durée : c'est le rapport des deux. Et deux évolutions successives se multiplient — +20 % puis −20 % ne ramène pas au prix de départ.",
   },
+  "maths/3e/pythagore-theoreme": {
+    titre: "Pythagore, sa réciproque, et la rédaction attendue",
+    resume:
+      "En 4e le théorème calculait une longueur ; en 3e il démontre qu'un angle est droit. Et le calcul juste ne suffit plus : c'est la rédaction en quatre temps que le brevet note.",
+  },
   "maths/3e/triangle-figure": {
     titre: "Les triangles : angles, familles et existence",
     resume:
