@@ -260,15 +260,20 @@ def arbre_dessine() -> VGroup:
 # Les clips sont produits par `scripts/generer-voix.ps1` depuis
 # `manim/voix/cp-lettre-a.json` — une phrase change, on régénère en une commande.
 #
+# ⭐ VOIX : **Julie**, l'une des trois voix françaises MODERNES de Windows.
+# Frédéric, 02/09 : « elle n'est pas très joyeuse », « ça fait trop machine » —
+# c'était Hortense, une voix SAPI5 de 2012, la seule que `System.Speech` sache
+# voir. Julie et Paul ne s'atteignent que par WinRT (voir le générateur).
+#
 # ⚠️ LES DURÉES SONT MESURÉES, PAS ESTIMÉES (lecture des en-têtes WAV). Elles
 # commandent les `wait()` : une phrase plus longue que son écran déborde sur le
 # suivant, et personne ne le voit en lisant le code.
 VOIX = Path(__file__).resolve().parents[3] / "public" / "sons" / "cp-lettre-a"
 DUREE = {
-    "00-aujourdhui": 3.93, "01-ecoute": 3.69, "02-regarde": 3.72, "03-depart": 8.21,
-    "04-encore": 3.63, "05-cherchons": 5.00, "05-a-comme": 2.03, "06-arbre": 1.86,
-    "07-avion": 1.84, "08-ami": 1.75, "09-animal": 2.16, "10-abricot": 2.08,
-    "10-pareil": 5.99, "11-relance": 4.30, "12-signature": 3.54,
+    "00-aujourdhui": 3.17, "01-ecoute": 2.99, "02-regarde": 3.02, "03-depart": 6.70,
+    "04-encore": 2.92, "05-cherchons": 4.12, "05-a-comme": 1.58, "06-arbre": 1.46,
+    "07-avion": 1.47, "08-ami": 1.36, "09-animal": 1.68, "10-abricot": 1.65,
+    "10-pareil": 4.71, "11-relance": 3.60, "12-signature": 2.95,
 }
 CLIPS_MOTS = ["06-arbre", "07-avion", "08-ami", "09-animal", "10-abricot"]
 
