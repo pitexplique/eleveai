@@ -23,9 +23,18 @@
 // ⚠️ Il ne voit PAS le canvas `algebre`, qui rend en HTML et non en SVG — celui-là
 // se contrôle à l'œil (voir docs/prompt-maths-4e-suite.md).
 //
+// ⛔⛔ ET IL REFUSE DE CONCLURE QUAND LA CSS EST PERDUE — ajouté le 03/09/2026,
+// après s'être fait avoir lui-même. Le serveur de dev a servi les fiches sans
+// leur feuille de style : plus de grille, chaque bloc en pleine largeur, les
+// dessins étirés cinq fois. Toutes les polices montaient si haut qu'aucun défaut
+// n'était détecté, et le script a annoncé « 19 fiches, 0 en défaut » sur des
+// pages illisibles. Un rapport vert qui ne veut rien dire est pire qu'une
+// absence de mesure — la doctrine de ce script vaut aussi contre lui.
+//
 // Usage : node scripts/mesurer-fiches.mjs <origine> <matiere> <classe>
 //         node scripts/mesurer-fiches.mjs http://localhost:3100 maths 4e
-// Sortie 1 si une fiche a le moindre défaut.
+// Sortie 1 si une fiche a le moindre défaut ; 2 si la CSS manque, auquel cas
+// il faut relancer le serveur de dev avant de remesurer.
 
 import fs from "node:fs";
 import path from "node:path";
@@ -57,6 +66,7 @@ const MESUREUR = () => {
     dollars: (document.body.innerText.match(/\$/g) || []).length,
     nbDessins: 0,
     minPx: 99,
+    largeurMax: 0,
   };
   document.querySelectorAll("svg").forEach((svg) => {
     const r = svg.getBoundingClientRect();
@@ -64,6 +74,7 @@ const MESUREUR = () => {
     out.nbDessins++;
     const vb = svg.viewBox?.baseVal?.width || r.width;
     const ratio = r.width / vb;
+    if (r.width > out.largeurMax) out.largeurMax = Math.round(r.width);
     const T = [...svg.querySelectorAll("text")];
     T.forEach((t) => {
       const f = (parseFloat(getComputedStyle(t).fontSize) || 0) * ratio;
@@ -130,6 +141,32 @@ for (const notion of NOTIONS) {
       ligne.dessins = Math.max(ligne.dessins, m.nbDessins);
       ligne.minPx = Math.min(ligne.minPx, m.minPx);
       ligne.console += erreursConsole.length;
+      // ⛔⛔ LA CSS PEUT ÊTRE PERDUE, ET ALORS TOUTE LA MESURE EST FAUSSE —
+      // rencontré le 03/09/2026. Le serveur de dev a servi les fiches SANS leur
+      // feuille de style : plus de grille, chaque bloc en pleine largeur. Un
+      // dessin de 228 de viewBox s'étirait à 1264 px, ratio 5,5, et toutes les
+      // polices montaient si haut qu'AUCUN défaut n'était détecté. Le script a
+      // annoncé « 19 fiches, 0 en défaut » sur des pages illisibles.
+      // 👉 Un rapport vert qui ne veut rien dire est pire qu'une absence de
+      // mesure — c'est la doctrine de ce script, elle vaut aussi contre lui.
+      // ⚠️ LE SIGNAL N'EST PAS LE RATIO — première version, et faux positif
+      // immédiat : le canvas `probabilites` a un viewBox de 132 pour ses dés,
+      // donc un ratio de 2,23 parfaitement légitime. Le bon signal est la
+      // LARGEUR RENDUE. Avec la CSS, aucun dessin ne dépasse 300 px, aux deux
+      // viewports, parce que la colonne de lecture est bornée. Sans elle, un
+      // bloc prend toute la fenêtre : 1264 px à 1280. Entre 300 et 1264, il y a
+      // la place pour un seuil qui ne se trompe pas.
+      if (m.largeurMax > 500) {
+        console.error(
+          `\n⛔ CSS PERDUE — un dessin rendu à ${m.largeurMax} px sur ${notion} en ${l.nom}px.\n` +
+            "   Les blocs sont en pleine largeur : la page est servie sans sa\n" +
+            "   feuille de style, et AUCUNE mesure de cette passe n'est valable.\n" +
+            "   Relancer le serveur de dev, puis remesurer.\n",
+        );
+        await page.close();
+        await navigateur.close();
+        process.exit(2);
+      }
       if (m.petites.length) ligne.defauts.push(`${l.nom}px · ${m.petites.length} sous 11px : ${m.petites.slice(0, 3).join(", ")}`);
       if (m.chevauchements.length) ligne.defauts.push(`${l.nom}px · ${m.chevauchements.length} chevauchement(s) : ${m.chevauchements.slice(0, 2).join(" | ")}`);
       if (m.debordements.length) ligne.defauts.push(`${l.nom}px · ${m.debordements.length} débordement(s) : ${m.debordements.slice(0, 3).join(", ")}`);
