@@ -50,6 +50,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # dossier manim/
 from charte import *  # noqa: F403,E402
 from mascotte import MascotteMargouillat  # noqa: E402
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # dossier cp/
+from lettre_commune import ecran_relance  # noqa: E402
+
 # ─── La géométrie du Seyès, en unités Manim ───────────────────────────────────
 # ⭐ 1 unité = 1 interligne. Le corps d'une minuscule occupe EXACTEMENT un
 # interligne : c'est sur lui que l'enfant apprend la taille de ses lettres, et
@@ -296,7 +299,8 @@ DUREE = {
     "00-aujourdhui": 3.17, "01-ecoute": 2.99, "02-regarde": 3.02, "03-depart": 6.70,
     "04-encore": 2.92, "05-cherchons": 4.12, "05-a-comme": 1.58, "06-arbre": 1.46,
     "07-avion": 1.47, "08-ami": 1.36, "09-animal": 1.68, "10-abricot": 1.65,
-    "10-pareil": 4.71, "11-relance": 3.60, "12-va-sur": 3.16, "13-coach": 3.25,
+    "10-pareil": 4.71, "11-relance": 2.93, "12-va-sur": 3.16, "13-tout": 9.55,
+    "14-bientot": 1.71,
 }
 CLIPS_MOTS = ["06-arbre", "07-avion", "08-ami", "09-animal", "10-abricot"]
 
@@ -618,7 +622,14 @@ class _LettreABase(Scene):
         # ⭐ On ne finit pas sur une liste : on rend la main. « Un autre mot ? »
         # transforme un visionnage en devinette, et c'est ce qui fait rejouer.
         self.play(FadeOut(bloc))
-        relance = Text("On essaie un autre mot ?", font_size=54, color=VERT_OK)
+        # ⛔⛔ LA RELANCE DÉBORDAIT EN PORTRAIT, ET PERSONNE NE L'AVAIT VU.
+        # `Text("On essaie un autre mot ?", font_size=54)` mesure **9,57** de
+        # large ; le cadre 9:16 en offre **3,90**. Frédéric l'a découvert sur le
+        # Short en ligne : « aie un autr », coupé des deux côtés.
+        # ⚠️ LA RÉDUIRE NE SUFFIT PAS : même à 32 elle mesure encore 5,64. Il
+        # faut DEUX LIGNES. Toute phrase de plus de quinze signes destinée au
+        # portrait doit être coupée à la main, pas mise à l'échelle.
+        relance = ecran_relance(self.vertical, "a")
         d = self.dire("11-relance")
         self.play(FadeIn(relance, scale=0.85))
         self.play(relance.animate.scale(1.08), run_time=0.5)
@@ -643,19 +654,36 @@ class _LettreABase(Scene):
         # `__init__` ne transmet que les kwargs d'ImageMobject et fixe la
         # hauteur. Tous les scripts existants font `.scale(...)` après coup.
         # ⚠️ On REPREND le même Ti-Margo — il ouvrait la vidéo, il la ferme.
+        # ⛔ « Essaie notre coach CP français » A ÉTÉ RETIRÉ (Frédéric, 03/09 :
+        # « enlève essayer, mets simplement Coach français »). L'écran est une
+        # LISTE de ce qui existe, pas une injonction — et une seule proposition
+        # cachait les quatre autres.
+        # ⛔ Il débordait de toute façon : 5,70 de large pour 3,90 utiles en
+        # portrait. Le filet de mise à l'échelle l'avait « sauvé » en écrasant
+        # TOUT le bloc, Ti-Margo réduit à un timbre. Le rendu paraissait correct
+        # et il était mauvais — c'est la deuxième fois que ce filet trompe.
+        # ⭐ CHAQUE LIGNE ARRIVE À SON TOUR, pendant que la voix la nomme : la
+        # liste se construit sous les yeux au lieu de tomber d'un bloc.
         fin_url = Text(
-            "Va sur eleveai.fr",
-            font_size=54 if not self.vertical else 40,
+            "eleveai.fr",
+            font_size=62 if not self.vertical else 50,
             color=JAUNE_TITRE,
         )
-        fin_coach = Text(
-            "Essaie notre coach CP français",
-            font_size=38 if not self.vertical else 27,
-            color=BLEU_CALCUL,
+        PORTES = ["Coach Maths", "Coach Français", "Dictée", "Fiches activités"]
+        portes = VGroup(
+            *[
+                Text(p, font_size=40 if not self.vertical else 30, color=BLEU_CALCUL)
+                for p in PORTES
+            ]
+        ).arrange(DOWN, buff=0.30)
+        bientot = Text(
+            "À bientôt !",
+            font_size=52 if not self.vertical else 42,
+            color=VERT_OK,
         )
-        bloc_fin = VGroup(fin_url, fin_coach).arrange(DOWN, buff=0.45)
-        margo.scale(0.75)
-        page_fin = Group(margo, bloc_fin).arrange(DOWN, buff=0.55)
+        bloc_fin = VGroup(fin_url, portes, bientot).arrange(DOWN, buff=0.45)
+        margo.scale(0.75 if not self.vertical else 0.85)
+        page_fin = Group(margo, bloc_fin).arrange(DOWN, buff=0.40)
         page_fin.scale(
             min(
                 1.0,
@@ -665,11 +693,32 @@ class _LettreABase(Scene):
         ).move_to(ORIGIN)
 
         d1 = self.dire("12-va-sur")
-        self.play(FadeIn(margo, shift=UP * 0.3), FadeIn(fin_url, shift=UP * 0.3))
-        self.wait(max(0.4, d1 - 1.0))
-        d2 = self.dire("13-coach")
-        self.play(FadeIn(fin_coach, shift=UP * 0.3))
-        self.wait(max(1.2, d2 - 1.0))
+        self.play(FadeIn(margo, shift=UP * 0.3), GrowFromCenter(fin_url))
+        self.wait(max(0.3, d1 - 1.2))
+        # ⭐ L'EFFET : les quatre portes se posent l'une après l'autre, au rythme
+        # de la phrase qui les énumère (7,82 s pour quatre — environ 1,9 s
+        # chacune, le temps de la lire à voix haute).
+        # ⭐ ZOOM IN / ZOOM OUT SUR CHAQUE PORTE (Frédéric, 03/09), le même
+        # rythme que les cinq mots de « a comme… ». Sans lui, quatre lignes
+        # s'empilent et l'œil ne sait plus laquelle vient d'arriver ; avec lui,
+        # celle que la voix nomme se met en avant puis reprend sa place.
+        # ⚠️ Le zoom porte sur la ligne, pas sur le bloc : `bloc_fin` grossirait
+        # d'un coup et ferait sauter tout l'écran.
+        d2 = self.dire("13-tout")
+        pas = max(1.05, (d2 - 0.6) / len(PORTES))
+        for p in portes:
+            self.play(FadeIn(p, shift=RIGHT * 0.35), run_time=0.30)
+            self.play(p.animate.scale(1.22), run_time=0.30)
+            self.wait(0.20)
+            self.play(p.animate.scale(1 / 1.22), run_time=0.25)
+            self.wait(max(0.05, pas - 1.05))
+        # ⭐ Et le « À bientôt ! » fait le même mouvement, en plus ample : il
+        # ferme la vidéo, c'est la dernière chose que l'enfant voit bouger.
+        d3 = self.dire("14-bientot")
+        self.play(GrowFromCenter(bientot), run_time=0.35)
+        self.play(bientot.animate.scale(1.18), run_time=0.35)
+        self.play(bientot.animate.scale(1 / 1.18), run_time=0.30)
+        self.wait(max(1.0, d3 - 1.0))
 
 
 # ─── Les quatre variantes : deux mains × deux cadres ──────────────────────────

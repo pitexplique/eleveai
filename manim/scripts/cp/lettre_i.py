@@ -31,6 +31,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # dossier manim/
 from charte import *  # noqa: F403,E402
 from mascotte import MascotteMargouillat  # noqa: E402
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # dossier cp/
+from lettre_commune import ecran_relance  # noqa: E402
+
 INTERLIGNE = 1.0
 LARGEUR_REGLURE = 9.0
 
@@ -260,8 +263,8 @@ DUREE = {
     "00-aujourdhui": 3.15, "01-ecoute": 2.96, "02-regarde": 3.00, "03-depart": 7.56,
     "04-le-point": 4.21, "05-encore": 2.92, "06-cherchons": 4.09, "06-i-comme": 1.56,
     "07-image": 1.61, "08-igloo": 1.48, "09-iguane": 1.66, "10-iris": 1.52,
-    "11-immeuble": 1.63, "11-pareil": 4.71, "12-relance": 3.57, "13-va-sur": 3.16,
-    "14-coach": 3.25,
+    "11-immeuble": 1.63, "11-pareil": 4.71, "12-relance": 2.91, "13-va-sur": 3.16,
+    "14-tout": 9.55, "15-bientot": 1.71,
 }
 CLIPS_MOTS = ["07-image", "08-igloo", "09-iguane", "10-iris", "11-immeuble"]
 
@@ -473,7 +476,13 @@ class _LettreIBase(Scene):
 
         # ── 4 bis. LA RELANCE ───────────────────────────────────────────────
         self.play(FadeOut(bloc))
-        relance = Text("On essaie un autre mot ?", font_size=54, color=VERT_OK)
+        # ⛔⛔ DEUX LIGNES EN PORTRAIT, JAMAIS UNE. La phrase mesure 9,57 de
+        # large à 54, et le cadre 9:16 n'en offre que 3,90 : elle sortait des
+        # deux côtés. La réduire ne suffit pas (5,64 encore à 32).
+        # ⭐ ET C'EST LE FORMAT QUI COMPTE : 98 vues pour un Short contre 1 pour
+        # le paysage (relevé le 03/09). Le portrait n'est pas la version
+        # secondaire, c'est celle que les gens voient.
+        relance = ecran_relance(self.vertical, "i")
         d = self.dire("12-relance")
         self.play(FadeIn(relance, scale=0.85))
         self.play(relance.animate.scale(1.08), run_time=0.5)
@@ -483,19 +492,30 @@ class _LettreIBase(Scene):
         # ── 5. LA PAGE DE FIN : OÙ ALLER MAINTENANT ─────────────────────────
         # ⭐ On nomme le COACH FRANÇAIS, pas l'accueil : c'est la porte d'entrée
         # qui mène au tutor. Page vérifiée : /coach-ia/francais?classe=cp.
+        # ⛔ PAS DE VERBE, UNE LISTE (Frédéric, 03/09 : « enlève essayer, mets
+        # simplement Coach français »). L'écran dit ce qui existe ; une seule
+        # proposition cachait les quatre autres.
+        # ⭐ CHAQUE LIGNE ARRIVE À SON TOUR, pendant que la voix la nomme.
         fin_url = Text(
-            "Va sur eleveai.fr",
-            font_size=54 if not self.vertical else 40,
+            "eleveai.fr",
+            font_size=62 if not self.vertical else 50,
             color=JAUNE_TITRE,
         )
-        fin_coach = Text(
-            "Essaie notre coach CP français",
-            font_size=38 if not self.vertical else 27,
-            color=BLEU_CALCUL,
+        PORTES = ["Coach Maths", "Coach Français", "Dictée", "Fiches activités"]
+        portes = VGroup(
+            *[
+                Text(p, font_size=40 if not self.vertical else 30, color=BLEU_CALCUL)
+                for p in PORTES
+            ]
+        ).arrange(DOWN, buff=0.30)
+        bientot = Text(
+            "À bientôt !",
+            font_size=52 if not self.vertical else 42,
+            color=VERT_OK,
         )
-        bloc_fin = VGroup(fin_url, fin_coach).arrange(DOWN, buff=0.45)
-        margo.scale(0.75)
-        page_fin = Group(margo, bloc_fin).arrange(DOWN, buff=0.55)
+        bloc_fin = VGroup(fin_url, portes, bientot).arrange(DOWN, buff=0.45)
+        margo.scale(0.75 if not self.vertical else 0.85)
+        page_fin = Group(margo, bloc_fin).arrange(DOWN, buff=0.40)
         page_fin.scale(
             min(
                 1.0,
@@ -505,11 +525,26 @@ class _LettreIBase(Scene):
         ).move_to(ORIGIN)
 
         d1 = self.dire("13-va-sur")
-        self.play(FadeIn(margo, shift=UP * 0.3), FadeIn(fin_url, shift=UP * 0.3))
-        self.wait(max(0.4, d1 - 1.0))
-        d2 = self.dire("14-coach")
-        self.play(FadeIn(fin_coach, shift=UP * 0.3))
-        self.wait(max(1.2, d2 - 1.0))
+        self.play(FadeIn(margo, shift=UP * 0.3), GrowFromCenter(fin_url))
+        self.wait(max(0.3, d1 - 1.2))
+        # ⭐ ZOOM IN / ZOOM OUT SUR CHAQUE PORTE, le même rythme que les cinq
+        # mots. Sans lui, quatre lignes s'empilent et l'œil ne sait plus
+        # laquelle vient d'arriver.
+        # ⚠️ Le zoom porte sur la ligne, pas sur le bloc — sinon tout l'écran
+        # sauterait à chaque fois.
+        d2 = self.dire("14-tout")
+        pas = max(1.05, (d2 - 0.6) / len(PORTES))
+        for p in portes:
+            self.play(FadeIn(p, shift=RIGHT * 0.35), run_time=0.30)
+            self.play(p.animate.scale(1.22), run_time=0.30)
+            self.wait(0.20)
+            self.play(p.animate.scale(1 / 1.22), run_time=0.25)
+            self.wait(max(0.05, pas - 1.05))
+        d3 = self.dire("15-bientot")
+        self.play(GrowFromCenter(bientot), run_time=0.35)
+        self.play(bientot.animate.scale(1.18), run_time=0.35)
+        self.play(bientot.animate.scale(1 / 1.18), run_time=0.30)
+        self.wait(max(1.0, d3 - 1.0))
 
 
 class _Portrait:

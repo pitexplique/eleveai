@@ -1518,6 +1518,27 @@ export const RESSOURCES: RessourceEleveAI[] = [
     statut: "validee",
   },
   {
+    // ⭐⭐ LES FICHES D'ÉCRITURE (03/09/2026). Frédéric, après avoir vu les
+    // vidéos de lettres : « il faut des fiches d'écriture ». Une vidéo montre
+    // le geste, elle ne le fait pas faire — l'enfant apprend à écrire avec un
+    // crayon dans la main.
+    // ⚠️ CE N'EST PAS UNE « FICHE D'ACTIVITÉS » : celles-là sont un cours plus
+    // des exercices (`/fiches-cours/...`). Ici c'est une feuille de réglure où
+    // l'on repasse une lettre. Deux objets, deux entrées.
+    // ⭐ NIVEAUX cp/ce1 ET PARENT : c'est le parent qui imprime, pas l'enfant.
+    // Et « prof » parce qu'une classe entière se sert de la même feuille.
+    id: "fiches-ecriture",
+    titre: "Les fiches d'écriture",
+    promesse: "La lettre à repasser, et la vidéo qui montre le geste.",
+    url: "/fiches-ecriture",
+    niveaux: ["cp", "ce1", "parent", "prof"],
+    matiere: "francais",
+    notions: ["ecriture", "grapheme_phoneme", "copie", "*"],
+    intentions: ["sentrainer", "enseigner", "decouvrir"],
+    type: "fiche",
+    statut: "validee",
+  },
+  {
     id: "carte-974",
     titre: "La carte des maths de l'île",
     promesse: "Chaque endroit de l'île a son calcul.",

@@ -13,7 +13,8 @@
   "10-iris": "iris",
   "11-immeuble": "immeuble",
   "11-pareil": "Tu as entendu ? Ils commencent tous pareil.",
-  "12-relance": "On essaie un autre mot qui commence par i ?",
+  "12-relance": "Trouve un mot qui commence par i.",
   "13-va-sur": "Va sur élève A I point F R.",
-  "14-coach": "Essaie notre coach CP français !"
+  "14-tout": "Tu y trouveras le coach de maths, le coach de français, la dictée du jour, des fiches d'activités, et des fiches d'écriture.",
+  "15-bientot": "À bientôt !"
 }

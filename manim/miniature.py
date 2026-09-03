@@ -1192,6 +1192,21 @@ TRACES = {
         # une lettre à hampe (b, l, h) en demandera un plus court encore.
         "il": 118,
     },
+    "o": {
+        "depart": (0.02, 0.80),
+        "courbes": [
+            ((-0.20, 1.02), (-0.84, 0.96), (-0.84, 0.44)),
+            ((-0.84, -0.02), (-0.14, -0.04), (0.06, 0.40)),
+            ((0.16, 0.60), (0.14, 0.74), (0.02, 0.82)),
+            ((-0.08, 0.94), (0.18, 0.94), (0.34, 0.76)),
+        ],
+        "point": None,
+        # ⭐ Le droitier pose sa pointe en FIN de sortie, le gaucher au point le
+        # plus à gauche du rond : son stylo penche vers la gauche et il lui faut
+        # du papier vide de ce côté.
+        "pose": ((0.34, 0.76), (-0.84, 0.44)),
+        "il": 145,
+    },
 }
 
 

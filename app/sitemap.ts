@@ -6,6 +6,7 @@ import { NIVEAUX, motsDeLaClasse } from "@/lib/dico";
 import { cgvEnVigueur } from "@/lib/legal/editeur";
 import { PDF_DISPONIBLES } from "@/lib/fiches/pdf-disponibles";
 import { FICHES_REGISTRE } from "@/lib/fiches/registre";
+import { FICHES as FICHES_ECRITURE } from "@/lib/fiches-ecriture/registre";
 import {
   PROGRAMME_CLASSES,
   listerNiveauxHorsClasse,
@@ -262,6 +263,14 @@ const ROUTES: RouteConfig[] = [
   // au-dessus des machines individuelles (0.8).
   { path: "/simulateurs",     priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-07-24") },
   { path: "/maths-974",       priority: 0.8,  changeFrequency: "weekly", lastMod: LASTMOD_974 },
+  // ⭐ LES FICHES D'ÉCRITURE (03/09/2026). Priorité haute : « fiche d'écriture
+  // CP à imprimer » est une requête très cherchée, et cinq sites en vivent
+  // déjà — la nôtre est la seule à porter la vidéo du geste à côté du PDF.
+  // ⚠️ Les pages de lettres (/fiches-ecriture/lettres/a…) s'ajoutent plus bas,
+  // depuis le registre : une entrée écrite en dur ici deviendrait fausse à la
+  // vingt-sixième lettre.
+  { path: "/fiches-ecriture", priority: 0.9,  changeFrequency: "weekly", lastMod: LASTMOD_974 },
+  { path: "/fiches-ecriture/lettres", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_974 },
   { path: "/simulateur-cyclone", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
   { path: "/simulateur-sucre", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
   { path: "/simulateur-fromage", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
@@ -583,6 +592,18 @@ const jeuxCartesRoutes: RouteConfig[] = NIVEAUX.filter(
   lastMod: LASTMOD_JEUX,
 }));
 
+// Fiches d'écriture — une page par lettre, générée depuis le registre.
+// ⛔ NE JAMAIS LES ÉCRIRE EN DUR : il y en aura vingt-six, puis les majuscules,
+// les chiffres, les nombres. Une liste recopiée à la main devient fausse à la
+// première lettre ajoutée, et une entrée de sitemap qui pointe vers une page
+// absente coûte plus cher qu'une page non déclarée.
+const fichesEcritureRoutes: RouteConfig[] = FICHES_ECRITURE.map((f) => ({
+  path: `/fiches-ecriture/${f.famille}/${f.slug}`,
+  priority: 0.85,
+  changeFrequency: "monthly" as const,
+  lastMod: new Date("2026-09-03"),
+}));
+
 // Vidéos YouTube publiées (chaîne EleveAI), rattachées à la fiche de leur notion
 // pour un sitemap vidéo Google (SEO). Miroir léger de notion_ressources : on
 // ajoute une ligne par vidéo publiée (clé = chemin de la fiche).
@@ -732,6 +753,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...niveauxRoutes,
     ...notionsRoutes,
     ...niveauxHorsClasseRoutes,
+    ...fichesEcritureRoutes,
   ].map((route) => {
     const videos = VIDEOS_FICHES[route.path];
     return {
