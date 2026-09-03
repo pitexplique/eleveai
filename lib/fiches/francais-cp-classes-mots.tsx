@@ -204,6 +204,73 @@ const nommerCeQuOnVoit = perso({
   largeur: 300,
 });
 
+/* ─── Les dessins DES EXERCICES ────────────────────────────────────────────────
+   ⭐⭐ AU CYCLE 2, UN EXERCICE SE FAIT AU CRAYON (règle du 03/09/2026).
+   ⛔ Ni `consigne` ni `legende` ici : l'énoncé numéroté les porte déjà. */
+
+const exQuatreRoles = phrase({
+  mots: [
+    { texte: "Le" },
+    { texte: "petit" },
+    { texte: "chien" },
+    { texte: "dort" },
+  ],
+  largeur: 300,
+});
+
+const exTroisNoms = objets({
+  elements: [
+    { quoi: "chat", label: "un chat" },
+    { quoi: "bateau", label: "un bateau" },
+    { quoi: "fleur", label: "une fleur" },
+  ],
+  colonnes: 2,
+  largeur: 280,
+});
+
+const exCeQuOnFait = perso({
+  personnage: "teo",
+  pose: "marche",
+  expression: "rire",
+  bulle: { texte: "Je cours !", forme: "cri" },
+  largeur: 240,
+});
+
+const exOnLEnleve = phrase({
+  mots: [
+    { texte: "Le" },
+    { texte: "grand" },
+    { texte: "chat" },
+    { texte: "saute" },
+  ],
+  largeur: 300,
+});
+
+const exDeterminant = phrase({
+  mots: [{ texte: "…" }, { texte: "chien" }],
+  largeur: 220,
+});
+
+const exPronom = phrase({
+  mots: [
+    { texte: "Le chien" },
+    { texte: "dort" },
+    { texte: "." },
+    { texte: "Il" },
+    { texte: "rêve" },
+  ],
+  largeur: 300,
+});
+
+const exNommer = perso({
+  personnage: "nina",
+  pose: "montre",
+  expression: "sourire",
+  mode: "couleur",
+  bulle: { texte: "Le petit chien dort." },
+  largeur: 280,
+});
+
 // ─── La fiche ─────────────────────────────────────────────────────────────────
 
 export const ficheClassesMotsCp: FicheCoursData = {
@@ -310,30 +377,64 @@ export const ficheClassesMotsCp: FicheCoursData = {
     "L'adjectif s'enlève sans casser la phrase.",
     "Le pronom remplace ce dont on vient de parler.",
   ],
+  /* ⭐ Dix exercices, sept avec un support à entourer, colorier ou barrer.
+     Les corrections s'impriment sur leur propre page. */
   entrainement: [
+    {
+      question: "Entoure le mot qui dit ce que c'est, et souligne celui qui dit ce qu'on fait.",
+      correction: "On entoure « chien » (le nom) et on souligne « dort » (le verbe).",
+      schema: exQuatreRoles,
+      micros: ["cp_gram_nom_verbe"],
+    },
     {
       question: "Dans « Le chien dort. », quel mot est le verbe ?",
       correction: "« dort » — c'est ce qu'on fait.",
       micros: ["cp_gram_nom_verbe"],
     },
     {
-      question: "Dans « Le chien dort. », quel mot est le nom ?",
-      correction: "« chien » — c'est ce que c'est.",
+      question: "Colorie les trois dessins et écris leur nom en dessous.",
+      correction: "un chat, un bateau, une fleur. Un nom dit ce que c'est.",
+      schema: exTroisNoms,
       micros: ["cp_gram_nom_verbe"],
     },
     {
-      question: "Quel petit mot peut-on planter devant « chien » ?",
-      correction: "« le », « un », « ce »… Ce sont des déterminants.",
-      micros: ["cp_gram_determinant"],
+      question: "Colorie le mot qui dit ce qu'on fait.",
+      correction: "« cours ». C'est le verbe : Je COURS !",
+      schema: exCeQuOnFait,
+      micros: ["cp_gram_nom_verbe"],
     },
     {
-      question: "Dans « Le grand chat saute. », quel mot peut-on enlever ?",
-      correction: "« grand ». La phrase marche encore, mais on en sait moins.",
+      question: "Barre le mot qu'on peut enlever sans casser la phrase.",
+      correction: "« grand ». La phrase marche encore : « Le chat saute. » On en sait juste moins.",
+      schema: exOnLEnleve,
       micros: ["cp_gram_adjectif"],
     },
     {
-      question: "« Léa joue. Elle rit. » Qui est « Elle » ?",
-      correction: "Léa. Le pronom remplace ce dont on vient de parler.",
+      question: "Dans « Le grand chat saute. », que nous apprend le mot qu'on peut enlever ?",
+      correction: "Il dit comment est le chat. C'est un adjectif.",
+      micros: ["cp_gram_adjectif"],
+    },
+    {
+      question: "Écris dans la case le petit mot qui peut se planter devant « chien ».",
+      correction: "« le », « un », « ce », « mon »… Ce sont des déterminants.",
+      schema: exDeterminant,
+      micros: ["cp_gram_determinant"],
+    },
+    {
+      question: "Quel petit mot ne peut PAS se planter devant « chien » : le, un, dort ?",
+      correction: "« dort ». C'est un verbe, pas un déterminant.",
+      micros: ["cp_gram_determinant"],
+    },
+    {
+      question: "Relie « Il » au mot qu'il remplace.",
+      correction: "« Il » remplace « le chien ». Un pronom renvoie à ce dont on vient de parler.",
+      schema: exPronom,
+      micros: ["cp_gram_pronom"],
+    },
+    {
+      question: "Nomme le rôle de chaque mot de la phrase de Nina.",
+      correction: "Le = déterminant, petit = adjectif, chien = nom, dort = verbe.",
+      schema: exNommer,
       micros: ["cp_gram_pronom", "cp_gram_defi"],
     },
   ],

@@ -23,12 +23,12 @@
 // objet cohérent, aucun découpage à décider.
 //
 // Les 6 micros sont couvertes :
-// - cp_phono_syllabe_compter    → figure, propriété 1, méthode 1, entrainements 1 et 2
-// - cp_phono_syllabe_decouper   → propriété 2, exemple 1, entrainement 3
-// - cp_phono_rime_reconnaitre   → propriété 3, exemple 2, entrainement 4
-// - cp_phono_son_identifier     → propriété 4, méthode 2
-// - cp_phono_son_position       → propriété 5, entrainement 5
-// - cp_phono_defi               → méthode 2, entrainement 5
+// - cp_phono_syllabe_compter    → figure, propriété 1, méthode 1, entrainements 1 à 5
+// - cp_phono_syllabe_decouper   → propriété 2, exemple 1, entrainement 6
+// - cp_phono_rime_reconnaitre   → propriété 3, exemple 2, entrainements 7 et 8
+// - cp_phono_son_identifier     → propriété 4, méthode 2, entrainement 9
+// - cp_phono_son_position       → propriété 4, entrainement 10
+// - cp_phono_defi               → méthode 2, entrainements 9 et 10
 //
 // ⛔ AUCUNE NOTATION PHONÉTIQUE. Le pool écrit « [u] (ou) » — c'est bon pour un
 // corrigé lu par un adulte, pas pour une feuille que l'enfant a sous les yeux.

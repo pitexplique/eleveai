@@ -231,6 +231,76 @@ const motsRemis = (
   />
 );
 
+/* ─── Les dessins DES EXERCICES ────────────────────────────────────────────────
+   ⭐⭐ AU CYCLE 2, UN EXERCICE SE FAIT AU CRAYON (règle du 03/09/2026).
+   ⛔ Aucun `consigne` ni `legende` sur ces dessins-là : l'énoncé numéroté est
+   déjà la consigne, et la répéter sous le dessin fait deux déchiffrages pour
+   une seule instruction. */
+
+const exLesDeuxBouts = perso({
+  personnage: "zoe",
+  pose: "debout",
+  expression: "sourire",
+  bulle: { texte: "Ma tortue mange.", marques: ["majuscule", "point"] },
+  largeur: 250,
+});
+
+const exUnMotToutSeul = perso({
+  personnage: "teo",
+  pose: "debout",
+  expression: "pense",
+  bulle: { texte: "chat", forme: "pensee" },
+  largeur: 230,
+});
+
+const exPhraseEntiere = perso({
+  personnage: "teo",
+  pose: "marche",
+  expression: "sourire",
+  bulle: { texte: "Je range mes billes." },
+  largeur: 250,
+});
+
+const exDireNon = perso({
+  personnage: "nina",
+  pose: "debout",
+  expression: "surpris",
+  bulle: { texte: "Je ne dors pas !", forme: "cri" },
+  largeur: 250,
+});
+
+const exQuestion = perso({
+  personnage: "zoe",
+  pose: "debout",
+  expression: "pense",
+  bulle: { texte: "Où est mon cartable ?", forme: "pensee", marques: ["point"] },
+  largeur: 250,
+});
+
+const exCri = perso({
+  personnage: "ravi",
+  pose: "bras_leves",
+  expression: "rire",
+  bulle: { texte: "Quelle belle mangue !", forme: "cri", marques: ["point"] },
+  largeur: 250,
+});
+
+const exLigneAEcrire = (
+  <div className="reglure">
+    <CanvasRenderer
+      figure={{
+        kind: "reglure",
+        modele: "Le chat dort.",
+        lignes: 3,
+        interligne: 3,
+        aRepasser: true,
+        depart: true,
+        size: { width: 320 },
+      }}
+    />
+  </div>
+);
+
 // ─── La fiche ─────────────────────────────────────────────────────────────────
 
 export const fichePhraseCp: FicheCoursData = {
@@ -329,31 +399,66 @@ export const fichePhraseCp: FicheCoursData = {
     "Elle finit par un point.",
     "Pour dire non : ne … pas.",
   ],
+  /* ⭐ Dix exercices, huit avec un support à colorier, entourer ou écrire.
+     Les corrections s'impriment sur leur propre page. */
   entrainement: [
     {
-      question: "Par quoi commence une phrase ?",
-      correction: "Par une grande lettre.",
+      question: "Colorie la grande lettre en bleu et le point en rouge.",
+      correction: "La grande lettre est le « M » de « Ma », le point est tout à la fin.",
+      schema: exLesDeuxBouts,
       micros: ["cp_gram_majuscule_point"],
     },
     {
-      question: "Par quoi finit une phrase ?",
-      correction: "Par un point.",
+      question: "Par quoi commence une phrase ? Par quoi finit-elle ?",
+      correction: "Elle commence par une grande lettre et finit par un point.",
       micros: ["cp_gram_majuscule_point"],
     },
     {
-      question: "« chat » est-il une phrase ?",
-      correction: "Non. Un mot tout seul ne dit pas quelque chose en entier.",
+      question: "« chat » est-il une phrase ? Barre la bulle si ce n'en est pas une.",
+      correction: "Non, on barre. Un mot tout seul ne dit pas quelque chose en entier.",
+      schema: exUnMotToutSeul,
       micros: ["cp_gram_phrase_reconnaitre"],
     },
     {
-      question: "Remets dans l'ordre : dort chat Le",
-      correction: "Le chat dort.",
+      question: "Téo dit-il une phrase entière ? Colorie-le si oui.",
+      correction: "Oui : « Je range mes billes. » dit quelque chose en entier, avec ses deux bouts.",
+      schema: exPhraseEntiere,
+      micros: ["cp_gram_phrase_reconnaitre"],
+    },
+    {
+      question: "Remets les mots dans l'ordre, puis écris la phrase.",
+      correction: "« Le chat dort. » — le point se met à la fin, jamais au milieu.",
+      schema: motsMelanges,
       micros: ["cp_gram_ordonner_phrase"],
     },
     {
-      question: "Comment dit-on non dans une phrase ?",
-      correction: "Avec deux petits mots : ne … pas.",
+      question: "Repasse la phrase, puis écris-la tout seul sur la ligne vide.",
+      correction: "« Le chat dort. » — grande lettre au début, point à la fin.",
+      schema: exLigneAEcrire,
+      micros: ["cp_gram_ordonner_phrase", "cp_gram_majuscule_point"],
+    },
+    {
+      question: "Colorie les deux petits mots qui disent non.",
+      correction: "« ne » et « pas » : Je NE dors PAS.",
+      schema: exDireNon,
       micros: ["cp_gram_forme_negative"],
+    },
+    {
+      question: "Comment dit-on non dans une phrase ?",
+      correction: "Avec deux petits mots qui encadrent le verbe : ne … pas.",
+      micros: ["cp_gram_forme_negative"],
+    },
+    {
+      question: "Entoure le point. Que fait-il ici : il raconte, il demande ou il crie ?",
+      correction: "Il demande : c'est un point d'interrogation, la phrase pose une question.",
+      schema: exQuestion,
+      micros: ["cp_gram_types_phrases"],
+    },
+    {
+      question: "Colorie ce point en rouge. Que fait-il ?",
+      correction: "Il crie : c'est un point d'exclamation.",
+      schema: exCri,
+      micros: ["cp_gram_types_phrases", "cp_gram_forme_exclamative"],
     },
   ],
   coachHref: "/coach-ia/francais?classe=cp",

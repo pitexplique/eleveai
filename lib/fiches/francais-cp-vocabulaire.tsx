@@ -206,6 +206,78 @@ const remplacerSansChanger = phrase({
   largeur: 280,
 });
 
+/* ─── Les dessins DES EXERCICES ────────────────────────────────────────────────
+   ⭐⭐ AU CYCLE 2, UN EXERCICE SE FAIT AU CRAYON (règle du 03/09/2026).
+   ⛔ Ni `consigne` ni `legende` ici : l'énoncé numéroté les porte déjà.
+   ⛔ ET AUCUNE `marque` SUR CES DESSINS : entourer d'avance, c'est donner la
+   réponse — la faute déjà payée le 02/09 sur la voiture de la figure. */
+
+const exIntrusJardin = objets({
+  elements: [
+    { quoi: "arbre", label: "un arbre" },
+    { quoi: "fleur", label: "une fleur" },
+    { quoi: "papillon", label: "un papillon" },
+    { quoi: "bateau", label: "un bateau" },
+  ],
+  colonnes: 2,
+  largeur: 280,
+});
+
+const exChampMaison = objets({
+  elements: [
+    { quoi: "maison", label: "une maison" },
+    { quoi: "cle", label: "une clé" },
+    { quoi: "tasse", label: "une tasse" },
+    { quoi: "poisson", label: "un poisson" },
+  ],
+  colonnes: 2,
+  largeur: 280,
+});
+
+const exFamilleDuChat = phrase({
+  mots: [
+    { texte: "chat" },
+    { texte: "chaton" },
+    { texte: "chatte" },
+    { texte: "chapeau" },
+  ],
+  largeur: 280,
+});
+
+const exContraire = perso({
+  personnage: "zoe",
+  pose: "debout",
+  expression: "triste",
+  bulle: { texte: "Je suis triste." },
+  largeur: 230,
+});
+
+const exDeuxFeuilles = objets({
+  elements: [
+    { quoi: "feuille", label: "une feuille" },
+    { quoi: "livre", label: "une feuille" },
+  ],
+  colonnes: 2,
+  largeur: 260,
+});
+
+const exMotInconnu = perso({
+  personnage: "nina",
+  pose: "montre",
+  expression: "pense",
+  bulle: { texte: "Range ton cartable !" },
+  largeur: 250,
+});
+
+const exSynonyme = phrase({
+  mots: [
+    { texte: "Le chien est" },
+    { texte: "content" },
+    { texte: "joyeux" },
+  ],
+  largeur: 280,
+});
+
 // ─── La fiche ─────────────────────────────────────────────────────────────────
 
 export const ficheVocabulaireCp: FicheCoursData = {
@@ -305,21 +377,48 @@ export const ficheVocabulaireCp: FicheCoursData = {
     "Le contraire dit exactement l'inverse.",
     "Un même mot peut désigner deux choses.",
   ],
+  /* ⭐ Dix exercices, sept avec un support à entourer, colorier, barrer ou
+     relier. Les corrections s'impriment sur leur propre page. */
   entrainement: [
     {
-      question: "arbre, fleur, papillon, bateau : quel mot ne va pas avec les autres ?",
-      correction: "« bateau ». Les trois autres vivent au jardin.",
+      question: "Trois vivent au même endroit. Entoure celui qui est de passage.",
+      correction: "« un bateau ». L'arbre, la fleur et le papillon vivent au jardin.",
+      schema: exIntrusJardin,
       micros: ["cp_voc_champ_lexical"],
     },
     {
-      question: "chat, chaton, chapeau : lequel n'est pas de la famille ?",
+      question: "Colorie les mots qui parlent de la maison, et barre l'intrus.",
+      correction: "On colorie la maison, la clé et la tasse. On barre le poisson.",
+      schema: exChampMaison,
+      micros: ["cp_voc_champ_lexical"],
+    },
+    {
+      question: "Barre le mot qui n'est pas de la famille de « chat ».",
       correction: "« chapeau ». Il se ressemble, mais le sens ne suit pas.",
+      schema: exFamilleDuChat,
       micros: ["cp_voc_famille"],
     },
     {
-      question: "Quel est le contraire de « content » ?",
-      correction: "« triste ».",
+      question: "Pourquoi « chapeau » n'est-il pas de la famille de « chat » ?",
+      correction: "Se ressembler ne suffit pas : il faut aussi que le sens aille ensemble.",
+      micros: ["cp_voc_famille"],
+    },
+    {
+      question: "Écris le contraire de ce que dit Zoé.",
+      correction: "« Je suis content. » — content est le contraire de triste.",
+      schema: exContraire,
       micros: ["cp_voc_antonyme"],
+    },
+    {
+      question: "Quel est le contraire de « grand » ?",
+      correction: "« petit ». Un contraire dit exactement l'inverse.",
+      micros: ["cp_voc_antonyme"],
+    },
+    {
+      question: "Le même mot pour deux dessins : lequel ? Écris-le sous chacun.",
+      correction: "« une feuille » : celle de l'arbre et celle du cahier. Le mot est le même, la chose non.",
+      schema: exDeuxFeuilles,
+      micros: ["cp_voc_polysemie"],
     },
     {
       question: "« la feuille de l'arbre », « la feuille du cahier » : même mot ?",
@@ -327,9 +426,16 @@ export const ficheVocabulaireCp: FicheCoursData = {
       micros: ["cp_voc_polysemie"],
     },
     {
-      question: "« Range ton cartable ! » Que veut dire « cartable » ?",
-      correction: "Le sac de l'école. La phrase met sur la piste : on le range.",
+      question: "Entoure les mots de la phrase qui aident à deviner ce qu'est un cartable.",
+      correction: "« Range » et « ton » : on le range, il est à toi. C'est le sac de l'école.",
+      schema: exMotInconnu,
       micros: ["cp_voc_mot_inconnu"],
+    },
+    {
+      question: "Barre le mot et remplace-le par l'autre. La phrase change-t-elle ?",
+      correction: "Non : « Le chien est joyeux » dit la même chose que « content ». Ce sont des synonymes.",
+      schema: exSynonyme,
+      micros: ["cp_voc_synonyme"],
     },
   ],
   coachHref: "/coach-ia/francais?classe=cp",

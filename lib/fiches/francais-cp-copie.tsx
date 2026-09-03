@@ -159,6 +159,37 @@ const leModeleEtLaCopie = perso({
   consigne: "Il manque une lettre. Laquelle ?",
 });
 
+/* ─── Les dessins DES EXERCICES ────────────────────────────────────────────────
+   ⭐⭐ ICI LE SUPPORT VA DE SOI : la notion EST l'écriture, donc l'exercice est
+   une réglure sur laquelle l'enfant copie pour de bon. Une question écrite sur
+   la copie fait tout sauf copier.
+   ⛔ Ni `consigne` ni `legende` sur ces dessins : l'énoncé numéroté la porte
+   déjà, et la répéter sous les lignes fait deux lectures pour une instruction. */
+
+const exLettresRondes = lignes({ modele: "a c d o q", aRepasser: true, largeur: 300 });
+const exLettresQuiMontent = lignes({ modele: "l b h k", aRepasser: true, largeur: 300 });
+const exLettreQuiDescend = lignes({ modele: "le jardin", aRepasser: true, largeur: 300 });
+const exMotParMorceaux = lignes({ modele: "margouillat", aRepasser: true, largeur: 300 });
+const exPhraseEntiere = lignes({ modele: "Le margouillat dort.", aRepasser: true, largeur: 320 });
+const exDate = lignes({ modele: "lundi", aRepasser: true, largeur: 260 });
+
+const exLeMotOublie = perso({
+  personnage: "nina",
+  pose: "debout",
+  expression: "surpris",
+  mode: "couleur",
+  bulle: { texte: "le margoullat" },
+  largeur: 260,
+});
+
+const exRelire = perso({
+  personnage: "zoe",
+  pose: "montre",
+  expression: "pense",
+  bulle: { texte: "Et le point ?" },
+  largeur: 230,
+});
+
 // ─── La fiche ─────────────────────────────────────────────────────────────────
 
 export const ficheCopieCp: FicheCoursData = {
@@ -261,31 +292,67 @@ export const ficheCopieCp: FicheCoursData = {
     "On copie par morceaux, pas lettre à lettre.",
     "On se relit du doigt, du début au point.",
   ],
+  /* ⭐ Dix exercices, huit avec un support. Six sont des RÉGLURES : sur une
+     fiche de copie, l'exercice doit faire écrire. Les corrections s'impriment
+     sur leur propre page. */
   entrainement: [
     {
-      question: "Pour copier une lettre, qu'est-ce qui compte le plus ?",
-      correction: "La former dans le bon sens du tracé.",
+      question: "Pars du point vert et repasse. Ces lettres commencent toutes par un petit tour.",
+      correction: "a, c, d, o, q : on part en haut, on tourne à gauche, on revient.",
+      schema: exLettresRondes,
       micros: ["cp_copie_lettre"],
     },
     {
+      question: "Repasse ces lettres, puis écris-les seul. Que font-elles toutes ?",
+      correction: "Elles montent au-dessus des autres : l, b, h, k.",
+      schema: exLettresQuiMontent,
+      micros: ["cp_copie_lettre"],
+    },
+    {
+      question: "Copie « le jardin », puis entoure la lettre qui descend sous la ligne.",
+      correction: "Le « j » de jardin. Les autres restent entre les deux lignes.",
+      schema: exLettreQuiDescend,
+      micros: ["cp_copie_lettre"],
+    },
+    {
+      question: "Pour copier une lettre, qu'est-ce qui compte le plus ?",
+      correction: "La former dans le bon sens du tracé — sinon elle ne s'attachera pas à la suivante.",
+      micros: ["cp_copie_lettre"],
+    },
+    {
+      question: "Copie « margouillat » en trois fois, un morceau à la fois.",
+      correction: "mar — gouil — lat. Un morceau dans la tête, puis on écrit sans regarder.",
+      schema: exMotParMorceaux,
+      micros: ["cp_copie_strategie", "cp_copie_mot"],
+    },
+    {
       question: "Tu copies « le margouillat ». Quelle est la façon la plus rapide ?",
-      correction: "Le prendre par morceaux : mar — gouil — lat.",
+      correction: "Le prendre par morceaux : mar — gouil — lat. On regarde le modèle trois fois, pas onze.",
       micros: ["cp_copie_strategie"],
     },
     {
-      question: "Modèle : « le margouillat ». Un élève écrit « le margoullat ». Qu'a-t-il oublié ?",
-      correction: "Le « i » de « gouil ».",
+      question: "Modèle : « le margouillat ». Que manque-t-il dans ce que dit Nina ?",
+      correction: "Le « i » de « gouil » : elle a écrit « margoullat ».",
+      schema: exLeMotOublie,
       micros: ["cp_copie_mot"],
     },
     {
-      question: "Que regarde-t-on en se relisant ?",
-      correction: "Sa copie et le modèle, mot par mot, du doigt.",
+      question: "Copie la phrase entière, sans rien oublier.",
+      correction: "« Le margouillat dort. » — la majuscule au début, et le point à la fin.",
+      schema: exPhraseEntiere,
+      micros: ["cp_copie_phrase"],
+    },
+    {
+      question: "Suis ta phrase du doigt. Que vérifie-t-on en se relisant ?",
+      correction: "Sa copie et le modèle, mot par mot, du début au point.",
+      schema: exRelire,
       micros: ["cp_copie_relire"],
     },
     {
-      question: "Qu'est-ce qu'on oublie souvent de copier à la fin d'une phrase ?",
-      correction: "Le point.",
-      micros: ["cp_copie_phrase"],
+      question: "Copie le jour de la semaine. Qu'est-ce qu'on oublie souvent à la fin d'une phrase ?",
+      correction: "Le point. On le cherche en dernier, avec le doigt.",
+      schema: exDate,
+      micros: ["cp_copie_phrase", "cp_copie_relire"],
     },
   ],
   coachHref: "/coach-ia/francais?classe=cp",

@@ -26,11 +26,11 @@
 // `cp_phono_son_identifier` — la fiche précédente.
 //
 // Les 5 micros sont couvertes :
-// - cp_gph_voyelles          → propriété 1, entrainement 1
-// - cp_gph_consonnes_simples → propriété 2, exemple 1, entrainement 2
-// - cp_gph_sons_composes     → propriété 3, entrainement 3
-// - cp_gph_ecrire_son        → figure, propriété 4, méthode 1, entrainement 4
-// - cp_gph_defi              → méthode 2, exemple 2, entrainement 5
+// - cp_gph_voyelles          → propriété 1, entrainements 1 et 2
+// - cp_gph_consonnes_simples → propriété 2, exemple 1, entrainements 3 et 4
+// - cp_gph_sons_composes     → propriété 3, entrainements 5, 6 et 7
+// - cp_gph_ecrire_son        → figure, propriété 4, méthode 1, entrainements 8 et 9
+// - cp_gph_defi              → méthode 2, exemple 2, entrainement 10
 //
 // ⛔ AUCUNE NOTATION PHONÉTIQUE, comme sur la fiche des sons : le pool écrit
 // « [o] », la feuille écrit « le son o, celui de moto ». Un son se nomme par un
@@ -208,6 +208,44 @@ const jeCherecheLesSons = perso({
   consigne: "Je découpe le mot en sons avant d'écrire.",
 });
 
+/* ─── Les dessins DES EXERCICES ────────────────────────────────────────────────
+   ⭐⭐ AU CYCLE 2, UN EXERCICE SE FAIT AU CRAYON (règle du 03/09/2026).
+   ⭐ Et sur CETTE notion, la moitié des supports sont des RÉGLURES : le BO
+   demande qu'on fasse « écrire systématiquement les CGP enseignées » —
+   décoder et encoder marchent ensemble, donc l'exercice fait écrire.
+   ⛔ Ni `consigne` ni `legende` : l'énoncé numéroté les porte déjà. */
+
+const exVoyellesEtIntruse = etiquettes({
+  cases: ["b", "m", "i", "r"],
+  largeur: 260,
+});
+
+const exToutesLesVoyelles = lignes({ modele: "a e i o u y", aRepasser: true, largeur: 300 });
+
+const exJumeaux = lignes({ modele: "b d b d", aRepasser: true, largeur: 300 });
+
+const exBateau = lignes({ modele: "bateau", aRepasser: true, largeur: 280 });
+
+const exSonsComposes = etiquettes({
+  cases: ["ou", "ch", "on", "oi"],
+  largeur: 280,
+});
+
+const exChou = lignes({ modele: "chou", aRepasser: true, largeur: 260 });
+
+const exTroisGraphies = etiquettes({
+  cases: ["o", "au", "eau"],
+  largeur: 260,
+});
+
+const exDeuxSonsDuC = perso({
+  personnage: "teo",
+  pose: "montre",
+  expression: "surpris",
+  bulle: { texte: "cari, cerise" },
+  largeur: 240,
+});
+
 // ─── La fiche ─────────────────────────────────────────────────────────────────
 
 export const ficheGraphemesCp: FicheCoursData = {
@@ -307,16 +345,38 @@ export const ficheGraphemesCp: FicheCoursData = {
     "Le b a son ventre à droite du bâton, le d à gauche.",
     "ou, ch, on, oi : deux lettres, un seul son.",
   ],
+  /* ⭐ Dix exercices, huit avec un support. Cinq font ÉCRIRE, comme le BO le
+     demande. Les corrections s'impriment sur leur propre page. */
   entrainement: [
     {
-      question: "Quelle est l'intruse : b, m, i, r ?",
-      correction: "« i » : c'est la seule voyelle, les trois autres sont des consonnes.",
+      question: "Barre l'intruse : trois consonnes et une voyelle.",
+      correction: "On barre « i » : c'est la seule voyelle.",
+      schema: exVoyellesEtIntruse,
       micros: ["cp_gph_voyelles"],
     },
     {
-      question: "Dans « bateau », le premier b a son ventre de quel côté du bâton ?",
-      correction: "À droite. Le ventre à gauche, ce serait un d.",
+      question: "Repasse les six voyelles, puis écris-les seul.",
+      correction: "a, e, i, o, u, y. La dernière est celle qu'on oublie.",
+      schema: exToutesLesVoyelles,
+      micros: ["cp_gph_voyelles"],
+    },
+    {
+      question: "Repasse les jumeaux, puis entoure en bleu tous les b.",
+      correction: "Le b a son ventre à DROITE du bâton, le d à gauche.",
+      schema: exJumeaux,
       micros: ["cp_gph_consonnes_simples"],
+    },
+    {
+      question: "Copie « bateau ». De quel côté du bâton se met le ventre du b ?",
+      correction: "À droite. Le ventre à gauche, ce serait « dateau ».",
+      schema: exBateau,
+      micros: ["cp_gph_consonnes_simples"],
+    },
+    {
+      question: "Entoure les groupes de deux lettres qui ne font qu'un seul son.",
+      correction: "Tous les quatre : ou, ch, on, oi. Ils ne se coupent jamais.",
+      schema: exSonsComposes,
+      micros: ["cp_gph_sons_composes"],
     },
     {
       question: "Combien de lettres font le son ou dans « chou » ?",
@@ -324,13 +384,26 @@ export const ficheGraphemesCp: FicheCoursData = {
       micros: ["cp_gph_sons_composes"],
     },
     {
+      question: "Repasse « chou », puis colorie les deux lettres qui font le son ou.",
+      correction: "« ou », à la fin. Le « ch » du début est lui aussi deux lettres pour un son.",
+      schema: exChou,
+      micros: ["cp_gph_sons_composes", "cp_gph_ecrire_son"],
+    },
+    {
+      question: "Écris sous chaque case un mot qui écrit le son o de cette façon.",
+      correction: "o → moto. au → jaune. eau → bateau.",
+      schema: exTroisGraphies,
+      micros: ["cp_gph_ecrire_son"],
+    },
+    {
       question: "Écris le mot qu'on entend : ch — a — t.",
       correction: "« chat ». Le ch s'écrit avec deux lettres, et le t de la fin ne s'entend pas.",
       micros: ["cp_gph_ecrire_son"],
     },
     {
-      question: "Dans « moto » et « bateau », entend-on le même son à la fin ?",
-      correction: "Oui, le son o. Mais il s'écrit o dans l'un et eau dans l'autre.",
+      question: "Colorie la lettre c dans les deux mots. Se lit-elle pareil ?",
+      correction: "Non : le c de « cari » et celui de « cerise » ne font pas le même son. Même lettre, deux sons.",
+      schema: exDeuxSonsDuC,
       micros: ["cp_gph_defi"],
     },
   ],

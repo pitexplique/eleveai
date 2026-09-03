@@ -193,6 +193,66 @@ const leMargouillat = perso({
   largeur: 300,
 });
 
+/* ─── Les dessins DES EXERCICES ────────────────────────────────────────────────
+   ⭐⭐ AU CYCLE 2, UN EXERCICE SE FAIT AU CRAYON (règle posée le 03/09/2026).
+   ⛔ Et ces dessins-là ne portent NI `consigne` NI `legende` : l'énoncé numéroté
+   est déjà la consigne, et la répéter sous le dessin fait deux déchiffrages
+   pour une seule instruction. */
+
+const exEtreATrous = tableau({
+  infinitif: "être",
+  temps: "présent",
+  lignes: [
+    { pronom: "je", radical: "", terminaison: "…" },
+    { pronom: "tu", radical: "", terminaison: "es" },
+    { pronom: "il", radical: "", terminaison: "…" },
+    { pronom: "nous", radical: "", terminaison: "sommes" },
+    { pronom: "vous", radical: "", terminaison: "…" },
+    { pronom: "ils", radical: "", terminaison: "sont", alerte: true },
+  ],
+  largeur: 260,
+});
+
+const exAvoirATrous = tableau({
+  infinitif: "avoir",
+  temps: "présent",
+  lignes: [
+    { pronom: "j'", radical: "", terminaison: "ai" },
+    { pronom: "tu", radical: "", terminaison: "…" },
+    { pronom: "il", radical: "", terminaison: "a" },
+    { pronom: "nous", radical: "", terminaison: "…" },
+    { pronom: "vous", radical: "", terminaison: "avez" },
+    { pronom: "ils", radical: "", terminaison: "…", alerte: true },
+  ],
+  largeur: 260,
+});
+
+const exUnOuPlusieurs = perso({
+  personnage: "teo",
+  pose: "debout",
+  expression: "pense",
+  bulle: { texte: "Ils sont deux ?", forme: "pensee" },
+  largeur: 220,
+});
+
+const exLaMarqueMuette = wagons({
+  pronom: "ils",
+  segments: [
+    { texte: "chant", role: "radical" },
+    { texte: "ent", role: "personne", alerte: true },
+  ],
+  largeur: 260,
+});
+
+const exAvecNous = wagons({
+  pronom: "nous",
+  segments: [
+    { texte: "jou", role: "radical" },
+    { texte: "ons", role: "personne", alerte: true },
+  ],
+  largeur: 260,
+});
+
 // ─── La fiche ─────────────────────────────────────────────────────────────────
 
 export const ficheConjugaisonCp: FicheCoursData = {
@@ -289,10 +349,19 @@ export const ficheConjugaisonCp: FicheCoursData = {
     "Avoir : j'ai, tu as, il a, nous avons, vous avez, ils ont.",
     "Avec « nous » : -ons. Avec « ils » : -ent, et ça ne s'entend pas.",
   ],
+  /* ⭐ Dix exercices, sept avec un support à faire au crayon. Les corrections
+     s'impriment sur leur propre page : la feuille de l'enfant ne porte plus la
+     réponse sous la question. */
   entrainement: [
     {
+      question: "Complète le tableau du verbe être : je …, il …, vous ….",
+      correction: "je suis, il est, vous êtes.",
+      schema: exEtreATrous,
+      micros: ["cp_conj_etre_present"],
+    },
+    {
       question: "« Le margouillat ___ sur le mur. » (verbe être)",
-      correction: "« est ».",
+      correction: "« est ». Un seul margouillat : je le remplace par « il » dans ma tête.",
       micros: ["cp_conj_etre_present"],
     },
     {
@@ -301,14 +370,38 @@ export const ficheConjugaisonCp: FicheCoursData = {
       micros: ["cp_conj_etre_present"],
     },
     {
+      question: "Complète le tableau du verbe avoir : tu …, nous …, ils ….",
+      correction: "tu as, nous avons, ils ont.",
+      schema: exAvoirATrous,
+      micros: ["cp_conj_avoir_present"],
+    },
+    {
       question: "« Nous ___ faim. » (verbe avoir)",
       correction: "« avons » — avec « nous », le verbe finit presque toujours par -ons.",
       micros: ["cp_conj_avoir_present"],
     },
     {
-      question: "« Il chante » et « ils chantent » : entend-on une différence ?",
-      correction: "Non, ça se dit pareil. Seul l'œil voit.",
+      question: "Entoure le pronom, puis colorie la fin du verbe.",
+      correction: "On entoure « nous » et on colorie « ons » : nous jouons.",
+      schema: exAvecNous,
       micros: ["cp_conj_formes_verbales"],
+    },
+    {
+      question: "Colorie la partie du verbe qu'on n'entend pas.",
+      correction: "« ent ». « il chante » et « ils chantent » se disent pareil.",
+      schema: exLaMarqueMuette,
+      micros: ["cp_conj_formes_verbales"],
+    },
+    {
+      question: "« Il chante » et « ils chantent » : entend-on une différence ?",
+      correction: "Non, ça se dit pareil. Seul l'œil voit le « s » et le « -ent ».",
+      micros: ["cp_conj_formes_verbales"],
+    },
+    {
+      question: "Compte d'abord : sont-ils un ou plusieurs ? Écris ensuite le verbe être.",
+      correction: "Ils sont deux, donc « ils sont ». On compte AVANT d'écrire.",
+      schema: exUnOuPlusieurs,
+      micros: ["cp_conj_defi"],
     },
     {
       question: "« Ils jou___ dans la cour. »",
