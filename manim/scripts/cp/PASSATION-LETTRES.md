@@ -15,7 +15,9 @@ départ → le **tracé lent mené par un stylo** → deux reprises plus rapides
 **« a comme… »** cinq mots, chacun avec son dessin → **« On essaie un autre
 mot ? »** → **Ti-Margo**.
 
-Commence par **`e`**, puis `i`, `o`, `u` (les voyelles) avant les consonnes.
+**État au 03/09/2026 (soir).** `a` **et** `i` sont faits, rendus en 1080p60,
+vignettes comprises, et commités. Le `a` est **en ligne sur YouTube**.
+👉 **La suite est `o`, puis `u`.** ⛔ **PAS `e`** — voir « Le piège du `e` ».
 
 ---
 
@@ -64,11 +66,78 @@ LETTRE **et** par le SON (« âne » aurait le son sans la lettre nue).
 
 ---
 
+## ⛔⛔ Les six pièges payés le 03/09 — à ne pas repayer
+
+**6. Le stylo ne suit PAS le chemin.** Il suivait la normale au segment : sur le
+rond du `a` la tangente fait un tour complet, donc le stylo tournait avec elle et
+finissait **couché vers la gauche — la prise d'un gaucher**, projetée à toute la
+classe. Angle **constant** (`ANGLE_STYLO = 30°`), miroir (`PI − ANGLE_STYLO`)
+pour les gauchers. Une main ne change pas de prise en cours de lettre.
+
+**7. Quatre vidéos par lettre**, pas deux : droitier × gaucher × paysage ×
+portrait. Nommage `eleveai-francais-cp-lettre-<x>-<main>-<cadre>`.
+⛔ **Une commande de rendu par scène** : `config.frame_width` est global, un
+portrait rendu avant un paysage laisse le cadre étroit au second, et tout son
+texte déborde **sans qu'aucune erreur ne le signale**.
+⚠️ Manim range par **hauteur** : `1080p60/` = paysage, `1920p60/` = portrait.
+
+**8. Aucune image noire, jamais.** La vidéo s'ouvrait sur 3,2 s d'écran noir — la
+première phrase jouée sur du vide. La page de garde va de **0 à 1 s**, posée par
+`add` et non par `play` : un fondu d'entrée ne peut pas s'appliquer à la première
+image, il ne fait que la retarder. Elle porte `Français CP · Écriture cursive`,
+**les deux formes de la lettre** (cursive à gauche, plus grande) et **« Pour
+droitier » / « Pour gaucher »** en haut — la seule chose qui distingue les deux
+vidéos.
+
+**9. La page de fin est une PORTE, pas une signature.** « Va sur eleveai.fr /
+Essaie notre coach CP français ». On nomme le **coach français**, la porte qui
+mène au tutor — jamais l'accueil, sinon l'enfant arrive et cherche.
+⚠️ Vérifier que la page répond **avant** de l'écrire à l'écran.
+⚠️ Signature YouTube : **« Frédéric Lacoste — La Réunion 🌋 »**, sans le mot
+*enseignant* (Frédéric, 03/09).
+
+**10. Les dessins se jugent à leur TAILLE FINALE.** L'iris du `i` — trois pétales
+étroits et vides — ne faisait plus qu'un bâton une fois réduit à 0,52 dans la
+liste des mots. Le seul des cinq qui ne disait rien. Regarder l'image du rendu,
+pas le code.
+
+**11. Chaque lettre a son propre interligne dans la vignette.** Le point du `i`
+monte à 1,32 interligne là où le `a` culmine à 1,05 : au même réglage il se
+posait **sur le sous-titre**. Clé `"il"` dans `TRACES` (`manim/miniature.py`).
+Une lettre à hampe (`b`, `l`, `h`) en demandera un plus court encore.
+
+---
+
+## ⛔ Le piège du `e` — pourquoi il est reporté
+
+La règle du `a` (« cinq noms concrets qui commencent par la **lettre** ET par le
+**son** ») **n'a pas de solution pour `e`** : en position initiale, la lettre `e`
+ne fait presque jamais [ə] en français. « école » et « étoile » sont des `é`,
+« escargot » est [ɛ], « enfant » est nasal. Une vidéo qui les alignerait ferait
+entendre **quatre sons sous une seule lettre** — exactement l'erreur qu'elle est
+censée éviter.
+
+Trois voies, **non tranchées, c'est l'arbitrage de Frédéric** :
+1. « e comme **dans** cheval » — cheval, renard, melon, requin, cerise ; le `e`
+   colorié à sa place **dans** le mot. Juste, mais casse le parallélisme.
+2. Faire `o` et `u` d'abord (lettre et son coïncident) — **voie retenue le 03/09**.
+3. Forcer l'initiale malgré le son — déconseillé.
+
+⚠️ **Même pour `o` et `u`, les listes se valident.** `île` est écarté du `i` par
+la règle qui avait sorti `âne` du `a` : le circonflexe donne le son sans la
+lettre nue. Et tous les mots en `in-` (insecte, instrument) sont écartés — la
+lettre y est un `i`, mais elle se lit [ɛ̃].
+
+---
+
 ## Ce qui existe déjà et qu'on ne refait pas
 
 | | |
 |---|---|
-| `manim/scripts/cp/lettre_a.py` | le modèle : scènes 16:9 et 9:16, voix, stylo |
+| `manim/scripts/cp/lettre_a.py` | le modèle : les 4 scènes, voix, stylo, garde, fin |
+| `manim/scripts/cp/lettre_i.py` | la 2ᵉ lettre — et le geste **en deux temps** (on lève le crayon pour le point) |
+| `manim/miniature.py` → `TRACES` | le chemin de chaque lettre pour la vignette ; ajouter `o` = 5 lignes |
+| `manim/miniatures/cp/francais/` | les vignettes, 1280×720 (paysage) et 1080×1920 (portrait, = l'image 0 de la vidéo) |
 | `scripts/generer-voix.ps1` | la voix, depuis un JSON — **Julie**, voix moderne |
 | `manim/voix/cp-lettre-a.json` | les 15 phrases |
 | `public/sons/cp-lettre-a/` | les clips |
