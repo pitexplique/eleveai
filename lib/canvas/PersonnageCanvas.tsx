@@ -331,6 +331,26 @@ function Visage({ expression, coloriage }: { expression: string; coloriage: bool
     );
   }
 
+  /* ⭐⭐ LES YEUX FERMÉS SONT UNE MÉTHODE, PAS UNE HUMEUR (03/09/2026).
+     La conscience phonologique du CP se travaille en frappant dans ses mains
+     LES YEUX FERMÉS : les yeux fermés, on ne PEUT plus compter les lettres, et
+     le piège de la notion disparait au lieu d'être signalé. La bibliothèque ne
+     savait pas dessiner ça — le personnage disait « je ferme les yeux » en
+     regardant droit devant lui, et le dessin contredisait sa propre consigne.
+     Défaut vu au rendu du PDF, invisible dans le code.
+     ⚠️ La paupière tombe (∪), à l'inverse des yeux plissés de `rire` (∩) : sans
+     cette différence de courbure, les deux expressions se confondent. */
+  if (expression === "yeux_fermes") {
+    return (
+      <>
+        <path d="M 37 28 Q 42 33.5 47 28" fill="none" stroke={ENCRE} strokeWidth={2.2} strokeLinecap="round" />
+        <path d="M 53 28 Q 58 33.5 63 28" fill="none" stroke={ENCRE} strokeWidth={2.2} strokeLinecap="round" />
+        {nez}
+        <path d="M 42 41 Q 50 48 58 41" fill="none" stroke={ENCRE} strokeWidth={2.2} strokeLinecap="round" />
+      </>
+    );
+  }
+
   if (expression === "triste") {
     return (
       <>

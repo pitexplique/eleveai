@@ -180,7 +180,7 @@ photocopieur ; ici elle n'est pas imprimée, elle est POSÉE par l'élève.
 |---|---|
 | `personnage` | `nina` (couettes) · `teo` (épis) · `zoe` (boucles, lunettes) · `ravi` (casquette) · `pic`, le paille-en-queue |
 | `pose` | `debout` · `montre` (le bras tendu vers la bulle) · `bras_leves` · `marche` · `assis` (en tailleur) |
-| `expression` | `sourire` · `rire` · `surpris` · `pense` · `triste` |
+| `expression` | `sourire` · `rire` · `surpris` · `pense` · `triste` · `yeux_fermes` |
 | `bulle.forme` | `parole` · `pensee` (nuage) · `cri` (en éclats) — ⭐ **la forme EST la leçon** : déclarative, pensée, exclamative |
 | `bulle.marques` | `majuscule` et/ou `point` : le signe est ENTOURÉ dans la bulle |
 | `mode` | `coloriage` (défaut) · `couleur` |

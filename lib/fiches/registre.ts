@@ -747,6 +747,16 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Se ressembler ne suffit pas : « chapeau » n'est pas de la famille de « chat ». Familles de mots, contraires, intrus, et deviner un mot grâce à la phrase.",
   },
+  "francais/cp/conjugaison": {
+    titre: "Être et avoir au présent au CP (2026-2027)",
+    resume:
+      "« Il chante » et « ils chantent » se disent pareil : seul l'œil voit. Être, avoir, et les terminaisons qui ne s'entendent pas.",
+  },
+  "francais/cp/conscience-phonologique": {
+    titre: "Écouter les sons des mots au CP (2026-2027)",
+    resume:
+      "« margouillat » a onze lettres et trois frappes. Compter les syllabes les yeux fermés, découper, rimer, et trouver où se cache un son.",
+  },
   "francais/cm2/grammaire-nature-fonction": {
     titre: "Nature et fonction d'un mot en CM2 (2026-2027)",
     resume:

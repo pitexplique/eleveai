@@ -1680,7 +1680,13 @@ export type PersonnageExpression =
   | "rire"
   | "surpris"
   | "pense"
-  | "triste";
+  | "triste"
+  /** ⭐ Les yeux fermés ne sont pas une humeur, c'est un GESTE DE TRAVAIL :
+   *  on compte les syllabes les yeux fermés, parce qu'ainsi on ne peut plus
+   *  compter les lettres. Ajouté le 03/09/2026 pour la conscience phonologique
+   *  du CP, où le personnage annonçait « je ferme les yeux » en regardant
+   *  droit devant lui. */
+  | "yeux_fermes";
 
 export type PersonnageBulle = {
   texte: string;

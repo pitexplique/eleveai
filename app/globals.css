@@ -363,11 +363,18 @@ body {
   [data-cycle="2"] [data-rubrique="definition"] svg {
     max-width: 180px !important;
   }
-  /* ⛔ SAUF LA RÉGLURE. Le plafond de largeur ci-dessus sert à raccourcir les
-     dessins pour gagner du papier — mais des lignes d'écriture rétrécies, c'est
-     une case où l'enfant ne peut plus écrire. La réglure est le seul dessin dont
-     la largeur EST la fonction : elle reprend toute la sienne. */
-  [data-cycle="2"] .reglure svg {
+  /* ⛔ SAUF LES DESSINS DONT LA LARGEUR EST LA FONCTION. Le plafond ci-dessus
+     sert à raccourcir les dessins pour gagner du papier — mais il y a deux
+     familles qu'il abime au lieu de les réduire :
+       · `.reglure` — des lignes d'écriture rétrécies, c'est une case où
+         l'enfant ne peut plus écrire ;
+       · `.dessin-mots` — un dessin qui PORTE DU TEXTE (le tableau de
+         conjugaison, les wagons du verbe) : le rétrécir ne le raccourcit pas,
+         il rend ses mots illisibles. Mesuré le 03/09 sur la fiche de
+         conjugaison, où « muet » tombait sous le plancher de lecture.
+     Les deux reprennent toute leur largeur. */
+  [data-cycle="2"] .reglure svg,
+  [data-cycle="2"] .dessin-mots svg {
     max-width: none !important;
   }
   [data-cycle="2"] [data-rubrique="aRetenir"] li {
