@@ -454,6 +454,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Une vitesse n'est ni une distance ni une durée : c'est le rapport des deux. Et deux évolutions successives se multiplient — +20 % puis −20 % ne ramène pas au prix de départ.",
   },
+  "maths/3e/stat-statistique": {
+    titre: "Statistiques : lire une série, et choisir ce qui la résume",
+    resume:
+      "Le salaire moyen d'une entreprise peut ne décrire personne. Moyenne, médiane, étendue : trois nombres, trois questions — et une seule valeur extrême suffit à rendre la moyenne trompeuse.",
+  },
   "maths/3e/pythagore-theoreme": {
     titre: "Pythagore, sa réciproque, et la rédaction attendue",
     resume:
