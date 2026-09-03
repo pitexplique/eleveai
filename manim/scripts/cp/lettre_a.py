@@ -23,10 +23,22 @@
 # côté droit, sort vers la lettre suivante).
 #
 # ⛔ TOUJOURS --disable_caching : sans lui, les sons sautent (voir `dire`).
-# Rendu 16:9   : python -m manim render -qh --disable_caching manim/scripts/cp/lettre_a.py LettreACp \
-#                  -o eleveai-francais-cp-lettre-a --media_dir manim/scripts/cp/media
-# Rendu 9:16   : python -m manim render -qh --disable_caching -r 1080,1920 manim/scripts/cp/lettre_a.py LettreACpShort \
-#                  -o eleveai-francais-cp-lettre-a-short --media_dir manim/scripts/cp/media
+# ⛔ UNE COMMANDE PAR SCÈNE : le cadre logique du portrait est global, il
+#    déborderait sur un paysage rendu dans le même processus.
+#
+# ⭐ NOM DE SORTIE : <lettre>-<main>-<cadre>. Frédéric, 03/09 : « à nommer
+#   eleveai-francais-cp-lettre-a-droitier ou gaucher », « rajoute paysage ou
+#   portrait dans le titre ». Quatre fichiers par lettre, aucun ambigu — un mp4
+#   sans main ni cadre dans son nom est un reliquat, il se supprime.
+#
+# paysage droitier  : python -m manim render -qh --disable_caching manim/scripts/cp/lettre_a.py LettreACp \
+#                       -o eleveai-francais-cp-lettre-a-droitier-paysage --media_dir manim/scripts/cp/media
+# paysage gaucher   : python -m manim render -qh --disable_caching manim/scripts/cp/lettre_a.py LettreACpGaucher \
+#                       -o eleveai-francais-cp-lettre-a-gaucher-paysage --media_dir manim/scripts/cp/media
+# portrait droitier : python -m manim render -qh --disable_caching -r 1080,1920 manim/scripts/cp/lettre_a.py LettreACpPortrait \
+#                       -o eleveai-francais-cp-lettre-a-droitier-portrait --media_dir manim/scripts/cp/media
+# portrait gaucher  : python -m manim render -qh --disable_caching -r 1080,1920 manim/scripts/cp/lettre_a.py LettreACpPortraitGaucher \
+#                       -o eleveai-francais-cp-lettre-a-gaucher-portrait --media_dir manim/scripts/cp/media
 
 import sys
 from pathlib import Path
@@ -105,18 +117,32 @@ def chemin_a(stroke_width: float = 10, color: str = WHITE) -> VMobject:
 
 
 # ─── Le stylo qui écrit ───────────────────────────────────────────────────────
-# ⭐⭐ IDÉE DE FRÉDÉRIC (02/09/2026) : « oriente-le comme le vecteur normal au
-# segment, il est facile à calculer ». Sans stylo, on voit un trait APPARAITRE ;
-# avec lui, on voit quelqu'un ÉCRIRE — et c'est toute la différence pour un
-# enfant qui doit reproduire le geste.
+# ⭐⭐ Sans stylo, on voit un trait APPARAITRE ; avec lui, on voit quelqu'un
+# ÉCRIRE — et c'est toute la différence pour un enfant qui doit reproduire le
+# geste. Le stylo est bâti la POINTE À L'ORIGINE, corps vers le haut ; on le
+# couche une fois pour toutes, et on ne déplace plus que sa pointe.
 #
-# La normale d'une tangente (tx, ty) est (−ty, tx) : une soustraction et une
-# permutation, rien de plus. Le stylo est bâti la POINTE À L'ORIGINE, corps vers
-# le haut ; à chaque image on le tourne de l'angle de la normale et on pose sa
-# pointe sur le point courant du chemin.
+# ⛔⛔ CE QU'IL NE FAUT PAS REFAIRE : ORIENTER LE STYLO SUR LE CHEMIN.
+# Première version (02/09) : le stylo suivait la NORMALE au segment, (−ty, tx).
+# Le calcul est juste — une soustraction et une permutation — et le résultat est
+# faux. Sur le rond du « a » la tangente fait UN TOUR COMPLET, donc le stylo
+# tourne avec elle : il part couché vers le bas à gauche, se redresse au sommet,
+# bascule à droite en redescendant. Personne n'écrit comme ça.
+# ⭐ Et couché à gauche, c'est la main d'un GAUCHER — projetée à toute la
+# classe, sur la seule vidéo dont l'objet est la prise du stylo.
+# Frédéric au rendu (03/09/2026) : « 30 degrés par rapport à l'horizontal, et on
+# est sur droitier pas gaucher ».
+#
+# ⭐ UNE MAIN NE CHANGE PAS DE PRISE EN COURS DE LETTRE. L'angle est donc
+# CONSTANT, et le corps penche vers la DROITE, du côté de l'épaule du droitier.
+# Seule la pointe se déplace. C'est une ligne de moins que la normale, et c'est
+# le geste juste.
 
 LONGUEUR_STYLO = 1.15
 EPS = 1e-3
+# L'angle du CORPS du stylo avec l'horizontale. Le droitier l'ouvre vers la
+# droite ; le gaucher est son MIROIR par la verticale, soit PI − ANGLE_STYLO.
+ANGLE_STYLO = 30 * DEGREES
 
 
 def stylo_neuf() -> VGroup:
@@ -142,21 +168,18 @@ def stylo_neuf() -> VGroup:
     return VGroup(corps, pointe)
 
 
-def poser_stylo(stylo: VGroup, modele: VGroup, chemin: VMobject, s: float) -> None:
-    """Pose la pointe sur le chemin à l'abscisse `s`, inclinée selon la NORMALE.
+def poser_stylo(
+    stylo: VGroup, modele: VGroup, chemin: VMobject, s: float, angle: float
+) -> None:
+    """Pose la POINTE sur le chemin à l'abscisse `s`. L'inclinaison ne bouge pas.
 
     ⚠️ On borne `s` : `point_from_proportion` refuse 0 et 1 exactement sur
-    certains chemins composés, et une tangente nulle ferait un `atan2(0, 0)`.
+    certains chemins composés.
     """
     s = min(max(s, EPS), 1 - EPS)
     p = chemin.point_from_proportion(s)
-    q = chemin.point_from_proportion(min(s + EPS, 1 - EPS))
-    tangente = q - p
-    if np.linalg.norm(tangente) < 1e-9:
-        tangente = np.array([1.0, 0.0, 0.0])
-    normale = np.array([-tangente[1], tangente[0], 0.0])
-    normale /= np.linalg.norm(normale)
-    angle = np.arctan2(normale[1], normale[0])
+    # Le modèle est bâti corps vers le haut (90°) : on le couche à `angle`, puis
+    # on pose sa pointe — qui est son origine — sur le point courant.
     stylo.become(modele.copy().rotate(angle - PI / 2, about_point=ORIGIN).shift(p))
 
 
@@ -273,7 +296,7 @@ DUREE = {
     "00-aujourdhui": 3.17, "01-ecoute": 2.99, "02-regarde": 3.02, "03-depart": 6.70,
     "04-encore": 2.92, "05-cherchons": 4.12, "05-a-comme": 1.58, "06-arbre": 1.46,
     "07-avion": 1.47, "08-ami": 1.36, "09-animal": 1.68, "10-abricot": 1.65,
-    "10-pareil": 4.71, "11-relance": 3.60, "12-signature": 2.95,
+    "10-pareil": 4.71, "11-relance": 3.60, "12-va-sur": 3.16, "13-coach": 3.25,
 }
 CLIPS_MOTS = ["06-arbre", "07-avion", "08-ami", "09-animal", "10-abricot"]
 
@@ -282,6 +305,7 @@ class _LettreABase(Scene):
     """Le contenu, écrit une fois. Les deux formats n'en changent que le cadre."""
 
     vertical = False
+    gaucher = False
 
     def dire(self, nom: str) -> float:
         """Joue un clip de voix ici, et rend sa durée pour caler l'attente.
@@ -308,7 +332,7 @@ class _LettreABase(Scene):
         # phonéticiens, elle ne dit rien à un enfant de six ans — et elle
         # ajoutait deux signes à lire là où on veut qu'il n'en lise qu'un.
         son = Text("a", font_size=150, color=JAUNE_TITRE)
-        titre = Text("le son", font_size=44, color=BLEU_CALCUL).next_to(son, UP, buff=0.5)
+        titre = Text("la lettre", font_size=44, color=BLEU_CALCUL).next_to(son, UP, buff=0.5)
         # ⭐ TI-MARGO OUVRE ET FERME LA VIDÉO, ET RIEN ENTRE LES DEUX.
         # `manim/REGLES.md` le veut « sur chaque écran » ; Frédéric a tranché
         # autrement pour celle-ci (02/09) : « pas sur chaque écran, mais sur
@@ -323,15 +347,115 @@ class _LettreABase(Scene):
         else:
             margo.to_edge(RIGHT, buff=1.1)
 
+        # ── 0. LA PAGE DE GARDE : DE 0 À 1 SECONDE, PAS UNE DE PLUS ─────────
+        # ⛔⛔ LA VIDÉO S'OUVRAIT SUR 3,2 s D'ÉCRAN NOIR. La première phrase se
+        # jouait sur du vide, et le titre mettait encore une seconde à monter en
+        # fondu : 4,2 s avant que rien ne soit lisible. Frédéric, 03/09 : « rien
+        # n'apparait avant 4 ou 5 secondes », puis « ça doit commencer au bout
+        # d'1 seconde et la page de garde de 0 à 1 seconde ». Sur un Reel ou un
+        # Short, c'est là que le spectateur décide — et il décidait sur du noir.
+        #
+        # ⭐ ELLE EST POSÉE PAR `add`, PAS PAR `play` : un fondu d'entrée ne peut
+        # pas s'appliquer à la première image, il ne fait que la retarder. Il
+        # n'existe donc aucun instant où l'écran est vide.
+        # ⭐ 0,75 s d'affichage + 0,25 s de fondu croisé = LA SECONDE EXACTE. La
+        # voix part à 1,000 s, et tout le reste de la vidéo est décalé d'autant.
+        #
+        # ⭐ TITRE AU FORMAT DE `manim/REGLES.md` (« Maths <classe> · <notion> »),
+        # décliné en français. Frédéric, 03/09 : « Francais 6eme - Ecriture
+        # cursive - lettre a par exemple ».
+        # ⚠️ LA CLASSE ÉCRITE EST **CP**, PAS 6e : le format était donné en
+        # exemple, mais cette vidéo enseigne le tracé de la lettre — micros
+        # `cp_gph_voyelles` et `cp_copie_lettre`. Une classe fausse sur la page
+        # de garde est la première chose que verrait un parent.
+        #
+        # ⭐ LES DEUX FORMES DE LA LETTRE CÔTE À CÔTE : l'imprimée qu'il lit,
+        # la cursive qu'il va écrire. C'est le sujet de la vidéo en une image —
+        # et c'est l'image que la vignette doit montrer.
+        # ⚠️ LE PORTRAIT A SES PROPRES TAILLES, il ne se déduit pas du paysage.
+        # Avec celles du 16:9, « Écriture cursive » touchait les deux bords du
+        # cadre 4,5 ; la mise à l'échelle de secours rattrapait le débordement —
+        # en écrasant TOUT le bloc, Ti-Margo compris, réduit à un timbre. Le
+        # garde-fou avait fonctionné, et le résultat était mauvais quand même.
+        garde_classe = Text(
+            "Français CP", font_size=34 if not self.vertical else 26, color=BLEU_CALCUL
+        )
+        garde_notion = Text(
+            "Écriture cursive",
+            font_size=54 if not self.vertical else 40,
+            color=JAUNE_TITRE,
+        )
+        # ⭐ LA CURSIVE D'ABORD, ET PLUS GRANDE. Elle était à droite et de même
+        # taille : on lit de gauche à droite, donc l'imprimée ouvrait une vidéo
+        # qui s'appelle « Écriture cursive ». Le sujet passe devant.
+        # ⭐ MAIS L'IMPRIMÉE RESTE. Dans la seconde moitié, « arbre », « avion »,
+        # « ami » sont écrits en imprimé avec l'initiale en jaune : ce « a »-là
+        # apparaitra de toute façon. S'il n'a jamais été montré, l'enfant le
+        # rencontre pour la première fois au milieu d'un mot, sans que personne
+        # le lui ait nommé — et la correspondance entre les deux écritures d'une
+        # lettre est une compétence du CP, pas un décor.
+        garde_imp = Text(
+            "a", font_size=96 if not self.vertical else 76, color=JAUNE_TITRE
+        )
+        garde_cur = chemin_a(stroke_width=12)
+        garde_cur.height = garde_imp.height * 1.9
+        duo = VGroup(garde_cur, garde_imp).arrange(RIGHT, buff=0.8)
+        coeur = VGroup(garde_classe, garde_notion, duo).arrange(DOWN, buff=0.38)
+        # ⚠️ `Group` et non `VGroup` : Ti-Margo est un ImageMobject, un VGroup
+        # le refuse.
+        margo_garde = MascotteMargouillat().scale(0.7 if not self.vertical else 0.62)
+        if self.vertical:
+            garde = Group(coeur, margo_garde).arrange(DOWN, buff=0.5)
+        else:
+            garde = Group(coeur, margo_garde).arrange(RIGHT, buff=1.0)
+        # ⚠️ La garde se remet à l'échelle du cadre : le portrait fait 4,5 de
+        # large, et sans ça le titre en sort sans qu'aucune erreur ne le dise.
+        # ⚠️ La hauteur disponible retire 1,8 et non 0,8 : la mention de la main
+        # occupe le haut du cadre, le bloc ne doit pas monter dedans.
+        garde.scale(
+            min(
+                1.0,
+                (config.frame_width - 0.8) / garde.width,
+                (config.frame_height - 1.8) / garde.height,
+            )
+        ).move_to(ORIGIN)
+
+        # ⭐⭐ LA MAIN S'ANNONCE EN HAUT. Frédéric, 03/09 : « il faut juste
+        # rajouter en haut Pour Droitier ou pour Gaucher ».
+        # C'est la SEULE chose qui distingue les deux vidéos : elles ont le même
+        # titre, la même durée, la même voix, et à la vignette la même image.
+        # Sans cette ligne, un parent qui tombe sur un Reel ne sait pas s'il
+        # regarde celle de son enfant — et un gaucher apprendrait la prise de
+        # l'autre main sans que personne ne s'en aperçoive.
+        # ⚠️ En haut du CADRE (`to_edge`), pas en haut du bloc : elle doit se
+        # lire comme une mention, pas comme la première ligne du titre.
+        garde_main = Text(
+            "Pour gaucher" if self.gaucher else "Pour droitier",
+            font_size=32 if not self.vertical else 26,
+        )
+        garde_main.to_edge(UP, buff=0.45)
+        self.add(garde, garde_main)
+        self.wait(0.75)
+
+        # ── 1 bis. L'ACCUEIL PREND LA SUITE, À LA SECONDE PILE ──────────────
+        self.play(
+            FadeOut(garde),
+            FadeOut(garde_main),
+            FadeIn(titre),
+            FadeIn(son),
+            FadeIn(margo),
+            run_time=0.25,
+        )
         d0 = self.dire("00-aujourdhui")
         self.wait(d0)
+        # ⭐ « la lettre » devient « le son » : le mot change, l'écran ne bouge
+        # pas. Et le « a » pulse pour dire que c'est LUI qu'on écoute.
         d = self.dire("01-ecoute")
         self.play(
-            FadeIn(titre, shift=DOWN * 0.3),
-            GrowFromCenter(son),
-            FadeIn(margo, shift=LEFT * 0.4),
+            Transform(titre, Text("le son", font_size=44, color=BLEU_CALCUL).move_to(titre)),
+            Indicate(son, scale_factor=1.25, color=JAUNE_TITRE),
         )
-        self.wait(d - 0.8)
+        self.wait(d - 1.0)
         # ⛔ LE SON SE RANGE DANS UN COIN, PAS EN HAUT AU CENTRE (corrigé au
         # rendu du 02/09). Posé à `to_edge(UP)`, il restait pile là où
         # « a comme… » vient s'écrire, et les deux se chevauchaient à l'écran.
@@ -352,11 +476,34 @@ class _LettreABase(Scene):
         groupe = VGroup(lignes, lettre)
         groupe.move_to(ORIGIN).shift(DOWN * 0.4)
 
+        # ⭐⭐ L'IMPRIMÉE DEVIENT LA CURSIVE — LA LEÇON EN UNE ANIMATION.
+        # C'est ici que la vidéo bascule de la lecture vers l'écriture, et c'est
+        # donc ici que les deux écritures de la lettre doivent se rejoindre :
+        # celle du livre se déforme en celle du cahier. Le programme du CP
+        # demande cette correspondance ; une seconde d'animation la montre mieux
+        # qu'une phrase que l'enfant ne sait pas encore lire.
+        # ⭐ ET LA CURSIVE RESTE, EN GRIS : c'est le MODÈLE À REPASSER, comme la
+        # ligne pointillée de la réglure. Le tracé blanc passera dessus. (La
+        # maquette HTML l'avait déjà sous le nom `fond` ; le Python ne l'avait
+        # pas — les deux sont enfin d'accord.)
+        # ⚠️ TOUT TIENT DANS LES 3,02 s DE LA PHRASE : 0,8 + 0,3 + 0,8 + 0,5,
+        # puis l'attente absorbe le reste. Ajouté à la suite, ça faisait 1,2 s
+        # de silence de plus avant le tracé.
+        modele = chemin_a(
+            stroke_width=14 if not self.vertical else 16, color=GREY_D
+        )
+        modele.match_points(lettre)
+        imprime = Text(
+            "a", font_size=110 if not self.vertical else 90, color=JAUNE_TITRE
+        ).move_to(modele)
+
         d = self.dire("02-regarde")
         self.play(Create(lignes), run_time=0.8)
+        self.play(FadeIn(imprime, scale=0.85), run_time=0.3)
+        self.play(Transform(imprime, modele), run_time=0.8)
         point = Dot(lettre.get_start(), radius=0.14, color=VERT_OK)
-        self.play(FadeIn(point, scale=2))
-        self.wait(max(0.4, d - 1.4))
+        self.play(FadeIn(point, scale=2), run_time=0.5)
+        self.wait(max(0.3, d - 2.4))
 
         # ⭐ LE TRACÉ EST LENT, D'UN SEUL TENANT, ET LE STYLO LE MÈNE.
         # Un seul `ValueTracker` pilote les deux : le trait qui se dessine et le
@@ -375,8 +522,10 @@ class _LettreABase(Scene):
                 )
             )
         )
+        # ⭐ LA SEULE LIGNE QUI SÉPARE LA VIDÉO DU GAUCHER DE CELLE DU DROITIER.
+        angle_main = PI - ANGLE_STYLO if self.gaucher else ANGLE_STYLO
         stylo.add_updater(
-            lambda m: poser_stylo(m, modele_stylo, lettre, avance.get_value())
+            lambda m: poser_stylo(m, modele_stylo, lettre, avance.get_value(), angle_main)
         )
 
         self.remove(lettre)
@@ -403,7 +552,9 @@ class _LettreABase(Scene):
             self.play(Create(trace), run_time=duree, rate_func=linear)
             self.wait(0.4)
 
-        self.play(FadeOut(point), FadeOut(lignes))
+        # ⚠️ `imprime` porte le MODÈLE GRIS depuis le Transform : il sort avec la
+        # réglure. Oublié, il resterait seul à l'écran sous les cinq mots.
+        self.play(FadeOut(point), FadeOut(lignes), FadeOut(imprime))
         lettre = trace
 
         # ── 4. « a » COMME… CINQ MOTS, CHACUN AVEC SON DESSIN ───────────────
@@ -474,29 +625,73 @@ class _LettreABase(Scene):
         self.wait(max(0.8, d - 1.4))
         self.play(FadeOut(relance), FadeOut(son))
 
-        # ── 5. SIGNATURE ────────────────────────────────────────────────────
+        # ── 5. LA PAGE DE FIN : OÙ ALLER MAINTENANT ─────────────────────────
+        # ⛔ CE N'EST PLUS UNE SIGNATURE, C'EST UNE PORTE. Elle disait « EleveAI
+        # — Ti Margo » : un nom, et rien à faire ensuite. Frédéric, 03/09 :
+        # « Va sur eleveai.fr / Essaie notre coach CP français ».
+        # ⭐ ON NOMME LE COACH FRANÇAIS, PAS L'ACCUEIL NI UNE FICHE : c'est « la
+        # source première qui va vers le tutor ». Une vidéo qui déverse sur
+        # l'accueil laisse l'enfant chercher ; celle-ci le pose devant sa série.
+        # ⚠️ VÉRIFIÉ AVANT DE L'ÉCRIRE À L'ÉCRAN : /coach-ia/francais?classe=cp
+        # répond en production — « Français CP », 16 notions, 96 séries. Une
+        # vidéo qui envoie vers une page absente est pire que pas d'appel.
+        # ⚠️ LA VOIX A ÉTÉ REFAITE AVEC. L'ancien clip « 12-signature » disait
+        # « Elève AI, avec Ti Margo » et ne collait plus à l'écran ; il est
+        # remplacé par DEUX clips, un par ligne, pour que chacune arrive avec sa
+        # phrase et non après elle.
         # ⚠️ `MascotteMargouillat` ne prend PAS de `scale` en argument : son
         # `__init__` ne transmet que les kwargs d'ImageMobject et fixe la
         # hauteur. Tous les scripts existants font `.scale(...)` après coup.
-        # ⚠️ On REPREND le même Ti-Margo, on n'en crée pas un second : il a
-        # accompagné toute la vidéo depuis son coin, il revient au centre.
-        signe = Text("EleveAI — Ti Margo", font_size=40, color=BLEU_CALCUL)
-        signe.move_to(DOWN * 2.3)
         # ⚠️ On REPREND le même Ti-Margo — il ouvrait la vidéo, il la ferme.
-        margo.scale(0.75).move_to(UP * 0.7)
-        d = self.dire("12-signature")
-        self.play(FadeIn(margo, shift=UP * 0.3), FadeIn(signe, shift=UP * 0.3))
-        self.wait(max(1.2, d - 0.8))
+        fin_url = Text(
+            "Va sur eleveai.fr",
+            font_size=54 if not self.vertical else 40,
+            color=JAUNE_TITRE,
+        )
+        fin_coach = Text(
+            "Essaie notre coach CP français",
+            font_size=38 if not self.vertical else 27,
+            color=BLEU_CALCUL,
+        )
+        bloc_fin = VGroup(fin_url, fin_coach).arrange(DOWN, buff=0.45)
+        margo.scale(0.75)
+        page_fin = Group(margo, bloc_fin).arrange(DOWN, buff=0.55)
+        page_fin.scale(
+            min(
+                1.0,
+                (config.frame_width - 0.8) / page_fin.width,
+                (config.frame_height - 0.8) / page_fin.height,
+            )
+        ).move_to(ORIGIN)
+
+        d1 = self.dire("12-va-sur")
+        self.play(FadeIn(margo, shift=UP * 0.3), FadeIn(fin_url, shift=UP * 0.3))
+        self.wait(max(0.4, d1 - 1.0))
+        d2 = self.dire("13-coach")
+        self.play(FadeIn(fin_coach, shift=UP * 0.3))
+        self.wait(max(1.2, d2 - 1.0))
 
 
-class LettreACp(_LettreABase):
-    """16:9 — YouTube."""
+# ─── Les quatre variantes : deux mains × deux cadres ──────────────────────────
+# ⭐⭐ UNE VIDÉO POUR LES GAUCHERS. Frédéric, 03/09/2026 : « il faut video
+# droitier et une gaucher en format paysage et pour portrait ».
+# Ils sont environ un enfant sur dix dans la classe, et ce sont eux qui peinent
+# le plus à l'écriture. Un gaucher à qui on ne montre que la main droite apprend
+# à se corriger d'une chose qui n'est pas une faute — sur la seule vidéo dont
+# l'objet EST la tenue du stylo. Et ça coute une constante.
+#
+# ⚠️ LE TRACÉ NE CHANGE PAS : une lettre s'écrit dans le même sens des deux
+# mains, même départ, même sens de rotation. Seule l'inclinaison du stylo
+# bascule, en miroir de la verticale. Rien d'autre ne doit diverger.
+#
+# ⛔ RENDRE CHAQUE SCÈNE DANS SA PROPRE COMMANDE. `config.frame_width` est
+# GLOBAL et `_Portrait.__init__` l'écrase : enchainer un portrait puis un
+# paysage dans le même processus laisse le cadre étroit au second, et tout son
+# texte déborde sans qu'aucune erreur ne le signale.
 
-    vertical = False
 
-
-class LettreACpShort(_LettreABase):
-    """9:16 — Shorts et Instagram.
+class _Portrait:
+    """9:16 — Shorts, Reels, TikTok.
 
     ⚠️ LE CADRE LOGIQUE S'IMPOSE DANS `__init__`, avant `super()`. Passer
     seulement `-r 1080,1920` ne change que les pixels : le cadre reste large, et
@@ -509,3 +704,23 @@ class LettreACpShort(_LettreABase):
         config.frame_height = 8.0
         config.frame_width = 4.5
         super().__init__(*args, **kwargs)
+
+
+class LettreACp(_LettreABase):
+    """16:9, droitier — YouTube."""
+
+
+class LettreACpGaucher(_LettreABase):
+    """16:9, gaucher — YouTube."""
+
+    gaucher = True
+
+
+class LettreACpPortrait(_Portrait, _LettreABase):
+    """9:16, droitier."""
+
+
+class LettreACpPortraitGaucher(_Portrait, _LettreABase):
+    """9:16, gaucher."""
+
+    gaucher = True

@@ -1127,7 +1127,143 @@ def acc_bulles_rondes(d):
     d.ellipse([bx - 12, by - 12, bx - 2, by - 2], fill=(255, 255, 255))
 
 
+# ── L'écriture cursive (CP) ───────────────────────────────────────────────────
+# ⭐⭐ LA VIGNETTE DOIT DIRE LA MAIN. Les quatre vidéos de la lettre « a » ont le
+# même titre à un mot près et la même durée : si les vignettes se ressemblent, un
+# parent télécharge la mauvaise et ne le saura jamais. C'est le STYLO PENCHÉ qui
+# les sépare au premier coup d'œil — à droite pour un droitier, à gauche pour un
+# gaucher — bien avant que le sous-titre ne soit lu.
+#
+# ⚠️ LISIBILITÉ AVANT FIDÉLITÉ : l'interligne fait 145 px et non trois fois 56.
+# Une réglure Seyès exacte tiendrait dans la bande libre (y 345→545, entre le
+# titre et la signature), mais la lettre y serait haute comme un ongle. Une
+# vignette se juge en 210 px de large dans une liste de suggestions.
+def _bezier(p0, p1, p2, p3, n=40):
+    """PIL ne sait pas tracer une Bézier : on l'échantillonne."""
+    pts = []
+    for i in range(n + 1):
+        t = i / n
+        u = 1 - t
+        pts.append((
+            u**3 * p0[0] + 3*u*u*t * p1[0] + 3*u*t*t * p2[0] + t**3 * p3[0],
+            u**3 * p0[1] + 3*u*u*t * p1[1] + 3*u*t*t * p2[1] + t**3 * p3[1],
+        ))
+    return pts
+
+
+# ⭐ LE TRACÉ DE CHAQUE LETTRE, EN MIROIR DE `manim/scripts/cp/lettre_<x>.py`.
+# ⚠️ UNE SEULE VÉRITÉ, RECOPIÉE : si la courbe change dans le script Manim, elle
+# doit changer ICI — sinon la vignette annonce une lettre qu'on ne voit pas dans
+# la vidéo. C'est le seul endroit du dépôt où cette duplication est acceptée :
+# Manim et PIL ne partagent aucun objet de dessin.
+#
+# Format : (départ, [(ctrl1, ctrl2, fin), …], point-du-i-ou-None, pose-du-stylo)
+# La « pose » dit à quel instant du tracé la pointe se pose, par main :
+# (droitier, gaucher). Les deux sont des instants VRAIS du geste.
+TRACES = {
+    "a": {
+        "depart": (0.00, 0.70),
+        "courbes": [
+            ((-0.10, 1.05), (-0.80, 1.00), (-0.80, 0.50)),
+            ((-0.80, 0.05), (-0.15, 0.05), (0.00, 0.60)),
+            # la hampe descend jusqu'à la ligne, puis la sortie
+            ((0.00, 0.40), (0.00, 0.15), (0.00, 0.00)),
+            ((0.15, -0.05), (0.30, 0.10), (0.50, 0.35)),
+        ],
+        "point": None,
+        "pose": ((0.50, 0.35), (-0.80, 0.50)),
+        "il": 145,
+    },
+    "i": {
+        "depart": (-0.44, 0.00),
+        "courbes": [
+            ((-0.32, 0.30), (-0.16, 0.64), (0.02, 0.95)),
+            ((0.07, 0.64), (0.09, 0.24), (0.18, 0.02)),
+            ((0.30, -0.02), (0.42, 0.08), (0.58, 0.26)),
+        ],
+        # ⭐ Le point du i EST sur la vignette : c'est ce qui distingue la lettre
+        # d'un simple jambage, et le geste en deux temps est la leçon du jour.
+        "point": (0.06, 1.32),
+        "pose": ((0.58, 0.26), (-0.44, 0.00)),
+        # ⛔ INTERLIGNE PLUS COURT QUE CELUI DU « a », ET C'EST OBLIGATOIRE.
+        # Le « a » culmine à 1,05 interligne, le « i » à 1,32 à cause de son
+        # point : au même interligne de 145, ce point venait se poser SUR le
+        # sous-titre « pour un GAUCHER ». Chaque lettre porte donc le sien —
+        # une lettre à hampe (b, l, h) en demandera un plus court encore.
+        "il": 118,
+    },
+}
+
+
+def acc_lettre_cursive(lettre, gaucher):
+    """La lettre cursive sur sa réglure, stylo penché du côté de la main."""
+    import math
+
+    spec = TRACES[lettre]
+
+    def dessiner(d):
+        # ⚠️ LA LETTRE GLISSE À DROITE POUR LE GAUCHER. Son stylo penche vers la
+        # gauche : il lui faut du papier vide de ce côté, sinon le corps se
+        # couche en travers de la lettre — vérifié au rendu, le « a » était à
+        # moitié masqué sur la vignette qui sert justement à le montrer.
+        IL, by = spec["il"], 530
+        bx = 500 if gaucher else 430
+        # La réglure : ligne de base forte, deux fines au-dessus.
+        d.line([(200, by), (830, by)], fill=NAVY, width=5)
+        d.line([(200, by - IL), (830, by - IL)], fill=CARREAU_FORT, width=3)
+        d.line([(200, by - IL // 2), (830, by - IL // 2)], fill=CARREAU, width=2)
+
+        def P(x, y):
+            return (bx + x * IL, by - y * IL)
+
+        cur = spec["depart"]
+        pts = [P(*cur)]
+        for c1, c2, fin in spec["courbes"]:
+            pts += _bezier(P(*cur), P(*c1), P(*c2), P(*fin))
+            cur = fin
+        d.line(pts, fill=BLEU, width=16, joint="curve")
+        if spec["point"]:
+            qx, qy = P(*spec["point"])
+            d.ellipse([qx - 13, qy - 13, qx + 13, qy + 13], fill=BLEU)
+
+        # Le stylo, posé sur la fin du tracé. ⚠️ En image l'axe y DESCEND : le
+        # sinus se soustrait pour que 30° monte au lieu de plonger.
+        # ⭐ ET SA POINTE SE POSE AILLEURS : au point le plus à GAUCHE du rond
+        # plutôt qu'en fin de sortie. Les deux sont des instants vrais du tracé ;
+        # celui-ci laisse le corps du stylo partir dans le vide.
+        a = math.radians(150 if gaucher else 30)
+        tx, ty = P(*spec["pose"][1 if gaucher else 0])
+        ux, uy = math.cos(a), -math.sin(a)
+        px, py = -uy, ux
+        long_stylo, demi = 205, 13
+
+        def pt(l, w):
+            return (tx + ux * l + px * w, ty + uy * l + py * w)
+
+        d.polygon(
+            [pt(46, -demi), pt(long_stylo, -demi), pt(long_stylo, demi), pt(46, demi)],
+            fill=NAVY, outline=(255, 255, 255),
+        )
+        d.polygon([(tx, ty), pt(46, -demi), pt(46, demi)], fill=JAUNE, outline=NAVY)
+
+    return dessiner
+
+
 NOTIONS = {
+    # ⭐ Deux vignettes par lettre : la MAIN se voit au stylo penché, bien avant
+    # que le sous-titre ne soit lu — en 210 px de large dans une liste de
+    # suggestions, c'est la seule chose qui distingue les deux vidéos.
+    **{
+        f"eleveai-francais-cp-lettre-{x}-{'gaucher' if g else 'droitier'}": {
+            "badge": "FRANÇAIS CP · ÉCRITURE",
+            "titre": ["ÉCRIRE LA", f"LETTRE {x}"], "taille": 74,
+            "sous": f"en cursive · pour un {'GAUCHER' if g else 'DROITIER'}",
+            "accroche": acc_lettre_cursive(x, g),
+            "dossier": "cp/francais",
+        }
+        for x in TRACES
+        for g in (False, True)
+    },
     "eleveai-maths-journal-aiguille-de-kakeya": {
         "badge": "LE JOURNAL · UN PEU DE MATHS", "titre": ["L'AIGUILLE", "DE KAKEYA"], "taille": 68,
         "sous": "Hong Wang · médaille Fields 2026", "accroche": acc_aiguille_kakeya,
@@ -1500,8 +1636,13 @@ def construire(nom, spec):
     if "EN VRAI" in spec.get("badge", ""):
         macaron_nou_la_fe(img, d)
 
-    os.makedirs(SORTIE, exist_ok=True)
-    chemin = SORTIE / f"{nom}.png"
+    # ⭐ `dossier` RANGE LA VIGNETTE EN SOUS-DOSSIER (Frédéric, 03/09 : « mets
+    # les miniatures dans miniatures/cp/francais »). Sans la clé, tout tombe à
+    # plat dans `manim/miniatures/` — tenable à trente vignettes, plus du tout
+    # quand chaque lettre de l'alphabet en apportera deux.
+    dossier = SORTIE / spec["dossier"] if spec.get("dossier") else SORTIE
+    os.makedirs(dossier, exist_ok=True)
+    chemin = dossier / f"{nom}.png"
     img.save(chemin, "PNG")
     print(chemin)
 
