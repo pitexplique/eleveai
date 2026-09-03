@@ -673,7 +673,31 @@ export default function FicheCoursClient({
                   <p className="font-bold text-slate-900">
                     {index + 1}. <TexteMath>{item.question}</TexteMath>
                   </p>
-                  <details className="fiche-correction mt-2">
+                  {/* ⭐ LE SUPPORT DE TRAVAIL, quand l'exercice se FAIT au
+                      crayon plutôt qu'il ne se lit. Il vient souvent du cours
+                      plus haut : l'enfant retrouve le dessin qu'il connait. */}
+                  {item.schema ? (
+                    <div className="mt-3 flex justify-center">{item.schema}</div>
+                  ) : null}
+                  {/* ⛔⛔ AU CYCLE 2, LA CORRECTION NE S'IMPRIME PAS ICI
+                      (03/09/2026). Frédéric : « s'il imprime il voit la
+                      correction, ce n'est pas une fiche d'activité mais des
+                      exercices corrigés ». C'était exact, et c'était un défaut
+                      de conception : une feuille dont la réponse est posée sous
+                      la question ne peut pas être FAITE — l'enfant a lu avant
+                      d'avoir cherché.
+                      ⚠️ Elle n'est pas supprimée pour autant : la demande du
+                      01/09 — « les exercices corrigés doivent être dans le
+                      format imprimer et pdf avec correction » — tient toujours,
+                      et le prof a besoin du corrigé. Il part simplement sur sa
+                      PROPRE PAGE, en fin de document (voir plus bas). Un parent
+                      peut alors n'imprimer que les pages d'exercices.
+                      ⭐ Sur ÉCRAN, rien ne change : le dépliant reste, parce
+                      qu'il faut un geste pour l'ouvrir. Le papier, lui, n'a pas
+                      de geste. */}
+                  <details
+                    className={`fiche-correction mt-2${estCycle2 ? " print:hidden" : ""}`}
+                  >
                     <summary className="cursor-pointer text-sm font-bold text-sky-600">
                       Voir la correction
                     </summary>
@@ -684,6 +708,32 @@ export default function FicheCoursClient({
                 </li>
               ))}
             </ol>
+
+            {/* ⭐⭐ LES CORRECTIONS, SUR LEUR PROPRE PAGE (cycle 2, impression).
+                Elles ne sont visibles qu'au papier — sur écran, ce serait un
+                doublon des dépliants ci-dessus. `.corrections-a-part` porte le
+                saut de page : la feuille de l'enfant s'arrête avant. */}
+            {estCycle2 ? (
+              <section className="corrections-a-part hidden print:block">
+                <h2 className="text-2xl font-black text-slate-900 print:text-xl">
+                  {titreRubrique("Corrections")}
+                </h2>
+                <p className="mt-1 text-xs text-slate-500">
+                  Pour l&apos;adulte. Cette page se détache de la fiche
+                  d&apos;activité.
+                </p>
+                <ol className="mt-3 grid gap-2 text-xs leading-5 text-slate-700">
+                  {fiche.entrainement.map((item, index) => (
+                    <li key={item.question}>
+                      <span className="font-bold text-slate-900">
+                        {index + 1}.
+                      </span>{" "}
+                      <TexteMath>{item.correction}</TexteMath>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            ) : null}
 
             <div className="screen-only mt-6 flex flex-wrap gap-2">
               <Link

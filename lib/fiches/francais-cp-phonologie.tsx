@@ -222,6 +222,91 @@ const laMaisonQuiRime = objets({
   largeur: 200,
 });
 
+/* ─── Les dessins DES EXERCICES ────────────────────────────────────────────────
+   ⭐⭐ AU CYCLE 2, UN EXERCICE SE FAIT AU CRAYON (Frédéric, 03/09/2026 :
+   « intégrer des images des feuilles précédentes »). Dix questions écrites, à
+   six ans, c'est dix déchiffrages avant le premier travail ; dix supports à
+   entourer, colorier ou barrer, c'est dix fois le geste qu'on enseigne.
+   ⭐ Et les dessins sont ceux DU COURS, volontairement : on ne découvre pas une
+   figure au moment d'être évalué dessus.
+   ⛔ ET AUCUNE `consigne` SUR CES DESSINS-LÀ (vu au rendu du PDF, 03/09). Le
+   canvas écrit sa consigne en légende, et l'énoncé numéroté la portait déjà :
+   la même phrase s'imprimait deux fois, au-dessus et en dessous du dessin. Pour
+   un enfant qui déchiffre encore, c'est deux lectures pour une seule
+   instruction. Ici, c'est l'énoncé qui commande ; le dessin est le support. */
+
+const exFrapper = objets({
+  elements: [
+    { quoi: "chat", label: "un chat" },
+    { quoi: "papillon", label: "un papillon" },
+  ],
+  colonnes: 2,
+  largeur: 260,
+});
+
+/* ⛔ AUCUN MOT À « E » MUET FINAL, ICI NON PLUS. « arbre », « voiture »,
+   « pomme » et « livre » étaient écrits en premier jet : ils se disent en une
+   syllabe à Paris et souvent en deux à La Réunion, et un enfant d'ici aurait eu
+   faux en comptant juste. Le pool s'en explique ; la feuille doit s'y tenir. */
+const exCompterTrois = objets({
+  elements: [
+    { quoi: "cle", label: "une clé" },
+    { quoi: "soleil", label: "un soleil" },
+    { quoi: "papillon", label: "un papillon" },
+  ],
+  colonnes: 2,
+  largeur: 280,
+});
+
+const exDecouperBateau = motDecoupe({
+  syllabes: ["ba", "teau"],
+  numerote: true,
+  largeur: 260,
+});
+
+const exRimes = objets({
+  elements: [
+    { quoi: "chapeau", label: "un chapeau" },
+    { quoi: "maison", label: "une maison" },
+    { quoi: "bateau", label: "un bateau" },
+    { quoi: "cle", label: "une clé" },
+  ],
+  colonnes: 2,
+  largeur: 280,
+});
+
+const exIntrus = objets({
+  elements: [
+    { quoi: "chat", label: "un chat" },
+    { quoi: "chapeau", label: "un chapeau" },
+    { quoi: "ballon", label: "un ballon" },
+  ],
+  colonnes: 2,
+  largeur: 280,
+});
+
+const exPosition = motDecoupe({
+  syllabes: ["pa", "pil", "lon"],
+  largeur: 260,
+});
+
+const exYeuxFermes = perso({
+  personnage: "nina",
+  pose: "bras_leves",
+  expression: "yeux_fermes",
+  bulle: { texte: "un papillon" },
+  largeur: 230,
+});
+
+const exUneSeuleFrappe = objets({
+  elements: [
+    { quoi: "fleur", label: "une fleur" },
+    { quoi: "bateau", label: "un bateau" },
+  ],
+  colonnes: 2,
+  largeur: 260,
+});
+
 // ─── La fiche ─────────────────────────────────────────────────────────────────
 
 export const fichePhonologieCp: FicheCoursData = {
@@ -321,30 +406,68 @@ export const fichePhonologieCp: FicheCoursData = {
     "Deux mots riment quand leur fin chante pareil.",
     "Un son se cache au début, au milieu ou à la fin d'un mot.",
   ],
+  /* ⭐⭐ DIX EXERCICES, ET NEUF ONT UN SUPPORT À FAIRE AU CRAYON. Les
+     corrections s'impriment sur leur PROPRE PAGE (cycle 2) : la feuille de
+     l'enfant ne porte plus la réponse sous la question.
+     ⭐ L'ordre suit la difficulté du pool : compter, découper, rimer, situer un
+     son, puis les deux à la fois. Les deux derniers sont les seuls « défis ». */
   entrainement: [
+    {
+      question: "Frappe les deux mots. Entoure celui qui a le plus de frappes.",
+      correction: "« papillon » : pa-pil-lon, trois frappes, contre une seule pour « chat ».",
+      schema: exFrapper,
+      micros: ["cp_phono_syllabe_compter"],
+    },
+    {
+      question: "Écris sous chaque mot le nombre de frappes que tu entends.",
+      correction: "clé → 1 frappe. so-leil → 2 frappes. pa-pil-lon → 3 frappes.",
+      schema: exCompterTrois,
+      micros: ["cp_phono_syllabe_compter"],
+    },
     {
       question: "Combien de syllabes entends-tu dans « chat » ?",
       correction: "Une seule frappe. Le mot a quatre lettres, mais on ne compte pas les lettres.",
       micros: ["cp_phono_syllabe_compter"],
     },
     {
-      question: "Quel mot a le plus de syllabes : « riz » ou « papillon » ?",
-      correction: "« papillon » : pa-pil-lon, trois frappes, contre une seule pour « riz ».",
+      question: "Ferme les yeux, dis le mot, et colorie une main par frappe.",
+      correction: "Trois mains coloriées : pa-pil-lon.",
+      schema: exYeuxFermes,
       micros: ["cp_phono_syllabe_compter"],
     },
     {
-      question: "Découpe « bateau » en syllabes.",
-      correction: "ba-teau. Chaque morceau se dit d'un seul souffle.",
+      question: "Entoure le mot qui n'a qu'une seule frappe.",
+      correction: "« fleur ». « bateau » en a deux : ba-teau.",
+      schema: exUneSeuleFrappe,
+      micros: ["cp_phono_syllabe_compter"],
+    },
+    {
+      question: "Colorie la première syllabe de « bateau ».",
+      correction: "« ba ». La deuxième est « teau ».",
+      schema: exDecouperBateau,
       micros: ["cp_phono_syllabe_decouper"],
     },
     {
-      question: "Est-ce que « chapeau » et « bateau » riment ?",
-      correction: "Oui : tous les deux finissent par le même son.",
+      question: "Relie les deux mots dont la fin chante pareil.",
+      correction: "« chapeau » et « bateau » : les deux finissent par le même son.",
+      schema: exRimes,
       micros: ["cp_phono_rime_reconnaitre"],
     },
     {
-      question: "Où entends-tu le son a dans « chocolat » : au début, au milieu ou à la fin ?",
-      correction: "À la fin : cho — co — lat. C'est la dernière chose qu'on entend.",
+      question: "Est-ce que « maison » et « garçon » riment ?",
+      correction: "Oui : mais-ON, gar-ÇON. La fin chante pareil, même si elle ne s'écrit pas pareil.",
+      micros: ["cp_phono_rime_reconnaitre"],
+    },
+    {
+      question: "Deux mots commencent par le même son. Barre l'intrus.",
+      correction: "On barre « ballon ». « chat » et « chapeau » commencent tous les deux par le son ch.",
+      schema: exIntrus,
+      micros: ["cp_phono_son_identifier", "cp_phono_defi"],
+    },
+    {
+      question: "Entoure la syllabe où tu entends le son on.",
+      correction: "« lon », la dernière : pa — pil — lon.",
+      schema: exPosition,
       micros: ["cp_phono_son_position", "cp_phono_defi"],
     },
   ],

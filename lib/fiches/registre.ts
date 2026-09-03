@@ -757,6 +757,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "« margouillat » a onze lettres et trois frappes. Compter les syllabes les yeux fermés, découper, rimer, et trouver où se cache un son.",
   },
+  "francais/cp/grapheme-phoneme": {
+    titre: "Des lettres aux sons au CP (2026-2027)",
+    resume:
+      "Un son s'écrit de plusieurs façons, une lettre se lit de plusieurs façons. Les voyelles, les jumeaux b et d, et ou ch on oi.",
+  },
   "francais/cm2/grammaire-nature-fonction": {
     titre: "Nature et fonction d'un mot en CM2 (2026-2027)",
     resume:

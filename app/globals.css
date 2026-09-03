@@ -211,6 +211,20 @@ body {
     color: #475569;
   }
 
+  /* ⭐⭐ LA PAGE DES CORRECTIONS SE DÉTACHE (03/09/2026).
+     La fiche d'activité du cycle 2 s'arrête à son dernier exercice ; le
+     corrigé commence sur une feuille neuve. C'est ce saut de page qui rend la
+     feuille FAISABLE — sans lui, l'enfant lit la réponse en tournant les yeux.
+     ⚠️ `break-before` ET `page-break-before` : Chrome honore la propriété
+     moderne, mais le moteur d'impression de certains navigateurs ne connait
+     encore que l'ancienne, et une page qui ne se détache pas ne se voit pas
+     dans le PDF de contrôle — elle se voit chez le parent qui imprime. */
+  .corrections-a-part {
+    break-before: page;
+    page-break-before: always;
+    padding-top: 0.5rem;
+  }
+
   /* ⛔ UNE CARTE NE SE COUPE PLUS À LA PLIURE (01/09/2026).
      Mesuré sur le PDF de `francais/cp/grammaire-phrase` : les trois cartes de
      propriétés gardaient leur titre et leur texte en bas de la page 1, et leurs

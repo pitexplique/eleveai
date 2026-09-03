@@ -175,11 +175,33 @@ async function main() {
     // (contrôle négatif ci-dessus). Ce qui se mesure vraiment, c'est la HAUTEUR
     // RENDUE du bloc de correction — s'il occupe zéro pixel, il n'est pas dans
     // le fichier, et là seulement il y a un problème.
+    //
+    // ⭐⭐ ET LE CYCLE 2 RANGE SES CORRECTIONS AILLEURS (03/09/2026). La fiche
+    // d'activité s'imprime SANS ses réponses — elles partent sur leur propre
+    // page, `.corrections-a-part`. Compter les seuls `.fiche-correction` y
+    // annonçait « 0/10 corrections rendues » sur une fiche parfaitement
+    // corrigée : le vérificateur mesurait un emplacement, pas la chose.
+    // ⚠️ Et il gagne au passage l'invariant qui compte vraiment ici : si les
+    // deux formes s'impriment en même temps, l'enfant a la réponse sous la
+    // question ET sur la page du fond. C'est ce défaut-là qu'on cherche.
     const mesure = await page.evaluate(() => {
-      const corrections = [...document.querySelectorAll(".fiche-correction")];
+      const enLigne = [...document.querySelectorAll(".fiche-correction")];
+      const enLigneRendues = enLigne.filter(
+        (d) => (d as HTMLElement).offsetHeight > 20,
+      ).length;
+      const pageAPart = document.querySelector(".corrections-a-part");
+      const aPart = pageAPart
+        ? [...pageAPart.querySelectorAll("li")].filter(
+            (li) => (li as HTMLElement).offsetHeight > 0,
+          )
+        : [];
+      const corrections = aPart.length > 0 ? aPart.length : enLigne.length;
+      const rendues = aPart.length > 0 ? aPart.length : enLigneRendues;
       return {
-        corrections: corrections.length,
-        rendues: corrections.filter((d) => (d as HTMLElement).offsetHeight > 20).length,
+        corrections,
+        rendues,
+        // ⛔ Vrai seulement si la réponse est imprimée aux DEUX endroits.
+        corrigeEnDouble: aPart.length > 0 && enLigneRendues > 0,
         // Le pied de page du site DANS un PDF de fiche serait la faute la plus
         // visible : deux pages de plan de site agrafées à un cours.
         piedVisible:
@@ -235,6 +257,9 @@ async function main() {
       ko < 30 ? `${ko} Ko — trop léger, page probablement vide` : null,
       mesure.corrections > 0 && mesure.rendues < mesure.corrections
         ? `${mesure.rendues}/${mesure.corrections} corrections rendues`
+        : null,
+      mesure.corrigeEnDouble
+        ? "la correction s'imprime SOUS l'énoncé et sur la page à part"
         : null,
       mesure.piedVisible ? "le pied de page du site est resté" : null,
       mesure.blocs < 4 ? `${mesure.blocs} titres de bloc` : null,

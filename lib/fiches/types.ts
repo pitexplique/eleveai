@@ -55,7 +55,20 @@ export type FicheExemple = {
    *  que faire lire. Rendue au-dessus de la solution. */
   schema?: ReactNode;
 } & FicheMicros;
-export type FicheExercice = { question: string; correction: string } & FicheMicros;
+export type FicheExercice = {
+  question: string;
+  correction: string;
+  /**
+   * ⭐⭐ LE DESSIN DE L'EXERCICE (03/09/2026, Frédéric : « intégrer des images
+   * des feuilles précédentes »). Au cycle 2, un exercice qui se fait — entourer,
+   * colorier, barrer, repasser — vaut mieux que dix questions écrites pour un
+   * enfant qui déchiffre encore. Le dessin N'ILLUSTRE PAS l'énoncé : il EST le
+   * support sur lequel l'enfant travaille, et c'est pourquoi il porte souvent
+   * la même figure que le cours plus haut — on ne redécouvre pas un dessin au
+   * moment d'être évalué dessus.
+   */
+  schema?: ReactNode;
+} & FicheMicros;
 
 /** Les rubriques composables — le prof coche et ordonne les siennes. */
 export type FicheRubriqueId =
