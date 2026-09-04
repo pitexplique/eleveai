@@ -812,6 +812,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Celui qui t'écoute n'a pas entendu l'histoire. Raconter, écouter une consigne, redire autrement, et parler chacun son tour.",
   },
+  "francais/cp/lecture-voix-haute": {
+    titre: "Lire à voix haute au CP (2026-2027)",
+    resume:
+      "Le texte contient déjà les instructions pour le lire : le signe de la fin commande la voix, et on respire entre les groupes.",
+  },
   "francais/cm2/grammaire-nature-fonction": {
     titre: "Nature et fonction d'un mot en CM2 (2026-2027)",
     resume:
