@@ -333,6 +333,40 @@ export const NOTIONS: NotionLexique[] = [
     alias: ["orthographe", "ortographe", "accord", "accords", "dictee", "dicte", "mots", "ecrire les mots", "homophone", "a ou a", "et ou est", "son ou sont"],
   },
   {
+    // ⭐⭐ L'ÉCRITURE — LE GESTE, PAS L'ORTHOGRAPHE (03/09/2026).
+    // Frédéric : « je dois pouvoir taper écriture ou fiche d'écriture et
+    // tomber sur les fiches ». Sans cette entrée, « écriture » n'accrochait
+    // rien : le mot n'existait que dans les alias d'`orthographe`, qui est une
+    // AUTRE leçon — savoir quelles lettres mettre, pas savoir les tracer.
+    //
+    // ⚠️ LES FAUTES SONT DANS LA TABLE, ET C'EST LE POINT.
+    // Frédéric : « avec des fautes d'orthographe que les personnes peuvent
+    // commettre ». Ceux qui cherchent comment écrire sont, par construction,
+    // ceux qui écrivent le moins bien — un parent pressé, un enfant de six ans.
+    // Une recherche qui exige l'orthographe juste pour trouver la leçon
+    // d'écriture est une porte fermée à qui en a le plus besoin.
+    //
+    // ⚠️ Le normaliseur retire les accents mais GARDE l'apostrophe : on écrit
+    // donc les deux formes, « d'ecriture » et « d ecriture », parce qu'on tape
+    // les deux.
+    id: "ecriture", label: "l'écriture", matiere: "francais",
+    alias: [
+      "ecriture", "ecrire", "apprendre a ecrire", "j'apprends a ecrire",
+      "cursive", "cursif", "ecriture cursive", "attache", "en attache",
+      "lettres attachees", "tracer les lettres", "trace des lettres",
+      "geste d'ecriture", "geste d ecriture", "graphisme", "calligraphie",
+      "fiche d'ecriture", "fiche d ecriture", "fiche ecriture",
+      "fiches d'ecriture", "fiches d ecriture", "fiches ecriture",
+      "modele d'ecriture", "modele d ecriture", "reglure", "seyes",
+      "gaucher", "ecrire de la main gauche", "main gauche",
+      // ⚠️ Les fautes, volontairement : elles sont la règle, pas l'exception.
+      "ecritur", "ecritue", "ecriure", "ecritture", "ecrirure", "ecrir",
+      "ecrirte", "ecritur cursive", "curssive", "cursiv", "atache",
+      "fiche decriture", "fiches decriture", "fichedecriture",
+      "aprendre a ecrire", "apprendre ecrire",
+    ],
+  },
+  {
     id: "lecture", label: "la lecture et la compréhension", matiere: "francais",
     alias: ["lecture", "lire", "comprehension", "comprendre un texte", "texte", "histoire", "livre", "voix haute", "fluence"],
   },

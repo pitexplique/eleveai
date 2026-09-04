@@ -147,8 +147,30 @@ const PORTES_6E = [
  * ⛔ Rien avant le CM1. Le CE2 et en dessous n'ont ni parcours ni dico ; leur
  * inventaire est si court que le score dit déjà la même chose qu'une liste, et
  * une liste de plus serait une chose de plus à tenir à jour pour rien.
+ *
+ * ⭐⭐ SAUF LE CP, DEPUIS LE 03/09/2026 — et c'est la règle ci-dessus qui a
+ * changé, pas une exception qu'on lui arrache. Le CP a désormais quelque chose
+ * que le score ne peut pas peser : les FICHES D'ÉCRITURE. Frédéric : « en
+ * première position ». Un enfant de six ans ne vient pas chercher un coach, il
+ * vient apprendre à tracer ses lettres — et c'est ce que le parent imprime.
+ * Le score la mettrait après les coachs, parce qu'il compte des liens, pas ce
+ * qu'on fait à cet âge-là. Voir `PORTES_CP` juste en dessous.
  */
 const PORTES_ELEVE_CYCLE_3 = ["coach-maths", "coach-francais", "dictee-du-jour"];
+
+/**
+ * ⭐ LE CP : LA FEUILLE D'ABORD.
+ *
+ * ⚠️ DEUX JOKERS SUR TROIS : on n'écrit que la première place, celle qu'on sait
+ * meilleure que le score. Le reste suit le calcul — figer les trois cartes d'une
+ * classe dont l'inventaire grossit chaque semaine serait faux avant la fin du
+ * mois.
+ * ⚠️ Le CE1 garde le score pour l'instant : les fiches d'écriture le visent
+ * aussi, mais un CE1 sait déjà tracer ses lettres — chez lui, l'entrainement
+ * passe devant l'apprentissage du geste. À rouvrir quand les majuscules et les
+ * mots fréquents existeront.
+ */
+const PORTES_CP = ["fiches-ecriture", "*", "*"];
 
 /**
  * ⭐ L'ADULTE — LE RITUEL D'ABORD, LE COACH ENSUITE (21/08/2026).
@@ -363,6 +385,7 @@ export const PORTES_ECRITES: Partial<Record<ProfilId, string[]>> = {
    * douze. On n'écrit que le milieu, celui qu'on sait meilleur que le score.
    */
   prof: ["*", "*", "parcours", "type:fiche", "type:fiche", "*"],
+  cp: PORTES_CP,
   cm1: PORTES_ELEVE_CYCLE_3,
   cm2: PORTES_CM2,
   "6e": PORTES_6E,
@@ -1533,8 +1556,20 @@ export const RESSOURCES: RessourceEleveAI[] = [
     url: "/fiches-ecriture",
     niveaux: ["cp", "ce1", "parent", "prof"],
     matiere: "francais",
-    notions: ["ecriture", "grapheme_phoneme", "copie", "*"],
-    intentions: ["sentrainer", "enseigner", "decouvrir"],
+    // ⛔ PAS DE JOKER « * » ICI, ET C'EST MESURÉ. Avec lui, taper « écriture »
+    // en CP sortait la fiche en TROISIÈME position, derrière le coach de
+    // français et la dictée : une ressource qui répond à tout répond moins fort
+    // à la question précise. Sans lui, elle passe première — et c'est sa place
+    // le jour où quelqu'un tape exactement son nom.
+    // ⚠️ Elle reste proposée quand rien n'est tapé : c'est `PORTES_CP` qui l'y
+    // met, pas le joker.
+    notions: ["ecriture", "grapheme_phoneme", "copie"],
+    // ⚠️ « entrainer », PAS « sentrainer » : le premier jet écrivait le second,
+    // et l'accueil entier plantait — `LIBELLES[intention]` rendait `undefined`
+    // dans `chips.ts`. ⛔ Et je ne l'ai pas vu parce que j'avais FILTRÉ la
+    // sortie de `tsc` sur « fiches-ecriture » : le fichier fautif ne portait pas
+    // ce nom. Un typecheck qu'on filtre ne vérifie plus rien.
+    intentions: ["entrainer", "enseigner", "decouvrir"],
     type: "fiche",
     statut: "validee",
   },
