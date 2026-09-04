@@ -792,6 +792,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "« chat tapis dort » n'est pas une phrase, et « Un chat. » ne dit rien. Légender, répondre en phrase, ranger un texte court.",
   },
+  "francais/cp/orthographe": {
+    titre: "Les mots qui s'accordent au CP (2026-2027)",
+    resume:
+      "« des pomme » n'existe pas : quand un mot du groupe passe au pluriel, tous les autres suivent. Masculin, féminin, singulier, pluriel.",
+  },
   "francais/cm2/grammaire-nature-fonction": {
     titre: "Nature et fonction d'un mot en CM2 (2026-2027)",
     resume:

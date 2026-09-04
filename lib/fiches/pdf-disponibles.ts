@@ -92,6 +92,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "longueurs-cm2-cours-exercices-corriges.pdf",
   "masses-cm2-cours-exercices-corriges.pdf",
   "morale-poesie-et-les-autres-en-cm1-2026-2027-cours-exercices-corriges.pdf",
+  "mots-qui-s-accordent-au-cp-2026-2027-cours-exercices-corriges.pdf",
   "multiples-diviseurs-et-divisibilite-5e-cours-exercices-corriges.pdf",
   "multiples-diviseurs-et-division-euclidienne-4e-cours-exercices-corriges.pdf",
   "multiples-diviseurs-et-facteurs-premiers-3e-cours-exercices-corriges.pdf",
