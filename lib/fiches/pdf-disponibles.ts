@@ -29,6 +29,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "chaines-d-accord-dans-la-phrase-2026-2027-5e-cours-exercices-corriges.pdf",
   "complements-du-verbe-cm2-cours-exercices-corriges.pdf",
   "complements-du-verbe-en-cm1-2026-2027-cours-exercices-corriges.pdf",
+  "comprendre-ce-qu-on-lit-au-cp-2026-2027-cours-exercices-corriges.pdf",
   "comprendre-un-mot-inconnu-en-cm1-2026-2027-cours-exercices-corriges.pdf",
   "comprendre-un-texte-en-cm1-2026-2027-cours-exercices-corriges.pdf",
   "conjuguer-au-present-a-l-imparfait-et-au-futur-cm2-cours-exercices-corriges.pdf",

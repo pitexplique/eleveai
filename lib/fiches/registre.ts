@@ -802,6 +802,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "« poison » et « poisson » : un s de différence. Le s, le c, le g et le n changent de son selon la lettre qui suit.",
   },
+  "francais/cp/comprehension-lecture": {
+    titre: "Comprendre ce qu'on lit au CP (2026-2027)",
+    resume:
+      "On a le droit de deviner, à condition de montrer où c'est écrit. Un margouillat, un petit lézard, et un seul animal.",
+  },
   "francais/cm2/grammaire-nature-fonction": {
     titre: "Nature et fonction d'un mot en CM2 (2026-2027)",
     resume:

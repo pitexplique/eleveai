@@ -211,6 +211,17 @@ body {
     color: #475569;
   }
 
+  /* ⛔ UN TEXTE NE SE COUPE PAS EN DEUX (04/09/2026).
+     La fiche de compréhension du CP porte un texte de quatre lignes, et c'est
+     l'objet même du travail : sur une feuille dont la consigne est « relis
+     lentement », un texte réparti sur deux pages ne se relit plus. Les cartes
+     et les exercices avaient déjà leur règle ; le texte n'est ni l'un ni
+     l'autre, il lui fallait la sienne. */
+  .fiche-texte {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
   /* ⭐⭐ LA PAGE DES CORRECTIONS SE DÉTACHE (03/09/2026).
      La fiche d'activité du cycle 2 s'arrête à son dernier exercice ; le
      corrigé commence sur une feuille neuve. C'est ce saut de page qui rend la
