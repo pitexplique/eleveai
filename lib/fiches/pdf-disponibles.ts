@@ -49,6 +49,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "echelles-cm2-cours-exercices-corriges.pdf",
   "ecouter-les-sons-des-mots-au-cp-2026-2027-cours-exercices-corriges.pdf",
   "ecouter-une-consigne-en-cm1-2026-2027-cours-exercices-corriges.pdf",
+  "ecrire-les-mots-qu-on-entend-au-cp-2026-2027-cours-exercices-corriges.pdf",
   "ecrire-pour-apprendre-en-cm1-2026-2027-cours-exercices-corriges.pdf",
   "ecrire-un-texte-qui-se-tient-en-cm1-2026-2027-cours-exercices-corriges.pdf",
   "equations-4e-cours-exercices-corriges.pdf",

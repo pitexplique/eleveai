@@ -782,6 +782,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "« cha… », c'est chat ou chapeau ? Faire glisser les sons, coller les morceaux, et lire le mot jusqu'au bout.",
   },
+  "francais/cp/ecriture-mots": {
+    titre: "Écrire les mots qu'on entend au CP (2026-2027)",
+    resume:
+      "La lettre muette ne s'invente pas, elle se retrouve : « chat » cache un t, et « chaton » le réveille. Dictée de mots et de phrases.",
+  },
   "francais/cm2/grammaire-nature-fonction": {
     titre: "Nature et fonction d'un mot en CM2 (2026-2027)",
     resume:
