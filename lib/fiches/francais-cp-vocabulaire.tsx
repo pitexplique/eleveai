@@ -27,15 +27,37 @@
 // vocabulaire, comme le CP. Le découpage arrive au CM1 (`vocabulaire_sens`,
 // `_relations`, `_emploi`), et il y est déjà fait.
 //
-// Cette fiche couvre la branche DU SENS (6 micros sur 10) :
-// - cp_voc_champ_lexical → figure, propriété 1, entrainement 1
-// - cp_voc_famille       → propriété 2, exemple 1, entrainement 2
-// - cp_voc_antonyme      → propriété 3, entrainement 3
-// - cp_voc_polysemie     → propriété 4, exemple 2, entrainement 4
-// - cp_voc_mot_inconnu   → méthode 1, entrainement 5
-// - cp_voc_synonyme      → méthode 2
-// ⚠️ `cp_voc_ordre_alphabetique`, `cp_voc_dictionnaire` et `cp_voc_defi` sont
-// l'AUTRE racine : une leçon d'outil, pas de sens. Elle demande sa feuille.
+// ⭐⭐ LA FICHE COUVRE LES DIX MICROS, ET LE DÉCOUPAGE ANNONCÉ LE 02/09 A ÉTÉ
+// ABANDONNÉ (04/09/2026). Elle disait alors ne traiter que la branche DU SENS,
+// et renvoyait `ordre_alphabetique`, `dictionnaire`, `affixes` et `defi` à « une
+// autre feuille ». Deux raisons de revenir dessus, et la première est une
+// erreur de lecture de ma part :
+//
+//   1. ⛔ LES AFFIXES SONT DU SENS, PAS DE L'OUTIL. « pomme → pommier »,
+//      « coller → décoller » : un petit morceau collé au mot fabrique un sens
+//      neuf. C'est la famille de mots vue de l'autre côté — la propriété 2 de
+//      cette fiche même. Les avoir rangés avec le dictionnaire était une faute
+//      de classement, pas un choix.
+//   2. ⭐ ET LE DICTIONNAIRE PROLONGE UNE MÉTHODE DÉJÀ ÉCRITE ICI : « le reste
+//      de la phrase met sur la piste ». La suite naturelle de cette phrase est
+//      « et quand elle ne suffit pas, on ouvre le dictionnaire ». Ce n'est pas
+//      un second sujet collé au premier, c'est ce qui se passe après.
+//
+// ⚠️ Une feuille à part aurait de toute façon été introuvable : le slug d'une
+// fiche EST le `notionId` du coach, et `vocabulaire` est déjà pris par celle-ci.
+// Elle n'aurait été atteignable que par un lien écrit à la main.
+//
+// Les 10 micros sont couvertes :
+// - cp_voc_champ_lexical      → figure, propriété 1, entrainements 1 et 2
+// - cp_voc_famille            → propriété 2, exemple 1, entrainement 3
+// - cp_voc_affixes            → propriété 3, entrainement 4
+// - cp_voc_antonyme           → propriété 4, entrainement 5
+// - cp_voc_defi               → entrainement 6
+// - cp_voc_polysemie          → propriété 5, exemple 2, entrainement 7
+// - cp_voc_ordre_alphabetique → propriété 6, entrainement 8
+// - cp_voc_dictionnaire       → propriété 6, méthode 2, entrainement 8
+// - cp_voc_mot_inconnu        → méthode 1, entrainement 9
+// - cp_voc_synonyme           → méthode 2, entrainement 10
 //
 // Aligné sur `lib/tutor-v4/questionBank/cp/francais/vocabulaire.bank.ts`.
 
@@ -103,15 +125,21 @@ function phrase(opts: {
   legende?: string;
   largeur?: number;
 }) {
+  /* ⭐ `.dessin-mots` : ce canvas PORTE DU TEXTE, il échappe donc au plafond de
+     largeur du cycle 2. Le rétrécir ne le raccourcit pas, il le rend illisible
+     (mesuré le 03/09 sur le tableau de conjugaison, où « muet » est tombé sous
+     le plancher de lecture). Les quinze autres fiches le font déjà. */
   return (
-    <CanvasRenderer
-      figure={{
-        kind: "phrase",
-        mots: opts.mots.map((m) => (typeof m === "string" ? { texte: m } : m)),
-        legende: opts.legende,
-        largeurMax: opts.largeur ?? 230,
-      }}
-    />
+    <div className="dessin-mots">
+      <CanvasRenderer
+        figure={{
+          kind: "phrase",
+          mots: opts.mots.map((m) => (typeof m === "string" ? { texte: m } : m)),
+          legende: opts.legende,
+          largeurMax: opts.largeur ?? 230,
+        }}
+      />
+    </div>
   );
 }
 
@@ -206,6 +234,41 @@ const remplacerSansChanger = phrase({
   largeur: 280,
 });
 
+/**
+ * ⭐⭐ UN PETIT MORCEAU COLLÉ AU MOT FABRIQUE UN SENS NEUF. C'est la famille de
+ * mots vue de l'autre côté : au lieu de reconnaitre un morceau commun, on en
+ * AJOUTE un — et le mot change de sens de façon prévisible. « dé- » retourne,
+ * « -ier » donne l'arbre du fruit.
+ */
+const lePetitMorceauAjoute = phrase({
+  mots: [
+    { texte: "coller" },
+    { texte: "décoller", focus: true },
+    { texte: "pomme" },
+    { texte: "pommier", focus: true },
+  ],
+  legende: "dé- fait le contraire. -ier donne l'arbre du fruit.",
+  largeur: 320,
+});
+
+/**
+ * ⭐ ET QUAND LA PHRASE NE SUFFIT PAS, ON OUVRE LE DICTIONNAIRE. La méthode 1
+ * de cette fiche s'arrête à « le reste de la phrase met sur la piste » ; c'est
+ * la suite de cette phrase-là, pas un second sujet.
+ * ⚠️ Les mots sont rangés par leur PREMIÈRE lettre, et quand elle est la même,
+ * par la deuxième — c'est la seule règle du CP.
+ */
+const rangesParLAlphabet = phrase({
+  mots: [
+    { texte: "arbre" },
+    { texte: "chat" },
+    { texte: "chien" },
+    { texte: "lagon" },
+  ],
+  legende: "a, c, c, l : chat avant chien, parce que h vient avant i.",
+  largeur: 320,
+});
+
 /* ─── Les dessins DES EXERCICES ────────────────────────────────────────────────
    ⭐⭐ AU CYCLE 2, UN EXERCICE SE FAIT AU CRAYON (règle du 03/09/2026).
    ⛔ Ni `consigne` ni `legende` ici : l'énoncé numéroté les porte déjà.
@@ -278,6 +341,26 @@ const exSynonyme = phrase({
   largeur: 280,
 });
 
+const exAffixes = phrase({
+  mots: [{ texte: "coller" }, { texte: "…coller" }],
+  largeur: 260,
+});
+
+const exContraireEn = phrase({
+  mots: [{ texte: "visible" }, { texte: "…visible" }],
+  largeur: 260,
+});
+
+const exAlphabet = phrase({
+  mots: [
+    { texte: "lagon" },
+    { texte: "chat" },
+    { texte: "arbre" },
+    { texte: "chien" },
+  ],
+  largeur: 320,
+});
+
 // ─── La fiche ─────────────────────────────────────────────────────────────────
 
 export const ficheVocabulaireCp: FicheCoursData = {
@@ -325,6 +408,18 @@ export const ficheVocabulaireCp: FicheCoursData = {
       texte: "La feuille de l'arbre et la feuille du cahier.",
       schema: unMotDeuxChoses,
       micros: ["cp_voc_polysemie"],
+    },
+    {
+      titre: "Un petit morceau change le sens",
+      texte: "coller → décoller. pomme → pommier. Le morceau ajouté dit quoi.",
+      schema: lePetitMorceauAjoute,
+      micros: ["cp_voc_affixes"],
+    },
+    {
+      titre: "Le dictionnaire range par l'alphabet",
+      texte: "Par la première lettre — et par la deuxième quand elle est la même.",
+      schema: rangesParLAlphabet,
+      micros: ["cp_voc_ordre_alphabetique", "cp_voc_dictionnaire"],
     },
   ],
   reel: {
@@ -376,6 +471,8 @@ export const ficheVocabulaireCp: FicheCoursData = {
     "Des mots du même endroit forment un groupe.",
     "Le contraire dit exactement l'inverse.",
     "Un même mot peut désigner deux choses.",
+    "Un petit morceau ajouté change le sens : coller → décoller, pomme → pommier.",
+    "Le dictionnaire range les mots par l'alphabet, lettre après lettre.",
   ],
   /* ⭐ Dix exercices, sept avec un support à entourer, colorier, barrer ou
      relier. Les corrections s'impriment sur leur propre page. */
@@ -399,9 +496,14 @@ export const ficheVocabulaireCp: FicheCoursData = {
       micros: ["cp_voc_famille"],
     },
     {
-      question: "Pourquoi « chapeau » n'est-il pas de la famille de « chat » ?",
-      correction: "Se ressembler ne suffit pas : il faut aussi que le sens aille ensemble.",
-      micros: ["cp_voc_famille"],
+      /* ⭐ ÉCHANGÉ LE 04/09 : cet emplacement portait « pourquoi chapeau n'est
+         pas de la famille de chat », qui redisait en mots l'exercice illustré
+         juste au-dessus. Il sert maintenant aux affixes — la famille de mots
+         vue de l'autre côté. */
+      question: "Colle le petit morceau qui manque pour dire le contraire.",
+      correction: "« décoller ». Le morceau « dé- » retourne le sens du mot.",
+      schema: exAffixes,
+      micros: ["cp_voc_affixes"],
     },
     {
       question: "Écris le contraire de ce que dit Zoé.",
@@ -410,9 +512,13 @@ export const ficheVocabulaireCp: FicheCoursData = {
       micros: ["cp_voc_antonyme"],
     },
     {
-      question: "Quel est le contraire de « grand » ?",
-      correction: "« petit ». Un contraire dit exactement l'inverse.",
-      micros: ["cp_voc_antonyme"],
+      /* ⭐ ÉCHANGÉ LE 04/09 : « quel est le contraire de grand » doublait
+         l'exercice illustré précédent. Le défi du pool demande de FABRIQUER un
+         contraire, puis de vérifier le sens — deux gestes, pas un rappel. */
+      question: "Fabrique le contraire de « visible », puis relis-le pour vérifier.",
+      correction: "« invisible ». « in- » retourne le sens : on vérifie que ça veut bien dire « pas visible ».",
+      schema: exContraireEn,
+      micros: ["cp_voc_defi", "cp_voc_affixes"],
     },
     {
       question: "Le même mot pour deux dessins : lequel ? Écris-le sous chacun.",
@@ -421,9 +527,15 @@ export const ficheVocabulaireCp: FicheCoursData = {
       micros: ["cp_voc_polysemie"],
     },
     {
-      question: "« la feuille de l'arbre », « la feuille du cahier » : même mot ?",
-      correction: "Oui, mais pas la même chose. C'est la phrase qui le dit.",
-      micros: ["cp_voc_polysemie"],
+      /* ⭐ ÉCHANGÉ LE 04/09 : cet emplacement redisait l'exercice illustré des
+         deux feuilles. Il porte maintenant l'ordre alphabétique — et l'exemple
+         est choisi pour que la première lettre NE SUFFISE PAS : « chat » et
+         « chien » commencent pareil, et c'est la deuxième lettre qui tranche.
+         C'est la seule difficulté réelle de la notion au CP. */
+      question: "Numérote ces mots dans l'ordre du dictionnaire.",
+      correction: "1. arbre 2. chat 3. chien 4. lagon — chat avant chien, parce que h vient avant i.",
+      schema: exAlphabet,
+      micros: ["cp_voc_ordre_alphabetique", "cp_voc_dictionnaire"],
     },
     {
       question: "Entoure les mots de la phrase qui aident à deviner ce qu'est un cartable.",
