@@ -307,8 +307,24 @@ PORTES = [
     "Fiches d'écriture",
 ]
 
+# ⭐ LES CHIFFRES SONT DES MATHS. Frédéric, 04/09 : « pour les prochaines vidéos
+# de chiffre, remplace coach français par coach maths ». Une porte hors matière
+# sur l'écran de sortie disperse au lieu de conduire — c'est le même argument
+# qui avait fait retirer « Coach Maths » des vidéos de lettres.
+# ⚠️ « Dictée » reste pour l'instant : c'est un rituel de français, et il pourrait
+# devenir « Calcul rapide » sur les chiffres. Non tranché — à voir au rendu.
+PORTES_MATHS = [
+    "Coach Maths",
+    "Dictée",
+    "Fiches activités",
+    "Fiches d'écriture",
+]
 
-def page_de_fin(scene, mascotte, clip_url: str, clip_tout: str, clip_bientot: str):
+
+def page_de_fin(
+    scene, mascotte, clip_url: str, clip_tout: str, clip_bientot: str,
+    portes: list[str] | None = None,
+):
     """L'écran de sortie : une PORTE, pas une signature.
 
     ⛔ Il signait « EleveAI — Ti Margo » : un nom, et rien à faire ensuite.
@@ -321,16 +337,19 @@ def page_de_fin(scene, mascotte, clip_url: str, clip_tout: str, clip_bientot: st
     l'œil ne sait plus laquelle vient d'arriver.
     """
     v = scene.vertical
+    # ⚠️ La liste par défaut est celle du FRANÇAIS. Les chiffres passent
+    #  : voir le commentaire au-dessus de la constante.
+    noms = portes or PORTES
     url = Text("eleveai.fr", font_size=62 if not v else 50, color=JAUNE_TITRE)
     portes = VGroup(
         *[
             Text(p, font_size=40 if not v else 30, color=BLEU_CALCUL)
-            for p in PORTES
+            for p in noms
         ]
     ).arrange(DOWN, buff=0.30)
     bientot = Text("À bientôt !", font_size=52 if not v else 42, color=VERT_OK)
     for m, nom in [(url, "eleveai.fr"), (bientot, "À bientôt !")] + [
-        (p, PORTES[i]) for i, p in enumerate(portes)
+        (p, noms[i]) for i, p in enumerate(portes)
     ]:
         verifier(m, nom)
 
@@ -350,7 +369,7 @@ def page_de_fin(scene, mascotte, clip_url: str, clip_tout: str, clip_bientot: st
     scene.wait(max(0.3, d1 - 1.2))
 
     d2 = scene.dire(clip_tout)
-    pas = max(1.05, (d2 - 0.6) / len(PORTES))
+    pas = max(1.05, (d2 - 0.6) / len(noms))
     for p in portes:
         # ⚠️ Le zoom porte sur la LIGNE, pas sur le bloc : le bloc grossirait
         # d'un coup et ferait sauter tout l'écran.

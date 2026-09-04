@@ -51,6 +51,7 @@ from lettre_commune import (  # noqa: E402
     Portrait,
     angle_main,
     chemin_bezier,
+    PORTES_MATHS,
     page_de_fin,
     page_de_garde,
     poser_stylo,
@@ -309,7 +310,10 @@ class _Chiffre0Base(Scene):
         self.wait(max(0.8, d - 1.4))
         self.play(FadeOut(relance), FadeOut(son))
 
-        page_de_fin(self, margo, "12-va-sur", "13-tout", "14-bientot")
+        # ⭐ PORTES DE MATHS : « Coach Maths » et non « Coach Français »
+        # (Frédéric, 04/09). Une porte hors matière disperse au lieu de conduire.
+        page_de_fin(self, margo, "12-va-sur", "13-tout", "14-bientot",
+                    portes=PORTES_MATHS)
 
 
 class Chiffre0Cp(_Chiffre0Base):
