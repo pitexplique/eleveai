@@ -281,7 +281,7 @@ export const fichePuissances3e: FicheCoursData = {
   },
   formule: {
     contexte: "L'écriture scientifique d'un nombre",
-    expression: "a \\times 10^n \\qquad \\text{avec} \\qquad 1 \\leqslant a < 10",
+    expression: "$a \\times 10^n \\qquad \\text{avec} \\qquad 1 \\leqslant a < 10$",
     legende:
       "Le nombre $a$ porte les chiffres significatifs, l'exposant $n$ porte l'ordre de grandeur. La condition sur $a$ rend l'écriture UNIQUE : sans elle, $5\\,600$ pourrait s'écrire $56 \\times 10^2$, $5{,}6 \\times 10^3$ ou $0{,}56 \\times 10^4$, et deux nombres ne se compareraient plus d'un coup d'œil.",
     schema: legende(

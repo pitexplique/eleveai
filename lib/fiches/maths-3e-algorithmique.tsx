@@ -312,7 +312,7 @@ export const ficheAlgorithmique3e: FicheCoursData = {
   formule: {
     contexte: "Le passage d'un programme de calcul à son expression",
     expression:
-      "\\text{« choisir } x \\text{, ajouter } b \\text{, multiplier par } a \\text{ »} \\;\\longrightarrow\\; a(x + b)",
+      "$\\text{« choisir } x \\text{, ajouter } b \\text{, multiplier par } a \\text{ »} \\;\\longrightarrow\\; a(x + b)$",
     legende:
       "⚠️ La parenthèse vient de l'ORDRE, pas de la formule. Si l'on multiplie d'abord et qu'on ajoute ensuite, la même paire de nombres donne $ax + b$, qui est une expression différente. Une seule question tranche : sur quoi porte la dernière opération — sur le nombre seul, ou sur tout ce qui précède ?",
     schema: legende(

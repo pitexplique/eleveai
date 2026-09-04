@@ -335,7 +335,7 @@ export const ficheCalculLitteral3e: FicheCoursData = {
   },
   formule: {
     contexte: "La seule identité à connaître par cœur en troisième",
-    expression: "(a+b)(a-b) = a^2 - b^2",
+    expression: "$(a+b)(a-b) = a^2 - b^2$",
     legende:
       "Lue de gauche à droite elle développe ; lue de droite à gauche elle factorise, et c'est ce sens-là qui sert. Reconnaître $x^2 - 49$ comme $x^2 - 7^2$ donne immédiatement $(x+7)(x-7)$, sans aucun calcul — et rien d'autre ne permettait de factoriser cette expression.",
     schema: legende(

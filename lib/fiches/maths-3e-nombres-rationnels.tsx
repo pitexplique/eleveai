@@ -295,7 +295,7 @@ export const ficheNombresRationnels3e: FicheCoursData = {
   },
   formule: {
     contexte: "Trouver un rationnel strictement compris entre deux autres",
-    expression: "\\dfrac{a + b}{2}",
+    expression: "$\\dfrac{a + b}{2}$",
     legende:
       "La moyenne de deux nombres est toujours située entre eux, et elle reste rationnelle puisqu'on ne l'obtient qu'en additionnant et en divisant. C'est la réponse CONSTRUCTIVE à la question « en existe-t-il un entre les deux ? » : non seulement oui, mais en voici un.",
     schema: legende(

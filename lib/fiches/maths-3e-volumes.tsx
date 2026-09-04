@@ -276,7 +276,7 @@ export const ficheVolumes3e: FicheCoursData = {
   },
   formule: {
     contexte: "Le volume d'une boule de rayon $r$",
-    expression: "V = \\dfrac{4}{3}\\pi r^3",
+    expression: "$V = \\dfrac{4}{3}\\pi r^3$",
     legende:
       "C'est la seule formule vraiment neuve de l'année, et la seule qui ne s'écrive pas « aire de base × hauteur » — une boule n'ayant ni l'une ni l'autre. ⚠️ Le rayon est AU CUBE : doubler le rayon multiplie donc le volume par $8$. Et si l'énoncé fournit le diamètre, il faut le diviser par deux avant tout calcul.",
     schema: legende(

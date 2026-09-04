@@ -295,7 +295,7 @@ export const ficheStatistiques3e: FicheCoursData = {
   formule: {
     contexte: "Les trois indicateurs, et ce que chacun mesure",
     expression:
-      "\\text{moyenne} = \\dfrac{\\text{somme des valeurs}}{\\text{effectif total}} \\qquad \\text{étendue} = \\text{max} - \\text{min}",
+      "$\\text{moyenne} = \\dfrac{\\text{somme des valeurs}}{\\text{effectif total}} \\qquad \\text{étendue} = \\text{max} - \\text{min}$",
     legende:
       "La médiane, elle, ne se calcule pas par une formule : elle se LIT sur la série rangée, à la position du milieu. ⚠️ C'est justement ce qui la rend insensible aux valeurs extrêmes — elle ne regarde que les rangs, jamais les montants.",
     schema: legende(

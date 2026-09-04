@@ -361,7 +361,7 @@ export const ficheFonctions3e: FicheCoursData = {
   },
   formule: {
     contexte: "L'écriture d'une fonction, et celle d'un seul de ses résultats",
-    expression: "f : x \\mapsto 2x + 3 \\qquad \\text{et} \\qquad f(4) = 11",
+    expression: "$f : x \\mapsto 2x + 3 \\qquad \\text{et} \\qquad f(4) = 11$",
     legende:
       "À gauche, la machine tout entière : la flèche $\\mapsto$ se lit « a pour image ». À droite, un seul passage dedans. Les deux écritures parlent de la même fonction, mais la première la décrit et la seconde la fait travailler.",
     schema: legende(

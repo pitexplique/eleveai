@@ -132,7 +132,7 @@ const triangle = (
   />
 );
 
-// ⛔ LES POINTS SONT REPRIS DE , MAIS DEUX ONT DU ETRE
+// ⛔ LES POINTS SONT REPRIS DE maths-5e-triangles.tsx, MAIS DEUX ONT DU ETRE
 // RENTRES — mesure du 03/09/2026. Ils sont en coordonnees ABSOLUES dans un cadre
 // de 280 x 220, et le canvas pose l etiquette d un sommet A COTE de lui :
 //   · le C de l isocele etait a x = 260, son etiquette sortait par la DROITE ;
@@ -338,7 +338,7 @@ export const ficheTriangles3e: FicheCoursData = {
   },
   formule: {
     contexte: "La somme des angles d'un triangle",
-    expression: "\\widehat{A} + \\widehat{B} + \\widehat{C} = 180^\\circ",
+    expression: "$\\widehat{A} + \\widehat{B} + \\widehat{C} = 180^\\circ$",
     legende:
       "Elle sert dans les deux sens. De gauche à droite pour VÉRIFIER qu'un triplet d'angles est possible ; de droite à gauche pour TROUVER un angle manquant, en retranchant les deux connus de $180$.",
     schema: legende(

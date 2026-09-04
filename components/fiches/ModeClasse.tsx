@@ -4,15 +4,49 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { ArrowLeft, Maximize, Minimize, Monitor } from "lucide-react";
-// ⭐ Le mode classe ne passe PAS par `TexteMath` — il rend le texte brut. Il lui
-// faut donc sa propre pose d'insécables, et c'est l'écran qui compte le plus :
-// une coupure fautive projetée au tableau se voit de tout le fond de la classe.
+// ⭐ LE MODE CLASSE POSE SES INSÉCABLES LUI-MÊME, et c'est l'écran qui compte le
+// plus : une coupure fautive projetée au tableau se voit de tout le fond de la
+// classe.
+// ⛔⛔ ET IL REND MAINTENANT LE LaTeX (04/09/2026). Il ne le faisait pas — le
+// composant avait été écrit quand les diapositives étaient rédigées à la main,
+// sans formules. Mais `slidesDepuisFiche` les fabrique depuis la FICHE, dont les
+// textes portent du LaTeX depuis le 26/08 : Frédéric a vu « $\dfrac{3}{4}$ »
+// s'afficher en clair au vidéoprojecteur, sur trente diapositives.
+// ⚠️ `TexteMath` ne touche QU'AUX segments entre dollars et laisse le reste
+// intact : les insécables posées juste avant lui survivent.
 import { insecables, typographier } from "@/lib/fiches/typographie";
+import TexteMath from "@/components/fiches/TexteMath";
 import { LargeurProjetee } from "@/lib/canvas/largeur-projetee";
 
 /** ⭐ Largeur de repli des canvas projetés, en unités de viewBox. Réglée par la
  *  mesure du 01/09/2026 : voir le commentaire du provider, plus bas. */
 const LARGEUR_PROJETEE = 320;
+
+/**
+ * Combien de signes une section fait-elle projeter ?
+ * ⭐ C'est ce nombre qui décide de la mise en page, et non le type de section :
+ * une explication courte se lit très bien à côté du dessin, une longue devient
+ * une colonne étroite et interminable.
+ */
+function signesProjetes(section: ClasseSection): number {
+  const bouts: unknown[] = [];
+  if ("phrase" in section) bouts.push(section.phrase, section.sousPhrase, section.encadre?.texte);
+  if ("cartes" in section) bouts.push(...section.cartes.map((c) => c.texte));
+  if ("etapes" in section) bouts.push(...section.etapes);
+  if ("enonce" in section) bouts.push(section.enonce, (section as { correction?: string }).correction);
+  if ("gauche" in section) bouts.push(section.gauche.contenu, section.droite.contenu);
+  return bouts.filter((b) => typeof b === "string").join(" ").length;
+}
+
+/**
+ * Le texte d'une diapositive, rendu avec ses formules.
+ * ⚠️ `contenu` d'un panneau `duo` est un ReactNode et non une chaîne : on le
+ * laisse alors passer sans y toucher, sinon on casserait les dessins qu'il peut
+ * contenir.
+ */
+function M({ children }: { children: ReactNode }) {
+  return typeof children === "string" ? <TexteMath>{children}</TexteMath> : <>{children}</>;
+}
 
 /**
  * Mode classe : version vidéoprojetable d'une fiche de cours.
@@ -169,21 +203,21 @@ function Section({
               diapos déjà justes. La couleur ne demande pas d'espace. */}
           <div className={`rounded-3xl border-4 p-3 lg:p-4 ${t.carte}`}>
             <p className={`${tailleProjetee(section.phrase)} font-black leading-tight text-slate-950`}>
-              {section.phrase}
+              <M>{section.phrase}</M>
             </p>
             {section.sousPhrase ? (
               <p className="mt-5 text-xl font-bold leading-snug text-slate-600 lg:text-2xl">
-                {section.sousPhrase}
+                <M>{section.sousPhrase}</M>
               </p>
             ) : null}
           </div>
           {section.encadre ? (
             <div className="rounded-3xl border-4 border-emerald-200 bg-emerald-50 p-8">
               <p className="text-2xl font-black uppercase text-emerald-700">
-                {section.encadre.titre}
+                <M>{section.encadre.titre}</M>
               </p>
               <p className="mt-3 text-xl font-bold leading-snug text-slate-700 lg:text-2xl">
-                {section.encadre.texte}
+                <M>{section.encadre.texte}</M>
               </p>
             </div>
           ) : null}
@@ -201,10 +235,10 @@ function Section({
                 className={`rounded-3xl border-4 p-10 ${v.carte}`}
               >
                 <p className={`text-3xl font-black uppercase ${v.label}`}>
-                  {panel.titre}
+                  <M>{panel.titre}</M>
                 </p>
                 <div className="mt-5 text-3xl font-black leading-snug text-slate-950">
-                  {panel.contenu}
+                  <M>{panel.contenu}</M>
                 </div>
               </div>
             );
@@ -224,10 +258,10 @@ function Section({
                 {index + 1}
               </p>
               <p className="mt-4 text-3xl font-black leading-tight text-slate-950">
-                {carte.titre}
+                <M>{carte.titre}</M>
               </p>
               <p className="mt-3 text-2xl font-bold leading-snug text-slate-600">
-                {carte.texte}
+                <M>{carte.texte}</M>
               </p>
             </div>
           ))}
@@ -246,7 +280,7 @@ function Section({
                 {index + 1}
               </p>
               <p className="text-3xl font-black leading-tight text-slate-950">
-                {etape}
+                <M>{etape}</M>
               </p>
             </div>
           ))}
@@ -266,10 +300,10 @@ function Section({
         <div className="grid gap-6">
           <div className="rounded-3xl border-4 border-cyan-200 bg-cyan-50 p-6 lg:p-8">
             <p className="text-2xl font-black leading-tight text-slate-950 lg:text-3xl">
-              {section.enonce}
+              <M>{section.enonce}</M>
             </p>
             <p className="mt-4 text-2xl font-black leading-tight text-cyan-700 lg:text-3xl">
-              {section.question}
+              <M>{section.question}</M>
             </p>
           </div>
           <div className="flex flex-col rounded-3xl border-4 border-emerald-200 bg-emerald-50 p-6 lg:p-8">
@@ -278,7 +312,7 @@ function Section({
             </p>
             {revealed ? (
               <p className="mt-4 text-2xl font-black leading-snug text-slate-950 lg:text-3xl">
-                {section.correction}
+                <M>{section.correction}</M>
               </p>
             ) : (
               <button type="button" onClick={reveal} className={BTN_REVELER}>
@@ -295,11 +329,11 @@ function Section({
         <div className="grid gap-6">
           <div className="rounded-3xl border-4 border-cyan-200 bg-cyan-50 p-6 lg:p-8">
             <p className="text-2xl font-black leading-tight text-slate-950 lg:text-3xl">
-              {section.enonce}
+              <M>{section.enonce}</M>
             </p>
             {section.question ? (
               <p className="mt-4 text-2xl font-black leading-tight text-cyan-700 lg:text-3xl">
-                {section.question}
+                <M>{section.question}</M>
               </p>
             ) : null}
           </div>
@@ -309,12 +343,12 @@ function Section({
             </p>
             {section.indice ? (
               <p className="mt-5 text-4xl font-black leading-tight text-slate-950">
-                {section.indice}
+                <M>{section.indice}</M>
               </p>
             ) : null}
             {revealed ? (
               <p className="mt-4 text-2xl font-black leading-snug text-emerald-700 lg:text-3xl">
-                {section.correction}
+                <M>{section.correction}</M>
               </p>
             ) : (
               <button type="button" onClick={reveal} className={BTN_REVELER}>
@@ -508,7 +542,7 @@ export default function ModeClasse({
                 {slide.badge}
               </p>
               <h2 className="mt-3 text-6xl font-black tracking-normal text-slate-950">
-                {slide.titre}
+                <M>{slide.titre}</M>
               </h2>
             </div>
             <p className="rounded-full bg-slate-100 px-5 py-3 text-xl font-black text-slate-700">
@@ -525,8 +559,20 @@ export default function ModeClasse({
                la correction. Trois lignes, pleine largeur, dans l'ordre où on
                les lit. */
             <div
+              /* ⛔⛔ LA DEMI-LARGEUR NE VAUT QUE POUR UN TEXTE COURT — corrigé
+                 le 04/09/2026, sur signalement de Frédéric : « l'explication
+                 prend 1 colonne à droite de l'axe du milieu vertical au lieu de
+                 prendre toute la largeur ». Au-delà de 320 signes, la colonne
+                 devient une bande étroite et interminable, illisible du fond de
+                 la classe. On empile alors : le dessin, puis le texte en pleine
+                 largeur.
+                 ⚠️ Le seuil porte sur le NOMBRE DE SIGNES, pas sur le type de
+                 section. Un `objectif` bavard souffre autant qu'un `exemple`, et
+                 c'est la mesure qui tranche, pas la catégorie. */
               className={
-                slide.section.type === "exemple" || slide.section.type === "exercice"
+                slide.section.type === "exemple" ||
+                slide.section.type === "exercice" ||
+                signesProjetes(slide.section) > 320
                   ? "grid gap-6"
                   : "grid gap-6 lg:grid-cols-2 lg:gap-10"
               }

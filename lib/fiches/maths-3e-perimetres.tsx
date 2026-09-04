@@ -305,7 +305,7 @@ export const fichePerimetres3e: FicheCoursData = {
   formule: {
     contexte: "La longueur d'un cercle, et les périmètres usuels",
     expression:
-      "\\mathcal{P}_{\\text{cercle}} = 2\\pi r = \\pi d \\qquad \\mathcal{P}_{\\text{carré}} = 4c \\qquad \\mathcal{P}_{\\text{rect.}} = 2(L + l)",
+      "$\\mathcal{P}_{\\text{cercle}} = 2\\pi r = \\pi d \\qquad \\mathcal{P}_{\\text{carré}} = 4c \\qquad \\mathcal{P}_{\\text{rect.}} = 2(L + l)$",
     legende:
       "⚠️ La formule du cercle existe en deux versions parce que les énoncés donnent tantôt le rayon, tantôt le diamètre. Employer la mauvaise donnée est aussi fréquent qu'employer la mauvaise formule : avec un diamètre de 12 cm, écrire $2\\pi \\times 12$ double la réponse, car 12 est déjà le double du rayon.",
     schema: legende(

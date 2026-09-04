@@ -322,7 +322,7 @@ export const ficheProbabilites3e: FicheCoursData = {
   formule: {
     contexte: "La probabilité d'un événement, en situation d'équiprobabilité",
     expression:
-      "P(A) = \\dfrac{\\text{nombre d'issues favorables}}{\\text{nombre d'issues possibles}}",
+      "$P(A) = \\dfrac{\\text{nombre d'issues favorables}}{\\text{nombre d'issues possibles}}$",
     legende:
       "⚠️ La condition compte autant que la formule : elle ne vaut QUE si toutes les issues ont la même chance. Sur une roue à secteurs inégaux ou avec un dé truqué, compter les cas ne donne pas la probabilité — il faut alors les mesurer ou les lire dans l'énoncé.",
     schema: legende(

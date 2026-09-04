@@ -322,7 +322,7 @@ export const fichePythagore3e: FicheCoursData = {
   },
   formule: {
     contexte: "Le théorème et sa réciproque, dans un triangle rectangle en $A$",
-    expression: "BC^2 = AB^2 + AC^2",
+    expression: "$BC^2 = AB^2 + AC^2$",
     legende:
       "La même égalité sert dans les deux sens, et c'est ce qui rend la distinction difficile. Lue de gauche à droite quand on SAIT que le triangle est rectangle, elle calcule une longueur. Lue à l'envers quand on l'IGNORE, elle démontre l'angle droit. ⚠️ Ce n'est pas la formule qui change : c'est ce qu'on admet au départ.",
     schema: legende(

@@ -315,7 +315,7 @@ export const ficheAires3e: FicheCoursData = {
   formule: {
     contexte: "Les aires des figures usuelles",
     expression:
-      "\\mathcal{A}_{\\text{rect.}} = L \\times l \\qquad \\mathcal{A}_{\\text{triangle}} = \\dfrac{b \\times h}{2} \\qquad \\mathcal{A}_{\\text{disque}} = \\pi r^2",
+      "$\\mathcal{A}_{\\text{rect.}} = L \\times l \\qquad \\mathcal{A}_{\\text{triangle}} = \\dfrac{b \\times h}{2} \\qquad \\mathcal{A}_{\\text{disque}} = \\pi r^2$",
     legende:
       "⚠️ Chacune multiplie exactement DEUX longueurs, ce qui explique à la fois l'unité carrée et la règle du $k^2$. Dans la formule du disque, le carré porte sur le rayon seul : $\\pi r^2$ ne se lit pas $(\\pi r)^2$.",
     schema: legende(

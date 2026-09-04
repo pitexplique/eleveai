@@ -320,7 +320,7 @@ export const ficheProportionnalite3e: FicheCoursData = {
   formule: {
     contexte: "Les trois grandeurs quotients du programme",
     expression:
-      "v = \\dfrac{d}{t} \\qquad D = \\dfrac{V}{t} \\qquad d = \\dfrac{N}{S}",
+      "$v = \\dfrac{d}{t} \\qquad D = \\dfrac{V}{t} \\qquad d = \\dfrac{N}{S}$",
     legende:
       "Trois formules, un seul geste : diviser la grandeur qui varie par celle qui la mesure. ⚠️ Et l'unité doit suivre le calcul — des kilomètres divisés par des heures donnent des km/h. Une unité incohérente est le signe le plus sûr d'une division faite à l'envers.",
     schema: legende(
