@@ -51,7 +51,7 @@ from charte import *  # noqa: F403,E402
 from mascotte import MascotteMargouillat  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))  # dossier cp/
-from lettre_commune import ecran_relance  # noqa: E402
+from lettre_commune import ecran_relance, page_de_fin, page_de_garde  # noqa: E402
 
 # ─── La géométrie du Seyès, en unités Manim ───────────────────────────────────
 # ⭐ 1 unité = 1 interligne. Le corps d'une minuscule occupe EXACTEMENT un
@@ -299,7 +299,7 @@ DUREE = {
     "00-aujourdhui": 3.17, "01-ecoute": 2.99, "02-regarde": 3.02, "03-depart": 6.70,
     "04-encore": 2.92, "05-cherchons": 4.12, "05-a-comme": 1.58, "06-arbre": 1.46,
     "07-avion": 1.47, "08-ami": 1.36, "09-animal": 1.68, "10-abricot": 1.65,
-    "10-pareil": 4.71, "11-relance": 2.93, "12-va-sur": 3.16, "13-tout": 9.55,
+    "10-pareil": 4.71, "11-relance": 2.93, "12-va-sur": 3.16, "13-tout": 8.14,
     "14-bientot": 1.71,
 }
 CLIPS_MOTS = ["06-arbre", "07-avion", "08-ami", "09-animal", "10-abricot"]
@@ -351,95 +351,13 @@ class _LettreABase(Scene):
         else:
             margo.to_edge(RIGHT, buff=1.1)
 
-        # ── 0. LA PAGE DE GARDE : DE 0 À 1 SECONDE, PAS UNE DE PLUS ─────────
-        # ⛔⛔ LA VIDÉO S'OUVRAIT SUR 3,2 s D'ÉCRAN NOIR. La première phrase se
-        # jouait sur du vide, et le titre mettait encore une seconde à monter en
-        # fondu : 4,2 s avant que rien ne soit lisible. Frédéric, 03/09 : « rien
-        # n'apparait avant 4 ou 5 secondes », puis « ça doit commencer au bout
-        # d'1 seconde et la page de garde de 0 à 1 seconde ». Sur un Reel ou un
-        # Short, c'est là que le spectateur décide — et il décidait sur du noir.
-        #
-        # ⭐ ELLE EST POSÉE PAR `add`, PAS PAR `play` : un fondu d'entrée ne peut
-        # pas s'appliquer à la première image, il ne fait que la retarder. Il
-        # n'existe donc aucun instant où l'écran est vide.
-        # ⭐ 0,75 s d'affichage + 0,25 s de fondu croisé = LA SECONDE EXACTE. La
-        # voix part à 1,000 s, et tout le reste de la vidéo est décalé d'autant.
-        #
-        # ⭐ TITRE AU FORMAT DE `manim/REGLES.md` (« Maths <classe> · <notion> »),
-        # décliné en français. Frédéric, 03/09 : « Francais 6eme - Ecriture
-        # cursive - lettre a par exemple ».
-        # ⚠️ LA CLASSE ÉCRITE EST **CP**, PAS 6e : le format était donné en
-        # exemple, mais cette vidéo enseigne le tracé de la lettre — micros
-        # `cp_gph_voyelles` et `cp_copie_lettre`. Une classe fausse sur la page
-        # de garde est la première chose que verrait un parent.
-        #
-        # ⭐ LES DEUX FORMES DE LA LETTRE CÔTE À CÔTE : l'imprimée qu'il lit,
-        # la cursive qu'il va écrire. C'est le sujet de la vidéo en une image —
-        # et c'est l'image que la vignette doit montrer.
-        # ⚠️ LE PORTRAIT A SES PROPRES TAILLES, il ne se déduit pas du paysage.
-        # Avec celles du 16:9, « Écriture cursive » touchait les deux bords du
-        # cadre 4,5 ; la mise à l'échelle de secours rattrapait le débordement —
-        # en écrasant TOUT le bloc, Ti-Margo compris, réduit à un timbre. Le
-        # garde-fou avait fonctionné, et le résultat était mauvais quand même.
-        garde_classe = Text(
-            "Français CP", font_size=34 if not self.vertical else 26, color=BLEU_CALCUL
+        # ── 0. LA PAGE DE GARDE : DE 0 À ~1,5 SECONDE ──────────────────────
+        # ⭐ Elle vient du MODULE COMMUN. Elle vivait ici en copie, et c'est
+        # ainsi que « Fiches d'écriture » avait manqué à l'écran de fin :
+        # une seule des trois copies avait été mise à jour.
+        garde, garde_main = page_de_garde(
+            self, "a", chemin_a(stroke_width=12), MascotteMargouillat()
         )
-        garde_notion = Text(
-            "Écriture cursive",
-            font_size=54 if not self.vertical else 40,
-            color=JAUNE_TITRE,
-        )
-        # ⭐ LA CURSIVE D'ABORD, ET PLUS GRANDE. Elle était à droite et de même
-        # taille : on lit de gauche à droite, donc l'imprimée ouvrait une vidéo
-        # qui s'appelle « Écriture cursive ». Le sujet passe devant.
-        # ⭐ MAIS L'IMPRIMÉE RESTE. Dans la seconde moitié, « arbre », « avion »,
-        # « ami » sont écrits en imprimé avec l'initiale en jaune : ce « a »-là
-        # apparaitra de toute façon. S'il n'a jamais été montré, l'enfant le
-        # rencontre pour la première fois au milieu d'un mot, sans que personne
-        # le lui ait nommé — et la correspondance entre les deux écritures d'une
-        # lettre est une compétence du CP, pas un décor.
-        garde_imp = Text(
-            "a", font_size=96 if not self.vertical else 76, color=JAUNE_TITRE
-        )
-        garde_cur = chemin_a(stroke_width=12)
-        garde_cur.height = garde_imp.height * 1.9
-        duo = VGroup(garde_cur, garde_imp).arrange(RIGHT, buff=0.8)
-        coeur = VGroup(garde_classe, garde_notion, duo).arrange(DOWN, buff=0.38)
-        # ⚠️ `Group` et non `VGroup` : Ti-Margo est un ImageMobject, un VGroup
-        # le refuse.
-        margo_garde = MascotteMargouillat().scale(0.7 if not self.vertical else 0.62)
-        if self.vertical:
-            garde = Group(coeur, margo_garde).arrange(DOWN, buff=0.5)
-        else:
-            garde = Group(coeur, margo_garde).arrange(RIGHT, buff=1.0)
-        # ⚠️ La garde se remet à l'échelle du cadre : le portrait fait 4,5 de
-        # large, et sans ça le titre en sort sans qu'aucune erreur ne le dise.
-        # ⚠️ La hauteur disponible retire 1,8 et non 0,8 : la mention de la main
-        # occupe le haut du cadre, le bloc ne doit pas monter dedans.
-        garde.scale(
-            min(
-                1.0,
-                (config.frame_width - 0.8) / garde.width,
-                (config.frame_height - 1.8) / garde.height,
-            )
-        ).move_to(ORIGIN)
-
-        # ⭐⭐ LA MAIN S'ANNONCE EN HAUT. Frédéric, 03/09 : « il faut juste
-        # rajouter en haut Pour Droitier ou pour Gaucher ».
-        # C'est la SEULE chose qui distingue les deux vidéos : elles ont le même
-        # titre, la même durée, la même voix, et à la vignette la même image.
-        # Sans cette ligne, un parent qui tombe sur un Reel ne sait pas s'il
-        # regarde celle de son enfant — et un gaucher apprendrait la prise de
-        # l'autre main sans que personne ne s'en aperçoive.
-        # ⚠️ En haut du CADRE (`to_edge`), pas en haut du bloc : elle doit se
-        # lire comme une mention, pas comme la première ligne du titre.
-        garde_main = Text(
-            "Pour gaucher" if self.gaucher else "Pour droitier",
-            font_size=32 if not self.vertical else 26,
-        )
-        garde_main.to_edge(UP, buff=0.45)
-        self.add(garde, garde_main)
-        self.wait(0.75)
 
         # ── 1 bis. L'ACCUEIL PREND LA SUITE, À LA SECONDE PILE ──────────────
         self.play(
@@ -654,71 +572,12 @@ class _LettreABase(Scene):
         # `__init__` ne transmet que les kwargs d'ImageMobject et fixe la
         # hauteur. Tous les scripts existants font `.scale(...)` après coup.
         # ⚠️ On REPREND le même Ti-Margo — il ouvrait la vidéo, il la ferme.
-        # ⛔ « Essaie notre coach CP français » A ÉTÉ RETIRÉ (Frédéric, 03/09 :
-        # « enlève essayer, mets simplement Coach français »). L'écran est une
-        # LISTE de ce qui existe, pas une injonction — et une seule proposition
-        # cachait les quatre autres.
-        # ⛔ Il débordait de toute façon : 5,70 de large pour 3,90 utiles en
-        # portrait. Le filet de mise à l'échelle l'avait « sauvé » en écrasant
-        # TOUT le bloc, Ti-Margo réduit à un timbre. Le rendu paraissait correct
-        # et il était mauvais — c'est la deuxième fois que ce filet trompe.
-        # ⭐ CHAQUE LIGNE ARRIVE À SON TOUR, pendant que la voix la nomme : la
-        # liste se construit sous les yeux au lieu de tomber d'un bloc.
-        fin_url = Text(
-            "eleveai.fr",
-            font_size=62 if not self.vertical else 50,
-            color=JAUNE_TITRE,
-        )
-        PORTES = ["Coach Maths", "Coach Français", "Dictée", "Fiches activités"]
-        portes = VGroup(
-            *[
-                Text(p, font_size=40 if not self.vertical else 30, color=BLEU_CALCUL)
-                for p in PORTES
-            ]
-        ).arrange(DOWN, buff=0.30)
-        bientot = Text(
-            "À bientôt !",
-            font_size=52 if not self.vertical else 42,
-            color=VERT_OK,
-        )
-        bloc_fin = VGroup(fin_url, portes, bientot).arrange(DOWN, buff=0.45)
-        margo.scale(0.75 if not self.vertical else 0.85)
-        page_fin = Group(margo, bloc_fin).arrange(DOWN, buff=0.40)
-        page_fin.scale(
-            min(
-                1.0,
-                (config.frame_width - 0.8) / page_fin.width,
-                (config.frame_height - 0.8) / page_fin.height,
-            )
-        ).move_to(ORIGIN)
-
-        d1 = self.dire("12-va-sur")
-        self.play(FadeIn(margo, shift=UP * 0.3), GrowFromCenter(fin_url))
-        self.wait(max(0.3, d1 - 1.2))
-        # ⭐ L'EFFET : les quatre portes se posent l'une après l'autre, au rythme
-        # de la phrase qui les énumère (7,82 s pour quatre — environ 1,9 s
-        # chacune, le temps de la lire à voix haute).
-        # ⭐ ZOOM IN / ZOOM OUT SUR CHAQUE PORTE (Frédéric, 03/09), le même
-        # rythme que les cinq mots de « a comme… ». Sans lui, quatre lignes
-        # s'empilent et l'œil ne sait plus laquelle vient d'arriver ; avec lui,
-        # celle que la voix nomme se met en avant puis reprend sa place.
-        # ⚠️ Le zoom porte sur la ligne, pas sur le bloc : `bloc_fin` grossirait
-        # d'un coup et ferait sauter tout l'écran.
-        d2 = self.dire("13-tout")
-        pas = max(1.05, (d2 - 0.6) / len(PORTES))
-        for p in portes:
-            self.play(FadeIn(p, shift=RIGHT * 0.35), run_time=0.30)
-            self.play(p.animate.scale(1.22), run_time=0.30)
-            self.wait(0.20)
-            self.play(p.animate.scale(1 / 1.22), run_time=0.25)
-            self.wait(max(0.05, pas - 1.05))
-        # ⭐ Et le « À bientôt ! » fait le même mouvement, en plus ample : il
-        # ferme la vidéo, c'est la dernière chose que l'enfant voit bouger.
-        d3 = self.dire("14-bientot")
-        self.play(GrowFromCenter(bientot), run_time=0.35)
-        self.play(bientot.animate.scale(1.18), run_time=0.35)
-        self.play(bientot.animate.scale(1 / 1.18), run_time=0.30)
-        self.wait(max(1.0, d3 - 1.0))
+        # ⭐ L'ÉCRAN DE FIN VIENT DU MODULE COMMUN. Il portait ici sa propre
+        # copie de la liste — et le jour où « Fiches d'écriture » est arrivée,
+        # seule celle de `lettre_commune.py` a été mise à jour : la vidéo du
+        # « i » a été rendue avec l'ANCIENNE liste, « Coach Maths » compris.
+        # C'est très exactement la duplication que le module devait supprimer.
+        page_de_fin(self, margo, "12-va-sur", "13-tout", "14-bientot")
 
 
 # ─── Les quatre variantes : deux mains × deux cadres ──────────────────────────

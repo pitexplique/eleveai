@@ -123,7 +123,12 @@ export const FAMILLES: FamilleEcriture[] = [
   },
 ];
 
-const LETTRES_FAITES = ["a", "i", "o"];
+// ⚠️ L'ORDRE EST CELUI DE LA PRODUCTION, PAS L'ALPHABET. On a fait les voyelles
+// dont la lettre et le son coïncident (a, i, o), puis le « u », qui a demandé un
+// autre format : en français, `u` initial ne donne que des mots qu'un enfant de
+// six ans n'a jamais entendus (urne, ustensile). Sa vidéo dit donc « u comme
+// DANS lune » — et c'est la formule qu'il faudra pour le « e » et les consonnes.
+const LETTRES_FAITES = ["a", "i", "o", "u"];
 
 // ⚠️ LES IDENTIFIANTS YOUTUBE SE COLLENT ICI, et nulle part ailleurs.
 // Une lettre sans identifiant affiche quand même sa fiche et sa vignette : la

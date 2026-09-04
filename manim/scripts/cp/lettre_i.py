@@ -32,7 +32,7 @@ from charte import *  # noqa: F403,E402
 from mascotte import MascotteMargouillat  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))  # dossier cp/
-from lettre_commune import ecran_relance  # noqa: E402
+from lettre_commune import ecran_relance, page_de_fin, page_de_garde  # noqa: E402
 
 INTERLIGNE = 1.0
 LARGEUR_REGLURE = 9.0
@@ -264,7 +264,7 @@ DUREE = {
     "04-le-point": 4.21, "05-encore": 2.92, "06-cherchons": 4.09, "06-i-comme": 1.56,
     "07-image": 1.61, "08-igloo": 1.48, "09-iguane": 1.66, "10-iris": 1.52,
     "11-immeuble": 1.63, "11-pareil": 4.71, "12-relance": 2.91, "13-va-sur": 3.16,
-    "14-tout": 9.55, "15-bientot": 1.71,
+    "14-tout": 8.14, "15-bientot": 1.71,
 }
 CLIPS_MOTS = ["07-image", "08-igloo", "09-iguane", "10-iris", "11-immeuble"]
 
@@ -290,45 +290,13 @@ class _LettreIBase(Scene):
         else:
             margo.to_edge(RIGHT, buff=1.1)
 
-        # ── 0. LA PAGE DE GARDE : DE 0 À 1 SECONDE ──────────────────────────
-        # ⛔ Posée par `add`, jamais par `play` : un fondu d'entrée retarde la
-        # première image, et c'est là que le spectateur décide.
-        garde_classe = Text(
-            "Français CP", font_size=34 if not self.vertical else 26, color=BLEU_CALCUL
+        # ── 0. LA PAGE DE GARDE : DE 0 À ~1,5 SECONDE ──────────────────────
+        # ⭐ Elle vient du MODULE COMMUN. Elle vivait ici en copie, et c'est
+        # ainsi que « Fiches d'écriture » avait manqué à l'écran de fin :
+        # une seule des trois copies avait été mise à jour.
+        garde, garde_main = page_de_garde(
+            self, "i", chemin_i(stroke_width=12), MascotteMargouillat()
         )
-        garde_notion = Text(
-            "Écriture cursive",
-            font_size=54 if not self.vertical else 40,
-            color=JAUNE_TITRE,
-        )
-        garde_imp = Text(
-            "i", font_size=96 if not self.vertical else 76, color=JAUNE_TITRE
-        )
-        # ⭐ La cursive à GAUCHE et plus grande : c'est le sujet de la vidéo.
-        # L'imprimée reste, parce qu'elle reviendra dans « image », « igloo »…
-        garde_cur = chemin_i(stroke_width=12)
-        garde_cur.height = garde_imp.height * 1.4
-        duo = VGroup(garde_cur, garde_imp).arrange(RIGHT, buff=0.8)
-        coeur = VGroup(garde_classe, garde_notion, duo).arrange(DOWN, buff=0.38)
-        # ⚠️ `Group` et non `VGroup` : Ti-Margo est un ImageMobject.
-        margo_garde = MascotteMargouillat().scale(0.7 if not self.vertical else 0.62)
-        if self.vertical:
-            garde = Group(coeur, margo_garde).arrange(DOWN, buff=0.5)
-        else:
-            garde = Group(coeur, margo_garde).arrange(RIGHT, buff=1.0)
-        garde.scale(
-            min(
-                1.0,
-                (config.frame_width - 0.8) / garde.width,
-                (config.frame_height - 1.8) / garde.height,
-            )
-        ).move_to(ORIGIN)
-        garde_main = Text(
-            "Pour gaucher" if self.gaucher else "Pour droitier",
-            font_size=32 if not self.vertical else 26,
-        ).to_edge(UP, buff=0.45)
-        self.add(garde, garde_main)
-        self.wait(0.75)
 
         # ── 1. L'ACCUEIL, À LA SECONDE PILE ─────────────────────────────────
         self.play(
@@ -492,59 +460,12 @@ class _LettreIBase(Scene):
         # ── 5. LA PAGE DE FIN : OÙ ALLER MAINTENANT ─────────────────────────
         # ⭐ On nomme le COACH FRANÇAIS, pas l'accueil : c'est la porte d'entrée
         # qui mène au tutor. Page vérifiée : /coach-ia/francais?classe=cp.
-        # ⛔ PAS DE VERBE, UNE LISTE (Frédéric, 03/09 : « enlève essayer, mets
-        # simplement Coach français »). L'écran dit ce qui existe ; une seule
-        # proposition cachait les quatre autres.
-        # ⭐ CHAQUE LIGNE ARRIVE À SON TOUR, pendant que la voix la nomme.
-        fin_url = Text(
-            "eleveai.fr",
-            font_size=62 if not self.vertical else 50,
-            color=JAUNE_TITRE,
-        )
-        PORTES = ["Coach Maths", "Coach Français", "Dictée", "Fiches activités"]
-        portes = VGroup(
-            *[
-                Text(p, font_size=40 if not self.vertical else 30, color=BLEU_CALCUL)
-                for p in PORTES
-            ]
-        ).arrange(DOWN, buff=0.30)
-        bientot = Text(
-            "À bientôt !",
-            font_size=52 if not self.vertical else 42,
-            color=VERT_OK,
-        )
-        bloc_fin = VGroup(fin_url, portes, bientot).arrange(DOWN, buff=0.45)
-        margo.scale(0.75 if not self.vertical else 0.85)
-        page_fin = Group(margo, bloc_fin).arrange(DOWN, buff=0.40)
-        page_fin.scale(
-            min(
-                1.0,
-                (config.frame_width - 0.8) / page_fin.width,
-                (config.frame_height - 0.8) / page_fin.height,
-            )
-        ).move_to(ORIGIN)
-
-        d1 = self.dire("13-va-sur")
-        self.play(FadeIn(margo, shift=UP * 0.3), GrowFromCenter(fin_url))
-        self.wait(max(0.3, d1 - 1.2))
-        # ⭐ ZOOM IN / ZOOM OUT SUR CHAQUE PORTE, le même rythme que les cinq
-        # mots. Sans lui, quatre lignes s'empilent et l'œil ne sait plus
-        # laquelle vient d'arriver.
-        # ⚠️ Le zoom porte sur la ligne, pas sur le bloc — sinon tout l'écran
-        # sauterait à chaque fois.
-        d2 = self.dire("14-tout")
-        pas = max(1.05, (d2 - 0.6) / len(PORTES))
-        for p in portes:
-            self.play(FadeIn(p, shift=RIGHT * 0.35), run_time=0.30)
-            self.play(p.animate.scale(1.22), run_time=0.30)
-            self.wait(0.20)
-            self.play(p.animate.scale(1 / 1.22), run_time=0.25)
-            self.wait(max(0.05, pas - 1.05))
-        d3 = self.dire("15-bientot")
-        self.play(GrowFromCenter(bientot), run_time=0.35)
-        self.play(bientot.animate.scale(1.18), run_time=0.35)
-        self.play(bientot.animate.scale(1 / 1.18), run_time=0.30)
-        self.wait(max(1.0, d3 - 1.0))
+        # ⭐ L'ÉCRAN DE FIN VIENT DU MODULE COMMUN. Il portait ici sa propre
+        # copie de la liste — et le jour où « Fiches d'écriture » est arrivée,
+        # seule celle de `lettre_commune.py` a été mise à jour : la vidéo du
+        # « i » a été rendue avec l'ANCIENNE liste, « Coach Maths » compris.
+        # C'est très exactement la duplication que le module devait supprimer.
+        page_de_fin(self, margo, "13-va-sur", "14-tout", "15-bientot")
 
 
 class _Portrait:

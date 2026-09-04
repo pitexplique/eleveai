@@ -203,13 +203,23 @@ def page_de_garde(scene, lettre: str, chemin_cursif: VMobject, mascotte):
         font_size=32 if not v else 26,
     ).to_edge(UP, buff=0.45)
     verifier(main, "mention de la main")
+    # ⛔⛔ ELLE DOIT TENIR AU-DELÀ DE LA SECONDE, PAS JUSQU'À LA SECONDE.
+    # Frédéric, 04/09 : « YouTube sélectionne l'image, celle qui est à
+    # 1 seconde ». La première version s'arrêtait PILE à 1,00 s (0,75 + 0,25 de
+    # fondu) : l'image prélevée tombait donc au milieu du fondu, ou déjà sur
+    # l'écran d'accueil. La vignette du Short montrait le mauvais écran — et
+    # sur un Short, cette image est tout ce qui décide.
+    # ⭐ 1,30 s d'affichage plein, puis le fondu : à 1,000 s on est franchement
+    # sur la garde, avec de la marge des deux côtés.
+    # ⚠️ Ne pas rallonger davantage « pour être sûr » : c'est aussi le temps
+    # avant que la leçon commence, et le pouce décide vite.
     scene.add(garde, main)
-    scene.wait(0.75)
+    scene.wait(1.30)
     return garde, main
 
 
 # ─── La relance ───────────────────────────────────────────────────────────────
-def ecran_relance(vertical: bool, lettre: str) -> VGroup:
+def ecran_relance(vertical: bool, lettre: str, dans_le_mot: bool = False) -> VGroup:
     """« Trouve un mot qui commence par <x> » — et la LETTRE en gros dessous.
 
     ⛔ « On essaie un autre mot ? » EST ABANDONNÉ (Frédéric, 03/09 : « enlève on
@@ -226,14 +236,21 @@ def ecran_relance(vertical: bool, lettre: str) -> VGroup:
     par » déborde à 30 (3,93). D'où trois lignes, et des tailles qui ne se
     devinent pas — 36 et 28.
     """
+    # ⭐⭐ DEUX FORMULES, PARCE QUE DEUX LEÇONS.
+    # « a », « i », « o » se trouvent en tête de mot : on dit « qui commence
+    # par ». « u » et « e » ne s'y trouvent presque jamais en français — leur
+    # leçon est d'ENTENDRE le son où qu'il soit, et la consigne doit le dire.
+    # Arbitrage de Frédéric, 04/09 : le son DANS le mot (lune, mur, tortue).
+    # ⚠️ C'est aussi la formule qu'il faudra pour les vingt consonnes.
     jaune = Text(lettre, font_size=120 if not vertical else 90, color=JAUNE_TITRE)
+    l2 = "où on entend le" if dans_le_mot else "qui commence par"
     if vertical:
         haut = VGroup(
             Text("Trouve un mot", font_size=36, color=VERT_OK),
-            Text("qui commence par", font_size=28, color=VERT_OK),
+            Text(l2, font_size=28, color=VERT_OK),
         ).arrange(DOWN, buff=0.18)
     else:
-        haut = Text("Trouve un mot qui commence par", font_size=48, color=VERT_OK)
+        haut = Text(f"Trouve un mot {l2}", font_size=48, color=VERT_OK)
     bloc = VGroup(haut, jaune).arrange(DOWN, buff=0.35)
     for m in (haut, jaune):
         verifier(m, f"relance ({lettre})")
@@ -248,8 +265,16 @@ def ecran_relance(vertical: bool, lettre: str) -> VGroup:
 # à l'endroit dont on se souvient.
 # ⚠️ « Fiches activités » = le cours + ses exercices. « Fiches d'écriture » = la
 # feuille à repasser. Deux choses différentes, deux lignes.
+# ⭐ LE FRANÇAIS D'ABORD, ET C'EST L'ORDRE DE FRÉDÉRIC (04/09) : « coach
+# francais, coach maths, dictée, fiche d'activité, fiches d'écritures ».
+# ⚠️ La première version ouvrait sur « Coach Maths » — sur une vidéo qui apprend
+# à tracer une lettre, c'est la porte la plus éloignée de ce qu'on vient de
+# faire. L'enfant qui vient d'écrire un « a » continue en français.
+# ⛔ PAS DE « Coach Maths » ICI. Frédéric, 04/09 : « on peut enlever coach maths
+# car ça concerne français, non ? ». Oui — et rien n'est perdu : `eleveai.fr`
+# est écrit juste au-dessus, les maths sont à un clic. Une porte hors sujet sur
+# l'écran de sortie d'une leçon d'écriture disperse au lieu de conduire.
 PORTES = [
-    "Coach Maths",
     "Coach Français",
     "Dictée",
     "Fiches activités",

@@ -179,7 +179,7 @@ DUREE = {
     "00-aujourdhui": 3.17, "01-ecoute": 2.99, "02-regarde": 3.02, "03-depart": 9.03,
     "04-encore": 2.92, "05-cherchons": 4.12, "05-o-comme": 1.58, "06-orange": 1.57,
     "07-olive": 1.53, "08-oreille": 1.56, "09-os": 1.37, "10-ordinateur": 2.03,
-    "10-pareil": 4.71, "11-relance": 2.94, "12-va-sur": 3.16, "13-tout": 9.55,
+    "10-pareil": 4.71, "11-relance": 2.94, "12-va-sur": 3.16, "13-tout": 8.14,
     "14-bientot": 1.71,
 }
 CLIPS_MOTS = ["06-orange", "07-olive", "08-oreille", "09-os", "10-ordinateur"]
