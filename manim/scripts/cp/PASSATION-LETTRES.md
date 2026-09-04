@@ -15,9 +15,46 @@ départ → le **tracé lent mené par un stylo** → deux reprises plus rapides
 **« a comme… »** cinq mots, chacun avec son dessin → **« On essaie un autre
 mot ? »** → **Ti-Margo**.
 
-**État au 03/09/2026 (soir).** `a` **et** `i` sont faits, rendus en 1080p60,
-vignettes comprises, et commités. Le `a` est **en ligne sur YouTube**.
-👉 **La suite est `o`, puis `u`.** ⛔ **PAS `e`** — voir « Le piège du `e` ».
+**État au 04/09/2026.** ⭐ **LES SIX VOYELLES SONT FAITES** — `a`, `e`, `i`,
+`o`, `u`, `y` — chacune avec ses deux Shorts, sa **fiche d'écriture** à
+imprimer, sa vignette et sa page sur le site. `a`, `i`, `o` sont **en ligne**.
+👉 **La suite : les dix CHIFFRES (0→9)**, puis les vingt et une consonnes.
+
+## ⛔⛔ Ce qui a changé depuis le 03/09 et qui commande tout
+
+**ON NE REND QUE LES SHORTS.** 126 vues pour un Short contre 2 pour la même
+vidéo en paysage. Les scènes 16:9 restent dans les fichiers, on ne les rend
+plus. `1920p60/` = portrait = ce qu'on publie.
+
+**L'IMAGE À 1,000 s EST LA VIGNETTE DU SHORT.** YouTube la prélève là, et le
+PNG 1280×720 du générateur ne sert qu'au paysage — sur un Short il ne s'affiche
+pas. La page de garde tient donc **1,30 s** (`page_de_garde`), et « Pour
+droitier » / « Pour gaucher » doit y être lisible. ⚠️ `a`, `i` et `o` ont été
+publiés avec l'ancienne durée : leur vignette était un écran noir.
+
+**UN SEUL FICHIER PORTE LE MONTAGE** : `lettre_commune.py` (réglure, stylo,
+`page_de_garde`, `ecran_relance`, `page_de_fin`, `verifier`). ⛔ Trois fois de
+suite, une lettre a gardé sa propre copie d'un écran et n'a pas reçu une
+correction — c'est ainsi que « Fiches d'écriture » a manqué au `i`. **Ne jamais
+recopier un écran dans un fichier de lettre.**
+
+**`verifier()` ARRÊTE LE RENDU** si un texte dépasse la largeur du cadre. Il a
+remplacé un filet silencieux qui écrasait le bloc et faisait passer deux
+défauts pour des rendus corrects. ⭐ Sur le `u`, il a montré que le coupable
+était le TITRE et non la liste : sa mesure ne bougeait pas quand je rétrécissais
+les mots.
+
+**DEUX FORMATS DE LISTE, selon la lettre :**
+- `a`, `i`, `o` → « **a comme…** », cinq mots qui COMMENCENT par la lettre ;
+- `e`, `u`, `y` → « **u comme dans…** », le son DANS le mot, la lettre coloriée
+  à sa place (`ecran_relance(..., dans_le_mot=True)`).
+⭐ C'est le second format qu'il faudra pour **les vingt et une consonnes**.
+
+**LA FICHE D'ÉCRITURE** (`manim/fiche_ecriture.py`) sort du même tableau
+`TRACES` que les vignettes : une lettre ajoutée là donne le PDF, l'aperçu, la
+vignette et la page `/fiches-ecriture/lettres/<x>`. ⛔ Une lettre à JAMBAGE
+(y, et bientôt j, g, p, q, f) prend un interligne plus court — sinon sa jambe
+passe sous la consigne de la bande suivante.
 
 ---
 

@@ -1234,6 +1234,23 @@ TRACES = {
         "pose": ((0.58, 0.36), (-0.70, 0.48)),
         "il": 145,
     },
+    "y": {
+        "depart": (-0.50, 0.00),
+        "courbes": [
+            ((-0.36, 0.32), (-0.20, 0.64), (-0.02, 0.95)),
+            ((0.04, 0.55), (0.06, 0.06), (0.26, 0.02)),
+            ((0.40, 0.06), (0.46, 0.55), (0.50, 0.95)),
+            ((0.54, 0.40), (0.50, -0.30), (0.30, -0.62)),
+            ((0.00, -0.85), (-0.38, -0.50), (-0.10, -0.10)),
+            ((0.10, 0.02), (0.30, 0.06), (0.56, 0.20)),
+        ],
+        "point": None,
+        "pose": ((0.56, 0.20), (-0.50, 0.00)),
+        # ⛔ INTERLIGNE COURT : le « y » DESCEND SOUS LA LIGNE (jusqu'à −0,85).
+        # Il occupe donc 1,80 interligne au total quand le « a » en occupe 1,05.
+        # Au réglage des autres lettres, sa boucle passait sous la signature.
+        "il": 96,
+    },
 }
 
 

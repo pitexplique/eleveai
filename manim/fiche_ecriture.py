@@ -146,8 +146,30 @@ def bande(d, spec, y_base, titre, mode, nb):
         bx += ESPACE_LETTRE * IL
 
 
+def profondeur(spec):
+    """De combien la lettre DESCEND sous la ligne de base, en interlignes.
+
+    ⛔ LE « y » A CASSÉ LA FEUILLE, et aucune lettre avant lui ne l'avait fait.
+    Sa jambe plonge à −0,85 interligne : avec l'interligne des cinq voyelles
+    précédentes, elle passait SOUS la consigne de la bande suivante (« 2. Je
+    repasse sur les pointillés »), qui se pose 104 px plus bas. Les lettres
+    a, e, i, o, u restent toutes au-dessus de la ligne — le défaut ne pouvait
+    pas apparaitre avant.
+    ⚠️ Il reviendra pour j, g, p, q et f. Cette fonction le règle une fois.
+    """
+    bas = min(
+        [spec["depart"][1]]
+        + [pt[1] for c in spec["courbes"] for pt in c]
+    )
+    return max(0.0, -bas)
+
+
 def construire(lettre):
     spec = TRACES[lettre]
+    # ⭐ Une lettre à jambage prend un interligne PLUS COURT, au lieu d'écarter
+    # les bandes : écarter aurait poussé la dernière sous le pied de page.
+    global IL
+    IL = 120 if profondeur(spec) > 0.1 else 150
     img = Image.new("RGB", (W, H), (255, 255, 255))
     d = ImageDraw.Draw(img)
 
