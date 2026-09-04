@@ -15,10 +15,58 @@ départ → le **tracé lent mené par un stylo** → deux reprises plus rapides
 **« a comme… »** cinq mots, chacun avec son dessin → **« On essaie un autre
 mot ? »** → **Ti-Margo**.
 
-**État au 04/09/2026.** ⭐ **LES SIX VOYELLES SONT FAITES** — `a`, `e`, `i`,
-`o`, `u`, `y` — chacune avec ses deux Shorts, sa **fiche d'écriture** à
-imprimer, sa vignette et sa page sur le site. `a`, `i`, `o` sont **en ligne**.
-👉 **La suite : les dix CHIFFRES (0→9)**, puis les vingt et une consonnes.
+**État au 04/09/2026 (soir).**
+⭐ **LES SIX VOYELLES** — `a`, `e`, `i`, `o`, `u`, `y` : deux Shorts, une fiche
+d'écriture, une vignette et une page chacune. `a`, `i`, `o` sont **en ligne**.
+⭐ **DEUX CHIFFRES** — `0` et `1` : deux Shorts et deux vignettes chacun.
+⛔⛔ **ON NE PRODUIT PLUS AVANT D'AVOIR MESURÉ** (Frédéric, 04/09 : « on
+analysera les chiffres sur YouTube avant de se lancer à faire des vidéos »).
+Seize Shorts sont faits, et on ne sait toujours pas grand-chose : le seul
+chiffre solide est **126 vues pour un Short contre 2 pour un paysage**, et c'est
+lui qui a fait abandonner le 16:9. Le reste est encore une hypothèse.
+
+**Les trois questions à trancher avec les chiffres réels :**
+1. ⭐ **Le gaucher fait-il vraiment mieux ?** 126 contre 37 sur le `a` — mais le
+   gaucher était sorti en premier. ⚠️ Le test est prêt : publier le `i` avec le
+   **droitier D'ABORD**. Si le gaucher repasse devant en étant sorti second, ce
+   n'est plus l'ordre — c'est qu'aucune autre chaîne ne parle aux gauchers.
+2. **Lettres ou chiffres ?** Deux familles, deux publics ; laquelle circule.
+3. **Le titre en question** (« Pourquoi on ne peut pas dessiner zéro ») contre
+   l'intitulé (« Écrire le chiffre 0 »).
+
+👉 Ensuite seulement : les chiffres `2` à `9`, puis les vingt et une consonnes.
+
+## ⛔ Ce qu'il faut savoir avant de reprendre
+
+**LES TRACÉS DE 2 À 9 SONT VALIDÉS** (planche dessinée le 04/09). ⚠️ Le `4` et le
+`5` s'écrivent **EN DEUX TEMPS** en français : on lève le crayon. Les tracer d'un
+seul trait oblige à revenir en arrière sur son propre chemin — l'erreur exacte du
+point du `i`. La machinerie existe (`lettre_i.py` lève déjà le crayon).
+
+**UN CHIFFRE N'A PAS DE SON.** L'écran des cinq mots des lettres est remplacé par
+la **quantité**. ⭐⭐ Et le zéro ne se dessine pas : on montre une DISPARITION —
+trois pommes, on les mange, **l'assiette reste**. ⛔ Jamais d'écran vide.
+Pour `1`, cinq objets DIFFÉRENTS (un seul de chaque) : c'est la variété qui
+enseigne que le nombre ne dépend pas de la chose comptée.
+
+**LES CHIFFRES SONT DES MATHS** : `page_de_fin(..., portes=PORTES_MATHS)`, garde
+qui dit « Les chiffres », deux interlignes au lieu de trois, sorties nommées
+`eleveai-maths-cp-chiffre-<n>-…`, vignettes dans `cp/maths/shorts`.
+
+**LA GARDE TIENT 1,50 s** — et c'est la vignette téléversée qui le permet
+(`python scripts/vignettes-shorts.py`). Le réglage a bougé quatre fois
+(0,75 → 1,30 → 1,80 → 1,50) parce qu'on devinait l'instant du prélèvement.
+⛔ Sans vignette téléversée, remonter à 1,80.
+
+**CE QUI RESTE À FAIRE, ET QUI N'EST PAS DU RENDU :**
+- ⚠️ **Les chiffres n'ont pas de fiche** : `manim/fiche_ecriture.py` ne connaît
+  que les lettres, et la famille `chiffres` du hub est fermée (`ouverte: false`).
+  Tant qu'elle l'est, **aucune description de chiffre ne doit porter de lien**.
+- ⚠️ **Les identifiants YouTube** manquent dans `lib/fiches-ecriture/registre.ts`
+  (constante `VIDEOS`) : les six pages de lettres annoncent « la vidéo arrive
+  bientôt » alors que trois sont en ligne.
+- ⚠️ **`a`, `i`, `o` en ligne sont périmés** : ancienne garde, ancien écran de
+  fin sans « Fiches d'écriture ». Les fichiers à jour sont sur le disque.
 
 ## ⛔⛔ Ce qui a changé depuis le 03/09 et qui commande tout
 
