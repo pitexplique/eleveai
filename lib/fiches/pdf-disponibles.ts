@@ -77,6 +77,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "identites-remarquables-4e-cours-exercices-corriges.pdf",
   "imperatif-et-le-conditionnel-present-6e-cours-exercices-corriges.pdf",
   "lettre-qu-on-n-entend-pas-en-cm1-2026-2027-cours-exercices-corriges.pdf",
+  "lettre-qui-commande-sa-voisine-au-cp-2026-2027-cours-exercices-corriges.pdf",
   "lettres-aux-sons-au-cp-2026-2027-cours-exercices-corriges.pdf",
   "lire-a-voix-haute-en-cm1-2026-2027-cours-exercices-corriges.pdf",
   "lire-avec-fluidite-en-cm1-2026-2027-cours-exercices-corriges.pdf",

@@ -797,6 +797,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "« des pomme » n'existe pas : quand un mot du groupe passe au pluriel, tous les autres suivent. Masculin, féminin, singulier, pluriel.",
   },
+  "francais/cp/orthographe-lexicale": {
+    titre: "La lettre qui commande sa voisine au CP (2026-2027)",
+    resume:
+      "« poison » et « poisson » : un s de différence. Le s, le c, le g et le n changent de son selon la lettre qui suit.",
+  },
   "francais/cm2/grammaire-nature-fonction": {
     titre: "Nature et fonction d'un mot en CM2 (2026-2027)",
     resume:
