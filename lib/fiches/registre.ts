@@ -787,6 +787,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "La lettre muette ne s'invente pas, elle se retrouve : « chat » cache un t, et « chaton » le réveille. Dictée de mots et de phrases.",
   },
+  "francais/cp/production-ecrite": {
+    titre: "Écrire une phrase à soi au CP (2026-2027)",
+    resume:
+      "« chat tapis dort » n'est pas une phrase, et « Un chat. » ne dit rien. Légender, répondre en phrase, ranger un texte court.",
+  },
   "francais/cm2/grammaire-nature-fonction": {
     titre: "Nature et fonction d'un mot en CM2 (2026-2027)",
     resume:
