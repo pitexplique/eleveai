@@ -426,6 +426,17 @@ body {
   [data-cycle="2"] [data-rubrique="proprietes"] p {
     display: none !important;
   }
+  /* ⛔ … MAIS LE SÉLECTEUR VISAIT TROP LARGE (04/09/2026). Il voulait dire « la
+     phrase d'explication de la carte » et il disait « tout paragraphe » : sur
+     la fiche `devenir_lecteur`, dont une propriété porte DEUX EXTRAITS DE TEXTE
+     à comparer, la carte s'imprimait vide — un cadre bleu et rien dedans.
+     Le texte était bien dans le HTML ; c'est la feuille d'impression qui le
+     retirait, et ça ne se voyait qu'au PDF.
+     ⭐ Un `.fiche-texte` n'est pas un commentaire d'adulte, c'est le SUPPORT :
+     il se lit, il se relit, et il ne peut pas disparaitre. */
+  [data-cycle="2"] [data-rubrique="proprietes"] .fiche-texte p {
+    display: revert !important;
+  }
   [data-cycle="2"] [data-rubrique="aRetenir"] section {
     padding-top: 4px !important;
   }

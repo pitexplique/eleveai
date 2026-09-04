@@ -817,6 +817,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Le texte contient déjà les instructions pour le lire : le signe de la fin commande la voix, et on respire entre les groupes.",
   },
+  "francais/cp/devenir-lecteur": {
+    titre: "Choisir et relier ses lectures au CP (2026-2027)",
+    resume:
+      "Le choix commence dans ta tête, pas sur l'étagère. Les personnages qui reviennent, les sortes de livres, et ce qui relie deux histoires.",
+  },
   "francais/cm2/grammaire-nature-fonction": {
     titre: "Nature et fonction d'un mot en CM2 (2026-2027)",
     resume:
