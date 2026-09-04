@@ -212,7 +212,10 @@ class _LettreYBase(Scene):
             margo.to_edge(RIGHT, buff=1.1)
 
         garde, garde_main = page_de_garde(
-            self, "y", chemin_y(stroke_width=12), MascotteMargouillat()
+            self, "y", chemin_y(stroke_width=12), MascotteMargouillat(),
+            # ⭐ Le « y » descend a -0,85 : cale sur 1,4 comme les autres, son
+            # corps devenait minuscule et la boucle se repliait dessus.
+            hauteur_cursive=2.4,
         )
 
         self.play(

@@ -155,7 +155,14 @@ def verifier(mobjet, nom: str, marge: float = 0.6):
 
 
 # ─── La page de garde (0 → 1 seconde) ─────────────────────────────────────────
-def page_de_garde(scene, lettre: str, chemin_cursif: VMobject, mascotte):
+def page_de_garde(
+    scene,
+    lettre: str,
+    chemin_cursif: VMobject,
+    mascotte,
+    hauteur_cursive: float = 1.4,
+    notion: str = "Écriture cursive",
+):
     """Le carton d'ouverture, posé par `add` — jamais par `play`.
 
     ⛔ LA VIDÉO S'OUVRAIT SUR 3,2 s D'ÉCRAN NOIR : la première phrase se jouait
@@ -168,9 +175,10 @@ def page_de_garde(scene, lettre: str, chemin_cursif: VMobject, mascotte):
     """
     v = scene.vertical
     classe = Text("Français CP", font_size=34 if not v else 26, color=BLEU_CALCUL)
-    notion = Text(
-        "Écriture cursive", font_size=54 if not v else 40, color=JAUNE_TITRE
-    )
+    # ⚠️ `notion` est un paramètre depuis le 04/09 : les CHIFFRES ne sont pas de
+    # l'« écriture cursive » — un chiffre s'écrit pareil en script et en attaché.
+    # Leur garde dit « Les chiffres ».
+    notion = Text(notion, font_size=54 if not v else 40, color=JAUNE_TITRE)
     # ⭐ LA CURSIVE À GAUCHE ET PLUS GRANDE : c'est le sujet de la vidéo, et on
     # lit de gauche à droite. L'imprimée était devant, sur une vidéo qui
     # s'appelle « Écriture cursive ».
@@ -179,8 +187,14 @@ def page_de_garde(scene, lettre: str, chemin_cursif: VMobject, mascotte):
     # fois au milieu d'un mot — et la correspondance entre les deux écritures
     # d'une lettre est une compétence du CP, pas un décor.
     imprime = Text(lettre, font_size=96 if not v else 76, color=JAUNE_TITRE)
+    # ⛔ LE FACTEUR SE RÈGLE PAR LETTRE, IL N'EST PAS UNIVERSEL.
+    # 1,4 convient aux lettres qui tiennent au-dessus de la ligne (a, e, i, o,
+    # u). Le « y » descend à −0,85 : caler sa HAUTEUR TOTALE sur la même valeur
+    # écrase son corps à presque rien et replie la boucle par-dessus. Vu sur la
+    # vignette du Short, pas dans le code — le glyphe y devenait illisible.
+    # ⚠️ Chaque lettre à jambage (j, g, p, q, f) devra passer sa propre valeur.
     cursive = chemin_cursif
-    cursive.height = imprime.height * 1.4
+    cursive.height = imprime.height * hauteur_cursive
     duo = VGroup(cursive, imprime).arrange(RIGHT, buff=0.8)
     coeur = VGroup(classe, notion, duo).arrange(DOWN, buff=0.38)
     # ⚠️ `Group` et non `VGroup` : Ti-Margo est un ImageMobject.
@@ -209,12 +223,24 @@ def page_de_garde(scene, lettre: str, chemin_cursif: VMobject, mascotte):
     # fondu) : l'image prélevée tombait donc au milieu du fondu, ou déjà sur
     # l'écran d'accueil. La vignette du Short montrait le mauvais écran — et
     # sur un Short, cette image est tout ce qui décide.
-    # ⭐ 1,30 s d'affichage plein, puis le fondu : à 1,000 s on est franchement
-    # sur la garde, avec de la marge des deux côtés.
-    # ⚠️ Ne pas rallonger davantage « pour être sûr » : c'est aussi le temps
-    # avant que la leçon commence, et le pouce décide vite.
+    # ⭐⭐ 1,50 s — ET C'EST LA VIGNETTE TÉLÉVERSÉE QUI LE PERMET.
+    # Historique de ce seul nombre, parce qu'il a bougé trois fois :
+    #   0,75 → l'écran d'accueil arrivait à 1,00 s pile, YouTube prélevait le
+    #          fondu. Trois Shorts sont partis en ligne avec une vignette NOIRE.
+    #   1,30 → corrigeait 1,0 s, mais Frédéric a observé que YouTube prélève
+    #          plutôt vers 1,5 s : on retombait dans le fondu (fin à 1,55 s).
+    #   1,80 → sûr, mais 0,3 s de plus avant la leçon, sur le format où le pouce
+    #          décide en deux secondes.
+    #   1,50 → ⭐ LE CHOIX DU 04/09, après que les vignettes sont générées :
+    #          « on revient à 1,5 s et on crée miniature ». Une vignette
+    #          téléversée à la main rend le prélèvement automatique SANS OBJET,
+    #          donc la durée redevient une pure question de rythme — et sur un
+    #          Short, 0,3 s au démarrage ne sont pas rien.
+    # ⛔ CE RÉGLAGE SUPPOSE QUE LA VIGNETTE EST TÉLÉVERSÉE. Elle est générée par
+    # `scripts/vignettes-shorts.py` dans `manim/miniatures/cp/francais/shorts/`.
+    # Sans elle, 1,50 remet le prélèvement au bord du fondu : remonter à 1,80.
     scene.add(garde, main)
-    scene.wait(1.30)
+    scene.wait(1.50)
     return garde, main
 
 
