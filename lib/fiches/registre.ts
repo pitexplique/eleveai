@@ -807,6 +807,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "On a le droit de deviner, à condition de montrer où c'est écrit. Un margouillat, un petit lézard, et un seul animal.",
   },
+  "francais/cp/langage-oral": {
+    titre: "Parler pour être compris au CP (2026-2027)",
+    resume:
+      "Celui qui t'écoute n'a pas entendu l'histoire. Raconter, écouter une consigne, redire autrement, et parler chacun son tour.",
+  },
   "francais/cm2/grammaire-nature-fonction": {
     titre: "Nature et fonction d'un mot en CM2 (2026-2027)",
     resume:

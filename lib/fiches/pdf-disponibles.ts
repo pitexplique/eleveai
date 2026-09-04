@@ -111,6 +111,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "ordres-de-grandeur-et-prefixes-4e-cours-exercices-corriges.pdf",
   "parallelogramme-4e-cours-exercices-corriges.pdf",
   "parallelogramme-5e-cours-exercices-corriges.pdf",
+  "parler-pour-etre-compris-au-cp-2026-2027-cours-exercices-corriges.pdf",
   "participe-passe-accorder-et-ou-mettre-la-negation-cm2-cours-exercices-corriges.pdf",
   "passe-compose-et-le-choix-du-temps-en-cm1-2026-2027-cours-exercices-corriges.pdf",
   "passe-simple-le-conditionnel-et-les-temps-composes-2026-2027-5e-cours-exercices-corriges.pdf",
