@@ -69,6 +69,20 @@ import { cgvEnVigueur } from "@/lib/legal/editeur";
 const outils = [
   { label: "Maths : cours et exercices corrigés à imprimer", href: "/fiches-cours/maths" },
   { label: "Français : cours et exercices corrigés à imprimer", href: "/fiches-cours/francais" },
+  // ⭐⭐ LES FICHES D'ÉCRITURE (05/09/2026). Frédéric : « Google aime les fiches
+  // de cours, donc peut-être les fiches d'écriture ? ». Oui — mais « Fiches de
+  // cours » a gagné son LIEN DE SITE dans le résultat de marque parce qu'elle
+  // est ICI, sur toutes les pages. `/fiches-ecriture` n'était liée nulle part :
+  // ni pied de page, ni menu, seulement dans la matrice — c'est-à-dire derrière
+  // un clic JavaScript que le robot ne fait pas.
+  // ⚠️ Le sitemap dit à Google qu'une page EXISTE ; les liens internes lui
+  // disent qu'elle COMPTE. Une page orpheline reste indexée et invisible.
+  // ⚠️ L'intitulé porte « à imprimer » comme ses voisines : c'est la requête
+  // tapée, et cinq sites en vivent (professeur-o, ecriture-cp, bienenseigner…).
+  {
+    label: "Fiches d'écriture CP : les lettres en cursive à imprimer",
+    href: "/fiches-ecriture",
+  },
   { label: "Évaluations nationales 6e et 4e", href: "/evaluation-nationale-college" },
   { label: "Évaluation nationale 6e maths", href: "/evaluation-nationale-college/6e-maths" },
   { label: "Évaluation nationale 6e français", href: "/evaluation-nationale-college/6e-francais" },

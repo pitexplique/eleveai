@@ -162,6 +162,8 @@ def page_de_garde(
     mascotte,
     hauteur_cursive: float = 1.4,
     notion: str = "Écriture cursive",
+    classe: str = "Français CP",
+    mains: tuple[str, str] = ("Pour droitier", "Pour gaucher"),
 ):
     """Le carton d'ouverture, posé par `add` — jamais par `play`.
 
@@ -173,12 +175,41 @@ def page_de_garde(
     ⭐ Un fondu d'entrée ne peut pas s'appliquer à la PREMIÈRE image : il ne fait
     que la retarder. D'où `add`.
     """
+    # ⭐⭐ LA GARDE EST EN COULEUR DEPUIS LE 05/09, ET C'EST UNE MESURE QUI L'A
+    # DÉCIDÉ. Sources de trafic sur 28 jours : le flux Shorts apporte 805 vues
+    # pour 6,7 SECONDES en moyenne, quand la recherche en apporte 173 pour
+    # 33 secondes. Sur 65 s de vidéo, c'est 10 % de rétention contre 50 % : dans
+    # le fil, le pouce part avant la leçon.
+    # 👉 Le seul écran qu'il voit à ce moment-là est CELLE-CI, et elle était
+    # NOIRE — au milieu d'un fil saturé de couleur. C'est aussi elle que YouTube
+    # prend en vignette. Un changement, deux effets.
+    # ⚠️ LE FOND NOIR RESTE POUR LE TRACÉ : là, il faut du contraste et rien qui
+    # distraie. La couleur est pour la garde, pas pour la leçon.
+    CIEL = "#5BC8F5"
+    SOLEIL = "#FFC93C"
+    NUIT = "#0B2545"
+
     v = scene.vertical
-    classe = Text("Français CP", font_size=34 if not v else 26, color=BLEU_CALCUL)
+    fond = Rectangle(
+        width=config.frame_width + 1, height=config.frame_height + 1,
+        stroke_width=0,
+    ).set_fill(CIEL, opacity=1)
+    soleil = Circle(radius=1.5 if not v else 1.2, stroke_width=0)
+    soleil.set_fill(SOLEIL, opacity=1)
+    soleil.move_to(
+        np.array([config.frame_width / 2 - 0.3, config.frame_height / 2 - 0.3, 0])
+    )
+    ciel = VGroup(fond, soleil)
+
+    # ⚠️ `classe` et `mains` sont des PARAMÈTRES depuis le 05/09 : le tracé d'une
+    # lettre ne dépend pas de la langue, mais tout le texte autour, si. C'est ce
+    # qui permet de refaire la série en anglais sans dupliquer une ligne de
+    # géométrie.
+    classe = Text(classe, font_size=34 if not v else 26, color=NUIT)
     # ⚠️ `notion` est un paramètre depuis le 04/09 : les CHIFFRES ne sont pas de
     # l'« écriture cursive » — un chiffre s'écrit pareil en script et en attaché.
     # Leur garde dit « Les chiffres ».
-    notion = Text(notion, font_size=54 if not v else 40, color=JAUNE_TITRE)
+    notion = Text(notion, font_size=54 if not v else 40, color=NUIT)
     # ⭐ LA CURSIVE À GAUCHE ET PLUS GRANDE : c'est le sujet de la vidéo, et on
     # lit de gauche à droite. L'imprimée était devant, sur une vidéo qui
     # s'appelle « Écriture cursive ».
@@ -186,7 +217,10 @@ def page_de_garde(
     # est en jaune. Jamais montrée, l'enfant la rencontrerait pour la première
     # fois au milieu d'un mot — et la correspondance entre les deux écritures
     # d'une lettre est une compétence du CP, pas un décor.
-    imprime = Text(lettre, font_size=96 if not v else 76, color=JAUNE_TITRE)
+    # ⚠️ Sur ciel clair, le jaune de la charte devient illisible. La cursive
+    # garde le BLANC (elle est le sujet, et un trait épais tient sur le bleu) ;
+    # l'imprimée passe en orange, qui contraste sans hurler.
+    imprime = Text(lettre, font_size=96 if not v else 76, color=ORANGE_RETENUE)
     # ⛔ LE FACTEUR SE RÈGLE PAR LETTRE, IL N'EST PAS UNIVERSEL.
     # 1,4 convient aux lettres qui tiennent au-dessus de la ligne (a, e, i, o,
     # u). Le « y » descend à −0,85 : caler sa HAUTEUR TOTALE sur la même valeur
@@ -212,10 +246,22 @@ def page_de_garde(
     # Droitier ou pour Gaucher »). C'est la SEULE chose qui distingue les deux
     # vidéos : même titre, même durée, même vignette. Sans elle, un parent
     # regarde la mauvaise, et un gaucher apprend la prise de l'autre main.
-    main = Text(
-        "Pour gaucher" if scene.gaucher else "Pour droitier",
+    # ⭐ LA MAIN SUR UNE PASTILLE BLEU NUIT : c'est la seule chose qui distingue
+    # les deux vidéos, et sur ciel clair un texte blanc nu disparaitrait.
+    # ⭐⭐ ET C'EST DEVENU LE POINT FORT DE LA CHAINE. Frédéric, 05/09 : « il y a
+    # une vraie demande sur gaucher, car toutes les vidéos sont faites pour les
+    # droitiers ». Les cinq paires publiées lui donnent raison — le gaucher fait
+    # 3,4× à 20× les vues du droitier, sans exception.
+    texte_main = Text(
+        mains[1] if scene.gaucher else mains[0],
         font_size=32 if not v else 26,
-    ).to_edge(UP, buff=0.45)
+        color=WHITE,
+    )
+    pastille = RoundedRectangle(
+        width=texte_main.width + 0.55, height=texte_main.height + 0.35,
+        corner_radius=0.18, stroke_width=0,
+    ).set_fill(NUIT, opacity=1)
+    main = VGroup(pastille, texte_main).to_edge(UP, buff=0.45)
     verifier(main, "mention de la main")
     # ⛔⛔ ELLE DOIT TENIR AU-DELÀ DE LA SECONDE, PAS JUSQU'À LA SECONDE.
     # Frédéric, 04/09 : « YouTube sélectionne l'image, celle qui est à
@@ -239,13 +285,17 @@ def page_de_garde(
     # ⛔ CE RÉGLAGE SUPPOSE QUE LA VIGNETTE EST TÉLÉVERSÉE. Elle est générée par
     # `scripts/vignettes-shorts.py` dans `manim/miniatures/cp/francais/shorts/`.
     # Sans elle, 1,50 remet le prélèvement au bord du fondu : remonter à 1,80.
-    scene.add(garde, main)
+    scene.add(ciel, garde, main)
     scene.wait(1.50)
-    return garde, main
+    # ⚠️  et non  :  contient Ti-Margo, un ImageMobject.
+    return Group(ciel, garde), main
 
 
 # ─── La relance ───────────────────────────────────────────────────────────────
-def ecran_relance(vertical: bool, lettre: str, dans_le_mot: bool = False) -> VGroup:
+def ecran_relance(
+    vertical: bool, lettre: str, dans_le_mot: bool = False,
+    consigne: tuple[str, str, str] | None = None,
+) -> VGroup:
     """« Trouve un mot qui commence par <x> » — et la LETTRE en gros dessous.
 
     ⛔ « On essaie un autre mot ? » EST ABANDONNÉ (Frédéric, 03/09 : « enlève on
@@ -269,14 +319,20 @@ def ecran_relance(vertical: bool, lettre: str, dans_le_mot: bool = False) -> VGr
     # Arbitrage de Frédéric, 04/09 : le son DANS le mot (lune, mur, tortue).
     # ⚠️ C'est aussi la formule qu'il faudra pour les vingt consonnes.
     jaune = Text(lettre, font_size=120 if not vertical else 90, color=JAUNE_TITRE)
-    l2 = "où on entend le" if dans_le_mot else "qui commence par"
+    # ⚠️ `consigne` = (ligne 1 portrait, ligne 2 portrait, phrase paysage).
+    # Traduisible, comme le reste des écrans.
+    l1, l2, entier = consigne or (
+        "Trouve un mot",
+        "où on entend le" if dans_le_mot else "qui commence par",
+        "Trouve un mot " + ("où on entend le" if dans_le_mot else "qui commence par"),
+    )
     if vertical:
         haut = VGroup(
-            Text("Trouve un mot", font_size=36, color=VERT_OK),
+            Text(l1, font_size=36, color=VERT_OK),
             Text(l2, font_size=28, color=VERT_OK),
         ).arrange(DOWN, buff=0.18)
     else:
-        haut = Text(f"Trouve un mot {l2}", font_size=48, color=VERT_OK)
+        haut = Text(entier, font_size=48, color=VERT_OK)
     bloc = VGroup(haut, jaune).arrange(DOWN, buff=0.35)
     for m in (haut, jaune):
         verifier(m, f"relance ({lettre})")
@@ -322,40 +378,48 @@ PORTES_MATHS = [
 
 
 def page_de_fin(
-    scene, mascotte, clip_url: str, clip_tout: str, clip_bientot: str,
-    portes: list[str] | None = None,
+    scene, mascotte, clip_url: str, clip_tout: str | None = None,
+    clip_bientot: str = "", portes: list[str] | None = None,
+    adieu: str = "À bientôt !",
+    adieu_taille: int | None = None,
 ):
-    """L'écran de sortie : une PORTE, pas une signature.
+    """L'écran de sortie — COURT, et différent selon le format.
 
-    ⛔ Il signait « EleveAI — Ti Margo » : un nom, et rien à faire ensuite.
-    Frédéric, 03/09 : « Ti margo / eleveai.fr / Coach Maths / Coach Français /
-    Dictée / A bientôt / fiches activités / avec effet ».
-    ⛔ PAS DE VERBE : « enlève essayer, mets simplement Coach français ». L'écran
-    dit ce qui EXISTE ; une seule proposition cachait les quatre autres.
-    ⭐ Ti-Margo en haut, puis chaque ligne arrive à son tour avec ZOOM IN /
-    ZOOM OUT — le rythme des cinq mots. Sans lui, quatre lignes s'empilent et
-    l'œil ne sait plus laquelle vient d'arriver.
+    ⛔⛔ LES QUATRE PORTES ONT SAUTÉ LE 05/09, ET C'EST UNE MESURE QUI L'A DÉCIDÉ.
+    Elles occupaient une dizaine de secondes sur 65 — 15 % de la vidéo — alors
+    que la durée moyenne de visionnage est de **6,7 s dans le fil Shorts** et
+    **33 s en recherche**. Presque personne ne les atteignait. Et sur un Short,
+    rien n'est cliquable : elles ne pouvaient même pas servir de lien.
+    ⭐ EFFET MÉCANIQUE : raccourcir la fin AUGMENTE le pourcentage visionné. De
+    65 à 58 secondes, les mêmes 33 s regardées passent de 51 % à 57 % — et c'est
+    ce pourcentage que l'algorithme regarde.
+    ⚠️ `clip_tout` et `portes` restent acceptés pour ne pas casser les appels
+    existants ; ils ne sont plus joués.
+
+    ⭐ DEUX ADRESSES SELON LE FORMAT (Frédéric, 05/09) :
+      — PORTRAIT : « eleveai.fr » seul. Un chemin complet ne se retient pas sur
+        un téléphone qu'on fait défiler ; il va dans la DESCRIPTION, où il est
+        cliquable.
+      — PAYSAGE : « eleveai.fr/fiches-ecriture ». Le spectateur est assis devant
+        une leçon de plusieurs minutes — il peut lire et taper un chemin.
+    ⚠️ SINGULIER : la route du site est `/fiches-ecriture`. Un « s » de trop
+    affiché à l'écran envoie sur un 404 que personne ne corrigera de tête.
     """
     v = scene.vertical
-    # ⚠️ La liste par défaut est celle du FRANÇAIS. Les chiffres passent
-    #  : voir le commentaire au-dessus de la constante.
-    noms = portes or PORTES
-    url = Text("eleveai.fr", font_size=62 if not v else 50, color=JAUNE_TITRE)
-    portes = VGroup(
-        *[
-            Text(p, font_size=40 if not v else 30, color=BLEU_CALCUL)
-            for p in noms
-        ]
-    ).arrange(DOWN, buff=0.30)
-    bientot = Text("À bientôt !", font_size=52 if not v else 42, color=VERT_OK)
-    for m, nom in [(url, "eleveai.fr"), (bientot, "À bientôt !")] + [
-        (p, noms[i]) for i, p in enumerate(portes)
-    ]:
-        verifier(m, nom)
+    adresse = "eleveai.fr" if v else "eleveai.fr/fiches-ecriture"
+    url = Text(adresse, font_size=54 if not v else 50, color=JAUNE_TITRE)
+    verifier(url, "l'adresse de fin")
+    # ⚠️ LA TAILLE SE PASSE, ELLE NE SE DEVINE PAS. « See you soon! » mesure
+    # 4,11 de large à 42 pour 3,90 utiles — l'anglais est plus long que le
+    # français à corps égal.  a arrêté le rendu, comme il doit.
+    bientot = Text(
+        adieu, font_size=adieu_taille or (52 if not v else 42), color=VERT_OK
+    )
+    verifier(bientot, "à bientôt")
 
-    bloc = VGroup(url, portes, bientot).arrange(DOWN, buff=0.45)
+    bloc = VGroup(url, bientot).arrange(DOWN, buff=0.55)
     margo = mascotte.scale(0.75 if not v else 0.85)
-    page = Group(margo, bloc).arrange(DOWN, buff=0.40)
+    page = Group(margo, bloc).arrange(DOWN, buff=0.45)
     page.scale(
         min(
             1.0,
@@ -368,22 +432,11 @@ def page_de_fin(
     scene.play(FadeIn(margo, shift=UP * 0.3), GrowFromCenter(url))
     scene.wait(max(0.3, d1 - 1.2))
 
-    d2 = scene.dire(clip_tout)
-    pas = max(1.05, (d2 - 0.6) / len(noms))
-    for p in portes:
-        # ⚠️ Le zoom porte sur la LIGNE, pas sur le bloc : le bloc grossirait
-        # d'un coup et ferait sauter tout l'écran.
-        scene.play(FadeIn(p, shift=RIGHT * 0.35), run_time=0.30)
-        scene.play(p.animate.scale(1.22), run_time=0.30)
-        scene.wait(0.20)
-        scene.play(p.animate.scale(1 / 1.22), run_time=0.25)
-        scene.wait(max(0.05, pas - 1.05))
-
     d3 = scene.dire(clip_bientot)
     scene.play(GrowFromCenter(bientot), run_time=0.35)
     scene.play(bientot.animate.scale(1.18), run_time=0.35)
     scene.play(bientot.animate.scale(1 / 1.18), run_time=0.30)
-    scene.wait(max(1.0, d3 - 1.0))
+    scene.wait(max(0.8, d3 - 1.0))
 
 
 class Portrait:

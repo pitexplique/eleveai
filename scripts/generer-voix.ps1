@@ -51,7 +51,14 @@ param(
   # Débit SSML en %, négatif = plus lent. -18 laisse à un CP le temps d'entendre.
   [int]$Debit = -18,
   # Hauteur SSML en %. Un rien plus haut sonne plus enjoué, sans devenir aigu.
-  [int]$Hauteur = 6
+  [int]$Hauteur = 6,
+  # ⭐ LA LANGUE (05/09/2026). Elle était écrite EN DUR à « fr-FR » : le script
+  # ne voyait pas Hazel, George ni Susan, les trois voix anglaises pourtant
+  # installées. Frédéric veut tester l’écriture cursive dans d’autres langues —
+  # le tracé, lui, ne change pas de langue.
+  # ⚠️ es-ES n’est PAS installée sur ce poste : Paramètres → Heure et langue →
+  # Voix → ajouter l’espagnol, sinon le script lèvera « voix absente ».
+  [string]$Langue = "fr-FR"
 )
 
 $ErrorActionPreference = "Stop"
@@ -75,9 +82,9 @@ $null = [Windows.Storage.Streams.DataReader, Windows.Storage, ContentType = Wind
 
 $synth = [Windows.Media.SpeechSynthesis.SpeechSynthesizer]::new()
 $toutes = [Windows.Media.SpeechSynthesis.SpeechSynthesizer]::AllVoices
-$choisie = $toutes | Where-Object { $_.DisplayName -match $Voix -and $_.Language -eq "fr-FR" } | Select-Object -First 1
+$choisie = $toutes | Where-Object { $_.DisplayName -match $Voix -and $_.Language -eq $Langue } | Select-Object -First 1
 if (-not $choisie) {
-  throw "Voix « $Voix » (fr-FR) absente. Disponibles : $(($toutes | Where-Object Language -eq 'fr-FR' | ForEach-Object DisplayName) -join ', ')"
+  throw "Voix « $Voix » ($Langue) absente. Disponibles : $(($toutes | Where-Object Language -eq $Langue | ForEach-Object DisplayName) -join ', ')"
 }
 $synth.Voice = $choisie
 
@@ -90,7 +97,7 @@ $n = 0
 foreach ($p in $json.PSObject.Properties) {
   $texte = [System.Security.SecurityElement]::Escape($p.Value)
   $ssml = @"
-<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='fr-FR'>
+<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='$Langue'>
 <prosody rate='$Debit%' pitch='$Hauteur%'>$texte</prosody>
 </speak>
 "@
