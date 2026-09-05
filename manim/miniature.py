@@ -1318,7 +1318,7 @@ NOTIONS = {
             "titre": ["ÉCRIRE LA", f"LETTRE {x}"], "taille": 74,
             "sous": f"en cursive · pour un {'GAUCHER' if g else 'DROITIER'}",
             "accroche": acc_lettre_cursive(x, g),
-            "dossier": "cp/francais",
+            "dossier": "cp/francais/fr",
         }
         for x in TRACES
         for g in (False, True)
@@ -1699,6 +1699,15 @@ def construire(nom, spec):
     # les miniatures dans miniatures/cp/francais »). Sans la clé, tout tombe à
     # plat dans `manim/miniatures/` — tenable à trente vignettes, plus du tout
     # quand chaque lettre de l'alphabet en apportera deux.
+    #
+    # ⭐⭐ ET LE DERNIER SEGMENT EST LA LANGUE (Frédéric, 05/09 : « fr ou gb »,
+    # « idem pour les miniatures »). Donc `cp/<matière>/<langue>`, jamais
+    # `cp/<matière>` tout court.
+    # ⛔ Ce n'est pas du rangement décoratif : la vignette d'une lettre est la
+    # MÊME géométrie dans toutes les langues — seuls le titre et les mots
+    # changent. Deux fichiers presque identiques dans un même dossier, et on
+    # téléverse l'anglais sur la vidéo française sans jamais s'en apercevoir.
+    # La langue dans le CHEMIN est ce qui rend la confusion impossible.
     dossier = SORTIE / spec["dossier"] if spec.get("dossier") else SORTIE
     os.makedirs(dossier, exist_ok=True)
     chemin = dossier / f"{nom}.png"

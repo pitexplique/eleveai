@@ -217,8 +217,20 @@ class _LetterUBase(Scene):
         garde, garde_main = page_de_garde(
             self, "u", chemin_u(stroke_width=12), MascotteMargouillat(),
             notion="Cursive letters",
-            classe="Handwriting · ages 5-7",
+            # ⚠️ « Ages 5-7 » et non « Handwriting · ages 5-7 » : la ligne de
+            # série au-dessus dit déjà « Beautiful handwriting », et les deux
+            # ensemble répétaient le mot. Le français n'a pas ce problème
+            # (« La belle écriture » / « Français CP » ne se recoupent pas) —
+            # c'est le genre d'écart qu'une traduction ligne à ligne ne voit
+            # jamais, parce qu'on relit la ligne, pas la page.
+            classe="Ages 5-7",
             mains=("For right-handers", "For left-handers"),
+            # ⛔ LE NOM DE LA SÉRIE SE TRADUIT, LUI AUSSI. Son défaut est « La
+            # belle écriture » — écrit pour le français, et donc du français
+            # posé en haut d'une vidéo anglaise si personne ne passe le
+            # paramètre. C'est le même piège que `classe` et `mains` : un défaut
+            # qui convient à la langue d'origine ne se voit jamais depuis elle.
+            serie="Beautiful handwriting",
         )
 
         self.play(

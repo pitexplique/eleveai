@@ -141,6 +141,75 @@ class TexteTropLarge(Exception):
     pass
 
 
+# ⛔⛔ LE SECOND GARDE-FOU : L'ÉCRAN QU'ON CROYAIT AVOIR EFFACÉ.
+# Frédéric, 05/09, capture à l'appui : « enlève le 4, tu as oublié de
+# l'effacer » — le chiffre blanc du tracé traînait derrière la liste des
+# quantités, en plein sur « quatre bougies ».
+# ⭐⭐ CE DÉFAUT NE SE VOIT PAS EN REGARDANT LA LEÇON. Le tracé oublié est
+# recouvert au pixel près par la reprise rapide qui le redessine : les deux sont
+# superposés, l'image est juste. Il n'apparait qu'un écran PLUS LOIN, au moment
+# où l'on efface ce qui le cachait — quand plus personne ne regarde le chiffre.
+# 👉 D'où la règle : **on ne vérifie pas qu'un écran est propre en le
+# regardant, on compte ce qui reste.** C'est le pendant de `verifier()`, qui
+# mesure une largeur au lieu de la juger à l'œil.
+class EcranNonNettoye(Exception):
+    pass
+
+
+def _se_voit(m) -> bool:
+    """Un mobjet laisse-t-il une trace à l'image ?
+
+    ⚠️ ON MESURE CE QUI SE VOIT, PAS CE QUI EXISTE. La scène garde en permanence
+    des objets parfaitement légitimes et parfaitement invisibles : les
+    `ValueTracker` des animations, et les rescapés d'un `FadeOut` — car
+    `Scene.remove(groupe)` ne retire PAS les sous-objets ajoutés un par un
+    (`Create(groupe[0])` ajoute le trait, pas le groupe), il se contente de les
+    passer à opacité zéro. Les compter tous ferait un garde-fou qui crie à
+    chaque écran, donc un garde-fou qu'on désactive.
+    """
+    if not hasattr(m, "get_family"):
+        return False
+    for f in m.get_family():
+        if not f.get_num_points():
+            continue
+        # ⚠️ `ValueTracker` a des points mais n'est pas un VMobject : il lève
+        # AttributeError sur `stroke_opacity`. On l'écarte par la question qu'on
+        # lui pose, pas par son type — un futur mobjet sans opacité serait
+        # traité pareil, sans qu'il faille y penser.
+        for lire in (
+            getattr(f, "get_stroke_opacity", None),
+            getattr(f, "get_fill_opacity", None),
+        ):
+            try:
+                if lire is not None and float(lire() or 0) > 0.01:
+                    return True
+            except AttributeError:
+                continue
+    return False
+
+
+def verifier_ecran_vide(scene, etape: str, garder=()):
+    """⛔ Arrête le rendu si un objet VISIBLE survit à un changement d'écran.
+
+    `garder` liste ce qui doit rester — typiquement la lettre ou le chiffre
+    rappelé dans un coin pendant toute la vidéo.
+    """
+    epargnes = {id(g) for m in garder for g in m.get_family()}
+    restants = [
+        m for m in scene.mobjects if id(m) not in epargnes and _se_voit(m)
+    ]
+    if restants:
+        details = ", ".join(
+            f"{type(m).__name__}(largeur {m.width:.2f})" for m in restants[:6]
+        )
+        raise EcranNonNettoye(
+            f"{len(restants)} objet(s) VISIBLE(s) après « {etape} » : {details}. "
+            f"Deux causes connues : un tracé créé DANS une boucle, dont la "
+            f"variable ne garde que le dernier ; ou un `FadeOut(groupe)` alors "
+            f"que les membres ont été ajoutés séparément — écrire `FadeOut(*g)`."
+        )
+
+
 def verifier(mobjet, nom: str, marge: float = 0.6):
     """Refuse de continuer si `mobjet` ne tient pas dans la largeur du cadre."""
     utile = config.frame_width - marge
@@ -164,6 +233,7 @@ def page_de_garde(
     notion: str = "Écriture cursive",
     classe: str = "Français CP",
     mains: tuple[str, str] = ("Pour droitier", "Pour gaucher"),
+    serie: str = "La belle écriture",
 ):
     """Le carton d'ouverture, posé par `add` — jamais par `play`.
 
@@ -205,6 +275,28 @@ def page_de_garde(
     # lettre ne dépend pas de la langue, mais tout le texte autour, si. C'est ce
     # qui permet de refaire la série en anglais sans dupliquer une ligne de
     # géométrie.
+    # ⭐⭐ « LA BELLE ÉCRITURE » — LE NOM DE LA SÉRIE, EN HAUT DE LA GARDE
+    # (Frédéric, 05/09 : « j'aimerais bien rajouter La belle écriture », « on
+    # pourrait mettre en page de garde La belle écriture non ? »).
+    # ⭐ ET C'EST CE QUI RÉSOUT LE PROBLÈME DE MATIÈRE. La garde des chiffres
+    # annonçait « Français CP », ce qui semblait faux — j'allais le corriger en
+    # « Maths CP ». Frédéric a tranché autrement, et mieux : « ça peut être
+    # français en fait, pas maths — c'est de l'écriture ». **Tracer un chiffre
+    # est un geste graphique, pas un calcul.** Le point de départ, le sens, le
+    # nombre de traits, le lever de crayon : rien là-dedans n'est de l'arithmé-
+    # tique. Ranger les chiffres en maths aurait coupé la série en deux là où
+    # elle est une.
+    # ⚠️ CE QUI NE CHANGE PAS POUR AUTANT : le RANGEMENT sur le disque garde
+    # `cp/maths/shorts/` pour les chiffres et `cp/francais/shorts/` pour les
+    # lettres, et le nom de fichier garde `eleveai-maths-cp-`. Ce sont deux
+    # questions différentes — ce qu'on ANNONCE à l'enfant, et où l'on RETROUVE
+    # un fichier parmi trente-six. Dix chiffres mélangés à vingt-six lettres
+    # dans un même dossier ne se retrouvent plus ; et quatre chiffres sont déjà
+    # en ligne sous ce nom, qu'un renommage ne rattraperait pas.
+    # ⭐ Le nom de série donne aussi son titre à la playlist : une seule pour
+    # les lettres ET les chiffres, ce qui n'était pas possible tant que la garde
+    # annonçait deux matières.
+    serie = Text(serie, font_size=30 if not v else 24, color=ORANGE_RETENUE)
     classe = Text(classe, font_size=34 if not v else 26, color=NUIT)
     # ⚠️ `notion` est un paramètre depuis le 04/09 : les CHIFFRES ne sont pas de
     # l'« écriture cursive » — un chiffre s'écrit pareil en script et en attaché.
@@ -230,7 +322,11 @@ def page_de_garde(
     cursive = chemin_cursif
     cursive.height = imprime.height * hauteur_cursive
     duo = VGroup(cursive, imprime).arrange(RIGHT, buff=0.8)
-    coeur = VGroup(classe, notion, duo).arrange(DOWN, buff=0.38)
+    # ⚠️ La série se colle À LA CLASSE (buff serré), pas à la notion : les deux
+    # premières lignes sont l'étiquette, la troisième est le sujet. Un espace
+    # égal partout ferait quatre lignes de même poids, et plus de titre.
+    etiquette = VGroup(serie, classe).arrange(DOWN, buff=0.16)
+    coeur = VGroup(etiquette, notion, duo).arrange(DOWN, buff=0.38)
     # ⚠️ `Group` et non `VGroup` : Ti-Margo est un ImageMobject.
     margo = mascotte.scale(0.7 if not v else 0.62)
     garde = Group(coeur, margo).arrange(DOWN if v else RIGHT, buff=0.5 if v else 1.0)

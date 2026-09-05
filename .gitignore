@@ -77,3 +77,6 @@ __pycache__/
 # Aperçus de canvas rendus hors du site (scripts/apercu-canvas.mjs)
 .apercu/
 apercu-canvas.html
+
+# les MP4 rangés pour téléversement : lourds, et ils vivent sur YouTube
+manim/sorties/**/*.mp4
