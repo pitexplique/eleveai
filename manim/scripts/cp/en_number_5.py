@@ -402,6 +402,13 @@ class _Number5Base(Scene):
         page_de_fin(self, margo, "12-va-sur", clip_bientot="14-bientot",
                     adieu="See you soon!", adieu_taille=36,
                     abonne=("Subscribe to", "the channel!"),
+                    # ⛔ PAS D'APPEL À LA FICHE ICI, ET C'EST VOULU. Le « 5 » est
+                    # le TÉMOIN du plan d'expérience du 06/09 : il part sans
+                    # l'écran « plus vite » ni l'appel à la fiche, le « 6 » part
+                    # avec. Les lui ajouter par souci d'uniformité détruirait la
+                    # seule comparaison propre qu'on ait — deux chiffres voisins,
+                    # même série, même créneau.
+                    fiche=None,
                     voix_abonne="en-commun")
 
 

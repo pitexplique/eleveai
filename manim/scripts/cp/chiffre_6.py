@@ -1,10 +1,14 @@
 # Écriture du chiffre « 5 » — CP
 #
-# ⭐⭐ LE CHIFFRE QUI RESSEMBLE À UN LEVER DE CRAYON, ET QUI N'EN EST PAS UN.
-# Écrit « barre du haut en dernier », le 5 obligerait à lever. En partant du
-# bout DROIT de la barre, le geste est continu de bout en bout : barre vers la
-# gauche, descente, panse. C'est le contraste utile avec le « 4 », qui lui, lève
-# vraiment — l'enfant apprend ainsi que le lever n'est pas la règle. Le tracer d'un seul trait obligerait le crayon à REVENIR EN ARRIÈRE sur
+# ⭐ LE PREMIER CHIFFRE QUI SE TERMINE PAR UNE BOUCLE FERMÉE.
+# Le « 6 » est une grande vague qui descend en tournant, puis une boucle qui
+# remonte et vient se refermer sur elle-même. D'un seul trait, sans lever.
+# ⚠️ CE QUI SE JOUE DANS LA HAUTEUR DE LA BOUCLE : trop basse et écrasée, le
+# ventre déborde et le chiffre se lit « 0 mal fermé ». La forme retenue (B, sur
+# trois proposées) monte la boucle jusqu'à 0,76 — le ventre reste franchement
+# sous la médiane, et la vague garde son élan.
+# ⚠️ Et c'est la première vidéo à porter les deux écrans du 06/09 : l'annonce
+# « Maintenant, plus vite ! » et l'appel à la fiche à télécharger. Le tracer d'un seul trait obligerait le crayon à REVENIR EN ARRIÈRE sur
 # son propre chemin — c'est exactement l'erreur du point du « i », et elle
 # s'entend dans la main d'un enfant : un geste qui rebrousse chemin n'est pas un
 # geste d'écriture.
@@ -17,9 +21,9 @@
 #
 # ⛔ TOUJOURS --disable_caching. ⛔ ON NE REND QUE LES SHORTS.
 #
-# portrait droitier : python -m manim render -qh --disable_caching -r 1080,1920 manim/scripts/cp/chiffre_4.py Chiffre5CpPortrait \
+# portrait droitier : python -m manim render -qh --disable_caching -r 1080,1920 manim/scripts/cp/chiffre_4.py Chiffre6CpPortrait \
 #                       -o eleveai-maths-cp-chiffre-5-droitier-portrait --media_dir manim/scripts/cp/media
-# portrait gaucher  : python -m manim render -qh --disable_caching -r 1080,1920 manim/scripts/cp/chiffre_4.py Chiffre5CpPortraitGaucher \
+# portrait gaucher  : python -m manim render -qh --disable_caching -r 1080,1920 manim/scripts/cp/chiffre_4.py Chiffre6CpPortraitGaucher \
 #                       -o eleveai-maths-cp-chiffre-5-gaucher-portrait --media_dir manim/scripts/cp/media
 
 import sys
@@ -44,49 +48,32 @@ from lettre_commune import (  # noqa: E402
     page_de_fin,
     page_de_garde,
     poser_stylo,
+    ecran_plus_vite,
     verifier_ecran_vide,
     stylo_neuf,
     verifier,
 )
 
-CHIFFRE = "5"
-MOT = "cinq"
+CHIFFRE = "6"
+MOT = "six"
 
-# ─── Le chemin du « 5 », D'UN SEUL TRAIT ──────────────────────────────────────
-# ⛔⛔ CORRIGÉ LE 05/09 — LA PREMIÈRE VERSION IMPOSAIT UN LEVER DE CRAYON INUTILE.
-# Frédéric : « tu peux commencer en haut à droite du cinq, donc pas de lever de
-# stylo ». Il a raison, et ce n'est pas un détail de confort : j'avais écrit le
-# corps d'abord (verticale + panse) puis la barre du haut en second temps, ce
-# qui OBLIGE à lever. En partant du bout DROIT de la barre, on la trace vers la
-# gauche, on descend, on enroule la panse — et le crayon ne quitte jamais la
-# feuille.
-# ⭐ Ce qui se joue ici : un lever de crayon coûte à un enfant de six ans (il
-# faut viser le point de repose). On n'en impose un que lorsque la lettre l'exige
-# vraiment — le « 4 », lui, l'exige. Inventer un lever là où le geste peut être
-# continu, c'est enseigner une difficulté qui n'existe pas.
-DEPART = np.array([0.40, 1.90, 0])      # en haut À DROITE
-COIN = np.array([-0.30, 1.90, 0])       # bout gauche de la barre
-BAS_VERTICALE = np.array([-0.34, 1.10, 0])
-PANSE = [
-    ((0.10, 1.34), (0.48, 0.98), (0.40, 0.52)),
-    ((0.32, 0.06), (-0.26, -0.10), (-0.46, 0.26)),
+# ─── Le chemin du « 6 », d'un seul trait ──────────────────────────────────────
+# Forme B, choisie par Frédéric sur trois candidates rendues côte à côte.
+DEPART = np.array([0.40, 1.92, 0])
+COURBES = [
+    ((0.04, 1.66), (-0.36, 1.14), (-0.36, 0.62)),   # la grande vague qui descend
+    ((-0.36, 0.20), (-0.04, 0.00), (0.18, 0.22)),   # le fond, on repart à droite
+    ((0.38, 0.44), (0.26, 0.76), (-0.08, 0.76)),    # la boucle remonte
+    ((-0.24, 0.76), (-0.33, 0.70), (-0.36, 0.60)),  # …et se referme sur la vague
 ]
 
 
-def chemin_5(stroke_width: float = 10, color: str = WHITE) -> VGroup:
-    """Un seul tracé — mais rendu dans un VGroup d'UN élément.
-
-    ⚠️ Le VGroup n'est pas décoratif : tout le montage (la boucle de tracé, la
-    reprise rapide, le nettoyage) parle en « liste de traits ». Rendre un
-    VMobject nu ici obligerait à écrire deux chemins de code, donc deux endroits
-    où oublier une correction.
-    """
+def chemin_6(stroke_width: float = 10, color: str = WHITE) -> VGroup:
+    """Un seul tracé, dans un VGroup d'un élément (voir `chiffre_5`)."""
     p = VMobject(stroke_width=stroke_width, stroke_color=color)
     p.set_fill(opacity=0)
     p.start_new_path(DEPART)
-    p.add_line_to(COIN)
-    p.add_line_to(BAS_VERTICALE)
-    for c1, c2, fin in PANSE:
+    for c1, c2, fin in COURBES:
         p.add_cubic_bezier_curve_to(
             np.array([*c1, 0]), np.array([*c2, 0]), np.array([*fin, 0])
         )
@@ -110,9 +97,9 @@ def reglure_chiffres() -> VGroup:
     return g
 
 
-VOIX = Path(__file__).resolve().parents[3] / "public" / "sons" / "cp-chiffre-5"
+VOIX = Path(__file__).resolve().parents[3] / "public" / "sons" / "cp-chiffre-6"
 DUREE = {
-    "00-aujourdhui": 4.34, "01-ecoute": 3.38, "02-regarde": 3.37, "03-depart": 16.38,
+    "00-aujourdhui": 4.31, "01-ecoute": 2.55, "02-regarde": 4.02, "03-depart": 16.75,
     "04-encore": 2.93, "05-combien": 3.07, "06-a": 1.87, "07-b": 2.04,
     "08-c": 1.89, "09-d": 1.68, "10-e": 2.01, "10-pareil": 4.80,
     "11-relance": 3.55, "12-va-sur": 3.16, "14-bientot": 1.71,
@@ -120,7 +107,7 @@ DUREE = {
 CLIPS = ["06-a", "07-b", "08-c", "09-d", "10-e"]
 
 
-class _Chiffre5Base(Scene):
+class _Chiffre6Base(Scene):
     vertical = False
     gaucher = False
 
@@ -150,7 +137,7 @@ class _Chiffre5Base(Scene):
         garde, garde_main = page_de_garde(
             # ⚠️ LES DEUX TRAITS, pas `[0]` : la garde affichait un « 4 »
             # amputé de sa barre verticale.
-            self, CHIFFRE, chemin_5(stroke_width=12), MascotteMargouillat(),
+            self, CHIFFRE, chemin_6(stroke_width=12), MascotteMargouillat(),
             hauteur_cursive=1.9, notion="Les chiffres",
         )
         self.play(
@@ -172,10 +159,10 @@ class _Chiffre5Base(Scene):
 
         # ── LE GESTE, EN DEUX TEMPS ─────────────────────────────────────────
         lignes = reglure_chiffres()
-        traits = chemin_5(stroke_width=14 if not self.vertical else 16)
+        traits = chemin_6(stroke_width=14 if not self.vertical else 16)
         VGroup(lignes, traits).move_to(ORIGIN).shift(DOWN * 0.3)
 
-        modele = chemin_5(stroke_width=14 if not self.vertical else 16, color=GREY_D)
+        modele = chemin_6(stroke_width=14 if not self.vertical else 16, color=GREY_D)
         for m, t in zip(modele, traits):
             m.match_points(t)
         imprime = Text(
@@ -267,7 +254,8 @@ class _Chiffre5Base(Scene):
         # ⚠️ Les deux reprises redessinent LES DEUX TRAITS, dans l'ordre et avec
         # la coupure entre eux : une reprise d'un seul tenant effacerait la
         # leçon qu'on vient de donner.
-        self.dire("04-encore")
+        d_encore = self.dire("04-encore")
+        annonce = ecran_plus_vite(self, duree=1.1)
         refait = None
         for duree in (2.0, 1.2):
             if refait is not None:
@@ -277,7 +265,7 @@ class _Chiffre5Base(Scene):
                 # sous-objets. La première reprise restait donc à l'écran pour
                 # toujours — invisible, recouverte par la seconde.
                 self.remove(*refait)
-            refait = chemin_5(stroke_width=14 if not self.vertical else 16)
+            refait = chemin_6(stroke_width=14 if not self.vertical else 16)
             for r, t in zip(refait, traits):
                 r.match_points(t)
             for r in refait:
@@ -285,6 +273,7 @@ class _Chiffre5Base(Scene):
             self.wait(0.35)
 
         self.play(
+            FadeOut(annonce),
             FadeOut(point), FadeOut(lignes), FadeOut(imprime), FadeOut(*refait),
             *[FadeOut(t) for t in traces],
         )
@@ -393,31 +382,20 @@ class _Chiffre5Base(Scene):
         self.wait(max(0.8, d - 1.4))
         self.play(FadeOut(relance), FadeOut(son))
 
-        page_de_fin(
-            self, margo, "12-va-sur", clip_bientot="14-bientot",
-            # ⛔ LE « 5 » EST LE TÉMOIN, il part SANS l'appel à la fiche et SANS
-            # l'écran « plus vite » (06/09). Le « 6 » part avec les deux. C'est
-            # la seule comparaison propre qu'on puisse avoir : deux chiffres
-            # voisins, même série, même créneau, 3 s d'écart de durée.
-            # ⚠️ ET C'EST ÉCRIT ICI EXPRÈS, alors que le défaut suffirait à
-            # « améliorer » la vidéo : sans cette ligne, un futur rendu du 5 lui
-            # ajouterait l'écran en silence, et le témoin cesserait d'en être un
-            # sans que personne ne s'en aperçoive.
-            fiche=None,
-        )
+        page_de_fin(self, margo, "12-va-sur", clip_bientot="14-bientot")
 
 
-class Chiffre5Cp(_Chiffre5Base):
+class Chiffre6Cp(_Chiffre6Base):
     """16:9, droitier — conservée, mais on ne la rend plus."""
 
 
-class Chiffre5CpGaucher(_Chiffre5Base):
+class Chiffre6CpGaucher(_Chiffre6Base):
     gaucher = True
 
 
-class Chiffre5CpPortrait(Portrait, _Chiffre5Base):
+class Chiffre6CpPortrait(Portrait, _Chiffre6Base):
     """9:16, droitier — LE format qui est vu."""
 
 
-class Chiffre5CpPortraitGaucher(Portrait, _Chiffre5Base):
+class Chiffre6CpPortraitGaucher(Portrait, _Chiffre6Base):
     gaucher = True

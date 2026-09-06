@@ -520,6 +520,8 @@ def page_de_fin(
     abonne: tuple[str, ...] = ("Abonne-toi", "à la chaîne !"),
     poignee: str = "@eleveai974",
     voix_abonne: str = "cp-commun",
+    fiche: tuple[str, ...] | None = ("Télécharge", "ta fiche !"),
+    fiche_url: str = "eleveai.fr/fiches-ecriture",
 ):
     """L'écran de sortie — COURT, et différent selon le format.
 
@@ -626,6 +628,88 @@ def page_de_fin(
     scene.play(nom.animate.scale(1.12), run_time=anim[2])
     scene.play(nom.animate.scale(1 / 1.12), run_time=anim[3])
     scene.wait(max(0.6, d4 - sum(anim) + 0.25))
+
+    # ── ⭐⭐ LA FICHE À TÉLÉCHARGER ────────────────────────────────────────────
+    # Frédéric, 06/09 : « ce serait bien à la fin de dire télécharge fiche
+    # d'écriture ».
+    # ⭐⭐ ET C'EST L'ÉCRAN LE PLUS IMPORTANT DE LA VIDÉO. Une vidéo montre le
+    # geste ; elle ne le FAIT PAS FAIRE. L'enfant qui regarde n'écrit pas — il
+    # regarde quelqu'un écrire. La feuille est le seul endroit où le geste passe
+    # dans sa main. Tout le reste (l'abonnement, la chaîne) sert la chaîne ;
+    # celui-ci sert l'enfant, et c'est aussi la seule conversion qui compte.
+    # ⛔ CET ÉCRAN N'A PAS PU EXISTER AVANT LE 06/09 : les chiffres n'avaient
+    # pas de fiche, la famille était fermée sur le site, et annoncer un
+    # téléchargement inexistant aurait été pire que de se taire.
+    # ⛔ ET L'ADRESSE SUIT LA MÊME RÈGLE QUE L'ÉCRAN DE SORTIE, pas une nouvelle.
+    # J'y ai mis le chemin complet en portrait : 5,26 de large pour 3,90 utiles,
+    # `verifier()` a arrêté le rendu. Or la règle était écrite vingt lignes plus
+    # haut — chemin complet en PAYSAGE, « eleveai.fr » seul en PORTRAIT, parce
+    # qu'un chemin ne se retient pas sur un téléphone qu'on fait défiler. Il
+    # vit dans la DESCRIPTION, où il est cliquable.
+    # 👉 Inventer une seconde règle à côté d'une règle existante, c'est en
+    # créer deux qui divergeront.
+    if fiche:
+        scene.play(FadeOut(lignes_abo), FadeOut(nom), run_time=0.3)
+        lignes_f = VGroup(
+            *[
+                Text(t, font_size=(46 if not v else 40), color=VERT_OK)
+                for t in (fiche if v else (" ".join(fiche),))
+            ]
+        ).arrange(DOWN, buff=0.18)
+        for t in lignes_f:
+            verifier(t, "l'appel à la fiche")
+        adr = Text(
+            fiche_url if not v else fiche_url.split("/")[0],
+            font_size=40 if not v else 34, color=JAUNE_TITRE,
+        )
+        verifier(adr, "l'adresse de la fiche")
+        bloc_f = VGroup(lignes_f, adr).arrange(DOWN, buff=0.45)
+        bloc_f.move_to(bloc)
+        anim_f = (0.35, 0.35, 0.30, 0.28)
+        d5 = _jouer(scene, voix_abonne, "fiche")
+        scene.play(GrowFromCenter(lignes_f), run_time=anim_f[0])
+        scene.play(FadeIn(adr, shift=UP * 0.25), run_time=anim_f[1])
+        scene.play(adr.animate.scale(1.10), run_time=anim_f[2])
+        scene.play(adr.animate.scale(1 / 1.10), run_time=anim_f[3])
+        scene.wait(max(0.6, d5 - sum(anim_f) + 0.25))
+
+
+# ─── ⭐ « MAINTENANT, PLUS VITE ! » ───────────────────────────────────────────
+# Frédéric, 06/09 : « quand tu dis écrire plus vite, il faut un écran : on
+# l'élève apprend à écrire plus vite ».
+# ⭐ CE QUI SE JOUE : la reprise rapide n'était qu'une répétition, et une
+# répétition sans annonce ressemble à un bug de montage. Nommée, elle devient
+# une ÉTAPE — et c'est la vraie progression de l'écriture au CP : on trace
+# d'abord juste, puis on trace fluide. La vitesse n'est pas de la performance,
+# c'est ce qui libère la tête pour penser à ce qu'on écrit.
+# ⚠️ IL NE COÛTE RIEN EN DURÉE, et c'est délibéré. La voix « on recommence, un
+# peu plus vite » dure déjà 3,3 s pendant qu'on redessine : l'écran se loge DANS
+# ce temps. Un écran de plus aurait allongé une vidéo déjà à 77 s, et le
+# pourcentage visionné est ce que l'algorithme lit.
+def ecran_plus_vite(scene, duree: float = 1.1):
+    """Annonce la reprise rapide. À jouer juste après `dire("04-encore")`."""
+    v = scene.vertical
+    lignes = VGroup(
+        *[
+            Text(t, font_size=42 if not v else 34, color=BLEU_CALCUL)
+            for t in (("Maintenant,", "plus vite !") if v
+                      else ("Maintenant, plus vite !",))
+        ]
+    ).arrange(DOWN, buff=0.16)
+    for t in lignes:
+        verifier(t, "l'annonce de la reprise rapide")
+    # ⛔ PAS EN HAUT DE L'ÉCRAN : le rappel du chiffre (`son`) y est posé en
+    # permanence, à gauche, et l'annonce lui passait dessus — « Maintenant, »
+    # écrit en travers du 6 jaune. Un texte centré ne « voit » pas ce qui
+    # occupe déjà le coin.
+    # ⭐ Elle descend donc dans la bande vide qui sépare le rappel de la
+    # réglure : le seul endroit du cadre qui n'appartienne à personne.
+    lignes.to_edge(UP, buff=2.0 if v else 1.4)
+    scene.play(FadeIn(lignes, shift=DOWN * 0.25), run_time=0.35)
+    scene.play(lignes.animate.scale(1.08), run_time=0.25)
+    scene.play(lignes.animate.scale(1 / 1.08), run_time=0.22)
+    scene.wait(max(0.1, duree - 0.82))
+    return lignes
 
 
 class Portrait:
