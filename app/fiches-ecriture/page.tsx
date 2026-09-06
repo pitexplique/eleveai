@@ -139,10 +139,25 @@ function Carte({ f, i = 0 }: { f: FicheEcriture; i?: number }) {
 }
 
 export default function HubFichesEcriture() {
-  const lettres = fichesDe("lettres");
+  // ⛔⛔ ON PARCOURT LES FAMILLES OUVERTES, ON N'EN NOMME PLUS UNE.
+  // Cette page disait `fichesDe("lettres")` en dur — écrit quand « lettres »
+  // était la seule famille ouverte, donc juste ce jour-là et faux le jour
+  // suivant. Le 06/09, ouvrir « chiffres » les a RETIRÉS de la liste « Bientôt »
+  // sans les faire apparaitre nulle part : six fiches existaient sur le disque,
+  // étaient dans le sitemap, et la page d'accueil du hub n'en montrait aucune.
+  // ⚠️ Et le lien était déjà annoncé dans les descriptions YouTube du soir.
+  // 👉 La leçon, encore : **changer un drapeau ne suffit jamais.** Il faut
+  // suivre la chaîne jusqu'à ce qui s'affiche. Voir la note « les trous de la
+  // matrice d'entrée » — même faute, autre endroit.
+  const ouvertes = FAMILLES.filter((f) => f.ouverte).map((f) => ({
+    famille: f,
+    fiches: fichesDe(f.slug),
+  })).filter((x) => x.fiches.length > 0);
   const aVenir = FAMILLES.filter((f) => !f.ouverte);
-  // La première lettre qui a sa vidéo en ligne sert de démonstration.
-  const vedette = lettres.find((f) => f.video?.droitier || f.video?.gaucher);
+  // La première fiche qui a sa vidéo en ligne sert de démonstration.
+  const vedette = ouvertes
+    .flatMap((x) => x.fiches)
+    .find((f) => f.video?.droitier || f.video?.gaucher);
 
   return (
     // ⛔ FOND CLAIR EXPLICITE, comme /maths-974. Le gabarit du site est SOMBRE :
@@ -223,16 +238,25 @@ export default function HubFichesEcriture() {
         </section>
       )}
 
-      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {lettres.map((f, i) => (
-          <Carte key={f.slug} f={f} i={i} />
-        ))}
-      </div>
-
-      <p className="mt-6 text-sm text-slate-500">
-        {lettres.length} lettre{lettres.length > 1 ? "s" : ""} sur 26 — les
-        suivantes arrivent une par une.
-      </p>
+      {/* ⭐ UNE SECTION PAR FAMILLE OUVERTE. Le titre de famille n'apparait que
+          s'il y en a plusieurs : sur une seule, il ferait doublon avec le titre
+          de la page. */}
+      {ouvertes.map(({ famille: fam, fiches }) => (
+        <section key={fam.slug} className="mt-10">
+          {ouvertes.length > 1 && (
+            <h2 className="text-2xl font-black text-slate-900">{fam.titre}</h2>
+          )}
+          <div className="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {fiches.map((f, i) => (
+              <Carte key={`${f.famille}-${f.slug}`} f={f} i={i} />
+            ))}
+          </div>
+          <p className="mt-6 text-sm text-slate-500">
+            {fiches.length} sur {fam.slug === "chiffres" ? 10 : 26} — les
+            suivantes arrivent une par une.
+          </p>
+        </section>
+      ))}
 
       {/* ⭐ LES FAMILLES À VENIR SONT ANNONCÉES, PAS CACHÉES : elles disent où va
           le chantier. ⛔ Mais elles ne sont pas cliquables — une page vide coûte
