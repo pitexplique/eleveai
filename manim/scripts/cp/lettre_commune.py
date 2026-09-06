@@ -243,7 +243,25 @@ def page_de_garde(
     # ⚠️ « CP » reste dans les TITRES et descriptions YouTube : c'est ce qui se
     # tape en France, et c'est là que ça sert. Ce qui change, c'est ce qui est
     # ÉCRIT DANS L'IMAGE, qui est vue partout.
-    classe: str = "Écriture · 6-7 ans",
+    # ⛔⛔ VIDE PAR DÉFAUT DEPUIS LE 06/09, ET LA RAISON N'EST PAS TYPOGRAPHIQUE.
+    # Frédéric : « il faut enlever l'âge absolument — il y a des réfugiés qui
+    # veulent apprendre notre langue ».
+    # ⭐⭐ UNE ÉTIQUETTE D'ÂGE DIT AUSSI À QUI CE N'EST PAS DESTINÉ. Un adulte
+    # qui apprend à écrire le français — primo-arrivant, réfugié, adulte en
+    # réapprentissage — lit « 6-7 ans » et comprend qu'il n'est pas le public.
+    # Alors que c'est très exactement lui que ces vidéos peuvent servir : le
+    # geste de la cursive française ne s'apprend nulle part ailleurs en vidéo,
+    # et un adulte qui trace mal en souffre plus qu'un enfant.
+    # ⚠️ C'est la même décision que sur le site : l'adulte est une CLASSE, pas
+    # un rôle. On ne lui fait pas une page à part, on cesse de l'exclure.
+    # ⚠️ (Accessoirement, « Écriture · 6-7 ans » sous « La belle écriture »
+    # répétait le mot « écriture » — la faute corrigée côté anglais deux heures
+    # plus tôt et réintroduite en français sans la voir. Mais c'est l'argument
+    # faible ; celui du dessus est le vrai.)
+    # ⚠️ Le paramètre RESTE, il n'est pas supprimé : une garde de lettre ou une
+    # future série pourra vouloir une troisième ligne. Vide, elle ne s'affiche
+    # simplement pas.
+    classe: str = "",
     mains: tuple[str, str] = ("Pour droitier", "Pour gaucher"),
     serie: str = "La belle écriture",
 ):
@@ -332,7 +350,10 @@ def page_de_garde(
         corner_radius=0.16, stroke_width=0,
     ).set_fill(NUIT, opacity=1).move_to(serie)
     serie = VGroup(pastille, serie)
-    classe = Text(classe, font_size=34 if not v else 26, color=NUIT)
+    classe = (
+        Text(classe, font_size=34 if not v else 26, color=NUIT)
+        if classe else VGroup()
+    )
     # ⚠️ `notion` est un paramètre depuis le 04/09 : les CHIFFRES ne sont pas de
     # l'« écriture cursive » — un chiffre s'écrit pareil en script et en attaché.
     # Leur garde dit « Les chiffres ».

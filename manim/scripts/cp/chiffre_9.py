@@ -1,10 +1,14 @@
 # Écriture du chiffre « 5 » — CP
 #
-# ⭐⭐ LE CHIFFRE QUI RESSEMBLE À UN LEVER DE CRAYON, ET QUI N'EN EST PAS UN.
-# Écrit « barre du haut en dernier », le 5 obligerait à lever. En partant du
-# bout DROIT de la barre, le geste est continu de bout en bout : barre vers la
-# gauche, descente, panse. C'est le contraste utile avec le « 4 », qui lui, lève
-# vraiment — l'enfant apprend ainsi que le lever n'est pas la règle. Le tracer d'un seul trait obligerait le crayon à REVENIR EN ARRIÈRE sur
+# ⭐ LE DERNIER DES DIX, ET LE PLUS SIMPLE — SI ON LE PREND DANS LE BON SENS.
+# Le « 6 » est une grande vague qui descend en tournant, puis une boucle qui
+# remonte et vient se refermer sur elle-même. D'un seul trait, sans lever.
+# ⚠️ CE QUI SE JOUE DANS LA HAUTEUR DE LA BOUCLE : trop basse et écrasée, le
+# ventre déborde et le chiffre se lit « 0 mal fermé ». La forme retenue (B, sur
+# trois proposées) monte la boucle jusqu'à 0,76 — le ventre reste franchement
+# sous la médiane, et la vague garde son élan.
+# ⚠️ Et c'est la première vidéo à porter les deux écrans du 06/09 : l'annonce
+# « Maintenant, plus vite ! » et l'appel à la fiche à télécharger. Le tracer d'un seul trait obligerait le crayon à REVENIR EN ARRIÈRE sur
 # son propre chemin — c'est exactement l'erreur du point du « i », et elle
 # s'entend dans la main d'un enfant : un geste qui rebrousse chemin n'est pas un
 # geste d'écriture.
@@ -17,9 +21,9 @@
 #
 # ⛔ TOUJOURS --disable_caching. ⛔ ON NE REND QUE LES SHORTS.
 #
-# portrait droitier : python -m manim render -qh --disable_caching -r 1080,1920 manim/scripts/cp/chiffre_4.py Number5PortraitRight \
+# portrait droitier : python -m manim render -qh --disable_caching -r 1080,1920 manim/scripts/cp/chiffre_4.py Chiffre9CpPortrait \
 #                       -o eleveai-maths-cp-chiffre-5-droitier-portrait --media_dir manim/scripts/cp/media
-# portrait gaucher  : python -m manim render -qh --disable_caching -r 1080,1920 manim/scripts/cp/chiffre_4.py Number5PortraitLeft \
+# portrait gaucher  : python -m manim render -qh --disable_caching -r 1080,1920 manim/scripts/cp/chiffre_4.py Chiffre9CpPortraitGaucher \
 #                       -o eleveai-maths-cp-chiffre-5-gaucher-portrait --media_dir manim/scripts/cp/media
 
 import sys
@@ -34,7 +38,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))  # dossier cp/
 from charte import *  # noqa: F403,E402
 from mascotte import MascotteMargouillat  # noqa: E402
 
-from chiffre_commune import OBJETS_EN as OBJETS, groupe, referent_corporel  # noqa: E402
+from chiffre_commune import OBJETS, groupe, referent_corporel  # noqa: E402
 from lettre_commune import (  # noqa: E402
     EPS,
     INTERLIGNE,
@@ -44,49 +48,42 @@ from lettre_commune import (  # noqa: E402
     page_de_fin,
     page_de_garde,
     poser_stylo,
+    ecran_plus_vite,
     verifier_ecran_vide,
     stylo_neuf,
     verifier,
 )
 
-CHIFFRE = "5"
-MOT = "five"
+CHIFFRE = "9"
+MOT = "neuf"
 
-# ─── Le chemin du « 5 », D'UN SEUL TRAIT ──────────────────────────────────────
-# ⛔⛔ CORRIGÉ LE 05/09 — LA PREMIÈRE VERSION IMPOSAIT UN LEVER DE CRAYON INUTILE.
-# Frédéric : « tu peux commencer en haut à droite du cinq, donc pas de lever de
-# stylo ». Il a raison, et ce n'est pas un détail de confort : j'avais écrit le
-# corps d'abord (verticale + panse) puis la barre du haut en second temps, ce
-# qui OBLIGE à lever. En partant du bout DROIT de la barre, on la trace vers la
-# gauche, on descend, on enroule la panse — et le crayon ne quitte jamais la
-# feuille.
-# ⭐ Ce qui se joue ici : un lever de crayon coûte à un enfant de six ans (il
-# faut viser le point de repose). On n'en impose un que lorsque la lettre l'exige
-# vraiment — le « 4 », lui, l'exige. Inventer un lever là où le geste peut être
-# continu, c'est enseigner une difficulté qui n'existe pas.
-DEPART = np.array([0.40, 1.90, 0])      # en haut À DROITE
-COIN = np.array([-0.30, 1.90, 0])       # bout gauche de la barre
-BAS_VERTICALE = np.array([-0.34, 1.10, 0])
-PANSE = [
-    ((0.10, 1.34), (0.48, 0.98), (0.40, 0.52)),
-    ((0.32, 0.06), (-0.26, -0.10), (-0.46, 0.26)),
+# ─── Le chemin du « 9 », d'un seul trait ──────────────────────────────────────
+# ⭐⭐ LE « 9 » N'EST PAS UN « 6 » RETOURNÉ, ET C'EST TOUT LE POINT.
+# À l'imprimerie, si : la forme est la même à 180°. À la main, non — un geste
+# ne se retourne pas. Le « 6 » COMMENCE par la grande vague et FINIT par la
+# boucle ; le « 9 » commence par la boucle, en haut, et finit par la jambe.
+# ⛔ Enseigner « c'est un 6 à l'envers » ferait tracer le rond dans le mauvais
+# sens et descendre la jambe depuis le mauvais point — l'enfant obtiendrait la
+# bonne image par un geste faux, et le geste faux est ce qui restera.
+# ⭐ La formule de la voix dit donc autre chose : « le neuf, c'est un rond avec
+# une jambe ». Rond d'abord, jambe ensuite, sans lever.
+# ⚠️ La jambe descend DROIT et s'arrête sur la ligne de base — elle ne plonge
+# pas dessous. Un « 9 » à jambage serait un « g ».
+DEPART = np.array([0.30, 1.86, 0])
+COURBES = [
+    ((0.06, 2.04), (-0.34, 1.94), (-0.36, 1.58)),   # le rond, vers la gauche
+    ((-0.38, 1.24), (-0.02, 1.06), (0.20, 1.22)),   # le bas du rond, qui remonte
+    ((0.30, 1.30), (0.32, 1.42), (0.32, 1.58)),     # …et qui se ferme sur lui-même
+    ((0.32, 1.10), (0.30, 0.50), (0.24, 0.00)),     # la jambe, droit jusqu'en bas
 ]
 
 
-def chemin_5(stroke_width: float = 10, color: str = WHITE) -> VGroup:
-    """Un seul tracé — mais rendu dans un VGroup d'UN élément.
-
-    ⚠️ Le VGroup n'est pas décoratif : tout le montage (la boucle de tracé, la
-    reprise rapide, le nettoyage) parle en « liste de traits ». Rendre un
-    VMobject nu ici obligerait à écrire deux chemins de code, donc deux endroits
-    où oublier une correction.
-    """
+def chemin_9(stroke_width: float = 10, color: str = WHITE) -> VGroup:
+    """Un seul tracé, dans un VGroup d'un élément (voir `chiffre_5`)."""
     p = VMobject(stroke_width=stroke_width, stroke_color=color)
     p.set_fill(opacity=0)
     p.start_new_path(DEPART)
-    p.add_line_to(COIN)
-    p.add_line_to(BAS_VERTICALE)
-    for c1, c2, fin in PANSE:
+    for c1, c2, fin in COURBES:
         p.add_cubic_bezier_curve_to(
             np.array([*c1, 0]), np.array([*c2, 0]), np.array([*fin, 0])
         )
@@ -110,9 +107,9 @@ def reglure_chiffres() -> VGroup:
     return g
 
 
-VOIX = Path(__file__).resolve().parents[3] / "public" / "sons" / "en-chiffre-5"
+VOIX = Path(__file__).resolve().parents[3] / "public" / "sons" / "cp-chiffre-9"
 DUREE = {
-    "00-aujourdhui": 4.34, "01-ecoute": 3.38, "02-regarde": 3.37, "03-depart": 16.38,
+    "00-aujourdhui": 4.23, "01-ecoute": 2.54, "02-regarde": 4.02, "03-depart": 17.21,
     "04-encore": 2.93, "05-combien": 3.07, "06-a": 1.87, "07-b": 2.04,
     "08-c": 1.89, "09-d": 1.68, "10-e": 2.01, "10-pareil": 4.80,
     "11-relance": 3.55, "12-va-sur": 3.16, "14-bientot": 1.71,
@@ -120,7 +117,7 @@ DUREE = {
 CLIPS = ["06-a", "07-b", "08-c", "09-d", "10-e"]
 
 
-class _Number5Base(Scene):
+class _Chiffre9Base(Scene):
     vertical = False
     gaucher = False
 
@@ -140,7 +137,7 @@ class _Number5Base(Scene):
 
     def construct(self):
         son = Text(CHIFFRE, font_size=150, color=JAUNE_TITRE)
-        titre = Text("the number", font_size=44, color=BLEU_CALCUL).next_to(son, UP, buff=0.5)
+        titre = Text("le chiffre", font_size=44, color=BLEU_CALCUL).next_to(son, UP, buff=0.5)
         margo = MascotteMargouillat().scale(0.85 if not self.vertical else 0.7)
         if self.vertical:
             margo.next_to(son, DOWN, buff=0.9)
@@ -150,10 +147,8 @@ class _Number5Base(Scene):
         garde, garde_main = page_de_garde(
             # ⚠️ LES DEUX TRAITS, pas `[0]` : la garde affichait un « 4 »
             # amputé de sa barre verticale.
-            self, CHIFFRE, chemin_5(stroke_width=12), MascotteMargouillat(),
-            hauteur_cursive=1.9, notion="Numbers", classe="",
-            mains=("For right-handers", "For left-handers"),
-            serie="Beautiful handwriting",
+            self, CHIFFRE, chemin_9(stroke_width=12), MascotteMargouillat(),
+            hauteur_cursive=1.9, notion="Les chiffres",
         )
         self.play(
             FadeOut(garde), FadeOut(garde_main),
@@ -174,10 +169,10 @@ class _Number5Base(Scene):
 
         # ── LE GESTE, EN DEUX TEMPS ─────────────────────────────────────────
         lignes = reglure_chiffres()
-        traits = chemin_5(stroke_width=14 if not self.vertical else 16)
+        traits = chemin_9(stroke_width=14 if not self.vertical else 16)
         VGroup(lignes, traits).move_to(ORIGIN).shift(DOWN * 0.3)
 
-        modele = chemin_5(stroke_width=14 if not self.vertical else 16, color=GREY_D)
+        modele = chemin_9(stroke_width=14 if not self.vertical else 16, color=GREY_D)
         for m, t in zip(modele, traits):
             m.match_points(t)
         imprime = Text(
@@ -269,7 +264,8 @@ class _Number5Base(Scene):
         # ⚠️ Les deux reprises redessinent LES DEUX TRAITS, dans l'ordre et avec
         # la coupure entre eux : une reprise d'un seul tenant effacerait la
         # leçon qu'on vient de donner.
-        self.dire("04-encore")
+        d_encore = self.dire("04-encore")
+        annonce = ecran_plus_vite(self, duree=1.1)
         refait = None
         for duree in (2.0, 1.2):
             if refait is not None:
@@ -279,7 +275,7 @@ class _Number5Base(Scene):
                 # sous-objets. La première reprise restait donc à l'écran pour
                 # toujours — invisible, recouverte par la seconde.
                 self.remove(*refait)
-            refait = chemin_5(stroke_width=14 if not self.vertical else 16)
+            refait = chemin_9(stroke_width=14 if not self.vertical else 16)
             for r, t in zip(refait, traits):
                 r.match_points(t)
             for r in refait:
@@ -287,6 +283,7 @@ class _Number5Base(Scene):
             self.wait(0.35)
 
         self.play(
+            FadeOut(annonce),
             FadeOut(point), FadeOut(lignes), FadeOut(imprime), FadeOut(*refait),
             *[FadeOut(t) for t in traces],
         )
@@ -296,15 +293,11 @@ class _Number5Base(Scene):
         d = self.dire("05-combien")
         if self.vertical:
             question = VGroup(
-                # ⛔ « How many is that? » mesurait 4,45 pour 3,90 utiles.
-                # L'anglais est plus long que le français à corps égal — c'est
-                # la troisième fois que ce même écart arrête un rendu. En 9:16
-                # la question se réduit à deux mots.
-                Text("five.", font_size=34, color=BLEU_CALCUL),
-                Text("How many?", font_size=34, color=BLEU_CALCUL),
+                Text(f"{MOT},", font_size=34, color=BLEU_CALCUL),
+                Text("c'est combien ?", font_size=34, color=BLEU_CALCUL),
             ).arrange(DOWN, buff=0.18)
         else:
-            question = Text("five. How many is that?", font_size=52, color=BLEU_CALCUL)
+            question = Text(f"{MOT}, c'est combien ?", font_size=52, color=BLEU_CALCUL)
         for m in (question if self.vertical else [question]):
             verifier(m, "la question")
         question.to_edge(UP, buff=1.2 if self.vertical else 0.9)
@@ -349,7 +342,7 @@ class _Number5Base(Scene):
         # identiques d'un chiffre à l'autre, et c'est cette constance qui laisse
         # comparer cinq pommes à quatre pommes. La main ne vaut que pour SON
         # chiffre — dans la liste, elle casserait la comparaison.
-        referent = referent_corporel(int(CHIFFRE), langue="en")
+        referent = referent_corporel(int(CHIFFRE))
         if referent is not None:
             dessin, lignes_legende = referent
             self.play(FadeOut(bloc), run_time=0.3)
@@ -382,13 +375,13 @@ class _Number5Base(Scene):
         self.play(FadeOut(question), FadeOut(bloc))
         if self.vertical:
             relance = VGroup(
-                Text("Find something", font_size=28, color=VERT_OK),
-                Text("there are", font_size=28, color=VERT_OK),
+                Text("Cherche une chose", font_size=28, color=VERT_OK),
+                Text("dont il y en a", font_size=28, color=VERT_OK),
                 Text(CHIFFRE, font_size=90, color=JAUNE_TITRE),
             ).arrange(DOWN, buff=0.22)
         else:
             relance = VGroup(
-                Text("Find something there are", font_size=48, color=VERT_OK),
+                Text("Cherche une chose dont il y en a", font_size=48, color=VERT_OK),
                 Text(CHIFFRE, font_size=120, color=JAUNE_TITRE),
             ).arrange(DOWN, buff=0.35)
         for m in relance:
@@ -399,30 +392,20 @@ class _Number5Base(Scene):
         self.wait(max(0.8, d - 1.4))
         self.play(FadeOut(relance), FadeOut(son))
 
-        page_de_fin(self, margo, "12-va-sur", clip_bientot="14-bientot",
-                    adieu="See you soon!", adieu_taille=36,
-                    abonne=("Subscribe to", "the channel!"),
-                    # ⛔ PAS D'APPEL À LA FICHE ICI, ET C'EST VOULU. Le « 5 » est
-                    # le TÉMOIN du plan d'expérience du 06/09 : il part sans
-                    # l'écran « plus vite » ni l'appel à la fiche, le « 6 » part
-                    # avec. Les lui ajouter par souci d'uniformité détruirait la
-                    # seule comparaison propre qu'on ait — deux chiffres voisins,
-                    # même série, même créneau.
-                    fiche=None,
-                    voix_abonne="en-commun")
+        page_de_fin(self, margo, "12-va-sur", clip_bientot="14-bientot")
 
 
-class Number5Right(_Number5Base):
+class Chiffre9Cp(_Chiffre9Base):
     """16:9, droitier — conservée, mais on ne la rend plus."""
 
 
-class Number5Left(_Number5Base):
+class Chiffre9CpGaucher(_Chiffre9Base):
     gaucher = True
 
 
-class Number5PortraitRight(Portrait, _Number5Base):
+class Chiffre9CpPortrait(Portrait, _Chiffre9Base):
     """9:16, droitier — LE format qui est vu."""
 
 
-class Number5PortraitLeft(Portrait, _Number5Base):
+class Chiffre9CpPortraitGaucher(Portrait, _Chiffre9Base):
     gaucher = True

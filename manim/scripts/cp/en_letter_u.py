@@ -233,7 +233,7 @@ class _LetterUBase(Scene):
             # (« La belle écriture » / « Français CP » ne se recoupent pas) —
             # c'est le genre d'écart qu'une traduction ligne à ligne ne voit
             # jamais, parce qu'on relit la ligne, pas la page.
-            classe="Handwriting · ages 6-7",
+            classe="",
             mains=("For right-handers", "For left-handers"),
             # ⛔ LE NOM DE LA SÉRIE SE TRADUIT, LUI AUSSI. Son défaut est « La
             # belle écriture » — écrit pour le français, et donc du français
