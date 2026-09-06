@@ -6,7 +6,10 @@ import { NIVEAUX, motsDeLaClasse } from "@/lib/dico";
 import { cgvEnVigueur } from "@/lib/legal/editeur";
 import { PDF_DISPONIBLES } from "@/lib/fiches/pdf-disponibles";
 import { FICHES_REGISTRE } from "@/lib/fiches/registre";
-import { FICHES as FICHES_ECRITURE } from "@/lib/fiches-ecriture/registre";
+import {
+  FAMILLES as FAMILLES_ECRITURE,
+  FICHES as FICHES_ECRITURE,
+} from "@/lib/fiches-ecriture/registre";
 import {
   PROGRAMME_CLASSES,
   listerNiveauxHorsClasse,
@@ -269,8 +272,13 @@ const ROUTES: RouteConfig[] = [
   // ⚠️ Les pages de lettres (/fiches-ecriture/lettres/a…) s'ajoutent plus bas,
   // depuis le registre : une entrée écrite en dur ici deviendrait fausse à la
   // vingt-sixième lettre.
+  // ⛔ « /fiches-ecriture/lettres » ÉTAIT ÉCRIT EN DUR ICI, et la page famille
+  // des chiffres a donc manqué au sitemap le jour où on l'a ouverte (06/09) —
+  // alors que ses six fiches, elles, y étaient, via le registre. Le commentaire
+  // juste au-dessus prévenait pourtant du piège pour les LETTRES ; on l'a évité
+  // pour les feuilles et refait pour les familles, deux lignes plus bas.
+  // ⚠️ Les index de famille se dérivent donc du registre, comme les feuilles.
   { path: "/fiches-ecriture", priority: 0.9,  changeFrequency: "weekly", lastMod: LASTMOD_974 },
-  { path: "/fiches-ecriture/lettres", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_974 },
   { path: "/simulateur-cyclone", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
   { path: "/simulateur-sucre", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
   { path: "/simulateur-fromage", priority: 0.8, changeFrequency: "weekly", lastMod: LASTMOD_MACHINES },
@@ -597,6 +605,15 @@ const jeuxCartesRoutes: RouteConfig[] = NIVEAUX.filter(
 // les chiffres, les nombres. Une liste recopiée à la main devient fausse à la
 // première lettre ajoutée, et une entrée de sitemap qui pointe vers une page
 // absente coûte plus cher qu'une page non déclarée.
+const famillesEcritureRoutes: RouteConfig[] = FAMILLES_ECRITURE
+  .filter((f) => f.ouverte)
+  .map((f) => ({
+    path: `/fiches-ecriture/${f.slug}`,
+    priority: 0.85,
+    changeFrequency: "weekly" as const,
+    lastMod: LASTMOD_974,
+  }));
+
 const fichesEcritureRoutes: RouteConfig[] = FICHES_ECRITURE.map((f) => ({
   path: `/fiches-ecriture/${f.famille}/${f.slug}`,
   priority: 0.85,
@@ -753,6 +770,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...niveauxRoutes,
     ...notionsRoutes,
     ...niveauxHorsClasseRoutes,
+    ...famillesEcritureRoutes,
     ...fichesEcritureRoutes,
   ].map((route) => {
     const videos = VIDEOS_FICHES[route.path];
