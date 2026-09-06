@@ -232,7 +232,18 @@ def page_de_garde(
     mascotte,
     hauteur_cursive: float = 1.4,
     notion: str = "Écriture cursive",
-    classe: str = "Français CP",
+    # ⭐ « 6-7 ans » ET NON « CP » (Frédéric, 06/09 : « je préfère quand tu mets
+    # âge 6-7 plutôt que CP »). Trois raisons qui vont dans le même sens :
+    #   — un parent anglophone, québécois ou belge ne sait pas ce qu'est le CP,
+    #     et la chaîne a déjà 3 % de trafic américain sans un mot d'anglais ;
+    #   — un enfant de 6 ans qui n'est PAS en CP (déscolarisé, en avance, en
+    #     retard, à l'étranger) écrit quand même — le niveau exclut, l'âge non ;
+    #   — l'âge est la même unité dans les deux langues, donc la garde française
+    #     et la garde anglaise disent enfin la même chose.
+    # ⚠️ « CP » reste dans les TITRES et descriptions YouTube : c'est ce qui se
+    # tape en France, et c'est là que ça sert. Ce qui change, c'est ce qui est
+    # ÉCRIT DANS L'IMAGE, qui est vue partout.
+    classe: str = "Écriture · 6-7 ans",
     mains: tuple[str, str] = ("Pour droitier", "Pour gaucher"),
     serie: str = "La belle écriture",
 ):

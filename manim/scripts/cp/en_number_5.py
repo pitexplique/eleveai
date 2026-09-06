@@ -151,7 +151,7 @@ class _Number5Base(Scene):
             # ⚠️ LES DEUX TRAITS, pas `[0]` : la garde affichait un « 4 »
             # amputé de sa barre verticale.
             self, CHIFFRE, chemin_5(stroke_width=12), MascotteMargouillat(),
-            hauteur_cursive=1.9, notion="Numbers", classe="Ages 5-7",
+            hauteur_cursive=1.9, notion="Numbers", classe="Handwriting · ages 6-7",
             mains=("For right-handers", "For left-handers"),
             serie="Beautiful handwriting",
         )
