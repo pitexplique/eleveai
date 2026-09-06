@@ -15,6 +15,7 @@
 # bougé. À faire dès que les Shorts sont publiés.
 
 import sys
+import wave
 from pathlib import Path
 
 import numpy as np
@@ -473,11 +474,29 @@ PORTES_MATHS = [
 ]
 
 
+# ⭐ Les clips PARTAGÉS par toutes les vidéos vivent dans leur propre dossier.
+# La durée est lue sur le fichier, pas recopiée dans une table : une table de
+# durées se désynchronise dès qu'on régénère la voix, et personne ne s'en aperçoit
+# avant d'entendre une phrase coupée.
+SONS = Path(__file__).resolve().parents[3] / "public" / "sons"
+
+
+def _jouer(scene, dossier: str, nom: str) -> float:
+    """Joue un clip partagé et rend sa durée réelle, lue dans le WAV."""
+    chemin = SONS / dossier / f"{nom}.wav"
+    scene.add_sound(str(chemin))
+    with wave.open(str(chemin), "rb") as w:
+        return w.getnframes() / float(w.getframerate())
+
+
 def page_de_fin(
     scene, mascotte, clip_url: str, clip_tout: str | None = None,
     clip_bientot: str = "", portes: list[str] | None = None,
     adieu: str = "À bientôt !",
     adieu_taille: int | None = None,
+    abonne: tuple[str, ...] = ("Abonne-toi", "à la chaîne !"),
+    poignee: str = "@eleveai974",
+    voix_abonne: str = "cp-commun",
 ):
     """L'écran de sortie — COURT, et différent selon le format.
 
@@ -532,7 +551,58 @@ def page_de_fin(
     scene.play(GrowFromCenter(bientot), run_time=0.35)
     scene.play(bientot.animate.scale(1.18), run_time=0.35)
     scene.play(bientot.animate.scale(1 / 1.18), run_time=0.30)
-    scene.wait(max(0.8, d3 - 1.0))
+    # ⚠️ Le plancher passe de 0,8 à 0,3 : l'écran d'abonnement suit, il n'y a
+    # plus de raison de laisser un blanc avant lui.
+    scene.wait(max(0.3, d3 - 1.0))
+
+    # ── ⭐⭐ L'APPEL À L'ABONNEMENT (Frédéric, 05/09 : « à la fin on met abonne
+    # toi à la chaîne »). ───────────────────────────────────────────────────
+    # ⭐ LA POIGNÉE EST ÉCRITE, ET C'EST LE POINT. Sur un Short, RIEN N'EST
+    # CLIQUABLE — c'est déjà ce qui avait condamné les quatre portes. Un bouton
+    # dessiné ne serait qu'un dessin. `@eleveai974` se retient et se retape ;
+    # un bouton, non.
+    # ⛔ ET PAS DE FAUX BOUTON YOUTUBE : imiter l'interface de la plateforme
+    # dans la vidéo, c'est promettre une action que l'image ne peut pas rendre.
+    # ⚠️ CE QUE ÇA COÛTE, MESURÉ. L'écran ajoute ~3,5 s. Sur 64 s, les 39 s
+    # réellement regardées passent de 61 % à 58 % du total — et c'est ce
+    # pourcentage que l'algorithme lit. Le pari : convertir les 243 vues
+    # engagées (contre 7 abonnés) vaut mieux que 3 points de rétention.
+    # ⚠️ La voix est un clip PARTAGÉ (`public/sons/cp-commun/abonne.wav`), joué
+    # en direct et non par `dire()` : `dire` lit le dossier de SA vidéo, et
+    # recopier le même wav dans trente-six dossiers serait trente-six occasions
+    # d'en oublier un.
+    scene.play(FadeOut(url), FadeOut(bientot), run_time=0.3)
+    lignes_abo = VGroup(
+        *[
+            Text(t, font_size=(46 if not v else 40), color=ORANGE_RETENUE)
+            for t in (abonne if v else (" ".join(abonne),))
+        ]
+    ).arrange(DOWN, buff=0.18)
+    for t in lignes_abo:
+        verifier(t, "l'appel à l'abonnement")
+    nom = Text(poignee, font_size=48 if not v else 42, color=WHITE)
+    verifier(nom, "la poignée de la chaîne")
+    bloc_abo = VGroup(lignes_abo, nom).arrange(DOWN, buff=0.45)
+    # ⭐ ON REPREND LA PLACE DE `bloc`, DANS LE HAUT DE L'IMAGE — et le vide en
+    # bas est voulu. Sur un Short, l'interface de YouTube (titre, nom de chaîne,
+    # boutons) recouvre le cinquième inférieur de l'écran : ce qu'on y pose est
+    # masqué chez la moitié des spectateurs. La poignée doit rester au-dessus.
+    bloc_abo.move_to(bloc)
+
+    # ⛔ LE TEMPS D'ATTENTE SE CALCULE, IL NE SE DEVINE PAS. Première version :
+    # `max(0.6, d4 - 1.3)` — un 1,3 écrit à vue. Les animations en prenaient en
+    # réalité 1,28, et la vidéo finissait 0,06 s AVANT la voix : la dernière
+    # syllabe d'« à la chaîne » était rognée. Six centièmes qu'aucun œil ne
+    # trouve, et que la comparaison des deux durées a sortis en une ligne.
+    # ⚠️ On soustrait donc la somme RÉELLE des `run_time`, plus une marge de
+    # 0,25 s — le son doit finir avant l'image, jamais l'inverse.
+    anim = (0.35, 0.35, 0.30, 0.28)
+    d4 = _jouer(scene, voix_abonne, "abonne")
+    scene.play(GrowFromCenter(lignes_abo), run_time=anim[0])
+    scene.play(FadeIn(nom, shift=UP * 0.25), run_time=anim[1])
+    scene.play(nom.animate.scale(1.12), run_time=anim[2])
+    scene.play(nom.animate.scale(1 / 1.12), run_time=anim[3])
+    scene.wait(max(0.6, d4 - sum(anim) + 0.25))
 
 
 class Portrait:

@@ -1,9 +1,10 @@
 # Écriture du chiffre « 5 » — CP
 #
-# ⭐⭐ LE SECOND CHIFFRE QUI LÈVE LE CRAYON, ET IL LÈVE DANS L'AUTRE SENS.
-# Le « 4 » posait sa barre APRÈS ; le « 5 » écrit d'abord le corps — la verticale
-# puis la grosse panse — et revient poser la BARRE DU HAUT en dernier. Le crayon
-# remonte au lieu de descendre, et c'est un geste différent pour la main. Le tracer d'un seul trait obligerait le crayon à REVENIR EN ARRIÈRE sur
+# ⭐⭐ LE CHIFFRE QUI RESSEMBLE À UN LEVER DE CRAYON, ET QUI N'EN EST PAS UN.
+# Écrit « barre du haut en dernier », le 5 obligerait à lever. En partant du
+# bout DROIT de la barre, le geste est continu de bout en bout : barre vers la
+# gauche, descente, panse. C'est le contraste utile avec le « 4 », qui lui, lève
+# vraiment — l'enfant apprend ainsi que le lever n'est pas la règle. Le tracer d'un seul trait obligerait le crayon à REVENIR EN ARRIÈRE sur
 # son propre chemin — c'est exactement l'erreur du point du « i », et elle
 # s'entend dans la main d'un enfant : un geste qui rebrousse chemin n'est pas un
 # geste d'écriture.
@@ -22,6 +23,7 @@
 #                       -o eleveai-maths-cp-chiffre-5-gaucher-portrait --media_dir manim/scripts/cp/media
 
 import sys
+import wave
 from pathlib import Path
 
 import numpy as np
@@ -32,7 +34,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))  # dossier cp/
 from charte import *  # noqa: F403,E402
 from mascotte import MascotteMargouillat  # noqa: E402
 
-from chiffre_commune import OBJETS, groupe  # noqa: E402
+from chiffre_commune import OBJETS, groupe, referent_corporel  # noqa: E402
 from lettre_commune import (  # noqa: E402
     EPS,
     INTERLIGNE,
@@ -50,52 +52,45 @@ from lettre_commune import (  # noqa: E402
 CHIFFRE = "5"
 MOT = "cinq"
 
-# ─── Le chemin du « 5 », en DEUX tracés ───────────────────────────────────────
-# ⭐ Premier temps : la verticale courte, puis la panse qui s'enroule vers la
-# droite et revient à gauche. Second temps : la barre du haut, tracée de gauche
-# à droite, posée par-dessus le départ.
-# ⛔ PAS D'UN SEUL TRAIT : écrire la barre en premier puis descendre obligerait
-# à revenir en arrière sur la verticale.
-DEPART_1 = np.array([-0.30, 1.90, 0])
-DESCENTE = np.array([-0.34, 1.10, 0])
+# ─── Le chemin du « 5 », D'UN SEUL TRAIT ──────────────────────────────────────
+# ⛔⛔ CORRIGÉ LE 05/09 — LA PREMIÈRE VERSION IMPOSAIT UN LEVER DE CRAYON INUTILE.
+# Frédéric : « tu peux commencer en haut à droite du cinq, donc pas de lever de
+# stylo ». Il a raison, et ce n'est pas un détail de confort : j'avais écrit le
+# corps d'abord (verticale + panse) puis la barre du haut en second temps, ce
+# qui OBLIGE à lever. En partant du bout DROIT de la barre, on la trace vers la
+# gauche, on descend, on enroule la panse — et le crayon ne quitte jamais la
+# feuille.
+# ⭐ Ce qui se joue ici : un lever de crayon coûte à un enfant de six ans (il
+# faut viser le point de repose). On n'en impose un que lorsque la lettre l'exige
+# vraiment — le « 4 », lui, l'exige. Inventer un lever là où le geste peut être
+# continu, c'est enseigner une difficulté qui n'existe pas.
+DEPART = np.array([0.40, 1.90, 0])      # en haut À DROITE
+COIN = np.array([-0.30, 1.90, 0])       # bout gauche de la barre
+BAS_VERTICALE = np.array([-0.34, 1.10, 0])
 PANSE = [
     ((0.10, 1.34), (0.48, 0.98), (0.40, 0.52)),
     ((0.32, 0.06), (-0.26, -0.10), (-0.46, 0.26)),
 ]
-TRAIT_2 = [
-    np.array([-0.30, 1.90, 0]),   # on repose le crayon au départ…
-    np.array([0.40, 1.90, 0]),    # …et on trace la barre vers la droite
-]
 
 
-def _polyligne(points, stroke_width, color=WHITE) -> VMobject:
+def chemin_5(stroke_width: float = 10, color: str = WHITE) -> VGroup:
+    """Un seul tracé — mais rendu dans un VGroup d'UN élément.
+
+    ⚠️ Le VGroup n'est pas décoratif : tout le montage (la boucle de tracé, la
+    reprise rapide, le nettoyage) parle en « liste de traits ». Rendre un
+    VMobject nu ici obligerait à écrire deux chemins de code, donc deux endroits
+    où oublier une correction.
+    """
     p = VMobject(stroke_width=stroke_width, stroke_color=color)
     p.set_fill(opacity=0)
-    p.start_new_path(points[0])
-    for q in points[1:]:
-        p.add_line_to(q)
-    return p
-
-
-def _corps(stroke_width, color=WHITE) -> VMobject:
-    """La verticale puis la panse — un seul geste, sans lever."""
-    p = VMobject(stroke_width=stroke_width, stroke_color=color)
-    p.set_fill(opacity=0)
-    p.start_new_path(DEPART_1)
-    p.add_line_to(DESCENTE)
+    p.start_new_path(DEPART)
+    p.add_line_to(COIN)
+    p.add_line_to(BAS_VERTICALE)
     for c1, c2, fin in PANSE:
         p.add_cubic_bezier_curve_to(
             np.array([*c1, 0]), np.array([*c2, 0]), np.array([*fin, 0])
         )
-    return p
-
-
-def chemin_5(stroke_width: float = 10, color: str = WHITE) -> VGroup:
-    """Les deux tracés, séparés — jamais réunis en un seul chemin."""
-    return VGroup(
-        _corps(stroke_width, color),
-        _polyligne(TRAIT_2, stroke_width, color),
-    )
+    return VGroup(p)
 
 
 def reglure_chiffres() -> VGroup:
@@ -131,8 +126,17 @@ class _Chiffre5Base(Scene):
 
     def dire(self, nom: str) -> float:
         """⛔⛔ RENDRE SANS CACHE, sinon les sons sautent sans un mot."""
-        self.add_sound(str(VOIX / f"{nom}.wav"))
-        return DUREE[nom]
+        chemin = VOIX / f"{nom}.wav"
+        self.add_sound(str(chemin))
+        # ⭐⭐ LA DURÉE SE LIT DANS LE FICHIER, elle ne se recopie plus à la main
+        # dans `DUREE`. Une table écrite à la main se désynchronise dès qu'on
+        # régénère une voix — et le symptôme n'est pas une erreur, c'est une
+        # phrase coupée en fin de vidéo, que personne ne revérifie.
+        # ⚠️ `DUREE` reste dans le fichier : c'est la trace de ce qui a été dit,
+        # utile pour relire le script sans ouvrir les WAV. Mais elle ne commande
+        # plus rien.
+        with wave.open(str(chemin), "rb") as w:
+            return w.getnframes() / float(w.getframerate())
 
     def construct(self):
         son = Text(CHIFFRE, font_size=150, color=JAUNE_TITRE)
@@ -195,8 +199,9 @@ class _Chiffre5Base(Scene):
         # ⭐ On répartit le temps de la phrase : premier trait, le SAUT, second
         # trait. Le saut prend 1,4 s — assez pour qu'on le voie, pas assez pour
         # qu'on s'ennuie.
-        t1 = (d - 0.4 - 1.4) * 0.62
-        t2 = (d - 0.4 - 1.4) * 0.38
+        # ⭐ UN SEUL TRAIT : tout le temps de la phrase lui revient. Plus de
+        # budget de 1,4 s pour un saut qui n'existe plus.
+        t1 = d - 0.4
 
         # ⛔⛔ LES TRACÉS SE COLLECTIONNENT, ILS NE S'EFFACENT PAS TOUT SEULS.
         # `trace` naît DANS la boucle : il y en a un par trait, et seul le
@@ -213,7 +218,7 @@ class _Chiffre5Base(Scene):
         # pixel près. Le tracé fantôme n'apparait qu'au moment où l'on efface
         # `refait` — un écran plus loin, quand on ne regarde plus le chiffre.
         traces = []
-        for i, duree in ((0, t1), (1, t2)):
+        for i, duree in ((0, t1),):
             chemin = traits[i]
             avance = ValueTracker(0.0)
             trace = VMobject(
@@ -236,7 +241,10 @@ class _Chiffre5Base(Scene):
             trace.clear_updaters()
             stylo.clear_updaters()
 
-            if i == 0:
+            # ⛔ LE SAUT NE SE JOUE QUE S'IL Y A UN TRAIT SUIVANT. Écrit
+            # `if i == 0` tout court, il repartait sur le chemin d'un seul
+            # trait — le crayon aurait sauté vers nulle part.
+            if i == 0 and len(traits) > 1:
                 # ⭐⭐ LE SAUT DU CRAYON, MONTRÉ. Il se soulève (il grossit un
                 # peu, comme s'il s'éloignait de la feuille), traverse, et se
                 # repose. ⛔ Le faire disparaitre puis réapparaitre se lirait
@@ -272,8 +280,8 @@ class _Chiffre5Base(Scene):
             refait = chemin_5(stroke_width=14 if not self.vertical else 16)
             for r, t in zip(refait, traits):
                 r.match_points(t)
-            self.play(Create(refait[0]), run_time=duree * 0.62, rate_func=linear)
-            self.play(Create(refait[1]), run_time=duree * 0.38, rate_func=linear)
+            for r in refait:
+                self.play(Create(r), run_time=duree / len(refait), rate_func=linear)
             self.wait(0.35)
 
         self.play(
@@ -325,6 +333,44 @@ class _Chiffre5Base(Scene):
             self.wait(max(0.15, duree - 1.23))
         dp = self.dire("10-pareil")
         self.wait(dp)
+
+        # ── ⭐⭐ CINQ, C'EST LES DOIGTS DE TA MAIN ────────────────────────────
+        # Frédéric, 05/09 : « le chiffre 5 doit être comme les 5 doigts de la
+        # main ». C'est plus fort que cinq pommes : les pommes, il faut les
+        # avoir sous les yeux ; la main, l'enfant l'a TOUJOURS AVEC LUI. C'est
+        # le seul référent qu'il peut convoquer en pleine dictée.
+        # ⚠️ EN CONCLUSION, PAS À LA PLACE DES OBJETS : les cinq objets restent
+        # identiques d'un chiffre à l'autre, et c'est cette constance qui laisse
+        # comparer cinq pommes à quatre pommes. La main ne vaut que pour SON
+        # chiffre — dans la liste, elle casserait la comparaison.
+        referent = referent_corporel(int(CHIFFRE))
+        if referent is not None:
+            dessin, lignes_legende = referent
+            self.play(FadeOut(bloc), run_time=0.3)
+            dessin.scale(1.15 if not self.vertical else 1.0)
+            # ⚠️ En paysage la légende tient sur une ligne ; en portrait, non.
+            # Le découpage arrive de `referent_corporel`, on le recolle si le
+            # cadre est large.
+            if self.vertical:
+                texte = VGroup(*[
+                    Text(l, font_size=26, color=VERT_OK) for l in lignes_legende
+                ]).arrange(DOWN, buff=0.14)
+                for m in texte:
+                    verifier(m, "la légende du référent corporel")
+            else:
+                texte = Text(" ".join(lignes_legende), font_size=34, color=VERT_OK)
+                verifier(texte, "la légende du référent corporel")
+            groupe_ref = VGroup(dessin, texte).arrange(DOWN, buff=0.45)
+            groupe_ref.move_to(ORIGIN).shift(DOWN * 0.4)
+            verifier(groupe_ref, "le référent corporel")
+            dm = self.dire("10-main")
+            self.play(GrowFromCenter(dessin), run_time=0.45)
+            self.play(FadeIn(texte, shift=UP * 0.25), run_time=0.35)
+            self.play(dessin.animate.scale(1.10), run_time=0.30)
+            self.play(dessin.animate.scale(1 / 1.10), run_time=0.28)
+            self.wait(max(0.4, dm - 1.38 + 0.25))
+            self.play(FadeOut(groupe_ref), run_time=0.3)
+            bloc = groupe_ref
 
         # ── LA RELANCE ──────────────────────────────────────────────────────
         self.play(FadeOut(question), FadeOut(bloc))

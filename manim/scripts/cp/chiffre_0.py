@@ -34,6 +34,7 @@
 #                       -o eleveai-maths-cp-chiffre-0-gaucher-portrait --media_dir manim/scripts/cp/media
 
 import sys
+import wave
 from pathlib import Path
 
 import numpy as np
@@ -137,8 +138,17 @@ class _Chiffre0Base(Scene):
 
     def dire(self, nom: str) -> float:
         """⛔⛔ RENDRE SANS CACHE, sinon les sons sautent sans un mot."""
-        self.add_sound(str(VOIX / f"{nom}.wav"))
-        return DUREE[nom]
+        chemin = VOIX / f"{nom}.wav"
+        self.add_sound(str(chemin))
+        # ⭐⭐ LA DURÉE SE LIT DANS LE FICHIER, elle ne se recopie plus à la main
+        # dans `DUREE`. Une table écrite à la main se désynchronise dès qu'on
+        # régénère une voix — et le symptôme n'est pas une erreur, c'est une
+        # phrase coupée en fin de vidéo, que personne ne revérifie.
+        # ⚠️ `DUREE` reste dans le fichier : c'est la trace de ce qui a été dit,
+        # utile pour relire le script sans ouvrir les WAV. Mais elle ne commande
+        # plus rien.
+        with wave.open(str(chemin), "rb") as w:
+            return w.getnframes() / float(w.getframerate())
 
     def construct(self):
         son = Text("0", font_size=150, color=JAUNE_TITRE)

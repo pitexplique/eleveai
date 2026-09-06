@@ -47,6 +47,12 @@ import shutil
 import sys
 from pathlib import Path
 
+# ⚠️ La console Windows est en cp1252 : un ⛔ dans un message d'alerte y lève
+# UnicodeEncodeError et FAIT PLANTER LE SCRIPT. Un garde-fou qui casse au moment
+# où il a quelque chose à dire ne protège de rien.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 import av
 
 RACINE = Path(__file__).resolve().parents[1]
@@ -59,11 +65,15 @@ SORTIES = RACINE / "manim" / "sorties" / "cp"
 # ⛔ Rien ne se devine ici : un préfixe inconnu ARRÊTE le rangement au lieu de
 # choisir « francais » par défaut. C'est exactement le défaut par défaut qui a
 # fait dormir l'anglais chez le français.
+# ⚠️ L'ORDRE COMPTE : le plus spécifique d'abord. « eleveai-english-number- »
+# doit être reconnu AVANT « eleveai-english- », sinon un chiffre anglais se
+# rangerait chez le français — exactement la faute que ce tableau existe pour
+# empêcher.
 PREFIXES = {
+    "eleveai-english-number-": ("maths", "gb"),
+    "eleveai-english-": ("francais", "gb"),
     "eleveai-francais-cp-": ("francais", "fr"),
     "eleveai-maths-cp-": ("maths", "fr"),
-    "eleveai-english-": ("francais", "gb"),
-    "eleveai-maths-en-": ("maths", "gb"),
 }
 
 
@@ -72,11 +82,19 @@ class PrefixeInconnu(Exception):
 
 
 def route(nom: str) -> tuple[Path, str]:
-    """(dossier de destination, nom court) — ou une exception."""
+    """(dossier de destination, nom court) — ou une exception.
+
+    ⭐ Le FORMAT se lit dans le nom, comme la matière et la langue : un fichier
+    « …-paysage » va dans `paysage/`, tout le reste dans `shorts/`. Le plan
+    d'expérience du 06/09 compare les deux formats — les mélanger dans un même
+    dossier rendrait la comparaison impossible à tenir.
+    """
     for prefixe, (matiere, langue) in PREFIXES.items():
         if nom.startswith(prefixe):
-            court = nom[len(prefixe):].replace("-portrait", "")
-            return SORTIES / matiere / "shorts" / langue, court
+            format_ = "paysage" if nom.endswith("-paysage") else "shorts"
+            court = (nom[len(prefixe):]
+                     .replace("-portrait", "").replace("-paysage", ""))
+            return SORTIES / matiere / format_ / langue, court
     raise PrefixeInconnu(
         f"« {nom} » ne commence par aucun préfixe connu : "
         f"{', '.join(PREFIXES)}. Renommer la vidéo, ou ajouter le préfixe ici."
@@ -88,7 +106,53 @@ def route(nom: str) -> tuple[Path, str]:
 INSTANT = 0.60
 
 
+# ⛔⛔ LE FICHIER PÉRIMÉ, ET COMMENT IL EST ARRIVÉ JUSQU'À LA PUBLICATION.
+# Le 05/09, deux rendus anglais ont échoué (`verifier()` a arrêté sur un texte
+# trop large — il a fait son travail). Manim n'a donc rien écrit, l'ANCIEN MP4
+# est resté en place, et ce script l'a rangé et vignetté comme s'il était neuf.
+# La vidéo annoncée comme corrigée était la précédente.
+# 👉 Un rendu qui échoue ne laisse pas de trace dans le dossier de sortie : il
+# laisse le fichier d'AVANT, qui est bien plus difficile à repérer qu'un fichier
+# absent. D'où l'invariant, vérifié ici : **une vidéo doit être plus récente que
+# le code qui l'a produite.**
+SOURCES = RACINE / "manim" / "scripts" / "cp"
+
+
+# ⛔ ON COMPARE À SON PROPRE CODE, PAS À TOUT LE DOSSIER. Première version :
+# `max()` sur tous les `.py` de `scripts/cp/`. Elle a déclaré périmée une vidéo
+# française parfaitement fraiche, simplement parce qu'un fichier ANGLAIS avait
+# été modifié après son rendu. Un garde-fou qui crie à tort finit désactivé, et
+# ne sert alors plus qu'à donner l'illusion d'une vérification.
+# ⚠️ Les modules PARTAGÉS comptent, eux : une correction dans `lettre_commune`
+# périme bien toutes les vidéos, puisqu'elles en dépendent.
+PARTAGES = ("lettre_commune.py", "chiffre_commune.py", "mascotte.py", "charte.py")
+
+
+def _perime(mp4: Path) -> float:
+    """De combien de secondes la vidéo est-elle plus VIEILLE que SON code ?
+
+    Manim range chaque rendu sous `media/videos/<nom du script>/…` : le nom du
+    script se lit donc dans le chemin, sans qu'on ait à le deviner.
+    """
+    scene = mp4.parent.parent.name
+    codes = [SOURCES / f"{scene}.py"]
+    codes += [SOURCES / n for n in PARTAGES]
+    codes += [SOURCES.parent.parent / n for n in ("charte.py", "mascotte.py")]
+    dates = [c.stat().st_mtime for c in codes if c.exists()]
+    if not dates:
+        return 0.0
+    return max(dates) - mp4.stat().st_mtime
+
+
 def vignette(mp4: Path) -> Path | None:
+    retard = _perime(mp4)
+    if retard > 0:
+        print(
+            f"⛔ {mp4.name} : PÉRIMÉ de {retard / 60:.0f} min — le code a changé "
+            f"depuis ce rendu. Le rendu a probablement échoué : relire son "
+            f"journal, corriger, refaire. RIEN N'A ÉTÉ RANGÉ."
+        )
+        return None
     conteneur = av.open(str(mp4))
     for image in conteneur.decode(video=0):
         if image.time >= INSTANT:
@@ -114,7 +178,11 @@ def main():
     # ⚠️ 1920p60 UNIQUEMENT : c'est le dossier des portraits (Manim range par
     # HAUTEUR d'image). Le paysage vit dans 1080p60 et n'a pas de vignette à
     # téléverser — sa miniature 1280×720 est faite par `manim/miniature.py`.
-    trouves = sorted(VIDEOS.glob("*/1920p60/*.mp4"))
+    # ⚠️ 1920p60 = portrait, 1080p60 = paysage (Manim range par HAUTEUR
+    # d'image). Les deux sont désormais rangés : le paysage n'est plus écarté
+    # depuis que Frédéric le remet à l'épreuve (06/09, « deux formats pour
+    # tester »).
+    trouves = sorted(VIDEOS.glob("*/1920p60/*.mp4")) + sorted(VIDEOS.glob("*/1080p60/*.mp4"))
     if not trouves:
         print("Aucun Short rendu. Rendre d'abord en -qh -r 1080,1920.")
         return

@@ -101,6 +101,17 @@ def poisson() -> VGroup:
 
 # ⭐ L'ORDRE NE CHANGE PAS D'UN CHIFFRE À L'AUTRE : c'est ce qui permet de
 # comparer. Le mot au pluriel accompagne chaque objet.
+# ⭐ Les mêmes dessins, les mêmes rangs : seule l'étiquette change. C'est ce qui
+# permet de comparer une vidéo française et une vidéo anglaise dans le plan
+# d'expérience — si les images différaient, on ne saurait pas ce qu'on mesure.
+OBJETS_EN = [
+    ("apples", pomme),
+    ("stars", etoile),
+    ("candles", bougie),
+    ("wheels", roue),
+    ("fish", poisson),
+]
+
 OBJETS = [
     ("pommes", pomme),
     ("étoiles", etoile),
@@ -108,3 +119,79 @@ OBJETS = [
     ("roues", roue),
     ("poissons", poisson),
 ]
+
+
+# ─── ⭐⭐ LE RÉFÉRENT CORPOREL ────────────────────────────────────────────────
+# Frédéric, 05/09/2026 : « le chiffre 5 doit être comme les 5 doigts de la
+# main », puis « 2 comme tes deux mains ».
+# ⭐ Pourquoi c'est plus fort que cinq pommes : les pommes, il faut les avoir
+# sous les yeux. La main, l'enfant l'a TOUJOURS AVEC LUI — c'est le seul
+# référent qu'il peut convoquer en pleine dictée, sans matériel.
+# ⚠️ ET C'EST POURQUOI IL ARRIVE EN CONCLUSION, PAS À LA PLACE DES OBJETS.
+# Les cinq objets restent identiques d'un chiffre à l'autre : c'est cette
+# constance qui laisse comparer six pommes à quatre pommes. La main, elle, ne
+# vaut que pour SON chiffre — la mettre dans la liste casserait la comparaison.
+# ⛔ ET ÇA NE SE GÉNÉRALISE PAS AUX DIX CHIFFRES. 1 (un nez), 2 (deux mains),
+# 5 (cinq doigts), 10 (dix doigts) ont un référent corporel vrai. 3, 4, 6, 7, 8
+# et 9 n'en ont AUCUN. On n'en invente pas : un faux repère s'apprend aussi bien
+# qu'un vrai, et se désapprend beaucoup moins facilement.
+def main_ouverte(doigts: int = 5, gauche: bool = False) -> VGroup:
+    """Une main de face, `doigts` doigts levés. `gauche` la retourne.
+
+    ⭐⭐ SILHOUETTE PLEINE, ET C'EST UNE CORRECTION MESURÉE AU RENDU. Première
+    version en contour seul : les doigts et la paume se chevauchent, donc leurs
+    bords traversaient l'intérieur de la main en traits parasites, et le pouce
+    flottait comme une anse détachée. Rempli d'une seule couleur, tout se fond
+    en une forme unique — c'est la leçon déjà payée trois fois (l'iris du « i »,
+    l'oreille du « o », la plume du « u ») : **une silhouette fermée se lit, un
+    faisceau de traits non.**
+    ⚠️ Les écarts entre doigts sont donc devenus structurels : sans eux, la
+    silhouette n'a plus de doigts du tout, juste une palette. 0,07 d'espace pour
+    0,17 de doigt — mesuré au rendu, pas choisi à vue.
+    ⭐ `gauche` existe pour les DEUX mains du chiffre 2 : deux mains droites
+    côte à côte ne sont pas deux mains, c'est la même deux fois.
+    """
+    plein = dict(stroke_width=0, fill_opacity=1, fill_color=ORANGE_RETENUE)
+    paume = RoundedRectangle(width=0.92, height=0.80, corner_radius=0.22, **plein)
+
+    g = VGroup(paume)
+    # Majeur le plus long, comme une vraie main — l'index et l'annulaire
+    # l'encadrent, l'auriculaire est nettement plus court.
+    hauteurs = (0.60, 0.74, 0.68, 0.50)
+    for k, h in enumerate(hauteurs[: max(0, min(4, doigts))]):
+        d = RoundedRectangle(width=0.17, height=h, corner_radius=0.085, **plein)
+        d.move_to(np.array([-0.345 + k * 0.24, 0.34 + h / 2, 0]))
+        g.add(d)
+    # ⭐ Le POUCE part sur le côté et REMONTE : c'est ce qui fait lire « main »
+    # plutôt que « peigne ». Il n'apparait qu'au cinquième doigt.
+    if doigts >= 5:
+        pouce = RoundedRectangle(width=0.17, height=0.50, corner_radius=0.085, **plein)
+        pouce.rotate(52 * DEGREES).move_to(np.array([-0.56, 0.26, 0]))
+        g.add(pouce)
+    if gauche:
+        g.flip(UP)
+    return g
+
+
+def referent_corporel(n: int, langue: str = "fr") -> tuple[VGroup, tuple[str, ...]] | None:
+    """Le dessin et sa légende EN LIGNES, ou None si le chiffre n'en a pas.
+
+    ⛔ La légende arrive DÉJÀ COUPÉE, elle n'est pas une chaîne unique.
+    « comme les doigts de ta main ! » mesurait 5,33 pour 3,90 utiles en 9:16 et
+    `verifier()` a arrêté le rendu — comme il doit. Au-delà de ~15 signes, une
+    ligne ne tient pas dans un portrait : on coupe à la main, jamais à l'échelle.
+    """
+    if n == 2:
+        mains = VGroup(
+            main_ouverte(5, gauche=True), main_ouverte(5)
+        ).arrange(RIGHT, buff=0.50)
+        return mains, (("comme tes", "deux mains !") if langue == "fr"
+                       else ("like your", "two hands!"))
+    if n == 5:
+        return VGroup(main_ouverte(5)), (
+            ("comme les doigts", "de ta main !") if langue == "fr"
+            else ("like the fingers", "on your hand!")
+        )
+    # ⛔ 1 (un nez) attend son dessin ; 3, 4, 6, 7, 8, 9 n'ont AUCUN référent
+    # corporel vrai, et on n'en invente pas.
+    return None
