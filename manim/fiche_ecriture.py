@@ -31,6 +31,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from miniature import TRACES, _bezier  # noqa: E402
+from traces_chiffres import spec_chiffre  # noqa: E402
 
 RACINE = Path(__file__).resolve().parents[1]
 FONTS = Path("C:/Windows/Fonts")
@@ -63,16 +64,31 @@ def police(nom, taille):
 
 
 def points_lettre(spec, bx, by, il):
-    """Les points du chemin, dans le repère de la feuille (y vers le bas)."""
+    """Le glyphe en LISTE DE TRAITS, dans le repère de la feuille (y vers le bas).
+
+    ⭐⭐ UNE LISTE DE TRAITS, ET PAS UNE LISTE DE POINTS — c'est le changement du
+    06/09, imposé par les chiffres. Le « 4 » s'écrit en DEUX temps : relier ses
+    deux traits en un seul chemin dessinerait sur la feuille une diagonale de
+    retour que l'enfant ne doit surtout pas tracer. Les lettres n'avaient jamais
+    posé la question (elles s'écrivent toutes d'un trait, le point du « i » mis
+    à part, qui a son propre champ).
+    ⚠️ `[0]` sur ce retour donne donc le PREMIER TRAIT, pas le premier point :
+    le point de départ s'écrit `[0][0]`.
+    """
     def P(x, y):
         return (bx + x * il, by - y * il)
+
+    # Les chiffres arrivent déjà échantillonnés depuis les scènes Manim
+    # (`traces_chiffres.py`) : une source unique pour la vidéo et pour la fiche.
+    if "traits" in spec:
+        return [[P(x, y) for x, y in trait] for trait in spec["traits"]]
 
     cur = spec["depart"]
     pts = [P(*cur)]
     for c1, c2, fin in spec["courbes"]:
         pts += _bezier(P(*cur), P(*c1), P(*c2), P(*fin))
         cur = fin
-    return pts
+    return [pts]
 
 
 def tracer_lettre(d, spec, bx, by, il, couleur, epaisseur, pointille=False):
@@ -83,7 +99,20 @@ def tracer_lettre(d, spec, bx, by, il, couleur, epaisseur, pointille=False):
     n'en dessine qu'un morceau sur deux. Le pointillé suit donc exactement la
     lettre, y compris dans ses virages.
     """
-    pts = points_lettre(spec, bx, by, il)
+    for pts in points_lettre(spec, bx, by, il):
+        _un_trait(d, pts, couleur, epaisseur, pointille)
+    if spec["point"]:
+        px, py = points_lettre(
+            {"depart": spec["point"], "courbes": []}, bx, by, il
+        )[0][0]
+        r = max(6, epaisseur // 2 + 4)
+        if pointille:
+            d.ellipse([px - r, py - r, px + r, py + r], outline=couleur, width=3)
+        else:
+            d.ellipse([px - r, py - r, px + r, py + r], fill=couleur)
+
+
+def _un_trait(d, pts, couleur, epaisseur, pointille):
     if pointille:
         # ⚠️ TIRETS COURTS, TROU COURT. Premier essai : 7 points dessinés, 7
         # sautés — la lettre partait en miettes éparses, l'enfant ne voyait plus
@@ -98,13 +127,6 @@ def tracer_lettre(d, spec, bx, by, il, couleur, epaisseur, pointille=False):
             i += tiret + trou
     else:
         d.line(pts, fill=couleur, width=epaisseur, joint="curve")
-    if spec["point"]:
-        px, py = points_lettre({"depart": spec["point"], "courbes": []}, bx, by, il)[0]
-        r = max(6, epaisseur // 2 + 4)
-        if pointille:
-            d.ellipse([px - r, py - r, px + r, py + r], outline=couleur, width=3)
-        else:
-            d.ellipse([px - r, py - r, px + r, py + r], fill=couleur)
 
 
 def bande(d, spec, y_base, titre, mode, nb):
@@ -134,14 +156,14 @@ def bande(d, spec, y_base, titre, mode, nb):
     for _ in range(nb):
         if mode == "modele":
             tracer_lettre(d, spec, bx, y_base, IL, BLEU, 14)
-            dx, dy = points_lettre(spec, bx, y_base, IL)[0]
+            dx, dy = points_lettre(spec, bx, y_base, IL)[0][0]
             d.ellipse([dx - 17, dy - 17, dx + 17, dy + 17], fill=VERT)
         elif mode == "pointille":
             tracer_lettre(d, spec, bx, y_base, IL, GRIS_MODELE, 12, pointille=True)
-            dx, dy = points_lettre(spec, bx, y_base, IL)[0]
+            dx, dy = points_lettre(spec, bx, y_base, IL)[0][0]
             d.ellipse([dx - 15, dy - 15, dx + 15, dy + 15], fill=VERT)
         else:  # « seul » : rien que le point de départ
-            dx, dy = points_lettre(spec, bx, y_base, IL)[0]
+            dx, dy = points_lettre(spec, bx, y_base, IL)[0][0]
             d.ellipse([dx - 15, dy - 15, dx + 15, dy + 15], fill=VERT)
         bx += ESPACE_LETTRE * IL
 
@@ -157,15 +179,27 @@ def profondeur(spec):
     pas apparaitre avant.
     ⚠️ Il reviendra pour j, g, p, q et f. Cette fonction le règle une fois.
     """
-    bas = min(
-        [spec["depart"][1]]
-        + [pt[1] for c in spec["courbes"] for pt in c]
-    )
+    if "traits" in spec:
+        bas = min(y for trait in spec["traits"] for _, y in trait)
+    else:
+        bas = min(
+            [spec["depart"][1]]
+            + [pt[1] for c in spec["courbes"] for pt in c]
+        )
     return max(0.0, -bas)
 
 
 def construire(lettre):
-    spec = TRACES[lettre]
+    """`lettre` est une lettre (« a ») ou un chiffre (« 5 »).
+
+    ⭐ LES DEUX PASSENT PAR LA MÊME FEUILLE, et ce n'est pas de l'économie de
+    code : c'est la décision pédagogique du 05/09. Tracer un chiffre est de
+    l'ÉCRITURE — point de départ, sens, nombre de temps, lever de crayon — rien
+    de tout cela n'est de l'arithmétique. La feuille du « 5 » doit ressembler à
+    celle du « a » parce que c'est le même travail de main.
+    """
+    chiffre = lettre.isdigit()
+    spec = spec_chiffre(int(lettre)) if chiffre else TRACES[lettre]
     # ⭐ Une lettre à jambage prend un interligne PLUS COURT, au lieu d'écarter
     # les bandes : écarter aurait poussé la dernière sous le pied de page.
     global IL
@@ -177,7 +211,8 @@ def construire(lettre):
     d.rounded_rectangle([MARGE, 150, MARGE + 900, 270], radius=58, fill=NAVY)
     d.text((MARGE + 52, 178), "FRANÇAIS CP · ÉCRITURE",
            font=police("ariblk.ttf", 52), fill=(255, 255, 255))
-    d.text((MARGE, 320), f"J'écris la lettre {lettre}",
+    quoi = "le chiffre" if chiffre else "la lettre"
+    d.text((MARGE, 320), f"J'écris {quoi} {lettre}",
            font=police("ariblk.ttf", 132), fill=NAVY)
     d.text((MARGE, 486), "en cursive · je repasse, puis j'écris tout seul",
            font=police("arialbd.ttf", 52), fill=BLEU)
@@ -220,14 +255,15 @@ def construire(lettre):
     # « fiche écriture chiffre 3 », jamais « fiche maths écriture » : le chiffre
     # rangé sous `maths/` serait dans le seul dossier où personne ne le cherche.
     # Les familles à venir : majuscules/, chiffres/, nombres/, mots/, ailleurs/.
-    dossier = SORTIE / "lettres"
+    dossier = SORTIE / ("chiffres" if chiffre else "lettres")
     dossier.mkdir(parents=True, exist_ok=True)
     # ⭐ LE NOM DE FICHIER VISE LA REQUÊTE : Google indexe les PDF comme des
     # documents à part entière, et « ecriture-cursive-lettre-a-cp-a-imprimer »
     # est très exactement ce qui se tape. Cinq sites vivent déjà de cette
     # requête (professeur-o, ecriture-cp, bienenseigner…) — aucun n'a la vidéo
     # du geste à côté, c'est là qu'on passe devant.
-    base = f"ecriture-cursive-lettre-{lettre}-cp-a-imprimer"
+    base = (f"ecriture-chiffre-{lettre}-cp-a-imprimer" if chiffre
+            else f"ecriture-cursive-lettre-{lettre}-cp-a-imprimer")
     chemin = dossier / f"{base}.pdf"
     img.save(chemin, "PDF", resolution=300)
     img.resize((W // 3, H // 3), Image.LANCZOS).save(dossier / f"{base}.png", "PNG")
@@ -237,18 +273,28 @@ def construire(lettre):
     # même qu'on clique, et le hub doit tenir à mille fiches (Frédéric, 03/09).
     # ⚠️ On copie celle du DROITIER : la page de la lettre porte les deux mains,
     # le hub n'a la place que d'une.
-    src = RACINE / "manim" / "miniatures" / "cp" / "francais" / (
-        f"eleveai-francais-cp-lettre-{lettre}-droitier.png"
-    )
+    if chiffre:
+        src = RACINE / "manim" / "sorties" / "cp" / "maths" / "shorts" / "fr" / (
+            f"vignette-short-chiffre-{lettre}-droitier.png"
+        )
+        cible = dossier / f"vignette-chiffre-{lettre}.png"
+    else:
+        src = RACINE / "manim" / "miniatures" / "cp" / "francais" / (
+            f"eleveai-francais-cp-lettre-{lettre}-droitier.png"
+        )
+        cible = dossier / f"vignette-lettre-{lettre}.png"
     if src.exists():
-        Image.open(src).save(dossier / f"vignette-lettre-{lettre}.png", "PNG")
+        Image.open(src).save(cible, "PNG")
     print(chemin)
     return chemin
 
 
 if __name__ == "__main__":
     filtre = sys.argv[1] if len(sys.argv) > 1 else None
-    for lettre in TRACES:
-        if filtre and filtre != lettre:
+    # ⚠️ Les chiffres FAITS, pas 0-9 : `spec_chiffre` importe la scène, et une
+    # scène qui n'existe pas encore lève une erreur d'import qui ne dit rien
+    # d'utile. La liste se complète au fur et à mesure des vidéos.
+    for glyphe in list(TRACES) + ["0", "1", "2", "3", "4", "5"]:
+        if filtre and filtre != glyphe:
             continue
-        construire(lettre)
+        construire(glyphe)

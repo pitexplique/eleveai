@@ -87,9 +87,13 @@ export const FAMILLES: FamilleEcriture[] = [
     slug: "chiffres",
     titre: "Les chiffres",
     promesse: "De 0 à 9 : chaque chiffre a son chemin.",
+    // ⚠️ `matiere: "maths"` désigne le RAYON du site, pas la nature du geste.
+    // Tracer un chiffre est de l'écriture — point de départ, sens, nombre de
+    // temps, lever de crayon — et les feuilles portent d'ailleurs le bandeau
+    // « FRANÇAIS CP · ÉCRITURE ». C'est la même série que les lettres.
     matiere: "maths",
     classes: ["cp", "ce1"],
-    ouverte: false,
+    ouverte: true,
   },
   {
     slug: "nombres",
@@ -138,15 +142,31 @@ const VIDEOS: Record<string, { droitier?: string; gaucher?: string }> = {
   // a: { droitier: "xxxxxxxxxxx", gaucher: "xxxxxxxxxxx" },
 };
 
-export const FICHES: FicheEcriture[] = LETTRES_FAITES.map((x) => ({
-  famille: "lettres",
-  slug: x,
-  titre: `La lettre ${x} en cursive`,
-  pdf: `/fiches-ecriture/lettres/ecriture-cursive-lettre-${x}-cp-a-imprimer.pdf`,
-  apercu: `/fiches-ecriture/lettres/ecriture-cursive-lettre-${x}-cp-a-imprimer.png`,
-  vignette: `/fiches-ecriture/lettres/vignette-lettre-${x}.png`,
-  video: VIDEOS[x],
-}));
+// ⚠️ MÊME RÈGLE QUE POUR LES LETTRES : on ne liste que ce qui EXISTE sur le
+// disque. Déclarer 0-9 alors que seules six feuilles sont faites donnerait
+// quatre pages qui promettent un PDF absent — et le sitemap les soumettrait.
+const CHIFFRES_FAITS = ["0", "1", "2", "3", "4", "5"];
+
+export const FICHES: FicheEcriture[] = [
+  ...LETTRES_FAITES.map((x) => ({
+    famille: "lettres",
+    slug: x,
+    titre: `La lettre ${x} en cursive`,
+    pdf: `/fiches-ecriture/lettres/ecriture-cursive-lettre-${x}-cp-a-imprimer.pdf`,
+    apercu: `/fiches-ecriture/lettres/ecriture-cursive-lettre-${x}-cp-a-imprimer.png`,
+    vignette: `/fiches-ecriture/lettres/vignette-lettre-${x}.png`,
+    video: VIDEOS[x],
+  })),
+  ...CHIFFRES_FAITS.map((x) => ({
+    famille: "chiffres",
+    slug: x,
+    titre: `Le chiffre ${x} à écrire`,
+    pdf: `/fiches-ecriture/chiffres/ecriture-chiffre-${x}-cp-a-imprimer.pdf`,
+    apercu: `/fiches-ecriture/chiffres/ecriture-chiffre-${x}-cp-a-imprimer.png`,
+    vignette: `/fiches-ecriture/chiffres/vignette-chiffre-${x}.png`,
+    video: VIDEOS[`chiffre-${x}`],
+  })),
+];
 
 export function famille(slug: string) {
   return FAMILLES.find((f) => f.slug === slug);
