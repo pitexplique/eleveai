@@ -297,7 +297,30 @@ def page_de_garde(
     # ⭐ Le nom de série donne aussi son titre à la playlist : une seule pour
     # les lettres ET les chiffres, ce qui n'était pas possible tant que la garde
     # annonçait deux matières.
-    serie = Text(serie, font_size=30 if not v else 24, color=ORANGE_RETENUE)
+    # ⭐⭐ LA SÉRIE SUR PASTILLE SOMBRE, ET EN CURSIVE — MESURÉ, PAS CHOISI.
+    # Frédéric, 06/09 : « pas assez de contraste entre eleveai et la belle
+    # écriture, qui doit être en écriture cursive », puis « fond noir et
+    # écriture orange ». Le calcul lui donne raison sans appel :
+    #     orange sur le ciel #5BC8F5  →  1,47   ⛔ (seuil grand texte : 3,00)
+    #     les autres lignes (nuit sur ciel) → 8,08
+    #     orange sur la pastille nuit →  5,49   ✅
+    # La ligne de série était LA SEULE chose illisible de la page de garde,
+    # pendant que tout le reste était à 8. Ce n'était pas une impression.
+    # ⭐ Et la cursive : une série qui s'appelle « La belle écriture » doit
+    # l'écrire. ⚠️ C'est le SEUL endroit où une police script est permise —
+    # elle nomme, elle n'enseigne pas. Le modèle que l'enfant repasse reste
+    # tracé point par point (voir `chemin_bezier`) : une police donne un
+    # contour, jamais un chemin.
+    serie = Text(
+        serie, font="Segoe Script",
+        font_size=32 if not v else 26, color=ORANGE_RETENUE,
+    )
+    pastille = RoundedRectangle(
+        width=serie.width + (0.55 if not v else 0.40),
+        height=serie.height + (0.34 if not v else 0.26),
+        corner_radius=0.16, stroke_width=0,
+    ).set_fill(NUIT, opacity=1).move_to(serie)
+    serie = VGroup(pastille, serie)
     classe = Text(classe, font_size=34 if not v else 26, color=NUIT)
     # ⚠️ `notion` est un paramètre depuis le 04/09 : les CHIFFRES ne sont pas de
     # l'« écriture cursive » — un chiffre s'écrit pareil en script et en attaché.
