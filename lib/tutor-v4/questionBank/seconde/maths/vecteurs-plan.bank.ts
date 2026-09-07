@@ -34,6 +34,22 @@ function makeChoices(correct: string, wrongs: readonly string[]) {
 }
 
 
+/**
+ * Les couples dont la norme tombe juste — triplets pythagoriciens.
+ * ⛔ Sans eux, la norme de deux entiers pris au hasard est irrationnelle :
+ * « (5 ; 7) » donnerait 8,602..., impossible a proposer en QCM et decourageant
+ * a calculer. Avec eux, l'eleve fait le vrai calcul et trouve un entier.
+ */
+const TRIPLETS: [number, number, number][] = [
+  [3, 4, 5], [4, 3, 5], [6, 8, 10], [8, 6, 10], [5, 12, 13], [12, 5, 13],
+  [9, 12, 15], [12, 9, 15], [8, 15, 17], [15, 8, 17], [12, 16, 20],
+  [16, 12, 20], [7, 24, 25], [24, 7, 25], [20, 21, 29], [10, 24, 26],
+];
+
+function choisir<T>(liste: T[]): T {
+  return liste[Math.floor(Math.random() * liste.length)];
+}
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -1640,5 +1656,116 @@ export const vecteursPlanBank: TutorBankItemV4[] = [
       "À prouver un alignement ou un parallélisme."
     ),
     tags: ["seconde", "maths", "vecteurs", "colinearite", "raisonnement", "qcm"],
+  },
+
+  /* ---- les gabarits qui manquaient a la definition du vecteur ---- */
+
+  {
+    kind: "template",
+    id: "seconde_vect_def_tpl_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "vecteurs_plan",
+    microId: "vecteur_definition",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$\\|\\vec{u}\\| = \\sqrt{x^2 + y^2}$ — et un carré efface le signe.",
+    tags: ["seconde", "maths", "vecteurs", "norme", "template", "short"],
+    generate: () => {
+      const [a, b, n] = choisir(TRIPLETS);
+      const sx = Math.random() < 0.5 ? -1 : 1;
+      const sy = Math.random() < 0.5 ? -1 : 1;
+      const x = sx * a;
+      const y = sy * b;
+      return {
+        text: `Calculer la norme du vecteur $\\vec{u}\\,(${x}\\,;\\,${y})$.`,
+        format: "short",
+        expected: [String(n)],
+        comparator: "number_equal",
+        explanation: exp(
+          "La norme d'un vecteur est sa longueur : $\\|\\vec{u}\\| = \\sqrt{x^2 + y^2}$.",
+          "On élève chaque coordonnée au carré, on additionne, puis on prend la racine.",
+          `$${x}^2 + ${y}^2 = ${a * a} + ${b * b} = ${n * n}$, et $\\sqrt{${n * n}} = ${n}$.`,
+          `$\\|\\vec{u}\\| = ${n}$ — une norme est TOUJOURS positive : les carrés effacent les signes.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_vect_def_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "vecteurs_plan",
+    microId: "vecteur_definition",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Multiplier par un nombre NÉGATIF garde la direction mais retourne le sens.",
+    tags: ["seconde", "maths", "vecteurs", "direction", "sens", "template", "qcm"],
+    generate: () => {
+      const x = randomInt(1, 5) * (Math.random() < 0.5 ? -1 : 1);
+      const y = randomInt(1, 5) * (Math.random() < 0.5 ? -1 : 1);
+      const k = choisir([-3, -2, 2, 3]);
+      const positif = k > 0;
+      const correct = positif
+        ? "même direction et même sens"
+        : "même direction, mais sens opposé";
+      return {
+        text: `Soient $\\vec{u}\\,(${x}\\,;\\,${y})$ et $\\vec{v}\\,(${k * x}\\,;\\,${k * y})$. Que peut-on dire de ces deux vecteurs ?`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          positif ? "même direction, mais sens opposé" : "même direction et même sens",
+          "directions différentes",
+          "même norme",
+          "ils sont perpendiculaires",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Deux vecteurs proportionnels ont la même direction : ils sont colinéaires.",
+          "On cherche le nombre par lequel il faut multiplier le premier pour obtenir le second, et on regarde son signe.",
+          `Ici $\\vec{v} = ${k}\\,\\vec{u}$, et ce coefficient est ${positif ? "POSITIF" : "NÉGATIF"}.`,
+          positif
+            ? "Un coefficient positif conserve le sens : même direction, même sens, seule la norme change."
+            : "Un coefficient négatif retourne la flèche : même direction, sens opposé."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_vect_def_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "vecteurs_plan",
+    microId: "vecteur_definition",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le vecteur opposé pointe exactement à l'inverse.",
+    tags: ["seconde", "maths", "vecteurs", "sens", "template", "qcm"],
+    generate: () => {
+      const x = randomInt(1, 6) * (Math.random() < 0.5 ? -1 : 1);
+      const y = randomInt(1, 6) * (Math.random() < 0.5 ? -1 : 1);
+      return {
+        text: `Quelles sont les coordonnées du vecteur $-\\vec{u}$, si $\\vec{u}\\,(${x}\\,;\\,${y})$ ?`,
+        format: "qcm",
+        choices: makeChoices(`$(${-x}\\,;\\,${-y})$`, [
+          `$(${-x}\\,;\\,${y})$`,
+          `$(${x}\\,;\\,${-y})$`,
+          `$(${x}\\,;\\,${y})$`,
+          `$(${y}\\,;\\,${x})$`,
+        ]),
+        expected: [`$(${-x}\\,;\\,${-y})$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le vecteur opposé a la même direction et la même norme, mais le sens contraire.",
+          "On change le signe des DEUX coordonnées.",
+          `$-\\vec{u}\\,(${-x}\\,;\\,${-y})$.`,
+          "N'en changer qu'une donnerait un vecteur de direction différente, pas l'opposé."
+        ),
+      };
+    },
   },
 ];

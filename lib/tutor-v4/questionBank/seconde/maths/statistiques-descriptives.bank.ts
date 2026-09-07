@@ -24,6 +24,10 @@ function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function choisir<T>(liste: T[]): T {
+  return liste[Math.floor(Math.random() * liste.length)];
+}
+
 /**
  * Quatre propositions garanties DISTINCTES.
  *
@@ -2078,6 +2082,265 @@ export const statistiquesDescriptivesBank: TutorBankItemV4[] = [
           `On calcule d'abord la moyenne actuelle, puis on lui ajoute $${b}$.`,
           `Moyenne $= \\dfrac{${v.join(" + ")}}{4} = ${fmt(moy)}$, puis $${fmt(moy)} + ${b} = ${fmt(moy + b)}$.`,
           `La moyenne aurait été $${fmt(moy + b)}$ — et non $${fmt(moy + b / 4)}$, qui reviendrait à n'ajouter $${b}$ but qu'une seule fois.`
+        ),
+      };
+    },
+  },
+
+  /* ---- les gabarits qui manquaient a l'ecart type ---- */
+
+  {
+    kind: "template",
+    id: "seconde_stat_et_tpl_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_ecart_type",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Toutes les valeurs sont à la même distance de la moyenne.",
+    tags: ["seconde", "maths", "statistiques", "ecart-type", "canvas", "template", "short"],
+    generate: () => {
+      // ⭐ Serie SYMETRIQUE : deux valeurs en m - d, deux en m + d. Chaque ecart
+      // a la moyenne vaut d, donc la variance vaut d² et l'ecart type d, tout
+      // rond. C'est ce qui rend le calcul faisable a la main.
+      const m = randomInt(6, 15);
+      const d = randomInt(1, 5);
+      const serie = [m - d, m - d, m + d, m + d];
+      return {
+        text: `Calculer l'écart type de la série $${serie.join("$, $")}$.`,
+        format: "short",
+        expected: [String(d)],
+        comparator: "number_equal",
+        canvas: barres(serie.map((v, i) => ({ label: `v${i + 1}`, value: v }))),
+        explanation: exp(
+          "L'écart type mesure la distance moyenne des valeurs à la moyenne.",
+          "On calcule la moyenne, puis l'écart de chaque valeur, puis la racine de la moyenne de leurs carrés.",
+          `La moyenne vaut $${m}$, et chaque valeur en est distante de $${d}$ : la variance vaut $${d}^2 = ${d * d}$.`,
+          `L'écart type est $\\sqrt{${d * d}} = ${d}$ — ici toutes les valeurs sont à la même distance, ce qui rend le calcul immédiat.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_stat_et_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_ecart_type",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Si tout le monde monte pareil, les écarts entre eux changent-ils ?",
+    tags: ["seconde", "maths", "statistiques", "ecart-type", "piege", "template", "qcm"],
+    generate: () => {
+      const e = randomInt(2, 9);
+      const b = randomInt(1, 6);
+      return {
+        text: `Une série a pour écart type $${e}$. On ajoute $${b}$ à TOUTES ses valeurs. Que devient l'écart type ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          `$${e}$, il ne change pas`,
+          [`$${e + b}$`, `$${b}$`, `$${e * b}$`],
+          [`$${e + 2 * b}$`, `$${Math.abs(e - b)}$`]
+        ),
+        expected: [`$${e}$, il ne change pas`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'écart type mesure un ÉCART, pas un niveau.",
+          "On observe ce que devient la distance entre chaque valeur et la moyenne.",
+          `La moyenne monte de $${b}$, mais chaque valeur aussi : les distances restent identiques.`,
+          `L'écart type reste $${e}$ — c'est exactement ce qui le distingue de la moyenne, qui, elle, augmente de $${b}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_stat_et_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_ecart_type",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Étirer toute la série écarte aussi les valeurs les unes des autres.",
+    tags: ["seconde", "maths", "statistiques", "ecart-type", "template", "qcm"],
+    generate: () => {
+      const e = randomInt(2, 8);
+      const k = randomInt(2, 5);
+      return {
+        text: `Une série a pour écart type $${e}$. On multiplie TOUTES ses valeurs par $${k}$. Que devient l'écart type ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          `$${e * k}$`,
+          [`$${e}$, il ne change pas`, `$${e + k}$`, `$${e / k === Math.round(e / k) ? e / k : k}$`],
+          [`$${e * k * k}$`, `$${k}$`]
+        ),
+        expected: [`$${e * k}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Multiplier toutes les valeurs change l'échelle de la série, donc aussi celle des écarts.",
+          "On regarde ce que devient la distance entre une valeur et la moyenne.",
+          `Chaque distance est multipliée par $${k}$, donc l'écart type aussi.`,
+          `Il devient $${e} \\times ${k} = ${e * k}$ — contrairement à l'ajout d'une constante, qui ne le change pas.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_stat_et_tpl_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_ecart_type",
+    difficulty: 3,
+    theme: "sport",
+    hint: "Regarde laquelle des deux séries est la plus étalée, pas laquelle est la plus haute.",
+    tags: ["seconde", "maths", "statistiques", "ecart-type", "sport", "template", "qcm"],
+    generate: () => {
+      const m = randomInt(8, 14);
+      const d = randomInt(3, 6);
+      const serree = [m, m - 1, m + 1, m];
+      const etalee = [m - d, m + d, m - d, m + d];
+      const premiereEstSerree = Math.random() < 0.5;
+      const A = premiereEstSerree ? serree : etalee;
+      const B = premiereEstSerree ? etalee : serree;
+      const bonne = premiereEstSerree ? "l'équipe B" : "l'équipe A";
+      return {
+        text: `Équipe A : $${A.join("$, $")}$ buts. Équipe B : $${B.join("$, $")}$ buts. Laquelle a le PLUS GRAND écart type ?`,
+        format: "qcm",
+        choices: [bonne, premiereEstSerree ? "l'équipe A" : "l'équipe B", "les deux ont le même", "on ne peut pas le dire sans calculer"],
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'écart type est d'autant plus grand que les valeurs sont dispersées.",
+          "On compare l'étalement des deux séries, sans avoir besoin du calcul complet.",
+          `Les deux ont la même moyenne, $${m}$, mais l'une reste groupée autour d'elle tandis que l'autre s'en écarte de $${d}$.`,
+          `C'est ${bonne} qui a le plus grand écart type — deux séries de même moyenne peuvent être très différentes.`
+        ),
+      };
+    },
+  },
+
+  /* ---- les gabarits qui manquaient a l'interpretation ---- */
+
+  {
+    kind: "template",
+    id: "seconde_stat_interp_tpl_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_interpreter",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Un écart type petit veut dire que tout le monde se ressemble.",
+    tags: ["seconde", "maths", "statistiques", "interpreter", "template", "qcm"],
+    generate: () => {
+      const m = randomInt(10, 15);
+      const petit = choisir([0.4, 0.6, 0.8]);
+      const grand = randomInt(4, 7);
+      const cEstPetit = Math.random() < 0.5;
+      const e = cEstPetit ? petit : grand;
+      const correct = cEstPetit
+        ? "les notes sont très groupées autour de la moyenne"
+        : "les notes sont très dispersées autour de la moyenne";
+      return {
+        text: `Un devoir a pour moyenne $${m}$ et pour écart type $${String(e).replace(".", "{,}")}$. Que peut-on en dire ?`,
+        format: "qcm",
+        choices: [
+          correct,
+          cEstPetit
+            ? "les notes sont très dispersées autour de la moyenne"
+            : "les notes sont très groupées autour de la moyenne",
+          "la moitié de la classe a exactement la moyenne",
+          "personne n'a eu plus que la moyenne",
+        ],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'écart type se lit en le comparant à l'échelle des valeurs.",
+          "On regarde s'il est petit ou grand devant la moyenne.",
+          cEstPetit
+            ? `Un écart type de $${String(e).replace(".", "{,}")}$ sur une moyenne de $${m}$ est très faible.`
+            : `Un écart type de $${e}$ sur une moyenne de $${m}$ est important.`,
+          cEstPetit
+            ? "La classe est homogène : presque tout le monde est proche de la moyenne."
+            : "La classe est hétérogène : les notes s'étalent largement de part et d'autre."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_stat_interp_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_interpreter",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Quelques très grandes valeurs tirent la moyenne, pas la médiane.",
+    tags: ["seconde", "maths", "statistiques", "interpreter", "template", "qcm"],
+    generate: () => {
+      const med = randomInt(1200, 1600);
+      const ecart = randomInt(200, 600);
+      const moy = med + ecart;
+      return {
+        text: `Dans une entreprise, le salaire MÉDIAN est de $${med}$ € et le salaire MOYEN de $${moy}$ €. Qu'en déduire ?`,
+        format: "qcm",
+        choices: [
+          "quelques salaires très élevés tirent la moyenne vers le haut",
+          "la moitié des salariés gagne plus de " + moy + " €",
+          "tous les salaires sont supérieurs à la médiane",
+          "il y a une erreur : la moyenne ne peut pas dépasser la médiane",
+        ],
+        expected: ["quelques salaires très élevés tirent la moyenne vers le haut"],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La médiane partage l'effectif en deux, tandis que la moyenne se laisse influencer par les valeurs extrêmes.",
+          "On compare les deux indicateurs et on cherche ce qui explique leur écart.",
+          `La moyenne dépasse la médiane de $${ecart}$ € : le haut de la distribution pèse plus que le bas.`,
+          "Quelques hauts salaires suffisent à tirer la moyenne, alors que la médiane, elle, ne bouge pas — c'est pourquoi on publie souvent la médiane."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_stat_interp_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_interpreter",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Une dispersion nulle ne laisse aucune place à la différence.",
+    tags: ["seconde", "maths", "statistiques", "interpreter", "template", "qcm"],
+    generate: () => {
+      const m = randomInt(5, 18);
+      return {
+        text: `Une série de notes a pour moyenne $${m}$ et pour écart type $0$. Que peut-on affirmer ?`,
+        format: "qcm",
+        choices: [
+          `toutes les notes valent $${m}$`,
+          `la moitié des notes valent $${m}$`,
+          "il n'y a qu'une seule note dans la série",
+          "les notes vont de $0$ à $" + m + "$",
+        ],
+        expected: [`toutes les notes valent $${m}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'écart type mesure la dispersion autour de la moyenne.",
+          "On cherche ce que signifie une dispersion strictement nulle.",
+          "Aucune valeur ne s'écarte de la moyenne, sinon l'écart type serait strictement positif.",
+          `Toutes les notes valent donc $${m}$ — c'est le seul cas où l'écart type s'annule.`
         ),
       };
     },

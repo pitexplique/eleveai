@@ -22,6 +22,64 @@ function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function choisir<T>(liste: T[]): T {
+  return liste[Math.floor(Math.random() * liste.length)];
+}
+
+/** Melange une copie — sert a tirer des distracteurs sans les repeter. */
+function melanger<T>(liste: T[]): T[] {
+  const copie = [...liste];
+  for (let i = copie.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copie[i], copie[j]] = [copie[j], copie[i]];
+  }
+  return copie;
+}
+
+const ENSEMBLES = ["$\\mathbb{N}$", "$\\mathbb{Z}$", "$\\mathbb{D}$", "$\\mathbb{Q}$", "$\\mathbb{R}$"];
+
+/**
+ * VINGT NOMBRES ET LEUR PLUS PETIT ENSEMBLE.
+ *
+ * ⛔ Le piege du tableau est le decimal : une fraction n'est decimale que si
+ * son denominateur reduit ne contient que des 2 et des 5. $\dfrac{3}{4}$ vaut
+ * $0{,}75$ et vit dans $\mathbb{D}$ ; $\dfrac{1}{3}$ ne s'ecrit avec aucune
+ * virgule qui s'arrete et reste dans $\mathbb{Q}$.
+ *
+ * ⛔ Et les racines qui « tombent juste » sont la pour casser l'automatisme
+ * « racine donc irrationnel » : $\sqrt{16}$ est l'entier naturel $4$.
+ */
+const NOMBRES_ENSEMBLES: { ecriture: string; ensemble: string; pourquoi: string }[] = [
+  { ecriture: "$7$", ensemble: "$\\mathbb{N}$", pourquoi: "c'est un entier positif" },
+  { ecriture: "$0$", ensemble: "$\\mathbb{N}$", pourquoi: "zero est un entier naturel" },
+  { ecriture: "$\\sqrt{16}$", ensemble: "$\\mathbb{N}$", pourquoi: "$\\sqrt{16} = 4$, un entier positif" },
+  { ecriture: "$\\dfrac{10}{5}$", ensemble: "$\\mathbb{N}$", pourquoi: "cette fraction vaut $2$" },
+  { ecriture: "$-4$", ensemble: "$\\mathbb{Z}$", pourquoi: "c'est un entier, mais il est negatif" },
+  { ecriture: "$-\\sqrt{9}$", ensemble: "$\\mathbb{Z}$", pourquoi: "$-\\sqrt{9} = -3$, un entier negatif" },
+  { ecriture: "$\\dfrac{-9}{3}$", ensemble: "$\\mathbb{Z}$", pourquoi: "cette fraction vaut $-3$" },
+  { ecriture: "$-12$", ensemble: "$\\mathbb{Z}$", pourquoi: "c'est un entier negatif" },
+  { ecriture: "$\\dfrac{3}{4}$", ensemble: "$\\mathbb{D}$", pourquoi: "elle vaut $0{,}75$, une ecriture decimale qui s'arrete" },
+  { ecriture: "$-2{,}5$", ensemble: "$\\mathbb{D}$", pourquoi: "son ecriture decimale s'arrete, mais ce n'est pas un entier" },
+  { ecriture: "$0{,}125$", ensemble: "$\\mathbb{D}$", pourquoi: "son ecriture decimale s'arrete" },
+  { ecriture: "$\\dfrac{7}{8}$", ensemble: "$\\mathbb{D}$", pourquoi: "elle vaut $0{,}875$" },
+  { ecriture: "$-\\dfrac{5}{2}$", ensemble: "$\\mathbb{D}$", pourquoi: "elle vaut $-2{,}5$" },
+  { ecriture: "$\\dfrac{1}{3}$", ensemble: "$\\mathbb{Q}$", pourquoi: "son ecriture decimale ne s'arrete jamais" },
+  { ecriture: "$\\dfrac{22}{7}$", ensemble: "$\\mathbb{Q}$", pourquoi: "le denominateur $7$ interdit une ecriture decimale finie" },
+  { ecriture: "$\\dfrac{5}{6}$", ensemble: "$\\mathbb{Q}$", pourquoi: "le $3$ cache dans $6$ interdit une ecriture decimale finie" },
+  { ecriture: "$-\\dfrac{2}{7}$", ensemble: "$\\mathbb{Q}$", pourquoi: "le denominateur $7$ interdit une ecriture decimale finie" },
+  { ecriture: "$\\sqrt{2}$", ensemble: "$\\mathbb{R}$", pourquoi: "aucune fraction ne l'ecrit : il est irrationnel" },
+  { ecriture: "$\\pi$", ensemble: "$\\mathbb{R}$", pourquoi: "aucune fraction ne l'ecrit : il est irrationnel" },
+  { ecriture: "$\\sqrt{3}$", ensemble: "$\\mathbb{R}$", pourquoi: "aucune fraction ne l'ecrit : il est irrationnel" },
+];
+
+/** Les quatre formes d'intervalle, avec la phrase qui les dit. */
+const FORMES_INTERVALLE = [
+  { bornes: "[a ; b]", inegalite: (a: string, b: string) => `${a} \\leqslant x \\leqslant ${b}`, nom: "fermé aux deux bouts" },
+  { bornes: "]a ; b[", inegalite: (a: string, b: string) => `${a} < x < ${b}`, nom: "ouvert aux deux bouts" },
+  { bornes: "[a ; b[", inegalite: (a: string, b: string) => `${a} \\leqslant x < ${b}`, nom: "fermé à gauche, ouvert à droite" },
+  { bornes: "]a ; b]", inegalite: (a: string, b: string) => `${a} < x \\leqslant ${b}`, nom: "ouvert à gauche, fermé à droite" },
+];
+
 function exp(definition: string, methode: string, calcul: string, conclusion: string) {
   return (
     `Définition : ${definition}\n\n` +
@@ -1816,5 +1874,215 @@ export const reelsIntervallesBank: TutorBankItemV4[] = [
       "Cela sert à donner une valeur approchée entre deux bornes."
     ),
     tags: ["seconde", "maths", "reels", "encadrement", "raisonnement", "qcm"],
+  },
+
+  /* ================= les gabarits qui manquaient ================= */
+  // ⛔ Ces trois micros se repetaient : deux n'avaient AUCUN generateur, la
+  // troisieme n'en produisait qu'un seul enonce. Un eleve qui revient une
+  // deuxieme fois retombait sur les memes questions.
+
+  {
+    kind: "template",
+    id: "seconde_reels_ens_tpl_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "reels_intervalles",
+    microId: "reels_ensembles",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche le PLUS PETIT ensemble : commence par $\\mathbb{N}$ et descends la liste.",
+    tags: ["seconde", "maths", "reels", "ensembles", "template", "qcm"],
+    generate: () => {
+      const n = choisir(NOMBRES_ENSEMBLES);
+      const faux = melanger(ENSEMBLES.filter((e) => e !== n.ensemble)).slice(0, 3);
+      return {
+        text: `Quel est le PLUS PETIT ensemble auquel appartient ${n.ecriture} ?`,
+        format: "qcm",
+        choices: [n.ensemble, ...faux],
+        expected: [n.ensemble],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Les ensembles s'emboitent : $\\mathbb{N} \\subset \\mathbb{Z} \\subset \\mathbb{D} \\subset \\mathbb{Q} \\subset \\mathbb{R}$.",
+          "On part du plus petit et on descend jusqu'au premier qui convient.",
+          `Pour ${n.ecriture}, ${n.pourquoi}.`,
+          `Le plus petit ensemble est ${n.ensemble} — il appartient bien sûr aussi à tous les suivants.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_reels_ens_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "reels_intervalles",
+    microId: "reels_ensembles",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Une seule réponse est fausse : cherche l'ensemble TROP PETIT pour ce nombre.",
+    tags: ["seconde", "maths", "reels", "ensembles", "piege", "template", "qcm"],
+    generate: () => {
+      const n = choisir(NOMBRES_ENSEMBLES);
+      const rang = ENSEMBLES.indexOf(n.ensemble);
+      // Les ensembles qui CONTIENNENT le nombre sont ceux de rang superieur ou
+      // egal ; les autres sont trop petits. On demande une appartenance FAUSSE,
+      // ce qui n'a de sens que s'il en existe une.
+      const trop = ENSEMBLES.slice(0, rang);
+      const contiennent = ENSEMBLES.slice(rang);
+      if (trop.length === 0) {
+        // ⛔ Un naturel appartient a TOUS les ensembles : aucune appartenance
+        // n'est fausse, la question n'aurait pas de reponse. On la retourne.
+        return {
+          text: `${n.ecriture} appartient-il à $\\mathbb{N}$ ?`,
+          format: "qcm",
+          choices: ["oui, et à tous les autres ensembles", "non, seulement à $\\mathbb{Z}$", "non, seulement à $\\mathbb{R}$", "non, il n'appartient à aucun"],
+          expected: ["oui, et à tous les autres ensembles"],
+          comparator: "mcq_exact",
+          explanation: exp(
+            "$\\mathbb{N}$ est le plus petit des cinq ensembles emboités.",
+            "On vérifie que le nombre est bien un entier positif ou nul.",
+            `Ici ${n.pourquoi}.`,
+            "Un nombre de $\\mathbb{N}$ appartient donc aussi à $\\mathbb{Z}$, $\\mathbb{D}$, $\\mathbb{Q}$ et $\\mathbb{R}$."
+          ),
+        };
+      }
+      const fausse = choisir(trop);
+      const vraies = melanger(contiennent).slice(0, 3);
+      return {
+        text: `Laquelle de ces appartenances est FAUSSE pour ${n.ecriture} ?`,
+        format: "qcm",
+        choices: [
+          `${n.ecriture} $\\in$ ${fausse}`,
+          ...vraies.map((e) => `${n.ecriture} $\\in$ ${e}`),
+        ],
+        expected: [`${n.ecriture} $\\in$ ${fausse}`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un nombre appartient à son plus petit ensemble et à tous ceux qui le contiennent.",
+          "On situe d'abord le nombre, puis on écarte les ensembles trop petits.",
+          `${n.ecriture} vit dans ${n.ensemble}, car ${n.pourquoi}.`,
+          `${fausse} est plus petit que ${n.ensemble} : l'appartenance y est fausse.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_interv_repr_tpl_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "reels_intervalles",
+    microId: "intervalle_representer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un crochet TOURNÉ VERS le nombre l'inclut ; tourné vers l'extérieur, il l'exclut.",
+    tags: ["seconde", "maths", "reels", "intervalle", "template", "qcm"],
+    generate: () => {
+      const a = randomInt(-5, 2);
+      const b = a + randomInt(2, 5);
+      const forme = choisir(FORMES_INTERVALLE);
+      const ecrire = (f: typeof forme) => f.bornes.replace("a", String(a)).replace("b", String(b));
+      const faux = melanger(FORMES_INTERVALLE.filter((f) => f.bornes !== forme.bornes)).slice(0, 3);
+      return {
+        text: `Quel intervalle rassemble les réels $x$ tels que $${forme.inegalite(String(a), String(b))}$ ?`,
+        format: "qcm",
+        choices: [`$${ecrire(forme)}$`, ...faux.map((f) => `$${ecrire(f)}$`)],
+        expected: [`$${ecrire(forme)}$`],
+        comparator: "mcq_exact",
+        canvas: droiteGraduee(
+          [
+            { value: a, label: String(a), color: "#2563eb" },
+            { value: b, label: String(b), color: "#dc2626" },
+          ],
+          a - 1,
+          b + 1,
+          1
+        ),
+        explanation: exp(
+          "Un crochet dit si la borne fait partie de l'intervalle ou non.",
+          "On traduit chaque inégalité : large ($\\leqslant$) ferme le crochet, stricte ($<$) l'ouvre.",
+          `Ici l'intervalle est ${forme.nom}.`,
+          `On écrit $${ecrire(forme)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_interv_repr_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "reels_intervalles",
+    microId: "intervalle_representer",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Traduis les crochets en inégalités, dans l'ordre.",
+    tags: ["seconde", "maths", "reels", "intervalle", "template", "qcm"],
+    generate: () => {
+      const a = randomInt(-6, 1);
+      const b = a + randomInt(2, 6);
+      const forme = choisir(FORMES_INTERVALLE);
+      const bornes = forme.bornes.replace("a", String(a)).replace("b", String(b));
+      const faux = melanger(FORMES_INTERVALLE.filter((f) => f.bornes !== forme.bornes)).slice(0, 3);
+      return {
+        text: `Comment se traduit l'intervalle $${bornes}$ par des inégalités ?`,
+        format: "qcm",
+        choices: [
+          `$${forme.inegalite(String(a), String(b))}$`,
+          ...faux.map((f) => `$${f.inegalite(String(a), String(b))}$`),
+        ],
+        expected: [`$${forme.inegalite(String(a), String(b))}$`],
+        comparator: "mcq_exact",
+        canvas: droiteGraduee(
+          [
+            { value: a, label: String(a), color: "#2563eb" },
+            { value: b, label: String(b), color: "#dc2626" },
+          ],
+          a - 1,
+          b + 1,
+          1
+        ),
+        explanation: exp(
+          "Chaque crochet se lit comme une inégalité sur $x$.",
+          "Un crochet tourné vers l'intérieur inclut la borne : l'inégalité est large.",
+          `L'intervalle $${bornes}$ est ${forme.nom}.`,
+          `Il se traduit par $${forme.inegalite(String(a), String(b))}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_reels_droite_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "reels_intervalles",
+    microId: "reels_droite_graduee",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compte les graduations depuis zéro, en respectant le sens.",
+    tags: ["seconde", "maths", "reels", "droite-graduee", "canvas", "template", "qcm"],
+    generate: () => {
+      const x = choisir([-6, -5, -4, -3, -2, 2, 3, 4, 5, 6].filter((v) => v !== 0));
+      const faux = melanger([x + 1, x - 1, -x, x + 2].filter((v) => v !== x)).slice(0, 3);
+      return {
+        text: "Quelle est l'abscisse du point marqué sur cette droite graduée ?",
+        format: "qcm",
+        choices: [`$${x}$`, ...faux.map((v) => `$${v}$`)],
+        expected: [`$${x}$`],
+        comparator: "mcq_exact",
+        canvas: droiteGraduee([{ value: x, label: "A", color: "#2563eb" }], -7, 7, 1),
+        explanation: exp(
+          "Sur une droite graduée, l'abscisse d'un point se lit au nombre de graduations depuis l'origine.",
+          "On part de zéro et on compte, vers la droite pour les positifs, vers la gauche pour les négatifs.",
+          `Le point $A$ se trouve ${Math.abs(x)} graduations ${x < 0 ? "à GAUCHE" : "à droite"} de zéro.`,
+          `Son abscisse est $${x}$.`
+        ),
+      };
+    },
   },
 ];
