@@ -107,7 +107,7 @@ BARRE = [np.array([-0.20, Y_BARRE, 0]), np.array([0.42, Y_BARRE, 0])]
 
 # ⭐ Cinq noms concrets, tous avec la LETTRE « t » ET le SON [t] en initiale,
 # tous dessinables en silhouette fermée.
-MOTS_EN_T = ["table", "tomate", "train", "tapis", "tasse"]
+MOTS_EN_T = ["table", "tomato", "train", "tent", "teacup"]
 
 
 def chemin_t(stroke_width: float = 10, color: str = WHITE) -> VGroup:
@@ -174,26 +174,26 @@ def livre_dessine() -> VGroup:
 
 
 def lapin_dessine() -> VGroup:
-    """Un tapis vu de dessus : le rectangle et ses franges."""
-    fond = Polygon(
-        np.array([-0.60, -0.24, 0]), np.array([0.60, -0.24, 0]),
-        np.array([0.60, 0.26, 0]), np.array([-0.60, 0.26, 0]),
-        stroke_color=ROUGE_ERREUR, stroke_width=5,
+    """A tent: a closed triangle with its door and a pole.
+
+    ⛔ REMPLACE LE TAPIS DU FRANÇAIS. « rug » ne commence pas par un t, et
+    j'avais mis le mot « tent » SUR LE DESSIN D'UN TAPIS : l'enfant aurait
+    entendu un mot et vu autre chose. Le mot et l'image doivent coïncider —
+    traduire la liste ne suffit pas, il faut traduire les DESSINS avec.
+    """
+    toile = Polygon(
+        np.array([-0.58, -0.34, 0]), np.array([0.58, -0.34, 0]),
+        np.array([0.00, 0.46, 0]),
+        stroke_color=VERT_OK, stroke_width=5,
     ).set_fill(opacity=0)
-    motif = Polygon(
-        np.array([-0.38, -0.10, 0]), np.array([0.38, -0.10, 0]),
-        np.array([0.38, 0.12, 0]), np.array([-0.38, 0.12, 0]),
-        stroke_color=JAUNE_TITRE, stroke_width=3,
+    porte = Polygon(
+        np.array([-0.14, -0.34, 0]), np.array([0.14, -0.34, 0]),
+        np.array([0.00, 0.14, 0]),
+        stroke_color=ORANGE_RETENUE, stroke_width=4,
     ).set_fill(opacity=0)
-    franges = VGroup(
-        *[Line(np.array([x, 0.26, 0]), np.array([x, 0.40, 0]),
-               stroke_color=ROUGE_ERREUR, stroke_width=3)
-          for x in np.arange(-0.52, 0.60, 0.16)],
-        *[Line(np.array([x, -0.24, 0]), np.array([x, -0.38, 0]),
-               stroke_color=ROUGE_ERREUR, stroke_width=3)
-          for x in np.arange(-0.52, 0.60, 0.16)],
-    )
-    return VGroup(fond, motif, franges)
+    mat = Line(np.array([0.00, 0.46, 0]), np.array([0.00, 0.62, 0]),
+               stroke_color=WHITE, stroke_width=4)
+    return VGroup(toile, porte, mat)
 
 
 def lampe_dessine() -> VGroup:
@@ -221,17 +221,17 @@ def lampe_dessine() -> VGroup:
 
 # ─── La voix ──────────────────────────────────────────────────────────────────
 # ⚠️ DURÉES MESURÉES par `scripts/generer-voix.ps1`, jamais estimées.
-VOIX = Path(__file__).resolve().parents[3] / "public" / "sons" / "cp-lettre-t"
+VOIX = Path(__file__).resolve().parents[3] / "public" / "sons" / "en-lettre-t"
 DUREE = {
-    "00-aujourdhui": 3.33, "01-ecoute": 3.12, "02-regarde": 3.11, "03-depart": 20.58,
-    "04-encore": 2.92, "05-cherchons": 4.27, "05-t-comme": 1.66, "06-table": 1.50,
-    "07-tomate": 1.60, "08-train": 1.34, "09-tapis": 1.44, "10-tasse": 1.48,
-    "10-pareil": 4.71, "11-relance": 3.08, "12-va-sur": 3.16, "14-bientot": 1.71,
+    "00-aujourdhui": 3.60, "01-ecoute": 3.70, "02-regarde": 3.00, "03-depart": 25.16,
+    "04-encore": 4.15, "05-cherchons": 4.50, "05-t-comme": 1.80, "06-table": 1.60,
+    "07-tomate": 1.70, "08-train": 1.45, "09-tapis": 1.50, "10-tasse": 1.70,
+    "10-pareil": 5.16, "11-relance": 3.60, "12-va-sur": 3.56, "14-bientot": 2.23,
 }
 CLIPS_MOTS = ["06-table", "07-tomate", "08-train", "09-tapis", "10-tasse"]
 
 
-class _LettreTBase(Scene):
+class _LetterTBase(Scene):
     """Le contenu, écrit une fois. Les quatre variantes ne changent que le cadre
     et le côté vers lequel le stylo penche."""
 
@@ -257,7 +257,7 @@ class _LettreTBase(Scene):
 
     def construct(self):
         son = Text("t", font_size=150, color=JAUNE_TITRE)
-        titre = Text("la lettre", font_size=44, color=BLEU_CALCUL).next_to(son, UP, buff=0.5)
+        titre = Text("the letter", font_size=44, color=BLEU_CALCUL).next_to(son, UP, buff=0.5)
         margo = MascotteMargouillat().scale(0.85 if not self.vertical else 0.7)
         if self.vertical:
             margo.next_to(son, DOWN, buff=0.9)
@@ -266,7 +266,10 @@ class _LettreTBase(Scene):
 
         # ── 0. LA PAGE DE GARDE : DE 0 À 1 SECONDE ──────────────────────────
         garde, garde_main = page_de_garde(
-            self, "t", chemin_t(stroke_width=12), MascotteMargouillat()
+            self, "t", chemin_t(stroke_width=12), MascotteMargouillat(),
+            notion="Cursive letters",
+            mains=("For right-handers", "For left-handers"),
+            serie="Beautiful handwriting"
         )
 
         # ── 1. L'ACCUEIL, À LA SECONDE PILE ─────────────────────────────────
@@ -279,7 +282,7 @@ class _LettreTBase(Scene):
         self.wait(d0)
         d = self.dire("01-ecoute")
         self.play(
-            Transform(titre, Text("le son", font_size=44, color=BLEU_CALCUL).move_to(titre)),
+            Transform(titre, Text("the sound", font_size=44, color=BLEU_CALCUL).move_to(titre)),
             Indicate(son, scale_factor=1.25, color=JAUNE_TITRE),
         )
         self.wait(d - 1.0)
@@ -395,7 +398,7 @@ class _LettreTBase(Scene):
 
         # ── 4. « t » COMME… CINQ MOTS, CHACUN AVEC SON DESSIN ───────────────
 
-        titre_mots = Text("t comme…", font_size=50)
+        titre_mots = Text("t as in…", font_size=50)
         titre_mots[0].set_color(JAUNE_TITRE)
 
         dessins = [
@@ -435,7 +438,10 @@ class _LettreTBase(Scene):
 
         # ── 4 bis. LA RELANCE : UNE CONSIGNE, PAS UNE QUESTION ──────────────
         self.play(FadeOut(bloc))
-        relance = ecran_relance(self.vertical, "t")
+        relance = ecran_relance(
+            self.vertical, "t",
+            consigne=("Find a word", "beginning with", "Find a word beginning with"),
+        )
         d = self.dire("11-relance")
         self.play(FadeIn(relance, scale=0.85))
         self.play(relance.animate.scale(1.08), run_time=0.5)
@@ -443,24 +449,28 @@ class _LettreTBase(Scene):
         self.play(FadeOut(relance), FadeOut(son))
 
         # ── 5. LA PAGE DE FIN ───────────────────────────────────────────────
-        page_de_fin(self, margo, "12-va-sur", clip_bientot="14-bientot")
+        page_de_fin(self, margo, "12-va-sur", clip_bientot="14-bientot",
+                    adieu="See you soon!", adieu_taille=36,
+                    abonne=("Subscribe to", "the channel!"),
+                    fiche=("Download", "your sheet!"),
+                    voix_abonne="en-commun")
 
 
-class LettreTCp(_LettreTBase):
+class LetterTRight(_LetterTBase):
     """16:9, droitier."""
 
 
-class LettreTCpGaucher(_LettreTBase):
+class LetterTLeft(_LetterTBase):
     """16:9, gaucher."""
 
     gaucher = True
 
 
-class LettreTCpPortrait(Portrait, _LettreTBase):
+class LetterTPortraitRight(Portrait, _LetterTBase):
     """9:16, droitier."""
 
 
-class LettreTCpPortraitGaucher(Portrait, _LettreTBase):
+class LetterTPortraitLeft(Portrait, _LetterTBase):
     """9:16, gaucher."""
 
     gaucher = True
