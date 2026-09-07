@@ -236,6 +236,17 @@ export const NOTION_COACH_MATHS: TableNotions = {
     "premiere-spe": "probabilites_conditionnelles",
     "terminale-spe": "probabilite_conditionnelle",
   },
+  // ⛔ Les classes du primaire et du college ne sont PAS du remplissage : sans
+  // elles, « faux positifs » tape en CM1 renverrait a la page generale au lieu
+  // des probabilites de la classe.
+  probabilites_conditionnelles: {
+    cm1: "probabilite", cm2: "probabilite", "6e": "proba_experience",
+    "5e": "proba_experience", "4e": "proba_experience", "3e": "proba_experience",
+    seconde: "probabilites_conditionnelles_2de",
+    premiere: "alea_conditionnelle",
+    "premiere-spe": "probabilites_conditionnelles",
+    "terminale-spe": "probabilite_conditionnelle",
+  },
   statistiques: {
     cm1: "tableau", cm2: "tableau", "6e": "stat_donnee", "5e": "stat_statistique",
     "4e": "stat_statistique", "3e": "stat_statistique",

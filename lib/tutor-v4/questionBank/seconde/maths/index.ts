@@ -20,6 +20,7 @@ import { fonctionsReferenceBank } from "./fonctions-reference.bank";
 import { informationChiffreeBank } from "./information-chiffree.bank";
 import { statistiquesDescriptivesBank } from "./statistiques-descriptives.bank";
 import { probabilitesBank } from "./probabilites.bank";
+import { probabilitesConditionnellesBank } from "./probabilites-conditionnelles.bank";
 import { echantillonnageBank } from "./echantillonnage.bank";
 import { algorithmiquePythonBank } from "./algorithmique-python.bank";
 import { logiqueEnsemblesBank } from "./logique-ensembles.bank";
@@ -48,6 +49,7 @@ export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   ...informationChiffreeBank,
   ...statistiquesDescriptivesBank,
   ...probabilitesBank,
+  ...probabilitesConditionnellesBank,
   ...echantillonnageBank,
   // === Domaine ALGORITHMIQUE — refait (1 banque par notion) ===
   ...algorithmiquePythonBank,

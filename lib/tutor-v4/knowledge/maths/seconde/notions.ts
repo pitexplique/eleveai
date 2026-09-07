@@ -142,6 +142,16 @@ export const notions: NotionSource[] = [
     prerequis: ["reels_intervalles"],
     levels: [1, 2, 3],
   },
+  // ⭐ AJOUTEE LE 04/09/2026. Le BO 2026 lui donne son propre bloc de contenus
+  // et de capacites ; la premiere et la terminale la rangent deja comme une
+  // notion distincte (probabilites_conditionnelles, probabilite_conditionnelle).
+  {
+    id: "probabilites_conditionnelles_2de",
+    label: "Probabilites conditionnelles et arbres",
+    boId: "BO2D1",
+    prerequis: ["probabilites_ensemble_fini"],
+    levels: [2, 3],
+  },
   {
     id: "echantillonnage_simulation",
     label: "Echantillonnage et simulation",

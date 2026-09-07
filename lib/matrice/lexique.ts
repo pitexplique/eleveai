@@ -288,6 +288,21 @@ export const NOTIONS: NotionLexique[] = [
     alias: ["exponentielle", "exp", "logarithme", "ln", "log", "croissance exponentielle"],
   },
   {
+    // ⭐ AVANT « probabilites », et ce n'est pas negociable : le premier alias
+    // qui accroche gagne, et « probabilite » capterait « probabilite
+    // conditionnelle » pour l'envoyer sur la notion generale.
+    // ⛔ « arbre » seul reste a l'entree generale — les arbres se rencontrent
+    // des la 4e, bien avant les ponderations. Et « sachant » n'est PAS un alias :
+    // le mot vit dans trop de phrases ordinaires.
+    id: "probabilites_conditionnelles", label: "les probabilités conditionnelles", matiere: "maths",
+    alias: [
+      "probabilite conditionnelle", "probabilites conditionnelles",
+      "proba conditionnelle", "probas conditionnelles", "conditionnelle",
+      "arbre pondere", "arbres ponderes", "faux positif", "faux positifs",
+      "depistage",
+    ],
+  },
+  {
     // ⛔⛔ « des » A ÉTÉ RETIRÉ DES ALIAS LE 22/08/2026 — NE PAS LE REMETTRE.
     // Il désignait les DÉS à jouer, mais la saisie est normalisée sans accents :
     // « dés » devient « des », c'est-à-dire l'article le plus courant du

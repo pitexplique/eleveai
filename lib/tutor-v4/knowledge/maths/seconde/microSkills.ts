@@ -152,6 +152,20 @@ export const microSkills: MicroSkillSource[] = [
   { id: "proba_formule_union", label: "Utiliser P(A union B) + P(A inter B) = P(A) + P(B)", notionId: "probabilites_ensemble_fini", prerequis: ["proba_reunion_intersection"] },
   { id: "proba_tableau_arbre", label: "Organiser une experience avec tableau ou arbre", notionId: "probabilites_ensemble_fini", prerequis: ["proba_calculer"] },
 
+  /* ================= probabilites_conditionnelles_2de ================= */
+  // ⭐ Le BO 2026 : « probabilite conditionnelle d'un evenement B sachant un
+  // evenement A de probabilite non nulle. Notation PA(B). » et « arbres de
+  // probabilite, application au calcul de probabilites ».
+  //
+  // ⛔ PAS DE FORMULE DES PROBABILITES TOTALES : le BO exclut explicitement le
+  // calcul « relatif a une partition de l'univers ». On additionne les chemins
+  // de l'arbre, ce qui est demande ; on ne pose pas la formule generale.
+  { id: "proba_conditionnelle", label: "Calculer une probabilite conditionnelle PA(B)", notionId: "probabilites_conditionnelles_2de", prerequis: ["proba_calculer"] },
+  { id: "proba_arbre_pondere", label: "Lire et construire un arbre pondere", notionId: "probabilites_conditionnelles_2de", prerequis: ["proba_tableau_arbre", "proba_conditionnelle"] },
+  { id: "proba_arbre_chemins", label: "Calculer une probabilite en additionnant les chemins", notionId: "probabilites_conditionnelles_2de", prerequis: ["proba_arbre_pondere"] },
+  { id: "proba_tableau_croise", label: "Lire une probabilite conditionnelle sur un tableau croise", notionId: "probabilites_conditionnelles_2de", prerequis: ["proba_conditionnelle"] },
+  { id: "proba_faux_positifs", label: "Distinguer PA(B) et PB(A) (faux positifs)", notionId: "probabilites_conditionnelles_2de", prerequis: ["proba_conditionnelle"] },
+
   /* ===================== echantillonnage_simulation ===================== */
   { id: "echantillon_fluctuation", label: "Comprendre la fluctuation d'echantillonnage", notionId: "echantillonnage_simulation", prerequis: ["stat_frequence", "proba_calculer"] },
   { id: "echantillon_loi_grands_nombres", label: "Mobiliser la loi des grands nombres (estimation par frequence)", notionId: "echantillonnage_simulation", prerequis: ["echantillon_fluctuation"] },
