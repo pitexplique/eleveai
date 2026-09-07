@@ -1,4 +1,4 @@
-# Écriture de la lettre « n » en cursive — CP
+# Écriture de la lettre « m » en cursive — CP
 #
 # ⭐⭐ LA PREMIÈRE CONSONNE, ET LE PREMIER TRACÉ RELEVÉ SUR UN MODÈLE.
 # Les six voyelles ont été dessinées à l'œil. Le 07/09, Frédéric a envoyé le
@@ -33,6 +33,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # dossier manim/
 sys.path.insert(0, str(Path(__file__).resolve().parent))  # dossier cp/
 from charte import *  # noqa: F403,E402
 from mascotte import MascotteMargouillat  # noqa: E402
+from chiffre_commune import main_ouverte  # noqa: E402
 
 from lettre_commune import (  # noqa: E402
     EPS,
@@ -63,37 +64,28 @@ from lettre_commune import (  # noqa: E402
 #   3. fermeture ramenée À HAUTEUR DU DÉPART et boucle petite (sommet 0,94).
 # ⚠️ La boucle CROISE le rond, et c'est normal : c'est ce croisement qui fait la
 # sortie. Ce qu'il ne faut pas, c'est qu'elle dépasse le sommet du rond.
-# ⭐⭐ LE « n » EN GESTES NOMMÉS (Frédéric, 07/09), et il a fallu quatre essais :
-#   1. une CROSSE — « comme un bâton de pèlerin », TOURNÉE VERS LA GAUCHE :
-#      son extrémité libre est à gauche, le fût à droite ;
-#   2. on DESCEND tout droit jusqu'à la ligne ;
-#   3. on REMONTE SUR LE MÊME TRAIT — le geste qui évite le lever ;
-#   4. un PONT LARGE ;
-#   5. on redescend, et on finit par la PARABOLE CONVEXE du « t » et du « l ».
-#
-# ⛔ Mes trois ratages, dans l'ordre, et ce qu'ils enseignent :
-#   — j'ai commencé par une attaque montante d'un seul trait : le « n » n'a pas
-#     d'attaque, il part d'une crosse ;
-#   — j'ai refermé la crosse en BOUCLE : le « n » avait un œilleton. Une crosse
-#     est OUVERTE, elle ne recroise jamais son trait ;
-#   — je l'ai tournée vers la DROITE : le bâton pointait du mauvais côté.
-# 👉 « Bâton de pèlerin » a réglé en un mot ce que « boucle » ne réglait pas.
-# Pour une forme ouverte, une IMAGE CONCRÈTE vaut mieux qu'un terme géométrique.
-#
-# ⭐ SANS LEVER, et c'est un choix : trois glyphes en lèvent déjà (4, 7, t).
-# Imposer un lever là où la main n'en a pas besoin, c'est enseigner une
-# difficulté qui n'existe pas — le même argument que pour le « 5 ». Et repasser
-# sur son propre trait est un vrai geste de cursive, qui resservira pour m, p, r.
+# ⭐⭐ LE « m » EST LE « n » AVEC UN PONT DE PLUS, et c'est la démonstration que
+# la grammaire des gestes paie : le « n » a demandé QUATRE essais, le « m »
+# ZÉRO. Même crosse tournée vers la gauche, même remontée sur le même trait,
+# même creux final. Un seul geste s'ajoute : descente + remontée + second pont.
+# ⭐ Et c'est aussi la leçon pour l'enfant : qui sait écrire le « n » sait déjà
+# écrire le « m », il répète une fois de plus. La voix le dit en toutes lettres.
+# ⚠️ Les ponts sont RESSERRÉS par rapport au « n » (0,40 au lieu de 0,46) : à
+# trois jambes, la lettre dépasserait sinon la largeur utile. Mesuré : 1,85
+# pour 3,90 utiles.
 H = 1.00
-DEPART = np.array([-0.42, 0.84, 0])
+DEPART = np.array([-0.62, 0.84, 0])
 COURBES = [
-    ((-0.40, H + 0.06), (-0.18, H + 0.08), (-0.12, 0.86)),  # 1. la crosse, vers la GAUCHE
-    ((-0.11, 0.58), (-0.10, 0.30), (-0.10, 0.05)),          # 2. la descente
-    ((-0.10, 0.20), (-0.10, 0.38), (-0.09, 0.54)),          # 3. la remontée, SUR LE MÊME TRAIT
-    ((-0.03, 0.88), (0.20, H + 0.04), (0.36, H - 0.02)),    # 4. le pont, LARGE
-    ((0.44, 0.72), (0.45, 0.34), (0.45, 0.08)),             # 5. la descente
-    ((0.47, -0.02), (0.62, -0.03), (0.76, 0.10)),           # le creux, sur la ligne
-    ((0.86, 0.20), (0.94, 0.28), (1.04, 0.34)),             # la sortie, qui s'effile
+    ((-0.60, H + 0.06), (-0.38, H + 0.08), (-0.32, 0.86)),  # 1. la crosse, vers la GAUCHE
+    ((-0.31, 0.58), (-0.30, 0.30), (-0.30, 0.05)),          # 2. la descente
+    ((-0.30, 0.20), (-0.30, 0.38), (-0.29, 0.54)),          # 3. la remontée, MÊME TRAIT
+    ((-0.24, 0.88), (-0.04, H + 0.04), (0.10, H - 0.02)),   # 4. le premier pont
+    ((0.16, 0.72), (0.17, 0.34), (0.17, 0.05)),             # 5. la descente
+    ((0.17, 0.20), (0.17, 0.38), (0.18, 0.54)),             # 6. la remontée, MÊME TRAIT
+    ((0.23, 0.88), (0.43, H + 0.04), (0.57, H - 0.02)),     # 7. le second pont
+    ((0.63, 0.72), (0.64, 0.34), (0.64, 0.08)),             # 8. la descente
+    ((0.66, -0.02), (0.81, -0.03), (0.95, 0.10)),           # le creux, sur la ligne
+    ((1.05, 0.20), (1.13, 0.28), (1.23, 0.34)),             # la sortie, qui s'effile
 ]
 
 # ⭐ Cinq noms concrets, tous avec la LETTRE « o » ET le SON [o] en initiale.
@@ -105,99 +97,98 @@ COURBES = [
 # silhouette) et tous les mots en « ill » (fille, bille), où le « l » ne se
 # prononce pas seul — même piège que « ou » pour le « o ».
 # ⚠️ DESSINS À FAIRE : nid, nuage, note, navire, nappe.
-MOTS_EN_N = ["nid", "nuage", "note", "navire", "nappe"]
+# ⚠️ DESSINS À FAIRE : maison, montagne, main, moto, melon.
+# ⭐ « main » réutilise `main_ouverte()` de `chiffre_commune` — le référent
+# corporel du « 5 » resservira ici.
+MOTS_EN_M = ["maison", "montagne", "main", "moto", "melon"]
 
 
-def chemin_n(stroke_width: float = 10, color: str = WHITE) -> VMobject:
+def chemin_m(stroke_width: float = 10, color: str = WHITE) -> VMobject:
     return chemin_bezier(DEPART, COURBES, stroke_width, color)
 
 
 # ─── Les cinq dessins ─────────────────────────────────────────────────────────
 def lune_dessine() -> VGroup:
-    """Un nid : la coupe tressée et deux œufs."""
-    coupe = VMobject(stroke_color=ORANGE_RETENUE, stroke_width=5)
-    coupe.set_fill(opacity=0)
-    coupe.start_new_path(np.array([-0.52, 0.16, 0]))
-    coupe.add_cubic_bezier_curve_to(
-        np.array([-0.44, -0.34, 0]), np.array([0.44, -0.34, 0]),
-        np.array([0.52, 0.16, 0]))
-    brins = VGroup(
-        *[Line(np.array([-0.40 + k * 0.26, -0.06, 0]),
-               np.array([-0.28 + k * 0.26, -0.14, 0]),
-               stroke_color=ORANGE_RETENUE, stroke_width=3) for k in range(4)]
-    )
-    oeufs = VGroup(
-        *[Ellipse(width=0.20, height=0.26, stroke_color=WHITE, stroke_width=4)
-          .set_fill(opacity=0).move_to(np.array([x, 0.10, 0]))
-          for x in (-0.14, 0.14)]
-    )
-    return VGroup(coupe, brins, oeufs)
+    """Une maison : les murs, le toit, la porte, une fenêtre."""
+    murs = Polygon(
+        np.array([-0.44, -0.40, 0]), np.array([0.44, -0.40, 0]),
+        np.array([0.44, 0.16, 0]), np.array([-0.44, 0.16, 0]),
+        stroke_color=WHITE, stroke_width=5,
+    ).set_fill(opacity=0)
+    toit = Polygon(
+        np.array([-0.56, 0.16, 0]), np.array([0.56, 0.16, 0]),
+        np.array([0.00, 0.58, 0]),
+        stroke_color=ROUGE_ERREUR, stroke_width=5,
+    ).set_fill(opacity=0)
+    porte = Polygon(
+        np.array([-0.12, -0.40, 0]), np.array([0.12, -0.40, 0]),
+        np.array([0.12, -0.02, 0]), np.array([-0.12, -0.02, 0]),
+        stroke_color=ORANGE_RETENUE, stroke_width=4,
+    ).set_fill(opacity=0)
+    fenetre = Polygon(
+        np.array([0.20, -0.06, 0]), np.array([0.36, -0.06, 0]),
+        np.array([0.36, 0.08, 0]), np.array([0.20, 0.08, 0]),
+        stroke_color=BLEU_CALCUL, stroke_width=4,
+    ).set_fill(opacity=0)
+    return VGroup(murs, toit, porte, fenetre)
 
 
 def lit_dessine() -> VGroup:
-    """Un nuage : trois bosses et un dessous plat."""
-    n = VMobject(stroke_color=BLEU_CALCUL, stroke_width=5)
-    n.set_fill(opacity=0)
-    n.start_new_path(np.array([-0.52, -0.16, 0]))
-    n.add_cubic_bezier_curve_to(
-        np.array([-0.68, 0.16, 0]), np.array([-0.40, 0.40, 0]),
-        np.array([-0.22, 0.26, 0]))
-    n.add_cubic_bezier_curve_to(
-        np.array([-0.14, 0.54, 0]), np.array([0.22, 0.54, 0]),
-        np.array([0.26, 0.24, 0]))
-    n.add_cubic_bezier_curve_to(
-        np.array([0.52, 0.34, 0]), np.array([0.66, -0.04, 0]),
-        np.array([0.44, -0.16, 0]))
-    n.add_line_to(np.array([-0.52, -0.16, 0]))
-    return VGroup(n)
+    """Une montagne : deux sommets et la neige au-dessus."""
+    massif = Polygon(
+        np.array([-0.62, -0.34, 0]), np.array([-0.16, 0.42, 0]),
+        np.array([0.06, 0.10, 0]), np.array([0.30, 0.50, 0]),
+        np.array([0.62, -0.34, 0]),
+        stroke_color=WHITE, stroke_width=5,
+    ).set_fill(opacity=0)
+    neige = VGroup(
+        Polygon(np.array([-0.28, 0.22, 0]), np.array([-0.16, 0.42, 0]),
+                np.array([-0.05, 0.24, 0]),
+                stroke_color=BLEU_CALCUL, stroke_width=4).set_fill(opacity=0),
+        Polygon(np.array([0.19, 0.32, 0]), np.array([0.30, 0.50, 0]),
+                np.array([0.40, 0.30, 0]),
+                stroke_color=BLEU_CALCUL, stroke_width=4).set_fill(opacity=0),
+    )
+    return VGroup(massif, neige)
 
 
 def livre_dessine() -> VGroup:
-    """Une note de musique : la tête, la hampe, le crochet."""
-    tete = Ellipse(width=0.30, height=0.22, stroke_color=WHITE, stroke_width=5)
-    tete.set_fill(opacity=0).rotate(-0.3).move_to(np.array([-0.16, -0.26, 0]))
-    hampe = Line(np.array([-0.02, -0.22, 0]), np.array([-0.02, 0.44, 0]),
-                 stroke_color=WHITE, stroke_width=5)
-    crochet = ArcBetweenPoints(
-        np.array([-0.02, 0.44, 0]), np.array([0.26, 0.10, 0]),
-        angle=-1.2, stroke_color=WHITE, stroke_width=4)
-    return VGroup(tete, hampe, crochet)
+    """Une main ouverte — ⭐ le même dessin que le référent du « 5 »."""
+    return main_ouverte(5).scale(0.72)
 
 
 def lapin_dessine() -> VGroup:
-    """Un navire : la coque, le mât, la voile."""
-    coque = Polygon(
-        np.array([-0.54, -0.22, 0]), np.array([0.54, -0.22, 0]),
-        np.array([0.38, -0.44, 0]), np.array([-0.38, -0.44, 0]),
-        stroke_color=ORANGE_RETENUE, stroke_width=5,
-    ).set_fill(opacity=0)
-    mat = Line(np.array([0.00, -0.22, 0]), np.array([0.00, 0.54, 0]),
-               stroke_color=WHITE, stroke_width=5)
-    voile = Polygon(
-        np.array([0.04, 0.50, 0]), np.array([0.04, -0.14, 0]),
-        np.array([0.44, -0.14, 0]),
-        stroke_color=BLEU_CALCUL, stroke_width=5,
-    ).set_fill(opacity=0)
-    vague = Line(np.array([-0.62, -0.50, 0]), np.array([0.62, -0.50, 0]),
-                 stroke_color=BLEU_CALCUL, stroke_width=3)
-    return VGroup(vague, coque, mat, voile)
+    """Une moto : deux roues, le cadre, le guidon."""
+    roues = VGroup(
+        *[Circle(radius=0.19, stroke_color=WHITE, stroke_width=5)
+          .set_fill(opacity=0).move_to(np.array([x, -0.24, 0]))
+          for x in (-0.40, 0.40)]
+    )
+    cadre = VMobject(stroke_color=ROUGE_ERREUR, stroke_width=5)
+    cadre.set_fill(opacity=0)
+    cadre.start_new_path(np.array([-0.40, -0.24, 0]))
+    cadre.add_line_to(np.array([-0.06, 0.06, 0]))
+    cadre.add_line_to(np.array([0.28, 0.06, 0]))
+    cadre.add_line_to(np.array([0.40, -0.24, 0]))
+    guidon = Line(np.array([0.28, 0.06, 0]), np.array([0.44, 0.28, 0]),
+                  stroke_color=WHITE, stroke_width=5)
+    barre = Line(np.array([0.32, 0.32, 0]), np.array([0.58, 0.24, 0]),
+                 stroke_color=WHITE, stroke_width=4)
+    return VGroup(roues, cadre, guidon, barre)
 
 
 def lampe_dessine() -> VGroup:
-    """Une nappe : la table couverte, avec ses plis qui tombent."""
-    plateau = Polygon(
-        np.array([-0.56, 0.10, 0]), np.array([0.56, 0.10, 0]),
-        np.array([0.44, -0.16, 0]), np.array([-0.44, -0.16, 0]),
-        stroke_color=ROUGE_ERREUR, stroke_width=5,
-    ).set_fill(opacity=0)
-    plis = VGroup(
-        *[Line(np.array([x, -0.16, 0]), np.array([x * 0.94, -0.44, 0]),
-               stroke_color=ROUGE_ERREUR, stroke_width=4)
-          for x in (-0.44, -0.15, 0.15, 0.44)],
-        Line(np.array([-0.42, -0.44, 0]), np.array([0.42, -0.44, 0]),
-             stroke_color=ROUGE_ERREUR, stroke_width=4),
+    """Un melon : le fruit rond, ses côtes, sa queue."""
+    fruit = Circle(radius=0.38, stroke_color=VERT_OK, stroke_width=5)
+    fruit.set_fill(opacity=0)
+    cotes = VGroup(
+        *[ArcBetweenPoints(np.array([0, 0.38, 0]), np.array([0, -0.38, 0]),
+                           angle=a, stroke_color=VERT_OK, stroke_width=3)
+          for a in (-0.9, -0.3, 0.3, 0.9)]
     )
-    return VGroup(plateau, plis)
+    queue = Line(np.array([0, 0.38, 0]), np.array([0.04, 0.54, 0]),
+                 stroke_color=ORANGE_RETENUE, stroke_width=4)
+    return VGroup(fruit, cotes, queue)
 
 
 
@@ -205,17 +196,17 @@ def lampe_dessine() -> VGroup:
 
 # ─── La voix ──────────────────────────────────────────────────────────────────
 # ⚠️ DURÉES MESURÉES par `scripts/generer-voix.ps1`, jamais estimées.
-VOIX = Path(__file__).resolve().parents[3] / "public" / "sons" / "cp-lettre-n"
+VOIX = Path(__file__).resolve().parents[3] / "public" / "sons" / "cp-lettre-m"
 DUREE = {
-    "00-aujourdhui": 3.34, "01-ecoute": 3.12, "02-regarde": 3.11, "03-depart": 21.49,
-    "04-encore": 2.92, "05-cherchons": 4.27, "05-n-comme": 1.66, "06-nid": 1.30,
-    "07-nuage": 1.50, "08-note": 1.40, "09-navire": 1.55, "10-nappe": 1.45,
+    "00-aujourdhui": 3.40, "01-ecoute": 3.10, "02-regarde": 3.10, "03-depart": 21.00,
+    "04-encore": 2.92, "05-cherchons": 4.27, "05-m-comme": 1.66, "06-maison": 1.55,
+    "07-montagne": 1.75, "08-main": 1.35, "09-moto": 1.40, "10-melon": 1.50,
     "10-pareil": 4.71, "11-relance": 3.08, "12-va-sur": 3.16, "14-bientot": 1.71,
 }
-CLIPS_MOTS = ["06-nid", "07-nuage", "08-note", "09-navire", "10-nappe"]
+CLIPS_MOTS = ["06-maison", "07-montagne", "08-main", "09-moto", "10-melon"]
 
 
-class _LettreNBase(Scene):
+class _LettreMBase(Scene):
     """Le contenu, écrit une fois. Les quatre variantes ne changent que le cadre
     et le côté vers lequel le stylo penche."""
 
@@ -240,7 +231,7 @@ class _LettreNBase(Scene):
             return w.getnframes() / float(w.getframerate())
 
     def construct(self):
-        son = Text("n", font_size=150, color=JAUNE_TITRE)
+        son = Text("m", font_size=150, color=JAUNE_TITRE)
         titre = Text("la lettre", font_size=44, color=BLEU_CALCUL).next_to(son, UP, buff=0.5)
         margo = MascotteMargouillat().scale(0.85 if not self.vertical else 0.7)
         if self.vertical:
@@ -250,7 +241,7 @@ class _LettreNBase(Scene):
 
         # ── 0. LA PAGE DE GARDE : DE 0 À 1 SECONDE ──────────────────────────
         garde, garde_main = page_de_garde(
-            self, "n", chemin_n(stroke_width=12), MascotteMargouillat()
+            self, "m", chemin_m(stroke_width=12), MascotteMargouillat()
         )
 
         # ── 1. L'ACCUEIL, À LA SECONDE PILE ─────────────────────────────────
@@ -279,15 +270,15 @@ class _LettreNBase(Scene):
 
         # ── 2. LE GESTE, LENTEMENT ──────────────────────────────────────────
         lignes = reglure(3)
-        lettre = chemin_n(stroke_width=14 if not self.vertical else 16)
+        lettre = chemin_m(stroke_width=14 if not self.vertical else 16)
         VGroup(lignes, lettre).move_to(ORIGIN).shift(DOWN * 0.4)
 
         # ⭐ L'IMPRIMÉE DEVIENT LA CURSIVE, et la cursive reste en GRIS : c'est
         # le modèle à repasser, comme la ligne pointillée de la réglure.
-        modele = chemin_n(stroke_width=14 if not self.vertical else 16, color=GREY_D)
+        modele = chemin_m(stroke_width=14 if not self.vertical else 16, color=GREY_D)
         modele.match_points(lettre)
         imprime = Text(
-            "n", font_size=110 if not self.vertical else 90, color=JAUNE_TITRE
+            "m", font_size=110 if not self.vertical else 90, color=JAUNE_TITRE
         ).move_to(modele)
 
         d = self.dire("02-regarde")
@@ -332,7 +323,7 @@ class _LettreNBase(Scene):
         self.dire("04-encore")
         for duree in (2.0, 1.2):
             self.remove(trace)
-            trace = chemin_n(stroke_width=14 if not self.vertical else 16)
+            trace = chemin_m(stroke_width=14 if not self.vertical else 16)
             trace.match_points(lettre)
             self.play(Create(trace), run_time=duree, rate_func=linear)
             self.wait(0.4)
@@ -342,7 +333,7 @@ class _LettreNBase(Scene):
         # ── 4. « o » COMME… CINQ MOTS, CHACUN AVEC SON DESSIN ───────────────
         self.play(FadeOut(trace))
 
-        titre_mots = Text("n comme…", font_size=50)
+        titre_mots = Text("m comme…", font_size=50)
         titre_mots[0].set_color(JAUNE_TITRE)
 
         dessins = [
@@ -351,7 +342,7 @@ class _LettreNBase(Scene):
         ]
         echelle = 0.52 if not self.vertical else 0.46
         lignes_mots = VGroup()
-        for mot, dessin in zip(MOTS_EN_N, dessins):
+        for mot, dessin in zip(MOTS_EN_M, dessins):
             t = Text(mot, font_size=42 if not self.vertical else 38)
             t[0].set_color(JAUNE_TITRE)
             lignes_mots.add(VGroup(t, dessin.scale(echelle)).arrange(RIGHT, buff=0.55))
@@ -365,7 +356,7 @@ class _LettreNBase(Scene):
 
         dc = self.dire("05-cherchons")
         self.wait(dc)
-        d = self.dire("05-n-comme")
+        d = self.dire("05-m-comme")
         self.play(FadeIn(titre_mots, shift=DOWN * 0.3))
         self.wait(max(0.2, d - 1.0))
         for ligne, clip in zip(lignes_mots, CLIPS_MOTS):
@@ -382,7 +373,7 @@ class _LettreNBase(Scene):
 
         # ── 4 bis. LA RELANCE : UNE CONSIGNE, PAS UNE QUESTION ──────────────
         self.play(FadeOut(bloc))
-        relance = ecran_relance(self.vertical, "n")
+        relance = ecran_relance(self.vertical, "m")
         d = self.dire("11-relance")
         self.play(FadeIn(relance, scale=0.85))
         self.play(relance.animate.scale(1.08), run_time=0.5)
@@ -393,21 +384,21 @@ class _LettreNBase(Scene):
         page_de_fin(self, margo, "12-va-sur", clip_bientot="14-bientot")
 
 
-class LettreNCp(_LettreNBase):
+class LettreMCp(_LettreMBase):
     """16:9, droitier."""
 
 
-class LettreNCpGaucher(_LettreNBase):
+class LettreMCpGaucher(_LettreMBase):
     """16:9, gaucher."""
 
     gaucher = True
 
 
-class LettreNCpPortrait(Portrait, _LettreNBase):
+class LettreMCpPortrait(Portrait, _LettreMBase):
     """9:16, droitier."""
 
 
-class LettreNCpPortraitGaucher(Portrait, _LettreNBase):
+class LettreMCpPortraitGaucher(Portrait, _LettreMBase):
     """9:16, gaucher."""
 
     gaucher = True
