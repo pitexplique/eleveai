@@ -25,8 +25,18 @@
 // verifier-generateurs.mjs). La lecture du source ne sert plus que de repli, et
 // elle le DIT. Toute classe qui ressort à zéro est signalée en fin de rapport.
 //
-// Usage : node --experimental-strip-types scripts/generer-notions-matrice.mjs
-// À relancer quand une notion entre au programme ou en sort.
+// Usage : node scripts/generer-notions-matrice.mjs           (écrit le fichier)
+//         node scripts/generer-notions-matrice.mjs --verifier (ne l'écrit PAS)
+//
+// ⭐ LE MODE --verifier, AJOUTÉ LE 07/09/2026, ET IL RÉPARE UN OUBLI RÉEL.
+// Ce fichier disait déjà « à relancer quand une notion entre au programme ».
+// Cela n'a pas suffi : la notion `probabilites_conditionnelles_2de` a été
+// ajoutée au knowledge, le coach la servait, ses items étaient comptés verts
+// par les huit vérificateurs — et « probabilité conditionnelle » retombait
+// pourtant sur la notion générale, parce que le moteur cherche la notion au
+// PROGRAMME avant le lexique, et que son programme est CE fichier, resté
+// périmé. Une consigne en commentaire repose sur la mémoire de celui qui
+// édite ; ce mode-ci échoue tout seul, et nomme ce qui manque.
 
 import fs from "node:fs";
 import path from "node:path";
@@ -37,6 +47,7 @@ register("./lib/alias-loader.mjs", import.meta.url);
 
 const RACINE = path.resolve("lib/tutor-v4/knowledge");
 const SORTIE = path.resolve("lib/matrice/notions.generated.ts");
+const VERIFIER = process.argv.includes("--verifier");
 
 /** Les matières qu'on expose dans la matrice d'entrée. */
 const MATIERES = ["maths", "francais", "english", "espagnol", "ia"];
@@ -165,6 +176,72 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = ${JS
   2,
 )};
 `;
+
+/**
+ * Les notions du fichier tel qu'il est sur le disque, a plat :
+ * « matiere/classe/id » → libelle. Sert a DIRE ce qui manque, plutot que
+ * d'annoncer « ca differe » sans indiquer ou.
+ */
+function aPlat(texte) {
+  const i = texte.indexOf("NOTIONS_COACH");
+  if (i < 0) return null;
+  const debut = texte.indexOf("{", i);
+  const fin = texte.lastIndexOf("};");
+  if (debut < 0 || fin < 0) return null;
+  let arbre;
+  try {
+    arbre = JSON.parse(texte.slice(debut, fin + 1));
+  } catch {
+    return null;
+  }
+  const carte = new Map();
+  for (const [matiere, parClasse] of Object.entries(arbre)) {
+    for (const [classe, notions] of Object.entries(parClasse)) {
+      for (const n of notions) carte.set(`${matiere}/${classe}/${n.id}`, n.label);
+    }
+  }
+  return carte;
+}
+
+if (VERIFIER) {
+  // ⛔ LES FINS DE LIGNE SE NORMALISENT AVANT LA COMPARAISON. Git convertit ce
+  // fichier en CRLF sur Windows a la copie de travail ; comparer les octets
+  // bruts le declarerait perime a CHAQUE passage, et un verificateur qui crie
+  // au loup en permanence n'est plus lu.
+  const brut = fs.existsSync(SORTIE) ? fs.readFileSync(SORTIE, "utf8") : "";
+  const memesLignes = (a, b) => a.replace(/\r\n/g, "\n") === b.replace(/\r\n/g, "\n");
+
+  if (memesLignes(brut, entete)) {
+    console.log(`\n✅ ${path.relative(process.cwd(), SORTIE)} est à jour — ${total} notions.`);
+    process.exit(0);
+  }
+
+  console.log(`\n⛔ ${path.relative(process.cwd(), SORTIE)} est PÉRIMÉ.`);
+
+  const disque = aPlat(brut);
+  const frais = aPlat(entete);
+  if (disque && frais) {
+    const absentes = [...frais.keys()].filter((k) => !disque.has(k));
+    const disparues = [...disque.keys()].filter((k) => !frais.has(k));
+    const renommees = [...frais.entries()].filter(
+      ([k, v]) => disque.has(k) && disque.get(k) !== v,
+    );
+    const lister = (titre, liste, rendu) => {
+      if (!liste.length) return;
+      console.log(`\n   ${titre} (${liste.length}) :`);
+      for (const x of liste.slice(0, 12)) console.log(`     ${rendu(x)}`);
+      if (liste.length > 12) console.log(`     … et ${liste.length - 12} autres`);
+    };
+    lister("Au programme mais ABSENTES du fichier", absentes, (k) => `${k} — « ${frais.get(k)} »`);
+    lister("Dans le fichier mais PLUS au programme", disparues, (k) => `${k} — « ${disque.get(k)} »`);
+    lister("Libellé CHANGÉ", renommees, ([k, v]) => `${k}\n       avant : « ${disque.get(k)} »\n       après : « ${v} »`);
+  }
+
+  console.log("\n   Réparer : node scripts/generer-notions-matrice.mjs");
+  console.log("   ⚠️ Une notion absente d'ici est INVISIBLE pour la matrice d'entrée :");
+  console.log("      le moteur cherche la notion au PROGRAMME avant de lire le lexique.");
+  process.exit(1);
+}
 
 fs.writeFileSync(SORTIE, entete);
 console.log(`\n${total} notions écrites dans ${path.relative(process.cwd(), SORTIE)}`);
