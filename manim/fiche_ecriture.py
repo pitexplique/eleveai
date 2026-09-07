@@ -291,10 +291,19 @@ def construire(lettre):
 
 if __name__ == "__main__":
     filtre = sys.argv[1] if len(sys.argv) > 1 else None
-    # ⚠️ Les chiffres FAITS, pas 0-9 : `spec_chiffre` importe la scène, et une
-    # scène qui n'existe pas encore lève une erreur d'import qui ne dit rien
-    # d'utile. La liste se complète au fur et à mesure des vidéos.
-    for glyphe in list(TRACES) + ["0", "1", "2", "3", "4", "5"]:
+    # ⛔⛔ LA LISTE SE DÉDUIT DU DISQUE, ELLE NE S'ÉCRIT PLUS À LA MAIN.
+    # Elle a été figée à ["0"…"5"] le jour où seuls six chiffres existaient.
+    # Les scènes 6 à 9 écrites le soir même n'y sont jamais entrées : le filtre
+    # les faisait sortir de la boucle SANS UN MOT — pas d'erreur, pas de fichier,
+    # rien. C'est la QUATRIÈME liste en dur qui casse quelque chose aujourd'hui
+    # (le hub, le sitemap, l'index des familles, celle-ci).
+    # ⚠️ On cherche donc les scènes `chiffre_N.py` réellement présentes : une
+    # scène qui existe a forcément son tracé, et `spec_chiffre` peut l'importer.
+    chiffres = sorted(
+        f.stem.removeprefix("chiffre_")
+        for f in (RACINE / "manim" / "scripts" / "cp").glob("chiffre_[0-9].py")
+    )
+    for glyphe in list(TRACES) + chiffres:
         if filtre and filtre != glyphe:
             continue
         construire(glyphe)

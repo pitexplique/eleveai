@@ -145,7 +145,7 @@ const VIDEOS: Record<string, { droitier?: string; gaucher?: string }> = {
 // ⚠️ MÊME RÈGLE QUE POUR LES LETTRES : on ne liste que ce qui EXISTE sur le
 // disque. Déclarer 0-9 alors que seules six feuilles sont faites donnerait
 // quatre pages qui promettent un PDF absent — et le sitemap les soumettrait.
-const CHIFFRES_FAITS = ["0", "1", "2", "3", "4", "5"];
+const CHIFFRES_FAITS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 export const FICHES: FicheEcriture[] = [
   ...LETTRES_FAITES.map((x) => ({
