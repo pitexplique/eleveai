@@ -5,7 +5,15 @@ export const notions: NotionSource[] = [
   /* ===================== NOMBRES ET CALCULS (BO2N1) ===================== */
   {
     id: "reels_intervalles",
-    label: "Nombres reels et intervalles",
+    // ⭐ « et valeur absolue » ajoute le 07/09/2026, et ce n'est pas cosmetique.
+    // Le moteur de la matrice cherche la notion du programme AVANT le lexique,
+    // en comptant les mots forts du libelle presents dans la question. « valeur
+    // absolue » ne marquait donc AUCUN point en maths, tandis que le francais
+    // « Le verbe : valeurs temporelles... » en marquait un sur « valeurs » :
+    // l'eleve de seconde qui tapait « valeur absolue » ouvrait le coach de
+    // FRANCAIS. Le libelle est aussi plus juste — c'est bien dans ce bloc du BO
+    // que vit valeur_absolue_distance.
+    label: "Nombres reels, intervalles et valeur absolue",
     boId: "BO2N1",
     prerequis: [],
     levels: [1, 2, 3],

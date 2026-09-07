@@ -1,6 +1,6 @@
 // lib/tutor-v4/questionBank/seconde/maths/reels-intervalles.bank.ts
 //
-// Notion : Nombres réels et intervalles (reels_intervalles)
+// Notion : Nombres réels, intervalles et valeur absolue (reels_intervalles)
 //
 // microSkills couverts (~10 items chacun, difficultés étalées 1→5) :
 //   reels_ensembles        — Distinguer les ensembles N, Z, D, Q et R
