@@ -16,6 +16,57 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+function shuffle<T>(arr: readonly T[]): T[] {
+  const copie = [...arr];
+  for (let i = copie.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copie[i], copie[j]] = [copie[j], copie[i]];
+  }
+  return copie;
+}
+
+/** Quatre propositions distinctes, melangees. */
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+function choisir<T>(liste: readonly T[]): T {
+  return liste[Math.floor(Math.random() * liste.length)];
+}
+
+/**
+ * DIX-HUIT IMPLICATIONS, avec la verite du sens direct ET de la reciproque.
+ *
+ * ⭐ C'est ce second champ qui rend le micro enseignable : une implication
+ * vraie dont la reciproque est FAUSSE est le coeur du sujet, et une poignee
+ * d'equivalences sont la pour qu'« la reciproque est toujours fausse » ne
+ * devienne pas le nouvel automatisme.
+ */
+const IMPLICATIONS: { p: string; q: string; reciproqueVraie: boolean }[] = [
+  { p: "un nombre est un multiple de $4$", q: "il est pair", reciproqueVraie: false },
+  { p: "un quadrilatere est un carre", q: "c'est un rectangle", reciproqueVraie: false },
+  { p: "un quadrilatere est un carre", q: "c'est un losange", reciproqueVraie: false },
+  { p: "un triangle est equilateral", q: "il est isocele", reciproqueVraie: false },
+  { p: "$x = 2$", q: "$x^2 = 4$", reciproqueVraie: false },
+  { p: "un nombre est divisible par $6$", q: "il est divisible par $3$", reciproqueVraie: false },
+  { p: "un nombre se termine par $0$", q: "il est divisible par $5$", reciproqueVraie: false },
+  { p: "il pleut", q: "le sol est mouille", reciproqueVraie: false },
+  { p: "un nombre premier est superieur a $2$", q: "il est impair", reciproqueVraie: false },
+  { p: "$x > 3$", q: "$x > 1$", reciproqueVraie: false },
+  { p: "un nombre est divisible par $10$", q: "il est divisible par $2$", reciproqueVraie: false },
+  { p: "un triangle est rectangle et isocele", q: "il a un angle droit", reciproqueVraie: false },
+  // Les equivalences — la reciproque y est VRAIE.
+  { p: "un quadrilatere a quatre cotes de meme longueur", q: "c'est un losange", reciproqueVraie: true },
+  { p: "un nombre est divisible par $2$ et par $3$", q: "il est divisible par $6$", reciproqueVraie: true },
+  { p: "un triangle $ABC$ est rectangle en $A$", q: "$BC^2 = AB^2 + AC^2$", reciproqueVraie: true },
+  { p: "$n$ est pair", q: "$n^2$ est pair", reciproqueVraie: true },
+  { p: "un parallelogramme a ses diagonales de meme longueur", q: "c'est un rectangle", reciproqueVraie: true },
+  { p: "un parallelogramme a ses diagonales perpendiculaires", q: "c'est un losange", reciproqueVraie: true },
+];
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -450,16 +501,28 @@ export const logiqueEnsemblesBank: TutorBankItemV4[] = [
     hint: "Intersection = éléments communs.",
     tags: ["seconde", "maths", "logique", "union_intersection", "template"],
     generate: () => {
-      const a = [1, 2, 3, 4];
-      const b = [3, 4, 5, 6];
-      const inter = a.filter((x) => b.includes(x)); // [3,4]
+      // ⛔ Les deux ensembles se TIRENT. Ecrits en dur, ce gabarit ne
+      // produisait qu'un seul enonce et l'eleve revoyait {1,2,3,4} a chaque
+      // passage. On garantit au moins un element commun et un element propre a
+      // chacun, sinon l'intersection serait vide ou egale a A une fois sur deux.
+      const debut = randomInt(1, 5);
+      const a = [debut, debut + 1, debut + 2, debut + 3];
+      const chevauche = randomInt(1, 2); // 1 ou 2 elements communs
+      const b = [
+        ...a.slice(4 - chevauche),
+        a[3] + 1,
+        a[3] + 2,
+        a[3] + 3,
+      ].slice(0, 4);
+      const inter = a.filter((x) => b.includes(x));
+      const union = Array.from(new Set([...a, ...b])).sort((x, y) => x - y);
       const correct = `$\\{${inter.join(", ")}\\}$`;
-      const choices = [
-        correct,
-        "$\\{1, 2, 3, 4, 5, 6\\}$",
-        "$\\{1, 2\\}$",
+      const choices = makeChoices(correct, [
+        `$\\{${union.join(", ")}\\}$`,
+        `$\\{${a.filter((x) => !b.includes(x)).join(", ")}\\}$`,
+        `$\\{${b.filter((x) => !a.includes(x)).join(", ")}\\}$`,
         "$\\varnothing$",
-      ];
+      ]);
       return {
         text: `Soit $A = \\{${a.join(", ")}\\}$ et $B = \\{${b.join(", ")}\\}$. Que vaut $A \\cap B$ ?`,
         format: "qcm",
@@ -488,11 +551,19 @@ export const logiqueEnsemblesBank: TutorBankItemV4[] = [
     hint: "Réunion = tous les éléments, sans répétition.",
     tags: ["seconde", "maths", "logique", "union_intersection", "template"],
     generate: () => {
-      const a = [1, 2, 3];
-      const b = [3, 4];
+      // Meme correction que pour l'intersection : les ensembles se tirent.
+      const debut = randomInt(1, 6);
+      const a = [debut, debut + 1, debut + 2];
+      const b = [debut + 2, debut + 3];
       const union = Array.from(new Set([...a, ...b])).sort((x, y) => x - y);
+      const inter = a.filter((x) => b.includes(x));
       const correct = `$\\{${union.join(", ")}\\}$`;
-      const choices = [correct, "$\\{3\\}$", `$\\{${a.join(", ")}\\}$`, "$\\varnothing$"];
+      const choices = makeChoices(correct, [
+        `$\\{${inter.join(", ")}\\}$`,
+        `$\\{${a.join(", ")}\\}$`,
+        `$\\{${b.join(", ")}\\}$`,
+        "$\\varnothing$",
+      ]);
       return {
         text: `Soit $A = \\{${a.join(", ")}\\}$ et $B = \\{${b.join(", ")}\\}$. Que vaut $A \\cup B$ ?`,
         format: "qcm",
@@ -667,21 +738,31 @@ export const logiqueEnsemblesBank: TutorBankItemV4[] = [
     hint: "« et » : les deux vraies ; « ou » : au moins une.",
     tags: ["seconde", "maths", "logique", "connecteurs", "template"],
     generate: () => {
-      // P vrai, Q faux
+      // ⛔ Les deux inegalites etaient ecrites en dur — « 4 > 1 ET 2 > 9 »,
+      // toujours. On tire desormais LES QUATRE COMBINAISONS de verite, ce qui
+      // est le vrai objet du micro : une table de verite, pas un exemple.
       const connecteur = Math.random() < 0.5 ? "ET" : "OU";
-      const vraie = connecteur === "OU"; // P vrai, Q faux : ET->faux, OU->vrai
+      const pVrai = Math.random() < 0.5;
+      const qVrai = Math.random() < 0.5;
+      const g1 = randomInt(2, 9);
+      const g2 = randomInt(2, 9);
+      const P = pVrai ? `${g1 + 1} > ${g1}` : `${g1} > ${g1 + 1}`;
+      const Q = qVrai ? `${g2 + 1} > ${g2}` : `${g2} > ${g2 + 1}`;
+      const vraie = connecteur === "ET" ? pVrai && qVrai : pVrai || qVrai;
       const correct = vraie ? "Vraie" : "Fausse";
       return {
-        text: `La proposition « $4 > 1$ ${connecteur} $2 > 9$ » est :`,
+        text: `La proposition « $${P}$ ${connecteur} $${Q}$ » est :`,
         format: "qcm",
         choices: ["Vraie", "Fausse"],
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(
-          "On évalue chaque partie : $4 > 1$ vrai, $2 > 9$ faux.",
-          connecteur === "ET" ? "Le « et » exige les deux vraies." : "Le « ou » suffit d'une vraie.",
-          connecteur === "ET" ? "Une partie fausse rend le « et » faux." : "Une partie vraie rend le « ou » vrai.",
-          correct + "."
+          "Un connecteur se lit sur la valeur de vérité de CHAQUE partie.",
+          connecteur === "ET"
+            ? "Le « et » exige que les deux soient vraies."
+            : "Le « ou » se contente d'une seule vraie.",
+          `Ici $${P}$ est ${pVrai ? "vraie" : "fausse"} et $${Q}$ est ${qVrai ? "vraie" : "fausse"}.`,
+          `La proposition est donc ${correct.toLowerCase()}.`
         ),
       };
     },
@@ -1106,19 +1187,16 @@ export const logiqueEnsemblesBank: TutorBankItemV4[] = [
     hint: "Réciproque : on échange P et Q.",
     tags: ["seconde", "maths", "logique", "reciproque", "template"],
     generate: () => {
-      const cas = [
-        { p: "il pleut", q: "le sol est mouillé" },
-        { p: "un quadrilatère est un carré", q: "il a 4 côtés égaux" },
-        { p: "un nombre est un multiple de 4", q: "il est pair" },
-      ];
-      const c = cas[randomInt(0, cas.length - 1)];
+      // ⛔ Trois cas ecrits en dur : trois enonces en tout. On pioche
+      // desormais dans la table des dix-huit implications.
+      const c = choisir(IMPLICATIONS);
       const correct = `si ${c.q}, alors ${c.p}`;
-      const choices = [
-        correct,
+      const choices = makeChoices(correct, [
         `si ${c.p}, alors ${c.q}`,
         `${c.p} et ${c.q}`,
         `si non ${c.p}, alors non ${c.q}`,
-      ];
+        `si non ${c.q}, alors non ${c.p}`,
+      ]);
       return {
         text: `Quelle est la réciproque de « si ${c.p}, alors ${c.q} » ?`,
         format: "qcm",
@@ -1130,6 +1208,212 @@ export const logiqueEnsemblesBank: TutorBankItemV4[] = [
           `On part de « si ${c.p}, alors ${c.q} ».`,
           `On obtient « si ${c.q}, alors ${c.p} ».`,
           correct + "."
+        ),
+      };
+    },
+  },
+
+  /* ---- les gabarits qui manquaient ---- */
+
+  {
+    kind: "template",
+    id: "seconde_log_ui_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "logique_ensembles",
+    microId: "logique_union_intersection",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Le complémentaire garde ce qui est dans $E$ mais PAS dans $A$.",
+    tags: ["seconde", "maths", "logique", "union_intersection", "template", "qcm"],
+    generate: () => {
+      const n = randomInt(5, 8);
+      const E = Array.from({ length: n }, (_, i) => i + 1);
+      const A = shuffle(E).slice(0, randomInt(2, 4)).sort((x, y) => x - y);
+      const comp = E.filter((x) => !A.includes(x));
+      const correct = `$\\{${comp.join(", ")}\\}$`;
+      return {
+        text: `Dans $E = \\{${E.join(", ")}\\}$, soit $A = \\{${A.join(", ")}\\}$. Que vaut le complémentaire $\\overline{A}$ ?`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$\\{${A.join(", ")}\\}$`,
+          `$\\{${E.join(", ")}\\}$`,
+          "$\\varnothing$",
+          `$\\{${comp.slice(1).join(", ")}\\}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le complémentaire de $A$ dans $E$ rassemble les éléments de $E$ qui ne sont PAS dans $A$.",
+          "On parcourt $E$ et on écarte ce qui appartient à $A$.",
+          `On retire ${A.join(", ")} et il reste ${comp.join(", ")}.`,
+          `$\\overline{A} = \\{${comp.join(", ")}\\}$ — et $A$ et $\\overline{A}$ reconstituent $E$ tout entier.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_log_ui_tpl_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "logique_ensembles",
+    microId: "logique_union_intersection",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "« $\\cap$ » demande les DEUX, « $\\cup$ » se contente d'un seul.",
+    tags: ["seconde", "maths", "logique", "union_intersection", "template", "qcm"],
+    generate: () => {
+      const debut = randomInt(1, 5);
+      const A = [debut, debut + 1, debut + 2, debut + 3];
+      const B = [debut + 2, debut + 3, debut + 4, debut + 5];
+      const dansLesDeux = Math.random() < 0.5;
+      const x = dansLesDeux ? choisir([debut + 2, debut + 3]) : choisir([debut, debut + 1]);
+      const correct = dansLesDeux
+        ? `$x \\in A \\cap B$ et $x \\in A \\cup B$`
+        : `$x \\in A \\cup B$ mais $x \\notin A \\cap B$`;
+      return {
+        text: `Soit $A = \\{${A.join(", ")}\\}$, $B = \\{${B.join(", ")}\\}$ et $x = ${x}$. Que peut-on affirmer ?`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          dansLesDeux
+            ? `$x \\in A \\cup B$ mais $x \\notin A \\cap B$`
+            : `$x \\in A \\cap B$ et $x \\in A \\cup B$`,
+          `$x \\notin A \\cup B$`,
+          `$x \\in A \\cap B$ mais $x \\notin A \\cup B$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'intersection réclame l'appartenance aux deux ensembles, la réunion à au moins un.",
+          "On regarde si $x$ est dans $A$, puis s'il est dans $B$.",
+          dansLesDeux
+            ? `$${x}$ figure dans $A$ ET dans $B$.`
+            : `$${x}$ figure dans $A$ mais pas dans $B$.`,
+          dansLesDeux
+            ? "Il est donc dans l'intersection, et par conséquent aussi dans la réunion."
+            : "Il est donc dans la réunion, mais pas dans l'intersection — l'intersection est toujours incluse dans la réunion, jamais l'inverse."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_log_con_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "logique_ensembles",
+    microId: "logique_connecteurs",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Cherche un nombre qui satisfait la condition demandée.",
+    tags: ["seconde", "maths", "logique", "connecteurs", "template", "qcm"],
+    generate: () => {
+      const et = Math.random() < 0.5;
+      const seuil = randomInt(3, 8);
+      // pair ET > seuil  vs  pair OU > seuil
+      const pairEtGrand = 2 * (seuil + randomInt(1, 3));
+      const imPairEtGrand = 2 * (seuil + randomInt(1, 3)) + 1;
+      const pairEtPetit = 2;
+      const correct = et ? `$${pairEtGrand}$` : `$${pairEtPetit}$`;
+      return {
+        text: `Quel nombre vérifie « être pair ${et ? "ET" : "OU"} être supérieur à $${seuil}$ » ?`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          et ? `$${imPairEtGrand}$` : `$${2 * seuil + 1}$`,
+          `$${imPairEtGrand}$`,
+          `$${pairEtPetit}$`,
+          `$${pairEtGrand}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un « et » exige les deux conditions à la fois ; un « ou » se contente d'une seule.",
+          "On teste chaque nombre sur les deux conditions séparément.",
+          et
+            ? `$${pairEtGrand}$ est pair ET dépasse $${seuil}$ : les deux conditions tiennent.`
+            : `$${pairEtPetit}$ est pair, ce qui suffit pour le « ou », même s'il ne dépasse pas $${seuil}$.`,
+          et
+            ? "Avec un « et », un seul échec suffit à disqualifier un nombre."
+            : "Avec un « ou », une seule réussite suffit à le retenir."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_log_imp_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "logique_ensembles",
+    microId: "logique_implication_reciproque",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Cherche un contre-exemple à la réciproque : il suffit d'un seul.",
+    tags: ["seconde", "maths", "logique", "reciproque", "template", "qcm"],
+    generate: () => {
+      const c = choisir(IMPLICATIONS);
+      const correct = c.reciproqueVraie
+        ? "les deux sens sont vrais : c'est une équivalence"
+        : "le sens direct est vrai, mais pas sa réciproque";
+      return {
+        text: `On sait que « si ${c.p}, alors ${c.q} ». Que peut-on dire de la réciproque ?`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          c.reciproqueVraie
+            ? "le sens direct est vrai, mais pas sa réciproque"
+            : "les deux sens sont vrais : c'est une équivalence",
+          "la réciproque est vraie dès que le sens direct l'est",
+          "une réciproque est toujours fausse",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La réciproque échange hypothèse et conclusion, et sa vérité ne se déduit PAS de celle du sens direct.",
+          `On examine « si ${c.q}, alors ${c.p} » pour elle-même.`,
+          c.reciproqueVraie
+            ? "Ici elle tient aussi : les deux propositions se disent l'une l'autre."
+            : "Ici elle tombe en défaut : on trouve un cas où la conclusion est vraie sans l'hypothèse.",
+          c.reciproqueVraie
+            ? "C'est une équivalence, et on peut écrire « si et seulement si »."
+            : "Le sens direct est vrai, sa réciproque non — c'est le cas le plus fréquent."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_log_imp_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "logique_ensembles",
+    microId: "logique_implication_reciproque",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "« si et seulement si » réclame que les DEUX sens tiennent.",
+    tags: ["seconde", "maths", "logique", "equivalence", "template", "qcm"],
+    generate: () => {
+      const c = choisir(IMPLICATIONS);
+      const correct = c.reciproqueVraie ? "Oui" : "Non";
+      return {
+        text: `Peut-on écrire « ${c.p} SI ET SEULEMENT SI ${c.q} » ?`,
+        format: "qcm",
+        choices: ["Oui", "Non"],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une équivalence affirme les deux implications à la fois.",
+          "On vérifie le sens direct, puis on vérifie séparément la réciproque.",
+          c.reciproqueVraie
+            ? "Les deux sens tiennent."
+            : "Le sens direct tient, mais la réciproque non.",
+          c.reciproqueVraie
+            ? "On peut donc écrire « si et seulement si »."
+            : "On ne peut PAS écrire « si et seulement si » : une seule flèche est justifiée."
         ),
       };
     },
