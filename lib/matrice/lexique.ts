@@ -210,6 +210,19 @@ export const NOTIONS: NotionLexique[] = [
     alias: ["nombre premier", "nombres premiers", "facteurs premiers", "decomposition en facteurs premiers", "decomposer en facteurs", "crible", "eratosthene"],
   },
   {
+    // ⭐ AVANT « calcul », dont les alias sont les plus larges de la table.
+    // ⛔ « absolue » seul n'est PAS un alias : il faut l'expression entiere,
+    // comme pour « premier » ou « decomposition ».
+    // Les trois graphies couvrent ce que l'eleve tape vraiment — « absolu »
+    // sans e compris, puisque motProche ne tolere la faute que sur un mot isole
+    // et qu'ici l'expression en compte deux.
+    id: "valeur_absolue", label: "la valeur absolue", matiere: "maths",
+    alias: [
+      "valeur absolue", "valeur absolu", "valeurs absolues", "valeurs absolue",
+      "barres de valeur absolue",
+    ],
+  },
+  {
     id: "calcul", label: "le calcul", matiere: "maths",
     alias: ["calcul", "calculs", "calculer", "addition", "additionner", "soustraction", "soustraire", "multiplication", "multiplier", "division", "diviser", "table", "tables", "tables de multiplication", "poser une operation", "compter"],
   },

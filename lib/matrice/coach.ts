@@ -190,6 +190,15 @@ export const NOTION_COACH_MATHS: TableNotions = {
     "4e": "ordre_grandeur", premiere: "auto_ordres_unites",
   },
   relatifs: { "5e": "relatif_nombre", "4e": "relatif_operation" },
+  // ⛔ Ligne PARTIELLE, et c'est voulu : la valeur absolue n'existe qu'en 5e
+  // (valeur absolue d'un relatif), en seconde (distance sur la droite, puis la
+  // fonction) et en premiere-spe (non-derivabilite en 0). Ailleurs le mot n'a
+  // pas de notion, et une case inventee enverrait l'eleve sur un contresens.
+  valeur_absolue: {
+    "5e": "relatif_nombre",
+    seconde: "reels_intervalles",
+    "premiere-spe": "derivation",
+  },
   proportionnalite: {
     cm1: "proportionnalite", cm2: "proportionnalite",
     "6e": "prop_proportionnalite", "5e": "prop_proportionnalite",
