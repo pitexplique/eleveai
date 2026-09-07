@@ -63,6 +63,34 @@ se pose sur `figure.schema`, `propriete.schema`, `exemple.schema`, `formule.sche
 | `arbre_proba` | L'arbre : issues, branches, probabilités portées | Une expérience à une épreuve |
 | `fonctionGraphique` | Courbes, droites, nuage de points, avec `misesEnEvidence` pour guider la lecture. ⚠️ **Le seul `kind` en camelCase** | Un tableau de valeurs |
 | `fonction_tableau` | Le tableau de valeurs d'une fonction, à trous | La courbe |
+| `tableau_signes` | Le tableau de signes : 1 à 3 facteurs, produit **ou quotient**. Chaque ligne porte un signe par intervalle et une marque sur les bornes intérieures — `0` si le facteur s'annule, `\|\|` si la valeur est **interdite** | Les variations : c'est `tableau_variations` |
+| `tableau_variations` | Le tableau de variations : les flèches, avec sa ligne `f ′(x)` facultative | Le signe d'un produit ou d'un quotient |
+
+### `tableau_signes` et `tableau_variations` — deux objets, deux `kind`
+
+Séparés à la demande de Frédéric le 07/09/2026 : le professeur les trace pour
+deux raisons différentes, et un type unique obligeait chaque appel à préciser ce
+qu'il ne voulait pas.
+
+⛔ **`tableau_signes` est en HTML, pas en SVG**, et c'est délibéré. Un libellé de
+ligne doit pouvoir s'écrire `$\dfrac{x-4}{-x+6}$` — or KaTeX ne rend rien dans un
+`<text>` SVG. La première version affichait « le quotient » en toutes lettres,
+faute de pouvoir écrire la fraction. Tous les libellés passent par `TexteMath`.
+
+⛔ **La double barre n'est pas un zéro.** Sur un quotient, la valeur qui annule le
+dénominateur est INTERDITE : `"||"` et non `"0"`. Les confondre, c'est enseigner
+qu'on peut diviser par zéro.
+
+⛔ **Les flèches de `tableau_variations` ne se décrivent pas, elles se déduisent**
+des valeurs données à chaque borne. Décrire les flèches à la main laisserait
+écrire une flèche montante entre 9 et 4 — un dessin contredisant ses propres
+nombres. La lecture des valeurs accepte le **moins typographique** (`−`, U+2212)
+et la virgule décimale : `Number("−4")` vaut `NaN`, et une flèche serait partie à
+l'envers sans la moindre erreur.
+
+**Mesuré au rendu** (07/09/2026) : le cas le plus large — trois facteurs, cinq
+colonnes — tient en 384 px sans débordement, avec 43 px entre deux nombres
+voisins.
 
 ## Grandeurs et mesures
 

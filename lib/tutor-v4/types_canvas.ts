@@ -1845,6 +1845,57 @@ export type ReglureCanvasData = {
   size?: { width?: number };
 };
 
+// ============================================================
+// Tableau de signes et de variations
+// ============================================================
+
+export type TableauSignesLigne = {
+  /** Ce qui s'ecrit a gauche : « x - 5 », « Signe de -x + 6 », « f'(x) ». */
+  label: string;
+  /** Un signe par INTERVALLE : pour n bornes, il y en a n - 1. */
+  signes: ("+" | "-")[];
+  /**
+   * Ce qui se dessine SUR chaque borne interieure : n - 2 marques.
+   * ⛔ « 0 » et « || » ne disent pas la meme chose. Le zero annule le facteur ;
+   * la double barre marque une valeur INTERDITE, celle qui annule un
+   * denominateur. Les confondre, c'est enseigner qu'on peut diviser par zero.
+   */
+  marques?: ("0" | "||" | "")[];
+};
+
+export type TableauSignesCanvasData = {
+  kind: "tableau_signes";
+  titre?: string;
+  /** Les bornes de gauche a droite, ex. ["-∞", "4", "6", "+∞"]. */
+  bornes: string[];
+  lignes: TableauSignesLigne[];
+  size?: { width?: number; height?: number };
+};
+
+/**
+ * LE TABLEAU DE VARIATIONS — un canvas SEPARE (Frederic, 07/09/2026 : « un
+ * canvas pour tableau de variation et un pour tableau de signes »).
+ *
+ * Il porte sa propre ligne de derivee, car c'est ainsi qu'un tableau de
+ * variations se presente en classe : le signe de f'(x) au-dessus, les fleches
+ * en dessous. Sans elle, la troisieme forme montree ne serait pas dessinable.
+ */
+export type TableauVariationsCanvasData = {
+  kind: "tableau_variations";
+  titre?: string;
+  /** Les bornes de gauche a droite, ex. ["-5", "-2", "1", "5"]. */
+  bornes: string[];
+  /** La ligne du signe de la derivee, facultative. */
+  derivee?: TableauSignesLigne;
+  /**
+   * UNE VALEUR PAR BORNE. Les fleches se deduisent de la comparaison entre
+   * valeurs successives : on ne decrit pas les fleches, on decrit ce que vaut
+   * la fonction et le dessin suit.
+   */
+  variations: { label: string; valeurs: string[] };
+  size?: { width?: number; height?: number };
+};
+
 export type CanvasFigure =
   | ReglureCanvasData
   | ObjetsCanvasData
@@ -1882,4 +1933,6 @@ export type CanvasFigure =
   | ContenanceCanvasData
   | SchemaBarreCanvasData
   | DroiteGradueeCanvasData
+  | TableauSignesCanvasData
+  | TableauVariationsCanvasData
   | EchelleCanvasData;

@@ -34,6 +34,8 @@ import MasseCanvas from "./MasseCanvas";
 import ContenanceCanvas from "./ContenanceCanvas";
 import EchelleCanvas from "./EchelleCanvas";
 import SchemaBarreCanvas from "./SchemaBarreCanvas";
+import TableauSignesCanvas from "./TableauSignesCanvas";
+import TableauVariationsCanvas from "./TableauVariationsCanvas";
 import PhraseCanvas from "./PhraseCanvas";
 import ConjugaisonCanvas from "./ConjugaisonCanvas";
 import PersonnageCanvas from "./PersonnageCanvas";
@@ -140,6 +142,12 @@ export default function CanvasRenderer({ figure }: Props) {
 
     case "schema_barre":
       return <SchemaBarreCanvas  figure={figure} />;      
+
+    case "tableau_signes":
+      return <TableauSignesCanvas figure={figure} />;
+
+    case "tableau_variations":
+      return <TableauVariationsCanvas figure={figure} />;
 
     case "number_line":
     return <DroiteGradueeCanvas figure={figure} />;

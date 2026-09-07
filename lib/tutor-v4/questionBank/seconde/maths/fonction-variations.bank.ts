@@ -13,6 +13,38 @@
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 
+function shuffle<T>(arr: readonly T[]): T[] {
+  const copie = [...arr];
+  for (let i = copie.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copie[i], copie[j]] = [copie[j], copie[i]];
+  }
+  return copie;
+}
+
+/** Quatre propositions distinctes, melangees. */
+function makeChoices(correct: string, wrongs: readonly string[]) {
+  const distracteurs = shuffle(
+    Array.from(new Set(wrongs)).filter((w) => w !== correct),
+  ).slice(0, 3);
+  return shuffle([correct, ...distracteurs]);
+}
+
+/**
+ * Une parabole dont on CHOISIT le sommet : $f(x) = a(x - \alpha)^2 + \beta$.
+ *
+ * ⛔ Les bornes du canvas sont fixes (x de -5 a 5, y de -6 a 6) : le sommet doit
+ * y tenir, sinon le changement de sens sort du cadre et le dessin ne montre plus
+ * ce que l'enonce demande de lire.
+ */
+function paraboleSommet(a: number, alpha: number, beta: number): CanvasFigure {
+  return parabole(a, -2 * a * alpha, a * alpha * alpha + beta, {
+    x: alpha,
+    y: beta,
+    label: "S",
+  });
+}
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -804,5 +836,209 @@ export const fonctionVariationsBank: TutorBankItemV4[] = [
       "Un minimum ou un maximum."
     ),
     tags: ["seconde", "maths", "fonctions", "extremum", "raisonnement", "qcm"],
+  },
+
+  /* ---- les gabarits qui manquaient aux variations ---- */
+
+  {
+    kind: "template",
+    id: "seconde_var_tab_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_variations_extremums",
+    microId: "variation_tableau",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le sens change AU SOMMET : lis son abscisse.",
+    tags: ["seconde", "maths", "fonctions", "variations", "canvas", "template", "qcm"],
+    generate: () => {
+      const versLeHaut = Math.random() < 0.5;
+      const a = versLeHaut ? 1 : -1;
+      const alpha = randomInt(-3, 3);
+      const beta = versLeHaut ? randomInt(-1, 2) : randomInt(0, 4);
+      // Une parabole tournee vers le haut DESCEND avant son sommet.
+      const avant = versLeHaut ? "décroissante" : "croissante";
+      const apres = versLeHaut ? "croissante" : "décroissante";
+      const correct = `${avant} sur $]-\\infty\\,;\\,${alpha}]$ puis ${apres} sur $[${alpha}\\,;\\,+\\infty[$`;
+      return {
+        text: "Quel est le sens de variation de la fonction représentée ?",
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `${apres} sur $]-\\infty\\,;\\,${alpha}]$ puis ${avant} sur $[${alpha}\\,;\\,+\\infty[$`,
+          `${avant} sur $\\mathbb{R}$`,
+          `${apres} sur $\\mathbb{R}$`,
+          `${avant} sur $]-\\infty\\,;\\,0]$ puis ${apres} sur $[0\\,;\\,+\\infty[$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: paraboleSommet(a, alpha, beta),
+        explanation: exp(
+          "Une parabole change de sens exactement à son sommet.",
+          "On lit l'abscisse du sommet, puis on regarde de quel côté la courbe monte.",
+          `Le sommet $S$ a pour abscisse $${alpha}$, et la parabole est tournée vers le ${versLeHaut ? "HAUT" : "BAS"}.`,
+          `La fonction est donc ${avant} sur $]-\\infty\\,;\\,${alpha}]$, puis ${apres} sur $[${alpha}\\,;\\,+\\infty[$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_var_tab_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_variations_extremums",
+    microId: "variation_tableau",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Une fonction croissante range les images DANS LE MÊME ORDRE que les antécédents.",
+    tags: ["seconde", "maths", "fonctions", "variations", "template", "qcm"],
+    generate: () => {
+      const croissante = Math.random() < 0.5;
+      const a = randomInt(-4, 0);
+      const b = a + randomInt(4, 8);
+      const x1 = a + randomInt(1, 2);
+      const x2 = x1 + randomInt(1, 3);
+      const correct = croissante ? `$f(${x1}) < f(${x2})$` : `$f(${x1}) > f(${x2})$`;
+      return {
+        text: `Une fonction $f$ est ${croissante ? "croissante" : "décroissante"} sur $[${a}\\,;\\,${b}]$. Que peut-on dire de $f(${x1})$ et $f(${x2})$ ?`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          croissante ? `$f(${x1}) > f(${x2})$` : `$f(${x1}) < f(${x2})$`,
+          `$f(${x1}) = f(${x2})$`,
+          "on ne peut pas les comparer",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le sens de variation dit comment la fonction range les images par rapport aux antécédents.",
+          `On vérifie d'abord que $${x1}$ et $${x2}$ sont bien dans $[${a}\\,;\\,${b}]$, puis on applique le sens.`,
+          croissante
+            ? `Comme $${x1} < ${x2}$ et que $f$ croît, l'ordre est CONSERVÉ.`
+            : `Comme $${x1} < ${x2}$ et que $f$ décroît, l'ordre est INVERSÉ.`,
+          `${correct} — c'est toute l'utilité d'un tableau de variations : comparer sans calculer.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_var_tab_tpl_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_variations_extremums",
+    microId: "variation_tableau",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Compare les images successives, pas les antécédents.",
+    tags: ["seconde", "maths", "fonctions", "variations", "canvas", "template", "qcm"],
+    generate: () => {
+      const x0 = randomInt(-3, 0);
+      const xs = [x0, x0 + 1, x0 + 2, x0 + 3, x0 + 4];
+      const sommet = randomInt(1, 3); // indice du maximum
+      const ys = xs.map((_, i) => 10 - 2 * Math.abs(i - sommet) - randomInt(0, 1));
+      const correct = `croissante puis décroissante, avec un maximum en $x = ${xs[sommet]}$`;
+      return {
+        text: "D'après ce tableau de valeurs, comment la fonction varie-t-elle ?",
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `décroissante puis croissante, avec un minimum en $x = ${xs[sommet]}$`,
+          "croissante sur tout l'intervalle",
+          "décroissante sur tout l'intervalle",
+          `croissante puis décroissante, avec un maximum en $x = ${xs[0]}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: {
+          kind: "fonction_tableau",
+          titre: "Tableau de valeurs",
+          xValues: xs,
+          yValues: ys,
+          highlightIndex: sommet,
+          size: { width: 320, height: 120 },
+        },
+        explanation: exp(
+          "Un tableau de valeurs se lit en comparant chaque image à la suivante.",
+          "On parcourt la ligne des images de gauche à droite et on note où elle cesse de monter.",
+          `Les images montent jusqu'à $${ys[sommet]}$ en $x = ${xs[sommet]}$, puis redescendent.`,
+          `La fonction croît puis décroît, avec un maximum en $x = ${xs[sommet]}$ — le tableau de variations résumerait cela par deux flèches.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_var_ext_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_variations_extremums",
+    microId: "variation_extremum",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "L'extremum est une IMAGE : c'est l'ordonnée du sommet, pas son abscisse.",
+    tags: ["seconde", "maths", "fonctions", "extremum", "canvas", "template", "qcm"],
+    generate: () => {
+      const versLeHaut = Math.random() < 0.5;
+      const a = versLeHaut ? 1 : -1;
+      const alpha = randomInt(-3, 3);
+      const beta = versLeHaut ? randomInt(-1, 2) : randomInt(0, 4);
+      const nature = versLeHaut ? "minimum" : "maximum";
+      const correct = `un ${nature} égal à $${beta}$, atteint en $x = ${alpha}$`;
+      return {
+        text: "Que peut-on dire de l'extremum de la fonction représentée ?",
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `un ${versLeHaut ? "maximum" : "minimum"} égal à $${beta}$, atteint en $x = ${alpha}$`,
+          `un ${nature} égal à $${alpha}$, atteint en $x = ${beta}$`,
+          `un ${nature} égal à $${alpha}$, atteint en $x = ${alpha}$`,
+          "elle n'admet pas d'extremum",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: paraboleSommet(a, alpha, beta),
+        explanation: exp(
+          "Un extremum est la VALEUR extrême prise par la fonction, donc une ordonnée.",
+          "On repère le sommet, puis on distingue son abscisse (où) de son ordonnée (combien).",
+          `Le sommet est $S(${alpha}\\,;\\,${beta})$, et la parabole est tournée vers le ${versLeHaut ? "haut" : "bas"}.`,
+          `La fonction admet donc un ${nature} égal à $${beta}$, atteint en $x = ${alpha}$ — confondre les deux nombres est l'erreur la plus fréquente.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_var_ext_tpl_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_variations_extremums",
+    microId: "variation_extremum",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regarde le signe du coefficient de $x^2$.",
+    tags: ["seconde", "maths", "fonctions", "extremum", "template", "qcm"],
+    generate: () => {
+      const a = randomInt(1, 4) * (Math.random() < 0.5 ? -1 : 1);
+      const nature = a > 0 ? "un minimum" : "un maximum";
+      return {
+        text: `La fonction $f(x) = ${a}x^2 + ${randomInt(-4, 4)}x + ${randomInt(-3, 3)}$ admet :`,
+        format: "qcm",
+        choices: makeChoices(nature, [
+          a > 0 ? "un maximum" : "un minimum",
+          "un maximum et un minimum",
+          "aucun extremum",
+        ]),
+        expected: [nature],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le signe du coefficient de $x^2$ décide du sens dans lequel la parabole est tournée.",
+          "On regarde ce seul signe, sans avoir besoin de calculer le sommet.",
+          `Ici le coefficient vaut $${a}$, il est ${a > 0 ? "POSITIF" : "NÉGATIF"} : la parabole est tournée vers le ${a > 0 ? "haut" : "bas"}.`,
+          `Elle admet donc ${nature}, atteint à son sommet.`
+        ),
+      };
+    },
   },
 ];
