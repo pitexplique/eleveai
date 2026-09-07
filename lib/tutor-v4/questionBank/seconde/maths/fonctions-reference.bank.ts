@@ -11,6 +11,7 @@
 //   reference_inverse  — Fonction inverse
 //   reference_racine   — Fonction racine carree
 //   reference_cube     — Fonction cube
+//   reference_valeur_absolue — Fonction valeur absolue (calcul et courbe)
 //   reference_comparer — Comparer deux images via une fonction de reference
 //   reference_resoudre — Resoudre f(x)=k pour une fonction de reference
 
@@ -18,6 +19,28 @@ import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+/**
+ * Quatre propositions garanties DISTINCTES.
+ *
+ * ⛔ Un distracteur peut rejoindre la bonne reponse selon le tirage — $|x-a|$
+ * vaut $x-a$ des que $x > a$, et le QCM offrait alors deux fois la meme case.
+ * On prend les distracteurs voulus tant qu'ils different, puis on complete avec
+ * l'echelle de secours. La position, elle, est melangee plus tard par
+ * questionPairBuilder.
+ */
+function choixDistincts(correct: string, voulus: string[], secours: string[]): string[] {
+  const vus = new Set([correct]);
+  const sortie = [correct];
+  for (const c of [...voulus, ...secours]) {
+    if (sortie.length === 4) break;
+    if (!vus.has(c)) {
+      vus.add(c);
+      sortie.push(c);
+    }
+  }
+  return sortie;
 }
 
 function exp(definition: string, methode: string, calcul: string, conclusion: string) {
@@ -71,6 +94,56 @@ const courbeRacine: CanvasFigure = {
   grille: true,
   courbes: [{ id: "f", type: "points", couleur: "#2563eb", points: echantillonne((x) => Math.sqrt(x), 0, 9, 0.5) }],
 };
+
+// ⭐ LA COURBE EN V DE LA VALEUR ABSOLUE, ajoutee le 04/09/2026 avec la micro
+// `reference_valeur_absolue`. Elle se trace en `points` et non en `quadratique` :
+// |x| n'est pas un polynome, et ses DEUX demi-droites se rejoignent en un ANGLE.
+// C'est precisement ce que l'eleve doit voir — la seule fonction de reference du
+// programme dont la courbe n'est pas lisse.
+const courbeValeurAbsolue: CanvasFigure = {
+  kind: "fonctionGraphique",
+  size: { width: 300, height: 300 },
+  xmin: -5,
+  xmax: 5,
+  ymin: -1,
+  ymax: 6,
+  grille: true,
+  courbes: [{ id: "f", type: "points", couleur: "#2563eb", points: echantillonne((x) => Math.abs(x), -5, 5, 0.5) }],
+  misesEnEvidence: [{ point: { x: 0, y: 0, label: "O", couleur: "#dc2626" } }],
+};
+
+/**
+ * Une droite graduee centree sur un nombre, avec les deux points situes a une
+ * distance donnee de lui.
+ *
+ * ⛔ LES DEUX POINTS NE SONT PAS ETIQUETES : c'est l'eleve qui lit leur
+ * abscisse sur les graduations, et une etiquette lui donnerait la reponse.
+ * Seul le centre porte un nom.
+ *
+ * ⛔ LE PAS RESTE A 1. Un repli en pas de 2 avait l'air raisonnable — il
+ * desserre les nombres quand l'axe s'elargit — mais il ne gradue que les
+ * nombres pairs, et l'exercice demande de LIRE l'abscisse des points marques.
+ * Le tirage |x + 5| = 4 pose ses solutions en -9 et -1 : entre deux traits.
+ * Ce sont donc les tirages qui se plient a la largeur, pas l'inverse, et
+ * chaque generateur borne ses parametres pour tenir en onze graduations.
+ */
+function droiteDistance(centre: number, rayon: number): CanvasFigure {
+  const min = Math.min(centre - rayon, 0) - 1;
+  const haut = Math.max(centre + rayon, 0) + 1;
+  return {
+    kind: "number_line",
+    size: { width: 320, height: 120 },
+    min,
+    max: haut,
+    step: 1,
+    points: [
+      { value: centre, label: "centre", color: "#dc2626" },
+      { value: centre - rayon, color: "#2563eb" },
+      { value: centre + rayon, color: "#2563eb" },
+    ],
+    display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true, showZero: true },
+  };
+}
 
 export const fonctionsReferenceBank: TutorBankItemV4[] = [
   /* ===================== REFERENCE_CARRE ===================== */
@@ -1284,6 +1357,705 @@ export const fonctionsReferenceBank: TutorBankItemV4[] = [
           `$\\sqrt{x} = ${k} \\Rightarrow x = ${k}^2$.`,
           `$x = ${k * k}$.`,
           `$x = ${k * k}$.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== REFERENCE_VALEUR_ABSOLUE ===================== */
+
+  {
+    kind: "fixed",
+    id: "seconde_ref_abs_fixed_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Que vaut $|-7|$ ?",
+    format: "qcm",
+    choices: ["$7$", "$-7$", "$0$", "$49$"],
+    expected: ["$7$"],
+    comparator: "mcq_exact",
+    hint: "C'est une distance à zéro : une distance n'est jamais négative.",
+    explanation: exp(
+      "La valeur absolue d'un nombre est sa distance à zéro.",
+      "On retire simplement le signe.",
+      "$-7$ est à sept unités de zéro.",
+      "$|-7| = 7$."
+    ),
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_ref_abs_fixed_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quelle est l'allure de la courbe de $f(x) = |x|$ ?",
+    format: "qcm",
+    choices: [
+      "deux demi-droites formant un V, avec un angle en $O$",
+      "une parabole tournée vers le haut",
+      "une droite passant par l'origine",
+      "une hyperbole en deux morceaux",
+    ],
+    expected: ["deux demi-droites formant un V, avec un angle en $O$"],
+    comparator: "mcq_exact",
+    canvas: courbeValeurAbsolue,
+    hint: "Regarde ce qui se passe de part et d'autre de zéro.",
+    explanation: exp(
+      "Pour $x \\geqslant 0$, $|x| = x$ ; pour $x < 0$, $|x| = -x$.",
+      "Chaque morceau est donc une demi-droite.",
+      "Elles se rejoignent en $O$ en formant un angle, et non une courbure.",
+      "La courbe est un V — c'est la seule fonction de référence du programme qui n'est pas lisse."
+    ),
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "courbe", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_ref_abs_fixed_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Quel est le signe de la fonction $f(x) = |x|$ sur $\\mathbb{R}$ ?",
+    format: "qcm",
+    choices: [
+      "toujours positive ou nulle",
+      "toujours strictement positive",
+      "positive puis négative",
+      "négative sur les négatifs",
+    ],
+    expected: ["toujours positive ou nulle"],
+    comparator: "mcq_exact",
+    hint: "Une distance peut-elle être négative ? peut-elle être nulle ?",
+    explanation: exp(
+      "La valeur absolue est une distance à zéro.",
+      "Une distance n'est jamais négative, mais elle peut être nulle.",
+      "Elle s'annule exactement en $x = 0$.",
+      "$f$ est positive ou nulle sur $\\mathbb{R}$, et ne s'annule qu'en zéro."
+    ),
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "signe", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_abs_tpl_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "On enlève le signe, c'est tout.",
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "template"],
+    generate: () => {
+      const n = randomInt(2, 40);
+      const negatif = Math.random() < 0.5;
+      const arg = negatif ? -n : n;
+      return {
+        text: `Calculer $|${arg}|$.`,
+        format: "qcm",
+        choices: [`$${n}$`, `$${-n}$`, "$0$", `$${n * n}$`],
+        expected: [`$${n}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La valeur absolue est la distance du nombre à zéro.",
+          "On supprime le signe s'il y en a un.",
+          `$${arg}$ est à ${n} unités de zéro.`,
+          `$|${arg}| = ${n}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_abs_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Calcule d'abord ce qu'il y a DANS les barres.",
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "template"],
+    generate: () => {
+      const a = randomInt(2, 12);
+      const b = randomInt(a + 1, a + 15);
+      const val = Math.abs(a - b);
+      return {
+        text: `Calculer $|${a} - ${b}|$.`,
+        format: "qcm",
+        choices: [`$${val}$`, `$${-val}$`, `$${a + b}$`, "$0$"],
+        expected: [`$${val}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Les barres agissent sur le résultat du calcul qu'elles contiennent.",
+          "On effectue donc la soustraction en premier.",
+          `$${a} - ${b} = ${a - b}$, dont la valeur absolue vaut ${val}.`,
+          `$|${a} - ${b}| = ${val}$ — c'est aussi la DISTANCE entre ${a} et ${b}.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_abs_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Deux nombres ont la même distance à zéro.",
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "equation", "template"],
+    generate: () => {
+      const k = randomInt(2, 15);
+      return {
+        text: `Combien l'équation $|x| = ${k}$ a-t-elle de solutions ?`,
+        format: "qcm",
+        choices: ["deux", "une", "aucune", "une infinité"],
+        expected: ["deux"],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Résoudre $|x| = k$, c'est chercher les nombres situés à la distance $k$ de zéro.",
+          "On en trouve un de chaque côté.",
+          `Ici $x = ${k}$ et $x = -${k}$.`,
+          `L'équation a DEUX solutions, $${k}$ et $-${k}$ — la courbe en V coupe la droite $y = ${k}$ deux fois.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_abs_tpl_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Une distance peut-elle valoir un nombre négatif ?",
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "piege", "template"],
+    generate: () => {
+      const k = randomInt(2, 12);
+      return {
+        text: `Combien l'équation $|x| = -${k}$ a-t-elle de solutions ?`,
+        format: "qcm",
+        choices: ["aucune", "une", "deux", "une infinité"],
+        expected: ["aucune"],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une valeur absolue est une distance, donc toujours positive ou nulle.",
+          "Elle ne peut jamais égaler un nombre strictement négatif.",
+          `Aucun réel n'est à la distance $-${k}$ de zéro.`,
+          "L'équation n'a AUCUNE solution : la courbe en V ne descend jamais sous l'axe."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_abs_tpl_5",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "La courbe descend puis remonte : où change-t-elle de sens ?",
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "variations", "template"],
+    generate: () => {
+      const surPositifs = Math.random() < 0.5;
+      const intervalle = surPositifs ? "$[0\\,;\\,+\\infty[$" : "$]-\\infty\\,;\\,0]$";
+      const sens = surPositifs ? "croissante" : "décroissante";
+      return {
+        text: `Sur ${intervalle}, la fonction $f(x) = |x|$ est :`,
+        format: "qcm",
+        choices: ["croissante", "décroissante", "constante", "ni l'un ni l'autre"],
+        expected: [sens],
+        comparator: "mcq_exact",
+        canvas: courbeValeurAbsolue,
+        explanation: exp(
+          "La valeur absolue mesure l'éloignement à zéro.",
+          "On regarde si cet éloignement grandit ou diminue quand $x$ augmente.",
+          surPositifs
+            ? "Sur les positifs, $|x| = x$ : plus $x$ grandit, plus on s'éloigne."
+            : "Sur les négatifs, $|x| = -x$ : quand $x$ augmente vers zéro, on se rapproche.",
+          `Elle est ${sens} sur cet intervalle — le minimum, $0$, est atteint en $x = 0$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_abs_tpl_6",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Remplace $x$, puis applique les barres.",
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "image", "template"],
+    generate: () => {
+      const a = randomInt(1, 9);
+      const x = randomInt(-9, 3);
+      const val = Math.abs(x - a);
+      return {
+        text: `Soit $f(x) = |x - ${a}|$. Calculer $f(${x})$.`,
+        format: "qcm",
+        choices: choixDistincts(
+          `$${val}$`,
+          [`$${x - a}$`, `$${x + a}$`, "$0$"],
+          [`$${val + 1}$`, `$${val + a}$`, `$${-val}$`, `$${val + 2}$`, `$${val + 3}$`]
+        ),
+        expected: [`$${val}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On remplace $x$ par la valeur donnée, puis on applique les barres.",
+          `Ici $f(${x}) = |${x} - ${a}|$.`,
+          `Le calcul intérieur donne $${x - a}$, dont la valeur absolue vaut ${val}.`,
+          `$f(${x}) = ${val}$ — c'est la distance de $${x}$ à $${a}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_abs_tpl_7",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Une distance inférieure à $r$ : cela dessine quoi autour du centre ?",
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "intervalle", "template"],
+    generate: () => {
+      const a = randomInt(1, 8);
+      const r = randomInt(1, 5);
+      return {
+        text: `L'inéquation $|x - ${a}| \\leqslant ${r}$ a pour solutions :`,
+        format: "qcm",
+        choices: [
+          `$[${a - r}\\,;\\,${a + r}]$`,
+          `$[${-a - r}\\,;\\,${-a + r}]$`,
+          `$[0\\,;\\,${r}]$`,
+          "$\\mathbb{R}$",
+        ],
+        expected: [`$[${a - r}\\,;\\,${a + r}]$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "$|x - a|$ est la DISTANCE entre $x$ et $a$.",
+          `L'inéquation demande donc les nombres situés à au plus ${r} de ${a}.`,
+          `On part de ${a} et on s'écarte de ${r} des deux côtés.`,
+          `Les solutions forment l'intervalle $[${a - r}\\,;\\,${a + r}]$, centré en ${a}.`
+        ),
+      };
+    },
+  },
+
+  // ⭐ LE COTE GRAPHIQUE, a parite avec le cote algebrique. Une valeur absolue
+  // se LIT sur un V autant qu'elle se calcule, et le BO demande les deux
+  // registres : « resoudre graphiquement OU algebriquement une equation du type
+  // f(x) = k ».
+
+  {
+    kind: "template",
+    id: "seconde_ref_abs_tpl_8",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Monte depuis l'axe des abscisses jusqu'au V, puis lis à gauche.",
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "graphique", "template"],
+    generate: () => {
+      const x = randomInt(-4, 4);
+      const y = Math.abs(x);
+      return {
+        text: `Sur la courbe de $f(x) = |x|$, quelle est l'image de $${x}$ ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          `$${y}$`,
+          [`$${x}$`, `$${-y}$`, `$${y * y}$`],
+          [`$${y + 1}$`, `$${y - 1}$`, `$${2 * y}$`, `$${y + 2}$`, `$${y + 3}$`]
+        ),
+        expected: [`$${y}$`],
+        comparator: "mcq_exact",
+        canvas: courbeValeurAbsolue,
+        explanation: exp(
+          "Lire une image, c'est monter depuis l'abscisse jusqu'à la courbe, puis lire à gauche.",
+          `On se place en $x = ${x}$ sur l'axe horizontal.`,
+          x < 0
+            ? `La branche de gauche remonte : on lit $${y}$.`
+            : `La branche de droite monte : on lit $${y}$.`,
+          `L'image de $${x}$ est $${y}$ — et celle de $${-x}$ aussi, par symétrie du V.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_abs_tpl_9",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Trace la droite horizontale à cette hauteur : combien de fois coupe-t-elle le V ?",
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "graphique", "template"],
+    generate: () => {
+      const k = randomInt(1, 5);
+      return {
+        text: `Graphiquement, quels sont les antécédents de $${k}$ par $f(x) = |x|$ ?`,
+        format: "qcm",
+        choices: [
+          `$-${k}$ et $${k}$`,
+          `$${k}$ seulement`,
+          `$-${k}$ seulement`,
+          "aucun",
+        ],
+        expected: [`$-${k}$ et $${k}$`],
+        comparator: "mcq_exact",
+        canvas: courbeValeurAbsolue,
+        explanation: exp(
+          "Chercher les antécédents, c'est partir de l'axe VERTICAL et redescendre sur la courbe.",
+          `On trace la droite horizontale d'ordonnée $${k}$.`,
+          "Elle rencontre le V en deux points, un sur chaque branche.",
+          `Les antécédents sont $-${k}$ et $${k}$ : la lecture graphique donne d'un coup ce que l'algèbre trouve en deux cas.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_ref_abs_fixed_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Sur la courbe de $f(x) = |x|$, quelle particularité le point $O$ présente-t-il ?",
+    format: "qcm",
+    choices: [
+      "c'est un minimum, atteint en un angle",
+      "c'est un maximum",
+      "c'est un point d'inflexion",
+      "la courbe y est horizontale",
+    ],
+    expected: ["c'est un minimum, atteint en un angle"],
+    comparator: "mcq_exact",
+    canvas: courbeValeurAbsolue,
+    hint: "Regarde la valeur la plus basse, et la forme du tracé à cet endroit.",
+    explanation: exp(
+      "Le point $O$ est là où les deux demi-droites se rejoignent.",
+      "On y cherche la plus petite valeur prise par la fonction, et la forme du raccord.",
+      "La fonction descend jusqu'à zéro puis remonte : $0$ est son minimum, et le raccord est ANGULEUX.",
+      "$O$ est un minimum atteint en un angle — la parabole du carré, elle, y est arrondie."
+    ),
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "graphique", "qcm"],
+  },
+
+  /* ---- la definition par cas, et son application ---- */
+
+  {
+    kind: "fixed",
+    id: "seconde_ref_abs_fixed_5",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Comment la valeur absolue se définit-elle, cas par cas ?",
+    format: "qcm",
+    choices: [
+      "$|x| = x$ si $x \\geqslant 0$, et $|x| = -x$ si $x < 0$",
+      "$|x| = x$ pour tout $x$",
+      "$|x| = -x$ pour tout $x$",
+      "$|x| = x^2$",
+    ],
+    expected: ["$|x| = x$ si $x \\geqslant 0$, et $|x| = -x$ si $x < 0$"],
+    comparator: "mcq_exact",
+    hint: "Deux cas, selon le signe de ce qui est dans les barres.",
+    explanation: exp(
+      "La valeur absolue se définit par DEUX cas, selon le signe.",
+      "Si le nombre est déjà positif ou nul, on le laisse tel quel ; s'il est négatif, on prend son opposé.",
+      "⚠️ $-x$ n'est pas « un nombre négatif » : quand $x$ est négatif, $-x$ est POSITIF.",
+      "$|x| = x$ si $x \\geqslant 0$, et $|x| = -x$ si $x < 0$."
+    ),
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "definition", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_abs_tpl_10",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Quel est le signe de ce qui est DANS les barres, sur cet intervalle ?",
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "definition", "template"],
+    generate: () => {
+      const a = randomInt(2, 9);
+      const auDessus = Math.random() < 0.5;
+      const intervalle = auDessus
+        ? `x \\geqslant ${a}`
+        : `x < ${a}`;
+      const correct = auDessus ? `$x - ${a}$` : `$${a} - x$`;
+      return {
+        text: `Écrire $|x - ${a}|$ SANS barres, sachant que $${intervalle}$.`,
+        format: "qcm",
+        choices: [`$x - ${a}$`, `$${a} - x$`, `$x + ${a}$`, `$-x - ${a}$`],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On applique la définition par cas au contenu des barres.",
+          `On regarde le signe de $x - ${a}$ sur l'intervalle donné.`,
+          auDessus
+            ? `Comme $x \\geqslant ${a}$, l'expression $x - ${a}$ est positive ou nulle : on la garde.`
+            : `Comme $x < ${a}$, l'expression $x - ${a}$ est négative : on prend son opposé, $${a} - x$.`,
+          `Sur cet intervalle, $|x - ${a}| = ${correct.replace(/\$/g, "")}$.`
+        ),
+      };
+    },
+  },
+
+  /* ---- les equations et inequations a expression dans les barres ---- */
+
+  {
+    kind: "template",
+    id: "seconde_ref_abs_tpl_11",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Ce qui est dans les barres vaut $k$ ou $-k$.",
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "equation", "template"],
+    generate: () => {
+      const b = randomInt(1, 7);
+      const k = randomInt(2, 9);
+      const s1 = k - b;
+      const s2 = -k - b;
+      return {
+        text: `Résoudre $|x + ${b}| = ${k}$.`,
+        format: "qcm",
+        choices: [
+          `$x = ${s1}$ ou $x = ${s2}$`,
+          `$x = ${s1}$ seulement`,
+          `$x = ${k}$ ou $x = ${-k}$`,
+          `$x = ${k + b}$ ou $x = ${-k + b}$`,
+        ],
+        expected: [`$x = ${s1}$ ou $x = ${s2}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une valeur absolue égale à $k$ signifie que le contenu des barres vaut $k$ OU $-k$.",
+          `On écrit donc $x + ${b} = ${k}$, puis $x + ${b} = -${k}$.`,
+          `La première donne $x = ${s1}$, la seconde $x = ${s2}$.`,
+          `Les solutions sont $${s1}$ et $${s2}$ — deux cas, jamais un seul.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_abs_tpl_12",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Une distance INFÉRIEURE à $k$ : cela encadre, cela ne coupe pas en deux.",
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "inequation", "template"],
+    generate: () => {
+      const b = randomInt(1, 6);
+      const k = randomInt(2, 7);
+      return {
+        text: `Résoudre $|x + ${b}| \\leqslant ${k}$.`,
+        format: "qcm",
+        choices: [
+          `$[${-k - b}\\,;\\,${k - b}]$`,
+          `$[${-k}\\,;\\,${k}]$`,
+          `$[${k - b}\\,;\\,${k + b}]$`,
+          "$\\mathbb{R}$",
+        ],
+        expected: [`$[${-k - b}\\,;\\,${k - b}]$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une valeur absolue INFÉRIEURE à $k$ encadre : le contenu des barres est compris entre $-k$ et $k$.",
+          `On écrit $-${k} \\leqslant x + ${b} \\leqslant ${k}$.`,
+          `On retranche ${b} partout : $${-k - b} \\leqslant x \\leqslant ${k - b}$.`,
+          `Les solutions forment UN intervalle, $[${-k - b}\\,;\\,${k - b}]$ — alors qu'une inégalité en $\\geqslant$ en donnerait deux.`
+        ),
+      };
+    },
+  },
+
+
+  /* ---- la lecture sur une droite graduee ---- */
+
+  // ⭐ LA DROITE GRADUEE, ET NON LA COURBE (Frederic, 04/09/2026). Une equation
+  // a valeur absolue se resout de deux facons : par l'algebre — deux cas — ou
+  // par la LECTURE d'une distance sur un axe gradue. Chercher la portion du V
+  // sous une horizontale n'est pas la methode enseignee.
+  //
+  // ⛔ Et les points solutions ne portent PAS d'etiquette : une etiquette
+  // donnerait la reponse. L'eleve lit les graduations, ce qui est precisement
+  // le geste demande.
+
+  {
+    kind: "template",
+    id: "seconde_ref_abs_tpl_13",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Compte les graduations de part et d'autre du point marqué « centre ».",
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "droite-graduee", "equation", "template"],
+    generate: () => {
+      // ⛔ b + k <= 8 : au-dela l'axe demande plus de onze graduations, et les
+      // nombres ecrits dessous se touchent. Quatorze couples restent possibles.
+      let b = randomInt(1, 5);
+      let k = randomInt(2, 4);
+      while (b + k > 8) {
+        b = randomInt(1, 5);
+        k = randomInt(2, 4);
+      }
+      const s1 = k - b;
+      const s2 = -k - b;
+      return {
+        text: `Sur la droite graduée, on a marqué les deux points situés à la distance $${k}$ de $${-b}$. Quelles sont leurs abscisses — autrement dit, les solutions de $|x + ${b}| = ${k}$ ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          `$${s2}$ et $${s1}$`,
+          [`$${-b}$ et $${k}$`, `$${-k}$ et $${k}$`, `$${-b - 2 * k}$ et $${-b + 2 * k}$`],
+          [`$${s2 - 1}$ et $${s1 + 1}$`, `$${s2 + 1}$ et $${s1 - 1}$`, `$${s2}$ et $${s1 + 1}$`]
+        ),
+        expected: [`$${s2}$ et $${s1}$`],
+        comparator: "mcq_exact",
+        canvas: droiteDistance(-b, k),
+        explanation: exp(
+          `$|x + ${b}|$ se lit « la distance entre $x$ et $${-b}$ ».`,
+          `On part du point $${-b}$ et on avance de $${k}$ graduations, une fois vers la gauche, une fois vers la droite.`,
+          `À gauche on arrive en $${s2}$, à droite en $${s1}$.`,
+          `Les solutions sont $${s2}$ et $${s1}$ — et l'algèbre donne les mêmes, en résolvant $x + ${b} = ${k}$ puis $x + ${b} = -${k}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_abs_tpl_14",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Une distance INFÉRIEURE : les nombres cherchés sont ENTRE les deux points marqués.",
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "droite-graduee", "inequation", "template"],
+    generate: () => {
+      const a = randomInt(-4, 4);
+      const r = randomInt(2, 4);
+      return {
+        text: `Sur la droite graduée, les deux points marqués sont à la distance $${r}$ de $${a}$. Quelles sont les solutions de $|x - ${a}| \\leqslant ${r}$ ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          `$[${a - r}\\,;\\,${a + r}]$`,
+          [
+            `$[${-r}\\,;\\,${r}]$`,
+            `les nombres à l'extérieur de $[${a - r}\\,;\\,${a + r}]$`,
+            `$${a - r}$ et $${a + r}$ seulement`,
+          ],
+          [`$[${a}\\,;\\,${a + r}]$`, `$[${a - r}\\,;\\,${a}]$`]
+        ),
+        expected: [`$[${a - r}\\,;\\,${a + r}]$`],
+        comparator: "mcq_exact",
+        canvas: droiteDistance(a, r),
+        explanation: exp(
+          `$|x - ${a}| \\leqslant ${r}$ se lit « $x$ est à une distance d'au plus $${r}$ de $${a}$ ».`,
+          "On repère les deux points situés à cette distance exacte : ils bornent la zone cherchée.",
+          `Tout ce qui est ENTRE eux est plus proche de $${a}$ ; tout ce qui est en dehors est plus loin.`,
+          `Les solutions forment l'intervalle $[${a - r}\\,;\\,${a + r}]$ — un seul morceau, bornes comprises.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_abs_tpl_15",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_valeur_absolue",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une distance ne dépend pas du sens dans lequel on la parcourt.",
+    tags: ["seconde", "maths", "fonctions", "valeur-absolue", "droite-graduee", "distance", "template"],
+    generate: () => {
+      // ⛔ Meme borne qu'ailleurs : douze graduations serraient trop les nombres.
+      const a = randomInt(-4, 0);
+      const b = randomInt(1, 4);
+      return {
+        text: `Sur une droite graduée, $A$ a pour abscisse $${a}$ et $B$ pour abscisse $${b}$. Quelle écriture donne la longueur $AB$ ?`,
+        format: "qcm",
+        choices: [
+          `$|${b} - (${a})| = ${b - a}$`,
+          `$${a} - ${b} = ${a - b}$`,
+          `$${a} + ${b} = ${a + b}$`,
+          `$|${a} \\times ${b}| = ${Math.abs(a * b)}$`,
+        ],
+        expected: [`$|${b} - (${a})| = ${b - a}$`],
+        comparator: "mcq_exact",
+        canvas: {
+          kind: "number_line",
+          size: { width: 320, height: 120 },
+          min: a - 1,
+          max: b + 1,
+          step: 1,
+          points: [
+            { value: a, label: "A", color: "#2563eb" },
+            { value: b, label: "B", color: "#dc2626" },
+          ],
+          display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true, showZero: true },
+        },
+        explanation: exp(
+          "La distance entre deux points d'une droite graduée est la valeur absolue de la différence de leurs abscisses.",
+          "On soustrait une abscisse à l'autre, puis on prend la valeur absolue.",
+          `Ici $${b} - (${a}) = ${b - a}$, un nombre déjà positif.`,
+          `$AB = ${b - a}$ — et l'ordre de la soustraction n'a pas d'importance : $|${a} - ${b}|$ donne le même résultat.`
         ),
       };
     },

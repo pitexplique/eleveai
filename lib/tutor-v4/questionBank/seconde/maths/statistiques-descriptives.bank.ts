@@ -15,12 +15,35 @@
 //   stat_frequence         — Calculer une frequence
 //   stat_ecart_interquartile — Ecart interquartile
 //   stat_ecart_type        — Ecart type (dispersion)
+//   stat_linearite_moyenne — Linearite de la moyenne (BO 2026)
 //   stat_interpreter       — Interpreter des indicateurs
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+/**
+ * Quatre propositions garanties DISTINCTES.
+ *
+ * ⛔ Un distracteur peut rejoindre la bonne reponse selon le tirage — $|x-a|$
+ * vaut $x-a$ des que $x > a$, et le QCM offrait alors deux fois la meme case.
+ * On prend les distracteurs voulus tant qu'ils different, puis on complete avec
+ * l'echelle de secours. La position, elle, est melangee plus tard par
+ * questionPairBuilder.
+ */
+function choixDistincts(correct: string, voulus: string[], secours: string[]): string[] {
+  const vus = new Set([correct]);
+  const sortie = [correct];
+  for (const c of [...voulus, ...secours]) {
+    if (sortie.length === 4) break;
+    if (!vus.has(c)) {
+      vus.add(c);
+      sortie.push(c);
+    }
+  }
+  return sortie;
 }
 
 function exp(definition: string, methode: string, calcul: string, conclusion: string) {
@@ -1756,5 +1779,307 @@ export const statistiquesDescriptivesBank: TutorBankItemV4[] = [
       "Les comportements sont plus variés."
     ),
     tags: ["seconde", "maths", "statistiques", "interpreter", "ecologie", "raisonnement", "qcm"],
+  },
+
+  // ============================================================
+  // stat_linearite_moyenne — la linearite de la moyenne
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "seconde_stat_lin_fixed_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_linearite_moyenne",
+    difficulty: 1,
+    theme: "neutral",
+    text: "On ajoute $3$ à TOUTES les valeurs d'une série. Que devient la moyenne ?",
+    format: "qcm",
+    choices: [
+      "elle augmente de $3$",
+      "elle ne change pas",
+      "elle est multipliée par $3$",
+      "elle augmente de $3$ divisé par l'effectif",
+    ],
+    expected: ["elle augmente de $3$"],
+    comparator: "mcq_exact",
+    hint: "Si chaque valeur monte de $3$, le total monte de $3$ par valeur.",
+    explanation: exp(
+      "Ajouter un même nombre à toutes les valeurs décale toute la série.",
+      "Chaque valeur gagne $3$, donc la somme gagne $3$ autant de fois qu'il y a de valeurs.",
+      "En divisant par l'effectif, ce gain redevient $3$.",
+      "La moyenne augmente de $3$ : elle suit le décalage."
+    ),
+    tags: ["seconde", "maths", "statistiques", "linearite", "raisonnement", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_stat_lin_fixed_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_linearite_moyenne",
+    difficulty: 2,
+    theme: "neutral",
+    text: "On multiplie TOUTES les valeurs d'une série par $4$. Que devient la moyenne ?",
+    format: "qcm",
+    choices: [
+      "elle est multipliée par $4$",
+      "elle augmente de $4$",
+      "elle ne change pas",
+      "elle est divisée par $4$",
+    ],
+    expected: ["elle est multipliée par $4$"],
+    comparator: "mcq_exact",
+    hint: "Un changement d'unité — des mètres en centimètres — ne change pas la série, seulement son échelle.",
+    explanation: exp(
+      "Multiplier toutes les valeurs par un même nombre change l'échelle de la série.",
+      "La somme est elle aussi multipliée par $4$, tandis que l'effectif ne bouge pas.",
+      "$\\dfrac{4 \\times \\text{somme}}{\\text{effectif}} = 4 \\times \\dfrac{\\text{somme}}{\\text{effectif}}$.",
+      "La moyenne est multipliée par $4$."
+    ),
+    tags: ["seconde", "maths", "statistiques", "linearite", "raisonnement", "qcm"],
+  },
+
+  // ⛔ LE PIEGE LE PLUS FREQUENT : « on ajoute des points a un eleve, donc la
+  // moyenne monte d'autant ». Non — un seul terme change, et le gain se partage
+  // entre tous. C'est exactement la limite de la linearite.
+  {
+    kind: "fixed",
+    id: "seconde_stat_lin_fixed_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_linearite_moyenne",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Dans une classe de $25$ élèves, un SEUL élève gagne $5$ points. De combien la moyenne de la classe augmente-t-elle ?",
+    format: "qcm",
+    choices: [
+      "de $0{,}2$ point",
+      "de $5$ points",
+      "elle ne change pas",
+      "de $25$ points",
+    ],
+    expected: ["de $0{,}2$ point"],
+    comparator: "mcq_exact",
+    hint: "Ces $5$ points se partagent entre les $25$ élèves.",
+    explanation: exp(
+      "La linéarité ne s'applique que si TOUTES les valeurs sont transformées de la même façon.",
+      "Ici une seule valeur change : la somme gagne $5$, l'effectif reste $25$.",
+      "$\\dfrac{5}{25} = 0{,}2$.",
+      "La moyenne n'augmente que de $0{,}2$ point — le gain d'un seul se dilue dans le groupe."
+    ),
+    tags: ["seconde", "maths", "statistiques", "linearite", "piege", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_stat_lin_fixed_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_linearite_moyenne",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Des températures ont pour moyenne $20$ °C. On les convertit en °F par $F = 1{,}8 \\times C + 32$. Quelle est la moyenne en °F ?",
+    format: "short",
+    expected: ["68"],
+    comparator: "number_equal",
+    hint: "La moyenne subit la même transformation que les valeurs, dans le même ordre.",
+    explanation: exp(
+      "Une transformation affine appliquée à toutes les valeurs s'applique aussi à leur moyenne.",
+      "On remplace $C$ par la moyenne $20$ dans la formule.",
+      "$1{,}8 \\times 20 + 32 = 36 + 32$.",
+      "La moyenne est $68$ °F — inutile de reconvertir chaque température une par une."
+    ),
+    tags: ["seconde", "maths", "statistiques", "linearite", "conversion", "short"],
+  },
+
+  {
+    kind: "template",
+    id: "seconde_stat_lin_tpl_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_linearite_moyenne",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Toutes les notes montent pareil : la moyenne aussi.",
+    tags: ["seconde", "maths", "statistiques", "linearite", "template", "short"],
+    generate: () => {
+      const m = randomInt(8, 14);
+      const b = randomInt(1, 4);
+      return {
+        text: `La moyenne d'un devoir est $${m}$. Le professeur ajoute $${b}$ point(s) à TOUTES les copies. Quelle est la nouvelle moyenne ?`,
+        format: "short",
+        expected: [String(m + b)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Ajouter le même nombre à toutes les valeurs décale la moyenne d'autant.",
+          `On ajoute simplement $${b}$ à l'ancienne moyenne.`,
+          `$${m} + ${b} = ${m + b}$.`,
+          `La nouvelle moyenne est $${m + b}$ — sans avoir à recalculer la somme des copies.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_stat_lin_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_linearite_moyenne",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Changer d'unité, c'est multiplier chaque valeur par le même nombre.",
+    tags: ["seconde", "maths", "statistiques", "linearite", "ecologie", "template", "short"],
+    generate: () => {
+      const m = randomInt(3, 12);
+      const a = randomInt(2, 6);
+      return {
+        text: `Un quartier produit en moyenne $${m}$ kg de déchets par jour et par foyer. Si chaque foyer voit sa production multipliée par $${a}$, quelle devient la moyenne ?`,
+        format: "short",
+        expected: [String(m * a)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Multiplier toutes les valeurs par un même nombre multiplie la moyenne par ce nombre.",
+          `On multiplie l'ancienne moyenne par $${a}$.`,
+          `$${m} \\times ${a} = ${m * a}$.`,
+          `La moyenne devient $${m * a}$ kg par jour et par foyer.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_stat_lin_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_linearite_moyenne",
+    difficulty: 3,
+    theme: "sport",
+    hint: "On applique la formule à la moyenne, en respectant l'ordre des opérations.",
+    tags: ["seconde", "maths", "statistiques", "linearite", "sport", "template", "short"],
+    generate: () => {
+      const m = randomInt(4, 12);
+      const a = randomInt(2, 5);
+      const b = randomInt(1, 9);
+      return {
+        text: `Les points marqués par une équipe ont pour moyenne $${m}$. Le règlement change : chaque score devient $${a} \\times x + ${b}$. Quelle est la nouvelle moyenne ?`,
+        format: "short",
+        expected: [String(a * m + b)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Une transformation affine des valeurs se répercute telle quelle sur la moyenne.",
+          `On remplace $x$ par la moyenne $${m}$ dans $${a}x + ${b}$.`,
+          `$${a} \\times ${m} + ${b} = ${a * m} + ${b} = ${a * m + b}$.`,
+          `La nouvelle moyenne est $${a * m + b}$ — et l'ordre compte : on multiplie AVANT d'ajouter.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_stat_lin_tpl_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_linearite_moyenne",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "On connaît l'arrivée et on cherche le départ : on remonte la transformation.",
+    tags: ["seconde", "maths", "statistiques", "linearite", "template", "short"],
+    generate: () => {
+      const ancienne = randomInt(6, 14);
+      const b = randomInt(1, 5);
+      return {
+        text: `Après avoir ajouté $${b}$ point(s) à toutes les copies, la moyenne est $${ancienne + b}$. Quelle était la moyenne avant ?`,
+        format: "short",
+        expected: [String(ancienne)],
+        comparator: "number_equal",
+        explanation: exp(
+          "La moyenne a suivi le même décalage que les valeurs ; on peut donc le défaire.",
+          `On retranche $${b}$ à la moyenne actuelle.`,
+          `$${ancienne + b} - ${b} = ${ancienne}$.`,
+          `La moyenne était $${ancienne}$ avant le bonus.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_stat_lin_tpl_5",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_linearite_moyenne",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Une hausse de $p$ % revient à multiplier par $1 + \\dfrac{p}{100}$.",
+    tags: ["seconde", "maths", "statistiques", "linearite", "pourcentage", "template", "short"],
+    generate: () => {
+      const m = randomInt(10, 30) * 100;
+      const p = randomInt(1, 9) * 2;
+      const nouvelle = Math.round(m * (1 + p / 100));
+      return {
+        text: `Le salaire moyen d'une entreprise est de $${m}$ €. Tous les salaires augmentent de $${p}$ %. Quel est le nouveau salaire moyen, en euros ?`,
+        format: "short",
+        expected: [String(nouvelle)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Une hausse en pourcentage appliquée à tous revient à multiplier chaque valeur par un même coefficient.",
+          `Ce coefficient vaut $1 + \\dfrac{${p}}{100} = ${1 + p / 100}$, et la moyenne est multipliée par lui.`,
+          `$${m} \\times ${1 + p / 100} = ${nouvelle}$.`,
+          `Le salaire moyen devient $${nouvelle}$ € — la hausse générale se lit directement sur la moyenne.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_stat_lin_tpl_6",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_linearite_moyenne",
+    difficulty: 3,
+    theme: "sport",
+    hint: "Compare le graphique de départ et la transformation annoncée.",
+    tags: ["seconde", "maths", "statistiques", "linearite", "sport", "template", "qcm"],
+    generate: () => {
+      const v = [randomInt(1, 4), randomInt(2, 5), randomInt(3, 7), randomInt(1, 6)];
+      const somme = v.reduce((t, x) => t + x, 0);
+      const b = randomInt(1, 3);
+      const moy = somme / 4;
+      const fmt = (x: number) => String(Math.round(x * 100) / 100).replace(".", ",");
+      return {
+        text: `Une équipe a marqué $${v.join("$, $")}$ buts sur ses $4$ matchs. Si elle avait marqué $${b}$ but(s) de plus à CHAQUE match, quelle aurait été la moyenne ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          `$${fmt(moy + b)}$`,
+          [`$${fmt(moy)}$`, `$${fmt(moy + b / 4)}$`, `$${fmt(moy * b)}$`],
+          [`$${fmt(moy + 2 * b)}$`, `$${fmt(moy - b)}$`, `$${fmt(moy + b + 1)}$`]
+        ),
+        expected: [`$${fmt(moy + b)}$`],
+        comparator: "mcq_exact",
+        canvas: barres(v.map((x, i) => ({ label: `M${i + 1}`, value: x }))),
+        explanation: exp(
+          "Ajouter le même nombre à chaque valeur ajoute ce nombre à la moyenne.",
+          `On calcule d'abord la moyenne actuelle, puis on lui ajoute $${b}$.`,
+          `Moyenne $= \\dfrac{${v.join(" + ")}}{4} = ${fmt(moy)}$, puis $${fmt(moy)} + ${b} = ${fmt(moy + b)}$.`,
+          `La moyenne aurait été $${fmt(moy + b)}$ — et non $${fmt(moy + b / 4)}$, qui reviendrait à n'ajouter $${b}$ but qu'une seule fois.`
+        ),
+      };
+    },
   },
 ];

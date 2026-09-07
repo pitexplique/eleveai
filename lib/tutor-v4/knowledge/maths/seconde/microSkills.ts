@@ -91,7 +91,11 @@ export const microSkills: MicroSkillSource[] = [
   { id: "fonction_tableau_graphique", label: "Passer d'un tableau a un graphique", notionId: "fonction_vocabulaire_2de", prerequis: ["fonction_vocabulaire"] },
   { id: "fonction_resolution_graphique", label: "Resoudre graphiquement f(x)=k ou f(x)<k", notionId: "fonction_vocabulaire_2de", prerequis: ["fonction_vocabulaire", "fonction_antecedent"] },
   { id: "fonction_tableau_signes", label: "Resoudre une equation/inequation produit ou quotient avec un tableau de signes", notionId: "fonction_vocabulaire_2de", prerequis: ["fonction_image_formule"] },
-  { id: "fonction_parite", label: "Reconnaitre une fonction paire ou impaire", notionId: "fonction_vocabulaire_2de", prerequis: ["fonction_image_formule"] },
+  // ⭐ LE DOMAINE DE DEFINITION remplace la parite, retiree le 04/09/2026 :
+  // le mot « paire » n'apparait NULLE PART dans le BO 2026, tandis que la
+  // « recherche de domaine d'etude (ensemble de definition) » y figure en
+  // contenu de la section « Representation algebrique et graphique ».
+  { id: "fonction_domaine", label: "Determiner le domaine de definition d'une fonction", notionId: "fonction_vocabulaire_2de", prerequis: ["fonction_image_formule"] },
 
   /* ===================== fonction_variations_extremums ===================== */
   { id: "variation_tableau", label: "Lire un tableau de variations", notionId: "fonction_variations_extremums", prerequis: ["fonction_vocabulaire"] },
@@ -109,6 +113,11 @@ export const microSkills: MicroSkillSource[] = [
   { id: "reference_inverse", label: "Connaitre la fonction inverse", notionId: "fonctions_reference_2de", prerequis: ["reference_carre"] },
   { id: "reference_racine", label: "Connaitre la fonction racine carree", notionId: "fonctions_reference_2de", prerequis: ["reference_carre"] },
   { id: "reference_cube", label: "Connaitre la fonction cube", notionId: "fonctions_reference_2de", prerequis: ["reference_carre"] },
+  // ⭐ LA VALEUR ABSOLUE MANQUAIT, et le BO 2026 la cite TROIS fois : sa
+  // definition et sa courbe, son signe et ses variations, et la resolution
+  // de f(x) = k. Elle s'enseigne en debut d'annee (Frederic, 04/09/2026),
+  // d'ou le prerequis sur la distance, deja vue dans reels_intervalles.
+  { id: "reference_valeur_absolue", label: "Connaitre la fonction valeur absolue (calcul et courbe)", notionId: "fonctions_reference_2de", prerequis: ["valeur_absolue_distance"] },
   { id: "reference_comparer", label: "Comparer deux images avec une fonction de reference", notionId: "fonctions_reference_2de", prerequis: ["reference_carre", "reference_inverse", "reference_racine"] },
   { id: "reference_resoudre", label: "Resoudre f(x)=k pour une fonction de reference", notionId: "fonctions_reference_2de", prerequis: ["reference_carre", "fonction_resolution_graphique"] },
 
@@ -127,6 +136,10 @@ export const microSkills: MicroSkillSource[] = [
   { id: "stat_mediane_quartiles", label: "Determiner mediane et quartiles", notionId: "statistiques_descriptives", prerequis: ["stat_lire_serie"] },
   { id: "stat_frequence", label: "Calculer une frequence", notionId: "statistiques_descriptives", prerequis: ["stat_lire_serie"] },
   { id: "stat_ecart_interquartile", label: "Determiner l'ecart interquartile", notionId: "statistiques_descriptives", prerequis: ["stat_mediane_quartiles"] },
+  // ⭐ LA LINEARITE DE LA MOYENNE est un contenu explicite du BO 2026, au
+  // meme titre que l'ecart type : « Linearite de la moyenne » ouvre la liste
+  // des contenus de « Statistiques a une variable ».
+  { id: "stat_linearite_moyenne", label: "Utiliser la linearite de la moyenne", notionId: "statistiques_descriptives", prerequis: ["stat_moyenne"] },
   { id: "stat_ecart_type", label: "Calculer et interpreter l'ecart type", notionId: "statistiques_descriptives", prerequis: ["stat_moyenne"] },
   { id: "stat_interpreter", label: "Interpreter des indicateurs statistiques", notionId: "statistiques_descriptives", prerequis: ["stat_moyenne", "stat_mediane_quartiles", "stat_frequence"] },
 

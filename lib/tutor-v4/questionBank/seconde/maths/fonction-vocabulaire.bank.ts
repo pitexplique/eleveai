@@ -13,7 +13,7 @@
 //   fonction_tableau_graphique  — Passer d'un tableau a un graphique
 //   fonction_resolution_graphique — Resoudre f(x)=k graphiquement
 //   fonction_tableau_signes     — Tableau de signes (equation/inequation produit/quotient)
-//   fonction_parite             — Reconnaitre une fonction paire ou impaire
+//   fonction_domaine            — Determiner le domaine de definition
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 
@@ -1324,199 +1324,102 @@ export const fonctionVocabulaireBank: TutorBankItemV4[] = [
     tags: ["seconde", "maths", "fonctions", "tableau_signes", "raisonnement", "qcm"],
   },
 
-  /* ===================== FONCTION_PARITE ===================== */
+  /* ===================== FONCTION_DOMAINE ===================== */
+  // ⛔ CETTE SECTION A REMPLACE CELLE DE LA PARITE, le 04/09/2026. Le mot
+  // « paire » n'apparait nulle part dans le BO 2026 : ses neuf items faisaient
+  // travailler l'eleve hors programme. La « recherche de domaine d'etude
+  // (ensemble de definition) », elle, y figure en contenu explicite.
+  // ⭐ Et le domaine est le prealable de tout le reste : on ne calcule pas une
+  // image en une valeur interdite, et le tableau de signes d'un quotient
+  // commence par la valeur qui annule le denominateur.
 
   {
     kind: "fixed",
-    id: "seconde_fct_par_fixed_1",
+    id: "seconde_fct_dom_fixed_1",
     niveau: "seconde",
     matiere: "maths",
     notionId: "fonction_vocabulaire_2de",
-    microId: "fonction_parite",
+    microId: "fonction_domaine",
+    difficulty: 1,
+    theme: "neutral",
+    text: "Le domaine de définition d'une fonction, c'est :",
+    format: "qcm",
+    choices: makeChoices("l'ensemble des $x$ pour lesquels $f(x)$ existe", [
+      "l'ensemble des valeurs prises par $f$",
+      "l'ensemble des solutions de $f(x) = 0$",
+      "l'intervalle où $f$ est croissante",
+    ]),
+    expected: ["l'ensemble des $x$ pour lesquels $f(x)$ existe"],
+    comparator: "mcq_exact",
+    hint: "On parle des nombres qu'on a le droit de DONNER à la fonction.",
+    explanation: exp(
+      "Le domaine de définition rassemble les nombres qu'on peut donner à la fonction.",
+      "On écarte ce qui rendrait le calcul impossible.",
+      "Les valeurs prises par $f$, elles, forment l'ensemble des images — c'est autre chose.",
+      "C'est l'ensemble des $x$ pour lesquels $f(x)$ existe."
+    ),
+    tags: ["seconde", "maths", "fonctions", "domaine", "definition", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_fct_dom_fixed_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_vocabulaire_2de",
+    microId: "fonction_domaine",
     difficulty: 2,
     theme: "neutral",
-    text: "Une fonction $f$ est paire si, pour tout $x$ :",
+    text: "Deux interdits seulement se rencontrent en seconde. Lesquels ?",
     format: "qcm",
-    choices: ["$f(-x) = f(x)$", "$f(-x) = -f(x)$", "$f(x) = 0$", "$f(x) = x$"],
-    expected: ["$f(-x) = f(x)$"],
+    choices: makeChoices("diviser par zéro, et prendre la racine d'un négatif", [
+      "diviser par zéro, et élever au carré",
+      "prendre la racine d'un négatif, et multiplier par zéro",
+      "ajouter zéro, et diviser par un",
+    ]),
+    expected: ["diviser par zéro, et prendre la racine d'un négatif"],
     comparator: "mcq_exact",
-    hint: "Symétrie par rapport à l'axe des ordonnées.",
+    hint: "Un dénominateur, et ce qu'il y a sous un radical.",
     explanation: exp(
-      "Une fonction paire prend la même valeur en $x$ et $-x$.",
-      "On traduit par $f(-x) = f(x)$.",
-      "Sa courbe est symétrique par rapport à l'axe des ordonnées.",
-      "$f(-x) = f(x)$."
+      "Une expression n'a pas de sens si elle divise par zéro ou prend la racine d'un nombre négatif.",
+      "On cherche donc ce qui annule un dénominateur, et ce qui rend négatif un radicande.",
+      "Le carré, le produit et la somme, eux, acceptent tous les réels.",
+      "Diviser par zéro et prendre la racine d'un négatif : ce sont les deux seuls interdits."
     ),
-    tags: ["seconde", "maths", "fonctions", "parite", "raisonnement", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "seconde_fct_par_fixed_2",
-    niveau: "seconde",
-    matiere: "maths",
-    notionId: "fonction_vocabulaire_2de",
-    microId: "fonction_parite",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Une fonction $f$ est impaire si, pour tout $x$ :",
-    format: "qcm",
-    choices: ["$f(-x) = -f(x)$", "$f(-x) = f(x)$", "$f(x) = -x$", "$f(0) = 0$ seulement"],
-    expected: ["$f(-x) = -f(x)$"],
-    comparator: "mcq_exact",
-    hint: "Symétrie par rapport à l'origine.",
-    explanation: exp(
-      "Une fonction impaire change de signe quand $x$ devient $-x$.",
-      "On traduit par $f(-x) = -f(x)$.",
-      "Sa courbe est symétrique par rapport à l'origine.",
-      "$f(-x) = -f(x)$."
-    ),
-    tags: ["seconde", "maths", "fonctions", "parite", "raisonnement", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "seconde_fct_par_fixed_3",
-    niveau: "seconde",
-    matiere: "maths",
-    notionId: "fonction_vocabulaire_2de",
-    microId: "fonction_parite",
-    difficulty: 2,
-    theme: "neutral",
-    text: "La fonction carré $f(x) = x^2$ est :",
-    format: "qcm",
-    choices: ["paire", "impaire", "ni paire ni impaire", "constante"],
-    expected: ["paire"],
-    comparator: "mcq_exact",
-    hint: "$(-x)^2 = x^2$.",
-    explanation: exp(
-      "On teste $f(-x)$.",
-      "$f(-x) = (-x)^2 = x^2 = f(x)$.",
-      "Donc $f$ est paire.",
-      "La fonction carré est paire."
-    ),
-    tags: ["seconde", "maths", "fonctions", "parite", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "seconde_fct_par_fixed_4",
-    niveau: "seconde",
-    matiere: "maths",
-    notionId: "fonction_vocabulaire_2de",
-    microId: "fonction_parite",
-    difficulty: 3,
-    theme: "neutral",
-    text: "La fonction cube $f(x) = x^3$ est :",
-    format: "qcm",
-    choices: ["impaire", "paire", "ni paire ni impaire", "constante"],
-    expected: ["impaire"],
-    comparator: "mcq_exact",
-    hint: "$(-x)^3 = -x^3$.",
-    explanation: exp(
-      "On teste $f(-x)$.",
-      "$f(-x) = (-x)^3 = -x^3 = -f(x)$.",
-      "Donc $f$ est impaire.",
-      "La fonction cube est impaire."
-    ),
-    tags: ["seconde", "maths", "fonctions", "parite", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "seconde_fct_par_fixed_5",
-    niveau: "seconde",
-    matiere: "maths",
-    notionId: "fonction_vocabulaire_2de",
-    microId: "fonction_parite",
-    difficulty: 3,
-    theme: "neutral",
-    text: "La courbe d'une fonction paire est symétrique par rapport :",
-    format: "qcm",
-    choices: ["à l'axe des ordonnées", "à l'origine", "à l'axe des abscisses", "à la droite $y = x$"],
-    expected: ["à l'axe des ordonnées"],
-    comparator: "mcq_exact",
-    hint: "$f(-x) = f(x)$ : même hauteur de part et d'autre de l'axe vertical.",
-    explanation: exp(
-      "Pour une fonction paire, $f(-x) = f(x)$.",
-      "Les points $(x\\,;f(x))$ et $(-x\\,;f(x))$ sont symétriques par rapport à l'axe des ordonnées.",
-      "La courbe a donc cet axe pour axe de symétrie.",
-      "Symétrie par rapport à l'axe des ordonnées."
-    ),
-    tags: ["seconde", "maths", "fonctions", "parite", "raisonnement", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "seconde_fct_par_fixed_6",
-    niveau: "seconde",
-    matiere: "maths",
-    notionId: "fonction_vocabulaire_2de",
-    microId: "fonction_parite",
-    difficulty: 4,
-    theme: "neutral",
-    text: "La courbe d'une fonction impaire est symétrique par rapport :",
-    format: "qcm",
-    choices: ["à l'origine", "à l'axe des ordonnées", "à l'axe des abscisses", "à aucun élément"],
-    expected: ["à l'origine"],
-    comparator: "mcq_exact",
-    hint: "$f(-x) = -f(x)$ : symétrie centrale.",
-    explanation: exp(
-      "Pour une fonction impaire, $f(-x) = -f(x)$.",
-      "Les points $(x\\,;f(x))$ et $(-x\\,;-f(x))$ sont symétriques par rapport à l'origine.",
-      "La courbe a donc l'origine comme centre de symétrie.",
-      "Symétrie par rapport à l'origine."
-    ),
-    tags: ["seconde", "maths", "fonctions", "parite", "raisonnement", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "seconde_fct_par_fixed_7",
-    niveau: "seconde",
-    matiere: "maths",
-    notionId: "fonction_vocabulaire_2de",
-    microId: "fonction_parite",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Soit $f(x) = x^2$ une fonction paire. Sachant $f(3) = 9$, combien vaut $f(-3)$ ?",
-    format: "short",
-    expected: ["9"],
-    comparator: "number_equal",
-    hint: "Fonction paire : $f(-x) = f(x)$.",
-    explanation: exp(
-      "Pour une fonction paire, $f(-x) = f(x)$.",
-      "Donc $f(-3) = f(3)$.",
-      "$f(3) = 9$, donc $f(-3) = 9$.",
-      "$f(-3) = 9$."
-    ),
-    tags: ["seconde", "maths", "fonctions", "parite", "short"],
+    tags: ["seconde", "maths", "fonctions", "domaine", "raisonnement", "qcm"],
   },
 
   {
     kind: "template",
-    id: "seconde_fct_par_tpl_1",
+    id: "seconde_fct_dom_tpl_1",
     niveau: "seconde",
     matiere: "maths",
     notionId: "fonction_vocabulaire_2de",
-    microId: "fonction_parite",
-    difficulty: 4,
+    microId: "fonction_domaine",
+    difficulty: 2,
     theme: "neutral",
-    hint: "Paire : $f(-x) = f(x)$.",
-    tags: ["seconde", "maths", "fonctions", "parite", "template"],
+    hint: "Cherche la valeur qui annule le dénominateur.",
+    tags: ["seconde", "maths", "fonctions", "domaine", "template"],
     generate: () => {
-      const x = randomInt(2, 6);
-      const v = x * x;
+      const a = randomInt(2, 9);
+      const signe = Math.random() < 0.5 ? 1 : -1;
+      const interdite = signe * a;
+      const denom = signe > 0 ? `x - ${a}` : `x + ${a}`;
       return {
-        text: `$f(x) = x^2$ est paire. Sachant $f(${x}) = ${v}$, combien vaut $f(${-x})$ ?`,
-        format: "short",
-        expected: [String(v)],
-        comparator: "number_equal",
+        text: `Quelle valeur est INTERDITE pour $f(x) = \\dfrac{1}{${denom}}$ ?`,
+        format: "qcm",
+        choices: makeChoices(`$x = ${interdite}$`, [
+          `$x = ${-interdite}$`,
+          "$x = 0$",
+          "$x = 1$",
+        ]),
+        expected: [`$x = ${interdite}$`],
+        comparator: "mcq_exact",
         explanation: exp(
-          "Pour une fonction paire, $f(-x) = f(x)$.",
-          `Donc $f(${-x}) = f(${x})$.`,
-          `$f(${x}) = ${v}$, donc $f(${-x}) = ${v}$.`,
-          `$f(${-x}) = ${v}$.`
+          "Un quotient n'existe pas quand son dénominateur vaut zéro.",
+          `On résout donc $${denom} = 0$.`,
+          `Cela donne $x = ${interdite}$.`,
+          `La valeur interdite est $${interdite}$ : le domaine est $\\mathbb{R}$ privé de ce nombre.`
         ),
       };
     },
@@ -1524,33 +1427,233 @@ export const fonctionVocabulaireBank: TutorBankItemV4[] = [
 
   {
     kind: "template",
-    id: "seconde_fct_par_tpl_2",
+    id: "seconde_fct_dom_tpl_2",
     niveau: "seconde",
     matiere: "maths",
     notionId: "fonction_vocabulaire_2de",
-    microId: "fonction_parite",
+    microId: "fonction_domaine",
     difficulty: 3,
     theme: "neutral",
-    hint: "Teste $f(-x)$.",
-    tags: ["seconde", "maths", "fonctions", "parite", "raisonnement", "template"],
+    hint: "Sous une racine, il faut du positif ou du nul.",
+    tags: ["seconde", "maths", "fonctions", "domaine", "racine", "template"],
     generate: () => {
-      const impaire = Math.random() < 0.5;
-      const fonction = impaire ? "x^3" : "x^2";
-      const correct = impaire ? "impaire" : "paire";
-      const choices = ["paire", "impaire", "ni paire ni impaire", "constante"];
+      const a = randomInt(2, 12);
       return {
-        text: `La fonction $f(x) = ${fonction}$ est :`,
+        text: `Quel est le domaine de définition de $f(x) = \\sqrt{x - ${a}}$ ?`,
         format: "qcm",
-        choices,
-        expected: [correct],
+        choices: makeChoices(`$[${a}\\,;\\,+\\infty[$`, [
+          `$]-\\infty\\,;\\,${a}]$`,
+          `$]${a}\\,;\\,+\\infty[$`,
+          "$\\mathbb{R}$",
+        ]),
+        expected: [`$[${a}\\,;\\,+\\infty[$`],
         comparator: "mcq_exact",
         explanation: exp(
-          "On teste $f(-x)$.",
-          impaire
-            ? "$f(-x) = (-x)^3 = -x^3 = -f(x)$."
-            : "$f(-x) = (-x)^2 = x^2 = f(x)$.",
-          impaire ? "Donc $f$ est impaire." : "Donc $f$ est paire.",
-          `La fonction est ${correct}.`
+          "Une racine carrée n'existe que sur les nombres positifs ou nuls.",
+          `On résout donc $x - ${a} \\geqslant 0$.`,
+          `Cela donne $x \\geqslant ${a}$.`,
+          `Le domaine est $[${a}\\,;\\,+\\infty[$ — le crochet est FERMÉ, car ${a} convient.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_fct_dom_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_vocabulaire_2de",
+    microId: "fonction_domaine",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Un polynôme accepte-t-il un interdit ?",
+    tags: ["seconde", "maths", "fonctions", "domaine", "template"],
+    generate: () => {
+      const a = randomInt(2, 7);
+      const b = randomInt(1, 9);
+      return {
+        text: `Quel est le domaine de définition de $f(x) = ${a}x^2 + ${b}$ ?`,
+        format: "qcm",
+        choices: makeChoices("$\\mathbb{R}$", [
+          "$\\mathbb{R}$ privé de $0$",
+          "$[0\\,;\\,+\\infty[$",
+          `$\\mathbb{R}$ privé de $${b}$`,
+        ]),
+        expected: ["$\\mathbb{R}$"],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un polynôme ne contient ni quotient ni racine.",
+          "Aucune valeur ne peut donc rendre le calcul impossible.",
+          "On élève au carré, on multiplie, on ajoute : ces trois opérations acceptent tous les réels.",
+          "Le domaine est $\\mathbb{R}$ tout entier."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_fct_dom_tpl_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_vocabulaire_2de",
+    microId: "fonction_domaine",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Deux interdits peuvent se cumuler dans la même expression.",
+    tags: ["seconde", "maths", "fonctions", "domaine", "raisonnement", "template"],
+    generate: () => {
+      const a = randomInt(2, 8);
+      return {
+        text: `Combien de valeurs sont interdites pour $f(x) = \\dfrac{x}{(x - ${a})(x + ${a})}$ ?`,
+        format: "qcm",
+        choices: makeChoices("deux", ["une", "aucune", "trois"]),
+        expected: ["deux"],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le dénominateur est un produit : il s'annule dès qu'un de ses facteurs s'annule.",
+          `On résout $x - ${a} = 0$ puis $x + ${a} = 0$.`,
+          `On trouve $x = ${a}$ et $x = -${a}$.`,
+          "Deux valeurs sont interdites : le domaine est $\\mathbb{R}$ privé de ces deux nombres."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_fct_dom_tpl_5",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_vocabulaire_2de",
+    microId: "fonction_domaine",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Vrai ou faux : teste la valeur dans l'expression.",
+    tags: ["seconde", "maths", "fonctions", "domaine", "template"],
+    generate: () => {
+      const a = randomInt(2, 9);
+      const teste = Math.random() < 0.5 ? a : randomInt(a + 1, a + 5);
+      const interdit = teste === a;
+      return {
+        text: `Pour $f(x) = \\dfrac{1}{x - ${a}}$, le nombre $${teste}$ appartient-il au domaine ?`,
+        format: "qcm",
+        choices: shuffle(["oui", "non"]),
+        expected: [interdit ? "non" : "oui"],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un nombre appartient au domaine si le calcul y est possible.",
+          `On remplace : le dénominateur vaut $${teste} - ${a} = ${teste - a}$.`,
+          interdit
+            ? "Le dénominateur est nul, donc le calcul est impossible."
+            : "Le dénominateur n'est pas nul, donc le calcul se fait.",
+          interdit ? "Non, ce nombre est exclu du domaine." : "Oui, ce nombre appartient au domaine."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_fct_dom_tpl_6",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_vocabulaire_2de",
+    microId: "fonction_domaine",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Écris le domaine en notation d'intervalles.",
+    tags: ["seconde", "maths", "fonctions", "domaine", "intervalle", "template"],
+    generate: () => {
+      const a = randomInt(1, 6);
+      return {
+        text: `Le domaine de $f(x) = \\dfrac{1}{x - ${a}}$ s'écrit :`,
+        format: "qcm",
+        choices: makeChoices(
+          `$]-\\infty\\,;\\,${a}[ \\cup ]${a}\\,;\\,+\\infty[$`,
+          [
+            `$[${a}\\,;\\,+\\infty[$`,
+            `$]-\\infty\\,;\\,${a}]$`,
+            "$\\mathbb{R}$",
+          ],
+        ),
+        expected: [`$]-\\infty\\,;\\,${a}[ \\cup ]${a}\\,;\\,+\\infty[$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Retirer un point d'une droite laisse deux morceaux.",
+          `La valeur $${a}$ est interdite : on coupe la droite en ce point.`,
+          "On réunit alors les deux intervalles ouverts qui restent.",
+          `Le domaine est $]-\\infty\\,;\\,${a}[ \\cup ]${a}\\,;\\,+\\infty[$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_fct_dom_tpl_7",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_vocabulaire_2de",
+    microId: "fonction_domaine",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "La racine impose une inégalité, le quotient une exclusion.",
+    tags: ["seconde", "maths", "fonctions", "domaine", "raisonnement", "template"],
+    generate: () => {
+      const a = randomInt(1, 6);
+      return {
+        text: `Quel est le domaine de $f(x) = \\dfrac{\\sqrt{x}}{x - ${a}}$ ?`,
+        format: "qcm",
+        choices: makeChoices(
+          `$[0\\,;\\,+\\infty[$ privé de $${a}$`,
+          [
+            "$[0\\,;\\,+\\infty[$",
+            `$\\mathbb{R}$ privé de $${a}$`,
+            "$\\mathbb{R}$",
+          ],
+        ),
+        expected: [`$[0\\,;\\,+\\infty[$ privé de $${a}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Deux contraintes se cumulent : la racine et le quotient.",
+          `La racine impose $x \\geqslant 0$ ; le dénominateur interdit $x = ${a}$.`,
+          "On garde donc les positifs, en retirant la valeur qui annule le dénominateur.",
+          `Le domaine est $[0\\,;\\,+\\infty[$ privé de $${a}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_fct_dom_tpl_8",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_vocabulaire_2de",
+    microId: "fonction_domaine",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une durée, une longueur, un effectif : que peuvent-ils valoir ?",
+    tags: ["seconde", "maths", "fonctions", "domaine", "modelisation", "template"],
+    generate: () => {
+      const cote = randomInt(6, 20);
+      return {
+        text: `Dans un carré de côté ${cote} cm, on découpe un carré de côté $x$. Quel domaine a du sens pour $x$ ?`,
+        format: "qcm",
+        choices: makeChoices(`$[0\\,;\\,${cote}]$`, [
+          "$\\mathbb{R}$",
+          `$[0\\,;\\,+\\infty[$`,
+          `$[-${cote}\\,;\\,${cote}]$`,
+        ]),
+        expected: [`$[0\\,;\\,${cote}]$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un domaine peut être impose par la SITUATION, pas seulement par le calcul.",
+          "Une longueur ne peut pas être négative, et le carré découpé ne peut pas dépasser le grand.",
+          `On encadre donc $x$ entre $0$ et $${cote}$.`,
+          `Le domaine qui a du sens est $[0\\,;\\,${cote}]$, même si la formule accepterait davantage.`
         ),
       };
     },
