@@ -39,13 +39,61 @@ function signesProjetes(section: ClasseSection): number {
 }
 
 /**
+ * Découpe un texte long en paragraphes de deux phrases.
+ *
+ * ⛔ ON NE COUPE QU'EN DEHORS DES SEGMENTS ENTRE DOLLARS. Une phrase peut
+ * contenir « $0{,}25$ » ou « $f(4) = 11$ » : le point qui s'y trouve n'est pas
+ * une fin de phrase, et couper là scinderait la formule en deux, ce qui
+ * l'empêcherait de se rendre. D'où le drapeau `dansMaths`.
+ * ⚠️ On exige aussi une ESPACE après le point : « 3.5 » et « M. Dupont »
+ * n'ouvrent pas de paragraphe.
+ */
+function paragraphes(texte: string): string[] {
+  const morceaux: string[] = [];
+  let courant = "";
+  let dansMaths = false;
+  let phrases = 0;
+  for (let i = 0; i < texte.length; i += 1) {
+    const c = texte[i];
+    courant += c;
+    if (c === "$") dansMaths = !dansMaths;
+    if (!dansMaths && (c === "." || c === "!" || c === "?") && texte[i + 1] === " ") {
+      phrases += 1;
+      if (phrases >= 2) {
+        morceaux.push(courant.trim());
+        courant = "";
+        phrases = 0;
+        i += 1;
+      }
+    }
+  }
+  if (courant.trim()) morceaux.push(courant.trim());
+  return morceaux;
+}
+
+/**
  * Le texte d'une diapositive, rendu avec ses formules.
  * ⚠️ `contenu` d'un panneau `duo` est un ReactNode et non une chaîne : on le
  * laisse alors passer sans y toucher, sinon on casserait les dessins qu'il peut
  * contenir.
+ * ⭐ ET AU-DELÀ DE 240 SIGNES, LE TEXTE S'AÉRE EN PARAGRAPHES (04/09/2026). Un
+ * pavé de six phrases projeté au tableau ne se lit pas : l'œil perd sa ligne.
+ * Le seuil laisse les TITRES intacts — ils sont courts par construction.
  */
 function M({ children }: { children: ReactNode }) {
-  return typeof children === "string" ? <TexteMath>{children}</TexteMath> : <>{children}</>;
+  if (typeof children !== "string") return <>{children}</>;
+  if (children.length <= 240) return <TexteMath>{children}</TexteMath>;
+  const blocs = paragraphes(children);
+  if (blocs.length < 2) return <TexteMath>{children}</TexteMath>;
+  return (
+    <>
+      {blocs.map((b, i) => (
+        <span key={i} className={i === 0 ? "block" : "mt-4 block"}>
+          <TexteMath>{b}</TexteMath>
+        </span>
+      ))}
+    </>
+  );
 }
 
 /**
@@ -195,7 +243,16 @@ function Section({
     // affichage qu'au redimensionnement, et il ne peut pas osciller.
     case "objectif":
       return (
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+        // ⛔⛔ DEUX COLONNES SEULEMENT S IL Y A DEUX CHOSES — corrige le
+        // 04/09/2026, capture a l appui. Cette section se scindait TOUJOURS en
+        // 1,1fr / 0,9fr : phrase a gauche, encadre a droite. Quand la
+        // diapositive n a pas d encadre — c est le cas de toutes celles que
+        // slidesDepuisFiche fabrique depuis la definition ou une propriete —
+        // la moitie droite restait VIDE et le texte se tassait dans une colonne
+        // etroite, projete au videoprojecteur.
+        // 👉 Frederic : « il faut que le commentaire prenne toute la largeur et
+        // pas la moitie ». Sans encadre, une seule colonne.
+        <div className={section.encadre ? "grid gap-8 lg:grid-cols-[1.1fr_0.9fr]" : "grid gap-8"}>
           {/* ⭐ La carte teintée remplace le texte nu (31/08/2026). C'était la
               section la plus fréquente du diaporama et la seule sans couleur. */}
           {/* ⚠️ Padding volontairement serré : mesuré le 31/08, une carte en
@@ -534,8 +591,17 @@ export default function ModeClasse({
           ⚠️ La toute première mesure, faite dans un panneau de 49 px de haut,
           annonçait « les 28 débordent, jusqu'à 1978 px ». Un étalon cassé
           invente un problème : fixer la fenêtre AVANT de conclure. */}
-      <section className="flex flex-1 items-center overflow-y-auto px-6 py-3 lg:py-6">
-        <div className="mx-auto w-full max-w-7xl rounded-[2rem] border-4 border-white bg-white/90 p-5 shadow-2xl shadow-emerald-900/10 lg:p-8">
+      {/* ⛔⛔ ET LE CENTRAGE MANGEAIT LE HAUT DE LA DIAPO — corrige le
+          04/09/2026, capture a l appui : Frederic voyait le titre coupe, cache
+          sous l en-tete. C est le piege classique de flexbox : un conteneur en
+          "items-center" avec "overflow-y-auto" centre son enfant meme quand il
+          est PLUS HAUT que lui, et le debordement du haut devient alors
+          inatteignable — aucun defilement ne le ramene.
+          ⭐ La parade est "m-auto" sur l ENFANT : une marge automatique centre
+          tant qu il y a de la place, et se replie a zero des que le contenu
+          deborde, ce que "items-center" ne sait pas faire. */}
+      <section className="flex flex-1 overflow-y-auto px-6 py-3 lg:py-6">
+        <div className="m-auto w-full max-w-7xl rounded-[2rem] border-4 border-white bg-white/90 p-5 shadow-2xl shadow-emerald-900/10 lg:p-8">
           <div className="mb-3 flex flex-wrap items-start justify-between gap-4 lg:mb-6">
             <div>
               <p className={`text-2xl font-black uppercase ${TEINTES[slide.teinte ?? "objectif"].badge}`}>
