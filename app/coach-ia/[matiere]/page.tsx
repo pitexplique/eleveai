@@ -6,6 +6,8 @@ import {
   getNotionOptions,
   getNotionMicroMap,
   getMicroLabelMap,
+  getMicroLabelMathMap,
+  getNotionLabelMathMap,
   getDomaineMap,
   getAnneesNotions,
   sansMarqueurAnnee,
@@ -13,7 +15,15 @@ import {
   type Classe,
   type Matiere,
 } from "@/lib/tutor-v4/catalog";
+// ⭐ 07/09/2026 — LES FORMULES SE RENDENT DANS LA LISTE DU COACH.
+// « Utiliser (a+b)^2 = a^2 + 2ab + b^2 » : du code source projeté à une classe.
+// `TexteMath` est le composant des fiches, et il est l'IDENTITÉ sur un libellé
+// sans `$` — les 4 200 autres libellés ne bougent donc pas d'un pixel.
+// ⛔ IL NE SERT QU'À L'AFFICHAGE. La recherche, l'URL YouTube et l'`aria-label`
+// continuent de lire `microLabels` (texte), pas `microLabelsMath` (source).
+import TexteMath from "@/components/fiches/TexteMath";
 import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
+import { normaliser } from "@/lib/matrice/normaliser";
 import FloatingCoach from "@/components/FloatingCoach";
 import BoiteAOutils from "@/components/BoiteAOutils";
 import { useEleve } from "@/context/EleveContext";
@@ -341,6 +351,10 @@ export default function CoachIA() {
   const notionOptions = getNotionOptions(classe, matiere);
   const notionMicroMap = getNotionMicroMap(classe, matiere);
   const microLabels = getMicroLabelMap(classe, matiere);
+  // La MÊME donnée, sous ses deux formes : `microLabels` est le texte (recherche,
+  // URL, `aria-label`), `microLabelsMath` la source à confier à KaTeX.
+  const microLabelsMath = getMicroLabelMathMap(classe, matiere);
+  const notionLabelsMath = getNotionLabelMathMap(classe, matiere);
 
   // Année choisie à l'intérieur de la classe (STMG seulement, cf. AnneeFiltre).
   // `anneesNotions` vaut `null` partout ailleurs : une classe = une année, et
@@ -370,6 +384,16 @@ export default function CoachIA() {
       return anneesNotions && annee !== "cycle" ? sansMarqueurAnnee(brut) : brut;
     },
     [anneesNotions, annee, classe, matiere]
+  );
+
+  // Le même libellé de notion, formules comprises — pour le titre affiché.
+  // La recherche continue de passer par `libelleNotion`, en texte.
+  const libelleNotionMath = useCallback(
+    (notionId: string) => {
+      const brut = notionLabelsMath[notionId] ?? notionId;
+      return anneesNotions && annee !== "cycle" ? sansMarqueurAnnee(brut) : brut;
+    },
+    [anneesNotions, annee, notionLabelsMath]
   );
 
   const comptesAnnee = useMemo(() => {
@@ -451,7 +475,13 @@ export default function CoachIA() {
     return sum + (notionMicroMap[notionId]?.length ?? 0);
   }, 0);
 
-  const searchLower = search.trim().toLowerCase();
+  // ⛔ LA RECHERCHE DOIT IGNORER LES ACCENTS (07/09/2026). Elle comparait en
+  // `toLowerCase()` seul. Tant que les libellés de seconde étaient écrits sans
+  // accents, taper « développer » ne rendait RIEN ; une fois les accents posés,
+  // c'est « developper » qui n'aurait plus rien rendu. Un élève tape les deux.
+  // `normaliser` est déjà le passage obligé de la matrice d'entrée, pour cette
+  // raison précise — deux normalisations finissent toujours par diverger.
+  const searchLower = normaliser(search);
 
   function handleClick(notionId: string, microId: string) {
     router.push(
@@ -675,21 +705,21 @@ export default function CoachIA() {
                 .map((notionId) => ({ notionId, micros: notionMicroMap[notionId] ?? [] }))
                 .filter((item) => {
                   if (!searchLower) return item.micros.length > 0;
-                  const notionMatch = libelleNotion(item.notionId).toLowerCase().includes(searchLower);
+                  const notionMatch = normaliser(libelleNotion(item.notionId)).includes(searchLower);
                   const filteredMicros = item.micros.filter((microId) =>
-                    (microLabels[microId] || microId).toLowerCase().includes(searchLower)
+                    normaliser(microLabels[microId] || microId).includes(searchLower)
                   );
                   return notionMatch ? item.micros.length > 0 : filteredMicros.length > 0;
                 })
                 .map((item) => {
                   if (!searchLower) return item;
-                  const notionMatch = libelleNotion(item.notionId).toLowerCase().includes(searchLower);
+                  const notionMatch = normaliser(libelleNotion(item.notionId)).includes(searchLower);
                   return {
                     ...item,
                     micros: notionMatch
                       ? item.micros
                       : item.micros.filter((microId) =>
-                          (microLabels[microId] || microId).toLowerCase().includes(searchLower)
+                          normaliser(microLabels[microId] || microId).includes(searchLower)
                         ),
                   };
                 });
@@ -738,7 +768,7 @@ export default function CoachIA() {
                       >
                         <div className="mb-2 flex flex-wrap items-center gap-2">
                           <h3 className="text-base font-bold text-slate-800">
-                            {libelleNotion(notionId)}
+                            <TexteMath>{libelleNotionMath(notionId)}</TexteMath>
                           </h3>
                           {ficheHref ? (
                             <Link
@@ -810,7 +840,7 @@ export default function CoachIA() {
                                   {index + 1}
                                 </span>
                                 <span className="underline-offset-2 group-hover:underline">
-                                  {microLabels[microId] || microId}
+                                  <TexteMath>{microLabelsMath[microId] || microId}</TexteMath>
                                 </span>
                                 {microId.includes("defis") && (
                                   <span className="ml-1 rounded-full bg-orange-100 px-2 py-0.5 text-xs font-bold text-orange-600">

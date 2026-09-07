@@ -9,7 +9,7 @@ export const microSkills: MicroSkillSource[] = [
   },
   {
     id: "adulte_calcul_difference",
-    label: "Calculer un ecart ou une monnaie rendue",
+    label: "Calculer un écart ou une monnaie rendue",
     notionId: "calcul_mental_utile",
     prerequis: ["adulte_calcul_mental_total"],
   },
@@ -27,13 +27,13 @@ export const microSkills: MicroSkillSource[] = [
   },
   {
     id: "adulte_budget_plusieurs_depenses",
-    label: "Suivre plusieurs depenses",
+    label: "Suivre plusieurs dépenses",
     notionId: "argent_budget",
     prerequis: ["adulte_budget_reste"],
   },
   {
     id: "adulte_prix_unitaire",
-    label: "Trouver un prix au kilo ou a l'unite",
+    label: "Trouver un prix au kilo ou à l'unité",
     notionId: "prix_comparer",
     prerequis: ["adulte_calcul_mental_total"],
   },
@@ -63,7 +63,7 @@ export const microSkills: MicroSkillSource[] = [
   },
   {
     id: "adulte_prix_apres_remise",
-    label: "Trouver le prix apres une remise",
+    label: "Trouver le prix après une remise",
     notionId: "pourcentages_quotidien",
     prerequis: ["adulte_remise"],
   },
@@ -81,19 +81,19 @@ export const microSkills: MicroSkillSource[] = [
   },
   {
     id: "adulte_dose_quantite",
-    label: "Doser une quantite pour plus ou moins de personnes",
+    label: "Doser une quantité pour plus ou moins de personnes",
     notionId: "proportionnalite_pratique",
     prerequis: ["adulte_recette"],
   },
   {
     id: "adulte_fraction_part",
-    label: "Utiliser moitie, quart, tiers",
+    label: "Utiliser moitié, quart, tiers",
     notionId: "fractions_ratios",
     prerequis: ["adulte_calcul_mental_total"],
   },
   {
     id: "adulte_partage_montant",
-    label: "Partager un montant ou une quantite",
+    label: "Partager un montant ou une quantité",
     notionId: "fractions_ratios",
     prerequis: ["adulte_fraction_part"],
   },
@@ -105,13 +105,13 @@ export const microSkills: MicroSkillSource[] = [
   },
   {
     id: "adulte_conversion_distance",
-    label: "Convertir metres et kilometres",
+    label: "Convertir mètres et kilomètres",
     notionId: "mesures_conversions",
     prerequis: ["adulte_conversion_mesure"],
   },
   {
     id: "adulte_horaire_duree",
-    label: "Calculer une duree ou une heure d'arrivee",
+    label: "Calculer une durée ou une heure d'arrivée",
     notionId: "durees_trajets",
     prerequis: ["adulte_calcul_mental_total"],
   },
@@ -129,7 +129,7 @@ export const microSkills: MicroSkillSource[] = [
   },
   {
     id: "adulte_tableau_comparer",
-    label: "Comparer des donnees dans un tableau",
+    label: "Comparer des données dans un tableau",
     notionId: "donnees_tableaux",
     prerequis: ["adulte_tableau_lire"],
   },
@@ -141,7 +141,7 @@ export const microSkills: MicroSkillSource[] = [
   },
   {
     id: "adulte_stat_total",
-    label: "Calculer un total a partir de donnees",
+    label: "Calculer un total à partir de données",
     notionId: "statistiques_simples",
     prerequis: ["adulte_tableau_lire"],
   },

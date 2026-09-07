@@ -44,6 +44,7 @@ import { buildKnowledgeB2Ia } from "@/lib/tutor-v4/knowledge/ia/b2/buildKnowledg
 import { buildKnowledgeC1Ia } from "@/lib/tutor-v4/knowledge/ia/c1/buildKnowledgeC1Ia";
 import { buildKnowledgePixCollegeIa } from "@/lib/tutor-v4/knowledge/ia/pix-college/buildKnowledgePixCollegeIa";
 import { buildKnowledgePixLyceeIa } from "@/lib/tutor-v4/knowledge/ia/pix-lycee/buildKnowledgePixLyceeIa";
+import { libelleTexte } from "@/lib/tutor-v4/libelleMath";
 
 // =========================
 // TYPES
@@ -221,8 +222,34 @@ export function getNotionMicroMap(classe: Classe, matiere: Matiere = "maths"): R
 // =========================
 // LABELS
 // =========================
+//
+// ⭐ LE TEXTE EST LE DÉFAUT, LE LATEX SE DEMANDE (07/09/2026). Depuis que
+// certains libellés portent une formule entre `$…$`, ces quatre fonctions —
+// qui sont les 28 points d'appel du dépôt : coach, tuteur, kits imprimables,
+// recherche YouTube, `aria-label`, admin, bilans — rendent la formule EN TEXTE
+// LISIBLE, par `libelleTexte`. Aucun dollar ne peut donc partir dans une URL
+// ni dans un PDF par simple oubli. L'affichage qui sait rendre du KaTeX prend
+// la source, et il doit le demander : `getMicroLabelMathMap`.
+// Voir l'en-tête de `lib/tutor-v4/libelleMath.ts`.
 
 export function getNotionLabelMap(classe: Classe, matiere: Matiere = "maths"): Record<string, string> {
+  const knowledge = getKnowledge(classe, matiere);
+
+  return Object.fromEntries(
+    knowledge.notions.map((notion) => [notion.id, libelleTexte(notion.label)])
+  );
+}
+
+export function getMicroLabelMap(classe: Classe, matiere: Matiere = "maths"): Record<string, string> {
+  const knowledge = getKnowledge(classe, matiere);
+
+  return Object.fromEntries(
+    knowledge.microSkills.map((micro) => [micro.id, libelleTexte(micro.label)])
+  );
+}
+
+/** Les libellés SOURCE, formules `$…$` comprises — pour un rendu KaTeX. */
+export function getNotionLabelMathMap(classe: Classe, matiere: Matiere = "maths"): Record<string, string> {
   const knowledge = getKnowledge(classe, matiere);
 
   return Object.fromEntries(
@@ -230,7 +257,8 @@ export function getNotionLabelMap(classe: Classe, matiere: Matiere = "maths"): R
   );
 }
 
-export function getMicroLabelMap(classe: Classe, matiere: Matiere = "maths"): Record<string, string> {
+/** Les libellés SOURCE, formules `$…$` comprises — pour un rendu KaTeX. */
+export function getMicroLabelMathMap(classe: Classe, matiere: Matiere = "maths"): Record<string, string> {
   const knowledge = getKnowledge(classe, matiere);
 
   return Object.fromEntries(

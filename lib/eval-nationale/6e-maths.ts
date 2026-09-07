@@ -26,6 +26,7 @@
 import { mathsCm2QuestionBank } from "@/lib/tutor-v4/questionBank/cm2/maths";
 import { buildKnowledgeCm2Maths } from "@/lib/tutor-v4/knowledge/maths/cm2/buildKnowledgeCm2";
 import type { ConfigEpreuve, ThemeEval, TypeItem } from "./moteur";
+import { libelleTexte } from "@/lib/tutor-v4/libelleMath";
 
 const knowledge = buildKnowledgeCm2Maths();
 
@@ -262,6 +263,6 @@ export const CONFIG_6E_MATHS: ConfigEpreuve = {
   ],
   typesMicro: TYPES_MICRO,
   banque: mathsCm2QuestionBank,
-  labelsNotion: new Map(knowledge.notions.map((n) => [n.id, n.label])),
-  labelsMicro: new Map(knowledge.microSkills.map((m) => [m.id, m.label])),
+  labelsNotion: new Map(knowledge.notions.map((n) => [n.id, libelleTexte(n.label)])),
+  labelsMicro: new Map(knowledge.microSkills.map((m) => [m.id, libelleTexte(m.label)])),
 };

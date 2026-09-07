@@ -5,15 +5,15 @@ export const notions: NotionSource[] = [
   /* ===================== NOMBRES ET CALCULS (BO2N1) ===================== */
   {
     id: "reels_intervalles",
-    // ⭐ « et valeur absolue » ajoute le 07/09/2026, et ce n'est pas cosmetique.
+    // ⭐ « et valeur absolue » ajouté le 07/09/2026, et ce n'est pas cosmétique.
     // Le moteur de la matrice cherche la notion du programme AVANT le lexique,
-    // en comptant les mots forts du libelle presents dans la question. « valeur
-    // absolue » ne marquait donc AUCUN point en maths, tandis que le francais
-    // « Le verbe : valeurs temporelles... » en marquait un sur « valeurs » :
-    // l'eleve de seconde qui tapait « valeur absolue » ouvrait le coach de
-    // FRANCAIS. Le libelle est aussi plus juste — c'est bien dans ce bloc du BO
+    // en comptant les mots forts du libellé présents dans la question. « valeur
+    // absolue » ne marquait donc AUCUN point en maths, tandis que le français
+    // « Le verbe : valeurs temporelles… » en marquait un sur « valeurs » :
+    // l'élève de seconde qui tapait « valeur absolue » ouvrait le coach de
+    // FRANÇAIS. Le libellé est aussi plus juste — c'est bien dans ce bloc du BO
     // que vit valeur_absolue_distance.
-    label: "Nombres reels, intervalles et valeur absolue",
+    label: "Nombres réels, intervalles et valeur absolue",
     boId: "BO2N1",
     prerequis: [],
     levels: [1, 2, 3],
@@ -34,35 +34,35 @@ export const notions: NotionSource[] = [
   },
   {
     id: "racine_carree_2de",
-    label: "Racine carree",
+    label: "Racine carrée",
     boId: "BO2N1",
     prerequis: ["reels_intervalles"],
     levels: [1, 2, 3],
   },
   {
     id: "developpement_factorisation_2de",
-    label: "Developpement et factorisation",
+    label: "Développement et factorisation",
     boId: "BO2N1",
     prerequis: ["reels_intervalles"],
     levels: [1, 2, 3],
   },
   {
     id: "identites_remarquables_2de",
-    label: "Identites remarquables",
+    label: "Identités remarquables",
     boId: "BO2N1",
     prerequis: ["developpement_factorisation_2de"],
     levels: [1, 2, 3],
   },
   {
     id: "expressions_litterales_2de",
-    label: "Expressions litterales",
+    label: "Expressions littérales",
     boId: "BO2N1",
     prerequis: ["developpement_factorisation_2de"],
     levels: [1, 2, 3],
   },
   {
     id: "equations_inequations_1er_degre",
-    label: "Equations et inequations du premier degre",
+    label: "Équations et inéquations du premier degré",
     boId: "BO2N1",
     prerequis: ["developpement_factorisation_2de", "reels_intervalles"],
     levels: [1, 2, 3],
@@ -78,7 +78,7 @@ export const notions: NotionSource[] = [
   },
   {
     id: "repere_coordonnees",
-    label: "Repere et coordonnees",
+    label: "Repère et coordonnées",
     boId: "BO2G1",
     prerequis: ["reels_intervalles"],
     levels: [1, 2, 3],
@@ -92,7 +92,7 @@ export const notions: NotionSource[] = [
   },
   {
     id: "geometrie_problemes_plan",
-    label: "Problemes de geometrie plane",
+    label: "Problèmes de géométrie plane",
     boId: "BO2G1",
     prerequis: [],
     levels: [1, 2, 3],
@@ -101,7 +101,7 @@ export const notions: NotionSource[] = [
   /* ===================== FONCTIONS (BO2F1) ===================== */
   {
     id: "fonction_vocabulaire_2de",
-    label: "Fonctions : vocabulaire et representations",
+    label: "Fonctions : vocabulaire et représentations",
     boId: "BO2F1",
     prerequis: ["reels_intervalles"],
     levels: [1, 2, 3],
@@ -122,7 +122,7 @@ export const notions: NotionSource[] = [
   },
   {
     id: "fonctions_reference_2de",
-    label: "Fonctions de reference",
+    label: "Fonctions de référence",
     boId: "BO2F1",
     prerequis: ["fonction_variations_extremums", "developpement_factorisation_2de"],
     levels: [1, 2, 3],
@@ -131,7 +131,7 @@ export const notions: NotionSource[] = [
   /* ===================== STATISTIQUES ET PROBABILITES (BO2D1) ===================== */
   {
     id: "information_chiffree_evolutions",
-    label: "Information chiffree : proportions, pourcentages et evolutions",
+    label: "Information chiffrée : proportions, pourcentages et évolutions",
     boId: "BO2D1",
     prerequis: [],
     levels: [1, 2, 3],
@@ -145,24 +145,24 @@ export const notions: NotionSource[] = [
   },
   {
     id: "probabilites_ensemble_fini",
-    label: "Probabilites sur un ensemble fini",
+    label: "Probabilités sur un ensemble fini",
     boId: "BO2D1",
     prerequis: ["reels_intervalles"],
     levels: [1, 2, 3],
   },
-  // ⭐ AJOUTEE LE 04/09/2026. Le BO 2026 lui donne son propre bloc de contenus
-  // et de capacites ; la premiere et la terminale la rangent deja comme une
+  // ⭐ AJOUTÉE LE 04/09/2026. Le BO 2026 lui donne son propre bloc de contenus
+  // et de capacités ; la première et la terminale la rangent déjà comme une
   // notion distincte (probabilites_conditionnelles, probabilite_conditionnelle).
   {
     id: "probabilites_conditionnelles_2de",
-    label: "Probabilites conditionnelles et arbres",
+    label: "Probabilités conditionnelles et arbres",
     boId: "BO2D1",
     prerequis: ["probabilites_ensemble_fini"],
     levels: [2, 3],
   },
   {
     id: "echantillonnage_simulation",
-    label: "Echantillonnage et simulation",
+    label: "Échantillonnage et simulation",
     boId: "BO2D1",
     prerequis: ["probabilites_ensemble_fini", "statistiques_descriptives"],
     levels: [2, 3],

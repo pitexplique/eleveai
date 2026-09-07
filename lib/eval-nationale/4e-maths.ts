@@ -42,6 +42,7 @@
 import { maths5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/maths";
 import { buildKnowledge5eMaths } from "@/lib/tutor-v4/knowledge/maths/5e/buildKnowledge5e";
 import type { ConfigEpreuve, ThemeEval, TypeItem } from "./moteur";
+import { libelleTexte } from "@/lib/tutor-v4/libelleMath";
 
 const knowledge = buildKnowledge5eMaths();
 
@@ -374,6 +375,6 @@ export const CONFIG_4E_MATHS: ConfigEpreuve = {
   ],
   typesMicro: TYPES_MICRO,
   banque: maths5eQuestionBank,
-  labelsNotion: new Map(knowledge.notions.map((n) => [n.id, n.label])),
-  labelsMicro: new Map(knowledge.microSkills.map((m) => [m.id, m.label])),
+  labelsNotion: new Map(knowledge.notions.map((n) => [n.id, libelleTexte(n.label)])),
+  labelsMicro: new Map(knowledge.microSkills.map((m) => [m.id, libelleTexte(m.label)])),
 };

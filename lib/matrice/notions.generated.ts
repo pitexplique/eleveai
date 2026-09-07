@@ -768,7 +768,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "argent_budget",
-        "label": "Gerer un budget simple",
+        "label": "Gérer un budget simple",
         "prerequis": [
           "calcul_mental_utile"
         ]
@@ -789,14 +789,14 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "proportionnalite_pratique",
-        "label": "Adapter des quantites",
+        "label": "Adapter des quantités",
         "prerequis": [
           "calcul_mental_utile"
         ]
       },
       {
         "id": "fractions_ratios",
-        "label": "Utiliser moitie, quart, tiers",
+        "label": "Utiliser moitié, quart, tiers",
         "prerequis": [
           "calcul_mental_utile"
         ]
@@ -810,21 +810,21 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "durees_trajets",
-        "label": "Calculer des durees et des horaires",
+        "label": "Calculer des durées et des horaires",
         "prerequis": [
           "calcul_mental_utile"
         ]
       },
       {
         "id": "donnees_tableaux",
-        "label": "Lire un tableau ou une information chiffree",
+        "label": "Lire un tableau ou une information chiffrée",
         "prerequis": [
           "calcul_mental_utile"
         ]
       },
       {
         "id": "statistiques_simples",
-        "label": "Moyennes et reperes simples",
+        "label": "Moyennes et repères simples",
         "prerequis": [
           "donnees_tableaux"
         ]
@@ -2081,7 +2081,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
     "seconde": [
       {
         "id": "reels_intervalles",
-        "label": "Nombres reels, intervalles et valeur absolue",
+        "label": "Nombres réels, intervalles et valeur absolue",
         "prerequis": []
       },
       {
@@ -2098,35 +2098,35 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "racine_carree_2de",
-        "label": "Racine carree",
+        "label": "Racine carrée",
         "prerequis": [
           "reels_intervalles"
         ]
       },
       {
         "id": "developpement_factorisation_2de",
-        "label": "Developpement et factorisation",
+        "label": "Développement et factorisation",
         "prerequis": [
           "reels_intervalles"
         ]
       },
       {
         "id": "identites_remarquables_2de",
-        "label": "Identites remarquables",
+        "label": "Identités remarquables",
         "prerequis": [
           "developpement_factorisation_2de"
         ]
       },
       {
         "id": "expressions_litterales_2de",
-        "label": "Expressions litterales",
+        "label": "Expressions littérales",
         "prerequis": [
           "developpement_factorisation_2de"
         ]
       },
       {
         "id": "equations_inequations_1er_degre",
-        "label": "Equations et inequations du premier degre",
+        "label": "Équations et inéquations du premier degré",
         "prerequis": [
           "developpement_factorisation_2de",
           "reels_intervalles"
@@ -2139,7 +2139,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "repere_coordonnees",
-        "label": "Repere et coordonnees",
+        "label": "Repère et coordonnées",
         "prerequis": [
           "reels_intervalles"
         ]
@@ -2155,12 +2155,12 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "geometrie_problemes_plan",
-        "label": "Problemes de geometrie plane",
+        "label": "Problèmes de géométrie plane",
         "prerequis": []
       },
       {
         "id": "fonction_vocabulaire_2de",
-        "label": "Fonctions : vocabulaire et representations",
+        "label": "Fonctions : vocabulaire et représentations",
         "prerequis": [
           "reels_intervalles"
         ]
@@ -2182,7 +2182,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "fonctions_reference_2de",
-        "label": "Fonctions de reference",
+        "label": "Fonctions de référence",
         "prerequis": [
           "fonction_variations_extremums",
           "developpement_factorisation_2de"
@@ -2190,7 +2190,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "information_chiffree_evolutions",
-        "label": "Information chiffree : proportions, pourcentages et evolutions",
+        "label": "Information chiffrée : proportions, pourcentages et évolutions",
         "prerequis": []
       },
       {
@@ -2200,21 +2200,21 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "probabilites_ensemble_fini",
-        "label": "Probabilites sur un ensemble fini",
+        "label": "Probabilités sur un ensemble fini",
         "prerequis": [
           "reels_intervalles"
         ]
       },
       {
         "id": "probabilites_conditionnelles_2de",
-        "label": "Probabilites conditionnelles et arbres",
+        "label": "Probabilités conditionnelles et arbres",
         "prerequis": [
           "probabilites_ensemble_fini"
         ]
       },
       {
         "id": "echantillonnage_simulation",
-        "label": "Echantillonnage et simulation",
+        "label": "Échantillonnage et simulation",
         "prerequis": [
           "probabilites_ensemble_fini",
           "statistiques_descriptives"
@@ -5061,7 +5061,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "ia_a1_responsabilite_impact",
-        "label": "Mon role et l'impact de l'IA",
+        "label": "Mon rôle et l'impact de l'IA",
         "prerequis": [
           "ia_a1_usages_limites"
         ]
@@ -5070,12 +5070,12 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
     "a2": [
       {
         "id": "ia_a2_prompts",
-        "label": "Ecrire un bon prompt",
+        "label": "Écrire un bon prompt",
         "prerequis": []
       },
       {
         "id": "ia_a2_reviser",
-        "label": "Reviser et s'entrainer avec l'IA",
+        "label": "Réviser et s'entrainer avec l'IA",
         "prerequis": [
           "ia_a2_prompts"
         ]
@@ -5091,19 +5091,19 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
     "b1": [
       {
         "id": "ia_b1_verification",
-        "label": "Verifier et garder l'esprit critique",
+        "label": "Vérifier et garder l'esprit critique",
         "prerequis": []
       },
       {
         "id": "ia_b1_securite",
-        "label": "Securite et donnees personnelles",
+        "label": "Sécurité et données personnelles",
         "prerequis": [
           "ia_b1_verification"
         ]
       },
       {
         "id": "ia_b1_responsabilite_numerique",
-        "label": "Plagiat, droits et responsabilite",
+        "label": "Plagiat, droits et responsabilité",
         "prerequis": [
           "ia_b1_securite"
         ]
@@ -5112,19 +5112,19 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
     "b2": [
       {
         "id": "ia_b2_prompt_avance",
-        "label": "Methode : prompt avance et iteration",
+        "label": "Méthode : prompt avancé et itération",
         "prerequis": []
       },
       {
         "id": "ia_b2_production",
-        "label": "Production creative",
+        "label": "Production créative",
         "prerequis": [
           "ia_b2_prompt_avance"
         ]
       },
       {
         "id": "ia_b2_qualite_responsabilite",
-        "label": "Qualite, verification et responsabilite",
+        "label": "Qualité, vérification et responsabilité",
         "prerequis": [
           "ia_b2_production"
         ]
@@ -5138,14 +5138,14 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "ia_c1_conception_responsable",
-        "label": "Concevoir de facon responsable",
+        "label": "Concevoir de façon responsable",
         "prerequis": [
           "ia_c1_cadrer_projet"
         ]
       },
       {
         "id": "ia_c1_responsabilite_pitch",
-        "label": "Tester et presenter",
+        "label": "Tester et présenter",
         "prerequis": [
           "ia_c1_conception_responsable"
         ]

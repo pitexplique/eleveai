@@ -57,6 +57,7 @@ import {
   SUPPORTS_ORAL_CM2,
 } from "./supports";
 import type { ConfigEpreuve, ThemeEval } from "./moteur";
+import { libelleTexte } from "@/lib/tutor-v4/libelleMath";
 
 const knowledge = buildKnowledgeCm2Francais();
 
@@ -176,6 +177,6 @@ export const CONFIG_6E_FRANCAIS: ConfigEpreuve = {
     "Une seule chose de l'épreuve officielle manque ici : la fluence, qui se passe à voix haute, en tête à tête avec un professeur — un ordinateur ne peut pas l'évaluer. La compréhension de l'oral, elle, y est : prévois des écouteurs ou une pièce calme.",
   themes: THEMES,
   banque: francaisCm2QuestionBank,
-  labelsNotion: new Map(knowledge.notions.map((n) => [n.id, n.label])),
-  labelsMicro: new Map(knowledge.microSkills.map((m) => [m.id, m.label])),
+  labelsNotion: new Map(knowledge.notions.map((n) => [n.id, libelleTexte(n.label)])),
+  labelsMicro: new Map(knowledge.microSkills.map((m) => [m.id, libelleTexte(m.label)])),
 };

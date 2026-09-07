@@ -5,14 +5,21 @@
 
 import type { MicroSkillSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
 import type { TutorBankItemFixedV4, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { libelleTexte } from "@/lib/tutor-v4/libelleMath";
 import type { KitExo } from "./types";
 
+// ⛔ CES KITS S'IMPRIMENT. C'est le seul endroit du dépôt qui lit les libellés
+// SANS passer par `catalog.ts` : sans `libelleTexte`, une checklist de survie
+// sortirait « Utiliser $\sqrt{a^2} = |a|$ » sur une photocopie, sans que rien
+// ne le signale. Voir l'en-tête de `lib/tutor-v4/libelleMath.ts`.
 export function kitHelpers(microSkills: MicroSkillSource[]) {
-  const microLabel = new Map(microSkills.map((m) => [m.id, m.label]));
+  const microLabel = new Map(microSkills.map((m) => [m.id, libelleTexte(m.label)]));
 
   /** Libellés des micro-compétences d'une notion (checklist « je sais… »). */
   function microsDe(notionId: string): string[] {
-    return microSkills.filter((m) => m.notionId === notionId).map((m) => m.label);
+    return microSkills
+      .filter((m) => m.notionId === notionId)
+      .map((m) => libelleTexte(m.label));
   }
 
   /**
