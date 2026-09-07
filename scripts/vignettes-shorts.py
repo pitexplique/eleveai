@@ -43,6 +43,7 @@
 # laisser dans deux arbres différents (`media/videos/…/1920p60/` d'un côté,
 # `miniatures/` de l'autre) obligeait à faire la correspondance à la main.
 
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -94,7 +95,26 @@ def route(nom: str) -> tuple[Path, str]:
             format_ = "paysage" if nom.endswith("-paysage") else "shorts"
             court = (nom[len(prefixe):]
                      .replace("-portrait", "").replace("-paysage", ""))
-            return SORTIES / matiere / format_ / langue, court
+            # ⭐⭐ UN SOUS-DOSSIER PAR GLYPHE (Frédéric, 07/09 : « il va y avoir
+            # 27 × 4 vidéos, sinon ça va être trop de fichiers dans un même
+            # répertoire »). À 26 lettres et 10 chiffres, chaque dossier de
+            # langue recevrait plus de DEUX CENTS fichiers — impossible d'y
+            # retrouver la paire vidéo + vignette qu'on cherche au moment de
+            # téléverser.
+            # ⛔ LE GLYPHE SE LIT DANS LE NOM COMPLET, PAS DANS LE NOM TRONQUÉ.
+            # Première version : je le déduisais de `court`, qui pour un chiffre
+            # anglais vaut « 5-left » — le mot « number » ayant été mangé par le
+            # préfixe. Huit vignettes se sont retrouvées sans dossier.
+            # ⚠️ Une information retirée en amont ne se retrouve pas en aval.
+            m = re.search(r"(lettre-[a-z]|chiffre-\d|letter-[a-z]|number-\d)", nom)
+            if m is None:
+                raise PrefixeInconnu(
+                    f"« {nom} » ne nomme ni lettre ni chiffre : impossible de le "
+                    f"ranger. Le nom doit contenir « lettre-x », « chiffre-n », "
+                    f"« letter-x » ou « number-n »."
+                )
+            glyphe = m.group(1)
+            return SORTIES / matiere / format_ / langue / glyphe, court
     raise PrefixeInconnu(
         f"« {nom} » ne commence par aucun préfixe connu : "
         f"{', '.join(PREFIXES)}. Renommer la vidéo, ou ajouter le préfixe ici."

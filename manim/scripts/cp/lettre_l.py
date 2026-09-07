@@ -63,22 +63,33 @@ from lettre_commune import (  # noqa: E402
 #   3. fermeture ramenée À HAUTEUR DU DÉPART et boucle petite (sommet 0,94).
 # ⚠️ La boucle CROISE le rond, et c'est normal : c'est ce croisement qui fait la
 # sortie. Ce qu'il ne faut pas, c'est qu'elle dépasse le sommet du rond.
-DEPART = np.array([-0.95, 0.30, 0])
+# ⭐⭐ LE « l » EN CINQ GESTES NOMMÉS PAR LEUR COURBURE (Frédéric, 07/09) :
+#   1. une PARABOLE CONVEXE QUI MONTE — l'attaque, un creux qui se relève ;
+#   2. la BOUCLE À GAUCHE ;
+#   3. une PARABOLE CONCAVE — le sommet, une voûte ;
+#   4. on DESCEND TOUT DROIT ;
+#   5. à 80 % du haut, une PARABOLE CONVEXE — le creux final, posé sur la ligne.
+#
+# ⭐⭐ ET C'EST CETTE DESCRIPTION-LÀ QUI A CONVERGÉ, APRÈS HUIT ESSAIS RATÉS.
+# Frédéric : « parfait, mieux lorsque je te décris en maths ». Les descriptions
+# visuelles (« la boucle est trop fermée », « on n'y est pas ») me faisaient
+# faire du yoyo ; une suite de COURBURES — creux, voûte, droite, pourcentage de
+# hauteur — se transpose directement en points de contrôle.
+# 👉 POUR LES DIX-NEUF LETTRES RESTANTES : demander la suite des courbures.
+#
+# ⛔ ET LE SVG NE SUFFISAIT PAS. Il m'a donné la FORME juste, et j'en ai conclu
+# que la lettre l'était. Mais un SVG montre où passent les traits, PAS DANS QUEL
+# ORDRE LA MAIN LES PARCOURT — ma version calée sur le SVG montait à gauche et
+# redescendait à droite, l'exact inverse du geste. Sur une vidéo dont l'objet
+# EST le geste, c'est la seule chose qui compte.
+DEPART = np.array([-0.90, 0.08, 0])
 COURBES = [
-    ((-0.70, 0.52), (-0.30, 0.86), (0.00, 1.05)),   # l'attaque, longue et plate
-    ((0.16, 1.60), (0.02, 2.60), (0.22, 3.02)),     # la montée, dans la boucle
-    ((0.46, 3.28), (0.72, 2.94), (0.66, 2.40)),     # le sommet de la goutte
-    # ⭐ LA REDESCENTE EST UNE DROITE (Frédéric : « après la boucle descends
-    # tout droit ») : ses contrôles sont posés SUR le segment.
-    ((0.44, 1.95), (0.22, 1.50), (0.00, 1.05)),     # …et le CROISEMENT
-    ((-0.06, 0.74), (-0.07, 0.48), (-0.06, 0.30)),  # le fût, droit
-    # ⭐ LE BAS EST UNE PARABOLE CONVEXE, pas un crochet : elle descend jusqu'à
-    # la ligne, s'y aplatit, et remonte symétriquement.
-    # ⚠️ Le point bas se pose SUR la ligne (y = 0) : un « l » qui descend plus
-    # bas devient un « j ».
-    ((-0.08, 0.12), (0.02, 0.00), (0.18, 0.00)),
-    ((0.36, 0.00), (0.52, 0.11), (0.66, 0.27)),
-    ((0.76, 0.35), (0.84, 0.40), (0.92, 0.43)),     # la sortie, qui s'effile
+    ((-0.60, 0.10), (-0.20, 0.55), (0.10, 1.30)),   # 1. le creux qui monte
+    ((0.24, 1.90), (0.34, 2.50), (0.34, 2.95)),     # 2. …et file vers le sommet
+    ((0.34, 3.30), (-0.10, 3.32), (-0.18, 2.80)),   # 3. la voûte, qui bascule à GAUCHE
+    ((-0.10, 2.06), (0.00, 1.32), (0.06, 0.60)),    # 4. la descente, DROITE — croise bas
+    ((0.08, 0.22), (0.20, 0.00), (0.38, 0.02)),     # 5. le creux final, sur la ligne
+    ((0.54, 0.06), (0.68, 0.18), (0.82, 0.34)),     # la sortie, qui s'effile
 ]
 
 # ⭐ Cinq noms concrets, tous avec la LETTRE « o » ET le SON [o] en initiale.
