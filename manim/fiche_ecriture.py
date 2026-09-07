@@ -30,8 +30,8 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from miniature import TRACES, _bezier  # noqa: E402
-from traces_chiffres import spec_chiffre  # noqa: E402
+from miniature import _bezier  # noqa: E402
+from traces_scenes import spec_chiffre, spec_lettre  # noqa: E402
 
 RACINE = Path(__file__).resolve().parents[1]
 FONTS = Path("C:/Windows/Fonts")
@@ -199,7 +199,12 @@ def construire(lettre):
     celle du « a » parce que c'est le même travail de main.
     """
     chiffre = lettre.isdigit()
-    spec = spec_chiffre(int(lettre)) if chiffre else TRACES[lettre]
+    # ⛔ AVANT LE 07/09, LES LETTRES LISAIENT `TRACES` DE `miniature.py` —
+    # une table remplie à la main, arrêtée aux six voyelles. Seize lettres
+    # avaient une vidéo, six avaient une fiche, et les dix autres affichaient
+    # « Télécharge ta fiche ! » sans fiche derrière. Elles passent désormais par
+    # le même lecteur que les chiffres : la scène EST la source.
+    spec = spec_chiffre(int(lettre)) if chiffre else spec_lettre(lettre)
     # ⭐ Une lettre à jambage prend un interligne PLUS COURT, au lieu d'écarter
     # les bandes : écarter aurait poussé la dernière sous le pied de page.
     global IL
@@ -273,17 +278,22 @@ def construire(lettre):
     # même qu'on clique, et le hub doit tenir à mille fiches (Frédéric, 03/09).
     # ⚠️ On copie celle du DROITIER : la page de la lettre porte les deux mains,
     # le hub n'a la place que d'une.
-    if chiffre:
-        src = RACINE / "manim" / "sorties" / "cp" / "maths" / "shorts" / "fr" / (
-            f"vignette-short-chiffre-{lettre}-droitier.png"
-        )
-        cible = dossier / f"vignette-chiffre-{lettre}.png"
+    # ⛔⛔ CES DEUX CHEMINS ONT ÉTÉ PÉRIMÉS PAR LA RÉORGANISATION DU 07/09, et
+    # personne ne l'a su : les vidéos sont passées en SOUS-RÉPERTOIRE PAR GLYPHE
+    # (`shorts/fr/lettre-s/`, `shorts/fr/chiffre-0/`) parce qu'à 27 lettres × 4
+    # un seul dossier devenait illisible. Les lettres pointaient en plus vers
+    # `manim/miniatures/`, une arborescence morte.
+    # ⚠️ Et le `if src.exists()` en dessous avalait l'échec SANS UN MOT — d'où
+    # seize PDF pour six vignettes. Il lève maintenant.
+    matiere, prefixe = ("maths", "chiffre") if chiffre else ("francais", "lettre")
+    src = (RACINE / "manim" / "sorties" / "cp" / matiere / "shorts" / "fr"
+           / f"{prefixe}-{lettre}" / f"vignette-short-{prefixe}-{lettre}-droitier.png")
+    cible = dossier / f"vignette-{prefixe}-{lettre}.png"
+    if not src.exists():
+        # ⚠️ Pas une exception : une lettre peut avoir sa fiche AVANT sa vidéo,
+        # et la fiche doit sortir quand même. Mais ça se DIT.
+        print(f"  ⚠️ vignette absente pour « {lettre} » : {src}")
     else:
-        src = RACINE / "manim" / "miniatures" / "cp" / "francais" / (
-            f"eleveai-francais-cp-lettre-{lettre}-droitier.png"
-        )
-        cible = dossier / f"vignette-lettre-{lettre}.png"
-    if src.exists():
         Image.open(src).save(cible, "PNG")
     print(chemin)
     return chemin
@@ -299,11 +309,19 @@ if __name__ == "__main__":
     # (le hub, le sitemap, l'index des familles, celle-ci).
     # ⚠️ On cherche donc les scènes `chiffre_N.py` réellement présentes : une
     # scène qui existe a forcément son tracé, et `spec_chiffre` peut l'importer.
+    #
+    # ⛔ ET LES LETTRES VENAIENT ENCORE DE `list(TRACES)`, LA TABLE ÉCRITE À LA
+    # MAIN : la même liste en dur, une case plus loin. Elle a laissé DIX lettres
+    # sans fiche pendant que leurs vidéos disaient « Télécharge ta fiche ! ».
+    # Elles se déduisent du disque comme les chiffres — même règle, même geste.
+    SCENES = RACINE / "manim" / "scripts" / "cp"
     chiffres = sorted(
-        f.stem.removeprefix("chiffre_")
-        for f in (RACINE / "manim" / "scripts" / "cp").glob("chiffre_[0-9].py")
+        f.stem.removeprefix("chiffre_") for f in SCENES.glob("chiffre_[0-9].py")
     )
-    for glyphe in list(TRACES) + chiffres:
+    lettres = sorted(
+        f.stem.removeprefix("lettre_") for f in SCENES.glob("lettre_[a-z].py")
+    )
+    for glyphe in lettres + chiffres:
         if filtre and filtre != glyphe:
             continue
         construire(glyphe)

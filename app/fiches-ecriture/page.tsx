@@ -10,6 +10,7 @@
 // faut ici — une vidéo, un titre, une action.
 
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Download, PlayCircle, Sparkles } from "lucide-react";
 
@@ -179,6 +180,34 @@ export default function HubFichesEcriture() {
           <h1 className="mt-4 max-w-3xl text-4xl font-black tracking-tight drop-shadow-[0_2px_6px_rgba(2,60,90,0.35)] sm:text-6xl">
             Les fiches d&apos;écriture
           </h1>
+          {/* ⭐ LA SIGNATURE DE LA SÉRIE VIDÉO, POSÉE SUR LE HUB. « La belle
+              écriture » est le nom sous lequel les Shorts sortent sur YouTube :
+              l'enfant qui arrive du film doit retrouver ici le même titre et le
+              même margouillat, sinon il ne sait pas qu'il est au bon endroit.
+              ⚠️ En MARELLE, pas en Segoe Script : la page de garde des vidéos
+              emploie encore Segoe, et globals.css explique pourquoi c'est un
+              modèle faux — c'est une écriture d'ADULTE, dont les boucles ne
+              sont pas celles qu'on apprend à tracer. Sur une page dont l'objet
+              EST l'écriture, on montre la cursive de l'école.
+              ⛔ Et le margouillat tient DÉJÀ son crayon : j'en avais rendu un
+              second en Manim, qui flottait à côté de lui. Regarder l'image
+              avant de lui ajouter quelque chose. */}
+          <p className="mt-3 flex items-center gap-3">
+            <Image
+              src="/cahier-vacances/ti-margo.png"
+              alt=""
+              aria-hidden
+              width={56}
+              height={56}
+              className="h-12 w-12 shrink-0 drop-shadow-[0_2px_4px_rgba(2,60,90,0.35)] sm:h-14 sm:w-14"
+            />
+            <span
+              className="text-2xl text-amber-100 drop-shadow-[0_2px_5px_rgba(2,60,90,0.45)] sm:text-3xl"
+              style={{ fontFamily: '"Marelle", "Segoe Script", "Bradley Hand", cursive' }}
+            >
+              La belle écriture
+            </span>
+          </p>
           <p className="mt-4 max-w-2xl text-base font-semibold leading-7 text-white/90 sm:text-lg">
             Une feuille par lettre : le modèle, les pointillés à repasser, et la
             ligne où l&apos;on écrit tout seul.{" "}

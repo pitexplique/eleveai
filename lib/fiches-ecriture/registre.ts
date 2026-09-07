@@ -132,7 +132,20 @@ export const FAMILLES: FamilleEcriture[] = [
 // autre format : en français, `u` initial ne donne que des mots qu'un enfant de
 // six ans n'a jamais entendus (urne, ustensile). Sa vidéo dit donc « u comme
 // DANS lune » — et c'est la formule qu'il faudra pour le « e » et les consonnes.
-const LETTRES_FAITES = ["a", "e", "i", "o", "u", "y"];
+// ⛔⛔ CETTE LISTE EST RESTÉE À SIX PENDANT QUE SEIZE LETTRES AVAIENT LEUR
+// VIDÉO. Elle n'était pourtant pas fautive : la règle du registre est de ne
+// lister QUE ce qui existe sur le disque, et les dix PDF manquaient vraiment.
+// Le blocage était trois maillons plus loin — `fiche_ecriture.py` lisait les
+// tracés dans une table recopiée à la main (`TRACES` de `miniature.py`),
+// arrêtée aux six voyelles. Pendant ce temps les dix vidéos affichaient
+// « Télécharge ta fiche ! » sans rien derrière.
+// ⚠️ Le sitemap, lui, était innocent : il dérive déjà ses routes d'ici.
+// 👉 LEÇON : quand une page manque, remonter la chaîne ENTIÈRE jusqu'au
+// producteur du fichier. Le maillon visible est rarement le coupable.
+const LETTRES_FAITES = [
+  "a", "c", "d", "e", "h", "i", "l", "m",
+  "n", "o", "p", "r", "s", "t", "u", "y",
+];
 
 // ⚠️ LES IDENTIFIANTS YOUTUBE SE COLLENT ICI, et nulle part ailleurs.
 // Une lettre sans identifiant affiche quand même sa fiche et sa vignette : la
