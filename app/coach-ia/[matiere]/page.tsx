@@ -831,6 +831,19 @@ export default function CoachIA() {
                               <button
                                 type="button"
                                 onClick={() => handleClick(notionId, microId)}
+                                /* ⛔ SANS CE LIBELLÉ, LA FORMULE EST MUETTE (07/09/2026).
+                                   `TexteMath` rend le KaTeX en `output: "html"` —
+                                   donc SANS MathML. Le bouton s'annonçait « Utiliser
+                                   un exposant négatif () » dans l'arbre
+                                   d'accessibilité : les parenthèses vides, et rien
+                                   dedans. Le texte le dit en toutes lettres
+                                   (« a⁻ⁿ = 1/aⁿ »), et c'est déjà ce que lit la
+                                   loupe YouTube juste à côté.
+                                   ⚠️ On ne change PAS le mode de `TexteMath` : il
+                                   sert 26 points d'affichage de fiches, et du MathML
+                                   doublerait leur `innerText` — ce que comptent
+                                   `mesurer-fiches.mjs` et `mesurer-mode-classe.mjs`. */
+                                aria-label={microLabels[microId] || microId}
                                 className={[
                                   "group flex flex-1 items-start gap-2 rounded-lg px-2 py-1.5 text-left text-sm leading-5 transition",
                                   getMicroButtonStyle(microId),

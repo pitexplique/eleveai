@@ -147,6 +147,15 @@ for (const l of corpus) {
     }
   }
 
+  // 2 bis. ⛔ UNE FORMULE DANS UN TITRE DE NOTION SERAIT MUETTE. Le libellé de
+  // micro est rendu dans un `<button>` qui porte un `aria-label` de repli en
+  // texte ; le titre de notion est un `<h3>` qui n'en a pas, et KaTeX en
+  // `output: "html"` ne produit aucun MathML. Aucune notion n'en porte
+  // aujourd'hui — ce contrôle est là pour que ça reste vrai.
+  if (l.genre === "notion" && dollars >= 2) {
+    anomalies.push({ l, genre: "formule dans un titre de notion", detail: "le <h3> n'a pas de repli lisible — écrire le titre en texte" });
+  }
+
   // 3. Traduction en texte
   // ⛔ SEULEMENT SUR LES LIBELLÉS QUI PORTENT UNE FORMULE. Une accolade hors
   // `$…$` est une notation d'ensemble parfaitement légitime — « Interpréter les
