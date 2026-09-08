@@ -1327,4 +1327,284 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // ============================================================
+  // Des generateurs, la ou tout etait fige
+  // ============================================================
+
+  {
+    kind: "template",
+    id: "seconde_ir_gen_somme_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "identites_remarquables_2de",
+    microId: "ir_carre_somme",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$a$ est ce qui précède le $+$, et $a^2$ n'oublie pas le coefficient.",
+    tags: ["seconde", "maths", "identites", "developper", "template", "qcm"],
+    generate: () => {
+      const a = randomInt(2, 6);
+      const b = randomInt(2, 9);
+      const correct = `$${a * a}x^2 + ${2 * a * b}x + ${b * b}$`;
+      return {
+        text: `Développer $(${a}x + ${b})^2$.`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$${a * a}x^2 + ${b * b}$`,
+          `$${a}x^2 + ${2 * a * b}x + ${b * b}$`,
+          `$${a * a}x^2 + ${a * b}x + ${b * b}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "$(a+b)^2 = a^2 + 2ab + b^2$ : trois termes, jamais deux.",
+          `Ici $a = ${a}x$ et $b = ${b}$.`,
+          `$a^2 = ${a * a}x^2$, $2ab = 2 \\times ${a} \\times ${b} = ${2 * a * b}$ fois $x$, et $b^2 = ${b * b}$.`,
+          `⚠️ $a^2$ vaut $${a * a}x^2$ et non $${a}x^2$ : le coefficient se met AUSSI au carré.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ir_gen_diff_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "identites_remarquables_2de",
+    microId: "ir_carre_difference",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Seul le terme du MILIEU porte le signe moins.",
+    tags: ["seconde", "maths", "identites", "developper", "template", "qcm"],
+    generate: () => {
+      const a = randomInt(2, 6);
+      const b = randomInt(2, 9);
+      const correct = `$${a * a}x^2 - ${2 * a * b}x + ${b * b}$`;
+      return {
+        text: `Développer $(${a}x - ${b})^2$.`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$${a * a}x^2 - ${2 * a * b}x - ${b * b}$`,
+          `$${a * a}x^2 - ${b * b}$`,
+          `$${a * a}x^2 + ${2 * a * b}x + ${b * b}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "$(a-b)^2 = a^2 - 2ab + b^2$ : seul le double produit change de signe.",
+          `Avec $a = ${a}x$ et $b = ${b}$, on calcule les trois termes.`,
+          `$${a * a}x^2$, puis $-${2 * a * b}x$, puis $+${b * b}$.`,
+          `⚠️ Le dernier terme reste POSITIF : $(-${b})^2 = ${b * b}$, un carré n'est jamais négatif.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ir_gen_conj_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "identites_remarquables_2de",
+    microId: "ir_difference_carres",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le double produit s'annule : il ne reste que deux termes.",
+    tags: ["seconde", "maths", "identites", "developper", "template", "qcm"],
+    generate: () => {
+      const a = randomInt(2, 7);
+      const b = randomInt(2, 9);
+      const correct = `$${a * a}x^2 - ${b * b}$`;
+      return {
+        text: `Développer $(${a}x - ${b})(${a}x + ${b})$.`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$${a * a}x^2 + ${b * b}$`,
+          `$${a * a}x^2 - ${2 * a * b}x - ${b * b}$`,
+          `$${a}x^2 - ${b * b}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "$(a-b)(a+b) = a^2 - b^2$ : c'est la seule identité à deux termes.",
+          `Avec $a = ${a}x$ et $b = ${b}$, les doubles produits s'annulent entre eux.`,
+          `Il reste $${a * a}x^2 - ${b * b}$.`,
+          "Pas de terme en $x$ : si vous en trouvez un, c'est qu'une des deux parenthèses portait le même signe."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ir_gen_facto_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "identites_remarquables_2de",
+    microId: "ir_difference_carres",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Deux carrés séparés par un moins.",
+    tags: ["seconde", "maths", "identites", "factoriser", "template", "qcm"],
+    generate: () => {
+      const a = randomInt(2, 6);
+      const b = randomInt(2, 9);
+      const correct = `$(${a}x - ${b})(${a}x + ${b})$`;
+      return {
+        text: `Factoriser $${a * a}x^2 - ${b * b}$.`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$(${a}x - ${b})^2$`,
+          `$(${a * a}x - ${b * b})(${a * a}x + ${b * b})$`,
+          "on ne peut pas factoriser",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une différence de deux carrés se factorise en somme fois différence.",
+          `On cherche de quoi $${a * a}x^2$ et $${b * b}$ sont les carrés.`,
+          `$${a * a}x^2 = (${a}x)^2$ et $${b * b} = ${b}^2$.`,
+          `Donc $${a * a}x^2 - ${b * b} = (${a}x - ${b})(${a}x + ${b})$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ir_gen_facto_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "identites_remarquables_2de",
+    microId: "ir_application",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Vérifie que le terme du milieu vaut bien $2ab$.",
+    tags: ["seconde", "maths", "identites", "factoriser", "template", "qcm"],
+    generate: () => {
+      const b = randomInt(2, 9);
+      const moins = Math.random() < 0.5;
+      const correct = moins ? `$(x - ${b})^2$` : `$(x + ${b})^2$`;
+      return {
+        text: `Factoriser $x^2 ${moins ? "-" : "+"} ${2 * b}x + ${b * b}$.`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          moins ? `$(x + ${b})^2$` : `$(x - ${b})^2$`,
+          `$(x - ${b})(x + ${b})$`,
+          "on ne peut pas factoriser",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Trois termes dont deux carrés : on tente le carré d'une somme ou d'une différence.",
+          `On repère $x^2$ et $${b * b} = ${b}^2$, puis on VÉRIFIE le double produit.`,
+          `$2 \\times x \\times ${b} = ${2 * b}x$ : cela correspond, au signe près.`,
+          `Le signe du milieu est ${moins ? "négatif" : "positif"}, donc la factorisation est ${correct}.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ir_gen_mental_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "identites_remarquables_2de",
+    microId: "ir_calcul_mental",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Écris le nombre comme $100$ plus ou moins quelque chose.",
+    tags: ["seconde", "maths", "identites", "calcul-mental", "template", "short"],
+    generate: () => {
+      const k = randomInt(1, 9);
+      const plus = Math.random() < 0.5;
+      const n = plus ? 100 + k : 100 - k;
+      const val = n * n;
+      return {
+        text: `Calculer $${n}^2$ de tête, à l'aide d'une identité remarquable.`,
+        format: "short",
+        expected: [String(val)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un nombre proche d'une dizaine ronde se met sous la forme $(100 \\pm k)$.",
+          `On écrit $${n} = 100 ${plus ? "+" : "-"} ${k}$, puis on applique l'identité.`,
+          `$10\\,000 ${plus ? "+" : "-"} ${2 * 100 * k} + ${k * k} = ${val}$.`,
+          `$${n}^2 = ${val}$ — le double produit $${2 * 100 * k}$ est ce qui fait tout le travail.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ir_gen_racine_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "identites_remarquables_2de",
+    microId: "ir_carre_somme",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "$(\\sqrt{q})^2 = q$, mais le double produit garde sa racine.",
+    tags: ["seconde", "maths", "identites", "racine", "template", "qcm"],
+    generate: () => {
+      const p = randomInt(2, 6);
+      const q = [2, 3, 5, 7][randomInt(0, 3)];
+      const correct = `$${p * p + q} + ${2 * p}\\sqrt{${q}}$`;
+      return {
+        text: `Développer $(${p} + \\sqrt{${q}})^2$.`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$${p * p} + ${q}$`,
+          `$${p * p + q}$`,
+          `$${p * p} + ${2 * p}\\sqrt{${q}} + \\sqrt{${q}}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'identité s'applique aux racines comme à tout le reste.",
+          `Avec $a = ${p}$ et $b = \\sqrt{${q}}$, on calcule les trois termes.`,
+          `$a^2 = ${p * p}$, $2ab = ${2 * p}\\sqrt{${q}}$, et $b^2 = (\\sqrt{${q}})^2 = ${q}$.`,
+          `On regroupe les entiers : $${p * p + q} + ${2 * p}\\sqrt{${q}}$. ⭐ La racine RESTE, portée par le double produit.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ir_gen_racine_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "identites_remarquables_2de",
+    microId: "ir_difference_carres",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Pas de double produit ici : la racine n'a rien pour survivre.",
+    tags: ["seconde", "maths", "identites", "racine", "conjugue", "template", "qcm"],
+    generate: () => {
+      const p = randomInt(2, 7);
+      const q = [2, 3, 5, 7][randomInt(0, 3)];
+      const correct = `$${p * p - q}$`;
+      return {
+        text: `Calculer $(${p} + \\sqrt{${q}})(${p} - \\sqrt{${q}})$.`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$${p * p + q}$`,
+          `$${p * p} - \\sqrt{${q}}$`,
+          `$${p * p - q} + ${2 * p}\\sqrt{${q}}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un produit conjugué vaut $a^2 - b^2$, sans terme du milieu.",
+          `Avec $a = ${p}$ et $b = \\sqrt{${q}}$, les doubles produits s'annulent.`,
+          `$${p}^2 - (\\sqrt{${q}})^2 = ${p * p} - ${q} = ${p * p - q}$.`,
+          `⭐ La racine DISPARAÎT : c'est tout l'intérêt du conjugué, et ce qui permet de nettoyer un dénominateur.`
+        ),
+      };
+    },
+  },
 ];

@@ -530,6 +530,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
       "L'exposant compte les facteurs, il ne multiplie pas ; un exposant négatif donne un inverse et non un opposé ; et la notation scientifique donne à chaque nombre une forme unique, qui rend la comparaison immédiate.",
   },
   // ⭐ LA PREMIERE FICHE DE SECONDE (08/09/2026).
+  "maths/seconde/identites-remarquables-2de": {
+    titre: "Les identités remarquables",
+    resume: "Developper et factoriser avec les trois identites, le double produit qu on oublie, et le conjugue qui fait disparaitre une racine.",
+  },
   "maths/seconde/racine-carree-2de": {
     titre: "La racine carrée",
     resume: "Carres parfaits, simplifier, le produit qui passe et la somme qui ne passe pas, additionner des radicaux identiques.",
