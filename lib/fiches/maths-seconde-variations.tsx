@@ -109,7 +109,12 @@ export const ficheVariationsSeconde: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
   classe: "seconde",
-  notion: "fonction-variations-extremums-2de",
+  // ⛔ PAS DE SUFFIXE INVENTE. Ce champ doit etre le notionId EXACT, tirets a la
+  // place des underscores : `fonction_variations_extremums` donne
+  // « fonction-variations-extremums ». J'y avais ajoute « -2de » par analogie
+  // avec les deux autres fiches, dont les notions se terminent VRAIMENT par
+  // « _2de » — et la fiche ne s'allumait plus depuis le coach.
+  notion: "fonction-variations-extremums",
   titre: "Variations et extremums",
   accroche:
     "Un tableau de variations tient en deux flèches et trois nombres, et pourtant il dit tout : où la fonction monte, où elle descend, et quelle est la plus grande valeur qu'elle atteint. C'est le résumé d'une courbe, écrit en une ligne.",
