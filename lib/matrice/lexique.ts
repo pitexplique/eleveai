@@ -210,6 +210,21 @@ export const NOTIONS: NotionLexique[] = [
     alias: ["nombre premier", "nombres premiers", "facteurs premiers", "decomposition en facteurs premiers", "decomposer en facteurs", "crible", "eratosthene"],
   },
   {
+    // ⚠️ FILET DE SECURITE. « tableau de variations » accroche deja par le
+    // libelle du programme (« Variations et extremums » contient
+    // « variations »), et le lexique n'est donc pas consulte. Mais cela tient a
+    // ce libelle : s'il bouge, le mot ne renvoie plus rien — le trou exact
+    // repare le 07/09 pour « valeur absolue ». Cette entree survit a un
+    // changement de libelle.
+    // ⛔ « tableau » seul n'y figure pas : « tableau de bord » est un suivi de
+    // progres, et « tableau de proportionnalite » une tout autre notion.
+    id: "tableau_variations", label: "le tableau de variations", matiere: "maths",
+    alias: [
+      "tableau de variations", "tableau de variation", "tableaux de variations",
+      "sens de variation", "sens de variations",
+    ],
+  },
+  {
     // ⛔ « signe » SEUL n'est pas un alias : le mot vit dans « signe egal »,
     // « les signes de ponctuation », « signe du zodiaque ». Il faut l'expression.
     id: "tableau_signes", label: "le tableau de signes", matiere: "maths",

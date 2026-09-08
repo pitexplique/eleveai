@@ -198,6 +198,16 @@ export const NOTION_COACH_MATHS: TableNotions = {
   // seconde. La STMG porte bien `auto_signes`, mais aucune cle « stmg » n'existe
   // dans CLASSE_COACH — la matrice ne la sert pas.
   tableau_signes: { seconde: "signes_expression_2de" },
+  // Les variations existent bien au-dela de la seconde : on remplit ce qu'on a.
+  // ⛔ Identifiants RELUS DANS LES FICHIERS DE NOTIONS, pas devines : ma
+  // premiere version citait « variations_courbes » et « fct_representation »,
+  // qui n'existent nulle part. Une case inventee n'echoue pas — elle rend
+  // simplement `undefined`, et le mot n'ouvre rien.
+  tableau_variations: {
+    "3e": "fonction_generalite",
+    seconde: "fonction_variations_extremums",
+    "premiere-spe": "variations_fonctions",
+  },
   valeur_absolue: {
     "5e": "relatif_nombre",
     seconde: "reels_intervalles",
