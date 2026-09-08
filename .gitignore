@@ -72,6 +72,13 @@ node_modules
 
 # manim : les rendus et caches restent en local (les videos vivent sur YouTube)
 manim/**/media/
+# ⚠️ 08/09/2026 — LE MÊME DOSSIER, MAIS À LA RACINE. Manim écrit dans `media/`
+# relatif au répertoire d'où on le lance : lancé depuis la racine du dépôt (et
+# pas depuis manim/), il dépose son cache ici, où le motif ci-dessus ne le voit
+# pas. 236 fichiers, 9,9 Mo, que le site ne sert jamais — un seul `git add .`
+# distrait et chaque build Vercel les clone pour toujours. La barre oblique
+# initiale ancre à la racine : un futur public/media/ resterait suivi.
+/media/
 __pycache__/
 
 # Aperçus de canvas rendus hors du site (scripts/apercu-canvas.mjs)
@@ -80,3 +87,20 @@ apercu-canvas.html
 
 # les MP4 rangés pour téléversement : lourds, et ils vivent sur YouTube
 manim/sorties/**/*.mp4
+
+# ⛔ 08/09/2026 — RIEN DE MANIM NE PART CHEZ VERCEL. Vercel clone le dépôt à
+# CHAQUE build (79 sur le seul cycle de septembre) : tout fichier suivi est
+# rapatrié 79 fois pour un site qui ne le sert jamais. Vérifié avant retrait :
+# aucun import ni aucun chemin vers `manim/` ou `/sons/` dans app/, lib/ ou
+# components/ — seulement deux commentaires ; et rien ne balaie `public/` au
+# build (aucun readdir). Ce sont des rendus pour YouTube, pas des assets.
+# ⚠️ On ne sort que les SORTIES. Les 161 SOURCES (120 .py, 38 .json, 3 .md,
+# 2,1 Mo en tout) restent suivies : les deux postes ne communiquent que par ce
+# dépôt, et un script ignoré serait invisible à celui qui ne l'a pas écrit.
+# ⚠️ `git rm --cached` les retire du prochain commit, pas de l'HISTORIQUE : les
+# 39,7 Mo déjà poussés y restent. Seule une réécriture les effacerait — elle
+# obligerait l'autre poste à recloner, donc elle ne se fait pas à la légère.
+manim/miniatures/
+manim/chaine/
+manim/sorties/
+/public/sons/
