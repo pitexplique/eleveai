@@ -34,7 +34,25 @@ export default function ArbreProbabilitesCanvas({ figure }: Props) {
   const roots = figure.racineEnfants ?? [];
   const totalLeaves = roots.reduce((sum, r) => sum + countLeaves(r), 0);
 
-  const width = figure.size?.width ?? 360;
+  // ⛔ LE CADRE S'ELARGIT POUR L'ETIQUETTE LA PLUS LONGUE, il ne la coupe plus.
+  //
+  // Mesure le 08/09/2026, en photographiant enfin ce canvas : la derniere
+  // colonne se pose a x = 320 et son etiquette s'ecrit a x + 8, sans borne. Dans
+  // un cadre de 360, « Test positif » sortait — QUATRE etiquettes perdues d'un
+  // coup, sans erreur ni avertissement. Les arbres existants n'en ressentent
+  // rien : leurs etiquettes tiennent deja, et le maximum les laisse a 360.
+  const LARGEUR_CAR = 7.8; // fontSize 14, poids 900
+  const plusLongue = (function mesure(noeuds: ArbreProbaNoeud[]): number {
+    let max = 0;
+    for (const n of noeuds) {
+      const feuille = !n.enfants || n.enfants.length === 0;
+      if (feuille) max = Math.max(max, (n.label ?? "").length);
+      else max = Math.max(max, mesure(n.enfants ?? []));
+    }
+    return max;
+  })(roots);
+  const largeurNecessaire = COL_X[COL_X.length - 1] + 8 + plusLongue * LARGEUR_CAR + 6;
+  const width = Math.max(figure.size?.width ?? 360, Math.ceil(largeurNecessaire));
   const height = figure.size?.height ?? PAD_TOP * 2 + Math.max(1, totalLeaves) * ROW_H;
 
   // Placement : les feuilles sont réparties verticalement, un nœud interne se
@@ -114,21 +132,32 @@ export default function ArbreProbabilitesCanvas({ figure }: Props) {
           );
         })}
 
-        {nodes.map((p, i) => (
-          <text
-            key={`node-${i}`}
-            x={p.x + 8}
-            y={p.y + 5}
-            fontSize="14"
-            fontWeight="900"
-            fill={COULEUR_LABEL}
-            stroke="white"
-            strokeWidth="2.5"
-            paintOrder="stroke"
-          >
-            {p.node.label}
-          </text>
-        ))}
+        {/* ⛔ UN NOEUD INTERIEUR PORTE SON ETIQUETTE AU-DESSUS, PAS A DROITE.
+            Frederic, 08/09/2026, en regardant le rendu : « Malade et Sain
+            doivent etre centres sur le noeud, et toi tu les fais demarrer au
+            noeud, donc ils cachent une partie des deux branches ». C'est exact :
+            de ces noeuds partent deux branches vers la droite, et le mot se
+            couchait dessus. Une FEUILLE, elle, n'a aucune branche sortante :
+            son etiquette reste a droite, ou elle se lit le mieux. */}
+        {nodes.map((p, i) => {
+          const feuille = p.children.length === 0;
+          return (
+            <text
+              key={`node-${i}`}
+              x={feuille ? p.x + 8 : p.x}
+              y={feuille ? p.y + 5 : p.y - 13}
+              textAnchor={feuille ? "start" : "middle"}
+              fontSize="14"
+              fontWeight="900"
+              fill={COULEUR_LABEL}
+              stroke="white"
+              strokeWidth="2.5"
+              paintOrder="stroke"
+            >
+              {p.node.label}
+            </text>
+          );
+        })}
       </svg>
     </div>
   );

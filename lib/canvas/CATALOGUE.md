@@ -66,6 +66,28 @@ se pose sur `figure.schema`, `propriete.schema`, `exemple.schema`, `formule.sche
 | `tableau_signes` | Le tableau de signes : 1 à 3 facteurs, produit **ou quotient**. Chaque ligne porte un signe par intervalle et une marque sur les bornes intérieures — `0` si le facteur s'annule, `\|\|` si la valeur est **interdite** | Les variations : c'est `tableau_variations` |
 | `tableau_variations` | Le tableau de variations : les flèches, avec sa ligne `f ′(x)` facultative | Le signe d'un produit ou d'un quotient |
 
+
+### `arbre_proba` — photographié le 08/09/2026, et deux défauts corrigés
+
+Il avait servi pendant des semaines sans qu'on le regarde. Deux mesures l'ont
+repris :
+
+⛔ **Il COUPAIT les étiquettes de feuilles longues.** La dernière colonne se pose
+à `x = 320` et son étiquette s'écrit à `x + 8`, sans borne, dans un cadre de 360.
+« Test positif » sortait — quatre étiquettes perdues d'un coup, sans erreur ni
+avertissement. Le cadre s'élargit désormais à la plus longue : mesuré, 360 reste
+360 pour `T+` / `P` / `D`, et passe à 428 pour « Test positif ». Les arbres
+existants ne bougent pas d'un pixel.
+
+⛔ **L'étiquette d'un nœud INTÉRIEUR se posait à sa droite, sur ses propres
+branches.** Frédéric, en regardant le rendu : « Malade et Sain doivent être
+centrés sur le nœud, et toi tu les fais démarrer au nœud, donc ils cachent une
+partie des deux branches. » Elles se posent maintenant AU-DESSUS. Une feuille,
+elle, n'a pas de branche sortante : son étiquette reste à droite.
+
+**Mesuré après correction** : rien hors cadre, aucun chevauchement de textes,
+police minimale 12 px.
+
 ### `tableau_signes` et `tableau_variations` — deux objets, deux `kind`
 
 Séparés à la demande de Frédéric le 07/09/2026 : le professeur les trace pour
