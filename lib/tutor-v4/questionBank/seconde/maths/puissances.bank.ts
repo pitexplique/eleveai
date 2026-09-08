@@ -1069,4 +1069,452 @@ export const puissancesBank: TutorBankItemV4[] = [
     ),
     tags: ["seconde", "maths", "puissances", "exposant_negatif", "raisonnement", "qcm"],
   },
+
+  /* ============== PUISS_EXPRESSION_COMPOSEE (08/09/2026) ==============
+   *
+   * Les quatre micros precedentes enseignent chaque regle SEPAREMENT. Aucun
+   * enonce ne les enchainait — et c'est pourtant la forme de l'exercice type :
+   * la question 2.2 du controle commun de mars 2025 demande d'ecrire
+   * B = (7^4 x 7^-5) / (7^3)^4 sous la forme 7^n. Trois regles d'affilee.
+   *
+   * On garde toujours la MEME BASE : l'exercice porte sur les exposants, pas
+   * sur le calcul de la valeur (7^-13 n'a aucun interet a etre calcule).
+   */
+
+  {
+    kind: "template",
+    id: "seconde_puiss_compose_tpl_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "puissances_2de",
+    microId: "puiss_expression_composee",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Le numérateur : on additionne. Le dénominateur : $(a^r)^s = a^{r \\times s}$. Puis on soustrait.",
+    tags: ["seconde", "maths", "puissances", "expression_composee", "template"],
+    generate: () => {
+      const base = [2, 3, 5, 7, 11][randomInt(0, 4)];
+      const p = randomInt(3, 8);
+      const q = -randomInt(2, 6);
+      const r = randomInt(2, 4);
+      const s = randomInt(2, 4);
+      const n = p + q - r * s;
+      return {
+        text:
+          `Écrire $B = \\dfrac{${base}^{${p}} \\times ${base}^{${q}}}{\\left(${base}^{${r}}\\right)^{${s}}}$ ` +
+          `sous la forme $${base}^{n}$. Donner l'entier $n$.`,
+        format: "short",
+        expected: [`${n}`],
+        comparator: "number_equal",
+        explanation: exp(
+          "Même base partout : on ne calcule rien, on ne travaille que sur les exposants.",
+          "Produit → on additionne. Puissance d'une puissance → on multiplie. Quotient → on soustrait.",
+          `Numérateur : $${base}^{${p}} \\times ${base}^{${q}} = ${base}^{${p} ${q < 0 ? "-" : "+"} ${Math.abs(q)}} = ${base}^{${p + q}}$.\n\n` +
+            `Dénominateur : $\\left(${base}^{${r}}\\right)^{${s}} = ${base}^{${r} \\times ${s}} = ${base}^{${r * s}}$.\n\n` +
+            `Quotient : $B = ${base}^{${p + q} - ${r * s}} = ${base}^{${n}}$.`,
+          `$n = ${n}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_puiss_compose_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "puissances_2de",
+    microId: "puiss_expression_composee",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On additionne les exposants du haut, on soustrait celui du bas.",
+    tags: ["seconde", "maths", "puissances", "expression_composee", "template"],
+    generate: () => {
+      const p = randomInt(4, 9);
+      const q = randomInt(2, 6);
+      const r = randomInt(2, 7);
+      const n = p + q - r;
+      const correct = `$a^{${n}}$`;
+      // Les pieges sont les trois erreurs reelles : tout additionner, multiplier
+      // les exposants du produit, oublier le signe du quotient.
+      const choices = makeChoices(correct, [
+        `$a^{${p + q + r}}$`,
+        `$a^{${p * q - r}}$`,
+        `$a^{${p - q - r}}$`,
+        `$a^{${p + q}}$`,
+      ]);
+      return {
+        text: `Simplifie $\\dfrac{a^{${p}} \\times a^{${q}}}{a^{${r}}}$ (avec $a \\neq 0$).`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une seule base : les exposants suffisent.",
+          "$a^m \\times a^n = a^{m+n}$, puis $\\dfrac{a^m}{a^n} = a^{m-n}$.",
+          `Haut : $a^{${p}} \\times a^{${q}} = a^{${p + q}}$. Puis $\\dfrac{a^{${p + q}}}{a^{${r}}} = a^{${p + q} - ${r}}$.`,
+          `$\\dfrac{a^{${p}} \\times a^{${q}}}{a^{${r}}} = a^{${n}}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_puiss_compose_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "puissances_2de",
+    microId: "puiss_expression_composee",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Commence par la parenthèse : l'exposant d'une puissance de puissance se multiplie.",
+    tags: ["seconde", "maths", "puissances", "expression_composee", "template"],
+    generate: () => {
+      const r = randomInt(2, 5);
+      const s = randomInt(2, 4);
+      const t = randomInt(2, 7);
+      const n = r * s + t;
+      const correct = `$a^{${n}}$`;
+      const choices = makeChoices(correct, [
+        `$a^{${r + s + t}}$`,
+        `$a^{${r * s * t}}$`,
+        `$a^{${r * s - t}}$`,
+        `$a^{${r + s}}$`,
+      ]);
+      return {
+        text: `Simplifie $\\left(a^{${r}}\\right)^{${s}} \\times a^{${t}}$ (avec $a \\neq 0$).`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Deux règles différentes se suivent : ne pas les mélanger.",
+          "Dans la parenthèse on MULTIPLIE les exposants, dans le produit on les ADDITIONNE.",
+          `$\\left(a^{${r}}\\right)^{${s}} = a^{${r * s}}$, puis $a^{${r * s}} \\times a^{${t}} = a^{${r * s} + ${t}}$.`,
+          `$\\left(a^{${r}}\\right)^{${s}} \\times a^{${t}} = a^{${n}}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_puiss_compose_tpl_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "puissances_2de",
+    microId: "puiss_expression_composee",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Un exposant négatif se manipule comme les autres : $-4 - (-6) = +2$.",
+    tags: ["seconde", "maths", "puissances", "expression_composee", "template"],
+    generate: () => {
+      const base = [2, 3, 5, 10][randomInt(0, 3)];
+      const p = -randomInt(2, 7);
+      const r = randomInt(2, 4);
+      const s = -randomInt(2, 3);
+      const n = p - r * s;
+      const correct = `$${base}^{${n}}$`;
+      const choices = makeChoices(correct, [
+        `$${base}^{${p + r * s}}$`,
+        `$${base}^{${-n}}$`,
+        `$${base}^{${p - r - s}}$`,
+        `$${base}^{${p * r * s}}$`,
+      ]);
+      return {
+        text: `Écrire $\\dfrac{${base}^{${p}}}{\\left(${base}^{${r}}\\right)^{${s}}}$ sous la forme $${base}^{n}$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Les règles ne changent pas quand les exposants sont négatifs.",
+          "On réduit d'abord le dénominateur, puis on soustrait.",
+          `Dénominateur : $\\left(${base}^{${r}}\\right)^{${s}} = ${base}^{${r} \\times (${s})} = ${base}^{${r * s}}$.\n\n` +
+            `Quotient : $${base}^{${p} - (${r * s})} = ${base}^{${n}}$.`,
+          `$\\dfrac{${base}^{${p}}}{\\left(${base}^{${r}}\\right)^{${s}}} = ${base}^{${n}}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_puiss_compose_fixed_5",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "puissances_2de",
+    microId: "puiss_expression_composee",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Dans $\\dfrac{7^4 \\times 7^{-5}}{\\left(7^3\\right)^4}$, par quoi commence-t-on ?",
+    format: "qcm",
+    choices: [
+      "par réduire le numérateur et le dénominateur séparément",
+      "par calculer $7^4$, $7^{-5}$ et $7^3$",
+      "par simplifier le $7$ du haut avec celui du bas",
+      "par additionner tous les exposants",
+    ],
+    expected: ["par réduire le numérateur et le dénominateur séparément"],
+    comparator: "mcq_exact",
+    hint: "On ne calcule jamais la valeur : la base est la même partout.",
+    explanation: exp(
+      "Une expression composée se réduit par étages.",
+      "On écrit le haut sous la forme $7^{\\ldots}$, puis le bas, et seulement à la fin on soustrait.",
+      "Calculer $7^4 = 2401$ ne sert à rien : la réponse attendue est une puissance de $7$, pas un nombre.",
+      "On réduit le numérateur et le dénominateur séparément."
+    ),
+    tags: ["seconde", "maths", "puissances", "expression_composee", "raisonnement", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_puiss_compose_fixed_6",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "puissances_2de",
+    microId: "puiss_expression_composee",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Un élève écrit $\\dfrac{a^5 \\times a^3}{a^2} = a^{15/2}$. Quelle est son erreur ?",
+    format: "qcm",
+    choices: [
+      "il a multiplié les exposants au lieu de les additionner",
+      "il a oublié la condition $a \\neq 0$",
+      "il a soustrait au lieu d'additionner",
+      "il n'y a pas d'erreur",
+    ],
+    expected: ["il a multiplié les exposants au lieu de les additionner"],
+    comparator: "mcq_exact",
+    hint: "Il a fait $5 \\times 3$, puis divisé par $2$.",
+    explanation: exp(
+      "C'est l'erreur la plus fréquente : appliquer la règle de la parenthèse au produit.",
+      "Dans $a^m \\times a^n$ on ADDITIONNE, et dans le quotient on SOUSTRAIT — on ne divise jamais les exposants.",
+      "Le calcul juste : $\\dfrac{a^5 \\times a^3}{a^2} = \\dfrac{a^8}{a^2} = a^6$.",
+      "Il a multiplié les exposants au lieu de les additionner."
+    ),
+    tags: ["seconde", "maths", "puissances", "expression_composee", "piege", "qcm"],
+  },
+
+  /* ============= PUISS_NOTATION_SCIENTIFIQUE (08/09/2026) =============
+   *
+   * Le mot « scientifique » n'apparaissait nulle part dans toute la seconde.
+   * Le programme la reactive pourtant pour comparer des ordres de grandeur.
+   * La difficulte reelle n'est pas la puissance de 10 : c'est la condition
+   * 1 <= a < 10, que l'eleve oublie et qui rend « 45,3 x 10^3 » faux.
+   */
+
+  {
+    kind: "template",
+    id: "seconde_puiss_scientif_tpl_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "puissances_2de",
+    microId: "puiss_notation_scientifique",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un seul chiffre avant la virgule, et ce chiffre n'est pas $0$.",
+    tags: ["seconde", "maths", "puissances", "notation_scientifique", "template"],
+    generate: () => {
+      const d1 = randomInt(1, 9);
+      const d2 = randomInt(0, 9);
+      const d3 = randomInt(1, 9);
+      const n = randomInt(3, 7);
+      const nombre = `${d1}${d2}${d3}${"0".repeat(n - 2)}`;
+      const mantisse = `${d1},${d2}${d3}`;
+      const correct = `$${mantisse} \\times 10^{${n}}$`;
+      const choices = makeChoices(correct, [
+        `$${d1}${d2},${d3} \\times 10^{${n - 1}}$`,
+        `$${mantisse} \\times 10^{${n + 1}}$`,
+        `$${mantisse} \\times 10^{-${n}}$`,
+        `$0,${d1}${d2}${d3} \\times 10^{${n + 1}}$`,
+      ]);
+      return {
+        text: `Écrire $${nombre}$ en notation scientifique.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La notation scientifique s'écrit $a \\times 10^n$ avec $1 \\leqslant a < 10$.",
+          "On place la virgule après le premier chiffre, puis on compte de combien de rangs elle s'est déplacée.",
+          `De $${nombre}$ à $${mantisse}$, la virgule recule de $${n}$ rangs : l'exposant est $${n}$.`,
+          `$${nombre} = ${mantisse} \\times 10^{${n}}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_puiss_scientif_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "puissances_2de",
+    microId: "puiss_notation_scientifique",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Un nombre plus petit que $1$ a un exposant négatif.",
+    tags: ["seconde", "maths", "puissances", "notation_scientifique", "template"],
+    generate: () => {
+      const d1 = randomInt(1, 9);
+      const d2 = randomInt(0, 9);
+      const d3 = randomInt(1, 9);
+      const n = randomInt(2, 6);
+      const nombre = `0,${"0".repeat(n - 1)}${d1}${d2}${d3}`;
+      const mantisse = `${d1},${d2}${d3}`;
+      const correct = `$${mantisse} \\times 10^{-${n}}$`;
+      const choices = makeChoices(correct, [
+        `$${mantisse} \\times 10^{${n}}$`,
+        `$${mantisse} \\times 10^{-${n + 1}}$`,
+        `$0,${d1}${d2}${d3} \\times 10^{-${n - 1}}$`,
+        `$${mantisse} \\times 10^{-${n - 1}}$`,
+      ]);
+      return {
+        text: `Écrire $${nombre}$ en notation scientifique.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un nombre inférieur à $1$ s'écrit avec une puissance de $10$ négative.",
+          "On avance la virgule jusqu'après le premier chiffre non nul et on compte les rangs.",
+          `De $${nombre}$ à $${mantisse}$, la virgule avance de $${n}$ rangs : l'exposant est $-${n}$.`,
+          `$${nombre} = ${mantisse} \\times 10^{-${n}}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_puiss_scientif_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "puissances_2de",
+    microId: "puiss_notation_scientifique",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Un seul chiffre avant la virgule, entre $1$ et $9$.",
+    tags: ["seconde", "maths", "puissances", "notation_scientifique", "raisonnement", "template"],
+    generate: () => {
+      const d1 = randomInt(1, 9);
+      const d2 = randomInt(1, 9);
+      const n = randomInt(3, 8);
+      const correct = `$${d1},${d2} \\times 10^{${n}}$`;
+      // Les trois pieges sont les trois facons de rater la condition 1 <= a < 10 :
+      // deux chiffres devant, un zero devant, une somme au lieu d'un produit.
+      const choices = makeChoices(correct, [
+        `$${d1}${d2} \\times 10^{${n - 1}}$`,
+        `$0,${d1}${d2} \\times 10^{${n + 1}}$`,
+        `$${d1},${d2} + 10^{${n}}$`,
+      ]);
+      return {
+        text: "Parmi ces écritures, laquelle est en notation scientifique ?",
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La notation scientifique impose $a \\times 10^n$ avec $1 \\leqslant a < 10$.",
+          "On vérifie qu'il y a exactement un chiffre avant la virgule, et qu'il n'est pas $0$.",
+          `$${d1}${d2}$ est trop grand, $0,${d1}${d2}$ est trop petit : seul $${d1},${d2}$ convient. Et il faut un produit, pas une somme.`,
+          `La bonne écriture est $${d1},${d2} \\times 10^{${n}}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_puiss_scientif_tpl_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "puissances_2de",
+    microId: "puiss_notation_scientifique",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Réduis chaque écriture à la forme $a \\times 10^n$, puis compare les exposants.",
+    tags: ["seconde", "maths", "puissances", "notation_scientifique", "template"],
+    generate: () => {
+      const n = randomInt(4, 9);
+      const d = randomInt(2, 9);
+      // Les deux nombres sont deliberement ecrits SOUS DES FORMES DIFFERENTES :
+      // c'est ce qui rend la comparaison interessante, et ce que font les
+      // sciences physiques quand elles comparent deux ordres de grandeur.
+      const correct = `$${d} \\times 10^{${n}}$`;
+      const choices = makeChoices(correct, [
+        `$${d}00 \\times 10^{${n - 3}}$`,
+        `$0,${d} \\times 10^{${n}}$`,
+        `$${d} \\times 10^{${n - 1}}$`,
+      ]);
+      return {
+        text: "Parmi ces quatre nombres, lequel est le plus grand ?",
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Comparer des ordres de grandeur, c'est ramener tout le monde à la même écriture.",
+          "On met chaque nombre en notation scientifique, puis on compare les exposants avant les mantisses.",
+          `$${d}00 \\times 10^{${n - 3}} = ${d} \\times 10^{${n - 1}}$, et $0,${d} \\times 10^{${n}} = ${d} \\times 10^{${n - 1}}$ : ces deux-là sont égaux et dix fois plus petits.`,
+          `Le plus grand est $${d} \\times 10^{${n}}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_puiss_scientif_fixed_5",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "puissances_2de",
+    microId: "puiss_notation_scientifique",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un nombre en notation scientifique s'écrit $a \\times 10^n$. Quelle condition doit vérifier $a$ ?",
+    format: "qcm",
+    choices: [
+      "$1 \\leqslant a < 10$",
+      "$0 < a < 1$",
+      "$a$ est un entier",
+      "$0 \\leqslant a \\leqslant 10$",
+    ],
+    expected: ["$1 \\leqslant a < 10$"],
+    comparator: "mcq_exact",
+    hint: "Exactement un chiffre avant la virgule, et ce n'est pas $0$.",
+    explanation: exp(
+      "C'est cette condition qui rend l'écriture UNIQUE.",
+      "Sans elle, $4530$ s'écrirait $4,53 \\times 10^3$, $45,3 \\times 10^2$, $0,453 \\times 10^4$… autant d'écritures que l'on veut.",
+      "$1 \\leqslant a < 10$ n'en laisse qu'une seule.",
+      "Il faut $1 \\leqslant a < 10$."
+    ),
+    tags: ["seconde", "maths", "puissances", "notation_scientifique", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_puiss_scientif_fixed_6",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "puissances_2de",
+    microId: "puiss_notation_scientifique",
+    difficulty: 3,
+    theme: "neutral",
+    text: "La masse d'un atome d'hydrogène vaut environ $0,00000000000000000000000167$ kg. Quel est son ordre de grandeur ?",
+    format: "qcm",
+    choices: ["$10^{-27}$ kg", "$10^{-24}$ kg", "$10^{-21}$ kg", "$10^{27}$ kg"],
+    expected: ["$10^{-27}$ kg"],
+    comparator: "mcq_exact",
+    hint: "Compte les zéros après la virgule avant d'arriver au $1$.",
+    explanation: exp(
+      "L'ordre de grandeur est la puissance de $10$ de l'écriture scientifique.",
+      "On écrit d'abord le nombre sous la forme $a \\times 10^n$, puis on ne garde que $10^n$.",
+      "Il y a $26$ zéros après la virgule : la masse vaut $1,67 \\times 10^{-27}$ kg.",
+      "Son ordre de grandeur est $10^{-27}$ kg — et c'est bien pour cela qu'on ne l'écrit jamais en toutes lettres."
+    ),
+    tags: ["seconde", "maths", "puissances", "notation_scientifique", "reel", "qcm"],
+  },
 ];

@@ -85,8 +85,17 @@ export const NOTION_COACH_MATHS: TableNotions = {
   // « puissances » dans la matrice n'ouvrait donc RIEN — alors que la 3e a
   // `entier_puissance` avec sa banque de 59 items depuis longtemps. Les deux
   // classes entrent ensemble, sinon on répare une moitié du problème.
+  // ⛔ 08/09/2026 — LA SECONDE MANQUAIT, et le trou était INVISIBLE : un élève
+  // qui tape « puissances » arrive bien au coach de seconde, mais par l'AUTRE
+  // branche — celle du programme, qui gagne quand les mots du libellé (ici
+  // « Puissances ») se retrouvent dans la question. Le lexique n'était jamais
+  // consulté, donc son absence de rang « seconde » ne se voyait pas.
+  // Elle se voyait pour « notation scientifique » et « exposant négatif » : ces
+  // mots-là ne figurent pas dans le libellé, ils tombaient dans le lexique, et
+  // le lexique n'avait rien à leur donner. Les deux n'ouvraient RIEN.
   puissances: {
     "4e": "puissance_ecriture", "3e": "entier_puissance",
+    seconde: "puissances_2de",
   },
   // ⭐ AJOUTÉ LE 28/08/2026 avec la notion `prop_echelle` de 4e. ⛔ Et là encore
   // le trou dépassait la 4e : « échelle » n'était un thème NULLE PART, alors que

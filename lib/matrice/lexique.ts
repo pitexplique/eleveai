@@ -257,6 +257,19 @@ export const NOTIONS: NotionLexique[] = [
     alias: ["calcul", "calculs", "calculer", "addition", "additionner", "soustraction", "soustraire", "multiplication", "multiplier", "division", "diviser", "table", "tables", "tables de multiplication", "poser une operation", "compter"],
   },
   {
+    // ⭐ REMONTÉE ICI LE 08/09/2026, AU-DESSUS DE `relatifs`, et pour la même
+    // raison que la valeur absolue est au-dessus de `calcul` : le premier qui
+    // accroche gagne, et « négatif » est un alias des relatifs. « exposant
+    // négatif » ouvrait donc les nombres relatifs — une notion de collège — à
+    // un élève de seconde qui demandait $a^{-n}$. Mesuré, pas supposé.
+    // ⚠️ « négatif » SEUL reste aux relatifs : cette entrée ne le porte pas.
+    id: "puissances", label: "les puissances", matiere: "maths",
+    // « exposant negatif » ajoute le meme jour : « exposant » seul etait bien
+    // la, mais `expressionPresente` exige TOUS les mots de l'alias — l'eleve qui
+    // ecrivait les deux mots n'accrochait donc aucun alias.
+    alias: ["puissance", "puissances", "exposant", "exposants", "exposant negatif", "notation scientifique", "puissance de dix", "au carre", "au cube"],
+  },
+  {
     id: "relatifs", label: "les nombres relatifs", matiere: "maths",
     alias: ["relatif", "relatifs", "negatif", "negatifs", "les moins et les plus", "moins moins", "nombre negatif"],
   },
@@ -274,10 +287,8 @@ export const NOTIONS: NotionLexique[] = [
   // ⚠️ ELLES SONT PLACÉES ICI, AVANT `proportionnalite`, PARCE QUE LE PREMIER
   // QUI ACCROCHE GAGNE. Derrière, « échelle » serait repris par la
   // proportionnalité avant d'atteindre sa propre ligne.
-  {
-    id: "puissances", label: "les puissances", matiere: "maths",
-    alias: ["puissance", "puissances", "exposant", "exposants", "notation scientifique", "puissance de dix", "au carre", "au cube"],
-  },
+  // (`puissances`, la cinquième, a dû remonter plus haut encore le 08/09/2026 —
+  // au-dessus de `relatifs`, qui lui prenait « exposant négatif ».)
   {
     // ⚠️ « échelle » RESTE AUSSI dans les alias de la proportionnalité : les
     // classes sans notion d'échelle (cm1, 5e, 3e, seconde, première) y sont

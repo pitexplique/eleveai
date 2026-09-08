@@ -534,6 +534,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les identités remarquables",
     resume: "Developper et factoriser avec les trois identites, le double produit qu on oublie, et le conjugue qui fait disparaitre une racine.",
   },
+  "maths/seconde/puissances-2de": {
+    titre: "Les puissances",
+    resume: "Produit, quotient, puissance d une puissance, exposant negatif, et la notation scientifique : reduire sans calculer.",
+  },
   "maths/seconde/racine-carree-2de": {
     titre: "La racine carrée",
     resume: "Carres parfaits, simplifier, le produit qui passe et la somme qui ne passe pas, additionner des radicaux identiques.",

@@ -33,6 +33,16 @@ export const microSkills: MicroSkillSource[] = [
   { id: "puiss_produit_quotient", label: "Utiliser le produit et le quotient de puissances de même base", notionId: "puissances_2de", prerequis: ["puiss_calcul"] },
   { id: "puiss_puissance_puissance", label: "Calculer une puissance d'une puissance", notionId: "puissances_2de", prerequis: ["puiss_produit_quotient"] },
   { id: "puiss_exposant_negatif", label: "Utiliser un exposant négatif ($a^{-n} = \\frac{1}{a^n}$)", notionId: "puissances_2de", prerequis: ["puiss_calcul"] },
+  // ⭐ AJOUTEES LE 08/09/2026, sur mesure. La banque enseignait les trois regles
+  // SEPAREMENT — produit, quotient, puissance de puissance — et zero enonce ne
+  // les enchainait. Or la question 2.2 du controle commun de mars 2025 les
+  // enchaine toutes les trois d'un coup : « ecrire B = (7^4 x 7^-5) / (7^3)^4
+  // sous la forme 7^n ». L'eleve savait chaque regle et bloquait sur l'exercice.
+  { id: "puiss_expression_composee", label: "Réduire une expression sous la forme $a^n$ en enchaînant les règles", notionId: "puissances_2de", prerequis: ["puiss_produit_quotient", "puiss_puissance_puissance", "puiss_exposant_negatif"] },
+  // Absente elle aussi : « notation scientifique » n'apparaissait nulle part
+  // dans la seconde, alors que le programme la reactive pour comparer des ordres
+  // de grandeur (masse d'un atome, distance d'une etoile).
+  { id: "puiss_notation_scientifique", label: "Écrire un nombre en notation scientifique", notionId: "puissances_2de", prerequis: ["puiss_exposant_negatif"] },
 
   /* ===================== racine_carree_2de ===================== */
   { id: "racine_calcul", label: "Calculer une racine carrée", notionId: "racine_carree_2de", prerequis: ["puiss_calcul"] },
