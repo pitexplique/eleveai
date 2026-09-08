@@ -104,3 +104,26 @@ manim/miniatures/
 manim/chaine/
 manim/sorties/
 /public/sons/
+# … et la même règle portée à l'EXTENSION, pas au dossier : le dossier de
+# sortie d'aujourd'hui n'est pas celui de demain, et une règle qui nomme des
+# chemins se périme au premier `manim/vignettes/` créé sans y penser. Sous
+# `manim/`, tout ce qui est vidéo, son ou image est un rendu — la source, elle,
+# est du texte (.py, .json, .md) et reste suivie.
+manim/**/*.mp4
+manim/**/*.mov
+manim/**/*.webm
+manim/**/*.gif
+manim/**/*.wav
+manim/**/*.mp3
+manim/**/*.m4a
+manim/**/*.ogg
+manim/**/*.opus
+manim/**/*.png
+manim/**/*.jpg
+manim/**/*.jpeg
+manim/**/*.webp
+manim/**/*.srt
+# ⛔ NE PAS ÉTENDRE À `public/`. Deux dossiers de médias y sont SERVIS par le
+# site et doivent rester suivis : `public/audio/` (1 766 fichiers, 35,5 Mo —
+# la dictée et le podcast, appelés depuis app/podcast-maths/page.tsx) et
+# `public/apercus/`. Ici on ne chasse que ce qui part sur YouTube.
