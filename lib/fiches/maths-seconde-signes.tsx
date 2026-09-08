@@ -61,15 +61,32 @@ function courbe(
     <CanvasRenderer
       figure={{
         kind: "fonctionGraphique",
-        size: { width: 240, height: 215 },
-        xmin: -4,
-        xmax: 6,
-        ymin: -8,
-        ymax: 6,
+        // ⛔ 215, ET NON 240 : les nombres des AXES de ce canvas sont ecrits en
+        // 11, pas en 12 comme le reste. A 240 l'echelle vaut 0,94 et ils rendent
+        // 10,3 px. Il faut donc un viewBox sous 225 pour que l'echelle depasse 1.
+        size: { width: 215, height: 195 },
+        // ⛔ HUIT UNITES PAR AXE AU PLUS. A dix, les graduations tombent a
+        // 10,3 px — sous le plancher de 11. Meme mesure que sur la fiche des
+        // fonctions le meme jour.
+        // ⛔ ET LA COURBE DOIT TENIR ENTIERE. (x+1)(x-4) a son sommet a
+        // y = -6,25 : avec ymin = -5, le bas de la parabole etait COUPE, et le
+        // dessin ne montrait plus le creux dont parle le texte.
+        //
+        // ⭐ Frederic : « mets 0,5(x+1)(x-4) ». Le coefficient 0,5 garde les
+        // racines -1 et 4 — celles qu'un professeur ecrirait — tout en ramenant
+        // le creux de -6,25 a -3,125. La courbe tient, sans rien perdre.
+        xmin: -2,
+        xmax: 5,
+        ymin: -4,
+        ymax: 4,
         grille: true,
         courbes: [{ id: "f", type, a, b, c, couleur: "#2563eb" }],
+        // ⛔ LES RACINES NE PORTENT PAS D'ETIQUETTE. Elles sont posees SUR l'axe
+        // des abscisses, a l'endroit exact ou la graduation ecrit deja leur
+        // valeur : l'etiquette « -1 » se superposait au « -1 » de l'axe. Le point
+        // rouge suffit, et l'axe le nomme.
         misesEnEvidence: racines.map((r) => ({
-          point: { x: r, y: 0, label: `${r}`, couleur: "#dc2626" },
+          point: { x: r, y: 0, couleur: "#dc2626" },
         })),
       }}
     />
@@ -146,7 +163,7 @@ export const ficheSignesSeconde: FicheCoursData = {
       titre: "Le signe se lit aussi sur une courbe",
       texte:
         "Au-dessus de l'axe des abscisses : positif. En dessous : négatif. Attention, « la courbe monte » décrit les variations, pas le signe.",
-      schema: courbe("quadratique", 1, -3, -4, [-1, 4]),
+      schema: courbe("quadratique", 0.5, -1.5, -2, [-1, 4]),
     },
   ],
 

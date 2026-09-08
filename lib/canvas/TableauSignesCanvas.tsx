@@ -15,20 +15,31 @@ type Props = { figure: CanvasFigure };
  * `fonction_tableau` est un tableau de VALEURS, et le faire passer pour un
  * tableau de signes aurait été un dessin qui ment sur son énoncé.
  *
- * ⛔ IL EST EN HTML, ET NON EN SVG, ET C'EST LA RAISON D'ÊTRE DE LA RÉÉCRITURE.
- * Frédéric, le jour même : « quand tu écris quotient il faut vraiment l'écrire
- * (x+2)/(x+3) en KaTeX ». Or KaTeX ne peut RIEN rendre dans un `<text>` SVG : la
- * première version affichait « le quotient » en toutes lettres, faute de pouvoir
- * écrire la fraction. En HTML, chaque libellé passe par `TexteMath` et la
- * fraction s'écrit vraiment. Un tableau de signes est d'ailleurs un tableau.
+ * ⛔ IL EST EN HTML, ET NON EN SVG. Frédéric : « quand tu écris quotient il faut
+ * vraiment l'écrire (x+2)/(x+3) en KaTeX ». Or KaTeX ne rend RIEN dans un
+ * `<text>` SVG : la première version affichait « le quotient » en toutes lettres,
+ * faute de pouvoir écrire la fraction. Chaque libellé passe par `TexteMath`.
+ *
+ * ⭐ CHAQUE BORNE A SA PROPRE COLONNE — réécriture du 08/09/2026, et c'est ce qui
+ * a réglé le problème pour de bon. Les bornes étaient posées EN POURCENTAGE, hors
+ * flux : la dernière, ancrée au bord même de la zone, se faisait couper par le
+ * cadre (« on ne voit pas la partie droite », capture à l'appui), et je rattrapais
+ * à coups de marges sans jamais fermer le sujet. En colonnes alternées — borne,
+ * intervalle, borne, intervalle… — plus rien ne peut déborder ni se chevaucher,
+ * par construction. Les `0` et les `‖` tombent d'eux-mêmes dans la colonne de
+ * leur borne, qui est exactement leur place.
+ *
+ * ⛔ PAS DE SECOND CADRE NI DE MARGE : « coller le tableau au cadre pour gagner de
+ * l'espace ». L'enveloppe portait une bordure arrondie ET 12 px de padding de
+ * chaque côté — un double encadrement, 24 px perdus dans un bloc qui n'en fait
+ * que 250. Le tableau a déjà sa bordure.
  *
  * ⛔ LA DOUBLE BARRE N'EST PAS UN ZÉRO. Sur un quotient, la valeur qui annule le
- * dénominateur est INTERDITE : elle se marque « ‖ » et non « 0 ». Confondre les
- * deux, c'est enseigner qu'on peut diviser par zéro.
+ * dénominateur est INTERDITE : « ‖ » et non « 0 ». Les confondre, c'est enseigner
+ * qu'on peut diviser par zéro.
  *
- * ⛔ ET LE MOINS EST LE SIGNE MOINS, pas le trait d'union. Vu au rendu de la
- * version SVG : à taille égale, un « - » ASCII paraît deux fois plus petit qu'un
- * « + » et se lit mal au fond de la classe.
+ * ⛔ ET LE MOINS EST LE SIGNE MOINS, pas le trait d'union : à taille égale, un
+ * « - » ASCII paraît deux fois plus petit qu'un « + ».
  */
 export default function TableauSignesCanvas({ figure }: Props) {
   if (figure.kind !== "tableau_signes") return null;
@@ -39,103 +50,81 @@ export default function TableauSignesCanvas({ figure }: Props) {
 
   const intervalles = bornes.length - 1;
 
-  // Une colonne de libellés, puis une colonne par intervalle. Les bornes se
-  // posent SUR les séparations et non dans les cases : elles sortent donc du
-  // flux, positionnées en pourcentage de la zone des intervalles.
-  const colonnes = `minmax(76px, auto) repeat(${intervalles}, minmax(50px, 1fr))`;
+  // Libellés, puis borne, intervalle, borne, intervalle… jusqu'à la dernière
+  // borne. Les colonnes de bornes se dimensionnent sur leur contenu ; celles des
+  // intervalles se partagent ce qui reste.
+  const colonnes = `minmax(52px, 88px) auto repeat(${intervalles}, minmax(26px, 1fr) auto)`;
 
   return (
-    <div className="mx-auto w-full max-w-[440px] overflow-x-auto rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
+    <div className="mx-auto w-full max-w-[440px]">
       {figure.titre ? (
-        <div className="mb-2 text-center text-sm font-black text-slate-800">
+        <div className="mb-1.5 text-center text-sm font-black text-slate-800">
           <TexteMath>{figure.titre}</TexteMath>
         </div>
       ) : null}
 
-      <div className="min-w-[248px] rounded-md border border-slate-900">
-        {/* En-tête : x, puis les bornes posées sur les séparations */}
-        <div className="grid border-b border-slate-900" style={{ gridTemplateColumns: colonnes }}>
-          <div className="border-r border-slate-900 px-2 py-1.5 text-center text-[15px] font-extrabold italic text-slate-900">
+      <div className="overflow-hidden rounded-md border border-slate-900 bg-white">
+        {/* En-tête : x, puis les bornes, chacune dans sa colonne */}
+        <div
+          className="grid items-center border-b border-slate-900"
+          style={{ gridTemplateColumns: colonnes }}
+        >
+          <div className="border-r border-slate-900 px-1.5 py-1.5 text-center text-[15px] font-extrabold italic text-slate-900">
             x
           </div>
-          <div className="relative col-start-2 -col-end-1 py-1.5" style={{ gridColumn: `2 / -1` }}>
-            {bornes.map((b, i) => (
-              <span
-                key={`b-${i}`}
-                className="absolute top-1.5 whitespace-nowrap text-[13px] font-bold text-slate-900"
-                style={{
-                  left: `${(i / intervalles) * 100}%`,
-                  // ⛔ Les bornes extrêmes ne se centrent PAS sur le bord : mesuré
-                  // au rendu de la version SVG, « −∞ » chevauchait la barre de
-                  // gauche et « +∞ » sortait du cadre, coupé en deux.
-                  transform:
-                    i === 0
-                      ? "translateX(2px)"
-                      : i === bornes.length - 1
-                        ? "translateX(-100%) translateX(-2px)"
-                        : "translateX(-50%)",
-                }}
-              >
+          {bornes.map((b, i) => (
+            <div key={`b-${i}`} className="contents">
+              <div className="px-0.5 py-1.5 text-center text-[13px] font-bold leading-none text-slate-900">
                 <TexteMath>{b}</TexteMath>
-              </span>
-            ))}
-            {/* Les bornes étant hors flux, ce texte invisible donne sa hauteur. */}
-            <span className="invisible text-[13px]">0</span>
-          </div>
+              </div>
+              {i < intervalles ? <div aria-hidden /> : null}
+            </div>
+          ))}
         </div>
 
         {/* Les lignes de signes */}
         {lignes.map((ligne, li) => (
           <div
             key={`l-${li}`}
-            className={`grid items-center ${li < lignes.length - 1 ? "border-b border-slate-900" : ""}`}
+            className={`grid items-stretch ${li < lignes.length - 1 ? "border-b border-slate-900" : ""}`}
             style={{ gridTemplateColumns: colonnes }}
           >
-            <div className="self-stretch border-r border-slate-900 px-2 py-2 text-center text-[13px] font-semibold leading-tight text-slate-900 flex items-center justify-center">
+            <div className="flex items-center justify-center border-r border-slate-900 px-1.5 py-2 text-center text-[13px] font-semibold leading-tight text-slate-900">
               <TexteMath>{ligne.label}</TexteMath>
             </div>
 
-            <div className="relative" style={{ gridColumn: `2 / -1` }}>
-              <div className="grid" style={{ gridTemplateColumns: `repeat(${intervalles}, 1fr)` }}>
-                {ligne.signes.map((s, i) => (
-                  <div
-                    key={`s-${li}-${i}`}
-                    className={`py-2 text-center text-xl font-extrabold ${
-                      s === "+" ? "text-emerald-700" : "text-red-700"
-                    }`}
-                  >
-                    {s === "+" ? "+" : "−"}
+            {bornes.map((_, i) => {
+              // La colonne de la borne : un zéro, une double barre, ou rien.
+              // ⛔ Les bornes EXTRÊMES ne portent jamais de marque : $-\infty$ et
+              // $+\infty$ ne sont pas des valeurs que l'expression puisse annuler.
+              const marque = i > 0 && i < bornes.length - 1 ? (ligne.marques ?? [])[i - 1] : "";
+              const signe = i < intervalles ? ligne.signes[i] : null;
+              return (
+                <div key={`c-${li}-${i}`} className="contents">
+                  <div className="flex items-center justify-center px-0.5">
+                    {marque === "||" ? (
+                      <span
+                        aria-label="valeur interdite"
+                        className="text-xl font-black leading-none text-red-700"
+                      >
+                        ‖
+                      </span>
+                    ) : marque === "0" ? (
+                      <span className="text-base font-extrabold leading-none text-slate-900">0</span>
+                    ) : null}
                   </div>
-                ))}
-              </div>
-
-              {/* Les marques SUR les bornes intérieures */}
-              {(ligne.marques ?? []).map((m, i) => {
-                if (!m) return null;
-                const gauche = `${((i + 1) / intervalles) * 100}%`;
-                if (m === "||") {
-                  return (
-                    <span
-                      key={`m-${li}-${i}`}
-                      aria-label="valeur interdite"
-                      className="absolute inset-y-0 flex items-center text-xl font-black leading-none text-red-700"
-                      style={{ left: gauche, transform: "translateX(-50%)" }}
+                  {signe !== null ? (
+                    <div
+                      className={`py-2 text-center text-xl font-extrabold leading-none ${
+                        signe === "+" ? "text-emerald-700" : "text-red-700"
+                      }`}
                     >
-                      ‖
-                    </span>
-                  );
-                }
-                return (
-                  <span
-                    key={`m-${li}-${i}`}
-                    className="absolute inset-y-0 flex items-center bg-white px-1 text-base font-extrabold leading-none text-slate-900"
-                    style={{ left: gauche, transform: "translateX(-50%)" }}
-                  >
-                    0
-                  </span>
-                );
-              })}
-            </div>
+                      {signe === "+" ? "+" : "−"}
+                    </div>
+                  ) : null}
+                </div>
+              );
+            })}
           </div>
         ))}
       </div>
