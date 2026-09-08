@@ -2060,4 +2060,336 @@ export const fonctionsReferenceBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // ============================================================
+  // reference_inverse — l'hyperbole, et son trou en zero
+  // ============================================================
+
+  {
+    kind: "template",
+    id: "seconde_ref_inv_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_inverse",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "L'inverse d'un négatif est négatif.",
+    tags: ["seconde", "maths", "fonctions", "inverse", "template", "qcm"],
+    generate: () => {
+      const x = -randomInt(2, 9);
+      const correct = `$-\\dfrac{1}{${-x}}$`;
+      return {
+        text: `Pour la fonction inverse, combien vaut $f(${x})$ ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          correct,
+          [`$\\dfrac{1}{${-x}}$`, `$${x}$`, `$${-x}$`],
+          [`$-${-x}$`, `$\\dfrac{1}{${x - 1}}$`]
+        ),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'inverse d'un nombre garde son signe : un négatif a un inverse négatif.",
+          "On écrit $\\dfrac{1}{x}$ avec la valeur donnée, puis on sort le signe.",
+          `$\\dfrac{1}{${x}} = -\\dfrac{1}{${-x}}$.`,
+          `$f(${x}) = -\\dfrac{1}{${-x}}$ — l'hyperbole a une branche entière sous l'axe, du côté des négatifs.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_inv_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_inverse",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Chercher un antécédent, c'est résoudre $\\dfrac{1}{x} = k$.",
+    tags: ["seconde", "maths", "fonctions", "inverse", "antecedent", "template", "qcm"],
+    generate: () => {
+      const n = randomInt(2, 9);
+      const correct = `$${n}$`;
+      return {
+        text: `Quel nombre a pour inverse $\\dfrac{1}{${n}}$ ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          correct,
+          [`$\\dfrac{1}{${n}}$`, `$-${n}$`, `$${n * n}$`],
+          [`$${n + 1}$`, `$${n - 1}$`]
+        ),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'inverse de l'inverse redonne le nombre de départ.",
+          `On cherche $x$ tel que $\\dfrac{1}{x} = \\dfrac{1}{${n}}$.`,
+          `Les deux fractions sont égales quand les dénominateurs le sont : $x = ${n}$.`,
+          `C'est $${n}$ — et cette réciprocité vaut pour tout nombre non nul, jamais pour $0$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_inv_tpl_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_inverse",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Sur les positifs, l'inverse DÉCROIT : plus le nombre grandit, plus son inverse rapetisse.",
+    tags: ["seconde", "maths", "fonctions", "inverse", "comparaison", "template", "qcm"],
+    generate: () => {
+      const a = randomInt(2, 5);
+      const b = a + randomInt(1, 4);
+      const correct = `$f(${a}) > f(${b})$`;
+      return {
+        text: `Sur $]0\\,;+\\infty[$, comparer $f(${a})$ et $f(${b})$ pour la fonction inverse.`,
+        format: "qcm",
+        choices: choixDistincts(
+          correct,
+          [`$f(${a}) < f(${b})$`, `$f(${a}) = f(${b})$`, "on ne peut pas comparer"],
+          [`$f(${a}) \\leqslant f(${b})$`]
+        ),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Sur les nombres strictement positifs, la fonction inverse est DÉCROISSANTE.",
+          "On applique le sens de variation : l'ordre des images est inversé.",
+          `Comme $${a} < ${b}$ et que $f$ décroît, $f(${a}) > f(${b})$ — et l'on vérifie : $\\dfrac{1}{${a}} > \\dfrac{1}{${b}}$.`,
+          "Partager un gâteau entre plus de personnes donne des parts plus petites : c'est la même idée."
+        ),
+      };
+    },
+  },
+
+  // ============================================================
+  // reference_cube — celle qui garde le signe
+  // ============================================================
+
+  {
+    kind: "template",
+    id: "seconde_ref_cube_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_cube",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Trois facteurs négatifs : le résultat reste négatif.",
+    tags: ["seconde", "maths", "fonctions", "cube", "piege", "template", "qcm"],
+    generate: () => {
+      const x = -randomInt(2, 5);
+      const correct = `$${x * x * x}$`;
+      return {
+        text: `Pour la fonction cube, combien vaut $f(${x})$ ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          correct,
+          [`$${-x * x * x}$`, `$${x * x}$`, `$${3 * x}$`],
+          [`$${x}$`, `$${-x}$`]
+        ),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le cube d'un nombre GARDE son signe, contrairement au carré.",
+          `On multiplie trois fois : $${x} \\times ${x} \\times ${x}$.`,
+          `Les deux premiers donnent $${x * x}$, positif ; multiplié par $${x}$, cela redonne $${x * x * x}$.`,
+          `$f(${x}) = ${x * x * x}$ — trois facteurs négatifs laissent un résultat négatif, là où le carré l'aurait rendu positif.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_cube_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_cube",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Combien de nombres ont le même cube ?",
+    tags: ["seconde", "maths", "fonctions", "cube", "equation", "template", "qcm"],
+    generate: () => {
+      const n = randomInt(2, 5);
+      const k = n * n * n * (Math.random() < 0.5 ? -1 : 1);
+      const sol = k > 0 ? n : -n;
+      const correct = `une seule : $${sol}$`;
+      return {
+        text: `Combien l'équation $x^3 = ${k}$ a-t-elle de solutions ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          correct,
+          [`deux : $${n}$ et $${-n}$`, "aucune", `une seule : $${-sol}$`],
+          ["trois"]
+        ),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La fonction cube est croissante sur $\\mathbb{R}$ : chaque valeur n'est atteinte qu'une fois.",
+          "On cherche le nombre dont le cube vaut la valeur donnée, en respectant son signe.",
+          `$${sol}^3 = ${k}$, et aucun autre nombre ne convient.`,
+          `Il y a UNE solution, $${sol}$ — alors que $x^2 = ${n * n}$ en aurait deux. Le cube ne replie pas les négatifs sur les positifs.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_cube_tpl_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_cube",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Croissante sur $\\mathbb{R}$ : l'ordre est conservé, négatifs compris.",
+    tags: ["seconde", "maths", "fonctions", "cube", "comparaison", "template", "qcm"],
+    generate: () => {
+      const a = randomInt(-4, 1);
+      const b = a + randomInt(1, 4);
+      const correct = `$f(${a}) < f(${b})$`;
+      return {
+        text: `Pour la fonction cube, comparer $f(${a})$ et $f(${b})$.`,
+        format: "qcm",
+        choices: choixDistincts(
+          correct,
+          [`$f(${a}) > f(${b})$`, `$f(${a}) = f(${b})$`, "cela dépend du signe"],
+          ["on ne peut pas comparer"]
+        ),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La fonction cube est croissante sur $\\mathbb{R}$ tout entier.",
+          "On applique le sens de variation : l'ordre est CONSERVÉ.",
+          `Comme $${a} < ${b}$, on a $${a}^3 < ${b}^3$, soit $${a * a * a} < ${b * b * b}$.`,
+          `$f(${a}) < f(${b})$ — et cela vaut même chez les négatifs, contrairement au carré.`
+        ),
+      };
+    },
+  },
+
+  // ============================================================
+  // reference_racine — celle qui n'existe qu'à droite
+  // ============================================================
+
+  {
+    kind: "template",
+    id: "seconde_ref_rac_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_racine",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Chercher un antécédent : $\\sqrt{x} = k$ donne $x = k^2$.",
+    tags: ["seconde", "maths", "fonctions", "racine", "antecedent", "template", "qcm"],
+    generate: () => {
+      const k = randomInt(2, 9);
+      const correct = `$${k * k}$`;
+      return {
+        text: `Quel nombre a pour racine carrée $${k}$ ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          correct,
+          [`$${k}$`, `$${2 * k}$`, `$${k * k * k}$`],
+          [`$${k * k + 1}$`, `$${k * k - 1}$`]
+        ),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Chercher un antécédent par la racine carrée, c'est élever au carré.",
+          `On résout $\\sqrt{x} = ${k}$ en passant au carré des deux côtés.`,
+          `$x = ${k}^2 = ${k * k}$.`,
+          `C'est $${k * k}$ — et il n'y en a qu'un, car la racine carrée ne rend que des résultats positifs.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_rac_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_racine",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Entre $0$ et $1$, la racine carrée AGRANDIT ; au-delà de $1$, elle rapetisse.",
+    tags: ["seconde", "maths", "fonctions", "racine", "piege", "template", "qcm"],
+    generate: () => {
+      // ⛔ QUE DES CARRES PARFAITS du cote des grands nombres : `Math.sqrt(5)`
+      // vaut 2,236, et `toFixed` l'ecrirait « 2.24 » — avec un POINT, que l'eleve
+      // ne doit jamais lire. On tire donc parmi 4, 9, 16 et 25.
+      const grand = Math.random() < 0.5;
+      const carre = [4, 9, 16, 25][randomInt(0, 3)];
+      const petit = ["0{,}25", "0{,}16", "0{,}01"][randomInt(0, 2)];
+      const racPetit = { "0{,}25": "0{,}5", "0{,}16": "0{,}4", "0{,}01": "0{,}1" }[petit] as string;
+      const affiche = grand ? String(carre) : petit;
+      const affRac = grand ? String(Math.sqrt(carre)) : racPetit;
+      const correct = grand ? `$\\sqrt{x} < x$` : `$\\sqrt{x} > x$`;
+      return {
+        text: `Pour $x = ${affiche}$, comparer $\\sqrt{x}$ et $x$.`,
+        format: "qcm",
+        choices: choixDistincts(
+          correct,
+          [grand ? `$\\sqrt{x} > x$` : `$\\sqrt{x} < x$`, `$\\sqrt{x} = x$`, "cela dépend"],
+          ["on ne peut pas comparer"]
+        ),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La racine carrée ne rapetisse pas toujours : tout dépend du côté de $1$ où l'on se trouve.",
+          "On calcule la racine, puis on compare au nombre de départ.",
+          `$\\sqrt{${affiche}} = ${affRac}$, à comparer à $${affiche}$.`,
+          grand
+            ? `Au-delà de $1$, la racine RAPETISSE : $${affRac} < ${affiche}$.`
+            : `Entre $0$ et $1$, la racine AGRANDIT : $${affRac} > ${affiche}$ — le contraire de l'intuition.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_rac_tpl_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_racine",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La racine carrée n'existe que pour les nombres positifs ou nuls.",
+    tags: ["seconde", "maths", "fonctions", "racine", "domaine", "template", "qcm"],
+    generate: () => {
+      const n = randomInt(2, 9);
+      const correct = `$\\sqrt{-${n}}$`;
+      return {
+        text: `Laquelle de ces expressions n'existe PAS ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          correct,
+          [`$\\sqrt{${n}}$`, `$\\sqrt{0}$`, `$-\\sqrt{${n}}$`],
+          [`$\\sqrt{${n * n}}$`]
+        ),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La racine carrée est définie sur $[0\\,;+\\infty[$ seulement.",
+          "On regarde ce qui se trouve SOUS le radical, et non devant.",
+          `$-${n}$ est négatif : $\\sqrt{-${n}}$ n'existe pas. En revanche $-\\sqrt{${n}}$ existe très bien — le signe est DEVANT.`,
+          "⚠️ Un signe moins devant la racine ne pose aucun problème : c'est un moins SOUS le radical qui l'interdit."
+        ),
+      };
+    },
+  },
 ];
