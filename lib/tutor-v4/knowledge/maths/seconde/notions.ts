@@ -99,6 +99,25 @@ export const notions: NotionSource[] = [
   },
 
   /* ===================== FONCTIONS (BO2F1) ===================== */
+  // ⭐ AJOUTEE LE 08/09/2026. Le tableau de signes logeait jusque-la dans
+  // « Vocabulaire des fonctions », a cote de image et antecedent — or ce n'est
+  // pas du vocabulaire, c'est une TECHNIQUE DE RESOLUTION, enseignee comme un
+  // chapitre a part vers novembre-decembre. La STMG portait deja une notion
+  // dediee (`auto_signes`), avec la meme progression.
+  {
+    id: "signes_expression_2de",
+    // ⛔ LE LIBELLE NE CONTIENT PAS « tableau », ET C'EST MESURE. Avec
+    // « Signe d'une expression et tableau de signes », le moteur — qui compte
+    // les mots forts du libelle presents dans la question — donnait un point a
+    // « tableau » seul : « tableau de bord » (un suivi de progres !) et
+    // « tableau de variations » ouvraient tous deux cette notion. Le libelle de
+    // la STMG, « Signe d'une expression », ne prete pas le flanc, et
+    // « tableau de signes » accroche quand meme par le mot « signes ».
+    label: "Signe d'une expression",
+    boId: "BO2F1",
+    prerequis: ["equations_inequations_1er_degre"],
+    levels: [1, 2, 3],
+  },
   {
     id: "fonction_vocabulaire_2de",
     label: "Fonctions : vocabulaire et représentations",

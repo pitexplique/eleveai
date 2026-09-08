@@ -14,6 +14,7 @@ import { droitesPlanBank } from "./droites-plan.bank";
 import { vecteursPlanBank } from "./vecteurs-plan.bank";
 import { geometrieProblemesPlanBank } from "./geometrie-problemes-plan.bank";
 import { fonctionVocabulaireBank } from "./fonction-vocabulaire.bank";
+import { signesExpressionBank } from "./signes-expression.bank";
 import { fonctionVariationsBank } from "./fonction-variations.bank";
 import { fonctionsAffinesBank } from "./fonctions-affines.bank";
 import { fonctionsReferenceBank } from "./fonctions-reference.bank";
@@ -42,6 +43,7 @@ export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   ...geometrieProblemesPlanBank,
   // === Domaine FONCTIONS — en cours de refonte (1 banque par notion) ===
   ...fonctionVocabulaireBank,
+  ...signesExpressionBank,
   ...fonctionVariationsBank,
   ...fonctionsAffinesBank,
   ...fonctionsReferenceBank,

@@ -102,7 +102,19 @@ export const microSkills: MicroSkillSource[] = [
   { id: "fonction_antecedent", label: "Rechercher un antécédent", notionId: "fonction_vocabulaire_2de", prerequis: ["fonction_image_formule", "equation_resoudre"] },
   { id: "fonction_tableau_graphique", label: "Passer d'un tableau à un graphique", notionId: "fonction_vocabulaire_2de", prerequis: ["fonction_vocabulaire"] },
   { id: "fonction_resolution_graphique", label: "Résoudre graphiquement $f(x) = k$ ou $f(x) < k$", notionId: "fonction_vocabulaire_2de", prerequis: ["fonction_vocabulaire", "fonction_antecedent"] },
-  { id: "fonction_tableau_signes", label: "Résoudre une équation ou une inéquation produit ou quotient avec un tableau de signes", notionId: "fonction_vocabulaire_2de", prerequis: ["fonction_image_formule"] },
+
+  /* ===================== signes_expression_2de ===================== */
+  // ⛔ `fonction_tableau_signes` GARDE SON IDENTIFIANT en changeant de notion :
+  // le renommer aurait orphelin ses quatorze items d'un coup.
+  { id: "signes_premier_degre", label: "Déterminer le signe de $ax + b$", notionId: "signes_expression_2de", prerequis: ["inequation_resoudre"] },
+  { id: "signes_produit", label: "Dresser le tableau de signes d'un produit", notionId: "signes_expression_2de", prerequis: ["signes_premier_degre"] },
+  { id: "signes_quotient", label: "Dresser le tableau de signes d'un quotient et repérer la valeur interdite", notionId: "signes_expression_2de", prerequis: ["signes_produit"] },
+  // ⭐ DEUX MICROS ET NON UN. Résoudre $f(x) = 0$, c'est LIRE LES RACINES ;
+  // résoudre $f(x) > 0$, c'est CHOISIR DES INTERVALLES. Deux gestes, deux
+  // erreurs typiques — et dans les deux cas l'énoncé part soit du tableau,
+  // soit d'une courbe tracée.
+  { id: "signes_resoudre_equation", label: "Résoudre une équation à partir d'un tableau de signes ou d'une courbe", notionId: "signes_expression_2de", prerequis: ["signes_produit"] },
+  { id: "signes_resoudre_inequation", label: "Résoudre une inéquation à partir d'un tableau de signes ou d'une courbe", notionId: "signes_expression_2de", prerequis: ["signes_resoudre_equation"] },
   // ⭐ LE DOMAINE DE DÉFINITION remplace la parité, retirée le 04/09/2026 :
   // le mot « paire » n'apparait NULLE PART dans le BO 2026, tandis que la
   // « recherche de domaine d'étude (ensemble de définition) » y figure en

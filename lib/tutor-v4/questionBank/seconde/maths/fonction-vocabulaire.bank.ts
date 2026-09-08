@@ -12,7 +12,6 @@
 //   fonction_antecedent         — Rechercher un antecedent
 //   fonction_tableau_graphique  — Passer d'un tableau a un graphique
 //   fonction_resolution_graphique — Resoudre f(x)=k graphiquement
-//   fonction_tableau_signes     — Tableau de signes (equation/inequation produit/quotient)
 //   fonction_domaine            — Determiner le domaine de definition
 
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
@@ -33,6 +32,29 @@ function makeChoices(correct: string, wrongs: readonly string[]) {
   return shuffle([correct, ...distracteurs]);
 }
 
+
+/**
+ * Le nom de la fonction, tire.
+ * ⭐ Frederic, 08/09/2026 : « il peut y avoir fonction f ou g ou h, il faut
+ * savoir varier, meme u(x) mais plus rare dans les enonces ». Un generateur qui
+ * dit toujours « f » apprend a ne reconnaitre que « f ».
+ */
+function nomFonction(): string {
+  const r = Math.random();
+  if (r < 0.45) return "f";
+  if (r < 0.75) return "g";
+  if (r < 0.93) return "h";
+  return "u";
+}
+
+/** Le tableau de signes d'un produit ou d'un quotient. */
+function tableauSignes(
+  bornes: string[],
+  lignes: { label: string; signes: ("+" | "-")[]; marques?: ("0" | "||" | "")[] }[],
+  titre?: string,
+): CanvasFigure {
+  return { kind: "tableau_signes", titre, bornes, lignes };
+}
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -1105,236 +1127,6 @@ export const fonctionVocabulaireBank: TutorBankItemV4[] = [
 
   {
     kind: "fixed",
-    id: "seconde_fct_sig_fixed_1",
-    niveau: "seconde",
-    matiere: "maths",
-    notionId: "fonction_vocabulaire_2de",
-    microId: "fonction_tableau_signes",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Un produit de deux facteurs est nul si et seulement si :",
-    format: "qcm",
-    choices: [
-      "au moins un des facteurs est nul",
-      "les deux facteurs sont égaux",
-      "les deux facteurs sont positifs",
-      "leur somme est nulle",
-    ],
-    expected: ["au moins un des facteurs est nul"],
-    comparator: "mcq_exact",
-    hint: "C'est la règle du produit nul.",
-    explanation: exp(
-      "La règle du produit nul est essentielle pour résoudre les équations produit.",
-      "$A \\times B = 0 \\iff A = 0$ ou $B = 0$.",
-      "Il suffit qu'un facteur soit nul.",
-      "Au moins un des facteurs est nul."
-    ),
-    tags: ["seconde", "maths", "fonctions", "tableau_signes", "raisonnement", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "seconde_fct_sig_fixed_2",
-    niveau: "seconde",
-    matiere: "maths",
-    notionId: "fonction_vocabulaire_2de",
-    microId: "fonction_tableau_signes",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Quelles sont les solutions de l'équation $(x - 2)(x + 5) = 0$ ?",
-    format: "qcm",
-    choices: ["$x = 2$ ou $x = -5$", "$x = -2$ ou $x = 5$", "$x = 2$ ou $x = 5$", "$x = 0$"],
-    expected: ["$x = 2$ ou $x = -5$"],
-    comparator: "mcq_exact",
-    hint: "On annule chaque facteur.",
-    explanation: exp(
-      "On applique la règle du produit nul.",
-      "$x - 2 = 0$ ou $x + 5 = 0$.",
-      "$x = 2$ ou $x = -5$.",
-      "Les solutions sont $x = 2$ ou $x = -5$."
-    ),
-    tags: ["seconde", "maths", "fonctions", "tableau_signes", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "seconde_fct_sig_fixed_3",
-    niveau: "seconde",
-    matiere: "maths",
-    notionId: "fonction_vocabulaire_2de",
-    microId: "fonction_tableau_signes",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Le facteur $x - 3$ s'annule en $3$. Pour $x > 3$, quel est son signe ?",
-    format: "qcm",
-    choices: ["positif", "négatif", "nul", "indéfini"],
-    expected: ["positif"],
-    comparator: "mcq_exact",
-    hint: "Teste avec $x = 4$ : $4 - 3 = 1$.",
-    explanation: exp(
-      "Un facteur affine $x - 3$ change de signe en $3$.",
-      "Pour $x > 3$, par exemple $x = 4$ : $4 - 3 = 1 > 0$.",
-      "Donc $x - 3$ est positif après $3$.",
-      "Il est positif pour $x > 3$."
-    ),
-    tags: ["seconde", "maths", "fonctions", "tableau_signes", "raisonnement", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "seconde_fct_sig_fixed_4",
-    niveau: "seconde",
-    matiere: "maths",
-    notionId: "fonction_vocabulaire_2de",
-    microId: "fonction_tableau_signes",
-    difficulty: 4,
-    theme: "neutral",
-    text: "À quoi sert un tableau de signes ?",
-    format: "qcm",
-    choices: [
-      "À étudier le signe d'un produit/quotient selon les valeurs de $x$",
-      "À calculer une moyenne",
-      "À tracer une parabole",
-      "À mesurer un angle",
-    ],
-    expected: ["À étudier le signe d'un produit/quotient selon les valeurs de $x$"],
-    comparator: "mcq_exact",
-    hint: "On y note le signe de chaque facteur, puis du produit.",
-    explanation: exp(
-      "Le tableau de signes organise l'étude du signe d'une expression factorisée.",
-      "On indique le signe de chaque facteur, puis on multiplie les signes.",
-      "Cela résout les inéquations produit/quotient.",
-      "Il sert à étudier le signe d'un produit/quotient selon $x$."
-    ),
-    tags: ["seconde", "maths", "fonctions", "tableau_signes", "raisonnement", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "seconde_fct_sig_fixed_5",
-    niveau: "seconde",
-    matiere: "maths",
-    notionId: "fonction_vocabulaire_2de",
-    microId: "fonction_tableau_signes",
-    difficulty: 3,
-    theme: "neutral",
-    text: "La fonction affine $f(x) = 2x - 6$ s'annule en quelle valeur ?",
-    format: "short",
-    expected: ["3"],
-    comparator: "number_equal",
-    hint: "On résout $2x - 6 = 0$.",
-    explanation: exp(
-      "Pour le tableau de signes, on cherche où $f$ s'annule.",
-      "$2x - 6 = 0 \\Rightarrow 2x = 6$.",
-      "$x = 3$.",
-      "$f$ s'annule en $3$."
-    ),
-    tags: ["seconde", "maths", "fonctions", "tableau_signes", "short"],
-  },
-
-  {
-    kind: "template",
-    id: "seconde_fct_sig_tpl_1",
-    niveau: "seconde",
-    matiere: "maths",
-    notionId: "fonction_vocabulaire_2de",
-    microId: "fonction_tableau_signes",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "On annule chaque facteur.",
-    tags: ["seconde", "maths", "fonctions", "tableau_signes", "template"],
-    generate: () => {
-      const a = randomInt(1, 6);
-      const b = randomInt(1, 6);
-      const correct = `$x = ${a}$ ou $x = ${-b}$`;
-      const choices = [
-        correct,
-        `$x = ${-a}$ ou $x = ${b}$`,
-        `$x = ${a}$ ou $x = ${b}$`,
-        `$x = ${-a}$ ou $x = ${-b}$`,
-      ];
-      return {
-        text: `Quelles sont les solutions de $(x - ${a})(x + ${b}) = 0$ ?`,
-        format: "qcm",
-        choices,
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "On applique la règle du produit nul.",
-          `$x - ${a} = 0$ ou $x + ${b} = 0$.`,
-          `$x = ${a}$ ou $x = ${-b}$.`,
-          `Les solutions sont $x = ${a}$ ou $x = ${-b}$.`
-        ),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "seconde_fct_sig_tpl_2",
-    niveau: "seconde",
-    matiere: "maths",
-    notionId: "fonction_vocabulaire_2de",
-    microId: "fonction_tableau_signes",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "On résout $ax + b = 0$.",
-    tags: ["seconde", "maths", "fonctions", "tableau_signes", "template"],
-    generate: () => {
-      const a = randomInt(2, 5);
-      const x = randomInt(1, 6);
-      const b = -a * x;
-      const sb = b >= 0 ? `+ ${b}` : `- ${-b}`;
-      return {
-        text: `En quelle valeur la fonction affine $f(x) = ${a}x ${sb}$ s'annule-t-elle ?`,
-        format: "short",
-        expected: [String(x)],
-        comparator: "number_equal",
-        explanation: exp(
-          "On cherche où $f$ s'annule pour le tableau de signes.",
-          `$${a}x ${sb} = 0 \\Rightarrow ${a}x = ${-b}$.`,
-          `$x = ${x}$.`,
-          `$f$ s'annule en $${x}$.`
-        ),
-      };
-    },
-  },
-
-  {
-    kind: "fixed",
-    id: "seconde_fct_sig_fixed_6",
-    niveau: "seconde",
-    matiere: "maths",
-    notionId: "fonction_vocabulaire_2de",
-    microId: "fonction_tableau_signes",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Pour résoudre l'inéquation $(x - 1)(x + 2) > 0$, l'outil le plus adapté est :",
-    format: "qcm",
-    choices: ["un tableau de signes", "le théorème de Pythagore", "la relation de Chasles", "un encadrement"],
-    expected: ["un tableau de signes"],
-    comparator: "mcq_exact",
-    hint: "On étudie le signe de chaque facteur.",
-    explanation: exp(
-      "Une inéquation produit se résout avec un tableau de signes.",
-      "On y note le signe de $x - 1$, de $x + 2$, puis du produit.",
-      "On lit les intervalles où le produit est positif.",
-      "On utilise un tableau de signes."
-    ),
-    tags: ["seconde", "maths", "fonctions", "tableau_signes", "raisonnement", "qcm"],
-  },
-
-  /* ===================== FONCTION_DOMAINE ===================== */
-  // ⛔ CETTE SECTION A REMPLACE CELLE DE LA PARITE, le 04/09/2026. Le mot
-  // « paire » n'apparait nulle part dans le BO 2026 : ses neuf items faisaient
-  // travailler l'eleve hors programme. La « recherche de domaine d'etude
-  // (ensemble de definition) », elle, y figure en contenu explicite.
-  // ⭐ Et le domaine est le prealable de tout le reste : on ne calcule pas une
-  // image en une valeur interdite, et le tableau de signes d'un quotient
-  // commence par la valeur qui annule le denominateur.
-
-  {
-    kind: "fixed",
     id: "seconde_fct_dom_fixed_1",
     niveau: "seconde",
     matiere: "maths",
@@ -1658,4 +1450,5 @@ export const fonctionVocabulaireBank: TutorBankItemV4[] = [
       };
     },
   },
+
 ];

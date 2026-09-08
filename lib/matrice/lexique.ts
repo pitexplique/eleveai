@@ -210,6 +210,21 @@ export const NOTIONS: NotionLexique[] = [
     alias: ["nombre premier", "nombres premiers", "facteurs premiers", "decomposition en facteurs premiers", "decomposer en facteurs", "crible", "eratosthene"],
   },
   {
+    // ⛔ « signe » SEUL n'est pas un alias : le mot vit dans « signe egal »,
+    // « les signes de ponctuation », « signe du zodiaque ». Il faut l'expression.
+    id: "tableau_signes", label: "le tableau de signes", matiere: "maths",
+    alias: [
+      "tableau de signes", "tableau de signe", "tableaux de signes",
+      "signe d'un produit", "signe d'un quotient", "etudier le signe",
+      // ⚠️ CES DEUX-LA SONT ACTUELLEMENT SANS EFFET, et il faut le savoir :
+      // le moteur cherche au PROGRAMME avant de lire le lexique, et le libelle
+      // « Nombres reels, intervalles et valeur absolue » marque un point sur
+      // « valeur ». « valeur interdite » ouvre donc reels_intervalles. On les
+      // garde : le jour ou ce libelle bouge, elles reprennent la main.
+      "valeur interdite", "valeurs interdites",
+    ],
+  },
+  {
     // ⭐ AVANT « calcul », dont les alias sont les plus larges de la table.
     // ⛔ « absolue » seul n'est PAS un alias : il faut l'expression entiere,
     // comme pour « premier » ou « decomposition ».

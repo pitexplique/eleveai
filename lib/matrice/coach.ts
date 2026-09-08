@@ -194,6 +194,10 @@ export const NOTION_COACH_MATHS: TableNotions = {
   // (valeur absolue d'un relatif), en seconde (distance sur la droite, puis la
   // fonction) et en premiere-spe (non-derivabilite en 0). Ailleurs le mot n'a
   // pas de notion, et une case inventee enverrait l'eleve sur un contresens.
+  // ⛔ Ligne d'UNE SEULE classe, et c'est voulu : la notion n'existe qu'en
+  // seconde. La STMG porte bien `auto_signes`, mais aucune cle « stmg » n'existe
+  // dans CLASSE_COACH — la matrice ne la sert pas.
+  tableau_signes: { seconde: "signes_expression_2de" },
   valeur_absolue: {
     "5e": "relatif_nombre",
     seconde: "reels_intervalles",
