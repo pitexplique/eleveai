@@ -80,6 +80,66 @@ function tableValeurs(xValues: number[], yValues: number[], highlightIndex?: num
   };
 }
 
+/**
+ * DEUX courbes dans le meme repere, pour les comparer entre elles.
+ *
+ * ⛔ Elles portent des couleurs FRANCHEMENT differentes et sont nommees dans
+ * l'enonce : une question qui dit « f est au-dessus de g » n'a aucun sens si
+ * l'eleve ne sait pas laquelle est laquelle.
+ */
+function deuxCourbes(
+  f: { type: "affine" | "quadratique"; a: number; b: number; c?: number },
+  g: { type: "affine" | "quadratique"; a: number; b: number; c?: number },
+  intersections: number[],
+): CanvasFigure {
+  // ⛔ LE CADRE SE CALCULE SUR LES COURBES, il n'est pas fige. Mesure sur
+  // 2 000 tirages : a cadre fixe, la droite de g ne restait visible que sur
+  // 38 % de la largeur — elle sortait par le haut ou par le bas selon son
+  // ordonnee a l'origine. On centre donc sur les intersections, et on prend la
+  // hauteur qu'il faut pour que LES DEUX courbes tiennent entieres.
+  const hauteur = (c: { type: string; a: number; b: number; c?: number }, x: number) =>
+    c.type === "affine" ? c.a * x + c.b : c.a * x * x + c.b * x + (c.c ?? 0);
+
+  // ⛔ ET LA FENETRE SE RESSERRE JUSQU'A CE QUE LA HAUTEUR TIENNE. Une parabole
+  // grimpe vite : a marge fixe, l'amplitude verticale montait a 28 unites pour
+  // 8 de large — le dessin etirait la courbe et serrait les graduations au point
+  // de les rendre illisibles. On reduit la marge jusqu'a redescendre sous 14.
+  const bas = Math.min(...intersections, 0);
+  const haut = Math.max(...intersections, 0);
+  let marge = 3;
+  let xmin = bas - marge;
+  let xmax = haut + marge;
+  let ymin = 0;
+  let ymax = 0;
+  for (;;) {
+    const vues: number[] = [];
+    for (let x = xmin; x <= xmax; x += 0.5) vues.push(hauteur(f, x), hauteur(g, x));
+    ymin = Math.floor(Math.min(...vues)) - 1;
+    ymax = Math.ceil(Math.max(...vues)) + 1;
+    if (ymax - ymin <= 14 || marge <= 1) break;
+    marge -= 0.5;
+    xmin = bas - marge;
+    xmax = haut + marge;
+  }
+
+  return {
+    kind: "fonctionGraphique",
+    size: { width: 240, height: 215 },
+    xmin,
+    xmax,
+    ymin,
+    ymax,
+    grille: true,
+    courbes: [
+      { id: "f", type: f.type, a: f.a, b: f.b, c: f.c, couleur: "#2563eb" },
+      { id: "g", type: g.type, a: g.a, b: g.b, c: g.c, couleur: "#b45309" },
+    ],
+    misesEnEvidence: intersections.map((x) => ({
+      point: { x, y: f.type === "affine" ? f.a * x + f.b : f.a * x * x + f.b * x + (f.c ?? 0), label: `${x}`, couleur: "#dc2626" },
+    })),
+  };
+}
+
 function courbeAffine(a: number, b: number, points?: { x: number; y: number; label?: string }[]): CanvasFigure {
   return {
     kind: "fonctionGraphique",
@@ -1451,4 +1511,286 @@ export const fonctionVocabulaireBank: TutorBankItemV4[] = [
     },
   },
 
+
+  // ============================================================
+  // fonction_comparer_courbes — deux courbes, pas une courbe et un axe
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "seconde_fct_cmp_fixed_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_vocabulaire_2de",
+    microId: "fonction_comparer_courbes",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Que représente un point d'INTERSECTION de deux courbes $C_f$ et $C_g$ ?",
+    format: "qcm",
+    choices: [
+      "une valeur de $x$ pour laquelle $f(x) = g(x)$",
+      "une valeur de $x$ pour laquelle $f(x) = 0$",
+      "le maximum de $f$",
+      "une valeur interdite",
+    ],
+    expected: ["une valeur de $x$ pour laquelle $f(x) = g(x)$"],
+    comparator: "mcq_exact",
+    hint: "En ce point, les deux courbes ont la même hauteur.",
+    explanation: exp(
+      "Deux courbes se coupent là où elles ont la même ordonnée pour la même abscisse.",
+      "On repère l'abscisse du point commun.",
+      "En cette abscisse, $f$ et $g$ prennent la même valeur.",
+      "C'est donc une solution de $f(x) = g(x)$ — et non de $f(x) = 0$, qui se lit sur l'AXE."
+    ),
+    tags: ["seconde", "maths", "fonctions", "graphique", "deux-courbes", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_fct_cmp_fixed_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_vocabulaire_2de",
+    microId: "fonction_comparer_courbes",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Comment lit-on graphiquement $f(x) > g(x)$ ?",
+    format: "qcm",
+    choices: [
+      "là où $C_f$ est AU-DESSUS de $C_g$",
+      "là où $C_f$ est au-dessus de l'axe des abscisses",
+      "là où $C_f$ monte",
+      "là où les deux courbes se coupent",
+    ],
+    expected: ["là où $C_f$ est AU-DESSUS de $C_g$"],
+    comparator: "mcq_exact",
+    hint: "On compare les deux courbes ENTRE ELLES, plus à l'axe.",
+    explanation: exp(
+      "$f(x) > g(x)$ compare deux hauteurs entre elles, à la même abscisse.",
+      "On regarde, colonne par colonne, laquelle des deux courbes est la plus haute.",
+      "Là où $C_f$ passe au-dessus de $C_g$, l'inégalité est vraie.",
+      "⚠️ Le réflexe « au-dessus de l'axe » ne sert plus ici : l'axe n'intervient pas. Les deux courbes peuvent être négatives et l'inégalité vraie quand même."
+    ),
+    tags: ["seconde", "maths", "fonctions", "graphique", "deux-courbes", "piege", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "seconde_fct_cmp_tpl_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_vocabulaire_2de",
+    microId: "fonction_comparer_courbes",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche l'abscisse du point où les deux droites se croisent.",
+    tags: ["seconde", "maths", "fonctions", "graphique", "deux-courbes", "canvas", "template", "qcm"],
+    generate: () => {
+      const x0 = randomInt(-2, 2);
+      const a1 = randomInt(1, 2);
+      const a2 = -randomInt(1, 2);
+      const b1 = randomInt(-1, 2);
+      const b2 = b1 + (a1 - a2) * x0;
+      const correct = `$x = ${x0}$`;
+      return {
+        text: "D'après le graphique, quelle est la solution de $f(x) = g(x)$ ?",
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$x = ${x0 + 1}$`,
+          `$x = ${x0 - 1}$`,
+          "il n'y en a pas",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: deuxCourbes(
+          { type: "affine", a: a1, b: b1 },
+          { type: "affine", a: a2, b: b2 },
+          [x0],
+        ),
+        explanation: exp(
+          "Résoudre $f(x) = g(x)$ graphiquement, c'est chercher où les deux courbes se COUPENT.",
+          "On repère le point commun, puis on lit son ABSCISSE.",
+          `Les deux droites se croisent au point d'abscisse $${x0}$.`,
+          `La solution est $x = ${x0}$ — on lit l'abscisse, jamais l'ordonnée.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_fct_cmp_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_vocabulaire_2de",
+    microId: "fonction_comparer_courbes",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "De quel côté du point de croisement la droite de $f$ passe-t-elle au-dessus ?",
+    tags: ["seconde", "maths", "fonctions", "graphique", "deux-courbes", "canvas", "template", "qcm"],
+    generate: () => {
+      const x0 = randomInt(-2, 2);
+      const a1 = randomInt(1, 2);
+      const a2 = -randomInt(1, 2);
+      const b1 = randomInt(-1, 2);
+      const b2 = b1 + (a1 - a2) * x0;
+      // a1 > a2 : f depasse g APRES x0.
+      const correct = `$]${x0}\\,;\\,+\\infty[$`;
+      return {
+        text: "D'après le graphique, résoudre $f(x) > g(x)$.",
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$]-\\infty\\,;\\,${x0}[$`,
+          `$[${x0}\\,;\\,+\\infty[$`,
+          "$\\mathbb{R}$",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: deuxCourbes(
+          { type: "affine", a: a1, b: b1 },
+          { type: "affine", a: a2, b: b2 },
+          [x0],
+        ),
+        explanation: exp(
+          "$f(x) > g(x)$ se lit « la courbe de $f$ est au-dessus de celle de $g$ ».",
+          "On repère le croisement, puis on regarde de quel côté $C_f$ domine.",
+          `Les droites se croisent en $${x0}$ ; celle de $f$ monte plus vite, donc elle passe au-dessus APRÈS $${x0}$.`,
+          `Les solutions sont $]${x0}\\,;\\,+\\infty[$ — borne exclue, car en $${x0}$ les deux fonctions sont ÉGALES.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_fct_cmp_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_vocabulaire_2de",
+    microId: "fonction_comparer_courbes",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Une parabole et une droite peuvent se couper DEUX fois.",
+    tags: ["seconde", "maths", "fonctions", "graphique", "deux-courbes", "canvas", "template", "qcm"],
+    generate: () => {
+      const r1 = randomInt(-3, -1);
+      const r2 = r1 + randomInt(2, 4);
+      const m = randomInt(-1, 1);
+      const k = randomInt(-1, 2);
+      // f - g = (x - r1)(x - r2), avec g affine.
+      const fb = m - r1 - r2;
+      const fc = r1 * r2 + k;
+      const correct = `$${r1}$ et $${r2}$`;
+      return {
+        text: "D'après le graphique, quelles sont les solutions de $f(x) = g(x)$ ?",
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$${r1}$ seulement`,
+          `$${r2}$ seulement`,
+          "il n'y en a pas",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: deuxCourbes(
+          { type: "quadratique", a: 1, b: fb, c: fc },
+          { type: "affine", a: m, b: k },
+          [r1, r2],
+        ),
+        explanation: exp(
+          "Les solutions de $f(x) = g(x)$ sont les abscisses des points d'INTERSECTION.",
+          "On compte les points communs, puis on lit leurs abscisses.",
+          `La parabole coupe la droite en deux points, d'abscisses $${r1}$ et $${r2}$.`,
+          `Les solutions sont $${r1}$ et $${r2}$ — une parabole et une droite se coupent souvent DEUX fois.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_fct_cmp_tpl_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_vocabulaire_2de",
+    microId: "fonction_comparer_courbes",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Entre les deux croisements, la parabole plonge SOUS la droite.",
+    tags: ["seconde", "maths", "fonctions", "graphique", "deux-courbes", "canvas", "template", "qcm"],
+    generate: () => {
+      const r1 = randomInt(-3, -1);
+      const r2 = r1 + randomInt(2, 4);
+      const m = randomInt(-1, 1);
+      const k = randomInt(-1, 2);
+      const fb = m - r1 - r2;
+      const fc = r1 * r2 + k;
+      const correct = `$]${r1}\\,;\\,${r2}[$`;
+      return {
+        text: "D'après le graphique, résoudre $f(x) < g(x)$.",
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$]-\\infty\\,;\\,${r1}[ \\cup ]${r2}\\,;\\,+\\infty[$`,
+          `$[${r1}\\,;\\,${r2}]$`,
+          "$\\mathbb{R}$",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: deuxCourbes(
+          { type: "quadratique", a: 1, b: fb, c: fc },
+          { type: "affine", a: m, b: k },
+          [r1, r2],
+        ),
+        explanation: exp(
+          "$f(x) < g(x)$ se lit « la parabole est EN DESSOUS de la droite ».",
+          "On repère les deux croisements, puis la portion où la parabole passe dessous.",
+          `Entre $${r1}$ et $${r2}$, la parabole plonge sous la droite ; à l'extérieur, elle repasse au-dessus.`,
+          `Les solutions sont $]${r1}\\,;\\,${r2}[$ — bornes exclues, l'inégalité étant stricte.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_fct_cmp_tpl_5",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_vocabulaire_2de",
+    microId: "fonction_comparer_courbes",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Compare les deux HAUTEURS à cette abscisse, pas leurs signes.",
+    tags: ["seconde", "maths", "fonctions", "graphique", "deux-courbes", "piege", "canvas", "template", "qcm"],
+    generate: () => {
+      const x0 = randomInt(-2, 2);
+      const a1 = randomInt(1, 2);
+      const a2 = -randomInt(1, 2);
+      const b1 = randomInt(-1, 2);
+      const b2 = b1 + (a1 - a2) * x0;
+      const x = x0 + randomInt(1, 2);
+      const correct = `$f(${x}) > g(${x})$`;
+      return {
+        text: `D'après le graphique, comparer $f(${x})$ et $g(${x})$.`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$f(${x}) < g(${x})$`,
+          `$f(${x}) = g(${x})$`,
+          "on ne peut pas comparer",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: deuxCourbes(
+          { type: "affine", a: a1, b: b1 },
+          { type: "affine", a: a2, b: b2 },
+          [x0],
+        ),
+        explanation: exp(
+          "Comparer $f(x)$ et $g(x)$ à une abscisse donnée, c'est comparer deux HAUTEURS.",
+          `On se place en $x = ${x}$ et on regarde laquelle des deux courbes est la plus haute.`,
+          `$${x}$ est situé APRÈS le croisement en $${x0}$, et c'est $C_f$ qui domine de ce côté.`,
+          `$f(${x}) > g(${x})$ — et cela reste vrai même si les deux valeurs sont négatives : on compare entre elles, pas à zéro.`
+        ),
+      };
+    },
+  },
 ];

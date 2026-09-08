@@ -102,6 +102,11 @@ export const microSkills: MicroSkillSource[] = [
   { id: "fonction_antecedent", label: "Rechercher un antécédent", notionId: "fonction_vocabulaire_2de", prerequis: ["fonction_image_formule", "equation_resoudre"] },
   { id: "fonction_tableau_graphique", label: "Passer d'un tableau à un graphique", notionId: "fonction_vocabulaire_2de", prerequis: ["fonction_vocabulaire"] },
   { id: "fonction_resolution_graphique", label: "Résoudre graphiquement $f(x) = k$ ou $f(x) < k$", notionId: "fonction_vocabulaire_2de", prerequis: ["fonction_vocabulaire", "fonction_antecedent"] },
+  // ⭐ AJOUTE LE 08/09/2026, sur le controle commun de mars 2025 : ses
+  // questions 5.4 et 5.5 comparent DEUX courbes. Geste distinct de
+  // `fonction_resolution_graphique`, qui compare une courbe a une
+  // HORIZONTALE : ici le reflexe « au-dessus de l'axe » ne sert plus.
+  { id: "fonction_comparer_courbes", label: "Résoudre graphiquement $f(x) = g(x)$ ou $f(x) > g(x)$", notionId: "fonction_vocabulaire_2de", prerequis: ["fonction_resolution_graphique"] },
 
   /* ===================== signes_expression_2de ===================== */
   // ⛔ `fonction_tableau_signes` GARDE SON IDENTIFIANT en changeant de notion :
