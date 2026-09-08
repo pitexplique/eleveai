@@ -1674,7 +1674,12 @@ export const fonctionVocabulaireBank: TutorBankItemV4[] = [
     tags: ["seconde", "maths", "fonctions", "graphique", "deux-courbes", "canvas", "template", "qcm"],
     generate: () => {
       const r1 = randomInt(-3, -1);
-      const r2 = r1 + randomInt(2, 4);
+      // ⭐⭐ L'ECART EST PAIR, donc le MILIEU des racines tombe sur un entier
+      // (Frederic, 08/09/2026 : « choisis des milieux de racines qui tombent
+      // sur un nombre entier, plus facile pour l'exemple »). Le sommet d'une
+      // parabole est au milieu de ses racines : un ecart impair le posait sur
+      // un demi-entier une fois sur trois.
+      const r2 = r1 + 2 * randomInt(1, 2);
       const m = randomInt(-1, 1);
       const k = randomInt(-1, 2);
       // f - g = (x - r1)(x - r2), avec g affine.
@@ -1719,7 +1724,12 @@ export const fonctionVocabulaireBank: TutorBankItemV4[] = [
     tags: ["seconde", "maths", "fonctions", "graphique", "deux-courbes", "canvas", "template", "qcm"],
     generate: () => {
       const r1 = randomInt(-3, -1);
-      const r2 = r1 + randomInt(2, 4);
+      // ⭐⭐ L'ECART EST PAIR, donc le MILIEU des racines tombe sur un entier
+      // (Frederic, 08/09/2026 : « choisis des milieux de racines qui tombent
+      // sur un nombre entier, plus facile pour l'exemple »). Le sommet d'une
+      // parabole est au milieu de ses racines : un ecart impair le posait sur
+      // un demi-entier une fois sur trois.
+      const r2 = r1 + 2 * randomInt(1, 2);
       const m = randomInt(-1, 1);
       const k = randomInt(-1, 2);
       const fb = m - r1 - r2;

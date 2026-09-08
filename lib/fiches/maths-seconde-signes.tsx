@@ -72,13 +72,16 @@ function courbe(
         // y = -6,25 : avec ymin = -5, le bas de la parabole etait COUPE, et le
         // dessin ne montrait plus le creux dont parle le texte.
         //
-        // ⭐ Frederic : « mets 0,5(x+1)(x-4) ». Le coefficient 0,5 garde les
-        // racines -1 et 4 — celles qu'un professeur ecrirait — tout en ramenant
-        // le creux de -6,25 a -3,125. La courbe tient, sans rien perdre.
+        // ⭐⭐ LE MILIEU DES RACINES DOIT TOMBER SUR UN ENTIER (Frederic,
+        // 08/09/2026) : « choisis des milieux de racines qui tombent sur un
+        // nombre entier, plus facile pour l'exemple ». Le sommet d'une parabole
+        // est au MILIEU de ses racines — leur somme doit donc etre paire.
+        // 0,5(x+1)(x-4) donnait un sommet en 1,5 ; 0,5(x+1)(x-3) le pose en
+        // (1 ; -2), tout en entiers, et le creux tient dans le cadre.
         xmin: -2,
-        xmax: 5,
-        ymin: -4,
-        ymax: 4,
+        xmax: 4,
+        ymin: -3,
+        ymax: 3,
         grille: true,
         courbes: [{ id: "f", type, a, b, c, couleur: "#2563eb" }],
         // ⛔ LES RACINES NE PORTENT PAS D'ETIQUETTE. Elles sont posees SUR l'axe
@@ -163,7 +166,7 @@ export const ficheSignesSeconde: FicheCoursData = {
       titre: "Le signe se lit aussi sur une courbe",
       texte:
         "Au-dessus de l'axe des abscisses : positif. En dessous : négatif. Attention, « la courbe monte » décrit les variations, pas le signe.",
-      schema: courbe("quadratique", 0.5, -1.5, -2, [-1, 4]),
+      schema: courbe("quadratique", 0.5, -1, -1.5, [-1, 3]),
     },
   ],
 
