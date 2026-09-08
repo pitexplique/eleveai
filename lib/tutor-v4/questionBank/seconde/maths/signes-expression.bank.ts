@@ -1127,12 +1127,14 @@ export const signesExpressionBank: TutorBankItemV4[] = [
     tags: ["seconde", "maths", "signes", "graphique", "canvas", "template", "qcm"],
     generate: () => {
       const r1 = randomInt(-4, -1);
-      // ⭐⭐ L'ECART EST PAIR, donc le MILIEU des racines tombe sur un entier
-      // (Frederic, 08/09/2026 : « choisis des milieux de racines qui tombent
-      // sur un nombre entier, plus facile pour l'exemple »). Le sommet d'une
-      // parabole est au milieu de ses racines : un ecart impair le posait sur
-      // un demi-entier une fois sur trois.
-      const r2 = r1 + 2 * randomInt(1, 2);
+      // ⚠️ L'ECART RESTE LIBRE, pair ou impair (Frederic, 08/09/2026) : « on
+      // peut parfois avoir des milieux de racines qui ne sont pas entiers,
+      // mais parfois plus simple pour l'explication ». Le sommet d'une
+      // parabole est au milieu de ses racines, donc un ecart impair le pose
+      // sur un demi-entier — c'est legitime, et l'eleve doit le rencontrer.
+      // ⭐ La preference pour l'entier vaut dans une FICHE, ou l'on explique ;
+      // pas ici, ou l'on entraine et ou la variete compte.
+      const r2 = r1 + randomInt(2, 4);
       const nom = nomFonction();
       // (x - r1)(x - r2) = x^2 - (r1+r2)x + r1 r2
       const correct = "3";
@@ -1166,12 +1168,14 @@ export const signesExpressionBank: TutorBankItemV4[] = [
     tags: ["seconde", "maths", "signes", "graphique", "canvas", "template", "qcm"],
     generate: () => {
       const r1 = randomInt(-4, -1);
-      // ⭐⭐ L'ECART EST PAIR, donc le MILIEU des racines tombe sur un entier
-      // (Frederic, 08/09/2026 : « choisis des milieux de racines qui tombent
-      // sur un nombre entier, plus facile pour l'exemple »). Le sommet d'une
-      // parabole est au milieu de ses racines : un ecart impair le posait sur
-      // un demi-entier une fois sur trois.
-      const r2 = r1 + 2 * randomInt(1, 2);
+      // ⚠️ L'ECART RESTE LIBRE, pair ou impair (Frederic, 08/09/2026) : « on
+      // peut parfois avoir des milieux de racines qui ne sont pas entiers,
+      // mais parfois plus simple pour l'explication ». Le sommet d'une
+      // parabole est au milieu de ses racines, donc un ecart impair le pose
+      // sur un demi-entier — c'est legitime, et l'eleve doit le rencontrer.
+      // ⭐ La preference pour l'entier vaut dans une FICHE, ou l'on explique ;
+      // pas ici, ou l'on entraine et ou la variete compte.
+      const r2 = r1 + randomInt(2, 4);
       const nom = nomFonction();
       const correct = `$]${r1}\\,;\\,${r2}[$`;
       return {
@@ -1208,12 +1212,14 @@ export const signesExpressionBank: TutorBankItemV4[] = [
     tags: ["seconde", "maths", "signes", "graphique", "canvas", "template", "qcm"],
     generate: () => {
       const r1 = randomInt(-4, -1);
-      // ⭐⭐ L'ECART EST PAIR, donc le MILIEU des racines tombe sur un entier
-      // (Frederic, 08/09/2026 : « choisis des milieux de racines qui tombent
-      // sur un nombre entier, plus facile pour l'exemple »). Le sommet d'une
-      // parabole est au milieu de ses racines : un ecart impair le posait sur
-      // un demi-entier une fois sur trois.
-      const r2 = r1 + 2 * randomInt(1, 2);
+      // ⚠️ L'ECART RESTE LIBRE, pair ou impair (Frederic, 08/09/2026) : « on
+      // peut parfois avoir des milieux de racines qui ne sont pas entiers,
+      // mais parfois plus simple pour l'explication ». Le sommet d'une
+      // parabole est au milieu de ses racines, donc un ecart impair le pose
+      // sur un demi-entier — c'est legitime, et l'eleve doit le rencontrer.
+      // ⭐ La preference pour l'entier vaut dans une FICHE, ou l'on explique ;
+      // pas ici, ou l'on entraine et ou la variete compte.
+      const r2 = r1 + randomInt(2, 4);
       const nom = nomFonction();
       // -(x - r1)(x - r2)
       const correct = `$-$, $+$, $-$`;
@@ -1484,12 +1490,14 @@ export const signesExpressionBank: TutorBankItemV4[] = [
     tags: ["seconde", "maths", "signes", "equation", "graphique", "canvas", "template", "qcm"],
     generate: () => {
       const r1 = randomInt(-4, -1);
-      // ⭐⭐ L'ECART EST PAIR, donc le MILIEU des racines tombe sur un entier
-      // (Frederic, 08/09/2026 : « choisis des milieux de racines qui tombent
-      // sur un nombre entier, plus facile pour l'exemple »). Le sommet d'une
-      // parabole est au milieu de ses racines : un ecart impair le posait sur
-      // un demi-entier une fois sur trois.
-      const r2 = r1 + 2 * randomInt(1, 2);
+      // ⚠️ L'ECART RESTE LIBRE, pair ou impair (Frederic, 08/09/2026) : « on
+      // peut parfois avoir des milieux de racines qui ne sont pas entiers,
+      // mais parfois plus simple pour l'explication ». Le sommet d'une
+      // parabole est au milieu de ses racines, donc un ecart impair le pose
+      // sur un demi-entier — c'est legitime, et l'eleve doit le rencontrer.
+      // ⭐ La preference pour l'entier vaut dans une FICHE, ou l'on explique ;
+      // pas ici, ou l'on entraine et ou la variete compte.
+      const r2 = r1 + randomInt(2, 4);
       const nom = nomFonction();
       const correct = `$${r1}$ et $${r2}$`;
       return {
@@ -1690,12 +1698,14 @@ export const signesExpressionBank: TutorBankItemV4[] = [
     tags: ["seconde", "maths", "signes", "inequation", "graphique", "canvas", "template", "qcm"],
     generate: () => {
       const r1 = randomInt(-4, -1);
-      // ⭐⭐ L'ECART EST PAIR, donc le MILIEU des racines tombe sur un entier
-      // (Frederic, 08/09/2026 : « choisis des milieux de racines qui tombent
-      // sur un nombre entier, plus facile pour l'exemple »). Le sommet d'une
-      // parabole est au milieu de ses racines : un ecart impair le posait sur
-      // un demi-entier une fois sur trois.
-      const r2 = r1 + 2 * randomInt(1, 2);
+      // ⚠️ L'ECART RESTE LIBRE, pair ou impair (Frederic, 08/09/2026) : « on
+      // peut parfois avoir des milieux de racines qui ne sont pas entiers,
+      // mais parfois plus simple pour l'explication ». Le sommet d'une
+      // parabole est au milieu de ses racines, donc un ecart impair le pose
+      // sur un demi-entier — c'est legitime, et l'eleve doit le rencontrer.
+      // ⭐ La preference pour l'entier vaut dans une FICHE, ou l'on explique ;
+      // pas ici, ou l'on entraine et ou la variete compte.
+      const r2 = r1 + randomInt(2, 4);
       const nom = nomFonction();
       const correct = `$]-\\infty\\,;\\,${r1}[ \\cup ]${r2}\\,;\\,+\\infty[$`;
       return {
@@ -1843,12 +1853,14 @@ export const signesExpressionBank: TutorBankItemV4[] = [
     tags: ["seconde", "maths", "signes", "inequation", "graphique", "canvas", "template", "qcm"],
     generate: () => {
       const r1 = randomInt(-4, -1);
-      // ⭐⭐ L'ECART EST PAIR, donc le MILIEU des racines tombe sur un entier
-      // (Frederic, 08/09/2026 : « choisis des milieux de racines qui tombent
-      // sur un nombre entier, plus facile pour l'exemple »). Le sommet d'une
-      // parabole est au milieu de ses racines : un ecart impair le posait sur
-      // un demi-entier une fois sur trois.
-      const r2 = r1 + 2 * randomInt(1, 2);
+      // ⚠️ L'ECART RESTE LIBRE, pair ou impair (Frederic, 08/09/2026) : « on
+      // peut parfois avoir des milieux de racines qui ne sont pas entiers,
+      // mais parfois plus simple pour l'explication ». Le sommet d'une
+      // parabole est au milieu de ses racines, donc un ecart impair le pose
+      // sur un demi-entier — c'est legitime, et l'eleve doit le rencontrer.
+      // ⭐ La preference pour l'entier vaut dans une FICHE, ou l'on explique ;
+      // pas ici, ou l'on entraine et ou la variete compte.
+      const r2 = r1 + randomInt(2, 4);
       const nom = nomFonction();
       const correct = `$[${r1}\\,;\\,${r2}]$`;
       return {
