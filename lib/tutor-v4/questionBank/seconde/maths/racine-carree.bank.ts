@@ -17,6 +17,34 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
+function shuffle<T>(arr: readonly T[]): T[] {
+  const copie = [...arr];
+  for (let i = copie.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copie[i], copie[j]] = [copie[j], copie[i]];
+  }
+  return copie;
+}
+
+/**
+ * Quatre propositions garanties DISTINCTES.
+ * ⛔ Un distracteur peut rejoindre la bonne reponse selon le tirage : avec
+ * a = b = 2, le produit a x b vaut 4 comme la somme a + b, et le QCM offrait
+ * deux fois la meme case.
+ */
+function choixDistincts(correct: string, voulus: string[], secours: string[]): string[] {
+  const vus = new Set([correct]);
+  const sortie = [correct];
+  for (const c of [...voulus, ...secours]) {
+    if (sortie.length === 4) break;
+    if (!vus.has(c)) {
+      vus.add(c);
+      sortie.push(c);
+    }
+  }
+  return shuffle(sortie);
+}
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -832,7 +860,7 @@ export const racineCarreeBank: TutorBankItemV4[] = [
     niveau: "seconde",
     matiere: "maths",
     notionId: "racine_carree_2de",
-    microId: "racine_simplification",
+    microId: "racine_somme",
     difficulty: 4,
     theme: "neutral",
     text: "Combien vaut $\\sqrt{18} + \\sqrt{2}$ ?",
@@ -992,5 +1020,344 @@ export const racineCarreeBank: TutorBankItemV4[] = [
       "$\\sqrt{75} = 5\\sqrt{3}$."
     ),
     tags: ["seconde", "maths", "racine", "simplification", "qcm"],
+  },
+
+  // ============================================================
+  // racine_somme — on n'additionne QUE des radicaux identiques
+  // ============================================================
+  // ⛔ L'erreur imite la regle du PRODUIT, qui elle est vraie : √2 × √3 = √6,
+  // donc √2 + √3 « devrait » faire √5. Plusieurs items cassent ce parallele.
+
+  {
+    kind: "fixed",
+    id: "seconde_racine_somme_fixed_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_somme",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Combien vaut $\\sqrt{2} + \\sqrt{3}$ ?",
+    format: "qcm",
+    choices: [
+      "on ne peut pas simplifier : cela reste $\\sqrt{2} + \\sqrt{3}$",
+      "$\\sqrt{5}$",
+      "$\\sqrt{6}$",
+      "$2\\sqrt{5}$",
+    ],
+    expected: ["on ne peut pas simplifier : cela reste $\\sqrt{2} + \\sqrt{3}$"],
+    comparator: "mcq_exact",
+    hint: "Les deux radicaux sont-ils les mêmes ?",
+    explanation: exp(
+      "On n'additionne que des racines PORTANT LE MÊME NOMBRE sous le radical.",
+      "On compare ce qui est sous les racines : ici $2$ et $3$, qui diffèrent.",
+      "Rien ne permet donc de les regrouper : la somme reste telle quelle.",
+      "⚠️ $\\sqrt{2} + \\sqrt{3} \\neq \\sqrt{5}$. Vérification : $\\sqrt{2} \\approx 1{,}41$ et $\\sqrt{3} \\approx 1{,}73$, soit environ $3{,}14$ — alors que $\\sqrt{5} \\approx 2{,}24$."
+    ),
+    tags: ["seconde", "maths", "racine", "somme", "piege", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_racine_somme_fixed_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_somme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Pourquoi $\\sqrt{a} \\times \\sqrt{b} = \\sqrt{ab}$ fonctionne-t-il, alors que la même règle est FAUSSE pour l'addition ?",
+    format: "qcm",
+    choices: [
+      "la racine carrée respecte le produit, mais pas la somme",
+      "elle respecte les deux, mais on l'écrit autrement",
+      "c'est une convention arbitraire",
+      "la règle du produit est fausse aussi",
+    ],
+    expected: ["la racine carrée respecte le produit, mais pas la somme"],
+    comparator: "mcq_exact",
+    hint: "Teste sur des nombres simples : $\\sqrt{9} + \\sqrt{16}$ vaut-il $\\sqrt{25}$ ?",
+    explanation: exp(
+      "La racine carrée se distribue sur le PRODUIT, jamais sur la SOMME.",
+      "On le vérifie sur des carrés parfaits, où tout se calcule.",
+      "$\\sqrt{9} \\times \\sqrt{16} = 3 \\times 4 = 12 = \\sqrt{144}$ ✓. Mais $\\sqrt{9} + \\sqrt{16} = 3 + 4 = 7$, alors que $\\sqrt{25} = 5$.",
+      "C'est précisément parce que la règle du produit EST vraie que l'erreur sur la somme est si tentante."
+    ),
+    tags: ["seconde", "maths", "racine", "somme", "piege", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_racine_somme_fixed_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_somme",
+    difficulty: 2,
+    theme: "neutral",
+    text: "À quoi peut-on comparer $\\sqrt{2} + 3\\sqrt{2}$ pour le calculer ?",
+    format: "qcm",
+    choices: [
+      "à $x + 3x$ : le radical se comporte comme une lettre",
+      "à $x \\times 3x$",
+      "à $2 + 3 \\times 2$",
+      "à rien : c'est un cas particulier",
+    ],
+    expected: ["à $x + 3x$ : le radical se comporte comme une lettre"],
+    comparator: "mcq_exact",
+    hint: "Remplace $\\sqrt{2}$ par $x$ et regarde ce qui reste.",
+    explanation: exp(
+      "Un radical identique se traite comme une inconnue : on additionne les coefficients.",
+      "On pose $x = \\sqrt{2}$ et on réécrit la somme.",
+      "$\\sqrt{2} + 3\\sqrt{2}$ devient $x + 3x = 4x$, soit $4\\sqrt{2}$.",
+      "Le radical joue le rôle d'une lettre — c'est la même règle que le calcul littéral, pas une nouvelle."
+    ),
+    tags: ["seconde", "maths", "racine", "somme", "methode", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "seconde_racine_somme_tpl_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_somme",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Même radical : on additionne les coefficients.",
+    tags: ["seconde", "maths", "racine", "somme", "template", "qcm"],
+    generate: () => {
+      const k = [2, 3, 5, 6, 7][randomInt(0, 4)];
+      const a = randomInt(2, 6);
+      const b = randomInt(2, 6);
+      const correct = `$${a + b}\\sqrt{${k}}$`;
+      return {
+        text: `Combien vaut $${a}\\sqrt{${k}} + ${b}\\sqrt{${k}}$ ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          correct,
+          [
+            `$${a * b}\\sqrt{${k}}$`,
+            `$${a + b}\\sqrt{${2 * k}}$`,
+            `$\\sqrt{${(a + b) * k}}$`,
+          ],
+          [`$${a + b}$`, `$${a + b + 1}\\sqrt{${k}}$`]
+        ),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Deux radicaux identiques s'additionnent par leurs coefficients.",
+          `On garde $\\sqrt{${k}}$ et on additionne $${a}$ et $${b}$.`,
+          `$${a} + ${b} = ${a + b}$, donc le résultat est $${a + b}\\sqrt{${k}}$.`,
+          `⚠️ Le nombre SOUS le radical ne change pas : ce n'est ni $\\sqrt{${2 * k}}$, ni $\\sqrt{${(a + b) * k}}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_racine_somme_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_somme",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Compare ce qui est SOUS les deux radicaux.",
+    tags: ["seconde", "maths", "racine", "somme", "piege", "template", "qcm"],
+    generate: () => {
+      const paires = [
+        [2, 3],
+        [3, 5],
+        [2, 7],
+        [5, 6],
+        [3, 7],
+        [2, 5],
+      ];
+      const [u, v] = paires[randomInt(0, paires.length - 1)];
+      const correct = "on ne peut pas simplifier";
+      return {
+        text: `Combien vaut $\\sqrt{${u}} + \\sqrt{${v}}$ ?`,
+        format: "qcm",
+        choices: [
+          correct,
+          `$\\sqrt{${u + v}}$`,
+          `$\\sqrt{${u * v}}$`,
+          `$2\\sqrt{${u + v}}$`,
+        ],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On n'additionne que des racines portant le même nombre sous le radical.",
+          `On compare : sous les racines, $${u}$ et $${v}$ diffèrent.`,
+          `Aucun regroupement n'est possible, et $\\sqrt{${u}} + \\sqrt{${v}} \\neq \\sqrt{${u + v}}$.`,
+          `La somme reste $\\sqrt{${u}} + \\sqrt{${v}}$ — c'est une réponse complète, pas un échec.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_racine_somme_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_somme",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Simplifie CHAQUE racine d'abord : le radical commun apparaîtra.",
+    tags: ["seconde", "maths", "racine", "somme", "simplification", "template", "qcm"],
+    generate: () => {
+      const k = [2, 3, 5][randomInt(0, 2)];
+      const a = randomInt(2, 5);
+      const b = randomInt(2, 5);
+      const correct = `$${a + b}\\sqrt{${k}}$`;
+      return {
+        text: `Combien vaut $\\sqrt{${a * a * k}} + \\sqrt{${b * b * k}}$ ?`,
+        format: "qcm",
+        choices: [
+          correct,
+          `$\\sqrt{${a * a * k + b * b * k}}$`,
+          `$${a + b}\\sqrt{${2 * k}}$`,
+          "on ne peut pas simplifier",
+        ],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Deux racines qui semblent différentes peuvent cacher le MÊME radical.",
+          "On simplifie chacune avant de conclure quoi que ce soit.",
+          `$\\sqrt{${a * a * k}} = ${a}\\sqrt{${k}}$ et $\\sqrt{${b * b * k}} = ${b}\\sqrt{${k}}$ : le radical est le même.`,
+          `On additionne alors les coefficients : $${a}\\sqrt{${k}} + ${b}\\sqrt{${k}} = ${a + b}\\sqrt{${k}}$. ⭐ On SIMPLIFIE avant d'additionner, jamais l'inverse.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_racine_somme_tpl_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_somme",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Simplifie les deux, puis soustrais les coefficients.",
+    tags: ["seconde", "maths", "racine", "somme", "soustraction", "template", "qcm"],
+    generate: () => {
+      const k = [2, 3, 5][randomInt(0, 2)];
+      const b = randomInt(2, 4);
+      const a = b + randomInt(1, 3);
+      const correct = a - b === 1 ? `$\\sqrt{${k}}$` : `$${a - b}\\sqrt{${k}}$`;
+      return {
+        text: `Écrire $\\sqrt{${a * a * k}} - \\sqrt{${b * b * k}}$ sous la forme $a\\sqrt{${k}}$.`,
+        format: "qcm",
+        choices: [
+          correct,
+          `$\\sqrt{${a * a * k - b * b * k}}$`,
+          `$${a + b}\\sqrt{${k}}$`,
+          `$${a - b}\\sqrt{${a * a * k - b * b * k}}$`,
+        ],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La soustraction suit la même règle que l'addition : même radical exigé.",
+          "On simplifie chaque racine, puis on soustrait les coefficients.",
+          `$\\sqrt{${a * a * k}} = ${a}\\sqrt{${k}}$ et $\\sqrt{${b * b * k}} = ${b}\\sqrt{${k}}$, donc la différence vaut $${a - b}\\sqrt{${k}}$.`,
+          `${a - b === 1 ? `Un coefficient de $1$ ne s'écrit pas : la réponse est $\\sqrt{${k}}$.` : `La réponse est $${a - b}\\sqrt{${k}}$.`} C'est exactement le calcul demandé au contrôle commun.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_racine_somme_tpl_5",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_somme",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Un seul des deux calculs se simplifie. Lequel ?",
+    tags: ["seconde", "maths", "racine", "somme", "piege", "template", "qcm"],
+    generate: () => {
+      const k = [2, 3, 5][randomInt(0, 2)];
+      const autre = k === 2 ? 3 : k === 3 ? 5 : 7;
+      const correct = `$\\sqrt{${k}} + \\sqrt{${4 * k}}$`;
+      return {
+        text: `Laquelle de ces sommes peut se simplifier ?`,
+        format: "qcm",
+        choices: [
+          correct,
+          `$\\sqrt{${k}} + \\sqrt{${autre}}$`,
+          `$\\sqrt{${k}} + \\sqrt{${autre + 1}}$`,
+          "aucune",
+        ],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une somme se simplifie quand les deux racines cachent le même radical.",
+          "On simplifie chaque terme avant de trancher.",
+          `$\\sqrt{${4 * k}} = 2\\sqrt{${k}}$ : la première somme devient $\\sqrt{${k}} + 2\\sqrt{${k}} = 3\\sqrt{${k}}$. Les autres gardent des radicaux différents.`,
+          `Une somme n'est simplifiable que si un des nombres sous racine contient un CARRÉ en facteur — ici $${4 * k} = 4 \\times ${k}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_racine_somme_fixed_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_somme",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Dans quel ordre faut-il travailler pour calculer $\\sqrt{75} - \\sqrt{48}$ ?",
+    format: "qcm",
+    choices: [
+      "simplifier chaque racine, PUIS soustraire",
+      "soustraire $75 - 48$, puis prendre la racine",
+      "additionner les racines, puis simplifier",
+      "aucun des deux ne se simplifie",
+    ],
+    expected: ["simplifier chaque racine, PUIS soustraire"],
+    comparator: "mcq_exact",
+    hint: "$\\sqrt{75}$ et $\\sqrt{48}$ cachent le même radical.",
+    explanation: exp(
+      "On ne peut soustraire que des radicaux identiques : il faut donc les faire apparaître.",
+      "On cherche un carré en facteur dans chaque nombre, puis on soustrait les coefficients.",
+      "$\\sqrt{75} = 5\\sqrt{3}$ et $\\sqrt{48} = 4\\sqrt{3}$, donc la différence vaut $\\sqrt{3}$.",
+      "⚠️ Soustraire d'abord donnerait $\\sqrt{27}$, qui vaut $3\\sqrt{3}$ — un résultat FAUX."
+    ),
+    tags: ["seconde", "maths", "racine", "somme", "methode", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_racine_somme_fixed_5",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_somme",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Combien vaut $5\\sqrt{7} - \\sqrt{7}$ ?",
+    format: "qcm",
+    choices: ["$4\\sqrt{7}$", "$5$", "$4$", "$5\\sqrt{6}$"],
+    expected: ["$4\\sqrt{7}$"],
+    comparator: "mcq_exact",
+    hint: "$\\sqrt{7}$ vaut $1\\sqrt{7}$.",
+    explanation: exp(
+      "Un radical écrit seul porte un coefficient sous-entendu de $1$.",
+      "On l'écrit explicitement, puis on soustrait les coefficients.",
+      "$5\\sqrt{7} - 1\\sqrt{7} = (5 - 1)\\sqrt{7} = 4\\sqrt{7}$.",
+      "Le radical reste $\\sqrt{7}$ : oublier le coefficient $1$ fait souvent répondre $5$."
+    ),
+    tags: ["seconde", "maths", "racine", "somme", "qcm"],
   },
 ];

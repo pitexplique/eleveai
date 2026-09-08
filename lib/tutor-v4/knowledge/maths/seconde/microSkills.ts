@@ -39,6 +39,11 @@ export const microSkills: MicroSkillSource[] = [
   { id: "racine_carre_de_a2", label: "Utiliser $\\sqrt{a^2} = |a|$", notionId: "racine_carree_2de", prerequis: ["racine_calcul", "valeur_absolue_distance"] },
   { id: "racine_produit", label: "Utiliser $\\sqrt{ab} = \\sqrt{a} \\times \\sqrt{b}$", notionId: "racine_carree_2de", prerequis: ["racine_calcul"] },
   { id: "racine_simplification", label: "Simplifier une racine carrée ($\\sqrt{50} = 5\\sqrt{2}$)", notionId: "racine_carree_2de", prerequis: ["racine_produit"] },
+  // ⭐ AJOUTE LE 08/09/2026. Le coach n'avait qu'un seul item sur l'addition
+  // de radicaux, et rien sur son interdit. Or le controle commun de mars 2025
+  // le demande : √75 − √48 sous la forme a√3, ce qui exige de simplifier PUIS
+  // de soustraire des radicaux identiques.
+  { id: "racine_somme", label: "Additionner des racines carrées : seulement à radical identique", notionId: "racine_carree_2de", prerequis: ["racine_simplification"] },
 
   /* ===================== developpement_factorisation_2de ===================== */
   { id: "devfac_developper_simple", label: "Développer une expression du type $k(a+b)$", notionId: "developpement_factorisation_2de", prerequis: [] },
