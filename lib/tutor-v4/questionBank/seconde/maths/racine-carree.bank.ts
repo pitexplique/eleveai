@@ -15,7 +15,33 @@
 //   racine_produit       — Utiliser racine de ab = racine de a x racine de b
 //   racine_simplification— Simplifier une racine (racine de 50 = 5 racine de 2)
 
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
+
+/**
+ * La courbe de la fonction racine carree.
+ *
+ * ⛔ Type « points » et non une formule : le canvas ne connait pas la racine
+ * comme fonction, on lui donne les points calcules. Et ils commencent a ZERO —
+ * c'est tout l'enjeu : rien a gauche, donc pas d'image pour un negatif.
+ */
+function courbeRacine(marque?: number): CanvasFigure {
+  const points: { x: number; y: number }[] = [];
+  for (let x = 0; x <= 9; x += 0.25) points.push({ x, y: Math.sqrt(x) });
+  return {
+    kind: "fonctionGraphique",
+    size: { width: 260, height: 200 },
+    xmin: -2,
+    xmax: 9,
+    ymin: -1,
+    ymax: 4,
+    grille: true,
+    courbes: [{ id: "r", type: "points", couleur: "#2563eb", points }],
+    misesEnEvidence:
+      marque !== undefined
+        ? [{ point: { x: marque, y: Math.sqrt(marque), label: `${Math.sqrt(marque)}`, couleur: "#dc2626" } }]
+        : undefined,
+  };
+}
 
 function shuffle<T>(arr: readonly T[]): T[] {
   const copie = [...arr];
@@ -1359,5 +1385,384 @@ export const racineCarreeBank: TutorBankItemV4[] = [
       "Le radical reste $\\sqrt{7}$ : oublier le coefficient $1$ fait souvent répondre $5$."
     ),
     tags: ["seconde", "maths", "racine", "somme", "qcm"],
+  },
+
+  // ============================================================
+  // racine_domaine — la courbe, et ce qu'elle refuse
+  // ============================================================
+
+  {
+    kind: "fixed",
+    id: "seconde_racine_dom_fixed_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_domaine",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Sur la courbe de la fonction racine carrée, quelle est l'image de $4$ ?",
+    format: "qcm",
+    choices: ["$2$", "$16$", "$4$", "$-2$"],
+    expected: ["$2$"],
+    comparator: "mcq_exact",
+    canvas: courbeRacine(4),
+    hint: "On monte depuis $4$ jusqu'à la courbe, puis on lit à gauche.",
+    explanation: exp(
+      "L'image d'un nombre par la fonction racine carrée est sa racine.",
+      "On se place en $x = 4$ sur l'axe horizontal et on rejoint la courbe.",
+      "On lit alors l'ordonnée : $\\sqrt{4} = 2$.",
+      "L'image de $4$ est $2$ — et non $16$, qui serait son CARRÉ."
+    ),
+    tags: ["seconde", "maths", "racine", "fonction", "canvas", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_racine_dom_fixed_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_domaine",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Sur cette courbe, quelle est l'image de $-1$ ?",
+    format: "qcm",
+    choices: [
+      "il n'y en a pas : la courbe n'existe pas à gauche de zéro",
+      "$-1$",
+      "$1$",
+      "$0$",
+    ],
+    expected: ["il n'y en a pas : la courbe n'existe pas à gauche de zéro"],
+    comparator: "mcq_exact",
+    canvas: courbeRacine(),
+    hint: "Regarde s'il y a quelque chose à gauche de l'origine.",
+    explanation: exp(
+      "Une image n'existe que si la courbe se trouve au-dessus de l'abscisse considérée.",
+      "On se place en $x = -1$ et on cherche la courbe au-dessus ou en dessous.",
+      "Il n'y a RIEN : la courbe démarre en zéro et ne va pas plus à gauche.",
+      "$-1$ n'a donc aucune image — c'est ce que signifie « pas de racine d'un nombre négatif », et cela se VOIT."
+    ),
+    tags: ["seconde", "maths", "racine", "fonction", "domaine", "canvas", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_racine_dom_fixed_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_domaine",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quel est le domaine de définition de la fonction racine carrée ?",
+    format: "qcm",
+    choices: [
+      "$[0\\,;\\,+\\infty[$",
+      "$\\mathbb{R}$",
+      "$]0\\,;\\,+\\infty[$",
+      "$]-\\infty\\,;\\,0]$",
+    ],
+    expected: ["$[0\\,;\\,+\\infty[$"],
+    comparator: "mcq_exact",
+    hint: "Zéro a-t-il une image ?",
+    explanation: exp(
+      "Le domaine rassemble tous les nombres qui ONT une image.",
+      "On écarte les négatifs, puis on décide du sort de zéro.",
+      "$\\sqrt{0} = 0$ existe parfaitement : zéro est donc INCLUS.",
+      "Le domaine est $[0\\,;\\,+\\infty[$ — crochet FERMÉ en zéro, c'est là que la courbe commence."
+    ),
+    tags: ["seconde", "maths", "racine", "domaine", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_racine_dom_fixed_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_domaine",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Sur son domaine, la fonction racine carrée est :",
+    format: "qcm",
+    choices: [
+      "croissante : plus le nombre grandit, plus sa racine grandit",
+      "décroissante",
+      "constante",
+      "croissante puis décroissante",
+    ],
+    expected: ["croissante : plus le nombre grandit, plus sa racine grandit"],
+    comparator: "mcq_exact",
+    canvas: courbeRacine(),
+    hint: "La courbe monte-t-elle ou descend-elle de gauche à droite ?",
+    explanation: exp(
+      "Le sens de variation se lit sur la courbe, de gauche à droite.",
+      "On suit le tracé depuis zéro et on regarde s'il monte.",
+      "La courbe monte partout, de plus en plus doucement : $\\sqrt{1} = 1$, $\\sqrt{4} = 2$, $\\sqrt{9} = 3$.",
+      "Elle est CROISSANTE sur $[0\\,;\\,+\\infty[$ — c'est ce qui permet de comparer deux racines sans les calculer."
+    ),
+    tags: ["seconde", "maths", "racine", "fonction", "canvas", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "seconde_racine_dom_tpl_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_domaine",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "L'image d'un carré parfait tombe juste.",
+    tags: ["seconde", "maths", "racine", "fonction", "canvas", "template", "qcm"],
+    generate: () => {
+      // ⛔ ON ECARTE n = 1 : la racine de 1 vaut 1, et son carre aussi. Trois
+      // distracteurs sur quatre s'effondraient alors sur la bonne reponse, et le
+      // QCM tombait a trois propositions sur 23 % des tirages.
+      const n = randomInt(2, 3);
+      const carre = n * n;
+      const correct = `$${n}$`;
+      return {
+        text: `Sur la courbe de la fonction racine carrée, quelle est l'image de $${carre}$ ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          correct,
+          [`$${carre}$`, `$${carre * carre}$`, `$${n + 1}$`],
+          [`$${n * 2}$`, "elle n'existe pas"]
+        ),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: courbeRacine(carre),
+        explanation: exp(
+          "L'image par la fonction racine carrée est la racine du nombre.",
+          `On monte depuis $${carre}$ jusqu'à la courbe, puis on lit à gauche.`,
+          `$\\sqrt{${carre}} = ${n}$, car $${n}^2 = ${carre}$.`,
+          `L'image de $${carre}$ est $${n}$ — un carré parfait donne toujours une lecture exacte.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_racine_dom_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_domaine",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le nombre est-il positif ou négatif ?",
+    tags: ["seconde", "maths", "racine", "domaine", "template", "qcm"],
+    generate: () => {
+      const positif = Math.random() < 0.5;
+      const x = positif ? randomInt(1, 9) : -randomInt(1, 9);
+      const correct = positif ? "oui" : "non";
+      return {
+        text: `Le nombre $${x}$ a-t-il une image par la fonction racine carrée ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Seuls les nombres positifs ou nuls ont une image par la racine carrée.",
+          "On regarde donc le signe du nombre, rien d'autre.",
+          positif
+            ? `$${x}$ est positif : son image existe, c'est $\\sqrt{${x}}$.`
+            : `$${x}$ est négatif : aucun nombre au carré ne peut le donner.`,
+          positif
+            ? `Réponse : oui — $${x}$ appartient au domaine $[0\\,;\\,+\\infty[$.`
+            : `Réponse : non — sur la courbe, il n'y a rien au-dessus de $${x}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_racine_dom_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_domaine",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Chercher un antécédent : quel nombre a CETTE racine ?",
+    tags: ["seconde", "maths", "racine", "fonction", "antecedent", "template", "qcm"],
+    generate: () => {
+      const n = randomInt(2, 5);
+      const correct = `$${n * n}$`;
+      return {
+        text: `Sur la courbe de la fonction racine carrée, quel nombre a pour image $${n}$ ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          correct,
+          [`$${n}$`, `$${2 * n}$`, `$${n * n * n}$`],
+          [`$${n * n + 1}$`, `$${n * n - 1}$`]
+        ),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: courbeRacine(n * n),
+        explanation: exp(
+          "Chercher un antécédent, c'est partir de l'axe VERTICAL et redescendre sur la courbe.",
+          `On part de l'ordonnée $${n}$ et on cherche l'abscisse correspondante.`,
+          `Il faut $\\sqrt{x} = ${n}$, donc $x = ${n}^2 = ${n * n}$.`,
+          `C'est $${n * n}$ — et il n'y en a qu'UN, car la courbe ne remonte jamais.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_racine_dom_fixed_5",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_domaine",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Pourquoi la courbe de la fonction racine carrée ne descend-elle JAMAIS sous l'axe des abscisses ?",
+    format: "qcm",
+    choices: [
+      "parce qu'une racine carrée est toujours positive ou nulle",
+      "parce que la fonction est croissante",
+      "parce qu'elle commence en zéro",
+      "elle y descend, pour les petits nombres",
+    ],
+    expected: ["parce qu'une racine carrée est toujours positive ou nulle"],
+    comparator: "mcq_exact",
+    canvas: courbeRacine(),
+    hint: "Que vaut $\\sqrt{a}$ par définition ?",
+    explanation: exp(
+      "Par définition, $\\sqrt{a}$ est le nombre POSITIF dont le carré vaut $a$.",
+      "On regarde ce que cela impose aux ordonnées de la courbe.",
+      "Toutes les images sont positives ou nulles : la courbe reste donc au-dessus de l'axe.",
+      "⚠️ Deux choses à ne pas confondre : la courbe ne va pas à GAUCHE de zéro (pas d'antécédent négatif) et ne descend pas SOUS l'axe (pas d'image négative)."
+    ),
+    tags: ["seconde", "maths", "racine", "fonction", "canvas", "raisonnement", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_racine_dom_fixed_6",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_domaine",
+    difficulty: 4,
+    theme: "neutral",
+    text: "La fonction racine carrée étant croissante, comparer $\\sqrt{7}$ et $\\sqrt{11}$ sans calculatrice.",
+    format: "qcm",
+    choices: [
+      "$\\sqrt{7} < \\sqrt{11}$",
+      "$\\sqrt{7} > \\sqrt{11}$",
+      "elles sont égales",
+      "on ne peut pas savoir",
+    ],
+    expected: ["$\\sqrt{7} < \\sqrt{11}$"],
+    comparator: "mcq_exact",
+    hint: "Croissante : l'ordre est conservé.",
+    explanation: exp(
+      "Une fonction croissante conserve l'ordre entre un nombre et son image.",
+      "On compare d'abord les nombres SOUS les radicaux.",
+      "$7 < 11$, et la racine carrée est croissante sur son domaine.",
+      "Donc $\\sqrt{7} < \\sqrt{11}$ — comparer deux racines ne demande aucun calcul."
+    ),
+    tags: ["seconde", "maths", "racine", "fonction", "comparaison", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "seconde_racine_dom_tpl_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_domaine",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Entre quels DEUX carrés parfaits ce nombre se trouve-t-il ?",
+    tags: ["seconde", "maths", "racine", "encadrement", "template", "qcm"],
+    generate: () => {
+      // ⛔ On ecarte les carres parfaits eux-memes : leur racine tombe juste, et
+      // la question de l'encadrement n'a plus de sens.
+      const n = randomInt(1, 8);
+      const bas = n;
+      const haut = n + 1;
+      const candidats: number[] = [];
+      for (let v = bas * bas + 1; v < haut * haut; v += 1) candidats.push(v);
+      const x = candidats[randomInt(0, candidats.length - 1)];
+      const correct = `entre $${bas}$ et $${haut}$`;
+      return {
+        text: `Sans calculatrice, entre quels deux entiers consécutifs se trouve $\\sqrt{${x}}$ ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          correct,
+          [
+            `entre $${bas + 1}$ et $${haut + 1}$`,
+            `entre $${Math.max(0, bas - 1)}$ et $${bas}$`,
+            `entre $${Math.floor(x / 2)}$ et $${Math.floor(x / 2) + 1}$`,
+          ],
+          [`entre $${bas}$ et $${haut + 1}$`, `entre $0$ et $${x}$`]
+        ),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On encadre le nombre entre les deux CARRÉS PARFAITS qui l'entourent.",
+          "On cherche le plus grand carré en dessous, et le plus petit au-dessus.",
+          `$${bas * bas} < ${x} < ${haut * haut}$, c'est-à-dire $${bas}^2 < ${x} < ${haut}^2$.`,
+          `La racine carrée étant croissante, l'ordre se conserve : $${bas} < \\sqrt{${x}} < ${haut}$. Aucune calculatrice n'a servi.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_racine_dom_tpl_5",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "racine_carree_2de",
+    microId: "racine_domaine",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le nombre est-il un carré parfait ?",
+    tags: ["seconde", "maths", "racine", "encadrement", "template", "qcm"],
+    generate: () => {
+      const parfait = Math.random() < 0.5;
+      const n = randomInt(2, 9);
+      const x = parfait ? n * n : n * n + randomInt(1, 2 * n);
+      const correct = parfait
+        ? `un nombre ENTIER : $${n}$`
+        : `un nombre entre $${n}$ et $${n + 1}$, sans écriture décimale exacte`;
+      return {
+        text: `L'image de $${x}$ par la fonction racine carrée est-elle un nombre entier ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          correct,
+          [
+            parfait
+              ? `un nombre entre $${n}$ et $${n + 1}$, sans écriture décimale exacte`
+              : `un nombre ENTIER : $${n}$`,
+            `un nombre entier : $${x}$`,
+            "elle n'existe pas",
+          ],
+          [`un nombre entier : $${n + 1}$`]
+        ),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une racine tombe juste exactement quand le nombre est un CARRÉ PARFAIT.",
+          "On regarde donc si le nombre figure dans la liste des carrés.",
+          parfait
+            ? `$${x} = ${n}^2$ : c'est un carré parfait, sa racine vaut $${n}$ tout rond.`
+            : `$${x}$ n'est pas un carré parfait — il tombe entre $${n}^2 = ${n * n}$ et $${n + 1}^2 = ${(n + 1) * (n + 1)}$.`,
+          parfait
+            ? `L'image est l'entier $${n}$.`
+            : `L'image existe bel et bien, mais elle s'écrit $\\sqrt{${x}}$ : entre $${n}$ et $${n + 1}$, sans décimale exacte. Ce n'est PAS une réponse incomplète.`
+        ),
+      };
+    },
   },
 ];

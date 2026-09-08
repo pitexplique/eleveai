@@ -530,6 +530,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
       "L'exposant compte les facteurs, il ne multiplie pas ; un exposant négatif donne un inverse et non un opposé ; et la notation scientifique donne à chaque nombre une forme unique, qui rend la comparaison immédiate.",
   },
   // ⭐ LA PREMIERE FICHE DE SECONDE (08/09/2026).
+  "maths/seconde/racine-carree-2de": {
+    titre: "La racine carrée",
+    resume: "Carres parfaits, simplifier, le produit qui passe et la somme qui ne passe pas, additionner des radicaux identiques.",
+  },
   "maths/seconde/fonction-variations-extremums": {
     titre: "Variations et extremums",
     resume: "Croissance et decroissance, dresser un tableau de variations depuis une courbe, lire un maximum ou un minimum.",

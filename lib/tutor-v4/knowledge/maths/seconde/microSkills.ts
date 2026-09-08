@@ -44,6 +44,12 @@ export const microSkills: MicroSkillSource[] = [
   // le demande : √75 − √48 sous la forme a√3, ce qui exige de simplifier PUIS
   // de soustraire des radicaux identiques.
   { id: "racine_somme", label: "Additionner des racines carrées : seulement à radical identique", notionId: "racine_carree_2de", prerequis: ["racine_simplification"] },
+  // ⭐ LA FONCTION, INTRODUITE DES LE CHAPITRE DE LA RACINE (08/09/2026).
+  // `reference_racine` la traite aussi, mais dans `fonctions_reference_2de`,
+  // plus tard dans l'annee. Frederic l'amene ICI : faire calculer l'image de 4
+  // et montrer que -1 n'en a pas rend le domaine VISIBLE, au lieu d'enoncer
+  // une interdiction que l'eleve doit croire sur parole.
+  { id: "racine_domaine", label: "Lire une image et le domaine sur la courbe de la fonction racine carrée", notionId: "racine_carree_2de", prerequis: ["racine_calcul"] },
 
   /* ===================== developpement_factorisation_2de ===================== */
   { id: "devfac_developper_simple", label: "Développer une expression du type $k(a+b)$", notionId: "developpement_factorisation_2de", prerequis: [] },
