@@ -127,7 +127,7 @@ export const ficheVariationsSeconde: FicheCoursData = {
   figure: {
     schema: variations(
       ["−3", "1", "5"],
-      ["-2", "4", "0"],
+      ["−2", "4", "0"],
       undefined,
       "f croît puis décroît",
     ),
@@ -160,7 +160,7 @@ export const ficheVariationsSeconde: FicheCoursData = {
         "Deux flèches et trois nombres remplacent tout le dessin. On y lit le sens, les extremums, et les valeurs aux bornes de l'intervalle d'étude.",
       schema: variations(
         ["−2", "0", "3"],
-        ["5", "-1", "8"],
+        ["5", "−1", "8"],
         { label: "f ′(x)", signes: ["-", "+"], marques: ["0"] },
       ),
     },
@@ -208,7 +208,7 @@ export const ficheVariationsSeconde: FicheCoursData = {
       titre: "Trouver un maximum",
       detail:
         "Le tableau le donne directement : c'est la valeur au sommet, atteinte à l'abscisse écrite au-dessus.",
-      schema: variations(["−3", "1", "5"], ["-2", "4", "0"], undefined, "Maximum 4 en 1"),
+      schema: variations(["−3", "1", "5"], ["−2", "4", "0"], undefined, "Maximum 4 en 1"),
     },
     {
       titre: "Lire un signe de dérivée",
@@ -216,7 +216,7 @@ export const ficheVariationsSeconde: FicheCoursData = {
         "En première, la ligne du haut donnera le signe de $f'$ : positif quand $f$ monte, négatif quand elle descend.",
       schema: variations(
         ["−2", "0", "3"],
-        ["5", "-1", "8"],
+        ["5", "−1", "8"],
         { label: "f ′(x)", signes: ["-", "+"], marques: ["0"] },
       ),
     },
