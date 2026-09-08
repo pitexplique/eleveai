@@ -194,20 +194,20 @@ export const ficheFonctionsSeconde: FicheCoursData = {
 
   methode: [
     {
-      titre: "1. Calculer une image",
+      titre: "Calculer une image",
       texte:
         "Je remplace $x$ par le nombre, partout, et je calcule. $f(x) = 2x + 1$ donne $f(3) = 2 \\times 3 + 1 = 7$ : le point marqué a pour ordonnée $7$.",
       // ⛔ Un tableau, PAS un repere : ce bloc ne fait que 86 px de large.
       schema: tableau([0, 1, 2, 3], [1, 3, 5, 7], 3),
     },
     {
-      titre: "2. Chercher un antécédent",
+      titre: "Chercher un antécédent",
       texte:
         "Je pose l'ÉQUATION $f(x) = y$ et je la résous. Il peut y avoir zéro, une, ou plusieurs solutions — ici, $2$ apparait DEUX fois dans la ligne du bas.",
       schema: tableau([-2, -1, 0, 1, 2], [2, -1, -2, -1, 2]),
     },
     {
-      titre: "3. Vérifier le domaine",
+      titre: "Vérifier le domaine",
       texte:
         "Avant tout calcul, je regarde si le nombre A une image : pas de division par zéro, pas de racine de négatif. La lecture graphique, elle, est détaillée plus bas.",
       schema: tableau([-2, -1, 1, 2], [-0.5, -1, 1, 0.5]),

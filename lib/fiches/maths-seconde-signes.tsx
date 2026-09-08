@@ -182,7 +182,7 @@ export const ficheSignesSeconde: FicheCoursData = {
 
   methode: [
     {
-      titre: "1. Je cherche les racines",
+      titre: "Je cherche les racines",
       texte:
         "J'annule chaque facteur séparément. $x + 1 = 0$ donne $-1$, $x - 4 = 0$ donne $4$. Deux facteurs, deux racines.",
       schema: tableau(
@@ -192,7 +192,7 @@ export const ficheSignesSeconde: FicheCoursData = {
       ),
     },
     {
-      titre: "2. Je range et je compte les colonnes",
+      titre: "Je range et je compte les colonnes",
       texte:
         "Les racines se rangent dans l'ordre CROISSANT, pas dans l'ordre où les facteurs sont écrits. Deux racines donnent trois colonnes.",
       schema: tableau(
@@ -202,7 +202,7 @@ export const ficheSignesSeconde: FicheCoursData = {
       ),
     },
     {
-      titre: "3. Je remplis, puis je multiplie",
+      titre: "Je remplis, puis je multiplie",
       texte:
         "Une ligne par facteur, un seul zéro par ligne. Puis la ligne du bas : je multiplie les signes colonne par colonne.",
       schema: tableau(

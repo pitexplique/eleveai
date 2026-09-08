@@ -54,11 +54,19 @@ export default function TableauVariationsCanvas({ figure }: Props) {
   // première case de flèches.
   const LARGEUR_CAR = 7.2;
   const colGauche = Math.min(
-    190,
+    80,
     Math.max(64, ...[variations.label, derivee?.label ?? "", "x"].map((t) => t.length * LARGEUR_CAR + 16)),
   );
 
-  const LARGEUR_INTER = 78;
+  // ⛔ AFFINE AVANT SA PREMIERE UTILISATION (08/09/2026). A 78 px par intervalle
+  // et une colonne de gauche jusqu'a 190, le dessin faisait 424 px de large — le
+  // double d'un bloc de fiche, ou il aurait rendu ses nombres a 8 px. A 54, un
+  // tableau a trois intervalles tient en 226 et rend a 11 px.
+  //
+  // ⚠️ EN CONTREPARTIE, LES LIBELLES DOIVENT ETRE COURTS : « f ′(x) » et « f »,
+  // pas « variations de f ». Le SVG ne sait pas passer un texte a la ligne, donc
+  // un libelle long repousse toute la grille vers la droite.
+  const LARGEUR_INTER = 54;
   const HAUT_ENTETE = 36;
   const HAUT_DERIVEE = 42;
   const HAUT_VARIATIONS = 84;

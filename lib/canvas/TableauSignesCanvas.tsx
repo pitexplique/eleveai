@@ -53,7 +53,10 @@ export default function TableauSignesCanvas({ figure }: Props) {
   // Libellés, puis borne, intervalle, borne, intervalle… jusqu'à la dernière
   // borne. Les colonnes de bornes se dimensionnent sur leur contenu ; celles des
   // intervalles se partagent ce qui reste.
-  const colonnes = `minmax(52px, 88px) auto repeat(${intervalles}, minmax(26px, 1fr) auto)`;
+  // ⛔ 108 px et non 88 : « (x+1)(x-4) » se coupait en deux lignes, « (x + » puis
+  // « 1)(x - 4) », au milieu d'une expression. Un libelle de produit doit tenir
+  // d'un seul tenant — c'est le nom de la fonction etudiee.
+  const colonnes = `minmax(52px, 108px) auto repeat(${intervalles}, minmax(24px, 1fr) auto)`;
 
   return (
     <div className="mx-auto w-full max-w-[440px]">
@@ -63,70 +66,78 @@ export default function TableauSignesCanvas({ figure }: Props) {
         </div>
       ) : null}
 
-      <div className="overflow-hidden rounded-md border border-slate-900 bg-white">
+      {/* ⛔ UNE SEULE GRILLE POUR TOUT LE TABLEAU, et non une grille par ligne.
+          Frédéric, 08/09/2026 : « la colonne x et la colonne f(x) doivent être de
+          même largeur ». Elles ne l'étaient pas : chaque ligne formait sa propre
+          grille et dimensionnait sa colonne de gauche sur SON contenu — « x » est
+          étroit, « (x+1)(x−4) » est large — si bien que le trait vertical
+          zigzaguait d'une ligne à l'autre. En une grille unique, toutes les
+          colonnes s'alignent par construction. */}
+      <div
+        className="grid overflow-hidden rounded-md border border-slate-900 bg-white"
+        style={{ gridTemplateColumns: colonnes }}
+      >
         {/* En-tête : x, puis les bornes, chacune dans sa colonne */}
-        <div
-          className="grid items-center border-b border-slate-900"
-          style={{ gridTemplateColumns: colonnes }}
-        >
-          <div className="border-r border-slate-900 px-1.5 py-1.5 text-center text-[15px] font-extrabold italic text-slate-900">
-            x
-          </div>
-          {bornes.map((b, i) => (
-            <div key={`b-${i}`} className="contents">
-              <div className="px-0.5 py-1.5 text-center text-[13px] font-bold leading-none text-slate-900">
-                <TexteMath>{b}</TexteMath>
-              </div>
-              {i < intervalles ? <div aria-hidden /> : null}
-            </div>
-          ))}
+        <div className="border-b border-r border-slate-900 px-1.5 py-1.5 text-center text-[15px] font-extrabold italic text-slate-900">
+          x
         </div>
-
-        {/* Les lignes de signes */}
-        {lignes.map((ligne, li) => (
-          <div
-            key={`l-${li}`}
-            className={`grid items-stretch ${li < lignes.length - 1 ? "border-b border-slate-900" : ""}`}
-            style={{ gridTemplateColumns: colonnes }}
-          >
-            <div className="flex items-center justify-center border-r border-slate-900 px-1.5 py-2 text-center text-[13px] font-semibold leading-tight text-slate-900">
-              <TexteMath>{ligne.label}</TexteMath>
+        {bornes.map((b, i) => (
+          <div key={`b-${i}`} className="contents">
+            <div className="border-b border-slate-900 px-0.5 py-1.5 text-center text-[13px] font-bold leading-none text-slate-900">
+              <TexteMath>{b}</TexteMath>
             </div>
-
-            {bornes.map((_, i) => {
-              // La colonne de la borne : un zéro, une double barre, ou rien.
-              // ⛔ Les bornes EXTRÊMES ne portent jamais de marque : $-\infty$ et
-              // $+\infty$ ne sont pas des valeurs que l'expression puisse annuler.
-              const marque = i > 0 && i < bornes.length - 1 ? (ligne.marques ?? [])[i - 1] : "";
-              const signe = i < intervalles ? ligne.signes[i] : null;
-              return (
-                <div key={`c-${li}-${i}`} className="contents">
-                  <div className="flex items-center justify-center px-0.5">
-                    {marque === "||" ? (
-                      <span
-                        aria-label="valeur interdite"
-                        className="text-xl font-black leading-none text-red-700"
-                      >
-                        ‖
-                      </span>
-                    ) : marque === "0" ? (
-                      <span className="text-base font-extrabold leading-none text-slate-900">0</span>
-                    ) : null}
-                  </div>
-                  {signe !== null ? (
-                    <div
-                      className={`py-2 text-center text-xl font-extrabold leading-none ${
-                        signe === "+" ? "text-emerald-700" : "text-red-700"
-                      }`}
-                    >
-                      {signe === "+" ? "+" : "−"}
-                    </div>
-                  ) : null}
-                </div>
-              );
-            })}
+            {i < intervalles ? <div className="border-b border-slate-900" aria-hidden /> : null}
           </div>
         ))}
+
+        {/* Les lignes de signes */}
+        {lignes.map((ligne, li) => {
+          const bordure = li < lignes.length - 1 ? "border-b border-slate-900" : "";
+          return (
+            <div key={`l-${li}`} className="contents">
+              <div
+                className={`flex items-center justify-center border-r border-slate-900 px-1.5 py-2 text-center text-[13px] font-semibold leading-tight text-slate-900 ${bordure}`}
+              >
+                <TexteMath>{ligne.label}</TexteMath>
+              </div>
+
+              {bornes.map((_, i) => {
+                // La colonne de la borne : un zéro, une double barre, ou rien.
+                // ⛔ Les bornes EXTRÊMES ne portent jamais de marque : $-\infty$ et
+                // $+\infty$ ne sont pas des valeurs que l'expression puisse annuler.
+                const marque = i > 0 && i < bornes.length - 1 ? (ligne.marques ?? [])[i - 1] : "";
+                const signe = i < intervalles ? ligne.signes[i] : null;
+                return (
+                  <div key={`c-${li}-${i}`} className="contents">
+                    <div className={`flex items-center justify-center px-0.5 ${bordure}`}>
+                      {marque === "||" ? (
+                        <span
+                          aria-label="valeur interdite"
+                          className="text-xl font-black leading-none text-red-700"
+                        >
+                          ‖
+                        </span>
+                      ) : marque === "0" ? (
+                        <span className="text-base font-extrabold leading-none text-slate-900">
+                          0
+                        </span>
+                      ) : null}
+                    </div>
+                    {signe !== null ? (
+                      <div
+                        className={`py-2 text-center text-xl font-extrabold leading-none ${bordure} ${
+                          signe === "+" ? "text-emerald-700" : "text-red-700"
+                        }`}
+                      >
+                        {signe === "+" ? "+" : "−"}
+                      </div>
+                    ) : null}
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
