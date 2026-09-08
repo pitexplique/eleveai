@@ -529,6 +529,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "L'exposant compte les facteurs, il ne multiplie pas ; un exposant négatif donne un inverse et non un opposé ; et la notation scientifique donne à chaque nombre une forme unique, qui rend la comparaison immédiate.",
   },
+  // ⭐ LA PREMIERE FICHE DE SECONDE (08/09/2026).
+  "maths/seconde/signes-expression-2de": {
+    titre: "Le signe d'une expression",
+    resume: "Dresser un tableau de signes : produit, quotient et valeur interdite ; resoudre equations et inequations.",
+  },
   "maths/premiere-spe/derivation": {
     titre: "La dérivation",
     resume: "Taux de variation, nombre dérivé, dérivées usuelles et équation de la tangente.",
