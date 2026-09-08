@@ -1793,4 +1793,113 @@ export const fonctionVocabulaireBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* ---- du tableau au graphique, et retour ---- */
+
+  {
+    kind: "template",
+    id: "seconde_fct_tabgraph_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_vocabulaire_2de",
+    microId: "fonction_tableau_graphique",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une colonne du tableau donne un couple $(x\\,;\\,f(x))$ : c'est un POINT.",
+    tags: ["seconde", "maths", "fonctions", "tableau", "canvas", "template", "qcm"],
+    generate: () => {
+      const x0 = randomInt(-3, 1);
+      const xs = [x0, x0 + 1, x0 + 2, x0 + 3];
+      const ys = xs.map((x) => 2 * x + randomInt(0, 2));
+      const i = randomInt(0, 3);
+      const correct = `$(${xs[i]}\\,;\\,${ys[i]})$`;
+      return {
+        text: "D'après ce tableau de valeurs, lequel de ces points appartient à la courbe ?",
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$(${ys[i]}\\,;\\,${xs[i]})$`,
+          `$(${xs[i]}\\,;\\,${ys[i] + 1})$`,
+          `$(${xs[i] + 1}\\,;\\,${ys[i]})$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: tableValeurs(xs, ys, i),
+        explanation: exp(
+          "Chaque colonne d'un tableau de valeurs décrit UN point de la courbe.",
+          "On lit l'abscisse sur la ligne du haut, l'image sur celle du bas, dans cet ordre.",
+          `La colonne mise en évidence donne $x = ${xs[i]}$ et $f(x) = ${ys[i]}$.`,
+          `Le point est $(${xs[i]}\\,;\\,${ys[i]})$ — l'abscisse D'ABORD : $(${ys[i]}\\,;\\,${xs[i]})$ serait un autre point.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_fct_tabgraph_tpl_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_vocabulaire_2de",
+    microId: "fonction_tableau_graphique",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Monte depuis l'abscisse jusqu'à la droite, puis lis à gauche.",
+    tags: ["seconde", "maths", "fonctions", "graphique", "canvas", "template", "short"],
+    generate: () => {
+      const a = randomInt(1, 3);
+      const b = randomInt(-2, 2);
+      const x = randomInt(-2, 3);
+      return {
+        text: `D'après ce graphique, quelle est l'image de $${x}$ ?`,
+        format: "short",
+        expected: [String(a * x + b)],
+        comparator: "number_equal",
+        canvas: courbeAffine(a, b, [{ x, y: a * x + b, label: `${x}` }]),
+        explanation: exp(
+          "Lire une image, c'est monter depuis l'abscisse jusqu'à la courbe, puis lire à gauche.",
+          `On se place en $x = ${x}$ sur l'axe horizontal, et on rejoint la droite.`,
+          `On lit alors l'ordonnée : $${a} \\times ${x} ${b < 0 ? "-" : "+"} ${Math.abs(b)} = ${a * x + b}$.`,
+          `L'image de $${x}$ est $${a * x + b}$ — c'est ce nombre qui remplirait la case du bas dans un tableau de valeurs.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_fct_tabgraph_tpl_5",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonction_vocabulaire_2de",
+    microId: "fonction_tableau_graphique",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Un tableau ne donne que quelques points, jamais toute la courbe.",
+    tags: ["seconde", "maths", "fonctions", "tableau", "piege", "canvas", "template", "qcm"],
+    generate: () => {
+      const x0 = randomInt(-2, 0);
+      const xs = [x0, x0 + 1, x0 + 2, x0 + 3];
+      const ys = xs.map((x) => x * x);
+      const entre = x0 + 1.5;
+      const correct = "on ne peut pas le savoir : le tableau ne donne que quatre points";
+      return {
+        text: `Ce tableau donne quatre valeurs. Que vaut $f(${entre.toString().replace(".", "{,}")})$ ?`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$${ys[1]}$`,
+          `$${ys[2]}$`,
+          `la moyenne de $${ys[1]}$ et $${ys[2]}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: tableValeurs(xs, ys),
+        explanation: exp(
+          "Un tableau de valeurs ne décrit que les points qu'il contient, pas ce qui se passe entre eux.",
+          "On vérifie si l'abscisse demandée figure dans la ligne du haut.",
+          `$${entre.toString().replace(".", "{,}")}$ n'y est pas : le tableau reste muet sur cette valeur.`,
+          "⚠️ Relier les points à la règle donnerait une réponse fausse : entre deux valeurs, la courbe fait ce que la FORMULE décide, pas ce que le dessin suggère."
+        ),
+      };
+    },
+  },
 ];
