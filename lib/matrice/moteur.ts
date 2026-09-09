@@ -460,6 +460,11 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
         .join(" — "),
       url: url ?? r.url,
       ciblee: viseNotion,
+      // Le fait était déjà calculé pour la raison affichée, deux lignes plus
+      // haut. Il sort maintenant de la boucle, parce que les portes écrites en
+      // ont besoin pour leurs jokers `type:` — voir le commentaire du champ
+      // dans types.ts, et son usage plus bas.
+      parLaClasse,
     });
   }
 
@@ -520,7 +525,45 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
 
     for (const porte of portes) {
       const c = porte.startsWith("type:")
-        ? premier((x) => x.ressource.type === porte.slice(5))
+        ? // ⭐⭐ UN JOKER `type:` EXIGE LA CLASSE, PAS SEULEMENT LE RÔLE
+          // (Frédéric, 09/09/2026 : « quand tu tape eleve seconde la belle
+          // ecriture s'affiche »).
+          //
+          // ⚠️ C'EST LE MIROIR DU PIÈGE RÉGLÉ LE 24/08 dans la liste parent
+          // (voir PORTES_ECRITES dans ressources.ts). Là-bas, un id FIGÉ
+          // servait la fiche d'une autre classe : `type:fiche` l'a corrigé en
+          // prenant « la mieux classée ». Mais « la mieux classée » n'est pas
+          // « la bonne » quand il n'y en a AUCUNE de la classe dite : le joker
+          // se rabattait alors sur une fiche entrée par le rôle. Mesuré à
+          // « Enseignant + Seconde » : les fiches d'IA au rang 4, les fiches
+          // d'écriture du CP au rang 5.
+          //
+          // ⛔ NE PAS « CORRIGER » ÇA DANS ressources.ts en retirant « prof »
+          // des niveaux de `fiches-ecriture` : ce niveau-là est juste et il est
+          // délibéré (03/09 — une classe entière se sert de la même feuille).
+          // C'est le joker qui mentait sur ce qu'il ramenait, pas la donnée.
+          //
+          // ⚠️ Les portes nommées PAR IDENTIFIANT ne sont pas touchées : les
+          // nommer est un choix explicite, et `espace-parents` chez un parent
+          // n'entre légitimement que par le rôle. Seuls les jokers, qui
+          // choisissent à notre place, doivent prouver le niveau.
+          // ⚠️ Le repli sur `tousNiveaux` (un joker DANS `niveaux`) rendrait
+          // `parLaClasse` faux : vérifié le 09/09, AUCUNE ressource n'en a un —
+          // le jour où il en existera une, elle ne sera plus prise par un
+          // `type:`, et ce sera à revoir ici.
+          //
+          // ⚠️⚠️ ET LA CONDITION NE VAUT QUE SI UNE CLASSE A ÉTÉ DITE — c'est
+          // un effet de bord de la première version, vu au rendu le 09/09.
+          // Sans `!classeDite`, les deux jetons `type:fiche` de la liste prof
+          // s'éteignaient AUSSI sur l'écran d'un enseignant qui n'a encore
+          // rien précisé : `rangClasse` y vaut -1 pour tout le monde, donc
+          // `parLaClasse` est faux partout. Or servir une fiche à un prof qui
+          // n'a pas dit sa classe est légitime — il enseigne peut-être en CP.
+          // Ce qui ne l'était pas, c'est de la servir à celui qui a dit
+          // « Seconde ». La règle exacte est donc : quand une classe est
+          // nommée, le joker doit la prouver ; quand elle ne l'est pas, il
+          // reprend son ancien comportement.
+          premier((x) => x.ressource.type === porte.slice(5) && (x.parLaClasse || !classeDite))
         : porte === "*"
           ? // Le trou laissé au score. Il respecte le seuil, lui : une porte
             // écrite nomme quelque chose, « * » ne nomme rien — et servir une

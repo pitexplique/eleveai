@@ -248,6 +248,21 @@ export type Recommandation = {
   url: string;
   /** Vrai quand l'URL vise directement la notion demandée. */
   ciblee: boolean;
+  /**
+   * ⭐ VRAI QUAND LA RESSOURCE EST ENTRÉE PAR LA CLASSE DITE, et non par le
+   * seul rôle (09/09/2026). Le moteur calculait déjà ce fait pour écrire la
+   * raison affichée ; il ne le rendait pas, et les jokers `type:` des portes
+   * écrites ne pouvaient donc pas s'en servir.
+   *
+   * ⛔ CE QU'IL EMPÊCHE, et c'était mesuré : à « Enseignant + Seconde », les
+   * deux jetons `type:fiche` de `PORTES_ECRITES.prof` rapportaient « L'IA —
+   * cours et exercices corrigés » et « Les fiches d'écriture ». Ces deux-là
+   * passaient le filtre de niveau par le RÔLE (« prof » est dans leurs
+   * `niveaux`, et c'est juste : une classe entière se sert de la même feuille),
+   * mais la Seconde n'a presque aucune fiche — les jokers raclaient donc le
+   * fond du tiroir et servaient du CP à un professeur de lycée.
+   */
+  parLaClasse: boolean;
 };
 
 export type ResultatMatrice = {

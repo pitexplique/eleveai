@@ -172,6 +172,12 @@ export function vitrine(aujourdhui = new Date()): Recommandation[] {
       raison: entree.raison ?? "",
       url: ressource.url,
       ciblee: false,
+      // ⚠️ FAUX, ET C'EST EXACT : `vitrine()` ne reçoit qu'une DATE. Elle ne
+      // connait ni rôle ni classe, donc aucune de ses cartes n'entre « par la
+      // classe dite » — il n'y en a pas. Le champ dit la vérité de cette
+      // liste-là, et ces cartes ne passent de toute façon pas par les portes
+      // écrites, qui sont les seules à le lire.
+      parLaClasse: false,
     });
   }
 
