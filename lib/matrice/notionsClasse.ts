@@ -19,8 +19,15 @@ import { CLASSE_COACH } from "./coach";
 import { normaliser } from "./normaliser";
 import type { ProfilId } from "./types";
 
-/** Mots trop communs pour désigner une notion à eux seuls. */
-const MOTS_FAIBLES = new Set([
+/**
+ * Mots trop communs pour désigner une notion à eux seuls.
+ *
+ * ⚠️ EXPORTÉ DEPUIS LE 09/09/2026, et il faut qu'il le reste : la recherche
+ * suggérée (suggestions.ts) filtre les libellés avec EXACTEMENT cette liste.
+ * Deux copies divergeraient au premier ajout — et la divergence se verrait
+ * comme un bogue de classement, pas comme un doublon.
+ */
+export const MOTS_FAIBLES = new Set([
   "les", "des", "une", "sur", "dans", "avec", "pour", "aux", "par", "son",
   "sont", "leur", "vocabulaire", "problemes", "probleme", "calcul", "nombres",
   "nombre", "simples", "simple", "premier", "degre", "type", "types", "et",

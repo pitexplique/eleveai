@@ -44,7 +44,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { track } from "@vercel/analytics";
 import { useEleve } from "@/context/EleveContext";
 import CarteRessource from "./CarteRessource";
@@ -62,6 +62,7 @@ import { afficherConcours } from "@/lib/matrice/concours";
 import { cahiersPour, guidesPour, urlCahierPour, urlGuidePour } from "@/lib/matrice/guides";
 import { fichesPour, urlFichesPour } from "@/lib/matrice/fiches";
 import { chercher, libelleIntention } from "@/lib/matrice/moteur";
+import { suggerer, type Suggestion } from "@/lib/matrice/suggestions";
 import { vitrine } from "@/lib/matrice/vitrine";
 import {
   EVENEMENT_NOUVELLE_DEMANDE,
@@ -415,6 +416,73 @@ export default function EntreeMatrice({
   const [resultat, setResultat] = useState<ResultatMatrice | null>(null);
   const [demandeProfil, setDemandeProfil] = useState(false);
   const [plusDOptions, setPlusDOptions] = useState(false);
+
+  /**
+   * ⭐⭐ LA LISTE QUI S'OUVRE PENDANT QU'ON TAPE (09/09/2026), ET POURQUOI ELLE
+   * N'EST PAS UN CONFORT.
+   *
+   * Frédéric, rapportant sa fille : « je voulais réviser les pourcentages, je
+   * ne savais pas où aller. » Elle n'a rien tapé. Le champ demande d'expliquer
+   * ce qui coince — or elle n'avait pas de problème à décrire, elle avait un
+   * chapitre à réviser. Entre elle et le coach il n'y avait pas un bogue, il y
+   * avait une phrase à inventer.
+   *
+   * La référence est donnée, capture à l'appui : IXL. Trois lettres, une liste
+   * de compétences avec leur niveau écrit à droite, un clic, l'exercice.
+   *
+   * ⚠️ DEUX ÉTATS, ET LE SECOND N'EST PAS DU LUXE. `surligne` porte la ligne
+   * choisie au clavier ; `listeFermee` retient qu'on a dit non (Échap, un envoi,
+   * la souris partie ailleurs). Sans ce second état, la liste se rouvrirait
+   * toute seule au rendu suivant — le texte du champ n'a pas changé, donc les
+   * suggestions non plus.
+   */
+  const [surligne, setSurligne] = useState(-1);
+  const [listeFermee, setListeFermee] = useState(false);
+  // Prendre une suggestion au CLAVIER doit naviguer comme un clic sur la ligne :
+  // c'est la seule raison d'être de ce routeur ici.
+  const router = useRouter();
+
+  /**
+   * ⚠️ `niveauContexte` ET NON `profil`. Le profil d'un parent vaut « parent »,
+   * dont le coach n'a aucune classe (CLASSE_COACH le met à `null`) : le bonus
+   * de niveau ne serait jamais tombé pour lui, alors qu'il vient précisément de
+   * cliquer la classe de son enfant. Le niveau dont on PARLE, c'est celui-là.
+   * ⚠️ Et la matière passe par son LIBELLÉ, tel qu'allumé dans la rangée : c'est
+   * ce que `suggerer` attend, et son commentaire dit pourquoi.
+   */
+  const suggestions = useMemo(
+    () => (listeFermee ? [] : suggerer(question, niveauContexte, matiereChoisie)),
+    [question, niveauContexte, matiereChoisie, listeFermee],
+  );
+
+  const fermerListe = useCallback(() => {
+    setListeFermee(true);
+    setSurligne(-1);
+  }, []);
+
+  /**
+   * Prendre une ligne, c'est aller AU COACH — pas remplir le champ.
+   *
+   * ⛔ ET C'EST TOUT L'INTÉRÊT. La version qui recopie le libellé dans le champ
+   * et laisse valider aurait été plus douce à écrire : elle rend un aller-retour
+   * de plus à quelqu'un qui vient d'en économiser trois. Chez IXL, cliquer une
+   * ligne ouvre l'exercice ; la fille de Frédéric ne cherchait pas une meilleure
+   * façon de formuler sa demande, elle cherchait la porte.
+   *
+   * ⚠️ `from=ia` COMME LES CARTES (CarteRessource.tsx) : sans lui, ces arrivées
+   * seraient indistinguables de celles du menu, et on ne saurait pas dire si la
+   * liste sert. `ia_suggestion` est un événement NEUF, et il le faut : mélangé à
+   * `ia_ressource`, il ferait monter le compteur des cartes sans qu'on puisse
+   * séparer les deux gestes — or c'est exactement la question posée.
+   */
+  const choisirSuggestion = useCallback(
+    (s: Suggestion, rang: number) => {
+      track("ia_suggestion", { notion: s.id, rang: rang + 1, profil: profil ?? "inconnu" });
+      fermerListe();
+      router.push(`${s.url}&from=ia`);
+    },
+    [fermerListe, profil, router],
+  );
   // ⛔ IL Y AVAIT ICI UN ÉTAT `historique` QUE PERSONNE NE LISAIT — un
   // `const [, setHistorique]`, en écriture seule. Il ne servait qu'à connaître
   // la liste déjà enregistrée au moment d'y ajouter une demande, et il a coûté
@@ -1456,6 +1524,9 @@ export default function EntreeMatrice({
             // annuler. La seule façon d'effacer une demande est la croix de la
             // ligne de rappel, ou « Nouvelle demande ».
             const tape = question.trim();
+            // Envoyer, c'est avoir choisi de ne pas prendre une suggestion :
+            // la liste se ferme, et elle ne se rouvrira qu'à la frappe suivante.
+            fermerListe();
             lancer(tape || demande, chip);
             if (tape) {
               setDemande(tape);
@@ -1468,10 +1539,62 @@ export default function EntreeMatrice({
             ref={champ}
             type="text"
             value={question}
-            onChange={(e) => setQuestion(e.target.value)}
+            onChange={(e) => {
+              setQuestion(e.target.value);
+              // Une nouvelle frappe rouvre la liste — y compris après un Échap :
+              // on a refusé CES suggestions-là, pas le principe.
+              setListeFermee(false);
+              setSurligne(-1);
+            }}
+            onKeyDown={(e) => {
+              if (suggestions.length === 0) return;
+              if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+                // ⚠️ `preventDefault` : sans lui, la flèche déplace le curseur
+                // dans le texte en même temps qu'elle descend la liste.
+                e.preventDefault();
+                const pas = e.key === "ArrowDown" ? 1 : -1;
+                // ⚠️ LE TOUR DE LISTE PASSE PAR −1, c'est-à-dire « aucune ligne
+                // choisie ». C'est ce qui rend le texte tapé récupérable sans
+                // souris : en remontant d'un cran au-dessus de la première, on
+                // revient à sa propre phrase — et Entrée l'envoie au moteur,
+                // comme avant. Une boucle qui saute de la première à la
+                // dernière enfermerait dans la liste.
+                const n = suggestions.length;
+                setSurligne((s) => {
+                  const suivant = s + pas;
+                  if (suivant < -1) return n - 1;
+                  if (suivant >= n) return -1;
+                  return suivant;
+                });
+              } else if (e.key === "Enter" && surligne >= 0) {
+                e.preventDefault();
+                choisirSuggestion(suggestions[surligne], surligne);
+              } else if (e.key === "Escape") {
+                fermerListe();
+              }
+            }}
+            // Le doigt ou la souris partis ailleurs, la liste n'a plus de raison
+            // de flotter au-dessus des cartes.
+            // ⚠️ Les lignes annulent leur `mousedown` : ce `blur`-ci ne se
+            // déclenche donc PAS quand on clique une suggestion — sans quoi il
+            // fermerait la liste avant que le clic n'aboutisse.
+            onBlur={fermerListe}
             placeholder={
               tutoie ? "Écris ta question ou explique ce qui coince…" : "Décrivez votre besoin…"
             }
+            // ⚠️ LE CHAMP DEVIENT UNE `combobox`, ET C'EST OBLIGATOIRE dès qu'il
+            // pilote une liste : sans ces attributs, un lecteur d'écran annonce
+            // « zone de texte » et ne dit jamais qu'une liste s'est ouverte
+            // sous les doigts. `aria-activedescendant` est ce qui lui fait lire
+            // la ligne surlignée à chaque flèche.
+            role="combobox"
+            aria-expanded={suggestions.length > 0}
+            aria-controls="suggestions-matrice"
+            aria-autocomplete="list"
+            aria-activedescendant={surligne >= 0 ? `suggestion-${surligne}` : undefined}
+            // Le navigateur propose déjà ses propres complétions par-dessus la
+            // nôtre, et les deux listes se superposent.
+            autoComplete="off"
             aria-label={tutoie ? "Ta question" : "Votre demande"}
             // ⚠️ ARRONDI, seul de toute la page (Frédéric, 05/08). Le journal
             // est carré partout — filets, tuiles, encadrés — et c'est justement
@@ -1496,6 +1619,86 @@ export default function EntreeMatrice({
           >
             <span aria-hidden="true">→</span>
           </button>
+
+          {/* ── ⭐⭐ LA LISTE DES NOTIONS, PENDANT QU'ON TAPE (09/09/2026) ──────
+              Ce que chaque ligne porte, et l'ordre est celui d'IXL : à gauche le
+              NOM de la notion, à droite sa matière et son niveau. Le niveau à
+              droite n'est pas une décoration — c'est lui qui permet de proposer
+              « Pourcentages » en 6ᵉ ET « Pourcentages simples » en CM2 sans
+              qu'une seule des deux lignes soit un piège.
+
+              ⚠️ `absolute` ET `z-30` : la liste FLOTTE au-dessus des chips et
+              des cartes. Poussée dans le flux, elle décalerait tout l'écran vers
+              le bas à chaque frappe — c'est-à-dire qu'elle ferait sauter les
+              cartes pendant qu'on tape, exactement le défaut que la barre noire
+              a mis trois passes à corriger dans l'autre sens.
+              ⚠️ `onMouseDown` + `preventDefault` SUR LA LIGNE : sans ça, le
+              `blur` du champ ferme la liste AVANT que le clic n'arrive, et le
+              premier clic ne fait rien. C'est le classique de toute liste de
+              complétion, et il ne se voit qu'à la souris — jamais au clavier,
+              jamais dans un test qui appelle la fonction directement. */}
+          {suggestions.length > 0 && (
+            <ul
+              id="suggestions-matrice"
+              role="listbox"
+              aria-label="Notions qui correspondent"
+              className={`absolute left-0 right-0 top-full z-30 mt-2 overflow-hidden rounded-2xl border-2 bg-white ${
+                surAccueil
+                  ? "border-[#1d1c16] shadow-[4px_4px_0_#1d1c16]"
+                  : "border-slate-300 shadow-lg"
+              }`}
+            >
+              {suggestions.map((s, i) => (
+                <li key={`${s.url}`} role="presentation">
+                  <Link
+                    id={`suggestion-${i}`}
+                    role="option"
+                    aria-selected={i === surligne}
+                    href={`${s.url}&from=ia`}
+                    prefetch={false}
+                    onMouseDown={(e) => e.preventDefault()}
+                    onMouseEnter={() => setSurligne(i)}
+                    onClick={(e) => {
+                      // Le <Link> naviguerait très bien tout seul ; on passe par
+                      // la fonction pour que le clic et la touche Entrée
+                      // émettent le MÊME événement, et un seul.
+                      e.preventDefault();
+                      choisirSuggestion(s, i);
+                    }}
+                    className={`flex items-center justify-between gap-3 border-b px-4 py-2.5 text-left transition last:border-b-0 ${
+                      surAccueil ? "border-[#1d1c16]/10" : "border-slate-100"
+                    } ${
+                      i === surligne
+                        ? surAccueil
+                          ? "bg-[#1d1c16]/[0.06]"
+                          : "bg-slate-100"
+                        : "bg-white"
+                    }`}
+                  >
+                    {/* ⚠️ `truncate` ET `min-w-0` : « Information chiffrée :
+                        proportions, pourcentages et évolutions » fait 68 signes.
+                        Sans les deux, la ligne pousse la pastille du niveau hors
+                        du cadre à 375 px — et le niveau est justement ce qui
+                        distingue deux lignes voisines. */}
+                    <span
+                      className={`min-w-0 flex-1 truncate text-sm ${
+                        surAccueil ? "text-[#1d1c16]" : "text-slate-800"
+                      }`}
+                    >
+                      {s.label}
+                    </span>
+                    <span
+                      className={`shrink-0 text-[11px] font-semibold uppercase tracking-wide ${
+                        surAccueil ? "text-[#1d1c16]/55" : "text-slate-500"
+                      }`}
+                    >
+                      {s.matiereLabel} · {s.niveauLabel}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </form>
 
         {/* Les actions du professeur et du chef d'établissement — écrites, pas
