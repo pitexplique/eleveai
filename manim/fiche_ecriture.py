@@ -209,6 +209,18 @@ def construire(lettre):
     # les bandes : écarter aurait poussé la dernière sous le pied de page.
     global IL
     IL = 120 if profondeur(spec) > 0.1 else 150
+    # ⛔⛔ ET CE PALIER DE DEUX VALEURS NE SUFFIT PLUS DEPUIS LE « f ».
+    # Il ne regarde que ce qui DESCEND. Le « f » descend à 1,97 interligne MAIS
+    # monte à 3,36 : 5,33 en tout, quand le « y » n'en fait que 1,80. À 120, sa
+    # jambe traversait la consigne de la bande suivante — exactement la panne
+    # que le « y » avait causée, revenue par l'autre bout.
+    # ⚠️ LA CONTRAINTE SE CALCULE : les bandes sont espacées de 620 px et la
+    # consigne de la suivante se pose 66 px au-dessus de son 3ᵉ interligne. Il
+    # faut donc (3 + profondeur) × IL + la hauteur de la consigne < 620.
+    # 👉 On garde 150/120 comme PLAFOND et on descend seulement si c'est
+    # nécessaire : aucune fiche déjà publiée ne bouge (vérifié — « a » 150,
+    # « y » 120, « p » 120 inchangés ; seul le « f » passe à 101).
+    IL = min(IL, int((620 - 66 - 60) / (profondeur(spec) + 3)))
     img = Image.new("RGB", (W, H), (255, 255, 255))
     d = ImageDraw.Draw(img)
 
