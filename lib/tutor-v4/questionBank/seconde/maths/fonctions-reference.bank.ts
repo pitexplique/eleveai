@@ -2392,4 +2392,424 @@ export const fonctionsReferenceBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* ========== RENFORTS DU 09/09/2026 ==========
+   *
+   * ⛔ MESURE QUI LES A DECIDES. Repartition generateurs / items fixes :
+   *     reference_carre            1 gen ·  8 fixes   ← la plus fondamentale,
+   *                                                     et la moins variee
+   *     reference_comparer         2 gen ·  5 fixes
+   *     reference_resoudre         2 gen ·  7 fixes
+   *     reference_valeur_absolue  15 gen ·  5 fixes   (ecrite le 08/09)
+   * Le verificateur de renouvellement disait vert : un seul gabarit a large
+   * plage suffit a passer le seuil. Mais un seul gabarit, c'est une seule
+   * FORME de question, et l'eleve la reconnait au deuxieme passage.
+   *
+   * ⛔ ET LE GESTE DE FREDERIC ETAIT ABSENT — ses mots : « je fais calculer
+   * l'image de 4 par la courbe racine carree et je montre que -1 n'a pas
+   * d'image ; les autres ne le font pas, ils le font APRES sur les fonctions de
+   * reference ». Zero item dans toute la banque sur une image qui N'EXISTE PAS.
+   * C'est pourtant ce qui distingue une fonction de reference d'une autre.
+   */
+
+  {
+    kind: "template",
+    id: "seconde_ref_carre_tpl_antecedents",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_carre",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Un carré est toujours positif — et deux nombres opposés ont le même carré.",
+    tags: ["seconde", "maths", "fonctions", "carre", "antecedents", "template"],
+    generate: () => {
+      // Trois cas, et c'est TOUT l'interet de la question : deux solutions,
+      // une seule, ou aucune. Un gabarit qui ne tirerait que k > 0 n'enseignerait
+      // que le tiers de la reponse.
+      const cas = randomInt(0, 2);
+      const k = cas === 0 ? randomInt(1, 9) ** 2 : cas === 1 ? 0 : -randomInt(1, 20);
+      const correct = cas === 0 ? "deux solutions" : cas === 1 ? "une seule solution" : "aucune solution";
+      const choices = choixDistincts(
+        correct,
+        ["deux solutions", "une seule solution", "aucune solution"],
+        ["une infinité de solutions"],
+      );
+      const detail =
+        cas === 0
+          ? `$x = ${Math.sqrt(k)}$ et $x = -${Math.sqrt(k)}$ conviennent tous les deux, car deux nombres opposés ont le même carré.`
+          : cas === 1
+            ? "Seul $x = 0$ a pour carré $0$."
+            : `Aucun carré n'est négatif : $x^2 \\geqslant 0$ pour tout réel $x$, donc jamais $${k}$.`;
+      return {
+        text: `Combien l'équation $x^2 = ${k}$ a-t-elle de solutions ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Chercher les antécédents de $k$ par la fonction carré, c'est résoudre $x^2 = k$.",
+          "On regarde d'abord le SIGNE de $k$ : c'est lui qui décide du nombre de solutions.",
+          detail,
+          `L'équation $x^2 = ${k}$ a ${correct}.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_carre_tpl_signe",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_carre",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "La fonction carré décroît sur les négatifs et croît sur les positifs : le côté compte.",
+    tags: ["seconde", "maths", "fonctions", "carre", "variations", "template"],
+    generate: () => {
+      // Une fois sur deux les deux nombres sont NEGATIFS : c'est le seul cas ou
+      // l'ordre s'inverse, et c'est l'erreur que le sujet cherche.
+      const negatifs = Math.random() < 0.5;
+      const p = randomInt(1, 8);
+      const q = p + randomInt(1, 5);
+      const [a, b] = negatifs ? [-q, -p] : [p, q]; // toujours a < b
+      const correct = negatifs ? `$a^2 > b^2$` : `$a^2 < b^2$`;
+      const choices = choixDistincts(
+        correct,
+        [`$a^2 < b^2$`, `$a^2 > b^2$`, `$a^2 = b^2$`],
+        ["on ne peut pas conclure"],
+      );
+      return {
+        text: `Soit $a = ${a}$ et $b = ${b}$, donc $a < b$. Comparer $a^2$ et $b^2$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La fonction carré est DÉCROISSANTE sur $]-\\infty \\,;\\, 0]$ et CROISSANTE sur $[0 \\,;\\, +\\infty[$.",
+          "On regarde de quel côté de zéro se trouvent les deux nombres : c'est ce qui décide si l'ordre est conservé ou inversé.",
+          `$a^2 = ${a * a}$ et $b^2 = ${b * b}$. ` +
+            (negatifs
+              ? "Les deux sont négatifs : on est sur la partie décroissante, l'ordre S'INVERSE."
+              : "Les deux sont positifs : on est sur la partie croissante, l'ordre est conservé."),
+          negatifs
+            ? "$a^2 > b^2$ — ⛔ élever au carré n'a conservé l'ordre que parce qu'on l'a vérifié, pas par principe."
+            : "$a^2 < b^2$."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_carre_tpl_encadrement",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_carre",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Sur des négatifs, les bornes de l'encadrement ÉCHANGENT leurs places.",
+    tags: ["seconde", "maths", "fonctions", "carre", "encadrement", "template"],
+    generate: () => {
+      const negatifs = Math.random() < 0.5;
+      const p = randomInt(1, 6);
+      const q = p + randomInt(1, 4);
+      const [a, b] = negatifs ? [-q, -p] : [p, q];
+      // Sur les positifs : a^2 <= x^2 <= b^2. Sur les negatifs, tout s'inverse.
+      const bas = negatifs ? b * b : a * a;
+      const haut = negatifs ? a * a : b * b;
+      const correct = `$${bas} \\leqslant x^2 \\leqslant ${haut}$`;
+      const choices = choixDistincts(
+        correct,
+        [`$${haut} \\leqslant x^2 \\leqslant ${bas}$`, `$${a * a} \\leqslant x^2 \\leqslant ${b * b}$`],
+        [`$${a} \\leqslant x^2 \\leqslant ${b}$`, `$0 \\leqslant x^2 \\leqslant ${haut}$`],
+      );
+      return {
+        text: `On sait que $${a} \\leqslant x \\leqslant ${b}$. Encadrer $x^2$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Encadrer $x^2$, c'est appliquer la fonction carré aux deux bornes — mais son sens de variation décide de l'ordre du résultat.",
+          "On situe l'intervalle par rapport à zéro, puis on applique le sens de variation correspondant.",
+          negatifs
+            ? `L'intervalle est entièrement négatif : la fonction carré y DÉCROÎT, donc les bornes s'échangent. $(${a})^2 = ${a * a}$ devient le maximum et $(${b})^2 = ${b * b}$ le minimum.`
+            : `L'intervalle est entièrement positif : la fonction carré y croît, les bornes restent dans le même ordre. $${a}^2 = ${a * a}$ et $${b}^2 = ${b * b}$.`,
+          `$${bas} \\leqslant x^2 \\leqslant ${haut}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_racine_tpl_domaine",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_racine",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La racine carrée d'un nombre négatif n'existe pas : aucun carré n'est négatif.",
+    tags: ["seconde", "maths", "fonctions", "racine", "domaine", "template"],
+    generate: () => {
+      // ⭐ LE GESTE DE FREDERIC : on calcule une image qui existe, puis une qui
+      // n'existe pas. Un nombre sur trois est negatif — assez pour que l'eleve
+      // ne puisse pas repondre sans regarder le signe.
+      const negatif = Math.random() < 0.4;
+      const r = randomInt(1, 10);
+      const x = negatif ? -randomInt(1, 20) : r * r;
+      const correct = negatif ? "elle n'existe pas" : `$${r}$`;
+      const choices = choixDistincts(
+        correct,
+        negatif
+          ? ["elle n'existe pas", `$${Math.round(Math.sqrt(-x) * 10) / 10}$`, `$${x}$`, `$0$`]
+          : [`$${r}$`, `$${x}$`, `$${x / 2}$`, "elle n'existe pas"],
+        [`$${r + 1}$`, `$-${r}$`],
+      );
+      return {
+        text: `Quelle est l'image de $${x}$ par la fonction racine carrée ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La fonction racine carrée n'est définie que sur $[0 \\,;\\, +\\infty[$ : son domaine EXCLUT les négatifs.",
+          "On vérifie d'abord le signe du nombre, et seulement ensuite on cherche la racine.",
+          negatif
+            ? `$${x}$ est négatif. Or $\\sqrt{${x}}$ devrait être un nombre dont le carré vaut $${x}$ — et aucun carré n'est négatif.`
+            : `$${x}$ est positif, et $${r}^2 = ${x}$, donc $\\sqrt{${x}} = ${r}$.`,
+          negatif
+            ? `$${x}$ n'a PAS d'image par la fonction racine carrée. ⭐ Une fonction n'est pas obligée de donner une image à tout le monde.`
+            : `L'image de $${x}$ est $${r}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_inverse_tpl_domaine",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_inverse",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Diviser par zéro n'a pas de sens — c'est la seule valeur interdite.",
+    tags: ["seconde", "maths", "fonctions", "inverse", "domaine", "template"],
+    generate: () => {
+      const interdit = Math.random() < 0.35;
+      const x = interdit ? 0 : [2, 4, 5, 8, 10, 20, 25, -2, -4, -5, -8, -10, -20][randomInt(0, 12)];
+      const val = interdit ? "" : `${1 / x}`.replace(".", ",");
+      const correct = interdit ? "elle n'existe pas" : `$${val}$`;
+      const choices = choixDistincts(
+        correct,
+        interdit
+          ? ["elle n'existe pas", "$0$", "$1$", "une infinité"]
+          : [`$${val}$`, `$${x}$`, `$${-x}$`, "elle n'existe pas"],
+        ["$0$", "$1$"],
+      );
+      return {
+        text: `Quelle est l'image de $${x}$ par la fonction inverse ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La fonction inverse $x \\mapsto \\dfrac{1}{x}$ est définie sur $\\mathbb{R}^*$ : tous les réels SAUF zéro.",
+          "On vérifie que le nombre n'est pas nul, puis on prend son inverse.",
+          interdit
+            ? "$\\dfrac{1}{0}$ n'a pas de sens : aucun nombre multiplié par $0$ ne donne $1$."
+            : `$\\dfrac{1}{${x}} = ${val}$.`,
+          interdit
+            ? "$0$ n'a PAS d'image par la fonction inverse — c'est la seule valeur exclue, et c'est ce qui crée l'asymptote de sa courbe."
+            : `L'image de $${x}$ est $${val}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_comparer_tpl_inverse",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_comparer",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "La fonction inverse est DÉCROISSANTE : le plus grand nombre a le plus petit inverse.",
+    tags: ["seconde", "maths", "fonctions", "comparer", "inverse", "template"],
+    generate: () => {
+      // ⛔ PREMIERE VERSION MESUREE FAUSSE-VARIEE : elle ne tirait que des
+      // couples de MEME signe, si bien que la reponse etait « 1/a > 1/b » sur
+      // les 500 tirages. Un eleve la donne sans reflechir des le deuxieme
+      // passage. Un cas sur trois traverse desormais zero — et c'est justement
+      // le cas ou l'ordre est CONSERVE, celui que le sujet cherche.
+      const cas = randomInt(0, 2); // 0 = positifs, 1 = negatifs, 2 = a<0<b
+      const p = randomInt(2, 9);
+      const q = p + randomInt(1, 6);
+      const [a, b] = cas === 0 ? [p, q] : cas === 1 ? [-q, -p] : [-p, q];
+      const memeSigne = cas !== 2;
+      const correct = memeSigne ? `$\\dfrac{1}{a} > \\dfrac{1}{b}$` : `$\\dfrac{1}{a} < \\dfrac{1}{b}$`;
+      const choices = choixDistincts(
+        correct,
+        [`$\\dfrac{1}{a} < \\dfrac{1}{b}$`, `$\\dfrac{1}{a} > \\dfrac{1}{b}$`, `$\\dfrac{1}{a} = \\dfrac{1}{b}$`],
+        ["on ne peut pas conclure"],
+      );
+      return {
+        text: `Soit $a = ${a}$ et $b = ${b}$, donc $a < b$. Comparer $\\dfrac{1}{a}$ et $\\dfrac{1}{b}$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La fonction inverse est décroissante sur $]-\\infty \\,;\\, 0[$ et sur $]0 \\,;\\, +\\infty[$ — sur chacun des deux SÉPARÉMENT, jamais d'un bloc.",
+          "On regarde d'abord si les deux nombres sont du même côté de zéro. C'est cette question-là qui décide, pas le sens de variation.",
+          memeSigne
+            ? `$${a}$ et $${b}$ sont de même signe, donc du même côté de zéro : la décroissance s'applique et inverse l'ordre. $\\dfrac{1}{${a}}$ contre $\\dfrac{1}{${b}}$.`
+            : `⛔ Ici $${a}$ est négatif et $${b}$ positif : ils sont de PART ET D'AUTRE de zéro. Le sens de variation ne s'applique pas d'un côté à l'autre. Mais on conclut quand même, et autrement : $\\dfrac{1}{${a}}$ est négatif, $\\dfrac{1}{${b}}$ est positif.`,
+          memeSigne
+            ? "$\\dfrac{1}{a} > \\dfrac{1}{b}$ — l'ordre est inversé."
+            : "$\\dfrac{1}{a} < \\dfrac{1}{b}$ — l'ordre est CONSERVÉ, alors que la fonction est décroissante. C'est possible parce qu'on a franchi zéro."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_comparer_tpl_racine_cube",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_comparer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Ces deux fonctions-là sont croissantes : elles ne changent jamais l'ordre.",
+    tags: ["seconde", "maths", "fonctions", "comparer", "template"],
+    generate: () => {
+      const cube = Math.random() < 0.5;
+      const p = randomInt(1, 8);
+      const q = p + randomInt(1, 6);
+      // La racine n'accepte que des positifs ; le cube accepte tout, et c'est
+      // justement ce qui le rend interessant : il conserve l'ordre AUSSI sur les
+      // negatifs, contrairement au carre.
+      const [a, b] = cube && Math.random() < 0.5 ? [-q, -p] : [p, q];
+      const f = cube ? "a^3" : "\\sqrt{a}";
+      const g = cube ? "b^3" : "\\sqrt{b}";
+      const correct = `$${f} < ${g}$`;
+      const choices = choixDistincts(
+        correct,
+        [`$${f} > ${g}$`, `$${f} = ${g}$`],
+        ["on ne peut pas conclure"],
+      );
+      return {
+        text:
+          `Soit $a = ${a}$ et $b = ${b}$, donc $a < b$. ` +
+          `Comparer $${f}$ et $${g}$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          cube
+            ? "La fonction cube est croissante sur $\\mathbb{R}$ TOUT ENTIER."
+            : "La fonction racine carrée est croissante sur $[0 \\,;\\, +\\infty[$.",
+          "Une fonction croissante conserve l'ordre : si $a < b$, alors son image de $a$ est plus petite que celle de $b$.",
+          cube
+            ? `$(${a})^3 = ${a ** 3}$ et $(${b})^3 = ${b ** 3}$ — l'ordre est conservé, y compris sur les négatifs. ⭐ C'est ce qui distingue le cube du carré.`
+            : `$\\sqrt{${a}}$ et $\\sqrt{${b}}$ : la racine croît, donc l'ordre tient.`,
+          `$${f} < ${g}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_resoudre_tpl_inverse",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_resoudre",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "L'inverse de l'inverse redonne le nombre de départ.",
+    tags: ["seconde", "maths", "fonctions", "resoudre", "inverse", "template"],
+    generate: () => {
+      // Liste elargie : la premiere version n'avait que 7 valeurs, donc 7
+      // enonces possibles en tout.
+      const k = [2, 3, 4, 5, 8, 10, 20, 25, -2, -3, -4, -5, -8, -10, -20][randomInt(0, 14)];
+      const sol = `${1 / k}`.replace(".", ",");
+      const correct = `$x = ${sol}$`;
+      const choices = choixDistincts(
+        correct,
+        [`$x = ${k}$`, `$x = ${-k}$`, `$x = ${`${-1 / k}`.replace(".", ",")}$`],
+        ["pas de solution"],
+      );
+      return {
+        text: `Résoudre $\\dfrac{1}{x} = ${k}$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Résoudre $f(x) = k$, c'est chercher les antécédents de $k$.",
+          "$\\dfrac{1}{x} = k$ équivaut à $x = \\dfrac{1}{k}$, dès lors que $k \\neq 0$.",
+          `$x = \\dfrac{1}{${k}} = ${sol}$. Vérification : $\\dfrac{1}{${sol}} = ${k}$.`,
+          `$x = ${sol}$. ⭐ La fonction inverse est sa propre réciproque : on lui applique deux fois et on retombe sur le départ.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_ref_resoudre_tpl_racine",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_reference_2de",
+    microId: "reference_resoudre",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Pour retrouver $x$, on élève au carré — mais attention au signe de $k$.",
+    tags: ["seconde", "maths", "fonctions", "resoudre", "racine", "template"],
+    generate: () => {
+      // Une fois sur trois, k est negatif : il n'y a alors AUCUNE solution, car
+      // une racine carree n'est jamais negative. C'est la moitie de la lecon.
+      const impossible = Math.random() < 0.33;
+      const k = impossible ? -randomInt(1, 9) : randomInt(2, 12);
+      const correct = impossible ? "pas de solution" : `$x = ${k * k}$`;
+      const choices = choixDistincts(
+        correct,
+        impossible
+          ? ["pas de solution", `$x = ${k * k}$`, `$x = ${k}$`, `$x = ${-k}$`]
+          : [`$x = ${k * k}$`, `$x = ${k}$`, `$x = ${k / 2}$`, "pas de solution"],
+        [`$x = ${k + 1}$`],
+      );
+      return {
+        text: `Résoudre $\\sqrt{x} = ${k}$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une racine carrée est toujours POSITIVE ou nulle : $\\sqrt{x} \\geqslant 0$ quel que soit $x$.",
+          "On regarde d'abord le signe de $k$. S'il est positif, on élève les deux membres au carré.",
+          impossible
+            ? `$${k}$ est négatif, et aucune racine carrée ne l'est. L'équation n'a donc pas de solution — inutile d'élever au carré.`
+            : `On élève au carré : $x = ${k}^2 = ${k * k}$. Vérification : $\\sqrt{${k * k}} = ${k}$.`,
+          impossible
+            ? "Pas de solution. ⛔ Élever au carré sans regarder le signe aurait donné une réponse fausse."
+            : `$x = ${k * k}$.`
+        ),
+      };
+    },
+  },
 ];
