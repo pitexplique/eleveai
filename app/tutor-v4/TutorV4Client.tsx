@@ -534,6 +534,9 @@ const questionTopRef = useRef<HTMLDivElement | null>(null);
 const successBannerRef = useRef<HTMLElement | null>(null);
 const hasForcedTopScrollRef = useRef(false);
 const autoActivatedPairRef = useRef<string | null>(null);
+/* La bascule « téléphone → mode simple » ne se joue qu'une fois par visite :
+   sinon elle reprendrait à l'élève le mode qu'il vient de choisir. */
+const aBasculeModeRef = useRef(false);
 // Garde synchrone contre le double-envoi : l'état `busy` se met à jour un
 // rendu trop tard, donc un double-clic (fréquent sur mobile) peut lancer
 // deux fois submitAnswer ; le 2e tombait sur « Aucune question choisie ».
@@ -831,6 +834,43 @@ useEffect(() => {
     return () => window.clearTimeout(timeout);
   }, [successBanner.open]);
 
+  /**
+   * ⭐ AU TÉLÉPHONE, LE MODE SIMPLE PASSE OUTRE L'ADRESSE (09/09/2026).
+   *
+   * Frédéric : « je pense qu'avec téléphone on pourrait mettre le mode simple
+   * par défaut sur toutes les classes », puis « le téléphone passe outre ce
+   * paramètre ». Le lien du coach écrit TOUJOURS `display=` d'après la classe
+   * (`displayParamForClasse`) : sans cette bascule, une 5e sur son téléphone
+   * reçoit le mode complet, c'est-à-dire un tableau de bord, deux énoncés au
+   * choix, et du défilement avant de travailler — alors que sa colonne de
+   * micro-compétences est de toute façon masquée sous `lg`. Le mode simple pose
+   * la question, en grand.
+   *
+   * ⛔ MAIS LE CHOIX DE L'ÉLÈVE GAGNE. S'il appuie sur « Mode complet », on le
+   * retient : sans ça on le lui reprendrait à chaque notion, et le bouton
+   * n'aurait aucun effet durable.
+   *
+   * ⚠️ 768 px, et le script des aperçus photographie à 800 (`LARGEUR` dans
+   * scripts/capturer-apercus-coach.ts) : les 768 captures ne sont pas
+   * concernées, et la vue reste celle que `display=` demande.
+   */
+  useEffect(() => {
+    if (!urlInitDone) return;
+    if (aBasculeModeRef.current) return;
+
+    aBasculeModeRef.current = true;
+
+    try {
+      if (localStorage.getItem("tutorv4-mode-choisi")) return;
+    } catch {
+      /* localStorage indisponible : on applique quand même la règle. */
+    }
+
+    if (window.matchMedia("(max-width: 767px)").matches) {
+      setDisplayMode("simple");
+    }
+  }, [urlInitDone]);
+
   // L'« affichage classe » est une préférence du prof : on la garde d'une
   // notion à l'autre (et après rechargement) pour ne pas la réactiver sans
   // cesse en classe. Lecture après montage pour éviter un écart d'hydratation.
@@ -944,6 +984,18 @@ useEffect(() => {
   function randomSuccessTitle() {
     const items = ["Super !", "Magnifique !", "OK !"];
     return items[Math.floor(Math.random() * items.length)];
+  }
+
+  /* Changer de vue à la main, c'est une décision : on la retient, et elle tient
+     tête à la bascule automatique du téléphone. */
+  function choisirMode(mode: TutorDisplayMode) {
+    setDisplayMode(mode);
+
+    try {
+      localStorage.setItem("tutorv4-mode-choisi", mode);
+    } catch {
+      /* localStorage indisponible : le choix vaut pour cette page seulement. */
+    }
   }
 
   function openSuccessBanner(message?: string) {
@@ -1646,7 +1698,7 @@ function handleInputKeyDown(
           onNextNotion={() => shiftNotion(1)}
           renderCanvas={(question) => renderCanvas(question.canvas)}
           onBackCoach={retourCoach}
-          onSwitchToComplete={() => setDisplayMode("complete")}
+          onSwitchToComplete={() => choisirMode("complete")}
           onStart={() => void startSession(activeMicroId ?? undefined)}
           onSubmit={() => void submitAnswer()}
           onQcmClick={(choice) => void handleQcmClick(choice)}
@@ -1709,7 +1761,7 @@ function handleInputKeyDown(
 
             <button
               type="button"
-              onClick={() => setDisplayMode("simple")}
+              onClick={() => choisirMode("simple")}
               className="rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-center text-sm font-black text-slate-800 shadow-sm hover:bg-slate-50"
             >
               Mode simple
