@@ -1201,12 +1201,48 @@ export async function answerTutorV4(
     nextCurrentPair.optionB.id,
   ];
 
-  session.currentChoice = undefined;
+  /* ⭐ ET ENTRE DEUX QUESTIONS AUSSI (09/09/2026). Le démarrage avait été traité
+     le matin ; l'aller-retour restait ENTRE CHAQUE question, parce que la
+     réponse ne rendait, elle aussi, qu'une paire à activer. Même geste, même
+     règle de départage. Mesuré : `/choose` coûte 0,42 s en dev, plus une
+     latence réseau complète sur un téléphone. */
+  const enonceSimple = isSimpleMode ? choisirEnonceSimple(nextCurrentPair) : null;
+
+  if (enonceSimple) {
+    const difficulteChoisie = getDifficultyFromOption(enonceSimple);
+
+    session.currentChoice = {
+      pairId: nextCurrentPair.pairId,
+      chosenOptionId: enonceSimple.id,
+      chosenDifficulty: difficulteChoisie,
+      chosenStar: enonceSimple.meta.starLevel,
+      chosenTheme: enonceSimple.meta.theme,
+      chosenAt: Date.now(),
+    };
+
+    session.audit.push({
+      at: new Date().toISOString(),
+      event: "question_chosen",
+      notionId: enonceSimple.notionId,
+      microId: enonceSimple.microId,
+      pairId: nextCurrentPair.pairId,
+      optionId: enonceSimple.id,
+      difficulty: difficulteChoisie,
+      starLevel: enonceSimple.meta.starLevel,
+      mode: session.mode,
+      reason: "Choix automatique de la vue simple, après une réponse.",
+      flags: [],
+    });
+  } else {
+    session.currentChoice = undefined;
+  }
+
   session.turnStartedAt = Date.now();
 
   await saveSessionV4(session);
 
   return {
+    chosenOptionId: enonceSimple?.id,
     feedback: remediationNote
       ? `${guarded.text}\n\n${remediationNote}`
       : guarded.text,

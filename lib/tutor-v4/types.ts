@@ -423,6 +423,10 @@ export type AnswerTutorV4Response = {
   feedback: string;
   result: { ok: boolean; flags: string[] };
   pair: TutorQuestionPair;
+  /* Comme dans `StartTutorV4Response` : en vue simple, la question SUIVANTE est
+     déjà choisie, et le client n'a pas à rappeler `/choose` entre deux
+     questions. Absent en vue complète, où l'élève choisit. */
+  chosenOptionId?: string;
   mode: TutorMode;
   recommendedStar: StarLevel;
   recommendedDifficulty: DifficultyLevel;

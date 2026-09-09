@@ -641,6 +641,12 @@ function forceScrollTopOnArrival() {
   const [pendingNextPair, setPendingNextPair] = useState<TutorQuestionPair | null>(
     null
   );
+  /* En vue simple, la question suivante est choisie par le serveur AU MOMENT DE
+     LA CORRECTION. On la met de côté avec la paire, le temps que l'élève lise
+     l'explication. */
+  const [pendingNextChosenOptionId, setPendingNextChosenOptionId] = useState<
+    string | null
+  >(null);
   const [pendingNextMode, setPendingNextMode] = useState<TutorMode | null>(null);
   const [pendingNextRecommendedStar, setPendingNextRecommendedStar] =
     useState<StarLevel | null>(null);
@@ -1020,6 +1026,7 @@ useEffect(() => {
     setWrongAnswerPanelOpen(false);
     setLastSubmittedAnswer("");
     setPendingNextPair(null);
+    setPendingNextChosenOptionId(null);
     setPendingNextMode(null);
     setPendingNextRecommendedStar(null);
     setPendingNextVisibleProgress(null);
@@ -1052,6 +1059,11 @@ function continueAfterExplanation() {
   setAnswer("");
   resetWrongAnswerFlow();
 
+  /* Le serveur avait déjà choisi la question suivante au moment de corriger
+     (vue simple) : l'élève sort de l'explication directement sur l'énoncé,
+     sans l'aller-retour d'activation. */
+  activerQuestionServie(pendingNextPair, pendingNextChosenOptionId ?? undefined);
+
   scrollToQuestions();
 }
 
@@ -1075,6 +1087,27 @@ function continueAfterExplanation() {
       [option.microId]:
         prev[option.microId] === "success" ? "success" : "current",
     }));
+  }
+
+  /* La question suivante quand le serveur l'a déjà choisie (vue simple) : on la
+     pose sans repasser par `/choose`. `autoActivatedPairRef` est marqué pour
+     que l'effet d'activation automatique ne redemande pas ce qui est à
+     l'écran. Rend `true` quand il y avait bien une question à poser. */
+  function activerQuestionServie(
+    pairServie: TutorQuestionPair,
+    chosenOptionId?: string
+  ): boolean {
+    if (!chosenOptionId) return false;
+
+    const option = [pairServie.optionA, pairServie.optionB].find(
+      (candidate) => candidate.id === chosenOptionId
+    );
+
+    if (!option) return false;
+
+    autoActivatedPairRef.current = pairServie.pairId;
+    appliquerQuestionActive(option);
+    return true;
   }
 
   async function activateQuestion(
@@ -1163,16 +1196,7 @@ function continueAfterExplanation() {
          Le serveur a fait le choix — il n'y a plus de second appel à attendre.
          `autoActivatedPairRef` est marqué ici pour que l'effet d'activation
          automatique ne redemande pas ce qui est déjà à l'écran. */
-      const dejaChoisie = typed.chosenOptionId
-        ? [typed.pair.optionA, typed.pair.optionB].find(
-            (option) => option.id === typed.chosenOptionId
-          )
-        : undefined;
-
-      if (dejaChoisie) {
-        autoActivatedPairRef.current = typed.pair.pairId;
-        appliquerQuestionActive(dejaChoisie);
-      }
+      activerQuestionServie(typed.pair, typed.chosenOptionId);
     } catch (error) {
       setFeedback(
         error instanceof Error ? error.message : "Erreur au démarrage du tutor."
@@ -1452,9 +1476,15 @@ function continueAfterExplanation() {
         setCurrentQuestion(null);
         setAnswer("");
         setPendingNextPair(null);
+        setPendingNextChosenOptionId(null);
         setPendingNextMode(null);
         setPendingNextRecommendedStar(null);
         setPendingNextVisibleProgress(null);
+
+        /* Vue simple : la question suivante est déjà choisie, elle se pose ici.
+           En vue complète, `chosenOptionId` est absent et on retombe sur les
+           deux énoncés au choix, comme avant. */
+        activerQuestionServie(typed.pair, typed.chosenOptionId);
       } else {
         closeSuccessBanner();
         // Si la remédiation s'est déclenchée, on montre le message causal du
@@ -1469,6 +1499,7 @@ function continueAfterExplanation() {
           setWrongAnswerPanelOpen(true);
 
           setPendingNextPair(typed.pair);
+          setPendingNextChosenOptionId(typed.chosenOptionId ?? null);
           setPendingNextMode(typed.mode);
           setPendingNextRecommendedStar(typed.recommendedStar);
           setPendingNextVisibleProgress(typed.visibleProgress);
@@ -1492,9 +1523,12 @@ function continueAfterExplanation() {
           setCurrentQuestion(null);
           setAnswer("");
           setPendingNextPair(null);
+          setPendingNextChosenOptionId(null);
           setPendingNextMode(null);
           setPendingNextRecommendedStar(null);
           setPendingNextVisibleProgress(null);
+
+          activerQuestionServie(typed.pair, typed.chosenOptionId);
         }
       }
     } catch (error) {
