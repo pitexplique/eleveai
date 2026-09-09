@@ -120,12 +120,14 @@ body {
    porte SA classe écrite à droite. Ce qui bloquait n'était donc pas une règle,
    c'était un ordre de lecture — et un ordre de lecture se change en CSS.
 
-   ⛔ EN CSS, ET PAS DANS `EntreeMatrice` (consigne explicite du 09/09). Le
-   composant sert aussi la variante « accueil » du journal ailleurs sur le
-   site : y inverser l'ordre changerait des écrans que personne n'a demandé à
-   changer. La règle ci-dessous ne s'applique que sous `.accueil-champ-en-tete`,
-   posé par app/accueil/AccueilIA.tsx — donc sur cette page et nulle part
-   ailleurs.
+   ⛔ EN CSS, ET PAS DANS `EntreeMatrice` (consigne explicite du 09/09). La
+   règle ne s'applique que sous `.accueil-champ-en-tete`, posé par
+   app/accueil/AccueilIA.tsx — donc sur cette page et nulle part ailleurs.
+   ⚠️ Une première rédaction de cette note justifiait le choix par « le composant
+   sert aussi ailleurs sur le site ». C'est FAUX, vérifié le 09/09 : le seul
+   point d'appel de `EntreeMatrice` est AccueilIA.tsx, en `variante="page"` — la
+   branche `variante="accueil"` existe dans le composant et personne ne l'utilise
+   plus. Le vrai motif est celui du dessus, et il se suffit.
 
    ⚠️ `order` DÉPLACE CE QU'ON VOIT, PAS L'ORDRE DE TABULATION. Au clavier, on
    passe encore par les pastilles avant d'atteindre le champ. C'est le prix

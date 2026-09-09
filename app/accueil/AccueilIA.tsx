@@ -189,9 +189,9 @@ export default function AccueilIA() {
               jamais été ; elles en avaient seulement l'air, parce qu'elles
               étaient rencontrées les premières.
               ⛔ CE `div` NE FAIT QUE PORTER LA CLASSE. L'inversion se joue
-              entièrement dans app/globals.css (`.accueil-champ-en-tete`), et
-              c'est voulu : `EntreeMatrice` sert aussi ailleurs sur le site, où
-              rien ne doit bouger. Sa note complète est dans la feuille. */}
+              entièrement dans app/globals.css (`.accueil-champ-en-tete`), sur
+              consigne — et la note complète est dans la feuille, y compris ce
+              que la méthode coûte à la tabulation. */}
           <div className="accueil-champ-en-tete">
             <Suspense fallback={<div className="h-64" aria-hidden="true" />}>
               {/* L'entrée n'affiche plus l'historique sous la recherche : c'est

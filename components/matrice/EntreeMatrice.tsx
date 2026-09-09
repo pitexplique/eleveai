@@ -1579,8 +1579,33 @@ export default function EntreeMatrice({
             // déclenche donc PAS quand on clique une suggestion — sans quoi il
             // fermerait la liste avant que le clic n'aboutisse.
             onBlur={fermerListe}
+            // ⭐ 09/09/2026 — « TAPE LES 3 PREMIÈRES LETTRES » (Frédéric).
+            // Ce que disait le champ avant — « Écris ta question ou explique ce
+            // qui coince… », « Décrivez votre besoin… » — demandait de RÉDIGER.
+            // C'est exactement la marche que sa fille n'a pas su monter : elle
+            // voulait réviser les pourcentages, elle n'avait aucun besoin à
+            // décrire, et elle est repartie sans rien taper.
+            // Depuis la liste suggérée (lib/matrice/suggestions.ts), trois
+            // lettres suffisent VRAIMENT — le seuil s'appelle `MINIMUM` et vaut
+            // 3. Le libellé ne promet donc rien qu'il ne tienne : il annonce le
+            // geste le moins cher que la page accepte.
+            // ⚠️ ON NE PERD PAS LA PHRASE LIBRE. Le moteur lit toujours une
+            // question entière, et l'exemple soufflé sous le champ en montre
+            // une. Ce qui change, c'est le geste PROPOSÉ EN PREMIER : le plus
+            // petit, pas le plus complet.
+            // ⚠️ « 3 » EN CHIFFRE. Dans un libellé aussi court il se voit d'un
+            // coup d'œil là où « trois » se lit — or c'est un nombre qu'on veut
+            // compter, pas lire.
+            // ⛔ ET LE COMMENTAIRE EST EN `//`, PAS EN `{/* */}`. Une accolade
+            // ouverte au milieu d'une balise fait attendre un attribut au
+            // compilateur : « Expected '</', got '}' », et toute la page tombe
+            // en 500. C'est la forme qu'emploient déjà les autres notes de ce
+            // même `<input>`.
+            // ⚠️ Les deux variantes restent : `tutoie` vaut faux pour le
+            // parent, le professeur et la direction (profils.ts), et tout le
+            // reste de l'écran obéit.
             placeholder={
-              tutoie ? "Écris ta question ou explique ce qui coince…" : "Décrivez votre besoin…"
+              tutoie ? "Tape les 3 premières lettres…" : "Tapez les 3 premières lettres…"
             }
             // ⚠️ LE CHAMP DEVIENT UNE `combobox`, ET C'EST OBLIGATOIRE dès qu'il
             // pilote une liste : sans ces attributs, un lecteur d'écran annonce
