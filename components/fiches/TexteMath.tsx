@@ -91,6 +91,24 @@ export default function TexteMath({ children }: { children: string }) {
           // on retombe sur le texte source, entre ses dollars.
           return <React.Fragment key={i}>{`$${m.contenu}$`}</React.Fragment>;
         }
+        // ⚠️ 09/09/2026 — J'AI FAILLI AJOUTER ICI `inline-block whitespace-nowrap`.
+        // Frédéric voyait « Le vecteur AB » puis une flèche SEULE à la ligne
+        // suivante, sur toutes les fiches. J'ai conclu que le navigateur coupait
+        // la formule entre la base et son accent, et j'ai corrigé ce span.
+        //
+        // ⛔ C'ÉTAIT UN MAUVAIS DIAGNOSTIC. Mesure dans la console de la page :
+        // ZÉRO règle `.katex` chargée, et `getComputedStyle(.katex).fontFamily`
+        // valait `Arial` au lieu de `KaTeX_Main`. La feuille de KaTeX manquait —
+        // le défaut connu du cache `.next` corrompu, pas un problème de balisage.
+        // Sans elle, la pile `vlist` qui pose l'accent au-dessus de la lettre
+        // n'est plus positionnée : la flèche retombe en flux et passe à la ligne.
+        // 👉 `Remove-Item -Recurse -Force .next` puis redémarrage : 228 règles
+        // reviennent, et 0 formule coupée sur 164.
+        //
+        // ⭐ LA LEÇON : avant de durcir un rendu, vérifier que sa FEUILLE DE
+        // STYLE est là. Un symptôme de mise en page a une cause de mise en page,
+        // et la CSS absente en est une — voir la note du 01/09 sur les radicaux
+        // de 400 em.
         return <span key={i} dangerouslySetInnerHTML={{ __html: html }} />;
       })}
     </>

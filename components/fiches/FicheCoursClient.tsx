@@ -466,7 +466,22 @@ export default function FicheCoursClient({
                 sous 8 px — le rapporteur, la droite graduée, les légendes. Le palier
                 intermédiaire à deux colonnes rend 340 px par carte. Le `print` garde
                 ses trois colonnes : sur A4, la largeur ne manque pas. */}
-            <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3 print:grid-cols-3 print:gap-3">
+            {/* ⭐ 09/09/2026, DEMANDE DE FRÉDÉRIC : « au lieu de faire 3 colonnes
+                sur deux lignes avec 4 propriétés, fais deux colonnes et deux
+                lignes ». À quatre, la grille en trois colonnes en laissait une
+                seule, orpheline, sur la seconde ligne — et surtout elle
+                rétrécissait chaque carte à ~225 px, ce qui écrasait les
+                tableaux : colonnes coupées, barre de défilement horizontale,
+                « AB + BC + CA » empilé un terme par ligne.
+                Deux colonnes règlent les deux d'un coup : la grille est pleine,
+                et chaque carte passe à ~340 px.
+                ⚠️ 102 fiches ont exactement quatre propriétés — c'est le cas le
+                plus fréquent du site, mesuré le jour même. */}
+            <div
+              className={`mt-4 grid gap-4 md:grid-cols-2 print:grid-cols-3 print:gap-3 ${
+                fiche.proprietes.length === 4 ? "lg:grid-cols-2" : "lg:grid-cols-3"
+              }`}
+            >
               {fiche.proprietes.map((p) => (
                 <div
                   key={p.titre}
