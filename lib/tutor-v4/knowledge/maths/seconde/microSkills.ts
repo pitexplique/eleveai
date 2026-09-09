@@ -94,6 +94,15 @@ export const microSkills: MicroSkillSource[] = [
   { id: "vecteur_coordonnees", label: "Calculer les coordonnées d'un vecteur", notionId: "vecteurs_plan", prerequis: ["repere_coordonnees_point"] },
   { id: "vecteur_norme", label: "Calculer la norme d'un vecteur", notionId: "vecteurs_plan", prerequis: ["vecteur_coordonnees", "repere_distance"] },
   { id: "vecteur_produit_reel", label: "Multiplier un vecteur par un nombre réel", notionId: "vecteurs_plan", prerequis: ["vecteur_coordonnees"] },
+  // ⭐ DEUX MICROS AJOUTEES LE 09/09/2026, et la mesure qui les a decidees :
+  // sur les 60 items de la notion, 40 travaillent EN COORDONNEES et les 20
+  // autres sont tous FIXES — pas un seul generateur ne fonctionne sans repere.
+  // Or l'exercice 3 du controle commun de mars 2025 est entierement « vecteurs
+  // SANS reperage ». Un eleve qui le refaisait revoyait les memes 20 questions.
+  // ⛔ Et la SOUSTRACTION de vecteurs etait absente : zero item sur
+  // `AB - AC = CB`, qui est pourtant le piege classique de Chasles.
+  { id: "vecteur_chasles_calcul", label: "Simplifier une expression vectorielle avec Chasles (somme, différence, réordonnancement)", notionId: "vecteurs_plan", prerequis: ["vecteur_somme"] },
+  { id: "vecteur_point_defini", label: "Placer un point défini par une égalité vectorielle", notionId: "vecteurs_plan", prerequis: ["vecteur_egalite", "vecteur_produit_reel"] },
   { id: "vecteur_colinearite", label: "Étudier la colinéarité avec le déterminant (alignement, parallélisme)", notionId: "vecteurs_plan", prerequis: ["vecteur_produit_reel", "vecteur_coordonnees"] },
 
   /* ===================== repere_coordonnees ===================== */

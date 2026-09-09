@@ -1768,4 +1768,378 @@ export const vecteursPlanBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* ============ VECTEUR_CHASLES_CALCUL (09/09/2026) ============
+   *
+   * ⛔ MESURE QUI A DECIDE CETTE MICRO : sur les 60 items de la notion, 40
+   * travaillaient en coordonnees et les 20 autres etaient tous FIXES. Pas un
+   * generateur ne fonctionnait sans repere — alors que l'exercice 3 du controle
+   * commun de mars 2025 est entierement « vecteurs SANS reperage ».
+   *
+   * ⛔ Et zero item sur la SOUSTRACTION. `AB - AC = CB` n'existait nulle part,
+   * alors que c'est le piege classique : l'eleve ecrit `BC` parce qu'il lit les
+   * lettres dans l'ordre ou elles sont ecrites.
+   *
+   * ⭐ Ces gabarits tirent des LETTRES, pas des nombres : c'est ce qui les rend
+   * utilisables sans repere, et c'est le seul endroit de la banque ou le geste
+   * est purement geometrique.
+   */
+
+  {
+    kind: "template",
+    id: "seconde_vect_chasles_tpl_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "vecteurs_plan",
+    microId: "vecteur_chasles_calcul",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La lettre du milieu disparaît : elle est le point de passage.",
+    tags: ["seconde", "maths", "vecteurs", "chasles", "template"],
+    generate: () => {
+      const [p, q, r] = shuffle(["A", "B", "C", "D", "E", "F", "G", "H"]).slice(0, 3);
+      const correct = `$\\vec{${p}${r}}$`;
+      const choices = makeChoices(correct, [
+        `$\\vec{${r}${p}}$`,
+        `$\\vec{${p}${q}}$`,
+        `$\\vec{${q}${r}}$`,
+        `$\\vec{0}$`,
+      ]);
+      return {
+        text: `Simplifier $\\vec{${p}${q}} + \\vec{${q}${r}}$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La relation de Chasles : aller de $A$ à $B$ puis de $B$ à $C$, c'est aller de $A$ à $C$.",
+          "Quand la lettre d'arrivée du premier vecteur est la lettre de départ du second, elle DISPARAÎT.",
+          `Ici $${q}$ est cette lettre de passage : $\\vec{${p}${q}} + \\vec{${q}${r}} = \\vec{${p}${r}}$.`,
+          `$\\vec{${p}${q}} + \\vec{${q}${r}} = \\vec{${p}${r}}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_vect_chasles_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "vecteurs_plan",
+    microId: "vecteur_chasles_calcul",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Une somme de vecteurs se réorganise librement : cherche deux morceaux qui s'enchaînent.",
+    tags: ["seconde", "maths", "vecteurs", "chasles", "template"],
+    generate: () => {
+      const [p, q, r, s] = shuffle(["A", "B", "C", "D", "E", "F", "G", "H"]).slice(0, 4);
+      // L'enonce presente les trois morceaux DANS LE DESORDRE : PQ + RS + QR.
+      // Remis dans l'ordre, PQ + QR + RS = PS.
+      const correct = `$\\vec{${p}${s}}$`;
+      const choices = makeChoices(correct, [
+        `$\\vec{${s}${p}}$`,
+        `$\\vec{${p}${r}}$`,
+        `$\\vec{${q}${s}}$`,
+        `$\\vec{0}$`,
+      ]);
+      return {
+        text: `Simplifier $\\vec{${p}${q}} + \\vec{${r}${s}} + \\vec{${q}${r}}$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une somme de vecteurs peut se réorganiser dans n'importe quel ordre — l'addition est commutative.",
+          "On cherche des morceaux qui s'enchaînent, quitte à les remettre dans l'ordre avant d'appliquer Chasles.",
+          `On réordonne : $\\vec{${p}${q}} + \\vec{${q}${r}} + \\vec{${r}${s}}$. ` +
+            `Puis $\\vec{${p}${q}} + \\vec{${q}${r}} = \\vec{${p}${r}}$, et $\\vec{${p}${r}} + \\vec{${r}${s}} = \\vec{${p}${s}}$.`,
+          `La somme vaut $\\vec{${p}${s}}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_vect_chasles_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "vecteurs_plan",
+    microId: "vecteur_chasles_calcul",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Soustraire un vecteur, c'est ajouter son opposé : $-\\vec{AC} = \\vec{CA}$.",
+    tags: ["seconde", "maths", "vecteurs", "chasles", "soustraction", "template"],
+    generate: () => {
+      const [p, q, r] = shuffle(["A", "B", "C", "D", "E", "F", "G", "H"]).slice(0, 3);
+      // PQ - PR = PQ + RP = RP + PQ = RQ. Les deux vecteurs partent du MEME
+      // point : c'est la forme sous laquelle le sujet la pose.
+      const correct = `$\\vec{${r}${q}}$`;
+      // ⛔ Le premier piege est LA reponse fausse : l'eleve lit les lettres dans
+      // l'ordre ou elles sont ecrites et repond QR au lieu de RQ.
+      const choices = makeChoices(correct, [
+        `$\\vec{${q}${r}}$`,
+        `$\\vec{${p}${q}}$`,
+        `$\\vec{${p}${r}}$`,
+        `$\\vec{0}$`,
+      ]);
+      return {
+        text: `Simplifier $\\vec{${p}${q}} - \\vec{${p}${r}}$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Soustraire un vecteur, c'est ajouter son opposé — et l'opposé de $\\vec{AC}$ est $\\vec{CA}$, les lettres retournées.",
+          "On transforme la différence en somme, puis on applique Chasles.",
+          `$\\vec{${p}${q}} - \\vec{${p}${r}} = \\vec{${p}${q}} + \\vec{${r}${p}} = \\vec{${r}${p}} + \\vec{${p}${q}} = \\vec{${r}${q}}$.`,
+          `$\\vec{${p}${q}} - \\vec{${p}${r}} = \\vec{${r}${q}}$. ⛔ Et non $\\vec{${q}${r}}$ : l'ordre des lettres est l'inverse de celui qu'on lit.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_vect_chasles_tpl_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "vecteurs_plan",
+    microId: "vecteur_chasles_calcul",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On part d'un point et on y revient : que vaut alors le déplacement total ?",
+    tags: ["seconde", "maths", "vecteurs", "chasles", "template"],
+    generate: () => {
+      const [p, q, r] = shuffle(["A", "B", "C", "D", "E", "F", "G", "H"]).slice(0, 3);
+      const correct = "$\\vec{0}$";
+      const choices = makeChoices(correct, [
+        `$\\vec{${p}${r}}$`,
+        `$\\vec{${p}${q}}$`,
+        `$\\vec{${r}${p}}$`,
+        `$3\\vec{${p}${q}}$`,
+      ]);
+      return {
+        text: `Simplifier $\\vec{${p}${q}} + \\vec{${q}${r}} + \\vec{${r}${p}}$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le vecteur nul est celui dont le départ et l'arrivée sont confondus.",
+          "On applique Chasles de proche en proche, et on regarde où l'on arrive.",
+          `$\\vec{${p}${q}} + \\vec{${q}${r}} = \\vec{${p}${r}}$, puis $\\vec{${p}${r}} + \\vec{${r}${p}} = \\vec{${p}${p}} = \\vec{0}$.`,
+          "Le circuit est fermé — on revient au point de départ : la somme vaut $\\vec{0}$."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_vect_chasles_tpl_5",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "vecteurs_plan",
+    microId: "vecteur_chasles_calcul",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Chasles se lit aussi de droite à gauche : un vecteur se COUPE en deux par un point de passage.",
+    tags: ["seconde", "maths", "vecteurs", "chasles", "decomposition", "template"],
+    generate: () => {
+      const [p, q, r] = shuffle(["A", "B", "C", "D", "E", "F", "G", "H"]).slice(0, 3);
+      const correct = `$\\vec{${p}${r}} + \\vec{${r}${q}}$`;
+      const choices = makeChoices(correct, [
+        `$\\vec{${p}${r}} + \\vec{${q}${r}}$`,
+        `$\\vec{${r}${p}} + \\vec{${r}${q}}$`,
+        `$\\vec{${p}${r}} - \\vec{${r}${q}}$`,
+        `$\\vec{${q}${r}} + \\vec{${r}${p}}$`,
+      ]);
+      return {
+        text: `Décomposer $\\vec{${p}${q}}$ en passant par le point $${r}$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Chasles se lit dans les deux sens : il RASSEMBLE deux vecteurs, mais il permet aussi d'en COUPER un en deux.",
+          `On insère le point de passage entre le départ et l'arrivée : $\\vec{${p}${q}} = \\vec{${p}\\square} + \\vec{\\square${q}}$, où $\\square$ est le point choisi.`,
+          `Avec $${r}$ : $\\vec{${p}${q}} = \\vec{${p}${r}} + \\vec{${r}${q}}$. La lettre $${r}$ apparaît deux fois, en arrivée puis en départ.`,
+          `$\\vec{${p}${q}} = \\vec{${p}${r}} + \\vec{${r}${q}}$. ⭐ C'est le geste qui débloque presque tous les exercices sans repérage.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_vect_chasles_fixed_6",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "vecteurs_plan",
+    microId: "vecteur_chasles_calcul",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Un élève écrit $\\vec{AB} - \\vec{AC} = \\vec{BC}$. Où est son erreur ?",
+    format: "qcm",
+    choices: [
+      "le résultat est $\\vec{CB}$ : il a inversé les lettres",
+      "il fallait additionner, pas soustraire",
+      "on ne peut pas soustraire deux vecteurs",
+      "il n'y a pas d'erreur",
+    ],
+    expected: ["le résultat est $\\vec{CB}$ : il a inversé les lettres"],
+    comparator: "mcq_exact",
+    hint: "$-\\vec{AC} = \\vec{CA}$ : l'opposé retourne les lettres.",
+    explanation: exp(
+      "Soustraire un vecteur, c'est ajouter son opposé, et l'opposé retourne les lettres.",
+      "$\\vec{AB} - \\vec{AC} = \\vec{AB} + \\vec{CA} = \\vec{CA} + \\vec{AB} = \\vec{CB}$.",
+      "L'élève a gardé l'ordre dans lequel les lettres sont ÉCRITES — $B$ puis $C$ — au lieu de suivre le calcul.",
+      "Le résultat est $\\vec{CB}$, pas $\\vec{BC}$ : ce sont deux vecteurs opposés."
+    ),
+    tags: ["seconde", "maths", "vecteurs", "chasles", "piege", "qcm"],
+  },
+
+  /* ============ VECTEUR_POINT_DEFINI (09/09/2026) ============
+   *
+   * L'autre geste sans reperage : une egalite vectorielle DEFINIT un point, et
+   * le sujet demande de le placer. C'est la face constructive de l'egalite de
+   * vecteurs, et elle n'existait nulle part dans la banque.
+   */
+
+  {
+    kind: "template",
+    id: "seconde_vect_point_tpl_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "vecteurs_plan",
+    microId: "vecteur_point_defini",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Deux vecteurs égaux ferment un parallélogramme — attention à l'ordre des sommets.",
+    tags: ["seconde", "maths", "vecteurs", "construction", "template"],
+    generate: () => {
+      const [p, q, r] = shuffle(["A", "B", "C", "D", "E", "F"]).slice(0, 3);
+      // PM = QR : le quadrilatere PQRM a ses cotes [PM] et [QR] paralleles et de
+      // meme longueur, donc PQRM est un parallelogramme. ⚠️ L'ordre des sommets
+      // n'est PAS PQRM au hasard : PM = QR s'ecrit aussi PQ = MR.
+      const correct = `$${p}${q}${r}M$ est un parallélogramme`;
+      const choices = makeChoices(correct, [
+        `$${p}${q}M${r}$ est un parallélogramme`,
+        `$M$ est le milieu de $[${p}${r}]$`,
+        `$M$ est le symétrique de $${p}$ par rapport à $${q}$`,
+        `$M$ est confondu avec $${r}$`,
+      ]);
+      return {
+        text: `Le point $M$ vérifie $\\vec{${p}M} = \\vec{${q}${r}}$. Que peut-on en dire ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Deux vecteurs égaux ont même direction, même sens et même longueur : ils sont les côtés opposés d'un parallélogramme.",
+          "On lit l'égalité comme une consigne de construction : depuis $" + p + "$, on reproduit le déplacement qui va de $" + q + "$ à $" + r + "$.",
+          `$\\vec{${p}M} = \\vec{${q}${r}}$ équivaut à $\\vec{${p}${q}} = \\vec{M${r}}$ : les segments $[${p}${q}]$ et $[M${r}]$ sont parallèles et de même longueur.`,
+          `$${p}${q}${r}M$ est un parallélogramme.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_vect_point_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "vecteurs_plan",
+    microId: "vecteur_point_defini",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Le déplacement est DEUX fois celui qui mène au second point : où tombe-t-on ?",
+    tags: ["seconde", "maths", "vecteurs", "construction", "template"],
+    generate: () => {
+      const [p, q] = shuffle(["A", "B", "C", "D", "E", "F"]).slice(0, 2);
+      const correct = `$${q}$ est le milieu de $[${p}M]$`;
+      const choices = makeChoices(correct, [
+        `$M$ est le milieu de $[${p}${q}]$`,
+        `$${p}$ est le milieu de $[${q}M]$`,
+        `$M$ est confondu avec $${q}$`,
+        `$M$ est le symétrique de $${q}$ par rapport à $${p}$`,
+      ]);
+      return {
+        text: `Le point $M$ vérifie $\\vec{${p}M} = 2\\vec{${p}${q}}$. Que peut-on en dire ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Multiplier un vecteur par $2$ garde la direction et le sens, et double la longueur.",
+          "On part de $" + p + "$ et on parcourt DEUX fois le déplacement qui mène à $" + q + "$.",
+          `On arrive donc au double de la distance, dans le même sens : $${p}${q} = ${q}M$, et les trois points sont alignés dans cet ordre.`,
+          `$${q}$ est le milieu de $[${p}M]$ — autrement dit $M$ est le symétrique de $${p}$ par rapport à $${q}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_vect_point_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "vecteurs_plan",
+    microId: "vecteur_point_defini",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Le coefficient est négatif : le déplacement se fait dans l'autre sens.",
+    tags: ["seconde", "maths", "vecteurs", "construction", "template"],
+    generate: () => {
+      const [p, q] = shuffle(["A", "B", "C", "D", "E", "F"]).slice(0, 2);
+      const correct = `$${p}$ est le milieu de $[${q}M]$`;
+      const choices = makeChoices(correct, [
+        `$${q}$ est le milieu de $[${p}M]$`,
+        `$M$ est le milieu de $[${p}${q}]$`,
+        `$M$ est confondu avec $${q}$`,
+        `$${p}${q}M$ est un triangle équilatéral`,
+      ]);
+      return {
+        text: `Le point $M$ vérifie $\\vec{${p}M} = -\\vec{${p}${q}}$. Que peut-on en dire ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un coefficient négatif retourne le sens du vecteur, sans changer sa longueur.",
+          "On part de $" + p + "$ et on parcourt la même distance que vers $" + q + "$, mais dans l'autre sens.",
+          `$M$ est donc à égale distance de $${p}$ que $${q}$, de l'autre côté : $\\vec{${p}M}$ et $\\vec{${p}${q}}$ sont opposés.`,
+          `$${p}$ est le milieu de $[${q}M]$, c'est-à-dire que $M$ est le symétrique de $${q}$ par rapport à $${p}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_vect_point_fixed_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "vecteurs_plan",
+    microId: "vecteur_point_defini",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Combien y a-t-il de points $M$ vérifiant $\\vec{AM} = \\vec{u}$, pour un point $A$ et un vecteur $\\vec{u}$ donnés ?",
+    format: "qcm",
+    choices: ["exactement un", "aucun", "deux", "une infinité"],
+    expected: ["exactement un"],
+    comparator: "mcq_exact",
+    hint: "Un vecteur donne une direction, un sens ET une longueur : il ne reste aucun choix.",
+    explanation: exp(
+      "Un vecteur est entièrement déterminé par sa direction, son sens et sa norme.",
+      "Partant de $A$, ces trois données fixent l'arrivée sans ambiguïté.",
+      "C'est ce qui permet d'écrire « soit $M$ le point tel que… » : la phrase DÉFINIT le point, elle ne le suppose pas.",
+      "Il y a exactement un tel point $M$."
+    ),
+    tags: ["seconde", "maths", "vecteurs", "construction", "raisonnement", "qcm"],
+  },
 ];

@@ -35,37 +35,20 @@ function randomInt(min: number, max: number) {
 }
 
 /**
- * Quatre propositions, TOUJOURS quatre.
+ * ⚠️ ON NE FORCE PAS QUATRE PROPOSITIONS — regle donnee par Frederic le
+ * 08/09/2026 : « les QCM peuvent avoir vrai/faux, 3 propositions ou 4 ;
+ * l'important c'est l'ordre des bonnes reponses, mais le mieux est 3 ou 4 ».
  *
- * ⛔ `makeChoices` deduplique puis coupe a trois distracteurs : quand deux
- * pieges ecrits a la main se confondent sur un tirage particulier, le QCM tombe
- * a trois propositions. Mesure sur 3 000 tirages : c'est rare — trois fois — et
- * ajouter des candidats ne fait que reculer le probleme sans le fermer.
+ * J'avais ajoute ici un helper qui rembourrait jusqu'a quatre en decalant une
+ * coordonnee, parce que 16 tirages sur 3 000 tombaient a trois propositions.
+ * ⛔ Ce n'etait pas un defaut, et le remede etait pire : un point decale d'une
+ * unite n'est l'erreur d'AUCUN eleve, alors que les pieges ecrits a la main
+ * sont tous de vraies methodes fausses. Trois vrais pieges valent mieux que
+ * quatre dont un factice.
  *
- * Ici on ferme : `point` fabrique un piege de secours en decalant une
- * coordonnee, autant de fois qu'il le faut. Le decalage est petit, donc le
- * piege reste credible.
+ * Ce qui compte vraiment est deja assure par `makeChoices` : le `shuffle`
+ * final, qui fait varier la POSITION de la bonne reponse.
  */
-function quatreChoix(
-  correct: string,
-  wrongs: readonly string[],
-  point: (dx: number, dy: number) => string,
-) {
-  const vus = new Set<string>([correct]);
-  const gardes: string[] = [];
-  for (const w of shuffle(wrongs)) {
-    if (!vus.has(w)) { vus.add(w); gardes.push(w); }
-    if (gardes.length === 3) break;
-  }
-  for (let d = 1; gardes.length < 3 && d <= 6; d += 1) {
-    for (const [dx, dy] of [[d, 0], [0, d], [-d, 0], [0, -d]] as const) {
-      const c = point(dx, dy);
-      if (!vus.has(c)) { vus.add(c); gardes.push(c); }
-      if (gardes.length === 3) break;
-    }
-  }
-  return shuffle([correct, ...gardes]);
-}
 
 function exp(definition: string, methode: string, calcul: string, conclusion: string) {
   return (
@@ -915,22 +898,19 @@ export const repereCoordonneesBank: TutorBankItemV4[] = [
       const xd = xa + xc - xb;
       const yd = ya + yc - yb;
       const correct = `$D(${xd}\\,;${yd})$`;
-      // ⛔ Il faut PLUS de quatre candidats. Mesure sur 600 tirages : avec
-      // quatre, deux se confondaient regulierement et le QCM tombait a trois
-      // propositions. Les deux derniers sont l'erreur de signe sur UNE SEULE
-      // coordonnee — frequente, et presque jamais en collision.
-      const choices = quatreChoix(
-        correct,
-        [
-          `$D(${xa + xb - xc}\\,;${ya + yb - yc})$`,
-          `$D(${xb + xc - xa}\\,;${yb + yc - ya})$`,
-          `$D(${xa + xb + xc}\\,;${ya + yb + yc})$`,
-          `$D(${xc - xa}\\,;${yc - ya})$`,
-          `$D(${xa + xc - xb}\\,;${ya + yb - yc})$`,
-          `$D(${xa + xb - xc}\\,;${ya + yc - yb})$`,
-        ],
-        (dx, dy) => `$D(${xd + dx}\\,;${yd + dy})$`,
-      );
+      // Six pieges proposes, tous de VRAIES methodes fausses : le mauvais
+      // sommet oppose (deux facons), la somme des trois points, un vecteur pris
+      // pour un point, et l'erreur de signe sur UNE SEULE coordonnee.
+      // `makeChoices` en garde trois distincts — parfois deux quand un tirage
+      // en confond, et c'est tres bien ainsi.
+      const choices = makeChoices(correct, [
+        `$D(${xa + xb - xc}\\,;${ya + yb - yc})$`,
+        `$D(${xb + xc - xa}\\,;${yb + yc - ya})$`,
+        `$D(${xa + xb + xc}\\,;${ya + yb + yc})$`,
+        `$D(${xc - xa}\\,;${yc - ya})$`,
+        `$D(${xa + xc - xb}\\,;${ya + yb - yc})$`,
+        `$D(${xa + xb - xc}\\,;${ya + yc - yb})$`,
+      ]);
       return {
         text:
           `Soit $A(${xa}\\,;${ya})$, $B(${xb}\\,;${yb})$ et $C(${xc}\\,;${yc})$. ` +
@@ -1125,21 +1105,17 @@ export const repereCoordonneesBank: TutorBankItemV4[] = [
       const xb = 2 * xc - xa;
       const yb = 2 * yc - ya;
       const correct = `$B(${xb}\\,;${yb})$`;
-      // Six candidats, pas quatre : voir le gabarit 1: a quatre, deux se
-      // confondaient sur certains tirages et le QCM perdait une proposition.
-      // Les deux derniers sont « j'ai transforme une seule coordonnee ».
-      const choices = quatreChoix(
-        correct,
-        [
-          `$B(${xc - xa}\\,;${yc - ya})$`,
-          `$B(${xa + xc}\\,;${ya + yc})$`,
-          `$B(${2 * xa - xc}\\,;${2 * ya - yc})$`,
-          `$B(${-xa}\\,;${-ya})$`,
-          `$B(${xb}\\,;${ya})$`,
-          `$B(${xa}\\,;${yb})$`,
-        ],
-        (dx, dy) => `$B(${xb + dx}\\,;${yb + dy})$`,
-      );
+      // Six pieges, tous de vraies confusions : le vecteur au lieu du point, la
+      // somme au lieu du double, la symetrie prise a l'envers, la symetrie par
+      // rapport a l'origine, et « je n'ai transforme qu'une seule coordonnee ».
+      const choices = makeChoices(correct, [
+        `$B(${xc - xa}\\,;${yc - ya})$`,
+        `$B(${xa + xc}\\,;${ya + yc})$`,
+        `$B(${2 * xa - xc}\\,;${2 * ya - yc})$`,
+        `$B(${-xa}\\,;${-ya})$`,
+        `$B(${xb}\\,;${ya})$`,
+        `$B(${xa}\\,;${yb})$`,
+      ]);
       return {
         text:
           `Soit $A(${xa}\\,;${ya})$ et $C(${xc}\\,;${yc})$. ` +

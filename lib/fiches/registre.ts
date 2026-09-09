@@ -542,6 +542,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les puissances",
     resume: "Produit, quotient, puissance d une puissance, exposant negatif, et la notation scientifique : reduire sans calculer.",
   },
+  "maths/seconde/vecteurs-plan": {
+    titre: "Les vecteurs du plan",
+    resume: "Un vecteur est un deplacement, pas un point : Chasles dans les deux sens, la difference qui retourne les lettres, et placer un point.",
+  },
   "maths/seconde/repere-coordonnees": {
     titre: "Repère et coordonnées",
     resume: "Le milieu est une moyenne, la distance est Pythagore — et ce qu elles demontrent : parallelogramme, symetrique, nature d un triangle.",
