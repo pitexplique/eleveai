@@ -543,9 +543,17 @@ export default function FicheCoursClient({
             <h2 className="text-2xl font-black text-slate-900 print:text-xl">
               {titreRubrique("Méthode")}
             </h2>
-            {/* Même palier que les propriétés : les étapes de méthode portent
-                elles aussi un dessin. */}
-            <div className="mt-4 grid gap-5 md:grid-cols-2 lg:grid-cols-3 print:grid-cols-3 print:gap-3">
+            {/* ⭐ DEUX COLONNES, ET C'EST MESURÉ — Frédéric, 09/09/2026 :
+                « quand c'est en deux colonnes ça va, quand c'est en trois
+                colonnes ça devient illisible ». Le contenu était bon ; c'est la
+                largeur qui le cassait. À trois colonnes chaque carte tombe à
+                ~225 px, et un tableau de trois colonnes n'y tient pas : barre de
+                défilement horizontale, en-têtes coupés (« élogramme » pour
+                « parallélogramme »), valeurs empilées un mot par ligne.
+                À deux colonnes, la carte passe à ~340 px et tout rentre.
+                ⚠️ L'impression garde ses trois colonnes : sur A4 la largeur ne
+                manque pas, et le nombre de pages compte. */}
+            <div className="mt-4 grid gap-5 md:grid-cols-2 print:grid-cols-3 print:gap-3">
             {fiche.methode.map((etape, i) => {
               const Icone = ICONES_METHODE[i % ICONES_METHODE.length];
               const style = STYLES_METHODE[i % STYLES_METHODE.length];
@@ -576,8 +584,10 @@ export default function FicheCoursClient({
             <h2 className="text-2xl font-black text-slate-900 print:text-xl">
               {titreRubrique("Selon ce que l'on cherche")}
             </h2>
-            {/* Même palier : les usages portent un dessin dès la 5e. */}
-            <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3 print:grid-cols-3 print:gap-3">
+            {/* Deux colonnes ici aussi, et pour la même mesure que la méthode :
+                les usages portent des tableaux depuis la 5e, et trois colonnes
+                les rendent illisibles. */}
+            <div className="mt-4 grid gap-4 md:grid-cols-2 print:grid-cols-3 print:gap-3">
               {fiche.usages.map((usage) => (
                 <div
                   key={usage.titre}
