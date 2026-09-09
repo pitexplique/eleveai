@@ -56,7 +56,7 @@
 // Le détail est dans FenetreApercu.tsx, la fabrique dans
 // scripts/capturer-apercus.ts.
 
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 import Link from "next/link";
 import { track } from "@vercel/analytics";
 import ApercuRessource, { LIBELLE_RESULTAT, LIBELLE_TYPE } from "./ApercuRessource";
@@ -162,12 +162,52 @@ export default function CarteRessource({
    */
   const [montee, setMontee] = useState(false);
   const [ouverte, setOuverte] = useState(false);
+  /**
+   * ⭐⭐ LES DEUX MÊMES ÉTATS, POUR LE TOUCHER (09/09/2026 — Frédéric : « go
+   * pour mobile »). 38 % des visiteurs du site sont sur mobile, et
+   * `peutSurvoler()` les écarte exprès : ils ne voyaient donc JAMAIS une des
+   * 347 captures de `public/apercus/`.
+   *
+   * ⚠️ DEUX PAIRES D'ÉTATS ET NON UNE, alors que la mécanique est identique.
+   * Fusionner obligerait à savoir, au moment du rendu, si l'on est sur un
+   * pointeur ou un doigt — c'est-à-dire à interroger `matchMedia` pendant le
+   * rendu, exactement ce que la note de `peutSurvoler()` interdit (le serveur
+   * n'a pas de `window`, et React reproche au client de dire autre chose que
+   * lui). Deux paires, deux fenêtres, chacune cachée par le CSS de son côté du
+   * seuil : personne n'a besoin de deviner quoi que ce soit.
+   */
+  const [monteeTactile, setMonteeTactile] = useState(false);
+  const [ouverteTactile, setOuverteTactile] = useState(false);
   const bande = bandeApercu(r.ressource.id);
 
   function survoler() {
     if (!bande || !peutSurvoler()) return;
     setMontee(true);
     setOuverte(true);
+  }
+
+  /**
+   * ⚠️ AUCUN TEST DE POINTEUR ICI, et c'est voulu : ce geste-là est explicite.
+   * `peutSurvoler()` existe parce que `mouseenter` part TOUT SEUL à l'appui, à
+   * l'insu de la personne. Un tap sur un bouton qui dit « voir l'aperçu » est
+   * une demande — la garder derrière un test de média reviendrait à refuser ce
+   * qu'on vient de proposer. Le bouton, lui, est caché en `lg:` où le survol
+   * fait déjà le travail.
+   */
+  function ouvrirAuDoigt(e: MouseEvent<HTMLButtonElement>) {
+    // Le bouton recouvre la vignette, qui est DANS le rectangle cliquable de la
+    // carte. Sans ces deux lignes, l'aperçu s'ouvrirait et la ressource
+    // s'ouvrirait par-dessus.
+    e.preventDefault();
+    e.stopPropagation();
+    if (!bande) return;
+    setMonteeTactile(true);
+    setOuverteTactile(true);
+    // ⭐ L'ÉVÉNEMENT QUI MESURE L'HYPOTHÈSE, et il est neuf : `ia_apercu` dira
+    // si les gens au doigt VEULENT ces captures. Sans lui, on aurait livré une
+    // fonctionnalité sans jamais savoir si elle sert — et c'est précisément la
+    // question qui a lancé le chantier.
+    track("ia_apercu", { id: r.ressource.id, rang, profil });
   }
 
   return (
@@ -299,6 +339,81 @@ export default function CarteRessource({
           la droite — un clic dans la gouttière ouvrirait la ressource. */}
       {montee && bande && (
         <FenetreApercu src={bande.src} ecrans={bande.ecrans} ouverte={ouverte} />
+      )}
+
+      {/* ⭐⭐ LE DÉCLENCHEUR AU DOIGT — POSÉ SUR LA VIGNETTE DESSINÉE.
+          Toucher l'image pour voir l'image : c'est le geste que tout le monde
+          connait, et il n'a besoin d'aucune explication à l'écran.
+          ⚠️ HORS DU <Link>, comme la fenêtre : un <a> ne peut pas contenir de
+          bouton. D'où le placement absolu, et d'où les deux lignes de
+          `ouvrirAuDoigt` qui empêchent le lien de s'ouvrir par-dessous.
+
+          ⚠️⚠️ SES COORDONNÉES RECOPIENT CELLES DE LA VIGNETTE, et les deux
+          jeux DOIVENT bouger ensemble — c'est le même contrat que les 1024 px
+          de `peutSurvoler()` et le `lg:` de la fenêtre. Le calcul :
+            gauche/haut = bordure (2 px) + padding du <Link> (12 px en `p-3`,
+            16 px en `sm:p-4`), donc 14 px puis 18 px ;
+            taille = celle d'`ApercuRessource` ci-dessus, h-12 w-16 puis
+            sm:h-[66px] sm:w-[88px].
+          Si l'un des deux change, ce bouton se décale sans rien casser de
+          visible — il couvrira simplement autre chose que la vignette.
+
+          ⛔ `lg:hidden` : au-dessus du seuil, le survol fait déjà le travail,
+          et deux chemins pour le même geste, c'est un de trop. */}
+      {bande && (
+        <button
+          type="button"
+          onClick={ouvrirAuDoigt}
+          aria-label={`Voir un aperçu de « ${r.ressource.titre} »`}
+          className="absolute left-[14px] top-[14px] flex h-12 w-16 items-end justify-end p-1 sm:left-[18px] sm:top-[18px] sm:h-[66px] sm:w-[88px] lg:hidden"
+        >
+          {/* La pastille est la SEULE chose visible : la vignette dessinée
+              reste lisible dessous, on ne la recouvre pas d'un voile. */}
+          <span
+            aria-hidden="true"
+            className="flex h-4 w-4 items-center justify-center rounded-full border border-[#1d1c16]/25 bg-white/95 text-[#1d1c16]/70 shadow-sm sm:h-5 sm:w-5"
+          >
+            <svg viewBox="0 0 16 16" className="h-2.5 w-2.5 sm:h-3 sm:w-3">
+              <path
+                d="M8 3.5C5 3.5 2.7 5.7 2 8c.7 2.3 3 4.5 6 4.5s5.3-2.2 6-4.5c-.7-2.3-3-4.5-6-4.5z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.4"
+              />
+              <circle cx="8" cy="8" r="1.7" fill="currentColor" />
+            </svg>
+          </span>
+        </button>
+      )}
+
+      {/* ⚠️ LE FOND CAPTE LE TOUCHER PARTOUT, PANNEAU COMPRIS — c'est lui qui
+          remplace le bouton de fermeture. La fenêtre garde
+          `pointer-events-none` en mode tactile (voir FenetreApercu.tsx) :
+          un tap n'importe où, y compris sur la capture, referme donc.
+          ⚠️ z-20 sous les z-30 de la fenêtre : le fond assombrit la page, il ne
+          passe jamais devant ce qu'on est venu regarder. */}
+      {ouverteTactile && (
+        <button
+          type="button"
+          aria-label="Fermer l'aperçu"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setOuverteTactile(false);
+          }}
+          className="fixed inset-0 z-20 cursor-default bg-[#1d1c16]/55 lg:hidden"
+        />
+      )}
+      {monteeTactile && bande && (
+        <FenetreApercu
+          src={bande.src}
+          ecrans={bande.ecrans}
+          ouverte={ouverteTactile}
+          tactile
+          /* Centrée dans la FENÊTRE et non dans la carte : à 375 px, une
+             fenêtre de 335 px posée dans une carte serait à moitié dehors. */
+          position="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        />
       )}
     </li>
   );

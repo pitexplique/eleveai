@@ -215,12 +215,41 @@ export default function FenetreApercu({
    * à personne. Le libellé sert quand il NOMME quelque chose.
    */
   libelles,
+  /**
+   * ⭐⭐ LE MODE TACTILE (09/09/2026) — ce qui donne l'aperçu au téléphone.
+   *
+   * Frédéric : « go pour mobile ». Le constat qui l'a déclenché : ces captures
+   * ne s'affichaient QU'AU SURVOL, et `peutSurvoler()` écarte volontairement
+   * les écrans tactiles (CarteRessource.tsx). **38 % des visiteurs du site sont
+   * sur mobile et ne voyaient donc jamais une seule capture** — alors qu'il en
+   * existe 347 dans `public/apercus/`.
+   *
+   * ⛔ CE N'EST PAS UN CONTOURNEMENT DE LA RÈGLE DE COÛT, et il faut le dire
+   * clairement parce que la tentation est là. La note du 27/08 refuse qu'un TAP
+   * télécharge une capture que personne ne verra — « sur un écran purement
+   * tactile, `mouseenter` se déclenche à l'appui, juste avant que le lien
+   * s'ouvre ». Elle n'interdit pas qu'un mobile en voie une s'il la DEMANDE.
+   * L'économie reste mot pour mot celle du survol : ça ne coûte un octet qu'à
+   * qui a déjà choisi de regarder. Rien n'est chargé d'avance, jamais.
+   *
+   * ⚠️ CE QUE CE MODE CHANGE, ET C'EST TOUT — deux choses :
+   *   1. la visibilité s'inverse (`block lg:hidden` au lieu de l'inverse) ;
+   *   2. la largeur devient fluide : `LARGEUR` vaut 380 px fixes, et un iPhone
+   *      SE fait 375 px. Posée en dur, la fenêtre débordait de l'écran.
+   * ⛔ `pointer-events-none` ET `aria-hidden` RESTENT DANS LES DEUX MODES. Ce
+   * n'est pas un oubli : c'est le fond posé par l'appelant qui capte le toucher,
+   * PARTOUT, y compris derrière ce panneau — donc un tap n'importe où referme,
+   * sans bouton de fermeture à placer. Et la fenêtre ne dit toujours rien que
+   * le titre et la promesse ne disent déjà à côté.
+   */
+  tactile = false,
 }: {
   src: string;
   ecrans: number;
   ouverte: boolean;
   position?: string;
   libelles?: Libelle[];
+  tactile?: boolean;
 }) {
   const [index, setIndex] = useState(0);
 
@@ -253,10 +282,14 @@ export default function FenetreApercu({
          ENTIÈREMENT CLIQUABLE. Sans ça, elle avalerait le clic qu'elle est
          censée provoquer. */
       aria-hidden="true"
-      style={{ width: LARGEUR }}
-      className={`pointer-events-none z-30 hidden transition-all duration-200 lg:block ${position} ${
-        ouverte ? "scale-100 opacity-100" : "scale-95 opacity-0"
-      }`}
+      /* ⚠️ `calc(100vw - 2.5rem)` : 380 px fixes débordent d'un écran de 375.
+         Le `min()` garde la largeur de lisibilité partout où elle tient, et ne
+         la réduit que là où il le faut — donc un grand téléphone couché voit
+         bien la même fenêtre qu'un ordinateur. */
+      style={{ width: tactile ? "min(380px, calc(100vw - 2.5rem))" : LARGEUR }}
+      className={`pointer-events-none z-30 transition-all duration-200 ${
+        tactile ? "block lg:hidden" : "hidden lg:block"
+      } ${position} ${ouverte ? "scale-100 opacity-100" : "scale-95 opacity-0"}`}
     >
       {/* Le cadre reprend la charte des cartes — bord noir, ombre portée pleine,
           angles droits. Une fenêtre arrondie et floutée aurait eu l'air d'être
