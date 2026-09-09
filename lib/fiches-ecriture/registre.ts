@@ -143,8 +143,9 @@ export const FAMILLES: FamilleEcriture[] = [
 // 👉 LEÇON : quand une page manque, remonter la chaîne ENTIÈRE jusqu'au
 // producteur du fichier. Le maillon visible est rarement le coupable.
 const LETTRES_FAITES = [
-  "a", "c", "d", "e", "h", "i", "l", "m",
-  "n", "o", "p", "r", "s", "t", "u", "y",
+  "a", "c", "d", "e", "f", "g", "h", "i",
+  "k", "l", "m", "n", "o", "p", "q", "r",
+  "s", "t", "u", "y",
 ];
 
 // ⚠️ LES IDENTIFIANTS YOUTUBE SE COLLENT ICI, et nulle part ailleurs.
