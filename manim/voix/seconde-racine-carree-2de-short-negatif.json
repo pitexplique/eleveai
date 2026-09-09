@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Pourquoi racine de moins 9 n'existe pas ?",
+  "01-carre": "Parce qu'un carré est toujours positif. 3 fois 3 font 9. Et moins 3 fois moins 3 font 9 aussi.",
+  "02-aucun": "Aucun nombre, multiplié par lui-même, ne donne moins 9.",
+  "03-courbe": "Et ça se voit sur la courbe. 4 a une image : racine de 4 égale 2. Mais à gauche de zéro, il n'y a rien. La courbe s'arrête.",
+  "04-regle": "La racine carrée n'existe que pour les nombres positifs ou nuls.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

@@ -1,0 +1,8 @@
+{
+  "00-accroche": "ABCD est-il un parallélogramme ? Attention, presque tout le monde compare les mauvais segments.",
+  "01-erreur": "L'erreur, c'est de comparer les milieux des CÔTÉS : A B et C D. Ça ne prouve rien du tout.",
+  "02-regle": "Ce qu'il faut comparer, ce sont les DIAGONALES. A C et B D. Celles qui sautent une lettre.",
+  "03-calcul": "Milieu de A C : 1 plus 6 divisé par 2, ça fait 3 virgule 5. Et 2 plus 7 divisé par 2, 4 virgule 5. Milieu de B D : 5 plus 2 divisé par 2, 3 virgule 5. Et 3 plus 6 divisé par 2, 4 virgule 5.",
+  "04-conclusion": "Même milieu. Donc oui, c'est un parallélogramme. Et je n'ai rien mesuré : que des moyennes.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

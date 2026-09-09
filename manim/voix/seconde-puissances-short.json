@@ -1,0 +1,8 @@
+{
+  "00-accroche": "7 puissance 3, le tout à la puissance 4. Est-ce qu'on additionne, ou est-ce qu'on multiplie ?",
+  "01-erreur": "L'erreur, c'est d'additionner. 3 plus 4, 7. Ça ressemble tellement à la règle du produit qu'on la prend par réflexe.",
+  "02-regle": "Mais non. Avec une parenthèse, on MULTIPLIE. 3 fois 4, ça fait 12. Donc le résultat est 7 puissance 12.",
+  "03-pourquoi": "Pourquoi ? Parce que 7 puissance 3, écrit quatre fois de suite, ça fait quatre paquets de trois facteurs. Douze facteurs en tout.",
+  "04-retenir": "Retiens la forme : une croix entre deux puissances, on additionne. Une parenthèse, on multiplie.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

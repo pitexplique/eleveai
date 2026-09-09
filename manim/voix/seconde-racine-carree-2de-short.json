@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Racine de 9, plus racine de 16. Est-ce que ça fait racine de 25 ?",
+  "01-gauche": "Regardons. À gauche : 9 plus 16 font 25. Et racine de 25 égale 5.",
+  "02-droite": "À droite : racine de 9 égale 3. Racine de 16 égale 4. Trois plus quatre, sept.",
+  "03-verdict": "Cinq et sept ne sont pas le même nombre. Donc non. La racine d'une somme n'est jamais la somme des racines.",
+  "04-regle": "Avec le produit, ça marche. Avec la somme, jamais. Teste toujours sur des carrés parfaits.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

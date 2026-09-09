@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Racine de 50. Est-ce que ça se simplifie ?",
+  "01-carre": "On cherche le plus grand carré parfait qui divise 50. C'est 25, car 50 égale 25 fois 2.",
+  "02-sortir": "Le carré sort du radical en devenant sa racine. Racine de 25 égale 5. Et le 2 reste dessous.",
+  "03-resultat": "Racine de 50 égale 5 racine de 2.",
+  "04-piege": "Attention : le PLUS GRAND carré. Pour 72, prendre 4 donne 2 racine de 18. C'est exact, mais ce n'est pas fini. Il fallait 36, et la vraie réponse est 6 racine de 2.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

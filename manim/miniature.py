@@ -1308,7 +1308,65 @@ def acc_lettre_cursive(lettre, gaucher):
     return dessiner
 
 
+def acc_racine_carree_2de(d):
+    """Le piège du chapitre, écrit en grand — c'est lui qui fait cliquer.
+
+    Pas la définition, pas « la racine carrée » : l'erreur que l'élève commet.
+    Il reconnait sa propre faute dans la vignette, et il ouvre pour vérifier.
+    """
+    # ⚠️ y ≥ 350 : un titre sur DEUX lignes pousse le sous-titre jusque vers
+    # y = 310, et une accroche posée à 290 lui passe dessous (constaté au premier
+    # tirage). La zone libre va d'environ 350 à 545, avant la signature.
+    d.text((300, 352), "√9 + √16", font=police("ariblk.ttf", 80), fill=BLEU)
+    d.text((334, 452), "≠  √25", font=police("ariblk.ttf", 80), fill=ROUGE)
+
+
+def acc_repere_coordonnees(d):
+    """Le parallélogramme et ses DEUX diagonales — le piège du chapitre, dessiné.
+
+    Une figure se reconnait à 210 px de large dans une liste de suggestions, là
+    où une formule ne se lit plus.
+    """
+    # ⚠️ La figure tient entre y = 365 et y = 535 : au-dessus elle touche le
+    # sous-titre (un titre sur deux lignes le descend jusque vers 310), en
+    # dessous elle heurte la signature « Frédéric, ton prof ».
+    A, B, C, D = (335, 530), (515, 487), (568, 372), (392, 412)
+    for p, q in ((A, B), (B, C), (C, D), (D, A)):
+        d.line([p, q], fill=NAVY, width=4)
+    d.line([A, C], fill=VERT, width=7)      # diagonale [AC]
+    d.line([B, D], fill=ROUGE, width=7)     # diagonale [BD]
+    for p in (A, B, C, D):
+        d.ellipse([p[0] - 7, p[1] - 7, p[0] + 7, p[1] + 7], fill=BLEU)
+    f = police("ariblk.ttf", 40)
+    d.text((610, 398), "[AC]", font=f, fill=VERT)
+    d.text((610, 452), "[BD]", font=f, fill=ROUGE)
+
+
+def acc_puissances_2de(d):
+    """Le piège de la parenthèse : l'élève voit son hésitation dans la vignette."""
+    d.text((300, 348), "(7³)⁴", font=police("ariblk.ttf", 82), fill=BLEU)
+    d.text((300, 462), "3 × 4, pas 3 + 4", font=police("arialbd.ttf", 44), fill=ROUGE)
+
+
 NOTIONS = {
+    "eleveai-maths-seconde-puissances": {
+        "badge": "MATHS · SECONDE", "titre": ["LES", "PUISSANCES"], "taille": 78,
+        "sous": "quatre règles, une seule condition",
+        "accroche": acc_puissances_2de,
+        "dossier": "seconde/maths/fr",
+    },
+    "eleveai-maths-seconde-repere-coordonnees": {
+        "badge": "MATHS · SECONDE", "titre": ["REPÈRE ET", "COORDONNÉES"], "taille": 70,
+        "sous": "le milieu, la distance, et ce qu'ils prouvent",
+        "accroche": acc_repere_coordonnees,
+        "dossier": "seconde/maths/fr",
+    },
+    "eleveai-maths-seconde-racine-carree-2de": {
+        "badge": "MATHS · SECONDE", "titre": ["LA RACINE", "CARRÉE"], "taille": 78,
+        "sous": "le produit passe, la somme non",
+        "accroche": acc_racine_carree_2de,
+        "dossier": "seconde/maths/fr",
+    },
     # ⭐ Deux vignettes par lettre : la MAIN se voit au stylo penché, bien avant
     # que le sous-titre ne soit lu — en 210 px de large dans une liste de
     # suggestions, c'est la seule chose qui distingue les deux vidéos.
