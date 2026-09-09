@@ -24,6 +24,11 @@ type TutorSimpleViewProps = {
   // Accessibilité (élèves déficients visuels) : bouton d'écoute de la question +
   // bascule « lecture auto » de l'énoncé/correction.
   questionListenButton?: ReactNode;
+  /* La pastille « Fiche de cours », quand la notion en a une. Elle arrive
+     construite (comme `questionListenButton`) : la vue simple ne connaît ni le
+     registre des fiches ni les alias d'une classe à l'autre. Elle se pose dans
+     la rangée de pastilles de l'énoncé — aucune ligne en plus. */
+  ficheLink?: ReactNode;
   autoRead: boolean;
   onToggleAutoRead: () => void;
   wrongAnswerPanel: ReactNode;
@@ -88,6 +93,7 @@ export default function TutorSimpleView({
   feedback,
   remediationBanner,
   questionListenButton,
+  ficheLink,
   autoRead,
   onToggleAutoRead,
   wrongAnswerPanel,
@@ -347,6 +353,14 @@ export default function TutorSimpleView({
                   <span className="rounded-full bg-amber-100 px-3 py-1 text-amber-800">
                     Niveau {currentQuestion.meta.starLevel}
                   </span>
+                  {/* ⚠️ LA FICHE PASSE AVANT LE LIBELLÉ, ET CE N'EST PAS DU
+                      GOÛT (09/09/2026). Placée après, elle tombait sous un
+                      libellé de micro-compétence qui prend déjà deux lignes sur
+                      un téléphone : mesuré à 375 px, la rangée passait de 84 à
+                      116 px — la ligne en plus que Frédéric ne veut pas. Entre
+                      « Niveau 1 » et la pastille il reste de la place ; c'est le
+                      libellé, plus long, qui va à la ligne de toute façon. */}
+                  {ficheLink}
                   <span className="rounded-full bg-slate-100 px-3 py-1 text-slate-700">
                     {microLabel ?? "Entraînement"}
                   </span>

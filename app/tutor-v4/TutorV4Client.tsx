@@ -101,6 +101,12 @@ import {
   speechLangForMatiere,
 } from "./ListenButton";
 import AudioBoost from "@/components/AudioBoost";
+/* La fiche de cours de la notion, quand elle existe. Le coach l'affiche déjà à
+   côté du titre de chaque notion (app/coach-ia/[matiere]/page.tsx) ; le tutor,
+   lui, ne la proposait nulle part — un élève bloqué devait ressortir pour aller
+   lire son cours. Le registre est la source de vérité, on ne recopie aucune
+   table de correspondance. */
+import { ficheClasseSource, ficheHrefPourCoach } from "@/lib/fiches/registre";
 import { MarkdownMath } from "@/components/MarkdownMath";
 import BoiteAOutils from "@/components/BoiteAOutils";
 import Image from "next/image";
@@ -443,6 +449,47 @@ function selectSimpleOption(pair: TutorQuestionPair): TutorQuestionOption {
   })[0];
 }
 
+/**
+ * ⭐ LE COURS À PORTÉE DE MAIN, SANS AJOUTER UNE LIGNE (09/09/2026).
+ *
+ * Frédéric : « il faut, si la fiche du cours existe, la voir dans l'écran du
+ * tutor, mode simple et mode complet, sans rajouter une ligne — on l'a dans le
+ * coach mais pas dans tutor-v4 ». Cette pastille se glisse donc DANS des
+ * rangées qui existent déjà : la ligne « Compétence : … » en mode complet, la
+ * rangée de pastilles de l'énoncé en mode simple. Aucune hauteur en plus.
+ *
+ * ⚠️ `data-hors-apercu` : le script des aperçus la retire avant de
+ * photographier, comme la pastille vidéo du mode simple. C'est un raccourci de
+ * navigation, et les 768 captures ne montrent que l'exercice.
+ */
+function PastilleFiche({
+  href,
+  classeSource,
+}: {
+  href: string | null;
+  classeSource?: string | null;
+}) {
+  if (!href) return null;
+
+  return (
+    <Link
+      href={href}
+      data-hors-apercu=""
+      title={
+        classeSource
+          ? `Fiche de cours (écrite pour la ${classeSource.toUpperCase()})`
+          : "Fiche de cours de cette notion"
+      }
+      className="inline-flex shrink-0 items-center gap-1 rounded-full bg-sky-100 px-3 py-1 text-xs font-bold text-sky-800 hover:bg-sky-200"
+    >
+      📘 Fiche de cours
+      {classeSource ? (
+        <span className="font-black">· {classeSource.toUpperCase()}</span>
+      ) : null}
+    </Link>
+  );
+}
+
 export default function TutorV4Page() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -482,6 +529,9 @@ const hasPreservedInitialUrlNotionRef = useRef(false);
 const lastUrlSelectionRef = useRef<string>("");
 
 const questionTopRef = useRef<HTMLDivElement | null>(null);
+/* Le bandeau vert « Mission réussie » : on a besoin de le MESURER après une
+   bonne réponse pour savoir où remonter (voir `scrollToPageTop`). */
+const successBannerRef = useRef<HTMLElement | null>(null);
 const hasForcedTopScrollRef = useRef(false);
 const autoActivatedPairRef = useRef<string | null>(null);
 // Garde synchrone contre le double-envoi : l'état `busy` se met à jour un
@@ -495,6 +545,47 @@ function scrollToQuestions() {
       behavior: "smooth",
       block: "start",
     });
+  }, 80);
+}
+/**
+ * ⭐ APRÈS UNE BONNE RÉPONSE, ON REMONTE EN HAUT DE PAGE (09/09/2026).
+ *
+ * Frédéric : « quand on a répondu juste on ne le sait pas, et il remonte juste à
+ * "Choisis ta question" ». Les deux moitiés de la phrase sont le même bogue :
+ * `scrollToQuestions` cale `questionTopRef` en haut de l'écran, or le bandeau
+ * vert « Mission réussie » est rendu JUSTE AU-DESSUS de cette ancre. On le
+ * poussait donc hors de l'écran par le haut — l'élève arrivait directement sur
+ * la question suivante, sans avoir vu qu'il avait gagné.
+ *
+ * Le délai de 80 ms est celui de `scrollToQuestions` : il laisse React peindre
+ * la nouvelle paire avant qu'on décide où est le haut.
+ *
+ * ⛔ ET LE HAUT DE PAGE NE SUFFIT PAS SUR TÉLÉPHONE — mesuré le 09/09/2026 :
+ * à 375×812, une fois remonté à 0, le bandeau était à 826 px, soit 14 px SOUS
+ * l'écran. Au-dessus de lui s'empilent la barre d'outils, le sélecteur de
+ * notion, le bandeau MODE MISSION, le tableau de bord (qui vient justement
+ * d'apparaître avec la première réponse) et la barre d'encouragement. Sur
+ * ordinateur, en revanche, le haut de page le montre à 383 px sur 800.
+ * On remonte donc tout en haut QUAND le bandeau y est visible, et sinon on
+ * cale le bandeau lui-même en haut de l'écran. Un seul défilement dans les
+ * deux cas : deux défilements fluides à la suite se voient.
+ */
+function scrollToPageTop() {
+  window.setTimeout(() => {
+    /* Lu DANS le délai, pas avant : le bandeau n'est pas encore peint au
+       moment de l'appel. */
+    const bandeau = successBannerRef.current;
+
+    if (bandeau) {
+      const hautAbsolu = bandeau.getBoundingClientRect().top + window.scrollY;
+
+      if (hautAbsolu + bandeau.offsetHeight > window.innerHeight) {
+        bandeau.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+    }
+
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, 80);
 }
 function forceScrollTopOnArrival() {
@@ -725,12 +816,17 @@ useEffect(() => {
     return () => clearInterval(interval);
   }, [sessionStartedAt]);
 
+  /* ⚠️ 1 200 ms NE SUFFISAIT PAS, ET LE DÉFILEMENT EN MANGEAIT LA MOITIÉ
+     (09/09/2026). Le bandeau s'ouvre au moment où la page remonte vers le
+     haut : un défilement fluide dure à lui seul 300 à 500 ms, et il ne restait
+     qu'un demi-battement de cœur pour lire « Mission réussie ». 2 600 ms, soit
+     à peu près le temps de lire la phrase à voix haute. */
   useEffect(() => {
     if (!successBanner.open) return;
 
     const timeout = window.setTimeout(() => {
       closeSuccessBanner();
-    }, 1200);
+    }, 2600);
 
     return () => window.clearTimeout(timeout);
   }, [successBanner.open]);
@@ -787,6 +883,12 @@ useEffect(() => {
 
   const bonnesReponses = sessionResults.filter(Boolean).length;
   const nbTentatives = sessionResults.length;
+
+  /* La fiche de cours de la notion travaillée, ou null. Même appel que le
+     coach, donc mêmes alias (Pythagore s'écrit en 4e et se révise en 3e) : la
+     classe d'origine est annoncée, sinon l'élève croit à une erreur. */
+  const ficheHref = notion ? ficheHrefPourCoach(matiere, classe, notion) : null;
+  const ficheAutreClasse = notion ? ficheClasseSource(matiere, classe, notion) : null;
 
   const scoreSeanceSur20 =
     possiblePoints > 0 ? ((earnedPoints / possiblePoints) * 20).toFixed(1) : "0.0";
@@ -1230,7 +1332,6 @@ function continueAfterExplanation() {
 
       if (typed.result.ok) {
         setEarnedPoints((prev) => prev + pointsForQuestion);
-        scrollToQuestions();
       }
 
       setMicroScores((prev) => {
@@ -1279,6 +1380,9 @@ function continueAfterExplanation() {
               : ""
           }`
         );
+
+        /* Après le bandeau, pas avant : c'est lui qu'on va mesurer. */
+        scrollToPageTop();
 
         setPair(typed.pair);
         setMode(typed.mode);
@@ -1492,6 +1596,9 @@ function handleInputKeyDown(
         <TutorSimpleView
           remediationBanner={remediationBanner}
           questionListenButton={questionListenButton}
+          ficheLink={
+            <PastilleFiche href={ficheHref} classeSource={ficheAutreClasse} />
+          }
           autoRead={autoRead}
           onToggleAutoRead={toggleAutoRead}
           classe={classe}
@@ -1837,7 +1944,10 @@ function handleInputKeyDown(
           })()}
 
           {successBanner.open ? (
-            <section className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-4 shadow-sm">
+            <section
+              ref={successBannerRef}
+              className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-4 shadow-sm"
+            >
               <div className="text-lg font-black text-emerald-800">
                 {successBanner.title}
               </div>
@@ -1859,8 +1969,11 @@ function handleInputKeyDown(
           {pair && !currentQuestion ? (
             <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
               <div className="mb-4 space-y-1">
-                <div className="text-xl font-black text-slate-900">
-                  Choisis ta question
+                <div className="flex flex-wrap items-center gap-2">
+                  <div className="text-xl font-black text-slate-900">
+                    Choisis ta question
+                  </div>
+                  <PastilleFiche href={ficheHref} classeSource={ficheAutreClasse} />
                 </div>
                 <p className="text-sm text-slate-500">
                   Compétence active :{" "}
@@ -1938,8 +2051,15 @@ function handleInputKeyDown(
             <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
               <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
                 <div className="space-y-1">
-                  <div className="text-xl font-black text-slate-900">
-                    Mission en cours
+                  {/* La pastille se pose sur la ligne du TITRE, pas sous le
+                      libellé de compétence : mesuré à 375 px, sous le libellé
+                      elle faisait passer la ligne de 40 à 72 px. Ici le titre
+                      est court, il reste de la place à sa droite. */}
+                  <div className="flex flex-wrap items-center gap-2">
+                    <div className="text-xl font-black text-slate-900">
+                      Mission en cours
+                    </div>
+                    <PastilleFiche href={ficheHref} classeSource={ficheAutreClasse} />
                   </div>
                   <p className="text-sm text-slate-500">
                     Compétence :{" "}
