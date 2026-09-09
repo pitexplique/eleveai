@@ -1604,8 +1604,21 @@ export default function EntreeMatrice({
             // ⚠️ Les deux variantes restent : `tutoie` vaut faux pour le
             // parent, le professeur et la direction (profils.ts), et tout le
             // reste de l'écran obéit.
+            // ⭐ CORRECTION DU 09/09, MÊME SOIRÉE : « Décrivez votre besoin :
+            // tapez les 3 premières lettres » (Frédéric, mot pour mot). Ma
+            // version avait REMPLACÉ l'ancienne phrase ; il en veut les deux.
+            // Et il a raison sur le fond : « tape 3 lettres » seul dit comment
+            // se servir de la liste, il ne dit plus ce que le champ est. Les
+            // deux moitiés font deux choses différentes — la première nomme
+            // l'objet, la seconde donne le geste le moins cher pour l'atteindre.
+            // ⚠️ COMPTÉ, ET ÇA NE TIENT PAS EN 375 px : 337 px de texte pour
+            // 266 px de place, soit les six derniers signes coupés (« ettres »).
+            // C'est dit à Frédéric, mesure à l'appui — la phrase reste telle
+            // qu'il l'a dictée tant qu'il n'a pas tranché.
             placeholder={
-              tutoie ? "Tape les 3 premières lettres…" : "Tapez les 3 premières lettres…"
+              tutoie
+                ? "Décris ton besoin : tape les 3 premières lettres"
+                : "Décrivez votre besoin : tapez les 3 premières lettres"
             }
             // ⚠️ LE CHAMP DEVIENT UNE `combobox`, ET C'EST OBLIGATOIRE dès qu'il
             // pilote une liste : sans ces attributs, un lecteur d'écran annonce
