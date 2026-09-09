@@ -534,6 +534,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les identités remarquables",
     resume: "Developper et factoriser avec les trois identites, le double produit qu on oublie, et le conjugue qui fait disparaitre une racine.",
   },
+  "maths/seconde/equations-inequations-1er-degre": {
+    titre: "Équations et inéquations du premier degré",
+    resume: "La balance, le symbole qui se retourne quand on divise par un negatif, l intervalle des solutions et la mise en equation.",
+  },
   "maths/seconde/puissances-2de": {
     titre: "Les puissances",
     resume: "Produit, quotient, puissance d une puissance, exposant negatif, et la notation scientifique : reduire sans calculer.",
