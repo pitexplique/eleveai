@@ -70,12 +70,27 @@ for (const notion of NOTIONS) {
     // et se declarait propre, et ce n'etait jamais la meme d'une passe a
     // l'autre. Le mode classe est le critere d'acceptation du site : il ne peut
     // pas etre le seul a n'etre pas mesure.
+    // ⚠️ LES OPTIONS SONT LE TROISIEME ARGUMENT, PAS LE DEUXIEME. Playwright
+    // attend `waitForFunction(fn, arg, options)` : ecrire
+    // `waitForFunction(fn, { timeout: 15000 })` passe l'objet en ARG et laisse
+    // le timeout par defaut de 30 s. Le message d'erreur annoncait alors
+    // « Timeout 30000ms » alors que le script disait 15 000 — c'est ce
+    // decalage qui m'a mis sur la piste.
     await page.waitForFunction(
       () => {
         const p = document.querySelector("div.fixed.inset-0");
         return !!p && /\d+ \/ \d+/.test(p.innerText);
       },
-      { timeout: 15000 },
+      undefined,
+      // ⚠️ 45 s, ET C'EST LE MEME BUDGET QUE `page.goto`. Mesure du 09/09 : a
+      // 15 s, les DEUX PREMIERES fiches de la liste echouaient et les huit
+      // suivantes passaient. La cause n'est pas la page mais le PANNEAU : en
+      // dev, Next compile le morceau `ModeClasse` a la demande, au premier clic
+      // de la fournee. La premiere fiche paie cette compilation pour toutes les
+      // autres — d'ou un echec qui frappe toujours le debut de la liste.
+      // Un budget large ne coute rien : `waitForFunction` rend la main des que
+      // le compteur parait, soit ~2,3 s sur une page deja chaude.
+      { timeout: 45000 },
     );
 
     // On parcourt toutes les diapositives avec la flèche droite.
