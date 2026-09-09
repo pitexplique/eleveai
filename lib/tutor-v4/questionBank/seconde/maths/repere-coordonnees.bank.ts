@@ -34,6 +34,39 @@ function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+/**
+ * Quatre propositions, TOUJOURS quatre.
+ *
+ * ⛔ `makeChoices` deduplique puis coupe a trois distracteurs : quand deux
+ * pieges ecrits a la main se confondent sur un tirage particulier, le QCM tombe
+ * a trois propositions. Mesure sur 3 000 tirages : c'est rare — trois fois — et
+ * ajouter des candidats ne fait que reculer le probleme sans le fermer.
+ *
+ * Ici on ferme : `point` fabrique un piege de secours en decalant une
+ * coordonnee, autant de fois qu'il le faut. Le decalage est petit, donc le
+ * piege reste credible.
+ */
+function quatreChoix(
+  correct: string,
+  wrongs: readonly string[],
+  point: (dx: number, dy: number) => string,
+) {
+  const vus = new Set<string>([correct]);
+  const gardes: string[] = [];
+  for (const w of shuffle(wrongs)) {
+    if (!vus.has(w)) { vus.add(w); gardes.push(w); }
+    if (gardes.length === 3) break;
+  }
+  for (let d = 1; gardes.length < 3 && d <= 6; d += 1) {
+    for (const [dx, dy] of [[d, 0], [0, d], [-d, 0], [0, -d]] as const) {
+      const c = point(dx, dy);
+      if (!vus.has(c)) { vus.add(c); gardes.push(c); }
+      if (gardes.length === 3) break;
+    }
+  }
+  return shuffle([correct, ...gardes]);
+}
+
 function exp(definition: string, methode: string, calcul: string, conclusion: string) {
   return (
     `Définition : ${definition}\n\n` +
@@ -840,5 +873,346 @@ export const repereCoordonneesBank: TutorBankItemV4[] = [
         ),
       };
     },
+  },
+
+  /* ============== REPERE_CONFIGURATION (08/09/2026) ==============
+   *
+   * Les trois micros precedentes enseignent des GESTES : lire un point,
+   * calculer un milieu, calculer une distance. L'exercice type ne demande
+   * jamais un geste isole — il demande ce que ces gestes PROUVENT.
+   *
+   * Deux outils, deux preuves, et ce sont les seules du chapitre :
+   *   — le MILIEU prouve un parallelogramme (memes milieux de diagonales) ou
+   *     une symetrie centrale ;
+   *   — la DISTANCE prouve la nature d'un triangle (isocele par deux longueurs
+   *     egales, rectangle par la reciproque de Pythagore).
+   *
+   * ⛔ Toutes les figures tirees ici sont VERIFIEES par construction, et le
+   * script de recalcul les refait a partir des coordonnees de l'enonce.
+   */
+
+  {
+    kind: "template",
+    id: "seconde_repere_config_tpl_1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "repere_coordonnees",
+    microId: "repere_configuration",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Dans $ABCD$, les diagonales sont $[AC]$ et $[BD]$ : elles ont le même milieu.",
+    tags: ["seconde", "maths", "repere", "configuration", "template"],
+    generate: () => {
+      let xa = 0, ya = 0, xb = 0, yb = 0, xc = 0, yc = 0;
+      do {
+        xa = randomInt(-4, 4); ya = randomInt(-4, 4);
+        xb = randomInt(-4, 4); yb = randomInt(-4, 4);
+        xc = randomInt(-4, 4); yc = randomInt(-4, 4);
+        // Trois points alignes ne font pas un parallelogramme : le produit en
+        // croix doit etre non nul.
+      } while ((xb - xa) * (yc - ya) - (yb - ya) * (xc - xa) === 0);
+      // ABCD est un parallelogramme <=> milieu[AC] = milieu[BD] <=> D = A + C - B
+      const xd = xa + xc - xb;
+      const yd = ya + yc - yb;
+      const correct = `$D(${xd}\\,;${yd})$`;
+      // ⛔ Il faut PLUS de quatre candidats. Mesure sur 600 tirages : avec
+      // quatre, deux se confondaient regulierement et le QCM tombait a trois
+      // propositions. Les deux derniers sont l'erreur de signe sur UNE SEULE
+      // coordonnee — frequente, et presque jamais en collision.
+      const choices = quatreChoix(
+        correct,
+        [
+          `$D(${xa + xb - xc}\\,;${ya + yb - yc})$`,
+          `$D(${xb + xc - xa}\\,;${yb + yc - ya})$`,
+          `$D(${xa + xb + xc}\\,;${ya + yb + yc})$`,
+          `$D(${xc - xa}\\,;${yc - ya})$`,
+          `$D(${xa + xc - xb}\\,;${ya + yb - yc})$`,
+          `$D(${xa + xb - xc}\\,;${ya + yc - yb})$`,
+        ],
+        (dx, dy) => `$D(${xd + dx}\\,;${yd + dy})$`,
+      );
+      return {
+        text:
+          `Soit $A(${xa}\\,;${ya})$, $B(${xb}\\,;${yb})$ et $C(${xc}\\,;${yc})$. ` +
+          `Quelles sont les coordonnées du point $D$ tel que $ABCD$ soit un parallélogramme ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un quadrilatère est un parallélogramme lorsque ses diagonales se coupent en leur milieu.",
+          "Dans $ABCD$, les diagonales sont $[AC]$ et $[BD]$. On écrit que leurs milieux coïncident.",
+          `Milieu de $[AC]$ : $\\left(\\dfrac{${xa}+${xc}}{2}\\,;\\dfrac{${ya}+${yc}}{2}\\right)$. ` +
+            `Le milieu de $[BD]$ doit lui être égal, d'où $x_D = ${xa} + ${xc} - (${xb}) = ${xd}$ et ` +
+            `$y_D = ${ya} + ${yc} - (${yb}) = ${yd}$.`,
+          `$D(${xd}\\,;${yd})$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_repere_config_tpl_2",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "repere_coordonnees",
+    microId: "repere_configuration",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "On calcule le milieu de $[AC]$, puis celui de $[BD]$, et on compare.",
+    tags: ["seconde", "maths", "repere", "configuration", "raisonnement", "template"],
+    generate: () => {
+      const xa = randomInt(-4, 3), ya = randomInt(-4, 3);
+      const xb = randomInt(-4, 4), yb = randomInt(-4, 4);
+      const xc = randomInt(-3, 4), yc = randomInt(-3, 4);
+      // Une fois sur deux la figure EST un parallelogramme, une fois sur deux
+      // on decale D : sans quoi la reponse « oui » serait toujours la bonne.
+      const vrai = Math.random() < 0.5;
+      const decalage = vrai ? 0 : (Math.random() < 0.5 ? 1 : -1);
+      const xd = xa + xc - xb + decalage;
+      const yd = ya + yc - yb;
+      const correct = vrai
+        ? "oui : les diagonales $[AC]$ et $[BD]$ ont le même milieu"
+        : "non : les diagonales $[AC]$ et $[BD]$ n'ont pas le même milieu";
+      const choices = makeChoices(correct, [
+        vrai
+          ? "non : les diagonales $[AC]$ et $[BD]$ n'ont pas le même milieu"
+          : "oui : les diagonales $[AC]$ et $[BD]$ ont le même milieu",
+        "on ne peut pas le savoir sans mesurer les angles",
+        "oui, car les quatre points sont dans le même repère",
+      ]);
+      const mAC = `\\left(${(xa + xc) / 2}\\,;${(ya + yc) / 2}\\right)`;
+      const mBD = `\\left(${(xb + xd) / 2}\\,;${(yb + yd) / 2}\\right)`;
+      return {
+        text:
+          `Soit $A(${xa}\\,;${ya})$, $B(${xb}\\,;${yb})$, $C(${xc}\\,;${yc})$ et $D(${xd}\\,;${yd})$. ` +
+          `Le quadrilatère $ABCD$ est-il un parallélogramme ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Les diagonales d'un parallélogramme se coupent en leur milieu.",
+          "On calcule les deux milieux et on les compare — c'est la seule chose à faire.",
+          `Milieu de $[AC]$ : $${mAC}$. Milieu de $[BD]$ : $${mBD}$.`,
+          vrai
+            ? "Les deux milieux sont confondus : $ABCD$ est bien un parallélogramme."
+            : "Les deux milieux diffèrent : $ABCD$ n'est pas un parallélogramme."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_repere_config_tpl_3",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "repere_coordonnees",
+    microId: "repere_configuration",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "On calcule les trois longueurs. Deux longueurs égales : isocèle.",
+    tags: ["seconde", "maths", "repere", "configuration", "template"],
+    generate: () => {
+      let p = 0, q = 0;
+      do {
+        p = randomInt(1, 5);
+        q = randomInt(1, 5);
+        // p = q rendrait le triangle plat, et l'egalite 2(p-q)^2 = p^2+q^2 le
+        // rendrait equilateral : deux cas ou la reponse annoncee serait fausse.
+      } while (p === q || 2 * (p - q) ** 2 === p * p + q * q);
+      const xa = randomInt(-3, 3), ya = randomInt(-3, 3);
+      // B et C echanges : AB^2 = p^2+q^2 = AC^2, donc isocele en A par
+      // CONSTRUCTION. Et l'angle en A n'est pas droit, car p et q sont > 0.
+      const xb = xa + p, yb = ya + q;
+      const xc = xa + q, yc = ya + p;
+      const correct = "isocèle en $A$";
+      const choices = makeChoices(correct, [
+        "équilatéral",
+        "rectangle en $A$",
+        "quelconque",
+        "isocèle en $B$",
+      ]);
+      const carre = p * p + q * q;
+      return {
+        text:
+          `Dans un repère orthonormé, $A(${xa}\\,;${ya})$, $B(${xb}\\,;${yb})$ et $C(${xc}\\,;${yc})$. ` +
+          `Quelle est la nature du triangle $ABC$ ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La nature d'un triangle se lit sur ses longueurs, calculées par la formule de la distance.",
+          "$AB = \\sqrt{(x_B-x_A)^2 + (y_B-y_A)^2}$, et de même pour $AC$ et $BC$.",
+          `$AB^2 = ${p}^2 + ${q}^2 = ${carre}$ et $AC^2 = ${q}^2 + ${p}^2 = ${carre}$ : ` +
+            `les deux sont égaux. $BC^2 = ${2 * (p - q) ** 2}$, qui en diffère.`,
+          "Deux côtés de même longueur issus de $A$ : le triangle est isocèle en $A$."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_repere_config_tpl_4",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "repere_coordonnees",
+    microId: "repere_configuration",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "On calcule les carrés des trois longueurs, puis on teste $AB^2 + AC^2 = BC^2$.",
+    tags: ["seconde", "maths", "repere", "configuration", "template"],
+    generate: () => {
+      const p = randomInt(1, 3);
+      const q = randomInt(1, 3);
+      const xa = randomInt(-2, 2), ya = randomInt(-2, 2);
+      // Les vecteurs (p ; q) et (-2q ; 2p) sont perpendiculaires — leur produit
+      // scalaire vaut -2pq + 2pq = 0 — et de longueurs DIFFERENTES : le triangle
+      // est rectangle en A sans etre isocele.
+      const xb = xa + p, yb = ya + q;
+      const xc = xa - 2 * q, yc = ya + 2 * p;
+      const ab2 = p * p + q * q;
+      const ac2 = 4 * (p * p + q * q);
+      const bc2 = ab2 + ac2;
+      const correct = "rectangle en $A$";
+      const choices = makeChoices(correct, [
+        "isocèle en $A$",
+        "rectangle en $B$",
+        "quelconque",
+        "équilatéral",
+      ]);
+      return {
+        text:
+          `Dans un repère orthonormé, $A(${xa}\\,;${ya})$, $B(${xb}\\,;${yb})$ et $C(${xc}\\,;${yc})$. ` +
+          `Quelle est la nature du triangle $ABC$ ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La réciproque de Pythagore se teste sur les CARRÉS des longueurs — inutile de sortir les racines.",
+          "On calcule $AB^2$, $AC^2$ et $BC^2$, puis on regarde si les deux plus petits s'additionnent pour donner le plus grand.",
+          `$AB^2 = ${ab2}$, $AC^2 = ${ac2}$, $BC^2 = ${bc2}$. Or $${ab2} + ${ac2} = ${bc2}$.`,
+          "L'égalité de Pythagore est vérifiée : le triangle est rectangle en $A$, sommet opposé au plus grand côté."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_repere_config_tpl_5",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "repere_coordonnees",
+    microId: "repere_configuration",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "« $B$ symétrique de $A$ par rapport à $C$ » signifie exactement « $C$ est le milieu de $[AB]$ ».",
+    tags: ["seconde", "maths", "repere", "configuration", "template"],
+    generate: () => {
+      const xa = randomInt(-5, 5), ya = randomInt(-5, 5);
+      let xc = 0, yc = 0;
+      do {
+        xc = randomInt(-4, 4);
+        yc = randomInt(-4, 4);
+      } while (xc === xa && yc === ya);
+      // C milieu de [AB] <=> B = 2C - A
+      const xb = 2 * xc - xa;
+      const yb = 2 * yc - ya;
+      const correct = `$B(${xb}\\,;${yb})$`;
+      // Six candidats, pas quatre : voir le gabarit 1: a quatre, deux se
+      // confondaient sur certains tirages et le QCM perdait une proposition.
+      // Les deux derniers sont « j'ai transforme une seule coordonnee ».
+      const choices = quatreChoix(
+        correct,
+        [
+          `$B(${xc - xa}\\,;${yc - ya})$`,
+          `$B(${xa + xc}\\,;${ya + yc})$`,
+          `$B(${2 * xa - xc}\\,;${2 * ya - yc})$`,
+          `$B(${-xa}\\,;${-ya})$`,
+          `$B(${xb}\\,;${ya})$`,
+          `$B(${xa}\\,;${yb})$`,
+        ],
+        (dx, dy) => `$B(${xb + dx}\\,;${yb + dy})$`,
+      );
+      return {
+        text:
+          `Soit $A(${xa}\\,;${ya})$ et $C(${xc}\\,;${yc})$. ` +
+          `Quelles sont les coordonnées du symétrique $B$ de $A$ par rapport à $C$ ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le symétrique de $A$ par rapport à $C$ est le point $B$ tel que $C$ soit le MILIEU de $[AB]$.",
+          "On écrit la formule du milieu à l'envers : $x_C = \\dfrac{x_A + x_B}{2}$ donne $x_B = 2x_C - x_A$.",
+          `$x_B = 2 \\times (${xc}) - (${xa}) = ${xb}$ et $y_B = 2 \\times (${yc}) - (${ya}) = ${yb}$.`,
+          `$B(${xb}\\,;${yb})$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_repere_config_fixed_6",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "repere_coordonnees",
+    microId: "repere_configuration",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Pour prouver que $ABCD$ est un parallélogramme à partir des coordonnées, que compare-t-on ?",
+    format: "qcm",
+    choices: [
+      "les milieux de $[AC]$ et de $[BD]$",
+      "les milieux de $[AB]$ et de $[CD]$",
+      "les longueurs $AB$ et $CD$ seulement",
+      "les quatre longueurs des côtés",
+    ],
+    expected: ["les milieux de $[AC]$ et de $[BD]$"],
+    comparator: "mcq_exact",
+    hint: "Dans le quadrilatère $ABCD$, quelles sont les DIAGONALES ?",
+    explanation: exp(
+      "Les diagonales d'un parallélogramme se coupent en leur milieu — et la réciproque est vraie.",
+      "Encore faut-il repérer les diagonales : dans $ABCD$, ce sont $[AC]$ et $[BD]$, celles qui sautent une lettre.",
+      "$[AB]$ et $[CD]$ sont deux CÔTÉS opposés, pas des diagonales : les comparer ne prouve rien.",
+      "On compare les milieux de $[AC]$ et de $[BD]$."
+    ),
+    tags: ["seconde", "maths", "repere", "configuration", "raisonnement", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_repere_config_fixed_7",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "repere_coordonnees",
+    microId: "repere_configuration",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pour montrer qu'un triangle est rectangle à partir des coordonnées, il vaut mieux :",
+    format: "qcm",
+    choices: [
+      "comparer les CARRÉS des longueurs",
+      "calculer les trois longueurs avec leurs racines",
+      "mesurer l'angle au rapporteur",
+      "vérifier que deux côtés sont égaux",
+    ],
+    expected: ["comparer les CARRÉS des longueurs"],
+    comparator: "mcq_exact",
+    hint: "La formule de la distance donne un carré avant de donner une racine.",
+    explanation: exp(
+      "La réciproque de Pythagore porte sur les carrés : $AB^2 + AC^2 = BC^2$.",
+      "Or la formule de la distance calcule justement $AB^2$ avant d'en prendre la racine : on s'arrête là.",
+      "Sortir les racines fait apparaître des décimaux approchés, et une égalité approchée ne DÉMONTRE rien.",
+      "On compare les carrés des longueurs, sans jamais calculer les racines."
+    ),
+    tags: ["seconde", "maths", "repere", "configuration", "methode", "qcm"],
   },
 ];

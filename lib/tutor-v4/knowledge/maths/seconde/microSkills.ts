@@ -99,6 +99,14 @@ export const microSkills: MicroSkillSource[] = [
   /* ===================== repere_coordonnees ===================== */
   { id: "repere_coordonnees_point", label: "Lire et placer un point dans un repère", notionId: "repere_coordonnees", prerequis: [] },
   { id: "repere_milieu", label: "Calculer les coordonnées d'un milieu", notionId: "repere_coordonnees", prerequis: ["repere_coordonnees_point"] },
+  // ⭐ AJOUTEE LE 08/09/2026, et pour la MEME RAISON que
+  // `puiss_expression_composee` le meme jour : les trois micros precedentes
+  // enseignent les gestes ISOLES — lire un point, calculer un milieu, calculer
+  // une distance — et l'exercice type ne demande jamais un geste isole. Il
+  // demande ce que ces gestes PROUVENT : « ABCD est-il un parallelogramme ? »,
+  // « quelle est la nature du triangle ABC ? ». La formule du milieu ne sert
+  // presque jamais a autre chose qu'a comparer deux diagonales.
+  { id: "repere_configuration", label: "Prouver une configuration à partir des coordonnées (parallélogramme, nature d'un triangle)", notionId: "repere_coordonnees", prerequis: ["repere_milieu", "repere_distance"] },
   { id: "repere_distance", label: "Calculer une distance dans un repère orthonormé", notionId: "repere_coordonnees", prerequis: ["repere_coordonnees_point"] },
 
   /* ===================== droites_plan ===================== */

@@ -542,6 +542,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les puissances",
     resume: "Produit, quotient, puissance d une puissance, exposant negatif, et la notation scientifique : reduire sans calculer.",
   },
+  "maths/seconde/repere-coordonnees": {
+    titre: "Repère et coordonnées",
+    resume: "Le milieu est une moyenne, la distance est Pythagore — et ce qu elles demontrent : parallelogramme, symetrique, nature d un triangle.",
+  },
   "maths/seconde/racine-carree-2de": {
     titre: "La racine carrée",
     resume: "Carres parfaits, simplifier, le produit qui passe et la somme qui ne passe pas, additionner des radicaux identiques.",
