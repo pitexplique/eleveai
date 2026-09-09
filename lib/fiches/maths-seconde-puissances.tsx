@@ -86,7 +86,7 @@ export const fichePuissancesSeconde: FicheCoursData = {
 
   figure: {
     schema: tableau(
-      ["", "aᵐ × aⁿ", "aᵐ ÷ aⁿ", "(aᵐ)ⁿ", "a⁻ⁿ"],
+      ["aᵐ × aⁿ", "aᵐ ÷ aⁿ", "(aᵐ)ⁿ", "a⁻ⁿ"],
       [{ label: "égale", values: ["aᵐ⁺ⁿ", "aᵐ⁻ⁿ", "aᵐˣⁿ", "1 ÷ aⁿ"] }],
       "Les quatre règles",
     ),
@@ -100,7 +100,7 @@ export const fichePuissancesSeconde: FicheCoursData = {
       texte:
         "$a^m \\times a^n = a^{m+n}$. On compte les facteurs : $a^3 \\times a^2$, c'est trois $a$ puis deux $a$, donc cinq $a$. ⛔ On n'écrit JAMAIS $a^{6}$ — multiplier les exposants est l'erreur la plus fréquente.",
       schema: tableau(
-        ["", "a³ × a²", "juste", "faux"],
+        ["a³ × a²", "juste", "faux"],
         [{ label: "vaut", values: ["aaa × aa", "a⁵", "a⁶"] }],
         "On compte les facteurs, on ne les multiplie pas",
       ),
@@ -110,7 +110,7 @@ export const fichePuissancesSeconde: FicheCoursData = {
       texte:
         "$\\dfrac{a^m}{a^n} = a^{m-n}$ pour $a \\neq 0$. Les $a$ du bas simplifient ceux du haut. Et la règle marche même quand le bas est plus grand : $\\dfrac{a^2}{a^5} = a^{-3}$.",
       schema: tableau(
-        ["", "a⁵ ÷ a²", "a² ÷ a⁵", "a⁴ ÷ a⁴"],
+        ["a⁵ ÷ a²", "a² ÷ a⁵", "a⁴ ÷ a⁴"],
         [{ label: "vaut", values: ["a³", "a⁻³", "a⁰ = 1"] }],
         "Le résultat peut être négatif ou nul",
       ),
@@ -120,7 +120,7 @@ export const fichePuissancesSeconde: FicheCoursData = {
       texte:
         "$(a^m)^n = a^{m \\times n}$. C'est ici — et seulement ici — qu'on multiplie les exposants : $(a^2)^3 = a^2 \\times a^2 \\times a^2 = a^6$. ⚠️ Ne pas confondre avec $a^2 \\times a^3 = a^5$.",
       schema: tableau(
-        ["", "(a²)³", "a² × a³"],
+        ["(a²)³", "a² × a³"],
         [{ label: "vaut", values: ["a⁶", "a⁵"] }],
         "Deux écritures voisines, deux règles opposées",
       ),
@@ -130,7 +130,7 @@ export const fichePuissancesSeconde: FicheCoursData = {
       texte:
         "$a^{-n} = \\dfrac{1}{a^n}$ pour $a \\neq 0$. ⛔ Ce n'est pas un nombre négatif : $2^{-3} = \\dfrac{1}{8}$, qui est positif. Un exposant négatif retourne la fraction, il ne change pas le signe.",
       schema: tableau(
-        ["", "2⁻³", "10⁻²", "a⁻¹"],
+        ["2⁻³", "10⁻²", "a⁻¹"],
         [{ label: "vaut", values: ["1/8", "0,01", "1/a"] }],
         "Un inverse, pas un opposé",
       ),
@@ -153,7 +153,7 @@ export const fichePuissancesSeconde: FicheCoursData = {
       texte:
         "Les quatre règles ne fonctionnent QUE sur une base commune. $2^3 \\times 3^2$ ne se réduit pas — les bases diffèrent, il n'y a rien à faire des exposants.",
       schema: tableau(
-        ["", "7⁴ × 7⁻⁵", "2³ × 3²"],
+        ["7⁴ × 7⁻⁵", "2³ × 3²"],
         [{ label: "on réduit ?", values: ["oui", "non"] }],
       ),
     },
@@ -162,7 +162,7 @@ export const fichePuissancesSeconde: FicheCoursData = {
       texte:
         "Le numérateur d'un côté, le dénominateur de l'autre, chacun ramené à une seule puissance. On ne mélange les deux qu'à la fin.",
       schema: tableau(
-        ["étage", "haut", "bas"],
+        ["haut", "bas"],
         [{ label: "réduit à", values: ["7⁴ × 7⁻⁵ = 7⁻¹", "(7³)⁴ = 7¹²"] }],
       ),
     },
@@ -171,7 +171,7 @@ export const fichePuissancesSeconde: FicheCoursData = {
       texte:
         "$\\dfrac{7^{-1}}{7^{12}} = 7^{-1-12} = 7^{-13}$. ⭐ Et on s'ARRÊTE : la question demandait $7^n$, pas une valeur décimale.",
       schema: tableau(
-        ["", "n", "à calculer ?"],
+        ["n", "à calculer ?"],
         [{ label: "réponse", values: ["−13", "non"] }],
       ),
     },
@@ -183,7 +183,7 @@ export const fichePuissancesSeconde: FicheCoursData = {
       detail:
         "C'est la question type du contrôle : ramener une expression à la forme $a^n$. On enchaîne les règles, on ne calcule jamais.",
       schema: tableau(
-        ["", "(a²)³ × a⁴", "a⁵ × a³ ÷ a²"],
+        ["(a²)³ × a⁴", "a⁵ × a³ ÷ a²"],
         [{ label: "vaut", values: ["a¹⁰", "a⁶"] }],
         "La réponse est une puissance",
       ),
@@ -193,7 +193,7 @@ export const fichePuissancesSeconde: FicheCoursData = {
       detail:
         "Un nombre s'écrit $a \\times 10^n$ avec $1 \\leqslant a < 10$ — un seul chiffre avant la virgule, et pas $0$. Cette condition rend l'écriture UNIQUE.",
       schema: tableau(
-        ["", "45 300", "0,000 72"],
+        ["45 300", "0,000 72"],
         [{ label: "s'écrit", values: ["4,53 × 10⁴", "7,2 × 10⁻⁴"] }],
         "Un seul chiffre devant la virgule",
       ),
@@ -203,7 +203,7 @@ export const fichePuissancesSeconde: FicheCoursData = {
       detail:
         "L'ordre de grandeur, c'est la puissance de $10$ toute seule. Elle suffit pour comparer : $10^{-27}$ et $10^{-9}$ sont séparés par un facteur mille milliards.",
       schema: tableau(
-        ["", "atome H", "cheveu", "Terre-Soleil"],
+        ["atome H", "cheveu", "Terre-Soleil"],
         [{ label: "ordre", values: ["10⁻²⁷ kg", "10⁻⁴ m", "10¹¹ m"] }],
         "Trois échelles du monde",
       ),
@@ -216,7 +216,7 @@ export const fichePuissancesSeconde: FicheCoursData = {
       donnees: "$(-2)^4$ et $-2^4$.",
       question: "Ces deux écritures donnent-elles le même nombre ?",
       schema: tableau(
-        ["", "(−2)⁴", "−2⁴"],
+        ["(−2)⁴", "−2⁴"],
         [{ label: "vaut", values: ["16", "−16"] }],
       ),
       solution:
@@ -227,7 +227,7 @@ export const fichePuissancesSeconde: FicheCoursData = {
       donnees: "$\\dfrac{a^7 \\times a^3}{a^4}$ avec $a \\neq 0$.",
       question: "Simplifier.",
       schema: tableau(
-        ["", "haut", "puis"],
+        ["haut", "puis"],
         [{ label: "réduit", values: ["a⁷ × a³ = a¹⁰", "a¹⁰ ÷ a⁴ = a⁶"] }],
       ),
       solution:
@@ -238,7 +238,7 @@ export const fichePuissancesSeconde: FicheCoursData = {
       donnees: "$B = \\dfrac{7^4 \\times 7^{-5}}{\\left(7^3\\right)^4}$.",
       question: "Écrire $B$ sous la forme $7^n$.",
       schema: tableau(
-        ["", "haut", "bas", "B"],
+        ["haut", "bas", "B"],
         [{ label: "vaut", values: ["7⁻¹", "7¹²", "7⁻¹³"] }],
       ),
       solution:
@@ -249,7 +249,7 @@ export const fichePuissancesSeconde: FicheCoursData = {
       donnees: "$0{,}000\\,58$.",
       question: "Écrire ce nombre en notation scientifique.",
       schema: tableau(
-        ["", "mantisse", "rangs", "écriture"],
+        ["mantisse", "rangs", "écriture"],
         [{ label: "0,000 58", values: ["5,8", "4", "5,8 × 10⁻⁴"] }],
       ),
       solution:

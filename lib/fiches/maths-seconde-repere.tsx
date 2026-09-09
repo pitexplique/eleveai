@@ -108,7 +108,7 @@ export const ficheRepereSeconde: FicheCoursData = {
 
   figure: {
     schema: tableau(
-      ["", "milieu de [AB]", "distance AB"],
+      ["milieu de [AB]", "distance AB"],
       [
         { label: "formule", values: ["moyenne des coordonnées", "Pythagore"] },
         { label: "résultat", values: ["un POINT", "un NOMBRE"] },
@@ -156,7 +156,7 @@ export const ficheRepereSeconde: FicheCoursData = {
       texte:
         "Si les axes ne sont pas perpendiculaires, ou si leurs unités diffèrent, il n'y a aucun triangle rectangle : Pythagore ne s'applique plus et la formule ment. Le milieu, lui, reste valable dans n'importe quel repère.",
       schema: tableau(
-        ["", "milieu", "distance"],
+        ["milieu", "distance"],
         [{ label: "repère quelconque", values: ["valable", "FAUSSE"] }],
         "Une seule des deux formules est exigeante",
       ),
@@ -179,7 +179,7 @@ export const ficheRepereSeconde: FicheCoursData = {
       texte:
         "Je note $A(x_A \\,;\\, y_A)$ et $B(x_B \\,;\\, y_B)$ au brouillon. La moitié des erreurs du chapitre sont des confusions entre l'abscisse et l'ordonnée.",
       schema: tableau(
-        ["", "xA", "yA", "xB", "yB"],
+        ["xA", "yA", "xB", "yB"],
         [{ label: "A(2;5) B(6;1)", values: [2, 5, 6, 1] }],
       ),
     },
@@ -188,7 +188,7 @@ export const ficheRepereSeconde: FicheCoursData = {
       texte:
         "Parallélogramme ou symétrique ? C'est le MILIEU. Nature d'un triangle, longueur, cercle ? C'est la DISTANCE. Aucune question de ce chapitre n'en demande un troisième.",
       schema: tableau(
-        ["question", "parallélogramme", "isocèle", "rectangle"],
+        ["parallélogramme", "isocèle", "rectangle"],
         [{ label: "outil", values: ["milieu", "distance", "distance"] }],
       ),
     },
@@ -197,7 +197,7 @@ export const ficheRepereSeconde: FicheCoursData = {
       texte:
         "Pour la nature d'un triangle, je compare $AB^2$, $AC^2$ et $BC^2$ sans jamais sortir les racines : une égalité approchée ne démontre rien.",
       schema: tableau(
-        ["", "AB²", "AC²", "BC²"],
+        ["AB²", "AC²", "BC²"],
         [{ label: "on compare", values: [9, 16, 25] }],
       ),
     },
@@ -209,7 +209,7 @@ export const ficheRepereSeconde: FicheCoursData = {
       detail:
         "$ABCD$ est un parallélogramme si et seulement si $[AC]$ et $[BD]$ ont le même milieu. ⛔ Ce sont les DIAGONALES : celles qui sautent une lettre, pas les côtés $[AB]$ et $[CD]$.",
       schema: tableau(
-        ["dans ABCD", "[AC]", "[BD]", "[AB]"],
+        ["[AC]", "[BD]", "[AB]"],
         [{ label: "c'est", values: ["diagonale", "diagonale", "côté"] }],
         "Sauter une lettre",
       ),
@@ -219,7 +219,7 @@ export const ficheRepereSeconde: FicheCoursData = {
       detail:
         "Deux longueurs égales : isocèle. Pythagore vérifié sur les carrés : rectangle. Les deux à la fois : rectangle isocèle. Aucune des deux : quelconque.",
       schema: tableau(
-        ["on constate", "AB = AC", "AB² + AC² = BC²"],
+        ["AB = AC", "AB² + AC² = BC²"],
         [{ label: "on conclut", values: ["isocèle en A", "rectangle en A"] }],
         "Deux constats, deux conclusions",
       ),
@@ -242,7 +242,7 @@ export const ficheRepereSeconde: FicheCoursData = {
       donnees: "Un point situé à $4$ à gauche de l'origine et $3$ en dessous.",
       question: "Quelles sont ses coordonnées ?",
       schema: tableau(
-        ["", "à gauche", "en dessous"],
+        ["à gauche", "en dessous"],
         [{ label: "signe", values: ["x négatif", "y négatif"] }],
       ),
       solution:
@@ -253,7 +253,7 @@ export const ficheRepereSeconde: FicheCoursData = {
       donnees: "$A(-3 \\,;\\, 5)$ et $B(7 \\,;\\, -1)$.",
       question: "Coordonnées du milieu $M$ de $[AB]$ ?",
       schema: tableau(
-        ["", "abscisse", "ordonnée"],
+        ["abscisse", "ordonnée"],
         [{ label: "moyenne", values: ["(−3+7)÷2 = 2", "(5−1)÷2 = 2"] }],
       ),
       solution:
@@ -264,7 +264,7 @@ export const ficheRepereSeconde: FicheCoursData = {
       donnees: "$A(1 \\,;\\, -2)$ et $B(5 \\,;\\, 1)$, repère orthonormé.",
       question: "Calculer $AB$.",
       schema: tableau(
-        ["", "écart en x", "écart en y", "AB"],
+        ["écart en x", "écart en y", "AB"],
         [{ label: "vaut", values: ["5 − 1 = 4", "1 − (−2) = 3", "5"] }],
       ),
       solution:
@@ -275,7 +275,7 @@ export const ficheRepereSeconde: FicheCoursData = {
       donnees: "$A(1 \\,;\\, 1)$, $B(4 \\,;\\, 2)$ et $C(-1 \\,;\\, 7)$, repère orthonormé.",
       question: "Quelle est la nature du triangle $ABC$ ?",
       schema: tableau(
-        ["", "AB²", "AC²", "BC²"],
+        ["AB²", "AC²", "BC²"],
         [{ label: "vaut", values: [10, 40, 50] }],
       ),
       solution:

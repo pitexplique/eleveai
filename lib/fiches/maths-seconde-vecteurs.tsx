@@ -74,6 +74,83 @@ function tableau(
   );
 }
 
+/**
+ * ⭐ DESSINER UN VECTEUR — ajouté le 09/09/2026, Frédéric : « ce qui me dérange,
+ * c'est aucun dessin ». Une fiche sur les vecteurs sans une seule flèche,
+ * pendant que la règle du site demande un visuel par bloc.
+ *
+ * ⛔ AUCUN CANVAS NE SAIT DESSINER UN VECTEUR. Le catalogue en compte trente-cinq
+ * et pas un ne trace de flèche entre deux points — c'est pour ça que la fiche
+ * était vide. On le fabrique donc avec `fonctionGraphique`, dont le champ
+ * `courbes` accepte PLUSIEURS polylignes : une pour la hampe, deux pour les
+ * barbes de la pointe. Trois polylignes de la même couleur font une flèche.
+ *
+ * ⚠️ LA FENÊTRE DOIT ÊTRE CARRÉE, sinon la pointe part de travers : le canvas
+ * met à l'échelle x et y indépendamment. On garde donc `xmax - xmin` égal à
+ * `ymax - ymin`, et une taille 220 × 220.
+ */
+function fleche(
+  id: string,
+  de: { x: number; y: number },
+  vers: { x: number; y: number },
+  couleur: string,
+) {
+  const dx = vers.x - de.x;
+  const dy = vers.y - de.y;
+  const L = Math.hypot(dx, dy);
+  const [ux, uy] = [dx / L, dy / L];
+  // Une barbe part de la pointe, en arrière, à 30° de part et d'autre de l'axe.
+  const r = Math.min(0.55, L * 0.22);
+  const barbe = (angle: number) => {
+    const c = Math.cos(angle);
+    const s = Math.sin(angle);
+    return {
+      x: +(vers.x + r * (ux * c - uy * s)).toFixed(3),
+      y: +(vers.y + r * (ux * s + uy * c)).toFixed(3),
+    };
+  };
+  const a = (150 * Math.PI) / 180;
+  return [
+    { id: `${id}-hampe`, type: "points" as const, couleur, points: [de, vers] },
+    { id: `${id}-b1`, type: "points" as const, couleur, points: [vers, barbe(a)] },
+    { id: `${id}-b2`, type: "points" as const, couleur, points: [vers, barbe(-a)] },
+  ];
+}
+
+/**
+ * Le repère qui accueille les flèches — SVG, donc réservé à `proprietes`
+ * (225 px) et `usages` (220 px), et fenêtre étroite : la leçon des treize
+ * étiquettes qui se chevauchaient est payée depuis la fiche du repère.
+ *
+ * ⛔ Aucun point ne se pose SUR le bord : son étiquette déborderait. Une unité
+ * de marge au minimum.
+ */
+function figureVecteurs(
+  courbes: ReturnType<typeof fleche>[],
+  points: { x: number; y: number; label: string; couleur?: string }[],
+  fenetre: { min: number; max: number },
+) {
+  return (
+    <CanvasRenderer
+      figure={{
+        kind: "fonctionGraphique",
+        size: { width: 220, height: 220 },
+        xmin: fenetre.min,
+        xmax: fenetre.max,
+        ymin: fenetre.min,
+        ymax: fenetre.max,
+        grille: true,
+        courbes: courbes.flat(),
+        points,
+      }}
+    />
+  );
+}
+
+const BLEU = "#2563eb";
+const ROUGE = "#dc2626";
+const VERT = "#059669";
+
 export const ficheVecteursSeconde: FicheCoursData = {
   matiere: "maths",
   matiereLabel: "Maths",
@@ -95,7 +172,7 @@ export const ficheVecteursSeconde: FicheCoursData = {
 
   figure: {
     schema: tableau(
-      ["", "direction", "sens", "norme"],
+      ["direction", "sens", "norme"],
       [
         { label: "AB", values: ["celle de (AB)", "de A vers B", "longueur AB"] },
         { label: "BA", values: ["la même", "l'inverse", "la même"] },
@@ -111,10 +188,21 @@ export const ficheVecteursSeconde: FicheCoursData = {
       titre: "Deux vecteurs égaux, c'est un parallélogramme",
       texte:
         "$\\vec{AB} = \\vec{CD}$ signifie même direction, même sens, même norme — les deux flèches sont parallèles, orientées pareil, et de même longueur. ⭐ Le quadrilatère $ABDC$ est alors un parallélogramme : attention à l'ordre des lettres.",
-      schema: tableau(
-        ["si", "AB = CD", "AB = DC"],
-        [{ label: "alors", values: ["ABDC est un parallélogramme", "ABCD est un parallélogramme"] }],
-        "L'ordre des sommets change",
+      // A(1;1) B(4;2) C(5;5) D(2;4) : AB⃗ = C − D = (3;1) = DC⃗, et ABCD est bien
+      // un parallelogramme. Les deux fleches sont PARALLELES et de MEME LONGUEUR
+      // a l'ecran — c'est ce que l'eleve doit voir avant toute formule.
+      schema: figureVecteurs(
+        [
+          fleche("ab", { x: 1, y: 1 }, { x: 4, y: 2 }, BLEU),
+          fleche("dc", { x: 2, y: 4 }, { x: 5, y: 5 }, BLEU),
+        ],
+        [
+          { x: 1, y: 1, label: "A", couleur: ROUGE },
+          { x: 4, y: 2, label: "B", couleur: ROUGE },
+          { x: 5, y: 5, label: "C", couleur: ROUGE },
+          { x: 2, y: 4, label: "D", couleur: ROUGE },
+        ],
+        { min: 0, max: 6 },
       ),
     },
     {
@@ -122,7 +210,7 @@ export const ficheVecteursSeconde: FicheCoursData = {
       texte:
         "$\\vec{AB} + \\vec{BC} = \\vec{AC}$ : aller de $A$ à $B$ puis de $B$ à $C$, c'est aller de $A$ à $C$. La lettre du milieu DISPARAÎT — c'est le point de passage.",
       schema: tableau(
-        ["", "AB + BC", "AB + BA", "AB + BC + CA"],
+        ["AB + BC", "AB + BA", "AB + BC + CA"],
         [{ label: "vaut", values: ["AC", "0", "0"] }],
         "Le circuit fermé vaut le vecteur nul",
       ),
@@ -132,7 +220,7 @@ export const ficheVecteursSeconde: FicheCoursData = {
       texte:
         "$\\vec{AB} - \\vec{AC} = \\vec{CB}$, et NON $\\vec{BC}$. Soustraire un vecteur, c'est ajouter son opposé : $-\\vec{AC} = \\vec{CA}$, donc $\\vec{AB} - \\vec{AC} = \\vec{CA} + \\vec{AB} = \\vec{CB}$. L'ordre du résultat est l'inverse de celui qu'on lit.",
       schema: tableau(
-        ["", "AB − AC", "erreur classique"],
+        ["AB − AC", "erreur classique"],
         [{ label: "vaut", values: ["CB", "BC — l'opposé"] }],
         "Les deux vecteurs partent du même point",
       ),
@@ -165,7 +253,7 @@ export const ficheVecteursSeconde: FicheCoursData = {
       texte:
         "Dans une somme, deux vecteurs s'enchaînent quand l'arrivée du premier est le départ du second. Cette lettre-là disparaît.",
       schema: tableau(
-        ["", "AB + BC", "lettre commune"],
+        ["AB + BC", "lettre commune"],
         [{ label: "donne", values: ["AC", "B, elle disparait"] }],
       ),
     },
@@ -183,7 +271,7 @@ export const ficheVecteursSeconde: FicheCoursData = {
       texte:
         "Chasles se lit aussi à l'envers : $\\vec{AB} = \\vec{AM} + \\vec{MB}$ pour N'IMPORTE quel point $M$. Insérer un point de passage bien choisi débloque presque tous les exercices sans repérage.",
       schema: tableau(
-        ["", "AB", "coupé en M"],
+        ["AB", "coupé en M"],
         [{ label: "vaut", values: ["—", "AM + MB"] }],
       ),
     },
@@ -195,7 +283,7 @@ export const ficheVecteursSeconde: FicheCoursData = {
       detail:
         "$ABCD$ est un parallélogramme si et seulement si $\\vec{AB} = \\vec{DC}$. ⭐ C'est la deuxième preuve du programme, à côté de celle par les milieux des diagonales — et celle-ci ne demande aucun repère.",
       schema: tableau(
-        ["preuve", "par les vecteurs", "par les milieux"],
+        ["par les vecteurs", "par les milieux"],
         [{ label: "ABCD", values: ["AB = DC", "[AC] et [BD] même milieu"] }],
         "Deux preuves, au choix",
       ),
@@ -205,7 +293,7 @@ export const ficheVecteursSeconde: FicheCoursData = {
       detail:
         "Une égalité vectorielle DÉFINIT un point, et un seul. $\\vec{AM} = 2\\vec{AB}$ place $M$ tel que $B$ soit le milieu de $[AM]$ ; $\\vec{AM} = -\\vec{AB}$ place $M$ symétrique de $B$ par rapport à $A$.",
       schema: tableau(
-        ["AM =", "AB", "2AB", "−AB"],
+        ["AB", "2AB", "−AB"],
         [{ label: "M est", values: ["confondu avec B", "B milieu de [AM]", "symétrique de B"] }],
         "Le coefficient dit où l'on tombe",
       ),
@@ -228,7 +316,7 @@ export const ficheVecteursSeconde: FicheCoursData = {
       donnees: "Les vecteurs $\\vec{AB}$ et $\\vec{BA}$.",
       question: "Sont-ils égaux ?",
       schema: tableau(
-        ["", "direction", "sens", "norme"],
+        ["direction", "sens", "norme"],
         [{ label: "identiques ?", values: ["oui", "NON", "oui"] }],
       ),
       solution:
@@ -239,7 +327,7 @@ export const ficheVecteursSeconde: FicheCoursData = {
       donnees: "$\\vec{AB} + \\vec{CD} + \\vec{BC}$.",
       question: "Simplifier.",
       schema: tableau(
-        ["étape", "réordonné", "puis", "puis"],
+        ["réordonné", "puis", "puis"],
         [{ label: "on obtient", values: ["AB + BC + CD", "AC + CD", "AD"] }],
       ),
       solution:
@@ -250,7 +338,7 @@ export const ficheVecteursSeconde: FicheCoursData = {
       donnees: "$\\vec{AB} - \\vec{AC}$.",
       question: "Simplifier.",
       schema: tableau(
-        ["", "−AC", "on réordonne", "résultat"],
+        ["−AC", "on réordonne", "résultat"],
         [{ label: "vaut", values: ["CA", "CA + AB", "CB"] }],
       ),
       solution:
@@ -261,7 +349,7 @@ export const ficheVecteursSeconde: FicheCoursData = {
       donnees: "$M$ est le point tel que $\\vec{AM} = 2\\vec{AB}$.",
       question: "Où se trouve $M$ ?",
       schema: tableau(
-        ["", "déplacement", "distance", "M"],
+        ["déplacement", "distance", "M"],
         [{ label: "de A", values: ["même sens que AB", "le double", "B milieu de [AM]"] }],
       ),
       solution:

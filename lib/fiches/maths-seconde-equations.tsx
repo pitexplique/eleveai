@@ -109,7 +109,7 @@ export const ficheEquationsSeconde: FicheCoursData = {
 
   figure: {
     schema: tableau(
-      ["", "3x + 4 = 19", "3x + 4 > 19"],
+      ["3x + 4 = 19", "3x + 4 > 19"],
       [
         { label: "type", values: ["équation", "inéquation"] },
         { label: "solutions", values: ["x = 5, une seule", "x > 5, une infinité"] },
@@ -127,7 +127,7 @@ export const ficheEquationsSeconde: FicheCoursData = {
       texte:
         "On peut ajouter, soustraire, multiplier ou diviser par un même nombre non nul DES DEUX CÔTÉS : l'égalité tient. C'est l'image de la balance — ce qu'on fait à gauche, on le fait à droite.",
       schema: tableau(
-        ["étape", "3x + 4 = 19", "3x = 15", "x = 5"],
+        ["3x + 4 = 19", "3x = 15", "x = 5"],
         [{ label: "on a fait", values: ["départ", "−4 des deux côtés", "÷3 des deux côtés"] }],
         "Deux gestes, et c'est fini",
       ),
@@ -137,7 +137,7 @@ export const ficheEquationsSeconde: FicheCoursData = {
       texte:
         "Ajouter ou soustraire un nombre ne change RIEN au sens de l'inégalité. Multiplier ou diviser par un nombre POSITIF non plus. Jusque-là, tout se passe comme pour une équation.",
       schema: tableau(
-        ["étape", "2x + 1 > 7", "2x > 6", "x > 3"],
+        ["2x + 1 > 7", "2x > 6", "x > 3"],
         [{ label: "on a fait", values: ["départ", "−1", "÷2, positif"] }],
         "Le sens n'a pas bougé",
       ),
@@ -147,7 +147,7 @@ export const ficheEquationsSeconde: FicheCoursData = {
       texte:
         "Multiplier ou diviser une inéquation par un nombre négatif RENVERSE l'inégalité. On le voit sur des nombres : $2 < 5$, mais en multipliant par $-1$, $-2 > -5$. C'est la seule règle du chapitre sans équivalent chez les équations.",
       schema: tableau(
-        ["", "2 < 5", "×(−1)", "−4x ⩾ 8"],
+        ["2 < 5", "×(−1)", "−4x ⩾ 8"],
         [{ label: "devient", values: ["vrai", "−2 > −5", "x ⩽ −2"] }],
         "Le symbole bascule",
       ),
@@ -176,7 +176,7 @@ export const ficheEquationsSeconde: FicheCoursData = {
       texte:
         "Tous les termes en $x$ à gauche, tous les nombres à droite. On y arrive en ajoutant ou soustrayant la même chose des deux côtés.",
       schema: tableau(
-        ["", "5x + 3 = 2x + 12", "puis"],
+        ["5x + 3 = 2x + 12", "puis"],
         [{ label: "devient", values: ["5x − 2x = 12 − 3", "3x = 9"] }],
       ),
     },
@@ -185,7 +185,7 @@ export const ficheEquationsSeconde: FicheCoursData = {
       texte:
         "Diviser par le coefficient de $x$. ⛔ S'il s'agit d'une inéquation ET que ce coefficient est négatif, le symbole se retourne à ce moment précis.",
       schema: tableau(
-        ["", "3x = 9", "−3x > 9"],
+        ["3x = 9", "−3x > 9"],
         [{ label: "donne", values: ["x = 3", "x < −3"] }],
       ),
     },
@@ -194,7 +194,7 @@ export const ficheEquationsSeconde: FicheCoursData = {
       texte:
         "Une équation se conclut par $S = \\{3\\}$, une inéquation par un intervalle. Et une équation se VÉRIFIE : je remplace $x$ par ma valeur et je regarde si l'égalité tient.",
       schema: tableau(
-        ["", "équation", "inéquation"],
+        ["équation", "inéquation"],
         [{ label: "on écrit", values: ["S = {3}", "S = ]−∞ ; −3["] }],
       ),
     },
@@ -206,7 +206,7 @@ export const ficheEquationsSeconde: FicheCoursData = {
       detail:
         "On nomme l'inconnue par une phrase — « soit $x$ le nombre cherché » — puis on traduit l'énoncé mot à mot. « Le double d'un nombre augmenté de $3$ vaut $11$ » devient $2x + 3 = 11$.",
       schema: tableau(
-        ["", "le double de x", "augmenté de 3", "vaut 11"],
+        ["le double de x", "augmenté de 3", "vaut 11"],
         [{ label: "s'écrit", values: ["2x", "2x + 3", "2x + 3 = 11"] }],
         "Mot à mot",
       ),
@@ -216,7 +216,7 @@ export const ficheEquationsSeconde: FicheCoursData = {
       detail:
         "Le crochet est fermé quand la borne est atteinte ($\\leqslant$, $\\geqslant$) et ouvert sinon. Vers l'infini, il est toujours ouvert.",
       schema: tableau(
-        ["", "x > 3", "x ⩽ −2", "−1 ⩽ x < 4"],
+        ["x > 3", "x ⩽ −2", "−1 ⩽ x < 4"],
         [{ label: "intervalle", values: ["]3 ; +∞[", "]−∞ ; −2]", "[−1 ; 4["] }],
         "Le crochet suit le symbole",
       ),
@@ -226,7 +226,7 @@ export const ficheEquationsSeconde: FicheCoursData = {
       detail:
         "Pour savoir laquelle de $A$ et $B$ est la plus grande, on étudie le SIGNE de $A - B$. Si $A - B > 0$, alors $A > B$. Pour deux nombres strictement positifs, le quotient $\\dfrac{A}{B}$ répond aussi.",
       schema: tableau(
-        ["A − B", "positif", "nul", "négatif"],
+        ["positif", "nul", "négatif"],
         [{ label: "conclusion", values: ["A > B", "A = B", "A < B"] }],
         "Le signe de la différence",
       ),
@@ -239,7 +239,7 @@ export const ficheEquationsSeconde: FicheCoursData = {
       donnees: "$5x + 3 = 2x + 12$.",
       question: "Résoudre.",
       schema: tableau(
-        ["", "étape 1", "étape 2", "étape 3"],
+        ["étape 1", "étape 2", "étape 3"],
         [{ label: "on obtient", values: ["3x + 3 = 12", "3x = 9", "x = 3"] }],
       ),
       solution:
@@ -250,7 +250,7 @@ export const ficheEquationsSeconde: FicheCoursData = {
       donnees: "$-4x + 1 \\geqslant 9$.",
       question: "Résoudre.",
       schema: tableau(
-        ["", "−4x ⩾ 8", "÷(−4)", "résultat"],
+        ["−4x ⩾ 8", "÷(−4)", "résultat"],
         [{ label: "signe", values: ["⩾", "il bascule", "x ⩽ −2"] }],
       ),
       solution:
@@ -261,7 +261,7 @@ export const ficheEquationsSeconde: FicheCoursData = {
       donnees: "$S$ est l'ensemble des $x$ tels que $x \\leqslant 4$.",
       question: "Écrire $S$ sous forme d'intervalle.",
       schema: tableau(
-        ["", "borne", "atteinte ?", "vers"],
+        ["borne", "atteinte ?", "vers"],
         [{ label: "x ⩽ 4", values: ["4", "oui", "−∞"] }],
       ),
       solution:
@@ -272,7 +272,7 @@ export const ficheEquationsSeconde: FicheCoursData = {
       donnees: "La somme de deux entiers consécutifs vaut $47$.",
       question: "Quels sont ces deux entiers ?",
       schema: tableau(
-        ["", "le petit", "le grand", "leur somme"],
+        ["le petit", "le grand", "leur somme"],
         [{ label: "s'écrit", values: ["x", "x + 1", "2x + 1 = 47"] }],
       ),
       solution:

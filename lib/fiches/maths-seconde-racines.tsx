@@ -147,7 +147,7 @@ export const ficheRacinesSeconde: FicheCoursData = {
       texte:
         "Certaines racines tombent juste. Les connaître par cœur est ce qui permet de repérer un carré caché dans un nombre.",
       schema: tableau(
-        ["a", "1", "4", "9", "16", "25", "36", "49", "64", "81", "100"],
+        ["1", "4", "9", "16", "25", "36", "49", "64", "81", "100"],
         [{ label: "√a", values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }],
         "À connaître par cœur",
       ),
@@ -163,7 +163,7 @@ export const ficheRacinesSeconde: FicheCoursData = {
       texte:
         "$\\sqrt{a \\times b} = \\sqrt{a} \\times \\sqrt{b}$. C'est cette règle qui permet de simplifier — et c'est aussi elle qui rend l'erreur sur la somme si tentante.",
       schema: tableau(
-        ["", "√(4 × 9)", "√4 × √9"],
+        ["√(4 × 9)", "√4 × √9"],
         [{ label: "vaut", values: ["√36 = 6", "2 × 3 = 6"] }],
         "Les deux donnent 6 ✓",
       ),
@@ -173,7 +173,7 @@ export const ficheRacinesSeconde: FicheCoursData = {
       texte:
         "$\\sqrt{a + b} \\neq \\sqrt{a} + \\sqrt{b}$. On le vérifie sur des carrés parfaits, où tout se calcule : il n'y a pas de doute possible.",
       schema: tableau(
-        ["", "√(9 + 16)", "√9 + √16"],
+        ["√(9 + 16)", "√9 + √16"],
         [{ label: "vaut", values: ["√25 = 5", "3 + 4 = 7"] }],
         "5 ≠ 7 : la règle est FAUSSE",
       ),
@@ -183,7 +183,7 @@ export const ficheRacinesSeconde: FicheCoursData = {
       texte:
         "$\\sqrt{a^2} = |a|$, et non $a$ : la racine rend toujours un résultat POSITIF. Pour $a$ négatif, elle rend son opposé.",
       schema: tableau(
-        ["a", "5", "−5", "3", "−3"],
+        ["5", "−5", "3", "−3"],
         [{ label: "√(a²)", values: [5, 5, 3, 3] }],
         "Toujours positif",
       ),
@@ -206,7 +206,7 @@ export const ficheRacinesSeconde: FicheCoursData = {
       texte:
         "Je décompose le nombre sous le radical en cherchant le plus GRAND carré parfait qui le divise. Pour $50$ : c'est $25$.",
       schema: tableau(
-        ["nombre", "50", "12", "75", "48"],
+        ["50", "12", "75", "48"],
         [{ label: "carré caché", values: ["25 × 2", "4 × 3", "25 × 3", "16 × 3"] }],
       ),
     },
@@ -215,7 +215,7 @@ export const ficheRacinesSeconde: FicheCoursData = {
       texte:
         "$\\sqrt{25 \\times 2} = \\sqrt{25} \\times \\sqrt{2} = 5\\sqrt{2}$. Le carré sort en devenant sa racine ; le reste demeure dessous.",
       schema: tableau(
-        ["", "√50", "√12", "√75", "√48"],
+        ["√50", "√12", "√75", "√48"],
         [{ label: "devient", values: ["5√2", "2√3", "5√3", "4√3"] }],
       ),
     },
@@ -224,7 +224,7 @@ export const ficheRacinesSeconde: FicheCoursData = {
       texte:
         "Une fois simplifiés, deux termes de même radical s'additionnent par leurs coefficients — exactement comme $x + 3x = 4x$.",
       schema: tableau(
-        ["", "√75 − √48", "5√3 − 4√3"],
+        ["√75 − √48", "5√3 − 4√3"],
         [{ label: "vaut", values: ["√3", "√3"] }],
         "On simplifie AVANT",
       ),
@@ -237,7 +237,7 @@ export const ficheRacinesSeconde: FicheCoursData = {
       detail:
         "$\\sqrt{8} = 2\\sqrt{2}$ : la forme simplifiée est plus courte, et surtout elle révèle le radical commun.",
       schema: tableau(
-        ["", "√8", "√18", "√32"],
+        ["√8", "√18", "√32"],
         [{ label: "devient", values: ["2√2", "3√2", "4√2"] }],
         "Même radical : √2",
       ),
@@ -253,7 +253,7 @@ export const ficheRacinesSeconde: FicheCoursData = {
       detail:
         "Une diagonale, une hypoténuse : $\\sqrt{a^2 + b^2}$. On additionne les CARRÉS, puis on prend la racine.",
       schema: tableau(
-        ["côtés", "3 et 4", "6 et 8", "5 et 12"],
+        ["3 et 4", "6 et 8", "5 et 12"],
         [{ label: "diagonale", values: [5, 10, 13] }],
       ),
     },
@@ -264,7 +264,7 @@ export const ficheRacinesSeconde: FicheCoursData = {
       titre: "Simplifier",
       donnees: "$\\sqrt{8}$.",
       question: "Écrire cette racine sous forme simplifiée.",
-      schema: tableau(["", "8"], [{ label: "=", values: ["4 × 2"] }]),
+      schema: tableau(["8"], [{ label: "=", values: ["4 × 2"] }]),
       solution:
         "On cherche le plus grand carré parfait qui divise $8$ : c'est $4$. Donc $\\sqrt{8} = \\sqrt{4 \\times 2} = \\sqrt{4} \\times \\sqrt{2} = 2\\sqrt{2}$.",
     },
@@ -272,7 +272,7 @@ export const ficheRacinesSeconde: FicheCoursData = {
       titre: "Un carré plus grand",
       donnees: "$\\sqrt{72}$.",
       question: "Simplifier au maximum.",
-      schema: tableau(["", "72"], [{ label: "=", values: ["36 × 2"] }]),
+      schema: tableau(["72"], [{ label: "=", values: ["36 × 2"] }]),
       solution:
         "$72 = 36 \\times 2$, et $36$ est le plus GRAND carré qui le divise : $\\sqrt{72} = 6\\sqrt{2}$. ⚠️ Prendre $4$ au lieu de $36$ donnerait $2\\sqrt{18}$ — exact, mais pas simplifié jusqu'au bout.",
     },
@@ -281,7 +281,7 @@ export const ficheRacinesSeconde: FicheCoursData = {
       donnees: "$\\sqrt{2} + \\sqrt{3}$.",
       question: "Peut-on simplifier ?",
       schema: tableau(
-        ["", "√2 + √3", "√5"],
+        ["√2 + √3", "√5"],
         [{ label: "vaut environ", values: ["3,15", "2,24"] }],
       ),
       solution:
@@ -292,7 +292,7 @@ export const ficheRacinesSeconde: FicheCoursData = {
       donnees: "$C = \\sqrt{75} - \\sqrt{48}$.",
       question: "Écrire $C$ sous la forme $a\\sqrt{3}$.",
       schema: tableau(
-        ["", "√75", "√48"],
+        ["√75", "√48"],
         [{ label: "devient", values: ["5√3", "4√3"] }],
       ),
       solution:

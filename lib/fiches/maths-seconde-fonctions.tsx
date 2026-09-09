@@ -82,7 +82,12 @@ function comparaison(xs: number[], fs: number[], gs: number[]) {
     <CanvasRenderer
       figure={{
         kind: "tableau_donnees",
-        headers: ["x", ...xs.map((x) => String(x))],
+        // ⛔ PAS DE « x » EN TETE. Le composant ecrit lui-meme un `<th>`
+        // « Donnees » des qu'une ligne porte un `label` — et les deux lignes en
+        // portent, « f(x) » et « g(x) ». Un en-tete de plus que de valeurs
+        // decalait donc toute la ligne d'un cran : la premiere image tombait
+        // sous « x », la derniere colonne restait blanche.
+        headers: xs.map((x) => String(x)),
         rows: [
           { label: "f(x)", values: fs },
           { label: "g(x)", values: gs },

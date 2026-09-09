@@ -84,7 +84,7 @@ export const ficheIdentitesSeconde: FicheCoursData = {
 
   figure: {
     schema: tableau(
-      ["", "(a+b)²", "(a−b)²", "(a−b)(a+b)"],
+      ["(a+b)²", "(a−b)²", "(a−b)(a+b)"],
       [{ label: "égale", values: ["a² + 2ab + b²", "a² − 2ab + b²", "a² − b²"] }],
       "Les trois identités",
     ),
@@ -98,7 +98,7 @@ export const ficheIdentitesSeconde: FicheCoursData = {
       texte:
         "$(a+b)^2 = a^2 + 2ab + b^2$. ⛔ Ce n'est PAS $a^2 + b^2$ : il manque le double produit $2ab$, et c'est l'erreur la plus fréquente du programme.",
       schema: tableau(
-        ["", "(3+4)²", "3² + 4²"],
+        ["(3+4)²", "3² + 4²"],
         [{ label: "vaut", values: ["49", "25"] }],
         "49 ≠ 25 : le double produit manque",
       ),
@@ -108,7 +108,7 @@ export const ficheIdentitesSeconde: FicheCoursData = {
       texte:
         "$(a-b)^2 = a^2 - 2ab + b^2$. Seul le double produit change de signe : le terme $b^2$, lui, reste POSITIF — c'est un carré.",
       schema: tableau(
-        ["", "a²", "−2ab", "+b²"],
+        ["a²", "−2ab", "+b²"],
         [{ label: "(x−5)²", values: ["x²", "−10x", "+25"] }],
       ),
     },
@@ -117,7 +117,7 @@ export const ficheIdentitesSeconde: FicheCoursData = {
       texte:
         "$(a-b)(a+b) = a^2 - b^2$. Le double produit s'annule de lui-même : c'est la seule identité dont le résultat n'a que deux termes.",
       schema: tableau(
-        ["", "(x−3)(x+3)"],
+        ["(x−3)(x+3)"],
         [{ label: "égale", values: ["x² − 9"] }],
         "Deux termes, pas trois",
       ),
@@ -127,7 +127,7 @@ export const ficheIdentitesSeconde: FicheCoursData = {
       texte:
         "Elles marchent aussi sur les racines. Le carré d'une somme en fait APPARAÎTRE une ; le produit conjugué la fait DISPARAÎTRE — car $(\\sqrt{3})^2 = 3$.",
       schema: tableau(
-        ["", "(2+√3)²", "(2+√3)(2−√3)"],
+        ["(2+√3)²", "(2+√3)(2−√3)"],
         [{ label: "égale", values: ["7 + 4√3", "1"] }],
         "Elle apparait / elle disparait",
       ),
@@ -150,7 +150,7 @@ export const ficheIdentitesSeconde: FicheCoursData = {
       texte:
         "Deux termes entre parenthèses, le tout au carré ? C'est une des deux premières. Un produit de la forme somme × différence ? C'est la troisième.",
       schema: tableau(
-        ["expression", "(x+7)²", "(x−7)²", "(x−7)(x+7)"],
+        ["(x+7)²", "(x−7)²", "(x−7)(x+7)"],
         [{ label: "identité", values: ["1re", "2e", "3e"] }],
       ),
     },
@@ -159,7 +159,7 @@ export const ficheIdentitesSeconde: FicheCoursData = {
       texte:
         "$a$ est ce qui est au début, $b$ ce qui suit. Dans $(3x+2)^2$ : $a = 3x$ et $b = 2$ — attention, $a^2$ vaut alors $9x^2$, pas $3x^2$.",
       schema: tableau(
-        ["", "a", "b", "a²", "2ab", "b²"],
+        ["a", "b", "a²", "2ab", "b²"],
         [{ label: "(3x+2)²", values: ["3x", "2", "9x²", "12x", "4"] }],
       ),
     },
@@ -168,7 +168,7 @@ export const ficheIdentitesSeconde: FicheCoursData = {
       texte:
         "Développer : je pars de la parenthèse. Factoriser : je pars de la somme et je reconnais les carrés. Le contrôle demande souvent le SECOND.",
       schema: tableau(
-        ["", "développer", "factoriser"],
+        ["développer", "factoriser"],
         [{ label: "x² − 16", values: ["—", "(x−4)(x+4)"] }],
       ),
     },
@@ -180,7 +180,7 @@ export const ficheIdentitesSeconde: FicheCoursData = {
       detail:
         "$x^2 + 10x + 25$ : je reconnais $x^2$, $5^2$, et $2 \\times x \\times 5$. C'est $(x+5)^2$.",
       schema: tableau(
-        ["", "x² + 10x + 25", "9x² − 16"],
+        ["x² + 10x + 25", "9x² − 16"],
         [{ label: "factorisé", values: ["(x+5)²", "(3x−4)(3x+4)"] }],
         "Les deux du contrôle",
       ),
@@ -190,7 +190,7 @@ export const ficheIdentitesSeconde: FicheCoursData = {
       detail:
         "$101^2 = (100+1)^2 = 10\\,000 + 200 + 1 = 10\\,201$. Et $99 \\times 101 = (100-1)(100+1) = 9\\,999$.",
       schema: tableau(
-        ["", "101²", "99²", "99 × 101"],
+        ["101²", "99²", "99 × 101"],
         [{ label: "vaut", values: ["10 201", "9 801", "9 999"] }],
       ),
     },
@@ -199,7 +199,7 @@ export const ficheIdentitesSeconde: FicheCoursData = {
       detail:
         "$(3+\\sqrt{2})(3-\\sqrt{2}) = 9 - 2 = 7$. Le produit conjugué transforme une écriture avec racine en un entier.",
       schema: tableau(
-        ["", "(3+√2)(3−√2)", "(√5−1)(√5+1)"],
+        ["(3+√2)(3−√2)", "(√5−1)(√5+1)"],
         [{ label: "vaut", values: [7, 4] }],
         "La racine s'en va",
       ),
@@ -212,7 +212,7 @@ export const ficheIdentitesSeconde: FicheCoursData = {
       donnees: "$(2x + 5)^2$.",
       question: "Développer et réduire.",
       schema: tableau(
-        ["", "a²", "2ab", "b²"],
+        ["a²", "2ab", "b²"],
         [{ label: "vaut", values: ["4x²", "20x", "25"] }],
       ),
       solution:
@@ -223,7 +223,7 @@ export const ficheIdentitesSeconde: FicheCoursData = {
       donnees: "$(2 + \\sqrt{3})^2$.",
       question: "Développer.",
       schema: tableau(
-        ["", "a²", "2ab", "b²"],
+        ["a²", "2ab", "b²"],
         [{ label: "vaut", values: ["4", "4√3", "3"] }],
       ),
       solution:
@@ -234,7 +234,7 @@ export const ficheIdentitesSeconde: FicheCoursData = {
       donnees: "$(2 + \\sqrt{3})(2 - \\sqrt{3})$.",
       question: "Calculer.",
       schema: tableau(
-        ["", "a²", "b²", "a² − b²"],
+        ["a²", "b²", "a² − b²"],
         [{ label: "vaut", values: ["4", "3", "1"] }],
       ),
       solution:
@@ -245,7 +245,7 @@ export const ficheIdentitesSeconde: FicheCoursData = {
       donnees: "$9x^2 - 16$.",
       question: "Factoriser.",
       schema: tableau(
-        ["", "9x²", "16"],
+        ["9x²", "16"],
         [{ label: "est le carré de", values: ["3x", "4"] }],
       ),
       solution:

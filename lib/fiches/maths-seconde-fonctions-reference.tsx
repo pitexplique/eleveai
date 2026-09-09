@@ -117,7 +117,7 @@ export const ficheFonctionsReferenceSeconde: FicheCoursData = {
 
   figure: {
     schema: tableau(
-      ["fonction", "x²", "1/x", "√x", "x³", "|x|"],
+      ["x²", "1/x", "√x", "x³", "|x|"],
       [
         { label: "définie sur", values: ["ℝ", "ℝ sauf 0", "x ⩾ 0", "ℝ", "ℝ"] },
         { label: "courbe", values: ["parabole", "hyperbole", "demi-branche", "en S", "en V"] },
@@ -189,7 +189,7 @@ export const ficheFonctionsReferenceSeconde: FicheCoursData = {
       texte:
         "Avant tout calcul, on regarde le domaine. Un négatif sous une racine, un zéro au dénominateur : la réponse est « pas d'image », et c'est une réponse complète.",
       schema: tableau(
-        ["", "√(−1)", "1/0", "(−1)³"],
+        ["√(−1)", "1/0", "(−1)³"],
         [{ label: "existe ?", values: ["non", "non", "oui : −1"] }],
       ),
     },
@@ -198,7 +198,7 @@ export const ficheFonctionsReferenceSeconde: FicheCoursData = {
       texte:
         "Pour le carré, l'inverse et la valeur absolue, le sens de variation CHANGE selon le côté. Situer les nombres par rapport à zéro décide de tout.",
       schema: tableau(
-        ["", "sur les négatifs", "sur les positifs"],
+        ["sur les négatifs", "sur les positifs"],
         [{ label: "le carré", values: ["décroissant", "croissant"] }],
       ),
     },
@@ -207,7 +207,7 @@ export const ficheFonctionsReferenceSeconde: FicheCoursData = {
       texte:
         "Une fonction croissante conserve l'ordre, une décroissante l'inverse. C'est ce qui permet de comparer $2{,}1^2$ et $2{,}3^2$ sans sortir la calculatrice.",
       schema: tableau(
-        ["", "2,1 < 2,3", "conclusion"],
+        ["2,1 < 2,3", "conclusion"],
         [{ label: "positifs", values: ["croissant ici", "2,1² < 2,3²"] }],
       ),
     },
@@ -219,7 +219,7 @@ export const ficheFonctionsReferenceSeconde: FicheCoursData = {
       detail:
         "C'est l'usage principal au contrôle. On situe les deux nombres, on lit le sens de variation, on conclut. ⛔ Sur les négatifs, le carré inverse : $-5 < -2$ donne $25 > 4$.",
       schema: tableau(
-        ["", "a = −5, b = −2", "a = 2, b = 5"],
+        ["a = −5, b = −2", "a = 2, b = 5"],
         [{ label: "a² et b²", values: ["a² > b²", "a² < b²"] }],
         "Le même calcul, deux conclusions",
       ),
@@ -229,7 +229,7 @@ export const ficheFonctionsReferenceSeconde: FicheCoursData = {
       detail:
         "$x^2 = k$ a DEUX solutions si $k > 0$, une seule si $k = 0$, aucune si $k < 0$. Et $\\sqrt{x} = k$ n'a aucune solution dès que $k$ est négatif, puisqu'une racine n'est jamais négative.",
       schema: tableau(
-        ["", "x² = 9", "x² = 0", "x² = −4"],
+        ["x² = 9", "x² = 0", "x² = −4"],
         [{ label: "solutions", values: ["2 : −3 et 3", "1 : zéro", "aucune"] }],
         "Le signe de k décide",
       ),
@@ -239,7 +239,7 @@ export const ficheFonctionsReferenceSeconde: FicheCoursData = {
       detail:
         "Si $2 \\leqslant x \\leqslant 3$ alors $4 \\leqslant x^2 \\leqslant 9$. ⛔ Mais si $-3 \\leqslant x \\leqslant -2$, les bornes S'ÉCHANGENT : $4 \\leqslant x^2 \\leqslant 9$ aussi, en partant de l'autre bout.",
       schema: tableau(
-        ["x dans", "[2 ; 3]", "[−3 ; −2]"],
+        ["[2 ; 3]", "[−3 ; −2]"],
         [{ label: "x² dans", values: ["[4 ; 9]", "[4 ; 9]"] }],
         "Même encadrement, chemin inverse",
       ),
@@ -252,7 +252,7 @@ export const ficheFonctionsReferenceSeconde: FicheCoursData = {
       donnees: "La fonction racine carrée.",
       question: "Quelles sont les images de $4$ et de $-1$ ?",
       schema: tableau(
-        ["", "4", "−1"],
+        ["4", "−1"],
         [{ label: "image", values: ["2", "aucune"] }],
       ),
       solution:
@@ -263,7 +263,7 @@ export const ficheFonctionsReferenceSeconde: FicheCoursData = {
       donnees: "$a = -5$ et $b = -2$, donc $a < b$.",
       question: "Comparer $a^2$ et $b^2$.",
       schema: tableau(
-        ["", "a = −5", "b = −2"],
+        ["a = −5", "b = −2"],
         [{ label: "le carré", values: [25, 4] }],
       ),
       solution:
@@ -274,7 +274,7 @@ export const ficheFonctionsReferenceSeconde: FicheCoursData = {
       donnees: "$\\sqrt{17}$ et $\\sqrt{15}$.",
       question: "Lequel est le plus grand ?",
       schema: tableau(
-        ["", "15 < 17", "la racine"],
+        ["15 < 17", "la racine"],
         [{ label: "donc", values: ["—", "√15 < √17"] }],
       ),
       solution:
@@ -285,7 +285,7 @@ export const ficheFonctionsReferenceSeconde: FicheCoursData = {
       donnees: "$\\sqrt{x} = -3$.",
       question: "Résoudre.",
       schema: tableau(
-        ["", "√x", "−3"],
+        ["√x", "−3"],
         [{ label: "signe", values: ["toujours ⩾ 0", "négatif"] }],
       ),
       solution:
