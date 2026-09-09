@@ -542,6 +542,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les puissances",
     resume: "Produit, quotient, puissance d une puissance, exposant negatif, et la notation scientifique : reduire sans calculer.",
   },
+  "maths/seconde/fonctions-reference-2de": {
+    titre: "Les fonctions de référence",
+    resume: "Les cinq fonctions par coeur : leur domaine, leurs variations, leurs courbes — et pourquoi moins un n a pas d image par la racine.",
+  },
   "maths/seconde/vecteurs-plan": {
     titre: "Les vecteurs du plan",
     resume: "Un vecteur est un deplacement, pas un point : Chasles dans les deux sens, la difference qui retourne les lettres, et placer un point.",
