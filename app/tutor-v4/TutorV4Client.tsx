@@ -1674,7 +1674,16 @@ function handleInputKeyDown(
     <div className="mx-auto max-w-7xl">
        {remediationBanner}
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
-        <div className="space-y-4">
+        {/* ⛔ `min-w-0` : SANS LUI LA PAGE EST PLUS LARGE QUE L'ÉCRAN
+            (09/09/2026, signalé par Frédéric — « en mode téléphone l'écran est
+            trop large », et « le footer n'a pas la même largeur que la page »).
+            Mesuré à 375 px : la page faisait 390 px, le pied de page restait à
+            375, d'où le décalage. Un enfant de grille a `min-width: auto` par
+            défaut : il refuse de descendre sous la largeur de son contenu le
+            plus rigide, et pousse toute la page. Vérifié en posant
+            `min-width: 0` en direct dans le navigateur : 390 → 375 px. La vue
+            simple, elle, n'a jamais débordé — son contenu tient. */}
+        <div className="min-w-0 space-y-4">
           {/* Contrôles + notion sur une seule ligne pour garder la question
               dans l'écran sans avoir à scroller. */}
           {/* ⚠️ HORS APERÇU (27/08/2026) — scripts/capturer-apercus-coach.ts
