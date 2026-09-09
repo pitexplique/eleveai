@@ -29,31 +29,33 @@
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+import {
+  egalite,
+  egalites,
+  cas,
+  enBleu,
+  enRouge,
+  enVert,
+  BLEU,
+  ROUGE,
+  VERT,
+} from "@/lib/fiches/schemas";
 
 /**
- * Un tableau — HTML, donc lisible partout, y compris dans `methode` et
- * `exemples` dont les blocs peuvent ne faire que 80 px.
+ * ⛔ PLUS AUCUN TABLEAU DANS CETTE FICHE — Frédéric, 10/09/2026, après avoir
+ * relu la fiche des vecteurs : « fiche vecteur parfaite, mieux vaut des schémas
+ * que des tableaux ». C'est une préférence générale, pas un correctif local.
  *
- * ⛔ ET IL NE PREND QUE DU TEXTE NU : `TexteMath` ne le traverse jamais, ses
- * textes arrivant en DONNÉES de figure. On écrit « (3 ; −2) », jamais « $(3;-2)$ ».
+ * ⚠️ Et ce n'est PAS que les tableaux étaient faux. La veille, sur cette fiche
+ * même : « il était clair, juste un problème de mettre en deux colonnes ». Ils
+ * étaient à l'étroit, la largeur a été corrigée séparément. Le schéma l'emporte
+ * parce qu'il dit MIEUX — une formule avec la partie utile en couleur montre
+ * l'idée, là où un tableau la décrit.
+ *
+ * Les quatorze tableaux sont devenus des schémas de `lib/fiches/schemas.tsx` :
+ * `egalites` pour un calcul qui se déroule, `cas` pour une comparaison, et le
+ * repère dessiné ci-dessous pour une position.
  */
-function tableau(
-  headers: string[],
-  rows: { label: string; values: (string | number)[] }[],
-  title?: string,
-) {
-  return (
-    <CanvasRenderer
-      figure={{
-        kind: "tableau_donnees",
-        title,
-        headers,
-        rows,
-        display: { striped: true, compact: true },
-      }}
-    />
-  );
-}
 
 /**
  * Un repère avec des points — SVG, donc RÉSERVÉ à `proprietes` (225 px) et
@@ -107,14 +109,16 @@ export const ficheRepereSeconde: FicheCoursData = {
   },
 
   figure: {
-    schema: tableau(
-      ["milieu de [AB]", "distance AB"],
+    // ⛔ `egalites` ET NON `cas` ICI, et c'est mesuré : dans le bloc figure, deux
+    // cartes de `cas` tombent à 141 px alors que ces deux formules font 208 et
+    // 223 px. `cas` est fait pour des étiquettes COURTES ; une formule longue
+    // prend la pleine largeur.
+    schema: egalites(
       [
-        { label: "formule", values: ["moyenne des coordonnées", "Pythagore"] },
-        { label: "résultat", values: ["un POINT", "un NOMBRE"] },
-        { label: "repère", values: ["quelconque suffit", "orthonormé obligatoire"] },
+        enBleu("M") + "\\left(\\dfrac{x_A+x_B}{2}\\,;\\,\\dfrac{y_A+y_B}{2}\\right)",
+        enRouge("AB") + " = \\sqrt{(x_B-x_A)^2+(y_B-y_A)^2}",
       ],
-      "Les deux formules, et ce qui les sépare",
+      "En bleu le milieu, qui est un POINT. En rouge la distance, qui est un NOMBRE. Ce sont les deux seules formules du chapitre.",
     ),
     legende:
       "Le milieu rend un point, la distance rend un nombre. Et seule la seconde exige un repère orthonormé — c'est la question que le sujet pose pour vérifier qu'on l'a compris.",
@@ -135,30 +139,38 @@ export const ficheRepereSeconde: FicheCoursData = {
       titre: "Le milieu : une moyenne",
       texte:
         "Le milieu $M$ de $[AB]$ a pour coordonnées $\\left(\\dfrac{x_A + x_B}{2} \\,;\\, \\dfrac{y_A + y_B}{2}\\right)$. C'est la moyenne des abscisses et la moyenne des ordonnées — rien de plus.",
-      schema: tableau(
-        ["A(2 ; 4)", "B(8 ; 10)", "milieu"],
-        [{ label: "calcul", values: ["(2+8)÷2 = 5", "(4+10)÷2 = 7", "M(5 ; 7)"] }],
-        "Deux moyennes, deux coordonnées",
+      schema: egalites(
+        [
+          "A(2\\,;4) \\qquad B(8\\,;10)",
+          "x_M = \\dfrac{2+8}{2} = " + enRouge("5"),
+          "y_M = \\dfrac{4+10}{2} = " + enVert("7"),
+        ],
+        "Deux moyennes, et le milieu vaut M(5 ; 7).",
       ),
     },
     {
       titre: "La distance : Pythagore déguisé",
       texte:
         "Dans un repère ORTHONORMÉ, $AB = \\sqrt{(x_B - x_A)^2 + (y_B - y_A)^2}$. C'est le théorème de Pythagore appliqué au triangle rectangle dont $[AB]$ est l'hypoténuse et dont les côtés sont l'écart horizontal et l'écart vertical.",
-      schema: tableau(
-        ["A(1 ; 2)", "B(4 ; 6)", "écarts", "AB"],
-        [{ label: "calcul", values: ["—", "—", "3 et 4", "√(9+16) = 5"] }],
-        "Le triangle rectangle est caché dans la formule",
+      schema: egalites(
+        [
+          "A(1\\,;2) \\qquad B(4\\,;6)",
+          "AB = \\sqrt{" + enRouge("3") + "^2 + " + enVert("4") + "^2}",
+          "AB = \\sqrt{25} = 5",
+        ],
+        "En rouge l'écart horizontal, en vert le vertical : le triangle rectangle est caché dans la formule.",
       ),
     },
     {
       titre: "⛔ Sans repère orthonormé, pas de distance",
       texte:
         "Si les axes ne sont pas perpendiculaires, ou si leurs unités diffèrent, il n'y a aucun triangle rectangle : Pythagore ne s'applique plus et la formule ment. Le milieu, lui, reste valable dans n'importe quel repère.",
-      schema: tableau(
-        ["milieu", "distance"],
-        [{ label: "repère quelconque", values: ["valable", "FAUSSE"] }],
-        "Une seule des deux formules est exigeante",
+      schema: cas(
+        [
+          { formule: "\\text{le milieu}", verdict: "valable partout", couleur: VERT },
+          { formule: "\\text{la distance}", verdict: "orthonormé exigé", couleur: ROUGE },
+        ],
+        "Sans angle droit ni unité commune, il n'y a aucun triangle rectangle — donc pas de Pythagore.",
       ),
     },
   ],
@@ -178,27 +190,33 @@ export const ficheRepereSeconde: FicheCoursData = {
       titre: "J'écris les coordonnées avant tout",
       texte:
         "Je note $A(x_A \\,;\\, y_A)$ et $B(x_B \\,;\\, y_B)$ au brouillon. La moitié des erreurs du chapitre sont des confusions entre l'abscisse et l'ordonnée.",
-      schema: tableau(
-        ["xA", "yA", "xB", "yB"],
-        [{ label: "A(2;5) B(6;1)", values: [2, 5, 6, 1] }],
+      schema: egalites(
+        [
+          "A(" + enRouge("2") + "\\,;" + enVert("5") + ")",
+          "B(" + enRouge("6") + "\\,;" + enVert("1") + ")",
+        ],
+        "En rouge les abscisses, en vert les ordonnées. On ne les mélange plus.",
       ),
     },
     {
       titre: "Je choisis l'outil selon la question",
       texte:
         "Parallélogramme ou symétrique ? C'est le MILIEU. Nature d'un triangle, longueur, cercle ? C'est la DISTANCE. Aucune question de ce chapitre n'en demande un troisième.",
-      schema: tableau(
-        ["parallélogramme", "isocèle", "rectangle"],
-        [{ label: "outil", values: ["milieu", "distance", "distance"] }],
+      schema: cas(
+        [
+          { formule: "\\text{parallélogramme}", verdict: "le MILIEU", couleur: BLEU },
+          { formule: "\\text{nature du triangle}", verdict: "la DISTANCE", couleur: ROUGE },
+        ],
+        "La question dit l'outil, et il n'y en a que deux.",
       ),
     },
     {
       titre: "Je reste sur les carrés",
       texte:
         "Pour la nature d'un triangle, je compare $AB^2$, $AC^2$ et $BC^2$ sans jamais sortir les racines : une égalité approchée ne démontre rien.",
-      schema: tableau(
-        ["AB²", "AC²", "BC²"],
-        [{ label: "on compare", values: [9, 16, 25] }],
+      schema: egalite(
+        "AB^2 + AC^2 = BC^2",
+        "On compare les CARRÉS : 9 + 16 = 25. Aucune racine à sortir.",
       ),
     },
   ],
@@ -208,30 +226,37 @@ export const ficheRepereSeconde: FicheCoursData = {
       titre: "Prouver un parallélogramme",
       detail:
         "$ABCD$ est un parallélogramme si et seulement si $[AC]$ et $[BD]$ ont le même milieu. ⛔ Ce sont les DIAGONALES : celles qui sautent une lettre, pas les côtés $[AB]$ et $[CD]$.",
-      schema: tableau(
-        ["[AC]", "[BD]", "[AB]"],
-        [{ label: "c'est", values: ["diagonale", "diagonale", "côté"] }],
-        "Sauter une lettre",
+      schema: egalites(
+        [
+          "\\text{milieu de } [" + enRouge("AC") + "] = \\text{milieu de } [" + enRouge("BD") + "]",
+          "\\Updownarrow",
+          "ABCD \\text{ parallélogramme}",
+        ],
+        "Les diagonales sautent une lettre : [AC] et [BD], jamais les côtés.",
       ),
     },
     {
       titre: "Trouver la nature d'un triangle",
       detail:
         "Deux longueurs égales : isocèle. Pythagore vérifié sur les carrés : rectangle. Les deux à la fois : rectangle isocèle. Aucune des deux : quelconque.",
-      schema: tableau(
-        ["AB = AC", "AB² + AC² = BC²"],
-        [{ label: "on conclut", values: ["isocèle en A", "rectangle en A"] }],
-        "Deux constats, deux conclusions",
+      schema: cas(
+        [
+          { formule: "AB = AC", verdict: "isocèle en $A$", couleur: BLEU },
+          { formule: "AB^2 + AC^2 = BC^2", verdict: "rectangle en $A$", couleur: ROUGE },
+        ],
+        "Les deux à la fois : rectangle isocèle. Aucune des deux : quelconque.",
       ),
     },
     {
       titre: "Construire le symétrique d'un point",
       detail:
         "« $B$ est le symétrique de $A$ par rapport à $C$ » signifie exactement « $C$ est le milieu de $[AB]$ ». On écrit la formule du milieu à l'envers : $x_B = 2x_C - x_A$.",
-      schema: tableau(
-        ["A(1 ; 3)", "C(4 ; 5)", "B"],
-        [{ label: "calcul", values: ["—", "2×4 − 1 = 7", "B(7 ; 7)"] }],
-        "La formule du milieu retournée",
+      schema: egalites(
+        [
+          "x_B = " + enRouge("2") + "x_C - x_A",
+          "x_B = 2 \\times 4 - 1 = 7",
+        ],
+        "La formule du milieu écrite à l'envers. Avec A(1 ; 3) et C(4 ; 5) : B(7 ; 7).",
       ),
     },
   ],
@@ -241,9 +266,11 @@ export const ficheRepereSeconde: FicheCoursData = {
       titre: "Lire des coordonnées",
       donnees: "Un point situé à $4$ à gauche de l'origine et $3$ en dessous.",
       question: "Quelles sont ses coordonnées ?",
-      schema: tableau(
-        ["à gauche", "en dessous"],
-        [{ label: "signe", values: ["x négatif", "y négatif"] }],
+      schema: cas(
+        [
+          { formule: "\\leftarrow \\text{ à gauche}", verdict: "$x$ négatif", couleur: ROUGE },
+          { formule: "\\downarrow \\text{ en dessous}", verdict: "$y$ négatif", couleur: VERT },
+        ],
       ),
       solution:
         "Vers la gauche, l'abscisse est négative ; vers le bas, l'ordonnée l'est aussi. Le point est donc $(-4 \\,;\\, -3)$. ⚠️ On écrit toujours l'abscisse en premier.",
@@ -252,9 +279,12 @@ export const ficheRepereSeconde: FicheCoursData = {
       titre: "Un milieu",
       donnees: "$A(-3 \\,;\\, 5)$ et $B(7 \\,;\\, -1)$.",
       question: "Coordonnées du milieu $M$ de $[AB]$ ?",
-      schema: tableau(
-        ["abscisse", "ordonnée"],
-        [{ label: "moyenne", values: ["(−3+7)÷2 = 2", "(5−1)÷2 = 2"] }],
+      schema: egalites(
+        [
+          "x_M = \\dfrac{-3+7}{2} = 2",
+          "y_M = \\dfrac{5+(-1)}{2} = 2",
+        ],
+        "Les négatifs entrent dans la moyenne comme les autres.",
       ),
       solution:
         "$x_M = \\dfrac{-3 + 7}{2} = 2$ et $y_M = \\dfrac{5 + (-1)}{2} = 2$. Donc $M(2 \\,;\\, 2)$. ⚠️ Les nombres négatifs entrent dans la moyenne comme les autres : c'est là que se perdent les signes.",
@@ -263,9 +293,12 @@ export const ficheRepereSeconde: FicheCoursData = {
       titre: "Une distance",
       donnees: "$A(1 \\,;\\, -2)$ et $B(5 \\,;\\, 1)$, repère orthonormé.",
       question: "Calculer $AB$.",
-      schema: tableau(
-        ["écart en x", "écart en y", "AB"],
-        [{ label: "vaut", values: ["5 − 1 = 4", "1 − (−2) = 3", "5"] }],
+      schema: egalites(
+        [
+          "AB = \\sqrt{" + enRouge("4") + "^2 + " + enVert("3") + "^2}",
+          "AB = \\sqrt{25} = 5",
+        ],
+        "En rouge l'écart horizontal, en vert le vertical.",
       ),
       solution:
         "$AB = \\sqrt{(5-1)^2 + (1-(-2))^2} = \\sqrt{4^2 + 3^2} = \\sqrt{16 + 9} = \\sqrt{25} = 5$. ⭐ Les carrés effacent les signes : peu importe qu'on calcule $x_B - x_A$ ou l'inverse.",
@@ -274,9 +307,12 @@ export const ficheRepereSeconde: FicheCoursData = {
       titre: "La nature d'un triangle",
       donnees: "$A(1 \\,;\\, 1)$, $B(4 \\,;\\, 2)$ et $C(-1 \\,;\\, 7)$, repère orthonormé.",
       question: "Quelle est la nature du triangle $ABC$ ?",
-      schema: tableau(
-        ["AB²", "AC²", "BC²"],
-        [{ label: "vaut", values: [10, 40, 50] }],
+      schema: egalites(
+        [
+          "AB^2 = 10 \\quad AC^2 = 40 \\quad BC^2 = 50",
+          enRouge("10 + 40 = 50"),
+        ],
+        "Pythagore est vérifié : le triangle est rectangle en A.",
       ),
       solution:
         "$AB^2 = 3^2 + 1^2 = 10$, $AC^2 = (-2)^2 + 6^2 = 40$, $BC^2 = (-5)^2 + 5^2 = 50$. Or $10 + 40 = 50$, c'est-à-dire $AB^2 + AC^2 = BC^2$ : par la réciproque de Pythagore, le triangle est RECTANGLE EN $A$, le sommet opposé au plus grand côté. ⭐ On n'a sorti aucune racine — et c'est exactement ce qui rend la preuve exacte.",
