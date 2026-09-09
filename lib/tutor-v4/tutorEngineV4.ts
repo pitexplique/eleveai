@@ -432,6 +432,36 @@ function findNextAvailableMicroInNotion(args: {
   return null;
 }
 
+/**
+ * ⭐ LE MÊME DÉPARTAGE QUE LA VUE SIMPLE, MAIS CÔTÉ SERVEUR (09/09/2026).
+ *
+ * La vue simple ne montre pas les deux énoncés : elle en active un toute seule.
+ * Ce choix se faisait dans le navigateur (`selectSimpleOption`,
+ * app/tutor-v4/TutorV4Client.tsx), donc APRÈS avoir reçu la paire, donc au prix
+ * d'un second aller-retour avant que la question s'affiche. Mesuré le
+ * 09/09/2026 sur le serveur de dev à chaud : `start` 0,71 à 0,86 s, `choose`
+ * 0,42 s — soit ~1,2 s en file, et c'est ce que Frédéric voyait (« la question
+ * met 1 à 2 secondes pour s'afficher »). La règle est la même des deux côtés ;
+ * seule sa place change.
+ *
+ * ⚠️ LE DÉPARTAGE AU HASARD EST VOLONTAIRE — ne pas le « stabiliser ». À
+ * pertinence égale, trier par longueur de texte revenait à toujours prendre le
+ * QCM (plus court) et à ne jamais servir les questions en saisie libre.
+ */
+function choisirEnonceSimple(pair: TutorQuestionPair): TutorQuestionOption {
+  return [pair.optionA, pair.optionB].sort((a, b) => {
+    const distanceA = Math.abs(a.meta.starLevel - pair.recommendedStar);
+    const distanceB = Math.abs(b.meta.starLevel - pair.recommendedStar);
+
+    if (distanceA !== distanceB) return distanceA - distanceB;
+    if (a.meta.starLevel !== b.meta.starLevel) {
+      return a.meta.starLevel - b.meta.starLevel;
+    }
+
+    return Math.random() - 0.5;
+  })[0];
+}
+
 export async function startTutorSessionV4(
   input: StartTutorV4Input
 ): Promise<StartTutorV4Response> {
@@ -567,11 +597,47 @@ export async function startTutorSessionV4(
     ],
   };
 
+  /* En vue simple, l'élève n'a rien à choisir : on enregistre le choix tout de
+     suite, exactement comme le ferait `chooseQuestionV4`, et le client reçoit
+     la question activée avec la paire. Un aller-retour de moins avant le
+     premier mot de l'énoncé. */
+  const enonceSimple = isSimpleMode ? choisirEnonceSimple(currentPair) : null;
+
+  if (enonceSimple) {
+    const difficulteChoisie = getDifficultyFromOption(enonceSimple);
+
+    session.currentChoice = {
+      pairId: currentPair.pairId,
+      chosenOptionId: enonceSimple.id,
+      chosenDifficulty: difficulteChoisie,
+      chosenStar: enonceSimple.meta.starLevel,
+      chosenTheme: enonceSimple.meta.theme,
+      chosenAt: Date.now(),
+    };
+
+    session.turnStartedAt = Date.now();
+
+    session.audit.push({
+      at: new Date().toISOString(),
+      event: "question_chosen",
+      notionId: enonceSimple.notionId,
+      microId: enonceSimple.microId,
+      pairId: currentPair.pairId,
+      optionId: enonceSimple.id,
+      difficulty: difficulteChoisie,
+      starLevel: enonceSimple.meta.starLevel,
+      mode: session.mode,
+      reason: "Choix automatique de la vue simple, au démarrage.",
+      flags: [],
+    });
+  }
+
   await createSessionV4(session);
 
   return {
     sessionId: session.id,
     pair: currentPair,
+    chosenOptionId: enonceSimple?.id,
     mode: session.mode,
     recommendedStar: session.recommendedStar,
     recommendedDifficulty: session.recommendedDifficulty,

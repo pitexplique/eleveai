@@ -901,6 +901,28 @@ function continueAfterExplanation() {
   scrollToQuestions();
 }
 
+  /* Poser la question à l'écran, une fois qu'on sait laquelle. Séparé de
+     l'appel réseau parce que le serveur peut l'avoir DÉJÀ choisie : en vue
+     simple, `start` renvoie `chosenOptionId` et il n'y a plus rien à demander
+     (voir lib/tutor-v4/tutorEngineV4.ts). */
+  function appliquerQuestionActive(option: TutorQuestionOption) {
+    setSelectedOptionId(option.id);
+    setCurrentQuestion(option);
+    /* La question est SERVIE : on la retient ici, et pas à la réponse — une
+       question vue puis abandonnée a quand même été vue. */
+    retenirQuestionVue(classe, matiere, option.id);
+    setAnswer("");
+    resetWrongAnswerFlow();
+    closeSuccessBanner();
+    setActiveMicroId(option.microId);
+
+    setMicroStatuses((prev) => ({
+      ...prev,
+      [option.microId]:
+        prev[option.microId] === "success" ? "success" : "current",
+    }));
+  }
+
   async function activateQuestion(
     currentSessionId: string,
     option: TutorQuestionOption
@@ -917,21 +939,7 @@ function continueAfterExplanation() {
       throw new Error(data?.error ?? "Erreur pendant l’activation de la question.");
     }
 
-    setSelectedOptionId(option.id);
-    setCurrentQuestion(option);
-    /* La question est SERVIE : on la retient ici, et pas à la réponse — une
-       question vue puis abandonnée a quand même été vue. */
-    retenirQuestionVue(classe, matiere, option.id);
-    setAnswer("");
-    resetWrongAnswerFlow();
-    closeSuccessBanner();
-    setActiveMicroId(option.microId);
-
-    setMicroStatuses((prev) => ({
-      ...prev,
-      [option.microId]:
-        prev[option.microId] === "success" ? "success" : "current",
-    }));
+    appliquerQuestionActive(option);
   }
 
   async function startSession(targetMicroId?: string, notionOverride?: string) {
@@ -996,6 +1004,21 @@ function continueAfterExplanation() {
         ...prev,
         [typed.pair.microId]: "current",
       }));
+
+      /* ⭐ EN VUE SIMPLE, LA QUESTION ARRIVE AVEC LA PAIRE (09/09/2026).
+         Le serveur a fait le choix — il n'y a plus de second appel à attendre.
+         `autoActivatedPairRef` est marqué ici pour que l'effet d'activation
+         automatique ne redemande pas ce qui est déjà à l'écran. */
+      const dejaChoisie = typed.chosenOptionId
+        ? [typed.pair.optionA, typed.pair.optionB].find(
+            (option) => option.id === typed.chosenOptionId
+          )
+        : undefined;
+
+      if (dejaChoisie) {
+        autoActivatedPairRef.current = typed.pair.pairId;
+        appliquerQuestionActive(dejaChoisie);
+      }
     } catch (error) {
       setFeedback(
         error instanceof Error ? error.message : "Erreur au démarrage du tutor."
@@ -1708,12 +1731,23 @@ function handleInputKeyDown(
           </header>
 
           <section className="grid gap-3 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm md:hidden">
-            <h2 className="text-base font-black text-slate-900">Tableau de bord</h2>
+            {/* ⭐ PAS DE 0/20 AVANT LA PREMIÈRE RÉPONSE (09/09/2026).
+                Sur téléphone ce bloc passe AVANT la question : le premier mot
+                que l'élève lisait sur lui-même était « Score 0.0/20 », et il
+                repoussait l'énoncé sous la ligne de flottaison. Un tableau de
+                bord n'a rien à annoncer tant que rien n'a été joué ; il
+                apparaît à la première réponse, quand ses chiffres veulent
+                enfin dire quelque chose. */}
+            {nbTentatives > 0 ? (
+              <>
+                <h2 className="text-base font-black text-slate-900">Tableau de bord</h2>
 
-            <div className="grid grid-cols-2 gap-3">
-              <HeroStat title="Score" value={`${scoreSeanceSur20}/20`} icon="🎯" />
-              <HeroStat title="Temps" value={formatDuration(elapsedSeconds)} icon="⏱️" />
-            </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <HeroStat title="Score" value={`${scoreSeanceSur20}/20`} icon="🎯" />
+                  <HeroStat title="Temps" value={formatDuration(elapsedSeconds)} icon="⏱️" />
+                </div>
+              </>
+            ) : null}
 
             <button
               onClick={() => void startSession()}
@@ -2048,15 +2082,23 @@ function handleInputKeyDown(
         </div>
 
         <aside className="hidden space-y-5 lg:block">
-          <SidebarCard title="Tableau de bord">
-            <div className="grid gap-3">
-              <StatLine label="Score" value={`${scoreSeanceSur20}/20`} />
-              <StatLine label="Temps" value={formatDuration(elapsedSeconds)} />
-              <StatLine label="Points" value={`${earnedPoints}/${possiblePoints}`} />
-              <StatLine label="Bonnes réponses" value={`${bonnesReponses}`} />
-              <StatLine label="Questions faites" value={`${nbTentatives}`} />
-            </div>
-          </SidebarCard>
+          {/* ⭐ CINQ ZÉROS EN MOINS À L'ARRIVÉE (09/09/2026) — même raison que
+              le tableau de bord de téléphone plus haut : « Score 0.0/20 ·
+              Points 0/0 · Bonnes réponses 0 · Questions faites 0 » est un
+              bulletin vierge, et il s'affichait avant que l'élève ait eu la
+              moindre occasion de répondre. Les micro-compétences, elles,
+              RESTENT : elles annoncent le programme au lieu de noter. */}
+          {nbTentatives > 0 ? (
+            <SidebarCard title="Tableau de bord">
+              <div className="grid gap-3">
+                <StatLine label="Score" value={`${scoreSeanceSur20}/20`} />
+                <StatLine label="Temps" value={formatDuration(elapsedSeconds)} />
+                <StatLine label="Points" value={`${earnedPoints}/${possiblePoints}`} />
+                <StatLine label="Bonnes réponses" value={`${bonnesReponses}`} />
+                <StatLine label="Questions faites" value={`${nbTentatives}`} />
+              </div>
+            </SidebarCard>
+          ) : null}
 
           <SidebarCard title={`Micro-compétences : ${notionLabel(notion, classe, matiere)}`}>
             <div className="mb-3 text-xs text-slate-500">

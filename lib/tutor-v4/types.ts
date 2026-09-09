@@ -378,6 +378,13 @@ export type StartTutorV4Input = {
 export type StartTutorV4Response = {
   sessionId: string;
   pair: TutorQuestionPair;
+  /* ⭐ LA QUESTION EST DÉJÀ CHOISIE EN VUE SIMPLE (09/09/2026).
+     Le primaire et les niveaux du CECRL ne montrent pas les deux énoncés : le
+     client en activait un aussitôt, par un SECOND appel réseau. `start` fait
+     donc le choix lui-même et le dit ici — l'écran n'attend plus qu'un
+     aller-retour au lieu de deux. Absent en vue complète, où c'est l'élève
+     qui choisit. */
+  chosenOptionId?: string;
   mode: TutorMode;
   recommendedStar: StarLevel;
   recommendedDifficulty: DifficultyLevel;

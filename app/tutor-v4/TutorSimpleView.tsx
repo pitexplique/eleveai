@@ -300,7 +300,19 @@ export default function TutorSimpleView({
 
         {remediationBanner}
 
-        <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_120px]">
+        {/* ⭐ LA COLONNE DES SCORES N'EXISTE QU'UNE FOIS LE JEU COMMENCÉ
+            (09/09/2026, même geste qu'en mode complet). « Questions 0 · Temps
+            0:00 · Score 0/20 » accueillait un élève de primaire avec trois
+            zéros sur lui-même, avant sa première réponse. La colonne — et donc
+            la seconde colonne de la grille — n'apparaît qu'à la première
+            tentative ; l'énoncé prend toute la largeur d'ici là. */}
+        <div
+          className={
+            questionsDone > 0
+              ? "grid gap-4 lg:grid-cols-[minmax(0,1fr)_120px]"
+              : "grid gap-4"
+          }
+        >
           <section className="min-h-[520px] rounded-2xl bg-white px-5 py-6 shadow-sm ring-1 ring-slate-200 sm:px-8 lg:px-12">
             {/* La leçon écrite est retirée le temps d'en revoir le principe :
                 elle se construisait sur les items `fixed`. Reste la vidéo, et
@@ -473,11 +485,13 @@ export default function TutorSimpleView({
             )}
           </section>
 
-          <aside className="grid grid-cols-3 gap-2 lg:block lg:space-y-0">
-            <SimpleStat title="Questions" value={`${questionsDone}`} tone="green" />
-            <SimpleStat title="Temps" value={elapsedTime} tone="blue" />
-            <SimpleStat title="Score" value={`${score}/20`} tone="orange" />
-          </aside>
+          {questionsDone > 0 ? (
+            <aside className="grid grid-cols-3 gap-2 lg:block lg:space-y-0">
+              <SimpleStat title="Questions" value={`${questionsDone}`} tone="green" />
+              <SimpleStat title="Temps" value={elapsedTime} tone="blue" />
+              <SimpleStat title="Score" value={`${score}/20`} tone="orange" />
+            </aside>
+          ) : null}
         </div>
 
         {/* Enregistrement de la séance : visible dès la première réponse, comme
