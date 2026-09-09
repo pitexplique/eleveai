@@ -61,7 +61,22 @@ for (const notion of NOTIONS) {
       continue;
     }
     await bouton.click();
-    await page.waitForTimeout(600);
+
+    // ⛔ ON ATTEND LE COMPTEUR, ON NE COMPTE PAS SUR UNE DUREE. Premiere
+    // version : `waitForTimeout(600)` en dur. Quand la page compilait a froid,
+    // le panneau n'avait pas encore peint son « 1 / 6 » au bout de 600 ms — et
+    // la boucle plus bas cassait alors des la premiere diapositive, en
+    // ANNONCANT ✅. Mesure du 09/09/2026 : une fiche par passe rendait « 1 diapo »
+    // et se declarait propre, et ce n'etait jamais la meme d'une passe a
+    // l'autre. Le mode classe est le critere d'acceptation du site : il ne peut
+    // pas etre le seul a n'etre pas mesure.
+    await page.waitForFunction(
+      () => {
+        const p = document.querySelector("div.fixed.inset-0");
+        return !!p && /\d+ \/ \d+/.test(p.innerText);
+      },
+      { timeout: 15000 },
+    );
 
     // On parcourt toutes les diapositives avec la flèche droite.
     for (let i = 0; i < 60; i += 1) {
@@ -94,8 +109,16 @@ for (const notion of NOTIONS) {
       if (m.katexErreurs) defauts.push(`diapo ${i + 1} · ${m.katexErreurs} formule(s) en erreur`);
       if (m.debordent) defauts.push(`diapo ${i + 1} · déborde de l'écran`);
 
+      // ⛔ UN COMPTEUR ILLISIBLE EST UN DEFAUT, PLUS UNE SORTIE SILENCIEUSE.
+      // Premiere version : `if (!total || n >= total) break;` — les deux cas
+      // sortaient de la meme facon, si bien qu'un panneau sans compteur passait
+      // pour un diaporama d'une seule diapositive, termine et sain.
       const [n, total] = (m.position.match(/\d+/g) || []).map(Number);
-      if (!total || n >= total) break;
+      if (!total) {
+        defauts.push(`diapo ${i + 1} · compteur introuvable : le diaporama n'a pas pu être parcouru`);
+        break;
+      }
+      if (n >= total) break;
       await page.keyboard.press("ArrowRight");
       // ⚠️ 350 ms ET NON 120. KaTeX rend APRES le montage de la diapositive :
       // a 120 ms le script lisait encore les dollars bruts et signalait des
