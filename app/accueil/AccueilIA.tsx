@@ -181,13 +181,26 @@ export default function AccueilIA() {
             </p>
           </header>
 
-          <Suspense fallback={<div className="h-64" aria-hidden="true" />}>
-            {/* L'entrée n'affiche plus l'historique sous la recherche : c'est
-                la colonne de gauche qui le porte, et lui seul. Sur téléphone
-                la colonne devient un tiroir (bouton ☰) — le RÉCENT reste donc
-                atteignable, à un geste plutôt qu'à zéro. */}
-            <EntreeMatrice variante="page" />
-          </Suspense>
+          {/* ⭐ 09/09/2026 — LE CHAMP REMONTE AU-DESSUS DES TROIS RANGÉES.
+              Frédéric, IXL et MSN à l'appui : « la barre de recherche est
+              toujours au-dessus », et surtout le pourquoi — « du coup personne
+              ne se sent obligé de taper classe etc. ? ça pourrait descendre le
+              bounce ». Les rangées ne sont pas un passage obligé et ne l'ont
+              jamais été ; elles en avaient seulement l'air, parce qu'elles
+              étaient rencontrées les premières.
+              ⛔ CE `div` NE FAIT QUE PORTER LA CLASSE. L'inversion se joue
+              entièrement dans app/globals.css (`.accueil-champ-en-tete`), et
+              c'est voulu : `EntreeMatrice` sert aussi ailleurs sur le site, où
+              rien ne doit bouger. Sa note complète est dans la feuille. */}
+          <div className="accueil-champ-en-tete">
+            <Suspense fallback={<div className="h-64" aria-hidden="true" />}>
+              {/* L'entrée n'affiche plus l'historique sous la recherche : c'est
+                  la colonne de gauche qui le porte, et lui seul. Sur téléphone
+                  la colonne devient un tiroir (bouton ☰) — le RÉCENT reste donc
+                  atteignable, à un geste plutôt qu'à zéro. */}
+              <EntreeMatrice variante="page" />
+            </Suspense>
+          </div>
           </div>
 
           {/* ⭐ TI MARGO, DESCENDU ICI (Frédéric, 21/08/2026).

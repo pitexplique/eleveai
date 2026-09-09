@@ -107,6 +107,60 @@ body {
   white-space: nowrap;
 }
 
+/* ─── LE CHAMP PASSE AU-DESSUS DES TROIS RANGÉES ───────────────────────────
+   ⭐ 09/09/2026, Frédéric, capture d'IXL et de MSN à l'appui : « la barre de
+   recherche est toujours au-dessus », « pourquoi on ne la mettrait pas au même
+   niveau », et le raisonnement qui suit — « du coup personne ne se sent obligé
+   de taper classe etc. ? ça pourrait descendre le bounce ».
+
+   C'est le nœud. Les trois rangées — qui es-tu, ta classe, ta matière — se
+   LISENT comme un formulaire à remplir avant d'avoir le droit de demander
+   quelque chose. Elles ne l'ont jamais été : le champ marche sans elles, et
+   depuis la liste suggérée (lib/matrice/suggestions.ts) chaque proposition
+   porte SA classe écrite à droite. Ce qui bloquait n'était donc pas une règle,
+   c'était un ordre de lecture — et un ordre de lecture se change en CSS.
+
+   ⛔ EN CSS, ET PAS DANS `EntreeMatrice` (consigne explicite du 09/09). Le
+   composant sert aussi la variante « accueil » du journal ailleurs sur le
+   site : y inverser l'ordre changerait des écrans que personne n'a demandé à
+   changer. La règle ci-dessous ne s'applique que sous `.accueil-champ-en-tete`,
+   posé par app/accueil/AccueilIA.tsx — donc sur cette page et nulle part
+   ailleurs.
+
+   ⚠️ `order` DÉPLACE CE QU'ON VOIT, PAS L'ORDRE DE TABULATION. Au clavier, on
+   passe encore par les pastilles avant d'atteindre le champ. C'est le prix
+   connu de cette méthode, et il se paierait en déplaçant le JSX si on veut le
+   supprimer un jour.
+
+   ⚠️ Le filet suit le champ. Il marquait la bascule « au-dessus qui on est, en
+   dessous ce qu'on cherche » ; les deux moitiés viennent d'échanger leur place,
+   donc le trait descend avec elles — sinon la page s'ouvrirait sur une ligne
+   horizontale posée sous le titre, qui ne sépare plus rien.
+   `div.border-t` est le bloc du champ, et c'est le SEUL enfant direct de la
+   section à porter cette classe (vérifié) ; `div:first-of-type` est la rangée
+   des rôles, première dans le DOM quoi que fasse `order`. */
+.accueil-champ-en-tete > section {
+  display: flex;
+  flex-direction: column;
+}
+.accueil-champ-en-tete > section > div.border-t {
+  order: -1;
+  margin-top: 0;
+  padding-top: 0;
+  border-top-width: 0;
+}
+.accueil-champ-en-tete > section > div:first-of-type {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  /* ⚠️ slate-200, ET PAS l'encre du journal à 12 %. Sur `/accueil` la matrice
+     tourne en variante « page » (`surAccueil` y vaut faux), donc son filet
+     d'origine était déjà celui-ci. Les deux teintes sont à un cheveu l'une de
+     l'autre — raison de plus pour reprendre celle que le composant pose
+     lui-même, plutôt qu'une valeur voisine qui divergera au premier
+     changement de charte. */
+  border-top: 1px solid rgb(226 232 240);
+}
+
 /* ─── … SAUF QUAND ON A DEMANDÉ À TOUT VOIR ────────────────────────────────
    Défaut retrouvé le 07/08 par Frédéric : « lorsqu'on clique sur les chips
    plus d'options, on ne les voit pas toutes ». C'était vrai — la rangée
