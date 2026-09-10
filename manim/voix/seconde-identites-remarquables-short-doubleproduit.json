@@ -1,0 +1,8 @@
+{
+  "00-accroche": "3 plus 4, le tout au carré. Est-ce que ça fait 3 au carré plus 4 au carré ?",
+  "01-gauche": "À gauche : 3 plus 4 font 7. Et 7 au carré, c'est 49.",
+  "02-droite": "À droite : 3 au carré font 9, 4 au carré font 16. Neuf plus seize, vingt-cinq.",
+  "03-verdict": "Quarante-neuf n'est pas vingt-cinq. Donc non. Il manque quelque chose, et ce quelque chose vaut 24.",
+  "04-regle": "Ce qui manque, c'est le DOUBLE PRODUIT : deux fois a fois b. Deux fois 3 fois 4, ça fait 24. Un carré de somme a toujours TROIS termes, jamais deux.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

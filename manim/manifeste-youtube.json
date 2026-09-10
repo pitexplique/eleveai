@@ -18,12 +18,10 @@
     "⛔ La description ne doit contenir ni chevrons < > (YouTube les refuse) ni",
     "le mot « enseignant » dans la signature — formule arrêtée le 03/09/2026."
   ],
-
-  "playlist": "Maths 2de",
+  "playlist": "Maths seconde",
   "signature": "Frédéric Lacoste — La Réunion 🌋",
   "categorie": "27",
   "langue": "fr",
-
   "videos": [
     {
       "id": "racine-carree-2de",
@@ -31,24 +29,67 @@
       "type": "longue",
       "fichier": "seconde/maths/paysage/fr/racine-carree-2de/eleveai-maths-seconde-racine-carree-2de.mp4",
       "miniature": "seconde/maths/fr/eleveai-maths-seconde-racine-carree-2de.png",
-      "titre": "Maths 2de · La racine carrée — EleveAI",
+      "titre": "Maths seconde · La racine carrée — EleveAI",
       "accroche": "√9 + √16 = 7, et non 5. Toute la difficulté du chapitre tient dans cette ligne : la racine traverse les produits sans effort, mais elle butte sur les sommes — et rien dans l'écriture ne prévient.",
       "chapitres": [
-        ["00:00", "La racine carrée"],
-        ["00:13", "Les objectifs"],
-        ["00:36", "Une racine, c'est un nombre"],
-        ["00:58", "Les carrés parfaits"],
-        ["01:17", "Elle refuse les négatifs"],
-        ["01:41", "La racine d'un carré"],
-        ["02:08", "Le PRODUIT passe"],
-        ["02:45", "La SOMME ne passe pas"],
-        ["03:18", "Simplifier : sortir le carré caché"],
-        ["03:52", "Défi"],
-        ["04:16", "Correction"],
-        ["04:54", "Tu sais maintenant"]
+        [
+          "00:00",
+          "La racine carrée"
+        ],
+        [
+          "00:13",
+          "Les objectifs"
+        ],
+        [
+          "00:36",
+          "Une racine, c'est un nombre"
+        ],
+        [
+          "00:58",
+          "Les carrés parfaits"
+        ],
+        [
+          "01:17",
+          "Elle refuse les négatifs"
+        ],
+        [
+          "01:41",
+          "La racine d'un carré"
+        ],
+        [
+          "02:08",
+          "Le PRODUIT passe"
+        ],
+        [
+          "02:45",
+          "La SOMME ne passe pas"
+        ],
+        [
+          "03:18",
+          "Simplifier : sortir le carré caché"
+        ],
+        [
+          "03:52",
+          "Défi"
+        ],
+        [
+          "04:16",
+          "Correction"
+        ],
+        [
+          "04:54",
+          "Tu sais maintenant"
+        ]
       ],
       "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/racine-carree-2de",
-      "tags": ["maths", "seconde", "2de", "racine carrée", "simplifier une racine", "lycée"]
+      "tags": [
+        "maths",
+        "seconde",
+        "2de",
+        "racine carrée",
+        "simplifier une racine",
+        "lycée"
+      ]
     },
     {
       "id": "racine-somme",
@@ -60,7 +101,13 @@
       "titre": "√9 + √16 = √25 ? La faute que presque tout le monde fait",
       "accroche": "Le piège du chapitre, en 45 secondes : la règle du produit est vraie, celle de la somme ne l'est pas.",
       "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/racine-carree-2de",
-      "tags": ["maths", "seconde", "racine carrée", "Shorts"]
+      "tags": [
+        "maths",
+        "seconde",
+        "racine carrée",
+        "Shorts",
+        "2de"
+      ]
     },
     {
       "id": "racine-simplifier",
@@ -72,7 +119,13 @@
       "titre": "√50 = 5√2 : comment simplifier une racine carrée",
       "accroche": "Le geste en deux temps : chercher le plus grand carré, puis le sortir du radical.",
       "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/racine-carree-2de",
-      "tags": ["maths", "seconde", "simplifier une racine", "Shorts"]
+      "tags": [
+        "maths",
+        "seconde",
+        "simplifier une racine",
+        "Shorts",
+        "2de"
+      ]
     },
     {
       "id": "racine-negatif",
@@ -84,7 +137,13 @@
       "titre": "Pourquoi √(−9) n'existe pas",
       "accroche": "Ce n'est pas une règle arbitraire : la courbe s'arrête à zéro, et ça se voit.",
       "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/racine-carree-2de",
-      "tags": ["maths", "seconde", "racine carrée", "Shorts"]
+      "tags": [
+        "maths",
+        "seconde",
+        "racine carrée",
+        "Shorts",
+        "2de"
+      ]
     },
     {
       "id": "repere-coordonnees",
@@ -92,22 +151,61 @@
       "type": "longue",
       "fichier": "seconde/maths/paysage/fr/repere-coordonnees/eleveai-maths-seconde-repere-coordonnees.mp4",
       "miniature": "seconde/maths/fr/eleveai-maths-seconde-repere-coordonnees.png",
-      "titre": "Maths 2de · Repère et coordonnées — EleveAI",
+      "titre": "Maths seconde · Repère et coordonnées — EleveAI",
       "accroche": "Deux formules seulement : le milieu est une MOYENNE, la distance est PYTHAGORE. Tout l'intérêt du chapitre est ailleurs — c'est ce qu'elles permettent de démontrer, sans jamais rien mesurer.",
       "chapitres": [
-        ["00:00", "Repère et coordonnées"],
-        ["00:10", "Les objectifs"],
-        ["00:29", "Lire et placer un point"],
-        ["00:52", "Le milieu : une moyenne"],
-        ["01:25", "La distance : Pythagore déguisé"],
-        ["01:53", "Il faut un repère orthonormé"],
-        ["02:17", "Prouver un parallélogramme"],
-        ["02:37", "Défi"],
-        ["02:56", "Correction"],
-        ["03:35", "Tu sais maintenant"]
+        [
+          "00:00",
+          "Repère et coordonnées"
+        ],
+        [
+          "00:10",
+          "Les objectifs"
+        ],
+        [
+          "00:29",
+          "Lire et placer un point"
+        ],
+        [
+          "00:52",
+          "Le milieu : une moyenne"
+        ],
+        [
+          "01:25",
+          "La distance : Pythagore déguisé"
+        ],
+        [
+          "01:53",
+          "Il faut un repère orthonormé"
+        ],
+        [
+          "02:17",
+          "Prouver un parallélogramme"
+        ],
+        [
+          "02:37",
+          "Défi"
+        ],
+        [
+          "02:56",
+          "Correction"
+        ],
+        [
+          "03:35",
+          "Tu sais maintenant"
+        ]
       ],
       "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/repere-coordonnees",
-      "tags": ["maths", "seconde", "2de", "coordonnées", "milieu", "distance", "parallélogramme", "lycée"]
+      "tags": [
+        "maths",
+        "seconde",
+        "2de",
+        "coordonnées",
+        "milieu",
+        "distance",
+        "parallélogramme",
+        "lycée"
+      ]
     },
     {
       "id": "repere-diagonales",
@@ -119,7 +217,14 @@
       "titre": "Parallélogramme ? Compare les DIAGONALES, pas les côtés",
       "accroche": "L'erreur qui coûte des points : les diagonales sautent une lettre, [AC] et [BD].",
       "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/repere-coordonnees",
-      "tags": ["maths", "seconde", "parallélogramme", "coordonnées", "Shorts"]
+      "tags": [
+        "maths",
+        "seconde",
+        "parallélogramme",
+        "coordonnées",
+        "Shorts",
+        "2de"
+      ]
     },
     {
       "id": "puissances",
@@ -127,23 +232,63 @@
       "type": "longue",
       "fichier": "seconde/maths/paysage/fr/puissances/eleveai-maths-seconde-puissances.mp4",
       "miniature": "seconde/maths/fr/eleveai-maths-seconde-puissances.png",
-      "titre": "Maths 2de · Les puissances — EleveAI",
+      "titre": "Maths seconde · Les puissances — EleveAI",
       "accroche": "Quatre règles, et une seule condition pour qu'elles marchent : la même base. Le défi de cette vidéo est la vraie question du contrôle commun, celle qui enchaîne les trois règles d'un coup.",
       "chapitres": [
-        ["00:00", "Les puissances"],
-        ["00:10", "Les objectifs"],
-        ["00:30", "Le produit : on additionne"],
-        ["00:51", "Le quotient : on soustrait"],
-        ["01:10", "La parenthèse : on multiplie"],
-        ["01:32", "L'exposant négatif"],
-        ["01:55", "Enchaîner les règles"],
-        ["02:13", "La notation scientifique"],
-        ["02:38", "Défi"],
-        ["03:03", "Correction"],
-        ["03:43", "Tu sais maintenant"]
+        [
+          "00:00",
+          "Les puissances"
+        ],
+        [
+          "00:10",
+          "Les objectifs"
+        ],
+        [
+          "00:30",
+          "Le produit : on additionne"
+        ],
+        [
+          "00:51",
+          "Le quotient : on soustrait"
+        ],
+        [
+          "01:10",
+          "La parenthèse : on multiplie"
+        ],
+        [
+          "01:32",
+          "L'exposant négatif"
+        ],
+        [
+          "01:55",
+          "Enchaîner les règles"
+        ],
+        [
+          "02:13",
+          "La notation scientifique"
+        ],
+        [
+          "02:38",
+          "Défi"
+        ],
+        [
+          "03:03",
+          "Correction"
+        ],
+        [
+          "03:43",
+          "Tu sais maintenant"
+        ]
       ],
       "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/puissances-2de",
-      "tags": ["maths", "seconde", "2de", "puissances", "notation scientifique", "lycée"]
+      "tags": [
+        "maths",
+        "seconde",
+        "2de",
+        "puissances",
+        "notation scientifique",
+        "lycée"
+      ]
     },
     {
       "id": "puissances-parenthese",
@@ -155,7 +300,130 @@
       "titre": "(7³)⁴ : on additionne ou on multiplie ?",
       "accroche": "Le réflexe est d'additionner. C'est faux : une parenthèse, ça multiplie.",
       "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/puissances-2de",
-      "tags": ["maths", "seconde", "puissances", "Shorts"]
+      "tags": [
+        "maths",
+        "seconde",
+        "puissances",
+        "Shorts",
+        "2de"
+      ]
+    },
+    {
+      "id": "identites-remarquables",
+      "notionId": "identites_remarquables_2de",
+      "type": "longue",
+      "fichier": "seconde/maths/paysage/fr/identites-remarquables/eleveai-maths-seconde-identites-remarquables.mp4",
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-identites-remarquables.png",
+      "titre": "Maths seconde · Les identités remarquables — EleveAI",
+      "accroche": "Trois égalités, et tout un chapitre. Mais l'erreur la plus fréquente du programme se cache dans la première : (3+4)² vaut 49, et non 25. Ce qui manque, c'est le double produit.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les identités remarquables"
+        ],
+        [
+          "00:10",
+          "Les objectifs"
+        ],
+        [
+          "00:31",
+          "Le carré d'une somme"
+        ],
+        [
+          "01:05",
+          "Le carré d'une différence"
+        ],
+        [
+          "01:32",
+          "La différence de deux carrés"
+        ],
+        [
+          "01:55",
+          "Développer ou factoriser"
+        ],
+        [
+          "02:19",
+          "99² de tête"
+        ],
+        [
+          "02:43",
+          "Défi"
+        ],
+        [
+          "03:03",
+          "Correction"
+        ],
+        [
+          "03:36",
+          "Tu sais maintenant"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/identites-remarquables-2de",
+      "tags": [
+        "maths",
+        "seconde",
+        "2de",
+        "identités remarquables",
+        "développer",
+        "factoriser",
+        "double produit",
+        "lycée"
+      ]
+    },
+    {
+      "id": "ir-double-produit",
+      "notionId": "identites_remarquables_2de",
+      "microId": "ir_carre_somme",
+      "type": "short",
+      "renvoie_vers": "identites-remarquables",
+      "fichier": "seconde/maths/shorts/fr/identites-remarquables/eleveai-maths-seconde-identites-remarquables-short-doubleproduit.mp4",
+      "titre": "Carré d'une somme : l'erreur la plus fréquente en maths",
+      "accroche": "(3+4)² vaut 49, pas 25. Ce qui manque, c'est le double produit 2ab — et un carré de somme a toujours TROIS termes.",
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/identites-remarquables-2de",
+      "tags": [
+        "maths",
+        "seconde",
+        "identités remarquables",
+        "double produit",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "ir-difference",
+      "notionId": "identites_remarquables_2de",
+      "microId": "ir_difference_carres",
+      "type": "short",
+      "renvoie_vers": "identites-remarquables",
+      "fichier": "seconde/maths/shorts/fr/identites-remarquables/eleveai-maths-seconde-identites-remarquables-short-difference.mp4",
+      "titre": "Comment factoriser une différence de deux carrés",
+      "accroche": "x² − 9 se factorise en (x−3)(x+3). Le geste : reconnaître deux carrés, et un signe MOINS entre eux.",
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/identites-remarquables-2de",
+      "tags": [
+        "maths",
+        "seconde",
+        "factoriser",
+        "différence de carrés",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "ir-calcul-mental",
+      "notionId": "identites_remarquables_2de",
+      "microId": "ir_calcul_mental",
+      "type": "short",
+      "renvoie_vers": "identites-remarquables",
+      "fichier": "seconde/maths/shorts/fr/identites-remarquables/eleveai-maths-seconde-identites-remarquables-short-calculmental.mp4",
+      "titre": "Calculer 99 au carré de tête, en 3 secondes",
+      "accroche": "L'astuce : écrire 99 comme 100 − 1, puis appliquer le carré d'une différence. 10 000 − 200 + 1 = 9 801.",
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/identites-remarquables-2de",
+      "tags": [
+        "maths",
+        "seconde",
+        "calcul mental",
+        "identités remarquables",
+        "astuce",
+        "Shorts"
+      ]
     }
   ]
 }

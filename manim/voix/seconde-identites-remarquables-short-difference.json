@@ -1,0 +1,8 @@
+{
+  "00-accroche": "x au carré moins 9. Comment on factorise ça ?",
+  "01-reconnaitre": "Le geste, c'est de RECONNAÎTRE. 9, c'est 3 au carré. Donc on a un carré, moins un autre carré.",
+  "02-formule": "Et il existe une identité pour ça : a au carré moins b au carré égale a moins b, fois a plus b.",
+  "03-appliquer": "Ici a vaut x, et b vaut 3. Donc x au carré moins 9 égale x moins 3, fois x plus 3.",
+  "04-piege": "Attention : ça ne marche QUE pour une différence. x au carré PLUS 9 ne se factorise pas. Le signe moins est la condition.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

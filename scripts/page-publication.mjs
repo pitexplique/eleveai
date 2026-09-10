@@ -1,7 +1,7 @@
 /**
  * page-publication.mjs
  *
- * Génère `manim/sorties/publication-seconde.html` — la page qu'on garde ouverte
+ * Génère `manim/sorties/publication.html` — la page qu'on garde ouverte
  * à côté de YouTube Studio pendant la mise en ligne : un bloc par vidéo, avec
  * son titre et sa description complète, et un bouton qui copie dans le
  * presse-papier.
@@ -11,8 +11,9 @@
  * bon titre, la bonne description et les bons chapitres pour la bonne vidéo,
  * huit fois de suite, sans se tromper de notion.
  *
- * La SOURCE reste `manim/sorties/manifeste-youtube.json` : on ne recopie jamais
- * un titre à la main, on regénère la page.
+ * DEUX SOURCES, jamais recopiées à la main : `manim/manifeste-youtube.json`
+ * (maths) et `manim/sorties/METADONNEES-YOUTUBE.json` (« La belle écriture »,
+ * dont seules les entrées qui ne sont pas « EN LIGNE » sont affichées).
  *
  * Usage : node scripts/page-publication.mjs
  */
@@ -29,6 +30,21 @@ const SORTIES = path.join(MANIM, "sorties");
 // SOURCE — des titres et des descriptions écrits à la main. Poussé là-bas, il
 // aurait disparu au premier changement de poste.
 const m = JSON.parse(fs.readFileSync(path.join(MANIM, "manifeste-youtube.json"), "utf-8"));
+
+/**
+ * ⭐ LA DEUXIÈME SÉRIE (09/09/2026) : « La belle écriture » a son propre
+ * manifeste, plus ancien et de forme différente — `METADONNEES-YOUTUBE.json`,
+ * avec un champ `etat` (« à publier » / « EN LIGNE ») que le manifeste des
+ * maths n'a pas. On ne l'unifie PAS : le convertir obligerait à retoucher 60
+ * entrées déjà éprouvées. On le lit tel quel et on n'affiche que ce qui reste
+ * à publier.
+ */
+const CHEMIN_ECRITURE = path.join(SORTIES, "METADONNEES-YOUTUBE.json");
+const ecriture = fs.existsSync(CHEMIN_ECRITURE)
+  ? JSON.parse(fs.readFileSync(CHEMIN_ECRITURE, "utf-8")).filter(
+      (v) => (v.etat || "").toUpperCase() !== "EN LIGNE",
+    )
+  : [];
 
 const echappe = (s) =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -95,12 +111,62 @@ ${cartes}
   })
   .join("\n");
 
+// ─── « La belle écriture » — groupée par lettre, droitier et gaucher côte à côte
+const parLettre = {};
+for (const v of ecriture) {
+  const cle = `${v.type === "chiffre" ? "chiffre" : "lettre"} ${v.glyphe}`;
+  (parLettre[cle] ||= []).push(v);
+}
+
+const blocsEcriture = Object.entries(parLettre)
+  .map(([cle, videos], iL) => {
+    const cartes = videos
+      .map((v, i) => {
+        const id = `e${iL}-${i}`;
+        const court = path.basename(v.fichier);
+        return `
+      <article class="video ${court.includes("portrait") ? "short" : "longue"}">
+        <header>
+          <span class="etiquette">${court.includes("portrait") ? "SHORT 9:16" : "PAYSAGE"}</span>
+          <span class="etiquette">${echappe(v.main || "")}</span>
+          <code class="fichier">${echappe(court)}</code>
+        </header>
+
+        <label>Titre</label>
+        <div class="champ">
+          <pre id="t-${id}">${echappe(v.titre)}</pre>
+          <button data-cible="t-${id}">copier</button>
+        </div>
+
+        <label>Description</label>
+        <div class="champ">
+          <pre id="d-${id}">${echappe(v.description)}</pre>
+          <button data-cible="d-${id}">copier</button>
+        </div>
+
+        <label>Tags</label>
+        <div class="champ">
+          <pre id="g-${id}">${echappe(v.tags || "")}</pre>
+          <button data-cible="g-${id}">copier</button>
+        </div>
+
+        <p class="rappel">Playlist : <strong>${echappe(v.playlist || "")}</strong></p>
+      </article>`;
+      })
+      .join("\n");
+    return `    <section>
+      <h2>${echappe(cle)}</h2>
+${cartes}
+    </section>`;
+  })
+  .join("\n");
+
 const html = `<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Publication YouTube — Maths 2de</title>
+<title>Publication YouTube — EleveAI</title>
 <style>
   :root { color-scheme: light dark; --fond:#0f1115; --carte:#171a21; --bord:#2a2f3a;
           --texte:#e8ecf3; --doux:#9aa4b6; --or:#ffd700; --bleu:#38bdf8; --vert:#00ff7f; }
@@ -110,6 +176,8 @@ const html = `<!doctype html>
   .page { max-width: 980px; margin: 0 auto; }
   h1 { font-size:1.65rem; margin:0 0 .3rem; color:var(--or); }
   .intro { color:var(--doux); margin:0 0 2rem; }
+  h1.serie { font-size:1.15rem; margin:3rem 0 .4rem; padding-top:1.4rem;
+             border-top:2px solid var(--bord); color:var(--or); }
   h2 { font-size:1rem; letter-spacing:.09em; text-transform:uppercase; color:var(--bleu);
        border-bottom:1px solid var(--bord); padding-bottom:.5rem; margin:2.5rem 0 1rem; }
   .video { background:var(--carte); border:1px solid var(--bord); border-radius:12px;
@@ -137,14 +205,31 @@ const html = `<!doctype html>
 </head>
 <body>
 <div class="page">
-  <h1>Publication YouTube — ${echappe(m.playlist)}</h1>
+  <h1>Publication YouTube</h1>
   <p class="intro">
-    ${m.videos.length} vidéos prêtes. Publier la vidéo <strong>paysage</strong> d'une notion
-    avant ses shorts : leur description renvoie vers elle.
-    Page générée depuis <code>manim/manifeste-youtube.json</code> —
-    corriger un titre se fait là-bas, puis <code>node scripts/page-publication.mjs</code>.
+    <strong>${m.videos.length}</strong> vidéos de maths 2de et
+    <strong>${ecriture.length}</strong> d'écriture restent à publier.
+    Corriger un titre se fait dans les manifestes
+    (<code>manim/manifeste-youtube.json</code>,
+    <code>manim/sorties/METADONNEES-YOUTUBE.json</code>), puis
+    <code>node scripts/page-publication.mjs</code> — jamais dans cette page,
+    qui est régénérée.
+  </p>
+
+  <h1 class="serie">${echappe(m.playlist)} — ${m.videos.length} vidéos</h1>
+  <p class="intro">
+    Publier la vidéo <strong>paysage</strong> d'une notion AVANT ses shorts :
+    leur description renvoie vers elle.
   </p>
 ${blocs}
+
+  <h1 class="serie">La belle écriture — ${ecriture.length} à publier</h1>
+  <p class="intro">
+    Les <em>EN LIGNE</em> du manifeste sont masquées. Après publication, passer
+    leur <code>etat</code> à <code>EN LIGNE</code> dans
+    <code>METADONNEES-YOUTUBE.json</code> pour qu'elles disparaissent d'ici.
+  </p>
+${blocsEcriture}
 </div>
 <script>
   document.addEventListener("click", async (e) => {
@@ -163,7 +248,7 @@ ${blocs}
 </html>
 `;
 
-const sortie = path.join(SORTIES, "publication-seconde.html");
+const sortie = path.join(SORTIES, "publication.html");
 fs.writeFileSync(sortie, html, "utf-8");
 console.log(sortie);
-console.log(`${m.videos.length} vidéos, ${Object.keys(parNotion).length} notions.`);
+console.log(`maths 2de : ${m.videos.length} vidéos · écriture : ${ecriture.length} à publier.`);

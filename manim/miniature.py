@@ -1348,7 +1348,21 @@ def acc_puissances_2de(d):
     d.text((300, 462), "3 × 4, pas 3 + 4", font=police("arialbd.ttf", 44), fill=ROUGE)
 
 
+def acc_identites_remarquables(d):
+    """Le contre-exemple chiffré : l'élève reconnait sa propre faute."""
+    f = police("ariblk.ttf", 46)
+    d.text((300, 340), "(3+4)² = 49", font=f, fill=VERT)
+    d.text((300, 404), "3² + 4² = 25", font=f, fill=ROUGE)
+    d.text((300, 476), "il manque 2ab", font=police("arialbd.ttf", 40), fill=NAVY)
+
+
 NOTIONS = {
+    "eleveai-maths-seconde-identites-remarquables": {
+        "badge": "MATHS · SECONDE", "titre": ["IDENTITÉS", "REMARQUABLES"], "taille": 62,
+        "sous": "le double produit qu'on oublie",
+        "accroche": acc_identites_remarquables,
+        "dossier": "seconde/maths/fr",
+    },
     "eleveai-maths-seconde-puissances": {
         "badge": "MATHS · SECONDE", "titre": ["LES", "PUISSANCES"], "taille": 78,
         "sous": "quatre règles, une seule condition",

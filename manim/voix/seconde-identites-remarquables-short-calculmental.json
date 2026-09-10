@@ -1,0 +1,8 @@
+{
+  "00-accroche": "99 au carré, de tête. En trois secondes.",
+  "01-astuce": "L'astuce, c'est d'écrire 99 comme 100 moins 1. Un nombre rond, moins un tout petit.",
+  "02-formule": "Et d'utiliser le carré d'une différence : a moins b au carré égale a au carré, moins deux a b, plus b au carré.",
+  "03-calcul": "Donc : 100 au carré, ça fait 10 000. Moins deux fois 100 fois 1, ça fait moins 200. Plus 1. Résultat : 9 801.",
+  "04-autre": "Ça marche pour tous les nombres proches d'un nombre rond. 101 au carré ? 10 000, plus 200, plus 1 : 10 201.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}
