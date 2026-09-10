@@ -876,6 +876,25 @@ export default function EntreeMatrice({
     !resultat.lecture.intention &&
     !matiereChoisie;
 
+  /**
+   * ⭐⭐ 10/09/2026 — LA PORTE DE LA BARRE NOIRE (Frédéric, 09/09 : « quand je
+   * tape pourcentage en 6e, pas de lien dans la partie noire »).
+   *
+   * Mesuré au DOM avant de corriger : le bloc `[role="status"]` contenait
+   * `liens: []`. La barre nommait la bonne notion — « ↓ Pourcentages. » — en
+   * TEXTE MORT. C'est le pire endroit pour ça : la personne vient de réussir le
+   * plus dur (le moteur a compris ce qu'elle cherchait), on le lui annonce, et
+   * on la renvoie chercher elle-même dans les cartes.
+   *
+   * ⚠️ RIEN DE NEUF N'EST CALCULÉ, et c'est la garantie qu'on n'invente pas une
+   * destination : `ciblee` est le drapeau que `moteur.ts` pose déjà sur la
+   * recommandation dont l'URL vise la notion — la même que la carte du dessous
+   * affiche sous « s'ouvre sur … ». Deux chemins, une seule adresse. Si aucune
+   * recommandation n'est ciblée, il n'y a pas de lien : on préfère du texte à
+   * une porte qui mène ailleurs que ce qu'elle annonce.
+   */
+  const cibleBarre = resultat?.recommandations.find((r) => r.ciblee) ?? null;
+
   const lancer = useCallback(
     (
       texte: string,
@@ -2016,15 +2035,57 @@ export default function EntreeMatrice({
                     paraît : la flèche dit « en dessous », la notion dit de quoi
                     ça parle, et l'aveu — le seul moment où il faut nommer la
                     lecture — garde sa phrase entière dans `rienCompris`. */}
-                {rienCompris
-                  ? `Je n'ai pas bien compris — voici par où ${
-                      tutoie ? "tu peux" : "vous pouvez"
-                    } commencer.`
-                  : lectureCompris
-                    ? `${lectureCompris}.`
-                    : tutoie
-                      ? "Voici ce qu'on te propose."
-                      : "Voici ce qu'on vous propose."}
+                {/* ⭐⭐ LA NOTION DEVIENT UNE PORTE (10/09/2026). Voir la note de
+                    `cibleBarre` plus haut pour le pourquoi et pour l'origine de
+                    l'adresse. Ce qui se décide ICI, c'est la FORME.
+                    ⚠️ LA FLÈCHE RESTE « ↓ », ET ELLE NE MENT PAS. Elle a été
+                    ajoutée le 24/08 pour répondre à « les cards bougent mais ça
+                    ne se voit pas » : elle désigne la liste, pas le lien. Les
+                    cartes changent toujours, et le lien est un raccourci EN
+                    PLUS — le remplacer par « → » retirerait l'information au
+                    profit de l'autre au lieu de les additionner.
+                    ⚠️ SOULIGNÉ, et pas seulement plus clair. Sur un fond noir
+                    où tout le texte est déjà blanc, la couleur seule ne dit
+                    rien à qui distingue mal les contrastes ; le soulignement,
+                    lui, se voit toujours (WCAG 1.4.1, « la couleur n'est pas le
+                    seul indice »).
+                    ⚠️ ZÉRO SIGNE DE PLUS. Le libellé de notion est exactement
+                    celui d'avant, et il a été choisi au signe près en 375 px
+                    (voir la note du dessus) : y ajouter « commencer » ou une
+                    flèche ferait remonter la barre d'une ligne, soit reprendre
+                    ce que trois passes ont passé à gagner. */}
+                {rienCompris ? (
+                  `Je n'ai pas bien compris — voici par où ${
+                    tutoie ? "tu peux" : "vous pouvez"
+                  } commencer.`
+                ) : lectureCompris ? (
+                  cibleBarre ? (
+                    <>
+                      <Link
+                        href={`${cibleBarre.url}${
+                          cibleBarre.url.includes("?") ? "&" : "?"
+                        }from=ia`}
+                        prefetch={false}
+                        onClick={() =>
+                          track("ia_barre", {
+                            id: cibleBarre.ressource.id,
+                            profil: profil ?? "inconnu",
+                          })
+                        }
+                        className="font-semibold text-[#f5fafb] underline underline-offset-2 transition hover:text-white"
+                      >
+                        {lectureCompris}
+                      </Link>
+                      .
+                    </>
+                  ) : (
+                    `${lectureCompris}.`
+                  )
+                ) : tutoie ? (
+                  "Voici ce qu'on te propose."
+                ) : (
+                  "Voici ce qu'on vous propose."
+                )}
               </p>
             </div>
             <button
