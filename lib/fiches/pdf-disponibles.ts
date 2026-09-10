@@ -64,6 +64,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "equations-et-inequations-du-premier-degre-seconde-cours-exercices-corriges.pdf",
   "etre-et-avoir-au-present-au-cp-2026-2027-cours-exercices-corriges.pdf",
   "expressions-litterales-4e-cours-exercices-corriges.pdf",
+  "expressions-litterales-seconde-cours-exercices-corriges.pdf",
   "factorisation-4e-cours-exercices-corriges.pdf",
   "familles-de-mots-et-contraires-en-cm1-2026-2027-cours-exercices-corriges.pdf",
   "figures-planes-cm2-cours-exercices-corriges.pdf",

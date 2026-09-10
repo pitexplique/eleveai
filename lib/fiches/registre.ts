@@ -546,6 +546,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les fonctions de référence",
     resume: "Les cinq fonctions par coeur : leur domaine, leurs variations, leurs courbes — et pourquoi moins un n a pas d image par la racine.",
   },
+  "maths/seconde/expressions-litterales-2de": {
+    titre: "Les expressions littérales",
+    resume: "Traduire, reduire, substituer et retourner une formule — et pourquoi un contre-exemple refute mais ne prouve jamais.",
+  },
   "maths/seconde/fonctions-affines-2de": {
     titre: "Les fonctions affines",
     resume: "a est la pente, b le point de depart : lecture graphique, deux points suffisent, et le signe de a decide de tout.",

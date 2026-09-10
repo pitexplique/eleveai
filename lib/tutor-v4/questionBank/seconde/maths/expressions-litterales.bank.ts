@@ -825,4 +825,335 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* ================= RENFORTS DU 10/09/2026 =================
+   *
+   * ⛔ LA NOTION LA PLUS MAIGRE DE LA SECONDE : 272 énoncés, contre 1 094 pour
+   * les affines et 2 720 pour les vecteurs. Les trois micros passaient les
+   * seuils, avec deux gabarits chacun — et deux GESTES DU PROGRAMME manquaient
+   * entièrement :
+   *
+   * 1. ⛔ LE PROGRAMME DE CALCUL. Un seul item figé, alors que c'est l'exercice
+   *    type du chapitre : on choisit un nombre, on enchaîne des opérations, et
+   *    on démontre que le résultat suit une règle — quelle que soit la valeur
+   *    de départ. C'est là que l'expression littérale montre à quoi elle sert.
+   *
+   * 2. ⛔ PROUVER OU RÉFUTER UNE ÉGALITÉ. Zéro item. Or c'est le geste logique
+   *    du programme : une égalité vraie POUR TOUT x se démontre en réduisant
+   *    les deux membres ; une égalité fausse se réfute par UN SEUL
+   *    CONTRE-EXEMPLE. Les deux moitiés sont asymétriques, et c'est ce que
+   *    l'élève doit comprendre.
+   *
+   * ⚠️ Et la substitution ne se généra it qu'en `ax + b` : jamais de carré, jamais
+   * de valeur négative — alors que $x^2$ avec $x = -2$ est LE piège de signe.
+   */
+
+  {
+    kind: "template",
+    id: "seconde_expr_programme_calcul",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "expressions_litterales_2de",
+    microId: "expr_modeliser",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "On traduit chaque étape l'une après l'autre, en gardant $x$ comme nombre de départ.",
+    tags: ["seconde", "maths", "expressions", "programme_calcul", "template"],
+    generate: () => {
+      const k = randomInt(2, 5);
+      const b = randomInt(2, 9);
+      const c = randomInt(1, 6);
+      // « multiplier par k, ajouter b, puis retirer c » -> kx + (b - c)
+      const d = b - c;
+      const ecrire = (p: number, q: number) =>
+        q === 0 ? `$${p}x$` : `$${p}x ${q < 0 ? "-" : "+"} ${Math.abs(q)}$`;
+      const correct = ecrire(k, d);
+      const choices = makeChoices(correct, [
+        ecrire(k, b + c),
+        ecrire(k, b),
+        ecrire(k + b, -c),
+        ecrire(k, c - b),
+      ]);
+      return {
+        text:
+          `Programme de calcul : « choisir un nombre, le multiplier par $${k}$, ` +
+          `ajouter $${b}$, puis retirer $${c}$ ». ` +
+          `Si le nombre choisi est $x$, quelle expression donne le résultat ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un programme de calcul se traduit ÉTAPE PAR ÉTAPE, en gardant la lettre du nombre choisi.",
+          "On écrit ce que devient $x$ après chaque instruction, sans jamais sauter d'étape.",
+          `Multiplier par $${k}$ : $${k}x$. Ajouter $${b}$ : $${k}x + ${b}$. ` +
+            `Retirer $${c}$ : $${k}x + ${b} - ${c}$, soit ${correct}.`,
+          `Le résultat s'écrit ${correct}. ⭐ Une seule expression décrit le programme pour TOUTES les valeurs de départ.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_expr_programme_conclusion",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "expressions_litterales_2de",
+    microId: "expr_modeliser",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Écrire l'expression du programme, la réduire, et regarder ce qu'il reste.",
+    tags: ["seconde", "maths", "expressions", "programme_calcul", "raisonnement", "template"],
+    generate: () => {
+      // « ajouter a, multiplier par k, retirer k*a » -> k(x+a) - ka = kx.
+      // Le programme rend donc TOUJOURS k fois le nombre de depart.
+      const k = randomInt(2, 5);
+      const a = randomInt(2, 8);
+      const correct = `on obtient toujours $${k}$ fois le nombre choisi`;
+      const choices = makeChoices(correct, [
+        `on obtient toujours le nombre choisi augmenté de $${k}$`,
+        `on obtient toujours $${k * a}$`,
+        "le résultat dépend du nombre choisi, sans règle",
+        `on obtient toujours $${k}$ fois le nombre choisi, augmenté de $${a}$`,
+      ]);
+      return {
+        text:
+          `Programme : « choisir un nombre, ajouter $${a}$, multiplier par $${k}$, ` +
+          `puis retirer $${k * a}$ ». Que peut-on affirmer du résultat ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Pour démontrer qu'un programme suit une règle, on ne teste pas des exemples : on le traduit en expression littérale et on réduit.",
+          "Quelques essais font DEVINER la règle ; seul le calcul littéral la DÉMONTRE, parce que $x$ représente n'importe quel nombre.",
+          `Avec $x$ au départ : $x + ${a}$, puis $${k}(x + ${a}) = ${k}x + ${k * a}$, ` +
+            `puis on retire $${k * a}$ : il reste $${k}x$.`,
+          `On obtient toujours $${k}x$, c'est-à-dire $${k}$ fois le nombre choisi — quel que soit ce nombre.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_expr_contre_exemple",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "expressions_litterales_2de",
+    microId: "expr_reduire_substituer",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Pour montrer qu'une égalité est fausse, une seule valeur de $x$ suffit.",
+    tags: ["seconde", "maths", "expressions", "contre_exemple", "raisonnement", "template"],
+    generate: () => {
+      // (x + a)^2 = x^2 + a^2 est FAUSSE : il manque le double produit.
+      // On demande la valeur qui le prouve, et 0 ne le prouve PAS.
+      const a = randomInt(2, 6);
+      const v = randomInt(1, 5);
+      const correct = `$x = ${v}$ : les deux membres ne donnent pas le même nombre`;
+      const choices = makeChoices(correct, [
+        "$x = 0$ : les deux membres donnent le même nombre",
+        "aucune valeur ne peut le montrer, l'égalité est vraie",
+        "il faudrait tester toutes les valeurs de $x$",
+      ]);
+      return {
+        text:
+          `On veut montrer que l'égalité $(x + ${a})^2 = x^2 + ${a * a}$ est FAUSSE. ` +
+          `Quelle démarche convient ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une égalité annoncée « pour tout $x$ » est fausse dès qu'UNE SEULE valeur la met en défaut.",
+          "On cherche donc un contre-exemple : une valeur de $x$ pour laquelle les deux membres diffèrent.",
+          `Avec $x = ${v}$ : à gauche $(${v} + ${a})^2 = ${(v + a) ** 2}$, à droite $${v * v} + ${a * a} = ${v * v + a * a}$. ` +
+            `Les deux nombres diffèrent. ⚠️ $x = 0$ n'aurait rien prouvé : les deux membres y valent $${a * a}$.`,
+          "Un seul contre-exemple suffit à réfuter. ⛔ En revanche, aucun nombre d'exemples ne suffirait à DÉMONTRER une égalité : pour cela, il faut le calcul littéral."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_expr_prouver_egalite",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "expressions_litterales_2de",
+    microId: "expr_reduire_substituer",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "On réduit les deux membres et on compare ce qu'on obtient.",
+    tags: ["seconde", "maths", "expressions", "preuve", "raisonnement", "template"],
+    generate: () => {
+      const a = randomInt(2, 6);
+      const b = randomInt(2, 7);
+      // a(x + b) = ax + ab : VRAIE pour tout x. Une fois sur deux on propose la
+      // version FAUSSE, ou le second terme est ax + b.
+      const vraie = Math.random() < 0.5;
+      const droite = vraie ? `${a}x + ${a * b}` : `${a}x + ${b}`;
+      const correct = vraie
+        ? "vraie pour tout $x$, et le calcul littéral le démontre"
+        : "fausse : un contre-exemple suffit à le montrer";
+      const choices = makeChoices(correct, [
+        vraie
+          ? "fausse : un contre-exemple suffit à le montrer"
+          : "vraie pour tout $x$, et le calcul littéral le démontre",
+        "vraie seulement pour $x = 0$",
+        "on ne peut pas savoir sans connaître $x$",
+      ]);
+      return {
+        text: `L'égalité $${a}(x + ${b}) = ${droite}$ est-elle vraie pour tout $x$ ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une égalité littérale est vraie « pour tout $x$ » quand les deux membres se réduisent à la même expression.",
+          "On développe le membre de gauche, puis on compare terme à terme.",
+          `$${a}(x + ${b}) = ${a}x + ${a * b}$. ` +
+            (vraie
+              ? `C'est exactement le membre de droite : l'égalité tient pour tout $x$.`
+              : `Or à droite on lit $${a}x + ${b}$, et $${a * b} \\neq ${b}$ : les deux membres diffèrent.`),
+          vraie
+            ? "Vraie pour tout $x$. ⭐ La distributivité multiplie le $b$ par $a$ lui aussi — c'est ce que l'écriture littérale rend visible."
+            : `Fausse. ⛔ L'erreur est d'oublier de multiplier $${b}$ par $${a}$. Un contre-exemple, par exemple $x = 0$, donne $${a * b}$ contre $${b}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_expr_reduire_long",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "expressions_litterales_2de",
+    microId: "expr_reduire_substituer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On regroupe d'un côté les termes en $x$, de l'autre les nombres seuls.",
+    tags: ["seconde", "maths", "expressions", "reduire", "template"],
+    generate: () => {
+      const a = randomInt(2, 7);
+      const b = randomInt(1, 9);
+      const c = randomInt(1, 6);
+      const d = randomInt(1, 8);
+      const x = a - c;
+      const n = b + d;
+      // ⛔ ON N'ÉCRIT NI « 1x » NI « -1x ». Le coefficient 1 ne se note pas, et
+      // le coefficient -1 s'écrit « -x ». Repéré en relisant les tirages : le
+      // gabarit produisait « $-1x + 8$ », qui n'est pas une écriture de
+      // mathématicien — et un élève qui recopie ça se le verra corriger.
+      const terme = (p: number) => (p === 1 ? "x" : p === -1 ? "-x" : `${p}x`);
+      const ecrire = (p: number, q: number) =>
+        p === 0 ? `$${q}$` : `$${terme(p)} ${q < 0 ? "-" : "+"} ${Math.abs(q)}$`;
+      const correct = ecrire(x, n);
+      const choices = makeChoices(correct, [
+        ecrire(a + c, n),
+        ecrire(x, b - d),
+        ecrire(a - c, b - d),
+        `$${a + b - c + d}x$`,
+      ]);
+      return {
+        text: `Réduis l'expression $${a}x + ${b} - ${c}x + ${d}$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Réduire, c'est regrouper les termes SEMBLABLES : les $x$ avec les $x$, les nombres avec les nombres.",
+          "On additionne les coefficients des termes en $x$, puis les nombres seuls, séparément.",
+          `Termes en $x$ : $${a}x - ${c}x = ${x}x$. Nombres : $${b} + ${d} = ${n}$.`,
+          `${correct}. ⛔ On n'additionne JAMAIS un terme en $x$ avec un nombre seul : ils ne sont pas semblables.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_expr_substituer_carre",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "expressions_litterales_2de",
+    microId: "expr_reduire_substituer",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "On met la valeur ENTRE PARENTHÈSES avant de l'élever au carré.",
+    tags: ["seconde", "maths", "expressions", "substituer", "template"],
+    generate: () => {
+      // ⛔ La valeur est NEGATIVE une fois sur deux : c'est le piege de signe du
+      // chapitre, et le gabarit d'origine ne tirait que des positifs.
+      const v = [-4, -3, -2, -1, 2, 3, 4][randomInt(0, 6)];
+      const k = randomInt(2, 5);
+      const val = v * v + k * v;
+      const correct = `$${val}$`;
+      const choices = makeChoices(correct, [
+        `$${-(v * v) + k * v}$`,
+        `$${v * v - k * v}$`,
+        `$${2 * v + k * v}$`,
+        `$${v * v + k}$`,
+      ]);
+      return {
+        text: `Que vaut l'expression $x^2 + ${k}x$ lorsque $x = ${v}$ ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Substituer, c'est remplacer la lettre par sa valeur — en gardant les parenthèses.",
+          `On écrit $(${v})^2 + ${k} \\times (${v})$, et on calcule dans l'ordre.`,
+          `$(${v})^2 = ${v * v}$` +
+            (v < 0 ? " — un carré est POSITIF, même pour un nombre négatif" : "") +
+            `, et $${k} \\times (${v}) = ${k * v}$. Total : $${val}$.`,
+          `L'expression vaut $${val}$.` +
+            (v < 0
+              ? " ⛔ Sans les parenthèses, on écrirait $-" + String(v * v) + "$ au lieu de $" + String(v * v) + "$."
+              : "")
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_expr_modeliser_aire",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "expressions_litterales_2de",
+    microId: "expr_modeliser",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "L'aire d'un rectangle est le produit de ses deux dimensions — développer vient après.",
+    tags: ["seconde", "maths", "expressions", "aire", "template"],
+    generate: () => {
+      const a = randomInt(2, 7);
+      const correct = `$x^2 + ${a}x$`;
+      const choices = makeChoices(correct, [
+        `$x^2 + ${a}$`,
+        `$2x + ${a}$`,
+        `$${a}x$`,
+        `$2x + ${2 * a}$`,
+      ]);
+      return {
+        text:
+          `Un rectangle a pour largeur $x$ et pour longueur $x + ${a}$. ` +
+          `Quelle expression donne son AIRE, une fois développée ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'aire d'un rectangle est le produit de sa longueur par sa largeur.",
+          "On écrit d'abord le produit, puis on développe.",
+          `Aire $= x(x + ${a}) = x^2 + ${a}x$.`,
+          `L'aire vaut $x^2 + ${a}x$. ⛔ Le piège est de répondre $2x + ${2 * a}$, qui est le PÉRIMÈTRE : lire l'énoncé décide, pas l'habitude.`
+        ),
+      };
+    },
+  },
 ];
