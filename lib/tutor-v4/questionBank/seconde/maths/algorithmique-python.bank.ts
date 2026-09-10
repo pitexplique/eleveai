@@ -23,6 +23,25 @@ function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+/**
+ * Évalue une comparaison Python, pour que l'explication dise `True` ou `False`
+ * sans que personne ait à le calculer de tête.
+ *
+ * ⚠️ Elle existe parce qu'une explication qui se trompe est PIRE qu'une
+ * explication absente : l'élève la croit.
+ */
+function evaluerComparaison(a: number, op: string, b: number): boolean {
+  switch (op) {
+    case "<": return a < b;
+    case ">": return a > b;
+    case "==": return a === b;
+    case "!=": return a !== b;
+    case "<=": return a <= b;
+    case ">=": return a >= b;
+    default: return false;
+  }
+}
+
 function exp(definition: string, methode: string, calcul: string, conclusion: string) {
   return (
     `Définition : ${definition}\n\n` +
@@ -1454,6 +1473,387 @@ export const algorithmiquePythonBank: TutorBankItemV4[] = [
           `$\\dfrac{${succes}}{${total}}$.`,
           `$= ${fStr}$.`,
           `La fréquence estimée est $${fStr}$.`
+        ),
+      };
+    },
+  },
+
+  /* ============== RENFORTS DU 10/09/2026 ==============
+   *
+   * ⛔ MESURE QUI LES A DECIDES. Onze gabarits pour sept micros, et TROIS micros
+   * n'en avaient qu'UN SEUL :
+   *     python_type_variable   1 gabarit ·  4 enonces generes
+   *     python_condition       1 gabarit
+   *     python_simulation      1 gabarit
+   *     python_boucle_non_bornee 2 gabarits · 9 enonces
+   * Un seul gabarit, c'est une seule FORME de question : l'eleve la reconnait au
+   * deuxieme passage et repond sans lire.
+   *
+   * ⛔ ET DEUX MANQUES DE FOND, comptes dans le fichier entier :
+   *   — le MODULO n'apparaissait pas une seule fois, alors que
+   *     `if n % 2 == 0` est le test de parite de base de la seconde ;
+   *   — le type d'une DIVISION n'etait jamais interroge, alors que `6 / 3` rend
+   *     `2.0`, un flottant, en Python 3. C'est le piege de type le plus courant.
+   *
+   * ⭐ TOUS LES GABARITS QUI TRACENT UN PROGRAMME CALCULENT LEUR REPONSE EN
+   * EXECUTANT LA BOUCLE, jamais par une formule fermee. Un `ceil(log2(n))` ecrit
+   * a la main se trompe d'une unite sur les puissances exactes ; la boucle, non.
+   *
+   * ⚠️ ET LES TROIS GABARITS DE TYPE RENDENT TOUJOURS LA MEME REPONSE — float,
+   * int, bool. C'est VOULU, ce n'est pas le defaut de « faux generateur » :
+   * chacun enseigne UNE regle et la martele sur des nombres qui changent
+   * (« / rend toujours un flottant »). Le gabarit qui fait VARIER la reponse
+   * existe deja a cote — `seconde_py_type_tpl_1`, qui tire parmi quatre
+   * litteraux. Les uns drillent, l'autre teste. Ne pas les uniformiser.
+   */
+
+  {
+    kind: "template",
+    id: "seconde_py_type_tpl_division",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "algorithmique_python_2de",
+    microId: "python_type_variable",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "En Python 3, `/` rend TOUJOURS un flottant, même quand la division tombe juste.",
+    tags: ["seconde", "maths", "python", "type", "template"],
+    generate: () => {
+      // ⭐ Une fois sur deux la division TOMBE JUSTE : c'est precisement le cas
+      // ou l'eleve repond « int », et c'est le piege que ce gabarit existe pour
+      // poser. 6 / 3 vaut 2.0, pas 2.
+      const juste = Math.random() < 0.5;
+      const b = randomInt(2, 6);
+      const a = juste ? b * randomInt(2, 6) : b * randomInt(2, 6) + 1;
+      const valeur = juste ? `${a / b}.0` : (a / b).toFixed(4).replace(/0+$/, "");
+      const correct = "un flottant (float)";
+      const choices = [
+        "un flottant (float)",
+        "un entier (int)",
+        "une chaîne (str)",
+        "un booléen (bool)",
+      ];
+      return {
+        text: `Quel est le type de \`${a} / ${b}\` en Python ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "En Python 3, l'opérateur `/` est la division DÉCIMALE : son résultat est toujours un flottant.",
+          "On ne regarde pas si le calcul tombe juste, on regarde l'OPÉRATEUR.",
+          juste
+            ? `\`${a} / ${b}\` vaut \`${valeur}\` — et non \`${a / b}\`. Le point zéro est là pour dire le type.`
+            : `\`${a} / ${b}\` vaut environ \`${valeur}\`.`,
+          "C'est un flottant (float). ⛔ Pour obtenir un entier, il faut la division entière `//`."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_py_type_tpl_entiere",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "algorithmique_python_2de",
+    microId: "python_type_variable",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "`//` garde le quotient entier, `%` garde le reste : deux entiers.",
+    tags: ["seconde", "maths", "python", "type", "modulo", "template"],
+    generate: () => {
+      const b = randomInt(2, 9);
+      const a = randomInt(10, 60);
+      const modulo = Math.random() < 0.5;
+      const op = modulo ? "%" : "//";
+      const valeur = modulo ? a % b : Math.floor(a / b);
+      const correct = "un entier (int)";
+      const choices = [
+        "un entier (int)",
+        "un flottant (float)",
+        "une chaîne (str)",
+        "un booléen (bool)",
+      ];
+      return {
+        text: `Quel est le type de \`${a} ${op} ${b}\` en Python ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          modulo
+            ? "`%` donne le RESTE d'une division euclidienne."
+            : "`//` donne le QUOTIENT entier d'une division euclidienne.",
+          "Ces deux opérateurs travaillent sur des entiers et rendent un entier.",
+          `\`${a} ${op} ${b}\` vaut \`${valeur}\`, sans virgule.`,
+          "C'est un entier (int). ⚠️ C'est `/` qui rend un flottant, pas ceux-là."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_py_type_tpl_test",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "algorithmique_python_2de",
+    microId: "python_type_variable",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une comparaison ne rend pas un nombre : elle rend une réponse à une question.",
+    tags: ["seconde", "maths", "python", "type", "template"],
+    generate: () => {
+      const a = randomInt(1, 20);
+      const b = randomInt(1, 20);
+      const ops = ["<", ">", "==", "!=", "<=", ">="];
+      const op = ops[randomInt(0, ops.length - 1)];
+      const correct = "un booléen (bool)";
+      const choices = [
+        "un booléen (bool)",
+        "un entier (int)",
+        "un flottant (float)",
+        "une chaîne (str)",
+      ];
+      return {
+        text: `Quel est le type de \`${a} ${op} ${b}\` en Python ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une comparaison est un TEST : elle répond vrai ou faux.",
+          "Le résultat est donc `True` ou `False`, les deux seules valeurs du type booléen.",
+          `\`${a} ${op} ${b}\` s'évalue en \`${evaluerComparaison(a, op, b) ? "True" : "False"}\`.`,
+          "C'est un booléen (bool) — et c'est ce type-là que `if` attend."
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_py_cond_tpl_parite",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "algorithmique_python_2de",
+    microId: "python_condition",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "`n % 2` vaut 0 quand n est pair, 1 quand il est impair.",
+    tags: ["seconde", "maths", "python", "condition", "modulo", "template"],
+    generate: () => {
+      const n = randomInt(10, 99);
+      const pair = n % 2 === 0;
+      const correct = pair ? "pair" : "impair";
+      return {
+        text:
+          `Avec \`n = ${n}\`, qu'affiche ce code ?\n` +
+          "`if n % 2 == 0:` / `  print(\"pair\")` / `else:` / `  print(\"impair\")`",
+        format: "qcm",
+        choices: ["pair", "impair", "0", "rien"],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "`%` donne le reste de la division par 2 : c'est le test de parité.",
+          "Un nombre est pair si ce reste vaut 0.",
+          `${n} % 2 = ${n % 2}, donc la condition est ${pair ? "VRAIE" : "FAUSSE"}.`,
+          `Le programme affiche « ${correct} ».`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_py_cond_tpl_elif",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "algorithmique_python_2de",
+    microId: "python_condition",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Les tests se lisent DANS L'ORDRE, et on s'arrête au premier qui est vrai.",
+    tags: ["seconde", "maths", "python", "condition", "template"],
+    generate: () => {
+      const note = randomInt(0, 20);
+      // ⚠️ Les seuils sont FIXES et le tirage porte sur la note : c'est ce qui
+      // fait tomber les trois branches, chacune avec sa probabilite.
+      const correct = note >= 16 ? "tres bien" : note >= 10 ? "admis" : "a revoir";
+      return {
+        text:
+          `Avec \`note = ${note}\`, qu'affiche ce code ?\n` +
+          "`if note >= 16:` / `  print(\"tres bien\")` / `elif note >= 10:` / " +
+          "`  print(\"admis\")` / `else:` / `  print(\"a revoir\")`",
+        format: "qcm",
+        choices: ["tres bien", "admis", "a revoir", "les trois"],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "`elif` n'est testé QUE si le `if` précédent est faux.",
+          "On descend les tests dans l'ordre, et on exécute le bloc du PREMIER qui est vrai — puis on sort.",
+          note >= 16
+            ? `${note} ≥ 16 : le premier test suffit, les suivants ne sont jamais évalués.`
+            : note >= 10
+              ? `${note} < 16, donc on passe au deuxième test ; ${note} ≥ 10, il est vrai.`
+              : `${note} < 16 et ${note} < 10 : les deux tests échouent, c'est le bloc final qui s'exécute.`,
+          `Le programme affiche « ${correct} ». ⛔ Un seul bloc s'exécute, jamais plusieurs.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_py_boucle_w_tpl_double",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "algorithmique_python_2de",
+    microId: "python_boucle_non_bornee",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "On ne peut pas savoir d'avance combien de tours : il faut les compter.",
+    tags: ["seconde", "maths", "python", "while", "template"],
+    generate: () => {
+      // ⚠️ Quinze seuils et non cinq : mesure sur 400 tirages, la premiere
+      // version ne produisait que CINQ enonces distincts.
+      const seuil = [
+        30, 50, 60, 80, 100, 120, 150, 200, 250, 300, 400, 500, 600, 750, 1000,
+      ][randomInt(0, 14)];
+      // ⭐ ON EXECUTE LA BOUCLE POUR CONNAITRE LA REPONSE. Une formule fermee en
+      // logarithme se trompe d'une unite sur les puissances exactes de 2.
+      let x = 1;
+      let c = 0;
+      while (x < seuil) {
+        x = x * 2;
+        c += 1;
+      }
+      return {
+        text:
+          `Que vaut c à la fin ?\n` +
+          `\`x = 1\` / \`c = 0\` / \`while x < ${seuil}:\` / \`  x = x * 2\` / \`  c = c + 1\``,
+        format: "short",
+        expected: [String(c)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Une boucle `while` répète tant que sa condition reste vraie : le nombre de tours n'est pas donné, il se compte.",
+          "On suit x et c tour après tour, jusqu'à ce que la condition devienne fausse.",
+          `x double à chaque tour : 1, 2, 4, 8… Il faut ${c} doublements pour atteindre ou dépasser ${seuil} (x vaut alors ${x}).`,
+          `c vaut ${c}. ⭐ C'est exactement ce que compte un algorithme de dichotomie.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_py_boucle_w_tpl_retrait",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "algorithmique_python_2de",
+    microId: "python_boucle_non_bornee",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Retirer p tant qu'on peut, c'est une division euclidienne déguisée.",
+    tags: ["seconde", "maths", "python", "while", "template"],
+    generate: () => {
+      const p = randomInt(3, 9);
+      const n0 = randomInt(20, 80);
+      let n = n0;
+      let c = 0;
+      while (n >= p) {
+        n = n - p;
+        c += 1;
+      }
+      return {
+        text:
+          `Que vaut c à la fin ?\n` +
+          `\`n = ${n0}\` / \`c = 0\` / \`while n >= ${p}:\` / \`  n = n - ${p}\` / \`  c = c + 1\``,
+        format: "short",
+        expected: [String(c)],
+        comparator: "number_equal",
+        explanation: exp(
+          "La boucle retire p tant que c'est possible, et compte combien de fois.",
+          "C'est la division euclidienne écrite en algorithme : le compteur donne le quotient, ce qui reste dans n donne le reste.",
+          `${n0} = ${p} × ${c} + ${n}, donc la boucle tourne ${c} fois et n finit à ${n}.`,
+          `c vaut ${c} — c'est-à-dire \`${n0} // ${p}\`.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_py_simu_tpl_randint",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "algorithmique_python_2de",
+    microId: "python_simulation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "`randint(a, b)` peut rendre a, b, et tout ce qu'il y a entre : les DEUX bornes comprises.",
+    tags: ["seconde", "maths", "python", "simulation", "template"],
+    generate: () => {
+      // ⛔ `a` COMMENCE A 2, ET C'EST UNE CONTRAINTE DE PIEGES, pas de maths.
+      // Mesure sur 400 tirages : avec les distracteurs `b` et `b - a`, deux
+      // propositions se confondaient systematiquement — `b - a` EST `n - 1` par
+      // definition, et `b` vaut `n` des que a = 1. Les trois pieges retenus ne
+      // peuvent coincider avec la reponse ni entre eux tant que a >= 2 :
+      //   n - 1  : « j'ai oublie le + 1 »
+      //   n + 1  : « j'en ai compte un de trop »
+      //   a + b  : « j'ai additionne les bornes »
+      const a = randomInt(2, 4);
+      const b = a + randomInt(3, 9);
+      const n = b - a + 1;
+      const correct = String(n);
+      const choices = [String(n), String(n - 1), String(n + 1), String(a + b)];
+      return {
+        text: `Combien de valeurs différentes \`randint(${a}, ${b})\` peut-il rendre ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "`randint(a, b)` tire un entier au hasard entre a et b, les DEUX BORNES COMPRISES.",
+          "On compte les entiers de a à b : il y en a b − a + 1.",
+          `De ${a} à ${b} : ${b} − ${a} + 1 = ${n} valeurs.`,
+          `${n} valeurs. ⛔ Le « + 1 » s'oublie facilement — et il change la probabilité de chaque tirage.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_py_simu_tpl_comptage",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "algorithmique_python_2de",
+    microId: "python_simulation",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Le compteur ne monte que lorsque la condition est vraie.",
+    tags: ["seconde", "maths", "python", "simulation", "template"],
+    generate: () => {
+      // Une suite de tirages DEJA CONNUE : l'eleve trace le programme, il ne
+      // simule pas. C'est ce que demande un sujet, faute de pouvoir executer.
+      const tirages = Array.from({ length: 8 }, () => randomInt(1, 6));
+      const cible = randomInt(1, 6);
+      const c = tirages.filter((t) => t === cible).length;
+      return {
+        text:
+          `Une simulation a donné les tirages ${tirages.join(", ")}.\n` +
+          `Que vaut c à la fin ?\n` +
+          `\`c = 0\` / \`for t in tirages:\` / \`  if t == ${cible}:\` / \`    c = c + 1\``,
+        format: "short",
+        expected: [String(c)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le compteur d'une simulation s'incrémente SOUS CONDITION : seulement quand le tirage est celui qu'on cherche.",
+          "On parcourt la liste et on compte les occurrences de la valeur cible.",
+          `Dans ${tirages.join(", ")}, la valeur ${cible} apparaît ${c} fois.`,
+          `c vaut ${c}. ⭐ Diviser ce compteur par le nombre de tirages donne la fréquence, donc l'estimation de la probabilité.`
         ),
       };
     },
