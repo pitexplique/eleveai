@@ -107,7 +107,8 @@
         "racine carrée",
         "Shorts",
         "2de"
-      ]
+      ],
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-racine-carree-2de-short-somme.png"
     },
     {
       "id": "racine-simplifier",
@@ -125,7 +126,8 @@
         "simplifier une racine",
         "Shorts",
         "2de"
-      ]
+      ],
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-racine-carree-2de-short-simplifier.png"
     },
     {
       "id": "racine-negatif",
@@ -143,7 +145,8 @@
         "racine carrée",
         "Shorts",
         "2de"
-      ]
+      ],
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-racine-carree-2de-short-negatif.png"
     },
     {
       "id": "repere-coordonnees",
@@ -224,7 +227,8 @@
         "coordonnées",
         "Shorts",
         "2de"
-      ]
+      ],
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-repere-coordonnees-short.png"
     },
     {
       "id": "puissances",
@@ -306,7 +310,8 @@
         "puissances",
         "Shorts",
         "2de"
-      ]
+      ],
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-puissances-short.png"
     },
     {
       "id": "identites-remarquables",
@@ -386,7 +391,8 @@
         "identités remarquables",
         "double produit",
         "Shorts"
-      ]
+      ],
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-identites-remarquables-short-doubleproduit.png"
     },
     {
       "id": "ir-difference",
@@ -404,7 +410,8 @@
         "factoriser",
         "différence de carrés",
         "Shorts"
-      ]
+      ],
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-identites-remarquables-short-difference.png"
     },
     {
       "id": "ir-calcul-mental",
@@ -423,7 +430,8 @@
         "identités remarquables",
         "astuce",
         "Shorts"
-      ]
+      ],
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-identites-remarquables-short-calculmental.png"
     }
   ]
 }
