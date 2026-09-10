@@ -18,6 +18,37 @@ function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function shuffle<T>(arr: readonly T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+/**
+ * Des propositions TOUTES DIFFÉRENTES, et la bonne réponse à une place variable.
+ *
+ * ⛔ Les pièges d'un gabarit sont écrits à la main, et deux d'entre eux finissent
+ * par coïncider dès qu'un paramètre tombe sur une valeur particulière — un
+ * coefficient de 1, une ordonnée nulle, deux erreurs qui donnent le même nombre.
+ * L'élève voit alors deux fois la même ligne. Mesuré ailleurs dans la banque :
+ * 400 QCM sur 400 avec un doublon, parce que deux pièges étaient égaux PAR
+ * DÉFINITION.
+ *
+ * ⚠️ On en garde jusqu'à trois : deux suffisent quand un tirage en confond, et
+ * c'est mieux qu'un quatrième piège inventé pour faire nombre (Frédéric :
+ * « les QCM peuvent avoir vrai/faux, 3 propositions ou 4 »).
+ */
+function choix(correct: string, pieges: readonly string[]): string[] {
+  const vus = new Set([correct]);
+  const gardes: string[] = [];
+  for (const p of pieges) {
+    if (gardes.length === 3) break;
+    if (!vus.has(p)) {
+      vus.add(p);
+      gardes.push(p);
+    }
+  }
+  return shuffle([correct, ...gardes]);
+}
+
 function exp(definition: string, methode: string, calcul: string, conclusion: string) {
   return (
     `Définition : ${definition}\n\n` +
@@ -910,5 +941,333 @@ export const fonctionsAffinesBank: TutorBankItemV4[] = [
       "En son zéro."
     ),
     tags: ["seconde", "maths", "fonctions", "affine_signe", "raisonnement", "qcm"],
+  },
+
+  /* ================= RENFORTS DU 10/09/2026 =================
+   *
+   * ⛔ TROIS TROUS MESURÉS, alors que les quatre micros passaient les seuils :
+   *
+   * 1. LA LECTURE GRAPHIQUE tenait en UN SEUL item, et il était figé. Or la
+   *    fonction affine EST une droite : lire `a` et `b` sur un dessin est la
+   *    question type, et pas un cas particulier.
+   * 2. LES DEUX POINTS QUELCONQUES n'existaient qu'en items figés. Le gabarit
+   *    de `determiner_expression` ne tirait que `f(0) = …`, ce qui DONNE `b` :
+   *    l'élève n'a alors jamais à calculer (y₂ − y₁) / (x₂ − x₁).
+   * 3. LE SIGNE ne se demandait que par « sur quel intervalle est-elle
+   *    POSITIVE ». Jamais négative, et jamais la forme du tableau de signes —
+   *    qui est pourtant l'écriture attendue en fin d'exercice.
+   *
+   * ⚠️ Et zéro item sur les DROITES PARALLÈLES, alors que « même coefficient
+   * directeur » est la lecture qui relie ce chapitre à celui des droites.
+   */
+
+  {
+    kind: "template",
+    id: "seconde_affine_deux_points_a",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_affines_2de",
+    microId: "affine_determiner_expression",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "$a$ est la variation de $f$ divisée par la variation de $x$.",
+    tags: ["seconde", "maths", "fonctions", "affine", "deux_points", "template"],
+    generate: () => {
+      // ⛔ AUCUN DES DEUX POINTS N'EST EN 0 : c'est tout l'interet. Avec f(0),
+      // l'ordonnee a l'origine est DONNEE et le calcul de a devient une
+      // soustraction. Ici il faut vraiment le quotient des variations.
+      const a = [-4, -3, -2, 2, 3, 4, 5][randomInt(0, 6)];
+      const b = randomInt(-6, 6);
+      const x1 = randomInt(1, 4);
+      const x2 = x1 + randomInt(1, 4);
+      const y1 = a * x1 + b;
+      const y2 = a * x2 + b;
+      const correct = `$${a}$`;
+      const choices = choix(correct, [
+        `$${y2 - y1}$`,
+        `$${x2 - x1}$`,
+        `$${-a}$`,
+        `$${b}$`,
+      ]);
+      return {
+        text:
+          `Une fonction affine vérifie $f(${x1}) = ${y1}$ et $f(${x2}) = ${y2}$. ` +
+          `Quel est son coefficient directeur ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le coefficient directeur mesure de combien $f$ varie quand $x$ augmente de $1$.",
+          "$a = \\dfrac{f(x_2) - f(x_1)}{x_2 - x_1}$ — la variation de $f$ divisée par celle de $x$.",
+          `$a = \\dfrac{${y2} - (${y1})}{${x2} - ${x1}} = \\dfrac{${y2 - y1}}{${x2 - x1}} = ${a}$.`,
+          `Le coefficient directeur vaut $${a}$. ⚠️ Ce n'est PAS $${y2 - y1}$ : il faut diviser par l'écart des abscisses.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_affine_deux_points_expr",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_affines_2de",
+    microId: "affine_determiner_expression",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Trouver $a$ d'abord, puis remplacer dans une des deux égalités pour avoir $b$.",
+    tags: ["seconde", "maths", "fonctions", "affine", "deux_points", "template"],
+    generate: () => {
+      const a = [-3, -2, 2, 3, 4][randomInt(0, 4)];
+      const b = randomInt(-5, 5);
+      const x1 = randomInt(1, 3);
+      const x2 = x1 + randomInt(1, 3);
+      const y1 = a * x1 + b;
+      const y2 = a * x2 + b;
+      const ecrire = (p: number, q: number) =>
+        `$f(x) = ${p}x ${q < 0 ? "-" : "+"} ${Math.abs(q)}$`;
+      const correct = ecrire(a, b);
+      const choices = choix(correct, [
+        ecrire(b, a),
+        ecrire(a, -b),
+        ecrire(y2 - y1, b),
+        ecrire(-a, b),
+      ]);
+      return {
+        text:
+          `Une fonction affine vérifie $f(${x1}) = ${y1}$ et $f(${x2}) = ${y2}$. ` +
+          `Quelle est son expression ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une fonction affine s'écrit $f(x) = ax + b$ : deux inconnues, donc deux informations suffisent.",
+          "On calcule $a$ par le quotient des variations, puis on remplace dans une des deux égalités pour obtenir $b$.",
+          `$a = \\dfrac{${y2} - (${y1})}{${x2} - ${x1}} = ${a}$. ` +
+            `Puis $f(${x1}) = ${y1}$ donne $${a} \\times ${x1} + b = ${y1}$, donc $b = ${b}$.`,
+          `$f(x) = ${a}x ${b < 0 ? "-" : "+"} ${Math.abs(b)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_affine_lire_a",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_affines_2de",
+    microId: "affine_forme",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Quand on avance de $1$ vers la droite, de combien la droite monte-t-elle ?",
+    tags: ["seconde", "maths", "fonctions", "affine", "graphique", "template"],
+    generate: () => {
+      const a = [-3, -2, -1, 1, 2, 3][randomInt(0, 5)];
+      const b = randomInt(-3, 3);
+      const correct = `$${a}$`;
+      const choices = choix(correct, [
+        `$${-a}$`,
+        `$${b}$`,
+        `$${a > 0 ? a + 1 : a - 1}$`,
+        `$${-b}$`,
+      ]);
+      return {
+        text: "Quel est le coefficient directeur de la droite tracée ci-dessous ?",
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: droiteCanvas(a, b),
+        explanation: exp(
+          "Le coefficient directeur se LIT sur le dessin : c'est la montée pour un pas de $1$ vers la droite.",
+          "On part d'un point de la droite, on avance de $1$, et on regarde de combien on monte — ou de combien on descend.",
+          `Ici la droite ${a > 0 ? "monte" : "descend"} de $${Math.abs(a)}$ quand $x$ augmente de $1$ : le coefficient vaut $${a}$.`,
+          `$a = ${a}$. ⚠️ Une droite qui descend a un coefficient NÉGATIF.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_affine_lire_b",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_affines_2de",
+    microId: "affine_forme",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "L'ordonnée à l'origine se lit là où la droite coupe l'axe vertical.",
+    tags: ["seconde", "maths", "fonctions", "affine", "graphique", "template"],
+    generate: () => {
+      const a = [-2, -1, 1, 2, 3][randomInt(0, 4)];
+      const b = [-4, -3, -2, -1, 1, 2, 3, 4][randomInt(0, 7)];
+      const correct = `$${b}$`;
+      const choices = choix(correct, [
+        `$${a}$`,
+        `$${-b}$`,
+        `$0$`,
+        `$${b + 1}$`,
+      ]);
+      return {
+        text: "Quelle est l'ordonnée à l'origine de la droite tracée ci-dessous ?",
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: droiteCanvas(a, b),
+        explanation: exp(
+          "L'ordonnée à l'origine est la valeur de $f(0)$ : l'image de zéro.",
+          "Sur le dessin, on regarde où la droite COUPE L'AXE VERTICAL.",
+          `La droite coupe l'axe des ordonnées en $${b}$, donc $f(0) = ${b}$.`,
+          `$b = ${b}$. ⚠️ À ne pas confondre avec le point où la droite coupe l'axe HORIZONTAL, qui est la racine.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_affine_paralleles",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_affines_2de",
+    microId: "affine_forme",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Deux droites sont parallèles quand elles ont la même PENTE.",
+    tags: ["seconde", "maths", "fonctions", "affine", "paralleles", "template"],
+    generate: () => {
+      const a = [-3, -2, 2, 3, 4][randomInt(0, 4)];
+      const b = randomInt(-5, 5);
+      let b2 = b;
+      while (b2 === b) b2 = randomInt(-5, 5);
+      const ecrire = (p: number, q: number) =>
+        `$g(x) = ${p}x ${q < 0 ? "-" : "+"} ${Math.abs(q)}$`;
+      // ⛔ LES PIÈGES SE CONSTRUISENT PAR LEUR COEFFICIENT, jamais au hasard.
+      // Première version : l'un d'eux était `g(x) = bx + a`, qui devient
+      // PARALLÈLE dès que b vaut a — le QCM avait alors deux bonnes réponses.
+      // Mesuré : 15 tirages sur 500. Ici les trois coefficients pièges sont
+      // -a, a+1 et a-1 : tous différents de a puisque a n'est jamais nul.
+      const correct = ecrire(a, b2);
+      const choices = choix(correct, [
+        ecrire(-a, b),
+        ecrire(a + 1, b),
+        ecrire(a - 1, b2),
+      ]);
+      return {
+        text:
+          `La droite d'équation $f(x) = ${a}x ${b < 0 ? "-" : "+"} ${Math.abs(b)}$ est tracée. ` +
+          `Laquelle de ces droites lui est PARALLÈLE ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le coefficient directeur donne l'inclinaison de la droite.",
+          "Deux droites sont parallèles si et seulement si elles ont le MÊME coefficient directeur — l'ordonnée à l'origine, elle, n'a aucune importance.",
+          `Il faut donc retrouver $${a}$ devant le $x$. Seule $${correct.replace(/\$/g, "")}$ convient.`,
+          `⭐ Changer $b$ fait GLISSER la droite sans la pencher ; changer $a$ la fait pivoter.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_affine_signe_negatif",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_affines_2de",
+    microId: "affine_signe",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "On cherche d'abord la racine, puis on regarde le signe de $a$.",
+    tags: ["seconde", "maths", "fonctions", "affine", "signe", "template"],
+    generate: () => {
+      // b est un multiple de a, donc la racine est un ENTIER : l'eleve lit un
+      // intervalle propre au lieu d'une fraction qui brouille la question.
+      const a = [-4, -3, -2, 2, 3, 4][randomInt(0, 5)];
+      const x0 = randomInt(-4, 4);
+      const b = -a * x0;
+      const correct =
+        a > 0
+          ? `$]-\\infty \\,;\\, ${x0}[$`
+          : `$]${x0} \\,;\\, +\\infty[$`;
+      const choices = choix(correct, [
+        a > 0 ? `$]${x0} \\,;\\, +\\infty[$` : `$]-\\infty \\,;\\, ${x0}[$`,
+        `$]-\\infty \\,;\\, ${-x0}[$`,
+        `$]${-x0} \\,;\\, +\\infty[$`,
+        "elle n'est jamais négative",
+      ]);
+      return {
+        text:
+          `Sur quel intervalle la fonction $f(x) = ${a}x ${b < 0 ? "-" : "+"} ${Math.abs(b)}$ ` +
+          `est-elle NÉGATIVE ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une fonction affine change de signe une seule fois : en sa racine.",
+          "On résout $ax + b = 0$ pour trouver la racine, puis le signe de $a$ dit de quel côté la fonction est négative.",
+          `Racine : $${a}x ${b < 0 ? "-" : "+"} ${Math.abs(b)} = 0$ donne $x = ${x0}$. ` +
+            (a > 0
+              ? `Comme $a = ${a} > 0$, $f$ est CROISSANTE : négative AVANT la racine.`
+              : `Comme $a = ${a} < 0$, $f$ est DÉCROISSANTE : négative APRÈS la racine.`),
+          `$f$ est négative sur ${correct.replace(/\$/g, "")}.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_affine_tableau_signes",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "fonctions_affines_2de",
+    microId: "affine_signe",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le signe de $a$ décide de l'ORDRE des deux signes dans le tableau.",
+    tags: ["seconde", "maths", "fonctions", "affine", "signe", "raisonnement", "template"],
+    generate: () => {
+      const a = [-4, -3, -2, 2, 3, 4][randomInt(0, 5)];
+      const x0 = randomInt(-3, 3);
+      const b = -a * x0;
+      const correct =
+        a > 0
+          ? "$-$ puis $0$ puis $+$"
+          : "$+$ puis $0$ puis $-$";
+      const choices = choix(correct, [
+        a > 0 ? "$+$ puis $0$ puis $-$" : "$-$ puis $0$ puis $+$",
+        "$+$ partout",
+        "$-$ partout",
+      ]);
+      return {
+        text:
+          `Dans le tableau de signes de $f(x) = ${a}x ${b < 0 ? "-" : "+"} ${Math.abs(b)}$, ` +
+          `que lit-on sur la ligne des signes, de gauche à droite ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le tableau de signes d'une fonction affine a UNE seule colonne de séparation : sa racine.",
+          "On place la racine, on met un $0$ dessous, puis on remplit les deux côtés selon le signe de $a$.",
+          `La racine vaut $x = ${x0}$. ` +
+            (a > 0
+              ? `Avec $a = ${a} > 0$, la fonction croît : elle est négative à gauche, positive à droite.`
+              : `Avec $a = ${a} < 0$, la fonction décroît : elle est positive à gauche, négative à droite.`),
+          a > 0
+            ? "On lit donc $-$, $0$, $+$. ⭐ Le sens de lecture suit le sens de variation."
+            : "On lit donc $+$, $0$, $-$. ⭐ Le sens de lecture suit le sens de variation."
+        ),
+      };
+    },
   },
 ];
