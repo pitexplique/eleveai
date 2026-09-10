@@ -153,7 +153,40 @@ def acc_ir_calcul_mental(d):
     centre(d, W // 2, 1140, "de tête", police("ariblk.ttf", 82), NAVY)
 
 
+def acc_eq_retournement(d):
+    centre(d, W // 2, 690, "−2x > 6", police("ariblk.ttf", 128), JAUNE)
+    centre(d, W // 2, 880, "x < −3", police("ariblk.ttf", 128), VERT)
+    centre(d, W // 2, 1070, "le sens se retourne", police("ariblk.ttf", 64), ROUGE)
+
+
+def acc_eq_balance(d):
+    centre(d, W // 2, 700, "5x − 3 = 12", police("ariblk.ttf", 104), JAUNE)
+    centre(d, W // 2, 900, "↓", police("ariblk.ttf", 90), NAVY)
+    centre(d, W // 2, 1030, "x = 3", police("ariblk.ttf", 140), VERT)
+
+
+def acc_eq_probleme(d):
+    for i, (txt, coul) in enumerate([("1. nommer", NAVY), ("2. traduire", NAVY),
+                                     ("3. résoudre", NAVY), ("4. répondre", VERT)]):
+        centre(d, W // 2, 680 + i * 118, txt, police("ariblk.ttf", 76), coul)
+
+
 SHORTS = {
+    "eleveai-maths-seconde-equations-inequations-short-retournement": {
+        "badge": "MATHS · SECONDE", "titre": ["DIVISER PAR", "UN NÉGATIF"], "taille": 82,
+        "sous": "l'exception qui coûte des points", "accroche": acc_eq_retournement,
+        "dossier": "seconde/maths/fr",
+    },
+    "eleveai-maths-seconde-equations-inequations-short-balance": {
+        "badge": "MATHS · SECONDE", "titre": ["RÉSOUDRE UNE", "ÉQUATION"], "taille": 82,
+        "sous": "la balance, en trois gestes", "accroche": acc_eq_balance,
+        "dossier": "seconde/maths/fr",
+    },
+    "eleveai-maths-seconde-equations-inequations-short-probleme": {
+        "badge": "MATHS · SECONDE", "titre": ["METTRE EN", "ÉQUATION"], "taille": 88,
+        "sous": "la méthode en quatre étapes", "accroche": acc_eq_probleme,
+        "dossier": "seconde/maths/fr",
+    },
     "eleveai-maths-seconde-identites-remarquables-short-doubleproduit": {
         "badge": "MATHS · SECONDE", "titre": ["LE DOUBLE", "PRODUIT"], "taille": 90,
         "sous": "celui qu'on oublie", "accroche": acc_ir_double_produit,

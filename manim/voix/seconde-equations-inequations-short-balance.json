@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Résoudre 5 x moins 3 égale 12. En trois gestes.",
+  "01-balance": "Le principe, c'est une balance. Les deux plateaux sont en équilibre. Tout ce que tu fais d'un côté, tu le fais de l'autre.",
+  "02-geste1": "Premier geste : j'ajoute 3 des deux côtés. À gauche il reste 5 x. À droite, 12 plus 3, ça fait 15.",
+  "03-geste2": "Deuxième geste : je divise par 5 des deux côtés. À gauche il reste x. À droite, 15 divisé par 5, ça fait 3.",
+  "04-verifier": "Troisième geste, celui qu'on saute : je vérifie. 5 fois 3 moins 3, ça fait 15 moins 3, donc 12. C'est bien le résultat attendu.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

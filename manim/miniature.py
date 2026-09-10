@@ -1356,7 +1356,21 @@ def acc_identites_remarquables(d):
     d.text((300, 476), "il manque 2ab", font=police("arialbd.ttf", 40), fill=NAVY)
 
 
+def acc_equations_inequations(d):
+    """Le retournement, montre plutot qu'enonce : le meme calcul, deux symboles."""
+    f = police("ariblk.ttf", 52)
+    d.text((300, 340), "−2x > 6", font=f, fill=BLEU)
+    d.text((300, 410), "x < −3", font=f, fill=VERT)
+    d.text((300, 486), "le sens se retourne", font=police("arialbd.ttf", 36), fill=ROUGE)
+
+
 NOTIONS = {
+    "eleveai-maths-seconde-equations-inequations": {
+        "badge": "MATHS · SECONDE", "titre": ["ÉQUATIONS ET", "INÉQUATIONS"], "taille": 58,
+        "sous": "diviser par un négatif retourne tout",
+        "accroche": acc_equations_inequations,
+        "dossier": "seconde/maths/fr",
+    },
     "eleveai-maths-seconde-identites-remarquables": {
         "badge": "MATHS · SECONDE", "titre": ["IDENTITÉS", "REMARQUABLES"], "taille": 62,
         "sous": "le double produit qu'on oublie",

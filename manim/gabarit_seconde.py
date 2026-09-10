@@ -21,6 +21,12 @@
 #    ⛔⛔ RENDRE SANS CACHE (`--disable_caching`) ou les sons sautent en silence.
 # 3. PAS D'EMOJI dans un `Text` : la police les rend en carrés. Tout pictogramme
 #    se trace (voir `coche()`).
+#    ⛔ ET PAS TOUS LES SYMBOLES MATHÉMATIQUES NON PLUS. Mesuré le 10/09/2026 :
+#      · ≤ ≥ ≠ × ÷ √ ∞ − (moins typographique) se rendent — utilise ceux-là ;
+#      · ⩽ ⩾ (la forme française, barre inclinée, U+2A7D/U+2A7E) NE SE RENDENT
+#        PAS : elles sortent en carré blanc, avec leur code hexadécimal dedans.
+#    ⚠️ Les FICHES, elles, écrivent bien ⩽ et ⩾ (KaTeX les connait) : recopier un
+#    exemple de fiche sans convertir le symbole fait entrer un carré à l'écran.
 # 4. Le même gabarit sert le PAYSAGE et le SHORT 9:16 : `chute()` lit
 #    `config.frame_width` au lieu d'une largeur écrite en dur.
 #
@@ -109,6 +115,20 @@ class NotionSeconde(Scene):
             t.scale_to_fit_width(largeur_max)
         return t.to_edge(DOWN, buff=1.45 if vertical else 0.7).shift(
             LEFT * (0.0 if vertical else 0.6))
+
+    def grand(self, texte, font_size=60, color=WHITE, marge=0.6):
+        """Un texte en GRAND, borné à la largeur du cadre.
+
+        ⛔ En vertical le cadre ne fait que 4,5 unités : « −2x > 6 » en taille 88
+        déborde des deux côtés, et le rendu ne prévient pas (constaté le 10/09).
+        Toute ligne destinée à être lue en grand — accroches de short, résultats —
+        passe par ici plutôt que par un `Text` nu.
+        """
+        t = Text(texte, font_size=font_size, color=color)
+        largeur_max = config.frame_width - marge
+        if t.width > largeur_max:
+            t.scale_to_fit_width(largeur_max)
+        return t
 
     def radical(self, radicande, coefficient="", font_size=44, color=WHITE):
         """Un radical DESSINÉ : coefficient, signe √, radicande, et sa barre.

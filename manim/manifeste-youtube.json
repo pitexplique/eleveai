@@ -432,6 +432,131 @@
         "Shorts"
       ],
       "miniature": "seconde/maths/fr/eleveai-maths-seconde-identites-remarquables-short-calculmental.png"
+    },
+    {
+      "id": "equations-inequations",
+      "notionId": "equations_inequations_1er_degre",
+      "type": "longue",
+      "fichier": "seconde/maths/paysage/fr/equations-inequations/eleveai-maths-seconde-equations-inequations.mp4",
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-equations-inequations.png",
+      "titre": "Maths seconde · Équations et inéquations — EleveAI",
+      "accroche": "Les mêmes gestes des deux côtés — sauf un, et c'est celui qui fait perdre le plus de points : diviser par un nombre négatif retourne le sens de l'inégalité.",
+      "chapitres": [
+        [
+          "00:00",
+          "Équations et inéquations"
+        ],
+        [
+          "00:09",
+          "Les objectifs"
+        ],
+        [
+          "00:28",
+          "L'équation : une balance"
+        ],
+        [
+          "00:55",
+          "L'inéquation : les mêmes gestes"
+        ],
+        [
+          "01:21",
+          "Diviser par un négatif"
+        ],
+        [
+          "01:55",
+          "Écrire en intervalle"
+        ],
+        [
+          "02:17",
+          "Mettre un problème en équation"
+        ],
+        [
+          "02:39",
+          "Défi"
+        ],
+        [
+          "02:58",
+          "Correction"
+        ],
+        [
+          "03:25",
+          "Tu sais maintenant"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/equations-inequations-1er-degre",
+      "tags": [
+        "maths",
+        "seconde",
+        "2de",
+        "équation",
+        "inéquation",
+        "intervalle",
+        "premier degré",
+        "lycée"
+      ]
+    },
+    {
+      "id": "eq-retournement",
+      "notionId": "equations_inequations_1er_degre",
+      "microId": "inequation_resoudre",
+      "type": "short",
+      "renvoie_vers": "equations-inequations",
+      "fichier": "seconde/maths/shorts/fr/equations-inequations/eleveai-maths-seconde-equations-inequations-short-retournement.mp4",
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-equations-inequations-short-retournement.png",
+      "titre": "Inéquation : pourquoi le signe se retourne",
+      "accroche": "−2x > 6 donne x < −3, et non x > −3. Quand on divise par un nombre négatif, le sens de l'inégalité bascule — et ça se démontre en une ligne.",
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/equations-inequations-1er-degre",
+      "tags": [
+        "maths",
+        "seconde",
+        "inéquation",
+        "signe",
+        "erreur",
+        "2de",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "eq-balance",
+      "notionId": "equations_inequations_1er_degre",
+      "microId": "equation_resoudre",
+      "type": "short",
+      "renvoie_vers": "equations-inequations",
+      "fichier": "seconde/maths/shorts/fr/equations-inequations/eleveai-maths-seconde-equations-inequations-short-balance.mp4",
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-equations-inequations-short-balance.png",
+      "titre": "Résoudre une équation du premier degré en 3 gestes",
+      "accroche": "Le principe tient en une image : une balance. Ce qu'on fait d'un côté, on le fait de l'autre. Et le troisième geste est celui qu'on saute — vérifier.",
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/equations-inequations-1er-degre",
+      "tags": [
+        "maths",
+        "seconde",
+        "équation",
+        "premier degré",
+        "méthode",
+        "2de",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "eq-probleme",
+      "notionId": "equations_inequations_1er_degre",
+      "microId": "equation_probleme",
+      "type": "short",
+      "renvoie_vers": "equations-inequations",
+      "fichier": "seconde/maths/shorts/fr/equations-inequations/eleveai-maths-seconde-equations-inequations-short-probleme.mp4",
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-equations-inequations-short-probleme.png",
+      "titre": "Mettre un problème en équation : la méthode en 4 étapes",
+      "accroche": "Nommer, traduire, résoudre — et répondre par une phrase. C'est la quatrième étape qu'on oublie, et elle vaut un point.",
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/equations-inequations-1er-degre",
+      "tags": [
+        "maths",
+        "seconde",
+        "mise en équation",
+        "problème",
+        "méthode",
+        "2de",
+        "Shorts"
+      ]
     }
   ]
 }

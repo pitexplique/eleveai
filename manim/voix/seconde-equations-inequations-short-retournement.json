@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Moins 2 x supérieur à 6. Est-ce que x est supérieur à moins 3 ?",
+  "01-erreur": "Le réflexe, c'est de diviser par moins 2 et de garder le symbole. Ça donne x supérieur à moins 3. Et c'est faux.",
+  "02-pourquoi": "Regarde pourquoi. 2 est plus petit que 5, d'accord ? Multiplions les deux par moins 1 : moins 2 et moins 5. Or moins 2 est plus GRAND que moins 5. Le sens a basculé.",
+  "03-regle": "La règle : quand tu divises ou tu multiplies par un nombre NÉGATIF, le sens de l'inégalité se retourne.",
+  "04-resultat": "Donc la vraie réponse est : x INFÉRIEUR à moins 3. Le symbole a changé de sens.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}
