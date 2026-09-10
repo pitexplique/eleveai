@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Le même matin, à La Réunion : 26 degrés à Saint-Gilles, et 11 degrés au Maïdo. Vingt kilomètres les séparent. Comment est-ce possible ?",
+  "01-altitude": "La réponse n'est pas la distance. C'est l'ALTITUDE. Saint-Gilles est au bord de l'eau, à zéro mètre. Le Maïdo, lui, culmine à 2200 mètres.",
+  "02-gradient": "Et il existe une règle, la même partout sur Terre : on perd environ zéro virgule 65 degré chaque fois qu'on monte de 100 mètres.",
+  "03-affine": "Autrement dit, la température est une FONCTION AFFINE de l'altitude. T égale 26 moins zéro virgule zéro zéro 65 fois h. Le 26, c'est la température au niveau de la mer : c'est l'ordonnée à l'origine. Et la pente est négative, parce que la température descend quand on monte.",
+  "04-verifier": "Vérifions sur le Piton des Neiges, 3070 mètres. 26 moins zéro virgule zéro zéro 65 fois 3070 : ça fait environ 6 degrés. Et c'est bien ce qu'on y relève. Une seule formule, et toute l'île y passe.",
+  "05-fin": "Les maths de La Réunion, sur éleveai point fr."
+}
