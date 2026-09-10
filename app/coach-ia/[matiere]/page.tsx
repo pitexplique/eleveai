@@ -542,9 +542,12 @@ export default function CoachIA() {
             height: `calc(100dvh - ${hauteurHeader}px)`,
           }}
         >
-          <div className="mb-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-cyan-500 text-base font-bold text-white">
-            IA
-          </div>
+          {/* ⛔ 10/09/2026 — LA PASTILLE « IA » EST PARTIE (Frédéric).
+              Elle avait la forme et la taille des classes juste en dessous,
+              sans en être une : la seule pastille de la colonne sur laquelle
+              cliquer ne faisait rien. Elle coûtait en plus un cran de hauteur
+              à une colonne qui déborde déjà sous ~1065 px (voir la note de
+              l'`<aside>`), donc la retirer rend une classe visible en bas. */}
           {groupes.map((groupe) => (
             <div key={groupe.titre ?? "tous"} className="flex shrink-0 flex-col items-center gap-1.5">
               {groupe.titre && (
@@ -572,8 +575,136 @@ export default function CoachIA() {
 
         <section className="w-full px-4 py-5 sm:px-6 lg:px-8">
           <header className="mb-6 border-b border-slate-200 pb-5">
-            {/* Classes mobiles */}
-            <div className="mb-4 space-y-2 md:hidden">
+            {/* ⭐⭐ 10/09/2026 — LA RECHERCHE PREND LA PLACE DU MOT D'ACCUEIL.
+                Frédéric : « une grande barre de recherche à la place de
+                bienvenue chez toi, comme dans l'accueil ». C'est le même geste
+                que le 09/09 sur `/accueil` (voir `.accueil-champ-en-tete` dans
+                globals.css) : ce qu'on cherche passe DEVANT ce qu'on nous dit.
+
+                Le mot d'accueil occupait le premier écran pour n'apprendre
+                rien qu'on ne redécouvre au premier clic ; le champ, lui, était
+                relégué sous le titre, en `text-sm` et `sm:max-w-md` — plus
+                petit que les deux compteurs posés à côté. Sur une classe à 24
+                notions, l'élève qui sait ce qu'il veut réviser devait donc
+                d'abord LIRE, puis chercher le champ des yeux.
+
+                ⛔ ET IL PASSE AUSSI DEVANT LES PASTILLES DE CLASSE, qui ne
+                vivent sur téléphone que dans le bloc `md:hidden` juste en
+                dessous. Sur 375 px elles empilent quinze boutons et cinq
+                intitulés : le champ posé après elles rouvrait, en plus petit,
+                exactement le défaut que `/accueil` venait de corriger — « du
+                coup personne ne se sent obligé de taper classe etc. ? ça
+                pourrait descendre le bounce » (Frédéric, 09/09). Sur écran
+                large la question ne se pose pas : les classes sont dans
+                l'`<aside>`, et le champ y est premier de toute façon.
+
+                ⚠️ C'EST LE MÊME CHAMP, PAS UN SECOND. Il porte toujours l'état
+                `search`, il filtre toujours la liste en direct, et l'ouverture
+                depuis l'évaluation blanche (`?notion=2.3`) continue de le
+                pré-remplir — donc de le montrer rempli, désormais en haut de
+                l'écran au lieu du milieu.
+                ⛔ AUCUN BOUTON « CHERCHER » : ici la liste se filtre à la
+                frappe, il n'y a rien à valider. La croix ne paraît qu'une fois
+                qu'il y a quelque chose à effacer, et le bouton natif de
+                `type="search"` est masqué pour ne pas en afficher deux.
+                ⚠️ ET C'EST POURQUOI LA MARGE DE DROITE SUIT `search` : réserver
+                les 56 px du bouton en permanence, c'est les retirer au texte de
+                l'invite alors qu'aucun bouton ne s'y trouve. Mesuré à 375 px :
+                231 px de place avec la réserve, 271 px sans.
+                ⚠️ L'INVITE A ÉTÉ RACCOURCIE POUR TENIR À 375 px. « Rechercher
+                une notion ou micro-compétence… » demande 336 px pour 271 :
+                l'élève lisait « … ou micro » et la fin sautait, chez 38 % des
+                visiteurs. Même mesure, même verdict que sur le champ de
+                l'accueil — sauf qu'ici la phrase n'est dictée par personne. */}
+            <div className="relative mb-6">
+              <span className="pointer-events-none absolute inset-y-0 left-5 flex items-center text-lg text-slate-400">
+                🔍
+              </span>
+              <input
+                type="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Rechercher une notion…"
+                aria-label="Rechercher une notion ou une micro-compétence"
+                className={[
+                  "w-full rounded-full border-2 border-slate-300 bg-white py-4 pl-14 text-base text-slate-800 shadow-sm outline-none placeholder:text-slate-400 focus:border-teal-700 focus:ring-2 focus:ring-teal-700/20 sm:text-lg",
+                  "[&::-webkit-search-cancel-button]:appearance-none",
+                  search ? "pr-14" : "pr-5",
+                ].join(" ")}
+              />
+              {search ? (
+                <button
+                  type="button"
+                  onClick={() => setSearch("")}
+                  aria-label="Effacer la recherche"
+                  className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-teal-700 text-lg text-white transition hover:bg-teal-800"
+                >
+                  <span aria-hidden="true">×</span>
+                </button>
+              ) : null}
+            </div>
+
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+              <div>
+                {/* ⛔ 10/09/2026 — LE SURTITRE « COACH IA · SÉRIE D'EXERCICES »
+                    EST PARTI. Frédéric a dicté l'ordre de l'écran : « barre de
+                    recherche, puis Maths Seconde, puis séries d'exercices avec
+                    correction et score ». Le surtitre s'intercalait entre les
+                    deux premiers, et il disait déjà — en plus petit, en
+                    majuscules et AVANT le titre — ce que la ligne du dessous
+                    dit maintenant en entier. Le nom du coach reste écrit dans
+                    l'en-tête du site, dans l'URL et dans le `<title>`. */}
+                <h1 className={["mt-1 text-4xl font-bold tracking-tight sm:text-5xl", getMatiereColor(matiere)].join(" ")}>
+                  {getMatiereTitle(matiere, classe)}
+                </h1>
+                {/* ⭐ 10/09/2026 — « raccourcis la ligne des exercices
+                    corrigés » puis, dans la foulée, la phrase exacte :
+                    « séries d'exercices avec correction et score ! ».
+                    Ce qu'elle disait avant tenait en deux lignes et décrivait
+                    la liste qui commence 40 px plus bas (« choisis une
+                    compétence, puis clique sur une ligne »). Ce qu'elle ne
+                    disait NULLE PART, c'est le SCORE — or c'est la seule des
+                    trois promesses que l'écran ne montre pas de lui-même : les
+                    séries se voient, la correction s'annonce, le score n'arrive
+                    qu'après le premier exercice.
+                    ⚠️ L'espace avant le « ! » est insécable, comme partout dans
+                    ce fichier (`chez toi&nbsp;!` avant lui) : sans elle le
+                    point d'exclamation part seul à la ligne suivante dès que la
+                    colonne se resserre. */}
+                <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
+                  Séries d&apos;exercices avec correction et score&nbsp;!
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                <span className="rounded-full border border-orange-300 bg-white px-4 py-2 text-sm font-semibold text-orange-600">
+                  {totalNotions} notions
+                </span>
+                <span className="rounded-full border border-green-300 bg-white px-4 py-2 text-sm font-semibold text-green-700">
+                  {totalMicros} séries d&apos;exercices
+                </span>
+                {matiere === "francais" ? (
+                  <span className="rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-semibold text-sky-700">
+                    CP a 3e ouverts
+                  </span>
+                ) : null}
+              </div>
+            </div>
+
+            {/* ⭐ 10/09/2026 — LES CLASSES DESCENDENT SOUS LE TITRE, SUR
+                TÉLÉPHONE SEULEMENT. Elles n'existent ici que pour les écrans
+                étroits (`md:hidden`) : au-delà, c'est l'`<aside>` qui les
+                porte, et l'ordre demandé — barre, « Maths Seconde », la ligne
+                des séries — y est déjà celui de l'écran. Sur 375 px, les
+                quinze classes et leurs cinq intitulés de groupe mesurent 415 px
+                empilés : laissées au-dessus, elles repoussaient le titre à
+                497 px du haut et rendaient l'ordre faux pour les 38 % de
+                visiteurs qui n'ont que cette largeur.
+                ⚠️ Elles restent AU-DESSUS DE LA LISTE, et juste à côté du
+                sélecteur d'année STMG : les deux boutons qui changent ce que la
+                liste contient sont maintenant voisins, au lieu d'encadrer le
+                titre. */}
+            <div className="mt-5 space-y-2 md:hidden">
               {groupes.map((groupe) => (
                 <div key={groupe.titre ?? "tous"} className="flex flex-wrap items-center gap-2">
                   {groupe.titre && (
@@ -596,48 +727,6 @@ export default function CoachIA() {
                   ))}
                 </div>
               ))}
-            </div>
-
-            {/* Mot d'accueil chaleureux (arrivée depuis un cahier / une carte). */}
-            <div className="mb-5 rounded-2xl border border-emerald-200 bg-gradient-to-r from-emerald-50 to-teal-50 p-4">
-              <p className="flex items-center gap-2 text-base font-black text-slate-900">
-                🦎 Bienvenue — ici, tu es chez toi&nbsp;!
-              </p>
-              <p className="mt-1 text-sm font-semibold leading-6 text-slate-600">
-                Chaque ligne ci-dessous lance une <strong>série d&apos;exercices
-                corrigés</strong>. Choisis une notion, clique, et entraîne-toi à ton
-                rythme, <strong>sans jugement</strong>. C&apos;est gratuit — et chaque
-                erreur t&apos;aide à progresser. 🌱
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
-                  Coach IA · série d&apos;exercices
-                </p>
-                <h1 className={["mt-1 text-4xl font-bold tracking-tight sm:text-5xl", getMatiereColor(matiere)].join(" ")}>
-                  {getMatiereTitle(matiere, classe)}
-                </h1>
-                <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
-                  Des exercices corrigés pour t&apos;entraîner : choisis une
-                  compétence, puis clique sur une ligne pour démarrer ta série.
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                <span className="rounded-full border border-orange-300 bg-white px-4 py-2 text-sm font-semibold text-orange-600">
-                  {totalNotions} notions
-                </span>
-                <span className="rounded-full border border-green-300 bg-white px-4 py-2 text-sm font-semibold text-green-700">
-                  {totalMicros} séries d&apos;exercices
-                </span>
-                {matiere === "francais" ? (
-                  <span className="rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-semibold text-sky-700">
-                    CP a 3e ouverts
-                  </span>
-                ) : null}
-              </div>
             </div>
 
             {/* Année, à l'intérieur d'une classe qui en couvre deux (STMG). */}
@@ -684,18 +773,6 @@ export default function CoachIA() {
                 </p>
               </div>
             ) : null}
-
-            {/* Barre de recherche */}
-            <div className="mt-4 relative">
-              <span className="absolute inset-y-0 left-3 flex items-center text-slate-400 pointer-events-none">🔍</span>
-              <input
-                type="search"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Rechercher une notion ou micro-compétence…"
-                className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-4 text-sm text-slate-800 placeholder-slate-400 shadow-sm outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/30 sm:max-w-md"
-              />
-            </div>
           </header>
 
           <div className="columns-1 gap-8 lg:columns-2 2xl:columns-3">

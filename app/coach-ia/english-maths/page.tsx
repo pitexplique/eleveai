@@ -87,9 +87,11 @@ function CoachEnglishInner() {
       <div className="flex min-h-screen">
         {/* Sidebar niveaux */}
         <aside className="sticky top-0 hidden h-screen w-24 shrink-0 border-r border-slate-200 bg-white md:flex md:flex-col md:items-center md:gap-3 md:py-6">
-          <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-sky-500 text-sm font-black text-white">
-            EN
-          </div>
+          {/* ⛔ 10/09/2026 — LA PASTILLE « EN » EST PARTIE, comme la « IA » de
+              /coach-ia/[matiere] : même forme et même taille que les niveaux
+              juste dessous, sans en être un — la seule de la colonne où le
+              clic ne fait rien. Les quatre coachs se ressemblent, leur colonne
+              aussi. */}
           {NIVEAUX.map((n) => (
             <button
               key={n}
@@ -107,36 +109,61 @@ function CoachEnglishInner() {
 
         <section className="w-full px-4 py-5 sm:px-6 lg:px-8">
           <header className="mb-6 border-b border-slate-200 pb-5">
-            {/* Niveaux mobiles */}
-            <div className="mb-4 flex flex-wrap gap-2 md:hidden">
-              {NIVEAUX.map((n) => (
+            {/* ⭐⭐ 10/09/2026 — LE CHAMP PASSE EN TÊTE, comme sur les autres
+                coachs et sur `/accueil` : ce qu'on cherche avant ce qu'on nous
+                dit — et, sur téléphone, DEVANT les pastilles de niveau, qui ne
+                vivent que dans le bloc `md:hidden` juste en dessous. C'est LE
+                MÊME champ (état `search`, filtrage à la frappe), pas un
+                second — seules sa place et sa taille changent. Il était sous le
+                titre, en `text-sm` et `sm:max-w-md`, plus petit que les trois
+                compteurs posés à côté de lui.
+                ⚠️ Le placeholder reste en anglais : toute cette page l'est, et
+                c'est son objet même — faire des maths en anglais. */}
+            <div className="relative mb-6">
+              <span className="pointer-events-none absolute inset-y-0 left-5 flex items-center text-lg text-slate-400">
+                🔍
+              </span>
+              <input
+                type="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search a skill…"
+                aria-label="Search a category or skill"
+                className={[
+                  "w-full rounded-full border-2 border-slate-300 bg-white py-4 pl-14 text-base text-slate-800 shadow-sm outline-none placeholder:text-slate-400 focus:border-sky-600 focus:ring-2 focus:ring-sky-600/20 sm:text-lg",
+                  "[&::-webkit-search-cancel-button]:appearance-none",
+                  search ? "pr-14" : "pr-5",
+                ].join(" ")}
+              />
+              {search ? (
                 <button
-                  key={n}
                   type="button"
-                  onClick={() => setNiveau(n)}
-                  className={[
-                    "rounded-full border px-4 py-2 text-sm font-black transition",
-                    getNiveauBadgeColor(n, niveau === n),
-                  ].join(" ")}
+                  onClick={() => setSearch("")}
+                  aria-label="Clear the search"
+                  className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-sky-600 text-lg text-white transition hover:bg-sky-700"
                 >
-                  {niveauLabels[n]}
+                  <span aria-hidden="true">×</span>
                 </button>
-              ))}
+              ) : null}
             </div>
 
             <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
-                  Coach IA
-                </p>
-                <h1 className="mt-1 text-4xl font-bold tracking-tight text-sky-600 sm:text-5xl">
+                {/* ⛔ Le surtitre « Coach IA » est parti, comme sur
+                    /coach-ia/[matiere] : Frédéric a dicté l'ordre — barre de
+                    recherche, puis le titre, puis ce que la page offre. Le
+                    surtitre s'intercalait entre les deux premiers.
+                    ⚠️ La ligne du bas reprend la promesse française du jour
+                    (« séries d'exercices avec correction et score ! »), en
+                    anglais parce que toute la page l'est. */}
+                <h1 className="text-4xl font-bold tracking-tight text-sky-600 sm:text-5xl">
                   English Maths — {niveauLabels[niveau]}
                 </h1>
                 <p className="mt-2 text-sm text-slate-500 font-medium">
                   {niveauDescriptions[niveau]}
                 </p>
                 <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
-                  Choose a category, then a skill to practise.
+                  Exercise sets with corrections and a score!
                 </p>
               </div>
 
@@ -153,16 +180,24 @@ function CoachEnglishInner() {
               </div>
             </div>
 
-            {/* Barre de recherche */}
-            <div className="mt-4 relative">
-              <span className="absolute inset-y-0 left-3 flex items-center text-slate-400 pointer-events-none">🔍</span>
-              <input
-                type="search"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search a category or skill…"
-                className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-4 text-sm text-slate-800 placeholder-slate-400 shadow-sm outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-400/30 sm:max-w-md"
-              />
+            {/* ⭐ Les niveaux descendent sous le titre, sur téléphone seulement
+                (`md:hidden` : au-delà, c'est l'`<aside>` qui les porte). Même
+                raison que sur /coach-ia/[matiere] — l'ordre demandé est barre,
+                titre, promesse, et les pastilles s'y intercalaient. */}
+            <div className="mt-5 flex flex-wrap gap-2 md:hidden">
+              {NIVEAUX.map((n) => (
+                <button
+                  key={n}
+                  type="button"
+                  onClick={() => setNiveau(n)}
+                  className={[
+                    "rounded-full border px-4 py-2 text-sm font-black transition",
+                    getNiveauBadgeColor(n, niveau === n),
+                  ].join(" ")}
+                >
+                  {niveauLabels[n]}
+                </button>
+              ))}
             </div>
           </header>
 
