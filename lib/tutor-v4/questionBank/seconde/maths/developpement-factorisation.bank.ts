@@ -1283,4 +1283,309 @@ export const developpementFactorisationBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* ================= RENFORTS DU 10/09/2026 =================
+   *
+   * ⭐ FRÉDÉRIC : « surtout explique bien que c'est pour RÉSOUDRE une équation
+   * produit nul ». C'est la finalité du chapitre, et elle manquait entièrement.
+   *
+   * ⛔ ZÉRO ITEM SUR L'ÉQUATION PRODUIT NUL, mesuré sur le fichier entier. Or
+   * c'est à cela que sert la factorisation en seconde : on ne factorise pas pour
+   * faire joli, on factorise parce qu'un PRODUIT NUL se résout et qu'une SOMME
+   * ne se résout pas. Sans ce geste, le chapitre n'a pas de but — l'élève
+   * apprend une transformation sans savoir ce qu'elle lui achète.
+   *
+   * ⛔ ET ZÉRO ITEM SUR LA SOUSTRACTION D'UNE PARENTHÈSE. $5 - (x + 3)$ vaut
+   * $2 - x$, et non $2 + x$ : c'est l'erreur de signe la plus coûteuse du lycée,
+   * parce qu'elle survit jusqu'en terminale.
+   *
+   * ⚠️ `devfac_choisir_forme` n'avait qu'UN gabarit — la micro qui porte
+   * justement le « pourquoi » du chapitre.
+   */
+
+  {
+    kind: "template",
+    id: "seconde_devfac_produit_nul",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "developpement_factorisation_2de",
+    microId: "devfac_choisir_forme",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un produit est nul quand l'un AU MOINS de ses facteurs est nul.",
+    tags: ["seconde", "maths", "algebre", "produit_nul", "template"],
+    generate: () => {
+      // ⛔ p ET q DOIVENT DIFFÉRER. Quand ils sont égaux, le piège « -p ou q »
+      // désigne le MÊME ENSEMBLE de solutions que la bonne réponse : le QCM a
+      // alors deux bonnes lignes. Mesuré : 69 tirages sur 500.
+      const p = randomInt(1, 8);
+      let q = randomInt(1, 8);
+      while (q === p) q = randomInt(1, 8);
+      const correct = `$x = ${p}$ ou $x = ${-q}$`;
+      const choices = makeChoices(correct, [
+        `$x = ${-p}$ ou $x = ${q}$`,
+        `$x = ${p}$ et $x = ${-q}$`,
+        `$x = ${p - q}$`,
+        `$x = 0$`,
+      ]);
+      return {
+        text: `Résoudre l'équation $(x - ${p})(x + ${q}) = 0$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un produit de facteurs est nul SI ET SEULEMENT SI l'un au moins des facteurs est nul.",
+          "On annule chaque facteur à son tour, ce qui donne deux équations du premier degré.",
+          `$x - ${p} = 0$ donne $x = ${p}$, et $x + ${q} = 0$ donne $x = ${-q}$.`,
+          `Les solutions sont $${p}$ et $${-q}$. ⭐ On dit « OU », pas « et » : une seule des deux suffit à annuler le produit.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_devfac_factoriser_pour_resoudre",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "developpement_factorisation_2de",
+    microId: "devfac_choisir_forme",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Sous cette forme on ne peut rien conclure : il faut d'abord factoriser.",
+    tags: ["seconde", "maths", "algebre", "produit_nul", "raisonnement", "template"],
+    generate: () => {
+      const k = randomInt(2, 6);
+      // kx^2 + k*a*x = kx(x + a) -> solutions 0 et -a
+      const a = randomInt(1, 7);
+      const correct = "factoriser, car un produit nul se résout mais pas une somme";
+      const choices = makeChoices(correct, [
+        "développer, pour voir apparaître les solutions",
+        "remplacer $x$ par plusieurs valeurs jusqu'à en trouver une",
+        "diviser les deux membres par $x$",
+      ]);
+      return {
+        text:
+          `Pour résoudre $${k}x^2 + ${k * a}x = 0$, quelle est la première chose à faire ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une équation ne se résout par annulation que si un côté est un PRODUIT et l'autre zéro.",
+          "Tant que le membre de gauche est une somme, aucune règle ne s'applique : on factorise d'abord.",
+          `$${k}x^2 + ${k * a}x = ${k}x(x + ${a})$. Le produit est nul si $x = 0$ ou si $x = ${-a}$.`,
+          `On factorise. ⛔ Diviser par $x$ ferait PERDRE la solution $x = 0$ — c'est l'erreur classique, et elle coûte une solution sur deux.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_devfac_produit_nul_identite",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "developpement_factorisation_2de",
+    microId: "devfac_factoriser_identite",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "C'est une différence de deux carrés : elle se factorise, et alors le produit se résout.",
+    tags: ["seconde", "maths", "algebre", "produit_nul", "identite", "template"],
+    generate: () => {
+      const n = randomInt(2, 9);
+      const correct = `$x = ${n}$ ou $x = ${-n}$`;
+      const choices = makeChoices(correct, [
+        `$x = ${n}$`,
+        `$x = ${n * n}$ ou $x = ${-n * n}$`,
+        `$x = ${-n}$`,
+        "pas de solution",
+      ]);
+      return {
+        text: `Résoudre $x^2 - ${n * n} = 0$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une différence de deux carrés se factorise : $a^2 - b^2 = (a-b)(a+b)$.",
+          "On factorise pour obtenir un produit nul, puis on annule chaque facteur.",
+          `$x^2 - ${n * n} = (x - ${n})(x + ${n})$. Ce produit est nul si $x = ${n}$ ou $x = ${-n}$.`,
+          `Deux solutions : $${n}$ et $${-n}$. ⛔ N'en donner qu'une est l'oubli le plus fréquent — un carré ne distingue pas les deux signes.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_devfac_soustraire_parenthese",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "developpement_factorisation_2de",
+    microId: "devfac_developper_simple",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Le signe moins devant la parenthèse change le signe de TOUT ce qu'elle contient.",
+    tags: ["seconde", "maths", "algebre", "signe", "template"],
+    generate: () => {
+      const a = randomInt(3, 12);
+      const b = randomInt(1, 9);
+      const k = randomInt(2, 5);
+      // a - (kx + b) = -kx + (a - b)
+      const c = a - b;
+      const ecrire = (p: number, q: number) =>
+        `$${p === -1 ? "-x" : p === 1 ? "x" : `${p}x`} ${q < 0 ? "-" : "+"} ${Math.abs(q)}$`;
+      const correct = ecrire(-k, c);
+      const choices = makeChoices(correct, [
+        ecrire(k, c),
+        ecrire(-k, a + b),
+        ecrire(k, a + b),
+        ecrire(-k, b - a),
+      ]);
+      return {
+        text: `Développer et réduire $${a} - (${k}x + ${b})$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un signe moins devant une parenthèse change le signe de CHAQUE terme à l'intérieur.",
+          "On peut le lire comme une multiplication par $-1$ : $-(A + B) = -A - B$.",
+          `$${a} - (${k}x + ${b}) = ${a} - ${k}x - ${b} = ${-k}x + ${c}$.`,
+          `${correct}. ⛔ L'erreur est de ne changer que le premier terme : le $+${b}$ devient $-${b}$ lui aussi.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_devfac_double_deux_x",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "developpement_factorisation_2de",
+    microId: "devfac_developper_double",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Quatre produits à faire, et deux d'entre eux se regroupent.",
+    tags: ["seconde", "maths", "algebre", "double_distributivite", "template"],
+    generate: () => {
+      const a = randomInt(2, 5);
+      const b = randomInt(1, 7);
+      const c = randomInt(2, 5);
+      const d = randomInt(1, 7);
+      // (ax + b)(cx + d) = ac x^2 + (ad + bc) x + bd
+      const p = a * c;
+      const m = a * d + b * c;
+      const n = b * d;
+      const correct = `$${p}x^2 + ${m}x + ${n}$`;
+      const choices = makeChoices(correct, [
+        `$${p}x^2 + ${n}$`,
+        `$${p}x^2 + ${a * d}x + ${n}$`,
+        `$${p}x^2 + ${b * c}x + ${n}$`,
+        `$${a + c}x^2 + ${m}x + ${n}$`,
+      ]);
+      return {
+        text: `Développer et réduire $(${a}x + ${b})(${c}x + ${d})$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La double distributivité : chaque terme de la première parenthèse multiplie chaque terme de la seconde.",
+          "Quatre produits, puis on regroupe les deux termes en $x$.",
+          `$${a}x \\times ${c}x = ${p}x^2$ ; $${a}x \\times ${d} = ${a * d}x$ ; ` +
+            `$${b} \\times ${c}x = ${b * c}x$ ; $${b} \\times ${d} = ${n}$. ` +
+            `Les deux termes en $x$ donnent $${a * d}x + ${b * c}x = ${m}x$.`,
+          `${correct}. ⛔ Le piège est d'oublier les DEUX produits croisés et de n'écrire que $${p}x^2 + ${n}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_devfac_simplifier_fraction",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "developpement_factorisation_2de",
+    microId: "devfac_facteur_commun",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "On ne simplifie une fraction que sur des FACTEURS, jamais sur des termes d'une somme.",
+    tags: ["seconde", "maths", "algebre", "fraction", "template"],
+    generate: () => {
+      // ⭐ FREDERIC, 10/09/2026 : « on factorise aussi pour SIMPLIFIER UNE
+      // FRACTION, mais plus rare ». C'est le troisieme usage du chapitre, apres
+      // resoudre et choisir la forme — et il n'existait nulle part.
+      const k = randomInt(2, 6);
+      const a = randomInt(1, 8);
+      // (kx + ka) / k = x + a, en passant par k(x + a)
+      const correct = `$x + ${a}$`;
+      const choices = makeChoices(correct, [
+        `$${k}x + ${a}$`,
+        `$x + ${k * a}$`,
+        `$${k}x + ${k * a}$`,
+        "on ne peut pas simplifier",
+      ]);
+      return {
+        text: `Simplifier la fraction $\\dfrac{${k}x + ${k * a}}{${k}}$.`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une fraction ne se simplifie que par un FACTEUR commun au numérateur et au dénominateur.",
+          "Le numérateur est une SOMME : on le factorise d'abord pour faire apparaître un facteur, puis on simplifie.",
+          `$${k}x + ${k * a} = ${k}(x + ${a})$, donc $\\dfrac{${k}(x + ${a})}{${k}} = x + ${a}$.`,
+          `${correct}. ⛔ Sans factoriser, on serait tenté de « barrer » le $${k}$ du seul premier terme — et ce serait faux : on ne simplifie jamais un terme d'une somme.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_devfac_forme_selon_but",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "developpement_factorisation_2de",
+    microId: "devfac_choisir_forme",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Résoudre une équation nulle demande un PRODUIT ; calculer une image demande une somme.",
+    tags: ["seconde", "maths", "algebre", "choisir_forme", "raisonnement", "template"],
+    generate: () => {
+      const resoudre = Math.random() < 0.5;
+      const n = randomInt(2, 7);
+      const correct = resoudre ? "la forme FACTORISÉE" : "la forme DÉVELOPPÉE";
+      const choices = makeChoices(correct, [
+        resoudre ? "la forme DÉVELOPPÉE" : "la forme FACTORISÉE",
+        "les deux conviennent également",
+        "aucune des deux ne permet de conclure",
+      ]);
+      const but = resoudre
+        ? `résoudre $f(x) = 0$`
+        : `calculer $f(0)$ et reconnaître l'ordonnée à l'origine`;
+      return {
+        text:
+          `Soit $f(x) = (x - ${n})(x + ${n})$, aussi égale à $x^2 - ${n * n}$. ` +
+          `Quelle forme choisir pour ${but} ?`,
+        format: "qcm",
+        choices,
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Les deux écritures désignent la même fonction : on choisit celle qui rend la question FACILE.",
+          "Résoudre une équation nulle demande un produit ; lire une valeur ou un coefficient demande une somme.",
+          resoudre
+            ? `Factorisée, $f(x) = 0$ donne immédiatement $x = ${n}$ ou $x = ${-n}$. Développée, on ne saurait pas par où commencer.`
+            : `Développée, $f(0) = -${n * n}$ se lit d'un coup. Factorisée, il faudrait multiplier avant de conclure.`,
+          `${correct}. ⭐ On ne factorise pas par principe : on factorise POUR RÉSOUDRE.`
+        ),
+      };
+    },
+  },
 ];
