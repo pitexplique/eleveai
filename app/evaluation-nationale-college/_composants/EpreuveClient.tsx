@@ -166,6 +166,15 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
   /** « 6e » s'écrit « 6ᵉ » quand on l'affiche. */
   const classeLabel = config.classe.replace(/e$/, "ᵉ");
   /**
+   * LA MATIÈRE DANS UNE PHRASE, et c'est le mot COURT. `matiereLabel` est une
+   * étiquette de pastille (« Mathématiques ») ; le titre, lui, dit « en maths »
+   * — comme le <title> de la page et comme le reste du site. `config.matiere`
+   * porte déjà ce mot court, il ne lui manque que la cédille ; une matière
+   * qu'on ajouterait demain retombe sur sa propre clé, jamais sur du vide.
+   */
+  const matierePhrase =
+    config.matiere === "francais" ? "français" : config.matiere;
+  /**
    * LA COULEUR DE L'ÉPREUVE, la même que sa carte sur le hub (09/08). Elle
    * remplace le `cyan-800` unique du papier journal : quatre épreuves qui se
    * ressemblaient trait pour trait, on ne savait plus laquelle on passait.
@@ -592,7 +601,18 @@ export default function EpreuveClient({ config }: { config: ConfigEpreuve }) {
                     boxDecorationBreak: "clone",
                   }}
                 >
-                  L&apos;évaluation nationale, en vrai
+                  {/* ⚠️ LA CLASSE ET LA MATIÈRE SONT DANS LE TITRE, et elles
+                      doivent y rester (10/09). Les quatre épreuves portaient
+                      le même h1 — « L'évaluation nationale, en vrai » — et le
+                      HTML servi était identique à 70-86 % d'une épreuve à
+                      l'autre : 11 à 17 mots propres par page sur ~250. Le seul
+                      endroit qui les distinguait était le <title> et la
+                      pastille au-dessus, en 11 px. Une seule des quatre
+                      remontait dans les visites. Le h1 est le signal le plus
+                      fort après le <title> : il dit maintenant LAQUELLE des
+                      quatre on ouvre. La formule, elle, ne bouge pas. */}
+                  L&apos;évaluation nationale de {classeLabel} en{" "}
+                  {matierePhrase}, en vrai
                 </span>
               </h1>
               <p className="mt-4 text-sm font-medium leading-6 text-[#1d1c16]/75">
