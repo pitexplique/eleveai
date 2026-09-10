@@ -476,12 +476,31 @@ export default function FicheCoursClient({
                 Deux colonnes règlent les deux d'un coup : la grille est pleine,
                 et chaque carte passe à ~340 px.
                 ⚠️ 102 fiches ont exactement quatre propriétés — c'est le cas le
-                plus fréquent du site, mesuré le jour même. */}
-            <div
-              className={`mt-4 grid gap-4 md:grid-cols-2 print:grid-cols-3 print:gap-3 ${
-                fiche.proprietes.length === 4 ? "lg:grid-cols-2" : "lg:grid-cols-3"
-              }`}
-            >
+                plus fréquent du site, mesuré le jour même.
+
+                ⛔⛔ ET L'IMPRESSION AUSSI PASSE À DEUX, DEPUIS LE 10/09/2026.
+                J'y avais laissé trois colonnes en supposant qu'A4 avait la
+                place. Frédéric, PDF en main : « les 3 colonnes ça va pas, fais
+                des deux colonnes toujours, car ça ne le fait pas du tout ».
+                Le calcul confirme : une A4 offre ~17,5 cm de contenu, soit
+                ~660 px — divisés par trois, on retombe à ~215 px par carte,
+                c'est-à-dire EXACTEMENT la largeur qui cassait le web. Sur ses
+                captures, « Les carrés parfaits » s'arrête à « 1 | 4 | 9 | 1… ».
+                👉 Le papier n'était pas plus large, il était plus SILENCIEUX :
+                pas de barre de défilement pour signaler la coupure.
+                ⚠️ Le prix est réel et assumé : moins de colonnes, plus de pages.
+
+                ⭐ Le bloc « identité » garde ses trois colonnes : il porte trois
+                libellés courts et aucun tableau. */}
+            {/* ⛔⛔ ET PLUS AUCUNE CONDITION, DEPUIS LE 10/09/2026. La règle ne
+                valait que pour QUATRE propriétés ; la fiche de la racine carrée
+                en a CINQ, elle retombait donc en trois colonnes — et son tableau
+                des dix carrés parfaits s'y coupait à « 1 | 4 | 9 | 1… ».
+                Frédéric : « éviter 3 colonnes, surtout si elles sont chargées ».
+                Une carte de propriété porte presque toujours un tableau ou un
+                dessin : elle est chargée par construction. Donc deux colonnes,
+                toujours, quel que soit le nombre de propriétés. */}
+            <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-2 print:grid-cols-2 print:gap-3">
               {fiche.proprietes.map((p) => (
                 <div
                   key={p.titre}
@@ -553,7 +572,7 @@ export default function FicheCoursClient({
                 À deux colonnes, la carte passe à ~340 px et tout rentre.
                 ⚠️ L'impression garde ses trois colonnes : sur A4 la largeur ne
                 manque pas, et le nombre de pages compte. */}
-            <div className="mt-4 grid gap-5 md:grid-cols-2 print:grid-cols-3 print:gap-3">
+            <div className="mt-4 grid gap-5 md:grid-cols-2 print:grid-cols-2 print:gap-3">
             {fiche.methode.map((etape, i) => {
               const Icone = ICONES_METHODE[i % ICONES_METHODE.length];
               const style = STYLES_METHODE[i % STYLES_METHODE.length];
@@ -587,7 +606,7 @@ export default function FicheCoursClient({
             {/* Deux colonnes ici aussi, et pour la même mesure que la méthode :
                 les usages portent des tableaux depuis la 5e, et trois colonnes
                 les rendent illisibles. */}
-            <div className="mt-4 grid gap-4 md:grid-cols-2 print:grid-cols-3 print:gap-3">
+            <div className="mt-4 grid gap-4 md:grid-cols-2 print:grid-cols-2 print:gap-3">
               {fiche.usages.map((usage) => (
                 <div
                   key={usage.titre}
