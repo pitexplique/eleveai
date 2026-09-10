@@ -62,13 +62,40 @@ export default function ColonneGauche() {
   const { eleve, logout } = useEleve();
   const [menuOuvert, setMenuOuvert] = useState(false);
   const [tiroirOuvert, setTiroirOuvert] = useState(false);
-  const [replie, setReplie] = useState(false);
+  /**
+   * ⭐⭐ 10/09/2026 — LA COLONNE EST FERMÉE PAR DÉFAUT (Frédéric).
+   *
+   * « Sur la page d'accueil, mets la barre latérale gauche fermée : je trouve
+   * qu'on perd l'attention, et je me rends compte que je ne la regarde jamais. »
+   * Le second membre de la phrase est le vrai argument, et il vient de
+   * quelqu'un qui utilise cette page tous les jours en classe.
+   *
+   * Ce qu'elle coûtait : 256 px de rubriques à gauche (Coach, Parcours, Calcul
+   * rapide, Dictée, Défis, ×5 matières chacune) pendant que l'écran ne pose
+   * qu'une question, au centre. Une page qui propose trente liens en périphérie
+   * demande de choisir avant d'avoir lu — exactement ce qu'on vient de retirer
+   * en remontant le champ au-dessus des trois rangées.
+   *
+   * ⚠️ `useState(true)` ET NON `false` PUIS UN EFFET QUI REFERME. Le second
+   * peindrait la colonne ouverte, puis la replierait au premier effet : un saut
+   * de 256 px sur la page dont on soigne justement la première seconde. Ici le
+   * rendu serveur et la première peinture sont déjà fermés, et l'effet ne fait
+   * qu'une chose — ROUVRIR pour qui l'a explicitement demandé.
+   *
+   * ⛔ ET LE CHOIX DE CHACUN GAGNE TOUJOURS. La clé garde trois états et non
+   * deux : « ouverte » (on l'a dépliée soi-même, elle le reste), « repliee »
+   * (on l'a fermée), et ABSENTE — le cas neuf, qui vaut maintenant fermée.
+   * Quelqu'un qui s'en sert la garde donc ; c'est le défaut qui change.
+   * ⚠️ Le pli ne concerne que l'ordinateur : sur téléphone la colonne est déjà
+   * un tiroir derrière ☰ (voir plus bas), et rien ne bouge pour elle.
+   */
+  const [replie, setReplie] = useState(true);
 
   useEffect(() => {
     try {
-      setReplie(localStorage.getItem(CLE_COLONNE) === "repliee");
+      setReplie(localStorage.getItem(CLE_COLONNE) !== "ouverte");
     } catch {
-      /* navigation privée : la colonne vit sans */
+      /* navigation privée : la colonne reste fermée, comme le défaut */
     }
   }, []);
 
