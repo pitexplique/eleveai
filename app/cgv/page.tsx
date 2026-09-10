@@ -29,6 +29,7 @@ import {
   VENDEUR,
   VENTE,
   cgvEnVigueur,
+  identitePubliee,
   piecesManquantes,
 } from "@/lib/legal/editeur";
 
@@ -119,7 +120,11 @@ export default function CgvPage() {
         </Article>
 
         <Article titre="2. Identité du vendeur">
-          {VENDEUR.siren ? (
+          {/* ⛔ `identitePubliee`, pas `VENDEUR.siren` : le champ est rempli
+              depuis le 18/08, donc ce bloc affichait le SIREN, l'adresse et le
+              portable dès qu'on connaissait l'URL — alors que rien ne se vend.
+              Corrigé le 09/09/2026, avec /mentions-legales. */}
+          {identitePubliee ? (
             <>
               <p>
                 {VENDEUR.denominationEI}, {VENDEUR.forme}, exerçant sous le

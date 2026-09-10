@@ -22,9 +22,13 @@ export const metadata: Metadata = {
   alternates: {
     canonical: url,
   },
+  /* ⛔ ÉTEINTE LE 09/09/2026 avec /tarifs et /faq/faq-tarifs — page conservée,
+     seulement débranchée. Elle ne dit pas COMBIEN mais POURQUOI, et un « nos
+     tarifs sont justes » qui survit à la grille qu'il défend est pire qu'un
+     silence : il argumente pour des montants que le site n'affiche plus. */
   robots: {
-    index: true,
-    follow: true,
+    index: false,
+    follow: false,
   },
   openGraph: {
     type: "article",

@@ -22,7 +22,7 @@ import PageViewTracker from "@/components/PageViewTracker";
 // ⛔ `PRIX_ETABLISSEMENT_ELEVE_MOIS` et `PLAFOND_ETABLISSEMENT_AN` ont quitté
 // cet import le 01/09/2026 avec l'offre qu'ils déclaraient. Ce JSON-LD vit dans
 // le layout : il partait donc depuis TOUTES les pages du site.
-import { PRIX_ANNUEL, PRIX_MENSUEL } from "@/lib/tarifs";
+import { PRIX_ANNUEL, PRIX_MENSUEL, PRIX_PUBLICS } from "@/lib/tarifs";
 import { VENTE } from "@/lib/legal/editeur";
 
 const geistSans = Geist({
@@ -303,7 +303,22 @@ export default function RootLayout({
          inventer de transaction. Les `offers` ne portent alors que ce qui se
          vend vraiment. */
       isAccessibleForFree: true,
-      offers: [
+      /* ⛔⛔ LES OFFRES SONT DÉBRANCHÉES LE 09/09/2026 (`PRIX_PUBLICS`), ET
+         C'ÉTAIT LA SURFACE LA PLUS LOURDE DU SITE. Ce bloc vit dans le LAYOUT :
+         il publiait les deux prix famille — et deux liens vers /tarifs — sur
+         TOUTES les pages, à chaque rendu. Retirer la carte, le lien du pied de
+         page et la ligne du sitemap sans toucher à ceci aurait laissé la grille
+         se répondre toute seule à qui interroge un assistant. C'est le
+         quatrième endroit de `retirer-du-sitemap-ne-ferme-rien`, et c'est
+         toujours celui qu'on oublie.
+         ⭐ `isAccessibleForFree` RESTE, et c'est ce qu'il faut : le contenu
+         s'atteint bien sans payer. On cesse de déclarer un catalogue, on ne
+         prétend pas que le site est fermé.
+         ⚠️ L'offre enseignant à 0 € part avec les deux autres, non parce
+         qu'elle porte un prix, mais parce qu'elle pointe sur /tarifs#enseignant
+         qui passe en `noindex` le même jour. Déclarer une offre dont l'URL est
+         interdite aux moteurs, c'est se contredire en deux lignes. */
+      ...(PRIX_PUBLICS ? { offers: [
         {
           "@type": "Offer",
           name: "Famille, au mois — par foyer, jamais par enfant",
@@ -391,7 +406,7 @@ export default function RootLayout({
            recevait encore un prix et un plafond.
            ⚠️ Ce qui n'est PAS touché : /dashboard-principal et l'audience
            `etablissement`. L'outil déjà installé n'est pas une vente. */
-      ],
+      ] } : {}),
     },
     {
       "@context": "https://schema.org",

@@ -210,13 +210,15 @@ export default function FrancaisDeLEtrangerPage() {
               espace famille (par email — aucun établissement requis) pour
               suivre la progression de votre enfant.
             </li>
+            {/* ⛔ L'ÉTAPE 3 VENDAIT L'OFFRE FAMILLE SUR /tarifs — retirée le
+                09/09/2026, la page passant en `noindex`. Elle est remplacée et
+                non supprimée : une liste numérotée qui saute du 2 au néant se
+                lit comme un bout manquant, et l'étape utile existe vraiment. */}
             <li>
-              <span className="font-black text-amber-200">3.</span> Pour un
-              accompagnement complet, découvrez l&apos;offre Famille sur la{" "}
-              <Link href="/tarifs" className="font-black text-amber-200 underline underline-offset-2 hover:text-amber-100">
-                page des tarifs
-              </Link>
-              .
+              <span className="font-black text-amber-200">3.</span> Travaillez
+              depuis n&apos;importe quel fuseau : les cahiers, les fiches et les
+              évaluations s&apos;impriment, et le coach fonctionne hors des
+              heures de La Réunion.
             </li>
           </ol>
           <Link

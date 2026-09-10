@@ -118,6 +118,37 @@
 // n'est toujours pas branchée dans l'inscription (report décidé, pas un oubli).
 // ─────────────────────────────────────────────────────────────────────────────
 
+/* ⛔⛔ L'INTERRUPTEUR DES PRIX — POSÉ LE 09/09/2026, EN ATTENTE DE RÉFLEXION.
+   Frédéric : « on va enlever les tarifs », « je veux plus voir des prix »,
+   « débranche, ne supprime pas ». Le site se réoriente peut-être vers un
+   JOURNAL ÉDUCATIF vendu comme tel, et aucune grille ne doit survivre à la
+   réflexion en s'affichant toute seule pendant ce temps-là.
+
+   ⭐ TOUT LE CALCUL RESTE. Les constantes, les dérivées (`MOIS_OFFERTS`,
+   `REDUCTION_ANNUEL_POURCENT`), les pages, leurs textes : rien n'est supprimé.
+   Seul l'AFFICHAGE est débranché. Remettre les prix en ligne, c'est repasser
+   cette ligne à `true` — et rien d'autre.
+
+   ⚠️ CE QU'IL COUVRE, ET IL FAUT LES QUATRE (voir la note
+   `retirer-du-sitemap-ne-ferme-rien`, où l'oubli a coûté deux jours) :
+     1. le JSON-LD de `app/layout.tsx` — le plus lourd, il publiait les deux
+        offres famille sur TOUTES les pages du site ;
+     2. `app/llms.txt/route.ts` — lu par les modèles de langage, invisible en
+        navigant, et c'est celui qu'on oublie systématiquement ;
+     3. les blocs de prix des pages qui restent en ligne (/parents, /presse,
+        /espace-parents, /espace-profs) ;
+     4. les trois pages entièrement consacrées au prix (/tarifs,
+        /pourquoi-nos-tarifs-sont-justes, /faq/faq-tarifs), qui passent en
+        `noindex` et sortent du sitemap — leurs répertoires RESTENT.
+   ⛔ Les liens internes vers /tarifs sont coupés dans le même geste. Une page
+   qu'on dit aux moteurs d'ignorer et vers laquelle le site pointe encore est
+   signalée en erreur par la Search Console — c'est le précédent de /photo-cours.
+
+   ⚠️ `scripts/verifier-tarifs.ts` continue de tourner et c'est voulu : il
+   garantit qu'aucun prix n'est écrit à la main, donc qu'aucun ne réapparaîtra
+   par une page oubliée le jour où l'on rallume. */
+export const PRIX_PUBLICS = false;
+
 /**
  * ⭐ 2,50 € PAR MOIS, SANS ENGAGEMENT — par FOYER, jamais par enfant, sur une
  * seule adresse courriel. Le frère d'à côté ne coûte rien de plus.

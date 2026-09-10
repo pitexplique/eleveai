@@ -20,7 +20,7 @@ import type { Metadata } from "next";
 // silence : c'est la leçon du llms.txt qui prétendait que le coach ne demandait
 // pas de compte.
 import { VENTE } from "@/lib/legal/editeur";
-import { ENSEIGNANT, PRIX_MENSUEL, montant } from "@/lib/tarifs";
+import { ENSEIGNANT, PRIX_MENSUEL, PRIX_PUBLICS, montant } from "@/lib/tarifs";
 
 /** L'effectif d'une classe ordinaire — sert d'illustration, plus de calcul. */
 const CLASSE_EXEMPLE_ELEVES = 30;
@@ -411,10 +411,16 @@ export default function EnseignantsPage() {
                   annoncera de bonne foi à ses familles — qui découvriront le
                   prix devant la caisse. La restriction est donc sur la ligne
                   d'après le mot, pas en bas de page. */}
+              {/* ⛔ LE MONTANT PART LE 09/09/2026 (`PRIX_PUBLICS`), MAIS PAS LA
+                  RESTRICTION. Les deux moitiés ne se séparent toujours pas :
+                  supprimer « pas pour les familles de vos élèves » en même temps
+                  que le prix rendrait la phrase FAUSSE dans le sens exact que le
+                  commentaire ci-dessus interdit — un professeur lirait « gratuit »
+                  tout court et l'annoncerait à sa classe. */}
               <p className="mt-1 text-sm font-black text-sky-800">
                 Ouvert sur {ENSEIGNANT.verification} — gratuit pour vous, pas
-                pour les familles de vos élèves, qui restent à{" "}
-                {montant(PRIX_MENSUEL)} par mois
+                pour les familles de vos élèves
+                {PRIX_PUBLICS ? <>, qui restent à {montant(PRIX_MENSUEL)} par mois</> : null}
               </p>
               {/* ⛔ CETTE PHRASE DISAIT « LES FAMILLES DE VOTRE CLASSE NE PAIENT
                   RIEN » — vrai du forfait professeur du 21/08, faux depuis le 22.

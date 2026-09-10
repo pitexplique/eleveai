@@ -408,7 +408,15 @@ const ROUTES: RouteConfig[] = [
   { path: "/qui-sommes-nous",   priority: 0.7,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   // 0,7 → 0,85 le 21/08 : la page est devenue une destination de l'en-tête et
   // porte désormais les trois offres. Elle n'est plus une annexe.
-  { path: "/tarifs",            priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_TARIFS },
+  // ⛔⛔ /tarifs SORT DU SITEMAP LE 09/09/2026, avec /pourquoi-nos-tarifs-sont-justes
+  // et /faq/faq-tarifs. Les trois passent en `noindex` le même jour, leurs liens
+  // de pied de page et d'en-tête sont coupés, et le JSON-LD du layout cesse de
+  // déclarer les offres. ⚠️ Les quatre gestes vont ensemble : retirer cette
+  // ligne seule n'aurait RIEN éteint.
+  // ⭐ LES PAGES EXISTENT TOUJOURS et répondent en 200 — « débranche, ne
+  // supprime pas ». C'est un choix : la réflexion en cours (un journal éducatif
+  // vendu comme tel) peut les rallumer, et `PRIX_PUBLICS` dans lib/tarifs.ts est
+  // l'unique interrupteur.
   // ⭐ 22/08 — LA FORMATION CRPE ENTRE AU SITEMAP, le statut URSSAF étant réglé.
   // `weekly` et non `monthly` : les inscriptions se jouent avant le 3 octobre et
   // le nombre de places bouge. Priorité 0,8, au niveau de /tarifs et non des
@@ -430,7 +438,7 @@ const ROUTES: RouteConfig[] = [
   // ⚠️ /entreprises reste : partenariat pédagogique gratuit, c'est d'elle que
   // viennent les simulateurs (l'hôtel, la fromagerie). Ce n'est pas la même page.
   { path: "/charte",            priority: 0.7,  changeFrequency: "monthly", lastMod: LASTMOD_CORE },
-  { path: "/pourquoi-nos-tarifs-sont-justes", priority: 0.65, changeFrequency: "monthly", lastMod: LASTMOD_TARIFS },
+  // ⛔ /pourquoi-nos-tarifs-sont-justes retirée le 09/09/2026 — voir /tarifs.
   // ⛔ /offre-pilote a quitté le sitemap ET le site le 31/08/2026 : « Collèges
   // et lycées », 0,50 €/élève/mois, plafond 2 000 €. Elle était encore ici en
   // priorité 0,7 deux jours après la décision de ne plus vendre aux
@@ -449,7 +457,9 @@ const ROUTES: RouteConfig[] = [
   { path: "/faq/faq-professeurs",   priority: 0.55, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/faq/faq-parents",       priority: 0.55, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/faq/faq-administration",priority: 0.5,  changeFrequency: "monthly", lastMod: LASTMOD_TARIFS },
-  { path: "/faq/faq-tarifs",        priority: 0.7,  changeFrequency: "monthly", lastMod: LASTMOD_TARIFS },
+  // ⛔ /faq/faq-tarifs retirée le 09/09/2026 — voir /tarifs. ⚠️ Rangée sous
+  // /faq, elle échappe à un `grep tarifs` fait sur les chemins : c'est la page
+  // de prix qu'on oublie.
 
   // ── LÉGAL ──────────────────────────────────────────────────────────────────
   { path: "/mentions-legales",           priority: 0.3, changeFrequency: "yearly", lastMod: LASTMOD_LEGAL },

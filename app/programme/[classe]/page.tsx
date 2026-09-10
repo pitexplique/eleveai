@@ -348,13 +348,12 @@ export default async function ProgrammePage({
               </Link>
             ))}
           </div>
+          {/* ⛔ Jumelle de celle de components/programme/PageNiveau.tsx, et
+              elles se corrigent ENSEMBLE : la moitié commerciale est retirée le
+              09/09/2026 avec le lien vers /tarifs. */}
           <p className="mt-5 text-sm font-semibold text-slate-500">
-            S&apos;entraîner sur tout ça est{" "}
-            <span className="font-black text-emerald-600">gratuit</span> — ce qui
-            se paie, c&apos;est l&apos;accompagnement dans la durée.{" "}
-            <Link href="/tarifs" className="font-black text-teal-600 underline underline-offset-2 hover:text-teal-500">
-              Voir les offres
-            </Link>
+            S&apos;entraîner sur tout ça{" "}
+            <span className="font-black text-emerald-600">ne coûte rien</span>.
           </p>
         </section>
       </div>

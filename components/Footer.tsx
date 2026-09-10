@@ -171,8 +171,16 @@ const infos = [
   { label: "Préparer les maths du CRPE", href: "/formation-crpe" },
   { label: "Qui sommes-nous", href: "/qui-sommes-nous" },
   { label: "Charte d'usage de l'IA", href: "/charte" },
-  { label: "Tarifs", href: "/tarifs" },
-  { label: "Pourquoi nos tarifs sont justes", href: "/pourquoi-nos-tarifs-sont-justes" },
+  /* ⛔⛔ « TARIFS » ET « POURQUOI NOS TARIFS SONT JUSTES » RETIRÉS LE
+     09/09/2026 — Frédéric : « je veux plus voir des prix », en attente d'une
+     réflexion sur un journal éducatif vendu comme tel.
+     ⚠️ C'était le lien le plus lourd des douze : présent dans le pied de
+     TOUTES les pages du site, il envoyait sur la grille depuis n'importe où —
+     exactement le rôle qu'avait « Établissements scolaires » avant le 29/08.
+     ⚠️ LES TROIS GESTES VONT ENSEMBLE, comme toujours ici : ce lien, la ligne
+     du sitemap, et le `noindex` posé sur la page. Les pages, elles, ne sont PAS
+     supprimées — « débranche, ne supprime pas ». Voir `PRIX_PUBLICS` dans
+     lib/tarifs.ts, l'interrupteur unique qui les rallume. */
   { label: "Presse", href: "/presse" },
   // ⛔ « Partenaires » retiré le 31/08/2026 : la page est supprimée et redirigée
   // vers /contact. Le lien du pied de page était l'une des raisons pour

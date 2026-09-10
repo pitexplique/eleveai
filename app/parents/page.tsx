@@ -35,16 +35,23 @@ import {
   PERIODE_ANNUELLE,
   PRIX_ANNUEL,
   PRIX_MENSUEL,
+  PRIX_PUBLICS,
   montant,
 } from "@/lib/tarifs";
 
 export const metadata: Metadata = {
   title: "Parents",
-  description: `Une IA qui explique, jamais qui fait à la place. Encadrée par un enseignant, sans publicité, données protégées. Votre enfant ne paie jamais ; la vue du parent est à ${montant(
-    PRIX_MENSUEL,
-  )} par mois ou ${montant(
-    PRIX_ANNUEL,
-  )} ${PERIODE_ANNUELLE}, sur une seule adresse courriel et quel que soit le nombre d'enfants.`,
+  /* ⛔ LE PRIX SORT DE LA DESCRIPTION LE 09/09/2026 (`PRIX_PUBLICS`). ⚠️ C'est
+     la SERP : ce texte est ce que Google affiche sous le lien, et il s'y
+     périme plus lentement que la page — une grille annoncée ici survit des
+     semaines à la carte qui l'a produite (« 4,90 €/mois », voir lib/tarifs.ts). */
+  description: PRIX_PUBLICS
+    ? `Une IA qui explique, jamais qui fait à la place. Encadrée par un enseignant, sans publicité, données protégées. Votre enfant ne paie jamais ; la vue du parent est à ${montant(
+        PRIX_MENSUEL,
+      )} par mois ou ${montant(
+        PRIX_ANNUEL,
+      )} ${PERIODE_ANNUELLE}, sur une seule adresse courriel et quel que soit le nombre d'enfants.`
+    : `Une IA qui explique, jamais qui fait à la place. Encadrée par un enseignant, sans publicité, données protégées. Votre enfant ne paie jamais : le coach, les exercices, les parcours et les évaluations restent ouverts sans limite de temps.`,
   alternates: { canonical: "https://www.eleveai.fr/parents" },
 };
 
@@ -94,12 +101,19 @@ const faq = [
     // PAYER NON PLUS ». Aucun collège ne participe et aucun ne le peut : la
     // vente aux établissements est interdite depuis le 31/08. La phrase
     // envoyait le parent demander un code qui n'existe pas.
+    /* ⛔ 09/09/2026 — LA RÉPONSE PERD SON MONTANT, PAS SA RÉPONSE. La question
+       « Combien ça coûte, pour moi ? » se garde et se répond : ce qui compte
+       pour le parent qui la pose, c'est que son enfant, lui, ne paie rien.
+       ⚠️ Ne pas supprimer la question : une FAQ de page parents sans ligne sur
+       le coût donne à croire qu'on l'esquive. */
     q: "Combien ça coûte, pour moi ?",
-    a: `Votre enfant, lui, ne paie jamais : le coach, les exercices, les parcours et les évaluations restent ouverts sans limite de temps. L'offre famille est à ${montant(
-      PRIX_MENSUEL,
-    )} par mois sans engagement, ou ${montant(
-      PRIX_ANNUEL,
-    )} ${PERIODE_ANNUELLE} — sur une seule adresse courriel et pour toute la maison quel que soit le nombre d'enfants. Elle ouvre votre vue à vous : son bulletin, sa semaine, et quoi reprendre ensuite.`,
+    a: PRIX_PUBLICS
+      ? `Votre enfant, lui, ne paie jamais : le coach, les exercices, les parcours et les évaluations restent ouverts sans limite de temps. L'offre famille est à ${montant(
+          PRIX_MENSUEL,
+        )} par mois sans engagement, ou ${montant(
+          PRIX_ANNUEL,
+        )} ${PERIODE_ANNUELLE} — sur une seule adresse courriel et pour toute la maison quel que soit le nombre d'enfants. Elle ouvre votre vue à vous : son bulletin, sa semaine, et quoi reprendre ensuite.`
+      : `Votre enfant, lui, ne paie jamais : le coach, les exercices, les parcours et les évaluations restent ouverts sans limite de temps, et il garde ses résultats. Une formule d'abonnement destinée aux parents — votre vue à vous : son bulletin, sa semaine, et quoi reprendre ensuite — est en cours de réexamen : aucun tarif n'est publié aujourd'hui, et rien n'est encaissé.`,
   },
   {
     // ⭐ LA QUESTION QUE POSE LA COMPARAISON AVEC LES CONCURRENTS, et la seule
@@ -395,17 +409,29 @@ export default function ParentsPage() {
                   ne s'écrit jamais sans elle (le piège du facteur douze du
                   22/08). Ce qui descend, c'est l'argument commercial, qui va
                   rejoindre la formule annuelle. */}
-              <p className="mt-2 text-3xl font-black leading-tight text-slate-900">
-                {montant(PRIX_MENSUEL)}
-                <span className="ml-1 align-middle text-base font-black text-slate-500">
-                  par mois
-                </span>
-              </p>
-              {/* ⛔ MENTION OBLIGATOIRE : le prix annuel ne s'affiche jamais
-                  sans sa période — article 8 des CGV. */}
-              <p className="mt-1 text-sm font-bold text-slate-500">
-                Sans engagement, ou {montant(PRIX_ANNUEL)} {PERIODE_ANNUELLE}.
-              </p>
+              {/* ⛔ LES DEUX MONTANTS SONT DÉBRANCHÉS LE 09/09/2026
+                  (`PRIX_PUBLICS`). ⚠️ Ils partent ENSEMBLE et c'est obligatoire :
+                  le prix annuel ne s'affiche jamais sans sa période (article 8
+                  des CGV), donc garder l'un sans l'autre serait un défaut de
+                  mention, pas une demi-mesure. */}
+              {PRIX_PUBLICS ? (
+                <>
+                  <p className="mt-2 text-3xl font-black leading-tight text-slate-900">
+                    {montant(PRIX_MENSUEL)}
+                    <span className="ml-1 align-middle text-base font-black text-slate-500">
+                      par mois
+                    </span>
+                  </p>
+                  <p className="mt-1 text-sm font-bold text-slate-500">
+                    Sans engagement, ou {montant(PRIX_ANNUEL)} {PERIODE_ANNUELLE}.
+                  </p>
+                </>
+              ) : (
+                <p className="mt-2 text-sm font-bold text-slate-500">
+                  La formule est en cours de réexamen : aucun tarif n&apos;est
+                  publié, et rien n&apos;est encaissé.
+                </p>
+              )}
               <ul className="mt-4 space-y-2.5">
                 {[
                   ["📊", "Son bulletin : où il en est, matière par matière"],

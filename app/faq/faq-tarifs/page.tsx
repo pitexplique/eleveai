@@ -22,6 +22,11 @@ export const metadata: Metadata = {
   title: "FAQ Tarifs",
   description: resume,
   alternates: { canonical: "/faq/faq-tarifs" },
+  /* ⛔ ÉTEINTE LE 09/09/2026 avec /tarifs — page conservée, débranchée.
+     ⚠️ C'est la troisième page de prix, et la plus facile à oublier : elle est
+     rangée sous /faq et non sous /tarifs, donc elle échappe à un `grep tarifs`
+     fait sur les chemins. Elle affichait onze montants. */
+  robots: { index: false, follow: false },
   openGraph: {
     title: "FAQ Tarifs – EleveAI",
     description: resume,

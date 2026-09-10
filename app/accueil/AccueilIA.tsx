@@ -44,7 +44,8 @@ const PIED = [
   // comme titre : c'est la page de la collection.
   { label: "Fiches de cours", href: "/fiches-cours" },
   { label: "Toutes les ressources", href: "/explorer" },
-  { label: "Tarifs", href: "/tarifs" },
+  // ⛔ « Tarifs » retiré le 09/09/2026 : la page passe en `noindex` le même
+  // jour. Voir `PRIX_PUBLICS` dans lib/tarifs.ts — l'interrupteur qui rallume.
   { label: "À propos", href: "/qui-sommes-nous" },
   { label: "Aide", href: "/faq" },
   { label: "Confidentialité", href: "/politique-confidentialite" },

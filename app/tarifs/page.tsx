@@ -36,7 +36,18 @@ export const metadata: Metadata = {
   title: "Tarifs — apprendre, progresser, s'évaluer",
   description: resume,
   alternates: { canonical: url },
-  robots: { index: true, follow: true },
+  /* ⛔⛔ `noindex` LE 09/09/2026 — LA PAGE EST ÉTEINTE, PAS SUPPRIMÉE.
+     Frédéric : « on la supprime pas, on l'éteint en attente de réflexion »,
+     puis « je veux plus voir des prix ». Le répertoire, le client et tout le
+     texte RESTENT : c'est `PRIX_PUBLICS` dans lib/tarifs.ts qui commande, et
+     rallumer tient en une ligne.
+     ⚠️ `follow: false` AUSSI, et ce n'est pas symétrique par confort : la page
+     porte des liens vers /cgv et /pourquoi-nos-tarifs-sont-justes qu'on ne veut
+     pas voir recrawlés depuis une grille en réexamen.
+     ⚠️ Le `noindex` ne suffit à rien seul — voir `retirer-du-sitemap-ne-ferme-rien`.
+     Il va avec la ligne retirée du sitemap et les liens internes coupés (pied
+     de page, en-tête, accueil, programme, français de l'étranger). */
+  robots: { index: false, follow: false },
   openGraph: {
     type: "website",
     url,

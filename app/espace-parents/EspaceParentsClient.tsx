@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import { VENTE } from "@/lib/legal/editeur";
-import { PRIX_ANNUEL, montant } from "@/lib/tarifs";
+import { PRIX_ANNUEL, PRIX_PUBLICS, montant } from "@/lib/tarifs";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // LA FENÊTRE DU PARENT, REFAITE LE 21/08/2026.
@@ -275,40 +275,66 @@ export default function EspaceParentsClient() {
                 </strong>
               </p>
 
-              <p className="mt-4">
-                <span className="bg-gradient-to-r from-emerald-500 to-green-600 bg-clip-text text-4xl font-black text-transparent">
-                  {montant(PRIX_ANNUEL)}
-                </span>{" "}
-                {/* ⛔ « PAR AN » SEUL ÉTAIT INSUFFISANT DEPUIS LE 01/09 :
-                    l'abonnement annuel couvre l'ANNÉE SCOLAIRE, pas douze mois
-                    glissants, et c'est une mention obligatoire. Elle se colle au
-                    prix, elle ne se renvoie pas aux CGV. */}
-                <span className="text-lg font-black text-slate-900">
-                  pour l&apos;année scolaire
-                </span>
-              </p>
-              <p className="mt-1 text-sm font-black text-emerald-700">
-                Une adresse courriel, tous les enfants de la maison
-              </p>
+              {/* ⛔⛔ LA CARTE DE PRIX EST DÉBRANCHÉE LE 09/09/2026
+                  (`PRIX_PUBLICS`) : le montant en 4xl, le bouton qui le répète
+                  et les DEUX liens vers /tarifs#famille, qui passe en `noindex`
+                  le même jour. Ce n'était pas une mention de prix parmi
+                  d'autres — c'était le geste d'achat de la page parents.
+                  ⭐ CE QUI RESTE EN FACE N'EST PAS UN TROU : la promesse tient
+                  sans son prix (« ce qui se paie, c'est que ça se souvienne de
+                  votre enfant » juste au-dessus, et la liste des quatre choses
+                  qu'ouvre la fenêtre juste en dessous). On retire le montant et
+                  la caisse, pas l'explication. */}
+              {PRIX_PUBLICS ? (
+                <>
+                  <p className="mt-4">
+                    <span className="bg-gradient-to-r from-emerald-500 to-green-600 bg-clip-text text-4xl font-black text-transparent">
+                      {montant(PRIX_ANNUEL)}
+                    </span>{" "}
+                    {/* ⛔ « PAR AN » SEUL ÉTAIT INSUFFISANT DEPUIS LE 01/09 :
+                        l'abonnement annuel couvre l'ANNÉE SCOLAIRE, pas douze
+                        mois glissants, et c'est une mention obligatoire. Elle se
+                        colle au prix, elle ne se renvoie pas aux CGV. */}
+                    <span className="text-lg font-black text-slate-900">
+                      pour l&apos;année scolaire
+                    </span>
+                  </p>
+                  <p className="mt-1 text-sm font-black text-emerald-700">
+                    Une adresse courriel, tous les enfants de la maison
+                  </p>
 
-              {venteOuverte ? (
-                <Link
-                  href="/tarifs#famille"
-                  className="mt-5 inline-flex rounded-2xl bg-gradient-to-r from-emerald-400 to-green-500 px-8 py-4 text-base font-black text-white shadow-lg transition hover:-translate-y-0.5"
-                >
-                  S&apos;abonner — {montant(PRIX_ANNUEL)} pour l&apos;année
-                </Link>
+                  {venteOuverte ? (
+                    <Link
+                      href="/tarifs#famille"
+                      className="mt-5 inline-flex rounded-2xl bg-gradient-to-r from-emerald-400 to-green-500 px-8 py-4 text-base font-black text-white shadow-lg transition hover:-translate-y-0.5"
+                    >
+                      S&apos;abonner — {montant(PRIX_ANNUEL)} pour l&apos;année
+                    </Link>
+                  ) : (
+                    <>
+                      <Link
+                        href="/tarifs#famille"
+                        className="mt-5 inline-flex rounded-2xl bg-gradient-to-r from-emerald-400 to-green-500 px-8 py-4 text-base font-black text-white shadow-lg transition hover:-translate-y-0.5"
+                      >
+                        Voir l&apos;offre famille
+                      </Link>
+                      <p className="mt-3 text-xs font-bold text-slate-500">
+                        Cette vue se construit en ce moment. Le prix ci-dessus est
+                        ferme, et rien n&apos;est encaissé tant qu&apos;elle
+                        n&apos;est pas prête.
+                      </p>
+                    </>
+                  )}
+                </>
               ) : (
                 <>
-                  <Link
-                    href="/tarifs#famille"
-                    className="mt-5 inline-flex rounded-2xl bg-gradient-to-r from-emerald-400 to-green-500 px-8 py-4 text-base font-black text-white shadow-lg transition hover:-translate-y-0.5"
-                  >
-                    Voir l&apos;offre famille
-                  </Link>
+                  <p className="mt-4 text-sm font-black text-emerald-700">
+                    Une adresse courriel, tous les enfants de la maison
+                  </p>
                   <p className="mt-3 text-xs font-bold text-slate-500">
-                    Cette vue se construit en ce moment. Le prix ci-dessus est ferme, et
-                    rien n&apos;est encaissé tant qu&apos;elle n&apos;est pas prête.
+                    Cette vue se construit en ce moment, et sa formule est en
+                    cours de réexamen : aucun tarif n&apos;est publié, et rien
+                    n&apos;est encaissé.
                   </p>
                 </>
               )}

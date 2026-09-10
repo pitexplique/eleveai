@@ -828,9 +828,14 @@ export default function Header() {
                   de marque à partir de la NAVIGATION, et /tarifs n'y sera plus.
                   La rubrique mettra des semaines à revenir le jour où on
                   rallume. C'est le prix à payer, il est connu.
-                  ⚠️ La page /tarifs, elle, N'EST PAS retirée : elle reste en
-                  ligne, au sitemap, et liée depuis le pied de page. On coupe
-                  l'invitation permanente, pas l'information.
+                  ⚠️ MISE À JOUR DU 09/09/2026 — LE PARAGRAPHE CI-DESSUS N'EST
+                  PLUS VRAI, et il ne faut pas s'y fier. Il disait que /tarifs
+                  restait « en ligne, au sitemap, et liée depuis le pied de
+                  page » : ce jour-là elle est passée en `noindex`, sortie du
+                  sitemap, et son lien de pied de page a été coupé, avec
+                  /pourquoi-nos-tarifs-sont-justes et /faq/faq-tarifs. La page
+                  répond toujours en 200 — « débranche, ne supprime pas ».
+                  L'interrupteur unique est `PRIX_PUBLICS` dans lib/tarifs.ts.
 
                   ✅ POUR RALLUMER : décommenter ce bloc ET son jumeau du menu
                   mobile (chercher « ÉTEINTE LE 23/08 » plus bas dans ce même

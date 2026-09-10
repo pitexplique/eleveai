@@ -5,7 +5,7 @@ import {
   HEBERGEUR,
   VENDEUR,
   cgvEnVigueur,
-  identiteProfessionnelleComplete,
+  identitePubliee,
 } from "@/lib/legal/editeur";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -66,7 +66,12 @@ export default function MentionsLegalesPage() {
           )}
         </p>
 
-        {identiteProfessionnelleComplete ? (
+        {/* ⛔ `identitePubliee`, PAS `identiteProfessionnelleComplete` — la
+            distinction a laissé le SIREN, l'adresse et le PORTABLE PERSONNEL en
+            ligne jusqu'au 09/09/2026. Le second dit « les champs sont remplis »
+            (ils le sont depuis le 18/08) ; seul le premier dit « quelque chose
+            se vend », et c'est ce qui déclenche l'obligation de publier. */}
+        {identitePubliee ? (
           <>
             {/* « EI » accolé au nom : art. R526-27 du code de commerce. */}
             <p>

@@ -148,16 +148,14 @@ export function PageNiveau({
           ))}
         </div>
 
+        {/* ⛔ LA MOITIÉ COMMERCIALE EST RETIRÉE LE 09/09/2026 : « ce qui se
+            paie, c'est l'accompagnement dans la durée » + « Voir les offres »
+            pointaient sur /tarifs, qui passe en `noindex` le même jour.
+            ⚠️ Et « est gratuit » devient « ne coûte rien » — quand on décrit
+            l'offre, ça se dit par le VERBE. */}
         <p className="mt-8 text-sm font-semibold text-slate-500">
-          S&apos;entraîner sur tout ça est{" "}
-          <span className="font-black text-emerald-600">gratuit</span> — ce qui
-          se paie, c&apos;est l&apos;accompagnement dans la durée.{" "}
-          <Link
-            href="/tarifs"
-            className="font-black text-teal-600 underline underline-offset-2 hover:text-teal-500"
-          >
-            Voir les offres
-          </Link>
+          S&apos;entraîner sur tout ça{" "}
+          <span className="font-black text-emerald-600">ne coûte rien</span>.
         </p>
       </div>
     </main>

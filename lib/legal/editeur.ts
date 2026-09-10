@@ -155,9 +155,44 @@ export const VENTE = {
   ouverteAuxParticuliers: true,
 };
 
-/** Ce qu'un éditeur professionnel doit publier : identité, siège, joignabilité. */
+/** Ce qu'un éditeur professionnel doit publier : identité, siège, joignabilité.
+    ⚠️ CE BOOLÉEN DIT « LES PIÈCES SONT RÉUNIES », PAS « ON LES AFFICHE ». Les
+    deux ont été confondus jusqu'au 09/09/2026 — voir `identitePubliee`. */
 export const identiteProfessionnelleComplete: boolean = Boolean(
   VENDEUR.siren && VENDEUR.adresse
+);
+
+/* ⛔⛔ L'INTERRUPTEUR D'IDENTITÉ — POSÉ LE 09/09/2026, ET IL RÉPARE UNE FUITE
+   RÉELLE. Jusqu'à ce jour, `/mentions-legales` et `/cgv` affichaient le SIREN,
+   l'adresse d'établissement ET le portable personnel de Frédéric, en ligne, sur
+   une page liée depuis TOUTES les pages du site.
+
+   LA CAUSE, et elle ne se voit pas en lisant les commentaires : les pages
+   testaient `identiteProfessionnelleComplete`, c'est-à-dire « les champs sont
+   remplis ». Ils le sont depuis le 18/08. Le commentaire en tête de ce fichier
+   affirmait pourtant le contraire (« tant qu'aucune entreprise n'est
+   immatriculée, elle dit la vérité d'aujourd'hui »). Le commentaire décrivait
+   l'INTENTION, le booléen faisait autre chose — et on relit le commentaire.
+
+   ⭐ CE QU'IL FAUT TESTER, C'EST LA VENTE. Publier son identité professionnelle
+   est une obligation de l'éditeur qui VEND (LCEN art. 6-III) ; un éditeur non
+   professionnel n'a pas à publier son adresse, son courriel suffit. Tant que
+   `VENTE.ouverte` est faux, rien ne se vend : la page retombe donc sur
+   `EDITEUR.statutSansVente`, et l'identité revient TOUTE SEULE le jour de
+   l'ouverture, où elle redevient obligatoire.
+
+   ⛔ NE JAMAIS « RÉPARER » ÇA EN VIDANT `VENDEUR.siren` OU `VENDEUR.adresse` :
+   `cgvEnVigueur` et `piecesManquantes()` s'en servent légitimement pour savoir
+   ce qui manque avant d'encaisser. Ce sont deux booléens distincts, pas un
+   champ à effacer. Frédéric, 09/09 : « débranche, ne supprime pas ».
+
+   ⚠️ CE QUI N'EST PAS COUVERT ET NE DOIT PAS L'ÊTRE : /devis, /facture et
+   /audit-commission lisent `VENDEUR` en direct. Ce sont des outils internes,
+   déjà `noindex` et non liés, qui ÉMETTENT des documents — or une facture sans
+   SIREN est invalide (art. R526-27 du code de commerce). Les débrancher
+   casserait la facturation sans rien retirer du site public. */
+export const identitePubliee: boolean = Boolean(
+  VENTE.ouverte && identiteProfessionnelleComplete
 );
 
 /* Les CGV ne sont « en vigueur » que quand elles sont complètes ET que quelque
