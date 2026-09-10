@@ -16,6 +16,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "algorithmique-et-programmation-4e-cours-exercices-corriges.pdf",
   "algorithmique-et-programmation-5e-cours-exercices-corriges.pdf",
   "algorithmique-et-programmation-6e-cours-exercices-corriges.pdf",
+  "algorithmique-et-python-seconde-cours-exercices-corriges.pdf",
   "algorithmique-variables-boucles-et-programmes-de-calcul-3e-cours-exercices-corriges.pdf",
   "analyser-une-phrase-nature-fonction-accords-cm2-cours-exercices-corriges.pdf",
   "angles-5e-cours-exercices-corriges.pdf",
