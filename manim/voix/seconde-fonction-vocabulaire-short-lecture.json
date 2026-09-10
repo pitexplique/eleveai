@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Lire une image sur une courbe. Et lire un antécédent. Ce n'est pas le même geste.",
+  "01-image": "Pour l'IMAGE d'un nombre : je pars de ce nombre sur l'axe horizontal, je MONTE jusqu'à la courbe, et je lis à gauche.",
+  "02-antecedent": "Pour un ANTÉCÉDENT : je pars du nombre sur l'axe vertical, je TRAVERSE à l'horizontale, et je regarde où ça coupe la courbe.",
+  "03-plusieurs": "Et là, surprise : l'horizontale peut couper la courbe à DEUX endroits. Il y a donc deux antécédents. La verticale, elle, ne coupe jamais qu'une fois.",
+  "04-retenir": "L'image, je monte. L'antécédent, je traverse. Voilà les deux gestes.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

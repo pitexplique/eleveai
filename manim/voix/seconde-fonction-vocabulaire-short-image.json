@@ -1,0 +1,8 @@
+{
+  "00-accroche": "f de x égale x au carré moins deux x. Combien vaut f de 4 ?",
+  "01-remplacer": "Calculer une image, c'est le sens facile : on REMPLACE. Partout où il y a x, j'écris 4.",
+  "02-calcul": "Ça donne : 4 au carré, moins deux fois 4.",
+  "03-resultat": "4 au carré, c'est 16. Deux fois 4, c'est 8. Donc 16 moins 8, égale 8. L'image de 4 est 8.",
+  "04-piege": "Attention avec les négatifs. f de moins 2 : moins 2 au carré vaut 4, POSITIF. Et moins deux fois moins 2 vaut plus 4. Donc f de moins 2 égale 8 aussi.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

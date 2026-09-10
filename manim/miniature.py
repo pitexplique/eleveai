@@ -1364,7 +1364,21 @@ def acc_equations_inequations(d):
     d.text((300, 486), "le sens se retourne", font=police("arialbd.ttf", 36), fill=ROUGE)
 
 
+def acc_fonction_vocabulaire(d):
+    """La dissymetrie, en deux lignes : un resultat contre deux."""
+    f = police("ariblk.ttf", 44)
+    d.text((300, 336), "image de 4 → 8", font=f, fill=VERT)
+    d.text((300, 400), "antécédents de 3", font=f, fill=ROUGE)
+    d.text((300, 464), "−1  et  3", font=police("ariblk.ttf", 52), fill=ROUGE)
+
+
 NOTIONS = {
+    "eleveai-maths-seconde-fonction-vocabulaire": {
+        "badge": "MATHS · SECONDE", "titre": ["IMAGE ET", "ANTÉCÉDENT"], "taille": 66,
+        "sous": "une image est unique, un antécédent non",
+        "accroche": acc_fonction_vocabulaire,
+        "dossier": "seconde/maths/fr",
+    },
     "eleveai-maths-seconde-equations-inequations": {
         "badge": "MATHS · SECONDE", "titre": ["ÉQUATIONS ET", "INÉQUATIONS"], "taille": 58,
         "sous": "diviser par un négatif retourne tout",

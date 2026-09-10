@@ -171,7 +171,42 @@ def acc_eq_probleme(d):
         centre(d, W // 2, 680 + i * 118, txt, police("ariblk.ttf", 76), coul)
 
 
+def acc_fv_dissymetrie(d):
+    centre(d, W // 2, 680, "IMAGE", police("ariblk.ttf", 96), VERT)
+    centre(d, W // 2, 790, "unique", police("ariblk.ttf", 68), VERT)
+    centre(d, W // 2, 940, "ANTÉCÉDENT", police("ariblk.ttf", 78), ROUGE)
+    centre(d, W // 2, 1050, "0, 1, 2, ou plus", police("ariblk.ttf", 58), ROUGE)
+
+
+def acc_fv_image(d):
+    centre(d, W // 2, 690, "f(4)", police("ariblk.ttf", 150), JAUNE)
+    centre(d, W // 2, 900, "4² − 2×4", police("ariblk.ttf", 88), NAVY)
+    centre(d, W // 2, 1040, "= 8", police("ariblk.ttf", 130), VERT)
+
+
+def acc_fv_lecture(d):
+    centre(d, W // 2, 680, "l'image", police("ariblk.ttf", 72), VERT)
+    centre(d, W // 2, 780, "je MONTE", police("ariblk.ttf", 88), VERT)
+    centre(d, W // 2, 940, "l'antécédent", police("ariblk.ttf", 66), ROUGE)
+    centre(d, W // 2, 1040, "je TRAVERSE", police("ariblk.ttf", 82), ROUGE)
+
+
 SHORTS = {
+    "eleveai-maths-seconde-fonction-vocabulaire-short-dissymetrie": {
+        "badge": "MATHS · SECONDE", "titre": ["IMAGE OU", "ANTÉCÉDENT ?"], "taille": 84,
+        "sous": "tout le monde les confond", "accroche": acc_fv_dissymetrie,
+        "dossier": "seconde/maths/fr",
+    },
+    "eleveai-maths-seconde-fonction-vocabulaire-short-image": {
+        "badge": "MATHS · SECONDE", "titre": ["CALCULER", "UNE IMAGE"], "taille": 90,
+        "sous": "il suffit de remplacer", "accroche": acc_fv_image,
+        "dossier": "seconde/maths/fr",
+    },
+    "eleveai-maths-seconde-fonction-vocabulaire-short-lecture": {
+        "badge": "MATHS · SECONDE", "titre": ["LIRE SUR", "UNE COURBE"], "taille": 90,
+        "sous": "deux gestes différents", "accroche": acc_fv_lecture,
+        "dossier": "seconde/maths/fr",
+    },
     "eleveai-maths-seconde-equations-inequations-short-retournement": {
         "badge": "MATHS · SECONDE", "titre": ["DIVISER PAR", "UN NÉGATIF"], "taille": 82,
         "sous": "l'exception qui coûte des points", "accroche": acc_eq_retournement,

@@ -557,6 +557,131 @@
         "2de",
         "Shorts"
       ]
+    },
+    {
+      "id": "fonction-vocabulaire",
+      "notionId": "fonction_vocabulaire_2de",
+      "type": "longue",
+      "fichier": "seconde/maths/paysage/fr/fonction-vocabulaire/eleveai-maths-seconde-fonction-vocabulaire.mp4",
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-fonction-vocabulaire.png",
+      "titre": "Maths seconde · Image, antécédent, courbe — EleveAI",
+      "accroche": "Le vocabulaire de toute l'année de seconde, et une dissymétrie que presque personne ne remarque : une image est unique, un antécédent ne l'est pas.",
+      "chapitres": [
+        [
+          "00:00",
+          "Image, antécédent, courbe"
+        ],
+        [
+          "00:11",
+          "Les objectifs"
+        ],
+        [
+          "00:30",
+          "Image et antécédent"
+        ],
+        [
+          "00:57",
+          "Calculer une image : remplacer"
+        ],
+        [
+          "01:22",
+          "Chercher un antécédent : résoudre"
+        ],
+        [
+          "01:51",
+          "La dissymétrie"
+        ],
+        [
+          "02:17",
+          "Les deux gestes sur la courbe"
+        ],
+        [
+          "02:40",
+          "Défi"
+        ],
+        [
+          "03:02",
+          "Correction"
+        ],
+        [
+          "03:41",
+          "Tu sais maintenant"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/fonction-vocabulaire-2de",
+      "tags": [
+        "maths",
+        "seconde",
+        "2de",
+        "fonction",
+        "image",
+        "antécédent",
+        "courbe",
+        "lycée"
+      ]
+    },
+    {
+      "id": "fv-dissymetrie",
+      "notionId": "fonction_vocabulaire_2de",
+      "microId": "fonction_antecedent",
+      "type": "short",
+      "renvoie_vers": "fonction-vocabulaire",
+      "fichier": "seconde/maths/shorts/fr/fonction-vocabulaire/eleveai-maths-seconde-fonction-vocabulaire-short-dissymetrie.mp4",
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-fonction-vocabulaire-short-dissymetrie.png",
+      "titre": "Image ou antécédent : la différence que tout le monde rate",
+      "accroche": "Une image est unique. Un antécédent peut être zéro, un, deux, ou une infinité. Et sur la courbe, ça se voit : la verticale coupe une fois, l'horizontale peut couper deux fois.",
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/fonction-vocabulaire-2de",
+      "tags": [
+        "maths",
+        "seconde",
+        "fonction",
+        "image",
+        "antécédent",
+        "2de",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "fv-image",
+      "notionId": "fonction_vocabulaire_2de",
+      "microId": "fonction_image_formule",
+      "type": "short",
+      "renvoie_vers": "fonction-vocabulaire",
+      "fichier": "seconde/maths/shorts/fr/fonction-vocabulaire/eleveai-maths-seconde-fonction-vocabulaire-short-image.mp4",
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-fonction-vocabulaire-short-image.png",
+      "titre": "Calculer l'image d'un nombre : il suffit de remplacer",
+      "accroche": "f(x) = x² − 2x, donc f(4) = 4² − 2×4 = 8. Le sens facile. Attention au piège des négatifs : (−2)² vaut 4, positif.",
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/fonction-vocabulaire-2de",
+      "tags": [
+        "maths",
+        "seconde",
+        "fonction",
+        "image",
+        "calculer",
+        "2de",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "fv-lecture",
+      "notionId": "fonction_vocabulaire_2de",
+      "microId": "fonction_resolution_graphique",
+      "type": "short",
+      "renvoie_vers": "fonction-vocabulaire",
+      "fichier": "seconde/maths/shorts/fr/fonction-vocabulaire/eleveai-maths-seconde-fonction-vocabulaire-short-lecture.mp4",
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-fonction-vocabulaire-short-lecture.png",
+      "titre": "Lire une image et un antécédent sur une courbe",
+      "accroche": "Deux gestes différents : pour l'image je MONTE, pour l'antécédent je TRAVERSE. Et l'horizontale peut couper la courbe deux fois.",
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/fonction-vocabulaire-2de",
+      "tags": [
+        "maths",
+        "seconde",
+        "fonction",
+        "lecture graphique",
+        "courbe",
+        "2de",
+        "Shorts"
+      ]
     }
   ]
 }
