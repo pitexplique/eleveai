@@ -1958,7 +1958,38 @@ export default function EntreeMatrice({
             enfant : c'est ce qui lui garde exactement la largeur du champ, la
             filiation se voit encore. Sortir du bloc l'aurait recentrée sur la
             colonne, plus large. */}
-        {demande && (
+        {/* ── ⭐⭐ 10/09/2026 : ELLE NE SORT PLUS QUE QUAND ON N'A PAS COMPRIS ──
+            Frédéric : « il faut la faire disparaitre, la ligne noire, car la
+            barre de recherche affiche les liens ». Il a raison pour le cas
+            normal : depuis la liste suggérée (lib/matrice/suggestions.ts), la
+            notion est nommée, située dans sa classe et CLIQUABLE avant même la
+            validation. Répéter ça après coup, en noir plein, c'est accuser
+            réception de ce que la personne vient de choisir elle-même.
+
+            ⛔ MAIS LE CAS « JE N'AI PAS BIEN COMPRIS » NE VIT QUE DANS CETTE
+            BARRE, et c'est pour lui qu'elle reste. Le bloc « Ce que j'ai
+            compris », plus bas, est gardé par `!demande` et ne sort jamais
+            quand quelqu'un a tapé. Sans ce garde-ci, « subjonctif » en 6ᵉ
+            renverrait « Le coach maths », « Les parcours », « Le calcul
+            rapide » — les portes du niveau, choisies sans rapport avec la
+            question — et RIEN ne dirait qu'on est passé à côté. C'est le
+            « mensonge poli » que ce fichier s'interdit depuis le 20/08.
+
+            ⚠️ POURQUOI PAS EN CSS, alors que la consigne est de ne pas toucher
+            ce fichier (voir app/globals.css). Parce que le CSS ne sait pas lire
+            « a-t-on compris ». Le seul indice qu'il verrait est la présence
+            d'un lien dans la barre — or ce lien dépend de la couverture du
+            coach, qui bouge à chaque fiche écrite : la règle serait juste par
+            coïncidence et dériverait en silence. Et masquer laisse le bloc dans
+            le paquet, image de Ti Margo comprise, chargée en `eager`.
+            Deux mots ici valent mieux qu'un sélecteur vrai par accident.
+
+            ⚠️ CE QUI DEVIENT INATTEIGNABLE ET RESTE ÉCRIT : les branches
+            `lectureCompris` et « Voici ce qu'on te propose » du ternaire plus
+            bas, ainsi que le lien de `cibleBarre`. On ne les retire pas dans le
+            même geste — ce fichier est sous consigne, et le prochain qui
+            l'ouvrira doit voir d'où vient le mort plutôt que de le déterrer. */}
+        {demande && rienCompris && (
           <div
             role="status"
             aria-live="polite"
