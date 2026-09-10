@@ -13,7 +13,7 @@
 // liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
 // par où l'année peut commencer.
 //
-// 799 notions, 40 paquets.
+// 811 notions, 44 paquets.
 
 export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
@@ -5375,6 +5375,90 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         "id": "m.1",
         "label": "m.1 · Travailler honnêtement avec l'IA",
         "prerequis": []
+      }
+    ]
+  },
+  "economie": {
+    "a1": [
+      {
+        "id": "eco_a1_argent",
+        "label": "L'argent : payer et échanger",
+        "prerequis": []
+      },
+      {
+        "id": "eco_a1_budget",
+        "label": "Le budget : ce qui rentre, ce qui sort",
+        "prerequis": [
+          "eco_a1_argent"
+        ]
+      },
+      {
+        "id": "eco_a1_consommer",
+        "label": "Acheter : besoin, envie, comparer",
+        "prerequis": [
+          "eco_a1_budget"
+        ]
+      }
+    ],
+    "a2": [
+      {
+        "id": "eco_a2_entreprise",
+        "label": "L'entreprise : produire et vendre",
+        "prerequis": []
+      },
+      {
+        "id": "eco_a2_marche",
+        "label": "Le marché : offre et demande",
+        "prerequis": [
+          "eco_a2_entreprise"
+        ]
+      },
+      {
+        "id": "eco_a2_travail",
+        "label": "Le travail : salaire et contrat",
+        "prerequis": [
+          "eco_a2_entreprise"
+        ]
+      }
+    ],
+    "b1": [
+      {
+        "id": "eco_b1_fiscalite",
+        "label": "L'impôt : qui paie quoi",
+        "prerequis": []
+      },
+      {
+        "id": "eco_b1_protection",
+        "label": "La protection sociale : cotiser, être couvert",
+        "prerequis": [
+          "eco_b1_fiscalite"
+        ]
+      },
+      {
+        "id": "eco_b1_entreprise",
+        "label": "L'entreprise et le marché, de plus près",
+        "prerequis": []
+      }
+    ],
+    "b2": [
+      {
+        "id": "eco_b2_croissance",
+        "label": "Croissance, PIB et emploi",
+        "prerequis": []
+      },
+      {
+        "id": "eco_b2_prix",
+        "label": "Monnaie, inflation et pouvoir d'achat",
+        "prerequis": [
+          "eco_b2_croissance"
+        ]
+      },
+      {
+        "id": "eco_b2_politiques",
+        "label": "Les choix de l'État : dette et relance",
+        "prerequis": [
+          "eco_b2_prix"
+        ]
       }
     ]
   }

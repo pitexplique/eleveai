@@ -27,7 +27,10 @@ import { englishA1QuestionBank } from "@/lib/tutor-v4/questionBank/a1/english";
 import { englishA2QuestionBank } from "@/lib/tutor-v4/questionBank/a2/english";
 import { englishB1QuestionBank } from "@/lib/tutor-v4/questionBank/b1/english";
 import { englishB2QuestionBank } from "@/lib/tutor-v4/questionBank/b2/english";
-import { economie4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/economie";
+import { economieA1QuestionBank } from "@/lib/tutor-v4/questionBank/a1/economie";
+import { economieA2QuestionBank } from "@/lib/tutor-v4/questionBank/a2/economie";
+import { economieB1QuestionBank } from "@/lib/tutor-v4/questionBank/b1/economie";
+import { economieB2QuestionBank } from "@/lib/tutor-v4/questionBank/b2/economie";
 import { espagnolA1QuestionBank } from "@/lib/tutor-v4/questionBank/a1/espagnol";
 import { espagnolA2QuestionBank } from "@/lib/tutor-v4/questionBank/a2/espagnol";
 import { espagnolB1QuestionBank } from "@/lib/tutor-v4/questionBank/b1/espagnol";
@@ -125,7 +128,10 @@ export async function loadQuestionBankV4(
   if (classe === "b1" && matiere === "english-maths") return englishB1QuestionBank;
   if (classe === "b2" && matiere === "english-maths") return englishB2QuestionBank;
 
-  if (classe === "eco-college" && matiere === "economie") return economie4eQuestionBank;
+  if (classe === "a1" && matiere === "economie") return economieA1QuestionBank;
+  if (classe === "a2" && matiere === "economie") return economieA2QuestionBank;
+  if (classe === "b1" && matiere === "economie") return economieB1QuestionBank;
+  if (classe === "b2" && matiere === "economie") return economieB2QuestionBank;
 
   if (classe === "a1" && matiere === "espagnol") return espagnolA1QuestionBank;
   if (classe === "a2" && matiere === "espagnol") return espagnolA2QuestionBank;

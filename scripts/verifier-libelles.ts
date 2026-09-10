@@ -53,7 +53,7 @@ const COUPLES: [Matiere, Classe[]][] = [
   ["english-maths", ["a1", "a2", "b1", "b2"]],
   ["espagnol", ["a1", "a2", "b1", "b2"]],
   ["ia", ["pix-college", "pix-lycee", "a1", "a2", "b1", "b2", "c1"]],
-  ["economie", ["eco-college"]],
+  ["economie", ["a1", "a2", "b1", "b2"]],
 ];
 
 // Les matières dont les libellés ne sont pas du français.

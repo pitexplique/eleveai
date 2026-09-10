@@ -74,6 +74,10 @@ const MATIERES: Record<string, { code: string; label: string }> = {
   francais: { code: "francais", label: "Français" },
   anglais: { code: "english-maths", label: "Anglais" },
   espagnol: { code: "espagnol", label: "Espagnol" },
+  // ⭐ 10/09/2026 — SIX MATIÈRES. L'économie se range par PALIER (a1…b2) comme
+  // l'anglais et l'espagnol, et son code est le même des deux côtés : pas de
+  // traduction à faire, contrairement à « anglais » / « english-maths ».
+  economie: { code: "economie", label: "Économie" },
   ia: { code: "ia", label: "IA" },
 };
 
@@ -121,9 +125,35 @@ function motsForts(label: string): string[] {
   // (« Comprendre l'aire et ses unités »), et ce verbe dit ce qu'on doit savoir
   // FAIRE, pas de quoi il s'agit. Laisser « comprendre » ouvrir la liste, c'est
   // proposer l'aire à qui tape « comprendre ».
-  return normaliser(label)
-    .split(" ")
-    .filter((m) => m.length >= 4 && !MOTS_FAIBLES.has(m));
+  const bruts = normaliser(label).split(" ");
+
+  /**
+   * ⛔ L'ÉLISION MANGEAIT LE MOT (mesuré le 10/09/2026, en branchant l'économie).
+   *
+   * `normaliser` GARDE l'apostrophe : « L'impôt : qui paie quoi » donne le
+   * jeton « l'impot », et la comparaison se fait en `startsWith`. Taper
+   * « impot » ne trouvait donc RIEN — ni « L'impôt », ni « L'entreprise », ni
+   * « L'argent ». Le mot le plus évident d'une notion était le seul à ne pas
+   * l'ouvrir, et en silence : la liste restait simplement vide.
+   *
+   * ⚠️ Ça ne concerne pas que l'économie : « L'aire d'un rectangle » avait le
+   * même trou sur « aire ». On garde les DEUX formes — « l'impot » ET
+   * « impot » — parce que quelqu'un peut taper l'une ou l'autre.
+   *
+   * ⚠️ LA QUEUE SE POSE JUSTE APRÈS SON JETON, jamais à la fin du tableau : le
+   * premier mot du libellé porte un bonus de rang (voir la boucle de notation),
+   * et déplacer l'ordre le donnerait au mauvais mot.
+   */
+  const avecElisions: string[] = [];
+  for (const mot of bruts) {
+    avecElisions.push(mot);
+    const apostrophe = mot.indexOf("'");
+    if (apostrophe > 0 && apostrophe < mot.length - 1) {
+      avecElisions.push(mot.slice(apostrophe + 1));
+    }
+  }
+
+  return avecElisions.filter((m) => m.length >= 4 && !MOTS_FAIBLES.has(m));
 }
 
 function construire(): Entree[] {

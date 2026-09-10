@@ -58,7 +58,14 @@ const BANQUES: [classe: string, matiere: string][] = [
   ["a2", "english-maths"],
   ["b1", "english-maths"],
   ["b2", "english-maths"],
-  ["eco-college", "economie"],
+  // ⚠️ Quatre lignes depuis le 10/09/2026 : l'économie est passée de
+  // `eco-college` à A1 → B2. La ligne d'avant ne levait AUCUNE erreur, elle
+  // affichait « ILLISIBLE » au milieu du rapport — c'est-à-dire qu'une banque
+  // pouvait sortir du périmètre du vérificateur sans le faire échouer.
+  ["a1", "economie"],
+  ["a2", "economie"],
+  ["b1", "economie"],
+  ["b2", "economie"],
   ["a1", "espagnol"],
   ["a2", "espagnol"],
   ["b1", "espagnol"],

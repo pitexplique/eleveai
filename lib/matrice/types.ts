@@ -136,7 +136,7 @@ export type RessourceEleveAI = {
 
   url: string;
   niveaux: NiveauRessource[];
-  matiere?: "maths" | "francais" | "anglais" | "espagnol" | "ia" | "transversal";
+  matiere?: "maths" | "francais" | "anglais" | "espagnol" | "economie" | "ia" | "transversal";
   /** Les notions du lexique que cette ressource travaille. `["*"]` = générale. */
   notions: string[];
   intentions: Intention[];

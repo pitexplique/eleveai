@@ -395,9 +395,11 @@ function normalizeClasse(value: string | null): Classe {
     value === "b1" ||
     value === "b2" ||
     value === "c1" ||
-    value === "eco-decouverte" ||
-    value === "eco-college" ||
-    value === "eco-lycee" ||
+    /* ⛔ Les trois `eco-*` ont été retirés le 10/09/2026 avec le passage de
+       l'économie en A1 → B2 : `a1`…`b2` sont déjà acceptés six lignes plus
+       haut, et les accepter ENCORE sous leur ancien nom aurait fait répondre
+       500 à l'API (« Knowledge V4 introuvable pour eco-college/economie »)
+       sur un lien que le repli muet d'en dessous n'aurait même pas rattrapé. */
     value === "pix-college" ||
     value === "pix-lycee"
   ) {

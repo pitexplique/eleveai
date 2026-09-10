@@ -474,10 +474,11 @@ export type SchoolLevel =
      indépendant d'un côté, avancé + expert de l'autre. Ce ne sont pas des
      classes non plus — voir lib/tutor-v4/knowledge/ia/pix/socle.ts. */
   | "pix-college"
-  | "pix-lycee"
-  | "eco-decouverte"
-  | "eco-college"
-  | "eco-lycee";
+  | "pix-lycee";
+/* ⛔ `eco-decouverte`, `eco-college` et `eco-lycee` ont été RETIRÉS le
+   10/09/2026 : le coach d'économie est passé en A1 → B2, quatre paliers écrits
+   chacun de leur côté. Voir NiveauEconomie dans lib/tutor-v4/catalog.ts pour
+   ce que ces trois-là cachaient. */
 export type SubjectCode =
   | "maths"
   | "francais"

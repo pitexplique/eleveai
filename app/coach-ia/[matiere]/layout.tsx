@@ -48,9 +48,13 @@ const FICHES: Record<string, Fiche> = {
       "Modèles, apprentissage, usages, limites et enjeux : les 16 compétences du référentiel Pix IA, du collège au lycée, avec la correction expliquée. Gratuit.",
   },
   economie: {
-    titre: "Coach d'économie — découvrir, collège, lycée",
+    // ⚠️ « de A1 à B2 » comme l'anglais et l'espagnol, et pour la même raison :
+    // ce coach n'est pas rangé par classe. L'ancien titre annonçait
+    // « découvrir, collège, lycée » — trois paliers dont deux servaient le même
+    // contenu (voir NiveauEconomie, lib/tutor-v4/catalog.ts).
+    titre: "Coach d'économie — de A1 à B2",
     description:
-      "Les mécanismes économiques expliqués pas à pas, de la découverte au lycée, avec des exercices corrigés.",
+      "L'argent, l'entreprise, l'impôt, l'inflation : les mots de l'économie expliqués un par un, de A1 à B2, avec des exercices corrigés. Gratuit.",
   },
 };
 

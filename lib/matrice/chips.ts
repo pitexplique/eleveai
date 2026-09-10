@@ -297,6 +297,10 @@ const LIBELLE_MATIERE: Record<string, string> = {
   francais: "Français",
   anglais: "Anglais",
   espagnol: "Espagnol",
+  // « Économie », en toutes lettres et avec ses accents — c'est le mot du
+  // bulletin de lycée (SES), pas une abréviation. Il fait neuf caractères,
+  // autant qu'« Espagnol » : la rangée ne s'allonge pas d'un cran de plus.
+  economie: "Économie",
   ia: "IA",
   transversal: "Tout",
 };
@@ -328,8 +332,14 @@ const MATIERES_MASQUEES = new Set<string>();
  * changement de classe.
  *
  * C'est l'ordre du bulletin, et c'est celui que tout le monde a en tête.
+ *
+ * ⭐ « economie » AJOUTÉE LE 10/09/2026, AVANT « ia » — la place est celle que
+ * Frédéric a dictée (« la chips economie avant ia »), et elle se défend : les
+ * cinq premières sont des matières du bulletin, l'IA n'en est pas une. Mettre
+ * l'économie après elle aurait cassé la seule chose que cette rangée sait faire
+ * lire d'un coup d'œil — les matières d'abord, l'IA en dernier.
  */
-const ORDRE_MATIERES: string[] = ["maths", "francais", "anglais", "espagnol", "ia"];
+const ORDRE_MATIERES: string[] = ["maths", "francais", "anglais", "espagnol", "economie", "ia"];
 
 export function matieresDisponibles(
   profil: ProfilId | null,

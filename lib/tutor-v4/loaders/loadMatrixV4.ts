@@ -28,7 +28,10 @@ import { matrixA1English } from "@/lib/tutor-v4/matrix/matrixA1English";
 import { matrixA2English } from "@/lib/tutor-v4/matrix/matrixA2English";
 import { matrixB1English } from "@/lib/tutor-v4/matrix/matrixB1English";
 import { matrixB2English } from "@/lib/tutor-v4/matrix/matrixB2English";
-import { matrixEco4e } from "@/lib/tutor-v4/matrix/matrixEco4e";
+import { matrixA1Economie } from "@/lib/tutor-v4/matrix/matrixA1Economie";
+import { matrixA2Economie } from "@/lib/tutor-v4/matrix/matrixA2Economie";
+import { matrixB1Economie } from "@/lib/tutor-v4/matrix/matrixB1Economie";
+import { matrixB2Economie } from "@/lib/tutor-v4/matrix/matrixB2Economie";
 import { matrixA1Espagnol } from "@/lib/tutor-v4/matrix/matrixA1Espagnol";
 import { matrixA2Espagnol } from "@/lib/tutor-v4/matrix/matrixA2Espagnol";
 import { matrixB1Espagnol } from "@/lib/tutor-v4/matrix/matrixB1Espagnol";
@@ -123,7 +126,10 @@ export async function loadMatrixV4(
   if (classe === "b1" && matiere === "english-maths") return matrixB1English;
   if (classe === "b2" && matiere === "english-maths") return matrixB2English;
 
-  if (classe === "eco-college" && matiere === "economie") return matrixEco4e;
+  if (classe === "a1" && matiere === "economie") return matrixA1Economie;
+  if (classe === "a2" && matiere === "economie") return matrixA2Economie;
+  if (classe === "b1" && matiere === "economie") return matrixB1Economie;
+  if (classe === "b2" && matiere === "economie") return matrixB2Economie;
 
   if (classe === "a1" && matiere === "espagnol") return matrixA1Espagnol;
   if (classe === "a2" && matiere === "espagnol") return matrixA2Espagnol;

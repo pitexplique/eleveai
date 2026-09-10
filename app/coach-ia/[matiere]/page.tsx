@@ -53,7 +53,43 @@ const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "
    96/96 alors qu'elle était injouable ici. Voir le commentaire en tête de
    `scripts/verifier-demarrage.ts`. */
 const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde"];
-const ECONOMIE_CLASSES: Classe[] = ["eco-decouverte", "eco-college", "eco-lycee"];
+/* ⭐ 10/09/2026 — L'ÉCONOMIE PASSE EN A1 → B2 (Frédéric : « brancher sur coach
+   economie qui gère les niveaux A1 A2 B1 B2 »), le jour où sa chip entre sur
+   l'accueil.
+
+   ⛔ CE QUE LA LISTE D'AVANT CACHAIT, ET IL FAUT LE SAVOIR : elle disait
+   ["eco-decouverte", "eco-college", "eco-lycee"] alors qu'UN SEUL paquet
+   existait. « Découverte » et « Lycée » tombaient sur le `default:` du
+   catalogue et servaient le contenu du collège — même liste de notions, même
+   série d'exercices, sans un mot. Deux boutons sur trois mentaient.
+
+   Les quatre paliers ont chacun leur paquet écrit : A1 l'argent qu'on
+   manipule, A2 l'entreprise et le marché, B1 l'État et la protection sociale,
+   B2 l'économie du pays. Voir lib/tutor-v4/knowledge/economie/<palier>/bo.ts.
+
+   ⚠️ CES IDENTIFIANTS SONT PARTAGÉS avec l'anglais, l'espagnol et l'échelle
+   maison de l'IA : les paquets sont indexés par (classe, MATIÈRE), jamais par
+   la classe seule. `a1` en économie et `a1` en espagnol ne se croisent pas. */
+const ECONOMIE_CLASSES: Classe[] = ["a1", "a2", "b1", "b2"];
+
+/**
+ * LES TROIS ANCIENS LIENS, RATTRAPÉS PLUTÔT QU'AVALÉS.
+ *
+ * ⚠️ Sans cette table, `?classe=eco-college` retomberait sur le repli de la
+ * matière — A1 — c'est-à-dire sur l'argent de poche pour quelqu'un qui venait
+ * lire « valeur ajoutée ». Le repli n'aurait rien cassé, et c'est bien le
+ * problème : il aurait montré autre chose sans le dire.
+ *
+ * ⚠️ `eco-lycee` mène à B1 et non à B2 : c'est là que l'ancien « lycée »
+ * envoyait de fait ses visiteurs (le paquet du collège, dont la fiscalité fait
+ * maintenant partie du B1). On rattrape ce que la page MONTRAIT, pas ce que
+ * son étiquette promettait.
+ */
+const ANCIENS_NIVEAUX_ECONOMIE: Record<string, Classe> = {
+  "eco-decouverte": "a1",
+  "eco-college": "a2",
+  "eco-lycee": "b1",
+};
 const ESPAGNOL_CLASSES: Classe[] = ["a1", "a2", "b1", "b2"];
 /* Le coach IA est adossé au référentiel Pix depuis le 16/08/2026 : deux
    portes, collège (paliers novice + indépendant) et lycée (avancé + expert).
@@ -106,8 +142,20 @@ function getGroupesForMatiere(matiere: Matiere): { titre: string | null; classes
   return groupes;
 }
 
-function normalizeClasse(value: string | null, classes: Classe[], fallback: Classe): Classe {
-  return classes.includes(value as Classe) ? (value as Classe) : fallback;
+function normalizeClasse(
+  value: string | null,
+  classes: Classe[],
+  fallback: Classe,
+  matiere?: Matiere,
+): Classe {
+  if (classes.includes(value as Classe)) return value as Classe;
+  // ⚠️ La traduction des anciens paliers ne vaut QUE pour l'économie : `a1`…`b2`
+  // servent aussi l'anglais, l'espagnol et l'IA, et un lien d'économie égaré
+  // sur une autre matière ne doit pas y déplacer le niveau par accident.
+  if (matiere === "economie" && value && ANCIENS_NIVEAUX_ECONOMIE[value]) {
+    return ANCIENS_NIVEAUX_ECONOMIE[value];
+  }
+  return fallback;
 }
 
 /**
@@ -171,9 +219,6 @@ function getMatiereTitle(matiere: string, classe: Classe) {
     c1: "C1",
     "pix-college": "Collège",
     "pix-lycee": "Lycée",
-    "eco-decouverte": "Déco.",
-    "eco-college":    "Collège",
-    "eco-lycee":      "Lycée",
   };
   const matiereLabel: Record<string, string> = {
     maths: "Maths",
@@ -201,9 +246,11 @@ function getClasseNavLabel(classe: Classe) {
     adulte: "Adulte",
     "pix-college": "Collège",
     "pix-lycee": "Lycée",
-    "eco-decouverte": "D�couverte",
-    "eco-college": "Coll�ge",
-    "eco-lycee": "Lyc�e",
+    /* ⛔ TROIS LIBELLÉS D'ÉCONOMIE VIVAIENT ICI AVEC LEURS ACCENTS CASSÉS —
+       « D?couverte », « Coll?ge », « Lyc?e » — et ils s'affichaient tels quels
+       dans la colonne de gauche du coach. Ils sont partis avec les paliers
+       qu'ils nommaient (10/09/2026) ; les quatre nouveaux (A1…B2) n'ont pas
+       d'accent, et n'ont donc pas besoin d'entrée ici. */
   };
 
   return labels[classe] ?? classe;
@@ -213,7 +260,7 @@ function getClasseNavLabel(classe: Classe) {
 // l'écran, et le bas de la colonne (le lycée) devenait inaccessible. Voir le
 // commentaire de l'`<aside>` : la taille soulage, le défilement corrige.
 function getClasseButtonSize(classe: Classe) {
-  if (["seconde", "premiere", "premiere-spe", "terminale-spe", "stmg", "adulte", "eco-decouverte", "eco-college", "eco-lycee", "pix-college", "pix-lycee"].includes(classe)) {
+  if (["seconde", "premiere", "premiere-spe", "terminale-spe", "stmg", "adulte", "pix-college", "pix-lycee"].includes(classe)) {
     return "h-12 min-w-16 px-2 rounded-full text-sm leading-tight";
   }
 
@@ -241,9 +288,9 @@ function getClasseBadgeColor(item: Classe, active: boolean) {
   if (["5e", "4e", "3e", "seconde", "premiere", "premiere-spe", "terminale-spe"].includes(item))
     return "border-sky-500 bg-sky-500 text-white";
   if (item === "adulte") return "border-violet-500 bg-violet-500 text-white";
-  if (item === "eco-decouverte") return "border-lime-500 bg-lime-500 text-white";
-  if (item === "eco-college")    return "border-amber-500 bg-amber-500 text-white";
-  if (item === "eco-lycee")      return "border-orange-500 bg-orange-500 text-white";
+  // A1 → C1 : la même échelle de couleurs pour l'anglais, l'espagnol, l'IA et
+  // — depuis le 10/09/2026 — l'économie. Un palier a la même couleur partout,
+  // c'est ce qui fait qu'on le reconnaît en changeant de matière.
   if (item === "a1") return "border-green-500 bg-green-500 text-white";
   if (item === "a2") return "border-sky-500 bg-sky-500 text-white";
   if (item === "b1") return "border-indigo-500 bg-indigo-500 text-white";
@@ -278,14 +325,22 @@ function getDomaineAccent(domaineId: string) {
     return { title: "text-red-700", pill: "bg-red-100 text-red-800" };
   // IA
   if (domaineId.startsWith("IA_")) return { title: "text-cyan-800", pill: "bg-cyan-100 text-cyan-800" };
-  // ?conomie
-  if (domaineId === "ECO_4E_ENTREPRISE") return { title: "text-amber-700",   pill: "bg-amber-100 text-amber-800"   };
-  if (domaineId === "ECO_4E_MARCHE")     return { title: "text-emerald-700", pill: "bg-emerald-100 text-emerald-800"};
-  if (domaineId === "ECO_4E_TRAVAIL")    return { title: "text-sky-700",     pill: "bg-sky-100 text-sky-800"       };
-  if (domaineId === "ECO_4E_MONNAIE")    return { title: "text-blue-700",    pill: "bg-blue-100 text-blue-800"     };
-  if (domaineId === "ECO_4E_BUDGET")     return { title: "text-violet-700",  pill: "bg-violet-100 text-violet-800" };
-  if (domaineId === "ECO_4E_FISCALITE")  return { title: "text-rose-700",    pill: "bg-rose-100 text-rose-800"     };
-  if (domaineId === "ECO_4E_ELECTIONS")  return { title: "text-orange-700",  pill: "bg-orange-100 text-orange-800" };
+  // Économie — A1 → B2 depuis le 10/09/2026.
+  // ⚠️ UNE COULEUR PAR THÈME, PAS PAR PALIER : l'argent est bleu en A1 comme
+  // les prix le sont en B2, l'entreprise ambrée en A2 comme en B1. C'est ce
+  // qui fait voir qu'on retrouve le même sujet un cran plus haut.
+  if (domaineId === "ECO_A1_ARGENT")     return { title: "text-blue-700",    pill: "bg-blue-100 text-blue-800"     };
+  if (domaineId === "ECO_A1_BUDGET")     return { title: "text-violet-700",  pill: "bg-violet-100 text-violet-800" };
+  if (domaineId === "ECO_A1_CONSOMMER")  return { title: "text-emerald-700", pill: "bg-emerald-100 text-emerald-800"};
+  if (domaineId === "ECO_A2_ENTREPRISE") return { title: "text-amber-700",   pill: "bg-amber-100 text-amber-800"   };
+  if (domaineId === "ECO_A2_MARCHE")     return { title: "text-emerald-700", pill: "bg-emerald-100 text-emerald-800"};
+  if (domaineId === "ECO_A2_TRAVAIL")    return { title: "text-sky-700",     pill: "bg-sky-100 text-sky-800"       };
+  if (domaineId === "ECO_B1_FISCALITE")  return { title: "text-rose-700",    pill: "bg-rose-100 text-rose-800"     };
+  if (domaineId === "ECO_B1_PROTECTION") return { title: "text-teal-700",    pill: "bg-teal-100 text-teal-800"     };
+  if (domaineId === "ECO_B1_ENTREPRISE") return { title: "text-amber-700",   pill: "bg-amber-100 text-amber-800"   };
+  if (domaineId === "ECO_B2_CROISSANCE") return { title: "text-indigo-700",  pill: "bg-indigo-100 text-indigo-800" };
+  if (domaineId === "ECO_B2_PRIX")       return { title: "text-blue-700",    pill: "bg-blue-100 text-blue-800"     };
+  if (domaineId === "ECO_B2_POLITIQUES") return { title: "text-orange-700",  pill: "bg-orange-100 text-orange-800" };
   // Maths
   if (domaineId.includes("N") || domaineId.includes("P"))
     return { title: "text-green-700", pill: "bg-green-100 text-green-800" };
@@ -306,7 +361,10 @@ export default function CoachIA() {
 
   const defaultClasse: Classe =
     matiere === "francais" ? "cp" :
-    matiere === "economie" ? "eco-college" :
+    // ⚠️ A1 et non A2 : l'économie s'ouvre sur le palier de l'argent qu'on
+    // manipule, celui que tout le monde peut lire. Les trois autres se
+    // choisissent, celui-ci s'offre.
+    matiere === "economie" ? "a1" :
     matiere === "espagnol" ? "a1" :
     matiere === "english-maths" ? "a1" :
     matiere === "ia" ? "a1" :
@@ -334,7 +392,8 @@ export default function CoachIA() {
     normalizeClasse(
       searchParams.get("classe") ?? classeEleve,
       classes,
-      defaultClasse
+      defaultClasse,
+      matiere
     )
   );
 
@@ -343,10 +402,11 @@ export default function CoachIA() {
       normalizeClasse(
         searchParams.get("classe") ?? classeEleve,
         classes,
-        defaultClasse
+        defaultClasse,
+        matiere
       )
     );
-  }, [searchParams, classes, defaultClasse, classeEleve]);
+  }, [searchParams, classes, defaultClasse, classeEleve, matiere]);
 
   const notionOptions = getNotionOptions(classe, matiere);
   const notionMicroMap = getNotionMicroMap(classe, matiere);

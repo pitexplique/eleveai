@@ -247,6 +247,7 @@ const POURQUOI_LE_PROFIL: Partial<Record<string, string>> = {
   francais: "« analyser une phrase » ne veut pas dire la même chose au CE1 et en Terminale",
   anglais: "« parler du passé » ne s'apprend pas pareil en 6ᵉ et en Terminale",
   espagnol: "« ser » et « estar » ne se travaillent pas pareil en 5ᵉ et en Terminale",
+  economie: "« le budget » ne veut pas dire la même chose en 5ᵉ et en Terminale",
   ia: "« un modèle » ne veut pas dire la même chose en 4ᵉ et en Terminale",
 };
 

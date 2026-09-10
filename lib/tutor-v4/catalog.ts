@@ -32,7 +32,10 @@ import { buildKnowledge5eFrancais } from "@/lib/tutor-v4/knowledge/francais/5e/b
 import { buildKnowledge4eFrancais } from "@/lib/tutor-v4/knowledge/francais/4e/buildKnowledge4eFrancais";
 import { buildKnowledge3eFrancais } from "@/lib/tutor-v4/knowledge/francais/3e/buildKnowledge3eFrancais";
 import { buildKnowledgeSecondeFrancais } from "@/lib/tutor-v4/knowledge/francais/seconde/buildKnowledgeSecondeFrancais";
-import { buildKnowledgeEco4e } from "@/lib/tutor-v4/knowledge/economie/4e/buildKnowledgeEco4e";
+import { buildKnowledgeA1Economie } from "@/lib/tutor-v4/knowledge/economie/a1/buildKnowledgeA1Economie";
+import { buildKnowledgeA2Economie } from "@/lib/tutor-v4/knowledge/economie/a2/buildKnowledgeA2Economie";
+import { buildKnowledgeB1Economie } from "@/lib/tutor-v4/knowledge/economie/b1/buildKnowledgeB1Economie";
+import { buildKnowledgeB2Economie } from "@/lib/tutor-v4/knowledge/economie/b2/buildKnowledgeB2Economie";
 import { buildKnowledgeA1Espagnol } from "@/lib/tutor-v4/knowledge/espagnol/a1/buildKnowledgeA1Espagnol";
 import { buildKnowledgeA2Espagnol } from "@/lib/tutor-v4/knowledge/espagnol/a2/buildKnowledgeA2Espagnol";
 import { buildKnowledgeB1Espagnol } from "@/lib/tutor-v4/knowledge/espagnol/b1/buildKnowledgeB1Espagnol";
@@ -72,13 +75,22 @@ export type Classe =
   | "b2"
   | "c1"
   | "pix-college"
-  | "pix-lycee"
-  | "eco-decouverte"
-  | "eco-college"
-  | "eco-lycee";
+  | "pix-lycee";
 
 export type Matiere = "maths" | "francais" | "english-maths" | "economie" | "espagnol" | "ia";
-export type NiveauEconomie = "eco-decouverte" | "eco-college" | "eco-lycee";
+/**
+ * ⭐ L'ÉCONOMIE EST PASSÉE EN A1 → B2 LE 10/09/2026 (Frédéric : « coach
+ * economie qui gère les niveaux A1 A2 B1 B2 »).
+ *
+ * ⛔ LES TROIS ANCIENS IDENTIFIANTS — `eco-decouverte`, `eco-college`,
+ * `eco-lycee` — ONT ÉTÉ RETIRÉS DU TYPE, ET C'EST DÉLIBÉRÉ. Les laisser aurait
+ * été confortable et faux : deux des trois ne désignaient aucun paquet et
+ * tombaient sur le `default:` du catalogue, c'est-à-dire sur le contenu du
+ * troisième, en silence. Les sortir du type force le compilateur à montrer
+ * chaque endroit qui les nommait encore — c'est le seul contrôle qui existe
+ * sur ces chaînes de caractères.
+ */
+export type NiveauEconomie = "a1" | "a2" | "b1" | "b2";
 export type NiveauEnglish = "a1" | "a2" | "b1" | "b2";
 export type NiveauIa = "a1" | "a2" | "b1" | "b2" | "c1";
 
@@ -140,8 +152,18 @@ function getKnowledge(classe: Classe, matiere: Matiere = "maths") {
   // ?conomie
   if (matiere === "economie") {
     switch (classe) {
-      case "eco-college": return buildKnowledgeEco4e();
-      default:            return buildKnowledgeEco4e();
+      case "a1": return buildKnowledgeA1Economie();
+      case "a2": return buildKnowledgeA2Economie();
+      case "b1": return buildKnowledgeB1Economie();
+      case "b2": return buildKnowledgeB2Economie();
+      /* ⛔ CE REPLI EST LE MÊME PIÈGE QU'EN FRANÇAIS (voir la note du switch
+         plus haut), et il a déjà mordu ICI : jusqu'au 10/09/2026 le sélecteur
+         proposait « Découverte » et « Lycée », qui n'avaient aucun paquet et
+         recevaient donc, sans un mot, celui du collège. Deux boutons sur trois
+         montraient le même contenu. Le repli reste — un `default:` est
+         obligatoire — mais il ne couvre plus que l'impossible : les quatre
+         paliers de `ECONOMIE_CLASSES` sont tous nommés au-dessus. */
+      default:   return buildKnowledgeA1Economie();
     }
   }
 

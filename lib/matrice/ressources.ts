@@ -307,6 +307,13 @@ const PORTES_5E = [
  *      jour où elle entrera : /coach-ia/economie répond 200 mais aucune
  *      ressource `coach-economie` n'est déclarée ici, et /parcours-economie
  *      n'existe pas (404). Il y a donc DEUX gestes à faire, pas un.
+ *      ⭐ 10/09/2026 — LE PREMIER GESTE EST FAIT, LE SECOND NON. `coach-economie`
+ *      est déclaré plus bas (Frédéric : « rajoute la chips economie avant ia ») ;
+ *      /parcours-economie répond toujours 404. ⛔ CONSÉQUENCE À CONNAÎTRE ICI :
+ *      `type:parcours` retombe donc sur le parcours d'une AUTRE matière pour un
+ *      4ᵉ venu pour l'économie — la liste ci-dessous ne vaut toujours pas pour
+ *      elle, et l'économie n'a que deux tiers de porte tant que ce parcours
+ *      n'existe pas.
  *
  *   2. LE FILTRE PAR MATIÈRE N'EST PAS SYMÉTRIQUE. Une demande de FRANÇAIS
  *      écarte bien les ressources de maths ; une demande de MATHS n'écarte pas
@@ -484,6 +491,59 @@ export const RESSOURCES: RessourceEleveAI[] = [
     matiere: "espagnol",
     notions: ["espagnol"],
     intentions: ["comprendre", "entrainer", "preparer"],
+    type: "coach",
+    resultat: "progression",
+    statut: "validee",
+  },
+  {
+    /**
+     * ⭐ L'ÉCONOMIE ENTRE DANS L'INVENTAIRE LE 10/09/2026 (Frédéric : « rajoute
+     * sur la page d'accueil la chips economie avant ia, brancher sur coach
+     * economie »).
+     *
+     * Elle en était sortie deux fois, et il faut le savoir avant de relire
+     * cette entrée :
+     *   — 23/07/2026, le menu : « coach pas assez fourni » (voir le
+     *     commentaire de NAV_ECONOMIE, components/Header.tsx) ;
+     *   — 26/08/2026, la matrice : « pour le moment je n'ai pas intégré
+     *     économie » (voir la note de PORTES_4E, plus haut dans ce fichier).
+     * La note du 26/08 disait qu'il y aurait DEUX gestes à faire le jour venu :
+     * déclarer le coach ici, et écrire /parcours-economie. Le premier est fait ;
+     * ⛔ LE SECOND NON — la route répond toujours 404, et c'est pour ça qu'il
+     * n'y a pas de ressource `parcours-economie` en dessous. Une matière à
+     * moitié ouverte est une matière dont on cherchera l'autre moitié.
+     *
+     * ⚠️ CE QUI EXISTE VRAIMENT DERRIÈRE, MESURÉ LE 10/09 : sept thèmes
+     * (entreprise, marché, travail, monnaie, budget, fiscalité, élections), UNE
+     * micro-compétence chacun, ~20 énoncés par micro. C'est un coach de
+     * VOCABULAIRE économique — d'où la promesse, qui ne promet que ça.
+     *
+     * ⭐ LE CM1 ET LE CM2 SONT DEDANS, ET C'EST UNE MESURE QUI LES A FAIT
+     * ENTRER. Première rédaction : « pas de primaire », au motif qu'un CM1 ne
+     * lit pas « valeur ajoutée ». Le contrôle a montré l'inverse — un CM2 qui
+     * tape « la monnaie et les prix » recevait la notion d'économie (le lexique
+     * la reconnaît) et AUCUNE ressource pour l'ouvrir : sa seule carte était
+     * son tableau de bord. Une matière qu'on sait lire et qu'on ne peut pas
+     * ouvrir est pire qu'une matière absente.
+     * ⚠️ Le CP, le CE1 et le CE2 restent dehors, et ils ne perdent rien : leur
+     * programme de MATHS contient « Monnaie », et la branche du programme passe
+     * avant le lexique (voir la note de trous-de-la-matrice). Le CM1 et le CM2,
+     * eux, n'ont plus de notion « monnaie » en maths — d'où le trou.
+     * ⚠️ « prof » et « parent », comme partout ailleurs : sans ces deux mots,
+     * un enseignant qui clique « Économie » n'obtient rien du tout.
+     * ⏭️ « adulte » N'Y EST PAS, et c'est une décision à prendre, pas un oubli :
+     * l'impôt, l'inflation et le budget sont exactement ce qu'un adulte vient
+     * chercher. Son coach de maths a déjà une classe « Calculs du quotidien » ;
+     * l'économie n'a pas encore de palier écrit pour lui.
+     */
+    id: "coach-economie",
+    titre: "Le coach économie",
+    promesse: "Les mots de l'économie, un par un : entreprise, marché, impôt, budget.",
+    url: "/coach-ia/economie",
+    niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "prof", "parent"],
+    matiere: "economie",
+    notions: ["economie"],
+    intentions: ["comprendre", "entrainer", "decouvrir"],
     type: "coach",
     resultat: "progression",
     statut: "validee",

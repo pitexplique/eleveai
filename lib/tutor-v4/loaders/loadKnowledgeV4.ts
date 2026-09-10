@@ -19,7 +19,10 @@ import { loadKnowledgeA1English } from "@/lib/tutor-v4/knowledge/loaders/loadKno
 import { loadKnowledgeA2English } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeA2English";
 import { loadKnowledgeB1English } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeB1English";
 import { loadKnowledgeB2English } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeB2English";
-import { loadKnowledgeEco4e } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeEco4e";
+import { loadKnowledgeA1Economie } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeA1Economie";
+import { loadKnowledgeA2Economie } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeA2Economie";
+import { loadKnowledgeB1Economie } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeB1Economie";
+import { loadKnowledgeB2Economie } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeB2Economie";
 import { loadKnowledgeA1Espagnol } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeA1Espagnol";
 import { loadKnowledgeA2Espagnol } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeA2Espagnol";
 import { loadKnowledgeB1Espagnol } from "@/lib/tutor-v4/knowledge/loaders/loadKnowledgeB1Espagnol";
@@ -120,7 +123,17 @@ export async function loadKnowledgeV4(
   if (classe === "b1" && matiere === "english-maths") return loadKnowledgeB1English() as KnowledgePack;
   if (classe === "b2" && matiere === "english-maths") return loadKnowledgeB2English() as KnowledgePack;
 
-  if (classe === "eco-college" && matiere === "economie") return loadKnowledgeEco4e() as KnowledgePack;
+  /* ⭐ 10/09/2026 — L'ÉCONOMIE PASSE DE TROIS PALIERS FICTIFS À QUATRE RÉELS.
+     Avant : un seul paquet (`eco-college`), et deux boutons — « Découverte » et
+     « Lycée » — qui servaient ce MÊME paquet en silence, par le `default:` du
+     catalogue. Deux tiers du sélecteur mentaient.
+     Depuis : A1 → B2, un paquet écrit pour chacun. Les anciens identifiants
+     n'existent plus nulle part ; un vieux lien `?classe=eco-college` est
+     rattrapé par ANCIENS_NIVEAUX_ECONOMIE (app/coach-ia/[matiere]/page.tsx). */
+  if (classe === "a1" && matiere === "economie") return loadKnowledgeA1Economie() as KnowledgePack;
+  if (classe === "a2" && matiere === "economie") return loadKnowledgeA2Economie() as KnowledgePack;
+  if (classe === "b1" && matiere === "economie") return loadKnowledgeB1Economie() as KnowledgePack;
+  if (classe === "b2" && matiere === "economie") return loadKnowledgeB2Economie() as KnowledgePack;
 
   if (classe === "a1" && matiere === "espagnol") return loadKnowledgeA1Espagnol() as KnowledgePack;
   if (classe === "a2" && matiere === "espagnol") return loadKnowledgeA2Espagnol() as KnowledgePack;

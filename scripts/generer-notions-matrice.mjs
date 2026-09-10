@@ -49,8 +49,12 @@ const RACINE = path.resolve("lib/tutor-v4/knowledge");
 const SORTIE = path.resolve("lib/matrice/notions.generated.ts");
 const VERIFIER = process.argv.includes("--verifier");
 
-/** Les matières qu'on expose dans la matrice d'entrée. */
-const MATIERES = ["maths", "francais", "english", "espagnol", "ia"];
+/** Les matières qu'on expose dans la matrice d'entrée.
+ *  ⭐ « economie » ajoutée le 10/09/2026, le jour où sa chip entre sur
+ *  l'accueil : sans cette ligne, ses douze notions n'existent pas pour la
+ *  recherche suggérée — on peut cliquer « Économie » dans la rangée et taper
+ *  « inflation » sans qu'aucune ligne ne s'ouvre. */
+const MATIERES = ["maths", "francais", "english", "espagnol", "ia", "economie"];
 
 /** Le nom de matière côté matrice (english → anglais). */
 const NOM_MATIERE = { english: "anglais" };

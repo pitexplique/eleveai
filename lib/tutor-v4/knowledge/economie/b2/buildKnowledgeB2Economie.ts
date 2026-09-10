@@ -3,10 +3,10 @@ import { bo } from "./bo";
 import { notions } from "./notions";
 import { microSkills } from "./microSkills";
 
-export function buildKnowledgeEco4e() {
+export function buildKnowledgeB2Economie() {
   return buildKnowledge({
-    id: "eco-college-economie",
-    classe: "eco-college",
+    id: "b2-economie",
+    classe: "b2",
     matiere: "economie",
     bo,
     notions,

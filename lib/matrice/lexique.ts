@@ -147,7 +147,7 @@ export const MARQUEURS_INTENTION: { intention: Intention; marqueurs: string[] }[
 export type NotionLexique = {
   id: string;
   label: string;
-  matiere: "maths" | "francais" | "anglais" | "espagnol" | "ia" | "transversal";
+  matiere: "maths" | "francais" | "anglais" | "espagnol" | "economie" | "ia" | "transversal";
   /** Écrits SANS accent et en minuscules — la normalisation les retire aussi. */
   alias: string[];
 };
@@ -450,6 +450,33 @@ export const NOTIONS: NotionLexique[] = [
   {
     id: "espagnol", label: "l'espagnol", matiere: "espagnol",
     alias: ["espagnol", "espanol", "vocabulaire espagnol", "ser estar"],
+  },
+  {
+    /**
+     * ⭐ L'ÉCONOMIE ENTRE DANS LE LEXIQUE LE 10/09/2026, en même temps que sa
+     * chip. Sans cette entrée, la matière existe dans la rangée mais AUCUN mot
+     * tapé ne l'ouvre : « c'est quoi la TVA » ou « le chômage » retombaient sur
+     * le repli de niveau, c'est-à-dire sur les maths. C'est la chaîne décrite
+     * en tête de coach.ts — une matière se branche en DEUX endroits.
+     *
+     * ⛔ CE QUI N'EST PAS DANS LES ALIAS, ET POURQUOI. « marché » (« ça ne
+     * marche pas » est la phrase d'élève la plus courante du site), « argent »
+     * seul (la monnaie se compte en maths dès le CP), « pourcentage » (il
+     * appartient à la proportionnalité, quatre entrées plus haut, et le premier
+     * qui accroche gagne). On ne prend que les mots qui n'ont PAS d'autre vie
+     * scolaire.
+     */
+    id: "economie", label: "l'économie", matiere: "economie",
+    alias: [
+      "economie", "economique", "entreprise", "chomage", "inflation",
+      "impot", "impots", "tva", "salaire", "monnaie", "budget",
+      "pouvoir d'achat", "pouvoir d achat", "offre et demande", "argent de poche",
+      // ⚠️ Ajoutés APRÈS mesure (10/09) : « pib », « dette » et « octroi de
+      // mer » renvoyaient `null`, alors qu'ils sont dans trois notions du
+      // palier B2. Voir la note de trous-de-la-matrice : un mot qui n'ouvre
+      // rien est invisible à tous les vérificateurs.
+      "pib", "dette", "octroi de mer", "cotisation", "cotisations",
+    ],
   },
   {
     id: "ia", label: "l'intelligence artificielle", matiere: "ia",
