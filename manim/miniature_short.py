@@ -191,7 +191,44 @@ def acc_fv_lecture(d):
     centre(d, W // 2, 1040, "je TRAVERSE", police("ariblk.ttf", 82), ROUGE)
 
 
+def acc_py_egal(d):
+    centre(d, W // 2, 690, "x = x + 1", police("ariblk.ttf", 112), JAUNE)
+    centre(d, W // 2, 880, "=  range", police("ariblk.ttf", 82), VERT)
+    centre(d, W // 2, 1000, "== compare", police("ariblk.ttf", 82), ROUGE)
+
+
+def acc_py_boucles(d):
+    centre(d, W // 2, 670, "for", police("ariblk.ttf", 92), VERT)
+    centre(d, W // 2, 780, "= POUR", police("ariblk.ttf", 62), VERT)
+    centre(d, W // 2, 930, "while", police("ariblk.ttf", 92), ROUGE)
+    centre(d, W // 2, 1040, "= TANT QUE", police("ariblk.ttf", 62), ROUGE)
+
+
+def acc_py_tracer(d):
+    f = police("ariblk.ttf", 62)
+    for i, (a, b) in enumerate([("i", "s"), ("1", "2"), ("2", "6"), ("3", "12"), ("4", "20")]):
+        coul = BLEU if i == 0 else (VERT if i == 4 else NAVY)
+        d.text((420, 660 + i * 74), a, font=f, fill=coul)
+        d.text((600, 660 + i * 74), b, font=f, fill=coul)
+    d.line([(400, 728), (700, 728)], fill=BLEU, width=4)
+
+
 SHORTS = {
+    "eleveai-maths-seconde-python-short-egal": {
+        "badge": "MATHS · SECONDE", "titre": ["LE SIGNE =", "EN PYTHON"], "taille": 88,
+        "sous": "il range, il ne compare pas", "accroche": acc_py_egal,
+        "dossier": "seconde/maths/fr",
+    },
+    "eleveai-maths-seconde-python-short-boucles": {
+        "badge": "MATHS · SECONDE", "titre": ["QUELLE", "BOUCLE ?"], "taille": 96,
+        "sous": "combien de fois, ou jusqu'à quand", "accroche": acc_py_boucles,
+        "dossier": "seconde/maths/fr",
+    },
+    "eleveai-maths-seconde-python-short-tracer": {
+        "badge": "MATHS · SECONDE", "titre": ["TRACER UN", "PROGRAMME"], "taille": 90,
+        "sous": "ne devine pas, note", "accroche": acc_py_tracer,
+        "dossier": "seconde/maths/fr",
+    },
     "eleveai-maths-seconde-fonction-vocabulaire-short-dissymetrie": {
         "badge": "MATHS · SECONDE", "titre": ["IMAGE OU", "ANTÉCÉDENT ?"], "taille": 84,
         "sous": "tout le monde les confond", "accroche": acc_fv_dissymetrie,

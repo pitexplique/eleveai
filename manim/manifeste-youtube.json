@@ -682,6 +682,134 @@
         "2de",
         "Shorts"
       ]
+    },
+    {
+      "id": "python",
+      "notionId": "algorithmique_python_2de",
+      "type": "longue",
+      "fichier": "seconde/maths/paysage/fr/python/eleveai-maths-seconde-python.mp4",
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-python.png",
+      "titre": "Maths seconde · Algorithmique et Python — EleveAI",
+      "accroche": "x = x + 1 : impossible en maths, normal en Python. Parce que le signe égal ne compare rien — il RANGE. Tout le chapitre tient dans cette différence.",
+      "chapitres": [
+        [
+          "00:00",
+          "Algorithmique et Python"
+        ],
+        [
+          "00:11",
+          "Les objectifs"
+        ],
+        [
+          "00:30",
+          "Le signe = range, il ne compare pas"
+        ],
+        [
+          "01:03",
+          "Les types et la division"
+        ],
+        [
+          "01:24",
+          "La condition : un aiguillage"
+        ],
+        [
+          "01:48",
+          "for = POUR, while = TANT QUE"
+        ],
+        [
+          "02:32",
+          "Les fonctions : def et return"
+        ],
+        [
+          "02:51",
+          "La simulation"
+        ],
+        [
+          "03:10",
+          "Défi"
+        ],
+        [
+          "03:33",
+          "Correction"
+        ],
+        [
+          "04:06",
+          "Tu sais maintenant"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/algorithmique-python-2de",
+      "tags": [
+        "maths",
+        "seconde",
+        "2de",
+        "python",
+        "algorithmique",
+        "boucle",
+        "variable",
+        "lycée"
+      ]
+    },
+    {
+      "id": "py-egal",
+      "notionId": "algorithmique_python_2de",
+      "microId": "python_variable_affectation",
+      "type": "short",
+      "renvoie_vers": "python",
+      "fichier": "seconde/maths/shorts/fr/python/eleveai-maths-seconde-python-short-egal.mp4",
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-python-short-egal.png",
+      "titre": "Python : pourquoi x = x + 1 n'est pas absurde",
+      "accroche": "Le signe égal ne compare rien, il RANGE. Un seul égal range, deux égal comparent — c'est l'erreur numéro un des débutants.",
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/algorithmique-python-2de",
+      "tags": [
+        "python",
+        "seconde",
+        "variable",
+        "affectation",
+        "maths",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "py-boucles",
+      "notionId": "algorithmique_python_2de",
+      "microId": "python_boucle",
+      "type": "short",
+      "renvoie_vers": "python",
+      "fichier": "seconde/maths/shorts/fr/python/eleveai-maths-seconde-python-short-boucles.mp4",
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-python-short-boucles.png",
+      "titre": "for ou while : quelle boucle choisir en Python",
+      "accroche": "for se lit POUR, while se lit TANT QUE. La première quand on sait combien de fois répéter, la seconde quand on sait seulement à quelle condition s'arrêter.",
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/algorithmique-python-2de",
+      "tags": [
+        "python",
+        "seconde",
+        "boucle",
+        "for",
+        "while",
+        "maths",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "py-tracer",
+      "notionId": "algorithmique_python_2de",
+      "microId": "python_simulation",
+      "type": "short",
+      "renvoie_vers": "python",
+      "fichier": "seconde/maths/shorts/fr/python/eleveai-maths-seconde-python-short-tracer.mp4",
+      "miniature": "seconde/maths/fr/eleveai-maths-seconde-python-short-tracer.png",
+      "titre": "Tracer un programme Python ligne à ligne",
+      "accroche": "La méthode qui ne trompe jamais : un tableau, deux colonnes, et on note les valeurs à chaque tour. On ne devine pas, on note.",
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/algorithmique-python-2de",
+      "tags": [
+        "python",
+        "seconde",
+        "tracer",
+        "programme",
+        "méthode",
+        "maths",
+        "Shorts"
+      ]
     }
   ]
 }

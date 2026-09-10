@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Ce programme, que vaut s à la fin ? Ne devine pas. Trace.",
+  "01-methode": "La méthode qui ne trompe jamais : on suit le programme ligne à ligne, et on NOTE les valeurs à chaque tour. Un tableau, deux colonnes.",
+  "02-tours": "Au départ, s vaut zéro. Premier tour, i vaut 1 : on ajoute 2, s vaut 2. Deuxième tour, i vaut 2 : on ajoute 4, s vaut 6.",
+  "03-suite": "Troisième tour, i vaut 3 : on ajoute 6, s vaut 12. Quatrième tour, i vaut 4 : on ajoute 8, s vaut 20.",
+  "04-resultat": "La boucle s'arrête, parce que i s'arrête à 4. Donc s vaut 20. Je n'ai rien deviné : j'ai seulement noté.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

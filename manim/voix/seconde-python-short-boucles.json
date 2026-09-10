@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Deux sortes de boucles en Python. L'une se lit POUR, l'autre se lit TANT QUE. Comment savoir laquelle prendre ?",
+  "01-bornee": "La première se lit POUR : pour i allant de 0 à 3, fais ceci. Tu la prends quand tu sais COMBIEN de fois répéter. Elle compte toute seule.",
+  "02-exemple1": "Regarde : s démarre à zéro, et on lui ajoute successivement 0, 1, 2, puis 3. À la fin, s vaut 6. Quatre tours, décidés d'avance.",
+  "03-non-bornee": "La seconde se lit TANT QUE : tant que x est inférieur à 50, double x. Tu la prends quand tu ne sais PAS combien de fois, mais que tu sais à quelle condition t'arrêter.",
+  "04-exemple2": "Ici, x démarre à 1 et double à chaque tour : 2, 4, 8, 16, 32, puis 64. Et là, elle s'arrête, parce que 64 n'est plus inférieur à 50. Combien de tours ? On ne le savait pas au départ.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}

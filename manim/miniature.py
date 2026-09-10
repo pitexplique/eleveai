@@ -1372,7 +1372,20 @@ def acc_fonction_vocabulaire(d):
     d.text((300, 464), "−1  et  3", font=police("ariblk.ttf", 52), fill=ROUGE)
 
 
+def acc_python_2de(d):
+    """La ligne impossible en maths, normale en Python."""
+    d.text((300, 340), "x = x + 1", font=police("ariblk.ttf", 68), fill=BLEU)
+    d.text((300, 424), "un = RANGE", font=police("arialbd.ttf", 44), fill=VERT)
+    d.text((300, 480), "deux == COMPARENT", font=police("arialbd.ttf", 40), fill=ROUGE)
+
+
 NOTIONS = {
+    "eleveai-maths-seconde-python": {
+        "badge": "MATHS · SECONDE", "titre": ["ALGORITHMIQUE", "ET PYTHON"], "taille": 56,
+        "sous": "l'ordinateur fait ce que tu écris",
+        "accroche": acc_python_2de,
+        "dossier": "seconde/maths/fr",
+    },
     "eleveai-maths-seconde-fonction-vocabulaire": {
         "badge": "MATHS · SECONDE", "titre": ["IMAGE ET", "ANTÉCÉDENT"], "taille": 66,
         "sous": "une image est unique, un antécédent non",

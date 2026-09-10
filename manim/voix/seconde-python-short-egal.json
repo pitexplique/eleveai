@@ -1,0 +1,8 @@
+{
+  "00-accroche": "En Python, x égale x plus 1. En maths, c'est impossible. En Python, ça marche. Pourquoi ?",
+  "01-range": "Parce que le signe égal, en Python, ne compare rien du tout. Il RANGE. x égale 3 veut dire : range 3 dans la boîte qui s'appelle x.",
+  "02-exemple": "Donc x égale x plus 1 se lit : prends ce qu'il y a dans x, ajoute 1, et remets le résultat dans la boîte. Si x valait 5, il vaut maintenant 6.",
+  "03-comparer": "Et pour comparer ? Il faut DEUX signes égal. Un seul range, deux comparent. C'est l'erreur numéro un des débutants.",
+  "04-retenir": "Retiens la phrase : un égal, ça range. Deux égal, ça compare.",
+  "05-fin": "La vidéo complète est sur la chaîne."
+}
