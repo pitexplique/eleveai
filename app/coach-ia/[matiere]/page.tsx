@@ -246,6 +246,21 @@ function getClasseNavLabel(classe: Classe) {
     adulte: "Adulte",
     "pix-college": "Collège",
     "pix-lycee": "Lycée",
+    /* ⭐ LES PALIERS EN CAPITALES (10/09/2026, Frédéric : « corrige »).
+       Cette table est un `Partial<Record<…>>`, et ce qui n'y figure pas
+       s'affiche TEL QUEL — c'est-à-dire l'identifiant brut. Les cinq paliers du
+       cadre européen n'avaient pas d'entrée : la colonne de gauche montrait
+       donc « a1 », « b2 » en minuscules, alors qu'un niveau du CECRL s'écrit en
+       capitales partout ailleurs sur le site (le titre « Espagnol A1 » juste à
+       côté, le menu, les pastilles de la recherche suggérée).
+       ⚠️ Le trou datait de l'anglais et de l'espagnol, pas de l'économie : les
+       quatre matières en A1 → B2 le portaient depuis le début, et les quatre
+       sont réparées d'un coup. */
+    a1: "A1",
+    a2: "A2",
+    b1: "B1",
+    b2: "B2",
+    c1: "C1",
     /* ⛔ TROIS LIBELLÉS D'ÉCONOMIE VIVAIENT ICI AVEC LEURS ACCENTS CASSÉS —
        « D?couverte », « Coll?ge », « Lyc?e » — et ils s'affichaient tels quels
        dans la colonne de gauche du coach. Ils sont partis avec les paliers
