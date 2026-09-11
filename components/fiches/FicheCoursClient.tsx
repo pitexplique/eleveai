@@ -78,6 +78,62 @@ function compositionParDefaut(): Composition {
  */
 const CYCLE_2 = new Set(["cp", "ce1", "ce2"]);
 
+/**
+ * ⭐ DEUX COLONNES, TROIS SEULEMENT SI LE CONTENU EST LÉGER — règle affinée par
+ * Frédéric le 11/09/2026 : « fais deux colonnes et non pas trois, SAUF si
+ * l'intérieur des colonnes a peu de texte ».
+ *
+ * ⚠️ « Peu de texte » ne se juge pas à l'œil, sinon la règle dérive d'une fiche
+ * à l'autre. On la MESURE, et sur les deux choses qui décident vraiment de la
+ * largeur nécessaire :
+ *
+ *   1. UN SCHÉMA SUFFIT À IMPOSER DEUX COLONNES. Un tableau, un dessin, une
+ *      formule encadrée : ce sont eux qui débordaient à ~225 px — captures à
+ *      l'appui, en-têtes coupés et barre de défilement. Un seul dans la
+ *      rubrique, et toute la rubrique passe à deux.
+ *   2. SINON, LE TEXTE LE PLUS LONG décide. Au delà de 180 signes, une carte à
+ *      trois colonnes fait une dizaine de lignes hautes et étroites, pénibles à
+ *      lire au vidéoprojecteur.
+ *
+ * ⚠️ C'est le MAXIMUM qu'on regarde, pas la moyenne : trois cartes courtes et
+ * une longue donnent une grille bancale, et c'est la longue qui gêne.
+ */
+const SIGNES_POUR_TROIS_COLONNES = 180;
+
+/**
+ * Combien de colonnes pour une grille de cartes, sur grand écran.
+ *
+ * Trois colonnes surchargent une carte : le texte s'y étrangle et la fiche
+ * devient illisible. La règle par défaut est donc DEUX colonnes, et trois
+ * seulement quand l'intérieur des cartes tient en peu de mots.
+ *
+ * Trois conditions doivent être réunies pour passer à trois :
+ *
+ *  1. aucune carte ne porte de schéma — un dessin a besoin de largeur, et
+ *     `viewBox` est calibré sur la largeur de la carte à deux colonnes ;
+ *  2. le plus long texte tient en {@link SIGNES_POUR_TROIS_COLONNES} signes ;
+ *  3. le nombre de cartes n'est pas 4. Avec quatre cartes, trois colonnes
+ *     laissent une orpheline toute seule sur la deuxième ligne ; deux colonnes
+ *     donnent un carré 2 × 2, qui se lit et se projette mieux.
+ *
+ * À l'impression, la grille reste à deux colonnes quoi qu'il arrive (voir les
+ * classes `print:grid-cols-2` aux points d'appel) : une feuille A4 est plus
+ * étroite qu'un écran.
+ */
+function grilleColonnes(
+  blocs: { texte?: string; detail?: string; schema?: unknown }[],
+): string {
+  if (blocs.some((b) => b.schema)) return "lg:grid-cols-2";
+  if (blocs.length === 4) return "lg:grid-cols-2";
+  const plusLong = Math.max(
+    0,
+    ...blocs.map((b) => (b.texte ?? b.detail ?? "").length),
+  );
+  return plusLong <= SIGNES_POUR_TROIS_COLONNES
+    ? "lg:grid-cols-3"
+    : "lg:grid-cols-2";
+}
+
 const ICONES_METHODE = [BookOpen, Lightbulb, CheckCircle2];
 const STYLES_METHODE = [
   { carte: "border-sky-200 bg-sky-50", icone: "text-sky-500" },
@@ -500,7 +556,9 @@ export default function FicheCoursClient({
                 Une carte de propriété porte presque toujours un tableau ou un
                 dessin : elle est chargée par construction. Donc deux colonnes,
                 toujours, quel que soit le nombre de propriétés. */}
-            <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-2 print:grid-cols-2 print:gap-3">
+            <div
+              className={`mt-4 grid gap-4 md:grid-cols-2 print:grid-cols-2 print:gap-3 ${grilleColonnes(fiche.proprietes)}`}
+            >
               {fiche.proprietes.map((p) => (
                 <div
                   key={p.titre}
@@ -572,7 +630,9 @@ export default function FicheCoursClient({
                 À deux colonnes, la carte passe à ~340 px et tout rentre.
                 ⚠️ L'impression garde ses trois colonnes : sur A4 la largeur ne
                 manque pas, et le nombre de pages compte. */}
-            <div className="mt-4 grid gap-5 md:grid-cols-2 print:grid-cols-2 print:gap-3">
+            <div
+              className={`mt-4 grid gap-5 md:grid-cols-2 print:grid-cols-2 print:gap-3 ${grilleColonnes(fiche.methode)}`}
+            >
             {fiche.methode.map((etape, i) => {
               const Icone = ICONES_METHODE[i % ICONES_METHODE.length];
               const style = STYLES_METHODE[i % STYLES_METHODE.length];
@@ -606,7 +666,9 @@ export default function FicheCoursClient({
             {/* Deux colonnes ici aussi, et pour la même mesure que la méthode :
                 les usages portent des tableaux depuis la 5e, et trois colonnes
                 les rendent illisibles. */}
-            <div className="mt-4 grid gap-4 md:grid-cols-2 print:grid-cols-2 print:gap-3">
+            <div
+              className={`mt-4 grid gap-4 md:grid-cols-2 print:grid-cols-2 print:gap-3 ${grilleColonnes(fiche.usages)}`}
+            >
               {fiche.usages.map((usage) => (
                 <div
                   key={usage.titre}
