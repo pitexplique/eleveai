@@ -43,11 +43,32 @@ export const enVert = (s: string) => `\\textcolor{${VERT}}{${s}}`;
  * Une formule seule, centrée, avec sa légende.
  *
  * ⚠️ `tex` s'écrit SANS les dollars : ils sont ajoutés ici.
+ *
+ * ⛔ UNE FORMULE LONGUE POUSSAIT LA CARTE HORS DE SA GRILLE — mesuré le
+ * 11/09/2026, en poche, sur des fiches déjà validées à l'œil.
+ *
+ * Un élément de grille porte `min-width: auto` : il REFUSE de descendre sous la
+ * largeur minimale de son contenu. Une formule KaTeX ne se coupe pas, donc sa
+ * largeur minimale est sa largeur entière — et la carte grandissait jusqu'à
+ * déborder du cadre, sans barre de défilement et sans la moindre erreur. La
+ * fiche des racines carrées dépassait ainsi de 164 px à 375 px de large.
+ *
+ * ⛔ ET `overflow-x-auto` NE SUFFIT PAS SEUL. KaTeX rend des éléments en ligne :
+ * le navigateur les coupe volontiers aux signes d'opération, donc au lieu de
+ * défiler la formule S'EMPILAIT sur trois ou quatre lignes — une fraction dont
+ * le numérateur passe à la ligne ne se lit plus, et le dernier terme sortait du
+ * cadre. `whitespace-nowrap` la garde d'un seul tenant, et c'est alors seulement
+ * qu'elle défile.
+ *
+ * Trois gestes, et les trois sont nécessaires : `min-w-0` sur la carte (dans
+ * FicheCoursClient) pour qu'elle ACCEPTE de rétrécir, `overflow-x-auto` ici pour
+ * que la formule défile dans son cadre, et `whitespace-nowrap` pour qu'elle
+ * défile au lieu de se replier.
  */
 export function egalite(tex: string, legende?: string) {
   return (
     <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-4 text-center">
-      <div className="text-lg text-slate-900">
+      <div className="overflow-x-auto whitespace-nowrap text-lg text-slate-900">
         <TexteMath>{`$${tex}$`}</TexteMath>
       </div>
       {legende ? (
@@ -67,7 +88,10 @@ export function egalites(lignes: string[], legende?: string) {
   return (
     <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-4 text-center">
       {lignes.map((l, i) => (
-        <div key={i} className={`text-lg text-slate-900 ${i ? "mt-2" : ""}`}>
+        <div
+          key={i}
+          className={`overflow-x-auto whitespace-nowrap text-lg text-slate-900 ${i ? "mt-2" : ""}`}
+        >
           <TexteMath>{`$${l}$`}</TexteMath>
         </div>
       ))}
@@ -105,7 +129,7 @@ export function cas(
             key={i}
             className="min-w-[92px] flex-1 rounded-lg bg-white px-2 py-2 text-center ring-1 ring-slate-200"
           >
-            <div className="text-base text-slate-900">
+            <div className="overflow-x-auto whitespace-nowrap text-base text-slate-900">
               <TexteMath>{`$${e.formule}$`}</TexteMath>
             </div>
             <div

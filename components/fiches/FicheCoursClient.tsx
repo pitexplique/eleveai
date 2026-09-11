@@ -562,7 +562,7 @@ export default function FicheCoursClient({
               {fiche.proprietes.map((p) => (
                 <div
                   key={p.titre}
-                  className="rounded-2xl border border-slate-200 bg-white p-4"
+                  className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4"
                 >
                   <h3 className="font-black text-slate-900"><TexteMath>{p.titre}</TexteMath></h3>
                   <p className="mt-2 text-sm leading-6 text-slate-600 print:text-xs">
@@ -639,7 +639,7 @@ export default function FicheCoursClient({
               return (
                 <div
                   key={etape.titre}
-                  className={`rounded-2xl border p-4 ${style.carte}`}
+                  className={`min-w-0 rounded-2xl border p-4 ${style.carte}`}
                 >
                   <Icone className={`h-5 w-5 print:hidden ${style.icone}`} />
                   <h3 className="mt-3 text-lg font-black text-slate-900 print:mt-0 print:text-base">
@@ -672,7 +672,7 @@ export default function FicheCoursClient({
               {fiche.usages.map((usage) => (
                 <div
                   key={usage.titre}
-                  className="rounded-2xl border border-slate-200 bg-white p-4"
+                  className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4"
                 >
                   <h3 className="font-black text-slate-900"><TexteMath>{usage.titre}</TexteMath></h3>
                   <p className="mt-2 text-sm leading-6 text-slate-600 print:text-xs">
@@ -696,7 +696,7 @@ export default function FicheCoursClient({
               {fiche.exemples.map((exemple) => (
                 <div
                   key={exemple.titre}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                  className="min-w-0 rounded-2xl border border-slate-200 bg-slate-50 p-4"
                 >
                   <h3 className="font-black text-slate-900"><TexteMath>{exemple.titre}</TexteMath></h3>
                   <p className="mt-2 text-sm text-slate-600 print:text-xs">
@@ -774,7 +774,7 @@ export default function FicheCoursClient({
               {fiche.entrainement.map((item, index) => (
                 <li
                   key={item.question}
-                  className="rounded-2xl border border-slate-200 bg-white p-4"
+                  className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4"
                 >
                   <p className="font-bold text-slate-900">
                     {index + 1}. <TexteMath>{item.question}</TexteMath>

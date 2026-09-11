@@ -68,7 +68,7 @@ export default function DiagrammeBoiteCanvas({ figure }: Props) {
 
   // Une étiquette de série à gauche prend de la place sur toute la hauteur.
   const aDesLibelles = series.some((s) => s.label);
-  const LARGEUR_CAR_LIBELLE = 6.5; // fontSize 12, fontWeight 700
+  const LARGEUR_CAR_LIBELLE = 8.7; // fontSize 16, fontWeight 700
   const libelleLarge = aDesLibelles
     ? Math.min(
         92,
@@ -93,8 +93,8 @@ export default function DiagrammeBoiteCanvas({ figure }: Props) {
   // ligne, « 12 » et « 13 » se recouvrent et on lit un nombre qui n'existe pas.
   // Chaque étiquette prend donc le premier étage où elle ne touche personne, et
   // le dessin gagne en hauteur plutôt que de mentir.
-  const LARGEUR_CAR = 7.5; // fontSize 12, fontWeight 800
-  const CRAN = 17;
+  const LARGEUR_CAR = 10; // fontSize 16, fontWeight 800
+  const CRAN = 22;
 
   function etages(serie: Serie) {
     // Deux des cinq nombres peuvent être ÉGAUX — c'est le cas d'une série très
@@ -130,8 +130,8 @@ export default function DiagrammeBoiteCanvas({ figure }: Props) {
   const parSerie = series.map((s) => {
     const e = montrerValeurs ? etages(s) : { place: [], hauteur: 0 };
     const hautNombres = montrerValeurs ? 6 + CRAN * e.hauteur : 0;
-    const hautBoite = 34;
-    const basEcart = montrerEcart ? 24 : 0;
+    const hautBoite = 40;
+    const basEcart = montrerEcart ? 28 : 0;
     return {
       serie: s,
       place: e.place,
@@ -142,7 +142,7 @@ export default function DiagrammeBoiteCanvas({ figure }: Props) {
     };
   });
 
-  const hautAxe = montrerAxe ? 30 : 6;
+  const hautAxe = montrerAxe ? 36 : 6;
   const hauteur =
     parSerie.reduce((somme, p) => somme + p.total, 0) + hautAxe + 6;
 
@@ -204,9 +204,9 @@ export default function DiagrammeBoiteCanvas({ figure }: Props) {
                 {s.label ? (
                   <text
                     x={gauche - 8}
-                    y={yMilieu + 4}
+                    y={yMilieu + 6}
                     textAnchor="end"
-                    fontSize="12"
+                    fontSize="16"
                     fontWeight="700"
                     fill={trait}
                   >
@@ -294,7 +294,7 @@ export default function DiagrammeBoiteCanvas({ figure }: Props) {
                         x={p.x}
                         y={y}
                         textAnchor="middle"
-                        fontSize="12"
+                        fontSize="16"
                         fontWeight="800"
                         fill={estMediane ? ROUGE : ARDOISE}
                         stroke="white"
@@ -324,9 +324,9 @@ export default function DiagrammeBoiteCanvas({ figure }: Props) {
                     />
                     <text
                       x={(xQ1 + xQ3) / 2}
-                      y={yBoite + b.hautBoite + 21}
+                      y={yBoite + b.hautBoite + 24}
                       textAnchor="middle"
-                      fontSize="11"
+                      fontSize="14"
                       fontWeight="700"
                       fill={trait}
                       stroke="white"
@@ -374,9 +374,9 @@ export default function DiagrammeBoiteCanvas({ figure }: Props) {
                   />
                   <text
                     x={versX(g)}
-                    y={axeY + 17}
+                    y={axeY + 19}
                     textAnchor="middle"
-                    fontSize="11"
+                    fontSize="14"
                     fontWeight="700"
                     fill="#475569"
                   >
