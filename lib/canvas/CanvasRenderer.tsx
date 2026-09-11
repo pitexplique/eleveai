@@ -10,6 +10,7 @@ import DroiteGradueeCanvas from "./DroiteGradueeCanvas";
 import ThalesCanvas from "./ThalesCanvas";
 import Solide3DCanvas from "./Solide3DCanvas";
 import StatGraphCanvas from "./StatGraphCanvas";
+import DiagrammeBoiteCanvas from "./DiagrammeBoiteCanvas";
 import CanvasProbabilites from "./ProbabilitesCanvas";
 import ArbreProbabilitesCanvas from "./ArbreProbabilitesCanvas";
 import Repere3dCanvas from "./Repere3dCanvas";
@@ -74,6 +75,8 @@ export default function CanvasRenderer({ figure }: Props) {
 
     case "stat_graph":
       return <StatGraphCanvas figure={figure} />;
+    case "diagramme_boite":
+      return <DiagrammeBoiteCanvas figure={figure} />;
 
     case "probabilites":
       return <CanvasProbabilites figure={figure} />;

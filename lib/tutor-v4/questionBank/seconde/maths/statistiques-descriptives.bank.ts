@@ -69,6 +69,102 @@ function barres(data: { label: string; value: number; color?: string }[], highli
   };
 }
 
+/**
+ * Les séries que peut résumer un diagramme en boîte.
+ *
+ * ⚠️ ELLES NE SONT PAS DÉCORATIVES. Le texte d'un énoncé à dessin ne contient
+ * aucun nombre — tout est dans la figure —, donc sans contexte tiré au sort les
+ * 600 tirages servaient UN SEUL énoncé : le compteur de renouvellement voyait
+ * un item figé, et l'élève relisait la même phrase à chaque question.
+ */
+const CONTEXTES_BOITE = [
+  "les temps (en s) des nageurs d'un club",
+  "les distances (en km) parcourues par les coureurs",
+  "les âges des licenciés d'un club",
+  "les notes d'un devoir sur 20",
+  "les tailles (en cm) des élèves d'une classe",
+  "les durées (en min) des trajets domicile-lycée",
+  "les températures (en °C) relevées à midi pendant un mois",
+  "les dépenses (en €) des familles pour la rentrée",
+];
+
+/** Un diagramme en boîte d'une seule série, à la largeur d'une carte de fiche. */
+function boite(cinq: {
+  min: number;
+  q1: number;
+  mediane: number;
+  q3: number;
+  max: number;
+}): CanvasFigure {
+  return {
+    kind: "diagramme_boite",
+    series: [cinq],
+    size: { width: 320 },
+  };
+}
+
+/**
+ * Cinq nombres STRICTEMENT croissants pour un diagramme en boîte.
+ *
+ * ⛔ Ils doivent être strictement croissants. Avec $Q_1 = Q_3$ la boîte n'a plus
+ * de largeur et l'énoncé « quel est l'écart interquartile ? » attend $0$, ce qui
+ * ne s'enseigne pas ; avec une médiane collée à un bord, le trait rouge se
+ * confond avec le trait de la boîte et la figure ment.
+ */
+function cinqNombres() {
+  const min = randomInt(1, 6);
+  const q1 = min + randomInt(2, 4);
+  const mediane = q1 + randomInt(2, 4);
+  const q3 = mediane + randomInt(2, 4);
+  const max = q3 + randomInt(2, 5);
+  return { min, q1, mediane, q3, max };
+}
+
+/** Une série de `n` entiers deux à deux distincts, rangée dans l'ordre croissant. */
+function serieCroissante(n: number): number[] {
+  const serie: number[] = [];
+  let v = randomInt(2, 8);
+  for (let i = 0; i < n; i += 1) {
+    serie.push(v);
+    v += randomInt(1, 4);
+  }
+  return serie;
+}
+
+/**
+ * La même série, dans le désordre — et JAMAIS dans l'ordre par accident.
+ *
+ * ⛔ Un mélange de Fisher-Yates rend la liste triée une fois sur $n!$, et cette
+ * fois-là l'énoncé « la série n'est pas rangée » devient faux : l'élève qui lit
+ * la valeur centrale sans ranger tombe juste, et le piège lui apprend
+ * exactement le contraire de ce qu'on voulait. On remélange tant que la liste
+ * sort triée, et l'on force au passage un premier terme qui ne soit pas le
+ * minimum.
+ */
+function melanger(serie: number[]): number[] {
+  const trie = [...serie];
+  let sortie = [...serie];
+  let essais = 0;
+  do {
+    for (let i = sortie.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [sortie[i], sortie[j]] = [sortie[j], sortie[i]];
+    }
+    essais += 1;
+  } while (
+    essais < 40 &&
+    (sortie.every((v, i) => v === trie[i]) ||
+      sortie[0] === trie[0] ||
+      // ⛔ LE PIÈGE QUI NE PIQUE PAS. Une fois sur $n$ environ, la valeur qui
+      // tombe au MILIEU de la liste mélangée est justement la médiane : l'élève
+      // qui lit le centre sans ranger tombe juste, et l'énoncé lui enseigne
+      // exactement le contraire de ce qu'il veut. Mesuré sur 600 tirages avant
+      // cette ligne. On remélange tant que le raccourci gagne.
+      sortie[(sortie.length - 1) / 2] === trie[(trie.length - 1) / 2])
+  );
+  return sortie;
+}
+
 export const statistiquesDescriptivesBank: TutorBankItemV4[] = [
   /* ===================== STAT_LIRE_SERIE ===================== */
 
@@ -2341,6 +2437,552 @@ export const statistiquesDescriptivesBank: TutorBankItemV4[] = [
           "On cherche ce que signifie une dispersion strictement nulle.",
           "Aucune valeur ne s'écarte de la moyenne, sinon l'écart type serait strictement positif.",
           `Toutes les notes valent donc $${m}$ — c'est le seul cas où l'écart type s'annule.`
+        ),
+      };
+    },
+  },
+
+  /* ===================== RENFORT DU 11/09/2026 =====================
+   *
+   * ⛔ LE TROU MESURÉ. La notion comptait 1 890 énoncés, 81 items, aucune dette
+   * de renouvellement — et pourtant AUCUNE question du contrôle n'y était :
+   *
+   *   - tout item de quartile DONNAIT déjà $Q_1$ et $Q_3$ ; pas un seul ne
+   *     demandait de les DÉTERMINER à partir d'une série ;
+   *   - les deux gabarits de médiane servaient une suite arithmétique DÉJÀ
+   *     ORDONNÉE, donc jamais le geste « j'ordonne d'abord » ;
+   *   - le diagramme en boîte n'existait nulle part, ni en lecture ni en
+   *     comparaison, alors que c'est LA représentation du programme ;
+   *   - les effectifs cumulés, qui sont la seule façon de trouver une médiane
+   *     dans un tableau d'effectifs, étaient absents.
+   *
+   * ⚠️ LE RANG DES QUARTILES. On ne tire que des effectifs qui NE SONT PAS
+   * multiples de 4. Quand $N$ est multiple de 4, les manuels divergent sur le
+   * rang de $Q_1$ ($N/4$ ou $N/4 + 1$ selon les éditions) : un coach n'a pas à
+   * trancher une convention que le professeur de l'élève pourrait compter faux.
+   */
+
+  /* --- Lire un diagramme en boîte --- */
+
+  {
+    kind: "fixed",
+    id: "seconde_stat_lire_fixed_boite_lecture",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_lire_serie",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Sur un diagramme en boîte, que représente le trait tracé À L'INTÉRIEUR de la boîte ?",
+    format: "qcm",
+    choices: ["la médiane", "la moyenne", "le maximum", "l'étendue"],
+    expected: ["la médiane"],
+    comparator: "mcq_exact",
+    canvas: boite({ min: 4, q1: 9, mediane: 12, q3: 15, max: 20 }),
+    hint: "La boîte va de $Q_1$ à $Q_3$ ; le trait du milieu coupe la série en deux.",
+    explanation: exp(
+      "La boîte s'étend de $Q_1$ à $Q_3$, et le trait intérieur marque la médiane.",
+      "On regarde le trait situé entre les deux bords de la boîte.",
+      "Il partage la série en deux moitiés de même effectif.",
+      "Ce trait est la médiane. La moyenne, elle, ne se lit PAS sur un diagramme en boîte."
+    ),
+    tags: ["seconde", "maths", "statistiques", "lire_serie", "canvas", "boite", "qcm"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_stat_lire_fixed_boite_bords",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_lire_serie",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Sur un diagramme en boîte, les deux extrémités des moustaches marquent :",
+    format: "qcm",
+    choices: [
+      "le minimum et le maximum",
+      "$Q_1$ et $Q_3$",
+      "la moyenne et la médiane",
+      "les valeurs les plus fréquentes",
+    ],
+    expected: ["le minimum et le maximum"],
+    comparator: "mcq_exact",
+    canvas: boite({ min: 4, q1: 9, mediane: 12, q3: 15, max: 20 }),
+    hint: "Les bords de la BOÎTE sont $Q_1$ et $Q_3$ ; les moustaches vont plus loin.",
+    explanation: exp(
+      "Le diagramme en boîte porte cinq nombres : minimum, $Q_1$, médiane, $Q_3$, maximum.",
+      "On distingue les bords de la boîte des bouts des moustaches.",
+      "Les bords de la boîte donnent $Q_1$ et $Q_3$ ; les bouts des moustaches donnent le minimum et le maximum.",
+      "Les extrémités des moustaches sont le minimum et le maximum : l'écart entre les deux est l'étendue."
+    ),
+    tags: ["seconde", "maths", "statistiques", "lire_serie", "canvas", "boite", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "seconde_stat_lire_tpl_boite_mediane",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_lire_serie",
+    difficulty: 2,
+    theme: "sport",
+    hint: "La médiane est le trait à l'intérieur de la boîte.",
+    tags: ["seconde", "maths", "statistiques", "lire_serie", "canvas", "boite", "template"],
+    generate: () => {
+      const cinq = cinqNombres();
+      const contexte = choisir(CONTEXTES_BOITE);
+      return {
+        text: `Le diagramme en boîte résume ${contexte}. Quelle est la médiane ?`,
+        format: "short",
+        expected: [String(cinq.mediane)],
+        comparator: "number_equal",
+        canvas: boite(cinq),
+        explanation: exp(
+          "Sur un diagramme en boîte, la médiane est le trait tracé à l'intérieur de la boîte.",
+          "On lit sa position sur l'axe.",
+          `Le trait intérieur tombe sur $${cinq.mediane}$.`,
+          `La médiane vaut $${cinq.mediane}$ : la moitié des valeurs lui sont inférieures ou égales.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_stat_lire_tpl_boite_etendue",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_lire_serie",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Étendue $=$ maximum $-$ minimum, donc d'un bout de moustache à l'autre.",
+    tags: ["seconde", "maths", "statistiques", "lire_serie", "canvas", "boite", "template"],
+    generate: () => {
+      const cinq = cinqNombres();
+      const etendue = cinq.max - cinq.min;
+      const contexte = choisir(CONTEXTES_BOITE);
+      return {
+        text: `Ce diagramme en boîte résume ${contexte}. Quelle est l'étendue de la série ?`,
+        format: "short",
+        expected: [String(etendue)],
+        comparator: "number_equal",
+        canvas: boite(cinq),
+        explanation: exp(
+          "L'étendue est l'écart entre la plus grande et la plus petite valeur.",
+          "On lit les deux bouts des moustaches, pas les bords de la boîte.",
+          `Maximum $= ${cinq.max}$, minimum $= ${cinq.min}$, donc $${cinq.max} - ${cinq.min}$.`,
+          `L'étendue vaut $${etendue}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_stat_lire_tpl_boite_quart",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_lire_serie",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Le bord GAUCHE de la boîte est $Q_1$ : au moins un quart des valeurs lui sont inférieures ou égales.",
+    tags: ["seconde", "maths", "statistiques", "lire_serie", "canvas", "boite", "raisonnement", "template"],
+    generate: () => {
+      const cinq = cinqNombres();
+      const correct = `au moins $25\\,\\%$ des valeurs sont inférieures ou égales à $${cinq.q1}$`;
+      const contexte = choisir(CONTEXTES_BOITE);
+      return {
+        text: `Ce diagramme en boîte résume ${contexte}. Que peut-on affirmer ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          correct,
+          [
+            `exactement $25\\,\\%$ des valeurs valent $${cinq.q1}$`,
+            `au moins $25\\,\\%$ des valeurs sont supérieures ou égales à $${cinq.q1}$`,
+            `la moyenne vaut $${cinq.q1}$`,
+          ],
+          [
+            `toutes les valeurs sont supérieures à $${cinq.q1}$`,
+            `$${cinq.q1}$ est la valeur la plus fréquente`,
+          ]
+        ),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: boite(cinq),
+        explanation: exp(
+          "$Q_1$ est la plus petite valeur telle qu'au moins un quart de la série lui soit inférieur ou égal.",
+          "On lit le bord gauche de la boîte.",
+          `Ce bord tombe sur $${cinq.q1}$, donc $Q_1 = ${cinq.q1}$.`,
+          `Au moins $25\\,\\%$ des valeurs sont inférieures ou égales à $${cinq.q1}$. Attention : « exactement » serait faux, la définition dit « au moins ».`
+        ),
+      };
+    },
+  },
+
+  /* --- Déterminer médiane et quartiles à partir d'une série --- */
+
+  {
+    kind: "fixed",
+    id: "seconde_stat_med_fixed_rang_q1",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_mediane_quartiles",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Une série ordonnée compte $30$ valeurs. À quel rang lit-on le premier quartile $Q_1$ ?",
+    format: "short",
+    expected: ["8"],
+    comparator: "number_equal",
+    hint: "On calcule $\\dfrac{30}{4}$ puis on arrondit à l'entier SUPÉRIEUR.",
+    explanation: exp(
+      "Le rang de $Q_1$ est $\\dfrac{N}{4}$ arrondi à l'entier supérieur.",
+      "Ici $N = 30$, donc on calcule $\\dfrac{30}{4}$.",
+      "$\\dfrac{30}{4} = 7{,}5$, et l'entier supérieur est $8$.",
+      "On lit $Q_1$ au $8^e$ rang. ⛔ Arrondir à $7$ est l'erreur classique : il faut AU MOINS un quart des valeurs en dessous."
+    ),
+    tags: ["seconde", "maths", "statistiques", "mediane", "quartiles", "short"],
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_stat_med_fixed_ordonner",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_mediane_quartiles",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Quelle est la médiane de la série : $12$, $7$, $19$, $9$, $15$ ?",
+    format: "short",
+    expected: ["12"],
+    comparator: "number_equal",
+    hint: "⚠️ La série n'est pas rangée. On l'ordonne AVANT de chercher le milieu.",
+    explanation: exp(
+      "La médiane est la valeur centrale d'une série ORDONNÉE.",
+      "On range d'abord : $7$, $9$, $12$, $15$, $19$.",
+      "Il y a $5$ valeurs, la centrale est la $3^e$ : $12$.",
+      "La médiane vaut $12$. ⛔ Sans ranger, on aurait lu $19$ — la 3ᵉ valeur de la liste d'origine, qui ne veut rien dire."
+    ),
+    tags: ["seconde", "maths", "statistiques", "mediane", "piege", "short"],
+  },
+
+  {
+    kind: "template",
+    id: "seconde_stat_med_tpl_desordre",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_mediane_quartiles",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "⚠️ La série n'est pas rangée. On l'ordonne d'abord.",
+    tags: ["seconde", "maths", "statistiques", "mediane", "piege", "template"],
+    generate: () => {
+      const n = choisir([5, 7, 9]);
+      const triee = serieCroissante(n);
+      const melangee = melanger(triee);
+      const med = triee[(n - 1) / 2];
+      return {
+        text: `Voici les valeurs relevées : ${melangee.join(", ")}. Quelle est la médiane ?`,
+        format: "short",
+        expected: [String(med)],
+        comparator: "number_equal",
+        explanation: exp(
+          "La médiane se lit sur la série ORDONNÉE, jamais sur la liste telle qu'elle arrive.",
+          `On range : ${triee.join(", ")}.`,
+          `Il y a $${n}$ valeurs, donc la médiane est la $${(n + 1) / 2}^e$ : $${med}$.`,
+          `La médiane vaut $${med}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_stat_med_tpl_q1_serie",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_mediane_quartiles",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Rang de $Q_1$ : $\\dfrac{N}{4}$ arrondi à l'entier supérieur.",
+    tags: ["seconde", "maths", "statistiques", "quartiles", "template"],
+    generate: () => {
+      const n = choisir([9, 10, 11, 13, 14, 15]);
+      const s = serieCroissante(n);
+      const rang = Math.ceil(n / 4);
+      const q1 = s[rang - 1];
+      return {
+        text: `Série ordonnée de $${n}$ valeurs : ${s.join(", ")}. Quel est le premier quartile $Q_1$ ?`,
+        format: "short",
+        expected: [String(q1)],
+        comparator: "number_equal",
+        explanation: exp(
+          "$Q_1$ est la valeur de rang $\\dfrac{N}{4}$ arrondi à l'entier supérieur.",
+          `Ici $N = ${n}$, donc $\\dfrac{${n}}{4} = ${(n / 4).toFixed(2).replace(/0+$/, "").replace(/\.$/, "").replace(".", ",")}$.`,
+          `L'entier supérieur est $${rang}$ : on lit la $${rang}^e$ valeur de la série.`,
+          `$Q_1 = ${q1}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_stat_med_tpl_q3_serie",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_mediane_quartiles",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Rang de $Q_3$ : $\\dfrac{3N}{4}$ arrondi à l'entier supérieur.",
+    tags: ["seconde", "maths", "statistiques", "quartiles", "template"],
+    generate: () => {
+      const n = choisir([9, 10, 11, 13, 14, 15]);
+      const s = serieCroissante(n);
+      const rang = Math.ceil((3 * n) / 4);
+      const q3 = s[rang - 1];
+      return {
+        text: `Série ordonnée de $${n}$ valeurs : ${s.join(", ")}. Quel est le troisième quartile $Q_3$ ?`,
+        format: "short",
+        expected: [String(q3)],
+        comparator: "number_equal",
+        explanation: exp(
+          "$Q_3$ est la valeur de rang $\\dfrac{3N}{4}$ arrondi à l'entier supérieur.",
+          `Ici $N = ${n}$, donc $\\dfrac{3 \\times ${n}}{4} = \\dfrac{${3 * n}}{4}$.`,
+          `Cela fait $${((3 * n) / 4).toFixed(2).replace(/0+$/, "").replace(/\.$/, "").replace(".", ",")}$, dont l'entier supérieur est $${rang}$ : on lit la $${rang}^e$ valeur.`,
+          `$Q_3 = ${q3}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_stat_med_tpl_effectifs_cumules",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_mediane_quartiles",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "On cumule les effectifs jusqu'à dépasser la moitié de l'effectif total.",
+    tags: ["seconde", "maths", "statistiques", "mediane", "effectifs_cumules", "canvas", "template"],
+    generate: () => {
+      // Cinq valeurs et leurs effectifs, avec un total IMPAIR : la médiane tombe
+      // alors sur une valeur unique, et non entre deux, ce qui rend la lecture
+      // des effectifs cumulés sans ambiguïté.
+      const valeurs = [0, 1, 2, 3, 4];
+      let effectifs = valeurs.map(() => randomInt(2, 9));
+      let total = effectifs.reduce((a, b) => a + b, 0);
+      if (total % 2 === 0) {
+        effectifs = [...effectifs];
+        effectifs[2] += 1;
+        total += 1;
+      }
+      const cumul: number[] = [];
+      let c = 0;
+      for (const e of effectifs) {
+        c += e;
+        cumul.push(c);
+      }
+      const rang = (total + 1) / 2;
+      const indice = cumul.findIndex((x) => x >= rang);
+      const med = valeurs[indice];
+      const contexte = choisir([
+        "le nombre de frères et sœurs des élèves d'une classe",
+        "le nombre de buts marqués par match sur une saison",
+        "le nombre de trajets à vélo par semaine",
+      ]);
+      return {
+        text: `Le tableau donne ${contexte}, sur ${total} relevés. Quelle est la médiane de cette série ?`,
+        format: "short",
+        expected: [String(med)],
+        comparator: "number_equal",
+        canvas: {
+          kind: "tableau_donnees",
+          headers: valeurs.map((v) => String(v)),
+          rows: [{ label: "Effectif", values: effectifs }],
+          caption: `Effectif total : ${total}`,
+        },
+        explanation: exp(
+          "Dans un tableau d'effectifs, la médiane se trouve en CUMULANT les effectifs.",
+          `L'effectif total vaut $${total}$, qui est impair : la médiane est la valeur de rang $\\dfrac{${total} + 1}{2} = ${rang}$.`,
+          `Effectifs cumulés : ${cumul.join(", ")}. Le premier qui atteint $${rang}$ est $${cumul[indice]}$, en face de la valeur $${med}$.`,
+          `La médiane vaut $${med}$. ⛔ Ce n'est PAS la moyenne des valeurs du tableau, et ce n'est pas non plus la valeur au plus gros effectif.`
+        ),
+      };
+    },
+  },
+
+  /* --- L'écart interquartile lu sur la boîte --- */
+
+  {
+    kind: "template",
+    id: "seconde_stat_eiq_tpl_boite",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_ecart_interquartile",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "L'écart interquartile est la LARGEUR de la boîte.",
+    tags: ["seconde", "maths", "statistiques", "ecart_interquartile", "canvas", "boite", "template"],
+    generate: () => {
+      const cinq = cinqNombres();
+      const eiq = cinq.q3 - cinq.q1;
+      const contexte = choisir(CONTEXTES_BOITE);
+      return {
+        text: `Ce diagramme résume ${contexte}. Quel est l'écart interquartile ?`,
+        format: "short",
+        expected: [String(eiq)],
+        comparator: "number_equal",
+        canvas: boite(cinq),
+        explanation: exp(
+          "L'écart interquartile vaut $Q_3 - Q_1$ : c'est la largeur de la boîte.",
+          "On lit les deux bords de la boîte, sans regarder les moustaches.",
+          `$Q_1 = ${cinq.q1}$ et $Q_3 = ${cinq.q3}$, donc $${cinq.q3} - ${cinq.q1}$.`,
+          `L'écart interquartile vaut $${eiq}$ : c'est l'étalement de la MOITIÉ CENTRALE de la série.`
+        ),
+      };
+    },
+  },
+
+  /* --- Comparer deux séries --- */
+
+  {
+    kind: "template",
+    id: "seconde_stat_interp_tpl_deux_boites",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_interpreter",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Des résultats RÉGULIERS, c'est une boîte ÉTROITE.",
+    tags: ["seconde", "maths", "statistiques", "interpreter", "canvas", "boite", "raisonnement", "template"],
+    generate: () => {
+      const large = cinqNombres();
+      // La seconde série garde la même médiane mais resserre ses quartiles : la
+      // comparaison porte alors sur la SEULE dispersion, ce qui est le point.
+      const serre = {
+        min: large.q1 - 1,
+        q1: large.mediane - 1,
+        mediane: large.mediane,
+        q3: large.mediane + 1,
+        max: large.q3 + 1,
+      };
+      const correct = "la classe B, car sa boîte est plus étroite";
+      const matiere = choisir([
+        "de mathématiques",
+        "de français",
+        "d'histoire-géographie",
+        "de physique-chimie",
+        "de SVT",
+        "d'anglais",
+      ]);
+      return {
+        text: `Deux classes ont passé le même devoir ${matiere}. Quelle classe a les résultats les plus RÉGULIERS ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          correct,
+          [
+            "la classe A, car sa boîte est plus large",
+            "la classe A, car ses moustaches vont plus loin",
+            "on ne peut pas le savoir sans la moyenne",
+          ],
+          ["les deux classes sont aussi régulières"]
+        ),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: {
+          kind: "diagramme_boite",
+          titre: "Deux classes, même devoir",
+          series: [
+            { label: "Classe A", min: large.min, q1: large.q1, mediane: large.mediane, q3: large.q3, max: large.max },
+            { label: "Classe B", min: serre.min, q1: serre.q1, mediane: serre.mediane, q3: serre.q3, max: serre.max, couleur: "#059669" },
+          ],
+          size: { width: 320 },
+        },
+        explanation: exp(
+          "Des résultats réguliers, ce sont des valeurs peu dispersées : l'écart interquartile est petit.",
+          "On compare la LARGEUR des deux boîtes, qui est l'écart interquartile de chaque série.",
+          `Classe A : $${large.q3} - ${large.q1} = ${large.q3 - large.q1}$. Classe B : $${serre.q3} - ${serre.q1} = ${serre.q3 - serre.q1}$.`,
+          `La boîte de la classe B est plus étroite : ses résultats sont plus regroupés. Les deux classes ont pourtant la MÊME médiane $${large.mediane}$ — la médiane seule ne dit rien de la régularité.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_stat_interp_tpl_boites_mediane",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "statistiques_descriptives",
+    microId: "stat_interpreter",
+    difficulty: 4,
+    theme: "sport",
+    hint: "On compare les traits intérieurs des deux boîtes.",
+    tags: ["seconde", "maths", "statistiques", "interpreter", "canvas", "boite", "template"],
+    generate: () => {
+      const a = cinqNombres();
+      const ecart = randomInt(2, 4);
+      const b = {
+        min: a.min + ecart,
+        q1: a.q1 + ecart,
+        mediane: a.mediane + ecart,
+        q3: a.q3 + ecart,
+        max: a.max + ecart,
+      };
+      const [premier, second] = choisir([
+        [{ nom: "Groupe 1", s: a }, { nom: "Groupe 2", s: b }],
+        [{ nom: "Groupe 1", s: b }, { nom: "Groupe 2", s: a }],
+      ]);
+      const gagnant = premier.s.mediane > second.s.mediane ? premier.nom : second.nom;
+      const correct = `${gagnant}, dont la médiane vaut $${Math.max(premier.s.mediane, second.s.mediane)}$`;
+      const perdant = gagnant === premier.nom ? second.nom : premier.nom;
+      const epreuve = choisir([
+        "ont couru la même distance",
+        "ont nagé le même parcours",
+        "ont passé le même test d'endurance",
+        "ont fait la même randonnée",
+      ]);
+      return {
+        text: `Deux groupes ${epreuve}. Quel groupe a la médiane la plus élevée ?`,
+        format: "qcm",
+        choices: choixDistincts(
+          correct,
+          [
+            `${perdant}, dont la médiane vaut $${Math.min(premier.s.mediane, second.s.mediane)}$`,
+            "les deux médianes sont égales",
+            "on ne peut pas comparer deux diagrammes en boîte",
+          ],
+          [`${gagnant}, dont la médiane vaut $${Math.min(premier.s.mediane, second.s.mediane)}$`]
+        ),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: {
+          kind: "diagramme_boite",
+          titre: "Deux groupes",
+          series: [
+            { label: premier.nom, min: premier.s.min, q1: premier.s.q1, mediane: premier.s.mediane, q3: premier.s.q3, max: premier.s.max },
+            { label: second.nom, min: second.s.min, q1: second.s.q1, mediane: second.s.mediane, q3: second.s.q3, max: second.s.max, couleur: "#059669" },
+          ],
+          size: { width: 320 },
+        },
+        explanation: exp(
+          "La médiane se lit sur le trait intérieur de chaque boîte.",
+          "On repère les deux traits et on compare leur position sur l'axe.",
+          `${premier.nom} : médiane $${premier.s.mediane}$. ${second.nom} : médiane $${second.s.mediane}$.`,
+          `C'est ${gagnant} qui a la médiane la plus élevée, avec $${Math.max(premier.s.mediane, second.s.mediane)}$.`
         ),
       };
     },

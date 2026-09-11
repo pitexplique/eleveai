@@ -24,6 +24,8 @@ export type {
   NumberLineCanvasData,
   StatGraphKind,
   StatGraphCanvasData,
+  DiagrammeBoiteSerie,
+  DiagrammeBoiteCanvasData,
   SolideKind,
   CubeCell3D,
   Solide3DCanvasData,

@@ -51,7 +51,7 @@ const SEUIL = Number(process.argv[4] ?? 12);
 /** Tirages par gabarit. 300 épuise une table de quinze cas sans effort. */
 const TIRAGES = 300;
 
-type Question = { text?: string; choices?: string[] };
+type Question = { text?: string; choices?: string[]; canvas?: unknown };
 
 type Item = {
   id: string;
@@ -59,16 +59,29 @@ type Item = {
   notionId: string;
   text?: string;
   choices?: string[];
+  canvas?: unknown;
   generate?: () => Question;
 };
 
-/** La signature d'une question : son énoncé ET ses propositions, triées —
- *  l'ordre des lignes change à chaque service et ne fait pas une question de
- *  plus. Même clé que `mesurer-vivier.ts`. */
+/** La signature d'une question : son énoncé, ses propositions triées — l'ordre
+ *  des lignes change à chaque service et ne fait pas une question de plus — ET
+ *  SON DESSIN.
+ *
+ *  ⛔⛔ LE DESSIN COMPTE — corrigé le 11/09/2026, en posant les diagrammes en
+ *  boîte de la seconde. Sur ces items, le texte ne contient AUCUN nombre :
+ *  « Quelle est la médiane ? » sous une figure qui change à chaque tirage. Clé
+ *  sans le dessin, six cents tirages donnaient « 8 énoncés » et le script
+ *  réclamait une dette de renouvellement sur des gabarits qui servent une
+ *  question neuve à chaque fois. C'est exactement la faute du 25/08 — signer
+ *  trop peu de la question —, une seconde fois, sur un autre morceau.
+ *
+ *  ⚠️ `mesurer-vivier.ts` porte encore la clé d'avant (texte + propositions) et
+ *  sous-compte donc les mêmes gabarits. */
 function cle(q: Question | undefined): string | null {
   if (!q?.text) return null;
   const choix = q.choices?.length ? [...q.choices].sort().join("|") : "";
-  return `${q.text}##${choix}`;
+  const dessin = q.canvas ? JSON.stringify(q.canvas) : "";
+  return `${q.text}##${choix}##${dessin}`;
 }
 
 async function main() {

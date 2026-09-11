@@ -197,6 +197,54 @@ export type StatGraphCanvasData = {
   };
 };
 
+/**
+ * Une série résumée par ses cinq nombres, ceux du diagramme en boîte.
+ *
+ * L'ordre min ≤ q1 ≤ mediane ≤ q3 ≤ max n'est pas vérifié par le type : c'est
+ * à l'appelant de le tenir. Le dessin ne se plaint pas d'un ordre faux, il
+ * dessine une boîte à l'envers — et une boîte à l'envers se lit comme un
+ * diagramme valide.
+ */
+export type DiagrammeBoiteSerie = {
+  label?: string;
+  min: number;
+  q1: number;
+  mediane: number;
+  q3: number;
+  max: number;
+  /** Le trait de la boîte. Quatre teintes ont un fond assorti : bleu #2563eb,
+   *  vert #059669, orange #c2410c, violet #7c3aed. */
+  couleur?: string;
+};
+
+/**
+ * Le diagramme en boîte (dit « à moustaches »).
+ *
+ * Une boîte de Q1 à Q3 — la moitié centrale de la série —, la médiane en rouge
+ * dedans, et deux moustaches jusqu'au minimum et au maximum. Plusieurs séries
+ * s'empilent pour se comparer d'un coup d'œil, ce qui est l'usage du lycée.
+ *
+ * Les bornes de l'axe se CALCULENT depuis les données quand on ne les donne
+ * pas : une borne devinée coupe une moustache, et une moustache coupée se lit
+ * comme un maximum au mauvais endroit.
+ */
+export type DiagrammeBoiteCanvasData = {
+  kind: "diagramme_boite";
+  series: DiagrammeBoiteSerie[];
+  titre?: string;
+  /** Bornes de l'axe. Omises, elles se déduisent de la série. */
+  min?: number;
+  max?: number;
+  step?: number;
+  size?: { width?: number; height?: number };
+  display?: {
+    showAxis?: boolean;
+    showValues?: boolean;
+    /** L'accolade Q3 − Q1 sous la boîte, avec sa valeur. */
+    showEcartInterquartile?: boolean;
+  };
+};
+
 export type SolideKind =
   | "cube"
   | "pave_droit"
@@ -1914,6 +1962,7 @@ export type CanvasFigure =
   | SectionSolideCanvasData
   | ThalesCanvasData
   | StatGraphCanvasData
+  | DiagrammeBoiteCanvasData
   | AngleCanvasData
   | FonctionGraphiqueCanvasData
   | FonctionTableauCanvasData

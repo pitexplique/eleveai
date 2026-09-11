@@ -58,6 +58,7 @@ se pose sur `figure.schema`, `propriete.schema`, `exemple.schema`, `formule.sche
 | `kind` | Ce qu'il montre | ⛔ Pas pour |
 |---|---|---|
 | `stat_graph` | Barres, bâtons, camembert — la série mise en image | Un tableau de valeurs |
+| `diagramme_boite` | Le diagramme en boîte : min, Q1, médiane (en rouge), Q3, max, l'accolade Q3 − Q1 en option. Plusieurs séries s'empilent pour se comparer | Les effectifs d'une série : c'est `stat_graph` |
 | `tableau_donnees` | Un tableau (croisé compris), colonnes ou cellules surlignables | Un graphique |
 | `probabilites` | Le matériel de l'expérience : dé, roue, urne de billes, tableau à double entrée | Un enchaînement de deux épreuves |
 | `arbre_proba` | L'arbre : issues, branches, probabilités portées | Une expérience à une épreuve |
@@ -66,6 +67,43 @@ se pose sur `figure.schema`, `propriete.schema`, `exemple.schema`, `formule.sche
 | `tableau_signes` | Le tableau de signes : 1 à 3 facteurs, produit **ou quotient**. Chaque ligne porte un signe par intervalle et une marque sur les bornes intérieures — `0` si le facteur s'annule, `\|\|` si la valeur est **interdite** | Les variations : c'est `tableau_variations` |
 | `tableau_variations` | Le tableau de variations : les flèches, avec sa ligne `f ′(x)` facultative | Le signe d'un produit ou d'un quotient |
 
+
+### `diagramme_boite` — ajouté le 11/09/2026
+
+Il manquait : `stat_graph` ne sait faire que barres, bâtons et camembert, et le
+programme de seconde demande de **résumer une série par cinq nombres** puis de
+comparer deux séries d'un coup d'œil. Sans lui, la médiane et les quartiles
+n'existaient que comme des nombres dans une phrase.
+
+```ts
+{
+  kind: "diagramme_boite",
+  titre: "Deux classes",
+  series: [
+    { label: "2de A", min: 4, q1: 9, mediane: 12, q3: 15, max: 20 },
+    { label: "2de B", min: 7, q1: 11, mediane: 13, q3: 14, max: 18,
+      couleur: "#059669" },
+  ],
+  min: 0, max: 20, step: 2,
+  display: { showEcartInterquartile: true },
+}
+```
+
+Trois choses valent d'être sues :
+
+- **La médiane est en rouge**, plus épaisse que le trait de la boîte : c'est
+  elle qu'on cherche en premier, et à trait égal elle se confondait avec le bord
+  de la boîte quand Q1 ou Q3 s'en approchait.
+- **Les cinq nombres s'empilent quand ils se touchent**, et un nombre répété ne
+  s'écrit qu'une fois. Sur une série resserrée où Q1 = médiane = Q3, trois « 10 »
+  s'empilaient l'un sur l'autre et se lisaient comme trois valeurs.
+- **Les bornes de l'axe se calculent** quand `min`/`max` sont omis. Une borne
+  devinée coupe une moustache, et une moustache coupée se lit comme un maximum
+  au mauvais endroit.
+
+Quatre couleurs ont un fond assorti : `#2563eb` (bleu, par défaut), `#059669`
+(vert), `#c2410c` (orange), `#7c3aed` (violet). Une autre teinte prend le fond
+bleu.
 
 ### `arbre_proba` — photographié le 08/09/2026, et deux défauts corrigés
 
