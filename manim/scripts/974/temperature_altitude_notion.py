@@ -133,11 +133,14 @@ class TemperatureAltitude974Longue(NotionSeconde, _Commun):
         self.play(LaggedStart(*[FadeIn(d) for d in col_mer], lag_ratio=0.05))
         self.play(LaggedStart(*[FadeIn(d) for d in col_sommet], lag_ratio=0.08))
 
-        beaucoup = Text("beaucoup d'air", font_size=22, color=BLEU_CALCUL)
-        beaucoup.next_to(col_mer, DOWN, buff=0.15)
+        # ⚠️ À GAUCHE, pas dessous : sous la colonne, l'étiquette tombait sur la
+        # ligne de mer et s'y faisait barrer.
+        beaucoup = Text("beaucoup", font_size=22, color=BLEU_CALCUL)
+        beaucoup2 = Text("d'air", font_size=22, color=BLEU_CALCUL)
+        VGroup(beaucoup, beaucoup2).arrange(DOWN, buff=0.1).next_to(col_mer, LEFT, buff=0.18)
         peu = Text("peu d'air", font_size=22, color=BLEU_CALCUL)
         peu.next_to(col_sommet, UP, buff=0.12)
-        self.play(FadeIn(beaucoup), FadeIn(peu))
+        self.play(FadeIn(beaucoup), FadeIn(beaucoup2), FadeIn(peu))
 
         explique = VGroup(
             Text("plus on monte,", font_size=30, color=WHITE),

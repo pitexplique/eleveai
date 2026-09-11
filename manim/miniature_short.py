@@ -213,7 +213,43 @@ def acc_py_tracer(d):
     d.line([(400, 728), (700, 728)], fill=BLEU, width=4)
 
 
+def acc_974_fait(d):
+    centre(d, W // 2, 660, "26°", police("ariblk.ttf", 130), JAUNE)
+    centre(d, W // 2, 800, "à Saint-Gilles", police("ariblk.ttf", 52), JAUNE)
+    centre(d, W // 2, 930, "11°", police("ariblk.ttf", 130), BLEU)
+    centre(d, W // 2, 1070, "au Maïdo", police("ariblk.ttf", 52), BLEU)
+
+
+def acc_974_antecedent(d):
+    centre(d, W // 2, 680, "20 °C", police("ariblk.ttf", 128), JAUNE)
+    centre(d, W // 2, 850, "à quelle", police("ariblk.ttf", 68), NAVY)
+    centre(d, W // 2, 950, "altitude ?", police("ariblk.ttf", 68), NAVY)
+    centre(d, W // 2, 1090, "923 m", police("ariblk.ttf", 96), VERT)
+
+
+def acc_974_pourquoi(d):
+    centre(d, W // 2, 670, "plus près", police("ariblk.ttf", 76), JAUNE)
+    centre(d, W // 2, 770, "du soleil", police("ariblk.ttf", 76), JAUNE)
+    centre(d, W // 2, 920, "et plus", police("ariblk.ttf", 76), BLEU)
+    centre(d, W // 2, 1020, "FROID", police("ariblk.ttf", 110), BLEU)
+
+
 SHORTS = {
+    "eleveai-maths-974-temperature-altitude": {
+        "badge": "MATHS RÉEL · 974", "titre": ["15 DEGRÉS", "D'ÉCART"], "taille": 92,
+        "sous": "sur la même île, le même matin", "accroche": acc_974_fait,
+        "dossier": "974/maths/fr",
+    },
+    "eleveai-maths-974-temperature-altitude-short-antecedent": {
+        "badge": "MATHS RÉEL · 974", "titre": ["OÙ FAIT-IL", "20 DEGRÉS ?"], "taille": 88,
+        "sous": "une équation, et un lieu réel", "accroche": acc_974_antecedent,
+        "dossier": "974/maths/fr",
+    },
+    "eleveai-maths-974-temperature-altitude-short-pourquoi": {
+        "badge": "MATHS RÉEL · 974", "titre": ["POURQUOI IL", "FAIT FROID"], "taille": 84,
+        "sous": "en haut de la montagne", "accroche": acc_974_pourquoi,
+        "dossier": "974/maths/fr",
+    },
     "eleveai-maths-seconde-python-short-egal": {
         "badge": "MATHS · SECONDE", "titre": ["LE SIGNE =", "EN PYTHON"], "taille": 88,
         "sous": "il range, il ne compare pas", "accroche": acc_py_egal,

@@ -810,6 +810,135 @@
         "maths",
         "Shorts"
       ]
+    },
+    {
+      "id": "974-temperature-altitude",
+      "notionId": "974_temperature_altitude",
+      "type": "longue",
+      "serie": "Maths Réel · 974",
+      "fichier": "974/maths/paysage/fr/temperature-altitude/eleveai-maths-974-temperature-altitude-paysage.mp4",
+      "miniature": "974/maths/fr/eleveai-maths-974-temperature-altitude-paysage.png",
+      "titre": "Pourquoi il fait 26° à Saint-Gilles et 11° au Maïdo — Maths Réel 974",
+      "accroche": "Quinze degrés d'écart sur une île de soixante kilomètres. Ce n'est pas une curiosité : c'est une fonction affine, et elle se lit dans les deux sens.",
+      "chapitres": [
+        [
+          "00:00",
+          "La température et l'altitude"
+        ],
+        [
+          "00:12",
+          "Les objectifs"
+        ],
+        [
+          "00:34",
+          "Le même matin, sur la même île"
+        ],
+        [
+          "00:56",
+          "La cause : l'altitude"
+        ],
+        [
+          "01:16",
+          "La règle : −0,65 °C tous les 100 m"
+        ],
+        [
+          "01:37",
+          "Une fonction affine"
+        ],
+        [
+          "02:06",
+          "Elle se lit dans les deux sens"
+        ],
+        [
+          "02:26",
+          "Ce que le modèle ignore"
+        ],
+        [
+          "02:53",
+          "Défi"
+        ],
+        [
+          "03:17",
+          "Correction"
+        ],
+        [
+          "04:00",
+          "Tu sais maintenant"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/maths-974",
+      "tags": [
+        "maths",
+        "La Réunion",
+        "974",
+        "fonction affine",
+        "altitude",
+        "température",
+        "seconde",
+        "lycée"
+      ]
+    },
+    {
+      "id": "974-fait",
+      "notionId": "974_temperature_altitude",
+      "microId": "affine_forme",
+      "type": "short",
+      "renvoie_vers": "974-temperature-altitude",
+      "serie": "Maths Réel · 974",
+      "fichier": "974/maths/shorts/fr/temperature-altitude/eleveai-maths-974-temperature-altitude.mp4",
+      "miniature": "974/maths/fr/eleveai-maths-974-temperature-altitude.png",
+      "titre": "26° à Saint-Gilles, 11° au Maïdo : pourquoi ?",
+      "accroche": "Vingt kilomètres les séparent, et quinze degrés. Ce n'est pas la distance, c'est l'altitude — et ça s'écrit T = 26 − 0,0065 × h.",
+      "fiche": "https://www.eleveai.fr/maths-974",
+      "tags": [
+        "maths",
+        "La Réunion",
+        "974",
+        "altitude",
+        "fonction affine",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "974-antecedent",
+      "notionId": "974_temperature_altitude",
+      "microId": "fonction_antecedent",
+      "type": "short",
+      "renvoie_vers": "974-temperature-altitude",
+      "serie": "Maths Réel · 974",
+      "fichier": "974/maths/shorts/fr/temperature-altitude/eleveai-maths-974-temperature-altitude-short-antecedent.mp4",
+      "miniature": "974/maths/fr/eleveai-maths-974-temperature-altitude-short-antecedent.png",
+      "titre": "À quelle altitude fait-il 20 °C à La Réunion ?",
+      "accroche": "Ici on connaît la température et on cherche l'altitude : ce n'est plus un calcul, c'est une équation. Réponse : 923 mètres, soit la Plaine des Palmistes.",
+      "fiche": "https://www.eleveai.fr/maths-974",
+      "tags": [
+        "maths",
+        "La Réunion",
+        "974",
+        "antécédent",
+        "équation",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "974-pourquoi",
+      "notionId": "974_temperature_altitude",
+      "type": "short",
+      "renvoie_vers": "974-temperature-altitude",
+      "serie": "Maths Réel · 974",
+      "fichier": "974/maths/shorts/fr/temperature-altitude/eleveai-maths-974-temperature-altitude-short-pourquoi.mp4",
+      "miniature": "974/maths/fr/eleveai-maths-974-temperature-altitude-short-pourquoi.png",
+      "titre": "Plus près du soleil, et pourtant plus froid : pourquoi ?",
+      "accroche": "Au sommet du Piton des Neiges tu es 3 km plus près du soleil, et il y fait 20 degrés de moins. La distance n'y est pour rien : c'est l'air qui se détend, comme dans une bombe aérosol.",
+      "fiche": "https://www.eleveai.fr/maths-974",
+      "tags": [
+        "maths",
+        "La Réunion",
+        "974",
+        "physique",
+        "altitude",
+        "Shorts"
+      ]
     }
   ]
 }

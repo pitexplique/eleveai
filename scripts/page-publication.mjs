@@ -96,7 +96,7 @@ const blocs = Object.entries(parNotion)
         </div>
 
         ${v.miniature ? `<p class="mini">Miniature : <code>manim/miniatures/${echappe(v.miniature)}</code></p>` : ""}
-        <p class="rappel">Playlist : <strong>${echappe(m.playlist)}</strong>${
+        <p class="rappel">Playlist : <strong>${echappe(v.serie || m.playlist)}</strong>${
           v.type === "short"
             ? " · <em>publier la vidéo longue d'abord, puis coller son URL dans la description</em>"
             : ""
@@ -207,7 +207,8 @@ const html = `<!doctype html>
 <div class="page">
   <h1>Publication YouTube</h1>
   <p class="intro">
-    <strong>${m.videos.length}</strong> vidéos de maths 2de et
+    <strong>${m.videos.filter((v) => !v.serie).length}</strong> vidéos de maths seconde,
+    <strong>${m.videos.filter((v) => v.serie).length}</strong> de « Maths Réel · 974 », et
     <strong>${ecriture.length}</strong> d'écriture restent à publier.
     Corriger un titre se fait dans les manifestes
     (<code>manim/manifeste-youtube.json</code>,
@@ -216,7 +217,7 @@ const html = `<!doctype html>
     qui est régénérée.
   </p>
 
-  <h1 class="serie">${echappe(m.playlist)} — ${m.videos.length} vidéos</h1>
+  <h1 class="serie">Vidéos de maths — ${m.videos.length}</h1>
   <p class="intro">
     Publier la vidéo <strong>paysage</strong> d'une notion AVANT ses shorts :
     leur description renvoie vers elle.
@@ -251,4 +252,4 @@ ${blocsEcriture}
 const sortie = path.join(SORTIES, "publication.html");
 fs.writeFileSync(sortie, html, "utf-8");
 console.log(sortie);
-console.log(`maths 2de : ${m.videos.length} vidéos · écriture : ${ecriture.length} à publier.`);
+console.log(`maths : ${m.videos.length} vidéos (dont ${m.videos.filter((v) => v.serie).length} en 974) · écriture : ${ecriture.length} à publier.`);

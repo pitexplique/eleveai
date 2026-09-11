@@ -1379,7 +1379,25 @@ def acc_python_2de(d):
     d.text((300, 480), "deux == COMPARENT", font=police("arialbd.ttf", 40), fill=ROUGE)
 
 
+def acc_974_temperature(d):
+    """Les deux extremes de l'ile, et l'ecart entre eux."""
+    f = police("ariblk.ttf", 52)
+    d.text((300, 336), "26° à la mer", font=f, fill=JAUNE if False else VERT)
+    d.text((300, 404), "11° au Maïdo", font=f, fill=BLEU)
+    d.text((300, 478), "l'altitude, pas la distance", font=police("arialbd.ttf", 34), fill=ROUGE)
+
+
 NOTIONS = {
+    # ⛔ SUFFIXE « -paysage » OBLIGATOIRE : le premier SHORT de la serie porte
+    # le nom nu `eleveai-maths-974-temperature-altitude`, et sa vignette
+    # verticale vit dans le meme dossier. Sans le suffixe, l'une ecrase l'autre
+    # en silence (constate le 11/09).
+    "eleveai-maths-974-temperature-altitude-paysage": {
+        "badge": "MATHS RÉEL · 974", "titre": ["TEMPÉRATURE", "ET ALTITUDE"], "taille": 62,
+        "sous": "15 degrés sur 60 kilomètres",
+        "accroche": acc_974_temperature,
+        "dossier": "974/maths/fr",
+    },
     "eleveai-maths-seconde-python": {
         "badge": "MATHS · SECONDE", "titre": ["ALGORITHMIQUE", "ET PYTHON"], "taille": 56,
         "sous": "l'ordinateur fait ce que tu écris",
