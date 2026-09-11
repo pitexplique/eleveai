@@ -49,6 +49,10 @@ const ecriture = fs.existsSync(CHEMIN_ECRITURE)
 const echappe = (s) =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
+// ⛔ LE RENVOI DÉPEND DE LA SÉRIE. « La fiche de cours » n'a de sens que pour
+// une vidéo de notion : les séries sans classe (« Les bases ») et les séries de
+// terrain (« Les maths en vrai ») pointent vers le coach, et leur lien ne porte
+// PAS `?classe=seconde` — une leçon transversale n'a pas de classe.
 function description(v) {
   const l = [v.accroche, ""];
   if (v.chapitres?.length) {
@@ -56,14 +60,29 @@ function description(v) {
     l.push("");
   }
   if (v.type === "short") l.push("La vidéo complète : [coller ici l'URL de la vidéo longue]");
-  l.push(`La fiche de cours : ${v.fiche}`);
-  l.push("S'entraîner avec le coach : https://www.eleveai.fr/coach-ia/maths?classe=seconde");
+  if (String(v.fiche || "").includes("/fiches-cours/")) {
+    l.push(`La fiche de cours : ${v.fiche}`);
+    l.push("S'entraîner avec le coach : https://www.eleveai.fr/coach-ia/maths?classe=seconde");
+  } else {
+    l.push(`S'entraîner sur le coach maths : ${v.fiche}`);
+  }
   l.push("", m.signature);
   return l.join("\n");
 }
 
+// Le comptage par série, pour l'en-tête : plus de nom de série écrit en dur.
+const series = Object.entries(
+  m.videos.reduce((acc, v) => {
+    if (v.serie) acc[v.serie] = (acc[v.serie] || 0) + 1;
+    return acc;
+  }, {}),
+);
+
+// ⚠️ Une vidéo de série n'a pas de `notionId` : sans repli, les neuf fractions
+// et les huit cartes de l'île se retrouvaient dans un même bloc « undefined ».
 const parNotion = {};
-for (const v of m.videos) (parNotion[v.notionId] ||= []).push(v);
+for (const v of m.videos)
+  (parNotion[v.notionId || v.renvoie_vers || v.id] ||= []).push(v);
 
 const blocs = Object.entries(parNotion)
   .map(([notionId, videos]) => {
@@ -207,9 +226,9 @@ const html = `<!doctype html>
 <div class="page">
   <h1>Publication YouTube</h1>
   <p class="intro">
-    <strong>${m.videos.filter((v) => !v.serie).length}</strong> vidéos de maths seconde,
-    <strong>${m.videos.filter((v) => v.serie).length}</strong> de « Maths Réel · 974 », et
-    <strong>${ecriture.length}</strong> d'écriture restent à publier.
+    <strong>${m.videos.filter((v) => !v.serie).length}</strong> vidéos de ${echappe(m.playlist)},
+    ${series.map(([nom, n]) => `<strong>${n}</strong> de « ${echappe(nom)} »`).join(", ")},
+    et <strong>${ecriture.length}</strong> d'écriture restent à publier.
     Corriger un titre se fait dans les manifestes
     (<code>manim/manifeste-youtube.json</code>,
     <code>manim/sorties/METADONNEES-YOUTUBE.json</code>), puis
@@ -252,4 +271,7 @@ ${blocsEcriture}
 const sortie = path.join(SORTIES, "publication.html");
 fs.writeFileSync(sortie, html, "utf-8");
 console.log(sortie);
-console.log(`maths : ${m.videos.length} vidéos (dont ${m.videos.filter((v) => v.serie).length} en 974) · écriture : ${ecriture.length} à publier.`);
+console.log(
+  `maths : ${m.videos.length} vidéos (${series.map(([n, c]) => `${c} « ${n} »`).join(", ")})` +
+    ` · écriture : ${ecriture.length} à publier.`,
+);

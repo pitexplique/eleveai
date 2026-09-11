@@ -1387,7 +1387,23 @@ def acc_974_temperature(d):
     d.text((300, 478), "l'altitude, pas la distance", font=police("arialbd.ttf", 34), fill=ROUGE)
 
 
+def acc_bases_fractions(d):
+    """Les trois écritures du même nombre — l'idée qui tient toute la leçon."""
+    f = police("ariblk.ttf", 56)
+    d.text((300, 332), "1/5  =  0,2  =  20 %", font=f, fill=BLEU)
+    d.text((300, 412), "le même nombre", font=police("arialbd.ttf", 42), fill=VERT)
+    d.text((300, 474), "1/2 + 1/3 n'est PAS 2/5", font=police("arialbd.ttf", 40), fill=ROUGE)
+
+
 NOTIONS = {
+    # ⛔ « LES BASES » N'A PAS DE CLASSE : le badge ne dit ni le niveau ni l'âge.
+    # C'est la seule série du dossier dans ce cas, et c'est voulu.
+    "eleveai-maths-bases-fractions": {
+        "badge": "LES BASES", "titre": ["LES", "FRACTIONS"], "taille": 74,
+        "sous": "calculer sans se tromper",
+        "accroche": acc_bases_fractions,
+        "dossier": "bases/maths/fr",
+    },
     # ⛔ SUFFIXE « -paysage » OBLIGATOIRE : le premier SHORT de la serie porte
     # le nom nu `eleveai-maths-974-temperature-altitude`, et sa vignette
     # verticale vit dans le meme dossier. Sans le suffixe, l'une ecrase l'autre

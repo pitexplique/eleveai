@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Cette question a été posée au brevet des collèges. Deux cinquièmes moins trois cinquièmes fois un tiers.",
+  "01-piege": "Et beaucoup se trompent avant même de calculer. Ils commencent par deux cinquièmes moins trois cinquièmes, et trouvent moins un cinquième. C'est faux.",
+  "02-ordre": "Parce qu'on ne calcule pas de gauche à droite. La multiplication passe AVANT la soustraction. Toujours.",
+  "03-multiplier": "Donc d'abord : trois cinquièmes fois un tiers. Ça passe tout droit : trois en haut, quinze en bas. Trois quinzièmes, qui se simplifie en un cinquième.",
+  "04-soustraire": "Ensuite seulement : deux cinquièmes moins un cinquième. Même dénominateur, donc je soustrais les numérateurs. Résultat : un cinquième.",
+  "05-fin": "Entraîne-toi sur le coach maths d'éleveai point fr. Et abonne-toi à la chaîne !"
+}

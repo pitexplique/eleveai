@@ -1,0 +1,20 @@
+# .vercelignore — CE QUI NE MONTE PAS SUR VERCEL.
+#
+# ⛔ RIEN DE MANIM NE PART SUR VERCEL (Frédéric, 11/09/2026).
+#
+# ⚠️ `vercel.json` avait déjà un `ignoreCommand` — mais il ne fait PAS ça. Il
+# empêche de DÉCLENCHER un build quand seul `manim/` a changé ; dès qu'un
+# commit touche le site, les 234 fichiers suivis de `manim/` (3,4 Mo de scripts
+# Python, de gabarits et de manifestes) montaient quand même dans la source du
+# build. Les deux réglages sont complémentaires, aucun ne remplace l'autre.
+#
+# ✅ Vérifié avant d'écrire ce fichier : aucun `.ts`, `.tsx`, `.mjs` ni
+# `next.config` du site n'importe quoi que ce soit de `manim/`. Les vidéos, le
+# son et les vignettes, eux, ne sont même pas dans git — voir la règle du 09/09.
+
+manim/
+
+# Les outils de production locale : Python et PowerShell n'ont rien à faire
+# dans un build Next.js.
+scripts/*.py
+scripts/*.ps1

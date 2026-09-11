@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Un cinquième, zéro virgule deux, et vingt pour cent. Ce sont trois écritures du MÊME nombre.",
+  "01-decimal": "Pour passer de la fraction au décimal, je divise le haut par le bas. Un divisé par cinq, ça fait zéro virgule deux.",
+  "02-pourcentage": "Pour passer du décimal au pourcentage, je multiplie par cent. Zéro virgule deux fois cent, ça fait vingt. Donc vingt pour cent.",
+  "03-meme-nombre": "Et c'est bien le même nombre à chaque fois. Sur la droite graduée, un cinquième, zéro virgule deux et vingt pour cent désignent exactement le même point.",
+  "04-piege": "Mais attention : toutes les fractions ne s'écrivent pas en décimal. Un tiers donne zéro virgule trois trois trois, et ça ne s'arrête jamais. Ce n'est pas un bug de la calculatrice : c'est la nature de ce nombre.",
+  "05-fin": "Entraîne-toi sur le coach maths d'éleveai point fr. Et abonne-toi à la chaîne !"
+}

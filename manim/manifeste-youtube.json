@@ -939,6 +939,226 @@
         "Shorts",
         "les maths en vrai"
       ]
+    },
+    {
+      "id": "bases-fractions",
+      "serie": "Les bases",
+      "type": "longue",
+      "fichier": "bases/maths/paysage/fr/fractions/eleveai-maths-bases-fractions.mp4",
+      "miniature": "bases/maths/fr/eleveai-maths-bases-fractions.png",
+      "titre": "Les fractions : la leçon complète pour ne plus se tromper",
+      "accroche": "1/2 + 1/3 ne fait pas 2/5. Et dans 2/5 − 3/5 × 1/3, on ne commence pas par la gauche. Cette leçon reprend les fractions depuis le début : ce qu'une fraction est vraiment (un partage, et un nombre), pourquoi le dénominateur n'est jamais zéro, pourquoi 3/3 = 4/4 = 1, comment simplifier, comment passer de la fraction au décimal puis au pourcentage, multiplier, et additionner sans se tromper. Elle finit sur une question posée au brevet des collèges — celle sur laquelle presque tout le monde bute. Aucun niveau requis : les fractions servent au collège, au lycée, et encore après.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les fractions"
+        ],
+        [
+          "00:10",
+          "Ce que tu sauras à la fin"
+        ],
+        [
+          "00:34",
+          "Un partage… et un nombre"
+        ],
+        [
+          "01:04",
+          "Jamais zéro en bas"
+        ],
+        [
+          "01:39",
+          "3/3 = 4/4 = 1"
+        ],
+        [
+          "02:03",
+          "Simplifier : la même part, écrite plus court"
+        ],
+        [
+          "02:27",
+          "1/5 = 0,2 = 20 % : trois écritures"
+        ],
+        [
+          "03:15",
+          "Multiplier : ça passe tout droit"
+        ],
+        [
+          "03:34",
+          "Additionner : ça ne passe PAS"
+        ],
+        [
+          "04:11",
+          "Défi — la question du brevet"
+        ],
+        [
+          "04:32",
+          "Correction"
+        ],
+        [
+          "05:18",
+          "Tu sais maintenant"
+        ],
+        [
+          "05:44",
+          "S'entraîner sur le coach"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/accueil",
+      "tags": [
+        "maths",
+        "fractions",
+        "simplifier une fraction",
+        "additionner des fractions",
+        "pourcentage",
+        "révisions",
+        "cours de maths"
+      ]
+    },
+    {
+      "id": "bases-fractions-definition",
+      "serie": "Les bases",
+      "type": "short",
+      "renvoie_vers": "bases-fractions",
+      "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-definition.mp4",
+      "miniature": "bases/maths/fr/eleveai-maths-bases-fractions-short-definition.png",
+      "titre": "C'est quoi une fraction ? (il y a deux réponses)",
+      "accroche": "Un partage, oui. Mais aussi un NOMBRE, un point sur la droite graduée. Tant qu'on ne voit que le partage, diviser par une fraction reste de la magie.",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "tags": [
+        "maths",
+        "fractions",
+        "c'est quoi une fraction",
+        "révisions",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "bases-fractions-zero",
+      "serie": "Les bases",
+      "type": "short",
+      "renvoie_vers": "bases-fractions",
+      "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-zero.mp4",
+      "miniature": "bases/maths/fr/eleveai-maths-bases-fractions-short-zero.png",
+      "titre": "Pourquoi on ne divise JAMAIS par zéro",
+      "accroche": "Couper un gâteau en zéro part ne veut rien dire. Et plus le dénominateur est petit, plus le résultat explose : aucun nombre ne conviendrait.",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "tags": [
+        "maths",
+        "fractions",
+        "division par zéro",
+        "révisions",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "bases-fractions-egales",
+      "serie": "Les bases",
+      "type": "short",
+      "renvoie_vers": "bases-fractions",
+      "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-egales.mp4",
+      "miniature": "bases/maths/fr/eleveai-maths-bases-fractions-short-egales.png",
+      "titre": "3/3, 4/4, 100/100 : pourquoi ça fait toujours 1",
+      "accroche": "À chaque fois tu prends TOUTES les parts. Et c'est exactement ce qui permet de mettre deux fractions au même dénominateur sans rien changer.",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "tags": [
+        "maths",
+        "fractions",
+        "fractions égales",
+        "révisions",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "bases-fractions-simplifier",
+      "serie": "Les bases",
+      "type": "short",
+      "renvoie_vers": "bases-fractions",
+      "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-simplifier.mp4",
+      "miniature": "bases/maths/fr/eleveai-maths-bases-fractions-short-simplifier.png",
+      "titre": "Comment simplifier une fraction (et le piège à éviter)",
+      "accroche": "6/8 = 3/4 : on divise le haut ET le bas par le même nombre. La surface coloriée ne bouge pas, seule l'écriture change. Diviser le haut seul change la valeur.",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "tags": [
+        "maths",
+        "fractions",
+        "simplifier une fraction",
+        "révisions",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "bases-fractions-ecritures",
+      "serie": "Les bases",
+      "type": "short",
+      "renvoie_vers": "bases-fractions",
+      "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-ecritures.mp4",
+      "miniature": "bases/maths/fr/eleveai-maths-bases-fractions-short-ecritures.png",
+      "titre": "1/5 = 0,2 = 20 % : le même nombre, trois écritures",
+      "accroche": "Pour le décimal : le haut divisé par le bas. Pour le pourcentage : fois 100. Exactement le même point sur la droite. Et pourquoi 1/3 = 0,333... ne s'arrête jamais.",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "tags": [
+        "maths",
+        "fractions",
+        "pourcentage",
+        "nombre décimal",
+        "révisions",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "bases-fractions-multiplier",
+      "serie": "Les bases",
+      "type": "short",
+      "renvoie_vers": "bases-fractions",
+      "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-multiplier.mp4",
+      "miniature": "bases/maths/fr/eleveai-maths-bases-fractions-short-multiplier.png",
+      "titre": "Multiplier deux fractions : le calcul le plus facile",
+      "accroche": "Les hauts entre eux, les bas entre eux, rien d'autre. Et c'est PARCE QUE c'est si simple qu'on se trompe ensuite sur l'addition.",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "tags": [
+        "maths",
+        "fractions",
+        "multiplier des fractions",
+        "révisions",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "bases-fractions-additionner",
+      "serie": "Les bases",
+      "type": "short",
+      "renvoie_vers": "bases-fractions",
+      "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-additionner.mp4",
+      "miniature": "bases/maths/fr/eleveai-maths-bases-fractions-short-additionner.png",
+      "titre": "1/2 + 1/3 ne fait pas 2/5 — voici pourquoi",
+      "accroche": "0,5 + 0,33 fait plus de 0,8, et 2/5 = 0,4 : deux fois trop petit. On n'additionne que des parts de MÊME taille, d'où le même dénominateur.",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "tags": [
+        "maths",
+        "fractions",
+        "additionner des fractions",
+        "dénominateur commun",
+        "révisions",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "bases-fractions-ordre",
+      "serie": "Les bases",
+      "type": "short",
+      "renvoie_vers": "bases-fractions",
+      "fichier": "bases/maths/shorts/fr/fractions/eleveai-maths-bases-fractions-short-ordre.mp4",
+      "miniature": "bases/maths/fr/eleveai-maths-bases-fractions-short-ordre.png",
+      "titre": "Cette question du brevet piège presque tout le monde",
+      "accroche": "2/5 − 3/5 × 1/3. Beaucoup calculent de gauche à droite et trouvent −1/5. C'est faux : la multiplication passe AVANT la soustraction. Toujours.",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "tags": [
+        "maths",
+        "fractions",
+        "priorités opératoires",
+        "brevet",
+        "révisions",
+        "Shorts"
+      ]
     }
   ]
 }

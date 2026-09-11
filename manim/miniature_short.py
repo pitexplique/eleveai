@@ -234,7 +234,139 @@ def acc_974_pourquoi(d):
     centre(d, W // 2, 1020, "FROID", police("ariblk.ttf", 110), BLEU)
 
 
+# ── « LES BASES » : les fractions ─────────────────────────────────────────────
+# ⛔ Badge « LES BASES » et RIEN d'autre : la série n'a pas de classe, et une
+# vignette est le premier endroit où une étiquette s'installe sans y penser.
+
+def frac(d, cx, y, num, den, taille, coul):
+    """Une fraction dessinée — il n'y a pas de glyphe pour ça, et « 3/4 » écrit
+    en ligne ne se lit pas de loin dans une grille de vignettes."""
+    f = police("ariblk.ttf", taille)
+    ln, ld = d.textlength(str(num), font=f), d.textlength(str(den), font=f)
+    larg = max(ln, ld) + 24
+    d.text((cx - ln / 2, y), str(num), font=f, fill=coul)
+    yb = y + taille * 1.12
+    d.line([(cx - larg / 2, yb), (cx + larg / 2, yb)], fill=coul, width=max(6, taille // 14))
+    d.text((cx - ld / 2, yb + taille * 0.16), str(den), font=f, fill=coul)
+    return yb + taille * 1.28  # le bas de la fraction
+
+
+def acc_fr_definition(d):
+    frac(d, W // 2, 590, 3, 4, 150, BLEU)
+    centre(d, W // 2, 1010, "un partage", police("ariblk.ttf", 66), NAVY)
+    centre(d, W // 2, 1100, "ET un nombre", police("ariblk.ttf", 66), VERT)
+
+
+def acc_fr_zero(d):
+    bas = frac(d, W // 2, 620, "a", 0, 150, ROUGE)
+    d.line([(330, bas + 20), (750, 600)], fill=ROUGE, width=16)
+    centre(d, W // 2, 1090, "JAMAIS", police("ariblk.ttf", 110), ROUGE)
+
+
+def acc_fr_egales(d):
+    # ⚠️ Chaque terme est POSÉ à une abscisse choisie, jamais collé au précédent :
+    # au premier tirage le « = 1 » chevauchait le 4/4 et sortait par la droite.
+    frac(d, 250, 620, 3, 3, 100, BLEU)
+    centre(d, 400, 660, "=", police("ariblk.ttf", 80), NAVY)
+    frac(d, 550, 620, 4, 4, 100, BLEU)
+    centre(d, 700, 660, "=", police("ariblk.ttf", 80), NAVY)
+    centre(d, 860, 600, "1", police("ariblk.ttf", 150), VERT)
+    centre(d, W // 2, 1050, "toujours", police("ariblk.ttf", 72), NAVY)
+
+
+def acc_fr_simplifier(d):
+    frac(d, 320, 620, 6, 8, 130, NAVY)
+    # ⛔ La flèche est DESSINÉE : « → » n'existe pas dans Arial Black et la
+    # substitution rendait un trait fin, invisible dans une grille.
+    y = 750
+    d.line([(490, y), (610, y)], fill=JAUNE, width=18)
+    d.polygon([(600, y - 34), (660, y), (600, y + 34)], fill=JAUNE)
+    frac(d, 780, 620, 3, 4, 130, VERT)
+    centre(d, W // 2, 1060, "même valeur", police("ariblk.ttf", 68), NAVY)
+
+
+def acc_fr_ecritures(d):
+    frac(d, 190, 610, 1, 5, 104, BLEU)
+    centre(d, 330, 650, "=", police("ariblk.ttf", 70), NAVY)
+    centre(d, 500, 630, "0,2", police("ariblk.ttf", 96), NAVY)
+    centre(d, 680, 650, "=", police("ariblk.ttf", 70), NAVY)
+    centre(d, 870, 630, "20 %", police("ariblk.ttf", 88), VERT)
+    centre(d, W // 2, 990, "le MÊME", police("ariblk.ttf", 72), JAUNE)
+    centre(d, W // 2, 1080, "nombre", police("ariblk.ttf", 72), JAUNE)
+
+
+def acc_fr_multiplier(d):
+    frac(d, 330, 600, 2, 3, 120, BLEU)
+    centre(d, W // 2, 670, "×", police("ariblk.ttf", 110), NAVY)
+    frac(d, 750, 600, 3, 4, 120, BLEU)
+    centre(d, W // 2, 1000, "ça passe", police("ariblk.ttf", 72), VERT)
+    centre(d, W // 2, 1090, "TOUT DROIT", police("ariblk.ttf", 82), VERT)
+
+
+def acc_fr_additionner(d):
+    frac(d, 260, 590, 1, 2, 108, NAVY)
+    centre(d, 390, 650, "+", police("ariblk.ttf", 96), NAVY)
+    frac(d, 520, 590, 1, 3, 108, NAVY)
+    centre(d, 650, 650, "=", police("ariblk.ttf", 96), NAVY)
+    frac(d, 800, 590, 2, 5, 108, ROUGE)
+    d.line([(700, 930), (900, 560)], fill=ROUGE, width=14)
+    centre(d, W // 2, 1010, "NON", police("ariblk.ttf", 120), ROUGE)
+    centre(d, W // 2, 1140, "et voici pourquoi", police("ariblk.ttf", 58), NAVY)
+
+
+def acc_fr_ordre(d):
+    # L'expression est centrée sur W/2, pas sur la marge gauche : au premier
+    # tirage elle laissait le tiers droit de la vignette vide.
+    frac(d, 290, 600, 2, 5, 96, NAVY)
+    centre(d, 415, 640, "−", police("ariblk.ttf", 86), NAVY)
+    frac(d, 540, 600, 3, 5, 96, NAVY)
+    centre(d, 665, 640, "×", police("ariblk.ttf", 86), JAUNE)
+    frac(d, 790, 600, 1, 3, 96, NAVY)
+    centre(d, W // 2, 960, "× AVANT −", police("ariblk.ttf", 96), VERT)
+    centre(d, W // 2, 1085, "toujours", police("ariblk.ttf", 64), NAVY)
+
+
 SHORTS = {
+    "eleveai-maths-bases-fractions-short-definition": {
+        "badge": "LES BASES", "titre": ["C'EST QUOI", "UNE FRACTION ?"], "taille": 82,
+        "sous": "deux réponses, pas une", "accroche": acc_fr_definition,
+        "dossier": "bases/maths/fr",
+    },
+    "eleveai-maths-bases-fractions-short-zero": {
+        "badge": "LES BASES", "titre": ["DIVISER", "PAR ZÉRO"], "taille": 96,
+        "sous": "pourquoi c'est interdit", "accroche": acc_fr_zero,
+        "dossier": "bases/maths/fr",
+    },
+    "eleveai-maths-bases-fractions-short-egales": {
+        "badge": "LES BASES", "titre": ["3/3, 4/4,", "100/100"], "taille": 92,
+        "sous": "ça fait toujours 1", "accroche": acc_fr_egales,
+        "dossier": "bases/maths/fr",
+    },
+    "eleveai-maths-bases-fractions-short-simplifier": {
+        "badge": "LES BASES", "titre": ["SIMPLIFIER", "UNE FRACTION"], "taille": 84,
+        "sous": "le haut ET le bas", "accroche": acc_fr_simplifier,
+        "dossier": "bases/maths/fr",
+    },
+    "eleveai-maths-bases-fractions-short-ecritures": {
+        "badge": "LES BASES", "titre": ["FRACTION,", "DÉCIMAL, %"], "taille": 88,
+        "sous": "trois écritures, un nombre", "accroche": acc_fr_ecritures,
+        "dossier": "bases/maths/fr",
+    },
+    "eleveai-maths-bases-fractions-short-multiplier": {
+        "badge": "LES BASES", "titre": ["MULTIPLIER", "DEUX FRACTIONS"], "taille": 78,
+        "sous": "le calcul le plus facile", "accroche": acc_fr_multiplier,
+        "dossier": "bases/maths/fr",
+    },
+    "eleveai-maths-bases-fractions-short-additionner": {
+        "badge": "LES BASES", "titre": ["1/2 + 1/3", "N'EST PAS 2/5"], "taille": 84,
+        "sous": "l'erreur la plus courante", "accroche": acc_fr_additionner,
+        "dossier": "bases/maths/fr",
+    },
+    "eleveai-maths-bases-fractions-short-ordre": {
+        "badge": "LES BASES", "titre": ["LA QUESTION", "DU BREVET"], "taille": 86,
+        "sous": "presque tout le monde se trompe", "accroche": acc_fr_ordre,
+        "dossier": "bases/maths/fr",
+    },
     "eleveai-maths-974-temperature-altitude": {
         "badge": "LES MATHS EN VRAI", "titre": ["15 DEGRÉS", "D'ÉCART"], "taille": 92,
         "sous": "sur la même île, le même matin", "accroche": acc_974_fait,

@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Un demi plus un tiers. Est-ce que ça fait deux cinquièmes ?",
+  "01-verifier": "Vérifions avec des nombres. Un demi, c'est zéro virgule cinq. Un tiers, environ zéro virgule trente-trois. Ensemble, plus de zéro virgule huit.",
+  "02-faux": "Or deux cinquièmes vaut zéro virgule quatre. C'est deux fois trop petit. Donc non : additionner tout droit, ça ne marche pas.",
+  "03-pourquoi": "Pourquoi ? Parce qu'on ne peut additionner que des parts de MÊME TAILLE. Un demi et un tiers ne sont pas la même part : impossible de les compter ensemble.",
+  "04-solution": "La solution : leur donner la même taille. Un demi devient trois sixièmes, un tiers devient deux sixièmes. Maintenant je peux additionner : cinq sixièmes.",
+  "05-fin": "Entraîne-toi sur le coach maths d'éleveai point fr. Et abonne-toi à la chaîne !"
+}
