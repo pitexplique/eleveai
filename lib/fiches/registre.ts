@@ -550,6 +550,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Développement et factorisation",
     resume: "Deux ecritures, deux sens — et on factorise POUR RESOUDRE : un produit nul se resout, une somme non.",
   },
+  "maths/seconde/statistiques-descriptives-2de": {
+    titre: "Les statistiques descriptives",
+    resume: "Moyenne, mediane, quartiles et dispersion — et pourquoi un indicateur de position ne va jamais sans son indicateur de dispersion.",
+  },
   "maths/seconde/expressions-litterales-2de": {
     titre: "Les expressions littérales",
     resume: "Traduire, reduire, substituer et retourner une formule — et pourquoi un contre-exemple refute mais ne prouve jamais.",

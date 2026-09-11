@@ -180,6 +180,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "solides-et-representations-4e-cours-exercices-corriges.pdf",
   "statistiques-4e-cours-exercices-corriges.pdf",
   "statistiques-5e-cours-exercices-corriges.pdf",
+  "statistiques-descriptives-seconde-cours-exercices-corriges.pdf",
   "statistiques-lire-une-serie-et-choisir-ce-qui-la-resume-3e-cours-exercices-corriges.pdf",
   "suites-de-nombres-cm2-cours-exercices-corriges.pdf",
   "symetrie-axiale-6e-cours-exercices-corriges.pdf",
