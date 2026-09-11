@@ -1,5 +1,5 @@
 # temperature_altitude.py
-# EleveAI — « Maths Réel · 974 » — La température et l'altitude
+# EleveAI — « Les maths en vrai » — La température et l'altitude
 #
 # ⭐ PREMIER SHORT DE LA SÉRIE « UNE CARTE, TOUS LES NIVEAUX » (10/09/2026).
 # Frédéric, devant une carte météo : « et si on faisait des shorts sur la carte
@@ -8,9 +8,13 @@
 # MODÉLISE.
 #
 # ⛔ CE N'EST PAS UNE VIDÉO DE NOTION. Pas de notionId, pas de fiche, pas de
-# playlist « Maths seconde » : cette série vit dans « Maths Réel · 974 »
-# (`/maths-974`), et son écran de fin renvoie à la rubrique, pas à une vidéo
-# longue qui n'existe pas.
+# playlist « Maths seconde ».
+# ⛔⛔ ET PAS NON PLUS « MATHS RÉEL · 974 » — j'avais écrit ce nom-là le 10/09,
+# à tort. `manim/REGLES.md` (l.127) sépare DEUX marques : « Les maths en vrai »
+# rassemble les SIMULATIONS ANIMÉES d'un phénomène de l'île — c'est celle-ci —
+# tandis que « Maths Réel · 974 » (`/maths-974`) est le carnet de TERRAIN réel,
+# de vraies vidéos tournées sur place. Publier l'une sous le nom de l'autre crée
+# exactement la confusion que cette règle veut éviter.
 #
 # ⭐ MAIS ELLE S'APPUIE SUR LE COACH. Le geste enseigné ici est le micro
 # `affine_forme` de la seconde — « Reconnaitre une fonction affine f(x) = ax+b ».
@@ -194,8 +198,8 @@ class TemperatureAltitude974(ShortSeconde):
         self.dire(voix)
 
         titre = VGroup(
-            self.grand("Maths Réel", font_size=48, color=JAUNE_TITRE),
-            self.grand("· 974 ·", font_size=36, color=JAUNE_TITRE),
+            self.grand("Les maths", font_size=48, color=JAUNE_TITRE),
+            self.grand("en vrai", font_size=48, color=JAUNE_TITRE),
         ).arrange(DOWN, buff=0.15).move_to([0, 2.3, 0])
         self.play(FadeIn(titre, shift=DOWN * 0.12))
 

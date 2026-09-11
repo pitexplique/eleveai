@@ -236,17 +236,17 @@ def acc_974_pourquoi(d):
 
 SHORTS = {
     "eleveai-maths-974-temperature-altitude": {
-        "badge": "MATHS RÉEL · 974", "titre": ["15 DEGRÉS", "D'ÉCART"], "taille": 92,
+        "badge": "LES MATHS EN VRAI", "titre": ["15 DEGRÉS", "D'ÉCART"], "taille": 92,
         "sous": "sur la même île, le même matin", "accroche": acc_974_fait,
         "dossier": "974/maths/fr",
     },
     "eleveai-maths-974-temperature-altitude-short-antecedent": {
-        "badge": "MATHS RÉEL · 974", "titre": ["OÙ FAIT-IL", "20 DEGRÉS ?"], "taille": 88,
+        "badge": "LES MATHS EN VRAI", "titre": ["OÙ FAIT-IL", "20 DEGRÉS ?"], "taille": 88,
         "sous": "une équation, et un lieu réel", "accroche": acc_974_antecedent,
         "dossier": "974/maths/fr",
     },
     "eleveai-maths-974-temperature-altitude-short-pourquoi": {
-        "badge": "MATHS RÉEL · 974", "titre": ["POURQUOI IL", "FAIT FROID"], "taille": 84,
+        "badge": "LES MATHS EN VRAI", "titre": ["POURQUOI IL", "FAIT FROID"], "taille": 84,
         "sous": "en haut de la montagne", "accroche": acc_974_pourquoi,
         "dossier": "974/maths/fr",
     },

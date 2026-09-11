@@ -1393,7 +1393,7 @@ NOTIONS = {
     # verticale vit dans le meme dossier. Sans le suffixe, l'une ecrase l'autre
     # en silence (constate le 11/09).
     "eleveai-maths-974-temperature-altitude-paysage": {
-        "badge": "MATHS RÉEL · 974", "titre": ["TEMPÉRATURE", "ET ALTITUDE"], "taille": 62,
+        "badge": "LES MATHS EN VRAI", "titre": ["TEMPÉRATURE", "ET ALTITUDE"], "taille": 62,
         "sous": "15 degrés sur 60 kilomètres",
         "accroche": acc_974_temperature,
         "dossier": "974/maths/fr",

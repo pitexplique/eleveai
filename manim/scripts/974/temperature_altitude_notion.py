@@ -1,5 +1,5 @@
 # temperature_altitude_notion.py
-# EleveAI — « Maths Réel · 974 » — La température et l'altitude
+# EleveAI — « Les maths en vrai » — La température et l'altitude
 # LA VIDÉO LONGUE et ses deux shorts supplémentaires.
 #
 # ⭐ FORMAT HABITUEL APPLIQUÉ À LA SÉRIE 974 (Frédéric, 10/09/2026 : « on va
@@ -8,7 +8,7 @@
 # vidéo paysage et deux shorts de plus.
 #
 # ⛔ CE N'EST PAS UNE VIDÉO DE NOTION. Pas de notionId, pas de fiche : la série
-# vit dans « Maths Réel · 974 » (`/maths-974`) et renvoie à SA rubrique.
+# vit dans « Les maths en vrai » (`/maths-974`) et renvoie à SA rubrique.
 # ⭐ Mais les gestes viennent du coach de seconde : `affine_forme` (reconnaitre
 # une fonction affine) et `fonction_antecedent` (rechercher un antécédent).
 #
@@ -399,8 +399,8 @@ class _Short974(ShortSeconde, _Commun):
         self.margo_bas()
         self.dire(voix)
         titre = VGroup(
-            self.grand("Maths Réel", font_size=48, color=JAUNE_TITRE),
-            self.grand("· 974 ·", font_size=36, color=JAUNE_TITRE),
+            self.grand("Les maths", font_size=48, color=JAUNE_TITRE),
+            self.grand("en vrai", font_size=48, color=JAUNE_TITRE),
         ).arrange(DOWN, buff=0.15).move_to([0, 2.3, 0])
         self.play(FadeIn(titre, shift=DOWN * 0.12))
         site = self.grand("eleveai.fr", font_size=54, color=BLEU_CALCUL).move_to([0, 0.9, 0])
