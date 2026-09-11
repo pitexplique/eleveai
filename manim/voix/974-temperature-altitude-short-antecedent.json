@@ -1,0 +1,8 @@
+{
+  "00-accroche": "À La Réunion, à quelle altitude fait-il exactement 20 degrés ?",
+  "01-formule": "On connaît la règle : la température part de 26 degrés au bord de l'eau, et perd zéro virgule 65 degré tous les 100 mètres. En fonction affine : T égale 26 moins zéro virgule 0065 fois h.",
+  "02-equation": "Ici, on ne cherche pas la température : on la CONNAÎT. C'est l'altitude qu'on cherche. Ce n'est donc pas un calcul, c'est une équation. On pose : 26 moins zéro virgule 0065 h égale 20.",
+  "03-resoudre": "Je retire 26 des deux côtés : moins zéro virgule 0065 h égale moins 6. Puis je divise par moins zéro virgule 0065. Les deux signes moins s'annulent, et j'obtiens h égale environ 923.",
+  "04-lieu": "Neuf cent vingt-trois mètres. C'est à peu près l'altitude de la Plaine des Palmistes. Voilà : on vient de trouver un ANTÉCÉDENT, et il correspond à un endroit réel.",
+  "05-fin": "Les maths de La Réunion, sur éleveai point fr."
+}
