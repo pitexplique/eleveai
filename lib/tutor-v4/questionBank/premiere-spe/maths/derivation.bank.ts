@@ -3709,4 +3709,79 @@ export const derivationBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* ── der_tangente : le geste du sujet, lu sur le graphique (12/09/2026) ──
+   *
+   * ⛔ La micro plafonnait à 11 énoncés générés — juste sous le seuil — avec
+   * treize items figés. Or ses trois gabarits partaient tous de l'EXPRESSION de
+   * $f$ : « soit $f(x) = x^2$, quelle est la pente en $a$ ? ». Le sujet, lui,
+   * fait l'inverse : il donne une figure, on y LIT $a$, $f(a)$ et $f'(a)$, et
+   * l'on écrit l'équation. C'est ce geste-là qui manquait.
+   */
+  {
+    kind: "template",
+    id: "premiere_der_tan_tpl_equation_lue",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation",
+    microId: "der_tangente",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "$y = f'(a)(x - a) + f(a)$ : la pente se lit sur la tangente, $f(a)$ est la hauteur du point de contact.",
+    tags: ["premiere", "maths", "derivation", "tangente", "graphique", "canvas", "template"],
+    generate: () => {
+      // ⛔ LES QUATRE PROPOSITIONS DOIVENT ETRE DEUX A DEUX DIFFERENTES.
+      // Recalcul independant sur 600 tirages : selon le tirage, un distracteur
+      // rejoignait la bonne reponse — ordonnee a l'origine egale a f(a), ou
+      // pente egale a l'abscisse — et `makeChoices` dedoublonne, donc le QCM se
+      // retrouvait a trois cases, parfois deux. On enumere les configurations et
+      // l'on ne garde que celles ou les quatre nombres qui distinguent les
+      // propositions sont distincts.
+      const valides = ([-4, -2, 0, 2] as const).flatMap((bb) =>
+        ([-3, -1, 0, 1, 3] as const).flatMap((cc) =>
+          ([-2, -1, 0, 1, 2] as const).map((aa) => {
+            const f = aa * aa + bb * aa + cc;
+            const p = 2 * aa + bb;
+            return { b: bb, c: cc, a: aa, fa: f, pente: p, ord: f - p * aa };
+          }),
+        ),
+      ).filter((v) => new Set([v.pente, v.fa, v.a]).size === 3 && v.ord !== v.fa);
+      const tire = pickOne(valides);
+      const b = tire.b;
+      const c = tire.c;
+      const a = tire.a;
+      const fa = tire.fa;
+      const pente = tire.pente;
+      // y = pente·x + ordonnée à l'origine
+      const ord = fa - pente * a;
+      const signe = ord >= 0 ? "+" : "-";
+      const correct =
+        pente === 0
+          ? `$y = ${fa}$`
+          : `$y = ${pente === 1 ? "" : pente === -1 ? "-" : pente}x ${signe} ${Math.abs(ord)}$`;
+      return {
+        text:
+          `Sur la figure, la tangente à la courbe de $f$ au point $A$ d'abscisse $${a}$ a pour ` +
+          `coefficient directeur $${pente}$, et $f(${a}) = ${fa}$. Quelle est son équation réduite ?`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          // le piège numéro un : oublier de ramener en y = mx + p et laisser f(a)
+          `$y = ${pente}x ${fa >= 0 ? "+" : "-"} ${Math.abs(fa)}$`,
+          // échanger la pente et l'ordonnée
+          `$y = ${fa}x ${signe} ${Math.abs(pente)}$`,
+          // prendre l'abscisse pour la pente
+          `$y = ${a}x ${signe} ${Math.abs(ord)}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: tangente(b, c, a),
+        explanation: exp(
+          "L'équation de la tangente au point d'abscisse $a$ est $y = f'(a)(x - a) + f(a)$.",
+          "On remplace, puis on développe pour obtenir la forme réduite $y = mx + p$.",
+          `$y = ${pente}(x - (${a})) + ${fa} = ${pente}x ${pente * -a >= 0 ? "+" : "-"} ${Math.abs(pente * a)} + ${fa}$, soit ${correct}.`,
+          `${correct}. ⛔ L'erreur la plus fréquente est d'écrire $y = f'(a)x + f(a)$ : on oublie le $-a$ dans la parenthèse, et la droite ne passe plus par le point de contact.`
+        ),
+      };
+    },
+  },
 ];

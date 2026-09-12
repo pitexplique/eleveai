@@ -56,13 +56,11 @@ function exp(definition: string, methode: string, calcul: string, conclusion: st
  * Une parabole f(x) = ax² + bx + c et sa tangente au point d'abscisse x0.
  * Le nombre dérivé f'(x0) vaut 2a·x0 + b : c'est le coefficient directeur de
  * la tangente, et c'est ce que l'élève doit lire.
- */
-/**
- * La courbe, sa tangente en A, et une fenêtre QUI SE CALCULE.
  *
- * ⛔ LA FENÊTRE ÉTAIT FIXE — [−5 ; 5] × [−8 ; 10] quelle que soit la pente —, et
- * c'est ce que Frédéric voyait le 12/09/2026 : « il me semble qu'il y a des
- * erreurs parfois » sur les dérivées graphiques. Mesuré sur 200 tirages :
+ * ⛔ ET LA FENÊTRE SE CALCULE. Elle était fixe — [−5 ; 5] × [−8 ; 10] quelle que
+ * soit la pente —, et c'est ce que Frédéric voyait le 12/09/2026 : « il me
+ * semble qu'il y a des erreurs parfois » sur les dérivées graphiques. Mesuré
+ * sur 200 tirages :
  *
  *   - le point A tombait HORS du cadre (A(4 ; 14) pour une fenêtre qui
  *     s'arrête à 10) : on demandait la pente en un point invisible ;
@@ -549,6 +547,398 @@ export const deriveeLectureBank: TutorBankItemV4[] = [
             cause: "confond « la dérivée s'annule » et « la fonction s'annule »",
           },
         ],
+      };
+    },
+  },
+
+  /* ═════════════ RENFORT DU 12/09/2026 ═════════════
+   *
+   * ⛔ LE TROU MESURÉ. Les micros étaient servies — lire une pente, son signe,
+   * la tangente horizontale — mais l'ENCHAÎNEMENT du devoir n'existait pas :
+   *
+   *   - ZÉRO item donnant la courbe de $f'$ pour en déduire les variations de
+   *     $f$. C'est LA question de lecture graphique des sujets, et celle qui
+   *     porte la confusion la plus coûteuse de tout le chapitre : l'élève lit
+   *     les variations de la courbe qu'il voit, alors qu'on lui montre la
+   *     DÉRIVÉE. Une courbe de $f'$ qui descend ne dit rien de décroissant : ce
+   *     qui compte est son SIGNE, pas son sens de variation.
+   *   - ZÉRO association « cette courbe est-elle $f$ ou $f'$ ? ».
+   *   - trois micros sous le seuil de renouvellement : der_modele_interpreter
+   *     (3 énoncés), der_nombre_derive_sens (5), der_comparer_vitesses (8).
+   */
+
+  {
+    kind: "template",
+    id: "premiere_der_signe_depuis_courbe_derivee_tpl",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "der_graphique",
+    microId: "der_tangente_signe",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "⚠️ La courbe tracée est celle de $f'$, pas de $f$. On regarde si elle est AU-DESSUS ou EN DESSOUS de l'axe, pas si elle monte.",
+    tags: ["premiere", "maths", "derivation", "graphique", "signe", "template"],
+    generate: () => {
+      // f'(x) = m(x − r) : une droite qui coupe l'axe en r, de pente m.
+      const r = pick([-2, -1, 1, 2] as const);
+      const m = pick([-2, -1, 1, 2] as const);
+      const x1 = pick(([-3, -2, -1, 0, 1, 2, 3] as const).filter((v) => v !== r));
+      const valeur = m * (x1 - r);
+      const croissante = valeur > 0;
+      // ⛔ LE POINT MARQUE SORTAIT DU CADRE (recalcul independant, 500 tirages).
+      // Le demi-cote se deduisait de la pente seule : pour m = 2, r = -2 et
+      // x1 = 3, la valeur atteint 10 alors que la fenetre s'arretait a 8. On le
+      // calcule donc sur la VALEUR reellement marquee.
+      const correct = croissante
+        ? `$f$ est CROISSANTE en $${x1}$, car $f'(${x1}) > 0$`
+        : `$f$ est DÉCROISSANTE en $${x1}$, car $f'(${x1}) < 0$`;
+      const demi = Math.max(4, Math.abs(valeur) + 2);
+      return {
+        text: `La courbe ci-contre est celle de la DÉRIVÉE $f'$. Que peut-on dire de $f$ en $x = ${x1}$ ?`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          croissante
+            ? `$f$ est DÉCROISSANTE en $${x1}$, car $f'(${x1}) < 0$`
+            : `$f$ est CROISSANTE en $${x1}$, car $f'(${x1}) > 0$`,
+          m > 0
+            ? `$f$ est croissante, car la courbe tracée MONTE`
+            : `$f$ est décroissante, car la courbe tracée DESCEND`,
+          "on ne peut rien dire sans l'expression de $f$",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: {
+          kind: "fonctionGraphique",
+          titre: "La courbe de f ′ (et non celle de f)",
+          xmin: -4,
+          xmax: 4,
+          ymin: -demi,
+          ymax: demi,
+          grille: true,
+          courbes: [{ id: "fp", type: "affine", a: m, b: -m * r, couleur: "#7c3aed" }],
+          points: [{ x: x1, y: valeur, label: "" }],
+        },
+        explanation: exp(
+          "Le SIGNE de $f'$ donne le sens de variation de $f$ : $f' > 0$ sur un intervalle, $f$ y est croissante ; $f' < 0$, $f$ y est décroissante.",
+          "On repère $x = " + x1 + "$ sur l'axe, et on regarde si la courbe de $f'$ est au-dessus ou en dessous de l'axe des abscisses à cet endroit.",
+          `En $x = ${x1}$, la courbe de $f'$ est ${croissante ? "AU-DESSUS" : "EN DESSOUS"} de l'axe : $f'(${x1}) = ${fr(valeur)}$, donc ${croissante ? "positif" : "négatif"}.`,
+          `$f$ est donc ${croissante ? "croissante" : "décroissante"} en $${x1}$. ⛔ Le piège : cette courbe ${m > 0 ? "MONTE" : "DESCEND"}, et l'on est tenté d'en conclure que $f$ ${m > 0 ? "croît" : "décroît"}. Non : c'est la courbe de $f'$, seul son SIGNE parle de $f$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_der_f_ou_fprime_tpl",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "der_graphique",
+    microId: "der_nombre_derive_sens",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Là où $f$ a une tangente horizontale, $f'$ vaut $0$ : sa courbe coupe l'axe.",
+    tags: ["premiere", "maths", "derivation", "graphique", "raisonnement", "template"],
+    generate: () => {
+      // f(x) = a(x − s)² + k, sommet en s : f' s'annule en s, et seulement là.
+      const a = pick([0.5, 1] as const);
+      const s = pick([-2, -1, 1, 2] as const);
+      const correct = `en $x = ${s}$, là où la tangente à la courbe est horizontale`;
+      return {
+        text:
+          `La courbe ci-contre est celle de $f$. En quel point la dérivée $f'$ s'annule-t-elle ?`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `en $x = 0$, là où la courbe coupe l'axe des ordonnées`,
+          `là où la courbe coupe l'axe des abscisses`,
+          `$f'$ ne s'annule jamais`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: canvasTangente(a, -2 * a * s, 0, s, "Où la tangente est-elle horizontale ?"),
+        explanation: exp(
+          "$f'(x_0) = 0$ signifie que la tangente au point d'abscisse $x_0$ a un coefficient directeur nul : elle est HORIZONTALE.",
+          "On cherche donc sur la courbe l'endroit où la tangente est horizontale — le sommet de la parabole.",
+          `Ce sommet est en $x = ${s}$ : la tangente y est parallèle à l'axe des abscisses.`,
+          `$f'(${s}) = 0$. ⛔ Ce n'est PAS là où la courbe coupe un axe : couper l'axe des abscisses veut dire $f(x) = 0$, ce qui ne dit rien sur $f'$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_der_comparer_pentes_tpl",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "der_graphique",
+    microId: "der_comparer_vitesses",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Plus la tangente est RAIDE en montant, plus le nombre dérivé est grand.",
+    tags: ["premiere", "maths", "derivation", "graphique", "comparer", "template"],
+    generate: () => {
+      const a = pick([0.5, 1] as const);
+      const b = pick([-2, -1, 0, 1, 2] as const);
+      // Deux abscisses distinctes, et des pentes franchement differentes.
+      const paires = ([[-2, 1], [-1, 2], [-2, 2], [-1, 1], [0, 2], [-2, 0]] as const).filter(
+        ([u, v]) => Math.abs((2 * a * u + b) - (2 * a * v + b)) >= 1,
+      );
+      const [u, v] = pick(paires);
+      const pu = 2 * a * u + b;
+      const pv = 2 * a * v + b;
+      const plusGrand = pu > pv ? u : v;
+      const correct = `$f'(${plusGrand})$, car la tangente y est la plus RAIDE en montant`;
+      const autre = plusGrand === u ? v : u;
+      return {
+        text: `Sur la courbe de $f$, on compare les nombres dérivés en $${u}$ et en $${v}$. Lequel est le plus GRAND ?`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$f'(${autre})$, car la tangente y est la plus RAIDE en montant`,
+          "ils sont égaux, puisque c'est la même courbe",
+          "on ne peut pas comparer deux nombres dérivés",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: {
+          kind: "fonctionGraphique",
+          titre: `Deux tangentes : en ${u} et en ${v}`,
+          xmin: Math.min(u, v) - 3,
+          xmax: Math.max(u, v) + 3,
+          ymin: Math.min(a * u * u + b * u, a * v * v + b * v) - 5,
+          ymax: Math.max(a * u * u + b * u, a * v * v + b * v) + 6,
+          grille: true,
+          courbes: [
+            { id: "f", type: "quadratique", a, b, c: 0, couleur: "#e11d48" },
+            { id: "t1", type: "affine", a: pu, b: a * u * u + b * u - pu * u, couleur: "#0284c7" },
+            { id: "t2", type: "affine", a: pv, b: a * v * v + b * v - pv * v, couleur: "#059669" },
+          ],
+          points: [
+            { x: u, y: a * u * u + b * u, label: "A" },
+            { x: v, y: a * v * v + b * v, label: "B" },
+          ],
+        },
+        explanation: exp(
+          "Le nombre dérivé est le coefficient directeur de la tangente : comparer deux nombres dérivés, c'est comparer deux pentes.",
+          "On regarde les deux tangentes tracées et on compare leur inclinaison, signe compris.",
+          `$f'(${u}) = ${fr(pu)}$ et $f'(${v}) = ${fr(pv)}$.`,
+          `$f'(${plusGrand})$ est le plus grand. ⚠️ « Plus grand » ne veut pas dire « plus penché » : une tangente très raide en DESCENDANT donne un nombre dérivé très NÉGATIF, donc petit.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_der_interpreter_contexte_tpl",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "der_nombre_derive",
+    microId: "der_modele_interpreter",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Un nombre dérivé porte une UNITÉ : celle de la grandeur, divisée par celle du temps (ou de la quantité).",
+    tags: ["premiere", "maths", "derivation", "interpreter", "modele", "template"],
+    generate: () => {
+      const cas = pick([
+        {
+          quoi: "la taille (en cm) d'un enfant en fonction de son âge (en années)",
+          a: "8",
+          unite: "cm par an",
+          phrase: "à 8 ans, l'enfant grandit de",
+          faux: "l'enfant mesure",
+          fauxUnite: "cm",
+        },
+        {
+          quoi: "la distance (en km) parcourue en fonction du temps (en h)",
+          a: "2",
+          unite: "km par heure",
+          phrase: "à 2 h de trajet, on avance à",
+          faux: "on a parcouru",
+          fauxUnite: "km",
+        },
+        {
+          quoi: "le coût (en €) de production en fonction du nombre d'objets",
+          a: "50",
+          unite: "€ par objet",
+          phrase: "à 50 objets produits, chaque objet de plus coûte environ",
+          faux: "produire 50 objets coûte",
+          fauxUnite: "€",
+        },
+        {
+          quoi: "le volume d'eau (en L) d'un bassin en fonction du temps (en min)",
+          a: "10",
+          unite: "L par minute",
+          phrase: "à la 10ᵉ minute, le bassin se remplit de",
+          faux: "le bassin contient",
+          fauxUnite: "L",
+        },
+      ] as const);
+      const val = pick([3, 4, 5, 6, 7] as const);
+      const correct = `${cas.phrase} $${val}$ ${cas.unite}`;
+      return {
+        text:
+          `$f$ modélise ${cas.quoi}. On lit $f'(${cas.a}) = ${val}$. Comment l'interpréter ?`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `${cas.faux} $${val}$ ${cas.fauxUnite}`,
+          `${cas.phrase} $${cas.a}$ ${cas.unite}`,
+          "cela ne s'interprète pas : c'est un nombre sans unité",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le nombre dérivé $f'(a)$ est une VITESSE DE VARIATION : de combien la grandeur change quand la variable augmente d'une unité, au voisinage de $a$.",
+          "On lit l'unité dans l'énoncé : unité de la grandeur DIVISÉE par unité de la variable.",
+          `Ici $f'(${cas.a}) = ${val}$, donc ${cas.phrase} $${val}$ ${cas.unite}.`,
+          `⛔ Le piège : confondre $f'(${cas.a})$ et $f(${cas.a})$. $f(${cas.a})$ serait une valeur (${cas.fauxUnite}) ; $f'(${cas.a})$ est une vitesse (${cas.unite}).`
+        ),
+      };
+    },
+  },
+
+  /* ── un SECOND gabarit pour les micros de tangente (12/09/2026) ──
+   *
+   * ⚠️ ELLES AVAIENT DES ÉNONCÉS, PAS DES GABARITS. der_tangente_lire servait
+   * 92 énoncés distincts — et tous sortaient d'un gabarit UNIQUE. Le mode
+   * complet du coach oppose deux questions et exige donc deux items : une micro
+   * à gabarit unique y tombe en panne, quel que soit son nombre d'énoncés.
+   * Chacun des trois seconds gabarits demande un GESTE DIFFÉRENT du premier,
+   * sinon on double la quantité sans rien ajouter à ce qu'on enseigne.
+   */
+
+  {
+    kind: "template",
+    id: "premiere_der_tangente_lire_tpl_2",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "der_graphique",
+    microId: "der_tangente_lire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Entre deux points d'une droite : on divise la montée par le déplacement horizontal.",
+    tags: ["premiere", "maths", "derivation", "tangente", "template", "short"],
+    generate: () => {
+      // Le geste change : on ne lit plus « avance de 1 », on utilise DEUX points
+      // marqués de la tangente, comme le fait un sujet quand la pente n'est pas
+      // entière.
+      const x0 = pick([-2, -1, 0, 1, 2] as const);
+      const dx = pick([2, 4] as const);
+      const dy = pick([-6, -3, -2, 2, 3, 6] as const);
+      const pente = dy / dx;
+      const y0 = pick([-2, 0, 2] as const);
+      const demi = Math.max(4, Math.ceil(Math.abs(dy)) + 1);
+      return {
+        text:
+          `La tangente à la courbe de $f$ au point $A(${x0}\\,;\\,${y0})$ passe aussi par ` +
+          `$B(${x0 + dx}\\,;\\,${y0 + dy})$. Combien vaut $f'(${x0})$ ?`,
+        format: "short",
+        expected: [fr(pente)],
+        comparator: "number_equal",
+        canvas: {
+          kind: "fonctionGraphique",
+          titre: "La tangente passe par A et par B",
+          xmin: x0 - 2,
+          xmax: x0 + dx + 2,
+          ymin: Math.min(y0, y0 + dy) - 2,
+          ymax: Math.min(y0, y0 + dy) - 2 + demi + 3,
+          grille: true,
+          courbes: [{ id: "t", type: "affine", a: pente, b: y0 - pente * x0, couleur: "#0284c7" }],
+          points: [
+            { x: x0, y: y0, label: "A" },
+            { x: x0 + dx, y: y0 + dy, label: "B" },
+          ],
+        },
+        explanation: exp(
+          "Le nombre dérivé $f'(x_0)$ est le coefficient directeur de la tangente, et le coefficient directeur d'une droite se calcule avec deux de ses points.",
+          "On divise la variation des ordonnées par celle des abscisses : $\\dfrac{y_B - y_A}{x_B - x_A}$.",
+          `$\\dfrac{${y0 + dy} - (${y0})}{${x0 + dx} - (${x0})} = \\dfrac{${dy}}{${dx}} = ${fr(pente)}$.`,
+          `$f'(${x0}) = ${fr(pente)}$. ⛔ On divise la MONTÉE par le déplacement horizontal, jamais l'inverse.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_der_horizontale_tpl_2",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "der_graphique",
+    microId: "der_tangente_horizontale",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Une tangente horizontale, c'est un sommet — le point où la courbe cesse de monter pour descendre, ou l'inverse.",
+    tags: ["premiere", "maths", "derivation", "tangente", "extremum", "template", "short"],
+    generate: () => {
+      // Le geste change : on ne reconnait plus une tangente horizontale, on
+      // CHERCHE l'abscisse ou elle l'est.
+      const a = pick([0.5, 1] as const);
+      const s = pick([-2, -1, 1, 2] as const);
+      const c = pick([-2, 0, 2] as const);
+      return {
+        text:
+          `La courbe ci-contre est celle de $f$. En quelle abscisse la tangente à la courbe ` +
+          `est-elle HORIZONTALE ?`,
+        format: "short",
+        expected: [fr(s)],
+        comparator: "number_equal",
+        canvas: canvasTangente(a, -2 * a * s, c, s, "Cherche le point où la tangente est plate"),
+        explanation: exp(
+          "Une tangente horizontale a un coefficient directeur nul : c'est exactement l'endroit où $f'$ s'annule.",
+          "Sur une parabole, ce point est le SOMMET : la courbe y cesse de descendre pour monter (ou l'inverse).",
+          `Le sommet de cette parabole a pour abscisse $${fr(s)}$.`,
+          `La tangente est horizontale en $x = ${fr(s)}$, et $f'(${fr(s)}) = 0$. ⚠️ C'est l'abscisse qu'on demande, pas la valeur de $f$ en ce point.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_der_coefficient_tpl_2",
+    niveau: "premiere",
+    matiere: "maths",
+    notionId: "der_nombre_derive",
+    microId: "der_tangente_coefficient",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Dans $y = mx + p$, le nombre dérivé est $m$ — le coefficient devant $x$, pas l'ordonnée à l'origine.",
+    tags: ["premiere", "maths", "derivation", "tangente", "equation", "template"],
+    generate: () => {
+      // Le geste change : la tangente est donnee par son EQUATION, pas par un
+      // dessin. C'est la forme sous laquelle un sujet la fournit le plus souvent
+      // apres la premiere question.
+      const m = pick([-4, -3, -2, 2, 3, 4] as const);
+      // ⛔ LE QCM TOMBAIT A DEUX PROPOSITIONS (recalcul independant). Les trois
+      // distracteurs sont p, f(x0) = m·x0 + p et x0 : rien n'empechait deux
+      // d'entre eux de coincider, ni de valoir m — et `makeChoices` supprime
+      // les doublons, donc la question se retrouvait a deux cases. On ne tire
+      // que des configurations ou les quatre nombres sont deux a deux
+      // differents.
+      const combinaisons = ([-5, -3, -1, 1, 3, 5] as const).flatMap((pp) =>
+        ([-2, -1, 1, 2, 3] as const).map((xx) => ({ p: pp, x0: xx })),
+      ).filter(({ p: pp, x0: xx }) => new Set([m, pp, m * xx + pp, xx]).size === 4);
+      const { p, x0 } = pick(combinaisons);
+      const correct = `$${fr(m)}$`;
+      return {
+        text:
+          `La tangente à la courbe de $f$ au point d'abscisse $${x0}$ a pour équation ` +
+          `$y = ${fr(m)}x ${p >= 0 ? "+" : "-"} ${fr(Math.abs(p))}$. Que vaut $f'(${x0})$ ?`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$${fr(p)}$`,
+          `$${fr(m * x0 + p)}$`,
+          `$${fr(x0)}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le nombre dérivé en $x_0$ est le COEFFICIENT DIRECTEUR de la tangente en ce point.",
+          "Dans une équation $y = mx + p$, le coefficient directeur est $m$.",
+          `Ici $m = ${fr(m)}$, donc $f'(${x0}) = ${fr(m)}$.`,
+          `⛔ Les deux pièges : $${fr(p)}$ est l'ordonnée à l'origine de la tangente, et $${fr(m * x0 + p)}$ est $f(${x0})$ — la HAUTEUR du point de contact, pas la pente.`
+        ),
       };
     },
   },
