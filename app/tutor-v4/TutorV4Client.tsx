@@ -2736,9 +2736,17 @@ function WrongAnswerPanel({
           <MarkdownMath inline>{correctAnswer}</MarkdownMath>
         </div>
 
+        {/* ⛔ LA RÉPONSE DE L'ÉLÈVE SE REND COMME L'AUTRE (12/09/2026).
+            Frédéric, capture à l'appui sur la dérivée d'une somme : la bonne
+            réponse s'affichait composée — f′ = u′ + v′ — et juste en dessous
+            « Ta réponse : $f' = u' + v$ », en code source, dollars compris. Il
+            a conclu que le coach n'avait pas pris sa réponse « parce qu'il y a
+            des $ ». La correction était juste — il avait cliqué le piège sans
+            le prime sur v —, mais on ne pouvait pas le VOIR : comparer du math
+            composé à du LaTeX brut ne compare rien. */}
         {userAnswer ? (
           <div className="mt-3 text-sm font-semibold text-slate-400">
-            Ta réponse : {userAnswer}
+            Ta réponse : <MarkdownMath inline>{userAnswer}</MarkdownMath>
           </div>
         ) : null}
       </div>
