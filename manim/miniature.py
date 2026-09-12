@@ -1387,6 +1387,34 @@ def acc_974_temperature(d):
     d.text((300, 478), "l'altitude, pas la distance", font=police("arialbd.ttf", 34), fill=ROUGE)
 
 
+def acc_sondages(d):
+    """Les trois segments qui ne se croisent que sur un dixième de point.
+    ⛔ Aucun nom de candidat : seulement les chiffres et les instituts.
+
+    ⚠️ LES ABSCISSES SE CALCULENT, elles ne se posent pas à la main : au premier
+    tirage j'avais choisi des centres à l'œil et « Cluster17 » s'écrivait par
+    dessus son propre segment. La colonne des noms va de 300 à 480, les
+    segments commencent à 580 — et l'échelle garantit que ça reste vrai.
+    """
+    X0, X1, PMIN, PMAX = 580, 900, 26.0, 38.0
+    ech = lambda p: X0 + (p - PMIN) / (PMAX - PMIN) * (X1 - X0)
+    f = police("arialbd.ttf", 34)
+    for i, (nom, p, m, coul) in enumerate([("Cluster17", 30.0, 2.2, VERT),
+                                           ("Ipsos", 34.5, 2.4, BLEU),
+                                           ("OpinionWay", 34.0, 2.9, NAVY)]):
+        y = 350 + i * 66
+        d.text((300, y - 17), nom, font=f, fill=coul)
+        xa, xb = ech(p - m), ech(p + m)
+        d.line([(xa, y), (xb, y)], fill=coul, width=7)
+        for x in (xa, xb):
+            d.line([(x, y - 13), (x, y + 13)], fill=coul, width=7)
+    # la bande de recouvrement : 0,1 point, soit 3 px — on l'épaissit pour
+    # qu'elle se voie, c'est justement le sujet.
+    d.rectangle([ech(32.1) - 3, 328, ech(32.2) + 3, 500], fill=JAUNE)
+    d.text((300, 545), "ils se croisent sur 0,1 point",
+           font=police("ariblk.ttf", 40), fill=ROUGE)
+
+
 def acc_bases_fractions(d):
     """Les trois écritures du même nombre — l'idée qui tient toute la leçon."""
     f = police("ariblk.ttf", 56)
@@ -1395,7 +1423,25 @@ def acc_bases_fractions(d):
     d.text((300, 474), "1/2 + 1/3 n'est PAS 2/5", font=police("arialbd.ttf", 40), fill=ROUGE)
 
 
+def acc_pisa_2025(d):
+    """Le paradoxe de la vidéo : la chute mesurée, et la conviction record.
+    ⚠️ Lignes COURTES : à 48 px, « 458 en maths : −16 points » entrait dans
+    Ti-Margo (premier tirage)."""
+    f = police("ariblk.ttf", 50)
+    d.text((300, 330), "−16 points en maths", font=f, fill=ROUGE)
+    d.text((300, 402), "81 % pensent progresser", font=f, fill=VERT)
+    d.text((300, 474), "record de l'OCDE", font=police("arialbd.ttf", 40), fill=NAVY)
+
+
 NOTIONS = {
+    "eleveai-maths-actu-sondages": {
+        # ⚠️ EXACTEMENT DEUX LIGNES : le gabarit paysage lit `titre[1]` sans
+        # garde et lève un IndexError sur un titre d'une seule ligne.
+        "badge": "QUI A RAISON ?", "titre": ["30 %, 34 %,", "34,5 %"], "taille": 66,
+        "sous": "trois instituts, la même semaine",
+        "accroche": acc_sondages,
+        "dossier": "actu/maths/fr",
+    },
     # ⛔ « LES BASES » N'A PAS DE CLASSE : le badge ne dit ni le niveau ni l'âge.
     # C'est la seule série du dossier dans ce cas, et c'est voulu.
     "eleveai-maths-bases-fractions": {
@@ -1413,6 +1459,14 @@ NOTIONS = {
         "sous": "15 degrés sur 60 kilomètres",
         "accroche": acc_974_temperature,
         "dossier": "974/maths/fr",
+    },
+    # ⛔ PISA 2025 : sujet national, sans classe et sans île — badge « PISA 2025 »,
+    # le mot tapé la semaine de la publication. Voir miniature_short.py.
+    "eleveai-maths-actu-pisa-2025": {
+        "badge": "PISA 2025", "titre": ["LE NIVEAU", "BAISSE ?"], "taille": 66,
+        "sous": "qui a raison ?",
+        "accroche": acc_pisa_2025,
+        "dossier": "actu/maths/fr",
     },
     "eleveai-maths-seconde-python": {
         "badge": "MATHS · SECONDE", "titre": ["ALGORITHMIQUE", "ET PYTHON"], "taille": 56,

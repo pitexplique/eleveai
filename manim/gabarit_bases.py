@@ -105,6 +105,11 @@ class _Fractions:
 class NotionBases(NotionSeconde, _Fractions):
     """Une vidéo longue de la série « Les bases » — format paysage."""
 
+    # ⭐ L'IDENTITÉ EST UN PARAMÈTRE (11/09/2026) : une vidéo d'actualité sans
+    # classe (PISA 2025) reprend ce gabarit — même écran de fin vers le coach,
+    # même absence d'étiquette — mais pas sous le nom « Les bases ».
+    identite = "Les bases · EleveAI"
+
     def page_de_garde(self, titre, accroche, promesse, voix="00-garde"):
         """⛔ Identique à celle des notions, SAUF l'identité : pas de classe.
         « Les bases · EleveAI » remplace « Maths seconde — EleveAI »."""
@@ -113,7 +118,9 @@ class NotionBases(NotionSeconde, _Fractions):
         self.dire(voix)
 
         t = Text(titre, font_size=54, color=JAUNE_TITRE).to_edge(UP, buff=0.9)
-        identite = Text("Les bases · EleveAI", font_size=30, color=WHITE)
+        if t.width > config.frame_width - 1.0:
+            t.scale_to_fit_width(config.frame_width - 1.0)
+        identite = Text(self.identite, font_size=30, color=WHITE)
         identite.next_to(t, DOWN, buff=0.35)
         acc = Text(accroche, font_size=34, color=BLEU_CALCUL)
         acc.next_to(identite, DOWN, buff=0.95)

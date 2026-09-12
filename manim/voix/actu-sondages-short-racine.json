@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Interroger quatre fois plus de monde ne rend pas un sondage quatre fois plus précis. Seulement deux fois.",
+  "01-mille": "Mille personnes donnent environ trois points de marge d'erreur. Pour descendre à un point et demi, combien en faut-il ?",
+  "02-quatre": "Pas deux mille. Quatre mille. Parce que la précision ne suit pas le nombre de personnes : elle suit sa racine carrée.",
+  "03-neuf": "Et pour descendre à un seul point, il en faut neuf mille. Neuf fois plus de monde pour gagner un point. La racine carrée est impitoyable.",
+  "04-retenir": "Voilà pourquoi personne ne sonde dix mille personnes. Ça coûte dix fois plus cher pour trois fois moins d'erreur. C'est la racine carrée qui décide du budget.",
+  "05-fin": "Entraîne-toi sur le coach maths d'éleveai point fr. Et abonne-toi à la chaîne !"
+}

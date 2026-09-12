@@ -234,6 +234,104 @@ def acc_974_pourquoi(d):
     centre(d, W // 2, 1020, "FROID", police("ariblk.ttf", 110), BLEU)
 
 
+# ── PISA 2025 : un sujet national, sans série ─────────────────────────────────
+# ⛔ Badge « PISA 2025 » — c'est le mot que tout le monde tape la semaine de la
+# publication, et un sujet national ne prend ni classe ni île.
+# ⭐ La première ligne est un PARADOXE : c'est ce qui a fait 852 vues le 11/09.
+
+def acc_pisa_ia(d):
+    # ⚠️ La ligne du bas ne répète pas le sous-titre : le sous-titre dit la
+    # vitesse, l'accroche pose la question.
+    centre(d, W // 2, 650, "3x + 7 = 22", police("ariblk.ttf", 92), BLEU)
+    centre(d, W // 2, 770, "x = 5", police("ariblk.ttf", 120), VERT)
+    centre(d, W // 2, 940, "alors pourquoi", police("ariblk.ttf", 60), NAVY)
+    centre(d, W // 2, 1030, "L'APPRENDRE ?", police("ariblk.ttf", 74), ROUGE)
+
+
+def acc_pisa_favorises(d):
+    centre(d, W // 2, 630, "534", police("ariblk.ttf", 150), VERT)
+    centre(d, W // 2, 810, "les favorisés : parmi les meilleurs", police("arialbd.ttf", 42), NAVY)
+    centre(d, W // 2, 900, "100 points", police("ariblk.ttf", 110), ROUGE)
+    centre(d, W // 2, 1040, "d'écart avec les autres", police("arialbd.ttf", 42), NAVY)
+
+
+def acc_pisa_ecart(d):
+    centre(d, W // 2, 640, "2022 : 474", police("ariblk.ttf", 72), NAVY)
+    centre(d, W // 2, 740, "2025 : 458", police("ariblk.ttf", 96), ROUGE)
+    centre(d, W // 2, 900, "l'écart entre", police("arialbd.ttf", 44), NAVY)
+    centre(d, W // 2, 960, "les bons et les faibles :", police("arialbd.ttf", 44), NAVY)
+    centre(d, W // 2, 1030, "INCHANGÉ", police("ariblk.ttf", 96), VERT)
+
+
+def acc_pisa_croire(d):
+    centre(d, W // 2, 630, "81 %", police("ariblk.ttf", 170), VERT)
+    centre(d, W // 2, 840, "pensent pouvoir", police("arialbd.ttf", 50), NAVY)
+    centre(d, W // 2, 900, "progresser", police("arialbd.ttf", 50), NAVY)
+    centre(d, W // 2, 1000, "record de l'OCDE", police("ariblk.ttf", 60), BLEU)
+
+
+# ── « QUI A RAISON ? » : les sondages ─────────────────────────────────────────
+# ⛔⛔ AUCUN NOM DE CANDIDAT sur ces vignettes. Les noms d'INSTITUTS sont la
+# partie vérifiable et peuvent rester ; le reste transformerait une chaîne
+# d'élèves en tribune électorale.
+
+def segment(d, x_centre, demi_largeur, y, coul, ep=9, cap=16):
+    """Un intervalle de confiance : le trait et ses deux bornes. C'est le
+    schéma de toute la série — un score est un SEGMENT, pas un point."""
+    d.line([(x_centre - demi_largeur, y), (x_centre + demi_largeur, y)], fill=coul, width=ep)
+    for x in (x_centre - demi_largeur, x_centre + demi_largeur):
+        d.line([(x, y - cap), (x, y + cap)], fill=coul, width=ep)
+    r = 11
+    d.ellipse([x_centre - r, y - r, x_centre + r, y + r], fill=NAVY)
+
+
+def acc_sond_mille(d):
+    # La grande population et la petite : la MÊME cuillère jaune dans les deux.
+    # ⚠️ Assez grandes pour se comparer dans une grille de vignettes : à 220 px
+    # de côté, le carré jaune n'était plus qu'un grain.
+    d.rectangle([250, 570, 530, 850], outline=BLEU, width=6)
+    d.rectangle([358, 678, 422, 742], fill=JAUNE)
+    d.rectangle([680, 690, 810, 820], outline=VERT, width=6)
+    d.rectangle([713, 723, 777, 787], fill=JAUNE)
+    centre(d, 390, 870, "48 millions", police("arialbd.ttf", 36), BLEU)
+    centre(d, 745, 840, "500 000", police("arialbd.ttf", 36), VERT)
+    centre(d, W // 2, 960, "même carré jaune", police("ariblk.ttf", 44), NAVY)
+    centre(d, W // 2, 1030, "même précision", police("ariblk.ttf", 52), VERT)
+
+
+def acc_sond_trois(d):
+    # Les trois segments, et la bande où ils se croisent : 0,1 point.
+    for y, dx, cx, coul in ((650, 150, 430, VERT), (760, 165, 690, BLEU), (870, 200, 660, NAVY)):
+        segment(d, cx, dx, y, coul)
+    d.rectangle([576, 610, 588, 910], fill=JAUNE)
+    centre(d, W // 2, 950, "ils se croisent", police("arialbd.ttf", 40), NAVY)
+    centre(d, W // 2, 1010, "sur 0,1 point", police("ariblk.ttf", 54), ROUGE)
+
+
+def acc_sond_racine(d):
+    f = police("ariblk.ttf", 46)
+    for i, (n, m, coul) in enumerate([("1 000", "± 3 pt", BLEU),
+                                      ("4 000", "± 1,5 pt", VERT),
+                                      ("9 000", "± 1 pt", NAVY)]):
+        y = 640 + i * 92
+        d.text((300, y), n, font=f, fill=coul)
+        d.text((620, y), m, font=f, fill=coul)
+    centre(d, W // 2, 950, "9 × plus de monde", police("arialbd.ttf", 40), NAVY)
+    centre(d, W // 2, 1010, "pour 1 point", police("ariblk.ttf", 52), ROUGE)
+
+
+def acc_sond_avance(d):
+    # ⚠️ Chaque segment porte SON étiquette, et ils sont espacés de 140 px : au
+    # premier tirage ils étaient à 120 px l'un de l'autre sous un texte commun,
+    # et le bleu se confondait avec la ligne du dessus.
+    f = police("arialbd.ttf", 34)
+    centre(d, 300, 640, "34 %", f, BLEU)
+    segment(d, 590, 210, 660, BLEU)
+    centre(d, 300, 780, "33,5 %", f, ROUGE)
+    segment(d, 570, 210, 800, ROUGE)
+    centre(d, W // 2, 900, "INDISCERNABLES", police("ariblk.ttf", 54), ROUGE)
+
+
 # ── « LES BASES » : les fractions ─────────────────────────────────────────────
 # ⛔ Badge « LES BASES » et RIEN d'autre : la série n'a pas de classe, et une
 # vignette est le premier endroit où une étiquette s'installe sans y penser.
@@ -327,6 +425,26 @@ def acc_fr_ordre(d):
 
 
 SHORTS = {
+    "eleveai-maths-actu-sondages-short-mille": {
+        "badge": "QUI A RAISON ?", "titre": ["1 000 POUR", "48 MILLIONS"], "taille": 88,
+        "sous": "et ça suffit", "accroche": acc_sond_mille,
+        "dossier": "actu/maths/fr",
+    },
+    "eleveai-maths-actu-sondages-short-trois": {
+        "badge": "QUI A RAISON ?", "titre": ["30, 34, 34,5", "LA MÊME SEMAINE"], "taille": 78,
+        "sous": "trois instituts, un candidat", "accroche": acc_sond_trois,
+        "dossier": "actu/maths/fr",
+    },
+    "eleveai-maths-actu-sondages-short-racine": {
+        "badge": "QUI A RAISON ?", "titre": ["4 × PLUS DE GENS", "2 × PLUS PRÉCIS"], "taille": 74,
+        "sous": "la racine carrée décide du budget", "accroche": acc_sond_racine,
+        "dossier": "actu/maths/fr",
+    },
+    "eleveai-maths-actu-sondages-short-avance": {
+        "badge": "QUI A RAISON ?", "titre": ["0,5 POINT", "N'EST PAS UNE AVANCE"], "taille": 70,
+        "sous": "ce que le titre ne dit pas", "accroche": acc_sond_avance,
+        "dossier": "actu/maths/fr",
+    },
     "eleveai-maths-bases-fractions-short-definition": {
         "badge": "LES BASES", "titre": ["C'EST QUOI", "UNE FRACTION ?"], "taille": 82,
         "sous": "deux réponses, pas une", "accroche": acc_fr_definition,
@@ -381,6 +499,26 @@ SHORTS = {
         "badge": "LES MATHS EN VRAI", "titre": ["POURQUOI IL", "FAIT FROID"], "taille": 84,
         "sous": "en haut de la montagne", "accroche": acc_974_pourquoi,
         "dossier": "974/maths/fr",
+    },
+    "eleveai-maths-actu-pisa-2025-short-ia": {
+        "badge": "PISA 2025", "titre": ["L'IA RÉSOUT", "L'ÉQUATION"], "taille": 84,
+        "sous": "en 1 seconde, sans se tromper", "accroche": acc_pisa_ia,
+        "dossier": "actu/maths/fr",
+    },
+    "eleveai-maths-actu-pisa-2025-short-favorises": {
+        "badge": "PISA 2025", "titre": ["PARMI LES MEILLEURS", "ET POURTANT MOYENNE"], "taille": 58,
+        "sous": "la France et ses favorisés", "accroche": acc_pisa_favorises,
+        "dossier": "actu/maths/fr",
+    },
+    "eleveai-maths-actu-pisa-2025-short-ecart": {
+        "badge": "PISA 2025", "titre": ["−16 POINTS", "EN MATHS"], "taille": 92,
+        "sous": "et pourtant l'écart n'a pas bougé", "accroche": acc_pisa_ecart,
+        "dossier": "actu/maths/fr",
+    },
+    "eleveai-maths-actu-pisa-2025-short-croire": {
+        "badge": "PISA 2025", "titre": ["ILS", "DÉGRINGOLENT ?"], "taille": 84,
+        "sous": "c'est ce qu'on leur dit", "accroche": acc_pisa_croire,
+        "dossier": "actu/maths/fr",
     },
     "eleveai-maths-seconde-python-short-egal": {
         "badge": "MATHS · SECONDE", "titre": ["LE SIGNE =", "EN PYTHON"], "taille": 88,

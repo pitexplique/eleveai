@@ -1159,6 +1159,313 @@
         "révisions",
         "Shorts"
       ]
+    },
+    {
+      "id": "pisa-2025",
+      "serie": "Qui a raison ?",
+      "type": "longue",
+      "fichier": "actu/maths/paysage/fr/pisa-2025/eleveai-maths-actu-pisa-2025.mp4",
+      "miniature": "actu/maths/fr/eleveai-maths-actu-pisa-2025.png",
+      "titre": "Le niveau baisse, et pourtant 81 % y croient : qui a raison ? — PISA 2025",
+      "accroche": "Le niveau baisse, disent les journaux. Et pourtant 81 % des élèves français pensent qu'ils peuvent progresser — le record de l'OCDE. Qui a raison ? On lit les chiffres du PISA 2025 ensemble : ce que dit vraiment un score de 458, pourquoi la moyenne cache l'écart, pourquoi −16 points sans que l'écart bouge s'appelle une translation, ce que PISA mesure de neuf et que la France tient, ce qui manque vraiment (et qui s'apprend), et la question que tout le monde se pose : pourquoi apprendre à résoudre une équation quand l'IA le fait ?\n\nSources : « Résultats du PISA 2025 (Volume I) – Note pays : France », OCDE, 8 septembre 2026 ; Rosser et al., « The impact of video games on training surgeons in the 21st century », Archives of Surgery, 2007.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le niveau baisse ?"
+        ],
+        [
+          "00:16",
+          "Ce que tu sauras à la fin"
+        ],
+        [
+          "00:38",
+          "Le titre, et le chiffre"
+        ],
+        [
+          "01:08",
+          "Trois ans, et dix ans"
+        ],
+        [
+          "01:33",
+          "Et pourtant, l'écart n'a pas bougé"
+        ],
+        [
+          "01:59",
+          "Ce que la moyenne cache"
+        ],
+        [
+          "02:28",
+          "Ce que le titre ne dit pas"
+        ],
+        [
+          "03:06",
+          "Ce qui manque — et qui s'apprend"
+        ],
+        [
+          "03:38",
+          "Et l'IA, alors ?"
+        ],
+        [
+          "04:26",
+          "Défi"
+        ],
+        [
+          "04:55",
+          "Correction"
+        ],
+        [
+          "05:18",
+          "Tu sais maintenant"
+        ],
+        [
+          "05:43",
+          "S'entraîner sur le coach"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/accueil",
+      "tags": [
+        "PISA 2025",
+        "PISA",
+        "niveau des élèves",
+        "maths",
+        "statistiques",
+        "moyenne",
+        "écart",
+        "IA",
+        "école",
+        "OCDE"
+      ]
+    },
+    {
+      "id": "pisa-2025-ia",
+      "type": "short",
+      "renvoie_vers": "pisa-2025",
+      "serie": "Qui a raison ?",
+      "fichier": "actu/maths/shorts/fr/pisa-2025/eleveai-maths-actu-pisa-2025-short-ia.mp4",
+      "miniature": "actu/maths/fr/eleveai-maths-actu-pisa-2025-short-ia.png",
+      "titre": "L'IA résout l'équation en 1 seconde : alors pourquoi l'apprendre ?",
+      "accroche": "Oui, l'IA résout 3x + 7 = 22 en une seconde. Mais elle répond à la question qu'on lui pose : poser l'équation, c'est toi. Et tu ne peux pas vérifier ce que tu ne sais pas faire. PISA appelle ça le niveau le plus haut — 5 % des élèves français y arrivent, 11 % il y a dix ans. Alors résous-en assez pour posséder l'idée : vingt équations, pas deux cents. Après, l'IA est à toi.\n\nSources : « Résultats du PISA 2025 (Volume I) – Note pays : France », OCDE, 8 septembre 2026 ; Rosser et al., « The impact of video games on training surgeons in the 21st century », Archives of Surgery, 2007.",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "tags": [
+        "PISA 2025",
+        "IA",
+        "équation",
+        "maths",
+        "pourquoi apprendre",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "pisa-2025-favorises",
+      "type": "short",
+      "renvoie_vers": "pisa-2025",
+      "serie": "Qui a raison ?",
+      "fichier": "actu/maths/shorts/fr/pisa-2025/eleveai-maths-actu-pisa-2025-short-favorises.mp4",
+      "miniature": "actu/maths/fr/eleveai-maths-actu-pisa-2025-short-favorises.png",
+      "titre": "Parmi les meilleurs du monde, et pourtant la France est moyenne : pourquoi ?",
+      "accroche": "39 % des élèves français font partie du quart le plus favorisé de tous les pays testés, et ils obtiennent 534 en sciences — parmi les meilleurs du monde. Mais entre le quart le plus favorisé et le quart le moins favorisé, il y a 100 points d'écart (OCDE : 85). La moyenne est au milieu, et elle ne dit rien de ça. Le problème de la France, ce n'est pas le niveau : c'est l'écart.\n\nSources : « Résultats du PISA 2025 (Volume I) – Note pays : France », OCDE, 8 septembre 2026 ; Rosser et al., « The impact of video games on training surgeons in the 21st century », Archives of Surgery, 2007.",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "tags": [
+        "PISA 2025",
+        "moyenne",
+        "écart",
+        "inégalités",
+        "maths",
+        "statistiques",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "pisa-2025-ecart",
+      "type": "short",
+      "renvoie_vers": "pisa-2025",
+      "serie": "Qui a raison ?",
+      "fichier": "actu/maths/shorts/fr/pisa-2025/eleveai-maths-actu-pisa-2025-short-ecart.mp4",
+      "miniature": "actu/maths/fr/eleveai-maths-actu-pisa-2025-short-ecart.png",
+      "titre": "−16 points en maths, et pourtant l'écart n'a pas bougé : qui a baissé ?",
+      "accroche": "474 en 2022, 458 en 2025 : seize points de moins en maths. Et pourtant l'écart entre les 10 % du haut et les 10 % du bas n'a pas changé. Ce n'est donc ni le bas qui a décroché, ni le haut qui s'est effondré : toute la distribution a glissé, ensemble. En maths, ça s'appelle une translation — et ça veut dire que la solution concerne tout le monde.\n\nSources : « Résultats du PISA 2025 (Volume I) – Note pays : France », OCDE, 8 septembre 2026 ; Rosser et al., « The impact of video games on training surgeons in the 21st century », Archives of Surgery, 2007.",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "tags": [
+        "PISA 2025",
+        "translation",
+        "moyenne",
+        "écart",
+        "déciles",
+        "maths",
+        "statistiques",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "pisa-2025-croire",
+      "type": "short",
+      "renvoie_vers": "pisa-2025",
+      "serie": "Qui a raison ?",
+      "fichier": "actu/maths/shorts/fr/pisa-2025/eleveai-maths-actu-pisa-2025-short-croire.mp4",
+      "miniature": "actu/maths/fr/eleveai-maths-actu-pisa-2025-short-croire.png",
+      "titre": "On leur dit qu'ils dégringolent, et pourtant 81 % y croient : qui a raison ?",
+      "accroche": "81 % des élèves français pensent qu'on peut développer son intelligence par le travail — le record de l'OCDE (69 %). Mais 54 % seulement redoublent d'efforts quand c'est dur (OCDE : 60), et 33 % planifient leur travail. La croyance est là, la pratique moins. Le niveau mesuré baisse, c'est vrai — et ce qui manque s'apprend. Alors ne leur dites pas qu'ils sont nuls : dites-leur quoi faire.\n\nSources : « Résultats du PISA 2025 (Volume I) – Note pays : France », OCDE, 8 septembre 2026 ; Rosser et al., « The impact of video games on training surgeons in the 21st century », Archives of Surgery, 2007.",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "tags": [
+        "PISA 2025",
+        "mentalité de croissance",
+        "effort",
+        "élèves",
+        "école",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "sondages-marge",
+      "serie": "Qui a raison ?",
+      "type": "longue",
+      "fichier": "actu/maths/paysage/fr/sondages/eleveai-maths-actu-sondages.mp4",
+      "miniature": "actu/maths/fr/eleveai-maths-actu-sondages.png",
+      "titre": "30 %, 34 %, 34,5 % : trois instituts, la même semaine",
+      "accroche": "Début septembre 2026, trois instituts publient leur mesure de la même intention de vote. Ils trouvent 30 %, 34 % et 34,5 %. Lequel a raison ?\n\nLa bonne question n'est pas celle-là. Un score de sondage n'est pas un nombre : c'est un segment. Et quand on dessine les trois segments sur la même échelle, on découvre qu'ils ne se recouvrent que sur UN DIXIÈME DE POINT — donc le hasard du tirage n'explique même pas tout l'écart.\n\nAu programme : pourquoi 1 000 personnes suffisent pour en représenter 48 millions (et pourquoi la taille du pays n'entre pas dans le calcul), pourquoi interroger quatre fois plus de monde ne rend le sondage que deux fois plus précis, et comment reconnaître un écart qui n'en est pas un.\n\nAucun niveau requis. Aucun nom de candidat : le sujet est la mesure, pas l'élection.",
+      "chapitres": [
+        [
+          "00:00",
+          "Qui a raison ?"
+        ],
+        [
+          "00:12",
+          "Ce que tu sauras à la fin"
+        ],
+        [
+          "00:27",
+          "Trois instituts, trois chiffres"
+        ],
+        [
+          "00:52",
+          "« 1 000 personnes, c'est trop peu ! »"
+        ],
+        [
+          "01:19",
+          "Un score est un segment, pas un nombre"
+        ],
+        [
+          "01:39",
+          "Les trois sur la même échelle"
+        ],
+        [
+          "02:06",
+          "Pour être deux fois plus précis"
+        ],
+        [
+          "02:31",
+          "« Il passe devant »"
+        ],
+        [
+          "02:53",
+          "L'effet d'institut"
+        ],
+        [
+          "03:22",
+          "Défi"
+        ],
+        [
+          "03:41",
+          "Correction"
+        ],
+        [
+          "04:08",
+          "Tu sais maintenant"
+        ],
+        [
+          "04:27",
+          "S'entraîner sur le coach"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/accueil",
+      "source": "Source des trois sondages : Cluster17 (31 août-1er sept., n = 1 711), Ipsos (31 août-2 sept., n = 1 500), OpinionWay (9-10 sept., n = 1 001), recensés sur fr.wikipedia.org/wiki/Liste_de_sondages_sur_l'élection_présidentielle_française_de_2027 (consulté le 12/09/2026). Les marges d'erreur sont CALCULÉES (1,96 racine de p(1-p)/n), pas recopiées. Les instituts travaillent par quotas et non par tirage aléatoire simple : l'ordre de grandeur tient, le dixième de point non — c'est précisément le propos de la vidéo.",
+      "tags": [
+        "maths",
+        "sondages",
+        "marge d'erreur",
+        "statistiques",
+        "échantillon",
+        "esprit critique",
+        "pourcentages"
+      ]
+    },
+    {
+      "id": "sondages-mille",
+      "serie": "Qui a raison ?",
+      "type": "short",
+      "renvoie_vers": "sondages-marge",
+      "fichier": "actu/maths/shorts/fr/sondages/eleveai-maths-actu-sondages-short-mille.mp4",
+      "miniature": "actu/maths/fr/eleveai-maths-actu-sondages-short-mille.png",
+      "titre": "Pourquoi 1 000 personnes suffisent pour 48 millions",
+      "accroche": "Et la taille de la population n'intervient NULLE PART dans le calcul de la précision. Un sondage de 1 000 personnes est aussi précis en France qu'au Luxembourg. C'est la règle de la soupe : une cuillère bien mélangée renseigne autant sur une casserole que sur une marmite.",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "source": "Source des trois sondages : Cluster17 (31 août-1er sept., n = 1 711), Ipsos (31 août-2 sept., n = 1 500), OpinionWay (9-10 sept., n = 1 001), recensés sur fr.wikipedia.org/wiki/Liste_de_sondages_sur_l'élection_présidentielle_française_de_2027 (consulté le 12/09/2026). Les marges d'erreur sont CALCULÉES (1,96 racine de p(1-p)/n), pas recopiées. Les instituts travaillent par quotas et non par tirage aléatoire simple : l'ordre de grandeur tient, le dixième de point non — c'est précisément le propos de la vidéo.",
+      "tags": [
+        "maths",
+        "sondages",
+        "échantillon",
+        "statistiques",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "sondages-trois",
+      "serie": "Qui a raison ?",
+      "type": "short",
+      "renvoie_vers": "sondages-marge",
+      "fichier": "actu/maths/shorts/fr/sondages/eleveai-maths-actu-sondages-short-trois.mp4",
+      "miniature": "actu/maths/fr/eleveai-maths-actu-sondages-short-trois.png",
+      "titre": "4,5 points d'écart entre trois sondages de la même semaine",
+      "accroche": "Trois instituts, trois chiffres, 4,5 points d'écart. Chacun porte une marge de 2 à 3 points — et les trois intervalles ne se croisent que sur 0,1 point. Le hasard du tirage n'explique donc pas tout : ce qui reste s'appelle l'effet d'institut.",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "source": "Source des trois sondages : Cluster17 (31 août-1er sept., n = 1 711), Ipsos (31 août-2 sept., n = 1 500), OpinionWay (9-10 sept., n = 1 001), recensés sur fr.wikipedia.org/wiki/Liste_de_sondages_sur_l'élection_présidentielle_française_de_2027 (consulté le 12/09/2026). Les marges d'erreur sont CALCULÉES (1,96 racine de p(1-p)/n), pas recopiées. Les instituts travaillent par quotas et non par tirage aléatoire simple : l'ordre de grandeur tient, le dixième de point non — c'est précisément le propos de la vidéo.",
+      "tags": [
+        "maths",
+        "sondages",
+        "marge d'erreur",
+        "statistiques",
+        "esprit critique",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "sondages-racine",
+      "serie": "Qui a raison ?",
+      "type": "short",
+      "renvoie_vers": "sondages-marge",
+      "fichier": "actu/maths/shorts/fr/sondages/eleveai-maths-actu-sondages-short-racine.mp4",
+      "miniature": "actu/maths/fr/eleveai-maths-actu-sondages-short-racine.png",
+      "titre": "4 × plus de monde ne rend pas un sondage 4 × plus précis",
+      "accroche": "1 000 personnes : ± 3 points. 4 000 : ± 1,5 point. 9 000 : ± 1 point. La précision ne suit pas le nombre de personnes, elle suit sa RACINE CARRÉE — et c'est pour ça que personne ne sonde 10 000 personnes.",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "source": "Source des trois sondages : Cluster17 (31 août-1er sept., n = 1 711), Ipsos (31 août-2 sept., n = 1 500), OpinionWay (9-10 sept., n = 1 001), recensés sur fr.wikipedia.org/wiki/Liste_de_sondages_sur_l'élection_présidentielle_française_de_2027 (consulté le 12/09/2026). Les marges d'erreur sont CALCULÉES (1,96 racine de p(1-p)/n), pas recopiées. Les instituts travaillent par quotas et non par tirage aléatoire simple : l'ordre de grandeur tient, le dixième de point non — c'est précisément le propos de la vidéo.",
+      "tags": [
+        "maths",
+        "sondages",
+        "racine carrée",
+        "statistiques",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "sondages-avance",
+      "serie": "Qui a raison ?",
+      "type": "short",
+      "renvoie_vers": "sondages-marge",
+      "fichier": "actu/maths/shorts/fr/sondages/eleveai-maths-actu-sondages-short-avance.mp4",
+      "miniature": "actu/maths/fr/eleveai-maths-actu-sondages-short-avance.png",
+      "titre": "0,5 point d'avance, ce n'est pas une avance",
+      "accroche": "34 % contre 33,5 %, avec 3 points de marge : les deux segments se recouvrent presque entièrement. La règle tient en une phrase — si l'écart est plus petit que la marge, il n'y a pas d'écart. Y lire un classement, c'est lire le bruit.",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "source": "Source des trois sondages : Cluster17 (31 août-1er sept., n = 1 711), Ipsos (31 août-2 sept., n = 1 500), OpinionWay (9-10 sept., n = 1 001), recensés sur fr.wikipedia.org/wiki/Liste_de_sondages_sur_l'élection_présidentielle_française_de_2027 (consulté le 12/09/2026). Les marges d'erreur sont CALCULÉES (1,96 racine de p(1-p)/n), pas recopiées. Les instituts travaillent par quotas et non par tirage aléatoire simple : l'ordre de grandeur tient, le dixième de point non — c'est précisément le propos de la vidéo.",
+      "tags": [
+        "maths",
+        "sondages",
+        "marge d'erreur",
+        "esprit critique",
+        "statistiques",
+        "Shorts"
+      ]
     }
   ]
 }
