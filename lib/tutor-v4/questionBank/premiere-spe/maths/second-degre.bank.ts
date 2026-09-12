@@ -22,6 +22,30 @@ function pickOne<T>(arr: readonly T[]): T {
   return arr[randomInt(0, arr.length - 1)];
 }
 
+/**
+ * Quatre propositions garanties DEUX À DEUX DIFFÉRENTES.
+ *
+ * ⛔ Un distracteur peut rejoindre la bonne réponse selon le tirage — deux
+ * racines qui coïncident, un seuil qui vaut le paramètre. Sans ce filet, on
+ * servait un QCM à trois cases, parfois deux, sans la moindre erreur visible :
+ * le doublon disparaît en silence. Mesuré deux fois le 12/09/2026, sur des
+ * gabarits écrits le jour même.
+ *
+ * ⚠️ L'ORDRE N'EST PAS MÉLANGÉ ICI : `questionPairBuilder` le fait à
+ * l'affichage, pour tous les items du site.
+ */
+function quatreChoix(correct: string, distracteurs: readonly string[]): string[] {
+  const vus = new Set([correct]);
+  const sortie = [correct];
+  for (const d of distracteurs) {
+    if (sortie.length === 4) break;
+    if (vus.has(d)) continue;
+    vus.add(d);
+    sortie.push(d);
+  }
+  return sortie;
+}
+
 function exp(definition: string, methode: string, calcul: string, conclusion: string) {
   return (
     `Définition : ${definition}\n\n` +
@@ -3289,6 +3313,324 @@ export const secondDegreBank: TutorBankItemV4[] = [
             ? `La parabole ne coupe jamais l'axe des abscisses : le trinôme garde le signe de $a = ${c.a}$ partout.`
             : `Les racines sont $${c.r}$, et le coefficient $a = ${c.a}$ indique de quel côté la parabole est tournée.`,
           `Conclusion : le trinôme est ${c.conclusion}.`
+        ),
+      };
+    },
+  },
+
+  /* ═══════════ RENFORT DU 12/09/2026 : LES QUESTIONS DU DEVOIR ═══════════
+   *
+   * ⛔⛔ LE COACH ÉTAIT VERT ET NE POSAIT PAS LES QUESTIONS DU CONTRÔLE.
+   * 120 items, 10 micros sur 11 robustes, une seule micro en dette — et
+   * pourtant, mesuré sur 5 891 énoncés déroulés :
+   *
+   *   - ZÉRO question à PARAMÈTRE (« pour quelles valeurs de $m$ l'équation
+   *     a-t-elle deux solutions ? »), qui est LA question de DS sur le
+   *     discriminant : elle demande de voir $\Delta$ comme une fonction de $m$,
+   *     et non comme un nombre ;
+   *   - ZÉRO position relative d'une courbe et d'une droite, alors que c'est le
+   *     motif le plus fréquent où une équation du second degré SURGIT d'un
+   *     problème au lieu d'être donnée ;
+   *   - ZÉRO équation qui se RAMÈNE au second degré ;
+   *   - et surtout : sur 1 769 énoncés donnant un trinôme complet à résoudre,
+   *     43 seulement avaient $\Delta < 0$ — tous issus d'UN SEUL item figé,
+   *     toujours la même équation. La règle « si $\Delta < 0$, pas de solution »
+   *     était énoncée partout et le GESTE n'était jamais demandé. Un élève qui
+   *     n'a jamais calculé un discriminant négatif ne sait pas qu'il faut
+   *     s'arrêter là : il cherche la racine carrée d'un nombre négatif.
+   */
+
+  {
+    kind: "template",
+    id: "premiere_sd_resoudre_trois_cas_tpl",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_racines",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "On calcule $\\Delta = b^2 - 4ac$ AVANT tout : son signe décide s'il y a deux racines, une seule, ou aucune.",
+    tags: ["premiere", "maths", "second_degre", "discriminant", "racines", "template"],
+    generate: () => {
+      // ⚠️ LES TROIS CAS SONT TIRÉS À PARTS ÉGALES. C'est le point de ce
+      // gabarit : ailleurs dans la banque, Δ est positif neuf fois sur dix.
+      const cas = pickOne(["deux", "une", "aucune"] as const);
+      let b = 0;
+      let c = 0;
+      if (cas === "deux") {
+        // deux racines entieres distinctes r et s : x² - (r+s)x + rs
+        const r = pickOne([-4, -3, -2, -1, 1, 2, 3, 4] as const);
+        const s = pickOne(([-4, -3, -2, -1, 1, 2, 3, 4] as const).filter((v) => v !== r));
+        b = -(r + s);
+        c = r * s;
+      } else if (cas === "une") {
+        const r = pickOne([-4, -3, -2, -1, 1, 2, 3, 4] as const);
+        b = -2 * r;
+        c = r * r;
+      } else {
+        // Δ = b² - 4c < 0 : on prend c assez grand devant b.
+        b = pickOne([-4, -2, 0, 2, 4] as const);
+        c = pickOne([5, 6, 7, 8, 9, 10] as const) + Math.floor((b * b) / 4);
+      }
+      const delta = b * b - 4 * c;
+      const ecritB = b === 0 ? "" : b > 0 ? ` + ${b}x` : ` - ${-b}x`;
+      const ecritC = c > 0 ? ` + ${c}` : ` - ${-c}`;
+      const correct =
+        cas === "deux"
+          ? "deux solutions distinctes"
+          : cas === "une"
+            ? "une solution double"
+            : "aucune solution réelle";
+      return {
+        text: `Combien de solutions l'équation $x^2${ecritB}${ecritC} = 0$ admet-elle ?`,
+        format: "qcm",
+        // ⚠️ TROIS PROPOSITIONS, ET C'EST VOULU : la question n'a que trois
+        // reponses possibles, et Frederic l'a tranche le 09/09 — « les QCM
+        // peuvent avoir vrai/faux, 3 propositions ou 4 ». Rembourrer avec une
+        // quatrieme case inventee affaiblirait la question.
+        choices: quatreChoix(correct, [
+          "deux solutions distinctes",
+          "une solution double",
+          "aucune solution réelle",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le nombre de solutions de $ax^2 + bx + c = 0$ est donné par le signe du discriminant $\\Delta = b^2 - 4ac$.",
+          `On calcule $\\Delta$ avec $a = 1$, $b = ${b}$ et $c = ${c}$.`,
+          `$\\Delta = (${b})^2 - 4 \\times 1 \\times ${c} = ${b * b} - ${4 * c} = ${delta}$.`,
+          delta < 0
+            ? `$\\Delta = ${delta} < 0$ : l'équation n'a AUCUNE solution réelle. ⛔ On s'arrête ici — il ne faut surtout pas écrire $\\sqrt{${delta}}$, qui n'existe pas.`
+            : delta === 0
+              ? `$\\Delta = 0$ : une seule solution, $x = \\dfrac{-b}{2a} = ${-b / 2}$, dite racine double.`
+              : `$\\Delta = ${delta} > 0$ : deux solutions distinctes, $x = \\dfrac{-b \\pm \\sqrt{\\Delta}}{2a}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_sd_parametre_tpl",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_discriminant",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "$\\Delta$ devient une expression en $m$ : on écrit la condition sur $\\Delta$, puis on la résout.",
+    tags: ["premiere", "maths", "second_degre", "discriminant", "parametre", "template"],
+    generate: () => {
+      // x² + m·x + k = 0 : Δ = m² - 4k. Avec k carré parfait, le seuil est entier.
+      const racine = pickOne([1, 2, 3, 4, 5] as const);
+      const k = racine * racine;
+      const seuil = 2 * racine;
+      const condition = pickOne(["deux", "aucune", "double"] as const);
+      const correct =
+        condition === "deux"
+          ? `$m < -${seuil}$ ou $m > ${seuil}$`
+          : condition === "aucune"
+            ? `$-${seuil} < m < ${seuil}$`
+            : `$m = -${seuil}$ ou $m = ${seuil}$`;
+      const demande =
+        condition === "deux"
+          ? "DEUX solutions distinctes"
+          : condition === "aucune"
+            ? "AUCUNE solution réelle"
+            : "une solution DOUBLE";
+      const signe =
+        condition === "deux" ? "> 0" : condition === "aucune" ? "< 0" : "= 0";
+      return {
+        text: `Pour quelles valeurs du réel $m$ l'équation $x^2 + mx + ${k} = 0$ admet-elle ${demande} ?`,
+        format: "qcm",
+        choices: quatreChoix(correct, [
+          `$-${seuil} < m < ${seuil}$`,
+          `$m < -${seuil}$ ou $m > ${seuil}$`,
+          `$m = -${seuil}$ ou $m = ${seuil}$`,
+          `$m > ${k}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le nombre de solutions dépend du signe de $\\Delta$ — et ici $\\Delta$ n'est pas un nombre, c'est une expression en $m$.",
+          `On écrit $\\Delta = m^2 - 4 \\times 1 \\times ${k} = m^2 - ${4 * k}$, puis on résout $\\Delta ${signe}$.`,
+          `$m^2 - ${4 * k} ${signe}$ équivaut à $m^2 ${signe.replace("0", String(4 * k))}$, c'est-à-dire ${correct}.`,
+          `${correct}. ⛔ Le piège : résoudre l'équation en $x$ au lieu d'étudier le signe de $\\Delta$. Ici l'inconnue de la question est $m$, pas $x$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_sd_position_droite_tpl",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_racines",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Deux courbes se coupent là où elles ont la MÊME ordonnée : on écrit $f(x) = g(x)$ et on ramène tout d'un côté.",
+    tags: ["premiere", "maths", "second_degre", "racines", "graphique", "template"],
+    generate: () => {
+      // La parabole y = x² + bx + c coupe la droite y = mx + p aux racines de
+      // x² + (b - m)x + (c - p) = 0. On choisit ces racines entieres.
+      const r = pickOne([-3, -2, -1, 1, 2] as const);
+      const s = pickOne(([-3, -2, -1, 1, 2, 3] as const).filter((v) => v !== r));
+      const [x1, x2] = r < s ? [r, s] : [s, r];
+      const m = pickOne([-2, -1, 1, 2] as const);
+      const p = pickOne([-3, -1, 0, 1, 3] as const);
+      // b - m = -(x1 + x2) et c - p = x1·x2
+      const b = m - (x1 + x2);
+      const c = p + x1 * x2;
+      const ecritB = b === 0 ? "" : b > 0 ? ` + ${b}x` : ` - ${-b}x`;
+      const ecritC = c === 0 ? "" : c > 0 ? ` + ${c}` : ` - ${-c}`;
+      const ecritM = m === 1 ? "x" : m === -1 ? "-x" : `${m}x`;
+      const ecritP = p === 0 ? "" : p > 0 ? ` + ${p}` : ` - ${-p}`;
+      const correct = `$x = ${x1}$ et $x = ${x2}$`;
+      return {
+        text:
+          `La parabole d'équation $y = x^2${ecritB}${ecritC}$ et la droite d'équation ` +
+          `$y = ${ecritM}${ecritP}$ se coupent en deux points. Quelles sont leurs abscisses ?`,
+        format: "qcm",
+        choices: quatreChoix(correct, [
+          `$x = ${-x1}$ et $x = ${-x2}$`,
+          `$x = ${x1 * x2}$ et $x = ${x1 + x2}$`,
+          "elles ne se coupent pas",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Deux courbes se coupent aux points où elles ont la même ordonnée : on résout $f(x) = g(x)$.",
+          "On ramène tout d'un côté pour obtenir une équation du second degré égale à zéro, puis on applique le discriminant.",
+          `$x^2${ecritB}${ecritC} = ${ecritM}${ecritP}$ devient $x^2 ${b - m >= 0 ? "+" : "-"} ${Math.abs(b - m)}x ${c - p >= 0 ? "+" : "-"} ${Math.abs(c - p)} = 0$, dont les solutions sont $${x1}$ et $${x2}$.`,
+          `Les abscisses des points d'intersection sont $${x1}$ et $${x2}$. ⭐ C'est le motif le plus fréquent où une équation du second degré SURGIT d'un problème au lieu d'être donnée.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_sd_bicarree_tpl",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_racines",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "On pose $X = x^2$ : l'équation devient du second degré en $X$. ⚠️ Une valeur NÉGATIVE de $X$ ne donne aucun $x$.",
+    tags: ["premiere", "maths", "second_degre", "racines", "changement_variable", "template"],
+    generate: () => {
+      // x⁴ - S·x² + P = 0 avec X = x² : X² - SX + P = 0, racines X1 et X2.
+      // On prend X1 carre parfait positif, et X2 soit carre parfait, soit negatif.
+      const X1 = pickOne([1, 4, 9, 16] as const);
+      const deuxPositives = Math.random() < 0.5;
+      // ⛔ X2 NE DOIT PAS ETRE L'OPPOSE DE X1 : la somme s'annule, le terme en
+      // x² disparait, et « x⁴ - 16 = 0 » n'est plus une bicarree a resoudre par
+      // changement d'inconnue — c'est une difference de carres.
+      const X2 = deuxPositives
+        ? pickOne(([1, 4, 9, 16] as const).filter((v) => v !== X1))
+        : pickOne(([-1, -2, -3, -4] as const).filter((v) => v !== -X1));
+      const S = X1 + X2;
+      const P = X1 * X2;
+      const r1 = Math.sqrt(X1);
+      const r2 = deuxPositives ? Math.sqrt(X2) : 0;
+      const sols = deuxPositives
+        ? [...new Set([-r2, -r1, r1, r2])].sort((a, b) => a - b)
+        : [-r1, r1];
+      const correct = `${sols.length} solutions : $${sols.join("$, $")}$`;
+      const ecritS = S === 0 ? "" : S > 0 ? ` - ${S}x^2` : ` + ${-S}x^2`;
+      const ecritP = P > 0 ? ` + ${P}` : ` - ${-P}`;
+      return {
+        text: `Résoudre $x^4${ecritS}${ecritP} = 0$ en posant $X = x^2$.`,
+        format: "qcm",
+        // ⛔ LE DISTRACTEUR « SOLUTIONS OPPOSEES » VALAIT TOUJOURS LA BONNE
+        // REPONSE : les solutions d'une bicarree sont symetriques par
+        // construction, donc les opposer ne change rien. Mesure : 600 tirages,
+        // doublon a chaque fois. Les trois pieges portent maintenant sur les
+        // vraies erreurs — s'arreter a X, oublier les racines negatives, ou
+        // prendre les racines carrees d'un X negatif.
+        choices: quatreChoix(correct, [
+          `${deuxPositives ? 2 : 2} solutions : $${X1}$, $${X2}$ — ce sont les valeurs de $X$`,
+          `${deuxPositives ? 2 : 1} solution${deuxPositives ? "s" : ""} : $${sols.filter((v) => v > 0).join("$, $")}$`,
+          "aucune solution réelle",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une équation en $x^4$ et $x^2$ devient du second degré si l'on pose $X = x^2$ : c'est un CHANGEMENT D'INCONNUE.",
+          `On résout $X^2 ${S >= 0 ? "-" : "+"} ${Math.abs(S)}X ${P >= 0 ? "+" : "-"} ${Math.abs(P)} = 0$, puis on revient à $x$ par $x^2 = X$.`,
+          deuxPositives
+            ? `Les deux valeurs de $X$ sont $${X1}$ et $${X2}$, toutes deux positives : chacune donne deux $x$ opposés.`
+            : `Les deux valeurs de $X$ sont $${X1}$ et $${X2}$. ⛔ $X = ${X2}$ est NÉGATIF : $x^2 = ${X2}$ n'a aucune solution, on l'écarte.`,
+          `${correct}. ⛔ L'erreur classique : s'arrêter à $X$ et donner les valeurs de $X$ comme réponse — or on cherchait $x$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_sd_forme_adaptee_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "second_degre",
+    microId: "sd_forme_adaptee",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Chaque forme montre UNE chose : développée → l'ordonnée à l'origine, factorisée → les racines, canonique → le sommet.",
+    tags: ["premiere", "maths", "second_degre", "forme", "template"],
+    generate: () => {
+      const alpha = pickOne([-3, -2, -1, 1, 2, 3] as const);
+      const beta = pickOne([-4, -2, 2, 4] as const);
+      const x1 = pickOne([-3, -2, -1, 1, 2] as const);
+      const x2 = pickOne(([-3, -2, -1, 1, 2, 3] as const).filter((v) => v !== x1));
+      const cas = pickOne([
+        {
+          question: "l'ordonnée du point d'intersection avec l'axe des ordonnées",
+          bonne: "la forme DÉVELOPPÉE",
+          pourquoi: "elle donne $f(0) = c$ en une lecture",
+        },
+        {
+          question: "les abscisses des points d'intersection avec l'axe des abscisses",
+          bonne: "la forme FACTORISÉE",
+          pourquoi: "un produit est nul quand l'un de ses facteurs l'est",
+        },
+        {
+          question: "les coordonnées du sommet de la parabole",
+          bonne: "la forme CANONIQUE",
+          pourquoi: `$a(x - \\alpha)^2 + \\beta$ donne le sommet $(${alpha}\\,;\\,${beta})$ sans calcul`,
+        },
+        {
+          question: "le signe du trinôme sur chaque intervalle",
+          bonne: "la forme FACTORISÉE",
+          pourquoi: "on dresse le tableau de signes de chaque facteur",
+        },
+        {
+          question: "l'extremum de la fonction",
+          bonne: "la forme CANONIQUE",
+          pourquoi: "un carré est toujours positif, donc $\\beta$ est atteint et c'est l'extremum",
+        },
+      ] as const);
+      return {
+        text:
+          `Soit $f(x) = ${alpha > 0 ? "" : "-"}(x ${x1 >= 0 ? "-" : "+"} ${Math.abs(x1)})(x ${x2 >= 0 ? "-" : "+"} ${Math.abs(x2)})$. ` +
+          `On cherche ${cas.question}. Quelle forme choisir ?`,
+        format: "qcm",
+        choices: quatreChoix(cas.bonne, [
+          "la forme DÉVELOPPÉE",
+          "la forme FACTORISÉE",
+          "la forme CANONIQUE",
+          "n'importe laquelle, elles sont équivalentes",
+        ]),
+        expected: [cas.bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Les trois formes d'un trinôme désignent le MÊME nombre pour chaque $x$ ; seule leur FORME change, et c'est elle qui décide de ce qu'on peut lire sans calcul.",
+          "On se demande quelle information la question réclame, puis quelle forme la donne directement.",
+          `Ici on cherche ${cas.question} : ${cas.pourquoi}.`,
+          `C'est ${cas.bonne}. ⚠️ « N'importe laquelle » est vrai au sens des valeurs et faux au sens du travail : l'une répond en une ligne, les autres demandent de tout refaire. Exemple de trinôme à racines $${x1}$ et $${x2}$ : la factorisée les affiche, la développée les cache.`
         ),
       };
     },
