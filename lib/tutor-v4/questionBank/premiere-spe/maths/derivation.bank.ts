@@ -46,17 +46,30 @@ function exp(definition: string, methode: string, calcul: string, conclusion: st
 }
 
 // Parabole y = x² + bx + c avec sa tangente au point d'abscisse a.
+/**
+ * ⚠️ `a` EST L'ABSCISSE DU POINT, pas le coefficient dominant : la courbe est
+ * toujours $x^2 + bx + c$.
+ *
+ * ⛔ LA FENÊTRE SE CALCULE (12/09/2026). Elle était fixe, [−5 ; 5] × [−6 ; 10] :
+ * pour un point d'abscisse 4 sur $x^2$, A tombait en (4 ; 16), soit six unités
+ * au-dessus du haut du cadre — on demandait la pente en un point que l'élève ne
+ * voyait pas. Elle est maintenant centrée sur A, de demi-côté |pente| + 2, ce
+ * qui garantit qu'un pas de 1 de part et d'autre reste dans la figure.
+ *
+ * ⭐ Carrée en unités, pour qu'une pente de 1 se dessine bien à 45°.
+ */
 function tangente(b: number, c: number, a: number): CanvasFigure {
   const fa = a * a + b * a + c;
   const pente = 2 * a + b; // dérivée de x²+bx+c
   const ord = fa - pente * a; // y = pente·x + ord
+  const demi = Math.max(3, Math.ceil(Math.abs(pente)) + 2);
   return {
     kind: "fonctionGraphique",
     size: { width: 320, height: 320 },
-    xmin: -5,
-    xmax: 5,
-    ymin: -6,
-    ymax: 10,
+    xmin: a - demi,
+    xmax: a + demi,
+    ymin: fa - demi,
+    ymax: fa + demi,
     grille: true,
     courbes: [
       { id: "f", type: "quadratique", a: 1, b, c, couleur: "#2563eb" },

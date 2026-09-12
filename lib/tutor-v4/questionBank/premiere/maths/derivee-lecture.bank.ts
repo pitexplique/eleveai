@@ -57,6 +57,26 @@ function exp(definition: string, methode: string, calcul: string, conclusion: st
  * Le nombre dérivé f'(x0) vaut 2a·x0 + b : c'est le coefficient directeur de
  * la tangente, et c'est ce que l'élève doit lire.
  */
+/**
+ * La courbe, sa tangente en A, et une fenêtre QUI SE CALCULE.
+ *
+ * ⛔ LA FENÊTRE ÉTAIT FIXE — [−5 ; 5] × [−8 ; 10] quelle que soit la pente —, et
+ * c'est ce que Frédéric voyait le 12/09/2026 : « il me semble qu'il y a des
+ * erreurs parfois » sur les dérivées graphiques. Mesuré sur 200 tirages :
+ *
+ *   - le point A tombait HORS du cadre (A(4 ; 14) pour une fenêtre qui
+ *     s'arrête à 10) : on demandait la pente en un point invisible ;
+ *   - 19 fois sur 200, la tangente quittait la figure AVANT un pas de 1, donc
+ *     le geste même qu'enseigne l'exercice — « avance de 1, regarde de combien
+ *     elle monte » — ne pouvait pas se faire.
+ *
+ * La fenêtre est donc centrée sur A, et son demi-côté vaut |pente| + 2 : à un
+ * pas de 1 la tangente est montée de |pente|, il reste deux unités de marge.
+ *
+ * ⭐ ET ELLE EST CARRÉE EN UNITÉS. Sur un repère dont les deux axes n'ont pas la
+ * même échelle, une pente de 1 ne se dessine pas à 45° : l'élève qui apprend à
+ * LIRE une pente apprendrait un réflexe faux. Le carré rend le dessin honnête.
+ */
 function canvasTangente(
   a: number,
   b: number,
@@ -66,13 +86,14 @@ function canvasTangente(
 ): CanvasFigure {
   const pente = 2 * a * x0 + b;
   const yx0 = a * x0 * x0 + b * x0 + c;
+  const demi = Math.max(3, Math.ceil(Math.abs(pente)) + 2);
   return {
     kind: "fonctionGraphique",
     titre: titre ?? "La courbe de f et sa tangente au point A",
-    xmin: -5,
-    xmax: 5,
-    ymin: -8,
-    ymax: 10,
+    xmin: x0 - demi,
+    xmax: x0 + demi,
+    ymin: yx0 - demi,
+    ymax: yx0 + demi,
     grille: true,
     courbes: [
       { id: "f", type: "quadratique", a, b, c, couleur: "#e11d48" },
@@ -421,6 +442,19 @@ export const deriveeLectureBank: TutorBankItemV4[] = [
         )
       );
       const pente = 2 * a * x0 + b;
+      // ⛔⛔ LE DESSIN ÉTAIT COLLÉ AUX QUATRE CAS — corrigé le 12/09/2026, et
+      // c'est le défaut que Frédéric signalait. Trois de ces questions ne
+      // parlent pas de la figure, et l'une la CONTREDIT : on demandait « si la
+      // tangente est HORIZONTALE, que vaut le nombre dérivé ? » sous un dessin
+      // où la tangente a une pente de 1. L'élève lit la figure — c'est ce qu'on
+      // lui apprend à faire — et la figure lui dit le contraire de l'énoncé.
+      //
+      // Chaque cas porte donc SON dessin, ou aucun :
+      //   - la question sur la tangente horizontale en dessine une VRAIE, prise
+      //     au sommet de la parabole, où la pente s'annule pour de bon ;
+      //   - la question sur deux tangentes parallèles n'a pas de figure : la
+      //     figure ne montre qu'une courbe, elle ne peut qu'égarer.
+      const sommet = -b / (2 * a);
       const cas = pick([
         {
           question: "Géométriquement, que représente le nombre dérivé $f'(a)$ ?",
@@ -430,16 +464,19 @@ export const deriveeLectureBank: TutorBankItemV4[] = [
             "l'aire sous la courbe jusqu'à $a$",
             "la distance entre la courbe et l'axe des abscisses",
           ],
+          figure: canvasTangente(a, b, 0, x0),
         },
         {
           question: `La tangente tracée ci-contre a pour coefficient directeur $${fr(pente)}$. Que vaut $f'(${x0})$ ?`,
           bonne: `$${fr(pente)}$`,
           pieges: [`$${fr(-pente)}$`, `$${fr(x0)}$`, "on ne peut pas le savoir sans l'expression de $f$"],
+          figure: canvasTangente(a, b, 0, x0),
         },
         {
-          question: "Si la tangente à la courbe en un point est HORIZONTALE, que vaut le nombre dérivé en ce point ?",
+          question: "Sur la figure, la tangente à la courbe au point $A$ est HORIZONTALE. Que vaut le nombre dérivé en ce point ?",
           bonne: "$0$",
           pieges: ["$1$", "il n'existe pas", "il est infini"],
+          figure: canvasTangente(a, b, 0, sommet, "Une tangente horizontale, au sommet"),
         },
         {
           question:
@@ -450,6 +487,7 @@ export const deriveeLectureBank: TutorBankItemV4[] = [
             "ils sont nuls tous les deux",
             "on ne peut rien en dire",
           ],
+          figure: undefined,
         },
       ] as const);
       return {
@@ -458,7 +496,7 @@ export const deriveeLectureBank: TutorBankItemV4[] = [
         choices: makeChoices(cas.bonne, cas.pieges),
         expected: [cas.bonne],
         comparator: "mcq_exact",
-        canvas: canvasTangente(a, b, 0, x0),
+        canvas: cas.figure,
         explanation: exp(
           "La tangente en un point est la position limite des sécantes passant par ce point ; son coefficient directeur EST le nombre dérivé.",
           "On relie ce que l'on voit (une pente) à ce que l'on calcule (un nombre dérivé).",
