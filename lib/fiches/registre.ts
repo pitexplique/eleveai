@@ -594,6 +594,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "La dérivation",
     resume: "Taux de variation, nombre dérivé, dérivées usuelles et équation de la tangente.",
   },
+  "maths/premiere-spe/second-degre": {
+    titre: "Le second degré",
+    resume: "Le discriminant ne calcule rien, il decide : deux racines, une seule, ou aucune — et donc si la forme factorisee existe.",
+  },
   // ─── Français ───────────────────────────────────────────────────────────────
   // La matière s'ouvre au cycle 3 : c'est le programme du CM2, et c'est aussi
   // celui sur lequel porte l'écrit de français du CRPE.

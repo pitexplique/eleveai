@@ -173,6 +173,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "revenir-sur-son-texte-en-cm1-2026-2027-cours-exercices-corriges.pdf",
   "se-reperer-dans-la-phrase-complexe-6e-cours-exercices-corriges.pdf",
   "se-reperer-sur-une-droite-dans-le-plan-sur-la-terre-4e-cours-exercices-corriges.pdf",
+  "second-degre-premiere-spe-cours-exercices-corriges.pdf",
   "sections-planes-de-solides-3e-cours-exercices-corriges.pdf",
   "sens-des-mots-au-cp-2026-2027-cours-exercices-corriges.pdf",
   "signe-d-une-expression-seconde-cours-exercices-corriges.pdf",
