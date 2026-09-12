@@ -3265,7 +3265,7 @@ export const derivationBank: TutorBankItemV4[] = [
     microId: "der_graphique",
     difficulty: 5,
     theme: "neutral",
-    text: "Sur un graphique, le point $A$ de la courbe a pour ordonnée $4$, et la tangente en $A$ a pour pente $-3$. Que valent $f(a)$ et $f'(a)$ ?",
+    text: "Sur la courbe de $f$, le point $A$ a pour ordonnée $4$, et la tangente en $A$ a pour pente $-3$. Que valent $f(a)$ et $f'(a)$ ?",
     format: "qcm",
     choices: [
       "$f(a) = 4$ et $f'(a) = -3$",
@@ -3376,7 +3376,7 @@ export const derivationBank: TutorBankItemV4[] = [
       const fa = randomInt(-3, 6);
       const d = pickOne([-4, -2, -1, 0, 2, 3]);
       return {
-        text: `Sur un graphique, le point de la courbe d'abscisse $${a}$ a pour ordonnée $${fa}$, et la tangente en ce point a pour pente $${d}$. Donne $f(${a})$ et $f'(${a})$, puis l'équation de la tangente.`,
+        text: `Sur la courbe de $f$, le point d'abscisse $${a}$ a pour ordonnée $${fa}$, et la tangente en ce point a pour pente $${d}$. Donne $f(${a})$ et $f'(${a})$, puis l'équation de la tangente.`,
         format: "open",
         expected: [String(fa), String(d), "tangente", "pente"],
         comparator: "contains_keyword",

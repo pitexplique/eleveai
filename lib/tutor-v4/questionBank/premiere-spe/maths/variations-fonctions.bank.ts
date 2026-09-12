@@ -46,6 +46,30 @@ function parabole(a: number, b: number, c: number): CanvasFigure {
   };
 }
 
+/**
+ * Quatre propositions garanties DEUX A DEUX DIFFERENTES.
+ *
+ * ⛔ Un distracteur peut rejoindre la bonne reponse selon le tirage — un sommet
+ * qui vaut son maximum, deux racines qui coincident. Sans ce filet, le QCM se
+ * retrouve a trois cases, parfois deux, sans la moindre erreur visible : le
+ * doublon disparait en silence. Mesure quatre fois le 12/09/2026, sur des
+ * gabarits ecrits le jour meme.
+ *
+ * ⚠️ L'ORDRE N'EST PAS MELANGE ICI : `questionPairBuilder` le fait a
+ * l'affichage, pour tous les items du site.
+ */
+function quatreChoixVar(correct: string, distracteurs: readonly string[]): string[] {
+  const vus = new Set([correct]);
+  const sortie = [correct];
+  for (const d of distracteurs) {
+    if (sortie.length === 4) break;
+    if (vus.has(d)) continue;
+    vus.add(d);
+    sortie.push(d);
+  }
+  return sortie;
+}
+
 export const variationsFonctionsBank: TutorBankItemV4[] = [
   /* ===================== VAR_SIGNE_DERIVEE ===================== */
   {
@@ -3315,6 +3339,152 @@ export const variationsFonctionsBank: TutorBankItemV4[] = [
           `On note $x$ la largeur en mètres. Le périmètre valant $${p}$, la longueur est $${demi} - x$, et l'aire vaut $A(x) = x(${demi} - x)$, avec $x \\in \\left]0 ; ${demi}\\right[$ pour que les deux côtés soient positifs.`,
           `On dérive : $A'(x) = ${demi} - 2x$, qui s'annule en $x = ${cote}$ et change de signe (positive avant, négative après).`,
           `L'aire est donc maximale pour $x = ${cote}$ m : l'enclos est un CARRÉ de côté $${cote}$ m, d'aire $${cote * cote}$ m². À périmètre fixé, c'est toujours le carré qui gagne.`
+        ),
+      };
+    },
+  },
+
+  /* ═══════ RENFORT DU 12/09/2026 : LES DEUX MICROS SOUS LE SEUIL ═══════
+   *
+   * ⛔ var_position_relative plafonnait a 8 enonces, et la cause n'etait pas le
+   * nombre de gabarits — il y en avait deux — mais le fait que L'UN D'EUX NE
+   * VARIAIT PAS : deux tirages consecutifs servaient mot pour mot « En combien
+   * de points les courbes de f(x) = x² et g(x) = x + 2 se coupent-elles ? ».
+   * Un gabarit qui ne varie pas est un item fige deguise, et le compteur de
+   * renouvellement est le seul a le voir.
+   *
+   * ⛔ var_optimisation plafonnait a 10 : ses deux gabarits ne faisaient varier
+   * qu'un nombre dans un contexte unique (le rectangle de demi-perimetre donne,
+   * l'enclos a clôturer). L'eleve revoyait la meme situation.
+   *
+   * Le geste vise est celui du sujet : on POSE h = f − g, on etudie son SIGNE,
+   * et l'on conclut sur la position. Pas « combien de points d'intersection »,
+   * qui n'est que la premiere ligne.
+   */
+
+  {
+    kind: "template",
+    id: "premiere_var_position_signe_tpl",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_position_relative",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "On pose $h = f - g$ : la courbe de $f$ est au-dessus de celle de $g$ exactement là où $h > 0$.",
+    tags: ["premiere", "maths", "variations", "position_relative", "template"],
+    generate: () => {
+      // h(x) = f(x) − g(x) = x² + Bx + C, de racines entieres r et s.
+      const r = pickOne([-3, -2, -1, 0, 1, 2] as const);
+      const s = pickOne(([-2, -1, 0, 1, 2, 3] as const).filter((v) => v !== r));
+      const [x1, x2] = r < s ? [r, s] : [s, r];
+      const B = -(x1 + x2);
+      const C = x1 * x2;
+      // On repartit h entre f et g : f = x² + bx + c, g = (b − B)x + (c − C).
+      const m = pickOne([-2, -1, 1, 2] as const);
+      const p = pickOne([-3, -1, 0, 1, 3] as const);
+      const b = B + m;
+      const c = C + p;
+      const ecrit = (coef: number, variable: string) =>
+        coef === 0 ? "" : `${coef > 0 ? " + " : " - "}${Math.abs(coef) === 1 && variable ? "" : Math.abs(coef)}${variable}`;
+      const fTex = `x^2${ecrit(b, "x")}${ecrit(c, "")}`;
+      const gTex = `${m === 1 ? "x" : m === -1 ? "-x" : `${m}x`}${ecrit(p, "")}`;
+      const correct = `sur $\\left] -\\infty \\,;\\, ${x1} \\right[$ et $\\left] ${x2} \\,;\\, +\\infty \\right[$`;
+      return {
+        text:
+          `Soit $f(x) = ${fTex}$ et $g(x) = ${gTex}$. Sur quel ensemble la courbe de $f$ ` +
+          `est-elle STRICTEMENT AU-DESSUS de celle de $g$ ?`,
+        format: "qcm",
+        choices: quatreChoixVar(correct, [
+          `sur $\\left] ${x1} \\,;\\, ${x2} \\right[$`,
+          `sur $\\mathbb{R}$ tout entier`,
+          `seulement en $x = ${x1}$ et $x = ${x2}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La courbe de $f$ est au-dessus de celle de $g$ là où $f(x) - g(x) > 0$. On étudie donc le SIGNE de la différence, jamais les deux courbes séparément.",
+          "On pose $h(x) = f(x) - g(x)$, on cherche ses racines, puis on lit son signe.",
+          `$h(x) = x^2${ecrit(B, "x")}${ecrit(C, "")}$, qui s'annule en $${x1}$ et $${x2}$. Comme le coefficient de $x^2$ vaut $1 > 0$, $h$ est positif à l'EXTÉRIEUR de ses racines.`,
+          `La courbe de $f$ est au-dessus de celle de $g$ ${correct}. ⛔ Comparer $f'$ et $g'$ ne répondrait pas : deux courbes peuvent croître à la même vitesse sans être à la même hauteur.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_var_optimisation_contextes_tpl",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_optimisation",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "On dérive, on cherche où $f'$ s'annule, ET on vérifie le signe de $f'$ de part et d'autre pour conclure à un maximum.",
+    tags: ["premiere", "maths", "variations", "optimisation", "template"],
+    generate: () => {
+      // f(x) = −a·x² + b·x : maximum en b/(2a), valeur b²/(4a).
+      const contexte = pickOne([
+        {
+          quoi: "La recette d'un loueur de kayaks",
+          symbole: "R",
+          variable: "le prix d'une location, en euros",
+          unite: "€",
+          demande: "recette maximale",
+        },
+        {
+          quoi: "Le bénéfice d'un atelier",
+          symbole: "B",
+          variable: "le nombre d'objets vendus",
+          unite: "€",
+          demande: "bénéfice maximal",
+        },
+        {
+          quoi: "L'aire d'un enclos rectangulaire",
+          symbole: "A",
+          variable: "une longueur, en mètres",
+          unite: "m²",
+          demande: "aire maximale",
+        },
+        {
+          quoi: "La hauteur d'un ballon lancé vers le haut",
+          symbole: "h",
+          variable: "le temps, en secondes",
+          unite: "m",
+          demande: "hauteur maximale",
+        },
+        {
+          quoi: "Le nombre de visiteurs d'une exposition",
+          symbole: "V",
+          variable: "le nombre de jours écoulés",
+          unite: "visiteurs",
+          demande: "affluence maximale",
+        },
+      ] as const);
+      // On choisit le sommet ENTIER : b = 2·a·sommet.
+      const a = pickOne([1, 2, 5] as const);
+      const sommet = pickOne([3, 4, 5, 6, 8, 10, 12, 15, 20] as const);
+      const b = 2 * a * sommet;
+      const maxi = a * sommet * sommet;
+      const correct = `${maxi} ${contexte.unite}, atteint pour $x = ${sommet}$`;
+      return {
+        text:
+          `${contexte.quoi} est modélisé par $${contexte.symbole}(x) = -${a === 1 ? "" : a}x^2 + ${b}x$, ` +
+          `où $x$ est ${contexte.variable}. Quelle est la ${contexte.demande} ?`,
+        format: "qcm",
+        choices: quatreChoixVar(correct, [
+          `${sommet} ${contexte.unite}, atteint pour $x = ${maxi}$`,
+          `${b} ${contexte.unite}, atteint pour $x = ${sommet}$`,
+          `${maxi} ${contexte.unite}, atteint pour $x = ${2 * sommet}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Optimiser une grandeur, c'est chercher l'extremum de la fonction qui la modélise : on dérive, on annule, on vérifie le signe de la dérivée de part et d'autre.",
+          `On calcule $${contexte.symbole}'(x) = -${2 * a}x + ${b}$, puis on résout $${contexte.symbole}'(x) = 0$.`,
+          `$-${2 * a}x + ${b} = 0$ donne $x = ${sommet}$. La dérivée est positive avant et négative après : c'est bien un MAXIMUM. Sa valeur vaut $${contexte.symbole}(${sommet}) = ${maxi}$.`,
+          `La ${contexte.demande} est de $${maxi}$ ${contexte.unite}, atteinte pour $x = ${sommet}$. ⛔ Les deux réponses attendues sont la VALEUR de l'extremum et l'ABSCISSE où il est atteint : n'en donner qu'une laisse la question à moitié résolue.`
         ),
       };
     },

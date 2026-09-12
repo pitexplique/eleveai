@@ -144,6 +144,54 @@ function cercleTrigo(angleDeg: number, labelPoint: string, labelArc?: string): C
   };
 }
 
+/**
+ * DEUX points images sur le cercle, et la symétrie qui les échange.
+ *
+ * ⛔ POURQUOI CE SECOND HELPER (12/09/2026). Deux items d'angles associés
+ * disaient « en t'appuyant sur LA FIGURE » et ne portaient AUCUNE figure. Un
+ * balayage des 1 387 items de première spé en a trouvé trois dans ce cas : on
+ * demandait à l'élève de lire quelque chose qui n'était pas là. Et
+ * `cercleTrigo` ne pouvait pas servir ici — il ne dessine qu'un point, alors
+ * que l'énoncé parle des DEUX points images et de ce qui les relie.
+ *
+ * ⚠️ La symétrie ne se DIT pas sur la figure — le type `cercle` ne porte pas de
+ * légende. Elle est nommée dans l'explication de chaque item, qui est de toute
+ * façon l'endroit où l'élève la lit après avoir répondu.
+ */
+function cercleDeuxPoints(
+  angleM: number,
+  angleN: number,
+  labelM: string,
+  labelN: string,
+): CanvasFigure {
+  const cx = 170;
+  const cy = 140;
+  const r = 105;
+  const pos = (deg: number) => ({
+    x: Math.round(cx + r * Math.cos((deg * Math.PI) / 180)),
+    y: Math.round(cy - r * Math.sin((deg * Math.PI) / 180)),
+  });
+  const M = pos(angleM);
+  const N = pos(angleN);
+  return {
+    kind: "cercle",
+    size: { width: 340, height: 280 },
+    circle: { cx, cy, r, showCircle: true },
+    points: [
+      { id: "O", x: cx, y: cy, label: "O", color: "#0f172a", highlight: true },
+      { id: "I", x: cx + r, y: cy, label: "I" },
+      { id: "M", x: M.x, y: M.y, label: labelM, color: "#dc2626", highlight: true },
+      { id: "N", x: N.x, y: N.y, label: labelN, color: "#2563eb", highlight: true },
+    ],
+    segments: [
+      { id: "rayon-i", kind: "rayon", from: "O", to: "I", color: "#94a3b8" },
+      { id: "rayon-m", kind: "rayon", from: "O", to: "M", color: "#dc2626" },
+      { id: "rayon-n", kind: "rayon", from: "O", to: "N", color: "#2563eb" },
+    ],
+    display: { showLabels: true, showPoints: true, showCenter: true },
+  };
+}
+
 export const trigonometrieBank: TutorBankItemV4[] = [
   /* ===================== TRIG_RADIAN ===================== */
   {
@@ -2470,6 +2518,11 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     format: "open",
     expected: ["ordonnee", "ordonnée", "conservee", "conservée", "meme", "même", "symetrie", "symétrie"],
     comparator: "contains_keyword",
+    // ⛔ CET ENONCE PROMETTAIT UNE FIGURE QU'IL N'AVAIT PAS (12/09/2026).
+    // « Explique son erreur en t'appuyant sur la figure » — et rien à regarder.
+    // Les deux points images de x et de π − x, et leur symétrie par rapport à
+    // l'axe des ordonnées : c'est la figure qui donne la réponse.
+    canvas: cercleDeuxPoints(50, 130, "M(x)", "N(π − x)"),
     hint: "Que devient l'ordonnée dans une symétrie par rapport à l'axe des ordonnées ?",
     explanation: exp(
       "Le sinus est l'ordonnée du point image : pour savoir ce qu'il devient, il suffit de regarder ce que la symétrie fait à l'ordonnée.",
@@ -2541,6 +2594,17 @@ export const trigonometrieBank: TutorBankItemV4[] = [
         format: "open",
         expected: c.mots,
         comparator: "contains_keyword",
+        // La figure MONTRE les deux points dont parle l'énoncé, et la symétrie
+        // se lit sur leur position — pas dans le souvenir d'une formule.
+        // L'angle du second point se DÉDUIT de la symétrie annoncée, plutôt que
+        // d'être recopié dans chaque cas : deux écritures du même fait finissent
+        // toujours par diverger.
+        canvas: cercleDeuxPoints(
+          50,
+          c.sym.includes("ordonnées") ? 130 : c.sym.includes("centre") ? 230 : -50,
+          "M(x)",
+          `N(${c.q.replace(/\cos|\sin/, "").replace(/[()]/g, "").replace(/\pi/g, "π").trim()})`,
+        ),
         explanation: exp(
           "Chaque formule d'angle associé traduit une symétrie du cercle : c'est la figure qui donne le résultat, pas la mémoire.",
           `Ici les points images sont échangés par ${c.sym}.`,
