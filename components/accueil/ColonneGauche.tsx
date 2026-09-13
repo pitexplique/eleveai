@@ -29,7 +29,9 @@ import { useEleve } from "@/context/EleveContext";
 import { ouvrirEcrireAuProf } from "@/lib/ecrireAuProf";
 import { PROFILS } from "@/lib/matrice/profils";
 import ResumeEleve from "@/components/accueil/ResumeEleve";
+import PhotoExercice from "@/components/photo-exercice/PhotoExercice";
 import { EVENEMENT_NOUVELLE_DEMANDE } from "@/lib/matrice/historique";
+import { Camera } from "lucide-react";
 
 // ⛔ CETTE COLONNE NE LIT PLUS `eleveai.ia.profil` (17/08/2026). Elle en gardait
 // une copie pour écrire la classe sous le nom du compte, et cette clé ne dit pas
@@ -175,6 +177,20 @@ export default function ColonneGauche() {
           >
             <IconePanneau className="h-5 w-5" />
           </button>
+        </div>
+
+        {/* ⭐⭐ 13/09/2026 — LA FEUILLE PHOTOGRAPHIÉE, EN TÊTE DE COLONNE.
+            Frédéric : « le choix sur la partie droite, aller où ils veulent ;
+            à gauche les recommandations à partir d'une feuille photographiée ».
+            La colonne cesse d'être une liste de liens qui doublent les cartes :
+            elle devient l'endroit où l'on montre sa feuille et où l'on reçoit
+            les séries qui vont avec. Sans compte, sans requête tant qu'on n'a
+            rien déposé — la règle de poids de l'en-tête tient.
+            ⚠️ Elle est fermée par défaut depuis le 10/09 (« je ne la regarde
+            jamais ») : c'est pour ça que le bouton replié, plus bas, est
+            devenu une caméra lisible et non plus un pictogramme à demi effacé. */}
+        <div className="mb-4">
+          <PhotoExercice compact />
         </div>
 
         {/* ⭐ LE RÉSUMÉ, À LA PLACE DU RÉCENT (29/08/2026). Il porte les portes
@@ -343,15 +359,26 @@ export default function ColonneGauche() {
           ⭐ Adouci le 07/08 : à demi effacé au repos, net au survol. Posé au
           milieu du bord gauche, il attirait l'œil plus que la question posée au
           centre de l'écran. */}
+      {/* ⭐ 13/09/2026 — LE BOUTON REPLIÉ EST UNE CAMÉRA, ET IL SE LIT. Le
+          pictogramme à demi effacé du 07/08 convenait à une colonne de liens
+          que personne ne venait chercher ; il ne convient plus à une colonne
+          qui porte le geste « montre ta feuille ». Il dit ce qu'il ouvre, en
+          toutes lettres, et reste au bord gauche pour ne pas concurrencer la
+          question posée au centre. */}
       {replie && (
         <button
           type="button"
           onClick={() => basculerPli(false)}
-          aria-label="Afficher mes activités"
-          title="Afficher mes activités"
-          className="fixed left-2 top-1/2 z-40 hidden -translate-y-1/2 rounded-xl border border-slate-200 bg-white/70 p-2 text-slate-400 opacity-60 shadow-sm transition hover:border-slate-300 hover:bg-white hover:text-slate-800 hover:opacity-100 lg:block"
+          aria-label="Photographier un exercice"
+          title="Photographier un exercice : les séries du coach qui vont avec"
+          className="fixed left-2 top-1/2 z-40 hidden -translate-y-1/2 flex-col items-center gap-1 rounded-xl border border-orange-200 bg-orange-50 px-2 py-2 text-center text-[10px] font-bold leading-tight text-orange-900 shadow-sm transition hover:border-orange-400 hover:bg-orange-100 lg:flex"
         >
-          <IconePanneau className="h-5 w-5" />
+          <Camera className="h-5 w-5 text-orange-700" aria-hidden="true" />
+          <span>
+            Photographier
+            <br />
+            un exercice
+          </span>
         </button>
       )}
 
@@ -370,13 +397,16 @@ export default function ColonneGauche() {
           porte plus l'historique des questions tapées. Un nom qui survit à ce
           qu'il désignait est un nom faux, et c'est au lecteur d'écran qu'il
           ment en premier. */}
+      {/* 13/09/2026 : sur téléphone, c'est l'appareil photo qu'on a en main —
+          le bouton du tiroir le dit, et le tiroir s'ouvre sur la brique photo. */}
       <button
         type="button"
         onClick={() => setTiroirOuvert(true)}
-        aria-label="Ouvrir mes activités"
-        className="fixed bottom-4 left-3 z-40 rounded-full border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-600 shadow-lg lg:hidden print:hidden"
+        aria-label="Photographier un exercice et ouvrir mes activités"
+        className="fixed bottom-4 left-3 z-40 flex items-center gap-2 rounded-full border border-orange-300 bg-white px-3.5 py-2.5 text-sm font-bold text-orange-900 shadow-lg lg:hidden print:hidden"
       >
-        ☰
+        <Camera className="h-4 w-4 text-orange-700" aria-hidden="true" />
+        Photo d&apos;un exercice
       </button>
       {tiroirOuvert && (
         <div className="fixed inset-0 z-50 lg:hidden">

@@ -28,7 +28,7 @@ import FloatingCoach from "@/components/FloatingCoach";
 import BoiteAOutils from "@/components/BoiteAOutils";
 import { useEleve } from "@/context/EleveContext";
 import Link from "next/link";
-import { BookOpen, ChevronRight, CirclePlay, Play } from "lucide-react";
+import { BookOpen, Camera, ChevronRight, CirclePlay, Play } from "lucide-react";
 import { ficheClasseSource, ficheHrefPourCoach } from "@/lib/fiches/registre";
 import NotionAvecApercu from "@/components/coach/NotionAvecApercu";
 import { useNotionsPliees } from "@/components/coach/useNotionsPliees";
@@ -738,7 +738,12 @@ export default function CoachIA() {
                 className={[
                   "w-full rounded-full border-2 border-slate-300 bg-white py-4 pl-14 text-base text-slate-800 shadow-sm outline-none placeholder:text-slate-400 focus:border-teal-700 focus:ring-2 focus:ring-teal-700/20 sm:text-lg",
                   "[&::-webkit-search-cancel-button]:appearance-none",
-                  search ? "pr-14" : "pr-5",
+                  /* 13/09 : la caméra occupe la droite en permanence (56 px) ;
+                     la croix, quand il y a quelque chose à effacer, se place
+                     à sa gauche. « Rechercher une notion… » tient encore dans
+                     les 231 px restants à 375 px — c'est le chiffre mesuré le
+                     10/09 pour la réserve du bouton, qui n'existait pas alors. */
+                  search ? "pr-24" : "pr-14",
                 ].join(" ")}
               />
               {search ? (
@@ -746,11 +751,30 @@ export default function CoachIA() {
                   type="button"
                   onClick={() => setSearch("")}
                   aria-label="Effacer la recherche"
-                  className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-teal-700 text-lg text-white transition hover:bg-teal-800"
+                  className="absolute right-14 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-teal-700 text-lg text-white transition hover:bg-teal-800"
                 >
                   <span aria-hidden="true">×</span>
                 </button>
               ) : null}
+              {/* ⭐ 13/09/2026 — LA FEUILLE PHOTOGRAPHIÉE, DANS LE CHAMP. Frédéric
+                  voulait la photo « sur la barre latérale gauche », puis : « mon
+                  œil ne va jamais sur la barre latérale gauche ». Elle est donc
+                  là où l'œil va : dans la recherche, à droite de la loupe, comme
+                  Lens dans la barre Google. Taper trois lettres, ou montrer la
+                  feuille — c'est la même question posée de deux façons.
+                  Sur téléphone, c'est le seul endroit où elle existe sur cette
+                  page (la colonne des classes n'y est pas). `coach_photo`
+                  compte les clics, comme `coach_classe`. */}
+              <Link
+                href={`/photo-exercice?classe=${encodeURIComponent(classe)}&matiere=${encodeURIComponent(matiere)}`}
+                prefetch={false}
+                onClick={() => track("coach_photo", { matiere, classe })}
+                aria-label="Photographier un exercice : trouver les séries qui vont avec"
+                title="Photographier un exercice : trouver les séries qui vont avec"
+                className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-orange-200 bg-orange-50 text-orange-800 transition hover:border-orange-400 hover:bg-orange-100"
+              >
+                <Camera className="h-5 w-5" aria-hidden="true" />
+              </Link>
             </div>
 
             <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">

@@ -362,6 +362,10 @@ const ROUTES: RouteConfig[] = [
   // Console. Elle était en noindex parce qu'elle est en essai ; elle est
   // maintenant assumée comme une porte, avec un titre qui se cherche.
   { path: "/photo-cours",      priority: 0.8,  changeFrequency: "monthly", lastMod: new Date("2026-08-12") },
+  // 13/09/2026 : la feuille d'exercices de l'élève → les séries du coach. Sans
+  // compte. Liée depuis le champ de recherche du coach et la colonne de
+  // l'accueil : les trois gestes sont faits.
+  { path: "/photo-exercice",   priority: 0.8,  changeFrequency: "monthly", lastMod: new Date("2026-09-13") },
   { path: "/francais-de-l-etranger", priority: 0.9, changeFrequency: "weekly", lastMod: new Date("2026-07-10") },
 
   // ── PROGRAMME PAR CLASSE (moteur SEO n°2 : les compétences des banques
