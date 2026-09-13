@@ -1387,6 +1387,32 @@ def acc_974_temperature(d):
     d.text((300, 478), "l'altitude, pas la distance", font=police("arialbd.ttf", 34), fill=ROUGE)
 
 
+def acc_fonctions(d):
+    """⭐ L'aire de jeux de la vidéo, redessinée point par point avec LES MÊMES
+    formules : la vignette tient la promesse de la première seconde."""
+    import math
+    X0, X1, Y0, Y1 = 300, 860, 545, 335          # boîte en pixels (y inversé)
+    def px(x, y):
+        return (X0 + x / 16 * (X1 - X0), Y0 - y / 5 * (Y0 - Y1))
+    def trace(f, a, b, coul, ep=6, n=60):
+        pts = [px(a + (b - a) * i / n, f(a + (b - a) * i / n)) for i in range(n + 1)]
+        d.line(pts, fill=coul, width=ep, joint="curve")
+    GRIS, ORANGE, VIOLET = (140, 150, 160), (249, 115, 22), (139, 92, 246)
+    sol = 0.5
+    trace(lambda x: sol, 0, 16, GRIS, 5, 2)
+    trace(lambda x: 0.9 * (x - 0.7) + 2.5, 0.7, 2.5, ORANGE, 7, 2)
+    trace(lambda x: -0.9 * (x - 4.3) + 2.5, 2.5, 4.3, ORANGE, 7, 2)
+    for xm in (1.0, 4.0):
+        d.line([px(xm, sol), px(xm, 2.77)], fill=NAVY, width=4)
+    trace(lambda x: -0.45 * (x - 6.5) ** 2 + 2.3, 4.5, 8.5, VERT)
+    trace(lambda x: sol + 0.12 * (math.exp(1.4 * (x - 9)) - 1), 9, 11, JAUNE)
+    d.line([px(11.3, sol), px(11.3, 3.5)], fill=NAVY, width=4)
+    trace(lambda x: sol + 0.9 / (x - 11.0), 11.3, 13.8, VIOLET)
+    trace(lambda x: sol + 0.7 * math.log(1 + 2.5 * (x - 14)), 14, 16, BLEU)
+    cx, cy = px(6.5, 4.4)
+    d.ellipse([cx - 16, cy - 16, cx + 16, cy + 16], fill=JAUNE)
+
+
 def acc_sondages(d):
     """Les trois segments qui ne se croisent que sur un dixième de point.
     ⛔ Aucun nom de candidat : seulement les chiffres et les instituts.
@@ -1434,6 +1460,13 @@ def acc_pisa_2025(d):
 
 
 NOTIONS = {
+    # ⭐ Le titre est la phrase par laquelle Frédéric ouvrait ses cours.
+    "eleveai-maths-bases-fonctions": {
+        "badge": "LES MATHS EN VRAI", "titre": ["ÇA SERT À RIEN…", "SAUF À PRÉVOIR"], "taille": 58,
+        "sous": "sept formules, une aire de jeux",
+        "accroche": acc_fonctions,
+        "dossier": "bases/maths/fr",
+    },
     "eleveai-maths-actu-sondages": {
         # ⚠️ EXACTEMENT DEUX LIGNES : le gabarit paysage lit `titre[1]` sans
         # garde et lève un IndexError sur un titre d'une seule ligne.

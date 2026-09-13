@@ -1488,6 +1488,84 @@
         "ordre de grandeur",
         "Shorts"
       ]
+    },
+    {
+      "id": "bases-fonctions",
+      "serie": "Les maths en vrai",
+      "type": "longue",
+      "fichier": "bases/maths/paysage/fr/fonctions/eleveai-maths-bases-fonctions.mp4",
+      "miniature": "bases/maths/fr/eleveai-maths-bases-fonctions.png",
+      "titre": "Les maths, ça sert à rien… sauf à prévoir",
+      "accroche": "Les maths, ça sert à rien. Sauf à prévoir.\n\nCette vidéo ne te demande pas d'apprendre des formes de courbes par cœur : elle te montre à quoi elles servent. D'abord à dessiner — une constante pour le sol, une affine pour un toit, une parabole pour une colline. Mais surtout à prévoir. Modéliser, c'est remplacer une situation réelle par une formule, pour calculer ce qui n'est pas encore arrivé.\n\nTrois questions, trois fonctions :\n• COMBIEN ? → l'exponentielle (une vidéo qui double ses vues chaque jour)\n• QUAND ? → le logarithme (la même vidéo, la question inverse)\n• JUSQU'OÙ ? → la fonction inverse 1/x (un gâteau partagé entre de plus en plus de monde)\n\nÀ la fin, on dessine une aire de jeux entière avec sept formules, sans un seul trait à la main.\n\nLes chiffres sont des modèles, pas des prédictions : une formule dit ce qui arrivera si les choses continuent comme maintenant. Aucun niveau requis.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les maths, ça sert à rien…"
+        ],
+        [
+          "00:15",
+          "Ce que tu sauras à la fin"
+        ],
+        [
+          "00:32",
+          "Dessiner : le sol"
+        ],
+        [
+          "00:51",
+          "Dessiner : le toit"
+        ],
+        [
+          "01:17",
+          "Dessiner : la colline"
+        ],
+        [
+          "01:36",
+          "Modéliser, c'est prévoir"
+        ],
+        [
+          "02:05",
+          "COMBIEN ? L'exponentielle"
+        ],
+        [
+          "02:35",
+          "QUAND ? Le logarithme"
+        ],
+        [
+          "03:02",
+          "JUSQU'OÙ ? La fonction inverse"
+        ],
+        [
+          "03:30",
+          "Défi"
+        ],
+        [
+          "04:03",
+          "Correction"
+        ],
+        [
+          "04:33",
+          "Sept formules, une aire de jeux"
+        ],
+        [
+          "05:04",
+          "Tu sais maintenant"
+        ],
+        [
+          "05:32",
+          "S'entraîner sur le coach"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/accueil",
+      "tags": [
+        "maths",
+        "fonctions",
+        "modéliser",
+        "fonction exponentielle",
+        "logarithme",
+        "fonction inverse",
+        "fonction affine",
+        "parabole"
+      ]
     }
   ]
 }
