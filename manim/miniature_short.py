@@ -289,14 +289,16 @@ def acc_sond_mille(d):
     # La grande population et la petite : la MÊME cuillère jaune dans les deux.
     # ⚠️ Assez grandes pour se comparer dans une grille de vignettes : à 220 px
     # de côté, le carré jaune n'était plus qu'un grain.
-    d.rectangle([250, 570, 530, 850], outline=BLEU, width=6)
-    d.rectangle([358, 678, 422, 742], fill=JAUNE)
-    d.rectangle([680, 690, 810, 820], outline=VERT, width=6)
-    d.rectangle([713, 723, 777, 787], fill=JAUNE)
-    centre(d, 390, 870, "48 millions", police("arialbd.ttf", 36), BLEU)
-    centre(d, 745, 840, "500 000", police("arialbd.ttf", 36), VERT)
-    centre(d, W // 2, 960, "même carré jaune", police("ariblk.ttf", 44), NAVY)
-    centre(d, W // 2, 1030, "même précision", police("ariblk.ttf", 52), VERT)
+    # ⚠️ Descendu de 70 px : le sous-titre du gabarit descend jusqu'à ~590 et
+    # « et ça suffit » mordait sur le haut du grand carré.
+    d.rectangle([250, 640, 530, 920], outline=BLEU, width=6)
+    d.rectangle([358, 748, 422, 812], fill=JAUNE)
+    d.rectangle([680, 760, 810, 890], outline=VERT, width=6)
+    d.rectangle([713, 793, 777, 857], fill=JAUNE)
+    centre(d, 390, 940, "48 millions", police("arialbd.ttf", 36), BLEU)
+    centre(d, 745, 910, "500 000", police("arialbd.ttf", 36), VERT)
+    centre(d, W // 2, 1030, "même carré jaune", police("ariblk.ttf", 44), NAVY)
+    centre(d, W // 2, 1100, "même précision", police("ariblk.ttf", 52), VERT)
 
 
 def acc_sond_trois(d):
@@ -318,6 +320,28 @@ def acc_sond_racine(d):
         d.text((620, y), m, font=f, fill=coul)
     centre(d, W // 2, 950, "9 × plus de monde", police("arialbd.ttf", 40), NAVY)
     centre(d, W // 2, 1010, "pour 1 point", police("ariblk.ttf", 52), ROUGE)
+
+
+def acc_sond_avis(d):
+    """⭐ L'ARGUMENT DE LA VIDÉO EN UNE IMAGE : le large flou orange (± 3 points)
+    et, dedans, le trait vert de ton poids (0,1 point). On voit le rapport de
+    trente sans lire un chiffre — et c'est ça qui dissout la contradiction
+    « voter ou être sondé »."""
+    # ⚠️ Pas d'orange dans la palette des vignettes : on le pose ici plutôt que
+    # d'élargir la charte pour une image. C'est l'ORANGE_RETENUE de la vidéo,
+    # pour que la miniature et l'écran disent la même chose de la même couleur.
+    ORANGE = (249, 115, 22)
+    # ⚠️ Le sous-titre du gabarit descend jusqu'à ~580 : le libellé du flou posé
+    # à 570 lui rentrait dedans. Tout le bloc descend de 90 px, ce qui remplit
+    # au passage le vide qui restait au-dessus de la signature.
+    # le flou : 6 points de large
+    d.rectangle([250, 700, 830, 880], fill=(253, 224, 187), outline=ORANGE, width=5)
+    centre(d, 540, 655, "le flou du sondage : 6 points", police("arialbd.ttf", 36), ORANGE)
+    # toi : 0,1 point, à la MÊME échelle — 1/60 de la largeur du flou
+    d.rectangle([535, 678, 545, 902], fill=VERT)
+    centre(d, 540, 925, "toi : 0,1 point", police("ariblk.ttf", 42), VERT)
+    centre(d, W // 2, 1020, "un énorme poids", police("arialbd.ttf", 42), NAVY)
+    centre(d, W // 2, 1090, "sur un nombre qui tremble", police("ariblk.ttf", 44), ROUGE)
 
 
 def acc_sond_avance(d):
@@ -425,6 +449,11 @@ def acc_fr_ordre(d):
 
 
 SHORTS = {
+    "eleveai-maths-actu-sondages-short-avis": {
+        "badge": "QUI A RAISON ?", "titre": ["TON AVIS PÈSE", "48 000 × PLUS"], "taille": 84,
+        "sous": "et se noie quand même", "accroche": acc_sond_avis,
+        "dossier": "actu/maths/fr",
+    },
     "eleveai-maths-actu-sondages-short-mille": {
         "badge": "QUI A RAISON ?", "titre": ["1 000 POUR", "48 MILLIONS"], "taille": 88,
         "sous": "et ça suffit", "accroche": acc_sond_mille,

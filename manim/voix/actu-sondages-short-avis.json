@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Est-ce que ton avis compte ? Dans l'urne, ta voix est une parmi quarante-huit millions. Dans un sondage, une parmi mille.",
+  "01-facteur": "Quarante-huit millions divisé par mille : quarante-huit mille. Ton avis pèse donc quarante-huit mille fois plus lourd dans un sondage que dans l'isoloir. Ta seule réponse déplace le score d'un dixième de point.",
+  "02-mais": "Sauf que ce score est donné à trois points près. Ton dixième de point se perd dans un flou trente fois plus grand que lui. Un énorme poids, sur un nombre qui tremble.",
+  "03-urne": "Dans l'urne, c'est l'inverse. Ta voix est minuscule, mais il n'y a aucune marge d'erreur : on ne mesure pas, on COMPTE. Ta voix est dans le total, exactement, et elle y restera.",
+  "04-retenir": "Retiens ceci : un gros poids sur une mesure floue vaut moins qu'un petit poids sur un compte exact. Un sondage estime. Une élection décide.",
+  "05-fin": "Entraîne-toi sur le coach maths d'éleveai point fr. Et abonne-toi à la chaîne !"
+}

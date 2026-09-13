@@ -1378,7 +1378,7 @@
         ]
       ],
       "fiche": "https://www.eleveai.fr/accueil",
-      "source": "Source des trois sondages : Cluster17 (31 août-1er sept., n = 1 711), Ipsos (31 août-2 sept., n = 1 500), OpinionWay (9-10 sept., n = 1 001), recensés sur fr.wikipedia.org/wiki/Liste_de_sondages_sur_l'élection_présidentielle_française_de_2027 (consulté le 12/09/2026). Les marges d'erreur sont CALCULÉES (1,96 racine de p(1-p)/n), pas recopiées. Les instituts travaillent par quotas et non par tirage aléatoire simple : l'ordre de grandeur tient, le dixième de point non — c'est précisément le propos de la vidéo.",
+      "source": "Source des trois sondages : Cluster17 (31 août-1er sept., n = 1 711), Ipsos (31 août-2 sept., n = 1 500), OpinionWay (9-10 sept., n = 1 001), recensés sur fr.wikipedia.org/wiki/Liste_de_sondages_sur_l'élection_présidentielle_française_de_2027 (consulté le 12/09/2026). Les marges d'erreur sont CALCULÉES (1,96 racine de p(1-p)/n), pas recopiées. Les instituts travaillent par quotas et non par tirage aléatoire simple : l'ordre de grandeur tient, le dixième de point non — c'est précisément le propos de la vidéo. Électorat : environ 48 millions d'électeurs résidant en France (INSEE, « Corps électoral 2026 », Insee Focus n° 378 : 48,7 millions), auxquels s'ajoutent 1,7 million d'inscrits à l'étranger, que les sondages n'interrogent pas.",
       "tags": [
         "maths",
         "sondages",
@@ -1399,7 +1399,7 @@
       "titre": "Pourquoi 1 000 personnes suffisent pour 48 millions",
       "accroche": "Et la taille de la population n'intervient NULLE PART dans le calcul de la précision. Un sondage de 1 000 personnes est aussi précis en France qu'au Luxembourg. C'est la règle de la soupe : une cuillère bien mélangée renseigne autant sur une casserole que sur une marmite.",
       "fiche": "https://www.eleveai.fr/accueil",
-      "source": "Source des trois sondages : Cluster17 (31 août-1er sept., n = 1 711), Ipsos (31 août-2 sept., n = 1 500), OpinionWay (9-10 sept., n = 1 001), recensés sur fr.wikipedia.org/wiki/Liste_de_sondages_sur_l'élection_présidentielle_française_de_2027 (consulté le 12/09/2026). Les marges d'erreur sont CALCULÉES (1,96 racine de p(1-p)/n), pas recopiées. Les instituts travaillent par quotas et non par tirage aléatoire simple : l'ordre de grandeur tient, le dixième de point non — c'est précisément le propos de la vidéo.",
+      "source": "Source des trois sondages : Cluster17 (31 août-1er sept., n = 1 711), Ipsos (31 août-2 sept., n = 1 500), OpinionWay (9-10 sept., n = 1 001), recensés sur fr.wikipedia.org/wiki/Liste_de_sondages_sur_l'élection_présidentielle_française_de_2027 (consulté le 12/09/2026). Les marges d'erreur sont CALCULÉES (1,96 racine de p(1-p)/n), pas recopiées. Les instituts travaillent par quotas et non par tirage aléatoire simple : l'ordre de grandeur tient, le dixième de point non — c'est précisément le propos de la vidéo. Électorat : environ 48 millions d'électeurs résidant en France (INSEE, « Corps électoral 2026 », Insee Focus n° 378 : 48,7 millions), auxquels s'ajoutent 1,7 million d'inscrits à l'étranger, que les sondages n'interrogent pas.",
       "tags": [
         "maths",
         "sondages",
@@ -1418,7 +1418,7 @@
       "titre": "4,5 points d'écart entre trois sondages de la même semaine",
       "accroche": "Trois instituts, trois chiffres, 4,5 points d'écart. Chacun porte une marge de 2 à 3 points — et les trois intervalles ne se croisent que sur 0,1 point. Le hasard du tirage n'explique donc pas tout : ce qui reste s'appelle l'effet d'institut.",
       "fiche": "https://www.eleveai.fr/accueil",
-      "source": "Source des trois sondages : Cluster17 (31 août-1er sept., n = 1 711), Ipsos (31 août-2 sept., n = 1 500), OpinionWay (9-10 sept., n = 1 001), recensés sur fr.wikipedia.org/wiki/Liste_de_sondages_sur_l'élection_présidentielle_française_de_2027 (consulté le 12/09/2026). Les marges d'erreur sont CALCULÉES (1,96 racine de p(1-p)/n), pas recopiées. Les instituts travaillent par quotas et non par tirage aléatoire simple : l'ordre de grandeur tient, le dixième de point non — c'est précisément le propos de la vidéo.",
+      "source": "Source des trois sondages : Cluster17 (31 août-1er sept., n = 1 711), Ipsos (31 août-2 sept., n = 1 500), OpinionWay (9-10 sept., n = 1 001), recensés sur fr.wikipedia.org/wiki/Liste_de_sondages_sur_l'élection_présidentielle_française_de_2027 (consulté le 12/09/2026). Les marges d'erreur sont CALCULÉES (1,96 racine de p(1-p)/n), pas recopiées. Les instituts travaillent par quotas et non par tirage aléatoire simple : l'ordre de grandeur tient, le dixième de point non — c'est précisément le propos de la vidéo. Électorat : environ 48 millions d'électeurs résidant en France (INSEE, « Corps électoral 2026 », Insee Focus n° 378 : 48,7 millions), auxquels s'ajoutent 1,7 million d'inscrits à l'étranger, que les sondages n'interrogent pas.",
       "tags": [
         "maths",
         "sondages",
@@ -1438,7 +1438,7 @@
       "titre": "4 × plus de monde ne rend pas un sondage 4 × plus précis",
       "accroche": "1 000 personnes : ± 3 points. 4 000 : ± 1,5 point. 9 000 : ± 1 point. La précision ne suit pas le nombre de personnes, elle suit sa RACINE CARRÉE — et c'est pour ça que personne ne sonde 10 000 personnes.",
       "fiche": "https://www.eleveai.fr/accueil",
-      "source": "Source des trois sondages : Cluster17 (31 août-1er sept., n = 1 711), Ipsos (31 août-2 sept., n = 1 500), OpinionWay (9-10 sept., n = 1 001), recensés sur fr.wikipedia.org/wiki/Liste_de_sondages_sur_l'élection_présidentielle_française_de_2027 (consulté le 12/09/2026). Les marges d'erreur sont CALCULÉES (1,96 racine de p(1-p)/n), pas recopiées. Les instituts travaillent par quotas et non par tirage aléatoire simple : l'ordre de grandeur tient, le dixième de point non — c'est précisément le propos de la vidéo.",
+      "source": "Source des trois sondages : Cluster17 (31 août-1er sept., n = 1 711), Ipsos (31 août-2 sept., n = 1 500), OpinionWay (9-10 sept., n = 1 001), recensés sur fr.wikipedia.org/wiki/Liste_de_sondages_sur_l'élection_présidentielle_française_de_2027 (consulté le 12/09/2026). Les marges d'erreur sont CALCULÉES (1,96 racine de p(1-p)/n), pas recopiées. Les instituts travaillent par quotas et non par tirage aléatoire simple : l'ordre de grandeur tient, le dixième de point non — c'est précisément le propos de la vidéo. Électorat : environ 48 millions d'électeurs résidant en France (INSEE, « Corps électoral 2026 », Insee Focus n° 378 : 48,7 millions), auxquels s'ajoutent 1,7 million d'inscrits à l'étranger, que les sondages n'interrogent pas.",
       "tags": [
         "maths",
         "sondages",
@@ -1457,13 +1457,34 @@
       "titre": "0,5 point d'avance, ce n'est pas une avance",
       "accroche": "34 % contre 33,5 %, avec 3 points de marge : les deux segments se recouvrent presque entièrement. La règle tient en une phrase — si l'écart est plus petit que la marge, il n'y a pas d'écart. Y lire un classement, c'est lire le bruit.",
       "fiche": "https://www.eleveai.fr/accueil",
-      "source": "Source des trois sondages : Cluster17 (31 août-1er sept., n = 1 711), Ipsos (31 août-2 sept., n = 1 500), OpinionWay (9-10 sept., n = 1 001), recensés sur fr.wikipedia.org/wiki/Liste_de_sondages_sur_l'élection_présidentielle_française_de_2027 (consulté le 12/09/2026). Les marges d'erreur sont CALCULÉES (1,96 racine de p(1-p)/n), pas recopiées. Les instituts travaillent par quotas et non par tirage aléatoire simple : l'ordre de grandeur tient, le dixième de point non — c'est précisément le propos de la vidéo.",
+      "source": "Source des trois sondages : Cluster17 (31 août-1er sept., n = 1 711), Ipsos (31 août-2 sept., n = 1 500), OpinionWay (9-10 sept., n = 1 001), recensés sur fr.wikipedia.org/wiki/Liste_de_sondages_sur_l'élection_présidentielle_française_de_2027 (consulté le 12/09/2026). Les marges d'erreur sont CALCULÉES (1,96 racine de p(1-p)/n), pas recopiées. Les instituts travaillent par quotas et non par tirage aléatoire simple : l'ordre de grandeur tient, le dixième de point non — c'est précisément le propos de la vidéo. Électorat : environ 48 millions d'électeurs résidant en France (INSEE, « Corps électoral 2026 », Insee Focus n° 378 : 48,7 millions), auxquels s'ajoutent 1,7 million d'inscrits à l'étranger, que les sondages n'interrogent pas.",
       "tags": [
         "maths",
         "sondages",
         "marge d'erreur",
         "esprit critique",
         "statistiques",
+        "Shorts"
+      ]
+    },
+    {
+      "id": "sondages-avis",
+      "serie": "Qui a raison ?",
+      "type": "short",
+      "renvoie_vers": "sondages-marge",
+      "fichier": "actu/maths/shorts/fr/sondages/eleveai-maths-actu-sondages-short-avis.mp4",
+      "miniature": "actu/maths/fr/eleveai-maths-actu-sondages-short-avis.png",
+      "titre": "48 000 fois plus de poids, et pourtant noyé dans le bruit",
+      "accroche": "Dans l'urne, ta voix est une parmi 48 millions. Dans un sondage, une parmi 1 000 : ton avis y pèse 48 000 fois plus lourd, et ta seule réponse déplace le score publié de 0,1 point.\n\nSauf que ce score est donné à ± 3 points près. Ton dixième de point se perd dans un flou trente fois plus grand que lui : un énorme poids, sur un nombre qui tremble.\n\nDans l'urne, c'est l'inverse — ta voix est minuscule, mais il n'y a aucune marge d'erreur. On ne mesure pas, on COMPTE.\n\nLa leçon tient en une phrase : un gros poids sur une mesure floue vaut moins qu'un petit poids sur un compte exact. Un sondage estime. Une élection décide.",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "source": "Sources : les trois sondages de début septembre 2026 (Cluster17 n = 1 711, Ipsos n = 1 500, OpinionWay n = 1 001) recensés sur Wikipédia, « Liste de sondages sur l'élection présidentielle française de 2027 », consulté le 12/09/2026.  La marge de ± 3 points est calculée (1,96 racine de p(1-p)/n pour n = 1 000). Électorat : environ 48 millions d'électeurs résidant en France (INSEE, « Corps électoral 2026 », Insee Focus n° 378 : 48,7 millions), auxquels s'ajoutent 1,7 million d'inscrits à l'étranger, que les sondages n'interrogent pas.",
+      "tags": [
+        "maths",
+        "sondages",
+        "marge d'erreur",
+        "statistiques",
+        "esprit critique",
+        "ordre de grandeur",
         "Shorts"
       ]
     }

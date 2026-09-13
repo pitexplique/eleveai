@@ -59,6 +59,7 @@ VOIX_MILLE = SONS / "actu-sondages-short-mille"
 VOIX_TROIS = SONS / "actu-sondages-short-trois"
 VOIX_RACINE = SONS / "actu-sondages-short-racine"
 VOIX_AVANCE = SONS / "actu-sondages-short-avance"
+VOIX_AVIS = SONS / "actu-sondages-short-avis"
 
 # (nom, n, score, marge) — la marge est calculée, pas recopiée.
 INSTITUTS = [
@@ -848,3 +849,151 @@ class SondagesShortAvance(ShortBases, _Sondages):
     def construct(self):
         self.ecran_accroche(); self.ecran_marge(); self.ecran_segments()
         self.ecran_verdict(); self.ecran_retenir(); self.ecran_renvoi()
+
+
+class SondagesShortAvis(ShortBases, _Sondages):
+    """« Est-ce que ton avis compte ? » — 48 000 fois plus dans un sondage… et
+    noyé dans le bruit quand même.
+
+    ⭐⭐ LA CONTRADICTION QUE FRÉDÉRIC A VUE (12/09/2026). Écrit naïvement, ce
+    short dit « ton vote pèse 48 000 fois moins que ta réponse à un sondage » —
+    et un élève en conclut légitimement qu'il vaut mieux être sondé que voter.
+    ⛔ On ne répare PAS ça par une précaution morale collée à la fin. On le
+    répare par les maths, parce que la comparaison elle-même est bancale :
+      · dans le sondage, ta réponse déplace un score de 0,1 point — sur un
+        nombre connu à ± 3 points près. Tu pèses UN TRENTIÈME DU FLOU.
+      · dans l'urne, ta voix est minuscule — mais il n'y a aucune marge
+        d'erreur : on ne mesure pas, on COMPTE. Elle est dans le total, exacte.
+    👉 Un gros poids sur une mesure floue vaut moins qu'un petit poids sur un
+    compte exact. Un sondage estime, une élection décide.
+    """
+
+    dossier_voix = VOIX_AVIS
+
+    def ecran_accroche(self):
+        self.clear()
+        self.margo_bas()
+        self.dire("00-accroche")
+        q = VGroup(
+            self.grand("Est-ce que", font_size=40, color=WHITE),
+            self.grand("ton avis compte ?", font_size=44, color=JAUNE_TITRE),
+        ).arrange(DOWN, buff=0.2).move_to([0, 2.9, 0])
+        self.play(FadeIn(q, shift=DOWN * 0.12), run_time=0.5)
+        duo = VGroup(
+            self.grand("dans l'urne", font_size=32, color=WHITE),
+            self.grand("1 sur 48 000 000", font_size=40, color=BLEU_CALCUL),
+            self.grand("dans un sondage", font_size=32, color=WHITE),
+            self.grand("1 sur 1 000", font_size=48, color=VERT_OK),
+        ).arrange(DOWN, buff=0.22).move_to([0, 0.5, 0])
+        for m in duo:
+            self.play(FadeIn(m, shift=UP * 0.1), run_time=0.34)
+        self.attendre_voix(marge=0.4)
+
+    def ecran_facteur(self):
+        self.clear()
+        self.margo_bas()
+        self.dire("01-facteur")
+        calcul = VGroup(
+            self.grand("48 000 000", font_size=40, color=BLEU_CALCUL),
+            self.grand("÷ 1 000", font_size=36, color=WHITE),
+        ).arrange(DOWN, buff=0.18).move_to([0, 2.9, 0])
+        self.play(FadeIn(calcul, shift=DOWN * 0.1), run_time=0.45)
+        gros = self.grand("48 000 ×", font_size=76, color=JAUNE_TITRE)
+        gros.move_to([0, 1.35, 0])
+        self.play(GrowFromCenter(gros), Flash(gros, color=JAUNE_TITRE, line_length=0.4))
+        bas = VGroup(
+            self.grand("plus lourd", font_size=36, color=JAUNE_TITRE),
+            self.grand("ta réponse déplace", font_size=30, color=WHITE),
+            self.grand("le score de 0,1 point", font_size=34, color=VERT_OK),
+        ).arrange(DOWN, buff=0.22).move_to([0, -0.5, 0])
+        for m in bas:
+            self.play(FadeIn(m, shift=UP * 0.1), run_time=0.36)
+        self.attendre_voix(marge=0.4)
+
+    def ecran_mais(self):
+        """⭐ L'ÉCRAN QUI RENVERSE. Le 0,1 point posé À L'ÉCHELLE du ± 3 points :
+        on voit le trait minuscule dans la large bande, et l'argument est fait
+        sans un mot de morale."""
+        self.clear()
+        self.margo_bas()
+        self.dire("02-mais")
+        self.play(Write(self.grand("Sauf que…", font_size=42,
+                                   color=ORANGE_RETENUE).move_to([0, 3.2, 0])))
+        note = VGroup(
+            self.grand("ce score est connu", font_size=30, color=WHITE),
+            self.grand("à ± 3 points près", font_size=40, color=ORANGE_RETENUE),
+        ).arrange(DOWN, buff=0.2).move_to([0, 2.25, 0])
+        self.play(FadeIn(note, shift=UP * 0.12))
+
+        # ⚠️ L'axe porte ses graduations SOUS lui (−0,38) : poser l'étiquette du
+        # trait vert à −1,05 la faisait tomber dessus. Tout l'ensemble remonte,
+        # et l'étiquette se loge entre les graduations et le verdict.
+        axe = self.axe_pourcents(0.2, pas=4, font_size=18)
+        self.play(Create(axe))
+        flou = self.bande(31.0, 37.0, 0.2, 1.3, couleur=ORANGE_RETENUE, opacite=0.35)
+        self.play(FadeIn(flou))
+        lab_flou = Text("le flou : 6 points", font_size=22, color=ORANGE_RETENUE)
+        lab_flou.move_to([0, 1.58, 0])
+        self.play(FadeIn(lab_flou))
+        # ⭐ ton poids : 0,1 point, tracé à la MÊME échelle que le flou. Le
+        # rapport de 60 se voit, il ne se calcule pas.
+        moi = self.bande(33.95, 34.05, 0.35, 1.15, couleur=VERT_OK, opacite=1.0)
+        self.play(FadeIn(moi))
+        lab_moi = Text("toi : 0,1 point", font_size=24, color=VERT_OK)
+        lab_moi.move_to([0, -0.6, 0])
+        self.play(FadeIn(lab_moi))
+
+        verdict = VGroup(
+            self.grand("un énorme poids", font_size=34, color=WHITE),
+            self.grand("sur un nombre qui TREMBLE", font_size=32, color=ROUGE_ERREUR),
+        ).arrange(DOWN, buff=0.24).move_to([0, -1.75, 0])
+        self.play(FadeIn(verdict, shift=UP * 0.12))
+        self.attendre_voix(marge=0.4)
+
+    def ecran_urne(self):
+        self.clear()
+        self.margo_bas()
+        self.dire("03-urne")
+        self.play(Write(self.grand("Dans l'urne, l'inverse", font_size=34,
+                                   color=JAUNE_TITRE).move_to([0, 3.2, 0])))
+        bloc = VGroup(
+            self.grand("ta voix est", font_size=34, color=WHITE),
+            self.grand("minuscule", font_size=42, color=BLEU_CALCUL),
+            self.grand("mais AUCUNE", font_size=34, color=VERT_OK),
+            self.grand("marge d'erreur", font_size=40, color=VERT_OK),
+        ).arrange(DOWN, buff=0.24).move_to([0, 1.6, 0])
+        for m in bloc:
+            self.play(FadeIn(m, shift=UP * 0.1), run_time=0.38)
+        fin = VGroup(
+            self.grand("on ne mesure pas", font_size=32, color=WHITE),
+            self.grand("on COMPTE", font_size=44, color=VERT_OK),
+            self.grand("elle est dans le total", font_size=28, color=WHITE),
+        ).arrange(DOWN, buff=0.2).move_to([0, -1.05, 0])
+        for m in fin:
+            self.play(FadeIn(m, shift=UP * 0.1), run_time=0.36)
+        self.play(Flash(fin[1], color=VERT_OK, line_length=0.35))
+        self.attendre_voix(marge=0.4)
+
+    def ecran_retenir(self):
+        self.clear()
+        self.margo_bas()
+        self.dire("04-retenir")
+        regle = VGroup(
+            self.grand("un gros poids", font_size=34, color=WHITE),
+            self.grand("sur une mesure FLOUE", font_size=32, color=ORANGE_RETENUE),
+            self.grand("vaut moins", font_size=36, color=JAUNE_TITRE),
+            self.grand("qu'un petit poids", font_size=32, color=WHITE),
+            self.grand("sur un compte EXACT", font_size=32, color=VERT_OK),
+        ).arrange(DOWN, buff=0.2).move_to([0, 1.8, 0])
+        cadre = SurroundingRectangle(regle, color=JAUNE_TITRE, buff=0.24, stroke_width=3)
+        self.play(FadeIn(regle), Create(cadre))
+        fin = VGroup(
+            self.grand("un sondage ESTIME", font_size=32, color=BLEU_CALCUL),
+            self.grand("une élection DÉCIDE", font_size=34, color=VERT_OK),
+        ).arrange(DOWN, buff=0.2).move_to([0, -1.35, 0])
+        self.play(FadeIn(fin, shift=UP * 0.12))
+        self.attendre_voix(marge=0.4)
+
+    def construct(self):
+        self.ecran_accroche(); self.ecran_facteur(); self.ecran_mais()
+        self.ecran_urne(); self.ecran_retenir(); self.ecran_renvoi()
