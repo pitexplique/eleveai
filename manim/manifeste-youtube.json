@@ -1317,7 +1317,7 @@
     },
     {
       "id": "sondages-marge",
-      "serie": "Qui a raison ?",
+      "serie": "Les maths en vrai",
       "type": "longue",
       "fichier": "actu/maths/paysage/fr/sondages/eleveai-maths-actu-sondages.mp4",
       "miniature": "actu/maths/fr/eleveai-maths-actu-sondages.png",
@@ -1391,7 +1391,7 @@
     },
     {
       "id": "sondages-mille",
-      "serie": "Qui a raison ?",
+      "serie": "Les maths en vrai",
       "type": "short",
       "renvoie_vers": "sondages-marge",
       "fichier": "actu/maths/shorts/fr/sondages/eleveai-maths-actu-sondages-short-mille.mp4",
@@ -1410,7 +1410,7 @@
     },
     {
       "id": "sondages-trois",
-      "serie": "Qui a raison ?",
+      "serie": "Les maths en vrai",
       "type": "short",
       "renvoie_vers": "sondages-marge",
       "fichier": "actu/maths/shorts/fr/sondages/eleveai-maths-actu-sondages-short-trois.mp4",
@@ -1430,7 +1430,7 @@
     },
     {
       "id": "sondages-racine",
-      "serie": "Qui a raison ?",
+      "serie": "Les maths en vrai",
       "type": "short",
       "renvoie_vers": "sondages-marge",
       "fichier": "actu/maths/shorts/fr/sondages/eleveai-maths-actu-sondages-short-racine.mp4",
@@ -1449,7 +1449,7 @@
     },
     {
       "id": "sondages-avance",
-      "serie": "Qui a raison ?",
+      "serie": "Les maths en vrai",
       "type": "short",
       "renvoie_vers": "sondages-marge",
       "fichier": "actu/maths/shorts/fr/sondages/eleveai-maths-actu-sondages-short-avance.mp4",
@@ -1469,7 +1469,7 @@
     },
     {
       "id": "sondages-avis",
-      "serie": "Qui a raison ?",
+      "serie": "Les maths en vrai",
       "type": "short",
       "renvoie_vers": "sondages-marge",
       "fichier": "actu/maths/shorts/fr/sondages/eleveai-maths-actu-sondages-short-avis.mp4",
