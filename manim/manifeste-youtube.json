@@ -1474,10 +1474,10 @@
       "renvoie_vers": "sondages-marge",
       "fichier": "actu/maths/shorts/fr/sondages/eleveai-maths-actu-sondages-short-avis.mp4",
       "miniature": "actu/maths/fr/eleveai-maths-actu-sondages-short-avis.png",
-      "titre": "48 000 fois plus de poids, et pourtant noyé dans le bruit",
+      "titre": "Sondage ou urne : où ton avis compte-t-il vraiment ?",
       "accroche": "Dans l'urne, ta voix est une parmi 48 millions. Dans un sondage, une parmi 1 000 : ton avis y pèse 48 000 fois plus lourd, et ta seule réponse déplace le score publié de 0,1 point.\n\nSauf que ce score est donné à ± 3 points près. Ton dixième de point se perd dans un flou trente fois plus grand que lui : un énorme poids, sur un nombre qui tremble.\n\nDans l'urne, c'est l'inverse — ta voix est minuscule, mais il n'y a aucune marge d'erreur. On ne mesure pas, on COMPTE.\n\nLa leçon tient en une phrase : un gros poids sur une mesure floue vaut moins qu'un petit poids sur un compte exact. Un sondage estime. Une élection décide.",
       "fiche": "https://www.eleveai.fr/accueil",
-      "source": "Sources : les trois sondages de début septembre 2026 (Cluster17 n = 1 711, Ipsos n = 1 500, OpinionWay n = 1 001) recensés sur Wikipédia, « Liste de sondages sur l'élection présidentielle française de 2027 », consulté le 12/09/2026.  La marge de ± 3 points est calculée (1,96 racine de p(1-p)/n pour n = 1 000). Électorat : environ 48 millions d'électeurs résidant en France (INSEE, « Corps électoral 2026 », Insee Focus n° 378 : 48,7 millions), auxquels s'ajoutent 1,7 million d'inscrits à l'étranger, que les sondages n'interrogent pas.",
+      "source": "Sources : les trois sondages de début septembre 2026 (Cluster17 n = 1 711, Ipsos n = 1 500, OpinionWay n = 1 001) recensés sur Wikipédia, « Liste de sondages sur l'élection présidentielle française de 2027 », consulté le 12/09/2026. La marge de ± 3 points est calculée (1,96 racine de p(1-p)/n pour n = 1 000). Électorat : environ 48 millions d'électeurs résidant en France (INSEE, « Corps électoral 2026 », Insee Focus n° 378 : 48,7 millions), auxquels s'ajoutent 1,7 million d'inscrits à l'étranger, que les sondages n'interrogent pas.",
       "tags": [
         "maths",
         "sondages",
