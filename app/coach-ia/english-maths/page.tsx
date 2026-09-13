@@ -11,6 +11,8 @@ import {
   type NiveauEnglish,
 } from "@/lib/tutor-v4/catalog";
 import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
+import { ChevronRight } from "lucide-react";
+import { useNotionsPliees } from "@/components/coach/useNotionsPliees";
 
 const NIVEAUX: NiveauEnglish[] = ["a1", "a2", "b1", "b2"];
 
@@ -75,6 +77,17 @@ function CoachEnglishInner() {
     (sum, id) => sum + (notionMicroMap[id]?.length ?? 0),
     0
   );
+
+  /* ⭐ 13/09/2026 — LE MODE SIMPLE, comme sur /coach-ia/[matiere] : les
+     notions seules, les skills au chevron, « Expand all » retenu. Voir
+     components/coach/useNotionsPliees.ts. */
+  const notionsAvecMicrosIds = notionOptions.filter(
+    (id) => (notionMicroMap[id]?.length ?? 0) > 0
+  );
+  const { estDepliee, basculer, toutDeplier, toutReplier } =
+    useNotionsPliees(notionsAvecMicrosIds);
+  const tousDeplies =
+    notionsAvecMicrosIds.length > 0 && notionsAvecMicrosIds.every(estDepliee);
 
   function handleClick(notionId: string, microId: string) {
     router.push(
@@ -174,6 +187,14 @@ function CoachEnglishInner() {
                 <span className="rounded-full border border-violet-300 bg-white px-4 py-2 text-sm font-semibold text-violet-700">
                   {totalMicros} skills
                 </span>
+                <button
+                  type="button"
+                  onClick={tousDeplies ? toutReplier : toutDeplier}
+                  aria-pressed={tousDeplies}
+                  className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                >
+                  {tousDeplies ? "Collapse all" : "Expand all"}
+                </button>
                 <span className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-600">
                   🔊 Audio available
                 </span>
@@ -249,11 +270,44 @@ function CoachEnglishInner() {
                   </div>
 
                   <div className="space-y-5">
-                    {notionsAvecMicros.map(({ notionId, micros }) => (
+                    {notionsAvecMicros.map(({ notionId, micros }) => {
+                      /* Titre muet à la recherche, skill qui répond : la
+                         notion se montre dépliée et sans chevron. */
+                      const forceeParLaRecherche =
+                        !!searchLower &&
+                        !notionLabel(notionId, niveau, "english-maths")
+                          .toLowerCase()
+                          .includes(searchLower);
+                      const ouverte = forceeParLaRecherche || estDepliee(notionId);
+                      return (
                       <article key={notionId}>
                         <h3 className="mb-2 text-base font-bold text-slate-800">
-                          {notionLabel(notionId, niveau, "english-maths")}
+                          {forceeParLaRecherche ? (
+                            <span className="inline-flex items-center py-1">
+                              {notionLabel(notionId, niveau, "english-maths")}
+                            </span>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={() => basculer(notionId)}
+                              aria-expanded={ouverte}
+                              className="group/pli -ml-1 inline-flex items-center gap-1.5 rounded-lg px-1 py-1 text-left transition hover:bg-slate-100"
+                            >
+                              <ChevronRight
+                                aria-hidden="true"
+                                className={[
+                                  "h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover/pli:text-slate-600",
+                                  ouverte ? "rotate-90" : "",
+                                ].join(" ")}
+                              />
+                              {notionLabel(notionId, niveau, "english-maths")}
+                              <span className="ml-1 text-xs font-semibold text-slate-400">
+                                {micros.length}
+                              </span>
+                            </button>
+                          )}
                         </h3>
+                        {ouverte ? (
                         <ol className="space-y-1">
                           {micros.map((microId, index) => (
                             <li key={microId}>
@@ -277,8 +331,10 @@ function CoachEnglishInner() {
                             </li>
                           ))}
                         </ol>
+                        ) : null}
                       </article>
-                    ))}
+                      );
+                    })}
                   </div>
                 </section>
               );

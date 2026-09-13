@@ -28,9 +28,10 @@ import FloatingCoach from "@/components/FloatingCoach";
 import BoiteAOutils from "@/components/BoiteAOutils";
 import { useEleve } from "@/context/EleveContext";
 import Link from "next/link";
-import { BookOpen, CirclePlay, Play } from "lucide-react";
+import { BookOpen, ChevronRight, CirclePlay, Play } from "lucide-react";
 import { ficheClasseSource, ficheHrefPourCoach } from "@/lib/fiches/registre";
 import NotionAvecApercu from "@/components/coach/NotionAvecApercu";
+import { useNotionsPliees } from "@/components/coach/useNotionsPliees";
 import {
   youtubeSearchUrl,
   CLASSE_YOUTUBE_LABEL,
@@ -558,6 +559,19 @@ export default function CoachIA() {
   // raison précise — deux normalisations finissent toujours par diverger.
   const searchLower = normaliser(search);
 
+  /* ⭐ 13/09/2026 — LE MODE SIMPLE : LES NOTIONS SEULES, LES MICROS SUR
+     DEMANDE. Frédéric : « ils se perdent avec toutes ses micros ». Sur Maths
+     4e, 33 notions et 210 séries s'ouvraient d'un coup. Chaque notion porte
+     maintenant un chevron ; « Tout déplier » rend l'ancien écran, et ce choix
+     est retenu (voir components/coach/useNotionsPliees.ts). */
+  const notionsAvecMicrosIds = notionsVisibles.filter(
+    (notionId) => (notionMicroMap[notionId]?.length ?? 0) > 0
+  );
+  const { estDepliee, basculer, toutDeplier, toutReplier } =
+    useNotionsPliees(notionsAvecMicrosIds);
+  const tousDeplies =
+    notionsAvecMicrosIds.length > 0 && notionsAvecMicrosIds.every(estDepliee);
+
   function handleClick(notionId: string, microId: string) {
     router.push(
       `/tutor-v4?classe=${encodeURIComponent(classe)}&matiere=${encodeURIComponent(matiere)}&notion=${encodeURIComponent(notionId)}&microId=${encodeURIComponent(microId)}&${displayParamForClasse(classe)}`
@@ -758,6 +772,17 @@ export default function CoachIA() {
                 <span className="rounded-full border border-green-300 bg-white px-4 py-2 text-sm font-semibold text-green-700">
                   {totalMicros} séries d&apos;exercices
                 </span>
+                {/* Le « mode complet » de la liste, à un clic et retenu —
+                    comme dans le tutor, c'est le DÉFAUT qui a changé, pas le
+                    possible. */}
+                <button
+                  type="button"
+                  onClick={tousDeplies ? toutReplier : toutDeplier}
+                  aria-pressed={tousDeplies}
+                  className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                >
+                  {tousDeplies ? "Tout replier" : "Tout déplier"}
+                </button>
                 {matiere === "francais" ? (
                   <span className="rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-semibold text-sky-700">
                     CP a 3e ouverts
@@ -903,6 +928,14 @@ export default function CoachIA() {
                       // prévenance croit à une erreur.
                       const ficheAutreClasse = ficheClasseSource(matiere, classe, notionId);
                       const videos = videosParNotion[notionId] ?? [];
+                      /* Une notion dont le titre ne répond pas à la recherche
+                         mais dont une micro y répond se montre DÉPLIÉE et sans
+                         chevron : ce sont ses micros qui sont la réponse, un
+                         pli les cacherait. */
+                      const forceeParLaRecherche =
+                        !!searchLower &&
+                        !normaliser(libelleNotion(notionId)).includes(searchLower);
+                      const ouverte = forceeParLaRecherche || estDepliee(notionId);
                       return (
                       /* ⭐ 27/08/2026 — LA NOTION MONTRE SON EXERCICE AU SURVOL.
                          « Un élève sur deux quitte le coach et ne va pas sur
@@ -919,8 +952,34 @@ export default function CoachIA() {
                         notionId={notionId}
                       >
                         <div className="mb-2 flex flex-wrap items-center gap-2">
+                          {/* Le bouton vit DANS le h3 (motif accordéon), et
+                              les liens Fiche / Vidéo restent ses voisins : un
+                              lien dans un bouton n'est pas du HTML. */}
                           <h3 className="text-base font-bold text-slate-800">
-                            <TexteMath>{libelleNotionMath(notionId)}</TexteMath>
+                            {forceeParLaRecherche ? (
+                              <span className="inline-flex items-center gap-1.5 py-1">
+                                <TexteMath>{libelleNotionMath(notionId)}</TexteMath>
+                              </span>
+                            ) : (
+                              <button
+                                type="button"
+                                onClick={() => basculer(notionId)}
+                                aria-expanded={ouverte}
+                                className="group/pli -ml-1 inline-flex items-center gap-1.5 rounded-lg px-1 py-1 text-left transition hover:bg-slate-100"
+                              >
+                                <ChevronRight
+                                  aria-hidden="true"
+                                  className={[
+                                    "h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover/pli:text-slate-600",
+                                    ouverte ? "rotate-90" : "",
+                                  ].join(" ")}
+                                />
+                                <TexteMath>{libelleNotionMath(notionId)}</TexteMath>
+                                <span className="ml-1 text-xs font-semibold text-slate-400">
+                                  {micros.length}
+                                </span>
+                              </button>
+                            )}
                           </h3>
                           {ficheHref ? (
                             <Link
@@ -969,6 +1028,7 @@ export default function CoachIA() {
                             );
                           })() : null}
                         </div>
+                        {ouverte ? (
                         <ol className="space-y-1">
                           {micros.map((microId, index) => {
                             const microVideos = videosParMicro[microId] ?? [];
@@ -1055,6 +1115,7 @@ export default function CoachIA() {
                             );
                           })}
                         </ol>
+                        ) : null}
                       </NotionAvecApercu>
                       );
                     })}
