@@ -1566,6 +1566,63 @@
         "fonction affine",
         "parabole"
       ]
+    },
+    {
+      "id": "bases-fonctions-combien",
+      "serie": "Les maths en vrai",
+      "type": "short",
+      "renvoie_vers": "bases-fonctions",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "titre": "Une semaine sans rien, puis 102 400 vues",
+      "accroche": "Une vidéo fait 100 vues aujourd'hui, et ses vues doublent chaque jour. Pendant une semaine, sur la courbe, il ne se passe presque rien. Puis elle s'envole : 102 400 vues dans 10 jours.\n\nC'est une croissance exponentielle — on multiplie toujours par le même nombre, f(x) = 100 × 2^x. Elle répond à la question : combien ? Et elle trompe tout le monde, parce qu'au début elle a l'air de ne rien faire.",
+      "tags": [
+        "maths",
+        "exponentielle",
+        "croissance exponentielle",
+        "fonctions",
+        "modéliser",
+        "Shorts"
+      ],
+      "fichier": "bases/maths/shorts/fr/fonctions/eleveai-maths-bases-fonctions-short-combien.mp4",
+      "miniature": "bases/maths/fr/eleveai-maths-bases-fonctions-short-combien.png"
+    },
+    {
+      "id": "bases-fonctions-quand",
+      "serie": "Les maths en vrai",
+      "type": "short",
+      "renvoie_vers": "bases-fonctions",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "titre": "Le million arrive 3 jours après les 100 000",
+      "accroche": "100 000 vues en 10 jours. Et le million ? Pas dans 100 jours : un peu plus de 13 jours, à peine 3 jours après.\n\nOn connaît le résultat et on cherche le temps : c'est la question inverse de l'exponentielle, et il faut la fonction qui la défait, le logarithme. 2^x = 10 000, donc x = ln(10 000) ÷ ln 2 ≈ 13,3. Le logarithme répond à la question : quand ?",
+      "tags": [
+        "maths",
+        "logarithme",
+        "exponentielle",
+        "fonctions",
+        "modéliser",
+        "Shorts"
+      ],
+      "fichier": "bases/maths/shorts/fr/fonctions/eleveai-maths-bases-fonctions-short-quand.mp4",
+      "miniature": "bases/maths/fr/eleveai-maths-bases-fonctions-short-quand.png"
+    },
+    {
+      "id": "bases-fonctions-jusquou",
+      "serie": "Les maths en vrai",
+      "type": "short",
+      "renvoie_vers": "bases-fonctions",
+      "fiche": "https://www.eleveai.fr/accueil",
+      "titre": "Jamais zéro : une part de gâteau partagée à l'infini",
+      "accroche": "Un gâteau partagé entre de plus en plus de monde. À 2, une moitié. À 10, un dixième. À un million, un millionième. Ta part rétrécit sans fin… mais elle ne vaut jamais zéro.\n\nC'est la fonction inverse, f(x) = 1/x : elle s'approche de zéro sans jamais le toucher. Elle répond à la question : jusqu'où ? Aussi près qu'on veut, jamais jusqu'au bout.",
+      "tags": [
+        "maths",
+        "fonction inverse",
+        "1/x",
+        "fonctions",
+        "seconde",
+        "Shorts"
+      ],
+      "fichier": "bases/maths/shorts/fr/fonctions/eleveai-maths-bases-fonctions-short-jusquou.mp4",
+      "miniature": "bases/maths/fr/eleveai-maths-bases-fonctions-short-jusquou.png"
     }
   ]
 }

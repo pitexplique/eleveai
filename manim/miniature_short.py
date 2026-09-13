@@ -270,6 +270,47 @@ def acc_pisa_croire(d):
     centre(d, W // 2, 1000, "record de l'OCDE", police("ariblk.ttf", 60), BLEU)
 
 
+# ── « LES MATHS EN VRAI » : à quoi servent les fonctions ──────────────────────
+
+def _courbe(d, f, a, b, box, coul, ep=12, n=80):
+    """Trace y = f(x) dans une boîte (x0, y0, x1, y1, xmin, xmax, ymax), y inversé."""
+    x0, y0, x1, y1, xmin, xmax, ymax = box
+    pts = [(x0 + (x - xmin) / (xmax - xmin) * (x1 - x0), y1 - min(f(x), ymax) / ymax * (y1 - y0))
+           for x in [a + (b - a) * i / n for i in range(n + 1)]]
+    d.line(pts, fill=coul, width=ep, joint="curve")
+
+
+def acc_fonc_combien(d):
+    box = (230, 640, 850, 960, 0, 10, 110)
+    d.line([(230, 960), (850, 960)], fill=NAVY, width=4)
+    _courbe(d, lambda x: 0.1 * 2 ** x, 0, 10, box, JAUNE)
+    d.ellipse([836, 646, 864, 674], fill=VERT)
+    centre(d, W // 2, 1000, "presque rien… puis TOUT", police("ariblk.ttf", 50), ROUGE)
+
+
+def acc_fonc_quand(d):
+    import math
+    box = (230, 640, 850, 960, 0, 14, 1800)
+    d.line([(230, 960), (850, 960)], fill=NAVY, width=4)
+    _courbe(d, lambda x: 0.1 * 2 ** x, 0, 14, box, JAUNE)
+    xm = 230 + math.log(10_000) / math.log(2) / 14 * 620
+    ym = 960 - 1000 / 1800 * 320
+    for i in range(230, int(xm), 26):
+        d.line([(i, ym), (min(i + 14, xm), ym)], fill=BLEU, width=5)
+    for j in range(int(ym), 960, 26):
+        d.line([(xm, j), (xm, min(j + 14, 960))], fill=BLEU, width=5)
+    centre(d, W // 2, 1000, "≈ 13,3 jours", police("ariblk.ttf", 60), BLEU)
+
+
+def acc_fonc_jusquou(d):
+    VIOLET = (139, 92, 246)
+    box = (230, 620, 850, 960, 0.8, 10, 1.25)
+    d.line([(230, 960), (850, 960)], fill=NAVY, width=4)
+    d.line([(230, 620), (230, 960)], fill=NAVY, width=4)
+    _courbe(d, lambda x: 1 / x, 0.8, 10, box, VIOLET)
+    centre(d, W // 2, 1000, "1/x ne touche jamais 0", police("ariblk.ttf", 52), VIOLET)
+
+
 # ── « QUI A RAISON ? » : les sondages ─────────────────────────────────────────
 # ⛔⛔ AUCUN NOM DE CANDIDAT sur ces vignettes. Les noms d'INSTITUTS sont la
 # partie vérifiable et peuvent rester ; le reste transformerait une chaîne
@@ -449,6 +490,21 @@ def acc_fr_ordre(d):
 
 
 SHORTS = {
+    "eleveai-maths-bases-fonctions-short-combien": {
+        "badge": "LES MATHS EN VRAI", "titre": ["100 VUES…", "102 400"], "taille": 96,
+        "sous": "dans 10 jours, en doublant", "accroche": acc_fonc_combien,
+        "dossier": "bases/maths/fr",
+    },
+    "eleveai-maths-bases-fonctions-short-quand": {
+        "badge": "LES MATHS EN VRAI", "titre": ["LE MILLION", "3 JOURS APRÈS"], "taille": 80,
+        "sous": "après les 100 000 vues", "accroche": acc_fonc_quand,
+        "dossier": "bases/maths/fr",
+    },
+    "eleveai-maths-bases-fonctions-short-jusquou": {
+        "badge": "LES MATHS EN VRAI", "titre": ["JAMAIS", "ZÉRO"], "taille": 116,
+        "sous": "une part qui rétrécit sans fin", "accroche": acc_fonc_jusquou,
+        "dossier": "bases/maths/fr",
+    },
     "eleveai-maths-actu-sondages-short-avis": {
         "badge": "QUI A RAISON ?", "titre": ["TON AVIS PÈSE", "48 000 × PLUS"], "taille": 84,
         "sous": "et se noie quand même", "accroche": acc_sond_avis,

@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Dix jours pour atteindre cent mille vues. Et pour le million, combien de temps ? Encore cent jours ?",
+  "01-question": "Cette fois, on connaît le résultat, un million, et on cherche le temps. C'est la question inverse de l'exponentielle.",
+  "02-log": "Pour y répondre, il faut la fonction qui défait l'exponentielle : le logarithme. Deux puissance x égale dix mille, donc x égale logarithme de dix mille, divisé par logarithme de deux.",
+  "03-reponse": "Résultat : un peu plus de treize jours. À peine trois jours après les cent mille vues.",
+  "04-retenir": "Le logarithme répond à la question : quand ? Et il révèle ce que l'exponentielle cache : les derniers zéros arrivent très vite.",
+  "05-fin": "Entraîne-toi sur le coach maths d'éleveai point fr. Et abonne-toi à la chaîne !"
+}

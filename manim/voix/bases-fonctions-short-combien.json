@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Une vidéo fait cent vues aujourd'hui, et ses vues doublent chaque jour. Combien dans dix jours ? Mille ? Deux mille ?",
+  "01-rien": "Regarde les premiers jours : deux cents, quatre cents, huit cents. Sur la courbe, pendant une semaine, il ne se passe presque rien.",
+  "02-explose": "Puis elle s'envole. Dans dix jours : cent deux mille quatre cents vues. Plus de cinquante fois deux mille.",
+  "03-nom": "C'est une croissance exponentielle : on multiplie toujours par le même nombre. Ici, f de x égale cent fois deux puissance x.",
+  "04-retenir": "L'exponentielle répond à la question : combien ? Et elle trompe tout le monde, parce qu'au début, elle a l'air de ne rien faire.",
+  "05-fin": "Entraîne-toi sur le coach maths d'éleveai point fr. Et abonne-toi à la chaîne !"
+}
