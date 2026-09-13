@@ -1461,11 +1461,11 @@ def acc_pisa_2025(d):
 
 NOTIONS = {
     # ⭐ Le titre est la phrase par laquelle Frédéric ouvrait ses cours.
-    "eleveai-maths-bases-fonctions": {
+    "eleveai-maths-en-vrai-fonctions": {
         "badge": "LES MATHS EN VRAI", "titre": ["ÇA SERT À RIEN…", "SAUF À PRÉVOIR"], "taille": 58,
         "sous": "sept formules, une aire de jeux",
         "accroche": acc_fonctions,
-        "dossier": "bases/maths/fr",
+        "dossier": "maths-en-vrai/maths/fr",
     },
     "eleveai-maths-actu-sondages": {
         # ⚠️ EXACTEMENT DEUX LIGNES : le gabarit paysage lit `titre[1]` sans

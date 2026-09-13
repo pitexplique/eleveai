@@ -1493,8 +1493,8 @@
       "id": "bases-fonctions",
       "serie": "Les maths en vrai",
       "type": "longue",
-      "fichier": "bases/maths/paysage/fr/fonctions/eleveai-maths-bases-fonctions.mp4",
-      "miniature": "bases/maths/fr/eleveai-maths-bases-fonctions.png",
+      "fichier": "maths-en-vrai/maths/paysage/fr/fonctions/eleveai-maths-en-vrai-fonctions.mp4",
+      "miniature": "maths-en-vrai/maths/fr/eleveai-maths-en-vrai-fonctions.png",
       "titre": "Les maths, ça sert à rien… sauf à prévoir",
       "accroche": "Les maths, ça sert à rien. Sauf à prévoir.\n\nCette vidéo ne te demande pas d'apprendre des formes de courbes par cœur : elle te montre à quoi elles servent. D'abord à dessiner — une constante pour le sol, une affine pour un toit, une parabole pour une colline. Mais surtout à prévoir. Modéliser, c'est remplacer une situation réelle par une formule, pour calculer ce qui n'est pas encore arrivé.\n\nTrois questions, trois fonctions :\n• COMBIEN ? → l'exponentielle (une vidéo qui double ses vues chaque jour)\n• QUAND ? → le logarithme (la même vidéo, la question inverse)\n• JUSQU'OÙ ? → la fonction inverse 1/x (un gâteau partagé entre de plus en plus de monde)\n\nÀ la fin, on dessine une aire de jeux entière avec sept formules, sans un seul trait à la main.\n\nLes chiffres sont des modèles, pas des prédictions : une formule dit ce qui arrivera si les choses continuent comme maintenant. Aucun niveau requis.",
       "chapitres": [
@@ -1583,8 +1583,8 @@
         "modéliser",
         "Shorts"
       ],
-      "fichier": "bases/maths/shorts/fr/fonctions/eleveai-maths-bases-fonctions-short-combien.mp4",
-      "miniature": "bases/maths/fr/eleveai-maths-bases-fonctions-short-combien.png"
+      "fichier": "maths-en-vrai/maths/shorts/fr/fonctions/eleveai-maths-en-vrai-fonctions-short-combien.mp4",
+      "miniature": "maths-en-vrai/maths/fr/eleveai-maths-en-vrai-fonctions-short-combien.png"
     },
     {
       "id": "bases-fonctions-quand",
@@ -1602,8 +1602,8 @@
         "modéliser",
         "Shorts"
       ],
-      "fichier": "bases/maths/shorts/fr/fonctions/eleveai-maths-bases-fonctions-short-quand.mp4",
-      "miniature": "bases/maths/fr/eleveai-maths-bases-fonctions-short-quand.png"
+      "fichier": "maths-en-vrai/maths/shorts/fr/fonctions/eleveai-maths-en-vrai-fonctions-short-quand.mp4",
+      "miniature": "maths-en-vrai/maths/fr/eleveai-maths-en-vrai-fonctions-short-quand.png"
     },
     {
       "id": "bases-fonctions-jusquou",
@@ -1621,8 +1621,8 @@
         "seconde",
         "Shorts"
       ],
-      "fichier": "bases/maths/shorts/fr/fonctions/eleveai-maths-bases-fonctions-short-jusquou.mp4",
-      "miniature": "bases/maths/fr/eleveai-maths-bases-fonctions-short-jusquou.png"
+      "fichier": "maths-en-vrai/maths/shorts/fr/fonctions/eleveai-maths-en-vrai-fonctions-short-jusquou.mp4",
+      "miniature": "maths-en-vrai/maths/fr/eleveai-maths-en-vrai-fonctions-short-jusquou.png"
     }
   ]
 }

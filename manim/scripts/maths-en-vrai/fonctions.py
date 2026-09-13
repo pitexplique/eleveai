@@ -35,7 +35,7 @@
 #   jour (le jour 10 ferait 100·2⁹) : corrigé en « aujourd'hui / dans 10 jours ».
 #
 # Rendu :
-#   python -m manim render -qh --disable_caching manim/scripts/bases/fonctions.py FonctionsLongue -o eleveai-maths-bases-fonctions --media_dir manim/scripts/bases/media
+#   python -m manim render -qh --disable_caching manim/scripts/maths-en-vrai/fonctions.py FonctionsLongue -o eleveai-maths-en-vrai-fonctions --media_dir manim/scripts/maths-en-vrai/media
 
 import math
 import sys

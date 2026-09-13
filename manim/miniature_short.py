@@ -490,20 +490,20 @@ def acc_fr_ordre(d):
 
 
 SHORTS = {
-    "eleveai-maths-bases-fonctions-short-combien": {
+    "eleveai-maths-en-vrai-fonctions-short-combien": {
         "badge": "LES MATHS EN VRAI", "titre": ["100 VUES…", "102 400"], "taille": 96,
         "sous": "dans 10 jours, en doublant", "accroche": acc_fonc_combien,
-        "dossier": "bases/maths/fr",
+        "dossier": "maths-en-vrai/maths/fr",
     },
-    "eleveai-maths-bases-fonctions-short-quand": {
+    "eleveai-maths-en-vrai-fonctions-short-quand": {
         "badge": "LES MATHS EN VRAI", "titre": ["LE MILLION", "3 JOURS APRÈS"], "taille": 80,
         "sous": "après les 100 000 vues", "accroche": acc_fonc_quand,
-        "dossier": "bases/maths/fr",
+        "dossier": "maths-en-vrai/maths/fr",
     },
-    "eleveai-maths-bases-fonctions-short-jusquou": {
+    "eleveai-maths-en-vrai-fonctions-short-jusquou": {
         "badge": "LES MATHS EN VRAI", "titre": ["JAMAIS", "ZÉRO"], "taille": 116,
         "sous": "une part qui rétrécit sans fin", "accroche": acc_fonc_jusquou,
-        "dossier": "bases/maths/fr",
+        "dossier": "maths-en-vrai/maths/fr",
     },
     "eleveai-maths-actu-sondages-short-avis": {
         "badge": "QUI A RAISON ?", "titre": ["TON AVIS PÈSE", "48 000 × PLUS"], "taille": 84,

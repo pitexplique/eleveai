@@ -16,7 +16,7 @@
 # libellés français posés à la main.
 #
 # Rendu (exemple) :
-#   python -m manim render -qh -r 1080,1920 --disable_caching manim/scripts/bases/fonctions_shorts.py FonctionsShortCombien -o eleveai-maths-bases-fonctions-short-combien --media_dir manim/scripts/bases/media
+#   python -m manim render -qh -r 1080,1920 --disable_caching manim/scripts/maths-en-vrai/fonctions_shorts.py FonctionsShortCombien -o eleveai-maths-en-vrai-fonctions-short-combien --media_dir manim/scripts/maths-en-vrai/media
 
 import math
 import sys
