@@ -32,13 +32,26 @@ import { BookOpen, ChevronRight, CirclePlay, Play } from "lucide-react";
 import { ficheClasseSource, ficheHrefPourCoach } from "@/lib/fiches/registre";
 import NotionAvecApercu from "@/components/coach/NotionAvecApercu";
 import { useNotionsPliees } from "@/components/coach/useNotionsPliees";
+import { track } from "@vercel/analytics";
 import {
   youtubeSearchUrl,
   CLASSE_YOUTUBE_LABEL,
   MATIERE_YOUTUBE_LABEL,
 } from "@/lib/videos/youtubeSearch";
 
-const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "premiere-spe", "terminale-spe", "stmg", "adulte"];
+/* ⭐ 13/09/2026 — LA COLONNE SE LIT DE LA TERMINALE AU CP (Frédéric : « plutôt
+   que de démarrer sur CP et aller vers adulte, je préfère inversé »).
+   La colonne mesure ~1 175 px et se coupe sous 1 065 px de fenêtre, donc sur
+   presque tous les portables : ce qui tombait sous le bord, c'était le lycée
+   et les adultes — là où est le public du site. Inversée, c'est le primaire
+   qui passe sous le bord, où le coach de maths est le moins visité.
+   ⚠️ « Adultes » reste EN DERNIER : c'est le seul bouton qui n'est pas une
+   classe, et il ferait une drôle de première ligne.
+   ⚠️ C'est le seul sélecteur du site dans ce sens : l'accueil et les autres
+   lisent CP → Terminale. Incohérence assumée, parce que cette colonne est la
+   seule qui se coupe — ne pas l'étendre ailleurs. Les paliers A1 → B2 restent
+   dans l'ordre : quatre boutons ne se coupent jamais. */
+const CLASSES: Classe[] = ["terminale-spe", "premiere-spe", "premiere", "seconde", "3e", "4e", "5e", "6e", "cm2", "cm1", "ce2", "ce1", "cp", "stmg", "adulte"];
 /* ⛔ CETTE LISTE DÉCIDE DE CE QU'UN ÉLÈVE PEUT CLIQUER EN FRANÇAIS, et elle est
    INDÉPENDANTE de `loadQuestionBankV4` : la 2de répond parfaitement par
    `?classe=seconde` sans qu'aucune pastille ne la propose. Tester par l'URL ne
@@ -53,7 +66,7 @@ const CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "
    ⚠️ Toujours mesurer AVEC LE MODE : en mode simple la classe rendait déjà
    96/96 alors qu'elle était injouable ici. Voir le commentaire en tête de
    `scripts/verifier-demarrage.ts`. */
-const FRANCAIS_READY_CLASSES: Classe[] = ["cp", "ce1", "ce2", "cm1", "cm2", "6e", "5e", "4e", "3e", "seconde"];
+const FRANCAIS_READY_CLASSES: Classe[] = ["seconde", "3e", "4e", "5e", "6e", "cm2", "cm1", "ce2", "ce1", "cp"];
 /* ⭐ 10/09/2026 — L'ÉCONOMIE PASSE EN A1 → B2 (Frédéric : « brancher sur coach
    economie qui gère les niveaux A1 A2 B1 B2 »), le jour où sa chip entre sur
    l'accueil.
@@ -120,10 +133,11 @@ function getClassesForMatiere(matiere: Matiere): Classe[] {
  * silence — c'est le même genre de repli muet que le `default:` du catalogue.
  */
 const GROUPES: { titre: string; classes: Classe[] }[] = [
-  { titre: "Primaire", classes: ["cp", "ce1", "ce2", "cm1", "cm2"] },
-  { titre: "Collège", classes: ["6e", "5e", "4e", "3e"] },
-  { titre: "Lycée général", classes: ["seconde", "premiere", "premiere-spe", "terminale-spe"] },
+  // Du plus haut au plus bas, voir la note de `CLASSES` ; les adultes ferment.
+  { titre: "Lycée général", classes: ["terminale-spe", "premiere-spe", "premiere", "seconde"] },
   { titre: "Voie techno.", classes: ["stmg"] },
+  { titre: "Collège", classes: ["3e", "4e", "5e", "6e"] },
+  { titre: "Primaire", classes: ["cm2", "cm1", "ce2", "ce1", "cp"] },
   { titre: "Adultes", classes: ["adulte"] },
 ];
 
@@ -592,6 +606,12 @@ export default function CoachIA() {
   // une à une toutes les pastilles essayées. On repart des paramètres existants
   // pour ne pas effacer `annee` (le filtre STMG) ni les UTM d'une campagne.
   function choisirClasse(item: Classe) {
+    /* ⭐ 13/09/2026 — LE PREMIER ÉVÉNEMENT DU COACH. Rien ne disait quelles
+       classes sont cliquées ici, et Vercel n'affiche pas `?classe=` : sans ça,
+       l'inversion de la colonne (voir `CLASSES`) ne se vérifie jamais. Une
+       semaine de `coach_classe` dit où va le doigt. `depuis` est la classe
+       quittée, pour voir aussi les allers-retours. */
+    track("coach_classe", { matiere, classe: item, depuis: classe });
     setClasse(item);
     const params = new URLSearchParams(searchParams.toString());
     params.set("classe", item);
