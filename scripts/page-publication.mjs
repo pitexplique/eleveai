@@ -59,13 +59,20 @@ function description(v) {
     for (const [t, titre] of v.chapitres) l.push(`${t} ${titre}`);
     l.push("");
   }
-  if (v.type === "short") l.push("La vidéo complète : [coller ici l'URL de la vidéo longue]");
+  // ⭐ L'URL de la longue est notée dans le manifeste (`url`) dès qu'elle est
+  // en ligne : chaque short de la même série la reprend sans copier-coller.
+  if (v.type === "short") {
+    const longue = m.videos.find((x) => x.id === v.renvoie_vers);
+    l.push(`La vidéo complète : ${longue?.url || "[coller ici l'URL de la vidéo longue]"}`);
+  }
   if (String(v.fiche || "").includes("/fiches-cours/")) {
     l.push(`La fiche de cours : ${v.fiche}`);
     l.push("S'entraîner avec le coach : https://www.eleveai.fr/coach-ia/maths?classe=seconde");
   } else {
     l.push(`S'entraîner sur le coach maths : ${v.fiche}`);
   }
+  // Une vidéo d'actualité porte ses sources : elles vont dans la description.
+  if (v.source) l.push("", v.source);
   l.push("", m.signature);
   return l.join("\n");
 }
