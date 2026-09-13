@@ -1001,6 +1001,21 @@ export default function CoachIA() {
                               </button>
                             )}
                           </h3>
+                          {/* ⭐ 13/09/2026 — « il faudrait un chips GO »
+                              (Frédéric). Le pli replié ne laissait qu'un
+                              geste : déplier, puis choisir. GO lance le tutor
+                              sur la PREMIÈRE série de la notion, comme le
+                              ferait le clic sur sa ligne 1 — même `handleClick`,
+                              donc même `microId`, même mode simple. */}
+                          <button
+                            type="button"
+                            onClick={() => handleClick(notionId, micros[0])}
+                            aria-label={`Commencer : ${libelleNotion(notionId)}`}
+                            className="inline-flex items-center gap-1 rounded-full bg-green-600 px-3 py-0.5 text-xs font-black tracking-wide text-white shadow-sm transition hover:bg-green-700"
+                          >
+                            GO
+                            <Play className="h-3 w-3 fill-current" aria-hidden="true" />
+                          </button>
                           {ficheHref ? (
                             <Link
                               href={ficheHref}

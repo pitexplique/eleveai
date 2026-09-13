@@ -11,7 +11,7 @@ import {
   type NiveauEnglish,
 } from "@/lib/tutor-v4/catalog";
 import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Play } from "lucide-react";
 import { useNotionsPliees } from "@/components/coach/useNotionsPliees";
 
 const NIVEAUX: NiveauEnglish[] = ["a1", "a2", "b1", "b2"];
@@ -281,7 +281,7 @@ function CoachEnglishInner() {
                       const ouverte = forceeParLaRecherche || estDepliee(notionId);
                       return (
                       <article key={notionId}>
-                        <h3 className="mb-2 text-base font-bold text-slate-800">
+                        <h3 className="mb-2 inline-flex flex-wrap items-center gap-2 text-base font-bold text-slate-800">
                           {forceeParLaRecherche ? (
                             <span className="inline-flex items-center py-1">
                               {notionLabel(notionId, niveau, "english-maths")}
@@ -306,6 +306,17 @@ function CoachEnglishInner() {
                               </span>
                             </button>
                           )}
+                          {/* « GO » lance la première skill de la notion,
+                              comme sur /coach-ia/[matiere]. */}
+                          <button
+                            type="button"
+                            onClick={() => handleClick(notionId, micros[0])}
+                            aria-label={`Start: ${notionLabel(notionId, niveau, "english-maths")}`}
+                            className="inline-flex items-center gap-1 rounded-full bg-sky-600 px-3 py-0.5 text-xs font-black tracking-wide text-white shadow-sm transition hover:bg-sky-700"
+                          >
+                            GO
+                            <Play className="h-3 w-3 fill-current" aria-hidden="true" />
+                          </button>
                         </h3>
                         {ouverte ? (
                         <ol className="space-y-1">
