@@ -1462,7 +1462,7 @@ def acc_pisa_2025(d):
 NOTIONS = {
     # ⭐ Le titre est la phrase par laquelle Frédéric ouvrait ses cours.
     "eleveai-maths-bases-fonctions": {
-        "badge": "LES BASES", "titre": ["ÇA SERT À RIEN…", "SAUF À PRÉVOIR"], "taille": 58,
+        "badge": "LES MATHS EN VRAI", "titre": ["ÇA SERT À RIEN…", "SAUF À PRÉVOIR"], "taille": 58,
         "sous": "sept formules, une aire de jeux",
         "accroche": acc_fonctions,
         "dossier": "bases/maths/fr",

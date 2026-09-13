@@ -1491,7 +1491,7 @@
     },
     {
       "id": "bases-fonctions",
-      "serie": "Les bases",
+      "serie": "Les maths en vrai",
       "type": "longue",
       "fichier": "bases/maths/paysage/fr/fonctions/eleveai-maths-bases-fonctions.mp4",
       "miniature": "bases/maths/fr/eleveai-maths-bases-fonctions.png",
@@ -1569,7 +1569,7 @@
     },
     {
       "id": "bases-fonctions-combien",
-      "serie": "Les bases",
+      "serie": "Les maths en vrai",
       "type": "short",
       "renvoie_vers": "bases-fonctions",
       "fiche": "https://www.eleveai.fr/accueil",
@@ -1588,7 +1588,7 @@
     },
     {
       "id": "bases-fonctions-quand",
-      "serie": "Les bases",
+      "serie": "Les maths en vrai",
       "type": "short",
       "renvoie_vers": "bases-fonctions",
       "fiche": "https://www.eleveai.fr/accueil",
@@ -1607,7 +1607,7 @@
     },
     {
       "id": "bases-fonctions-jusquou",
-      "serie": "Les bases",
+      "serie": "Les maths en vrai",
       "type": "short",
       "renvoie_vers": "bases-fonctions",
       "fiche": "https://www.eleveai.fr/accueil",
