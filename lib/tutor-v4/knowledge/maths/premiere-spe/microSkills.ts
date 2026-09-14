@@ -312,13 +312,13 @@ export const microSkills: MicroSkillSource[] = [
   /* ===================== EXPONENTIELLE ===================== */
   {
     id: "exp_definition",
-    label: "Définition : l’unique fonction telle que f’ = f et f(0) = 1",
+    label: "Définition : l’unique fonction telle que $f' = f$ et $f(0) = 1$",
     notionId: "exponentielle",
     prerequis: [],
   },
   {
     id: "exp_relation",
-    label: "Relation fonctionnelle exp(x + y) = exp(x)exp(y)",
+    label: "Relation fonctionnelle $\\exp(x + y) = \\exp(x)\\exp(y)$",
     notionId: "exponentielle",
     prerequis: ["exp_definition"],
   },
