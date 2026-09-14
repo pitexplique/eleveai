@@ -58,6 +58,69 @@ function exp(definition: string, methode: string, calcul: string, conclusion: st
   );
 }
 
+/* ─── Écritures des gabarits du 14/09/2026 ───────────────────────────────────
+ * Un énoncé tiré au sort doit s'écrire comme l'écrirait un professeur : pas de
+ * « 1x », pas de « + -3 », pas de « 4/2 ». Ces aides ne calculent rien — elles
+ * mettent en forme un nombre déjà juste.
+ */
+
+function pgcd(a: number, b: number): number {
+  return b === 0 ? a : pgcd(b, a % b);
+}
+
+/** Fraction réduite, signe devant : (-3, 6) → « -\dfrac{1}{2} », (4, 2) → « 2 ». */
+function fraction(p: number, q: number): string {
+  if (q < 0) {
+    p = -p;
+    q = -q;
+  }
+  const g = pgcd(Math.abs(p), q) || 1;
+  p /= g;
+  q /= g;
+  if (q === 1) return String(p);
+  return `${p < 0 ? "-" : ""}\\dfrac{${Math.abs(p)}}{${q}}`;
+}
+
+/** ax + b : « x », « -x », « 2x - 3 », « 5 » (a nul), « 2x » (b nul). */
+function affine(a: number, b: number, v = "x"): string {
+  const t = a === 0 ? "" : a === 1 ? v : a === -1 ? `-${v}` : `${a}${v}`;
+  if (b === 0) return t || "0";
+  if (!t) return String(b);
+  return `${t} ${b < 0 ? "-" : "+"} ${Math.abs(b)}`;
+}
+
+/** Un coefficient devant une lettre : 1 → « », -1 → « - », 3 → « 3 ». */
+function coef(k: number): string {
+  return k === 1 ? "" : k === -1 ? "-" : String(k);
+}
+
+/** k·e^n, n entier : (-1, 1) → « -e », (2, 0) → « 2 », (3, -2) → « 3e^{-2} ». */
+function kExp(k: number, n: number): string {
+  if (n === 0) return String(k);
+  return `${coef(k)}${n === 1 ? "e" : `e^{${n}}`}`;
+}
+
+/** Un nombre décimal à la française, pour KaTeX : 0.05 → « 0{,}05 ». */
+function nb(v: number): string {
+  return String(Math.round(v * 10000) / 10000).replace(".", "{,}");
+}
+
+/** Demi-droite solution : sens « < » → ]-∞ ; x0[, sens « > » → ]x0 ; +∞[. */
+function intervalle(x0: string, sens: "<" | ">", ferme: boolean): string {
+  return sens === "<"
+    ? `$\\left] -\\infty \\,;\\, ${x0} \\right${ferme ? "]" : "["}$`
+    : `$\\left${ferme ? "[" : "]"} ${x0} \\,;\\, +\\infty \\right[$`;
+}
+
+/** Les quatre verdicts possibles devant « est-ce la fonction exponentielle ? ».
+ *  Toujours servis ensemble : seule la bonne réponse change d'un tirage à l'autre. */
+const VERDICTS_EXP = {
+  oui: "oui : $f' = f$ et $f(0) = 1$",
+  depart: "non : $f' = f$, mais $f(0) \\neq 1$",
+  derivee: "non : $f(0) = 1$, mais $f' \\neq f$",
+  aucune: "non : ni $f' = f$, ni $f(0) = 1$",
+} as const;
+
 function echantillonne(f: (x: number) => number, xmin: number, xmax: number, step: number) {
   const pts: { x: number; y: number }[] = [];
   for (let x = xmin; x <= xmax + 1e-9; x += step) {
@@ -348,52 +411,65 @@ export const exponentielleBank: TutorBankItemV4[] = [
     hint: "Deux vérifications à faire : la dérivée, puis la valeur en $0$.",
     tags: ["premiere", "maths", "exponentielle", "definition", "template"],
     generate: () => {
-      const cas = [
+      // ⛔ Corrigé le 14/09/2026 : les propositions changeaient selon le cas —
+      // « oui » seul face à deux « non : … » justifiés, ou « non » seul face à
+      // « oui, car … ». La bonne réponse était TOUJOURS la seule sans
+      // justification : on la trouvait sans rien dériver. Les quatre verdicts
+      // sont désormais les mêmes à chaque tirage, et chacun porte sa raison.
+      const cas: { f: string; verdict: keyof typeof VERDICTS_EXP; pourquoi: string }[] = [
         {
           f: "$f(x) = e^{x}$",
-          ok: true,
+          verdict: "oui",
           pourquoi: "$f'(x) = e^x = f(x)$ et $f(0) = e^0 = 1$ : les deux conditions sont remplies.",
         },
         {
           f: "$f(x) = 2e^{x}$",
-          ok: false,
+          verdict: "depart",
           pourquoi: "$f' = f$ est bien vérifiée, mais $f(0) = 2$ et non $1$.",
         },
         {
           f: "$f(x) = e^{2x}$",
-          ok: false,
+          verdict: "derivee",
           pourquoi: "$f(0) = 1$ est bien vérifiée, mais $f'(x) = 2e^{2x} = 2f(x)$ : la dérivée vaut le double de la fonction.",
         },
         {
           f: "$f(x) = e^{x} + 1$",
-          ok: false,
+          verdict: "aucune",
           pourquoi: "$f'(x) = e^x$, qui n'est pas égal à $f(x) = e^x + 1$ ; et $f(0) = 2$.",
         },
         {
           f: "$f(x) = x e^{x}$",
-          ok: false,
+          verdict: "aucune",
           pourquoi: "$f(0) = 0 \\times e^0 = 0$, et sa dérivée $(1 + x)e^x$ ne lui est pas égale.",
         },
         {
           f: "$f(x) = 0$",
-          ok: false,
+          verdict: "depart",
           pourquoi: "sa dérivée est bien nulle, donc $f' = f$ ; mais $f(0) = 0$ et non $1$.",
+        },
+        {
+          f: "$f(x) = e^{x + 1}$",
+          verdict: "depart",
+          pourquoi: "$f'(x) = e^{x+1} = f(x)$, mais $f(0) = e^{1} = e$ et non $1$.",
+        },
+        {
+          f: "$f(x) = e^{-x}$",
+          verdict: "derivee",
+          pourquoi: "$f(0) = e^0 = 1$, mais $f'(x) = -e^{-x} = -f(x)$ : la dérivée est l'opposé de la fonction.",
         },
       ];
       const c = pickOne(cas);
       return {
         text: `La fonction définie par ${c.f} est-elle la fonction exponentielle ?`,
         format: "qcm",
-        choices: c.ok
-          ? ["oui", "non : $f(0) \\neq 1$", "non : $f' \\neq f$", "on ne peut pas le savoir"]
-          : ["non", "oui", "oui, car $f' = f$", "on ne peut pas le savoir"],
-        expected: [c.ok ? "oui" : "non"],
+        choices: Object.values(VERDICTS_EXP),
+        expected: [VERDICTS_EXP[c.verdict]],
         comparator: "mcq_exact",
         explanation: exp(
           "L'exponentielle est l'unique fonction telle que $f' = f$ ET $f(0) = 1$ : on vérifie les deux conditions.",
           `On dérive ${c.f}, puis on calcule sa valeur en $0$.`,
           c.pourquoi,
-          c.ok ? "Oui, c'est bien la fonction exponentielle." : "Non, ce n'est pas la fonction exponentielle."
+          c.verdict === "oui" ? "Oui, c'est bien la fonction exponentielle." : "Non, ce n'est pas la fonction exponentielle."
         ),
       };
     },
@@ -971,27 +1047,49 @@ export const exponentielleBank: TutorBankItemV4[] = [
     microId: "exp_nombre_e",
     difficulty: 5,
     theme: "neutral",
-    hint: "Pars de $2{,}7 < e < 2{,}8$ et élève à la puissance demandée.",
+    hint: "Pars de $2{,}7 < e < 2{,}8$ : élève à la puissance, et passe à l'inverse si l'exposant est négatif.",
     tags: ["premiere", "maths", "exponentielle", "nombre_e", "open", "template"],
     generate: () => {
+      // ⛔ Corrigé le 14/09/2026 : « compare e³ et 20 » et « e³ et 21 » étaient
+      // proposés avec la méthode 2,7 < e < 2,8 — qui donne 19,683 < e³ < 21,952
+      // et NE TRANCHE PAS. La correction affirmait le contraire. Chaque seuil
+      // ci-dessous est choisi HORS de l'encadrement, et l'encadrement affiché est
+      // CALCULÉ (borne basse arrondie par défaut, borne haute par excès).
       const cas = [
-        { n: 2, m: 7, plus: true, mots: ["7,3", "7.3", "7,38", "7.38", "encadre"], val: "7{,}39" },
-        { n: 2, m: 8, plus: false, mots: ["7,3", "7.3", "7,38", "7.38", "encadre"], val: "7{,}39" },
-        { n: 1, m: 3, plus: false, mots: ["2,718", "2.718", "2,7", "2.7", "encadre"], val: "2{,}72" },
-        { n: 3, m: 20, plus: true, mots: ["20,0", "20.0", "20,09", "20.09", "encadre"], val: "20{,}09" },
-        { n: 3, m: 21, plus: false, mots: ["20,0", "20.0", "20,09", "20.09", "encadre"], val: "20{,}09" },
+        { n: 1, m: 2 },
+        { n: 1, m: 3 },
+        { n: 2, m: 7 },
+        { n: 2, m: 8 },
+        { n: 3, m: 19 },
+        { n: 3, m: 22 },
+        { n: 4, m: 53 },
+        { n: 4, m: 62 },
+        { n: -1, m: 0.3 },
+        { n: -1, m: 0.4 },
+        { n: -2, m: 0.1 },
+        { n: -2, m: 0.2 },
       ];
       const c = pickOne(cas);
+      const p = Math.abs(c.n);
+      const basse = (v: number) => nb(Math.floor(v * 1000) / 1000);
+      const haute = (v: number) => nb(Math.ceil(v * 1000) / 1000);
+      // Encadrement de e^n : pour n > 0, 2,7ⁿ < eⁿ < 2,8ⁿ ; pour n < 0, on passe à l'inverse.
+      const bas = c.n > 0 ? 2.7 ** p : 1 / 2.8 ** p;
+      const haut = c.n > 0 ? 2.8 ** p : 1 / 2.7 ** p;
+      const plus = bas > c.m;
+      const puissance = p === 1 ? "e" : `e^{${p}}`;
       return {
-        text: `Sans calculatrice, compare $e^{${c.n}}$ et $${c.m}$. Justifie ta réponse.`,
+        text: `Sans calculatrice, compare $e^{${c.n}}$ et $${nb(c.m)}$. Justifie ta réponse.`,
         format: "open",
-        expected: c.mots,
+        expected: ["encadre", "2,7", "2.7", "2,8", "2.8", "puissance", "inverse"],
         comparator: "contains_keyword",
         explanation: exp(
-          "Pour comparer sans machine, on encadre $e$ puis on élève l'encadrement à la puissance voulue.",
-          `On part de $2{,}7 < e < 2{,}8$ et on passe à la puissance ${c.n}.`,
-          `On obtient $e^{${c.n}} \\approx ${c.val}$, ce qui suffit à trancher face à $${c.m}$.`,
-          c.plus ? `$e^{${c.n}} > ${c.m}$.` : `$e^{${c.n}} < ${c.m}$.`
+          "Pour comparer sans machine, on encadre $e$ puis on transporte l'encadrement jusqu'au nombre voulu.",
+          c.n > 0
+            ? `On part de $2{,}7 < e < 2{,}8$ et on élève à la puissance $${p}$ : tous les nombres sont positifs, l'ordre est conservé.`
+            : `On part de $2{,}7 < e < 2{,}8$, on élève à la puissance $${p}$, puis on passe à l'inverse — ce qui RENVERSE l'ordre, puisque $e^{${c.n}} = \\dfrac{1}{${puissance}}$.`,
+          `On obtient $${basse(bas)} < e^{${c.n}} < ${haute(haut)}$ : tout l'encadrement est ${plus ? "au-dessus" : "au-dessous"} de $${nb(c.m)}$.`,
+          plus ? `$e^{${c.n}} > ${nb(c.m)}$.` : `$e^{${c.n}} < ${nb(c.m)}$.`
         ),
       };
     },
@@ -1353,19 +1451,20 @@ export const exponentielleBank: TutorBankItemV4[] = [
       const b = randomInt(2, 5);
       const c = randomInt(1, 3);
       const k = a + b - c;
-      const correct = `$e^{${k}x}$`;
-      const choices = [correct, `$e^{${a + b + c}x}$`, `$e^{${a + b}x}$`, `$e^{${k}x^2}$`];
+      const correct = `$e^{${affine(k, 0)}}$`;
+      const choices = [correct, `$e^{${a + b + c}x}$`, `$e^{${a + b}x}$`, `$e^{${coef(k)}x^2}$`];
+      // ⛔ 14/09/2026 : c = 1 écrivait « e^{1x} » dans l'énoncé, 426 fois sur 600.
       return {
-        text: `Simplifie $\\dfrac{e^{${a}x} \\times e^{${b}x}}{e^{${c}x}}$.`,
+        text: `Simplifie $\\dfrac{e^{${a}x} \\times e^{${b}x}}{e^{${affine(c, 0)}}}$.`,
         format: "qcm",
         choices,
         expected: [correct],
         comparator: "mcq_exact",
         explanation: exp(
           "Produit → somme, quotient → différence des exposants.",
-          `$e^{${a}x + ${b}x - ${c}x}$.`,
-          `$= e^{${k}x}$.`,
-          `$e^{${k}x}$.`
+          `$e^{${a}x + ${b}x - ${affine(c, 0)}}$.`,
+          `$= e^{${affine(k, 0)}}$.`,
+          `$e^{${affine(k, 0)}}$.`
         ),
       };
     },
@@ -1414,7 +1513,8 @@ export const exponentielleBank: TutorBankItemV4[] = [
       const a = randomInt(1, 3);
       const b = pickOne([-3, -2, -1, 1, 2]);
       const total = n * a + b;
-      const ecrire = (k: number) => (k === 0 ? "1" : k === 1 ? "e^{x}" : `e^{${k}x}`);
+      // ⛔ 14/09/2026 : k = -1 écrivait « e^{-1x} », et l'explication « 8x - 1x », « = 0x ».
+      const ecrire = (k: number) => (k === 0 ? "1" : `e^{${affine(k, 0)}}`);
       const correct = `$${ecrire(total)}$`;
       const faux = [`$${ecrire(a + b)}$`, `$${ecrire(n * a)}$`, `$${ecrire(total + 1)}$`].filter(
         (v) => v !== correct,
@@ -1428,7 +1528,7 @@ export const exponentielleBank: TutorBankItemV4[] = [
         explanation: exp(
           "Deux règles se combinent : une puissance de puissance multiplie les exposants, un produit les additionne.",
           `On traite d'abord la parenthèse : $\\left(e^{${a === 1 ? "x" : a + "x"}}\\right)^{${n}} = e^{${n * a}x}$.`,
-          `On regroupe ensuite le produit : $${n * a}x ${b >= 0 ? "+ " + b : "- " + -b}x = ${total}x$.`,
+          `On regroupe ensuite le produit : $${n * a}x ${b >= 0 ? "+" : "-"} ${affine(Math.abs(b), 0)} = ${affine(total, 0)}$.`,
           `${correct}${total === 0 ? " — les exposants se compensent exactement." : "."}`
         ),
       };
@@ -3251,6 +3351,679 @@ export const exponentielleBank: TutorBankItemV4[] = [
           `En $t = 0$, l'exponentielle vaut $1$ : la quantité de départ est donc $${c.n0}$.`,
           `Le coefficient de $t$ est ${c.sens === "croissance" ? "positif" : "négatif"}, et la dérivée du modèle a le même signe que lui.`,
           `Il s'agit donc d'une ${c.sens} : la quantité ${c.sens === "croissance" ? "augmente de plus en plus vite" : "diminue en se rapprochant de $0$ sans jamais l'atteindre"}.`
+        ),
+      };
+    },
+  },
+
+  /* ═══════════ RENFORT DU 14/09/2026 : LES QUESTIONS DU DEVOIR ═══════════
+   *
+   * ⛔⛔ LE COACH ENSEIGNAIT LES PROPRIÉTÉS ET NE POSAIT PAS UN EXERCICE.
+   * 113 items, 6 micros sur 11 robustes — et sur 7 887 énoncés déroulés :
+   *
+   *   - ZÉRO équation $e^{u} = e^{v}$, ZÉRO inéquation $e^{u} < e^{v}$. La
+   *     banque récitait « l'exponentielle est strictement croissante » et ne
+   *     demandait jamais de s'en SERVIR ;
+   *   - ZÉRO équation produit nul $(ax + b)e^{x} = 0$ ;
+   *   - ZÉRO dérivée de $(ax + b)e^{x}$, ZÉRO variations, ZÉRO extremum : l'étude
+   *     de fonction, qui est l'exercice long de tout devoir sur le chapitre,
+   *     n'existait pas.
+   *
+   * Vérifié contre le programme (projet d'aménagement de juin 2025, rentrée
+   * 2026) : « Signe, sens de variation » de l'exponentielle, « Pour a réel,
+   * dérivée de la fonction t ↦ e^{at} » (ajout en rouge), « Étudier les
+   * variations d'une fonction. Déterminer les extremums ». ⚠️ La dérivée de
+   * g(ax + b) SORT du programme : les gabarits ne dérivent que des e^{at}.
+   *
+   * Rangement validé par Frédéric le 14/09 : dans les micros EXISTANTES.
+   * Équations, comparaisons et étude → exp_derivee (« Dérivée, signe et
+   * variations ») ; produit nul → exp_signe.
+   */
+
+  {
+    kind: "template",
+    id: "premiere_exp_equation_tpl",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_derivee",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "L'exponentielle est strictement croissante : deux exponentielles sont égales exactement quand leurs exposants le sont.",
+    tags: ["premiere", "maths", "exponentielle", "derivee", "equation", "template"],
+    generate: () => {
+      const a = pickOne([-3, -2, -1, 1, 2, 3, 4]);
+      const c = pickOne([-2, -1, 0, 1, 2, 3].filter((v) => v !== a));
+      const b = randomInt(-6, 6);
+      // d ≠ b : sinon la solution est 0 et trois pièges sur quatre valent 0 eux
+      // aussi — mesuré, un QCM à deux cases sur « e^{4x} = e^{3x} ».
+      const d = pickOne([-6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6].filter((v) => v !== b));
+      const k = a - c;
+      const m = d - b;
+      const x0 = fraction(m, k);
+      const correct = `$x = ${x0}$`;
+      const pieges = [
+        `$x = ${fraction(d + b, k)}$`, // b passé de l'autre côté sans changer de signe
+        a + c !== 0 ? `$x = ${fraction(m, a + c)}$` : "", // cx passé sans changer de signe
+        `$x = ${fraction(k, m)}$`, // division à l'envers
+        `$x = ${fraction(-m, k)}$`, // signe perdu à la fin
+        "aucune solution",
+      ].filter(Boolean);
+      return {
+        text: `Résous dans $\\mathbb{R}$ l'équation $e^{${affine(a, b)}} = e^{${affine(c, d)}}$.`,
+        format: "qcm",
+        choices: makeChoices(correct, pieges),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'exponentielle est strictement croissante sur $\\mathbb{R}$ : pour tous réels $u$ et $v$, $e^{u} = e^{v} \\Longleftrightarrow u = v$.",
+          `On égale donc les exposants : $${affine(a, b)} = ${affine(c, d)}$.`,
+          `On regroupe les $x$ d'un côté et les nombres de l'autre : $${affine(k, 0)} = ${m}$, donc $x = ${x0}$.`,
+          `$S = \\left\\{ ${x0} \\right\\}$ — il n'a fallu aucun logarithme : l'exponentielle disparaît dès qu'on compare les exposants.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_exp_inequation_tpl",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_derivee",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Comme l'exponentielle est strictement croissante, $e^{u} < e^{v}$ équivaut à $u < v$. Attention ensuite en divisant par un nombre négatif.",
+    tags: ["premiere", "maths", "exponentielle", "derivee", "inequation", "template"],
+    generate: () => {
+      // ⚠️ La moitié des tirages divise par un nombre NÉGATIF : c'est là que
+      // l'élève perd le point, pas dans la propriété de l'exponentielle.
+      const negatif = pickOne([true, false]);
+      let a = 0;
+      let c = 0;
+      do {
+        a = pickOne([-2, -1, 0, 1, 2, 3, 4]);
+        c = pickOne([-2, -1, 0, 1, 2, 3, 4]);
+      } while (a === c || a - c < 0 !== negatif);
+      const b = randomInt(-6, 6);
+      const d = randomInt(-6, 6);
+      const op = pickOne(["<", ">", "\\leqslant", "\\geqslant"] as const);
+      const k = a - c;
+      const m = d - b;
+      const x0 = fraction(m, k);
+      const large = op === "\\leqslant" || op === "\\geqslant";
+      const versLeBas = op === "<" || op === "\\leqslant";
+      const sens: "<" | ">" = versLeBas !== k < 0 ? "<" : ">";
+      const oppose: "<" | ">" = sens === "<" ? ">" : "<";
+      const opFinal = sens === "<" ? (large ? "\\leqslant" : "<") : large ? "\\geqslant" : ">";
+      const correct = intervalle(x0, sens, large);
+      return {
+        text: `Résous dans $\\mathbb{R}$ l'inéquation $e^{${affine(a, b)}} ${op} e^{${affine(c, d)}}$.`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          intervalle(x0, oppose, large), // sens de l'inégalité non inversé (ou inversé à tort)
+          intervalle(x0, sens, !large), // crochet ouvert au lieu de fermé, ou l'inverse
+          intervalle(x0, oppose, !large),
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'exponentielle est strictement croissante sur $\\mathbb{R}$ : elle conserve l'ordre, donc $e^{u} < e^{v} \\Longleftrightarrow u < v$ (et de même avec $\\leqslant$).",
+          `On compare les exposants : $${affine(a, b)} ${op} ${affine(c, d)}$, soit $${affine(k, 0)} ${op} ${m}$.`,
+          k < 0
+            ? `On divise par $${k}$, qui est NÉGATIF : le sens de l'inégalité change. $x ${opFinal} ${x0}$.`
+            : `On divise par $${k}$, qui est positif : le sens de l'inégalité est conservé. $x ${opFinal} ${x0}$.`,
+          `$S = $ ${correct}${large ? " — crochet fermé en " + `$${x0}$` + ", puisque l'égalité est permise." : "."}`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_exp_egal_un_tpl",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_derivee",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Écris d'abord le second membre comme une exponentielle : $1 = e^{0}$, $e = e^{1}$, $\\dfrac{1}{e} = e^{-1}$.",
+    tags: ["premiere", "maths", "exponentielle", "derivee", "equation", "template"],
+    generate: () => {
+      // `erreur` : l'exposant qu'écrit l'élève qui n'a pas réécrit le second membre.
+      const cible = pickOne([
+        { tex: "1", k: 0, erreur: 1, piege: "« $e^{u} = 1$, donc $u = 1$ ». Non : $e^{0} = 1$, donc $u = 0$." },
+        { tex: "e", k: 1, erreur: 0, piege: "oublier que $e = e^{1}$. L'exposant vaut $1$, pas $0$." },
+        { tex: "\\dfrac{1}{e}", k: -1, erreur: 1, piege: "perdre le signe : $\\dfrac{1}{e} = e^{-1}$, l'exposant vaut $-1$, pas $1$." },
+      ] as const);
+      const a = pickOne([-3, -2, -1, 1, 2, 3]);
+      const b = randomInt(-5, 5);
+      const op = pickOne(["=", "=", ">", "<"] as const);
+      const x0 = fraction(cible.k - b, a);
+      const xFaux = fraction(cible.erreur - b, a);
+      let correct: string;
+      let pieges: string[];
+      let conclusion: string;
+      if (op === "=") {
+        correct = `$x = ${x0}$`;
+        pieges = [`$x = ${xFaux}$`, `$x = ${fraction(cible.k + b, a)}$`, "aucune solution"];
+        conclusion = `$${affine(a, b)} = ${cible.k}$, donc $x = ${x0}$.`;
+      } else {
+        const sens: "<" | ">" = (op === "<") !== a < 0 ? "<" : ">";
+        const oppose: "<" | ">" = sens === "<" ? ">" : "<";
+        correct = intervalle(x0, sens, false);
+        pieges = [intervalle(x0, oppose, false), intervalle(xFaux, sens, false), intervalle(xFaux, oppose, false)];
+        conclusion =
+          `$${affine(a, b)} ${op} ${cible.k}$, donc $${affine(a, 0)} ${op} ${cible.k - b}$` +
+          (a < 0 ? ` ; on divise par $${a} < 0$, le sens change : $x ${sens} ${x0}$.` : `, soit $x ${sens} ${x0}$.`);
+      }
+      // « e^u − 1 > 0 » est la même inéquation déguisée : c'est ainsi qu'elle
+      // arrive dans une étude de signe. Une fois sur deux quand la cible est 1.
+      const deguisee = op !== "=" && cible.k === 0 && pickOne([true, false]);
+      return {
+        text: deguisee
+          ? `Résous dans $\\mathbb{R}$ : $e^{${affine(a, b)}} - 1 ${op} 0$.`
+          : `Résous dans $\\mathbb{R}$ : $e^{${affine(a, b)}} ${op} ${cible.tex}$.`,
+        format: "qcm",
+        choices: makeChoices(correct, pieges),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Pour comparer deux exponentielles, il faut DEUX exponentielles : on commence par écrire le second membre sous la forme $e^{\\dots}$.",
+          `Ici $${cible.tex} = e^{${cible.k}}$. L'exponentielle étant strictement croissante, on peut comparer les exposants.`,
+          conclusion,
+          `${op === "=" ? "$S = \\left\\{ " + x0 + " \\right\\}$" : "$S = $ " + correct}. ⛔ Le piège : ${cible.piege}`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_exp_comparer_tpl",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_derivee",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "L'exponentielle est strictement croissante : $e^{p}$ et $e^{q}$ sont rangés dans le même ordre que $p$ et $q$.",
+    tags: ["premiere", "maths", "exponentielle", "derivee", "comparer", "template"],
+    generate: () => {
+      // Des exposants PROCHES, souvent négatifs ou écrits différemment : tout
+      // l'exercice est de comparer p et q, l'exponentielle ne fait que suivre.
+      const paires: [{ t: string; v: number }, { t: string; v: number }][] = [
+        [{ t: "-3", v: -3 }, { t: "-2", v: -2 }],
+        [{ t: "-\\frac{1}{2}", v: -0.5 }, { t: "-0{,}6", v: -0.6 }],
+        [{ t: "\\sqrt{2}", v: Math.SQRT2 }, { t: "1{,}4", v: 1.4 }],
+        [{ t: "\\pi", v: Math.PI }, { t: "3{,}2", v: 3.2 }],
+        [{ t: "\\frac{1}{3}", v: 1 / 3 }, { t: "0{,}3", v: 0.3 }],
+        [{ t: "\\frac{2}{3}", v: 2 / 3 }, { t: "0{,}7", v: 0.7 }],
+        [{ t: "-\\sqrt{3}", v: -Math.sqrt(3) }, { t: "-1{,}7", v: -1.7 }],
+        [{ t: "\\frac{3}{4}", v: 0.75 }, { t: "0{,}75", v: 0.75 }],
+        [{ t: "-0{,}1", v: -0.1 }, { t: "-0{,}01", v: -0.01 }],
+        [{ t: "\\frac{5}{4}", v: 1.25 }, { t: "\\frac{4}{3}", v: 4 / 3 }],
+        [{ t: "-\\frac{7}{2}", v: -3.5 }, { t: "-\\frac{10}{3}", v: -10 / 3 }],
+        [{ t: "2{,}5", v: 2.5 }, { t: "\\frac{5}{2}", v: 2.5 }],
+      ];
+      const paire = pickOne(paires);
+      const [p, q] = pickOne([true, false]) ? paire : [paire[1], paire[0]];
+      const egal = Math.abs(p.v - q.v) < 1e-9;
+      const symbole = egal ? "=" : p.v < q.v ? "<" : ">";
+      const correct = `$e^{${p.t}} ${symbole} e^{${q.t}}$`;
+      const approx = (v: number) => nb(Math.round(v * 1000) / 1000);
+      return {
+        text: `Sans calculatrice, compare $e^{${p.t}}$ et $e^{${q.t}}$.`,
+        format: "qcm",
+        choices: [`$e^{${p.t}} < e^{${q.t}}$`, `$e^{${p.t}} > e^{${q.t}}$`, `$e^{${p.t}} = e^{${q.t}}$`],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'exponentielle est strictement croissante : elle range les nombres dans le même ordre que leurs exposants.",
+          `Il suffit donc de comparer les exposants $${p.t}$ et $${q.t}$.`,
+          egal
+            ? `$${p.t}$ et $${q.t}$ sont deux écritures du même nombre : les exponentielles sont égales.`
+            : `$${p.t} \\approx ${approx(p.v)}$ et $${q.t} \\approx ${approx(q.v)}$, donc $${p.t} ${symbole} ${q.t}$.${p.v < 0 && q.v < 0 ? " ⚠️ Entre deux négatifs, le plus grand est le plus proche de $0$." : ""}`,
+          `${correct}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_exp_produit_nul_tpl",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_signe",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Un produit est nul quand l'un de ses facteurs l'est. Mais l'un des deux facteurs ne s'annule JAMAIS.",
+    tags: ["premiere", "maths", "exponentielle", "signe", "equation", "template"],
+    generate: () => {
+      const a = pickOne([-4, -3, -2, -1, 1, 2, 3, 4]);
+      const b = pickOne([-8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8]);
+      const c = pickOne([1, -1, 2, -2, 3]);
+      const E = `e^{${affine(c, 0)}}`;
+      const facteur = `(${affine(a, b)})`;
+      const x0 = fraction(-b, a);
+      const correct = `$x = ${x0}$`;
+      return {
+        text: `Résous dans $\\mathbb{R}$ l'équation $${pickOne([true, false]) ? facteur + E : E + facteur} = 0$.`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$x = ${x0}$ ou $x = 0$`, // croire que l'exponentielle s'annule en 0
+          `$x = ${fraction(b, a)}$`,
+          "aucune solution",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un produit est nul si et seulement si l'un de ses facteurs est nul.",
+          `Le facteur $${E}$ est strictement positif pour tout réel $x$ : il ne s'annule jamais. Tout se joue donc sur $${affine(a, b)}$.`,
+          `$${affine(a, b)} = 0 \\Longleftrightarrow ${affine(a, 0)} = ${-b} \\Longleftrightarrow x = ${x0}$. ⛔ Et non « $x = 0$ » en plus : en $0$, l'exponentielle vaut $1$, pas $0$.`,
+          `$S = \\left\\{ ${x0} \\right\\}$.`
+        ),
+      };
+    },
+  },
+
+  /* ── L'étude de fonction : f(x) = (ax + b)e^{cx} ── */
+
+  {
+    kind: "template",
+    id: "premiere_exp_deriver_produit_tpl",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_derivee",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "C'est un PRODUIT : $(uv)' = u'v + uv'$, avec $(e^{cx})' = c\\,e^{cx}$. Puis on factorise par l'exponentielle.",
+    tags: ["premiere", "maths", "exponentielle", "derivee", "produit", "template"],
+    generate: () => {
+      const a = pickOne([-3, -2, -1, 1, 2, 3]);
+      const b = pickOne([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]);
+      const c = pickOne([1, -1, 2]);
+      const E = `e^{${affine(c, 0)}}`;
+      /** (kx + m)·E, ou kx·E quand m est nul. */
+      const produit = (k: number, m: number) => (m === 0 ? `${coef(k)}x${E}` : `(${affine(k, m)})${E}`);
+      const p = a * c;
+      const q = a + b * c;
+      const correct = `$f'(x) = ${produit(p, q)}$`;
+      return {
+        text: `Calcule la dérivée de la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = ${produit(a, b)}$.`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$f'(x) = ${coef(a * c)}${E}$`, // on dérive chaque facteur et on multiplie
+          `$f'(x) = ${produit(a, a + b)}$`, // on oublie le c de (e^{cx})'
+          `$f'(x) = ${produit(-p, a - b * c)}$`, // u'v − uv'
+          `$f'(x) = ${produit(p, b * c)}$`, // on ne dérive que l'exponentielle
+          `$f'(x) = ${coef(a)}${E}$`, // on ne dérive que le facteur affine
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "$f$ est un produit $u \\times v$ : on applique $(uv)' = u'v + uv'$.",
+          `$u(x) = ${affine(a, b)}$, donc $u'(x) = ${a}$ ; $v(x) = ${E}$, donc $v'(x) = ${coef(c)}${E}$.`,
+          `$f'(x) = ${a}\\,${E} ${c < 0 ? "-" : "+"} ${Math.abs(c) === 1 ? "" : Math.abs(c)}(${affine(a, b)})${E}$. On factorise par $${E}$ : $f'(x) = (${a} ${c < 0 ? "-" : "+"} ${Math.abs(c) === 1 ? "" : Math.abs(c)}(${affine(a, b)}))${E}$.`,
+          `${correct}. On garde toujours cette forme factorisée : c'est elle qui donne le signe.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_exp_variations_tpl",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_derivee",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "L'exponentielle est strictement positive : elle ne décide jamais du signe de $f'$. C'est l'autre facteur qui décide.",
+    tags: ["premiere", "maths", "exponentielle", "derivee", "variations", "template"],
+    generate: () => {
+      const p = pickOne([-3, -2, -1, 1, 2, 3]);
+      const q = randomInt(-6, 6);
+      const c = pickOne([1, -1, 2, -2]);
+      const E = `e^{${affine(c, 0)}}`;
+      const fp = q === 0 ? `${coef(p)}x${E}` : `(${affine(p, q)})${E}`;
+      const decrire = (x: string, descendPuisMonte: boolean) =>
+        descendPuisMonte
+          ? `décroissante sur $\\left] -\\infty \\,;\\, ${x} \\right]$, puis croissante sur $\\left[ ${x} \\,;\\, +\\infty \\right[$`
+          : `croissante sur $\\left] -\\infty \\,;\\, ${x} \\right]$, puis décroissante sur $\\left[ ${x} \\,;\\, +\\infty \\right[$`;
+      const x0 = fraction(-q, p);
+      const correct = decrire(x0, p > 0);
+      return {
+        text: `Soit $f$ une fonction dérivable sur $\\mathbb{R}$ dont la dérivée est $f'(x) = ${fp}$. Quelles sont les variations de $f$ ?`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          decrire(x0, p < 0),
+          `croissante sur $\\mathbb{R}$, car $${E} > 0$`, // l'exponentielle prise pour le signe de f'
+          c < 0 ? `décroissante sur $\\mathbb{R}$, car $${E} < 0$` : decrire(fraction(q, p), p < 0),
+          decrire(fraction(q, p), p > 0),
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le sens de variation de $f$ se lit sur le signe de $f'$.",
+          `Dans $f'(x) = ${fp}$, le facteur $${E}$ est strictement positif pour tout $x$${c < 0 ? " — même avec un exposant négatif : une exponentielle n'est jamais négative" : ""}. Le signe de $f'(x)$ est donc celui de $${affine(p, q)}$.`,
+          `$${affine(p, q)}$ s'annule en $x = ${x0}$ ; comme le coefficient $${p}$ est ${p > 0 ? "positif, il est négatif avant puis positif après" : "négatif, il est positif avant puis négatif après"}.`,
+          `$f$ est ${correct}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_exp_extremum_tpl",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_derivee",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Dérive, factorise par l'exponentielle, cherche où $f'$ s'annule EN CHANGEANT DE SIGNE, puis calcule l'image de ce point.",
+    tags: ["premiere", "maths", "exponentielle", "derivee", "extremum", "template"],
+    generate: () => {
+      // On part de l'extremum x0 pour qu'il tombe sur un entier : avec
+      // f(x) = (ax + b)e^{cx}, f'(x) = (acx + a + bc)e^{cx} s'annule en x0 quand
+      // b = −a(x0 + 1) pour c = 1, et b = a(1 − x0) pour c = −1. L'image vaut
+      // alors f(x0) = −a·e^{x0} (c = 1) ou a·e^{−x0} (c = −1).
+      const c = pickOne([1, -1]);
+      const a = pickOne([-2, -1, 1, 2]);
+      const x0 = randomInt(-3, 3);
+      const b = c === 1 ? -a * (x0 + 1) : a * (1 - x0);
+      const E = `e^{${affine(c, 0)}}`;
+      const f = b === 0 ? `${coef(a)}x${E}` : `(${affine(a, b)})${E}`;
+      const k = c === 1 ? -a : a;
+      const n = c * x0;
+      const minimum = c === 1 ? a > 0 : a < 0;
+      const nature = minimum ? "minimum" : "maximum";
+      const autre = minimum ? "maximum" : "minimum";
+      const V = kExp(k, n);
+      const p = a * c;
+      const q = a + b * c; // = −p·x0
+      const correct = `un ${nature} égal à $${V}$, atteint en $x = ${x0}$`;
+      return {
+        text: `On considère la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = ${f}$. Quel est son extremum ?`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `un ${autre} égal à $${V}$, atteint en $x = ${x0}$`,
+          `un ${nature} égal à $0$, atteint en $x = ${fraction(-b, a)}$`, // où f s'annule, pas f'
+          `un ${nature} égal à $${kExp(-k, n)}$, atteint en $x = ${x0}$`,
+          `aucun extremum : $${E}$ est toujours strictement positif`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un extremum se trouve là où la dérivée s'annule EN CHANGEANT DE SIGNE — pas là où la fonction s'annule.",
+          `Produit : $f'(x) = ${q === 0 ? `${coef(p)}x${E}` : `(${affine(p, q)})${E}`}$. Comme $${E} > 0$, $f'(x)$ a le signe de $${affine(p, q)}$, qui s'annule en $x = ${x0}$.`,
+          `$${affine(p, q)}$ est ${p > 0 ? "négatif puis positif" : "positif puis négatif"} : $f$ ${minimum ? "descend puis remonte" : "monte puis redescend"}. En $x = ${x0}$ : $f(${x0}) = (${a * x0 + b})e^{${n}} = ${V}$.`,
+          `${correct.charAt(0).toUpperCase()}${correct.slice(1)}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_exp_etude_open_tpl",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_derivee",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Trois temps : dériver (produit), étudier le signe de $f'$ (l'exponentielle est positive), dresser le tableau.",
+    tags: ["premiere", "maths", "exponentielle", "derivee", "variations", "open", "template"],
+    generate: () => {
+      const a = pickOne([-3, -2, -1, 1, 2, 3]);
+      const b = pickOne([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]);
+      const q = a + b;
+      const x0 = fraction(-q, a);
+      const fp = q === 0 ? `${coef(a)}xe^{x}` : `(${affine(a, q)})e^{x}`;
+      const nature = a > 0 ? "minimum" : "maximum";
+      return {
+        text: `Étudie les variations de la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = (${affine(a, b)})e^{x}$ : calcule $f'(x)$, étudie son signe, puis dresse son tableau de variations.`,
+        format: "open",
+        expected: ["strictement positi", "signe de", "e^x > 0", "e^x>0", nature, "croissante"],
+        comparator: "contains_keyword",
+        explanation: exp(
+          "On dérive un produit, puis on lit le sens de variation sur le signe de la dérivée.",
+          `$f'(x) = ${a}e^{x} + (${affine(a, b)})e^{x} = ${fp}$, en factorisant par $e^{x}$.`,
+          `Comme $e^{x} > 0$, $f'(x)$ a le signe de $${affine(a, q)}$ : ${a > 0 ? "négatif" : "positif"} pour $x < ${x0}$, nul en $${x0}$, ${a > 0 ? "positif" : "négatif"} pour $x > ${x0}$.`,
+          `$f$ est ${a > 0 ? "décroissante" : "croissante"} sur $\\left] -\\infty \\,;\\, ${x0} \\right]$ puis ${a > 0 ? "croissante" : "décroissante"} sur $\\left[ ${x0} \\,;\\, +\\infty \\right[$ : elle admet un ${nature} en $x = ${x0}$.`
+        ),
+      };
+    },
+  },
+
+  /* ── Les cinq micros sous le seuil de renouvellement (8 à 11 énoncés) ── */
+
+  {
+    kind: "template",
+    id: "premiere_exp_def_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_definition",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Deux vérifications, dans l'ordre : $f(0)$ vaut-il $1$ ? $f'$ est-elle égale à $f$ ?",
+    tags: ["premiere", "maths", "exponentielle", "definition", "template"],
+    generate: () => {
+      const ks = [
+        { t: "", v: 1 },
+        { t: "2", v: 2 },
+        { t: "3", v: 3 },
+        { t: "-", v: -1 },
+        { t: "\\dfrac{1}{2}", v: 0.5 },
+        { t: "5", v: 5 },
+      ];
+      const as = [
+        { t: "x", v: 1 },
+        { t: "2x", v: 2 },
+        { t: "-x", v: -1 },
+        { t: "3x", v: 3 },
+        { t: "\\frac{x}{2}", v: 0.5 },
+      ];
+      // Le « oui » a une chance sur quatre : sinon il ne sortirait qu'une fois sur trente.
+      const oui = randomInt(1, 4) === 1;
+      const k = oui ? ks[0] : pickOne(ks);
+      const a = oui ? as[0] : pickOne(as);
+      const depart = k.v === 1;
+      const derivee = a.v === 1;
+      const verdict: keyof typeof VERDICTS_EXP = depart && derivee ? "oui" : derivee ? "depart" : depart ? "derivee" : "aucune";
+      const quart = (v: number) => fraction(Math.round(v * 4), 4);
+      const ka = k.v * a.v;
+      return {
+        text: `La fonction définie sur $\\mathbb{R}$ par $f(x) = ${k.t}e^{${a.t}}$ est-elle la fonction exponentielle ?`,
+        format: "qcm",
+        choices: Object.values(VERDICTS_EXP),
+        expected: [VERDICTS_EXP[verdict]],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'exponentielle est l'unique fonction telle que $f' = f$ ET $f(0) = 1$ : les deux conditions, pas une seule.",
+          `En $0$ : $f(0) = ${k.t === "" ? "" : k.t === "-" ? "-" : k.t + " \\times "}e^{0} = ${quart(k.v)}$${depart ? "" : ", et non $1$"}.`,
+          `Dérivée : $(e^{${a.t}})' = ${a.v === 1 ? "" : quart(a.v) === "-1" ? "-" : quart(a.v)}e^{${a.t}}$, donc $f'(x) = ${ka === 1 ? "" : ka === -1 ? "-" : quart(ka)}e^{${a.t}}$ — ${derivee ? "c'est bien $f(x)$" : "ce n'est pas $f(x)$"}.`,
+          `${VERDICTS_EXP[verdict].charAt(0).toUpperCase()}${VERDICTS_EXP[verdict].slice(1)}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_exp_e_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_nombre_e",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$e$ lui-même est une exponentielle : $e = \\exp(1) = e^{1}$.",
+    tags: ["premiere", "maths", "exponentielle", "nombre_e", "notation", "template"],
+    generate: () => {
+      const p = pickOne([2, 3, 4, 5, -1, -2, -3]);
+      // Dans un calcul, un exposant négatif prend ses parenthèses : « 1 + (-2) », pas « 1 + -2 ».
+      const P = p < 0 ? `(${p})` : String(p);
+      const formes = [
+        {
+          tex: `\\exp(${p}) \\times e`,
+          juste: p + 1,
+          calcul: `e^{${p}} \\times e^{1} = e^{${p} + 1}`,
+          pieges: [`$e^{${p}}$`, `$${p}e$`, `$e^{${p} + e}$`],
+        },
+        {
+          tex: `\\dfrac{\\exp(${p})}{e}`,
+          juste: p - 1,
+          calcul: `\\dfrac{e^{${p}}}{e^{1}} = e^{${p} - 1}`,
+          pieges: [`$e^{${p}}$`, `$e^{${p}} - 1$`, `$e^{${p} - e}$`],
+        },
+        {
+          tex: `e \\times \\exp(${p}) \\times e`,
+          juste: p + 2,
+          calcul: `e^{1} \\times e^{${p}} \\times e^{1} = e^{1 + ${P} + 1}`,
+          pieges: [`$2e^{${p}}$`, `$e^{${p + 1}}$`, `$e^{${2 * p}}$`],
+        },
+        {
+          tex: `\\left(\\exp(1)\\right)^{${p}}`,
+          juste: p,
+          calcul: `\\left(e^{1}\\right)^{${p}} = e^{1 \\times ${P}}`,
+          pieges: [`$e^{${p + 1}}$`, `$${p}e$`, `$1$`],
+        },
+      ];
+      const fo = pickOne(formes);
+      const correct = `$e^{${fo.juste}}$`;
+      return {
+        text: `Écris $${fo.tex}$ sous la forme d'une seule puissance de $e$.`,
+        format: "qcm",
+        choices: makeChoices(correct, fo.pieges),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le nombre $e$ est défini par $e = \\exp(1)$ : c'est donc lui-même une exponentielle, $e = e^{1}$, et la notation $e^{x}$ remplace $\\exp(x)$.",
+          "On réécrit tout avec des puissances de $e$, puis on applique les règles de calcul des puissances.",
+          `$${fo.calcul} = e^{${fo.juste}}$.`,
+          `${correct}. ⛔ $e$ n'est pas « rien » dans un produit : c'est un facteur $e^{1}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_exp_crb_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_courbe",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Compare les exposants $k_1 t$ et $k_2 t$ : leur ordre dépend du signe de $t$. L'exponentielle, croissante, suit cet ordre.",
+    tags: ["premiere", "maths", "exponentielle", "courbe", "template"],
+    generate: () => {
+      const ks = [
+        { t: "2", v: 2 },
+        { t: "0{,}5", v: 0.5 },
+        { t: "3", v: 3 },
+        { t: "-", v: -1 },
+        { t: "-0{,}5", v: -0.5 },
+        { t: "", v: 1 },
+        { t: "0{,}2", v: 0.2 },
+        { t: "-2", v: -2 },
+      ];
+      const k1 = pickOne(ks);
+      const k2 = pickOne(ks.filter((k) => k !== k1));
+      const positif = pickOne([true, false]);
+      // Pour t > 0 : k1·t > k2·t ⇔ k1 > k2. Pour t < 0, l'ordre s'inverse.
+      const fDessus = positif ? k1.v > k2.v : k1.v < k2.v;
+      const correct = fDessus ? "la courbe de $f$" : "la courbe de $g$";
+      const [grand, petit] = k1.v > k2.v ? [k1, k2] : [k2, k1];
+      return {
+        text: `On trace dans un même repère les courbes de $f(t) = e^{${k1.t}t}$ et de $g(t) = e^{${k2.t}t}$. Pour $t ${positif ? ">" : "<"} 0$, laquelle est au-dessus de l'autre ?`,
+        format: "qcm",
+        choices: ["la courbe de $f$", "la courbe de $g$", "elles sont confondues"],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'exponentielle est strictement croissante : la courbe au-dessus est celle dont l'EXPOSANT est le plus grand.",
+          `On compare $${k1.t === "" ? "" : k1.t === "-" ? "-" : k1.t}t$ et $${k2.t === "" ? "" : k2.t === "-" ? "-" : k2.t}t$ : multiplier par $t$ ${positif ? "positif conserve" : "NÉGATIF renverse"} l'ordre des coefficients.`,
+          positif
+            ? `Pour $t > 0$, le plus grand coefficient donne le plus grand exposant : c'est $${grand.t === "" ? "1" : grand.t === "-" ? "-1" : grand.t}$.`
+            : `Pour $t < 0$, c'est le PLUS PETIT coefficient, $${petit.t === "" ? "1" : petit.t === "-" ? "-1" : petit.t}$, qui donne le plus grand exposant. Les deux courbes se croisent en $(0 ; 1)$ et échangent leurs places.`,
+          `Pour $t ${positif ? ">" : "<"} 0$, c'est ${correct} qui est au-dessus.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_exp_aff_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_derivee_affine",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "$(e^{at})' = a\\,e^{at}$, et un coefficient devant reste en facteur : $(k\\,e^{at})' = k \\times a\\,e^{at}$.",
+    tags: ["premiere", "maths", "exponentielle", "derivee_affine", "template"],
+    generate: () => {
+      const k = pickOne([2, 3, 5, 10, 20, 50, 100, -4]);
+      const a = pickOne([0.1, 0.2, -0.2, 0.5, -0.5, 2, -3, -0.05, 1.5]);
+      const ka = Math.round(k * a * 10000) / 10000;
+      const E = `e^{${nb(a)}t}`;
+      const devant = (v: number) => (v === 1 ? "" : v === -1 ? "-" : `${nb(v)}\\,`);
+      const correct = `$f'(t) = ${devant(ka)}${E}$`;
+      return {
+        text: `Calcule la dérivée de la fonction $f$ définie sur $\\mathbb{R}$ par $f(t) = ${k}\\,${E}$.`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$f'(t) = ${devant(k)}${E}$`, // on oublie le a
+          `$f'(t) = ${devant(a)}${E}$`, // on oublie le k
+          `$f'(t) = ${ka === 1 ? "" : ka === -1 ? "-" : nb(ka)}t\\,${E}$`, // on recopie l'exposant entier
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Pour tout réel $a$, la dérivée de $t \\mapsto e^{at}$ est $t \\mapsto a\\,e^{at}$ ; un coefficient constant devant reste en facteur.",
+          `Ici $k = ${k}$ et $a = ${nb(a)}$.`,
+          `$f'(t) = ${k} \\times ${a < 0 ? `(${nb(a)})` : nb(a)}\\,${E} = ${devant(ka)}${E}$.`,
+          `${correct}${ka < 0 ? " : négative partout, la fonction décroît." : " : positive partout, la fonction croît."}`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_exp_geo_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_suite_geo",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Calcule $u_0$, puis le quotient $\\dfrac{u_{n+1}}{u_n}$ : la relation fonctionnelle fait sortir un facteur constant.",
+    tags: ["premiere", "maths", "exponentielle", "suite_geo", "template"],
+    generate: () => {
+      const C = pickOne([2, 5, 10, 50, 100, 300, 1000]);
+      const a = pickOne([0.1, 0.3, -0.2, -0.5, 1, -1, 2, 0.05]);
+      const A = nb(a);
+      const exposant = a === 1 ? "n" : a === -1 ? "-n" : `${A}n`;
+      const correct = `géométrique de premier terme $${C}$ et de raison $e^{${A}}$`;
+      return {
+        text: `On définit la suite $(u_n)$ par $u_n = ${C}\\,e^{${exposant}}$ pour tout entier naturel $n$. Quelle est sa nature ?`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `géométrique de premier terme $${C}$ et de raison $${A}$`,
+          `géométrique de premier terme $${C}\\,e^{${A}}$ et de raison $e^{${A}}$`,
+          `arithmétique de premier terme $${C}$ et de raison $${A}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une suite est géométrique quand le quotient de deux termes consécutifs est constant ; ce quotient est la raison.",
+          `Premier terme : $u_0 = ${C}\\,e^{0} = ${C}$.`,
+          `$\\dfrac{u_{n+1}}{u_n} = \\dfrac{${C}\\,e^{${A}(n+1)}}{${C}\\,e^{${A}n}} = e^{${A}(n+1) - ${a < 0 ? `(${A}n)` : `${A}n`}} = e^{${A}}$, qui ne dépend pas de $n$.`,
+          `La suite est ${correct}${a > 0 ? " ; comme $e^{" + A + "} > 1$, elle est croissante." : " ; comme $0 < e^{" + A + "} < 1$, elle est décroissante."}`
         ),
       };
     },
