@@ -350,9 +350,9 @@ export const microSkills: MicroSkillSource[] = [
 
   /* ────────────────────────── expo_proprietes ────────────────────────── */
 
-  { id: "expoT_somme_exposants", label: "Utiliser a^(x+y) = aˣ × a^y", notionId: "expo_proprietes", prerequis: [] },
-  { id: "expoT_difference_exposants", label: "Utiliser a^(x−y) = aˣ / a^y", notionId: "expo_proprietes", prerequis: ["expoT_somme_exposants"] },
-  { id: "expoT_puissance_exposant", label: "Utiliser a^(nx) = (aˣ)ⁿ pour n entier relatif", notionId: "expo_proprietes", prerequis: ["expoT_somme_exposants"] },
+  { id: "expoT_somme_exposants", label: "Utiliser $a^{x+y} = a^x \\times a^y$", notionId: "expo_proprietes", prerequis: [] },
+  { id: "expoT_difference_exposants", label: "Utiliser $a^{x-y} = \\dfrac{a^x}{a^y}$", notionId: "expo_proprietes", prerequis: ["expoT_somme_exposants"] },
+  { id: "expoT_puissance_exposant", label: "Utiliser $a^{nx} = (a^x)^n$ pour $n$ entier relatif", notionId: "expo_proprietes", prerequis: ["expoT_somme_exposants"] },
   { id: "expoT_transformer", label: "Transformer une écriture numérique ou littérale à l'aide des propriétés algébriques", notionId: "expo_proprietes", prerequis: ["expoT_difference_exposants", "expoT_puissance_exposant"] },
 
   /* ────────────────────────── expo_taux_moyen ────────────────────────── */
@@ -447,12 +447,12 @@ export const microSkills: MicroSkillSource[] = [
   /* ─────────────────── proba_conditionnelle_tableau ─────────────────── */
 
   { id: "probaC_reconnaitre", label: "Reconnaître une probabilité conditionnelle dans un énoncé (« parmi », « sachant que »)", notionId: "proba_conditionnelle_tableau", prerequis: [] },
-  { id: "probaC_notation", label: "Utiliser la notation P_A(B)", notionId: "proba_conditionnelle_tableau", prerequis: ["probaC_reconnaitre"] },
+  { id: "probaC_notation", label: "Utiliser la notation $P_A(B)$", notionId: "proba_conditionnelle_tableau", prerequis: ["probaC_reconnaitre"] },
   { id: "probaC_calculer_tableau", label: "Calculer une probabilité conditionnelle à partir d'un tableau croisé d'effectifs", notionId: "proba_conditionnelle_tableau", prerequis: ["probaC_notation"] },
 
   /* ────────────────── proba_conditionnelle_distinguer ────────────────── */
 
-  { id: "probaC_distinguer", label: "Distinguer P(A ∩ B), P_A(B) et P_B(A)", notionId: "proba_conditionnelle_distinguer", prerequis: [] },
+  { id: "probaC_distinguer", label: "Distinguer $P(A \\cap B)$, $P_A(B)$ et $P_B(A)$", notionId: "proba_conditionnelle_distinguer", prerequis: [] },
   { id: "probaC_interpreter_phrase", label: "Interpréter une probabilité conditionnelle par une phrase", notionId: "proba_conditionnelle_distinguer", prerequis: ["probaC_distinguer"] },
   { id: "probaC_test_diagnostique", label: "Interpréter faux positifs, faux négatifs, sensibilité et spécificité d'un test", notionId: "proba_conditionnelle_distinguer", prerequis: ["probaC_distinguer"] },
 
@@ -479,7 +479,7 @@ export const microSkills: MicroSkillSource[] = [
 
   /* ──────────────────────── proba_independance ──────────────────────── */
 
-  { id: "probaT_indep_definition", label: "Reconnaître l'indépendance de deux évènements : P_A(B) = P(B)", notionId: "proba_independance", prerequis: [] },
+  { id: "probaT_indep_definition", label: "Reconnaître l'indépendance de deux évènements : $P_A(B) = P(B)$", notionId: "proba_independance", prerequis: [] },
   { id: "probaT_indep_produit", label: "Utiliser P(A ∩ B) = P(A) × P(B) pour deux évènements indépendants", notionId: "proba_independance", prerequis: ["probaT_indep_definition"] },
   { id: "probaT_indep_justifier", label: "Justifier par un calcul que deux évènements sont indépendants, ou ne le sont pas", notionId: "proba_independance", prerequis: ["probaT_indep_produit"] },
   { id: "probaT_indep_incompatible", label: "Distinguer indépendance et incompatibilité", notionId: "proba_independance", prerequis: ["probaT_indep_definition"] },

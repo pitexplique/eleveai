@@ -97,7 +97,7 @@ export const notions: NotionSource[] = [
 
   { id: "expo_suite_geometrique", label: "Suite géométrique : reconnaître", boId: "BOP1VE", prerequis: ["auto_coefficient_multiplicateur"], levels: [1, 2, 3] },
   { id: "expo_suite_terme_general", label: "Suite géométrique : terme général", boId: "BOP1VE", prerequis: ["expo_suite_geometrique"], levels: [1, 2, 3] },
-  { id: "expo_fonction", label: "Fonction exponentielle x ↦ a^x", boId: "BOP1VE", prerequis: ["expo_suite_geometrique"], levels: [1, 2, 3] },
+  { id: "expo_fonction", label: "Fonction exponentielle x ↦ aˣ", boId: "BOP1VE", prerequis: ["expo_suite_geometrique"], levels: [1, 2, 3] },
   { id: "expo_fonction_lecture", label: "Fonction exponentielle : variations et courbe", boId: "BOP1VE", prerequis: ["expo_fonction"], levels: [1, 2, 3] },
   { id: "expo_taux_moyen", label: "Taux d'évolution moyen", boId: "BOP1VE", prerequis: ["expo_suite_geometrique", "auto_taux_evolution"], levels: [1, 2, 3] },
   { id: "expo_modeliser", label: "Modéliser une évolution exponentielle", boId: "BOP1VE", prerequis: ["expo_suite_terme_general"], levels: [1, 2, 3] },

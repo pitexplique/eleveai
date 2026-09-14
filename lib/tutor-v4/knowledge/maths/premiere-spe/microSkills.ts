@@ -324,7 +324,7 @@ export const microSkills: MicroSkillSource[] = [
   },
   {
     id: "exp_nombre_e",
-    label: "Le nombre e et la notation eˣ",
+    label: "Le nombre $e$ et la notation $e^x$",
     notionId: "exponentielle",
     prerequis: ["exp_definition"],
   },
@@ -354,19 +354,19 @@ export const microSkills: MicroSkillSource[] = [
   },
   {
     id: "exp_derivee_affine",
-    label: "Dériver t ↦ e^(kt)",
+    label: "Dériver $t \\mapsto e^{kt}$",
     notionId: "exponentielle",
     prerequis: ["exp_derivee"],
   },
   {
     id: "exp_courbe",
-    label: "Représenter t ↦ e^(kt) et t ↦ e^(−kt)",
+    label: "Représenter $t \\mapsto e^{kt}$ et $t \\mapsto e^{-kt}$",
     notionId: "exponentielle",
     prerequis: ["exp_derivee_affine"],
   },
   {
     id: "exp_suite_geo",
-    label: "Reconnaître que la suite (e^(na)) est géométrique",
+    label: "Reconnaître que la suite $(e^{na})$ est géométrique",
     notionId: "exponentielle",
     prerequis: ["exp_proprietes", "suite_geometrique"],
   },
@@ -620,7 +620,7 @@ export const microSkills: MicroSkillSource[] = [
   },
   {
     id: "pc_inverser",
-    label: "Distinguer P_A(B) et P_B(A) : les faux positifs",
+    label: "Distinguer $P_A(B)$ et $P_B(A)$ : les faux positifs",
     notionId: "probabilites_conditionnelles",
     prerequis: ["pc_totales"],
   },

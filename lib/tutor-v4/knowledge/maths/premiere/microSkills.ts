@@ -141,7 +141,7 @@ export const microSkills: MicroSkillSource[] = [
 
   { id: "auto_proba_conditionnelle_lecture", label: "Calculer une probabilité conditionnelle à partir d'un tableau croisé ou d'un arbre pondéré", notionId: "auto_proba_lecture", prerequis: ["auto_proba_equiprobabilite"] },
   { id: "auto_proba_intersection_tableau", label: "Lire P(A ∩ B) dans un tableau croisé d'effectifs", notionId: "auto_proba_lecture", prerequis: ["auto_proba_conditionnelle_lecture"] },
-  { id: "auto_proba_distinguer", label: "Distinguer P(A ∩ B), P_A(B) et P_B(A)", notionId: "auto_proba_lecture", prerequis: ["auto_proba_intersection_tableau"] },
+  { id: "auto_proba_distinguer", label: "Distinguer $P(A \\cap B)$, $P_A(B)$ et $P_B(A)$", notionId: "auto_proba_lecture", prerequis: ["auto_proba_intersection_tableau"] },
 
   /* ─────────────────────── info_tableau_croise ─────────────────────── */
 
@@ -205,15 +205,15 @@ export const microSkills: MicroSkillSource[] = [
   /* ───────────────────────── alea_conditionnelle ───────────────────────── */
 
   { id: "alea_cond_reconnaitre", label: "Reconnaître une probabilité conditionnelle dans un énoncé (« parmi », « sachant que »)", notionId: "alea_conditionnelle", prerequis: [] },
-  { id: "alea_cond_notation", label: "Utiliser la notation P_A(B)", notionId: "alea_conditionnelle", prerequis: ["alea_cond_reconnaitre"] },
+  { id: "alea_cond_notation", label: "Utiliser la notation $P_A(B)$", notionId: "alea_conditionnelle", prerequis: ["alea_cond_reconnaitre"] },
   { id: "alea_cond_tableau", label: "Calculer une probabilité conditionnelle à l'aide d'un tableau croisé d'effectifs", notionId: "alea_conditionnelle", prerequis: ["alea_cond_notation"] },
 
   /* ────────────────────── alea_conditionnelle_calcul ────────────────────── */
 
-  { id: "alea_cond_formule", label: "Utiliser P_A(B) = P(A ∩ B) / P(A)", notionId: "alea_conditionnelle_calcul", prerequis: ["alea_cond_notation"] },
-  { id: "alea_cond_intersection", label: "Calculer P(A ∩ B) à partir de P(A) et de P_A(B)", notionId: "alea_conditionnelle_calcul", prerequis: ["alea_cond_formule"] },
+  { id: "alea_cond_formule", label: "Utiliser $P_A(B) = \\dfrac{P(A \\cap B)}{P(A)}$", notionId: "alea_conditionnelle_calcul", prerequis: ["alea_cond_notation"] },
+  { id: "alea_cond_intersection", label: "Calculer $P(A \\cap B)$ à partir de $P(A)$ et de $P_A(B)$", notionId: "alea_conditionnelle_calcul", prerequis: ["alea_cond_formule"] },
   { id: "alea_cond_interpreter", label: "Interpréter une probabilité conditionnelle par une phrase", notionId: "alea_conditionnelle_calcul", prerequis: ["alea_cond_tableau"] },
-  { id: "alea_cond_faux_positifs", label: "Distinguer P_A(B) et P_B(A) dans un test médical (faux positifs)", notionId: "alea_conditionnelle_calcul", prerequis: ["alea_cond_interpreter", "alea_cond_formule"] },
+  { id: "alea_cond_faux_positifs", label: "Distinguer $P_A(B)$ et $P_B(A)$ dans un test médical (faux positifs)", notionId: "alea_conditionnelle_calcul", prerequis: ["alea_cond_interpreter", "alea_cond_formule"] },
 
   /* ──────────────────────────── alea_arbre ──────────────────────────── */
 
@@ -229,7 +229,7 @@ export const microSkills: MicroSkillSource[] = [
 
   /* ───────────────────────── alea_independance ───────────────────────── */
 
-  { id: "alea_indep_definition", label: "Reconnaître l'indépendance de deux évènements : P_B(A) = P(A)", notionId: "alea_independance", prerequis: [] },
+  { id: "alea_indep_definition", label: "Reconnaître l'indépendance de deux évènements : $P_B(A) = P(A)$", notionId: "alea_independance", prerequis: [] },
   { id: "alea_indep_produit", label: "Utiliser P(A ∩ B) = P(A) × P(B) pour deux évènements indépendants", notionId: "alea_independance", prerequis: ["alea_indep_definition"] },
   { id: "alea_indep_justifier", label: "Justifier par un calcul que deux évènements sont indépendants, ou ne le sont pas", notionId: "alea_independance", prerequis: ["alea_indep_produit"] },
   { id: "alea_indep_incompatible", label: "Distinguer indépendance et incompatibilité", notionId: "alea_independance", prerequis: ["alea_indep_definition"] },
@@ -329,9 +329,9 @@ export const microSkills: MicroSkillSource[] = [
 
   /* ─────────────────────────── expo_fonction ─────────────────────────── */
 
-  { id: "expo_fct_reconnaitre", label: "Reconnaître une fonction exponentielle x ↦ a^x (a > 0)", notionId: "expo_fonction", prerequis: [] },
+  { id: "expo_fct_reconnaitre", label: "Reconnaître une fonction exponentielle $x \\mapsto a^x$ ($a > 0$)", notionId: "expo_fonction", prerequis: [] },
   { id: "expo_fct_calculer", label: "Calculer l'image d'un réel positif par une fonction exponentielle", notionId: "expo_fonction", prerequis: ["expo_fct_reconnaitre"] },
-  { id: "expo_fct_proprietes", label: "Utiliser les propriétés algébriques (a^(x+y) = a^x × a^y)", notionId: "expo_fonction", prerequis: ["expo_fct_calculer"] },
+  { id: "expo_fct_proprietes", label: "Utiliser les propriétés algébriques ($a^{x+y} = a^x \\times a^y$)", notionId: "expo_fonction", prerequis: ["expo_fct_calculer"] },
   { id: "expo_fct_exposant_fractionnaire", label: "Utiliser l'exposant 1/n (racine n-ième d'un réel positif)", notionId: "expo_fonction", prerequis: ["expo_fct_proprietes"] },
 
   /* ─────────────────────── expo_fonction_lecture ─────────────────────── */

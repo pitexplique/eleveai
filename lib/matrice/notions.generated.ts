@@ -1925,7 +1925,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "expo_fonction",
-        "label": "Fonction exponentielle x ↦ a^x",
+        "label": "Fonction exponentielle x ↦ aˣ",
         "prerequis": [
           "expo_suite_geometrique"
         ]
