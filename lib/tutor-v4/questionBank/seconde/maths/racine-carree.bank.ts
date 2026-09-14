@@ -913,7 +913,7 @@ export const racineCarreeBank: TutorBankItemV4[] = [
     microId: "racine_simplification",
     difficulty: 3,
     theme: "neutral",
-    hint: "Extrais le carré parfait : racine(k^2 * 2) = k racine(2).",
+    hint: "Extrais le carré parfait : $\\sqrt{k^2 \\times 2} = k\\sqrt{2}$.",
     tags: ["seconde", "maths", "racine", "simplification", "template"],
     generate: () => {
       const k = randomInt(2, 6);
@@ -945,7 +945,7 @@ export const racineCarreeBank: TutorBankItemV4[] = [
     microId: "racine_simplification",
     difficulty: 3,
     theme: "neutral",
-    hint: "racine(k^2 * 3) = k racine(3).",
+    hint: "$\\sqrt{k^2 \\times 3} = k\\sqrt{3}$.",
     tags: ["seconde", "maths", "racine", "simplification", "template"],
     generate: () => {
       const k = randomInt(2, 5);
@@ -977,7 +977,7 @@ export const racineCarreeBank: TutorBankItemV4[] = [
     microId: "racine_simplification",
     difficulty: 4,
     theme: "neutral",
-    hint: "racine(k^2 * 5) = k racine(5).",
+    hint: "$\\sqrt{k^2 \\times 5} = k\\sqrt{5}$.",
     tags: ["seconde", "maths", "racine", "simplification", "template"],
     generate: () => {
       const k = randomInt(2, 4);

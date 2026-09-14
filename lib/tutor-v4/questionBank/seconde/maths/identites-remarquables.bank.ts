@@ -1012,7 +1012,7 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     microId: "ir_calcul_mental",
     difficulty: 4,
     theme: "neutral",
-    hint: "Écris le nombre comme (n - 1)(n + 1) = n^2 - 1.",
+    hint: "Écris le nombre comme $(n - 1)(n + 1) = n^2 - 1$.",
     tags: ["seconde", "maths", "identites", "calcul_mental", "template"],
     generate: () => {
       const n = randomInt(11, 40);

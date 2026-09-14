@@ -1218,7 +1218,9 @@ export const fonctionsAffinesBank: TutorBankItemV4[] = [
             (a > 0
               ? `Comme $a = ${a} > 0$, $f$ est CROISSANTE : négative AVANT la racine.`
               : `Comme $a = ${a} < 0$, $f$ est DÉCROISSANTE : négative APRÈS la racine.`),
-          `$f$ est négative sur ${correct.replace(/\$/g, "")}.`
+          // ⛔ Le `.replace(/\$/g, "")` retirait les délimiteurs : l'élève lisait
+          // « ]-\infty \,;\, 3[ » en clair (mesuré le 14/09/2026).
+          `$f$ est négative sur ${correct}.`
         ),
       };
     },
