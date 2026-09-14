@@ -652,7 +652,7 @@ export const loiBinomialeBank: TutorBankItemV4[] = [
     ],
     expected: ["$\\binom{n}{k} p^k (1-p)^{n-k}$"],
     comparator: "mcq_exact",
-    hint: "Coefficient binomial × proba de succès^k × proba d'échec^(n-k).",
+    hint: "Coefficient binomial × (proba de succès)ᵏ × (proba d'échec)ⁿ⁻ᵏ.",
     explanation: exp(
       "La probabilité binomiale combine dénombrement et probabilités des chemins.",
       "Le coefficient $\\binom{n}{k}$ compte les chemins à $k$ succès.",

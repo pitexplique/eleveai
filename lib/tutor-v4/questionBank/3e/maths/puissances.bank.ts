@@ -115,14 +115,14 @@ export const puissancesBank: TutorBankItemV4[] = [
       const correct = Array(exp).fill(base).join(" × ");
 
       return {
-        text: `Développer ${base}^${exp}.`,
+        text: `Développer $${base}^{${exp}}$.`,
         format: "short",
         expected: [correct],
         comparator: "contains_keyword",
         explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
           `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
           `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
-          (`${base}^${exp} = ${correct}.`) +
+          (`$${base}^{${exp}}$ = ${correct}.`) +
           `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
       };
     },
@@ -233,14 +233,14 @@ export const puissancesBank: TutorBankItemV4[] = [
       const value = Math.pow(base, exp);
 
       return {
-        text: `Calculer ${base}^${exp}.`,
+        text: `Calculer $${base}^{${exp}}$.`,
         format: "short",
         expected: [String(value)],
         comparator: "number_equal",
         explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
           `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
           `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
-          (`${base}^${exp} = ${value}.`) +
+          (`$${base}^{${exp}} = ${value}$.`) +
           `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
       };
     },
@@ -268,7 +268,7 @@ export const puissancesBank: TutorBankItemV4[] = [
     explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
       `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
       `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
-      ("2² × 2³ = 2^(2+3) = 2⁵.") +
+      ("$2^2 \\times 2^3 = 2^{2+3} = 2^5$.") +
       `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
   },
 
@@ -289,7 +289,7 @@ export const puissancesBank: TutorBankItemV4[] = [
     explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
       `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
       `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
-      ("3⁴ ÷ 3² = 3^(4-2) = 3².") +
+      ("$3^4 \\div 3^2 = 3^{4-2} = 3^2$.") +
       `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
   },
 
@@ -331,14 +331,14 @@ export const puissancesBank: TutorBankItemV4[] = [
       const b = randomInt(1, 4);
 
       return {
-        text: `Simplifier : ${base}^${a} × ${base}^${b}`,
+        text: `Simplifier : $${base}^{${a}} \\times ${base}^{${b}}$`,
         format: "short",
         expected: [`${base}^${a + b}`],
         comparator: "exact_text",
         explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
           `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
           `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
-          (`${base}^${a} × ${base}^${b} = ${base}^${a + b}.`) +
+          (`$${base}^{${a}} \\times ${base}^{${b}} = ${base}^{${a + b}}$.`) +
           `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
       };
     },
@@ -409,14 +409,14 @@ export const puissancesBank: TutorBankItemV4[] = [
       const value = 10 ** exp;
 
       return {
-        text: `Calculer 10^${exp}.`,
+        text: `Calculer $10^{${exp}}$.`,
         format: "short",
         expected: [String(value)],
         comparator: "number_equal",
         explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
           `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
           `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
-          (`10^${exp} = ${value}.`) +
+          (`$10^{${exp}} = ${value}$.`) +
           `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
       };
     },
@@ -439,14 +439,14 @@ export const puissancesBank: TutorBankItemV4[] = [
       const expected = value.toString().replace(".", ",");
 
       return {
-        text: `Calculer 10^-${exp}.`,
+        text: `Calculer $10^{-${exp}}$.`,
         format: "short",
         expected: [expected, value.toString()],
         comparator: "exact_text",
         explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
           `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
           `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
-          (`10^-${exp} = 1 / 10^${exp} = ${expected}.`) +
+          (`$10^{-${exp}} = \\dfrac{1}{10^{${exp}}} = ${expected.replace(",", "{,}")}$.`) +
           `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
       };
     },
@@ -551,7 +551,7 @@ export const puissancesBank: TutorBankItemV4[] = [
         explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
           `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
           `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
-          (`${value.toLocaleString("fr-FR")} = ${mantisseText} × 10^${exp}.`) +
+          (`${value.toLocaleString("fr-FR")} = $${mantisseText.replace(",", "{,}")} \\times 10^{${exp}}$.`) +
           `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
       };
     },
@@ -575,14 +575,14 @@ export const puissancesBank: TutorBankItemV4[] = [
       const mantisseText = String(mantisse).replace(".", ",");
 
       return {
-        text: `Donner l’écriture décimale de ${mantisseText} × 10^${exp}.`,
+        text: `Donner l’écriture décimale de $${mantisseText.replace(",", "{,}")} \\times 10^{${exp}}$.`,
         format: "short",
         expected: [String(value), value.toLocaleString("fr-FR")],
         comparator: "exact_text",
         explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
           `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
           `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
-          (`${mantisseText} × 10^${exp} = ${value.toLocaleString("fr-FR")}.`) +
+          (`$${mantisseText.replace(",", "{,}")} \\times 10^{${exp}}$ = ${value.toLocaleString("fr-FR")}.`) +
           `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
       };
     },
@@ -680,14 +680,14 @@ export const puissancesBank: TutorBankItemV4[] = [
       const b = randomInt(2, 5);
 
       return {
-        text: `Simplifier : ${base}^${a} × ${base}^${b}`,
+        text: `Simplifier : $${base}^{${a}} \\times ${base}^{${b}}$`,
         format: "short",
         expected: [`${base}^${a + b}`],
         comparator: "exact_text",
         explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
           `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
           `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
-          (`Même base et multiplication : ${base}^${a} × ${base}^${b} = ${base}^${a + b}.`) +
+          (`Même base et multiplication : $${base}^{${a}} \\times ${base}^{${b}} = ${base}^{${a + b}}$.`) +
           `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
       };
     },
@@ -706,9 +706,10 @@ export const puissancesBank: TutorBankItemV4[] = [
     tags: ["entier_puissance", "defi", "reunion", "ecriture_scientifique", "template"],
     generate: () => {
       const distance = randomChoice([
-        { value: "384 000", sci: "3,84 × 10^5", context: "la distance approximative Terre-Lune en km" },
-        { value: "150 000 000", sci: "1,5 × 10^8", context: "la distance approximative Terre-Soleil en km" },
-        { value: "8 800", sci: "8,8 × 10^3", context: "l’altitude approximative de l’Everest en mètres" },
+        // `sci` est la réponse que l'élève TAPE ; `tex` est ce qu'on lui AFFICHE.
+        { value: "384 000", sci: "3,84 × 10^5", tex: "3{,}84 \\times 10^{5}", context: "la distance approximative Terre-Lune en km" },
+        { value: "150 000 000", sci: "1,5 × 10^8", tex: "1{,}5 \\times 10^{8}", context: "la distance approximative Terre-Soleil en km" },
+        { value: "8 800", sci: "8,8 × 10^3", tex: "8{,}8 \\times 10^{3}", context: "l’altitude approximative de l’Everest en mètres" },
       ]);
 
       return {
@@ -719,7 +720,7 @@ export const puissancesBank: TutorBankItemV4[] = [
         explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
           `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
           `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
-          (`${distance.value} = ${distance.sci}.`) +
+          (`${distance.value} = $${distance.tex}$.`) +
           `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
       };
     },

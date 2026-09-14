@@ -168,14 +168,14 @@ export const limitesFonctionsBank: TutorBankItemV4[] = [
       const k = randomChoice([1, 2, 3, 4]);
 
       return {
-        text: `Quelle est la limite de 1/x^${k} quand x tend vers +∞ ?`,
+        text: `Quelle est la limite de $\\dfrac{1}{x^{${k}}}$ quand $x$ tend vers $+\\infty$ ?`,
         format: "short",
         expected: ["0"],
         comparator: "number_equal",
         explanation: exp(
-          "Pour tout entier k strictement positif, x^k tend vers +∞ quand x tend vers +∞.",
-          "L’inverse d’une quantité qui tend vers +∞ tend vers 0.",
-          `Ici, x^${k} tend vers +∞, donc 1/x^${k} tend vers 0.`,
+          "Pour tout entier $k$ strictement positif, $x^k$ tend vers $+\\infty$ quand $x$ tend vers $+\\infty$.",
+          "L’inverse d’une quantité qui tend vers $+\\infty$ tend vers $0$.",
+          `Ici, $x^{${k}}$ tend vers $+\\infty$, donc $\\dfrac{1}{x^{${k}}}$ tend vers $0$.`,
           "La limite est 0."
         ),
       };

@@ -533,7 +533,7 @@ export const ordresGrandeurBank: TutorBankItemV4[] = [
           kind: "tableau_donnees",
           headers: ["ce qu'on attend", "ce qui est annoncé"],
           rows: [
-            { values: [`≈ 10^${ea + eb + 2}`, String(annonce)] },
+            { values: [`$\\approx 10^{${ea + eb + 2}}$`, String(annonce)] },
           ],
           highlight: { col: 1 },
           caption: juste ? "même rang" : "pas le même rang",

@@ -262,15 +262,15 @@ export const suitesBank: TutorBankItemV4[] = [
       const result = a * n + b;
 
       return {
-        text: `Soit uₙ = ${a}n + ${b}. Calculer u_${n}.`,
+        text: `Soit $u_n = ${a}n + ${b}$. Calculer $u_{${n}}$.`,
         format: "short",
         expected: [String(result)],
         comparator: "number_equal",
         explanation: exp(
           "Pour calculer un terme d’une suite explicite, on remplace n par le rang demandé.",
           `On remplace n par ${n}.`,
-          `u_${n} = ${a} × ${n} + ${b} = ${result}.`,
-          `Donc u_${n} = ${result}.`
+          `$u_{${n}} = ${a} \\times ${n} + ${b} = ${result}$.`,
+          `Donc $u_{${n}} = ${result}$.`
         ),
       };
     },
@@ -950,15 +950,15 @@ export const suitesBank: TutorBankItemV4[] = [
       const result = u0 + n * r;
 
       return {
-        text: `On définit u₀ = ${u0} et uₙ₊₁ = uₙ + ${r}. Calculer u_${n}.`,
+        text: `On définit $u_0 = ${u0}$ et $u_{n+1} = u_n + ${r}$. Calculer $u_{${n}}$.`,
         format: "short",
         expected: [String(result)],
         comparator: "number_equal",
         explanation: exp(
-          "Une suite arithmétique vérifie uₙ = u₀ + nr.",
+          "Une suite arithmétique vérifie $u_n = u_0 + nr$.",
           "On identifie le premier terme et la raison.",
-          `Ici, u₀ = ${u0}, r = ${r}, donc u_${n} = ${u0} + ${n} × ${r} = ${result}.`,
-          `Donc u_${n} = ${result}.`
+          `Ici, $u_0 = ${u0}$, $r = ${r}$, donc $u_{${n}} = ${u0} + ${n} \\times ${r} = ${result}$.`,
+          `Donc $u_{${n}} = ${result}$.`
         ),
       };
     },
@@ -982,15 +982,15 @@ export const suitesBank: TutorBankItemV4[] = [
       const result = u0 * Math.pow(q, n);
 
       return {
-        text: `On définit u₀ = ${u0} et uₙ₊₁ = ${q}uₙ. Calculer u_${n}.`,
+        text: `On définit $u_0 = ${u0}$ et $u_{n+1} = ${q}u_n$. Calculer $u_{${n}}$.`,
         format: "short",
         expected: [String(result)],
         comparator: "number_equal",
         explanation: exp(
-          "Une suite géométrique vérifie uₙ = u₀ × qⁿ.",
+          "Une suite géométrique vérifie $u_n = u_0 \\times q^n$.",
           "On identifie le premier terme et la raison.",
-          `Ici, u₀ = ${u0}, q = ${q}, donc u_${n} = ${u0} × ${q}^${n} = ${result}.`,
-          `Donc u_${n} = ${result}.`
+          `Ici, $u_0 = ${u0}$, $q = ${q}$, donc $u_{${n}} = ${u0} \\times ${q}^{${n}} = ${result}$.`,
+          `Donc $u_{${n}} = ${result}$.`
         ),
       };
     },

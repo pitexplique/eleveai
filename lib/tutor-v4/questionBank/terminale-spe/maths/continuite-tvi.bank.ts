@@ -860,10 +860,10 @@ export const continuiteTviBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "terminale_spe_tvi_defi_h6", niveau: "terminale-spe", matiere: "maths",
     notionId: "continuite_tvi", microId: "tvi_defi", difficulty: 5, theme: "neutral",
-    text: "f(x) = e^x - 3 est continue et strictement croissante. Sachant f(0) = -2 < 0 et f(2) ≈ 4,4 > 0, l'équation f(x) = 0 :",
+    text: "$f(x) = e^x - 3$ est continue et strictement croissante. Sachant $f(0) = -2 < 0$ et $f(2) \\approx 4{,}4 > 0$, l'équation $f(x) = 0$ :",
     format: "qcm", choices: ["admet une unique solution", "n'a pas de solution", "admet deux solutions", "est impossible"], expected: ["admet une unique solution"], comparator: "mcq_exact",
     hint: "Continue + strictement croissante + 0 encadré.",
-    explanation: exp("On applique le corollaire du TVI.", "f continue, strictement croissante (car (e^x)' = e^x > 0), 0 encadré.", "Existence + unicité.", "Une unique solution (ici x = ln 3)."),
+    explanation: exp("On applique le corollaire du TVI.", "$f$ continue, strictement croissante (car $(e^x)' = e^x > 0$), $0$ encadré.", "Existence + unicité.", "Une unique solution (ici $x = \\ln 3$)."),
     tags: ["terminale-spe", "tvi", "type_bac", "exponentielle", "qcm"],
   },
 ];

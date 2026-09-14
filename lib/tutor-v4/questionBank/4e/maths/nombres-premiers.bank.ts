@@ -113,7 +113,7 @@ export const nombresPremiersBank: TutorBankItemV4[] = [
           "Méthode : on cherche un diviseur autre que 1 et le nombre. Un seul suffit à conclure que le nombre n'est pas premier.\n\n" +
           (premier
             ? `Calcul : ${n} n'est divisible ni par 2, ni par 3, ni par 5, ni par 7 — et $11^2 = 121$ dépasse ${n}, donc inutile d'aller plus loin.\n\n`
-            : `Calcul : ${n}$ \\div ${d} = ${n / d}$, sans reste. Il a donc au moins trois diviseurs : 1, ${d} et ${n}.\n\n`) +
+            : `Calcul : $${n} \\div ${d} = ${n / d}$, sans reste. Il a donc au moins trois diviseurs : 1, ${d} et ${n}.\n\n`) +
           `Conclusion : ${n} ${premier ? "EST" : "n'est PAS"} premier. ⭐ Il suffit de tester les nombres premiers dont le carré ne dépasse pas ${n}.`,
       };
     },

@@ -114,7 +114,7 @@ export const divisibiliteBank: TutorBankItemV4[] = [
         explanation:
           "Définition : un nombre est MULTIPLE d'un autre lorsqu'il s'obtient en le multipliant par un entier. L'autre en est alors un DIVISEUR.\n\n" +
           "Méthode : on regarde lequel des deux est le plus grand — le multiple est toujours le plus grand.\n\n" +
-          `Calcul : ${d} \\times ${k} = ${m}, donc ${m} est un multiple de ${d}, et ${d} est un diviseur de ${m}.\n\n` +
+          `Calcul : $${d} \\times ${k} = ${m}$, donc ${m} est un multiple de ${d}, et ${d} est un diviseur de ${m}.\n\n` +
           "Conclusion : ⭐ c'est une SEULE relation dite dans les deux sens, comme « parent » et « enfant ». Les deux mots ne s'échangent jamais.",
       };
     },
@@ -400,7 +400,7 @@ export const divisibiliteBank: TutorBankItemV4[] = [
         explanation:
           "Définition : la division euclidienne de a par b donne un quotient q et un reste r tels que $a = b \\times q + r$, avec $0 \\leqslant r < b$.\n\n" +
           "Méthode : on cherche le plus grand multiple de b qui ne dépasse pas a ; ce qui manque pour atteindre a est le reste.\n\n" +
-          `Calcul : ${b} \\times ${q} = ${b * q}, et ${a} - ${b * q} = ${r}.\n\n` +
+          `Calcul : $${b} \\times ${q} = ${b * q}$, et $${a} - ${b * q} = ${r}$.\n\n` +
           `Conclusion : le reste vaut ${r}. ⚠️ Il est TOUJOURS plus petit que le diviseur : s'il atteignait ${b}, on pourrait faire une part de plus.`,
         canvas: potence(a, b),
       };
@@ -438,7 +438,7 @@ export const divisibiliteBank: TutorBankItemV4[] = [
         explanation:
           "Définition : toute division euclidienne s'écrit $a = b \\times q + r$, où a est le dividende, b le diviseur, q le quotient et r le reste.\n\n" +
           "Méthode : on repère chaque rôle avant d'écrire — le dividende est SEUL d'un côté.\n\n" +
-          `Calcul : ${b} \\times ${q} = ${b * q}, puis ${b * q} + ${r} = ${a}. L'égalité est vérifiée.\n\n` +
+          `Calcul : $${b} \\times ${q} = ${b * q}$, puis $${b * q} + ${r} = ${a}$. L'égalité est vérifiée.\n\n` +
           `Conclusion : ⭐ cette égalité est le CONTRÔLE de la division : si elle ne tombe pas juste, c'est que le quotient ou le reste est faux.`,
       };
     },
