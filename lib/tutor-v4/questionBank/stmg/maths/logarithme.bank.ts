@@ -968,7 +968,7 @@ export const logarithmeBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(n)],
         comparator: "number_equal",
-        canvas: canvasCourbe((x) => Math.pow(a, x), 0, Math.ceil(seuil) + 4, `y = ${fr(a)}^x et le seuil ${b}`, {
+        canvas: canvasCourbe((x) => Math.pow(a, x), 0, Math.ceil(seuil) + 4, `y = ${fr(a)}ˣ et le seuil ${b}`, {
           pas: (Math.ceil(seuil) + 4) / 70,
           seuil: b,
         }),

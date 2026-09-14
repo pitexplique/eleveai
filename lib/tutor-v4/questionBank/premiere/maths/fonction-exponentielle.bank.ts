@@ -258,7 +258,7 @@ export const fonctionExponentielleBank: TutorBankItemV4[] = [
         comparator: "mcq_exact",
         canvas: canvasExponentielle(
           [0, 1, 2, 3, 4].map((k) => Math.round(100 * a ** k) / 100),
-          `Les valeurs de ${fr(a)}^x`
+          `Les valeurs de ${fr(a)}ˣ`
         ),
         explanation: exp(
           "Une fonction exponentielle $x \\mapsto a^x$ est croissante si $a > 1$, décroissante si $0 < a < 1$.",
@@ -300,7 +300,7 @@ export const fonctionExponentielleBank: TutorBankItemV4[] = [
         format: "short",
         expected: [fr(a ** x)],
         comparator: "number_equal",
-        canvas: canvasExponentielle(valeurs, `Les valeurs de ${a}^x`),
+        canvas: canvasExponentielle(valeurs, `Les valeurs de ${a}ˣ`),
         explanation: exp(
           "La représentation graphique d'une fonction exponentielle se lit comme celle de n'importe quelle fonction : l'ordonnée d'un point est l'image de son abscisse.",
           "On repère l'abscisse demandée et l'on lit la valeur correspondante.",

@@ -2603,7 +2603,10 @@ export const trigonometrieBank: TutorBankItemV4[] = [
           50,
           c.sym.includes("ordonnées") ? 130 : c.sym.includes("centre") ? 230 : -50,
           "M(x)",
-          `N(${c.q.replace(/\cos|\sin/, "").replace(/[()]/g, "").replace(/\pi/g, "π").trim()})`,
+          // ⛔ Les motifs s'écrivaient `/\cos|\sin/` et `/\pi/` — un seul
+          // antislash, donc pas de macro LaTeX à retirer : le canvas affichait
+          // « N(\sin\π - x) » (mesuré le 14/09/2026).
+          `N(${c.q.replace(/\\cos|\\sin/, "").replace(/[()]/g, "").replace(/\\pi/g, "π").replace(/-/g, "−").trim()})`,
         ),
         explanation: exp(
           "Chaque formule d'angle associé traduit une symétrie du cercle : c'est la figure qui donne le résultat, pas la mémoire.",

@@ -1566,7 +1566,7 @@ export const suitesTerminaleBank: TutorBankItemV4[] = [
           headers: ["", "Intérêts simples", "Intérêts composés"],
           rows: [
             { label: "Modèle", values: ["suite arithmétique", "suite géométrique"] },
-            { label: "Calcul", values: [`${capital} × (1 + ${n}×${t}/100)`, `${capital} × ${fr(1 + t / 100)}^${n}`] },
+            { label: "Calcul", values: [`${capital} × (1 + ${n}×${t}/100)`, `${capital} × ${fr(1 + t / 100)}${String(n).replace(/\d/g, (d) => "⁰¹²³⁴⁵⁶⁷⁸⁹"[Number(d)])}`] },
             { label: "Valeur acquise (€)", values: [eur(simples), eur(composes)] },
           ],
         } satisfies CanvasFigure,

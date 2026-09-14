@@ -140,7 +140,9 @@ export const automatismesAlgebreBank: TutorBankItemV4[] = [
         expected: [`$${trinome(a * a, milieu, b * b)}$`],
         comparator: "mcq_exact",
         explanation: exp(
-          "Identité remarquable : $(u ${signe > 0 ? '+' : '-'} v)^2 = u^2 ${signe > 0 ? '+' : '-'} 2uv + v^2$.",
+          // ⛔ Était entre guillemets droits, pas entre accents graves : l'élève
+          // lisait « ${signe > 0 ? '+' : '-'} » en toutes lettres (14/09/2026).
+          `Identité remarquable : $(u ${signe > 0 ? "+" : "-"} v)^2 = u^2 ${signe > 0 ? "+" : "-"} 2uv + v^2$.`,
           `On identifie $u = ${a === 1 ? "" : a}x$ et $v = ${b}$, puis on applique la formule.`,
           `$u^2 = ${fr(a * a)}x^2$ ; $2uv = ${fr(Math.abs(milieu))}x$ ; $v^2 = ${b * b}$. ` +
             `D'où $${trinome(a * a, milieu, b * b)}$.`,

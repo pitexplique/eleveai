@@ -502,7 +502,7 @@ export const exponentiellesBank: TutorBankItemV4[] = [
         choices: shuffle(["croissante", "décroissante", "constante", "croissante puis décroissante"]),
         expected: [croissante ? "croissante" : "décroissante"],
         comparator: "mcq_exact",
-        canvas: canvasExponentielle(1, a, 8, `Courbe de f(x) = ${fr(a)}^x`, { avecNuage: false }),
+        canvas: canvasExponentielle(1, a, 8, `Courbe de f(x) = ${fr(a)}ˣ`, { avecNuage: false }),
         explanation: exp(
           "Une fonction exponentielle $x \\mapsto a^x$ est croissante si $a > 1$, décroissante si $0 < a < 1$, constante si $a = 1$.",
           "On compare la base à $1$ — c'est le même critère que pour la raison d'une suite géométrique.",
@@ -688,7 +688,7 @@ export const exponentiellesBank: TutorBankItemV4[] = [
         choices: shuffle(["croissante", "décroissante", "constante", "cela dépend de $x$"]),
         expected: [croissante ? "croissante" : "décroissante"],
         comparator: "mcq_exact",
-        canvas: canvasExponentielle(k, a, 6, `Courbe de f(x) = ${k} × ${fr(a)}^x`, { avecNuage: false }),
+        canvas: canvasExponentielle(k, a, 6, `Courbe de f(x) = ${k} × ${fr(a)}ˣ`, { avecNuage: false }),
         explanation: exp(
           "Pour $x \\mapsto k\\,a^x$, deux éléments décident : la position de $a$ par rapport à $1$, et le SIGNE de $k$. Un $k$ négatif retourne la courbe et inverse le sens de variation.",
           "On détermine d'abord le sens de $a^x$, puis on regarde si $k$ le conserve ou l'inverse.",

@@ -3049,7 +3049,7 @@ export const suitesBank: TutorBankItemV4[] = [
       "Les termes dépassent n'importe quelle valeur fixée à l'avance : la suite tend vers $+\\infty$.",
       "Elle tend vers $+\\infty$."
     ),
-    canvas: suiteCanvas([1, 2, 4, 8, 16, 32, "…"], ["×2", "×2", "×2", "×2", "×2"], "u(n) = 2^n"),
+    canvas: suiteCanvas([1, 2, 4, 8, 16, 32, "…"], ["×2", "×2", "×2", "×2", "×2"], "u(n) = 2ⁿ"),
     tags: ["premiere", "maths", "suites", "limite", "canvas", "qcm"],
   },
   {
