@@ -40,23 +40,29 @@ export type EntreeClasse = {
   annee?: AnneeStmg;
 };
 
-/** Les classes proposées, dans l'ordre de la scolarité. */
+/**
+ * Les classes proposées, DE LA TERMINALE AU CP (14/09, Frédéric : « ordre
+ * terminale cp oui ») — le même sens que la colonne du coach depuis le 13/09 :
+ * le public du site est au lycée, il ne doit pas descendre une liste pour se
+ * trouver. Lycée général, puis STMG (14/09 : « tu as oublié STMG », deux
+ * entrées sur le paquet unique du coach), puis collège, puis primaire.
+ */
 export const CLASSES_PHOTO: EntreeClasse[] = [
-  { cle: "cp", classe: "cp", label: "CP" },
-  { cle: "ce1", classe: "ce1", label: "CE1" },
-  { cle: "ce2", classe: "ce2", label: "CE2" },
-  { cle: "cm1", classe: "cm1", label: "CM1" },
-  { cle: "cm2", classe: "cm2", label: "CM2" },
-  { cle: "6e", classe: "6e", label: "6e" },
-  { cle: "5e", classe: "5e", label: "5e" },
-  { cle: "4e", classe: "4e", label: "4e" },
-  { cle: "3e", classe: "3e", label: "3e" },
-  { cle: "seconde", classe: "seconde", label: "Seconde" },
-  { cle: "premiere", classe: "premiere", label: "1re (tronc commun)" },
-  { cle: "premiere-spe", classe: "premiere-spe", label: "1re spé maths" },
   { cle: "terminale-spe", classe: "terminale-spe", label: "Terminale spé maths" },
-  { cle: "stmg-premiere", classe: "stmg", label: "1re STMG", annee: "premiere" },
+  { cle: "premiere-spe", classe: "premiere-spe", label: "1re spé maths" },
+  { cle: "premiere", classe: "premiere", label: "1re (tronc commun)" },
   { cle: "stmg-terminale", classe: "stmg", label: "Tle STMG", annee: "terminale" },
+  { cle: "stmg-premiere", classe: "stmg", label: "1re STMG", annee: "premiere" },
+  { cle: "seconde", classe: "seconde", label: "Seconde" },
+  { cle: "3e", classe: "3e", label: "3e" },
+  { cle: "4e", classe: "4e", label: "4e" },
+  { cle: "5e", classe: "5e", label: "5e" },
+  { cle: "6e", classe: "6e", label: "6e" },
+  { cle: "cm2", classe: "cm2", label: "CM2" },
+  { cle: "cm1", classe: "cm1", label: "CM1" },
+  { cle: "ce2", classe: "ce2", label: "CE2" },
+  { cle: "ce1", classe: "ce1", label: "CE1" },
+  { cle: "cp", classe: "cp", label: "CP" },
 ];
 
 /**
