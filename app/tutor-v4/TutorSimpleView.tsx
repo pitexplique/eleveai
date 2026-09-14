@@ -413,6 +413,15 @@ export default function TutorSimpleView({
                   >
                     {currentQuestion.choices.map((choice, index) => {
                       const lettre = ["A", "B", "C", "D", "E", "F"][index] ?? `${index + 1}`;
+                      /* ⭐ LE CHOIX CLIQUÉ S'ALLUME AU CLIC (14/09/2026).
+                         Frédéric : « quand je clique je dois cliquer plusieurs
+                         fois ». Le premier clic partait bien, mais pendant la
+                         seconde de correction les quatre boutons se grisaient
+                         pareil : rien ne disait LEQUEL avait été pris, donc on
+                         recliquait. Le choix envoyé reste plein et cerclé,
+                         les autres s'effacent. `answer` porte déjà ce choix
+                         (handleQcmClick), aucun état en plus. */
+                      const enCours = busy && answer === choice;
                       return (
                         <button
                           key={`${choice}-${index}`}
@@ -420,9 +429,20 @@ export default function TutorSimpleView({
                           onClick={() => onQcmClick(choice)}
                           disabled={busy}
                           aria-label={`Réponse ${lettre} : ${choice}`}
-                          className={`rounded-lg border border-slate-300 bg-white px-4 text-left font-semibold text-slate-900 shadow-sm hover:bg-sky-50 disabled:opacity-60 ${boardChoiceClass}`}
+                          aria-busy={enCours || undefined}
+                          className={`flex items-center justify-between gap-3 rounded-lg border px-4 text-left font-semibold text-slate-900 shadow-sm ${boardChoiceClass} ${
+                            enCours
+                              ? "border-sky-500 bg-sky-50 ring-2 ring-sky-400"
+                              : "border-slate-300 bg-white hover:bg-sky-50 disabled:opacity-50"
+                          }`}
                         >
                           <MarkdownMath inline>{choice}</MarkdownMath>
+                          {enCours ? (
+                            <span
+                              aria-hidden="true"
+                              className="h-5 w-5 shrink-0 animate-spin rounded-full border-2 border-sky-500 border-t-transparent"
+                            />
+                          ) : null}
                         </button>
                       );
                     })}

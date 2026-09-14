@@ -2210,17 +2210,33 @@ function handleInputKeyDown(
                       </div>
 
                       <div className="grid gap-2">
-                        {currentQuestion.choices.map((choice, idx) => (
-                          <button
-                            key={`${choice}-${idx}`}
-                            type="button"
-                            onClick={() => void handleQcmClick(choice)}
-                            disabled={busy || wrongAnswerPanelOpen}
-                            className={`rounded-2xl border border-slate-300 bg-white px-4 text-left font-medium text-slate-900 transition hover:bg-slate-50 disabled:opacity-50 ${boardChoiceClass}`}
-                          >
-                            <MarkdownMath inline>{choice}</MarkdownMath>
-                          </button>
-                        ))}
+                        {currentQuestion.choices.map((choice, idx) => {
+                          // Le choix envoyé reste allumé pendant la correction
+                          // (voir TutorSimpleView, même geste).
+                          const enCours = busy && answer === choice;
+                          return (
+                            <button
+                              key={`${choice}-${idx}`}
+                              type="button"
+                              onClick={() => void handleQcmClick(choice)}
+                              disabled={busy || wrongAnswerPanelOpen}
+                              aria-busy={enCours || undefined}
+                              className={`flex items-center justify-between gap-3 rounded-2xl border px-4 text-left font-medium text-slate-900 transition ${boardChoiceClass} ${
+                                enCours
+                                  ? "border-sky-500 bg-sky-50 ring-2 ring-sky-400"
+                                  : "border-slate-300 bg-white hover:bg-slate-50 disabled:opacity-50"
+                              }`}
+                            >
+                              <MarkdownMath inline>{choice}</MarkdownMath>
+                              {enCours ? (
+                                <span
+                                  aria-hidden="true"
+                                  className="h-5 w-5 shrink-0 animate-spin rounded-full border-2 border-sky-500 border-t-transparent"
+                                />
+                              ) : null}
+                            </button>
+                          );
+                        })}
                       </div>
                     </div>
                   ) : currentQuestion.format === "open" ? (

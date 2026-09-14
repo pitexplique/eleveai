@@ -11,8 +11,28 @@
  * accède, comme les autres tables du projet. SQL : supabase/tutor_sessions_v4.sql.
  */
 
+import { after } from "next/server";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type { TutorSessionV4 } from "@/lib/tutor-v4/types";
+
+/* ⭐ L'ÉCRITURE EN BASE PART APRÈS LA RÉPONSE (14/09/2026).
+   Frédéric, sur la fonction exponentielle en terminale : « les qcm sont très
+   longs à charger et quand je clique je dois cliquer plusieurs fois ».
+   Mesuré depuis La Réunion, un clic coûtait ~0,65 s en local, dont ~0,26 s de
+   lecture Supabase et ~0,29 s d'écriture ; ~1 s en production. L'élève
+   attendait donc que la base ait fini d'écrire un tour qu'il avait déjà joué.
+   `after()` renvoie la question d'abord et écrit ensuite (waitUntil sur Vercel).
+   ⚠️ La contrepartie est traitée dans `getSessionV4` : une lecture qui arrive
+   avant la fin de l'écriture garde la copie mémoire si elle est plus récente.
+   Hors requête (script), `after` lève : on écrit alors en ligne, comme avant. */
+function enArrierePlan(tache: () => Promise<void>): Promise<void> {
+  try {
+    after(tache);
+    return Promise.resolve();
+  } catch {
+    return tache();
+  }
+}
 
 const TTL_MS = 30 * 60 * 1000;
 
@@ -93,19 +113,23 @@ async function persist(session: TutorSessionV4) {
 export async function createSessionV4(session: TutorSessionV4) {
   cleanup();
   setInMemory(session);
-  await persist(session);
+  const instantane = structuredClone(session);
 
-  // Purge opportuniste des sessions expirées (une requête par démarrage).
-  const db = getDb();
-  if (db) {
-    const { error } = await db
-      .from("tutor_sessions_v4")
-      .delete()
-      .lt("expires_at", new Date().toISOString());
-    if (error) {
-      console.error("tutor_sessions_v4 purge:", error.message);
+  await enArrierePlan(async () => {
+    await persist(instantane);
+
+    // Purge opportuniste des sessions expirées (une requête par démarrage).
+    const db = getDb();
+    if (db) {
+      const { error } = await db
+        .from("tutor_sessions_v4")
+        .delete()
+        .lt("expires_at", new Date().toISOString());
+      if (error) {
+        console.error("tutor_sessions_v4 purge:", error.message);
+      }
     }
-  }
+  });
 
   return session;
 }
@@ -127,6 +151,13 @@ export async function getSessionV4(
 
     if (!error && data && new Date(data.expires_at).getTime() >= Date.now()) {
       const session = data.data as TutorSessionV4;
+      // L'écriture du tour précédent peut ne pas être arrivée (voir
+      // `enArrierePlan`) : sur la même instance, la mémoire est alors en avance
+      // sur la base, et c'est elle qui fait foi.
+      const enMemoire = getStore().get(sessionId)?.value;
+      if (enMemoire && enMemoire.updatedAt > session.updatedAt) {
+        return enMemoire;
+      }
       setInMemory(session);
       return session;
     }
@@ -142,5 +173,8 @@ export async function getSessionV4(
 export async function saveSessionV4(session: TutorSessionV4) {
   cleanup();
   setInMemory(session);
-  await persist(session);
+  // Copie figée : la session peut encore être modifiée par l'appelant avant que
+  // l'écriture différée ne parte.
+  const instantane = structuredClone(session);
+  await enArrierePlan(() => persist(instantane));
 }
