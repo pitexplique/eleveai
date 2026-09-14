@@ -53,12 +53,13 @@ values
   ('coach-ia',        'coach', 'coach', 'ia',       'Coach IA',            'A1 → C1 : comprendre, utiliser, vérifier, créer.',                '/coach-ia/ia',            'A1 → C1',        'moyen', 'quotidien', array['progresser','explorer'], 0.85, 0.70, 'actif', true, 14),
   ('coach-economie',  'coach', 'coach', 'economie', 'Coach Économie IA',   'Entreprise, marché, travail, fiscalité.',                         '/coach-ia/economie',      'Découverte → Lycée', 'moyen', 'quotidien', array['progresser','explorer'], 0.60, 0.55, 'actif', true, 15),
 
-  -- 🛤️ Parcours — bilan de compétences par matière
-  ('parcours-maths',    'parcours', 'parcours', 'maths',    'Parcours Maths',    'Bilan de compétences personnalisé.', '/parcours',               'Collège / Lycée', 'long', 'ponctuel', array['explorer'], 0.80, 0.40, 'actif', true, 20),
-  ('parcours-francais', 'parcours', 'parcours', 'francais', 'Parcours Français', 'Bilan de compétences français.',     '/parcours-francais',      'Collège',         'long', 'ponctuel', array['explorer'], 0.80, 0.40, 'actif', true, 21),
-  ('parcours-anglais',  'parcours', 'parcours', 'anglais',  'Parcours English',  'Bilan de niveau CECRL avec audio.',  '/parcours-english-maths', 'A1 → B2',         'long', 'ponctuel', array['explorer'], 0.80, 0.40, 'actif', true, 22),
-  ('parcours-espagnol', 'parcours', 'parcours', 'espagnol', 'Parcours Espagnol', 'Bilan de niveau CECRL avec audio.',  '/parcours-espagnol',      'A1 → B2',         'long', 'ponctuel', array['explorer'], 0.80, 0.40, 'actif', true, 23),
-  ('parcours-ia',       'parcours', 'parcours', 'ia',       'Parcours IA',       'Bilan de culture et de réflexes IA.', '/parcours-ia',           'A1 → C1',         'long', 'ponctuel', array['explorer'], 0.70, 0.45, 'actif', true, 24),
+  -- 🛤️ Évaluation annuelle — bilan de compétences par matière (« Parcours »
+  -- jusqu'au 14/09/2026 ; les id et les routes gardent l'ancien nom)
+  ('parcours-maths',    'parcours', 'parcours', 'maths',    'Évaluation annuelle · Maths',    'Bilan de compétences personnalisé.', '/parcours',               'Collège / Lycée', 'long', 'ponctuel', array['explorer'], 0.80, 0.40, 'actif', true, 20),
+  ('parcours-francais', 'parcours', 'parcours', 'francais', 'Évaluation annuelle · Français', 'Bilan de compétences français.',     '/parcours-francais',      'Collège',         'long', 'ponctuel', array['explorer'], 0.80, 0.40, 'actif', true, 21),
+  ('parcours-anglais',  'parcours', 'parcours', 'anglais',  'Évaluation annuelle · Anglais',  'Bilan de niveau CECRL avec audio.',  '/parcours-english-maths', 'A1 → B2',         'long', 'ponctuel', array['explorer'], 0.80, 0.40, 'actif', true, 22),
+  ('parcours-espagnol', 'parcours', 'parcours', 'espagnol', 'Évaluation annuelle · Espagnol', 'Bilan de niveau CECRL avec audio.',  '/parcours-espagnol',      'A1 → B2',         'long', 'ponctuel', array['explorer'], 0.80, 0.40, 'actif', true, 23),
+  ('parcours-ia',       'parcours', 'parcours', 'ia',       'Évaluation annuelle · IA',       'Bilan de culture et de réflexes IA.', '/parcours-ia',           'A1 → C1',         'long', 'ponctuel', array['explorer'], 0.70, 0.45, 'actif', true, 24),
 
   -- ☀️ Rituels quotidiens — le carburant du rendez-vous du matin
   ('defis-du-jour',  'rituel', 'defi',         'maths',       'Défis du jour',    'Un défi maths chaque jour, inspiré de l''actu et de La Réunion.', '/defis-du-jour', 'Tous', 'court', 'quotidien', array['rituel','competition'], 0.70, 0.90, 'actif', true, 30),

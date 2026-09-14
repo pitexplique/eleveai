@@ -191,7 +191,7 @@ export default function FrancaisDeLEtrangerPage() {
             href="/parcours"
             className="mt-3 inline-flex w-fit items-center gap-2 rounded-full bg-violet-400 px-5 py-2.5 text-sm font-black text-[#041B33] transition hover:brightness-110"
           >
-            Faire le point avec un parcours →
+            Faire le point avec l&apos;évaluation annuelle →
           </Link>
         </div>
 

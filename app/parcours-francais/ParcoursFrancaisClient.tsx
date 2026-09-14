@@ -181,7 +181,7 @@ export default function ParcoursFrancaisClient() {
           </div>
 
           <div className="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-200 sm:p-6">
-            <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">Parcours</p>
+            <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">Évaluation annuelle</p>
             <h1 className="text-2xl font-black text-indigo-600 sm:text-3xl">Français 📚</h1>
             <p className="mt-1 text-sm text-slate-500 font-medium">
               Diagnostique ta grammaire, ta conjugaison et ton orthographe, du CP à la seconde.

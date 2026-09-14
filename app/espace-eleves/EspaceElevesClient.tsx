@@ -120,7 +120,7 @@ const classes = [
 const decouvrir = [
   {
     emoji: "🛤️",
-    title: "Parcours",
+    title: "Évaluation annuelle",
     description: "Fais un bilan de tes notions : maîtrisées, à revoir ou fragiles.",
     href: "/parcours",
     color: "from-violet-500 to-indigo-600",

@@ -65,7 +65,11 @@ const ACTIVITES: Activite[] = [
     ],
   },
   {
-    label: "Parcours",
+    // ⭐ 14/09/2026 — « ÉVALUATION ANNUELLE » ET NON « PARCOURS » (Frédéric :
+    // « parce qu'en fait c'est une évaluation »). « Parcours » promettait un
+    // chemin à suivre ; la page fait passer un bilan de l'année. Seul le mot
+    // change : les cinq routes restent `/parcours*`.
+    label: "Évaluation annuelle",
     matieres: [
       { label: "Maths", href: "/parcours" },
       { label: "Français", href: "/parcours-francais" },

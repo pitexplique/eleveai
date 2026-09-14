@@ -63,7 +63,7 @@ const outils = [
   { emoji: "🧠", titre: "Coach Maths", texte: "Notion par notion, du CP à la Terminale", href: "/coach-ia/maths" },
   { emoji: "📖", titre: "Coach Français", texte: "Sons, grammaire, conjugaison", href: "/coach-ia/francais" },
   { emoji: "🇬🇧", titre: "English Maths", texte: "A1 → B2, avec l'audio", href: "/coach-ia/english-maths" },
-  { emoji: "🛤️", titre: "Parcours", texte: "Un bilan : maîtrisé, à revoir, fragile", href: "/parcours" },
+  { emoji: "🛤️", titre: "Évaluation annuelle", texte: "Un bilan : maîtrisé, à revoir, fragile", href: "/parcours" },
   { emoji: "⚡", titre: "Calcul rapide", texte: "Les automatismes en 5 minutes", href: "/calcul-rapide" },
   { emoji: "✍️", titre: "Dictée du jour", texte: "Une dictée courte, corrigée", href: "/dictee-du-jour" },
   { emoji: "🎯", titre: "Défis du jour", texte: "Des problèmes ancrés à La Réunion", href: "/defis-du-jour" },

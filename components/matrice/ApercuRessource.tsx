@@ -115,7 +115,7 @@ const COULEUR_DU_TYPE: Record<TypeRessource, Couleur> = {
  */
 export const LIBELLE_TYPE: Record<TypeRessource, string> = {
   coach: "Coach",
-  parcours: "Parcours",
+  parcours: "Évaluation annuelle",
   evaluation: "Évaluation",
   entrainement: "Entraînement",
   defi: "Défi",

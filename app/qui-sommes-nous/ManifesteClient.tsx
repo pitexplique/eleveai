@@ -9,7 +9,7 @@ const EMAIL = "contact@eleveai.fr";
 const principes = [
   {
     title: "Plusieurs portes d'entrée",
-    text: "Coach IA (maths, français, anglais, espagnol, IA), Parcours, Brevet, Calcul rapide, Dictée, Défis… Chaque élève choisit ce qui lui convient le mieux.",
+    text: "Coach IA (maths, français, anglais, espagnol, IA), Évaluation annuelle, Brevet, Calcul rapide, Dictée, Défis… Chaque élève choisit ce qui lui convient le mieux.",
   },
   {
     title: "Suivi réel de la progression",

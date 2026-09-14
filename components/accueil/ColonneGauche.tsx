@@ -210,7 +210,7 @@ export default function ColonneGauche() {
               </p>
               {[
                 { label: "Tableau de bord", href: "/dashboard-eleve" },
-                { label: "Mes apprentissages", href: "/parcours" },
+                { label: "Mon évaluation annuelle", href: "/parcours" },
               ].map((l) => (
                 <Link
                   key={l.href}

@@ -411,7 +411,7 @@ export default function DashboardProfClient() {
             </div>
             <div className="flex flex-wrap gap-2">
               {[
-                { href: "/parcours", label: "🛤️ Parcours", color: "bg-violet-100 text-violet-900 ring-1 ring-violet-200" },
+                { href: "/parcours", label: "🛤️ Évaluation annuelle", color: "bg-violet-100 text-violet-900 ring-1 ring-violet-200" },
                 { href: "/calcul-rapide", label: "⚡ Calcul", color: "bg-lime-100 text-lime-900 ring-1 ring-lime-200" },
                 { href: "/defis-du-jour", label: "🎯 Défis", color: "bg-orange-100 text-orange-900 ring-1 ring-orange-200" },
                 { href: "/english-maths", label: "🇬🇧 English", color: "bg-sky-100 text-sky-900 ring-1 ring-sky-200" },
@@ -571,7 +571,7 @@ export default function DashboardProfClient() {
                         <th className="px-4 py-3 font-black text-center">🏖️ Vacances</th>
                         <th className="px-4 py-3 font-black text-center">Activités</th>
                         <th className="px-4 py-3 font-black text-center">Moyenne</th>
-                        <th className="px-4 py-3 font-black text-center">🛤️ Parcours</th>
+                        <th className="px-4 py-3 font-black text-center">🛤️ Évaluation</th>
                         <th className="px-4 py-3 font-black text-center">⚡ Calcul</th>
                         <th className="px-4 py-3 font-black text-center">🎯 Défis</th>
                         <th className="px-4 py-3 font-black text-center">🇬🇧 EN</th>
@@ -622,9 +622,9 @@ export default function DashboardProfClient() {
                               <td colSpan={10} className="bg-blue-50 px-4 pb-4 pt-2">
                                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                                   {[
-                                    { label: "Dernier parcours", value: s.dernierParcours ? `${matiereLabel(s.dernierParcours.matiere)} · ${s.dernierParcours.score}/${s.dernierParcours.total} · ${formatDate(s.dernierParcours.created_at)}` : "—" },
+                                    { label: "Dernière évaluation", value: s.dernierParcours ? `${matiereLabel(s.dernierParcours.matiere)} · ${s.dernierParcours.score}/${s.dernierParcours.total} · ${formatDate(s.dernierParcours.created_at)}` : "—" },
                                     {
-                                      label: "Parcours par matière",
+                                      label: "Évaluations par matière",
                                       value: s.parcours.length > 0
                                         ? Object.entries(
                                             s.parcours.reduce<Record<string, number>>((acc, p) => {
@@ -684,9 +684,9 @@ export default function DashboardProfClient() {
             {/* ACTIVITÉ RÉCENTE */}
             <div className="grid gap-4 lg:grid-cols-2">
               <div className="rounded-[2rem] bg-white p-6 text-slate-950 shadow-xl">
-                <h2 className="mb-4 text-xl font-black">🛤️ Derniers parcours</h2>
+                <h2 className="mb-4 text-xl font-black">🛤️ Dernières évaluations</h2>
                 {resultatsParcours.length === 0 ? (
-                  <p className="text-sm font-bold text-slate-400">Aucun parcours enregistré.</p>
+                  <p className="text-sm font-bold text-slate-400">Aucune évaluation enregistrée.</p>
                 ) : (
                   <div className="space-y-2">
                     {resultatsParcours.slice(0, 6).map((r) => (

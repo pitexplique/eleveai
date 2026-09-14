@@ -155,7 +155,7 @@ export default function ParcoursEnglishClient() {
           </div>
 
           <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
-            <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">Parcours</p>
+            <p className="mb-1 text-xs font-black uppercase tracking-widest text-slate-400">Évaluation annuelle</p>
             <h1 className="text-3xl font-black text-sky-600 sm:text-4xl">English Maths</h1>
             <p className="mt-2 text-slate-500 font-medium">
               Diagnostique ton vocabulaire mathématique en anglais.

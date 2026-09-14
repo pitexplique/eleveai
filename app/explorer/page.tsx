@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 const FAMILLES: { key: string; titre: string; emoji: string; sous: string }[] = [
   { key: "coach",     titre: "Coachs",              emoji: "🎓", sous: "Le cœur : progresser, notion par notion — un par matière." },
   { key: "rituel",    titre: "Rituels du jour",     emoji: "☀️", sous: "Courts, à faire chaque jour. Le rendez-vous du matin." },
-  { key: "parcours",  titre: "Parcours",            emoji: "🛤️", sous: "Faire le point : un bilan de tes compétences." },
+  { key: "parcours",  titre: "Évaluation annuelle", emoji: "🛤️", sous: "Faire le point : un bilan de tes compétences." },
   { key: "reviser",   titre: "Réviser & découvrir", emoji: "📖", sous: "Fiches, dico, podcast — pour revoir autrement." },
   { key: "ouverture", titre: "Ouverture",           emoji: "🧭", sous: "Le sens, l'envie : à quoi ça sert, et comment." },
   { key: "evenement", titre: "Défis & concours",    emoji: "🏆", sous: "Se mesurer, se dépasser, pour de vrai." },

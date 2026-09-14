@@ -7,9 +7,11 @@ import FloatingCoach from "@/components/FloatingCoach";
 // gabarit « %s — EleveAI ». L'ancien titre donnait donc, en vrai, « Parcours
 // Maths - EleveAI — EleveAI ». Même faute que sur l'accueil, corrigée le 06/08.
 export const metadata: Metadata = {
-  title: "Parcours de maths — faire le point, classe par classe",
+  // 14/09/2026 : « Évaluation annuelle » remplace « Parcours ». Le reste du titre
+  // raccourcit pour tenir, avec « — EleveAI », sous les ~60 signes qu'affiche Google.
+  title: "Évaluation annuelle de maths, du CP à la Terminale",
   description:
-    "Un parcours guidé pour savoir où tu en es vraiment : quelques questions par notion, un bilan clair, et le coach qui reprend ce qui coince. Du CP à la Terminale, gratuit.",
+    "Une évaluation pour savoir où tu en es vraiment : quelques questions par notion, un bilan clair, et le coach qui reprend ce qui coince. Du CP à la Terminale, gratuit.",
   alternates: { canonical: "/parcours" },
 };
 

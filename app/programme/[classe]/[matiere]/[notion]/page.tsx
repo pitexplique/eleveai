@@ -159,7 +159,7 @@ export default async function NotionProgrammePage({
             className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3.5 text-sm font-black text-slate-700 shadow-sm transition hover:border-slate-400 hover:bg-slate-50"
           >
             <ArrowRight className="h-4 w-4" />
-            Se tester sur le parcours
+            Se tester avec l&apos;évaluation annuelle
           </Link>
           {hubFiches ? (
             <Link

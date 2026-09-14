@@ -70,7 +70,7 @@ export default function FloatingCoach() {
         {
           role: "coach",
           content:
-            "Je n'arrive pas à répondre pour le moment. Essaie depuis Parcours après une correction.",
+            "Je n'arrive pas à répondre pour le moment. Essaie depuis l'évaluation annuelle après une correction.",
         },
       ]);
     } finally {

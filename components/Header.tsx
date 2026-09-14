@@ -16,7 +16,7 @@ import type { ProfilId } from "@/lib/matrice/types";
 
 const NAV_MATHS = [
   { href: "/coach-ia/maths",   icon: "🧠", label: "Coach Maths IA",    desc: "Séries d'exercices corrigés, CP → Terminale" },
-  { href: "/parcours",         icon: "🛤️", label: "Parcours Maths",    desc: "Bilan de compétences personnalisé" },
+  { href: "/parcours",         icon: "🛤️", label: "Évaluation annuelle", desc: "Bilan de compétences personnalisé" },
   { href: "/coach-brevet",     icon: "📚", label: "Coach Brevet",       desc: "Sprint J−30, toutes les notions" },
   { href: "/coach-bac-spe",    icon: "🎓", label: "Coach Bac Spé",      desc: "Suites, fonctions, proba" },
   { href: "/calcul-rapide",    icon: "⚡", label: "Calcul rapide",      desc: "5 min d'automatismes" },
@@ -33,19 +33,19 @@ const NAV_MATHS = [
 
 const NAV_FRANCAIS = [
   { href: "/coach-ia/francais",  icon: "📖", label: "Coach Français IA", desc: "Séries d'exercices : grammaire, conjugaison, vocabulaire" },
-  { href: "/parcours-francais",  icon: "🛤️", label: "Parcours Français", desc: "Bilan de compétences français" },
+  { href: "/parcours-francais",  icon: "🛤️", label: "Évaluation annuelle", desc: "Bilan de compétences français" },
   { href: "/dico/francais/6e",   icon: "📒", label: "Dico Français 6e",  desc: "50 mots & gestes pour l'éval nationale" },
 ];
 
 const NAV_ANGLAIS = [
   { href: "/coach-ia/english-maths", icon: "🇬🇧", label: "Coach English Maths", desc: "Séries d'exercices A1 → B2, maths en anglais" },
-  { href: "/parcours-english-maths", icon: "🛤️", label: "Parcours English",     desc: "Bilan de niveau CECRL avec audio" },
+  { href: "/parcours-english-maths", icon: "🛤️", label: "Évaluation annuelle",  desc: "Bilan de niveau CECRL avec audio" },
   { href: "/english-maths",          icon: "📅", label: "Semaine des verbes",     desc: "Vocabulaire anglais de la semaine" },
 ];
 
 const NAV_ESPAGNOL = [
   { href: "/coach-ia/espagnol",          icon: "🇪🇸", label: "Coach Espagnol IA",  desc: "Séries d'exercices A1 → B2, vocabulaire & expressions" },
-  { href: "/parcours-espagnol",          icon: "🛤️", label: "Parcours Espagnol",  desc: "Bilan de niveau CECRL avec audio"    },
+  { href: "/parcours-espagnol",          icon: "🛤️", label: "Évaluation annuelle", desc: "Bilan de niveau CECRL avec audio"   },
   { href: "/coach-ia/espagnol?classe=a1",icon: "🌱",  label: "Niveau A1",          desc: "Chiffres, couleurs, famille, école"  },
   { href: "/coach-ia/espagnol?classe=a2",icon: "🏙️", label: "Niveau A2",          desc: "Vie quotidienne, voyage, métiers"    },
   { href: "/coach-ia/espagnol?classe=b1",icon: "🌍",  label: "Niveau B1",          desc: "Opinions, environnement, société"    },
@@ -54,7 +54,7 @@ const NAV_ESPAGNOL = [
 
 const NAV_IA = [
   { href: "/coach-ia/ia",          icon: "IA", label: "Coach IA", desc: "Séries d'exercices A1 -> C1, comprendre, utiliser, verifier, creer" },
-  { href: "/parcours-ia",          icon: "🛤️", label: "Parcours IA", desc: "Bilan de culture et de reflexes IA, A1 -> C1" },
+  { href: "/parcours-ia",          icon: "🛤️", label: "Évaluation annuelle", desc: "Bilan de culture et de reflexes IA, A1 -> C1" },
   { href: "/eval-pix-ia",          icon: "🎓", label: "Éval blanche Pix IA", desc: "Prépa éval nationale : 3 domaines, profil de compétences" },
   { href: "/fiches-cours/ia",      icon: "PDF", label: "Fiches de cours IA", desc: "Cours IA par domaine, à lire ou télécharger en PDF" },
   { href: "/fiches-cours/ia/livre", icon: "📕", label: "Le livre IA", desc: "Les 16 fiches en un livre, à télécharger en PDF ou EPUB" },
@@ -72,11 +72,11 @@ const NAV_IA = [
 // MATIERES (desktop) et sa MobileSection, et la carte de la grille accueil.
 
 const NAV_PARCOURS = [
-  { href: "/parcours",               icon: "🛤️", label: "Parcours Maths",    desc: "Bilan de compétences personnalisé" },
-  { href: "/parcours-francais",      icon: "📖", label: "Parcours Français", desc: "Bilan de compétences français" },
-  { href: "/parcours-english-maths", icon: "🇬🇧", label: "Parcours English",  desc: "Niveau CECRL avec audio" },
-  { href: "/parcours-espagnol",      icon: "🇪🇸", label: "Parcours Espagnol", desc: "Niveau CECRL avec audio" },
-  { href: "/parcours-ia",            icon: "🤖", label: "Parcours IA",       desc: "Culture et réflexes IA, A1 → C1" },
+  { href: "/parcours",               icon: "🛤️", label: "Évaluation annuelle · Maths",    desc: "Bilan de compétences personnalisé" },
+  { href: "/parcours-francais",      icon: "📖", label: "Évaluation annuelle · Français", desc: "Bilan de compétences français" },
+  { href: "/parcours-english-maths", icon: "🇬🇧", label: "Évaluation annuelle · Anglais",  desc: "Niveau CECRL avec audio" },
+  { href: "/parcours-espagnol",      icon: "🇪🇸", label: "Évaluation annuelle · Espagnol", desc: "Niveau CECRL avec audio" },
+  { href: "/parcours-ia",            icon: "🤖", label: "Évaluation annuelle · IA",       desc: "Culture et réflexes IA, A1 → C1" },
 ];
 
 type NavItem = { href: string; icon: string; label: string; desc: string; download?: boolean };
@@ -300,7 +300,12 @@ function MobileSection({
 //   ⭐ « Guide de survie » entre, et il ouvre CELUI DE SA CLASSE.
 const MENU_ELEVE: { href: string; label: string; court: string }[] = [
   { href: "/coach-ia/maths", label: "🧠 Coach", court: "🧠 Coach" },
-  { href: "/parcours", label: "🛤️ Parcours", court: "🛤️ Parcours" },
+  // 14/09/2026 : « Parcours » devient « Évaluation annuelle » (Frédéric : « c'est
+  // une évaluation »). ⛔ La barre de l'ordinateur affiche `court`, À TOUTE
+  // LARGEUR : l'en-tête est borné, et « Évaluation annuelle » l'élargit de 82 px
+  // — la mascotte recouvre alors « Coach », mesuré à 1 280 comme à 1 600 px. Le
+  // mot entier reste en info-bulle, et dans la grille du téléphone.
+  { href: "/parcours", label: "🛤️ Évaluation annuelle", court: "🛤️ Évaluation" },
   { href: "/dictee-du-jour", label: "✍️ Dictée", court: "✍️ Dictée" },
   { href: "/cahier-vacances", label: "☀️ Cahier", court: "☀️ Cahier" },
 ];
@@ -397,7 +402,7 @@ function MenuCompte({
           <div className={`border-t px-1 pt-1 ${paper ? "border-[#1d1c16]/10" : "border-white/10"}`}>
             {[
               { label: "Tableau de bord", href: dashboardHref },
-              { label: "Mes apprentissages", href: "/parcours" },
+              { label: "Mon évaluation annuelle", href: "/parcours" },
               { label: "Donner mon avis", href: "/votre-avis" },
               { label: "Signaler une erreur", href: "/signaler-une-erreur" },
               { label: "Devenir bêta testeur", href: "/devenir-beta-testeur" },
@@ -695,6 +700,7 @@ export default function Header() {
                   prefetch={false}
                   key={c.href}
                   href={c.href}
+                  title={c.label === c.court ? undefined : c.label}
                   className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-2 text-sm font-black transition ${
                     paper
                       ? isActive(pathname, c.href)
@@ -705,7 +711,7 @@ export default function Header() {
                         : "text-white/85 hover:bg-white/15 hover:text-white"
                   }`}
                 >
-                  {c.label}
+                  {c.court}
                 </Link>
               ))}
               {/* Le guide de SA classe. Le mot complet n'apparaît qu'à partir

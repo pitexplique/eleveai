@@ -666,7 +666,7 @@ export default function DashboardEleveClient() {
             <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
               <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-emerald-100">
                 <p className="text-sm font-black uppercase text-emerald-700">
-                  Dernier parcours
+                  Dernière évaluation
                 </p>
 
                 <p className="mt-3 text-3xl font-black">
@@ -685,7 +685,7 @@ export default function DashboardEleveClient() {
 
               <div className="rounded-[2rem] bg-white p-5 shadow-xl ring-1 ring-sky-100">
                 <p className="text-sm font-black uppercase text-sky-700">
-                  Meilleur parcours
+                  Meilleure évaluation
                 </p>
 
                 <p className="mt-3 text-3xl font-black">
@@ -820,7 +820,7 @@ export default function DashboardEleveClient() {
                 <p className="mt-3 text-3xl font-black">{totalActivites}</p>
 
                 <p className="mt-2 text-sm font-bold text-slate-500">
-                  Parcours + calcul + défis + English + dictée + langues
+                  Évaluations + calcul + défis + English + dictée + langues
                 </p>
               </div>
             </div>
@@ -912,9 +912,9 @@ export default function DashboardEleveClient() {
               <div className="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100">
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h2 className="text-2xl font-black">Parcours</h2>
+                    <h2 className="text-2xl font-black">Évaluation annuelle</h2>
                     <p className="mt-1 text-sm font-semibold text-slate-600">
-                      Historique de tous tes parcours : maths, français, English, espagnol.
+                      Historique de toutes tes évaluations : maths, français, English, espagnol.
                     </p>
                   </div>
 
@@ -938,7 +938,7 @@ export default function DashboardEleveClient() {
 
                 {resultatsParcours.length === 0 ? (
                   <div className="rounded-2xl bg-amber-50 p-4 font-bold text-amber-800">
-                    Aucun parcours enregistré pour le moment.
+                    Aucune évaluation enregistrée pour le moment.
                   </div>
                 ) : (
                   <div className="overflow-x-auto">
@@ -1291,7 +1291,7 @@ export default function DashboardEleveClient() {
                 href="/parcours"
                 className="rounded-2xl bg-emerald-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-emerald-500"
               >
-                Parcours
+                Évaluation annuelle
               </Link>
 
               <Link

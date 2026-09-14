@@ -141,7 +141,7 @@ export default function SimulateursPage() {
               href="/explorer#parcours"
               className="rounded-sm border-2 border-cyan-800 px-5 py-2.5 text-sm font-black text-cyan-800 transition hover:bg-cyan-800 hover:text-[#f0fafc]"
             >
-              🧭 Teste-toi — Parcours →
+              🧭 Teste-toi — Évaluation annuelle →
             </Link>
           </div>
           <div className="mt-5 border-t border-[#1d1c16]/15 pt-4">

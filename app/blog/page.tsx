@@ -130,7 +130,7 @@ export default function BlogPage() {
           </p>
           <div className="mt-4 flex flex-wrap justify-center gap-3">
             <Link href="/parcours" className="rounded-2xl bg-emerald-500 px-5 py-3 text-sm font-black text-white shadow hover:bg-emerald-400">
-              🛤️ Mon parcours de notions
+              🛤️ Mon évaluation annuelle
             </Link>
             <Link href="/coach-brevet" className="rounded-2xl bg-white px-5 py-3 text-sm font-black text-slate-800 ring-1 ring-slate-200 hover:bg-slate-50">
               📚 Coach Brevet

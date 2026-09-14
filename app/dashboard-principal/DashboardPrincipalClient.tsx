@@ -341,7 +341,7 @@ export default function DashboardPrincipalClient() {
                         <th className="px-4 py-3 font-black text-slate-600">Code</th>
                         <th className="px-4 py-3 text-center font-black text-slate-600">Total</th>
                         <th className="px-4 py-3 text-center font-black text-slate-600">Moyenne</th>
-                        <th className="px-4 py-3 text-center font-black text-violet-600">🛤️ Parcours</th>
+                        <th className="px-4 py-3 text-center font-black text-violet-600">🛤️ Évaluation</th>
                         <th className="px-4 py-3 text-center font-black text-lime-600">⚡ Calcul</th>
                         <th className="px-4 py-3 text-center font-black text-orange-600">🎯 Défis</th>
                         <th className="px-4 py-3 text-center font-black text-sky-600">🇬🇧 EN</th>
@@ -385,9 +385,9 @@ export default function DashboardPrincipalClient() {
                                 <div className="grid gap-3 sm:grid-cols-2">
                                   {/* Parcours */}
                                   <div className="rounded-2xl bg-white p-4 shadow-sm">
-                                    <p className="mb-2 text-xs font-black uppercase text-violet-600">🛤️ Derniers parcours</p>
+                                    <p className="mb-2 text-xs font-black uppercase text-violet-600">🛤️ Dernières évaluations</p>
                                     {eleveDetailParcours.length === 0 ? (
-                                      <p className="text-xs text-slate-400">Aucun parcours.</p>
+                                      <p className="text-xs text-slate-400">Aucune évaluation.</p>
                                     ) : (
                                       <div className="space-y-1">
                                         {eleveDetailParcours.slice(0, 4).map((r) => (

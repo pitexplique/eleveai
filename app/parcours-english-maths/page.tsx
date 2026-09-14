@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import ParcoursEnglishClient from "./ParcoursEnglishClient";
 
 export const metadata: Metadata = {
-  title: "Parcours English Maths",
+  title: "Évaluation annuelle d'anglais",
   description: "Diagnostique ton niveau de vocabulaire mathématique en anglais.",
 };
 

@@ -124,7 +124,7 @@ export default function EvalPixIaClient() {
         <div className="mx-auto max-w-3xl">
           <div className="mb-6">
             <Link href="/parcours-ia" className="text-sm font-bold text-slate-500 hover:text-slate-800">
-              ← Parcours IA
+              ← Évaluation annuelle d'IA
             </Link>
           </div>
 

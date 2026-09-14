@@ -91,10 +91,10 @@ const outils = [
   { label: "Coach English IA", href: "/coach-ia/english-maths" },
   { label: "Coach Maths IA", href: "/coach-ia/maths" },
   { label: "Coach Français IA", href: "/coach-ia/francais" },
-  { label: "Parcours English", href: "/parcours-english-maths" },
-  { label: "Parcours Espagnol", href: "/parcours-espagnol" },
-  { label: "Parcours Français", href: "/parcours-francais" },
-  { label: "Parcours", href: "/parcours" },
+  { label: "Évaluation annuelle d'anglais", href: "/parcours-english-maths" },
+  { label: "Évaluation annuelle d'espagnol", href: "/parcours-espagnol" },
+  { label: "Évaluation annuelle de français", href: "/parcours-francais" },
+  { label: "Évaluation annuelle de maths", href: "/parcours" },
   { label: "Coach Brevet", href: "/coach-brevet" },
   { label: "Coach Bac Spé", href: "/coach-bac-spe" },
   { label: "Calcul rapide", href: "/calcul-rapide" },
@@ -400,7 +400,7 @@ export default function Footer() {
                   href="/parcours-english-maths"
                   className="text-sm text-slate-400 transition hover:text-sky-300"
                 >
-                  Parcours English
+                  Évaluation annuelle
                 </Link>
               </li>
             </ul>

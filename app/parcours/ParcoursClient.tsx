@@ -116,7 +116,7 @@ const questionCountOptions = [
   },
   {
     value: 20,
-    label: "Grand parcours",
+    label: "Marathon",
     emoji: "🏆",
     description: "20 questions",
   },
@@ -441,7 +441,7 @@ export default function ParcoursClient() {
     }
 
     if (!submitted || scores.length === 0) {
-      setSaveMessage("Termine d’abord le parcours avant d’enregistrer.");
+      setSaveMessage("Termine d'abord l'évaluation avant d'enregistrer.");
       return;
     }
 
@@ -450,7 +450,7 @@ export default function ParcoursClient() {
       eleve.code_eleve?.trim() ?? eleve.code_utilisateur?.trim() ?? "";
 
     if (!codeEtablissement || !codeUtilisateur) {
-      setSaveMessage("Impossible d’identifier ton compte élève.");
+      setSaveMessage("Impossible d'identifier ton compte élève.");
       return;
     }
 
@@ -492,13 +492,13 @@ export default function ParcoursClient() {
 
     if (error) {
       console.error(error);
-      setSaveMessage("Erreur : la note n’a pas été enregistrée.");
+      setSaveMessage("Erreur : la note n'a pas été enregistrée.");
       return;
     }
 
     setSaved(true);
     setSaveMessage(
-      "Note enregistrée ✅ Tu peux refaire le parcours pour améliorer ton score."
+      "Note enregistrée ✅ Tu peux refaire l'évaluation pour améliorer ton score."
     );
   }
 
@@ -579,15 +579,19 @@ export default function ParcoursClient() {
         <div className="mb-8 overflow-hidden rounded-[2rem] border border-white/70 bg-white/80 p-6 shadow-2xl backdrop-blur-xl">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-800 ring-1 ring-emerald-200">
             <span>🚀</span>
-            <span>EleveAI · Parcours</span>
+            <span>EleveAI · Évaluation annuelle</span>
           </div>
 
           <h1 className="text-3xl font-black leading-tight text-slate-950 md:text-5xl">
-            Ton voyage mathématiques
+            Ton évaluation de maths
           </h1>
 
+          {/* 14/09/2026 — « Ton voyage mathématiques » et « Choisis ton parcours »
+              partent avec le mot « Parcours » (Frédéric : « c'est une
+              évaluation »). Le premier choix de la page est une CLASSE : c'est
+              ce que le bouton dit désormais. */}
           <p className="mt-3 max-w-3xl text-base font-semibold leading-relaxed text-slate-700 md:text-lg">
-            Choisis ton parcours, le nombre de questions et ton niveau.
+            Choisis ta classe, le nombre de questions et ton niveau.
             EleveAI affiche ensuite une carte claire de tes forces :
             🟢 maîtrisé, 🟡 à revoir, 🔴 fragile.
           </p>
@@ -600,7 +604,7 @@ export default function ParcoursClient() {
             </div>
           ) : (
             <div className="mt-5 rounded-3xl border border-amber-200 bg-amber-50 p-4 text-sm font-black text-amber-900">
-              Tu peux faire le parcours sans connexion, mais il faudra être
+              Tu peux faire l&apos;évaluation sans connexion, mais il faudra être
               connecté pour enregistrer ta note.
             </div>
           )}
@@ -614,7 +618,7 @@ export default function ParcoursClient() {
 
           <div className="mt-6">
             <p className="mb-3 text-sm font-black uppercase tracking-wide text-slate-700">
-              1. Choisis ton parcours
+              1. Choisis ta classe
             </p>
 
             <div className="flex flex-wrap gap-3">
@@ -799,7 +803,7 @@ export default function ParcoursClient() {
               <span className="font-black text-emerald-700">
                 {questionCount}
               </span>{" "}
-              dans ce parcours.
+              dans cette évaluation.
             </p>
 
             <div className="grid gap-3 md:grid-cols-2">
@@ -845,7 +849,7 @@ export default function ParcoursClient() {
             {submitted && (
               <div ref={bilanRef} className="rounded-[2rem] border border-white/70 bg-white/85 p-6 shadow-2xl backdrop-blur-xl">
                 <h2 className="text-3xl font-black text-slate-950">
-                  🏆 Bilan du parcours
+                  🏆 Bilan de l&apos;évaluation
                 </h2>
 
                 <p className="mt-2 text-sm font-semibold text-slate-600">
@@ -869,8 +873,8 @@ export default function ParcoursClient() {
 
                   <p className="mt-3 text-sm font-bold text-emerald-900">
                     {eleve
-                      ? "Tu peux enregistrer cette tentative. Si tu refais le parcours, une nouvelle tentative pourra être enregistrée."
-                      : "Tu peux faire le parcours librement, mais il faut être connecté pour enregistrer ta progression."}
+                      ? "Tu peux enregistrer cette tentative. Si tu refais l'évaluation, une nouvelle tentative pourra être enregistrée."
+                      : "Tu peux faire l'évaluation librement, mais il faut être connecté pour enregistrer ta progression."}
                   </p>
 
                   <div className="mt-4 flex flex-wrap gap-3">
@@ -992,7 +996,7 @@ export default function ParcoursClient() {
                           Tu ne comprends pas la notion ?
                         </p>
                         <p className="mt-1 text-sm font-bold text-slate-700">
-                          Regarde une video d&apos;explication avant de repondre.
+                          Regarde une vidéo d&apos;explication avant de répondre.
                         </p>
                       </div>
 
@@ -1002,7 +1006,7 @@ export default function ParcoursClient() {
                         rel="noopener noreferrer"
                         className="inline-flex shrink-0 items-center justify-center rounded-full bg-sky-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-sky-500"
                       >
-                        Regarder la video
+                        Regarder la vidéo
                       </a>
                     </div>
                   </div>
@@ -1162,7 +1166,7 @@ export default function ParcoursClient() {
                     onClick={startParcours}
                     className="rounded-2xl bg-gradient-to-r from-emerald-400 to-sky-400 px-5 py-3 text-sm font-black text-slate-950 shadow-lg hover:from-emerald-300 hover:to-sky-300"
                   >
-                    Refaire un parcours
+                    Refaire une évaluation
                   </button>
 
                   <button

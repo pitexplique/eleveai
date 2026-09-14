@@ -63,35 +63,35 @@ const portes = [
   // ── Faire le point : un parcours par matière ───────────────────────────
   {
     emoji: "🛤️",
-    title: "Parcours Maths",
+    title: "Évaluation annuelle · Maths",
     text: "Un bilan clair : notions maîtrisées 🟢, à revoir 🟡, fragiles 🔴. L'élève sait où il en est.",
     href: "/parcours",
     color: "from-violet-500 to-indigo-600",
   },
   {
     emoji: "🛤️",
-    title: "Parcours Français",
+    title: "Évaluation annuelle · Français",
     text: "Le même bilan, matière par matière : ce qui est acquis, ce qui demande à être repris.",
     href: "/parcours-francais",
     color: "from-violet-500 to-purple-600",
   },
   {
     emoji: "🛤️",
-    title: "Parcours Espagnol",
+    title: "Évaluation annuelle · Espagnol",
     text: "Où en est-on vraiment&nbsp;? Le point sur les notions travaillées, sans note ni classement.",
     href: "/parcours-espagnol",
     color: "from-indigo-500 to-violet-600",
   },
   {
     emoji: "🛤️",
-    title: "Parcours Anglais",
+    title: "Évaluation annuelle · Anglais",
     text: "Le bilan English Maths : le vocabulaire tenu, celui qui s'échappe encore.",
     href: "/parcours-english-maths",
     color: "from-blue-500 to-indigo-600",
   },
   {
     emoji: "🛤️",
-    title: "Parcours IA",
+    title: "Évaluation annuelle · IA",
     text: "Le point sur les compétences numériques, dans l'ordre du référentiel.",
     href: "/parcours-ia",
     color: "from-teal-500 to-cyan-600",
@@ -443,7 +443,7 @@ export default function PourquoiEleveAIClient() {
             enregistrés automatiquement dans son tableau de bord :
           </p>
           <ul className="mt-4 space-y-2 text-sm font-semibold text-slate-700">
-            <li className="flex items-center gap-2"><span className="text-emerald-500">✅</span> Notions maîtrisées et fragiles (Parcours)</li>
+            <li className="flex items-center gap-2"><span className="text-emerald-500">✅</span> Notions maîtrisées et fragiles (Évaluation annuelle)</li>
             <li className="flex items-center gap-2"><span className="text-emerald-500">✅</span> Score et temps en Calcul rapide</li>
             <li className="flex items-center gap-2"><span className="text-emerald-500">✅</span> Réponses exactes aux Défis du jour</li>
             <li className="flex items-center gap-2"><span className="text-emerald-500">✅</span> Score des mini-défis English Maths</li>

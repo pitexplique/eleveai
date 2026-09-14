@@ -630,8 +630,11 @@ export const RESSOURCES: RessourceEleveAI[] = [
   },
   {
     id: "parcours",
-    titre: "Les parcours",
-    promesse: "Une série guidée qui monte en difficulté, du début à la fin.",
+    // 14/09/2026 : « Les parcours » devient « L'évaluation annuelle » (Frédéric :
+    // « c'est une évaluation »). La promesse suit : « une série guidée qui monte
+    // en difficulté » décrivait un entraînement, pas un bilan de l'année.
+    titre: "L'évaluation annuelle",
+    promesse: "Un bilan clair de ce qui est acquis et de ce qui reste à reprendre.",
     url: "/parcours",
     // « prof » aussi — voir la note sur le coach maths.
     niveaux: ["cm1", "cm2", "6e", "5e", "4e", "3e", "seconde", "premiere", "terminale", "prof"],
@@ -648,8 +651,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
   // et le parcours restait invisible à qui ne connaissait pas son adresse.
   {
     id: "parcours-francais",
-    titre: "Les parcours de français",
-    promesse: "Une série guidée qui monte en difficulté, du début à la fin.",
+    titre: "L'évaluation annuelle de français",
+    promesse: "Un bilan clair de ce qui est acquis et de ce qui reste à reprendre.",
     url: "/parcours-francais",
     // ⭐ « seconde » ajoutée le 18/08/2026, en même temps que le sélecteur de
     // classe de `/parcours-francais`. Les deux doivent bouger ensemble : ici
@@ -664,7 +667,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
   },
   {
     id: "parcours-anglais",
-    titre: "Les parcours d'anglais",
+    titre: "L'évaluation annuelle d'anglais",
     promesse: "L'anglais et les maths dans la même série.",
     url: "/parcours-english-maths",
     niveaux: ["6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
@@ -677,8 +680,8 @@ export const RESSOURCES: RessourceEleveAI[] = [
   },
   {
     id: "parcours-espagnol",
-    titre: "Les parcours d'espagnol",
-    promesse: "Une série guidée qui monte en difficulté, du début à la fin.",
+    titre: "L'évaluation annuelle d'espagnol",
+    promesse: "Un bilan clair de ce qui est acquis et de ce qui reste à reprendre.",
     url: "/parcours-espagnol",
     // 6ᵉ incluse, comme le coach : voir la note sur `coach-espagnol`.
     niveaux: ["6e", "5e", "4e", "3e", "seconde", "premiere", "terminale"],
@@ -691,7 +694,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
   },
   {
     id: "parcours-ia",
-    titre: "Les parcours d'IA",
+    titre: "L'évaluation annuelle d'IA",
     promesse: "Comprendre l'intelligence artificielle en la pratiquant.",
     url: "/parcours-ia",
     // Mêmes niveaux que le coach d'IA, et pour la même raison : la banque est

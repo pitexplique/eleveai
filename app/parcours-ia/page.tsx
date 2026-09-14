@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import ParcoursIaClient from "./ParcoursIaClient";
 
 export const metadata: Metadata = {
-  title: "Parcours IA",
+  title: "Évaluation annuelle d'IA",
   description: "Diagnostique ton niveau de culture et d'usage de l'intelligence artificielle (A1 → C1).",
 };
 
