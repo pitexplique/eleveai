@@ -1495,8 +1495,9 @@
       "type": "longue",
       "fichier": "maths-en-vrai/maths/paysage/fr/fonctions/eleveai-maths-en-vrai-fonctions.mp4",
       "miniature": "maths-en-vrai/maths/fr/eleveai-maths-en-vrai-fonctions.png",
-      "titre": "Les maths, ça sert à rien… sauf à prévoir",
-      "accroche": "Les maths, ça sert à rien. Sauf à prévoir.\n\nCette vidéo ne te demande pas d'apprendre des formes de courbes par cœur : elle te montre à quoi elles servent. D'abord à dessiner — une constante pour le sol, une affine pour un toit, une parabole pour une colline. Mais surtout à prévoir. Modéliser, c'est remplacer une situation réelle par une formule, pour calculer ce qui n'est pas encore arrivé.\n\nTrois questions, trois fonctions :\n• COMBIEN ? → l'exponentielle (une vidéo qui double ses vues chaque jour)\n• QUAND ? → le logarithme (la même vidéo, la question inverse)\n• JUSQU'OÙ ? → la fonction inverse 1/x (un gâteau partagé entre de plus en plus de monde)\n\nÀ la fin, on dessine une aire de jeux entière avec sept formules, sans un seul trait à la main.\n\nLes chiffres sont des modèles, pas des prédictions : une formule dit ce qui arrivera si les choses continuent comme maintenant. Aucun niveau requis.",
+      "titre": "Les fonctions, ça sert à rien… sauf à prévoir",
+      "url": "https://youtu.be/y5Gp1bltuaw",
+      "accroche": "Les fonctions, ça sert à rien. Sauf à dessiner… et surtout à prévoir.\n\nCette vidéo ne te demande pas d'apprendre des formes de courbes par cœur : elle te montre à quoi elles servent. D'abord à dessiner — une constante pour le sol, une affine pour un toit, une parabole pour une colline. Mais surtout à prévoir. Modéliser, c'est remplacer une situation réelle par une formule, pour calculer ce qui n'est pas encore arrivé.\n\nTrois questions, trois fonctions :\n• COMBIEN ? → l'exponentielle (une vidéo qui double ses vues chaque jour)\n• QUAND ? → le logarithme (la même vidéo, la question inverse)\n• JUSQU'OÙ ? → la fonction inverse 1/x (un gâteau partagé entre de plus en plus de monde)\n\nÀ la fin, on dessine une aire de jeux entière avec sept formules, sans un seul trait à la main.\n\nLes chiffres sont des modèles, pas des prédictions : une formule dit ce qui arrivera si les choses continuent comme maintenant. Aucun niveau requis.",
       "chapitres": [
         [
           "00:00",
@@ -1573,8 +1574,8 @@
       "type": "short",
       "renvoie_vers": "bases-fonctions",
       "fiche": "https://www.eleveai.fr/accueil",
-      "titre": "Une semaine sans rien, puis 102 400 vues",
-      "accroche": "Une vidéo fait 100 vues aujourd'hui, et ses vues doublent chaque jour. Pendant une semaine, sur la courbe, il ne se passe presque rien. Puis elle s'envole : 102 400 vues dans 10 jours.\n\nC'est une croissance exponentielle — on multiplie toujours par le même nombre, f(x) = 100 × 2^x. Elle répond à la question : combien ? Et elle trompe tout le monde, parce qu'au début elle a l'air de ne rien faire.",
+      "titre": "100 vues aujourd'hui, 102 400 dans 10 jours",
+      "accroche": "Une vidéo fait 100 vues aujourd'hui, et ses vues doublent chaque jour. Pendant une semaine, sur la courbe, il ne se passe presque rien. Puis elle s'envole : 102 400 vues dans 10 jours.\n\nC'est une croissance exponentielle : on multiplie toujours par le même nombre, f(x) = 100 × 2^x. Elle répond à la question « combien ? ». Et elle trompe tout le monde, parce qu'au début elle a l'air de ne rien faire.\n\nLes fonctions, ça sert à rien… sauf à prévoir.",
       "tags": [
         "maths",
         "exponentielle",
