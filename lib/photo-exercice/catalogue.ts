@@ -20,25 +20,43 @@ import {
   getNotionMicroMap,
   getNotionLabelMap,
   getMicroLabelMap,
+  getAnneesNotions,
+  sansMarqueurAnnee,
+  type AnneeStmg,
   type Classe,
   type Matiere,
 } from "@/lib/tutor-v4/catalog";
 
+/**
+ * Une entrée du sélecteur. `cle` est ce que le navigateur envoie ; `classe` est
+ * la classe du coach. Les deux diffèrent pour la STMG : le coach n'a qu'un
+ * paquet pour 1re et Tle, filtré par année (14/09, Frédéric : « STMG première
+ * et terminale »), et la photo offre donc deux entrées sur ce seul paquet.
+ */
+export type EntreeClasse = {
+  cle: string;
+  classe: Classe;
+  label: string;
+  annee?: AnneeStmg;
+};
+
 /** Les classes proposées, dans l'ordre de la scolarité. */
-export const CLASSES_PHOTO: { id: Classe; label: string }[] = [
-  { id: "cp", label: "CP" },
-  { id: "ce1", label: "CE1" },
-  { id: "ce2", label: "CE2" },
-  { id: "cm1", label: "CM1" },
-  { id: "cm2", label: "CM2" },
-  { id: "6e", label: "6e" },
-  { id: "5e", label: "5e" },
-  { id: "4e", label: "4e" },
-  { id: "3e", label: "3e" },
-  { id: "seconde", label: "Seconde" },
-  { id: "premiere", label: "1re (tronc commun)" },
-  { id: "premiere-spe", label: "1re spé maths" },
-  { id: "terminale-spe", label: "Terminale spé maths" },
+export const CLASSES_PHOTO: EntreeClasse[] = [
+  { cle: "cp", classe: "cp", label: "CP" },
+  { cle: "ce1", classe: "ce1", label: "CE1" },
+  { cle: "ce2", classe: "ce2", label: "CE2" },
+  { cle: "cm1", classe: "cm1", label: "CM1" },
+  { cle: "cm2", classe: "cm2", label: "CM2" },
+  { cle: "6e", classe: "6e", label: "6e" },
+  { cle: "5e", classe: "5e", label: "5e" },
+  { cle: "4e", classe: "4e", label: "4e" },
+  { cle: "3e", classe: "3e", label: "3e" },
+  { cle: "seconde", classe: "seconde", label: "Seconde" },
+  { cle: "premiere", classe: "premiere", label: "1re (tronc commun)" },
+  { cle: "premiere-spe", classe: "premiere-spe", label: "1re spé maths" },
+  { cle: "terminale-spe", classe: "terminale-spe", label: "Terminale spé maths" },
+  { cle: "stmg-premiere", classe: "stmg", label: "1re STMG", annee: "premiere" },
+  { cle: "stmg-terminale", classe: "stmg", label: "Tle STMG", annee: "terminale" },
 ];
 
 /**
@@ -56,8 +74,8 @@ export const MATIERES_PHOTO: { id: Matiere; label: string }[] = [
   { id: "francais", label: "Français" },
 ];
 
-export function classesPour(matiere: Matiere): { id: Classe; label: string }[] {
-  if (matiere === "francais") return CLASSES_PHOTO.filter((c) => CLASSES_FRANCAIS.has(c.id));
+export function classesPour(matiere: Matiere): EntreeClasse[] {
+  if (matiere === "francais") return CLASSES_PHOTO.filter((c) => CLASSES_FRANCAIS.has(c.classe));
   return CLASSES_PHOTO;
 }
 
@@ -66,13 +84,20 @@ export function matiereValide(brut: unknown): Matiere | null {
   return m ? m.id : null;
 }
 
-export function classeValide(brut: unknown, matiere: Matiere): Classe | null {
-  const c = classesPour(matiere).find((x) => x.id === brut);
-  return c ? c.id : null;
-}
-
-export function labelClasse(classe: Classe): string {
-  return CLASSES_PHOTO.find((c) => c.id === classe)?.label ?? classe;
+/**
+ * L'entrée qui correspond à une clé — ou à une classe du coach plus une
+ * année, quand on arrive depuis le coach (`?classe=stmg&annee=premiere`).
+ * `null` si rien ne correspond : on ne devine pas.
+ */
+export function classeValide(
+  brut: unknown,
+  matiere: Matiere,
+  annee?: unknown,
+): EntreeClasse | null {
+  const entrees = classesPour(matiere);
+  const parCle = entrees.find((x) => x.cle === brut);
+  if (parCle) return parCle;
+  return entrees.find((x) => x.classe === brut && (x.annee ?? null) === (annee || null)) ?? null;
 }
 
 export type NotionDuSommaire = {
@@ -81,19 +106,34 @@ export type NotionDuSommaire = {
   micros: { id: string; label: string }[];
 };
 
-/** Les notions de la classe qui ont au moins une série : les autres n'ouvrent rien. */
-export function sommaire(classe: Classe, matiere: Matiere): NotionDuSommaire[] {
+/**
+ * Les notions de l'entrée qui ont au moins une série : les autres n'ouvrent
+ * rien. Pour une entrée à année (STMG), on garde les notions de cette année et
+ * celles communes aux deux — la même règle que `gardeNotion` dans /coach-ia —
+ * et on retire le marqueur « (Tle) » des libellés, comme le coach le fait.
+ */
+export function sommaire(entree: EntreeClasse, matiere: Matiere): NotionDuSommaire[] {
+  const { classe, annee } = entree;
   const notions = getNotionOptions(classe, matiere);
   const micros = getNotionMicroMap(classe, matiere);
   const labelsNotions = getNotionLabelMap(classe, matiere);
   const labelsMicros = getMicroLabelMap(classe, matiere);
+  const annees = annee ? getAnneesNotions(classe, matiere) : null;
 
   return notions
-    .map((id) => ({
-      id,
-      label: labelsNotions[id] ?? id,
-      micros: (micros[id] ?? []).map((m) => ({ id: m, label: labelsMicros[m] ?? m })),
-    }))
+    .filter((id) => {
+      if (!annees) return true;
+      const a = annees[id];
+      return a === undefined || a === annee;
+    })
+    .map((id) => {
+      const brut = labelsNotions[id] ?? id;
+      return {
+        id,
+        label: annees ? sansMarqueurAnnee(brut) : brut,
+        micros: (micros[id] ?? []).map((m) => ({ id: m, label: labelsMicros[m] ?? m })),
+      };
+    })
     .filter((n) => n.micros.length > 0);
 }
 

@@ -30,23 +30,32 @@ import {
   classeValide,
   matiereValide,
 } from "@/lib/photo-exercice/catalogue";
-import type { Classe, Matiere } from "@/lib/tutor-v4/catalog";
+import type { Matiere } from "@/lib/tutor-v4/catalog";
 import type { ReponsePhotoExercice } from "@/app/api/photo-exercice/route";
 
 const PDF_MAX_OCTETS = 3_000_000;
 
 type Props = {
+  /** Une clé d'entrée (« stmg-premiere ») ou une classe du coach (« stmg » + `anneeInitiale`). */
   classeInitiale?: string | null;
+  anneeInitiale?: string | null;
   matiereInitiale?: string | null;
   /** Dans la colonne : titres plus petits, pas de paragraphe d'explication. */
   compact?: boolean;
 };
 
-export default function PhotoExercice({ classeInitiale, matiereInitiale, compact = false }: Props) {
+export default function PhotoExercice({
+  classeInitiale,
+  anneeInitiale,
+  matiereInitiale,
+  compact = false,
+}: Props) {
   const { eleve } = useEleve();
   const [matiere, setMatiere] = useState<Matiere>(matiereValide(matiereInitiale) ?? "maths");
-  const [classe, setClasse] = useState<Classe | "">(
-    classeValide(classeInitiale, matiereValide(matiereInitiale) ?? "maths") ?? ""
+  // `classe` est la CLÉ d'entrée du sélecteur (« 4e », « stmg-premiere »), pas
+  // toujours la classe du coach : voir EntreeClasse dans le catalogue.
+  const [classe, setClasse] = useState<string>(
+    classeValide(classeInitiale, matiereValide(matiereInitiale) ?? "maths", anneeInitiale)?.cle ?? ""
   );
   const [nomFichier, setNomFichier] = useState<string | null>(null);
   const [enCours, setEnCours] = useState(false);
@@ -70,7 +79,7 @@ export default function PhotoExercice({ classeInitiale, matiereInitiale, compact
   useEffect(() => {
     if (!classe && eleve?.classe) {
       const c = classeValide(eleve.classe, matiere);
-      if (c) setClasse(c);
+      if (c) setClasse(c.cle);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [eleve?.classe]);
@@ -213,7 +222,7 @@ export default function PhotoExercice({ classeInitiale, matiereInitiale, compact
           <select
             value={classe}
             onChange={(e) => {
-              setClasse(e.target.value as Classe | "");
+              setClasse(e.target.value);
               setResultat(null);
             }}
             className={[
@@ -223,7 +232,7 @@ export default function PhotoExercice({ classeInitiale, matiereInitiale, compact
           >
             <option value="">Ta classe…</option>
             {classes.map((c) => (
-              <option key={c.id} value={c.id}>
+              <option key={c.cle} value={c.cle}>
                 {c.label}
               </option>
             ))}
@@ -320,7 +329,7 @@ export default function PhotoExercice({ classeInitiale, matiereInitiale, compact
                   Exercice {ex.numero} · {ex.resume}
                 </p>
                 <Link
-                  href={`/coach-ia/${resultat.matiere}?classe=${encodeURIComponent(resultat.classe)}&notion=${encodeURIComponent(ex.notionLabel)}`}
+                  href={`/coach-ia/${resultat.matiere}?classe=${encodeURIComponent(resultat.classe)}${resultat.annee ? `&annee=${encodeURIComponent(resultat.annee)}` : ""}&notion=${encodeURIComponent(ex.notionLabel)}`}
                   prefetch={false}
                   className="mt-0.5 block text-sm font-bold text-teal-800 hover:underline"
                 >

@@ -766,7 +766,7 @@ export default function CoachIA() {
                   page (la colonne des classes n'y est pas). `coach_photo`
                   compte les clics, comme `coach_classe`. */}
               <Link
-                href={`/photo-exercice?classe=${encodeURIComponent(classe)}&matiere=${encodeURIComponent(matiere)}`}
+                href={`/photo-exercice?classe=${encodeURIComponent(classe)}${anneesNotions && annee !== "cycle" ? `&annee=${annee}` : ""}&matiere=${encodeURIComponent(matiere)}`}
                 prefetch={false}
                 onClick={() => track("coach_photo", { matiere, classe })}
                 aria-label="Photographier un exercice : trouver les séries qui vont avec"

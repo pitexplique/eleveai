@@ -30,7 +30,6 @@ import { clean } from "@/lib/photo-cours/auth";
 import { niveauVersProfil } from "@/lib/photo-cours/coach";
 import {
   classeValide,
-  labelClasse,
   matiereValide,
   sommaire,
   sommaireEnTexte,
@@ -71,7 +70,10 @@ export type ExerciceReconnu = {
 };
 
 export type ReponsePhotoExercice = {
+  /** La classe du coach (« stmg »), pour construire les liens. */
   classe: string;
+  /** L'année, quand la classe en distingue (STMG) : reprise dans le lien coach. */
+  annee: string | null;
   matiere: string;
   exercices: ExerciceReconnu[];
   /** Les exercices qui ne correspondent à aucune notion du coach — dits tels quels. */
@@ -142,8 +144,8 @@ export async function POST(req: Request) {
     if (!matiere) {
       return NextResponse.json({ error: "Matière inconnue." }, { status: 400 });
     }
-    const classe = classeValide(clean(body.classe, 20), matiere);
-    if (!classe) {
+    const entree = classeValide(clean(body.classe, 20), matiere);
+    if (!entree) {
       return NextResponse.json({ error: "Classe inconnue pour cette matière." }, { status: 400 });
     }
 
@@ -166,7 +168,8 @@ export async function POST(req: Request) {
       );
     }
 
-    const s = sommaire(classe, matiere);
+    const classe = entree.classe;
+    const s = sommaire(entree, matiere);
     if (s.length === 0) {
       return NextResponse.json({ error: "Le coach n'a pas encore de séries pour cette classe." }, { status: 404 });
     }
@@ -188,7 +191,7 @@ export async function POST(req: Request) {
       max_tokens: 1500,
       response_format: { type: "json_object" },
       messages: [
-        { role: "system", content: consigne(labelClasse(classe), matiereLabel, sommaireEnTexte(s)) },
+        { role: "system", content: consigne(entree.label, matiereLabel, sommaireEnTexte(s)) },
         {
           role: "user",
           content: [{ type: "text", text: "Voici la feuille." }, piece],
@@ -257,7 +260,9 @@ export async function POST(req: Request) {
     const remarqueModele = clean(parsed.remarque, 200);
     const classeProbable = clean(parsed.classeProbable, 40);
     const profilProbable = niveauVersProfil(classeProbable);
-    const profilChoisi = classe.replace(/-spe$/, "");
+    // Pour une entrée à année (1re STMG), c'est l'année qui fait le profil :
+    // « première » lu sur la feuille et « 1re STMG » choisi sont d'accord.
+    const profilChoisi = entree.annee ?? classe.replace(/-spe$/, "");
     const remarque =
       remarqueModele ||
       (profilProbable && profilProbable !== profilChoisi
@@ -275,7 +280,14 @@ export async function POST(req: Request) {
       outputTokens: completion.usage?.completion_tokens ?? null,
     });
 
-    const reponse: ReponsePhotoExercice = { classe, matiere, exercices, horsCatalogue, remarque };
+    const reponse: ReponsePhotoExercice = {
+      classe,
+      annee: entree.annee ?? null,
+      matiere,
+      exercices,
+      horsCatalogue,
+      remarque,
+    };
     return NextResponse.json(reponse);
   } catch (error) {
     console.error("Erreur /api/photo-exercice :", error);

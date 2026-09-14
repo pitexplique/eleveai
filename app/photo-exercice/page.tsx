@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 export default async function PhotoExercicePage({
   searchParams,
 }: {
-  searchParams: Promise<{ classe?: string; matiere?: string }>;
+  searchParams: Promise<{ classe?: string; annee?: string; matiere?: string }>;
 }) {
   const sp = await searchParams;
   return (
@@ -38,7 +38,11 @@ export default async function PhotoExercicePage({
           et les séries où t&apos;entraîner, une question à la fois, corrigée.
         </p>
         <div className="mt-6">
-          <PhotoExercice classeInitiale={sp.classe ?? null} matiereInitiale={sp.matiere ?? null} />
+          <PhotoExercice
+            classeInitiale={sp.classe ?? null}
+            anneeInitiale={sp.annee ?? null}
+            matiereInitiale={sp.matiere ?? null}
+          />
         </div>
       </div>
     </main>
