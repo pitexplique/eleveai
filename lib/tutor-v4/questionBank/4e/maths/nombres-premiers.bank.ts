@@ -220,7 +220,7 @@ export const nombresPremiersBank: TutorBankItemV4[] = [
           "Méthode : jusqu'à 100, cela ne fait que quatre tests — 2, 3, 5 et 7. Car $11^2 = 121$, déjà au-delà de 100.\n\n" +
           (premier
             ? `Calcul : ${n} n'est divisible ni par 2 (il est impair), ni par 3 (somme des chiffres : ${String(n).split("").reduce((s, c) => s + Number(c), 0)}), ni par 5, ni par 7.\n\n`
-            : `Calcul : ${n} \\div ${d} = ${n / d}, sans reste.\n\n`) +
+            : `Calcul : $${n} \\div ${d} = ${n / d}$, sans reste.\n\n`) +
           `Conclusion : ${correct}. ⭐ Quatre tests suffisent jusqu'à 100 — c'est tout l'intérêt de la méthode, et un élève qui teste jusqu'à 99 n'a pas compris le crible.`,
         canvas: {
           kind: "tableau_donnees",

@@ -144,7 +144,7 @@ export const divisibiliteBank: TutorBankItemV4[] = [
         explanation:
           "Définition : un nombre est multiple d'un autre lorsque la division tombe juste — autrement dit lorsque le RESTE vaut zéro.\n\n" +
           "Méthode : on divise et on regarde le reste.\n\n" +
-          `Calcul : ${n} \\div ${d} donne ${Math.floor(n / d)} et il reste ${n - d * Math.floor(n / d)}.\n\n` +
+          `Calcul : $${n} \\div ${d}$ donne ${Math.floor(n / d)} et il reste ${n - d * Math.floor(n / d)}.\n\n` +
           (divisible
             ? `Conclusion : le reste vaut 0, donc ${n} est bien un multiple de ${d}.`
             : `Conclusion : ⚠️ le reste ne vaut pas 0, donc ${n} n'est PAS un multiple de ${d}. « Presque divisible » n'existe pas.`),
