@@ -598,6 +598,16 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Le second degré",
     resume: "Le discriminant ne calcule rien, il decide : deux racines, une seule, ou aucune — et donc si la forme factorisee existe.",
   },
+  // Deux parties (Frédéric, 14/09/2026). La première porte le slug du notionId
+  // du coach, `exponentielle` : c'est elle que la liste du coach retrouve.
+  "maths/premiere-spe/exponentielle": {
+    titre: "L'exponentielle, partie 1 : calculer et résoudre",
+    resume: "Tout se joue dans l'exposant : règles de calcul, signe, croissance, et e^a = e^b ⇔ a = b pour résoudre.",
+  },
+  "maths/premiere-spe/exponentielle-etude": {
+    titre: "L'exponentielle, partie 2 : dériver et étudier",
+    resume: "L'exponentielle ne décide jamais du signe : dérivée de e^(at), étude de (ax + b)e^x, croissance exponentielle.",
+  },
   // ─── Français ───────────────────────────────────────────────────────────────
   // La matière s'ouvre au cycle 3 : c'est le programme du CM2, et c'est aussi
   // celui sur lequel porte l'écrit de français du CRPE.
