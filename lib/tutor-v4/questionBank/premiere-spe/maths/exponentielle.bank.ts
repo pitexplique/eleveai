@@ -112,6 +112,80 @@ function intervalle(x0: string, sens: "<" | ">", ferme: boolean): string {
     : `$\\left${ferme ? "[" : "]"} ${x0} \\,;\\, +\\infty \\right[$`;
 }
 
+type Comparaison = "=" | "<" | ">" | "\\leqslant" | "\\geqslant";
+
+/** L'exponentielle d'un exposant, écrite comme au tableau : « 0 » → 1, « 1 » → e.
+ *  ⛔ Sans elle, l'énoncé affichait « e^{1} » (mesuré le 15/09/2026). */
+function puissanceE(exposant: string): string {
+  return exposant === "0" ? "1" : exposant === "1" ? "e" : `e^{${exposant}}`;
+}
+
+/**
+ * Résout (Ax + B) ⋈ (Cx + D), avec A ≠ C — ce qui reste d'une équation ou d'une
+ * inéquation exponentielle une fois les exposants comparés. Rend la réponse,
+ * deux pièges sur la FIN du calcul, et les lignes de la correction.
+ * ⚠️ Les pièges qui visent la PROPRIÉTÉ elle-même (« e^x = 1 donc x = 1 »)
+ * s'ajoutent gabarit par gabarit : ce sont eux qui comptent.
+ */
+function comparerExposants(A: number, B: number, C: number, D: number, op: Comparaison) {
+  const k = A - C;
+  const m = D - B;
+  const x0 = fraction(m, k);
+  const regroupe = `$${affine(k, 0)} ${op} ${m}$`;
+  if (op === "=") {
+    return {
+      correct: `$x = ${x0}$`,
+      pieges: [`$x = ${fraction(-m, k)}$`, "aucune solution"],
+      calcul: k === 1 ? `$x = ${x0}$.` : `${regroupe}, donc $x = ${x0}$.`,
+      solution: `$S = \\left\\{ ${x0} \\right\\}$`,
+    };
+  }
+  const large = op === "\\leqslant" || op === "\\geqslant";
+  const versLeBas = op === "<" || op === "\\leqslant";
+  const sens: "<" | ">" = versLeBas !== k < 0 ? "<" : ">";
+  const oppose: "<" | ">" = sens === "<" ? ">" : "<";
+  const opFinal = sens === "<" ? (large ? "\\leqslant" : "<") : large ? "\\geqslant" : ">";
+  const correct = intervalle(x0, sens, large);
+  return {
+    correct,
+    pieges: [intervalle(x0, oppose, large), intervalle(x0, sens, !large)],
+    calcul:
+      k < 0
+        ? `${regroupe} ; on divise par $${k}$, qui est NÉGATIF : le sens change, $x ${opFinal} ${x0}$.`
+        : k === 1
+          ? `$x ${opFinal} ${x0}$.`
+          : `${regroupe}, donc $x ${opFinal} ${x0}$.`,
+    solution: `$S = $ ${correct}`,
+  };
+}
+
+/** La correction d'une comparaison d'exponentielles : la propriété, les exposants, le calcul. */
+function expliquerComparaison(
+  gauche: string,
+  droite: string,
+  op: Comparaison,
+  r: ReturnType<typeof comparerExposants>,
+  reecriture = "",
+) {
+  return exp(
+    op === "="
+      ? "L'exponentielle est strictement croissante : $e^{a} = e^{b} \\Longleftrightarrow a = b$."
+      : "L'exponentielle est strictement croissante, elle conserve l'ordre : $e^{a} < e^{b} \\Longleftrightarrow a < b$ (de même avec $\\leqslant$).",
+    `${reecriture}On compare les exposants : $${gauche} ${op} ${droite}$.`,
+    // « e^x = e^3 » : la comparaison EST la réponse, on ne la répète pas.
+    r.calcul === `$${gauche} ${op} ${droite}$.` ? "Il n'y a rien d'autre à calculer : l'exponentielle a disparu." : r.calcul,
+    `${r.solution}.`
+  );
+}
+
+/** Ce qu'il faut réécrire avant de comparer, quand un membre est 1 ou e. */
+function reecrire(membres: string[]): string {
+  const faits = [...new Set(membres)]
+    .map((m) => (m === "0" ? "$1 = e^{0}$" : m === "1" ? "$e = e^{1}$" : ""))
+    .filter(Boolean);
+  return faits.length ? `On écrit ${faits.join(" et ")}. ` : "";
+}
+
 /** Les quatre verdicts possibles devant « est-ce la fonction exponentielle ? ».
  *  Toujours servis ensemble : seule la bonne réponse change d'un tirage à l'autre. */
 const VERDICTS_EXP = {
@@ -3369,58 +3443,120 @@ export const exponentielleBank: TutorBankItemV4[] = [
    *     de fonction, qui est l'exercice long de tout devoir sur le chapitre,
    *     n'existait pas.
    *
-   * Vérifié contre le programme (projet d'aménagement de juin 2025, rentrée
-   * 2026) : « Signe, sens de variation » de l'exponentielle, « Pour a réel,
-   * dérivée de la fonction t ↦ e^{at} » (ajout en rouge), « Étudier les
-   * variations d'une fonction. Déterminer les extremums ». ⚠️ La dérivée de
-   * g(ax + b) SORT du programme : les gabarits ne dérivent que des e^{at}.
-   *
-   * Rangement validé par Frédéric le 14/09 : dans les micros EXISTANTES.
-   * Équations, comparaisons et étude → exp_derivee (« Dérivée, signe et
-   * variations ») ; produit nul → exp_signe.
+   * Vérifié contre le programme officiel (BO n° 14 de 2026, identique au projet
+   * de juin 2025) : « Signe, sens de variation » de l'exponentielle, « Pour a
+   * réel, dérivée de la fonction t ↦ e^{at} », « Étudier les variations d'une
+   * fonction. Déterminer les extremums ». ⚠️ La dérivée de g(ax + b) n'est plus
+   * au programme : les gabarits ne dérivent que des e^{at}.
    */
 
+  /* ── RÉSOUDRE : la micro exp_equations (15/09/2026) ──
+   *
+   * La veille, ces gabarits étaient rangés sous exp_derivee — et Frédéric, en
+   * testant : « je m'aperçois que équation et inéquation ont disparu ». Ils
+   * étaient là, mais aucun libellé de la liste ne disait « résoudre ».
+   *
+   * ⭐ ET LA CONSIGNE QUI A TOUT RÉÉCRIT : « la résolution d'équation ne doit pas
+   * être trop difficile, le but est que l'élève sache que e(a) = e(b) alors
+   * a = b, idem pour inéquation » · « ça doit rester simple ».
+   *
+   * La veille, les solutions tombaient sur des fractions et l'inéquation divisait
+   * par un négatif une fois sur deux : on mesurait la mise en équation, pas
+   * l'exponentielle. Désormais : solutions ENTIÈRES, petits coefficients, et des
+   * pièges qui visent la PROPRIÉTÉ — « e^x = 1 donc x = 1 », « e^x = e^3 donc
+   * x = e^3 », « on ne peut pas enlever les e ».
+   */
+
+  {
+    kind: "template",
+    id: "premiere_exp_eq_simple_tpl",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_equations",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Deux exponentielles sont égales exactement quand leurs exposants le sont : $e^{a} = e^{b} \\Longleftrightarrow a = b$. Et $1 = e^{0}$.",
+    tags: ["premiere", "maths", "exponentielle", "equations", "template"],
+    generate: () => {
+      const op = pickOne(["=", "=", "=", "<", ">", "\\leqslant", "\\geqslant"] as const);
+      const mot = op === "=" ? "l'équation" : "l'inéquation";
+      if (pickOne([true, true, false])) {
+        // e^{ax} ⋈ e^{k} : le premier geste, le plus nu.
+        const a = pickOne([1, 1, 2, 3, -1]);
+        const x0 = randomInt(-4, 5);
+        const k = a * x0;
+        const gauche = affine(a, 0);
+        const r = comparerExposants(a, 0, 0, k, op);
+        // Garder le e : « e^x = e^3 donc x = e^3 », et surtout « e^x = 1 donc x = 1 ».
+        const garderLeE =
+          op === "="
+            ? `$x = ${puissanceE(String(k))}$`
+            : intervalle(puissanceE(String(k)), r.correct.includes("-\\infty") ? "<" : ">", op === "\\leqslant" || op === "\\geqslant");
+        const oublierA = a !== 1 ? comparerExposants(1, 0, 0, k, op).correct : "";
+        return {
+          text: `Résous dans $\\mathbb{R}$ ${mot} $e^{${gauche}} ${op} ${puissanceE(String(k))}$.`,
+          format: "qcm",
+          choices: makeChoices(r.correct, [garderLeE, oublierA, ...r.pieges].filter(Boolean)),
+          expected: [r.correct],
+          comparator: "mcq_exact",
+          explanation: expliquerComparaison(gauche, String(k), op, r, reecrire([String(k)])),
+        };
+      }
+      // e^{x} ⋈ e^{cx + d} : un x de chaque côté, toujours une solution entière.
+      const c = pickOne([2, 3, -1, -2]);
+      // x0 ≠ 0 : « e^x = e^{2x} » a pour solution 0, et trois pièges sur quatre valaient 0.
+      const x0 = pickOne([-4, -3, -2, -1, 1, 2, 3, 4]);
+      const d = (1 - c) * x0;
+      const r = comparerExposants(1, 0, c, d, op);
+      const sansChangerDeSigne = op === "=" ? `$x = ${fraction(d, 1 + c)}$` : intervalle(fraction(d, 1 + c), r.correct.includes("-\\infty") ? "<" : ">", op === "\\leqslant" || op === "\\geqslant");
+      return {
+        text: `Résous dans $\\mathbb{R}$ ${mot} $e^{x} ${op} ${puissanceE(affine(c, d))}$.`,
+        format: "qcm",
+        choices: makeChoices(r.correct, [...r.pieges, 1 + c !== 0 ? sansChangerDeSigne : "", "aucune solution"].filter(Boolean)),
+        expected: [r.correct],
+        comparator: "mcq_exact",
+        explanation: expliquerComparaison("x", affine(c, d), op, r),
+      };
+    },
+  },
   {
     kind: "template",
     id: "premiere_exp_equation_tpl",
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "exponentielle",
-    microId: "exp_derivee",
-    difficulty: 4,
+    microId: "exp_equations",
+    difficulty: 3,
     theme: "neutral",
     hint: "L'exponentielle est strictement croissante : deux exponentielles sont égales exactement quand leurs exposants le sont.",
-    tags: ["premiere", "maths", "exponentielle", "derivee", "equation", "template"],
+    tags: ["premiere", "maths", "exponentielle", "equations", "template"],
     generate: () => {
-      const a = pickOne([-3, -2, -1, 1, 2, 3, 4]);
-      const c = pickOne([-2, -1, 0, 1, 2, 3].filter((v) => v !== a));
-      const b = randomInt(-6, 6);
-      // d ≠ b : sinon la solution est 0 et trois pièges sur quatre valent 0 eux
-      // aussi — mesuré, un QCM à deux cases sur « e^{4x} = e^{3x} ».
-      const d = pickOne([-6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6].filter((v) => v !== b));
-      const k = a - c;
-      const m = d - b;
-      const x0 = fraction(m, k);
-      const correct = `$x = ${x0}$`;
-      const pieges = [
-        `$x = ${fraction(d + b, k)}$`, // b passé de l'autre côté sans changer de signe
-        a + c !== 0 ? `$x = ${fraction(m, a + c)}$` : "", // cx passé sans changer de signe
-        `$x = ${fraction(k, m)}$`, // division à l'envers
-        `$x = ${fraction(-m, k)}$`, // signe perdu à la fin
-        "aucune solution",
-      ].filter(Boolean);
+      // On part de la solution, ENTIÈRE, et on fabrique l'équation autour.
+      let a = 0;
+      let b = 0;
+      let c = 0;
+      let d = 0;
+      let x0 = 0;
+      do {
+        a = pickOne([1, 2, 3, -1, -2]);
+        c = pickOne([0, 1, 2, 3, -1]);
+        x0 = randomInt(-5, 5);
+        b = randomInt(-6, 6);
+        d = (a - c) * x0 + b;
+        // x0 = b = 0 donnerait e^{ax} = e^{cx} : trois pièges sur quatre valent 0.
+      } while (a === c || Math.abs(d) > 12 || (x0 === 0 && b === 0));
+      const r = comparerExposants(a, b, c, d, "=");
       return {
-        text: `Résous dans $\\mathbb{R}$ l'équation $e^{${affine(a, b)}} = e^{${affine(c, d)}}$.`,
+        text: `Résous dans $\\mathbb{R}$ l'équation $e^{${affine(a, b)}} = ${puissanceE(affine(c, d))}$.`,
         format: "qcm",
-        choices: makeChoices(correct, pieges),
-        expected: [correct],
+        choices: makeChoices(r.correct, [
+          ...r.pieges,
+          `$x = ${fraction(d + b, a - c)}$`, // b passé de l'autre côté sans changer de signe
+        ]),
+        expected: [r.correct],
         comparator: "mcq_exact",
-        explanation: exp(
-          "L'exponentielle est strictement croissante sur $\\mathbb{R}$ : pour tous réels $u$ et $v$, $e^{u} = e^{v} \\Longleftrightarrow u = v$.",
-          `On égale donc les exposants : $${affine(a, b)} = ${affine(c, d)}$.`,
-          `On regroupe les $x$ d'un côté et les nombres de l'autre : $${affine(k, 0)} = ${m}$, donc $x = ${x0}$.`,
-          `$S = \\left\\{ ${x0} \\right\\}$ — il n'a fallu aucun logarithme : l'exponentielle disparaît dès qu'on compare les exposants.`
-        ),
+        explanation: expliquerComparaison(affine(a, b), affine(c, d), "=", r, reecrire([affine(c, d)])),
       };
     },
   },
@@ -3430,51 +3566,41 @@ export const exponentielleBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "exponentielle",
-    microId: "exp_derivee",
-    difficulty: 5,
+    microId: "exp_equations",
+    difficulty: 4,
     theme: "neutral",
-    hint: "Comme l'exponentielle est strictement croissante, $e^{u} < e^{v}$ équivaut à $u < v$. Attention ensuite en divisant par un nombre négatif.",
-    tags: ["premiere", "maths", "exponentielle", "derivee", "inequation", "template"],
+    hint: "L'exponentielle est strictement croissante : $e^{a} < e^{b}$ équivaut à $a < b$. On compare les exposants, dans le MÊME sens.",
+    tags: ["premiere", "maths", "exponentielle", "equations", "inequation", "template"],
     generate: () => {
-      // ⚠️ La moitié des tirages divise par un nombre NÉGATIF : c'est là que
-      // l'élève perd le point, pas dans la propriété de l'exponentielle.
-      const negatif = pickOne([true, false]);
+      // Une fois sur quatre seulement, on divise par un négatif : le point du
+      // gabarit est la propriété, pas le piège de la division.
+      const negatif = randomInt(1, 4) === 1;
       let a = 0;
+      let b = 0;
       let c = 0;
+      let d = 0;
+      let x0 = 0;
       do {
-        a = pickOne([-2, -1, 0, 1, 2, 3, 4]);
-        c = pickOne([-2, -1, 0, 1, 2, 3, 4]);
-      } while (a === c || a - c < 0 !== negatif);
-      const b = randomInt(-6, 6);
-      const d = randomInt(-6, 6);
+        a = pickOne([1, 2, 3, -1, -2]);
+        c = pickOne([0, 1, 2, 3, -1]);
+        x0 = randomInt(-5, 5);
+        b = randomInt(-6, 6);
+        d = (a - c) * x0 + b;
+      } while (a === c || a - c < 0 !== negatif || Math.abs(d) > 12);
       const op = pickOne(["<", ">", "\\leqslant", "\\geqslant"] as const);
-      const k = a - c;
-      const m = d - b;
-      const x0 = fraction(m, k);
+      const r = comparerExposants(a, b, c, d, op);
       const large = op === "\\leqslant" || op === "\\geqslant";
-      const versLeBas = op === "<" || op === "\\leqslant";
-      const sens: "<" | ">" = versLeBas !== k < 0 ? "<" : ">";
-      const oppose: "<" | ">" = sens === "<" ? ">" : "<";
-      const opFinal = sens === "<" ? (large ? "\\leqslant" : "<") : large ? "\\geqslant" : ">";
-      const correct = intervalle(x0, sens, large);
+      const x = fraction(d - b, a - c);
       return {
-        text: `Résous dans $\\mathbb{R}$ l'inéquation $e^{${affine(a, b)}} ${op} e^{${affine(c, d)}}$.`,
+        text: `Résous dans $\\mathbb{R}$ l'inéquation $e^{${affine(a, b)}} ${op} ${puissanceE(affine(c, d))}$.`,
         format: "qcm",
-        choices: makeChoices(correct, [
-          intervalle(x0, oppose, large), // sens de l'inégalité non inversé (ou inversé à tort)
-          intervalle(x0, sens, !large), // crochet ouvert au lieu de fermé, ou l'inverse
-          intervalle(x0, oppose, !large),
+        choices: makeChoices(r.correct, [
+          ...r.pieges,
+          intervalle(x, r.correct.includes("-\\infty") ? ">" : "<", !large),
         ]),
-        expected: [correct],
+        expected: [r.correct],
         comparator: "mcq_exact",
-        explanation: exp(
-          "L'exponentielle est strictement croissante sur $\\mathbb{R}$ : elle conserve l'ordre, donc $e^{u} < e^{v} \\Longleftrightarrow u < v$ (et de même avec $\\leqslant$).",
-          `On compare les exposants : $${affine(a, b)} ${op} ${affine(c, d)}$, soit $${affine(k, 0)} ${op} ${m}$.`,
-          k < 0
-            ? `On divise par $${k}$, qui est NÉGATIF : le sens de l'inégalité change. $x ${opFinal} ${x0}$.`
-            : `On divise par $${k}$, qui est positif : le sens de l'inégalité est conservé. $x ${opFinal} ${x0}$.`,
-          `$S = $ ${correct}${large ? " — crochet fermé en " + `$${x0}$` + ", puisque l'égalité est permise." : "."}`
-        ),
+        explanation: expliquerComparaison(affine(a, b), affine(c, d), op, r, reecrire([affine(c, d)])),
       };
     },
   },
@@ -3484,59 +3610,201 @@ export const exponentielleBank: TutorBankItemV4[] = [
     niveau: "premiere-spe",
     matiere: "maths",
     notionId: "exponentielle",
-    microId: "exp_derivee",
-    difficulty: 4,
+    microId: "exp_equations",
+    difficulty: 3,
     theme: "neutral",
     hint: "Écris d'abord le second membre comme une exponentielle : $1 = e^{0}$, $e = e^{1}$, $\\dfrac{1}{e} = e^{-1}$.",
-    tags: ["premiere", "maths", "exponentielle", "derivee", "equation", "template"],
+    tags: ["premiere", "maths", "exponentielle", "equations", "template"],
     generate: () => {
       // `erreur` : l'exposant qu'écrit l'élève qui n'a pas réécrit le second membre.
       const cible = pickOne([
         { tex: "1", k: 0, erreur: 1, piege: "« $e^{u} = 1$, donc $u = 1$ ». Non : $e^{0} = 1$, donc $u = 0$." },
+        { tex: "1", k: 0, erreur: 1, piege: "« $e^{u} = 1$, donc $u = 1$ ». Non : $e^{0} = 1$, donc $u = 0$." },
         { tex: "e", k: 1, erreur: 0, piege: "oublier que $e = e^{1}$. L'exposant vaut $1$, pas $0$." },
         { tex: "\\dfrac{1}{e}", k: -1, erreur: 1, piege: "perdre le signe : $\\dfrac{1}{e} = e^{-1}$, l'exposant vaut $-1$, pas $1$." },
       ] as const);
-      const a = pickOne([-3, -2, -1, 1, 2, 3]);
-      const b = randomInt(-5, 5);
-      const op = pickOne(["=", "=", ">", "<"] as const);
-      const x0 = fraction(cible.k - b, a);
-      const xFaux = fraction(cible.erreur - b, a);
-      let correct: string;
-      let pieges: string[];
-      let conclusion: string;
-      if (op === "=") {
-        correct = `$x = ${x0}$`;
-        pieges = [`$x = ${xFaux}$`, `$x = ${fraction(cible.k + b, a)}$`, "aucune solution"];
-        conclusion = `$${affine(a, b)} = ${cible.k}$, donc $x = ${x0}$.`;
-      } else {
-        const sens: "<" | ">" = (op === "<") !== a < 0 ? "<" : ">";
-        const oppose: "<" | ">" = sens === "<" ? ">" : "<";
-        correct = intervalle(x0, sens, false);
-        pieges = [intervalle(x0, oppose, false), intervalle(xFaux, sens, false), intervalle(xFaux, oppose, false)];
-        conclusion =
-          `$${affine(a, b)} ${op} ${cible.k}$, donc $${affine(a, 0)} ${op} ${cible.k - b}$` +
-          (a < 0 ? ` ; on divise par $${a} < 0$, le sens change : $x ${sens} ${x0}$.` : `, soit $x ${sens} ${x0}$.`);
-      }
+      const op = pickOne(["=", "=", "<", ">", "\\leqslant", "\\geqslant"] as const);
+      let a = 0;
+      let b = 0;
+      do {
+        a = pickOne([1, 2, 3, -1, -2]);
+        b = cible.k - a * randomInt(-4, 4);
+      } while (Math.abs(b) > 9);
+      const r = comparerExposants(a, b, 0, cible.k, op);
+      const faux = comparerExposants(a, b, 0, cible.erreur, op).correct;
       // « e^u − 1 > 0 » est la même inéquation déguisée : c'est ainsi qu'elle
       // arrive dans une étude de signe. Une fois sur deux quand la cible est 1.
       const deguisee = op !== "=" && cible.k === 0 && pickOne([true, false]);
+      const u = affine(a, b);
       return {
         text: deguisee
-          ? `Résous dans $\\mathbb{R}$ : $e^{${affine(a, b)}} - 1 ${op} 0$.`
-          : `Résous dans $\\mathbb{R}$ : $e^{${affine(a, b)}} ${op} ${cible.tex}$.`,
+          ? `Résous dans $\\mathbb{R}$ : $e^{${u}} - 1 ${op} 0$.`
+          : `Résous dans $\\mathbb{R}$ : $e^{${u}} ${op} ${cible.tex}$.`,
         format: "qcm",
-        choices: makeChoices(correct, pieges),
-        expected: [correct],
+        choices: makeChoices(r.correct, [faux, ...r.pieges]),
+        expected: [r.correct],
         comparator: "mcq_exact",
         explanation: exp(
-          "Pour comparer deux exponentielles, il faut DEUX exponentielles : on commence par écrire le second membre sous la forme $e^{\\dots}$.",
-          `Ici $${cible.tex} = e^{${cible.k}}$. L'exponentielle étant strictement croissante, on peut comparer les exposants.`,
-          conclusion,
-          `${op === "=" ? "$S = \\left\\{ " + x0 + " \\right\\}$" : "$S = $ " + correct}. ⛔ Le piège : ${cible.piege}`
+          "Pour utiliser $e^{a} = e^{b} \\Longleftrightarrow a = b$, il faut DEUX exponentielles : on écrit d'abord le second membre sous la forme $e^{\\dots}$.",
+          `${deguisee ? `$e^{${u}} - 1 ${op} 0$ s'écrit $e^{${u}} ${op} 1$, et ` : "Ici "}$${cible.tex} = e^{${cible.k}}$. L'exponentielle étant strictement croissante, on compare les exposants : $${u} ${op} ${cible.k}$.`,
+          r.calcul,
+          `${r.solution}. ⛔ Le piège : ${cible.piege}`
         ),
       };
     },
   },
+  {
+    kind: "template",
+    id: "premiere_exp_eq_signe_tpl",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_equations",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Regarde le second membre AVANT de calculer : une exponentielle est toujours strictement positive.",
+    tags: ["premiere", "maths", "exponentielle", "equations", "signe", "template"],
+    generate: () => {
+      const op = pickOne(["=", "<", ">", "\\leqslant", "\\geqslant"] as const);
+      const mot = op === "=" ? "l'équation" : "l'inéquation";
+      const a = pickOne([1, 2, 3, -1, -2]);
+      // Une fois sur trois le second membre vaut 1 et l'on résout vraiment :
+      // sinon « aucune solution » ou « ℝ » se devinerait sans rien regarder.
+      if (randomInt(1, 3) === 1) {
+        const b = -a * randomInt(-3, 3);
+        const r = comparerExposants(a, b, 0, 0, op);
+        return {
+          text: `Résous dans $\\mathbb{R}$ ${mot} $e^{${affine(a, b)}} ${op} 1$.`,
+          format: "qcm",
+          choices: makeChoices(r.correct, [...r.pieges, "$S = \\mathbb{R}$", "aucune solution"]),
+          expected: [r.correct],
+          comparator: "mcq_exact",
+          explanation: expliquerComparaison(affine(a, b), "0", op, r, reecrire(["0"])),
+        };
+      }
+      const b = randomInt(-4, 4);
+      const k = pickOne([-3, -2, -1, 0]);
+      const u = affine(a, b);
+      const toujours = op === ">" || op === "\\geqslant";
+      const correct = toujours ? "$S = \\mathbb{R}$" : "aucune solution";
+      return {
+        text: `Résous dans $\\mathbb{R}$ ${mot} $e^{${u}} ${op} ${k}$.`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          toujours ? "aucune solution" : "$S = \\mathbb{R}$",
+          // Le piège : lire le second membre comme un exposant, « e^u = −3 donc u = −3 ».
+          comparerExposants(a, b, 0, k, op).correct,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une exponentielle est TOUJOURS strictement positive : $e^{u} > 0$ pour tout réel $u$.",
+          `Le second membre $${k}$ est ${k < 0 ? "négatif" : "nul"} : ce n'est pas une exponentielle, on ne compare surtout pas les exposants.`,
+          op === "="
+            ? `$e^{${u}}$ ne peut jamais valoir $${k}$.`
+            : toujours
+              ? `$e^{${u}}$ est strictement positif, donc toujours ${op === ">" ? "supérieur" : "supérieur ou égal"} à $${k}$ : l'inégalité est vraie pour tout $x$.`
+              : `$e^{${u}}$ est strictement positif, donc jamais ${op === "<" ? "inférieur" : "inférieur ou égal"} à $${k}$ : l'inégalité n'est vraie pour aucun $x$.`,
+          toujours ? "$S = \\mathbb{R}$." : "Aucune solution : $S = \\varnothing$."
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_exp_produit_nul_tpl",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_equations",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un produit est nul quand l'un de ses facteurs l'est. Mais l'un des deux facteurs ne s'annule JAMAIS.",
+    tags: ["premiere", "maths", "exponentielle", "equations", "signe", "template"],
+    generate: () => {
+      const a = pickOne([1, 2, 3, -1, -2]);
+      const x0 = pickOne([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]);
+      const b = -a * x0;
+      const c = pickOne([1, -1, 2]);
+      const E = `e^{${affine(c, 0)}}`;
+      const facteur = `(${affine(a, b)})`;
+      const correct = `$x = ${x0}$`;
+      return {
+        text: `Résous dans $\\mathbb{R}$ l'équation $${pickOne([true, false]) ? facteur + E : E + facteur} = 0$.`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `$x = ${x0}$ ou $x = 0$`, // croire que l'exponentielle s'annule en 0
+          `$x = ${-x0}$`,
+          "aucune solution",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un produit est nul si et seulement si l'un de ses facteurs est nul.",
+          `Le facteur $${E}$ est strictement positif pour tout réel $x$ : il ne s'annule jamais. Tout se joue donc sur $${affine(a, b)}$.`,
+          `$${affine(a, b)} = 0$ donne $x = ${x0}$. ⛔ Et non « $x = 0$ » en plus : en $0$, l'exponentielle vaut $1$, pas $0$.`,
+          `$S = \\left\\{ ${x0} \\right\\}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_exp_eq_second_degre_tpl",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "exponentielle",
+    microId: "exp_equations",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "D'abord la propriété : les exposants sont égaux. Il reste une équation du second degré, qu'on résout avec $\\Delta$.",
+    tags: ["premiere", "maths", "exponentielle", "equations", "second_degre", "template"],
+    generate: () => {
+      // Deux racines entières distinctes, ou (une fois sur six) une racine double non nulle.
+      const double = randomInt(1, 6) === 1;
+      const r1 = double ? pickOne([-3, -2, -1, 1, 2, 3]) : randomInt(-4, 4);
+      let r2 = r1;
+      while (!double && r2 === r1) r2 = randomInt(-4, 5);
+      const p = Math.min(r1, r2);
+      const q = Math.max(r1, r2);
+      const S = p + q;
+      const P = p * q; // x² − Sx + P = 0
+      const trinome = (bb: number, cc: number) =>
+        "x^2" +
+        (bb ? ` ${bb < 0 ? "-" : "+"} ${Math.abs(bb) === 1 ? "" : Math.abs(bb)}x` : "") +
+        (cc ? ` ${cc < 0 ? "-" : "+"} ${Math.abs(cc)}` : "");
+      // Le terme en x² d'un côté, un exposant affine de l'autre.
+      const dd = pickOne([-2, -1, 1, 2, 3]);
+      const ee = randomInt(-5, 5);
+      const carre = trinome(dd - S, P + ee);
+      const lineaire = affine(dd, ee);
+      const [G, D] = pickOne([true, false]) ? [carre, lineaire] : [lineaire, carre];
+      const ensemble = (xs: number[]) =>
+        xs.length === 1 ? `$x = ${xs[0]}$` : `$x = ${Math.min(...xs)}$ ou $x = ${Math.max(...xs)}$`;
+      const correct = double ? ensemble([p]) : ensemble([p, q]);
+      return {
+        text: `Résous dans $\\mathbb{R}$ l'équation $e^{${G}} = ${puissanceE(D)}$.`,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          double ? ensemble([-p]) : ensemble([-p, -q]), // les signes des racines inversés
+          double ? ensemble([p, -p]) : ensemble([q]), // une racine perdue en route
+          "aucune solution",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "L'exponentielle est strictement croissante : $e^{a} = e^{b} \\Longleftrightarrow a = b$. L'exponentielle disparaît, il reste une équation du second degré.",
+          `On égale les exposants : $${G} = ${D}$, soit $${trinome(-S, P)} = 0$.`,
+          double
+            ? `$\\Delta = (${-S})^2 - 4 \\times ${P < 0 ? `(${P})` : P} = 0$ : une racine double, $x = ${p}$.`
+            : `$\\Delta = (${-S})^2 - 4 \\times ${P < 0 ? `(${P})` : P} = ${(q - p) ** 2}$, et $\\sqrt{\\Delta} = ${q - p}$ : deux racines, $x = ${p}$ et $x = ${q}$.`,
+          double ? `$S = \\left\\{ ${p} \\right\\}$.` : `$S = \\left\\{ ${p} \\,;\\, ${q} \\right\\}$.`
+        ),
+      };
+    },
+  },
+  /* ── Comparer deux exponentielles : la croissance, sans rien résoudre ── */
+
   {
     kind: "template",
     id: "premiere_exp_comparer_tpl",
@@ -3584,44 +3852,6 @@ export const exponentielleBank: TutorBankItemV4[] = [
             ? `$${p.t}$ et $${q.t}$ sont deux écritures du même nombre : les exponentielles sont égales.`
             : `$${p.t} \\approx ${approx(p.v)}$ et $${q.t} \\approx ${approx(q.v)}$, donc $${p.t} ${symbole} ${q.t}$.${p.v < 0 && q.v < 0 ? " ⚠️ Entre deux négatifs, le plus grand est le plus proche de $0$." : ""}`,
           `${correct}.`
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "premiere_exp_produit_nul_tpl",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "exponentielle",
-    microId: "exp_signe",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Un produit est nul quand l'un de ses facteurs l'est. Mais l'un des deux facteurs ne s'annule JAMAIS.",
-    tags: ["premiere", "maths", "exponentielle", "signe", "equation", "template"],
-    generate: () => {
-      const a = pickOne([-4, -3, -2, -1, 1, 2, 3, 4]);
-      const b = pickOne([-8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8]);
-      const c = pickOne([1, -1, 2, -2, 3]);
-      const E = `e^{${affine(c, 0)}}`;
-      const facteur = `(${affine(a, b)})`;
-      const x0 = fraction(-b, a);
-      const correct = `$x = ${x0}$`;
-      return {
-        text: `Résous dans $\\mathbb{R}$ l'équation $${pickOne([true, false]) ? facteur + E : E + facteur} = 0$.`,
-        format: "qcm",
-        choices: makeChoices(correct, [
-          `$x = ${x0}$ ou $x = 0$`, // croire que l'exponentielle s'annule en 0
-          `$x = ${fraction(b, a)}$`,
-          "aucune solution",
-        ]),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Un produit est nul si et seulement si l'un de ses facteurs est nul.",
-          `Le facteur $${E}$ est strictement positif pour tout réel $x$ : il ne s'annule jamais. Tout se joue donc sur $${affine(a, b)}$.`,
-          `$${affine(a, b)} = 0 \\Longleftrightarrow ${affine(a, 0)} = ${-b} \\Longleftrightarrow x = ${x0}$. ⛔ Et non « $x = 0$ » en plus : en $0$, l'exponentielle vaut $1$, pas $0$.`,
-          `$S = \\left\\{ ${x0} \\right\\}$.`
         ),
       };
     },

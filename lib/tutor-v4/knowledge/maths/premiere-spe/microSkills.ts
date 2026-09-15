@@ -353,6 +353,16 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["exp_signe"],
   },
   {
+    // Ajoutée le 15/09/2026 à la demande de Frédéric. Les équations e^a = e^b
+    // existaient depuis la veille, rangées sous exp_derivee : invisibles dans la
+    // liste du coach, où aucun libellé ne disait « résoudre ». Le but n'est pas
+    // l'algèbre, c'est la propriété : e^a = e^b ⇔ a = b, e^a < e^b ⇔ a < b.
+    id: "exp_equations",
+    label: "Résoudre une équation ou une inéquation avec l’exponentielle",
+    notionId: "exponentielle",
+    prerequis: ["exp_derivee"],
+  },
+  {
     id: "exp_derivee_affine",
     label: "Dériver $t \\mapsto e^{kt}$",
     notionId: "exponentielle",
