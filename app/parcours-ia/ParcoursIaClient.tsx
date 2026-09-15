@@ -35,7 +35,7 @@ const questionCountOptions = [
   { value: 5,  label: "Sprint",         emoji: "⚡", description: "5 questions" },
   { value: 10, label: "Course",         emoji: "🏃", description: "10 questions" },
   { value: 15, label: "Challenge",      emoji: "🔥", description: "15 questions" },
-  { value: 20, label: "Grand parcours", emoji: "🏆", description: "20 questions" },
+  { value: 20, label: "Marathon", emoji: "🏆", description: "20 questions" },
 ] as const;
 
 type QuestionCount = (typeof questionCountOptions)[number]["value"];
@@ -373,7 +373,7 @@ export default function ParcoursIaClient() {
             onClick={resetParcours}
             className="rounded-2xl bg-white px-5 py-3 text-sm font-black text-slate-800 ring-1 ring-slate-200 hover:bg-slate-50 transition"
           >
-            Nouveau parcours
+            Refaire une évaluation
           </button>
           <Link
             href={`/coach-ia/ia?classe=pix-${niveau}`}
