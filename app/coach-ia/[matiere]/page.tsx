@@ -30,7 +30,6 @@ import { useEleve } from "@/context/EleveContext";
 import Link from "next/link";
 import { BookOpen, Camera, ChevronRight, CirclePlay, Play } from "lucide-react";
 import { ficheClasseSource, ficheHrefPourCoach } from "@/lib/fiches/registre";
-import NotionAvecApercu from "@/components/coach/NotionAvecApercu";
 import { useNotionsPliees } from "@/components/coach/useNotionsPliees";
 import { track } from "@vercel/analytics";
 import {
@@ -981,20 +980,14 @@ export default function CoachIA() {
                         !normaliser(libelleNotion(notionId)).includes(searchLower);
                       const ouverte = forceeParLaRecherche || estDepliee(notionId);
                       return (
-                      /* ⭐ 27/08/2026 — LA NOTION MONTRE SON EXERCICE AU SURVOL.
-                         « Un élève sur deux quitte le coach et ne va pas sur
-                         tutor » (Frédéric). Cette liste ne dit que des titres ;
-                         la fenêtre montre l'écran d'après, avant le clic.
-                         Le composant ne fait que porter l'état de survol et la
-                         fenêtre — tout le contenu de la notion est inchangé.
-                         ⚠️ Une notion sans capture ne change RIEN : il rend
-                         alors exactement l'`<article>` d'avant. */
-                      <NotionAvecApercu
-                        key={notionId}
-                        matiere={matiere}
-                        classe={classe}
-                        notionId={notionId}
-                      >
+                      /* ⛔ 15/09/2026 — APERÇUS AU SURVOL DÉBRANCHÉS, TOUTES
+                         MATIÈRES. Frédéric : « ça n'apporte rien en fait ».
+                         L'`<article>` est celui que rendait NotionAvecApercu.
+                         Les images de public/apercus/coach/ sont supprimées et
+                         le manifeste est vide ; le composant et le script de
+                         capture restent — rebrancher, c'est relancer la
+                         capture PUIS remettre le composant ici. */
+                      <article key={notionId} className="relative">
                         <div className="mb-2 flex flex-wrap items-center gap-2">
                           {/* Le bouton vit DANS le h3 (motif accordéon), et
                               les liens Fiche / Vidéo restent ses voisins : un
@@ -1175,7 +1168,7 @@ export default function CoachIA() {
                           })}
                         </ol>
                         ) : null}
-                      </NotionAvecApercu>
+                      </article>
                       );
                     })}
                   </div>
