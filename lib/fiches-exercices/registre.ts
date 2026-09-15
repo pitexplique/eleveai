@@ -6,7 +6,14 @@
 // ⚠️ La clé est `<matière>/<classe>/<slug de la notion du coach>`, en tirets :
 // c'est ce qui permet au coach de retrouver la fiche depuis un `notionId`.
 
-type FicheExercicesEntry = { titre: string; resume: string };
+type FicheExercicesEntry = {
+  titre: string;
+  resume: string;
+  /** Les AUTRES fiches de cours (slugs de la même classe) que cette feuille
+   *  couvre — quand une notion a deux fiches de cours et une seule feuille
+   *  d'exercices. Le slug de la clé est couvert d'office. */
+  aussiPour?: string[];
+};
 
 export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
   // ⭐ LA PREMIÈRE (15/09/2026) — écrite pour la fille de Frédéric, en 1re, qui
@@ -15,6 +22,8 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     titre: "L'exponentielle : 20 exercices corrigés",
     resume:
       "Du geste seul au problème de contrôle : calculer, résoudre, dériver, étudier. Un rappel de cours avant chaque niveau, et chaque corrigé étape par étape.",
+    // Le cours est en deux parties, la feuille couvre les deux.
+    aussiPour: ["exponentielle-etude"],
   },
   "maths/premiere-spe/second-degre": {
     titre: "Le second degré : 20 exercices corrigés",
@@ -25,6 +34,28 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
 
 export function hrefFicheExercices(matiere: string, classe: string, notion: string) {
   return `/fiches-exercices/${matiere}/${classe}/${notion}`;
+}
+
+/** La feuille d'exercices qui va avec une FICHE DE COURS (par son slug), ou
+ *  null. Sert au lien posé sur la fiche de cours : la clé directe d'abord, puis
+ *  les fiches que la feuille déclare couvrir en plus (`aussiPour`). */
+export function ficheExercicesPourCours(
+  matiere: string,
+  classe: string,
+  notionCours: string,
+): { href: string; titre: string } | null {
+  const c = classe.toLowerCase();
+  const n = notionCours.toLowerCase().replace(/_/g, "-");
+  const directe = `${matiere}/${c}/${n}`;
+  if (FICHES_EXERCICES_REGISTRE[directe]) {
+    return { href: `/fiches-exercices/${directe}`, titre: FICHES_EXERCICES_REGISTRE[directe].titre };
+  }
+  for (const [cle, entree] of Object.entries(FICHES_EXERCICES_REGISTRE)) {
+    if (cle.startsWith(`${matiere}/${c}/`) && entree.aussiPour?.includes(n)) {
+      return { href: `/fiches-exercices/${cle}`, titre: entree.titre };
+    }
+  }
+  return null;
 }
 
 export type FicheExercicesListItem = {

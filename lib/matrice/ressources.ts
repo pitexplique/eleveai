@@ -1544,6 +1544,43 @@ export const RESSOURCES: RessourceEleveAI[] = [
     statut: "validee",
   },
   {
+    /**
+     * ⭐ LA SECONDE COLLECTION (15/09/2026, Frédéric : « rajoute dans
+     * ressources.ts »). Une feuille de VINGT exercices corrigés par notion, à
+     * part du cours — née du test de sa fille sur la fiche de l'exponentielle :
+     * « bien pour un prof, trop compliquée pour élèves moyens, ils préfèrent
+     * vidéo et exercices corrigés ». Deux feuilles ce jour (exponentielle,
+     * second degré), toutes deux en 1re spé — d'où le seul niveau « premiere ».
+     *
+     * ⚠️ `type: "entrainement"` et non `"fiche"` : ce n'est pas un cours à lire,
+     * c'est une feuille à FAIRE, au brouillon, correction repliée. C'est aussi
+     * ce qui la distingue de la carte du dessus quand un professeur filtre par
+     * type. Et `resultat: "corrige"` — un corrigé étape par étape, mais rien ne
+     * remonte : pas de compte, pas de score.
+     *
+     * ⚠️ L'URL EST LE HUB, pas une page de classe : /fiches-exercices ne liste
+     * aujourd'hui que la 1re spé. Le jour où une deuxième classe aura ses
+     * feuilles, il faudra une page /fiches-exercices/maths/<classe>, comme les
+     * sommaires de classe des fiches de cours le 26/08 — et cette entrée devra
+     * pointer dessus, sinon on referait le trajet « la carte promet la 1re et
+     * livre tout le site ».
+     * « prof » et « parent », comme partout : un enseignant qui cherche une
+     * feuille d'exercices à donner doit la voir.
+     */
+    id: "fiches-exercices-maths-premiere",
+    titre: "Maths Première spé — 20 exercices corrigés par notion",
+    promesse:
+      "Un rappel de cours, puis vingt exercices du geste seul au problème, corrigés étape par étape.",
+    url: "/fiches-exercices",
+    niveaux: ["premiere", "prof", "parent"],
+    matiere: "maths",
+    notions: ["*"],
+    intentions: ["entrainer", "corriger", "preparer"],
+    type: "entrainement",
+    resultat: "corrige",
+    statut: "validee",
+  },
+  {
     id: "dico",
     titre: "Le dico des mots et des gestes",
     promesse: "Le mot de la consigne qu'on n'a pas compris.",

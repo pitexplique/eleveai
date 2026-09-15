@@ -38,6 +38,7 @@ import { slidesDepuisFiche } from "@/lib/fiches/slidesDepuisFiche";
 import Flashcards from "@/components/fiches/Flashcards";
 import VideoNotion from "@/components/fiches/VideoNotion";
 import EncartsFiche from "@/components/fiches/EncartsFiche";
+import LienFicheExercices from "@/components/fiches/LienFicheExercices";
 import { libelleClasse } from "@/lib/fiches/registre";
 import { DOSSIER_PDF, nomPdf } from "@/lib/fiches/pdf";
 import { PDF_DISPONIBLES } from "@/lib/fiches/pdf-disponibles";
@@ -849,6 +850,12 @@ export default function FicheCoursClient({
                 <Sparkles className="h-4 w-4" />
                 M&apos;entraîner avec le Coach IA
               </Link>
+              <LienFicheExercices
+                matiere={fiche.matiere}
+                classe={fiche.classe}
+                notion={fiche.notion}
+                variante="bouton"
+              />
               {pdfPret ? (
                 // ⚠️ UN VRAI LIEN, PAS UN BOUTON — c'est ce qui fait marcher le
                 // téléphone. Sur iPhone il ouvre le PDF dans le lecteur, d'où
@@ -1183,6 +1190,14 @@ export default function FicheCoursClient({
               />
 
               <EncartsFiche matiere={fiche.matiere} classe={fiche.classe} />
+              {/* La feuille de vingt exercices de la notion, quand elle existe
+                  (15/09/2026) — voir LienFicheExercices, qui décide seul. */}
+              <LienFicheExercices
+                matiere={fiche.matiere}
+                classe={fiche.classe}
+                notion={fiche.notion}
+                variante="encart"
+              />
             </header>
 
             {/* ⭐ `data-rubrique` EST LE SEUL POINT D'ACCROCHE D'UN BLOC (02/09/2026).
