@@ -67,6 +67,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "etre-et-avoir-au-present-au-cp-2026-2027-cours-exercices-corriges.pdf",
   "exponentielle-partie-1-premiere-spe-cours-exercices-corriges.pdf",
   "exponentielle-partie-2-premiere-spe-cours-exercices-corriges.pdf",
+  "exponentielle-premiere-spe-20-exercices-corriges.pdf",
   "expressions-litterales-4e-cours-exercices-corriges.pdf",
   "expressions-litterales-seconde-cours-exercices-corriges.pdf",
   "factorisation-4e-cours-exercices-corriges.pdf",

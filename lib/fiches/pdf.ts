@@ -74,3 +74,37 @@ export function nomPdf(titre: string, classe: string): string {
 export function urlPdf(titre: string, classe: string): string {
   return `${DOSSIER_PDF}/${nomPdf(titre, classe)}`;
 }
+
+/** Le radical d'un nom de fichier : le titre sans son article, en minuscules
+ *  et en tirets. Partagé par les deux règles de nommage ci-dessus et ci-dessous. */
+function radical(titre: string): string {
+  return titre
+    .replace(/œ/g, "oe")
+    .replace(/Œ/g, "OE")
+    .replace(/æ/g, "ae")
+    .replace(/Æ/g, "AE")
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/^(le|la|les|l|un|une|des|du)[\s'’]+/, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+/**
+ * Le nom du PDF d'une FICHE D'EXERCICES (15/09/2026) :
+ * « exponentielle-premiere-spe-20-exercices-corriges.pdf ».
+ *
+ * ⚠️ Une règle à part, et non `nomPdf` : celle-ci écrit « cours-exercices-
+ * corriges », or il n'y a pas de cours dans cette feuille — le nom d'un PDF est
+ * indexé comme un document, il doit dire ce qu'il contient. Le nombre y est
+ * parce que c'est ce qu'on tape (« 20 exercices corrigés exponentielle »), et
+ * il se COMPTE depuis la donnée : voir `compterExercices`.
+ *
+ * ⚠️ Le composant pose ce nom dans `data-nom-pdf` sur le h1, et
+ * `scripts/build-fiches-pdf.ts` le lit tel quel : le fichier et le lien ne
+ * peuvent pas diverger.
+ */
+export function nomPdfExercices(titre: string, classe: string, nb: number): string {
+  return `${radical(titre)}-${classe}-${nb}-exercices-corriges.pdf`;
+}

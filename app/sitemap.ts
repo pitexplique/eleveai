@@ -6,6 +6,7 @@ import { NIVEAUX, motsDeLaClasse } from "@/lib/dico";
 import { cgvEnVigueur } from "@/lib/legal/editeur";
 import { PDF_DISPONIBLES } from "@/lib/fiches/pdf-disponibles";
 import { FICHES_REGISTRE } from "@/lib/fiches/registre";
+import { FICHES_EXERCICES_REGISTRE } from "@/lib/fiches-exercices/registre";
 import {
   FAMILLES as FAMILLES_ECRITURE,
   FICHES as FICHES_ECRITURE,
@@ -534,6 +535,23 @@ const fichesRoutes: RouteConfig[] = clesFiches.map((cle) => ({
   lastMod: LASTMOD_PAR_MATIERE[cle.split("/")[0]] ?? LASTMOD_FICHES,
 }));
 
+/* ⭐ LES FICHES D'EXERCICES (15/09/2026) — même mécanisme que les fiches de
+   cours juste au-dessus : une ligne au registre, et la page est ici. La
+   première est l'exponentielle de 1re spé, écrite pour un élève moyen qui
+   veut « vidéo et exercices corrigés » plutôt que le cours entier.
+   ⚠️ Son PDF n'a pas besoin d'une ligne : `build-fiches-pdf.ts` le range dans
+   le même manifeste que les autres, `pdfRoutes` le déclare. */
+const LASTMOD_FICHES_EXERCICES = new Date("2026-09-15");
+
+const fichesExercicesRoutes: RouteConfig[] = Object.keys(FICHES_EXERCICES_REGISTRE).map(
+  (cle) => ({
+    path: `/fiches-exercices/${cle}`,
+    priority: 0.85,
+    changeFrequency: "weekly" as const,
+    lastMod: LASTMOD_FICHES_EXERCICES,
+  }),
+);
+
 /* Un sommaire par NIVEAU réellement peuplé — une classe en maths et en
    français, un domaine Pix en IA (voir SommaireClasse). Déduit des clés, donc
    il apparaît le jour où la première fiche du niveau entre au registre, et pas
@@ -781,6 +799,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...ROUTES,
     ...jeuxCartesRoutes,
     ...fichesRoutes,
+    ...fichesExercicesRoutes,
     ...niveauxRoutes,
     ...notionsRoutes,
     ...niveauxHorsClasseRoutes,

@@ -28,7 +28,8 @@ import FloatingCoach from "@/components/FloatingCoach";
 import BoiteAOutils from "@/components/BoiteAOutils";
 import { useEleve } from "@/context/EleveContext";
 import Link from "next/link";
-import { BookOpen, Camera, ChevronRight, CirclePlay, Play } from "lucide-react";
+import { BookOpen, Camera, ChevronRight, CirclePlay, PencilLine, Play } from "lucide-react";
+import { ficheExercicesHrefPourCoach } from "@/lib/fiches-exercices/registre";
 import { ficheClasseSource, ficheHrefPourCoach } from "@/lib/fiches/registre";
 import { useNotionsPliees } from "@/components/coach/useNotionsPliees";
 import { track } from "@vercel/analytics";
@@ -970,6 +971,11 @@ export default function CoachIA() {
                       // élève qui ouvre un cours daté d'un autre niveau sans
                       // prévenance croit à une erreur.
                       const ficheAutreClasse = ficheClasseSource(matiere, classe, notionId);
+                      // ⭐ 15/09/2026 — la feuille d'exercices, à côté de la
+                      // fiche de cours. Frédéric : « la fiche utile avec mode
+                      // classe, la vidéo, et la fiche exercices à part ». Une
+                      // porte par usage sur la même ligne.
+                      const exercicesHref = ficheExercicesHrefPourCoach(matiere, classe, notionId);
                       const videos = videosParNotion[notionId] ?? [];
                       /* Une notion dont le titre ne répond pas à la recherche
                          mais dont une micro y répond se montre DÉPLIÉE et sans
@@ -1041,6 +1047,16 @@ export default function CoachIA() {
                             >
                               <BookOpen className="h-3.5 w-3.5" />
                               {ficheAutreClasse ? `Fiche · ${ficheAutreClasse}` : "Fiche"}
+                            </Link>
+                          ) : null}
+                          {exercicesHref ? (
+                            <Link
+                              href={exercicesHref}
+                              className="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-xs font-bold text-amber-800 transition hover:bg-amber-100"
+                              title="La feuille d'exercices corrigés de cette notion"
+                            >
+                              <PencilLine className="h-3.5 w-3.5" />
+                              Exercices
                             </Link>
                           ) : null}
                           {videos.length ? (() => {

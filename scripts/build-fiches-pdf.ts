@@ -105,6 +105,13 @@ async function main() {
       "fiche";
     // La classe se lit dans le chemin : /fiches-cours/<matiere>/<classe>/<notion>
     const classe = chemin.split("/")[3] ?? "";
+    // ⭐ 15/09/2026 — UNE PAGE PEUT NOMMER SON FICHIER ELLE-MÊME. Les fiches
+    // d'EXERCICES (/fiches-exercices/…) ne s'appellent pas « cours-exercices-
+    // corriges » : il n'y a pas de cours dedans. Elles posent leur nom complet
+    // dans `data-nom-pdf`, calculé par la même fonction que leur lien
+    // (`nomPdfExercices`). Sans l'attribut, la règle des fiches de cours
+    // s'applique comme avant.
+    const nomImpose = (await page.getAttribute("h1", "data-nom-pdf"))?.trim() || null;
 
     // ⚠️ ON FORCE LE MÉDIA « print » AVANT d'appeler `pdf()`. Chrome le fait
     // déjà pour l'impression, mais l'expliciter évite qu'un composant qui lit
@@ -211,7 +218,7 @@ async function main() {
       };
     });
 
-    const fichier = path.join(SORTIE, nomPdf(titre, classe));
+    const fichier = path.join(SORTIE, nomImpose ?? nomPdf(titre, classe));
     await page.pdf({
       path: fichier,
       format: "A4",
