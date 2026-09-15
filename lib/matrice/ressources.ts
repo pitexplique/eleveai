@@ -330,6 +330,38 @@ const PORTES_5E = [
  */
 const PORTES_4E = ["type:coach", "type:parcours", "type:fiche"];
 
+/**
+ * ⭐⭐ LES PORTES D'UNE MATIÈRE CLIQUÉE (15/09/2026) — Frédéric, pour l'élève
+ * de 1re qui clique « Maths » : « en premier coach, deuxième fiche cours,
+ * troisième fiche exercices, prendre photo ».
+ *
+ * ⚠️ C'EST UNE TABLE À PART, ET ELLE NE CONTREDIT PAS LA RÈGLE DU 16/08.
+ * `PORTES_ECRITES` ne vaut que quand personne n'a rien dit — cliquer une
+ * matière EST une demande, et le score reprenait la main. Mesuré ce jour sur
+ * « élève 1re + Maths » : coach, évaluation annuelle, photo, mes résultats,
+ * calcul rapide, DICTÉE — les deux fiches de la classe absentes, parce que le
+ * calcul rapide et la dictée portent `testee_eleves` (+1) et que le filtre de
+ * matière ne retient pas le français (voir la note de PORTES_4E). Le score
+ * n'était pas faux au sens du calcul ; il était faux pour un lycéen qui vient
+ * de dire « maths ». C'est exactement le cas où une liste se justifie.
+ *
+ * Elle s'applique quand la matière est cliquée SEULE — ni notion, ni intention
+ * lue. Dès qu'un mot de plus est dit (« les fractions », « m'entraîner »), le
+ * score répond, comme avant. Même forme que PORTES_ECRITES : des identifiants
+ * ou des jetons `type:` / `*`, pris dans les candidats déjà filtrés par la
+ * matière — un id qui n'y est pas est sauté sans bruit.
+ *
+ * ⚠️ QUATRE ENTRÉES, PAS SIX : les places 5 et 6 restent au score (l'évaluation
+ * annuelle, les résultats). On n'écrit que ce qu'on sait meilleur que le calcul.
+ * ⛔ N'écrire une ligne ici que si l'ordre au score est FAUX pour ce profil et
+ * cette matière — la règle du fichier, appliquée une matière à la fois.
+ */
+export const PORTES_PAR_MATIERE: Partial<Record<ProfilId, Partial<Record<string, string[]>>>> = {
+  premiere: {
+    maths: ["coach-maths", "fiches-maths-premiere", "fiches-exercices-maths-premiere", "photo-cours"],
+  },
+};
+
 export const PORTES_ECRITES: Partial<Record<ProfilId, string[]>> = {
   adulte: PORTES_ADULTE,
   /**

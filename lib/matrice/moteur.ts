@@ -20,7 +20,7 @@ import { CLASSE_COACH, notionCoach, urlCoachCiblee } from "./coach";
 import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
 import { MARQUEURS_INTENTION, NOTIONS } from "./lexique";
 import { getProfil, chipsPour, rangNiveaux } from "./profils";
-import { PORTES_ECRITES, RESSOURCES, STATUTS_PUBLIABLES } from "./ressources";
+import { PORTES_ECRITES, PORTES_PAR_MATIERE, RESSOURCES, STATUTS_PUBLIABLES } from "./ressources";
 import { ressourcesDeSaison } from "./saison";
 export { normaliser };
 
@@ -514,7 +514,19 @@ export function chercher(vecteur: VecteurEntree): ResultatMatrice {
   // plus « Photographier un cours » d'office ; elle revient au score. La photo
   // garde sa place écrite sur l'écran d'accueil, là où elle avait été demandée
   // (12/08) — c'est-à-dire quand on n'a encore rien dit.
-  const portes = repliSurLeNiveau ? PORTES_ECRITES[profil.id] : undefined;
+  // ⭐ ET UNE MATIÈRE CLIQUÉE SEULE A SES PROPRES PORTES (15/09/2026), quand
+  // elles sont écrites — voir PORTES_PAR_MATIERE dans ressources.ts. Ce n'est
+  // pas le retour des portes générales sur un clic de matière : c'est une
+  // liste PAR MATIÈRE, prise dans des candidats que le filtre de matière a déjà
+  // triés. « Seule » : ni notion, ni intention lue — un mot de plus, et le
+  // score répond comme avant. Frédéric, pour l'élève de 1re qui clique
+  // « Maths » : coach, fiche de cours, fiche d'exercices, photo.
+  const matiereSeule = Boolean(matiereChip) && !notion && !intention && !notionProgramme;
+  const portes = repliSurLeNiveau
+    ? PORTES_ECRITES[profil.id]
+    : matiereSeule && matiereChip
+      ? PORTES_PAR_MATIERE[profil.id]?.[matiereChip]
+      : undefined;
   if (portes) {
     const pris = new Set<string>();
     // `candidates` est déjà trié : le PREMIER qui correspond est toujours le
