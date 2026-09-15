@@ -19,6 +19,7 @@
 
 import Link from "next/link";
 import {
+  ArrowLeft,
   BookOpen,
   CheckCircle2,
   Download,
@@ -88,6 +89,17 @@ export default function FicheExercicesClient({ fiche }: { fiche: FicheExercicesD
       <article className="mx-auto max-w-5xl px-5 py-8 sm:px-8 print:max-w-none print:px-0 print:py-0">
         <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-300/40 sm:p-8 print:rounded-none print:border-0 print:p-0 print:shadow-none">
           <header className="border-b border-slate-200 pb-6">
+            {/* La remontée vers le hub — un élève qui a fini cette feuille doit
+                trouver la suivante sans repasser par l'accueil. Écran seulement. */}
+            <nav className="screen-only mb-4">
+              <Link
+                href="/fiches-exercices"
+                className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3.5 py-1.5 text-sm font-bold text-slate-700 shadow-sm transition hover:border-slate-400 hover:bg-slate-50"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Toutes les fiches d&apos;exercices
+              </Link>
+            </nav>
             <div className="mb-4 flex flex-wrap items-center gap-x-2 gap-y-1">
               <span className="flex items-center gap-2 text-lg font-black tracking-tight text-sky-600">
                 <Sparkles className="h-5 w-5" />

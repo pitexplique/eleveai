@@ -142,6 +142,10 @@ const ROUTES: RouteConfig[] = [
   { path: "/fiches-cours",      priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/fiches-cours/maths", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES },
   { path: "/fiches-cours/francais", priority: 0.85, changeFrequency: "weekly", lastMod: LASTMOD_FICHES_FR },
+  // ⭐ LE HUB DES FICHES D'EXERCICES (15/09/2026), ouvert à la deuxième feuille.
+  // Écrit à la main comme les quatre portes des fiches de cours : ce n'est pas
+  // une entrée du registre. Les feuilles elles-mêmes se génèrent plus bas.
+  { path: "/fiches-exercices", priority: 0.85, changeFrequency: "weekly", lastMod: new Date("2026-09-15") },
 
   // ── Les sommaires PAR CLASSE (26/08/2026) ──────────────────────────────────
   // ⛔ PAS DE 3ᵉ, ET PAS DE CLASSE SANS FICHE EN GÉNÉRAL. `SommaireClasse` rend

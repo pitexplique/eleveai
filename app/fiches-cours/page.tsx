@@ -94,6 +94,19 @@ export default function FichesCoursPage() {
           <Sparkles className="h-4 w-4" />
           D&apos;autres matières arriveront ici.
         </p>
+
+        {/* ⭐ 15/09/2026 — LA SECONDE COLLECTION. Le cours est ici ; les
+            feuilles de vingt exercices corrigés par notion, à part, sont à
+            côté. Un élève qui vient chercher des exercices ne doit pas avoir à
+            deviner qu'elles existent. */}
+        <p className="mt-6 text-sm font-bold text-slate-500">
+          <Link
+            href="/fiches-exercices"
+            className="underline decoration-slate-300 underline-offset-4 hover:text-slate-700"
+          >
+            Tu cherches des exercices ? Les fiches d&apos;exercices corrigés, vingt par notion →
+          </Link>
+        </p>
       </section>
     </main>
   );

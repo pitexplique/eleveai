@@ -27,6 +27,39 @@ export function hrefFicheExercices(matiere: string, classe: string, notion: stri
   return `/fiches-exercices/${matiere}/${classe}/${notion}`;
 }
 
+export type FicheExercicesListItem = {
+  matiere: string;
+  classe: string;
+  notion: string;
+  titre: string;
+  resume: string;
+  href: string;
+};
+
+// Même ordre que les fiches de cours : du plus jeune au plus âgé.
+const ORDRE_CLASSES = [
+  "cp", "ce1", "ce2", "cm1", "cm2",
+  "6e", "5e", "4e", "3e",
+  "seconde", "premiere-spe", "terminale-spe",
+];
+
+/** Toutes les fiches d'exercices, triées par matière, niveau puis titre —
+ *  c'est ce que le hub /fiches-exercices affiche. */
+export function listerFichesExercices(): FicheExercicesListItem[] {
+  return Object.entries(FICHES_EXERCICES_REGISTRE)
+    .map(([cle, v]) => {
+      const [matiere, classe, notion] = cle.split("/");
+      return { matiere, classe, notion, titre: v.titre, resume: v.resume, href: `/fiches-exercices/${cle}` };
+    })
+    .sort((a, b) => {
+      if (a.matiere !== b.matiere) return a.matiere.localeCompare(b.matiere, "fr");
+      const oa = ORDRE_CLASSES.indexOf(a.classe);
+      const ob = ORDRE_CLASSES.indexOf(b.classe);
+      if (oa !== ob) return oa - ob;
+      return a.titre.localeCompare(b.titre, "fr");
+    });
+}
+
 /** Le lien de la fiche d'exercices d'une notion DU COACH, ou null. Le slug de
  *  la fiche EST le `notionId` du coach, en tirets. */
 export function ficheExercicesHrefPourCoach(
