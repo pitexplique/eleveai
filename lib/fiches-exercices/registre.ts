@@ -16,6 +16,11 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Du geste seul au problème de contrôle : calculer, résoudre, dériver, étudier. Un rappel de cours avant chaque niveau, et chaque corrigé étape par étape.",
   },
+  "maths/premiere-spe/second-degre": {
+    titre: "Le second degré : 20 exercices corrigés",
+    resume:
+      "Du discriminant seul au problème de contrôle : résoudre, factoriser, forme canonique, signe et inéquations, ballon, enclos, paramètre m. Un rappel de cours avant chaque niveau.",
+  },
 };
 
 export function hrefFicheExercices(matiere: string, classe: string, notion: string) {
