@@ -34,6 +34,7 @@ function signesProjetes(section: ClasseSection): number {
   if ("cartes" in section) bouts.push(...section.cartes.map((c) => c.texte));
   if ("etapes" in section) bouts.push(...section.etapes);
   if ("enonce" in section) bouts.push(section.enonce, (section as { correction?: string }).correction);
+  if ("lignes" in section) bouts.push(...section.lignes);
   if ("gauche" in section) bouts.push(section.gauche.contenu, section.droite.contenu);
   return bouts.filter((b) => typeof b === "string").join(" ").length;
 }
@@ -181,6 +182,22 @@ export type ClasseSection =
       question?: string;
       indice?: string;
       correction: string;
+    }
+  /**
+   * ⭐ UN CORRIGÉ EN LIGNES (15/09/2026) — pour les fiches d'EXERCICES, dont
+   * les corrections sont écrites étape par étape, une étape par ligne. Les
+   * sections « exemple » et « exercice » rendent la correction en UN paragraphe
+   * à `text-3xl` : mesuré sur la feuille de l'exponentielle à 1280 × 800, 15
+   * diapos sur 24 débordaient, jusqu'à 961 px. Ici chaque ligne garde sa
+   * ligne, et la taille descend avec le nombre de signes.
+   * `enonce` absent : une liste seule (le rappel de cours d'un niveau).
+   * `revelable` : les lignes attendent « Révéler la correction ».
+   */
+  | {
+      type: "corrige";
+      enonce?: string;
+      lignes: string[];
+      revelable?: boolean;
     };
 
 export type ClasseSlide = {
@@ -415,6 +432,56 @@ function Section({
           </div>
         </div>
       );
+
+    case "corrige": {
+      // La taille suit le NOMBRE DE SIGNES à projeter, comme `tailleProjetee`
+      // pour une phrase : huit étapes de cent signes ne tiennent pas à la taille
+      // d'une étape de vingt.
+      const signes = section.lignes.join(" ").length + (section.enonce?.length ?? 0);
+      // Seuils calés à 1280 × 800 sur les deux premières feuilles (15/09) :
+      // au-dessus, les diapos les plus chargées débordaient encore de 50 à 110 px.
+      const taille =
+        signes <= 240
+          ? "text-2xl lg:text-3xl"
+          : signes <= 520
+            ? "text-xl lg:text-2xl"
+            : "text-lg lg:text-xl";
+      const lignes = (
+        <ol className={`mt-4 grid gap-2 font-bold leading-snug text-slate-950 ${taille}`}>
+          {section.lignes.map((l, i) => (
+            <li key={i} className="flex gap-3">
+              <span className={`shrink-0 font-black ${t.accent}`}>{i + 1}.</span>
+              <span className="min-w-0">
+                <TexteMath>{l}</TexteMath>
+              </span>
+            </li>
+          ))}
+        </ol>
+      );
+      return (
+        <div className="grid gap-5">
+          {section.enonce ? (
+            <div className="rounded-3xl border-4 border-cyan-200 bg-cyan-50 p-5 lg:p-6">
+              <p className={`whitespace-pre-line font-black leading-tight text-slate-950 ${section.enonce.length <= 110 ? "text-2xl lg:text-3xl" : "text-xl lg:text-2xl"}`}>
+                <TexteMath>{section.enonce}</TexteMath>
+              </p>
+            </div>
+          ) : null}
+          <div className={`flex flex-col rounded-3xl border-4 p-5 lg:p-6 ${section.revelable ? "border-emerald-200 bg-emerald-50" : t.carte}`}>
+            {section.revelable ? (
+              <p className="text-2xl font-black uppercase text-emerald-700">Correction</p>
+            ) : null}
+            {!section.revelable || revealed ? (
+              lignes
+            ) : (
+              <button type="button" onClick={reveal} className={BTN_REVELER}>
+                Révéler la correction
+              </button>
+            )}
+          </div>
+        </div>
+      );
+    }
 
     default:
       return null;

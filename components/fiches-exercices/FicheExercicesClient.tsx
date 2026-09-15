@@ -8,9 +8,12 @@
 // sont des exercices CORRIGÉS ; ce qui change, c'est que le papier n'a pas de
 // geste pour cacher une réponse.
 //
-// ⚠️ PAS DE MODE CLASSE ICI, et c'est voulu (Frédéric, 15/09/2026) : la fiche de
-// cours reste l'outil projetable ; cette feuille est celle de l'élève, à faire
-// au brouillon. Le composeur et les flashcards ne s'y appliquent pas non plus.
+// ⭐ LE MODE CLASSE EST LÀ, comme sur les fiches de cours (Frédéric, 15/09/2026 :
+// « c'est un mode classe comme dans les fiches cours », et « cela ne concerne
+// pas ma fille » — la feuille est à l'élève, le diaporama est au professeur qui
+// la fait en classe). Les diapos se fabriquent depuis la donnée, voir
+// `lib/fiches-exercices/slides.ts`. Le composeur et les flashcards, eux, ne
+// s'appliquent pas ici.
 //
 // ⭐ LE H1 NE DIT PAS LA MÊME CHOSE QUE CELUI DE LA FICHE DE COURS. Celle-ci
 // titre « cours et exercices corrigés de maths 1re spé » ; ici « 20 exercices
@@ -28,8 +31,10 @@ import {
   Printer,
   Sparkles,
 } from "lucide-react";
+import ModeClasse from "@/components/fiches/ModeClasse";
 import TexteMath from "@/components/fiches/TexteMath";
 import VideoNotion from "@/components/fiches/VideoNotion";
+import { slidesDepuisExercices } from "@/lib/fiches-exercices/slides";
 import { libelleClasse } from "@/lib/fiches/registre";
 import { DOSSIER_PDF, nomPdfExercices } from "@/lib/fiches/pdf";
 import { PDF_DISPONIBLES } from "@/lib/fiches/pdf-disponibles";
@@ -75,6 +80,7 @@ export default function FicheExercicesClient({ fiche }: { fiche: FicheExercicesD
   const pdfPret = PDF_DISPONIBLES.has(fichierPdf);
   const hrefPdf = `${DOSSIER_PDF}/${fichierPdf}`;
   const classe = libelleClasse(fiche.classe);
+  const slides = slidesDepuisExercices(fiche);
 
   // La numérotation court d'un niveau à l'autre : 1 à 20, pas trois fois 1 à 8.
   let compteur = 0;
@@ -149,6 +155,7 @@ export default function FicheExercicesClient({ fiche }: { fiche: FicheExercicesD
                   {insecables(`Relire le cours — ${f.titre}`)}
                 </Link>
               ))}
+              <ModeClasse sousTitre={`${titreComplet} - ${classe}`} slides={slides} />
               {pdfPret ? (
                 <a
                   href={hrefPdf}
