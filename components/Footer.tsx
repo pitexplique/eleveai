@@ -69,6 +69,15 @@ import { cgvEnVigueur } from "@/lib/legal/editeur";
 const outils = [
   { label: "Maths : cours et exercices corrigés à imprimer", href: "/fiches-cours/maths" },
   { label: "Français : cours et exercices corrigés à imprimer", href: "/fiches-cours/francais" },
+  // ⭐ LES FICHES D'EXERCICES (15/09/2026, Frédéric : « as-tu mis à jour le
+  // footer ? »). La seconde collection : vingt exercices corrigés par notion, à
+  // part du cours. Même raison que les fiches d'écriture juste en dessous : le
+  // sitemap dit que le hub existe, ce lien-ci dit qu'il compte — et « à
+  // imprimer » est vrai, chaque feuille a son PDF avec les corrigés à part.
+  {
+    label: "Exercices corrigés par notion : 20 par fiche, à imprimer",
+    href: "/fiches-exercices",
+  },
   // ⭐⭐ LES FICHES D'ÉCRITURE (05/09/2026). Frédéric : « Google aime les fiches
   // de cours, donc peut-être les fiches d'écriture ? ». Oui — mais « Fiches de
   // cours » a gagné son LIEN DE SITE dans le résultat de marque parce qu'elle
