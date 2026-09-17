@@ -18,6 +18,8 @@
 // Le corrigé est écrit ÉTAPE PAR ÉTAPE, avec le pourquoi de chaque étape et le
 // piège nommé — c'est ce qui le distingue de la ligne de la fiche de cours.
 
+import type { ReactNode } from "react";
+
 export type NiveauExercice = 1 | 2 | 3;
 
 export type ExerciceCorrige = {
@@ -27,6 +29,21 @@ export type ExerciceCorrige = {
   enonce: string;
   /** Le corrigé, une étape par ligne (`\n`), chaque étape avec son pourquoi. */
   correction: string;
+  /**
+   * ⭐ LE TABLEAU DESSINÉ DU CORRIGÉ (Frédéric, 17/09/2026 : « j'ai remarqué que
+   * dans la fiche d'exercices il y a l'explication, mais jamais de dressage de
+   * tableau de signes et de variations avec les canvas »).
+   *
+   * Un corrigé qui DIT « f croît puis décroît » sans MONTRER le tableau demande
+   * à l'élève de le reconstruire de tête — c'est-à-dire de refaire l'exercice
+   * pour lire sa correction. On sert donc ici le même canvas que le coach
+   * (`tableau_variations`, `tableau_signes`) : même figure dans la question et
+   * dans la réponse.
+   *
+   * Rendu à DEUX endroits, écran et papier : sous la correction dépliée, et sur
+   * la page des corrigés du PDF.
+   */
+  schema?: ReactNode;
   /** Les micro-compétences du coach que l'exercice fait travailler (ids de
    *  `lib/tutor-v4/knowledge/<matière>/<classe>/microSkills.ts`). */
   micros?: string[];

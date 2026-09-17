@@ -117,5 +117,43 @@ const microSkills = fs.readFileSync(
 const inconnues = [...micros].filter((id) => !microSkills.includes(`id: "${id}"`));
 ok(`${micros.size} micros citées, toutes connues du coach`, inconnues.length === 0, inconnues.join(", "));
 
+/* ─── Les tableaux DESSINÉS des corrigés (ajoutés le 17/09/2026) ──────────────
+ * ⛔ Un canvas de tableau de variations DÉDUIT ses flèches en comparant les
+ * valeurs successives. Une valeur que `Number()` ne sait pas lire devient NaN,
+ * et NaN ne compare jamais vrai : toutes les flèches partent alors vers le bas,
+ * sans erreur visible. On relit donc chaque tableau écrit dans la fiche et l'on
+ * vérifie que le signe annoncé et le sens de la flèche disent la MÊME chose. */
+console.log("Les tableaux dessinés des corrigés");
+const lireVal = (t) => {
+  const net = String(t).replace(/−/g, "-").replace(/\s| /g, "").replace(",", ".");
+  if (/^\+?∞$/.test(net)) return Infinity;
+  if (/^-∞$/.test(net)) return -Infinity;
+  return Number(net);
+};
+const appels = [...source.matchAll(/schema: tableau(Variations|Signes)\(([\s\S]*?)\),\n/g)];
+ok(`${appels.length} tableaux dessinés dans les corrigés`, appels.length === 4, `${appels.length}`);
+for (const [, type, args] of appels) {
+  // ⛔ Ne pas découper sur les virgules : « "34,5" » est UNE valeur, et un
+  // `split(",")` en faisait deux — le script criait au tableau mal dimensionné
+  // sur une donnée juste. On lit donc les chaînes entre guillemets d'un bloc.
+  const listes = [...args.matchAll(/\[([^\]]*)\]/g)].map((m) =>
+    [...m[1].matchAll(/"[^"]*"|[^,\s]+/g)].map((x) => x[0].replace(/^["']|["']$/g, "")),
+  );
+  if (type === "Signes") {
+    const [bornes, signes] = listes;
+    ok(`  signes : ${signes.length} signes pour ${bornes.length} bornes`, signes.length === bornes.length - 1, args.slice(0, 40));
+    continue;
+  }
+  const [bornes, signes, valeurs] = listes;
+  ok(`  variations : ${valeurs.length} valeurs pour ${bornes.length} bornes`, valeurs.length === bornes.length, args.slice(0, 40));
+  const lues = valeurs.map(lireVal);
+  ok(`  variations : valeurs lisibles (${valeurs.join(" ")})`, lues.every((v) => !Number.isNaN(v)), valeurs.join(" "));
+  const accord = signes.every((s, i) => (s === "+" ? lues[i + 1] > lues[i] : lues[i + 1] < lues[i]));
+  ok(`  variations : les flèches suivent les signes (${signes.join(" ")})`, accord, valeurs.join(" → "));
+}
+// ⭐ Les valeurs dessinées sont celles que le corrigé a calculées, pas d'autres.
+ok("le tableau du cari reprend T(0) = 95 et T(10) ≈ 34,5", source.includes("[95, \"34,5\"]") && source.includes("= 34{,}5$ °C"));
+ok("le tableau des bactéries reprend N(0) = 200 et N(2) ≈ 544", source.includes("[200, 544]") && source.includes("544$ bactéries"));
+
 console.log(erreurs ? `\n✗ ${erreurs} divergence(s)` : "\n✓ les vingt corrigés sont recalculés sans écart");
 process.exitCode = erreurs ? 1 : 0;

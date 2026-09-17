@@ -19,7 +19,63 @@
 // (15, 19, 20), exp_derivee (16-18), exp_modelisation (19-20), exp_suite_geo (20).
 // Seule exp_courbe n'a pas d'exercice : elle se travaille au coach, sur dessin.
 
+import { CanvasRenderer } from "@/lib/canvas";
 import type { FicheExercicesData } from "@/lib/fiches-exercices/types";
+
+/* ═══════════════════════════════════════════════════════════════════════════
+ * LES TABLEAUX DESSINÉS DES CORRIGÉS (ajoutés le 17/09/2026)
+ *
+ * Frédéric : « regarde la fiche d'exercices exponentielle pour savoir si on peut
+ * mettre des tableaux de variations ou de signes ». Mesuré : QUATRE des vingt
+ * exercices s'y prêtent, tous au niveau 3, et leurs corrigés écrivaient déjà en
+ * toutes lettres un tableau qu'ils ne montraient pas.
+ *
+ * ⛔ ET LA LIMITE, QUI EST UNE LIMITE DE PROGRAMME. Sur les exercices 17 et 18,
+ * on dessine le tableau de SIGNES de f′, jamais celui des variations : ce
+ * dernier demanderait la valeur de f aux bornes infinies, et $(x-3)e^x$ tend
+ * vers 0 en $-\infty$ par croissance comparée — hors programme de première. Une
+ * valeur inventée là enseignerait faux, et une case vide ferait dessiner une
+ * flèche au hasard (le canvas déduit ses flèches en comparant les valeurs).
+ * Les exercices 19 et 20, eux, ont un tableau de VARIATIONS sur un intervalle
+ * fermé dont les deux valeurs sont déjà calculées dans leur corrigé.
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+const nb = (n: number | string) => String(n).replace("-", "−");
+
+/** Le tableau de variations : signe de la dérivée en haut, valeurs en bas. */
+function tableauVariations(
+  bornes: (number | string)[],
+  signes: ("+" | "-")[],
+  valeurs: (number | string)[],
+  labels: { derivee: string; fonction: string; variable?: string },
+) {
+  return (
+    <CanvasRenderer
+      figure={{
+        kind: "tableau_variations",
+        bornes: bornes.map(nb),
+        variable: labels.variable,
+        derivee: { label: labels.derivee, signes, marques: Array(bornes.length - 2).fill("0") },
+        variations: { label: labels.fonction, valeurs: valeurs.map(nb) },
+        size: { width: 380, height: 200 },
+      }}
+    />
+  );
+}
+
+/** Le tableau de signes seul — celui qu'on dresse avant de conclure. */
+function tableauSignes(bornes: (number | string)[], label: string, signes: ("+" | "-")[]) {
+  return (
+    <CanvasRenderer
+      figure={{
+        kind: "tableau_signes",
+        bornes: bornes.map(nb),
+        lignes: [{ label, signes, marques: Array(bornes.length - 2).fill("0") }],
+        size: { width: 380, height: 140 },
+      }}
+    />
+  );
+}
 
 export const exercicesExponentiellePremiere: FicheExercicesData = {
   matiere: "maths",
@@ -187,6 +243,9 @@ export const exercicesExponentiellePremiere: FicheExercicesData = {
             "Soit $f(x) = (2x + 4)\\,e^{-x}$, définie sur $\\mathbb{R}$.\na) Calculer $f'(x)$ et montrer que $f'(x) = -2(x + 1)\\,e^{-x}$.\nb) Étudier le signe de $f'(x)$.\nc) Donner les variations de $f$.\nd) En déduire l'extremum de $f$.",
           correction:
             "a) Produit $uv$ avec $u = 2x + 4$, $u' = 2$, $v = e^{-x}$, $v' = -e^{-x}$ (règle $\\left(e^{at}\\right)' = a\\,e^{at}$ avec $a = -1$).\n$f'(x) = u'v + uv' = 2\\,e^{-x} + (2x + 4)(-e^{-x})$.\nOn factorise par $e^{-x}$ : $f'(x) = e^{-x}\\,(2 - 2x - 4) = (-2x - 2)\\,e^{-x}$.\nOn sort le $-2$ : $f'(x) = -2(x + 1)\\,e^{-x}$.\nb) $e^{-x} > 0$ et $-2 < 0$ : le signe de $f'(x)$ est l'opposé de celui de $x + 1$.\n$x + 1 > 0 \\Leftrightarrow x > -1$. Donc $f'(x) > 0$ si $x < -1$, $f'(-1) = 0$, et $f'(x) < 0$ si $x > -1$.\nc) $f$ est croissante sur $]-\\infty \\,;\\, -1]$ et décroissante sur $[-1 \\,;\\, +\\infty[$.\nd) $f'$ s'annule en $-1$ en passant du $+$ au $-$ : $f$ a un maximum en $x = -1$.\nIl vaut $f(-1) = (-2 + 4)\\,e^{1} = 2e \\approx 5{,}44$.",
+          // ⛔ Le signe, pas les variations : f(x) tend vers 0 en +∞ par
+          // croissance comparée, et les limites ne sont pas au programme de 1re.
+          schema: tableauSignes(["−∞", -1, "+∞"], "f ′(x)", ["+", "-"]),
           micros: ["exp_derivee", "exp_signe"],
         },
         {
@@ -195,6 +254,9 @@ export const exercicesExponentiellePremiere: FicheExercicesData = {
             "Soit $f(x) = (x - 3)\\,e^{x}$, définie sur $\\mathbb{R}$.\na) Montrer que $f'(x) = (x - 2)\\,e^{x}$.\nb) Donner les variations de $f$ et préciser son extremum.\nc) Un élève écrit : « $f$ est croissante sur $\\mathbb{R}$ car $e^{x} > 0$ ». Vrai ou faux ? Expliquer.",
           correction:
             "a) $u = x - 3$, $u' = 1$, $v = e^{x}$, $v' = e^{x}$.\n$f'(x) = u'v + uv' = e^{x} + (x - 3)\\,e^{x}$.\nOn factorise par $e^{x}$ : $f'(x) = e^{x}\\,(1 + x - 3) = (x - 2)\\,e^{x}$.\nb) $e^{x} > 0$, donc $f'(x)$ a le signe de $x - 2$ : négatif si $x < 2$, nul en $2$, positif si $x > 2$.\n$f$ est décroissante sur $]-\\infty \\,;\\, 2]$ et croissante sur $[2 \\,;\\, +\\infty[$.\nElle a un minimum en $x = 2$ : $f(2) = (2 - 3)\\,e^{2} = -e^{2} \\approx -7{,}39$.\nc) Faux. $e^{x} > 0$ dit seulement que $f'$ a le signe de $x - 2$, et $x - 2$ est négatif avant $2$. L'exponentielle ne décide jamais du signe : c'est l'autre facteur qui commande. D'ailleurs $f(0) = -3$ et $f(2) \\approx -7{,}4$ : $f$ a bien diminué entre $0$ et $2$.",
+          // ⭐ Le tableau qui répond à la question c) : le MOINS occupe tout
+          // l'intervalle avant 2, alors que l'exponentielle y est positive.
+          schema: tableauSignes(["−∞", 2, "+∞"], "f ′(x)", ["-", "+"]),
           micros: ["exp_derivee", "exp_signe"],
         },
         {
@@ -203,6 +265,12 @@ export const exercicesExponentiellePremiere: FicheExercicesData = {
             "Un cari sort du feu. Sa température, en degrés, au bout de $t$ minutes est $T(t) = 25 + 70\\,e^{-0{,}2t}$.\na) Quelle est la température à la sortie du feu ?\nb) Calculer $T'(t)$ et en déduire le sens de variation de $T$.\nc) Montrer que la température ne descend jamais sous $25$ °C. Que représente ce nombre ?\nd) Quelle est la température au bout de $10$ minutes ? (arrondir au dixième)",
           correction:
             "a) À $t = 0$ : $T(0) = 25 + 70\\,e^{0} = 25 + 70 \\times 1 = 95$ °C.\nb) Le $25$ est une constante, sa dérivée est $0$. Pour $70\\,e^{-0{,}2t}$, on applique $\\left(e^{at}\\right)' = a\\,e^{at}$ avec $a = -0{,}2$ : $T'(t) = 70 \\times (-0{,}2)\\,e^{-0{,}2t} = -14\\,e^{-0{,}2t}$.\n$e^{-0{,}2t} > 0$ et $-14 < 0$, donc $T'(t) < 0$ pour tout $t$ : $T$ est strictement décroissante. Le cari refroidit, sans jamais se réchauffer.\nc) $T(t) - 25 = 70\\,e^{-0{,}2t}$, et une exponentielle est toujours strictement positive. Donc $T(t) > 25$ pour tout $t$. Les $25$ °C sont la température de la cuisine : le plat s'en approche sans jamais passer dessous.\nd) $T(10) = 25 + 70\\,e^{-2} \\approx 25 + 70 \\times 0{,}135 \\approx 25 + 9{,}5 = 34{,}5$ °C.",
+          // Les deux valeurs du tableau sont celles des questions a) et d).
+          schema: tableauVariations([0, 10], ["-"], [95, "34,5"], {
+            derivee: "T ′(t)",
+            fonction: "T(t)",
+            variable: "t",
+          }),
           micros: ["exp_modelisation", "exp_derivee_affine", "exp_signe"],
         },
         {
@@ -211,6 +279,12 @@ export const exercicesExponentiellePremiere: FicheExercicesData = {
             "Dans une boîte, le nombre de bactéries au bout de $t$ heures est $N(t) = 200\\,e^{0{,}5t}$.\na) Combien de bactéries y a-t-il au départ ? Au bout de $2$ heures ? (arrondir à l'unité)\nb) Calculer $N'(t)$ et en déduire le sens de variation de $N$.\nc) On relève le nombre de bactéries toutes les heures : $v_{n} = N(n)$. Montrer que $(v_{n})$ est une suite géométrique et donner sa raison.\nd) Par combien le nombre de bactéries est-il multiplié à chaque heure ? (arrondir au centième)",
           correction:
             "a) $N(0) = 200\\,e^{0} = 200$ bactéries. $N(2) = 200\\,e^{1} = 200e \\approx 200 \\times 2{,}718 \\approx 544$ bactéries.\nb) $N'(t) = 200 \\times 0{,}5\\,e^{0{,}5t} = 100\\,e^{0{,}5t}$. C'est strictement positif ($100 > 0$ et $e^{0{,}5t} > 0$), donc $N$ est strictement croissante : les bactéries se multiplient.\nc) $v_{n} = 200\\,e^{0{,}5n}$. On écrit le terme suivant : $v_{n + 1} = 200\\,e^{0{,}5(n + 1)} = 200\\,e^{0{,}5n + 0{,}5}$.\nUn produit d'exponentielles : $e^{0{,}5n + 0{,}5} = e^{0{,}5n} \\times e^{0{,}5}$, donc $v_{n + 1} = 200\\,e^{0{,}5n} \\times e^{0{,}5} = v_{n} \\times e^{0{,}5}$.\nChaque terme s'obtient en multipliant le précédent par le même nombre : $(v_{n})$ est géométrique, de raison $q = e^{0{,}5}$ et de premier terme $v_{0} = 200$.\nd) $e^{0{,}5} \\approx 1{,}65$ : le nombre de bactéries est multiplié par $1{,}65$ environ chaque heure. Au bout de deux heures : $\\times 1{,}65^{2} \\approx 2{,}72 = e$, ce qu'on retrouve avec $N(2) = 200e$.",
+          // Les deux valeurs du tableau sont celles de la question a).
+          schema: tableauVariations([0, 2], ["+"], [200, 544], {
+            derivee: "N ′(t)",
+            fonction: "N(t)",
+            variable: "t",
+          }),
           micros: ["exp_modelisation", "exp_suite_geo", "exp_derivee_affine"],
         },
       ],

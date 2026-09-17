@@ -25,6 +25,11 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     // Le cours est en deux parties, la feuille couvre les deux.
     aussiPour: ["exponentielle-etude"],
   },
+  "maths/premiere-spe/variations-fonctions": {
+    titre: "Les variations d'une fonction : 20 exercices corrigés",
+    resume:
+      "Du signe de la dérivée au problème d'optimisation : dresser un tableau, justifier un extremum, lire la courbe de f′, comparer deux courbes, démontrer une inégalité, mettre en équation une boîte ou un enclos. Un rappel de cours avant chaque niveau.",
+  },
   "maths/premiere-spe/second-degre": {
     titre: "Le second degré : 20 exercices corrigés",
     resume:

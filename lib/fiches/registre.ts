@@ -598,6 +598,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Le second degré",
     resume: "Le discriminant ne calcule rien, il decide : deux racines, une seule, ou aucune — et donc si la forme factorisee existe.",
   },
+  "maths/premiere-spe/variations-fonctions": {
+    titre: "Variations et courbes",
+    resume:
+      "C'est le SIGNE de f′ qui parle, pas son sens de variation : tableau de variations, extremum, position relative et optimisation.",
+  },
   // Deux parties (Frédéric, 14/09/2026). La première porte le slug du notionId
   // du coach, `exponentielle` : c'est elle que la liste du coach retrouve.
   "maths/premiere-spe/exponentielle": {

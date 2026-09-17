@@ -207,6 +207,8 @@ export const PDF_DISPONIBLES = new Set<string>([
   "trouver-le-sujet-et-le-verbe-en-cm1-2026-2027-cours-exercices-corriges.pdf",
   "types-et-les-formes-de-phrases-en-cm1-2026-2027-cours-exercices-corriges.pdf",
   "valeur-des-temps-raconter-ou-parler-6e-cours-exercices-corriges.pdf",
+  "variations-d-une-fonction-premiere-spe-20-exercices-corriges.pdf",
+  "variations-et-courbes-premiere-spe-cours-exercices-corriges.pdf",
   "variations-et-extremums-seconde-cours-exercices-corriges.pdf",
   "vecteurs-du-plan-seconde-cours-exercices-corriges.pdf",
   "volumes-4e-cours-exercices-corriges.pdf",

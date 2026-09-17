@@ -260,6 +260,11 @@ export default function FicheExercicesClient({ fiche }: { fiche: FicheExercicesD
                           </summary>
                           <div className="mt-2 whitespace-pre-line rounded-xl border border-sky-100 bg-sky-50 p-3 text-sm leading-6 text-sky-900">
                             <TexteMath>{ex.correction}</TexteMath>
+                            {/* ⭐ Le tableau DESSINÉ du corrigé (17/09/2026) —
+                                voir `schema` dans lib/fiches-exercices/types.ts. */}
+                            {ex.schema ? (
+                              <div className="mt-3 max-w-md whitespace-normal">{ex.schema}</div>
+                            ) : null}
                           </div>
                         </details>
                       </li>
@@ -303,6 +308,10 @@ export default function FicheExercicesClient({ fiche }: { fiche: FicheExercicesD
                     </span>
                     {ex.titre ? "\n" : " "}
                     <TexteMath>{ex.correction}</TexteMath>
+                    {/* Le même tableau dessiné, sur la page des corrigés. */}
+                    {ex.schema ? (
+                      <span className="mt-2 block max-w-xs whitespace-normal">{ex.schema}</span>
+                    ) : null}
                   </li>
                 )),
               )}
