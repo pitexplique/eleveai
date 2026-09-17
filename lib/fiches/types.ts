@@ -3,6 +3,33 @@
 // c'est un objet en blocs typés. Les pages (fiche publique, flashcards élève,
 // composeur prof, mode classe, impression) ne sont que des RENDUS de cette
 // donnée — même source, plusieurs lunettes.
+//
+// ═══════════════════════════════════════════════════════════════════════════════
+// ⭐⭐ LA RÈGLE DE LA FILLE DE FRÉDÉRIC — ÉCRIRE SIMPLEMENT (17/09/2026)
+//
+// Frédéric, en relisant la fiche des variations : « je ne comprends pas ce que
+// tu dis "de quel côté de l'axe elle passe" » · « simplifie : f′ positif alors f
+// croissante, f′ négatif alors f strictement décroissante » · « FICHE ÉLÈVE, IL
+// FAUT ÉCRIRE SIMPLEMENT ». Et : « c'était d'ailleurs la remarque de ma fille,
+// c'est pour ça qu'elle m'a demandé des fiches d'exercices ».
+//
+// ⛔ C'est la cause qui a fait naître `lib/fiches-exercices/` : la fiche de cours
+// de l'exponentielle n'était ni fausse ni trop longue — elle était écrite dans
+// une langue que l'élève ne lit pas. Une phrase juste mais savante est un DÉFAUT,
+// au même titre qu'un calcul faux.
+//
+// Ce qu'on écrit, dans tout ce que l'élève lit (accroche, définition, propriétés,
+// légendes de schémas, corrigés) :
+//   1. La règle en toutes lettres, dans l'ordre où on la dit en classe :
+//      « f′ positif, f est croissante ; f′ négatif, f est strictement
+//      décroissante. » ⛔ Jamais une périphrase à la place.
+//   2. Une idée par phrase. Le tiret cadratin qui empile une seconde idée est
+//      presque toujours à couper en deux phrases.
+//   3. Le mot de la classe, pas celui du mathématicien : « ce qui se passe
+//      autour » et non « le voisinage » ; « la règle du chapitre » et non « le
+//      théorème central » ; « s'écrit » et non « se modélise par ».
+//   4. ⭐ Le test : la phrase se dit-elle telle quelle, à l'oral, devant la classe ?
+// ═══════════════════════════════════════════════════════════════════════════════
 
 import type { ReactNode } from "react";
 
