@@ -3699,4 +3699,385 @@ export const suitesBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * AJOUT DU 17/09/2026 — LES GESTES DU DEVOIR QUI MANQUAIENT
+   *
+   * Mesuré ce matin-là sur les 134 items de la banque :
+   *   · AUCUN ne demandait de MONTRER qu'une suite est arithmétique ou
+   *     géométrique — la question numéro un de tout devoir ;
+   *   · AUCUN ne parlait de SUITE AUXILIAIRE (micro `suite_auxiliaire`, créée
+   *     le jour même) ;
+   *   · AUCUN ne faisait EXPRIMER u_n en fonction de n ;
+   *   · les quatre items de somme étaient du COURS (« combien y a-t-il de
+   *     termes ? »), aucun ne faisait calculer une somme ;
+   *   · deux items seulement parlaient d'algorithme ou de seuil.
+   *
+   * Les micros savaient RECONNAÎTRE une suite géométrique ; elles ne savaient
+   * pas s'en servir. C'est « coach vert, exercice type absent ».
+   * ═══════════════════════════════════════════════════════════════════════════ */
+
+  {
+    kind: "template",
+    id: "premiere_suites_geo_tpl_montrer",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_geometrique",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Calcule le quotient d'un terme par le précédent, et regarde s'il dépend encore de n.",
+    tags: ["premiere", "maths", "suites", "geometrique", "montrer", "template"],
+    generate: () => {
+      const q = pickOne([2, 3, 4, 5, 10]);
+      // ⛔ Mesuré au recalcul, 17/09 : avec a = q, les propositions « la raison »
+      // et « le premier terme » sont le MÊME nombre — le QCM tombait à trois
+      // cases une fois sur neuf, sans la moindre erreur visible.
+      let a = randomInt(2, 9);
+      while (a === q) a = randomInt(2, 9);
+      const correct = `${q}`;
+      return {
+        text: `Soit $u_n = ${a} \\times ${q}^{n}$. Pour montrer que $(u_n)$ est géométrique, on calcule $\\dfrac{u_{n+1}}{u_n}$. Que vaut ce quotient ?`,
+        format: "qcm",
+        choices: [correct, `${a}`, `${a * q}`, `${q}^{n}`].map((c) => `$${c}$`),
+        expected: [`$${correct}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une suite est géométrique quand le quotient d'un terme par le précédent est CONSTANT : il ne doit plus dépendre de $n$.",
+          "On écrit le terme suivant, on divise par le terme courant, et on simplifie.",
+          `$u_{n+1} = ${a} \\times ${q}^{n+1} = ${a} \\times ${q}^{n} \\times ${q}$, donc $\\dfrac{u_{n+1}}{u_n} = \\dfrac{${a} \\times ${q}^{n} \\times ${q}}{${a} \\times ${q}^{n}} = ${q}$.`,
+          `Le quotient vaut $${q}$ pour tout $n$ : $(u_n)$ est géométrique de raison $${q}$ et de premier terme $u_0 = ${a}$. ⛔ Écrire « $u_{n+1} = ${q} \\times u_n$ donc c'est géométrique » sans le calcul ne démontre rien : c'est le quotient qu'on doit rendre constant.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_suites_arith_tpl_montrer",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_arithmetique",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Calcule la DIFFÉRENCE entre deux termes consécutifs, et regarde si elle dépend encore de n.",
+    tags: ["premiere", "maths", "suites", "arithmetique", "montrer", "template"],
+    generate: () => {
+      const r = pickOne([-5, -3, -2, 2, 3, 4, 6, 7]);
+      // ⛔ Même piège que ci-dessus : avec b = r, « la raison » et « le premier
+      // terme » se confondent et une proposition disparaît au tri.
+      let b = randomInt(1, 12);
+      while (b === r) b = randomInt(1, 12);
+      const correct = `${r}`;
+      return {
+        text: `Soit $u_n = ${r}n ${b >= 0 ? "+ " + b : "- " + -b}$. Pour montrer que $(u_n)$ est arithmétique, on calcule $u_{n+1} - u_n$. Que vaut cette différence ?`,
+        format: "qcm",
+        choices: [correct, `${b}`, `${r + b}`, `${r}n`].map((c) => `$${c}$`),
+        expected: [`$${correct}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une suite est arithmétique quand la DIFFÉRENCE entre deux termes consécutifs est constante : elle ne doit plus dépendre de $n$.",
+          "On écrit le terme suivant en remplaçant $n$ par $n+1$, puis on soustrait le terme courant.",
+          `$u_{n+1} = ${r}(n+1) ${b >= 0 ? "+ " + b : "- " + -b} = ${r}n + ${r} ${b >= 0 ? "+ " + b : "- " + -b}$.\nDonc $u_{n+1} - u_n = ${r}$.`,
+          `La différence vaut $${r}$ quel que soit $n$ : $(u_n)$ est arithmétique de raison $${r}$. ⚠️ Le $${b}$ n'est pas la raison, c'est le premier terme $u_0$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_suites_aux_tpl_raison",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_auxiliaire",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Remplace u(n+1) par son expression, puis fais apparaître v(n) = u(n) − L en facteur.",
+    tags: ["premiere", "maths", "suites", "auxiliaire", "template"],
+    generate: () => {
+      // ⭐ On part du POINT FIXE L, et l'on en déduit b : L = aL + b donne
+      //    b = L(1 − a). Tirer a et b au hasard donnerait un L décimal, et
+      //    l'exercice type du devoir a toujours un L entier.
+      const a = pickOne(["0,8", "0,9", "0,5", "0,75", "1,2", "1,5"] as const);
+      const aNum = Number(a.replace(",", "."));
+      const L = pickOne([10, 20, 30, 40, 50, 100, 200]);
+      const bNum = Math.round(L * (1 - aNum) * 100) / 100;
+      const b = String(bNum).replace(".", ",");
+      const signeB = bNum >= 0 ? `+ ${b}` : `- ${String(-bNum).replace(".", ",")}`;
+      return {
+        text:
+          `Soit $(u_n)$ définie par $u_{n+1} = ${a}\\,u_n ${signeB}$, et $v_n = u_n - ${L}$. ` +
+          `On montre que $(v_n)$ est géométrique. Quelle est sa raison ?`,
+        format: "qcm",
+        // ⛔ Mesuré au recalcul : avec a = 0,9 et L = 10, le terme constant b
+        // vaut exactement 1 — et le distracteur « 1 » devenait un doublon. On
+        // complète donc jusqu'à quatre propositions DISTINCTES, en puisant dans
+        // des candidats de secours plutôt qu'en espérant qu'ils diffèrent.
+        choices: [`$${a}$`, `$${b}$`, `$${L}$`, "$1$", "$0$", `$${aNum + 1}$`.replace(".", ",")]
+          .filter((c, i, t) => t.indexOf(c) === i)
+          .slice(0, 4),
+        expected: [`$${a}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une suite auxiliaire sert à se ramener à une suite géométrique, la seule dont on sache écrire le terme général.",
+          `On calcule $v_{n+1} = u_{n+1} - ${L}$, on remplace $u_{n+1}$ par son expression, puis on FACTORISE pour faire réapparaître $v_n = u_n - ${L}$.`,
+          `$v_{n+1} = ${a}\\,u_n ${signeB} - ${L} = ${a}\\,u_n - ${String(Math.round(aNum * L * 100) / 100).replace(".", ",")}$.\nOr $${a} \\times ${L} = ${String(Math.round(aNum * L * 100) / 100).replace(".", ",")}$, donc $v_{n+1} = ${a}\\,(u_n - ${L}) = ${a}\\,v_n$.`,
+          `$(v_n)$ est géométrique de raison $${a}$. ⭐ Le nombre $${L}$ n'est pas choisi au hasard : c'est la valeur qui ne bouge plus, celle qui vérifie $L = ${a}L ${signeB}$. La suite $(u_n)$ s'en approche sans jamais l'atteindre.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_suites_aux_tpl_revenir",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_auxiliaire",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Écris d'abord v(n) avec la formule d'une suite géométrique, puis reviens à u : u(n) = v(n) + L.",
+    tags: ["premiere", "maths", "suites", "auxiliaire", "template"],
+    generate: () => {
+      const q = pickOne(["0,5", "0,8", "0,9", "2", "3"] as const);
+      const L = pickOne([10, 20, 30, 50, 100]);
+      const v0 = pickOne([-40, -30, -20, -10, 10, 20, 40]);
+      const u0 = v0 + L;
+      return {
+        text:
+          `On sait que $v_n = u_n - ${L}$ est géométrique de raison $${q}$, et que $u_0 = ${u0}$. ` +
+          `Quelle est l'expression de $u_n$ en fonction de $n$ ?`,
+        format: "qcm",
+        choices: [
+          `$u_n = ${v0} \\times ${q}^{n} + ${L}$`,
+          `$u_n = ${u0} \\times ${q}^{n}$`,
+          `$u_n = ${v0} \\times ${q}^{n} - ${L}$`,
+          `$u_n = ${u0} \\times ${q}^{n} + ${L}$`,
+        ],
+        expected: [`$u_n = ${v0} \\times ${q}^{n} + ${L}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le terme général d'une suite géométrique s'écrit $v_n = v_0 \\times q^{n}$. C'est pour pouvoir l'écrire qu'on est passé par la suite auxiliaire.",
+          `On calcule d'abord $v_0$, on écrit $v_n$, puis on REVIENT à $u$ : comme $v_n = u_n - ${L}$, on a $u_n = v_n + ${L}$.`,
+          `$v_0 = u_0 - ${L} = ${u0} - ${L} = ${v0}$, donc $v_n = ${v0} \\times ${q}^{n}$.`,
+          `D'où $u_n = ${v0} \\times ${q}^{n} + ${L}$. ⛔ L'oubli classique est de s'arrêter à $v_n$ : la question porte sur $u_n$, il faut toujours faire le chemin du retour.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_suites_sommes_tpl_calculer",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_sommes",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Nombre de termes × moyenne du premier et du dernier. ⚠️ Compte bien les termes.",
+    tags: ["premiere", "maths", "suites", "sommes", "calculer", "template"],
+    generate: () => {
+      const u0 = randomInt(1, 12);
+      const r = pickOne([2, 3, 4, 5, 6, 10]);
+      const n = pickOne([9, 11, 14, 19, 24]);
+      const dernier = u0 + n * r;
+      const nbTermes = n + 1;
+      const s = (nbTermes * (u0 + dernier)) / 2;
+      return {
+        text:
+          `$(u_n)$ est arithmétique de premier terme $u_0 = ${u0}$ et de raison $${r}$. ` +
+          `Calcule la somme $u_0 + u_1 + \\ldots + u_{${n}}$.`,
+        format: "short",
+        expected: [String(s)],
+        comparator: "number_equal",
+        explanation: exp(
+          "La somme de termes consécutifs d'une suite arithmétique vaut : nombre de termes $\\times$ la moyenne du premier et du dernier.",
+          "On compte les termes, on calcule le dernier, puis on applique la formule.",
+          `De $u_0$ à $u_{${n}}$ il y a $${nbTermes}$ termes (et non $${n}$ : on compte le rang $0$).\n$u_{${n}} = ${u0} + ${n} \\times ${r} = ${dernier}$.`,
+          `$S = ${nbTermes} \\times \\dfrac{${u0} + ${dernier}}{2} = ${nbTermes} \\times ${(u0 + dernier) / 2} = ${s}$. ⛔ L'erreur la plus fréquente est de compter $${n}$ termes au lieu de $${nbTermes}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_suites_algo_tpl_seuil",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_algorithme",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Calcule les termes un par un jusqu'à dépasser le seuil, et compte les étapes.",
+    tags: ["premiere", "maths", "suites", "algorithme", "seuil", "template"],
+    generate: () => {
+      const u0 = pickOne([100, 200, 500, 1000]);
+      const q = pickOne(["1,1", "1,2", "1,5"] as const);
+      const qNum = Number(q.replace(",", "."));
+      const seuil = u0 * pickOne([2, 3, 4]);
+      let n = 0;
+      let u = u0;
+      while (u <= seuil) {
+        u *= qNum;
+        n += 1;
+      }
+      return {
+        text:
+          `Une population de $${u0}$ individus augmente de $${Math.round((qNum - 1) * 100)}\\,\\%$ par an : $u_{n+1} = ${q}\\,u_n$. ` +
+          `À partir de quelle année la population dépasse-t-elle $${seuil}$ ?`,
+        format: "short",
+        expected: [String(n)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un problème de SEUIL ne se résout pas par une formule en première : on calcule les termes un par un jusqu'à dépasser la valeur visée.",
+          `C'est exactement ce que fait un algorithme « tant que » : tant que $u \\leqslant ${seuil}$, on multiplie $u$ par $${q}$ et on ajoute $1$ au compteur.`,
+          `En partant de $u_0 = ${u0}$ et en multipliant par $${q}$ à chaque étape, le seuil de $${seuil}$ est franchi au bout de $${n}$ étapes.`,
+          `La population dépasse $${seuil}$ à l'année $${n}$. ⚠️ On demande le RANG, pas la valeur atteinte : le compteur de l'algorithme est la réponse.`
+        ),
+      };
+    },
+  },
+
+  /* ─── La dette de renouvellement, payée le 17/09/2026 ────────────────────────
+   * Trois micros plafonnaient à 9 énoncés générés pour un seuil de 12 :
+   * suite_registres, suite_modeliser et suite_limite. ⛔ On ne comble pas avec
+   * des questions figées — elles ne se renouvellent jamais. Un TROISIÈME gabarit
+   * par micro, qui prend la question par l'autre bout. */
+
+  {
+    kind: "template",
+    id: "premiere_suites_reg_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_registres",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "« On part de… et on ajoute à chaque fois » se traduit par une formule explicite en n.",
+    tags: ["premiere", "maths", "suites", "registres", "template"],
+    generate: () => {
+      const r = pickOne([3, 4, 5, 6, 7, 8, 10, 12, 15, 20, 25]);
+      // ⛔ Avec u0 = r, le distracteur « on a interverti les deux nombres »
+      // devient mot pour mot la bonne réponse. Mesuré au recalcul le 17/09.
+      let u0 = randomInt(2, 15);
+      while (u0 === r) u0 = randomInt(2, 15);
+      return {
+        text:
+          `Une suite est décrite ainsi : « on part de $${u0}$, et à chaque rang on ajoute $${r}$ ». ` +
+          `Quelle est son écriture EXPLICITE, celle qui donne $u_n$ directement à partir de $n$ ?`,
+        format: "qcm",
+        choices: [
+          `$u_n = ${u0} + ${r}n$`,
+          `$u_{n+1} = u_n + ${r}$`,
+          `$u_n = ${u0} \\times ${r}^{n}$`,
+          `$u_n = ${r} + ${u0}n$`,
+        ],
+        expected: [`$u_n = ${u0} + ${r}n$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une même suite s'écrit de plusieurs façons : en français, par récurrence, ou explicitement. Passer de l'une à l'autre est un geste à part entière.",
+          "L'écriture par RÉCURRENCE dit comment passer d'un terme au suivant. L'écriture EXPLICITE donne le terme de rang $n$ sans calculer les précédents.",
+          `« On part de $${u0}$ » donne $u_0 = ${u0}$ ; « on ajoute $${r}$ » donne $u_{n+1} = u_n + ${r}$. Au rang $n$, on a ajouté $${r}$ exactement $n$ fois.`,
+          `L'écriture explicite est donc $u_n = ${u0} + ${r}n$. ⛔ La réponse $u_{n+1} = u_n + ${r}$ est juste, mais c'est la forme par RÉCURRENCE : elle oblige à calculer tous les termes avant. ⚠️ Et ne pas intervertir $${u0}$ et $${r}$ : le nombre qui multiplie $n$ est la raison.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_suites_mod_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_modeliser",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Une somme fixe à chaque étape donne une suite arithmétique ; un pourcentage donne une géométrique.",
+    tags: ["premiere", "maths", "suites", "modeliser", "template"],
+    generate: () => {
+      const contexte = pickOne([
+        { quoi: "Un abonnement à la médiathèque de Saint-Denis", unite: "adhérents", verbe: "gagne" },
+        { quoi: "Un club de randonnée du Maïdo", unite: "membres", verbe: "gagne" },
+        { quoi: "Une association de plongée", unite: "licenciés", verbe: "gagne" },
+        { quoi: "Un potager partagé", unite: "parcelles", verbe: "ajoute" },
+        { quoi: "Une chaîne de vidéos", unite: "abonnés", verbe: "gagne" },
+      ] as const);
+      const depart = pickOne([80, 120, 150, 200, 240, 300]);
+      const arithmetique = randomInt(0, 1) === 1;
+      const r = pickOne([15, 20, 25, 30]);
+      const p = pickOne([5, 10, 20]);
+      const texte = arithmetique
+        ? `${contexte.quoi} compte $${depart}$ ${contexte.unite} et en ${contexte.verbe} $${r}$ de plus chaque année.`
+        : `${contexte.quoi} compte $${depart}$ ${contexte.unite} et leur nombre augmente de $${p}\\,\\%$ chaque année.`;
+      const correct = arithmetique
+        ? `arithmétique, de raison $${r}$`
+        : `géométrique, de raison $${(1 + p / 100).toString().replace(".", ",")}$`;
+      return {
+        text: `${texte} Par quelle suite modélise-t-on ce nombre ?`,
+        format: "qcm",
+        choices: [
+          correct,
+          arithmetique ? `géométrique, de raison $${r}$` : `arithmétique, de raison $${p}$`,
+          arithmetique ? `géométrique, de raison $${depart}$` : `géométrique, de raison $${p}$`,
+          `arithmétique, de raison $${depart}$`,
+        ],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Modéliser, c'est reconnaître le MÉCANISME de l'énoncé : ce qui se répète à chaque étape.",
+          "On ajoute toujours la même quantité : la suite est arithmétique. On multiplie toujours par le même nombre — c'est le cas d'un pourcentage — : elle est géométrique.",
+          arithmetique
+            ? `Ici on ajoute $${r}$ chaque année, la même quantité à chaque fois : $u_{n+1} = u_n + ${r}$.`
+            : `Ici on augmente de $${p}\\,\\%$, donc on multiplie par $1 + \\dfrac{${p}}{100} = ${(1 + p / 100).toString().replace(".", ",")}$ : $u_{n+1} = ${(1 + p / 100).toString().replace(".", ",")}\\,u_n$.`,
+          arithmetique
+            ? `La suite est ARITHMÉTIQUE de raison $${r}$, et $u_0 = ${depart}$.`
+            : `La suite est GÉOMÉTRIQUE de raison $${(1 + p / 100).toString().replace(".", ",")}$, et $u_0 = ${depart}$. ⛔ La raison n'est pas $${p}$ : un pourcentage d'augmentation se traduit par un coefficient MULTIPLICATEUR, pas par la valeur du pourcentage.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_suites_lim_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "suites",
+    microId: "suite_limite",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Cherche la valeur qui ne bouge plus : celle qui redonne elle-même quand on applique la règle.",
+    tags: ["premiere", "maths", "suites", "limite", "template"],
+    generate: () => {
+      // Même construction que la suite auxiliaire : on part du point fixe.
+      const a = pickOne(["0,5", "0,75", "0,8", "0,9"] as const);
+      const aNum = Number(a.replace(",", "."));
+      const L = pickOne([12, 20, 25, 40, 60, 80, 100]);
+      const bNum = Math.round(L * (1 - aNum) * 100) / 100;
+      const b = String(bNum).replace(".", ",");
+      const depart = L + pickOne([-30, -20, 20, 40, 60]);
+      return {
+        text:
+          `Une suite vérifie $u_{n+1} = ${a}\\,u_n + ${b}$, avec $u_0 = ${depart}$. ` +
+          `Vers quelle valeur les termes semblent-ils s'approcher quand $n$ grandit ?`,
+        format: "qcm",
+        // ⛔ Le terme constant b peut tomber sur la valeur de départ (a = 0,5,
+        // L = 40 donne b = 20, et un départ à 20). On complète jusqu'à quatre
+        // propositions DISTINCTES plutôt que d'espérer qu'elles diffèrent.
+        choices: [`$${L}$`, `$${depart}$`, `$${b}$`, "$0$", `$${L * 2}$`, "$1$"]
+          .filter((c, i, t) => t.indexOf(c) === i)
+          .slice(0, 4),
+        expected: [`$${L}$`],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Quand une suite s'approche d'une valeur, cette valeur finit par ne plus bouger : lui appliquer la règle la redonne à l'identique.",
+          `On cherche donc le nombre $L$ tel que $L = ${a}L + ${b}$, puis on vérifie que les termes s'en rapprochent effectivement.`,
+          `$L - ${a}L = ${b}$, donc $${String(Math.round((1 - aNum) * 100) / 100).replace(".", ",")}\\,L = ${b}$ et $L = ${L}$.\nEn partant de $u_0 = ${depart}$, l'écart à $${L}$ est multiplié par $${a}$ à chaque étape : il diminue sans jamais s'annuler.`,
+          `Les termes s'approchent de $${L}$. ⭐ C'est la même idée que la suite auxiliaire : $v_n = u_n - ${L}$ est géométrique de raison $${a}$, et comme $0 < ${a} < 1$, cet écart tend vers $0$.`
+        ),
+      };
+    },
+  },
 ];

@@ -104,6 +104,24 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "suites",
     prerequis: ["suite_variation"],
   },
+  /**
+   * ⭐⭐ LA MICRO DU 17/09/2026 — l'exercice type de fin de chapitre.
+   *
+   * Mesuré ce jour-là sur les 134 items de la banque : AUCUN ne demandait de
+   * MONTRER qu'une suite est arithmétique ou géométrique, aucun ne parlait de
+   * suite auxiliaire, aucun ne faisait exprimer u_n en fonction de n. Or le gros
+   * exercice de tout devoir de première spé est celui-là, en trois temps :
+   * « u(n+1) = 0,8 u(n) + 6 et v(n) = u(n) − 30. a) Montrer que v est
+   * géométrique. b) Exprimer v(n) puis u(n) en fonction de n. c) Conclure. »
+   * C'est « coach vert, exercice type absent » : les micros existantes savaient
+   * RECONNAÎTRE une suite géométrique, jamais en FABRIQUER une pour s'en servir.
+   */
+  {
+    id: "suite_auxiliaire",
+    label: "Suite auxiliaire : montrer que v = u − L est géométrique",
+    notionId: "suites",
+    prerequis: ["suite_geometrique", "suite_recurrence"],
+  },
 
   /* ===================== SECOND DEGRÉ ===================== */
   {
