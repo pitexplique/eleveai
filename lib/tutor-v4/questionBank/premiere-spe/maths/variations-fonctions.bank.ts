@@ -46,6 +46,127 @@ function parabole(a: number, b: number, c: number): CanvasFigure {
   };
 }
 
+/* ═══════ LES TROIS DESSINS DU CHAPITRE — ajoutés le 17/09/2026 ═══════════════
+ *
+ * Frédéric, le jour même : « il faut donc se servir des 2 canvas ! » — le
+ * tableau de variations ET le tableau de signes existent depuis le 07/09 et
+ * cette banque ne servait ni l'un ni l'autre : ses 14 figures étaient toutes
+ * la même parabole avec son sommet.
+ *
+ * ⛔ `fonctionGraphique` ne sait PAS tracer une cubique : ses types sont
+ * lineaire, affine, quadratique et points. Une courbe de degré 3 passe donc
+ * par une liste de points. Ici on n'en a pas besoin : ce qu'on montre, c'est
+ * la courbe de f′, et la dérivée d'une cubique est une PARABOLE.
+ */
+
+/**
+ * Un nombre tel qu'il s'écrit DANS UN CANVAS, avec le vrai signe moins.
+ * ⛔ Un canvas affiche du texte brut : le trait d'union du clavier y reste un
+ * trait d'union. Dans un tableau qui porte déjà « −∞ », les « -4 » d'à côté
+ * dépareillaient (vu au rendu le 17/09/2026).
+ */
+const nb = (n: number) => String(n).replace("-", "−");
+
+/** La courbe de f′ = a(x − r)(x − s), avec ses deux racines marquées. */
+function courbeDerivee(a: number, r: number, s: number): CanvasFigure {
+  return {
+    kind: "fonctionGraphique",
+    titre: "courbe de la dérivée f ′",
+    size: { width: 300, height: 300 },
+    xmin: -6,
+    xmax: 6,
+    ymin: -8,
+    ymax: 8,
+    grille: true,
+    courbes: [{ id: "fprime", type: "quadratique", a, b: -a * (r + s), c: a * r * s, couleur: "#2563eb" }],
+    misesEnEvidence: [
+      { point: { x: r, y: 0, label: nb(r), couleur: "#dc2626" } },
+      { point: { x: s, y: 0, label: nb(s), couleur: "#dc2626" } },
+      { horizontale: { y: 0, couleur: "#dc2626" } },
+    ],
+  };
+}
+
+/**
+ * Le tableau de variations : la ligne de signe de f′ au-dessus, les valeurs en
+ * dessous. ⭐ On décrit CE QUE VAUT la fonction à chaque borne ; les flèches se
+ * déduisent de la comparaison entre valeurs successives, on ne les décrit pas.
+ */
+function tableauVariations(bornes: number[], signes: ("+" | "-")[], valeurs: number[]): CanvasFigure {
+  return {
+    kind: "tableau_variations",
+    bornes: bornes.map(nb),
+    derivee: { label: "f ′(x)", signes, marques: Array(bornes.length - 2).fill("0") },
+    variations: { label: "f(x)", valeurs: valeurs.map(nb) },
+    size: { width: 380, height: 200 },
+  };
+}
+
+/** Le tableau de signes de f′ seul — celui qu'on dresse AVANT le tableau de variations. */
+function tableauSigneDerivee(bornes: string[], signes: ("+" | "-")[]): CanvasFigure {
+  return {
+    kind: "tableau_signes",
+    bornes,
+    lignes: [{ label: "f ′(x)", signes, marques: Array(bornes.length - 2).fill("0") }],
+    size: { width: 380, height: 140 },
+  };
+}
+
+/** Un terme d'un polynôme, signe compris : « - 6x^2 », « + 48x », rien si nul. */
+function termePoly(coef: number, suffixe: string, premier: boolean): string {
+  if (coef === 0) return "";
+  const signe = coef > 0 ? (premier ? "" : " + ") : premier ? "-" : " - ";
+  const val = Math.abs(coef);
+  const nombre = val === 1 && suffixe !== "" ? "" : String(val);
+  return `${signe}${nombre}${suffixe}`;
+}
+
+/** « 2x^3 - 6x^2 - 48x », sans terme nul ni coefficient 1 inutile. */
+function cubique(A: number, B: number, C: number): string {
+  let out = termePoly(A, "x^3", true);
+  out += termePoly(B, "x^2", out === "");
+  out += termePoly(C, "x", out === "");
+  return out === "" ? "0" : out;
+}
+
+/**
+ * « 6x^2 - 12x - 48 » — le trinôme AVEC son terme constant.
+ * ⛔ Première écriture du 17/09 : la dérivée était composée par `cubique`, qui
+ * n'a pas de place pour la constante — f′ sortait amputée de son « + 6rs », et
+ * l'explication donnait donc un calcul faux sans qu'aucun type ne bronche.
+ */
+function trinomeTexte(a2: number, a1: number, a0: number): string {
+  let out = termePoly(a2, "x^2", true);
+  out += termePoly(a1, "x", out === "");
+  out += termePoly(a0, "", out === "");
+  return out === "" ? "0" : out;
+}
+
+/**
+ * Une cubique dont la DÉRIVÉE a deux racines ENTIÈRES r < s :
+ *   f(x) = sens·(2x³ − 3(r+s)x² + 6rs·x)   ⇒   f′(x) = sens·6(x − r)(x − s)
+ * ⛔ Le coefficient 2 n'est pas décoratif : avec un x³ tout seul il faudrait
+ * que r + s soit pair, ce qui supprimerait la moitié des tirages.
+ */
+function cubiqueDeRacines(sens: 1 | -1, r: number, s: number) {
+  const A = sens * 2;
+  const B = sens * -3 * (r + s);
+  const C = sens * 6 * r * s;
+  return {
+    A,
+    B,
+    C,
+    texte: cubique(A, B, C),
+    derivee: trinomeTexte(sens * 6, sens * -6 * (r + s), sens * 6 * r * s),
+  };
+}
+
+/** Deux racines entières r < s, tirées large. */
+function deuxRacines() {
+  const r = randomInt(-4, 3);
+  return { r, s: randomInt(r + 1, 4) };
+}
+
 /**
  * Quatre propositions garanties DEUX A DEUX DIFFERENTES.
  *
@@ -3485,6 +3606,369 @@ export const variationsFonctionsBank: TutorBankItemV4[] = [
           `On calcule $${contexte.symbole}'(x) = -${2 * a}x + ${b}$, puis on résout $${contexte.symbole}'(x) = 0$.`,
           `$-${2 * a}x + ${b} = 0$ donne $x = ${sommet}$. La dérivée est positive avant et négative après : c'est bien un MAXIMUM. Sa valeur vaut $${contexte.symbole}(${sommet}) = ${maxi}$.`,
           `La ${contexte.demande} est de $${maxi}$ ${contexte.unite}, atteinte pour $x = ${sommet}$. ⛔ Les deux réponses attendues sont la VALEUR de l'extremum et l'ABSCISSE où il est atteint : n'en donner qu'une laisse la question à moitié résolue.`
+        ),
+      };
+    },
+  },
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * AJOUT DU 17/09/2026 — LES TROIS GESTES DU DEVOIR QUI MANQUAIENT
+   *
+   * Les trois vérificateurs étaient VERTS ce matin-là : 133/133 au démarrage,
+   * aucune micro var_ sous le seuil de renouvellement, aucun gabarit qui
+   * s'effondre. Et pourtant, sur les 123 items de la banque :
+   *   1. AUCUN ne demandait de DÉRIVER — f′ était donnée dans l'énoncé, 123
+   *      fois sur 123 (« Soit f(x) = x³ − 3x, donc f′(x) = 3x² − 3 ») ;
+   *   2. AUCUN ne demandait de METTRE EN ÉQUATION — l'aire, le volume ou la
+   *      recette à optimiser étaient déjà fournis tout faits ;
+   *   3. AUCUN ne faisait LIRE un tableau ou la courbe de f′ — les 14 figures
+   *      de la banque étaient la même parabole avec son sommet.
+   *
+   * C'est le défaut « coach vert, exercice type absent » : une micro est un
+   * geste isolé, un exercice de DS est un ENCHAÎNEMENT de gestes.
+   * ═══════════════════════════════════════════════════════════════════════════ */
+
+  {
+    kind: "template",
+    id: "premiere_var_sg_tpl_derive_seul",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_signe_derivee",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Personne ne te donne f ′ ici : calcule-la d'abord, puis cherche où elle s'annule.",
+    tags: ["premiere", "maths", "variations", "signe", "derivee", "template"],
+    generate: () => {
+      const sens = pickOne([1, -1] as const);
+      const { r, s } = deuxRacines();
+      const f = cubiqueDeRacines(sens, r, s);
+      // a > 0 : f croît, DÉCROÎT entre les racines, puis croît. a < 0 : l'inverse.
+      const mot = sens === 1 ? "décroissante" : "croissante";
+      const correct = `$[${r} ; ${s}]$`;
+      return {
+        text: `Soit $f(x) = ${f.texte}$. Sur quel intervalle $f$ est-elle ${mot} ?`,
+        format: "qcm",
+        choices: quatreChoixVar(correct, [
+          `$]-\\infty ; ${r}]$`,
+          `$[${s} ; +\\infty[$`,
+          "$\\mathbb{R}$ tout entier",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le sens de variation d'une fonction dérivable se lit sur le SIGNE de sa dérivée — encore faut-il commencer par la calculer, car l'énoncé ne la donne pas.",
+          "On dérive, on factorise la dérivée pour trouver où elle s'annule, puis on étudie son signe.",
+          `$f ′(x) = ${f.derivee}$, qui se factorise en $${sens * 6}(x ${r >= 0 ? "- " + r : "+ " + -r})(x ${s >= 0 ? "- " + s : "+ " + -s})$. Elle s'annule en $x = ${r}$ et $x = ${s}$.`,
+          `Un trinôme est du signe de son coefficient dominant à l'extérieur des racines, et du signe contraire entre elles. Ici ce coefficient vaut $${sens * 6}$ : $f ′$ est donc ${sens === 1 ? "NÉGATIVE" : "POSITIVE"} sur $]${r} ; ${s}[$, et $f$ y est ${mot}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_var_ext_tpl_derive_seul",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_extremum",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Dérive, trouve les deux valeurs qui annulent f ′, puis regarde de quel côté la dérivée change de signe.",
+    tags: ["premiere", "maths", "variations", "extremum", "derivee", "template"],
+    generate: () => {
+      const sens = pickOne([1, -1] as const);
+      const { r, s } = deuxRacines();
+      const f = cubiqueDeRacines(sens, r, s);
+      // a > 0 : croît, décroît, croît → MAXIMUM local à la PREMIÈRE racine.
+      const abscisse = sens === 1 ? r : s;
+      const autre = sens === 1 ? s : r;
+      const milieu = String((r + s) / 2).replace(".", ","); // la virgule, jamais le point
+
+      const correct = `$x = ${abscisse}$`;
+      return {
+        text: `Soit $f(x) = ${f.texte}$. En quelle abscisse $f$ admet-elle un MAXIMUM local ?`,
+        format: "qcm",
+        choices: quatreChoixVar(correct, [
+          `$x = ${autre}$`,
+          `$x = ${milieu}$`,
+          "$f$ n'admet pas de maximum local",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un maximum local est atteint là où la dérivée s'annule EN CHANGEANT DE SIGNE, en passant du positif au négatif : la fonction monte, puis redescend.",
+          "On calcule la dérivée, on cherche ses racines, et on regarde dans quel ordre les signes se succèdent.",
+          `$f ′(x) = ${f.derivee} = ${sens * 6}(x ${r >= 0 ? "- " + r : "+ " + -r})(x ${s >= 0 ? "- " + s : "+ " + -s})$, qui s'annule en $${r}$ et $${s}$. Son coefficient dominant vaut $${sens * 6}$, donc $f ′$ est ${sens === 1 ? "positive, puis négative, puis positive" : "négative, puis positive, puis négative"}.`,
+          `Le passage du PLUS au MOINS se fait en $x = ${abscisse}$ : c'est là le maximum local. ⛔ En $x = ${autre}$ la dérivée s'annule aussi, mais elle passe du moins au plus — c'est un minimum. Le milieu $${milieu}$, lui, ne joue aucun rôle : c'est le sommet de la parabole de $f ′$, pas un extremum de $f$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_var_opt_tpl_mise_en_equation",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_optimisation",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Personne ne te donne la fonction : écris d'abord la grandeur demandée, puis remplace ce que tu ne connais pas.",
+    tags: ["premiere", "maths", "variations", "optimisation", "modelisation", "template"],
+    generate: () => {
+      const forme = randomInt(1, 3);
+      if (forme === 1) {
+        const L = pickOne([24, 30, 36, 40, 48, 60] as const);
+        const correct = `$A(x) = x(${L} - 2x)$`;
+        return {
+          text:
+            `Un enclos rectangulaire est adossé à un mur : le mur forme un côté, et l'on dispose de $${L}$ m ` +
+            `de grillage pour les trois autres. On note $x$ la largeur, c'est-à-dire la longueur de chacun des ` +
+            `deux côtés perpendiculaires au mur. Exprime l'aire $A(x)$ de l'enclos en fonction de $x$.`,
+          format: "qcm",
+          choices: quatreChoixVar(correct, [
+            `$A(x) = x(${L} - x)$`,
+            `$A(x) = 2x(${L} - 2x)$`,
+            `$A(x) = ${L}x$`,
+          ]),
+          expected: [correct],
+          comparator: "mcq_exact",
+          explanation: exp(
+            "Mettre en équation, c'est écrire la grandeur cherchée puis exprimer, à l'aide de $x$, tout ce qui n'est pas connu.",
+            "L'aire d'un rectangle vaut largeur × longueur. La largeur est $x$ ; reste à trouver la longueur.",
+            `Le grillage couvre TROIS côtés : les deux largeurs et la longueur. Il en part $2x$ pour les largeurs, donc la longueur vaut $${L} - 2x$.`,
+            `D'où $A(x) = x(${L} - 2x)$. ⛔ Le piège est d'écrire $x(${L} - x)$ : ce serait vrai si le grillage ne servait qu'à deux côtés. Le mur en remplace UN, pas deux.`
+          ),
+        };
+      }
+      if (forme === 2) {
+        const P = pickOne([20, 24, 28, 32, 36, 44] as const);
+        const demi = P / 2;
+        const correct = `$A(x) = x(${demi} - x)$`;
+        return {
+          text:
+            `Un rectangle a pour périmètre $${P}$ cm. On note $x$ sa largeur, en cm. ` +
+            `Exprime son aire $A(x)$ en fonction de $x$.`,
+          format: "qcm",
+          choices: quatreChoixVar(correct, [
+            `$A(x) = x(${P} - x)$`,
+            `$A(x) = x(${P} - 2x)$`,
+            `$A(x) = 2x(${demi} - x)$`,
+          ]),
+          expected: [correct],
+          comparator: "mcq_exact",
+          explanation: exp(
+            "Le périmètre d'un rectangle compte DEUX largeurs et DEUX longueurs : $P = 2(\\ell + L)$.",
+            "On en tire la longueur en fonction de la largeur, puis on écrit l'aire.",
+            `Ici $2(x + L) = ${P}$, donc $x + L = ${demi}$ et la longueur vaut $L = ${demi} - x$.`,
+            `L'aire vaut donc $A(x) = x(${demi} - x)$. ⛔ Le piège classique est d'oublier de couper le périmètre en deux et d'écrire $x(${P} - x)$.`
+          ),
+        };
+      }
+      const N = pickOne([120, 200, 240, 300, 360] as const);
+      const k = pickOne([2, 3, 4, 5] as const);
+      const correct = `$R(x) = x(${N} - ${k}x)$`;
+      return {
+        text:
+          `Une association vend des tee-shirts. Quand le prix est de $x$ euros, elle en écoule $${N} - ${k}x$. ` +
+          `Exprime la recette $R(x)$, en euros, en fonction du prix $x$.`,
+        format: "qcm",
+        choices: quatreChoixVar(correct, [
+          `$R(x) = ${N} - ${k}x$`,
+          `$R(x) = ${N}x - ${k}$`,
+          `$R(x) = \\dfrac{${N} - ${k}x}{x}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une recette est un produit : le prix unitaire multiplié par le nombre d'articles vendus.",
+          "On écrit ce produit, puis on remplace chaque facteur par son expression en $x$.",
+          `Le prix est $x$, le nombre d'acheteurs est $${N} - ${k}x$.`,
+          `Donc $R(x) = x(${N} - ${k}x)$. ⛔ Répondre $${N} - ${k}x$ serait donner le nombre de tee-shirts, pas l'argent encaissé : c'est la confusion la plus fréquente de tout le chapitre.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_var_opt_tpl_boite",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_optimisation",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Fais le dessin dans ta tête : que devient chaque côté de la plaque quand on enlève un carré à chaque bout ?",
+    tags: ["premiere", "maths", "variations", "optimisation", "modelisation", "template"],
+    generate: () => {
+      const carree = randomInt(0, 1) === 1;
+      // ⛔ Mesuré au recalcul, 17/09 : tirer la largeur en RETRANCHANT de la
+      // longueur donnait des plaques de 10 sur 4 — on y découpe des carrés de
+      // 2 cm et il ne reste plus de largeur du tout. On part donc de la PETITE
+      // dimension, jamais sous 8 cm, et on lui ajoute l'écart.
+      const l = carree ? 0 : pickOne([8, 10, 12, 14, 16, 18] as const);
+      const c = carree ? pickOne([10, 12, 14, 16, 18, 20, 24, 30] as const) : l + pickOne([2, 4, 6, 8] as const);
+      const correct = carree ? `$V(x) = x(${c} - 2x)^2$` : `$V(x) = x(${c} - 2x)(${l} - 2x)$`;
+      return {
+        text:
+          `D'une plaque ${carree ? `carrée de $${c}$ cm de côté` : `rectangulaire de $${c}$ cm sur $${l}$ cm`}, ` +
+          `on découpe aux quatre coins un carré de côté $x$, puis on relève les bords pour former une boîte ` +
+          `sans couvercle. Exprime le volume $V(x)$ de la boîte, en cm³, en fonction de $x$.`,
+        format: "qcm",
+        choices: quatreChoixVar(correct, [
+          carree ? `$V(x) = x(${c} - x)^2$` : `$V(x) = x(${c} - x)(${l} - x)$`,
+          carree ? `$V(x) = x^2(${c} - 2x)$` : `$V(x) = x(${c} - 2x)(${l} - x)$`,
+          carree ? `$V(x) = (${c} - 2x)^2$` : `$V(x) = (${c} - 2x)(${l} - 2x)$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le volume d'un pavé droit est le produit de ses trois dimensions : longueur × largeur × hauteur.",
+          "La hauteur de la boîte est la profondeur du pli, c'est-à-dire $x$. Les deux autres dimensions sont ce qui reste de la plaque une fois les coins enlevés.",
+          `Sur chaque côté, on retire un carré à CHAQUE extrémité, donc $2x$ en tout : ${carree ? `le fond est un carré de côté $${c} - 2x$` : `le fond mesure $${c} - 2x$ sur $${l} - 2x$`}.`,
+          `D'où $V(x) = ${carree ? `x(${c} - 2x)^2` : `x(${c} - 2x)(${l} - 2x)`}$. ⛔ Écrire $${c} - x$ revient à ne couper qu'un seul coin par côté — l'erreur se voit tout de suite sur un croquis, et c'est pour cela qu'il faut le faire.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "premiere_var_tab_tpl_lecture_tableau",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_tableau",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Tout est dans le tableau : la ligne du haut donne le signe de f ′, celle du bas ce que vaut f.",
+    tags: ["premiere", "maths", "variations", "tableau", "lecture", "canvas", "template"],
+    generate: () => {
+      const b0 = randomInt(-6, -3);
+      const b1 = randomInt(-2, 0);
+      const b2 = randomInt(1, 3);
+      const b3 = randomInt(4, 6);
+      const hautLocal = randomInt(3, 9);
+      const basLocal = randomInt(-7, 2);
+      const gauche = basLocal - randomInt(1, 4);
+      const droite = randomInt(3, 12);
+      const figure = tableauVariations([b0, b1, b2, b3], ["+", "-", "+"], [gauche, hautLocal, basLocal, droite]);
+      const surMinimum = randomInt(0, 1) === 1;
+      if (surMinimum) {
+        const correct = String(basLocal);
+        return {
+          text: "Voici le tableau de variations de $f$. Quelle est la valeur du minimum local de $f$ ?",
+          format: "qcm",
+          canvas: figure,
+          choices: quatreChoixVar(correct, [String(hautLocal), String(gauche), `$x = ${b2}$`]),
+          expected: [correct],
+          comparator: "mcq_exact",
+          explanation: exp(
+            "Un tableau de variations se lit sur deux lignes : celle du signe de $f ′$, et celle des valeurs de $f$ au bout de chaque flèche.",
+            "Le minimum local est la valeur atteinte au creux, là où la flèche cesse de descendre et repart vers le haut.",
+            `Ici $f ′$ est négative sur $]${b1} ; ${b2}[$ puis redevient positive : le creux est en $x = ${b2}$, et la valeur inscrite en dessous est $${basLocal}$.`,
+            `Le minimum local VAUT $${basLocal}$ ; il est ATTEINT en $x = ${b2}$. ⛔ Confondre les deux — donner l'abscisse quand on demande la valeur — est l'erreur la plus coûteuse du chapitre, car elle passe pour une étourderie alors qu'elle change la réponse.`
+          ),
+        };
+      }
+      const correct = `$[${b1} ; ${b2}]$`;
+      return {
+        text: "Voici le tableau de variations de $f$. Sur quel intervalle $f$ est-elle décroissante ?",
+        format: "qcm",
+        canvas: figure,
+        choices: quatreChoixVar(correct, [`$[${b0} ; ${b1}]$`, `$[${b2} ; ${b3}]$`, `$[${b0} ; ${b3}]$`]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "La ligne du haut donne le signe de $f ′$ ; la ligne du bas traduit ce signe en flèches.",
+          "La fonction décroît exactement là où sa dérivée est négative : on cherche donc le morceau marqué d'un moins.",
+          `Le signe $-$ occupe l'intervalle $]${b1} ; ${b2}[$, et c'est bien là que la flèche descend, de $${hautLocal}$ à $${basLocal}$.`,
+          `$f$ est donc décroissante sur $[${b1} ; ${b2}]$. Sur les deux autres morceaux, $f ′$ est positive et la fonction monte.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_var_lc_tpl_courbe_derivee",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_lecture_courbe",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "On ne te demande pas si la courbe monte ou descend, mais si elle est AU-DESSUS ou EN DESSOUS de l'axe.",
+    tags: ["premiere", "maths", "variations", "lecture", "derivee", "canvas", "template"],
+    generate: () => {
+      const a = pickOne([1, -1] as const);
+      const r = randomInt(-4, 1);
+      const s = r + randomInt(2, Math.min(5, 5 - r));
+      // ⛔ La virgule, pas le point : « 1.5 » est de l'anglais, et l'élève lit
+      // ce nombre dans une proposition de QCM (vu au rendu le 17/09).
+      const milieu = String((r + s) / 2).replace(".", ",");
+      // a > 0 : f ′ est NÉGATIVE entre ses racines, donc f y décroît.
+      const mot = a === 1 ? "décroissante" : "croissante";
+      const correct = `$[${r} ; ${s}]$`;
+      return {
+        text: `La courbe ci-contre est celle de la DÉRIVÉE $f ′$ d'une fonction $f$. Sur quel intervalle $f$ est-elle ${mot} ?`,
+        format: "qcm",
+        canvas: courbeDerivee(a, r, s),
+        choices: quatreChoixVar(correct, [
+          `$]-\\infty ; ${milieu}]$`,
+          `$]-\\infty ; ${r}]$`,
+          `$[${s} ; +\\infty[$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "⭐ Toute la difficulté du chapitre tient dans une confusion, et une seule : devant la courbe de $f ′$, on lit ses VARIATIONS à elle alors qu'on ne demande que son SIGNE.",
+          `Le signe de $f ′$, sur un dessin, c'est la position par rapport à l'axe des abscisses : au-dessus, $f ′$ est positive et $f$ croît ; en dessous, $f ′$ est négative et $f$ décroît.`,
+          `Ici la courbe coupe l'axe en $${r}$ et $${s}$, et elle est ${a === 1 ? "EN DESSOUS" : "AU-DESSUS"} entre ces deux valeurs.`,
+          `Donc $f$ est ${mot} sur $[${r} ; ${s}]$. ⛔ La réponse $]-\\infty ; ${milieu}]$ est le piège : $${milieu}$ est le sommet de la parabole, l'endroit où $f ′$ cesse de décroître. C'est une information sur $f ′$, pas sur $f$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_var_sg_tpl_tableau_signes",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "variations_fonctions",
+    microId: "var_signe_derivee",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Le tableau donne le signe de f ′. Traduis chaque signe en flèche.",
+    tags: ["premiere", "maths", "variations", "signe", "tableau", "canvas", "template"],
+    generate: () => {
+      const { r, s } = deuxRacines();
+      const positifDehors = randomInt(0, 1) === 1;
+      const signes: ("+" | "-")[] = positifDehors ? ["+", "-", "+"] : ["-", "+", "-"];
+      const correct = positifDehors
+        ? `croissante, puis décroissante, puis croissante`
+        : `décroissante, puis croissante, puis décroissante`;
+      return {
+        text: "Voici le tableau de signes de $f ′$. Que fait $f$, de gauche à droite ?",
+        format: "qcm",
+        // ⛔ Vu au RENDU le 17/09 : un canvas écrit du TEXTE BRUT. Les bornes
+        // passées en LaTeX s'affichaient « -\infty » en clair dans le tableau.
+        canvas: tableauSigneDerivee(["−∞", nb(r), nb(s), "+∞"], signes),
+        choices: quatreChoixVar(correct, [
+          positifDehors
+            ? "décroissante, puis croissante, puis décroissante"
+            : "croissante, puis décroissante, puis croissante",
+          "croissante sur $\\mathbb{R}$",
+          "elle change de signe en $" + r + "$ et en $" + s + "$",
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le tableau de signes de $f ′$ est l'étape qui précède le tableau de variations : c'est lui qu'on traduit en flèches.",
+          "Chaque $+$ devient une flèche qui monte, chaque $-$ une flèche qui descend. Rien d'autre à faire.",
+          `Ici les signes se succèdent en $${signes.join(" , ")}$ sur les trois intervalles découpés par $${r}$ et $${s}$.`,
+          `Donc $f$ est ${correct}. ⛔ La dernière réponse proposée parle du signe de $f$ elle-même : le tableau ne dit rien de $f$, il ne parle que de sa dérivée. Une fonction peut être négative et croissante.`
         ),
       };
     },
