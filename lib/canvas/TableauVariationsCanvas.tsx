@@ -14,12 +14,18 @@ type Props = { figure: CanvasFigure };
  * des defauts, celui qui se voit seulement en classe.
  */
 function nombre(t: string): number {
-  return Number(
-    t
-      .replace(/−/g, "-")
-      .replace(/ |\s/g, "")
-      .replace(",", "."),
-  );
+  const net = t
+    .replace(/−/g, "-")
+    .replace(/ |\s/g, "")
+    .replace(",", ".");
+  // ⛔ L'INFINI EST UNE VALEUR DE TABLEAU (corrige le 17/09/2026). Un tableau de
+  // variations sur R porte −∞ et +∞ au bout de ses fleches : c'est la notation
+  // de tous les manuels. Number() les rend NaN, et NaN ne compare jamais vrai —
+  // toutes les fleches d'un tel tableau partaient donc VERS LE BAS, y compris sur
+  // une branche qui monte, sans la moindre erreur visible.
+  if (/^\+?∞$/.test(net)) return Number.POSITIVE_INFINITY;
+  if (/^-∞$/.test(net)) return Number.NEGATIVE_INFINITY;
+  return Number(net);
 }
 
 /**
@@ -98,7 +104,7 @@ export default function TableauVariationsCanvas({ figure }: Props) {
 
         {/* L'en-tête */}
         <text x={colGauche / 2} y={23} textAnchor="middle" fontSize={15} fontWeight={800} fontStyle="italic" fill={TRAIT}>
-          x
+          {figure.variable ?? "x"}
         </text>
         {/* ⛔ LES BORNES EXTREMES NE SE CENTRENT PAS SUR LE BORD. Vu au rendu :
             « −∞ » centré sur la barre verticale la chevauchait, et « +∞ » sortait

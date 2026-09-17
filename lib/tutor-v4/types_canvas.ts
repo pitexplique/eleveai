@@ -1916,6 +1916,13 @@ export type TableauSignesCanvasData = {
   titre?: string;
   /** Les bornes de gauche a droite, ex. ["-∞", "4", "6", "+∞"]. */
   bornes: string[];
+  /**
+   * La variable de la premiere ligne, « x » par defaut. ⛔ Ajoutee le 17/09/2026 :
+   * un tableau qui annonce « x » au-dessus d'une ligne « T(t) » melange deux
+   * noms pour la meme grandeur — vu au rendu sur le refroidissement d'un cari,
+   * ou le temps s'appelle t partout ailleurs dans l'enonce.
+   */
+  variable?: string;
   lignes: TableauSignesLigne[];
   size?: { width?: number; height?: number };
 };
@@ -1933,6 +1940,8 @@ export type TableauVariationsCanvasData = {
   titre?: string;
   /** Les bornes de gauche a droite, ex. ["-5", "-2", "1", "5"]. */
   bornes: string[];
+  /** La variable de la premiere ligne, « x » par defaut (voir tableau_signes). */
+  variable?: string;
   /** La ligne du signe de la derivee, facultative. */
   derivee?: TableauSignesLigne;
   /**

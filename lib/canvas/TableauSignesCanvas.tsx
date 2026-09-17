@@ -79,7 +79,7 @@ export default function TableauSignesCanvas({ figure }: Props) {
       >
         {/* En-tête : x, puis les bornes, chacune dans sa colonne */}
         <div className="border-b border-r border-slate-900 px-1.5 py-1.5 text-center text-[15px] font-extrabold italic text-slate-900">
-          x
+          {figure.variable ?? "x"}
         </div>
         {bornes.map((b, i) => (
           <div key={`b-${i}`} className="contents">
