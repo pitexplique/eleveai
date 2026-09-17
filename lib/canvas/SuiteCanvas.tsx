@@ -117,6 +117,14 @@ export default function SuiteCanvas({ figure }: Props) {
   const showArrows = figure.display?.showArrows ?? true;
   const showRule = figure.display?.showRule ?? false;
   const showLabels = figure.display?.showLabels ?? true;
+  /**
+   * ⛔ LE RANG DU PREMIER TERME (ajouté le 17/09/2026). La frise étiquetait
+   * toujours « terme 1 » la première case. En première spé, une suite commence
+   * presque toujours à u(0) : le dessin appelait donc « terme 3 » ce que le
+   * corrigé nommait u(2), dans le même exercice. Par défaut 1, pour ne rien
+   * changer aux banques écrites avant.
+   */
+  const premierRang = figure.premierRang ?? 1;
 
   return (
     <div className="mx-auto w-full max-w-[460px] rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
@@ -164,7 +172,7 @@ export default function SuiteCanvas({ figure }: Props) {
 
                   {showLabels ? (
                     <div className="mt-1 text-center text-[10px] font-semibold text-slate-500">
-                      terme {index + 1}
+                      terme {index + premierRang}
                     </div>
                   ) : null}
                 </div>

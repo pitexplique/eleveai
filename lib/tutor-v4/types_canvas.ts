@@ -814,6 +814,12 @@ export type SuiteCanvasData = {
   kind: "suite";
   theme?: SuiteCanvasTheme;
   titre?: string;
+  /**
+   * Le rang du PREMIER terme affiche, « 1 » par defaut. A mettre a 0 quand la
+   * suite commence a u(0), ce qui est le cas courant au lycee : sinon la frise
+   * appelle « terme 3 » ce que le corrige nomme u(2) (ajoute le 17/09/2026).
+   */
+  premierRang?: number;
   terms: Array<number | string>;
   missingIndex?: number;
   arrows?: string[];
