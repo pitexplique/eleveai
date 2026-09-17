@@ -25,6 +25,11 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     // Le cours est en deux parties, la feuille couvre les deux.
     aussiPour: ["exponentielle-etude"],
   },
+  "maths/premiere-spe/suites": {
+    titre: "Les suites numériques : 20 exercices corrigés",
+    resume:
+      "Du calcul d'un terme au problème de contrôle : montrer qu'une suite est arithmétique ou géométrique, sens de variation, sommes, taux d'évolution, seuil, et la suite auxiliaire qui ramène tout à une géométrique.",
+  },
   "maths/premiere-spe/variations-fonctions": {
     titre: "Les variations d'une fonction : 20 exercices corrigés",
     resume:

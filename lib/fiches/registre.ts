@@ -598,6 +598,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Le second degré",
     resume: "Le discriminant ne calcule rien, il decide : deux racines, une seule, ou aucune — et donc si la forme factorisee existe.",
   },
+  "maths/premiere-spe/suites": {
+    titre: "Les suites numériques",
+    resume:
+      "On ajoute toujours le même nombre, ou on multiplie toujours par le même : arithmétique ou géométrique, terme général, et la suite auxiliaire quand ce n'est ni l'une ni l'autre.",
+  },
   "maths/premiere-spe/variations-fonctions": {
     titre: "Variations et courbes",
     resume:
