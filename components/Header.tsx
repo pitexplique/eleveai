@@ -681,24 +681,42 @@ export default function Header() {
                   seraient retrouvés sur le même écran en fin de page. */}
           </Link>
 
-          <span className="flex shrink-0 items-end" title="Frédéric, ton prof">
+          {/* ⭐ « METS UN PLUS ENTRE LES DEUX — C'EST UNE COLLABORATION » (Frédéric,
+              20/09/2026, en voyant la première version en ligne). Ti Margo
+              chevauchait la photo, comme un ornement posé sur elle ; le « + » en
+              fait deux auteurs côte à côte. Il est `aria-hidden` : un lecteur
+              d'écran entend les deux noms à la suite, et c'est la même chose.
+              Ti Margo gagne donc un `alt` — dans une signature à deux, il n'est
+              plus une image d'accompagnement.
+              ⚠️ Le « + » coûte ~22 px. À 360 px il restait 25 px de marge avant
+              « Inscription » : la paire descend d'un cran sous `lg` (photo 28 px,
+              Ti Margo 32 px de haut) pour garder de l'air. */}
+          <span className="flex shrink-0 items-center" title="Frédéric + Ti Margo">
             <Image
               src="/images/avatar-frederic-visage.webp"
               alt="Frédéric Lacoste, ton prof"
               width={240}
               height={240}
               sizes="40px"
-              className={`h-8 w-8 rounded-full object-cover ring-2 lg:h-10 lg:w-10 ${
+              className={`h-7 w-7 rounded-full object-cover ring-2 lg:h-10 lg:w-10 ${
                 paper ? "ring-white" : "ring-white/70"
               }`}
             />
+            <span
+              aria-hidden="true"
+              className={`mx-0.5 text-sm font-black leading-none lg:mx-1 lg:text-lg ${
+                paper ? "text-[#1d1c16]/80" : "text-white/85"
+              }`}
+            >
+              +
+            </span>
             <Image
               src="/cahier-vacances/ti-margo.png"
-              alt=""
+              alt="Ti Margo"
               width={1122}
               height={1402}
               sizes="36px"
-              className="-ml-1.5 h-9 w-auto shrink-0 lg:h-11"
+              className="h-8 w-auto shrink-0 lg:h-11"
             />
           </span>
 
