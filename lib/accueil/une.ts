@@ -72,7 +72,106 @@ export type Une = {
   diapos: DiapoUne[];
 };
 
+// Les deux diapositives que la semaine du 21 septembre garde d'une Une à l'autre.
+const COLLEGE_FRACTIONS: DiapoUne = {
+  cycle: "college",
+  onglet: "Collège",
+  accroche: "Les maths, ça sert à rien… sauf à ne pas croire que 1/2 + 1/3 = 2/5.",
+  notion: "Calculer avec des fractions · 5e",
+  short: {
+    id: "BsT5A1Brwxg",
+    titre: "1/2 + 1/3 ne fait pas 2/5 — voici pourquoi",
+    vignette: "/une/short-fractions-additionner.webp",
+  },
+  liens: [
+    {
+      genre: "feuille",
+      label: "La feuille : 20 exercices",
+      court: "20 exercices",
+      href: "/fiches-exercices/maths/5e/fraction-calcul?from=une",
+    },
+    {
+      genre: "fiche",
+      label: "La fiche de cours",
+      court: "La fiche",
+      href: "/fiches-cours/maths/5e/fraction-calcul?from=une",
+    },
+    {
+      genre: "series",
+      label: "Les séries du coach",
+      court: "Le coach",
+      href: "/coach-ia/maths?classe=5e&notion=fraction&from=une",
+    },
+  ],
+};
+
+const PRIMAIRE_LETTRE_A: DiapoUne = {
+  cycle: "primaire",
+  onglet: "Primaire",
+  accroche: "La belle écriture : le a, tracé devant toi, puis à repasser crayon en main.",
+  notion: "Écrire le a en cursive · CP",
+  short: {
+    id: "I8stjojvTmg",
+    titre: "La lettre a en cursive · droitier",
+    vignette: "/une/short-lettre-a-droitier.webp",
+  },
+  liens: [
+    {
+      genre: "feuille",
+      label: "La fiche d'écriture à imprimer",
+      court: "La fiche d'écriture",
+      href: "/fiches-ecriture/lettres/a?from=une",
+    },
+  ],
+};
+
 export const UNES: Une[] = [
+  // ⭐ LE LYCÉE CHANGE EN COURS DE SEMAINE (20/09/2026 au soir). Frédéric : « à la
+  // Une de eleveai on met une vidéo associée à un coach IA et feuille d'exercices,
+  // comme avec les baleines » — le short « Sarah Knafo a-t-elle raison ? » suit
+  // l'actualité, il n'attend pas lundi prochain. Collège et primaire ne bougent
+  // pas ; la baleine passe dans l'entrée suivante, l'archive.
+  // ⛔ PAS D'ÉTIQUETTE DE CLASSE UNIQUE : l'information chiffrée est au programme
+  // de seconde ET du tronc commun de première.
+  {
+    semaine: "Semaine du 21 septembre",
+    diapos: [
+      {
+        cycle: "lycee",
+        onglet: "Lycée",
+        accroche:
+          "Les maths, ça sert à rien… sauf à vérifier ce que disent les politiques.",
+        notion: "Pourcentages et évolutions · 2de et 1re",
+        short: {
+          id: "LaEHPPdKZHc",
+          titre: "Sarah Knafo a-t-elle raison ? Oui… et non",
+          vignette: "/une/short-fiche-de-paie.webp",
+        },
+        liens: [
+          {
+            genre: "feuille",
+            label: "La feuille : 20 exercices",
+            court: "20 exercices",
+            href: "/fiches-exercices/maths/seconde/information-chiffree-evolutions?from=une",
+          },
+          {
+            genre: "fiche",
+            label: "La fiche et sa vidéo",
+            court: "La fiche",
+            href: "/fiches-cours/maths/seconde/information-chiffree-evolutions?from=une",
+          },
+          {
+            genre: "series",
+            label: "Les séries du coach",
+            court: "Le coach",
+            href: "/coach-ia/maths?classe=seconde&notion=information&from=une",
+          },
+        ],
+      },
+      COLLEGE_FRACTIONS,
+      PRIMAIRE_LETTRE_A,
+    ],
+  },
   {
     semaine: "Semaine du 21 septembre",
     diapos: [
@@ -108,60 +207,10 @@ export const UNES: Une[] = [
           },
         ],
       },
-      {
-        cycle: "college",
-        onglet: "Collège",
-        accroche:
-          "Les maths, ça sert à rien… sauf à ne pas croire que 1/2 + 1/3 = 2/5.",
-        notion: "Calculer avec des fractions · 5e",
-        short: {
-          id: "BsT5A1Brwxg",
-          titre: "1/2 + 1/3 ne fait pas 2/5 — voici pourquoi",
-          vignette: "/une/short-fractions-additionner.webp",
-        },
-        // La feuille est arrivée le soir même (Frédéric, 20/09 : « pour le
-        // collège on fait la fiche fractions ») : le trio est complet.
-        liens: [
-          {
-            genre: "feuille",
-            label: "La feuille : 20 exercices",
-            court: "20 exercices",
-            href: "/fiches-exercices/maths/5e/fraction-calcul?from=une",
-          },
-          {
-            genre: "fiche",
-            label: "La fiche de cours",
-            court: "La fiche",
-            href: "/fiches-cours/maths/5e/fraction-calcul?from=une",
-          },
-          {
-            genre: "series",
-            label: "Les séries du coach",
-            court: "Le coach",
-            href: "/coach-ia/maths?classe=5e&notion=fraction&from=une",
-          },
-        ],
-      },
-      {
-        cycle: "primaire",
-        onglet: "Primaire",
-        accroche:
-          "La belle écriture : le a, tracé devant toi, puis à repasser crayon en main.",
-        notion: "Écrire le a en cursive · CP",
-        short: {
-          id: "I8stjojvTmg",
-          titre: "La lettre a en cursive · droitier",
-          vignette: "/une/short-lettre-a-droitier.webp",
-        },
-        liens: [
-          {
-            genre: "feuille",
-            label: "La fiche d'écriture à imprimer",
-            court: "La fiche d'écriture",
-            href: "/fiches-ecriture/lettres/a?from=une",
-          },
-        ],
-      },
+      // La feuille du collège est arrivée le soir même (Frédéric, 20/09 : « pour
+      // le collège on fait la fiche fractions ») : le trio est complet.
+      COLLEGE_FRACTIONS,
+      PRIMAIRE_LETTRE_A,
     ],
   },
 ];

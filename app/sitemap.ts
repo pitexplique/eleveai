@@ -937,7 +937,25 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-09-20",
     },
   ],
+  // ⭐ UN SHORT, ET POURTANT ICI (20/09/2026). « Sarah Knafo a-t-elle raison ? »
+  // est la SEULE vidéo de sa fiche : sa page durable est la fiche, pas l'accueil,
+  // qui ne le porte que la semaine où il fait la Une. `VIDEOS_UNE` l'écarte donc
+  // de `/accueil` (voir `IDS_DES_FICHES`) — une vidéo = UNE page déclarée.
+  "/fiches-cours/maths/seconde/information-chiffree-evolutions": [
+    {
+      id: "LaEHPPdKZHc",
+      title: "Sarah Knafo a-t-elle raison ? Oui… et non : sa fiche de paie vérifiée",
+      description:
+        "Un salarié coûte 3 922 € et touche 2 079 € : 47 % du coût, et l'OCDE mesure 47,2 % — le chiffre est juste. Mais les mêmes euros font 89 % du net, la France est 3e sur 38 pays, et la part baisse depuis vingt ans (50,5 % en 2005). Un pourcentage ne dit rien sans son total : pour cent de quoi ?",
+      ajoutee: "2026-09-20",
+    },
+  ],
 };
+
+// Une vidéo déjà déclarée sur sa fiche ne l'est pas une seconde fois à l'accueil.
+const IDS_DES_FICHES = new Set(
+  Object.values(VIDEOS_FICHES).flatMap((videos) => videos.map((v) => v.id)),
+);
 
 // ⭐ LA UNE DÉCLARE SES SHORTS (Frédéric, 20/09/2026 : « tu dois déclarer aussi à
 // la Une »). La bande de l'accueil montre jusqu'à trois shorts par semaine ; ils
@@ -947,11 +965,13 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
 // second lundi. Le titre est celui du short, la description son accroche — la
 // phrase que la page affiche vraiment. `/accueil` porte déjà `new Date()` comme
 // date, il n'y a donc pas d'`ajoutee` à poser.
-const VIDEOS_UNE: VideoSitemap[] = (UNE_COURANTE?.diapos ?? []).map((d) => ({
-  id: d.short.id,
-  title: d.short.titre,
-  description: d.accroche,
-}));
+const VIDEOS_UNE: VideoSitemap[] = (UNE_COURANTE?.diapos ?? [])
+  .filter((d) => !IDS_DES_FICHES.has(d.short.id))
+  .map((d) => ({
+    id: d.short.id,
+    title: d.short.titre,
+    description: d.accroche,
+  }));
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Routes statiques
