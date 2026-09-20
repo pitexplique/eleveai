@@ -31,6 +31,27 @@ function exp(definition: string, methode: string, calcul: string, conclusion: st
   );
 }
 
+// Arrondi au millieme : un flottant (0,2 * 100 = 20,000000000000004) ne doit
+// jamais arriver tel quel dans une reponse attendue ni dans une formule.
+function arrondi(n: number) {
+  return Math.round(n * 1000) / 1000;
+}
+
+// Reponse attendue, a la francaise : 37,5
+function fr(n: number) {
+  return String(arrondi(n)).replace(".", ",");
+}
+
+// Le meme nombre dans une formule : 37{,}5
+function tex(n: number) {
+  return String(arrondi(n)).replace(".", "{,}");
+}
+
+// Un montant dans une formule : 3\,922\,€
+function euros(n: number) {
+  return `${String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "\\,")}\\,€`;
+}
+
 function camembert(data: { label: string; value: number; color?: string }[]): CanvasFigure {
   return {
     kind: "stat_graph",
@@ -1342,5 +1363,320 @@ export const informationChiffreeBank: TutorBankItemV4[] = [
       "Non : on obtient $0{,}96$, soit $-4\\,\\%$."
     ),
     tags: ["seconde", "maths", "info_chiffree", "evolution_reciproque", "raisonnement", "qcm"],
+  },
+
+  /* ===================== LA FICHE DE PAIE (20/09/2026) =====================
+   * Les enonces du short « fiche de paie » : une meme somme rapportee a deux
+   * references, les points de pourcentage, le chemin retour du net au cout.
+   * Montants ronds, volontairement : les vrais (3 922 -> 2 079, OCDE 50,5 -> 47,2)
+   * sont dans la fiche de cours et la feuille d'exercices.
+   */
+
+  {
+    kind: "template",
+    id: "seconde_info_prop_tpl_paie",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "information_chiffree_evolutions",
+    microId: "info_proportion",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "La même somme, deux totaux possibles : regarde à quoi la question la rapporte.",
+    tags: ["seconde", "maths", "info_chiffree", "proportion", "fiche_de_paie", "template"],
+    generate: () => {
+      // part dans le cout -> part rapportee au net : 20 -> 25, 37,5 -> 60, 50 -> 100, 60 -> 150
+      const cas = [
+        { cout: 2500, net: 2000 },
+        { cout: 3000, net: 2400 },
+        { cout: 4000, net: 3200 },
+        { cout: 3200, net: 2000 },
+        { cout: 2400, net: 1500 },
+        { cout: 4000, net: 2500 },
+        { cout: 3000, net: 1500 },
+        { cout: 4000, net: 2000 },
+        { cout: 5000, net: 2000 },
+      ];
+      const c = cas[randomInt(0, cas.length - 1)];
+      const prelev = c.cout - c.net;
+      const surCout = randomInt(0, 1) === 0;
+      const total = surCout ? c.cout : c.net;
+      const pct = (prelev * 100) / total;
+      const reference = surCout ? "du coût total" : "du salaire net";
+      const autre = surCout ? "au net" : "au coût";
+      return {
+        text: `Un salarié coûte $${euros(c.cout)}$ par mois à son employeur et touche $${euros(c.net)}$ net : les prélèvements font $${euros(prelev)}$. Quel pourcentage ${reference} représentent-ils ?`,
+        format: "short",
+        expected: [fr(pct), String(pct)],
+        comparator: "number_equal",
+        canvas: tableauAvantApres("Le bulletin", ["Coût employeur", "Net touché"], "Montant (€)", c.cout, c.net),
+        explanation: exp(
+          "Une proportion n'a de sens qu'avec son total : ici, on rapporte les prélèvements " +
+            (surCout ? "au coût total." : "au salaire net."),
+          `$\\dfrac{${prelev}}{${total}} \\times 100$.`,
+          `$= ${tex(pct)}$.`,
+          `Les prélèvements font $${tex(pct)}\\,\\%$ ${reference}. Rapportés ${autre}, les mêmes $${euros(prelev)}$ donneraient un autre pourcentage.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_info_prop_fixed_paie_qcm",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "information_chiffree_evolutions",
+    microId: "info_proportion",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Sur un bulletin, le coût pour l'employeur est $3\\,922\\,€$ et le net touché $2\\,079\\,€$. Un titre dit « $47\\,\\%$ de prélèvements », un autre « $89\\,\\%$ ». Qui a raison ?",
+    format: "qcm",
+    choices: [
+      "Les deux : $47\\,\\%$ du coût, $89\\,\\%$ du net",
+      "Seulement le premier",
+      "Seulement le second",
+      "Aucun : il faut faire la moyenne des deux",
+    ],
+    expected: ["Les deux : $47\\,\\%$ du coût, $89\\,\\%$ du net"],
+    comparator: "mcq_exact",
+    hint: "Calcule $1\\,843 \\div 3\\,922$, puis $1\\,843 \\div 2\\,079$.",
+    explanation: exp(
+      "Un pourcentage se lit toujours avec son ensemble de référence.",
+      "Les prélèvements font $3\\,922 - 2\\,079 = 1\\,843\\,€$ ; on les rapporte au coût, puis au net.",
+      "$\\dfrac{1\\,843}{3\\,922} \\approx 0{,}47$ et $\\dfrac{1\\,843}{2\\,079} \\approx 0{,}89$.",
+      "Les deux titres sont justes : ils ne parlent pas du même total."
+    ),
+    tags: ["seconde", "maths", "info_chiffree", "proportion", "fiche_de_paie", "raisonnement", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "seconde_info_pdp_tpl_paie",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "information_chiffree_evolutions",
+    microId: "info_pourcentage_de_pourcentage",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Un pourcentage d'un pourcentage : on multiplie les deux proportions.",
+    tags: ["seconde", "maths", "info_chiffree", "pourcentage_de_pourcentage", "fiche_de_paie", "template"],
+    generate: () => {
+      const cas = [
+        { taux: 10, base: 90, res: 9 },
+        { taux: 20, base: 50, res: 10 },
+        { taux: 8, base: 75, res: 6 },
+        { taux: 5, base: 80, res: 4 },
+        { taux: 12, base: 50, res: 6 },
+        { taux: 15, base: 60, res: 9 },
+        { taux: 25, base: 80, res: 20 },
+      ];
+      const c = cas[randomInt(0, cas.length - 1)];
+      return {
+        text: `Sur un bulletin, une contribution vaut $${c.taux}\\,\\%$ d'une base, et cette base représente $${c.base}\\,\\%$ du salaire brut. Quel pourcentage du salaire brut la contribution représente-t-elle ?`,
+        format: "short",
+        expected: [String(c.res)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Prendre un pourcentage d'un pourcentage, c'est multiplier les proportions.",
+          `$\\dfrac{${c.taux}}{100} \\times \\dfrac{${c.base}}{100}$.`,
+          `$= ${tex(c.taux / 100)} \\times ${tex(c.base / 100)} = ${tex(c.res / 100)}$.`,
+          `La contribution fait $${c.res}\\,\\%$ du brut. C'est ainsi que se calcule la CSG : $9{,}2\\,\\%$ de $98{,}25\\,\\%$ du brut.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_info_var_tpl_points",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "information_chiffree_evolutions",
+    microId: "info_variation_absolue_relative",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Entre deux pourcentages, la différence se compte en points ; la variation relative se rapporte au taux de départ.",
+    tags: ["seconde", "maths", "info_chiffree", "variation", "points", "fiche_de_paie", "template"],
+    generate: () => {
+      const cas = [
+        { avant: 50, apres: 45 },
+        { avant: 50, apres: 40 },
+        { avant: 40, apres: 30 },
+        { avant: 25, apres: 20 },
+        { avant: 20, apres: 25 },
+        { avant: 10, apres: 12 },
+        { avant: 40, apres: 50 },
+        { avant: 60, apres: 45 },
+      ];
+      const c = cas[randomInt(0, cas.length - 1)];
+      const points = Math.abs(c.apres - c.avant);
+      const relatif = (points * 100) / c.avant;
+      const sens = c.apres > c.avant ? "hausse" : "baisse";
+      const enPoints = randomInt(0, 1) === 0;
+      return {
+        text: enPoints
+          ? `La part des prélèvements dans le coût du travail passe de $${c.avant}\\,\\%$ à $${c.apres}\\,\\%$. De combien de points est cette ${sens} ?`
+          : `La part des prélèvements dans le coût du travail passe de $${c.avant}\\,\\%$ à $${c.apres}\\,\\%$. Quelle est cette ${sens} en pourcentage du taux de départ ?`,
+        format: "short",
+        expected: enPoints ? [String(points)] : [fr(relatif), String(relatif)],
+        comparator: "number_equal",
+        canvas: tableauAvantApres("Part des prélèvements", ["Avant", "Après"], "Taux (%)", c.avant, c.apres),
+        explanation: exp(
+          "Entre deux pourcentages, la variation absolue se dit en points ; la variation relative se rapporte à la valeur de départ.",
+          enPoints ? `$${c.apres} - ${c.avant}$.` : `$\\dfrac{${c.apres} - ${c.avant}}{${c.avant}} \\times 100$.`,
+          enPoints
+            ? `L'écart est de $${points}$ points.`
+            : `$\\dfrac{${c.apres - c.avant}}{${c.avant}} \\times 100 = ${tex(((c.apres - c.avant) / c.avant) * 100)}$.`,
+          `C'est une ${sens} de $${points}$ points, soit $${tex(relatif)}\\,\\%$ en relatif : deux nombres différents pour le même fait.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "fixed",
+    id: "seconde_info_var_fixed_points_qcm",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "information_chiffree_evolutions",
+    microId: "info_variation_absolue_relative",
+    difficulty: 4,
+    theme: "neutral",
+    text: "En France, la part des prélèvements dans le coût d'un salaire moyen est passée de $50{,}5\\,\\%$ (2005) à $47{,}2\\,\\%$ (2025), selon l'OCDE. Quelle phrase est juste ?",
+    format: "qcm",
+    choices: [
+      "Elle a baissé de $3{,}3$ points",
+      "Elle a baissé de $3{,}3\\,\\%$",
+      "Elle a augmenté de $3{,}3$ points",
+      "Elle a baissé de $47{,}2\\,\\%$",
+    ],
+    expected: ["Elle a baissé de $3{,}3$ points"],
+    comparator: "mcq_exact",
+    canvas: tableauAvantApres("Part des prélèvements (OCDE)", ["2005", "2025"], "Taux (%)", "50,5", "47,2"),
+    hint: "$50{,}5 - 47{,}2$ : dans quelle unité s'exprime cet écart ?",
+    explanation: exp(
+      "La différence entre deux pourcentages se compte en points de pourcentage.",
+      "$47{,}2 - 50{,}5 = -3{,}3$.",
+      "En relatif : $\\dfrac{-3{,}3}{50{,}5} \\times 100 \\approx -6{,}5$.",
+      "Une baisse de $3{,}3$ points, soit environ $6{,}5\\,\\%$ en relatif. Dire « $3{,}3\\,\\%$ » mélange les deux."
+    ),
+    tags: ["seconde", "maths", "info_chiffree", "variation", "points", "fiche_de_paie", "raisonnement", "qcm"],
+  },
+
+  {
+    kind: "template",
+    id: "seconde_info_taux_tpl_salaire",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "information_chiffree_evolutions",
+    microId: "info_taux_evolution",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Taux $= \\dfrac{V_A - V_D}{V_D} \\times 100$.",
+    tags: ["seconde", "maths", "info_chiffree", "taux_evolution", "fiche_de_paie", "template"],
+    generate: () => {
+      const cas = [
+        { vd: 2000, va: 2500 },
+        { vd: 1500, va: 1800 },
+        { vd: 2000, va: 3000 },
+        { vd: 1600, va: 2000 },
+        { vd: 2500, va: 3000 },
+        { vd: 1250, va: 1500 },
+        { vd: 2400, va: 3000 },
+        { vd: 3000, va: 4500 },
+        { vd: 2000, va: 2200 },
+      ];
+      const c = cas[randomInt(0, cas.length - 1)];
+      const taux = ((c.va - c.vd) * 100) / c.vd;
+      return {
+        text: `En vingt ans, un salaire brut mensuel est passé de $${euros(c.vd)}$ à $${euros(c.va)}$. Quel est son taux d'évolution, en pourcentage ?`,
+        format: "short",
+        expected: [fr(taux), String(taux)],
+        comparator: "number_equal",
+        canvas: tableauAvantApres("Salaire brut mensuel", ["Il y a 20 ans", "Aujourd'hui"], "Montant (€)", c.vd, c.va),
+        explanation: exp(
+          "Le taux d'évolution rapporte la variation à la valeur de départ.",
+          `$\\dfrac{${c.va} - ${c.vd}}{${c.vd}} \\times 100$.`,
+          `$= \\dfrac{${c.va - c.vd}}{${c.vd}} \\times 100 = ${tex(taux)}$.`,
+          `Le salaire a augmenté de $${tex(taux)}\\,\\%$ : il a été multiplié par $${tex(c.va / c.vd)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_info_succ_tpl_paie",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "information_chiffree_evolutions",
+    microId: "info_evolutions_successives",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "On multiplie les coefficients : les pourcentages ne s'additionnent pas.",
+    tags: ["seconde", "maths", "info_chiffree", "evolutions_successives", "fiche_de_paie", "template"],
+    generate: () => {
+      const cas = [
+        { a: 30, b: 20, global: 44 },
+        { a: 25, b: 20, global: 40 },
+        { a: 20, b: 20, global: 36 },
+        { a: 30, b: 10, global: 37 },
+        { a: 40, b: 25, global: 55 },
+        { a: 20, b: 25, global: 40 },
+        { a: 50, b: 20, global: 60 },
+        { a: 20, b: 10, global: 28 },
+      ];
+      const c = cas[randomInt(0, cas.length - 1)];
+      const ca = 1 - c.a / 100;
+      const cb = 1 - c.b / 100;
+      return {
+        text: `Du coût employeur au salaire brut, on retire $${c.a}\\,\\%$. Du brut au net, on retire encore $${c.b}\\,\\%$. Quel pourcentage a-t-on retiré en tout, du coût employeur au net ?`,
+        format: "short",
+        expected: [String(c.global)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Deux évolutions successives se composent en multipliant leurs coefficients.",
+          `$${tex(ca)} \\times ${tex(cb)}$.`,
+          `$= ${tex(Math.round(ca * cb * 100) / 100)}$, soit $1 - ${tex(c.global / 100)}$.`,
+          `On a retiré $${c.global}\\,\\%$ en tout, et non $${c.a + c.b}\\,\\%$ : le second pourcentage porte sur une base déjà réduite.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "seconde_info_recip_tpl_paie",
+    niveau: "seconde",
+    matiere: "maths",
+    notionId: "information_chiffree_evolutions",
+    microId: "info_evolution_reciproque",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Coefficient réciproque $= \\dfrac{1}{CM}$ : le chemin retour ne porte pas le même pourcentage.",
+    tags: ["seconde", "maths", "info_chiffree", "evolution_reciproque", "fiche_de_paie", "template"],
+    generate: () => {
+      const cas = [
+        { baisse: 20, hausse: 25 },
+        { baisse: 50, hausse: 100 },
+        { baisse: 37.5, hausse: 60 },
+        { baisse: 60, hausse: 150 },
+        { baisse: 75, hausse: 300 },
+      ];
+      const c = cas[randomInt(0, cas.length - 1)];
+      const cm = 1 - c.baisse / 100;
+      return {
+        text: `Du coût employeur au salaire net, un bulletin retire $${tex(c.baisse)}\\,\\%$. Pour remonter du net au coût employeur, de quel pourcentage faut-il augmenter le net ?`,
+        format: "short",
+        expected: [String(c.hausse)],
+        comparator: "number_equal",
+        explanation: exp(
+          "L'évolution réciproque a pour coefficient l'inverse du coefficient de départ.",
+          `La baisse de $${tex(c.baisse)}\\,\\%$ a pour coefficient $${tex(cm)}$ ; son inverse est $\\dfrac{1}{${tex(cm)}}$.`,
+          `$\\dfrac{1}{${tex(cm)}} = ${tex(1 / cm)}$.`,
+          `Il faut augmenter le net de $${c.hausse}\\,\\%$. Même bulletin, deux pourcentages : $-${tex(c.baisse)}\\,\\%$ à l'aller, $+${c.hausse}\\,\\%$ au retour.`
+        ),
+      };
+    },
   },
 ];

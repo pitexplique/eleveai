@@ -590,6 +590,10 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Le signe d'une expression",
     resume: "Dresser un tableau de signes : produit, quotient et valeur interdite ; resoudre equations et inequations.",
   },
+  "maths/seconde/information-chiffree-evolutions": {
+    titre: "Pourcentages et évolutions",
+    resume: "Proportion et total de référence, points de pourcentage, coefficient multiplicateur, évolutions successives et réciproques : le même bulletin de paie fait 47 % ou 89 %.",
+  },
   "maths/premiere-spe/derivation": {
     titre: "La dérivation",
     resume: "Taux de variation, nombre dérivé, dérivées usuelles et équation de la tangente.",
