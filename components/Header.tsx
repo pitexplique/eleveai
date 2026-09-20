@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { Menu, X, GraduationCap, LogOut, ChevronDown } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { useEleve } from "@/context/EleveContext";
 import { createClient } from "@/lib/supabase/client";
 import { ouvrirEcrireAuProf } from "@/lib/ecrireAuProf";
@@ -691,7 +692,30 @@ export default function Header() {
               ⚠️ Le « + » coûte ~22 px. À 360 px il restait 25 px de marge avant
               « Inscription » : la paire descend d'un cran sous `lg` (photo 28 px,
               Ti Margo 32 px de haut) pour garder de l'air. */}
-          <span className="flex shrink-0 items-center" title="Frédéric + Ti Margo">
+          {/* ⭐ LA PAIRE MÈNE À LA CHAÎNE (Frédéric, 20/09/2026 : « faut rajouter
+              https://www.youtube.com/@eleveai974 sur le header », « avec une icône
+              YouTube »). C'est TOUT le groupe qui est le lien — photo, « + », Ti
+              Margo, icône : la cible du doigt fait ~75 × 32 px au lieu de 18.
+              ⚠️ SUR TÉLÉPHONE L'ICÔNE EST UNE PASTILLE posée sur le coin de Ti
+              Margo (`absolute`), pas un élément de plus dans la rangée : à
+              360 px il ne reste que 13 px avant « Inscription », une icône de
+              24 px n'y tient pas. À partir de `sm` elle reprend sa place, en
+              ligne, à sa taille.
+              ⚠️ `aria-label` sur le lien : c'est lui que lit un lecteur d'écran,
+              à la place des deux `alt` — « la chaîne YouTube » est la
+              destination, et c'est elle qu'un lien doit annoncer.
+              `track("entete_youtube")` : le seul moyen de savoir si l'en-tête
+              envoie quelqu'un sur la chaîne — YouTube ne dit pas d'où l'on vient
+              quand on arrive sur une page de chaîne. */}
+          <a
+            href="https://www.youtube.com/@eleveai974"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track("entete_youtube")}
+            title="La chaîne YouTube — Frédéric + Ti Margo"
+            aria-label="La chaîne YouTube d'EleveAI, par Frédéric et Ti Margo"
+            className="relative flex shrink-0 items-center rounded-full transition hover:brightness-110 sm:gap-1.5"
+          >
             <Image
               src="/images/avatar-frederic-visage.webp"
               alt="Frédéric Lacoste, ton prof"
@@ -718,7 +742,17 @@ export default function Header() {
               sizes="36px"
               className="h-8 w-auto shrink-0 lg:h-11"
             />
-          </span>
+            {/* Le logo YouTube, dessiné ici : lucide a retiré ses icônes de marque,
+                et deux formes ne valent pas une dépendance. */}
+            <svg
+              viewBox="0 0 24 17"
+              aria-hidden="true"
+              className="absolute -bottom-1 -right-1.5 h-3 w-auto drop-shadow-sm sm:static sm:h-[1.15rem] lg:h-5"
+            >
+              <rect width="24" height="17" rx="4.5" fill="#FF0000" />
+              <path d="M9.6 4.6v7.8l6.9-3.9z" fill="#fff" />
+            </svg>
+          </a>
 
           {/* ── LA PORTE DE RETOUR ────────────────────────────────────────
               L'onglet « 🏠 Accueil » est parti le 06/08 avec le journal, puis
