@@ -612,7 +612,13 @@ export default function Header() {
                 priority
               />
             </div>
-            <div className="flex flex-col leading-tight">
+            {/* ⚠️ `hidden sm:flex` (20/09/2026) : sous 640 px le mot « EleveAI »
+                était déjà COUPÉ après son « E » par la pastille « Inscription »
+                — mesuré à 375 px avant d'y toucher. La place qu'il occupait sans
+                se laisser lire revient à la photo et à Ti Margo (voir plus bas).
+                Le nom du lien ne change pas : c'est l'`alt` du logo qui le porte,
+                ce `<span>` est `aria-hidden`. */}
+            <div className="hidden flex-col leading-tight sm:flex">
               <span aria-hidden="true" className={`text-[1.05rem] font-black tracking-tight ${paper ? "text-[#1d1c16]" : "text-white"}`}>
                 Eleve<span className={paper ? "text-cyan-800" : "text-cyan-200"}>AI</span>
               </span>
@@ -649,18 +655,52 @@ export default function Header() {
                 Même raison et même condition que le 🏠 juste en dessous : ce
                 que la page dit déjà, le haut de page ne le répète pas. Ti Margo
                 garde son rôle — suivre l'élève PARTOUT AILLEURS, là où l'accueil
-                ne l'accompagne plus. */}
-            {!paper && (
-              <Image
-                src="/cahier-vacances/ti-margo.png"
-                alt=""
-                width={1122}
-                height={1402}
-                sizes="36px"
-                className="hidden h-11 w-auto shrink-0 lg:block"
-              />
-            )}
+                ne l'accompagne plus.
+
+                ⭐⭐ 20/09/2026 — LE VISAGE DE FRÉDÉRIC REJOINT TI MARGO, ICI.
+                Frédéric : « sur les vidéos on met ma figure, pourrait-on faire
+                pareil sur le header… pour humaniser ? », « ma figure avec Ti
+                Margo sur le header ». C'est la photo de ses vignettes YouTube
+                (`AVATAR` dans manim/miniature.py) : le site et la chaîne
+                montrent le même visage à côté de la même mascotte.
+                ⛔ JE L'AVAIS D'ABORD MISE DANS LA UNE DE L'ACCUEIL, contre sa
+                demande, en prenant son « on envoie » pour un accord sur ma
+                contre-proposition. Il a corrigé : « je voulais ma photo sur le
+                header ainsi que Ti Margo, PAS à la Une ». Ne pas la redéplacer.
+                Ce que ça change dans ce bloc :
+                — la paire sort du `<Link>` : le nom accessible du lien reste
+                  « EleveAI », et la photo peut porter son propre `alt` ;
+                — À TOUTES LES LARGEURS (Ti Margo était `hidden lg:block`) : une
+                  figure qu'on ne voit pas sur téléphone n'humanise personne, et
+                  le mot « EleveAI », coupé sous 640 px, lui laisse sa place ;
+                — SUR L'ACCUEIL AUSSI (`!paper` levé). La raison du 20/08 —
+                  « il y a deux margouillats » — tenait au Ti Margo posé en
+                  grand au-dessus du titre ; il est descendu en bas de page le
+                  21/08, et il est débranché le 20/09 (AccueilIA.tsx,
+                  `TI_MARGO_EN_BAS`) : l'en-tête est `sticky`, les deux se
+                  seraient retrouvés sur le même écran en fin de page. */}
           </Link>
+
+          <span className="flex shrink-0 items-end" title="Frédéric, ton prof">
+            <Image
+              src="/images/avatar-frederic-visage.webp"
+              alt="Frédéric Lacoste, ton prof"
+              width={240}
+              height={240}
+              sizes="40px"
+              className={`h-8 w-8 rounded-full object-cover ring-2 lg:h-10 lg:w-10 ${
+                paper ? "ring-white" : "ring-white/70"
+              }`}
+            />
+            <Image
+              src="/cahier-vacances/ti-margo.png"
+              alt=""
+              width={1122}
+              height={1402}
+              sizes="36px"
+              className="-ml-1.5 h-9 w-auto shrink-0 lg:h-11"
+            />
+          </span>
 
           {/* ── LA PORTE DE RETOUR ────────────────────────────────────────
               L'onglet « 🏠 Accueil » est parti le 06/08 avec le journal, puis
@@ -750,7 +790,18 @@ export default function Header() {
         </div>
 
         {/* ── ZONE 3 : LE COMPTE, complètement à droite ─────────────────── */}
-        <div className="flex items-center gap-1.5 justify-self-end">
+        {/* ⛔ `col-start-3` (20/09/2026) — SANS LUI, « COMPLÈTEMENT À DROITE » ÉTAIT
+            FAUX SOUS 1024 px. La zone 2 est `hidden` sur téléphone : masquée, elle
+            n'est plus un élément de grille, et cette zone-ci devenait le DEUXIÈME
+            enfant — placée dans la colonne du milieu (`auto`), pas dans la
+            troisième. Mesuré à 360 px avant de corriger : colonnes 73 · 166 · 73,
+            le menu finissait à x = 263, il restait 97 px VIDES à sa droite, et la
+            marque n'avait que 73 px — d'où le mot « EleveAI » coupé après son
+            « E », que tout le monde voyait sans en connaître la cause. La photo
+            et Ti Margo y passaient sous « Inscription ». Avec `col-start-3` la
+            zone tient sa colonne à toutes les largeurs ; au-dessus de 1024 px la
+            zone 2 existe et rien ne change. */}
+        <div className="col-start-3 flex items-center gap-1.5 justify-self-end">
           {eleve ? (
             <>
               {/* « MON ESPACE » plutôt que le nom et la classe (07/08).

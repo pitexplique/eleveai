@@ -54,6 +54,11 @@ const PIED = [
   { label: "Conditions", href: "/cgu" },
 ];
 
+/** Ti Margo en bas de l'accueil : débranché depuis qu'il est dans l'en-tête de
+ *  toutes les pages, accueil comprise (20/09/2026). Voir la note au point de
+ *  montage, plus bas. */
+const TI_MARGO_EN_BAS = false;
+
 export default function AccueilIA() {
   return (
     <div className="flex min-h-screen bg-white text-slate-900">
@@ -244,17 +249,27 @@ export default function AccueilIA() {
               coût connu : la note du 21/08 disait qu'une mascotte POSÉE CONTRE
               UN NOM désigne quelqu'un, là où seule elle n'est qu'une
               illustration. On perd ça, et c'est le prix demandé. */}
-          <div className="mt-10 flex flex-col items-center gap-2 border-t border-slate-100 pt-6">
-            <Image
-              src="/cahier-vacances/ti-margo.png"
-              alt="Ti Margo, le margouillat d'EleveAI, avec son crayon"
-              width={1122}
-              height={1402}
-              sizes="40px"
-              loading="lazy"
-              className="h-10 w-auto"
-            />
-          </div>
+          {/* ⛔ DÉBRANCHÉ LE 20/09/2026, PAS SUPPRIMÉ (`TI_MARGO_EN_BAS`).
+              Frédéric a demandé sa photo et Ti Margo dans l'en-tête
+              (components/Header.tsx), à toutes les largeurs et sur l'accueil
+              aussi. L'en-tête est `sticky` : en fin de page il reste collé en
+              haut, et ce Ti Margo-ci se serait retrouvé sur le même écran que
+              le sien — « il y a deux margouillats », son mot du 20/08.
+              Pour le remettre : repasser la constante à `true`, ET le retirer
+              de l'en-tête sur l'accueil (`paper`). Pas l'un sans l'autre. */}
+          {TI_MARGO_EN_BAS && (
+            <div className="mt-10 flex flex-col items-center gap-2 border-t border-slate-100 pt-6">
+              <Image
+                src="/cahier-vacances/ti-margo.png"
+                alt="Ti Margo, le margouillat d'EleveAI, avec son crayon"
+                width={1122}
+                height={1402}
+                sizes="40px"
+                loading="lazy"
+                className="h-10 w-auto"
+              />
+            </div>
+          )}
 
           <footer className="pt-10">
             {/* ⚠️ `text-slate-600`, ET C'ÉTAIT `slate-400` (20/08/2026).
