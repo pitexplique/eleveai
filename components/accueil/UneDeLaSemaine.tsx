@@ -88,13 +88,51 @@ export default function UneDeLaSemaine({ une }: { une: Une }) {
       className="mb-5 rounded-2xl border border-emerald-200 bg-emerald-50/60"
     >
       <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-4 pt-3">
-        {/* À 375 px « Semaine du 21 septembre » et les trois onglets ne tiennent pas
-            sur une ligne : le libellé se replie, et la bande paie 24 px pour une
-            date. Le téléphone lit donc « Cette semaine ». */}
-        <p className="text-xs font-semibold text-emerald-800">
-          <span className="sm:hidden">Cette semaine</span>
-          <span className="hidden sm:inline">{une.semaine}</span>
-        </p>
+        {/* ⭐ LA BANDE EST SIGNÉE (Frédéric, 20/09/2026 : « sur les vidéos on met ma
+            figure, pourrait-on faire pareil… pour humaniser ? », puis « ma figure
+            avec Ti Margo »). La même photo et la même formule que ses vignettes
+            YouTube — « Frédéric, ton prof » (`sig` dans manim/miniature_short.py) :
+            le site, la chaîne et Instagram signent pareil.
+            ⚠️ ICI ET PAS DANS L'EN-TÊTE, où il l'avait d'abord imaginée : l'en-tête
+            s'affiche sur toutes les pages — y compris celles où un parent arrive
+            de Google pour imprimer un sujet — et à 375 px il est déjà plein (le
+            nom du site y est coupé). Un visage a sa place là où quelqu'un PARLE,
+            et l'accroche de la bande est sa phrase d'ouverture de cours.
+            ⚠️ Ça lève, sur sa demande, la règle du 24/08 (« enlève sur la page
+            d'accueil Frédéric Lacoste enseignant ») : ce n'est pas le badge qui
+            revient, ni le mot « enseignant » — c'est le visage, et « ton prof ».
+            Ti Margo est décoratif (`alt=""`) ; la photo porte le nom.
+            ⚠️ SUR TÉLÉPHONE : LA PHOTO ET TI MARGO, SANS LE NOM. Mesuré le 20/09 en
+            375 px : avec « Frédéric » écrit à côté, la rangée se repliait sur deux
+            lignes et la bande passait de 197 à 229 px (les trois onglets font
+            ~215 px, pas 190 comme je l'avais estimé). Et beaucoup de téléphones
+            font 360 px, pas 375 : on ne règle pas une rangée au pixel près —
+            les trois boutons, eux, se repliaient à 360 et ont été resserrés le
+            même soir. Le nom reste dit aux lecteurs d'écran (`alt`), et
+            s'écrit dès `sm`. */}
+        <div className="flex min-w-0 items-center gap-2">
+          <span className="flex shrink-0 items-end">
+            <Image
+              src="/images/avatar-frederic-visage.webp"
+              alt="Frédéric Lacoste"
+              width={240}
+              height={240}
+              sizes="28px"
+              className="h-7 w-7 rounded-full border border-white object-cover shadow-sm"
+            />
+            <Image
+              src="/cahier-vacances/ti-margo-112.webp"
+              alt=""
+              width={90}
+              height={112}
+              sizes="23px"
+              className="-ml-1.5 h-7 w-auto"
+            />
+          </span>
+          <p className="hidden truncate text-xs font-semibold text-emerald-800 sm:block">
+            Frédéric, ton prof · {une.semaine}
+          </p>
+        </div>
         {plusieurs && (
           <div className="flex gap-1" role="group" aria-label="Choisir le niveau">
             {une.diapos.map((d, i) => (
@@ -161,7 +199,7 @@ export default function UneDeLaSemaine({ une }: { une: Une }) {
               <p className="mt-1 text-xs text-slate-600">{d.notion}</p>
             </div>
 
-            <ul className="col-span-2 flex flex-wrap gap-1.5 sm:col-span-1 sm:col-start-2 sm:gap-2 sm:self-start">
+            <ul className="col-span-2 flex flex-wrap gap-1 sm:col-span-1 sm:col-start-2 sm:gap-2 sm:self-start">
               {d.liens.map((l) => {
                 const Icone = ICONES[l.genre];
                 return (
@@ -170,7 +208,7 @@ export default function UneDeLaSemaine({ une }: { une: Une }) {
                       href={l.href}
                       prefetch={false}
                       onClick={() => track("une_clic", { cible: l.genre, cycle: d.cycle })}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-emerald-300 bg-white px-2.5 py-1.5 text-xs sm:px-3 font-semibold text-emerald-900 hover:border-emerald-500 hover:bg-emerald-50"
+                      className="inline-flex items-center gap-1 rounded-full border border-emerald-300 bg-white px-2 py-1.5 text-xs sm:gap-1.5 sm:px-3 font-semibold text-emerald-900 hover:border-emerald-500 hover:bg-emerald-50"
                     >
                       <Icone className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                       <span className="sm:hidden">{l.court}</span>
