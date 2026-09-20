@@ -20,7 +20,9 @@ import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ColonneGauche from "@/components/accueil/ColonneGauche";
+import UneDeLaSemaine from "@/components/accueil/UneDeLaSemaine";
 import EntreeMatrice from "@/components/matrice/EntreeMatrice";
+import { UNE_COURANTE } from "@/lib/accueil/une";
 
 /** Un pied de page sobre : des repères, pas une seconde page d'accueil. */
 const PIED = [
@@ -119,7 +121,21 @@ export default function AccueilIA() {
               dans la ligne du dessous, où « Conçues » s'accorde maintenant
               avec « les ressources » du titre. La Réunion y reste, en petit et
               après — inchangé. */}
-          <header className="mb-6 text-center">
+          {/* ⭐ 20/09/2026 — LA UNE DE LA SEMAINE PREND LA PLACE DU TITRE.
+              Frédéric : « sur la page d'accueil tu mettrais le short avec la
+              feuille d'exercices et les séries du short », « comme un slide »
+              pour le lycée, le collège et le primaire. Les trois lignes du
+              titre occupaient le meilleur endroit de la page sans rien offrir
+              à cliquer ; la bande y met un contenu AVANT la première question.
+              ⚠️ CE QUE ÇA LÈVE, ET IL FAUT LE SAVOIR : la règle du 21/08 (« rien
+              au-dessus du titre ») et celle du 20/08 (« le titre reste »). Le
+              titre reste — dans le DOM : `sr-only` le garde pour les lecteurs
+              d'écran et pour les moteurs (la page a toujours son <h1>, mot
+              pour mot), il ne se voit plus. « Débranche, ne supprime pas » :
+              pour revenir en arrière, vider `UNES` dans lib/accueil/une.ts
+              suffit — sans Une, le titre redevient visible tout seul. */}
+          {UNE_COURANTE && <UneDeLaSemaine une={UNE_COURANTE} />}
+          <header className={UNE_COURANTE ? "sr-only" : "mb-6 text-center"}>
             {/* ⛔ RIEN AU-DESSUS DU TITRE (Frédéric, 21/08/2026).
                 Ti Margo puis le badge signé occupaient les deux premiers blocs
                 de la page : ~80 px à regarder avant la moindre question posée

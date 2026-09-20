@@ -39,9 +39,23 @@ export async function GET(req: Request) {
     return NextResponse.json({ ok: true, videos: {}, videosMicro: {} });
   }
 
+  // ⭐ L'ORDRE DES PARTIES (20/09/2026). Une leçon en plusieurs vidéos porte son
+  // rang dans le titre — « (1/3) », « (2/3) », « (3/3) » — et la requête ne
+  // garantit aucun ordre. Trier par titre ne marcherait pas : « Dériver… (3/3) »
+  // passerait devant « La fonction… (1/3) ». On lit donc le rang, et à rang égal
+  // (ou sans rang) la plus ancienne d'abord, comme avant.
+  const rang = (titre: string | null) =>
+    Number(titre?.match(/\((\d+)\s*\/\s*\d+\)/)?.[1] ?? Infinity);
+  const lignes = [...(data ?? [])].sort(
+    (a, b) =>
+      // Infinity − Infinity vaut NaN, donc « faux » : on tombe sur la date.
+      rang(a.titre) - rang(b.titre) ||
+      String(a.created_at).localeCompare(String(b.created_at))
+  );
+
   const videos: Record<string, { url: string; titre: string | null }[]> = {};
   const videosMicro: Record<string, { url: string; titre: string | null }[]> = {};
-  for (const row of data ?? []) {
+  for (const row of lignes) {
     const micro = (row.micro_id ?? "").trim();
     if (micro) {
       (videosMicro[micro] ??= []).push({ url: row.url, titre: row.titre });

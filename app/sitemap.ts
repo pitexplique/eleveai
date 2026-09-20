@@ -4,6 +4,7 @@ import type { MetadataRoute } from "next";
 import { getAllBlogPosts } from "@/data/blogPosts";
 import { NIVEAUX, motsDeLaClasse } from "@/lib/dico";
 import { cgvEnVigueur } from "@/lib/legal/editeur";
+import { UNE_COURANTE } from "@/lib/accueil/une";
 import { PDF_DISPONIBLES } from "@/lib/fiches/pdf-disponibles";
 import { FICHES_REGISTRE } from "@/lib/fiches/registre";
 import { FICHES_EXERCICES_REGISTRE } from "@/lib/fiches-exercices/registre";
@@ -660,10 +661,17 @@ const fichesEcritureRoutes: RouteConfig[] = FICHES_ECRITURE.map((f) => ({
 // Vidéos YouTube publiées (chaîne EleveAI), rattachées à la fiche de leur notion
 // pour un sitemap vidéo Google (SEO). Miroir léger de notion_ressources : on
 // ajoute une ligne par vidéo publiée (clé = chemin de la fiche).
-const VIDEOS_FICHES: Record<
-  string,
-  { id: string; title: string; description: string }[]
-> = {
+//
+// ⭐ `ajoutee` (20/09/2026) — LE JOUR OÙ LA VIDÉO EST ARRIVÉE SUR LA PAGE.
+// Les fiches de maths partagent une seule date (`LASTMOD_FICHES`, juillet) : une
+// fiche qui gagne sa vidéo en septembre restait donc annoncée comme inchangée
+// depuis l'été, et Google n'avait aucune raison de repasser lire la balise
+// vidéo. Quand `ajoutee` est plus récente que la date de la route, c'est elle
+// que le sitemap publie (voir le `.map()` de `sitemap()`). ⚠️ Seulement pour la
+// page qui a VRAIMENT changé : on ne rajeunit pas deux cents fiches pour onze.
+type VideoSitemap = { id: string; title: string; description: string; ajoutee?: string };
+
+const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
   // La machine du barrage porte ses DEUX vidéos : l'épisode « en vrai » et le
   // film d'animation du principe (20/07) — le schéma animé, sans son, à lire.
   // La salle de sport porte son Short (24/07) : l'effort et les protéines.
@@ -795,7 +803,155 @@ const VIDEOS_FICHES: Record<
         "Nommer le triangle ABC, reconnaître sa nature (côtés et angles), la règle des 180° et l'inégalité triangulaire, dessinés pas à pas (6e).",
     },
   ],
+
+  // ⭐ 20/09/2026 — LES LEÇONS DE SECONDE ET DE 1re SPÉ REJOIGNENT LEUR FICHE.
+  // Elles étaient sur la chaîne depuis des jours et sur aucune page du site :
+  // `notion_ressources` ne portait que les treize vidéos de 6e. Les quinze
+  // lignes ajoutées en base le 20/09 ont ici leur miroir — même clé (le chemin
+  // de la fiche), même ordre des parties que la route /api/notion-videos.
+  // ⚠️ Une vidéo = UNE page au sitemap, celle de sa fiche de cours : treize
+  // balises sur onze pages, pour quinze lignes en base. La feuille d'exercices de
+  // la même notion l'affiche aussi, comme la fiche voisine (l'exponentielle
+  // 3/3, les fractions en 4e) — mais la déclarer deux fois ferait choisir
+  // Google à notre place.
+  "/fiches-cours/maths/seconde/racine-carree-2de": [
+    {
+      id: "zl61iG90AGM",
+      title: "La racine carrée — Maths seconde — EleveAI",
+      description:
+        "√9 + √16 = 7, et non 5 : la racine traverse les produits, elle butte sur les sommes. Carrés parfaits, racine d'un carré, simplifier en sortant le carré caché (seconde).",
+      ajoutee: "2026-09-20",
+    },
+  ],
+  "/fiches-cours/maths/seconde/repere-coordonnees": [
+    {
+      id: "ptquQWJrtuE",
+      title: "Repère et coordonnées — Maths seconde — EleveAI",
+      description:
+        "Le milieu est une moyenne, la distance est Pythagore : lire et placer un point, et prouver un parallélogramme sans rien mesurer, dans un repère orthonormé (seconde).",
+      ajoutee: "2026-09-20",
+    },
+  ],
+  "/fiches-cours/maths/seconde/puissances-2de": [
+    {
+      id: "RpmhlenzRus",
+      title: "Les puissances — Maths seconde — EleveAI",
+      description:
+        "Quatre règles et une seule condition, la même base : produit, quotient, parenthèse, exposant négatif, puis la notation scientifique et la question type du contrôle commun (seconde).",
+      ajoutee: "2026-09-20",
+    },
+  ],
+  "/fiches-cours/maths/seconde/identites-remarquables-2de": [
+    {
+      id: "VnpCwS8zDiw",
+      title: "Les identités remarquables — Maths seconde — EleveAI",
+      description:
+        "(3 + 4)² vaut 49, et non 25 : ce qui manque, c'est le double produit. Carré d'une somme, carré d'une différence, différence de deux carrés, développer ou factoriser (seconde).",
+      ajoutee: "2026-09-20",
+    },
+  ],
+  "/fiches-cours/maths/seconde/fonctions-affines-2de": [
+    {
+      id: "CHS_8yj-VrA",
+      title: "Pourquoi il fait 26° à Saint-Gilles et 11° au Maïdo — Les maths en vrai",
+      description:
+        "Quinze degrés d'écart sur une île de soixante kilomètres : −0,65 °C tous les 100 m, c'est une fonction affine, et elle se lit dans les deux sens — de l'altitude à la température, et retour.",
+      ajoutee: "2026-09-20",
+    },
+  ],
+  "/fiches-cours/maths/seconde/fonction-vocabulaire-2de": [
+    {
+      id: "y5Gp1bltuaw",
+      title: "Les fonctions, ça sert à rien… sauf à prévoir",
+      description:
+        "À quoi servent les fonctions : dessiner, et surtout prévoir. Combien ? (l'exponentielle), quand ? (le logarithme), jusqu'où ? (la fonction inverse) — trois questions, trois courbes, aucun niveau requis.",
+      ajoutee: "2026-09-20",
+    },
+  ],
+  "/fiches-cours/maths/premiere-spe/second-degre": [
+    {
+      id: "OT7gGCthbAs",
+      title:
+        "Le second degré (1/2) : discriminant, équation et factorisation — Maths 1re spé",
+      description:
+        "Deux racines, une seule ou aucune : c'est le discriminant Δ qui décide. Résoudre une équation du second degré et factoriser le trinôme (1re spé, partie 1 sur 2).",
+      ajoutee: "2026-09-20",
+    },
+    {
+      id: "aIkUwVlopLE",
+      title:
+        "Le signe du trinôme (2/2) : tableau de signes et inéquations — Maths 1re spé",
+      description:
+        "Un trinôme est-il positif ou négatif ? Ça dépend d'où l'on est, et c'est encore Δ qui décide. Tableau de signes et inéquations du second degré (1re spé, partie 2 sur 2).",
+      ajoutee: "2026-09-20",
+    },
+  ],
+  "/fiches-cours/maths/premiere-spe/exponentielle": [
+    {
+      id: "imdxA7H3Ov8",
+      title:
+        "La fonction exponentielle (1/3) : définition, nombre e et règles de calcul — Maths 1re spé",
+      description:
+        "Une fonction égale à sa propre dérivée : plus elle est haute, plus elle monte vite. Définition, nombre e et règles de calcul (1re spé, partie 1 sur 3).",
+      ajoutee: "2026-09-20",
+    },
+    {
+      id: "9pKucQ-tYYw",
+      title:
+        "Résoudre avec l'exponentielle (2/3) : équations et inéquations — Maths 1re spé",
+      description:
+        "Résoudre une équation sans jamais calculer une seule exponentielle : équations et inéquations avec la fonction exponentielle (1re spé, partie 2 sur 3).",
+      ajoutee: "2026-09-20",
+    },
+  ],
+  // La troisième partie est l'ÉTUDE de fonction : elle a sa propre fiche.
+  "/fiches-cours/maths/premiere-spe/exponentielle-etude": [
+    {
+      id: "uIsHrz51lEQ",
+      title:
+        "Dériver et étudier l'exponentielle (3/3) : dérivée, tableau de variations — Maths 1re spé",
+      description:
+        "Un cari sort du feu à Saint-Joseph : pourquoi ne descend-il jamais sous 25 °C ? Dériver une fonction avec exponentielle et dresser son tableau de variations (1re spé, partie 3 sur 3).",
+      ajoutee: "2026-09-20",
+    },
+  ],
+  "/fiches-cours/maths/premiere-spe/suites": [
+    {
+      id: "iP9bmXGlTJ0",
+      title:
+        "Les suites (1/2) : arithmétique, géométrique et terme général — Maths 1re spé",
+      description:
+        "Deux clubs ouvrent le même jour avec 250 membres : l'un gagne 30 membres par an, l'autre 12 % par an. Suite arithmétique ou géométrique, raison et terme général (1re spé, partie 1 sur 2).",
+      ajoutee: "2026-09-20",
+    },
+  ],
+  // « Les bases » n'a pas de classe : la leçon de fractions est rattachée à la
+  // fiche de 5e (celle que la Une du 21/09 met en avant). La 4e l'affiche aussi
+  // sur sa page, sans seconde déclaration ici — voir la note d'en-tête.
+  "/fiches-cours/maths/5e/fraction-calcul": [
+    {
+      id: "mWK-Qm8bPKY",
+      title: "Les fractions : la leçon complète pour ne plus se tromper",
+      description:
+        "1/2 + 1/3 ne fait pas 2/5. Ce qu'une fraction est vraiment, pourquoi le dénominateur n'est jamais zéro, simplifier, passer au décimal et au pourcentage, multiplier, additionner — jusqu'à la question du brevet.",
+      ajoutee: "2026-09-20",
+    },
+  ],
 };
+
+// ⭐ LA UNE DÉCLARE SES SHORTS (Frédéric, 20/09/2026 : « tu dois déclarer aussi à
+// la Une »). La bande de l'accueil montre jusqu'à trois shorts par semaine ; ils
+// n'étaient déclarés nulle part — `VIDEOS_FICHES` ne porte que des leçons.
+// ⚠️ LUS DANS lib/accueil/une.ts, PAS RECOPIÉS ICI : la Une change chaque
+// semaine, et une liste écrite à la main aurait une semaine de retard dès le
+// second lundi. Le titre est celui du short, la description son accroche — la
+// phrase que la page affiche vraiment. `/accueil` porte déjà `new Date()` comme
+// date, il n'y a donc pas d'`ajoutee` à poser.
+const VIDEOS_UNE: VideoSitemap[] = (UNE_COURANTE?.diapos ?? []).map((d) => ({
+  id: d.short.id,
+  title: d.short.titre,
+  description: d.accroche,
+}));
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Routes statiques
@@ -810,10 +966,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...famillesEcritureRoutes,
     ...fichesEcritureRoutes,
   ].map((route) => {
-    const videos = VIDEOS_FICHES[route.path];
+    const videosFiche = VIDEOS_FICHES[route.path];
+    const videos =
+      route.path === "/accueil" && VIDEOS_UNE.length > 0
+        ? [...(videosFiche ?? []), ...VIDEOS_UNE]
+        : videosFiche;
+    // La page est aussi récente que sa dernière vidéo — voir `ajoutee`.
+    const dateRoute = route.lastMod ?? LASTMOD_CORE;
+    const dateVideo = (videos ?? []).reduce<Date | null>((d, v) => {
+      if (!v.ajoutee) return d;
+      const a = new Date(v.ajoutee);
+      return !d || a > d ? a : d;
+    }, null);
     return {
       url: u(route.path),
-      lastModified: route.lastMod ?? LASTMOD_CORE,
+      lastModified: dateVideo && dateVideo > dateRoute ? dateVideo : dateRoute,
       changeFrequency: route.changeFrequency,
       priority: route.priority,
       ...(videos

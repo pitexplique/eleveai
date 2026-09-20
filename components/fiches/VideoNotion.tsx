@@ -33,7 +33,13 @@ export default function VideoNotion({
   classe: string;
   notion: string;
 }) {
-  const [video, setVideo] = useState<{ url: string; titre: string | null } | null>(null);
+  // ⭐ TOUTES LES VIDÉOS DE LA NOTION, PAS SEULEMENT LA PREMIÈRE (20/09/2026).
+  // Ce bloc lisait `[0]`. Tant qu'une notion n'avait qu'une vidéo, c'était la
+  // même chose ; avec les leçons de 1re spé en deux ou trois parties, la fiche
+  // du second degré aurait montré « (1/2) » et passé la seconde sous silence —
+  // celle du tableau de signes, qui est la moitié du chapitre. L'ordre des parties est
+  // posé par la route (/api/notion-videos), qui lit le rang dans le titre.
+  const [videos, setVideos] = useState<{ url: string; titre: string | null }[]>([]);
   const [charge, setCharge] = useState(false);
 
   useEffect(() => {
@@ -45,7 +51,7 @@ export default function VideoNotion({
       .then((res) => res.json())
       .then((data) => {
         if (annule) return;
-        setVideo(data?.videos?.[notionId]?.[0] ?? null);
+        setVideos(data?.videos?.[notionId] ?? []);
       })
       .catch(() => {
         /* hors-ligne : repli chaîne */
@@ -60,9 +66,50 @@ export default function VideoNotion({
 
   // Rien tant qu'on n'a pas demandé, et rien s'il n'y a pas de vidéo POUR CETTE
   // NOTION. Voir la note en tête : une fiche ne promet que ce qui existe.
-  if (!charge || !video) return null;
+  if (!charge || videos.length === 0) return null;
 
-  const url = video.url;
+  // Plusieurs parties : un QR code par vidéo, chacun sous son titre. À
+  // l'impression c'est la seule porte — un lien ne se clique pas sur du papier —
+  // donc la seconde partie a droit au sien, en plus petit pour tenir sur la
+  // ligne. ⚠️ Le cas à UNE vidéo garde son rendu d'origine, plus bas, au pixel :
+  // treize fiches de 6e l'affichent déjà et n'ont rien demandé.
+  if (videos.length > 1) {
+    return (
+      <div className="mt-5 rounded-2xl border border-rose-200 bg-rose-50 p-4 print:mt-3 print:p-3">
+        <p className="flex items-center gap-2 font-black text-slate-900 print:text-sm">
+          <PlayCircle className="h-5 w-5 shrink-0 text-rose-500 print:hidden" />
+          Les vidéos de cette notion
+        </p>
+        <p className="mt-1 text-sm leading-6 text-slate-600 print:text-xs">
+          Scanne un QR code avec ton téléphone pour voir le cours en vidéo.
+        </p>
+        <ul className="mt-3 grid gap-3 sm:grid-cols-2 print:grid-cols-2 print:gap-2">
+          {videos.map((v) => (
+            <li key={v.url} className="flex items-center gap-3">
+              <div className="shrink-0 rounded-xl border border-rose-200 bg-white p-1.5">
+                <QRCodeSVG value={v.url} size={64} aria-label="QR code vers la vidéo" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm font-bold leading-5 text-slate-900 print:text-xs">
+                  {v.titre ?? "La vidéo"}
+                </p>
+                <a
+                  href={v.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="screen-only mt-1 inline-flex items-center gap-1.5 text-sm font-black text-rose-600 transition hover:text-rose-500"
+                >
+                  Regarder la vidéo →
+                </a>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  const url = videos[0].url;
 
   return (
     <div className="mt-5 flex items-center gap-4 rounded-2xl border border-rose-200 bg-rose-50 p-4 print:mt-3 print:gap-3 print:p-3">
