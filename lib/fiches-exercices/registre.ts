@@ -16,6 +16,13 @@ type FicheExercicesEntry = {
 };
 
 export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
+  // ⭐ LA PREMIÈRE DU COLLÈGE (20/09/2026) — elle ferme le trio de la Une de
+  // l'accueil : le short « 1/2 + 1/3 ne fait pas 2/5 », la leçon vidéo, la feuille.
+  "maths/5e/fraction-calcul": {
+    titre: "Calculer avec les fractions : 20 exercices corrigés",
+    resume:
+      "Du calcul seul au problème : additionner et soustraire (même dénominateur, multiples, différents), multiplier, prendre une fraction d'un nombre, démonter l'erreur 1/2 + 1/3 = 2/5. Un rappel de cours avant chaque niveau, et cinq corrigés dessinés.",
+  },
   // ⭐ LA PREMIÈRE (15/09/2026) — écrite pour la fille de Frédéric, en 1re, qui
   // teste ce soir. Le verdict est pour demain.
   "maths/premiere-spe/exponentielle": {

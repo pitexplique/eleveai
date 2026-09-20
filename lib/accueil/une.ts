@@ -119,10 +119,15 @@ export const UNES: Une[] = [
           titre: "1/2 + 1/3 ne fait pas 2/5 — voici pourquoi",
           vignette: "/une/short-fractions-additionner.webp",
         },
-        // ⏳ La feuille de 20 exercices sur les fractions est à écrire
-        // (Frédéric, 20/09 : « pour le collège on fait la fiche fractions »).
-        // Le jour où elle existe, on ajoute ici sa ligne `feuille`, en premier.
+        // La feuille est arrivée le soir même (Frédéric, 20/09 : « pour le
+        // collège on fait la fiche fractions ») : le trio est complet.
         liens: [
+          {
+            genre: "feuille",
+            label: "La feuille : 20 exercices",
+            court: "20 exercices",
+            href: "/fiches-exercices/maths/5e/fraction-calcul?from=une",
+          },
           {
             genre: "fiche",
             label: "La fiche de cours",
