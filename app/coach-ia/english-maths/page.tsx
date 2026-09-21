@@ -122,50 +122,13 @@ function CoachEnglishInner() {
 
         <section className="w-full px-4 py-5 sm:px-6 lg:px-8">
           <header className="mb-6 border-b border-slate-200 pb-5">
-            {/* ⭐⭐ 10/09/2026 — LE CHAMP PASSE EN TÊTE, comme sur les autres
-                coachs et sur `/accueil` : ce qu'on cherche avant ce qu'on nous
-                dit — et, sur téléphone, DEVANT les pastilles de niveau, qui ne
-                vivent que dans le bloc `md:hidden` juste en dessous. C'est LE
-                MÊME champ (état `search`, filtrage à la frappe), pas un
-                second — seules sa place et sa taille changent. Il était sous le
-                titre, en `text-sm` et `sm:max-w-md`, plus petit que les trois
-                compteurs posés à côté de lui.
-                ⚠️ Le placeholder reste en anglais : toute cette page l'est, et
-                c'est son objet même — faire des maths en anglais. */}
-            <div className="relative mb-6">
-              <span className="pointer-events-none absolute inset-y-0 left-5 flex items-center text-lg text-slate-400">
-                🔍
-              </span>
-              <input
-                type="search"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search a skill…"
-                aria-label="Search a category or skill"
-                className={[
-                  "w-full rounded-full border-2 border-slate-300 bg-white py-4 pl-14 text-base text-slate-800 shadow-sm outline-none placeholder:text-slate-400 focus:border-sky-600 focus:ring-2 focus:ring-sky-600/20 sm:text-lg",
-                  "[&::-webkit-search-cancel-button]:appearance-none",
-                  search ? "pr-14" : "pr-5",
-                ].join(" ")}
-              />
-              {search ? (
-                <button
-                  type="button"
-                  onClick={() => setSearch("")}
-                  aria-label="Clear the search"
-                  className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-sky-600 text-lg text-white transition hover:bg-sky-700"
-                >
-                  <span aria-hidden="true">×</span>
-                </button>
-              ) : null}
-            </div>
-
+            {/* ⭐ 21/09/2026 — LE TITRE, PUIS LA BARRE, PUIS LES NOTIONS,
+                comme sur /coach-ia/[matiere] (Frédéric : « Maths Seconde, puis
+                barre de recherche, puis les notions »). */}
             <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
               <div>
                 {/* ⛔ Le surtitre « Coach IA » est parti, comme sur
-                    /coach-ia/[matiere] : Frédéric a dicté l'ordre — barre de
-                    recherche, puis le titre, puis ce que la page offre. Le
-                    surtitre s'intercalait entre les deux premiers.
+                    /coach-ia/[matiere].
                     ⚠️ La ligne du bas reprend la promesse française du jour
                     (« séries d'exercices avec correction et score ! »), en
                     anglais parce que toute la page l'est. */}
@@ -201,10 +164,44 @@ function CoachEnglishInner() {
               </div>
             </div>
 
-            {/* ⭐ Les niveaux descendent sous le titre, sur téléphone seulement
+            {/* ⭐⭐ 10/09/2026 — LE GRAND CHAMP. C'est LE MÊME champ (état
+                `search`, filtrage à la frappe), pas un second — seules sa
+                place et sa taille ont changé. Il était en `text-sm` et
+                `sm:max-w-md`, plus petit que les trois compteurs.
+                ⚠️ Le placeholder reste en anglais : toute cette page l'est, et
+                c'est son objet même — faire des maths en anglais. */}
+            <div className="relative mt-6">
+              <span className="pointer-events-none absolute inset-y-0 left-5 flex items-center text-lg text-slate-400">
+                🔍
+              </span>
+              <input
+                type="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search a skill…"
+                aria-label="Search a category or skill"
+                className={[
+                  "w-full rounded-full border-2 border-slate-300 bg-white py-4 pl-14 text-base text-slate-800 shadow-sm outline-none placeholder:text-slate-400 focus:border-sky-600 focus:ring-2 focus:ring-sky-600/20 sm:text-lg",
+                  "[&::-webkit-search-cancel-button]:appearance-none",
+                  search ? "pr-14" : "pr-5",
+                ].join(" ")}
+              />
+              {search ? (
+                <button
+                  type="button"
+                  onClick={() => setSearch("")}
+                  aria-label="Clear the search"
+                  className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-sky-600 text-lg text-white transition hover:bg-sky-700"
+                >
+                  <span aria-hidden="true">×</span>
+                </button>
+              ) : null}
+            </div>
+
+            {/* ⭐ Les niveaux descendent sous la barre, sur téléphone seulement
                 (`md:hidden` : au-delà, c'est l'`<aside>` qui les porte). Même
-                raison que sur /coach-ia/[matiere] — l'ordre demandé est barre,
-                titre, promesse, et les pastilles s'y intercalaient. */}
+                raison que sur /coach-ia/[matiere] : au-dessus, ils sortiraient
+                la barre du premier écran. */}
             <div className="mt-5 flex flex-wrap gap-2 md:hidden">
               {NIVEAUX.map((n) => (
                 <button

@@ -30,7 +30,7 @@ import { useEleve } from "@/context/EleveContext";
 import Link from "next/link";
 import { BookOpen, Camera, ChevronRight, CirclePlay, PencilLine, Play } from "lucide-react";
 import { ficheExercicesHrefPourCoach } from "@/lib/fiches-exercices/registre";
-import { ficheClasseSource, ficheHrefPourCoach } from "@/lib/fiches/registre";
+import { ficheClasseSource, ficheHrefPourCoach, libelleClasse } from "@/lib/fiches/registre";
 import { useNotionsPliees } from "@/components/coach/useNotionsPliees";
 import { track } from "@vercel/analytics";
 import {
@@ -203,12 +203,19 @@ function normalizeAnnee(value: string | null): AnneeFiltre {
     : "premiere";
 }
 
-// youtu.be/ID, youtube.com/watch?v=ID, /embed/ID… → l'identifiant seul, pour
-// afficher la miniature YouTube (i.ytimg.com) à la place d'une icône générique.
-function youtubeId(url: string): string | null {
-  const m = url.match(/(?:youtu\.be\/|v=|embed\/)([A-Za-z0-9_-]{11})/);
-  return m ? m[1] : null;
-}
+// Les cases des boutons d'une notion (21/09/2026) : largeur FIXE, pour que
+// GO, Fiche, Exercices et Vidéo tombent en colonnes d'une notion à l'autre.
+// Une case vide garde la place d'un bouton absent. Seule « Fiche · 4e » peut
+// élargir la sienne (d'où `min-w`). ⚠️ Largeurs mesurées : 280 px pour les
+// quatre avec leurs écarts, et une carte n'offre que 288 px sur un écran de
+// 360 — au-delà, « Vidéo » passait seule à la ligne.
+const CASE = "inline-flex h-7 shrink-0 items-center justify-center gap-1 text-xs";
+const CASE_GO = `${CASE} w-12`;
+const CASE_FICHE = `${CASE} min-w-16`;
+const CASE_EXERCICES = `${CASE} w-23`;
+const CASE_VIDEO = `${CASE} w-16`;
+const BOUTON_SECONDAIRE =
+  "rounded-full border border-slate-200 bg-white px-1.5 font-bold text-slate-600 transition hover:border-slate-300 hover:bg-slate-50";
 
 function getMatiereTitle(matiere: string, classe: Classe) {
   const classeLabel: Record<Classe, string> = {
@@ -684,11 +691,73 @@ export default function CoachIA() {
 
         <section className="w-full px-4 py-5 sm:px-6 lg:px-8">
           <header className="mb-6 border-b border-slate-200 pb-5">
+            {/* ⭐ 21/09/2026 — LE TITRE REPASSE DEVANT LA BARRE. Frédéric :
+                « Maths Seconde, puis barre de recherche, puis les notions ».
+                Le titre dit où l'on est ; la barre filtre la liste à la frappe,
+                elle se pose donc juste au-dessus de ce qu'elle filtre. Sur
+                téléphone, les pastilles de classe restent SOUS la barre : au-
+                dessus, leurs 415 px la sortiraient du premier écran. */}
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+              <div>
+                {/* ⛔ 10/09/2026 — LE SURTITRE « COACH IA · SÉRIE D'EXERCICES »
+                    EST PARTI. Il disait déjà — en plus petit, en majuscules et
+                    AVANT le titre — ce que la ligne du dessous dit maintenant
+                    en entier. Le nom du coach reste écrit dans l'en-tête du
+                    site, dans l'URL et dans le `<title>`. */}
+                <h1 className={["mt-1 text-4xl font-bold tracking-tight sm:text-5xl", getMatiereColor(matiere)].join(" ")}>
+                  {getMatiereTitle(matiere, classe)}
+                </h1>
+                {/* ⭐ 10/09/2026 — « raccourcis la ligne des exercices
+                    corrigés » puis, dans la foulée, la phrase exacte :
+                    « séries d'exercices avec correction et score ! ».
+                    Ce qu'elle disait avant tenait en deux lignes et décrivait
+                    la liste qui commence 40 px plus bas (« choisis une
+                    compétence, puis clique sur une ligne »). Ce qu'elle ne
+                    disait NULLE PART, c'est le SCORE — or c'est la seule des
+                    trois promesses que l'écran ne montre pas de lui-même : les
+                    séries se voient, la correction s'annonce, le score n'arrive
+                    qu'après le premier exercice.
+                    ⚠️ L'espace avant le « ! » est insécable, comme partout dans
+                    ce fichier (`chez toi&nbsp;!` avant lui) : sans elle le
+                    point d'exclamation part seul à la ligne suivante dès que la
+                    colonne se resserre. */}
+                <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
+                  Séries d&apos;exercices avec correction et score&nbsp;!
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                <span className="rounded-full border border-orange-300 bg-white px-4 py-2 text-sm font-semibold text-orange-600">
+                  {totalNotions} notions
+                </span>
+                <span className="rounded-full border border-green-300 bg-white px-4 py-2 text-sm font-semibold text-green-700">
+                  {totalMicros} séries d&apos;exercices
+                </span>
+                {/* Le « mode complet » de la liste, à un clic et retenu —
+                    comme dans le tutor, c'est le DÉFAUT qui a changé, pas le
+                    possible. */}
+                <button
+                  type="button"
+                  onClick={tousDeplies ? toutReplier : toutDeplier}
+                  aria-pressed={tousDeplies}
+                  className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                >
+                  {tousDeplies ? "Tout replier" : "Tout déplier"}
+                </button>
+                {matiere === "francais" ? (
+                  <span className="rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-semibold text-sky-700">
+                    CP a 3e ouverts
+                  </span>
+                ) : null}
+              </div>
+            </div>
+
             {/* ⭐⭐ 10/09/2026 — LA RECHERCHE PREND LA PLACE DU MOT D'ACCUEIL.
                 Frédéric : « une grande barre de recherche à la place de
                 bienvenue chez toi, comme dans l'accueil ». C'est le même geste
                 que le 09/09 sur `/accueil` (voir `.accueil-champ-en-tete` dans
-                globals.css) : ce qu'on cherche passe DEVANT ce qu'on nous dit.
+                globals.css). ⚠️ Elle était alors AU-DESSUS du titre ; le
+                21/09 l'a remise dessous (voir le haut de ce `<header>`).
 
                 Le mot d'accueil occupait le premier écran pour n'apprendre
                 rien qu'on ne redécouvre au premier clic ; le champ, lui, était
@@ -725,7 +794,7 @@ export default function CoachIA() {
                 l'élève lisait « … ou micro » et la fin sautait, chez 38 % des
                 visiteurs. Même mesure, même verdict que sur le champ de
                 l'accueil — sauf qu'ici la phrase n'est dictée par personne. */}
-            <div className="relative mb-6">
+            <div className="relative mt-6">
               <span className="pointer-events-none absolute inset-y-0 left-5 flex items-center text-lg text-slate-400">
                 🔍
               </span>
@@ -777,69 +846,10 @@ export default function CoachIA() {
               </Link>
             </div>
 
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-              <div>
-                {/* ⛔ 10/09/2026 — LE SURTITRE « COACH IA · SÉRIE D'EXERCICES »
-                    EST PARTI. Frédéric a dicté l'ordre de l'écran : « barre de
-                    recherche, puis Maths Seconde, puis séries d'exercices avec
-                    correction et score ». Le surtitre s'intercalait entre les
-                    deux premiers, et il disait déjà — en plus petit, en
-                    majuscules et AVANT le titre — ce que la ligne du dessous
-                    dit maintenant en entier. Le nom du coach reste écrit dans
-                    l'en-tête du site, dans l'URL et dans le `<title>`. */}
-                <h1 className={["mt-1 text-4xl font-bold tracking-tight sm:text-5xl", getMatiereColor(matiere)].join(" ")}>
-                  {getMatiereTitle(matiere, classe)}
-                </h1>
-                {/* ⭐ 10/09/2026 — « raccourcis la ligne des exercices
-                    corrigés » puis, dans la foulée, la phrase exacte :
-                    « séries d'exercices avec correction et score ! ».
-                    Ce qu'elle disait avant tenait en deux lignes et décrivait
-                    la liste qui commence 40 px plus bas (« choisis une
-                    compétence, puis clique sur une ligne »). Ce qu'elle ne
-                    disait NULLE PART, c'est le SCORE — or c'est la seule des
-                    trois promesses que l'écran ne montre pas de lui-même : les
-                    séries se voient, la correction s'annonce, le score n'arrive
-                    qu'après le premier exercice.
-                    ⚠️ L'espace avant le « ! » est insécable, comme partout dans
-                    ce fichier (`chez toi&nbsp;!` avant lui) : sans elle le
-                    point d'exclamation part seul à la ligne suivante dès que la
-                    colonne se resserre. */}
-                <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
-                  Séries d&apos;exercices avec correction et score&nbsp;!
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                <span className="rounded-full border border-orange-300 bg-white px-4 py-2 text-sm font-semibold text-orange-600">
-                  {totalNotions} notions
-                </span>
-                <span className="rounded-full border border-green-300 bg-white px-4 py-2 text-sm font-semibold text-green-700">
-                  {totalMicros} séries d&apos;exercices
-                </span>
-                {/* Le « mode complet » de la liste, à un clic et retenu —
-                    comme dans le tutor, c'est le DÉFAUT qui a changé, pas le
-                    possible. */}
-                <button
-                  type="button"
-                  onClick={tousDeplies ? toutReplier : toutDeplier}
-                  aria-pressed={tousDeplies}
-                  className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
-                >
-                  {tousDeplies ? "Tout replier" : "Tout déplier"}
-                </button>
-                {matiere === "francais" ? (
-                  <span className="rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-semibold text-sky-700">
-                    CP a 3e ouverts
-                  </span>
-                ) : null}
-              </div>
-            </div>
-
             {/* ⭐ 10/09/2026 — LES CLASSES DESCENDENT SOUS LE TITRE, SUR
                 TÉLÉPHONE SEULEMENT. Elles n'existent ici que pour les écrans
                 étroits (`md:hidden`) : au-delà, c'est l'`<aside>` qui les
-                porte, et l'ordre demandé — barre, « Maths Seconde », la ligne
-                des séries — y est déjà celui de l'écran. Sur 375 px, les
+                porte. Depuis le 21/09 elles sont aussi sous la barre. Sur 375 px, les
                 quinze classes et leurs cinq intitulés de groupe mesurent 415 px
                 empilés : laissées au-dessus, elles repoussaient le titre à
                 497 px du haut et rendaient l'ordre faux pour les 38 % de
@@ -993,12 +1003,25 @@ export default function CoachIA() {
                          le manifeste est vide ; le composant et le script de
                          capture restent — rebrancher, c'est relancer la
                          capture PUIS remettre le composant ici. */
-                      <article key={notionId} className="relative">
-                        <div className="mb-2 flex flex-wrap items-center gap-2">
+                      <article key={notionId} className="@container relative">
+                        {/* ⭐ 21/09/2026 — « ça fait un peu fouillis non ».
+                            Tout était dans UN flex-wrap : les boutons partaient
+                            à la ligne là où la place manquait, donc à un
+                            endroit différent pour chaque notion, et la vignette
+                            de la vidéo rendait sa ligne plus haute que les
+                            autres. Désormais le titre a sa place, et les
+                            boutons la leur : sur la même ligne quand la carte
+                            est assez large (≥ 576 px, requête de CONTENEUR,
+                            car la même largeur d'écran donne une ou deux
+                            colonnes), dessous sinon. Toujours dans le même
+                            ordre, avec une case vide quand un bouton manque,
+                            pour que les colonnes s'alignent d'une notion à la
+                            suivante. */}
+                        <div className="mb-2 flex flex-col gap-1 @xl:flex-row @xl:items-center @xl:gap-3">
                           {/* Le bouton vit DANS le h3 (motif accordéon), et
                               les liens Fiche / Vidéo restent ses voisins : un
                               lien dans un bouton n'est pas du HTML. */}
-                          <h3 className="text-base font-bold text-slate-800">
+                          <h3 className="min-w-0 flex-1 text-base font-bold text-slate-800">
                             {forceeParLaRecherche ? (
                               <span className="inline-flex items-center gap-1.5 py-1">
                                 <TexteMath>{libelleNotionMath(notionId)}</TexteMath>
@@ -1017,24 +1040,33 @@ export default function CoachIA() {
                                     ouverte ? "rotate-90" : "",
                                   ].join(" ")}
                                 />
-                                <TexteMath>{libelleNotionMath(notionId)}</TexteMath>
-                                <span className="ml-1 text-xs font-semibold text-slate-400">
-                                  {micros.length}
+                                {/* Le compte suit le DERNIER MOT : posé en
+                                    frère du titre, il partait au bord droit
+                                    dès que le titre prenait deux lignes. */}
+                                <span>
+                                  <TexteMath>{libelleNotionMath(notionId)}</TexteMath>
+                                  <span className="ml-1.5 text-xs font-semibold text-slate-400">
+                                    {micros.length}
+                                  </span>
                                 </span>
                               </button>
                             )}
                           </h3>
+                          <div className="flex shrink-0 flex-wrap items-center gap-1 @md:pl-6 @xl:pl-0">
                           {/* ⭐ 13/09/2026 — « il faudrait un chips GO »
                               (Frédéric). Le pli replié ne laissait qu'un
                               geste : déplier, puis choisir. GO lance le tutor
                               sur la PREMIÈRE série de la notion, comme le
                               ferait le clic sur sa ligne 1 — même `handleClick`,
-                              donc même `microId`, même mode simple. */}
+                              donc même `microId`, même mode simple.
+                              C'est le SEUL bouton plein de la ligne : les trois
+                              autres partagent un même contour, seule leur icône
+                              garde sa couleur. */}
                           <button
                             type="button"
                             onClick={() => handleClick(notionId, micros[0])}
                             aria-label={`Commencer : ${libelleNotion(notionId)}`}
-                            className="inline-flex items-center gap-1 rounded-full bg-green-600 px-3 py-0.5 text-xs font-black tracking-wide text-white shadow-sm transition hover:bg-green-700"
+                            className={[CASE_GO, "rounded-full bg-green-600 font-black tracking-wide text-white shadow-sm transition hover:bg-green-700"].join(" ")}
                           >
                             GO
                             <Play className="h-3 w-3 fill-current" aria-hidden="true" />
@@ -1042,59 +1074,41 @@ export default function CoachIA() {
                           {ficheHref ? (
                             <Link
                               href={ficheHref}
-                              className="inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-xs font-bold text-emerald-700 transition hover:bg-emerald-100"
+                              className={[CASE_FICHE, BOUTON_SECONDAIRE].join(" ")}
                               title="Lire la fiche de cours de cette notion"
                             >
-                              <BookOpen className="h-3.5 w-3.5" />
-                              {ficheAutreClasse ? `Fiche · ${ficheAutreClasse}` : "Fiche"}
+                              <BookOpen className="h-3.5 w-3.5 text-emerald-600" />
+                              {ficheAutreClasse ? `Fiche · ${libelleClasse(ficheAutreClasse)}` : "Fiche"}
                             </Link>
-                          ) : null}
+                          ) : <span aria-hidden="true" className={CASE_FICHE} />}
                           {exercicesHref ? (
                             <Link
                               href={exercicesHref}
-                              className="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-amber-50 px-2 py-0.5 text-xs font-bold text-amber-800 transition hover:bg-amber-100"
+                              className={[CASE_EXERCICES, BOUTON_SECONDAIRE].join(" ")}
                               title="La feuille d'exercices corrigés de cette notion"
                             >
-                              <PencilLine className="h-3.5 w-3.5" />
+                              <PencilLine className="h-3.5 w-3.5 text-amber-600" />
                               Exercices
                             </Link>
-                          ) : null}
-                          {videos.length ? (() => {
-                            // Miniature YouTube réelle (mini 16:9) à la place de
-                            // l'icône générique : plus vivant, cohérent avec
-                            // l'accueil, mais volontairement PETIT pour garder la
-                            // densité de la liste de notions.
-                            const vid = youtubeId(videos[0].url);
-                            return (
+                          ) : <span aria-hidden="true" className={CASE_EXERCICES} />}
+                          {/* ⛔ 21/09/2026 — PLUS DE VIGNETTE YOUTUBE ICI. À
+                              48 px de large elle ne se lisait pas, elle rendait
+                              la ligne plus haute que ses voisines, et chaque
+                              notion à vidéo chargeait une image de ytimg.com.
+                              Le ▶ rouge dit « vidéo » aussi bien. */}
+                          {videos.length ? (
                             <a
                               href={videos[0].url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="group/vid inline-flex items-center gap-1.5 rounded-lg border border-rose-200 bg-rose-50 p-0.5 pr-2 text-xs font-bold text-rose-700 transition hover:bg-rose-100"
+                              className={[CASE_VIDEO, BOUTON_SECONDAIRE].join(" ")}
                               title={videos[0].titre ?? "Voir la vidéo de cette notion"}
                             >
-                              {vid ? (
-                                <span className="relative block aspect-video w-12 shrink-0 overflow-hidden rounded bg-black/10">
-                                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                                  <img
-                                    src={`https://i.ytimg.com/vi/${vid}/mqdefault.jpg`}
-                                    alt=""
-                                    loading="lazy"
-                                    className="h-full w-full object-cover transition group-hover/vid:scale-105"
-                                  />
-                                  <span className="absolute inset-0 flex items-center justify-center">
-                                    <span className="flex h-4 w-4 items-center justify-center rounded-full bg-rose-600/90 shadow">
-                                      <Play className="h-2.5 w-2.5 fill-white text-white" />
-                                    </span>
-                                  </span>
-                                </span>
-                              ) : (
-                                <Play className="ml-1 h-3.5 w-3.5" />
-                              )}
+                              <Play className="h-3 w-3 fill-rose-600 text-rose-600" />
                               Vidéo
                             </a>
-                            );
-                          })() : null}
+                          ) : <span aria-hidden="true" className={CASE_VIDEO} />}
+                          </div>
                         </div>
                         {ouverte ? (
                         <ol className="space-y-1">
