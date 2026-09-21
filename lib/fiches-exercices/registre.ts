@@ -23,6 +23,14 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Du calcul seul au problème : additionner et soustraire (même dénominateur, multiples, différents), multiplier, prendre une fraction d'un nombre, démonter l'erreur 1/2 + 1/3 = 2/5. Un rappel de cours avant chaque niveau, et cinq corrigés dessinés.",
   },
+  // ⭐ LA PREMIÈRE DE 3e (21/09/2026) — le trio de la Une du collège : le short
+  // « +20 % puis −20 % » (la tablette de 100 carrés), la fiche de cours, la
+  // feuille. Le verre doseur et les abonnés perdus sont dans les exercices.
+  "maths/3e/prop-proportionnalite": {
+    titre: "Proportionnalité et pourcentages : 20 exercices corrigés",
+    resume:
+      "Du calcul seul au problème : reconnaître la proportionnalité, tableau et produit en croix, pourcentages, coefficient multiplicateur, vitesse et débit. Et le piège du chapitre, compté carré par carré : +20 % puis −20 % ne ramène pas au départ. La tablette de 100 carrés, les abonnés perdus, la deuxième démarque, l'aller-retour.",
+  },
   // ⭐ LA PREMIÈRE DE SECONDE (20/09/2026) — le trio de la Une « fiche de paie » :
   // le short, la fiche de cours, la feuille. De vrais chiffres, sourcés en tête
   // du fichier de données (OCDE, URSSAF, INSEE).
