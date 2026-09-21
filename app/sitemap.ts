@@ -823,6 +823,52 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-09-20",
     },
   ],
+  // ⭐ 21/09/2026 : les leçons « pour faire le lien » du bloc Nombres et calculs.
+  "/fiches-cours/maths/seconde/reels-intervalles": [
+    {
+      id: "Fmg5FNKY-Zs",
+      title: "Valeur absolue et intervalles — Maths seconde — EleveAI",
+      description:
+        "|x + 5|, c'est la distance à 5 ou à −5 ? Les ensembles de nombres, les crochets qui disent « compris » ou « exclu », et la valeur absolue qui est une distance : tout se lit sur la droite graduée (seconde).",
+      ajoutee: "2026-09-21",
+    },
+  ],
+  "/fiches-cours/maths/seconde/developpement-factorisation-2de": [
+    {
+      id: "Luyg-h3m98o",
+      title: "Développer et factoriser — Maths seconde — EleveAI",
+      description:
+        "5x² = 20x : si tu divises par x, tu perds une solution. Développer, factoriser, et pourquoi on factorise : pour résoudre une équation produit nul (seconde).",
+      ajoutee: "2026-09-21",
+    },
+  ],
+  "/fiches-cours/maths/seconde/expressions-litterales-2de": [
+    {
+      id: "XsfMrmyxuak",
+      title: "Les expressions littérales — Maths seconde — EleveAI",
+      description:
+        "Ça marche pour 1, 2 et 3 : c'est prouvé ? Non. Traduire, réduire, remplacer un nombre négatif, retourner une formule, et la différence entre réfuter avec un exemple et prouver avec une lettre (seconde).",
+      ajoutee: "2026-09-21",
+    },
+  ],
+  "/fiches-cours/maths/seconde/equations-inequations-1er-degre": [
+    {
+      id: "O8xsaf2bwNc",
+      title: "Équations et inéquations — Maths seconde — EleveAI",
+      description:
+        "−2x > 6 : x est-il plus grand que −3 ? Les mêmes gestes des deux côtés, sauf un : diviser par un nombre négatif retourne le sens de l'inégalité. Résoudre, écrire en intervalle, mettre en équation (seconde).",
+      ajoutee: "2026-09-21",
+    },
+  ],
+  "/fiches-cours/maths/seconde/arithmetique-entiers": [
+    {
+      id: "ZZiXPXBTXIQ",
+      title: "Multiples, diviseurs et nombres premiers — Maths seconde — EleveAI",
+      description:
+        "119 a l'air premier, et pourtant 119 = 7 × 17. Diviseurs, pair et impair, nombres premiers, décomposition, fractions irréductibles : tout se justifie par une égalité (seconde).",
+      ajoutee: "2026-09-21",
+    },
+  ],
   "/fiches-cours/maths/seconde/repere-coordonnees": [
     {
       id: "ptquQWJrtuE",
