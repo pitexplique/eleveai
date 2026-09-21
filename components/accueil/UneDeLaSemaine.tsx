@@ -88,16 +88,19 @@ export default function UneDeLaSemaine({ une }: { une: Une }) {
       className="mb-5 rounded-2xl border border-emerald-200 bg-emerald-50/60"
     >
       <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-4 pt-3">
-        {/* À 375 px « Semaine du 21 septembre » et les trois onglets ne tiennent pas
-            sur une ligne : le libellé se replie, et la bande paie 24 px pour une
-            date. Le téléphone lit donc « Cette semaine ».
+        {/* ⭐ LE JOUR, PAS LA SEMAINE (Frédéric, 21/09/2026 : « mets le jour, pas la
+            semaine ») : la Une change plusieurs fois par semaine. À 375 px le
+            libellé long et les trois onglets ne tiennent pas sur une ligne — il se
+            replie, et la bande paie 24 px pour une date : le téléphone lit donc la
+            forme courte, « 21 septembre ». C'est un TEXTE de lib/accueil/une.ts,
+            jamais une date calculée (erreur d'hydratation).
             ⛔ PAS DE PHOTO NI DE TI MARGO ICI. Je les y avais mis le 20/09, contre
             la demande de Frédéric, qui les voulait dans l'en-tête : « je voulais
             ma photo sur le header ainsi que Ti Margo, PAS à la Une ». Ils y sont
             (components/Header.tsx) ; la bande, elle, ne signe pas. */}
         <p className="text-xs font-semibold text-emerald-800">
-          <span className="sm:hidden">Cette semaine</span>
-          <span className="hidden sm:inline">{une.semaine}</span>
+          <span className="sm:hidden">{une.jourCourt}</span>
+          <span className="hidden sm:inline">{une.jour}</span>
         </p>
         {plusieurs && (
           <div className="flex gap-1" role="group" aria-label="Choisir le niveau">

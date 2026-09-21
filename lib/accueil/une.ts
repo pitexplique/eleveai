@@ -23,7 +23,7 @@
 // donnerait un HTML prérendu (daté du déploiement) différent de celui du
 // navigateur le lundi suivant — une erreur d'hydratation pour gagner une
 // programmation dont personne n'a besoin : le site se déploie presque chaque
-// jour. `semaine` n'est donc qu'un libellé affiché.
+// jour. `jour` n'est donc qu'un libellé affiché.
 //
 // ── LA VIGNETTE ──────────────────────────────────────────────────────────────
 // Une image de NOTRE domaine (public/une/*.webp, ~10 Ko), jamais le lecteur
@@ -67,8 +67,15 @@ export type DiapoUne = {
 };
 
 export type Une = {
-  /** Libellé affiché, rien de plus : « Semaine du 21 septembre ». */
-  semaine: string;
+  /** Le JOUR où cette Une a été posée, libellé affiché et rien de plus :
+   *  « Lundi 21 septembre ». ⭐ Frédéric, 21/09/2026 : « mets le jour, pas la
+   *  semaine » — la Une change plusieurs fois par semaine (deux fois ce lundi-là).
+   *  ⚠️ C'est un TEXTE, pas une date calculée (voir « PAS DE CALCUL DE DATE ») :
+   *  il dit quand la Une a changé, pas quel jour on est. */
+  jour: string;
+  /** Le même sans le nom du jour, pour le téléphone : « 21 septembre ». À 375 px
+   *  le libellé long et les trois onglets ne tiennent pas sur une ligne. */
+  jourCourt: string;
   diapos: DiapoUne[];
 };
 
@@ -105,6 +112,83 @@ const COLLEGE_FRACTIONS: DiapoUne = {
   ],
 };
 
+// Le lycée du 21 septembre : « 0,999… = 1 ». ⚠️ `notion=réels` : ce terme
+// n'ouvre QU'UNE des 24 notions de seconde — compté sur les libellés du coach
+// avant d'écrire le lien (« valeur absolue » en ouvre deux, « intervalle » trois).
+const LYCEE_REELS: DiapoUne = {
+  cycle: "lycee",
+  onglet: "Lycée",
+  accroche:
+    "Les maths, ça sert à rien… sauf à savoir que 0,999… et 1 sont le même nombre.",
+  notion: "Nombres réels et valeur absolue · 2de",
+  short: {
+    id: "rmsHC82_MoM",
+    titre: "0,999… = 1 — et ce n'est pas un arrondi",
+    vignette: "/une/short-0999-egale-1.webp",
+  },
+  liens: [
+    {
+      genre: "feuille",
+      label: "La feuille : 20 exercices",
+      court: "20 exercices",
+      href: "/fiches-exercices/maths/seconde/reels-intervalles?from=une",
+    },
+    {
+      genre: "fiche",
+      label: "La fiche de cours",
+      court: "La fiche",
+      href: "/fiches-cours/maths/seconde/reels-intervalles?from=une",
+    },
+    {
+      genre: "series",
+      label: "Les séries du coach",
+      court: "Le coach",
+      href: "/coach-ia/maths?classe=seconde&notion=r%C3%A9els&from=une",
+    },
+  ],
+};
+
+// ⭐ LE COLLÈGE PASSE AUX POURCENTAGES (21/09/2026 au soir). Frédéric : « on n'a
+// pas modifié le short sur la page d'accueil pour les collégiens », « ça doit
+// être relié comme d'habitude au cours et feuille d'exercices et coach ». Le
+// short est celui de la tablette de 100 carrés ; la feuille est la PREMIÈRE de
+// 3e, écrite le même jour. ⛔ Le short ne porte aucune étiquette de classe (les
+// pourcentages vont de la 6e à la 1re) : c'est la FEUILLE qui est de 3e.
+// ⚠️ `notion=proportionnalité` ouvre UNE notion sur 22 en 3e ; « pourcentages »
+// au pluriel n'en ouvre aucune (les libellés du coach sont au singulier).
+const COLLEGE_POURCENTAGES: DiapoUne = {
+  cycle: "college",
+  onglet: "Collège",
+  accroche:
+    "Les maths, ça sert à rien… sauf à savoir que +20 % puis −20 % ne ramène pas au départ.",
+  notion: "Proportionnalité et pourcentages · 3e",
+  short: {
+    id: "It1VgxU9n78",
+    titre: "+20 % puis −20 % : tu n'es PAS revenu au départ",
+    vignette: "/une/short-pourcentages-tablette.webp",
+  },
+  liens: [
+    {
+      genre: "feuille",
+      label: "La feuille : 20 exercices",
+      court: "20 exercices",
+      href: "/fiches-exercices/maths/3e/prop-proportionnalite?from=une",
+    },
+    {
+      genre: "fiche",
+      label: "La fiche de cours",
+      court: "La fiche",
+      href: "/fiches-cours/maths/3e/prop-proportionnalite?from=une",
+    },
+    {
+      genre: "series",
+      label: "Les séries du coach",
+      court: "Le coach",
+      href: "/coach-ia/maths?classe=3e&notion=proportionnalit%C3%A9&from=une",
+    },
+  ],
+};
+
 const PRIMAIRE_LETTRE_A: DiapoUne = {
   cycle: "primaire",
   onglet: "Primaire",
@@ -126,50 +210,24 @@ const PRIMAIRE_LETTRE_A: DiapoUne = {
 };
 
 export const UNES: Une[] = [
+  // ⭐ LUNDI 21 SEPTEMBRE AU SOIR : le collège change (voir COLLEGE_POURCENTAGES).
+  // Le lycée posé l'après-midi et le primaire ne bougent pas.
+  {
+    jour: "Lundi 21 septembre",
+    jourCourt: "21 septembre",
+    diapos: [LYCEE_REELS, COLLEGE_POURCENTAGES, PRIMAIRE_LETTRE_A],
+  },
   // ⭐ LE LYCÉE PASSE AUX NOMBRES RÉELS (21/09/2026). Frédéric : « pourquoi ne
   // ferait-on pas une vidéo lycée sur une contradiction ? », puis « ok 1er short,
   // et du coup on mettra à jour la page d'accueil ». C'est la notion qui ouvre
   // l'année de seconde (la valeur absolue s'enseigne en septembre) ; sa fiche et
   // sa feuille sont en ligne depuis le matin même. Le short « Sarah Knafo »
   // descend dans l'archive.
-  // ⚠️ `notion=réels` : ce terme n'ouvre QU'UNE des 24 notions de seconde —
-  // compté sur les libellés du coach avant d'écrire le lien (« valeur absolue »
-  // en ouvre deux, « intervalle » trois).
   {
-    semaine: "Semaine du 21 septembre",
+    jour: "Lundi 21 septembre",
+    jourCourt: "21 septembre",
     diapos: [
-      {
-        cycle: "lycee",
-        onglet: "Lycée",
-        accroche:
-          "Les maths, ça sert à rien… sauf à savoir que 0,999… et 1 sont le même nombre.",
-        notion: "Nombres réels et valeur absolue · 2de",
-        short: {
-          id: "rmsHC82_MoM",
-          titre: "0,999… = 1 — et ce n'est pas un arrondi",
-          vignette: "/une/short-0999-egale-1.webp",
-        },
-        liens: [
-          {
-            genre: "feuille",
-            label: "La feuille : 20 exercices",
-            court: "20 exercices",
-            href: "/fiches-exercices/maths/seconde/reels-intervalles?from=une",
-          },
-          {
-            genre: "fiche",
-            label: "La fiche de cours",
-            court: "La fiche",
-            href: "/fiches-cours/maths/seconde/reels-intervalles?from=une",
-          },
-          {
-            genre: "series",
-            label: "Les séries du coach",
-            court: "Le coach",
-            href: "/coach-ia/maths?classe=seconde&notion=r%C3%A9els&from=une",
-          },
-        ],
-      },
+      LYCEE_REELS,
       COLLEGE_FRACTIONS,
       PRIMAIRE_LETTRE_A,
     ],
@@ -182,7 +240,8 @@ export const UNES: Une[] = [
   // ⛔ PAS D'ÉTIQUETTE DE CLASSE UNIQUE : l'information chiffrée est au programme
   // de seconde ET du tronc commun de première.
   {
-    semaine: "Semaine du 21 septembre",
+    jour: "Dimanche 20 septembre",
+    jourCourt: "20 septembre",
     diapos: [
       {
         cycle: "lycee",
@@ -221,7 +280,8 @@ export const UNES: Une[] = [
     ],
   },
   {
-    semaine: "Semaine du 21 septembre",
+    jour: "Dimanche 20 septembre",
+    jourCourt: "20 septembre",
     diapos: [
       {
         cycle: "lycee",
