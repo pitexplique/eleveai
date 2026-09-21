@@ -31,6 +31,49 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Du calcul seul au problème, sur de vrais chiffres : une fiche de paie (47 % du coût ou 89 % du net ?), vingt ans de salaires, cinq pays. Proportion et total de référence, points de pourcentage, coefficient multiplicateur, évolutions successives et réciproques. Un rappel de cours avant chaque niveau.",
   },
+  // ⭐ LE BLOC « NOMBRES ET CALCULS » DE SECONDE (21/09/2026) — Frédéric :
+  // « toutes les fiches exercices de nombres et calculs en seconde », une par
+  // une, chronométrées.
+  "maths/seconde/puissances-2de": {
+    titre: "Les puissances : 20 exercices corrigés",
+    resume:
+      "Du calcul seul au problème : produit, quotient, puissance d'une puissance, exposant négatif, expressions à réduire sous la forme a^n comme au contrôle, notation scientifique. La lumière du Soleil, les globules rouges, une bactérie qui se divise.",
+  },
+  "maths/seconde/racine-carree-2de": {
+    titre: "La racine carrée : 20 exercices corrigés",
+    resume:
+      "Du calcul seul au problème : calculer, racine d'un carré, produit de racines, simplifier, additionner des racines de même radical comme au contrôle, développer. Une diagonale, un triangle rectangle, le secret de la feuille A4.",
+  },
+  "maths/seconde/developpement-factorisation-2de": {
+    titre: "Développer et factoriser : 20 exercices corrigés",
+    resume:
+      "Du calcul seul au problème : distributivité, signe moins devant une parenthèse, double distributivité, facteur commun, identités remarquables, et l'équation produit nul — la raison d'être de la factorisation. Une terrasse, un cadre photo, un programme de calcul.",
+  },
+  "maths/seconde/identites-remarquables-2de": {
+    titre: "Les identités remarquables : 20 exercices corrigés",
+    resume:
+      "Du calcul seul au problème : développer et factoriser avec les trois identités, calculer de tête, faire apparaître puis disparaître une racine, résoudre. Deux preuves : deux impairs consécutifs, et la racine chassée du dénominateur.",
+  },
+  "maths/seconde/expressions-litterales-2de": {
+    titre: "Les expressions littérales : 20 exercices corrigés",
+    resume:
+      "Du calcul seul au problème : traduire, réduire, remplacer une lettre par un nombre négatif, isoler une lettre dans une formule, programmes de calcul. Prouver avec une lettre, réfuter par un contre-exemple. Un tour de magie, le carré du calendrier, la TVA à La Réunion.",
+  },
+  "maths/seconde/equations-inequations-1er-degre": {
+    titre: "Équations et inéquations : 20 exercices corrigés",
+    resume:
+      "Du calcul seul au problème : résoudre, diviser par un négatif, écrire les solutions en intervalle et les voir sur une droite graduée, aucune solution ou tous les nombres, comparer par la différence ou le quotient. Le marché de Saint-Paul, le froid au Piton des Neiges, une course à rattraper.",
+  },
+  "maths/seconde/arithmetique-entiers": {
+    titre: "Multiples, diviseurs et nombres premiers : 20 exercices corrigés",
+    resume:
+      "Du calcul seul au problème : diviseurs, pair et impair, critères de divisibilité, nombres premiers, décomposition, fractions irréductibles, et deux démonstrations avec une lettre. Des bouquets, des bus, un carrelage, un vélo, et les cigales qui comptent en nombres premiers.",
+  },
+  "maths/seconde/reels-intervalles": {
+    titre: "Nombres réels, intervalles et valeur absolue : 20 exercices corrigés",
+    resume:
+      "Du calcul seul au problème : ensembles de nombres, droite graduée, intervalles écrits et dessinés, encadrements, valeur absolue et distance, |x − a| ≤ r. Les deux preuves du programme (1/3 n'est pas décimal, √2 est irrationnel), une pièce à 0,2 mm près, la marge d'erreur d'un sondage.",
+  },
   // ⭐ LA PREMIÈRE (15/09/2026) — écrite pour la fille de Frédéric, en 1re, qui
   // teste ce soir. Le verdict est pour demain.
   "maths/premiere-spe/exponentielle": {

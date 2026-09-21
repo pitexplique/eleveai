@@ -2,6 +2,7 @@
 "use client";
 
 import type { CanvasFigure } from "@/lib/tutor-v4/types";
+import type { NumberLineCanvasIntervalle } from "@/lib/tutor-v4/types_canvas";
 
 type Props = {
   figure: CanvasFigure;
@@ -64,6 +65,7 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
   const showZero = figure.display?.showZero ?? true;
 
   const points = (figure.points ?? []) as NumberLinePoint[];
+  const intervalles = (figure.intervalles ?? []) as NumberLineCanvasIntervalle[];
 
   const ticks: number[] = [];
   const safeStep = step > 0 ? step : 1;
@@ -126,6 +128,27 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
         className="block h-auto w-full"
         aria-label="Droite graduée"
       >
+        {/* ⭐ Les intervalles, SOUS l'axe : une bande colorée large, que l'axe
+            traverse. Dessinée d'abord pour ne masquer ni l'axe ni les graduations. */}
+        {intervalles.map((iv, index) => {
+          const couleur = iv.color ?? "#16a34a";
+          const x1 = iv.de === undefined ? axisStartX : valueToX(clamp(iv.de, min, max), min, max, leftPad, rightPad, width);
+          const x2 = iv.a === undefined ? axisEndX : valueToX(clamp(iv.a, min, max), min, max, leftPad, rightPad, width);
+          return (
+            <line
+              key={`bande-${index}`}
+              x1={x1}
+              y1={axisY}
+              x2={x2}
+              y2={axisY}
+              stroke={couleur}
+              strokeWidth={12}
+              strokeOpacity={0.3}
+              strokeLinecap="butt"
+            />
+          );
+        })}
+
         {/* Axe */}
         <line
           x1={axisStartX}
@@ -199,6 +222,44 @@ export default function DroiteGradueeCanvas({ figure }: Props) {
               </g>
             );
           })}
+
+        {/* Les crochets et l'infini, PAR-DESSUS les graduations.
+            Un crochet se lit comme il s'écrit : borne comprise, il se tourne
+            vers l'intérieur de l'intervalle (« [2 » ; « 5] ») ; borne exclue,
+            vers l'extérieur (« ]2 » ; « 5[ »). Côté infini, une flèche colorée. */}
+        {intervalles.map((iv, index) => {
+          const couleur = iv.color ?? "#16a34a";
+          const H = 13; // demi-hauteur d'un crochet
+          const B = 7; // longueur de ses becs
+          const crochet = (x: number, sens: 1 | -1) =>
+            `M ${x + sens * B} ${axisY - H} L ${x} ${axisY - H} L ${x} ${axisY + H} L ${x + sens * B} ${axisY + H}`;
+          const fleche = (x: number, sens: 1 | -1) =>
+            `M ${x - sens * 11} ${axisY - 8} L ${x} ${axisY} L ${x - sens * 11} ${axisY + 8}`;
+          const x1 = iv.de === undefined ? axisStartX : valueToX(clamp(iv.de, min, max), min, max, leftPad, rightPad, width);
+          const x2 = iv.a === undefined ? axisEndX : valueToX(clamp(iv.a, min, max), min, max, leftPad, rightPad, width);
+          const trait = { fill: "none", stroke: couleur, strokeWidth: 3.2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+          return (
+            <g key={`intervalle-${index}`}>
+              {iv.de === undefined ? <path d={fleche(x1, -1)} {...trait} /> : <path d={crochet(x1, iv.deInclus ? 1 : -1)} {...trait} />}
+              {iv.a === undefined ? <path d={fleche(x2, 1)} {...trait} /> : <path d={crochet(x2, iv.aInclus ? -1 : 1)} {...trait} />}
+              {iv.label ? (
+                <text
+                  x={(x1 + x2) / 2}
+                  y={axisY - H - 7}
+                  textAnchor="middle"
+                  fontSize="14"
+                  fontWeight="900"
+                  fill={couleur}
+                  stroke="white"
+                  strokeWidth="3"
+                  paintOrder="stroke"
+                >
+                  {iv.label}
+                </text>
+              ) : null}
+            </g>
+          );
+        })}
 
         {/* Points */}
         {showPoints &&

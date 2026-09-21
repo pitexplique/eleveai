@@ -590,6 +590,16 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Le signe d'une expression",
     resume: "Dresser un tableau de signes : produit, quotient et valeur interdite ; resoudre equations et inequations.",
   },
+  // ⭐ LES DEUX DERNIÈRES DU BLOC « NOMBRES ET CALCULS » (21/09/2026), écrites
+  // après leurs feuilles d'exercices.
+  "maths/seconde/reels-intervalles": {
+    titre: "Nombres réels, intervalles et valeur absolue",
+    resume: "Les cinq ensembles de nombres, les crochets qui disent compris ou exclu, et la valeur absolue qui est une distance : tout se lit sur la droite graduée.",
+  },
+  "maths/seconde/arithmetique-entiers": {
+    titre: "Multiples, diviseurs et nombres premiers",
+    resume: "Tout se justifie par une égalité : 56 = 8 × 7. Pair et impair, critères de divisibilité, nombres premiers, et la décomposition qui rend une fraction irréductible.",
+  },
   "maths/seconde/information-chiffree-evolutions": {
     titre: "Pourcentages et évolutions",
     resume: "Proportion et total de référence, points de pourcentage, coefficient multiplicateur, évolutions successives et réciproques : le même bulletin de paie fait 47 % ou 89 %.",

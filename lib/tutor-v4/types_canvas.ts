@@ -162,6 +162,28 @@ export type NumberLineCanvasPoint = {
   color?: string;
 };
 
+/**
+ * ⭐ UN INTERVALLE POSÉ SUR LA DROITE (21/09/2026, feuilles d'inéquations et
+ * d'intervalles de seconde). Un segment épais coloré, un crochet à chaque borne
+ * — tourné vers l'intérieur si la borne est comprise, vers l'extérieur sinon,
+ * comme on l'écrit « [2 ; 5[ » — et une flèche au bout pour l'infini.
+ * `de` ou `a` absents = −∞ ou +∞. La même règle que l'écriture : l'élève lit
+ * sur le dessin le crochet qu'il doit écrire.
+ */
+export type NumberLineCanvasIntervalle = {
+  /** Borne gauche ; absente = −∞. */
+  de?: number;
+  /** Borne droite ; absente = +∞. */
+  a?: number;
+  /** La borne gauche est-elle comprise ? (crochet « [ ») */
+  deInclus?: boolean;
+  /** La borne droite est-elle comprise ? (crochet « ] ») */
+  aInclus?: boolean;
+  color?: string;
+  /** Texte court posé au-dessus du segment, ex. « solutions ». */
+  label?: string;
+};
+
 export type NumberLineCanvasData = {
   kind: "number_line";
   size?: { width?: number; height?: number };
@@ -169,6 +191,7 @@ export type NumberLineCanvasData = {
   max?: number;
   step?: number;
   points?: NumberLineCanvasPoint[];
+  intervalles?: NumberLineCanvasIntervalle[];
   display?: {
     showTicks?: boolean;
     showValues?: boolean;
@@ -1409,6 +1432,8 @@ export type DroiteGradueeCanvasData = {
   step?: number;
 
   points?: DroiteGradueePoint[];
+  /** Voir `NumberLineCanvasIntervalle`. */
+  intervalles?: NumberLineCanvasIntervalle[];
 
   display?: {
     showTicks?: boolean;
