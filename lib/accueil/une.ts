@@ -128,9 +128,10 @@ const PRIMAIRE_LETTRE_A: DiapoUne = {
 export const UNES: Une[] = [
   // ⭐ LE LYCÉE PASSE AUX NOMBRES RÉELS (21/09/2026). Frédéric : « pourquoi ne
   // ferait-on pas une vidéo lycée sur une contradiction ? », puis « ok 1er short,
-  // et du coup on mettra à jour la page d'accueil ». C'est la notion qu'il
-  // enseigne cette semaine en seconde ; sa fiche et sa feuille sont en ligne
-  // depuis le matin même. Le short « Sarah Knafo » descend dans l'archive.
+  // et du coup on mettra à jour la page d'accueil ». C'est la notion qui ouvre
+  // l'année de seconde (la valeur absolue s'enseigne en septembre) ; sa fiche et
+  // sa feuille sont en ligne depuis le matin même. Le short « Sarah Knafo »
+  // descend dans l'archive.
   // ⚠️ `notion=réels` : ce terme n'ouvre QU'UNE des 24 notions de seconde —
   // compté sur les libellés du coach avant d'écrire le lien (« valeur absolue »
   // en ouvre deux, « intervalle » trois).
