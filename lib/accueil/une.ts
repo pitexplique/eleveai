@@ -126,6 +126,53 @@ const PRIMAIRE_LETTRE_A: DiapoUne = {
 };
 
 export const UNES: Une[] = [
+  // ⭐ LE LYCÉE PASSE AUX NOMBRES RÉELS (21/09/2026). Frédéric : « pourquoi ne
+  // ferait-on pas une vidéo lycée sur une contradiction ? », puis « ok 1er short,
+  // et du coup on mettra à jour la page d'accueil ». C'est la notion qu'il
+  // enseigne cette semaine en seconde ; sa fiche et sa feuille sont en ligne
+  // depuis le matin même. Le short « Sarah Knafo » descend dans l'archive.
+  // ⚠️ `notion=réels` : ce terme n'ouvre QU'UNE des 24 notions de seconde —
+  // compté sur les libellés du coach avant d'écrire le lien (« valeur absolue »
+  // en ouvre deux, « intervalle » trois).
+  {
+    semaine: "Semaine du 21 septembre",
+    diapos: [
+      {
+        cycle: "lycee",
+        onglet: "Lycée",
+        accroche:
+          "Les maths, ça sert à rien… sauf à savoir que 0,999… et 1 sont le même nombre.",
+        notion: "Nombres réels et valeur absolue · 2de",
+        short: {
+          id: "rmsHC82_MoM",
+          titre: "0,999… = 1 — et ce n'est pas un arrondi",
+          vignette: "/une/short-0999-egale-1.webp",
+        },
+        liens: [
+          {
+            genre: "feuille",
+            label: "La feuille : 20 exercices",
+            court: "20 exercices",
+            href: "/fiches-exercices/maths/seconde/reels-intervalles?from=une",
+          },
+          {
+            genre: "fiche",
+            label: "La fiche de cours",
+            court: "La fiche",
+            href: "/fiches-cours/maths/seconde/reels-intervalles?from=une",
+          },
+          {
+            genre: "series",
+            label: "Les séries du coach",
+            court: "Le coach",
+            href: "/coach-ia/maths?classe=seconde&notion=r%C3%A9els&from=une",
+          },
+        ],
+      },
+      COLLEGE_FRACTIONS,
+      PRIMAIRE_LETTRE_A,
+    ],
+  },
   // ⭐ LE LYCÉE CHANGE EN COURS DE SEMAINE (20/09/2026 au soir). Frédéric : « à la
   // Une de eleveai on met une vidéo associée à un coach IA et feuille d'exercices,
   // comme avec les baleines » — le short « Sarah Knafo a-t-elle raison ? » suit
