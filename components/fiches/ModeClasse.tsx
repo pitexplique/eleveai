@@ -215,6 +215,9 @@ export type ClasseSlide = {
    * Frédéric : « le mode classe est vraiment essentiel pour les profs ».
    */
   schema?: ReactNode;
+  /** Le dessin se LIT pendant tout l'exercice (la courbe d'un énoncé) : il
+   *  reste à gauche, en colonne étroite, au lieu d'être empilé en grand. */
+  figureEtroite?: boolean;
 };
 
 const BTN_REVELER =
@@ -703,11 +706,19 @@ export default function ModeClasse({
                  section. Un `objectif` bavard souffre autant qu'un `exemple`, et
                  c'est la mesure qui tranche, pas la catégorie. */
               className={
-                slide.section.type === "exemple" ||
-                slide.section.type === "exercice" ||
-                signesProjetes(slide.section) > 320
-                  ? "grid gap-6"
-                  : "grid gap-6 lg:grid-cols-2 lg:gap-10"
+                // ⭐ LA FIGURE À LIRE, EN COLONNE ÉTROITE (22/09/2026) — les
+                // feuilles d'exercices de fonctions projettent la courbe de
+                // l'énoncé. Empilée en pleine largeur, elle montait à 530 px et
+                // la diapo débordait de 445 (mesuré à 1280 × 800). À gauche, en
+                // 22rem, le texte garde les deux tiers de l'écran : ce n'est pas
+                // la « bande étroite » du 04/09, et ce sont deux colonnes, pas trois.
+                slide.figureEtroite
+                  ? "grid gap-6 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:items-start lg:gap-10"
+                  : slide.section.type === "exemple" ||
+                      slide.section.type === "exercice" ||
+                      signesProjetes(slide.section) > 320
+                    ? "grid gap-6"
+                    : "grid gap-6 lg:grid-cols-2 lg:gap-10"
               }
             >
               {/* ⛔ LE DESSIN ÉTAIT LA VRAIE CAUSE DU DÉBORDEMENT — mesuré le
@@ -743,7 +754,7 @@ export default function ModeClasse({
                   222 px : projeté, le dessin se plie à un mot par ligne et
                   monte à 702 px de haut dans une diapo qui en montre 621.
                   Voir lib/canvas/largeur-projetee.tsx pour les mesures. */}
-              <div className="mx-auto w-full max-w-xl [&_svg]:w-full">
+              <div className={`mx-auto w-full ${slide.figureEtroite ? "max-w-[22rem]" : "max-w-xl"} [&_svg]:w-full`}>
                 <LargeurProjetee.Provider value={LARGEUR_PROJETEE}>
                   {slide.schema}
                 </LargeurProjetee.Provider>

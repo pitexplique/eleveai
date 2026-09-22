@@ -285,7 +285,7 @@ export function outilsAlgebre(v, { enonces, corrections }) {
  * du DESSIN, lu dans le source de l'exercice. Une borne comprise à tort, un
  * sens oublié : la grille le voit.
  */
-const nb = (x) => (typeof x === "object" ? x : typeof x === "string" ? D(x) : Q(x));
+const nb = (x) => (typeof x === "object" ? x : typeof x === "string" || !Number.isInteger(x) ? D(String(x)) : Q(x));
 
 export function grille(a, b, pas, bornes) {
   const g = [];
@@ -318,7 +318,335 @@ export function outilsIntervalles(v, { corrections, blocs }) {
     const ok = ["de", "a", "deInclus", "aInclus"].every((cle) => lu[cle] === attendu[cle]);
     v.ok(`${k}. le dessin montre le même intervalle`, !!m && ok, `lu ${JSON.stringify(lu)} ; attendu ${JSON.stringify(attendu)}`);
   };
-  return { ensemble, dessin };
+  /** Même contrôle pour une RÉUNION d'intervalles (`[−2 ; −1[ ∪ ]3 ; 4]`). */
+  const union = (k, quoi, condition, ivs, { phrase, de = -30, a = 30, pas = Q(1, 4) } = {}) => {
+    const bornes = ivs.flatMap((iv) => [iv.de, iv.a]).filter((b) => b !== undefined).map(nb);
+    const faux = grille(de, a, pas, bornes).filter((x) => condition(x) !== ivs.some((iv) => dans(x, iv)));
+    v.ok(`${k}. ${quoi}`, faux.length === 0 && (!phrase || c(k).includes(phrase)), faux.length ? `désaccord en x = ${faux[0].n}/${faux[0].d}` : `phrase : ${phrase}`);
+  };
+  return { ensemble, dessin, union };
+}
+
+/* ── Les courbes et les tableaux DESSINÉS (bloc « Fonctions », 21/09 au soir) ─
+ *
+ * ⭐ Une feuille de fonctions se LIT sur ses figures : la courbe de l'énoncé est
+ * la donnée de l'exercice. Le script ne recopie donc pas les courbes — il les
+ * RELIT dans le source (`repere([cadre], courbes, marques, horizontale)`, les
+ * constantes `const NOM: Courbe[]`, les `tableau([entête], [ligne])`) et les
+ * évalue en fractions exactes. Une courbe modifiée sans son corrigé, un point
+ * marqué à côté de sa courbe : ça se voit.
+ */
+
+/** Une courbe relue : `q` (ax² + bx + c) ou `pts` (ligne brisée), évaluée exactement.
+ *  Renvoie null hors d'une ligne brisée. */
+export function evalCourbe(courbe) {
+  if (courbe.p) {
+    const coefs = courbe.p.map(nb);
+    return (x) => coefs.reduce((s, c) => plus(fois(s, x), c), Q(0));
+  }
+  if (courbe.q) {
+    const [a, b, cc] = courbe.q.map(nb);
+    return (x) => plus(plus(fois(a, fois(x, x)), fois(b, x)), cc);
+  }
+  const pts = courbe.pts.map(([x, y]) => [nb(x), nb(y)]);
+  return (x) => {
+    for (let i = 0; i + 1 < pts.length; i++) {
+      const [x0, y0] = pts[i];
+      const [x1, y1] = pts[i + 1];
+      if (!inf(x, x0) && !inf(x1, x)) return plus(y0, div(fois(moins(x, x0), moins(y1, y0)), moins(x1, x0)));
+    }
+    return null;
+  };
+}
+
+/** JSON d'un argument relu dans le source : la virgule finale d'une liste
+ *  écrite sur plusieurs lignes est permise en TypeScript, pas en JSON. */
+// ⚠️ Seulement devant un retour à la ligne : `{,}`, la virgule décimale de
+// LaTeX, est une virgule devant une accolade — elle perdait sa virgule.
+const json = (t) => JSON.parse(t.replace(/,(\s*\n\s*[\]}])/g, "$1"));
+
+/** Les arguments de premier niveau d'un appel dont `debut` pointe la parenthèse ouvrante. */
+function argumentsDe(texte, debut) {
+  const args = [];
+  let prof = 0;
+  let courant = "";
+  for (let i = debut + 1; i < texte.length; i++) {
+    const ch = texte[i];
+    if ("([{".includes(ch)) prof++;
+    if (")]}".includes(ch)) {
+      if (prof === 0) {
+        if (courant.trim()) args.push(courant.trim());
+        return args;
+      }
+      prof--;
+    }
+    if (ch === "," && prof === 0) {
+      args.push(courant.trim());
+      courant = "";
+    } else courant += ch;
+  }
+  throw new Error("appel non fermé");
+}
+
+export function outilsCourbes(v, { blocs }, source) {
+  // Les constantes du fichier : `const NOM: Courbe[] = […];` et `const NOM: [number, number][] = […];`.
+  const consts = {};
+  const lireCourbes = (t) => {
+    t = t.trim();
+    if (/^[A-Z0-9_]+$/.test(t)) {
+      if (!consts[t]) throw new Error(`constante inconnue : ${t}`);
+      return consts[t];
+    }
+    return [...t.matchAll(/\{\s*(q|pts|p): (\[\[[\s\S]*?\]\]|\[[^\]]*\]|[A-Z0-9_]+)/g)].map(([, cle, val]) =>
+      /^[A-Z0-9_]+$/.test(val) ? { pts: consts[val].pts } : { [cle]: json(val) },
+    );
+  };
+  for (const m of source.matchAll(/const ([A-Z0-9_]+): (Courbe\[\]|\[number, number\]\[\]) = (\[[\s\S]*?\]);\n/g)) {
+    consts[m[1]] = m[2] === "Courbe[]" ? lireCourbes(m[3]) : { pts: json(m[3]) };
+  }
+
+  /** Les appels `repere(…)` de l'exercice k, avec leur rôle (figure ou schéma). */
+  const reperes = (k) => {
+    const bloc = blocs[k - 1] ?? "";
+    return [...bloc.matchAll(/\brepere\(/g)].map((m) => {
+      const debut = m.index + m[0].length - 1;
+      const avant = bloc.slice(0, m.index);
+      const role = avant.lastIndexOf("figure:") > avant.lastIndexOf("schema:") ? "figure" : "schema";
+      const [cadre, courbes, marques, horiz] = argumentsDe(bloc, debut);
+      return {
+        role,
+        cadre: json(cadre),
+        courbes: lireCourbes(courbes),
+        marques: marques && marques.startsWith("[") ? [...marques.matchAll(/\{([^}]*)\}/g)].map(([, t]) => ({ x: Number(/x: (-?[\d.]+)/.exec(t)[1]), y: Number(/y: (-?[\d.]+)/.exec(t)[1]), label: /label: "([^"]*)"/.exec(t)?.[1] })) : [],
+        horizontale: horiz === undefined ? undefined : Number(horiz),
+      };
+    });
+  };
+
+  /** Les fonctions dessinées dans la figure (ou le schéma) de l'exercice k. */
+  const courbes = (k, role = "figure") => {
+    const r = reperes(k).find((x) => x.role === role);
+    if (!r) throw new Error(`exercice ${k} : pas de ${role}`);
+    return r.courbes.map(evalCourbe);
+  };
+
+  /** Le `tableau([entête], [ligne])` de l'exercice k, ligne en nombres (« −3 » compris). */
+  const tableauDe = (k) => {
+    const bloc = blocs[k - 1] ?? "";
+    const i = bloc.indexOf("tableau(");
+    if (i < 0) throw new Error(`exercice ${k} : pas de tableau`);
+    const [entete, ligne] = argumentsDe(bloc, i + "tableau".length).map((a) => json(a.replace(/−/g, "-")));
+    return { entete, ligne };
+  };
+
+  /** Contrôle de TOUS les repères de la feuille : chaque point marqué est dans
+   *  son cadre, sur une des courbes tracées, et un point étiqueté garde deux
+   *  unités au-dessus de lui (sinon l'étiquette sort, mesuré le 08/09). */
+  const controlerTout = () => {
+    let n = 0;
+    const fautes = [];
+    blocs.forEach((_, i) => {
+      for (const r of reperes(i + 1)) {
+        n++;
+        const [xmin, xmax, ymin, ymax] = r.cadre;
+        if (!(xmin < xmax && ymin < 0 && ymax > ymin)) fautes.push(`${i + 1} : cadre ${r.cadre} (ymin doit être < 0)`);
+        const fs = r.courbes.map(evalCourbe);
+        for (const p of r.marques) {
+          const x = D(String(p.x));
+          const y = D(String(p.y));
+          if (p.x < xmin || p.x > xmax || p.y < ymin || p.y > ymax) fautes.push(`${i + 1} : (${p.x} ; ${p.y}) hors du cadre`);
+          if (!fs.some((f) => { const fx = f(x); return fx && egal(fx, y); })) fautes.push(`${i + 1} : (${p.x} ; ${p.y}) sur aucune courbe`);
+          if (p.label && ymax - p.y < 2) fautes.push(`${i + 1} : l'étiquette « ${p.label} » colle au bord du haut`);
+        }
+      }
+    });
+    v.ok(`${n} repères : points marqués dans le cadre, sur leur courbe, étiquettes loin du bord`, fautes.length === 0, fautes.join(" | "));
+  };
+
+  /** Les `tableauVariations([bornes], [valeurs], "label")` de l'exercice k, avec leur rôle. */
+  const tableauxVariations = (k) => {
+    const bloc = blocs[k - 1] ?? "";
+    const num = (x) => D(String(x).replace(/−/g, "-"));
+    return [...bloc.matchAll(/\btableauVariations\(/g)].map((m) => {
+      const avant = bloc.slice(0, m.index);
+      const role = avant.lastIndexOf("figure:") > avant.lastIndexOf("schema:") ? "figure" : "schema";
+      const [b, val, label] = argumentsDe(bloc, m.index + m[0].length - 1);
+      return { role, bornes: json(b).map(num), valeurs: json(val).map(num), label: label ? json(label) : "f" };
+    });
+  };
+  const tableauVariationsDe = (k, role = "figure") => {
+    const t = tableauxVariations(k).find((x) => x.role === role);
+    if (!t) throw new Error(`exercice ${k} : pas de tableau de variations (${role})`);
+    return t;
+  };
+
+  /** Le tableau dit-il la même chose que la fonction F ? Valeur à chaque borne,
+   *  puis, sur chaque morceau, le sens de la flèche — strictement monotone, ou
+   *  constante si les deux bouts sont égaux — vérifié sur une grille de 1/8. */
+  const accord = (k, t, F, quoi) => {
+    const fautes = [];
+    t.bornes.forEach((b, i) => {
+      if (!egal(F(b), t.valeurs[i])) fautes.push(`f(${b.n}/${b.d}) ≠ ${t.valeurs[i].n}/${t.valeurs[i].d}`);
+    });
+    for (let i = 0; i + 1 < t.bornes.length; i++) {
+      const sens = inf(t.valeurs[i], t.valeurs[i + 1]) ? 1 : inf(t.valeurs[i + 1], t.valeurs[i]) ? -1 : 0;
+      let prec = F(t.bornes[i]);
+      for (let x = plus(t.bornes[i], Q(1, 8)); !inf(t.bornes[i + 1], x); x = plus(x, Q(1, 8))) {
+        const y = F(x);
+        const ok = sens === 1 ? inf(prec, y) : sens === -1 ? inf(y, prec) : egal(y, prec);
+        if (!ok) {
+          fautes.push(`morceau ${i + 1} : le sens ne tient pas en x = ${x.n}/${x.d}`);
+          break;
+        }
+        prec = y;
+      }
+    }
+    v.ok(`${k}. ${quoi}`, fautes.length === 0, fautes.slice(0, 2).join(" ; "));
+  };
+
+  return { reperes, courbes, tableauDe, controlerTout, consts, tableauxVariations, tableauVariationsDe, accord };
+}
+
+/** Racine carrée exacte d'une fraction, ou null. */
+export function racineExacte(q) {
+  const r = (n) => {
+    if (n < 0n) return null;
+    let x = BigInt(Math.floor(Math.sqrt(Number(n))));
+    while (x * x > n) x--;
+    while ((x + 1n) * (x + 1n) <= n) x++;
+    return x * x === n ? x : null;
+  };
+  const a = r(q.n);
+  const b = r(q.d);
+  return a === null || b === null ? null : Q(a, b);
+}
+
+/** Les racines EXACTES de f, polynôme de degré ≤ 2 LU PAR SES VALEURS en −1, 0,
+ *  1 (et 2 pour s'assurer du degré) : « deux, une ou aucune » se compte, il ne
+ *  se recopie pas. null si f est nulle partout. */
+export function racines(f) {
+  const [fm, f0, f1, f2] = [-1, 0, 1, 2].map((n) => f(Q(n)));
+  const a = moins(div(plus(f1, fm), Q(2)), f0);
+  const b = div(moins(f1, fm), Q(2));
+  const c = f0;
+  const troisieme = moins(moins(f2, f0), fois(Q(2), moins(f1, f0)));
+  if (!egal(troisieme, fois(Q(2), a))) throw new Error("pas un polynôme de degré ≤ 2");
+  if (egal(a, Q(0))) return egal(b, Q(0)) ? (egal(c, Q(0)) ? null : []) : [div(moins(Q(0), c), b)];
+  const delta = moins(fois(b, b), fois(Q(4), fois(a, c)));
+  if (inf(delta, Q(0))) return [];
+  const r = racineExacte(delta);
+  if (r === null) throw new Error(`discriminant non carré : ${delta.n}/${delta.d}`);
+  const s = [div(moins(moins(Q(0), b), r), fois(Q(2), a)), div(plus(moins(Q(0), b), r), fois(Q(2), a))];
+  return egal(s[0], s[1]) ? [s[0]] : s;
+}
+
+/**
+ * Les tableaux de SIGNES d'une feuille (`tableauSignes([bornes], [[libellé,
+ * signes, marques], …])`), relus et recalculés case par case.
+ * ⭐ Chaque ligne se vérifie sur SA formule — son libellé lui-même (`$2x - 8$`,
+ * `$\dfrac{x - 5}{2x + 2}$`), ou celle qu'on donne pour un libellé comme
+ * `$h(x)$`. Dans chaque colonne, le signe au milieu ; sous chaque borne, `0` si
+ * la formule s'annule, `||` si elle n'existe pas (division par zéro), rien sinon.
+ */
+export function outilsSignes(v, { blocs }) {
+  const borne = (s) => {
+    const t = s.replace(/−/g, "-").replace(/\$/g, "").trim();
+    if (t === "-∞") return -Infinity;
+    if (t === "+∞") return Infinity;
+    return evalTex(t, Q(0));
+  };
+  const tableaux = (k) => {
+    const bloc = blocs[k - 1] ?? "";
+    return [...bloc.matchAll(/\btableauSignes\(/g)].map((m) => {
+      const avant = bloc.slice(0, m.index);
+      const role = avant.lastIndexOf("figure:") > avant.lastIndexOf("schema:") ? "figure" : "schema";
+      const [b, l, variable] = argumentsDe(bloc, m.index + m[0].length - 1);
+      return { role, bornesTexte: json(b), bornes: json(b).map(borne), lignes: json(l), variable: variable ? json(variable) : "x" };
+    });
+  };
+  const tableau = (k, role = "schema") => {
+    const t = tableaux(k).find((x) => x.role === role);
+    if (!t) throw new Error(`exercice ${k} : pas de tableau de signes (${role})`);
+    return t;
+  };
+  /** Le signe exact d'une formule en x, ou « || » si elle n'y existe pas. */
+  const signeEn = (formule, x) => {
+    let y;
+    try {
+      y = evalTex(formule, x);
+    } catch (e) {
+      if (/division par zéro/.test(String(e?.message))) return "||";
+      throw e;
+    }
+    return inf(y, Q(0)) ? "-" : inf(Q(0), y) ? "+" : "0";
+  };
+  /** Tout le tableau de l'exercice k est-il juste ? `formules[i]` remplace le
+   *  libellé de la ligne i quand celui-ci n'est pas une formule (« $h(x)$ »). */
+  const juste = (k, formules = {}, role = "schema") => {
+    const t = tableau(k, role);
+    const fautes = [];
+    const finies = t.bornes.filter((b) => typeof b === "object");
+    if (finies.some((b, i) => i > 0 && !inf(finies[i - 1], b))) fautes.push("bornes pas dans l'ordre croissant");
+    const milieu = (j) => {
+      const [a, b] = [t.bornes[j], t.bornes[j + 1]];
+      if (a === -Infinity) return moins(b, Q(1));
+      if (b === Infinity) return plus(a, Q(1));
+      return div(plus(a, b), Q(2));
+    };
+    t.lignes.forEach(([label, signes, marques = []], i) => {
+      const f = (formules[i] ?? label.replace(/\$/g, "")).replace(t.variable === "x" ? /$^/ : new RegExp(t.variable, "g"), "x");
+      signes.forEach((s, j) => {
+        const lu = signeEn(f, milieu(j));
+        if (lu !== s) fautes.push(`ligne « ${label} », colonne ${j + 1} : ${s} écrit, ${lu} calculé`);
+      });
+      for (let j = 1; j + 1 < t.bornes.length; j++) {
+        const lu = signeEn(f, t.bornes[j]);
+        const attendu = lu === "0" ? "0" : lu === "||" ? "||" : "";
+        if ((marques[j - 1] ?? "") !== attendu) fautes.push(`ligne « ${label} », sous ${t.bornesTexte[j]} : « ${marques[j - 1] ?? ""} » écrit, « ${attendu} » calculé`);
+      }
+    });
+    v.ok(`${k}. le tableau de signes, case par case (${t.lignes.length} ligne${t.lignes.length > 1 ? "s" : ""}, ${t.bornes.length - 1} colonnes)`, fautes.length === 0, fautes.slice(0, 2).join(" ; "));
+    return t;
+  };
+  return { tableau, juste, signeEn };
+}
+
+/** Ce qu'un tableau de variations permet de LIRE, calculé sur ses nombres. */
+export function lireTableauVariations(t) {
+  const max = t.valeurs.reduce((m, x) => (inf(m, x) ? x : m));
+  const min = t.valeurs.reduce((m, x) => (inf(x, m) ? x : m));
+  return {
+    max,
+    min,
+    enMax: t.bornes.filter((_, i) => egal(t.valeurs[i], max)),
+    enMin: t.bornes.filter((_, i) => egal(t.valeurs[i], min)),
+    /** Nombre de solutions de f(x) = k, flèche par flèche (k ne doit être aucune valeur du tableau). */
+    solutions: (k) => {
+      if (t.valeurs.some((x) => egal(x, k))) throw new Error("k est une valeur du tableau : compte ambigu");
+      let n = 0;
+      for (let i = 0; i + 1 < t.valeurs.length; i++) {
+        const [a, b] = [t.valeurs[i], t.valeurs[i + 1]];
+        if ((inf(a, k) && inf(k, b)) || (inf(b, k) && inf(k, a))) n++;
+      }
+      return n;
+    },
+    /** Les intervalles où la flèche monte (1), descend (−1). */
+    morceaux: (sens) =>
+      t.bornes.slice(0, -1).map((b, i) => [b, t.bornes[i + 1], inf(t.valeurs[i], t.valeurs[i + 1]) ? 1 : inf(t.valeurs[i + 1], t.valeurs[i]) ? -1 : 0]).filter((m) => m[2] === sens).map(([a, b]) => [a, b]),
+  };
+}
+
+/** « a = b = c » écrit dans le corrigé k, et tous les membres égaux (exact, ou
+ *  décimal s'il y a une racine). */
+export function outilsEgalites(v, { corrections }) {
+  const c = (k) => corrections[k - 1] ?? "";
+  return (k, texte) => {
+    const membres = texte.split(" = ");
+    const reel = /\\sqrt/.test(texte);
+    const vals = membres.map((m) => (reel ? evalTexReel(m) : evalTex(m, Q(0))));
+    const tous = vals.every((x) => (reel ? Math.abs(x - vals[0]) < 1e-9 : egal(x, vals[0])));
+    v.ok(`${k}. ${texte}`, tous && c(k).includes(texte), `membres égaux : ${tous} ; écrit : ${c(k).includes(texte)}`);
+  };
 }
 
 /* ── Lecture de la feuille ───────────────────────────────────────────────── */

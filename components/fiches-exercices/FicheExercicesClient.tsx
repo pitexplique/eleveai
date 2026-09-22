@@ -251,6 +251,11 @@ export default function FicheExercicesClient({ fiche }: { fiche: FicheExercicesD
                         <div className={`whitespace-pre-line text-slate-800 ${ex.titre ? "mt-2" : "-mt-6 pl-9"}`}>
                           <TexteMath>{ex.enonce}</TexteMath>
                         </div>
+                        {/* ⭐ La figure de l'énoncé, celle qu'on LIT (21/09/2026) —
+                            voir `figure` dans lib/fiches-exercices/types.ts. */}
+                        {ex.figure ? (
+                          <div className="mt-3 max-w-xl whitespace-normal print:max-w-[34rem]">{ex.figure}</div>
+                        ) : null}
                         {/* Sur ÉCRAN : repliée, un geste pour l'ouvrir, après
                             avoir cherché. Sur PAPIER : absente d'ici, elle est
                             sur la page des corrigés (voir plus bas). */}
@@ -262,8 +267,13 @@ export default function FicheExercicesClient({ fiche }: { fiche: FicheExercicesD
                             <TexteMath>{ex.correction}</TexteMath>
                             {/* ⭐ Le tableau DESSINÉ du corrigé (17/09/2026) —
                                 voir `schema` dans lib/fiches-exercices/types.ts. */}
+                            {/* ⛔ `-mx-3` SUR TÉLÉPHONE (21/09/2026) : mesuré à 360 px,
+                                le dessin n'avait que 186 px — les graduations d'un
+                                repère tombaient à 10,3 px, celles d'un tableau de
+                                variations à trois flèches à 9,8. Il reprend la marge
+                                de l'encadré : 210 px, 11,2 px au pire. */}
                             {ex.schema ? (
-                              <div className="mt-3 max-w-md whitespace-normal">{ex.schema}</div>
+                              <div className="-mx-3 mt-3 max-w-md whitespace-normal sm:mx-0">{ex.schema}</div>
                             ) : null}
                           </div>
                         </details>

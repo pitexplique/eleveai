@@ -1,6 +1,7 @@
 // lib/canvas/TableauVariationsCanvas.tsx
 "use client";
 
+import { useId } from "react";
 import type { CanvasFigure } from "@/lib/tutor-v4/types";
 
 type Props = { figure: CanvasFigure };
@@ -45,6 +46,11 @@ function nombre(t: string): number {
  * flèche montante entre 9 et 4 — un dessin qui contredirait ses propres nombres.
  */
 export default function TableauVariationsCanvas({ figure }: Props) {
+  // ⛔ UNE POINTE DE FLÈCHE PAR TABLEAU (22/09/2026). Tous les tableaux d'une
+  // page nommaient leur pointe `#pointeVar` : 22 tableaux, UN seul identifiant,
+  // et le premier dans une correction repliée. Mesuré : en mode classe, les
+  // flèches n'avaient plus de pointe. Un identifiant propre à chaque tableau.
+  const pointe = `pointeVar-${useId().replace(/:/g, "")}`;
   if (figure.kind !== "tableau_variations") return null;
 
   const bornes = figure.bornes ?? [];
@@ -84,6 +90,21 @@ export default function TableauVariationsCanvas({ figure }: Props) {
 
   const xBorne = (i: number) => colGauche + i * LARGEUR_INTER;
   const xMilieu = (i: number) => colGauche + (i + 0.5) * LARGEUR_INTER;
+
+  // Une valeur se pose EN HAUT si elle domine sa (ou ses) voisine(s), en bas
+  // sinon : c'est ce qui fait lire le tableau d'un coup d'œil. ⭐ Une valeur
+  // ÉGALE à sa voisine de gauche (palier) se pose à la même hauteur qu'elle —
+  // sinon le « 3 » de droite d'un palier 3 → 3 tombait en bas. Tout le palier
+  // prend la hauteur de celle de ses valeurs qui domine une voisine.
+  const vals = variations.valeurs.map(nombre);
+  const enHautDe = vals.map((val, i) => (i > 0 && val > vals[i - 1]) || (i < vals.length - 1 && val > vals[i + 1]));
+  for (let i = 0; i < vals.length; ) {
+    let j = i;
+    while (j + 1 < vals.length && vals[j + 1] === vals[i]) j++;
+    const haut = enHautDe.slice(i, j + 1).some(Boolean);
+    for (let k = i; k <= j; k++) enHautDe[k] = haut;
+    i = j + 1;
+  }
 
   const TRAIT = "#0f172a";
   const PLUS = "#15803d";
@@ -182,6 +203,30 @@ export default function TableauVariationsCanvas({ figure }: Props) {
 
         {variations.valeurs.slice(0, -1).map((v, i) => {
           const monte = nombre(variations.valeurs[i + 1]) > nombre(v);
+          // ⛔ DEUX VALEURS ÉGALES : LA FONCTION EST CONSTANTE (21/09/2026). La
+          // flèche partait vers le bas — `monte` était faux, donc « descend » —
+          // sur la puissance d'une éolienne, constante de 12 à 25 m/s. Une
+          // fonction constante est au programme de seconde : flèche HORIZONTALE,
+          // à la hauteur de ses deux valeurs.
+          if (nombre(variations.valeurs[i + 1]) === nombre(v)) {
+            const y = yVar + (enHautDe[i] ? 18 : HAUT_VARIATIONS - 16);
+            // Les valeurs des bords sont ancrées vers l'intérieur (plus larges
+            // de ce côté) ; ailleurs elles sont centrées sur leur borne. Mesuré :
+            // 22 de marge partout ne laissait que la pointe de la flèche.
+            const dernier = variations.valeurs.length - 1;
+            return (
+              <line
+                key={`f-${i}`}
+                x1={xBorne(i) + (i === 0 ? 20 : 12)}
+                y1={y}
+                x2={xBorne(i + 1) - (i + 1 === dernier ? 20 : 12)}
+                y2={y}
+                stroke={FLECHE}
+                strokeWidth={2.2}
+                markerEnd={`url(#${pointe})`}
+              />
+            );
+          }
           const y1 = yVar + (monte ? HAUT_VARIATIONS - 20 : 24);
           const y2 = yVar + (monte ? 24 : HAUT_VARIATIONS - 20);
           return (
@@ -193,7 +238,7 @@ export default function TableauVariationsCanvas({ figure }: Props) {
               y2={y2}
               stroke={FLECHE}
               strokeWidth={2.2}
-              markerEnd="url(#pointeVar)"
+              markerEnd={`url(#${pointe})`}
             />
           );
         })}
@@ -202,12 +247,7 @@ export default function TableauVariationsCanvas({ figure }: Props) {
             rendu : centree sur le bord du cadre, la derniere valeur en sortait
             de moitie — exactement le piege deja corrige sur les bornes. */}
         {variations.valeurs.map((v, i) => {
-          // Une valeur se pose EN HAUT si elle domine sa (ou ses) voisine(s),
-          // en bas sinon : c'est ce qui fait lire le tableau d'un coup d'œil.
-          const prec = i > 0 ? nombre(variations.valeurs[i - 1]) : null;
-          const suiv = i < variations.valeurs.length - 1 ? nombre(variations.valeurs[i + 1]) : null;
-          const val = nombre(v);
-          const enHaut = (prec !== null && val > prec) || (suiv !== null && val > suiv);
+          const enHaut = enHautDe[i];
           return (
             <text
               key={`v-${i}`}
@@ -227,7 +267,7 @@ export default function TableauVariationsCanvas({ figure }: Props) {
         })}
 
         <defs>
-          <marker id="pointeVar" markerWidth={7} markerHeight={7} refX={6} refY={3} orient="auto">
+          <marker id={pointe} markerWidth={7} markerHeight={7} refX={6} refY={3} orient="auto">
             <path d="M0,0 L7,3 L0,6 Z" fill={FLECHE} />
           </marker>
         </defs>

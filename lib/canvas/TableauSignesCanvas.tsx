@@ -56,7 +56,12 @@ export default function TableauSignesCanvas({ figure }: Props) {
   // ⛔ 108 px et non 88 : « (x+1)(x-4) » se coupait en deux lignes, « (x + » puis
   // « 1)(x - 4) », au milieu d'une expression. Un libelle de produit doit tenir
   // d'un seul tenant — c'est le nom de la fonction etudiee.
-  const colonnes = `minmax(52px, 108px) auto repeat(${intervalles}, minmax(24px, 1fr) auto)`;
+  // ⛔ 14 px et non 24 au MINIMUM d'une colonne de signes (21/09/2026) : un
+  // produit de trois facteurs a quatre colonnes ; à 360 px de large, le
+  // minimum de 24 poussait la grille au-delà de sa case, et le « +∞ » de la
+  // dernière borne était coupé par le bord. Un signe tient en 10 px. Sur un
+  // écran large, rien ne change : les colonnes prennent leur `1fr`.
+  const colonnes = `minmax(52px, 108px) auto repeat(${intervalles}, minmax(14px, 1fr) auto)`;
 
   return (
     <div className="mx-auto w-full max-w-[440px]">

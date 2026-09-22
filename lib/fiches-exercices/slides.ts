@@ -66,16 +66,37 @@ function slidesDunExercice(
     enonce.parties.length === correction.parties.length &&
     enonce.parties.every((p, i) => p.lettre === correction.parties[i].lettre);
 
+  // La figure de l'énoncé (la courbe qu'on lit) est projetée sur CHAQUE diapo
+  // de l'exercice : on ne lit pas une courbe restée deux diapos plus haut.
+  // En colonne étroite à gauche (`figureEtroite`) : empilée, elle faisait
+  // déborder la diapo de 445 px à 1280 × 800 (mesuré le 22/09).
+  const schema = ex.figure ? { schema: ex.figure, figureEtroite: true } : {};
+
   if (!memesLettres) {
     return [
       {
         titre,
         badge,
         teinte: "exercice",
+        ...schema,
         section: { type: "corrige", enonce: ex.enonce, lignes: lignesDe(ex.correction), revelable: true },
       },
     ];
   }
+
+  // ⭐ CHAQUE PIÈGE REJOINT SA QUESTION (22/09/2026). Les lignes « ⛔ Le piège au
+  // b) … » s'écrivent en fin de corrigé : elles tombaient toutes sur la diapo de
+  // la DERNIÈRE question, qui débordait (jusqu'à 248 px à 1280 × 800, mesuré
+  // sur les feuilles de fonctions de seconde). Une ligne ⛔, ⭐ ou ⚠️ qui nomme
+  // « au b) » va sur la diapo de b) ; les autres restent où elles sont.
+  const parties = correction.parties.map((p) => ({ ...p, lignes: [p.lignes[0]] }));
+  correction.parties.forEach((p) => {
+    for (const ligne of p.lignes.slice(1)) {
+      const cible = /^(⛔|⭐|⚠️)/.test(ligne) ? ligne.match(/\bau ([a-h])\)/)?.[1] : null;
+      const dest = parties.find((q) => q.lettre === cible) ?? parties.find((q) => q.lettre === p.lettre)!;
+      dest.lignes.push(ligne);
+    }
+  });
 
   // ⚠️ Le titre reste COURT : « 20. Combien de solutions, selon m ? — a) »
   // passait sur deux lignes à `text-6xl` et coûtait à lui seul les 90 px qui
@@ -88,13 +109,14 @@ function slidesDunExercice(
     titre: `${titreCourt} — ${partie.lettre})`,
     badge: `${badge} · question ${partie.lettre}) sur ${enonce.parties.length}`,
     teinte: "exercice",
+    ...schema,
     section: {
       type: "corrige",
       // Le contexte du problème reste sur chaque diapo : on ne le fait pas
       // remonter trois questions plus haut pour relire l'énoncé.
       enonce: [...enonce.preambule, ...partie.lignes].join("\n"),
       // Les lignes de préambule du corrigé (rares) vont avec la première question.
-      lignes: [...(i === 0 ? correction.preambule : []), ...correction.parties[i].lignes],
+      lignes: [...(i === 0 ? correction.preambule : []), ...parties[i].lignes],
       revelable: true,
     },
   }));

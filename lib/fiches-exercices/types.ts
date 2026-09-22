@@ -27,6 +27,14 @@ export type ExerciceCorrige = {
   titre?: string;
   /** L'énoncé. Les sous-questions a), b)… sont séparées par des `\n`. `$…$` pour les formules. */
   enonce: string;
+  /**
+   * ⭐ LA FIGURE DE L'ÉNONCÉ (21/09/2026, bloc « Fonctions » de seconde) : la
+   * courbe qu'on LIT. Jusque-là une feuille ne dessinait que dans son corrigé
+   * (`schema`) — une lecture graphique, cœur de l'exercice 5 du contrôle commun,
+   * devait se décrire en mots. Rendue sous l'énoncé (écran et PDF) et à côté de
+   * l'exercice en mode classe. Facultative : les feuilles d'avant ne changent pas.
+   */
+  figure?: ReactNode;
   /** Le corrigé, une étape par ligne (`\n`), chaque étape avec son pourquoi. */
   correction: string;
   /**

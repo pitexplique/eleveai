@@ -1,0 +1,171 @@
+// ─── Les figures des feuilles d'exercices (bloc « Fonctions » de seconde) ─────
+//
+// Réunies le 21/09/2026 au soir, à la deuxième feuille du bloc : les mêmes
+// aides servaient à cinq feuilles. Ce sont les canvas du coach, servis tels
+// quels — l'élève retrouve dans sa feuille la figure de ses questions.
+//
+// ⭐ Le script de recalcul RELIT ces appels dans le source de chaque feuille
+// (`repere(…)`, `tableau(…)`, `const NOM: Courbe[]`) : écrire les coefficients
+// et les points EN CLAIR dans l'appel, jamais calculés ailleurs.
+
+import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+
+export const BLEU = "#2563eb";
+export const ORANGE = "#ea580c";
+
+/** `q: [a, b, c]` pour ax² + bx + c (a = 0 : une droite) ; `p: [coefficients]`
+ *  pour un polynôme (du plus haut degré au plus bas), échantillonné ; `pts`
+ *  pour une ligne brisée. */
+export type Courbe = { q?: [number, number, number]; p?: number[]; pts?: [number, number][]; couleur?: string };
+
+const polynome = (coefs: number[], x: number) => coefs.reduce((s, c) => s * x + c, 0);
+
+/**
+ * Un repère et ses courbes.
+ * ⛔ CADRE 215 DE LARGE (mesuré le 21/09 sur la feuille des réels) : dans une
+ * correction, le dessin fait ~209 px à 375 ; au-delà de 215, les graduations
+ * (écrites en 12) passent sous 11 px. Le canvas gradue les ENTIERS seulement.
+ * ⛔ `ymin` < 0 toujours : à `ymin = 0`, l'axe des abscisses est le bord du bas
+ * et ses nombres sortent du cadre.
+ */
+export const repere = (
+  cadre: [number, number, number, number],
+  courbes: Courbe[],
+  marques: { x: number; y: number; label?: string }[] = [],
+  horizontale?: number | number[],
+) => {
+  const [xmin, xmax, ymin, ymax] = cadre;
+  const horizontales = horizontale === undefined ? [] : Array.isArray(horizontale) ? horizontale : [horizontale];
+  return (
+    <div className="mx-auto w-full max-w-[16rem] print:max-w-[12rem]">
+      <CanvasRenderer
+        figure={{
+          kind: "fonctionGraphique",
+          size: { width: 215, height: 200 },
+          xmin,
+          xmax,
+          ymin,
+          ymax,
+          grille: true,
+          courbes: courbes.map((c, i) => {
+            const couleur = c.couleur ?? BLEU;
+            if (c.q) return { id: `c${i}`, type: "quadratique" as const, a: c.q[0], b: c.q[1], c: c.q[2], couleur };
+            if (c.p) {
+              const coefs = c.p;
+              // 120 pas sur le cadre ; on ne garde que ce qui reste près du cadre.
+              const points = Array.from({ length: 121 }, (_, k) => xmin + ((xmax - xmin) * k) / 120)
+                .map((x) => ({ x, y: polynome(coefs, x) }))
+                .filter((pt) => pt.y >= ymin - 1 && pt.y <= ymax + 1);
+              return { id: `c${i}`, type: "points" as const, points, couleur };
+            }
+            // ⛔ Une ligne brisée s'arrête au cadre : la racine relue jusqu'à 9
+            // dans un repère qui s'arrête à 4 traçait 184 px hors du dessin
+            // (rogné, mais compté comme débordement à 360 px, 22/09).
+            const points = (c.pts ?? []).filter(([x]) => x >= xmin && x <= xmax).map(([x, y]) => ({ x, y }));
+            return { id: `c${i}`, type: "points" as const, points, couleur };
+          }),
+          misesEnEvidence: [
+            ...horizontales.map((y) => ({ horizontale: { y } })),
+            ...marques.map((pt) => ({ point: { x: pt.x, y: pt.y, label: pt.label, couleur: "#dc2626" } })),
+          ],
+        }}
+      />
+    </div>
+  );
+};
+
+const signe = (v: string | number) => (typeof v === "number" ? String(v).replace("-", "−").replace(".", ",") : v);
+
+/** Un tableau de valeurs, en HTML : lisible à toutes les largeurs.
+ *  ⛔ Pas de `label` de ligne : le composant ajouterait une colonne « Données ».
+ *  ⛔ MESURÉ À 375 PX (21/09) : la case utile fait 226 px. Six colonnes d'années
+ *  à quatre chiffres en demandaient 303 — d'où `vertical`, une ligne par valeur. */
+export const tableau = (entete: string[], ligne: (string | number)[], vertical: boolean | "ecran" = false) => {
+  const cases = ligne.map(signe);
+  const horizontal = (
+    <CanvasRenderer figure={{ kind: "tableau_donnees", headers: entete, rows: [{ values: cases }], display: { compact: true } }} />
+  );
+  if (!vertical) return <div className="mx-auto w-full max-w-[20rem] print:max-w-[14rem]">{horizontal}</div>;
+  // ⭐ Vertical sur TÉLÉPHONE seulement : sur papier, dix lignes d'un tableau
+  // prenaient une demi-page (feuilles de 13 et 14 pages, 22/09). À partir de
+  // `sm` et à l'impression, la place est là : on repasse à l'horizontale.
+  // `"ecran"` : vertical sur TOUT écran, horizontal sur papier seulement — les
+  // onze colonnes du 100 m de Bolt demandaient 475 px dans une carte de 394.
+  const surTelephoneSeulement = vertical === true;
+  return (
+    <>
+      <div className={`mx-auto w-full max-w-[20rem] print:hidden ${surTelephoneSeulement ? "sm:hidden" : ""}`}>
+        <CanvasRenderer
+          figure={{ kind: "tableau_donnees", headers: [entete[0], cases[0]], rows: entete.slice(1).map((e, i) => ({ values: [e, cases[i + 1]] })), display: { compact: true, striped: true } }}
+        />
+      </div>
+      <div className={`mx-auto hidden w-full max-w-[34rem] print:block ${surTelephoneSeulement ? "sm:block" : ""}`}>{horizontal}</div>
+    </>
+  );
+};
+
+/** Une droite graduée et UN intervalle dessus.
+ *  ⛔ Cadre 260 et dix graduations au plus : mesuré le 21/09 sur la feuille des
+ *  équations, c'est ce qui garde les nombres au-dessus de 11 px à 375. */
+export const droite = (min: number, max: number, iv: { de?: number; a?: number; deInclus?: boolean; aInclus?: boolean; label?: string }) => (
+  <div className="mx-auto w-full max-w-[20rem] print:max-w-[14rem]">
+    <CanvasRenderer
+      figure={{
+        kind: "number_line",
+        min,
+        max,
+        step: 1,
+        size: { width: 260, height: 80 },
+        intervalles: [iv],
+        display: { showPoints: false },
+      }}
+    />
+  </div>
+);
+
+/**
+ * Le tableau de signes : une ligne par facteur, `[libellé, signes, marques]`.
+ * ⭐ Ce canvas est en HTML et passe ses libellés par `TexteMath` : on y écrit
+ * `$2x - 8$` et `$\dfrac{x - 5}{2x + 2}$`. Les bornes aussi (`$\dfrac{1}{2}$`).
+ * ⛔ Marques : « 0 » sous une valeur qui annule, « || » sous une valeur
+ * INTERDITE, « » sous une borne où ce facteur ne s'annule pas.
+ * ⚠️ Des tableaux, pas des objets `{ label: … }` : le contrôle commun des
+ * feuilles refuse un `$` sur une ligne `label:`, faite pour les canvas SVG.
+ */
+export const tableauSignes = (
+  bornes: string[],
+  lignes: [string, ("+" | "-")[], ("0" | "||" | "")[]?][],
+  variable?: string,
+) => (
+  <div className="mx-auto w-full max-w-[20rem] print:max-w-[14rem]">
+    <CanvasRenderer
+      figure={{
+        kind: "tableau_signes",
+        bornes,
+        variable,
+        lignes: lignes.map(([texte, signes, marques]) => ({ label: texte, signes, marques })),
+      }}
+    />
+  </div>
+);
+
+/**
+ * Le tableau de variations, sans ligne de dérivée (la seconde n'en a pas).
+ * ⛔ Le canvas se dimensionne seul : 54 par intervalle. TROIS intervalles au
+ * plus (quatre bornes) — au-delà, ses nombres passent sous 11 px à 375.
+ * ⛔ Texte NU : « −3 », jamais « $-3$ » (SVG, KaTeX n'y passe pas).
+ */
+export const tableauVariations = (bornes: (string | number)[], valeurs: (string | number)[], label = "f", variable?: string) => (
+  <div className="mx-auto w-full max-w-[20rem] print:max-w-[14rem]">
+    <CanvasRenderer
+      figure={{
+        kind: "tableau_variations",
+        // « x » par défaut ; « t » pour un temps, « v » pour une vitesse — un
+        // tableau qui annonce x au-dessus de P(v) mélange deux noms (vu au rendu).
+        variable,
+        bornes: bornes.map(signe),
+        variations: { label, valeurs: valeurs.map(signe) },
+      }}
+    />
+  </div>
+);

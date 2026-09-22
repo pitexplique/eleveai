@@ -176,7 +176,11 @@ export default function FonctionGraphiqueCanvas({ figure }: Props) {
               // vertical, qui lui barre le ventre. On le décale de quelques
               // pixels vers la droite : la place à gauche est prise par la
               // colonne des ordonnées.
-              const decalZero = x === 0 ? 8 : 0;
+              // ⚠️ SAUF QUAND LE « 0 » EST DÉJÀ RAMENÉ AU BORD (xmin = 0) : l'axe
+              // est alors le bord gauche, il ne le traverse pas, et le décalage
+              // le collait au chiffre suivant — « 03 » lu sur l'axe des vitesses
+              // d'une éolienne, gradué de 3 en 3 (21/09/2026).
+              const decalZero = x === 0 && sx > marge ? 8 : 0;
               const sxClamp =
                 Math.min(width - marge, Math.max(marge, sx)) + decalZero;
               return (

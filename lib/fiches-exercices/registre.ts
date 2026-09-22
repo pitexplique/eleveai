@@ -82,6 +82,34 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Du calcul seul au problème : ensembles de nombres, droite graduée, intervalles écrits et dessinés, encadrements, valeur absolue et distance, |x − a| ≤ r. Les deux preuves du programme (1/3 n'est pas décimal, √2 est irrationnel), une pièce à 0,2 mm près, la marge d'erreur d'un sondage.",
   },
+  // ⭐ LE BLOC « FONCTIONS » DE SECONDE (21/09/2026, le soir) — Frédéric : « on
+  // fait toutes les fiches de fonctions secondes », « fiches exercices », puis
+  // les vidéos. Des exemples concrets pris dans le monde.
+  "maths/seconde/fonction-vocabulaire-2de": {
+    titre: "Image, antécédent et courbe : 20 exercices corrigés",
+    resume:
+      "Du calcul seul au problème : image, antécédents (deux, un ou aucun), domaine de définition, lire une courbe, résoudre graphiquement, comparer deux courbes. Un plongeon de 10 mètres, des panneaux solaires, la distance de freinage, le CO₂ de l'atmosphère.",
+  },
+  "maths/seconde/fonction-variations-extremums": {
+    titre: "Variations et extremums : 20 exercices corrigés",
+    resume:
+      "Du geste seul au problème : dresser un tableau de variations depuis une courbe, comparer sans calculer, démontrer un sens de variation, trouver un maximum, compter les solutions. Une crue, le 100 m de Usain Bolt, un potager, une éolienne, la distance de la Terre au Soleil.",
+  },
+  "maths/seconde/signes-expression-2de": {
+    titre: "Le signe d'une expression : 20 exercices corrigés",
+    resume:
+      "Du geste seul au problème : signe de ax + b, tableau de signes d'un produit et d'un quotient, valeur interdite et double barre, équations produit nul, inéquations. Un maraîcher, une transformation au rugby, un médicament, une salle de sport, un parapentiste. Chaque corrigé dresse son tableau.",
+  },
+  "maths/seconde/fonctions-affines-2de": {
+    titre: "Les fonctions affines : 20 exercices corrigés",
+    resume:
+      "Du geste seul au problème : reconnaître a et b, calculer une image, lire une droite, trouver l'expression par deux points, droites parallèles, signe de ax + b. Les degrés Fahrenheit, l'eau qui bout à 84 °C au mont Blanc, l'orage, une facture d'électricité, des vélos en libre-service.",
+  },
+  "maths/seconde/fonctions-reference-2de": {
+    titre: "Les fonctions de référence : 20 exercices corrigés",
+    resume:
+      "Du geste seul au problème : carré, inverse, racine carrée, cube et valeur absolue. Calculer, lire une courbe, résoudre, comparer et encadrer sans calculatrice. Un gouffre mesuré au chronomètre, le marathon sous les 2 heures, la masse d'une baleine, un refuge de montagne.",
+  },
   // ⭐ LA PREMIÈRE (15/09/2026) — écrite pour la fille de Frédéric, en 1re, qui
   // teste ce soir. Le verdict est pour demain.
   "maths/premiere-spe/exponentielle": {
