@@ -66,30 +66,154 @@ function decouper(texte: string): { math: boolean; contenu: string }[] {
   return morceaux;
 }
 
+// ─── La ponctuation soudée à sa formule (22/09/2026) ───────────────────────────
+//
+// ⛔ LE DÉFAUT. À 360 px, le point de « $f(2) = 3$. » ou la virgule de « donne
+// $+$, un nombre » passait SEUL en tête de la ligne suivante : 21 cas sur 1 091
+// formules suivies d'une ponctuation, sur trois feuilles et trois fiches de
+// seconde. Même chose, à l'envers, pour « répondre « $10$ » » : le guillemet
+// ouvrant restait seul en fin de ligne (2 sur 18).
+//
+// ⭐ LA CAUSE. KaTeX découpe une formule en `.base`, des `inline-block` — c'est
+// ce qui lui permet de passer à la ligne après un `=` ou un `+`. Or CSS Text
+// impose une occasion de coupure avant et après toute boîte `inline-block`,
+// « même à côté d'un caractère qui l'interdit d'ordinaire ». Chrome l'applique
+// et décide de cette coupure avec le `white-space` du parent DIRECT de la
+// boîte. D'où deux échecs mesurés, chacun à 21 sur 1 091, zéro gagné :
+//   · un joint de mot U+2060 après la formule — Chrome coupe quand même ;
+//   · un `nowrap` autour de la formule entière ET du point, la formule remise
+//     en `normal` dedans pour garder ses coupures — la dernière `.base` a pour
+//     parent un `normal`, la coupure est permise, et elle glisse derrière les
+//     balises fermantes jusque devant le point.
+//
+// ⭐ LA SOLUTION MESURÉE : 0 sur 1 091. La dernière `.base` passe dans une
+// seconde `.katex`, et cette seconde formule est soudée au point dans un
+// `nowrap`. La coupure après un `=` au milieu de la formule reste possible,
+// seule celle d'avant le point disparaît. Visuellement rien ne bouge : chaque
+// `.base` porte ses propres espacements et son `strut`, deux `.katex` côte à
+// côte se lisent comme une seule. Même geste, symétrique, pour la première
+// `.base` et le guillemet ouvrant.
+//
+// ⛔ JAMAIS `nowrap` SUR TOUTE LA FORMULE : une longue formule deviendrait
+// insécable et déborderait à 360 px (la leçon du `\left[ \right]` de la feuille
+// des réels). Ici, seule la dernière `.base` est soudée — elle l'était déjà.
+
+/** Ponctuation fermante en tête du texte qui suit, avec l'insécable que `insecables()` a pu poser devant `:`, `;`, `?`, `!`, `»`. */
+const PONCTUATION_APRES = /^(?:[\u00A0\u202F]?[.,;:!?…)\]»])+/;
+/** Ponctuation ouvrante en fin du texte qui précède : `(`, `[`, ou `«` et son insécable. */
+const PONCTUATION_AVANT = /(?:[(\[«][\u00A0\u202F]?)+$/;
+
+const TETE_KATEX = '<span class="katex"><span class="katex-html" aria-hidden="true">';
+const QUEUE_KATEX = "</span></span>";
+
+/**
+ * Les `.base` de premier niveau d'une formule rendue par KaTeX, ou `null` si le
+ * balisage n'a pas la forme attendue (formule en erreur, `\\`, autre version de
+ * KaTeX…) — la formule est alors rendue d'un bloc, comme avant.
+ */
+function basesDe(html: string): string[] | null {
+  if (!html.startsWith(TETE_KATEX) || !html.endsWith(QUEUE_KATEX)) return null;
+  const corps = html.slice(TETE_KATEX.length, html.length - QUEUE_KATEX.length);
+  const bases: string[] = [];
+  const balise = /<span\b|<\/span>/g;
+  let profondeur = 0;
+  let debut = 0;
+  for (let m = balise.exec(corps); m; m = balise.exec(corps)) {
+    if (m[0] !== "</span>") {
+      if (profondeur === 0 && (m.index !== debut || !corps.startsWith('<span class="base">', m.index)))
+        return null;
+      profondeur++;
+    } else if (--profondeur === 0) {
+      bases.push(corps.slice(debut, balise.lastIndex));
+      debut = balise.lastIndex;
+    } else if (profondeur < 0) return null;
+  }
+  return profondeur === 0 && debut === corps.length && bases.length > 0 ? bases : null;
+}
+
+function Formule({ bases }: { bases: string[] }) {
+  return <span dangerouslySetInnerHTML={{ __html: TETE_KATEX + bases.join("") + QUEUE_KATEX }} />;
+}
+
+type Morceau =
+  | { math: false; texte: string }
+  | { math: true; source: string; html: string | null; bases: string[] | null; avant: string; apres: string };
+
 export default function TexteMath({ children }: { children: string }) {
   // Le cas de loin le plus fréquent : un texte sans formule. Il ne reste que la
   // typographie à poser.
   if (!children || !children.includes("$")) return <>{insecables(children)}</>;
 
+  const morceaux: Morceau[] = decouper(children).map((m) => {
+    // ⚠️ La typographie ne s'applique QU'AUX morceaux littéraux : dans une
+    // formule, `:` et `!` sont des opérateurs et KaTeX doit les recevoir
+    // intacts.
+    if (!m.math) return { math: false, texte: insecables(m.contenu) };
+    let html: string | null;
+    try {
+      html = katex.renderToString(m.contenu, {
+        throwOnError: false,
+        displayMode: false,
+        output: "html",
+      });
+    } catch {
+      // Une formule illisible ne doit jamais faire tomber une fiche entière :
+      // on retombe sur le texte source, entre ses dollars.
+      html = null;
+    }
+    return { math: true, source: m.contenu, html, bases: html ? basesDe(html) : null, avant: "", apres: "" };
+  });
+
+  // Chaque formule découpable prend à ses voisins la ponctuation qui la touche.
+  morceaux.forEach((m, i) => {
+    if (!m.math || !m.bases) return;
+    const prec = morceaux[i - 1];
+    const suiv = morceaux[i + 1];
+    if (suiv && !suiv.math) {
+      m.apres = suiv.texte.match(PONCTUATION_APRES)?.[0] ?? "";
+      suiv.texte = suiv.texte.slice(m.apres.length);
+    }
+    if (prec && !prec.math) {
+      m.avant = prec.texte.match(PONCTUATION_AVANT)?.[0] ?? "";
+      prec.texte = prec.texte.slice(0, prec.texte.length - m.avant.length);
+    }
+  });
+
   return (
     <>
-      {decouper(children).map((m, i) => {
-        // ⚠️ La typographie ne s'applique QU'AUX morceaux littéraux : dans une
-        // formule, `:` et `!` sont des opérateurs et KaTeX doit les recevoir
-        // intacts.
-        if (!m.math)
-          return <React.Fragment key={i}>{insecables(m.contenu)}</React.Fragment>;
-        let html: string;
-        try {
-          html = katex.renderToString(m.contenu, {
-            throwOnError: false,
-            displayMode: false,
-            output: "html",
-          });
-        } catch {
-          // Une formule illisible ne doit jamais faire tomber une fiche entière :
-          // on retombe sur le texte source, entre ses dollars.
-          return <React.Fragment key={i}>{`$${m.contenu}$`}</React.Fragment>;
+      {morceaux.map((m, i) => {
+        if (!m.math) return m.texte ? <React.Fragment key={i}>{m.texte}</React.Fragment> : null;
+        if (m.html === null) return <React.Fragment key={i}>{`$${m.source}$`}</React.Fragment>;
+        if (m.bases && (m.avant || m.apres)) {
+          const b = m.bases;
+          // Une seule `.base` : la formule entière est soudée, elle l'était déjà.
+          if (b.length === 1)
+            return (
+              <span key={i} className="whitespace-nowrap">
+                {m.avant || null}
+                <Formule bases={b} />
+                {m.apres || null}
+              </span>
+            );
+          const debut = m.avant ? 1 : 0;
+          const fin = m.apres ? b.length - 1 : b.length;
+          return (
+            <React.Fragment key={i}>
+              {m.avant ? (
+                <span className="whitespace-nowrap">
+                  {m.avant}
+                  <Formule bases={b.slice(0, 1)} />
+                </span>
+              ) : null}
+              {fin > debut ? <Formule bases={b.slice(debut, fin)} /> : null}
+              {m.apres ? (
+                <span className="whitespace-nowrap">
+                  <Formule bases={b.slice(-1)} />
+                  {m.apres}
+                </span>
+              ) : null}
+            </React.Fragment>
+          );
         }
         // ⚠️ 09/09/2026 — J'AI FAILLI AJOUTER ICI `inline-block whitespace-nowrap`.
         // Frédéric voyait « Le vecteur AB » puis une flèche SEULE à la ligne
@@ -109,7 +233,7 @@ export default function TexteMath({ children }: { children: string }) {
         // STYLE est là. Un symptôme de mise en page a une cause de mise en page,
         // et la CSS absente en est une — voir la note du 01/09 sur les radicaux
         // de 400 em.
-        return <span key={i} dangerouslySetInnerHTML={{ __html: html }} />;
+        return <span key={i} dangerouslySetInnerHTML={{ __html: m.html }} />;
       })}
     </>
   );
