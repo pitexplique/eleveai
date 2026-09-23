@@ -44,11 +44,11 @@ export async function generateMetadata({
 
   return {
     title: `Programme ${classe.label} : ${nomsMatieres} — ${nbMicros} compétences détaillées`,
-    description: `Tout le programme ${classe.enClasse}, compétence par compétence (${nomsMatieres}), conforme aux programmes officiels — et un coach IA gratuit pour s'entraîner sur chacune. Par un professeur en poste, à La Réunion.`,
+    description: `Tout le programme ${classe.enClasse}, compétence par compétence (${nomsMatieres}), conforme aux programmes officiels — et un coach gratuit pour s'entraîner sur chacune. Par un professeur en poste, à La Réunion.`,
     alternates: { canonical: `${SITE_URL}/programme/${classe.slug}` },
     openGraph: {
       title: `Le programme ${classe.enClasse}, compétence par compétence — EleveAI`,
-      description: `${nbMicros} compétences détaillées (${nomsMatieres}) et un coach IA gratuit pour s'entraîner sur chacune.`,
+      description: `${nbMicros} compétences détaillées (${nomsMatieres}) et un coach gratuit pour s'entraîner sur chacune.`,
       url: `${SITE_URL}/programme/${classe.slug}`,
       type: "website",
       siteName: "EleveAI",
@@ -156,7 +156,7 @@ export default async function ProgrammePage({
           </h1>
           <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600">
             Tout ce qu&apos;on apprend {classe.enClasse}, conforme aux programmes
-            officiels — et pour chaque compétence, un coach IA{" "}
+            officiels — et pour chaque compétence, un coach{" "}
             <span className="font-bold text-emerald-600">gratuit</span> pour
             s&apos;entraîner. Par un professeur en poste, à La Réunion.
           </p>

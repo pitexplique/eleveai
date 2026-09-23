@@ -155,7 +155,7 @@ C'est la différence entre un outil qui fait le devoir et un outil qui apprend �
 
 - Nous ne faisons pas les devoirs à la place de l'élève, et c'est un choix de conception, pas une limite technique.
 - Nous n'affichons aucune publicité.
-- Nous ne demandons pas de compte pour s'entraîner : les séries d'exercices, leur correction et leur explication, les cahiers de vacances et les épreuves blanches s'utilisent sans rien créer. ⚠️ Seuls le Coach IA sur l'erreur et l'enregistrement des résultats demandent une connexion — le compte élève est gratuit.
+- Nous ne demandons pas de compte pour s'entraîner : les séries d'exercices, leur correction et leur explication, les cahiers de vacances et les épreuves blanches s'utilisent sans rien créer. ⚠️ Seuls l'explication par l'IA sur une erreur et l'enregistrement des résultats demandent une connexion — le compte élève est gratuit.
 
 ## Comment nous citer
 

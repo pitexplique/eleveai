@@ -42,7 +42,7 @@ export function metadataNiveau(
   const labelNiveau = LABEL_NIVEAU_LANGUE[niveau] ?? niveau.toUpperCase();
   const url = `${SITE_URL}/programme/${matiere}/${niveau}`;
   const titre = `Programme ${label} ${labelNiveau.split(" — ")[0]} : ${pack.nbMicros} compétences détaillées`;
-  const description = `Les ${pack.nbNotions} notions et ${pack.nbMicros} compétences du niveau ${labelNiveau.split(" — ")[0]} en ${label.toLowerCase()}, une par une — et un coach IA gratuit pour s'entraîner sur chacune.`;
+  const description = `Les ${pack.nbNotions} notions et ${pack.nbMicros} compétences du niveau ${labelNiveau.split(" — ")[0]} en ${label.toLowerCase()}, une par une — et un coach gratuit pour s'entraîner sur chacune.`;
 
   return {
     title: titre,

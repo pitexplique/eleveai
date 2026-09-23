@@ -16,7 +16,7 @@ const SITE_URL = "https://www.eleveai.fr";
 export const metadata: Metadata = {
   title: "Le programme français à l'étranger",
   description:
-    "Votre enfant grandit loin de la France ? Dictée quotidienne, coach IA aligné sur le programme français (CP au Bac), cahiers de vacances à imprimer — où que vous soyez, à votre fuseau horaire. Conçu par un professeur français, à La Réunion.",
+    "Votre enfant grandit loin de la France ? Dictée quotidienne, coach aligné sur le programme français (CP au Bac), cahiers de vacances à imprimer — où que vous soyez, à votre fuseau horaire. Conçu par un professeur français, à La Réunion.",
   alternates: { canonical: `${SITE_URL}/francais-de-l-etranger` },
   keywords: [
     "programme français à l'étranger",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Le programme français à l'étranger — EleveAI",
     description:
-      "Dictée quotidienne, coach IA aligné programme français, cahiers à imprimer — où que vous soyez. Conçu par un prof français, à 9 000 km de Paris.",
+      "Dictée quotidienne, coach aligné programme français, cahiers à imprimer — où que vous soyez. Conçu par un prof français, à 9 000 km de Paris.",
     url: `${SITE_URL}/francais-de-l-etranger`,
     type: "website",
     siteName: "EleveAI",
@@ -54,7 +54,7 @@ const REPONSES = [
     emoji: "📚",
     douleur: "« Il décroche du programme français »",
     reponse:
-      "Un coach IA aligné sur les programmes officiels, du CP au Bac : maths, français, anglais, espagnol, IA. Il explique et encourage — il ne fait pas à la place.",
+      "Un coach aligné sur les programmes officiels, du CP au Bac : maths, français, anglais, espagnol, IA. Il explique et encourage — il ne fait pas à la place.",
     cta: "Essayer le coach",
     href: "/coach-ia/maths",
     color: "border-cyan-300/25 from-cyan-400/[0.10]",

@@ -57,7 +57,7 @@ export async function generateMetadata({
 
   return {
     title: `${n.label} ${n.classeLabel} : ce qu'il faut savoir faire`,
-    description: `${n.label} ${n.enClasse} — les ${n.micros.length} compétences du programme, une par une : ${listeMicros}. Et un coach IA pour s'entraîner sur chacune.`,
+    description: `${n.label} ${n.enClasse} — les ${n.micros.length} compétences du programme, une par une : ${listeMicros}. Et un coach pour s'entraîner sur chacune.`,
     alternates: { canonical: url },
     openGraph: {
       title: `${n.label} ${n.enClasse} — ${n.micros.length} compétences détaillées`,

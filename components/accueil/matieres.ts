@@ -24,7 +24,24 @@ export type MatiereAccueil = {
   id: MatiereId;
   /** Le mot de la ligne du haut. Court : il passe sous une icône. */
   label: string;
-  /** Le titre écrit dans le bandeau : « EleveAI Maths ». */
+  /**
+   * LE TITRE DU BANDEAU — ET C'EST LE `<h1>` DE LA PAGE.
+   *
+   * ⛔ IL NE PORTE PLUS LA MARQUE (23/09/2026). Il disait « EleveAI Maths »,
+   * repris de la capture AMÉRICAINE d'IXL (« IXL Math »). Or `fr.ixl.com`, la
+   * version française, ne met jamais son nom dans son h1 : l'accueil écrit
+   * « Soutien scolaire en maths » — c'est-à-dire la REQUÊTE — et la page
+   * matière écrit « Maths », le mot nu. Relevé au navigateur le 23/09.
+   *
+   * ⭐ Le raisonnement tient en une phrase : un h1 qui dit la marque parle à
+   * ceux qui connaissent déjà le site ; un h1 qui dit la requête parle à ceux
+   * qui ne la connaissent pas. La marque, elle, est déjà dans le logo de
+   * l'en-tête et dans le `<title>` (app/accueil/metadata.ts, inchangé).
+   *
+   * ⚠️ NE PAS Y REMETTRE LE NIVEAU : « du CP à la Terminale », « de A1 à B2 »
+   * sont déjà dans `phrase`, juste en dessous. Deux fois la même information
+   * dans le même bloc, c'est une ligne de titre perdue.
+   */
   titreBandeau: string;
   /** La phrase du bandeau, deux lignes maximum. */
   phrase: string;
@@ -106,7 +123,7 @@ export const MATIERES: MatiereAccueil[] = [
   {
     id: "maths",
     label: "Mathématiques",
-    titreBandeau: "EleveAI Maths",
+    titreBandeau: "Cours et exercices de maths corrigés",
     phrase:
       "Choisis ta classe, puis la notion : le coach pose les questions, corrige, et explique sans faire à ta place. Du CP à la Terminale.",
     slug: "maths",
@@ -116,7 +133,7 @@ export const MATIERES: MatiereAccueil[] = [
   {
     id: "francais",
     label: "Français",
-    titreBandeau: "EleveAI Français",
+    titreBandeau: "Cours et exercices de français corrigés",
     phrase:
       "Conjugaison, accords, analyse de la phrase, orthographe : le coach reprend notion par notion, avec la correction immédiate.",
     slug: "francais",
@@ -126,7 +143,7 @@ export const MATIERES: MatiereAccueil[] = [
   {
     id: "economie",
     label: "Économie",
-    titreBandeau: "EleveAI Économie",
+    titreBandeau: "Comprendre l’économie",
     phrase:
       "L'argent, l'entreprise, l'impôt, l'inflation : les mots de l'économie expliqués un par un, avec des exercices corrigés.",
     slug: "economie",
@@ -136,7 +153,7 @@ export const MATIERES: MatiereAccueil[] = [
   {
     id: "anglais",
     label: "Anglais",
-    titreBandeau: "EleveAI Anglais",
+    titreBandeau: "Exercices d’anglais corrigés",
     phrase:
       "Vocabulaire, verbes irréguliers, temps et compréhension : entraîne-toi à ton niveau réel, de A1 à B2.",
     slug: "anglais",
@@ -146,7 +163,7 @@ export const MATIERES: MatiereAccueil[] = [
   {
     id: "espagnol",
     label: "Espagnol",
-    titreBandeau: "EleveAI Espagnol",
+    titreBandeau: "Exercices d’espagnol corrigés",
     phrase:
       "Ser ou estar, conjugaison, vocabulaire du quotidien : le coach t'entraîne à ton niveau, de A1 à B2.",
     slug: "espagnol",
@@ -156,7 +173,7 @@ export const MATIERES: MatiereAccueil[] = [
   {
     id: "ia",
     label: "IA",
-    titreBandeau: "EleveAI Intelligence artificielle",
+    titreBandeau: "Intelligence artificielle et Pix IA",
     phrase:
       "Modèles, apprentissage, usages, limites et enjeux : les compétences du référentiel Pix IA, du collège au lycée.",
     slug: "ia",
