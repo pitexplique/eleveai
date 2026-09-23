@@ -29,8 +29,26 @@ const TITRE = "EleveAI — exercices, coach et cahiers gratuits, du CP au Bac";
 // raccourci le même jour (« il y a trop à lire ») et « ressources » est passé
 // dans la troisième, qui porte l'accord de « conçues ».
 // 143 signes ; Google coupe autour de 155.
+//
+// ⛔⛔ RÉÉCRITE LE 23/09/2026, ET C'ÉTAIT UN DÉFAUT INTRODUIT LE MATIN MÊME.
+// Elle annonçait « Qui es-tu ? Que cherches-tu aujourd'hui ? Des ressources
+// conçues, sélectionnées et vérifiées » — c'est-à-dire le <h1> et le
+// sous-titre de l'accueil d'AVANT. La refonte « façon IXL » a retiré la matrice
+// d'entrée et changé le h1 : la description décrivait donc une page qui
+// n'existe plus, exactement le défaut que la note du 08/08 ci-dessous
+// documente. Refaire une page sans relire sa description, c'est le recréer.
+//
+// La nouvelle suit le texte VISIBLE, mot pour mot : « exercices corrigés » et
+// « coach » (le h1 et la ligne d'actions), les matières (la ligne du haut),
+// « Choisis ta classe, puis la notion » (la phrase du bandeau), « du CP à la
+// Terminale » (la même phrase). La forme validée le 08/08 est conservée : la
+// marque dans les trois premiers mots, puis un verbe, puis du concret.
+// ⚠️ 152 signes, mesurés sur le fichier écrit — pas sur un brouillon.
+// ⚠️ L'ÉCONOMIE N'Y EST PAS, et c'est une place, pas un oubli : la liste des
+// six matières porte la phrase à 158 signes, donc au-delà de la coupe. Les cinq
+// nommées sont celles qui portent les requêtes.
 const PROMESSE =
-  "EleveAI propose ce qui correspond. Qui es-tu ? Que cherches-tu aujourd'hui ? Des ressources conçues, sélectionnées et vérifiées. Du CP au Bac.";
+  "EleveAI propose des exercices corrigés et un coach en maths, français, anglais, espagnol et IA. Choisis ta classe, puis la notion. Du CP à la Terminale.";
 
 export const metadata: Metadata = {
   // ⭐ `absolute` ET NON une simple chaîne. Le layout applique le gabarit
@@ -106,7 +124,7 @@ export const metadata: Metadata = {
         url: HERO,
         width: 1680,
         height: 945,
-        alt: "EleveAI — l'entrée du site : dire qui on est et ce qu'on cherche",
+        alt: "EleveAI — l'entrée du site : une matière, une classe, et les notions du programme",
       },
     ],
   },
