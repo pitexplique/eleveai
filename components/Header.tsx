@@ -12,6 +12,8 @@ import { ouvrirEcrireAuProf } from "@/lib/ecrireAuProf";
 import { urlGuidePour } from "@/lib/matrice/guides";
 import { PROFILS } from "@/lib/matrice/profils";
 import type { ProfilId } from "@/lib/matrice/types";
+// ⚠️ N'EST RENDU QUE SUR L'ACCUEIL — voir `rechercheAuCentre` plus bas.
+import RechercheEntete from "@/components/accueil/RechercheEntete";
 
 // ─── Nav structure ────────────────────────────────────────────────────────────
 
@@ -478,6 +480,16 @@ export default function Header() {
   // haute du quotidien (crème + encre) ; partout ailleurs il reste bleu nuit.
   const paper = pathname === "/" || pathname === "/accueil";
 
+  /** ⭐ LA RECHERCHE AU CENTRE DE L'EN-TÊTE (23/09/2026, validé).
+   *  Frédéric, capture d'IXL à l'appui : « au centre barre de recherche ». Le
+   *  centre de l'en-tête était vide depuis le 20/08 pour qui n'est pas un élève
+   *  connecté ; c'était donc une place libre, pas une place prise à quelqu'un.
+   *  ⛔ GARDÉE À L'ACCUEIL, PAS SUR TOUT LE SITE. Chez IXL le champ suit partout ;
+   *  ici il coûterait ~150 px de largeur dans un en-tête déjà mesuré au pixel
+   *  (la paire photo + Ti Margo laisse 7 px de marge à 360 px). L'étendre est
+   *  une décision à part, et elle se mesure. */
+  const rechercheAuCentre = pathname === "/accueil";
+
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
@@ -781,7 +793,19 @@ export default function Header() {
         </div>
 
         {/* ── ZONE 2 : LA NAVIGATION, au centre de la page ──────────────── */}
-        <div className="hidden items-center gap-1 justify-self-center lg:flex">
+        {/* ⚠️ `sm:flex` AU LIEU DE `lg:flex` QUAND LA RECHERCHE EST LÀ : le
+            champ est la raison d'être du centre sur l'accueil, et le masquer
+            sous 1 024 px le retirerait à la tablette comme au portable. Sous
+            `sm`, la page pose son propre champ (voir app/accueil/AccueilMatieres.tsx) — la
+            zone 1 et la zone 3 ne laissent pas 200 px libres à 360 px. */}
+        <div
+          className={
+            rechercheAuCentre
+              ? "hidden min-w-0 items-center gap-1 justify-self-center sm:flex"
+              : "hidden items-center gap-1 justify-self-center lg:flex"
+          }
+        >
+          {rechercheAuCentre && <RechercheEntete />}
           {eleve && !isStaff ? (
             /* Élève CONNECTÉ → son menu de travail.
                Coach et Parcours en tête : ce sont les deux seuls endroits qui

@@ -31,7 +31,17 @@
 //     de maths » (journal_articles) s'écrivent encore dans /admin/journal et
 //     /admin/articles, mais plus aucune page ne les lit.
 
-import AccueilIA from "./AccueilIA";
+// ⭐ REFONTE DU 23/09/2026 — L'ACCUEIL PASSE À LA CONSTRUCTION D'IXL.
+// Frédéric, après avoir regardé la maquette sur /accueil-2 : « bcp plus clair »,
+// « remplace accueil par accueil 2 ». Une ligne de matières, une ligne
+// d'actions, un bandeau dessiné, et le coach de maths ouvert par défaut.
+// ⛔ AccueilIA.tsx reste sur le disque, DÉBRANCHÉ et non supprimé : la matrice
+// d'entrée, la colonne de gauche et la bande de la Une y sont encore montées.
+// Pour revenir en arrière, remettre `<AccueilIA />` ci-dessous — et rien d'autre.
+// ⚠️ Il est donc relu à chaque typecheck sans servir personne, exactement comme
+// AccueilClient.tsx l'a été du 06 au 14/08. Si la refonte tient une quinzaine,
+// c'est lui qu'on supprime, avec la même note que ci-dessus.
+import AccueilMatieres from "./AccueilMatieres";
 
 // ⭐ LES MÉTADONNÉES VIVENT DANS ./metadata.ts, ET NULLE PART AILLEURS.
 // Elles étaient écrites ici en dur pendant qu'un fichier metadata.ts existait à
@@ -42,5 +52,5 @@ import AccueilIA from "./AccueilIA";
 export { metadata } from "./metadata";
 
 export default function AccueilPage() {
-  return <AccueilIA />;
+  return <AccueilMatieres />;
 }

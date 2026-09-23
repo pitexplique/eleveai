@@ -1,0 +1,636 @@
+"use client";
+
+// ── LA PAGE D'ACCUEIL, REFONTE DU 23/09/2026 « façon IXL » ──────────────────
+//
+// Montée par app/accueil/page.tsx. Elle REMPLACE AccueilIA.tsx, qui reste sur
+// le disque, débranché : « remplace accueil par accueil 2 » (Frédéric, après
+// avoir regardé la maquette sur /accueil-2 — « bcp plus clair », « ça sera
+// beaucoup plus clair pour les élèves et pour les profs »).
+// 👉 POUR REVENIR EN ARRIÈRE : une ligne dans page.tsx, `<AccueilIA />` à la
+// place de `<AccueilMatieres />`. Rien d'autre n'a été supprimé.
+//
+// Frédéric, 23/09/2026, capture d'IXL à l'appui :
+//   « header inchangé : logo + Ti Margo, au centre la barre de recherche, à
+//     droite connexion inscription
+//     un SVG comme dans IXL en bandeau
+//     une ligne : Mathématiques Français Économie Anglais Espagnol IA
+//     dès que l'élève sélectionne, il a coach IA - Évaluation - Fiche de cours -
+//     Prendre en photo - Leçon du jour
+//     en dessous le coach IA maths s'affiche par défaut et on enlève la barre
+//     de gauche »
+//   puis : « maths en présélection en 1re ligne et coach en 2e ligne ».
+//
+// ⛔⛔ CE QUI QUITTE L'ACCUEIL CE JOUR-LÀ — à lire avant de chercher où c'est
+// passé, et avant de le « remettre » :
+//   1. la COLONNE DE GAUCHE (components/accueil/ColonneGauche.tsx) : retirée sur
+//      demande explicite — « tu retires la barre latérale gauche de la page
+//      d'accueil ». La page prend toute la largeur, comme IXL. Avec elle part
+//      l'HISTORIQUE des demandes (lib/matrice/historique.ts) : il n'a plus
+//      aucun point d'affichage sur le site. Voir la note du 28/08 qui disait
+//      déjà qu'une question refaite n'a pas de valeur — mais c'est une perte,
+//      pas un nettoyage ;
+//   2. la MATRICE D'ENTRÉE (components/matrice/EntreeMatrice.tsx, 2 387 lignes,
+//      « Qui es-tu ? », les 4 profils, les 12 classes) : plus montée nulle part.
+//      ⚠️ Son champ, lui, ne disparaît pas — il remonte dans l'en-tête
+//      (components/Header.tsx), au centre, et c'est la MÊME recherche suggérée
+//      (lib/matrice/suggestions.ts). Ce qui se perd, c'est l'ADAPTATION du texte
+//      à qui lit : « Ta matière » / « La matière », le tutoiement selon le
+//      profil. Les quatre audiences n'ont plus ici que quatre portes (voir
+//      `AUDIENCES` plus bas), pas un mode de lecture ;
+//   3. la BANDE « LA UNE DE LA SEMAINE » (components/accueil/UneDeLaSemaine.tsx)
+//      ne s'ouvre plus d'elle-même : son contenu est l'onglet « Leçon du jour »,
+//      donc à UN CLIC au lieu de zéro. ⚠️ app/sitemap.ts déclare les shorts de
+//      la Une sur /accueil (`VIDEOS_UNE`) : ils sont toujours dans la page, mais
+//      rendus seulement quand l'onglet est ouvert. La mesure du 28/09 sur
+//      `?from=une` porte donc sur un geste plus cher qu'avant — à dire avant de
+//      comparer les deux relevés.
+//   ⚠️ Le code des trois reste en place, rien n'est supprimé du dépôt.
+//
+// ⚠️ LE <h1> DE LA PAGE LA PLUS IMPORTANTE DU SITE A CHANGÉ. C'était « Qui
+// es-tu ? Que cherches-tu aujourd'hui ? » ; c'est maintenant le titre du
+// bandeau — « EleveAI Maths ». Le <title> et la description, eux, ne bougent
+// pas (app/accueil/metadata.ts). À surveiller au relevé d'indexation de fin
+// septembre : c'est le seul changement SEO de cette refonte.
+//
+// ⛔ LES TOPICS NE SONT PAS ÉCRITS À LA MAIN : ils viennent de NOTIONS_COACH,
+// c'est-à-dire du knowledge (« tu peux te servir de ressources pour afficher
+// les topics »). Zéro requête, zéro octet de plus : `notions.generated.ts` est
+// déjà dans le paquet du navigateur.
+
+import { useMemo, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  Bot,
+  Calculator,
+  Camera,
+  ClipboardCheck,
+  CalendarDays,
+  ChevronRight,
+  FileText,
+  Globe,
+  LineChart,
+  MessagesSquare,
+  PenLine,
+  Sparkles,
+} from "lucide-react";
+import BandeauMatiere from "@/components/accueil/BandeauMatiere";
+import RechercheEntete from "@/components/accueil/RechercheEntete";
+import {
+  ACTIONS,
+  MATIERES,
+  TEINTES,
+  matierePar,
+  notionsDe,
+  type ActionId,
+  type MatiereAccueil,
+  type MatiereId,
+  type Niveau,
+} from "@/components/accueil/matieres";
+import { ficheHrefPourCoach } from "@/lib/fiches/registre";
+import { UNE_COURANTE } from "@/lib/accueil/une";
+
+const ICONES_MATIERE: Record<MatiereId, typeof Calculator> = {
+  maths: Calculator,
+  francais: PenLine,
+  economie: LineChart,
+  anglais: MessagesSquare,
+  espagnol: Globe,
+  ia: Sparkles,
+};
+
+const ICONES_ACTION: Record<ActionId, typeof Calculator> = {
+  coach: Bot,
+  evaluation: ClipboardCheck,
+  fiche: FileText,
+  photo: Camera,
+  lecon: CalendarDays,
+};
+
+/* ═══ LES QUATRE AUDIENCES ════════════════════════════════════════════════
+   Frédéric, 23/09 : « au fait il n'y a plus élève prof parents etc. ».
+   C'est vrai, et c'est la vraie perte de cette maquette : la matrice d'entrée
+   posait la question « Qui es-tu ? » en grand, au milieu de l'écran.
+
+   ⚠️ CE N'EST PAS LE MÊME OBJET, ET IL FAUT LE DIRE. Dans la matrice, cliquer
+   « Parent » CHANGEAIT la page : le tutoiement, les ressources proposées, la
+   colonne de gauche. Ici, ce sont quatre PORTES vers les quatre espaces qui
+   existent déjà. On y gagne une page qui s'ouvre sur du contenu ; on y perd
+   l'adaptation du texte à qui lit. Si l'adaptation doit revenir, elle revient
+   ici — un menu qui mémorise le profil, comme `eleveai.ia.profil` le fait déjà.
+
+   ⭐ Pourquoi en HAUT À DROITE et en petit : chez IXL, « Sign in » et
+   « Membership » tiennent ce coin, et les portes d'audience (« For teachers »,
+   « For parents ») sont dans le menu, jamais au milieu du contenu. Un élève qui
+   arrive n'a pas à déclarer qui il est avant de voir une notion. */
+const AUDIENCES = [
+  { label: "Élève", href: "/espace-eleves" },
+  { label: "Parent", href: "/parents" },
+  { label: "Enseignant", href: "/espace-profs" },
+  { label: "Chef d'établissement", href: "/direction" },
+];
+
+function LigneAudiences() {
+  return (
+    <div className="border-b border-slate-200 bg-white">
+      {/* ⚠️ `justify-start` SOUS `sm`, ET C'EST UN BOGUE CONNU DE FLEXBOX :
+          dans un conteneur qui défile, `justify-end` fait déborder le contenu
+          PAR LA GAUCHE, hors d'atteinte du défilement. Mesuré à 375 px, « Je »
+          était coupé et on ne pouvait pas le ramener. */}
+      <div className="mx-auto flex max-w-6xl items-center justify-start gap-1 overflow-x-auto px-3 py-1 sm:justify-end sm:px-4">
+        <span className="shrink-0 text-xs font-semibold text-slate-500">Je suis :</span>
+        {AUDIENCES.map((a) => (
+          <Link
+            prefetch={false}
+            key={a.href}
+            href={`${a.href}?from=accueil`}
+            className="shrink-0 whitespace-nowrap rounded-full px-2 py-1 text-xs font-semibold text-slate-600 underline-offset-2 transition hover:bg-slate-100 hover:text-teal-700 hover:underline"
+          >
+            {a.label}
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ═══ LA LIGNE DES MATIÈRES ═══════════════════════════════════════════════
+   L'icône au-dessus du mot, le soulignement sous celle qui est ouverte : c'est
+   la construction d'IXL, et elle a une qualité que les pastilles n'ont pas —
+   on voit d'un coup TOUT ce que le site sait faire, sans avoir à cliquer.
+   ⚠️ `overflow-x-auto` : à 360 px les six mots font 620 px. On fait défiler
+   plutôt que de replier sur deux lignes — replié, le bandeau descend sous le
+   pli et la page s'ouvre sur du vide. */
+function LigneMatieres({
+  actif,
+  choisir,
+}: {
+  actif: MatiereId;
+  choisir: (m: MatiereId) => void;
+}) {
+  return (
+    <div className="border-b border-slate-200 bg-white">
+      <div className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-2 sm:justify-center sm:gap-2 sm:px-4">
+        {MATIERES.map((m) => {
+          const Icone = ICONES_MATIERE[m.id];
+          const ouvert = m.id === actif;
+          return (
+            <button
+              key={m.id}
+              type="button"
+              onClick={() => choisir(m.id)}
+              aria-current={ouvert ? "page" : undefined}
+              className={[
+                "relative flex shrink-0 flex-col items-center gap-1 px-3 py-2.5 text-sm font-semibold transition sm:px-5",
+                ouvert
+                  ? "text-teal-700"
+                  : "text-slate-600 hover:bg-slate-50 hover:text-slate-900",
+              ].join(" ")}
+            >
+              <Icone className="h-5 w-5" strokeWidth={ouvert ? 2.4 : 1.9} aria-hidden="true" />
+              <span className="whitespace-nowrap">{m.label}</span>
+              {ouvert && (
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-x-2 bottom-0 h-[3px] rounded-t bg-teal-600"
+                />
+              )}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ═══ LA SECONDE LIGNE ════════════════════════════════════════════════════
+   Elle n'apparaît QU'UNE FOIS la matière choisie — et comme les maths sont
+   présélectionnées, elle est là dès l'ouverture, sur « Coach IA ».
+   ⛔ Elle ne quitte pas la page : elle change le panneau du dessous. */
+function LigneActions({
+  matiere,
+  actif,
+  choisir,
+}: {
+  matiere: MatiereAccueil;
+  actif: ActionId;
+  choisir: (a: ActionId) => void;
+}) {
+  return (
+    <div className="border-b border-slate-200 bg-slate-50">
+      <div className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-2 sm:justify-center sm:px-4">
+        <span className="hidden shrink-0 py-2 pr-2 text-xs font-semibold uppercase tracking-wide text-slate-500 lg:inline">
+          {matiere.label} :
+        </span>
+        {ACTIONS.map((a) => {
+          const Icone = ICONES_ACTION[a.id];
+          const ouvert = a.id === actif;
+          return (
+            <button
+              key={a.id}
+              type="button"
+              onClick={() => choisir(a.id)}
+              aria-current={ouvert ? "true" : undefined}
+              className={[
+                "my-1.5 flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold transition sm:px-4",
+                ouvert
+                  ? "bg-teal-700 text-white shadow-sm"
+                  : "text-slate-700 hover:bg-white hover:text-slate-900",
+              ].join(" ")}
+            >
+              <Icone className="h-4 w-4" aria-hidden="true" />
+              <span className="hidden whitespace-nowrap sm:inline">{a.label}</span>
+              <span className="whitespace-nowrap sm:hidden">{a.court}</span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ═══ LA CARTE D'UN NIVEAU ════════════════════════════════════════════════
+   La pastille colorée à gauche, le nom, la ligne « Comprend : … », le bouton
+   à droite. C'est la carte « Pre-K / Kindergarten / First grade » d'IXL, avec
+   nos classes et nos notions.
+   ⚠️ La ligne « Comprend » est TRONQUÉE à six notions. Les 86 de STMG
+   rempliraient l'écran d'un bloc gris illisible : ce qu'on montre est un
+   échantillon, et le bouton dit combien il y en a en tout. */
+function CarteNiveau({
+  niveau,
+  teinte,
+  notions,
+  href,
+  verbe,
+}: {
+  niveau: Niveau;
+  teinte: (typeof TEINTES)[number];
+  notions: string[];
+  href: string;
+  verbe: string;
+}) {
+  return (
+    <article className="flex overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:border-slate-300 hover:shadow-md">
+      <div
+        className={`flex w-16 shrink-0 items-center justify-center px-1 text-center text-sm font-black leading-tight text-white sm:w-20 ${teinte.chip}`}
+      >
+        {niveau.label}
+      </div>
+
+      <div className="flex min-w-0 flex-1 flex-col gap-2 p-3 sm:flex-row sm:items-center sm:gap-4 sm:p-4">
+        <div className="min-w-0 flex-1">
+          <h3 className="text-base font-bold text-slate-900 sm:text-lg">
+            {niveau.nom}
+            {niveau.sous && (
+              <span className="ml-2 text-xs font-medium text-slate-500">{niveau.sous}</span>
+            )}
+          </h3>
+          {notions.length > 0 ? (
+            <p className="mt-0.5 text-sm leading-snug text-slate-600">
+              <span className="font-semibold text-slate-500">Comprend : </span>
+              {notions.map((n, i) => (
+                <span key={n}>
+                  {i > 0 && <span className="px-1 text-slate-300">|</span>}
+                  {n}
+                </span>
+              ))}
+            </p>
+          ) : (
+            /* ⛔ ON NE PROMET PAS CE QUI N'EST PAS ÉCRIT. Un niveau sans notion
+               le dit — c'est la règle de la Une (« pas de feuille, pas de
+               bouton »), appliquée ici. */
+            <p className="mt-0.5 text-sm text-slate-500">Pas encore de notion à ce niveau.</p>
+          )}
+        </div>
+
+        {notions.length > 0 && (
+          <Link
+            prefetch={false}
+            href={href}
+            className={`inline-flex shrink-0 items-center gap-1 self-start rounded-lg px-3 py-2 text-sm font-bold text-white shadow-sm transition hover:brightness-110 sm:self-center ${teinte.chip}`}
+          >
+            {verbe}
+            <ChevronRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        )}
+      </div>
+    </article>
+  );
+}
+
+/* ═══ LE PANNEAU « COACH IA » — celui qui s'ouvre par défaut ══════════════ */
+function PanneauCoach({ matiere }: { matiere: MatiereAccueil }) {
+  const lignes = useMemo(
+    () =>
+      matiere.niveaux.map((niveau) => {
+        const notions = notionsDe(matiere.cle, niveau.id);
+        return {
+          niveau,
+          total: notions.length,
+          apercu: notions.slice(0, 6).map((n) => n.label),
+        };
+      }),
+    [matiere],
+  );
+
+  return (
+    <div className="space-y-3">
+      {lignes.map(({ niveau, total, apercu }, i) => (
+        <CarteNiveau
+          key={niveau.id}
+          niveau={niveau}
+          teinte={TEINTES[i % TEINTES.length]}
+          notions={apercu}
+          href={`/coach-ia/${matiere.slug}?classe=${niveau.id}&from=accueil`}
+          verbe={`Voir les ${total} notions`}
+        />
+      ))}
+    </div>
+  );
+}
+
+/* ═══ LE PANNEAU « FICHE DE COURS » ═══════════════════════════════════════
+   Les fiches n'existent pas partout (146 en maths, 148 en français, 16 en IA).
+   On n'affiche donc que les notions QUI ONT une fiche, et on le dit quand il
+   n'y en a aucune. */
+function PanneauFiches({ matiere }: { matiere: MatiereAccueil }) {
+  const lignes = useMemo(
+    () =>
+      matiere.niveaux.map((niveau) => ({
+        niveau,
+        fiches: notionsDe(matiere.cle, niveau.id)
+          .map((n) => ({ label: n.label, href: ficheHrefPourCoach(matiere.cle, niveau.id, n.id) }))
+          .filter((f): f is { label: string; href: string } => Boolean(f.href)),
+      })),
+    [matiere],
+  );
+
+  const total = lignes.reduce((s, l) => s + l.fiches.length, 0);
+
+  if (total === 0) {
+    return (
+      <p className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-center text-sm text-slate-600">
+        Les fiches de cours de cette matière ne sont pas encore écrites. Le coach, lui,
+        couvre déjà le programme : sa liste est dans l&rsquo;onglet « Coach IA ».
+      </p>
+    );
+  }
+
+  return (
+    <div className="space-y-3">
+      {lignes.map(({ niveau, fiches }, i) => {
+        const teinte = TEINTES[i % TEINTES.length];
+        if (fiches.length === 0) return null;
+        return (
+          <article
+            key={niveau.id}
+            className="flex overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
+          >
+            <div
+              className={`flex w-16 shrink-0 items-center justify-center px-1 text-center text-sm font-black leading-tight text-white sm:w-20 ${teinte.chip}`}
+            >
+              {niveau.label}
+            </div>
+            <div className="min-w-0 flex-1 p-3 sm:p-4">
+              <h3 className="text-base font-bold text-slate-900 sm:text-lg">
+                {niveau.nom}
+                <span className="ml-2 text-xs font-medium text-slate-500">
+                  {fiches.length} fiche{fiches.length > 1 ? "s" : ""}
+                </span>
+              </h3>
+              <ul className="mt-2 flex flex-wrap gap-1.5">
+                {fiches.map((f) => (
+                  <li key={f.href}>
+                    <Link
+                      prefetch={false}
+                      href={`${f.href}?from=accueil`}
+                      className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold transition hover:bg-white ${teinte.bord} ${teinte.clair} ${teinte.texte}`}
+                    >
+                      {f.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  );
+}
+
+/* ═══ LES TROIS AUTRES PANNEAUX ═══════════════════════════════════════════ */
+
+function Carte({
+  href,
+  titre,
+  texte,
+  Icone,
+}: {
+  href: string;
+  titre: string;
+  texte: string;
+  Icone: typeof Calculator;
+}) {
+  return (
+    <Link
+      prefetch={false}
+      href={href}
+      className="flex gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:border-teal-300 hover:shadow-md"
+    >
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-teal-50 text-teal-700">
+        <Icone className="h-5 w-5" aria-hidden="true" />
+      </span>
+      <span className="min-w-0">
+        <span className="block font-bold text-slate-900">{titre}</span>
+        <span className="mt-0.5 block text-sm leading-snug text-slate-600">{texte}</span>
+      </span>
+    </Link>
+  );
+}
+
+function PanneauEvaluation({ matiere }: { matiere: MatiereAccueil }) {
+  return (
+    <div className="grid gap-3 sm:grid-cols-2">
+      <Carte
+        href={`/evaluation?matiere=${matiere.slug}&from=accueil`}
+        titre="Évaluation annuelle"
+        texte="Une série qui balaie le programme de l'année et dit ce qui tient et ce qui ne tient pas encore."
+        Icone={ClipboardCheck}
+      />
+      <Carte
+        href="/evaluation-nationale-college?from=accueil"
+        titre="Évaluations nationales"
+        texte="Les épreuves de 6e et de 4e, dans leur format réel, avec la correction expliquée."
+        Icone={ClipboardCheck}
+      />
+      <Carte
+        href="/coach-brevet?from=accueil"
+        titre="Brevet"
+        texte="Les exercices du brevet, notion par notion, corrigés pas à pas."
+        Icone={ClipboardCheck}
+      />
+      <Carte
+        href="/coach-bac-spe?from=accueil"
+        titre="Bac — spécialité"
+        texte="L'entraînement du bac, sur les notions de première et de terminale."
+        Icone={ClipboardCheck}
+      />
+    </div>
+  );
+}
+
+function PanneauPhoto() {
+  return (
+    <div className="grid gap-3 sm:grid-cols-2">
+      <Carte
+        href="/photo-exercice?from=accueil"
+        titre="Photographier un exercice"
+        texte="Une photo de l'énoncé, et le site ouvre la série du coach qui correspond — pas la réponse toute faite."
+        Icone={Camera}
+      />
+      <Carte
+        href="/photo-cours?from=accueil"
+        titre="Photographier une leçon"
+        texte="Une photo du cahier, et on retrouve la fiche de cours et les exercices de la même notion."
+        Icone={Camera}
+      />
+    </div>
+  );
+}
+
+function PanneauLecon() {
+  if (!UNE_COURANTE) {
+    return (
+      <p className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-center text-sm text-slate-600">
+        Pas de leçon du jour pour l&rsquo;instant.
+      </p>
+    );
+  }
+  return (
+    <div className="space-y-3">
+      <p className="text-sm font-semibold text-slate-500">{UNE_COURANTE.jour}</p>
+      <div className="grid gap-3 lg:grid-cols-3">
+        {UNE_COURANTE.diapos.map((d) => (
+          <article
+            key={d.cycle}
+            className="flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
+          >
+            <div className="flex gap-3 p-3">
+              <Image
+                src={d.short.vignette}
+                alt=""
+                width={216}
+                height={384}
+                sizes="72px"
+                className="h-24 w-[54px] shrink-0 rounded-lg object-cover"
+              />
+              <div className="min-w-0">
+                <span className="inline-flex rounded-full bg-teal-50 px-2 py-0.5 text-xs font-bold text-teal-700">
+                  {d.onglet}
+                </span>
+                <p className="mt-1 text-sm font-semibold leading-snug text-slate-900">
+                  {d.accroche}
+                </p>
+                <p className="mt-0.5 text-xs text-slate-500">{d.notion}</p>
+              </div>
+            </div>
+            <div className="mt-auto flex flex-wrap gap-1.5 border-t border-slate-100 p-3">
+              <a
+                href={`https://www.youtube.com/shorts/${d.short.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex rounded-lg bg-slate-900 px-2.5 py-1.5 text-xs font-bold text-white hover:bg-slate-700"
+              >
+                Voir le short
+              </a>
+              {d.liens.map((l) => (
+                <Link
+                  prefetch={false}
+                  key={l.href}
+                  href={l.href}
+                  className="inline-flex rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-bold text-slate-700 hover:bg-slate-50"
+                >
+                  {l.court}
+                </Link>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ═══ LA PAGE ═════════════════════════════════════════════════════════════ */
+
+const PIED = [
+  { label: "Comment ça marche", href: "/pourquoi-eleveai" },
+  { label: "Enseignants", href: "/espace-profs" },
+  { label: "Parents", href: "/parents" },
+  { label: "Fiches de cours", href: "/fiches-cours" },
+  { label: "Toutes les ressources", href: "/explorer" },
+  { label: "À propos", href: "/qui-sommes-nous" },
+  { label: "Aide", href: "/faq" },
+  { label: "Confidentialité", href: "/politique-confidentialite" },
+  { label: "Conditions", href: "/cgu" },
+];
+
+export default function AccueilMatieres() {
+  // ⭐ MATHS ET COACH SONT PRÉSÉLECTIONNÉS (Frédéric, 23/09) : la page s'ouvre
+  // sur quelque chose, personne n'a à cliquer pour voir ce que le site fait.
+  const [matiereId, setMatiereId] = useState<MatiereId>("maths");
+  const [action, setAction] = useState<ActionId>("coach");
+  const matiere = matierePar(matiereId);
+
+  return (
+    <div className="min-h-screen bg-slate-50">
+      {/* ⚠️ LE CHAMP DES TÉLÉPHONES. Dans l'en-tête, la zone du milieu est
+          masquée sous 640 px — la marque, la photo, Ti Margo et « Inscription »
+          y tiennent déjà à 7 px près (mesuré le 20/09). Sans cette ligne, 38 %
+          des visiteurs n'auraient AUCUNE recherche. */}
+      <div className="border-b border-slate-200 bg-white px-3 py-2 sm:hidden">
+        <RechercheEntete variante="page" />
+      </div>
+
+      <LigneAudiences />
+      <LigneMatieres
+        actif={matiereId}
+        choisir={(m) => {
+          setMatiereId(m);
+          // ⚠️ On RETOMBE sur le coach en changeant de matière. Rester sur
+          // « Leçon du jour » en passant aux maths à l'espagnol montrerait un
+          // panneau qui n'a rien à voir avec la matière qu'on vient de cliquer.
+          setAction("coach");
+        }}
+      />
+      <LigneActions matiere={matiere} actif={action} choisir={setAction} />
+
+      <BandeauMatiere
+        matiere={matiere.id}
+        titre={matiere.titreBandeau}
+        phrase={matiere.phrase}
+      />
+
+      <main className="mx-auto w-full max-w-5xl px-3 py-6 sm:px-4 sm:py-8">
+        {action === "coach" && <PanneauCoach matiere={matiere} />}
+        {action === "fiche" && <PanneauFiches matiere={matiere} />}
+        {action === "evaluation" && <PanneauEvaluation matiere={matiere} />}
+        {action === "photo" && <PanneauPhoto />}
+        {action === "lecon" && <PanneauLecon />}
+
+        <footer className="pt-10">
+          <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-xs text-slate-600">
+            {PIED.map((l) => (
+              <li key={l.href}>
+                <Link prefetch={false} href={l.href} className="hover:text-slate-900">
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </footer>
+      </main>
+    </div>
+  );
+}

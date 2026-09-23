@@ -1,0 +1,202 @@
+// LA DONNÉE DE L'ACCUEIL « façon IXL » (23/09/2026).
+//
+// Lue par app/accueil/AccueilMatieres.tsx, et par personne d'autre.
+//
+// Ce qu'on copie d'IXL, et c'est tout : la LIGNE DES MATIÈRES (une icône, un
+// mot, un soulignement sous celle qui est ouverte), puis une SECONDE LIGNE
+// d'actions qui ne change que le panneau du dessous. Chez IXL c'est
+// « View by : Grades / Topics / Week by week » ; ici c'est ce qu'on sait faire
+// d'une matière : le coach, l'évaluation, la fiche, la photo, la leçon du jour.
+//
+// ⛔ LES TOPICS NE SONT PAS RÉÉCRITS ICI. Ils sont lus dans NOTIONS_COACH
+// (lib/matrice/notions.generated.ts, 799 notions générées depuis le knowledge) —
+// donc une notion qui entre au programme apparaît sur cette page le jour où le
+// script est relancé, sans que personne ait à la recopier. C'est la règle de
+// notionsClasse.ts, appliquée à un écran de plus.
+
+import { NOTIONS_COACH } from "@/lib/matrice/notions.generated";
+
+export type MatiereId = "maths" | "francais" | "economie" | "anglais" | "espagnol" | "ia";
+
+export type ActionId = "coach" | "evaluation" | "fiche" | "photo" | "lecon";
+
+export type MatiereAccueil = {
+  id: MatiereId;
+  /** Le mot de la ligne du haut. Court : il passe sous une icône. */
+  label: string;
+  /** Le titre écrit dans le bandeau : « EleveAI Maths ». */
+  titreBandeau: string;
+  /** La phrase du bandeau, deux lignes maximum. */
+  phrase: string;
+  /** La route du coach — /coach-ia/<slug>. ⚠️ « anglais » côté site,
+   *  « english-maths » côté SubjectCode : la traduction se fait dans le coach,
+   *  pas ici (voir lib/matrice/suggestions.ts). */
+  slug: string;
+  /** La clé de NOTIONS_COACH, et celle des registres de fiches. */
+  cle: string;
+  /** Les niveaux affichés, dans l'ordre d'affichage. */
+  niveaux: Niveau[];
+};
+
+export type Niveau = {
+  /** Ce que le coach attend dans `?classe=`. */
+  id: string;
+  /** La pastille de couleur, à gauche de la carte : « 6e », « CM2 », « A1 ». */
+  label: string;
+  /** Le titre de la carte, en toutes lettres : « Sixième ». Un enfant de CP ne
+   *  lit pas « CP », il lit ce que la maîtresse dit. */
+  nom: string;
+  /** La précision qui évite une erreur de clic : « tronc commun », « débutant ». */
+  sous?: string;
+};
+
+/* ⭐ LA LISTE SE LIT DE LA TERMINALE AU CP (Frédéric, 23/09/2026 : « change
+   l'ordre d'affichage des classes »), et c'est la même décision que celle qu'il
+   a prise le 13/09 pour la colonne du coach : « plutôt que de démarrer sur CP
+   et aller vers adulte, je préfère inversé ».
+   Ici la raison n'est plus la coupure de la colonne — cette page ne coupe rien
+   — mais l'ordre de lecture : le public du site est au lycée et au collège,
+   donc il est servi en premier, et le primaire descend sous le pli.
+   ⚠️ « Adultes » reste EN DERNIER : ce n'est pas une classe, il ferait une
+   drôle de première ligne. STMG juste avant, même raison.
+   ⚠️ Les paliers A1 → B2 gardent leur ordre : voir NIVEAUX_CECRL. */
+const PRIMAIRE: Niveau[] = [
+  { id: "cm2", label: "CM2", nom: "Cours moyen 2" },
+  { id: "cm1", label: "CM1", nom: "Cours moyen 1" },
+  { id: "ce2", label: "CE2", nom: "Cours élémentaire 2" },
+  { id: "ce1", label: "CE1", nom: "Cours élémentaire 1" },
+  { id: "cp", label: "CP", nom: "Cours préparatoire" },
+];
+
+const COLLEGE: Niveau[] = [
+  { id: "3e", label: "3e", nom: "Troisième" },
+  { id: "4e", label: "4e", nom: "Quatrième" },
+  { id: "5e", label: "5e", nom: "Cinquième" },
+  { id: "6e", label: "6e", nom: "Sixième" },
+];
+
+const CLASSES_MATHS: Niveau[] = [
+  { id: "terminale-spe", label: "Term", nom: "Terminale", sous: "spécialité maths" },
+  { id: "premiere-spe", label: "1re spé", nom: "Première", sous: "spécialité maths" },
+  { id: "premiere", label: "1re", nom: "Première", sous: "tronc commun" },
+  { id: "seconde", label: "2de", nom: "Seconde" },
+  ...COLLEGE,
+  ...PRIMAIRE,
+  { id: "stmg", label: "STMG", nom: "Série STMG", sous: "première et terminale" },
+  { id: "adulte", label: "Adultes", nom: "Adultes", sous: "reprise d'études" },
+];
+
+const CLASSES_FRANCAIS: Niveau[] = [
+  { id: "seconde", label: "2de", nom: "Seconde" },
+  ...COLLEGE,
+  ...PRIMAIRE,
+];
+
+/** ⚠️ NI L'ANGLAIS NI L'ESPAGNOL NE SE RANGENT PAR CLASSE, et c'est voulu : on
+ *  n'apprend pas une langue au rythme du collège. Le CECRL, comme dans le
+ *  coach. Même chose pour l'économie. */
+const NIVEAUX_CECRL: Niveau[] = [
+  { id: "a1", label: "A1", nom: "Niveau A1", sous: "on démarre" },
+  { id: "a2", label: "A2", nom: "Niveau A2", sous: "les bases tiennent" },
+  { id: "b1", label: "B1", nom: "Niveau B1", sous: "on se débrouille" },
+  { id: "b2", label: "B2", nom: "Niveau B2", sous: "on argumente" },
+];
+
+export const MATIERES: MatiereAccueil[] = [
+  {
+    id: "maths",
+    label: "Mathématiques",
+    titreBandeau: "EleveAI Maths",
+    phrase:
+      "Choisis ta classe, puis la notion : le coach pose les questions, corrige, et explique sans faire à ta place. Du CP à la Terminale.",
+    slug: "maths",
+    cle: "maths",
+    niveaux: CLASSES_MATHS,
+  },
+  {
+    id: "francais",
+    label: "Français",
+    titreBandeau: "EleveAI Français",
+    phrase:
+      "Conjugaison, accords, analyse de la phrase, orthographe : le coach reprend notion par notion, avec la correction immédiate.",
+    slug: "francais",
+    cle: "francais",
+    niveaux: CLASSES_FRANCAIS,
+  },
+  {
+    id: "economie",
+    label: "Économie",
+    titreBandeau: "EleveAI Économie",
+    phrase:
+      "L'argent, l'entreprise, l'impôt, l'inflation : les mots de l'économie expliqués un par un, avec des exercices corrigés.",
+    slug: "economie",
+    cle: "economie",
+    niveaux: NIVEAUX_CECRL,
+  },
+  {
+    id: "anglais",
+    label: "Anglais",
+    titreBandeau: "EleveAI Anglais",
+    phrase:
+      "Vocabulaire, verbes irréguliers, temps et compréhension : entraîne-toi à ton niveau réel, de A1 à B2.",
+    slug: "anglais",
+    cle: "anglais",
+    niveaux: NIVEAUX_CECRL,
+  },
+  {
+    id: "espagnol",
+    label: "Espagnol",
+    titreBandeau: "EleveAI Espagnol",
+    phrase:
+      "Ser ou estar, conjugaison, vocabulaire du quotidien : le coach t'entraîne à ton niveau, de A1 à B2.",
+    slug: "espagnol",
+    cle: "espagnol",
+    niveaux: NIVEAUX_CECRL,
+  },
+  {
+    id: "ia",
+    label: "IA",
+    titreBandeau: "EleveAI Intelligence artificielle",
+    phrase:
+      "Modèles, apprentissage, usages, limites et enjeux : les compétences du référentiel Pix IA, du collège au lycée.",
+    slug: "ia",
+    cle: "ia",
+    niveaux: [
+      { id: "pix-college", label: "Collège", nom: "Collège", sous: "référentiel Pix IA" },
+      { id: "pix-lycee", label: "Lycée", nom: "Lycée", sous: "référentiel Pix IA" },
+    ],
+  },
+];
+
+export function matierePar(id: string): MatiereAccueil {
+  return MATIERES.find((m) => m.id === id) ?? MATIERES[0];
+}
+
+/** Les notions d'un niveau, telles que le coach les connaît. Liste vide si le
+ *  niveau n'est pas servi — la carte le dit alors au lieu de mentir. */
+export function notionsDe(cle: string, niveau: string) {
+  return NOTIONS_COACH[cle]?.[niveau] ?? [];
+}
+
+/* ── LA SECONDE LIGNE ───────────────────────────────────────────────────────
+   ⛔ Elle ne NAVIGUE PAS : elle change le panneau du dessous, comme le
+   « View by » d'IXL. Un onglet qui quitterait la page à chaque clic
+   redonnerait cinq pages là où on vient d'en faire une. */
+export const ACTIONS: { id: ActionId; label: string; court: string }[] = [
+  { id: "coach", label: "Coach IA", court: "Coach" },
+  { id: "evaluation", label: "Évaluation", court: "Évaluation" },
+  { id: "fiche", label: "Fiche de cours", court: "Fiches" },
+  { id: "photo", label: "Prendre en photo", court: "Photo" },
+  { id: "lecon", label: "Leçon du jour", court: "Leçon" },
+];
+
+/** Les pastilles de niveau, en couleurs qui tournent — la colonne colorée à
+ *  gauche de chaque carte, chez IXL. Six teintes, reprises en boucle. */
+export const TEINTES = [
+  { chip: "bg-orange-500", bord: "border-orange-200", clair: "bg-orange-50", texte: "text-orange-700" },
+  { chip: "bg-teal-500", bord: "border-teal-200", clair: "bg-teal-50", texte: "text-teal-700" },
+  { chip: "bg-violet-500", bord: "border-violet-200", clair: "bg-violet-50", texte: "text-violet-700" },
+  { chip: "bg-sky-500", bord: "border-sky-200", clair: "bg-sky-50", texte: "text-sky-700" },
+  { chip: "bg-rose-500", bord: "border-rose-200", clair: "bg-rose-50", texte: "text-rose-700" },
+  { chip: "bg-emerald-600", bord: "border-emerald-200", clair: "bg-emerald-50", texte: "text-emerald-700" },
+];
