@@ -82,6 +82,7 @@ import {
   TEINTES,
   matierePar,
   notionsDe,
+  RITUELS,
   type ActionId,
   type MatiereAccueil,
   type MatiereId,
@@ -205,7 +206,7 @@ function LigneMatieres({
 
 /* ═══ LA SECONDE LIGNE ════════════════════════════════════════════════════
    Elle n'apparaît QU'UNE FOIS la matière choisie — et comme les maths sont
-   présélectionnées, elle est là dès l'ouverture, sur « Coach IA ».
+   présélectionnées, elle est là dès l'ouverture, sur « Coach ».
    ⛔ Elle ne quitte pas la page : elle change le panneau du dessous. */
 function LigneActions({
   matiere,
@@ -371,7 +372,7 @@ function PanneauFiches({ matiere }: { matiere: MatiereAccueil }) {
     return (
       <p className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-center text-sm text-slate-600">
         Les fiches de cours de cette matière ne sont pas encore écrites. Le coach, lui,
-        couvre déjà le programme : sa liste est dans l&rsquo;onglet « Coach IA ».
+        couvre déjà le programme : sa liste est dans l&rsquo;onglet « Coach ».
       </p>
     );
   }
@@ -499,17 +500,67 @@ function PanneauPhoto() {
   );
 }
 
-function PanneauLecon() {
-  if (!UNE_COURANTE) {
-    return (
-      <p className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-center text-sm text-slate-600">
-        Pas de leçon du jour pour l&rsquo;instant.
-      </p>
-    );
-  }
+/* ═══ LE PANNEAU « LEÇON DU JOUR » ════════════════════════════════════════
+   ⛔ LE DÉFAUT QUE FRÉDÉRIC A VU LE 23/09, ET IL ÉTAIT RÉEL : « la leçon du
+   jour n'est que pour les mathématiques — par contre tu peux rajouter des
+   rituels, style dictée de la semaine, lorsqu'on clique sur français ».
+   La Une est en maths cette semaine ; un élève qui cliquait « Français » puis
+   « Leçon du jour » tombait sur des fractions. Le panneau promettait une chose
+   par matière et en servait une seule.
+
+   La sortie : chaque matière montre SES rituels (voir `RITUELS`), et la Une —
+   qui est la leçon du jour au sens propre — ne s'affiche que là où elle est
+   vraie, c'est-à-dire en maths. ⚠️ La diapositive « primaire » de la Une est
+   souvent une lettre en cursive, donc du français : elle reste avec les autres
+   plutôt que d'être déplacée, parce que la Une se range par CYCLE (lycée,
+   collège, primaire) et pas par matière — les découper serait réécrire une.ts
+   pour un cas. */
+function PanneauLecon({ matiere }: { matiere: MatiereAccueil }) {
+  const rituels = RITUELS[matiere.id];
+  const montreLaUne = matiere.id === "maths" && Boolean(UNE_COURANTE);
+
   return (
-    <div className="space-y-3">
-      <p className="text-sm font-semibold text-slate-500">{UNE_COURANTE.jour}</p>
+    <div className="space-y-6">
+      {rituels.length > 0 && (
+        <section>
+          <h2 className="mb-2 text-sm font-bold uppercase tracking-wide text-slate-500">
+            Les rituels — quelque chose de neuf chaque matin
+          </h2>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {rituels.map((r) => (
+              <Carte
+                key={r.href}
+                href={`${r.href}?from=accueil`}
+                titre={r.titre}
+                texte={r.texte}
+                Icone={CalendarDays}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {rituels.length === 0 && (
+        <p className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-center text-sm text-slate-600">
+          {/* ⚠️ PAS de `toLowerCase()` : il écrivait « en ia ». Le sigle est le
+              seul libellé des six qui ne se met pas en minuscules. */}
+          Pas encore de rituel quotidien en {matiere.label}. Ce qui existe
+          aujourd&rsquo;hui, ce sont les séries du coach — l&rsquo;onglet « Coach ».
+        </p>
+      )}
+
+      {montreLaUne && <LaUne />}
+    </div>
+  );
+}
+
+function LaUne() {
+  if (!UNE_COURANTE) return null;
+  return (
+    <section className="space-y-3">
+      <h2 className="text-sm font-bold uppercase tracking-wide text-slate-500">
+        La leçon du jour · {UNE_COURANTE.jour}
+      </h2>
       <div className="grid gap-3 lg:grid-cols-3">
         {UNE_COURANTE.diapos.map((d) => (
           <article
@@ -558,7 +609,7 @@ function PanneauLecon() {
           </article>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -617,7 +668,7 @@ export default function AccueilMatieres() {
         {action === "fiche" && <PanneauFiches matiere={matiere} />}
         {action === "evaluation" && <PanneauEvaluation matiere={matiere} />}
         {action === "photo" && <PanneauPhoto />}
-        {action === "lecon" && <PanneauLecon />}
+        {action === "lecon" && <PanneauLecon matiere={matiere} />}
 
         <footer className="pt-10">
           <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-xs text-slate-600">

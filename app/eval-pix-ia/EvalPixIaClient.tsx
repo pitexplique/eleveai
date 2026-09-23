@@ -371,7 +371,7 @@ export default function EvalPixIaClient() {
             href={coachPourCompetence("", niveau).split("&notion=")[0]}
             className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-black text-white hover:bg-slate-800 transition"
           >
-            M&apos;entraîner avec le Coach IA →
+            M&apos;entraîner avec le Coach →
           </Link>
         </div>
 

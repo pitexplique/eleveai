@@ -495,7 +495,7 @@ export default function DashboardEleveClient() {
               🎯 Faire des exercices
             </Link>
             <p className="text-sm font-semibold text-slate-600">
-              Le Coach IA, ce sont des milliers d&apos;exercices corrigés, notion par notion.
+              Le Coach, ce sont des milliers d&apos;exercices corrigés, notion par notion.
             </p>
           </div>
 
@@ -579,7 +579,7 @@ export default function DashboardEleveClient() {
                   🎯 Tu veux des exercices pour travailler ? C&apos;est ici !
                 </h2>
                 <p className="mt-2 max-w-3xl text-sm font-semibold leading-relaxed text-slate-600">
-                  Le Coach IA te propose des milliers d&apos;exercices corrigés,
+                  Le Coach te propose des milliers d&apos;exercices corrigés,
                   du CP à la Terminale. Choisis ta classe, une notion, et
                   entraîne-toi à ton rythme — chaque exercice est corrigé pas à
                   pas. Tes scores s&apos;afficheront ensuite sur cette page.
@@ -1147,7 +1147,7 @@ export default function DashboardEleveClient() {
               <div className="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-100 xl:col-span-2">
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h2 className="text-2xl font-black">Coach Maths IA — séries d&apos;exercices</h2>
+                    <h2 className="text-2xl font-black">Coach de maths — séries d&apos;exercices</h2>
                     <p className="mt-1 text-sm font-semibold text-slate-600">
                       Historique de tes séries d&apos;exercices.
                     </p>
@@ -1312,7 +1312,7 @@ export default function DashboardEleveClient() {
                 href="/coach-ia/maths"
                 className="rounded-2xl bg-indigo-600 px-5 py-3 text-sm font-black text-white shadow-lg hover:bg-indigo-500"
               >
-                Coach Maths IA
+                Coach de maths
               </Link>
 
               <Link

@@ -98,7 +98,7 @@ const outils = [
   { label: "Évaluation nationale 4e maths", href: "/evaluation-nationale-college/4e-maths" },
   { label: "Évaluation nationale 4e français", href: "/evaluation-nationale-college/4e-francais" },
   { label: "Coach English IA", href: "/coach-ia/english-maths" },
-  { label: "Coach Maths IA", href: "/coach-ia/maths" },
+  { label: "Coach de maths", href: "/coach-ia/maths" },
   { label: "Coach Français IA", href: "/coach-ia/francais" },
   { label: "Évaluation annuelle d'anglais", href: "/parcours-english-maths" },
   { label: "Évaluation annuelle d'espagnol", href: "/parcours-espagnol" },

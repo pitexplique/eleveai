@@ -907,7 +907,7 @@ export default function TarifsClient() {
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm font-black">
             {[
-              "Coach Maths IA",
+              "Coach de maths",
               "Coach Français IA",
               "English Maths",
               "CP → Terminale",

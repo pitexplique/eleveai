@@ -77,7 +77,7 @@ export default function CaptureApresTelechargement({
         <p className="mt-2 text-sm font-semibold leading-6 text-slate-600">
           <span className="font-black text-slate-800">Parents&nbsp;:</span> créez un
           espace <span className="font-black">gratuit</span> pour recevoir les
-          prochaines nouveautés, et débloquer le coach IA qui{" "}
+          prochaines nouveautés, et débloquer le coach qui{" "}
           <span className="font-black">explique</span> à votre enfant quand il
           bloque. Rien à installer, sans publicité.
         </p>
@@ -113,7 +113,7 @@ export default function CaptureApresTelechargement({
               href={coachHref}
               className="flex items-center justify-center gap-2 rounded-full border border-teal-300 bg-white px-5 py-2.5 text-sm font-black text-teal-700 transition hover:bg-teal-50"
             >
-              Découvrir le coach IA
+              Découvrir le coach
             </Link>
           </div>
           <div className="shrink-0 text-center">

@@ -86,7 +86,7 @@ const MODULES: { key: string; label: string; color: string }[] = [
   { key: "parcours", label: "🛤️ Parcours", color: "bg-violet-500" },
   { key: "calcul", label: "⚡ Calcul rapide", color: "bg-lime-500" },
   { key: "defis", label: "🎯 Défis du jour", color: "bg-orange-500" },
-  { key: "coach", label: "🧠 Coach IA", color: "bg-indigo-500" },
+  { key: "coach", label: "🧠 Coach", color: "bg-indigo-500" },
   { key: "english", label: "🇬🇧 English-Maths", color: "bg-sky-500" },
   { key: "dictee", label: "✍️ Dictée du jour", color: "bg-cyan-500" },
   { key: "langue", label: "🗣️ Langues du jour", color: "bg-fuchsia-500" },

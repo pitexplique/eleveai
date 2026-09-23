@@ -212,7 +212,7 @@ export default function CahierVacances({
          ligne. Capte le parent venu de Google AVANT qu'il ne reparte (le cahier
          gratuit se suffit sinon). Bouton primaire seul, « Imprimer » passe en
          secondaire, les autres liens descendent sous le cahier.
-         ⚠️ Ce pavé promettait « un coach IA » et menait droit au coach, matière
+         ⚠️ Ce pavé promettait « un coach » et menait droit au coach, matière
          imposée. Il mène maintenant à l'accueil, qui demande d'abord qui on est —
          donc il annonce ce qu'il livre, sinon on promet une porte et on en ouvre
          une autre. */}

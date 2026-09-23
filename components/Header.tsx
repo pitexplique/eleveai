@@ -18,7 +18,7 @@ import RechercheEntete from "@/components/accueil/RechercheEntete";
 // ─── Nav structure ────────────────────────────────────────────────────────────
 
 const NAV_MATHS = [
-  { href: "/coach-ia/maths",   icon: "🧠", label: "Coach Maths IA",    desc: "Séries d'exercices corrigés, CP → Terminale" },
+  { href: "/coach-ia/maths",   icon: "🧠", label: "Coach de maths",    desc: "Séries d'exercices corrigés, CP → Terminale" },
   { href: "/parcours",         icon: "🛤️", label: "Évaluation annuelle", desc: "Bilan de compétences personnalisé" },
   { href: "/coach-brevet",     icon: "📚", label: "Coach Brevet",       desc: "Sprint J−30, toutes les notions" },
   { href: "/coach-bac-spe",    icon: "🎓", label: "Coach Bac Spé",      desc: "Suites, fonctions, proba" },
@@ -56,7 +56,7 @@ const NAV_ESPAGNOL = [
 ];
 
 const NAV_IA = [
-  { href: "/coach-ia/ia",          icon: "IA", label: "Coach IA", desc: "Séries d'exercices A1 -> C1, comprendre, utiliser, verifier, creer" },
+  { href: "/coach-ia/ia",          icon: "IA", label: "Coach", desc: "Séries d'exercices A1 -> C1, comprendre, utiliser, verifier, creer" },
   { href: "/parcours-ia",          icon: "🛤️", label: "Évaluation annuelle", desc: "Bilan de culture et de reflexes IA, A1 -> C1" },
   { href: "/eval-pix-ia",          icon: "🎓", label: "Éval blanche Pix IA", desc: "Prépa éval nationale : 3 domaines, profil de compétences" },
   { href: "/fiches-cours/ia",      icon: "PDF", label: "Fiches de cours IA", desc: "Cours IA par domaine, à lire ou télécharger en PDF" },

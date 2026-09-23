@@ -397,7 +397,7 @@ export default function LeconDuJourPage() {
                 href={pack.coachHref}
                 className={`rounded-2xl px-5 py-3 text-center text-sm font-black text-white shadow sm:text-base ${pack.accent.secondary}`}
               >
-                S'entrainer avec le Coach IA
+                S'entrainer avec le Coach
               </Link>
             </div>
 

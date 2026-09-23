@@ -107,7 +107,7 @@ export async function POST(req: Request) {
             "Reponds en francais simple, en 3 a 5 phrases maximum.",
             consigneSalutation,
             "Aide sans faire tout le travail a la place de l'eleve.",
-            "Si la question demande un exercice precis, invite l'eleve a aller dans « Évaluation annuelle » ou Coach IA.",
+            "Si la question demande un exercice precis, invite l'eleve a aller dans « Évaluation annuelle » ou le Coach.",
             "N'utilise pas de LaTeX.",
           ].join("\n"),
         },

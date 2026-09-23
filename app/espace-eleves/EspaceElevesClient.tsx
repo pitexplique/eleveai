@@ -53,7 +53,7 @@ const coachs = [
   },
   {
     emoji: "🤖",
-    title: "Coach IA",
+    title: "Coach",
     description: "Comprendre et maîtriser l'intelligence artificielle, A1 → C1.",
     href: "/coach-ia/ia",
     color: "from-cyan-400 to-teal-600",

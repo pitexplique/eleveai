@@ -322,7 +322,7 @@ export default function TutorSimpleView({
           <section className="min-h-[520px] rounded-2xl bg-white px-5 py-6 shadow-sm ring-1 ring-slate-200 sm:px-8 lg:px-12">
             {/* La leçon écrite est retirée le temps d'en revoir le principe :
                 elle se construisait sur les items `fixed`. Reste la vidéo, et
-                le Coach IA quand l'élève se trompe. */}
+                l’explication IA quand l'élève se trompe. */}
             {learningVideoHref ? (
               /* ⚠️ HORS APERÇU (27/08/2026) — scripts/capturer-apercus-coach.ts
                  retire cette pastille avant de photographier. Elle reste sur le

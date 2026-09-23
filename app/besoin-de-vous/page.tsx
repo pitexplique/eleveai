@@ -217,7 +217,7 @@ export default async function BesoinDeVousPage({
               <span className="text-3xl" aria-hidden>📚</span>
               <h3 className="mt-2 text-lg font-black text-white">Je viens apprendre</h3>
               <p className="mt-1 flex-1 text-sm font-semibold leading-6 text-white/75">
-                Un coach IA qui explique sans juger, du CM1 au Bac — maths, français,
+                Un coach qui explique sans juger, du CM1 au Bac — maths, français,
                 anglais, espagnol, IA.
               </p>
               <Link

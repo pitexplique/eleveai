@@ -120,7 +120,7 @@ export default function LivreIa({ chapitres }: { chapitres: ChapitreLivre[] }) {
                   <li>
                     Entraîne-toi avec le{" "}
                     <Link href="/coach-ia/ia" className="font-bold text-indigo-600 underline decoration-indigo-300 underline-offset-2 hover:text-indigo-500">
-                      Coach IA
+                      Coach
                     </Link>
                     , puis teste-toi avec l&apos;
                     <Link href="/eval-pix-ia" className="font-bold text-indigo-600 underline decoration-indigo-300 underline-offset-2 hover:text-indigo-500">

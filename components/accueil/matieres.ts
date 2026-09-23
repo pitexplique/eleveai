@@ -183,7 +183,7 @@ export function notionsDe(cle: string, niveau: string) {
    « View by » d'IXL. Un onglet qui quitterait la page à chaque clic
    redonnerait cinq pages là où on vient d'en faire une. */
 export const ACTIONS: { id: ActionId; label: string; court: string }[] = [
-  { id: "coach", label: "Coach IA", court: "Coach" },
+  { id: "coach", label: "Coach", court: "Coach" },
   { id: "evaluation", label: "Évaluation", court: "Évaluation" },
   { id: "fiche", label: "Fiche de cours", court: "Fiches" },
   { id: "photo", label: "Prendre en photo", court: "Photo" },
@@ -192,6 +192,81 @@ export const ACTIONS: { id: ActionId; label: string; court: string }[] = [
 
 /** Les pastilles de niveau, en couleurs qui tournent — la colonne colorée à
  *  gauche de chaque carte, chez IXL. Six teintes, reprises en boucle. */
+/* ── LES RITUELS, PAR MATIÈRE ───────────────────────────────────────────────
+   Frédéric, 23/09/2026 : « la leçon du jour n'est que pour les mathématiques —
+   par contre tu peux rajouter des rituels, style dictée de la semaine, lorsqu'on
+   clique sur français ».
+
+   Il a raison, et le défaut était réel : l'onglet « Leçon du jour » montrait la
+   Une, qui est en maths cette semaine. Un élève qui cliquait « Français » puis
+   « Leçon du jour » tombait sur des fractions.
+
+   ⭐ Et la sortie était DÉJÀ ÉCRITE, à d'autres adresses : le site a un rituel
+   par matière depuis des mois (la dictée, les cinq mots d'anglais, ceux
+   d'espagnol, les défis, le calcul rapide, la belle écriture). Ils vivaient
+   dans le pied de page et dans /explorer — c'est-à-dire là où on va quand on
+   sait déjà qu'ils existent.
+   ⛔ AUCUNE ADRESSE INVENTÉE : les huit routes ci-dessous ont été vérifiées une
+   par une sur le disque avant d'être écrites. C'est la règle de la Une (« pas de
+   feuille, pas de bouton »). */
+export type Rituel = { titre: string; texte: string; href: string };
+
+export const RITUELS: Record<MatiereId, Rituel[]> = {
+  maths: [
+    {
+      titre: "Les défis du jour",
+      texte: "Trois défis neufs chaque matin, du calcul à la logique. Cinq minutes, pas plus.",
+      href: "/defis-du-jour",
+    },
+    {
+      titre: "Le calcul rapide",
+      texte: "Cinq minutes d'automatismes, on recommence demain. C'est le rituel le plus court du site.",
+      href: "/calcul-rapide",
+    },
+    {
+      titre: "Qui suis-je ?",
+      texte: "Un nombre se décrit, on le devine. À projeter en classe ou à faire à deux.",
+      href: "/picto-maths",
+    },
+  ],
+  francais: [
+    {
+      titre: "La dictée du jour",
+      texte: "Une dictée par jour, lue à voix haute, corrigée mot à mot — du CP à la 3e.",
+      href: "/dictee-du-jour",
+    },
+    {
+      titre: "Toutes les dictées",
+      texte: "La collection entière, par niveau et par difficulté, quand une par jour ne suffit pas.",
+      href: "/dictee",
+    },
+    {
+      titre: "La belle écriture",
+      texte: "Tracer les lettres en cursive, une par une, dans le bon sens. Pour le CP et le CE1.",
+      href: "/fiches-ecriture",
+    },
+  ],
+  anglais: [
+    {
+      titre: "L'anglais du jour",
+      texte: "Cinq mots par matin, prononcés, replacés dans une phrase. De A1 à B2.",
+      href: "/anglais-du-jour",
+    },
+  ],
+  espagnol: [
+    {
+      titre: "L'espagnol du jour",
+      texte: "Cinq mots par matin, prononcés, replacés dans une phrase. De A1 à B2.",
+      href: "/espagnol-du-jour",
+    },
+  ],
+  // ⛔ NI L'IA NI L'ÉCONOMIE N'ONT DE RITUEL, et on l'écrit plutôt que de leur
+  // prêter celui d'une autre matière. Le panneau le dit en une phrase et renvoie
+  // au coach — la seule chose qui existe vraiment pour elles aujourd'hui.
+  ia: [],
+  economie: [],
+};
+
 export const TEINTES = [
   { chip: "bg-orange-500", bord: "border-orange-200", clair: "bg-orange-50", texte: "text-orange-700" },
   { chip: "bg-teal-500", bord: "border-teal-200", clair: "bg-teal-50", texte: "text-teal-700" },

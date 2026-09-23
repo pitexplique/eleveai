@@ -29,7 +29,7 @@ export default function PontCoachFiches() {
   let label = "🧮 Entraîne-toi avec le Coach Maths →";
   if (matiere === "ia") {
     href = "/coach-ia/ia?from=fiche";
-    label = "🤖 Entraîne-toi avec le Coach IA →";
+    label = "🤖 Entraîne-toi avec le Coach →";
   } else if (matiere === "maths" && seg[2] && CLASSES_MATHS.has(seg[2])) {
     href = `/coach-ia/maths?classe=${seg[2]}&from=fiche`;
   }

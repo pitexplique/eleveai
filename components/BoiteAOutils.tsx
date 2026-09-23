@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react";
  *
  * Demande élèves (2026-06-18) : une calculatrice accessible pendant les
  * exercices et la lecture des fiches. Placée en BAS AU CENTRE (Écris-moi à
- * gauche, Coach IA à droite).
+ * gauche, Coach à droite).
  *
  * Deux modes : simple (par défaut, primaire/collège) et scientifique (sin, cos,
  * tan + inverses, ln, log, exp, π, e) avec bascule DEG/RAD pour la trigo.

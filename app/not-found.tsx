@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 const PORTES = [
   { href: "/accueil", emoji: "🏠", titre: "Accueil", sous: "Toutes les portes d'entrée" },
-  { href: "/coach-maths-ia", emoji: "🧭", titre: "Coach Maths IA", sous: "Comprendre pas à pas" },
+  { href: "/coach-maths-ia", emoji: "🧭", titre: "Coach de maths", sous: "Comprendre pas à pas" },
   { href: "/parcours", emoji: "🚀", titre: "Évaluation annuelle", sous: "Faire le point sur ton année" },
   { href: "/carte", emoji: "🗺️", titre: "Les maths en vrai · 974", sous: "Le tour de l'île" },
 ];

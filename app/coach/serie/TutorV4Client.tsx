@@ -89,7 +89,7 @@ import {
 } from "@/lib/tutor-v4/memoireQuestions";
 // La leçon écrite est retirée du tutor : elle se construisait sur les items
 // `fixed` et rendait mal. En attendant de revoir le principe, l'aide passe par
-// le Coach IA proposé sur l'écran d'erreur (`CoachErrorHelp`).
+// l'explication IA proposée sur l'écran d'erreur (`CoachErrorHelp`).
 import TutorSimpleView from "./TutorSimpleView";
 
 const CYCLE_2_COACH = new Set(["cp", "ce1", "ce2"]);
@@ -1644,7 +1644,7 @@ function handleInputKeyDown(
       })()
     : [];
 
-  // Contexte transmis au Coach IA pour « Aide-toi de notre Coach IA » sur une
+  // Contexte transmis à l'IA pour « Demande une explication » sur une
   // erreur. RGPD : classe oui, prénom/nom JAMAIS.
   const coachContext: CoachContext = {
     codeEtablissement: eleve?.code_etablissement?.trim() ?? "",
@@ -2469,7 +2469,7 @@ type CoachContext = {
   suggestions: { label: string; href: string }[];
 };
 
-// « Aide-toi de notre Coach IA » : à la demande, l'IA explique l'erreur précise
+// « Demande une explication » : à la demande, l'IA explique l'erreur précise
 // de l'élève et il peut rebondir. RGPD : on envoie la classe, JAMAIS le prénom.
 function CoachErrorHelp({
   question,
@@ -2563,7 +2563,7 @@ function CoachErrorHelp({
           onClick={start}
           className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 via-emerald-500 to-orange-400 px-5 py-2.5 text-sm font-black text-white shadow-md transition hover:brightness-105"
         >
-          🤖 Aide-toi de notre Coach IA
+          🤖 Demande une explication
         </button>
       </div>
     );
@@ -2572,7 +2572,7 @@ function CoachErrorHelp({
   return (
     <div className="rounded-[28px] border border-cyan-200 bg-[#05213f] p-4 text-white shadow-sm">
       <div className="mb-2 flex items-center justify-between">
-        <span className="text-sm font-black">🤖 Coach IA — ton erreur</span>
+        <span className="text-sm font-black">🤖 L&rsquo;IA t&rsquo;explique ton erreur</span>
         <button
           type="button"
           onClick={() => setOpen(false)}
@@ -2584,7 +2584,7 @@ function CoachErrorHelp({
 
       {!canAsk ? (
         <p className="text-sm font-semibold text-white/80">
-          Connecte-toi pour demander de l&apos;aide au Coach IA.
+          Connecte-toi pour demander une explication.
         </p>
       ) : (
         <>
@@ -2691,7 +2691,7 @@ function WrongAnswerPanel({
         {/* ⭐ TI MARGO À LA PLACE DU ROBOT (18/08/2026). Un émoji robot annonçait
             l'erreur — or ce n'est pas une machine qui accompagne l'élève ici,
             c'est le margouillat de l'accueil, des cahiers et des vidéos. Le
-            robot reste sur le Coach IA plus bas : celui-là EST une IA, et il
+            robot reste sur l'explication IA plus bas : celui-là EST une IA, et il
             doit se dire.
             « Hmm… pas tout à fait » est parti avec lui : la phrase devient un
             mensonge quand l'élève a répondu au hasard, et un élève le sent.

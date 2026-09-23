@@ -123,7 +123,7 @@ export default function LeconPourcentagesPage() {
               href="/coach-ia/maths"
               className="rounded-2xl bg-purple-500 px-5 py-3 text-center font-black text-white shadow hover:bg-purple-600"
             >
-              🧠 Coach IA
+              🧠 Coach
             </Link>
           </div>
         </div>

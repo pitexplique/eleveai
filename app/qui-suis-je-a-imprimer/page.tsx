@@ -99,7 +99,7 @@ export default function QuiSuisJeHubPage() {
         <div className="flex flex-col items-center gap-3 rounded-2xl border border-violet-300 bg-gradient-to-r from-violet-50 to-fuchsia-50 p-4 text-center shadow-sm sm:flex-row sm:justify-between sm:text-left">
           <p className="text-sm font-black text-slate-900 sm:text-base">
             🦎 Ces jeux plaisent à ton enfant&nbsp;? Son{" "}
-            <span className="text-violet-700">coach IA</span> continue en ligne —{" "}
+            <span className="text-violet-700">coach</span> continue en ligne —{" "}
             <span className="text-violet-700">gratuit</span>, à son rythme et sans jugement.
           </p>
           <Link

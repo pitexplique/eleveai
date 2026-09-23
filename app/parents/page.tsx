@@ -207,7 +207,7 @@ export default function ParentsPage() {
               <span className="h-3 w-3 rounded-full bg-red-400/70" />
               <span className="h-3 w-3 rounded-full bg-amber-400/70" />
               <span className="h-3 w-3 rounded-full bg-emerald-400/70" />
-              <span className="ml-3 text-xs font-bold text-white/40">Coach IA · Maths</span>
+              <span className="ml-3 text-xs font-bold text-white/40">Coach · Maths</span>
             </div>
 
             <div className="rounded-2xl bg-white/5 p-3 text-sm font-semibold text-white/85">

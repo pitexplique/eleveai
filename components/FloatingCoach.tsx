@@ -13,7 +13,7 @@ const MESSAGE_ACCUEIL: CoachMessage = {
 };
 
 /**
- * Coach IA flottant, réutilisable sur toutes les pages (accueil, coachs, tutor).
+ * Assistant IA flottant, réutilisable sur toutes les pages (accueil, coachs, tutor).
  * Composant autonome : il lit le contexte élève, gère son propre état et
  * interroge /api/accueil/chat. Il suffit de poser <FloatingCoach /> sur une page.
  * Le fil complet reste affiché et l'historique est envoyé à l'API (retour
@@ -85,7 +85,7 @@ export default function FloatingCoach() {
         onClick={() => setOpen(true)}
         className="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 via-emerald-500 to-orange-400 px-5 py-3 text-sm font-black text-white shadow-2xl ring-2 ring-white/50 transition hover:scale-105"
       >
-        🤖 <span className="hidden sm:inline">Coach IA</span>
+        🤖 <span className="hidden sm:inline">Demande à l&rsquo;IA</span>
       </button>
     );
   }
@@ -131,7 +131,7 @@ export default function FloatingCoach() {
         ) : (
           <div className="flex h-full items-center text-center">
             <p className="text-sm font-semibold leading-relaxed text-white/70">
-              Connecte-toi pour dialoguer avec le coach IA.
+              Connecte-toi pour dialoguer avec l&rsquo;IA.
             </p>
           </div>
         )}

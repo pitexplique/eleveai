@@ -376,7 +376,7 @@ export default function FicheCoursIa({ fiche }: { fiche: FicheIaData }) {
                 className="inline-flex w-fit items-center gap-2 rounded-full bg-indigo-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-400"
               >
                 <Sparkles className="h-4 w-4" />
-                M&apos;entraîner avec le Coach IA
+                M&apos;entraîner avec le Coach
               </Link>
               <Link
                 href="/eval-pix-ia"

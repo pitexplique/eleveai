@@ -9,7 +9,7 @@ const EMAIL = "contact@eleveai.fr";
 const principes = [
   {
     title: "Plusieurs portes d'entrée",
-    text: "Coach IA (maths, français, anglais, espagnol, IA), Évaluation annuelle, Brevet, Calcul rapide, Dictée, Défis… Chaque élève choisit ce qui lui convient le mieux.",
+    text: "Coach (maths, français, anglais, espagnol, IA), Évaluation annuelle, Brevet, Calcul rapide, Dictée, Défis… Chaque élève choisit ce qui lui convient le mieux.",
   },
   {
     title: "Suivi réel de la progression",
@@ -162,7 +162,7 @@ export default function ManifesteClient() {
                 En résumé
               </p>
               <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-200">
-                <li>• Un coach IA par matière : maths, français, anglais, espagnol, IA — du CP au Bac.</li>
+                <li>• Un coach par matière : maths, français, anglais, espagnol, IA — du CP au Bac.</li>
                 <li>• Plusieurs portes : parcours, brevet, calcul rapide, dictée du jour, défis…</li>
                 <li>• Résultats enregistrés et visibles dans le tableau de bord élève.</li>
                 <li>• Ancré à La Réunion — contexte local, exemples du territoire.</li>

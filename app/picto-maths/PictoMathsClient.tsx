@@ -605,7 +605,7 @@ export default function PictoMathsClient({
       <div className="screen-only mx-auto max-w-4xl px-5 pt-5 sm:px-8">
         <div className="flex flex-col items-center gap-3 rounded-2xl border border-cyan-300 bg-gradient-to-r from-cyan-50 to-teal-50 p-4 text-center shadow-sm sm:flex-row sm:justify-between sm:text-left">
           <p className="text-sm font-black text-slate-900 sm:text-base">
-            🦎 Ces défis plaisent&nbsp;? Le <span className="text-cyan-700">coach IA</span> continue en
+            🦎 Ces défis plaisent&nbsp;? Le <span className="text-cyan-700">coach</span> continue en
             ligne — <span className="text-cyan-700">gratuit</span>, à ton rythme et sans jugement.
           </p>
           <Link

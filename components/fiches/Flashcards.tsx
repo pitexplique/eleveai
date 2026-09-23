@@ -245,7 +245,7 @@ export default function Flashcards({ fiche }: { fiche: FicheCoursData }) {
                 className="inline-flex items-center gap-2 rounded-full bg-sky-500 px-5 py-3 text-sm font-black text-white shadow-lg shadow-sky-500/30 transition hover:bg-sky-400"
               >
                 <Sparkles className="h-4 w-4" />
-                M&apos;entraîner avec le Coach IA
+                M&apos;entraîner avec le Coach
               </a>
             </div>
           </div>

@@ -6,7 +6,7 @@ import Script from "next/script";
 /**
  * LES PORTES, DANS L'ORDRE DONNÉ PAR FRÉDÉRIC LE 21/08/2026.
  *
- * « coach maths, coach français, coach espagnol, coach anglais, coach IA — puis
+ * « coach maths, coach français, coach espagnol, coach anglais, coach — puis
  * les parcours associés — puis les rituels — puis concours général et Concours
  * Avenir — puis les évaluations nationales — puis Pix IA. »
  *
@@ -54,7 +54,7 @@ const portes = [
   },
   {
     emoji: "✳️",
-    title: "Coach IA",
+    title: "Coach",
     text: "Ce qu'il faut savoir sur l'intelligence artificielle, calé sur le référentiel Pix.",
     href: "/coach-ia/ia",
     color: "from-cyan-500 to-teal-600",
@@ -447,7 +447,7 @@ export default function PourquoiEleveAIClient() {
             <li className="flex items-center gap-2"><span className="text-emerald-500">✅</span> Score et temps en Calcul rapide</li>
             <li className="flex items-center gap-2"><span className="text-emerald-500">✅</span> Réponses exactes aux Défis du jour</li>
             <li className="flex items-center gap-2"><span className="text-emerald-500">✅</span> Score des mini-défis English Maths</li>
-            <li className="flex items-center gap-2"><span className="text-emerald-500">✅</span> Score sur 20 et notions travaillées au Coach Maths IA</li>
+            <li className="flex items-center gap-2"><span className="text-emerald-500">✅</span> Score sur 20 et notions travaillées au Coach de maths</li>
           </ul>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
