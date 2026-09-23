@@ -190,6 +190,33 @@ export const ACTIONS: { id: ActionId; label: string; court: string }[] = [
   { id: "lecon", label: "Leçon du jour", court: "Leçon" },
 ];
 
+/* ── L'ÉVALUATION ANNUELLE : LA ROUTE EST `/parcours…`, PAS `/evaluation` ───
+   ⛔ CORRIGÉ LE 23/09/2026, défaut signalé par Frédéric capture à l'appui :
+   « il y a une erreur dans évaluation, il faut brancher sur parcours ».
+   L'onglet pointait vers `/evaluation?matiere=…` — une page qui existe, mais
+   qui n'est pas celle-là, et qui ne lit pas ce paramètre. Les quatre visiteurs
+   sur cinq atterrissaient donc ailleurs que là où le bouton promettait.
+
+   ⭐ LE PIÈGE EST DANS LE VOCABULAIRE, et il est connu : le mot affiché est
+   « Évaluation annuelle » depuis le 14/09, mais **l'adresse est restée
+   `/parcours`** — on a changé le libellé, pas la route. Chercher le mot du
+   libellé dans les dossiers ne pouvait donc pas trouver la bonne page.
+   Les titres le confirment, un par un : « Évaluation annuelle de maths »,
+   « …de français », « …d'anglais », « …d'espagnol », « …d'IA ».
+
+   ⚠️ L'ANGLAIS S'APPELLE `english-maths` ICI AUSSI — la même traduction que
+   dans le coach (voir lib/matrice/suggestions.ts). Écrire `/parcours-anglais`
+   donne une 404.
+   ⛔ L'ÉCONOMIE N'A PAS DE PARCOURS : il n'y a pas de `/parcours-economie` sur
+   le disque, et on ne l'invente pas. Le panneau le dit. */
+export const PARCOURS: Partial<Record<MatiereId, string>> = {
+  maths: "/parcours",
+  francais: "/parcours-francais",
+  anglais: "/parcours-english-maths",
+  espagnol: "/parcours-espagnol",
+  ia: "/parcours-ia",
+};
+
 /* ── LES ENTRÉES QUI QUITTENT LA PAGE, APRÈS UN FILET ───────────────────────
    Frédéric, 23/09 : « quand on sélectionne maths, après leçon du jour, rajoute
    calcul rapide et maths réel », puis « ou que calcul rapide ».

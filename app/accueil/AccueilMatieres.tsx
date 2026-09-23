@@ -85,6 +85,7 @@ import {
   notionsDe,
   RITUELS,
   LIENS_MATIERE,
+  PARCOURS,
   type ActionId,
   type MatiereAccueil,
   type MatiereId,
@@ -483,33 +484,59 @@ function Carte({
   );
 }
 
+/* ⛔ CHAQUE CARTE EST PROPRE À SA MATIÈRE. La version d'avant proposait le
+   brevet et le bac de spécialité même en espagnol : ce sont des entraînements
+   de MATHS (voir leur place dans le menu « Maths » de l'en-tête). Une carte qui
+   ne concerne pas la matière ouverte n'est pas une suggestion, c'est une
+   erreur d'aiguillage — celle-là même que Frédéric vient de signaler. */
 function PanneauEvaluation({ matiere }: { matiere: MatiereAccueil }) {
+  const parcours = PARCOURS[matiere.id];
+  // Les quatre épreuves blanches n'existent qu'en maths et en français (6e et
+  // 4e). Les proposer ailleurs enverrait sur une épreuve d'une autre matière.
+  const evalNationale = matiere.id === "maths" || matiere.id === "francais";
+  const examensMaths = matiere.id === "maths";
+  // ⚠️ « IA » ne se met pas en minuscules — c'est un sigle, pas un mot.
+  const enMatiere = matiere.id === "ia" ? "IA" : matiere.label.toLowerCase();
+
   return (
     <div className="grid gap-3 sm:grid-cols-2">
-      <Carte
-        href={`/evaluation?matiere=${matiere.slug}&from=accueil`}
-        titre="Évaluation annuelle"
-        texte="Une série qui balaie le programme de l'année et dit ce qui tient et ce qui ne tient pas encore."
-        Icone={ClipboardCheck}
-      />
-      <Carte
-        href="/evaluation-nationale-college?from=accueil"
-        titre="Évaluations nationales"
-        texte="Les épreuves de 6e et de 4e, dans leur format réel, avec la correction expliquée."
-        Icone={ClipboardCheck}
-      />
-      <Carte
-        href="/coach-brevet?from=accueil"
-        titre="Brevet"
-        texte="Les exercices du brevet, notion par notion, corrigés pas à pas."
-        Icone={ClipboardCheck}
-      />
-      <Carte
-        href="/coach-bac-spe?from=accueil"
-        titre="Bac — spécialité"
-        texte="L'entraînement du bac, sur les notions de première et de terminale."
-        Icone={ClipboardCheck}
-      />
+      {parcours ? (
+        <Carte
+          href={`${parcours}?from=accueil`}
+          titre={`Évaluation annuelle — ${enMatiere}`}
+          texte="Une série qui balaie le programme de l'année et dit ce qui tient, et ce qui ne tient pas encore."
+          Icone={ClipboardCheck}
+        />
+      ) : (
+        <p className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600 sm:col-span-2">
+          Pas encore d&rsquo;évaluation annuelle en {matiere.label}. Ce qui existe
+          aujourd&rsquo;hui, ce sont les séries du coach — l&rsquo;onglet « Coach ».
+        </p>
+      )}
+      {evalNationale && (
+        <Carte
+          href="/evaluation-nationale-college?from=accueil"
+          titre="Évaluations nationales"
+          texte="Les épreuves de 6e et de 4e, dans leur format réel, avec la correction expliquée."
+          Icone={ClipboardCheck}
+        />
+      )}
+      {examensMaths && (
+        <>
+          <Carte
+            href="/coach-brevet?from=accueil"
+            titre="Brevet"
+            texte="Les exercices du brevet, notion par notion, corrigés pas à pas."
+            Icone={ClipboardCheck}
+          />
+          <Carte
+            href="/coach-bac-spe?from=accueil"
+            titre="Bac — spécialité"
+            texte="L'entraînement du bac, sur les notions de première et de terminale."
+            Icone={ClipboardCheck}
+          />
+        </>
+      )}
     </div>
   );
 }
