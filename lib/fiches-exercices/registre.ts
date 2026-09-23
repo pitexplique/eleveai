@@ -123,6 +123,14 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Du geste seul au problème : lire et placer un point, milieu, distance, puis prouver avec — parallélogramme, rectangle, losange, carré, triangle rectangle, points sur un cercle. Un plan de ville, un terrain de football, trois antennes qui retrouvent un téléphone, un pré relevé au GPS.",
   },
+  // ⛔ Clé = le notionId du coach (`statistiques_descriptives`) ; la fiche de
+  // cours est rangée sous `statistiques-descriptives-2de`, d'où `aussiPour`.
+  "maths/seconde/statistiques-descriptives": {
+    titre: "Les statistiques descriptives : 20 exercices corrigés",
+    resume:
+      "Du geste seul au problème : fréquences, moyenne simple et pondérée, médiane et quartiles, diagramme en boîte, écart interquartile, écart type. Deux archers, un bulletin à coefficients, un PDG dans la moyenne des salaires, deux climats de même moyenne que tout oppose, une machine à paquets de pâtes.",
+    aussiPour: ["statistiques-descriptives-2de"],
+  },
   // ⭐ LA PREMIÈRE (15/09/2026) — écrite pour la fille de Frédéric, en 1re, qui
   // teste ce soir. Le verdict est pour demain.
   "maths/premiere-spe/exponentielle": {

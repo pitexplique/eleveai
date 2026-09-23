@@ -132,6 +132,29 @@ export const vecteurs = (
   );
 };
 
+/**
+ * Le diagramme en boîte (23/09/2026, feuille des statistiques de seconde) : le
+ * canvas `diagramme_boite` de la fiche de cours, une ou deux séries.
+ * ⛔ Texte NU dans `label` (SVG : KaTeX n'y passe pas).
+ * ⭐ Le script de recalcul RELIT les cinq nombres : les écrire en clair.
+ */
+export const boite = (
+  series: { label?: string; min: number; q1: number; mediane: number; q3: number; max: number; couleur?: string }[],
+  axe?: { min?: number; max?: number; step?: number },
+) => (
+  <div className="mx-auto w-full max-w-[20rem] print:max-w-[16rem]">
+    <CanvasRenderer figure={{ kind: "diagramme_boite", series, min: axe?.min, max: axe?.max, step: axe?.step, size: { width: 320 } }} />
+  </div>
+);
+
+/** Diagramme en bâtons, en barres ou circulaire (canvas `stat_graph` du coach).
+ *  ⛔ Texte NU dans `label`. Le recalcul relit `{ label, value }`. */
+export const diagramme = (graphType: "barres" | "batons" | "camembert", data: { label: string; value: number }[], surligne?: number) => (
+  <div className="mx-auto w-full max-w-[20rem] print:max-w-[14rem]">
+    <CanvasRenderer figure={{ kind: "stat_graph", graphType, data, size: { width: 300, height: 220 }, display: { showValues: true, showLabels: true, highlightIndex: surligne } }} />
+  </div>
+);
+
 const signe = (v: string | number) => (typeof v === "number" ? String(v).replace("-", "−").replace(".", ",") : v);
 
 /** Un tableau de valeurs, en HTML : lisible à toutes les largeurs.
