@@ -131,6 +131,14 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
       "Du geste seul au problème : fréquences, moyenne simple et pondérée, médiane et quartiles, diagramme en boîte, écart interquartile, écart type. Deux archers, un bulletin à coefficients, un PDG dans la moyenne des salaires, deux climats de même moyenne que tout oppose, une machine à paquets de pâtes.",
     aussiPour: ["statistiques-descriptives-2de"],
   },
+  // ⭐ LA PREMIÈRE SANS FICHE DE COURS (23/09/2026) — Frédéric : « on fait
+  // toutes les fiches d'exercices d'abord » ; le rappel de chaque niveau porte
+  // le cours utile.
+  "maths/seconde/droites-plan": {
+    titre: "Les droites du plan : 20 exercices corrigés",
+    resume:
+      "Du geste seul au problème : équation réduite, droite verticale, équation cartésienne, vecteur directeur, parallèles, intersection, systèmes. Deux randonneurs qui se croisent, la billetterie d'un concert, le point d'équilibre d'un triangle, un bateau qui évite un rocher. Chaque corrigé dessine ses droites.",
+  },
   "maths/seconde/algorithmique-python-2de": {
     titre: "Algorithmique et Python : 20 exercices corrigés",
     resume:

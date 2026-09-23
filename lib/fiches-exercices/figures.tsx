@@ -133,6 +133,33 @@ export const vecteurs = (
 };
 
 /**
+ * Des DROITES données par leur équation cartésienne `a x + b y + c = 0`
+ * (23/09/2026, feuille « Droites du plan » de seconde), coupées au cadre.
+ * ⭐ Une droite VERTICALE (b = 0) se trace comme les autres — c'est ce que
+ * `repere()`, qui ne dessine que des fonctions, ne sait pas faire.
+ * Des flèches (vecteurs directeurs) peuvent s'y ajouter.
+ * ⭐ Le script de recalcul RELIT `{ a, b, c }` et les points : en clair.
+ */
+export const droites = (
+  fenetre: [number, number],
+  lignes: { a: number; b: number; c: number; couleur?: string }[],
+  points: { x: number; y: number; label: string }[] = [],
+  fleches: Fleche[] = [],
+) => {
+  const [min, max] = fenetre;
+  const segments: Fleche[] = lignes.flatMap(({ a, b, c, couleur }) => {
+    const pts: [number, number][] = [];
+    const garde = (x: number, y: number) => {
+      if (x >= min - 1e-9 && x <= max + 1e-9 && y >= min - 1e-9 && y <= max + 1e-9 && !pts.some(([u, v]) => Math.abs(u - x) < 1e-9 && Math.abs(v - y) < 1e-9)) pts.push([x, y]);
+    };
+    if (b !== 0) for (const x of [min, max]) garde(x, -(a * x + c) / b);
+    if (a !== 0) for (const y of [min, max]) garde(-(b * y + c) / a, y);
+    return pts.length >= 2 ? [{ de: pts[0], vers: pts[1], couleur, pointe: false }] : [];
+  });
+  return vecteurs(fenetre, [...segments, ...fleches], points);
+};
+
+/**
  * Le diagramme en boîte (23/09/2026, feuille des statistiques de seconde) : le
  * canvas `diagramme_boite` de la fiche de cours, une ou deux séries.
  * ⛔ Texte NU dans `label` (SVG : KaTeX n'y passe pas).

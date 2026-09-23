@@ -56,6 +56,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "discours-direct-et-le-discours-indirect-2026-2027-5e-cours-exercices-corriges.pdf",
   "distributivite-4e-cours-exercices-corriges.pdf",
   "division-cm2-cours-exercices-corriges.pdf",
+  "droites-du-plan-seconde-20-exercices-corriges.pdf",
   "droites-segments-et-demi-droites-cm2-cours-exercices-corriges.pdf",
   "durees-cm2-cours-exercices-corriges.pdf",
   "echelles-cm2-cours-exercices-corriges.pdf",
