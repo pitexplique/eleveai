@@ -361,11 +361,17 @@ export default function CahierVacances({
                 registre de chaque page — « toi » ici, « vous » sur les cahiers
                 des petits et des parents, qui s'adressent à l'adulte. Arbitrage
                 inverse, et il est plus haut que la page : LE SITE TUTOIE TOUT LE
-                MONDE. L'accueil demande « Qui es-tu ? Que cherches-tu
-                aujourd'hui ? » à tous ses visiteurs, chef d'établissement
-                compris (voir la note du <h1> dans AccueilIA.tsx). Une signature
-                qui vouvoie sur un cahier, quand la porte d'entrée tutoie,
-                changerait de personne en cours de route.
+                MONDE. Une signature qui vouvoie sur un cahier, quand la porte
+                d'entrée tutoie, changerait de personne en cours de route.
+                ⚠️ L'EXEMPLE A CHANGÉ LE 23/09/2026, PAS LA RÈGLE. Cette note
+                citait « Qui es-tu ? Que cherches-tu aujourd'hui ? », le titre de
+                l'accueil d'alors, adressé à tous ses visiteurs — chef
+                d'établissement compris. La refonte « façon IXL » a retiré ce
+                titre, et l'accueil tutoie toujours : « Choisis ta classe, puis
+                la notion », « explique sans faire à ta place »
+                (components/accueil/matieres.ts). La décision tient donc ; c'est
+                sa citation qui était périmée. ⛔ Ne pas rouvrir l'arbitrage en
+                constatant que la phrase citée a disparu.
                 ⚠️ Le prix est visible sur le cahier des parents, dont le reste
                 de la page vouvoie (« votre enfant », « vous l'essayez ») : la
                 ligne y détonne un peu. C'est assumé — le tutoiement d'EleveAI
