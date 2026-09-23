@@ -914,6 +914,15 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-09-20",
     },
   ],
+  "/fiches-cours/maths/seconde/fonctions-reference-2de": [
+    {
+      id: "1g53KZ3d_XM",
+      title: "Les fonctions de référence — Maths seconde — EleveAI",
+      description:
+        "Cinq fonctions à connaître par cœur : le carré, l'inverse, la racine carrée, le cube et la valeur absolue. −1 n'a pas d'image par la racine carrée, et sur les négatifs élever au carré retourne l'ordre — −3 < −2, mais 9 > 4 (seconde).",
+      ajoutee: "2026-09-23",
+    },
+  ],
   "/fiches-cours/maths/premiere-spe/second-degre": [
     {
       id: "OT7gGCthbAs",
