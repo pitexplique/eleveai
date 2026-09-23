@@ -74,8 +74,9 @@ export const repere = (
   );
 };
 
-/** Une flèche `de` → `vers`, couleur facultative (bleu par défaut). */
-export type Fleche = { de: [number, number]; vers: [number, number]; couleur?: string };
+/** Une flèche `de` → `vers`, couleur facultative (bleu par défaut).
+ *  `pointe: false` : un simple SEGMENT, le côté d'une figure (feuille du repère). */
+export type Fleche = { de: [number, number]; vers: [number, number]; couleur?: string; pointe?: boolean };
 
 /**
  * Des VECTEURS sur un quadrillage (23/09/2026, feuille des vecteurs de seconde).
@@ -93,7 +94,9 @@ export const vecteurs = (
   points: { x: number; y: number; label: string }[] = [],
 ) => {
   const [min, max] = fenetre;
-  const courbes = fleches.flatMap(({ de, vers, couleur = BLEU }, i) => {
+  const courbes = fleches.flatMap(({ de, vers, couleur = BLEU, pointe: avecPointe = true }, i) => {
+    const hampe = { id: `v${i}`, type: "points" as const, couleur, points: [{ x: de[0], y: de[1] }, { x: vers[0], y: vers[1] }] };
+    if (!avecPointe) return [hampe];
     const [dx, dy] = [vers[0] - de[0], vers[1] - de[1]];
     const L = Math.hypot(dx, dy);
     const [ux, uy] = [dx / L, dy / L];
@@ -105,7 +108,7 @@ export const vecteurs = (
     });
     const pointe = { x: vers[0], y: vers[1] };
     return [
-      { id: `v${i}`, type: "points" as const, couleur, points: [{ x: de[0], y: de[1] }, pointe] },
+      hampe,
       { id: `v${i}a`, type: "points" as const, couleur, points: [pointe, barbe((5 * Math.PI) / 6)] },
       { id: `v${i}b`, type: "points" as const, couleur, points: [pointe, barbe((-5 * Math.PI) / 6)] },
     ];
