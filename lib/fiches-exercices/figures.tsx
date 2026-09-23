@@ -155,6 +155,56 @@ export const diagramme = (graphType: "barres" | "batons" | "camembert", data: { 
   </div>
 );
 
+/**
+ * Un PROGRAMME Python (23/09/2026, feuille d'algorithmique de seconde) : le
+ * geste de `code()` de la fiche de cours, mais imprimable (fond clair sur
+ * papier). Une ligne peut être mise en couleur.
+ * ⛔ `whitespace-pre` : l'indentation EST la syntaxe, une ligne ne se replie
+ * pas — 30 signes au plus, pour tenir à 375 px.
+ * ⛔ Guillemets SIMPLES dans le code : un `\"` laisserait un antislash dans le
+ * source, que le contrôle commun prendrait pour du LaTeX hors formule.
+ * ⭐ Le script de recalcul EXÉCUTE ces lignes avec Python.
+ */
+export const programme = (lignes: string[], enCouleur?: number) => (
+  <div className="mx-auto w-full max-w-[22rem] rounded-xl border border-slate-200 bg-slate-900 p-3 print:max-w-[16rem] print:border-slate-400 print:bg-white print:p-2">
+    <pre className="overflow-x-auto whitespace-pre font-mono text-[13px] leading-6 text-slate-100 print:text-[10px] print:leading-4 print:text-slate-900">
+      {lignes.map((l, i) => (
+        <div key={i} style={i === enCouleur ? { color: "#fca5a5", fontWeight: 700 } : undefined}>
+          {l || " "}
+        </div>
+      ))}
+    </pre>
+  </div>
+);
+
+/** La TRACE d'un programme : une ligne par étape, une colonne par variable. */
+export const trace = (entete: string[], lignes: (string | number)[][]) => (
+  <div className="mx-auto w-full max-w-[20rem] overflow-x-auto print:max-w-[14rem]">
+    <table className="w-full border-collapse text-center font-mono text-[13px] print:text-[10px]">
+      <thead>
+        <tr>
+          {entete.map((e, i) => (
+            <th key={i} className="border border-slate-300 bg-slate-100 px-2 py-1 font-semibold text-slate-700">
+              {e}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {lignes.map((l, i) => (
+          <tr key={i}>
+            {l.map((v, j) => (
+              <td key={j} className="border border-slate-300 px-2 py-0.5 text-slate-800" style={i === lignes.length - 1 ? { color: "#dc2626", fontWeight: 700 } : undefined}>
+                {v}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
+
 const signe = (v: string | number) => (typeof v === "number" ? String(v).replace("-", "−").replace(".", ",") : v);
 
 /** Un tableau de valeurs, en HTML : lisible à toutes les largeurs.

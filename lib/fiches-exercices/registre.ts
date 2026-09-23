@@ -131,6 +131,11 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
       "Du geste seul au problème : fréquences, moyenne simple et pondérée, médiane et quartiles, diagramme en boîte, écart interquartile, écart type. Deux archers, un bulletin à coefficients, un PDG dans la moyenne des salaires, deux climats de même moyenne que tout oppose, une machine à paquets de pâtes.",
     aussiPour: ["statistiques-descriptives-2de"],
   },
+  "maths/seconde/algorithmique-python-2de": {
+    titre: "Algorithmique et Python : 20 exercices corrigés",
+    resume:
+      "Du geste seul au problème : affectation, types, conditions, boucles for et while, fonctions, simulation. Chaque corrigé montre la trace du programme, tour après tour. Un placement à 4 %, le CO₂ de l'atmosphère, un dé lancé dix mille fois, la conjecture de Syracuse, la racine de 2 pas à pas.",
+  },
   // ⭐ LA PREMIÈRE (15/09/2026) — écrite pour la fille de Frédéric, en 1re, qui
   // teste ce soir. Le verdict est pour demain.
   "maths/premiere-spe/exponentielle": {
