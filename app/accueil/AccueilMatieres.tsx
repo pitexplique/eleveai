@@ -48,16 +48,59 @@
 //
 // ⚠️ LE <h1> DE LA PAGE LA PLUS IMPORTANTE DU SITE A CHANGÉ. C'était « Qui
 // es-tu ? Que cherches-tu aujourd'hui ? » ; c'est maintenant le titre du
-// bandeau — « EleveAI Maths ». Le <title> et la description, eux, ne bougent
-// pas (app/accueil/metadata.ts). À surveiller au relevé d'indexation de fin
-// septembre : c'est le seul changement SEO de cette refonte.
+// bandeau, qui dit la REQUÊTE et non la marque — « Cours et exercices de maths
+// corrigés » (voir `titreBandeau` dans components/accueil/matieres.ts). La
+// description a suivi le même jour ; le <title>, lui, n'a pas bougé.
+// À surveiller au relevé d'indexation de fin septembre.
+//
+// ⭐⭐ LA MESURE, ÉCRITE AVANT DE LIRE LE MOINDRE CHIFFRE (23/09/2026).
+//
+// ⛔ LA LIGNE DE BASE D'AVANT N'EST PLUS LISIBLE, et il faut le dire net :
+// les trois taux du relevé du 14-21/09 — tape une demande 33,0 %, clique un
+// profil 47,5 %, clique une carte 49,7 % — portaient sur des objets que cette
+// page n'a plus (ni profils, ni cartes de ressources, ni champ au centre).
+// Les comparer à quoi que ce soit d'aujourd'hui serait comparer deux écrans
+// différents et appeler ça un effet.
+//
+// ⭐ CE QUI RESTE COMPARABLE, ET C'EST LE SEUL CHIFFRE QUI DÉCIDE :
+//     départs de l'accueil ÷ ouvertures de l'accueil
+// Avant, le marqueur était `?from=ia` (posé par la matrice) ; maintenant c'est
+// `?from=accueil`, posé sur TOUS les liens de cette page. Les deux comptent la
+// même chose — « je suis parti d'ici vers une ressource » — et tous deux
+// atterrissent dans `pages_vues.source` (app/api/track/route.ts).
+// ⚠️ C'est un RATIO, pas un taux : il peut dépasser 1 si quelqu'un clique deux
+// liens. Ne pas l'écrire en pourcentage.
+//
+// ⭐ LA PRÉDICTION, POSÉE MAINTENANT POUR NE PAS ÊTRE INTERPRÉTÉE APRÈS COUP.
+// Valeurs connues, France, mêmes fenêtres horaires : 0,65 (37 ouvertures) la
+// semaine du 13/09, 0,88 (48 ouvertures) le 21/09.
+//   • Fenêtre : du 24/09 au 30/09 inclus, 7 jours pleins, relevé le 01/10.
+//   • Prédiction : ≥ 0,88. La page ouvre sur des notions CLIQUABLES sans
+//     étape préalable, là où la matrice demandait de se déclarer d'abord.
+//   • ⛔ Seuil de décision : sous 0,65 — c'est-à-dire sous le pire relevé
+//     de l'ancienne page — la refonte coûte plus qu'elle ne rapporte, et on
+//     regarde ce qui bloque avant d'ajouter quoi que ce soit.
+//   ⚠️ À ce trafic (~50 ouvertures/jour en France), 7 jours donnent ~350
+//     ouvertures : assez pour distinguer 0,65 de 0,88, pas pour trancher un
+//     écart de 5 points. Ne pas conclure sur moins.
+//
+// ⭐ ET CE QUE `pages_vues` NE PEUT PAS VOIR : les clics qui ne quittent pas la
+// page. D'où cinq événements Vercel, et cinq seulement — ils se paient :
+//   `accueil_matiere`  {matiere, depuis}  quelle matière, et depuis laquelle
+//   `accueil_action`   {matiere, action}  quel onglet de la seconde ligne
+//   `accueil_classe`   {matiere, classe}  LE geste qui entre dans le coach
+//   `accueil_recherche`{rang, niveau}     le champ de l'en-tête, et son tri
+//   `accueil_audience` {audience}         élève / parent / prof / direction
+//   `accueil_lien`     {matiere, lien}    calcul rapide, maths réel
+// ⚠️ Ils répondent à « QUOI », jamais à « combien entrent dans le coach » :
+// cette question-là se lit en base, et seulement là.
 //
 // ⛔ LES TOPICS NE SONT PAS ÉCRITS À LA MAIN : ils viennent de NOTIONS_COACH,
 // c'est-à-dire du knowledge (« tu peux te servir de ressources pour afficher
 // les topics »). Zéro requête, zéro octet de plus : `notions.generated.ts` est
 // déjà dans le paquet du navigateur.
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -75,7 +118,9 @@ import {
   Sparkles,
   Zap,
 } from "lucide-react";
+import { track } from "@vercel/analytics";
 import BandeauMatiere from "@/components/accueil/BandeauMatiere";
+import RangeeDefilante from "@/components/accueil/RangeeDefilante";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
 import {
   ACTIONS,
@@ -93,6 +138,10 @@ import {
 } from "@/components/accueil/matieres";
 import { ficheHrefPourCoach } from "@/lib/fiches/registre";
 import { UNE_COURANTE } from "@/lib/accueil/une";
+
+/** L'identifiant du panneau, partage par les cinq onglets : un seul panneau
+ *  est rendu a la fois, donc tous les `aria-controls` le designent. */
+const PANNEAU_ID = "panneau-accueil";
 
 const ICONES_MATIERE: Record<MatiereId, typeof Calculator> = {
   maths: Calculator,
@@ -141,19 +190,25 @@ function LigneAudiences() {
           dans un conteneur qui défile, `justify-end` fait déborder le contenu
           PAR LA GAUCHE, hors d'atteinte du défilement. Mesuré à 375 px, « Je »
           était coupé et on ne pouvait pas le ramener. */}
-      <div className="mx-auto flex max-w-6xl items-center justify-start gap-1 overflow-x-auto px-3 py-1 sm:[justify-content:safe_flex-end] sm:px-4">
+      <RangeeDefilante
+        role="navigation"
+        aria-label="Espaces par profil"
+        fond="from-white"
+        className="mx-auto flex max-w-6xl items-center justify-start gap-1 overflow-x-auto px-3 py-1 sm:[justify-content:safe_flex-end] sm:px-4"
+      >
         <span className="shrink-0 text-xs font-semibold text-slate-500">Je suis :</span>
         {AUDIENCES.map((a) => (
           <Link
             prefetch={false}
             key={a.href}
             href={`${a.href}?from=accueil`}
+            onClick={() => track("accueil_audience", { audience: a.label })}
             className="shrink-0 whitespace-nowrap rounded-full px-2 py-1 text-xs font-semibold text-slate-600 underline-offset-2 transition hover:bg-slate-100 hover:text-teal-700 hover:underline"
           >
             {a.label}
           </Link>
         ))}
-      </div>
+      </RangeeDefilante>
     </div>
   );
 }
@@ -184,7 +239,20 @@ function LigneMatieres({
 }) {
   return (
     <div className="border-b border-slate-200 bg-white">
-      <div className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-2 sm:[justify-content:safe_center] sm:gap-2 sm:px-4">
+      {/* ⭐ UNE NAVIGATION, PAS UN `tablist` — et la distinction n'est pas
+          cosmétique. Cliquer une matière change TOUT l'écran : le bandeau, le
+          panneau, et jusqu'aux onglets de la ligne du dessous. C'est un
+          changement de sujet, que `aria-current="page"` décrit exactement.
+          La ligne des ACTIONS, elle, ne change qu'un panneau : c'est elle qui
+          est un vrai `tablist` (voir plus bas). Étiqueter les deux pareil
+          aurait annoncé deux jeux d'onglets imbriqués, ce qui n'est pas ce que
+          la page fait. */}
+      <RangeeDefilante
+        role="navigation"
+        aria-label="Matières"
+        fond="from-white"
+        className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-2 sm:[justify-content:safe_center] sm:gap-2 sm:px-4"
+      >
         {MATIERES.map((m) => {
           const Icone = ICONES_MATIERE[m.id];
           const ouvert = m.id === actif;
@@ -212,15 +280,41 @@ function LigneMatieres({
             </button>
           );
         })}
-      </div>
+      </RangeeDefilante>
     </div>
   );
 }
 
-/* ═══ LA SECONDE LIGNE ════════════════════════════════════════════════════
+/* ═══ LA SECONDE LIGNE — UN VRAI `tablist` ════════════════════════════════
    Elle n'apparaît QU'UNE FOIS la matière choisie — et comme les maths sont
    présélectionnées, elle est là dès l'ouverture, sur « Coach ».
-   ⛔ Elle ne quitte pas la page : elle change le panneau du dessous. */
+   ⛔ Elle ne quitte pas la page : elle change le panneau du dessous.
+
+   ⭐ 23/09/2026 — LE MOTIF ARIA, ET POURQUOI IL FALLAIT LE POSER. Ces boutons
+   pilotaient le panneau sans le DIRE : à la souris on voyait le lien de cause à
+   effet, au clavier et au lecteur d'écran on entendait « bouton Évaluation »,
+   puis plus rien — le contenu changeait 300 px plus bas, hors du champ
+   d'attention. `tablist` / `tab` / `tabpanel` est exactement la description de
+   ce que la ligne fait, et il apporte trois choses d'un coup : l'onglet ouvert
+   est annoncé (`aria-selected`), le lien onglet → panneau est déclaré
+   (`aria-controls`), et les flèches ← → parcourent les onglets sans sortir de
+   la rangée. C'est le motif que tout le monde connaît sans l'avoir appris.
+   ⚠️ Cet écran est PROJETÉ EN CLASSE (voir la note du principe fondateur) :
+   une page qu'on pilote au clavier depuis le bureau du professeur vaut mieux
+   qu'une page où il faut viser une pastille à la souris devant trente élèves.
+
+   ⛔ LE ROVING TABINDEX EST LA PARTIE QU'ON OUBLIE : un seul onglet est dans
+   l'ordre de tabulation (`tabIndex=0`, celui qui est ouvert), les autres en
+   sont retirés (`-1`). Sans ça, la touche Tab traverse les cinq onglets un par
+   un avant d'atteindre le contenu — c'est précisément ce que le motif existe
+   pour éviter.
+
+   ⛔ LE LIBELLÉ « MATHÉMATIQUES : » EST PARTI, et pour trois raisons qui vont
+   dans le même sens : il répétait la matière soulignée juste au-dessus, il
+   coûtait ~140 px (c'est lui qui faisait déborder la rangée à 1 009 px), et un
+   élément qui n'est pas un onglet n'a rien à faire dans un `tablist`.
+   Ce qu'il disait est passé dans l'`aria-label` de la rangée, où il sert
+   vraiment à quelqu'un. */
 function LigneActions({
   matiere,
   actif,
@@ -230,37 +324,73 @@ function LigneActions({
   actif: ActionId;
   choisir: (a: ActionId) => void;
 }) {
+  const tablist = useRef<HTMLDivElement>(null);
+
+  function auClavier(e: React.KeyboardEvent<HTMLDivElement>) {
+    const touches = ["ArrowRight", "ArrowLeft", "Home", "End"];
+    if (!touches.includes(e.key)) return;
+    e.preventDefault();
+    const i = ACTIONS.findIndex((a) => a.id === actif);
+    const dernier = ACTIONS.length - 1;
+    // ⚠️ Les flèches BOUCLENT (dernier → premier) : c'est ce que prescrit le
+    // motif, et ce que fait tout jeu d'onglets. Sans la boucle, la flèche
+    // droite « ne marche plus » sur le dernier onglet, et on croit à une panne.
+    const j =
+      e.key === "ArrowRight" ? (i + 1) % ACTIONS.length
+      : e.key === "ArrowLeft" ? (i - 1 + ACTIONS.length) % ACTIONS.length
+      : e.key === "Home" ? 0
+      : dernier;
+    choisir(ACTIONS[j].id);
+    // Le focus SUIT la sélection — sinon le lecteur d'écran annonce un onglet
+    // et en ouvre un autre.
+    const boutons = tablist.current?.querySelectorAll<HTMLButtonElement>('[role="tab"]');
+    boutons?.[j]?.focus();
+  }
+
   return (
     <div className="border-b border-slate-200 bg-slate-50">
-      <div className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-2 sm:[justify-content:safe_center] sm:px-4">
-        <span className="hidden shrink-0 py-2 pr-2 text-xs font-semibold uppercase tracking-wide text-slate-500 lg:inline">
-          {matiere.label} :
-        </span>
-        {ACTIONS.map((a) => {
-          const Icone = ICONES_ACTION[a.id];
-          const ouvert = a.id === actif;
-          return (
-            <button
-              key={a.id}
-              type="button"
-              onClick={() => choisir(a.id)}
-              aria-current={ouvert ? "true" : undefined}
-              className={[
-                "my-1.5 flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold transition sm:px-4",
-                ouvert
-                  ? "bg-teal-700 text-white shadow-sm"
-                  : "text-slate-700 hover:bg-white hover:text-slate-900",
-              ].join(" ")}
-            >
-              <Icone className="h-4 w-4" aria-hidden="true" />
-              <span className="hidden whitespace-nowrap sm:inline">{a.label}</span>
-              <span className="whitespace-nowrap sm:hidden">{a.court}</span>
-            </button>
-          );
-        })}
+      <RangeeDefilante
+        fond="from-slate-50"
+        className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-2 sm:[justify-content:safe_center] sm:px-4"
+      >
+        <div
+          ref={tablist}
+          role="tablist"
+          aria-label={`Ce qu'on peut faire en ${matiere.label}`}
+          onKeyDown={auClavier}
+          className="flex shrink-0 items-center gap-1"
+        >
+          {ACTIONS.map((a) => {
+            const Icone = ICONES_ACTION[a.id];
+            const ouvert = a.id === actif;
+            return (
+              <button
+                key={a.id}
+                type="button"
+                role="tab"
+                id={`onglet-${a.id}`}
+                aria-selected={ouvert}
+                aria-controls={PANNEAU_ID}
+                tabIndex={ouvert ? 0 : -1}
+                onClick={() => choisir(a.id)}
+                className={[
+                  "my-1.5 flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold transition sm:px-4",
+                  ouvert
+                    ? "bg-teal-700 text-white shadow-sm"
+                    : "text-slate-700 hover:bg-white hover:text-slate-900",
+                ].join(" ")}
+              >
+                <Icone className="h-4 w-4" aria-hidden="true" />
+                <span className="hidden whitespace-nowrap sm:inline">{a.label}</span>
+                <span className="whitespace-nowrap sm:hidden">{a.court}</span>
+              </button>
+            );
+          })}
+        </div>
 
         {/* Le filet, puis les entrées qui QUITTENT la page — la fin de la ligne
-            de matières d'IXL, à l'identique. Voir `LIENS_MATIERE`. */}
+            de matières d'IXL, à l'identique. Voir `LIENS_MATIERE`.
+            ⚠️ HORS DU `tablist` : ce ne sont pas des onglets, ils naviguent. */}
         {(LIENS_MATIERE[matiere.id] ?? []).length > 0 && (
           <span
             aria-hidden="true"
@@ -272,6 +402,7 @@ function LigneActions({
             prefetch={false}
             key={l.href}
             href={`${l.href}?from=accueil`}
+            onClick={() => track("accueil_lien", { matiere: matiere.id, lien: l.label })}
             className="my-1.5 flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-teal-700 sm:px-4"
           >
             <Zap className="h-4 w-4" aria-hidden="true" />
@@ -279,7 +410,7 @@ function LigneActions({
             <span className="whitespace-nowrap sm:hidden">{l.court}</span>
           </Link>
         ))}
-      </div>
+      </RangeeDefilante>
     </div>
   );
 }
@@ -297,12 +428,16 @@ function CarteNiveau({
   notions,
   href,
   verbe,
+  pister,
 }: {
   niveau: Niveau;
   teinte: (typeof TEINTES)[number];
   notions: string[];
   href: string;
   verbe: string;
+  /** Appele au clic du bouton. C'est LE geste qui fait entrer dans le coach —
+   *  celui qu'on mesure. */
+  pister?: () => void;
 }) {
   return (
     <article className="flex overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:border-slate-300 hover:shadow-md">
@@ -342,6 +477,7 @@ function CarteNiveau({
           <Link
             prefetch={false}
             href={href}
+            onClick={pister}
             className={`inline-flex shrink-0 items-center gap-1 self-start rounded-lg px-3 py-2 text-sm font-bold text-white shadow-sm transition hover:brightness-110 sm:self-center ${teinte.chip}`}
           >
             {verbe}
@@ -378,6 +514,9 @@ function PanneauCoach({ matiere }: { matiere: MatiereAccueil }) {
           notions={apercu}
           href={`/coach-ia/${matiere.slug}?classe=${niveau.id}&from=accueil`}
           verbe={`Voir les ${total} notions`}
+          pister={() =>
+            track("accueil_classe", { matiere: matiere.id, classe: niveau.id })
+          }
         />
       ))}
     </div>
@@ -708,6 +847,11 @@ export default function AccueilMatieres() {
       <LigneMatieres
         actif={matiereId}
         choisir={(m) => {
+          if (m === matiereId) return;
+          // ⭐ `depuis` DIT D'OÙ L'ON VIENT, et c'est lui qui rend la mesure
+          // lisible : sans ça on saurait que « Français » est cliqué, jamais
+          // s'il est cliqué en PREMIER ou après avoir vu les maths.
+          track("accueil_matiere", { matiere: m, depuis: matiereId });
           setMatiereId(m);
           // ⚠️ On RETOMBE sur le coach en changeant de matière. Rester sur
           // « Leçon du jour » en passant aux maths à l'espagnol montrerait un
@@ -715,7 +859,15 @@ export default function AccueilMatieres() {
           setAction("coach");
         }}
       />
-      <LigneActions matiere={matiere} actif={action} choisir={setAction} />
+      <LigneActions
+        matiere={matiere}
+        actif={action}
+        choisir={(a) => {
+          if (a === action) return;
+          track("accueil_action", { matiere: matiereId, action: a });
+          setAction(a);
+        }}
+      />
 
       <BandeauMatiere
         matiere={matiere.id}
@@ -723,7 +875,18 @@ export default function AccueilMatieres() {
         phrase={matiere.phrase}
       />
 
-      <main className="mx-auto w-full max-w-5xl px-3 py-6 sm:px-4 sm:py-8">
+      {/* ⭐ LE PANNEAU DÉCLARE QU'IL EST PILOTÉ PAR L'ONGLET OUVERT. `role` et
+          `aria-labelledby` ferment la boucle commencée par `aria-controls` sur
+          les onglets : un lecteur d'écran annonce « Évaluation, onglet
+          sélectionné », puis, en entrant ici, « panneau Évaluation ». Sans ces
+          deux attributs, il annonçait un bouton, et le contenu changeait 300 px
+          plus bas sans que rien ne le relie au geste. */}
+      <main
+        id={PANNEAU_ID}
+        role="tabpanel"
+        aria-labelledby={`onglet-${action}`}
+        className="mx-auto w-full max-w-5xl px-3 py-6 sm:px-4 sm:py-8"
+      >
         {action === "coach" && <PanneauCoach matiere={matiere} />}
         {action === "fiche" && <PanneauFiches matiere={matiere} />}
         {action === "evaluation" && <PanneauEvaluation matiere={matiere} />}

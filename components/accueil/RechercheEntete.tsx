@@ -24,6 +24,7 @@
 import { useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { suggerer } from "@/lib/matrice/suggestions";
 
 export default function RechercheEntete({
@@ -48,6 +49,14 @@ export default function RechercheEntete({
   function aller(i: number) {
     const s = suggestions[i];
     if (!s) return;
+    // ⭐ LE SEUL GESTE DE L'ACCUEIL QUI NE LAISSE AUCUNE TRACE AUTREMENT.
+    // Les autres partent par un lien `?from=accueil`, donc `pages_vues` les
+    // voit (app/api/track/route.ts). Celui-ci navigue par `router.push` vers
+    // une URL du coach : la page d'arrivée est comptée, mais rien ne dirait
+    // qu'on y est venu par la recherche plutôt qu'en cliquant une classe.
+    // ⚠️ `rang` dit si la personne a pris la PREMIÈRE ligne ou a dû descendre :
+    // c'est la mesure de la qualité du tri, pas seulement de l'usage.
+    track("accueil_recherche", { rang: i + 1, niveau: s.niveauLabel });
     setOuvert(false);
     router.push(s.url);
   }
