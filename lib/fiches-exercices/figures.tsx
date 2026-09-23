@@ -74,6 +74,61 @@ export const repere = (
   );
 };
 
+/** Une flèche `de` → `vers`, couleur facultative (bleu par défaut). */
+export type Fleche = { de: [number, number]; vers: [number, number]; couleur?: string };
+
+/**
+ * Des VECTEURS sur un quadrillage (23/09/2026, feuille des vecteurs de seconde).
+ * Aucun canvas ne trace de flèche entre deux points : on reprend le geste de la
+ * fiche de cours (`lib/fiches/maths-seconde-vecteurs.tsx`) — trois polylignes
+ * de même couleur, la hampe et deux barbes, dans un `fonctionGraphique`.
+ * ⛔ FENÊTRE CARRÉE (`[min, max]` sert aux deux axes) : le canvas met x et y à
+ * l'échelle séparément, une fenêtre rectangulaire tord la pointe.
+ * ⛔ `min` < 0, et aucun point sur le bord : son étiquette sortirait du cadre.
+ * ⭐ Le script de recalcul RELIT `de`, `vers` et les points : les écrire en clair.
+ */
+export const vecteurs = (
+  fenetre: [number, number],
+  fleches: Fleche[],
+  points: { x: number; y: number; label: string }[] = [],
+) => {
+  const [min, max] = fenetre;
+  const courbes = fleches.flatMap(({ de, vers, couleur = BLEU }, i) => {
+    const [dx, dy] = [vers[0] - de[0], vers[1] - de[1]];
+    const L = Math.hypot(dx, dy);
+    const [ux, uy] = [dx / L, dy / L];
+    // La pointe : deux barbes en arrière, à 30° de part et d'autre de la hampe.
+    const r = Math.min(0.5, L * 0.3) * ((max - min) / 8);
+    const barbe = (a: number) => ({
+      x: +(vers[0] + r * (ux * Math.cos(a) - uy * Math.sin(a))).toFixed(3),
+      y: +(vers[1] + r * (ux * Math.sin(a) + uy * Math.cos(a))).toFixed(3),
+    });
+    const pointe = { x: vers[0], y: vers[1] };
+    return [
+      { id: `v${i}`, type: "points" as const, couleur, points: [{ x: de[0], y: de[1] }, pointe] },
+      { id: `v${i}a`, type: "points" as const, couleur, points: [pointe, barbe((5 * Math.PI) / 6)] },
+      { id: `v${i}b`, type: "points" as const, couleur, points: [pointe, barbe((-5 * Math.PI) / 6)] },
+    ];
+  });
+  return (
+    <div className="mx-auto w-full max-w-[16rem] print:max-w-[12rem]">
+      <CanvasRenderer
+        figure={{
+          kind: "fonctionGraphique",
+          size: { width: 215, height: 215 },
+          xmin: min,
+          xmax: max,
+          ymin: min,
+          ymax: max,
+          grille: true,
+          courbes,
+          points: points.map((p) => ({ ...p, couleur: "#dc2626" })),
+        }}
+      />
+    </div>
+  );
+};
+
 const signe = (v: string | number) => (typeof v === "number" ? String(v).replace("-", "−").replace(".", ",") : v);
 
 /** Un tableau de valeurs, en HTML : lisible à toutes les largeurs.

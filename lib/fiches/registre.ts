@@ -1610,6 +1610,14 @@ export const FICHES_ALIAS: Record<string, string> = {
   "francais/4e/phrase-subordonnees": "francais/4e/phrase-complexe",
   "francais/4e/vocabulaire-orthographe": "francais/4e/vocabulaire-formation",
   "francais/4e/conjugaison-valeurs": "francais/4e/conjugaison-temps",
+
+  /* ⛔ UNE FICHE ÉCRITE, UN BADGE ABSENT (23/09/2026, vu par Frédéric sur la
+     page du coach de seconde). La fiche est rangée sous
+     `statistiques-descriptives-2de`, la notion du coach s'appelle
+     `statistiques_descriptives` (sans « _2de ») : la ligne n'affichait ni
+     « Fiche » ni rien. Alias plutôt que renommage : l'URL de la fiche est déjà
+     au sitemap, la déplacer ferait une 404. */
+  "maths/seconde/statistiques-descriptives": "maths/seconde/statistiques-descriptives-2de",
 };
 
 /** La classe où la fiche est réellement rangée, quand elle diffère de celle

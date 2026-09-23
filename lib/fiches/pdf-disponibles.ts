@@ -229,6 +229,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "variations-et-courbes-premiere-spe-cours-exercices-corriges.pdf",
   "variations-et-extremums-d-une-fonction-seconde-20-exercices-corriges.pdf",
   "variations-et-extremums-seconde-cours-exercices-corriges.pdf",
+  "vecteurs-du-plan-seconde-20-exercices-corriges.pdf",
   "vecteurs-du-plan-seconde-cours-exercices-corriges.pdf",
   "volumes-4e-cours-exercices-corriges.pdf",
   "volumes-5e-cours-exercices-corriges.pdf",

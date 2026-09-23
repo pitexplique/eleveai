@@ -110,6 +110,14 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Du geste seul au problème : carré, inverse, racine carrée, cube et valeur absolue. Calculer, lire une courbe, résoudre, comparer et encadrer sans calculatrice. Un gouffre mesuré au chronomètre, le marathon sous les 2 heures, la masse d'une baleine, un refuge de montagne.",
   },
+  // ⭐ LE BLOC « GÉOMÉTRIE » DE SECONDE (23/09/2026) — Frédéric : « je préfère
+  // finir les fiches d'exercices de seconde ». Les vecteurs d'abord : le
+  // contrôle commun de mars 2025 les demande sans repère.
+  "maths/seconde/vecteurs-plan": {
+    titre: "Les vecteurs du plan : 20 exercices corrigés",
+    resume:
+      "Du geste seul au problème : vecteurs égaux et opposés, coordonnées et norme, Chasles sans repère et le piège de la soustraction, placer un point, parallélogramme, colinéarité et alignement. Un bac dérivé par le courant, une randonnée et son drone, deux chevaux qui tirent un tronc, une rangée de vigne.",
+  },
   // ⭐ LA PREMIÈRE (15/09/2026) — écrite pour la fille de Frédéric, en 1re, qui
   // teste ce soir. Le verdict est pour demain.
   "maths/premiere-spe/exponentielle": {
