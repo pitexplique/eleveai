@@ -2,8 +2,8 @@
 //
 // Le pont entre la matrice d'entrée et le coach qui existe déjà.
 //
-// Le coach (app/tutor-v4) sait s'ouvrir sur une notion précise :
-//   /tutor-v4?classe=6e&matiere=maths&notion=fraction_nombre
+// Le coach (app/coach/serie) sait s'ouvrir sur une notion précise :
+//   /coach/serie?classe=6e&matiere=maths&notion=fraction_nombre
 // Sans ce pont, on dirait « voilà le coach, débrouille-toi » — avec, on ouvre
 // la bonne porte du premier coup. C'est toute la différence entre un lien et
 // une recommandation.
@@ -339,7 +339,7 @@ export const NOTION_COACH_FRANCAIS: TableNotions = {
  * L'URL du coach, ouverte aussi précisément qu'on peut.
  *
  * — Notion connue → le tutor s'ouvre DESSUS :
- *     /tutor-v4?classe=premiere-spe&matiere=maths&notion=derivation&display=simple
+ *     /coach/serie?classe=premiere-spe&matiere=maths&notion=derivation&display=simple
  *   (vérifié : le fil d'ariane affiche « PREMIERE-SPE > Maths > Dérivation »).
  *   Pas de microId : sans lui la session ne démarre pas toute seule, l'élève
  *   voit sa notion déjà choisie et clique « Commencer ». C'est voulu — on ne
@@ -363,7 +363,7 @@ export function urlCoachCiblee(
     : null;
 
   return notion
-    ? `/tutor-v4?classe=${classe}&matiere=${matiere}&notion=${notion}&${displayParamForClasse(classe)}`
+    ? `/coach/serie?classe=${classe}&matiere=${matiere}&notion=${notion}&${displayParamForClasse(classe)}`
     : `/coach-ia/${matiere}?classe=${classe}`;
 }
 

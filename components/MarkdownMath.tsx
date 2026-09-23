@@ -15,7 +15,7 @@ import rehypeKatex from "rehype-katex";
 //
 // ⚠️ CE N'EST PAS UNE SUPPRESSION, C'EST UN DÉPLACEMENT. Next rattache la CSS
 // importée par un composant aux seules routes qui l'embarquent : le coach maths
-// (`app/tutor-v4/*`), le parcours (`app/parcours/*`), les évaluations nationales,
+// (`app/coach/serie/*`), le parcours (`app/parcours/*`), les évaluations nationales,
 // le concours Avenir et le kit de survie continuent de la recevoir, dans le HTML
 // initial et non après coup. Aucun `next/dynamic` dans le dépôt : rien n'arrive
 // en différé, donc pas de formule qui s'affiche nue avant de se styler.

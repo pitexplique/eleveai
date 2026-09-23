@@ -36,7 +36,7 @@ const lessonPacks: Record<
     badge: "Semaine des fractions",
     writtenHref: "/podcast-maths/ecrit/fractions",
     coachHref:
-      "/tutor-v4?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_lire_ecrire",
+      "/coach/serie?classe=6e&matiere=maths&notion=fraction_nombre&microId=fraction_lire_ecrire",
     accent: {
       page: "from-sky-50 via-indigo-50 to-purple-50",
       badge: "bg-sky-100 text-sky-700",
@@ -97,7 +97,7 @@ const lessonPacks: Record<
     badge: "Semaine des pourcentages",
     writtenHref: "/podcast-maths/ecrit/pourcentages",
     coachHref:
-      "/tutor-v4?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_comprendre",
+      "/coach/serie?classe=6e&matiere=maths&notion=pourcentage_nombre&microId=pourcentage_comprendre",
     accent: {
       page: "from-orange-50 via-yellow-50 to-emerald-50",
       badge: "bg-orange-100 text-orange-700",
@@ -157,7 +157,7 @@ const lessonPacks: Record<
     badge: "Semaine des probabilites",
     writtenHref: "/podcast-maths/ecrit/probabilites",
     coachHref:
-      "/tutor-v4?classe=6e&matiere=maths&notion=proba_experience&microId=proba_vocabulaire",
+      "/coach/serie?classe=6e&matiere=maths&notion=proba_experience&microId=proba_vocabulaire",
     accent: {
       page: "from-emerald-50 via-cyan-50 to-violet-50",
       badge: "bg-emerald-100 text-emerald-700",

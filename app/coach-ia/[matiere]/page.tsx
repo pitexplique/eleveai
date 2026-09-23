@@ -595,7 +595,7 @@ export default function CoachIA() {
 
   function handleClick(notionId: string, microId: string) {
     router.push(
-      `/tutor-v4?classe=${encodeURIComponent(classe)}&matiere=${encodeURIComponent(matiere)}&notion=${encodeURIComponent(notionId)}&microId=${encodeURIComponent(microId)}&${displayParamForClasse(classe)}`
+      `/coach/serie?classe=${encodeURIComponent(classe)}&matiere=${encodeURIComponent(matiere)}&notion=${encodeURIComponent(notionId)}&microId=${encodeURIComponent(microId)}&${displayParamForClasse(classe)}`
     );
   }
 

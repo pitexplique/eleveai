@@ -141,7 +141,7 @@ export default function LeconProbabilitesPage() {
             </Link>
 
             <Link
-              href="/tutor-v4?classe=6e&matiere=maths&notion=proba_experience&microId=proba_vocabulaire"
+              href="/coach/serie?classe=6e&matiere=maths&notion=proba_experience&microId=proba_vocabulaire"
               className="rounded-2xl bg-violet-500 px-5 py-3 text-center font-black text-white shadow hover:bg-violet-600"
             >
               Coach IA

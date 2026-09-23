@@ -636,7 +636,7 @@ export default function DashboardEleveClient() {
                         ) : null}
                       </div>
                       <Link
-                        href={`/tutor-v4?classe=${encodeURIComponent(
+                        href={`/coach/serie?classe=${encodeURIComponent(
                           r.classe
                         )}&matiere=${encodeURIComponent(
                           r.matiere

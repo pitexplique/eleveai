@@ -16,7 +16,7 @@
  * ouvrir, mais un exercice qu'il faut faire démarrer.
  *
  * ── ⚠️ POURQUOI IL FAUT CLIQUER, ET PAS SEULEMENT NAVIGUER ───────────────────
- * `/tutor-v4?classe=5e&matiere=maths&notion=nombre_relatif` PRÉSÉLECTIONNE bien
+ * `/coach/serie?classe=5e&matiere=maths&notion=nombre_relatif` PRÉSÉLECTIONNE bien
  * la notion — vérifié, le `<select>` porte la bonne valeur. Mais l'écran affiche
  * alors « Clique sur Démarrer une mission. » et rien d'autre. Une campagne qui
  * se contenterait de l'URL produirait 768 fois le même écran vide, et personne
@@ -406,7 +406,7 @@ async function capturerUneVue(
    * On construit l'URL avec la MÊME fonction que la page. Pas de recopie.
    */
   const url =
-    `${base}/tutor-v4?classe=${encodeURIComponent(c.classe)}` +
+    `${base}/coach/serie?classe=${encodeURIComponent(c.classe)}` +
     `&matiere=${encodeURIComponent(c.matiere)}` +
     `&notion=${encodeURIComponent(c.notion)}` +
     `&display=${vue}`;

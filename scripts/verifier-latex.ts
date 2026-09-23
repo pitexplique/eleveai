@@ -1,7 +1,7 @@
 // Contrôle du LaTeX RENDU dans les énoncés du coach — à l'exécution.
 //
 // POURQUOI (18/08/2026). Le bandeau de correction rappelle désormais l'énoncé
-// (`WrongAnswerPanel`, app/tutor-v4/TutorV4Client.tsx). Frédéric : « il ne faut
+// (`WrongAnswerPanel`, app/coach/serie/TutorV4Client.tsx). Frédéric : « il ne faut
 // pas de $ dans les formules, donc du latex quand c'est nécessaire », « je te
 // parle surtout pour le coach maths ». D'où la question à trancher : les
 // banques écrivent-elles un LaTeX que KaTeX sait rendre, ou reste-t-il des

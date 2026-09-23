@@ -102,8 +102,16 @@ const MODULES: { key: string; label: string; color: string }[] = [
 const SECTION_LABELS: Record<string, string> = {
   "/": "🏠 Accueil",
   "/accueil": "🏠 Accueil",
-  "/tutor-v4": "🧠 Coach / Tutor",
-  "/coach-ia": "🧠 Coach IA",
+  // ⚠️ LES DEUX LIGNES SONT NÉCESSAIRES, ET LA PREMIÈRE NE PARTIRA JAMAIS.
+  // La route a été renommée le 23/09/2026 (`/tutor-v4` → `/coach/serie`), mais
+  // `pages_vues` garde des MOIS de lignes écrites sous l'ancien chemin. Retirer
+  // l'entrée ferait disparaître tout l'historique du coach du tableau de bord —
+  // pas « à zéro », mais dans la ligne « autres », ce qui est pire : le chiffre
+  // baisserait sans que personne sache pourquoi. Les deux comptent le même
+  // écran, à deux époques.
+  "/tutor-v4": "🧠 Coach (avant le 23/09)",
+  "/coach": "🧠 Coach",
+  "/coach-ia": "🧠 Coach — les séries",
   "/parcours": "🛤️ Parcours",
   "/parcours-ia": "🤖 Parcours IA",
   "/calcul-rapide": "⚡ Calcul rapide",

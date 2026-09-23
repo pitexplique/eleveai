@@ -7,7 +7,7 @@ import { CanvasRenderer } from "@/lib/canvas";
 import { MarkdownMath } from "@/components/MarkdownMath";
 import { saveResultat } from "@/lib/resultats";
 import { useEleve } from "@/context/EleveContext";
-import { speakText, stopSpeak } from "@/app/tutor-v4/ListenButton";
+import { speakText, stopSpeak } from "@/app/coach/serie/ListenButton";
 
 import {
   GROUPES,

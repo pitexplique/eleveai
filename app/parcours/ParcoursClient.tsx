@@ -934,7 +934,7 @@ export default function ParcoursClient() {
 
                       {score.status !== "maitrise" && (
                         <Link
-                          href={`/tutor-v4?classe=${classe}&matiere=maths&notion=${score.notionId}`}
+                          href={`/coach/serie?classe=${classe}&matiere=maths&notion=${score.notionId}`}
                           className="mt-3 inline-block rounded-xl bg-slate-950 px-3 py-2 text-xs font-black text-white hover:bg-slate-800"
                         >
                           Retravailler cette notion

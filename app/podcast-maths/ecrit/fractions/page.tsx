@@ -131,7 +131,7 @@ export default function LeconFractionsPage() {
             </Link>
 
             <Link
-              href="/tutor-v4?classe=6e&matiere=maths&notion=fractions&microId=fraction_comprendre"
+              href="/coach/serie?classe=6e&matiere=maths&notion=fractions&microId=fraction_comprendre"
               className="rounded-2xl bg-purple-500 px-5 py-3 text-center font-black text-white shadow hover:bg-purple-600"
             >
               🧠 Coach IA

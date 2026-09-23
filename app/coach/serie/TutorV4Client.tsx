@@ -1116,7 +1116,7 @@ function continueAfterExplanation() {
     currentSessionId: string,
     option: TutorQuestionOption
   ) {
-    const res = await fetch("/api/tutor-v4/choose", {
+    const res = await fetch("/api/coach/choose", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ sessionId: currentSessionId, optionId: option.id }),
@@ -1155,7 +1155,7 @@ function continueAfterExplanation() {
       initMicroScoresForNotion(activeNotion);
       setActiveMicroId(targetMicroId ?? null);
 
-      const res = await fetch("/api/tutor-v4/start", {
+      const res = await fetch("/api/coach/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -1265,7 +1265,7 @@ function continueAfterExplanation() {
       setCurrentQuestion(null);
       setAnswer("");
 
-      const res = await fetch("/api/tutor-v4/jump", {
+      const res = await fetch("/api/coach/jump", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ sessionId, microId }),
@@ -1364,7 +1364,7 @@ function continueAfterExplanation() {
         typeof currentExplanation === "string" &&
         currentExplanation.length > 0;
 
-      const res = await fetch("/api/tutor-v4/answer", {
+      const res = await fetch("/api/coach/answer", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ sessionId, answer: finalAnswer }),
@@ -1635,7 +1635,7 @@ function handleInputKeyDown(
         ];
         return ordered.slice(0, 3).map((mId) => ({
           label: microLabel(mId, classe, matiere),
-          href: `/tutor-v4?classe=${encodeURIComponent(
+          href: `/coach/serie?classe=${encodeURIComponent(
             classe
           )}&matiere=${encodeURIComponent(matiere)}&notion=${encodeURIComponent(
             nId

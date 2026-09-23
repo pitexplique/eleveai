@@ -196,7 +196,7 @@ export function routeRemediation(
   microId: string,
 ) {
   return (
-    `/tutor-v4?classe=${encodeURIComponent(config.classeSource)}` +
+    `/coach/serie?classe=${encodeURIComponent(config.classeSource)}` +
     `&matiere=${encodeURIComponent(config.matiere)}` +
     `&notion=${encodeURIComponent(notionId)}` +
     `&microId=${encodeURIComponent(microId)}&display=simple`

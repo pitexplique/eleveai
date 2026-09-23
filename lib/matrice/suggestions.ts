@@ -179,7 +179,7 @@ function construire(): Entree[] {
         niveauLabel,
         profil,
         mots,
-        url: `/tutor-v4?classe=${classeCoach}&matiere=${m.code}&notion=${n.id}&${displayParamForClasse(classeCoach)}`,
+        url: `/coach/serie?classe=${classeCoach}&matiere=${m.code}&notion=${n.id}&${displayParamForClasse(classeCoach)}`,
       });
     }
   };

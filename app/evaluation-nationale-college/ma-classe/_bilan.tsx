@@ -200,7 +200,7 @@ export function lienRemediation(classe: string, matiere: string, sf: SavoirFaire
   // donc elle, et pas la classe de l'élève, qui décide de la vue du tutor.
   const classeCible = CLASSE_SOURCE[classe] ?? classe;
   return (
-    `/tutor-v4?classe=${encodeURIComponent(classeCible)}` +
+    `/coach/serie?classe=${encodeURIComponent(classeCible)}` +
     `&matiere=${encodeURIComponent(matiere)}` +
     `&notion=${encodeURIComponent(sf.notionId)}` +
     `&microId=${encodeURIComponent(sf.microId)}&${displayParamForClasse(classeCible)}`

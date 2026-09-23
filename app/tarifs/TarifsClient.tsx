@@ -38,7 +38,7 @@ import {
 // du gratuit — retiré depuis, voir plus bas —, puis le collectif
 // en bas — non plus comme un tunnel de vente mais comme une preuve de sérieux.
 //
-// ⭐ Les couleurs sont celles du coach (`app/tutor-v4/TutorV4Client.tsx`) :
+// ⭐ Les couleurs sont celles du coach (`app/coach/serie/TutorV4Client.tsx`) :
 // bandeau indigo→sky→cyan, tuiles sky/violet/emerald/amber. Une page de tarifs
 // qui ne ressemble pas au produit se lit comme une page de quelqu'un d'autre.
 // ─────────────────────────────────────────────────────────────────────────────

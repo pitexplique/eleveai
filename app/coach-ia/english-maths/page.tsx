@@ -91,7 +91,7 @@ function CoachEnglishInner() {
 
   function handleClick(notionId: string, microId: string) {
     router.push(
-      `/tutor-v4?classe=${encodeURIComponent(niveau)}&matiere=english-maths&notion=${encodeURIComponent(notionId)}&microId=${encodeURIComponent(microId)}&${displayParamForClasse(niveau)}`
+      `/coach/serie?classe=${encodeURIComponent(niveau)}&matiere=english-maths&notion=${encodeURIComponent(notionId)}&microId=${encodeURIComponent(microId)}&${displayParamForClasse(niveau)}`
     );
   }
 

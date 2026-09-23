@@ -340,7 +340,7 @@ export default function PhotoExercice({
                     {ex.micros.map((m) => (
                       <li key={m.id}>
                         <Link
-                          href={`/tutor-v4?classe=${encodeURIComponent(resultat.classe)}&matiere=${encodeURIComponent(resultat.matiere)}&notion=${encodeURIComponent(ex.notionId)}&microId=${encodeURIComponent(m.id)}&${displayParamForClasse(resultat.classe)}`}
+                          href={`/coach/serie?classe=${encodeURIComponent(resultat.classe)}&matiere=${encodeURIComponent(resultat.matiere)}&notion=${encodeURIComponent(ex.notionId)}&microId=${encodeURIComponent(m.id)}&${displayParamForClasse(resultat.classe)}`}
                           prefetch={false}
                           className="flex items-start gap-1.5 rounded-lg px-1.5 py-1 text-sm text-slate-700 transition hover:bg-teal-50 hover:text-teal-900"
                         >

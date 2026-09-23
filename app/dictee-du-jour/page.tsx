@@ -20,7 +20,7 @@ import {
   classeVersNiveau,
   NIVEAUX_DICTEE,
 } from "@/lib/dictee-du-jour/parNiveau";
-import { speakText } from "@/app/tutor-v4/ListenButton";
+import { speakText } from "@/app/coach/serie/ListenButton";
 import { playMotDictee } from "@/lib/dictee-du-jour/playAudio";
 import { useEleve } from "@/context/EleveContext";
 import PontCoach from "@/components/PontCoach";

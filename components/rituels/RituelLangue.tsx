@@ -15,7 +15,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { estAReviser, type MotLangue, type Repertoire } from "@/lib/repertoire/moteur";
-import { speakText, type SpeechLang } from "@/app/tutor-v4/ListenButton";
+import { speakText, type SpeechLang } from "@/app/coach/serie/ListenButton";
 import { useEleve } from "@/context/EleveContext";
 import FinRituel from "@/components/rituels/FinRituel";
 

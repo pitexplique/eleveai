@@ -494,7 +494,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     id: "coach-anglais",
     titre: "Le coach anglais",
     promesse: "Du A1 au B2, chacun à son rythme.",
-    // ⚠️ /coach-ia/english-maths, pas /tutor-v4?matiere=anglais : sans classe,
+    // ⚠️ /coach-ia/english-maths, pas /coach/serie?matiere=anglais : sans classe,
     // le tutor retombe sur la 6e en maths (normalizeClasse a sa whitelist).
     // Le sommaire, lui, ouvre bien la bonne matière.
     url: "/coach-ia/english-maths",

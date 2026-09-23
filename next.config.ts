@@ -38,6 +38,56 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // ─── 23/09/2026 — « TUTOR V4 » DISPARAÎT DE CE QUE L'ÉLÈVE VOIT ────────
+      // Frédéric a tranché le nom : un seul mot, « le coach », de la liste
+      // jusqu'à la question. `/tutor-v4` cumulait trois défauts — de l'anglais
+      // dans un produit français lu par des CP, un NUMÉRO DE VERSION dans une
+      // adresse publique (`tutor-v4?classe=6e&notion=fraction`), et, traduit,
+      // le mot « tutorat », qui en français désigne le dispositif des élèves en
+      // difficulté : exactement le jugement que tout le produit s'emploie à
+      // retirer.
+      //
+      // ⭐ CE QUE CETTE REDIRECTION PROTÈGE, ET C'EST ELLE LA RAISON D'ÊTRE DE
+      // LA LIGNE : les QR CODES DÉJÀ IMPRIMÉS. Les fiches et les feuilles
+      // d'exercices distribuées en classe portent des adresses figées sur du
+      // papier — on ne les rappelle pas. Tout ce qui pointait vers `/tutor-v4`
+      // continue d'arriver au bon endroit, paramètres compris (Next conserve la
+      // query sur une redirection).
+      // ⚠️ `permanent: true` (308) : cette adresse ne reviendra pas.
+      // ⛔ Aucun coût SEO : `/tutor-v4` n'est PAS au sitemap et n'a jamais été
+      // une page indexable (un écran d'application, tout en `?paramètres`).
+      // Les pages qui portent le référencement du coach — `/coach-ia/<matiere>`,
+      // priorité 0,95 — n'ont PAS bougé, et c'est délibéré : leur adresse porte
+      // la requête « coach ia maths ». Les renommer est une autre décision, qui
+      // se mesure.
+      // ⛔⛔ ET SURTOUT PAS `/coach` TOUT COURT — LE PIÈGE, TROUVÉ EN TESTANT.
+      // `/coach` est un LIEN COURT DIT À VOIX HAUTE DANS LES VIDÉOS YouTube
+      // (plus bas dans ce même fichier, avec `/cahier`) : il redirige vers
+      // `/coach-ia/maths` avec les UTM de campagne. Poser l'écran d'exercices
+      // sur `/coach` l'aurait tué en silence — la redirection passe AVANT la
+      // route, exactement comme pour les fiches de 4e en août. Mesuré : la
+      // première version de ce renommage envoyait bien sur `/coach`, et
+      // l'élève atterrissait sur la liste des notions, sa série perdue.
+      // 👉 L'écran vit donc à `/coach/serie`. ⚠️ `source: "/coach"` est une
+      // correspondance EXACTE : elle n'attrape pas `/coach/serie`.
+      // ⭐ Et le segment fixe `serie` restera prioritaire sur un futur
+      // `/coach/[matiere]` (Next fait toujours passer le statique avant le
+      // dynamique) — la place est donc libre si `/coach-ia/<matiere>` déménage
+      // un jour.
+      {
+        source: "/tutor-v4",
+        destination: "/coach/serie",
+        permanent: true,
+      },
+      // Les quatre routes d'API ont suivi le même chemin (app/api/coach/*).
+      // Elles ne sont appelées que par le navigateur depuis l'écran du coach,
+      // donc rien d'extérieur ne les vise — mais une redirection coûte une ligne
+      // et couvre l'onglet resté ouvert pendant le déploiement.
+      {
+        source: "/api/tutor-v4/:chemin*",
+        destination: "/api/coach/:chemin*",
+        permanent: false,
+      },
       // ─── Les fiches de maths de 4e et de 3e, éteintes le 21/08/2026 ───────
       // Cinq fiches de juin (Pythagore, cosinus, statistiques, probabilités,
       // Thalès), restées seules de leur niveau et jamais reprises au standard
