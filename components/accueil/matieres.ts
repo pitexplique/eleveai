@@ -60,8 +60,27 @@ export type Niveau = {
   id: string;
   /** La pastille de couleur, à gauche de la carte : « 6e », « CM2 », « A1 ». */
   label: string;
-  /** Le titre de la carte, en toutes lettres : « Sixième ». Un enfant de CP ne
-   *  lit pas « CP », il lit ce que la maîtresse dit. */
+  /**
+   * LE TITRE DE LA CARTE — UNE PROMESSE, PAS UN NOM D'ADMINISTRATION.
+   *
+   * ⭐ 23/09/2026, Frédéric : « j'aime bien réussir sa 6e ». La carte disait
+   * « Sixième », « Cours préparatoire » — le vocabulaire du bulletin. IXL
+   * français écrit « Réussir ma 6ᵉ », « Réussir mon CP » : un verbe qui dit ce
+   * qu'on vient chercher, et un possessif qui met l'élève dedans.
+   *
+   * ⚠️ « SA » ET NON « MA », et c'est son mot. L'accueil est lu par l'élève ET
+   * par le parent assis à côté de lui — c'est la raison pour laquelle ce bloc
+   * n'a jamais tutoyé (voir la règle du 19/08 sur le titre de l'ancien accueil).
+   * « Ma 6e » fait parler l'élève ; « sa 6e » parle de lui, et les deux publics
+   * peuvent le lire.
+   * ⚠️ L'accord du possessif suit le NOM DE LA CLASSE, pas le sigle : « son CP »
+   * (cours préparatoire, masculin), « sa 6e » (sixième, féminin).
+   *
+   * ⛔ LA FORMULE NE S'ÉTEND PAS À TOUT. « Réussir son A1 » ne se dit pas : les
+   * paliers du CECRL gardent « Niveau A1 », « Adultes » et les deux paliers Pix
+   * gardent leur nom. On n'étire pas une tournure jusqu'à ce qu'elle sonne faux
+   * — leur champ `sous` porte déjà le sens.
+   */
   nom: string;
   /** La précision qui évite une erreur de clic : « tronc commun », « débutant ». */
   sous?: string;
@@ -78,33 +97,33 @@ export type Niveau = {
    drôle de première ligne. STMG juste avant, même raison.
    ⚠️ Les paliers A1 → B2 gardent leur ordre : voir NIVEAUX_CECRL. */
 const PRIMAIRE: Niveau[] = [
-  { id: "cm2", label: "CM2", nom: "Cours moyen 2" },
-  { id: "cm1", label: "CM1", nom: "Cours moyen 1" },
-  { id: "ce2", label: "CE2", nom: "Cours élémentaire 2" },
-  { id: "ce1", label: "CE1", nom: "Cours élémentaire 1" },
-  { id: "cp", label: "CP", nom: "Cours préparatoire" },
+  { id: "cm2", label: "CM2", nom: "Réussir son CM2" },
+  { id: "cm1", label: "CM1", nom: "Réussir son CM1" },
+  { id: "ce2", label: "CE2", nom: "Réussir son CE2" },
+  { id: "ce1", label: "CE1", nom: "Réussir son CE1" },
+  { id: "cp", label: "CP", nom: "Réussir son CP" },
 ];
 
 const COLLEGE: Niveau[] = [
-  { id: "3e", label: "3e", nom: "Troisième" },
-  { id: "4e", label: "4e", nom: "Quatrième" },
-  { id: "5e", label: "5e", nom: "Cinquième" },
-  { id: "6e", label: "6e", nom: "Sixième" },
+  { id: "3e", label: "3e", nom: "Réussir sa 3e" },
+  { id: "4e", label: "4e", nom: "Réussir sa 4e" },
+  { id: "5e", label: "5e", nom: "Réussir sa 5e" },
+  { id: "6e", label: "6e", nom: "Réussir sa 6e" },
 ];
 
 const CLASSES_MATHS: Niveau[] = [
-  { id: "terminale-spe", label: "Term", nom: "Terminale", sous: "spécialité maths" },
-  { id: "premiere-spe", label: "1re spé", nom: "Première", sous: "spécialité maths" },
-  { id: "premiere", label: "1re", nom: "Première", sous: "tronc commun" },
-  { id: "seconde", label: "2de", nom: "Seconde" },
+  { id: "terminale-spe", label: "Term", nom: "Réussir sa terminale", sous: "spécialité maths" },
+  { id: "premiere-spe", label: "1re spé", nom: "Réussir sa 1re", sous: "spécialité maths" },
+  { id: "premiere", label: "1re", nom: "Réussir sa 1re", sous: "tronc commun" },
+  { id: "seconde", label: "2de", nom: "Réussir sa 2de" },
   ...COLLEGE,
   ...PRIMAIRE,
-  { id: "stmg", label: "STMG", nom: "Série STMG", sous: "première et terminale" },
+  { id: "stmg", label: "STMG", nom: "Réussir en STMG", sous: "première et terminale" },
   { id: "adulte", label: "Adultes", nom: "Adultes", sous: "reprise d'études" },
 ];
 
 const CLASSES_FRANCAIS: Niveau[] = [
-  { id: "seconde", label: "2de", nom: "Seconde" },
+  { id: "seconde", label: "2de", nom: "Réussir sa 2de" },
   ...COLLEGE,
   ...PRIMAIRE,
 ];
