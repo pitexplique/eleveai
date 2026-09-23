@@ -558,7 +558,7 @@ export const ficheProbabilites3e: FicheCoursData = {
       micros: ["proba_calculer"],
     },
   ],
-  coachHref: "/coach?matiere=maths&classe=3e&notion=proba_experience",
+  coachHref: "/coach/serie?classe=3e&matiere=maths&notion=proba_experience&display=simple",
 };
 
 // ─── Mode classe ───────────────────────────────────────────────────────────────

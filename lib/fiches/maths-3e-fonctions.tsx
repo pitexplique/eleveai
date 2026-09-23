@@ -602,7 +602,7 @@ export const ficheFonctions3e: FicheCoursData = {
       micros: ["fonction_defi"],
     },
   ],
-  coachHref: "/coach?matiere=maths&classe=3e&notion=fonction_generalite",
+  coachHref: "/coach/serie?classe=3e&matiere=maths&notion=fonction_generalite&display=simple",
 };
 
 // ─── Mode classe ───────────────────────────────────────────────────────────────

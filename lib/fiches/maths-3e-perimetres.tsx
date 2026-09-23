@@ -539,7 +539,7 @@ export const fichePerimetres3e: FicheCoursData = {
       micros: ["aire_perimetre_defi"],
     },
   ],
-  coachHref: "/coach?matiere=maths&classe=3e&notion=aire_perimetre",
+  coachHref: "/coach/serie?classe=3e&matiere=maths&notion=aire_perimetre&display=simple",
 };
 
 // ─── Mode classe ───────────────────────────────────────────────────────────────

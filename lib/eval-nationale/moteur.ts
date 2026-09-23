@@ -286,8 +286,19 @@ function formatDe(q: QuestionEval): FormatReponse {
  * Ce qu'on enregistre quand une grille de tableau série n'est pas entièrement
  * juste. Le caractère nul en tête est délibéré : aucune proposition de banque
  * ne peut lui ressembler, donc il ne sera jamais pris pour une bonne réponse.
+ *
+ * ⛔ ET IL S'ÉCRIT AVEC SON ÉCHAPPEMENT UNICODE — un antislash, puis
+ * « u0000 » — ET JAMAIS EN OCTET BRUT (corrigé le 23/09/2026).
+ * Il était tapé comme un vrai octet nul dans la source — même valeur à
+ * l'exécution, mais `file` classait le fichier « data » et **git le traitait
+ * comme un binaire** : plus de diff lisible, plus de fusion possible, et une
+ * ligne modifiée ici devenait invisible en relecture. C'est le même piège que
+ * partout ailleurs dans le dépôt : un octet nul écrit dans un fichier source
+ * ne se voit pas, et il coûte l'historique du fichier.
+ * ⚠️ La valeur produite est IDENTIQUE — rien à reprendre en base, et
+ * `cleDe` ci-dessous obéit à la même règle.
  */
-export const GRILLE_FAUSSE = " grille-fausse";
+export const GRILLE_FAUSSE = "\u0000grille-fausse";
 
 /**
  * LA RÈGLE DU TABLEAU SÉRIE, ET ELLE EST DURE : « L'élève doit avoir répondu
@@ -390,7 +401,7 @@ function empreinte(texte: string): string {
  * l'autre, et l'anti-répétition ne servirait plus à rien du tout.
  */
 function cleDe(texte: string, choices: readonly string[]): string {
-  return empreinte(`${texte} ${[...choices].sort().join(" ")}`);
+  return empreinte(`${texte}\u0000${[...choices].sort().join("\u0000")}`);
 }
 
 function melanger<T>(liste: readonly T[]): T[] {

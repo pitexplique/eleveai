@@ -551,7 +551,7 @@ export const fichePythagore3e: FicheCoursData = {
       micros: ["pythagore_defi", "pythagore_calculer_cote"],
     },
   ],
-  coachHref: "/coach?matiere=maths&classe=3e&notion=pythagore_theoreme",
+  coachHref: "/coach/serie?classe=3e&matiere=maths&notion=pythagore_theoreme&display=simple",
 };
 
 // ─── Mode classe ───────────────────────────────────────────────────────────────

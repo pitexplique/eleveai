@@ -73,6 +73,7 @@ import {
   MessagesSquare,
   PenLine,
   Sparkles,
+  Zap,
 } from "lucide-react";
 import BandeauMatiere from "@/components/accueil/BandeauMatiere";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
@@ -83,6 +84,7 @@ import {
   matierePar,
   notionsDe,
   RITUELS,
+  LIENS_MATIERE,
   type ActionId,
   type MatiereAccueil,
   type MatiereId,
@@ -138,7 +140,7 @@ function LigneAudiences() {
           dans un conteneur qui défile, `justify-end` fait déborder le contenu
           PAR LA GAUCHE, hors d'atteinte du défilement. Mesuré à 375 px, « Je »
           était coupé et on ne pouvait pas le ramener. */}
-      <div className="mx-auto flex max-w-6xl items-center justify-start gap-1 overflow-x-auto px-3 py-1 sm:justify-end sm:px-4">
+      <div className="mx-auto flex max-w-6xl items-center justify-start gap-1 overflow-x-auto px-3 py-1 sm:[justify-content:safe_flex-end] sm:px-4">
         <span className="shrink-0 text-xs font-semibold text-slate-500">Je suis :</span>
         {AUDIENCES.map((a) => (
           <Link
@@ -161,7 +163,17 @@ function LigneAudiences() {
    on voit d'un coup TOUT ce que le site sait faire, sans avoir à cliquer.
    ⚠️ `overflow-x-auto` : à 360 px les six mots font 620 px. On fait défiler
    plutôt que de replier sur deux lignes — replié, le bandeau descend sous le
-   pli et la page s'ouvre sur du vide. */
+   pli et la page s'ouvre sur du vide.
+
+   ⛔⛔ `[justify-content:safe_center]` ET PAS `justify-center`, sur les TROIS
+   lignes de cette page. Le défaut est le même que celui vu à 375 px sur la
+   ligne des audiences, et il est contre-intuitif : dans un conteneur qui
+   défile, un contenu CENTRÉ qui déborde sort des DEUX côtés — et la moitié de
+   gauche passe en coordonnée négative, hors d'atteinte du défilement. Mesuré à
+   1 009 px après l'ajout de « Calcul rapide » et « Maths Réel » : le libellé
+   « MATHÉMATIQUES : » était coupé et rien ne permettait de le ramener.
+   Le mot-clé `safe` dit au navigateur de retomber sur `start` dès que ça
+   déborde : centré quand ça tient, aligné à gauche quand ça ne tient pas. */
 function LigneMatieres({
   actif,
   choisir,
@@ -171,7 +183,7 @@ function LigneMatieres({
 }) {
   return (
     <div className="border-b border-slate-200 bg-white">
-      <div className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-2 sm:justify-center sm:gap-2 sm:px-4">
+      <div className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-2 sm:[justify-content:safe_center] sm:gap-2 sm:px-4">
         {MATIERES.map((m) => {
           const Icone = ICONES_MATIERE[m.id];
           const ouvert = m.id === actif;
@@ -219,7 +231,7 @@ function LigneActions({
 }) {
   return (
     <div className="border-b border-slate-200 bg-slate-50">
-      <div className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-2 sm:justify-center sm:px-4">
+      <div className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-2 sm:[justify-content:safe_center] sm:px-4">
         <span className="hidden shrink-0 py-2 pr-2 text-xs font-semibold uppercase tracking-wide text-slate-500 lg:inline">
           {matiere.label} :
         </span>
@@ -245,6 +257,27 @@ function LigneActions({
             </button>
           );
         })}
+
+        {/* Le filet, puis les entrées qui QUITTENT la page — la fin de la ligne
+            de matières d'IXL, à l'identique. Voir `LIENS_MATIERE`. */}
+        {(LIENS_MATIERE[matiere.id] ?? []).length > 0 && (
+          <span
+            aria-hidden="true"
+            className="mx-1 h-5 w-px shrink-0 self-center bg-slate-300"
+          />
+        )}
+        {(LIENS_MATIERE[matiere.id] ?? []).map((l) => (
+          <Link
+            prefetch={false}
+            key={l.href}
+            href={`${l.href}?from=accueil`}
+            className="my-1.5 flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-teal-700 sm:px-4"
+          >
+            <Zap className="h-4 w-4" aria-hidden="true" />
+            <span className="hidden whitespace-nowrap sm:inline">{l.label}</span>
+            <span className="whitespace-nowrap sm:hidden">{l.court}</span>
+          </Link>
+        ))}
       </div>
     </div>
   );

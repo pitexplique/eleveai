@@ -506,7 +506,7 @@ export const ficheNombresRationnels3e: FicheCoursData = {
       micros: ["fraction_rationnel_defi"],
     },
   ],
-  coachHref: "/coach?matiere=maths&classe=3e&notion=fraction_rationnel",
+  coachHref: "/coach/serie?classe=3e&matiere=maths&notion=fraction_rationnel&display=simple",
 };
 
 // ─── Mode classe ───────────────────────────────────────────────────────────────

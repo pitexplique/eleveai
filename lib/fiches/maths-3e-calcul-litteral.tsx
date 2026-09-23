@@ -547,7 +547,7 @@ export const ficheCalculLitteral3e: FicheCoursData = {
       micros: ["litteral_defi", "litteral_developper"],
     },
   ],
-  coachHref: "/coach?matiere=maths&classe=3e&notion=litteral_calcul",
+  coachHref: "/coach/serie?classe=3e&matiere=maths&notion=litteral_calcul&display=simple",
 };
 
 // ─── Mode classe ───────────────────────────────────────────────────────────────

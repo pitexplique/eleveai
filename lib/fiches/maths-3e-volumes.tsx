@@ -506,7 +506,7 @@ export const ficheVolumes3e: FicheCoursData = {
       micros: ["volume_prisme", "volume_defi"],
     },
   ],
-  coachHref: "/coach?matiere=maths&classe=3e&notion=volume_solide",
+  coachHref: "/coach/serie?classe=3e&matiere=maths&notion=volume_solide&display=simple",
 };
 
 // ─── Mode classe ───────────────────────────────────────────────────────────────

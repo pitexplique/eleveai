@@ -554,7 +554,7 @@ export const ficheAlgorithmique3e: FicheCoursData = {
       micros: ["algo_corriger", "algo_generaliser"],
     },
   ],
-  coachHref: "/coach?matiere=maths&classe=3e&notion=algo_programmation",
+  coachHref: "/coach/serie?classe=3e&matiere=maths&notion=algo_programmation&display=simple",
 };
 
 // ─── Mode classe ───────────────────────────────────────────────────────────────

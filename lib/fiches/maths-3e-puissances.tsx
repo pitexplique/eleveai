@@ -489,7 +489,7 @@ export const fichePuissances3e: FicheCoursData = {
       micros: ["entier_puissance_defi"],
     },
   ],
-  coachHref: "/coach?matiere=maths&classe=3e&notion=entier_puissance",
+  coachHref: "/coach/serie?classe=3e&matiere=maths&notion=entier_puissance&display=simple",
 };
 
 // ─── Mode classe ───────────────────────────────────────────────────────────────

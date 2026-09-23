@@ -531,7 +531,7 @@ export const ficheProportionnalite3e: FicheCoursData = {
       micros: ["prop_vitesse_debit", "prop_defi"],
     },
   ],
-  coachHref: "/coach?matiere=maths&classe=3e&notion=prop_proportionnalite",
+  coachHref: "/coach/serie?classe=3e&matiere=maths&notion=prop_proportionnalite&display=simple",
 };
 
 // ─── Mode classe ───────────────────────────────────────────────────────────────

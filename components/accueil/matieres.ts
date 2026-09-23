@@ -190,6 +190,27 @@ export const ACTIONS: { id: ActionId; label: string; court: string }[] = [
   { id: "lecon", label: "Leçon du jour", court: "Leçon" },
 ];
 
+/* ── LES ENTRÉES QUI QUITTENT LA PAGE, APRÈS UN FILET ───────────────────────
+   Frédéric, 23/09 : « quand on sélectionne maths, après leçon du jour, rajoute
+   calcul rapide et maths réel », puis « ou que calcul rapide ».
+   Les deux sont posés ; retirer « Maths Réel » est une ligne à enlever ici.
+
+   ⭐ CE SONT DES LIENS, PAS DES ONGLETS, et c'est la construction d'IXL : leur
+   ligne de matières se termine par un filet vertical, puis « Recommendations |
+   Skill plans | Awards » — qui, eux, quittent la page. Un onglet qui n'ouvrirait
+   qu'une seule carte serait un panneau vide avec un bouton dedans ; ces deux-là
+   sont des pages entières, on y va.
+   ⛔ Propres aux maths : /calcul-rapide et /maths-974 n'existent pas ailleurs. */
+export const LIENS_MATIERE: Partial<
+  Record<MatiereId, { label: string; court: string; href: string }[]>
+> = {
+  maths: [
+    { label: "Calcul rapide", court: "Calcul", href: "/calcul-rapide" },
+    // Le titre exact de la page est « Maths Réel · 974 ».
+    { label: "Maths Réel", court: "Réel", href: "/maths-974" },
+  ],
+};
+
 /** Les pastilles de niveau, en couleurs qui tournent — la colonne colorée à
  *  gauche de chaque carte, chez IXL. Six teintes, reprises en boucle. */
 /* ── LES RITUELS, PAR MATIÈRE ───────────────────────────────────────────────

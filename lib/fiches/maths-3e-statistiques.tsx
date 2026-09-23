@@ -511,7 +511,7 @@ export const ficheStatistiques3e: FicheCoursData = {
       micros: ["stat_interpreter"],
     },
   ],
-  coachHref: "/coach?matiere=maths&classe=3e&notion=stat_statistique",
+  coachHref: "/coach/serie?classe=3e&matiere=maths&notion=stat_statistique&display=simple",
 };
 
 // ─── Mode classe ───────────────────────────────────────────────────────────────

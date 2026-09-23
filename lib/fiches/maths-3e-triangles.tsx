@@ -551,7 +551,7 @@ export const ficheTriangles3e: FicheCoursData = {
       micros: ["triangle_defi", "triangle_reconnaitre"],
     },
   ],
-  coachHref: "/coach?matiere=maths&classe=3e&notion=triangle_figure",
+  coachHref: "/coach/serie?classe=3e&matiere=maths&notion=triangle_figure&display=simple",
 };
 
 // ─── Mode classe ───────────────────────────────────────────────────────────────

@@ -546,7 +546,7 @@ export const ficheAires3e: FicheCoursData = {
       micros: ["aire_agrandissement_reduction"],
     },
   ],
-  coachHref: "/coach?matiere=maths&classe=3e&notion=aire_surface",
+  coachHref: "/coach/serie?classe=3e&matiere=maths&notion=aire_surface&display=simple",
 };
 
 // ─── Mode classe ───────────────────────────────────────────────────────────────
