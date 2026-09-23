@@ -35,12 +35,17 @@
 // Frédéric, après avoir regardé la maquette sur /accueil-2 : « bcp plus clair »,
 // « remplace accueil par accueil 2 ». Une ligne de matières, une ligne
 // d'actions, un bandeau dessiné, et le coach de maths ouvert par défaut.
-// ⛔ AccueilIA.tsx reste sur le disque, DÉBRANCHÉ et non supprimé : la matrice
-// d'entrée, la colonne de gauche et la bande de la Une y sont encore montées.
-// Pour revenir en arrière, remettre `<AccueilIA />` ci-dessous — et rien d'autre.
-// ⚠️ Il est donc relu à chaque typecheck sans servir personne, exactement comme
-// AccueilClient.tsx l'a été du 06 au 14/08. Si la refonte tient une quinzaine,
-// c'est lui qu'on supprime, avec la même note que ci-dessus.
+// ✅ ET AccueilIA.tsx EST SUPPRIMÉ (23/09/2026, le soir même). Frédéric :
+// « tu peux supprimer AccueilIA.tsx, on reste sur notre version » — après le
+// verdict qui compte, celui de sa fille devant l'écran : « là on comprend de
+// suite ». La même qui disait le 09/09 « je voulais réviser les pourcentages,
+// je ne savais pas où aller ».
+// ⚠️ LE RETOUR ARRIÈRE N'EST DONC PLUS UNE LIGNE : il passe par l'historique,
+//     git show 0925f01f:app/accueil/AccueilIA.tsx > app/accueil/AccueilIA.tsx
+// (n'importe quel commit antérieur à la suppression fait l'affaire). C'est la
+// même manœuvre que pour AccueilClient.tsx, supprimé le 14/08 — et la raison
+// est la même : un fichier que plus personne ne monte est relu à chaque
+// typecheck et se périme en silence.
 import AccueilMatieres from "./AccueilMatieres";
 
 // ⭐ LES MÉTADONNÉES VIVENT DANS ./metadata.ts, ET NULLE PART AILLEURS.

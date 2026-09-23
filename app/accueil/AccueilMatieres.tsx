@@ -2,12 +2,24 @@
 
 // ── LA PAGE D'ACCUEIL, REFONTE DU 23/09/2026 « façon IXL » ──────────────────
 //
-// Montée par app/accueil/page.tsx. Elle REMPLACE AccueilIA.tsx, qui reste sur
-// le disque, débranché : « remplace accueil par accueil 2 » (Frédéric, après
-// avoir regardé la maquette sur /accueil-2 — « bcp plus clair », « ça sera
-// beaucoup plus clair pour les élèves et pour les profs »).
-// 👉 POUR REVENIR EN ARRIÈRE : une ligne dans page.tsx, `<AccueilIA />` à la
-// place de `<AccueilMatieres />`. Rien d'autre n'a été supprimé.
+// Montée par app/accueil/page.tsx. Elle REMPLACE AccueilIA.tsx, SUPPRIMÉ le
+// 23/09/2026 au soir : « remplace accueil par accueil 2 », puis « tu peux
+// supprimer AccueilIA.tsx, on reste sur notre version ». Le verdict qui a
+// tranché est celui de sa fille devant l'écran : « là on comprend de suite ».
+// 👉 POUR REVENIR EN ARRIÈRE : `git show 0925f01f:app/accueil/AccueilIA.tsx`.
+//
+// ⚠️ CE QUE SA SUPPRESSION LAISSE SANS APPELANT — 3 379 lignes que PLUS AUCUNE
+// PAGE NE MONTE, et qui sont donc relues à chaque typecheck pour rien :
+//   components/matrice/EntreeMatrice.tsx      2 387
+//   components/accueil/ColonneGauche.tsx        426  (seul appelant de ResumeEleve)
+//   components/accueil/ResumeEleve.tsx          294
+//   components/accueil/UneDeLaSemaine.tsx       195
+//   app/accueil/PresentationAudio.tsx            77
+// ⛔ ELLES NE SONT PAS SUPPRIMÉES ICI : Frédéric a demandé AccueilIA.tsx, pas
+// la cascade. À trancher séparément.
+// ⚠️ ET `lib/accueil/une.ts` N'EST PAS ORPHELIN, lui : le `PanneauLecon` plus
+// bas lit toujours `UNE_COURANTE`. C'est le COMPOSANT qui ne sert plus, pas la
+// donnée — ne pas les confondre en faisant le ménage.
 //
 // Frédéric, 23/09/2026, capture d'IXL à l'appui :
 //   « header inchangé : logo + Ti Margo, au centre la barre de recherche, à
