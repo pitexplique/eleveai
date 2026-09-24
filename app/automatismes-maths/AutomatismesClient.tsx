@@ -220,7 +220,7 @@ export default function AutomatismesClient() {
               génère à l'ouverture : 20 séries + corrigés, ~50 pages A4. */}
           {niveau && !enCours && !apercu ? (
             <a
-              href={`/automatismes-maths/livret?classe=${classe}`}
+              href={`/automatismes-maths/livret/${classe}`}
               target="_blank"
               rel="noopener"
               className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-5 py-3 text-sm font-black text-emerald-800 ring-2 ring-emerald-300 hover:bg-emerald-50"

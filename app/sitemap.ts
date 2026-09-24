@@ -117,6 +117,13 @@ const ROUTES: RouteConfig[] = [
   { path: "/parcours-ia",       priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   // 24/09/2026 — les automatismes (première partie du DNB), à part du coach.
   { path: "/automatismes-maths", priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  // Les six livrets PDF, une adresse par classe (titres validés le 24/09/2026).
+  { path: "/automatismes-maths/livret/6e",       priority: 0.8, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  { path: "/automatismes-maths/livret/5e",       priority: 0.8, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  { path: "/automatismes-maths/livret/4e",       priority: 0.8, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  { path: "/automatismes-maths/livret/3e",       priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  { path: "/automatismes-maths/livret/seconde",  priority: 0.8, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  { path: "/automatismes-maths/livret/premiere", priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/eval-pix-ia",       priority: 0.9,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
 
   // ── KITS DE SURVIE (lycée) ─────────────────────────────────────────────────

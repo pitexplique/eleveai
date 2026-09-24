@@ -46,15 +46,15 @@ function avecGraine<T>(graine: number, tirer: () => T): T {
 
 const LETTRES = ["A", "B", "C", "D"];
 
-export default function LivretClient() {
-  const [classe, setClasse] = useState("3e");
+export default function LivretClient({ classe: classeProp }: { classe?: string }) {
+  const [classe, setClasse] = useState(classeProp ?? "3e");
   const [edition, setEdition] = useState(1);
   const [series, setSeries] = useState<AutoQuestionServie[][]>([]);
 
   // Tirage APRÈS le montage : le rendu serveur ne doit pas tirer au hasard.
   useEffect(() => {
     const p = new URLSearchParams(window.location.search);
-    const c = p.get("classe") ?? "3e";
+    const c = classeProp ?? p.get("classe") ?? "3e";
     const e = Math.max(1, Number(p.get("edition")) || 1);
     setClasse(c);
     setEdition(e);
@@ -62,7 +62,7 @@ export default function LivretClient() {
     if (!niveau) return;
     const graine = [...c].reduce((h, ch) => h * 31 + ch.charCodeAt(0), e * 1000003);
     setSeries(avecGraine(graine, () => Array.from({ length: NB_SERIES }, () => tirerSerie(niveau))));
-  }, []);
+  }, [classeProp]);
 
   const niveau = getNiveauAutomatismes(classe);
   if (!niveau) {
