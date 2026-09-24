@@ -204,6 +204,51 @@ export const triangle = (
 };
 
 /**
+ * Les canvas de PROBABILITÉS du coach (24/09/2026, feuille des probabilités de
+ * seconde) : l'arbre pondéré, et le canvas `probabilites` en quatre variantes.
+ * ⛔ Texte NU partout (SVG) : « 1/4 », « 0,6 », jamais de `$`.
+ * ⭐ Le script de recalcul relit les probabilités des branches, les poids de
+ * la roue, les billes et les cases du tableau : les écrire en clair.
+ */
+type Noeud = { label: string; proba?: string; enfants?: Noeud[] };
+/* ⛔ MESURÉ LE 24/09 À 375 PX : l'arbre est dessiné pour 360 de large ; tassé
+   dans une carte de 250, ses probabilités tombaient à 8 px. Et le tableau du
+   canvas a un cadre `overflow-hidden` : une ligne plus large que la carte
+   était COUPÉE, sans défilement. D'où une largeur minimale — sa largeur
+   naturelle — dans un conteneur qui défile sur téléphone (pas sur papier). */
+const DEFILE = "mx-auto w-full overflow-x-auto print:overflow-visible";
+export const arbre = (racine: Noeud[]) => (
+  <div className={`${DEFILE} max-w-[23rem] print:max-w-[14rem]`}>
+    <div className="min-w-[22.5rem] print:min-w-0">
+      <CanvasRenderer figure={{ kind: "arbre_proba", racineEnfants: racine }} />
+    </div>
+  </div>
+);
+const PROBA_CADRE = "mx-auto w-full max-w-[18rem] print:max-w-[12rem]";
+export const de = (surligne: (1 | 2 | 3 | 4 | 5 | 6)[] = []) => (
+  <div className={PROBA_CADRE}>
+    <CanvasRenderer figure={{ kind: "probabilites", variant: "de", de: { faces: [1, 2, 3, 4, 5, 6], surligne } }} />
+  </div>
+);
+export const roue = (segments: { label: string; poids: number; couleur?: string }[]) => (
+  <div className={PROBA_CADRE}>
+    <CanvasRenderer figure={{ kind: "probabilites", variant: "roue", roue: { segments } }} />
+  </div>
+);
+export const billes = (elements: { label?: string; couleur: string }[]) => (
+  <div className={PROBA_CADRE}>
+    <CanvasRenderer figure={{ kind: "probabilites", variant: "billes", billes: { elements } }} />
+  </div>
+);
+export const tableauProba = (entetes: string[], lignes: string[][], surligne: [number, number][] = []) => (
+  <div className={`${DEFILE} max-w-[22rem] print:max-w-[15rem]`}>
+    <div className="min-w-[21rem] print:min-w-0">
+      <CanvasRenderer figure={{ kind: "probabilites", variant: "tableau", tableau: { entetes, lignes, casesSurlignees: surligne } }} />
+    </div>
+  </div>
+);
+
+/**
  * Le diagramme en boîte (23/09/2026, feuille des statistiques de seconde) : le
  * canvas `diagramme_boite` de la fiche de cours, une ou deux séries.
  * ⛔ Texte NU dans `label` (SVG : KaTeX n'y passe pas).
