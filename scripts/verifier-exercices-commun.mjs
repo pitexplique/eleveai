@@ -732,7 +732,7 @@ export function controlesCommuns(v, source, { notionId, classe = "seconde", mati
     "utf8",
   );
   const deLaNotion = [
-    ...microSkills.matchAll(new RegExp(`\\{ id: "([a-z0-9_]+)", label: "(?:[^"\\\\]|\\\\.)*", notionId: "${notionId}"`, "g")),
+    ...microSkills.matchAll(new RegExp(`\\{\\s*id: "([a-z0-9_]+)",\\s*label: "(?:[^"\\\\]|\\\\.)*",\\s*notionId: "${notionId}"`, "g")),
   ].map((m) => m[1]);
   const inconnues = [...cites].filter((id) => !microSkills.includes(`id: "${id}"`));
   v.ok(`${cites.size} micros citées, toutes connues du coach`, inconnues.length === 0, inconnues.join(", "));
@@ -746,7 +746,8 @@ export function controlesCommuns(v, source, { notionId, classe = "seconde", mati
  * Lance le recalcul, puis les contrôles négatifs.
  * @param {{ nom: string, fichier: string, notionId: string, verifier: (source: string, v: ReturnType<typeof creerVerif>) => void, casses: [string, string, string][] }} p
  */
-export function lancer({ nom, fichier, notionId, verifier, casses }) {
+// `classe` : « 3e » lit les micros écrites sur trois lignes (24/09/2026).
+export function lancer({ nom, fichier, notionId, verifier, casses, classe = "seconde" }) {
   const chemin = path.join(RACINE, fichier);
   const source = fs.readFileSync(chemin, "utf8");
   const passe = (src, bavard) => {
@@ -756,7 +757,7 @@ export function lancer({ nom, fichier, notionId, verifier, casses }) {
     } catch (e) {
       v.ok("le recalcul s'exécute", false, String(e?.message ?? e));
     }
-    controlesCommuns(v, src, { notionId });
+    controlesCommuns(v, src, { notionId, classe });
     return v.erreurs();
   };
 
