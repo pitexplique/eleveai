@@ -218,6 +218,15 @@ export function notionsDe(cle: string, niveau: string) {
    ⛔ Elle ne NAVIGUE PAS : elle change le panneau du dessous, comme le
    « View by » d'IXL. Un onglet qui quitterait la page à chaque clic
    redonnerait cinq pages là où on vient d'en faire une. */
+/** ⚠️ LA MATIÈRE À LAQUELLE LA « LEÇON DU JOUR » EST RATTACHÉE — ET C'EST
+ *  PROVISOIRE, PAR CONSTRUCTION. `lib/accueil/une.ts` range la Une par CYCLE
+ *  (lycée, collège, primaire) et **jamais par matière** : elle est transversale.
+ *  Elle paraît « maths » parce que les vidéos le sont en ce moment, mais la
+ *  diapositive « primaire » est souvent une lettre en cursive, donc du français.
+ *  👉 Le jour où la Une sort des matières (idée de Frédéric, 24/09), c'est cette
+ *  constante qui disparaît — pas une liste éparpillée dans le JSX. */
+export const MATIERE_DE_LA_UNE: MatiereId = "maths";
+
 export const ACTIONS: { id: ActionId; label: string; court: string }[] = [
   { id: "coach", label: "Coach", court: "Coach" },
   { id: "evaluation", label: "Évaluation", court: "Évaluation" },
@@ -225,6 +234,36 @@ export const ACTIONS: { id: ActionId; label: string; court: string }[] = [
   { id: "photo", label: "Prendre en photo", court: "Photo" },
   { id: "lecon", label: "Leçon du jour", court: "Leçon" },
 ];
+
+/* ── L'ONGLET DIT CE QU'IL SERT, PAS AUTRE CHOSE (24/09/2026) ──────────────
+   ⛔ LE DÉFAUT, repéré par Frédéric : le cinquième onglet s'appelait
+   « Leçon du jour » dans les SIX matières, alors qu'une seule a une leçon du
+   jour. Les autres servaient des rituels — la dictée, les cinq mots d'anglais,
+   ceux d'espagnol — et deux n'avaient rien du tout. Un seul nom pour trois
+   contenus différents : c'est le défaut « Coach IA » de la veille, en plus
+   petit. Sa conclusion, et elle est la bonne : « renommer selon ce qui est
+   servi ».
+
+   ⚠️ SA PRÉMISSE, ELLE, ÉTAIT FAUSSE, et la mesure l'a montrée avant qu'on
+   supprime quoi que ce soit : il croyait que le short de maths s'affichait
+   partout. Non — il est borné à `MATIERE_DE_LA_UNE` depuis le 23/09. Suivre
+   l'instruction sans mesurer aurait retiré la dictée du jour, l'anglais du jour
+   et l'espagnol du jour de l'accueil pour corriger un défaut qui n'existait pas.
+
+   ⭐ ET LE RENOMMAGE SE DÉDUIT DU CONTENU, il ne se déclare pas : une matière
+   qui gagne un rituel voit l'onglet apparaître toute seule, une matière qui en
+   perd le voit disparaître. Aucune liste à tenir à jour en double. */
+export function actionsPour(m: MatiereAccueil) {
+  return ACTIONS.flatMap((a) => {
+    if (a.id !== "lecon") return [a];
+    const laUne = m.id === MATIERE_DE_LA_UNE;
+    const desRituels = (RITUELS[m.id] ?? []).length > 0;
+    // ⛔ Ni Une ni rituel (l'IA, l'économie) : pas d'onglet du tout. Un onglet
+    // qui ne sert qu'à s'excuser de n'avoir rien coûte un clic pour rien.
+    if (!laUne && !desRituels) return [];
+    return [laUne ? a : { ...a, label: "Rituels", court: "Rituels" }];
+  });
+}
 
 /* ── L'ÉVALUATION ANNUELLE : LA ROUTE EST `/parcours…`, PAS `/evaluation` ───
    ⛔ CORRIGÉ LE 23/09/2026, défaut signalé par Frédéric capture à l'appui :

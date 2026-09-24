@@ -135,11 +135,12 @@ import BandeauMatiere from "@/components/accueil/BandeauMatiere";
 import RangeeDefilante from "@/components/accueil/RangeeDefilante";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
 import {
-  ACTIONS,
+  actionsPour,
   MATIERES,
   TEINTES,
   matierePar,
   notionsDe,
+  MATIERE_DE_LA_UNE,
   RITUELS,
   LIENS_MATIERE,
   LIEN_APRES_FICHE,
@@ -338,22 +339,29 @@ function LigneActions({
   choisir: (a: ActionId) => void;
 }) {
   const tablist = useRef<HTMLDivElement>(null);
+  // ⭐ LA LISTE EST PROPRE À LA MATIÈRE (24/09/2026) : le cinquième onglet
+  // s'appelle « Leçon du jour » là où il y a une Une, « Rituels » là où il y a
+  // des rituels, et il n'existe pas là où il n'y a ni l'un ni l'autre.
+  // ⚠️ TOUT ce qui parcourt les onglets doit passer par `actions`, jamais par
+  // `ACTIONS` : sinon les flèches du clavier visent un onglet qui n'est pas
+  // affiché, et le focus part dans le vide sans que rien ne le signale.
+  const actions = actionsPour(matiere);
 
   function auClavier(e: React.KeyboardEvent<HTMLDivElement>) {
     const touches = ["ArrowRight", "ArrowLeft", "Home", "End"];
     if (!touches.includes(e.key)) return;
     e.preventDefault();
-    const i = ACTIONS.findIndex((a) => a.id === actif);
-    const dernier = ACTIONS.length - 1;
+    const i = actions.findIndex((a) => a.id === actif);
+    const dernier = actions.length - 1;
     // ⚠️ Les flèches BOUCLENT (dernier → premier) : c'est ce que prescrit le
     // motif, et ce que fait tout jeu d'onglets. Sans la boucle, la flèche
     // droite « ne marche plus » sur le dernier onglet, et on croit à une panne.
     const j =
-      e.key === "ArrowRight" ? (i + 1) % ACTIONS.length
-      : e.key === "ArrowLeft" ? (i - 1 + ACTIONS.length) % ACTIONS.length
+      e.key === "ArrowRight" ? (i + 1) % actions.length
+      : e.key === "ArrowLeft" ? (i - 1 + actions.length) % actions.length
       : e.key === "Home" ? 0
       : dernier;
-    choisir(ACTIONS[j].id);
+    choisir(actions[j].id);
     // Le focus SUIT la sélection — sinon le lecteur d'écran annonce un onglet
     // et en ouvre un autre.
     const boutons = tablist.current?.querySelectorAll<HTMLButtonElement>('[role="tab"]');
@@ -376,14 +384,14 @@ function LigneActions({
           onKeyDown={auClavier}
           className="flex shrink-0 items-center gap-1"
         >
-          {ACTIONS.map((a) => {
+          {actions.map((a) => {
             const Icone = ICONES_ACTION[a.id];
             const ouvert = a.id === actif;
             // ⚠️ Un LIEN au milieu des onglets (Frédéric, 24/09 : « met
             // automatisme après fiche cours »). Il navigue, il n'ouvre pas de
             // panneau : `role="presentation"` sur son enveloppe le sort de la
             // liste d'onglets pour les lecteurs d'écran, et les flèches du
-            // clavier (`auClavier`) ne passent que par ACTIONS — il ne casse
+            // clavier (`auClavier`) ne passent que par `actions` — il ne casse
             // donc pas la navigation entre onglets.
             const lien = a.id === "fiche" ? LIEN_APRES_FICHE[matiere.id] : undefined;
             return (
@@ -762,11 +770,18 @@ function PanneauPhoto() {
    collège, primaire) et pas par matière — les découper serait réécrire une.ts
    pour un cas. */
 function PanneauLecon({ matiere }: { matiere: MatiereAccueil }) {
-  const rituels = RITUELS[matiere.id];
-  const montreLaUne = matiere.id === "maths" && Boolean(UNE_COURANTE);
+  const rituels = RITUELS[matiere.id] ?? [];
+  const montreLaUne = matiere.id === MATIERE_DE_LA_UNE && Boolean(UNE_COURANTE);
 
   return (
     <div className="space-y-6">
+      {/* ⭐ LA UNE PASSE DEVANT LES RITUELS (24/09/2026), et c'est la suite
+          logique du renommage de l'onglet : là où il s'appelle « Leçon du
+          jour », la leçon du jour doit être la première chose qu'on voit.
+          Elle était sous les rituels depuis la veille — l'onglet promettait une
+          chose et en servait une autre, en dessous du pli sur téléphone. */}
+      {montreLaUne && <LaUne />}
+
       {rituels.length > 0 && (
         <section>
           <h2 className="mb-2 text-sm font-bold uppercase tracking-wide text-slate-500">
@@ -786,16 +801,14 @@ function PanneauLecon({ matiere }: { matiere: MatiereAccueil }) {
         </section>
       )}
 
-      {rituels.length === 0 && (
-        <p className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-center text-sm text-slate-600">
-          {/* ⚠️ PAS de `toLowerCase()` : il écrivait « en ia ». Le sigle est le
-              seul libellé des six qui ne se met pas en minuscules. */}
-          Pas encore de rituel quotidien en {matiere.label}. Ce qui existe
-          aujourd&rsquo;hui, ce sont les séries du coach — l&rsquo;onglet « Coach ».
-        </p>
-      )}
-
-      {montreLaUne && <LaUne />}
+      {/* ⛔ LE MESSAGE « Pas encore de rituel quotidien en … » EST PARTI, et ce
+          n'est pas un oubli : il est devenu INATTEIGNABLE le 24/09. L'onglet
+          n'existe plus pour une matière sans Une ni rituel (voir `actionsPour`
+          dans matieres.ts), donc ce panneau n'est plus jamais rendu vide.
+          Un onglet qui ne sert qu'à s'excuser de n'avoir rien coûtait un clic
+          pour rien ; mieux vaut ne pas le proposer.
+          ⚠️ Si `actionsPour` change un jour, rétablir un repli ici : un panneau
+          qui se rend vide est pire qu'un panneau qui explique. */}
     </div>
   );
 }
