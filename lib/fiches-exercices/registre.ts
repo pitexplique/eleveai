@@ -72,6 +72,31 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Lire a et b dans une formule, sur une droite, dans un tableau ; trouver la fonction avec deux points ; linéaire et proportionnalité ; comparer deux tarifs comme au brevet. Chaque corrigé dessine la droite et sa marche d'escalier.",
   },
+  "maths/3e/triangle-figure": {
+    titre: "Les triangles : 20 exercices corrigés",
+    resume:
+      "Trouver un angle avec la somme de 180°, reconnaître isocèle, équilatéral, rectangle, tester si trois longueurs ou trois angles font un triangle — puis le pont en treillis, la pyramide du Louvre et Paris-Lyon-Marseille, chaque triangle dessiné à l'échelle.",
+  },
+  "maths/3e/pythagore-theoreme": {
+    titre: "Le théorème de Pythagore et sa réciproque : 20 exercices corrigés",
+    resume:
+      "Repérer l'hypoténuse, calculer une longueur, puis démontrer qu'un angle est droit — ou qu'il ne l'est pas — avec la rédaction du brevet. Une échelle, une tyrolienne, un voilier, une rampe, le coin d'un terrain de football : chaque corrigé a son triangle dessiné à l'échelle.",
+  },
+  "maths/3e/thales-theoreme": {
+    titre: "Le théorème de Thalès : 20 exercices corrigés",
+    resume:
+      "Reconnaître la configuration même en papillon, écrire les quotients dans le bon ordre, calculer une longueur, prouver un parallélisme par la réciproque ou la contraposée, et rédiger comme au brevet. Puis un arbre mesuré par son ombre, une passerelle sans traverser la rivière, la pente de la Streif, la tour Eiffel dans une photo. Chaque corrigé a sa figure à l'échelle.",
+  },
+  "maths/3e/sym-transformation": {
+    titre: "Transformations et homothétie : 20 exercices corrigés",
+    resume:
+      "Symétries, translation, quart de tour, puis l'homothétie sur quadrillage : la construire (rapport négatif compris), retrouver son centre et son rapport, et voir pourquoi l'aire suit k² — chambre noire, vidéoprojecteur, frise, carte au 1/25 000.",
+  },
+  "maths/3e/sections-solides": {
+    titre: "Les sections planes de solides : 20 exercices corrigés",
+    resume:
+      "Nommer la section d'un pavé, d'un cylindre, d'un cône, d'une pyramide ou d'une boule, puis calculer à plat dedans : de la meule de comté à la pyramide du Louvre et au parallèle de Paris, chaque corrigé dessine le solide coupé et la section en vraie grandeur.",
+  },
   "maths/3e/entier-racine-carree": {
     titre: "La racine carrée : 20 exercices corrigés",
     resume:
