@@ -32,10 +32,25 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
       "Du calcul seul au problème : reconnaître la proportionnalité, tableau et produit en croix, pourcentages, coefficient multiplicateur, vitesse et débit. Et le piège du chapitre, compté carré par carré : +20 % puis −20 % ne ramène pas au départ. La tablette de 100 carrés, les abonnés perdus, la deuxième démarque, l'aller-retour.",
   },
   // Le lot de 3e (24/09/2026), dans l'ordre d'affichage du coach.
+  "maths/3e/algo-programmation": {
+    titre: "Algorithmique et programmation : 20 exercices corrigés",
+    resume:
+      "Suivre un programme Scratch bloc par bloc, variables, boucles « répéter » et « répéter jusqu'à », conditions avec « et » et « ou », programme de calcul écrit en x, corriger un programme. Trace des variables dans chaque corrigé.",
+  },
   "maths/3e/fraction-rationnel": {
     titre: "Nombres rationnels : 20 exercices corrigés",
     resume:
       "Écrire un nombre sous la forme a/b, passer de la fraction au décimal, comparer des fractions négatives, calculer avec les priorités, et trouver toujours un rationnel entre deux autres. Corrigés étape par étape, avec la droite graduée.",
+  },
+  "maths/3e/entier-puissance": {
+    titre: "Puissances et écriture scientifique : 20 exercices corrigés",
+    resume:
+      "Écrire et calculer une puissance, (−2)⁴ contre −2⁴, puissances de 10 et exposants négatifs, écriture scientifique, produit, quotient et puissance de puissance, et pourquoi 2³ + 2⁴ n'est pas 2⁷. Problèmes : la lumière jusqu'à Neptune, le disque plein de photos, les fourmis de la Terre, la feuille pliée jusqu'à la Lune.",
+  },
+  "maths/3e/entier-racine-carree": {
+    titre: "La racine carrée : 20 exercices corrigés",
+    resume:
+      "Retrouver une racine, reconnaître un carré parfait, encadrer une racine entre deux entiers puis au dixième, résoudre x² = a — et mesurer un champ de deux hectares, un terrain de handball, un écran en pouces.",
   },
   // ⭐ LA PREMIÈRE DE SECONDE (20/09/2026) — le trio de la Une « fiche de paie » :
   // le short, la fiche de cours, la feuille. De vrais chiffres, sourcés en tête
