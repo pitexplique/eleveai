@@ -67,6 +67,11 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Une image se lit en partant de l'axe horizontal, un antécédent en partant de l'axe vertical, et il y en a parfois deux, trois ou aucun. Courbes, tableur, formules et programmes de calcul, comme au brevet : un matin de gel, la marée, le dégagement d'un gardien, une randonnée, une crue.",
   },
+  "maths/3e/affine-fonction": {
+    titre: "Fonctions affines : 20 exercices corrigés",
+    resume:
+      "Lire a et b dans une formule, sur une droite, dans un tableau ; trouver la fonction avec deux points ; linéaire et proportionnalité ; comparer deux tarifs comme au brevet. Chaque corrigé dessine la droite et sa marche d'escalier.",
+  },
   "maths/3e/entier-racine-carree": {
     titre: "La racine carrée : 20 exercices corrigés",
     resume:
