@@ -204,6 +204,78 @@ export const triangle = (
 };
 
 /**
+ * Plusieurs INTERVALLES sur une même droite graduée (24/09/2026, feuille
+ * « Logique et ensembles ») : « et » (intersection), « ou » (réunion),
+ * complémentaire. Chaque intervalle a sa couleur et son étiquette.
+ * ⛔ Même cadre que `droite()` : 260 de large, dix graduations au plus.
+ */
+export const intervalles = (
+  min: number,
+  max: number,
+  ivs: { de?: number; a?: number; deInclus?: boolean; aInclus?: boolean; label?: string; color?: string }[],
+  step = 1,
+) => {
+  // ⛔ MESURÉ LE 24/09 : sur UNE droite, deux intervalles qui se chevauchent
+  // posent leurs étiquettes l'une sur l'autre (« J » sur « I ∩ J »). On fait
+  // comme au tableau : une droite par intervalle, empilées, mêmes graduations —
+  // l'œil lit l'intersection à la verticale. Les morceaux de même étiquette
+  // (une réunion) restent sur la même droite.
+  const groupes = [...new Set(ivs.map((iv) => iv.label ?? ""))].map((l) => ivs.filter((iv) => (iv.label ?? "") === l));
+  return (
+    <div className="mx-auto grid w-full max-w-[20rem] gap-0 print:max-w-[14rem]">
+      {groupes.map((g, i) => (
+        <CanvasRenderer key={i} figure={{ kind: "number_line", min, max, step, size: { width: 260, height: 80 }, intervalles: g, display: { showPoints: false } }} />
+      ))}
+    </div>
+  );
+};
+
+/**
+ * Un DIAGRAMME DE VENN (24/09/2026, feuille « Logique et ensembles »). Le coach
+ * n'en a pas : deux cercles A et B dans le rectangle de l'univers E, et les
+ * éléments écrits dans leur zone — A seul, A ∩ B, B seul, hors de A ∪ B.
+ * SVG simple, texte NU. ⭐ Le script de recalcul relit les quatre zones.
+ */
+export const venn = (
+  zones: { aSeul: string[]; commun: string[]; bSeul: string[]; dehors?: string[] },
+  noms: { a?: string; b?: string; e?: string } = {},
+  surligne?: "aSeul" | "commun" | "bSeul" | "dehors" | "union",
+) => {
+  const bleu = surligne === "aSeul" || surligne === "union" ? 0.35 : 0.12;
+  const orange = surligne === "bSeul" || surligne === "union" ? 0.35 : 0.12;
+  const colonne = (els: string[], x: number) =>
+    els.map((t, i) => (
+      <text key={i} x={x} y={92 + (i - (els.length - 1) / 2) * 17} textAnchor="middle" fontSize="14" fontWeight="700" fill="#0f172a">
+        {t}
+      </text>
+    ));
+  return (
+    <div className="mx-auto w-full max-w-[20rem] print:max-w-[14rem]">
+      <svg viewBox="0 0 300 180" className="block h-auto w-full" role="img" aria-label="Diagramme de Venn">
+        <rect x="4" y="4" width="292" height="172" rx="12" fill={surligne === "dehors" ? "#fef3c7" : "#fff"} stroke="#94a3b8" strokeWidth="2" />
+        {/* L'univers en bas à gauche : en haut, un nom long touchait le « A ». */}
+        <text x="14" y="168" fontSize="13" fontWeight="900" fill="#475569">{noms.e ?? "E"}</text>
+        <circle cx="118" cy="92" r="66" fill="#2563eb" fillOpacity={bleu} stroke="#2563eb" strokeWidth="2.5" />
+        <circle cx="182" cy="92" r="66" fill="#ea580c" fillOpacity={orange} stroke="#ea580c" strokeWidth="2.5" />
+        {surligne === "commun" ? (
+          <path d="M150,34.3 A66,66 0 0 1 150,149.7 A66,66 0 0 1 150,34.3 Z" fill="#16a34a" fillOpacity="0.35" />
+        ) : null}
+        <text x="72" y="36" fontSize="15" fontWeight="900" fill="#2563eb">{noms.a ?? "A"}</text>
+        <text x="222" y="36" fontSize="15" fontWeight="900" fill="#ea580c" textAnchor="end">{noms.b ?? "B"}</text>
+        {colonne(zones.aSeul, 88)}
+        {colonne(zones.commun, 150)}
+        {colonne(zones.bSeul, 212)}
+        {(zones.dehors ?? []).map((t, i) => (
+          <text key={i} x={286 - i * 26} y="166" textAnchor="end" fontSize="13" fontWeight="700" fill="#475569">
+            {t}
+          </text>
+        ))}
+      </svg>
+    </div>
+  );
+};
+
+/**
  * Les canvas de PROBABILITÉS du coach (24/09/2026, feuille des probabilités de
  * seconde) : l'arbre pondéré, et le canvas `probabilites` en quatre variantes.
  * ⛔ Texte NU partout (SVG) : « 1/4 », « 0,6 », jamais de `$`.

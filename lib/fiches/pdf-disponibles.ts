@@ -66,6 +66,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "ecrire-pour-apprendre-en-cm1-2026-2027-cours-exercices-corriges.pdf",
   "ecrire-un-texte-qui-se-tient-en-cm1-2026-2027-cours-exercices-corriges.pdf",
   "ecrire-une-phrase-a-soi-au-cp-2026-2027-cours-exercices-corriges.pdf",
+  "ensembles-et-logique-seconde-20-exercices-corriges.pdf",
   "equations-4e-cours-exercices-corriges.pdf",
   "equations-et-inequations-du-premier-degre-seconde-cours-exercices-corriges.pdf",
   "equations-et-inequations-seconde-20-exercices-corriges.pdf",
