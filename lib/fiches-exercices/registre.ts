@@ -47,6 +47,26 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Écrire et calculer une puissance, (−2)⁴ contre −2⁴, puissances de 10 et exposants négatifs, écriture scientifique, produit, quotient et puissance de puissance, et pourquoi 2³ + 2⁴ n'est pas 2⁷. Problèmes : la lumière jusqu'à Neptune, le disque plein de photos, les fourmis de la Terre, la feuille pliée jusqu'à la Lune.",
   },
+  "maths/3e/entier-arithmetique": {
+    titre: "Multiples, diviseurs et facteurs premiers : 20 exercices corrigés",
+    resume:
+      "Diviseurs, critères, nombres premiers, décomposition en facteurs premiers, PGCD et fraction irréductible — puis les sacs du ravitaillement, les dalles d'une terrasse, Jupiter et Saturne, les équipes d'un club. Échelles de divisions dessinées dans les corrigés.",
+  },
+  "maths/3e/litteral-calcul": {
+    titre: "Le calcul littéral : 20 exercices corrigés",
+    resume:
+      "Traduire, calculer, réduire, développer, factoriser, les identités remarquables et la différence de deux carrés, puis prouver avec une lettre : programmes de calcul du brevet, un potager, le cadre d'un tableau. Corrigés étape par étape, avec le dessin des aires.",
+  },
+  "maths/3e/equation-resolution": {
+    titre: "Résoudre une équation : 20 exercices corrigés",
+    resume:
+      "Du geste seul au problème de brevet : la balance dessinée à chaque étape, l'équation produit nul qui donne deux solutions, x² = a, et quatre mises en équation — deux loueurs de vélos, le triathlon olympique, une chandelle, une échappée du Tour.",
+  },
+  "maths/3e/fonction-generalite": {
+    titre: "Fonctions : image et antécédent : 20 exercices corrigés",
+    resume:
+      "Une image se lit en partant de l'axe horizontal, un antécédent en partant de l'axe vertical, et il y en a parfois deux, trois ou aucun. Courbes, tableur, formules et programmes de calcul, comme au brevet : un matin de gel, la marée, le dégagement d'un gardien, une randonnée, une crue.",
+  },
   "maths/3e/entier-racine-carree": {
     titre: "La racine carrée : 20 exercices corrigés",
     resume:
