@@ -97,6 +97,36 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Nommer la section d'un pavé, d'un cylindre, d'un cône, d'une pyramide ou d'une boule, puis calculer à plat dedans : de la meule de comté à la pyramide du Louvre et au parallèle de Paris, chaque corrigé dessine le solide coupé et la section en vraie grandeur.",
   },
+  "maths/3e/volume-geometrie-espace": {
+    titre: "La géométrie dans l'espace : 20 exercices corrigés",
+    resume:
+      "Reconnaître les solides et compter faces, arêtes, sommets, lire une perspective cavalière, trouver une section, repérer un point dans un pavé et une ville par sa latitude et sa longitude — un drone, un cargo de conteneurs, Stockholm et Le Cap, les antipodes, le ballon de foot.",
+  },
+  "maths/3e/aire-perimetre": {
+    titre: "Périmètres : 20 exercices corrigés",
+    resume:
+      "Faire le tour d'un polygone, mesurer un cercle (2πr ou πd, jamais πr²), suivre le contour d'une figure composée sans compter les traits intérieurs — et la piste de 400 m, la roue d'un vélo, la boucle d'un parc, une corde autour de la Terre.",
+  },
+  "maths/3e/aire-surface": {
+    titre: "Les aires : 20 exercices corrigés",
+    resume:
+      "Du calcul seul au problème : convertir m², cm² et hectares, trouver la vraie hauteur d'un triangle, l'aire d'un disque avec πr², découper une figure composée, et voir pourquoi doubler les longueurs quadruple l'aire. Un terrain de football en hectares, des pizzas, un mur à repeindre, des panneaux solaires. Vingt corrigés dessinés, la surface ombrée.",
+  },
+  "maths/3e/volume-solide": {
+    titre: "Calculer un volume : 20 exercices corrigés",
+    resume:
+      "Du carton de déménagement à la Lune : pavé, prisme, cylindre, cône, pyramide et boule, litres et mètres cubes, et le volume multiplié par k³ quand on agrandit. Chaque corrigé dessine son solide, dimensions dessus.",
+  },
+  "maths/3e/stat-statistique": {
+    titre: "Les statistiques : 20 exercices corrigés",
+    resume:
+      "Effectifs et fréquences, moyenne avec effectifs, médiane en rangeant d'abord, étendue, tableur et diagrammes, et choisir entre moyenne et médiane : la pluie de Paris, Kipchoge à Berlin, un orage, des salaires tirés par deux dirigeants.",
+  },
+  "maths/3e/proba-experience": {
+    titre: "Probabilités : 20 exercices corrigés",
+    resume:
+      "Issues, événements, équiprobabilité, contraire, puis deux épreuves : le tableau des deux dés, l'arbre avec ou sans remise, la roue tournée deux fois. Tirs au but, météo du week-end, donneurs de sang, jeu équitable — un schéma par corrigé.",
+  },
   "maths/3e/entier-racine-carree": {
     titre: "La racine carrée : 20 exercices corrigés",
     resume:
