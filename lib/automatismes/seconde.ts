@@ -2,36 +2,41 @@
 //
 // Automatismes de Seconde — 24/09/2026.
 //
-// ⚠️ IL N'Y A PAS DE LISTE OFFICIELLE d'automatismes de seconde (Frédéric,
-// 24/09 : « pas de liste officielle je crois »), et pas d'épreuve en fin de
-// seconde. La référence est donc le PROGRAMME de seconde, celui sur lequel le
-// coach est aligné (lib/tutor-v4/knowledge/maths/seconde/notions.ts, 22 notions).
-// ⭐ Et c'est la bonne préparation : l'EAM de première évalue « les automatismes
-// des nouveaux programmes de seconde ET de première » (message de l'IPR). Même
-// règle donc : réponses courtes, au clavier, SANS QCM.
+// ⭐ LA RÉFÉRENCE : l'annexe du BO n° 24 du 12 juin 2025, « Automatismes
+// évaluables lors de l'épreuve anticipée de mathématiques » — « les
+// automatismes relevant du programme de seconde […] sont en italique ».
+// ⛔ Au premier jet, ce fichier affirmait qu'il n'y avait pas de liste pour la
+// seconde ; Frédéric a apporté l'annexe le jour même (« je me trompe ou
+// quoi ? »). Il n'y a pas d'épreuve en fin de seconde, mais c'est exactement ce
+// que l'épreuve anticipée de première pourra reprendre. Même règle : réponses
+// courtes, au clavier, SANS QCM.
 //
-// Les générateurs communs à la première (fractions, puissances, racines,
-// développer-factoriser, équations, inéquations, fonctions, affines, droites,
-// pourcentages, évolutions, probabilités, statistiques) sont REPRIS de
-// premiere.ts — ils portent sur des contenus de seconde. Ce fichier écrit ce qui
-// n'existe qu'en seconde : réels et intervalles, valeur absolue, ensembles de
-// nombres, arithmétique, fonctions de référence, vecteurs et repère, Python.
+// Les générateurs partagés viennent de premiere.ts, appelés seulement avec
+// leurs CAS en italique. Ce fichier écrit en plus ce que le programme de
+// seconde contient et que l'annexe ne cite pas — réels et intervalles, valeur
+// absolue, ensembles de nombres, arithmétique, fonctions de référence, vecteurs,
+// Python —, marqué `horsEpreuve` : on peut le cocher, « la totale » ne le tire
+// pas.
 
 import type { AutoNiveau, AutoQuestion } from "./types";
 import {
-  affines,
+  calculLitteral,
+  comparer,
+  conversions,
   developperFactoriser,
   droites,
+  ecritureScientifique,
+  ecrituresNombre,
   equations,
   evolutions,
   fonctions,
-  fractionDeFraction,
+  formules,
   fractionsCalcul,
   inequations,
+  ordreGrandeur,
   probabilites,
   proportions,
   puissances,
-  racines,
   statistiques,
 } from "./premiere";
 
@@ -293,23 +298,42 @@ export const automatismesSeconde: AutoNiveau = {
   duree: 20,
   examen: "Pas d'épreuve en seconde : ce sont les automatismes que l'épreuve anticipée de première évaluera. Réponses courtes, sans calculatrice",
   nbQuestions: 10,
+  // ⭐ ALIGNÉ SUR L'ANNEXE DU BO n° 24 DU 12 JUIN 2025 (24/09/2026) : elle
+  // met EN ITALIQUE « les automatismes relevant du programme de seconde ».
+  // ⛔ Il y a donc bien une liste pour la seconde — ce fichier disait le
+  // contraire au premier jet. Chaque générateur partagé n'est appelé qu'avec
+  // les CAS en italique : pas de produit nul, pas de signe d'expression, pas de
+  // taux successifs ni réciproques, pas de probabilités conditionnelles.
+  // Les thèmes du programme de seconde que l'annexe ne cite pas (intervalles,
+  // arithmétique, fonctions de référence, vecteurs, Python) restent, marqués
+  // « hors épreuve ».
   themes: [
-    { id: "reels", label: "Réels, intervalles, valeur absolue", generateurs: [reels] },
-    { id: "arithmetique", label: "Multiples, diviseurs, premiers", generateurs: [arithmetique] },
-    { id: "fractions", label: "Fractions", generateurs: [fractionsCalcul, fractionDeFraction] },
-    { id: "puissances", label: "Puissances", generateurs: [puissances] },
-    { id: "racines", label: "Racines carrées", generateurs: [racines] },
+    // Calcul numérique et algébrique (tout en italique)
+    { id: "comparer", label: "Comparer deux nombres", generateurs: [comparer] },
+    { id: "fractions", label: "Fractions", generateurs: [fractionsCalcul] },
+    { id: "puissances", label: "Puissances", generateurs: [puissances, ecritureScientifique] },
+    { id: "ecritures", label: "Écritures d'un nombre", generateurs: [ecrituresNombre] },
+    { id: "grandeur", label: "Ordre de grandeur", generateurs: [ordreGrandeur] },
+    { id: "unites", label: "Conversions d'unités", generateurs: [conversions] },
+    { id: "litteral", label: "Calcul littéral élémentaire", generateurs: [calculLitteral] },
     { id: "devfac", label: "Développer, factoriser", generateurs: [developperFactoriser] },
-    { id: "equations", label: "Équations", generateurs: [equations] },
-    { id: "inequations", label: "Inéquations et signes", generateurs: [inequations] },
-    { id: "fonctions", label: "Fonctions : généralités", generateurs: [fonctions] },
-    { id: "reference", label: "Fonctions de référence", generateurs: [reference] },
-    { id: "affines", label: "Fonctions affines", generateurs: [affines] },
-    { id: "droites", label: "Droites du plan", generateurs: [droites] },
-    { id: "vecteurs", label: "Vecteurs et repère", generateurs: [vecteurs] },
-    { id: "pourcentages", label: "Pourcentages et évolutions", generateurs: [proportions, evolutions] },
+    // x² = a, ax + b = cx + d, a/x = b — le produit nul (cas 2) est de première.
+    { id: "equations", label: "Équations", generateurs: [() => equations([1, 3, 4])] },
+    { id: "inequations", label: "Inéquations du premier degré", generateurs: [() => inequations([1])] },
+    { id: "formules", label: "Formules : isoler, appliquer", generateurs: [formules] },
+    // Proportions (partie ↔ tout, en %) ; évolutions : seulement « +5 % = × 1,05 »
+    { id: "proportions", label: "Proportions et pourcentages", generateurs: [() => proportions([3, 4])] },
+    { id: "evolutions", label: "Coefficient multiplicateur", generateurs: [() => evolutions([1])] },
+    // Fonctions : images, antécédents, appartenance d'un point
+    { id: "fonctions", label: "Fonctions : images et antécédents", generateurs: [() => fonctions([1, 3, 4]), droites] },
+    // Statistiques (tout en italique) ; probabilités sans conditionnelles
     { id: "stats", label: "Statistiques", generateurs: [statistiques] },
-    { id: "probas", label: "Probabilités", generateurs: [probabilites] },
-    { id: "python", label: "Python", generateurs: [python] },
+    { id: "probas", label: "Probabilités", generateurs: [() => probabilites([3, 4])] },
+    // Programme de seconde, hors de l'annexe
+    { id: "reels", label: "Intervalles, valeur absolue (hors épreuve)", generateurs: [reels], horsEpreuve: true },
+    { id: "arithmetique", label: "Multiples, diviseurs (hors épreuve)", generateurs: [arithmetique], horsEpreuve: true },
+    { id: "reference", label: "Fonctions de référence (hors épreuve)", generateurs: [reference], horsEpreuve: true },
+    { id: "vecteurs", label: "Vecteurs et repère (hors épreuve)", generateurs: [vecteurs], horsEpreuve: true },
+    { id: "python", label: "Python (hors épreuve)", generateurs: [python], horsEpreuve: true },
   ],
 };

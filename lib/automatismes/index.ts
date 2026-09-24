@@ -65,9 +65,11 @@ export function tirerSerie(niveau: AutoNiveau, themeIds?: string[] | null): Auto
     return serie;
   }
 
-  const n = Math.min(niveau.nbQuestions ?? niveau.themes.length, niveau.themes.length);
+  // « La totale » imite l'épreuve : les thèmes hors épreuve n'y entrent pas.
+  const themesEpreuve = niveau.themes.filter((t) => !t.horsEpreuve);
+  const n = Math.min(niveau.nbQuestions ?? themesEpreuve.length, themesEpreuve.length);
   const toujours = new Set(niveau.toujours ?? []);
-  const autres = niveau.themes
+  const autres = themesEpreuve
     .filter((t) => !toujours.has(t.id))
     .map((t) => ({ t, r: Math.random() }))
     .sort((a, b) => a.r - b.r)

@@ -292,8 +292,29 @@ export function developperFactoriser(): AutoQuestion {
 
 /* ═══════════════ ÉQUATIONS ═══════════════ */
 
-export function equations(): AutoQuestion {
-  const cas = entre(1, 3);
+/**
+ * ⭐ `permis` : les CAS qu'un niveau autorise. L'annexe du BO (12 juin 2025)
+ * met en italique ce qui relève de la seconde : la Seconde appelle donc
+ * `equations([1, 3, 4])`, sans le produit nul (cas 2), réservé à la première.
+ */
+function tirerCas(permis: readonly number[] | undefined, tous: number): number {
+  return permis?.length ? pick(permis) : entre(1, tous);
+}
+
+export function equations(permis?: readonly number[]): AutoQuestion {
+  const cas = tirerCas(permis, 4);
+  if (cas === 4) {
+    // « a/x = b » — cité en toutes lettres par l'annexe.
+    const x = pick([-5, -4, -2, 2, 3, 4, 5, 6, 8, 10] as const).valueOf();
+    const b = pick([-3, -2, 2, 3, 4, 5] as const).valueOf();
+    const a = x * b;
+    return {
+      text: `Résoudre $\\dfrac{${a}}{x} = ${b}$ (avec $x \\neq 0$). Donner $x$.`,
+      format: "short",
+      expected: accepte(x),
+      explanation: `$\\dfrac{${a}}{x} = ${b}$ équivaut à $${a} = ${b}x$, donc $x = \\dfrac{${a}}{${b}} = ${x}$.`,
+    };
+  }
   if (cas === 1) {
     const x = entre(-6, 8);
     const a = entre(3, 9), c = entre(1, a - 1);
@@ -308,7 +329,7 @@ export function equations(): AutoQuestion {
   }
   if (cas === 2) {
     const a = entre(1, 3), r1 = nonNul(-5, 5), r2 = nonNul(-6, 6);
-    if (r1 === r2) return equations();
+    if (r1 === r2) return equations(permis);
     // (a·x − a·r1)(x − r2) = 0
     return {
       text: `Résoudre $(${coefX(a)} ${sg(-a * r1)})(x ${sg(-r2)}) = 0$. Donner les deux solutions, séparées par « ; ».`,
@@ -339,8 +360,23 @@ export function equations(): AutoQuestion {
 
 /* ═══════════════ INÉQUATIONS ET SIGNES ═══════════════ */
 
-export function inequations(): AutoQuestion {
-  if (Math.random() < 0.6) {
+export function inequations(permis?: readonly number[]): AutoQuestion {
+  const cas = tirerCas(permis, 3);
+  if (cas === 3) {
+    // « Déterminer le signe d'une expression du premier degré, d'une expression
+    // factorisée du second degré » (annexe, rubrique non italique : première).
+    const r1 = entre(-5, 2), r2 = entre(r1 + 2, 6);
+    const x = pick([r1 - 1, r1 + 1, r2 + 1, r2 - 1, 0].filter((v) => v !== r1 && v !== r2));
+    const val = (x - r1) * (x - r2);
+    const rep = val > 0 ? "positif" : "négatif";
+    return {
+      text: `L'expression $(x ${sg(-r1)})(x ${sg(-r2)})$ est-elle positive ou négative pour $x = ${x}$ ? (Répondre « positif » ou « négatif ».)`,
+      format: "short",
+      expected: rep === "positif" ? ["positif", "positive"] : ["négatif", "negatif", "négative", "negative"],
+      explanation: `C'est l'expression $(x ${sg(-r1)})(x ${sg(-r2)})$ pour $x = ${x}$. Ses racines sont ${r1} et ${r2} : elle est NÉGATIVE entre les racines, positive à l'extérieur.\n${x} est ${val < 0 ? "entre" : "à l'extérieur"} : ${rep} (le produit vaut ${val}).`,
+    };
+  }
+  if (cas === 1) {
     const a = nonNul(-5, 5), s = entre(-6, 6);
     const b = -a * s;
     const sensInitial = pick(["\\geqslant", "\\leqslant"] as const);
@@ -380,8 +416,34 @@ export function inequations(): AutoQuestion {
 
 /* ═══════════════ FONCTIONS : GÉNÉRALITÉS ═══════════════ */
 
-export function fonctions(): AutoQuestion {
-  const cas = entre(1, 3);
+export function fonctions(permis?: readonly number[]): AutoQuestion {
+  const cas = tirerCas(permis, 4);
+  if (cas === 4) {
+    // « Résoudre graphiquement une équation f(x) = k » / « déterminer
+    // graphiquement des antécédents » (annexe). Une parabole à sommet entier,
+    // et k choisi pour que les solutions tombent sur des entiers.
+    const h = entre(-1, 2), s = pick([1, -1] as const).valueOf(), k0 = s > 0 ? entre(-3, -1) : entre(2, 4);
+    const d = pick([1, 2] as const).valueOf();
+    const m = k0 + s * d * d;
+    if (m < -4 || m > 5) return fonctions(permis);
+    const canvas = {
+      kind: "fonctionGraphique",
+      xmin: -3,
+      xmax: 5,
+      ymin: -4,
+      ymax: 5,
+      grille: true,
+      courbes: [{ id: "f", type: "quadratique", a: s, b: -2 * s * h, c: s * h * h + k0, couleur: "#0d9488" }],
+    } as unknown as CanvasFigure;
+    return {
+      text: `Voici la courbe d'une fonction $f$. Résoudre graphiquement $f(x) = ${m}$. Donner les solutions, séparées par « ; ».`,
+      format: "short",
+      expected: [`${h - d};${h + d}`],
+      compare: "ensemble",
+      explanation: `On trace la droite horizontale $y = ${m}$ et on lit les ABSCISSES des points où elle coupe la courbe.\nSolutions : ${h - d} et ${h + d} — ce sont les antécédents de ${m}.`,
+      canvas,
+    };
+  }
   if (cas === 1) {
     const a = nonNul(-3, 3), b = entre(-5, 5), c = entre(-6, 6), x = nonNul(-3, 3);
     const r = a * x * x + b * x + c;
@@ -426,7 +488,7 @@ export function fonctions(): AutoQuestion {
   const h = entre(-1, 2), k = entre(-2, 1), a = pick([1, -1] as const).valueOf();
   const x = h + pick([-1, 1, 2, -2] as const);
   const y = a * (x - h) ** 2 + k;
-  if (y < -4 || y > 5) return fonctions();
+  if (y < -4 || y > 5) return fonctions(permis);
   const canvas = {
     kind: "fonctionGraphique",
     xmin: -3,
@@ -511,26 +573,48 @@ export function droites(): AutoQuestion {
       explanation: `On remplace $x$ par ${x} : $${m} \\times (${x}) ${sg(p)} = ${m * x + p}$.\n${vrai ? `On trouve bien ${y} : oui, M est sur la droite.` : `On trouve ${m * x + p}, pas ${y} : non.`}`,
     };
   }
-  const m = nonNul(-5, 5), p = entre(-5, 5), q = entre(-5, 5);
+  // ⛔ Était « droite parallèle, même coefficient directeur » : hors de
+  // l'annexe (24/09). Remplacé par ce qu'elle cite : « exploiter une équation
+  // de courbe (appartenance d'un point, CALCUL DE COORDONNÉES) ».
+  const m = nonNul(-5, 5), p = entre(-6, 6), x = entre(-4, 4);
   return {
-    text: `La droite $d$ est parallèle à la droite d'équation $y = ${coefX(m)} ${sg(p)}$ et passe par le point $(0 ; ${q})$. Son équation est $y = mx + q$ : donner $m$.`,
+    text: `Le point $A$ d'abscisse ${x} est sur la droite d'équation $y = ${coefX(m)} ${sg(p)}$. Quelle est son ordonnée ?`,
     format: "short",
-    expected: accepte(m),
-    explanation: `Deux droites parallèles ont le MÊME coefficient directeur.\n$m = ${m}$, et l'équation de $d$ est $y = ${coefX(m)} ${sg(q)}$.`,
+    expected: accepte(m * x + p),
+    explanation: `Un point est sur la droite si ses coordonnées vérifient l'équation : on remplace $x$ par ${x}.\n$y = ${m} \\times (${x}) ${sg(p)} = ${m * x + p}$.`,
   };
 }
 
 /* ═══════════════ POURCENTAGES ET PROPORTIONS ═══════════════ */
 
-export function proportions(): AutoQuestion {
-  const cas = entre(1, 3);
+export function proportions(permis?: readonly number[]): AutoQuestion {
+  const cas = tirerCas(permis, 4);
+  if (cas === 4) {
+    // « Utiliser une proportion pour calculer […] le tout connaissant une
+    // partie » (annexe, en italique : dès la seconde).
+    const pct = pick([10, 20, 25, 40, 50, 75] as const).valueOf();
+    const tout = pick([40, 60, 80, 120, 200, 240, 400] as const).valueOf();
+    const partie = (tout * pct) / 100;
+    if (!Number.isInteger(partie)) return proportions(permis);
+    const ctx = pick([
+      `Les ${partie} élèves de seconde représentent ${pct} % des élèves d'un lycée.`,
+      `Les ${partie} chênes représentent ${pct} % des arbres d'un parc.`,
+      `Les ${partie} abonnés venus en train représentent ${pct} % des spectateurs.`,
+    ]);
+    return {
+      text: `${ctx} Quel est l'effectif total ?`,
+      format: "short",
+      expected: accepte(tout),
+      explanation: `${pct} % du total font ${partie} : total $\\times ${fr(pct / 100)} = ${partie}$.\nTotal $= ${partie} \\div ${fr(pct / 100)} = ${tout}$.`,
+    };
+  }
   // ⭐ Tirages LIBRES dans les trois cas (24/09) : les listes figées ne
   // donnaient que 19 questions au thème, sous le seuil de 30.
   if (cas === 1) {
     const p1 = pick([10, 20, 25, 40, 50, 60, 75, 80] as const).valueOf();
     const p2 = pick([10, 20, 25, 30, 40, 50] as const).valueOf();
     const totaux = [20, 40, 60, 80, 100, 120, 200, 300, 400, 500, 600, 800, 1000].filter((t) => (t * p1 * p2) % 10000 === 0);
-    if (!totaux.length) return proportions();
+    if (!totaux.length) return proportions(permis);
     const total = pick(totaux);
     const r = (total * p1 * p2) / 10000;
     return {
@@ -554,7 +638,7 @@ export function proportions(): AutoQuestion {
   const n = pick([20, 25, 40, 50, 60, 80, 120, 200] as const).valueOf();
   const pct = pick([5, 10, 15, 20, 25, 30, 40, 45, 60, 75] as const).valueOf();
   const k = (n * pct) / 100;
-  if (!Number.isInteger(k) || k === 0) return proportions();
+  if (!Number.isInteger(k) || k === 0) return proportions(permis);
   const r = pct;
   return {
     text: `Sur ${n} salariés d'une entreprise, ${k} travaillent à temps partiel. Quelle proportion, en %, cela représente-t-il ?`,
@@ -566,12 +650,43 @@ export function proportions(): AutoQuestion {
 
 /* ═══════════════ TAUX D'ÉVOLUTION ═══════════════ */
 
-export function evolutions(): AutoQuestion {
-  const cas = entre(1, 4);
+export function evolutions(permis?: readonly number[]): AutoQuestion {
+  const cas = tirerCas(permis, 5);
+  if (cas === 5) {
+    // « Appliquer un taux d'évolution pour calculer une valeur finale ou
+    // INITIALE » (annexe) : on remonte en divisant par le coefficient.
+    const t = pick([10, 20, 25, 50, -20, -25, -50, -10] as const).valueOf();
+    const cm = 1 + t / 100;
+    const initial = pick([40, 60, 80, 120, 200, 400] as const).valueOf();
+    const final = initial * cm;
+    if (!Number.isInteger(final)) return evolutions(permis);
+    const cherche = pick(["final", "initial"] as const);
+    return {
+      text: cherche === "final"
+        ? `Un article coûte ${initial} €. Son prix ${t > 0 ? "augmente" : "baisse"} de ${Math.abs(t)} %. Quel est son nouveau prix, en € ?`
+        : `Après ${t > 0 ? "une hausse" : "une baisse"} de ${Math.abs(t)} %, un article coûte ${final} €. Quel était son prix initial, en € ?`,
+      format: "short",
+      expected: accepte(cherche === "final" ? final : initial),
+      explanation: cherche === "final"
+        ? `On multiplie par le coefficient $${fr(cm)}$.\n$${initial} \\times ${fr(cm)} = ${final}$ €.`
+        : `Initial × $${fr(cm)}$ = ${final} : on DIVISE par le coefficient (et non on retire ${Math.abs(t)} % au prix final).\n$${final} \\div ${fr(cm)} = ${initial}$ €.`,
+    };
+  }
   if (cas === 1) {
-    const t = pick([8, 3, 15, 25, 40, 2, 12] as const).valueOf();
+    // « Passer d'une formulation additive à une formulation multiplicative » —
+    // dans les DEUX sens (seul cas d'évolution en italique : c'est tout ce que
+    // la seconde en a ; 14 questions dans un seul sens, sous le seuil de 30).
+    const t = pick([2, 3, 5, 8, 12, 15, 20, 25, 30, 40, 50, 60, 75] as const).valueOf();
     const hausse = Math.random() < 0.5;
     const cm = hausse ? 1 + t / 100 : 1 - t / 100;
+    if (Math.random() < 0.5) {
+      return {
+        text: `Multiplier une quantité par ${fr(cm)} revient à ${hausse ? "l'augmenter" : "la diminuer"} de combien de % ?`,
+        format: "short",
+        expected: [...accepte(t), `${t} %`, `${t}%`],
+        explanation: `$${fr(cm)} = 1 ${hausse ? "+" : "-"} ${fr(t / 100)}$ : ${hausse ? "une hausse" : "une baisse"} de ${t} %.`,
+      };
+    }
     return {
       text: `${hausse ? "Augmenter" : "Diminuer"} une quantité de ${t} % revient à la multiplier par quel nombre ?`,
       format: "short",
@@ -612,8 +727,48 @@ export function evolutions(): AutoQuestion {
 
 /* ═══════════════ PROBABILITÉS ═══════════════ */
 
-export function probabilites(): AutoQuestion {
-  const cas = entre(1, 3);
+export function probabilites(permis?: readonly number[]): AutoQuestion {
+  const cas = tirerCas(permis, 5);
+  if (cas === 4) {
+    // « Savoir calculer la probabilité de l'événement contraire » (italique).
+    const p = pick([0.15, 0.2, 0.35, 0.4, 0.45, 0.62, 0.7, 0.85, 0.08, 0.3] as const).valueOf();
+    const ev = pick(["il pleuve demain", "un composant soit défectueux", "un joueur marque son tir", "un train soit en retard"]);
+    return {
+      text: `La probabilité qu'${ev} est ${fr(p)}. Quelle est la probabilité de l'événement contraire ?`,
+      format: "short",
+      expected: accepte(Math.round((1 - p) * 100) / 100),
+      explanation: `$P(\\overline{A}) = 1 - P(A)$.\n$1 - ${fr(p)} = ${fr(Math.round((1 - p) * 100) / 100)}$.`,
+    };
+  }
+  if (cas === 5) {
+    // « Distinguer P(A ∩ B), P_A(B), P_B(A) » : sur l'arbre, P_A(B) se LIT sur
+    // la branche ; P(A ∩ B) se CALCULE en multipliant.
+    const pA = pick([0.4, 0.3, 0.6, 0.2, 0.7] as const).valueOf();
+    const pB = pick([0.2, 0.5, 0.3, 0.1, 0.8] as const).valueOf();
+    const pB2 = pick([0.6, 0.4, 0.9, 0.25] as const).valueOf();
+    const canvas = {
+      kind: "arbre_proba",
+      racineEnfants: [
+        { label: "A", proba: fr(pA), enfants: [{ label: "B", proba: fr(pB) }, { label: "B̄", proba: fr(1 - pB) }] },
+        { label: "Ā", proba: fr(1 - pA), enfants: [{ label: "B", proba: fr(pB2) }, { label: "B̄", proba: fr(1 - pB2) }] },
+      ],
+    } as unknown as CanvasFigure;
+    const q = pick(["PA", "PAbarre", "inter"] as const);
+    const rep = q === "PA" ? pB : q === "PAbarre" ? pB2 : Math.round((1 - pA) * pB2 * 1000) / 1000;
+    return {
+      text: q === "PA"
+        ? "D'après cet arbre, que vaut $P_A(B)$ ?"
+        : q === "PAbarre"
+          ? "D'après cet arbre, que vaut $P_{\\overline{A}}(B)$ ?"
+          : "D'après cet arbre, calculer $P(\\overline{A} \\cap B)$.",
+      format: "short",
+      expected: accepte(rep),
+      explanation: q === "inter"
+        ? `$P(\\overline{A} \\cap B)$ : le CHEMIN $\\overline{A}$ puis $B$, on multiplie.\n$${fr(1 - pA)} \\times ${fr(pB2)} = ${fr(rep)}$.`
+        : `Une probabilité conditionnelle se LIT sur la branche de second niveau : pas de calcul.\n${q === "PA" ? "$P_A(B)$" : "$P_{\\overline{A}}(B)$"} $= ${fr(rep)}$ — à ne pas confondre avec l'intersection, qui se calcule.`,
+      canvas,
+    };
+  }
   if (cas === 1) {
     const pA = pick([0.4, 0.3, 0.6, 0.2, 0.5] as const).valueOf();
     const pB = pick([0.2, 0.5, 0.3, 0.1, 0.4] as const).valueOf();
@@ -675,12 +830,81 @@ export function probabilites(): AutoQuestion {
 
 /* ═══════════════ STATISTIQUES ═══════════════ */
 
-export function statistiques(): AutoQuestion {
-  const cas = entre(1, 3);
+export function statistiques(permis?: readonly number[]): AutoQuestion {
+  const cas = tirerCas(permis, 6);
+  if (cas === 4) {
+    // « Diagramme circulaire, semi-circulaire » (annexe, italique).
+    const parts = pick([[50, 25, 25], [25, 25, 50], [50, 30, 20], [40, 35, 25], [60, 25, 15], [20, 30, 50]] as const);
+    const noms = pick([["Bus", "Vélo", "À pied"], ["Sport", "Musique", "Lecture"], ["Solaire", "Éolien", "Hydraulique"]]);
+    const i = entre(0, 2);
+    const canvas = {
+      kind: "stat_graph",
+      graphType: "camembert",
+      title: "Répartition (en %)",
+      data: noms.map((n, k) => ({ label: n, value: parts[k] })),
+      display: { showValues: false, showLabels: true },
+    } as unknown as CanvasFigure;
+    const degres = Math.random() < 0.5;
+    return {
+      text: degres
+        ? `Dans ce diagramme circulaire, « ${noms[i]} » représente ${parts[i]} %. Quelle est la mesure de l'angle de son secteur, en degrés ?`
+        : `Ce diagramme circulaire porte sur 200 personnes. « ${noms[i]} » en représente ${parts[i]} %. Combien de personnes cela fait-il ?`,
+      format: "short",
+      expected: accepte(degres ? (parts[i] * 360) / 100 : parts[i] * 2),
+      explanation: degres
+        ? `Le disque entier, c'est 360° pour 100 %.\n$${parts[i]} \\% \\times 360 = ${(parts[i] * 360) / 100}$°.`
+        : `$${parts[i]} \\%$ de 200 : $200 \\times ${fr(parts[i] / 100)} = ${parts[i] * 2}$.`,
+      canvas,
+    };
+  }
+  if (cas === 5) {
+    // « Comparer des distributions à l'aide de boîtes à moustaches » (italique).
+    const serie = () => {
+      const min = entre(0, 3), q1 = min + entre(1, 3), med = q1 + entre(1, 2), q3 = med + entre(1, 3), max = q3 + entre(1, 2);
+      return { min, q1, mediane: med, q3, max };
+    };
+    const A = serie(), B = serie();
+    const q = pick(["mediane", "eiq"] as const);
+    const vA = q === "mediane" ? A.mediane : A.q3 - A.q1, vB = q === "mediane" ? B.mediane : B.q3 - B.q1;
+    if (vA === vB) return statistiques(permis);
+    const canvas = {
+      kind: "diagramme_boite",
+      series: [{ ...A, label: "A", couleur: "#2563eb" }, { ...B, label: "B", couleur: "#c2410c" }],
+      min: 0,
+      max: 12,
+      step: 1,
+      display: { showAxis: true, showValues: false },
+    } as unknown as CanvasFigure;
+    const rep = vA > vB ? "A" : "B";
+    return {
+      text: q === "mediane"
+        ? "Quelle série, A ou B, a la plus grande médiane ? (Répondre A ou B.)"
+        : "Quelle série, A ou B, est la plus dispersée autour de sa médiane, c'est-à-dire a le plus grand écart interquartile ? (Répondre A ou B.)",
+      format: "short",
+      expected: [rep, rep.toLowerCase()],
+      explanation: q === "mediane"
+        ? `La médiane est le trait dans la boîte : ${A.mediane} pour A, ${B.mediane} pour B.\nC'est ${rep}.`
+        : `L'écart interquartile est la LARGEUR de la boîte : ${A.q3 - A.q1} pour A, ${B.q3 - B.q1} pour B.\nC'est ${rep}.`,
+      canvas,
+    };
+  }
+  if (cas === 6) {
+    // « Calculer des indicateurs (moyenne, médiane, QUARTILES) » (italique).
+    const n = pick([8, 12] as const).valueOf();
+    const vals = Array.from({ length: n }, () => entre(2, 20)).sort((a, b) => a - b);
+    const q = pick(["Q1", "Q3"] as const);
+    const rang = q === "Q1" ? Math.ceil(n / 4) : Math.ceil((3 * n) / 4);
+    return {
+      text: `Voici une série RANGÉE de ${n} valeurs : ${vals.join(" ; ")}. Quel est son ${q === "Q1" ? "premier quartile $Q_1$" : "troisième quartile $Q_3$"} ?`,
+      format: "short",
+      expected: accepte(vals[rang - 1]),
+      explanation: `${q} est la plus petite valeur telle qu'au moins ${q === "Q1" ? "25" : "75"} % des valeurs lui soient inférieures ou égales : rang $${q === "Q1" ? `${n} \\times 0,25` : `${n} \\times 0,75`} = ${q === "Q1" ? n / 4 : (3 * n) / 4}$, arrondi au-dessus : ${rang}.\n${q} = ${vals[rang - 1]}.`,
+    };
+  }
   if (cas === 1) {
     const n1 = entre(8, 14), c1 = pick([2, 3] as const).valueOf(), m = n1 + pick([1, 2] as const);
     const x = m * (c1 + 1) - n1 * c1;
-    if (x > 20 || x < 0) return statistiques();
+    if (x > 20 || x < 0) return statistiques(permis);
     return {
       text: `Une élève a eu ${n1} avec un coefficient ${c1}, puis une note $x$ avec un coefficient 1. Sa moyenne est ${m}. Que vaut $x$ ?`,
       format: "short",
@@ -745,6 +969,104 @@ export function statistiques(): AutoQuestion {
   };
 }
 
+/* ═══════════════ CE QUE L'ANNEXE DEMANDE ET QUI MANQUAIT (24/09) ═══════════════ */
+//
+// Annexe du BO n° 24 du 12 juin 2025, « Calcul numérique et algébrique » —
+// toutes ces lignes sont en ITALIQUE, donc dès la seconde.
+
+/** « Comparer deux nombres directement ou par calcul de leur différence ou,
+ *  s'ils sont strictement positifs, de leur quotient. » */
+export function comparer(): AutoQuestion {
+  const cas = pick([
+    () => { const [a, b, c, d] = pick([[3, 4, 5, 7], [2, 3, 5, 8], [4, 5, 7, 9], [5, 6, 7, 8], [3, 5, 4, 7], [7, 9, 3, 4]] as const); const x = a / b, y = c / d; return { t: `Quel est le plus grand des deux nombres $\\dfrac{${a}}{${b}}$ et $\\dfrac{${c}}{${d}}$ ? (Écrire la fraction.)`, r: [x > y ? `${a}/${b}` : `${c}/${d}`], e: `On calcule la différence : $\\dfrac{${a}}{${b}} - \\dfrac{${c}}{${d}} = \\dfrac{${a * d - b * c}}{${b * d}}$, ${a * d - b * c > 0 ? "positive" : "négative"}.\nLe plus grand est $\\dfrac{${x > y ? a : c}}{${x > y ? b : d}}$.` }; },
+    () => { const a = pick([0.7, 0.35, 0.62, 0.8, 0.45] as const).valueOf(); const [n, d] = pick([[2, 3], [3, 4], [5, 8], [3, 5], [4, 7]] as const); const g = a > n / d; return { t: `Quel est le plus grand des deux nombres ${fr(a)} et $\\dfrac{${n}}{${d}}$ ? (Écrire le nombre tel qu'il est donné.)`, r: g ? accepte(a) : [`${n}/${d}`], e: `$\\dfrac{${n}}{${d}} \\approx ${fr(Math.round((n / d) * 1000) / 1000)}$, à comparer à ${fr(a)}.\nLe plus grand est ${g ? fr(a) : `$\\dfrac{${n}}{${d}}$`}.` }; },
+    () => { const x = pick([3, 5, 7, 12] as const).valueOf(), k = pick([2, 3, 4] as const).valueOf(); const A = x * k, B = x; return { t: `$A = ${A} \\times 10^{-3}$ et $B = ${B} \\times 10^{-3}$. Calculer le quotient $\\dfrac{A}{B}$.`, r: accepte(k), e: `$\\dfrac{A}{B} = \\dfrac{${A}}{${B}} = ${k}$ : A est ${k} fois plus grand que B. Le quotient compare deux nombres POSITIFS.` }; },
+  ]);
+  const { t, r, e } = cas();
+  return { text: t, format: "short", expected: r, explanation: e };
+}
+
+/** « Passer d'une écriture d'un nombre à une autre (décimale, fractionnaire,
+ *  pourcentage). » */
+export function ecrituresNombre(): AutoQuestion {
+  const [n, d] = pick([[1, 4], [3, 4], [1, 5], [2, 5], [3, 8], [7, 20], [1, 8], [9, 25], [3, 50], [6, 5], [5, 4], [7, 10]] as const);
+  const dec = n / d;
+  const sens = entre(1, 3);
+  if (sens === 1) {
+    return { text: `Écrire $\\dfrac{${n}}{${d}}$ en pourcentage.`, format: "short", expected: [...accepte(dec * 100), `${fr(dec * 100)} %`, `${fr(dec * 100)}%`], explanation: `$\\dfrac{${n}}{${d}} = ${fr(dec)} = \\dfrac{${fr(dec * 100)}}{100}$, soit ${fr(dec * 100)} %.` };
+  }
+  if (sens === 2) {
+    return { text: `Écrire ${fr(dec * 100)} % sous forme décimale.`, format: "short", expected: accepte(dec), explanation: `${fr(dec * 100)} % $= \\dfrac{${fr(dec * 100)}}{100} = ${fr(dec)}$.` };
+  }
+  return { text: `Écrire ${fr(dec)} sous forme d'une fraction irréductible.`, format: "short", expected: [`${n}/${d}`], explanation: `$${fr(dec)} = \\dfrac{${fr(dec * 1000)}}{1000}$, qu'on simplifie : $\\dfrac{${n}}{${d}}$.` };
+}
+
+/** « Estimer un ordre de grandeur. » On arrondit chaque facteur à UN chiffre
+ *  significatif ; la réponse attendue est ce produit arrondi. */
+export function ordreGrandeur(): AutoQuestion {
+  const a = pick([19.8, 49.7, 301, 0.498, 2.03, 98.6, 5.02, 0.0198] as const).valueOf();
+  const b = pick([21, 4.97, 198, 0.51, 39.9, 7.02] as const).valueOf();
+  const ar = Number(a.toPrecision(1)), br = Number(b.toPrecision(1));
+  const r = Number((ar * br).toPrecision(2));
+  return {
+    text: `Sans calculatrice, donner un ordre de grandeur de $${fr(a)} \\times ${fr(b)}$ (arrondir chaque nombre à un seul chiffre significatif).`,
+    format: "short",
+    expected: accepte(r),
+    explanation: `$${fr(a)} \\approx ${fr(ar)}$ et $${fr(b)} \\approx ${fr(br)}$.\n$${fr(ar)} \\times ${fr(br)} = ${fr(r)}$ : le résultat exact en est proche. C'est aussi ce qui permet de contrôler la vraisemblance d'un calcul.`,
+  };
+}
+
+/** « Effectuer un calcul littéral élémentaire » : −(a − b) = b − a,
+ *  x/a = (1/a)x, a/b ÷ c/d = ad/bc… On demande toujours un NOMBRE. */
+export function calculLitteral(): AutoQuestion {
+  const cas = entre(1, 3);
+  if (cas === 1) {
+    const b = entre(2, 12);
+    return {
+      text: `On écrit $-(x - ${b})$ sans parenthèses : $-x + \\ldots$ Compléter.`,
+      format: "short",
+      expected: accepte(b),
+      explanation: `Un signe moins devant une parenthèse change le signe de CHAQUE terme : $-(a - b) = -a + b$.\n$-(x - ${b}) = -x + ${b}$.`,
+    };
+  }
+  if (cas === 2) {
+    const a = pick([2, 4, 5, 10] as const).valueOf();
+    return {
+      text: `$\\dfrac{x}{${a}}$ s'écrit aussi $k \\times x$. Donner $k$ sous forme décimale.`,
+      format: "short",
+      expected: accepte(1 / a),
+      explanation: `$\\dfrac{x}{a} = \\dfrac{1}{a}\\,x$ : diviser par ${a}, c'est multiplier par $\\dfrac{1}{${a}} = ${fr(1 / a)}$.`,
+    };
+  }
+  const [a, b] = pick([[2, 3], [3, 4], [1, 2], [4, 5], [5, 6]] as const);
+  const [c, d] = pick([[4, 5], [1, 3], [2, 7], [3, 8], [5, 9]] as const);
+  const n = a * d, D = b * c, g = pgcd(n, D);
+  return {
+    text: `Calculer $\\dfrac{\\dfrac{${a}}{${b}}}{\\dfrac{${c}}{${d}}}$. Donner une fraction irréductible.`,
+    format: "short",
+    expected: [D / g === 1 ? `${n / g}` : `${n / g}/${D / g}`],
+    explanation: `Diviser par une fraction, c'est multiplier par son inverse : $\\dfrac{${a}}{${b}} \\times \\dfrac{${d}}{${c}} = \\dfrac{${n}}{${D}}$${g > 1 ? ` $= \\dfrac{${n / g}}{${D / g}}$` : ""}.`,
+  };
+}
+
+/** « Isoler une variable dans une égalité qui en comporte plusieurs » et
+ *  « effectuer une application numérique d'une formule (notamment pour les
+ *  formules utilisées dans les autres disciplines) ». C'est la question 12 du
+ *  sujet 0 de spécialité (a = v²/R). */
+export function formules(): AutoQuestion {
+  const cas = pick([
+    () => { const R = pick([2, 4, 5, 10] as const).valueOf(), v = pick([2, 4, 6, 10] as const).valueOf(); return { t: `L'accélération centripète vaut $a = \\dfrac{v^2}{R}$. Calculer $a$ (en m/s²) pour $v = ${v}$ m/s et $R = ${R}$ m.`, r: (v * v) / R, e: `Application numérique : $a = \\dfrac{${v}^2}{${R}} = \\dfrac{${v * v}}{${R}} = ${fr((v * v) / R)}$ m/s².` }; },
+    () => { const R = pick([2, 5, 10, 20] as const).valueOf(), I = pick([2, 3, 4, 0.5] as const).valueOf(); return { t: `La loi d'Ohm s'écrit $U = R \\times I$. On mesure $U = ${fr(R * I)}$ V et $I = ${fr(I)}$ A. Calculer $R$, en ohms.`, r: R, e: `On isole $R$ : $R = \\dfrac{U}{I}$.\n$R = \\dfrac{${fr(R * I)}}{${fr(I)}} = ${R}$ Ω.` }; },
+    () => { const d = pick([120, 180, 240, 300] as const).valueOf(), v = pick([60, 80, 90, 120] as const).valueOf(); const t = d / v; if (!Number.isInteger(t * 4)) return null; return { t: `On a $v = \\dfrac{d}{t}$. Un train parcourt $d = ${d}$ km à $v = ${v}$ km/h. Calculer $t$, en heures.`, r: t, e: `On isole $t$ : $t = \\dfrac{d}{v}$.\n$t = \\dfrac{${d}}{${v}} = ${fr(t)}$ h.` }; },
+    () => { const m = pick([2, 5, 10, 0.5] as const).valueOf(), v = pick([2, 4, 6] as const).valueOf(); return { t: `L'énergie cinétique vaut $E = \\dfrac{1}{2} m v^2$. Calculer $E$ (en J) pour $m = ${fr(m)}$ kg et $v = ${v}$ m/s.`, r: 0.5 * m * v * v, e: `$E = 0,5 \\times ${fr(m)} \\times ${v}^2 = 0,5 \\times ${fr(m)} \\times ${v * v} = ${fr(0.5 * m * v * v)}$ J.` }; },
+    () => { const rho = pick([2, 4, 8] as const).valueOf(), V = pick([3, 5, 10] as const).valueOf(); return { t: `La masse volumique vaut $\\rho = \\dfrac{m}{V}$. Un objet a $\\rho = ${rho}$ g/cm³ et $V = ${V}$ cm³. Calculer sa masse $m$, en g.`, r: rho * V, e: `On isole $m$ : $m = \\rho \\times V$.\n$m = ${rho} \\times ${V} = ${rho * V}$ g.` }; },
+    () => { const P = pick([100, 200, 500, 1000] as const).valueOf(), t = pick([2, 3, 5] as const).valueOf(); return { t: `L'énergie consommée vaut $E = P \\times t$. Un appareil de ${P} W fonctionne ${t} h. Calculer $E$ en Wh.`, r: P * t, e: `$E = ${P} \\times ${t} = ${P * t}$ Wh.` }; },
+  ]);
+  const c = cas();
+  if (!c) return formules();
+  return { text: c.t, format: "short", expected: accepte(c.r), explanation: c.e };
+}
+
 /* ═══════════════ LE NIVEAU ═══════════════ */
 
 export const automatismesPremiere: AutoNiveau = {
@@ -753,21 +1075,35 @@ export const automatismesPremiere: AutoNiveau = {
   duree: 30,
   examen: "Première partie de l'épreuve anticipée : réponses courtes, sans calculatrice, sans QCM",
   nbQuestions: 12,
+  // ⭐ ALIGNÉ SUR L'ANNEXE DU BO n° 24 DU 12 JUIN 2025 (24/09/2026), dans
+  // l'ordre de ses rubriques : Calcul numérique et algébrique, Proportions et
+  // pourcentages, Évolutions et variations, Fonctions et représentations,
+  // Statistiques, Probabilités. La même liste vaut pour TOUS les élèves de
+  // première — avec ou sans spécialité, voie générale ou technologique (le
+  // sujet 0 de spécialité ne pose, en première partie, que ces automatismes).
+  // ⛔ Retirés parce que l'annexe ne les cite pas : les produits de racines
+  // (√2 × √8, √48 = a√3) et les droites parallèles.
   themes: [
-    { id: "fractions", label: "Fractions", generateurs: [fractionsCalcul, fractionDeFraction] },
-    { id: "puissances", label: "Puissances", generateurs: [puissances] },
-    { id: "scientifique", label: "Écriture scientifique", generateurs: [ecritureScientifique] },
-    { id: "racines", label: "Racines carrées", generateurs: [racines] },
+    // Calcul numérique et algébrique
+    { id: "comparer", label: "Comparer deux nombres", generateurs: [comparer] },
+    { id: "fractions", label: "Fractions", generateurs: [fractionsCalcul] },
+    { id: "puissances", label: "Puissances", generateurs: [puissances, ecritureScientifique] },
+    { id: "ecritures", label: "Écritures d'un nombre", generateurs: [ecrituresNombre] },
+    { id: "grandeur", label: "Ordre de grandeur", generateurs: [ordreGrandeur] },
     { id: "unites", label: "Conversions d'unités", generateurs: [conversions] },
+    { id: "litteral", label: "Calcul littéral élémentaire", generateurs: [calculLitteral] },
     { id: "devfac", label: "Développer, factoriser", generateurs: [developperFactoriser] },
     { id: "equations", label: "Équations", generateurs: [equations] },
     { id: "inequations", label: "Inéquations et signes", generateurs: [inequations] },
-    { id: "fonctions", label: "Fonctions : généralités", generateurs: [fonctions] },
-    { id: "affines", label: "Fonctions affines", generateurs: [affines] },
-    { id: "droites", label: "Droites du plan", generateurs: [droites] },
-    { id: "proportions", label: "Pourcentages et proportions", generateurs: [proportions] },
-    { id: "evolutions", label: "Taux d'évolution", generateurs: [evolutions] },
-    { id: "probas", label: "Probabilités", generateurs: [probabilites] },
+    { id: "formules", label: "Formules : isoler, appliquer", generateurs: [formules] },
+    // Proportions et pourcentages ; Évolutions et variations
+    { id: "proportions", label: "Proportions et pourcentages", generateurs: [proportions, fractionDeFraction] },
+    { id: "evolutions", label: "Évolutions et variations", generateurs: [evolutions] },
+    // Fonctions et représentations
+    { id: "fonctions", label: "Fonctions : lectures graphiques", generateurs: [fonctions] },
+    { id: "droites", label: "Droites et fonctions affines", generateurs: [affines, droites] },
+    // Statistiques ; Probabilités
     { id: "stats", label: "Statistiques", generateurs: [statistiques] },
+    { id: "probas", label: "Probabilités", generateurs: [probabilites] },
   ],
 };

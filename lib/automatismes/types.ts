@@ -49,6 +49,9 @@ export type AutoTheme = {
   label: string;
   /** Un générateur est tiré au hasard à chaque série. */
   generateurs: (() => AutoQuestion)[];
+  /** Au programme mais pas dans la liste de l'épreuve : on peut le cocher,
+   *  mais « la totale » ne le tire pas. */
+  horsEpreuve?: boolean;
 };
 
 export type AutoNiveau = {
