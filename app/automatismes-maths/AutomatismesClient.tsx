@@ -30,8 +30,8 @@ function mmss(secondes: number) {
 export default function AutomatismesClient() {
   const [classe, setClasse] = useState("3e");
   const niveau = useMemo(() => getNiveauAutomatismes(classe), [classe]);
-  /** null = « La totale » : un thème différent par question. */
-  const [theme, setTheme] = useState<string | null>(null);
+  /** Les thèmes cochés ; vide = « La totale », un thème différent par question. */
+  const [themes, setThemes] = useState<string[]>([]);
   /** `?apercu=1` : un exemple de chaque générateur, corrigé, sans chrono. */
   const [apercu, setApercu] = useState(false);
 
@@ -67,7 +67,7 @@ export default function AutomatismesClient() {
 
   function lancer() {
     if (!niveau) return;
-    setSerie(apercu ? tirerApercu(niveau) : tirerSerie(niveau, theme));
+    setSerie(apercu ? tirerApercu(niveau) : tirerSerie(niveau, themes));
     setReponses({});
     setCoches({});
     setValide(apercu);
@@ -123,7 +123,7 @@ export default function AutomatismesClient() {
                     disabled={!pret || enCours}
                     onClick={() => {
                       setClasse(c.classe);
-                      setTheme(null);
+                      setThemes([]);
                       setSerie([]);
                       setValide(false);
                     }}
@@ -146,30 +146,59 @@ export default function AutomatismesClient() {
 
           {niveau && !apercu ? (
             <div className="mt-6">
-              <p className="mb-3 text-sm font-black uppercase tracking-wide text-slate-700">
-                2. Choisis un thème, ou mélange tout
+              <p className="mb-1 text-sm font-black uppercase tracking-wide text-slate-700">
+                2. Choisis tes thèmes
+              </p>
+              <p className="mb-3 text-sm font-semibold text-slate-600">
+                Un seul, plusieurs (clique pour cocher ou décocher), ou la totale.
               </p>
               <div className="flex flex-wrap gap-2">
-                {[{ id: null as string | null, label: "🎲 La totale" }, ...niveau.themes.map((t) => ({ id: t.id as string | null, label: t.label }))].map((t) => (
-                  <button
-                    key={t.id ?? "tout"}
-                    type="button"
-                    disabled={enCours}
-                    onClick={() => {
-                      setTheme(t.id);
-                      setSerie([]);
-                      setValide(false);
-                    }}
-                    className={[
-                      "rounded-2xl px-4 py-2 text-sm font-black shadow-sm transition",
-                      theme === t.id
-                        ? "bg-emerald-700 text-white ring-4 ring-yellow-300"
-                        : "bg-white text-slate-800 ring-1 ring-slate-200 hover:bg-emerald-50",
-                    ].join(" ")}
-                  >
-                    {t.label}
-                  </button>
-                ))}
+                {/* ⭐ Frédéric, 24/09 : « la totale, ou un, mais aussi plusieurs ».
+                    Chaque thème se coche et se décoche ; « La totale » vide la
+                    sélection. `aria-pressed` dit l'état à un lecteur d'écran. */}
+                <button
+                  type="button"
+                  disabled={enCours}
+                  aria-pressed={themes.length === 0}
+                  onClick={() => {
+                    setThemes([]);
+                    setSerie([]);
+                    setValide(false);
+                  }}
+                  className={[
+                    "rounded-2xl px-4 py-2 text-sm font-black shadow-sm transition",
+                    themes.length === 0
+                      ? "bg-emerald-700 text-white ring-4 ring-yellow-300"
+                      : "bg-white text-slate-800 ring-1 ring-slate-200 hover:bg-emerald-50",
+                  ].join(" ")}
+                >
+                  🎲 La totale
+                </button>
+                {niveau.themes.map((t) => {
+                  const coche = themes.includes(t.id);
+                  return (
+                    <button
+                      key={t.id}
+                      type="button"
+                      disabled={enCours}
+                      aria-pressed={coche}
+                      onClick={() => {
+                        setThemes((l) => (coche ? l.filter((x) => x !== t.id) : [...l, t.id]));
+                        setSerie([]);
+                        setValide(false);
+                      }}
+                      className={[
+                        "rounded-2xl px-4 py-2 text-sm font-black shadow-sm transition",
+                        coche
+                          ? "bg-emerald-700 text-white ring-2 ring-emerald-300"
+                          : "bg-white text-slate-800 ring-1 ring-slate-200 hover:bg-emerald-50",
+                      ].join(" ")}
+                    >
+                      {coche ? "✓ " : ""}
+                      {t.label}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           ) : null}
@@ -179,8 +208,8 @@ export default function AutomatismesClient() {
               <p className="text-sm font-black text-slate-800">
                 {apercu
                   ? `👀 Aperçu : trois exemples de chacun des ${niveau.themes.reduce((s, t) => s + t.generateurs.length, 0)} générateurs, déjà corrigés.`
-                  : theme
-                    ? `🎯 ${niveau.nbQuestions ?? 10} questions sur le thème choisi, sans calculatrice.`
+                  : themes.length > 0
+                    ? `🎯 ${niveau.nbQuestions ?? 10} questions ${themes.length === 1 ? "sur le thème choisi" : `réparties entre tes ${themes.length} thèmes`}, sans calculatrice.`
                     : `🎯 ${niveau.examen}. ${niveau.nbQuestions ?? niveau.themes.length} questions tirées parmi ${niveau.themes.length} thèmes${niveau.toujours?.includes("rediger") ? ", dont une à rédiger : c'est là que compte l'orthographe" : ""}.`}
               </p>
             </div>

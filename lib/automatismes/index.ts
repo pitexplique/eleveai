@@ -36,24 +36,27 @@ export function getNiveauAutomatismes(classe: string): AutoNiveau | null {
  * Un générateur qui lève une erreur ne doit pas priver l'élève de toute la
  * série : on retente, puis on saute.
  */
-export function tirerSerie(niveau: AutoNiveau, themeId?: string | null): AutoQuestionServie[] {
-  // Un seul thème (le menu « Fractions », « Probabilités »… façon Galilee) :
-  // toute la série y puise, sans servir deux fois le même énoncé.
-  const seul = themeId ? niveau.themes.find((t) => t.id === themeId) : null;
-  if (seul) {
+export function tirerSerie(niveau: AutoNiveau, themeIds?: string[] | null): AutoQuestionServie[] {
+  // Un ou PLUSIEURS thèmes choisis (Frédéric, 24/09 : « la totale, ou un, mais
+  // aussi plusieurs ») : les questions tournent entre eux — Fractions,
+  // Probabilités, Fractions, Probabilités… —, sans servir deux fois le même
+  // énoncé. Aucun thème choisi = « la totale », plus bas.
+  const choisis = niveau.themes.filter((t) => themeIds?.includes(t.id));
+  if (choisis.length > 0) {
     const total = niveau.nbQuestions ?? 10;
     const vus = new Set<string>();
     const serie: AutoQuestionServie[] = [];
     for (let essai = 0; serie.length < total && essai < total * 20; essai++) {
+      const theme = choisis[serie.length % choisis.length];
       try {
-        const gen = seul.generateurs[Math.floor(Math.random() * seul.generateurs.length)];
+        const gen = theme.generateurs[Math.floor(Math.random() * theme.generateurs.length)];
         const q = gen();
         const cle = q.text + JSON.stringify(q.canvas ?? null);
         if (vus.has(cle)) continue;
         vus.add(cle);
-        serie.push({ ...q, themeId: seul.id, themeLabel: seul.label });
+        serie.push({ ...q, themeId: theme.id, themeLabel: theme.label });
       } catch (e) {
-        console.error(`[automatismes] ${niveau.classe}/${seul.id}`, e);
+        console.error(`[automatismes] ${niveau.classe}/${theme.id}`, e);
       }
     }
     return serie;
