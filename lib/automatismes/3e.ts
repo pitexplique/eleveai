@@ -84,7 +84,7 @@ const FRACTIONS_MOT: { n: number; d: number; mot: string }[] = [
   { n: 1, d: 5, mot: "le cinquième" },
 ];
 
-function fractionDe(): AutoQuestion {
+export function fractionDe(): AutoQuestion {
   if (Math.random() < 0.4) {
     const f = pick(FRACTIONS_MOT);
     const total = f.d * entre(3, 15);
@@ -107,7 +107,7 @@ function fractionDe(): AutoQuestion {
   };
 }
 
-function priorites(): AutoQuestion {
+export function priorites(): AutoQuestion {
   const cas = entre(1, 4);
   const a = entre(2, 9);
   const b = entre(2, 9);
@@ -149,7 +149,7 @@ function priorites(): AutoQuestion {
   };
 }
 
-function droiteGraduee(): AutoQuestion {
+export function droiteGraduee(): AutoQuestion {
   const d = pick([2, 3, 4, 5] as const);
   // Le point E tombe entre deux graduations entières, jamais sur un entier.
   let k = entre(1, 2 * d - 1);
@@ -221,7 +221,7 @@ function pctEtTotal(): { p: number; total: number } {
   return { p, total: pick(totaux) };
 }
 
-function pctEffectif(): AutoQuestion {
+export function pctEffectif(): AutoQuestion {
   const c = pick(CONTEXTES_PCT);
   const { p, total } = pctEtTotal();
   const rep = (p * total) / 100;
@@ -233,7 +233,7 @@ function pctEffectif(): AutoQuestion {
   };
 }
 
-function pctComplement(): AutoQuestion {
+export function pctComplement(): AutoQuestion {
   const c = pick(CONTEXTES_PCT);
   const { p, total } = pctEtTotal();
   const partie = (p * total) / 100;
@@ -246,7 +246,7 @@ function pctComplement(): AutoQuestion {
   };
 }
 
-function pctProportion(): AutoQuestion {
+export function pctProportion(): AutoQuestion {
   const c = pick(CONTEXTES_PCT);
   const [partie, total] = pick([
     [5, 20], [15, 60], [10, 40], [9, 30], [12, 48], [6, 25], [18, 50], [30, 200], [45, 300], [80, 400],
@@ -262,7 +262,7 @@ function pctProportion(): AutoQuestion {
 
 /* ═══════════════ 3. DURÉES ET VITESSES ═══════════════ */
 
-function convertirDurees(): AutoQuestion {
+export function convertirDurees(): AutoQuestion {
   const cas = entre(1, 3);
   if (cas === 1) {
     const min = pick([90, 150, 210, 240, 180, 45, 75, 30, 135] as const);
@@ -303,7 +303,7 @@ const MOBILES = [
   { qui: "Un bateau", v: [20, 30, 40] },
 ] as const;
 
-function vitesseDuree(): AutoQuestion {
+export function vitesseDuree(): AutoQuestion {
   const m = pick(MOBILES);
   const v = pick(m.v);
   const t = pick([0.5, 0.25, 0.75, 1.5, 2, 3] as const).valueOf();
@@ -328,7 +328,7 @@ function vitesseDuree(): AutoQuestion {
   };
 }
 
-function vitesseDistance(): AutoQuestion {
+export function vitesseDistance(): AutoQuestion {
   const m = pick(MOBILES);
   const v = pick(m.v);
   const t = pick([0.5, 2, 3, 1.5] as const).valueOf();
@@ -360,7 +360,7 @@ const SERIES_STAT = [
   { quoi: "Le nombre de dauphins aperçus lors de sorties en mer", unite: "" },
 ];
 
-function moyenne(): AutoQuestion {
+export function moyenne(): AutoQuestion {
   const s = pick(SERIES_STAT);
   const n = pick([4, 5] as const);
   const moy = entre(6, 14);
@@ -389,7 +389,7 @@ function moyenne(): AutoQuestion {
   return { text: texte, format: "short", expected: accepte(moy), explanation: explication };
 }
 
-function mediane(): AutoQuestion {
+export function mediane(): AutoQuestion {
   const s = pick(SERIES_STAT);
   const n = pick([5, 7, 6] as const);
   const valeurs: number[] = [];
@@ -452,7 +452,7 @@ function xLabel(x: number, g: (typeof GRAPHIQUES)[number]) {
   return `au jour ${x}`;
 }
 
-function lireValeur(): AutoQuestion {
+export function lireValeur(): AutoQuestion {
   const { g, pts, canvas } = courbe();
   const p = pick(pts);
   return {
@@ -464,7 +464,7 @@ function lireValeur(): AutoQuestion {
   };
 }
 
-function lireVariation(): AutoQuestion {
+export function lireVariation(): AutoQuestion {
   const { g, pts, canvas } = courbe();
   let i = entre(0, 4);
   let j = entre(i + 1, 5);
@@ -486,7 +486,7 @@ function lireVariation(): AutoQuestion {
   };
 }
 
-function lireInstant(): AutoQuestion {
+export function lireInstant(): AutoQuestion {
   const { g, pts, canvas } = courbe();
   const max = pts.reduce((m, p) => (p.y > m.y ? p : m));
   return {
@@ -500,7 +500,7 @@ function lireInstant(): AutoQuestion {
 
 /* ═══════════════ 6. ANGLES, PÉRIMÈTRES, AIRES ═══════════════ */
 
-function sommeAngles(): AutoQuestion {
+export function sommeAngles(): AutoQuestion {
   const [A, B, C] = pick(NOMS_TRIANGLE);
   const cas = entre(1, 3);
   const pointsTri = { A: { x: 40, y: 190 }, B: { x: 250, y: 190 }, C: { x: 250, y: 50 } };
@@ -542,7 +542,7 @@ function sommeAngles(): AutoQuestion {
   };
 }
 
-function perimetres(): AutoQuestion {
+export function perimetres(): AutoQuestion {
   const cas = entre(1, 4);
   if (cas === 1) {
     const c = entre(3, 12);
@@ -589,7 +589,7 @@ function perimetres(): AutoQuestion {
   };
 }
 
-function aires(): AutoQuestion {
+export function aires(): AutoQuestion {
   const cas = entre(1, 4);
   if (cas === 1) {
     const L = entre(3, 12);
@@ -645,7 +645,7 @@ function triangleRectangle(noms: readonly string[], cotes?: { AB?: string; CA?: 
   } as unknown as CanvasFigure;
 }
 
-function pythagore(): AutoQuestion {
+export function pythagore(): AutoQuestion {
   const [A, B, C] = pick(NOMS_TRIANGLE);
   if (Math.random() < 0.5) {
     const bonne = `$${B}${C}^2 = ${A}${B}^2 + ${A}${C}^2$`;
@@ -676,7 +676,7 @@ function pythagore(): AutoQuestion {
 // ⚠️ La liste indicative (octobre 2025) ne retient QUE le cosinus : « la ligne
 // trigonométrique cosinus ». Sinus et tangente restent au programme, mais pas
 // dans les automatismes.
-function trigoQuelCalcul(): AutoQuestion {
+export function trigoQuelCalcul(): AutoQuestion {
   const [A, B, C] = pick(NOMS_TRIANGLE);
   const enB = Math.random() < 0.5;
   const sommet = enB ? B : C;
@@ -700,7 +700,7 @@ function trigoQuelCalcul(): AutoQuestion {
   };
 }
 
-function cosinusLongueur(): AutoQuestion {
+export function cosinusLongueur(): AutoQuestion {
   const [A, B, C] = pick(NOMS_TRIANGLE);
   // cos 60° = 0,5 : le seul cosinus qui se calcule de tête au collège.
   const hyp = 2 * entre(2, 9);
@@ -741,7 +741,7 @@ function thalesCanvas(n: (typeof NOMS_THALES)[number], sideLabels: Record<string
   } as unknown as CanvasFigure;
 }
 
-function thalesEgalite(): AutoQuestion {
+export function thalesEgalite(): AutoQuestion {
   const n = pick(NOMS_THALES);
   const f = (a: string, b: string) => `\\dfrac{${a}}{${b}}`;
   const AM = n.A + n.M, AB = n.A + n.B, AN = n.A + n.N, AC = n.A + n.C, MN = n.M + n.N, BC = n.B + n.C;
@@ -764,7 +764,7 @@ function thalesEgalite(): AutoQuestion {
   };
 }
 
-function thalesLongueur(): AutoQuestion {
+export function thalesLongueur(): AutoQuestion {
   const n = pick(NOMS_THALES);
   const k = pick([2, 3, 4] as const);
   const am = entre(2, 5);
@@ -793,7 +793,7 @@ function thalesLongueur(): AutoQuestion {
 
 /* ═══════════════ 8. ÉQUATIONS ET EXPRESSIONS ═══════════════ */
 
-function equationQuelCalcul(): AutoQuestion {
+export function equationQuelCalcul(): AutoQuestion {
   const a = entre(2, 9);
   const b = pick([-7, -5, -3, -2, 2, 3, 4, 6, 8] as const).valueOf();
   const c = entre(10, 40);
@@ -813,7 +813,7 @@ function equationQuelCalcul(): AutoQuestion {
   };
 }
 
-function equationResoudre(): AutoQuestion {
+export function equationResoudre(): AutoQuestion {
   const a = entre(2, 9);
   const x = entre(-5, 9);
   const b = pick([-7, -5, -3, 2, 4, 6, 8] as const).valueOf();
@@ -826,7 +826,7 @@ function equationResoudre(): AutoQuestion {
   };
 }
 
-function valeurExpression(): AutoQuestion {
+export function valeurExpression(): AutoQuestion {
   const cas = entre(1, 3);
   const x = pick([-3, -2, -1, 2, 3, 4] as const).valueOf();
   if (cas === 1) {
@@ -864,7 +864,7 @@ function valeurExpression(): AutoQuestion {
 
 /* ═══════════════ 9. SCRATCH ═══════════════ */
 
-function programmeCalcul(): AutoQuestion {
+export function programmeCalcul(): AutoQuestion {
   const n = entre(1, 6);
   const a = entre(2, 8);
   const d = pick([2, 3] as const).valueOf();
@@ -901,7 +901,7 @@ const POLYGONES = [
   { n: 8, nom: "un octogone régulier" },
 ];
 
-function polygone(): AutoQuestion {
+export function polygone(): AutoQuestion {
   const p = pick(POLYGONES);
   const angle = 360 / p.n;
   const longueur = pick([40, 50, 60, 80] as const);
@@ -961,7 +961,7 @@ function polygone(): AutoQuestion {
 
 /* — Nombres : écritures, carrés, notation scientifique, divisibilité, n — */
 
-function ecritures(): AutoQuestion {
+export function ecritures(): AutoQuestion {
   const [n, d, dec] = pick([
     [1, 2, 0.5], [1, 4, 0.25], [3, 4, 0.75], [3, 2, 1.5], [5, 2, 2.5], [1, 10, 0.1], [6, 5, 1.2], [1, 5, 0.2], [7, 4, 1.75], [2, 5, 0.4],
   ] as const);
@@ -992,7 +992,7 @@ function ecritures(): AutoQuestion {
   };
 }
 
-function carres(): AutoQuestion {
+export function carres(): AutoQuestion {
   const n = entre(2, 12);
   if (Math.random() < 0.6) {
     return {
@@ -1010,7 +1010,7 @@ function carres(): AutoQuestion {
   };
 }
 
-function notationScientifique(): AutoQuestion {
+export function notationScientifique(): AutoQuestion {
   const m = pick([1.2, 2.5, 3.4, 4.5, 6.7, 7.2, 8.1] as const).valueOf();
   const p = pick([3, 4, 5, 6, -2, -3] as const).valueOf();
   const valeur = m * 10 ** p;
@@ -1030,7 +1030,7 @@ function notationScientifique(): AutoQuestion {
   };
 }
 
-function divisibilite(): AutoQuestion {
+export function divisibilite(): AutoQuestion {
   const d = pick([2, 3, 5, 9] as const).valueOf();
   let n = d * entre(12, 111);
   // Pour 3 et 9 : pas un multiple de 2 ou 5 qu'on reconnaîtrait autrement.
@@ -1052,7 +1052,7 @@ function divisibilite(): AutoQuestion {
   };
 }
 
-function expressionsDeN(): AutoQuestion {
+export function expressionsDeN(): AutoQuestion {
   const cas = pick([
     { quoi: "le double de $n$", bonne: "$2n$", pieges: ["$n^2$", "$n + 2$", "$\\dfrac{n}{2}$"] },
     { quoi: "le triple de $n$", bonne: "$3n$", pieges: ["$n^3$", "$n + 3$", "$\\dfrac{n}{3}$"] },
@@ -1078,7 +1078,7 @@ function expressionsDeN(): AutoQuestion {
 
 /* — Calcul littéral — */
 
-function simplifierDevelopper(): AutoQuestion {
+export function simplifierDevelopper(): AutoQuestion {
   const cas = entre(1, 3);
   if (cas === 1) {
     const a = entre(2, 7), b = entre(2, 7), c = entre(1, 9);
@@ -1113,7 +1113,7 @@ function simplifierDevelopper(): AutoQuestion {
   };
 }
 
-function equationsSimples(): AutoQuestion {
+export function equationsSimples(): AutoQuestion {
   const x = entre(-6, 12);
   if (Math.random() < 0.5) {
     const b = entre(2, 15);
@@ -1135,7 +1135,7 @@ function equationsSimples(): AutoQuestion {
 
 /* — Proportionnalité et évolutions — */
 
-function evolutionPct(): AutoQuestion {
+export function evolutionPct(): AutoQuestion {
   const p = pick([10, 20, 25, 50] as const).valueOf();
   const prix = pick([20, 40, 60, 80, 120, 200] as const).valueOf();
   const hausse = Math.random() < 0.5;
@@ -1149,7 +1149,7 @@ function evolutionPct(): AutoQuestion {
   };
 }
 
-function proportionnalite(): AutoQuestion {
+export function proportionnalite(): AutoQuestion {
   if (Math.random() < 0.6) {
     const produit = pick([
       { q: "kg de pommes", unite: "€" },
@@ -1184,7 +1184,7 @@ function proportionnalite(): AutoQuestion {
 
 /* — Conversions d'unités — */
 
-function conversions(): AutoQuestion {
+export function conversions(): AutoQuestion {
   const cas = pick([
     () => { const v = entre(2, 9) * 100; return { t: `Convertir ${v} cm en m.`, r: v / 100, e: `1 m = 100 cm : on divise par 100.\n$${v} \\div 100 = ${fr(v / 100)}$ m.` }; },
     () => { const v = pick([1.5, 2.3, 4, 0.8] as const).valueOf(); return { t: `Convertir ${fr(v)} km en m.`, r: v * 1000, e: `1 km = 1 000 m : on multiplie par 1 000.\n$${fr(v)} \\times 1000 = ${v * 1000}$ m.` }; },
@@ -1214,7 +1214,7 @@ function repereCanvas(points: { x: number; y: number; label: string }[]) {
   } as unknown as CanvasFigure;
 }
 
-function coordonnees(): AutoQuestion {
+export function coordonnees(): AutoQuestion {
   let x = entre(-4, 4), y = entre(-4, 4);
   while (x === 0 || y === 0 || x === y) { x = entre(-4, 4); y = entre(-4, 4); }
   const nom = pick(["A", "B", "M", "P", "R"]);
@@ -1227,7 +1227,7 @@ function coordonnees(): AutoQuestion {
   };
 }
 
-function symetries(): AutoQuestion {
+export function symetries(): AutoQuestion {
   let x = entre(-4, 4), y = entre(-4, 4);
   while (x === 0 || y === 0) { x = entre(-4, 4); y = entre(-4, 4); }
   const cas = pick([
@@ -1246,7 +1246,7 @@ function symetries(): AutoQuestion {
 
 /* — Angles : le vocabulaire — */
 
-function anglesVocabulaire(): AutoQuestion {
+export function anglesVocabulaire(): AutoQuestion {
   const cas = entre(1, 3);
   if (cas === 1) {
     const q = pick([
@@ -1278,7 +1278,7 @@ function anglesVocabulaire(): AutoQuestion {
 
 /* — Solides et volumes — */
 
-function solides(): AutoQuestion {
+export function solides(): AutoQuestion {
   const s = pick([
     { d: "a deux bases qui sont des disques identiques et parallèles", r: "cylindre" },
     { d: "a une base qui est un disque et un sommet", r: "cône" },
@@ -1296,7 +1296,7 @@ function solides(): AutoQuestion {
   };
 }
 
-function volumes(): AutoQuestion {
+export function volumes(): AutoQuestion {
   const cas = entre(1, 4);
   if (cas === 1) {
     const c = entre(2, 6);
@@ -1321,7 +1321,7 @@ function volumes(): AutoQuestion {
 
 /* — Probabilités et fréquences — */
 
-function probabilites(): AutoQuestion {
+export function probabilites(): AutoQuestion {
   if (Math.random() < 0.5) {
     const r = entre(1, 6), b = entre(1, 6), v = entre(0, 4);
     const total = r + b + v;
@@ -1350,7 +1350,7 @@ function probabilites(): AutoQuestion {
   };
 }
 
-function frequence(): AutoQuestion {
+export function frequence(): AutoQuestion {
   const [k, n] = pick([[5, 25], [6, 30], [8, 40], [3, 12], [9, 36], [7, 28], [12, 48], [10, 50], [4, 20]] as const);
   const f = k / n;
   return {
@@ -1374,7 +1374,7 @@ function frequence(): AutoQuestion {
 
 const CRITERE_ORTHO = "Ma phrase est complète, avec une majuscule, un point et sans faute d'orthographe.";
 
-function redigerPythagore(): AutoQuestion {
+export function redigerPythagore(): AutoQuestion {
   const [A, B, C] = pick(NOMS_TRIANGLE);
   const [a, b, c] = pick([[3, 4, 5], [6, 8, 10], [5, 12, 13], [9, 12, 15]] as const);
   return {
@@ -1394,7 +1394,7 @@ function redigerPythagore(): AutoQuestion {
   };
 }
 
-function redigerPremier(): AutoQuestion {
+export function redigerPremier(): AutoQuestion {
   const [p, q] = pick([[3, 17], [3, 19], [7, 13], [3, 23], [7, 11], [3, 29], [11, 13], [3, 31], [7, 17], [7, 19], [13, 17], [11, 17], [3, 37], [7, 23], [11, 19]] as const);
   const n = p * q;
   return {
@@ -1411,7 +1411,7 @@ function redigerPremier(): AutoQuestion {
   };
 }
 
-function redigerPourcentages(): AutoQuestion {
+export function redigerPourcentages(): AutoQuestion {
   const p = pick([10, 20, 25, 50] as const);
   const prix = pick([100, 200, 400] as const);
   const apres = prix * (1 + p / 100);
@@ -1432,7 +1432,7 @@ function redigerPourcentages(): AutoQuestion {
   };
 }
 
-function redigerMediane(): AutoQuestion {
+export function redigerMediane(): AutoQuestion {
   const valeurs = shuffle([entre(8, 10), entre(11, 12), entre(13, 14), entre(15, 16), entre(17, 19)]);
   const tri = [...valeurs].sort((a, b) => a - b);
   return {
