@@ -160,6 +160,50 @@ export const droites = (
 };
 
 /**
+ * Un TRIANGLE (24/09/2026, feuille « Problèmes de géométrie plane » de seconde) :
+ * le canvas `triangle` du coach, qui marque l'angle droit, nomme côtés et
+ * angles, et trace une HAUTEUR (le projeté orthogonal d'un sommet).
+ * ⭐ On donne les VRAIES coordonnées (en unités) : l'aide les met à l'échelle
+ * du cadre, y vers le haut. Un triangle 3-4-5 est donc dessiné 3-4-5, et le
+ * script de recalcul peut vérifier l'angle droit et les rapports des côtés.
+ * ⛔ Texte NU dans les étiquettes (« 5 cm », « 35° ») : SVG, pas de KaTeX.
+ * Les clés restent A, B, C (celles du canvas) ; `noms` les renomme à l'écran.
+ */
+export const triangle = (
+  pts: { A: [number, number]; B: [number, number]; C: [number, number] },
+  opts: {
+    noms?: Partial<Record<"A" | "B" | "C", string>>;
+    cotes?: Partial<Record<"AB" | "BC" | "CA", string>>;
+    angles?: Partial<Record<"A" | "B" | "C", string>>;
+    droit?: "A" | "B" | "C";
+    hauteur?: { depuis: "A" | "B" | "C"; label?: string };
+  } = {},
+) => {
+  const W = 260, H = 210, m = 34;
+  const xs = [pts.A[0], pts.B[0], pts.C[0]], ys = [pts.A[1], pts.B[1], pts.C[1]];
+  const [x0, y0] = [Math.min(...xs), Math.min(...ys)];
+  const s = Math.min((W - 2 * m) / (Math.max(...xs) - x0 || 1), (H - 2 * m) / (Math.max(...ys) - y0 || 1));
+  const px = ([x, y]: [number, number]) => ({ x: +(m + (x - x0) * s).toFixed(1), y: +(H - m - (y - y0) * s).toFixed(1) });
+  return (
+    <div className="mx-auto w-full max-w-[17rem] print:max-w-[13rem]">
+      <CanvasRenderer
+        figure={{
+          kind: "triangle",
+          size: { width: W, height: H },
+          points: { A: px(pts.A), B: px(pts.B), C: px(pts.C) },
+          display: { showPoints: true, showLabels: true, showSides: true, showAngles: !!opts.angles },
+          labels: opts.noms,
+          sideLabels: opts.cotes,
+          angleLabels: opts.angles,
+          marks: opts.droit ? { rightAngleAt: opts.droit } : undefined,
+          height: opts.hauteur ? { fromVertex: opts.hauteur.depuis, label: opts.hauteur.label } : undefined,
+        }}
+      />
+    </div>
+  );
+};
+
+/**
  * Le diagramme en boîte (23/09/2026, feuille des statistiques de seconde) : le
  * canvas `diagramme_boite` de la fiche de cours, une ou deux séries.
  * ⛔ Texte NU dans `label` (SVG : KaTeX n'y passe pas).

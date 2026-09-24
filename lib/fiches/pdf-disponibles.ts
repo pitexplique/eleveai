@@ -167,6 +167,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "probabilites-5e-cours-exercices-corriges.pdf",
   "probabilites-cm2-cours-exercices-corriges.pdf",
   "probabilites-issues-evenements-et-deux-epreuves-3e-cours-exercices-corriges.pdf",
+  "problemes-de-geometrie-plane-seconde-20-exercices-corriges.pdf",
   "pronoms-personnels-et-leur-antecedent-6e-cours-exercices-corriges.pdf",
   "proportionnalite-4e-cours-exercices-corriges.pdf",
   "proportionnalite-5e-cours-exercices-corriges.pdf",

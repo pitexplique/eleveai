@@ -139,6 +139,11 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Du geste seul au problème : équation réduite, droite verticale, équation cartésienne, vecteur directeur, parallèles, intersection, systèmes. Deux randonneurs qui se croisent, la billetterie d'un concert, le point d'équilibre d'un triangle, un bateau qui évite un rocher. Chaque corrigé dessine ses droites.",
   },
+  "maths/seconde/geometrie-problemes-plan": {
+    titre: "Problèmes de géométrie plane : 20 exercices corrigés",
+    resume:
+      "Du geste seul au problème : sinus, cosinus et tangente, cos² + sin² = 1, projeté orthogonal et distance à une droite, aires, un maximum à trouver. La hauteur d'un arbre, la pente d'un col du Tour de France, un enclos le long d'une rivière, le chemin le plus court jusqu'à un phare.",
+  },
   "maths/seconde/algorithmique-python-2de": {
     titre: "Algorithmique et Python : 20 exercices corrigés",
     resume:
