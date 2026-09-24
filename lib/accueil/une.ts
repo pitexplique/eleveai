@@ -212,9 +212,21 @@ const PRIMAIRE_LETTRE_A: DiapoUne = {
 export const UNES: Une[] = [
   // ⭐ LUNDI 21 SEPTEMBRE AU SOIR : le collège change (voir COLLEGE_POURCENTAGES).
   // Le lycée posé l'après-midi et le primaire ne bougent pas.
+  //
+  // ⚠️ DATE REMISE À JOUR LE 24/09/2026, ET LE SENS DU CHAMP A GLISSÉ. Frédéric,
+  // en voyant « La leçon du jour · Lundi 21 septembre » un jeudi : « corrige et
+  // mets la date du jour ». Le contenu, lui, n'a PAS changé depuis le 21.
+  // 👉 `jour` ne dit donc plus « quand la Une a changé » (son sens d'origine,
+  // décrit en tête de fichier) mais « à quelle date elle est présentée ». Les
+  // entrées d'ARCHIVE plus bas gardent leur date d'origine, qui reste juste.
+  // ⛔ CONSÉQUENCE À CONNAÎTRE : ce libellé se périme maintenant TOUS LES JOURS,
+  // alors qu'avant il ne se périmait qu'au changement de Une. C'est le prix du
+  // mot « jour », et Frédéric l'a dit lui-même : « à terme ça devra changer ».
+  // La sortie propre est décrite au § « PAS DE CALCUL DE DATE » en tête de
+  // fichier : la calculer sur le SERVEUR, pas dans le navigateur.
   {
-    jour: "Lundi 21 septembre",
-    jourCourt: "21 septembre",
+    jour: "Jeudi 24 septembre",
+    jourCourt: "24 septembre",
     diapos: [LYCEE_REELS, COLLEGE_POURCENTAGES, PRIMAIRE_LETTRE_A],
   },
   // ⭐ LE LYCÉE PASSE AUX NOMBRES RÉELS (21/09/2026). Frédéric : « pourquoi ne
