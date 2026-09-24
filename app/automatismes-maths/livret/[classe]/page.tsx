@@ -32,6 +32,10 @@ const LIVRETS: Record<string, { title: string; description: string }> = {
     title: "Automatismes de seconde : 20 séries corrigées en PDF",
     description: "Vingt séries d'automatismes de seconde, alignées sur la liste officielle de l'épreuve anticipée, à imprimer, corrigées à la fin. Réponses courtes, sans QCM.",
   },
+  "terminale-spe": {
+    title: "Automatismes terminale spé maths : 20 séries en PDF",
+    description: "Vingt séries de réflexes de terminale spécialité à imprimer, corrigées : limites, dérivées, exponentielle, logarithme, intégrales, loi binomiale. Un quart en QCM, comme au bac.",
+  },
   premiere: {
     title: "Automatismes 1re, épreuve anticipée : PDF sans QCM",
     description: "Vingt séries d'automatismes pour l'épreuve anticipée de maths (session 2027), alignées sur l'annexe officielle : réponses courtes comme à l'épreuve, corrigés à la fin.",

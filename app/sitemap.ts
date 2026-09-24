@@ -124,6 +124,7 @@ const ROUTES: RouteConfig[] = [
   { path: "/automatismes-maths/livret/3e",       priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/automatismes-maths/livret/seconde",  priority: 0.8, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/automatismes-maths/livret/premiere", priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
+  { path: "/automatismes-maths/livret/terminale-spe", priority: 0.8, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/eval-pix-ia",       priority: 0.9,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
 
   // ── KITS DE SURVIE (lycée) ─────────────────────────────────────────────────

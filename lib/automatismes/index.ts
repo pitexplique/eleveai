@@ -11,12 +11,13 @@ import { automatismes5e } from "./5e";
 import { automatismes6e } from "./6e";
 import { automatismesPremiere } from "./premiere";
 import { automatismesSeconde } from "./seconde";
+import { automatismesTerminaleSpe } from "./terminale-spe";
 import type { AutoNiveau, AutoQuestionServie } from "./types";
 
 export type { AutoNiveau, AutoQuestion, AutoQuestionServie, AutoTheme } from "./types";
 
 /** Les niveaux ÉCRITS. Les autres s'affichent « bientôt » sur la page. */
-export const NIVEAUX_AUTOMATISMES: AutoNiveau[] = [automatismes6e, automatismes5e, automatismes4e, automatismes3e, automatismesSeconde, automatismesPremiere];
+export const NIVEAUX_AUTOMATISMES: AutoNiveau[] = [automatismes6e, automatismes5e, automatismes4e, automatismes3e, automatismesSeconde, automatismesPremiere, automatismesTerminaleSpe];
 
 /** L'ordre d'affichage des classes sur la page, écrites ou non. */
 export const CLASSES_AUTOMATISMES: { classe: string; label: string }[] = [
@@ -26,6 +27,7 @@ export const CLASSES_AUTOMATISMES: { classe: string; label: string }[] = [
   { classe: "3e", label: "3e" },
   { classe: "seconde", label: "Seconde" },
   { classe: "premiere", label: "Première" },
+  { classe: "terminale-spe", label: "Terminale spé" },
 ];
 
 export function getNiveauAutomatismes(classe: string): AutoNiveau | null {
