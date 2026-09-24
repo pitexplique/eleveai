@@ -87,7 +87,7 @@ function accepte(n: number): string[] {
 
 /* ═══════════════ DIVISION EUCLIDIENNE, FACTEURS PREMIERS ═══════════════ */
 
-function divisionEuclidienne(): AutoQuestion {
+export function divisionEuclidienne(): AutoQuestion {
   const b = entre(3, 9), q = entre(4, 15), r = entre(1, b - 1);
   const a = b * q + r;
   const ctx = pick([
@@ -104,7 +104,7 @@ function divisionEuclidienne(): AutoQuestion {
   };
 }
 
-function decomposition(): AutoQuestion {
+export function decomposition(): AutoQuestion {
   const cas = pick([
     { n: 60, d: "2^2 \\times 3 \\times 5", grand: 5, nb: 3 },
     { n: 84, d: "2^2 \\times 3 \\times 7", grand: 7, nb: 3 },
@@ -135,7 +135,7 @@ function decomposition(): AutoQuestion {
 
 /* ═══════════════ ORDRES DE GRANDEUR ET PRÉFIXES ═══════════════ */
 
-function prefixes(): AutoQuestion {
+export function prefixes(): AutoQuestion {
   const cas = pick([
     () => { const v = entre(2, 9); return { t: `Combien de mètres y a-t-il dans ${v} km ?`, r: v * 1000, e: `kilo = mille : 1 km = $10^3$ m.\n$${v} \\times 1000 = ${v * 1000}$ m.` }; },
     () => { const v = entre(2, 9); return { t: `Combien d'octets y a-t-il dans ${v} ko ? (1 ko = 1 000 octets.)`, r: v * 1000, e: `kilo = $10^3$.\n${v} ko = ${v * 1000} octets.` }; },
@@ -150,27 +150,29 @@ function prefixes(): AutoQuestion {
 
 /* ═══════════════ RATIOS, AGRANDISSEMENT, RÉDUCTION ═══════════════ */
 
-function ratios(): AutoQuestion {
+export function ratios(): AutoQuestion {
   const [a, b] = pick([[2, 3], [1, 4], [3, 5], [2, 5], [1, 2], [3, 4], [4, 5]] as const);
   // k ≥ 4 : « une classe de 10 élèves » sortait à l'aperçu (24/09).
   const k = entre(4, 12);
   const total = (a + b) * k;
   const ctx = pick([
-    { t: `On partage ${total} € entre Léa et Sami dans le ratio ${a} : ${b}.`, qui: "Léa", quiB: "Sami", u: "€" },
-    { t: `Une peinture mélange du bleu et du jaune dans le ratio ${a} : ${b}, pour ${total} L en tout.`, qui: "le bleu", quiB: "le jaune", u: "L" },
-    { t: `Une classe de ${total} élèves compte des externes et des demi-pensionnaires dans le ratio ${a} : ${b}.`, qui: "les externes", quiB: "les demi-pensionnaires", u: "" },
+    // ⛔ `aQui` porte la préposition contractée : « à le bleu », « à les
+    // externes » sortaient au premier jet (24/09).
+    { t: `On partage ${total} € entre Léa et Sami dans le ratio ${a} : ${b}.`, qui: "Léa", quiB: "Sami", aQui: "à Léa", aQuiB: "à Sami", u: "€" },
+    { t: `Une peinture mélange du bleu et du jaune dans le ratio ${a} : ${b}, pour ${total} L en tout.`, qui: "le bleu", quiB: "le jaune", aQui: "au bleu", aQuiB: "au jaune", u: "L" },
+    { t: `Une classe de ${total} élèves compte des externes et des demi-pensionnaires dans le ratio ${a} : ${b}.`, qui: "les externes", quiB: "les demi-pensionnaires", aQui: "aux externes", aQuiB: "aux demi-pensionnaires", u: "" },
   ]);
   const premier = Math.random() < 0.5;
   const rep = (premier ? a : b) * k;
   return {
-    text: `${ctx.t} Quelle part revient à ${premier ? ctx.qui : ctx.quiB}${ctx.u ? `, en ${ctx.u}` : ""} ?`,
+    text: `${ctx.t} Quelle part revient ${premier ? ctx.aQui : ctx.aQuiB}${ctx.u ? `, en ${ctx.u}` : ""} ?`,
     format: "short",
     expected: accepte(rep),
     explanation: `Un ratio ${a} : ${b}, c'est ${a + b} parts égales en tout.\nUne part vaut $${total} \\div ${a + b} = ${k}$ ; ${premier ? ctx.qui : ctx.quiB} en reçoit ${premier ? a : b}, soit ${rep}.`,
   };
 }
 
-function echelles(): AutoQuestion {
+export function echelles(): AutoQuestion {
   const cas = entre(1, 3);
   if (cas === 1) {
     const e = pick([100, 1000, 10000, 25000, 50000] as const).valueOf();

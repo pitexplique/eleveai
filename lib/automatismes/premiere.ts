@@ -204,6 +204,17 @@ export function ecritureScientifique(): AutoQuestion {
 /* ═══════════════ RACINES CARRÉES ═══════════════ */
 
 export function racines(): AutoQuestion {
+  // Troisième cas, en tirage libre : √(a² × b²) = a × b (le réservoir figé des
+  // deux autres ne donnait que 28 questions pour le thème, seuil 30).
+  if (Math.random() < 0.34) {
+    const a = entre(2, 9), b = entre(2, 9);
+    return {
+      text: `Calculer $\\sqrt{${a * a} \\times ${b * b}}$ sans calculatrice.`,
+      format: "short",
+      expected: accepte(a * b),
+      explanation: `$\\sqrt{x \\times y} = \\sqrt{x} \\times \\sqrt{y}$ : on n'a pas à calculer le produit.\n$\\sqrt{${a * a}} \\times \\sqrt{${b * b}} = ${a} \\times ${b} = ${a * b}$.`,
+    };
+  }
   if (Math.random() < 0.5) {
     const [a, b, r] = pick([[2, 8, 4], [3, 12, 6], [5, 20, 10], [2, 18, 6], [3, 27, 9], [2, 32, 8], [6, 24, 12], [5, 45, 15]] as const);
     return {
@@ -513,8 +524,14 @@ export function droites(): AutoQuestion {
 
 export function proportions(): AutoQuestion {
   const cas = entre(1, 3);
+  // ⭐ Tirages LIBRES dans les trois cas (24/09) : les listes figées ne
+  // donnaient que 19 questions au thème, sous le seuil de 30.
   if (cas === 1) {
-    const [total, p1, p2] = pick([[30, 40, 25], [200, 50, 30], [80, 25, 50], [400, 25, 10], [60, 50, 20], [500, 20, 40]] as const);
+    const p1 = pick([10, 20, 25, 40, 50, 60, 75, 80] as const).valueOf();
+    const p2 = pick([10, 20, 25, 30, 40, 50] as const).valueOf();
+    const totaux = [20, 40, 60, 80, 100, 120, 200, 300, 400, 500, 600, 800, 1000].filter((t) => (t * p1 * p2) % 10000 === 0);
+    if (!totaux.length) return proportions();
+    const total = pick(totaux);
     const r = (total * p1 * p2) / 10000;
     return {
       text: `Dans un groupe de ${total} personnes, ${p1} % sont des femmes. Parmi elles, ${p2} % font de la randonnée. Combien de femmes font de la randonnée ?`,
@@ -524,7 +541,8 @@ export function proportions(): AutoQuestion {
     };
   }
   if (cas === 2) {
-    const [p1, p2] = pick([[50, 20], [40, 25], [20, 50], [80, 50], [60, 50], [25, 40]] as const);
+    const p1 = pick([10, 20, 25, 40, 50, 60, 80] as const).valueOf();
+    const p2 = pick([10, 20, 25, 40, 50, 75] as const).valueOf();
     const r = (p1 * p2) / 100;
     return {
       text: `${p1} % des élèves d'un lycée sont externes, et ${p2} % des externes viennent à vélo. Quel pourcentage des élèves du lycée cela représente-t-il ?`,
@@ -533,8 +551,11 @@ export function proportions(): AutoQuestion {
       explanation: `Une proportion d'une proportion : on multiplie.\n$${fr(p1 / 100)} \\times ${fr(p2 / 100)} = ${fr(r / 100)}$, soit ${fr(r)} %.`,
     };
   }
-  const [k, n] = pick([[15, 60], [9, 36], [12, 80], [45, 150], [7, 28], [18, 24], [21, 70]] as const);
-  const r = (k * 100) / n;
+  const n = pick([20, 25, 40, 50, 60, 80, 120, 200] as const).valueOf();
+  const pct = pick([5, 10, 15, 20, 25, 30, 40, 45, 60, 75] as const).valueOf();
+  const k = (n * pct) / 100;
+  if (!Number.isInteger(k) || k === 0) return proportions();
+  const r = pct;
   return {
     text: `Sur ${n} salariés d'une entreprise, ${k} travaillent à temps partiel. Quelle proportion, en %, cela représente-t-il ?`,
     format: "short",

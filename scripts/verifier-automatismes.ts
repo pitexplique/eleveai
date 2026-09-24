@@ -68,6 +68,24 @@ for (const niveau of NIVEAUX_AUTOMATISMES) {
       if (enonces.size < 12) erreurs++;
     });
   }
+  // ⭐ L'UNITÉ QUI COMPTE EST LE THÈME, pas le générateur (Frédéric, 24/09 :
+  // « il est important qu'il y ait dans chaque automatisme des questions en
+  // nombre suffisant »). Un élève coche « Fractions » et enchaîne des séries de
+  // 10 : il faut au moins TROIS séries sans revoir une question.
+  const SEUIL_THEME = 30;
+  for (const theme of niveau.themes) {
+    const vus = new Set<string>();
+    for (let i = 0; i < 4000; i++) {
+      const gen = theme.generateurs[i % theme.generateurs.length];
+      const q = gen();
+      vus.add(q.text + "|" + (q.choices ?? []).slice().sort().join("|") + "|" + JSON.stringify(q.canvas ?? null));
+    }
+    if (vus.size < SEUIL_THEME) {
+      erreurs++;
+      console.log(`⚠️ thème ${theme.id} : ${vus.size} questions distinctes (seuil ${SEUIL_THEME})`);
+    }
+  }
+
   const tailles = new Set(Array.from({ length: 200 }, () => tirerSerie(niveau).length));
   console.log(`  séries tirées : ${[...tailles].join(", ")} questions`);
 }
