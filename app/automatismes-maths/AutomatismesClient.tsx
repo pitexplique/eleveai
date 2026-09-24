@@ -49,6 +49,8 @@ export default function AutomatismesClient() {
   const [valide, setValide] = useState(false);
   const [reste, setReste] = useState(0);
   const bilanRef = useRef<HTMLDivElement>(null);
+  /** Le début des questions : c'est là qu'on emmène l'élève au lancement. */
+  const questionsRef = useRef<HTMLDivElement>(null);
 
   const enCours = serie.length > 0 && !valide;
 
@@ -72,7 +74,36 @@ export default function AutomatismesClient() {
     setCoches({});
     setValide(apercu);
     setReste(niveau.duree * 60);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // ⛔ Était `window.scrollTo({ top: 0 })` : on remontait en haut de la page
+    // au lieu d'arriver sur la question 1 (Frédéric, 24/09). Puis un
+    // `setTimeout(…, 60)` : trop tôt — la série et ses formules n'étaient pas
+    // encore rendues, la page ne bougeait pas (mesuré : défilement resté à 0).
+    // ⭐ On lève un drapeau, et c'est l'effet ci-dessous, APRÈS le rendu de la
+    // série, qui descend.
+    aDefiler.current = true;
+  }
+
+  const aDefiler = useRef(false);
+  useEffect(() => {
+    if (!aDefiler.current || !serie.length) return;
+    aDefiler.current = false;
+    // Un tour plus tard : les formules KaTeX ont pris leur hauteur.
+    // ⚠️ Pas `requestAnimationFrame` : il ne se déclenche pas quand l'onglet
+    // n'est pas affiché (mesuré le 24/09 : aucun appel), un minuteur si.
+    window.setTimeout(() =>
+      questionsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }),
+    0);
+  }, [serie]);
+
+  /** Arrête la série en cours et revient au choix — chrono et réponses à zéro.
+   *  Frédéric, 24/09 : « une fois la série lancée, on ne peut plus changer de
+   *  classe ; il faudrait un bouton qui remet les compteurs à zéro ». */
+  function reinitialiser() {
+    setSerie([]);
+    setReponses({});
+    setCoches({});
+    setValide(false);
+    setReste(0);
   }
 
   function valider() {
@@ -120,12 +151,11 @@ export default function AutomatismesClient() {
                   <button
                     key={c.classe}
                     type="button"
-                    disabled={!pret || enCours}
+                    disabled={!pret}
                     onClick={() => {
                       setClasse(c.classe);
                       setThemes([]);
-                      setSerie([]);
-                      setValide(false);
+                      reinitialiser();
                     }}
                     className={[
                       "rounded-2xl px-5 py-3 text-sm font-black shadow-sm transition",
@@ -158,12 +188,10 @@ export default function AutomatismesClient() {
                     sélection. `aria-pressed` dit l'état à un lecteur d'écran. */}
                 <button
                   type="button"
-                  disabled={enCours}
                   aria-pressed={themes.length === 0}
                   onClick={() => {
                     setThemes([]);
-                    setSerie([]);
-                    setValide(false);
+                    reinitialiser();
                   }}
                   className={[
                     "rounded-2xl px-4 py-2 text-sm font-black shadow-sm transition",
@@ -180,12 +208,10 @@ export default function AutomatismesClient() {
                     <button
                       key={t.id}
                       type="button"
-                      disabled={enCours}
                       aria-pressed={coche}
                       onClick={() => {
                         setThemes((l) => (coche ? l.filter((x) => x !== t.id) : [...l, t.id]));
-                        setSerie([]);
-                        setValide(false);
+                        reinitialiser();
                       }}
                       className={[
                         "rounded-2xl px-4 py-2 text-sm font-black shadow-sm transition",
@@ -240,22 +266,87 @@ export default function AutomatismesClient() {
           ) : null}
         </div>
 
-        {enCours ? (
-          <div className="sticky top-2 z-20 mb-4 flex items-center justify-between rounded-2xl border border-white/70 bg-white/90 px-5 py-3 shadow-lg backdrop-blur-xl">
-            <span className="text-sm font-black text-slate-700">
-              ⏱️ Sans calculatrice
-            </span>
-            <span
-              className={[
-                "font-mono text-2xl font-black tabular-nums",
-                reste <= 60 ? "text-red-600" : "text-slate-900",
-              ].join(" ")}
-              aria-live="off"
+        {/* ⭐ L'HORLOGE, AVEC TI MARGO (Frédéric, 24/09 : « rends plus vivante
+            l'horloge avec Ti Margo »). Une barre qui se vide, une phrase qui
+            change avec le temps, Ti Margo qui s'agite dans la dernière minute.
+            C'est aussi le point d'arrivée du lancement (`questionsRef`) : la
+            page s'arrête ICI, la question 1 juste dessous — « tu envoies la page
+            au-dessus de "sans calculatrice" ». `scroll-mt-24` : l'en-tête du
+            site ne doit pas la cacher. */}
+        {enCours && niveau ? (() => {
+          const total = niveau.duree * 60;
+          const part = Math.max(0, Math.min(1, reste / total));
+          const phrase =
+            reste <= 60 ? "Dernière minute ! Relis tes réponses 👀"
+            : part > 0.9 ? "C'est parti ! De tête, sans calculatrice 💪"
+            : part > 0.55 ? "Tu avances bien, garde le rythme !"
+            : part > 0.45 ? "Mi-temps ! Pas de panique, une question à la fois."
+            : "Plus que quelques minutes, tu y es presque !";
+          return (
+            <div
+              ref={questionsRef}
+              className="sticky top-2 z-20 mb-4 scroll-mt-24 rounded-2xl border border-white/70 bg-white/95 px-4 py-3 shadow-lg backdrop-blur-xl"
             >
-              {mmss(reste)}
-            </span>
-          </div>
-        ) : null}
+              <div className="flex items-center gap-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/cahier-vacances/ti-margo.png"
+                  alt="Ti Margo"
+                  width={52}
+                  height={52}
+                  style={{ width: 52, height: 52 }}
+                  className={["shrink-0 object-contain", reste <= 60 ? "animate-bounce" : "ti-margo-respire"].join(" ")}
+                />
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-black text-slate-800">{phrase}</p>
+                  <div className="mt-1.5 h-2.5 w-full overflow-hidden rounded-full bg-slate-200" aria-hidden="true">
+                    <div
+                      className={[
+                        "h-full rounded-full transition-[width] duration-1000 ease-linear",
+                        reste <= 60 ? "bg-red-500" : part > 0.5 ? "bg-emerald-500" : "bg-amber-400",
+                      ].join(" ")}
+                      style={{ width: `${part * 100}%` }}
+                    />
+                  </div>
+                  <p className="mt-1 text-xs font-semibold text-slate-500">⏱️ Sans calculatrice</p>
+                </div>
+                <span
+                  className={[
+                    "shrink-0 font-mono text-2xl font-black tabular-nums",
+                    reste <= 60 ? "text-red-600" : "text-slate-900",
+                  ].join(" ")}
+                  aria-live="off"
+                >
+                  {mmss(reste)}
+                </span>
+              </div>
+              <div className="mt-2 flex justify-end gap-2">
+                <button
+                  type="button"
+                  onClick={lancer}
+                  className="rounded-xl bg-emerald-600 px-3 py-1.5 text-xs font-black text-white hover:bg-emerald-500"
+                >
+                  🔁 Relancer
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    reinitialiser();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  className="rounded-xl bg-white px-3 py-1.5 text-xs font-black text-slate-700 ring-1 ring-slate-300 hover:bg-slate-50"
+                >
+                  ✖ Arrêter
+                </button>
+              </div>
+              <style>{`
+                @keyframes ti-margo-respire { 0%,100% { transform: translateY(0) rotate(0deg) } 50% { transform: translateY(-3px) rotate(-4deg) } }
+                .ti-margo-respire { animation: ti-margo-respire 2.4s ease-in-out infinite; }
+                @media (prefers-reduced-motion: reduce) { .ti-margo-respire, .animate-bounce { animation: none !important; } }
+              `}</style>
+            </div>
+          );
+        })() : null}
 
         {valide && serie.length > 0 ? (
           <div ref={bilanRef} className="mb-6 rounded-[2rem] border border-white/70 bg-white/85 p-6 shadow-2xl backdrop-blur-xl">
