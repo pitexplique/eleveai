@@ -115,6 +115,8 @@ const ROUTES: RouteConfig[] = [
   { path: "/parcours-francais", priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/parcours-espagnol", priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/parcours-ia",       priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
+  // 24/09/2026 — les automatismes (première partie du DNB), à part du coach.
+  { path: "/automatismes-maths", priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_CORE },
   { path: "/eval-pix-ia",       priority: 0.9,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
 
   // ── KITS DE SURVIE (lycée) ─────────────────────────────────────────────────

@@ -674,6 +674,15 @@ function PanneauEvaluation({ matiere }: { matiere: MatiereAccueil }) {
       )}
       {examensMaths && (
         <>
+          {/* 24/09/2026 — la première partie du DNB et de l'EAM : des séries
+              chronométrées, à part du coach (Frédéric : « on fait comme
+              parcours »). */}
+          <Carte
+            href="/automatismes-maths?from=accueil"
+            titre="Automatismes"
+            texte="Le brevet et l'épreuve anticipée de première : des questions courtes, sans calculatrice, toujours nouvelles."
+            Icone={ClipboardCheck}
+          />
           <Carte
             href="/coach-brevet?from=accueil"
             titre="Brevet"

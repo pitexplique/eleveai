@@ -113,6 +113,91 @@ export const TEXTES: TexteDictee[] = [
       "Un roitelet pour vous est un pesant fardeau.",
     ],
   },
+
+  // ─── LA DICTÉE DE MATHS (24/09/2026) ─────────────────────────────────────────
+  //
+  // Depuis 2026, la maîtrise de la langue vaut 2 points sur 20 à tous les
+  // sujets de maths, « plus particulièrement évaluée dans les réponses aux
+  // questions en gras » au DNB (message de l'IPR). Ce qui s'y écrit, ce sont
+  // les phrases d'une justification : « d'après la réciproque du théorème de
+  // Pythagore », « les droites sont parallèles ». Ces textes les font écrire.
+  // Écrits pour EleveAI : aucun droit à demander. Tout est en MOTS — on ne
+  // dicte pas un symbole.
+  {
+    id: "maths-pythagore",
+    titre: "Maths — Le théorème de Pythagore",
+    auteur: "EleveAI",
+    source: "Texte écrit pour la dictée de maths",
+    niveaux: ["4e", "3e"],
+    pieges:
+      "« hypoténuse » (un h, un y, un accent), « égal » sans e au masculin, et « carrés » au pluriel.",
+    segments: [
+      "Dans un triangle rectangle,",
+      "le carré de la longueur de l'hypoténuse",
+      "est égal à la somme des carrés",
+      "des longueurs des deux autres côtés.",
+    ],
+  },
+  {
+    id: "maths-reciproque",
+    titre: "Maths — Justifier qu'un triangle est rectangle",
+    auteur: "EleveAI",
+    source: "Texte écrit pour la dictée de maths",
+    niveaux: ["3e"],
+    pieges:
+      "« réciproque » et « théorème » avec leurs accents, « d'après » avec l'accent grave, et « égaux » : le pluriel de « égal ».",
+    segments: [
+      "Le plus grand côté est l'hypoténuse.",
+      "Comme les deux résultats sont égaux,",
+      "d'après la réciproque du théorème de Pythagore,",
+      "le triangle est rectangle.",
+    ],
+  },
+  {
+    id: "maths-thales",
+    titre: "Maths — Le théorème de Thalès",
+    auteur: "EleveAI",
+    source: "Texte écrit pour la dictée de maths",
+    niveaux: ["3e"],
+    pieges:
+      "« parallèles » (deux l au milieu, un seul à la fin), « alignés » accordé, et « proportionnelles » : deux n, deux l.",
+    segments: [
+      "Les droites sont parallèles",
+      "et les points sont alignés dans le même ordre.",
+      "D'après le théorème de Thalès,",
+      "les longueurs des côtés des deux triangles sont proportionnelles.",
+    ],
+  },
+  {
+    id: "maths-cercle",
+    titre: "Maths — Le périmètre et l'aire du disque",
+    auteur: "EleveAI",
+    source: "Texte écrit pour la dictée de maths",
+    niveaux: ["5e", "4e", "3e"],
+    pieges:
+      "« périmètre » et « diamètre », et « l'aire » est féminin : elle est « égale ».",
+    segments: [
+      "Le périmètre d'un cercle",
+      "se calcule en multipliant son diamètre par pi.",
+      "L'aire d'un disque est égale",
+      "à pi multiplié par le carré du rayon.",
+    ],
+  },
+  {
+    id: "maths-mediane",
+    titre: "Maths — La médiane d'une série",
+    auteur: "EleveAI",
+    source: "Texte écrit pour la dictée de maths",
+    niveaux: ["4e", "3e"],
+    pieges:
+      "« médiane », « croissant », « valeurs » au pluriel, et « effectif » : deux f.",
+    segments: [
+      "Pour trouver la médiane d'une série,",
+      "on range d'abord les valeurs dans l'ordre croissant.",
+      "La médiane partage la série",
+      "en deux groupes de même effectif.",
+    ],
+  },
 ];
 
 export function textesPourNiveau(niveau: NiveauDictee): TexteDictee[] {
