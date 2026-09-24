@@ -542,6 +542,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Les puissances",
     resume: "Produit, quotient, puissance d une puissance, exposant negatif, et la notation scientifique : reduire sans calculer.",
   },
+  "maths/seconde/geometrie-problemes-plan": {
+    titre: "Problèmes de géométrie plane",
+    resume:
+      "Sinus, cosinus, tangente dans le triangle rectangle, cos2 + sin2 = 1, le projete orthogonal qui donne la distance ET la hauteur, et un maximum d aire qui se lit sans calcul.",
+  },
   "maths/seconde/fonctions-reference-2de": {
     titre: "Les fonctions de référence",
     resume: "Les cinq fonctions par coeur : leur domaine, leurs variations, leurs courbes — et pourquoi moins un n a pas d image par la racine.",
