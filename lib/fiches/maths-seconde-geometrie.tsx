@@ -94,7 +94,11 @@ export const ficheGeometrieSeconde: FicheCoursData = {
   },
 
   figure: {
-    schema: triangle({ AB: "4", BC: "5", CA: "3" }, "A", { A: { x: 0, y: 0 }, B: { x: 4, y: 0 }, C: { x: 0, y: 3 } }),
+    // ⛔ ON NE TOUCHE PAS AUX POINTS : A(0,0) B(4,0) C(4,3), angle droit en B,
+    // c'est la configuration de la banque du coach, et la seule vérifiée au
+    // rendu. Avec A(0,0) B(4,0) C(0,3), le canvas sort VIDE — une marque
+    // d'angle droit dans un coin, et rien d'autre (constaté le 24/09).
+    schema: triangle({ AB: "4", BC: "3", CA: "5" }, "B"),
     legende:
       "⭐ Retenir le mot « CAH SOH TOA » : Cosinus-Adjacent-Hypoténuse, Sinus-Opposé-Hypoténuse, Tangente-Opposé-Adjacent. ⛔ Et se rappeler que l'hypoténuse ne change jamais, alors que « adjacent » et « opposé » S'ÉCHANGENT quand on regarde l'autre angle aigu.",
   },
@@ -103,9 +107,8 @@ export const ficheGeometrieSeconde: FicheCoursData = {
     {
       titre: "Les trois rapports, sur un triangle connu",
       texte:
-        "Dans le triangle $ABC$ rectangle en $A$, avec $AB = 4$, $AC = 3$ et $BC = 5$, on regarde l'angle $\\widehat{B}$. L'hypoténuse est $BC = 5$, l'adjacent est $AB = 4$, l'opposé est $AC = 3$. Donc $\\cos\\widehat{B} = 0{,}8$, $\\sin\\widehat{B} = 0{,}6$ et $\\tan\\widehat{B} = 0{,}75$.",
-      schema: triangle({ AB: "adjacent 4", BC: "hypoténuse 5", CA: "opposé 3" },
-                       "A", { A: { x: 0, y: 0 }, B: { x: 4, y: 0 }, C: { x: 0, y: 3 } }),
+        "Dans le triangle $ABC$ rectangle en $B$, avec $AB = 4$, $BC = 3$ et $AC = 5$, on regarde l'angle $\\widehat{A}$. L'hypoténuse est $AC = 5$, l'adjacent à $\\widehat{A}$ est $AB = 4$, l'opposé est $BC = 3$. Donc $\\cos\\widehat{A} = 0{,}8$, $\\sin\\widehat{A} = 0{,}6$ et $\\tan\\widehat{A} = 0{,}75$.",
+      schema: triangle({ AB: "adjacent 4", BC: "opposé 3", CA: "hypoténuse 5" }, "B"),
     },
     {
       titre: "⭐ $\\cos^2 x + \\sin^2 x = 1$",
