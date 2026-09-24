@@ -31,6 +31,12 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Du calcul seul au problème : reconnaître la proportionnalité, tableau et produit en croix, pourcentages, coefficient multiplicateur, vitesse et débit. Et le piège du chapitre, compté carré par carré : +20 % puis −20 % ne ramène pas au départ. La tablette de 100 carrés, les abonnés perdus, la deuxième démarque, l'aller-retour.",
   },
+  // Le lot de 3e (24/09/2026), dans l'ordre d'affichage du coach.
+  "maths/3e/fraction-rationnel": {
+    titre: "Nombres rationnels : 20 exercices corrigés",
+    resume:
+      "Écrire un nombre sous la forme a/b, passer de la fraction au décimal, comparer des fractions négatives, calculer avec les priorités, et trouver toujours un rationnel entre deux autres. Corrigés étape par étape, avec la droite graduée.",
+  },
   // ⭐ LA PREMIÈRE DE SECONDE (20/09/2026) — le trio de la Une « fiche de paie » :
   // le short, la fiche de cours, la feuille. De vrais chiffres, sourcés en tête
   // du fichier de données (OCDE, URSSAF, INSEE).
