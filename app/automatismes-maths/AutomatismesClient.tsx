@@ -215,6 +215,20 @@ export default function AutomatismesClient() {
             </div>
           ) : null}
 
+          {/* ⭐ 24/09/2026 — le livret PDF de la classe choisie (Frédéric :
+              « inclus un bouton dans automatismes pour télécharger »). Il se
+              génère à l'ouverture : 20 séries + corrigés, ~50 pages A4. */}
+          {niveau && !enCours && !apercu ? (
+            <a
+              href={`/automatismes-maths/livret?classe=${classe}`}
+              target="_blank"
+              rel="noopener"
+              className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-5 py-3 text-sm font-black text-emerald-800 ring-2 ring-emerald-300 hover:bg-emerald-50"
+            >
+              📄 Télécharger le livret {niveau.label} en PDF (20 séries corrigées)
+            </a>
+          ) : null}
+
           {niveau && !enCours ? (
             <button
               type="button"
