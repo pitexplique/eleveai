@@ -59,6 +59,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "droites-du-plan-seconde-20-exercices-corriges.pdf",
   "droites-segments-et-demi-droites-cm2-cours-exercices-corriges.pdf",
   "durees-cm2-cours-exercices-corriges.pdf",
+  "echantillonnage-et-simulation-seconde-20-exercices-corriges.pdf",
   "echelles-cm2-cours-exercices-corriges.pdf",
   "ecouter-les-sons-des-mots-au-cp-2026-2027-cours-exercices-corriges.pdf",
   "ecouter-une-consigne-en-cm1-2026-2027-cours-exercices-corriges.pdf",

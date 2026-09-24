@@ -214,6 +214,10 @@ export const intervalles = (
   max: number,
   ivs: { de?: number; a?: number; deInclus?: boolean; aInclus?: boolean; label?: string; color?: string }[],
   step = 1,
+  // ⭐ Des POINTS (une fréquence observée…) sur la PREMIÈRE droite, celle de
+  // l'intervalle : dedans ou dehors se lit d'un coup d'œil. ⛔ Un « intervalle »
+  // réduit à un point donnait un trait de longueur nulle, invisible (24/09).
+  points: { value: number; label?: string; color?: string }[] = [],
 ) => {
   // ⛔ MESURÉ LE 24/09 : sur UNE droite, deux intervalles qui se chevauchent
   // posent leurs étiquettes l'une sur l'autre (« J » sur « I ∩ J »). On fait
@@ -224,7 +228,7 @@ export const intervalles = (
   return (
     <div className="mx-auto grid w-full max-w-[20rem] gap-0 print:max-w-[14rem]">
       {groupes.map((g, i) => (
-        <CanvasRenderer key={i} figure={{ kind: "number_line", min, max, step, size: { width: 260, height: 80 }, intervalles: g, display: { showPoints: false } }} />
+        <CanvasRenderer key={i} figure={{ kind: "number_line", min, max, step, size: { width: 260, height: 80 }, intervalles: g, points: i === 0 ? points : [], display: { showPoints: i === 0 && points.length > 0, showPointLabels: true } }} />
       ))}
     </div>
   );

@@ -149,6 +149,11 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Du geste seul au problème : univers et événements, loi de probabilité, contraire, réunion et intersection, P(A ∪ B), arbres et tableaux. Un digicode, les mois de naissance d'un groupe d'amis, la roulette du casino, les groupes sanguins. Chaque corrigé a son schéma : dé, roue, urne, tableau ou arbre.",
   },
+  "maths/seconde/echantillonnage-simulation": {
+    titre: "Échantillonnage et simulation : 20 exercices corrigés",
+    resume:
+      "Du geste seul au problème : fluctuation, intervalle p ± 1/√n, loi des grands nombres, simulation en Python, estimer une probabilité. Un sondage à 48 contre 52, les naissances de garçons, π trouvé au hasard, les truites d'un lac comptées par capture-recapture.",
+  },
   "maths/seconde/probabilites-conditionnelles-2de": {
     titre: "Les probabilités conditionnelles : 20 exercices corrigés",
     resume:
