@@ -96,15 +96,40 @@ export default function LivretClient() {
 
       {/* COUVERTURE */}
       <section className="flex min-h-[80vh] flex-col items-center justify-center text-center print:min-h-[250mm]">
-        <p className="text-sm font-black uppercase tracking-widest text-emerald-700">EleveAI · Automatismes</p>
-        <h1 className="mt-4 text-5xl font-black">Automatismes de maths</h1>
+        {/* ⭐ Frédéric, 24/09/2026 : « eleveai.fr avec ma photo et celle de
+            Ti Margo et mon nom ». Même duo que l'en-tête du site, avec le
+            « + » (« c'est une collaboration »), et la signature à l'identique
+            (voir la note « la signature à répandre »). `<img>` et non
+            `next/image` : l'impression en PDF doit les avoir chargées. */}
+        <div className="flex items-center gap-3">
+          <img
+            src="/images/avatar-frederic-visage.webp"
+            alt="Frédéric Lacoste"
+            width={88}
+            height={88}
+            className="rounded-full object-cover ring-4 ring-emerald-200"
+            style={{ width: 88, height: 88 }}
+          />
+          <span className="text-3xl font-black text-emerald-700" aria-hidden="true">+</span>
+          <img
+            src="/cahier-vacances/ti-margo.png"
+            alt="Ti Margo"
+            width={88}
+            height={88}
+            className="object-contain"
+            style={{ width: 88, height: 88 }}
+          />
+        </div>
+        <p className="mt-3 text-sm font-semibold text-slate-700">Frédéric Lacoste, enseignant à La Réunion</p>
+        <p className="mt-6 text-lg font-black tracking-wide text-emerald-700">eleveai.fr</p>
+        <h1 className="mt-2 text-5xl font-black">Automatismes de maths</h1>
         <p className="mt-2 text-3xl font-black text-emerald-800">{niveau.label}</p>
         <p className="mt-6 max-w-xl text-lg font-semibold text-slate-700">
           {NB_SERIES} séries de {niveau.nbQuestions ?? 10} questions, sans calculatrice, corrigées à la fin.
         </p>
         <p className="mt-2 max-w-xl text-base text-slate-600">{niveau.examen}.</p>
         <p className="mt-10 text-sm text-slate-500">
-          Édition {edition} · des séries toujours nouvelles sur eleveai.fr/automatismes-maths
+          Édition {edition} · d&apos;autres séries, toujours nouvelles, sur eleveai.fr/automatismes-maths
         </p>
       </section>
 

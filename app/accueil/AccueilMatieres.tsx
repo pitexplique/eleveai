@@ -132,6 +132,7 @@ import {
 } from "lucide-react";
 import { track } from "@vercel/analytics";
 import BandeauMatiere from "@/components/accueil/BandeauMatiere";
+import DateDuJour from "@/components/accueil/DateDuJour";
 import RangeeDefilante from "@/components/accueil/RangeeDefilante";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
 import {
@@ -818,7 +819,14 @@ function LaUne() {
   return (
     <section className="space-y-3">
       <h2 className="text-sm font-bold uppercase tracking-wide text-slate-500">
-        La leçon du jour · {UNE_COURANTE.jour}
+        {/* ⭐ LA DATE SE CALCULE, ELLE NE SE RETAPE PLUS (24/09/2026).
+            `UNE_COURANTE.jour` reste le REPLI — la valeur du premier rendu, la
+            même côté serveur et côté client, donc aucune erreur d'hydratation.
+            Le navigateur la remplace ensuite par la vraie date du visiteur.
+            ⚠️ Le champ `jour` de une.ts garde donc son rôle d'origine : dire
+            quand la Une a CHANGÉ. C'est l'affichage qui ne le lit plus comme
+            « aujourd'hui ». Voir components/accueil/DateDuJour.tsx. */}
+        La leçon du jour · <DateDuJour repli={UNE_COURANTE.jour} />
       </h2>
       <div className="grid gap-3 lg:grid-cols-3">
         {UNE_COURANTE.diapos.map((d) => (
