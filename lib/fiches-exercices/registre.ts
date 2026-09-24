@@ -149,6 +149,11 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Du geste seul au problème : univers et événements, loi de probabilité, contraire, réunion et intersection, P(A ∪ B), arbres et tableaux. Un digicode, les mois de naissance d'un groupe d'amis, la roulette du casino, les groupes sanguins. Chaque corrigé a son schéma : dé, roue, urne, tableau ou arbre.",
   },
+  "maths/seconde/probabilites-conditionnelles-2de": {
+    titre: "Les probabilités conditionnelles : 20 exercices corrigés",
+    resume:
+      "Du geste seul au problème : tableau croisé, probabilité sachant, arbre pondéré, somme des chemins, et ne pas confondre « B sachant A » et « A sachant B ». Un test de dépistage positif, trois machines et leur contrôle qualité, une application météo, un filtre anti-spam.",
+  },
   "maths/seconde/logique-ensembles": {
     titre: "Ensembles et logique : 20 exercices corrigés",
     resume:
