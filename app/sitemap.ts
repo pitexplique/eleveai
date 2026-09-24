@@ -924,6 +924,15 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-09-20",
     },
   ],
+  "/fiches-cours/maths/seconde/geometrie-problemes-plan": [
+    {
+      id: "vJXmDdHk6_A",
+      title: "Comprendre toute la géométrie plane de seconde en 7 minutes",
+      description:
+        "Sinus, cosinus et tangente dans le triangle rectangle, la relation cos²x + sin²x = 1, le projeté orthogonal qui donne la distance à une droite ET la hauteur d'un triangle, et un maximum d'aire qui se lit sans calcul. Une pente de 12 % ne fait pas 12 degrés (seconde).",
+      ajoutee: "2026-09-24",
+    },
+  ],
   "/fiches-cours/maths/seconde/fonctions-reference-2de": [
     {
       id: "1g53KZ3d_XM",
