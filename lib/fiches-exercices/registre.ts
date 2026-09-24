@@ -87,6 +87,11 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Reconnaître la configuration même en papillon, écrire les quotients dans le bon ordre, calculer une longueur, prouver un parallélisme par la réciproque ou la contraposée, et rédiger comme au brevet. Puis un arbre mesuré par son ombre, une passerelle sans traverser la rivière, la pente de la Streif, la tour Eiffel dans une photo. Chaque corrigé a sa figure à l'échelle.",
   },
+  "maths/3e/trigo-trigonometrie": {
+    titre: "La trigonométrie : cosinus, sinus, tangente : 20 exercices corrigés",
+    resume:
+      "Choisir entre cosinus, sinus et tangente, puis calculer une longueur ou un angle : la tour Eiffel, une échelle, un cerf-volant, la rue la plus pentue du monde, la descente d'un avion. Chaque corrigé a son triangle dessiné à l'échelle.",
+  },
   "maths/3e/sym-transformation": {
     titre: "Transformations et homothétie : 20 exercices corrigés",
     resume:
