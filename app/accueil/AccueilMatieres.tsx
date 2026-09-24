@@ -112,7 +112,7 @@
 // les topics »). Zéro requête, zéro octet de plus : `notions.generated.ts` est
 // déjà dans le paquet du navigateur.
 
-import { useMemo, useRef, useState } from "react";
+import { Fragment, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -142,6 +142,7 @@ import {
   notionsDe,
   RITUELS,
   LIENS_MATIERE,
+  LIEN_APRES_FICHE,
   PARCOURS,
   type ActionId,
   type MatiereAccueil,
@@ -361,9 +362,12 @@ function LigneActions({
 
   return (
     <div className="border-b border-slate-200 bg-slate-50">
+      {/* ⚠️ `max-w-7xl` ici, pas `6xl` : avec « Automatismes » (24/09/2026), la
+          ligne demande 1 184 px et le plafond de 6xl n'en laissait que 1 152 —
+          « Maths Réel » passait sous le bord sur un écran de 1 280. */}
       <RangeeDefilante
         fond="from-slate-50"
-        className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-2 sm:[justify-content:safe_center] sm:px-4"
+        className="mx-auto flex max-w-7xl items-center gap-1 overflow-x-auto px-2 sm:[justify-content:safe_center] sm:px-4"
       >
         <div
           ref={tablist}
@@ -375,9 +379,16 @@ function LigneActions({
           {ACTIONS.map((a) => {
             const Icone = ICONES_ACTION[a.id];
             const ouvert = a.id === actif;
+            // ⚠️ Un LIEN au milieu des onglets (Frédéric, 24/09 : « met
+            // automatisme après fiche cours »). Il navigue, il n'ouvre pas de
+            // panneau : `role="presentation"` sur son enveloppe le sort de la
+            // liste d'onglets pour les lecteurs d'écran, et les flèches du
+            // clavier (`auClavier`) ne passent que par ACTIONS — il ne casse
+            // donc pas la navigation entre onglets.
+            const lien = a.id === "fiche" ? LIEN_APRES_FICHE[matiere.id] : undefined;
             return (
+              <Fragment key={a.id}>
               <button
-                key={a.id}
                 type="button"
                 role="tab"
                 id={`onglet-${a.id}`}
@@ -396,6 +407,21 @@ function LigneActions({
                 <span className="hidden whitespace-nowrap sm:inline">{a.label}</span>
                 <span className="whitespace-nowrap sm:hidden">{a.court}</span>
               </button>
+              {lien ? (
+                <span role="presentation" className="flex shrink-0">
+                  <Link
+                    prefetch={false}
+                    href={`${lien.href}?from=accueil`}
+                    onClick={() => track("accueil_lien", { matiere: matiere.id, lien: lien.label })}
+                    className="my-1.5 flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-teal-700 sm:px-4"
+                  >
+                    <Zap className="h-4 w-4" aria-hidden="true" />
+                    <span className="hidden whitespace-nowrap sm:inline">{lien.label}</span>
+                    <span className="whitespace-nowrap sm:hidden">{lien.court}</span>
+                  </Link>
+                </span>
+              ) : null}
+              </Fragment>
             );
           })}
         </div>

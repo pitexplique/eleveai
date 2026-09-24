@@ -264,10 +264,20 @@ export const PARCOURS: Partial<Record<MatiereId, string>> = {
    qu'une seule carte serait un panneau vide avec un bouton dedans ; ces deux-là
    sont des pages entières, on y va.
    ⛔ Propres aux maths : /calcul-rapide et /maths-974 n'existent pas ailleurs. */
+/** Un lien glissé ENTRE les onglets, juste après « Fiche de cours ».
+ *  Frédéric, 24/09/2026 : « met automatisme après fiche cours ». */
+export const LIEN_APRES_FICHE: Partial<
+  Record<MatiereId, { label: string; court: string; href: string }>
+> = {
+  maths: { label: "Automatismes", court: "Auto", href: "/automatismes-maths" },
+};
+
 export const LIENS_MATIERE: Partial<
   Record<MatiereId, { label: string; court: string; href: string }[]>
 > = {
   maths: [
+    // ⚠️ « Automatismes » n'est PAS ici : Frédéric le veut juste après
+    // « Fiche de cours » (24/09/2026). Voir LIEN_APRES_FICHE.
     { label: "Calcul rapide", court: "Calcul", href: "/calcul-rapide" },
     // Le titre exact de la page est « Maths Réel · 974 ».
     { label: "Maths Réel", court: "Réel", href: "/maths-974" },
