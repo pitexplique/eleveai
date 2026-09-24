@@ -81,7 +81,7 @@ function coefX(a: number, lettre = "x"): string {
 
 /* ═══════════════ FRACTIONS ═══════════════ */
 
-function fractionsCalcul(): AutoQuestion {
+export function fractionsCalcul(): AutoQuestion {
   for (;;) {
     const x = frac(entre(1, 9), pick([2, 3, 4, 5, 6] as const));
     const y = frac(entre(1, 7), pick([2, 3, 4, 5] as const));
@@ -116,7 +116,7 @@ function fractionsCalcul(): AutoQuestion {
   }
 }
 
-function fractionDeFraction(): AutoQuestion {
+export function fractionDeFraction(): AutoQuestion {
   // Contextes et fractions se tirent À PART : 6 × 36 combinaisons.
   const ctx = pick([
     { qui: "des adhérents d'un club font du sport collectif", sous: "d'entre eux jouent au football" },
@@ -141,7 +141,7 @@ function fractionDeFraction(): AutoQuestion {
 
 /* ═══════════════ PUISSANCES ET ÉCRITURE SCIENTIFIQUE ═══════════════ */
 
-function puissances(): AutoQuestion {
+export function puissances(): AutoQuestion {
   const cas = entre(1, 3);
   if (cas === 1) {
     const b = pick([2, 3, 5, 10] as const).valueOf();
@@ -174,7 +174,7 @@ function puissances(): AutoQuestion {
   };
 }
 
-function ecritureScientifique(): AutoQuestion {
+export function ecritureScientifique(): AutoQuestion {
   if (Math.random() < 0.5) {
     // B = (a·10^p × b·10^q) / (c·10^r), de tête.
     const [a, b, c] = pick([[2, 9, 3], [4, 3, 6], [6, 5, 3], [3, 8, 4], [5, 4, 2], [2, 6, 4], [8, 3, 6]] as const);
@@ -203,7 +203,7 @@ function ecritureScientifique(): AutoQuestion {
 
 /* ═══════════════ RACINES CARRÉES ═══════════════ */
 
-function racines(): AutoQuestion {
+export function racines(): AutoQuestion {
   if (Math.random() < 0.5) {
     const [a, b, r] = pick([[2, 8, 4], [3, 12, 6], [5, 20, 10], [2, 18, 6], [3, 27, 9], [2, 32, 8], [6, 24, 12], [5, 45, 15]] as const);
     return {
@@ -224,7 +224,7 @@ function racines(): AutoQuestion {
 
 /* ═══════════════ CONVERSIONS D'UNITÉS ═══════════════ */
 
-function conversions(): AutoQuestion {
+export function conversions(): AutoQuestion {
   const cas = pick([
     () => { const v = pick([36, 72, 90, 108, 18, 54] as const).valueOf(); return { t: `Convertir ${v} km/h en m/s.`, r: v / 3.6, e: `1 km/h = 1 000 m en 3 600 s : on divise par 3,6.\n$${v} \\div 3,6 = ${fr(v / 3.6)}$ m/s.` }; },
     () => { const v = pick([5, 10, 15, 20, 25] as const).valueOf(); return { t: `Convertir ${v} m/s en km/h.`, r: v * 3.6, e: `On multiplie par 3,6 (3 600 s dans une heure, 1 000 m dans un km).\n$${v} \\times 3,6 = ${fr(v * 3.6)}$ km/h.` }; },
@@ -240,7 +240,7 @@ function conversions(): AutoQuestion {
 
 /* ═══════════════ DÉVELOPPER, FACTORISER ═══════════════ */
 
-function developperFactoriser(): AutoQuestion {
+export function developperFactoriser(): AutoQuestion {
   const cas = entre(1, 4);
   if (cas === 1) {
     const a = entre(1, 4), b = nonNul(-7, 7);
@@ -281,7 +281,7 @@ function developperFactoriser(): AutoQuestion {
 
 /* ═══════════════ ÉQUATIONS ═══════════════ */
 
-function equations(): AutoQuestion {
+export function equations(): AutoQuestion {
   const cas = entre(1, 3);
   if (cas === 1) {
     const x = entre(-6, 8);
@@ -328,7 +328,7 @@ function equations(): AutoQuestion {
 
 /* ═══════════════ INÉQUATIONS ET SIGNES ═══════════════ */
 
-function inequations(): AutoQuestion {
+export function inequations(): AutoQuestion {
   if (Math.random() < 0.6) {
     const a = nonNul(-5, 5), s = entre(-6, 6);
     const b = -a * s;
@@ -369,7 +369,7 @@ function inequations(): AutoQuestion {
 
 /* ═══════════════ FONCTIONS : GÉNÉRALITÉS ═══════════════ */
 
-function fonctions(): AutoQuestion {
+export function fonctions(): AutoQuestion {
   const cas = entre(1, 3);
   if (cas === 1) {
     const a = nonNul(-3, 3), b = entre(-5, 5), c = entre(-6, 6), x = nonNul(-3, 3);
@@ -436,7 +436,7 @@ function fonctions(): AutoQuestion {
 
 /* ═══════════════ FONCTIONS AFFINES, DROITES ═══════════════ */
 
-function affines(): AutoQuestion {
+export function affines(): AutoQuestion {
   const cas = entre(1, 3);
   if (cas === 1) {
     const m = pick([-3, -2, -1, 2, 3, 0.5, -0.5] as const).valueOf();
@@ -488,7 +488,7 @@ function affines(): AutoQuestion {
   };
 }
 
-function droites(): AutoQuestion {
+export function droites(): AutoQuestion {
   if (Math.random() < 0.5) {
     const m = nonNul(-4, 4), p = entre(-5, 5), x = entre(-3, 3);
     const vrai = Math.random() < 0.5;
@@ -511,7 +511,7 @@ function droites(): AutoQuestion {
 
 /* ═══════════════ POURCENTAGES ET PROPORTIONS ═══════════════ */
 
-function proportions(): AutoQuestion {
+export function proportions(): AutoQuestion {
   const cas = entre(1, 3);
   if (cas === 1) {
     const [total, p1, p2] = pick([[30, 40, 25], [200, 50, 30], [80, 25, 50], [400, 25, 10], [60, 50, 20], [500, 20, 40]] as const);
@@ -545,7 +545,7 @@ function proportions(): AutoQuestion {
 
 /* ═══════════════ TAUX D'ÉVOLUTION ═══════════════ */
 
-function evolutions(): AutoQuestion {
+export function evolutions(): AutoQuestion {
   const cas = entre(1, 4);
   if (cas === 1) {
     const t = pick([8, 3, 15, 25, 40, 2, 12] as const).valueOf();
@@ -591,7 +591,7 @@ function evolutions(): AutoQuestion {
 
 /* ═══════════════ PROBABILITÉS ═══════════════ */
 
-function probabilites(): AutoQuestion {
+export function probabilites(): AutoQuestion {
   const cas = entre(1, 3);
   if (cas === 1) {
     const pA = pick([0.4, 0.3, 0.6, 0.2, 0.5] as const).valueOf();
@@ -654,7 +654,7 @@ function probabilites(): AutoQuestion {
 
 /* ═══════════════ STATISTIQUES ═══════════════ */
 
-function statistiques(): AutoQuestion {
+export function statistiques(): AutoQuestion {
   const cas = entre(1, 3);
   if (cas === 1) {
     const n1 = entre(8, 14), c1 = pick([2, 3] as const).valueOf(), m = n1 + pick([1, 2] as const);

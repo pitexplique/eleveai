@@ -7,12 +7,13 @@
 import { answersMatch } from "@/lib/answerMatch";
 import { automatismes3e } from "./3e";
 import { automatismesPremiere } from "./premiere";
+import { automatismesSeconde } from "./seconde";
 import type { AutoNiveau, AutoQuestionServie } from "./types";
 
 export type { AutoNiveau, AutoQuestion, AutoQuestionServie, AutoTheme } from "./types";
 
 /** Les niveaux ÉCRITS. Les autres s'affichent « bientôt » sur la page. */
-export const NIVEAUX_AUTOMATISMES: AutoNiveau[] = [automatismes3e, automatismesPremiere];
+export const NIVEAUX_AUTOMATISMES: AutoNiveau[] = [automatismes3e, automatismesSeconde, automatismesPremiere];
 
 /** L'ordre d'affichage des classes sur la page, écrites ou non. */
 export const CLASSES_AUTOMATISMES: { classe: string; label: string }[] = [
