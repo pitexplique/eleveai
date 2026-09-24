@@ -47,8 +47,10 @@
 //      (components/Header.tsx), au centre, et c'est la MÊME recherche suggérée
 //      (lib/matrice/suggestions.ts). Ce qui se perd, c'est l'ADAPTATION du texte
 //      à qui lit : « Ta matière » / « La matière », le tutoiement selon le
-//      profil. Les quatre audiences n'ont plus ici que quatre portes (voir
-//      `AUDIENCES` plus bas), pas un mode de lecture ;
+//      profil. Les quatre audiences n'ont plus ici que quatre portes — et
+//      depuis le 24/09 elles sont dans le PIED de page (voir `PIED` plus bas),
+//      plus dans une rangée en haut ; ce sont des portes, pas un mode de
+//      lecture ;
 //   3. la BANDE « LA UNE DE LA SEMAINE » (components/accueil/UneDeLaSemaine.tsx)
 //      ne s'ouvre plus d'elle-même : son contenu est l'onglet « Leçon du jour »,
 //      donc à UN CLIC au lieu de zéro. ⚠️ app/sitemap.ts déclare les shorts de
@@ -102,7 +104,6 @@
 //   `accueil_action`   {matiere, action}  quel onglet de la seconde ligne
 //   `accueil_classe`   {matiere, classe}  LE geste qui entre dans le coach
 //   `accueil_recherche`{rang, niveau}     le champ de l'en-tête, et son tri
-//   `accueil_audience` {audience}         élève / parent / prof / direction
 //   `accueil_lien`     {matiere, lien}    calcul rapide, maths réel
 // ⚠️ Ils répondent à « QUOI », jamais à « combien entrent dans le coach » :
 // cette question-là se lit en base, et seulement là.
@@ -175,58 +176,27 @@ const ICONES_ACTION: Record<ActionId, typeof Calculator> = {
   lecon: CalendarDays,
 };
 
-/* ═══ LES QUATRE AUDIENCES ════════════════════════════════════════════════
-   Frédéric, 23/09 : « au fait il n'y a plus élève prof parents etc. ».
-   C'est vrai, et c'est la vraie perte de cette maquette : la matrice d'entrée
-   posait la question « Qui es-tu ? » en grand, au milieu de l'écran.
+/* ═══ LES QUATRE AUDIENCES — DANS LE PIED, PLUS EN HAUT ══════════════
+   Frédéric, 24/09 : « cette ligne je la vois jamais et elle me sert à rien »,
+   puis « garde-la dans le footer ».
 
-   ⚠️ CE N'EST PAS LE MÊME OBJET, ET IL FAUT LE DIRE. Dans la matrice, cliquer
-   « Parent » CHANGEAIT la page : le tutoiement, les ressources proposées, la
-   colonne de gauche. Ici, ce sont quatre PORTES vers les quatre espaces qui
-   existent déjà. On y gagne une page qui s'ouvre sur du contenu ; on y perd
-   l'adaptation du texte à qui lit. Si l'adaptation doit revenir, elle revient
-   ici — un menu qui mémorise le profil, comme `eleveai.ia.profil` le fait déjà.
+   ⚠️ L'ARGUMENT QUI DÉCIDE N'EST PAS « je ne la vois jamais » : c'est celui de
+   l'auteur, qui connaît son site par cœur, pas celui du visiteur. C'est la
+   MESURE qui tranche. La rangée coûtait 32 px, en haut d'un écran qui en
+   dépensait déjà 260 avant le premier contenu — 39 % de la hauteur à 375 px.
+   Et elle était la seule des quatre rangées à ne rien servir à qui vient
+   travailler : les trois autres portent la matière, l'action et la recherche.
 
-   ⭐ Pourquoi en HAUT À DROITE et en petit : chez IXL, « Sign in » et
-   « Membership » tiennent ce coin, et les portes d'audience (« For teachers »,
-   « For parents ») sont dans le menu, jamais au milieu du contenu. Un élève qui
-   arrive n'a pas à déclarer qui il est avant de voir une notion. */
-const AUDIENCES = [
-  { label: "Élève", href: "/espace-eleves" },
-  { label: "Parent", href: "/parents" },
-  { label: "Enseignant", href: "/espace-profs" },
-  { label: "Chef d'établissement", href: "/direction" },
-];
+   ⛔ CE QU'IL FALLAIT VÉRIFIER AVANT DE LA RETIRER, ET CE N'ÉTAIT PAS ACQUIS :
+   les quatre portes n'existaient NULLE PART ailleurs. Le menu de l'en-tête n'en
+   porte aucune ; le pied commun (components/Footer.tsx) n'a que /espace-eleves
+   et /espace-profs. Retirer la rangée sans rien faire d'autre aurait rendu
+   /parents et /direction inatteignables depuis l'accueil.
+   -> Les quatre sont donc dans `PIED`, plus bas. C'est aussi ce que fait IXL :
+   ses portes d'audience vivent dans le menu et le pied, jamais dans le contenu.
 
-function LigneAudiences() {
-  return (
-    <div className="border-b border-slate-200 bg-white">
-      {/* ⚠️ `justify-start` SOUS `sm`, ET C'EST UN BOGUE CONNU DE FLEXBOX :
-          dans un conteneur qui défile, `justify-end` fait déborder le contenu
-          PAR LA GAUCHE, hors d'atteinte du défilement. Mesuré à 375 px, « Je »
-          était coupé et on ne pouvait pas le ramener. */}
-      <RangeeDefilante
-        role="navigation"
-        aria-label="Espaces par profil"
-        fond="from-white"
-        className="mx-auto flex max-w-6xl items-center justify-start gap-1 overflow-x-auto px-3 py-1 sm:[justify-content:safe_flex-end] sm:px-4"
-      >
-        <span className="shrink-0 text-xs font-semibold text-slate-500">Je suis :</span>
-        {AUDIENCES.map((a) => (
-          <Link
-            prefetch={false}
-            key={a.href}
-            href={`${a.href}?from=accueil`}
-            onClick={() => track("accueil_audience", { audience: a.label })}
-            className="shrink-0 whitespace-nowrap rounded-full px-2 py-1 text-xs font-semibold text-slate-600 underline-offset-2 transition hover:bg-slate-100 hover:text-teal-700 hover:underline"
-          >
-            {a.label}
-          </Link>
-        ))}
-      </RangeeDefilante>
-    </div>
-  );
-}
+   ⚠️ L'événement `accueil_audience` disparaît avec la rangée : un lien de pied
+   de page se mesure comme les autres, par `?from=accueil` dans `pages_vues`. */
 
 /* ═══ LA LIGNE DES MATIÈRES ═══════════════════════════════════════════════
    L'icône au-dessus du mot, le soulignement sous celle qui est ouverte : c'est
@@ -884,8 +854,14 @@ function LaUne() {
 
 const PIED = [
   { label: "Comment ça marche", href: "/pourquoi-eleveai" },
+  // ⭐ LES QUATRE PORTES D'AUDIENCE (24/09/2026), descendues de la rangée du
+  // haut. ⛔ NE PAS EN RETIRER : ce pied est le SEUL endroit du site d'où
+  // /parents et /direction sont atteignables — ni le menu de l'en-tête ni le
+  // pied commun ne les portent.
+  { label: "Élèves", href: "/espace-eleves" },
   { label: "Enseignants", href: "/espace-profs" },
   { label: "Parents", href: "/parents" },
+  { label: "Chef d'établissement", href: "/direction" },
   { label: "Fiches de cours", href: "/fiches-cours" },
   { label: "Toutes les ressources", href: "/explorer" },
   { label: "À propos", href: "/qui-sommes-nous" },
@@ -911,7 +887,6 @@ export default function AccueilMatieres() {
         <RechercheEntete variante="page" />
       </div>
 
-      <LigneAudiences />
       <LigneMatieres
         actif={matiereId}
         choisir={(m) => {
