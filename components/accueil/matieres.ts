@@ -305,18 +305,34 @@ export const PARCOURS: Partial<Record<MatiereId, string>> = {
    ⛔ Propres aux maths : /calcul-rapide et /maths-974 n'existent pas ailleurs. */
 /** Un lien glissé ENTRE les onglets, juste après « Fiche de cours ».
  *  Frédéric, 24/09/2026 : « met automatisme après fiche cours ». */
-export const LIEN_APRES_FICHE: Partial<
-  Record<MatiereId, { label: string; court: string; href: string }>
+/* ── UN LIEN GLISSÉ DANS LA LIGNE DES ACTIONS, À UNE PLACE QUI SE DÉCLARE ──
+   ⚠️ LA PLACE A CHANGÉ DEUX FOIS LE MÊME JOUR (24/09/2026) : d'abord « met
+   automatisme après fiche cours », puis « il faut changer l'ordre : Coach,
+   automatisme… sur la seconde ligne ». La première version codait « après la
+   fiche » EN DUR dans le JSX ; le champ `apres` le dit maintenant en un mot,
+   et le prochain changement d'avis ne coûtera plus une relecture du rendu.
+
+   ⛔ C'est un LIEN, pas un onglet : il quitte la page. Il reste donc hors du
+   `tablist` (voir LigneActions), et les flèches du clavier ne le traversent
+   pas — sinon elles annonceraient un onglet qui n'ouvre aucun panneau. */
+export const LIEN_DANS_ACTIONS: Partial<
+  Record<MatiereId, { apres: ActionId; label: string; court: string; href: string }>
 > = {
-  maths: { label: "Automatismes", court: "Auto", href: "/automatismes-maths" },
+  maths: {
+    apres: "coach",
+    label: "Automatismes",
+    court: "Auto",
+    href: "/automatismes-maths",
+  },
 };
 
 export const LIENS_MATIERE: Partial<
   Record<MatiereId, { label: string; court: string; href: string }[]>
 > = {
   maths: [
-    // ⚠️ « Automatismes » n'est PAS ici : Frédéric le veut juste après
-    // « Fiche de cours » (24/09/2026). Voir LIEN_APRES_FICHE.
+    // ⚠️ « Automatismes » n'est PAS ici, et ce n'est pas un oubli : ces deux
+    // liens-ci ferment la ligne, derrière un filet ; lui se glisse AU MILIEU
+    // des onglets, juste après « Coach ». Voir LIEN_DANS_ACTIONS.
     { label: "Calcul rapide", court: "Calcul", href: "/calcul-rapide" },
     // Le titre exact de la page est « Maths Réel · 974 ».
     { label: "Maths Réel", court: "Réel", href: "/maths-974" },

@@ -145,7 +145,7 @@ import {
   MATIERE_DE_LA_UNE,
   RITUELS,
   LIENS_MATIERE,
-  LIEN_APRES_FICHE,
+  LIEN_DANS_ACTIONS,
   PARCOURS,
   type ActionId,
   type MatiereAccueil,
@@ -364,7 +364,12 @@ function LigneActions({
             // liste d'onglets pour les lecteurs d'écran, et les flèches du
             // clavier (`auClavier`) ne passent que par `actions` — il ne casse
             // donc pas la navigation entre onglets.
-            const lien = a.id === "fiche" ? LIEN_APRES_FICHE[matiere.id] : undefined;
+            // ⭐ LA PLACE DU LIEN SE LIT DANS LA DONNÉE, plus dans ce JSX : le
+            // champ `apres` dit après quel onglet il se glisse. Frédéric a
+            // changé d'avis deux fois le 24/09 ; la seconde fois n'a coûté
+            // qu'un mot dans matieres.ts.
+            const glisse = LIEN_DANS_ACTIONS[matiere.id];
+            const lien = glisse?.apres === a.id ? glisse : undefined;
             return (
               <Fragment key={a.id}>
               <button
