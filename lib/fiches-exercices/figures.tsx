@@ -340,10 +340,18 @@ export const boite = (
 );
 
 /** Diagramme en bâtons, en barres ou circulaire (canvas `stat_graph` du coach).
- *  ⛔ Texte NU dans `label`. Le recalcul relit `{ label, value }`. */
+ *  ⛔ Texte NU dans `label`. Le recalcul relit `{ label, value }`.
+ *  ⛔ MESURÉ LE 25/09 À 375 PX : le viewBox fait 300 de large pour un dessin
+ *  rendu à ~233 px ; les étiquettes (écrites en 12) tombaient à 9,3 px. On ne
+ *  rétrécit PAS le viewBox : les étiquettes longues (« Tous différents »,
+ *  « Pointe en l'air ») et les douze mois s'y chevaucheraient. On fait comme
+ *  `arbre()` : une largeur minimale (19rem : dessin ≥ 286 px, étiquettes
+ *  ≥ 11,4 px) dans un conteneur qui défile sur téléphone, pas sur papier. */
 export const diagramme = (graphType: "barres" | "batons" | "camembert", data: { label: string; value: number }[], surligne?: number) => (
-  <div className="mx-auto w-full max-w-[20rem] print:max-w-[14rem]">
-    <CanvasRenderer figure={{ kind: "stat_graph", graphType, data, size: { width: 300, height: 220 }, display: { showValues: true, showLabels: true, highlightIndex: surligne } }} />
+  <div className={`${DEFILE} max-w-[20rem] print:max-w-[14rem]`}>
+    <div className="min-w-[19rem] print:min-w-0">
+      <CanvasRenderer figure={{ kind: "stat_graph", graphType, data, size: { width: 300, height: 220 }, display: { showValues: true, showLabels: true, highlightIndex: surligne } }} />
+    </div>
   </div>
 );
 
