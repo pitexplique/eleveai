@@ -367,10 +367,37 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Écrire les trois rapports, calculer une longueur, remplir le tableau de proportionnalité, prouver un parallélisme par la réciproque, et des problèmes réels : une tente, le service au tennis, la montée des eaux, l'éclipse. Chaque figure dessinée à l'échelle.",
   },
+  "maths/4e/stat-statistique": {
+    titre: "Moyenne, médiane, étendue : 20 exercices corrigés",
+    resume:
+      "Moyenne simple et pondérée (avec des effectifs, avec des nombres négatifs), médiane en rangeant d'abord (effectif pair ou impair, effectifs cumulés), étendue, valeur manquante, moyenne de deux classes, choisir entre moyenne et médiane. Des ruches, des maisons, le covoiturage, des panneaux solaires, des cigognes, les huit planètes. La série rangée et les diagrammes dessinés dans chaque corrigé.",
+  },
+  "maths/4e/aire-perimetre": {
+    titre: "Périmètres : 20 exercices corrigés",
+    resume:
+      "Rectangle, carré, triangle, remonter à un côté, unités, figures composées sans les côtés cachés, Pythagore pour le côté manquant — le terrain de football, le court de tennis, le flocon de von Koch, la clôture d'un pré. Chaque figure dessinée et cotée.",
+  },
+  "maths/4e/aire-surface": {
+    titre: "Les aires : 20 exercices corrigés",
+    resume:
+      "Compter des carreaux sans compter le tour, la vraie hauteur d'un triangle et d'un parallélogramme, remonter de l'aire à un côté, découper une figure composée. Un terrain de basket, un toit sous la pluie, un parking en épi, un champ à partager. Chaque figure dessinée et découpée.",
+  },
   "maths/4e/triangle-figure": {
     titre: "Le triangle pour démontrer : 20 exercices corrigés",
     resume:
       "Somme des angles, inégalité triangulaire, hauteur, médiatrice et médiane, les trois cas d'égalité, triangles semblables, protocole de construction. Problèmes : la largeur d'une rivière, l'ombre de l'obélisque, une ferme de charpente, une course d'orientation. Chaque triangle dessiné à l'échelle.",
+  },
+  // ⛔ En 4e, AUCUNE formule d'identité (Frédéric, 25/09 : « (x+2)² =
+  // (x+2)(x+2) puis on distribue ») : les trois identités sont un objectif de 3e.
+  "maths/4e/litteral-identite-remarquable": {
+    titre: "Développer un carré : 20 exercices corrigés",
+    resume:
+      "Écrire un carré comme un produit, faire les quatre produits, réduire : voir pourquoi les termes du milieu s'ajoutent ou s'annulent, sans formule à apprendre. Le tapis de judo, le jeu de go, la réserve qui s'agrandit de 10 %. Le carré découpé en quatre morceaux dessiné dans les corrigés.",
+  },
+  "maths/4e/litteral-factorisation": {
+    titre: "La factorisation : 20 exercices corrigés",
+    resume:
+      "Le plus grand facteur commun, factoriser par un nombre, une lettre ou un nombre négatif, le « 1 » caché, et vérifier en développant — le terrain de handball, le potager, la forêt, l'étang. Le rectangle découpé dessiné dans les corrigés.",
   },
   "maths/4e/litteral-distributivite": {
     titre: "La distributivité : 20 exercices corrigés",
