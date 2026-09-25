@@ -367,6 +367,26 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Écrire les trois rapports, calculer une longueur, remplir le tableau de proportionnalité, prouver un parallélisme par la réciproque, et des problèmes réels : une tente, le service au tennis, la montée des eaux, l'éclipse. Chaque figure dessinée à l'échelle.",
   },
+  "maths/4e/quadrilatere-parallelogramme": {
+    titre: "Le parallélogramme : 20 exercices corrigés",
+    resume:
+      "Côtés, angles et diagonales, démontrer qu'un quadrilatère est un parallélogramme, rectangle, losange, carré, aire base × hauteur. Une lampe d'architecte, un parking en épi, le « losange » du baseball, le drapeau du Brésil. Chaque figure dessinée à l'échelle.",
+  },
+  "maths/4e/grandeur-composee": {
+    titre: "Grandeurs composées et unités : 20 exercices corrigés",
+    resume:
+      "Grandeur produit (kWh, volume d'une douche) et grandeur quotient (vitesse, prix au kilo, masse volumique), lire et écrire une unité composée, convertir longueurs, aires et m/s en km/h, contrôler un résultat par son unité. La barge rousse qui vole onze jours sans se poser, le Rhône et nos robinets, le corps humain à 100 W, le record de l'heure. Un schéma dans chaque corrigé.",
+  },
+  "maths/4e/proba-experience": {
+    titre: "Les probabilités : 20 exercices corrigés",
+    resume:
+      "Issues et événements, équiprobabilité, probabilité en fraction, décimal et pourcentage, événement contraire, comparer deux chances — les océans de la Terre, les espèces menacées, la Coupe du monde 2026. Urnes, roues et échelle des probabilités dessinées.",
+  },
+  "maths/4e/sym-transformation": {
+    titre: "Les transformations : 20 exercices corrigés",
+    resume:
+      "Symétrie axiale (axe oblique compris), symétrie centrale, translation, rotation, puis ce qu'elles conservent pour justifier et calculer : Tetris, le cavalier des échecs, un cerf-volant, un terrain de handball, la grande roue, un flocon. Chaque image construite sur quadrillage.",
+  },
   "maths/4e/stat-statistique": {
     titre: "Moyenne, médiane, étendue : 20 exercices corrigés",
     resume:
