@@ -275,6 +275,108 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Du geste seul au problème : affectation, types, conditions, boucles for et while, fonctions, simulation. Chaque corrigé montre la trace du programme, tour après tour. Un placement à 4 %, le CO₂ de l'atmosphère, un dé lancé dix mille fois, la conjecture de Syracuse, la racine de 2 pas à pas.",
   },
+  // ⭐ LA 4e (25/09/2026) — Frédéric : « on va faire toutes les fiches
+  // exercices de 4eme, normalement le coach est robuste ». Dans l'ordre du coach.
+  "maths/4e/algo-programmation": {
+    titre: "Algorithmique et programmation : 20 exercices corrigés",
+    resume:
+      "Suivre un programme Scratch, variables, conditions vraies ou fausses, si… alors… sinon, boucles et le lutin qui trace. Problèmes : le comptage des hirondelles, la monnaie rendue, le pass ou le ticket, l'escalier du lutin. Trace des variables dans chaque corrigé.",
+  },
+  "maths/4e/relatif-operation": {
+    titre: "Nombres relatifs : 20 exercices corrigés",
+    resume:
+      "Additionner et soustraire des relatifs, multiplier et diviser avec la règle des signes, compter les facteurs négatifs, calculer avec parenthèses, priorités et trait de fraction. Problèmes : de la mer Morte à l'Everest, l'air à 11 km d'altitude, les records de froid et de chaud, la carte de golf. Corrigés étape par étape, avec la droite graduée.",
+  },
+  "maths/4e/fraction-nombre": {
+    titre: "Fractions et nombres rationnels : 20 exercices corrigés",
+    resume:
+      "Fractions égales, simplifier jusqu'à l'irréductible, passer de la fraction au décimal et retour, reconnaître un nombre rationnel, comparer et ranger des fractions, négatifs compris. Problèmes : les lancers francs, l'échappée du Tour, les braquets du vélo, qui vient le plus à vélo ? Un dessin dans chaque corrigé.",
+  },
+  "maths/4e/fraction-calcul": {
+    titre: "Calculer avec les fractions : 20 exercices corrigés",
+    resume:
+      "Additionner et soustraire avec des nombres négatifs, multiplier, prendre une fraction d'une quantité, l'opposé et l'inverse sans les confondre, diviser par une fraction, et les priorités. Problèmes : la batterie du vélo, l'eau douce de la Terre, un programme de calcul, la citerne à deux pompes. Un schéma dans chaque corrigé.",
+  },
+  "maths/4e/puissance-ecriture": {
+    titre: "Puissances et notation scientifique : 20 exercices corrigés",
+    resume:
+      "Écrire et calculer une puissance, (−3)⁴ contre −3⁴, l'exposant négatif qui donne un inverse, les puissances de 10, la notation scientifique, comparer et ranger, calculer en écrivant les puissances en clair — et pourquoi (2 + 3)² n'est pas 2² + 3². Problèmes : un parc éolien, une piscine olympique en gouttes d'eau, le poids des animaux, le tableau de Roland-Garros.",
+  },
+  "maths/4e/reperage": {
+    titre: "Se repérer sur une droite, dans le plan, sur la Terre : 20 exercices corrigés",
+    resume:
+      "Lire et placer une abscisse, même fractionnaire, lire et placer un point dans un repère (l'axe des ordonnées monte), symétriques et milieu, trois coordonnées dans un pavé, latitude et longitude — une course d'orientation, les records de température de la planète, le Rubik's Cube, les toits des continents.",
+  },
+  "maths/4e/divisibilite": {
+    titre: "Multiples, diviseurs et division euclidienne : 20 exercices corrigés",
+    resume:
+      "Multiples et diviseurs, critères par 2, 3, 5, 9 et 10, division euclidienne posée, diviseurs par paires — puis le calendrier, les cars d'une sortie, deux coureurs sur une piste, les cigales de 13 ans, la chaîne d'un vélo, des panneaux solaires et le panier d'œufs d'Ibn al-Haytham.",
+  },
+  "maths/4e/nombre-premier": {
+    titre: "Nombres premiers et décomposition : 20 exercices corrigés",
+    resume:
+      "La liste jusqu'à 30, décider jusqu'à 100 sans tout essayer, décomposer avec une échelle ou un arbre, simplifier une fraction, compter les diviseurs. Problèmes : les cigales à cycle premier, la photo du Tour de France, les vitesses du vélo, le cadenas des sites Internet.",
+  },
+  "maths/4e/ordre-grandeur": {
+    titre: "Ordres de grandeur et préfixes : 20 exercices corrigés",
+    resume:
+      "Nano, micro, milli, kilo, méga, giga : convertir avec un préfixe, donner l'ordre de grandeur d'un objet ou d'un nombre, estimer un produit ou un quotient, juger un résultat annoncé et retrouver le facteur perdu. Problèmes : le système solaire dans la cour, un fil d'une nanoseconde, les arbres de la Terre, les gouttes d'un bassin olympique. Chaque grandeur placée sur une échelle des puissances de dix.",
+  },
+  "maths/4e/prop-proportionnalite": {
+    titre: "Proportionnalité : 20 exercices corrigés",
+    resume:
+      "Reconnaître une situation de proportionnalité dans un tableau ou sur un graphique, compléter un tableau, le coefficient et le retour à l'unité, la quatrième proportionnelle. La pluie sur un toit, l'orage, les degrés Fahrenheit, le tour de la Terre. Le tableau dessiné avec son coefficient dans chaque corrigé.",
+  },
+  "maths/4e/prop-ratio-pourcentage": {
+    titre: "Ratios, partages et pourcentages : 20 exercices corrigés",
+    resume:
+      "Écrire et simplifier un ratio a : b, le traduire par une égalité de quotients, partager selon deux ou trois parts avec la barre dessinée, calculer un pourcentage, passer par le coefficient multiplicateur, enchaîner deux évolutions. Le braquet d'un vélo, le déclin des animaux sauvages, le CO₂ de l'air.",
+  },
+  "maths/4e/prop-echelle": {
+    titre: "Échelles, agrandissements et réductions : 20 exercices corrigés",
+    resume:
+      "Lire une échelle, passer de la carte au terrain et du terrain au plan en convertissant, retrouver une échelle ou un rapport, puis pourquoi doubler les longueurs quadruple l'aire et multiplie le volume par huit. Problèmes : le marathon au bout d'une ficelle, le bassin olympique, les grêlons, la forêt amazonienne sur la carte. Un dessin à l'échelle dans chaque corrigé.",
+  },
+  "maths/4e/litteral-expression": {
+    titre: "Expressions littérales : 20 exercices corrigés",
+    resume:
+      "Lire les termes et les coefficients, écrire sans le signe ×, traduire une phrase, remplacer la lettre par un nombre, réduire (les x², les x, les nombres). Problèmes : le cœur du sportif, des carrés en allumettes, trois entiers qui se suivent, l'eau de la douche. Un dessin dans chaque corrigé : rectangle à l'échelle, tuiles d'algèbre, tableau.",
+  },
+  "maths/4e/pythagore-theoreme": {
+    titre: "Le théorème de Pythagore et sa réciproque : 20 exercices corrigés",
+    resume:
+      "Carrés et racines carrées, repérer l'hypoténuse, calculer une longueur avec un arrondi, prouver qu'un triangle est rectangle — ou qu'il ne l'est pas — et rédiger. La feuille A4, la voile d'un dériveur, la terrasse d'un maçon, un court de tennis, une tente de bivouac, une valise cabine. Chaque triangle dessiné à l'échelle.",
+  },
+  "maths/4e/trigo-cosinus": {
+    titre: "Le cosinus dans le triangle rectangle : 20 exercices corrigés",
+    resume:
+      "Repérer l'hypoténuse et le côté adjacent, écrire le cosinus, calculer une longueur puis un angle avec cos⁻¹ — un télésiège, des panneaux solaires, le funiculaire de Montmartre, un voilier, la rotation de la Terre. Chaque triangle dessiné à l'échelle.",
+  },
+  "maths/4e/vision-espace": {
+    titre: "Solides et représentations : 20 exercices corrigés",
+    resume:
+      "Nommer un solide posé de travers, compter faces, arêtes et sommets, lire les vues d'un empilement de cubes, plier un patron de cube, lire une perspective cavalière, trouver la forme d'une section. Le cristal de quartz, le silo à grain, la piscine, le podium. Un solide dessiné dans chaque corrigé.",
+  },
+  "maths/4e/equation-resolution": {
+    titre: "Résoudre une équation : 20 exercices corrigés",
+    resume:
+      "Reconnaître, traduire, résoudre en un ou deux gestes, réduire, développer, x des deux côtés, vérifier, et mettre en équation : un terrain de foot, électrique ou essence, le CO₂ de l'air, un marathon en relais. La balance dessinée à chaque étape.",
+  },
+  "maths/4e/thales-theoreme": {
+    titre: "Le théorème de Thalès : 20 exercices corrigés",
+    resume:
+      "Écrire les trois rapports, calculer une longueur, remplir le tableau de proportionnalité, prouver un parallélisme par la réciproque, et des problèmes réels : une tente, le service au tennis, la montée des eaux, l'éclipse. Chaque figure dessinée à l'échelle.",
+  },
+  "maths/4e/triangle-figure": {
+    titre: "Le triangle pour démontrer : 20 exercices corrigés",
+    resume:
+      "Somme des angles, inégalité triangulaire, hauteur, médiatrice et médiane, les trois cas d'égalité, triangles semblables, protocole de construction. Problèmes : la largeur d'une rivière, l'ombre de l'obélisque, une ferme de charpente, une course d'orientation. Chaque triangle dessiné à l'échelle.",
+  },
+  "maths/4e/litteral-distributivite": {
+    titre: "La distributivité : 20 exercices corrigés",
+    resume:
+      "Développer avec un facteur puis avec deux parenthèses, réduire, reconnaître un produit, démasquer les erreurs — un terrain de foot agrandi, les degrés Fahrenheit, une semaine d'entraînement, le carré du calendrier. Le modèle des aires dessiné dans les corrigés.",
+  },
   // ⭐ LA PREMIÈRE (15/09/2026) — écrite pour la fille de Frédéric, en 1re, qui
   // teste ce soir. Le verdict est pour demain.
   "maths/premiere-spe/exponentielle": {
