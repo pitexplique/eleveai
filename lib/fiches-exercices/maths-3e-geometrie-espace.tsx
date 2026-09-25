@@ -56,7 +56,10 @@ import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import { ORANGE, tableauProba } from "@/lib/fiches-exercices/figures";
 
 type P3 = [number, number, number];
-type PointEspace = { nom: string; p: P3; texte?: string; chemin?: boolean; cote?: "g" | "d" };
+/** `etiquette` : l'étiquette SORT du solide (au-dessus, en dessous, à droite),
+ *  reliée à son point par un trait fin. ⛔ Vu par Frédéric le 25/09 (ex. 9 et
+ *  17) : posée à côté d'un point intérieur, elle était barrée par les arêtes. */
+type PointEspace = { nom: string; p: P3; texte?: string; chemin?: boolean; cote?: "g" | "d"; etiquette?: "dessus" | "dessous" | "droite" };
 type OptionsSolide = {
   /** true : tous les sommets nommés ; un objet : seulement ceux-là, renommés. */
   noms?: boolean | Record<string, string>;
@@ -215,11 +218,33 @@ const solide = (s: { sommets: Record<string, P3>; aretes: string[]; cachees: str
     const L = Math.hypot(mx - gx, my - gy) || 1;
     dessin.push(texte(mx + (18 * (mx - gx)) / L, my + (18 * (my - gy)) / L + 5, t, "middle", CACHEE, 13));
   }
+  // Le contour du dessin (solide ET axes), pour poser une étiquette dehors.
+  const ecranTous = tous.map(([X, Y]) => [(X - minX) * e, (maxY - Y) * e]);
+  const dehors = {
+    haut: Math.min(...ecranTous.map((p) => p[1])),
+    bas: Math.max(...ecranTous.map((p) => p[1])),
+    droite: Math.max(...ecranTous.map((p) => p[0])),
+  };
+  for (const pt of s.points ?? []) {
+    const [x, y] = ecran(pt.p);
+    const t = pt.texte ?? `${pt.nom} ${coordonnees(pt.p)}`;
+    if (t && pt.etiquette) {
+      // L'étiquette hors du solide, et un trait fin jusqu'au point.
+      const [tx, ty, ancre] =
+        pt.etiquette === "dessus" ? [x, dehors.haut - 14, "middle" as const]
+        : pt.etiquette === "dessous" ? [x, dehors.bas + 26, "middle" as const]
+        : [dehors.droite + 14, y + 5, "start" as const];
+      const [fx, fy] = pt.etiquette === "dessus" ? [tx, ty + 4] : pt.etiquette === "dessous" ? [tx, ty - 14] : [tx - 4, y];
+      // Le trait d'abord, le texte (avec son halo blanc) par-dessus.
+      dessin.push(<line key={`e${cle++}`} x1={x} y1={y} x2={fx} y2={fy} stroke={ROUGE} strokeWidth={1.2} strokeDasharray="2 3" />);
+      dessin.push(texte(tx, ty, t, ancre, ROUGE, 13));
+    }
+  }
   for (const pt of s.points ?? []) {
     const [x, y] = ecran(pt.p);
     dessin.push(<circle key={`c${cle++}`} cx={x} cy={y} r={4.5} fill={ROUGE} stroke="white" strokeWidth={1.5} />);
     const t = pt.texte ?? `${pt.nom} ${coordonnees(pt.p)}`;
-    if (t) {
+    if (t && !pt.etiquette) {
       const cote = pt.cote ?? (x > gx ? "g" : "d");
       dessin.push(texte(cote === "d" ? x + 8 : x - 8, y - 8, t, cote === "d" ? "start" : "end", ROUGE, 13));
     }
@@ -584,7 +609,7 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
             "Une pièce a la forme d'un pavé droit : 6 m de long, 4 m de large, 3 m de haut. Un coin du sol, O, est l'origine du repère : abscisses le long de la longueur, ordonnées le long de la largeur, altitudes vers le plafond (en mètres).\na) Quelles sont les coordonnées du coin du plafond le plus éloigné de O ?\nb) Une lampe L est fixée au centre du plafond. Quelles sont ses coordonnées ?\nc) Un drone est au point D(5 ; 1 ; 2). Décrire comment l'atteindre depuis O.\nd) Le point (2 ; 7 ; 1) est-il dans la pièce ?",
           correction:
             "a) Le coin opposé est au bout des trois dimensions : 6 m de long, 4 m de large, 3 m de haut. Ses coordonnées sont (6 ; 4 ; 3).\nb) Le centre du plafond est au milieu de la longueur et au milieu de la largeur, $6 \\div 2 = 3$ et $4 \\div 2 = 2$, tout en haut : L(3 ; 2 ; 3).\nc) Je lis dans l'ordre : j'avance de 5 m le long de la longueur, puis de 1 m le long de la largeur, puis je monte de 2 m (le chemin orange).\nd) L'ordonnée vaut 7, mais la pièce n'a que 4 m de large : le point est dehors, derrière le mur.\n⛔ Le piège : lire (5 ; 1 ; 2) dans le désordre. Le point (1 ; 5 ; 2) serait à 5 m dans la largeur : hors de la pièce.\nRéponse : (6 ; 4 ; 3) ; L(3 ; 2 ; 3) ; 5 m, puis 1 m, puis 2 m vers le haut ; non.",
-          schema: pave(6, 4, 3, ["AD", "CD", "DH"], { noms: { A: "O" }, axes: true, cotes: { AB: "6 m", AE: "3 m" }, points: [{ nom: "L", p: [3, 2, 3] }, { nom: "D", p: [5, 1, 2], chemin: true }] }),
+          schema: pave(6, 4, 3, ["AD", "CD", "DH"], { noms: { A: "O" }, axes: true, cotes: { AB: "6 m", AE: "3 m" }, points: [{ nom: "L", p: [3, 2, 3], etiquette: "dessus" }, { nom: "D", p: [5, 1, 2], chemin: true, etiquette: "droite" }] }),
           micros: ["volume_representation"],
         },
         {
@@ -687,7 +712,7 @@ export const exercicesGeometrieEspace3e: FicheExercicesData = {
             "Une salle de sport est un pavé droit de 20 m de long, 12 m de large et 8 m de haut. Un coin du sol, O, est l'origine du repère (en mètres). Un drone décolle de P(2 ; 2 ; 0) et reçoit trois ordres : avancer de 12 m selon l'axe des abscisses, puis de 6 m selon l'axe des ordonnées, puis monter de 5 m.\na) Quelles sont les coordonnées de son point d'arrivée M ?\nb) Une caméra C est fixée au centre du plafond. Quelles sont ses coordonnées ?\nc) Quels ordres donner au drone, depuis M, pour qu'il se place 2 m sous la caméra ?\nd) Arrivé là, le pilote ordonne « monter de 3 m ». Que se passe-t-il ?",
           correction:
             "a) Chaque ordre ne change qu'UNE coordonnée. Abscisse : $2 + 12 = 14$. Ordonnée : $2 + 6 = 8$. Altitude : $0 + 5 = 5$. Donc M(14 ; 8 ; 5), au bout du chemin orange.\nb) Le centre du plafond est au milieu de la longueur et au milieu de la largeur, tout en haut : $20 \\div 2 = 10$ et $12 \\div 2 = 6$, donc C(10 ; 6 ; 8).\nc) 2 m sous la caméra, c'est le point (10 ; 6 ; 6). Depuis M(14 ; 8 ; 5) : reculer de $14 - 10 = 4$ m selon les abscisses, reculer de $8 - 6 = 2$ m selon les ordonnées, monter de $6 - 5 = 1$ m.\nd) L'altitude passerait à $6 + 3 = 9$ m, mais le plafond est à 8 m, et la caméra juste au-dessus du drone : il la percute au bout de 2 m.\n⛔ Le piège : ajouter les 12 m à la mauvaise coordonnée. « Selon l'axe des abscisses » ne touche QUE le premier nombre.\nRéponse : M(14 ; 8 ; 5) ; C(10 ; 6 ; 8) ; reculer de 4 m, reculer de 2 m, monter de 1 m ; le drone heurte la caméra.",
-          schema: pave(20, 12, 8, ["AD", "CD", "DH"], { noms: { A: "O" }, chemin: [[2, 2, 0], [14, 2, 0], [14, 8, 0], [14, 8, 5]], points: [{ nom: "P", p: [2, 2, 0] }, { nom: "M", p: [14, 8, 5], cote: "d" }, { nom: "C", p: [10, 6, 8], cote: "g" }] }),
+          schema: pave(20, 12, 8, ["AD", "CD", "DH"], { noms: { A: "O" }, chemin: [[2, 2, 0], [14, 2, 0], [14, 8, 0], [14, 8, 5]], points: [{ nom: "P", p: [2, 2, 0] }, { nom: "M", p: [14, 8, 5], etiquette: "droite" }, { nom: "C", p: [10, 6, 8], etiquette: "dessus" }] }),
           micros: ["volume_representation", "volume_geometrie_espace_defi"],
         },
         {
