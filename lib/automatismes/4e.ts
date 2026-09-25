@@ -546,8 +546,10 @@ export function equations4e(): AutoQuestion {
 
 export function droiteRelatifs(): AutoQuestion {
   const pas = pick([1, 0.5] as const).valueOf();
-  let v = entre(-8, 8) * pas;
-  while (v === 0 || v === 1 || v > 4 || v < -4) v = entre(-8, 8) * pas;
+  // Jamais au bout de la droite (−4 ou 4 : on ne sait pas si elle continue) ;
+  // avec un pas de 0,5, un demi entier, sinon la graduation ne sert à rien.
+  let v = entre(-7, 7) * pas;
+  while (v === 0 || v === 1 || Math.abs(v) >= 4 || (pas === 0.5 && Number.isInteger(v))) v = entre(-7, 7) * pas;
   const canvas = {
     kind: "number_line",
     min: -4,
