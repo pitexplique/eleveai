@@ -12,7 +12,7 @@ import { automatismes6e } from "./6e";
 import { automatismesPremiere } from "./premiere";
 import { automatismesSeconde } from "./seconde";
 import { automatismesTerminaleSpe } from "./terminale-spe";
-import type { AutoNiveau, AutoQuestionServie } from "./types";
+import type { AutoNiveau, AutoQuestion, AutoQuestionServie } from "./types";
 
 export type { AutoNiveau, AutoQuestion, AutoQuestionServie, AutoTheme } from "./types";
 
@@ -29,6 +29,23 @@ export const CLASSES_AUTOMATISMES: { classe: string; label: string }[] = [
   { classe: "premiere", label: "Première" },
   { classe: "terminale-spe", label: "Terminale spé" },
 ];
+
+/**
+ * ⛔ Frédéric, 26/09 : « dans les QCM il faut mélanger l'ordre de la bonne
+ * réponse, à ne pas oublier ». Mélangé ICI, au moment de servir, pour TOUS
+ * les générateurs — même ceux qui écrivent leurs propositions dans un ordre
+ * fixe (« hauteur, médiane, médiatrice, bissectrice »). Le livret remplace
+ * Math.random par sa graine le temps du tirage : il reste reproductible.
+ */
+function melanger<T extends AutoQuestion>(q: T): T {
+  if (q.format !== "qcm" || !q.choices) return q;
+  const c = [...q.choices];
+  for (let i = c.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [c[i], c[j]] = [c[j], c[i]];
+  }
+  return { ...q, choices: c };
+}
 
 export function getNiveauAutomatismes(classe: string): AutoNiveau | null {
   return NIVEAUX_AUTOMATISMES.find((n) => n.classe === classe) ?? null;
@@ -56,7 +73,7 @@ export function tirerSerie(niveau: AutoNiveau, themeIds?: string[] | null): Auto
       const theme = choisis[serie.length % choisis.length];
       try {
         const gen = theme.generateurs[Math.floor(Math.random() * theme.generateurs.length)];
-        const q = gen();
+        const q = melanger(gen());
         const cle = q.text + JSON.stringify(q.canvas ?? null);
         if (vus.has(cle)) continue;
         vus.add(cle);
@@ -85,7 +102,7 @@ export function tirerSerie(niveau: AutoNiveau, themeIds?: string[] | null): Auto
     for (let essai = 0; essai < 5; essai++) {
       try {
         const gen = theme.generateurs[Math.floor(Math.random() * theme.generateurs.length)];
-        serie.push({ ...gen(), themeId: theme.id, themeLabel: theme.label });
+        serie.push({ ...melanger(gen()), themeId: theme.id, themeLabel: theme.label });
         break;
       } catch (e) {
         console.error(`[automatismes] ${niveau.classe}/${theme.id}`, e);
@@ -106,7 +123,7 @@ export function tirerApercu(niveau: AutoNiveau, parGenerateur = 3): AutoQuestion
   return niveau.themes.flatMap((t) =>
     t.generateurs.flatMap((gen, i) =>
       Array.from({ length: parGenerateur }, (_, k) => ({
-        ...gen(),
+        ...melanger(gen()),
         themeId: t.id,
         themeLabel: `${t.label} · générateur ${i + 1} · exemple ${k + 1}`,
       })),

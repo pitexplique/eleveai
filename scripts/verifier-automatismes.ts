@@ -86,6 +86,29 @@ for (const niveau of NIVEAUX_AUTOMATISMES) {
     }
   }
 
+  // ⛔ Frédéric, 26/09 : « dans les QCM il faut mélanger l'ordre de la bonne
+  // réponse ». On mesure sur les questions SERVIES (tirerSerie les mélange) :
+  // la bonne réponse doit occuper plusieurs places, jamais plus de 60 % du
+  // temps la même.
+  for (const theme of niveau.themes) {
+    const places = new Map<number, number>();
+    let nb = 0;
+    for (let i = 0; i < 60; i++) {
+      for (const q of tirerSerie(niveau, [theme.id])) {
+        if (q.format !== "qcm" || !q.choices) continue;
+        nb++;
+        const p = q.choices.indexOf(q.expected[0]);
+        places.set(p, (places.get(p) ?? 0) + 1);
+      }
+    }
+    if (nb < 20) continue;
+    const part = Math.max(...places.values()) / nb;
+    if (places.size < 2 || part > 0.6) {
+      erreurs++;
+      console.log(`⚠️ thème ${theme.id} : la bonne réponse des QCM est ${Math.round(part * 100)} % du temps à la même place`);
+    }
+  }
+
   const tailles = new Set(Array.from({ length: 200 }, () => tirerSerie(niveau).length));
   console.log(`  séries tirées : ${[...tailles].join(", ")} questions`);
 }
