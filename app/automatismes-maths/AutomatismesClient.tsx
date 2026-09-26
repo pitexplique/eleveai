@@ -13,6 +13,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import { CanvasRenderer } from "@/lib/canvas";
 import { MarkdownMath } from "@/components/MarkdownMath";
+import { ListenButton } from "@/app/coach/serie/ListenButton";
+import { texteALire } from "@/lib/automatismes/lecture";
 import {
   CLASSES_AUTOMATISMES,
   estCorrect,
@@ -362,10 +364,12 @@ export default function AutomatismesClient() {
                 </div>
               ))}
             </div>
-            <p className="mt-4 text-sm font-semibold text-slate-600">
-              Pour la question à rédiger, compare ta phrase à la réponse modèle et
-              coche ce que tu as bien fait : le point compte quand tout est coché.
-            </p>
+            {serie.some((q) => q.format === "redaction") ? (
+              <p className="mt-4 text-sm font-semibold text-slate-600">
+                Pour la question à rédiger, compare ta phrase à la réponse modèle et
+                coche ce que tu as bien fait : le point compte quand tout est coché.
+              </p>
+            ) : null}
             <p className="mt-2 text-sm font-semibold text-slate-600">
               ✍️ Les mots des maths s&apos;écrivent aussi sans faute :{" "}
               <Link href="/dictee" className="font-black text-emerald-700 underline">
@@ -386,9 +390,15 @@ export default function AutomatismesClient() {
                   key={i}
                   className="rounded-[2rem] border border-white bg-white/90 p-5 text-slate-950 shadow-xl ring-1 ring-white/80"
                 >
-                  <p className="text-xs font-black uppercase tracking-wide text-emerald-700">
-                    Question {i + 1} / {serie.length} · {q.themeLabel}
-                  </p>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <p className="text-xs font-black uppercase tracking-wide text-emerald-700">
+                      Question {i + 1} / {serie.length} · {q.themeLabel}
+                    </p>
+                    {/* ⭐ Frédéric, 26/09 : les petits lisent mal, et « tu n'as pas
+                        envie de lire dans un bus mais d'écouter » — l'énoncé et
+                        ses propositions, les formules dites en français. */}
+                    <ListenButton text={texteALire(q)} label="Écouter" />
+                  </div>
 
                   <MarkdownMath className="mt-2 whitespace-pre-line text-lg font-semibold leading-relaxed">
                     {q.text}

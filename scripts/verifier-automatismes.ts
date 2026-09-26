@@ -11,6 +11,7 @@
 //   npx --yes tsx@4 scripts/verifier-automatismes.ts
 
 import { NIVEAUX_AUTOMATISMES, estCorrect, tirerSerie } from "../lib/automatismes";
+import { texteALire } from "../lib/automatismes/lecture";
 
 const TIRAGES = 2000;
 let erreurs = 0;
@@ -106,6 +107,22 @@ for (const niveau of NIVEAUX_AUTOMATISMES) {
     if (places.size < 2 || part > 0.6) {
       erreurs++;
       console.log(`⚠️ thème ${theme.id} : la bonne réponse des QCM est ${Math.round(part * 100)} % du temps à la même place`);
+    }
+  }
+
+  // ⭐ La question LUE (bouton « Écouter », 26/09) : aucune trace de LaTeX ni
+  // d'unité abrégée ne doit arriver à la voix (« dollar », « backslash dfrac »).
+  const MAL_LU = /[\\$^{}_]|\bd?frac\b|widehat| - |°|\bm\/s/;
+  for (const theme of niveau.themes) {
+    for (const gen of theme.generateurs) {
+      for (let i = 0; i < 40; i++) {
+        const lu = texteALire(gen());
+        if (MAL_LU.test(lu)) {
+          erreurs++;
+          console.log(`⚠️ thème ${theme.id} : la lecture à voix haute garde une formule : « ${lu.slice(0, 120)} »`);
+          break;
+        }
+      }
     }
   }
 
