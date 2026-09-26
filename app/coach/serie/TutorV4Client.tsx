@@ -99,6 +99,7 @@ import {
   stopSpeak,
   buildReadableQuestion,
   speechLangForMatiere,
+  textePourLaVoix,
 } from "./ListenButton";
 import AudioBoost from "@/components/AudioBoost";
 /* La fiche de cours de la notion, quand elle existe. Le coach l'affiche déjà à
@@ -714,7 +715,8 @@ function forceScrollTopOnArrival() {
     if (!autoRead || !wrongAnswerPanelOpen || !currentQuestion) return;
     const expected = currentQuestion.expected?.join(" ou ") ?? "";
     const { brief } = extractConclusion(explanationText);
-    speakText(`Pas tout à fait. La bonne réponse était : ${expected}. ${brief}`);
+    // Lu par la voix française : les formules passent en mots.
+    speakText(textePourLaVoix(`Pas tout à fait. La bonne réponse était : ${expected}. ${brief}`));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoRead, wrongAnswerPanelOpen]);
 
@@ -2601,7 +2603,7 @@ function CoachErrorHelp({
                 <div>{m.content}</div>
                 {m.role === "coach" ? (
                   <ListenButton
-                    text={m.content}
+                    text={textePourLaVoix(m.content)}
                     className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] font-bold text-cyan-200 hover:bg-white/20"
                   />
                 ) : null}
@@ -2773,7 +2775,7 @@ function WrongAnswerPanel({
             Explication
           </span>
           <div className="flex items-center gap-2">
-            <ListenButton text={showDetail ? full : brief} />
+            <ListenButton text={textePourLaVoix(showDetail ? full : brief)} />
             {hasMore ? (
               <button
                 type="button"
