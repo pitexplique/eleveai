@@ -26,12 +26,14 @@ import type { AutoNiveau, AutoQuestion } from "./types";
 import type { CanvasFigure } from "@/lib/tutor-v4/types_canvas";
 import {
   aires,
+  angles5e,
   anglesVocabulaire,
   conversions,
   convertirDurees,
   coordonnees,
   droiteGraduee,
   ecritures,
+  ecrituresMultiples,
   fractionDe,
   frequence,
   lireInstant,
@@ -45,8 +47,11 @@ import {
   probabilites,
   programmeCalcul,
   proportionnalite,
+  quadrilateres5e,
   solides,
   sommeAngles,
+  symetrieQuadrillage,
+  triangles5e,
   volumes,
 } from "./3e";
 import { divisionEuclidienne } from "./4e";
@@ -305,31 +310,6 @@ function fractions5e(): AutoQuestion {
 }
 
 /** 1,2 = 12/10 = 6/5 = 1 + 1/5 = 120 % : un même nombre, plusieurs écritures. */
-function ecrituresMultiples(): AutoQuestion {
-  const [n, d] = pick([[1, 2], [1, 4], [3, 4], [3, 2], [5, 2], [6, 5], [1, 5], [2, 5], [7, 4], [5, 4], [7, 10], [3, 5], [9, 10], [4, 5], [7, 5]] as const);
-  const dec = n / d;
-  if (Math.random() < 0.5) {
-    const sur = pick([10, 100] as const).valueOf();
-    if ((dec * sur) % 1 !== 0) return ecrituresMultiples();
-    return {
-      text: `Compléter : $${fr(dec)} = \\dfrac{\\ldots}{${sur}}$.`,
-      format: "short",
-      expected: accepte(dec * sur),
-      explanation: `$${fr(dec)} = ${fr(dec * sur)} \\div ${sur}$.\nDonc $${fr(dec)} = ${tex(dec * sur, sur)}$.`,
-    };
-  }
-  const vrais = [`$${fr(dec)}$`, `$${tex(2 * n, 2 * d)}$`, `${fr(dec * 100)} %`];
-  if (n > d) vrais.push(`$${Math.floor(n / d)} + ${tex(n % d, d)}$`);
-  const faux = pick([`$${tex(d, n)}$`, `${fr(dec * 10)} %`, `$${tex(n, 10 * d)}$`, `$${fr(dec + 1)}$`]);
-  return {
-    text: `Parmi ces écritures, laquelle n'est PAS égale à $${tex(n, d)}$ ?`,
-    format: "qcm",
-    choices: qcm(faux, vrais),
-    expected: [faux],
-    explanation: `$${tex(n, d)} = ${n} \\div ${d} = ${fr(dec)} = ${fr(dec * 100)}$ %${n > d ? ` $= ${Math.floor(n / d)} + ${tex(n % d, d)}$` : ""}.\nL'intrus est ${faux}.`,
-  };
-}
-
 /* ═══════════════ DIVISEURS ═══════════════ */
 
 function diviseurs(): AutoQuestion {
@@ -695,15 +675,40 @@ function demiDroite(): AutoQuestion {
 /* ═══════════════ CUBES ET EMPILEMENTS ═══════════════ */
 
 function cubes(): AutoQuestion {
-  const cas = entre(1, 4);
-  const L = entre(2, 6), l = entre(2, 5), h = entre(2, 5);
+  const cas = entre(1, 5);
+  const L = entre(2, 5), l = entre(2, 4), h = entre(2, 4);
   const bloc = `Un empilement de petits cubes forme un pavé de ${L} cubes de long, ${l} de large et ${h} de haut.`;
+  // ⭐ Le dessin, avec le canvas `assemblage_cubes` du coach (volumes de 3e) :
+  // x = longueur, y = largeur, z = hauteur.
+  const dessin = (cubesPleins: { x: number; y: number; z: number }[]) =>
+    ({ kind: "solide_3d", solide: "assemblage_cubes", cubes: cubesPleins, display: { showLabels: false } }) as unknown as CanvasFigure;
+  const pave = () => {
+    const c: { x: number; y: number; z: number }[] = [];
+    for (let z = 0; z < h; z++) for (let y = 0; y < l; y++) for (let x = 0; x < L; x++) c.push({ x, y, z });
+    return c;
+  };
   if (cas === 1) {
     return {
-      text: `${bloc} Combien de petits cubes contient-il ?`,
+      text: "Cet empilement de petits cubes forme un pavé plein, sans trou. Combien de petits cubes contient-il ?",
       format: "short",
       expected: accepte(L * l * h),
-      explanation: `Un étage contient $${L} \\times ${l} = ${L * l}$ cubes, et il y a ${h} étages.\n$${L * l} \\times ${h} = ${L * l * h}$ cubes.`,
+      explanation: `On compte les arêtes du pavé : ${L} cubes de long, ${l} de large, ${h} de haut. Un étage contient $${L} \\times ${l} = ${L * l}$ cubes, et il y a ${h} étages — les cubes cachés comptent aussi.\n$${L * l} \\times ${h} = ${L * l * h}$ cubes.`,
+      canvas: dessin(pave()),
+    };
+  }
+  if (cas === 5) {
+    // Un escalier : chaque marche a une rangée de moins. Tous les cubes posés sur le sol.
+    const marches = entre(2, 4), prof = entre(1, 3);
+    const c: { x: number; y: number; z: number }[] = [];
+    for (let x = 0; x < marches; x++) for (let y = 0; y < prof; y++) for (let z = 0; z < marches - x; z++) c.push({ x, y, z });
+    const total = c.length;
+    const col = Array.from({ length: marches }, (_, x) => (marches - x) * prof);
+    return {
+      text: `Cet escalier de petits cubes a ${marches} marches et ${prof} cube${prof > 1 ? "s" : ""} de profondeur. Chaque colonne descend jusqu'au sol. Combien de petits cubes contient-il ?`,
+      format: "short",
+      expected: accepte(total),
+      explanation: `On compte tranche par tranche, de la plus haute à la plus basse : ${col.join(" + ")}.\n$${col.join(" + ")} = ${total}$ cubes.`,
+      canvas: dessin(c),
     };
   }
   if (cas === 2) {
@@ -717,6 +722,7 @@ function cubes(): AutoQuestion {
       format: "short",
       expected: accepte(vue.n),
       explanation: `Vue ${vue.nom} : ${vue.e}.\nOn voit ${vue.n} carrés.`,
+      canvas: dessin(pave()),
     };
   }
   if (cas === 3) {
@@ -775,98 +781,6 @@ function symetrieAxiale(): AutoQuestion {
 
 /* ═══════════════ ANGLES, TRIANGLES, QUADRILATÈRES ═══════════════ */
 
-function angles5e(): AutoQuestion {
-  const cas = entre(1, 3);
-  if (cas === 1) {
-    const a = entre(15, 165);
-    return {
-      text: `Deux angles sont opposés par le sommet. L'un mesure ${a}°. Combien mesure l'autre, en degrés ?`,
-      format: "short",
-      expected: accepte(a),
-      explanation: `Deux angles opposés par le sommet ont la même mesure.\nL'autre mesure aussi ${a}°.`,
-    };
-  }
-  if (cas === 2) {
-    const a = 2 * entre(10, 85);
-    return {
-      text: `On trace la bissectrice d'un angle de ${a}°. Combien mesure chacun des deux angles obtenus, en degrés ?`,
-      format: "short",
-      expected: accepte(a / 2),
-      explanation: `La bissectrice partage un angle en deux angles de même mesure.\n$${a} \\div 2 = ${a / 2}$°.`,
-    };
-  }
-  const q = pick([
-    { t: "Une équerre a un angle droit et un angle de 30°. Combien mesure son troisième angle, en degrés ?", r: 60 },
-    { t: "Une équerre a un angle droit et un angle de 60°. Combien mesure son troisième angle, en degrés ?", r: 30 },
-    { t: "Une équerre a un angle droit et un angle de 45°. Combien mesure son troisième angle, en degrés ?", r: 45 },
-    { t: "Combien mesure un angle plein, en degrés ?", r: 360 },
-  ]);
-  return {
-    text: q.t,
-    format: "short",
-    expected: accepte(q.r),
-    explanation: q.r === 360 ? "Un angle plein fait un tour complet.\n360°." : `Une équerre est un triangle : ses angles font 180° en tout.\n$180 - 90 - ${90 - q.r} = ${q.r}$°.`,
-  };
-}
-
-const TRIANGLES_5E = [["A", "B", "C"], ["E", "F", "G"], ["R", "S", "T"], ["K", "L", "M"], ["P", "Q", "R"]] as const;
-
-function triangles5e(): AutoQuestion {
-  const [A, B, C] = pick(TRIANGLES_5E);
-  const cas = entre(1, 3);
-  if (cas === 1) {
-    const f = pick([
-      { t: `les côtés [${A}${B}] et [${A}${C}] portent le même codage`, r: "isocèle", e: `Deux côtés de même longueur : il est isocèle en ${A}.` },
-      { t: "ses trois côtés portent le même codage", r: "équilatéral", e: "Trois côtés de même longueur : il est équilatéral." },
-      { t: `un angle droit est codé en ${B}`, r: "rectangle", e: `Un angle droit : il est rectangle en ${B}.` },
-      { t: `un angle droit est codé en ${A}, et [${A}${B}] et [${A}${C}] portent le même codage`, r: "rectangle isocèle", e: `Un angle droit en ${A} et deux côtés égaux issus de ${A} : il est rectangle isocèle en ${A}.` },
-    ]);
-    return {
-      text: `Sur la figure du triangle ${A}${B}${C}, ${f.t}. Quelle est sa nature ?`,
-      format: "qcm",
-      choices: qcm(f.r, ["isocèle", "équilatéral", "rectangle", "rectangle isocèle", "quelconque"]),
-      expected: [f.r],
-      explanation: `On lit le codage : même trait = même longueur, petit carré = angle droit.\n${f.e}`,
-    };
-  }
-  if (cas === 2) {
-    const v = entre(15, 95) / 10;
-    return {
-      text: `Le point M est sur la médiatrice du segment [${A}${B}], et M${A} = ${fr(v)} cm. Combien mesure M${B}, en cm ?`,
-      format: "short",
-      expected: accepte(v),
-      explanation: `Un point de la médiatrice d'un segment est à la même distance de ses deux extrémités.\nM${B} = M${A} = ${fr(v)} cm.`,
-    };
-  }
-  const r = entre(15, 80) / 10;
-  return {
-    text: `O est le centre du cercle circonscrit au triangle ${A}${B}${C}, et O${A} = ${fr(r)} cm. Combien mesure O${C}, en cm ?`,
-    format: "short",
-    expected: accepte(r),
-    explanation: `Le cercle circonscrit passe par les trois sommets : O${A}, O${B} et O${C} sont trois rayons.\nO${C} = ${fr(r)} cm.`,
-  };
-}
-
-function quadrilateres5e(): AutoQuestion {
-  const nom = pick(["ABCD", "EFGH", "MNOP", "RSTU", "IJKL"]);
-  const f = pick([
-    { t: `Sur la figure, les quatre côtés du quadrilatère ${nom} portent le même codage.`, r: "un losange", e: "Quatre côtés de même longueur : c'est un losange (on ne sait rien des angles)." },
-    { t: `Sur la figure, les quatre angles du quadrilatère ${nom} sont codés droits.`, r: "un rectangle", e: "Quatre angles droits : c'est un rectangle (on ne sait rien des côtés)." },
-    { t: `Sur la figure, les quatre côtés du quadrilatère ${nom} portent le même codage et ses quatre angles sont codés droits.`, r: "un carré", e: "Quatre côtés égaux ET quatre angles droits : c'est un carré." },
-    { t: `Sur la figure, les côtés opposés du quadrilatère ${nom} sont parallèles deux à deux.`, r: "un parallélogramme", e: "Côtés opposés parallèles deux à deux : c'est un parallélogramme." },
-    { t: `Le quadrilatère ${nom} a deux côtés parallèles, et deux seulement.`, r: "un trapèze", e: "Deux côtés parallèles (et pas les deux autres) : c'est un trapèze." },
-    // Des lettres qu'aucun nom de NOMS n'emploie : pas de « IJKLK ».
-    { t: `Le polygone ${nom}${pick(["V", "W"])} a 5 côtés.`, r: "un pentagone", e: "Cinq côtés : un pentagone (penta = 5)." },
-    { t: `Le polygone ${nom}${pick(["VW", "XY"])} a 6 côtés.`, r: "un hexagone", e: "Six côtés : un hexagone (hexa = 6)." },
-  ]);
-  return {
-    text: `${f.t} Quelle est la nature la plus précise que l'on peut affirmer ?`,
-    format: "qcm",
-    choices: qcm(f.r, ["un parallélogramme", "un rectangle", "un losange", "un carré", "un trapèze", "un pentagone", "un hexagone"]),
-    expected: [f.r],
-    explanation: `${f.e}\nOn ne conclut que ce que le codage PROUVE, pas ce que la figure semble montrer.`,
-  };
-}
 
 /* ═══════════════ ÉCHELLE DE PROBABILITÉ ═══════════════ */
 
@@ -932,7 +846,7 @@ export const automatismes5e: AutoNiveau = {
     // Espace et géométrie
     { id: "droite", label: "Demi-droite graduée", generateurs: [demiDroite] },
     { id: "cubes", label: "Cubes et empilements", generateurs: [cubes] },
-    { id: "symetrie", label: "Symétrie axiale", generateurs: [symetrieAxiale] },
+    { id: "symetrie", label: "Symétrie axiale", generateurs: [symetrieQuadrillage, symetrieAxiale] },
     { id: "angles", label: "Angles", generateurs: [anglesVocabulaire, angles5e] },
     { id: "triangles", label: "Triangles", generateurs: [sommeAngles, triangles5e] },
     { id: "quadrilateres", label: "Quadrilatères", generateurs: [quadrilateres5e] },

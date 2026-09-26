@@ -503,7 +503,8 @@ export function lireInstant(): AutoQuestion {
 export function sommeAngles(): AutoQuestion {
   const [A, B, C] = pick(NOMS_TRIANGLE);
   const cas = entre(1, 3);
-  const pointsTri = { A: { x: 40, y: 190 }, B: { x: 250, y: 190 }, C: { x: 250, y: 50 } };
+  // B et C à x = 225 : à 250, l'étiquette « ? » de l'angle en C sortait de 10 px du cadre de 280 (mesuré le 26/09).
+  const pointsTri = { A: { x: 40, y: 190 }, B: { x: 225, y: 190 }, C: { x: 225, y: 50 } };
   if (cas === 1) {
     const a = pick([25, 30, 35, 40, 50, 55, 60, 65] as const);
     const canvas = {
@@ -1371,6 +1372,387 @@ export function frequence(): AutoQuestion {
   };
 }
 
+/* ═══════════════ CODAGE, ANGLES, ÉCRITURES, TRANSLATION — partagés avec la 5e et la 4e (26/09) ═══════════════ */
+//
+// Écrits pour la 5e et la 4e, remontés ici : la liste du DNB les demande
+// aussi (codage d'une figure, angles opposés par le sommet, 1,2 = 6/5 = 120 %).
+// 3e.ts est la source commune : la 5e et la 4e importent d'ici, jamais l'inverse.
+
+function tex(n: number, d: number): string {
+  return `\\dfrac{${n}}{${d}}`;
+}
+
+const NOMS_QUADRI = ["ABCD", "EFGH", "MNOP", "RSTU", "IJKL"] as const;
+
+export function ecrituresMultiples(): AutoQuestion {
+  const [n, d] = pick([[1, 2], [1, 4], [3, 4], [3, 2], [5, 2], [6, 5], [1, 5], [2, 5], [7, 4], [5, 4], [7, 10], [3, 5], [9, 10], [4, 5], [7, 5]] as const);
+  const dec = n / d;
+  if (Math.random() < 0.5) {
+    const sur = pick([10, 100] as const).valueOf();
+    if ((dec * sur) % 1 !== 0) return ecrituresMultiples();
+    return {
+      text: `Compléter : $${fr(dec)} = \\dfrac{\\ldots}{${sur}}$.`,
+      format: "short",
+      expected: accepte(dec * sur),
+      explanation: `$${fr(dec)} = ${fr(dec * sur)} \\div ${sur}$.\nDonc $${fr(dec)} = ${tex(dec * sur, sur)}$.`,
+    };
+  }
+  const vrais = [`$${fr(dec)}$`, `$${tex(2 * n, 2 * d)}$`, `${fr(dec * 100)} %`];
+  if (n > d) vrais.push(`$${Math.floor(n / d)} + ${tex(n % d, d)}$`);
+  const faux = pick([`$${tex(d, n)}$`, `${fr(dec * 10)} %`, `$${tex(n, 10 * d)}$`, `$${fr(dec + 1)}$`]);
+  return {
+    text: `Parmi ces écritures, laquelle n'est PAS égale à $${tex(n, d)}$ ?`,
+    format: "qcm",
+    choices: qcm(faux, vrais),
+    expected: [faux],
+    explanation: `$${tex(n, d)} = ${n} \\div ${d} = ${fr(dec)} = ${fr(dec * 100)}$ %${n > d ? ` $= ${Math.floor(n / d)} + ${tex(n % d, d)}$` : ""}.\nL'intrus est ${faux}.`,
+  };
+}
+
+
+export function angles5e(): AutoQuestion {
+  const cas = entre(1, 3);
+  if (cas === 1) {
+    const a = entre(15, 165);
+    return {
+      text: `Deux angles sont opposés par le sommet. L'un mesure ${a}°. Combien mesure l'autre, en degrés ?`,
+      format: "short",
+      expected: accepte(a),
+      explanation: `Deux angles opposés par le sommet ont la même mesure.\nL'autre mesure aussi ${a}°.`,
+    };
+  }
+  if (cas === 2) {
+    const a = 2 * entre(10, 85);
+    return {
+      text: `On trace la bissectrice d'un angle de ${a}°. Combien mesure chacun des deux angles obtenus, en degrés ?`,
+      format: "short",
+      expected: accepte(a / 2),
+      explanation: `La bissectrice partage un angle en deux angles de même mesure.\n$${a} \\div 2 = ${a / 2}$°.`,
+    };
+  }
+  const q = pick([
+    { t: "Une équerre a un angle droit et un angle de 30°. Combien mesure son troisième angle, en degrés ?", r: 60 },
+    { t: "Une équerre a un angle droit et un angle de 60°. Combien mesure son troisième angle, en degrés ?", r: 30 },
+    { t: "Une équerre a un angle droit et un angle de 45°. Combien mesure son troisième angle, en degrés ?", r: 45 },
+    { t: "Combien mesure un angle plein, en degrés ?", r: 360 },
+  ]);
+  return {
+    text: q.t,
+    format: "short",
+    expected: accepte(q.r),
+    explanation: q.r === 360 ? "Un angle plein fait un tour complet.\n360°." : `Une équerre est un triangle : ses angles font 180° en tout.\n$180 - 90 - ${90 - q.r} = ${q.r}$°.`,
+  };
+}
+
+
+const TRIANGLES_5E = [["A", "B", "C"], ["E", "F", "G"], ["R", "S", "T"], ["K", "L", "M"], ["P", "Q", "R"]] as const;
+
+export function triangles5e(): AutoQuestion {
+  const [A, B, C] = pick(TRIANGLES_5E);
+  const cas = entre(1, 3);
+  if (cas === 1) {
+    const f = pick([
+      { t: `les côtés [${A}${B}] et [${A}${C}] portent le même codage`, r: "isocèle", e: `Deux côtés de même longueur : il est isocèle en ${A}.` },
+      { t: "ses trois côtés portent le même codage", r: "équilatéral", e: "Trois côtés de même longueur : il est équilatéral." },
+      { t: `un angle droit est codé en ${B}`, r: "rectangle", e: `Un angle droit : il est rectangle en ${B}.` },
+      { t: `un angle droit est codé en ${A}, et [${A}${B}] et [${A}${C}] portent le même codage`, r: "rectangle isocèle", e: `Un angle droit en ${A} et deux côtés égaux issus de ${A} : il est rectangle isocèle en ${A}.` },
+    ]);
+    return {
+      text: `Sur la figure du triangle ${A}${B}${C}, ${f.t}. Quelle est sa nature ?`,
+      format: "qcm",
+      choices: qcm(f.r, ["isocèle", "équilatéral", "rectangle", "rectangle isocèle", "quelconque"]),
+      expected: [f.r],
+      explanation: `On lit le codage : même trait = même longueur, petit carré = angle droit.\n${f.e}`,
+    };
+  }
+  if (cas === 2) {
+    const v = entre(15, 95) / 10;
+    return {
+      text: `Le point M est sur la médiatrice du segment [${A}${B}], et M${A} = ${fr(v)} cm. Combien mesure M${B}, en cm ?`,
+      format: "short",
+      expected: accepte(v),
+      explanation: `Un point de la médiatrice d'un segment est à la même distance de ses deux extrémités.\nM${B} = M${A} = ${fr(v)} cm.`,
+    };
+  }
+  const r = entre(15, 80) / 10;
+  return {
+    text: `O est le centre du cercle circonscrit au triangle ${A}${B}${C}, et O${A} = ${fr(r)} cm. Combien mesure O${C}, en cm ?`,
+    format: "short",
+    expected: accepte(r),
+    explanation: `Le cercle circonscrit passe par les trois sommets : O${A}, O${B} et O${C} sont trois rayons.\nO${C} = ${fr(r)} cm.`,
+  };
+}
+
+
+export function quadrilateres5e(): AutoQuestion {
+  const nom = pick(["ABCD", "EFGH", "MNOP", "RSTU", "IJKL"]);
+  const f = pick([
+    { t: `Sur la figure, les quatre côtés du quadrilatère ${nom} portent le même codage.`, r: "un losange", e: "Quatre côtés de même longueur : c'est un losange (on ne sait rien des angles)." },
+    { t: `Sur la figure, les quatre angles du quadrilatère ${nom} sont codés droits.`, r: "un rectangle", e: "Quatre angles droits : c'est un rectangle (on ne sait rien des côtés)." },
+    { t: `Sur la figure, les quatre côtés du quadrilatère ${nom} portent le même codage et ses quatre angles sont codés droits.`, r: "un carré", e: "Quatre côtés égaux ET quatre angles droits : c'est un carré." },
+    { t: `Sur la figure, les côtés opposés du quadrilatère ${nom} sont parallèles deux à deux.`, r: "un parallélogramme", e: "Côtés opposés parallèles deux à deux : c'est un parallélogramme." },
+    { t: `Le quadrilatère ${nom} a deux côtés parallèles, et deux seulement.`, r: "un trapèze", e: "Deux côtés parallèles (et pas les deux autres) : c'est un trapèze." },
+    // Des lettres qu'aucun nom de NOMS n'emploie : pas de « IJKLK ».
+    { t: `Le polygone ${nom}${pick(["V", "W"])} a 5 côtés.`, r: "un pentagone", e: "Cinq côtés : un pentagone (penta = 5)." },
+    { t: `Le polygone ${nom}${pick(["VW", "XY"])} a 6 côtés.`, r: "un hexagone", e: "Six côtés : un hexagone (hexa = 6)." },
+  ]);
+  return {
+    text: `${f.t} Quelle est la nature la plus précise que l'on peut affirmer ?`,
+    format: "qcm",
+    choices: qcm(f.r, ["un parallélogramme", "un rectangle", "un losange", "un carré", "un trapèze", "un pentagone", "un hexagone"]),
+    expected: [f.r],
+    explanation: `${f.e}\nOn ne conclut que ce que le codage PROUVE, pas ce que la figure semble montrer.`,
+  };
+}
+
+
+export function droiteRelatifs(): AutoQuestion {
+  const pas = pick([1, 0.5] as const).valueOf();
+  // Jamais au bout de la droite (−4 ou 4 : on ne sait pas si elle continue) ;
+  // avec un pas de 0,5, un demi entier, sinon la graduation ne sert à rien.
+  let v = entre(-7, 7) * pas;
+  while (v === 0 || v === 1 || Math.abs(v) >= 4 || (pas === 0.5 && Number.isInteger(v))) v = entre(-7, 7) * pas;
+  const canvas = {
+    kind: "number_line",
+    min: -4,
+    max: 4,
+    step: pas,
+    points: [
+      { value: 0, label: "0" },
+      { value: 1, label: "1" },
+      { value: v, label: "M", color: "#c2410c" },
+    ],
+    display: { showTicks: true, showValues: false, showPoints: true, showPointLabels: true },
+    size: { width: 440, height: 110 },
+  } as unknown as CanvasFigure;
+  return {
+    text: "Quelle est l'abscisse du point M sur cette droite graduée ?",
+    format: "short",
+    expected: accepte(v),
+    explanation: `On repère l'unité entre 0 et 1 : ${pas === 1 ? "chaque graduation vaut 1" : "elle est partagée en 2, chaque graduation vaut 0,5"}.\nM est à ${Math.abs(v / pas)} graduation${Math.abs(v / pas) > 1 ? "s" : ""} ${v < 0 ? "à gauche" : "à droite"} de 0 : son abscisse est ${fr(v)}.`,
+    canvas,
+  };
+}
+
+
+const NATURES = ["un parallélogramme", "un rectangle", "un losange", "un carré"] as const;
+
+export function quadrilateres(): AutoQuestion {
+  const nom = pick(NOMS_QUADRI);
+  const [A, B, C, D] = nom.split("");
+  const cas = pick([
+    { t: `Les diagonales du quadrilatère ${nom} se coupent en leur milieu.`, r: 0, e: "Des diagonales qui se coupent en leur milieu : c'est la propriété caractéristique du parallélogramme." },
+    { t: `Les diagonales du quadrilatère ${nom} se coupent en leur milieu et ont la même longueur.`, r: 1, e: "Même milieu : parallélogramme ; même longueur en plus : rectangle." },
+    { t: `Les diagonales du quadrilatère ${nom} se coupent en leur milieu et sont perpendiculaires.`, r: 2, e: "Même milieu : parallélogramme ; perpendiculaires en plus : losange." },
+    { t: `Les diagonales du quadrilatère ${nom} se coupent en leur milieu, ont la même longueur et sont perpendiculaires.`, r: 3, e: "Même milieu et même longueur : rectangle ; perpendiculaires en plus : c'est aussi un losange, donc un carré." },
+    { t: `Le quadrilatère ${nom} a ses côtés opposés parallèles deux à deux.`, r: 0, e: "Côtés opposés parallèles deux à deux : c'est la définition du parallélogramme." },
+    { t: `Le quadrilatère ${nom} a ses côtés opposés de même longueur deux à deux.`, r: 0, e: "Côtés opposés de même longueur : c'est une propriété caractéristique du parallélogramme." },
+    { t: `Le quadrilatère ${nom} a ses quatre côtés de même longueur.`, r: 2, e: "Quatre côtés de même longueur : c'est un losange." },
+    { t: `${nom} est un parallélogramme et ${A}${B} = ${B}${C}.`, r: 2, e: "Un parallélogramme qui a deux côtés consécutifs de même longueur est un losange." },
+    { t: `${nom} est un parallélogramme et l'angle $\\widehat{${A}${B}${C}}$ est droit.`, r: 1, e: "Un parallélogramme qui a un angle droit est un rectangle." },
+    { t: `${nom} est un losange et l'angle $\\widehat{${B}${C}${D}}$ est droit.`, r: 3, e: "Un losange qui a un angle droit est aussi un rectangle : c'est un carré." },
+    { t: `${nom} est un rectangle et ${A}${B} = ${B}${C}.`, r: 3, e: "Un rectangle qui a deux côtés consécutifs de même longueur est aussi un losange : c'est un carré." },
+    { t: `${nom} est un parallélogramme et ses diagonales [${A}${C}] et [${B}${D}] ont la même longueur.`, r: 1, e: "Un parallélogramme dont les diagonales ont la même longueur est un rectangle." },
+    { t: `${nom} est un parallélogramme et ses diagonales [${A}${C}] et [${B}${D}] sont perpendiculaires.`, r: 2, e: "Un parallélogramme dont les diagonales sont perpendiculaires est un losange." },
+  ]);
+  const bonne = NATURES[cas.r];
+  return {
+    text: `${cas.t} Quelle est sa nature, la plus précise possible ?`,
+    format: "qcm",
+    choices: [...NATURES],
+    expected: [bonne],
+    explanation: `${cas.e}\n${nom} est ${bonne}.`,
+  };
+}
+
+
+/* — Fractions et décimaux : ce que la liste du DNB demande en plus (26/09) — */
+
+/** « Simplifier, comparer des fractions, calculer avec des fractions. » */
+export function fractions3e(): AutoQuestion {
+  const cas = entre(1, 4);
+  if (cas === 1) {
+    const [n, d] = pick([[2, 3], [3, 4], [2, 5], [4, 5], [5, 6], [3, 7], [5, 8], [7, 9], [4, 7], [5, 9]] as const);
+    const k = entre(2, 9);
+    return {
+      text: `Écrire $${tex(n * k, d * k)}$ sous forme irréductible.`,
+      format: "short",
+      expected: [`${n}/${d}`],
+      explanation: `${n * k} et ${d * k} sont tous deux dans la table de ${k} : on divise en haut et en bas par ${k}.\n$${tex(n * k, d * k)} = ${tex(n, d)}$.`,
+    };
+  }
+  if (cas === 2) {
+    const [a, b] = pick([[2, 3], [3, 4], [1, 2], [2, 5], [3, 5], [4, 7]] as const);
+    const [c, d] = pick([[3, 4], [5, 6], [2, 3], [1, 3], [5, 7], [3, 8]] as const);
+    const n = a * c, D = b * d, g = pgcd(n, D);
+    return {
+      text: `Calculer $${tex(a, b)} \\times ${tex(c, d)}$. (Donner une fraction.)`,
+      format: "short",
+      expected: Array.from(new Set([`${n}/${D}`, D / g === 1 ? `${n / g}` : `${n / g}/${D / g}`])),
+      explanation: `On multiplie les numérateurs entre eux et les dénominateurs entre eux.\n$${tex(a * c, b * d)}$${g > 1 ? ` $= ${D / g === 1 ? n / g : tex(n / g, D / g)}$` : ""}.`,
+    };
+  }
+  if (cas === 3) {
+    const [a, b] = pick([[2, 3], [3, 4], [1, 2], [3, 5], [5, 6], [2, 7]] as const);
+    const [c, d] = pick([[1, 3], [3, 4], [2, 5], [1, 4], [5, 2], [4, 3]] as const);
+    const n = a * d, D = b * c, g = pgcd(n, D);
+    return {
+      text: `Calculer $${tex(a, b)} \\div ${tex(c, d)}$. (Donner une fraction.)`,
+      format: "short",
+      expected: Array.from(new Set([`${n}/${D}`, D / g === 1 ? `${n / g}` : `${n / g}/${D / g}`])),
+      explanation: `Diviser par une fraction, c'est multiplier par son inverse : $${tex(a, b)} \\times ${tex(d, c)}$.\n$= ${tex(n, D)}$${g > 1 ? ` $= ${D / g === 1 ? n / g : tex(n / g, D / g)}$` : ""}.`,
+    };
+  }
+  const [b, d] = pick([[3, 4], [4, 6], [2, 5], [6, 9], [5, 10], [3, 5], [4, 10], [6, 8]] as const);
+  let a = entre(1, 2 * b - 1), c = entre(1, 2 * d - 1);
+  while (a * d === c * b) { a = entre(1, 2 * b - 1); c = entre(1, 2 * d - 1); }
+  const L = (b * d) / pgcd(b, d);
+  const moins = Math.random() < 0.5;
+  const s = moins ? (a * L) / b - (c * L) / d : (a * L) / b + (c * L) / d;
+  const g = pgcd(Math.abs(s), L);
+  return {
+    text: `Calculer $${tex(a, b)} ${moins ? "-" : "+"} ${tex(c, d)}$. (Donner une fraction.)`,
+    format: "short",
+    expected: Array.from(new Set([`${s}/${L}`, L / g === 1 ? `${s / g}` : `${s / g}/${L / g}`])),
+    explanation: `Même dénominateur d'abord : ${L}. $${tex(a, b)} = ${tex((a * L) / b, L)}$ et $${tex(c, d)} = ${tex((c * L) / d, L)}$.\n$${tex((a * L) / b, L)} ${moins ? "-" : "+"} ${tex((c * L) / d, L)} = ${s < 0 ? `-${tex(-s, L)}` : tex(s, L)}$${g > 1 ? ` $= ${L / g === 1 ? s / g : s < 0 ? `-${tex(-s / g, L / g)}` : tex(s / g, L / g)}$` : ""}.`,
+  };
+}
+
+/** « Comparer des nombres décimaux et calculer avec des nombres décimaux (y compris négatifs). » */
+export function decimaux3e(): AutoQuestion {
+  const cas = entre(1, 3);
+  if (cas === 1) {
+    const paire = pick([
+      () => { const a = entre(10, 99) / 10; return [a, Math.round((a + 0.05) * 100) / 100]; },
+      () => { const e = entre(1, 9); return [e + 0.5, e + 0.45]; },
+      () => { const e = entre(1, 9); return [-(e + 0.3), -(e + 0.25)]; },
+      () => { const e = entre(1, 9); return [-e - 0.1, -e + 0.9]; },
+      () => { const e = entre(1, 5); return [-e, -(e + 0.5)]; },
+    ])();
+    const [x, y] = shuffle(paire);
+    const grand = Math.max(x, y);
+    return {
+      text: `Quel est le plus grand des deux nombres ${fr(x)} et ${fr(y)} ?`,
+      format: "short",
+      expected: accepte(grand),
+      explanation: `On compare chiffre par chiffre, rang par rang (${fr(x).includes(",") || fr(y).includes(",") ? "on peut compléter par des zéros : 2,5 = 2,50" : "d'abord la partie entière"}). Entre deux négatifs, le plus grand est le plus PROCHE de zéro.\nLe plus grand est ${fr(grand)}.`,
+    };
+  }
+  if (cas === 2) {
+    const a = entre(-40, 40) / 10, b = entre(-40, 40) / 10;
+    if (a === 0 || b === 0 || Number.isInteger(a) && Number.isInteger(b)) return decimaux3e();
+    const moins = Math.random() < 0.5;
+    const r = Math.round((moins ? a - b : a + b) * 10) / 10;
+    const pa = a < 0 ? `(${fr(a)})` : fr(a), pb = b < 0 ? `(${fr(b)})` : fr(b);
+    return {
+      text: `Calculer $${pa} ${moins ? "-" : "+"} ${pb}$.`,
+      format: "short",
+      expected: accepte(r),
+      explanation: `${moins ? `Soustraire, c'est ajouter l'opposé : $${pa} + ${-b < 0 ? `(${fr(-b)})` : fr(-b)}$. ` : ""}On compte en dixièmes, avec la règle des signes de l'addition.\n$${pa} ${moins ? "-" : "+"} ${pb} = ${fr(r)}$.`,
+    };
+  }
+  const a = pick([-0.5, -0.2, -0.3, 0.4, -1.5, 2.5, -0.1] as const).valueOf();
+  const b = pick([-4, -6, 3, 8, -2, 10, -20] as const).valueOf();
+  const r = Math.round(a * b * 100) / 100;
+  const pa = a < 0 ? `(${fr(a)})` : fr(a), pb = b < 0 ? `(${b})` : `${b}`;
+  return {
+    text: `Calculer $${pa} \\times ${pb}$.`,
+    format: "short",
+    expected: accepte(r),
+    explanation: `Le signe d'abord : ${(a < 0) === (b < 0) ? "deux facteurs de même signe, produit positif" : "deux facteurs de signes contraires, produit négatif"}. Puis $${fr(Math.abs(a))} \\times ${Math.abs(b)} = ${fr(Math.abs(r))}$.\nRésultat : ${fr(r)}.`,
+  };
+}
+
+/* — Transformations sur quadrillage (canvas `transformation`, celui du coach de 3e) — */
+
+type Pt = { x: number; y: number };
+
+/** Une figure de 3 ou 4 sommets, NON symétrique (sinon image et figure se confondent), dans la moitié gauche. */
+function figureQuelconque(): Pt[] {
+  for (;;) {
+    const n = pick([3, 4] as const);
+    const pts = Array.from({ length: n }, () => ({ x: entre(1, 4), y: entre(1, 8) }));
+    const cles = new Set(pts.map((p) => `${p.x},${p.y}`));
+    if (cles.size < n) continue;
+    const xs = pts.map((p) => p.x), ys = pts.map((p) => p.y);
+    if (Math.max(...xs) - Math.min(...xs) < 2 || Math.max(...ys) - Math.min(...ys) < 2) continue;
+    // Pas de symétrie propre évidente : aucun axe vertical ou horizontal ne la laisse en place.
+    const cx = Math.min(...xs) + Math.max(...xs), cy = Math.min(...ys) + Math.max(...ys);
+    const invV = pts.every((p) => cles.has(`${cx - p.x},${p.y}`));
+    const invH = pts.every((p) => cles.has(`${p.x},${cy - p.y}`));
+    const invC = pts.every((p) => cles.has(`${cx - p.x},${cy - p.y}`));
+    if (invV || invH || invC) continue;
+    return pts;
+  }
+}
+
+function canvasTransfo(transformation: string, source: Pt[], image: Pt[], extra: Record<string, unknown> = {}) {
+  return {
+    kind: "transformation",
+    transformation,
+    grid: { rows: 10, cols: 10 },
+    source: { label: "F", points: source },
+    image: { label: "F'", points: image },
+    ...extra,
+  } as unknown as CanvasFigure;
+}
+
+/**
+ * Symétrie axiale sur quadrillage (5e) : F' est-elle la symétrique de F par
+ * rapport à la droite tracée ? Le piège : une copie GLISSÉE, qui n'est pas retournée.
+ */
+export function symetrieQuadrillage(): AutoQuestion {
+  const F = figureQuelconque();
+  const axe = 5;
+  const vraie = F.map((p) => ({ x: 2 * axe - p.x, y: p.y }));
+  const bonne = Math.random() < 0.5;
+  const glisse = F.map((p) => ({ x: p.x + 5, y: p.y }));
+  const image = bonne ? vraie : glisse;
+  return {
+    text: "La figure F' est-elle la symétrique de la figure F par rapport à la droite tracée ? Répondre par oui ou par non.",
+    format: "short",
+    expected: bonne ? ["oui", "Oui"] : ["non", "Non"],
+    explanation: bonne
+      ? "Chaque sommet de F' est à la même distance de l'axe que son sommet dans F, de l'autre côté, sur la même ligne du quadrillage : F' est retournée, comme dans un miroir.\nOui, c'est la symétrique."
+      : "Une symétrie axiale RETOURNE la figure, comme un miroir : le sommet le plus proche de l'axe doit le rester de l'autre côté. Ici F' a seulement glissé vers la droite, sans se retourner.\nNon, c'est une translation.",
+    canvas: canvasTransfo("symetrie_axiale", F, image, { axis: { type: "vertical", x: axe } }),
+  };
+}
+
+/**
+ * Quelle transformation relie F et F' ? — sans tracer l'axe, le centre ni la
+ * flèche. La 4e : symétrie axiale ou demi-tour ; la 3e : la translation en plus.
+ */
+function quelleTransformation(avecTranslation: boolean): AutoQuestion {
+  const F = figureQuelconque();
+  const cas = pick([
+    { nom: "une symétrie axiale", kind: "symetrie_axiale", img: F.map((p) => ({ x: 10 - p.x, y: p.y })), signe: "la figure est retournée, comme dans un miroir" },
+    { nom: "une symétrie centrale", kind: "symetrie_centrale", img: F.map((p) => ({ x: 10 - p.x, y: 9 - p.y })), signe: "la figure a fait un demi-tour : elle a la tête en bas" },
+    ...(avecTranslation
+      ? [{ nom: "une translation", kind: "translation", img: F.map((p) => ({ x: p.x + 5, y: p.y })), signe: "la figure a glissé sans tourner ni se retourner" }]
+      : []),
+  ]);
+  const choix = avecTranslation
+    ? ["une symétrie axiale", "une symétrie centrale", "une translation"]
+    : ["une symétrie axiale", "une symétrie centrale"];
+  return {
+    text: `Quelle transformation permet de passer de la figure F à la figure F' ?`,
+    format: "qcm",
+    choices: shuffle(choix),
+    expected: [cas.nom],
+    explanation: `On suit un sommet, et on regarde surtout le SENS de la figure : une translation le garde, une symétrie axiale le retourne (miroir), une symétrie centrale fait faire un demi-tour.\nIci, ${cas.signe} : c'est ${cas.nom}.`,
+    canvas: canvasTransfo(cas.kind, F, cas.img, { display: { showGrid: true, showLabels: true } }),
+  };
+}
+
+export function quelleTransformation4e(): AutoQuestion {
+  return quelleTransformation(false);
+}
+
+export function quelleTransformation3e(): AutoQuestion {
+  return quelleTransformation(true);
+}
+
 /* ═══════════════ 10. RÉDIGER UNE RÉPONSE (la « question en gras ») ═══════════════ */
 
 // ⭐ Depuis 2026, la maîtrise de la langue vaut 2 points sur 20 à tous les
@@ -1473,8 +1855,8 @@ export const automatismes3e: AutoNiveau = {
   toujours: ["rediger"],
   themes: [
     // Nombres et calculs
-    { id: "fractions", label: "Fractions et écritures", generateurs: [fractionDe, ecritures, droiteGraduee] },
-    { id: "calcul", label: "Calcul mental", generateurs: [priorites, carres, notationScientifique] },
+    { id: "fractions", label: "Fractions et écritures", generateurs: [fractionDe, ecritures, droiteGraduee, fractions3e, ecrituresMultiples] },
+    { id: "calcul", label: "Calcul mental", generateurs: [priorites, carres, notationScientifique, decimaux3e] },
     { id: "entiers", label: "Divisibilité et nombres entiers", generateurs: [divisibilite, expressionsDeN] },
     { id: "litteral", label: "Calcul littéral", generateurs: [simplifierDevelopper, valeurExpression] },
     { id: "equations", label: "Équations", generateurs: [equationQuelCalcul, equationResoudre, equationsSimples] },
@@ -1486,8 +1868,9 @@ export const automatismes3e: AutoNiveau = {
     { id: "durees", label: "Durées et vitesses", generateurs: [convertirDurees, vitesseDuree, vitesseDistance] },
     { id: "unites", label: "Conversions d'unités", generateurs: [conversions] },
     // Espace et géométrie
-    { id: "repere", label: "Repère et symétries", generateurs: [coordonnees, symetries] },
-    { id: "angles", label: "Angles", generateurs: [sommeAngles, anglesVocabulaire] },
+    { id: "repere", label: "Repère et transformations", generateurs: [coordonnees, droiteRelatifs, symetries, quelleTransformation3e] },
+    { id: "codage", label: "Codage d'une figure", generateurs: [triangles5e, quadrilateres5e, quadrilateres] },
+    { id: "angles", label: "Angles", generateurs: [sommeAngles, anglesVocabulaire, angles5e] },
     { id: "mesures", label: "Périmètres et aires", generateurs: [perimetres, aires] },
     { id: "solides", label: "Solides et volumes", generateurs: [solides, volumes] },
     { id: "pythagore", label: "Pythagore et cosinus", generateurs: [pythagore, trigoQuelCalcul, cosinusLongueur] },

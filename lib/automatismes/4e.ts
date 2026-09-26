@@ -35,6 +35,7 @@ import {
   coordonnees,
   divisibilite,
   droiteGraduee,
+  droiteRelatifs,
   ecritures,
   expressionsDeN,
   fractionDe,
@@ -51,6 +52,8 @@ import {
   probabilites,
   programmeCalcul,
   proportionnalite,
+  quadrilateres,
+  quelleTransformation4e,
   redigerPourcentages,
   redigerPremier,
   solides,
@@ -544,66 +547,9 @@ export function equations4e(): AutoQuestion {
 
 /* ═══════════════ REPÈRE : DROITE GRADUÉE DES RELATIFS ═══════════════ */
 
-export function droiteRelatifs(): AutoQuestion {
-  const pas = pick([1, 0.5] as const).valueOf();
-  // Jamais au bout de la droite (−4 ou 4 : on ne sait pas si elle continue) ;
-  // avec un pas de 0,5, un demi entier, sinon la graduation ne sert à rien.
-  let v = entre(-7, 7) * pas;
-  while (v === 0 || v === 1 || Math.abs(v) >= 4 || (pas === 0.5 && Number.isInteger(v))) v = entre(-7, 7) * pas;
-  const canvas = {
-    kind: "number_line",
-    min: -4,
-    max: 4,
-    step: pas,
-    points: [
-      { value: 0, label: "0" },
-      { value: 1, label: "1" },
-      { value: v, label: "M", color: "#c2410c" },
-    ],
-    display: { showTicks: true, showValues: false, showPoints: true, showPointLabels: true },
-    size: { width: 440, height: 110 },
-  } as unknown as CanvasFigure;
-  return {
-    text: "Quelle est l'abscisse du point M sur cette droite graduée ?",
-    format: "short",
-    expected: accepte(v),
-    explanation: `On repère l'unité entre 0 et 1 : ${pas === 1 ? "chaque graduation vaut 1" : "elle est partagée en 2, chaque graduation vaut 0,5"}.\nM est à ${Math.abs(v / pas)} graduation${Math.abs(v / pas) > 1 ? "s" : ""} ${v < 0 ? "à gauche" : "à droite"} de 0 : son abscisse est ${fr(v)}.`,
-    canvas,
-  };
-}
-
 /* ═══════════════ PARALLÉLOGRAMMES PAR LE CODAGE ET LES DIAGONALES ═══════════════ */
 
 const NOMS_QUADRI = ["ABCD", "EFGH", "MNOP", "RSTU", "IJKL"] as const;
-const NATURES = ["un parallélogramme", "un rectangle", "un losange", "un carré"] as const;
-
-export function quadrilateres(): AutoQuestion {
-  const nom = pick(NOMS_QUADRI);
-  const [A, B, C, D] = nom.split("");
-  const cas = pick([
-    { t: `Les diagonales du quadrilatère ${nom} se coupent en leur milieu.`, r: 0, e: "Des diagonales qui se coupent en leur milieu : c'est la propriété caractéristique du parallélogramme." },
-    { t: `Les diagonales du quadrilatère ${nom} se coupent en leur milieu et ont la même longueur.`, r: 1, e: "Même milieu : parallélogramme ; même longueur en plus : rectangle." },
-    { t: `Les diagonales du quadrilatère ${nom} se coupent en leur milieu et sont perpendiculaires.`, r: 2, e: "Même milieu : parallélogramme ; perpendiculaires en plus : losange." },
-    { t: `Les diagonales du quadrilatère ${nom} se coupent en leur milieu, ont la même longueur et sont perpendiculaires.`, r: 3, e: "Même milieu et même longueur : rectangle ; perpendiculaires en plus : c'est aussi un losange, donc un carré." },
-    { t: `Le quadrilatère ${nom} a ses côtés opposés parallèles deux à deux.`, r: 0, e: "Côtés opposés parallèles deux à deux : c'est la définition du parallélogramme." },
-    { t: `Le quadrilatère ${nom} a ses côtés opposés de même longueur deux à deux.`, r: 0, e: "Côtés opposés de même longueur : c'est une propriété caractéristique du parallélogramme." },
-    { t: `Le quadrilatère ${nom} a ses quatre côtés de même longueur.`, r: 2, e: "Quatre côtés de même longueur : c'est un losange." },
-    { t: `${nom} est un parallélogramme et ${A}${B} = ${B}${C}.`, r: 2, e: "Un parallélogramme qui a deux côtés consécutifs de même longueur est un losange." },
-    { t: `${nom} est un parallélogramme et l'angle $\\widehat{${A}${B}${C}}$ est droit.`, r: 1, e: "Un parallélogramme qui a un angle droit est un rectangle." },
-    { t: `${nom} est un losange et l'angle $\\widehat{${B}${C}${D}}$ est droit.`, r: 3, e: "Un losange qui a un angle droit est aussi un rectangle : c'est un carré." },
-    { t: `${nom} est un rectangle et ${A}${B} = ${B}${C}.`, r: 3, e: "Un rectangle qui a deux côtés consécutifs de même longueur est aussi un losange : c'est un carré." },
-    { t: `${nom} est un parallélogramme et ses diagonales [${A}${C}] et [${B}${D}] ont la même longueur.`, r: 1, e: "Un parallélogramme dont les diagonales ont la même longueur est un rectangle." },
-    { t: `${nom} est un parallélogramme et ses diagonales [${A}${C}] et [${B}${D}] sont perpendiculaires.`, r: 2, e: "Un parallélogramme dont les diagonales sont perpendiculaires est un losange." },
-  ]);
-  const bonne = NATURES[cas.r];
-  return {
-    text: `${cas.t} Quelle est sa nature, la plus précise possible ?`,
-    format: "qcm",
-    choices: [...NATURES],
-    expected: [bonne],
-    explanation: `${cas.e}\n${nom} est ${bonne}.`,
-  };
-}
 
 /* ═══════════════ DROITES REMARQUABLES DU TRIANGLE ═══════════════ */
 
@@ -833,7 +779,7 @@ export const automatismes4e: AutoNiveau = {
     { id: "proportionnalite", label: "Proportionnalité", generateurs: [proportionnalite] },
     // Espace et géométrie
     { id: "repere", label: "Droite graduée et repère", generateurs: [droiteRelatifs, coordonnees] },
-    { id: "transformations", label: "Symétries et parallélogrammes", generateurs: [symetries, quadrilateres] },
+    { id: "transformations", label: "Symétries et parallélogrammes", generateurs: [symetries, quadrilateres, quelleTransformation4e] },
     { id: "triangles", label: "Triangles et angles", generateurs: [droitesRemarquables, sommeAngles, anglesVocabulaire] },
     { id: "mesures", label: "Aires et périmètres", generateurs: [aires, perimetres] },
     { id: "solides", label: "Solides et volumes", generateurs: [solides, volumes, conversions] },
