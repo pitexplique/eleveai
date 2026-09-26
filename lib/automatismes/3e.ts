@@ -1321,6 +1321,11 @@ export function volumes(): AutoQuestion {
 
 /* — Probabilités et fréquences — */
 
+/** « 1 boule rouge », « 3 boules rouges ». */
+function boules(n: number, couleur: string): string {
+  return n > 1 ? `${n} boules ${couleur}s` : `${n} boule ${couleur}`;
+}
+
 export function probabilites(): AutoQuestion {
   if (Math.random() < 0.5) {
     const r = entre(1, 6), b = entre(1, 6), v = entre(0, 4);
@@ -1328,7 +1333,8 @@ export function probabilites(): AutoQuestion {
     const coul = pick([{ n: r, c: "rouge" }, { n: b, c: "bleue" }]);
     const g = pgcd(coul.n, total);
     return {
-      text: `Un sac contient ${r} boules rouges, ${b} boules bleues${v ? ` et ${v} boules vertes` : ""}, indiscernables au toucher. On tire une boule au hasard. Quelle est la probabilité qu'elle soit ${coul.c} ? (Écrire une fraction.)`,
+      // ⛔ « 1 boules vertes » et « 6 boules rouges, 2 boules bleues, » sans « et » sortaient à la relecture (26/09).
+      text: `Un sac contient ${boules(r, "rouge")}${v ? ", " : " et "}${boules(b, "bleue")}${v ? ` et ${boules(v, "verte")}` : ""}, indiscernables au toucher. On tire une boule au hasard. Quelle est la probabilité qu'elle soit ${coul.c} ? (Écrire une fraction.)`,
       format: "short",
       expected: Array.from(new Set([`${coul.n}/${total}`, `${coul.n / g}/${total / g}`])),
       explanation: `Chaque boule a la même chance d'être tirée : probabilité = nombre de cas favorables ÷ nombre de cas possibles.\n$\\dfrac{${coul.n}}{${total}}$${g > 1 ? ` $= \\dfrac{${coul.n / g}}{${total / g}}$` : ""}.`,
