@@ -1,24 +1,39 @@
 // lib/automatismes/seconde.ts
 //
-// Automatismes de Seconde — 24/09/2026.
+// Automatismes de Seconde — 24/09/2026, recalés le 26/09/2026.
 //
-// ⭐ LA RÉFÉRENCE : l'annexe du BO n° 24 du 12 juin 2025, « Automatismes
-// évaluables lors de l'épreuve anticipée de mathématiques » — « les
-// automatismes relevant du programme de seconde […] sont en italique ».
-// ⛔ Au premier jet, ce fichier affirmait qu'il n'y avait pas de liste pour la
-// seconde ; Frédéric a apporté l'annexe le jour même (« je me trompe ou
-// quoi ? »). Il n'y a pas d'épreuve en fin de seconde, mais c'est exactement ce
-// que l'épreuve anticipée de première pourra reprendre. Même règle : réponses
-// courtes, au clavier, SANS QCM.
+// ⭐ LA RÉFÉRENCE : la partie « Automatismes » du PROGRAMME DE SECONDE (annexe
+// « Programme d'enseignement de mathématiques de la classe de seconde générale
+// et technologique »), apportée par Frédéric le 26/09. Frédéric : « on colle
+// strictement la liste ».
 //
-// Les générateurs partagés viennent de premiere.ts, appelés seulement avec
-// leurs CAS en italique. Ce fichier écrit en plus ce que le programme de
-// seconde contient et que l'annexe ne cite pas — réels et intervalles, valeur
-// absolue, ensembles de nombres, arithmétique, fonctions de référence, vecteurs,
-// Python —, marqué `horsEpreuve` : on peut le cocher, « la totale » ne le tire
-// pas.
+// ⛔ Ce qui a changé le 26/09 :
+// - SORTIS : intervalles et valeur absolue, multiples et diviseurs, fonctions
+//   de référence, vecteurs, Python. Au programme de seconde, mais pas dans sa
+//   liste d'automatismes (ils étaient « hors épreuve », cochables seulement).
+// - ENTRÉ : le bloc « Géométrie » de la liste, que l'annexe de l'épreuve
+//   anticipée de première (notre première source) n'a pas : droite graduée,
+//   repère, périmètres, aires, volumes (pyramide, cône et boule compris),
+//   Pythagore, Thalès, cosinus, sinus, tangente.
+//
+// Les générateurs de calcul, fonctions, statistiques et probabilités viennent
+// de premiere.ts, appelés avec les CAS de la liste de seconde ; ceux de
+// géométrie, de 3e.ts. ⭐ Règle des QCM en seconde (Frédéric, 26/09) : « QCM
+// que si c'est difficile à taper » — un nombre se tape ; une égalité
+// (Pythagore) ou un quotient de longueurs (trigonométrie) se choisit.
 
 import type { AutoNiveau, AutoQuestion } from "./types";
+import {
+  aires,
+  coordonnees,
+  cosinusLongueur,
+  droiteRelatifs,
+  perimetres,
+  pythagore,
+  thalesLongueur,
+  triangleRectangle,
+  volumes,
+} from "./3e";
 import {
   calculLitteral,
   comparer,
@@ -50,12 +65,6 @@ function entre(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function nonNul(min: number, max: number): number {
-  let n = entre(min, max);
-  while (n === 0) n = entre(min, max);
-  return n;
-}
-
 function fr(n: number): string {
   return String(Math.round(n * 1e6) / 1e6).replace(".", ",");
 }
@@ -65,228 +74,113 @@ function accepte(n: number): string[] {
   return Array.from(new Set([s, s.replace(",", ".")]));
 }
 
-/** Un couple de coordonnées, sous les écritures qu'un élève tape. */
-function couple(x: number, y: number): string[] {
-  return [`(${x};${y})`, `(${x} ; ${y})`, `(${x},${y})`, `${x};${y}`];
+function shuffle<T>(arr: readonly T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }
 
-/* ═══════════════ RÉELS, INTERVALLES, VALEUR ABSOLUE, ENSEMBLES ═══════════════ */
-
-function reels(): AutoQuestion {
-  const cas = entre(1, 4);
-  if (cas === 1) {
-    const a = entre(-6, 3), b = entre(a + 3, 9);
-    const gOuvert = Math.random() < 0.5, dOuvert = Math.random() < 0.5;
-    const plusPetit = Math.random() < 0.5;
-    const rep = plusPetit ? (gOuvert ? a + 1 : a) : dOuvert ? b - 1 : b;
-    const itv = `${gOuvert ? "]" : "["}${a} ; ${b}${dOuvert ? "[" : "]"}`;
-    return {
-      text: `Quel est le ${plusPetit ? "plus petit" : "plus grand"} nombre ENTIER de l'intervalle $${itv}$ ?`,
-      format: "short",
-      expected: accepte(rep),
-      explanation: `Un crochet tourné vers l'extérieur exclut la borne ; tourné vers l'intérieur, il l'inclut.\n${plusPetit ? `${a} est ${gOuvert ? "exclu" : "inclus"}` : `${b} est ${dOuvert ? "exclu" : "inclus"}`} : la réponse est ${rep}.`,
-    };
-  }
-  if (cas === 2) {
-    const a = nonNul(-9, 9), b = entre(-5, 5), c = entre(-5, 5);
-    const rep = Math.abs(a) + Math.abs(b - c);
-    return {
-      text: `Calculer $|${a}| + |${b} - ${c < 0 ? `(${c})` : c}|$.`,
-      format: "short",
-      expected: accepte(rep),
-      explanation: `La valeur absolue d'un nombre est sa distance à zéro : elle n'est jamais négative.\n$|${a}| = ${Math.abs(a)}$ et $|${b - c}| = ${Math.abs(b - c)}$, donc ${rep}.`,
-    };
-  }
-  if (cas === 3) {
-    const a = entre(-4, 5), r = entre(1, 5);
-    return {
-      text: `Résoudre $|x - ${a < 0 ? `(${a})` : a}| = ${r}$. Donner les deux solutions, séparées par « ; ».`,
-      format: "short",
-      expected: [`${a - r};${a + r}`],
-      compare: "ensemble",
-      explanation: `$|x - ${a}|$ est la DISTANCE entre $x$ et ${a}. Les nombres à distance ${r} de ${a} sont ${a} − ${r} et ${a} + ${r}.\nSolutions : ${a - r} et ${a + r}.`,
-    };
-  }
-  const n = pick([
-    { t: "$-7$", r: "Z", pourquoi: "un entier négatif : il est dans ℤ, pas dans ℕ" },
-    { t: "$12$", r: "N", pourquoi: "un entier positif : il est déjà dans ℕ" },
-    { t: "$-\\dfrac{3}{4}$", r: "D", pourquoi: "$-\\dfrac{3}{4} = -0,75$ : un nombre décimal, dans 𝔻" },
-    { t: "$\\dfrac{1}{3}$", r: "Q", pourquoi: "$\\dfrac{1}{3} = 0,333\\ldots$ ne s'écrit pas avec un nombre fini de décimales : il est dans ℚ, pas dans 𝔻" },
-    { t: "$\\sqrt{2}$", r: "R", pourquoi: "$\\sqrt{2}$ n'est pas un quotient d'entiers : il n'est que dans ℝ" },
-    { t: "$\\pi$", r: "R", pourquoi: "π n'est pas rationnel : il n'est que dans ℝ" },
-    { t: "$\\dfrac{12}{4}$", r: "N", pourquoi: "$\\dfrac{12}{4} = 3$ : un entier naturel, malgré son écriture" },
-    { t: "$2,5$", r: "D", pourquoi: "un nombre décimal, pas entier : dans 𝔻" },
-    { t: "$\\dfrac{2}{7}$", r: "Q", pourquoi: "$\\dfrac{2}{7}$ a une écriture décimale illimitée : dans ℚ, pas dans 𝔻" },
-    { t: "$\\sqrt{16}$", r: "N", pourquoi: "$\\sqrt{16} = 4$ : un entier naturel" },
-  ]);
-  const lettres: Record<string, string[]> = {
-    N: ["N", "ℕ", "n"], Z: ["Z", "ℤ", "z"], D: ["D", "𝔻", "d"], Q: ["Q", "ℚ", "q"], R: ["R", "ℝ", "r"],
-  };
-  return {
-    text: `Quel est le plus petit ensemble — N, Z, D, Q ou R — qui contient ${n.t} ? (Répondre par une lettre.)`,
-    format: "short",
-    expected: lettres[n.r],
-    explanation: `ℕ ⊂ ℤ ⊂ 𝔻 ⊂ ℚ ⊂ ℝ. Ici, ${n.pourquoi}.\nRéponse : ${n.r}.`,
-  };
+/** « 12π », « 12 π », « 12pi » : les écritures d'un multiple de π. */
+function enPi(k: number): string[] {
+  return [`${k}π`, `${k} π`, `${k}pi`, `${k} pi`, `${k}×π`];
 }
 
-/* ═══════════════ ARITHMÉTIQUE ═══════════════ */
+const NOMS = [["A", "B", "C"], ["E", "F", "G"], ["R", "S", "T"], ["K", "L", "M"], ["P", "Q", "R"]] as const;
 
-function arithmetique(): AutoQuestion {
+/* ═══════════════ TRIGONOMÉTRIE : COSINUS, SINUS, TANGENTE ═══════════════ */
+
+function trigonometrie(): AutoQuestion {
+  const [A, B, C] = pick(NOMS);
   const cas = entre(1, 3);
   if (cas === 1) {
-    const [n, p] = pick([[91, 7], [77, 7], [119, 7], [143, 11], [221, 13], [187, 11], [133, 7], [209, 11], [161, 7], [247, 13]] as const);
-    return {
-      text: `Quel est le plus petit diviseur premier de ${n} ?`,
-      format: "short",
-      expected: accepte(p),
-      explanation: `On essaie les nombres premiers dans l'ordre : 2 (${n} est impair), 3 (somme des chiffres ${String(n).split("").reduce((s, c) => s + +c, 0)}, pas un multiple de 3), 5 (ne finit ni par 0 ni par 5)${p > 7 ? ", 7" : ""}…\n$${n} = ${p} \\times ${n / p}$ : c'est ${p}.`,
-    };
-  }
-  if (cas === 2) {
-    const n = pick([12, 18, 20, 28, 30, 36, 45, 50] as const).valueOf();
-    const d = Array.from({ length: n }, (_, i) => i + 1).filter((k) => n % k === 0);
-    return {
-      text: `Combien le nombre ${n} a-t-il de diviseurs positifs ?`,
-      format: "short",
-      expected: accepte(d.length),
-      explanation: `On les cherche par paires : ${d.slice(0, Math.ceil(d.length / 2)).map((k) => `${k} × ${n / k}`).join(", ")}.\nSes diviseurs sont ${d.join(", ")} : il y en a ${d.length}.`,
-    };
-  }
-  const a = entre(2, 9) * entre(3, 12);
-  const b = pick([3, 4, 6, 7, 8, 9] as const).valueOf();
-  const oui = a % b === 0;
-  return {
-    text: `Le nombre ${a} est-il un multiple de ${b} ? Répondre par oui ou par non.`,
-    format: "short",
-    expected: oui ? ["oui", "Oui"] : ["non", "Non"],
-    explanation: oui
-      ? `Oui : $${a} = ${b} \\times ${a / b}$.`
-      : `Non : $${a} = ${b} \\times ${Math.floor(a / b)} + ${a % b}$, le reste n'est pas nul.`,
-  };
-}
-
-/* ═══════════════ FONCTIONS DE RÉFÉRENCE ═══════════════ */
-
-function reference(): AutoQuestion {
-  const cas = entre(1, 3);
-  if (cas === 1) {
-    const q = pick([
-      () => { const x = nonNul(-9, 9); return { t: `$f(x) = x^2$. Calculer $f(${x})$.`, r: x * x, e: `$(${x})^2 = ${x * x}$ : un carré est toujours positif.` }; },
-      () => { const x = pick([2, 4, 5, 10, 0.5, 0.25] as const).valueOf(); return { t: `$g(x) = \\dfrac{1}{x}$. Calculer $g(${fr(x)})$.`, r: 1 / x, e: `L'inverse de ${fr(x)} est $\\dfrac{1}{${fr(x)}} = ${fr(1 / x)}$.` }; },
-      () => { const k = entre(2, 12); return { t: `$h(x) = \\sqrt{x}$. Calculer $h(${k * k})$.`, r: k, e: `$\\sqrt{${k * k}} = ${k}$, car $${k}^2 = ${k * k}$ et ${k} est positif.` }; },
-      () => { const x = nonNul(-4, 4); return { t: `$u(x) = x^3$. Calculer $u(${x})$.`, r: x ** 3, e: `$(${x})^3 = ${x} \\times ${x} \\times ${x} = ${x ** 3}$ : le cube garde le signe.` }; },
+    // Un quotient de longueurs se tape mal : QCM (Frédéric, 26/09 : « QCM que
+    // si c'est difficile à taper »). Et pas d'exemple dans l'énoncé : il
+    // soufflait la forme de la réponse.
+    const f = pick([
+      { nom: "sin", haut: `${A}${C}`, bas: `${B}${C}`, mot: "côté opposé ÷ hypoténuse" },
+      { nom: "cos", haut: `${A}${B}`, bas: `${B}${C}`, mot: "côté adjacent ÷ hypoténuse" },
+      { nom: "tan", haut: `${A}${C}`, bas: `${A}${B}`, mot: "côté opposé ÷ côté adjacent" },
     ]);
-    const { t, r, e } = q();
-    return { text: t, format: "short", expected: accepte(r), explanation: e };
-  }
-  if (cas === 2) {
-    const a = entre(2, 9), b = entre(2, 9);
-    if (a === b) return reference();
-    const sa = -a, sb = -b;
-    const grand = Math.max(a * a, b * b);
+    const q = (h: string, b: string) => `$\\dfrac{${h}}{${b}}$`;
+    const bonne = q(f.haut, f.bas);
+    const toutes = [q(`${A}${C}`, `${B}${C}`), q(`${A}${B}`, `${B}${C}`), q(`${A}${C}`, `${A}${B}`), q(f.bas, f.haut)];
     return {
-      text: `Sans calculatrice, donner le plus grand des deux nombres $(${sa})^2$ et $(${sb})^2$.`,
-      format: "short",
-      expected: accepte(grand),
-      explanation: `La fonction carré est DÉCROISSANTE sur $]-\\infty ; 0]$ : plus un négatif est petit, plus son carré est grand.\n$(${Math.min(sa, sb)})^2 = ${grand}$ est le plus grand.`,
-    };
-  }
-  const k = pick([2, 4, 5, 10, -2, -4] as const).valueOf();
-  return {
-    text: `Résoudre $\\dfrac{1}{x} = ${k}$. Donner $x$ (nombre décimal).`,
-    format: "short",
-    expected: [...accepte(1 / k), `1/${k}`],
-    explanation: `$\\dfrac{1}{x} = ${k}$ équivaut à $x = \\dfrac{1}{${k}}$.\n$x = ${fr(1 / k)}$.`,
-  };
-}
-
-/* ═══════════════ VECTEURS ET REPÈRE ═══════════════ */
-
-function vecteurs(): AutoQuestion {
-  const cas = entre(1, 4);
-  const xA = entre(-5, 4), yA = entre(-5, 4);
-  if (cas === 1) {
-    const xB = entre(-5, 5), yB = entre(-5, 5);
-    return {
-      text: `Dans un repère, $A(${xA} ; ${yA})$ et $B(${xB} ; ${yB})$. Donner les coordonnées du vecteur $\\overrightarrow{AB}$, sous la forme (x ; y).`,
-      format: "short",
-      expected: couple(xB - xA, yB - yA),
-      explanation: `$\\overrightarrow{AB}(x_B - x_A ; y_B - y_A)$ : l'ARRIVÉE moins le DÉPART.\n$(${xB} - (${xA}) ; ${yB} - (${yA})) = (${xB - xA} ; ${yB - yA})$.`,
+      text: `Le triangle ${A}${B}${C} est rectangle en ${A}. À quel quotient est égal $\\${f.nom}(\\widehat{${A}${B}${C}})$ ?`,
+      format: "qcm",
+      choices: shuffle(Array.from(new Set(toutes))),
+      expected: [bonne],
+      explanation: `Vu de l'angle en ${B} : l'hypoténuse est [${B}${C}], le côté opposé [${A}${C}], le côté adjacent [${A}${B}].\n$\\${f.nom}(\\widehat{${A}${B}${C}})$ = ${f.mot} = $\\dfrac{${f.haut}}{${f.bas}}$.`,
+      canvas: triangleRectangle([A, B, C]),
     };
   }
   if (cas === 2) {
-    const xB = xA + 2 * entre(-3, 3), yB = yA + 2 * entre(-3, 3);
-    const mx = (xA + xB) / 2, my = (yA + yB) / 2;
+    // sin 30° = 0,5 ; tan 45° = 1 : la valeur est donnée, le calcul se fait de tête
+    const f = pick([
+      { nom: "sin", angle: 30, v: 0.5, connu: "hyp", cherche: "opp" },
+      { nom: "tan", angle: 45, v: 1, connu: "adj", cherche: "opp" },
+      { nom: "sin", angle: 30, v: 0.5, connu: "opp", cherche: "hyp" },
+    ]);
+    const L = f.connu === "opp" ? entre(2, 9) : 2 * entre(2, 9);
+    const rep = f.cherche === "hyp" ? L / f.v : L * f.v;
+    const nomsCotes = { hyp: `${B}${C}`, opp: `${A}${C}`, adj: `${A}${B}` };
+    const cotes: Record<string, string> = {};
+    cotes[f.connu === "hyp" ? "BC" : f.connu === "opp" ? "CA" : "AB"] = `${L} cm`;
+    cotes[f.cherche === "hyp" ? "BC" : "CA"] = "?";
     return {
-      text: `Dans un repère, $A(${xA} ; ${yA})$ et $B(${xB} ; ${yB})$. Donner les coordonnées du milieu $I$ de $[AB]$, sous la forme (x ; y).`,
+      text: `Le triangle ${A}${B}${C} est rectangle en ${A}, $\\widehat{${A}${B}${C}} = ${f.angle}°$ et ${nomsCotes[f.connu as "hyp" | "opp" | "adj"]} = ${L} cm. On sait que $\\${f.nom}(${f.angle}°) = ${fr(f.v)}$. Calculer ${nomsCotes[f.cherche as "hyp" | "opp"]}, en cm.`,
       format: "short",
-      expected: couple(mx, my),
-      explanation: `Le milieu a pour coordonnées les MOYENNES : $\\left(\\dfrac{x_A + x_B}{2} ; \\dfrac{y_A + y_B}{2}\\right)$.\n$\\left(\\dfrac{${xA + xB}}{2} ; \\dfrac{${yA + yB}}{2}\\right) = (${mx} ; ${my})$.`,
+      expected: accepte(rep),
+      explanation:
+        f.nom === "sin"
+          ? `$\\sin(\\widehat{${A}${B}${C}}) = \\dfrac{${A}${C}}{${B}${C}}$ (opposé ÷ hypoténuse), donc $\\dfrac{${A}${C}}{${B}${C}} = 0,5$.\n${f.cherche === "hyp" ? `${B}${C} = ${L} \\div 0,5 = ${fr(rep)}` : `${A}${C} = 0,5 \\times ${L} = ${fr(rep)}`} cm.`
+          : `$\\tan(\\widehat{${A}${B}${C}}) = \\dfrac{${A}${C}}{${A}${B}}$ (opposé ÷ adjacent) = 1 : les deux côtés de l'angle droit sont égaux.\n${A}${C} = ${fr(rep)} cm.`,
+      canvas: triangleRectangle([A, B, C], cotes, `${f.angle}°`),
     };
   }
-  if (cas === 3) {
-    const [dx, dy, d] = pick([[3, 4, 5], [6, 8, 10], [5, 12, 13], [4, 3, 5], [8, 6, 10], [12, 5, 13]] as const);
-    const sx = pick([1, -1] as const), sy = pick([1, -1] as const);
-    const xB = xA + sx * dx, yB = yA + sy * dy;
-    return {
-      text: `Dans un repère orthonormé, $A(${xA} ; ${yA})$ et $B(${xB} ; ${yB})$. Calculer la distance $AB$.`,
-      format: "short",
-      expected: accepte(d),
-      explanation: `$AB = \\sqrt{(x_B - x_A)^2 + (y_B - y_A)^2}$ — c'est Pythagore.\n$\\sqrt{${sx * dx}^2 + ${sy * dy}^2} = \\sqrt{${dx * dx} + ${dy * dy}} = \\sqrt{${d * d}} = ${d}$.`,
-    };
-  }
-  const ux = entre(-5, 5), uy = entre(-5, 5), vx = entre(-5, 5), vy = entre(-5, 5);
-  const k = pick([1, 2, 3] as const).valueOf();
+  // tan = opposé / adjacent, avec des longueurs données
+  const [opp, adj] = pick([[3, 4], [4, 5], [6, 8], [1, 2], [3, 5], [2, 5], [9, 10], [7, 10]] as const);
   return {
-    text: `On donne $\\vec{u}(${ux} ; ${uy})$ et $\\vec{v}(${vx} ; ${vy})$. Donner les coordonnées de $${k === 1 ? "" : k}\\vec{u} + \\vec{v}$, sous la forme (x ; y).`,
+    text: `Le triangle ${A}${B}${C} est rectangle en ${A}, avec ${A}${B} = ${adj} cm et ${A}${C} = ${opp} cm. Calculer $\\tan(\\widehat{${A}${B}${C}})$ (écriture décimale).`,
     format: "short",
-    expected: couple(k * ux + vx, k * uy + vy),
-    explanation: `On calcule coordonnée par coordonnée${k > 1 ? `, après avoir multiplié celles de $\\vec{u}$ par ${k}` : ""}.\n$(${k * ux} + (${vx}) ; ${k * uy} + (${vy})) = (${k * ux + vx} ; ${k * uy + vy})$.`,
+    expected: accepte(opp / adj),
+    explanation: `$\\tan(\\widehat{${A}${B}${C}}) = \\dfrac{\\text{opposé}}{\\text{adjacent}} = \\dfrac{${A}${C}}{${A}${B}}$.\n$\\dfrac{${opp}}{${adj}} = ${fr(opp / adj)}$.`,
+    canvas: triangleRectangle([A, B, C], { AB: `${adj} cm`, CA: `${opp} cm` }),
   };
 }
 
-/* ═══════════════ PYTHON ═══════════════ */
+/* ═══════════════ VOLUMES : PYRAMIDE, CÔNE, BOULE ═══════════════ */
 
-function python(): AutoQuestion {
+function volumesSeconde(): AutoQuestion {
   const cas = entre(1, 3);
   if (cas === 1) {
-    const n = entre(3, 7);
-    const pasDeux = Math.random() < 0.4;
-    const valeurs = Array.from({ length: n }, (_, i) => (pasDeux ? 2 * (i + 1) : i + 1));
-    const s = valeurs.reduce((a, b) => a + b, 0);
+    const h = 3 * entre(1, 5), B = entre(4, 20);
     return {
-      text:
-        "Quel nombre ce programme affiche-t-il ?\n\n```python\ns = 0\n" +
-        (pasDeux ? `for i in range(1, ${n + 1}):\n    s = s + 2 * i\n` : `for i in range(1, ${n + 1}):\n    s = s + i\n`) +
-        "print(s)\n```",
+      text: `Une pyramide a une base d'aire ${B} cm² et une hauteur de ${h} cm. Quel est son volume, en cm³ ?`,
       format: "short",
-      expected: accepte(s),
-      explanation: `\`range(1, ${n + 1})\` donne les entiers de 1 à ${n} (la borne ${n + 1} est EXCLUE).\n$s = ${valeurs.join(" + ")} = ${s}$.`,
+      expected: accepte((B * h) / 3),
+      explanation: `Volume d'une pyramide = aire de la base × hauteur ÷ 3.\n$${B} \\times ${h} \\div 3 = ${(B * h) / 3}$ cm³.`,
     };
   }
   if (cas === 2) {
-    const a = nonNul(-4, 5), b = entre(-6, 6), x = entre(-3, 5);
+    const r = entre(1, 6), h = 3 * entre(1, 4);
+    const k = (r * r * h) / 3;
     return {
-      text:
-        "Quel nombre ce programme affiche-t-il ?\n\n```python\ndef f(x):\n" +
-        `    return ${a} * x ${b >= 0 ? "+" : "-"} ${Math.abs(b)}\n\nprint(f(${x}))\n` +
-        "```",
+      text: `Un cône a un rayon de base de ${r} cm et une hauteur de ${h} cm. Donner la valeur exacte de son volume, en cm³, en fonction de $\\pi$.`,
       format: "short",
-      expected: accepte(a * x + b),
-      explanation: `\`f(${x})\` remplace x par ${x} : $${a} \\times (${x}) ${b >= 0 ? "+" : "-"} ${Math.abs(b)} = ${a * x + b}$.`,
+      expected: enPi(k),
+      explanation: `Volume d'un cône = $\\dfrac{1}{3} \\times \\pi r^2 \\times h$.\n$\\dfrac{1}{3} \\times \\pi \\times ${r * r} \\times ${h} = ${k}\\pi$ cm³.`,
     };
   }
-  const seuil = entre(8, 15), x = entre(3, 20);
-  const rep = x > seuil ? x - seuil : 2 * x;
+  const r = pick([3, 6, 9] as const).valueOf();
+  const k = (4 * r ** 3) / 3;
   return {
-    text:
-      "Quel nombre ce programme affiche-t-il ?\n\n```python\n" +
-      `x = ${x}\nif x > ${seuil}:\n    y = x - ${seuil}\nelse:\n    y = 2 * x\nprint(y)\n` +
-      "```",
+    text: `Une boule a un rayon de ${r} cm. Donner la valeur exacte de son volume, en cm³, en fonction de $\\pi$.`,
     format: "short",
-    expected: accepte(rep),
-    explanation: `${x} > ${seuil} est ${x > seuil ? "VRAI" : "FAUX"} : on passe dans ${x > seuil ? `le \`if\`, y = ${x} − ${seuil}` : `le \`else\`, y = 2 × ${x}`}.\nLe programme affiche ${rep}.`,
+    expected: enPi(k),
+    explanation: `Volume d'une boule = $\\dfrac{4}{3} \\pi r^3$.\n$${r}^3 = ${r ** 3}$, puis $\\dfrac{4}{3} \\times ${r ** 3} = ${k}$ : ${k}$\\pi$ cm³.`,
   };
 }
 
@@ -296,19 +190,13 @@ export const automatismesSeconde: AutoNiveau = {
   classe: "seconde",
   label: "Seconde",
   duree: 20,
-  examen: "Pas d'épreuve en seconde : ce sont les automatismes que l'épreuve anticipée de première évaluera. Réponses courtes, sans calculatrice",
+  examen: "Pas d'épreuve en seconde : la liste d'automatismes du programme de seconde, que l'épreuve anticipée de première reprendra. Réponses courtes, sans calculatrice",
   nbQuestions: 10,
-  // ⭐ ALIGNÉ SUR L'ANNEXE DU BO n° 24 DU 12 JUIN 2025 (24/09/2026) : elle
-  // met EN ITALIQUE « les automatismes relevant du programme de seconde ».
-  // ⛔ Il y a donc bien une liste pour la seconde — ce fichier disait le
-  // contraire au premier jet. Chaque générateur partagé n'est appelé qu'avec
-  // les CAS en italique : pas de produit nul, pas de signe d'expression, pas de
-  // taux successifs ni réciproques, pas de probabilités conditionnelles.
-  // Les thèmes du programme de seconde que l'annexe ne cite pas (intervalles,
-  // arithmétique, fonctions de référence, vecteurs, Python) restent, marqués
-  // « hors épreuve ».
+  // Les générateurs de première ne sont appelés qu'avec les CAS de la liste de
+  // seconde : pas de produit nul, pas de signe d'expression, pas de taux
+  // successifs ni réciproques, pas de probabilités conditionnelles.
   themes: [
-    // Calcul numérique et algébrique (tout en italique)
+    // Calcul numérique et algébrique
     { id: "comparer", label: "Comparer deux nombres", generateurs: [comparer] },
     { id: "fractions", label: "Fractions", generateurs: [fractionsCalcul] },
     { id: "puissances", label: "Puissances", generateurs: [puissances, ecritureScientifique] },
@@ -321,19 +209,18 @@ export const automatismesSeconde: AutoNiveau = {
     { id: "equations", label: "Équations", generateurs: [() => equations([1, 3, 4])] },
     { id: "inequations", label: "Inéquations du premier degré", generateurs: [() => inequations([1])] },
     { id: "formules", label: "Formules : isoler, appliquer", generateurs: [formules] },
-    // Proportions (partie ↔ tout, en %) ; évolutions : seulement « +5 % = × 1,05 »
+    // Proportions et pourcentages ; évolutions : seulement « +5 % = × 1,05 »
     { id: "proportions", label: "Proportions et pourcentages", generateurs: [() => proportions([3, 4])] },
     { id: "evolutions", label: "Coefficient multiplicateur", generateurs: [() => evolutions([1])] },
-    // Fonctions : images, antécédents, appartenance d'un point
+    // Fonctions et représentations
     { id: "fonctions", label: "Fonctions : images et antécédents", generateurs: [() => fonctions([1, 3, 4]), droites] },
-    // Statistiques (tout en italique) ; probabilités sans conditionnelles
+    // Géométrie (ajoutée le 26/09)
+    { id: "reperage", label: "Droite graduée et repère", generateurs: [droiteRelatifs, coordonnees] },
+    { id: "mesures", label: "Périmètres, aires, volumes", generateurs: [perimetres, aires, volumes, volumesSeconde] },
+    { id: "pythagore", label: "Pythagore et Thalès", generateurs: [pythagore, thalesLongueur] },
+    { id: "trigo", label: "Trigonométrie", generateurs: [trigonometrie, cosinusLongueur] },
+    // Statistiques et probabilités
     { id: "stats", label: "Statistiques", generateurs: [statistiques] },
     { id: "probas", label: "Probabilités", generateurs: [() => probabilites([3, 4])] },
-    // Programme de seconde, hors de l'annexe
-    { id: "reels", label: "Intervalles, valeur absolue (hors épreuve)", generateurs: [reels], horsEpreuve: true },
-    { id: "arithmetique", label: "Multiples, diviseurs (hors épreuve)", generateurs: [arithmetique], horsEpreuve: true },
-    { id: "reference", label: "Fonctions de référence (hors épreuve)", generateurs: [reference], horsEpreuve: true },
-    { id: "vecteurs", label: "Vecteurs et repère (hors épreuve)", generateurs: [vecteurs], horsEpreuve: true },
-    { id: "python", label: "Python (hors épreuve)", generateurs: [python], horsEpreuve: true },
   ],
 };

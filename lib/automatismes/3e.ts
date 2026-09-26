@@ -633,7 +633,7 @@ export function aires(): AutoQuestion {
 /* ═══════════════ 7. PYTHAGORE, THALÈS, TRIGONOMÉTRIE ═══════════════ */
 
 /** Triangle rectangle en `A` (angle droit en bas à gauche), comme au sujet 0. */
-function triangleRectangle(noms: readonly string[], cotes?: { AB?: string; CA?: string; BC?: string }, angleB?: string) {
+export function triangleRectangle(noms: readonly string[], cotes?: { AB?: string; CA?: string; BC?: string }, angleB?: string) {
   return {
     kind: "triangle",
     points: { A: { x: 55, y: 190 }, B: { x: 240, y: 190 }, C: { x: 55, y: 60 } },
