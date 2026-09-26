@@ -12,6 +12,15 @@ import LivretClient from "../LivretClient";
 // avec lui sous ~60 signes.
 
 const LIVRETS: Record<string, { title: string; description: string }> = {
+  // ⏳ CM1 et CM2 (26/09) : titres à faire valider par Frédéric.
+  cm1: {
+    title: "Calcul mental CM1 : 20 séries corrigées en PDF",
+    description: "Vingt séries de calcul mental de CM1 à imprimer, corrigées à la fin : tables, doubles et moitiés, fractions usuelles, × 10, + 9. Le programme 2025, rien de plus.",
+  },
+  cm2: {
+    title: "Calcul mental CM2 : 20 séries corrigées en PDF",
+    description: "Vingt séries de calcul mental de CM2 à imprimer, corrigées à la fin : tables, fractions usuelles, décimaux, × 5 et × 50, ÷ 4. Le programme 2025, rien de plus.",
+  },
   "6e": {
     title: "Automatismes maths 6e : 20 séries corrigées en PDF",
     description: "Vingt séries d'automatismes de 6e à imprimer, corrigées à la fin : décimaux, fractions, calcul mental, mesures. Nouvelles questions à chaque édition.",
