@@ -170,7 +170,7 @@ const CONDENSES: Condense[] = [
   {
     id: "trigonometrie",
     emoji: "🌀",
-    titre: "Fonctions trigonométriques",
+    titre: "Trigonométrie",
     domaine: "Analyse",
     essentiel:
       "Le **radian** mesure un angle par la longueur d'arc : $\\pi$ rad $=180°$. Sur le **cercle trigonométrique** (rayon 1), $\\cos x$ est l'**abscisse** et $\\sin x$ l'**ordonnée** du point. Les valeurs remarquables par cœur + les angles associés = l'essentiel du chapitre.",

@@ -1,6 +1,6 @@
 // lib/tutor-v4/questionBank/premiere-spe/maths/trigonometrie.bank.ts
 //
-// Chapitre : Fonctions trigonométriques (notion "trigonometrie")
+// Chapitre : Trigonométrie (notion "trigonometrie")
 // microSkills :
 //   trig_radian             — radian et conversion avec les degrés
 //   trig_arc                — longueur d'un arc sur le cercle trigonométrique
@@ -23,7 +23,19 @@
 // question ; plusieurs questions ouvertes par micro-compétence, dont au moins
 // un TEMPLATE ouvert — sinon la question ouverte se répète elle aussi.
 
-import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4, CanvasFigure, AngleTrigo } from "@/lib/tutor-v4/types";
+import {
+  angleLatex,
+  cosExact,
+  opposee,
+  reduirePositif,
+  simplifier,
+  sinExact,
+  toursRetires,
+  valeurLatex,
+  valeurNumerique,
+  type ValeurExacte,
+} from "@/lib/canvas/cercle-trigo-valeurs";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -190,6 +202,105 @@ function cercleDeuxPoints(
     ],
     display: { showLabels: true, showPoints: true, showCenter: true },
   };
+}
+
+/* ---------- Grands réels (trig_grand_reel, 26/09/2026) ----------
+   Le canvas `cercle_trigo` NU (les 16 repères, les axes gradués, aucun point)
+   accompagne la question : c'est l'outil de lecture que le BO demande, et il
+   ne donne pas la réponse — placer le point, c'est justement avoir retiré les
+   tours. Les valeurs viennent de `cercle-trigo-valeurs.ts`, jamais d'une
+   table recopiée ici. */
+
+const cercleALire: CanvasFigure = { kind: "cercle_trigo", reperes: "tous", valeursAxes: true };
+
+/** Tire un réel à plusieurs tours, nπ/d, dont le point image est remarquable. */
+function tirerGrandReel(negatif: boolean): AngleTrigo {
+  const d = pickOne([2, 3, 4, 6, 6]);
+  const residus: Record<number, number[]> = {
+    2: [1, 3], // les multiples de π, eux, passent par tirerMultipleDePiSurDeux
+    3: [1, 2, 4, 5],
+    4: [1, 3, 5, 7],
+    6: [1, 5, 7, 11],
+  };
+  const r = pickOne(residus[d]);
+  return negatif
+    ? { n: r - 2 * d * randomInt(2, 4), d }
+    : { n: r + 2 * d * randomInt(1, 5), d };
+}
+
+/** nπ/2 ou nπ, grands : le cas de « cos(28π/2) ». La fraction n'est PAS simplifiée. */
+function tirerMultipleDePiSurDeux(): AngleTrigo {
+  const signe = Math.random() < 0.2 ? -1 : 1;
+  return Math.random() < 0.7
+    ? { n: signe * randomInt(5, 60), d: 2 }
+    : { n: signe * randomInt(3, 40), d: 1 };
+}
+
+/** « nπ/d = rπ/d + k × 2π » en LaTeX. */
+function decomposition(a: AngleTrigo): string {
+  const s = simplifier(a);
+  const rep = reduirePositif(s);
+  const k = toursRetires(s);
+  const simplifie = s.n !== a.n ? ` = ${angleLatex(s)}` : "";
+  const tours = k >= 0 ? ` + ${k} \\times 2\\pi` : ` - ${-k} \\times 2\\pi`;
+  return `${angleLatex(a)}${simplifie} = ${angleLatex(rep)}${tours}`;
+}
+
+/** Quatre propositions distinctes, la bonne en tête (le moteur mélange). */
+function quatre(correct: string, candidats: string[]): string[] {
+  const vus = [correct];
+  for (const c of candidats) if (!vus.includes(c)) vus.push(c);
+  const secours = ["$0$", "$1$", "$-1$", "$\\dfrac{1}{2}$", "$\\dfrac{\\sqrt{3}}{2}$", "$\\dfrac{\\sqrt{2}}{2}$"];
+  for (const c of secours) if (vus.length < 4 && !vus.includes(c)) vus.push(c);
+  return vus.slice(0, 4);
+}
+
+const enDollars = (v: ValeurExacte) => `$${valeurLatex(v)}$`;
+
+/**
+ * Les 24 réels remarquables de ]−π ; 2π[, sous leurs deux écritures usuelles
+ * (−5π/6 ET 7π/6). Le socle des gabarits de renfort du 26/09 : huit micros
+ * tombaient sous 12 énoncés générés parce que leurs tables s'arrêtaient à 3
+ * ou 6 cas.
+ */
+const REMARQUABLES: AngleTrigo[] = (() => {
+  const res: AngleTrigo[] = [];
+  const pg = (a: number, b: number): number => (b ? pg(b, a % b) : Math.abs(a));
+  for (const d of [1, 2, 3, 4, 6]) {
+    for (let n = -d; n < 2 * d; n++) {
+      if ((n === 0 && d === 1) || (n !== 0 && pg(n, d) === 1)) res.push({ n, d });
+    }
+  }
+  return res;
+})();
+
+/** Ni sur un axe : cosinus et sinus tous deux non nuls. */
+const HORS_AXES = REMARQUABLES.filter((a) => cosExact(a) !== "0" && sinExact(a) !== "0");
+
+/** a/b en LaTeX, signe devant, simplifiée. */
+function fracLatex(num: number, den: number): string {
+  const pg = (a: number, b: number): number => (b ? pg(b, a % b) : Math.abs(a));
+  const g = pg(num, den);
+  const n = num / g;
+  const d = den / g;
+  const signe = n < 0 ? "-" : "";
+  return d === 1 ? `${n}` : `${signe}\\dfrac{${Math.abs(n)}}{${d}}`;
+}
+
+/** La phrase qui lit le cercle : quel point, symétrique de quel point du premier quadrant. */
+function lectureCercle(rep: AngleTrigo, f: "cos" | "sin"): string {
+  const deg = ((((180 * rep.n) / rep.d) % 360) + 360) % 360;
+  const coord = f === "cos" ? "l'abscisse" : "l'ordonnée";
+  if (deg % 90 === 0) {
+    const ou = ["le point $I(1 ; 0)$", "le point $J(0 ; 1)$", "le point $(-1 ; 0)$", "le point $(0 ; -1)$"][deg / 90];
+    return `Le point image est ${ou} : on lit directement ${coord}.`;
+  }
+  const quadrant = Math.floor(deg / 90);
+  const refDeg = [deg, 180 - deg, deg - 180, 360 - deg][quadrant];
+  const ref = simplifier({ n: refDeg, d: 180 });
+  if (quadrant === 0) return `Le point image est dans le premier quadrant : on lit ${coord} parmi les valeurs remarquables.`;
+  const sym = ["", "à l'axe des ordonnées", "au centre $O$", "à l'axe des abscisses"][quadrant];
+  return `Le point image est le symétrique de celui de $${angleLatex(ref)}$ par rapport ${sym} : même valeur absolue, et le signe se lit sur la position du point.`;
 }
 
 export const trigonometrieBank: TutorBankItemV4[] = [
@@ -2618,6 +2729,253 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     },
   },
 
+  /* ===================== TRIG_GRAND_REEL ===================== */
+  // 26/09/2026 — Frédéric : « si par exemple on demande cos(28π/2) ».
+  // Recalcul indépendant : scripts/verifier-coach-trigo-premiere.ts.
+  {
+    kind: "fixed",
+    id: "premiere_trig_gr_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_grand_reel",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Combien vaut $\\cos\\left(\\dfrac{28\\pi}{2}\\right)$ ?",
+    format: "qcm",
+    choices: ["$1$", "$-1$", "$0$", "$\\dfrac{1}{2}$"],
+    expected: ["$1$"],
+    comparator: "mcq_exact",
+    hint: "Commence par simplifier la fraction : que vaut $\\dfrac{28\\pi}{2}$ ?",
+    canvas: cercleALire,
+    explanation: exp(
+      "Deux réels qui diffèrent d'un nombre entier de tours ($2\\pi$) ont le même point image, donc le même cosinus.",
+      "On simplifie d'abord : $\\dfrac{28\\pi}{2} = 14\\pi$. Puis on compte les tours : $14\\pi = 7 \\times 2\\pi$.",
+      "Sept tours complets ramènent exactement au point de départ $I(1 ; 0)$, dont l'abscisse vaut $1$.",
+      "$\\cos\\left(\\dfrac{28\\pi}{2}\\right) = \\cos(14\\pi) = \\cos(0) = 1$."
+    ),
+    tags: ["premiere", "maths", "trigonometrie", "grand_reel", "canvas", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_trig_gr_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_grand_reel",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Pour calculer $\\cos\\left(\\dfrac{7\\pi}{6}\\right)$, un élève « retire $\\pi$ » et écrit $\\cos\\left(\\dfrac{7\\pi}{6}\\right) = \\cos\\left(\\dfrac{\\pi}{6}\\right)$. Qu'en penses-tu ?",
+    format: "qcm",
+    choices: [
+      "C'est faux : retirer $\\pi$ mène au point diamétralement opposé, le cosinus change de signe",
+      "C'est juste : on peut retirer $\\pi$ comme on retire $2\\pi$",
+      "C'est juste, car $\\dfrac{7\\pi}{6}$ et $\\dfrac{\\pi}{6}$ sont dans le même quadrant",
+      "C'est faux : $\\cos\\left(\\dfrac{7\\pi}{6}\\right) = \\sin\\left(\\dfrac{\\pi}{6}\\right)$",
+    ],
+    expected: ["C'est faux : retirer $\\pi$ mène au point diamétralement opposé, le cosinus change de signe"],
+    comparator: "mcq_exact",
+    hint: "Un demi-tour ramène-t-il au même point ?",
+    canvas: {
+      kind: "cercle_trigo",
+      reperes: "tous",
+      points: [
+        { angle: { n: 1, d: 6 }, projections: true, couleur: "#2563eb" },
+        { angle: { n: 7, d: 6 }, projections: true, arc: true },
+      ],
+    },
+    explanation: exp(
+      "Seuls les tours COMPLETS ($2\\pi$) ramènent au même point. Un demi-tour ($\\pi$) mène au point symétrique par rapport au centre $O$.",
+      "Sur la figure, les points images de $\\dfrac{\\pi}{6}$ et de $\\dfrac{7\\pi}{6}$ sont diamétralement opposés.",
+      "Leurs abscisses sont opposées : $\\cos\\left(\\dfrac{7\\pi}{6}\\right) = -\\cos\\left(\\dfrac{\\pi}{6}\\right) = -\\dfrac{\\sqrt{3}}{2}$.",
+      "L'élève se trompe : on ne retire que des multiples de $2\\pi$."
+    ),
+    tags: ["premiere", "maths", "trigonometrie", "grand_reel", "piege", "canvas", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_trig_gr_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_grand_reel",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Combien vaut $\\sin\\left(-\\dfrac{17\\pi}{6}\\right)$ ?",
+    format: "qcm",
+    choices: ["$-\\dfrac{1}{2}$", "$\\dfrac{1}{2}$", "$-\\dfrac{\\sqrt{3}}{2}$", "$\\dfrac{\\sqrt{3}}{2}$"],
+    expected: ["$-\\dfrac{1}{2}$"],
+    comparator: "mcq_exact",
+    hint: "Le réel est négatif : AJOUTE des tours complets jusqu'à tomber dans $[0 ; 2\\pi[$.",
+    canvas: cercleALire,
+    explanation: exp(
+      "Ajouter un tour complet ne change pas le point image : pour un réel négatif, on ajoute des multiples de $2\\pi$.",
+      "$-\\dfrac{17\\pi}{6} + 2 \\times 2\\pi = -\\dfrac{17\\pi}{6} + \\dfrac{24\\pi}{6} = \\dfrac{7\\pi}{6}$.",
+      "Le point image de $\\dfrac{7\\pi}{6}$ est le symétrique de celui de $\\dfrac{\\pi}{6}$ par rapport au centre $O$ : il est sous l'axe des abscisses, son ordonnée est négative.",
+      "$\\sin\\left(-\\dfrac{17\\pi}{6}\\right) = \\sin\\left(\\dfrac{7\\pi}{6}\\right) = -\\dfrac{1}{2}$."
+    ),
+    tags: ["premiere", "maths", "trigonometrie", "grand_reel", "canvas", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_trig_gr_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_grand_reel",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Explique comment tu calcules $\\sin\\left(\\dfrac{47\\pi}{6}\\right)$ sans calculatrice, et donne sa valeur.",
+    format: "open",
+    expected: ["2pi", "2π", "tour", "retire", "11pi/6", "11π/6", "-1/2", "−1/2"],
+    comparator: "contains_keyword",
+    hint: "Combien de fois $\\dfrac{12\\pi}{6}$ (un tour) tient-il dans $\\dfrac{47\\pi}{6}$ ?",
+    canvas: cercleALire,
+    explanation: exp(
+      "On retire des tours complets ($2\\pi = \\dfrac{12\\pi}{6}$) jusqu'à tomber dans $[0 ; 2\\pi[$, puis on lit le cercle.",
+      "$47 = 3 \\times 12 + 11$, donc $\\dfrac{47\\pi}{6} = \\dfrac{11\\pi}{6} + 3 \\times 2\\pi$ : on retire trois tours.",
+      "Le point image de $\\dfrac{11\\pi}{6}$ est le symétrique de celui de $\\dfrac{\\pi}{6}$ par rapport à l'axe des abscisses : même abscisse, ordonnée opposée.",
+      "$\\sin\\left(\\dfrac{47\\pi}{6}\\right) = \\sin\\left(\\dfrac{11\\pi}{6}\\right) = -\\dfrac{1}{2}$."
+    ),
+    tags: ["premiere", "maths", "trigonometrie", "grand_reel", "canvas", "open"],
+  },
+  {
+    kind: "template",
+    id: "premiere_trig_gr_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_grand_reel",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Simplifie la fraction, puis compte les demi-tours ($\\pi$) : pair ou impair ?",
+    tags: ["premiere", "maths", "trigonometrie", "grand_reel", "canvas", "short", "template"],
+    generate: () => {
+      const a = tirerMultipleDePiSurDeux();
+      const f = pickOne(["cos", "sin"] as const);
+      const v = (f === "cos" ? cosExact(a) : sinExact(a))!;
+      const rep = reduirePositif(a);
+      const reponse = v === "-1" ? ["-1", "−1"] : [v];
+      return {
+        text: `Combien vaut $\\${f}\\left(${angleLatex(a)}\\right)$ ?`,
+        format: "short",
+        expected: reponse,
+        comparator: "number_equal",
+        canvas: cercleALire,
+        explanation: exp(
+          `Deux réels qui diffèrent d'un nombre entier de tours ($2\\pi$) ont le même point image, donc le même ${f === "cos" ? "cosinus" : "sinus"}.`,
+          `$${decomposition(a)}$ : ${a.n < 0 ? "on ajoute" : "on retire"} les tours complets.`,
+          lectureCercle(rep, f),
+          `$\\${f}\\left(${angleLatex(a)}\\right) = \\${f}\\left(${angleLatex(rep)}\\right) = ${valeurLatex(v)}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_trig_gr_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_grand_reel",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Retire des tours complets ($2\\pi$) jusqu'à tomber dans $[0 ; 2\\pi[$, puis place le point sur le cercle.",
+    tags: ["premiere", "maths", "trigonometrie", "grand_reel", "canvas", "qcm", "template"],
+    generate: () => {
+      const a = tirerGrandReel(Math.random() < 0.3);
+      const f = pickOne(["cos", "sin"] as const);
+      const g = f === "cos" ? "sin" : "cos";
+      const v = (f === "cos" ? cosExact(a) : sinExact(a))!;
+      const w = (g === "cos" ? cosExact(a) : sinExact(a))!;
+      const rep = reduirePositif(a);
+      const correct = enDollars(v);
+      return {
+        text: `Combien vaut $\\${f}\\left(${angleLatex(a)}\\right)$ ?`,
+        format: "qcm",
+        choices: quatre(correct, [enDollars(opposee(v)), enDollars(w), enDollars(opposee(w))]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: cercleALire,
+        explanation: exp(
+          `Deux réels qui diffèrent d'un nombre entier de tours ($2\\pi$) ont le même point image, donc le même ${f === "cos" ? "cosinus" : "sinus"}.`,
+          `$${decomposition(a)}$ : ${a.n < 0 ? "on ajoute" : "on retire"} les tours complets.`,
+          lectureCercle(rep, f),
+          `$\\${f}\\left(${angleLatex(a)}\\right) = \\${f}\\left(${angleLatex(rep)}\\right) = ${valeurLatex(v)}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_trig_gr_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_grand_reel",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un tour complet vaut $2\\pi$ : écris-le avec le même dénominateur.",
+    tags: ["premiere", "maths", "trigonometrie", "grand_reel", "qcm", "template"],
+    generate: () => {
+      const a = tirerGrandReel(Math.random() < 0.3);
+      const rep = reduirePositif(a);
+      const correct = `$${angleLatex(rep)}$`;
+      // Les erreurs d'élève : retirer un demi-tour de trop ou de moins,
+      // changer le signe, retirer un tour de moins (on sort de [0 ; 2π[).
+      const demiTour = reduirePositif({ n: a.n - a.d, d: a.d });
+      const oppose = reduirePositif({ n: -a.n, d: a.d });
+      const unTourDeMoins = simplifier({ n: rep.n + 2 * rep.d, d: rep.d });
+      return {
+        text: `Quel réel de l'intervalle $[0 ; 2\\pi[$ a le même point image que $${angleLatex(a)}$ sur le cercle trigonométrique ?`,
+        format: "qcm",
+        choices: quatre(correct, [
+          `$${angleLatex(demiTour)}$`,
+          `$${angleLatex(oppose)}$`,
+          `$${angleLatex(unTourDeMoins)}$`,
+          `$${angleLatex(simplifier({ n: rep.n + rep.d, d: rep.d }))}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Deux réels ont le même point image lorsqu'ils diffèrent d'un nombre entier de tours, c'est-à-dire d'un multiple de $2\\pi$.",
+          `Un tour vaut $2\\pi = ${angleLatex({ n: 2 * a.d, d: a.d })}$ : on ${a.n < 0 ? "en ajoute" : "en retire"} autant qu'il faut pour tomber dans $[0 ; 2\\pi[$.`,
+          `$${decomposition(a)}$.`,
+          `Le réel cherché est $${angleLatex(rep)}$. ⚠️ Retirer $\\pi$ au lieu de $2\\pi$ mène au point opposé.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_trig_gr_tpl_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_grand_reel",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Un tour complet vaut $2\\pi$ : combien de fois tient-il dans ce réel ?",
+    tags: ["premiere", "maths", "trigonometrie", "grand_reel", "short", "template"],
+    generate: () => {
+      const a = tirerGrandReel(false);
+      const k = toursRetires(a);
+      const rep = reduirePositif(a);
+      return {
+        text: `Combien de tours complets faut-il retirer à $${angleLatex(a)}$ pour obtenir un réel de l'intervalle $[0 ; 2\\pi[$ ?`,
+        format: "short",
+        expected: [String(k)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un tour complet vaut $2\\pi$. On en retire autant que possible sans passer sous $0$.",
+          `Avec le dénominateur ${a.d}, un tour s'écrit $${angleLatex({ n: 2 * a.d, d: a.d })}$ : on divise ${a.n} par ${2 * a.d}.`,
+          `$${a.n} = ${k} \\times ${2 * a.d} + ${a.n - 2 * a.d * k}$, donc $${decomposition(a)}$.`,
+          `On retire ${k} tour${k > 1 ? "s" : ""} complet${k > 1 ? "s" : ""} ; il reste $${angleLatex(rep)}$.`
+        ),
+      };
+    },
+  },
+
   /* ===================== TRIG_PARITE ===================== */
   {
     kind: "fixed",
@@ -3528,6 +3886,586 @@ export const trigonometrieBank: TutorBankItemV4[] = [
           "On repère d'abord la position remarquable du point image, puis on traduit en valeur de la fonction.",
           c.pourquoi,
           `Réponse : ${c.r}.`
+        ),
+      };
+    },
+  },
+
+  /* ============ RENFORTS DU 26/09/2026 : UN GÉNÉRATEUR DE PLUS ============
+     Huit micros tombaient sous le seuil de 12 énoncés générés (7 à 11). Un
+     `fixed` ne se renouvelle jamais : chaque renfort est un GABARIT, bâti sur
+     les 24 réels remarquables, qui prend la question par un autre bout que
+     les deux gabarits déjà en place. Recalcul : verifier-coach-trigo-premiere.ts */
+  {
+    kind: "template",
+    id: "premiere_trig_rad_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_radian",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "$180° = \\pi$ radians : c'est la seule égalité à retenir.",
+    tags: ["premiere", "maths", "trigonometrie", "radian", "template"],
+    generate: () => {
+      const deg = 15 * randomInt(1, 24);
+      const a = simplifier({ n: deg, d: 180 });
+      if (Math.random() < 0.5) {
+        const correct = `$${angleLatex(a)}$`;
+        return {
+          text: `Convertis $${deg}°$ en radians.`,
+          format: "qcm",
+          choices: quatre(correct, [
+            `$${angleLatex(simplifier({ n: deg, d: 360 }))}$`,
+            `$${angleLatex(simplifier({ n: 2 * deg, d: 180 }))}$`,
+            `$${angleLatex(simplifier({ n: 180, d: deg }))}$`,
+          ]),
+          expected: [correct],
+          comparator: "mcq_exact",
+          explanation: exp(
+            "$180°$ correspondent à $\\pi$ radians : pour passer des degrés aux radians, on multiplie par $\\dfrac{\\pi}{180}$.",
+            `$${deg}° = ${deg} \\times \\dfrac{\\pi}{180}$.`,
+            `$= \\dfrac{${deg}\\pi}{180} = ${angleLatex(a)}$ en simplifiant la fraction.`,
+            `$${deg}° = ${angleLatex(a)}$ rad.`
+          ),
+        };
+      }
+      return {
+        text: `Convertis $${angleLatex(a)}$ radians en degrés.`,
+        format: "short",
+        expected: [String(deg)],
+        comparator: "number_equal",
+        explanation: exp(
+          "$\\pi$ radians correspondent à $180°$ : on remplace $\\pi$ par $180°$.",
+          a.d === 1
+            ? `$${angleLatex(a)} = ${a.n} \\times 180°$.`
+            : `$${angleLatex(a)} = ${a.n === 1 ? "" : `${a.n} \\times `}\\dfrac{180°}{${a.d}}$.`,
+          `$= ${deg}°$.`,
+          `$${angleLatex(a)}$ rad $= ${deg}°$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_trig_enr_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_enroulement",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Calcule la différence des deux réels : est-ce un nombre entier de tours ($2\\pi$) ?",
+    tags: ["premiere", "maths", "trigonometrie", "enroulement", "qcm", "template"],
+    generate: () => {
+      const a = pickOne(REMARQUABLES.filter((x) => x.d > 1 && x.n > 0));
+      // Un écart de k tours (même point) ou de k demi-tours impairs (point opposé).
+      const memePoint = Math.random() < 0.5;
+      const k = memePoint ? pickOne([-3, -2, -1, 1, 2, 3]) * 2 : pickOne([-3, -1, 1, 3]);
+      const b = { n: a.n + k * a.d, d: a.d };
+      const diff = simplifier({ n: b.n - a.n, d: a.d });
+      const oui = `Oui : $${angleLatex(b)} - ${angleLatex(a).startsWith("-") ? `\\left(${angleLatex(a)}\\right)` : angleLatex(a)} = ${angleLatex(diff)}$ est un multiple de $2\\pi$`;
+      const non = `Non : $${angleLatex(b)} - ${angleLatex(a).startsWith("-") ? `\\left(${angleLatex(a)}\\right)` : angleLatex(a)} = ${angleLatex(diff)}$ n'est pas un multiple de $2\\pi$`;
+      const correct = memePoint ? oui : non;
+      return {
+        text: `Les réels $${angleLatex(a)}$ et $${angleLatex(b)}$ ont-ils le même point image sur le cercle trigonométrique ?`,
+        format: "qcm",
+        choices: [correct, memePoint ? non : oui, "Oui : ils ont le même dénominateur", `Non : $${angleLatex(b)}$ n'est pas compris entre $0$ et $2\\pi$`],
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Deux réels ont le même point image lorsque leur différence est un nombre entier de tours, c'est-à-dire un multiple de $2\\pi$.",
+          `On calcule la différence : $${angleLatex(diff)}$.`,
+          memePoint
+            ? `$${angleLatex(diff)} = ${k / 2} \\times 2\\pi$ : c'est un nombre entier de tours.`
+            : `$${angleLatex(diff)}$ est un nombre IMPAIR de demi-tours : les deux points sont diamétralement opposés.`,
+          memePoint ? "Ils ont le même point image." : "Ils n'ont pas le même point image."
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_trig_val_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_valeurs",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Place le point sur le cercle, repère le réel du premier quadrant qui lui est symétrique, puis lis le signe.",
+    tags: ["premiere", "maths", "trigonometrie", "valeurs", "canvas", "qcm", "template"],
+    generate: () => {
+      const a = pickOne(REMARQUABLES);
+      const f = pickOne(["cos", "sin"] as const);
+      const v = (f === "cos" ? cosExact(a) : sinExact(a))!;
+      const w = (f === "cos" ? sinExact(a) : cosExact(a))!;
+      const correct = enDollars(v);
+      return {
+        text: `Combien vaut $\\${f}\\left(${angleLatex(a)}\\right)$ ?`,
+        format: "qcm",
+        choices: quatre(correct, [enDollars(opposee(v)), enDollars(w), enDollars(opposee(w))]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: cercleALire,
+        explanation: exp(
+          `Le ${f === "cos" ? "cosinus" : "sinus"} d'un réel est ${f === "cos" ? "l'abscisse" : "l'ordonnée"} de son point image sur le cercle.`,
+          `On place $${angleLatex(a)}$ sur le cercle.`,
+          lectureCercle(reduirePositif(a), f),
+          `$\\${f}\\left(${angleLatex(a)}\\right) = ${valeurLatex(v)}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_trig_cer_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_cercle",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "$\\cos^2 x + \\sin^2 x = 1$ donne la valeur au signe près ; l'intervalle donne le signe.",
+    tags: ["premiere", "maths", "trigonometrie", "cercle", "qcm", "template"],
+    generate: () => {
+      const [p, q, h] = pickOne([[3, 4, 5], [5, 12, 13], [8, 15, 17], [7, 24, 25], [20, 21, 29]]);
+      const [connu, cherche] = Math.random() < 0.5 ? [p, q] : [q, p];
+      const donneCos = Math.random() < 0.5;
+      const f = donneCos ? "cos" : "sin";
+      const g = donneCos ? "sin" : "cos";
+      // L'intervalle fixe le signe de ce qu'on cherche.
+      const intervalles = donneCos
+        ? [{ tex: "[0 ; \\pi]", signe: 1, pourquoi: "au-dessus de l'axe des abscisses" }, { tex: "[-\\pi ; 0]", signe: -1, pourquoi: "sous l'axe des abscisses" }]
+        : [{ tex: "\\left[-\\dfrac{\\pi}{2} ; \\dfrac{\\pi}{2}\\right]", signe: 1, pourquoi: "à droite de l'axe des ordonnées" }, { tex: "\\left[\\dfrac{\\pi}{2} ; \\dfrac{3\\pi}{2}\\right]", signe: -1, pourquoi: "à gauche de l'axe des ordonnées" }];
+      const I = pickOne(intervalles);
+      const correct = `$${fracLatex(I.signe * cherche, h)}$`;
+      return {
+        text: `On sait que $\\${f} x = ${fracLatex(connu, h)}$ et que $x \\in ${I.tex}$. Combien vaut $\\${g} x$ ?`,
+        format: "qcm",
+        choices: quatre(correct, [
+          `$${fracLatex(-I.signe * cherche, h)}$`,
+          `$${fracLatex(h - connu, h)}$`,
+          `$${fracLatex(I.signe * cherche * cherche, h * h)}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Pour tout réel $x$, $\\cos^2 x + \\sin^2 x = 1$ : le point image est sur le cercle de rayon $1$.",
+          `$\\${g}^2 x = 1 - \\left(${fracLatex(connu, h)}\\right)^2 = 1 - \\dfrac{${connu * connu}}{${h * h}} = \\dfrac{${cherche * cherche}}{${h * h}}$, donc $\\${g} x = ${fracLatex(cherche, h)}$ ou $\\${g} x = ${fracLatex(-cherche, h)}$.`,
+          `Comme $x \\in ${I.tex}$, le point image est ${I.pourquoi} : $\\${g} x$ est ${I.signe > 0 ? "positif ou nul" : "négatif ou nul"}.`,
+          `$\\${g} x = ${fracLatex(I.signe * cherche, h)}$. ⚠️ $1 - ${fracLatex(connu, h)}$ ne marche pas : ce sont les CARRÉS qui s'ajoutent.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_trig_cs_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_cos_sin",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "À droite de l'axe des ordonnées, le cosinus est positif ; au-dessus de l'axe des abscisses, le sinus est positif.",
+    tags: ["premiere", "maths", "trigonometrie", "cos_sin", "canvas", "qcm", "template"],
+    generate: () => {
+      const a = pickOne(HORS_AXES);
+      const c = valeurNumerique(cosExact(a)!) > 0;
+      const s = valeurNumerique(sinExact(a)!) > 0;
+      const libelle = (cp: boolean, sp: boolean) =>
+        `$\\cos\\left(${angleLatex(a)}\\right) ${cp ? ">" : "<"} 0$ et $\\sin\\left(${angleLatex(a)}\\right) ${sp ? ">" : "<"} 0$`;
+      const correct = libelle(c, s);
+      const quadrant = c ? (s ? "premier" : "quatrième") : s ? "deuxième" : "troisième";
+      return {
+        text: `Quels sont les signes de $\\cos\\left(${angleLatex(a)}\\right)$ et de $\\sin\\left(${angleLatex(a)}\\right)$ ?`,
+        format: "qcm",
+        choices: [correct, libelle(!c, s), libelle(c, !s), libelle(!c, !s)],
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: cercleALire,
+        explanation: exp(
+          "Le cosinus est l'abscisse du point image, le sinus son ordonnée : leurs signes se lisent sur la position du point.",
+          `On place $${angleLatex(a)}$ sur le cercle : le point tombe dans le ${quadrant} quadrant.`,
+          `Il est ${c ? "à droite" : "à gauche"} de l'axe des ordonnées et ${s ? "au-dessus" : "en dessous"} de l'axe des abscisses.`,
+          `${correct}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_trig_ang_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_angles_associes",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Place $x$ et le réel associé sur le cercle : quelle symétrie les échange ?",
+    tags: ["premiere", "maths", "trigonometrie", "angles_associes", "qcm", "template"],
+    generate: () => {
+      const x = pickOne([{ n: 1, d: 6 }, { n: 1, d: 4 }, { n: 1, d: 3 }]);
+      const X = angleLatex(x);
+      const assoc = pickOne([
+        { tex: `\\pi - ${X}`, angle: { n: x.d - x.n, d: x.d }, cos: "-\\cos x", sin: "\\sin x", sym: "l'axe des ordonnées" },
+        { tex: `\\pi + ${X}`, angle: { n: x.d + x.n, d: x.d }, cos: "-\\cos x", sin: "-\\sin x", sym: "le centre $O$" },
+        { tex: `-${X}`, angle: { n: -x.n, d: x.d }, cos: "\\cos x", sin: "-\\sin x", sym: "l'axe des abscisses" },
+        { tex: `\\dfrac{\\pi}{2} - ${X}`, angle: { n: x.d - 2 * x.n, d: 2 * x.d }, cos: "\\sin x", sin: "\\cos x", sym: "la première bissectrice" },
+        { tex: `\\dfrac{\\pi}{2} + ${X}`, angle: { n: x.d + 2 * x.n, d: 2 * x.d }, cos: "-\\sin x", sin: "\\cos x", sym: "la première bissectrice, puis l'axe des ordonnées" },
+      ]);
+      const f = pickOne(["cos", "sin"] as const);
+      const v = (f === "cos" ? cosExact(assoc.angle) : sinExact(assoc.angle))!;
+      const w = (f === "cos" ? sinExact(assoc.angle) : cosExact(assoc.angle))!;
+      const correct = enDollars(v);
+      return {
+        text: `On sait que $\\cos ${X} = ${valeurLatex(cosExact(x)!)}$ et $\\sin ${X} = ${valeurLatex(sinExact(x)!)}$. Combien vaut $\\${f}\\left(${assoc.tex}\\right)$ ?`,
+        format: "qcm",
+        choices: quatre(correct, [enDollars(opposee(v)), enDollars(w), enDollars(opposee(w))]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          `Les points images de $x$ et de $${assoc.tex.replace(X, "x")}$ sont symétriques par rapport à ${assoc.sym}.`,
+          `D'où $\\${f}\\left(${assoc.tex.replace(X, "x")}\\right) = ${f === "cos" ? assoc.cos : assoc.sin}$.`,
+          `Avec $x = ${X}$ : $\\${f}\\left(${assoc.tex}\\right) = ${valeurLatex(v)}$.`,
+          `$\\${f}\\left(${assoc.tex}\\right) = \\${f}\\left(${angleLatex(simplifier(assoc.angle))}\\right) = ${valeurLatex(v)}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_trig_par_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_parite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cosinus pair : $\\cos(-x) = \\cos x$. Sinus impair : $\\sin(-x) = -\\sin x$.",
+    tags: ["premiere", "maths", "trigonometrie", "parite", "qcm", "template"],
+    generate: () => {
+      const a = pickOne(REMARQUABLES.filter((x) => x.n > 0 && x.n <= x.d));
+      const moins = { n: -a.n, d: a.d };
+      const f = pickOne(["cos", "sin"] as const);
+      const v = (f === "cos" ? cosExact(moins) : sinExact(moins))!;
+      const w = (f === "cos" ? sinExact(moins) : cosExact(moins))!;
+      const correct = enDollars(v);
+      return {
+        text: `La fonction cosinus est paire et la fonction sinus est impaire. Combien vaut $\\${f}\\left(${angleLatex(moins)}\\right)$ ?`,
+        format: "qcm",
+        choices: quatre(correct, [enDollars(opposee(v)), enDollars(w), enDollars(opposee(w))]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          f === "cos"
+            ? "Le cosinus est pair : $\\cos(-x) = \\cos x$. Les points images de $x$ et $-x$ ont la même abscisse."
+            : "Le sinus est impair : $\\sin(-x) = -\\sin x$. Les points images de $x$ et $-x$ ont des ordonnées opposées.",
+          `$\\${f}\\left(${angleLatex(moins)}\\right) = ${f === "cos" ? "" : "-"}\\${f}\\left(${angleLatex(a)}\\right)$.`,
+          `Or $\\${f}\\left(${angleLatex(a)}\\right) = ${valeurLatex((f === "cos" ? cosExact(a) : sinExact(a))!)}$.`,
+          `$\\${f}\\left(${angleLatex(moins)}\\right) = ${valeurLatex(v)}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_trig_crb_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_courbes",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "L'ordonnée du point de la courbe d'abscisse $a$, c'est la valeur de la fonction en $a$ : lis-la sur le cercle.",
+    tags: ["premiere", "maths", "trigonometrie", "courbes", "canvas", "qcm", "template"],
+    generate: () => {
+      const a = pickOne(REMARQUABLES.filter((x) => x.n >= 0));
+      const f = pickOne(["cos", "sin"] as const);
+      const v = (f === "cos" ? cosExact(a) : sinExact(a))!;
+      const w = (f === "cos" ? sinExact(a) : cosExact(a))!;
+      const correct = enDollars(v);
+      return {
+        text: `Quelle est l'ordonnée du point de la courbe de la fonction ${f === "cos" ? "cosinus" : "sinus"} d'abscisse $${angleLatex(a)}$ ?`,
+        format: "qcm",
+        choices: quatre(correct, [enDollars(opposee(v)), enDollars(w), enDollars(opposee(w))]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        canvas: courbeCosSin,
+        explanation: exp(
+          `Le point de la courbe d'abscisse $a$ a pour ordonnée $\\${f}(a)$ : la courbe déroule ${f === "cos" ? "l'abscisse" : "l'ordonnée"} du point image sur le cercle.`,
+          `On calcule $\\${f}\\left(${angleLatex(a)}\\right)$ en plaçant $${angleLatex(a)}$ sur le cercle.`,
+          lectureCercle(reduirePositif(a), f),
+          `L'ordonnée cherchée est $${valeurLatex(v)}$ (sur la courbe ${f === "cos" ? "bleue" : "orange"}).`
+        ),
+      };
+    },
+  },
+
+  /* ===================== TRIG_ARCHIMEDE ===================== */
+  // 26/09/2026 — l'« exemple d'algorithme » du BO 2026 : approcher π par les
+  // polygones réguliers inscrits (n·sin(π/n)) et circonscrits (n·tan(π/n))
+  // dans un cercle de rayon 1. Le lien avec le triangle rectangle du collège
+  // est le cœur de la méthode : c'est lui qui donne le côté.
+  {
+    kind: "fixed",
+    id: "premiere_trig_arch_fixed_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_archimede",
+    difficulty: 2,
+    theme: "neutral",
+    text: "Un hexagone régulier est inscrit dans un cercle de rayon $1$. Quelle est la longueur de chacun de ses côtés ?",
+    format: "qcm",
+    choices: ["$1$", "$\\dfrac{1}{2}$", "$\\sqrt{3}$", "$2$"],
+    expected: ["$1$"],
+    comparator: "mcq_exact",
+    hint: "Relie le centre aux six sommets : quels triangles obtiens-tu ?",
+    explanation: exp(
+      "Un hexagone régulier inscrit se découpe en six triangles de sommet le centre, avec un angle au centre de $\\dfrac{2\\pi}{6} = \\dfrac{\\pi}{3}$, soit $60°$.",
+      "Chaque triangle a deux côtés égaux au rayon et un angle de $60°$ entre eux : il est équilatéral.",
+      "Le côté de l'hexagone est donc égal au rayon, $1$. Son demi-périmètre vaut $3$.",
+      "Chaque côté mesure $1$ — et ce $3$ est la première approximation de $\\pi$ d'Archimède."
+    ),
+    tags: ["premiere", "maths", "trigonometrie", "archimede", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_trig_arch_fixed_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_archimede",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Le demi-périmètre de l'hexagone régulier inscrit dans un cercle de rayon $1$ vaut $3$. Pourquoi est-il forcément inférieur à $\\pi$ ?",
+    format: "qcm",
+    choices: [
+      "Chaque côté est un segment, plus court que l'arc de cercle qui relie ses deux extrémités",
+      "Parce que $\\pi$ vaut $3{,}14$, qui est plus grand que $3$",
+      "Parce que l'hexagone a six côtés et le cercle aucun",
+      "Parce que l'hexagone est plus grand que le cercle",
+    ],
+    expected: ["Chaque côté est un segment, plus court que l'arc de cercle qui relie ses deux extrémités"],
+    comparator: "mcq_exact",
+    hint: "Entre deux points, quel est le plus court chemin ?",
+    explanation: exp(
+      "Le demi-périmètre du cercle de rayon $1$ vaut $\\pi$ : c'est la somme des six arcs sous-tendus par les côtés, divisée par $2$.",
+      "La ligne droite est le plus court chemin entre deux points : chaque côté est plus court que son arc.",
+      "En additionnant : demi-périmètre de l'hexagone $<$ demi-périmètre du cercle, donc $3 < \\pi$.",
+      "On ne peut pas utiliser $3{,}14$ : c'est justement ce qu'on cherche à obtenir."
+    ),
+    tags: ["premiere", "maths", "trigonometrie", "archimede", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_trig_arch_fixed_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_archimede",
+    difficulty: 3,
+    theme: "neutral",
+    text:
+      "On lit ce programme Python (dans un cercle de rayon $1$, `c` est le côté du polygone régulier inscrit à `n` côtés) :\n\n" +
+      "```python\nfrom math import sqrt\nn = 6\nc = 1\nfor i in range(4):\n    c = sqrt(2 - sqrt(4 - c**2))\n    n = 2 * n\nprint(n, n * c / 2)\n```\n\n" +
+      "Quelle valeur de `n` le programme affiche-t-il ?",
+    format: "qcm",
+    choices: ["$96$", "$48$", "$24$", "$10$"],
+    expected: ["$96$"],
+    comparator: "mcq_exact",
+    hint: "La boucle tourne quatre fois, et `n` double à chaque tour.",
+    explanation: exp(
+      "`range(4)` fait tourner la boucle quatre fois ; à chaque tour, le nombre de côtés double.",
+      "$6 \\to 12 \\to 24 \\to 48 \\to 96$.",
+      "Le programme affiche $96$ — le polygone à $96$ côtés d'Archimède, au IIIᵉ siècle avant notre ère.",
+      "$n = 96$."
+    ),
+    tags: ["premiere", "maths", "trigonometrie", "archimede", "python", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_trig_arch_fixed_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_archimede",
+    difficulty: 4,
+    theme: "neutral",
+    text:
+      "Dans le programme d'Archimède, `c` est le côté du polygone régulier à `n` côtés inscrit dans un cercle de rayon $1$. Que représente le nombre `n * c / 2` affiché à la fin ?",
+    format: "qcm",
+    choices: [
+      "Le demi-périmètre du polygone : une valeur approchée de $\\pi$ par défaut",
+      "La valeur exacte de $\\pi$",
+      "Le périmètre du cercle",
+      "Une valeur approchée de $\\pi$ par excès",
+    ],
+    expected: ["Le demi-périmètre du polygone : une valeur approchée de $\\pi$ par défaut"],
+    comparator: "mcq_exact",
+    hint: "Le polygone est À L'INTÉRIEUR du cercle.",
+    explanation: exp(
+      "`n * c` est le périmètre du polygone ; divisé par $2$, c'est son demi-périmètre.",
+      "Le polygone est inscrit : chaque côté est plus court que son arc, donc le demi-périmètre est inférieur à $\\pi$.",
+      "Plus il y a de côtés, plus le polygone colle au cercle : l'approximation s'améliore, sans jamais atteindre $\\pi$.",
+      "C'est une valeur approchée de $\\pi$ par défaut ($\\approx 3{,}1410$ pour $96$ côtés)."
+    ),
+    tags: ["premiere", "maths", "trigonometrie", "archimede", "python", "qcm"],
+  },
+  {
+    kind: "fixed",
+    id: "premiere_trig_arch_fixed_5",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_archimede",
+    difficulty: 5,
+    theme: "neutral",
+    text: "Avec des polygones à $96$ côtés, Archimède a prouvé que $3 + \\dfrac{10}{71} < \\pi < 3 + \\dfrac{1}{7}$. Quelles décimales de $\\pi$ cet encadrement garantit-il ?",
+    format: "qcm",
+    choices: ["$3{,}14$", "$3{,}141$", "$3{,}1$ seulement", "$3{,}142$"],
+    expected: ["$3{,}14$"],
+    comparator: "mcq_exact",
+    hint: "Calcule les deux bornes en décimal, puis regarde les chiffres qu'elles ont en commun.",
+    explanation: exp(
+      "Un encadrement garantit les décimales communes à ses deux bornes.",
+      "$3 + \\dfrac{10}{71} \\approx 3{,}1408$ et $3 + \\dfrac{1}{7} \\approx 3{,}1429$.",
+      "Les deux bornes commencent par $3{,}14$ ; la troisième décimale diffère ($0$ contre $2$).",
+      "L'encadrement garantit $\\pi \\approx 3{,}14$ : deux décimales exactes."
+    ),
+    tags: ["premiere", "maths", "trigonometrie", "archimede", "qcm"],
+  },
+  {
+    kind: "template",
+    id: "premiere_trig_arch_tpl_1",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_archimede",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Les $n$ angles au centre font un tour complet.",
+    tags: ["premiere", "maths", "trigonometrie", "archimede", "qcm", "template"],
+    generate: () => {
+      const n = pickOne([5, 6, 8, 10, 12, 20, 24, 36]);
+      const correct = `$${angleLatex(simplifier({ n: 2, d: n }))}$`;
+      return {
+        text: `Un polygone régulier à $${n}$ côtés est inscrit dans un cercle de centre $O$. Sous quel angle, en radians, le centre $O$ voit-il chaque côté ?`,
+        format: "qcm",
+        choices: quatre(correct, [
+          `$${angleLatex(simplifier({ n: 1, d: n }))}$`,
+          `$\\dfrac{${n}}{2\\pi}$`,
+          `$${360 / n}$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Les $n$ côtés découpent le tour complet, $2\\pi$, en $n$ angles au centre égaux.",
+          `Chaque angle vaut $\\dfrac{2\\pi}{${n}}$.`,
+          `$\\dfrac{2\\pi}{${n}} = ${angleLatex(simplifier({ n: 2, d: n }))}$ (soit $${360 / n}°$ : le nombre $${360 / n}$ seul est une mesure en DEGRÉS).`,
+          `Chaque côté est vu sous l'angle $${angleLatex(simplifier({ n: 2, d: n }))}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_trig_arch_tpl_2",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_archimede",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Coupe le triangle isocèle $OAB$ en deux triangles rectangles par sa hauteur issue de $O$.",
+    tags: ["premiere", "maths", "trigonometrie", "archimede", "qcm", "template"],
+    generate: () => {
+      const n = pickOne([5, 6, 8, 10, 12, 20, 24, 36]);
+      const demi = `\\dfrac{\\pi}{${n}}`;
+      const correct = `$2\\sin\\left(${demi}\\right)$`;
+      return {
+        text: `Un polygone régulier à $${n}$ côtés est inscrit dans un cercle de rayon $1$. Quelle est la longueur de chacun de ses côtés ?`,
+        format: "qcm",
+        choices: quatre(correct, [
+          `$\\sin\\left(${demi}\\right)$`,
+          `$2\\sin\\left(${angleLatex(simplifier({ n: 2, d: n }))}\\right)$`,
+          `$2\\cos\\left(${demi}\\right)$`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          `Soit $[AB]$ un côté : le triangle $OAB$ est isocèle en $O$ ($OA = OB = 1$), d'angle au centre $\\dfrac{2\\pi}{${n}}$.`,
+          `La hauteur issue de $O$ coupe $[AB]$ en son milieu $H$ et l'angle au centre en deux : $\\widehat{AOH} = ${demi}$.`,
+          `Dans le triangle $OAH$ rectangle en $H$, d'hypoténuse $OA = 1$ : $AH = OA \\times \\sin\\left(${demi}\\right) = \\sin\\left(${demi}\\right)$.`,
+          `$AB = 2\\,AH = 2\\sin\\left(${demi}\\right)$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_trig_arch_tpl_3",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_archimede",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Inscrit : $n\\sin\\left(\\dfrac{\\pi}{n}\\right)$. Circonscrit : $n\\tan\\left(\\dfrac{\\pi}{n}\\right)$. Calcule les deux à la calculatrice, en mode radian.",
+    tags: ["premiere", "maths", "trigonometrie", "archimede", "qcm", "template"],
+    generate: () => {
+      const tous = [6, 12, 24, 48, 96];
+      const encadrement = (n: number) => {
+        const bas = Math.floor(n * Math.sin(Math.PI / n) * 1000 + 1e-9) / 1000;
+        const haut = Math.ceil(n * Math.tan(Math.PI / n) * 1000 - 1e-9) / 1000;
+        const fr = (x: number) => x.toFixed(3).replace(".", "{,}");
+        return `$${fr(bas)} < \\pi < ${fr(haut)}$`;
+      };
+      const n = pickOne(tous);
+      const correct = encadrement(n);
+      return {
+        text: `Les demi-périmètres des polygones réguliers à $n$ côtés inscrit et circonscrit à un cercle de rayon $1$ valent $n\\sin\\left(\\dfrac{\\pi}{n}\\right)$ et $n\\tan\\left(\\dfrac{\\pi}{n}\\right)$. Quel encadrement de $\\pi$ obtient-on pour $n = ${n}$ (bornes à $10^{-3}$ près) ?`,
+        format: "qcm",
+        choices: quatre(correct, tous.filter((m) => m !== n).slice(0, 3).map(encadrement)),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Le polygone inscrit est plus court que le cercle, le circonscrit plus long : $n\\sin\\left(\\dfrac{\\pi}{n}\\right) < \\pi < n\\tan\\left(\\dfrac{\\pi}{n}\\right)$.",
+          `On calcule, en mode radian, $${n}\\sin\\left(\\dfrac{\\pi}{${n}}\\right)$ et $${n}\\tan\\left(\\dfrac{\\pi}{${n}}\\right)$.`,
+          "On arrondit la borne du bas par défaut et celle du haut par excès, pour que l'encadrement reste vrai.",
+          `Pour $n = ${n}$ : ${correct}. Plus $n$ est grand, plus l'encadrement se resserre.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_trig_arch_tpl_4",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "trigonometrie",
+    microId: "trig_archimede",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "À chaque étape, le nombre de côtés double.",
+    tags: ["premiere", "maths", "trigonometrie", "archimede", "short", "template"],
+    generate: () => {
+      const depart = pickOne([4, 6]);
+      const k = randomInt(2, 5);
+      const n = depart * 2 ** k;
+      const nom = depart === 6 ? "d'un hexagone" : "d'un carré";
+      return {
+        text: `La méthode d'Archimède part ${nom} régulier inscrit dans le cercle, puis double ${k} fois le nombre de côtés. Combien de côtés a le dernier polygone ?`,
+        format: "short",
+        expected: [String(n)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Doubler le nombre de côtés, c'est multiplier par $2$ à chaque étape.",
+          `On part de $${depart}$ côtés et on double ${k} fois : $${depart} \\times 2^{${k}}$.`,
+          `$${depart} \\times ${2 ** k} = ${n}$.`,
+          `Le dernier polygone a $${n}$ côtés.`
         ),
       };
     },

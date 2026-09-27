@@ -1984,7 +1984,51 @@ export type TableauVariationsCanvasData = {
   size?: { width?: number; height?: number };
 };
 
+// ============================================================
+// CERCLE TRIGONOMÉTRIQUE (26/09/2026, 1re spé)
+// ============================================================
+
+/**
+ * Un réel repéré en fraction de π : { n: 5, d: 6 } = 5π/6, { n: 28, d: 2 } =
+ * 28π/2. On ne réduit PAS la fraction à l'affichage d'un titre : « 28π/2 »
+ * est ce que l'énoncé écrit, c'est à l'élève de voir que c'est 14π.
+ */
+export type AngleTrigo = { n: number; d: number };
+
+export type CercleTrigoPoint = {
+  angle: AngleTrigo;
+  /** Défaut : le réel réduit dans ]−π ; π] (« 5π/6 »). "" = pas d'étiquette. */
+  label?: string;
+  couleur?: string;
+  /** Pointillés vers les axes, cos et sin écrits à leur pied. */
+  projections?: boolean;
+  /** L'arc parcouru depuis I (le réel réduit à un tour s'il en fait plusieurs). */
+  arc?: boolean;
+};
+
+/**
+ * LE CERCLE TRIGONOMÉTRIQUE, distinct de `cercle` : ce dernier travaille en
+ * pixels et ne sait rien des valeurs remarquables. Celui-ci se décrit en
+ * fractions de π et CALCULE les cosinus et sinus qu'il écrit — on ne peut pas
+ * lui faire dessiner une valeur fausse.
+ */
+export type CercleTrigoCanvasData = {
+  kind: "cercle_trigo";
+  titre?: string;
+  /**
+   * Les repères posés sur le cercle : « quarts » = 0, π/2, π, −π/2 ;
+   * « premier_quadrant » = les quarts + π/6, π/4, π/3 ; « tous » = les 16
+   * valeurs remarquables. Défaut : « tous ».
+   */
+  reperes?: "aucun" | "quarts" | "premier_quadrant" | "tous";
+  /** Graduer les demi-axes positifs en 1/2, √2/2, √3/2. */
+  valeursAxes?: boolean;
+  points?: CercleTrigoPoint[];
+  size?: { width?: number; height?: number };
+};
+
 export type CanvasFigure =
+  | CercleTrigoCanvasData
   | ReglureCanvasData
   | ObjetsCanvasData
   | PersonnageCanvasData

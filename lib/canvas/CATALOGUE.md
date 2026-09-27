@@ -40,7 +40,8 @@ se pose sur `figure.schema`, `propriete.schema`, `exemple.schema`, `formule.sche
 | `figure_libre` | Une figure quelconque **sur quadrillage** : c'est le canvas des aires et des périmètres composés | Une figure usuelle nommée |
 | `angle` | Un angle seul, avec sa mesure | Deux angles à comparer |
 | `droites` | Plusieurs droites, leurs intersections, parallèles et perpendiculaires marquées | Une droite graduée |
-| `cercle` | Cercle avec rayon, diamètre, corde, arcs | Un disque à colorier pour une fraction |
+| `cercle` | Cercle avec rayon, diamètre, corde, arcs | Un disque à colorier pour une fraction ; le cercle trigonométrique |
+| `cercle_trigo` | Le cercle trigonométrique : les 16 réels remarquables en fractions de π, les axes gradués en 1/2, √2/2, √3/2, l'arc parcouru depuis I et les projections (cos et sin **calculés**, jamais saisis). Se décrit en `{ n, d }` = nπ/d | Une courbe de cosinus (→ `fonctionGraphique`) |
 | `transformation` | Une figure et son image : symétrie axiale, centrale, translation, rotation | Un agrandissement |
 | `homothetie` | Le centre, le rapport k, la figure et son image — et **les droites issues de O**, prolongées | Une transformation qui conserve les longueurs |
 | `reperage` | Un repère du plan, des points, un chemin | Une courbe de fonction |

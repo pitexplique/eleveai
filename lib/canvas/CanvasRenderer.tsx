@@ -31,6 +31,7 @@ import DureeCanvas from "./DureeCanvas";
 import ReperageCanvas from "./ReperageCanvas";
 import DroitesCanvas from "./DroitesCanvas";
 import CercleCanvas from "./CercleCanvas";
+import CercleTrigoCanvas from "./CercleTrigoCanvas";
 import MasseCanvas from "./MasseCanvas";
 import ContenanceCanvas from "./ContenanceCanvas";
 import EchelleCanvas from "./EchelleCanvas";
@@ -133,6 +134,11 @@ export default function CanvasRenderer({ figure }: Props) {
 
     case "cercle":
       return <CercleCanvas figure={figure} />;
+
+    // Le cercle trigonométrique : décrit en fractions de π, il calcule
+    // lui-même les cosinus et sinus qu'il écrit.
+    case "cercle_trigo":
+      return <CercleTrigoCanvas figure={figure} />;
 
     case "masse":
       return <MasseCanvas figure={figure} />;

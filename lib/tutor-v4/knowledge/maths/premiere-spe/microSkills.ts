@@ -454,6 +454,16 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "trigonometrie",
     prerequis: ["trig_valeurs"],
   },
+  // ⭐ 26/09/2026 — Frédéric : « si par exemple on demande cos(28π/2) ». Retirer
+  // des tours existait, mais sous `trig_periodicite` (onze cas figés qui
+  // retombaient tous au premier quadrant) : jamais un multiple de π/2, jamais un
+  // angle associé APRÈS avoir retiré les tours, jamais un réel négatif.
+  {
+    id: "trig_grand_reel",
+    label: "Cosinus et sinus d’un grand réel : retirer les tours",
+    notionId: "trigonometrie",
+    prerequis: ["trig_angles_associes"],
+  },
   {
     id: "trig_parite",
     label: "Parité de cosinus et sinus, traduction graphique",
@@ -471,6 +481,14 @@ export const microSkills: MicroSkillSource[] = [
     label: "Courbes de cosinus et sinus, lien avec le cercle",
     notionId: "trigonometrie",
     prerequis: ["trig_parite", "trig_periodicite"],
+  },
+  // ⭐ 26/09/2026 — l'« exemple d'algorithme » du BO 2026 pour la
+  // trigonométrie. Aucune banque de 1re spé n'en parlait.
+  {
+    id: "trig_archimede",
+    label: "Approcher π par la méthode d’Archimède",
+    notionId: "trigonometrie",
+    prerequis: ["trig_valeurs"],
   },
 
   /* ===================== PRODUIT SCALAIRE ===================== */

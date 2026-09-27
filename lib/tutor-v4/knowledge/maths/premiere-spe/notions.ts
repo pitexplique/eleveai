@@ -61,7 +61,10 @@ export const notions: NotionSource[] = [
   },
   {
     id: "trigonometrie",
-    label: "Fonctions trigonométriques",
+    // 26/09/2026 — « Trigonométrie », le titre du BO 2026 (Frédéric). Le BO
+    // ne parle plus de FONCTIONS cosinus et sinus ; parité, périodicité et
+    // courbes restent pourtant servies, par décision de Frédéric le même jour.
+    label: "Trigonométrie",
     boId: "BOPSAN",
     prerequis: [],
     levels: [1, 2, 3],

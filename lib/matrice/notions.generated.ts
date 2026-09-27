@@ -2038,7 +2038,7 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
       },
       {
         "id": "trigonometrie",
-        "label": "Fonctions trigonométriques",
+        "label": "Trigonométrie",
         "prerequis": []
       },
       {
