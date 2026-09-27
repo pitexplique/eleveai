@@ -1,7 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, BookOpen, Download, PencilLine, Sparkles } from "lucide-react";
+import { BookOpen, PencilLine, Sparkles } from "lucide-react";
 import { libelleClasse } from "@/lib/fiches/registre";
+import FichesParClasse from "@/components/fiches/FichesParClasse";
 import { listerFichesExercices } from "@/lib/fiches-exercices/registre";
 
 // ─── Le hub des fiches d'exercices (15/09/2026) ───────────────────────────────
@@ -42,6 +43,7 @@ export default function FichesExercicesPage() {
     }
     g.fiches.push(f);
   }
+  const plusieursMatieres = new Set(groupes.map((g) => g.matiere)).size > 1;
 
   return (
     <main className="min-h-screen bg-[#f5f8ff] text-slate-800">
@@ -83,45 +85,21 @@ export default function FichesExercicesPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
-        {groupes.map((g) => (
-          <div key={g.cle} className="mb-10">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-black text-slate-900">
-              <span className="rounded-full bg-cyan-100 px-3 py-1 text-sm text-cyan-700">
-                {LIBELLE_MATIERE[g.matiere] ?? g.matiere}
-              </span>
-              <span className="rounded-full bg-sky-100 px-3 py-1 text-sm text-sky-700">
-                {libelleClasse(g.classe)}
-              </span>
-              <span className="text-slate-400">
-                {g.fiches.length} fiche{g.fiches.length > 1 ? "s" : ""}
-              </span>
-            </h2>
-            <div className="grid gap-4 md:grid-cols-2">
-              {g.fiches.map((f) => (
-                <Link
-                  key={f.href}
-                  href={f.href}
-                  className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-lg hover:shadow-amber-200/40"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h3 className="text-xl font-black text-slate-900">{f.titre}</h3>
-                      <p className="mt-2 text-sm leading-6 text-slate-600">{f.resume}</p>
-                    </div>
-                    <PencilLine className="mt-1 h-6 w-6 shrink-0 text-amber-500" />
-                  </div>
-                  <div className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-amber-700">
-                    <Download className="h-4 w-4" />
-                    Ouvrir la fiche
-                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        ))}
+        <FichesParClasse
+          sorte="exercices"
+          // De la plus grande classe à la plus petite, comme les cartes de
+          // l'accueil : c'est aussi l'ordre de leurs couleurs.
+          groupes={[...groupes].reverse().map((g) => ({
+            // Une seule matière aujourd'hui : l'URL dit « ?classe=4e ». Le
+            // jour où le français arrive, la matière entre dans la clé.
+            cle: plusieursMatieres ? `${g.matiere}-${g.classe}` : g.classe,
+            label: libelleClasse(g.classe),
+            sous: plusieursMatieres ? (LIBELLE_MATIERE[g.matiere] ?? g.matiere) : undefined,
+            fiches: g.fiches.map((f) => ({ href: f.href, titre: f.titre, resume: f.resume })),
+          }))}
+        />
 
-        <p className="flex items-center gap-2 text-sm font-medium text-slate-400">
+        <p className="mt-10 flex items-center gap-2 text-sm font-medium text-slate-400">
           <Sparkles className="h-4 w-4" />
           Une feuille par notion, au fil du programme. D&apos;autres arrivent.
         </p>

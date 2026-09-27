@@ -1,7 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowLeft, BookOpen, ChevronRight, Download, FileText, MessageCircle } from "lucide-react";
-import { listerFiches } from "@/lib/fiches/registre";
+import { ArrowLeft, BookOpen, ChevronRight, MessageCircle } from "lucide-react";
+import { libelleClasse, listerFiches } from "@/lib/fiches/registre";
+import FichesParClasse from "@/components/fiches/FichesParClasse";
 
 // ⭐ 23/08/2026 — LE TITRE PORTE CE QU'ON TAPE, PAS CE QU'ON VEND.
 // « Fiche de cours » est le nom de la COLLECTION : il reste dans le fil
@@ -29,10 +30,6 @@ const parNiveau = fiches.reduce<Record<string, typeof fiches>>((acc, f) => {
   return acc;
 }, {});
 const niveauxOrdonnes = Object.keys(parNiveau);
-const LABEL_NIVEAU: Record<string, string> = {
-  "6e": "6e", "5e": "5e", "4e": "4e", "3e": "3e",
-  seconde: "2nde", "premiere-spe": "1re spé", "terminale-spe": "Tale spé",
-};
 
 export default function FichesCoursMathsPage() {
   return (
@@ -96,46 +93,16 @@ export default function FichesCoursMathsPage() {
           {fiches.length} fiches de maths — chacune se lit, se révise en
           flashcards et se compose.
         </p>
-        {niveauxOrdonnes.map((niveau) => (
-          <div key={niveau} className="mb-10">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-black text-slate-900">
-              <span className="rounded-full bg-cyan-100 px-3 py-1 text-sm text-cyan-700">
-                {LABEL_NIVEAU[niveau] ?? niveau}
-              </span>
-              <span className="text-slate-400">
-                {parNiveau[niveau].length} fiche
-                {parNiveau[niveau].length > 1 ? "s" : ""}
-              </span>
-            </h2>
-            <div className="grid gap-4 md:grid-cols-2">
-              {parNiveau[niveau].map((fiche) => (
-                <Link
-                  key={fiche.href}
-                  href={fiche.href}
-                  className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-lg hover:shadow-emerald-200/40"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h3 className="text-xl font-black text-slate-900">
-                        {fiche.titre}
-                      </h3>
-                      {fiche.resume ? (
-                        <p className="mt-2 text-sm leading-6 text-slate-600">
-                          {fiche.resume}
-                        </p>
-                      ) : null}
-                    </div>
-                    <FileText className="mt-1 h-6 w-6 shrink-0 text-emerald-500" />
-                  </div>
-                  <div className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-emerald-600">
-                    <Download className="h-4 w-4" />
-                    Ouvrir la fiche
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        ))}
+        <FichesParClasse
+          sorte="cours"
+          // De la plus grande classe à la plus petite, comme les cartes de
+          // l'accueil : c'est aussi l'ordre de leurs couleurs.
+          groupes={[...niveauxOrdonnes].reverse().map((niveau) => ({
+            cle: niveau,
+            label: libelleClasse(niveau),
+            fiches: parNiveau[niveau].map((f) => ({ href: f.href, titre: f.titre, resume: f.resume })),
+          }))}
+        />
       </section>
     </main>
   );
