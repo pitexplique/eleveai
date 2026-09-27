@@ -13,6 +13,9 @@ import LivretClient from "../LivretClient";
 
 const LIVRETS: Record<string, { title: string; description: string }> = {
   // ⏳ CM1 et CM2 (26/09) : titres à faire valider par Frédéric.
+  // Descriptions de 6e, 5e, seconde et terminale remises à jour le 27/09 : elles
+  // annonçaient encore ce que les niveaux ne posent plus (relatifs en 5e, « sans
+  // QCM » en seconde, « un quart en QCM » en terminale).
   cm1: {
     title: "Calcul mental CM1 : 20 séries corrigées en PDF",
     description: "Vingt séries de calcul mental de CM1 à imprimer, corrigées à la fin : tables, doubles et moitiés, fractions usuelles, × 10, + 9. Le programme 2025, rien de plus.",
@@ -23,11 +26,11 @@ const LIVRETS: Record<string, { title: string; description: string }> = {
   },
   "6e": {
     title: "Automatismes maths 6e : 20 séries corrigées en PDF",
-    description: "Vingt séries d'automatismes de 6e à imprimer, corrigées à la fin : décimaux, fractions, calcul mental, mesures. Nouvelles questions à chaque édition.",
+    description: "Vingt séries d'automatismes de 6e à imprimer, corrigées à la fin : dixièmes et centièmes, fractions, longueurs, aires, heures, figures. Nouvelles questions à chaque édition.",
   },
   "5e": {
     title: "Automatismes maths 5e : 20 séries corrigées en PDF",
-    description: "Vingt séries d'automatismes de 5e à imprimer, corrigées à la fin : relatifs, fractions, calcul littéral, angles. Nouvelles questions à chaque édition.",
+    description: "Vingt séries d'automatismes de 5e à imprimer, corrigées à la fin : calcul mental, fractions, pourcentages, angles, symétrie. Nouvelles questions à chaque édition.",
   },
   "4e": {
     title: "Automatismes maths 4e : 20 séries corrigées en PDF",
@@ -39,11 +42,11 @@ const LIVRETS: Record<string, { title: string; description: string }> = {
   },
   seconde: {
     title: "Automatismes de seconde : 20 séries corrigées en PDF",
-    description: "Vingt séries d'automatismes de seconde, alignées sur la liste officielle de l'épreuve anticipée, à imprimer, corrigées à la fin. Réponses courtes, sans QCM.",
+    description: "Vingt séries d'automatismes de seconde, alignées sur la liste du programme, à imprimer, corrigées à la fin. Réponses courtes ; un QCM seulement quand la réponse se tape mal.",
   },
   "terminale-spe": {
     title: "Automatismes terminale spé maths : 20 séries en PDF",
-    description: "Vingt séries de réflexes de terminale spécialité à imprimer, corrigées : limites, dérivées, exponentielle, logarithme, intégrales, loi binomiale. Un quart en QCM, comme au bac.",
+    description: "Vingt séries de réflexes de terminale spécialité à imprimer, corrigées : limites, dérivées, exponentielle, logarithme, intégrales, loi binomiale. Un QCM seulement quand la réponse ne se tape pas.",
   },
   premiere: {
     title: "Automatismes 1re, épreuve anticipée : PDF sans QCM",
