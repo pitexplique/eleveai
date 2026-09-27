@@ -448,6 +448,12 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Du discriminant seul au problème de contrôle : résoudre, factoriser, forme canonique, signe et inéquations, ballon, enclos, paramètre m. Un rappel de cours avant chaque niveau.",
   },
+  // 26/09/2026 — la seule feuille de 1re spé sans fiche de cours (pas encore).
+  "maths/premiere-spe/trigonometrie": {
+    titre: "La trigonométrie : 20 exercices corrigés",
+    resume:
+      "Du radian au problème de contrôle : placer un point, lire cosinus et sinus, angles associés, grands réels, cos x = a, les deux démonstrations du programme, la grande roue, la marée, et π approché comme Archimède. Le cercle dessiné dans les corrigés.",
+  },
 };
 
 export function hrefFicheExercices(matiere: string, classe: string, notion: string) {

@@ -251,6 +251,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "triangles-angles-familles-et-existence-3e-20-exercices-corriges.pdf",
   "triangles-angles-familles-et-existence-3e-cours-exercices-corriges.pdf",
   "trigonometrie-cosinus-sinus-tangente-3e-20-exercices-corriges.pdf",
+  "trigonometrie-premiere-spe-20-exercices-corriges.pdf",
   "trigonometrie-sinus-cosinus-tangente-3e-cours-exercices-corriges.pdf",
   "trouver-le-sujet-et-le-verbe-en-cm1-2026-2027-cours-exercices-corriges.pdf",
   "types-et-les-formes-de-phrases-en-cm1-2026-2027-cours-exercices-corriges.pdf",
