@@ -314,16 +314,28 @@ export const PARCOURS: Partial<Record<MatiereId, string>> = {
 
    ⛔ C'est un LIEN, pas un onglet : il quitte la page. Il reste donc hors du
    `tablist` (voir LigneActions), et les flèches du clavier ne le traversent
-   pas — sinon elles annonceraient un onglet qui n'ouvre aucun panneau. */
+   pas — sinon elles annonceraient un onglet qui n'ouvre aucun panneau.
+
+   ⭐ UNE LISTE DEPUIS LE 26/09/2026 : Frédéric, « à côté de fiches de cours il
+   faut mettre fiches exercice ». Plusieurs liens peuvent se glisser, chacun à
+   sa place ; deux au même `apres` s'affichent dans l'ordre de la liste. */
 export const LIEN_DANS_ACTIONS: Partial<
-  Record<MatiereId, { apres: ActionId; label: string; court: string; href: string }>
+  Record<MatiereId, { apres: ActionId; label: string; court: string; href: string }[]>
 > = {
-  maths: {
-    apres: "coach",
-    label: "Automatismes",
-    court: "Auto",
-    href: "/automatismes-maths",
-  },
+  maths: [
+    {
+      apres: "coach",
+      label: "Automatismes",
+      court: "Auto",
+      href: "/automatismes-maths",
+    },
+    {
+      apres: "fiche",
+      label: "Fiches d'exercices",
+      court: "Exos",
+      href: "/fiches-exercices",
+    },
+  ],
 };
 
 export const LIENS_MATIERE: Partial<

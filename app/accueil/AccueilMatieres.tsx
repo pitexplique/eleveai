@@ -368,8 +368,7 @@ function LigneActions({
             // champ `apres` dit après quel onglet il se glisse. Frédéric a
             // changé d'avis deux fois le 24/09 ; la seconde fois n'a coûté
             // qu'un mot dans matieres.ts.
-            const glisse = LIEN_DANS_ACTIONS[matiere.id];
-            const lien = glisse?.apres === a.id ? glisse : undefined;
+            const liens = (LIEN_DANS_ACTIONS[matiere.id] ?? []).filter((l) => l.apres === a.id);
             return (
               <Fragment key={a.id}>
               <button
@@ -391,8 +390,8 @@ function LigneActions({
                 <span className="hidden whitespace-nowrap sm:inline">{a.label}</span>
                 <span className="whitespace-nowrap sm:hidden">{a.court}</span>
               </button>
-              {lien ? (
-                <span role="presentation" className="flex shrink-0">
+              {liens.map((lien) => (
+                <span key={lien.href} role="presentation" className="flex shrink-0">
                   <Link
                     prefetch={false}
                     href={`${lien.href}?from=accueil`}
@@ -404,7 +403,7 @@ function LigneActions({
                     <span className="whitespace-nowrap sm:hidden">{lien.court}</span>
                   </Link>
                 </span>
-              ) : null}
+              ))}
               </Fragment>
             );
           })}
@@ -868,6 +867,7 @@ const PIED = [
   { label: "Parents", href: "/parents" },
   { label: "Chef d'établissement", href: "/direction" },
   { label: "Fiches de cours", href: "/fiches-cours" },
+  { label: "Fiches d'exercices", href: "/fiches-exercices" },
   { label: "Toutes les ressources", href: "/explorer" },
   { label: "À propos", href: "/qui-sommes-nous" },
   { label: "Aide", href: "/faq" },
