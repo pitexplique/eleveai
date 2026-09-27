@@ -13,6 +13,7 @@
 import { useEffect, useState } from "react";
 import type { TutorQuestionOption } from "@/lib/tutor-v4/types";
 import type { Matiere } from "@/lib/tutor-v4/catalog";
+import { enMots } from "@/lib/lecture-en-mots";
 
 export type SpeechLang = "fr" | "en" | "es";
 
@@ -142,6 +143,16 @@ export function stopSpeak() {
 }
 
 /**
+ * Le texte tel que la voix doit le dire. En français, les formules passent
+ * par `enMots` (26/09) : sans lui, la voix prononçait « dollar, backslash,
+ * dfrac » sur « $\dfrac{3}{4}$ ». ⛔ Pas en anglais ni en espagnol : `enMots`
+ * parle français, il écrirait « 3 sur 4 » dans une phrase anglaise.
+ */
+export function textePourLaVoix(texte: string, lang: SpeechLang = "fr"): string {
+  return lang === "fr" ? enMots(texte) : texte;
+}
+
+/**
  * Construit un texte lisible d'une question : l'énoncé + les choix annoncés
  * « Réponse A, … » pour un QCM (indispensable pour un élève qui n'voit pas).
  * Les béquilles suivent la langue lue pour rester cohérentes à l'oreille.
@@ -150,12 +161,12 @@ export function buildReadableQuestion(
   question: TutorQuestionOption,
   lang: SpeechLang = "fr"
 ): string {
-  const parts = [question.text];
+  const parts = [textePourLaVoix(question.text, lang)];
   if (question.format === "qcm" && question.choices?.length) {
     const lettres = ["A", "B", "C", "D", "E", "F"];
     const { answer, intro } = SCAFFOLD[lang];
     const choix = question.choices
-      .map((c, i) => `${answer} ${lettres[i] ?? i + 1} : ${c}`)
+      .map((c, i) => `${answer} ${lettres[i] ?? i + 1} : ${textePourLaVoix(c, lang)}`)
       .join(". ");
     parts.push(`${intro} ${choix}.`);
   }
