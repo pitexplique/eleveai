@@ -173,6 +173,15 @@ export default function AutomatismesClient() {
                   </button>
                 );
               })}
+              {/* ⭐ 27/09 : avant le CM1, les automatismes sont les « Défis de Ti
+                  Margo » — une rubrique SANS classe (Frédéric : « des élèves ont
+                  du mal même en CE2 »), atteinte d'ici pour ceux qui la cherchent. */}
+              <Link
+                href="/defis-ti-margo"
+                className="rounded-2xl bg-lime-100 px-5 py-3 text-sm font-black text-lime-900 shadow-sm ring-1 ring-lime-300 transition hover:-translate-y-0.5 hover:bg-lime-200"
+              >
+                CP · CE1 · CE2 : les défis de Ti Margo 🦎
+              </Link>
             </div>
           </div>
 

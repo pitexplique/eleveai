@@ -12,7 +12,7 @@ import LivretClient from "../LivretClient";
 // avec lui sous ~60 signes.
 
 const LIVRETS: Record<string, { title: string; description: string }> = {
-  // ⏳ CM1 et CM2 (26/09) : titres à faire valider par Frédéric.
+  // CM1 et CM2 : titres validés par Frédéric le 27/09/2026.
   // Descriptions de 6e, 5e, seconde et terminale remises à jour le 27/09 : elles
   // annonçaient encore ce que les niveaux ne posent plus (relatifs en 5e, « sans
   // QCM » en seconde, « un quart en QCM » en terminale).
