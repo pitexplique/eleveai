@@ -82,7 +82,7 @@ export const exercicesTrigonometriePremiere: FicheExercicesData = {
   accroche:
     "Vingt exercices, du radian au problème de contrôle, avec un rappel de cours de trois lignes avant chaque niveau. Garde un cercle trigonométrique au brouillon : presque toutes les réponses s'y lisent. Les corrections le dessinent pour toi.",
 
-  fichesCours: [],
+  fichesCours: [{ href: "/fiches-cours/maths/premiere-spe/trigonometrie", titre: "La trigonométrie" }],
   coachHref: "/coach-ia/maths?classe=premiere-spe",
 
   series: [

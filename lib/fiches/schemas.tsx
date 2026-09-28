@@ -68,7 +68,7 @@ export const enVert = (s: string) => `\\textcolor{${VERT}}{${s}}`;
 export function egalite(tex: string, legende?: string) {
   return (
     <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-4 text-center">
-      <div className="overflow-x-auto whitespace-nowrap text-lg text-slate-900">
+      <div className="overflow-x-auto overflow-y-hidden whitespace-nowrap py-1.5 text-lg text-slate-900">
         <TexteMath>{`$${tex}$`}</TexteMath>
       </div>
       {legende ? (
@@ -90,7 +90,10 @@ export function egalites(lignes: string[], legende?: string) {
       {lignes.map((l, i) => (
         <div
           key={i}
-          className={`overflow-x-auto whitespace-nowrap text-lg text-slate-900 ${i ? "mt-2" : ""}`}
+          // ⛔ 28/09/2026 : `overflow-x-auto` rend aussi l'axe vertical défilant, et
+          // une formule haute (\dfrac, \leqslant) dépassait de 2 à 6 px — une barre
+          // de défilement fantôme par ligne. La marge l'absorbe, l'axe vertical se tait.
+          className={`overflow-x-auto overflow-y-hidden whitespace-nowrap py-1.5 text-lg text-slate-900 ${i ? "mt-1" : ""}`}
         >
           <TexteMath>{`$${l}$`}</TexteMath>
         </div>

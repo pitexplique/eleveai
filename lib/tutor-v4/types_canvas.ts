@@ -2023,6 +2023,13 @@ export type CercleTrigoCanvasData = {
   reperes?: "aucun" | "quarts" | "premier_quadrant" | "tous";
   /** Graduer les demi-axes positifs en 1/2, √2/2, √3/2. */
   valeursAxes?: boolean;
+  /**
+   * ⭐ LA CONVENTION DE FRÉDÉRIC (28/09/2026) : axe horizontal ROUGE = cosinus,
+   * axe vertical VERT = sinus, comme il dessine en classe. Les projections, les
+   * valeurs lues et les graduations prennent la couleur de leur axe, et le
+   * cosinus / le sinus sont surlignés en barre épaisse depuis O.
+   */
+  axesCouleur?: boolean;
   points?: CercleTrigoPoint[];
   size?: { width?: number; height?: number };
 };

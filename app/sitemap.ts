@@ -1003,10 +1003,10 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-09-20",
     },
   ],
-  // ⭐ La trigonométrie de 1re spé n'a PAS de fiche de cours : sa leçon se
-  // déclare sur la feuille d'exercices, qui l'affiche (VideoNotion) et la met
-  // en QR sur le PDF. Publiée le 28/09/2026.
-  "/fiches-exercices/maths/premiere-spe/trigonometrie": [
+  // La leçon « rouge et vert », publiée le 28/09/2026. D'abord déclarée sur la
+  // feuille d'exercices faute de fiche de cours ; la fiche est née le même soir,
+  // la vidéo la rejoint, comme pour les autres notions.
+  "/fiches-cours/maths/premiere-spe/trigonometrie": [
     {
       id: "5E56e0CbyvQ",
       title:

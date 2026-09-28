@@ -637,6 +637,11 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "L'exponentielle, partie 2 : dériver et étudier",
     resume: "L'exponentielle ne décide jamais du signe : dérivée de e^(at), étude de (ax + b)e^x, croissance exponentielle.",
   },
+  "maths/premiere-spe/trigonometrie": {
+    titre: "La trigonométrie",
+    resume:
+      "On enroule la droite sur un cercle de rayon 1 : chaque réel devient un point, son cosinus se lit sur l'axe rouge, son sinus sur l'axe vert. Radian, valeurs remarquables démontrées, angles associés, grands réels et courbes.",
+  },
   // ─── Français ───────────────────────────────────────────────────────────────
   // La matière s'ouvre au cycle 3 : c'est le programme du CM2, et c'est aussi
   // celui sur lequel porte l'écrit de français du CRPE.

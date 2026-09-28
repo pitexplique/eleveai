@@ -40,6 +40,10 @@ const C = {
   point: "#dc2626",
   arc: "#f59e0b",
   titre: "#0f172a",
+  // `axesCouleur` : la convention rouge (cos) / vert (sin) de Frédéric.
+  cos: "#dc2626",
+  sin: "#16a34a",
+  pointNeutre: "#0f172a",
 };
 
 const TAILLE = 12;
@@ -169,6 +173,11 @@ export default function CercleTrigoCanvas({ figure }: Props) {
   });
   const libre = (x: number, y: number) => occupes.every((o) => Math.abs(o.x - x) > 26 || Math.abs(o.y - y) > 26);
 
+  const rv = !!figure.axesCouleur;
+  const axeX = rv ? C.cos : C.axe;
+  const axeY = rv ? C.sin : C.axe;
+  const pointDefaut = rv ? C.pointNeutre : C.point;
+
   const graduations: { v: ValeurExacte; cote: 1 | -1 }[] = [
     { v: "1/2", cote: 1 },
     { v: "r2/2", cote: -1 },
@@ -190,11 +199,23 @@ export default function CercleTrigoCanvas({ figure }: Props) {
           <marker id="ct-fleche-axe" viewBox="0 0 10 10" refX={8} refY={5} markerWidth={7} markerHeight={7} orient="auto">
             <path d="M0,0 L10,5 L0,10 z" fill={C.axe} />
           </marker>
+          <marker id="ct-fleche-cos" viewBox="0 0 10 10" refX={8} refY={5} markerWidth={7} markerHeight={7} orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill={C.cos} />
+          </marker>
+          <marker id="ct-fleche-sin" viewBox="0 0 10 10" refX={8} refY={5} markerWidth={7} markerHeight={7} orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill={C.sin} />
+          </marker>
         </defs>
 
         {/* Axes */}
-        <line x1={cx - r - 12} y1={cy} x2={cx + r + 14} y2={cy} stroke={C.axe} strokeWidth={1.5} markerEnd="url(#ct-fleche-axe)" />
-        <line x1={cx} y1={cy + r + 12} x2={cx} y2={cy - r - 14} stroke={C.axe} strokeWidth={1.5} markerEnd="url(#ct-fleche-axe)" />
+        <line x1={cx - r - 12} y1={cy} x2={cx + r + 14} y2={cy} stroke={axeX} strokeWidth={rv ? 2.2 : 1.5} markerEnd={rv ? "url(#ct-fleche-cos)" : "url(#ct-fleche-axe)"} />
+        <line x1={cx} y1={cy + r + 12} x2={cx} y2={cy - r - 14} stroke={axeY} strokeWidth={rv ? 2.2 : 1.5} markerEnd={rv ? "url(#ct-fleche-sin)" : "url(#ct-fleche-axe)"} />
+        {rv ? (
+          <>
+            <text x={cx + r + 20} y={cy + 16} textAnchor="end" fontSize={12} fontWeight={900} fill={C.cos} stroke="white" strokeWidth={3} paintOrder="stroke">cos</text>
+            <text x={cx - 8} y={cy - r - 14} textAnchor="end" fontSize={12} fontWeight={900} fill={C.sin} stroke="white" strokeWidth={3} paintOrder="stroke">sin</text>
+          </>
+        ) : null}
         <text x={cx - 9} y={cy + 14} textAnchor="middle" fontSize={12} fontWeight={700} fill={C.repere}>O</text>
         <text x={cx + r + 8} y={cy - 6} textAnchor="middle" fontSize={12} fontWeight={800} fill={C.repere}>I</text>
         <text x={cx + 9} y={cy - r - 5} textAnchor="middle" fontSize={12} fontWeight={800} fill={C.repere}>J</text>
@@ -208,13 +229,13 @@ export default function CercleTrigoCanvas({ figure }: Props) {
               const d = valeurNumerique(v) * r;
               return (
                 <g key={v}>
-                  <line x1={cx + d} y1={cy - 4} x2={cx + d} y2={cy + 4} stroke={C.axe} strokeWidth={1.5} />
-                  <line x1={cx - 4} y1={cy - d} x2={cx + 4} y2={cy - d} stroke={C.axe} strokeWidth={1.5} />
+                  <line x1={cx + d} y1={cy - 4} x2={cx + d} y2={cy + 4} stroke={axeX} strokeWidth={1.5} />
+                  <line x1={cx - 4} y1={cy - d} x2={cx + 4} y2={cy - d} stroke={axeY} strokeWidth={1.5} />
                   {libre(cx + d, cy + cote * 20) && !dejaEcrits.has(`x:${v}`) ? (
-                    <Frac x={cx + d} y={cy + cote * 20} f={valeurFraction(v)} couleur={C.axe} />
+                    <Frac x={cx + d} y={cy + cote * 20} f={valeurFraction(v)} couleur={axeX} />
                   ) : null}
                   {!libre(cx - 20, cy - d) || dejaEcrits.has(`y:${v}`) ? null : (
-                    <Frac x={cx - 7} y={cy - d} f={valeurFraction(v)} couleur={C.axe} enLigne="gauche" />
+                    <Frac x={cx - 7} y={cy - d} f={valeurFraction(v)} couleur={axeY} enLigne="gauche" />
                   )}
                 </g>
               );
@@ -227,7 +248,7 @@ export default function CercleTrigoCanvas({ figure }: Props) {
           const p = pos(t);
           const e = pos(t, R);
           const pointEtudie = points.find((q) => memePoint(q.angle, a));
-          const couleur = pointEtudie ? (pointEtudie.couleur ?? C.point) : C.repere;
+          const couleur = pointEtudie ? (pointEtudie.couleur ?? pointDefaut) : C.repere;
           return (
             <g key={`${a.n}/${a.d}`}>
               <circle cx={p.x} cy={p.y} r={3} fill={C.repere} />
@@ -247,7 +268,10 @@ export default function CercleTrigoCanvas({ figure }: Props) {
             écrite par le précédent. */}
         {(() => {
           const rendus = points.map((q, i) => {
-            const couleur = q.couleur ?? C.point;
+            const couleur = q.couleur ?? pointDefaut;
+            // Rouge-vert : la projection sur l'axe des cos est rouge, sur l'axe des sin verte.
+            const coulCos = rv ? C.cos : couleur;
+            const coulSin = rv ? C.sin : couleur;
             const s = simplifier(q.angle);
             const rep = representant(s);
             const theta = (Math.PI * rep.n) / rep.d;
@@ -279,10 +303,17 @@ export default function CercleTrigoCanvas({ figure }: Props) {
                   </>
                 ) : null}
                 {q.projections && Math.abs(p.y - cy) > 1 ? (
-                  <line x1={p.x} y1={p.y} x2={p.x} y2={cy} stroke={couleur} strokeWidth={1.8} strokeDasharray="5 4" />
+                  <line x1={p.x} y1={p.y} x2={p.x} y2={cy} stroke={coulCos} strokeWidth={1.8} strokeDasharray="5 4" />
                 ) : null}
                 {q.projections && Math.abs(p.x - cx) > 1 ? (
-                  <line x1={p.x} y1={p.y} x2={cx} y2={p.y} stroke={couleur} strokeWidth={1.8} strokeDasharray="5 4" />
+                  <line x1={p.x} y1={p.y} x2={cx} y2={p.y} stroke={coulSin} strokeWidth={1.8} strokeDasharray="5 4" />
+                ) : null}
+                {/* Rouge-vert : le cosinus et le sinus en barres épaisses depuis O. */}
+                {rv && q.projections && Math.abs(p.x - cx) > 1 ? (
+                  <line x1={cx} y1={cy} x2={p.x} y2={cy} stroke={C.cos} strokeWidth={6} strokeLinecap="round" opacity={0.85} />
+                ) : null}
+                {rv && q.projections && Math.abs(p.y - cy) > 1 ? (
+                  <line x1={cx} y1={cy} x2={cx} y2={p.y} stroke={C.sin} strokeWidth={6} strokeLinecap="round" opacity={0.85} />
                 ) : null}
                 <line x1={cx} y1={cy} x2={p.x} y2={p.y} stroke={couleur} strokeWidth={2} />
                 <circle cx={p.x} cy={p.y} r={6} fill={couleur} stroke="#0f172a" strokeWidth={1.5} />
@@ -297,7 +328,7 @@ export default function CercleTrigoCanvas({ figure }: Props) {
                     x={p.x - (Math.abs(valeurNumerique(cosV)) > 0.8 ? Math.sign(valeurNumerique(cosV)) * 10 : 0)}
                     y={cy + (valeurNumerique(sinV ?? "0") >= 0 ? 20 : -20)}
                     f={valeurFraction(cosV)}
-                    couleur={couleur}
+                    couleur={coulCos}
                     gras
                   />
                 ) : null}
@@ -306,7 +337,7 @@ export default function CercleTrigoCanvas({ figure }: Props) {
                     x={cx + (valeurNumerique(cosV ?? "0") >= 0 ? -7 : 7)}
                     y={p.y}
                     f={valeurFraction(sinV)}
-                    couleur={couleur}
+                    couleur={coulSin}
                     gras
                     enLigne={valeurNumerique(cosV ?? "0") >= 0 ? "gauche" : "droite"}
                   />
