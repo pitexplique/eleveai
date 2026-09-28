@@ -40,6 +40,16 @@
       ],
       "port": 3400,
       "autoPort": false
+    },
+    {
+      "name": "eleveai-5",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "set NEXT_DIST_DIR=.next-5&& node scripts/dev-second-poste.mjs --port 3500"
+      ],
+      "port": 3500,
+      "autoPort": false
     }
   ]
 }

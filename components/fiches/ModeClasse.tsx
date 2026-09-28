@@ -198,6 +198,16 @@ export type ClasseSection =
       enonce?: string;
       lignes: string[];
       revelable?: boolean;
+    }
+  /**
+   * ⭐ UNE DIAPO DESSINÉE PAR SON APPELANT (28/09/2026) — pour la feuille
+   * COMPOSÉE, qui projette deux sujets côte à côte (gauche / droite) et dont
+   * les textes se modifient au tableau. Le mode classe garde la navigation et
+   * « Révéler » (Espace compris) ; le contenu est à l'appelant.
+   */
+  | {
+      type: "libre";
+      rendu: (etat: { revealed: boolean; reveal: () => void }) => ReactNode;
     };
 
 export type ClasseSlide = {
@@ -486,6 +496,9 @@ function Section({
       );
     }
 
+    case "libre":
+      return <>{section.rendu({ revealed, reveal })}</>;
+
     default:
       return null;
   }
@@ -544,6 +557,10 @@ export default function ModeClasse({
   useEffect(() => {
     if (!ouvert) return;
     function handleKey(event: KeyboardEvent) {
+      // Un texte qu'on modifie au tableau (feuille composée) garde ses touches :
+      // l'espace écrit une espace, les flèches déplacent le curseur.
+      const cible = event.target as HTMLElement | null;
+      if (cible && (cible.tagName === "TEXTAREA" || cible.tagName === "INPUT" || cible.isContentEditable)) return;
       switch (event.key) {
         case "ArrowRight":
         case "PageDown":

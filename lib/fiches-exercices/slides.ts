@@ -36,7 +36,7 @@ const lettreDe = (ligne: string) => ligne.match(/^([a-h])\)\s/)?.[1] ?? null;
  * Découpe un texte en préambule (les lignes avant la première sous-question)
  * et en parties, une par lettre. Un texte sans lettre n'a qu'un préambule.
  */
-function decouper(texte: string): { preambule: string[]; parties: { lettre: string; lignes: string[] }[] } {
+export function decouper(texte: string): { preambule: string[]; parties: { lettre: string; lignes: string[] }[] } {
   const preambule: string[] = [];
   const parties: { lettre: string; lignes: string[] }[] = [];
   for (const ligne of lignesDe(texte)) {
