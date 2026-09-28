@@ -243,8 +243,11 @@ export const exercicesTrigonometriePremiere: FicheExercicesData = {
           }),
           micros: ["trig_grand_reel"],
         },
+        // ⭐ 28/09/2026 — Frédéric : résoudre cos x = a est hors BO 2026, mais
+        // « on le garde comme un défi ».
         {
-          enonce: "a) Trouver tous les réels $x$ de $[0 ; 2\\pi[$ tels que $\\cos x = \\dfrac{1}{2}$.\nb) Même question pour $\\sin x = -\\dfrac{\\sqrt{2}}{2}$.",
+          titre: "⭐ Défi : remonter du cosinus au réel",
+          enonce: "Pour aller plus loin que le programme.\na) Trouver tous les réels $x$ de $[0 ; 2\\pi[$ tels que $\\cos x = \\dfrac{1}{2}$.\nb) Même question pour $\\sin x = -\\dfrac{\\sqrt{2}}{2}$.",
           correction:
             "a) On cherche les points du cercle d'abscisse $\\dfrac{1}{2}$ : on trace la droite verticale $x = \\dfrac{1}{2}$.\nElle coupe le cercle en DEUX points, symétriques par rapport à l'axe des abscisses.\nLe premier est l'image de $\\dfrac{\\pi}{3}$. Le second, celle de $-\\dfrac{\\pi}{3}$, soit $2\\pi - \\dfrac{\\pi}{3} = \\dfrac{5\\pi}{3}$ dans $[0 ; 2\\pi[$.\nSolutions : $x = \\dfrac{\\pi}{3}$ ou $x = \\dfrac{5\\pi}{3}$.\nb) On cherche les points d'ordonnée $-\\dfrac{\\sqrt{2}}{2}$ : la droite horizontale coupe le cercle sous l'axe, en deux points.\nCe sont les images de $\\pi + \\dfrac{\\pi}{4} = \\dfrac{5\\pi}{4}$ et de $2\\pi - \\dfrac{\\pi}{4} = \\dfrac{7\\pi}{4}$.\nSolutions : $x = \\dfrac{5\\pi}{4}$ ou $x = \\dfrac{7\\pi}{4}$.\n⛔ L'oubli classique : ne donner qu'une solution. Une droite coupe le cercle deux fois (sauf en $\\pm 1$).",
           schema: cercle(
