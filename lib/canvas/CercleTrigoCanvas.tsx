@@ -212,7 +212,7 @@ export default function CercleTrigoCanvas({ figure }: Props) {
         <line x1={cx} y1={cy + r + 12} x2={cx} y2={cy - r - 14} stroke={axeY} strokeWidth={rv ? 2.2 : 1.5} markerEnd={rv ? "url(#ct-fleche-sin)" : "url(#ct-fleche-axe)"} />
         {rv ? (
           <>
-            <text x={cx + r + 20} y={cy + 16} textAnchor="end" fontSize={12} fontWeight={900} fill={C.cos} stroke="white" strokeWidth={3} paintOrder="stroke">cos</text>
+            <text x={cx + r + 10} y={cy + 19} textAnchor="start" fontSize={12} fontWeight={900} fill={C.cos} stroke="white" strokeWidth={3} paintOrder="stroke">cos</text>
             <text x={cx - 8} y={cy - r - 14} textAnchor="end" fontSize={12} fontWeight={900} fill={C.sin} stroke="white" strokeWidth={3} paintOrder="stroke">sin</text>
           </>
         ) : null}

@@ -38,14 +38,32 @@ const BLEU = "#2563eb";
 const ROUGE = "#dc2626";
 const VERT = "#16a34a";
 
-/** Le cercle trigonométrique du corrigé : les points, l'arc, les projections. */
+/**
+ * Le rouge et le vert des POINTS, avant le 28/09, désignaient seulement « le
+ * premier » et « le second ». Sous la convention rouge (cos) / vert (sin) de
+ * Frédéric, ils mentiraient : le point rouge passe en ardoise, le vert en violet.
+ */
+const RECOLORER: Record<string, string> = { [ROUGE]: "#0f172a", [VERT]: "#7c3aed" };
+
+/**
+ * Le cercle trigonométrique du corrigé : les points, l'arc, les projections.
+ * ⭐ 28/09/2026 : à la convention de classe, axe rouge = cosinus, axe vert = sinus.
+ */
 function cercle(
   points: CercleTrigoPoint[],
   opts: { reperes?: "aucun" | "quarts" | "premier_quadrant" | "tous"; valeursAxes?: boolean; titre?: string } = {},
 ) {
+  const pts = points.map((p) => (p.couleur && RECOLORER[p.couleur] ? { ...p, couleur: RECOLORER[p.couleur] } : p));
   return (
     <CanvasRenderer
-      figure={{ kind: "cercle_trigo", reperes: opts.reperes ?? "tous", valeursAxes: opts.valeursAxes, titre: opts.titre, points }}
+      figure={{
+        kind: "cercle_trigo",
+        axesCouleur: true,
+        reperes: opts.reperes ?? "tous",
+        valeursAxes: opts.valeursAxes,
+        titre: opts.titre,
+        points: pts,
+      }}
     />
   );
 }
@@ -67,7 +85,7 @@ function courbeCosinus() {
         ymin: -1.5,
         ymax: 1.5,
         grille: true,
-        courbes: [{ id: "cos", type: "points", couleur: BLEU, points }],
+        courbes: [{ id: "cos", type: "points", couleur: ROUGE, points }],
       }}
     />
   );
