@@ -1003,6 +1003,19 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-09-20",
     },
   ],
+  // ⭐ La trigonométrie de 1re spé n'a PAS de fiche de cours : sa leçon se
+  // déclare sur la feuille d'exercices, qui l'affiche (VideoNotion) et la met
+  // en QR sur le PDF. Publiée le 28/09/2026.
+  "/fiches-exercices/maths/premiere-spe/trigonometrie": [
+    {
+      id: "5E56e0CbyvQ",
+      title:
+        "Le cercle trigonométrique en 8 min : radian, cosinus, sinus, valeurs remarquables — Maths 1re spé",
+      description:
+        "Un cercle de rayon 1, un axe rouge pour le cosinus, un axe vert pour le sinus. Le radian mesure la longueur de l'arc, la droite s'enroule sur le cercle, les valeurs remarquables en une ligne, cos²x + sin²x = 1, cos(−x) = cos(x), et le signe du cosinus expliqué par le vent (1re spé).",
+      ajoutee: "2026-09-28",
+    },
+  ],
   // « Les bases » n'a pas de classe : la leçon de fractions est rattachée à la
   // fiche de 5e (celle que la Une du 21/09 met en avant). La 4e l'affiche aussi
   // sur sa page, sans seconde déclaration ici — voir la note d'en-tête.
