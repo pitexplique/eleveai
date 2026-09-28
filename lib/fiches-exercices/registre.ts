@@ -469,14 +469,10 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
       "Du taux de variation au problème de contrôle : nombre dérivé par la définition, lecture d'une tangente, équation de la tangente, dérivées usuelles, somme, produit, quotient, g(ax + b), valeur absolue. Une pierre qui tombe d'une falaise, le coût d'une planche de skate de plus, un médicament dans le sang. Courbes et tangentes dessinées dans les corrigés.",
     notionsCoach: ["derivation_nombre_derive", "derivation_tangente", "derivation_formules", "derivation_operations"],
   },
-  // ⛔ LA PREMIÈRE SANS SPÉ : pas de discriminant, polynômes de degré 3 au plus,
-  // et le signe de f′ se lit sur une forme factorisée DONNÉE (qu'on vérifie).
-  "maths/premiere/derivation": {
-    titre: "La dérivation : 20 exercices corrigés",
-    resume:
-      "Du graphique au problème de contrôle : lire un nombre dérivé sur une tangente, dériver un polynôme, étudier le signe de f′ sur sa forme factorisée, dresser le tableau de variations, trouver un maximum. Un village pendant l'exode rural, la recette d'une entreprise, le bénéfice d'un maraîcher, une crue, une épidémie de grippe, le prix des billets d'un festival, un sentier de montagne. Courbes, tangentes et tableaux dessinés dans les corrigés.",
-    notionsCoach: ["der_graphique", "der_nombre_derive", "der_formules", "der_polynome", "der_signe", "der_variations"],
-  },
+  // (La dérivation de première SANS spé a eu une feuille unique pour ses six
+  //  notions le matin du 28/09 ; le soir, Frédéric : une feuille par notion.
+  //  Les six sont plus bas, avec les autres chapitres de première. La feuille
+  //  unique, jamais poussée, a été retirée.)
   // ⭐ LES AUTOMATISMES DE PREMIÈRE (28/09/2026) — Frédéric : « 1 feuille
   // d'exercice par notion comme d'habitude, même si cela prend du temps ».
   // Dix-huit feuilles, sans calculatrice, dans l'ordre du coach.
@@ -569,6 +565,209 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     titre: "Lire une probabilité dans un tableau ou un arbre : 20 exercices corrigés",
     resume:
       "Lire P(A ∩ B) dans un tableau croisé, lire une probabilité conditionnelle sur une ligne ou sur une branche d'arbre, et ne pas confondre P_A(B) et P_B(A), sans calculatrice. Vote par âge, emploi des diplômés, chômage des jeunes, fraude bancaire, retours d'achats en ligne, sondage et vote réel.",
+  },
+  // ⭐ LES AUTRES CHAPITRES DE PREMIÈRE, UNE FEUILLE PAR NOTION (28/09/2026) —
+  // Frédéric : « beaucoup de canvas et de visuel, et d'application économie,
+  // écologie, sport, nature », « et même de la physique et de l'histoire-géo ».
+  // Dans l'ordre du coach : information chiffrée, aléatoire, linéaire,
+  // quadratique, exponentielle, dérivation.
+  "maths/premiere/info-tableau-croise": {
+    titre: "Le tableau croisé : 20 exercices corrigés",
+    resume:
+      "Lire une case ou une marge, compléter un tableau croisé en commençant là où il ne manque qu'un nombre, le dresser à partir d'un énoncé, le vérifier dans les deux sens. Tri du verre, forêt, véhicules électriques, semi-marathon, exode rural d'un village, station de ski.",
+  },
+  "maths/premiere/info-frequences": {
+    titre: "Fréquences marginales et conditionnelles : 20 exercices corrigés",
+    resume:
+      "Calculer une fréquence marginale ou conditionnelle en choisissant le bon dénominateur (« parmi les… »), comparer des groupes de tailles différentes, découvrir le paradoxe des deux engrais. Tribunes d'un stade, composteurs, capteurs de température, migrations, éoliennes.",
+  },
+  "maths/premiere/info-representations-croisees": {
+    titre: "Représenter deux caractères : 20 exercices corrigés",
+    resume:
+      "Lire des barres groupées et empilées à 100 %, calculer les angles d'un diagramme circulaire ou semi-circulaire, choisir entre effectifs et pourcentages. Licences sportives, chauffage, mix électrique, hémicycle d'une assemblée, budget de deux familles.",
+  },
+  "maths/premiere/info-nuage": {
+    titre: "Le nuage de points : 20 exercices corrigés",
+    resume:
+      "Lire les coordonnées d'un point, construire le nuage d'un tableau, décrire la tendance et repérer un point isolé, sans confondre lien et cause. Chênes, glaces et soleil, éolienne et vent, vitesse et consommation, recul d'un glacier, abeilles.",
+  },
+  "maths/premiere/info-point-moyen": {
+    titre: "Le point moyen : 20 exercices corrigés",
+    resume:
+      "Calculer les coordonnées du point moyen, le placer, retrouver une donnée manquante, vérifier qu'une droite d'ajustement passe par lui. Tirs et buts, ressort, population d'une ville, niveau de la mer, éoliennes, forfaits mobiles.",
+  },
+  "maths/premiere/info-ajustement-affine": {
+    titre: "Ajustement affine : 20 exercices corrigés",
+    resume:
+      "Juger si un nuage de points est assez rectiligne, trouver l'équation d'une droite d'ajustement par deux points, puis s'en servir pour calculer ou résoudre. Forêt, vélos partagés, panneaux solaires, pouls d'un coureur, ressort, exode rural, voiture électrique.",
+  },
+  "maths/premiere/info-interpoler-extrapoler": {
+    titre: "Interpoler et extrapoler : 20 exercices corrigés",
+    resume:
+      "Situer une valeur dans la plage des données ou en dehors, l'estimer avec une droite d'ajustement, et reconnaître la prévision qui devient absurde. Température en montagne, glacier, population d'une ville, lynx, eau qui bout, niveau de la mer, date des vendanges.",
+  },
+  "maths/premiere/info-tableur": {
+    titre: "Le tableur : 20 exercices corrigés",
+    resume:
+      "Lire une cellule, comprendre et écrire une formule (=B2*1,05, SOMME, MOYENNE), la recopier vers le bas, trouver un seuil dans une colonne, choisir le bon diagramme. Épargne, forêt, entraînement, énergie électrique, ville industrielle, tournoi, compteur d'eau.",
+  },
+  "maths/premiere/info-filtre-donnees": {
+    titre: "Filtrer des données (ET, OU, NON) : 20 exercices corrigés",
+    resume:
+      "Filtrer un fichier sur un critère, combiner deux critères avec ET, OU, NON, et retrouver l'effectif dans un tableau croisé ou un diagramme de Venn. Randonnées, refuge animalier, club d'escalade, niveau sonore, élections, station de ski.",
+  },
+  "maths/premiere/alea-conditionnelle": {
+    titre: "Probabilité conditionnelle : reconnaître : 20 exercices corrigés",
+    resume:
+      "Repérer « parmi » et « sachant que », écrire P_A(B) et la calculer dans un tableau croisé, sans confondre P_A(B) et P_B(A). Forêts, abeilles, festival, tirs au but, capteurs de laboratoire, exode rural, tortues marines.",
+  },
+  "maths/premiere/alea-conditionnelle-calcul": {
+    titre: "Probabilité conditionnelle : calculer : 20 exercices corrigés",
+    resume:
+      "La formule P_A(B) = P(A ∩ B) / P(A) dans les trois sens, la phrase qui interprète, et le paradoxe des faux positifs. Dépistage, résistances électriques, choléra de Londres, incendies de forêt, iode 131, espérance de vie.",
+  },
+  "maths/premiere/alea-arbre": {
+    titre: "Arbre pondéré : lire et construire : 20 exercices corrigés",
+    resume:
+      "Lire ce que porte chaque branche, compléter un arbre (somme 1 à chaque nœud), construire l'arbre d'un énoncé. Tri des déchets, signal binaire, migrations, rugby, glands de chêne, émigration du XIXᵉ siècle.",
+  },
+  "maths/premiere/alea-arbre-calcul": {
+    titre: "Arbre pondéré : calculer : 20 exercices corrigés",
+    resume:
+      "Multiplier le long d'un chemin, additionner les chemins, passer de l'arbre au tableau croisé et retour. Détecteur de particules, élection à deux tours, biathlon, cigognes, radar routier, choléra de 1832, frelon asiatique.",
+  },
+  "maths/premiere/alea-independance": {
+    titre: "Indépendance de deux évènements : 20 exercices corrigés",
+    resume:
+      "Reconnaître l'indépendance (P_B(A) = P(A)), utiliser le produit, la justifier par un calcul, la distinguer de l'incompatibilité. Lancers francs, circuit en série, vote par région, noyaux de radon, registres de mariage, pièges photographiques.",
+  },
+  "maths/premiere/alea-bernoulli": {
+    titre: "Épreuves de Bernoulli : reconnaître : 20 exercices corrigés",
+    resume:
+      "Reconnaître une épreuve de Bernoulli et une répétition d'épreuves identiques et indépendantes, distinguer tirage avec et sans remise. Urnes, dés, carbone 14, sondage, météo, tortues marines, conscrits du XIXᵉ siècle.",
+  },
+  "maths/premiere/alea-bernoulli-calcul": {
+    titre: "Répétition d'épreuves : calculer : 20 exercices corrigés",
+    resume:
+      "Arbre de 2 à 4 épreuves, probabilité d'un chemin, « exactement k succès » en comptant les chemins, « au moins un » par le contraire. Lancers francs, signal répété, élection, disettes médiévales, relais radio, éoliennes, tennis.",
+  },
+  "maths/premiere/lin-suite-arithmetique": {
+    titre: "Suite arithmétique : reconnaître : 20 exercices corrigés",
+    resume:
+      "Reconnaître une suite arithmétique par ses écarts, trouver sa raison, écrire la relation de récurrence et calculer un terme de rang donné. Tirelire, forêt replantée, ruches, ligne de tramway, température et altitude, haies, salaires.",
+  },
+  "maths/premiere/lin-suite-terme-general": {
+    titre: "Suite arithmétique : terme général : 20 exercices corrigés",
+    resume:
+      "Écrire uₙ = u₀ + nr, donner le sens de variation par le signe de la raison, dessiner les termes et interpréter un résultat. Petites lignes de train, hérissons, panneaux solaires, ressort, zone humide, 400 m, CO₂ d'une entreprise.",
+  },
+  "maths/premiere/lin-affine": {
+    titre: "Fonction affine et taux d'accroissement : 20 exercices corrigés",
+    resume:
+      "Calculer un taux d'accroissement, retrouver f(x) = ax + b à partir de deux images, donner le sens de variation. Celsius et Fahrenheit, freinage, batterie, route de montagne, ville nouvelle, fréquence cardiaque, névé.",
+  },
+  "maths/premiere/lin-affine-lecture": {
+    titre: "Fonction affine : lire et exploiter : 20 exercices corrigés",
+    resume:
+      "Tracer et lire une fonction affine, exploiter une fonction affine par morceaux (barème d'impôt, tarifs progressifs), trouver un point d'équilibre offre-demande. Plongée, carte au 1/25 000, périurbanisation, eau, déchets, vélos d'occasion.",
+  },
+  "maths/premiere/lin-modeliser": {
+    titre: "Modéliser une croissance linéaire : 20 exercices corrigés",
+    resume:
+      "Reconnaître une croissance linéaire (quantité fixe, pas un pourcentage), choisir entre suite arithmétique et fonction affine, conclure avec l'unité. Covoiturage, piste cyclable, épargne, recul du trait de côte, mouvement uniforme, charge d'une batterie.",
+  },
+  "maths/premiere/lin-seuil": {
+    titre: "Problème de seuil : croissance linéaire : 20 exercices corrigés",
+    resume:
+      "Trouver le premier rang qui franchit un seuil par le calcul, avec un tableau de valeurs ou sur un graphique où le seuil est une horizontale. Cagnotte, CO₂ d'un territoire, rivière en crue, rail qui se dilate, station de ski, ferme solaire.",
+  },
+  "maths/premiere/quad-parabole": {
+    titre: "Parabole et expression de degré 2 : 20 exercices corrigés",
+    resume:
+      "Calculer une image, lire le rôle de a (sens et ouverture) et de c, lire les racines sur la courbe et les relier à la forme factorisée. Jet d'eau, arche de pont, dauphin, distance de freinage, trébuchet, chute sur Terre et sur la Lune, papillons d'un pré.",
+  },
+  "maths/premiere/quad-sommet-axe": {
+    titre: "Parabole : sommet et axe de symétrie : 20 exercices corrigés",
+    resume:
+      "Trouver l'axe de symétrie et le sommet sans formule : au milieu des racines, par deux points de même hauteur ou sur une forme donnée, puis utiliser la symétrie. Plongeon, passe de volley, saut à ski, vallée glaciaire, voûte d'un tunnel, pont ferroviaire, prix d'un billet.",
+  },
+  "maths/premiere/quad-variations": {
+    titre: "Parabole : variations et extremum : 20 exercices corrigés",
+    resume:
+      "Trouver le maximum ou le minimum d'une fonction de degré 2, dresser son tableau de variations, comparer deux images sans les calculer. Fusée à eau, chandelle au rugby, consommation d'une voiture, vol parabolique, zone de baignade, pêche durable.",
+  },
+  "maths/premiere/quad-racines-signe": {
+    titre: "Racines et signe par la forme factorisée : 20 exercices corrigés",
+    resume:
+      "Lire les racines sur une forme factorisée, l'écrire connaissant les racines, la vérifier en développant, dresser le tableau de signes et résoudre une inéquation du second degré, sans discriminant. Gel au verger, crue d'une rivière, pont en arc, lob au football, trésorerie d'une jeune entreprise.",
+  },
+  "maths/premiere/expo-suite-geometrique": {
+    titre: "Reconnaître une suite géométrique : 20 exercices corrigés",
+    resume:
+      "Reconnaître une suite géométrique par les quotients, écrire sa relation de récurrence, relier la raison à un taux d'évolution. Livret d'épargne, lumière sous l'eau, légende de l'échiquier, déchets, médicament, balle qui rebondit, oiseaux protégés.",
+  },
+  "maths/premiere/expo-suite-terme-general": {
+    titre: "Suite géométrique, terme général : 20 exercices corrigés",
+    resume:
+      "Écrire uₙ = u₀ × qⁿ, trouver le sens de variation selon la raison, placer les points et interpréter un terme. Capital, condensateur, population mondiale, ville de l'ère industrielle, CO₂, nénuphars, café qui refroidit.",
+  },
+  "maths/premiere/expo-fonction": {
+    titre: "La fonction exponentielle x ↦ aˣ : 20 exercices corrigés",
+    resume:
+      "Reconnaître une fonction x ↦ aˣ, calculer une image pour x non entier, utiliser aˣ⁺ʸ = aˣ × aʸ et l'exposant 1/n. Levures, médicament, population, polluant, taux mensuel, écran de plomb, exode rural.",
+  },
+  "maths/premiere/expo-fonction-lecture": {
+    titre: "Fonction exponentielle, variations et courbe : 20 exercices corrigés",
+    resume:
+      "Trouver le sens de variation d'après la base, lire la courbe de x ↦ aˣ et résoudre aˣ = k graphiquement. Voiture, fréquence cardiaque, recensements, climat, pression en montagne, deux villes et l'exode rural, truites.",
+  },
+  "maths/premiere/expo-taux-moyen": {
+    titre: "Le taux d'évolution moyen : 20 exercices corrigés",
+    resume:
+      "Trouver le taux moyen à partir d'une évolution globale, repasser au taux global, ne le confondre ni avec la moyenne des taux ni avec le taux global divisé par n. Chiffre d'affaires, population mondiale, 10 km, émissions, castors, inflation.",
+  },
+  "maths/premiere/expo-modeliser": {
+    titre: "Modéliser une évolution exponentielle : 20 exercices corrigés",
+    resume:
+      "Reconnaître une croissance exponentielle, choisir entre modèle linéaire et exponentiel, les comparer, estimer des ordres de grandeur. Intérêts composés, Malthus, lapins d'Australie, loi de Moore, légende de l'échiquier, frelons, rumeur.",
+  },
+  "maths/premiere/expo-seuil": {
+    titre: "Problème de seuil, croissance exponentielle : 20 exercices corrigés",
+    resume:
+      "Trouver quand une quantité franchit un seuil : en testant les rangs, dans un tableau, sur une courbe ; demi-vie et temps de doublement. Livret, iode 131, population mondiale, carbone 14, exode rural, règle de 72, glacier.",
+  },
+  // ⛔ Dérivation SANS spé : pas de discriminant, polynômes de degré 3 au plus,
+  // ni produit ni quotient ; le signe de f′ se lit sur une forme factorisée
+  // DONNÉE, qu'on vérifie en développant.
+  "maths/premiere/der-graphique": {
+    titre: "Lire un nombre dérivé sur un graphique : 20 exercices corrigés",
+    resume:
+      "Lire la pente d'une tangente, le signe du nombre dérivé, repérer une tangente horizontale, comparer deux vitesses, sans aucun calcul de dérivée. Une crue, la route d'un col, un village pendant l'exode rural, une voiture qui démarre, un thé qui refroidit, un marathon.",
+  },
+  "maths/premiere/der-nombre-derive": {
+    titre: "Nombre dérivé et tangente : 20 exercices corrigés",
+    resume:
+      "Coefficient directeur d'une tangente par deux points, équation réduite, vitesse instantanée, valeur approchée, coût et recette marginaux. Une pierre qui tombe, un TGV, un glacier, le CO₂, un radiateur, une cuve d'eau de pluie.",
+  },
+  "maths/premiere/der-formules": {
+    titre: "Les formules de base de la dérivée : 20 exercices corrigés",
+    resume:
+      "Dériver une constante, une fonction affine, le carré et le cube, puis calculer un nombre dérivé et le voir sur la tangente. Un train, deux abonnements, un glaçon qui fond, les billes de Galilée, les sécantes de Fermat, un enclos de moutons.",
+  },
+  "maths/premiere/der-polynome": {
+    titre: "Dériver un polynôme : 20 exercices corrigés",
+    resume:
+      "Produit par un réel, somme, polynômes de degré 2 et 3, calcul de f′(a) et son sens. La chute libre, un four, un sentier de montagne, des cigognes, une épidémie, une ville nouvelle, une coopérative de confitures.",
+  },
+  "maths/premiere/der-signe": {
+    titre: "Le signe de la dérivée : 20 exercices corrigés",
+    resume:
+      "Signe d'une forme affine, lecture sur la courbe de f′, vérifier une forme factorisée donnée en développant, puis dresser le tableau de signes. Un drone, une étape du Tour de France, un lac de barrage, des saumons, le climat d'une ville.",
+  },
+  "maths/premiere/der-variations": {
+    titre: "Le tableau de variations : 20 exercices corrigés",
+    resume:
+      "Déduire les variations du signe de f′, dresser le tableau, trouver un maximum ou un minimum (bornes comprises), optimiser, prévoir. Un four, une plongeuse, un freinage, une étape du Tour, une épidémie, un festival, le gel des abricotiers.",
   },
 };
 
