@@ -69,12 +69,12 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
           figure: repere([-3, 5, -5, 7], [{ q: [1, -2, -3] }], [], undefined, true),
           correction:
             "On trace l'horizontale d'ordonnée $k$, et on lit les abscisses des points d'intersection.\n$f(x) = 0$ : la courbe coupe l'axe des abscisses en $-1$ et en $3$. $S = \\{-1 ; 3\\}$.\n$f(x) = -3$ : $S = \\{0 ; 2\\}$.\n$f(x) = -5$ : l'horizontale passe sous le point le plus bas, d'ordonnée $-4$. Aucune solution : $S = \\varnothing$.\n⚠️ Les solutions sont des ABSCISSES : répondre « $-3$ », c'est recopier la question.",
-          schema: repere([-3, 5, -5, 7], [{ q: [1, -2, -3] }], [
+          schema: ecranSeulement(repere([-3, 5, -5, 7], [{ q: [1, -2, -3] }], [
             { x: -1, y: 0, label: "−1" },
             { x: 3, y: 0, label: "3" },
             { x: 0, y: -3, label: "0" },
             { x: 2, y: -3, label: "2" },
-          ], -3, true),
+          ], -3, true)),
           micros: ["auto_fct_resoudre_graphiquement"],
         },
         {
@@ -92,7 +92,7 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
           figure: repere([-4, 5, -4, 6], [{ q: [0.5, -0.5, -3] }]),
           correction:
             "On repère où la courbe coupe l'axe des abscisses : en $-2$ et en $3$.\nAvant $-2$, la courbe est au-dessus de l'axe : $f(x) > 0$.\nEntre $-2$ et $3$, elle est en dessous : $f(x) < 0$.\nAprès $3$, elle est de nouveau au-dessus : $f(x) > 0$.\n⚠️ Le signe de $f(x)$ se lit par rapport à l'axe HORIZONTAL, pas selon que la courbe monte ou descend.",
-          schema: tableauSignes(["−4", "−2", "3", "5"], [["$f(x)$", ["+", "-", "+"], ["0", "0"]]]),
+          schema: ecranSeulement(tableauSignes(["−4", "−2", "3", "5"], [["$f(x)$", ["+", "-", "+"], ["0", "0"]]])),
           micros: ["auto_fct_signe_graphique"],
         },
         {
@@ -122,7 +122,7 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
           enonce: "On reprend la courbe de l'exercice 1. Dresser le tableau de signes de $f$ sur $[-3 ; 5]$.",
           correction:
             "La courbe coupe l'axe des abscisses en $-1$ et en $3$ : ce sont les valeurs où $f(x) = 0$.\nAu-dessus de l'axe avant $-1$ : $+$. En dessous entre $-1$ et $3$ : $-$. Au-dessus après $3$ : $+$.\n⭐ C'est la même lecture que « $f(x) < 0$ » à l'exercice 2 : le tableau de signes range toutes ces réponses d'un coup.",
-          schema: tableauSignes(["−3", "−1", "3", "5"], [["$f(x)$", ["+", "-", "+"], ["0", "0"]]]),
+          schema: ecranSeulement(tableauSignes(["−3", "−1", "3", "5"], [["$f(x)$", ["+", "-", "+"], ["0", "0"]]])),
           micros: ["auto_fct_signe_graphique"],
         },
         {
@@ -175,12 +175,12 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
           figure: repere([-1, 7, -6, 6], [{ q: [-1, 6, -5] }], [], undefined, true),
           correction:
             "a) La courbe est au-dessus de l'axe entre $1$ et $5$ : $S = ]1 ; 5[$. Entre $100$ et $500$ objets, bornes exclues.\nb) $B(x) \\geqslant 3$ : la courbe est au-dessus de l'horizontale d'ordonnée $3$ entre $2$ et $4$. $S = [2 ; 4]$ : de $200$ à $400$ objets.\nc) $B$ est négatif sur $[0 ; 1[$, nul en $1$, positif sur $]1 ; 5[$, nul en $5$, négatif sur $]5 ; 6]$.\n⚠️ En $x = 1$ et en $x = 5$, le bénéfice est nul : l'atelier ne perd rien, mais ne gagne rien non plus. D'où les crochets ouverts en a).",
-          schema: repere([-1, 7, -6, 6], [{ q: [-1, 6, -5] }], [
+          schema: ecranSeulement(repere([-1, 7, -6, 6], [{ q: [-1, 6, -5] }], [
             { x: 1, y: 0, label: "1" },
             { x: 5, y: 0, label: "5" },
             { x: 2, y: 3, label: "2" },
             { x: 4, y: 3, label: "4" },
-          ], 3, true),
+          ], 3, true)),
           micros: ["auto_fct_resoudre_graphiquement", "auto_fct_signe_graphique"],
         },
         {
@@ -240,12 +240,12 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
           figure: repere([-1, 9, -1, 9], [{ pts: [[0, 2], [1, 3], [2, 5], [3, 7], [4, 5], [5, 3], [6, 5], [7, 7], [8, 3]] }], [], 5),
           correction:
             "a) La courbe est strictement au-dessus de l'horizontale entre $2$ et $4$, puis entre $6$ et $7{,}5$ : de $7$ à $8$, elle descend de $7$ à $3$ et passe à $5$ au milieu. $S = ]2 ; 4[ \\cup ]6 ; 7{,}5[$.\nb) $x = 2$ : $6$ h ; $x = 4$ : $12$ h ; $x = 6$ : $18$ h ; $x = 7{,}5$ : $22$ h $30$. Le seuil est dépassé de $6$ h à $12$ h, puis de $18$ h à $22$ h $30$.\n⭐ Deux pics dans la journée, sans doute ceux des trajets du matin et du soir.\n⚠️ Une réunion de deux intervalles s'écrit avec $\\cup$ : « dans l'un, ou dans l'autre ».",
-          schema: repere([-1, 9, -1, 9], [{ pts: [[0, 2], [1, 3], [2, 5], [3, 7], [4, 5], [5, 3], [6, 5], [7, 7], [8, 3]] }], [
+          schema: ecranSeulement(repere([-1, 9, -1, 9], [{ pts: [[0, 2], [1, 3], [2, 5], [3, 7], [4, 5], [5, 3], [6, 5], [7, 7], [8, 3]] }], [
             { x: 2, y: 5, label: "6 h" },
             { x: 4, y: 5, label: "12 h" },
             { x: 6, y: 5, label: "18 h" },
             { x: 7.5, y: 5, label: "22 h 30" },
-          ], 5),
+          ], 5)),
           micros: ["auto_fct_resoudre_graphiquement"],
         },
         {
@@ -309,11 +309,11 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
           figure: repere([-1, 11, -1, 9], [{ pts: [[0, 2], [3, 5], [4, 3], [6, 7], [8, 3], [10, 0]] }], [], undefined, true),
           correction:
             "a) Croissante de 1900 à 1930, décroissante de 1930 à 1940, croissante de 1940 à 1960, puis décroissante jusqu'en 2000, où elle s'arrête.\nb) En 1960 ($x = 6$) : $7$ dizaines de millions, soit $70$ millions de tonnes.\nc) L'horizontale d'ordonnée $5$ touche la courbe en $x = 3$, puis la courbe est au-dessus de $x = 5$ à $x = 7$. $S = \\{3\\} \\cup [5 ; 7]$ : en 1930, puis de 1950 à 1970.\n⚠️ En $x = 3$, la courbe touche l'horizontale sans passer au-dessus : cette solution est un point isolé.\n⭐ Le modèle raconte un creux autour de 1940, puis le déclin des mines.",
-          schema: repere([-1, 11, -1, 9], [{ pts: [[0, 2], [3, 5], [4, 3], [6, 7], [8, 3], [10, 0]] }], [
+          schema: ecranSeulement(repere([-1, 11, -1, 9], [{ pts: [[0, 2], [3, 5], [4, 3], [6, 7], [8, 3], [10, 0]] }], [
             { x: 3, y: 5, label: "1930" },
             { x: 5, y: 5, label: "1950" },
             { x: 7, y: 5, label: "1970" },
-          ], 5, true),
+          ], 5, true)),
           micros: ["auto_fct_variations_graphique", "auto_fct_resoudre_graphiquement"],
         },
         {

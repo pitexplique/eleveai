@@ -64,11 +64,11 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
           figure: repere([-2, 4, -6, 6], [{ q: [-1, 2, 3] }], [], undefined, true),
           correction:
             "On part de l'abscisse, on va jusqu'à la courbe, on lit l'ordonnée.\n$f(0) = 3$ : la courbe coupe l'axe vertical en $3$.\n$f(1) = 4$ : c'est le sommet de la courbe.\n$f(3) = 0$ : la courbe coupe l'axe horizontal en $3$.\n⚠️ $f(3) = 0$ ne veut pas dire « pas d'image » : l'image de $3$ existe, elle vaut $0$.",
-          schema: repere([-2, 4, -6, 6], [{ q: [-1, 2, 3] }], [
+          schema: ecranSeulement(repere([-2, 4, -6, 6], [{ q: [-1, 2, 3] }], [
             { x: 0, y: 3, label: "f(0)" },
             { x: 1, y: 4, label: "f(1)" },
             { x: 3, y: 0, label: "f(3)" },
-          ], undefined, true),
+          ], undefined, true)),
           micros: ["auto_fct_image_antecedent"],
         },
         {
@@ -76,12 +76,15 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
           figure: repere([-3, 5, -5, 7], [{ q: [1, -2, -3] }], [], undefined, true),
           correction:
             "On part de l'ordonnée, on suit l'horizontale, on lit les abscisses des points de la courbe.\nAntécédents de $-3$ : $0$ et $2$.\nAntécédents de $5$ : $-2$ et $4$.\nAntécédent de $-4$ : $1$ seulement, le point le plus bas.\n$-6$ n'a aucun antécédent : la courbe ne descend jamais sous $-4$.\n⚠️ Un nombre peut avoir deux antécédents, un seul, ou aucun. Une image, elle, est toujours unique.",
-          schema: repere([-3, 5, -5, 7], [{ q: [1, -2, -3] }], [
-            { x: 0, y: -3, label: "0" },
-            { x: 2, y: -3, label: "2" },
-            { x: -2, y: 5, label: "−2" },
-            { x: 4, y: 5, label: "4" },
-          ], [-3, 5], true),
+          // Écran seulement (28/09) : le PDF faisait 13 pages ; l'énoncé porte la courbe.
+          schema: ecranSeulement(
+            repere([-3, 5, -5, 7], [{ q: [1, -2, -3] }], [
+              { x: 0, y: -3, label: "0" },
+              { x: 2, y: -3, label: "2" },
+              { x: -2, y: 5, label: "−2" },
+              { x: 4, y: 5, label: "4" },
+            ], [-3, 5], true),
+          ),
           micros: ["auto_fct_image_antecedent"],
         },
         {
@@ -103,11 +106,11 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
           figure: repere([-1, 7, -1, 6], [{ pts: [[0, 1], [1, 1], [2, 2], [3, 3], [4, 4], [5, 3], [6, 2]] }]),
           correction:
             "a) En abscisse, l'heure (une unité $= 2$ h) ; en ordonnée, la température (une unité $= 5$ °C).\nb) $14$ h, c'est $8$ heures après $6$ h, soit $\\dfrac{8}{2} = 4$ unités. On lit $4$ unités en ordonnée : $4 \\times 5 = 20$ °C.\nc) $15$ °C, c'est $\\dfrac{15}{5} = 3$ unités. La courbe est à $3$ en $x = 3$ et en $x = 5$, soit à $12$ h et à $16$ h.\n⚠️ Lire « $4$ » et répondre « $4$ °C », c'est oublier l'échelle.",
-          schema: repere([-1, 7, -1, 6], [{ pts: [[0, 1], [1, 1], [2, 2], [3, 3], [4, 4], [5, 3], [6, 2]] }], [
+          schema: ecranSeulement(repere([-1, 7, -1, 6], [{ pts: [[0, 1], [1, 1], [2, 2], [3, 3], [4, 4], [5, 3], [6, 2]] }], [
             { x: 3, y: 3, label: "12 h" },
             { x: 4, y: 4, label: "14 h" },
             { x: 5, y: 3, label: "16 h" },
-          ], 3),
+          ], 3)),
           micros: ["auto_fct_reperer_graphique", "auto_fct_image_antecedent"],
         },
         {
@@ -122,10 +125,12 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
           enonce: "Soit $f(x) = x^2 - 2$.\na) Calculer $f(2)$.\nb) Trouver les antécédents de $2$ par $f$.",
           correction:
             "a) $f(2) = 2^2 - 2 = 2$.\nb) On cherche $x$ tel que $x^2 - 2 = 2$, soit $x^2 = 4$ : $x = 2$ ou $x = -2$.\n⚠️ Ici, l'image de $2$ vaut $2$, mais $2$ a DEUX antécédents : $2$ et $-2$. Image et antécédent ne se lisent pas dans le même sens.\n⭐ Sur le dessin, l'horizontale d'ordonnée $2$ coupe la courbe deux fois.",
-          schema: repere([-3, 3, -3, 8], [{ q: [1, 0, -2] }], [
-            { x: -2, y: 2, label: "−2" },
-            { x: 2, y: 2, label: "2" },
-          ], 2, true),
+          schema: ecranSeulement(
+            repere([-3, 3, -3, 8], [{ q: [1, 0, -2] }], [
+              { x: -2, y: 2, label: "−2" },
+              { x: 2, y: 2, label: "2" },
+            ], 2, true),
+          ),
           micros: ["auto_fct_image_antecedent"],
         },
         {
@@ -159,11 +164,11 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
           figure: repere([-1, 11, -1, 14], [{ pts: [[0, 4], [2, 8], [4, 12], [6, 10], [8, 6], [10, 4]] }], [], undefined, true),
           correction:
             "a) Au départ ($x = 0$), on lit $4$ centaines de mètres : $400$ m. Le point le plus haut est au km $4$ : $12$ centaines, soit $1\\,200$ m.\nb) $1\\,000$ m, c'est $10$ centaines. La courbe passe à $10$ au km $3$ (en montant) et au km $6$ (en descendant).\nc) $1\\,200 - 400 = 800$ m de montée.\n⚠️ Une graduation verticale vaut $100$ m, pas $1$ m : on lit l'unité avant le nombre.\n⭐ C'est le profil dessiné sur les topoguides de randonnée.",
-          schema: repere([-1, 11, -1, 14], [{ pts: [[0, 4], [2, 8], [4, 12], [6, 10], [8, 6], [10, 4]] }], [
+          schema: ecranSeulement(repere([-1, 11, -1, 14], [{ pts: [[0, 4], [2, 8], [4, 12], [6, 10], [8, 6], [10, 4]] }], [
             { x: 3, y: 10, label: "km 3" },
             { x: 6, y: 10, label: "km 6" },
             { x: 4, y: 12, label: "sommet" },
-          ], 10, true),
+          ], 10, true)),
           micros: ["auto_fct_reperer_graphique", "auto_fct_image_antecedent"],
         },
         {
@@ -173,11 +178,11 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
           figure: repere([-1, 7, -6, 6], [{ q: [-1, 6, -5] }], [], undefined, true),
           correction:
             "a) $200$ objets, c'est $x = 2$ : on lit $3$, soit $3\\,000$ €.\nb) La courbe traverse l'axe horizontal en $x = 1$ : au-delà de $100$ objets, le bénéfice devient positif.\nc) Le sommet est le point $(3 ; 4)$ : $4\\,000$ € pour $300$ objets.\n⚠️ Sous $100$ objets, la courbe est sous l'axe : c'est une PERTE, les frais fixes ne sont pas couverts.\n⭐ Au-delà de $500$ objets, elle repasse sous l'axe : produire trop fait aussi perdre de l'argent.",
-          schema: repere([-1, 7, -6, 6], [{ q: [-1, 6, -5] }], [
+          schema: ecranSeulement(repere([-1, 7, -6, 6], [{ q: [-1, 6, -5] }], [
             { x: 1, y: 0, label: "seuil" },
             { x: 2, y: 3, label: "" },
             { x: 3, y: 4, label: "max" },
-          ], undefined, true),
+          ], undefined, true)),
           micros: ["auto_fct_estimer_seuil", "auto_fct_image_antecedent"],
         },
         {
@@ -200,11 +205,11 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
           figure: repere([-1, 13, -1, 14], [{ pts: [[1, 2], [2, 3], [3, 5], [4, 7], [5, 9], [6, 11], [7, 12], [8, 11], [9, 9], [10, 7], [11, 4], [12, 2]] }], [], undefined, true),
           correction:
             "a) Avril, c'est $x = 4$ : on lit $7$ unités, soit $7 \\times 2 = 14$ °C.\nb) $14$ °C, ce sont $7$ unités : la courbe est à $7$ en $x = 4$ et en $x = 10$, en avril et en octobre.\nc) Le point le plus haut est en $x = 7$ : juillet, $12 \\times 2 = 24$ °C.\n⚠️ L'axe vertical compte des unités de $2$ °C : répondre « $7$ °C » serait deux fois trop froid.\n⭐ Deux mois pour une même température : un antécédent n'est pas toujours unique.",
-          schema: repere([-1, 13, -1, 14], [{ pts: [[1, 2], [2, 3], [3, 5], [4, 7], [5, 9], [6, 11], [7, 12], [8, 11], [9, 9], [10, 7], [11, 4], [12, 2]] }], [
+          schema: ecranSeulement(repere([-1, 13, -1, 14], [{ pts: [[1, 2], [2, 3], [3, 5], [4, 7], [5, 9], [6, 11], [7, 12], [8, 11], [9, 9], [10, 7], [11, 4], [12, 2]] }], [
             { x: 4, y: 7, label: "avril" },
             { x: 10, y: 7, label: "octobre" },
             { x: 7, y: 12, label: "juillet" },
-          ], 7, true),
+          ], 7, true)),
           micros: ["auto_fct_image_antecedent", "auto_fct_reperer_graphique"],
         },
         {
@@ -214,10 +219,10 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
           figure: repere([-1, 5, -1, 13], [{ q: [-0.5, 0, 12] }], [], undefined, true),
           correction:
             "a) $V(0) = 12$ : $12$ millions de m³.\nb) La courbe est à la hauteur $10$ en $t = 2$ : le volume passe sous $10$ millions après la semaine $2$.\nc) La courbe atteint $4$ en $t = 4$. Calcul : $-0{,}5 \\times 4^2 + 12 = -8 + 12 = 4$. ✔️\n⚠️ Le volume BAISSE : passer sous le seuil, c'est ici aller à DROITE de l'intersection.\n⭐ La baisse s'accélère : $2$ millions perdus les deux premières semaines, $6$ les deux suivantes.",
-          schema: repere([-1, 5, -1, 13], [{ q: [-0.5, 0, 12] }], [
+          schema: ecranSeulement(repere([-1, 5, -1, 13], [{ q: [-0.5, 0, 12] }], [
             { x: 2, y: 10, label: "alerte" },
             { x: 4, y: 4, label: "crise" },
-          ], [10, 4], true),
+          ], [10, 4], true)),
           micros: ["auto_fct_estimer_seuil", "auto_fct_appartenance_courbe"],
         },
         {
@@ -240,10 +245,10 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
           figure: repere([-1, 7, -2, 11], [{ q: [-1, 6, 0] }], [], undefined, true),
           correction:
             "a) $h(4) = -4^2 + 6 \\times 4 = -16 + 24 = 8$ : oui, $R$ est sur la trajectoire.\n$h(2) = -2^2 + 6 \\times 2 = -4 + 12 = 8$, et non $7$ : le point $(2 ; 7)$ n'y est pas.\nb) $40$ m, c'est $x = 4$ : la pierre est à $8$ dizaines, soit $80$ m de haut. Le rempart mesure $60$ m : elle passe au-dessus, avec $20$ m de marge.\nc) Au sol, $h(x) = 0$ : $-x^2 + 6x = x(6 - x) = 0$, donc $x = 0$ (le départ) ou $x = 6$. Elle retombe à $60$ m.\n⚠️ $-4^2 = -16$ : le carré porte sur $4$, puis on prend l'opposé.",
-          schema: repere([-1, 7, -2, 11], [{ q: [-1, 6, 0] }], [
+          schema: ecranSeulement(repere([-1, 7, -2, 11], [{ q: [-1, 6, 0] }], [
             { x: 4, y: 8, label: "R" },
             { x: 6, y: 0, label: "sol" },
-          ], 6, true),
+          ], 6, true)),
           micros: ["auto_fct_appartenance_courbe", "auto_fct_image_antecedent"],
         },
         {
@@ -309,11 +314,11 @@ export const exercicesAutoLectureGraphiquePremiere: FicheExercicesData = {
           figure: repere([-1, 13, -1, 12], [{ pts: [[1, 9], [2, 10], [3, 8], [4, 6], [5, 4], [6, 3], [7, 2], [8, 1], [9, 2], [10, 4], [11, 6], [12, 8]] }], [], undefined, true),
           correction:
             "a) Mai, c'est $x = 5$ : $4$ centaines, soit $400$ m³/s.\nb) $600$ m³/s, c'est $6$ : la courbe y passe en $x = 4$ et en $x = 11$, en avril et en novembre.\nc) Le point le plus bas est en $x = 8$ : en août, $100$ m³/s.\nd) La courbe est à $2$ en juillet ($x = 7$) et en septembre ($x = 9$), et en dessous entre les deux : de juillet à septembre.\n⭐ Hautes eaux en hiver, basses eaux en été : c'est l'allure d'un fleuve alimenté surtout par la pluie, en climat océanique.\n⚠️ En abscisse, des mois : on répond « avril et novembre », pas « $4$ et $11$ ».",
-          schema: repere([-1, 13, -1, 12], [{ pts: [[1, 9], [2, 10], [3, 8], [4, 6], [5, 4], [6, 3], [7, 2], [8, 1], [9, 2], [10, 4], [11, 6], [12, 8]] }], [
+          schema: ecranSeulement(repere([-1, 13, -1, 12], [{ pts: [[1, 9], [2, 10], [3, 8], [4, 6], [5, 4], [6, 3], [7, 2], [8, 1], [9, 2], [10, 4], [11, 6], [12, 8]] }], [
             { x: 4, y: 6, label: "avril" },
             { x: 11, y: 6, label: "novembre" },
             { x: 8, y: 1, label: "août" },
-          ], [6, 2], true),
+          ], [6, 2], true)),
           micros: ["auto_fct_reperer_graphique", "auto_fct_image_antecedent", "auto_fct_estimer_seuil"],
         },
         {
