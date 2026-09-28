@@ -1623,6 +1623,14 @@ export const FICHES_ALIAS: Record<string, string> = {
      « Fiche » ni rien. Alias plutôt que renommage : l'URL de la fiche est déjà
      au sitemap, la déplacer ferait une 404. */
   "maths/seconde/statistiques-descriptives": "maths/seconde/statistiques-descriptives-2de",
+
+  /* ⭐ LA DÉRIVATION DE 1re SPÉ EN QUATRE NOTIONS (28/09/2026). Le coach l'a
+     coupée comme en première ; le cours, lui, reste UNE fiche, qui couvre les
+     quatre. Pas de renommage : l'URL `derivation` est au sitemap. */
+  "maths/premiere-spe/derivation-nombre-derive": "maths/premiere-spe/derivation",
+  "maths/premiere-spe/derivation-tangente": "maths/premiere-spe/derivation",
+  "maths/premiere-spe/derivation-formules": "maths/premiere-spe/derivation",
+  "maths/premiere-spe/derivation-operations": "maths/premiere-spe/derivation",
 };
 
 /** La classe où la fiche est réellement rangée, quand elle diffère de celle
@@ -1652,7 +1660,7 @@ export function libelleClasse(classe: string) {
   const c = classe.toLowerCase();
   const table: Record<string, string> = {
     cp: "CP", ce1: "CE1", ce2: "CE2", cm1: "CM1", cm2: "CM2",
-    seconde: "2nde", "premiere-spe": "1re spé", "terminale-spe": "Tale spé",
+    seconde: "2nde", premiere: "1re", "premiere-spe": "1re spé", "terminale-spe": "Tale spé",
   };
   return table[c] ?? classe;
 }

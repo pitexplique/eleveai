@@ -13,7 +13,7 @@
 // liste. Un tableau vide veut dire « rien à savoir avant » — donc une notion
 // par où l'année peut commencer.
 //
-// 811 notions, 44 paquets.
+// 814 notions, 44 paquets.
 
 export type NotionCoach = { id: string; label: string; prerequis: string[] };
 
@@ -2016,24 +2016,45 @@ export const NOTIONS_COACH: Record<string, Record<string, NotionCoach[]>> = {
         "prerequis": []
       },
       {
-        "id": "derivation",
-        "label": "Dérivation",
+        "id": "derivation_nombre_derive",
+        "label": "Dérivée — taux de variation et nombre dérivé",
         "prerequis": [
           "second_degre"
+        ]
+      },
+      {
+        "id": "derivation_tangente",
+        "label": "Dérivée — tangente et lecture graphique",
+        "prerequis": [
+          "derivation_nombre_derive"
+        ]
+      },
+      {
+        "id": "derivation_formules",
+        "label": "Dérivée — les formules de base",
+        "prerequis": [
+          "derivation_nombre_derive"
+        ]
+      },
+      {
+        "id": "derivation_operations",
+        "label": "Dérivée — somme, produit, quotient",
+        "prerequis": [
+          "derivation_formules"
         ]
       },
       {
         "id": "variations_fonctions",
         "label": "Variations et courbes des fonctions",
         "prerequis": [
-          "derivation"
+          "derivation_operations"
         ]
       },
       {
         "id": "exponentielle",
         "label": "Fonction exponentielle",
         "prerequis": [
-          "derivation"
+          "derivation_operations"
         ]
       },
       {

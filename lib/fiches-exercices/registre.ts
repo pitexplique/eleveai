@@ -13,6 +13,10 @@ type FicheExercicesEntry = {
    *  couvre — quand une notion a deux fiches de cours et une seule feuille
    *  d'exercices. Le slug de la clé est couvert d'office. */
   aussiPour?: string[];
+  /** Les notions DU COACH (ids) qui mènent aussi à cette feuille — quand un
+   *  chapitre est coupé en plusieurs notions au coach et tient en UNE feuille
+   *  (la dérivation, 28/09/2026). Le slug de la clé est couvert d'office. */
+  notionsCoach?: string[];
 };
 
 export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
@@ -454,6 +458,118 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Du radian au problème de contrôle : placer un point, lire cosinus et sinus, angles associés, grands réels, cos x = a, les deux démonstrations du programme, la grande roue, la marée, et π approché comme Archimède. Le cercle dessiné dans les corrigés.",
   },
+  // ⭐ LA DÉRIVATION, UNE FEUILLE PAR CLASSE (28/09/2026) — Frédéric : « scinder
+  // en plusieurs parties la notion dérivation de première spé comme la première,
+  // et après faire les fiches d'exercices pour les 2 classes ». Le coach a quatre
+  // notions en spé, six en première ; chaque classe a UNE feuille, que le bouton
+  // « Exercices » ouvre depuis chacune de ses notions (`notionsCoach`).
+  "maths/premiere-spe/derivation": {
+    titre: "La dérivation : 20 exercices corrigés",
+    resume:
+      "Du taux de variation au problème de contrôle : nombre dérivé par la définition, lecture d'une tangente, équation de la tangente, dérivées usuelles, somme, produit, quotient, g(ax + b), valeur absolue. Une pierre qui tombe d'une falaise, le coût d'une planche de skate de plus, un médicament dans le sang. Courbes et tangentes dessinées dans les corrigés.",
+    notionsCoach: ["derivation_nombre_derive", "derivation_tangente", "derivation_formules", "derivation_operations"],
+  },
+  // ⛔ LA PREMIÈRE SANS SPÉ : pas de discriminant, polynômes de degré 3 au plus,
+  // et le signe de f′ se lit sur une forme factorisée DONNÉE (qu'on vérifie).
+  "maths/premiere/derivation": {
+    titre: "La dérivation : 20 exercices corrigés",
+    resume:
+      "Du graphique au problème de contrôle : lire un nombre dérivé sur une tangente, dériver un polynôme, étudier le signe de f′ sur sa forme factorisée, dresser le tableau de variations, trouver un maximum. Un village pendant l'exode rural, la recette d'une entreprise, le bénéfice d'un maraîcher, une crue, une épidémie de grippe, le prix des billets d'un festival, un sentier de montagne. Courbes, tangentes et tableaux dessinés dans les corrigés.",
+    notionsCoach: ["der_graphique", "der_nombre_derive", "der_formules", "der_polynome", "der_signe", "der_variations"],
+  },
+  // ⭐ LES AUTOMATISMES DE PREMIÈRE (28/09/2026) — Frédéric : « 1 feuille
+  // d'exercice par notion comme d'habitude, même si cela prend du temps ».
+  // Dix-huit feuilles, sans calculatrice, dans l'ordre du coach.
+  "maths/premiere/auto-comparer": {
+    titre: "Comparer deux nombres : 20 exercices corrigés",
+    resume:
+      "Sans calculatrice, comme à l'épreuve anticipée : comparer par la différence ou par le quotient, ranger des fractions, 3²⁰ contre 9⁹. Puis le prix au kilo, la densité de la France et de l'Allemagne, deux placements, deux remises, le budget d'une commune.",
+  },
+  "maths/premiere/auto-fractions-puissances": {
+    titre: "Fractions et puissances : 20 exercices corrigés",
+    resume:
+      "Additionner, multiplier et diviser des fractions, appliquer les règles des puissances, passer d'une fraction à un décimal ou à un pourcentage, sans calculatrice. Budget d'un ménage, chômage, dépenses d'un État, loyer, TVA et soldes, pouvoir d'achat, croissance d'une ville.",
+  },
+  "maths/premiere/auto-ordres-unites": {
+    titre: "Calcul mental, ordres de grandeur et unités : 20 exercices corrigés",
+    resume:
+      "Calculer de tête, estimer un ordre de grandeur, repérer un résultat impossible, convertir aires, volumes, durées et vitesses sur un tableau d'unités. Cartes et échelles, déchets d'une région, pluie sur un toit, montée des océans, salaire horaire, jours depuis la prise de la Bastille.",
+  },
+  "maths/premiere/auto-developper-factoriser": {
+    titre: "Développer et factoriser : 20 exercices corrigés",
+    resume:
+      "Développer un produit, utiliser les identités remarquables, factoriser par un facteur commun ou par une identité, avec les développements dessinés comme des aires. Champ agrandi, recette d'un cinéma, pavage d'une place, « +10 % puis −10 % », allée d'un jardin, bénéfice d'un artisan.",
+  },
+  "maths/premiere/auto-equations": {
+    titre: "Équations et inéquations : 20 exercices corrigés",
+    resume:
+      "Résoudre ax + b = cx + d, x² = a, a/x = b et une inéquation du premier degré, sans calculatrice ni discriminant, avec balances, droites graduées et graphiques. Location de voiture, prix d'équilibre, abonnement, altitude et gel, villes qui se rapprochent, taxi ou VTC.",
+  },
+  "maths/premiere/auto-signe-expression": {
+    titre: "Le signe d'une expression : 20 exercices corrigés",
+    resume:
+      "Résoudre une équation produit nul, trouver le signe de ax + b, dresser le tableau de signes d'une expression factorisée, sans discriminant. Seuil de rentabilité d'une artisane, altitude du gel, solde commercial d'un pays, deux offres d'électricité, prix d'équilibre du marché des fraises.",
+  },
+  "maths/premiere/auto-formules": {
+    titre: "Utiliser une formule : 20 exercices corrigés",
+    resume:
+      "Calculer la valeur d'une expression littérale, isoler une lettre dans une formule, faire une application numérique, sans calculatrice. TVA et prix hors taxes, salaire brut et net, intérêts simples, coût moyen, échelle d'une carte, densité de population, degrés Fahrenheit.",
+  },
+  "maths/premiere/auto-proportion": {
+    titre: "Proportions et pourcentages : 20 exercices corrigés",
+    resume:
+      "Calculer une proportion, l'écrire en fraction, en décimal ou en pourcentage, prendre un pourcentage d'une quantité, sans calculatrice. Participation à une élection, budget d'un ménage, soldes, TVA, parité chez les cadres, empreinte carbone, vieillissement d'un pays.",
+  },
+  "maths/premiere/auto-partie-tout": {
+    titre: "La partie et le tout : 20 exercices corrigés",
+    resume:
+      "Calculer une partie connaissant le tout, retrouver le tout connaissant une partie, prendre un pourcentage d'un pourcentage, sans calculatrice. Loyer et salaire, suffrages d'une élection, prix hors taxes, budget d'une commune, forêts protégées, chômage.",
+  },
+  "maths/premiere/auto-coefficient-multiplicateur": {
+    titre: "Coefficient multiplicateur : 20 exercices corrigés",
+    resume:
+      "Traduire une hausse ou une baisse par un coefficient (+5 % → × 1,05 ; −80 % → × 0,2), calculer une valeur d'arrivée, retrouver une valeur de départ en divisant. Soldes, salaire et panier de courses, carburant, TVA, immobilier, exode rural, glacier, population mondiale.",
+  },
+  "maths/premiere/auto-taux-evolution": {
+    titre: "Taux d'évolution : 20 exercices corrigés",
+    resume:
+      "Calculer un taux d'évolution, enchaîner des évolutions successives en multipliant les coefficients, trouver le taux réciproque, et voir pourquoi −10 % puis +10 % ne ramène pas au départ. Chômage en points ou en pour cent, pouvoir d'achat, soldes, bourse, trafic aérien, loyer, forêt.",
+  },
+  "maths/premiere/auto-lecture-graphique": {
+    titre: "Lecture graphique : 20 exercices corrigés",
+    resume:
+      "Lire une image et des antécédents sur une courbe (deux, un ou aucun), estimer un seuil, repérer les unités et l'échelle de chaque axe, vérifier par le calcul qu'un point est sur une courbe. Bénéfice d'un artisan, loyer, location de vélos, profil de randonnée, climat d'une ville, barrage en sécheresse, débit d'un fleuve.",
+  },
+  "maths/premiere/auto-resolution-graphique": {
+    titre: "Résolution graphique : 20 exercices corrigés",
+    resume:
+      "Résoudre graphiquement f(x) = k et f(x) < k, lire le signe d'une fonction, dresser son tableau de variations, dire si une croissance accélère ou ralentit. Bénéfice, placements, chômage, balance commerciale, ventes d'un jeu vidéo, station de ski, qualité de l'air, marée.",
+  },
+  "maths/premiere/auto-droites": {
+    titre: "Droites et coefficient directeur : 20 exercices corrigés",
+    resume:
+      "Reconnaître une fonction affine ou linéaire, tracer une droite avec l'escalier du coefficient directeur, lire une équation réduite, calculer un coefficient directeur à partir de deux points. Taxis, kayaks, facture d'électricité, food-truck, glacier, montée des eaux, étape du Tour de France.",
+  },
+  "maths/premiere/auto-lire-statistiques": {
+    titre: "Lire des graphiques statistiques : 20 exercices corrigés",
+    resume:
+      "Lire un diagramme en barres, en bâtons, circulaire ou un nuage de points, puis passer du graphique aux données et retour, sans calculatrice. Population par âge, élections municipales, sondage, salaires, loyers, mix électrique, budget d'un ménage, l'axe qui ne part pas de zéro.",
+  },
+  "maths/premiere/auto-indicateurs": {
+    titre: "Moyenne, médiane, quartiles : 20 exercices corrigés",
+    resume:
+      "Calculer une moyenne (avec effectifs, avec classes), ranger la série pour trouver la médiane et les quartiles, lire et comparer des boîtes à moustaches, et dire ce que racontent les indicateurs, sans calculatrice. Salaires, loyers, patrimoine des ménages, temps de trajet, climat, dons à une association.",
+  },
+  "maths/premiere/auto-proba-base": {
+    titre: "Probabilités : les bases : 20 exercices corrigés",
+    resume:
+      "Une probabilité entre 0 et 1, la somme des probabilités des issues, l'évènement contraire, les cas favorables quand tout est équiprobable, sans calculatrice. Dés, urnes et roue, puis population par âge, roulette, départements, jurés d'assises, retards de train et tombola.",
+  },
+  "maths/premiere/auto-proba-lecture": {
+    titre: "Lire une probabilité dans un tableau ou un arbre : 20 exercices corrigés",
+    resume:
+      "Lire P(A ∩ B) dans un tableau croisé, lire une probabilité conditionnelle sur une ligne ou sur une branche d'arbre, et ne pas confondre P_A(B) et P_B(A), sans calculatrice. Vote par âge, emploi des diplômés, chômage des jeunes, fraude bancaire, retours d'achats en ligne, sondage et vote réel.",
+  },
 };
 
 export function hrefFicheExercices(matiere: string, classe: string, notion: string) {
@@ -495,7 +611,7 @@ export type FicheExercicesListItem = {
 const ORDRE_CLASSES = [
   "cp", "ce1", "ce2", "cm1", "cm2",
   "6e", "5e", "4e", "3e",
-  "seconde", "premiere-spe", "terminale-spe",
+  "seconde", "premiere", "premiere-spe", "terminale-spe",
 ];
 
 /** Toutes les fiches d'exercices, triées par matière, niveau puis titre —
@@ -523,6 +639,13 @@ export function ficheExercicesHrefPourCoach(
   coachNotionId: string,
 ): string | null {
   if (!matiere || !classe || !coachNotionId) return null;
-  const cle = `${matiere}/${classe.toLowerCase()}/${coachNotionId.toLowerCase().replace(/_/g, "-")}`;
-  return FICHES_EXERCICES_REGISTRE[cle] ? `/fiches-exercices/${cle}` : null;
+  const c = classe.toLowerCase();
+  const cle = `${matiere}/${c}/${coachNotionId.toLowerCase().replace(/_/g, "-")}`;
+  if (FICHES_EXERCICES_REGISTRE[cle]) return `/fiches-exercices/${cle}`;
+  for (const [k, entree] of Object.entries(FICHES_EXERCICES_REGISTRE)) {
+    if (k.startsWith(`${matiere}/${c}/`) && entree.notionsCoach?.includes(coachNotionId)) {
+      return `/fiches-exercices/${k}`;
+    }
+  }
+  return null;
 }

@@ -33,15 +33,20 @@ export const repere = (
   courbes: Courbe[],
   marques: { x: number; y: number; label?: string }[] = [],
   horizontale?: number | number[],
+  // ⭐ `grand` (28/09/2026, automatismes de première) : au-delà d'une dizaine
+  // d'unités par axe, les graduations d'un cadre de 215 se TOUCHENT (« 9 » et
+  // « 10 » mesurés l'un sur l'autre à 375 px). Opt-in : les feuilles d'avant ne
+  // bougent pas.
+  grand = false,
 ) => {
   const [xmin, xmax, ymin, ymax] = cadre;
   const horizontales = horizontale === undefined ? [] : Array.isArray(horizontale) ? horizontale : [horizontale];
   return (
-    <div className="mx-auto w-full max-w-[16rem] print:max-w-[12rem]">
+    <div className={`mx-auto w-full ${grand ? "max-w-[17rem] print:max-w-[13rem]" : "max-w-[16rem] print:max-w-[12rem]"}`}>
       <CanvasRenderer
         figure={{
           kind: "fonctionGraphique",
-          size: { width: 215, height: 200 },
+          size: grand ? { width: 272, height: 272 } : { width: 215, height: 200 },
           xmin,
           xmax,
           ymin,

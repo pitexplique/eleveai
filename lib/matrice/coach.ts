@@ -220,7 +220,7 @@ export const NOTION_COACH_MATHS: TableNotions = {
   valeur_absolue: {
     "5e": "relatif_nombre",
     seconde: "reels_intervalles",
-    "premiere-spe": "derivation",
+    "premiere-spe": "derivation_nombre_derive",
   },
   proportionnalite: {
     cm1: "proportionnalite", cm2: "proportionnalite",
@@ -250,7 +250,7 @@ export const NOTION_COACH_MATHS: TableNotions = {
   },
   derivees: {
     premiere: "der_nombre_derive",
-    "premiere-spe": "derivation", "terminale-spe": "derivation_fonction",
+    "premiere-spe": "derivation_nombre_derive", "terminale-spe": "derivation_fonction",
   },
   suites: {
     premiere: "lin_suite_arithmetique",
@@ -339,7 +339,7 @@ export const NOTION_COACH_FRANCAIS: TableNotions = {
  * L'URL du coach, ouverte aussi précisément qu'on peut.
  *
  * — Notion connue → le tutor s'ouvre DESSUS :
- *     /coach/serie?classe=premiere-spe&matiere=maths&notion=derivation&display=simple
+ *     /coach/serie?classe=premiere-spe&matiere=maths&notion=derivation_nombre_derive&display=simple
  *   (vérifié : le fil d'ariane affiche « PREMIERE-SPE > Maths > Dérivation »).
  *   Pas de microId : sans lui la session ne démarre pas toute seule, l'élève
  *   voit sa notion déjà choisie et clique « Commencer ». C'est voulu — on ne

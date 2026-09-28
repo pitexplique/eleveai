@@ -38,25 +38,51 @@ export const notions: NotionSource[] = [
 
   /* ========================= ANALYSE ========================= */
 
+  // ⭐ LA DÉRIVATION EN QUATRE NOTIONS (28/09/2026, décision de Frédéric) —
+  // comme en première, où le chapitre est déjà coupé fin. C'était une seule
+  // notion de 12 micros : une séance qui ne finit pas. Le signe de f′ et le
+  // tableau de variations n'y sont pas : ils sont dans « Variations et courbes ».
+  // La fiche de cours reste UNE (`derivation`) : alias dans lib/fiches/registre.ts.
   {
-    id: "derivation",
-    label: "Dérivation",
+    id: "derivation_nombre_derive",
+    label: "Dérivée — taux de variation et nombre dérivé",
     boId: "BOPSAN",
     prerequis: ["second_degre"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "derivation_tangente",
+    label: "Dérivée — tangente et lecture graphique",
+    boId: "BOPSAN",
+    prerequis: ["derivation_nombre_derive"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "derivation_formules",
+    label: "Dérivée — les formules de base",
+    boId: "BOPSAN",
+    prerequis: ["derivation_nombre_derive"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "derivation_operations",
+    label: "Dérivée — somme, produit, quotient",
+    boId: "BOPSAN",
+    prerequis: ["derivation_formules"],
     levels: [1, 2, 3],
   },
   {
     id: "variations_fonctions",
     label: "Variations et courbes des fonctions",
     boId: "BOPSAN",
-    prerequis: ["derivation"],
+    prerequis: ["derivation_operations"],
     levels: [1, 2, 3],
   },
   {
     id: "exponentielle",
     label: "Fonction exponentielle",
     boId: "BOPSAN",
-    prerequis: ["derivation"],
+    prerequis: ["derivation_operations"],
     levels: [1, 2, 3],
   },
   {
