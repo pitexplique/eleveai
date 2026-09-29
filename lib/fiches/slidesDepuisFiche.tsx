@@ -18,7 +18,8 @@
 // exercice a sa slide, avec son dessin quand il en a un.
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
-import type { FicheCoursData } from "@/lib/fiches/types";
+import type { FicheCoursData, TiMargoDiapo } from "@/lib/fiches/types";
+import TiMargoBulle, { avecMargo, type HumeurMargo } from "@/components/fiches/TiMargoBulle";
 
 /** Le diaporama complet d'une fiche, dans l'ordre du cours. */
 export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
@@ -222,5 +223,34 @@ export function slidesDepuisFiche(fiche: FicheCoursData): ClasseSlide[] {
     });
   });
 
-  return slides;
+  return fiche.tiMargo ? avecTiMargo(slides, fiche.tiMargo) : slides;
+}
+
+/* ⭐ TI MARGO (30/09/2026, fiches de 6e) : « le mode classe doit être très
+   visuel, avec Ti Margo ». On repère chaque diapo par son titre ou son badge
+   — ceux posés plus haut —, et Ti Margo dit sa phrase sous le dessin. Une
+   diapo sans dessin reçoit Ti Margo seul : elle gagne enfin une image.
+   ⚠️ « exercice » : seulement le PREMIER exercice (le « flash » du cours). */
+const CIBLES: Record<TiMargoDiapo, { trouve: (s: ClasseSlide) => boolean; humeur: HumeurMargo }> = {
+  objectif: { trouve: (s) => s.titre === "Objectif du cours", humeur: "joie" },
+  definition: { trouve: (s) => s.titre === "La définition", humeur: "normal" },
+  reel: { trouve: (s) => s.titre === "À quoi ça sert ?", humeur: "normal" },
+  historique: { trouve: (s) => s.titre === "Le savais-tu ?", humeur: "joie" },
+  formule: { trouve: (s) => s.badge === "La formule", humeur: "normal" },
+  methode: { trouve: (s) => s.titre === "Les réflexes", humeur: "normal" },
+  pieges: { trouve: (s) => s.titre === "Pièges à éviter", humeur: "attention" },
+  retenir: { trouve: (s) => s.titre === "À retenir", humeur: "joie" },
+  exercice: { trouve: (s) => s.titre === "À toi de jouer", humeur: "normal" },
+};
+
+function avecTiMargo(slides: ClasseSlide[], phrases: Partial<Record<TiMargoDiapo, string>>): ClasseSlide[] {
+  const faites = new Set<TiMargoDiapo>();
+  return slides.map((s) => {
+    const cle = (Object.keys(phrases) as TiMargoDiapo[]).find((k) => !faites.has(k) && CIBLES[k].trouve(s));
+    if (!cle) return s;
+    faites.add(cle);
+    const texte = phrases[cle] as string;
+    const humeur = CIBLES[cle].humeur;
+    return { ...s, schema: s.schema ? avecMargo(s.schema, texte, humeur) : <TiMargoBulle texte={texte} humeur={humeur} /> };
+  });
 }
