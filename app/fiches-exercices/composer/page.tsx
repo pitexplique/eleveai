@@ -45,7 +45,15 @@ export default async function ComposerPage({ searchParams }: { searchParams: Pro
   const graine = Number.parseInt(un(params.t), 10) || 1;
 
   // Les classes qui ont des feuilles : le choix de départ.
-  const classes = [...new Set(Object.keys(FICHES_EXERCICES_REGISTRE).map((k) => k.split("/").slice(0, 2).join("/")))];
+  // Dans l'ordre scolaire, du plus jeune au plus âgé.
+  const ORDRE = ["6e", "5e", "4e", "3e", "seconde", "premiere", "premiere-spe", "terminale-spe"];
+  const rang = (k: string) => {
+    const i = ORDRE.indexOf(k.split("/")[1]);
+    return i < 0 ? ORDRE.length : i;
+  };
+  const classes = [...new Set(Object.keys(FICHES_EXERCICES_REGISTRE).map((k) => k.split("/").slice(0, 2).join("/")))].sort(
+    (a, b) => rang(a) - rang(b),
+  );
   const cles = classe ? clesDeLaClasse(`${matiere}/${classe}`) : [];
 
   // Toutes les feuilles de la classe, pour le sélecteur : leurs micros se

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { BookOpen, PencilLine, Sparkles } from "lucide-react";
+import { BookOpen, PencilLine, Shuffle, Sparkles } from "lucide-react";
 import { libelleClasse } from "@/lib/fiches/registre";
 import FichesParClasse from "@/components/fiches/FichesParClasse";
 import { listerFichesExercices } from "@/lib/fiches-exercices/registre";
@@ -66,6 +66,15 @@ export default function FichesExercicesPage() {
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
+            {/* ⭐ Le composeur (28/09/2026) : cocher ses notions, deux sujets
+                gauche / droite, éditable au tableau. Outil du prof, en tête. */}
+            <Link
+              href="/fiches-exercices/composer"
+              className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-4 py-2 text-sm font-black text-white shadow-lg shadow-amber-500/30 transition hover:bg-amber-400"
+            >
+              <Shuffle className="h-4 w-4" />
+              Composer ma feuille : notions au choix, sujets A et B
+            </Link>
             <Link
               href="/fiches-cours"
               className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-bold text-emerald-800 shadow-sm transition hover:bg-emerald-50"
