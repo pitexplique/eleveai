@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title:
     "Nombres relatifs 4e : 20 exercices corrigés, règle des signes et priorités (PDF)",
   description:
-    "Vingt exercices corrigés de 4e : additionner et soustraire des relatifs, multiplier et diviser avec la règle des signes, compter les facteurs négatifs, calculer avec parenthèses, priorités et trait de fraction. Problèmes : de la mer Morte à l'Everest, l'air à 11 km d'altitude, les records de froid et de chaud, la carte de golf. Rappel de cours avant chaque niveau, corrigé étape par étape avec la droite graduée, PDF à imprimer.",
+    "Vingt exercices corrigés de 4e : multiplier et diviser des relatifs avec la règle des signes, compter les facteurs négatifs, calculer avec parenthèses, priorités et trait de fraction. Problèmes : l'air qui se refroidit en altitude, le compte d'un club de VTT, le jeu du produit, le glacier qui fond. Rappel de cours avant chaque niveau, corrigé étape par étape avec un dessin, PDF à imprimer.",
 };
 
 export default function ExercicesRelatifs4ePage() {

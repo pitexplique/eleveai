@@ -381,7 +381,7 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
   "maths/4e/relatif-operation": {
     titre: "Nombres relatifs : 20 exercices corrigés",
     resume:
-      "Additionner et soustraire des relatifs, multiplier et diviser avec la règle des signes, compter les facteurs négatifs, calculer avec parenthèses, priorités et trait de fraction. Problèmes : de la mer Morte à l'Everest, l'air à 11 km d'altitude, les records de froid et de chaud, la carte de golf. Corrigés étape par étape, avec la droite graduée.",
+      "Multiplier et diviser des relatifs avec la règle des signes, compter les facteurs négatifs, respecter les priorités et le trait de fraction, les additions de 5e en rappel. Un sous-marin, un quiz, un programme de calcul, l'air qui se refroidit en altitude, le compte d'un club de VTT, un jeu de cartes, un glacier qui fond. Un dessin dans chaque corrigé.",
   },
   "maths/4e/fraction-nombre": {
     titre: "Fractions et nombres rationnels : 20 exercices corrigés",

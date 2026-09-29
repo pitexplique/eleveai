@@ -46,6 +46,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "calculer-avec-les-fractions-4e-cours-exercices-corriges.pdf",
   "calculer-avec-les-fractions-5e-20-exercices-corriges.pdf",
   "calculer-avec-les-fractions-5e-cours-exercices-corriges.pdf",
+  "calculer-avec-les-nombres-relatifs-4e-20-exercices-corriges.pdf",
   "calculer-un-volume-3e-20-exercices-corriges.pdf",
   "calculer-un-volume-du-pave-a-la-boule-3e-cours-exercices-corriges.pdf",
   "cercle-et-le-disque-6e-cours-exercices-corriges.pdf",
