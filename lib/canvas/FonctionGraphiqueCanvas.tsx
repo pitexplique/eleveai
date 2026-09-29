@@ -197,6 +197,17 @@ export default function FonctionGraphiqueCanvas({ figure }: Props) {
           const pasY = Math.max(1, Math.ceil(16 / ecartY));
           return Array.from({ length: nbY }, (_, i) => ymin + i)
             .filter((y) => y !== 0 && (y - ymin) % pasY === 0)
+            // ⛔ LA RANGÉE DES ABSCISSES EST RÉSERVÉE (30/09/2026, feuilles de
+            // terminale : 38 chevauchements mesurés à 375 px). Les abscisses
+            // occupent la bande `xAxisY + 5` → `xAxisY + 19` ; un chiffre
+            // d'ordonnée centré sur sa graduation déborde de ±6 px. Quand
+            // l'unité est petite (cadre haut, `ymin = −1`), le « −1 » tombait
+            // DANS cette bande, sur le « 0 » ou le « −1 » des abscisses. On
+            // saute ce chiffre, comme le pas adaptatif saute les autres ; son
+            // trait de graduation, lui, reste tracé.
+            // ⚠️ On teste la position APRÈS la remontée au bord (`syClamp`
+            // plus bas) : un « −1 » posé sur le bord du bas est remonté de 7 px.
+            .filter((y) => y > 0 || Math.min(height - 7, toSvgY(y, ymin, ymax, height)) - xAxisY >= 26)
             .map((y) => {
               const sy = toSvgY(y, ymin, ymax, height);
               // ⛔⛔ LE « −1 » DE L'AXE VERTICAL SE LISAIT COMME UNE ABSCISSE —

@@ -593,6 +593,99 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Du geste seul au problème de contrôle : ensembles et couples, « et » et « ou », quantificateurs et leur négation, implication, réciproque, contraposée, conditions nécessaires et suffisantes, raisonnement par l'absurde. Diagrammes de Venn, intervalles, tableaux de vérité et courbes contre-exemples.",
   },
+  // ⭐ LES FEUILLES DE TERMINALE SPÉ (29-30/09/2026) — une par notion du coach,
+  // dans son ordre, au niveau du bac ; un dessin par exercice. Sans fiche de
+  // cours pour l'instant (Frédéric : les feuilles d'exercices d'abord, partout).
+  "maths/terminale-spe/suite-numerique": {
+    titre: "Suites et récurrence : 20 exercices corrigés",
+    resume:
+      "Raisonnement par récurrence (sommes, divisibilité, l'hérédité sans initialisation), variations d'une suite, suites majorées, minorées, bornées, u(n) = f(n) contre u(n+1) = f(u(n)). Les tours de Hanoï, deux villes qui grandissent, les poissons d'une réserve, deux offres d'emploi.",
+  },
+  "maths/terminale-spe/limite-suite": {
+    titre: "Limites de suites : 20 exercices corrigés",
+    resume:
+      "Limites de référence, suites géométriques, formes indéterminées, comparaison et gendarmes, convergence monotone, l'inégalité de Bernoulli démontrée, boucle de seuil en Python. Les truites d'un bassin, la balle qui rebondit, le flocon de Koch. Les termes et leur limite dessinés dans chaque corrigé.",
+  },
+  "maths/terminale-spe/limite-fonction": {
+    titre: "Limites de fonctions : 20 exercices corrigés",
+    resume:
+      "Limites en l'infini et en un point, à droite et à gauche, formes indéterminées, quantité conjuguée, comparaison, composées, asymptotes et position de la courbe. Plus vite que la lumière, une cuve d'eau salée, la lentille d'un appareil photo, une courbe en S.",
+  },
+  "maths/terminale-spe/continuite-tvi": {
+    titre: "Continuité et valeurs intermédiaires : 20 exercices corrigés",
+    resume:
+      "Continuité, théorème des valeurs intermédiaires, corollaire de la bijection lu sur le tableau de variations, encadrement par balayage et par dichotomie en Python. Un prix d'équilibre, la jauge d'une cuve, un randonneur et son bivouac, un parachutiste.",
+  },
+  "maths/terminale-spe/derivation-fonction": {
+    titre: "Dérivation et variations : 20 exercices corrigés",
+    resume:
+      "Dérivée d'une composée, variations, extremums, tangentes, études de fonctions complètes au niveau du bac. Un pic de pollution, le coût moyen le plus bas, la lampe au-dessus de la table, le pic d'audience d'une vidéo. Tableaux de variations et courbes dessinés.",
+  },
+  "maths/terminale-spe/convexite-fonction": {
+    titre: "Convexité : 20 exercices corrigés",
+    resume:
+      "Dérivée seconde, fonctions convexes et concaves, point d'inflexion, position de la courbe par rapport à ses tangentes, inégalités de convexité. L'alcoolémie, la banque à 100 %, le câble entre deux pylônes, approcher ln 3 par les tangentes.",
+  },
+  "maths/terminale-spe/fonction-exponentielle": {
+    titre: "Fonction exponentielle : 20 exercices corrigés",
+    resume:
+      "Équations et inéquations, limites et croissances comparées, dérivée de e puissance u, études de fonctions type bac. L'offre et la demande, la caféine dans le sang, des doses répétées, la croissance d'un arbre.",
+  },
+  "maths/terminale-spe/fonction-logarithme": {
+    titre: "Fonction logarithme népérien : 20 exercices corrigés",
+    resume:
+      "Propriétés algébriques, équations et inéquations, limites, dérivée de ln u, seuils d'une suite géométrique. Le bénéfice d'un atelier, les oiseaux d'une réserve, e puissance π contre π puissance e, le bruit d'un atelier en décibels.",
+  },
+  "maths/terminale-spe/primitive-integrale": {
+    titre: "Primitives et intégrales : 20 exercices corrigés",
+    resume:
+      "Primitives, intégrale et aire sous la courbe, linéarité, relation de Chasles, valeur moyenne, intégration par parties, suites d'intégrales. Calculer ln 2 avec un ordinateur, le volume d'une crue, mesurer les inégalités de revenus, la tension du secteur. Les aires hachurées sur les courbes.",
+  },
+  "maths/terminale-spe/denombrement-combinatoire": {
+    titre: "Dénombrement et combinatoire : 20 exercices corrigés",
+    resume:
+      "Principe multiplicatif, k-uplets, arrangements, permutations, combinaisons, triangle de Pascal, parties d'un ensemble. Un tournoi, un jeu de tirage, la planche de Galton, le paradoxe des anniversaires. Arbres de choix et tableaux dans les corrigés.",
+  },
+  "maths/terminale-spe/geometrie-espace": {
+    titre: "Vecteurs, droites et plans de l'espace : 20 exercices corrigés",
+    resume:
+      "Colinéarité, coplanarité, représentations paramétriques de droites, positions relatives, intersections. Les câbles d'un entrepôt, l'ombre d'un mât, un trépied, les deux équipes d'un tunnel. Cubes et repères dessinés en perspective.",
+  },
+  "maths/terminale-spe/produit-scalaire-espace": {
+    titre: "Produit scalaire dans l'espace : 20 exercices corrigés",
+    resume:
+      "Produit scalaire et orthogonalité dans l'espace, vecteur normal et équation cartésienne d'un plan, projeté orthogonal sur une droite et sur un plan, distance à un plan, volume d'un tétraèdre. Les panneaux solaires d'un toit, un bloc de pierre, la conduite la plus courte, les haubans d'une antenne.",
+  },
+  "maths/terminale-spe/probabilite-conditionnelle": {
+    titre: "Probabilités conditionnelles : 20 exercices corrigés",
+    resume:
+      "Arbres pondérés, probabilités totales, inversion du conditionnement, indépendance, succession d'épreuves, suites de probabilités. Un vaccin et les malades, un dé et deux urnes, répondre au hasard, un bit qui traverse des relais.",
+  },
+  "maths/terminale-spe/variable-aleatoire": {
+    titre: "Sommes de variables aléatoires : 20 exercices corrigés",
+    resume:
+      "Linéarité de l'espérance, E(aX + b) et V(aX + b), variance d'une somme de variables indépendantes, échantillon et moyenne d'un échantillon. La file d'une caisse, une pièce puis un dé, la charge d'un ascenseur, mesurer plusieurs fois.",
+  },
+  "maths/terminale-spe/loi-binomiale": {
+    titre: "Loi binomiale : 20 exercices corrigés",
+    resume:
+      "Schéma de Bernoulli, coefficients binomiaux, P(X = k), P(X ≤ k), espérance et variance, seuils « au moins une fois ». Répondre au hasard à un QCM, un parc d'éoliennes, deux ateliers, un avion en surréservation. Lois dessinées en barres.",
+  },
+  "maths/terminale-spe/algorithmique-python": {
+    titre: "Algorithmique et Python : 20 exercices corrigés",
+    resume:
+      "Listes, fonctions, boucles de seuil, dichotomie, méthode d'Euler, aire par les rectangles, simulation. Un café qui refroidit, un contrôle qualité, une aire sans primitive, une rumeur au lycée. Chaque programme a sa trace ou sa sortie.",
+  },
+  "maths/terminale-spe/equation-differentielle": {
+    titre: "Équations différentielles : 20 exercices corrigés",
+    resume:
+      "y' = ay, y' = ay + b, y' = ay + f avec une solution particulière, condition initiale, solutions vérifiées en dérivant. Une espèce réintroduite, une perfusion, l'heure d'un décès par le refroidissement, une maison sans chauffage.",
+  },
+  "maths/terminale-spe/concentration-echantillonnage": {
+    titre: "Concentration et loi des grands nombres : 20 exercices corrigés",
+    resume:
+      "Inégalité de Bienaymé-Tchebychev, inégalité de concentration, loi des grands nombres, taille d'un échantillon, simulation en Python. La taille d'un sondage, une machine à café, pourquoi l'assurance tient, calculer π au hasard.",
+  },
   // (La dérivation de première SANS spé a eu une feuille unique pour ses six
   //  notions le matin du 28/09 ; le soir, Frédéric : une feuille par notion.
   //  Les six sont plus bas, avec les autres chapitres de première. La feuille
