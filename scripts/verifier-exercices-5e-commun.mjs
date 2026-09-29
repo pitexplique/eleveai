@@ -33,7 +33,9 @@ const DESSINS_COMMUNS = ["repere", "vecteurs", "droites", "triangle", "intervall
 /** Un nombre écrit comme dans la feuille : `2{,}5`, `-3`, `1\,250`. */
 export const t = (x) => tex(D(Number(x).toFixed(10)));
 
-export function ouvrir(fichier, notionId, dessinsLocaux = []) {
+// `classe` (29/09 au soir) : le même socle sert la 6e — « 5e » par défaut, les
+// dix-huit scripts de 5e ne changent pas.
+export function ouvrir(fichier, notionId, dessinsLocaux = [], classe = "5e") {
   const src = fs.readFileSync(path.join(RACINE, fichier), "utf8");
   const feuille = lireFeuille(src);
   const DESSINS = [...new Set([...DESSINS_COMMUNS, ...dessinsLocaux])];
@@ -187,11 +189,11 @@ export function ouvrir(fichier, notionId, dessinsLocaux = []) {
     }
     const nbEx = (src.match(/correction:/g) || []).length;
     vrai(`exactement 20 « correction: » (${nbEx})`, nbEx === 20);
-    vrai("classe 5e, coach de 5e", /classe: "5e"/.test(src) && src.includes('coachHref: "/coach-ia/maths?classe=5e"'));
+    vrai(`classe ${classe}, coach de ${classe}`, src.includes(`classe: "${classe}"`) && src.includes(`coachHref: "/coach-ia/maths?classe=${classe}"`));
 
     /* ═══ contrôles de texte communs ═══ */
     const v = { ok: (nom, cond, detail = "") => vrai(nom, cond, detail), titre() {} };
-    controlesCommuns(v, src, { notionId, classe: "5e" });
+    controlesCommuns(v, src, { notionId, classe });
 
     console.log(fichier);
     console.log(`dessins : ${imprimes} imprimés, ${ecran} à l'écran seulement`);
