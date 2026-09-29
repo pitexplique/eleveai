@@ -29,10 +29,95 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
   },
   // ⭐ LA 5e (29/09/2026) — Frédéric : « je préfère compléter les fiches
   // d'exercices pour tous les niveaux ». Dans l'ordre du coach.
+  "maths/5e/algo-programmation": {
+    titre: "Algorithmique et programmation : 20 exercices corrigés",
+    resume:
+      "Lire un programme Scratch : suivre les blocs dans l'ordre, repérer les entrées et les sorties, calculer une expression, prévoir ce que dira le lutin. Des fléchettes, un trajet à vélo, une pâte à crêpes, un robot aspirateur, un pluviomètre, un cadenas à code, une tondeuse robot. Les blocs dessinés, le trajet du lutin tracé.",
+  },
+  "maths/5e/algo-construire": {
+    titre: "Construire un programme : 20 exercices corrigés",
+    resume:
+      "Écrire un programme Scratch : traduire une formule en blocs, choisir une condition, régler les paramètres, poser une boucle « répéter » et faire tracer au lutin carrés, triangles, pentagone et escalier. Un taxi, une plante à arroser, une fusée, un thermomètre, une serre automatique, la clôture d'un potager, un feu tricolore.",
+  },
   "maths/5e/relatif-nombre": {
     titre: "Les nombres relatifs : 20 exercices corrigés",
     resume:
       "Écrire un relatif, reconnaître son signe, lire et placer une abscisse sur une droite graduée, comparer et ranger, l'opposé et la distance à zéro. Des températures, une différence de buts, une frise de l'Antiquité, un tournoi de golf, un ascenseur, la coupe d'une île. La droite graduée dessinée dans les corrigés.",
+  },
+  "maths/5e/relatif-operation": {
+    titre: "Les opérations sur les nombres relatifs : 20 exercices corrigés",
+    resume:
+      "Additionner deux relatifs, soustraire en ajoutant l'opposé, enlever les parenthèses, calculer une suite d'additions et de soustractions. Un congélateur, un lac de barrage, la frise de Rome à Alésia, les fuseaux horaires, une grotte, un carré magique. Les sauts dessinés sur la droite graduée.",
+  },
+  "maths/5e/divisibilite": {
+    titre: "Multiples, diviseurs et divisibilité : 20 exercices corrigés",
+    resume:
+      "Reconnaître un multiple et un diviseur, les critères par 2, 5, 10, 3 et 9, lister tous les diviseurs par paires, trouver un chiffre caché. Des jetons en rectangle, une plantation de salades, deux robots sur une règle, le code d'un cadenas, un mur à carreler, et pourquoi la règle du 9 marche.",
+  },
+  "maths/5e/fraction-nombre": {
+    titre: "Les fractions : 20 exercices corrigés",
+    resume:
+      "Fractions égales, simplifier, écrire un quotient en fraction et en décimal, comparer et ranger, l'opposé d'une fraction. Le vote de trois classes, des tablettes de chocolat, des tirs au but, un jardin partagé, les fractions de l'heure, une fraction mystère. Barres et disques de fractions dessinés.",
+  },
+  "maths/5e/prop-proportionnalite": {
+    titre: "La proportionnalité : 20 exercices corrigés",
+    resume:
+      "Reconnaître une situation de proportionnalité — et celle qui n'en est pas une —, compléter un tableau, trouver le coefficient, revenir à l'unité, calculer une quatrième proportionnelle. Des croissants, une piste d'athlétisme, des ruches, l'eau de mer, un pressoir, un robinet qui goutte, un podomètre. Le tableau dessiné dans les corrigés.",
+  },
+  "maths/5e/prop-ratio-pourcentage": {
+    titre: "Ratios, pourcentages et coefficient : 20 exercices corrigés",
+    resume:
+      "Écrire et simplifier un ratio, partager selon un ratio, prendre un pourcentage, écrire une part en pourcentage, passer d'une hausse ou d'une baisse au coefficient multiplicateur. Une forêt, des tirs au but, des soldes, une pâte sablée, les oiseaux d'un étang, le budget d'une sortie. La barre des parts dessinée.",
+  },
+  "maths/5e/litteral-calcul": {
+    titre: "Le calcul littéral : 20 exercices corrigés",
+    resume:
+      "Lire une expression, traduire une phrase, remplacer la lettre par un nombre, réduire, tester une égalité, développer k(a + b). Des tuiles, une balance, des programmes de calcul, des allumettes, une location de vélo, les tarifs d'une piscine, la bordure d'un bassin. Un dessin dans chaque corrigé.",
+  },
+  "maths/5e/angle-mesure": {
+    titre: "Les angles : 20 exercices corrigés",
+    resume:
+      "Nommer, mesurer, tracer et estimer un angle, angles complémentaires, supplémentaires et opposés par le sommet, puis deux parallèles coupées par une sécante. Des rues qui se croisent, une horloge, l'ombre de deux poteaux au soleil. Chaque figure dessinée à l'échelle.",
+  },
+  "maths/5e/triangle-figure": {
+    titre: "Les triangles : 20 exercices corrigés",
+    resume:
+      "Reconnaître un triangle isocèle, équilatéral ou rectangle, savoir si trois longueurs ferment un triangle, le construire, calculer un angle avec la somme de 180°. Une tente, trois refuges de montagne, un bateau vu depuis deux phares. Chaque triangle dessiné à l'échelle.",
+  },
+  "maths/5e/sym-centrale": {
+    titre: "La symétrie centrale : 20 exercices corrigés",
+    resume:
+      "Reconnaître un demi-tour, construire l'image d'un point, d'un segment, d'un triangle, retrouver le centre, et se servir de ce que la symétrie conserve : longueurs, angles, aires, parallélisme. Un terrain de football, des dominos, un logo. Chaque figure dessinée sur quadrillage avec son image.",
+  },
+  "maths/5e/parallelogramme": {
+    titre: "Le parallélogramme : 20 exercices corrigés",
+    resume:
+      "Reconnaître un parallélogramme, côtés et angles opposés, angles consécutifs, diagonales et centre de symétrie, losange, rectangle et carré, constructions. Un portail extensible, un pavage de losanges, un cadre qu'on pousse. Chaque figure dessinée à l'échelle et codée.",
+  },
+  "maths/5e/aire-surface": {
+    titre: "Les aires : 20 exercices corrigés",
+    resume:
+      "Compter des carreaux, distinguer aire et périmètre, aire du triangle (même quand la hauteur tombe dehors) et du parallélogramme, découper une figure pour ajouter ou retrancher, remonter à une hauteur. Une cabane, une voile, un champ de blé, un potager, un terrain à bâtir. Chaque figure dessinée et cotée.",
+  },
+  "maths/5e/grandeur-conversion": {
+    titre: "Convertir les grandeurs : 20 exercices corrigés",
+    resume:
+      "Convertir longueurs, masses et contenances, écrire une durée en heures et minutes, convertir avant de comparer ou de calculer, vérifier qu'un résultat a du sens. Un sac de randonnée, un train, un relais de natation, un trail, une citronnade, des bouteilles en plastique. Le tableau de conversion dessiné.",
+  },
+  "maths/5e/volume-solide": {
+    titre: "Les volumes : 20 exercices corrigés",
+    resume:
+      "Compter des cubes, même cachés, volume du pavé droit, du prisme droit et du cylindre, assemblages, passer des cm³ aux litres et aux m³, remonter à une longueur. Un aquarium, une tente, un nichoir, une piscine, une cuve d'eau de pluie, un galet plongé dans l'eau. Chaque solide dessiné en perspective.",
+  },
+  "maths/5e/stat-statistique": {
+    titre: "Les statistiques : 20 exercices corrigés",
+    resume:
+      "Ranger des réponses dans un tableau d'effectifs, lire un tableau et un diagramme, calculer une fréquence en fraction, en décimal et en pourcentage, construire un diagramme, choisir la bonne représentation, calculer une moyenne. Des trajets d'élèves, des oiseaux, un budget de club, le temps d'écran, la pluie.",
+  },
+  "maths/5e/proba-experience": {
+    titre: "Les probabilités : 20 exercices corrigés",
+    resume:
+      "Reconnaître une expérience aléatoire, lister les issues, événement certain ou impossible, équiprobabilité, calculer une probabilité en fraction, en décimal et en pourcentage. Des roues de kermesse, un tiroir de chaussettes, les mois de l'année, le sac du Scrabble, des oiseaux bagués, un dé fait main. Roues, dés et billes dessinés.",
   },
   // ⭐ LA PREMIÈRE DE 3e (21/09/2026) — le trio de la Une du collège : le short
   // « +20 % puis −20 % » (la tablette de 100 carrés), la fiche de cours, la
