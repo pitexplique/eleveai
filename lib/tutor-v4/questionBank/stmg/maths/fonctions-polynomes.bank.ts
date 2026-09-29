@@ -1943,4 +1943,196 @@ export const fonctionsPolynomesBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  /* ═════════ fct_equations_puissance — mode DÉFI (29/09/2026) ═════════
+   * L'évaluation par chapitres tire jusqu'à 20 questions en mode Défi : la
+   * notion n'en offrait que 19. Les équations restent celles du BO —
+   * $x^2 = c$ et $x^3 = c$ avec $c > 0$ —, mais il faut d'abord les Y
+   * RAMENER (diviser par un coefficient, retirer une constante), ou donner
+   * une valeur approchée de la racine cubique. */
+
+  {
+    kind: "template",
+    id: "stmg_eq_carre_tpl_se_ramener",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_equations_puissance",
+    microId: "fct_eq_carre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Isole d'abord $x^2$, puis n'oublie pas les DEUX solutions opposées.",
+    tags: ["stmg", "maths", "fonctions", "equations", "template"],
+    generate: () => {
+      const n = randomInt(2, 9);
+      const racineTex = (v: number) => {
+        const r = Math.round(Math.sqrt(v));
+        return r * r === v ? String(r) : `\\sqrt{${v}}`;
+      };
+      if (Math.random() < 0.5) {
+        const k = pick([2, 3, 4, 5, 6] as const);
+        const c = k * n * n;
+        const bonne = `$x = ${n}$ ou $x = -${n}$`;
+        return {
+          text: `Résous l'équation $${k}x^2 = ${c}$.`,
+          format: "qcm",
+          choices: makeChoices(bonne, [
+            `$x = ${n}$`,
+            `$x = ${racineTex(c)}$ ou $x = -${racineTex(c)}$`,
+            `$x = ${n * n}$ ou $x = -${n * n}$`,
+            `$x = ${fr(c / (2 * k))}$`,
+          ]),
+          expected: [bonne],
+          comparator: "mcq_exact",
+          explanation: exp(
+            "On se ramène à $x^2 = c$ avec $c > 0$, qui a deux solutions opposées $\\sqrt{c}$ et $-\\sqrt{c}$.",
+            `On divise les deux membres par $${k}$, puis on prend les deux racines.`,
+            `$${k}x^2 = ${c} \\iff x^2 = ${n * n} \\iff x = ${n}$ ou $x = -${n}$.`,
+            `Les solutions sont $${n}$ et $-${n}$.`
+          ),
+          choiceDiagnostics: [
+            {
+              choice: `$x = ${racineTex(c)}$ ou $x = -${racineTex(c)}$`,
+              cause: `a pris la racine sans diviser d'abord par $${k}$`,
+            },
+          ],
+        };
+      }
+      const b = pick([-20, -11, -7, -5, 3, 6, 10, 15, 24] as const);
+      const c = n * n + b;
+      const bonne = `$x = ${n}$ ou $x = -${n}$`;
+      const signeB = b > 0 ? `+ ${b}` : `- ${-b}`;
+      const autre = n * n + 2 * b; // piège : b ajouté au lieu d'être retiré
+      return {
+        text: `Résous l'équation $x^2 ${signeB} = ${c}$.`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `$x = ${n}$`,
+          autre > 0 ? `$x = ${racineTex(autre)}$ ou $x = -${racineTex(autre)}$` : "il n'y a pas de solution",
+          `$x = ${n * n}$ ou $x = -${n * n}$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "On se ramène à $x^2 = c$ avec $c > 0$, qui a deux solutions opposées.",
+          `On ${b > 0 ? "retire" : "ajoute"} $${Math.abs(b)}$ aux deux membres, puis on prend les deux racines.`,
+          `$x^2 ${signeB} = ${c} \\iff x^2 = ${c} ${b > 0 ? "-" : "+"} ${Math.abs(b)} = ${n * n} \\iff x = ${n}$ ou $x = -${n}$.`,
+          `Les solutions sont $${n}$ et $-${n}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "stmg_eq_cube_tpl_se_ramener",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_equations_puissance",
+    microId: "fct_eq_cube",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Isole d'abord $x^3$ ; il n'y a ensuite qu'UNE solution, la racine cubique.",
+    tags: ["stmg", "maths", "fonctions", "equations", "template", "short"],
+    generate: () => {
+      const n = randomInt(2, 6);
+      const k = pick([2, 3, 4, 5, 8, 10] as const);
+      const c = k * n ** 3;
+      if (Math.random() < 0.5) {
+        return {
+          text: `Résous l'équation $${k}x^3 = ${c}$. Donne la solution.`,
+          format: "short",
+          expected: [String(n)],
+          comparator: "number_equal",
+          explanation: exp(
+            "L'équation $x^3 = c$ a une unique solution, la racine cubique de $c$.",
+            `On divise par $${k}$ pour isoler $x^3$, puis on cherche le nombre dont le cube vaut le résultat.`,
+            `$${k}x^3 = ${c} \\iff x^3 = ${n ** 3} \\iff x = \\sqrt[3]{${n ** 3}} = ${n}$.`,
+            `La solution est $${n}$. ⚠️ Pas de solution opposée : $(-${n})^3 = -${n ** 3}$.`
+          ),
+        };
+      }
+      return {
+        text:
+          `Une cuve a la forme d'un pavé droit de dimensions $x$, $x$ et $${k}x$ (en mètres). ` +
+          `Son volume est de $${c}$ m³. Que vaut $x$, en mètres ?`,
+        format: "short",
+        expected: [String(n)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le volume d'un pavé droit est le produit de ses trois dimensions.",
+          `$x \\times x \\times ${k}x = ${k}x^3$ : on résout $${k}x^3 = ${c}$ en isolant $x^3$.`,
+          `$x^3 = \\dfrac{${c}}{${k}} = ${n ** 3}$, donc $x = \\sqrt[3]{${n ** 3}} = ${n}$.`,
+          `$x = ${n}$ m.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "stmg_eq_cube_tpl_cout",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_equations_puissance",
+    microId: "fct_eq_cube",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Retire d'abord la partie fixe pour isoler $x^3$.",
+    tags: ["stmg", "maths", "fonctions", "equations", "gestion", "template", "short"],
+    generate: () => {
+      const n = randomInt(2, 9);
+      const fixe = pick([5, 10, 12, 20, 25, 40, 50, 100, 150] as const);
+      const cible = n ** 3 + fixe;
+      return {
+        text:
+          `Le coût de fabrication de $x$ centaines d'objets est $C(x) = x^3 + ${fixe}$, en milliers d'euros. ` +
+          `Pour combien de centaines d'objets le coût atteint-il $${cible}$ milliers d'euros ?`,
+        format: "short",
+        expected: [String(n)],
+        comparator: "number_equal",
+        explanation: exp(
+          "On résout $C(x) = " + cible + "$ en se ramenant à une équation $x^3 = c$ avec $c > 0$.",
+          `On retire les $${fixe}$ milliers d'euros fixes aux deux membres.`,
+          `$x^3 + ${fixe} = ${cible} \\iff x^3 = ${n ** 3} \\iff x = ${n}$.`,
+          `Le coût atteint $${cible}$ milliers d'euros pour $${n}$ centaines d'objets.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "stmg_eq_racine_cubique_tpl_arrondi",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "fct_equations_puissance",
+    microId: "fct_eq_racine_cubique",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "À la calculatrice : $c^{1/3}$ (ou la touche $\\sqrt[3]{\\ }$), puis arrondis au dixième.",
+    tags: ["stmg", "maths", "fonctions", "equations", "calculatrice", "template", "short"],
+    generate: () => {
+      let c = 0;
+      do {
+        c = randomInt(2, 999);
+      } while (Number.isInteger(Math.round(Math.cbrt(c) * 1e9) / 1e9));
+      const approx = Math.round(Math.cbrt(c) * 10) / 10;
+      const cube = Math.random() < 0.5;
+      return {
+        text: cube
+          ? `Un cube a un volume de $${c}$ cm³. Quelle est la longueur de son arête, arrondie au dixième de centimètre ?`
+          : `Donne l'arrondi au dixième de la solution de l'équation $x^3 = ${c}$.`,
+        format: "short",
+        expected: [fr(approx)],
+        comparator: "number_equal",
+        explanation: exp(
+          "La solution de $x^3 = c$ (avec $c > 0$) est la racine cubique $\\sqrt[3]{c} = c^{\\frac{1}{3}}$.",
+          "On la calcule à la calculatrice, puis on arrondit au dixième.",
+          `$\\sqrt[3]{${c}} \\approx ${fr(Math.round(Math.cbrt(c) * 1000) / 1000)}$, soit $${fr(approx)}$ au dixième. ` +
+            `Vérification : $${fr(approx)}^3 \\approx ${fr(Math.round(approx ** 3 * 10) / 10)}$, proche de $${c}$.`,
+          cube ? `L'arête mesure environ $${fr(approx)}$ cm.` : `$x \\approx ${fr(approx)}$.`
+        ),
+      };
+    },
+  },
 ];

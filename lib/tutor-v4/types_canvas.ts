@@ -436,6 +436,13 @@ export type AngleCanvasData = {
        * `reading` la graduation atteinte par l'autre côté.
        */
       protractorStep?: "vertex" | "zero" | "reading";
+      /**
+       * `double` : le rapporteur de classe, avec DEUX graduations — l'extérieure
+       * part de 0 sur le côté droit, l'intérieure de 0 sur le côté gauche. C'est
+       * là que naît l'erreur « 180 − mesure » (Frédéric, 29/09 : « tu peux avoir
+       * deux types de rapporteur »). Défaut : `simple`.
+       */
+      protractorScale?: "simple" | "double";
     };
   };
   size?: { width?: number; height?: number };

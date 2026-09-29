@@ -22,6 +22,40 @@ function expl(calcul: string) {
   );
 }
 
+function pick<T>(arr: readonly T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function randomInt(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function pgcd(a: number, b: number): number {
+  return b === 0 ? a : pgcd(b, a % b);
+}
+
+/** Le plus petit total N tel que p % de N tombe juste (p × N divisible par 100). */
+function pasEntier(p: number) {
+  return 100 / pgcd(p, 100);
+}
+
+/** La bonne réponse et jusqu'à trois leurres, sans doublon ni leurre égal à la réponse. */
+function choixQcm(bonne: string, leurres: readonly string[]) {
+  const d = shuffle(Array.from(new Set(leurres)).filter((l) => l !== bonne)).slice(0, 3);
+  return shuffle([bonne, ...d]);
+}
+
+/** Le chemin de calcul mental quand il existe (10 %, 50 %, 25 %…), sinon × p ÷ 100. */
+function methodePourcentage(p: number, n: number) {
+  const r = (p * n) / 100;
+  if (p === 10) return `10 % de ${n}, c’est le dixième : ${n} ÷ 10 = ${r}.`;
+  if (p === 50) return `50 % de ${n}, c’est la moitié : ${n} ÷ 2 = ${r}.`;
+  if (p === 25) return `25 % de ${n}, c’est le quart : ${n} ÷ 4 = ${r}.`;
+  if (p === 75) return `75 % de ${n}, ce sont trois quarts : ${n} ÷ 4 = ${n / 4}, puis ${n / 4} × 3 = ${r}.`;
+  if (p % 10 === 0 && n % 10 === 0) return `10 % de ${n}, c’est ${n / 10} ; ${p} %, c’est ${p / 10} fois plus : ${n / 10} × ${p / 10} = ${r}.`;
+  return `${p} % de ${n} = ${n} × ${p} ÷ 100 = ${r}.`;
+}
+
 export const pourcentagesBank: TutorBankItemV4[] = [
   // =========================
   // POURCENTAGE_COMPRENDRE
@@ -1306,4 +1340,219 @@ export const pourcentagesBank: TutorBankItemV4[] = [
   { kind: "fixed", id: "pourcentage_lire_topup_3", niveau: "6e", matiere: "maths", notionId: "pourcentage_nombre", microId: "pourcentage_lire", difficulty: 2, theme: "neutral",
     text: "Sur 100 voitures, 25 % sont rouges. Combien de voitures sont rouges ?", format: "short", expected: ["25"], comparator: "number_equal",
     hint: "25 % = 25 sur 100.", explanation: expl("Sur 100 voitures, 25 % signifie 25 sur 100 : cela représente 25 voitures rouges."), tags: ["pourcentage_nombre", "lecture"] },
+
+  // =========================
+  // GÉNÉRATEURS DU 29/09/2026 — L'ÉVALUATION PAR CHAPITRES
+  //
+  // Un prof peut lancer 20 questions sur « Pourcentages » seul : le mode Défi
+  // (difficultés 3 à 5) n'en offrait que 17 distinctes. Six générateurs, qui
+  // paramètrent le total, le pourcentage ET la situation — le programme de 6e
+  // en trois gestes : appliquer un pourcentage, exprimer une proportion en
+  // pourcentage, et s'en servir dans un problème à deux étapes.
+  // =========================
+  {
+    kind: "template",
+    id: "pourcentage_calcul_simple_tpl_contexte",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "pourcentage_nombre",
+    microId: "pourcentage_calcul_simple",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "10 % = le dixième ; 50 % = la moitié ; 25 % = le quart.",
+    tags: ["pourcentage_nombre", "calcul", "template", "contexte"],
+    generate: () => {
+      const p = pick([10, 20, 25, 30, 40, 50, 75]);
+      const n = pasEntier(p) * randomInt(Math.ceil(20 / pasEntier(p)), 30);
+      const r = (p * n) / 100;
+      const contexte = pick([
+        `Dans un groupe de ${n} élèves, ${p} % sont demi-pensionnaires. Combien d’élèves sont demi-pensionnaires ?`,
+        `Un sac contient ${n} billes ; ${p} % sont rouges. Combien de billes rouges y a-t-il ?`,
+        `Un trajet en voiture fait ${n} km. On a déjà parcouru ${p} % du trajet. Combien de kilomètres a-t-on parcourus ?`,
+        `Un club compte ${n} adhérents, dont ${p} % ont moins de 12 ans. Combien d’adhérents ont moins de 12 ans ?`,
+        `Un réservoir de ${n} litres est rempli à ${p} %. Combien de litres contient-il ?`,
+        `Sur ${n} graines semées, ${p} % ont germé. Combien de graines ont germé ?`,
+        `Un livre a ${n} pages. Léa en a lu ${p} %. Combien de pages a-t-elle lues ?`,
+      ]);
+      return {
+        text: contexte,
+        format: "short",
+        expected: [String(r)],
+        comparator: "number_equal",
+        explanation: expl(methodePourcentage(p, n)),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "pourcentage_fraction_tpl_proportion",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "pourcentage_nombre",
+    microId: "pourcentage_fraction",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Écris la part sous forme de fraction, puis cherche la fraction égale sur 100.",
+    tags: ["pourcentage_nombre", "fraction", "proportion", "template"],
+    generate: () => {
+      const situations = [
+        { totaux: [20, 25], f: (N: number, k: number) => `Dans une classe de ${N} élèves, ${k} portent des lunettes. Quel pourcentage des élèves portent des lunettes ?` },
+        { totaux: [10, 20, 25, 50], f: (N: number, k: number) => `Sur ${N} tirs au but, une gardienne en arrête ${k}. Quel pourcentage des tirs a-t-elle arrêtés ?` },
+        { totaux: [10, 20, 25, 50], f: (N: number, k: number) => `Un QCM compte ${N} questions ; Tom en réussit ${k}. Quel pourcentage de bonnes réponses obtient-il ?` },
+        { totaux: [50, 200], f: (N: number, k: number) => `Sur ${N} personnes interrogées, ${k} préfèrent le vélo. Quel pourcentage des personnes interrogées cela représente-t-il ?` },
+        { totaux: [4, 5, 10], f: (N: number, k: number) => `Une tarte est coupée en ${N} parts égales ; on en mange ${k}. Quel pourcentage de la tarte a-t-on mangé ?` },
+      ];
+      const s = pick(situations);
+      const N = pick(s.totaux);
+      // Pour N = 200, k doit être pair pour que le pourcentage soit entier.
+      const k = N === 200 ? 2 * randomInt(1, 99) : randomInt(1, N - 1);
+      const p = (100 * k) / N;
+      const calcul =
+        100 % N === 0
+          ? `La part est ${k}/${N}. On multiplie en haut et en bas par ${100 / N} : ${k}/${N} = ${k * (100 / N)}/100, soit ${p} %.`
+          : `La part est ${k}/${N}. On divise en haut et en bas par 2 : ${k}/${N} = ${k / 2}/100, soit ${p} %.`;
+      return {
+        text: s.f(N, k),
+        format: "short",
+        expected: [String(p), `${p} %`, `${p}%`],
+        comparator: "number_equal",
+        explanation: expl(calcul),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "pourcentage_fraction_qcm_tpl_fraction_vers_pourcentage",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "pourcentage_nombre",
+    microId: "pourcentage_fraction",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Cherche la fraction égale dont le dénominateur est 100.",
+    tags: ["pourcentage_nombre", "fraction", "qcm", "template"],
+    generate: () => {
+      const b = pick([2, 4, 5, 10, 20, 25, 50]);
+      const candidats = Array.from({ length: b - 1 }, (_, i) => i + 1).filter((a) => pgcd(a, b) === 1);
+      const a = pick(candidats);
+      const p = (100 * a) / b;
+      return {
+        text: `Quel pourcentage correspond à la fraction ${a}/${b} ?`,
+        format: "qcm",
+        choices: choixQcm(`${p} %`, [`${a} %`, `${b} %`, `${100 - p} %`, `${a * 10} %`, ...(p % 10 === 0 ? [`${p / 10} %`] : [])]),
+        expected: [`${p} %`],
+        comparator: "mcq_exact",
+        explanation: expl(`On cherche la fraction égale sur 100 : ${a}/${b} = ${a * (100 / b)}/100 (on a multiplié par ${100 / b}). Donc ${a}/${b} = ${p} %. Attention : ${a}/${b} n’est pas ${a} %.`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "pourcentage_defi_qcm_tpl_soldes",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "pourcentage_nombre",
+    microId: "pourcentage_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Calcule d’abord la remise en euros, puis retire-la du prix.",
+    tags: ["pourcentage_nombre", "defi", "qcm", "template", "soldes"],
+    generate: () => {
+      const p = pick([10, 20, 25, 30, 40, 50]);
+      const P = pasEntier(p) * randomInt(Math.ceil(12 / pasEntier(p)), Math.floor(240 / pasEntier(p)));
+      const remise = (p * P) / 100;
+      const nouveau = P - remise;
+      const article = pick(["un jean", "une paire de baskets", "un sac à dos", "une trottinette", "un jeu vidéo", "un casque audio", "une lampe de bureau"]);
+      return {
+        text: `Pendant les soldes, ${article} à ${P} € est affiché « −${p} % ». Quel est son nouveau prix ?`,
+        format: "qcm",
+        choices: choixQcm(`${nouveau} €`, [`${remise} €`, ...(P - p > 0 ? [`${P - p} €`] : []), `${P + remise} €`]),
+        expected: [`${nouveau} €`],
+        comparator: "mcq_exact",
+        explanation: expl(
+          `La remise vaut ${p} % de ${P} € : ${methodePourcentage(p, P)} On retire la remise : ${P} − ${remise} = ${nouveau} €. ` +
+            `Piège : on n’enlève pas ${p} €, et ${remise} € est la remise, pas le prix.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "pourcentage_defi_tpl_reste",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "pourcentage_nombre",
+    microId: "pourcentage_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Quel pourcentage reste-t-il pour le dernier groupe ? Le total fait 100 %.",
+    tags: ["pourcentage_nombre", "defi", "template", "deux_etapes"],
+    generate: () => {
+      const N = pick([20, 40, 60, 80, 120, 140, 160, 200, 240, 300]);
+      const p1 = 5 * randomInt(2, 12);
+      const p2 = 5 * randomInt(1, Math.min(12, 18 - p1 / 5));
+      const q = 100 - p1 - p2;
+      const r = (q * N) / 100;
+      const s = pick([
+        `Dans un collège de ${N} élèves, ${p1} % viennent à pied et ${p2} % en bus. Les autres viennent en voiture. Combien d’élèves viennent en voiture ?`,
+        `Un verger compte ${N} arbres : ${p1} % de pommiers, ${p2} % de poiriers et le reste de cerisiers. Combien y a-t-il de cerisiers ?`,
+        `Parmi ${N} spectateurs, ${p1} % ont moins de 18 ans et ${p2} % ont plus de 60 ans. Combien de spectateurs ont entre 18 et 60 ans ?`,
+        `On a interrogé ${N} personnes : ${p1} % ont répondu « oui », ${p2} % « non » et les autres sont sans avis. Combien de personnes sont sans avis ?`,
+      ]);
+      return {
+        text: s,
+        format: "short",
+        expected: [String(r)],
+        comparator: "number_equal",
+        explanation: expl(
+          `Le dernier groupe représente 100 − ${p1} − ${p2} = ${q} % du total. ${q} % de ${N} = ${N} × ${q} ÷ 100 = ${r}. ` +
+            `(On peut aussi calculer les deux premiers groupes, ${(p1 * N) / 100} et ${(p2 * N) / 100}, puis les retirer de ${N}.)`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "pourcentage_defi_qcm_tpl_comparer",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "pourcentage_nombre",
+    microId: "pourcentage_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Un grand pourcentage d’un petit nombre peut être plus petit qu’un petit pourcentage d’un grand nombre : calcule les deux.",
+    tags: ["pourcentage_nombre", "defi", "qcm", "template", "comparaison"],
+    generate: () => {
+      // Deux fois sur trois, on garde un tirage où le PLUS GRAND pourcentage
+      // ne donne PAS le plus grand nombre (ou l'égalité) : c'est là qu'est le défi.
+      const contreIntuitif = Math.random() < 2 / 3;
+      let p1 = 0, p2 = 0, n1 = 0, n2 = 0, r1 = 0, r2 = 0;
+      for (let essai = 0; essai < 100; essai++) {
+        p1 = pick([10, 20, 25, 50, 75]);
+        p2 = pick([10, 20, 25, 50, 75].filter((x) => x !== p1));
+        n1 = 20 * randomInt(1, 15);
+        n2 = 20 * randomInt(1, 15);
+        r1 = (p1 * n1) / 100;
+        r2 = (p2 * n2) / 100;
+        const piege = r1 === r2 || (p1 > p2) !== (r1 > r2);
+        if (piege === contreIntuitif) break;
+      }
+      const c1 = `${p1} % de ${n1}`;
+      const c2 = `${p2} % de ${n2}`;
+      const egaux = "ils sont égaux";
+      const bonne = r1 === r2 ? egaux : r1 > r2 ? c1 : c2;
+      return {
+        text: `Quel nombre est le plus grand : ${c1} ou ${c2} ?`,
+        format: "qcm",
+        choices: shuffle([c1, c2, egaux]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: expl(
+          `${methodePourcentage(p1, n1)} ${methodePourcentage(p2, n2)} ` +
+            (r1 === r2 ? `Les deux valent ${r1} : ils sont égaux.` : `Donc ${bonne} est le plus grand (${Math.max(r1, r2)} contre ${Math.min(r1, r2)}).`) +
+            " Le plus grand pourcentage ne donne pas forcément le plus grand nombre.",
+        ),
+      };
+    },
+  },
 ];

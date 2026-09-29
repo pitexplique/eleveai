@@ -44,7 +44,13 @@ export default function AngleCanvas({ figure }: Props) {
   const leftX = cx + radius * Math.cos(-angleRad);
   const leftY = cy + radius * Math.sin(-angleRad);
 
-  const arcRadius = 42;
+  // Sur le rapporteur double, la graduation intérieure occupe le rayon ~48 :
+  // l'arc de l'angle rentre à 30 pour ne pas la barrer.
+  const arcRadius =
+    figure.angle?.display?.showProtractor &&
+    figure.angle?.display?.protractorScale === "double"
+      ? 30
+      : 42;
 
   const arcStartX = cx + arcRadius;
   const arcStartY = cy;
@@ -75,6 +81,7 @@ export default function AngleCanvas({ figure }: Props) {
   // `protractorStep` allume le geste dont parle la carte.
   const showProtractor = figure.angle?.display?.showProtractor ?? false;
   const step = figure.angle?.display?.protractorStep;
+  const double = figure.angle?.display?.protractorScale === "double";
   const rRapporteur = Math.min(radius + 22, height - 40, width / 2 - 12);
   const pointSur = (deg: number, r: number) => ({
     x: cx + r * Math.cos((-deg * Math.PI) / 180),
@@ -174,6 +181,22 @@ export default function AngleCanvas({ figure }: Props) {
                     stroke={allume ? "#dc2626" : "#0284c7"}
                     strokeWidth={allume ? 3 : majeur ? 1.6 : 1}
                   />
+                  {/* Graduation intérieure du rapporteur double : 180 − deg,
+                      plus petite et d'une autre couleur, comme sur l'instrument.
+                      ⚠️ À rRapporteur − 52, « 150 » touchait le « 30 » extérieur
+                      (mesuré) : − 56 les sépare à toutes les graduations. */}
+                  {majeur && double ? (
+                    <text
+                      x={pointSur(deg, rRapporteur - 56).x}
+                      y={pointSur(deg, rRapporteur - 56).y + 4}
+                      textAnchor="middle"
+                      fontSize="11"
+                      fontWeight="700"
+                      fill="#b45309"
+                    >
+                      {180 - deg}
+                    </text>
+                  ) : null}
                   {majeur ? (
                     <text
                       x={t.x}

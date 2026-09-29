@@ -1,7 +1,76 @@
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4, AngleCanvasData, DroitesCanvasData } from "@/lib/tutor-v4/types";
 
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
+}
+
+function pick<T>(arr: readonly T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function randomInt(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Des noms de points variés : l'angle n'est pas toujours AOB. Pas de O (pris
+// pour le zéro) ni de Q (trop proche du O à l'écran).
+const LETTRES = "ABCDEFGHIJKLMNPRSTUVWXYZ".split("");
+function lettres(k: number): string[] {
+  return shuffle(LETTRES).slice(0, k);
+}
+
+type NatureAngle = "nul" | "aigu" | "droit" | "obtus" | "plat" | "plein";
+
+function natureAngle(v: number): NatureAngle {
+  if (v === 0) return "nul";
+  if (v < 90) return "aigu";
+  if (v === 90) return "droit";
+  if (v < 180) return "obtus";
+  if (v === 180) return "plat";
+  return "plein";
+}
+
+/**
+ * Plusieurs demi-droites de même origine, chacune à sa direction (en degrés,
+ * sens inverse des aiguilles d'une montre, 0 vers la droite). Le canvas
+ * `angle` ne sait dessiner qu'un angle ; `droites` en pose plusieurs au même
+ * sommet — angles adjacents, supplémentaires, opposés par le sommet.
+ */
+function figureRayons(sommet: string, rayons: Array<{ nom: string; deg: number }>): DroitesCanvasData {
+  const O = { x: 170, y: 130 };
+  const L = 105;
+  const rad = (d: number) => (d * Math.PI) / 180;
+  const bout = (d: number) => ({
+    x: Math.round(O.x + L * Math.cos(rad(d))),
+    y: Math.round(O.y - L * Math.sin(rad(d))),
+  });
+  return {
+    kind: "droites",
+    size: { width: 340, height: 260 },
+    lines: rayons.map((r) => ({ id: `${sommet}${r.nom}`, type: "demi_droite" as const, from: O, to: bout(r.deg) })),
+    points: [
+      { x: O.x, y: O.y, label: sommet, highlight: true },
+      ...rayons.map((r) => ({ ...bout(r.deg), label: r.nom })),
+    ],
+    display: { showLabels: true, showPoints: true },
+  };
+}
+
+/** Un angle posé sur son rapporteur, sans la mesure écrite : c'est à l'élève de la lire. */
+function angleAuRapporteur(
+  deg: number,
+  noms: { sommet: string; gauche: string; droite: string },
+  echelle: "simple" | "double" = "simple",
+): AngleCanvasData {
+  return {
+    kind: "angle",
+    size: { width: 320, height: 240 },
+    angle: {
+      angleDeg: deg,
+      labels: { vertex: noms.sommet, left: noms.gauche, right: noms.droite },
+      display: { showLabels: true, showMeasure: false, showArc: true, showProtractor: true, protractorScale: echelle },
+    },
+  };
 }
 
 function expl(calcul: string) {
@@ -1635,5 +1704,237 @@ export const anglesBank: TutorBankItemV4[] = [
     hint: "Les deux angles ont pour somme 180°.",
     explanation: expl("Les deux angles forment un angle plat de 180°. L’autre angle vaut donc 180 - 110 = 70°."),
     tags: ["angle_mesure", "defi"],
+  },
+
+  // =========================
+  // GÉNÉRATEURS DU 29/09/2026 — L'ÉVALUATION PAR CHAPITRES
+  //
+  // Le mode Défi (difficultés 3 à 5) n'offrait que 15 questions distinctes sur
+  // « Angles ». Six générateurs, qui couvrent aussi le lexique du programme de
+  // 6e resté sans question : angle nul, angle plein, angles adjacents,
+  // supplémentaires, opposés par le sommet. Les noms des points changent à
+  // chaque tirage.
+  // =========================
+  {
+    kind: "template",
+    id: "angle_reconnaitre_qcm_tpl_nature",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare la mesure à 0°, 90°, 180° et 360°.",
+    tags: ["angle_mesure", "reconnaitre", "qcm", "template", "vocabulaire"],
+    generate: () => {
+      const v =
+        Math.random() < 0.25
+          ? pick([0, 90, 180, 360])
+          : pick(Array.from({ length: 35 }, (_, i) => 5 * (i + 1)).filter((x) => x !== 90));
+      const nature = natureAngle(v);
+      const voisins: Record<NatureAngle, NatureAngle[]> = {
+        nul: ["aigu", "plat", "plein"],
+        aigu: ["droit", "obtus", "plat"],
+        droit: ["aigu", "obtus", "plat"],
+        obtus: ["aigu", "droit", "plat"],
+        plat: ["obtus", "droit", "plein"],
+        plein: ["plat", "nul", "obtus"],
+      };
+      const regle: Record<NatureAngle, string> = {
+        nul: "Un angle de 0° a ses deux côtés confondus : c’est un angle nul.",
+        aigu: `${v}° est compris entre 0° et 90° : c’est un angle aigu.`,
+        droit: "Un angle de 90° est un angle droit.",
+        obtus: `${v}° est compris entre 90° et 180° : c’est un angle obtus.`,
+        plat: "Un angle de 180° a ses deux côtés alignés, dans des sens opposés : c’est un angle plat.",
+        plein: "Un angle de 360° fait un tour complet : c’est un angle plein.",
+      };
+      return {
+        text: `Un angle mesure ${v}°. Comment l’appelle-t-on ?`,
+        format: "qcm",
+        choices: shuffle([nature, ...voisins[nature]].map((n) => `un angle ${n}`)),
+        expected: [`un angle ${nature}`],
+        comparator: "mcq_exact",
+        explanation: expl(regle[nature]),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "angle_mesurer_qcm_tpl_rapporteur",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_mesurer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Avant de lire, regarde si l’angle est aigu ou obtus : cela élimine une mauvaise lecture.",
+    tags: ["angle_mesure", "mesure", "qcm", "template", "canvas", "rapporteur"],
+    generate: () => {
+      const v = 10 * randomInt(2, 16);
+      const [gauche, sommet, droite] = lettres(3);
+      const autre = v === 90 ? 110 : 180 - v;
+      // ⭐ 29/09 : une fois sur deux, le rapporteur de classe à DEUX graduations.
+      const double = Math.random() < 0.5;
+      return {
+        text: `Le rapporteur est posé sur l’angle ${gauche}${sommet}${droite}. Quelle est la mesure de cet angle ?`,
+        format: "qcm",
+        choices: shuffle([`${v}°`, `${autre}°`, `${v + 10}°`, `${v - 10}°`]),
+        expected: [`${v}°`],
+        comparator: "mcq_exact",
+        explanation: expl(
+          `Le centre du rapporteur est sur le sommet ${sommet} et le 0 sur le côté [${sommet}${droite}). ` +
+            (double
+              ? `Ce rapporteur a deux graduations : on lit celle dont le 0 est sur [${sommet}${droite}), la graduation extérieure. Le côté [${sommet}${gauche}) y passe par ${v}. `
+              : `Le côté [${sommet}${gauche}) passe par la graduation ${v}. `) +
+            (v === 90
+              ? "C’est un angle droit : 90°."
+              : `Vérification : l’angle est ${v < 90 ? "aigu, donc sa mesure est inférieure" : "obtus, donc sa mesure est supérieure"} à 90° — ce qui écarte ${180 - v}°, la lecture sur la mauvaise graduation.`),
+        ),
+        canvas: angleAuRapporteur(v, { sommet, gauche, droite }, double ? "double" : "simple"),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "angle_defi_tpl_supplementaires",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Trois points alignés forment un angle plat : 180°.",
+    tags: ["angle_mesure", "defi", "template", "canvas", "supplementaires"],
+    generate: () => {
+      const [X, O, Y, Z] = lettres(4);
+      const a = randomInt(15, 165);
+      const r = 180 - a;
+      return {
+        text: `Les points ${X}, ${O} et ${Z} sont alignés, et ${O} est entre ${X} et ${Z}. L’angle ${X}${O}${Y} mesure ${a}°. Combien mesure l’angle ${Y}${O}${Z} ?`,
+        format: "short",
+        expected: [String(r), `${r}°`],
+        comparator: "number_equal",
+        explanation: expl(
+          `L’angle ${X}${O}${Z} est plat : il mesure 180°. Les angles ${X}${O}${Y} et ${Y}${O}${Z} sont adjacents et le remplissent : ils sont supplémentaires. Donc ${Y}${O}${Z} = 180 − ${a} = ${r}°.`,
+        ),
+        canvas: figureRayons(O, [
+          { nom: Z, deg: 0 },
+          { nom: Y, deg: 180 - a },
+          { nom: X, deg: 180 },
+        ]),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "angle_defi_tpl_adjacents",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Les deux petits angles, côte à côte, forment le grand.",
+    tags: ["angle_mesure", "defi", "template", "canvas", "adjacents"],
+    generate: () => {
+      const [A, O, B, C] = lettres(4);
+      const T = randomInt(50, 170);
+      const a = randomInt(10, T - 10);
+      const r = T - a;
+      return {
+        text: `L’angle ${A}${O}${C} mesure ${T}°. La demi-droite [${O}${B}) est à l’intérieur de cet angle, et l’angle ${A}${O}${B} mesure ${a}°. Combien mesure l’angle ${B}${O}${C} ?`,
+        format: "short",
+        expected: [String(r), `${r}°`],
+        comparator: "number_equal",
+        explanation: expl(
+          `Les angles ${A}${O}${B} et ${B}${O}${C} sont adjacents : ensemble, ils forment l’angle ${A}${O}${C}. Donc ${B}${O}${C} = ${T} − ${a} = ${r}°.`,
+        ),
+        canvas: figureRayons(O, [
+          { nom: C, deg: 0 },
+          { nom: B, deg: r },
+          { nom: A, deg: T },
+        ]),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "angle_defi_tpl_opposes_par_le_sommet",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Deux angles opposés par le sommet ont la même mesure ; deux angles côte à côte sur une droite font 180°.",
+    tags: ["angle_mesure", "defi", "template", "canvas", "opposes_par_le_sommet"],
+    generate: () => {
+      const [A, B, C, D, O] = lettres(5);
+      let a = randomInt(20, 160);
+      if (a === 90) a = 70;
+      const cas = pick([
+        {
+          angle: `${B}${O}${D}`,
+          r: a,
+          pourquoi: `Les angles ${A}${O}${C} et ${B}${O}${D} sont opposés par le sommet : ils ont la même mesure, ${a}°.`,
+        },
+        {
+          angle: `${C}${O}${B}`,
+          r: 180 - a,
+          pourquoi: `${A}, ${O} et ${B} sont alignés : l’angle ${A}${O}${B} est plat. Les angles ${A}${O}${C} et ${C}${O}${B} sont donc supplémentaires : 180 − ${a} = ${180 - a}°.`,
+        },
+        {
+          angle: `${A}${O}${D}`,
+          r: 180 - a,
+          pourquoi: `${C}, ${O} et ${D} sont alignés : l’angle ${C}${O}${D} est plat. Les angles ${A}${O}${C} et ${A}${O}${D} sont donc supplémentaires : 180 − ${a} = ${180 - a}°.`,
+        },
+      ]);
+      return {
+        text: `Les droites (${A}${B}) et (${C}${D}) se coupent en ${O}. L’angle ${A}${O}${C} mesure ${a}°. Combien mesure l’angle ${cas.angle} ?`,
+        format: "short",
+        expected: [String(cas.r), `${cas.r}°`],
+        comparator: "number_equal",
+        explanation: expl(cas.pourquoi),
+        canvas: figureRayons(O, [
+          { nom: A, deg: 0 },
+          { nom: C, deg: a },
+          { nom: B, deg: 180 },
+          { nom: D, deg: 180 + a },
+        ]),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "angle_defi_tpl_angle_plein",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "angle_mesure",
+    microId: "angle_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Un tour complet, c’est un angle plein : 360°.",
+    tags: ["angle_mesure", "defi", "template", "canvas", "angle_plein"],
+    generate: () => {
+      const [O, P, R, S] = lettres(4);
+      // Trois angles saillants (moins de 180° chacun) qui font le tour.
+      const a = randomInt(60, 170);
+      const b = randomInt(Math.max(60, 185 - a), Math.min(170, 300 - a));
+      const c = 360 - a - b;
+      return {
+        text: `Autour du point ${O}, les trois angles ${P}${O}${R}, ${R}${O}${S} et ${S}${O}${P} font un tour complet. L’angle ${P}${O}${R} mesure ${a}° et l’angle ${R}${O}${S} mesure ${b}°. Combien mesure l’angle ${S}${O}${P} ?`,
+        format: "short",
+        expected: [String(c), `${c}°`],
+        comparator: "number_equal",
+        explanation: expl(
+          `Un tour complet est un angle plein : 360°. Donc ${S}${O}${P} = 360 − ${a} − ${b} = ${c}°.`,
+        ),
+        canvas: figureRayons(O, [
+          { nom: P, deg: 0 },
+          { nom: R, deg: a },
+          { nom: S, deg: a + b },
+        ]),
+      };
+    },
   },
 ];

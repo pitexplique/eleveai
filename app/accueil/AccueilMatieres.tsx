@@ -661,12 +661,25 @@ function PanneauEvaluation({ matiere }: { matiere: MatiereAccueil }) {
   return (
     <div className="grid gap-3 sm:grid-cols-2">
       {parcours ? (
-        <Carte
-          href={`${parcours}?from=accueil`}
-          titre={`Évaluation annuelle — ${enMatiere}`}
-          texte="Une série qui balaie le programme de l'année et dit ce qui tient, et ce qui ne tient pas encore."
-          Icone={ClipboardCheck}
-        />
+        /* ⭐ 29/09/2026 — en maths, Frédéric : « mettre simplement Évaluation
+           suivant les chapitres ». La page /parcours laisse désormais cocher
+           les notions (un chapitre, plusieurs, ou tout), comme les
+           automatismes. Les autres matières gardent la série de l'année. */
+        examensMaths ? (
+          <Carte
+            href={`${parcours}?from=accueil`}
+            titre="Évaluation par chapitres"
+            texte="Choisis ta classe, coche un chapitre, plusieurs ou tout le programme : les questions viennent du coach, la correction suit."
+            Icone={ClipboardCheck}
+          />
+        ) : (
+          <Carte
+            href={`${parcours}?from=accueil`}
+            titre={`Évaluation annuelle — ${enMatiere}`}
+            texte="Une série qui balaie le programme de l'année et dit ce qui tient, et ce qui ne tient pas encore."
+            Icone={ClipboardCheck}
+          />
+        )
       ) : (
         <p className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600 sm:col-span-2">
           Pas encore d&rsquo;évaluation annuelle en {matiere.label}. Ce qui existe

@@ -817,6 +817,197 @@ export const proportionsEvolutionsBank: TutorBankItemV4[] = [
     },
   },
 
+  /* ═══════════ auto_evo_coefficient — mode DÉFI (29/09/2026) ═══════════
+   * L'évaluation par chapitres tire jusqu'à 20 questions en mode Défi
+   * (difficultés 3 à 5) : la notion n'en offrait que 10, toutes sur la TVA.
+   * Ce sont toujours des AUTOMATISMES, pas des problèmes : un seul geste,
+   * mais sur les taux qui piègent — petits taux (− 3 % n'est pas × 0,3),
+   * taux d'au moins 100 % (+ 150 % n'est pas × 1,5), taux à virgule — ou
+   * un geste à rebours (remonter à la valeur initiale après une HAUSSE). */
+
+  {
+    kind: "template",
+    id: "stmg_evo_diminution_tpl_piege",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_evo_coefficient",
+    microId: "auto_evo_diminution",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une baisse de $t\\,\\%$ laisse $100 - t$ pour cent : $-\\,3\\,\\%$ donne $\\times\\,0{,}97$, pas $\\times\\,0{,}03$.",
+    tags: ["stmg", "maths", "evolutions", "piege", "template", "short"],
+    generate: () => {
+      const t = pick([1, 2, 3, 4, 6, 7, 8, 9, 0.5, 1.5, 2.5, 7.5, 12.5, 35, 45, 65, 75, 85, 95] as const);
+      const coef = Math.round((1 - t / 100) * 10000) / 10000;
+      const grandeur = pick([
+        { phrase: "Le prix d'un abonnement baisse", mult: "est-il multiplié" },
+        { phrase: "La production d'une usine recule", mult: "est-elle multipliée" },
+        { phrase: "Le nombre de clients diminue", mult: "est-il multiplié" },
+        { phrase: "La fréquentation d'un musée chute", mult: "est-elle multipliée" },
+      ] as const);
+      const sens = Math.random() < 0.5;
+      if (sens) {
+        return {
+          text: `${grandeur.phrase} de $${fr(t)}\\,\\%$. Par quel nombre ${grandeur.mult} ?`,
+          format: "short",
+          expected: [fr(coef)],
+          comparator: "number_equal",
+          explanation: exp(
+            "Diminuer de $t\\,\\%$ revient à multiplier par $1 - \\dfrac{t}{100}$.",
+            "On retire le taux, écrit en décimal, à $1$.",
+            `$1 - \\dfrac{${fr(t)}}{100} = 1 - ${fr(t / 100)} = ${fr(coef)}$.`,
+            `Le coefficient est $${fr(coef)}$ — et non $${fr(t / 100)}$, qui est la part PERDUE.`
+          ),
+        };
+      }
+      return {
+        text: `Multiplier une quantité par $${fr(coef)}$ revient à la faire baisser de combien de pour cent ?`,
+        format: "short",
+        expected: [fr(t)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un coefficient $k < 1$ traduit une baisse de $(1 - k) \\times 100\\,\\%$.",
+          "On calcule l'écart entre $1$ et le coefficient, puis on le lit en pourcentage.",
+          `$1 - ${fr(coef)} = ${fr(t / 100)}$, soit $${fr(t)}\\,\\%$.`,
+          `C'est une baisse de $${fr(t)}\\,\\%$ — et non de $${fr(coef * 100)}\\,\\%$, qui est ce qui RESTE.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "stmg_evo_additif_tpl_piege",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_evo_coefficient",
+    microId: "auto_evo_additif_multiplicatif",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une hausse de $t\\,\\%$ donne le coefficient $1 + \\dfrac{t}{100}$, même quand $t$ dépasse $100$.",
+    tags: ["stmg", "maths", "evolutions", "piege", "template", "short"],
+    generate: () => {
+      const t = pick([1, 2, 3, 0.5, 1.5, 2.5, 4.5, 12.5, 100, 110, 120, 150, 200, 250, 300, 400] as const);
+      const coef = Math.round((1 + t / 100) * 10000) / 10000;
+      const grandeur = pick([
+        "Le nombre d'abonnés d'une chaîne",
+        "Le chiffre d'affaires d'une start-up",
+        "Le prix d'une matière première",
+        "Le nombre de commandes en ligne",
+      ] as const);
+      const sens = Math.random() < 0.5;
+      if (sens) {
+        return {
+          text: `${grandeur} augmente de $${fr(t)}\\,\\%$. Par quel nombre est-il multiplié ?`,
+          format: "short",
+          expected: [fr(coef)],
+          comparator: "number_equal",
+          explanation: exp(
+            "Augmenter de $t\\,\\%$ revient à multiplier par $1 + \\dfrac{t}{100}$.",
+            "On garde le tout ($1$) et on ajoute le taux écrit en décimal.",
+            `$1 + \\dfrac{${fr(t)}}{100} = 1 + ${fr(t / 100)} = ${fr(coef)}$.`,
+            t >= 100
+              ? `Il est multiplié par $${fr(coef)}$. Une hausse de $100\\,\\%$ DOUBLE déjà : au-delà, le coefficient dépasse $2$.`
+              : `Il est multiplié par $${fr(coef)}$ — une petite hausse donne un coefficient tout proche de $1$.`
+          ),
+        };
+      }
+      return {
+        text: `${grandeur} a été multiplié par $${fr(coef)}$. De combien de pour cent a-t-il augmenté ?`,
+        format: "short",
+        expected: [fr(t)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un coefficient $k > 1$ correspond à une hausse de $(k - 1) \\times 100\\,\\%$.",
+          "On retire $1$ au coefficient — la valeur de départ —, puis on lit le reste en pourcentage.",
+          `$${fr(coef)} - 1 = ${fr(t / 100)}$, soit $${fr(t)}\\,\\%$.`,
+          `La hausse est de $${fr(t)}\\,\\%$ — et non de $${fr(coef * 100)}\\,\\%$ : on oublierait de retirer le point de départ.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "stmg_evo_finale_tpl_taux_fin",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_evo_coefficient",
+    microId: "auto_evo_valeur_finale",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Valeur finale $=$ valeur initiale $\\times$ coefficient ; avec un petit taux, le coefficient est proche de $1$.",
+    tags: ["stmg", "maths", "evolutions", "template", "short"],
+    generate: () => {
+      const situation = pick([
+        { phrase: "Un loyer mensuel", unite: "€" },
+        { phrase: "Le salaire brut mensuel d'une employée", unite: "€" },
+        { phrase: "Le budget publicité d'une entreprise", unite: "€" },
+        { phrase: "Le prix d'un ordinateur portable", unite: "€" },
+      ] as const);
+      const v = pick([200, 300, 400, 500, 600, 800, 1000, 1200, 1500, 1800, 2000] as const);
+      const t = pick([2, 3, 4, 6, 7, 12, 0.5, 1.5, 2.5] as const);
+      const hausse = Math.random() < 0.5;
+      const coef = Math.round((hausse ? 1 + t / 100 : 1 - t / 100) * 10000) / 10000;
+      const finale = Math.round(v * coef * 100) / 100;
+      return {
+        text:
+          `${situation.phrase} vaut $${v}$ ${situation.unite}. Il ${hausse ? "augmente" : "baisse"} de $${fr(t)}\\,\\%$. ` +
+          `Quelle est sa nouvelle valeur, en ${situation.unite} ?`,
+        format: "short",
+        expected: [fr(finale)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Appliquer une évolution, c'est multiplier par le coefficient multiplicateur.",
+          `${hausse ? "Une hausse" : "Une baisse"} de $${fr(t)}\\,\\%$ donne le coefficient $1 ${hausse ? "+" : "-"} ${fr(t / 100)} = ${fr(coef)}$.`,
+          `$${v} \\times ${fr(coef)} = ${fr(finale)}$.`,
+          `La nouvelle valeur est $${fr(finale)}$ ${situation.unite}.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "stmg_evo_initiale_tpl_apres_hausse",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_evo_coefficient",
+    microId: "auto_evo_valeur_initiale",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On connaît la valeur APRÈS l'évolution : on divise par le coefficient, on ne retire pas le pourcentage.",
+    tags: ["stmg", "maths", "evolutions", "piege", "template", "short"],
+    generate: () => {
+      const situation = pick([
+        { avant: "Après une hausse", apres: "un abonnement annuel coûte", question: "son prix avant la hausse", echelle: 1 },
+        { avant: "Après une augmentation", apres: "le chiffre d'affaires mensuel d'un salon de coiffure atteint", question: "le chiffre d'affaires avant l'augmentation", echelle: 100 },
+        { avant: "Après une baisse", apres: "un vélo est vendu", question: "son prix avant la baisse", echelle: 2 },
+        { avant: "Après une diminution", apres: "la facture d'énergie annuelle d'un restaurant s'élève à", question: "la facture avant la diminution", echelle: 10 },
+      ] as const);
+      const hausse = situation.avant.includes("hausse") || situation.avant.includes("augmentation");
+      const t = pick([4, 5, 10, 15, 20, 25, 30, 40, 50] as const);
+      const initiale = situation.echelle * pick([40, 80, 120, 160, 200, 240, 400, 600, 800] as const);
+      const coef = Math.round((hausse ? 1 + t / 100 : 1 - t / 100) * 10000) / 10000;
+      const finale = Math.round(initiale * coef * 100) / 100;
+      const piege = Math.round(finale * (hausse ? 1 - t / 100 : 1 + t / 100) * 100) / 100;
+      return {
+        text:
+          `${situation.avant} de $${t}\\,\\%$, ${situation.apres} $${fr(finale)}$ €. ` +
+          `Quel était ${situation.question}, en € ?`,
+        format: "short",
+        expected: [fr(initiale)],
+        comparator: "number_equal",
+        explanation: exp(
+          "$V_f = V_i \\times k$, donc $V_i = \\dfrac{V_f}{k}$.",
+          `On divise par le coefficient $k = ${fr(coef)}$. ⚠️ ${hausse ? "Retirer" : "Ajouter"} $${t}\\,\\%$ à $${fr(finale)}$ donnerait $${fr(piege)}$ : le pourcentage porte sur l'ANCIENNE valeur, pas sur la nouvelle.`,
+          `$\\dfrac{${fr(finale)}}{${fr(coef)}} = ${fr(initiale)}$.`,
+          `La valeur initiale était de $${fr(initiale)}$ €.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ auto_evo_absolue_relative ═══════════════════ */
 
   {

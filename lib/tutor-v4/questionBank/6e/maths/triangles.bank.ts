@@ -1,4 +1,4 @@
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4, TriangleCanvasData } from "@/lib/tutor-v4/types";
 
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
@@ -6,6 +6,29 @@ function shuffle<T>(arr: T[]): T[] {
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function pick<T>(arr: readonly T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+// Des noms de sommets variés — le triangle n'est pas toujours ABC. Sans O ni Q,
+// trop proches à l'écran. Rangés dans l'ordre alphabétique pour le NOM du
+// triangle (« triangle DKR »), comme on l'écrit en classe.
+const LETTRES = "ABCDEFGHIJKLMNPRSTUVWXYZ".split("");
+function sommetsTriangle(): [string, string, string] {
+  const [x, y, z] = shuffle(LETTRES).slice(0, 3).sort();
+  return [x, y, z];
+}
+
+/** Un segment nommé avec ses extrémités dans l'ordre alphabétique : [DK], pas [KD]. */
+function seg(p: string, q: string) {
+  return `[${[p, q].sort().join("")}]`;
+}
+
+/** Longueur d'un côté, sans les crochets : DK. */
+function lg(p: string, q: string) {
+  return [p, q].sort().join("");
 }
 
 function expl(calcul: string) {
@@ -2402,6 +2425,236 @@ export const trianglesBank: TutorBankItemV4[] = [
           "Calcul : " +
           c.reponse +
           "\n\nConclusion : on garde la réponse obtenue.",
+      };
+    },
+  },
+
+  // =========================
+  // GÉNÉRATEURS DU 29/09/2026 — L'ÉVALUATION PAR CHAPITRES
+  //
+  // Le mode Défi (difficultés 3 à 5) n'offrait que 7 questions distinctes sur
+  // « Triangles : reconnaître et nommer ». Six générateurs : les noms des
+  // sommets changent à chaque tirage, et les questions exigeantes font
+  // TRAVAILLER la définition (isocèle EN un sommet, périmètre d'un triangle
+  // particulier) au lieu de la réciter.
+  // =========================
+  {
+    kind: "template",
+    id: "triangle_sommet_cote_qcm_tpl_oppose",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_sommet_cote",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le côté opposé à un sommet est le seul côté qui ne passe pas par ce sommet.",
+    tags: ["triangle_figure", "sommet_cote", "qcm", "template"],
+    generate: () => {
+      const [X, Y, Z] = sommetsTriangle();
+      const nom = `${X}${Y}${Z}`;
+      const trio = shuffle([X, Y, Z]);
+      const S = trio[0];
+      const [U, V] = [trio[1], trio[2]];
+      if (Math.random() < 0.5) {
+        return {
+          text: `Dans le triangle ${nom}, quel est le côté opposé au sommet ${S} ?`,
+          format: "qcm",
+          choices: shuffle([seg(U, V), seg(S, U), seg(S, V)]),
+          expected: [seg(U, V)],
+          comparator: "mcq_exact",
+          explanation: expl(`Les côtés ${seg(S, U)} et ${seg(S, V)} partent de ${S}. Le seul côté qui ne touche pas ${S} est ${seg(U, V)} : c’est le côté opposé à ${S}.`),
+        };
+      }
+      return {
+        text: `Dans le triangle ${nom}, quel sommet est opposé au côté ${seg(U, V)} ?`,
+        format: "qcm",
+        choices: shuffle([S, U, V]),
+        expected: [S],
+        comparator: "mcq_exact",
+        explanation: expl(`${U} et ${V} sont les extrémités du côté ${seg(U, V)}. Le sommet qui lui fait face est le troisième : ${S}.`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "triangle_type_cote_qcm_tpl_isocele_en",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_type_cote",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Repère les deux côtés égaux : quel sommet ont-ils en commun ?",
+    tags: ["triangle_figure", "type_cote", "qcm", "template", "isocele"],
+    generate: () => {
+      const [X, Y, Z] = sommetsTriangle();
+      const trio = shuffle([X, Y, Z]);
+      const S = trio[0];
+      const [U, V] = [trio[1], trio[2]];
+      const a = randomInt(3, 12);
+      let b = randomInt(2, 2 * a - 1);
+      if (b === a) b = a + 1;
+      const mesures = shuffle([
+        `${lg(S, U)} = ${a} cm`,
+        `${lg(S, V)} = ${a} cm`,
+        `${lg(U, V)} = ${b} cm`,
+      ]);
+      return {
+        text: `Dans le triangle ${X}${Y}${Z}, ${mesures[0]}, ${mesures[1]} et ${mesures[2]}. Ce triangle est isocèle : en quel sommet ?`,
+        format: "qcm",
+        choices: shuffle([X, Y, Z]),
+        expected: [S],
+        comparator: "mcq_exact",
+        explanation: expl(
+          `Les deux côtés égaux sont ${seg(S, U)} et ${seg(S, V)} (${a} cm chacun). Ils ont le sommet ${S} en commun : le triangle est isocèle en ${S}, et ${seg(U, V)} est sa base.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "triangle_type_cote_tpl_equilateral_perimetre",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_type_cote",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Dans un triangle équilatéral, les trois côtés ont la même longueur.",
+    tags: ["triangle_figure", "type_cote", "template", "equilateral", "perimetre"],
+    generate: () => {
+      const [X, Y, Z] = sommetsTriangle();
+      const c = randomInt(2, 30);
+      const P = 3 * c;
+      const [p, q] = shuffle([X, Y, Z]);
+      return {
+        text: `Le triangle ${X}${Y}${Z} est équilatéral et son périmètre mesure ${P} cm. Combien mesure le côté ${seg(p, q)} ?`,
+        format: "short",
+        expected: [String(c), `${c} cm`],
+        comparator: "number_equal",
+        explanation: expl(`Équilatéral : ses trois côtés sont égaux. Le périmètre est la somme des trois : chaque côté mesure ${P} ÷ 3 = ${c} cm.`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "triangle_type_cote_tpl_isocele_perimetre",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_type_cote",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "« Isocèle en X » : les deux côtés qui partent de X sont égaux.",
+    tags: ["triangle_figure", "type_cote", "template", "isocele", "perimetre"],
+    generate: () => {
+      const [X, Y, Z] = sommetsTriangle();
+      const [S, U, V] = shuffle([X, Y, Z]);
+      const a = randomInt(3, 15);
+      let b = randomInt(2, 2 * a - 1);
+      if (b === a) b = a + 1;
+      const P = 2 * a + b;
+      return {
+        text: `Le triangle ${X}${Y}${Z} est isocèle en ${S}. On sait que ${lg(S, U)} = ${a} cm et ${lg(U, V)} = ${b} cm. Quel est son périmètre ?`,
+        format: "short",
+        expected: [String(P), `${P} cm`],
+        comparator: "number_equal",
+        explanation: expl(
+          `Isocèle en ${S} : les côtés ${seg(S, U)} et ${seg(S, V)} sont égaux, donc ${lg(S, V)} = ${a} cm aussi. Périmètre : ${a} + ${a} + ${b} = ${P} cm.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "triangle_defi_tpl_isocele_cote_manquant",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Retire la base du périmètre : il reste les deux côtés égaux.",
+    tags: ["triangle_figure", "defi", "template", "isocele", "perimetre"],
+    generate: () => {
+      const [X, Y, Z] = sommetsTriangle();
+      const [S, U, V] = shuffle([X, Y, Z]);
+      const a = randomInt(3, 20);
+      let b = randomInt(2, 2 * a - 1);
+      if (b === a) b = a + 1;
+      const P = 2 * a + b;
+      const demande = pick([U, V]);
+      return {
+        text: `Le triangle ${X}${Y}${Z} est isocèle en ${S}. Son périmètre mesure ${P} cm et ${lg(U, V)} = ${b} cm. Combien mesure ${lg(S, demande)} ?`,
+        format: "short",
+        expected: [String(a), `${a} cm`],
+        comparator: "number_equal",
+        explanation: expl(
+          `Isocèle en ${S} : ${lg(S, U)} = ${lg(S, V)}. Sans la base ${seg(U, V)}, il reste ${P} − ${b} = ${2 * a} cm pour ces deux côtés égaux, donc chacun mesure ${2 * a} ÷ 2 = ${a} cm.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "triangle_defi_qcm_tpl_codages",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "triangle_figure",
+    microId: "triangle_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Lis TOUS les codages : le petit carré (angle droit) et les petits traits (côtés égaux).",
+    tags: ["triangle_figure", "defi", "qcm", "template", "canvas", "codage"],
+    generate: () => {
+      const [X, Y, Z] = sommetsTriangle();
+      // Le sommet particulier (angle droit, sommet principal) est le point A du
+      // dessin ; on lui donne un nom au hasard parmi les trois.
+      const [nA, nB, nC] = shuffle([X, Y, Z]);
+      const cas = pick([
+        {
+          rep: "rectangle",
+          points: { A: { x: 70, y: 200 }, B: { x: 265, y: 200 }, C: { x: 70, y: 85 } },
+          marks: { rightAngleAt: "A" as const },
+          pourquoi: `Un seul codage : l’angle droit en ${nA}. Aucun côté n’est codé égal : le triangle est rectangle en ${nA}.`,
+        },
+        {
+          rep: "isocèle",
+          points: { A: { x: 160, y: 50 }, B: { x: 70, y: 210 }, C: { x: 250, y: 210 } },
+          marks: { equalSides: [["AB", "CA"]] as Array<["AB" | "BC" | "CA", "AB" | "BC" | "CA"]> },
+          pourquoi: `Deux côtés portent le même codage, ${seg(nA, nB)} et ${seg(nA, nC)}, et il n’y a pas d’angle droit : le triangle est isocèle en ${nA}.`,
+        },
+        {
+          rep: "équilatéral",
+          points: { A: { x: 160, y: 54 }, B: { x: 70, y: 210 }, C: { x: 250, y: 210 } },
+          marks: { equalSides: [["AB", "BC"], ["BC", "CA"]] as Array<["AB" | "BC" | "CA", "AB" | "BC" | "CA"]> },
+          pourquoi: "Les trois côtés portent le même codage : le triangle est équilatéral (il est aussi isocèle, mais « équilatéral » est plus précis).",
+        },
+        {
+          rep: "rectangle isocèle",
+          points: { A: { x: 85, y: 200 }, B: { x: 235, y: 200 }, C: { x: 85, y: 50 } },
+          marks: {
+            rightAngleAt: "A" as const,
+            equalSides: [["AB", "CA"]] as Array<["AB" | "BC" | "CA", "AB" | "BC" | "CA"]>,
+          },
+          pourquoi: `Il y a un angle droit en ${nA} ET deux côtés égaux, ${seg(nA, nB)} et ${seg(nA, nC)} : le triangle est rectangle isocèle en ${nA}. Dire seulement « rectangle » ou « isocèle » oublie un des deux codages.`,
+        },
+      ]);
+      const canvas: TriangleCanvasData = {
+        kind: "triangle",
+        points: cas.points,
+        labels: { A: nA, B: nB, C: nC },
+        display: { showPoints: true, showLabels: true },
+        marks: cas.marks,
+      };
+      return {
+        text: `Observe les codages du triangle ${X}${Y}${Z}. Quelle est sa nature la plus précise ?`,
+        format: "qcm",
+        choices: shuffle(["rectangle", "isocèle", "équilatéral", "rectangle isocèle"]),
+        expected: [cas.rep],
+        comparator: "mcq_exact",
+        explanation: expl(cas.pourquoi),
+        canvas,
       };
     },
   },

@@ -81,6 +81,22 @@ function tangente(b: number, c: number, a: number): CanvasFigure {
   };
 }
 
+/** Équation réduite $y = mx + p$, écrite proprement (pas de « 1x », pas de « + -3 »). */
+function eqReduite(m: number, p: number): string {
+  if (m === 0) return `y = ${p}`;
+  const mx = m === 1 ? "x" : m === -1 ? "-x" : `${m}x`;
+  if (p === 0) return `y = ${mx}`;
+  return `y = ${mx} ${p > 0 ? "+" : "-"} ${Math.abs(p)}`;
+}
+
+/** Polynôme $k x^n + bx + c$ (n = 2 ou 3), termes nuls omis. */
+function polyTex(k: number, n: 2 | 3, b: number, c: number): string {
+  const tete = `${k === 1 ? "" : k === -1 ? "-" : k}x^${n}`;
+  const tb = b === 0 ? "" : ` ${b > 0 ? "+" : "-"} ${Math.abs(b) === 1 ? "" : Math.abs(b)}x`;
+  const tc = c === 0 ? "" : ` ${c > 0 ? "+" : "-"} ${Math.abs(c)}`;
+  return `${tete}${tb}${tc}`;
+}
+
 export const derivationBank: TutorBankItemV4[] = [
   /* ===================== DER_TAUX ===================== */
   {
@@ -1347,6 +1363,157 @@ export const derivationBank: TutorBankItemV4[] = [
           `$f(${a}) = ${fa}$ et $f'(${a}) = ${pente}$ : $y = ${pente}(x - ${a}) + ${fa}$.`,
           `$y = ${pente}x ${ord >= 0 ? "+ " + ord : "- " + -ord}$.`,
           `${correct}.`
+        ),
+      };
+    },
+  },
+
+  /*
+   * ⭐ GÉNÉRATEURS DE RÉVISION (29/09/2026). L'évaluation par chapitres tire
+   * jusqu'à 20 questions sur la seule notion « tangente » en mode Révision
+   * (difficultés 1 à 3) : il n'y en avait que 11 distinctes. Quatre gestes
+   * de base, chacun paramétré — lire la pente dans une équation, retrouver
+   * le point de contact, calculer une pente, lire une pente sur la figure.
+   */
+  {
+    kind: "template",
+    id: "premiere_der_tan_tpl_pente_dans_equation",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation_tangente",
+    microId: "der_tangente",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Dans $y = mx + p$, le nombre dérivé $f'(a)$ est le coefficient directeur $m$.",
+    tags: ["premiere", "maths", "derivation", "tangente", "template", "short"],
+    generate: () => {
+      const a = pickOne([-3, -2, -1, 1, 2, 3, 4] as const);
+      const m = pickOne([-6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6] as const);
+      const p = pickOne([-8, -7, -5, -4, -3, -2, -1, 1, 2, 3, 5, 6, 7, 9] as const);
+      return {
+        text:
+          `La tangente à la courbe $\\mathcal{C}_f$ au point d'abscisse $${a}$ a pour équation ` +
+          `$${eqReduite(m, p)}$. Que vaut $f'(${a})$ ?`,
+        format: "short",
+        expected: [String(m)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Le nombre dérivé $f'(a)$ est le coefficient directeur de la tangente au point d'abscisse $a$.",
+          "On lit le coefficient de $x$ dans l'équation réduite $y = mx + p$.",
+          `Dans $${eqReduite(m, p)}$, le coefficient de $x$ vaut $${m}$ ; $${p}$ est l'ordonnée à l'origine, pas une pente.`,
+          `$f'(${a}) = ${m}$.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_der_tan_tpl_point_de_contact",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation_tangente",
+    microId: "der_tangente",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le point de contact $(a\\,;\\,f(a))$ est à la fois sur la courbe ET sur la tangente.",
+    tags: ["premiere", "maths", "derivation", "tangente", "template", "short"],
+    generate: () => {
+      const a = pickOne([-3, -2, -1, 1, 2, 3, 4] as const);
+      const m = pickOne([-5, -4, -3, -2, -1, 2, 3, 4, 5] as const);
+      const p = pickOne([-7, -5, -4, -3, -1, 1, 2, 4, 6, 8] as const);
+      const fa = m * a + p;
+      return {
+        text:
+          `La tangente à la courbe $\\mathcal{C}_f$ au point d'abscisse $${a}$ a pour équation ` +
+          `$${eqReduite(m, p)}$. Que vaut $f(${a})$ ?`,
+        format: "short",
+        expected: [String(fa)],
+        comparator: "number_equal",
+        explanation: exp(
+          "La tangente touche la courbe au point $A(a\\,;\\,f(a))$ : ce point appartient aux deux.",
+          "On remplace $x$ par $a$ dans l'équation de la tangente : l'ordonnée obtenue est $f(a)$.",
+          `$${m} \\times (${a}) ${p >= 0 ? "+" : "-"} ${Math.abs(p)} = ${fa}$.`,
+          `$f(${a}) = ${fa}$ — à ne pas confondre avec $f'(${a}) = ${m}$, la pente.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_der_tan_tpl_pente_polynome",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation_tangente",
+    microId: "der_tangente",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Pente de la tangente $= f'(a)$ : on dérive d'abord, on remplace ensuite.",
+    tags: ["premiere", "maths", "derivation", "tangente", "template", "short"],
+    generate: () => {
+      const n = pickOne([2, 2, 3] as const);
+      const k = pickOne([-3, -2, -1, 1, 2, 3] as const);
+      const b = pickOne([-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 6] as const);
+      const c = pickOne([-4, -2, 0, 1, 3, 5] as const);
+      const a = pickOne([-3, -2, -1, 1, 2, 3] as const);
+      const pente = n * k * a ** (n - 1) + b;
+      const fa = k * a ** n + b * a + c;
+      const derivee = `${n * k}x${n === 3 ? "^2" : ""}${b === 0 ? "" : ` ${b > 0 ? "+" : "-"} ${Math.abs(b)}`}`;
+      return {
+        text:
+          `Soit $f(x) = ${polyTex(k, n, b, c)}$. ` +
+          `Quelle est la pente de la tangente à $\\mathcal{C}_f$ au point d'abscisse $${a}$ ?`,
+        format: "short",
+        expected: [String(pente)],
+        comparator: "number_equal",
+        explanation: exp(
+          "La pente de la tangente au point d'abscisse $a$ est le nombre dérivé $f'(a)$.",
+          "On calcule $f'(x)$, puis on remplace $x$ par $a$.",
+          `$f'(x) = ${derivee}$, donc $f'(${a}) = ${pente}$.`,
+          `La pente vaut $${pente}$. ⚠️ $f(${a}) = ${fa}$ est la hauteur du point, pas la pente.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "premiere_der_gra_tpl_pente_lue",
+    niveau: "premiere-spe",
+    matiere: "maths",
+    notionId: "derivation_tangente",
+    microId: "der_graphique",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Depuis $A$, avance d'une unité vers la droite sur la tangente : de combien monte-t-on (ou descend-on) ?",
+    tags: ["premiere", "maths", "derivation", "tangente", "graphique", "canvas", "template", "short"],
+    generate: () => {
+      // Pente entière et point de contact à coordonnées entières : la tangente
+      // passe par des nœuds du quadrillage, la pente se lit sans estimer.
+      let a = 0;
+      let b = 0;
+      let c = 0;
+      let pente = 0;
+      do {
+        a = randomInt(-2, 2);
+        b = randomInt(-4, 4);
+        c = randomInt(-2, 2);
+        pente = 2 * a + b;
+      } while (Math.abs(pente) > 4);
+      const fa = a * a + b * a + c;
+      return {
+        text:
+          `Sur la figure, la droite rouge est la tangente à la courbe de $f$ au point $A$ d'abscisse $${a}$. ` +
+          `Lis graphiquement $f'(${a})$.`,
+        format: "short",
+        expected: [String(pente)],
+        comparator: "number_equal",
+        canvas: tangente(b, c, a),
+        explanation: exp(
+          "$f'(a)$ est le coefficient directeur de la tangente au point d'abscisse $a$.",
+          "On part de $A$, on avance de $1$ vers la droite en suivant la tangente, et on lit la variation verticale.",
+          `$A(${a}\\,;\\,${fa})$ ; en $x = ${a + 1}$, la tangente est à la hauteur $${fa + pente}$ : ` +
+            `elle ${pente > 0 ? "monte" : pente < 0 ? "descend" : "ne monte ni ne descend"}` +
+            `${pente === 0 ? "" : ` de $${Math.abs(pente)}$`}.`,
+          `$f'(${a}) = ${pente}$.`
         ),
       };
     },

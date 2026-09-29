@@ -171,6 +171,10 @@ function deNomGrandeur(nom: string): string {
  * réservoirs des données croisées et des probabilités, qui portent déjà leur
  * genre : ne jamais ajouter une production sans le sien.
  */
+function pgcdLocal(a: number, b: number): number {
+  return b === 0 ? Math.abs(a) : pgcdLocal(b, a % b);
+}
+
 const PRODUCTIONS = [
   { objet: "des paniers garnis", unite: "paniers", un: "un panier", chacun: "chacun", genre: "m" },
   { objet: "des coffrets cadeaux", unite: "coffrets", un: "un coffret", chacun: "chacun", genre: "m" },
@@ -1612,6 +1616,222 @@ export const derivationBank: TutorBankItemV4[] = [
           {
             choice: "il n'y a pas d'erreur : chaque terme a bien été dérivé",
             cause: "la constante a été recopiée telle quelle, pas dérivée — sa dérivée vaut zéro",
+          },
+        ],
+      };
+    },
+  },
+
+  /* ═════════════ der_formules — mode DÉFI (29/09/2026) ═════════════
+   * L'évaluation par chapitres tire jusqu'à 20 questions en mode Défi
+   * (difficultés 3 à 5) : la notion n'en avait AUCUNE. On reste sur les
+   * quatre formules du BO (carré, cube, $kf$, somme) — les polynômes
+   * complets relèvent de `der_polynome` —, mais en deux temps : dériver
+   * PUIS évaluer, dériver PUIS résoudre $f'(x) = v$, ou dériver un
+   * coefficient fractionnaire ou mis en facteur. */
+
+  {
+    kind: "template",
+    id: "stmg_der_f_somme_tpl_valeur",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_formules",
+    microId: "der_f_somme",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Dérive d'abord terme à terme, remplace ensuite — et entre parenthèses si le nombre est négatif.",
+    tags: ["stmg", "maths", "derivation", "template", "short"],
+    generate: () => {
+      const a = pick([1, 2, 3, 4, 5, -1, -2, -3] as const);
+      const b = pick([1, 2, 3, 5, 6, 8, -1, -2, -4, -7] as const);
+      const c = pick([1, 2, 4, 5, 9, -3, -6, -8] as const);
+      const x0 = pick([-4, -3, -2, -1, 1, 2, 3, 4] as const);
+      const valeur = 2 * a * x0 + b;
+      const fx0 = a * x0 * x0 + b * x0 + c;
+      return {
+        text: `Soit $f(x) = ${polynome(0, a, b, c)}$. Que vaut $f'(${x0})$ ?`,
+        format: "short",
+        expected: [String(valeur)],
+        comparator: "number_equal",
+        explanation: exp(
+          "La dérivée d'une somme est la somme des dérivées ; la constante disparaît.",
+          "On écrit $f'(x)$, puis on remplace $x$ par la valeur demandée.",
+          `$f'(x) = ${polynome(0, 0, 2 * a, b)}$, donc $f'(${x0}) = ${2 * a} \\times (${x0}) ${b >= 0 ? "+" : "-"} ${Math.abs(b)} = ${valeur}$.`,
+          `$f'(${x0}) = ${valeur}$. ⚠️ $f(${x0}) = ${fx0}$ est une autre valeur : on a demandé la dérivée.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "stmg_der_f_cube_tpl_resoudre",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_formules",
+    microId: "der_f_cube",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Écris $f'(x) = 3kx^2$, puis résous $3kx^2 = v$.",
+    tags: ["stmg", "maths", "derivation", "template", "short"],
+    generate: () => {
+      const k = pick([1, 2, 3, 4, 5, -1, -2] as const);
+      const x0 = randomInt(1, 6);
+      const v = 3 * k * x0 * x0;
+      return {
+        text:
+          `Soit $f(x) = ${k === 1 ? "" : k === -1 ? "-" : k}x^3$. ` +
+          `Pour quelle valeur POSITIVE de $x$ a-t-on $f'(x) = ${v}$ ?`,
+        format: "short",
+        expected: [String(x0)],
+        comparator: "number_equal",
+        explanation: exp(
+          "La dérivée de $kx^3$ est $3kx^2$.",
+          "On écrit $f'(x)$, on résout $f'(x) = v$, puis on garde la solution positive.",
+          `$f'(x) = ${3 * k}x^2$ ; $${3 * k}x^2 = ${v} \\iff x^2 = ${x0 * x0} \\iff x = ${x0}$ ou $x = -${x0}$.`,
+          `La valeur positive est $x = ${x0}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "stmg_der_f_carre_tpl_resoudre",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_formules",
+    microId: "der_f_carre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "La constante disparaît à la dérivation : $f'(x) = 2kx$. Résous ensuite $2kx = v$.",
+    tags: ["stmg", "maths", "derivation", "piege", "template", "short"],
+    generate: () => {
+      const k = pick([1, 2, 3, 4, 5, -1, -2, -3] as const);
+      const c = pick([-9, -5, -3, 2, 4, 7, 10, 15] as const);
+      const x0 = pick([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6] as const);
+      const v = 2 * k * x0;
+      return {
+        text:
+          `Soit $f(x) = ${polynome(0, k, 0, c)}$. ` +
+          `Pour quelle valeur de $x$ a-t-on $f'(x) = ${v}$ ?`,
+        format: "short",
+        expected: [String(x0)],
+        comparator: "number_equal",
+        explanation: exp(
+          "La dérivée de $kx^2$ est $2kx$ ; celle d'une constante est nulle.",
+          "On dérive, puis on résout l'équation du premier degré $f'(x) = v$.",
+          `$f'(x) = ${2 * k}x$ ; $${2 * k}x = ${v} \\iff x = \\dfrac{${v}}{${2 * k}} = ${x0}$.`,
+          `$x = ${x0}$. ⚠️ La constante $${c}$ ne compte pas : elle a disparu dans $f'$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "stmg_der_f_kf_tpl_fraction",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_formules",
+    microId: "der_f_kf",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$(kf)' = k \\times f'$ : le coefficient, même fractionnaire, se garde et se multiplie par l'exposant qui descend.",
+    tags: ["stmg", "maths", "derivation", "template"],
+    generate: () => {
+      // f(x) = (num/den)·xⁿ avec n = 2 ou 3 ; num/den irréductible, den ≠ 1.
+      let num = 0;
+      let den = 0;
+      do {
+        num = pick([1, 2, 3, 5, 7, -1, -2, -5] as const);
+        den = pick([2, 3, 4, 5, 6, 9] as const);
+      } while (pgcdLocal(Math.abs(num), den) !== 1);
+      const n = pick([2, 3] as const);
+      const coefTex = (p: number, q: number, partie: string) => {
+        const g = pgcdLocal(Math.abs(p), q);
+        const P = p / g;
+        const Q = q / g;
+        const signe = P < 0 ? "-" : "";
+        const absP = Math.abs(P);
+        if (Q === 1) return `${signe}${absP === 1 && partie !== "" ? "" : absP}${partie}`;
+        return `${signe}\\dfrac{${absP}}{${Q}}${partie}`;
+      };
+      const puis = (e: number) => (e === 1 ? "x" : `x^${e}`);
+      const f = coefTex(num, den, puis(n));
+      const bonne = `$${coefTex(n * num, den, puis(n - 1))}$`;
+      return {
+        text: `Soit $f(x) = ${f}$. Quelle est l'expression de $f'(x)$ ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `$${coefTex(num, den, puis(n - 1))}$`,
+          `$${coefTex(n * num, den, puis(n))}$`,
+          `$${coefTex(num, n * den, puis(n - 1))}$`,
+          `$${coefTex(n * num, n * den, puis(n - 1))}$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          `La dérivée de $x^${n}$ est $${n}${puis(n - 1)}$, et multiplier $f$ par un réel $k$ multiplie sa dérivée par $k$.`,
+          `On multiplie le coefficient par l'exposant $${n}$, puis l'exposant baisse d'un rang.`,
+          `$f'(x) = ${coefTex(num, den, "")} \\times ${n}${puis(n - 1)} = ${bonne.slice(1, -1)}$.`,
+          `$f'(x) = ${bonne.slice(1, -1)}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$${coefTex(num, den, puis(n - 1))}$`,
+            cause: "a baissé l'exposant sans le faire descendre en facteur",
+          },
+          {
+            choice: `$${coefTex(num, n * den, puis(n - 1))}$`,
+            cause: "a divisé par l'exposant au lieu de multiplier",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "stmg_der_f_kf_tpl_facteur",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "der_formules",
+    microId: "der_f_kf",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$(k \\times u)' = k \\times u'$ : dérive la parenthèse, puis multiplie TOUT le résultat par $k$.",
+    tags: ["stmg", "maths", "derivation", "piege", "template"],
+    generate: () => {
+      const k = pick([2, 3, 4, 5, -2, -3] as const);
+      const b = pick([1, 2, 3, 4, 5, -1, -2, -3, -4, -6] as const);
+      const c = pick([1, 2, 5, 7, -1, -3, -5] as const);
+      const bonne = `$${polynome(0, 0, 2 * k, k * b)}$`;
+      return {
+        text: `Soit $f(x) = ${k}(${polynome(0, 1, b, c)})$. Quelle est l'expression de $f'(x)$ ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `$${polynome(0, 0, 2 * k, b)}$`,
+          `$${polynome(0, 0, 2, b)}$`,
+          `$${polynome(0, 0, 2 * k, k * (b + c))}$`,
+          `$${polynome(0, 0, k, k * b)}$`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Multiplier une fonction par un réel $k$ multiplie sa dérivée par $k$ ; la constante disparaît.",
+          "On dérive la parenthèse, puis on multiplie chacun des termes obtenus par le facteur.",
+          `$(${polynome(0, 1, b, c)})' = ${polynome(0, 0, 2, b)}$, donc $f'(x) = ${k}(${polynome(0, 0, 2, b)}) = ${bonne.slice(1, -1)}$.`,
+          `$f'(x) = ${bonne.slice(1, -1)}$.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$${polynome(0, 0, 2 * k, b)}$`,
+            cause: "n'a multiplié par le facteur que le premier terme",
+          },
+          {
+            choice: `$${polynome(0, 0, 2 * k, k * (b + c))}$`,
+            cause: "a gardé la constante dans la dérivée",
           },
         ],
       };

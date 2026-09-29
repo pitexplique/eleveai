@@ -468,6 +468,313 @@ export const automatismesCalculBank: TutorBankItemV4[] = [
     },
   },
 
+  /* ═════════ auto_fractions_puissances — mode DÉFI (29/09/2026) ═════════
+   * L'évaluation par chapitres tire jusqu'à 20 questions en mode Défi
+   * (difficultés 3 à 5) : la notion n'en avait AUCUNE. Ce sont toujours des
+   * automatismes — un calcul court —, mais qui enchaînent deux gestes ou
+   * logent un piège classique : la priorité du produit sur la somme, la
+   * fraction d'une fraction, deux fractions très proches, un exposant
+   * négatif retranché, une écriture scientifique à renormaliser. */
+
+  {
+    kind: "template",
+    id: "stmg_num_fractions_ops_tpl_priorite",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_fractions_puissances",
+    microId: "auto_num_fractions_operations",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le produit est prioritaire sur la somme : on multiplie d'abord, on additionne ensuite.",
+    tags: ["stmg", "maths", "calcul", "fractions", "piege", "template"],
+    generate: () => {
+      let a = 0, b = 0, c = 0, d = 0, e = 0, f = 0;
+      let bonne = "";
+      let pieges: string[] = [];
+      do {
+        b = pick([2, 3, 4, 5, 6] as const);
+        d = pick([2, 3, 4, 5] as const);
+        f = pick([2, 3, 5, 7] as const);
+        a = 1 + Math.floor(Math.random() * (b - 1));
+        c = 1 + Math.floor(Math.random() * (d - 1));
+        e = 1 + Math.floor(Math.random() * (f - 1));
+        const den = b * d * f;
+        bonne = `$${frac(a * d * f + c * e * b, den)}$`;
+        pieges = Array.from(
+          new Set([
+            // la somme d'abord, le produit ensuite
+            `$${frac((a * d + c * b) * e, den)}$`,
+            // numérateurs et dénominateurs additionnés après le produit
+            `$${frac(a + c * e, b + d * f)}$`,
+            // les deux premières multipliées, la troisième ajoutée
+            `$${frac(a * c * f + e * b * d, den)}$`,
+          ])
+        ).filter((p) => p !== bonne);
+      } while (pgcd(a, b) !== 1 || pgcd(c, d) !== 1 || pgcd(e, f) !== 1 || pieges.length < 2);
+      const produit = frac(c * e, d * f);
+      return {
+        text: `Calcule : $\\dfrac{${a}}{${b}} + \\dfrac{${c}}{${d}} \\times \\dfrac{${e}}{${f}}$`,
+        format: "qcm",
+        choices: makeChoices(bonne, pieges),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Comme pour les nombres entiers, la multiplication passe avant l'addition.",
+          "On calcule d'abord le produit, puis on réduit au même dénominateur pour additionner.",
+          `$\\dfrac{${c}}{${d}} \\times \\dfrac{${e}}{${f}} = ${produit}$, puis ` +
+            `$\\dfrac{${a}}{${b}} + ${produit} = ${bonne.slice(1, -1)}$.`,
+          `Le résultat est ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: `$${frac((a * d + c * b) * e, b * d * f)}$`,
+            cause: "a additionné avant de multiplier : la priorité du produit n'a pas été respectée",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "stmg_num_fractions_ops_tpl_fraction_de_fraction",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_fractions_puissances",
+    microId: "auto_num_fractions_operations",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "« Les $\\dfrac{c}{d}$ des $\\dfrac{a}{b}$ » : on MULTIPLIE les deux fractions, puis on applique au total.",
+    tags: ["stmg", "maths", "calcul", "fractions", "template", "short"],
+    generate: () => {
+      const FRACTIONS = [
+        { n: 1, d: 2 }, { n: 1, d: 3 }, { n: 2, d: 3 }, { n: 1, d: 4 }, { n: 3, d: 4 },
+        { n: 1, d: 5 }, { n: 2, d: 5 }, { n: 3, d: 5 }, { n: 4, d: 5 }, { n: 1, d: 6 }, { n: 5, d: 6 },
+      ] as const;
+      const contexte = pick([
+        { intro: "Une entreprise compte", total: "salariés", groupe: "travaillent au siège", sous: "sont des cadres", question: "Combien de cadres travaillent au siège ?" },
+        { intro: "Un entrepôt expédie", total: "colis", groupe: "partent par la route", sous: "sont livrés en express", question: "Combien de colis partent par la route en express ?" },
+        { intro: "Un magasin a reçu", total: "clients", groupe: "ont payé par carte", sous: "ont utilisé le paiement sans contact", question: "Combien de clients ont payé sans contact par carte ?" },
+        { intro: "Une boutique propose", total: "articles", groupe: "sont en promotion", sous: "sont des vêtements", question: "Combien de vêtements sont en promotion ?" },
+      ] as const);
+      const f1 = pick(FRACTIONS);
+      const f2 = pick(FRACTIONS);
+      const total = f1.d * f2.d * pick([2, 3, 4, 5, 6, 10] as const);
+      const groupe = (total * f1.n) / f1.d;
+      const resultat = (groupe * f2.n) / f2.d;
+      return {
+        text:
+          `${contexte.intro} $${total}$ ${contexte.total}. Les $\\dfrac{${f1.n}}{${f1.d}}$ d'entre eux ${contexte.groupe}, ` +
+          `et parmi ceux-là, les $\\dfrac{${f2.n}}{${f2.d}}$ ${contexte.sous}. ${contexte.question}`,
+        format: "short",
+        expected: [fr(resultat)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Prendre une fraction d'une fraction d'une quantité, c'est multiplier les deux fractions entre elles, puis par la quantité.",
+          "On calcule d'abord le premier groupe, puis la part de ce groupe — ou directement le produit des fractions.",
+          `$${total} \\times \\dfrac{${f1.n}}{${f1.d}} = ${fr(groupe)}$, puis $${fr(groupe)} \\times \\dfrac{${f2.n}}{${f2.d}} = ${fr(resultat)}$. ` +
+            `⚠️ Additionner les fractions n'a pas de sens ici : la seconde porte sur le groupe, pas sur le total.`,
+          `La réponse est $${fr(resultat)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "stmg_num_fractions_comparer_tpl_proches",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_fractions_puissances",
+    microId: "auto_num_fractions_comparer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Les deux fractions sont très proches : multiplie en croix, ou compare ce qui manque à chacune pour faire $1$.",
+    tags: ["stmg", "maths", "calcul", "fractions", "template"],
+    generate: () => {
+      // Deux fractions irréductibles de dénominateurs 3 à 12, distinctes et
+      // PROCHES (écart entre 0,005 et 0,06) : l'œil ne tranche plus, il faut
+      // un calcul — et « le plus grand numérateur » n'est pas un critère.
+      let n1 = 0, d1 = 0, n2 = 0, d2 = 0;
+      do {
+        d1 = 3 + Math.floor(Math.random() * 10);
+        d2 = 3 + Math.floor(Math.random() * 10);
+        n1 = 1 + Math.floor(Math.random() * (d1 - 1));
+        n2 = 1 + Math.floor(Math.random() * (d2 - 1));
+      } while (
+        d1 === d2 ||
+        pgcd(n1, d1) !== 1 ||
+        pgcd(n2, d2) !== 1 ||
+        Math.abs(n1 / d1 - n2 / d2) < 0.005 ||
+        Math.abs(n1 / d1 - n2 / d2) > 0.06
+      );
+      const f1 = `$\\dfrac{${n1}}{${d1}}$`;
+      const f2 = `$\\dfrac{${n2}}{${d2}}$`;
+      const plusGrande = n1 * d2 > n2 * d1 ? f1 : f2;
+      return {
+        text: `Quelle est la plus grande de ces deux fractions : ${f1} ou ${f2} ?`,
+        format: "qcm",
+        choices: shuffle([f1, f2, "elles sont égales"]),
+        expected: [plusGrande],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Pour comparer $\\dfrac{a}{b}$ et $\\dfrac{c}{d}$, on compare $a \\times d$ et $c \\times b$ (même dénominateur $b \\times d$).",
+          "On ramène les deux fractions au dénominateur commun et on compare les numérateurs.",
+          `$\\dfrac{${n1}}{${d1}} = \\dfrac{${n1 * d2}}{${d1 * d2}}$ et $\\dfrac{${n2}}{${d2}} = \\dfrac{${n2 * d1}}{${d1 * d2}}$.`,
+          `La plus grande est ${plusGrande}.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "stmg_num_puissances_tpl_enchainement",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_fractions_puissances",
+    microId: "auto_num_puissances",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Produit : on ajoute les exposants ; quotient : on les retranche ; puissance de puissance : on les multiplie.",
+    tags: ["stmg", "maths", "calcul", "puissances", "template", "short"],
+    generate: () => {
+      const base = pick([2, 3, 5, 10] as const);
+      const p = (e: number) => `${base}^{${e}}`;
+      if (Math.random() < 0.6) {
+        const a = pick([-3, -2, 2, 3, 4, 5, 6] as const);
+        const b = pick([-4, -2, -1, 1, 2, 3, 5] as const);
+        const c = pick([-3, -2, -1, 2, 3, 4] as const);
+        const n = a + b - c;
+        return {
+          text: `On écrit $\\dfrac{${p(a)} \\times ${p(b)}}{${p(c)}}$ sous la forme $${base}^{n}$. Que vaut $n$ ?`,
+          format: "short",
+          expected: [String(n)],
+          comparator: "number_equal",
+          explanation: exp(
+            "$a^m \\times a^p = a^{m+p}$ et $\\dfrac{a^m}{a^q} = a^{m-q}$.",
+            "On ajoute les exposants du numérateur, puis on retranche celui du dénominateur — avec son signe.",
+            `$${a} + (${b}) - (${c}) = ${n}$.`,
+            `$n = ${n}$.${c < 0 ? ` ⚠️ Retrancher $${c}$, c'est ajouter $${-c}$.` : ""}`
+          ),
+        };
+      }
+      const m = pick([-2, 2, 3, 4] as const);
+      const k = pick([2, 3, -2] as const);
+      const q = pick([-5, -3, -1, 1, 2, 4] as const);
+      const n = m * k + q;
+      return {
+        text: `On écrit $(${p(m)})^{${k}} \\times ${p(q)}$ sous la forme $${base}^{n}$. Que vaut $n$ ?`,
+        format: "short",
+        expected: [String(n)],
+        comparator: "number_equal",
+        explanation: exp(
+          "$(a^m)^k = a^{m \\times k}$ et $a^m \\times a^q = a^{m+q}$.",
+          "On multiplie d'abord les exposants de la puissance de puissance, puis on ajoute celui du second facteur.",
+          `$${m} \\times (${k}) + (${q}) = ${m * k} + (${q}) = ${n}$.`,
+          `$n = ${n}$ — et non $${m + k + q}$ : une puissance de puissance MULTIPLIE les exposants.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "stmg_num_ecritures_tpl_scientifique_produit",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_fractions_puissances",
+    microId: "auto_num_ecritures",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Multiplie les nombres devant, ajoute les exposants… puis vérifie qu'il reste UN seul chiffre avant la virgule.",
+    tags: ["stmg", "maths", "calcul", "ecritures", "piege", "template"],
+    generate: () => {
+      // Mantisses en dixièmes (entiers) pour éviter les flottants ; leur
+      // produit dépasse toujours 10, donc il faut renormaliser.
+      const MANTISSES = [15, 20, 25, 30, 40, 50, 60, 80] as const;
+      let A = 0, B = 0;
+      do {
+        A = pick(MANTISSES);
+        B = pick(MANTISSES);
+      } while (A * B < 1000);
+      const m = pick([-4, -3, -2, 2, 3, 4, 5, 6] as const);
+      const n = pick([-5, -3, -2, -1, 2, 3, 4] as const);
+      const brut = (A * B) / 100; // entre 10 et 64
+      const mant = brut / 10;
+      const e = m + n + 1;
+      const ecrire = (x: number, k: number) => `$${fr(x)} \\times 10^{${k}}$`;
+      const bonne = ecrire(mant, e);
+      return {
+        text:
+          `Donne l'écriture scientifique de $(${fr(A / 10)} \\times 10^{${m}}) \\times (${fr(B / 10)} \\times 10^{${n}})$.`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          ecrire(brut, m + n),
+          ecrire(mant, m + n),
+          ecrire(mant, m * n + 1),
+          ecrire(mant, m + n - 1),
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "En écriture scientifique $a \\times 10^{n}$, on a $1 \\leqslant a < 10$.",
+          "On multiplie les nombres devant, on ajoute les exposants, puis on renormalise si le nombre devant dépasse $10$.",
+          `$${fr(A / 10)} \\times ${fr(B / 10)} = ${fr(brut)}$ et $10^{${m}} \\times 10^{${n}} = 10^{${m + n}}$ ; ` +
+            `$${fr(brut)} = ${fr(mant)} \\times 10$, donc on gagne un rang : $10^{${e}}$.`,
+          `L'écriture scientifique est ${bonne}.`
+        ),
+        choiceDiagnostics: [
+          {
+            choice: ecrire(brut, m + n),
+            cause: "le calcul est juste mais n'est pas en écriture scientifique : il y a deux chiffres avant la virgule",
+          },
+          {
+            choice: ecrire(mant, m + n),
+            cause: "a déplacé la virgule sans ajouter $1$ à l'exposant",
+          },
+        ],
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "stmg_num_ecritures_tpl_exposant_scientifique",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_fractions_puissances",
+    microId: "auto_num_ecritures",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compte de combien de rangs la virgule se déplace pour ne laisser qu'un chiffre non nul devant elle.",
+    tags: ["stmg", "maths", "calcul", "ecritures", "template", "short"],
+    generate: () => {
+      const chiffres = pick(["12", "25", "34", "405", "68", "725", "91", "108", "56", "3"] as const);
+      const mant = chiffres.length === 1 ? chiffres : `${chiffres[0]}{,}${chiffres.slice(1)}`;
+      const petit = Math.random() < 0.5;
+      const k = petit ? pick([-6, -5, -4, -3, -2, -1] as const) : pick([3, 4, 5, 6, 7, 8] as const);
+      // Écriture décimale construite en chaîne, sans flottant.
+      const decimal = petit
+        ? `0{,}${"0".repeat(-k - 1)}${chiffres}`
+        : chiffres.padEnd(k + 1, "0");
+      return {
+        text: `On écrit $${decimal}$ en écriture scientifique : $${decimal} = ${mant} \\times 10^{n}$. Que vaut $n$ ?`,
+        format: "short",
+        expected: [String(k)],
+        comparator: "number_equal",
+        explanation: exp(
+          "En écriture scientifique, on garde un seul chiffre non nul avant la virgule ; l'exposant compte les rangs dont on a déplacé la virgule.",
+          petit
+            ? "Pour un nombre inférieur à $1$, on déplace la virgule vers la DROITE : l'exposant est négatif."
+            : "Pour un nombre supérieur à $10$, on déplace la virgule vers la GAUCHE : l'exposant est positif.",
+          `La virgule se déplace de $${Math.abs(k)}$ rang${Math.abs(k) > 1 ? "s" : ""} : $${decimal} = ${mant} \\times 10^{${k}}$.`,
+          `$n = ${k}$.`
+        ),
+      };
+    },
+  },
+
   /* ═══════════════════ auto_num_calcul_mental ═══════════════════ */
 
   {

@@ -144,6 +144,14 @@ function canvasParabole(a: number, r1: number, r2: number, titre: string): Canva
   };
 }
 
+/** Trinôme $ax^2 + bx + c$ écrit proprement : termes nuls omis, pas de « 1x ». */
+function trinomeTex(a: number, b: number, c: number): string {
+  const tete = `${a === 1 ? "" : a === -1 ? "-" : a}x^2`;
+  const tb = b === 0 ? "" : ` ${b > 0 ? "+" : "-"} ${Math.abs(b) === 1 ? "" : Math.abs(b)}x`;
+  const tc = c === 0 ? "" : ` ${c > 0 ? "+" : "-"} ${Math.abs(c)}`;
+  return `${tete}${tb}${tc}`;
+}
+
 /* ─────────────────── réservoirs de contexte ─────────────────── */
 
 /** ⚠️ Chaque série porte SON pronom. Il était auparavant déduit de l'unité
@@ -598,6 +606,234 @@ export const automatismesGraphiquesBank: TutorBankItemV4[] = [
           `Les valeurs sont ${triees.map((v) => fr(v)).join(", ")}. ` +
             `Au-dessus de $${fr(seuil)}$, il y en a ${combien}.`,
           `Le seuil a été dépassé pendant ${combien} année${combien > 1 ? "s" : ""}.`
+        ),
+      };
+    },
+  },
+
+  /* ═════════ auto_lecture_graphique — mode DÉFI (29/09/2026) ═════════
+   * L'évaluation par chapitres tire jusqu'à 20 questions en mode Défi
+   * (difficultés 3 à 5) : la notion n'en avait AUCUNE. Toujours des
+   * automatismes de lecture, mais en deux temps : lire DEUX valeurs puis
+   * les comparer, lire puis convertir l'échelle, calculer une ordonnée à
+   * partir d'une abscisse négative, remonter de l'ordonnée à l'abscisse,
+   * trouver un franchissement sur une série qui monte ET descend. */
+
+  {
+    kind: "template",
+    id: "stmg_graph_image_tpl_variation",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_lecture_graphique",
+    microId: "auto_fct_image_antecedent",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Lis les deux valeurs, puis calcule « valeur d'arrivée − valeur de départ ».",
+    tags: ["stmg", "maths", "graphique", "canvas", "template", "short"],
+    generate: () => {
+      const serie = pick(SERIES);
+      const anneeDebut = pick([2018, 2019, 2020] as const);
+      const valeurs = Array.from({ length: 6 }, () => randomInt(2, 18) * 10);
+      let k1 = 0;
+      let k2 = 0;
+      do {
+        k1 = randomInt(0, 4);
+        k2 = randomInt(k1 + 1, 5);
+      } while (valeurs[k1] === valeurs[k2]);
+      const v1 = valeurs[k1];
+      const v2 = valeurs[k2];
+      const variation = v2 - v1;
+      return {
+        text:
+          `Le graphique donne ${serie.grandeur}. Quelle est sa variation entre ${anneeDebut + k1} et ${anneeDebut + k2} ? ` +
+          `(Réponds par un nombre négatif s'il s'agit d'une baisse.)`,
+        format: "short",
+        expected: [fr(variation)],
+        comparator: "number_equal",
+        canvas: canvasSerie(valeurs, anneeDebut, serie.titre),
+        explanation: exp(
+          "La variation entre deux dates est la différence « valeur d'arrivée − valeur de départ ».",
+          "On lit les deux images sur le graphique, puis on soustrait dans le bon ordre.",
+          `En ${anneeDebut + k1} : $${fr(v1)}$ ; en ${anneeDebut + k2} : $${fr(v2)}$. $${fr(v2)} - ${fr(v1)} = ${fr(variation)}$.`,
+          variation > 0
+            ? `La variation est de $+${fr(variation)}$ ${serie.unite} : une hausse.`
+            : `La variation est de $${fr(variation)}$ ${serie.unite} : une baisse.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "stmg_graph_reperer_tpl_ecart_echelle",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_lecture_graphique",
+    microId: "auto_fct_reperer_graphique",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Calcule l'écart en graduations, puis convertis-le avec l'unité annoncée par le titre de l'axe.",
+    tags: ["stmg", "maths", "graphique", "canvas", "echelle", "template", "short"],
+    generate: () => {
+      const echelle = pick(ECHELLES);
+      const anneeDebut = pick([2018, 2019, 2020, 2021] as const);
+      const valeurs = Array.from({ length: 6 }, () => randomInt(2, 18) * 10);
+      let k1 = 0;
+      let k2 = 0;
+      do {
+        k1 = randomInt(0, 4);
+        k2 = randomInt(k1 + 1, 5);
+      } while (valeurs[k2] <= valeurs[k1]);
+      const ecartLu = valeurs[k2] - valeurs[k1];
+      const ecartReel = ecartLu * echelle.facteur;
+      return {
+        text:
+          `${echelle.lecture} ` +
+          `De combien la valeur a-t-elle augmenté entre ${anneeDebut + k1} et ${anneeDebut + k2} ? Donne la réponse en ${echelle.reelle}.`,
+        format: "short",
+        expected: [fr(ecartReel)],
+        comparator: "number_equal",
+        canvas: canvasSerie(valeurs, anneeDebut, echelle.titre),
+        explanation: exp(
+          "Un écart lu sur le graphique est exprimé dans l'unité de l'axe ; il faut le convertir dans l'unité demandée.",
+          "On lit les deux hauteurs, on fait la différence, puis on multiplie par ce que vaut une unité de l'axe.",
+          `$${fr(valeurs[k2])} - ${fr(valeurs[k1])} = ${fr(ecartLu)}$, puis $${fr(ecartLu)} \\times ${fr(echelle.facteur)} = ${fr(ecartReel)}$.`,
+          `L'augmentation est de $${fr(ecartReel)}$ ${echelle.unite}.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "stmg_graph_appartenance_tpl_ordonnee_parabole",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_lecture_graphique",
+    microId: "auto_fct_appartenance_courbe",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Remplace $x$ par l'abscisse, entre parenthèses : $(-2)^2 = 4$, alors que $-2^2 = -4$.",
+    tags: ["stmg", "maths", "graphique", "canvas", "piege", "template", "short"],
+    generate: () => {
+      const a = pick([1, -1, 2, -2] as const);
+      const r1 = randomInt(-3, 1);
+      const r2 = randomInt(r1 + 1, 4);
+      const b = -a * (r1 + r2);
+      const c = a * r1 * r2;
+      // Une abscisse du cadre qui n'est pas une racine, négative de préférence :
+      // c'est là que se loge l'erreur de signe sur le carré.
+      const candidats = Array.from({ length: r2 - r1 + 5 }, (_, i) => r1 - 2 + i).filter(
+        (x) => x !== r1 && x !== r2 && x !== 0
+      );
+      const negatifs = candidats.filter((x) => x < 0);
+      const x0 = pick(negatifs.length > 0 && Math.random() < 0.75 ? negatifs : candidats);
+      const y0 = a * x0 * x0 + b * x0 + c;
+      return {
+        text:
+          `La courbe $\\mathcal{P}$ ci-dessous a pour équation $y = ${trinomeTex(a, b, c)}$. ` +
+          `Le point $A$ de $\\mathcal{P}$ a pour abscisse $${x0}$. Calcule son ordonnée.`,
+        format: "short",
+        expected: [fr(y0)],
+        comparator: "number_equal",
+        canvas: canvasParabole(a, r1, r2, "La courbe 𝒫"),
+        explanation: exp(
+          "Un point appartient à une courbe si ses coordonnées vérifient son équation : l'ordonnée s'obtient en remplaçant $x$ par l'abscisse.",
+          "On remplace $x$ par la valeur, ENTRE PARENTHÈSES, et on respecte les priorités (le carré d'abord).",
+          `$y = ${a} \\times (${x0})^2` +
+            (b === 0 ? "" : ` ${b > 0 ? "+" : "-"} ${Math.abs(b)} \\times (${x0})`) +
+            (c === 0 ? "" : ` ${c > 0 ? "+" : "-"} ${Math.abs(c)}`) +
+            ` = ${a * x0 * x0}` +
+            (b === 0 ? "" : ` ${b * x0 >= 0 ? "+" : "-"} ${Math.abs(b * x0)}`) +
+            (c === 0 ? "" : ` ${c > 0 ? "+" : "-"} ${Math.abs(c)}`) +
+            ` = ${y0}$.`,
+          `$A(${x0}\\,;\\,${y0})$ : l'ordonnée vaut $${y0}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "stmg_graph_appartenance_tpl_abscisse_droite",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_lecture_graphique",
+    microId: "auto_fct_appartenance_courbe",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le point est sur la droite : son ordonnée vérifie $y = ax + b$. Résous l'équation en $x$.",
+    tags: ["stmg", "maths", "graphique", "canvas", "template", "short"],
+    generate: () => {
+      const a = pick([2, 3, 4, 5, -2, -3, -4] as const);
+      const b = pick([-6, -5, -3, -2, -1, 1, 2, 4, 5, 7] as const);
+      const x0 = randomInt(1, 6);
+      const y0 = a * x0 + b;
+      return {
+        text:
+          `La droite $\\mathcal{D}$ a pour équation $y = ${a}x ${b >= 0 ? "+" : "-"} ${Math.abs(b)}$. ` +
+          `Le point $B$ de $\\mathcal{D}$ a pour ordonnée $${y0}$. Quelle est son abscisse ?`,
+        format: "short",
+        expected: [String(x0)],
+        comparator: "number_equal",
+        canvas: canvasDroite(a, b, 0, 7, "La droite 𝒟"),
+        explanation: exp(
+          "Les coordonnées d'un point de la droite vérifient son équation.",
+          "On remplace $y$ par l'ordonnée connue et on résout l'équation du premier degré obtenue.",
+          `$${a}x ${b >= 0 ? "+" : "-"} ${Math.abs(b)} = ${y0}$ donne $${a}x = ${y0 - b}$, donc $x = \\dfrac{${y0 - b}}{${a}} = ${x0}$.`,
+          `$B(${x0}\\,;\\,${y0})$ : l'abscisse vaut $${x0}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "stmg_graph_seuil_tpl_premier_franchissement",
+    niveau: "stmg",
+    matiere: "maths",
+    notionId: "auto_lecture_graphique",
+    microId: "auto_fct_estimer_seuil",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Parcours les points de gauche à droite : on demande la PREMIÈRE année au-dessus du seuil, pas celle du maximum.",
+    tags: ["stmg", "maths", "graphique", "canvas", "seuil", "piege", "template", "short"],
+    generate: () => {
+      const serie = pick(SERIES);
+      const anneeDebut = pick([2018, 2019, 2020] as const);
+      // Série qui monte et descend, valeurs distinctes multiples de 20 ; le
+      // seuil est à mi-chemin entre deux valeurs, jamais sur un point. On
+      // exige qu'au moins deux années le dépassent et que la première ne soit
+      // ni l'année de départ ni celle du maximum.
+      let valeurs: number[] = [];
+      let seuil = 0;
+      let k = -1;
+      let kMax = -1;
+      let au_dessus = 0;
+      do {
+        valeurs = shuffle([20, 40, 60, 80, 100, 120, 140, 160, 180]).slice(0, 6);
+        const triees = [...valeurs].sort((u, v) => u - v);
+        const rang = randomInt(2, 4);
+        seuil = (triees[rang - 1] + triees[rang]) / 2;
+        k = valeurs.findIndex((v) => v > seuil);
+        kMax = valeurs.indexOf(Math.max(...valeurs));
+        au_dessus = valeurs.filter((v) => v > seuil).length;
+      } while (k <= 0 || k === kMax || au_dessus < 2);
+      const annee = anneeDebut + k;
+      return {
+        text:
+          `Le graphique donne ${serie.grandeur}. ` +
+          `Quelle est la première année où ${serie.pronom === "il" ? "il" : "elle"} dépasse $${fr(seuil)}$ ?`,
+        format: "short",
+        expected: [String(annee)],
+        comparator: "number_equal",
+        canvas: canvasSerie(valeurs, anneeDebut, serie.titre, { y: seuil }),
+        explanation: exp(
+          "Estimer un seuil, c'est repérer où la courbe passe au-dessus d'une horizontale donnée.",
+          "On trace l'horizontale au niveau du seuil, puis on parcourt les points de gauche à droite jusqu'au premier situé au-dessus.",
+          `Avant ${annee}, toutes les valeurs sont sous $${fr(seuil)}$ ; en ${annee}, la valeur est $${fr(valeurs[k])}$. ` +
+            `Le maximum ($${fr(valeurs[kMax])}$, en ${anneeDebut + kMax}) vient ${kMax > k ? "après" : "avant"} : ce n'est pas la question.`,
+          `Le seuil est dépassé pour la première fois en ${annee}.`
         ),
       };
     },

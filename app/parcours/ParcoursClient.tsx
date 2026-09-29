@@ -20,6 +20,7 @@ import type {
 
 import { getClasseNotions } from "@/lib/parcours/getClasseNotions";
 import { getDefiQuestionForNotion } from "@/lib/parcours/getDefiQuestionForNotion";
+import { cleQuestionParcours } from "@/lib/parcours/cleQuestion";
 import { getAnneesNotions, sansMarqueurAnnee } from "@/lib/tutor-v4/catalog";
 import {
   filtrerNotionsParAnnee,
@@ -40,6 +41,9 @@ import {
   classText,
 } from "@/components/parcours/ClassBoard";
 
+// ⛔ 29/09/2026 — « Calculs du quotidien » (adulte) retiré de l'évaluation
+// par Frédéric : « supprime calcul du quotidien ». Le libellé reste dans
+// `classeLabels` (le type l'exige) ; `?classe=adulte` est ignoré.
 const classes: ParcoursClasse[] = [
   "cp",
   "ce1",
@@ -54,7 +58,6 @@ const classes: ParcoursClasse[] = [
   "premiere-spe",
   "terminale-spe",
   "stmg",
-  "adulte",
 ];
 
 const classeLabels: Record<ParcoursClasse, string> = {
@@ -201,9 +204,20 @@ export default function ParcoursClient() {
     setAnnee(normalizeAnnee(params.get("annee")));
   }, []);
 
+  /**
+   * ⭐ 29/09/2026 — CHOISIR SES CHAPITRES, comme dans les automatismes.
+   * Frédéric : « quand il choisit une classe, il y a toutes les notions qui
+   * s'affichent, et là on lance l'évaluation. Comme ça chaque prof pourra faire
+   * une évaluation sur plusieurs chapitres ou la totalité. »
+   * Vide = « La totale ». Les questions viennent toujours des banques du coach.
+   */
+  const [notionsChoisies, setNotionsChoisies] = useState<string[]>([]);
+
   const [started, setStarted] = useState(false);
   const [questions, setQuestions] = useState<ParcoursQuestion[]>([]);
-  const [answers, setAnswers] = useState<Record<string, string>>({});
+  // ⚠️ Clé = RANG de la question (et non plus l'id de la notion) : sur un seul
+  // chapitre, la même notion revient plusieurs fois dans la série.
+  const [answers, setAnswers] = useState<Record<number, string>>({});
   const [submitted, setSubmitted] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
   const [chatQuestion, setChatQuestion] = useState("");
@@ -254,8 +268,8 @@ export default function ParcoursClient() {
   const scores = useMemo<ParcoursNotionScore[]>(() => {
     if (!submitted) return [];
 
-    const parcoursAnswers: ParcoursAnswer[] = questions.map((q) => {
-      const userAnswer = answers[q.notionId] ?? "";
+    const parcoursAnswers: ParcoursAnswer[] = questions.map((q, i) => {
+      const userAnswer = answers[i] ?? "";
       const expected = q.question.expected ?? [];
 
       return {
@@ -266,13 +280,17 @@ export default function ParcoursClient() {
       };
     });
 
-    return questions.map((q) =>
-      scoreParcours({
-        notionId: q.notionId,
-        notionLabel: q.notionLabel,
-        answers: parcoursAnswers,
-      })
-    );
+    // Une carte par notion, même quand elle a posé plusieurs questions.
+    const vues = new Set<string>();
+    return questions
+      .filter((q) => !vues.has(q.notionId) && Boolean(vues.add(q.notionId)))
+      .map((q) =>
+        scoreParcours({
+          notionId: q.notionId,
+          notionLabel: q.notionLabel,
+          answers: parcoursAnswers,
+        })
+      );
   }, [answers, questions, submitted]);
 
   const totalScore = useMemo(() => {
@@ -296,23 +314,37 @@ export default function ParcoursClient() {
   }, [submitted, canAskCorrectionQuestion, questions]);
 
   function startParcours() {
-    const allQuestions = notions
-      .map((notion) =>
-        getDefiQuestionForNotion({
-          classe,
-          notionId: notion.id,
-          mode: difficulteMode,
-        })
-      )
-      .filter((q): q is ParcoursQuestion => q !== null)
-      // Le libellé voyage avec la question jusqu'au bilan : on le nettoie ici,
-      // une fois, plutôt qu'à chacun des endroits qui l'affichent.
-      .map((q) => ({ ...q, notionLabel: libelleNotion(q.notionLabel) }));
-
-    const selectedQuestions = shuffleArray(allQuestions).slice(
-      0,
-      Math.min(questionCount, allQuestions.length)
+    const choisies = new Set(notionsChoisies);
+    const reservoir = shuffleArray(
+      choisies.size > 0 ? notions.filter((n) => choisies.has(n.id)) : notions
     );
+
+    // Tour de table : une question par notion, puis on repasse, jusqu'au
+    // nombre demandé. Sur « la totale », chaque question vient donc d'une
+    // notion différente (comme avant) ; sur un chapitre, il revient.
+    // Une notion sans question au bon niveau quitte la table.
+    const selectedQuestions: ParcoursQuestion[] = [];
+    const textes = new Set<string>();
+    let actives = reservoir;
+    while (selectedQuestions.length < questionCount && actives.length > 0) {
+      const restantes: typeof actives = [];
+      for (const notion of actives) {
+        if (selectedQuestions.length >= questionCount) break;
+        let q: ParcoursQuestion | null = null;
+        // Trois essais pour ne pas reposer un énoncé déjà servi.
+        for (let essai = 0; essai < 3; essai += 1) {
+          q = getDefiQuestionForNotion({ classe, notionId: notion.id, mode: difficulteMode });
+          if (!q || !textes.has(cleQuestionParcours(q.question))) break;
+        }
+        if (!q || textes.has(cleQuestionParcours(q.question))) continue;
+        textes.add(cleQuestionParcours(q.question));
+        // Le libellé voyage avec la question jusqu'au bilan : on le nettoie ici,
+        // une fois, plutôt qu'à chacun des endroits qui l'affichent.
+        selectedQuestions.push({ ...q, notionLabel: libelleNotion(q.notionLabel) });
+        restantes.push(notion);
+      }
+      actives = restantes;
+    }
 
     setQuestions(selectedQuestions);
     setAnswers({});
@@ -333,10 +365,10 @@ export default function ParcoursClient() {
     setSaveMessage(null);
   }
 
-  function handleAnswer(notionId: string, value: string) {
+  function handleAnswer(rang: number, value: string) {
     setAnswers((prev) => ({
       ...prev,
-      [notionId]: value,
+      [rang]: value,
     }));
   }
 
@@ -357,7 +389,7 @@ export default function ParcoursClient() {
     question: ParcoursQuestion,
     studentQuestion: string
   ) {
-    const userAnswer = answers[question.notionId] ?? "Aucune réponse";
+    const userAnswer = answers[questions.indexOf(question)] ?? "Aucune réponse";
     const expected = question.question.expected?.join(" ou ") ?? "Non disponible";
     const explanation =
       question.question.explanation ??
@@ -400,7 +432,7 @@ export default function ParcoursClient() {
           notionLabel: currentContext.notionLabel,
           questionIndex: currentQuestionIndex > 0 ? currentQuestionIndex : null,
           questionText: currentContext.question.text,
-          studentAnswer: answers[currentContext.notionId] ?? "",
+          studentAnswer: answers[questions.indexOf(currentContext)] ?? "",
           expectedAnswer: currentContext.question.expected?.join(" ou ") ?? "",
           explanation: currentContext.question.explanation ?? "",
           studentQuestion: trimmed,
@@ -470,17 +502,18 @@ export default function ParcoursClient() {
         classe,
         nombreQuestionsChoisi: questionCount,
         nombreQuestionsReel: questions.length,
+        notionsChoisies: notionsChoisies.length > 0 ? notionsChoisies : "toutes",
         pourcentage,
         scores,
         answers,
-        questions: questions.map((q) => ({
+        questions: questions.map((q, i) => ({
           notionId: q.notionId,
           notionLabel: q.notionLabel,
           text: q.question.text,
           expected: q.question.expected ?? [],
-          userAnswer: answers[q.notionId] ?? "",
+          userAnswer: answers[i] ?? "",
           isCorrect: isCorrectAnswer(
-            answers[q.notionId] ?? "",
+            answers[i] ?? "",
             q.question.expected ?? []
           ),
         })),
@@ -628,6 +661,7 @@ export default function ParcoursClient() {
                   type="button"
                   onClick={() => {
                     setClasse(c);
+                    setNotionsChoisies([]);
                     resetParcours();
                   }}
                   className={[
@@ -659,6 +693,7 @@ export default function ParcoursClient() {
                       type="button"
                       onClick={() => {
                         setAnnee(chip.id);
+                        setNotionsChoisies([]);
                         resetParcours();
                       }}
                       aria-pressed={actif}
@@ -693,9 +728,73 @@ export default function ParcoursClient() {
             </div>
           ) : null}
 
+          {/* ⭐ 29/09/2026 — même geste que les automatismes : un chapitre,
+              plusieurs (cocher / décocher), ou la totale. */}
+          <div className="mt-6">
+            <p className="mb-1 text-sm font-black uppercase tracking-wide text-slate-700">
+              2. Choisis tes chapitres
+            </p>
+            <p className="mb-3 text-sm font-semibold text-slate-600">
+              Un seul, plusieurs (clique pour cocher ou décocher), ou la totale.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                aria-pressed={notionsChoisies.length === 0}
+                onClick={() => {
+                  setNotionsChoisies([]);
+                  resetParcours();
+                }}
+                className={[
+                  "rounded-2xl px-4 py-2 text-sm font-black shadow-sm transition",
+                  notionsChoisies.length === 0
+                    ? "bg-emerald-700 text-white ring-4 ring-yellow-300"
+                    : "bg-white text-slate-800 ring-1 ring-slate-200 hover:bg-emerald-50",
+                ].join(" ")}
+              >
+                🎲 La totale
+              </button>
+              {notions.map((notion) => {
+                const coche = notionsChoisies.includes(notion.id);
+                return (
+                  <button
+                    key={notion.id}
+                    type="button"
+                    aria-pressed={coche}
+                    onClick={() => {
+                      setNotionsChoisies((l) =>
+                        coche ? l.filter((x) => x !== notion.id) : [...l, notion.id]
+                      );
+                      resetParcours();
+                    }}
+                    className={[
+                      "rounded-2xl px-4 py-2 text-left text-sm font-black shadow-sm transition",
+                      coche
+                        ? "bg-emerald-700 text-white ring-2 ring-emerald-300"
+                        : "bg-white text-slate-800 ring-1 ring-slate-200 hover:bg-emerald-50",
+                    ].join(" ")}
+                  >
+                    {coche ? "✓ " : ""}
+                    {libelleNotion(notion.label)}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="mt-6 rounded-3xl bg-gradient-to-r from-emerald-100 via-sky-100 to-yellow-100 p-4 ring-1 ring-white/80">
+            <p className="text-sm font-black text-slate-800">
+              {notionsChoisies.length === 0
+                ? `🎯 ${questionCount} questions tirées parmi les ${notions.length} notions de l'année, une par notion.`
+                : notionsChoisies.length === 1
+                  ? `🎯 ${questionCount} questions sur le chapitre choisi.`
+                  : `🎯 ${questionCount} questions réparties entre tes ${notionsChoisies.length} chapitres.`}
+            </p>
+          </div>
+
           <div className="mt-6">
             <p className="mb-3 text-sm font-black uppercase tracking-wide text-slate-700">
-              2. Combien de questions ?
+              3. Combien de questions ?
             </p>
 
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -733,7 +832,7 @@ export default function ParcoursClient() {
 
           <div className="mt-6">
             <p className="mb-3 text-sm font-black uppercase tracking-wide text-slate-700">
-              3. Choisis ton niveau
+              4. Choisis ton niveau
             </p>
             <div className="grid gap-3 sm:grid-cols-2">
               <button
@@ -791,46 +890,6 @@ export default function ParcoursClient() {
             </Link>
           </div>
         </div>
-
-        {!started && (
-          <div className="rounded-[2rem] border border-white/70 bg-white/80 p-6 shadow-xl backdrop-blur-xl">
-            <h2 className="mb-3 text-2xl font-black text-slate-950">
-              🗺️ Notions prévues en {classe}
-            </h2>
-
-            <p className="mb-5 text-sm font-semibold text-slate-600">
-              Chaque carte peut devenir un défi. Tu en feras seulement{" "}
-              <span className="font-black text-emerald-700">
-                {questionCount}
-              </span>{" "}
-              dans cette évaluation.
-            </p>
-
-            <div className="grid gap-3 md:grid-cols-2">
-              {notions.map((notion, index) => (
-                <div
-                  key={notion.id}
-                  className="rounded-3xl border border-white bg-gradient-to-br from-white to-emerald-50 p-4 shadow-md ring-1 ring-emerald-100"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-100 text-lg font-black text-emerald-800">
-                      {index + 1}
-                    </div>
-
-                    <div>
-                      <div className="font-black text-slate-950">
-                        {libelleNotion(notion.label)}
-                      </div>
-                      <div className="mt-1 text-xs font-bold text-slate-500">
-                        {notion.id}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
 
         {started && questions.length === 0 && (
           <div className="rounded-[2rem] border border-red-200 bg-white/85 p-6 shadow-xl backdrop-blur-xl">
@@ -947,7 +1006,7 @@ export default function ParcoursClient() {
             )}
 
             {questions.map((q, index) => {
-              const userAnswer = answers[q.notionId] ?? "";
+              const userAnswer = answers[index] ?? "";
               const expected = q.question.expected ?? [];
               const correct = isCorrectAnswer(userAnswer, expected);
               const learningVideoHref = buildLearningVideoHref({
@@ -1024,11 +1083,11 @@ export default function ParcoursClient() {
                           key={`${q.notionId}-${index}-${choiceIndex}`}
                           type="button"
                           disabled={submitted}
-                          onClick={() => handleAnswer(q.notionId, choice)}
+                          onClick={() => handleAnswer(index, choice)}
                           className={[
                             "rounded-2xl border px-4 py-3 text-left font-bold transition",
                             classText.choice(classBoard),
-                            answers[q.notionId] === choice
+                            answers[index] === choice
                               ? "border-emerald-500 bg-emerald-100 text-emerald-900"
                               : "border-slate-200 bg-white hover:bg-emerald-50",
                             submitted ? "cursor-not-allowed opacity-80" : "",
@@ -1040,10 +1099,10 @@ export default function ParcoursClient() {
                     </div>
                   ) : (
                     <input
-                      value={answers[q.notionId] ?? ""}
+                      value={answers[index] ?? ""}
                       disabled={submitted}
                       onChange={(e) =>
-                        handleAnswer(q.notionId, e.target.value)
+                        handleAnswer(index, e.target.value)
                       }
                       placeholder="Ta réponse..."
                       className={`mt-4 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 font-bold outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 disabled:cursor-not-allowed disabled:bg-slate-100 ${classText.input(classBoard)}`}

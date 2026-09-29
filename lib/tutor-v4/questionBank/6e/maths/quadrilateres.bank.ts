@@ -1,4 +1,4 @@
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4, QuadrilatereCanvasData } from "@/lib/tutor-v4/types";
 
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
@@ -6,6 +6,30 @@ function shuffle<T>(arr: T[]): T[] {
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function pick<T>(arr: readonly T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+// Des noms variés — le quadrilatère n'est pas toujours ABCD : quatre lettres
+// qui se suivent dans l'alphabet (EFGH, MNPQ, RSTU…), sans le O. Les sommets
+// sont donnés DANS L'ORDRE où l'on tourne autour de la figure.
+const ALPHABET_SANS_O = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
+function sommetsQuadrilatere(): [string, string, string, string] {
+  const i = randomInt(0, ALPHABET_SANS_O.length - 4);
+  const [a, b, c, d] = ALPHABET_SANS_O.slice(i, i + 4).split("");
+  return [a, b, c, d];
+}
+
+/** Un segment nommé avec ses extrémités dans l'ordre alphabétique : [EG]. */
+function seg(p: string, q: string) {
+  return `[${[p, q].sort().join("")}]`;
+}
+
+/** Une longueur, sans les crochets : EG. */
+function lg(p: string, q: string) {
+  return [p, q].sort().join("");
 }
 
 function expl(calcul: string) {
@@ -2637,4 +2661,271 @@ export const quadrilateresBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // =========================
+  // GÉNÉRATEURS DU 29/09/2026 — L'ÉVALUATION PAR CHAPITRES
+  //
+  // Le mode Défi (difficultés 3 à 5) n'offrait que 13 questions distinctes sur
+  // « Quadrilatères : reconnaître et nommer ». Six générateurs, noms des
+  // sommets variés. Le cœur exigeant : ne conclure que sur ce qui est CODÉ ou
+  // DONNÉ — un dessin qui « a l'air » d'un carré ne suffit pas, et deux côtés
+  // opposés égaux n'apprennent rien de plus sur un rectangle.
+  // =========================
+  {
+    kind: "template",
+    id: "quadrilatere_nommer_vocabulaire_qcm_tpl_oppose_diagonale",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilatere_figure",
+    microId: "quadrilatere_nommer_vocabulaire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Les sommets sont donnés dans l’ordre du tour : deux lettres voisines forment un côté.",
+    tags: ["quadrilatere_figure", "vocabulaire", "qcm", "template"],
+    generate: () => {
+      const s = sommetsQuadrilatere();
+      const nom = s.join("");
+      // On fait tourner la figure pour que le côté ou le sommet demandé change.
+      const k = randomInt(0, 3);
+      const [P, Q, R, T] = [s[k], s[(k + 1) % 4], s[(k + 2) % 4], s[(k + 3) % 4]];
+      const variante = pick(["diagonales", "cote", "sommet"] as const);
+      if (variante === "diagonales") {
+        const bonne = `${seg(P, R)} et ${seg(Q, T)}`;
+        return {
+          text: `Quelles sont les diagonales du quadrilatère ${nom} ?`,
+          format: "qcm",
+          choices: shuffle([bonne, `${seg(P, Q)} et ${seg(R, T)}`, `${seg(Q, R)} et ${seg(T, P)}`, `${seg(P, Q)} et ${seg(Q, R)}`]),
+          expected: [bonne],
+          comparator: "mcq_exact",
+          explanation: expl(`Une diagonale relie deux sommets OPPOSÉS (non voisins dans le nom ${nom}) : ${[P, R].sort().join(" avec ")}, et ${[Q, T].sort().join(" avec ")}. Les diagonales sont ${bonne}.`),
+        };
+      }
+      if (variante === "cote") {
+        return {
+          text: `Dans le quadrilatère ${nom}, quel côté est opposé au côté ${seg(P, Q)} ?`,
+          format: "qcm",
+          choices: shuffle([seg(R, T), seg(Q, R), seg(T, P), seg(P, R)]),
+          expected: [seg(R, T)],
+          comparator: "mcq_exact",
+          explanation: expl(`${seg(Q, R)} et ${seg(T, P)} touchent ${seg(P, Q)} : ce sont des côtés consécutifs. ${seg(P, R)} est une diagonale. Le côté qui ne le touche pas est ${seg(R, T)} : c’est le côté opposé.`),
+        };
+      }
+      return {
+        text: `Dans le quadrilatère ${nom}, quel sommet est opposé au sommet ${P} ?`,
+        format: "qcm",
+        choices: shuffle([R, Q, T]),
+        expected: [R],
+        comparator: "mcq_exact",
+        explanation: expl(`${Q} et ${T} sont les voisins de ${P} dans le nom ${nom} : ce sont des sommets consécutifs. Le sommet opposé est celui qui n’est pas voisin : ${R}.`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "quadrilatere_nommer_vocabulaire_qcm_tpl_nom_faux",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilatere_figure",
+    microId: "quadrilatere_nommer_vocabulaire",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Dans un nom correct, deux lettres qui se suivent sont toujours deux sommets voisins.",
+    tags: ["quadrilatere_figure", "vocabulaire", "qcm", "template", "nommer"],
+    generate: () => {
+      const s = sommetsQuadrilatere();
+      const nom = s.join("");
+      // Les 8 noms corrects : on part de n'importe quel sommet, dans un sens ou dans l'autre.
+      const corrects: string[] = [];
+      for (let k = 0; k < 4; k++) {
+        corrects.push([0, 1, 2, 3].map((i) => s[(k + i) % 4]).join(""));
+        corrects.push([0, 1, 2, 3].map((i) => s[(k - i + 4) % 4]).join(""));
+      }
+      // Un nom faux : deux sommets voisins échangés, ce qui fait se suivre deux sommets opposés.
+      const k = randomInt(0, 3);
+      const faux = [s[k], s[(k + 2) % 4], s[(k + 1) % 4], s[(k + 3) % 4]].join("");
+      const bons = shuffle(corrects.filter((n) => n !== nom)).slice(0, 3);
+      return {
+        text: `Parmi ces noms, lequel ne désigne PAS le quadrilatère ${nom} ?`,
+        format: "qcm",
+        choices: shuffle([faux, ...bons]),
+        expected: [faux],
+        comparator: "mcq_exact",
+        explanation: expl(
+          `On nomme un quadrilatère en tournant autour, dans un sens ou dans l’autre, en partant de n’importe quel sommet. Dans ${faux}, ${s[k]} est suivi de ${s[(k + 2) % 4]} : ce sont deux sommets opposés, et ${seg(s[k], s[(k + 2) % 4])} est une diagonale, pas un côté. ${faux} ne désigne donc pas ${nom}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "quadrilatere_defi_tpl_perimetre_cote",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilatere_figure",
+    microId: "quadrilatere_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Carré et losange ont leurs quatre côtés égaux.",
+    tags: ["quadrilatere_figure", "defi", "template", "perimetre"],
+    generate: () => {
+      const s = sommetsQuadrilatere();
+      const nature = pick(["carré", "losange"] as const);
+      const c = randomInt(2, 25);
+      const P = 4 * c;
+      const k = randomInt(0, 3);
+      return {
+        text: `Le ${nature} ${s.join("")} a un périmètre de ${P} cm. Combien mesure le côté ${seg(s[k], s[(k + 1) % 4])} ?`,
+        format: "short",
+        expected: [String(c), `${c} cm`],
+        comparator: "number_equal",
+        explanation: expl(`Un ${nature} a ses quatre côtés de même longueur. Le périmètre est la somme des quatre : un côté mesure ${P} ÷ 4 = ${c} cm.`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "quadrilatere_defi_tpl_rectangle_perimetre",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilatere_figure",
+    microId: "quadrilatere_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Une longueur et une largeur font la moitié du périmètre.",
+    tags: ["quadrilatere_figure", "defi", "template", "perimetre", "rectangle"],
+    generate: () => {
+      const s = sommetsQuadrilatere();
+      const l = randomInt(2, 15);
+      const L = l + randomInt(1, 15);
+      const P = 2 * (L + l);
+      const k = randomInt(0, 3);
+      const cote1 = lg(s[k], s[(k + 1) % 4]);
+      const cote2 = lg(s[(k + 1) % 4], s[(k + 2) % 4]);
+      const [donne, cherche] = pick([[L, l], [l, L]]);
+      return {
+        text: `Le rectangle ${s.join("")} a un périmètre de ${P} cm, et ${cote1} = ${donne} cm. Combien mesure ${cote2} ?`,
+        format: "short",
+        expected: [String(cherche), `${cherche} cm`],
+        comparator: "number_equal",
+        explanation: expl(
+          `${cote1} et ${cote2} sont deux côtés consécutifs du rectangle. Le périmètre compte deux fois chacun : ${cote1} + ${cote2} = ${P} ÷ 2 = ${P / 2} cm. Donc ${cote2} = ${P / 2} − ${donne} = ${cherche} cm.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "quadrilatere_identifier_nature_qcm_tpl_codages",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilatere_figure",
+    microId: "quadrilatere_identifier_nature",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "On ne conclut que sur ce qui est codé, jamais sur l’allure du dessin.",
+    tags: ["quadrilatere_figure", "nature", "qcm", "template", "canvas", "codage"],
+    generate: () => {
+      const s = sommetsQuadrilatere();
+      const nom = s.join("");
+      const carre = { A: { x: 95, y: 205 }, B: { x: 245, y: 205 }, C: { x: 245, y: 55 }, D: { x: 95, y: 55 } };
+      const tousLesCotes: Array<[QuadrilatereCanvasSideLabel6e, QuadrilatereCanvasSideLabel6e]> = [["AB", "BC"], ["BC", "CD"], ["CD", "DA"]];
+      const tousLesAngles: Array<"A" | "B" | "C" | "D"> = ["A", "B", "C", "D"];
+      const cas = pick([
+        {
+          rep: "carré",
+          points: carre,
+          marks: { rightAnglesAt: tousLesAngles, equalSides: tousLesCotes },
+          pourquoi: "Quatre angles droits ET quatre côtés codés égaux : c’est un carré.",
+        },
+        {
+          rep: "rectangle",
+          points: { A: { x: 60, y: 190 }, B: { x: 270, y: 190 }, C: { x: 270, y: 70 }, D: { x: 60, y: 70 } },
+          marks: { rightAnglesAt: tousLesAngles },
+          pourquoi: "Quatre angles droits, et les côtés ne sont pas codés égaux : c’est un rectangle.",
+        },
+        {
+          rep: "losange",
+          points: { A: { x: 60, y: 190 }, B: { x: 190, y: 190 }, C: { x: 255, y: 77 }, D: { x: 125, y: 77 } },
+          marks: { equalSides: tousLesCotes },
+          pourquoi: "Quatre côtés codés égaux, sans angle droit : c’est un losange.",
+        },
+        {
+          rep: "rectangle",
+          points: carre,
+          marks: { rightAnglesAt: tousLesAngles },
+          pourquoi: "Le dessin a l’allure d’un carré, mais seuls les angles droits sont codés : rien ne dit que les côtés sont égaux. On peut seulement affirmer que c’est un rectangle.",
+        },
+        {
+          rep: "losange",
+          points: carre,
+          marks: { equalSides: tousLesCotes },
+          pourquoi: "Le dessin a l’allure d’un carré, mais seuls les côtés égaux sont codés : aucun angle droit n’est marqué. On peut seulement affirmer que c’est un losange.",
+        },
+      ]);
+      const canvas: QuadrilatereCanvasData = {
+        kind: "quadrilatere",
+        size: { width: 330, height: 250 },
+        points: cas.points,
+        labels: { A: s[0], B: s[1], C: s[2], D: s[3] },
+        display: { showPoints: true, showLabels: true },
+        marks: cas.marks,
+      };
+      return {
+        text: `Observe les codages du quadrilatère ${nom}. Quelle est sa nature la plus précise que l’on peut affirmer ?`,
+        format: "qcm",
+        choices: shuffle(["carré", "rectangle", "losange"]),
+        expected: [cas.rep],
+        comparator: "mcq_exact",
+        explanation: expl(cas.pourquoi),
+        canvas,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "quadrilatere_distinguer_qcm_tpl_carre_ou_rectangle",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "quadrilatere_figure",
+    microId: "quadrilatere_distinguer",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Les deux côtés donnés sont-ils consécutifs (ils se touchent) ou opposés ?",
+    tags: ["quadrilatere_figure", "distinguer", "qcm", "template", "raisonnement"],
+    generate: () => {
+      const s = sommetsQuadrilatere();
+      const nom = s.join("");
+      const k = randomInt(0, 3);
+      const [P, Q, R, T] = [s[k], s[(k + 1) % 4], s[(k + 2) % 4], s[(k + 3) % 4]];
+      const a = randomInt(3, 15);
+      const b = a + randomInt(1, 8);
+      const cas = pick([
+        {
+          info: `${lg(P, Q)} = ${lg(Q, R)} = ${a} cm`,
+          rep: "carré",
+          pourquoi: `Quatre angles droits : c’est un rectangle. De plus, ${seg(P, Q)} et ${seg(Q, R)} sont consécutifs (ils partent tous deux de ${Q}) et égaux. Dans un rectangle, les côtés opposés sont égaux : les quatre côtés mesurent donc ${a} cm. C’est un carré.`,
+        },
+        {
+          info: `${lg(P, Q)} = ${a} cm et ${lg(Q, R)} = ${b} cm`,
+          rep: "rectangle",
+          pourquoi: `Quatre angles droits : c’est un rectangle. Deux côtés consécutifs, ${seg(P, Q)} et ${seg(Q, R)}, ont des longueurs différentes : ce n’est pas un carré.`,
+        },
+        {
+          info: `${lg(P, Q)} = ${lg(R, T)} = ${a} cm`,
+          rep: "rectangle",
+          pourquoi: `Quatre angles droits : c’est un rectangle. ${seg(P, Q)} et ${seg(R, T)} sont OPPOSÉS : dans tout rectangle ils sont égaux, cette information n’apprend rien de plus. On ne sait rien de deux côtés consécutifs, donc on ne peut pas affirmer que c’est un carré.`,
+        },
+      ]);
+      return {
+        text: `Le quadrilatère ${nom} a quatre angles droits, et ${cas.info}. Quelle est sa nature la plus précise que l’on peut affirmer ?`,
+        format: "qcm",
+        choices: shuffle(["carré", "rectangle", "losange"]),
+        expected: [cas.rep],
+        comparator: "mcq_exact",
+        explanation: expl(cas.pourquoi),
+      };
+    },
+  },
 ];
+
+type QuadrilatereCanvasSideLabel6e = "AB" | "BC" | "CD" | "DA";

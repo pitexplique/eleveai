@@ -25,6 +25,30 @@ function exp(definition: string, methode: string, calcul: string, conclusion: st
   );
 }
 
+function pick<T>(arr: readonly T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+/**
+ * Écriture décimale EXACTE de num/den (au plus `max` décimales), ou null si le
+ * quotient ne tombe pas juste : les générateurs écartent alors le tirage plutôt
+ * que d'afficher un arrondi ou un 0,30000000000000004.
+ */
+function decimalExact(num: number, den: number, max = 4): string | null {
+  for (let k = 0; k <= max; k++) {
+    const scaled = num * 10 ** k;
+    if (Number.isInteger(scaled) && scaled % den === 0) {
+      return String(scaled / den / 10 ** k).replace(".", ",");
+    }
+  }
+  return null;
+}
+
+/** « 0,25 » → « 0{,}25 » pour l'écrire dans une formule. */
+function tex(s: string): string {
+  return s.replace(",", "{,}");
+}
+
 export const concentrationBank: TutorBankItemV4[] = [
   /* =========================================================
      CONCENTRATION_ECHANTILLON_MOYENNE
@@ -1593,5 +1617,239 @@ export const concentrationBank: TutorBankItemV4[] = [
       "$V(F_n) = 0{,}000625$."
     ),
     tags: ["terminale-spe", "concentration", "type_bac", "qcm"],
+  },
+
+  /* =========================================================
+     GÉNÉRATEURS (29/09/2026)
+     L'évaluation par chapitres tire jusqu'à 20 questions sur cette seule
+     notion en mode Révision (difficultés 1 à 3) : les items figés n'en
+     offraient que 19. Chaque générateur écarte les tirages dont le résultat
+     ne tombe pas juste (voir `decimalExact`) et ceux dont le majorant
+     dépasserait 1 — un majorant de probabilité supérieur à 1 ne dit rien.
+  ========================================================= */
+
+  {
+    kind: "template",
+    id: "terminale_spe_conc_moy_tpl_variance",
+    niveau: "terminale-spe",
+    matiere: "maths",
+    notionId: "concentration_echantillonnage",
+    microId: "concentration_echantillon_moyenne",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "$V(M_n) = \\dfrac{V(X)}{n}$ : la variance est divisée par $n$, pas par $n^2$.",
+    tags: ["terminale-spe", "concentration", "echantillon", "template", "short"],
+    generate: () => {
+      const contexte = pick([
+        { x: "le temps d'attente (en minutes) d'un client à un guichet", lot: "clients pris au hasard" },
+        { x: "la masse (en grammes) d'un paquet de café", lot: "paquets pris au hasard" },
+        { x: "le montant (en euros) d'un ticket de caisse", lot: "tickets pris au hasard" },
+        { x: "la durée (en heures) d'une batterie de téléphone", lot: "batteries prises au hasard" },
+      ] as const);
+      let n = 0;
+      let v = 0;
+      let res: string | null = null;
+      do {
+        n = pick([2, 4, 5, 8, 10, 16, 20, 25, 40, 50, 100] as const);
+        v = pick([1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 25, 30, 36] as const);
+        res = decimalExact(v, n);
+      } while (res === null || v / n < 0.01);
+      return {
+        text:
+          `On note $X$ ${contexte.x}, de variance $V(X) = ${v}$. On relève cette grandeur sur $${n}$ ${contexte.lot}, ` +
+          `de façon indépendante, et $M_{${n}}$ est la moyenne des $${n}$ valeurs. Que vaut $V(M_{${n}})$ ?`,
+        format: "short",
+        expected: [res],
+        comparator: "number_equal",
+        explanation: exp(
+          "Pour un échantillon de $n$ variables indépendantes de même loi, $V(M_n) = \\dfrac{V(X)}{n}$.",
+          "On divise la variance commune par la taille de l'échantillon.",
+          `$V(M_{${n}}) = \\dfrac{${v}}{${n}} = ${tex(res)}$.`,
+          `$V(M_{${n}}) = ${tex(res)}$ — plus petite que $V(X)$ : la moyenne fluctue moins qu'une valeur isolée.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "terminale_spe_conc_moy_tpl_ecart_type",
+    niveau: "terminale-spe",
+    matiere: "maths",
+    notionId: "concentration_echantillonnage",
+    microId: "concentration_echantillon_moyenne",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$V(M_n) = \\dfrac{\\sigma^2}{n}$, donc $\\sigma(M_n) = \\dfrac{\\sigma}{\\sqrt{n}}$.",
+    tags: ["terminale-spe", "concentration", "echantillon", "template", "short"],
+    generate: () => {
+      let sigma = 0;
+      let racine = 0;
+      let res: string | null = null;
+      do {
+        sigma = pick([1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 30] as const);
+        racine = pick([2, 4, 5, 8, 10, 20] as const);
+        res = decimalExact(sigma, racine);
+      } while (res === null || sigma === racine);
+      const n = racine * racine;
+      return {
+        text:
+          `Une variable aléatoire $X$ a pour écart-type $\\sigma = ${sigma}$. ` +
+          `Quel est l'écart-type de la moyenne $M_{${n}}$ d'un échantillon de taille $${n}$ de $X$ ?`,
+        format: "short",
+        expected: [res],
+        comparator: "number_equal",
+        explanation: exp(
+          "$V(M_n) = \\dfrac{\\sigma^2}{n}$ ; l'écart-type est la racine carrée de la variance.",
+          "$\\sigma(M_n) = \\sqrt{\\dfrac{\\sigma^2}{n}} = \\dfrac{\\sigma}{\\sqrt{n}}$ : on divise par $\\sqrt{n}$, pas par $n$.",
+          `$\\sigma(M_{${n}}) = \\dfrac{${sigma}}{\\sqrt{${n}}} = \\dfrac{${sigma}}{${racine}} = ${tex(res)}$.`,
+          `$\\sigma(M_{${n}}) = ${tex(res)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "terminale_spe_conc_bien_tpl_majorant",
+    niveau: "terminale-spe",
+    matiere: "maths",
+    notionId: "concentration_echantillonnage",
+    microId: "concentration_inegalite_bienayme",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$P(|X - \\mu| \\ge \\delta) \\le \\dfrac{V(X)}{\\delta^2}$ : repère d'abord $\\mu$ et $\\delta$.",
+    tags: ["terminale-spe", "concentration", "bienayme", "template", "short"],
+    generate: () => {
+      let v = 0;
+      let delta = 0;
+      let res: string | null = null;
+      do {
+        v = pick([1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 20, 25, 30, 40] as const);
+        delta = pick([2, 4, 5, 10, 20] as const);
+        res = decimalExact(v, delta * delta);
+      } while (res === null || v / (delta * delta) > 1 || v / (delta * delta) < 0.01);
+      const mu = pick([20, 30, 40, 50, 60, 80, 100, 120] as const);
+      // Deux écritures du même événement : la forme « écart », et la forme
+      // « en dehors d'un intervalle » où il faut retrouver δ soi-même.
+      const intervalle = Math.random() < 0.5;
+      const evenement = intervalle
+        ? `P(X \\le ${mu - delta} \\text{ ou } X \\ge ${mu + delta})`
+        : `P(|X - ${mu}| \\ge ${delta})`;
+      return {
+        text:
+          `Une variable aléatoire $X$ a pour espérance $${mu}$ et pour variance $${v}$. ` +
+          `Quel majorant l'inégalité de Bienaymé-Tchebychev donne-t-elle pour $${evenement}$ ?`,
+        format: "short",
+        expected: [res],
+        comparator: "number_equal",
+        explanation: exp(
+          "Bienaymé-Tchebychev : $P(|X - \\mu| \\ge \\delta) \\le \\dfrac{V(X)}{\\delta^2}$.",
+          intervalle
+            ? `L'événement « $X \\le ${mu - delta}$ ou $X \\ge ${mu + delta}$ » s'écrit $|X - ${mu}| \\ge ${delta}$ : $\\delta = ${delta}$.`
+            : `Ici $\\mu = ${mu}$ et $\\delta = ${delta}$.`,
+          `$\\dfrac{${v}}{${delta}^2} = \\dfrac{${v}}{${delta * delta}} = ${tex(res)}$. ⚠️ On divise par $\\delta^2$, pas par $\\delta$.`,
+          `La probabilité est au plus $${tex(res)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "terminale_spe_conc_conc_tpl_majorant",
+    niveau: "terminale-spe",
+    matiere: "maths",
+    notionId: "concentration_echantillonnage",
+    microId: "concentration_inegalite_concentration",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "$P(|M_n - \\mu| \\ge \\delta) \\le \\dfrac{\\sigma^2}{n\\delta^2}$.",
+    tags: ["terminale-spe", "concentration", "concentration", "template", "short"],
+    generate: () => {
+      // σ² = s/100 et δ = d/10 : le majorant vaut s / (n·d²), calcul entier.
+      let s = 0;
+      let n = 0;
+      let d = 0;
+      let res: string | null = null;
+      do {
+        s = pick([25, 50, 100, 200, 400, 900, 1600, 2500] as const);
+        n = pick([50, 100, 200, 250, 400, 500, 1000, 2000] as const);
+        d = pick([1, 2, 5, 10, 20] as const);
+        res = decimalExact(s, n * d * d);
+      } while (res === null || s / (n * d * d) > 1 || s / (n * d * d) < 0.01);
+      const sigma2 = String(s / 100).replace(".", ",");
+      const delta = String(d / 10).replace(".", ",");
+      const delta2 = String((d * d) / 100).replace(".", ",");
+      return {
+        text:
+          `Un échantillon de taille $n = ${n}$ est formé de variables indépendantes de même loi, ` +
+          `de variance $\\sigma^2 = ${tex(sigma2)}$. ` +
+          `Quel majorant l'inégalité de concentration donne-t-elle pour $P(|M_n - \\mu| \\ge ${tex(delta)})$ ?`,
+        format: "short",
+        expected: [res],
+        comparator: "number_equal",
+        explanation: exp(
+          "Inégalité de concentration : $P(|M_n - \\mu| \\ge \\delta) \\le \\dfrac{\\sigma^2}{n\\delta^2}$.",
+          "On remplace, en élevant bien $\\delta$ au carré.",
+          `$\\dfrac{${tex(sigma2)}}{${n} \\times ${tex(delta)}^2} = \\dfrac{${tex(sigma2)}}{${n} \\times ${tex(delta2)}} = ${tex(res)}$.`,
+          `Le majorant est $${tex(res)}$.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "terminale_spe_conc_fluc_tpl_majorant",
+    niveau: "terminale-spe",
+    matiere: "maths",
+    notionId: "concentration_echantillonnage",
+    microId: "concentration_fluctuation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Pour une fréquence, $\\sigma^2$ devient $p(1-p)$ : $P(|F_n - p| \\ge \\delta) \\le \\dfrac{p(1-p)}{n\\delta^2}$.",
+    tags: ["terminale-spe", "concentration", "fluctuation", "template", "short"],
+    generate: () => {
+      const contexte = pick([
+        { epreuve: "une pièce produite", succes: "la pièce est défectueuse" },
+        { epreuve: "un client interrogé", succes: "le client est satisfait" },
+        { epreuve: "une graine semée", succes: "la graine germe" },
+        { epreuve: "un colis expédié", succes: "le colis arrive en retard" },
+      ] as const);
+      // p = q/100 et δ = d/100 : le majorant vaut q(100 − q) / (n·d²).
+      let q = 0;
+      let n = 0;
+      let d = 0;
+      let res: string | null = null;
+      do {
+        q = pick([5, 10, 15, 20, 25, 30, 40, 45, 50, 60, 70, 75, 80, 90] as const);
+        n = pick([100, 200, 250, 400, 500, 1000, 2000, 2500] as const);
+        d = pick([5, 10, 20] as const);
+        const num = q * (100 - q);
+        res = decimalExact(num, n * d * d);
+        if (res !== null && (num / (n * d * d) > 1 || num / (n * d * d) < 0.01)) res = null;
+      } while (res === null);
+      const p = String(q / 100).replace(".", ",");
+      const unMoinsP = String((100 - q) / 100).replace(".", ",");
+      const delta = String(d / 100).replace(".", ",");
+      const produit = decimalExact(q * (100 - q), 10000) ?? "";
+      return {
+        text:
+          `Pour ${contexte.epreuve}, la probabilité que ${contexte.succes} vaut $p = ${tex(p)}$. ` +
+          `Sur $n = ${n}$ épreuves indépendantes, $F_n$ est la fréquence observée. ` +
+          `Quel majorant l'inégalité de concentration donne-t-elle pour $P(|F_n - ${tex(p)}| \\ge ${tex(delta)})$ ?`,
+        format: "short",
+        expected: [res],
+        comparator: "number_equal",
+        explanation: exp(
+          "$F_n$ est la moyenne de $n$ variables de Bernoulli de paramètre $p$ : sa variance commune vaut $p(1-p)$.",
+          "On applique l'inégalité de concentration avec $\\sigma^2 = p(1-p)$.",
+          `$p(1-p) = ${tex(p)} \\times ${tex(unMoinsP)} = ${tex(produit)}$, puis ` +
+            `$\\dfrac{${tex(produit)}}{${n} \\times ${tex(delta)}^2} = ${tex(res)}$.`,
+          `La probabilité d'un écart d'au moins $${tex(delta)}$ est au plus $${tex(res)}$.`
+        ),
+      };
+    },
   },
 ];

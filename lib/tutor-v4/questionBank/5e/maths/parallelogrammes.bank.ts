@@ -67,6 +67,43 @@ function paraCanvas(params: {
   };
 }
 
+function randomInt(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Des noms variés — le parallélogramme n'est pas toujours ABCD : quatre lettres
+// qui se suivent dans l'alphabet (EFGH, MNPQ, RSTU…), sans le O, gardé pour le
+// centre. Les sommets sont donnés dans l'ordre du tour.
+const ALPHABET_SANS_O = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
+function sommetsPara(): [string, string, string, string] {
+  const i = randomInt(0, ALPHABET_SANS_O.length - 4);
+  const [a, b, c, d] = ALPHABET_SANS_O.slice(i, i + 4).split("");
+  return [a, b, c, d];
+}
+
+/** Les sommets relus à partir du k-ième : le côté ou l'angle demandé change. */
+function tourner(s: readonly string[], k: number): [string, string, string, string] {
+  return [s[k % 4], s[(k + 1) % 4], s[(k + 2) % 4], s[(k + 3) % 4]];
+}
+
+/** Un segment avec ses extrémités dans l'ordre alphabétique : [EG]. */
+function seg(p: string, q: string) {
+  return `[${[p, q].sort().join("")}]`;
+}
+
+/** Une longueur, sans les crochets : EG. */
+function lg(p: string, q: string) {
+  return [p, q].sort().join("");
+}
+
+/** Une longueur au demi-centimètre près, écrite à la française : 4,5. */
+function demi(): number {
+  return randomInt(4, 30) / 2;
+}
+function fr(x: number) {
+  return String(x).replace(".", ",");
+}
+
 function expl(calcul: string) {
   return (
     "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
@@ -882,6 +919,238 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
         explanation: expl(
           `${cas.suffit ? "Oui, cela suffit" : "Non, cela ne suffit pas"} : ${cas.pourquoi}`,
         ),
+      };
+    },
+  },
+
+  /* ===== GÉNÉRATEURS DU 29/09/2026 — L'ÉVALUATION PAR CHAPITRES =====
+     Le mode Révision (difficultés 1 à 3) n'offrait que 11 questions
+     distinctes sur « Parallélogrammes » : presque tout était en défi. Sept
+     générateurs qui appliquent UNE propriété à la fois — côtés opposés, angles
+     opposés, diagonales, centre de symétrie, cas particuliers, reconnaissance
+     — avec des noms de sommets et des mesures qui changent à chaque tirage. */
+  {
+    kind: "template",
+    id: "para_cotes_angles_tpl_cote_oppose",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "parallelogramme",
+    microId: "para_cotes_angles",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Dans un parallélogramme, deux côtés opposés ont la même longueur.",
+    tags: ["parallelogramme", "cotes", "template"],
+    generate: () => {
+      const s = sommetsPara();
+      const [P, Q, R, T] = tourner(s, randomInt(0, 3));
+      const a = demi();
+      let b = demi();
+      if (b === a) b = a + 1;
+      const [cherche, rep, face] = randomChoice([
+        [lg(R, T), a, lg(P, Q)],
+        [lg(T, P), b, lg(Q, R)],
+      ] as Array<[string, number, string]>);
+      return {
+        text: `Dans le parallélogramme ${s.join("")}, ${lg(P, Q)} = ${fr(a)} cm et ${lg(Q, R)} = ${fr(b)} cm. Combien mesure ${cherche} ?`,
+        format: "short",
+        expected: [fr(rep), `${fr(rep)} cm`],
+        comparator: "number_equal",
+        explanation: expl(`[${cherche}] est le côté opposé à [${face}]. Dans un parallélogramme, les côtés opposés ont la même longueur : ${cherche} = ${face} = ${fr(rep)} cm.`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "para_cotes_angles_tpl_angle_oppose",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "parallelogramme",
+    microId: "para_cotes_angles",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Deux angles opposés d’un parallélogramme ont la même mesure.",
+    tags: ["parallelogramme", "angles", "template"],
+    generate: () => {
+      const s = sommetsPara();
+      const [P, , R] = tourner(s, randomInt(0, 3));
+      let a = randomInt(35, 145);
+      if (a === 90) a = 72;
+      return {
+        text: `Dans le parallélogramme ${s.join("")}, l’angle en ${P} mesure ${a}°. Combien mesure l’angle en ${R} ?`,
+        format: "short",
+        expected: [String(a), `${a}°`],
+        comparator: "number_equal",
+        explanation: expl(`${P} et ${R} ne sont pas voisins dans le nom ${s.join("")} : ce sont des sommets opposés. Dans un parallélogramme, deux angles opposés sont égaux : l’angle en ${R} mesure ${a}°.`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "para_cotes_angles_tpl_perimetre",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "parallelogramme",
+    microId: "para_cotes_angles",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "On ne connaît que deux côtés, mais les deux autres leur sont égaux.",
+    tags: ["parallelogramme", "cotes", "perimetre", "template"],
+    generate: () => {
+      const s = sommetsPara();
+      const [P, Q, R] = tourner(s, randomInt(0, 3));
+      const a = demi();
+      let b = demi();
+      if (b === a) b = a + 1.5;
+      const perimetre = 2 * (a + b);
+      return {
+        text: `Dans le parallélogramme ${s.join("")}, ${lg(P, Q)} = ${fr(a)} cm et ${lg(Q, R)} = ${fr(b)} cm. Quel est son périmètre ?`,
+        format: "short",
+        expected: [fr(perimetre), `${fr(perimetre)} cm`],
+        comparator: "number_equal",
+        explanation: expl(`Les côtés opposés sont égaux : le parallélogramme a deux côtés de ${fr(a)} cm et deux côtés de ${fr(b)} cm. Périmètre : 2 × (${fr(a)} + ${fr(b)}) = 2 × ${fr(a + b)} = ${fr(perimetre)} cm.`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "para_diagonales_tpl_milieu",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "parallelogramme",
+    microId: "para_diagonales",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Les diagonales d’un parallélogramme se coupent en leur milieu.",
+    tags: ["parallelogramme", "diagonales", "template"],
+    generate: () => {
+      const s = sommetsPara();
+      const [P, , R] = tourner(s, randomInt(0, 3));
+      const I = randomChoice(["O", "I", "K", "M"].filter((x) => !s.includes(x)));
+      const x = demi();
+      const cas = randomChoice([
+        {
+          text: `Les diagonales du parallélogramme ${s.join("")} se coupent en ${I}, et ${lg(P, I)} = ${fr(x)} cm. Combien mesure ${lg(R, I)} ?`,
+          rep: x,
+          pourquoi: `${I} est le milieu de la diagonale ${seg(P, R)}, donc ${lg(R, I)} = ${lg(P, I)} = ${fr(x)} cm.`,
+        },
+        {
+          text: `Les diagonales du parallélogramme ${s.join("")} se coupent en ${I}, et ${lg(P, I)} = ${fr(x)} cm. Combien mesure la diagonale ${lg(P, R)} ?`,
+          rep: 2 * x,
+          pourquoi: `${I} est le milieu de ${seg(P, R)} : la diagonale mesure deux fois ${lg(P, I)}, soit 2 × ${fr(x)} = ${fr(2 * x)} cm.`,
+        },
+        {
+          text: `Les diagonales du parallélogramme ${s.join("")} se coupent en ${I}, et la diagonale ${lg(P, R)} mesure ${fr(2 * x)} cm. Combien mesure ${lg(P, I)} ?`,
+          rep: x,
+          pourquoi: `${I} est le milieu de ${seg(P, R)} : ${lg(P, I)} vaut la moitié de la diagonale, ${fr(2 * x)} ÷ 2 = ${fr(x)} cm.`,
+        },
+      ]);
+      return {
+        text: cas.text,
+        format: "short",
+        expected: [fr(cas.rep), `${fr(cas.rep)} cm`],
+        comparator: "number_equal",
+        explanation: expl(`Dans un parallélogramme, les diagonales se coupent en leur milieu. ${cas.pourquoi}`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "para_diagonales_qcm_tpl_symetrique",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "parallelogramme",
+    microId: "para_diagonales",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Le centre d’un parallélogramme est le milieu de ses deux diagonales.",
+    tags: ["parallelogramme", "diagonales", "symetrie_centrale", "qcm", "template"],
+    generate: () => {
+      const s = sommetsPara();
+      const [P, Q, R, T] = tourner(s, randomInt(0, 3));
+      const O = randomChoice(["O", "I", "K", "M"].filter((x) => !s.includes(x)));
+      if (Math.random() < 0.5) {
+        return {
+          text: `Le parallélogramme ${s.join("")} a pour centre ${O}. Quel est le symétrique du point ${P} par rapport à ${O} ?`,
+          format: "qcm",
+          choices: shuffle([R, Q, T, P]),
+          expected: [R],
+          comparator: "mcq_exact",
+          explanation: expl(`${O} est le milieu de la diagonale ${seg(P, R)}. Le symétrique de ${P} par rapport à ${O} est donc l’autre extrémité de cette diagonale : ${R}.`),
+        };
+      }
+      return {
+        text: `Le parallélogramme ${s.join("")} a pour centre ${O}. Quel est le symétrique du côté ${seg(P, Q)} par rapport à ${O} ?`,
+        format: "qcm",
+        choices: shuffle([seg(R, T), seg(Q, R), seg(T, P), seg(P, R)]),
+        expected: [seg(R, T)],
+        comparator: "mcq_exact",
+        explanation: expl(`Par rapport à ${O}, ${P} a pour symétrique ${R} et ${Q} a pour symétrique ${T}. Le côté ${seg(P, Q)} a donc pour symétrique ${seg(R, T)}, le côté opposé.`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "para_particuliers_qcm_tpl_propriete",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "parallelogramme",
+    microId: "para_particuliers",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Côtés consécutifs égaux ou diagonales perpendiculaires : losange. Angle droit ou diagonales de même longueur : rectangle.",
+    tags: ["parallelogramme", "particuliers", "qcm", "template"],
+    generate: () => {
+      const s = sommetsPara();
+      const [P, Q, R, T] = tourner(s, randomInt(0, 3));
+      const cas = randomChoice([
+        { info: `${lg(P, Q)} = ${lg(Q, R)}`, rep: "un losange", pourquoi: "Un parallélogramme qui a deux côtés consécutifs égaux a ses quatre côtés égaux : c’est un losange." },
+        { info: `l’angle en ${P} est droit`, rep: "un rectangle", pourquoi: "Un parallélogramme qui a un angle droit a ses quatre angles droits : c’est un rectangle." },
+        { info: `ses diagonales ${seg(P, R)} et ${seg(Q, T)} ont la même longueur`, rep: "un rectangle", pourquoi: "Un parallélogramme dont les diagonales ont la même longueur est un rectangle." },
+        { info: `ses diagonales ${seg(P, R)} et ${seg(Q, T)} sont perpendiculaires`, rep: "un losange", pourquoi: "Un parallélogramme dont les diagonales sont perpendiculaires est un losange." },
+        { info: `${lg(P, Q)} = ${lg(Q, R)} et l’angle en ${Q} est droit`, rep: "un carré", pourquoi: "Deux côtés consécutifs égaux en font un losange, un angle droit en fait un rectangle : les deux à la fois, c’est un carré." },
+      ]);
+      return {
+        text: `${s.join("")} est un parallélogramme. On sait que ${cas.info}. Quelle est sa nature ?`,
+        format: "qcm",
+        choices: shuffle(["un losange", "un rectangle", "un carré"]),
+        expected: [cas.rep],
+        comparator: "mcq_exact",
+        explanation: expl(cas.pourquoi),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "para_reconnaitre_qcm_tpl_suffit",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "parallelogramme",
+    microId: "para_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une seule paire de côtés parallèles, ou des diagonales seulement égales ou perpendiculaires, ne suffit pas.",
+    tags: ["parallelogramme", "reconnaitre", "qcm", "template"],
+    generate: () => {
+      const s = sommetsPara();
+      const [P, Q, R, T] = tourner(s, randomInt(0, 3));
+      const oui = "oui";
+      const non = "non, pas forcément";
+      const cas = randomChoice([
+        { info: `(${lg(P, Q)}) // (${lg(R, T)}) et (${lg(Q, R)}) // (${lg(T, P)})`, rep: oui, pourquoi: "Ses côtés opposés sont parallèles deux à deux : c’est la définition du parallélogramme." },
+        { info: `ses diagonales ${seg(P, R)} et ${seg(Q, T)} ont le même milieu`, rep: oui, pourquoi: "Un quadrilatère dont les diagonales se coupent en leur milieu est un parallélogramme." },
+        { info: `(${lg(P, Q)}) // (${lg(R, T)}) et ${lg(P, Q)} = ${lg(R, T)}`, rep: oui, pourquoi: "Deux côtés opposés à la fois parallèles et de même longueur suffisent : c’est un parallélogramme." },
+        { info: `ses quatre côtés ont la même longueur`, rep: oui, pourquoi: "Quatre côtés égaux font un losange, et tout losange est un parallélogramme." },
+        { info: `(${lg(P, Q)}) // (${lg(R, T)})`, rep: non, pourquoi: "Une seule paire de côtés parallèles peut donner un trapèze : il faut les deux paires." },
+        { info: `ses diagonales ${seg(P, R)} et ${seg(Q, T)} ont la même longueur`, rep: non, pourquoi: "Des diagonales de même longueur ne suffisent pas : si elles ne se coupent pas en leur milieu, la figure n’est pas un parallélogramme (un trapèze isocèle, par exemple)." },
+        { info: `ses diagonales ${seg(P, R)} et ${seg(Q, T)} sont perpendiculaires`, rep: non, pourquoi: "Des diagonales perpendiculaires ne suffisent pas : un cerf-volant a ses diagonales perpendiculaires sans être un parallélogramme." },
+      ]);
+      return {
+        text: `Du quadrilatère ${s.join("")}, on sait seulement ceci : ${cas.info}. Peut-on affirmer que c’est un parallélogramme ?`,
+        format: "qcm",
+        choices: [oui, non],
+        expected: [cas.rep],
+        comparator: "mcq_exact",
+        explanation: expl(cas.pourquoi),
       };
     },
   },
