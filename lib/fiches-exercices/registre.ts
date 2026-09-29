@@ -469,6 +469,38 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
       "Du taux de variation au problème de contrôle : nombre dérivé par la définition, lecture d'une tangente, équation de la tangente, dérivées usuelles, somme, produit, quotient, g(ax + b), valeur absolue. Une pierre qui tombe d'une falaise, le coût d'une planche de skate de plus, un médicament dans le sang. Courbes et tangentes dessinées dans les corrigés.",
     notionsCoach: ["derivation_nombre_derive", "derivation_tangente", "derivation_formules", "derivation_operations"],
   },
+  // ⭐ LES SIX DERNIÈRES FEUILLES DE 1re SPÉ (29/09/2026) — une par notion,
+  // chaque exercice avec son dessin (« n'oublie pas les canvas »).
+  "maths/premiere-spe/produit-scalaire": {
+    titre: "Calcul vectoriel et produit scalaire : 20 exercices corrigés",
+    resume:
+      "Du geste seul au problème de contrôle : projection, normes et angle, coordonnées, orthogonalité, Al-Kashi et sa démonstration, l'ensemble des points M tels que MA·MB = 0. Travail d'une force sur une luge, voile, panneau solaire, radar, téléski. Vecteurs et projetés dessinés.",
+  },
+  "maths/premiere-spe/geometrie-reperee": {
+    titre: "Géométrie repérée : 20 exercices corrigés",
+    resume:
+      "Du geste seul au problème de contrôle : vecteur normal, équations de droites, projeté orthogonal, cercles et tangente, parabole. Médiatrice, nageur, arroseur, radar, laser et miroir. Droites, cercles et projetés dessinés dans les corrigés.",
+  },
+  "maths/premiere-spe/probabilites-conditionnelles": {
+    titre: "Probabilités conditionnelles et indépendance : 20 exercices corrigés",
+    resume:
+      "Du geste seul au problème de contrôle : tableau croisé, arbre pondéré, partition, formule des probabilités totales, faux positifs, indépendance démontrée, deux épreuves indépendantes, le jeu des trois portes. Les chemins utiles en orange sur les arbres.",
+  },
+  "maths/premiere-spe/variables-aleatoires": {
+    titre: "Variables aléatoires réelles : 20 exercices corrigés",
+    resume:
+      "Du geste seul au problème de contrôle : loi, espérance, variance, écart type, jeu équitable, E(aX + b), simulation en Python et moyenne d'un échantillon, capture-recapture. L'espérance marquée en rouge sur la droite graduée.",
+  },
+  "maths/premiere-spe/algorithmique": {
+    titre: "Algorithmique et programmation : 20 exercices corrigés",
+    resume:
+      "Du geste seul au problème de contrôle : affectation, listes (ajouts, compréhension, parcours), fonctions qui renvoient une valeur, boucle de seuil sur une suite, simulation d'un jeu, méthodes d'Euler et de Newton. Chaque corrigé montre la trace du programme ou la liste dessinée case par case.",
+  },
+  "maths/premiere-spe/logique-ensembles": {
+    titre: "Vocabulaire ensembliste et logique : 20 exercices corrigés",
+    resume:
+      "Du geste seul au problème de contrôle : ensembles et couples, « et » et « ou », quantificateurs et leur négation, implication, réciproque, contraposée, conditions nécessaires et suffisantes, raisonnement par l'absurde. Diagrammes de Venn, intervalles, tableaux de vérité et courbes contre-exemples.",
+  },
   // (La dérivation de première SANS spé a eu une feuille unique pour ses six
   //  notions le matin du 28/09 ; le soir, Frédéric : une feuille par notion.
   //  Les six sont plus bas, avec les autres chapitres de première. La feuille
