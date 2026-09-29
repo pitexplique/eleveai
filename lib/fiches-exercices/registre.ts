@@ -27,6 +27,13 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Du calcul seul au problème : additionner et soustraire (même dénominateur, multiples, différents), multiplier, prendre une fraction d'un nombre, démonter l'erreur 1/2 + 1/3 = 2/5. Un rappel de cours avant chaque niveau, et cinq corrigés dessinés.",
   },
+  // ⭐ LA 5e (29/09/2026) — Frédéric : « je préfère compléter les fiches
+  // d'exercices pour tous les niveaux ». Dans l'ordre du coach.
+  "maths/5e/relatif-nombre": {
+    titre: "Les nombres relatifs : 20 exercices corrigés",
+    resume:
+      "Écrire un relatif, reconnaître son signe, lire et placer une abscisse sur une droite graduée, comparer et ranger, l'opposé et la distance à zéro. Des températures, une différence de buts, une frise de l'Antiquité, un tournoi de golf, un ascenseur, la coupe d'une île. La droite graduée dessinée dans les corrigés.",
+  },
   // ⭐ LA PREMIÈRE DE 3e (21/09/2026) — le trio de la Une du collège : le short
   // « +20 % puis −20 % » (la tablette de 100 carrés), la fiche de cours, la
   // feuille. Le verre doseur et les abonnés perdus sont dans les exercices.

@@ -183,6 +183,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "nombres-rationnels-3e-cours-exercices-corriges.pdf",
   "nombres-reels-intervalles-et-valeur-absolue-seconde-20-exercices-corriges.pdf",
   "nombres-reels-intervalles-et-valeur-absolue-seconde-cours-exercices-corriges.pdf",
+  "nombres-relatifs-5e-20-exercices-corriges.pdf",
   "nombres-relatifs-5e-cours-exercices-corriges.pdf",
   "nuage-de-points-premiere-20-exercices-corriges.pdf",
   "operations-sur-les-nombres-relatifs-4e-cours-exercices-corriges.pdf",

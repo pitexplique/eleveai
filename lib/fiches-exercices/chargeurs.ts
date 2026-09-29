@@ -5,6 +5,7 @@ import type { FicheExercicesData } from "@/lib/fiches-exercices/types";
 
 export const CHARGEURS_FICHES_EXERCICES: Record<string, () => Promise<FicheExercicesData>> = {
   "maths/5e/fraction-calcul": () => import("@/lib/fiches-exercices/maths-5e-fraction-calcul").then((m) => m.exercicesFractionCalcul5e),
+  "maths/5e/relatif-nombre": () => import("@/lib/fiches-exercices/maths-5e-relatif-nombre").then((m) => m.exercicesRelatifNombre5e),
   "maths/3e/prop-proportionnalite": () => import("@/lib/fiches-exercices/maths-3e-proportionnalite").then((m) => m.exercicesProportionnalite3e),
   "maths/3e/algo-programmation": () => import("@/lib/fiches-exercices/maths-3e-algorithmique").then((m) => m.exercicesAlgorithmique3e),
   "maths/3e/fraction-rationnel": () => import("@/lib/fiches-exercices/maths-3e-nombres-rationnels").then((m) => m.exercicesRationnels3e),
@@ -86,6 +87,12 @@ export const CHARGEURS_FICHES_EXERCICES: Record<string, () => Promise<FicheExerc
   "maths/premiere-spe/second-degre": () => import("@/lib/fiches-exercices/maths-premiere-second-degre").then((m) => m.exercicesSecondDegrePremiere),
   "maths/premiere-spe/trigonometrie": () => import("@/lib/fiches-exercices/maths-premiere-trigonometrie").then((m) => m.exercicesTrigonometriePremiere),
   "maths/premiere-spe/derivation": () => import("@/lib/fiches-exercices/maths-premiere-derivation").then((m) => m.exercicesDerivationPremiereSpe),
+  "maths/premiere-spe/produit-scalaire": () => import("@/lib/fiches-exercices/maths-premiere-produit-scalaire").then((m) => m.exercicesProduitScalairePremiere),
+  "maths/premiere-spe/geometrie-reperee": () => import("@/lib/fiches-exercices/maths-premiere-geometrie-reperee").then((m) => m.exercicesGeometrieRepereePremiere),
+  "maths/premiere-spe/probabilites-conditionnelles": () => import("@/lib/fiches-exercices/maths-premiere-probabilites-conditionnelles").then((m) => m.exercicesProbabilitesConditionnellesPremiere),
+  "maths/premiere-spe/variables-aleatoires": () => import("@/lib/fiches-exercices/maths-premiere-variables-aleatoires").then((m) => m.exercicesVariablesAleatoiresPremiere),
+  "maths/premiere-spe/algorithmique": () => import("@/lib/fiches-exercices/maths-premiere-algorithmique").then((m) => m.exercicesAlgorithmiquePremiere),
+  "maths/premiere-spe/logique-ensembles": () => import("@/lib/fiches-exercices/maths-premiere-logique-ensembles").then((m) => m.exercicesLogiqueEnsemblesPremiere),
   "maths/premiere/auto-comparer": () => import("@/lib/fiches-exercices/maths-premiere-auto-comparer").then((m) => m.exercicesAutoComparerPremiere),
   "maths/premiere/auto-fractions-puissances": () => import("@/lib/fiches-exercices/maths-premiere-auto-fractions-puissances").then((m) => m.exercicesAutoFractionsPuissancesPremiere),
   "maths/premiere/auto-ordres-unites": () => import("@/lib/fiches-exercices/maths-premiere-auto-ordres-unites").then((m) => m.exercicesAutoOrdresUnitesPremiere),
