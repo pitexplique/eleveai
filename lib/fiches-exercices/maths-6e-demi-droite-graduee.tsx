@@ -229,7 +229,7 @@ export const exercicesDemiDroiteGraduee6e: FicheExercicesData = {
   accroche:
     "Vingt exercices, du geste seul au problème : lire l'abscisse d'un point, placer un nombre décimal, placer une fraction, graduer un segment. Un sentier de randonnée, une frise du XXe siècle, une balance de cuisine, une clôture, un thermomètre, un ruban, un saut en longueur. Un rappel de cours avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : étape par étape, avec le piège nommé et la demi-droite dessinée.",
 
-  fichesCours: [],
+  fichesCours: [{ href: "/fiches-cours/maths/6e/demi-droite-graduee", titre: "La demi-droite graduée" }],
   coachHref: "/coach-ia/maths?classe=6e",
 
   series: [

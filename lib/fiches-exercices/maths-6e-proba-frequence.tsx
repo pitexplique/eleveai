@@ -305,7 +305,7 @@ export const exercicesProbaFrequence6e: FicheExercicesData = {
   accroche:
     "Vingt exercices, du geste seul au problème. Lancer, compter ce qui est sorti, calculer une fréquence observée. La comparer à la probabilité, et au nombre de fois attendu. Voir l'écart se réduire quand on répète. Des pièces, des dés, des roues, un sac de billes, une punaise, des graines, toute une classe qui réunit ses lancers. Un rappel de cours avant chaque niveau. Cherche d'abord au brouillon. Puis ouvre la correction : étape par étape, avec le piège nommé.",
 
-  fichesCours: [],
+  fichesCours: [{ href: "/fiches-cours/maths/6e/proba-frequence", titre: "La fréquence : lancer pour de vrai" }],
   coachHref: "/coach-ia/maths?classe=6e",
 
   series: [

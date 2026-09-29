@@ -210,7 +210,7 @@ export const exercicesCercleCirconscrit6e: FicheExercicesData = {
   accroche:
     "Vingt exercices, du geste seul au problème : voir que les trois médiatrices d'un triangle se coupent en un même point, écrire la preuve, construire le cercle circonscrit, trouver un point à égale distance de trois points, et comprendre pourquoi c'est impossible quand ils sont alignés. Trois fermes et un puits, une assiette cassée, une table ronde. Un rappel de cours avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : étape par étape, avec le piège nommé et la figure tracée à l'échelle.",
 
-  fichesCours: [],
+  fichesCours: [{ href: "/fiches-cours/maths/6e/cercle-circonscrit", titre: "Le cercle circonscrit à un triangle" }],
   coachHref: "/coach-ia/maths?classe=6e",
 
   series: [

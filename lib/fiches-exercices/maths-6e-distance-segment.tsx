@@ -223,7 +223,7 @@ export const exercicesDistanceSegment6e: FicheExercicesData = {
   accroche:
     "Vingt exercices, du geste seul au problème : écrire (AB), [AB] ou AB, lire une longueur sur la règle, trouver et construire le milieu, et comprendre que la ligne droite est le plus court chemin. Un raccourci dans un parc, une ligne de tram, un ruban plié, une carte au trésor. Un rappel de cours avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : étape par étape, avec le pourquoi, le piège nommé, et la figure dessinée.",
 
-  fichesCours: [],
+  fichesCours: [{ href: "/fiches-cours/maths/6e/distance-segment", titre: "Distances et milieu d'un segment" }],
   coachHref: "/coach-ia/maths?classe=6e",
 
   series: [

@@ -381,7 +381,7 @@ export const exercicesDecimalCalcul6e: FicheExercicesData = {
   accroche:
     "Vingt exercices, du geste seul au problème : additionner et soustraire virgule sous virgule, multiplier, multiplier par 0,1, diviser par un entier en continuant après la virgule, contrôler avec un ordre de grandeur. Des courses au marché, une recette de crêpes, un relais, une ficelle, une sortie au parc, des tomates du potager, l'eau de la douche. Un rappel de cours avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : étape par étape, avec le piège nommé et l'opération posée dessinée.",
 
-  fichesCours: [],
+  fichesCours: [{ href: "/fiches-cours/maths/6e/decimal-calcul", titre: "Calculer avec les décimaux" }],
   coachHref: "/coach-ia/maths?classe=6e",
 
   series: [

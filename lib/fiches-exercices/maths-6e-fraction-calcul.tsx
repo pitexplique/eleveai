@@ -318,7 +318,7 @@ export const exercicesFractionCalcul6e: FicheExercicesData = {
   accroche:
     "Vingt exercices, du geste seul au problème : prendre une fraction d'une quantité, additionner et soustraire des fractions de même dénominateur, redécouper quand un dénominateur est multiple de l'autre, multiplier une fraction par un nombre entier. Des tartes, une classe qui vient à vélo, un jardin, des crêpes, une grenouille qui saute, une randonnée, de l'argent de poche et une plante à arroser. Un rappel de cours avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : étape par étape, avec le pourquoi, le piège nommé, et les parts dessinées.",
 
-  fichesCours: [],
+  fichesCours: [{ href: "/fiches-cours/maths/6e/fraction-calcul", titre: "Calculer avec les fractions" }],
   coachHref: "/coach-ia/maths?classe=6e",
 
   series: [

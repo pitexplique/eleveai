@@ -82,6 +82,72 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     titre: "Le cercle et le disque",
     resume: "Centre, rayon, diamètre et corde ; le tour ou le plein ; et le périmètre avec π.",
   },
+  // ⭐ LES 16 NOTIONS DE 6e QUI N'AVAIENT PAS DE FICHE (30/09/2026) — écrites
+  // simplement (« ils ont parfois du mal à lire »), Ti Margo en mode classe.
+  "maths/6e/demi-droite-graduee": {
+    titre: "La demi-droite graduée",
+    resume: "Lire l'abscisse d'un point, placer un décimal ou une fraction, graduer un segment.",
+  },
+  "maths/6e/decimal-calcul": {
+    titre: "Calculer avec les décimaux",
+    resume: "Additionner, multiplier, diviser des nombres à virgule, et multiplier par 0,1.",
+  },
+  "maths/6e/fraction-calcul": {
+    titre: "Calculer avec les fractions",
+    resume: "Prendre une fraction d'un nombre, ajouter des fractions, multiplier par un entier.",
+  },
+  "maths/6e/algebre-probleme": {
+    titre: "Problèmes à nombres cachés et motifs",
+    resume: "Dessiner un problème en barres pour trouver un nombre caché, et prolonger un motif.",
+  },
+  "maths/6e/prop-echelle": {
+    titre: "Les échelles",
+    resume: "Lire ce que vaut 1 cm du plan en vrai, multiplier pour aller vers la réalité, diviser pour revenir au plan.",
+  },
+  "maths/6e/aire-unite": {
+    titre: "L'aire et ses unités",
+    resume: "L'aire mesure l'intérieur d'une figure : on compte des carreaux, et 1 dm² vaut 100 cm².",
+  },
+  "maths/6e/triangle-propriete": {
+    titre: "Les angles du triangle et le triangle possible",
+    resume: "Les trois angles font 180°, trouver l'angle qui manque, savoir si trois longueurs font un triangle.",
+  },
+  "maths/6e/quadrilatere-propriete": {
+    titre: "Les propriétés des quadrilatères",
+    resume: "Lire le codage d'une figure et trouver son nom : parallélogramme, rectangle, losange ou carré.",
+  },
+  "maths/6e/duree-temps": {
+    titre: "Horaires et durées",
+    resume: "Un horaire dit quand, une durée dit combien de temps : on compte par 60 et on passe par l'heure ronde.",
+  },
+  "maths/6e/distance-segment": {
+    titre: "Distances et milieu d'un segment",
+    resume: "(AB), [AB] et AB, le milieu, et le plus court chemin : tout droit.",
+  },
+  "maths/6e/bissectrice-angle": {
+    titre: "La bissectrice d'un angle",
+    resume: "La droite qui coupe un angle en deux angles égaux : plier, prendre la moitié au rapporteur, calculer.",
+  },
+  "maths/6e/vision-espace": {
+    titre: "La vision dans l'espace",
+    resume: "Les quatre vues d'un assemblage, et compter les cubes étage par étage, cachés compris.",
+  },
+  "maths/6e/cercle-circonscrit": {
+    titre: "Le cercle circonscrit à un triangle",
+    resume: "Les trois médiatrices se croisent au centre du cercle qui passe par les trois sommets.",
+  },
+  "maths/6e/mediatrice-segment": {
+    titre: "La médiatrice d'un segment",
+    resume: "Perpendiculaire et par le milieu : tous ses points sont à égale distance des deux bouts.",
+  },
+  "maths/6e/stat-enquete": {
+    titre: "Mener une enquête et faire un tableau",
+    resume: "Poser une bonne question, noter les réponses et les compter dans un tableau d'effectifs.",
+  },
+  "maths/6e/proba-frequence": {
+    titre: "La fréquence : lancer pour de vrai",
+    resume: "Compter ce qui sort vraiment, le comparer au calcul, et voir l'écart se réduire quand on répète.",
+  },
   "maths/cm2/nombre-entier": {
     titre: "Les nombres entiers",
     resume: "Tableau de numération : lire, comparer, décomposer, arrondir et reconnaître les multiples.",

@@ -248,7 +248,7 @@ export const exercicesAlgebreProbleme6e: FicheExercicesData = {
   accroche:
     "Vingt exercices, du plus simple au problème. On cherche des nombres inconnus sans lettre : on dessine un schéma en barres, on retire, on partage, on échange. On observe des motifs qui grandissent pour prévoir la suite. Des billes, des allumettes, une balance, un banquet, une tirelire, des places de cinéma. Un rappel avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : étape par étape, avec le schéma dessiné.",
 
-  fichesCours: [],
+  fichesCours: [{ href: "/fiches-cours/maths/6e/algebre-probleme", titre: "Problèmes à nombres cachés et motifs" }],
   coachHref: "/coach-ia/maths?classe=6e",
 
   series: [

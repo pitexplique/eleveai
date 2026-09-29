@@ -267,7 +267,7 @@ export const exercicesBissectriceAngle6e: FicheExercicesData = {
   accroche:
     "Vingt exercices, du geste seul au problème. Reconnaître la bissectrice d'un angle. La tracer par pliage, puis au rapporteur. Calculer un angle grâce à elle. Puis enchaîner les bissectrices. Une tarte coupée en parts égales, un projecteur de théâtre, un pliage, un programme de construction. Un rappel de cours avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : étape par étape, avec le piège nommé et la figure.",
 
-  fichesCours: [],
+  fichesCours: [{ href: "/fiches-cours/maths/6e/bissectrice-angle", titre: "La bissectrice d'un angle" }],
   coachHref: "/coach-ia/maths?classe=6e",
 
   series: [

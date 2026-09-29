@@ -166,7 +166,7 @@ export const exercicesStatEnquete6e: FicheExercicesData = {
   accroche:
     "Vingt exercices, du geste seul au problème. Choisir la bonne question et les bonnes personnes. Mesurer et noter dans un tableau, avec la bonne unité. Ranger une liste de réponses dans un tableau d'effectifs. Lire un tableau. Des tomates, des pommes, un glacier, une mare, la piscine, la cantine, le sommeil, deux sondages qui ne disent pas la même chose. Un rappel de cours avant chaque niveau. Cherche d'abord au brouillon. Puis ouvre la correction : étape par étape, avec le piège nommé.",
 
-  fichesCours: [],
+  fichesCours: [{ href: "/fiches-cours/maths/6e/stat-enquete", titre: "Mener une enquête et faire un tableau" }],
   coachHref: "/coach-ia/maths?classe=6e",
 
   series: [

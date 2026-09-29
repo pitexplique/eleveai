@@ -227,7 +227,7 @@ export const exercicesPropEchelle6e: FicheExercicesData = {
   accroche:
     "Vingt exercices, du plus simple au problème. Lire une échelle, passer du plan à la réalité, puis de la réalité au plan. Retrouver l'échelle d'un plan. Des cartes de randonnée, une chambre, un terrain de handball, une maquette d'avion, une chasse au trésor. Un rappel de cours avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : étape par étape, avec le piège nommé et le plan dessiné.",
 
-  fichesCours: [],
+  fichesCours: [{ href: "/fiches-cours/maths/6e/prop-echelle", titre: "Les échelles" }],
   coachHref: "/coach-ia/maths?classe=6e",
 
   series: [

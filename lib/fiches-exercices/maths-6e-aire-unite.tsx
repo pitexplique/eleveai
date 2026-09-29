@@ -216,7 +216,7 @@ export const exercicesAireUnite6e: FicheExercicesData = {
   accroche:
     "Vingt exercices, du geste seul au problème : dire ce qu'est une aire, la mesurer en comptant des carreaux et des demi-carreaux, choisir la bonne unité, passer des m² aux dm² et des dm² aux cm² avec le carré découpé en cent. Un studio, une nappe, un carreau de faïence, un bac potager, une mosaïque, une salle de jeux, un timbre et une ville. Un rappel de cours avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : étape par étape, avec le piège nommé et un dessin.",
 
-  fichesCours: [],
+  fichesCours: [{ href: "/fiches-cours/maths/6e/aire-unite", titre: "L'aire et ses unités" }],
   coachHref: "/coach-ia/maths?classe=6e",
 
   series: [

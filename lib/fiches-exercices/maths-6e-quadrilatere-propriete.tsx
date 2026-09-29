@@ -285,7 +285,7 @@ export const exercicesQuadrilaterePropriete6e: FicheExercicesData = {
   accroche:
     "Vingt exercices sur les propriétés du rectangle, du losange et du carré. Lire les côtés et les diagonales, conclure (ou pas), compléter une figure sur quadrillage, construire à l'équerre et au compas. Un terrain, un foulard, des pailles, un jardin. Un rappel avant chaque niveau. Cherche d'abord, puis ouvre la correction : étape par étape, avec la figure et le piège nommé.",
 
-  fichesCours: [],
+  fichesCours: [{ href: "/fiches-cours/maths/6e/quadrilatere-propriete", titre: "Les propriétés des quadrilatères" }],
   coachHref: "/coach-ia/maths?classe=6e",
 
   series: [

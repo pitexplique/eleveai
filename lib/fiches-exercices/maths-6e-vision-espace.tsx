@@ -237,7 +237,7 @@ export const exercicesVisionEspace6e: FicheExercicesData = {
   accroche:
     "Vingt exercices, du geste seul au problème : compter les cubes d'un empilement, même cachés, dessiner les vues de dessus, de face, de gauche et de droite, lire un plan à nombres, reconnaître un patron de cube, lire une perspective cavalière. Un entrepôt de caisses, un dé à jouer, un cube peint. Un rappel de cours avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : étape par étape, avec le piège nommé et les vues dessinées.",
 
-  fichesCours: [],
+  fichesCours: [{ href: "/fiches-cours/maths/6e/vision-espace", titre: "La vision dans l'espace" }],
   coachHref: "/coach-ia/maths?classe=6e",
 
   series: [

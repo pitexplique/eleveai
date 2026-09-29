@@ -20,6 +20,183 @@ type FicheExercicesEntry = {
 };
 
 export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
+  // ⭐ LA 6e (30/09/2026) — Frédéric : « toutes les fiches d'exercices faites
+  // pour eux ». Dans l'ordre du coach ; phrases courtes, ils lisent parfois mal.
+  "maths/6e/entier-nombre": {
+    titre: "Les nombres entiers : 20 exercices corrigés",
+    resume:
+      "Écrire un nombre en chiffres et en lettres, trouver le chiffre et le nombre de centaines, comparer et ranger, décomposer, encadrer, lire une droite graduée. Des planètes, des stades de rugby, des vélos, des bouchons à recycler, un chèque, un comptage d'oiseaux et un compteur de voiture.",
+  },
+  "maths/6e/decimal-nombre": {
+    titre: "Les nombres décimaux : 20 exercices corrigés",
+    resume:
+      "Lire et écrire un décimal, le rang d'un chiffre, comparer et ranger, arrondir à l'unité, au dixième, au centième, encadrer et intercaler. Un lancer de poids, le prix du gazole, un compteur de vélo, une course de 100 m, des fruits sur la balance, la pluie de la semaine.",
+  },
+  "maths/6e/decimal-calcul": {
+    titre: "Calculer avec les nombres décimaux : 20 exercices corrigés",
+    resume:
+      "Additionner et soustraire virgule sous virgule, multiplier, multiplier par 0,1, 0,01, 0,001, diviser par un entier en continuant après la virgule, contrôler avec un ordre de grandeur. Des courses au marché, une recette de crêpes, un relais, une sortie au parc, des tomates du potager, l'eau de la douche.",
+  },
+  "maths/6e/demi-droite-graduee": {
+    titre: "La demi-droite graduée : 20 exercices corrigés",
+    resume:
+      "Lire l'abscisse d'un point, placer un nombre décimal, placer une fraction (plus grande que 1 comprise), graduer un segment de longueur donnée. Un sentier, une frise du XXe siècle, une balance de cuisine, une clôture, un thermomètre, un ruban, un saut en longueur.",
+  },
+  "maths/6e/fraction-nombre": {
+    titre: "Les fractions : 20 exercices corrigés",
+    resume:
+      "Lire, écrire et dessiner une fraction, passer d'une fraction décimale à un nombre à virgule, comparer et ranger, encadrer une fraction entre deux entiers. Des gourdes, une élection de délégué, un sentier de randonnée, un vitrail et une fraction mystère.",
+  },
+  "maths/6e/fraction-calcul": {
+    titre: "Calculer avec les fractions : 20 exercices corrigés",
+    resume:
+      "Prendre une fraction d'une quantité, additionner et soustraire des fractions de même dénominateur ou de dénominateurs multiples, multiplier une fraction par un entier. Des tartes, une classe à vélo, un jardin, des crêpes, une randonnée, de l'argent de poche et une plante à arroser.",
+  },
+  "maths/6e/algebre-probleme": {
+    titre: "Problèmes à nombres inconnus et motifs : 20 exercices corrigés",
+    resume:
+      "Sans lettre : dessiner un schéma en barres, retirer ce qui dépasse, partager en parts égales, trouver deux nombres par échange, prolonger un motif qui grandit. Billes, allumettes, balance, banquet, tirelire, places de cinéma.",
+  },
+  "maths/6e/pourcentage-nombre": {
+    titre: "Les pourcentages : 20 exercices corrigés",
+    resume:
+      "Comprendre « sur 100 », passer d'un pourcentage à une fraction et à un décimal, calculer 50 %, 25 %, 10 % d'un nombre, écrire une part en pourcentage. Une grille de 100 carreaux, des soldes, une bibliothèque, un sondage, le budget d'une fête et deux magasins.",
+  },
+  "maths/6e/prop-proportionnalite": {
+    titre: "La proportionnalité : 20 exercices corrigés",
+    resume:
+      "Reconnaître une situation proportionnelle et celle qui ne l'est pas, compléter un tableau, trouver le coefficient, passer par l'unité. Des glaces, une soupe, un ressort, un escargot, un pique-nique, une roue de vélo, une salle d'escalade.",
+  },
+  "maths/6e/prop-echelle": {
+    titre: "Les échelles : 20 exercices corrigés",
+    resume:
+      "Lire une échelle, passer du plan à la réalité et de la réalité au plan, retrouver l'échelle, sans produit en croix. Cartes de randonnée, chambre, terrain de handball, maquette d'avion, chasse au trésor, potager.",
+  },
+  "maths/6e/entier-calcul-pose": {
+    titre: "Le calcul posé : 20 exercices corrigés",
+    resume:
+      "Poser une addition et une soustraction avec retenues, une multiplication par un ou deux chiffres, une division en potence, puis vérifier par l'opération inverse et l'ordre de grandeur. Une bibliothèque, un club de foot, une forêt après la tempête, des cagettes de pommes, une classe de neige, un apiculteur et les perles de Mia.",
+  },
+  "maths/6e/entier-calcul-mental": {
+    titre: "Le calcul mental : 20 exercices corrigés",
+    resume:
+      "Passer par la dizaine, arrondir puis corriger, couper un nombre en morceaux, regrouper, double et moitié, fois et divisé par 10, 100, 1 000, ordre de grandeur. Une recette de crêpes, une équipe de volley, une sortie au parc animalier, des tours de piste, une pyramide de nombres et une tirelire.",
+  },
+  "maths/6e/aire-longueur": {
+    titre: "Les longueurs : 20 exercices corrigés",
+    resume:
+      "Mesurer à la règle, connaître les unités du mm au km, convertir avec le tableau, comparer, calculer un reste ou un total. Une chenille, un saut en longueur, une pelote de laine, un trajet à vélo, une course d'orientation, un bambou, une guirlande.",
+  },
+  "maths/6e/aire-perimetre": {
+    titre: "Les périmètres : 20 exercices corrigés",
+    resume:
+      "Suivre le tour d'une figure, calculer le périmètre d'un carré, d'un rectangle, d'un triangle ou d'une figure en L, retrouver un côté, coller des morceaux. Une cabane à oiseaux, un poulailler, un terrain de handball, un jardin partagé, une guirlande lumineuse, les tables de la fête.",
+  },
+  "maths/6e/aire-unite": {
+    titre: "L'aire et ses unités : 20 exercices corrigés",
+    resume:
+      "Dire ce qu'est une aire, compter des carreaux et des demi-carreaux, choisir entre mm², cm², dm², m² et km², passer des m² aux dm² et des dm² aux cm² avec le carré découpé en cent. Un studio, une nappe, un carreau de faïence, un bac potager, une mosaïque, une salle de jeux.",
+  },
+  "maths/6e/aire-surface": {
+    titre: "Les aires : 20 exercices corrigés",
+    resume:
+      "Calculer l'aire d'un rectangle et d'un carré, retrouver un côté, comparer des aires, découper une figure en L, en U ou en croix, enlever un trou. Un tapis, une terrasse, un mur à peindre, un panneau d'affichage, une chambre à parqueter, un jardin, une salle de bain, un enclos.",
+  },
+  "maths/6e/volume-solide": {
+    titre: "Les volumes : 20 exercices corrigés",
+    resume:
+      "Compter des cubes même cachés, lire une mesure en cm³ ou en m³, comparer deux solides, additionner les morceaux d'un assemblage et calculer le volume d'une boîte. Une boîte de sucres, un château, un bac du jardin, un camion de déménagement.",
+  },
+  "maths/6e/angle-mesure": {
+    titre: "Les angles : 20 exercices corrigés",
+    resume:
+      "Nommer un angle, le classer (aigu, droit, obtus, plat), le comparer, le mesurer et le tracer au rapporteur, puis calculer un angle dans un angle plat ou un tour complet. Une horloge, des ciseaux, une tarte, un éventail, une rose des vents, une grande roue, un miroir et un ordinateur portable.",
+  },
+  "maths/6e/triangle-figure": {
+    titre: "Les triangles : 20 exercices corrigés",
+    resume:
+      "Nommer un triangle, repérer sommets, côtés et côté opposé, reconnaître un triangle isocèle, équilatéral, quelconque, rectangle, obtusangle ou aigu, calculer le périmètre d'un triangle particulier. Un panneau de danger, un cerf-volant, un potager et un pavage.",
+  },
+  "maths/6e/triangle-propriete": {
+    titre: "Les angles du triangle et le triangle possible : 20 exercices corrigés",
+    resume:
+      "Utiliser la somme des angles (180°), trouver un angle manquant dans un triangle rectangle ou isocèle, savoir si trois longueurs forment un triangle. Une échelle contre un mur, une charpente, trois villages, dix bâtonnets et trois coins de papier.",
+  },
+  "maths/6e/quadrilatere-figure": {
+    titre: "Les quadrilatères : 20 exercices corrigés",
+    resume:
+      "Nommer un quadrilatère (côtés opposés, consécutifs, diagonales), reconnaître un rectangle, un losange ou un carré par ses codages et les distinguer, même penchés. Une tablette de chocolat, une feuille A4 pliée, un terrain de handball, un potager, des carrés à compter.",
+  },
+  "maths/6e/quadrilatere-propriete": {
+    titre: "Propriétés des quadrilatères : 20 exercices corrigés",
+    resume:
+      "Lire les propriétés du rectangle, du losange et du carré (côtés opposés, diagonales), conclure ou non sur la nature, compléter une figure sur quadrillage, construire à l'équerre et au compas. Un terrain de sport, un foulard, des pailles articulées, un jardin partagé.",
+  },
+  "maths/6e/duree-temps": {
+    titre: "Horaires et durées : 20 exercices corrigés",
+    resume:
+      "Calculer une heure de fin ou une durée sur une ligne du temps, convertir heures, minutes, secondes, jours et semaines, comprendre 1,5 h ou 2,75 h, passer minuit. Match, bus, bateau de nuit, marathon, nuit de sommeil, randonnée.",
+  },
+  "maths/6e/distance-segment": {
+    titre: "Distances et milieu d'un segment : 20 exercices corrigés",
+    resume:
+      "Écrire (AB), [AB] ou AB, lire une longueur sur la règle, trouver et construire le milieu, comprendre que la ligne droite est le plus court chemin et reconnaître trois points alignés. Un refuge de randonnée, un raccourci dans un parc, une ligne de tram, un ruban plié, une carte au trésor.",
+  },
+  "maths/6e/bissectrice-angle": {
+    titre: "La bissectrice d'un angle : 20 exercices corrigés",
+    resume:
+      "Reconnaître la bissectrice (deux angles égaux), la tracer par pliage puis au rapporteur, calculer la moitié ou le double d'un angle, enchaîner les bissectrices. Une tarte en parts égales, deux bissectrices perpendiculaires, un programme de construction et un projecteur de théâtre.",
+  },
+  "maths/6e/vision-espace": {
+    titre: "La vision dans l'espace : 20 exercices corrigés",
+    resume:
+      "Compter les cubes d'un empilement étage par étage, dessiner les vues de dessus, de face, de gauche et de droite, lire un plan à nombres, reconnaître un patron de cube et lire une perspective cavalière. Un entrepôt de caisses, un dé à jouer, un cube peint.",
+  },
+  "maths/6e/cercle-circonscrit": {
+    titre: "Médiatrices et cercle circonscrit : 20 exercices corrigés",
+    resume:
+      "Les trois médiatrices d'un triangle se coupent en un même point : le voir, écrire la preuve, construire le cercle circonscrit, et comprendre le triangle obtus et les points alignés. Trois fermes et un puits, une assiette cassée, une table ronde.",
+  },
+  "maths/6e/mediatrice-segment": {
+    titre: "La médiatrice d'un segment : 20 exercices corrigés",
+    resume:
+      "Reconnaître la médiatrice, utiliser sa propriété dans les deux sens, la construire à l'équerre, au compas ou par pliage, trouver le milieu d'une corde et le centre perdu d'un cercle. Un arrêt de bus, un gymnase entre trois écoles, une assiette cassée, un cerf-volant, deux puits.",
+  },
+  "maths/6e/cercle-disque": {
+    titre: "Le cercle et le disque : 20 exercices corrigés",
+    resume:
+      "Rayon, diamètre et corde, point sur le cercle, dans le disque ou dehors, points à une distance donnée, tour proportionnel au diamètre et périmètre avec π ≈ 3,14. Un chien et sa laisse, une horloge, une fenêtre, une piste, une ronde dans la cour.",
+  },
+  "maths/6e/sym-axiale": {
+    titre: "La symétrie axiale : 20 exercices corrigés",
+    resume:
+      "Reconnaître un pliage, construire sur quadrillage l'image d'un point, d'un segment, d'un triangle, trouver l'axe, compter les axes d'une figure et utiliser ce que la symétrie conserve. Un chalet qui se reflète dans un lac, des lettres, un logo, un rebond au billard, trois drapeaux, une feuille pliée en quatre.",
+  },
+  "maths/6e/algo-programmation": {
+    titre: "Algorithmique et programmation : 20 exercices corrigés",
+    resume:
+      "Lire un programme Scratch dans l'ordre, faire avancer et tourner le lutin, utiliser une boucle « répéter », tracer un carré, un rectangle ou un triangle équilatéral. Un robot qui sème, une course d'orientation, une ruche, une chasse au trésor.",
+  },
+  "maths/6e/stat-enquete": {
+    titre: "Mener une enquête : 20 exercices corrigés",
+    resume:
+      "Choisir la bonne question et les bonnes personnes, mesurer et noter avec une seule unité, ranger une liste de réponses dans un tableau d'effectifs contrôlé par le total, lire un tableau. Des tomates, un glacier, une mare, la piscine, le sommeil et deux sondages qui ne disent pas la même chose.",
+  },
+  "maths/6e/stat-donnee": {
+    titre: "Lire et interpréter des données : 20 exercices corrigés",
+    resume:
+      "Lire un diagramme en barres, un graphique et un diagramme circulaire, prélever une valeur dans un tableau à double entrée, calculer un total ou un écart, dire si une phrase est vraie, fausse ou exagérée. Des hérissons, un parc, une poubelle, des vélos, des médailles, des faucons, la cantine et la météo.",
+  },
+  "maths/6e/proba-experience": {
+    titre: "Premiers pas en probabilités : 20 exercices corrigés",
+    resume:
+      "Dire si un événement est certain, possible ou impossible, lister les issues, compter et comparer des chances, placer une chance sur l'échelle de 0 à 1. Des roues, des sacs de billes, des cartes, un dé fabriqué, une tombola et une fête foraine.",
+  },
+  "maths/6e/proba-frequence": {
+    titre: "Fréquences observées : 20 exercices corrigés",
+    resume:
+      "Calculer une fréquence observée en fraction, en décimal et en pourcentage, la comparer à la probabilité et au nombre de fois attendu, voir l'écart se réduire quand on répète. Des pièces, des dés, une punaise, des graines, un dé suspect et toute une classe qui réunit ses lancers.",
+  },
   // ⭐ LA PREMIÈRE DU COLLÈGE (20/09/2026) — elle ferme le trio de la Une de
   // l'accueil : le short « 1/2 + 1/3 ne fait pas 2/5 », la leçon vidéo, la feuille.
   "maths/5e/fraction-calcul": {

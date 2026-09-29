@@ -498,7 +498,7 @@ export const exercicesTrianglePropriete6e: FicheExercicesData = {
   accroche:
     "Vingt exercices, du geste seul au problème. Utiliser la somme des angles d'un triangle, 180°. Trouver un angle qui manque. Savoir si trois longueurs font un triangle. Puis chercher les triangles impossibles. Une échelle contre un mur, une charpente, trois villages, des bâtonnets, trois coins de papier. Un rappel de cours avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : étape par étape, avec le piège nommé et la figure.",
 
-  fichesCours: [],
+  fichesCours: [{ href: "/fiches-cours/maths/6e/triangle-propriete", titre: "Les angles du triangle et le triangle possible" }],
   coachHref: "/coach-ia/maths?classe=6e",
 
   series: [

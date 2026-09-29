@@ -210,7 +210,7 @@ export const exercicesDureeTemps6e: FicheExercicesData = {
   accroche:
     "Vingt exercices, du plus simple au problème. Calculer une heure de fin ou une durée, convertir des heures, des minutes et des secondes, comprendre 1,5 h. Un match, un bus, un bateau de nuit, un marathon, une nuit de sommeil, une randonnée. Un rappel avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : étape par étape, avec la ligne du temps dessinée.",
 
-  fichesCours: [],
+  fichesCours: [{ href: "/fiches-cours/maths/6e/duree-temps", titre: "Horaires et durées" }],
   coachHref: "/coach-ia/maths?classe=6e",
 
   series: [

@@ -195,7 +195,7 @@ export const exercicesMediatriceSegment6e: FicheExercicesData = {
   accroche:
     "Vingt exercices, du geste seul au problème : reconnaître la médiatrice, utiliser sa propriété dans les deux sens, la construire à l'équerre, au compas ou par pliage, puis s'en servir pour trouver le milieu d'une corde ou le centre perdu d'un cercle. Un arrêt de bus, un gymnase, une assiette cassée, un cerf-volant, deux puits. Un rappel de cours avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : étape par étape, avec le pourquoi, le piège nommé, et la figure dessinée.",
 
-  fichesCours: [],
+  fichesCours: [{ href: "/fiches-cours/maths/6e/mediatrice-segment", titre: "La médiatrice d'un segment" }],
   coachHref: "/coach-ia/maths?classe=6e",
 
   series: [
