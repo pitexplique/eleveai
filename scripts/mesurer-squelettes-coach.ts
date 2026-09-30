@@ -25,8 +25,9 @@
 // servie au plus 4 répétitions sur 20.
 
 import { maths4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/maths/index";
+import { maths3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/maths/index";
 
-const BANQUES: Record<string, any[]> = { "4e": maths4eQuestionBank };
+const BANQUES: Record<string, any[]> = { "4e": maths4eQuestionBank, "3e": maths3eQuestionBank };
 const [classe, ...notions] = process.argv.slice(2);
 const B = BANQUES[classe];
 if (!B || !notions.length) {

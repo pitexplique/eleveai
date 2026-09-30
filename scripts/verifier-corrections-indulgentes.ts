@@ -16,9 +16,10 @@
 // Usage : npx --yes tsx@4 scripts/verifier-corrections-indulgentes.ts <classe> [<notionId> …]
 
 import { maths4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/maths/index";
+import { maths3eQuestionBank } from "@/lib/tutor-v4/questionBank/3e/maths/index";
 import { compareAnswer } from "@/lib/tutor/evaluation/comparators";
 
-const BANQUES: Record<string, any[]> = { "4e": maths4eQuestionBank };
+const BANQUES: Record<string, any[]> = { "4e": maths4eQuestionBank, "3e": maths3eQuestionBank };
 const [classe, ...notions] = process.argv.slice(2);
 const B = BANQUES[classe];
 if (!B) {
