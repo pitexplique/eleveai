@@ -36,7 +36,15 @@ if (!B || !notions.length) {
 const SEUIL_SQUELETTES = 30;
 const SEUIL_REPETITIONS = 4;
 
-const squelette = (t: string) => t.replace(/\d+(?:[,.]\d+)?/g, "#").replace(/\s+/g, " ").trim();
+// ⚠️ Les exposants en exposant Unicode (« 5³ », « 10⁻² ») sont des NOMBRES
+// aussi : sans cette ligne, « #³ » et « #⁴ » comptaient pour deux squelettes
+// (signalé par l'agent des puissances, 30/09/2026).
+const squelette = (t: string) =>
+  t
+    .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+/g, "#")
+    .replace(/[−-]?\d+(?:[,.]\d+)?/g, "#")
+    .replace(/\s+/g, " ")
+    .trim();
 const texte = (it: any) => String(it.kind === "template" ? it.generate().text : it.text);
 
 /** Une série de 20 à une étoile, tirée comme le coach : répétitions de squelettes. */
