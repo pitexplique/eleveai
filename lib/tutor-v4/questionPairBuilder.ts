@@ -429,7 +429,31 @@ export function buildQuestionPair(args: {
     if (fp) avoidFingerprints.add(fp);
   }
 
-  const firstItem = pickPondere(source);
+  /**
+   * ⭐ UN GABARIT SERVI À L'UNE DES DEUX DERNIÈRES QUESTIONS CÈDE SA PLACE
+   * (30/09/2026, accord de Frédéric). Ses élèves de 4e : « des questions
+   * reviennent souvent ». Un gabarit n'est jamais écarté par son id (voir
+   * plus haut), et il pèse `POIDS_GABARIT` : à une étoile qui n'en compte que
+   * deux, le même revenait une question sur deux, avec la même PHRASE et
+   * d'autres nombres. Mesuré avec ce builder, séries de 20 : 4 à 7 fois
+   * « même gabarit deux fois de suite ».
+   * Ici, on PRÉFÈRE ce qui n'a pas servi aux `GABARITS_RECENTS` dernières
+   * questions — chaque question inscrit DEUX ids (options A et B). Ce n'est
+   * qu'une préférence : si tout a servi récemment, on garde la source entière,
+   * et une micro à gabarit unique continue de démarrer (`allowSingleItem`).
+   * ⚠️ Cela n'invente aucune phrase : une micro dont les gabarits n'ont qu'une
+   * tournure se répare dans sa BANQUE (scripts/mesurer-squelettes-coach.ts).
+   */
+  const GABARITS_RECENTS = 2;
+  const servi = (item: TutorBankItemV4) =>
+    item.kind === "template" &&
+    lastSeenIndex(item) >= recentQuestionIds.length - 2 * GABARITS_RECENTS;
+  const plutotFrais = (items: TutorBankItemV4[]) => {
+    const frais = items.filter((item) => !servi(item));
+    return frais.length > 0 ? frais : items;
+  };
+
+  const firstItem = pickPondere(plutotFrais(source));
   const optionA = toTutorQuestionOption(firstItem, avoidFingerprints);
 
   // Avec un générateur unique, on retire dans le MÊME gabarit : `avoidForB`
@@ -437,7 +461,7 @@ export function buildQuestionPair(args: {
   // nombres.
   const remaining = singleGenerateur
     ? [firstItem]
-    : source.filter((item) => item.id !== firstItem.id);
+    : plutotFrais(source.filter((item) => item.id !== firstItem.id));
 
   if (remaining.length === 0) {
     throw new Error(
