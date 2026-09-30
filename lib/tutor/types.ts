@@ -8,7 +8,10 @@ export type ComparatorName =
   | "mcq_exact"
   | "number_equal"
   | "fraction_decimal_equivalent"
-  | "contains_keyword";
+  | "contains_keyword"
+  | "expression_equivalente"
+  | "expression_developpee"
+  | "expression_factorisee";
 
 export type BoCompetence = {
   boId: string;

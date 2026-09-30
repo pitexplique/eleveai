@@ -2,6 +2,7 @@
 //lib/evaluation/comparators.ts
 import { answersMatch } from "@/lib/answerMatch";
 import type { ComparatorName } from "@/lib/tutor/types";
+import { estDeveloppee, estFactorisee, expressionsEquivalentes } from "@/lib/tutor/evaluation/expressionAlgebrique";
 
 function normalize(value: string) {
  const normalized = value
@@ -67,6 +68,16 @@ export function compareAnswer(args: {
 
     case "contains_keyword":
       return args.expected.some((exp) => a.includes(normalize(exp)));
+
+    // ⭐ 30/09/2026 — le calcul littéral : la réponse doit VALOIR l'attendue
+    // (plusieurs valeurs des lettres), et avoir la forme demandée. Voir
+    // lib/tutor/evaluation/expressionAlgebrique.ts.
+    case "expression_equivalente":
+      return args.expected.some((exp) => expressionsEquivalentes(args.answer, exp));
+    case "expression_developpee":
+      return estDeveloppee(args.answer) && args.expected.some((exp) => expressionsEquivalentes(args.answer, exp));
+    case "expression_factorisee":
+      return estFactorisee(args.answer) && args.expected.some((exp) => expressionsEquivalentes(args.answer, exp));
 
     default:
       return args.expected.some(
