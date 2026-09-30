@@ -199,7 +199,9 @@ const lutin = (chemins: [number, number][][], legende: string, opts: { cotes?: n
   const W = 300;
   const ox = (W - (x1 - x0) * k) / 2;
   const X = (x: number) => ox + (x - x0) * k;
-  const Y = (y: number) => 24 + (y1 - y) * k;
+  // ⛔ MESURÉ LE 30/09 À 375 PX (ex. 2 et 9) : une cote posée AU-DESSUS du côté le
+  // plus haut sortait du cadre avec une marge de 24. Marge de 36, et cote bornée.
+  const Y = (y: number) => 36 + (y1 - y) * k;
   const H = Y(y0) + 50;
   const pas = opts.grille ?? 10;
   const gx: number[] = [];
@@ -217,7 +219,7 @@ const lutin = (chemins: [number, number][][], legende: string, opts: { cotes?: n
     const L = Math.hypot(dx, dy) || 1;
     const [nx, ny] = [dy / L, -dx / L];
     const t = String(Math.round(L * 100) / 100).replace(".", ",");
-    const place = (s: number) => ({ x: Math.min(Math.max(X((p[0] + q[0]) / 2) + s * nx * 15, 16), W - 16), y: Y((p[1] + q[1]) / 2) - s * ny * 15 + 5, t });
+    const place = (s: number) => ({ x: Math.min(Math.max(X((p[0] + q[0]) / 2) + s * nx * 15, 16), W - 16), y: Math.min(Math.max(Y((p[1] + q[1]) / 2) - s * ny * 15 + 5, 18), H - 30), t });
     const c = touche(place(1)) ? place(-1) : place(1);
     posees.push(c);
     return c;

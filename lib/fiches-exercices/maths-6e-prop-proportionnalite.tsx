@@ -207,10 +207,10 @@ export const exercicesPropProportionnalite6e: FicheExercicesData = {
           figure: tableau(["Boules", "1", "2", "3"], ["Prix (€)", "2", "3,50", "5"], true),
           correction:
             "Je regarde ce qui se passe quand le nombre de boules double : de $1$ à $2$ boules.\nSi c'était proportionnel, le prix doublerait aussi : $2 \\times 2 = 4$ €.\nOr $2$ boules coûtent $3{,}50$ €, pas $4$ €.\nPour $3$ boules, ce serait $3 \\times 2 = 6$ €. Or le prix est $5$ €.\n⛔ Le piège : « le prix monte avec les boules, donc c'est proportionnel ». Il monte, mais il ne double pas.\nRéponse : non, ce n'est pas proportionnel.",
-          schema: ecranSeulement(table(["Boules", "Prix affiché", "Si proportionnel"], [
-            ["1", "2 €", "2 €"],
-            ["2", "3,50 €", "4 €"],
-            ["3", "5 €", "6 €"],
+          schema: ecranSeulement(table(["Boules", "Prix", "Si ×2"], [
+            ["1", "2", "2"],
+            ["2", "3,50", "4"],
+            ["3", "5", "6"],
           ])),
           micros: ["prop_reconnaitre"],
         },

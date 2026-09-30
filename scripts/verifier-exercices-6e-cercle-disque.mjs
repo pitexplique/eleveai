@@ -123,7 +123,8 @@ for (const a of appels("piste")) {
   const s = Math.min(190 / lw, 150 / lh);
   const W = lw * s + 104;
   vrai(`piste ${forme} : cadre de ${Math.round(W)}, 300 au plus`, W <= 300);
-  if (forme === "fenetre" && cotes.L) vrai(`piste fenêtre : « ${cotes.L} » tient à droite`, 6 + [...cotes.L].length * TAILLE * 0.6 <= 52);
+  // Mesuré à 375 px (30/09) : la cote à droite sortait du cadre ; elle est DANS la fenêtre, avec 30 % de marge sur la largeur des glyphes gras.
+  if (forme === "fenetre" && cotes.L) vrai(`piste fenêtre : « ${cotes.L} » tient dans la fenêtre`, 6 + [...cotes.L].length * TAILLE * 0.6 * 1.3 <= d * s - 4);
   if (cotes.L) verif(`piste ${forme} : cote « ${cotes.L} »`, nombre(cotes.L), L);
   if (cotes.d) verif(`piste ${forme} : cote « ${cotes.d} »`, nombre(cotes.d), d);
 }

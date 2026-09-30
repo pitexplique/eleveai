@@ -218,7 +218,8 @@ const piste = (forme: "stade" | "fenetre" | "demi", L: number, d: number, cotes:
         <path d={`M ${g} ${bas} L ${g} ${hr} A ${R} ${R} 0 0 1 ${dr} ${hr} L ${dr} ${bas} Z`} {...trait} />
         <line x1={g} y1={hr} x2={dr} y2={hr} {...tiret} />
         {cotes.d ? t((g + dr) / 2, bas + 20, cotes.d, "middle", "d") : null}
-        {cotes.L ? t(dr + 6, (hr + bas) / 2 + 5, cotes.L, "start", "L") : null}
+        {/* ⛔ MESURÉ À 375 PX (30/09) : à droite de la fenêtre, « 10 dm » sortait du cadre. Dedans, le long du bord gauche. */}
+        {cotes.L ? t(g + 6, (hr + bas) / 2 + 5, cotes.L, "start", "L") : null}
       </>
     );
   } else {
