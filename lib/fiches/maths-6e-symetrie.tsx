@@ -1,135 +1,120 @@
 // ─── Fiche de cours : la symétrie axiale (6e) ──────────────────────────────────
-// Fiche « en blocs » créée pour coller EXACTEMENT à la banque du coach
-// (lib/tutor-v4/questionBank/6e/maths/symetrie.bank.ts).
+// Fiche « en blocs » alignée sur la banque du coach
+// (6e/maths/symetrie.bank.ts, notionId sym_axiale — lecture seule).
+// Réécrite le 30/09/2026 au standard des fiches de 6e (étalon :
+// `maths-6e-bissectrice-angle.tsx`) : phrases courtes, un dessin par bloc,
+// Ti Margo dans le mode classe.
 //
-// Couverture des micro-compétences de la banque (pour la relecture du prof) :
-// - sym_reconnaitre → definition (miroir/axe), methode (Plier en pensée),
-//                     usages (carte 1), exemples (ex. 1), entrainement (Q1),
-//                     pieges (3, symétrie ≠ translation)
-// - sym_point       → proprietes (La médiatrice), methode (Tracer la
-//                     perpendiculaire + Reporter la distance), usages (carte 2),
-//                     exemples (ex. 2), entrainement (Q2), pieges (1 et 2)
-// - sym_figure      → usages (carte 2), entrainement (Q3), slide « autre exemple »
-// - sym_propriete   → proprietes (Conserve les mesures), reel, entrainement (Q4),
-//                     aRetenir (1)
-// - sym_axe         → proprietes (Les axes des figures usuelles),
-//                     usages (carte 3), exemples (implicite), entrainement (Q3),
-//                     slide « selon ce que l'on cherche »
-// - sym_defi        → entrainement (Q4), pieges (« ça a l'air symétrique »),
-//                     slide « exercice flash »
+// Micro-compétences 6/6 → blocs :
+//   sym_reconnaitre → définition + figure, méthode 1 (plier en pensée),
+//                     exemple 1, exercice 1
+//   sym_point       → propriétés 1 et 2 (même distance ; l'axe coupe [AA'] en
+//                     son milieu, à angle droit), méthodes 2 et 3, exemple 2,
+//                     exercice 2
+//   sym_figure      → méthode 3 (chaque sommet), usage 1 (un quadrilatère),
+//                     exercice 3
+//   sym_propriete   → propriété 3 (rien ne change), usage 2 (l'angle de 40°),
+//                     exercice 4
+//   sym_axe         → propriété 4 (les 4 axes du carré), usage 3 (les 3 axes
+//                     du triangle équilatéral), exercice 5
+//   sym_defi        → exemple 3 (l'aire du carré : 16 cm²), exercice 6
+//
+// ⭐ LES NOMBRES SONT CEUX DE LA BANQUE : A à 3 carreaux d'un axe vertical ; à
+// 4 carreaux d'un axe horizontal ; un segment de 7 cm et de 6 cm ; un angle de
+// 40° ; un carré de 16 cm² ; 4 axes pour le carré, 2 pour le rectangle, 3 pour
+// le triangle équilatéral, une infinité pour le cercle. La feuille d'exercices
+// (`lib/fiches-exercices/maths-6e-sym-axiale.tsx`) a évité exprès ces nombres,
+// le carrelage et le papillon : on les garde. ⛔ Aucun de ses exemples (chalet
+// et lac, logo du club, lettres, sapin, billard, drapeaux…). « Carrelage à La
+// Réunion » (banque) devient « carrelage ».
+//
+// ⭐ UN DESSIN PAR BLOC, JAMAIS DEUX FOIS LE MÊME. Le canvas `transformation`
+// dessine toujours une figure, un axe et son image : il garde la définition,
+// les exemples, le pliage raté, le report de distance et la figure entière.
+// `droites` pose ce qu'il ne sait pas faire (le milieu, l'angle droit, les 4
+// axes du carré) ; le tableau dit « rien ne change ». Les nouveaux dessins de
+// septembre (l'angle de 40° et son image, les 3 axes du triangle, le carré de
+// 16 cm²) sont des SVG locaux (`schemas-angles-6e.tsx`) : figures JUSTES, un
+// arc de 40° ouvre vraiment 40°.
+//
+// ⚠️ `cellSize: 22, padding: 18` SUR TOUS LES QUADRILLAGES, et c'est mesuré : à
+// 30, la phrase du bas du canvas tombait à 8,7 px dans un bloc de 199 px. Le
+// `padding` est passé de 10 à 18 le 30/09 : le canvas écrit « axe » à
+// `padding − 6` au-dessus du quadrillage, et à 10 le mot sortait du cadre par
+// le haut (mesuré : haut du texte à −6). À 18, il rentre ; les lettres restent
+// à 11,3 px sur 200 px de SVG.
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+import {
+  BLEU,
+  Dessin,
+  ORANGE,
+  ROUGE,
+  legende,
+  polaire,
+  type Pt,
+} from "@/lib/fiches/schemas-angles-6e";
 
-// Une figure et son image par rapport à un axe vertical, dessinées par le
-// moteur du coach : l'élève voit le « miroir » et peut compter les carreaux.
-//
-// ⚠️ `cellSize: 22, padding: 10` SUR LES SIX DESSINS DE LA FICHE, et c'est
-// mesuré. La taille d'une case fixe la largeur du viewBox (8 colonnes), donc le
-// rapport d'échelle une fois le SVG mis à la largeur de son bloc. À 30, la
-// phrase du bas du canvas tombait à 8,7 px dans un bloc d'exemple de 199 px.
-// Le dessin ne rétrécit pas pour autant : il occupe toujours toute la largeur —
-// ce sont les LETTRES qui grossissent.
-const schemaSymetrie = (
+const NOIR = "#0f172a";
+
+type PointGrille = { x: number; y: number };
+
+/** Une figure, un axe et son image, sur le quadrillage du coach (8 × 6). */
+const miroir = (opts: {
+  axe: { type: "vertical"; x: number; label: string } | { type: "horizontal"; y: number; label: string };
+  source: PointGrille[];
+  sourceLabel: string;
+  image: PointGrille[];
+  imageLabel: string;
+  pointilles?: boolean;
+}) => (
   <CanvasRenderer
     figure={{
       kind: "transformation",
       transformation: "symetrie_axiale",
       grid: { rows: 6, cols: 8 },
-      size: { cellSize: 22, padding: 10 },
-      axis: { type: "vertical", x: 4, label: "axe" },
-      source: { points: [{ x: 1, y: 1 }, { x: 1, y: 4 }, { x: 3, y: 1 }], label: "figure" },
-      image: { points: [{ x: 7, y: 1 }, { x: 7, y: 4 }, { x: 5, y: 1 }], label: "image" },
+      size: { cellSize: 22, padding: 18 },
+      axis: opts.axe,
+      source: { points: opts.source, label: opts.sourceLabel },
+      image: { points: opts.image, label: opts.imageLabel },
       display: {
         showTransformationInfo: true,
         showGrid: true,
         showLabels: true,
         showPoints: true,
-        showDashedLinks: true,
+        showDashedLinks: opts.pointilles ?? true,
       },
     }}
   />
 );
 
-// Exemple 1 : une figure bleue et son reflet de l'autre côté de l'axe vertical.
-const symReflet = (
-  <CanvasRenderer
-    figure={{
-      kind: "transformation",
-      transformation: "symetrie_axiale",
-      grid: { rows: 6, cols: 8 },
-      size: { cellSize: 22, padding: 10 },
-      axis: { type: "vertical", x: 4, label: "axe" },
-      source: { points: [{ x: 1, y: 1 }, { x: 3, y: 2 }, { x: 1, y: 4 }], label: "figure" },
-      image: { points: [{ x: 7, y: 1 }, { x: 5, y: 2 }, { x: 7, y: 4 }], label: "image" },
-      display: { showTransformationInfo: true, showGrid: true, showLabels: true, showPoints: true, showDashedLinks: true },
-    }}
-  />
-);
+// ─── LA FIGURE DE LA DÉFINITION ───────────────────────────────────────────────
+const schemaSymetrie = miroir({
+  axe: { type: "vertical", x: 4, label: "axe" },
+  source: [{ x: 1, y: 1 }, { x: 1, y: 4 }, { x: 3, y: 1 }],
+  sourceLabel: "figure",
+  image: [{ x: 7, y: 1 }, { x: 7, y: 4 }, { x: 5, y: 1 }],
+  imageLabel: "image",
+});
 
-// Exemple 2 : l'image A' d'un point A situé à 3 carreaux de l'axe.
-const symPoint = (
-  <CanvasRenderer
-    figure={{
-      kind: "transformation",
-      transformation: "symetrie_axiale",
-      grid: { rows: 6, cols: 8 },
-      size: { cellSize: 22, padding: 10 },
-      axis: { type: "vertical", x: 4, label: "axe" },
-      source: { points: [{ x: 1, y: 3 }], label: "A" },
-      image: { points: [{ x: 7, y: 3 }], label: "A'" },
-      display: { showTransformationInfo: true, showGrid: true, showLabels: true, showPoints: true, showDashedLinks: true },
-    }}
-  />
-);
-
-// ─── Les sept dessins des blocs ───────────────────────────────────────────────
-// ⭐ LE CANVAS `transformation` DESSINE TOUJOURS LA MÊME CHOSE : une figure, un
-// axe, son image. Mis sur les sept blocs, il aurait fait sept fois le miroir
-// (REGLES.md § 2 bis). Trois blocs passent donc à `droites`, qui sait ce que la
-// transformation ignore — marquer un angle droit, poser un milieu, tracer
-// plusieurs axes — et un quatrième à un tableau, parce que « ça ne change pas »
-// n'est pas une figure mais une liste.
-
-/** Un dessin et sa phrase, sous lui. */
-const legende = (dessin: React.ReactNode, texte: string) => (
-  <div>
-    {dessin}
-    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
-  </div>
-);
-
-const NOIR = "#0f172a";
-const BLEU = "#2563eb";
-const ROUGE = "#dc2626";
-
-// LE CAS QUI ÉTONNE : UN POINT QUI NE BOUGE PAS. L'exemple 2 montre déjà A à
-// trois carreaux et son image de l'autre côté ; celui-ci montre la seconde
-// moitié de la propriété, celle qu'on oublie — sur l'axe, l'image est le point
-// lui-même.
+// ─── UN POINT SUR L'AXE NE BOUGE PAS ──────────────────────────────────────────
+// ⚠️ UNE SEULE ÉTIQUETTE : A et A' sont au même endroit, leurs deux noms se
+// chevauchaient (mesuré en juin).
 const pointSurLAxe = legende(
-  <CanvasRenderer
-    figure={{
-      kind: "transformation",
-      transformation: "symetrie_axiale",
-      grid: { rows: 6, cols: 8 },
-      size: { cellSize: 22, padding: 10 },
-      axis: { type: "vertical", x: 4, label: "axe" },
-      // ⚠️ UNE SEULE ÉTIQUETTE, et c'est tout l'intérêt : A et A' sont au MÊME
-      // endroit, donc leurs deux noms se chevauchaient (mesuré). Un seul texte,
-      // « A = A' », dit la chose mieux que deux textes empilés.
-      source: { points: [{ x: 4, y: 2 }], label: "A = A'" },
-      image: { points: [{ x: 4, y: 2 }], label: "" },
-      display: { showTransformationInfo: true, showGrid: true, showLabels: true, showPoints: true, showDashedLinks: false },
-    }}
-  />,
-  "A est sur l'axe : son image, c'est lui-même"
+  miroir({
+    axe: { type: "vertical", x: 4, label: "axe" },
+    source: [{ x: 4, y: 2 }],
+    sourceLabel: "A = A'",
+    image: [{ x: 4, y: 2 }],
+    imageLabel: "",
+    pointilles: false,
+  }),
+  "A est sur l'axe : son image, c'est lui-même."
 );
 
-// ⭐ CE QUE LA TRANSFORMATION NE SAIT PAS DESSINER. « L'axe est la médiatrice »
-// demande deux marques que le canvas des symétries n'a pas : l'angle droit au
-// croisement et le MILIEU du segment. `droites` les pose toutes les deux.
+// ─── L'AXE COUPE [AA'] EN SON MILIEU, À ANGLE DROIT ───────────────────────────
 const laMediatrice = legende(
   <CanvasRenderer
     figure={{
@@ -139,8 +124,12 @@ const laMediatrice = legende(
         {
           id: "axe",
           type: "droite",
-          from: { x: 125, y: 25 },
-          to: { x: 125, y: 175 },
+          // ⚠️ Une `droite` est prolongée jusqu'aux bords : `from` et `to` ne
+          // fixent que sa direction… et la place du mot « axe », écrit à leur
+          // milieu. Posé à y = 90 (juin), il touchait encore le point M (vu au
+          // rendu, 30/09) : le milieu descend à y = 150, M reste à y = 60.
+          from: { x: 125, y: 110 },
+          to: { x: 125, y: 190 },
           label: "axe",
           color: ROUGE,
           display: { showLabel: true, showArrows: false },
@@ -148,50 +137,43 @@ const laMediatrice = legende(
         {
           id: "segment",
           type: "segment",
-          // ⚠️ REMONTÉ À 70. À y = 100, le segment coupait l'axe en son milieu
-          // exact — et l'étiquette « axe », posée au milieu de la droite,
-          // tombait pile sur le nom du point M (mesuré).
-          from: { x: 45, y: 70 },
-          to: { x: 205, y: 70 },
+          from: { x: 45, y: 60 },
+          to: { x: 205, y: 60 },
           color: BLEU,
           display: { showLabel: false, showArrows: false },
         },
       ],
       points: [
-        { x: 45, y: 70, label: "A", color: BLEU },
-        { x: 125, y: 70, label: "M", color: ROUGE, highlight: true },
-        { x: 205, y: 70, label: "A'", color: BLEU },
+        { x: 45, y: 60, label: "A", color: BLEU },
+        { x: 125, y: 60, label: "M", color: ROUGE, highlight: true },
+        { x: 205, y: 60, label: "A'", color: BLEU },
       ],
       markers: {
-        rightAngles: [{ x: 125, y: 70, lineA: "axe", lineB: "segment" }],
+        rightAngles: [{ x: 125, y: 60, lineA: "axe", lineB: "segment" }],
       },
     }}
   />,
-  "M est le milieu de [AA'], et l'angle est droit"
+  "M est le milieu de [AA'], et l'angle est droit."
 );
 
-// « ÇA NE CHANGE PAS » N'EST PAS UNE FIGURE, C'EST UNE LISTE. Dessiner un
-// segment et son image côte à côte ne montre rien : ils se ressemblent, c'est
-// tout. Ce qui se voit, c'est la colonne de droite identique à celle de gauche.
+// ─── RIEN NE CHANGE : la colonne « après » redit la colonne « avant » ─────────
 const cequiSeConserve = (
   <CanvasRenderer
     figure={{
       kind: "tableau_donnees",
-      title: "Rien ne change",
-      headers: ["Avant", "Après"],
+      headers: ["Mesure", "Avant", "Après"],
       rows: [
-        { label: "Un segment", values: ["7 cm", "7 cm"] },
-        { label: "Un angle", values: ["40°", "40°"] },
-        { label: "Une aire", values: ["12 cm²", "12 cm²"] },
+        { values: ["un segment", "7 cm", "7 cm"] },
+        { values: ["un angle", "40°", "40°"] },
+        { values: ["une aire", "12 cm²", "12 cm²"] },
       ],
-      highlight: { col: 1 },
+      highlight: { col: 2 },
+      display: { compact: true },
     }}
   />
 );
 
-// LES QUATRE AXES DU CARRÉ, TOUS SUR LE MÊME DESSIN. Le canvas des symétries
-// n'accepte qu'UN axe : impossible d'y montrer qu'un carré en a quatre. Quatre
-// droites en pointillés sur un carré, elles, le disent d'un coup d'œil.
+// ─── LES 4 AXES DU CARRÉ ──────────────────────────────────────────────────────
 const lesQuatreAxesDuCarre = legende(
   <CanvasRenderer
     figure={{
@@ -209,34 +191,24 @@ const lesQuatreAxesDuCarre = legende(
       ],
     }}
   />,
-  "le carré en a 4 · le rectangle 2 · le cercle une infinité"
+  "Le carré a 4 axes de symétrie."
 );
 
-// ⭐ LE CONTRE-EXEMPLE DU PLIAGE. Toutes les autres figures de la fiche se
-// superposent : celle-ci NON, et c'est ce qui rend le geste vérifiable. Plier
-// pour voir, c'est utile seulement s'il existe des cas où ça rate.
+// ─── PLIER EN PENSÉE : le contre-exemple, ça ne se superpose pas ──────────────
 const leProblemeDuPliage = legende(
-  <CanvasRenderer
-    figure={{
-      kind: "transformation",
-      transformation: "symetrie_axiale",
-      grid: { rows: 6, cols: 8 },
-      size: { cellSize: 22, padding: 10 },
-      axis: { type: "vertical", x: 4, label: "axe" },
-      source: { points: [{ x: 1, y: 1 }, { x: 3, y: 2 }, { x: 1, y: 4 }], label: "figure" },
-      // ⚠️ Étiquette courte : « pas l'image » (11 signes) chevauchait le mot
-      // « axe » posé en haut de la droite (mesuré). La légende sous le dessin
-      // dit la phrase entière, l'étiquette n'a qu'à désigner.
-      image: { points: [{ x: 6, y: 1 }, { x: 5, y: 3 }, { x: 7, y: 4 }], label: "faux" },
-      display: { showTransformationInfo: true, showGrid: true, showLabels: true, showPoints: true, showDashedLinks: false },
-    }}
-  />,
-  "plié, ça ne se superpose pas : ce n'est pas une symétrie"
+  miroir({
+    axe: { type: "vertical", x: 4, label: "axe" },
+    source: [{ x: 1, y: 1 }, { x: 3, y: 2 }, { x: 1, y: 4 }],
+    sourceLabel: "figure",
+    // Étiquette courte : « pas l'image » chevauchait le mot « axe » (mesuré).
+    image: [{ x: 6, y: 1 }, { x: 5, y: 3 }, { x: 7, y: 4 }],
+    imageLabel: "faux",
+    pointilles: false,
+  }),
+  "Plié, ça ne tombe pas dessus : pas de symétrie."
 );
 
-// LE GESTE EN COURS, PAS LE RÉSULTAT. La propriété montrait la médiatrice
-// terminée, avec son milieu ; ici A' n'existe pas encore — on vient seulement
-// de tracer la droite sur laquelle il se trouvera.
+// ─── TRACER LA PERPENDICULAIRE : A' n'existe pas encore ───────────────────────
 const laPerpendiculaire = legende(
   <CanvasRenderer
     figure={{
@@ -246,8 +218,9 @@ const laPerpendiculaire = legende(
         {
           id: "axe",
           type: "droite",
-          from: { x: 125, y: 25 },
-          to: { x: 125, y: 175 },
+          // Le mot « axe » loin de la perpendiculaire (voir `laMediatrice`).
+          from: { x: 125, y: 110 },
+          to: { x: 125, y: 190 },
           label: "axe",
           color: ROUGE,
           display: { showLabel: true, showArrows: false },
@@ -255,56 +228,154 @@ const laPerpendiculaire = legende(
         {
           id: "perp",
           type: "droite",
-          from: { x: 45, y: 70 },
-          to: { x: 210, y: 70 },
+          from: { x: 45, y: 60 },
+          to: { x: 210, y: 60 },
           color: BLEU,
           dashed: true,
           display: { showLabel: false, showArrows: false },
         },
       ],
-      points: [{ x: 45, y: 70, label: "A", color: BLEU, highlight: true }],
+      points: [{ x: 45, y: 60, label: "A", color: BLEU, highlight: true }],
       markers: {
-        rightAngles: [{ x: 125, y: 70, lineA: "axe", lineB: "perp" }],
+        rightAngles: [{ x: 125, y: 60, lineA: "axe", lineB: "perp" }],
       },
     }}
   />,
-  "A' sera quelque part sur cette droite"
+  "A' sera sur cette droite."
 );
 
-// ⭐ L'AXE N'EST PAS TOUJOURS VERTICAL. Les quatre autres dessins de la fiche
-// ont tous un axe debout : celui-ci est couché, et le report de distance se
-// compte alors en carreaux vers le haut et vers le bas. Même geste, autre
-// direction — c'est ce que la troisième étape doit rendre évident.
+// ─── REPORTER LA DISTANCE : l'axe est couché ──────────────────────────────────
+// ⚠️ Pas d'étiquette sur un axe HORIZONTAL : le canvas la pose hors du cadre.
 const reporterLaDistance = legende(
-  <CanvasRenderer
-    figure={{
-      kind: "transformation",
-      transformation: "symetrie_axiale",
-      grid: { rows: 6, cols: 8 },
-      size: { cellSize: 22, padding: 10 },
-      // ⚠️ Pas d'étiquette sur un axe HORIZONTAL : le canvas la pose au bout de
-      // la droite, donc hors du cadre (mesuré — le texte sortait du <svg>).
-      // C'est la légende du dessous qui nomme l'axe.
-      axis: { type: "horizontal", y: 3, label: "" },
-      source: { points: [{ x: 2, y: 1 }], label: "A" },
-      image: { points: [{ x: 2, y: 5 }], label: "A'" },
-      display: { showTransformationInfo: true, showGrid: true, showLabels: true, showPoints: true, showDashedLinks: true },
-    }}
-  />,
-  "l'axe est couché : 2 carreaux au-dessus, 2 en dessous"
+  miroir({
+    axe: { type: "horizontal", y: 3, label: "" },
+    source: [{ x: 2, y: 1 }],
+    sourceLabel: "A",
+    image: [{ x: 2, y: 5 }],
+    imageLabel: "A'",
+  }),
+  "2 carreaux au-dessus, 2 carreaux en dessous."
+);
+
+// ─── CONSTRUIRE L'IMAGE D'UNE FIGURE : sommet par sommet ──────────────────────
+const figureEntiere = legende(
+  miroir({
+    axe: { type: "vertical", x: 4, label: "axe" },
+    source: [{ x: 1, y: 1 }, { x: 3, y: 1 }, { x: 3, y: 3 }, { x: 1, y: 4 }],
+    sourceLabel: "figure",
+    image: [{ x: 7, y: 1 }, { x: 5, y: 1 }, { x: 5, y: 3 }, { x: 7, y: 4 }],
+    imageLabel: "image",
+  }),
+  "4 sommets, 4 images, puis on relie."
+);
+
+// ─── L'IMAGE D'UN ANGLE DE 40° MESURE 40° ─────────────────────────────────────
+const angleEtImage = (() => {
+  const G: Pt = { x: -30, y: 0 };
+  const D: Pt = { x: 30, y: 0 };
+  return (
+    <Dessin
+      titre="Un angle de 40° et son image : 40° aussi"
+      traits={[
+        { de: { x: 0, y: -90 }, a: { x: 0, y: 22 }, couleur: ROUGE, pointille: true },
+        { de: G, a: polaire(180, 80, G) },
+        { de: G, a: polaire(140, 80, G) },
+        { de: D, a: polaire(0, 80, D) },
+        { de: D, a: polaire(40, 80, D) },
+      ]}
+      arcs={[
+        { o: G, de: 140, a: 180, r: 26, couleur: BLEU, texte: "40°", rTexte: 50 },
+        { o: D, de: 0, a: 40, r: 26, couleur: ORANGE, texte: "40°", rTexte: 50 },
+      ]}
+      points={[G, D]}
+      textes={[{ p: { x: 0, y: -102 }, texte: "axe", couleur: ROUGE }]}
+    />
+  );
+})();
+
+// ─── LES 3 AXES DU TRIANGLE ÉQUILATÉRAL ───────────────────────────────────────
+// Côté 170, hauteur 147,2. Chaque axe va d'un sommet au milieu du côté opposé.
+const troisAxes = (() => {
+  const A: Pt = { x: 0, y: 0 };
+  const B: Pt = { x: 170, y: 0 };
+  const C: Pt = { x: 85, y: -147.2 };
+  const axe = (s: Pt, p: Pt, q: Pt) => {
+    const m = { x: (p.x + q.x) / 2, y: (p.y + q.y) / 2 };
+    const en = (t: number) => ({ x: s.x + t * (m.x - s.x), y: s.y + t * (m.y - s.y) });
+    return { de: en(-0.12), a: en(1.14), couleur: ROUGE, pointille: true };
+  };
+  return (
+    <Dessin
+      titre="Le triangle équilatéral et ses 3 axes de symétrie"
+      polygones={[{ pts: [A, B, C], fond: "#ffffff" }]}
+      traits={[axe(A, B, C), axe(B, C, A), axe(C, A, B)]}
+    />
+  );
+})();
+
+// ─── EXEMPLE 1 : une figure et son reflet ─────────────────────────────────────
+const symReflet = miroir({
+  axe: { type: "vertical", x: 4, label: "axe" },
+  source: [{ x: 1, y: 1 }, { x: 3, y: 2 }, { x: 1, y: 4 }],
+  sourceLabel: "figure",
+  image: [{ x: 7, y: 1 }, { x: 5, y: 2 }, { x: 7, y: 4 }],
+  imageLabel: "image",
+});
+
+// ─── EXEMPLE 2 : A à 3 carreaux de l'axe ──────────────────────────────────────
+const symPoint = miroir({
+  axe: { type: "vertical", x: 4, label: "axe" },
+  source: [{ x: 1, y: 3 }],
+  sourceLabel: "A",
+  image: [{ x: 7, y: 3 }],
+  imageLabel: "A'",
+});
+
+// ─── EXEMPLE 3 : le carré de 16 cm² et son image ──────────────────────────────
+const carre16 = (
+  <Dessin
+    titre="Un carré de 16 cm² et son image par symétrie"
+    polygones={[
+      {
+        pts: [
+          { x: -130, y: -80 },
+          { x: -50, y: -80 },
+          { x: -50, y: 0 },
+          { x: -130, y: 0 },
+        ],
+        fond: "#dbeafe",
+        couleur: BLEU,
+      },
+      {
+        pts: [
+          { x: 50, y: -80 },
+          { x: 130, y: -80 },
+          { x: 130, y: 0 },
+          { x: 50, y: 0 },
+        ],
+        fond: "#ffedd5",
+        couleur: ORANGE,
+      },
+    ]}
+    traits={[{ de: { x: 0, y: -100 }, a: { x: 0, y: 16 }, couleur: ROUGE, pointille: true }]}
+    textes={[
+      { p: { x: -90, y: -40 }, texte: "16 cm²", couleur: BLEU },
+      { p: { x: 90, y: -40 }, texte: "?", couleur: ORANGE, taille: 24 },
+      { p: { x: 0, y: -112 }, texte: "axe", couleur: ROUGE },
+    ]}
+  />
 );
 
 const pieges = [
-  "Placer l'image du bon côté de l'axe mais pas à la bonne distance : le point et son image doivent être exactement à la même distance de l'axe.",
-  "Oublier que le segment qui relie un point à son image est perpendiculaire à l'axe : l'axe doit couper ce segment en son milieu.",
-  "Confondre symétrie et translation : une symétrie retourne la figure comme un miroir, une translation la fait juste glisser sans la retourner.",
-  "Se fier à l'impression « ça a l'air symétrique » : il faut vérifier plusieurs sommets, pas seulement la forme générale.",
+  "Placer A' à une autre distance de l'axe. A et A' sont à la même distance.",
+  "Tracer [AA'] penché. Il coupe l'axe à angle droit.",
+  "Faire glisser la figure. Une symétrie la retourne, comme un miroir.",
 ];
 
 const aRetenir = [
-  "La symétrie axiale, c'est le pliage le long d'un axe : la figure et son image se superposent exactement.",
-  "L'image d'un point est de l'autre côté de l'axe, à la même distance ; l'axe est la médiatrice du segment qui les relie.",
-  "Une symétrie axiale conserve tout : les longueurs, les angles, les aires et l'alignement. Elle ne déforme rien.",
+  "L'axe est un miroir : pliée, la figure tombe sur son image.",
+  "A' est de l'autre côté de l'axe, à la même distance que A.",
+  "La symétrie garde les longueurs, les angles et les aires.",
 ];
 
 export const ficheSymetrie6e: FicheCoursData = {
@@ -314,120 +385,119 @@ export const ficheSymetrie6e: FicheCoursData = {
   notion: "sym-axiale",
   titre: "La symétrie axiale",
   accroche:
-    "La symétrie axiale, c'est le miroir des mathématiques : une droite, l'axe, sépare une figure de son reflet. En 6e, on apprend à la reconnaître, à construire l'image d'un point ou d'une figure, à utiliser ses propriétés et à trouver les axes des figures usuelles.",
+    "Pose un miroir sur un dessin : tu vois son reflet. La symétrie axiale fabrique ce reflet, de l'autre côté d'une droite.",
   identite: [
-    { label: "Prérequis", valeur: "Se repérer sur un quadrillage, tracer une droite perpendiculaire" },
-    { label: "Idée clé", valeur: "L'axe joue le rôle d'un miroir : l'image est le reflet de la figure" },
-    { label: "Outil", valeur: "Le pliage : la figure et son image se superposent le long de l'axe" },
+    { label: "Le mot clé", valeur: "L'axe, comme un miroir" },
+    { label: "Le secret", valeur: "Même distance à l'axe, de l'autre côté" },
+    { label: "Le geste", valeur: "Plier le long de l'axe" },
   ],
   definition: {
     texte:
-      "La symétrie axiale transforme une figure comme dans un miroir, par rapport à une droite appelée l'axe de symétrie. Si l'on plie la feuille le long de cet axe, la figure et son image se superposent exactement. Le mot « axiale » vient d'« axe » : c'est cette droite qui sert de miroir.",
+      "La symétrie axiale fait le reflet d'une figure, comme un miroir. Le miroir est une droite : l'axe de symétrie. Si on plie le long de l'axe, la figure et son image se superposent.",
   },
   figure: {
     schema: schemaSymetrie,
-    legende: "La figure et son image se replient l'une sur l'autre le long de l'axe.",
+    legende: "Pliée le long de l'axe, la figure tombe sur son image.",
   },
   proprietes: [
     {
       titre: "L'image d'un point",
       micros: ["sym_point"],
-      texte:
-        "L'image d'un point A est le point A', placé de l'autre côté de l'axe, à la même distance de l'axe. Si A est déjà sur l'axe, il ne bouge pas : son image est lui-même.",
+      texte: "A' est de l'autre côté de l'axe, à la même distance. Un point sur l'axe ne bouge pas.",
       schema: pointSurLAxe,
     },
     {
-      titre: "L'axe est la médiatrice",
+      titre: "L'axe coupe [AA'] en son milieu",
       micros: ["sym_point"],
-      texte:
-        "Le segment [AA'] qui relie un point à son image est toujours perpendiculaire à l'axe, et l'axe le coupe en son milieu. Autrement dit, l'axe est la médiatrice de [AA'].",
+      texte: "L'axe coupe [AA'] en son milieu, à angle droit. On dit que l'axe est la médiatrice de [AA'].",
       schema: laMediatrice,
     },
     {
-      titre: "La symétrie conserve les mesures",
+      titre: "Rien ne change de taille",
       micros: ["sym_propriete"],
-      texte:
-        "Une symétrie axiale ne déforme pas la figure : elle conserve les longueurs, les mesures d'angles, les aires, les périmètres et l'alignement des points. Un segment de 7 cm a une image de 7 cm ; un angle de 40° a une image de 40°.",
+      texte: "L'image a les mêmes longueurs, les mêmes angles et la même aire. La symétrie ne déforme rien.",
       schema: cequiSeConserve,
     },
     {
-      titre: "Les axes des figures usuelles",
+      titre: "Les axes d'une figure",
       micros: ["sym_axe"],
-      texte:
-        "Un rectangle non carré possède 2 axes de symétrie, un carré en possède 4 (les deux médianes et les deux diagonales), un triangle équilatéral en possède 3, un triangle isocèle non équilatéral en possède 1 et un cercle en possède une infinité.",
+      texte: "Un carré a 4 axes de symétrie. Un rectangle en a 2, un cercle en a une infinité.",
       schema: lesQuatreAxesDuCarre,
     },
   ],
   reel: {
     texte:
-      "La symétrie axiale est partout autour de nous : les ailes d'un papillon sont l'image l'une de l'autre par rapport au corps, une façade d'immeuble se reflète de part et d'autre de la porte centrale, et beaucoup de logos de marques sont construits autour d'un axe. Comme la symétrie conserve la forme et la taille, le reflet est identique à l'original, seulement retourné.",
+      "Les deux ailes d'un papillon sont symétriques. Une feuille d'arbre l'est presque, le long de sa nervure. Ton visage aussi, presque. L'axe passe au milieu.",
   },
   historique: {
     texte:
-      "L'idée de symétrie est très ancienne : les artisans de l'Égypte et de la Grèce antique l'utilisaient déjà pour décorer temples et poteries. Le mot « symétrie » vient du grec « summetria », qui signifiait « juste proportion ». En 1872, le mathématicien allemand Felix Klein a réuni toutes les transformations, dont la symétrie, dans une même théorie : la géométrie devient l'étude de ce qui ne change pas quand on transforme une figure.",
+      "Le mot « symétrie » vient du grec. Il voulait dire « belle proportion ». Les artisans de l'Égypte et de la Grèce antiques l'utilisaient déjà. Ils décoraient temples et poteries avec des motifs symétriques.",
   },
   methode: [
     {
       titre: "Plier en pensée",
       micros: ["sym_reconnaitre"],
-      texte:
-        "Pour reconnaître une symétrie, on imagine que l'on plie la feuille le long de l'axe. Si la figure et son image se superposent exactement, c'est bien une symétrie axiale.",
+      texte: "On imagine qu'on plie le long de l'axe. Si tout se superpose, c'est une symétrie.",
       schema: leProblemeDuPliage,
     },
     {
       titre: "Tracer la perpendiculaire",
       micros: ["sym_point"],
-      texte:
-        "Pour construire l'image d'un point A, on trace la droite perpendiculaire à l'axe qui passe par A. C'est sur cette droite que se trouvera l'image A'.",
+      texte: "On trace la droite qui passe par A et coupe l'axe à angle droit. A' sera sur cette droite.",
       schema: laPerpendiculaire,
     },
     {
       titre: "Reporter la distance",
       micros: ["sym_point", "sym_figure"],
-      texte:
-        "On mesure la distance de A à l'axe, puis on reporte cette même distance de l'autre côté, sur la perpendiculaire. On obtient A'. Pour une figure, on répète ce geste pour chaque sommet.",
+      texte: "On mesure la distance de A à l'axe. On la reporte de l'autre côté : c'est A'.",
       schema: reporterLaDistance,
     },
   ],
   usages: [
     {
-      titre: "Reconnaître une symétrie",
-      micros: ["sym_reconnaitre"],
-      detail:
-        "Vérifier qu'une figure est bien l'image d'une autre par symétrie axiale : on contrôle que chaque point et son image sont à la même distance de l'axe, de part et d'autre.",
-    },
-    {
-      titre: "Construire l'image",
+      titre: "L'image d'une figure",
       micros: ["sym_figure"],
-      detail:
-        "Construire l'image d'un point ou d'une figure : perpendiculaire à l'axe, même distance de l'autre côté. Pour un triangle ABC, on construit A', B', C' puis on relie les points.",
+      detail: "On construit l'image de chaque sommet. Puis on relie les images dans le même ordre.",
+      schema: figureEntiere,
     },
     {
-      titre: "Trouver les axes",
+      titre: "Une mesure à trouver",
+      micros: ["sym_propriete"],
+      detail: "L'image d'un angle de 40° mesure 40°. L'image d'un segment de 7 cm mesure 7 cm.",
+      schema: legende(angleEtImage, "Même mesure des deux côtés."),
+    },
+    {
+      titre: "Compter les axes",
       micros: ["sym_axe"],
-      detail:
-        "Chercher les axes de symétrie d'une figure : on teste mentalement les pliages possibles. Rectangle : 2 axes, carré : 4, triangle équilatéral : 3, cercle : une infinité.",
+      detail: "On cherche chaque pli qui marche. Le triangle équilatéral a 3 axes.",
+      schema: legende(troisAxes, "Un axe par sommet."),
     },
   ],
   exemples: [
     {
-      titre: "Reconnaître une symétrie axiale",
+      titre: "Reconnaître une symétrie",
       micros: ["sym_reconnaitre"],
-      donnees:
-        "Sur un quadrillage, une figure bleue est reflétée de l'autre côté d'une droite verticale, comme dans un miroir.",
-      question: "Quelle transformation relie la figure bleue à son reflet ?",
+      donnees: "Une figure est retournée de l'autre côté d'une droite.",
+      question: "Est-ce une symétrie axiale ?",
       schema: symReflet,
-      solution:
-        "On repère l'axe vertical qui sépare les deux figures. Chaque point du reflet est de l'autre côté de l'axe, à la même distance que le point d'origine : l'axe joue le rôle d'un miroir. La transformation utilisée est donc une symétrie axiale (et non une translation, qui ferait glisser la figure sans la retourner).",
+      solution: "Chaque point et son image sont à la même distance de l'axe. C'est une symétrie axiale.",
     },
     {
-      titre: "Construire l'image d'un point",
+      titre: "L'image d'un point",
       micros: ["sym_point"],
       donnees: "Le point A est à 3 carreaux à gauche d'un axe vertical.",
-      question: "Où placer son image A' par symétrie axiale ?",
+      question: "Où placer son image A' ?",
       schema: symPoint,
       solution:
-        "On trace la perpendiculaire à l'axe passant par A : c'est une ligne horizontale. On reporte la même distance de l'autre côté de l'axe : A étant à 3 carreaux à gauche, A' se place à 3 carreaux à droite de l'axe, sur cette même ligne. L'axe est alors le milieu du segment [AA'].",
+        "On reste sur la même ligne du quadrillage. On passe de l'autre côté de l'axe. A' est à 3 carreaux à droite de l'axe.",
+    },
+    {
+      titre: "Défi : l'aire de l'image",
+      micros: ["sym_defi", "sym_propriete"],
+      donnees: "Un carré a une aire de 16 cm².",
+      question: "Quelle est l'aire de son image par symétrie ?",
+      schema: carre16,
+      solution: "La symétrie ne déforme rien. L'image a aussi une aire de 16 cm².",
     },
   ],
   pieges,
@@ -435,167 +505,87 @@ export const ficheSymetrie6e: FicheCoursData = {
   entrainement: [
     {
       question:
-        "Sur un motif de carrelage, une figure est reflétée de l'autre côté d'un axe vertical, comme dans un miroir. S'agit-il d'une symétrie axiale ou d'une translation ? Explique.",
-      correction:
-        "Il y a un axe vertical qui joue le rôle de miroir : la figure est retournée de l'autre côté, à la même distance. C'est donc une symétrie axiale. Ce n'est pas une translation, car une translation ferait seulement glisser la figure dans une direction, sans la retourner.",
+        "Sur un carrelage, une figure est retournée de l'autre côté d'un axe vertical, comme dans un miroir. Quelle transformation est-ce ?",
+      correction: "Une symétrie axiale : la figure est retournée. Une figure qui glisse sans se retourner, ce n'en est pas une.",
+      micros: ["sym_reconnaitre"],
     },
     {
-      question:
-        "Le point A est à 4 carreaux au-dessus d'un axe horizontal. Où se trouve son image A' ? À quelle distance de l'axe se trouve-t-elle ?",
-      correction:
-        "L'image se place de l'autre côté de l'axe, à la même distance : A' est donc à 4 carreaux au-dessous de l'axe horizontal. La symétrie conserve la distance à l'axe, donc A' est bien à 4 carreaux de l'axe, comme A.",
+      question: "Le point A est à 4 carreaux au-dessus d'un axe horizontal. Où se trouve son image A' ?",
+      correction: "À 4 carreaux en dessous de l'axe, sur la même colonne.",
+      micros: ["sym_point"],
     },
     {
-      question:
-        "Pour construire l'image d'un triangle ABC par symétrie axiale, que faut-il faire ? Puis : combien d'axes de symétrie possède un carré ?",
-      correction:
-        "On construit l'image de chacun des trois sommets : A', B' et C', chacun de l'autre côté de l'axe et à la même distance que le sommet de départ. On relie ensuite A', B' et C' pour obtenir le triangle image. Un carré possède 4 axes de symétrie : les deux médianes (qui passent par les milieux des côtés opposés) et les deux diagonales.",
+      question: "Pour construire l'image d'un triangle ABC, que faut-il faire ?",
+      correction: "On construit A', B' et C', les images des trois sommets. Puis on relie A', B' et C'.",
       micros: ["sym_figure"],
     },
     {
-      question:
-        "Défi : un segment [AB] mesure 6 cm et un carré a une aire de 16 cm². Que valent la longueur de l'image [A'B'] et l'aire de l'image du carré par symétrie axiale ?",
-      correction:
-        "La symétrie axiale conserve les longueurs et les aires : elle ne déforme rien. L'image du segment mesure donc 6 cm, et l'image du carré a une aire de 16 cm². Retenir : ce qui est conservé, ce sont les longueurs, les angles, les aires et l'alignement.",
-      micros: ["sym_propriete", "sym_defi"],
+      question: "Un segment [AB] mesure 6 cm. Combien mesure son image [A'B'] ?",
+      correction: "6 cm. La symétrie garde les longueurs.",
+      micros: ["sym_propriete"],
+    },
+    {
+      question: "Combien d'axes de symétrie a un rectangle qui n'est pas un carré ?",
+      correction: "2 axes : ils passent par les milieux des côtés opposés. Les diagonales n'en sont pas.",
+      micros: ["sym_axe"],
+    },
+    {
+      question: "Deux figures « ont l'air » symétriques. Peut-on conclure ?",
+      correction: "Non. On vérifie chaque sommet : même distance de l'axe, de l'autre côté.",
+      micros: ["sym_defi"],
     },
   ],
   coachHref: "/coach-ia/maths?classe=6e",
+  // ⭐ Ti Margo dans le mode classe (engendré depuis la fiche) : une phrase
+  // courte, sans LaTeX, sur six diapos.
+  tiMargo: {
+    objectif: "L'axe, c'est un miroir !",
+    definition: "Plie : tout doit se superposer !",
+    methode: "Même distance, de l'autre côté !",
+    pieges: "On retourne la figure, on ne la fait pas glisser !",
+    retenir: "La symétrie ne déforme rien !",
+    exercice: "Compte les carreaux jusqu'à l'axe !",
+  },
 };
 
+// ⚠️ CE TABLEAU N'EST PAS PROJETÉ : le mode classe est engendré depuis la fiche
+// (`slidesDepuisFiche.tsx`), Ti Margo compris (champ `tiMargo`). Il reste
+// exporté parce que la page le passe ; un tableau vide couperait le mode classe.
+// ⛔ Aucun LaTeX ici non plus.
 export const slidesSymetrie6e: ClasseSlide[] = [
   {
     titre: "Objectif du cours",
     badge: "Symétrie axiale - 6e",
+    teinte: "objectif",
+    schema: schemaSymetrie,
     section: {
       type: "objectif",
-      phrase: "Reconnaître, construire et comprendre la symétrie axiale",
-      sousPhrase:
-        "La symétrie axiale, c'est le miroir des mathématiques : une droite, l'axe, sépare une figure de son reflet.",
-      encadre: {
-        titre: "L'idée",
-        texte: "Si l'on plie la feuille le long de l'axe, la figure et son image se superposent exactement.",
-      },
+      phrase: "Reconnaître et construire une symétrie axiale",
+      sousPhrase: "L'axe est un miroir : l'image est le reflet.",
     },
   },
   {
-    titre: "À quoi ça sert ?",
-    badge: "Utilité & histoire",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "info",
-        titre: "Au quotidien",
-        contenu:
-          "Les ailes d'un papillon, une façade d'immeuble, beaucoup de logos : autant de figures construites autour d'un axe. Le reflet est identique à l'original, seulement retourné.",
-      },
-      droite: {
-        variante: "histoire",
-        titre: "Le savais-tu ?",
-        contenu:
-          "Le mot « symétrie » vient du grec « summetria » (juste proportion). En 1872, Felix Klein a fait de la géométrie l'étude de ce qui ne change pas quand on transforme une figure.",
-      },
-    },
-  },
-  {
-    titre: "Les 3 réflexes",
-    badge: "Méthode",
-    section: {
-      type: "cartes",
-      cartes: ficheSymetrie6e.methode.map((m) => ({
-        titre: m.titre,
-        texte: m.texte,
-      })),
-    },
-  },
-  {
-    titre: "La définition",
-    badge: "À connaître",
+    titre: "La règle d'or",
+    badge: "À connaître par cœur",
+    teinte: "essentiel",
+    schema: symPoint,
     section: {
       type: "objectif",
-      phrase: "L'axe est un miroir, l'image est le reflet",
-      sousPhrase:
-        "L'image d'un point est de l'autre côté de l'axe, à la même distance. L'axe est la médiatrice du segment qui relie un point à son image.",
-      encadre: {
-        titre: "Attention",
-        texte: "Un point placé sur l'axe ne bouge pas : son image est lui-même.",
-      },
-    },
-  },
-  {
-    titre: "Selon ce que l'on cherche",
-    badge: "3 gestes",
-    section: {
-      type: "cartes",
-      cartes: ficheSymetrie6e.usages.map((u) => ({
-        titre: u.titre,
-        texte: u.detail,
-      })),
-    },
-  },
-  {
-    titre: "Exemple guidé",
-    badge: "Construire l'image d'un point",
-    section: {
-      type: "exemple",
-      enonce: "Le point A est à 3 carreaux à gauche d'un axe vertical.",
-      question: "Où placer son image A' ?",
-      correction:
-        "Perpendiculaire à l'axe passant par A, puis même distance de l'autre côté : A' est à 3 carreaux à droite de l'axe. L'axe est le milieu de [AA'].",
-    },
-  },
-  {
-    titre: "Autre exemple",
-    badge: "Image d'un triangle",
-    section: {
-      type: "exemple",
-      enonce: "On veut l'image d'un triangle ABC par symétrie axiale.",
-      question: "Que faut-il construire ?",
-      correction:
-        "L'image de chaque sommet : A', B', C', chacun de l'autre côté de l'axe à la même distance. On relie A'B'C' pour obtenir le triangle image.",
-    },
-  },
-  {
-    titre: "Pièges & à retenir",
-    badge: "Vigilance",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "piege",
-        titre: "Pièges à éviter",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {pieges.map((piege) => (
-              <li key={piege}>• {piege}</li>
-            ))}
-          </ul>
-        ),
-      },
-      droite: {
-        variante: "ok",
-        titre: "À retenir",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {aRetenir.map((point) => (
-              <li key={point}>• {point}</li>
-            ))}
-          </ul>
-        ),
-      },
+      phrase: "Même distance à l'axe, de l'autre côté",
+      sousPhrase: "A à 3 carreaux à gauche, A' à 3 carreaux à droite.",
     },
   },
   {
     titre: "À toi de jouer",
     badge: "Exercice flash",
+    teinte: "exercice",
+    schema: carre16,
     section: {
       type: "exercice",
-      enonce:
-        "Un segment [AB] mesure 6 cm et un carré a une aire de 16 cm².",
-      question:
-        "Que valent la longueur de l'image [A'B'] et l'aire de l'image du carré par symétrie axiale ?",
-      indice: "La symétrie axiale ne déforme rien : elle conserve les mesures.",
-      correction:
-        "L'image du segment mesure 6 cm et l'image du carré a une aire de 16 cm² : longueurs et aires sont conservées.",
+      enonce: "Un carré a une aire de 16 cm².",
+      question: "Quelle est l'aire de son image par symétrie axiale ?",
+      indice: "La symétrie ne déforme rien.",
+      correction: "16 cm² aussi.",
     },
   },
 ];

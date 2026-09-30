@@ -60,3 +60,7 @@ Doutes : décimal × décimal (2,5 × 1,4) ; 10 ÷ 3 arrondi en ★★ ; 450 ÷ 
   À vérifier à l'œil : calcul_pose (7 + 3 + 7 + 3 ; 7 × 7) sur la page réelle.
 - Lot données/probas/algo/cercle : 4/4 ✓ (algo +499, données +340, cercle +416, probas +273 → 0), Ti Margo 6 clés, tsc propre.
   Doutes : « lire un tableau » est à stat_enquete ; probabilité en fraction en 6e ? ; ⭐ cercle : juin posait la corde de 8 m sur un DIAMÈTRE (16 m) — corrigé sur un rayon ; Archimède « entre 3,140 et 3,143 » ; algo : le carré en 8 blocs retiré (débordait).
+- Lot géométrie (angles, triangles, quadrilatères, symétrie) : 4/4 ✓ (triangles +401, symétrie +341, quadrilatères +322 → 0), Ti Margo 6 clés, tsc propre.
+  Doutes : 180° et triangle possible retirés de triangle-figure (fiche triangle-propriete) ; idem parallèles/diagonales → quadrilatere-propriete ; « obtusangle », « triangle aigu » (banque) ; « panneau attention = losange » retiré (inexact).
+  ⭐ Corrigé : losange et carré de juin codés 1-3-5-3 traits (= côtés différents) → un trait par côté.
+  Canvas partagés à réparer un jour : triangle (showAngles sans mesure = aucun arc), quadrilatere (noms des diagonales au même milieu, codage des côtés égaux faux).

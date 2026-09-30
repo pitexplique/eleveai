@@ -1,118 +1,77 @@
 // ─── Fiche de cours : les quadrilatères (6e) ───────────────────────────────────
-// Fiche « en blocs » créée pour coller EXACTEMENT à la banque du coach
-// (lib/tutor-v4/questionBank/6e/maths/quadrilateres.bank.ts).
+// Fiche « en blocs » alignée sur la banque du coach
+// (6e/maths/quadrilateres.bank.ts, notionId quadrilatere_figure — lecture seule).
+// Réécrite le 30/09/2026 au standard des fiches de 6e (étalon :
+// `maths-6e-bissectrice-angle.tsx`) : phrases courtes, un dessin par bloc,
+// Ti Margo dans le mode classe.
 //
-// Couverture des micro-compétences de la banque (pour la relecture du prof) :
-// - quadrilatere_nommer_vocabulaire   → identite (Vocabulaire), definition,
-//                                        methode (Observer), usages (carte 1),
-//                                        exemples (ex. 1), entrainement (Q1)
-// - quadrilatere_identifier_nature     → proprietes (les 3 figures), usages (carte 2),
-//                                        exemples (ex. 2), entrainement (Q2),
-//                                        slides (exemple guidé)
-// - quadrilatere_lire_propriete        → definition (diagonales), proprietes,
-//                                        methode (Observer), pieges (1)
-// - quadrilatere_lien_propriete        → proprietes, methode (Conclure),
-//                                        exemples (ex. 2), entrainement (Q2)
-// - quadrilatere_distinguer            → proprietes, pieges (2), aRetenir (2),
-//                                        entrainement (Q3), slide « distinguer »
-// - quadrilatere_conclusion            → methode (Conclure), pieges (3),
-//                                        entrainement (Q3), slide « pièges »
-// - quadrilatere_completer_construire  → usages (carte 3), methode (Conclure),
-//                                        entrainement (Q4), slide « exercice flash »
-// - quadrilatere_defi                  → pieges (3), aRetenir (3), exemples (ex. 2),
-//                                        entrainement (Q4)
+// Micro-compétences 4/4 → blocs :
+//   quadrilatere_nommer_vocabulaire → définition + figure, propriété 1
+//                                     (opposés, consécutifs), usages 1 (le nom)
+//                                     et 2 (les diagonales), exemple 1,
+//                                     exercice 1
+//   quadrilatere_identifier_nature  → propriétés 2 et 3 (rectangle, losange),
+//                                     méthodes 1 et 2, exemple 2, exercice 2
+//   quadrilatere_distinguer         → propriété 4 (le carré), méthode 3
+//                                     (conclure), usage 3 (carré ou
+//                                     rectangle ?), exercice 3
+//   quadrilatere_defi               → exemple 2 (4 côtés égaux sans angle
+//                                     droit), exemple 3 (6 cm et 4 cm),
+//                                     exercice 4
+//
+// ⛔ LES PROPRIÉTÉS (parallèles, diagonales, « un carré est-il un rectangle ? »
+// posé en défi, compléter une figure) sont la notion `quadrilatere_propriete`,
+// qui a sa fiche depuis le 29/09 (`maths-6e-quadrilatere-propriete.tsx`). Ici,
+// on NOMME et on RECONNAÎT sur une figure codée.
+//
+// ⭐ LES NOMBRES ET LES QUESTIONS SONT CEUX DE LA BANQUE : ABCD, le côté opposé
+// à [AB], « 4 côtés égaux et aucun angle droit », « 4 angles droits, deux côtés
+// de L cm et deux de c cm » (6 et 4). La feuille d'exercices
+// (`lib/fiches-exercices/maths-6e-quadrilatere-figure.tsx`) a évité exprès
+// l'écran, la porte, le carreau, le cerf-volant et ces questions : on les garde.
+// ⛔ Aucun de ses exemples (RTSU, EFGH, post-it, handball, tablette…).
+//
+// ⛔⛔ LE CODAGE FAUX DE JUIN, CORRIGÉ. Le canvas `quadrilatere` met `idx + 1`
+// petits traits sur la paire numéro `idx` de `equalSides` : le losange et le
+// carré de juin, codés `[AB,BC], [BC,CD], [CD,DA]`, portaient donc 1, 3, 5 et 3
+// traits — un codage qui dit « côtés DIFFÉRENTS » (relevé le 29/09 par la
+// fiche voisine). Les figures à 4 côtés égaux sont maintenant des SVG locaux
+// (`schemas-angles-6e.tsx`) : UN petit trait sur chacun des 4 côtés. Le canvas
+// garde ce qu'il code juste : les angles droits, et deux paires distinctes
+// (1 trait et 2 traits) sur les côtés opposés d'un rectangle.
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+import {
+  BLEU,
+  Dessin,
+  VERT,
+  VIOLET,
+  legende,
+  type Coin,
+  type Pt,
+  type Trait,
+} from "@/lib/fiches/schemas-angles-6e";
 
-// Un quadrilatère ABCD dessiné par le moteur du coach : sommets nommés,
-// côtés et diagonales visibles — la figure de référence de la définition.
-const schemaQuadrilatere = (
-  <CanvasRenderer
-    figure={{
-      kind: "quadrilatere",
-      size: { width: 260, height: 200 },
-      points: {
-        A: { x: 40, y: 45 },
-        B: { x: 225, y: 40 },
-        C: { x: 205, y: 165 },
-        D: { x: 55, y: 155 },
-      },
-      display: {
-        showPoints: true,
-        showLabels: true,
-        showSides: true,
-        showDiagonals: true,
-      },
-      labels: { A: "A", B: "B", C: "C", D: "D" },
-    }}
-  />
-);
-
-// Exemple 1 : le quadrilatère ABCD, ses côtés (pour repérer les côtés opposés).
-const schemaABCDcotes = (
-  <CanvasRenderer
-    figure={{
-      kind: "quadrilatere",
-      size: { width: 260, height: 200 },
-      points: { A: { x: 40, y: 50 }, B: { x: 225, y: 45 }, C: { x: 205, y: 165 }, D: { x: 55, y: 155 } },
-      display: { showPoints: true, showLabels: true, showSides: true, showDiagonals: false },
-      labels: { A: "A", B: "B", C: "C", D: "D" },
-    }}
-  />
-);
-
-// Exemple 2 : un losange (4 côtés codés égaux, aucun angle droit).
-const schemaLosange = (
-  <CanvasRenderer
-    figure={{
-      kind: "quadrilatere",
-      size: { width: 240, height: 210 },
-      points: { A: { x: 120, y: 25 }, B: { x: 220, y: 115 }, C: { x: 120, y: 205 }, D: { x: 20, y: 115 } },
-      display: { showPoints: true, showLabels: true, showSides: true, showDiagonals: false },
-      labels: { A: "A", B: "B", C: "C", D: "D" },
-      marks: { equalSides: [["AB", "BC"], ["BC", "CD"], ["CD", "DA"]] },
-    }}
-  />
-);
-
-// ─── Les sept dessins des blocs ───────────────────────────────────────────────
-// ⭐ ICI, LE DESSIN NE DIT PAS LA NATURE : LE CODAGE LA DIT (c'est le piège n° 1
-// de la fiche, et REGLES.md § 2 bis). Les quatre propriétés AFFIRMENT — voilà un
-// rectangle, voilà un losange — tandis que les deux premières étapes de méthode
-// DOUTENT : la même figure y porte la moitié des codages, et la légende dit ce
-// qui manque encore pour conclure. C'est ce contraste qui fait sept dessins et
-// non sept quadrilatères.
-
-/** Un dessin et sa phrase, sous lui. */
-const legende = (dessin: React.ReactNode, texte: string) => (
-  <div>
-    {dessin}
-    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
-  </div>
-);
-
-type Pt = { x: number; y: number };
 type Sommet = "A" | "B" | "C" | "D";
 type Cote = "AB" | "BC" | "CD" | "DA";
 
+/** Un quadrilatère du moteur du coach — SANS côtés égaux (voir l'en-tête). */
 const quad = (
-  points: { A: Pt; B: Pt; C: Pt; D: Pt },
+  points: Record<Sommet, Pt>,
   opts: {
     labels?: Partial<Record<Sommet, string>>;
-    sideLabels?: Partial<Record<Cote, string>>;
+    sideLabels?: Partial<Record<Cote | "AC" | "BD", string>>;
     diagonales?: boolean;
-    marks?: {
-      rightAnglesAt?: Sommet[];
-      equalSides?: Array<[Cote, Cote]>;
-    };
+    marks?: { rightAnglesAt?: Sommet[]; equalSides?: Array<[Cote, Cote]> };
+    size?: { width?: number; height?: number };
   } = {}
 ) => (
   <CanvasRenderer
     figure={{
       kind: "quadrilatere",
-      size: { width: 250, height: 200 },
+      size: opts.size ?? { width: 250, height: 200 },
       points,
       display: {
         showPoints: !!opts.labels,
@@ -128,107 +87,271 @@ const quad = (
   />
 );
 
-// Les quatre côtés portent leur nom : c'est le seul dessin de la fiche où on
-// peut LIRE « AB » et « CD » et voir qu'ils ne se touchent pas.
+/** La direction de p vue depuis o, en degrés (0° à droite, 90° en haut). */
+const direction = (o: Pt, p: Pt) => (Math.atan2(-(p.y - o.y), p.x - o.x) * 180) / Math.PI;
+
+/** Le petit carré d'angle droit en o, entre les côtés qui vont vers p et q. */
+const coinDroit = (o: Pt, p: Pt, q: Pt): Coin => {
+  const d1 = direction(o, p);
+  const d2 = direction(o, q);
+  const ecart = (((d2 - d1) % 360) + 360) % 360;
+  return { o, dir: Math.abs(ecart - 90) < 2 ? d1 : d2, c: 14 };
+};
+
+/** Le petit trait vert qui code un côté, au milieu de [pq] (décalé de
+ *  `decalage` le long du côté, pour en poser deux côte à côte). */
+const trait = (p: Pt, q: Pt, decalage = 0): Trait => {
+  const L = Math.hypot(q.x - p.x, q.y - p.y) || 1;
+  const u = { x: (q.x - p.x) / L, y: (q.y - p.y) / L };
+  const m = { x: (p.x + q.x) / 2 + u.x * decalage, y: (p.y + q.y) / 2 + u.y * decalage };
+  const n = { x: -u.y * 8, y: u.x * 8 };
+  return { de: { x: m.x - n.x, y: m.y - n.y }, a: { x: m.x + n.x, y: m.y + n.y }, couleur: VERT };
+};
+
+/** `n` petits traits sur [pq], espacés de 7. */
+const traits = (p: Pt, q: Pt, n: number): Trait[] =>
+  Array.from({ length: n }, (_, i) => trait(p, q, (i - (n - 1) / 2) * 7));
+
+/**
+ * ⭐ UN QUADRILATÈRE AU CODAGE JUSTE (SVG local). Sommets dans l'ordre du tour.
+ * `egaux` : `true` = UN petit trait sur chacun des 4 côtés ; un tableau = le
+ * nombre de traits par côté ([AB], [BC], [CD], [DA]) — `[1, 2, 1, 2]` pour
+ * les côtés opposés d'un rectangle. `droits` : les 4 angles droits codés.
+ * `noms` : les lettres, posées vers l'extérieur.
+ */
+function quadCode(opts: {
+  titre: string;
+  pts: [Pt, Pt, Pt, Pt];
+  egaux?: boolean | [number, number, number, number];
+  droits?: boolean;
+  noms?: [string, string, string, string];
+  courbe?: boolean;
+}) {
+  const [A, B, C, D] = opts.pts;
+  const tour = [A, B, C, D];
+  const G = { x: (A.x + B.x + C.x + D.x) / 4, y: (A.y + B.y + C.y + D.y) / 4 };
+  const nombres = opts.egaux === true ? [1, 1, 1, 1] : opts.egaux || [0, 0, 0, 0];
+  const codes = tour.flatMap((p, i) => traits(p, tour[(i + 1) % 4], nombres[i]));
+  const coins = opts.droits ? tour.map((p, i) => coinDroit(p, tour[(i + 3) % 4], tour[(i + 1) % 4])) : [];
+  const textes = (opts.noms ?? []).map((texte, i) => {
+    const p = tour[i];
+    const L = Math.hypot(p.x - G.x, p.y - G.y) || 1;
+    return { p: { x: p.x + ((p.x - G.x) / L) * 18, y: p.y + ((p.y - G.y) / L) * 18 }, texte };
+  });
+  return (
+    <Dessin
+      titre={opts.titre}
+      polygones={[{ pts: tour }]}
+      traits={codes}
+      coins={coins}
+      points={opts.noms ? tour : []}
+      textes={textes}
+      courbes={opts.courbe ? [{ o: G, de: 150, a: -120, r: 34, couleur: VIOLET }] : []}
+    />
+  );
+}
+
+// ─── LA FIGURE DE LA DÉFINITION : ABCD et ses 2 diagonales ────────────────────
+const schemaQuadrilatere = quad(
+  { A: { x: 40, y: 45 }, B: { x: 225, y: 40 }, C: { x: 205, y: 165 }, D: { x: 55, y: 155 } },
+  { labels: { A: "A", B: "B", C: "C", D: "D" }, diagonales: true, size: { width: 260, height: 200 } }
+);
+
+// ─── OPPOSÉS OU CONSÉCUTIFS : les 4 côtés portent leur nom ────────────────────
 const cotesNommes = legende(
   quad(
     { A: { x: 35, y: 50 }, B: { x: 215, y: 35 }, C: { x: 230, y: 160 }, D: { x: 60, y: 170 } },
-    {
-      labels: { A: "A", B: "B", C: "C", D: "D" },
-      sideLabels: { AB: "AB", BC: "BC", CD: "CD", DA: "DA" },
-    }
+    { labels: { A: "A", B: "B", C: "C", D: "D" }, sideLabels: { AB: "AB", BC: "BC", CD: "CD", DA: "DA" } }
   ),
-  "AB et CD ne se touchent pas : ils sont opposés"
+  "[AB] et [CD] ne se touchent pas : ils sont opposés."
 );
 
-// Le rectangle AFFIRMÉ : quatre coins codés, et ses diagonales — la propriété
-// dit qu'elles ont la même longueur, autant qu'on les voie.
-const rectangleAffirme = legende(
-  quad(
-    { A: { x: 45, y: 50 }, B: { x: 215, y: 50 }, C: { x: 215, y: 150 }, D: { x: 45, y: 150 } },
-    { diagonales: true, marks: { rightAnglesAt: ["A", "B", "C", "D"] } }
-  ),
-  "4 angles droits, et deux diagonales de même longueur"
+// ─── LE RECTANGLE : 4 angles droits, côtés opposés codés deux à deux ──────────
+// Deux paires DISTINCTES : 1 trait sur [AB] et [CD], 2 traits sur [BC] et [DA].
+// (SVG local : au rendu du canvas, les 2 traits serrés se lisaient comme un seul.)
+const rectangle = legende(
+  quadCode({
+    titre: "Un rectangle : 4 angles droits",
+    pts: [
+      { x: 0, y: 0 },
+      { x: 170, y: 0 },
+      { x: 170, y: 95 },
+      { x: 0, y: 95 },
+    ],
+    egaux: [1, 2, 1, 2],
+    droits: true,
+  }),
+  "4 angles droits. Côtés opposés de même longueur."
 );
 
-// Le losange AFFIRMÉ : quatre côtés codés ET les diagonales, qui se coupent à
-// angle droit. L'exemple 2 montre déjà un losange, mais SANS ses diagonales —
-// or c'est d'elles que parle la propriété.
-const losangeAffirme = legende(
-  quad(
-    { A: { x: 125, y: 30 }, B: { x: 225, y: 110 }, C: { x: 125, y: 190 }, D: { x: 25, y: 110 } },
-    {
-      diagonales: true,
-      marks: { equalSides: [["AB", "BC"], ["BC", "CD"], ["CD", "DA"]] },
-    }
-  ),
-  "4 côtés égaux, et deux diagonales perpendiculaires"
-);
+// ─── LE LOSANGE : 4 côtés égaux, un trait sur chacun ──────────────────────────
+// Diagonales (200 ; 0) et (0 ; 130) : perpendiculaires, donc 4 côtés égaux.
+const losange = quadCode({
+  titre: "Un losange : 4 côtés égaux",
+  pts: [
+    { x: 0, y: -65 },
+    { x: 100, y: 0 },
+    { x: 0, y: 65 },
+    { x: -100, y: 0 },
+  ],
+  egaux: true,
+});
 
-// Le carré : le seul dessin de la fiche qui porte les DEUX codages à la fois.
-const carreAffirme = legende(
-  quad(
-    { A: { x: 65, y: 40 }, B: { x: 195, y: 40 }, C: { x: 195, y: 170 }, D: { x: 65, y: 170 } },
-    {
-      marks: {
-        rightAnglesAt: ["A", "B", "C", "D"],
-        equalSides: [["AB", "BC"], ["BC", "CD"], ["CD", "DA"]],
-      },
-    }
-  ),
-  "les deux à la fois : 4 angles droits ET 4 côtés égaux"
-);
+// ─── LE CARRÉ : les deux codages à la fois ────────────────────────────────────
+const carre = quadCode({
+  titre: "Un carré : 4 angles droits et 4 côtés égaux",
+  pts: [
+    { x: 0, y: 0 },
+    { x: 130, y: 0 },
+    { x: 130, y: 130 },
+    { x: 0, y: 130 },
+  ],
+  egaux: true,
+  droits: true,
+});
 
-// ⭐ LA MOITIÉ DES CODAGES, DONC PAS DE CONCLUSION. C'est le piège n° 3 dessiné :
-// 4 côtés égaux ne suffisent pas. Les angles ne sont pas codés — on ne sait pas.
-// (Losange penché : les diagonales (90, 30) et (−25, 75) sont perpendiculaires,
-// donc les quatre côtés sont bien égaux, quelle que soit l'inclinaison.)
+// ─── MÉTHODE 1 : les côtés seuls, losange penché ──────────────────────────────
+// Diagonales (90 ; 30) et (−25 ; 75) : perpendiculaires, 4 côtés égaux.
 const seulementLesCotes = legende(
-  quad(
-    { A: { x: 210, y: 135 }, B: { x: 95, y: 180 }, C: { x: 30, y: 75 }, D: { x: 145, y: 30 } },
-    { marks: { equalSides: [["AB", "BC"], ["BC", "CD"], ["CD", "DA"]] } }
-  ),
-  "4 côtés égaux… losange ou carré ? les angles ne sont pas codés"
+  quadCode({
+    titre: "Quatre côtés codés égaux, aucun angle codé",
+    pts: [
+      { x: 210, y: 135 },
+      { x: 95, y: 180 },
+      { x: 30, y: 75 },
+      { x: 145, y: 30 },
+    ],
+    egaux: true,
+  }),
+  "4 côtés égaux… et les angles ?"
 );
 
-// L'autre moitié : les angles seuls. Même incertitude, dans l'autre sens.
+// ─── MÉTHODE 2 : les angles seuls ─────────────────────────────────────────────
 const seulementLesAngles = legende(
   quad(
     { A: { x: 35, y: 60 }, B: { x: 225, y: 60 }, C: { x: 225, y: 140 }, D: { x: 35, y: 140 } },
     { marks: { rightAnglesAt: ["A", "B", "C", "D"] } }
   ),
-  "4 angles droits… rectangle ou carré ? les côtés ne sont pas codés"
+  "4 angles droits… et les côtés ?"
 );
 
-// CONCLURE, C'EST CROISER DEUX COLONNES. Le seul dessin de la fiche qui n'est
-// pas une figure — et c'est voulu : la conclusion ne se voit pas, elle se
-// déduit. Le carré est la ligne où les deux colonnes disent oui.
+// ─── MÉTHODE 3 : conclure, c'est croiser deux colonnes ────────────────────────
 const tableauDesNatures = (
   <CanvasRenderer
     figure={{
       kind: "tableau_donnees",
-      headers: ["4 angles droits", "4 côtés égaux"],
+      headers: ["Figure", "4 angles droits", "4 côtés égaux"],
       rows: [
-        { label: "Rectangle", values: ["oui", "non"] },
-        { label: "Losange", values: ["non", "oui"] },
-        { label: "Carré", values: ["oui", "oui"] },
+        { values: ["Rectangle", "oui", "pas forcément"] },
+        { values: ["Losange", "pas forcément", "oui"] },
+        { values: ["Carré", "oui", "oui"] },
       ],
       highlight: { row: 2 },
-      questionLabel: "Le carré dit oui aux deux.",
+      display: { compact: true },
     }}
   />
 );
 
+// ─── USAGE 1 : le nom se lit dans l'ordre du tour ─────────────────────────────
+const nomDansLOrdre = legende(
+  quadCode({
+    titre: "Le quadrilatère ABCD, lu dans l'ordre du tour",
+    pts: [
+      { x: 0, y: 0 },
+      { x: 160, y: -10 },
+      { x: 150, y: 100 },
+      { x: 20, y: 110 },
+    ],
+    noms: ["A", "B", "C", "D"],
+    courbe: true,
+  }),
+  "ABCD ou BCDA : oui. ACBD : non."
+);
+
+// ─── USAGE 2 : les diagonales AC et BD, nommées ───────────────────────────────
+// ⚠️ Le canvas écrit le nom d'une diagonale en son MILIEU. Sur un
+// parallélogramme, les deux milieux se confondent et « AC » couvre « BD » :
+// la figure est donc volontairement loin d'un parallélogramme (milieux à 60 px).
+const diagonalesNommees = quad(
+  { A: { x: 30, y: 35 }, B: { x: 230, y: 35 }, C: { x: 170, y: 160 }, D: { x: 90, y: 160 } },
+  {
+    labels: { A: "A", B: "B", C: "C", D: "D" },
+    diagonales: true,
+    sideLabels: { AC: "AC", BD: "BD" },
+    size: { width: 250, height: 200 },
+  }
+);
+
+// ─── USAGE 3 : carré ou rectangle, côte à côte ────────────────────────────────
+const carreOuRectangle = (() => {
+  const R = [
+    { x: 0, y: 0 },
+    { x: 120, y: 0 },
+    { x: 120, y: 70 },
+    { x: 0, y: 70 },
+  ];
+  const K = [
+    { x: 150, y: 0 },
+    { x: 220, y: 0 },
+    { x: 220, y: 70 },
+    { x: 150, y: 70 },
+  ];
+  const coins = (q: Pt[]) => q.map((p, i) => coinDroit(p, q[(i + 3) % 4], q[(i + 1) % 4]));
+  return (
+    <Dessin
+      titre="Un rectangle et un carré"
+      polygones={[{ pts: R }, { pts: K }]}
+      coins={[...coins(R), ...coins(K)].map((c) => ({ ...c, c: 11 }))}
+      traits={K.map((p, i) => trait(p, K[(i + 1) % 4]))}
+      textes={[
+        { p: { x: 60, y: 92 }, texte: "rectangle", couleur: BLEU },
+        { p: { x: 185, y: 92 }, texte: "carré", couleur: VERT },
+      ]}
+    />
+  );
+})();
+
+// ─── EXEMPLE 1 : ABCD, sans diagonales ────────────────────────────────────────
+const schemaABCD = quad(
+  { A: { x: 40, y: 50 }, B: { x: 225, y: 45 }, C: { x: 205, y: 165 }, D: { x: 55, y: 155 } },
+  { labels: { A: "A", B: "B", C: "C", D: "D" }, size: { width: 260, height: 200 } }
+);
+
+// ─── EXEMPLE 2 : un losange ABCD penché, autre que celui de la propriété ──────
+// AB = (110 ; −40) et AD = (−20 ; 115,3) : même longueur (117), et leur produit
+// scalaire n'est pas nul — donc un losange, PAS un carré.
+const losangePenche = quadCode({
+  titre: "Le quadrilatère ABCD : 4 côtés codés égaux, aucun angle droit codé",
+  pts: [
+    { x: 0, y: 0 },
+    { x: 110, y: -40 },
+    { x: 90, y: 75.3 },
+    { x: -20, y: 115.3 },
+  ],
+  egaux: true,
+  noms: ["A", "B", "C", "D"],
+});
+
+// ─── EXEMPLE 3 : 4 angles droits, 6 cm et 4 cm, à l'échelle (30 px par cm) ────
+const rectangle64 = quad(
+  { A: { x: 35, y: 40 }, B: { x: 215, y: 40 }, C: { x: 215, y: 160 }, D: { x: 35, y: 160 } },
+  {
+    sideLabels: { AB: "6 cm", BC: "4 cm", CD: "6 cm", DA: "4 cm" },
+    marks: { rightAnglesAt: ["A", "B", "C", "D"] },
+    size: { width: 250, height: 200 },
+  }
+);
+
 const pieges = [
-  "Confondre nature et dessin : un carré reste un carré même s'il est penché sur la feuille. Ce sont les codages (angles droits, côtés égaux) qui comptent, pas l'orientation.",
-  "Croire qu'un carré et un rectangle sont deux figures qui n'ont rien à voir : un carré est aussi un rectangle, car il a 4 angles droits. C'est un rectangle particulier dont tous les côtés sont égaux.",
-  "Conclure trop vite : 4 côtés égaux ne suffisent pas pour dire « carré ». Sans angle droit codé, c'est un losange. Il manque une information.",
+  "Juger à l'allure. Un carré penché reste un carré : on lit les codages.",
+  "Croire qu'un carré n'est pas un rectangle. Il a 4 angles droits : c'est aussi un rectangle.",
+  "Dire « carré » avec seulement 4 côtés égaux. Sans angle droit codé, c'est un losange.",
 ];
 
 const aRetenir = [
-  "Un quadrilatère a 4 côtés, 4 sommets, 4 angles et 2 diagonales. On le nomme avec ses sommets dans l'ordre : ABCD.",
-  "Rectangle = 4 angles droits. Losange = 4 côtés égaux. Carré = les deux à la fois.",
-  "Un carré est à la fois un rectangle et un losange : il possède toutes leurs propriétés.",
+  "Un quadrilatère a 4 côtés, 4 sommets, 4 angles et 2 diagonales.",
+  "Rectangle : 4 angles droits. Losange : 4 côtés égaux.",
+  "Carré : les deux à la fois. C'est un rectangle et un losange.",
 ];
 
 export const ficheQuadrilateres6e: FicheCoursData = {
@@ -238,287 +361,198 @@ export const ficheQuadrilateres6e: FicheCoursData = {
   notion: "quadrilatere-figure",
   titre: "Les quadrilatères",
   accroche:
-    "Un quadrilatère, c'est une figure à 4 côtés. En 6e, on apprend à le nommer, à lire ses propriétés (angles droits, côtés égaux) et à reconnaître sa nature : rectangle, losange ou carré.",
+    "Un quadrilatère est une figure à 4 côtés. Rectangle, losange, carré : on les reconnaît à leurs codages.",
   identite: [
-    { label: "Prérequis", valeur: "Reconnaître un angle droit et comparer des longueurs" },
-    { label: "Idée clé", valeur: "La nature d'une figure se lit dans ses codages, pas dans son orientation" },
-    { label: "Vocabulaire", valeur: "Sommet, côté, angle, diagonale, côtés opposés et consécutifs" },
+    { label: "Le mot clé", valeur: "4 sommets, 4 côtés, 2 diagonales" },
+    { label: "Le secret", valeur: "Les codages disent la nature, pas l'allure" },
+    { label: "Trois familles", valeur: "Rectangle, losange, carré" },
   ],
   definition: {
     texte:
-      "Un quadrilatère est un polygone qui possède 4 côtés. Il a donc aussi 4 sommets et 4 angles. On le nomme en donnant ses sommets dans l'ordre autour de la figure : le quadrilatère ABCD. Il possède 2 diagonales, qui relient chacune deux sommets opposés (par exemple AC et BD).",
+      "Un quadrilatère est une figure fermée qui a 4 côtés. On le nomme avec ses 4 sommets, dans l'ordre du tour : ABCD. Ses 2 diagonales relient deux sommets opposés : [AC] et [BD].",
   },
   figure: {
     schema: schemaQuadrilatere,
-    legende: "Le quadrilatère ABCD : 4 côtés, 4 sommets, 2 diagonales.",
+    legende: "Le quadrilatère ABCD et ses deux diagonales.",
   },
   proprietes: [
     {
-      titre: "Côtés opposés et consécutifs",
+      titre: "Opposés ou consécutifs",
       micros: ["quadrilatere_nommer_vocabulaire"],
-      texte:
-        "Deux côtés qui se touchent en un sommet sont consécutifs : AB et BC se touchent en B. Deux côtés qui ne se touchent pas sont opposés : dans ABCD, AB et CD sont opposés, ainsi que BC et AD.",
+      texte: "Deux côtés qui se touchent sont consécutifs : [AB] et [BC]. Deux côtés qui ne se touchent pas sont opposés.",
       schema: cotesNommes,
     },
     {
       titre: "Le rectangle",
       micros: ["quadrilatere_identifier_nature"],
-      texte:
-        "Un rectangle est un quadrilatère qui a 4 angles droits. Ses côtés opposés sont parallèles deux à deux (2 paires) et de même longueur, mais les 4 côtés ne sont pas forcément tous égaux. Ses diagonales ont la même longueur.",
-      schema: rectangleAffirme,
+      texte: "Un rectangle a 4 angles droits. Ses côtés opposés ont la même longueur.",
+      schema: rectangle,
     },
     {
       titre: "Le losange",
       micros: ["quadrilatere_identifier_nature"],
-      texte:
-        "Un losange est un quadrilatère qui a 4 côtés égaux. Ses côtés opposés sont parallèles, mais il n'a pas forcément d'angle droit. Ses diagonales sont perpendiculaires (elles se coupent à angle droit).",
-      schema: losangeAffirme,
+      texte: "Un losange a 4 côtés égaux. Il n'a pas besoin d'angle droit.",
+      schema: legende(losange, "Un petit trait sur chaque côté."),
     },
     {
       titre: "Le carré",
       micros: ["quadrilatere_distinguer"],
-      texte:
-        "Un carré est un quadrilatère qui a 4 angles droits ET 4 côtés égaux. Il cumule les propriétés du rectangle et du losange : ses diagonales sont à la fois de même longueur et perpendiculaires.",
-      schema: carreAffirme,
+      texte: "Un carré a 4 angles droits ET 4 côtés égaux. C'est un rectangle et un losange à la fois.",
+      schema: legende(carre, "Les deux codages à la fois."),
     },
   ],
   reel: {
     texte:
-      "Les quadrilatères sont partout : un écran de téléphone et une porte sont des rectangles, un carreau de carrelage est un carré, un cerf-volant ou un panneau routier « attention » ressemblent à un losange. Reconnaître une figure, c'est repérer ses angles et ses côtés pour la nommer correctement.",
+      "Une porte et un écran de téléphone sont des rectangles. Un carreau de carrelage est souvent un carré. Un cerf-volant a parfois la forme d'un losange. Pour les nommer, on regarde leurs angles et leurs côtés.",
   },
   historique: {
     texte:
-      "L'étude des figures à côtés droits est très ancienne. Vers 300 avant J.-C., le mathématicien grec Euclide rassemble dans ses « Éléments » les définitions du carré, du rectangle et du losange, encore utilisées aujourd'hui. Le mot « losange » vient d'ailleurs d'une vieille forme de pastille en forme de carreau penché.",
+      "« Quadrilatère » vient du latin : « quadri » veut dire quatre, « latus » veut dire côté. Vers 300 avant J.-C., le Grec Euclide écrit un grand livre de géométrie. Il y définit le carré, le rectangle et le losange. Ses définitions servent encore aujourd'hui.",
   },
   methode: [
     {
-      titre: "Observer les côtés",
+      titre: "Regarder les côtés",
       micros: ["quadrilatere_identifier_nature"],
-      texte:
-        "On repère d'abord les côtés : sont-ils tous égaux (même codage) ? Un même petit trait sur des côtés signale qu'ils ont la même longueur. 4 côtés égaux orientent vers le losange ou le carré.",
+      texte: "Les petits traits disent : même longueur. 4 côtés égaux, c'est un losange ou un carré.",
       schema: seulementLesCotes,
     },
     {
-      titre: "Observer les angles",
+      titre: "Regarder les angles",
       micros: ["quadrilatere_identifier_nature"],
-      texte:
-        "On regarde ensuite les angles : y a-t-il des angles droits ? Un petit carré à un sommet indique un angle droit. 4 angles droits orientent vers le rectangle ou le carré.",
+      texte: "Les petits carrés disent : angle droit. 4 angles droits, c'est un rectangle ou un carré.",
       schema: seulementLesAngles,
     },
     {
       titre: "Conclure",
       micros: ["quadrilatere_distinguer"],
-      texte:
-        "On croise les deux informations. 4 angles droits seuls : rectangle. 4 côtés égaux seuls : losange. Les deux ensemble : carré. Si une information manque, on ne peut pas conclure.",
+      texte: "On croise les deux. S'il manque une information, on ne dit pas « carré ».",
       schema: tableauDesNatures,
     },
   ],
   usages: [
     {
-      titre: "Nommer et décrire",
+      titre: "Écrire le nom",
       micros: ["quadrilatere_nommer_vocabulaire"],
-      detail:
-        "Donner le nom de la figure avec ses sommets (ABCD), repérer les côtés opposés, les côtés consécutifs et les 2 diagonales.",
+      detail: "On lit les sommets dans l'ordre du tour. On peut partir de n'importe quel sommet.",
+      schema: nomDansLOrdre,
     },
     {
-      titre: "Identifier la nature",
-      micros: ["quadrilatere_identifier_nature"],
-      detail:
-        "Lire les codages pour reconnaître un rectangle (4 angles droits), un losange (4 côtés égaux), un carré (les deux) ou un quadrilatère quelconque (aucun codage particulier).",
+      titre: "Trouver les diagonales",
+      micros: ["quadrilatere_nommer_vocabulaire"],
+      detail: "Une diagonale relie deux sommets qui ne se suivent pas. Dans ABCD : [AC] et [BD].",
+      schema: diagonalesNommees,
     },
     {
-      titre: "Compléter ou construire",
+      titre: "Carré ou rectangle ?",
       micros: ["quadrilatere_distinguer"],
-      detail:
-        "Trouver l'information manquante pour passer d'une figure à une autre : un rectangle devient un carré si l'on ajoute « 4 côtés égaux » ; un losange devient un carré si l'on ajoute « 4 angles droits ».",
+      detail: "Les deux ont 4 angles droits. Seul le carré a aussi 4 côtés égaux.",
+      schema: carreOuRectangle,
     },
   ],
   exemples: [
     {
-      titre: "Nommer et repérer le vocabulaire",
+      titre: "Le côté opposé",
       micros: ["quadrilatere_nommer_vocabulaire"],
-      donnees: "On donne un quadrilatère dont les sommets sont A, B, C et D.",
-      question: "Comment se nomme cette figure ? Quel côté est opposé au côté AB ?",
-      schema: schemaABCDcotes,
-      solution:
-        "On nomme la figure en donnant ses sommets dans l'ordre : c'est le quadrilatère ABCD. Le côté opposé à AB est celui qui ne le touche pas : c'est CD. Les côtés AB et BC, eux, se touchent au sommet B : ils sont consécutifs.",
+      donnees: "Ses sommets sont A, B, C et D.",
+      question: "Quel est son nom ? Quel côté est opposé à [AB] ?",
+      schema: schemaABCD,
+      solution: "C'est le quadrilatère ABCD. Le côté opposé à [AB] ne le touche pas : c'est [CD].",
     },
     {
-      titre: "Quelle est la nature de cette figure ?",
-      micros: ["quadrilatere_identifier_nature"],
-      donnees: "Une figure a ses 4 côtés codés égaux, mais aucun angle droit n'est marqué.",
-      question: "Quelle est la nature de cette figure ? Est-ce un carré ?",
-      schema: schemaLosange,
-      solution:
-        "Les 4 côtés sont égaux : la figure est donc un losange. Ce n'est pas forcément un carré, car aucun angle droit n'est codé. Pour affirmer « carré », il faudrait à la fois 4 côtés égaux ET 4 angles droits. Ici, il manque l'information sur les angles : on conclut « losange ».",
+      titre: "Carré ou losange ?",
+      micros: ["quadrilatere_identifier_nature", "quadrilatere_defi"],
+      donnees: "4 côtés codés égaux. Aucun angle droit codé.",
+      question: "Est-ce un carré ?",
+      schema: losangePenche,
+      solution: "4 côtés égaux : c'est un losange. Sans angle droit codé, on ne dit pas « carré ».",
+    },
+    {
+      titre: "6 cm et 4 cm",
+      micros: ["quadrilatere_defi", "quadrilatere_distinguer"],
+      donnees: "4 angles droits. Deux côtés de 6 cm, deux de 4 cm.",
+      question: "Quelle est sa nature ?",
+      schema: rectangle64,
+      solution: "4 angles droits : c'est un rectangle. Ses côtés ne sont pas tous égaux : pas un carré.",
     },
   ],
   pieges,
   aRetenir,
   entrainement: [
     {
-      question:
-        "Dans le quadrilatère ABCD, combien y a-t-il de diagonales ? Nomme-les, puis donne le côté opposé à BC.",
-      correction:
-        "Un quadrilatère possède 2 diagonales : elles relient les sommets opposés, ce sont AC et BD. Le côté opposé à BC est celui qui ne le touche pas : c'est AD.",
+      question: "Dans le quadrilatère ABCD, combien y a-t-il de diagonales ? Nomme-les. Quel côté est opposé à [BC] ?",
+      correction: "2 diagonales : [AC] et [BD]. Le côté opposé à [BC] est [AD].",
+      micros: ["quadrilatere_nommer_vocabulaire"],
     },
     {
-      question:
-        "Une figure a 4 angles droits codés, mais ses côtés ne sont pas tous marqués égaux. Quelle est sa nature ?",
-      correction:
-        "4 angles droits suffisent pour reconnaître un rectangle. Comme les 4 côtés ne sont pas tous codés égaux, ce n'est pas un carré : la figure est un rectangle.",
+      question: "Une figure a 4 angles droits codés. Ses côtés ne sont pas tous codés égaux. Quelle est sa nature ?",
+      correction: "4 angles droits : c'est un rectangle. Sans 4 côtés égaux, ce n'est pas un carré.",
+      micros: ["quadrilatere_identifier_nature"],
     },
     {
-      question:
-        "Quelle propriété distingue un carré d'un losange ? Peut-on être sûr qu'un quadrilatère à 4 côtés égaux est un carré ?",
-      correction:
-        "Le carré et le losange ont tous deux 4 côtés égaux ; ce qui les distingue, c'est que le carré possède 4 angles droits. Donc non, 4 côtés égaux seuls ne suffisent pas : sans angle droit, on obtient un losange, pas forcément un carré.",
+      question: "Qu'est-ce qui distingue un carré d'un losange ?",
+      correction: "Les deux ont 4 côtés égaux. Seul le carré a forcément 4 angles droits.",
+      micros: ["quadrilatere_distinguer"],
     },
     {
-      question:
-        "Défi : peut-on dire qu'un carré est aussi un rectangle ? Et que faut-il ajouter à un rectangle pour être sûr que c'est un carré ?",
-      correction:
-        "Oui, un carré est aussi un rectangle, car il a 4 angles droits (c'est ce qui définit un rectangle). Pour qu'un rectangle soit un carré, il faut ajouter l'information « 4 côtés égaux » : il possède alors les deux propriétés du carré.",
+      question: "Un quadrilatère a 4 angles droits et 4 côtés égaux. Quelle est sa nature ?",
+      correction: "C'est un carré : il a les deux codages à la fois.",
       micros: ["quadrilatere_defi"],
     },
   ],
   coachHref: "/coach-ia/maths?classe=6e",
+  // ⭐ Ti Margo dans le mode classe (engendré depuis la fiche) : une phrase
+  // courte, sans LaTeX, sur six diapos.
+  tiMargo: {
+    objectif: "4 côtés : lis bien les codages !",
+    definition: "Les sommets se lisent dans l'ordre du tour !",
+    methode: "Les côtés, puis les angles, puis on conclut !",
+    pieges: "Penché ou pas, un carré reste un carré !",
+    retenir: "Carré = rectangle + losange !",
+    exercice: "Cherche les petits traits et les petits carrés !",
+  },
 };
 
+// ⚠️ CE TABLEAU N'EST PAS PROJETÉ : le mode classe est engendré depuis la fiche
+// (`slidesDepuisFiche.tsx`), Ti Margo compris (champ `tiMargo`). Il reste
+// exporté parce que la page le passe ; un tableau vide couperait le mode classe.
+// ⛔ Aucun LaTeX ici non plus.
 export const slidesQuadrilateres6e: ClasseSlide[] = [
   {
     titre: "Objectif du cours",
     badge: "Quadrilatères - 6e",
+    teinte: "objectif",
+    schema: schemaQuadrilatere,
     section: {
       type: "objectif",
       phrase: "Nommer un quadrilatère et reconnaître sa nature",
-      sousPhrase:
-        "Un quadrilatère est une figure à 4 côtés. Tout repose sur une idée : sa nature se lit dans ses codages (angles droits, côtés égaux).",
-      encadre: {
-        titre: "L'idée",
-        texte:
-          "Rectangle = 4 angles droits. Losange = 4 côtés égaux. Carré = les deux à la fois.",
-      },
+      sousPhrase: "Rectangle, losange, carré : on lit les codages.",
     },
   },
   {
-    titre: "À quoi ça sert ?",
-    badge: "Utilité & histoire",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "info",
-        titre: "Au quotidien",
-        contenu:
-          "Un écran et une porte sont des rectangles, un carreau de carrelage un carré, un panneau « attention » un losange. Nommer une figure, c'est lire ses angles et ses côtés.",
-      },
-      droite: {
-        variante: "histoire",
-        titre: "Le savais-tu ?",
-        contenu:
-          "Vers 300 avant J.-C., le Grec Euclide rassemble dans ses « Éléments » les définitions du carré, du rectangle et du losange, encore utilisées aujourd'hui.",
-      },
-    },
-  },
-  {
-    titre: "Le vocabulaire",
+    titre: "Les trois familles",
     badge: "À connaître",
-    section: {
-      type: "objectif",
-      phrase: "4 côtés, 4 sommets, 4 angles, 2 diagonales",
-      sousPhrase:
-        "On nomme le quadrilatère avec ses sommets dans l'ordre : ABCD. Chaque diagonale relie deux sommets opposés (AC et BD).",
-      encadre: {
-        titre: "À distinguer",
-        texte:
-          "Côtés consécutifs : ils se touchent (AB et BC en B). Côtés opposés : ils ne se touchent pas (AB et CD).",
-      },
-    },
-  },
-  {
-    titre: "Les 3 réflexes",
-    badge: "Méthode",
+    teinte: "propriete",
+    schema: carre,
     section: {
       type: "cartes",
-      cartes: ficheQuadrilateres6e.methode.map((m) => ({
-        titre: m.titre,
-        texte: m.texte,
-      })),
-    },
-  },
-  {
-    titre: "Selon ce que l'on cherche",
-    badge: "3 gestes",
-    section: {
-      type: "cartes",
-      cartes: ficheQuadrilateres6e.usages.map((u) => ({
-        titre: u.titre,
-        texte: u.detail,
-      })),
-    },
-  },
-  {
-    titre: "Exemple guidé",
-    badge: "Quelle nature ?",
-    section: {
-      type: "exemple",
-      enonce: "Une figure a ses 4 côtés codés égaux, mais aucun angle droit n'est marqué.",
-      question: "Quelle est sa nature ? Est-ce un carré ?",
-      correction:
-        "4 côtés égaux : c'est un losange. Sans angle droit codé, on ne peut pas dire que c'est un carré.",
-    },
-  },
-  {
-    titre: "Distinguer les figures",
-    badge: "Ne pas confondre",
-    section: {
-      type: "exemple",
-      enonce: "On compare un carré et un rectangle : tous deux ont 4 angles droits.",
-      question: "Qu'est-ce qui distingue le carré du rectangle ?",
-      correction:
-        "Seul le carré a forcément ses 4 côtés égaux. Un carré est donc un rectangle particulier.",
-    },
-  },
-  {
-    titre: "Pièges & à retenir",
-    badge: "Vigilance",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "piege",
-        titre: "Pièges à éviter",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {pieges.map((piege) => (
-              <li key={piege}>• {piege}</li>
-            ))}
-          </ul>
-        ),
-      },
-      droite: {
-        variante: "ok",
-        titre: "À retenir",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {aRetenir.map((point) => (
-              <li key={point}>• {point}</li>
-            ))}
-          </ul>
-        ),
-      },
+      cartes: [
+        { titre: "Rectangle", texte: "4 angles droits." },
+        { titre: "Losange", texte: "4 côtés égaux." },
+        { titre: "Carré", texte: "Les deux à la fois." },
+      ],
     },
   },
   {
     titre: "À toi de jouer",
     badge: "Exercice flash",
+    teinte: "exercice",
+    schema: losange,
     section: {
       type: "exercice",
-      enonce:
-        "On dispose d'un rectangle dont les 4 angles droits sont codés.",
-      question: "Quelle information faut-il ajouter pour être sûr que c'est un carré ?",
-      indice: "Compare les longueurs des côtés.",
-      correction:
-        "Il faut ajouter « 4 côtés égaux ». Le rectangle possède alors les deux propriétés du carré.",
+      enonce: "Les 4 côtés sont codés égaux. Aucun angle droit n'est codé.",
+      question: "Est-ce un carré ?",
+      indice: "Cherche les petits carrés.",
+      correction: "Non : c'est un losange. Aucun angle droit n'est codé.",
     },
   },
 ];
