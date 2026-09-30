@@ -598,7 +598,7 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
   "maths/4e/prop-proportionnalite": {
     titre: "Proportionnalité : 20 exercices corrigés",
     resume:
-      "Reconnaître une situation de proportionnalité dans un tableau ou sur un graphique, compléter un tableau, le coefficient et le retour à l'unité, la quatrième proportionnelle. La pluie sur un toit, l'orage, les degrés Fahrenheit, le tour de la Terre. Le tableau dessiné avec son coefficient dans chaque corrigé.",
+      "Reconnaître la proportionnalité dans un tableau ou sur un graphique, le coefficient et le retour à l'unité, la quatrième proportionnelle par le produit en croix. Une imprimante 3D, un ressort, une trailleuse, la pâte à pain, les ombres au soleil, des panneaux solaires, des pompes qui vident un bassin. Un dessin dans chaque corrigé.",
   },
   "maths/4e/prop-ratio-pourcentage": {
     titre: "Ratios, partages et pourcentages : 20 exercices corrigés",

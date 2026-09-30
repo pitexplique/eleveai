@@ -307,6 +307,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "proportionnalite-cm2-cours-exercices-corriges.pdf",
   "proportionnalite-et-pourcentages-3e-20-exercices-corriges.pdf",
   "proportionnalite-pourcentages-et-grandeurs-quotients-3e-cours-exercices-corriges.pdf",
+  "proportionnalite-tableaux-coefficient-produit-en-croix-4e-20-exercices-corriges.pdf",
   "proportions-et-pourcentages-premiere-20-exercices-corriges.pdf",
   "proprietes-des-quadrilateres-6e-20-exercices-corriges.pdf",
   "proprietes-des-quadrilateres-6e-cours-exercices-corriges.pdf",

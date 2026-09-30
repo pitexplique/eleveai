@@ -1,150 +1,231 @@
 // ─── Fiche d'exercices : la proportionnalité (4e) — 20 exercices corrigés ─────
 //
-// Alignée sur la fiche de cours `lib/fiches/maths-4e-proportionnalite.tsx` et sur
-// les six micros du coach de 4e (notionId prop_proportionnalite). ⛔ La notion a
-// été SCINDÉE le 28/08/2026 : les pourcentages, le coefficient multiplicateur et
-// les évolutions sont partis dans `prop_ratio_pourcentage`, les échelles dans
-// `prop_echelle` — chacune a sa feuille. Celle-ci reste sur ce qui reste :
-// reconnaître (tableau ET graphique), compléter un tableau, le coefficient et le
-// retour à l'unité, la quatrième proportionnelle, le problème, le défi. Aucun
-// pourcentage, aucune échelle, pas de notation f(x) (hors programme de 4e) : le
-// graphique se dit « des points alignés avec l'origine ».
+// RÉÉCRITE le 30/09/2026 au standard de la 5e (étalon de la 4e :
+// `maths-4e-relatifs.tsx`), à la demande de Frédéric : ses élèves de 4e sont sur
+// ce chapitre. Un dessin qui aide dans CHAQUE exercice, 14 imprimés, aides de
+// dessin locales écrites EN CLAIR et relues par le script de recalcul.
+// L'ancienne feuille du 25/09 n'a servi que de réservoir ; aucun exercice n'en
+// est recopié (ni toit sous la pluie, ni orage, ni Fahrenheit, ni tour de la
+// Terre, ni cinéma, parking, tissu, peinture, crêpes, confiture, gazon,
+// baguettes, aquarium, jus d'orange, peintres).
 //
+// Alignée sur la fiche de cours `lib/fiches/maths-4e-proportionnalite.tsx` et sur
+// la banque `lib/tutor-v4/questionBank/4e/maths/proportionnalite.bank.ts`,
+// notionId prop_proportionnalite. Ce que la 4e ajoute à la 5e : le PRODUIT EN
+// CROIX pour la quatrième proportionnelle, et la proportionnalité LUE SUR UN
+// GRAPHIQUE (des points alignés avec l'origine). Pas de notation f(x) (hors
+// programme de 4e), aucun pourcentage (notion `prop_ratio_pourcentage`), aucune
+// échelle (notion `prop_echelle`).
 // ⛔ Aucun exemple de la fiche de cours n'est repris : ni les letchis (3 kg,
 // 12 €), ni le plombier (50 € + 30 €/h), ni les six bouteilles, ni 2 → 10,
-// 2 → 6 / 5 → 9, le cycliste de 24 km, l'abonnement à 15 €. ⛔ Ni ceux de la
-// feuille de 3e (tomates, 4 → 10, taxi, 12 L aux 200 km, robinet, bus,
-// tablette, verre doseur, abonnés, démarque, aller-retour).
+// 2 → 6 / 5 → 9, ni le cycliste de 24 km, ni l'abonnement à 15 €. Ni ceux de la
+// feuille de 5e (croissants, douche, ruches, voiture, piscines, kayak,
+// pressoir, robinet, photos, pas de Tom, piste de 400 m, sel de mer), ni le
+// taxi de la feuille de 3e.
 //
-// Les pièges nommés : conclure parce que « les deux lignes grandissent
-// ensemble » (1, 9), le tableau régulier pris pour proportionnel (2), copier
-// l'écart d'une ligne sur l'autre (3, 14), le coefficient pris dans le mauvais
-// sens (4), la mauvaise diagonale du produit en croix (5, 11), ajouter au lieu
-// d'ajouter des PARTS (6), « c'est une droite, donc c'est proportionnel » (7),
-// multiplier pour remonter d'une ligne (8), les unités mêlées (10, 18),
-// arrondir vers le haut un nombre d'objets (12), lire un graphique à l'envers
-// (13), comparer deux prix sans ramener à la même quantité (15), le produit en
-// croix sur une situation qui n'est pas proportionnelle (16), oublier la
-// surface (17), croire que doubler une température la double (19), un
-// coefficient sans son unité (20).
+// Les pièges nommés : le tableau régulier pris pour proportionnel (1, 8),
+// « une droite, donc proportionnel » sans passer par l'origine (2, 12),
+// diviser dans le mauvais sens (3, 11), le prix unitaire oublié (4), le
+// produit en croix monté à l'envers (5), lire le graphique sur le mauvais axe
+// (6), ajouter l'écart au lieu de multiplier (7), le coefficient calculé sur
+// une seule colonne (9), 2 h 30 lu 2,30 h (10), le plus petit prix pris pour
+// le moins cher (11), arrondir un nombre de sacs vers le bas (13), la dernière
+// mesure qui casse la proportionnalité (14), 1 h 20 lu 1,20 h (15), calculer
+// le coefficient quand une somme suffit (16), les ingrédients qu'on oublie de
+// convertir (17), la hauteur divisée au lieu de multipliée (18), un panneau
+// qu'on coupe (19), « plus de pompes, plus de temps » (20).
 //
-// Les chiffres du monde, et d'où ils viennent :
-// - « 1 mm de pluie = 1 L par m² » : c'est la DÉFINITION du millimètre de pluie
-//   (Météo-France, pluviométrie) — ex. 17 ; à Paris, environ 640 mm par an
-//   (normale 1991-2020 de Paris-Montsouris, 637 mm, Météo-France) ; l'abri de
-//   12 m² et la cuve de 300 L sont imaginés, à l'ordre de grandeur réel ;
-// - vitesse du son dans l'air : environ 340 m/s (343 m/s à 20 °C) ; la règle
-//   « 3 secondes par kilomètre » pour situer un orage (Météo-France) — ex. 18 ;
-// - l'échelle Fahrenheit : 0 °C = 32 °F, 100 °C = 212 °F, et °F = °C × 1,8 + 32,
-//   par définition — ex. 19 ;
-// - la Terre tourne de 360° en 24 h (jour solaire moyen ; le jour sidéral,
-//   23 h 56 min, n'est pas utile en 4e), d'où 15° par heure et les 24 fuseaux
-//   horaires de 15° — ex. 20.
+// Les faits réels : aucun. Tout est un MODÈLE, dit comme tel quand il
+// ressemble à une mesure (imprimante 3D, ressort, pâte à pain, panneaux
+// solaires). Le ressort (14) suit la loi de Hooke, vraie tant qu'on ne le
+// déforme pas : c'est ce que montre sa dernière mesure.
 //
-// ⭐ LES SCHÉMAS (« les élèves adorent les schémas ») : les VINGT corrigés ont
-// leur dessin. Le tableau de proportionnalité à deux lignes, avec sa flèche
-// « × coefficient » et les cases trouvées en rouge (`tableauCoef`, HTML : lisible
-// à toutes les largeurs, rien à mesurer), les graphiques avec `repere()` de
-// figures.tsx, le tableau des quotients qui ne sont pas égaux avec `tableau()`,
-// et le quart de tour de la Terre en SVG local (`tourDeTerre`). Le script de
-// recalcul RELIT chaque tableau et vérifie que la ligne du bas est bien celle du
-// haut multipliée par le coefficient écrit.
+// ⭐ LES DESSINS : le tableau de proportionnalité à deux lignes et sa flèche
+// « ↓ × coefficient » (`tableauCoef`, repris de la 5e), le PRODUIT EN CROIX
+// fléché (`croix`, neuf), un tableau à plusieurs lignes (`table`), des
+// graphiques `repere()` de figures.tsx, et les OMBRES au soleil (`ombres`,
+// neuf). 14 dessins imprimés ; ceux qui redisent le corrigé sont
+// `ecranSeulement`.
 //
-// Les corrigés sont écrits à la première personne (« je divise »), comme les
-// feuilles de 3e.
+// Les corrigés sont écrits à la première personne (« je multiplie »).
 //
-// ⭐ Recalcul indépendant : `scripts/verifier-exercices-proportionnalite-4e.mjs`.
+// ⭐ Recalcul indépendant : `scripts/verifier-exercices-4e-prop-proportionnalite.mjs`.
 //
-// Micro-compétences : prop_reconnaitre (1, 2, 7, 9, 13, 16, 19), prop_table (3,
-// 8, 10, 14), prop_coeff (4, 6, 8, 10, 12, 13, 15, 17, 20), prop_quatrieme (5,
-// 11, 12, 18), prop_probleme (12, 15, 17, 18, 20), prop_defi (14, 16, 18, 19,
-// 20). 6/6.
+// Micro-compétences : prop_reconnaitre (1, 2, 6, 8, 12, 14, 18, 20), prop_table
+// (3, 7, 9, 16), prop_coeff (3, 4, 6, 9, 11, 14, 17, 19), prop_quatrieme (4, 5,
+// 6, 10, 13, 15, 17, 18, 19), prop_probleme (10, 11, 12, 13, 15, 17, 18, 19,
+// 20), prop_defi (7, 8, 12, 14, 16, 20). 6/6.
 
 import type { ReactNode } from "react";
+import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 import type { FicheExercicesData } from "@/lib/fiches-exercices/types";
-import { ORANGE, repere, tableau } from "@/lib/fiches-exercices/figures";
+import { BLEU, ORANGE, repere } from "@/lib/fiches-exercices/figures";
 
-/** Deux dessins côte à côte : l'un sous l'autre sur téléphone, côte à côte à
- *  partir de `sm` et sur papier. Une légende courte au-dessus de chacun. */
-const deux = (a: ReactNode, b: ReactNode, legendes?: [string, string]) => (
-  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 print:grid-cols-2">
-    {[a, b].map((d, i) => (
-      <div key={i}>
-        {legendes && <p className="mb-1 text-center text-sm font-bold text-slate-700">{legendes[i]}</p>}
-        {d}
-      </div>
-    ))}
-  </div>
-);
+const ROUGE = "#dc2626";
+const VERT = "#16a34a";
+const NOIR = "#0f172a";
+
+/** Sur l'écran seulement : le dessin qui redit le corrigé ne s'imprime pas (PDF ≤ 12 pages). */
+const ecranSeulement = (dessin: ReactNode) => <div className="print:hidden">{dessin}</div>;
 
 /**
- * LE TABLEAU DE PROPORTIONNALITÉ d'un corrigé : deux lignes, et à droite la
- * flèche « ↓ × coefficient » qui fait passer de l'une à l'autre. Une case
- * écrite « !45 » est une case TROUVÉE : elle s'affiche en rouge, sans le « ! ».
- * Du HTML, pas un canvas : cinq colonnes de nombres tiennent à 360 px.
- * ⚠️ Pas de formule dans les cases : elles ne traversent pas KaTeX.
+ * Le tableau de proportionnalité (repris de la feuille de 5e) : deux lignes, la
+ * flèche « ↓ × coefficient ». Une case qui commence par « ! » est une case
+ * TROUVÉE, écrite en rouge.
+ * ⛔ Sur TÉLÉPHONE (sous `sm`), le tableau est COUCHÉ : deux colonnes, une ligne
+ * par paire, la flèche « → × coefficient » dessous — rien ne défile à 375 px.
+ * ⚠️ Texte NU dans les cases : elles ne traversent pas KaTeX.
  */
 const tableauCoef = (titres: [string, string], haut: string[], bas: string[], coef: string) => {
   const cellule = (c: string, i: number) => {
     const trouvee = c.startsWith("!");
     return (
-      <td
-        key={i}
-        className={`whitespace-nowrap border border-slate-400 px-2 py-1 text-center ${trouvee ? "font-bold text-red-600" : "text-slate-900"}`}
-      >
+      <td key={i} className={`whitespace-nowrap border border-slate-400 px-2 py-1 text-center ${trouvee ? "font-bold text-red-600" : "text-slate-900"}`}>
         {trouvee ? c.slice(1) : c}
       </td>
     );
   };
+  const titre = (texte: string) => <th className="whitespace-nowrap border border-slate-400 bg-slate-100 px-2 py-1 text-left font-semibold text-slate-800">{texte}</th>;
   return (
-    <div className="overflow-x-auto">
-      <table className="mx-auto border-collapse text-sm">
-        <tbody>
-          <tr>
-            <th className="whitespace-nowrap border border-slate-400 bg-slate-100 px-2 py-1 text-left font-semibold text-slate-800">{titres[0]}</th>
-            {haut.map(cellule)}
-            <td rowSpan={2} className="whitespace-nowrap pl-2 text-center font-bold text-blue-700">
-              ↓ × {coef}
-            </td>
-          </tr>
-          <tr>
-            <th className="whitespace-nowrap border border-slate-400 bg-slate-100 px-2 py-1 text-left font-semibold text-slate-800">{titres[1]}</th>
-            {bas.map(cellule)}
-          </tr>
-        </tbody>
-      </table>
+    <>
+      <div className="sm:hidden print:hidden">
+        <table className="mx-auto border-collapse text-sm">
+          <thead>
+            <tr>
+              {titre(titres[0])}
+              {titre(titres[1])}
+            </tr>
+          </thead>
+          <tbody>
+            {haut.map((h, i) => (
+              <tr key={i}>
+                {cellule(h, 0)}
+                {cellule(bas[i], 1)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p className="mt-1 text-center text-sm font-bold text-blue-700">→ × {coef}</p>
+      </div>
+      <div className="hidden sm:block print:block">
+        <table className="mx-auto border-collapse text-sm">
+          <tbody>
+            <tr>
+              {titre(titres[0])}
+              {haut.map(cellule)}
+              <td rowSpan={2} className="whitespace-nowrap pl-2 text-center font-bold text-blue-700">
+                ↓ × {coef}
+              </td>
+            </tr>
+            <tr>
+              {titre(titres[1])}
+              {bas.map(cellule)}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </>
+  );
+};
+
+/** Un tableau à plusieurs lignes. ⛔ Trois colonnes courtes au plus. */
+const table = (entete: string[], lignes: string[][]) => (
+  <div className="mx-auto w-full max-w-[22rem] print:max-w-[15rem]">
+    <CanvasRenderer figure={{ kind: "tableau_donnees", headers: entete, rows: lignes.map((values) => ({ values })), display: { compact: true, striped: true } }} />
+  </div>
+);
+
+/**
+ * Le PRODUIT EN CROIX : un tableau de deux colonnes de nombres, ses deux
+ * diagonales — en bleu plein celle des deux nombres connus qu'on MULTIPLIE, en
+ * orange pointillé celle de la case cherchée (« x », en rouge) et du nombre par
+ * lequel on DIVISE — et le calcul écrit dessous, en vert.
+ * ⛔ Titres : 12 signes au plus ; cases : 6 signes au plus ; calcul : 26 au plus.
+ */
+const croix = (titres: [string, string], haut: [string, string], bas: [string, string], calcul: string) => {
+  const [x0, lt, lc, hc, y0] = [6, 112, 80, 34, 6];
+  const cx = (j: number) => x0 + lt + lc * j + lc / 2;
+  const cy = (i: number) => y0 + hc * i + hc / 2;
+  const cases = [haut, bas];
+  // La diagonale de x : x est en (i, j) ; sa diagonale va vers (1 − i, 1 − j).
+  const ix = cases.findIndex((l) => l.includes("x"));
+  const jx = ix >= 0 ? cases[ix].indexOf("x") : 1;
+  const iy = ix >= 0 ? ix : 1;
+  const diag = (i1: number, j1: number, i2: number, j2: number, c: string, pointille: boolean) => {
+    const [xa, ya, xb, yb] = [cx(j1), cy(i1), cx(j2), cy(i2)];
+    const [dx, dy] = [xb - xa, yb - ya];
+    const L = Math.hypot(dx, dy);
+    const r = 14 / L;
+    return <line x1={xa + dx * r} y1={ya + dy * r} x2={xb - dx * r} y2={yb - dy * r} stroke={c} strokeWidth={2.4} strokeDasharray={pointille ? "5 4" : undefined} />;
+  };
+  return (
+    <div className="mx-auto w-full max-w-[20rem] print:max-w-[14rem]">
+      <svg viewBox="0 0 300 112" className="block h-auto w-full" role="img" aria-label="Le produit en croix">
+        {[0, 1].map((i) => (
+          <g key={i}>
+            <rect x={x0} y={y0 + hc * i} width={lt} height={hc} fill="#f1f5f9" stroke={NOIR} strokeWidth={1.4} />
+            <text x={x0 + 6} y={cy(i) + 5} fontSize="14" fontWeight="700" fill={NOIR}>
+              {titres[i]}
+            </text>
+            {[0, 1].map((j) => (
+              <g key={j}>
+                <rect x={x0 + lt + lc * j} y={y0 + hc * i} width={lc} height={hc} fill="#fff" stroke={NOIR} strokeWidth={1.4} />
+                <text x={cx(j) + (j === 0 ? -12 : 12)} y={cy(i) + 5} textAnchor="middle" fontSize="15" fontWeight="800" fill={cases[i][j] === "x" ? ROUGE : NOIR}>
+                  {cases[i][j]}
+                </text>
+              </g>
+            ))}
+          </g>
+        ))}
+        {diag(iy, jx, 1 - iy, 1 - jx, ORANGE, true)}
+        {diag(iy, 1 - jx, 1 - iy, jx, BLEU, false)}
+        <text x={150} y={100} textAnchor="middle" fontSize="15" fontWeight="900" fill={VERT}>
+          {calcul}
+        </text>
+      </svg>
     </div>
   );
 };
 
 /**
- * LE TOUR DE LA TERRE (exercice 20) : un cadran de 24 heures, et la part qui
- * tourne en `heures` heures, coloriée. 6 h font un quart de tour, 90°. Le
- * libellé se CALCULE sur l'argument : il ne peut pas contredire le dessin.
+ * Des OMBRES au soleil, au même moment : chaque objet est un trait vertical de
+ * hauteur `h` (m), son ombre un trait au sol de longueur `o` (m), et le rayon
+ * du soleil, en pointillé orange, va du sommet au bout de l'ombre. Les rayons
+ * sont parallèles : c'est ce qui rend l'ombre proportionnelle à la hauteur.
+ * `hauteur` et `ombre` : ce qu'on écrit (« ? » pour une longueur cherchée).
+ * À l'échelle : 12 unités par mètre, 20 m d'ombre en tout au plus.
  */
-const tourDeTerre = (heures: number) => {
-  const cx = 100;
-  const cy = 70;
-  const r = 56;
-  const angle = heures * 15;
-  const point = (deg: number, rayon = r) => {
-    const a = ((deg - 90) * Math.PI) / 180;
-    return [cx + rayon * Math.cos(a), cy + rayon * Math.sin(a)];
-  };
-  const [x1, y1] = point(angle);
+const ombres = (objets: { h: number; o: number; hauteur: string; ombre: string }[]) => {
+  const s = 12;
+  const sol = 20 + s * Math.max(...objets.map((b) => b.h));
+  let x = 60;
+  const places = objets.map((b) => {
+    const p = x;
+    x += b.o * s + 36;
+    return p;
+  });
   return (
-    <svg viewBox="0 0 200 150" role="img" aria-label={`En ${heures} heures, la Terre tourne de ${angle} degrés sur 360.`} className="mx-auto w-full max-w-[12rem]">
-      <circle cx={cx} cy={cy} r={r} fill="#e0f2fe" stroke="#0369a1" strokeWidth={1.5} />
-      <path d={`M ${cx} ${cy} L ${cx} ${cy - r} A ${r} ${r} 0 ${angle > 180 ? 1 : 0} 1 ${x1.toFixed(2)} ${y1.toFixed(2)} Z`} fill="#fdba74" stroke="#ea580c" strokeWidth={1.5} />
-      {Array.from({ length: 24 }, (_, h) => {
-        const [xa, ya] = point(h * 15, r - (h % 6 === 0 ? 9 : 5));
-        const [xb, yb] = point(h * 15);
-        return <line key={h} x1={xa} y1={ya} x2={xb} y2={yb} stroke="#0369a1" strokeWidth={h % 6 === 0 ? 1.6 : 0.8} />;
-      })}
-      <text x={cx} y={144} textAnchor="middle" fontSize={16} fontWeight={700} fill="#c2410c">
-        {`${heures} h → ${angle}°`}
-      </text>
-    </svg>
+    <div className="mx-auto w-full max-w-[20rem] print:max-w-[14rem]">
+      <svg viewBox={`0 0 300 ${sol + 26}`} className="block h-auto w-full" role="img" aria-label="Des objets et leurs ombres au soleil">
+        <line x1={4} y1={sol} x2={296} y2={sol} stroke={NOIR} strokeWidth={2} />
+        {objets.map((b, i) => {
+          const [xa, ht, lo] = [places[i], b.h * s, b.o * s];
+          return (
+            <g key={i}>
+              <line x1={xa} y1={sol} x2={xa} y2={sol - ht} stroke={NOIR} strokeWidth={4} strokeLinecap="round" />
+              <line x1={xa} y1={sol - ht} x2={xa + lo} y2={sol} stroke={ORANGE} strokeWidth={2} strokeDasharray="5 4" />
+              <line x1={xa} y1={sol} x2={xa + lo} y2={sol} stroke="#475569" strokeWidth={6} />
+              <text x={xa - 6} y={sol - ht / 2 + 5} textAnchor="end" fontSize="14" fontWeight="900" fill={b.hauteur === "?" ? ROUGE : BLEU}>
+                {b.hauteur}
+              </text>
+              <text x={xa + lo / 2} y={sol + 19} textAnchor="middle" fontSize="14" fontWeight="800" fill={NOIR}>
+                {b.ombre}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
+    </div>
   );
 };
 
@@ -155,7 +236,7 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
   notion: "prop-proportionnalite",
   titre: "Proportionnalité : tableaux, coefficient, produit en croix",
   accroche:
-    "Vingt exercices, du geste seul au problème : reconnaître une situation de proportionnalité dans un tableau ou sur un graphique, compléter un tableau, trouver le coefficient, calculer une quatrième proportionnelle. La pluie sur un toit, l'orage qu'on écoute, les degrés Fahrenheit, le tour de la Terre. Un rappel de cours avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : étape par étape, avec le pourquoi, le piège nommé, et le tableau dessiné.",
+    "Vingt exercices, du geste seul au problème : reconnaître la proportionnalité dans un tableau ou sur un graphique, trouver le coefficient, revenir à l'unité, calculer une quatrième proportionnelle par le produit en croix. Une imprimante 3D, un ressort, une trailleuse, la pâte à pain, les ombres au soleil, des panneaux solaires, des pompes qui vident un bassin. Un rappel de cours avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : étape par étape, avec le pourquoi, le piège nommé, et un dessin.",
 
   fichesCours: [{ href: "/fiches-cours/maths/4e/prop-proportionnalite", titre: "La proportionnalité" }],
   coachHref: "/coach-ia/maths?classe=4e",
@@ -165,82 +246,103 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
     {
       niveau: 1,
       titre: "Un seul geste",
-      consigne: "Un geste par exercice : vérifier, compléter ou calculer. Tu écris la réponse avec son unité.",
+      consigne: "Une règle par exercice. Je cherche d'abord le nombre qui relie les deux lignes.",
       rappel: [
-        "Deux grandeurs sont proportionnelles quand on passe de l'une à l'autre en MULTIPLIANT toujours par le même nombre : le coefficient de proportionnalité.",
-        "Pour le vérifier, je divise chaque valeur de la seconde ligne par celle du dessus : tous les quotients doivent être égaux.",
-        "Quatrième proportionnelle : si $a \\to b$ et $c \\to x$, alors $x = \\dfrac{b \\times c}{a}$. C'est le produit en croix.",
+        "Deux grandeurs sont proportionnelles quand on passe de l'une à l'autre en multipliant TOUJOURS par le même nombre : le coefficient.",
+        "Pour le vérifier, je divise chaque nombre du bas par celui du haut : tous les quotients doivent être égaux.",
         "Sur un graphique, une situation de proportionnalité donne des points alignés avec l'origine du repère.",
+        "Produit en croix : dans un tableau de proportionnalité, $\\dfrac{a}{b} = \\dfrac{c}{d}$ donne $a \\times d = b \\times c$.",
       ],
       exercices: [
         {
-          enonce: "Au cinéma, $2$ places coûtent $17$ €, $3$ places coûtent $25{,}50$ € et $5$ places coûtent $42{,}50$ €. Le prix est-il proportionnel au nombre de places ?",
-          figure: tableau(["Places", "2", "3", "5"], ["Prix (€)", "17", "25,50", "42,50"]),
+          enonce: "Dans ce tableau, la série A et la série B donnent chacune un nombre pour chaque valeur de $x$.\na) La série A est-elle proportionnelle à $x$ ? Justifie.\nb) Même question pour la série B.",
+          figure: table(["x", "série A", "série B"], [
+            ["3", "10,5", "7"],
+            ["5", "17,5", "11"],
+            ["8", "28", "17"],
+          ]),
           correction:
-            "Je divise chaque prix par le nombre de places qui lui correspond.\n$17 \\div 2 = 8{,}5$ ; $25{,}5 \\div 3 = 8{,}5$ ; $42{,}5 \\div 5 = 8{,}5$.\nLes trois quotients sont égaux : le prix est proportionnel au nombre de places.\nLe coefficient est $8{,}5$ : une place coûte $8{,}50$ €.\n⛔ Le piège : répondre « oui » parce que les deux lignes grandissent ensemble. Elles grandissent aussi dans un tableau qui n'est pas proportionnel : seul le calcul des quotients décide.\nRéponse : oui, le prix est proportionnel au nombre de places, avec le coefficient $8{,}5$.",
-          schema: tableauCoef(["Places", "Prix (€)"], ["2", "3", "5"], ["17", "25,50", "42,50"], "8,5"),
+            "Je divise chaque nombre de la série par la valeur de $x$ sur la même ligne. Proportionnel veut dire : le même quotient partout.\na) Série A : $10{,}5 \\div 3 = 3{,}5$ ; $17{,}5 \\div 5 = 3{,}5$ ; $28 \\div 8 = 3{,}5$. Les trois quotients sont égaux : la série A est proportionnelle à $x$, avec le coefficient $3{,}5$.\nb) Série B : $7 \\div 3 \\approx 2{,}33$ et $11 \\div 5 = 2{,}2$. Deux quotients différents suffisent : la série B n'est pas proportionnelle à $x$.\n⛔ Le piège : la série B est très RÉGULIÈRE (quand $x$ augmente de $2$, elle augmente de $4$), et pourtant elle n'est pas proportionnelle. Régulier ne veut pas dire proportionnel.\nRéponse : a) oui, coefficient $3{,}5$ ; b) non.",
+          schema: ecranSeulement(
+            table(["x", "A ÷ x", "B ÷ x"], [
+              ["3", "3,5", "2,33…"],
+              ["5", "3,5", "2,2"],
+              ["8", "3,5", "2,125"],
+            ]),
+          ),
           micros: ["prop_reconnaitre"],
         },
         {
-          enonce: "Voici les tarifs d'un parking. Le prix payé est-il proportionnel à la durée de stationnement ?",
-          figure: tableau(["Durée (h)", "1", "2", "4"], ["Prix (€)", "3", "5", "9"]),
+          enonce: "Voici trois graphiques : la droite bleue (d1), la droite orange (d2) et la ligne verte (d3).\nLequel représente une situation de proportionnalité ? Justifie pour chacun.",
+          figure: repere([-1, 6, -1, 11], [
+            { pts: [[0, 0], [5, 10]] },
+            { pts: [[0, 3], [5, 8]], couleur: ORANGE },
+            { pts: [[0, 0], [1, 4], [2, 6], [3, 7], [4, 7.5], [5, 7.8]], couleur: "#16a34a" },
+          ], [
+            { x: 4.5, y: 9, label: "d1" },
+            { x: 1, y: 4, label: "d3" },
+            { x: 4, y: 7, label: "d2" },
+          ], undefined, true),
           correction:
-            "Je divise chaque prix par sa durée.\n$3 \\div 1 = 3$ ; $5 \\div 2 = 2{,}5$ ; $9 \\div 4 = 2{,}25$.\nLes quotients ne sont pas égaux : le prix n'est PAS proportionnel à la durée.\n⭐ Autre chemin : $2$ h, c'est le double de $1$ h, mais $5$ € n'est pas le double de $3$ €.\n⛔ Le piège : le tableau est régulier, chaque heure de plus coûte $2$ €, et l'on croit que c'est proportionnel. Ajouter toujours la même somme, ce n'est pas multiplier toujours par le même nombre.\nRéponse : non, le prix n'est pas proportionnel à la durée.",
-          schema: tableau(["Durée (h)", "1", "2", "4"], ["Prix ÷ durée", "3", "2,5", "2,25"]),
+            "Une situation de proportionnalité a pour graphique des points ALIGNÉS avec l'ORIGINE : il faut les deux conditions.\n(d1) est une droite qui passe par l'origine : c'est une situation de proportionnalité. Je le vérifie : $(1 ; 2)$, $(2 ; 4)$, $(5 ; 10)$, et à chaque fois $y = 2 \\times x$.\n(d2) est une droite, mais elle coupe l'axe vertical en $3$, pas à l'origine : pas proportionnelle.\n(d3) passe par l'origine, mais ce n'est pas une droite, elle se courbe : pas proportionnelle.\n⛔ Le piège : dire « (d2) est une droite, donc c'est proportionnel ». Une droite qui ne passe pas par l'origine ne représente pas une situation de proportionnalité.\nRéponse : seule (d1).",
           micros: ["prop_reconnaitre"],
         },
         {
-          enonce: "Ce tableau est un tableau de proportionnalité. Complète-le en utilisant les colonnes déjà remplies, sans calculer le coefficient.",
-          figure: tableau(["Ligne 1", "4", "8", "12", "20"], ["Ligne 2", "6", "?", "?", "?"]),
+          enonce: "Le prix des noix de cajou est proportionnel à leur masse. Complète le tableau, en commençant par le coefficient.",
+          figure: tableauCoef(["Masse (kg)", "Prix (€)"], ["2", "5", "7,5", "…"], ["6,40", "…", "…", "41,60"], "?"),
           correction:
-            "$8$ est le double de $4$ : la case du dessous est le double de $6$, soit $12$.\n$12 = 4 + 8$ : j'additionne les deux cases du dessous, $6 + 12 = 18$.\n$20 = 8 + 12$ : j'additionne encore, $12 + 18 = 30$.\n⭐ Contrôle avec le coefficient : $6 \\div 4 = 1{,}5$, et $8 \\times 1{,}5 = 12$, $12 \\times 1{,}5 = 18$, $20 \\times 1{,}5 = 30$.\n⛔ Le piège : voir que $6 - 4 = 2$ et ajouter $2$ partout. On écrirait $10$ sous le $8$ : faux, car $10 \\div 8$ ne fait pas $1{,}5$.\nRéponse : les cases valent $12$, $18$ et $30$.",
-          schema: tableauCoef(["Ligne 1", "Ligne 2"], ["4", "8", "12", "20"], ["6", "!12", "!18", "!30"], "1,5"),
-          micros: ["prop_table"],
+            "Le coefficient : je divise un prix par sa masse, sur une colonne complète. $6{,}40 \\div 2 = 3{,}2$. Pour passer de la masse au prix, je multiplie par $3{,}2$.\n$5 \\times 3{,}2 = 16$ et $7{,}5 \\times 3{,}2 = 24$.\nDans la dernière colonne, je connais le prix : je fais le chemin inverse, je DIVISE. $41{,}60 \\div 3{,}2 = 13$.\n⛔ Le piège : multiplier $41{,}60$ par $3{,}2$. Pour remonter du prix à la masse, on divise par le coefficient.\nRéponse : le coefficient est $3{,}2$ ; les cases valent $16$ €, $24$ € et $13$ kg.",
+          schema: ecranSeulement(tableauCoef(["Masse (kg)", "Prix (€)"], ["2", "5", "7,5", "!13"], ["6,40", "!16", "!24", "41,60"], "3,2")),
+          micros: ["prop_table", "prop_coeff"],
         },
         {
-          enonce: "$2{,}5$ m de tissu coûtent $20$ €. Le prix est proportionnel à la longueur.\na) Calcule le coefficient qui fait passer de la longueur au prix.\nb) Que représente ce nombre ?",
+          enonce: "Un lot de $8$ piles coûte $9{,}60$ €. Le prix est proportionnel au nombre de piles.\na) Combien coûte une pile ?\nb) Combien coûtent $5$ piles ? Et $14$ piles ?",
           correction:
-            "a) Pour passer de la longueur au prix, je divise le prix par la longueur : $20 \\div 2{,}5 = 8$.\nb) C'est le prix d'UN mètre de tissu, $8$ €. Le coefficient est le prix « à l'unité ».\n⭐ Contrôle : $2{,}5 \\times 8 = 20$.\n⛔ Le piège : diviser dans l'autre sens, $2{,}5 \\div 20 = 0{,}125$. Ce nombre existe, mais il fait passer du prix à la longueur : c'est la longueur de tissu qu'on achète avec $1$ €.\nRéponse : le coefficient est $8$ ; c'est le prix d'un mètre de tissu, $8$ €.",
-          schema: tableauCoef(["Longueur (m)", "Prix (€)"], ["2,5", "1"], ["20", "!8"], "8"),
-          micros: ["prop_coeff"],
+            "Je reviens d'abord à l'unité : le prix d'UNE pile.\na) $9{,}60 \\div 8 = 1{,}2$. Une pile coûte $1{,}20$ €.\nb) $5 \\times 1{,}2 = 6$ et $14 \\times 1{,}2 = 16{,}8$.\n⭐ Contrôle : $14$ piles, c'est $8 + 5 + 1$ piles, et $9{,}60 + 6 + 1{,}20 = 16{,}80$.\n⛔ Le piège : chercher le prix de $5$ piles en enlevant $3$ € au prix du lot, « parce qu'il y a $3$ piles de moins ». Il faut passer par le prix d'une pile.\nRéponse : a) $1{,}20$ € ; b) $6$ € et $16{,}80$ €.",
+          schema: ecranSeulement(
+            table(["piles", "prix (€)"], [
+              ["8", "9,60"],
+              ["1", "1,20"],
+              ["5", "6"],
+              ["14", "16,80"],
+            ]),
+          ),
+          micros: ["prop_coeff", "prop_quatrieme"],
         },
         {
-          enonce: "$4$ pots de peinture permettent de peindre $30$ m² de mur. Combien de mètres carrés peut-on peindre avec $6$ pots ?",
+          enonce: "Chaque tableau est un tableau de proportionnalité. Calcule $x$ par le produit en croix.\na) $4$ correspond à $7$, et $12$ correspond à $x$.\nb) $15$ correspond à $6$, et $25$ correspond à $x$.\nc) $2{,}5$ correspond à $9$, et $7$ correspond à $x$.",
           correction:
-            "La surface peinte est proportionnelle au nombre de pots : $4 \\to 30$ et $6 \\to x$.\nProduit en croix : je multiplie les deux nombres en diagonale, puis je divise par le troisième. $x = \\dfrac{30 \\times 6}{4}$.\n$30 \\times 6 = 180$, puis $180 \\div 4 = 45$.\n⭐ Contrôle : $6$ pots, c'est $4$ pots plus leur moitié ; $30 + 15 = 45$.\n⛔ Le piège : se tromper de diagonale, $\\dfrac{30 \\times 4}{6} = 20$. Avec PLUS de pots, on ne peut pas peindre MOINS de mur.\nRéponse : avec $6$ pots, on peint $45$ m² de mur.",
-          schema: tableauCoef(["Pots", "Surface (m²)"], ["4", "6"], ["30", "!45"], "7,5"),
+            "Dans un tableau de proportionnalité, les produits en croix sont égaux. Je multiplie les deux nombres de la diagonale complète, puis je divise par le nombre qui reste.\na) $x = \\dfrac{12 \\times 7}{4} = 21$.\nb) $x = \\dfrac{25 \\times 6}{15} = 10$.\nc) $x = \\dfrac{7 \\times 9}{2{,}5} = 25{,}2$.\n⭐ Contrôle du b) : $6 \\div 15 = 0{,}4$ et $10 \\div 25 = 0{,}4$. Même coefficient.\n⛔ Le piège : multiplier les deux nombres d'une même COLONNE, par exemple $15 \\times 6$. Les nombres qu'on multiplie sont en DIAGONALE.\nRéponse : a) $21$ ; b) $10$ ; c) $25{,}2$.",
+          schema: croix(["premier", "second"], ["2,5", "7"], ["9", "x"], "x = 7 × 9 ÷ 2,5 = 25,2"),
           micros: ["prop_quatrieme"],
         },
         {
-          enonce: "Pour $4$ personnes, une pâte à crêpes demande $300$ g de farine.\na) Quelle masse de farine faut-il pour $1$ personne ?\nb) Pour $7$ personnes ?",
+          enonce: "Un arrosage au goutte-à-goutte donne de l'eau de façon régulière. Le graphique donne le volume d'eau versé (en litres, verticalement) selon la durée (en minutes, horizontalement).\na) Pourquoi le volume est-il proportionnel à la durée ?\nb) Lis sur le graphique le volume versé en $4$ minutes.\nc) Calcule le volume versé en $30$ minutes.\nd) En combien de minutes verse-t-il $60$ litres ?",
+          figure: repere([-1, 7, -1, 10], [{ pts: [[0, 0], [6, 9]] }], [], undefined, true),
           correction:
-            "a) Je reviens à l'unité : pour $1$ personne, il faut $4$ fois moins de farine. $300 \\div 4 = 75$, soit $75$ g.\nb) Pour $7$ personnes, $7$ fois plus : $7 \\times 75 = 525$, soit $525$ g.\n⭐ Ces $75$ g par personne sont le coefficient : il fait passer du nombre de personnes à la masse de farine.\n⛔ Le piège : « $3$ personnes de plus, donc $3$ g de plus », et répondre $303$ g. On ajoute trois PARTS de $75$ g : $300 + 3 \\times 75 = 525$.\nRéponse : $75$ g pour une personne, $525$ g pour sept personnes.",
-          schema: tableauCoef(["Personnes", "Farine (g)"], ["4", "1", "7"], ["300", "!75", "!525"], "75"),
-          micros: ["prop_coeff"],
+            "a) Le graphique est une droite qui passe par l'origine : le volume est proportionnel à la durée.\nb) Je pars de $4$ sur l'axe HORIZONTAL (les minutes), je monte jusqu'à la droite, puis je lis sur l'axe vertical : $6$ litres.\nc) Le coefficient : $6 \\div 4 = 1{,}5$ litre par minute. $30 \\times 1{,}5 = 45$ litres.\nd) Je fais le chemin inverse : $60 \\div 1{,}5 = 40$ minutes.\n⛔ Le piège du b) : partir de $4$ sur l'axe vertical, et lire $2{,}7$ environ. Les minutes sont sur l'axe horizontal.\nRéponse : a) une droite par l'origine ; b) $6$ L ; c) $45$ L ; d) $40$ minutes.",
+          schema: ecranSeulement(repere([-1, 7, -1, 10], [{ pts: [[0, 0], [6, 9]] }], [{ x: 4, y: 6, label: "(4 ; 6)" }], undefined, true)),
+          micros: ["prop_reconnaitre", "prop_coeff", "prop_quatrieme"],
         },
         {
-          enonce: "Voici deux graphiques. Lequel représente une situation de proportionnalité ? Justifie.",
-          figure: deux(
-            repere([-1, 7, -1, 10], [{ pts: [[0, 0], [6, 9]] }]),
-            repere([-1, 7, -1, 10], [{ pts: [[0, 2], [6, 8]], couleur: ORANGE }]),
-            ["Graphique A", "Graphique B"],
-          ),
+          enonce: "Pour $3$ personnes, une recette de pâte à crumble demande $240$ g de farine. La quantité de farine est proportionnelle au nombre de personnes.\nLéo dit : « Pour $5$ personnes, il faut $242$ g : j'ajoute $2$, comme pour les personnes. »\nZoé dit : « Pour $6$ personnes, il faut $480$ g. Pour $5$ personnes, j'enlève la part d'une personne. »\nQui a raison ? Calcule la quantité de farine pour $5$ personnes.",
           correction:
-            "Je lis deux points sur chaque droite, et je divise la hauteur du point par son abscisse.\nGraphique A : $(2 ; 3)$ et $(4 ; 6)$. $3 \\div 2 = 1{,}5$ et $6 \\div 4 = 1{,}5$ : les quotients sont égaux.\nGraphique B : $(2 ; 4)$ et $(4 ; 6)$. $4 \\div 2 = 2$ mais $6 \\div 4 = 1{,}5$ : les quotients sont différents.\n⭐ La règle : une situation de proportionnalité se représente par des points ALIGNÉS AVEC L'ORIGINE. La droite A passe par le point $(0 ; 0)$ ; la droite B coupe l'axe vertical en $2$.\n⛔ Le piège : « c'est une droite, donc c'est proportionnel ». La droite B est bien droite, mais elle ne passe pas par l'origine.\nRéponse : c'est le graphique A qui représente une situation de proportionnalité.",
-          schema: deux(
-            repere([-1, 7, -1, 10], [{ pts: [[0, 0], [6, 9]] }], [{ x: 2, y: 3 }, { x: 4, y: 6 }, { x: 0, y: 0 }]),
-            repere([-1, 7, -1, 10], [{ pts: [[0, 2], [6, 8]], couleur: ORANGE }], [{ x: 2, y: 4 }, { x: 4, y: 6 }, { x: 0, y: 2 }]),
-            ["A : passe par l'origine", "B : ne passe pas par l'origine"],
-          ),
-          micros: ["prop_reconnaitre"],
+            "Léo se trompe : dans une situation de proportionnalité, on MULTIPLIE, on n'ajoute pas. Passer de $3$ à $5$ personnes ne fait pas ajouter $2$ g.\nZoé a raison. $6$ personnes, c'est le double de $3$ : $240 \\times 2 = 480$ g.\nLa part d'une personne : $240 \\div 3 = 80$ g.\nPour $5$ personnes : $480 - 80 = 400$ g. Ou directement : $5 \\times 80 = 400$ g.\n⛔ Le piège : ajouter l'écart, comme Léo. $242$ g pour $5$ personnes, ce serait presque la même quantité que pour $3$ !\nRéponse : Zoé a raison ; il faut $400$ g de farine.",
+          schema: ecranSeulement(tableauCoef(["personnes", "farine (g)"], ["3", "1", "5", "6"], ["240", "!80", "!400", "!480"], "80")),
+          micros: ["prop_defi", "prop_table"],
         },
         {
-          enonce: "Ce tableau est un tableau de proportionnalité.\na) Calcule le coefficient qui fait passer de la ligne 1 à la ligne 2.\nb) Complète les deux cases vides.",
-          figure: tableau(["Ligne 1", "5", "?", "12"], ["Ligne 2", "3,5", "4,9", "?"]),
+          enonce: "Proportionnel ou pas ? Justifie par un calcul ou par un contre-exemple.\na) Le prix payé à la pompe et le nombre de litres d'essence.\nb) Le prix d'une location de trottinette : $1$ € pour la déverrouiller, puis $0{,}25$ € la minute, et la durée.\nc) Le périmètre d'un carré et la longueur de son côté.\nd) L'aire d'un carré et la longueur de son côté.",
           correction:
-            "a) La seule colonne complète est la première : $3{,}5 \\div 5 = 0{,}7$. Le coefficient est $0{,}7$.\nb) Dans la dernière colonne, je DESCENDS de la ligne 1 à la ligne 2 : je multiplie, $12 \\times 0{,}7 = 8{,}4$.\nDans la deuxième colonne, je REMONTE de la ligne 2 à la ligne 1 : je fais l'opération inverse, $4{,}9 \\div 0{,}7 = 7$.\n⭐ Contrôle : $7 \\times 0{,}7 = 4{,}9$.\n⛔ Le piège : multiplier aussi pour remonter, $4{,}9 \\times 0{,}7 = 3{,}43$. Pour remonter, on divise.\nRéponse : le coefficient est $0{,}7$ ; les cases vides valent $7$ et $8{,}4$.",
-          schema: tableauCoef(["Ligne 1", "Ligne 2"], ["5", "!7", "12"], ["3,5", "4,9", "!8,4"], "0,7"),
-          micros: ["prop_table", "prop_coeff"],
+            "a) Oui : chaque litre coûte le même prix. Le coefficient est le prix d'un litre.\nb) Non : pour $10$ minutes je paie $1 + 10 \\times 0{,}25 = 3{,}5$ €, pour $20$ minutes $1 + 20 \\times 0{,}25 = 6$ €. La durée double, le prix ne double pas, à cause du $1$ € de départ.\nc) Oui : le périmètre vaut toujours $4 \\times$ le côté. Le coefficient est $4$.\nd) Non : un côté de $1$ cm donne $1$ cm², un côté de $2$ cm donne $4$ cm², un côté de $3$ cm donne $9$ cm². Les quotients $1$, $2$ et $3$ ne sont pas égaux.\n⛔ Le piège du d) : « quand le côté augmente, l'aire augmente, donc c'est proportionnel ». Deux grandeurs qui grandissent ensemble ne sont pas forcément proportionnelles.\nRéponse : a) oui ; b) non ; c) oui ; d) non.",
+          schema: ecranSeulement(
+            table(["côté (cm)", "aire (cm²)", "aire ÷ côté"], [
+              ["1", "1", "1"],
+              ["2", "4", "2"],
+              ["3", "9", "3"],
+            ]),
+          ),
+          micros: ["prop_reconnaitre", "prop_defi"],
         },
       ],
     },
@@ -249,83 +351,94 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
     {
       niveau: 2,
       titre: "Type devoir",
-      consigne: "Plusieurs étapes, comme au contrôle. Tu justifies chaque réponse par un calcul.",
+      consigne: "Plusieurs étapes. J'écris le tableau, je donne le calcul, et je termine par une phrase.",
       rappel: [
-        "Avant tout calcul, je vérifie que la situation est proportionnelle : un forfait, une aire, un travail partagé entre plusieurs personnes ne le sont pas.",
-        "Dans un tableau de proportionnalité, je peux multiplier une colonne par un nombre, ou additionner deux colonnes. Je n'ajoute JAMAIS le même nombre aux deux lignes.",
-        "Revenir à l'unité : je divise pour trouver la valeur d'UNE unité, puis je multiplie par la quantité voulue.",
-        "Je mets les deux valeurs d'une même ligne dans la même unité AVANT de calculer.",
+        "Dans un tableau de proportionnalité, je peux additionner deux colonnes, ou multiplier une colonne par un même nombre : le résultat est encore une colonne du tableau.",
+        "Quatrième proportionnelle : je multiplie les deux nombres de la diagonale complète, puis je divise par le nombre qui reste.",
+        "Avant de calculer, je mets les données dans la même unité : les minutes en heures, les grammes en kilogrammes.",
       ],
       exercices: [
         {
-          enonce:
-            "Pour chaque situation, dis si les deux grandeurs sont proportionnelles. Justifie par un calcul.\na) Le périmètre d'un carré et la longueur de son côté.\nb) L'aire d'un carré et la longueur de son côté.\nc) Le prix payé et le nombre de croissants achetés, à $1{,}10$ € le croissant.",
+          enonce: "Un imprimeur fixe un prix proportionnel au nombre de flyers imprimés : $250$ flyers coûtent $35$ €.\na) Complète le tableau SANS calculer le coefficient, en additionnant ou en multipliant des colonnes.\nb) Calcule le coefficient, puis vérifie tes réponses.",
+          figure: tableauCoef(["flyers", "prix (€)"], ["250", "500", "750", "1 250"], ["35", "…", "…", "…"], "?"),
           correction:
-            "a) Le périmètre d'un carré vaut $4$ fois son côté : côté $1$ cm, périmètre $4$ cm ; côté $3$ cm, périmètre $12$ cm. Je multiplie toujours par $4$ : c'est proportionnel, de coefficient $4$.\nb) Côté $1$ cm, aire $1$ cm² ; côté $2$ cm, aire $4$ cm² ; côté $3$ cm, aire $9$ cm². $1 \\div 1 = 1$ mais $4 \\div 2 = 2$ : les quotients changent, ce n'est PAS proportionnel.\nc) $n$ croissants coûtent $n \\times 1{,}10$ € : je multiplie toujours par $1{,}10$, c'est proportionnel.\n⛔ Le piège : « quand le côté augmente, l'aire augmente, donc c'est proportionnel ». Deux grandeurs peuvent grandir ensemble sans être proportionnelles.\nRéponse : a) oui ; b) non ; c) oui.",
-          schema: tableau(["Côté (cm)", "1", "2", "3"], ["Aire (cm²)", "1", "4", "9"]),
-          micros: ["prop_reconnaitre"],
-        },
-        {
-          enonce:
-            "Pour faire de la confiture, la masse de sucre est proportionnelle à la masse de fruits. Complète le tableau. Attention aux unités.",
-          figure: tableau(["Fruits", "600 g", "1 000 g", "?", "2 kg"], ["Sucre", "450 g", "?", "900 g", "?"], true),
-          correction:
-            "Le coefficient, avec la première colonne : $450 \\div 600 = 0{,}75$. Je multiplie la masse de fruits par $0{,}75$ pour obtenir la masse de sucre.\n$1\\,000 \\times 0{,}75 = 750$ : il faut $750$ g de sucre.\nPour remonter du sucre aux fruits, je divise : $900 \\div 0{,}75 = 1\\,200$, soit $1\\,200$ g de fruits.\n$2$ kg, c'est $2\\,000$ g : $2\\,000 \\times 0{,}75 = 1\\,500$, soit $1\\,500$ g de sucre.\n⛔ Le piège : calculer $2 \\times 0{,}75 = 1{,}5$ et écrire « $1{,}5$ g ». Le nombre est juste en kilogrammes, faux en grammes : je convertis AVANT de calculer.\nRéponse : $750$ g de sucre, $1\\,200$ g de fruits, $1\\,500$ g de sucre.",
-          schema: tableauCoef(["Fruits (g)", "Sucre (g)"], ["600", "1 000", "!1 200", "2 000"], ["450", "!750", "900", "!1 500"], "0,75"),
+            "a) $500$ flyers, c'est $2$ fois $250$ : $35 \\times 2 = 70$ €.\n$750 = 250 + 500$ : j'additionne les colonnes, $35 + 70 = 105$ €.\n$1\\,250 = 500 + 750$ : $70 + 105 = 175$ €.\nb) Le coefficient : $35 \\div 250 = 0{,}14$. Un flyer coûte $0{,}14$ €.\nVérification : $500 \\times 0{,}14 = 70$ ; $750 \\times 0{,}14 = 105$ ; $1\\,250 \\times 0{,}14 = 175$.\n⛔ Le piège : calculer le coefficient « à l'envers », $250 \\div 35 \\approx 7{,}14$. Le coefficient qui passe du haut au bas se calcule : bas divisé par haut.\nRéponse : $70$ €, $105$ € et $175$ € ; le coefficient est $0{,}14$.",
+          schema: ecranSeulement(tableauCoef(["flyers", "prix (€)"], ["250", "500", "750", "1 250"], ["35", "!70", "!105", "!175"], "0,14")),
           micros: ["prop_table", "prop_coeff"],
         },
         {
-          enonce: "Il faut $2{,}4$ kg de graines pour semer $60$ m² de gazon. Quelle masse de graines faut-il pour $85$ m² ?",
+          enonce: "Une imprimante 3D utilise $38$ g de fil de plastique en $2$ h $30$ min. La masse de fil est proportionnelle à la durée d'impression (chiffres d'un modèle).\nQuelle masse de fil utilise-t-elle en $4$ h ?",
           correction:
-            "La masse de graines est proportionnelle à la surface : $60 \\to 2{,}4$ et $85 \\to x$.\nProduit en croix : $x = \\dfrac{2{,}4 \\times 85}{60}$.\n$2{,}4 \\times 85 = 204$, puis $204 \\div 60 = 3{,}4$.\n⭐ Autre chemin, par l'unité : $2{,}4 \\div 60 = 0{,}04$ kg par m², soit $40$ g par m². Puis $85 \\times 0{,}04 = 3{,}4$.\n⛔ Le piège : la mauvaise diagonale, $\\dfrac{60 \\times 85}{2{,}4} = 2\\,125$. Plus de deux tonnes de graines pour un jardin : l'ordre de grandeur signale l'erreur.\nRéponse : il faut $3{,}4$ kg de graines.",
-          schema: tableauCoef(["Surface (m²)", "Graines (kg)"], ["60", "85"], ["2,4", "!3,4"], "0,04"),
-          micros: ["prop_quatrieme"],
+            "D'abord la même unité : $2$ h $30$ min, c'est $2{,}5$ h, car $30$ min est une demi-heure.\nPuis le produit en croix : $2{,}5$ h correspond à $38$ g, $4$ h correspond à $x$ g.\n$x = \\dfrac{4 \\times 38}{2{,}5} = 60{,}8$.\n⭐ Contrôle : en $1$ h, $38 \\div 2{,}5 = 15{,}2$ g ; en $4$ h, $4 \\times 15{,}2 = 60{,}8$ g.\n⛔ Le piège : écrire $2{,}30$ h. $30$ minutes ne font pas $0{,}30$ h : une heure compte $60$ minutes, pas $100$.\nRéponse : elle utilise $60{,}8$ g de fil en $4$ h.",
+          schema: croix(["durée (h)", "masse (g)"], ["2,5", "4"], ["38", "x"], "x = 4 × 38 ÷ 2,5 = 60,8"),
+          micros: ["prop_quatrieme", "prop_probleme"],
         },
         {
-          enonce:
-            "Un boulanger utilise $1{,}2$ kg de farine pour $8$ baguettes.\na) Quelle masse de farine lui faut-il pour $50$ baguettes ?\nb) Il lui reste un sac de $25$ kg. Combien de baguettes peut-il faire, au maximum ?",
+          enonce: "Au magasin, le même miel est vendu en deux pots : un pot de $450$ g à $2{,}97$ € et un pot de $750$ g à $4{,}80$ €.\nQuel pot est le plus avantageux ? Justifie en calculant le prix d'un kilogramme.",
           correction:
-            "a) Je reviens à une baguette : $1{,}2 \\div 8 = 0{,}15$ kg, soit $150$ g de farine par baguette.\nPour $50$ baguettes : $50 \\times 0{,}15 = 7{,}5$, soit $7{,}5$ kg de farine.\nb) Chaque baguette prend $0{,}15$ kg : je cherche combien de fois $0{,}15$ tient dans $25$. $25 \\div 0{,}15 = 166{,}66\\ldots$\nIl ne peut pas faire un morceau de baguette : j'arrondis vers le BAS, $166$ baguettes.\n⛔ Le piège : arrondir à $167$. Il faudrait $167 \\times 0{,}15 = 25{,}05$ kg de farine, plus que le sac.\nRéponse : $7{,}5$ kg de farine pour $50$ baguettes ; $166$ baguettes au maximum avec le sac.",
-          schema: tableauCoef(["Baguettes", "Farine (kg)"], ["8", "1", "50", "!166"], ["1,2", "!0,15", "!7,5", "24,9"], "0,15"),
-          micros: ["prop_quatrieme", "prop_probleme", "prop_coeff"],
-        },
-        {
-          enonce:
-            "On remplit un aquarium avec un broc, toujours rempli de la même façon. Le graphique donne le volume d'eau versé (en litres, axe vertical) selon le nombre de brocs (axe horizontal).\na) Pourquoi le volume est-il proportionnel au nombre de brocs ?\nb) Lis le volume d'eau après $4$ brocs.\nc) Quel est le coefficient ? Que représente-t-il ?\nd) Combien de brocs faut-il pour verser $12$ L ?",
-          figure: repere([-1, 7, -1, 11], [{ pts: [[0, 0], [7, 10.5]] }]),
-          correction:
-            "a) Les points sont sur une droite qui passe par l'origine : c'est la marque d'une situation de proportionnalité. C'est logique : $0$ broc, $0$ L ; deux fois plus de brocs, deux fois plus d'eau.\nb) Je pars de $4$ sur l'axe horizontal, je monte jusqu'à la droite, puis je lis sur l'axe vertical : $6$ L.\nc) $6 \\div 4 = 1{,}5$. Le coefficient est $1{,}5$ : c'est le volume d'UN broc, $1{,}5$ L.\nd) $12$ L sort du graphique, alors je calcule : $12 \\div 1{,}5 = 8$, soit $8$ brocs.\n⛔ Le piège : lire le graphique à l'envers, en partant de $4$ sur l'axe VERTICAL. On trouverait environ $2{,}7$ brocs, une réponse qui n'a pas de sens ici.\nRéponse : $6$ L après $4$ brocs ; le coefficient $1{,}5$ est le volume d'un broc ; il faut $8$ brocs pour $12$ L.",
-          schema: repere([-1, 7, -1, 11], [{ pts: [[0, 0], [7, 10.5]] }], [{ x: 4, y: 6, label: "(4 ; 6)" }, { x: 2, y: 3 }]),
-          micros: ["prop_reconnaitre", "prop_coeff"],
-        },
-        {
-          enonce:
-            "Dans un tableau de proportionnalité, on lit $6 \\to 15$ et $10 \\to 25$. Tom veut compléter $16 \\to ?$ et $4 \\to ?$. Il écrit : « de $10$ à $16$ j'ajoute $6$, donc de $25$ j'ajoute aussi $6$ : $31$ ».\na) Explique son erreur.\nb) Complète correctement les deux cases, de deux façons différentes.",
-          figure: tableau(["Ligne 1", "6", "10", "16", "4"], ["Ligne 2", "15", "25", "?", "?"]),
-          correction:
-            "a) Tom ajoute la même chose sur les deux lignes. Or, dans un tableau de proportionnalité, on MULTIPLIE par le même nombre : $15 \\div 6 = 2{,}5$ et $25 \\div 10 = 2{,}5$. Avec sa réponse, $31 \\div 16$ ne fait pas $2{,}5$.\nb) Première façon, le coefficient : $16 \\times 2{,}5 = 40$ et $4 \\times 2{,}5 = 10$.\nDeuxième façon, les colonnes : $16 = 6 + 10$, donc la case vaut $15 + 25 = 40$. Et $4 = 10 - 6$, donc la case vaut $25 - 15 = 10$.\n⭐ J'ai le droit d'additionner ou de soustraire deux colonnes ENTIÈRES. Je n'ai pas le droit d'ajouter un même nombre aux deux lignes.\n⛔ Le piège : copier l'écart d'une ligne sur l'autre. Ajouter $6$ en haut, c'est ajouter $6 \\times 2{,}5 = 15$ en bas.\nRéponse : $16 \\to 40$ et $4 \\to 10$.",
-          schema: tableauCoef(["Ligne 1", "Ligne 2"], ["6", "10", "16", "4"], ["15", "25", "!40", "!10"], "2,5"),
-          micros: ["prop_defi", "prop_table"],
-        },
-        {
-          enonce:
-            "Au supermarché, une bouteille de jus d'orange de $1{,}5$ L coûte $2{,}70$ €, et une bouteille de $2$ L coûte $3{,}40$ €. Laquelle est la plus avantageuse ?",
-          correction:
-            "Je ne peux pas comparer $2{,}70$ € et $3{,}40$ € : les volumes ne sont pas les mêmes. Je reviens à l'unité, le prix d'UN litre.\nPetite bouteille : $2{,}70 \\div 1{,}5 = 1{,}80$ € le litre.\nGrande bouteille : $3{,}40 \\div 2 = 1{,}70$ € le litre.\n$1{,}70 < 1{,}80$ : le litre est moins cher dans la grande bouteille.\n⭐ Ce prix au litre est le coefficient de proportionnalité. Il est écrit en petit sur l'étiquette des rayons : « prix au litre ».\n⛔ Le piège : choisir la bouteille à $2{,}70$ € parce qu'elle « coûte moins cher ». Elle coûte moins, mais elle contient moins.\nRéponse : la bouteille de $2$ L est la plus avantageuse.",
-          schema: deux(
-            tableauCoef(["Volume (L)", "Prix (€)"], ["1,5", "1"], ["2,70", "!1,80"], "1,8"),
-            tableauCoef(["Volume (L)", "Prix (€)"], ["2", "1"], ["3,40", "!1,70"], "1,7"),
-            ["Petite bouteille", "Grande bouteille"],
+            "Pour comparer, je ramène les deux pots à la même quantité : $1$ kg, soit $1\\,000$ g.\nPetit pot : $450$ g, c'est $0{,}45$ kg. $2{,}97 \\div 0{,}45 = 6{,}6$. Le kilo revient à $6{,}60$ €.\nGrand pot : $750$ g, c'est $0{,}75$ kg. $4{,}80 \\div 0{,}75 = 6{,}4$. Le kilo revient à $6{,}40$ €.\n$6{,}40 < 6{,}60$ : le grand pot est plus avantageux.\n⛔ Le piège : choisir le petit pot « parce qu'il coûte moins cher ». Il coûte moins, mais il contient moins : seul le prix pour la même quantité permet de comparer.\nRéponse : le pot de $750$ g, à $6{,}40$ € le kilo.",
+          schema: ecranSeulement(
+            table(["pot", "masse (kg)", "prix au kg (€)"], [
+              ["petit", "0,45", "6,60"],
+              ["grand", "0,75", "6,40"],
+            ]),
           ),
-          micros: ["prop_coeff", "prop_probleme"],
+          micros: ["prop_probleme", "prop_coeff"],
         },
         {
-          enonce:
-            "$3$ peintres mettent $12$ jours pour repeindre une école. Ils travaillent tous au même rythme. Léo calcule le temps qu'il faudrait à $6$ peintres avec un produit en croix : $\\dfrac{12 \\times 6}{3} = 24$ jours.\na) Sa réponse est-elle vraisemblable ?\nb) Le nombre de jours est-il proportionnel au nombre de peintres ?\nc) Combien de jours faut-il à $6$ peintres ?",
+          enonce: "Pour louer un vélo, le tarif A coûte $3$ € l'heure. Le tarif B coûte $4$ € à la location, puis $2$ € l'heure. Le graphique donne le prix (en €) selon la durée (en heures) : la droite bleue pour A, la droite orange pour B.\na) Quel tarif est proportionnel à la durée ? Justifie avec le graphique.\nb) Pour quelle durée les deux tarifs coûtent-ils le même prix ? Quel est ce prix ?\nc) Pour une location de $6$ h, quel tarif choisir ?",
+          figure: repere([-1, 7, -2, 13], [
+            { pts: [[0, 0], [4.2, 12.6]] },
+            { pts: [[0, 4], [4.5, 13]], couleur: ORANGE },
+          ], [], undefined, true),
           correction:
-            "a) Non : avec DEUX fois plus de peintres, le travail ne peut pas prendre deux fois plus de temps. Il doit aller plus vite.\nb) Si c'était proportionnel, doubler le nombre de peintres doublerait le nombre de jours. Ici, c'est le contraire : ce n'est PAS proportionnel, et le produit en croix ne s'applique pas.\nc) Deux fois plus de peintres font le travail en deux fois moins de temps : $12 \\div 2 = 6$ jours.\n⭐ Contrôle : $3$ peintres pendant $12$ jours, c'est $3 \\times 12 = 36$ journées de travail ; $6$ peintres pendant $6$ jours, c'est aussi $6 \\times 6 = 36$.\n⛔ Le piège : lancer le produit en croix sans avoir vérifié que la situation est proportionnelle. Il donne toujours un nombre, même quand ce nombre n'a aucun sens.\nRéponse : ce n'est pas proportionnel ; $6$ peintres mettent $6$ jours.",
-          schema: tableau(["Peintres", "3", "6"], ["Jours", "12", "6"]),
-          micros: ["prop_reconnaitre", "prop_defi"],
+            "a) La droite bleue du tarif A passe par l'origine : le prix A est proportionnel à la durée, avec le coefficient $3$. La droite orange coupe l'axe vertical en $4$ : le prix B n'est pas proportionnel.\nb) Les droites se croisent au point $(4 ; 12)$. Je vérifie : tarif A, $4 \\times 3 = 12$ € ; tarif B, $4 + 4 \\times 2 = 12$ €. Pour $4$ h, les deux coûtent $12$ €.\nc) Tarif A : $6 \\times 3 = 18$ €. Tarif B : $4 + 6 \\times 2 = 16$ €. Je choisis le tarif B.\n⛔ Le piège : croire que le tarif proportionnel est toujours le moins cher. Il l'est pour une location courte ; après $4$ h, le tarif B gagne.\nRéponse : a) le tarif A ; b) $4$ h, pour $12$ € ; c) le tarif B, $16$ € au lieu de $18$ €.",
+          schema: ecranSeulement(repere([-1, 7, -2, 13], [
+            { pts: [[0, 0], [4.2, 12.6]] },
+            { pts: [[0, 4], [4.5, 13]], couleur: ORANGE },
+          ], [{ x: 4, y: 12 }], undefined, true)),
+          micros: ["prop_reconnaitre", "prop_probleme", "prop_defi"],
+        },
+        {
+          enonce: "Pour un mortier, un maçon mélange toujours $1$ sac de ciment de $25$ kg avec $75$ kg de sable. Les masses de ciment et de sable sont proportionnelles.\na) Quelle masse de ciment faut-il pour $180$ kg de sable ?\nb) Combien de sacs de ciment faut-il acheter ?",
+          correction:
+            "a) Produit en croix : $75$ kg de sable correspondent à $25$ kg de ciment, $180$ kg de sable correspondent à $x$ kg.\n$x = \\dfrac{180 \\times 25}{75} = 60$. Il faut $60$ kg de ciment.\nb) Un sac pèse $25$ kg : $60 \\div 25 = 2{,}4$ sacs. On ne peut pas acheter $0{,}4$ sac : il faut en acheter $3$.\n⭐ Contrôle : il y a toujours $3$ fois plus de sable que de ciment, et $3 \\times 60 = 180$.\n⛔ Le piège : arrondir à $2$ sacs. Avec $2$ sacs, soit $50$ kg, il manquerait $10$ kg de ciment.\nRéponse : a) $60$ kg ; b) $3$ sacs.",
+          schema: ecranSeulement(croix(["sable (kg)", "ciment (kg)"], ["75", "180"], ["25", "x"], "x = 180 × 25 ÷ 75 = 60")),
+          micros: ["prop_probleme", "prop_quatrieme"],
+        },
+        {
+          enonce: "En classe de physique, on suspend des masses à un ressort et on mesure son allongement (chiffres d'un modèle).\na) L'allongement est-il proportionnel à la masse, pour toutes les mesures ?\nb) Pour les mesures où il l'est, quel est le coefficient ?\nc) Quel allongement prévoir pour une masse de $120$ g ?",
+          figure: table(["masse (g)", "allongement (cm)"], [
+            ["50", "1,2"],
+            ["100", "2,4"],
+            ["150", "3,6"],
+            ["200", "4,8"],
+            ["250", "7,5"],
+          ]),
+          correction:
+            "a) Je calcule allongement divisé par masse pour chaque mesure.\n$1{,}2 \\div 50 = 0{,}024$ ; $2{,}4 \\div 100 = 0{,}024$ ; $3{,}6 \\div 150 = 0{,}024$ ; $4{,}8 \\div 200 = 0{,}024$.\nMais $7{,}5 \\div 250 = 0{,}03$ : la dernière mesure ne suit pas. Le ressort a été trop étiré : il s'est déformé.\nDonc l'allongement est proportionnel à la masse jusqu'à $200$ g, pas au-delà.\nb) Le coefficient est $0{,}024$ cm par gramme.\nc) $120$ g est dans la partie proportionnelle : $120 \\times 0{,}024 = 2{,}88$ cm.\n⛔ Le piège : conclure après avoir vérifié deux ou trois colonnes. Il faut TOUTES les vérifier : ici, c'est la dernière qui casse la proportionnalité.\nRéponse : a) oui jusqu'à $200$ g, non ensuite ; b) $0{,}024$ ; c) $2{,}88$ cm.",
+          schema: ecranSeulement(
+            table(["masse (g)", "allongement ÷ masse"], [
+              ["50 à 200", "0,024"],
+              ["250", "0,03"],
+            ]),
+          ),
+          micros: ["prop_reconnaitre", "prop_coeff", "prop_defi"],
+        },
+        {
+          enonce: "Une trailleuse monte une pente à vitesse régulière : elle gagne $540$ m d'altitude en $45$ min. Le dénivelé est proportionnel à la durée.\na) Quel dénivelé gagne-t-elle en $1$ h $20$ min ?\nb) Combien de temps lui faut-il pour gagner $1\\,200$ m ?",
+          correction:
+            "Je mets les durées en minutes : $1$ h $20$ min, c'est $60 + 20 = 80$ min.\na) Produit en croix : $45$ min correspondent à $540$ m, $80$ min correspondent à $x$ m. $x = \\dfrac{80 \\times 540}{45} = 960$. Elle gagne $960$ m.\nb) $540$ m correspondent à $45$ min, $1\\,200$ m correspondent à $t$ min. $t = \\dfrac{1\\,200 \\times 45}{540} = 100$. Il lui faut $100$ min, soit $1$ h $40$ min.\n⭐ Contrôle : en $1$ min, elle gagne $540 \\div 45 = 12$ m. Et $12 \\times 80 = 960$, $12 \\times 100 = 1\\,200$.\n⛔ Le piège : écrire $1$ h $20$ min $= 1{,}20$ h. En heures, c'est $1 + \\dfrac{20}{60}$, pas $1{,}20$. Les minutes évitent la question.\nRéponse : a) $960$ m ; b) $1$ h $40$ min.",
+          schema: ecranSeulement(croix(["durée (min)", "dénivelé (m)"], ["45", "80"], ["540", "x"], "x = 80 × 540 ÷ 45 = 960")),
+          micros: ["prop_quatrieme", "prop_probleme"],
+        },
+        {
+          enonce: "Ce tableau est un tableau de proportionnalité. Complète-le SANS calculer le coefficient, en écrivant chaque nombre du haut comme une somme ou une différence de nombres déjà connus. Vérifie ensuite avec le coefficient.",
+          figure: tableauCoef(["x", "y"], ["7", "11", "18", "4", "29"], ["16,8", "26,4", "…", "…", "…"], "?"),
+          correction:
+            "$18 = 7 + 11$ : j'additionne les colonnes, $16{,}8 + 26{,}4 = 43{,}2$.\n$4 = 11 - 7$ : je soustrais, $26{,}4 - 16{,}8 = 9{,}6$.\n$29 = 18 + 11$ : $43{,}2 + 26{,}4 = 69{,}6$.\nVérification par le coefficient : $16{,}8 \\div 7 = 2{,}4$. Puis $18 \\times 2{,}4 = 43{,}2$ ; $4 \\times 2{,}4 = 9{,}6$ ; $29 \\times 2{,}4 = 69{,}6$.\n⛔ Le piège : chercher un calcul compliqué. Quand les nombres du haut se combinent, les nombres du bas se combinent de la même façon.\nRéponse : $43{,}2$ ; $9{,}6$ ; $69{,}6$.",
+          schema: ecranSeulement(tableauCoef(["x", "y"], ["7", "11", "18", "4", "29"], ["16,8", "26,4", "!43,2", "!9,6", "!69,6"], "2,4")),
+          micros: ["prop_defi", "prop_table"],
         },
       ],
     },
@@ -334,57 +447,70 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
     {
       niveau: 3,
       titre: "Problèmes",
-      consigne: "Des situations réelles. Tu décides d'abord si c'est proportionnel, puis tu ranges les nombres dans un tableau.",
+      consigne: "Une situation, plusieurs questions qui s'enchaînent. Je repère les grandeurs proportionnelles, puis je réponds par une phrase.",
       rappel: [
-        "Je repère les deux grandeurs, et je me demande : si l'une double, est-ce que l'autre double ?",
-        "Je range les nombres dans un tableau, avec leurs unités, puis je cherche le coefficient. C'est souvent une grandeur « par » : des litres par millimètre, des mètres par seconde, des degrés par heure.",
-        "Je contrôle l'ordre de grandeur de ma réponse avant de l'écrire.",
+        "Je repère deux grandeurs proportionnelles, et je range leurs valeurs dans un tableau.",
+        "Pour trouver une valeur, j'utilise le coefficient, le passage à l'unité ou le produit en croix.",
+        "Je contrôle : ma réponse est-elle plausible ? Est-elle dans la bonne unité ?",
       ],
       exercices: [
         {
-          titre: "La pluie sur le toit",
+          titre: "La pâte à pain",
           enonce:
-            "Un millimètre de pluie, c'est $1$ litre d'eau tombé sur chaque mètre carré. Un abri de jardin a un toit de $12$ m² ; toute l'eau qui tombe dessus coule dans une cuve.\na) Un orage donne $15$ mm de pluie. Combien de litres arrivent dans la cuve ?\nb) La cuve contient $300$ L. Combien de millimètres de pluie faut-il pour la remplir, en partant de vide ?\nc) À Paris, il tombe en moyenne environ $640$ mm de pluie par an. Combien de litres ce toit recueillerait-il en un an ?",
+            "Un boulanger prépare toujours sa pâte avec les mêmes proportions : pour $1\\,000$ g de farine, $650$ g d'eau, $18$ g de sel et $20$ g de levure (chiffres d'un modèle).\na) Il n'a que $455$ g d'eau. Quelle masse de farine doit-il prendre ? Et de sel, et de levure ?\nb) Quelle masse de pâte obtient-il avec $1\\,000$ g de farine ?\nc) Avec $5$ kg de farine, combien de pains de $350$ g peut-il façonner ?",
+          figure: table(["ingrédient", "pour 1 000 g", "avec 455 g d'eau"], [
+            ["farine (g)", "1 000", "?"],
+            ["eau (g)", "650", "455"],
+            ["sel (g)", "18", "?"],
+            ["levure (g)", "20", "?"],
+          ]),
           correction:
-            "Sur $12$ m², $1$ mm de pluie donne $12$ fois $1$ L, soit $12$ L. Le volume recueilli est proportionnel à la hauteur de pluie, de coefficient $12$.\na) $15 \\times 12 = 180$ : $180$ L arrivent dans la cuve.\nb) Je remonte du volume à la hauteur de pluie : je divise. $300 \\div 12 = 25$, soit $25$ mm de pluie.\nc) $640 \\times 12 = 7\\,680$ : environ $7\\,680$ L en un an.\n⭐ $7\\,680 \\div 300 = 25{,}6$ : le toit remplirait la cuve plus de $25$ fois dans l'année.\n⛔ Le piège : oublier la surface et répondre « $15$ L » au a). Les $15$ mm tombent sur CHAQUE mètre carré du toit.\nRéponse : $180$ L ; $25$ mm ; environ $7\\,680$ L par an.",
-          schema: tableauCoef(["Pluie (mm)", "Eau (L)"], ["1", "15", "!25", "640"], ["12", "!180", "300", "!7 680"], "12"),
-          micros: ["prop_probleme", "prop_coeff"],
+            "a) Le coefficient qui passe de la recette à sa pâte : $455 \\div 650 = 0{,}7$. Toutes les masses sont multipliées par $0{,}7$.\nFarine : $1\\,000 \\times 0{,}7 = 700$ g. Sel : $18 \\times 0{,}7 = 12{,}6$ g. Levure : $20 \\times 0{,}7 = 14$ g.\nb) J'additionne : $1\\,000 + 650 + 18 + 20 = 1\\,688$ g de pâte.\nc) $5$ kg, c'est $5\\,000$ g, donc $5$ fois la recette : $1\\,688 \\times 5 = 8\\,440$ g de pâte.\n$8\\,440 \\div 350 \\approx 24{,}1$. Il peut façonner $24$ pains entiers.\n⛔ Le piège du c) : oublier de convertir, et multiplier par $5$ en croyant avoir $5$ g de farine. Ou répondre $25$ pains : le $25$e n'aurait pas assez de pâte.\nRéponse : a) $700$ g de farine, $12{,}6$ g de sel, $14$ g de levure ; b) $1\\,688$ g ; c) $24$ pains.",
+          micros: ["prop_probleme", "prop_coeff", "prop_quatrieme"],
         },
         {
-          titre: "Compter les secondes pendant l'orage",
+          titre: "Les ombres au soleil",
           enonce:
-            "Le son se propage dans l'air à environ $340$ m par seconde. La lumière de l'éclair, elle, nous arrive presque instantanément. On compte donc les secondes entre l'éclair et le tonnerre.\na) Tu comptes $6$ s. À quelle distance la foudre est-elle tombée ?\nb) Une règle dit : « $3$ secondes par kilomètre ». Vérifie-la.\nc) La foudre tombe à $5{,}1$ km de toi. Combien de secondes vas-tu compter ?\nd) Pendant un orage, tu comptes d'abord $12$ s, puis $6$ s à l'éclair suivant. L'orage s'approche-t-il ? De combien de mètres ?",
+            "Au même moment d'une journée ensoleillée, la longueur de l'ombre d'un objet vertical est proportionnelle à sa hauteur. Un bâton de $1{,}5$ m a une ombre de $2{,}4$ m. Au même moment, un arbre a une ombre de $14$ m.\na) Quelle est la hauteur de l'arbre ?\nb) Quelle est la longueur de l'ombre d'une personne de $1{,}6$ m ?\nc) Une tour a une ombre de $30{,}4$ m. Quelle est sa hauteur ?",
+          figure: ombres([
+            { h: 1.5, o: 2.4, hauteur: "1,5 m", ombre: "2,4 m" },
+            { h: 8.75, o: 14, hauteur: "?", ombre: "14 m" },
+          ]),
           correction:
-            "La distance est proportionnelle à la durée : chaque seconde, le son parcourt $340$ m. Le coefficient est $340$.\na) $6 \\times 340 = 2\\,040$ : la foudre est tombée à $2\\,040$ m, environ $2$ km.\nb) En $3$ s, le son parcourt $3 \\times 340 = 1\\,020$ m : environ $1$ km. La règle est bonne, à $20$ m près.\nc) $5{,}1$ km $= 5\\,100$ m. Je remonte de la distance à la durée : $5\\,100 \\div 340 = 15$, soit $15$ s.\nd) $12$ s : $12 \\times 340 = 4\\,080$ m. Puis $6$ s : $2\\,040$ m. L'orage s'approche, de $4\\,080 - 2\\,040 = 2\\,040$ m.\n⛔ Le piège : oublier de convertir au c), et calculer $5{,}1 \\div 340 = 0{,}015$ s. Quinze millièmes de seconde pour un orage à $5$ km : impossible.\nRéponse : $2\\,040$ m ; la règle est juste ; $15$ s ; l'orage s'est approché de $2\\,040$ m.",
-          schema: tableauCoef(["Durée (s)", "Distance (m)"], ["1", "3", "6", "!15"], ["340", "!1 020", "!2 040", "5 100"], "340"),
-          micros: ["prop_probleme", "prop_quatrieme", "prop_defi"],
+            "Le coefficient qui passe de la hauteur à l'ombre : $2{,}4 \\div 1{,}5 = 1{,}6$. L'ombre est $1{,}6$ fois plus longue que l'objet.\na) Je connais l'ombre, je cherche la hauteur : je DIVISE. $14 \\div 1{,}6 = 8{,}75$. L'arbre mesure $8{,}75$ m.\nb) $1{,}6 \\times 1{,}6 = 2{,}56$. L'ombre de la personne mesure $2{,}56$ m.\nc) $30{,}4 \\div 1{,}6 = 19$. La tour mesure $19$ m.\n⭐ Pourquoi ça marche : les rayons du soleil arrivent parallèles, et les triangles formés par chaque objet et son ombre ont la même forme.\n⛔ Le piège du a) : multiplier $14$ par $1{,}6$ et trouver un arbre de $22{,}4$ m, plus grand que son ombre. Or ici, l'ombre est plus longue que l'objet.\nRéponse : a) $8{,}75$ m ; b) $2{,}56$ m ; c) $19$ m.",
+          micros: ["prop_probleme", "prop_quatrieme", "prop_reconnaitre"],
         },
         {
-          titre: "Degrés Celsius et degrés Fahrenheit",
+          titre: "Les panneaux solaires",
           enonce:
-            "Aux États-Unis, la température se mesure en degrés Fahrenheit (°F). Le tableau donne quelques correspondances exactes.\na) La température en °F est-elle proportionnelle à la température en °C ? Donne deux raisons.\nb) Un élève dit : « $20$ °C, c'est le double de $10$ °C, donc c'est le double de $50$ °F, $100$ °F ». Qu'en penses-tu ?\nc) On passe des °C aux °F en multipliant par $1{,}8$, puis en ajoutant $32$. Convertis $30$ °C.\nd) Retire $32$ à chaque valeur en °F. Ce qui reste est-il proportionnel à la température en °C ?",
-          figure: tableau(["°C", "0", "10", "20", "100"], ["°F", "32", "50", "68", "212"]),
+            "Sur un toit bien orienté, l'électricité produite en un an est proportionnelle à la surface de panneaux solaires : $12$ m² de panneaux produisent $2\\,280$ kWh par an (chiffres d'un modèle).\na) Combien produisent $20$ m² de panneaux ?\nb) Une famille consomme $4\\,560$ kWh par an. Quelle surface de panneaux produirait autant ?\nc) Un panneau mesure $1{,}7$ m². Combien de panneaux faut-il poser pour atteindre au moins cette surface ?",
           correction:
-            "a) Première raison : $0$ °C donne $32$ °F, pas $0$. Dans une situation de proportionnalité, $0$ donne toujours $0$.\nSeconde raison : $50 \\div 10 = 5$ mais $68 \\div 20 = 3{,}4$. Les quotients changent : ce n'est PAS proportionnel.\nb) Il a tort : $20$ °C font $68$ °F, pas $100$ °F. Doubler la température en °C ne la double pas en °F.\nc) $30 \\times 1{,}8 = 54$, puis $54 + 32 = 86$ : $30$ °C font $86$ °F.\nd) $50 - 32 = 18$ ; $68 - 32 = 36$ ; $212 - 32 = 180$. Et $18 \\div 10 = 1{,}8$ ; $36 \\div 20 = 1{,}8$ ; $180 \\div 100 = 1{,}8$. OUI : cette partie-là est proportionnelle, de coefficient $1{,}8$. C'est le « plus $32$ » qui casse la proportionnalité.\n⛔ Le piège : croire qu'une température deux fois plus grande est « deux fois plus chaude ». Le double en °C n'est même pas le double en °F.\nRéponse : non, ce n'est pas proportionnel ; $20$ °C font $68$ °F ; $30$ °C font $86$ °F ; l'écart au-dessus de $32$ °F, lui, est proportionnel.",
-          schema: (
-            <div className="space-y-3">
-              {tableau(["°C", "10", "20", "100"], ["°F ÷ °C", "5", "3,4", "2,12"])}
-              {tableauCoef(["°C", "°F − 32"], ["10", "20", "30", "100"], ["18", "36", "!54", "180"], "1,8")}
-            </div>
-          ),
-          micros: ["prop_reconnaitre", "prop_defi"],
+            "Je reviens à l'unité : $1$ m² produit $2\\,280 \\div 12 = 190$ kWh par an.\na) $20 \\times 190 = 3\\,800$ kWh par an.\nb) Je fais le chemin inverse : $4\\,560 \\div 190 = 24$ m².\n⭐ Contrôle : $4\\,560$, c'est le double de $2\\,280$, donc il faut le double de $12$ m², soit $24$ m².\nc) $24 \\div 1{,}7 \\approx 14{,}1$. Avec $14$ panneaux, on n'a que $14 \\times 1{,}7 = 23{,}8$ m², pas assez. Il faut $15$ panneaux.\n⛔ Le piège du c) : répondre $14$ panneaux, ou $14{,}1$. On ne pose pas un morceau de panneau, et $14$ ne suffisent pas.\nRéponse : a) $3\\,800$ kWh ; b) $24$ m² ; c) $15$ panneaux.",
+          schema: ecranSeulement(tableauCoef(["surface (m²)", "production (kWh)"], ["12", "1", "20", "24"], ["2 280", "!190", "!3 800", "4 560"], "190")),
+          micros: ["prop_probleme", "prop_coeff", "prop_quatrieme"],
         },
         {
-          titre: "Le tour de la Terre",
+          titre: "Les pompes du bassin",
           enonce:
-            "La Terre fait un tour complet sur elle-même, soit $360°$, en $24$ h, et elle tourne toujours à la même vitesse.\na) De combien de degrés tourne-t-elle en $1$ h ? en $6$ h ?\nb) Le monde est découpé en $24$ fuseaux horaires. Explique pourquoi chacun mesure $15°$ de large.\nc) Le Soleil passe au plus haut au-dessus de Greenwich, près de Londres. Pour une ville située $45°$ plus à l'ouest, il passera au plus haut combien d'heures plus tard ?\nd) Une élève écrit : « en $1$ minute, la Terre tourne de $360 \\div 24 = 15°$ ». Corrige-la.",
+            "Pour vider un bassin, on utilise des pompes toutes identiques. Avec $1$ pompe, il faut $12$ h. Avec $2$ pompes, $6$ h. Avec $3$ pompes, $4$ h.\na) Combien de temps faut-il avec $4$ pompes ? Avec $6$ pompes ?\nb) La durée est-elle proportionnelle au nombre de pompes ? Justifie.\nc) Quel calcul donne toujours le même résultat, pour chaque colonne ?\nd) Combien de pompes faut-il pour vider le bassin en $1$ h $30$ min ?",
+          figure: table(["pompes", "durée (h)"], [
+            ["1", "12"],
+            ["2", "6"],
+            ["3", "4"],
+            ["4", "?"],
+            ["6", "?"],
+          ]),
           correction:
-            "L'angle est proportionnel à la durée : $360°$ en $24$ h.\na) En $1$ h : $360 \\div 24 = 15$, soit $15°$. En $6$ h : $6 \\times 15 = 90$, soit $90°$, un quart de tour.\nb) Les $24$ fuseaux se partagent les $360°$ du tour : $360 \\div 24 = 15$. Chacun couvre ce que la Terre tourne en $1$ h, $15°$.\nc) Je remonte de l'angle à la durée : $45 \\div 15 = 3$, soit $3$ h plus tard.\nd) $15°$, c'est en UNE HEURE. En $1$ minute, c'est $60$ fois moins : $15 \\div 60 = 0{,}25$, soit $0{,}25°$. Il faut donc $1 \\div 0{,}25 = 4$ minutes pour tourner de $1°$.\n⛔ Le piège : oublier l'unité du coefficient. « $15$ » ne veut rien dire seul : c'est $15°$ PAR HEURE.\nRéponse : $15°$ en $1$ h et $90°$ en $6$ h ; $3$ h plus tard ; $0{,}25°$ par minute.",
-          schema: deux(
-            tourDeTerre(6),
-            tableauCoef(["Durée (h)", "Angle (°)"], ["1", "3", "6", "24"], ["!15", "!45", "!90", "360"], "15"),
-          ),
-          micros: ["prop_coeff", "prop_probleme", "prop_defi"],
+            "a) Deux fois plus de pompes vident deux fois plus vite. $4$ pompes, c'est $2$ fois $2$ pompes : $6 \\div 2 = 3$ h. $6$ pompes, c'est $2$ fois $3$ pompes : $4 \\div 2 = 2$ h.\nb) Non. Les quotients durée divisée par pompes valent $12$, $3$, $1{,}33…$ : ils ne sont pas égaux. Et quand le nombre de pompes augmente, la durée DIMINUE.\nc) Le PRODUIT pompes fois durée : $1 \\times 12 = 12$, $2 \\times 6 = 12$, $3 \\times 4 = 12$, $4 \\times 3 = 12$, $6 \\times 2 = 12$. Il faut toujours $12$ heures de travail d'une pompe.\nd) $1$ h $30$ min $= 1{,}5$ h. Je cherche le nombre de pompes qui, multiplié par $1{,}5$, donne $12$ : $12 \\div 1{,}5 = 8$ pompes.\n⛔ Le piège : utiliser un produit en croix, comme si la durée était proportionnelle au nombre de pompes. On trouverait « plus de pompes, plus de temps », ce qui n'a pas de sens.\nRéponse : a) $3$ h et $2$ h ; b) non ; c) le produit vaut toujours $12$ ; d) $8$ pompes.",
+          schema: repere([-1, 9, -1, 13], [{ pts: [[1, 12], [2, 6], [3, 4], [4, 3], [6, 2], [8, 1.5]], couleur: ORANGE }], [
+            { x: 1, y: 12 },
+            { x: 2, y: 6 },
+            { x: 3, y: 4 },
+            { x: 4, y: 3 },
+            { x: 6, y: 2 },
+            { x: 8, y: 1.5 },
+          ], undefined, true),
+          micros: ["prop_defi", "prop_reconnaitre", "prop_probleme"],
         },
       ],
     },

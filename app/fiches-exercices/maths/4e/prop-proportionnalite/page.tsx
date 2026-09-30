@@ -8,7 +8,7 @@ import { exercicesProportionnalite4e } from "@/lib/fiches-exercices/maths-4e-pro
 export const metadata: Metadata = {
   title: "Proportionnalité 4e : 20 exercices corrigés, tableau, produit en croix, graphique (PDF)",
   description:
-    "Vingt exercices corrigés de 4e : reconnaître une situation de proportionnalité dans un tableau ou sur un graphique (points alignés avec l'origine), compléter un tableau, trouver le coefficient et revenir à l'unité, calculer une quatrième proportionnelle par le produit en croix. Problèmes : la pluie sur un toit, l'orage qu'on écoute, les degrés Fahrenheit, le tour de la Terre. Rappel de cours avant chaque niveau, corrigé étape par étape avec le tableau dessiné, PDF à imprimer.",
+    "Vingt exercices corrigés de 4e : reconnaître une situation de proportionnalité dans un tableau ou sur un graphique (points alignés avec l'origine), compléter un tableau, trouver le coefficient et revenir à l'unité, calculer une quatrième proportionnelle par le produit en croix. Problèmes : la pâte à pain, les ombres au soleil, les panneaux solaires, les pompes d'un bassin. Rappel de cours avant chaque niveau, corrigé étape par étape avec un dessin, PDF à imprimer.",
 };
 
 export default function ExercicesProportionnalite4ePage() {
