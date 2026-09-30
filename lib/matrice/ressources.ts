@@ -1045,6 +1045,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     niveaux: ["4e", "3e", "seconde", "premiere", "terminale", "prof", "direction"],
     matiere: "ia",
     notions: ["ia"],
+    motsCles: ["pix", "pix ia", "certification", "intelligence artificielle", "évaluation"],
     intentions: ["preparer", "tester"],
     type: "evaluation",
     resultat: "score",
@@ -1510,6 +1511,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     ],
     matiere: "ia",
     notions: ["ia"],
+    motsCles: ["pix", "pix ia", "intelligence artificielle", "cours"],
     // ⚠️ « comprendre » SEUL, comme les autres fiches — et non « decouvrir » que
     // porte le coach d'IA. Une fiche se lit pour comprendre ; découvrir, c'est
     // le geste de la machine et de la chaîne, pas celui d'une feuille A4.
@@ -2012,4 +2014,118 @@ export const RESSOURCES: RessourceEleveAI[] = [
     resultat: "score",
     statut: "validee",
   },
+];
+
+/**
+ * ⭐ LES PAGES DE FICHES, POUR LA BARRE DE RECHERCHE SEULE (30/09/2026).
+ *
+ * Frédéric : « fiches exercices / fiche exercice / exercice et fiches cours
+ * maths / fiche cours maths » — la barre de l'en-tête ne les trouvait pas.
+ *
+ * ⛔ PAS DANS `RESSOURCES`, EXPRÈS. `RESSOURCES` nourrit les cartes de
+ * l'accueil (moteur.ts) : y verser une ligne par classe changerait ce que
+ * l'accueil propose, et c'est une autre décision. Cette liste-ci n'est lue
+ * que par lib/matrice/suggestions.ts.
+ *
+ * ⚠️ Pas de chiffres dans les titres : ils bougent à chaque lot de feuilles.
+ * ⚠️ `?classe=` ouvre le hub sur la bonne classe (FichesParClasse). Le
+ * français n'a pas ce mécanisme : il pointe sur ses pages de classe.
+ * La casse et les accents ne comptent pas : tout est normalisé à la recherche.
+ */
+export type PageRecherche = {
+  id: string;
+  titre: string;
+  url: string;
+  matiere: "maths" | "francais";
+  /** Ce qui s'écrit à droite de la ligne : la classe, ou « Tous niveaux ». */
+  niveau: string;
+  motsCles: string[];
+};
+
+const MOTS_EXERCICES = ["fiches", "feuilles", "exercices", "corrigés", "maths", "mathématiques"];
+const MOTS_COURS_MATHS = ["fiches", "cours", "leçons", "maths", "mathématiques"];
+const MOTS_COURS_FRANCAIS = ["fiches", "cours", "leçons", "français"];
+
+// La clé de classe (celle de l'URL), le libellé, et les mots de la classe.
+const CLASSES_EXERCICES: [string, string, string[]][] = [
+  ["6e", "6e", ["6e", "sixième"]],
+  ["5e", "5e", ["5e", "cinquième"]],
+  ["4e", "4e", ["4e", "quatrième"]],
+  ["3e", "3e", ["3e", "troisième"]],
+  ["seconde", "Seconde", ["seconde", "2de"]],
+  ["premiere", "1re", ["première", "1re"]],
+  ["premiere-spe", "1re spé", ["première", "1re", "spé", "spécialité"]],
+  ["terminale-spe", "Tle spé", ["terminale", "spé", "spécialité"]],
+];
+
+// Les classes qui ont une page à elles gardent son URL ; les autres passent
+// par `?classe=` sur le hub des maths.
+const CLASSES_COURS_MATHS: [string, string, string[]][] = [
+  ["/fiches-cours/maths/cm2", "CM2", ["cm2"]],
+  ["/fiches-cours/maths/6e", "6e", ["6e", "sixième"]],
+  ["/fiches-cours/maths/5e", "5e", ["5e", "cinquième"]],
+  ["/fiches-cours/maths/4e", "4e", ["4e", "quatrième"]],
+  ["/fiches-cours/maths?classe=3e", "3e", ["3e", "troisième"]],
+  ["/fiches-cours/maths?classe=seconde", "Seconde", ["seconde", "2de"]],
+  ["/fiches-cours/maths/premiere-spe", "1re spé", ["première", "1re", "spé", "spécialité"]],
+];
+
+const CLASSES_COURS_FRANCAIS: [string, string, string[]][] = [
+  ["cp", "CP", ["cp"]],
+  ["cm1", "CM1", ["cm1"]],
+  ["cm2", "CM2", ["cm2"]],
+  ["6e", "6e", ["6e", "sixième"]],
+  ["5e", "5e", ["5e", "cinquième"]],
+  ["4e", "4e", ["4e", "quatrième"]],
+];
+
+export const PAGES_RECHERCHE: PageRecherche[] = [
+  {
+    id: "recherche-fiches-exercices",
+    titre: "Fiches d'exercices corrigés — maths",
+    url: "/fiches-exercices",
+    matiere: "maths",
+    niveau: "Tous niveaux",
+    motsCles: MOTS_EXERCICES,
+  },
+  ...CLASSES_EXERCICES.map(([cle, libelle, mots]): PageRecherche => ({
+    id: `recherche-fiches-exercices-${cle}`,
+    titre: `Fiches d'exercices corrigés — maths ${libelle}`,
+    url: `/fiches-exercices?classe=${cle}`,
+    matiere: "maths",
+    niveau: libelle,
+    motsCles: [...MOTS_EXERCICES, ...mots],
+  })),
+  {
+    id: "recherche-fiches-cours-maths",
+    titre: "Fiches de cours — maths",
+    url: "/fiches-cours/maths",
+    matiere: "maths",
+    niveau: "Tous niveaux",
+    motsCles: MOTS_COURS_MATHS,
+  },
+  ...CLASSES_COURS_MATHS.map(([url, libelle, mots]): PageRecherche => ({
+    id: `recherche-fiches-cours-maths-${libelle}`,
+    titre: `Fiches de cours — maths ${libelle}`,
+    url,
+    matiere: "maths",
+    niveau: libelle,
+    motsCles: [...MOTS_COURS_MATHS, ...mots],
+  })),
+  {
+    id: "recherche-fiches-cours-francais",
+    titre: "Fiches de cours — français",
+    url: "/fiches-cours/francais",
+    matiere: "francais",
+    niveau: "Tous niveaux",
+    motsCles: MOTS_COURS_FRANCAIS,
+  },
+  ...CLASSES_COURS_FRANCAIS.map(([cle, libelle, mots]): PageRecherche => ({
+    id: `recherche-fiches-cours-francais-${cle}`,
+    titre: `Fiches de cours — français ${libelle}`,
+    url: `/fiches-cours/francais/${cle}`,
+    matiere: "francais",
+    niveau: libelle,
+    motsCles: [...MOTS_COURS_FRANCAIS, ...mots],
+  })),
 ];

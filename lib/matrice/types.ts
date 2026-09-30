@@ -139,6 +139,16 @@ export type RessourceEleveAI = {
   matiere?: "maths" | "francais" | "anglais" | "espagnol" | "economie" | "ia" | "transversal";
   /** Les notions du lexique que cette ressource travaille. `["*"]` = générale. */
   notions: string[];
+  /**
+   * ⭐ LES MOTS QUI LA FONT SORTIR DE LA BARRE DE RECHERCHE (30/09/2026).
+   *
+   * La barre de l'en-tête (lib/matrice/suggestions.ts) ne cherchait que dans
+   * les notions du coach : « pix » ne trouvait rien, alors que l'éval blanche
+   * Pix IA est ici. Une ressource qui porte ce champ entre dans l'index, sur
+   * ces mots ET sur son titre. Normalisés à la recherche : les accents ne
+   * comptent pas. ⚠️ Un mot court (« pix ») passe ici, il est voulu.
+   */
+  motsCles?: string[];
   intentions: Intention[];
 
   /** Ce que c'est. Sert aux filtres de « Trouver une ressource ». */

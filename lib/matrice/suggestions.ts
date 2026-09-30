@@ -34,7 +34,8 @@ import { MOTS_FAIBLES } from "./notionsClasse";
 import { normaliser } from "./normaliser";
 import { PROFILS } from "./profils";
 import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
-import type { ProfilId } from "./types";
+import { PAGES_RECHERCHE, RESSOURCES, STATUTS_PUBLIABLES } from "./ressources";
+import type { ProfilId, TypeRessource } from "./types";
 
 export type Suggestion = {
   /** L'identifiant de notion du coach — celui qui part dans `?notion=`. */
@@ -168,9 +169,13 @@ function construire(): Entree[] {
   ) => {
     const m = MATIERES[matiere];
     if (!m) return;
+    // La classe entre dans les mots, APRÈS ceux du libellé (le bonus du
+    // premier mot reste au libellé). Voir CLASSES_COURTES.
+    const motsClasse = normaliser(niveauLabel).split(" ").filter(Boolean);
     for (const n of notions) {
-      const mots = motsForts(n.label);
-      if (mots.length === 0) continue;
+      const forts = motsForts(n.label);
+      if (forts.length === 0) continue;
+      const mots = [...forts, ...motsClasse];
       sortie.push({
         id: n.id,
         label: n.label,
@@ -209,8 +214,84 @@ function construire(): Entree[] {
     }
   }
 
-  return sortie;
+  // ── 3. Les ressources qui portent des `motsCles` (30/09/2026).
+  //
+  // Frédéric : « on trouve pas pix ia ». L'éval blanche Pix IA est dans
+  // ressources.ts, mais cet index ne lisait que les notions du coach. Seules
+  // les ressources qui ont des mots-clés entrent : les ajouter toutes noierait
+  // les notions sous les titres de pages.
+  //
+  // ⚠️ Les mots-clés gardent les mots de 3 lettres (« pix ») — c'est la
+  // différence avec `motsForts`, qui les écarte des libellés du programme.
+  // ⚠️ Posées EN TÊTE : à note égale, le rang décide, et qui tape « pix »
+  // cherche la page Pix avant une notion qui contiendrait le mot.
+  // ⚠️ Les mots-clés ne passent PAS par MOTS_FAIBLES : ils sont choisis à la
+  // main, et « cours » ou « exercices » y sont justement ce qu'on cherche.
+  const motsDe = (titre: string, motsCles: string[]) => {
+    const mots = new Set<string>(motsForts(titre));
+    for (const cle of motsCles) {
+      for (const m of normaliser(cle).split(" ")) {
+        if (m.length >= MINIMUM || CLASSES_COURTES.has(m)) mots.add(m);
+      }
+    }
+    return [...mots];
+  };
+
+  const pages: Entree[] = [];
+  for (const r of RESSOURCES) {
+    if (!r.motsCles?.length || !STATUTS_PUBLIABLES.includes(r.statut)) continue;
+    const mots = motsDe(r.titre, r.motsCles);
+    pages.push({
+      id: r.id,
+      label: r.titre,
+      matiere: r.matiere ?? "transversal",
+      matiereLabel: (r.matiere && MATIERES[r.matiere]?.label) || "EleveAI",
+      niveauLabel: LIBELLE_TYPE[r.type ?? "page"] ?? "Page",
+      profil: null,
+      mots,
+      url: r.url,
+    });
+  }
+
+  // ── 4. Les pages de fiches (exercices, cours), une par classe. Voir
+  // PAGES_RECHERCHE dans ressources.ts : elles n'y sont PAS dans RESSOURCES.
+  for (const p of PAGES_RECHERCHE) {
+    pages.push({
+      id: p.id,
+      label: p.titre,
+      matiere: p.matiere,
+      matiereLabel: MATIERES[p.matiere].label,
+      niveauLabel: p.niveau,
+      profil: null,
+      mots: motsDe(p.titre, p.motsCles),
+      url: p.url,
+    });
+  }
+
+  return [...pages, ...sortie];
 }
+
+/**
+ * ⭐ LES CLASSES DE DEUX LETTRES (30/09/2026).
+ *
+ * « fiche exercice 6e » : le « 6e » tombait sous le seuil de trois lettres, et
+ * la liste montrait toutes les classes. Ces jetons-là passent, dans la saisie
+ * comme dans l'index — et CHAQUE notion porte désormais sa classe dans ses
+ * mots (voir `ajouter`), sinon « pourcentages 6e » ne trouverait plus rien.
+ */
+const CLASSES_COURTES = new Set(["cp", "6e", "5e", "4e", "3e"]);
+
+/** Ce qui s'écrit à droite d'une ligne de ressource, à la place du niveau. */
+const LIBELLE_TYPE: Partial<Record<TypeRessource, string>> = {
+  coach: "Coach",
+  parcours: "Parcours",
+  evaluation: "Évaluation",
+  entrainement: "Entraînement",
+  fiche: "Fiches",
+  cahier: "Cahier",
+  guide: "Guide",
+  video: "Vidéo",
+};
 
 /**
  * ⭐ TROIS LETTRES, PAS DEUX.
@@ -243,7 +324,7 @@ export function suggerer(
 ): Suggestion[] {
   const mots = normaliser(saisie)
     .split(" ")
-    .filter((m) => m.length >= MINIMUM);
+    .filter((m) => m.length >= MINIMUM || CLASSES_COURTES.has(m));
   if (mots.length === 0) return [];
 
   index ??= construire();
