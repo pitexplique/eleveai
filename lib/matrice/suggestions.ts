@@ -289,6 +289,7 @@ const LIBELLE_TYPE: Partial<Record<TypeRessource, string>> = {
   entrainement: "Entraînement",
   fiche: "Fiches",
   cahier: "Cahier",
+  rituel: "Rituel",
   guide: "Guide",
   video: "Vidéo",
 };

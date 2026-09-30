@@ -833,6 +833,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     ],
     matiere: "maths",
     notions: ["calcul"],
+    motsCles: ["calcul rapide", "calcul mental", "chrono"],
     intentions: ["rituel", "entrainer"],
     type: "rituel",
     resultat: "score",
@@ -2080,6 +2081,17 @@ const CLASSES_COURS_FRANCAIS: [string, string, string[]][] = [
 ];
 
 export const PAGES_RECHERCHE: PageRecherche[] = [
+  {
+    // ⚠️ À part du coach, et hors de RESSOURCES : la recherche seule y mène.
+    // Le mot-clé est au PLURIEL : la comparaison se fait sur le début du mot,
+    // donc « automatisme » le trouve aussi — l'inverse ne marcherait pas.
+    id: "recherche-automatismes",
+    titre: "Automatismes de maths corrigés",
+    url: "/automatismes-maths",
+    matiere: "maths",
+    niveau: "CM1 → Tle",
+    motsCles: ["automatismes", "maths", "mathématiques", "corrigés"],
+  },
   {
     id: "recherche-fiches-exercices",
     titre: "Fiches d'exercices corrigés — maths",
