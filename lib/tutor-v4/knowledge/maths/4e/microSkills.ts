@@ -743,12 +743,11 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "litteral_factorisation",
     prerequis: ["litteral_facteur_commun"],
   },
-  {
-    id: "litteral_factoriser_identite",
-    label: "Factoriser avec une identité remarquable",
-    notionId: "litteral_factorisation",
-    prerequis: ["litteral_factoriser_simple", "litteral_identite_reconnaitre"],
-  },
+  // ⛔ 30/09/2026 — `litteral_factoriser_identite` (« Factoriser avec une
+  // identité remarquable ») RETIRÉE de la 4e par Frédéric : « la factorisation
+  // des identités remarquables n'est valable qu'en 3e ». Ses gabarits sont
+  // passés dans le coach de 3e (micro `litteral_identite`), sans réécriture.
+  // En 4e, on factorise par un facteur commun seulement.
   {
     id: "litteral_factoriser_verifier",
     label: "Vérifier une factorisation par développement",
@@ -759,7 +758,7 @@ export const microSkills: MicroSkillSource[] = [
     id: "litteral_factorisation_defi",
     label: "Défis sur la factorisation",
     notionId: "litteral_factorisation",
-    prerequis: ["litteral_factoriser_identite", "litteral_factoriser_verifier"],
+    prerequis: ["litteral_factoriser_simple", "litteral_factoriser_verifier"],
   },
 
   /* =========================

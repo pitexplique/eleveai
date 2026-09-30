@@ -314,9 +314,9 @@ const supportLinks: Record<string, string[]> = {
   // =========================
   litteral_facteur_commun: ["litteral_distributivite_simple", "litteral_expression_reduire"],
   litteral_factoriser_simple: ["litteral_facteur_commun", "litteral_distributivite_simple"],
-  litteral_factoriser_identite: ["litteral_factoriser_simple", "litteral_identite_reconnaitre", "litteral_identite_developper"],
+  // litteral_factoriser_identite retirée de la 4e le 30/09/2026 (passée en 3e).
   litteral_factoriser_verifier: ["litteral_factoriser_simple", "litteral_distributivite_simple"],
-  litteral_factorisation_defi: ["litteral_factoriser_identite", "litteral_factoriser_verifier"],
+  litteral_factorisation_defi: ["litteral_factoriser_simple", "litteral_factoriser_verifier"],
 
   // =========================
   // ÉQUATIONS

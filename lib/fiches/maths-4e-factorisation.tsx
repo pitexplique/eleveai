@@ -14,8 +14,13 @@
 //        le PLUS GRAND facteur commun ? » — la réponse est 3, pas 6.
 //   litteral_factoriser_simple    → 3x + 12 = 3(x + 4), 5x − 20 = 5(x − 4),
 //        x² + 5x = x(x + 5), 7x + 21 = 7(x + 3)
-//   litteral_factoriser_identite  → x² + 6x + 9 = (x + 3)², x² − 8x + 16 =
-//        (x − 4)², x² − 25 = (x − 5)(x + 5), x² − 49, x² − 1
+// ⛔ 30/09/2026 — la factorisation PAR UNE IDENTITÉ REMARQUABLE (x² + 6x + 9 =
+//        (x + 3)², x² − 25 = (x − 5)(x + 5)) est RETIRÉE de la 4e par Frédéric :
+//        « valable qu'en 3e ». Micro `litteral_factoriser_identite` supprimée,
+//        ses gabarits transférés au coach de 3e ; la propriété « Quand le
+//        puzzle se referme », l'usage, l'exemple, l'exercice et la diapo des
+//        « trois factorisations » sont partis avec elle. En 4e : le facteur
+//        commun seulement.
 //   litteral_factoriser_verifier  → « La factorisation 4x + 12 = 4(x + 3)
 //        est-elle correcte ? » (oui) et « 3x + 15 = 3(x + 15) ? » (non) — le
 //        contrôle se fait TOUJOURS en développant.
@@ -85,47 +90,6 @@ const rectangleAire = (cellSize: number, padding: number) => (
       },
       perimeterPath: [[0, 0], [0, 9], [3, 9], [3, 0], [0, 0]],
       vertices: { "3x": [1.7, 1.4], "12": [1.7, 6.1] },
-      display: {
-        showGrid: false,
-        showFilled: true,
-        showPerimeter: true,
-        showVertices: false,
-        showVertexLabels: true,
-      },
-      colors: { filled: BLEU },
-    }}
-  />
-);
-
-// ⭐ LE CARRÉ DE LA FICHE DES IDENTITÉS, LUI AUSSI RETOURNÉ. On a quatre
-// morceaux en vrac — x², deux bandes de 3x, neuf carrés — et la question est :
-// peut-on en faire un carré ? Oui, et son côté est x + 3. Reconnaître une
-// identité, c'est reconnaître un puzzle qui se referme.
-// ⚠️ Le contour se trace d'un seul trait : `buildPathFromGridPoints` ne connaît
-// qu'un `M` suivi de `L`, donc le chemin repasse sur trois bords déjà tracés
-// pour atteindre les deux traits intérieurs. Rouge sur rouge, invisible.
-// ⚠️ Les deux bandes portent le même libellé et une clé d'objet ne peut pas
-// servir deux fois : la seconde porte une espace finale, invisible à l'écran.
-const carreIdentite = (cellSize: number, padding: number) => (
-  <CanvasRenderer
-    figure={{
-      kind: "figure_libre",
-      size: { cellSize, padding },
-      grid: {
-        rows: 8,
-        cols: 8,
-        filledCells: [
-          [5, 5], [5, 6], [5, 7],
-          [6, 5], [6, 6], [6, 7],
-          [7, 5], [7, 6], [7, 7],
-        ],
-      },
-      perimeterPath: [
-        [0, 0], [0, 8], [8, 8], [8, 0], [0, 0],
-        [0, 5], [8, 5],
-        [8, 8], [5, 8], [5, 0],
-      ],
-      vertices: { "x²": [2.3, 1.9], "3x": [2.3, 5.6], "3x ": [6.6, 1.9], "9": [6.6, 6.2] },
       display: {
         showGrid: false,
         showFilled: true,
@@ -254,6 +218,22 @@ const calculMental = (
   />
 );
 
+// LE FACTEUR QUI CONTIENT LA LETTRE : 2x² + 6x. Même geste, une ligne par terme.
+const tableauDivisionLettre = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      headers: ["le terme", "divisé par 2x", "il reste"],
+      rows: [
+        { values: ["2x²", "2x² ÷ 2x", "x"] },
+        { values: ["6x", "6x ÷ 2x", "3"] },
+      ],
+      caption: "2x² + 6x = 2x(x + 3)",
+      display: { compact: true, striped: false },
+    }}
+  />
+);
+
 const pieges = [
   "Oublier de diviser le second terme : 5x + 20 ne fait pas 5(x + 20), mais 5(x + 4). C'est l'erreur miroir de celle du développement — là on oubliait de multiplier le 4, ici on oublie de diviser le 20.",
   "Se contenter du premier facteur venu : dans 6x + 9, le facteur commun n'est pas 6, parce que 6 ne divise pas 9. C'est 3, et la factorisation est 3(2x + 3).",
@@ -313,13 +293,6 @@ export const ficheFactorisation4e: FicheCoursData = {
         "Factoriser par 3, c'est couper la somme en trois morceaux rigoureusement identiques. Chacun vaut $x + 4$, donc le tout vaut $3 \\times (x + 4)$. Le facteur, c'est le NOMBRE de parts.",
       schema: barreTroisParts(228),
     },
-    {
-      titre: "Quand le puzzle se referme",
-      micros: ["litteral_factoriser_identite"],
-      texte:
-        "$x^2 + 6x + 9$ n'a aucun facteur commun — et pourtant il se factorise. Ses quatre morceaux forment exactement un carré de côté $x + 3$ : c'est une identité remarquable, lue à l'envers.",
-      schema: carreIdentite(24, 18),
-    },
   ],
   reel: {
     texte:
@@ -327,17 +300,14 @@ export const ficheFactorisation4e: FicheCoursData = {
   },
   historique: {
     texte:
-      "Le mot « facteur » vient du latin factor, « celui qui fait » — le même que dans manufacture. Retrouver un produit derrière une somme est un geste très ancien : c'est ainsi qu'al-Khwarizmi, à Bagdad au IXᵉ siècle, résolvait les équations du second degré, en « complétant le carré », c'est-à-dire en ajoutant juste ce qu'il fallait pour qu'une somme redevienne l'aire d'un carré. Il n'y avait alors ni lettres ni signes : tout s'énonçait en phrases, et se démontrait en découpant une figure — celle de cette fiche.",
+      "Le mot « facteur » vient du latin factor, « celui qui fait » — le même que dans manufacture. Retrouver un produit derrière une somme est un geste très ancien : c'est ainsi qu'al-Khwarizmi, à Bagdad au IXᵉ siècle, résolvait les équations du second degré, en « complétant le carré », c'est-à-dire en ajoutant juste ce qu'il fallait pour qu'une somme redevienne l'aire d'un carré. Il n'y avait alors ni lettres ni signes : tout s'énonçait en phrases, et se démontrait en découpant une figure.",
   },
   formule: {
-    contexte: "Les trois factorisations",
-    expression:
-      "$ka + kb = k(a + b)$   ·   $x^2 + 2ax + a^2 = (x + a)^2$   ·   $x^2 - a^2 = (x - a)(x + a)$",
+    contexte: "La factorisation par un facteur commun",
+    expression: "$ka + kb = k(a + b)$",
     legende:
-      "Ce sont les égalités du développement, lues de droite à gauche. La première marche toujours, dès qu'il y a un facteur commun ; les deux autres ne s'utilisent que si l'on reconnaît la forme.",
-    // ⛔ Pas de schéma ici, et c'est réfléchi : le rectangle dessine la première
-    // et le carré dessine les deux autres, tous deux plus haut dans la page. Un
-    // troisième dessin ne dirait rien de neuf (Frédéric, 25/08).
+      "C'est l'égalité de la distributivité, lue de droite à gauche. Elle marche dès qu'il y a un facteur commun à tous les termes : un nombre, une lettre, ou les deux.",
+    // ⛔ Pas de schéma ici : le rectangle, plus haut, dessine déjà cette égalité.
   },
   methode: [
     {
@@ -378,11 +348,11 @@ export const ficheFactorisation4e: FicheCoursData = {
       schema: calculMental,
     },
     {
-      titre: "Reconnaître une identité",
-      micros: ["litteral_factoriser_identite"],
+      titre: "Contrôler un résultat",
+      micros: ["litteral_factoriser_verifier"],
       detail:
-        "Trois termes dont le premier et le dernier sont des carrés ? Deux termes séparés par un moins, tous deux carrés ? Ce sont les signatures des identités remarquables lues à l'envers.",
-      schema: carreIdentite(24, 18),
+        "Une factorisation se vérifie en cinq secondes : on développe le produit, et on doit retrouver l'expression de départ.",
+      schema: tableauVerification,
     },
   ],
   exemples: [
@@ -396,13 +366,13 @@ export const ficheFactorisation4e: FicheCoursData = {
         "Le facteur commun est 3 : il divise $3x$ et il divise 12. On divise ensuite chaque terme par 3 : $3x \\div 3 = x$, et $12 \\div 3 = 4$. Donc $3x + 12 = 3(x + 4)$. Contrôle en développant : $3 \\times x + 3 \\times 4 = 3x + 12$. ✅",
     },
     {
-      titre: "Factoriser avec une identité",
-      micros: ["litteral_factoriser_identite"],
-      donnees: "On veut factoriser $x^2 + 6x + 9$.",
-      question: "Quel produit reconnaît-on ?",
-      schema: carreIdentite(20, 14),
+      titre: "Quand la lettre est en facteur",
+      micros: ["litteral_facteur_commun", "litteral_factorisation_defi"],
+      donnees: "On veut factoriser $2x^2 + 6x$.",
+      question: "Quel est le plus grand facteur commun ?",
+      schema: tableauDivisionLettre,
       solution:
-        "Il n'y a aucun facteur commun aux trois termes. Mais le premier est un carré ($x^2$), le dernier aussi ($9 = 3^2$), et celui du milieu vaut exactement le double produit ($2 \\times x \\times 3 = 6x$). C'est donc le carré d'une somme : $x^2 + 6x + 9 = (x + 3)^2$. Le dessin le confirme — les quatre morceaux forment un carré de côté $x + 3$. Contrôle en développant : $(x + 3)(x + 3) = x^2 + 3x + 3x + 9$. ✅",
+        "2 divise $2x^2$ et $6x$ ; $x$ aussi. Le plus grand facteur commun est donc $2x$. On divise chaque terme : $2x^2 \\div 2x = x$ et $6x \\div 2x = 3$. Donc $2x^2 + 6x = 2x(x + 3)$. ⚠️ Écrire $2(x^2 + 3x)$ est juste, mais incomplet : on peut encore sortir $x$. Contrôle : $2x \\times x + 2x \\times 3 = 2x^2 + 6x$. ✅",
     },
     {
       titre: "L'erreur miroir",
@@ -436,10 +406,10 @@ export const ficheFactorisation4e: FicheCoursData = {
       micros: ["litteral_facteur_commun", "litteral_factoriser_simple"],
     },
     {
-      question: "Factoriser : $x^2 - 25$.",
+      question: "Factoriser : $6x + 9$.",
       correction:
-        "$(x - 5)(x + 5)$. Deux termes séparés par un moins, tous deux des carrés ($25 = 5^2$) et aucun terme en $x$ : c'est une différence de deux carrés. Contrôle : $x^2 + 5x - 5x - 25 = x^2 - 25$. ✅",
-      micros: ["litteral_factoriser_identite"],
+        "$3(2x + 3)$. ⚠️ Le facteur commun n'est pas 6 : 6 ne divise pas 9. C'est 3, qui divise les deux : $6x \\div 3 = 2x$ et $9 \\div 3 = 3$. Contrôle : $3 \\times 2x + 3 \\times 3 = 6x + 9$. ✅",
+      micros: ["litteral_facteur_commun", "litteral_factoriser_simple"],
     },
     {
       question: "La factorisation $3x + 15 = 3(x + 15)$ est-elle correcte ?",
@@ -502,14 +472,13 @@ export const slidesFactorisation4e: ClasseSlide[] = [
     },
   },
   {
-    titre: "Les trois factorisations",
-    badge: "3 formules",
+    titre: "La factorisation de 4e",
+    badge: "1 formule",
     section: {
       type: "cartes",
       cartes: [
-        { titre: "ka + kb = k(a + b)", texte: "Le facteur commun : marche dès qu'il y en a un." },
-        { titre: "x² + 2ax + a² = (x + a)²", texte: "Trois termes, le premier et le dernier carrés, le milieu double." },
-        { titre: "x² − a² = (x − a)(x + a)", texte: "Deux carrés séparés par un moins, et pas de terme en x." },
+        { titre: "ka + kb = k(a + b)", texte: "Le facteur commun : il divise TOUS les termes." },
+        { titre: "2x² + 6x = 2x(x + 3)", texte: "Le facteur peut contenir la lettre : on prend le plus grand." },
       ],
     },
   },

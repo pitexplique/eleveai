@@ -294,157 +294,6 @@ export const factorisationBank: TutorBankItemV4[] = [
   // =========================
   // FACTORISER_IR
   // =========================
-  {
-    kind: "fixed",
-    id: "litteral_factoriser_identite_fixed_1",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "litteral_factorisation",
-    microId: "litteral_factoriser_identite",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Factoriser : x² + 6x + 9",
-    format: "qcm",
-    choices: ["(x + 3)²", "(x - 3)²", "(x - 3)(x + 3)", "x(x + 9)"],
-    expected: ["(x + 3)²"],
-    comparator: "mcq_exact",
-    hint: "9 = 3² et 6x = 2 × 3 × x.",
-    explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
-          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
-          ("x² + 6x + 9 = x² + 2 × x × 3 + 3² = (x + 3)².") +
-          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-    tags: ["litteral_factorisation", "identite_remarquable", "somme"],
-  },
-  {
-    kind: "fixed",
-    id: "litteral_factoriser_identite_fixed_2",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "litteral_factorisation",
-    microId: "litteral_factoriser_identite",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Factoriser : x² - 8x + 16",
-    format: "qcm",
-    choices: ["(x - 4)²", "(x + 4)²", "(x - 4)(x + 4)", "x(x - 16)"],
-    expected: ["(x - 4)²"],
-    comparator: "mcq_exact",
-    hint: "16 = 4² et -8x = -2 × 4 × x.",
-    explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
-          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
-          ("x² - 8x + 16 = x² - 2 × x × 4 + 4² = (x - 4)².") +
-          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-    tags: ["litteral_factorisation", "identite_remarquable", "difference"],
-  },
-  {
-    kind: "fixed",
-    id: "litteral_factoriser_identite_fixed_3",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "litteral_factorisation",
-    microId: "litteral_factoriser_identite",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Factoriser : x² - 25",
-    format: "qcm",
-    choices: ["(x - 5)(x + 5)", "(x - 5)²", "(x + 5)²", "x(x - 25)"],
-    expected: ["(x - 5)(x + 5)"],
-    comparator: "mcq_exact",
-    hint: "C’est une différence de deux carrés.",
-    explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
-          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
-          ("x² - 25 = x² - 5² = (x - 5)(x + 5).") +
-          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-    tags: ["litteral_factorisation", "difference_carres"],
-  },
-  {
-    kind: "template",
-    id: "litteral_factoriser_identite_tpl_somme_1",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "litteral_factorisation",
-    microId: "litteral_factoriser_identite",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Reconnais x² + 2ax + a².",
-    tags: ["litteral_factorisation", "identite_remarquable", "template"],
-    generate: () => {
-      const a = randomInt(2, 9);
-      const mid = 2 * a;
-      const square = a * a;
-
-      return {
-        text: `Factoriser : x² + ${mid}x + ${square}`,
-        format: "short",
-        expected: [`(x+${a})²`, `(x + ${a})²`, `(x+${a})^2`, `(x + ${a})^2`],
-        comparator: "contains_keyword",
-        explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
-          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
-          (`x² + ${mid}x + ${square} = x² + 2 × x × ${a} + ${a}² = (x + ${a})².`) +
-          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "litteral_factoriser_identite_tpl_difference_1",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "litteral_factorisation",
-    microId: "litteral_factoriser_identite",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Reconnais x² - 2ax + a².",
-    tags: ["litteral_factorisation", "identite_remarquable", "template"],
-    generate: () => {
-      const a = randomInt(2, 9);
-      const mid = 2 * a;
-      const square = a * a;
-
-      return {
-        text: `Factoriser : x² - ${mid}x + ${square}`,
-        format: "short",
-        expected: [`(x-${a})²`, `(x - ${a})²`, `(x-${a})^2`, `(x - ${a})^2`],
-        comparator: "contains_keyword",
-        explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
-          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
-          (`x² - ${mid}x + ${square} = x² - 2 × x × ${a} + ${a}² = (x - ${a})².`) +
-          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "litteral_factoriser_identite_tpl_carres_1",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "litteral_factorisation",
-    microId: "litteral_factoriser_identite",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Reconnais x² - a².",
-    tags: ["litteral_factorisation", "difference_carres", "template"],
-    generate: () => {
-      const a = randomInt(2, 12);
-      const square = a * a;
-
-      return {
-        text: `Factoriser : x² - ${square}`,
-        format: "short",
-        expected: [
-          `(x-${a})(x+${a})`,
-          `(x - ${a})(x + ${a})`,
-          `(x+${a})(x-${a})`,
-          `(x + ${a})(x - ${a})`,
-        ],
-        comparator: "contains_keyword",
-        explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
-          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
-          (`x² - ${square} = x² - ${a}² = (x - ${a})(x + ${a}).`) +
-          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-      };
-    },
-  },
 
   // =========================
   // FACTORISER_VERIFIER
@@ -524,26 +373,6 @@ export const factorisationBank: TutorBankItemV4[] = [
       };
     },
   },
-  {
-    kind: "fixed",
-    id: "litteral_factoriser_verifier_open_1",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "litteral_factorisation",
-    microId: "litteral_factoriser_verifier",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Explique comment vérifier que x² - 25 = (x - 5)(x + 5).",
-    format: "open",
-    expected: ["développer", "x²", "25"],
-    comparator: "contains_keyword",
-    hint: "Développe (x - 5)(x + 5).",
-    explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
-          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
-          ("On développe : (x - 5)(x + 5) = x² + 5x - 5x - 25 = x² - 25.") +
-          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-    tags: ["litteral_factorisation", "verifier", "open"],
-  },
 
   // =========================
   // FACTORISATION_DEFIS
@@ -568,32 +397,6 @@ export const factorisationBank: TutorBankItemV4[] = [
           ("Non. 5(x + 20) = 5x + 100. La bonne factorisation est 5(x + 4).") +
           "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
     tags: ["litteral_factorisation", "defi", "erreur"],
-  },
-  {
-    kind: "fixed",
-    id: "litteral_litteral_factorisation_defi_fixed_2",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "litteral_factorisation",
-    microId: "litteral_factorisation_defi",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Quelle méthode est la plus adaptée pour factoriser x² - 36 ?",
-    format: "qcm",
-    choices: [
-      "utiliser la différence de deux carrés",
-      "chercher seulement un facteur commun numérique",
-      "additionner x² et 36",
-      "développer avec la distributivité simple",
-    ],
-    expected: ["utiliser la différence de deux carrés"],
-    comparator: "mcq_exact",
-    hint: "36 est un carré parfait.",
-    explanation: "Définition : factoriser, c’est transformer une somme ou une différence en produit en faisant apparaître un facteur commun.\n\n" +
-          "Méthode : on cherche un facteur commun ou une forme connue, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
-          ("x² - 36 = x² - 6² = (x - 6)(x + 6).") +
-          "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
-    tags: ["litteral_factorisation", "defi", "choix_methode"],
   },
   {
     kind: "template",
@@ -800,154 +603,8 @@ export const factorisationBank: TutorBankItemV4[] = [
   },
 
   // ---------- FACTORISER_IR ----------
-  {
-    kind: "fixed",
-    id: "litteral_factoriser_identite_fixed_4",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "litteral_factorisation",
-    microId: "litteral_factoriser_identite",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Factoriser : $x^2 + 10x + 25$",
-    format: "qcm",
-    choices: ["$(x + 5)^2$", "$(x - 5)^2$", "$(x - 5)(x + 5)$", "$x(x + 10)$"],
-    expected: ["$(x + 5)^2$"],
-    comparator: "mcq_exact",
-    hint: "$25 = 5^2$ et $10x = 2 \\times 5 \\times x$.",
-    explanation:
-      "Définition : $a^2 + 2ab + b^2 = (a + b)^2$.\n\n" +
-      "Méthode : on reconnaît $b = 5$.\n\n" +
-      "Calcul : $x^2 + 10x + 25 = (x + 5)^2$.\n\n" +
-      "Conclusion : la forme factorisée est $(x + 5)^2$.",
-    tags: ["litteral_factorisation", "identite_remarquable", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "litteral_factoriser_identite_open_1",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "litteral_factorisation",
-    microId: "litteral_factoriser_identite",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Explique comment factoriser $x^2 - 49$.",
-    format: "open",
-    expected: ["différence", "49", "(x - 7)(x + 7)"],
-    comparator: "contains_keyword",
-    hint: "$49 = 7^2$ : c’est une différence de deux carrés.",
-    explanation:
-      "Définition : $a^2 - b^2 = (a - b)(a + b)$.\n\n" +
-      "Méthode : on reconnaît $49 = 7^2$.\n\n" +
-      "Calcul : $x^2 - 49 = (x - 7)(x + 7)$.\n\n" +
-      "Conclusion : la forme factorisée est $(x - 7)(x + 7)$.",
-    tags: ["litteral_factorisation", "difference_carres", "open"],
-  },
-  {
-    kind: "template",
-    id: "litteral_factoriser_identite_tpl_qcm_1",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "litteral_factorisation",
-    microId: "litteral_factoriser_identite",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Regarde le signe du milieu et le carré final.",
-    tags: ["litteral_factorisation", "identite_remarquable", "qcm", "template"],
-    generate: () => {
-      const a = randomInt(2, 9);
-      const mid = 2 * a;
-      const sq = a * a;
-      const mode = randomChoice(["somme", "difference", "carres"]);
-      const expr =
-        mode === "somme"
-          ? `x^2 + ${mid}x + ${sq}`
-          : mode === "difference"
-          ? `x^2 - ${mid}x + ${sq}`
-          : `x^2 - ${sq}`;
-      const correct =
-        mode === "somme"
-          ? `$(x + ${a})^2$`
-          : mode === "difference"
-          ? `$(x - ${a})^2$`
-          : `$(x - ${a})(x + ${a})$`;
-      return {
-        text: `Factoriser : $${expr}$`,
-        format: "qcm",
-        choices: shuffle([
-          `$(x + ${a})^2$`,
-          `$(x - ${a})^2$`,
-          `$(x - ${a})(x + ${a})$`,
-          `$x(x + ${a})$`,
-        ]),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : on reconnaît une identité remarquable à l’envers.\n\n" +
-          "Méthode : on regarde le signe du terme du milieu et le carré.\n\n" +
-          `Calcul : $${expr}$ se factorise en ${correct}.\n\n` +
-          `Conclusion : la forme factorisée est ${correct}.`,
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "litteral_factoriser_identite_tpl_carres_2",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "litteral_factorisation",
-    microId: "litteral_factoriser_identite",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Reconnais $x^2 - a^2$.",
-    tags: ["litteral_factorisation", "difference_carres", "qcm", "template"],
-    generate: () => {
-      const a = randomInt(2, 12);
-      const sq = a * a;
-      const correct = `$(x - ${a})(x + ${a})$`;
-      return {
-        text: `Factoriser : $x^2 - ${sq}$`,
-        format: "qcm",
-        choices: shuffle([
-          correct,
-          `$(x - ${a})^2$`,
-          `$(x + ${a})^2$`,
-          `$x(x - ${a})$`,
-        ]),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : $a^2 - b^2 = (a - b)(a + b)$.\n\n" +
-          `Méthode : on reconnaît $${sq} = ${a}^2$.\n\n` +
-          `Calcul : $x^2 - ${sq} = (x - ${a})(x + ${a})$.\n\n` +
-          `Conclusion : la forme factorisée est ${correct}.`,
-      };
-    },
-  },
 
   // ---------- FACTORISER_VERIFIER ----------
-  {
-    kind: "fixed",
-    id: "litteral_factoriser_verifier_fixed_3",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "litteral_factorisation",
-    microId: "litteral_factoriser_verifier",
-    difficulty: 3,
-    theme: "neutral",
-    text: "La factorisation $x^2 + 6x + 9 = (x + 3)^2$ est-elle correcte ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
-    comparator: "mcq_exact",
-    hint: "Développe $(x + 3)^2$.",
-    explanation:
-      "Définition : on vérifie une factorisation en développant.\n\n" +
-      "Méthode : on développe $(x + 3)^2$.\n\n" +
-      "Calcul : $(x + 3)^2 = x^2 + 6x + 9$.\n\n" +
-      "Conclusion : oui, la factorisation est correcte.",
-    tags: ["litteral_factorisation", "verifier", "identite", "qcm"],
-  },
   {
     kind: "fixed",
     id: "litteral_factoriser_verifier_fixed_4",
@@ -1054,28 +711,6 @@ export const factorisationBank: TutorBankItemV4[] = [
   // ---------- FACTORISATION_DEFIS ----------
   {
     kind: "fixed",
-    id: "litteral_factorisation_defi_fixed_3",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "litteral_factorisation",
-    microId: "litteral_factorisation_defi",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Factoriser : $x^2 - 1$",
-    format: "qcm",
-    choices: ["$(x - 1)(x + 1)$", "$(x - 1)^2$", "$(x + 1)^2$", "$x(x - 1)$"],
-    expected: ["$(x - 1)(x + 1)$"],
-    comparator: "mcq_exact",
-    hint: "$1 = 1^2$ : différence de deux carrés.",
-    explanation:
-      "Définition : $a^2 - b^2 = (a - b)(a + b)$.\n\n" +
-      "Méthode : on reconnaît $1 = 1^2$.\n\n" +
-      "Calcul : $x^2 - 1 = (x - 1)(x + 1)$.\n\n" +
-      "Conclusion : la forme factorisée est $(x - 1)(x + 1)$.",
-    tags: ["litteral_factorisation", "defi", "difference_carres", "qcm"],
-  },
-  {
-    kind: "fixed",
     id: "litteral_factorisation_defi_fixed_4",
     niveau: "4e",
     matiere: "maths",
@@ -1095,33 +730,6 @@ export const factorisationBank: TutorBankItemV4[] = [
       "Calcul : $2x^2 + 6x = 2x \\times x + 2x \\times 3 = 2x(x + 3)$.\n\n" +
       "Conclusion : la forme la plus factorisée est $2x(x + 3)$.",
     tags: ["litteral_factorisation", "defi", "facteur_double", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "litteral_factorisation_defi_fixed_5",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "litteral_factorisation",
-    microId: "litteral_factorisation_defi",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Quelle méthode est la plus adaptée pour factoriser $x^2 + 8x + 16$ ?",
-    format: "qcm",
-    choices: [
-      "le carré d’une somme",
-      "la différence de deux carrés",
-      "un simple facteur commun",
-      "le carré d’une différence",
-    ],
-    expected: ["le carré d’une somme"],
-    comparator: "mcq_exact",
-    hint: "$16 = 4^2$ et $8x = 2 \\times 4 \\times x$.",
-    explanation:
-      "Définition : $a^2 + 2ab + b^2 = (a + b)^2$.\n\n" +
-      "Méthode : on reconnaît la forme d’un carré d’une somme.\n\n" +
-      "Calcul : $x^2 + 8x + 16 = (x + 4)^2$.\n\n" +
-      "Conclusion : on utilise le carré d’une somme.",
-    tags: ["litteral_factorisation", "defi", "choix_methode", "qcm"],
   },
   {
     kind: "template",

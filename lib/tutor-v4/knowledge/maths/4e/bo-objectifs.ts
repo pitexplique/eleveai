@@ -431,7 +431,8 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     chapitre: "Utiliser le calcul littéral",
     objectif: "Factorisation de a² − b².",
     page: 132,
-    micros: ["litteral_factoriser_identite", "litteral_identite_reconnaitre", "litteral_identite_defi"],
+    micros: [],
+    note: "⛔ Décision de Frédéric, 30/09/2026 : la factorisation par une identité remarquable se fait en 3e (repères annuels), pas en 4e. La micro `litteral_factoriser_identite` a été retirée du coach de 4e et ses gabarits transférés en 3e (`litteral_identite`).",
   },
   {
     id: "4e-A-litteral-5",
