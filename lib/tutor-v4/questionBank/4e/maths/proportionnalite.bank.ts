@@ -18,6 +18,18 @@
  * - interpréter une évolution ;
  * - résoudre des problèmes contextualisés ;
  * - éviter les pièges classiques.
+ *
+ * ⛔ 30/09/2026 — LES DÉFIS DE POURCENTAGE ONT CHANGÉ DE MICRO. Sept items
+ * `prop_defi_*` (« + 20 % puis − 20 % », « augmenter de 30 %, c'est × 0,3 ? »…)
+ * étaient restés dans `prop_defi` (notion prop_proportionnalite) après la
+ * scission du 28/08, qui a envoyé les pourcentages dans prop_ratio_pourcentage.
+ * Un élève du chapitre « Proportionnalité » tombait donc sur des pourcentages
+ * au défi. Ils portent maintenant `microId: "prop_ratio_defi"` (« Défis sur
+ * les ratios et les pourcentages ») : leurs `id` n'ont pas changé, rien n'est
+ * supprimé.
+ * ⭐ 30/09/2026 — les gabarits tirent une SITUATION × une TOURNURE : les élèves
+ * de 4e de Frédéric voyaient revenir la même phrase (mesure :
+ * scripts/mesurer-squelettes-coach.ts).
  */
 
 import type {
@@ -78,6 +90,1423 @@ function tableauProportionnaliteCanvas(params: {
       showMissing: true,
       showGrid: true,
     },
+  };
+}
+
+/* =========================================================
+   SITUATIONS × TOURNURES — 30/09/2026
+   ---------------------------------------------------------
+   ⛔ POURQUOI. Les élèves de 4e de Frédéric : « des questions reviennent
+   souvent ». Les gabarits changeaient les NOMBRES mais gardaient la même
+   PHRASE, et l'élève reconnaît la phrase (mesuré : 8 à 10 squelettes par
+   micro, 13 à 18 répétitions sur 20 questions).
+   Chaque gabarit compose désormais une SITUATION (18 contextes, un seul
+   réunionnais par table) et une TOURNURE (3 à 6 façons de poser la même
+   question). Instrument : scripts/mesurer-squelettes-coach.ts 4e <notion>.
+   ⚠️ Un contexte ajouté doit rester plausible (un prix de baguette n'est pas
+   à 40 €) et ses phrases doivent se lire à la suite : `lien` est une
+   proposition sans majuscule ni point final, `demandeB` une question entière.
+   ========================================================= */
+
+/** Nombre écrit à la française (virgule décimale), pour le TEXTE. */
+function fr(n: number) {
+  return formatNumber(n).replace(".", ",");
+}
+
+/** Réponse attendue : un décimal est accepté avec point OU virgule. */
+function attendu(n: number) {
+  return Number.isInteger(n) ? [String(n)] : [formatNumber(n), fr(n)];
+}
+
+function cap(s: string) {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+/** Première lettre seulement : « Peinture (L) » → « peinture (L) », pas « (l) ». */
+function minuscule(s: string) {
+  return s.charAt(0).toLowerCase() + s.slice(1);
+}
+
+/** « que » + proposition, avec l'élision : « qu’en 3 h », « qu’un robinet ». */
+function que(s: string) {
+  return /^[aeiouyàâéèêîô]/i.test(s) ? `qu’${s}` : `que ${s}`;
+}
+
+/** « de » + groupe nominal : « du prix », « de la population », « de ce tarif ». */
+function deArt(g: string) {
+  return g.startsWith("le ") ? `du ${g.slice(3)}` : `de ${g}`;
+}
+
+/** « à » + groupe nominal : « au loyer », « à la facture ». */
+function aArt(g: string) {
+  return g.startsWith("le ") ? `au ${g.slice(3)}` : `à ${g}`;
+}
+
+function expl(definition: string, methode: string, calcul: string, conclusion: string) {
+  return `Définition : ${definition}\n\nMéthode : ${methode}\n\nCalcul : ${calcul}\n\nConclusion : ${conclusion}`;
+}
+
+const DEF_PROP =
+  "deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.";
+
+/** Une situation de proportionnalité : grandeur A (n) → grandeur B (m = n × k). */
+type SituationProp = {
+  /** Groupe nominal qui nomme la situation : « un robinet qui fuit ». */
+  titre: string;
+  /** Phrase d'introduction SANS hypothèse de proportionnalité (pour « reconnaître »). */
+  intro: string;
+  /** Un relevé court, après l'intro : « en 2 h, il parcourt 40 km ». */
+  couple: (n: number, m: number) => string;
+  /** La situation, proportionnelle par hypothèse. */
+  lien: (n: number, m: number) => string;
+  /** La même, données dans l'autre ordre. */
+  lien2: (n: number, m: number) => string;
+  /** Question qui demande la grandeur B pour n. */
+  demandeB: (n: number) => string;
+  /** Groupe nominal de la grandeur B pour n : « le prix de 7 kg de pommes ». */
+  valeurB: (n: number) => string;
+  /** Question qui demande la grandeur A pour m. */
+  demandeA: (m: number) => string;
+  /** La valeur pour une unité : « le prix d’un kilogramme de pommes ». */
+  unite: string;
+  uniteFem: boolean;
+  uB: string;
+  uA: string;
+  labelA: string;
+  labelB: string;
+  /** « de la masse (en kg) au prix (en €) ». */
+  passage: string;
+  qProp: string;
+  n: [number, number];
+  k: number[];
+  /** Écarts plausibles pour fabriquer une situation NON proportionnelle. */
+  ecart: number[];
+};
+
+const SITUATIONS: SituationProp[] = [
+  {
+    titre: "un achat de pommes au marché",
+    intro: "Au marché, on relève le prix des pommes",
+    couple: (n, m) => `${n} kg coûtent ${m} €`,
+    lien: (n, m) => `${n} kg de pommes coûtent ${m} €`,
+    lien2: (n, m) => `on paie ${m} € pour ${n} kg de pommes`,
+    demandeB: (n) => `Combien coûtent ${n} kg de pommes ?`,
+    valeurB: (n) => `le prix de ${n} kg de pommes`,
+    demandeA: (m) => `Quelle masse de pommes, en kg, peut-on acheter avec ${m} € ?`,
+    unite: "le prix d’un kilogramme de pommes",
+    uniteFem: false,
+    uB: "€",
+    uA: "kg",
+    labelA: "Masse de pommes (kg)",
+    labelB: "Prix (€)",
+    passage: "de la masse (en kg) au prix (en €)",
+    qProp: "Le prix payé est-il proportionnel à la masse de pommes ?",
+    n: [2, 9],
+    k: [2, 3, 4],
+    ecart: [1, 2, 3],
+  },
+  {
+    titre: "un cycliste sur une route de campagne",
+    intro: "On chronomètre un cycliste sur une longue route",
+    couple: (n, m) => `en ${n} h, il parcourt ${m} km`,
+    lien: (n, m) => `en ${n} h, un cycliste roulant à vitesse constante parcourt ${m} km`,
+    lien2: (n, m) => `un cycliste roulant à vitesse constante parcourt ${m} km en ${n} h`,
+    demandeB: (n) => `Quelle distance parcourt-il en ${n} h ?`,
+    valeurB: (n) => `la distance parcourue en ${n} h`,
+    demandeA: (m) => `Combien d’heures lui faut-il pour parcourir ${m} km ?`,
+    unite: "la distance parcourue en une heure",
+    uniteFem: true,
+    uB: "km",
+    uA: "h",
+    labelA: "Durée (h)",
+    labelB: "Distance (km)",
+    passage: "de la durée (en h) à la distance (en km)",
+    qProp: "La distance parcourue est-elle proportionnelle à la durée ?",
+    n: [2, 6],
+    k: [15, 18, 20, 24, 25],
+    ecart: [3, 5, 7],
+  },
+  {
+    titre: "une coureuse à l’entraînement",
+    intro: "Une coureuse note ses temps pendant un entraînement",
+    couple: (n, m) => `en ${n} min, elle parcourt ${m} m`,
+    lien: (n, m) => `à allure régulière, une coureuse parcourt ${m} m en ${n} min`,
+    lien2: (n, m) => `une coureuse, à allure régulière, met ${n} min pour parcourir ${m} m`,
+    demandeB: (n) => `Quelle distance, en mètres, parcourt-elle en ${n} min ?`,
+    valeurB: (n) => `la distance parcourue en ${n} min`,
+    demandeA: (m) => `Combien de minutes lui faut-il pour parcourir ${m} m ?`,
+    unite: "la distance parcourue en une minute",
+    uniteFem: true,
+    uB: "m",
+    uA: "min",
+    labelA: "Durée (min)",
+    labelB: "Distance (m)",
+    passage: "de la durée (en min) à la distance (en m)",
+    qProp: "La distance parcourue est-elle proportionnelle à la durée de course ?",
+    n: [3, 12],
+    k: [150, 180, 200, 220, 250],
+    ecart: [20, 30, 50],
+  },
+  {
+    titre: "une recette de crêpes",
+    intro: "Une famille note la farine utilisée pour ses crêpes",
+    couple: (n, m) => `pour ${n} personnes, il faut ${m} g de farine`,
+    lien: (n, m) => `pour ${n} personnes, une recette de crêpes demande ${m} g de farine`,
+    lien2: (n, m) => `une recette de crêpes utilise ${m} g de farine pour ${n} personnes`,
+    demandeB: (n) => `Quelle masse de farine faut-il pour ${n} personnes ?`,
+    valeurB: (n) => `la masse de farine nécessaire pour ${n} personnes`,
+    demandeA: (m) => `Pour combien de personnes suffisent ${m} g de farine ?`,
+    unite: "la masse de farine par personne",
+    uniteFem: true,
+    uB: "g",
+    uA: "personnes",
+    labelA: "Nombre de personnes",
+    labelB: "Farine (g)",
+    passage: "du nombre de personnes à la masse de farine (en g)",
+    qProp: "La masse de farine est-elle proportionnelle au nombre de personnes ?",
+    n: [2, 12],
+    k: [40, 50, 60, 75],
+    ecart: [10, 20, 30],
+  },
+  {
+    titre: "un train à grande vitesse",
+    intro: "Un voyageur note la distance parcourue par son train",
+    couple: (n, m) => `en ${n} h, le train a parcouru ${m} km`,
+    lien: (n, m) => `un train roulant à vitesse constante parcourt ${m} km en ${n} h`,
+    lien2: (n, m) => `en ${n} h, un train roulant à vitesse constante parcourt ${m} km`,
+    demandeB: (n) => `Quelle distance ce train parcourt-il en ${n} h ?`,
+    valeurB: (n) => `la distance parcourue par le train en ${n} h`,
+    demandeA: (m) => `Combien d’heures faut-il à ce train pour parcourir ${m} km ?`,
+    unite: "la distance parcourue par le train en une heure",
+    uniteFem: true,
+    uB: "km",
+    uA: "h",
+    labelA: "Durée du trajet (h)",
+    labelB: "Distance (km)",
+    passage: "de la durée du trajet (en h) à la distance (en km)",
+    qProp: "La distance parcourue par le train est-elle proportionnelle à la durée du trajet ?",
+    n: [2, 5],
+    k: [150, 200, 250, 300],
+    ecart: [20, 30, 40],
+  },
+  {
+    titre: "un robinet qui fuit",
+    intro: "On mesure l’eau perdue par un robinet qui fuit",
+    couple: (n, m) => `en ${n} jours, il perd ${m} L`,
+    lien: (n, m) => `un robinet qui fuit perd ${m} L d’eau en ${n} jours`,
+    lien2: (n, m) => `en ${n} jours, un robinet qui fuit perd ${m} L d’eau`,
+    demandeB: (n) => `Combien de litres d’eau perd-il en ${n} jours ?`,
+    valeurB: (n) => `le volume d’eau perdu en ${n} jours`,
+    demandeA: (m) => `En combien de jours perd-il ${m} L d’eau ?`,
+    unite: "le volume d’eau perdu en un jour",
+    uniteFem: false,
+    uB: "L",
+    uA: "jours",
+    labelA: "Durée (jours)",
+    labelB: "Eau perdue (L)",
+    passage: "de la durée (en jours) au volume d’eau perdu (en L)",
+    qProp: "Le volume d’eau perdu est-il proportionnel au nombre de jours ?",
+    n: [2, 10],
+    k: [8, 10, 12, 15, 20],
+    ecart: [2, 3, 5],
+  },
+  {
+    titre: "un radiateur électrique",
+    intro: "On relève la consommation d’un radiateur électrique",
+    couple: (n, m) => `en ${n} h, il consomme ${m} kWh`,
+    lien: (n, m) => `un radiateur électrique consomme ${m} kWh en ${n} h de fonctionnement`,
+    lien2: (n, m) => `en ${n} h de fonctionnement, un radiateur électrique consomme ${m} kWh`,
+    demandeB: (n) => `Combien de kWh consomme-t-il en ${n} h ?`,
+    valeurB: (n) => `l’énergie consommée en ${n} h`,
+    demandeA: (m) => `Pendant combien d’heures fonctionne-t-il avec ${m} kWh ?`,
+    unite: "l’énergie consommée en une heure",
+    uniteFem: true,
+    uB: "kWh",
+    uA: "h",
+    labelA: "Durée (h)",
+    labelB: "Énergie (kWh)",
+    passage: "de la durée (en h) à l’énergie consommée (en kWh)",
+    qProp: "L’énergie consommée est-elle proportionnelle à la durée de fonctionnement ?",
+    n: [2, 12],
+    k: [2, 3],
+    ecart: [1, 2],
+  },
+  {
+    titre: "un jardinier qui sème une pelouse",
+    intro: "Un jardinier note les graines utilisées pour semer du gazon",
+    couple: (n, m) => `pour ${n} m², il utilise ${m} g de graines`,
+    lien: (n, m) => `pour semer ${n} m² de pelouse, il faut ${m} g de graines`,
+    lien2: (n, m) => `un jardinier utilise ${m} g de graines pour semer ${n} m² de pelouse`,
+    demandeB: (n) => `Quelle masse de graines faut-il pour semer ${n} m² ?`,
+    valeurB: (n) => `la masse de graines pour ${n} m²`,
+    demandeA: (m) => `Quelle surface, en m², peut-on semer avec ${m} g de graines ?`,
+    unite: "la masse de graines pour un mètre carré",
+    uniteFem: true,
+    uB: "g",
+    uA: "m²",
+    labelA: "Surface (m²)",
+    labelB: "Graines (g)",
+    passage: "de la surface (en m²) à la masse de graines (en g)",
+    qProp: "La masse de graines est-elle proportionnelle à la surface semée ?",
+    n: [4, 20],
+    k: [25, 30, 35, 40],
+    ecart: [5, 10, 15],
+  },
+  {
+    titre: "des travaux de peinture",
+    intro: "Un bricoleur note la surface peinte avec ses pots de peinture",
+    couple: (n, m) => `avec ${n} L, il peint ${m} m²`,
+    lien: (n, m) => `${n} L de peinture permettent de couvrir ${m} m² de mur`,
+    lien2: (n, m) => `pour couvrir ${m} m² de mur, il faut ${n} L de peinture`,
+    demandeB: (n) => `Quelle surface de mur peut-on couvrir avec ${n} L de peinture ?`,
+    valeurB: (n) => `la surface couverte avec ${n} L de peinture`,
+    demandeA: (m) => `Combien de litres de peinture faut-il pour couvrir ${m} m² ?`,
+    unite: "la surface couverte par un litre de peinture",
+    uniteFem: true,
+    uB: "m²",
+    uA: "L",
+    labelA: "Peinture (L)",
+    labelB: "Surface (m²)",
+    passage: "du volume de peinture (en L) à la surface couverte (en m²)",
+    qProp: "La surface peinte est-elle proportionnelle au volume de peinture ?",
+    n: [2, 8],
+    k: [8, 10, 12],
+    ecart: [2, 3, 4],
+  },
+  {
+    titre: "un job d’été payé à l’heure",
+    intro: "Une étudiante note ce qu’elle gagne à son job d’été",
+    couple: (n, m) => `pour ${n} h, elle gagne ${m} €`,
+    lien: (n, m) => `pour ${n} h de travail, une étudiante gagne ${m} €`,
+    lien2: (n, m) => `une étudiante gagne ${m} € en travaillant ${n} h`,
+    demandeB: (n) => `Combien gagne-t-elle pour ${n} h de travail ?`,
+    valeurB: (n) => `le salaire pour ${n} h de travail`,
+    demandeA: (m) => `Combien d’heures doit-elle travailler pour gagner ${m} € ?`,
+    unite: "le salaire pour une heure de travail",
+    uniteFem: false,
+    uB: "€",
+    uA: "h",
+    labelA: "Durée de travail (h)",
+    labelB: "Salaire (€)",
+    passage: "de la durée de travail (en h) au salaire (en €)",
+    qProp: "Le salaire est-il proportionnel à la durée de travail ?",
+    n: [3, 20],
+    k: [12, 13, 14, 15],
+    ecart: [3, 5, 8],
+  },
+  {
+    titre: "un métronome",
+    intro: "Une musicienne compte les battements de son métronome",
+    couple: (n, m) => `en ${n} minutes, il bat ${m} fois`,
+    lien: (n, m) => `un métronome bat ${m} fois en ${n} minutes`,
+    lien2: (n, m) => `en ${n} minutes, un métronome bat ${m} fois`,
+    demandeB: (n) => `Combien de fois bat-il en ${n} minutes ?`,
+    valeurB: (n) => `le nombre de battements en ${n} minutes`,
+    demandeA: (m) => `En combien de minutes bat-il ${m} fois ?`,
+    unite: "le nombre de battements par minute",
+    uniteFem: false,
+    uB: "battements",
+    uA: "minutes",
+    labelA: "Durée (min)",
+    labelB: "Battements",
+    passage: "de la durée (en min) au nombre de battements",
+    qProp: "Le nombre de battements est-il proportionnel à la durée ?",
+    n: [2, 8],
+    k: [60, 80, 90, 100, 120],
+    ecart: [5, 10, 15],
+  },
+  {
+    titre: "une imprimante du CDI",
+    intro: "Au CDI, on chronomètre une imprimante",
+    couple: (n, m) => `en ${n} minutes, elle imprime ${m} pages`,
+    lien: (n, m) => `une imprimante imprime ${m} pages en ${n} minutes`,
+    lien2: (n, m) => `en ${n} minutes, une imprimante imprime ${m} pages`,
+    demandeB: (n) => `Combien de pages imprime-t-elle en ${n} minutes ?`,
+    valeurB: (n) => `le nombre de pages imprimées en ${n} minutes`,
+    demandeA: (m) => `Combien de minutes lui faut-il pour imprimer ${m} pages ?`,
+    unite: "le nombre de pages imprimées en une minute",
+    uniteFem: false,
+    uB: "pages",
+    uA: "minutes",
+    labelA: "Durée (min)",
+    labelB: "Pages imprimées",
+    passage: "de la durée (en min) au nombre de pages",
+    qProp: "Le nombre de pages imprimées est-il proportionnel à la durée ?",
+    n: [2, 10],
+    k: [12, 15, 20, 25],
+    ecart: [2, 3, 5],
+  },
+  {
+    titre: "un club de basket qui achète des ballons",
+    intro: "Un club de basket compare ses factures de ballons",
+    couple: (n, m) => `${n} ballons coûtent ${m} €`,
+    lien: (n, m) => `un club de basket paie ${m} € pour ${n} ballons identiques`,
+    lien2: (n, m) => `${n} ballons de basket identiques coûtent ${m} €`,
+    demandeB: (n) => `Combien coûtent ${n} de ces ballons ?`,
+    valeurB: (n) => `le prix de ${n} ballons`,
+    demandeA: (m) => `Combien de ballons peut-on acheter avec ${m} € ?`,
+    unite: "le prix d’un ballon",
+    uniteFem: false,
+    uB: "€",
+    uA: "ballons",
+    labelA: "Nombre de ballons",
+    labelB: "Prix (€)",
+    passage: "du nombre de ballons au prix (en €)",
+    qProp: "Le prix payé est-il proportionnel au nombre de ballons ?",
+    n: [2, 12],
+    k: [15, 18, 20, 25],
+    ecart: [2, 5, 8],
+  },
+  {
+    titre: "un séjour en auberge de jeunesse",
+    intro: "Des randonneurs comparent le prix de leurs nuits en auberge de jeunesse",
+    couple: (n, m) => `${n} nuits coûtent ${m} €`,
+    lien: (n, m) => `dans une auberge de jeunesse, ${n} nuits coûtent ${m} €`,
+    lien2: (n, m) => `un séjour de ${n} nuits dans une auberge de jeunesse coûte ${m} €`,
+    demandeB: (n) => `Combien coûtent ${n} nuits ?`,
+    valeurB: (n) => `le prix de ${n} nuits`,
+    demandeA: (m) => `Combien de nuits peut-on payer avec ${m} € ?`,
+    unite: "le prix d’une nuit",
+    uniteFem: false,
+    uB: "€",
+    uA: "nuits",
+    labelA: "Nombre de nuits",
+    labelB: "Prix (€)",
+    passage: "du nombre de nuits au prix (en €)",
+    qProp: "Le prix payé est-il proportionnel au nombre de nuits ?",
+    n: [2, 10],
+    k: [22, 25, 28, 30],
+    ecart: [3, 5, 10],
+  },
+  {
+    titre: "des letchis au marché de Saint-Pierre",
+    intro: "Au marché de Saint-Pierre, on relève le prix des letchis",
+    couple: (n, m) => `${n} kg coûtent ${m} €`,
+    lien: (n, m) => `au marché de Saint-Pierre, ${n} kg de letchis coûtent ${m} €`,
+    lien2: (n, m) => `un marchand de Saint-Pierre vend ${n} kg de letchis pour ${m} €`,
+    demandeB: (n) => `Combien coûtent ${n} kg de letchis ?`,
+    valeurB: (n) => `le prix de ${n} kg de letchis`,
+    demandeA: (m) => `Quelle masse de letchis, en kg, peut-on acheter avec ${m} € ?`,
+    unite: "le prix d’un kilogramme de letchis",
+    uniteFem: false,
+    uB: "€",
+    uA: "kg",
+    labelA: "Masse de letchis (kg)",
+    labelB: "Prix (€)",
+    passage: "de la masse (en kg) au prix (en €)",
+    qProp: "Le prix payé est-il proportionnel à la masse de letchis ?",
+    n: [2, 8],
+    k: [4, 5, 6, 8],
+    ecart: [1, 2, 3],
+  },
+  {
+    titre: "la préparation d’un jus d’orange",
+    intro: "Au self, on note le nombre d’oranges pressées pour faire du jus",
+    couple: (n, m) => `pour ${n} L de jus, il faut ${m} oranges`,
+    lien: (n, m) => `pour préparer ${n} L de jus, il faut presser ${m} oranges`,
+    lien2: (n, m) => `avec ${m} oranges pressées, on obtient ${n} L de jus`,
+    demandeB: (n) => `Combien d’oranges faut-il presser pour obtenir ${n} L de jus ?`,
+    valeurB: (n) => `le nombre d’oranges nécessaires pour ${n} L de jus`,
+    demandeA: (m) => `Combien de litres de jus obtient-on avec ${m} oranges ?`,
+    unite: "le nombre d’oranges pour un litre de jus",
+    uniteFem: false,
+    uB: "oranges",
+    uA: "L",
+    labelA: "Jus (L)",
+    labelB: "Oranges",
+    passage: "du volume de jus (en L) au nombre d’oranges",
+    qProp: "Le nombre d’oranges est-il proportionnel au volume de jus ?",
+    n: [2, 8],
+    k: [8, 10, 12],
+    ecart: [2, 3, 4],
+  },
+  {
+    titre: "un maçon sur un chantier",
+    intro: "Sur un chantier, on compte les briques posées par un maçon",
+    couple: (n, m) => `en ${n} heures, il pose ${m} briques`,
+    lien: (n, m) => `un maçon pose ${m} briques en ${n} heures`,
+    lien2: (n, m) => `en ${n} heures, un maçon pose ${m} briques`,
+    demandeB: (n) => `Combien de briques pose-t-il en ${n} heures ?`,
+    valeurB: (n) => `le nombre de briques posées en ${n} heures`,
+    demandeA: (m) => `Combien d’heures lui faut-il pour poser ${m} briques ?`,
+    unite: "le nombre de briques posées en une heure",
+    uniteFem: false,
+    uB: "briques",
+    uA: "heures",
+    labelA: "Durée (h)",
+    labelB: "Briques posées",
+    passage: "de la durée (en h) au nombre de briques",
+    qProp: "Le nombre de briques posées est-il proportionnel à la durée de travail ?",
+    n: [2, 8],
+    k: [40, 50, 60],
+    ecart: [5, 10, 15],
+  },
+  {
+    titre: "un escargot observé en SVT",
+    intro: "En SVT, on observe un escargot qui avance sur une vitre",
+    couple: (n, m) => `en ${n} minutes, il avance de ${m} cm`,
+    lien: (n, m) => `un escargot avançant à vitesse constante parcourt ${m} cm en ${n} minutes`,
+    lien2: (n, m) => `en ${n} minutes, un escargot avançant à vitesse constante parcourt ${m} cm`,
+    demandeB: (n) => `Quelle distance parcourt-il en ${n} minutes ?`,
+    valeurB: (n) => `la distance parcourue en ${n} minutes`,
+    demandeA: (m) => `Combien de minutes lui faut-il pour parcourir ${m} cm ?`,
+    unite: "la distance parcourue en une minute",
+    uniteFem: true,
+    uB: "cm",
+    uA: "minutes",
+    labelA: "Durée (min)",
+    labelB: "Distance (cm)",
+    passage: "de la durée (en min) à la distance (en cm)",
+    qProp: "La distance parcourue est-elle proportionnelle à la durée ?",
+    n: [2, 10],
+    k: [5, 6, 8],
+    ecart: [1, 2, 3],
+  },
+];
+
+/**
+ * Deux valeurs de la grandeur A et le coefficient.
+ * niveau 1 : n2 = 2 × n1 ou 3 × n1 ; niveau 2 : quelconques ;
+ * niveau 3 : rapport NON entier entre les colonnes (2j → 3j ou 5j).
+ */
+function tirerPaire(s: SituationProp, niveau: 1 | 2 | 3) {
+  const [lo, hi] = s.n;
+  const k = randomChoice(s.k);
+  let n1: number;
+  let n2: number;
+  if (niveau === 1) {
+    const f = randomChoice([2, 3]);
+    n1 = randomInt(lo, Math.max(lo, Math.floor(hi / f)));
+    n2 = n1 * f;
+  } else if (niveau === 3) {
+    const r = randomChoice([3, 5]);
+    const jMin = Math.max(1, Math.ceil(lo / 2));
+    const j = randomInt(jMin, Math.max(jMin, Math.floor(hi / r)));
+    n1 = 2 * j;
+    n2 = r * j;
+  } else {
+    n1 = randomInt(lo, hi);
+    do {
+      n2 = randomInt(lo, hi);
+    } while (n2 === n1);
+  }
+  return { k, n1, n2, m1: n1 * k, m2: n2 * k };
+}
+
+const ENONCES_TABLEAU = [
+  "complète ce tableau de proportionnalité.",
+  "quelle valeur manque dans ce tableau de proportionnalité ?",
+  "calcule la case vide de ce tableau de proportionnalité.",
+];
+
+/** Quatrième proportionnelle : on donne un couple, on demande B (ou A). */
+function genQuatrieme(niveau: 1 | 2 | 3) {
+  const s = randomChoice(SITUATIONS);
+  const { k, n1, n2, m1, m2 } = tirerPaire(s, niveau);
+  const t = randomInt(1, 6);
+  const inverse = t >= 5;
+  let text: string;
+  let canvas: TableauProportionnaliteCanvasData | undefined;
+  if (t === 1) text = `${cap(s.lien(n1, m1))}. ${s.demandeB(n2)}`;
+  else if (t === 2) text = `${cap(s.lien2(n1, m1))}. ${s.demandeB(n2)}`;
+  else if (t === 3) text = `Sachant ${que(s.lien(n1, m1))}, calcule ${s.valeurB(n2)}.`;
+  else if (t === 4) {
+    text = `${cap(s.titre)} : les deux grandeurs sont proportionnelles. ${cap(randomChoice(ENONCES_TABLEAU))}`;
+    canvas = tableauProportionnaliteCanvas({
+      rowLabels: [s.labelA, s.labelB],
+      values: [
+        [String(n1), String(n2)],
+        [String(m1), "?"],
+      ],
+      missing: [{ row: 1, col: 1 }],
+      highlightedCells: [{ row: 1, col: 1 }],
+    });
+  } else if (t === 5) text = `${cap(s.lien(n1, m1))}. ${s.demandeA(m2)}`;
+  else text = `${cap(s.lien2(n1, m1))}. ${s.demandeA(m2)}`;
+
+  const rep = inverse ? n2 : m2;
+  return {
+    text,
+    format: "short" as const,
+    expected: attendu(rep),
+    comparator: "number_equal" as const,
+    explanation: inverse
+      ? expl(
+          DEF_PROP,
+          `on passe par l’unité : ${s.unite} vaut ${m1} ÷ ${n1} = ${k} ${s.uB}.`,
+          `${m2} ÷ ${k} = ${n2}.`,
+          `la réponse est ${n2} ${s.uA}.`,
+        )
+      : expl(
+          DEF_PROP,
+          `on passe par l’unité : ${s.unite} vaut ${m1} ÷ ${n1} = ${k} ${s.uB} (ou produit en croix : ${m1} × ${n2} ÷ ${n1}).`,
+          `${n2} × ${k} = ${m2}.`,
+          `${s.valeurB(n2)} est de ${m2} ${s.uB}.`,
+        ),
+    ...(canvas ? { canvas } : {}),
+  };
+}
+
+/** Compléter un tableau de proportionnalité (canvas ou tableau décrit). */
+function genTableau(niveau: 1 | 2 | 3) {
+  const s = randomChoice(SITUATIONS);
+  const { k, n1, n2, m1, m2 } = tirerPaire(s, niveau);
+  // niveau 1 : la case vide est toujours en bas ; ensuite, une fois sur deux en haut.
+  const enHaut = niveau > 1 && Math.random() < 0.5;
+  const avecCanvas = Math.random() < 0.5;
+  let text: string;
+  let canvas: TableauProportionnaliteCanvasData | undefined;
+  if (avecCanvas) {
+    text = `${cap(s.titre)} : ${randomChoice(ENONCES_TABLEAU)}`;
+    canvas = tableauProportionnaliteCanvas({
+      rowLabels: [s.labelA, s.labelB],
+      values: enHaut
+        ? [
+            [String(n1), "?"],
+            [String(m1), String(m2)],
+          ]
+        : [
+            [String(n1), String(n2)],
+            [String(m1), "?"],
+          ],
+      missing: [enHaut ? { row: 0, col: 1 } : { row: 1, col: 1 }],
+      highlightedCells: [enHaut ? { row: 0, col: 1 } : { row: 1, col: 1 }],
+    });
+  } else {
+    text = enHaut
+      ? `Tableau de proportionnalité (${s.titre}) — ${s.labelA} : ${n1} et ? ; ${s.labelB} : ${m1} et ${m2}. Quelle est la valeur manquante ?`
+      : `Tableau de proportionnalité (${s.titre}) — ${s.labelA} : ${n1} et ${n2} ; ${s.labelB} : ${m1} et ?. Quelle est la valeur manquante ?`;
+  }
+  const rep = enHaut ? n2 : m2;
+  return {
+    text,
+    format: "short" as const,
+    expected: attendu(rep),
+    comparator: "number_equal" as const,
+    explanation: expl(
+      "dans un tableau de proportionnalité, on passe de la 1re ligne à la 2e en multipliant toujours par le même coefficient.",
+      `coefficient = ${m1} ÷ ${n1} = ${k}.`,
+      enHaut ? `on remonte en divisant : ${m2} ÷ ${k} = ${n2}.` : `${n2} × ${k} = ${m2}.`,
+      `la valeur manquante est ${rep}.`,
+    ),
+    ...(canvas ? { canvas } : {}),
+  };
+}
+
+/** Coefficient de proportionnalité (valeur pour une unité), ou son usage. */
+function genCoeff(niveau: 1 | 2 | 3) {
+  const s = randomChoice(SITUATIONS);
+  const k = randomChoice(s.k);
+  const [lo, hi] = s.n;
+  const n = niveau === 1 ? randomInt(lo, Math.min(hi, lo + 4)) : randomInt(lo, hi);
+  const m = n * k;
+  const t = randomInt(1, niveau === 3 ? 5 : 4);
+  let text: string;
+  if (t === 1) text = `${cap(s.lien(n, m))}. ${s.uniteFem ? "Quelle" : "Quel"} est ${s.unite} ?`;
+  else if (t === 2) text = `${cap(s.lien2(n, m))}. Calcule ${s.unite}.`;
+  else if (t === 3)
+    text = `${cap(s.titre)} — dans un tableau de proportionnalité, ${s.labelA} : ${n} ; ${s.labelB} : ${m}. Par quel nombre multiplie-t-on la première ligne pour obtenir la seconde ?`;
+  else if (t === 4)
+    text = `${cap(s.lien(n, m))}. Quel coefficient de proportionnalité permet de passer ${s.passage} ?`;
+  else text = `${cap(s.titre)} : ${s.unite} est de ${k} ${s.uB}. Calcule ${s.valeurB(n)}.`;
+
+  if (t === 5) {
+    return {
+      text,
+      format: "short" as const,
+      expected: attendu(m),
+      comparator: "number_equal" as const,
+      explanation: expl(
+        DEF_PROP,
+        `le coefficient est ${k} : on multiplie la première grandeur par ${k}.`,
+        `${n} × ${k} = ${m}.`,
+        `${s.valeurB(n)} est de ${m} ${s.uB}.`,
+      ),
+    };
+  }
+  return {
+    text,
+    format: "short" as const,
+    expected: attendu(k),
+    comparator: "number_equal" as const,
+    explanation: expl(
+      DEF_PROP,
+      "le coefficient s’obtient en divisant la seconde grandeur par la première.",
+      `${m} ÷ ${n} = ${k}.`,
+      `le coefficient de proportionnalité est ${k} : ${s.unite} est de ${k} ${s.uB}.`,
+    ),
+  };
+}
+
+function rapportTexte(m: number, n: number) {
+  const r = m / n;
+  const exact = Number.isInteger(Math.round(r * 100 * 1e6) / 1e6);
+  return `${m} ÷ ${n} ${exact ? "=" : "≈"} ${fr(Math.round(r * 100) / 100)}`;
+}
+
+/** Reconnaître une situation de proportionnalité (oui / non). */
+function genReconnaitre(niveau: 1 | 2 | 3) {
+  const s = randomChoice(SITUATIONS);
+  const prop = Math.random() < 0.5;
+  const { k, n1, n2 } = tirerPaire(s, niveau === 1 ? 1 : 2);
+  const ns = [n1, n2];
+  if (niveau === 3) {
+    let n3: number;
+    do {
+      n3 = randomInt(s.n[0], s.n[1]);
+    } while (ns.includes(n3));
+    ns.push(n3);
+  }
+  const ms = ns.map((n) => n * k);
+  if (!prop) {
+    // on fausse la 2e (ou la 3e) valeur d'un écart plausible
+    const i = randomInt(1, ns.length - 1);
+    const e = randomChoice(s.ecart) * (Math.random() < 0.5 && ms[i] > 2 * s.ecart[s.ecart.length - 1] ? -1 : 1);
+    ms[i] += e;
+  }
+  const couples = ns.map((n, i) => s.couple(n, ms[i]));
+  const liste = couples.length === 2 ? `${couples[0]} et ${couples[1]}` : `${couples[0]}, ${couples[1]} et ${couples[2]}`;
+  const t = randomInt(1, 4);
+  let text: string;
+  if (t === 1) text = `${s.intro} : ${liste}. Est-ce une situation de proportionnalité ?`;
+  else if (t === 2) text = `${s.intro} : ${couples.join(" ; ")}. ${s.qProp}`;
+  else if (t === 3)
+    text = `${cap(s.titre)} — tableau : ${s.labelA} : ${ns.join(" ; ")} — ${s.labelB} : ${ms.join(" ; ")}. Ce tableau est-il un tableau de proportionnalité ?`;
+  else
+    text = `${s.intro}. Relevés : ${couples.join(" ; ")}. Ces relevés traduisent-ils une situation de proportionnalité ?`;
+
+  const calculs = ns.map((n, i) => rapportTexte(ms[i], n)).join(" ; ");
+  return {
+    text,
+    format: "qcm" as const,
+    choices: ["oui", "non"],
+    expected: [prop ? "oui" : "non"],
+    comparator: "mcq_exact" as const,
+    explanation: expl(
+      DEF_PROP,
+      `on calcule le quotient ${minuscule(s.labelB)} ÷ ${minuscule(s.labelA)} pour chaque relevé.`,
+      `${calculs}.`,
+      prop
+        ? `le quotient vaut toujours ${k} : la situation est proportionnelle.`
+        : "les quotients ne sont pas tous égaux : la situation n’est pas proportionnelle.",
+    ),
+  };
+}
+
+/** Problèmes : produit en croix, retour à la grandeur A, différence, somme. */
+function genProbleme(niveau: 3 | 4) {
+  const s = randomChoice(SITUATIONS);
+  const t = randomInt(1, 4);
+  if (niveau === 3 || t <= 2) {
+    const { k, n1, n2, m1, m2 } = tirerPaire(s, niveau === 3 ? (t % 2 ? 2 : 3) : 3);
+    const inverse = niveau === 4 ? t === 2 : t === 4;
+    let text: string;
+    if (niveau === 3) {
+      if (t === 1) text = `${cap(s.lien(n1, m1))}. ${s.demandeB(n2)}`;
+      else if (t === 2) text = `${cap(s.lien2(n1, m1))}. ${s.demandeB(n2)}`;
+      else if (t === 3) text = `Sachant ${que(s.lien2(n1, m1))}, calcule ${s.valeurB(n2)}.`;
+      else text = `${cap(s.lien(n1, m1))}. ${s.demandeA(m2)}`;
+    } else {
+      text = t === 1 ? `Sachant ${que(s.lien(n1, m1))}, calcule ${s.valeurB(n2)}.` : `${cap(s.lien2(n1, m1))}. ${s.demandeA(m2)}`;
+    }
+    const rep = inverse ? n2 : m2;
+    return {
+      text,
+      format: "short" as const,
+      expected: attendu(rep),
+      comparator: "number_equal" as const,
+      explanation: expl(
+        DEF_PROP,
+        `${s.unite} vaut ${m1} ÷ ${n1} = ${k} ${s.uB}.`,
+        inverse ? `${m2} ÷ ${k} = ${n2}.` : `${n2} × ${k} = ${m2} (produit en croix : ${m1} × ${n2} ÷ ${n1} = ${m2}).`,
+        inverse ? `la réponse est ${n2} ${s.uA}.` : `${s.valeurB(n2)} est de ${m2} ${s.uB}.`,
+      ),
+    };
+  }
+  // niveau 4 : deux calculs enchaînés
+  const k = randomChoice(s.k);
+  const [lo, hi] = s.n;
+  const n1 = randomInt(lo, hi);
+  let n2: number;
+  let n3: number;
+  do {
+    n2 = randomInt(lo, hi);
+    n3 = randomInt(lo, hi);
+  } while (n2 === n3 || n2 === n1 || n3 === n1);
+  if (n2 > n3) [n2, n3] = [n3, n2];
+  const m1 = n1 * k;
+  const m2 = n2 * k;
+  const m3 = n3 * k;
+  if (t === 3) {
+    return {
+      text: `${cap(s.lien(n1, m1))}. Calcule la différence entre ${s.valeurB(n3)} et ${s.valeurB(n2)}.`,
+      format: "short" as const,
+      expected: attendu(m3 - m2),
+      comparator: "number_equal" as const,
+      explanation: expl(
+        DEF_PROP,
+        `${s.unite} vaut ${m1} ÷ ${n1} = ${k} ${s.uB}.`,
+        `${n3} × ${k} = ${m3} et ${n2} × ${k} = ${m2}, donc ${m3} − ${m2} = ${m3 - m2}.`,
+        `la différence est de ${m3 - m2} ${s.uB}.`,
+      ),
+    };
+  }
+  return {
+    text: `${cap(s.lien2(n1, m1))}. Calcule ${s.valeurB(n2)}, puis ${s.valeurB(n3)}, et donne la somme des deux résultats.`,
+    format: "short" as const,
+    expected: attendu(m2 + m3),
+    comparator: "number_equal" as const,
+    explanation: expl(
+      DEF_PROP,
+      `${s.unite} vaut ${m1} ÷ ${n1} = ${k} ${s.uB}.`,
+      `${n2} × ${k} = ${m2} et ${n3} × ${k} = ${m3}, donc ${m2} + ${m3} = ${m2 + m3}.`,
+      `la somme est de ${m2 + m3} ${s.uB}.`,
+    ),
+  };
+}
+
+const ELEVES: Array<[string, "il" | "elle"]> = [
+  ["Léo", "il"],
+  ["Inès", "elle"],
+  ["Sami", "il"],
+  ["Chloé", "elle"],
+  ["Noah", "il"],
+  ["Maëlle", "elle"],
+];
+
+/** Défi : un élève affirme un résultat ; a-t-il raison ? */
+function genAffirmation(niveau: 2 | 3) {
+  const s = randomChoice(SITUATIONS);
+  let { k, n1, n2, m1, m2 } = tirerPaire(s, niveau);
+  if (n2 < n1) {
+    [n1, n2] = [n2, n1];
+    [m1, m2] = [m2, m1];
+  }
+  const [nom, pron] = randomChoice(ELEVES);
+  const r = randomInt(1, 4);
+  let valeur: number;
+  let raison: string;
+  if (r === 1) {
+    valeur = m1 + (n2 - n1);
+    raison = `on passe de ${n1} à ${n2} en ajoutant ${n2 - n1}, donc ${pron} ajoute aussi ${n2 - n1} à ${m1}`;
+  } else if (r === 2) {
+    valeur = m1 * n2;
+    raison = `${pron} multiplie ${m1} par ${n2}`;
+  } else if (r === 3) {
+    valeur = m2;
+    raison = `${pron} calcule d’abord ${s.unite}, puis multiplie par ${n2}`;
+  } else {
+    valeur = m2;
+    raison = `${pron} fait un produit en croix : ${m1} × ${n2} ÷ ${n1}`;
+  }
+  const juste = valeur === m2;
+  return {
+    text: `${cap(s.lien(n1, m1))}. ${nom} affirme que ${s.valeurB(n2)} est de ${valeur} ${s.uB}, car ${raison}. ${pron === "il" ? "A-t-il" : "A-t-elle"} raison ?`,
+    format: "qcm" as const,
+    choices: ["oui", "non"],
+    expected: [juste ? "oui" : "non"],
+    comparator: "mcq_exact" as const,
+    explanation: expl(
+      DEF_PROP,
+      r === 1
+        ? `en proportionnalité, on multiplie, on n’ajoute pas : ${s.unite} vaut ${m1} ÷ ${n1} = ${k} ${s.uB}.`
+        : r === 2
+          ? `${m1} ${s.uB} correspondent à ${n1} ${s.uA}, pas à 1 : il faut d’abord diviser par ${n1}. ${cap(s.unite)} vaut ${m1} ÷ ${n1} = ${k} ${s.uB}.`
+          : `on passe par l’unité : ${s.unite} vaut ${m1} ÷ ${n1} = ${k} ${s.uB}.`,
+      `${n2} × ${k} = ${m2}.`,
+      juste
+        ? `${nom} a raison : ${s.valeurB(n2)} est bien de ${m2} ${s.uB}.`
+        : `${nom} a tort : ${s.valeurB(n2)} est de ${m2} ${s.uB}, pas ${valeur} ${s.uB}.`,
+    ),
+  };
+}
+
+/** Défi : comparer deux situations par leur valeur pour une unité. */
+function genComparer(niveau: 2 | 3) {
+  const s = randomChoice(SITUATIONS);
+  const kA = randomChoice(s.k);
+  const pareil = Math.random() < 0.2;
+  const kB = pareil ? kA : randomChoice(s.k.filter((x) => x !== kA));
+  const [lo, hi] = s.n;
+  const nA = randomInt(lo, hi);
+  let nB: number;
+  do {
+    nB = niveau === 3 ? randomInt(lo, hi) : randomInt(lo, Math.min(hi, lo + 5));
+  } while (nB === nA);
+  const mA = nA * kA;
+  const mB = nB * kB;
+  const plusGrand = Math.random() < 0.5;
+  const adj = s.uniteFem ? (plusGrand ? "la plus grande" : "la plus petite") : plusGrand ? "le plus grand" : "le plus petit";
+  const correct = kA === kB
+    ? "c’est pareil dans les deux"
+    : (plusGrand ? kA > kB : kA < kB)
+      ? "situation A"
+      : "situation B";
+  return {
+    text: `Situation A : ${s.lien(nA, mA)}. Situation B : ${s.lien(nB, mB)}. Dans quelle situation ${s.unite} est-${s.uniteFem ? "elle" : "il"} ${adj} ?`,
+    format: "qcm" as const,
+    choices: ["situation A", "situation B", "c’est pareil dans les deux"],
+    expected: [correct],
+    comparator: "mcq_exact" as const,
+    explanation: expl(
+      "pour comparer deux situations, on ramène chacune à une unité (on calcule le coefficient de chacune).",
+      `on divise la seconde grandeur par la première dans chaque situation.`,
+      `situation A : ${mA} ÷ ${nA} = ${kA} ${s.uB} ; situation B : ${mB} ÷ ${nB} = ${kB} ${s.uB}.`,
+      kA === kB ? "les deux valeurs sont égales : c’est pareil dans les deux." : `la réponse est : ${correct}.`,
+    ),
+  };
+}
+
+/* ---------- Pourcentages et évolutions ---------- */
+
+type SituationEvol = {
+  /** Phrase d'état (avec majuscule, sans point) : « Un village compte 1200 habitants ». */
+  etat: (v: number) => string;
+  /** Reprise : « sa population », « ce prix ». */
+  ce: string;
+  /** Groupe nominal autonome : « la population d’un village ». */
+  nom: string;
+  genre: "m" | "f";
+  u: string;
+  /** Valeurs de départ plausibles. Les résultats sont toujours ENTIERS (pas de 67,2 €). */
+  valeurs: number[];
+};
+
+const EVOLUTIONS: SituationEvol[] = [
+  { etat: (v) => `Le prix d’un vélo est de ${v} €`, ce: "ce prix", nom: "le prix d’un vélo", genre: "m", u: "€", valeurs: [200, 250, 300, 400, 500, 600] },
+  { etat: (v) => `Le loyer d’un appartement est de ${v} € par mois`, ce: "ce loyer", nom: "le loyer d’un appartement", genre: "m", u: "€", valeurs: [400, 500, 600, 700, 800] },
+  { etat: (v) => `Un village compte ${v} habitants`, ce: "sa population", nom: "la population d’un village", genre: "f", u: "habitants", valeurs: [800, 1000, 1200, 1500, 2000, 2500] },
+  { etat: (v) => `Une chaîne de vulgarisation scientifique compte ${v} abonnés`, ce: "son nombre d’abonnés", nom: "le nombre d’abonnés d’une chaîne de sciences", genre: "m", u: "abonnés", valeurs: [1000, 2000, 4000, 5000, 6000] },
+  { etat: (v) => `La facture d’électricité mensuelle d’une famille est de ${v} €`, ce: "cette facture", nom: "la facture d’électricité d’une famille", genre: "f", u: "€", valeurs: [60, 80, 100, 120, 150] },
+  { etat: (v) => `Un billet d’avion entre Paris et La Réunion coûte ${v} €`, ce: "ce prix", nom: "le prix d’un billet d’avion entre Paris et La Réunion", genre: "m", u: "€", valeurs: [600, 700, 800, 900] },
+  { etat: (v) => `Une ferme récolte ${v} kg de fraises par semaine`, ce: "cette récolte", nom: "la récolte de fraises d’une ferme", genre: "f", u: "kg", valeurs: [200, 300, 400, 500] },
+  { etat: (v) => `Un musée accueille ${v} visiteurs par mois`, ce: "le nombre de visiteurs", nom: "le nombre de visiteurs d’un musée", genre: "m", u: "visiteurs", valeurs: [2000, 3000, 4000, 5000] },
+  { etat: (v) => `Une console de jeux coûte ${v} €`, ce: "son prix", nom: "le prix d’une console de jeux", genre: "m", u: "€", valeurs: [300, 400, 500] },
+  { etat: (v) => `Un cinéma accueille ${v} spectateurs par semaine`, ce: "sa fréquentation", nom: "la fréquentation d’un cinéma", genre: "f", u: "spectateurs", valeurs: [800, 1000, 1200, 1500, 2000] },
+  { etat: (v) => `Un foyer consomme ${v} L d’eau par jour`, ce: "sa consommation", nom: "la consommation d’eau d’un foyer", genre: "f", u: "L", valeurs: [200, 300, 400, 500] },
+  { etat: (v) => `Un apprenti gagne ${v} € par mois`, ce: "son salaire", nom: "le salaire d’un apprenti", genre: "m", u: "€", valeurs: [800, 900, 1000, 1200] },
+  { etat: (v) => `Dans un parc, on a compté ${v} hérissons l’an dernier`, ce: "ce nombre", nom: "le nombre de hérissons d’un parc", genre: "m", u: "hérissons", valeurs: [40, 50, 60, 80, 100] },
+  { etat: (v) => `Une forêt couvre ${v} hectares`, ce: "sa surface", nom: "la surface d’une forêt", genre: "f", u: "hectares", valeurs: [200, 500, 800, 1000, 1500] },
+  { etat: (v) => `Un abonnement de musique en ligne coûte ${v} € par an`, ce: "ce tarif", nom: "le prix d’un abonnement de musique", genre: "m", u: "€", valeurs: [100, 120, 150, 200] },
+  { etat: (v) => `Une usine recycle ${v} tonnes de plastique par an`, ce: "cette quantité", nom: "la quantité de plastique recyclée par une usine", genre: "f", u: "tonnes", valeurs: [200, 400, 500, 800, 1000] },
+  { etat: (v) => `Une ligne de bus transporte ${v} passagers par jour`, ce: "ce nombre", nom: "le nombre de passagers d’une ligne de bus", genre: "m", u: "passagers", valeurs: [500, 800, 1000, 1200, 1500] },
+];
+
+/** Une valeur, un taux et un sens tels que le résultat « tombe juste ». */
+function tirerEvolution(taux: number[]) {
+  for (let essai = 0; essai < 200; essai++) {
+    const s = randomChoice(EVOLUTIONS);
+    const v = randomChoice(s.valeurs);
+    const p = randomChoice(taux);
+    const hausse = Math.random() < 0.5;
+    const brut = v * (hausse ? 100 + p : 100 - p); // = 100 × résultat
+    if (brut % 100 === 0) {
+      return { s, v, p, hausse, res: brut / 100, c: (hausse ? 100 + p : 100 - p) / 100 };
+    }
+  }
+  const s = EVOLUTIONS[0];
+  return { s, v: 200, p: 10, hausse: true, res: 220, c: 1.1 };
+}
+
+const mots = (hausse: boolean) =>
+  hausse
+    ? { verbe: "augmente", nomEvol: "hausse", participe: "augmenté", taux: "d’augmentation" }
+    : { verbe: "diminue", nomEvol: "baisse", participe: "diminué", taux: "de diminution" };
+
+/** Nouvelle valeur après une évolution. */
+function genNouvelleValeur(taux: number[]) {
+  const { s, v, p, hausse, res, c } = tirerEvolution(taux);
+  const w = mots(hausse);
+  const t = randomInt(1, 3);
+  let text: string;
+  if (t === 1) text = `${s.etat(v)}. ${cap(s.ce)} ${w.verbe} de ${p} %. Que devient ${s.ce} ?`;
+  else if (t === 2) text = `${s.etat(v)}. Calcule ce que devient ${s.ce} après une ${w.nomEvol} de ${p} %.`;
+  else text = `${s.etat(v)}. On prévoit une ${w.nomEvol} de ${p} %. Que devient ${s.ce} ?`;
+  return {
+    text,
+    format: "short" as const,
+    expected: attendu(res),
+    comparator: "number_equal" as const,
+    explanation: expl(
+      `une ${w.nomEvol} de p % revient à multiplier par ${hausse ? "1 + p ÷ 100" : "1 − p ÷ 100"}.`,
+      `une ${w.nomEvol} de ${p} % revient à multiplier par ${fr(c)} (${w.nomEvol === "hausse" ? `100 % + ${p} %` : `100 % − ${p} %`} = ${hausse ? 100 + p : 100 - p} %).`,
+      `${v} × ${fr(c)} = ${fr(res)}.`,
+      `${s.ce} devient ${fr(res)} ${s.u}.`,
+    ),
+  };
+}
+
+/** Pourcentage d'évolution entre deux valeurs. */
+function genTauxEvolution(taux: number[]) {
+  const { s, v, p, hausse, res } = tirerEvolution(taux);
+  const w = mots(hausse);
+  const pron = s.genre === "m" ? "il" : "elle";
+  const text =
+    Math.random() < 0.5
+      ? `${s.etat(v)}. Un an plus tard, ${s.ce} passe à ${fr(res)} ${s.u}. De quel pourcentage ${s.ce} a-t-${pron} ${w.participe} ?`
+      : `${s.etat(v)}. Quelques mois plus tard, ${s.ce} passe à ${fr(res)} ${s.u}. Calcule le pourcentage ${w.taux}.`;
+  const variation = Math.round(Math.abs(res - v) * 100) / 100;
+  return {
+    text,
+    format: "short" as const,
+    expected: [String(p)],
+    comparator: "number_equal" as const,
+    explanation: expl(
+      "le pourcentage d’évolution est égal à (variation ÷ valeur de départ) × 100.",
+      `variation = ${hausse ? `${fr(res)} − ${v}` : `${v} − ${fr(res)}`} = ${fr(variation)}.`,
+      `(${fr(variation)} ÷ ${v}) × 100 = ${p}.`,
+      `c’est une ${w.nomEvol} de ${p} %.`,
+    ),
+  };
+}
+
+/** Coefficient multiplicateur d'une évolution. mode : "short" ou "qcm". */
+function genCoeffMult(mode: "short" | "qcm", sens: "hausse" | "baisse" | "mixte", taux: number[]) {
+  const s = randomChoice(EVOLUTIONS);
+  const p = randomChoice(taux);
+  const hausse = sens === "mixte" ? Math.random() < 0.5 : sens === "hausse";
+  const w = mots(hausse);
+  const c = (hausse ? 100 + p : 100 - p) / 100;
+  const t = randomInt(1, 3);
+  let text: string;
+  if (t === 1) text = `${cap(s.nom)} ${w.verbe} de ${p} %. Par quel nombre multiplie-t-on l’ancienne valeur pour obtenir la nouvelle ?`;
+  else if (t === 2) text = `Une ${w.nomEvol} de ${p} % s’applique ${aArt(s.nom)}. Quel est le coefficient multiplicateur associé ?`;
+  else text = `Pour calculer ${s.nom} après une ${w.nomEvol} de ${p} %, par quel nombre faut-il multiplier sa valeur de départ ?`;
+  const explanation = expl(
+    `${hausse ? "augmenter" : "diminuer"} de p %, c’est multiplier par ${hausse ? "1 + p ÷ 100" : "1 − p ÷ 100"}.`,
+    hausse ? `on garde 100 % et on ajoute ${p} % : 100 % + ${p} % = ${100 + p} %.` : `il reste 100 % − ${p} % = ${100 - p} %.`,
+    `${hausse ? 100 + p : 100 - p} % = ${hausse ? 100 + p : 100 - p} ÷ 100 = ${fr(c)}.`,
+    `le coefficient multiplicateur est ${fr(c)}.`,
+  );
+  if (mode === "qcm") {
+    const correct = fr(c);
+    return {
+      text,
+      format: "qcm" as const,
+      choices: makeChoices(correct, [
+        fr(p / 100),
+        String(p),
+        fr((hausse ? 100 - p : 100 + p) / 100),
+        fr((hausse ? 1000 + p : 1000 - p) / 1000),
+      ]),
+      expected: [correct],
+      comparator: "mcq_exact" as const,
+      explanation,
+    };
+  }
+  return {
+    text,
+    format: "short" as const,
+    expected: attendu(c),
+    comparator: "number_equal" as const,
+    explanation,
+  };
+}
+
+/** Du coefficient multiplicateur au pourcentage d'évolution. */
+function genCoeffVersTaux(taux: number[]) {
+  const s = randomChoice(EVOLUTIONS);
+  const p = randomChoice(taux);
+  const hausse = Math.random() < 0.5;
+  const w = mots(hausse);
+  const c = (hausse ? 100 + p : 100 - p) / 100;
+  const multiplie = s.genre === "m" ? "multiplié" : "multipliée";
+  const text =
+    Math.random() < 0.5
+      ? `${cap(s.nom)} est ${multiplie} par ${fr(c)}. De combien de pour cent cette valeur ${w.verbe}-t-elle ?`
+      : `On multiplie ${s.nom} par ${fr(c)}. Quel pourcentage ${w.taux} cela représente-t-il ?`;
+  return {
+    text,
+    format: "short" as const,
+    expected: [String(p)],
+    comparator: "number_equal" as const,
+    explanation: expl(
+      "multiplier par 1 + p ÷ 100, c’est augmenter de p % ; multiplier par 1 − p ÷ 100, c’est diminuer de p %.",
+      `${fr(c)} = ${hausse ? 100 + p : 100 - p} ÷ 100, soit ${hausse ? 100 + p : 100 - p} % de la valeur de départ.`,
+      hausse ? `${100 + p} % − 100 % = ${p} %.` : `100 % − ${100 - p} % = ${p} %.`,
+      `c’est une ${w.nomEvol} de ${p} %.`,
+    ),
+  };
+}
+
+/** Appliquer un coefficient multiplicateur. */
+function genAppliquerCoeff(taux: number[]) {
+  const { s, v, p, hausse, res, c } = tirerEvolution(taux);
+  const w = mots(hausse);
+  const text =
+    Math.random() < 0.5
+      ? `${s.etat(v)}. ${cap(s.ce)} ${w.verbe} de ${p} %. En utilisant le coefficient multiplicateur, calcule la nouvelle valeur.`
+      : `${s.etat(v)}. Multiplie par le bon coefficient pour trouver ${s.ce} après une ${w.nomEvol} de ${p} %.`;
+  return {
+    text,
+    format: "short" as const,
+    expected: attendu(res),
+    comparator: "number_equal" as const,
+    explanation: expl(
+      `une ${w.nomEvol} de p % revient à multiplier par ${hausse ? "1 + p ÷ 100" : "1 − p ÷ 100"}.`,
+      `coefficient multiplicateur = ${fr(c)}.`,
+      `${v} × ${fr(c)} = ${fr(res)}.`,
+      `${s.ce} devient ${fr(res)} ${s.u}.`,
+    ),
+  };
+}
+
+/** Deux évolutions successives. memeTaux : +p puis −p (ou l'inverse). */
+function genSuccessives(memeTaux: boolean) {
+  const taux = [10, 20, 25, 30, 50];
+  for (let essai = 0; essai < 300; essai++) {
+    const s = randomChoice(EVOLUTIONS);
+    const v = randomChoice(s.valeurs);
+    const a = randomChoice(taux);
+    const b = memeTaux ? a : randomChoice(taux);
+    const hausseDabord = Math.random() < 0.6;
+    const c1 = hausseDabord ? 100 + a : 100 - a;
+    const c2 = hausseDabord ? 100 - b : 100 + b;
+    const brut = v * c1 * c2; // = 10 000 × résultat
+    const inter = v * c1; // = 100 × valeur intermédiaire
+    if (brut % 10000 !== 0 || inter % 100 !== 0) continue;
+    const res = brut / 10000;
+    const mid = inter / 100;
+    const w1 = mots(hausseDabord);
+    const w2 = mots(!hausseDabord);
+    const text =
+      Math.random() < 0.5
+        ? `${s.etat(v)}. ${cap(s.ce)} ${w1.verbe} de ${a} %, puis ${w2.verbe} de ${b} %. Quelle est la valeur finale ?`
+        : `${s.etat(v)}. Après une ${w1.nomEvol} de ${a} % suivie d’une ${w2.nomEvol} de ${b} %, calcule la valeur finale ${deArt(s.ce)}.`;
+    return {
+      text,
+      format: "short" as const,
+      expected: attendu(res),
+      comparator: "number_equal" as const,
+      explanation: expl(
+        "des évolutions successives se traduisent par des coefficients multiplicateurs qui se multiplient ; les pourcentages ne s’ajoutent pas.",
+        `${w1.nomEvol} de ${a} % : × ${fr(c1 / 100)} ; ${w2.nomEvol} de ${b} % : × ${fr(c2 / 100)}.`,
+        `${v} × ${fr(c1 / 100)} = ${fr(mid)}, puis ${fr(mid)} × ${fr(c2 / 100)} = ${fr(res)}.`,
+        `la valeur finale est ${fr(res)} ${s.u}${memeTaux ? ` : on ne retrouve pas ${v} ${s.u}, car la ${w2.nomEvol} s’applique à ${fr(mid)} et non à ${v}` : ""}.`,
+      ),
+    };
+  }
+  return genNouvelleValeur([10, 20]);
+}
+
+/** Pourcentage d'une quantité : situation « partie d'un tout ». */
+type SituationPct = {
+  cadre: (N: number) => string;
+  part: (p: number) => string;
+  partNb: (x: number) => string;
+  qPart: string;
+  nomPart: string;
+  qPct: string;
+  totalInconnu: (x: number, p: number) => string;
+  qTotal: string;
+  desTotal: string;
+  u: string;
+  N: number[];
+};
+
+const POURCENTAGES: SituationPct[] = [
+  {
+    cadre: (N) => `Un collège compte ${N} élèves.`,
+    part: (p) => `${p} % d’entre eux viennent à vélo.`,
+    partNb: (x) => `${x} d’entre eux viennent à vélo.`,
+    qPart: "Combien d’élèves viennent à vélo ?",
+    nomPart: "le nombre d’élèves qui viennent à vélo",
+    qPct: "Quel pourcentage des élèves vient à vélo ?",
+    totalInconnu: (x, p) => `Dans un collège, ${x} élèves viennent à vélo, ce qui représente ${p} % des élèves.`,
+    qTotal: "Combien d’élèves compte ce collège ?",
+    desTotal: "des élèves",
+    u: "élèves",
+    N: [200, 300, 400, 500, 600, 800],
+  },
+  {
+    cadre: (N) => `Un sac de mélange pour oiseaux pèse ${N} g.`,
+    part: (p) => `${p} % de sa masse est formée de graines de tournesol.`,
+    partNb: (x) => `Il contient ${x} g de graines de tournesol.`,
+    qPart: "Quelle masse de graines de tournesol contient-il ?",
+    nomPart: "la masse de graines de tournesol",
+    qPct: "Quel pourcentage de la masse du sac représentent les graines de tournesol ?",
+    totalInconnu: (x, p) => `Un sac de mélange pour oiseaux contient ${x} g de graines de tournesol, soit ${p} % de sa masse.`,
+    qTotal: "Quelle est la masse du sac, en g ?",
+    desTotal: "de la masse du sac",
+    u: "g",
+    N: [500, 800, 1000, 1200, 2000],
+  },
+  {
+    cadre: (N) => `Une facture s’élève à ${N} €.`,
+    part: (p) => `Les taxes représentent ${p} % de ce montant.`,
+    partNb: (x) => `Les taxes représentent ${x} € de ce montant.`,
+    qPart: "Quel est le montant des taxes ?",
+    nomPart: "le montant des taxes",
+    qPct: "Quel pourcentage du montant représentent les taxes ?",
+    totalInconnu: (x, p) => `Sur une facture, les taxes s’élèvent à ${x} €, soit ${p} % du montant total.`,
+    qTotal: "Quel est le montant total de la facture ?",
+    desTotal: "du montant",
+    u: "€",
+    N: [40, 60, 80, 120, 200, 400],
+  },
+  {
+    cadre: (N) => `Un jardin partagé a une surface de ${N} m².`,
+    part: (p) => `Des légumes sont plantés sur ${p} % de cette surface.`,
+    partNb: (x) => `Des légumes sont plantés sur ${x} m² de cette surface.`,
+    qPart: "Quelle surface est plantée de légumes ?",
+    nomPart: "la surface plantée de légumes",
+    qPct: "Quel pourcentage de la surface est planté de légumes ?",
+    totalInconnu: (x, p) => `Dans un jardin partagé, ${x} m² sont plantés de légumes, soit ${p} % de la surface totale.`,
+    qTotal: "Quelle est la surface totale du jardin, en m² ?",
+    desTotal: "de la surface",
+    u: "m²",
+    N: [100, 200, 300, 400, 500],
+  },
+  {
+    cadre: (N) => `Une chorale compte ${N} choristes.`,
+    part: (p) => `${p} % d’entre eux sont des ténors.`,
+    partNb: (x) => `${x} d’entre eux sont des ténors.`,
+    qPart: "Combien y a-t-il de ténors ?",
+    nomPart: "le nombre de ténors",
+    qPct: "Quel pourcentage des choristes sont des ténors ?",
+    totalInconnu: (x, p) => `Une chorale compte ${x} ténors, ce qui représente ${p} % des choristes.`,
+    qTotal: "Combien de choristes compte cette chorale ?",
+    desTotal: "des choristes",
+    u: "ténors",
+    N: [20, 40, 60, 80, 100],
+  },
+  {
+    cadre: (N) => `Pendant la saison, une basketteuse a tenté ${N} tirs.`,
+    part: (p) => `Elle en a réussi ${p} %.`,
+    partNb: (x) => `Elle en a réussi ${x}.`,
+    qPart: "Combien de tirs a-t-elle réussis ?",
+    nomPart: "le nombre de tirs réussis",
+    qPct: "Quel est son pourcentage de réussite ?",
+    totalInconnu: (x, p) => `Une basketteuse a réussi ${x} tirs, soit ${p} % de ses tentatives.`,
+    qTotal: "Combien de tirs a-t-elle tentés ?",
+    desTotal: "des tirs",
+    u: "tirs",
+    N: [40, 80, 100, 120, 200],
+  },
+  {
+    cadre: (N) => `Une bouteille de boisson contient ${N} mL.`,
+    part: (p) => `Le jus de fruits représente ${p} % de son volume.`,
+    partNb: (x) => `Elle contient ${x} mL de jus de fruits.`,
+    qPart: "Quel volume de jus de fruits contient-elle ?",
+    nomPart: "le volume de jus de fruits",
+    qPct: "Quel pourcentage du volume représente le jus de fruits ?",
+    totalInconnu: (x, p) => `Une bouteille de boisson contient ${x} mL de jus de fruits, soit ${p} % de son volume.`,
+    qTotal: "Quel est le volume de la bouteille, en mL ?",
+    desTotal: "du volume",
+    u: "mL",
+    N: [200, 250, 500, 1000, 1500],
+  },
+  {
+    cadre: (N) => `Une forêt compte ${N} arbres.`,
+    part: (p) => `${p} % de ces arbres sont des pins.`,
+    partNb: (x) => `${x} de ces arbres sont des pins.`,
+    qPart: "Combien y a-t-il de pins ?",
+    nomPart: "le nombre de pins",
+    qPct: "Quel pourcentage des arbres sont des pins ?",
+    totalInconnu: (x, p) => `Dans une forêt, on a compté ${x} pins, soit ${p} % des arbres.`,
+    qTotal: "Combien d’arbres compte cette forêt ?",
+    desTotal: "des arbres",
+    u: "pins",
+    N: [400, 600, 800, 1000, 2000],
+  },
+  {
+    cadre: (N) => `La playlist de Yanis contient ${N} morceaux.`,
+    part: (p) => `${p} % de ces morceaux sont du jazz.`,
+    partNb: (x) => `${x} de ces morceaux sont du jazz.`,
+    qPart: "Combien de morceaux de jazz contient-elle ?",
+    nomPart: "le nombre de morceaux de jazz",
+    qPct: "Quel pourcentage des morceaux sont du jazz ?",
+    totalInconnu: (x, p) => `La playlist de Yanis contient ${x} morceaux de jazz, soit ${p} % de ses morceaux.`,
+    qTotal: "Combien de morceaux contient la playlist ?",
+    desTotal: "des morceaux",
+    u: "morceaux",
+    N: [40, 60, 80, 100, 120, 200],
+  },
+  {
+    cadre: (N) => `Une enquête interroge ${N} habitants d’une commune.`,
+    part: (p) => `${p} % d’entre eux trient leurs déchets.`,
+    partNb: (x) => `${x} d’entre eux trient leurs déchets.`,
+    qPart: "Combien de personnes interrogées trient leurs déchets ?",
+    nomPart: "le nombre de personnes interrogées qui trient leurs déchets",
+    qPct: "Quel pourcentage des personnes interrogées trient leurs déchets ?",
+    totalInconnu: (x, p) => `Dans une enquête, ${x} habitants déclarent trier leurs déchets, soit ${p} % des personnes interrogées.`,
+    qTotal: "Combien de personnes ont été interrogées ?",
+    desTotal: "des personnes interrogées",
+    u: "personnes",
+    N: [200, 400, 500, 800, 1000],
+  },
+  {
+    cadre: (N) => `Un maraîcher récolte ${N} kg de tomates.`,
+    part: (p) => `${p} % de la récolte est abîmée.`,
+    partNb: (x) => `${x} kg de la récolte sont abîmés.`,
+    qPart: "Quelle masse de tomates est abîmée ?",
+    nomPart: "la masse de tomates abîmées",
+    qPct: "Quel pourcentage de la récolte est abîmé ?",
+    totalInconnu: (x, p) => `Un maraîcher jette ${x} kg de tomates abîmées, soit ${p} % de sa récolte.`,
+    qTotal: "Quelle est la masse de sa récolte, en kg ?",
+    desTotal: "de la récolte",
+    u: "kg",
+    N: [200, 300, 400, 500, 800],
+  },
+  {
+    cadre: (N) => `Le réservoir d’une moto contient ${N} L quand il est plein.`,
+    part: (p) => `Il est rempli à ${p} %.`,
+    partNb: (x) => `Il contient ${x} L d’essence.`,
+    qPart: "Combien de litres d’essence contient-il ?",
+    nomPart: "le volume d’essence dans le réservoir",
+    qPct: "À quel pourcentage le réservoir est-il rempli ?",
+    totalInconnu: (x, p) => `Le réservoir d’une moto contient ${x} L d’essence ; il est rempli à ${p} %.`,
+    qTotal: "Quelle est la contenance du réservoir, en L ?",
+    desTotal: "du réservoir",
+    u: "L",
+    N: [12, 16, 20, 24],
+  },
+  {
+    cadre: (N) => `Un voyage scolaire coûte ${N} € par élève.`,
+    part: (p) => `Les familles versent un acompte de ${p} % à l’inscription.`,
+    partNb: (x) => `Les familles versent un acompte de ${x} € à l’inscription.`,
+    qPart: "Quel est le montant de l’acompte ?",
+    nomPart: "le montant de l’acompte",
+    qPct: "Quel pourcentage du prix représente l’acompte ?",
+    totalInconnu: (x, p) => `Pour un voyage scolaire, l’acompte versé est de ${x} €, soit ${p} % du prix.`,
+    qTotal: "Quel est le prix du voyage ?",
+    desTotal: "du prix",
+    u: "€",
+    N: [200, 300, 400, 500],
+  },
+  {
+    cadre: (N) => `Un téléphone a une mémoire de ${N} Go.`,
+    part: (p) => `Les photos occupent ${p} % de cette mémoire.`,
+    partNb: (x) => `Les photos occupent ${x} Go de cette mémoire.`,
+    qPart: "Quelle place, en Go, occupent les photos ?",
+    nomPart: "la place occupée par les photos",
+    qPct: "Quel pourcentage de la mémoire occupent les photos ?",
+    totalInconnu: (x, p) => `Sur un téléphone, les photos occupent ${x} Go, soit ${p} % de la mémoire.`,
+    qTotal: "Quelle est la mémoire totale du téléphone, en Go ?",
+    desTotal: "de la mémoire",
+    u: "Go",
+    N: [64, 128, 256],
+  },
+  {
+    cadre: (N) => `Lors d’un nettoyage de plage à Saint-Gilles, ${N} déchets ont été ramassés.`,
+    part: (p) => `${p} % de ces déchets sont en plastique.`,
+    partNb: (x) => `${x} de ces déchets sont en plastique.`,
+    qPart: "Combien de déchets en plastique ont été ramassés ?",
+    nomPart: "le nombre de déchets en plastique",
+    qPct: "Quel pourcentage des déchets sont en plastique ?",
+    totalInconnu: (x, p) => `Lors d’un nettoyage de plage à Saint-Gilles, ${x} déchets en plastique ont été ramassés, soit ${p} % des déchets.`,
+    qTotal: "Combien de déchets ont été ramassés en tout ?",
+    desTotal: "des déchets",
+    u: "déchets",
+    N: [200, 300, 400, 500, 600],
+  },
+  {
+    cadre: (N) => `Le CDI possède ${N} livres.`,
+    part: (p) => `${p} % de ces livres sont des bandes dessinées.`,
+    partNb: (x) => `${x} de ces livres sont des bandes dessinées.`,
+    qPart: "Combien de bandes dessinées possède le CDI ?",
+    nomPart: "le nombre de bandes dessinées",
+    qPct: "Quel pourcentage des livres sont des bandes dessinées ?",
+    totalInconnu: (x, p) => `Le CDI possède ${x} bandes dessinées, soit ${p} % de ses livres.`,
+    qTotal: "Combien de livres possède le CDI ?",
+    desTotal: "des livres",
+    u: "bandes dessinées",
+    N: [400, 600, 800, 1000, 1200],
+  },
+  {
+    cadre: (N) => `Un sentier de randonnée mesure ${N} km.`,
+    part: (p) => `${p} % du parcours est en forêt.`,
+    partNb: (x) => `${x} km du parcours sont en forêt.`,
+    qPart: "Combien de kilomètres du parcours sont en forêt ?",
+    nomPart: "la longueur du parcours en forêt",
+    qPct: "Quel pourcentage du parcours est en forêt ?",
+    totalInconnu: (x, p) => `Sur un sentier de randonnée, ${x} km sont en forêt, soit ${p} % du parcours.`,
+    qTotal: "Quelle est la longueur du sentier, en km ?",
+    desTotal: "du parcours",
+    u: "km",
+    N: [10, 12, 16, 20, 24, 40],
+  },
+  {
+    cadre: (N) => `Un club de football compte ${N} licenciés.`,
+    part: (p) => `${p} % des licenciés sont des filles.`,
+    partNb: (x) => `${x} des licenciés sont des filles.`,
+    qPart: "Combien de filles compte le club ?",
+    nomPart: "le nombre de filles licenciées",
+    qPct: "Quel pourcentage des licenciés sont des filles ?",
+    totalInconnu: (x, p) => `Un club de football compte ${x} filles, soit ${p} % de ses licenciés.`,
+    qTotal: "Combien de licenciés compte le club ?",
+    desTotal: "des licenciés",
+    u: "filles",
+    N: [80, 100, 120, 150, 200, 300],
+  },
+];
+
+const FRACTIONS_POURCENT: Record<number, string> = { 5: "1/20", 10: "1/10", 20: "1/5", 25: "1/4", 50: "1/2", 75: "3/4" };
+
+function tirerPourcentage(taux: number[]) {
+  for (let essai = 0; essai < 300; essai++) {
+    const s = randomChoice(POURCENTAGES);
+    const N = randomChoice(s.N);
+    const p = randomChoice(taux);
+    if ((N * p) % 100 === 0) return { s, N, p, x: (N * p) / 100 };
+  }
+  return { s: POURCENTAGES[0], N: 400, p: 25, x: 100 };
+}
+
+/**
+ * Pourcentages. types : "partie" (p % de N), "aide" (avec la fraction),
+ * "taux" (quel pourcentage ?), "total" (retrouver le tout), "fraction" (QCM).
+ */
+function genPourcentage(types: Array<"partie" | "aide" | "taux" | "total" | "fraction">, taux: number[]) {
+  const type = randomChoice(types);
+  const tauxUtiles = type === "aide" || type === "fraction" ? taux.filter((p) => FRACTIONS_POURCENT[p]) : taux;
+  const { s, N, p, x } = tirerPourcentage(tauxUtiles.length ? tauxUtiles : [10, 25, 50]);
+  const defPct = "un pourcentage est une proportion rapportée à 100 : p % d’une quantité N, c’est N × p ÷ 100.";
+  if (type === "fraction") {
+    const correct = FRACTIONS_POURCENT[p];
+    const autres = Object.values(FRACTIONS_POURCENT).filter((f) => f !== correct);
+    return {
+      text: `${s.cadre(N)} ${s.part(p)} Quelle fraction ${s.desTotal} cela représente-t-il ?`,
+      format: "qcm" as const,
+      choices: makeChoices(correct, [`1/${p}`, ...shuffle(autres).slice(0, 3)]),
+      expected: [correct],
+      comparator: "mcq_exact" as const,
+      explanation: expl(defPct, `${p} % = ${p}/100, que l’on simplifie.`, `${p}/100 = ${correct}.`, `${p} % ${s.desTotal}, c’est ${correct} ${s.desTotal}.`),
+    };
+  }
+  if (type === "taux") {
+    const text = Math.random() < 0.5 ? `${s.cadre(N)} ${s.partNb(x)} ${s.qPct}` : `${s.cadre(N)} ${s.partNb(x)} Exprime cette part en pourcentage.`;
+    return {
+      text,
+      format: "short" as const,
+      expected: [String(p)],
+      comparator: "number_equal" as const,
+      explanation: expl(defPct, "pourcentage = partie ÷ total × 100.", `${x} ÷ ${N} × 100 = ${p}.`, `cela représente ${p} %.`),
+    };
+  }
+  if (type === "total") {
+    return {
+      text: `${s.totalInconnu(x, p)} ${s.qTotal}`,
+      format: "short" as const,
+      expected: [String(N)],
+      comparator: "number_equal" as const,
+      explanation: expl(
+        defPct,
+        `${p} % du total valent ${x} : on passe par 1 % (ou par la proportionnalité).`,
+        `1 % du total vaut ${x} ÷ ${p} = ${fr(x / p)}, donc 100 % valent ${fr(x / p)} × 100 = ${N}.`,
+        `le total est ${N}.`,
+      ),
+    };
+  }
+  let text: string;
+  if (type === "aide") text = `${s.cadre(N)} ${s.part(p)} Sachant que ${p} % = ${FRACTIONS_POURCENT[p]}, calcule ${s.nomPart}.`;
+  else text = Math.random() < 0.5 ? `${s.cadre(N)} ${s.part(p)} ${s.qPart}` : `${s.cadre(N)} ${s.part(p)} Calcule ${s.nomPart}.`;
+  return {
+    text,
+    format: "short" as const,
+    expected: [String(x)],
+    comparator: "number_equal" as const,
+    explanation: expl(defPct, `${p} % de ${N} = ${N} × ${p} ÷ 100.`, `${N} × ${p} ÷ 100 = ${x}.`, `la réponse est ${x} ${s.u}.`),
   };
 }
 
@@ -148,28 +1577,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Compare les deux coefficients.",
     tags: ["prop_proportionnalite", "reconnaitre", "template"],
-    generate: () => {
-      const a = randomInt(2, 5);
-      const k = randomInt(2, 6);
-      const b = a * 2;
-      const yes = randomChoice([true, false]);
-      const y1 = a * k;
-      const y2 = yes ? b * k : b * k + randomChoice([1, 2, 3]);
-
-      return {
-        text: `${a} objets coûtent ${y1} €. ${b} objets coûtent ${y2} €. Est-ce une situation proportionnelle ?`,
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: [yes ? "oui" : "non"],
-        comparator: "mcq_exact",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (yes
-          ? `${y1} ÷ ${a} = ${k} et ${y2} ÷ ${b} = ${k}. Le coefficient est le même.`
-          : `${y1} ÷ ${a} = ${k}, mais ${y2} ÷ ${b} n’est pas égal à ${k}. Ce n’est pas proportionnel.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genReconnaitre(2),
   },
   {
     kind: "template",
@@ -182,28 +1590,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "reunion",
     hint: "Vérifie si le prix par kg reste le même.",
     tags: ["prop_proportionnalite", "reunion", "prix", "template"],
-    generate: () => {
-      const kg1 = randomInt(2, 4);
-      const pricePerKg = randomInt(3, 8);
-      const kg2 = kg1 * 2;
-      const yes = randomChoice([true, false]);
-      const p1 = kg1 * pricePerKg;
-      const p2 = yes ? kg2 * pricePerKg : kg2 * pricePerKg + randomChoice([2, 3, 5]);
-
-      return {
-        text: `Au marché de Saint-Pierre, ${kg1} kg de mangues coûtent ${p1} € et ${kg2} kg coûtent ${p2} €. Est-ce proportionnel ?`,
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: [yes ? "oui" : "non"],
-        comparator: "mcq_exact",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (yes
-          ? `Le prix au kg est le même : ${p1} ÷ ${kg1} = ${pricePerKg} et ${p2} ÷ ${kg2} = ${pricePerKg}.`
-          : `Le prix au kg n’est pas le même. Ce n’est donc pas une situation proportionnelle.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genReconnaitre(2),
   },
   {
     kind: "fixed",
@@ -261,34 +1648,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Utilise le coefficient multiplicatif.",
     tags: ["prop_proportionnalite", "tableau", "template", "canvas"],
-    generate: () => {
-      const x1 = randomInt(2, 6);
-      const k = randomInt(2, 8);
-      const x2 = randomInt(7, 15);
-      const y1 = x1 * k;
-      const y2 = x2 * k;
-
-      return {
-        text: "Compléter le tableau de proportionnalité.",
-        format: "short",
-        expected: [String(y2)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`Le coefficient est ${y1} ÷ ${x1} = ${k}. Donc ${x2} → ${x2} × ${k} = ${y2}.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-        canvas: tableauProportionnaliteCanvas({
-          rowLabels: ["Quantité", "Prix (€)"],
-          colLabels: ["A", "B"],
-          values: [
-            [String(x1), String(x2)],
-            [String(y1), ""],
-          ],
-          missing: [{ row: 1, col: 1 }],
-          highlightedCells: [{ row: 1, col: 1 }],
-        }),
-      };
-    },
+    generate: () => genTableau(2),
   },
   {
     kind: "template",
@@ -301,24 +1661,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Cherche le passage d’une colonne à l’autre.",
     tags: ["prop_proportionnalite", "tableau", "template"],
-    generate: () => {
-      const x1 = randomInt(2, 8);
-      const y1 = x1 * randomInt(2, 6);
-      const factor = randomInt(2, 4);
-      const x2 = x1 * factor;
-      const y2 = y1 * factor;
-
-      return {
-        text: `Dans un tableau de proportionnalité, ${x1} → ${y1}. Comme ${x2} = ${factor} × ${x1}, combien vaut l’image de ${x2} ?`,
-        format: "short",
-        expected: [String(y2)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`On multiplie aussi ${y1} par ${factor}. Donc ${y1} × ${factor} = ${y2}.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genTableau(2),
   },
   {
     kind: "template",
@@ -331,24 +1674,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Passe par l’unité ou calcule le coefficient.",
     tags: ["prop_proportionnalite", "tableau", "template"],
-    generate: () => {
-      const k = randomInt(2, 9);
-      const x1 = randomInt(3, 8);
-      const x2 = randomInt(9, 18);
-      const y1 = x1 * k;
-      const y2 = x2 * k;
-
-      return {
-        text: `Compléter : ${x1} unités coûtent ${y1} €. Combien coûtent ${x2} unités ?`,
-        format: "short",
-        expected: [String(y2)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`Une unité coûte ${k} €. Donc ${x2} unités coûtent ${x2} × ${k} = ${y2} €.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genTableau(3),
   },
 
   // =========================
@@ -386,22 +1712,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Coefficient = deuxième grandeur ÷ première grandeur.",
     tags: ["prop_proportionnalite", "coefficient", "template"],
-    generate: () => {
-      const x = randomInt(2, 9);
-      const k = randomInt(2, 9);
-      const y = x * k;
-
-      return {
-        text: `On a ${x} → ${y}. Quel est le coefficient de proportionnalité ?`,
-        format: "short",
-        expected: [String(k)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`${y} ÷ ${x} = ${k}.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genCoeff(2),
   },
   {
     kind: "template",
@@ -414,22 +1725,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "reunion",
     hint: "Calcule le prix pour 1 kg.",
     tags: ["prop_proportionnalite", "coefficient", "reunion", "template"],
-    generate: () => {
-      const kg = randomInt(2, 6);
-      const pricePerKg = randomInt(3, 9);
-      const price = kg * pricePerKg;
-
-      return {
-        text: `Au marché, ${kg} kg de letchis coûtent ${price} €. Quel est le prix d’un kg ?`,
-        format: "short",
-        expected: [String(pricePerKg)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`${price} ÷ ${kg} = ${pricePerKg}. Un kg coûte ${pricePerKg} €.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genCoeff(2),
   },
   {
     kind: "template",
@@ -442,22 +1738,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le coefficient permet de passer de la première ligne à la deuxième.",
     tags: ["prop_proportionnalite", "coefficient", "template"],
-    generate: () => {
-      const distance = randomInt(3, 12);
-      const speed = randomInt(4, 10);
-      const time = distance * speed;
-
-      return {
-        text: `Un marcheur parcourt ${distance} km en ${time} dizaines de minutes. Quel coefficient permet de passer des km aux dizaines de minutes ?`,
-        format: "short",
-        expected: [String(speed)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`${time} ÷ ${distance} = ${speed}.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genCoeff(3),
   },
   {
     kind: "fixed",
@@ -515,24 +1796,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Passe par le prix d’une unité.",
     tags: ["prop_proportionnalite", "quatrieme_proportionnelle", "template"],
-    generate: () => {
-      const unit = randomInt(2, 8);
-      const q1 = randomInt(2, 6);
-      const q2 = randomInt(7, 15);
-      const p1 = q1 * unit;
-      const p2 = q2 * unit;
-
-      return {
-        text: `${q1} objets coûtent ${p1} €. Combien coûtent ${q2} objets ?`,
-        format: "short",
-        expected: [String(p2)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`Un objet coûte ${p1} ÷ ${q1} = ${unit} €. Donc ${q2} objets coûtent ${q2} × ${unit} = ${p2} €.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genQuatrieme(1),
   },
   {
     kind: "template",
@@ -545,23 +1809,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Utilise le coefficient de proportionnalité.",
     tags: ["prop_proportionnalite", "quatrieme_proportionnelle", "template"],
-    generate: () => {
-      const a = randomChoice([2, 3, 4, 5]);
-      const b = randomInt(5, 12);
-      const c = a * randomInt(2, 5);
-      const result = (b * c) / a;
-
-      return {
-        text: `Dans un tableau proportionnel : ${a} → ${b} et ${c} → ?. Quelle est la valeur manquante ?`,
-        format: "short",
-        expected: [formatNumber(result)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`On calcule ${b} × ${c} ÷ ${a} = ${formatNumber(result)}.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genQuatrieme(2),
   },
   {
     kind: "template",
@@ -574,34 +1822,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "reunion",
     hint: "Même prix au kg.",
     tags: ["prop_proportionnalite", "reunion", "quatrieme_proportionnelle", "template", "canvas"],
-    generate: () => {
-      const kg1 = randomInt(2, 5);
-      const pricePerKg = randomInt(4, 9);
-      const kg2 = randomInt(6, 12);
-      const p1 = kg1 * pricePerKg;
-      const p2 = kg2 * pricePerKg;
-
-      return {
-        text: "À Saint-Leu, complète le tableau de proportionnalité.",
-        format: "short",
-        expected: [String(p2)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`Le prix au kg est ${p1} ÷ ${kg1} = ${pricePerKg} €. Donc ${kg2} kg coûtent ${p2} €.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-        canvas: tableauProportionnaliteCanvas({
-          rowLabels: ["Masse (kg)", "Prix (€)"],
-          colLabels: ["Situation 1", "Situation 2"],
-          values: [
-            [String(kg1), String(kg2)],
-            [String(p1), ""],
-          ],
-          missing: [{ row: 1, col: 1 }],
-          highlightedCells: [{ row: 1, col: 1 }],
-        }),
-      };
-    },
+    generate: () => genQuatrieme(2),
   },
 
   // =========================
@@ -660,22 +1881,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "p % de N = N × p / 100.",
     tags: ["prop_proportionnalite", "pourcentage", "template"],
-    generate: () => {
-      const p = randomChoice([10, 20, 25, 50, 75]);
-      const n = randomChoice([40, 60, 80, 100, 120, 200]);
-      const result = (n * p) / 100;
-
-      return {
-        text: `Calculer ${p} % de ${n}.`,
-        format: "short",
-        expected: [String(result)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`${p} % de ${n} = ${n} × ${p} ÷ 100 = ${result}.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genPourcentage(["partie", "taux"], [5, 10, 20, 25, 30, 40, 50, 75]),
   },
   {
     kind: "template",
@@ -688,22 +1894,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Pourcentage = partie ÷ total × 100.",
     tags: ["prop_proportionnalite", "pourcentage", "template"],
-    generate: () => {
-      const total = randomChoice([50, 80, 100, 120, 200]);
-      const p = randomChoice([10, 20, 25, 40, 50]);
-      const part = (total * p) / 100;
-
-      return {
-        text: `Dans une classe de ${total} élèves, ${part} élèves pratiquent un sport. Quel pourcentage cela représente-t-il ?`,
-        format: "short",
-        expected: [String(p)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`${part} ÷ ${total} × 100 = ${p} %.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genPourcentage(["taux"], [5, 12, 15, 30, 35, 40, 45, 60]),
   },
   {
     kind: "template",
@@ -716,22 +1907,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "reunion",
     hint: "Calcule la partie correspondant au pourcentage.",
     tags: ["prop_proportionnalite", "pourcentage", "reunion", "template"],
-    generate: () => {
-      const total = randomChoice([100, 200, 300, 400]);
-      const p = randomChoice([15, 20, 25, 30]);
-      const result = (total * p) / 100;
-
-      return {
-        text: `Dans une opération de nettoyage à La Réunion, ${p} % des ${total} déchets ramassés sont des bouteilles. Combien cela fait-il de bouteilles ?`,
-        format: "short",
-        expected: [String(result)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`${p} % de ${total} = ${total} × ${p} ÷ 100 = ${result}.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genPourcentage(["partie"], [5, 12, 15, 30, 35, 40, 45, 60]),
   },
   {
     kind: "template",
@@ -744,25 +1920,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Transforme le pourcentage en fraction sur 100.",
     tags: ["prop_proportionnalite", "pourcentage", "qcm", "template"],
-    generate: () => {
-      const p = randomChoice([5, 10, 20, 25, 50, 75]);
-      const correct = `${p}/100`;
-
-      return {
-        text: `${p} % correspond à quelle fraction ?`,
-        format: "qcm",
-        // « (100 - p)/100 » tombe sur la bonne réponse à 50 % — une fois sur six.
-        // Le piège de réserve « 1/p » est de toute façon le meilleur des quatre :
-        // « 5 %, c'est 1/5 » est l'erreur qu'on entend vraiment en classe.
-        choices: makeChoices(correct, [`100/${p}`, `${p}/10`, `${100 - p}/100`, `1/${p}`]),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`${p} % signifie ${p} sur 100, donc ${correct}.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    // Le piège « 1/p » reste parmi les distracteurs : « 5 %, c'est 1/5 » est
+    // l'erreur qu'on entend vraiment en classe.
+    generate: () => genPourcentage(["fraction"], [5, 10, 20, 25, 50, 75]),
   },
 
   // =========================
@@ -821,21 +1981,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Augmenter de p %, c’est multiplier par 1 + p/100.",
     tags: ["prop_proportionnalite", "coefficient_multiplicateur", "augmentation", "template"],
-    generate: () => {
-      const p = randomChoice([5, 10, 15, 20, 25, 30, 40, 50]);
-      const coeff = 1 + p / 100;
-
-      return {
-        text: `Quel est le coefficient multiplicateur correspondant à une augmentation de ${p} % ?`,
-        format: "short",
-        expected: [String(coeff)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`1 + ${p}/100 = ${coeff}.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genCoeffMult("short", "hausse", [5, 10, 15, 20, 25, 30, 40, 50]),
   },
   {
     kind: "template",
@@ -848,21 +1994,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Diminuer de p %, c’est multiplier par 1 - p/100.",
     tags: ["prop_proportionnalite", "coefficient_multiplicateur", "reduction", "template"],
-    generate: () => {
-      const p = randomChoice([5, 10, 20, 25, 30, 40, 50]);
-      const coeff = 1 - p / 100;
-
-      return {
-        text: `Quel est le coefficient multiplicateur correspondant à une diminution de ${p} % ?`,
-        format: "short",
-        expected: [String(coeff)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`1 - ${p}/100 = ${coeff}.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genCoeffMult("short", "baisse", [5, 10, 15, 20, 25, 30, 40, 50]),
   },
   {
     kind: "template",
@@ -875,21 +2007,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Lis le coefficient : 1,15 signifie 115 %.",
     tags: ["prop_proportionnalite", "coefficient_multiplicateur", "template"],
-    generate: () => {
-      const p = randomChoice([5, 10, 15, 20, 25, 30]);
-      const coeff = 1 + p / 100;
-
-      return {
-        text: `Multiplier par ${coeff} correspond à quelle évolution en pourcentage ?`,
-        format: "short",
-        expected: [String(p)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`${coeff} = 1 + ${p}/100. Cela correspond à une augmentation de ${p} %.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genCoeffVersTaux([5, 10, 15, 20, 25, 30, 40, 50]),
   },
 
   // =========================
@@ -948,22 +2066,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Utilise le coefficient multiplicateur.",
     tags: ["prop_proportionnalite", "evolution", "augmentation", "template"],
-    generate: () => {
-      const initial = randomChoice([50, 80, 100, 120, 200]);
-      const p = randomChoice([10, 20, 25, 30, 50]);
-      const result = initial * (1 + p / 100);
-
-      return {
-        text: `Un prix de ${initial} € augmente de ${p} %. Quel est le nouveau prix ?`,
-        format: "short",
-        expected: [String(result)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`Coefficient multiplicateur : ${1 + p / 100}. Nouveau prix : ${initial} × ${1 + p / 100} = ${result} €.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genNouvelleValeur([5, 10, 15, 20, 25, 30, 40, 50]),
   },
   {
     kind: "template",
@@ -976,22 +2079,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Après une baisse, on multiplie par 1 - p/100.",
     tags: ["prop_proportionnalite", "evolution", "reduction", "template"],
-    generate: () => {
-      const initial = randomChoice([60, 80, 100, 120, 200]);
-      const p = randomChoice([10, 20, 25, 30, 50]);
-      const result = initial * (1 - p / 100);
-
-      return {
-        text: `Un prix de ${initial} € diminue de ${p} %. Quel est le nouveau prix ?`,
-        format: "short",
-        expected: [String(result)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`Coefficient multiplicateur : ${1 - p / 100}. Nouveau prix : ${initial} × ${1 - p / 100} = ${result} €.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genNouvelleValeur([5, 10, 15, 20, 25, 30, 40, 50]),
   },
   {
     kind: "template",
@@ -1004,22 +2092,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "reunion",
     hint: "Calcule d’abord la hausse.",
     tags: ["prop_proportionnalite", "evolution", "reunion", "template"],
-    generate: () => {
-      const initial = randomChoice([100, 150, 200, 250]);
-      const p = randomChoice([10, 20, 30]);
-      const result = initial * (1 + p / 100);
-
-      return {
-        text: `À La Réunion, une facture d’électricité de ${initial} € augmente de ${p} %. Quel est le nouveau montant ?`,
-        format: "short",
-        expected: [String(result)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`${initial} × ${1 + p / 100} = ${result} €.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genNouvelleValeur([6, 8, 12, 15, 35, 45]),
   },
   {
     kind: "template",
@@ -1032,22 +2105,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Compare le nouveau prix à l’ancien.",
     tags: ["prop_proportionnalite", "evolution", "template"],
-    generate: () => {
-      const oldPrice = randomChoice([50, 80, 100, 120, 200]);
-      const p = randomChoice([10, 20, 25, 50]);
-      const newPrice = oldPrice * (1 + p / 100);
-
-      return {
-        text: `Un prix passe de ${oldPrice} € à ${newPrice} €. Quel est le pourcentage d’augmentation ?`,
-        format: "short",
-        expected: [String(p)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`L’augmentation est ${newPrice - oldPrice} €. Le taux vaut (${newPrice - oldPrice} ÷ ${oldPrice}) × 100 = ${p} %.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genTauxEvolution([5, 10, 15, 20, 25, 30, 40, 50]),
   },
   {
     kind: "fixed",
@@ -1084,24 +2142,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "reunion",
     hint: "Cherche le prix pour 1 kg.",
     tags: ["prop_proportionnalite", "probleme", "reunion", "template"],
-    generate: () => {
-      const kg1 = randomInt(2, 5);
-      const unit = randomInt(3, 8);
-      const kg2 = randomInt(6, 12);
-      const p1 = kg1 * unit;
-      const p2 = kg2 * unit;
-
-      return {
-        text: `Au marché de Saint-Paul, ${kg1} kg de fruits coûtent ${p1} €. Combien coûtent ${kg2} kg ?`,
-        format: "short",
-        expected: [String(p2)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`Le prix au kg est ${p1} ÷ ${kg1} = ${unit} €. Donc ${kg2} kg coûtent ${p2} €.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genProbleme(3),
   },
   {
     kind: "template",
@@ -1114,22 +2155,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "sport",
     hint: "Si la vitesse est constante, distance et durée sont proportionnelles.",
     tags: ["prop_proportionnalite", "probleme", "sport", "template"],
-    generate: () => {
-      const speed = randomInt(6, 12);
-      const time = randomInt(2, 5);
-      const distance = speed * time;
-
-      return {
-        text: `Un cycliste roule à vitesse constante et parcourt ${speed} km en 1 h. Quelle distance parcourt-il en ${time} h ?`,
-        format: "short",
-        expected: [String(distance)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`À vitesse constante, la distance est proportionnelle au temps : ${speed} × ${time} = ${distance} km.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genProbleme(4),
   },
   {
     kind: "template",
@@ -1142,24 +2168,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "cuisine",
     hint: "Les quantités d’une recette sont proportionnelles au nombre de personnes.",
     tags: ["prop_proportionnalite", "probleme", "cuisine", "template"],
-    generate: () => {
-      const people1 = randomChoice([2, 3, 4]);
-      const gramsPerPerson = randomChoice([50, 75, 100, 125]);
-      const people2 = randomChoice([6, 8, 10, 12]);
-      const q1 = people1 * gramsPerPerson;
-      const q2 = people2 * gramsPerPerson;
-
-      return {
-        text: `Une recette prévoit ${q1} g de riz pour ${people1} personnes. Combien faut-il de riz pour ${people2} personnes ?`,
-        format: "short",
-        expected: [String(q2)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`Par personne, il faut ${q1} ÷ ${people1} = ${gramsPerPerson} g. Donc pour ${people2} personnes : ${q2} g.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genProbleme(4),
   },
   {
     kind: "template",
@@ -1172,22 +2181,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "reunion",
     hint: "Utilise le pourcentage.",
     tags: ["prop_proportionnalite", "probleme", "pourcentage", "reunion", "template"],
-    generate: () => {
-      const total = randomChoice([100, 200, 300, 500]);
-      const p = randomChoice([10, 20, 25, 30, 40]);
-      const result = (total * p) / 100;
-
-      return {
-        text: `Dans une réserve d’eau de ${total} L, on utilise ${p} % pour arroser un jardin. Combien de litres sont utilisés ?`,
-        format: "short",
-        expected: [String(result)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`${p} % de ${total} L = ${result} L.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genProbleme(4),
   },
   {
     kind: "fixed",
@@ -1259,8 +2253,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_defi_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_proportionnalite",
-    microId: "prop_defi",
+    notionId: "prop_ratio_pourcentage",
+    microId: "prop_ratio_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Un prix augmente de 20 %, puis baisse de 20 %. Revient-il au prix initial ?",
@@ -1286,54 +2280,20 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Teste les coefficients.",
     tags: ["prop_proportionnalite", "defi", "template"],
-    generate: () => {
-      const x1 = randomInt(2, 5);
-      const k = randomInt(2, 6);
-      const x2 = randomInt(6, 12);
-      const y1 = x1 * k;
-      const wrong = y1 + (x2 - x1);
-
-      return {
-        text: `Un élève affirme : ${x1} → ${y1}, donc ${x2} → ${wrong} car il ajoute ${x2 - x1}. A-t-il raison ?`,
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: ["non"],
-        comparator: "mcq_exact",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`Non. Le coefficient est ${k}, donc ${x2} devrait donner ${x2 * k}.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genAffirmation(3),
   },
   {
     kind: "template",
     id: "prop_defi_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_proportionnalite",
-    microId: "prop_defi",
+    notionId: "prop_ratio_pourcentage",
+    microId: "prop_ratio_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Une évolution successive se traite avec des coefficients multiplicateurs.",
     tags: ["prop_proportionnalite", "defi", "evolution", "template"],
-    generate: () => {
-      const initial = randomChoice([100, 200, 300]);
-      const up = randomChoice([10, 20, 25]);
-      const down = randomChoice([10, 20, 25]);
-      const result = initial * (1 + up / 100) * (1 - down / 100);
-
-      return {
-        text: `Un prix de ${initial} € augmente de ${up} %, puis baisse de ${down} %. Quel est le prix final ?`,
-        format: "short",
-        expected: [formatNumber(result)],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`Prix final = ${initial} × ${1 + up / 100} × ${1 - down / 100} = ${formatNumber(result)} €.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genSuccessives(false),
   },
   {
     kind: "template",
@@ -1346,36 +2306,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "reunion",
     hint: "Compare les prix au kg.",
     tags: ["prop_proportionnalite", "defi", "reunion", "comparaison", "template"],
-    generate: () => {
-      const kgA = randomInt(2, 5);
-      const unitA = randomInt(4, 8);
-      const kgB = randomInt(2, 5);
-      const unitB = unitA + randomChoice([-1, 1, 2]);
-      const priceA = kgA * unitA;
-      const priceB = kgB * unitB;
-
-      const correct = unitA < unitB ? "offre A" : "offre B";
-
-      return {
-        text: `Au marché, offre A : ${kgA} kg pour ${priceA} €. Offre B : ${kgB} kg pour ${priceB} €. Quelle offre est la moins chère au kg ?`,
-        format: "qcm",
-        choices: ["offre A", "offre B"],
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          (`Offre A : ${priceA} ÷ ${kgA} = ${unitA} €/kg. Offre B : ${priceB} ÷ ${kgB} = ${unitB} €/kg.`) +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-      };
-    },
+    generate: () => genComparer(3),
   },
   {
     kind: "fixed",
     id: "prop_defi_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_proportionnalite",
-    microId: "prop_defi",
+    notionId: "prop_ratio_pourcentage",
+    microId: "prop_ratio_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique l’erreur : « augmenter de 30 %, c’est multiplier par 0,3 ».",
@@ -1394,8 +2333,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_defi_open_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_proportionnalite",
-    microId: "prop_defi",
+    notionId: "prop_ratio_pourcentage",
+    microId: "prop_ratio_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi une réduction de 25 % ne correspond pas à multiplier par 25.",
@@ -1480,26 +2419,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Vérifie si le rapport y/x est le même partout.",
     tags: ["prop_proportionnalite", "reconnaitre", "template"],
-    generate: () => {
-      const prop = randomChoice([true, false]);
-      const k = randomChoice([2, 3, 4]);
-      const x1 = randomInt(2, 4);
-      const x2 = x1 + randomInt(1, 3);
-      const y1 = x1 * k;
-      const y2 = prop ? x2 * k : x2 * k + randomChoice([1, 2]);
-      return {
-        text: `Un tableau donne : pour ${x1} on a ${y1}, pour ${x2} on a ${y2}. Ce tableau est-il proportionnel ?`,
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: [prop ? "oui" : "non"],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : un tableau est proportionnel si le rapport y/x est constant.\n\n" +
-          "Méthode : on compare les rapports.\n\n" +
-          `Calcul : ${y1}÷${x1} = ${formatNumber(y1 / x1)} et ${y2}÷${x2} = ${formatNumber(y2 / x2)}.\n\n` +
-          `Conclusion : ${prop ? "les rapports sont égaux, c’est proportionnel" : "les rapports diffèrent, ce n’est pas proportionnel"}.`,
-      };
-    },
+    generate: () => genReconnaitre(2),
   },
   {
     kind: "fixed",
@@ -1583,32 +2503,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Trouve le coefficient, puis complète.",
     tags: ["prop_proportionnalite", "table", "template", "canvas"],
-    generate: () => {
-      const k = randomChoice([2, 3, 4, 5]);
-      const x1 = randomInt(2, 5);
-      const x2 = x1 + randomInt(2, 5);
-      const y1 = x1 * k;
-      const y2 = x2 * k;
-      return {
-        text: `Complète ce tableau de proportionnalité : ${x1} → ${y1}, ${x2} → ?`,
-        format: "short",
-        expected: [String(y2)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : un coefficient relie les deux lignes du tableau.\n\n" +
-          `Méthode : coefficient = ${y1} ÷ ${x1} = ${k}.\n\n` +
-          `Calcul : ${x2} × ${k} = ${y2}.\n\n` +
-          `Conclusion : la valeur manquante est ${y2}.`,
-        canvas: tableauProportionnaliteCanvas({
-          rowLabels: ["x", "y"],
-          values: [
-            [String(x1), String(x2)],
-            [String(y1), "?"],
-          ],
-          missing: [{ row: 1, col: 1 }],
-        }),
-      };
-    },
+    generate: () => genTableau(2),
   },
   {
     kind: "template",
@@ -1621,32 +2516,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le coefficient s’applique dans les deux sens.",
     tags: ["prop_proportionnalite", "table", "template", "canvas"],
-    generate: () => {
-      const k = randomChoice([2, 3, 4]);
-      const x1 = randomInt(2, 4);
-      const y2 = randomChoice([k * 4, k * 5, k * 6]);
-      const y1 = x1 * k;
-      const x2 = y2 / k;
-      return {
-        text: `Dans un tableau de proportionnalité : ${x1} → ${y1} et ? → ${y2}. Quelle est la valeur manquante de la première ligne ?`,
-        format: "short",
-        expected: [String(x2)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : on utilise le coefficient pour remonter dans le tableau.\n\n" +
-          `Méthode : coefficient = ${y1} ÷ ${x1} = ${k}.\n\n` +
-          `Calcul : ${y2} ÷ ${k} = ${x2}.\n\n` +
-          `Conclusion : la valeur manquante est ${x2}.`,
-        canvas: tableauProportionnaliteCanvas({
-          rowLabels: ["x", "y"],
-          values: [
-            [String(x1), "?"],
-            [String(y1), String(y2)],
-          ],
-          missing: [{ row: 0, col: 1 }],
-        }),
-      };
-    },
+    generate: () => genTableau(3),
   },
   {
     kind: "fixed",
@@ -1686,22 +2556,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Coefficient = valeur de la 2e ligne ÷ valeur de la 1re ligne.",
     tags: ["prop_proportionnalite", "table", "coefficient", "template"],
-    generate: () => {
-      const k = randomChoice([2, 3, 4, 5]);
-      const x = randomInt(2, 6);
-      const y = x * k;
-      return {
-        text: `Dans un tableau de proportionnalité, ${x} correspond à ${y}. Quel est le coefficient de proportionnalité (de la 1re vers la 2e ligne) ?`,
-        format: "short",
-        expected: [String(k)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : le coefficient relie la 1re ligne à la 2e.\n\n" +
-          "Méthode : on divise la valeur de la 2e ligne par celle de la 1re.\n\n" +
-          `Calcul : ${y} ÷ ${x} = ${k}.\n\n` +
-          `Conclusion : le coefficient est ${k}.`,
-      };
-    },
+    generate: () => genTableau(3),
   },
   {
     kind: "fixed",
@@ -1758,22 +2613,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Coefficient = total ÷ quantité.",
     tags: ["prop_proportionnalite", "coeff", "template"],
-    generate: () => {
-      const k = randomChoice([2, 3, 5, 6]);
-      const q = randomInt(2, 6);
-      const total = k * q;
-      return {
-        text: `${q} objets identiques coûtent ${total} €. Quel est le prix d’un objet ?`,
-        format: "short",
-        expected: [String(k)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : le coefficient est le prix unitaire.\n\n" +
-          "Méthode : on divise le total par la quantité.\n\n" +
-          `Calcul : ${total} ÷ ${q} = ${k}.\n\n` +
-          `Conclusion : un objet coûte ${k} €.`,
-      };
-    },
+    generate: () => genCoeff(2),
   },
   {
     kind: "template",
@@ -1786,22 +2626,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "On multiplie la quantité par le coefficient.",
     tags: ["prop_proportionnalite", "coeff", "template"],
-    generate: () => {
-      const k = randomChoice([2, 3, 4, 5]);
-      const q = randomInt(4, 9);
-      const total = k * q;
-      return {
-        text: `Un objet coûte ${k} €. Combien coûtent ${q} objets identiques ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : on utilise le prix unitaire comme coefficient.\n\n" +
-          "Méthode : on multiplie la quantité par le prix unitaire.\n\n" +
-          `Calcul : ${q} × ${k} = ${total}.\n\n` +
-          `Conclusion : ${q} objets coûtent ${total} €.`,
-      };
-    },
+    generate: () => genCoeff(3),
   },
   {
     kind: "fixed",
@@ -1885,24 +2710,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Produit en croix.",
     tags: ["prop_proportionnalite", "quatrieme", "template"],
-    generate: () => {
-      const k = randomChoice([2, 3, 4]);
-      const a = randomInt(2, 5);
-      const b = a * k;
-      const c = a + randomInt(1, 4);
-      const d = c * k;
-      return {
-        text: `${a} objets coûtent ${b} €. Combien coûtent ${c} objets ?`,
-        format: "short",
-        expected: [String(d)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : on cherche la quatrième proportionnelle.\n\n" +
-          `Méthode : produit en croix, prix = ${b} × ${c} ÷ ${a}.\n\n` +
-          `Calcul : ${b * c} ÷ ${a} = ${d}.\n\n` +
-          `Conclusion : ${c} objets coûtent ${d} €.`,
-      };
-    },
+    generate: () => genQuatrieme(2),
   },
   {
     kind: "template",
@@ -1915,24 +2723,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Passe d’abord à l’unité.",
     tags: ["prop_proportionnalite", "quatrieme", "unite", "template"],
-    generate: () => {
-      const unite = randomChoice([2, 3, 4, 5]);
-      const q1 = randomInt(2, 5);
-      const q2 = randomInt(6, 10);
-      const total1 = unite * q1;
-      const total2 = unite * q2;
-      return {
-        text: `${q1} kg de farine coûtent ${total1} €. Combien coûtent ${q2} kg ?`,
-        format: "short",
-        expected: [String(total2)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : on peut passer par le prix d’un kg.\n\n" +
-          `Méthode : prix d’un kg = ${total1} ÷ ${q1} = ${unite} €.\n\n` +
-          `Calcul : ${q2} × ${unite} = ${total2}.\n\n` +
-          `Conclusion : ${q2} kg coûtent ${total2} €.`,
-      };
-    },
+    generate: () => genQuatrieme(2),
   },
   {
     kind: "fixed",
@@ -1972,24 +2763,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Produit en croix avec une recette.",
     tags: ["prop_proportionnalite", "quatrieme", "contexte", "template"],
-    generate: () => {
-      const k = randomChoice([2, 3, 4]);
-      const pers1 = randomInt(2, 4);
-      const oeufs1 = pers1 * k;
-      const pers2 = pers1 + randomInt(2, 5);
-      const oeufs2 = pers2 * k;
-      return {
-        text: `Une recette pour ${pers1} personnes utilise ${oeufs1} œufs. Combien d’œufs faut-il pour ${pers2} personnes ?`,
-        format: "short",
-        expected: [String(oeufs2)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : on cherche la quatrième proportionnelle.\n\n" +
-          `Méthode : produit en croix, œufs = ${oeufs1} × ${pers2} ÷ ${pers1}.\n\n` +
-          `Calcul : ${oeufs1 * pers2} ÷ ${pers1} = ${oeufs2}.\n\n` +
-          `Conclusion : il faut ${oeufs2} œufs.`,
-      };
-    },
+    generate: () => genQuatrieme(3),
   },
   {
     kind: "fixed",
@@ -2046,22 +2820,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Pourcentage de N = N × p ÷ 100.",
     tags: ["prop_proportionnalite", "pourcentage", "template"],
-    generate: () => {
-      const p = randomChoice([10, 20, 25, 50]);
-      const n = randomChoice([40, 60, 80, 100, 200]);
-      const r = (n * p) / 100;
-      return {
-        text: `Combien font ${p} % de ${n} ?`,
-        format: "short",
-        expected: [String(r)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : prendre un pourcentage, c’est multiplier par p ÷ 100.\n\n" +
-          `Méthode : ${p} % de ${n} = ${n} × ${p} ÷ 100.\n\n` +
-          `Calcul : = ${r}.\n\n` +
-          `Conclusion : ${p} % de ${n} = ${r}.`,
-      };
-    },
+    generate: () => genPourcentage(["partie", "taux"], [5, 10, 20, 25, 30, 40, 50, 75]),
   },
   {
     kind: "template",
@@ -2074,23 +2833,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "On calcule la réduction puis on la retire du prix.",
     tags: ["prop_proportionnalite", "pourcentage", "reduction", "template"],
-    generate: () => {
-      const p = randomChoice([10, 20, 25, 50]);
-      const prix = randomChoice([40, 60, 80, 100]);
-      const reduction = (prix * p) / 100;
-      const finalPrix = prix - reduction;
-      return {
-        text: `Un article coûte ${prix} €. Il bénéficie d’une réduction de ${p} %. Quel est le nouveau prix ?`,
-        format: "short",
-        expected: [String(finalPrix)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : une réduction se soustrait au prix initial.\n\n" +
-          `Méthode : réduction = ${prix} × ${p} ÷ 100 = ${reduction} €.\n\n` +
-          `Calcul : ${prix} - ${reduction} = ${finalPrix}.\n\n` +
-          `Conclusion : le nouveau prix est ${finalPrix} €.`,
-      };
-    },
+    // Retrouver le TOUT à partir d'une partie et de son pourcentage.
+    generate: () => genPourcentage(["total"], [5, 10, 20, 25, 40, 50, 75]),
   },
   {
     kind: "fixed",
@@ -2170,23 +2914,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Augmentation : 1 + p/100.",
     tags: ["prop_proportionnalite", "coeff_multiplicateur", "template"],
-    generate: () => {
-      const p = randomChoice([5, 15, 25, 40]);
-      const coeff = 1 + p / 100;
-      const cPoint = String(coeff);
-      const cComma = cPoint.replace(".", ",");
-      return {
-        text: `Par quel nombre faut-il multiplier pour augmenter une valeur de ${p} % ?`,
-        format: "short",
-        expected: [cPoint, cComma],
-        comparator: "number_equal",
-        explanation:
-          "Définition : augmenter de p % revient à multiplier par 1 + p ÷ 100.\n\n" +
-          `Méthode : 1 + ${p} ÷ 100.\n\n` +
-          `Calcul : = ${cComma}.\n\n` +
-          `Conclusion : on multiplie par ${cComma}.`,
-      };
-    },
+    generate: () => genCoeffMult("short", "mixte", [5, 12, 15, 25, 35, 45]),
   },
   {
     kind: "template",
@@ -2199,23 +2927,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "On multiplie la valeur par le coefficient.",
     tags: ["prop_proportionnalite", "coeff_multiplicateur", "template"],
-    generate: () => {
-      const p = randomChoice([10, 20, 50]);
-      const prix = randomChoice([40, 60, 80, 200]);
-      const coeff = 1 + p / 100;
-      const result = prix * coeff;
-      return {
-        text: `Un prix de ${prix} € augmente de ${p} %. Quel est le nouveau prix ?`,
-        format: "short",
-        expected: [String(result)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : augmenter de p %, c’est multiplier par 1 + p ÷ 100.\n\n" +
-          `Méthode : coefficient = ${formatNumber(coeff)}.\n\n` +
-          `Calcul : ${prix} × ${formatNumber(coeff)} = ${result}.\n\n` +
-          `Conclusion : le nouveau prix est ${result} €.`,
-      };
-    },
+    generate: () => genAppliquerCoeff([10, 20, 25, 30, 40, 50]),
   },
   {
     kind: "fixed",
@@ -2272,22 +2984,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "On applique le coefficient multiplicateur.",
     tags: ["prop_proportionnalite", "evolution", "template"],
-    generate: () => {
-      const p = randomChoice([10, 20, 25, 50]);
-      const valeur = randomChoice([40, 60, 80, 200]);
-      const result = valeur * (1 + p / 100);
-      return {
-        text: `Une population de ${valeur} habitants augmente de ${p} %. Quelle est la nouvelle population ?`,
-        format: "short",
-        expected: [String(result)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : une augmentation de p % multiplie par 1 + p ÷ 100.\n\n" +
-          `Méthode : coefficient = ${formatNumber(1 + p / 100)}.\n\n` +
-          `Calcul : ${valeur} × ${formatNumber(1 + p / 100)} = ${result}.\n\n` +
-          `Conclusion : la nouvelle population est ${result}.`,
-      };
-    },
+    generate: () => genNouvelleValeur([5, 10, 15, 20, 25, 30, 40, 50]),
   },
   {
     kind: "fixed",
@@ -2323,24 +3020,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "La distance est proportionnelle au temps à vitesse constante.",
     tags: ["prop_proportionnalite", "probleme", "vitesse", "template"],
-    generate: () => {
-      const vitesse = randomChoice([4, 5, 6]);
-      const t1 = randomInt(2, 4);
-      const t2 = t1 + randomInt(2, 5);
-      const d1 = vitesse * t1;
-      const d2 = vitesse * t2;
-      return {
-        text: `Un marcheur parcourt ${d1} km en ${t1} h à allure constante. Quelle distance parcourt-il en ${t2} h ?`,
-        format: "short",
-        expected: [String(d2)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : à allure constante, la distance est proportionnelle au temps.\n\n" +
-          `Méthode : vitesse = ${d1} ÷ ${t1} = ${vitesse} km/h.\n\n` +
-          `Calcul : ${t2} × ${vitesse} = ${d2}.\n\n` +
-          `Conclusion : il parcourt ${d2} km.`,
-      };
-    },
+    generate: () => genProbleme(4),
   },
   {
     kind: "template",
@@ -2353,24 +3033,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Produit en croix.",
     tags: ["prop_proportionnalite", "probleme", "recette", "template"],
-    generate: () => {
-      const k = randomChoice([2, 3, 4]);
-      const p1 = randomInt(2, 4);
-      const g1 = p1 * k * 50;
-      const p2 = p1 + randomInt(2, 4);
-      const g2 = p2 * k * 50;
-      return {
-        text: `Une recette pour ${p1} personnes nécessite ${g1} g de farine. Combien de farine pour ${p2} personnes ?`,
-        format: "short",
-        expected: [String(g2)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : la quantité de farine est proportionnelle au nombre de personnes.\n\n" +
-          `Méthode : produit en croix, farine = ${g1} × ${p2} ÷ ${p1}.\n\n` +
-          `Calcul : ${g1 * p2} ÷ ${p1} = ${g2}.\n\n` +
-          `Conclusion : il faut ${g2} g de farine.`,
-      };
-    },
+    generate: () => genProbleme(3),
   },
   {
     kind: "fixed",
@@ -2421,8 +3084,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_defi_fixed_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_proportionnalite",
-    microId: "prop_defi",
+    notionId: "prop_ratio_pourcentage",
+    microId: "prop_ratio_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un prix augmente de 10 % puis baisse de 10 %. Retrouve-t-on le prix de départ ?",
@@ -2443,37 +3106,21 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_defi_tpl_1_successif",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_proportionnalite",
-    microId: "prop_defi",
+    notionId: "prop_ratio_pourcentage",
+    microId: "prop_ratio_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "On applique d’abord la première évolution, puis la seconde.",
     tags: ["prop_proportionnalite", "defi", "successif", "template"],
-    generate: () => {
-      const prix = randomChoice([100, 200]);
-      const p = randomChoice([10, 20, 50]);
-      const apres1 = prix * (1 + p / 100);
-      const apres2 = apres1 * (1 - p / 100);
-      return {
-        text: `Un prix de ${prix} € augmente de ${p} %, puis baisse de ${p} %. Quel est le prix final ?`,
-        format: "short",
-        expected: [String(apres2)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : les coefficients d’évolution se multiplient.\n\n" +
-          `Méthode : ${prix} × ${formatNumber(1 + p / 100)} = ${apres1}, puis × ${formatNumber(1 - p / 100)}.\n\n` +
-          `Calcul : ${apres1} × ${formatNumber(1 - p / 100)} = ${apres2}.\n\n` +
-          `Conclusion : le prix final est ${apres2} €.`,
-      };
-    },
+    generate: () => genSuccessives(true),
   },
   {
     kind: "fixed",
     id: "prop_defi_open_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_proportionnalite",
-    microId: "prop_defi",
+    notionId: "prop_ratio_pourcentage",
+    microId: "prop_ratio_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi deux évolutions en pourcentage ne s’additionnent pas toujours simplement.",
@@ -2487,5 +3134,141 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : par exemple +10 % puis +10 % donne ×1,1×1,1 = ×1,21, soit +21 % (pas +20 %).\n\n" +
       "Conclusion : on multiplie les coefficients, donc les pourcentages ne s’additionnent pas simplement.",
     tags: ["prop_proportionnalite", "defi", "open"],
+  },
+
+  /* =========================================================
+     GÉNÉRATEURS DES ÉTOILES QUI N'AVAIENT QUE DU FIGÉ — 30/09/2026
+     À ces étoiles, le coach tournait sur 2 à 4 items figés ;
+     dès qu'ils étaient épuisés, il les resservait (17 à 18 répétitions sur 20).
+  ========================================================= */
+  {
+    kind: "template",
+    id: "prop_reconnaitre_tpl_etoile1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_reconnaitre",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Si une grandeur double, l’autre doit doubler aussi.",
+    tags: ["prop_proportionnalite", "reconnaitre", "template"],
+    generate: () => genReconnaitre(1),
+  },
+  {
+    kind: "template",
+    id: "prop_reconnaitre_tpl_etoile3",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Calcule le quotient pour CHAQUE relevé : il doit être toujours le même.",
+    tags: ["prop_proportionnalite", "reconnaitre", "template"],
+    generate: () => genReconnaitre(3),
+  },
+  {
+    kind: "template",
+    id: "prop_table_tpl_etoile1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_table",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Regarde par combien on multiplie dans la première ligne.",
+    tags: ["prop_proportionnalite", "tableau", "template", "canvas"],
+    generate: () => genTableau(1),
+  },
+  {
+    kind: "template",
+    id: "prop_coeff_tpl_etoile1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Coefficient = deuxième grandeur ÷ première grandeur.",
+    tags: ["prop_proportionnalite", "coefficient", "template"],
+    generate: () => genCoeff(1),
+  },
+  {
+    kind: "template",
+    id: "prop_defi_tpl_etoile4_affirmation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Refais le calcul toi-même : en proportionnalité, on multiplie, on n’ajoute pas.",
+    tags: ["prop_proportionnalite", "defi", "erreur", "template"],
+    generate: () => genAffirmation(2),
+  },
+  {
+    kind: "template",
+    id: "prop_defi_tpl_etoile4_comparer",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Ramène chaque situation à une unité avant de comparer.",
+    tags: ["prop_proportionnalite", "defi", "comparaison", "template"],
+    generate: () => genComparer(2),
+  },
+  {
+    kind: "template",
+    id: "prop_pourcentage_tpl_etoile1",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_ratio_pourcentage",
+    microId: "prop_pourcentage",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "10 %, c’est diviser par 10 ; 50 %, c’est la moitié ; 25 %, c’est le quart.",
+    tags: ["prop_proportionnalite", "pourcentage", "template"],
+    generate: () => genPourcentage(["partie", "aide"], [10, 20, 25, 50]),
+  },
+  {
+    kind: "template",
+    id: "prop_pourcentage_tpl_etoile1_fraction",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_ratio_pourcentage",
+    microId: "prop_pourcentage",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "p % = p/100, puis on simplifie la fraction.",
+    tags: ["prop_proportionnalite", "pourcentage", "qcm", "template"],
+    generate: () => genPourcentage(["fraction"], [10, 20, 25, 50, 75]),
+  },
+  {
+    kind: "template",
+    id: "prop_coeff_multiplicateur_tpl_etoile2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_ratio_pourcentage",
+    microId: "prop_coeff_multiplicateur",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Hausse : 100 % + p % ; baisse : 100 % − p %. Puis divise par 100.",
+    tags: ["prop_proportionnalite", "coefficient_multiplicateur", "qcm", "template"],
+    generate: () => genCoeffMult("qcm", "mixte", [10, 20, 25, 30, 40, 50]),
+  },
+  {
+    kind: "template",
+    id: "prop_evolution_tpl_etoile2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_ratio_pourcentage",
+    microId: "prop_evolution",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Calcule d’abord p % de la valeur, puis ajoute-le ou retire-le.",
+    tags: ["prop_proportionnalite", "evolution", "template"],
+    generate: () => genNouvelleValeur([10, 20, 25, 50]),
   },
 ];
