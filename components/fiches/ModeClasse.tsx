@@ -362,11 +362,13 @@ function Section({
 
     case "etapes":
       return (
-        <div className="grid gap-6">
+        // Serré le 30/09/2026 (gap 6 → 5, p-7 → p-5) : pièges et « à retenir »
+        // dépassaient de 12 px sur toutes les fiches, à 1280 × 800.
+        <div className="grid gap-5">
           {section.etapes.map((etape, index) => (
             <div
               key={etape}
-              className={`grid items-center gap-5 rounded-3xl border-4 p-7 shadow-sm md:grid-cols-[120px_1fr] ${t.carte}`}
+              className={`grid items-center gap-5 rounded-3xl border-4 p-5 shadow-sm md:grid-cols-[120px_1fr] ${t.carte}`}
             >
               <p className={`text-5xl font-black ${t.accent}`}>
                 {index + 1}
@@ -389,8 +391,8 @@ function Section({
        coutait toute la largeur. */
     case "exemple":
       return (
-        <div className="grid gap-6">
-          <div className="rounded-3xl border-4 border-cyan-200 bg-cyan-50 p-6 lg:p-8">
+        <div className="grid gap-4">
+          <div className="rounded-3xl border-4 border-cyan-200 bg-cyan-50 p-5 lg:p-6">
             <p className="text-2xl font-black leading-tight text-slate-950 lg:text-3xl">
               <M>{section.enonce}</M>
             </p>
@@ -398,7 +400,7 @@ function Section({
               <M>{section.question}</M>
             </p>
           </div>
-          <div className="flex flex-col rounded-3xl border-4 border-emerald-200 bg-emerald-50 p-6 lg:p-8">
+          <div className="flex flex-col rounded-3xl border-4 border-emerald-200 bg-emerald-50 p-5 lg:p-6">
             <p className="text-2xl font-black uppercase text-emerald-700">
               Correction
             </p>
@@ -418,8 +420,8 @@ function Section({
     /* Même correction que pour « exemple » : en lignes, jamais en colonnes. */
     case "exercice":
       return (
-        <div className="grid gap-6">
-          <div className="rounded-3xl border-4 border-cyan-200 bg-cyan-50 p-6 lg:p-8">
+        <div className="grid gap-4">
+          <div className="rounded-3xl border-4 border-cyan-200 bg-cyan-50 p-5 lg:p-6">
             <p className="text-2xl font-black leading-tight text-slate-950 lg:text-3xl">
               <M>{section.enonce}</M>
             </p>
@@ -429,7 +431,7 @@ function Section({
               </p>
             ) : null}
           </div>
-          <div className="flex flex-col rounded-3xl border-4 border-amber-200 bg-amber-50 p-6 lg:p-8">
+          <div className="flex flex-col rounded-3xl border-4 border-amber-200 bg-amber-50 p-5 lg:p-6">
             <p className="text-3xl font-black uppercase text-amber-700">
               Consigne
             </p>
@@ -614,6 +616,14 @@ export default function ModeClasse({
   }
 
   const slide = slides[index];
+  /** Dessin en colonne étroite à gauche : demandé par la diapo, ou dès que
+   *  le texte s'empilerait en lignes (exemple, exercice, texte long). */
+  const figureEtroite =
+    !!slide &&
+    (slide.figureEtroite ||
+      slide.section.type === "exemple" ||
+      slide.section.type === "exercice" ||
+      signesProjetes(slide.section) > 320);
 
   const overlay = (
     <div
@@ -737,13 +747,16 @@ export default function ModeClasse({
                 // la diapo débordait de 445 (mesuré à 1280 × 800). À gauche, en
                 // 22rem, le texte garde les deux tiers de l'écran : ce n'est pas
                 // la « bande étroite » du 04/09, et ce sont deux colonnes, pas trois.
-                slide.figureEtroite
+                // ⛔⛔ ET C'EST AUSSI LA PLACE DES EXEMPLES (30/09/2026). Empilés
+                // en pleine largeur — dessin, énoncé, correction —, ils
+                // débordaient de 100 à 340 px sur TOUTES les fiches du site
+                // (mesuré à 1280 × 800, diapo par diapo : 16 fiches de 6e, et
+                // les anciennes autant, le cercle à +320 dès la définition).
+                // Dessin étroit à gauche, lignes empilées à droite : deux
+                // colonnes, jamais trois, et la hauteur tient.
+                figureEtroite
                   ? "grid gap-6 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:items-start lg:gap-10"
-                  : slide.section.type === "exemple" ||
-                      slide.section.type === "exercice" ||
-                      signesProjetes(slide.section) > 320
-                    ? "grid gap-6"
-                    : "grid gap-6 lg:grid-cols-2 lg:gap-10"
+                  : "grid gap-6 lg:grid-cols-2 lg:gap-10"
               }
             >
               {/* ⛔ LE DESSIN ÉTAIT LA VRAIE CAUSE DU DÉBORDEMENT — mesuré le
@@ -779,7 +792,7 @@ export default function ModeClasse({
                   222 px : projeté, le dessin se plie à un mot par ligne et
                   monte à 702 px de haut dans une diapo qui en montre 621.
                   Voir lib/canvas/largeur-projetee.tsx pour les mesures. */}
-              <div className={`mx-auto w-full ${slide.figureEtroite ? "max-w-[22rem]" : "max-w-xl"} [&_svg]:w-full`}>
+              <div className={`mx-auto w-full ${figureEtroite ? "max-w-[22rem]" : "max-w-xl"} [&_svg]:w-full`}>
                 <LargeurProjetee.Provider value={LARGEUR_PROJETEE}>
                   {slide.schema}
                 </LargeurProjetee.Provider>
