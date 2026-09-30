@@ -68,10 +68,12 @@ export const exercicesAutoResolutionGraphiquePremiere: FicheExercicesData = {
           enonce: "Voici la courbe d'une fonction $f$ définie sur $[-3 ; 5]$. Résoudre graphiquement : $f(x) = 0$ ; $f(x) = -3$ ; $f(x) = -5$.",
           figure: repere([-3, 5, -5, 7], [{ q: [1, -2, -3] }], [], undefined, true),
           correction:
-            "On trace l'horizontale d'ordonnée $k$, et on lit les abscisses des points d'intersection.\n$f(x) = 0$ : la courbe coupe l'axe des abscisses en $-1$ et en $3$. $S = \\{-1 ; 3\\}$.\n$f(x) = -3$ : $S = \\{0 ; 2\\}$.\n$f(x) = -5$ : l'horizontale passe sous le point le plus bas, d'ordonnée $-4$. Aucune solution : $S = \\varnothing$.\n⚠️ Les solutions sont des ABSCISSES : répondre « $-3$ », c'est recopier la question.",
+            "On trace l'horizontale d'ordonnée $k$, et on lit les abscisses des points d'intersection.\n$f(x) = 0$ : la courbe coupe l'axe des abscisses en $-1$ et en $3$. $S = \\{-1 ; 3\\}$.\n$f(x) = -3$ : $S = \\{0 ; 2\\}$.\n$f(x) = -5$ : l'horizontale passe sous le point le plus bas, d'ordonnée $-4$. Aucune solution : $S = \\varnothing$.\n⚠️ Les solutions sont des ABSCISSES : répondre « $-3$ », c'est recopier la question.\nSur le dessin, les deux points rouges de l'axe des abscisses sont en $-1$ et en $3$.",
           schema: ecranSeulement(repere([-3, 5, -5, 7], [{ q: [1, -2, -3] }], [
-            { x: -1, y: 0, label: "−1" },
-            { x: 3, y: 0, label: "3" },
+            // Étiquettes vidées (30/09/2026) : le « −1 » se posait sur la
+            // graduation « 1 » de l'axe vertical. L'axe des abscisses les porte déjà.
+            { x: -1, y: 0, label: "" },
+            { x: 3, y: 0, label: "" },
             { x: 0, y: -3, label: "0" },
             { x: 2, y: -3, label: "2" },
           ], -3, true)),

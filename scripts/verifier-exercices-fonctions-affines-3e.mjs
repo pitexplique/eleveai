@@ -279,6 +279,7 @@ lancer({
     ["ex. 20 : 21 km déclarés possibles", "On peut faire $20$ km au plus", "On peut faire $21$ km au plus"],
     ["un point marqué hors de sa droite", "{ x: 1.2, y: -1 }", "{ x: 1.2, y: -2 }"],
     ["une micro d'une autre notion", "micros: [\"affine_calcul_image\"],", "micros: [\"fonction_image\"],"],
-    ["un $ dans un canvas", "label: \"plein\"", "label: \"$plein$\""],
+    // (30/09/2026 : l'étiquette « plein » a été vidée — elle chevauchait le « 6 » de l'axe.)
+    ["un $ dans un canvas", "label: \"bascule\"", "label: \"$bascule$\""],
   ],
 });
