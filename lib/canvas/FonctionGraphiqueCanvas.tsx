@@ -29,6 +29,30 @@ function formatNumber(n: number) {
   return Number.isInteger(n) ? String(n) : n.toFixed(1);
 }
 
+/** Largeur d'un chiffre de graduation écrit en 12 : ~7 unités par signe. */
+function largeurChiffre(n: number) {
+  return 7 * formatNumber(n).length;
+}
+
+/**
+ * Les graduations dont le CHIFFRE a sa place (30/09/2026). On les prend par
+ * priorité (petit nombre d'abord : le « 0 », les bornes), et on n'en garde une
+ * que si elle reste à `demi(a) + demi(b) + 2` de toutes celles déjà gardées,
+ * positions mesurées APRÈS les remontées au bord. Renvoyées dans l'ordre.
+ */
+function espacer(
+  valeurs: number[],
+  pos: (v: number) => number,
+  demi: (v: number) => number,
+  priorite: (v: number) => number,
+): number[] {
+  const gardes: number[] = [];
+  for (const v of [...valeurs].sort((a, b) => priorite(a) - priorite(b) || a - b)) {
+    if (gardes.every((g) => Math.abs(pos(g) - pos(v)) >= demi(g) + demi(v) + 2)) gardes.push(v);
+  }
+  return gardes.sort((a, b) => a - b);
+}
+
 export default function FonctionGraphiqueCanvas({ figure }: Props) {
   if (figure.kind !== "fonctionGraphique") return null;
 
@@ -161,17 +185,30 @@ export default function FonctionGraphiqueCanvas({ figure }: Props) {
           const nbX = xmax - xmin + 1;
           const ecartX = width / Math.max(1, nbX - 1);
           const pasX = Math.max(1, Math.ceil(22 / ecartX));
-          return Array.from({ length: nbX }, (_, i) => xmin + i)
-            .filter((x) => x === 0 || (x - xmin) % pasX === 0)
+          const marge = 10;
+          const posX = (x: number) => {
+            const sx = toSvgX(x, xmin, xmax, width);
+            return Math.min(width - marge, Math.max(marge, sx)) + (x === 0 && sx > marge ? 8 : 0);
+          };
+          // ⛔ LES REMONTÉES AU BORD RAPPROCHENT LES CHIFFRES (30/09/2026, feuille
+          // de dérivation de 1re spé). Le « 0 » décalé de 8 px touchait le « 1 »
+          // quand l'unité est petite. On place donc tous les chiffres, puis on
+          // n'écrit que ceux qui ont leur place (`espacer`), le « 0 » d'abord,
+          // puis les bornes.
+          const gardes = espacer(
+            Array.from({ length: nbX }, (_, i) => xmin + i).filter((x) => x === 0 || (x - xmin) % pasX === 0),
+            posX,
+            (x) => largeurChiffre(x) / 2,
+            (x) => (x === 0 ? 0 : x === xmin || x === xmax ? 1 : 2),
+          );
+          return gardes
             .map((x) => {
-              const sx = toSvgX(x, xmin, xmax, width);
               // ⚠️ L'ÉTIQUETTE EST CENTRÉE SUR SA VALEUR, et `toSvgX` envoie
               // `xmin` sur 0 et `xmax` sur `width` : aux deux extrémités, la
               // moitié du chiffre sortait du viewBox. Mesuré le 01/09/2026 —
               // quatre graduations débordaient sur la fiche des fonctions
               // affines. On les ramène dans le cadre plutôt que de les
               // supprimer : un axe sans ses bornes se lit mal.
-              const marge = 10;
               // Le « 0 » est centré sur l'origine, donc TRAVERSÉ par l'axe
               // vertical, qui lui barre le ventre. On le décale de quelques
               // pixels vers la droite : la place à gauche est prise par la
@@ -180,9 +217,8 @@ export default function FonctionGraphiqueCanvas({ figure }: Props) {
               // est alors le bord gauche, il ne le traverse pas, et le décalage
               // le collait au chiffre suivant — « 03 » lu sur l'axe des vitesses
               // d'une éolienne, gradué de 3 en 3 (21/09/2026).
-              const decalZero = x === 0 && sx > marge ? 8 : 0;
-              const sxClamp =
-                Math.min(width - marge, Math.max(marge, sx)) + decalZero;
+              // (Ce décalage et la remontée au bord sont calculés dans `posX`.)
+              const sxClamp = posX(x);
               return (
                 <text key={`tx-${x}`} x={sxClamp} y={xAxisY + 17} textAnchor="middle" fontSize="12" fill="#334155">
                   {x !== 0 ? formatNumber(x) : "0"}
@@ -195,7 +231,8 @@ export default function FonctionGraphiqueCanvas({ figure }: Props) {
           const nbY = ymax - ymin + 1;
           const ecartY = height / Math.max(1, nbY - 1);
           const pasY = Math.max(1, Math.ceil(16 / ecartY));
-          return Array.from({ length: nbY }, (_, i) => ymin + i)
+          const posY = (y: number) => Math.min(height - 7, Math.max(7, toSvgY(y, ymin, ymax, height)));
+          const candidats = Array.from({ length: nbY }, (_, i) => ymin + i)
             .filter((y) => y !== 0 && (y - ymin) % pasY === 0)
             // ⛔ LA RANGÉE DES ABSCISSES EST RÉSERVÉE (30/09/2026, feuilles de
             // terminale : 38 chevauchements mesurés à 375 px). Les abscisses
@@ -207,7 +244,12 @@ export default function FonctionGraphiqueCanvas({ figure }: Props) {
             // trait de graduation, lui, reste tracé.
             // ⚠️ On teste la position APRÈS la remontée au bord (`syClamp`
             // plus bas) : un « −1 » posé sur le bord du bas est remonté de 7 px.
-            .filter((y) => y > 0 || Math.min(height - 7, toSvgY(y, ymin, ymax, height)) - xAxisY >= 26)
+            .filter((y) => y > 0 || Math.min(height - 7, toSvgY(y, ymin, ymax, height)) - xAxisY >= 26);
+          // ⛔ Même geste que pour les abscisses (30/09/2026) : le « −4 » d'un
+          // cadre qui s'arrête à −4 était remonté à 10 unités du « −3 », le « 8 »
+          // descendu à 10 du « 7 ». Un chiffre fait 12 de haut : les bornes
+          // passent d'abord, et un voisin trop proche n'est pas écrit.
+          return espacer(candidats, posY, () => 6.5, (y) => (y === ymin || y === ymax ? 0 : 1))
             .map((y) => {
               const sy = toSvgY(y, ymin, ymax, height);
               // ⛔⛔ LE « −1 » DE L'AXE VERTICAL SE LISAIT COMME UNE ABSCISSE —
