@@ -32,9 +32,9 @@ export default function TiMargoBulle({ texte, humeur = "normal" }: { texte: stri
         alt="Ti Margo"
         width={112}
         height={140}
-        className="h-24 w-auto shrink-0 object-contain lg:h-32"
+        className="h-20 w-auto shrink-0 object-contain lg:h-24"
       />
-      <p className={`relative mb-6 rounded-3xl border-4 px-5 py-3 text-2xl font-black leading-snug lg:text-3xl ${BULLE[humeur]}`}>
+      <p className={`relative mb-3 rounded-3xl border-4 px-4 py-2 text-xl font-black leading-snug lg:text-2xl ${BULLE[humeur]}`}>
         {humeur === "attention" ? "⚠️ " : humeur === "joie" ? "⭐ " : ""}
         {texte}
       </p>

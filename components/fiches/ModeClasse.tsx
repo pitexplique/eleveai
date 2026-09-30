@@ -228,6 +228,11 @@ export type ClasseSlide = {
   /** Le dessin se LIT pendant tout l'exercice (la courbe d'un énoncé) : il
    *  reste à gauche, en colonne étroite, au lieu d'être empilé en grand. */
   figureEtroite?: boolean;
+  /** ⭐ TI MARGO (30/09/2026) — posé dans l'EN-TÊTE, entre le titre et le
+   *  compteur. En colonne (comme `schema`), il faisait TROIS colonnes sur une
+   *  diapo « objectif » (Ti Margo | phrase | encadré) ; en bandeau sous le
+   *  titre, il faisait déborder quatre diapos. Mesuré à 1280 × 800. */
+  bandeau?: ReactNode;
 };
 
 const BTN_REVELER =
@@ -698,6 +703,9 @@ export default function ModeClasse({
                 <M>{slide.titre}</M>
               </h2>
             </div>
+            {/* Dans l'en-tête, à côté du titre : aucune hauteur prise au contenu
+                (en bandeau dessous, quatre diapos débordaient de 50 à 137 px). */}
+            {slide.bandeau ? <div className="min-w-0 flex-1 self-center">{slide.bandeau}</div> : null}
             <p className="rounded-full bg-slate-100 px-5 py-3 text-xl font-black text-slate-700">
               {index + 1} / {slides.length}
             </p>

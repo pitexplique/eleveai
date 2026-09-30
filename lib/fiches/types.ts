@@ -182,7 +182,7 @@ export type FicheCoursData = {
    * ENGENDRÉES par `slidesDepuisFiche` : c'est donc ici, dans la donnée, que
    * Ti Margo dit sa phrase — une phrase courte par diapo, sans LaTeX (le mode
    * classe n'a pas de KaTeX). Chaque clé présente pose Ti Margo et sa bulle
-   * sous le dessin de la diapo correspondante. Optionnel : les autres fiches
+   * en bandeau, sous le titre de la diapo correspondante. Optionnel : les autres fiches
    * ne changent pas.
    */
   tiMargo?: Partial<Record<TiMargoDiapo, string>>;
