@@ -1,35 +1,66 @@
 // ─── Fiche de cours : les nombres entiers (6e) ─────────────────────────────────
 // Fiche « en blocs » alignée sur la banque du coach
 // lib/tutor-v4/questionBank/6e/maths/entiers.bank.ts (notionId entier_nombre).
-// Refaite pour un élève de 6e (standard Frédéric du 13/07) : PEU de lecture,
-// les nombres MONTRÉS dans le tableau de numération et sur la droite graduée
-// (canvas du coach) plutôt que racontés. Propriétés = une ligne chacune.
 //
-// Micro-compétences couvertes :
-// - entier_lire_ecrire  → definition, methode « Je repère le rang », usages 1,
-//                         exemple « Écrire », entraînement 1
-// - entier_rang         → figure (tableau de numération), propriété « La position »,
-//                         exemple « Écrire » (chiffre des dizaines), entraînement 2
-// - entier_comparer     → propriété « Comparer », usages 2, exemple « Comparer »
-//                         (tableau), entraînement 3, piège 2
-// - entier_decomposer   → propriété « Décomposer », usages 3, exemple « Décomposer »
-//                         (tableau), entraînement 2
-// - entier_encadrer     → propriété « Encadrer », exemple « Encadrer » (droite
-//                         graduée), entraînement 3
-// - entier_defi         → usages, entraînement 4, slide « exercice flash »
+// ⭐ RÉÉCRITE LE 30/09/2026 POUR DES 6e QUI LISENT DIFFICILEMENT : phrases
+// courtes, une idée par phrase, un dessin sur CHAQUE bloc (ce sont les diapos
+// du mode classe), et Ti Margo dans le champ `tiMargo`.
+//
+// Micro-compétences 6/6 :
+// - entier_lire_ecrire → définition, propriété « Le zéro garde la place »
+//                        (1 042), méthode 3 (304), usage 3 (2 035), exemple 1
+//                        (1 042), entraînement 1 (90)
+// - entier_rang        → figure (4 273), propriété « La place donne la valeur »,
+//                        méthode 1 (352), exemple 1, entraînement 2 (7 306)
+// - entier_comparer    → propriété « Le plus long gagne » (98 et 1 042),
+//                        méthode 2 (890 et 908), usage 1 (3 045 < 3 405 < 3 450),
+//                        exemple 3 (345 et 354), entraînement 3 (1 480 et 1 408)
+// - entier_decomposer  → propriété « La place donne la valeur » (4 273 posé),
+//                        exemple 2 (2 845), entraînement 4 (706)
+// - entier_encadrer    → propriété « Encadrer » (47), usage 2 (5 280),
+//                        exemple 4 (380), entraînement 5 (326)
+// - entier_defi        → entraînement 6 (3, 0, 5, 1 → 1 035), dessiné
+// Tous les nombres sortent de la banque, sauf 98 (dessin gardé de juin).
+// ⛔ La feuille d'exercices `maths-6e-entier-nombre.tsx` n'en reprend aucun.
+//
+// ⚠️ `number_line` écrit en 14 : cadre de 260 dans une carte, jamais le défaut
+// (320). Au-delà de six graduations, les nombres se touchent.
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 
-// Le tableau de numération du coach : l'élève VOIT la valeur de chaque chiffre
-// selon sa colonne (le même dessin que dans ses exercices).
-function tableauNumeration(
-  title: string,
-  chiffres: string[],
-  valeurs: string[],
-  caption: string
-) {
+const BLEU = "#2563eb";
+const VERT = "#16a34a";
+const ROUGE = "#dc2626";
+
+type Pt = { value: number; label: string; color?: string };
+
+/** La droite de la fiche : cadre plat, réglages fixés une fois. */
+const droite = (min: number, max: number, pas: number, points: Pt[]) => (
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min,
+      max,
+      step: pas,
+      points,
+      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
+      size: { width: 240, height: 90 },
+    }}
+  />
+);
+
+/** Un dessin et sa phrase, sous lui. */
+const legende = (dessin: React.ReactNode, texte: string) => (
+  <div>
+    {dessin}
+    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+  </div>
+);
+
+/** Le tableau de numération du coach, avec la ligne « Vaut ». */
+function tableauNumeration(title: string, chiffres: string[], valeurs: string[], caption: string) {
   return (
     <CanvasRenderer
       figure={{
@@ -46,61 +77,22 @@ function tableauNumeration(
   );
 }
 
-const tableauComparaison = (
-  <CanvasRenderer
-    figure={{
-      kind: "tableau_donnees",
-      title: "345 ou 354 ?",
-      headers: ["Centaines", "Dizaines", "Unités"],
-      rows: [
-        { label: "345", values: ["3", "4", "5"] },
-        { label: "354", values: ["3", "5", "4"] },
-      ],
-      highlight: { col: 1 },
-      caption: "Mêmes centaines : 5 dizaines dépassent 4, donc 354 > 345.",
-    }}
-  />
+// ─── Les dessins ──────────────────────────────────────────────────────────────
+// Trois familles qui alternent : le TABLEAU (une colonne = un rang), la
+// DROITE (plus grand = plus à droite) et le CALCUL POSÉ (les rangs s'alignent).
+// Deux blocs voisins ne portent jamais la même famille.
+
+// LA FIGURE : chaque chiffre lu selon sa colonne.
+const figure4273 = tableauNumeration(
+  "Le nombre 4 273",
+  ["4", "2", "7", "3"],
+  ["4 000", "200", "70", "3"],
+  "Le 2 est aux centaines : il vaut 200."
 );
 
-const droiteEncadrement = (
-  <CanvasRenderer
-    figure={{
-      kind: "number_line",
-      min: 40,
-      max: 50,
-      step: 1,
-      points: [{ value: 47, label: "47", color: "#16a34a" }],
-    }}
-  />
-);
-
-// ─── Les six dessins des blocs ────────────────────────────────────────────────
-// ⭐ LE TABLEAU DE NUMÉRATION SERT DÉJÀ TROIS FOIS (figure, exemples 1 et 2).
-// Six de plus et la fiche serait une colonne de tableaux (REGLES.md § 2 bis). Il
-// ne revient donc que sur les deux blocs dont le geste EST de lire une colonne —
-// et encore, avec une case allumée à chaque fois différente. Les quatre autres
-// blocs sortent : une barre pour la décomposition (4 273, c'est une LONGUEUR
-// faite de quatre morceaux), et la droite graduée pour comparer et encadrer,
-// parce que « plus grand » veut dire « plus à droite ».
-
-/** Un dessin et sa phrase, sous lui. */
-const legende = (dessin: React.ReactNode, texte: string) => (
-  <div>
-    {dessin}
-    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
-  </div>
-);
-
-// ⭐ LA DÉCOMPOSITION SE POSE EN COLONNES, ET LES RANGS S'ALIGNENT TOUT SEULS.
-// C'est même le seul dessin de la fiche où la position d'un chiffre se voit
-// physiquement : les zéros de 4000 poussent le 4 quatre crans à gauche.
-//
-// ⛔ CE BLOC A D'ABORD PORTÉ UNE BARRE (4000 + 200 + 70 + 3), et c'était une
-// erreur d'échelle mesurée au rendu : `schema_barre` donne à chaque part une
-// largeur PROPORTIONNELLE à sa valeur. Les 4000 mangeaient 93 % de la barre, et
-// « 200 », « 70 », « centaines », « dizaines », « unités » se chevauchaient tous
-// dans les 7 % restants. Une décomposition décimale est par nature déséquilibrée
-// d'un facteur dix par rang : elle ne se dessine pas en longueurs.
+// ⭐ LA DÉCOMPOSITION POSÉE EN COLONNES : les zéros de 4000 poussent le 4
+// quatre crans à gauche. ⛔ Pas de `schema_barre` : les parts sont
+// proportionnelles, et 4000 mangeait 93 % de la barre (mesuré en juin).
 const additionDesRangs = (
   <CanvasRenderer
     figure={{
@@ -113,10 +105,7 @@ const additionDesRangs = (
   />
 );
 
-// L'AUTRE MOITIÉ DE LA RÈGLE. L'exemple 1 compare 345 et 354, deux nombres de
-// MÊME longueur — il montre donc « chiffre par chiffre ». Celui-ci montre la
-// première moitié, celle qu'on applique avant même de regarder les chiffres :
-// le plus long gagne, toujours.
+// LE PLUS LONG GAGNE, avant même de lire les chiffres.
 const lePlusLongGagne = (
   <CanvasRenderer
     figure={{
@@ -128,77 +117,18 @@ const lePlusLongGagne = (
         { label: "1 042", values: ["1", "0", "4", "2"] },
       ],
       highlight: { row: 1 },
-      caption: "4 chiffres contre 2 : inutile de comparer, 1 042 gagne.",
+      caption: "4 chiffres contre 2 : 1 042 gagne.",
     }}
   />
 );
 
-// ENCADRER, C'EST VOIR LES DEUX BORNES EN MÊME TEMPS. L'exemple 3 place 47 sur
-// une droite qui va déjà de 40 à 50 : les bornes y sont les bouts du dessin, donc
-// invisibles en tant que choix. Ici la droite va de 0 à 100, et ce sont les deux
-// dizaines encadrantes qui sont marquées — on VOIT qu'on les a choisies.
-const encadrerEntreDeuxDizaines = legende(
-  <CanvasRenderer
-    figure={{
-      kind: "number_line",
-      min: 0,
-      max: 100,
-      step: 20,
-      points: [
-        { value: 40, label: "40", color: "#2563eb" },
-        { value: 47, label: "47", color: "#16a34a" },
-        { value: 50, label: "50", color: "#2563eb" },
-      ],
-      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
-      size: { width: 260, height: 95 },
-    }}
-  />,
-  "47 est coincé entre 40 et 50"
+// ENCADRER : 47 coincé entre deux dizaines.
+const encadrer47 = legende(
+  droite(40, 50, 2, [{ value: 47, label: "47", color: VERT }]),
+  "47 est entre 40 et 50"
 );
 
-// LE RANG QU'ON CHERCHE, ALLUMÉ. Même tableau que la figure, mais une colonne
-// est mise en avant : lire un rang, c'est poser le doigt sur une colonne.
-const rangDesDizaines = (
-  <CanvasRenderer
-    figure={{
-      kind: "tableau_donnees",
-      title: "Le rang des dizaines",
-      headers: ["Milliers", "Centaines", "Dizaines", "Unités"],
-      rows: [
-        { label: "Chiffre", values: ["1", "0", "4", "2"] },
-        { label: "Vaut", values: ["1000", "0", "40", "2"] },
-      ],
-      highlight: { col: 2 },
-      caption: "Le 4 est au rang des dizaines : il vaut 40.",
-    }}
-  />
-);
-
-// COMPARER, C'EST REGARDER QUI EST À DROITE. Le tableau explique POURQUOI 354
-// dépasse 345 ; la droite le montre sans un mot — et c'est le seul dessin de la
-// fiche où le résultat se lit sans lire un seul chiffre.
-const leDroitierGagne = legende(
-  <CanvasRenderer
-    figure={{
-      kind: "number_line",
-      min: 340,
-      max: 360,
-      step: 5,
-      points: [
-        { value: 345, label: "345", color: "#dc2626" },
-        { value: 354, label: "354", color: "#16a34a" },
-      ],
-      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
-      size: { width: 260, height: 95 },
-    }}
-  />,
-  "354 est à droite de 345 : il est plus grand"
-);
-
-// ⭐ LE ZÉRO NE VAUT RIEN, MAIS IL TIENT LA PLACE. La colonne des centaines est
-// vide, et pourtant il faut écrire un 0 : sans lui, le 1 glisserait d'un rang et
-// 1 042 deviendrait 142. Le tableau est le seul objet qui montre une colonne
-// VIDE — une barre ou une droite ne peut pas dessiner une absence.
+// ⭐ LE ZÉRO NE VAUT RIEN, MAIS IL TIENT LA PLACE. Sans lui, 1 042 devient 142.
 const leZeroQuiTientLaPlace = (
   <CanvasRenderer
     figure={{
@@ -210,21 +140,161 @@ const leZeroQuiTientLaPlace = (
         { label: "sans le 0", values: ["", "1", "4", "2"] },
       ],
       highlight: { cell: { row: 0, col: 1 } },
-      caption: "Sans le 0, tout glisse d'un rang : on écrirait 142.",
+      caption: "Sans le 0, tout glisse : on lit 142.",
     }}
   />
 );
 
+// MÉTHODE 1 : le rang des dizaines, allumé (352, banque).
+const rang352 = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Le nombre 352",
+      headers: ["Centaines", "Dizaines", "Unités"],
+      rows: [
+        { label: "Chiffre", values: ["3", "5", "2"] },
+        { label: "Vaut", values: ["300", "50", "2"] },
+      ],
+      highlight: { col: 1 },
+      caption: "Le 5 est aux dizaines : il vaut 50.",
+    }}
+  />
+);
+
+// MÉTHODE 2 : 908 et 890, trois chiffres chacun. Le plus à droite gagne.
+const compare908 = legende(
+  droite(880, 920, 10, [
+    { value: 890, label: "890", color: ROUGE },
+    { value: 908, label: "908", color: VERT },
+  ]),
+  "908 est à droite de 890 : il est plus grand"
+);
+
+// MÉTHODE 3 : trois cent quatre, sans dizaine.
+const zero304 = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "« trois cent quatre »",
+      headers: ["Centaines", "Dizaines", "Unités"],
+      rows: [{ label: "Chiffre", values: ["3", "0", "4"] }],
+      highlight: { cell: { row: 0, col: 1 } },
+      caption: "Pas de dizaine : j'écris 0. C'est 304.",
+    }}
+  />
+);
+
+// USAGE 1 : ranger trois nombres qui se ressemblent.
+const ranger3045 = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Du plus petit au plus grand",
+      headers: ["Milliers", "Centaines", "Dizaines", "Unités"],
+      rows: [
+        { label: "3 045", values: ["3", "0", "4", "5"] },
+        { label: "3 405", values: ["3", "4", "0", "5"] },
+        { label: "3 450", values: ["3", "4", "5", "0"] },
+      ],
+      highlight: { col: 1 },
+      caption: "0 centaine : 3 045 est le plus petit.",
+    }}
+  />
+);
+
+// USAGE 2 : 5 280 entre deux milliers.
+const encadrer5280 = legende(
+  droite(5000, 6000, 200, [{ value: 5280, label: "5 280", color: BLEU }]),
+  "5 000 < 5 280 < 6 000"
+);
+
+// USAGE 3 : des mots aux chiffres, 2 000 + 35.
+const ecrire2035 = (
+  <CanvasRenderer
+    figure={{
+      kind: "calcul_pose",
+      operation: "addition",
+      title: "deux mille trente-cinq",
+      numbers: ["2000", "35"],
+      result: "2035",
+    }}
+  />
+);
+
+// EXEMPLES
+const exemple1042 = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "1 042",
+      headers: ["Milliers", "Centaines", "Dizaines", "Unités"],
+      rows: [{ label: "Chiffre", values: ["1", "0", "4", "2"] }],
+      highlight: { cell: { row: 0, col: 2 } },
+      caption: "Le chiffre des dizaines est 4.",
+    }}
+  />
+);
+
+const exemple2845 = (
+  <CanvasRenderer
+    figure={{
+      kind: "calcul_pose",
+      operation: "addition",
+      title: "2 845 décomposé",
+      numbers: ["2000", "800", "40", "5"],
+      result: "2845",
+    }}
+  />
+);
+
+const tableauComparaison = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "345 ou 354 ?",
+      headers: ["Centaines", "Dizaines", "Unités"],
+      rows: [
+        { label: "345", values: ["3", "4", "5"] },
+        { label: "354", values: ["3", "5", "4"] },
+      ],
+      highlight: { col: 1 },
+      caption: "5 dizaines battent 4 dizaines.",
+    }}
+  />
+);
+
+const exemple380 = legende(
+  droite(300, 400, 20, [{ value: 380, label: "380", color: VERT }]),
+  "380 est entre 300 et 400"
+);
+
+// LE DÉFI a son dessin : quatre cases, et le 0 interdit en tête.
+const defi1035 = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Avec 3, 0, 5 et 1",
+      headers: ["Milliers", "Centaines", "Dizaines", "Unités"],
+      rows: [{ label: "Chiffre", values: ["?", "?", "?", "?"] }],
+      highlight: { cell: { row: 0, col: 0 } },
+      caption: "Pas de 0 dans la première case !",
+    }}
+  />
+);
+
+// ─── Les textes courts ────────────────────────────────────────────────────────
+
 const pieges = [
-  "Confondre chiffre et nombre : dans 352, le chiffre des dizaines est 5, mais le nombre de dizaines est 35.",
-  "Croire qu'un nombre qui commence par 9 est le plus grand : 908 est plus petit que 1 205 (moins de chiffres).",
-  "Oublier le zéro d'un rang vide : « trois cent quatre » s'écrit 304, pas 34.",
+  "Confondre chiffre et nombre. Dans 352, le chiffre des dizaines est 5. Le nombre de dizaines est 35.",
+  "Croire que 908 dépasse 1 205. Il a moins de chiffres : il est plus petit.",
+  "Oublier le zéro d'un rang vide. Trois cent quatre s'écrit 304, pas 34.",
 ];
 
 const aRetenir = [
-  "La valeur d'un chiffre dépend de sa position : unités, dizaines, centaines, milliers.",
-  "Pour comparer : le plus de chiffres gagne ; à égalité, on compare de gauche à droite.",
-  "Décomposer, c'est écrire la valeur de chaque chiffre : 4 273 = 4 000 + 200 + 70 + 3.",
+  "La place d'un chiffre donne sa valeur : unités, dizaines, centaines, milliers.",
+  "Pour comparer : le plus de chiffres gagne. Sinon, je lis de gauche à droite.",
+  "Un rang vide garde un 0 : 304, pas 34.",
 ];
 
 export const ficheEntiers6e: FicheCoursData = {
@@ -234,83 +304,112 @@ export const ficheEntiers6e: FicheCoursData = {
   notion: "entier-nombre",
   titre: "Les nombres entiers",
   accroche:
-    "Un nombre entier sert à compter et à ranger. Tout repose sur une idée : la position d'un chiffre donne sa valeur.",
+    "Un nombre entier sert à compter : des buts, des pages, des élèves. La place d'un chiffre donne sa valeur.",
   identite: [
     { label: "Mots clés", valeur: "Chiffre, nombre, rang, valeur" },
-    { label: "Le secret", valeur: "La position d'un chiffre donne sa valeur" },
+    { label: "Le secret", valeur: "La place d'un chiffre donne sa valeur" },
     { label: "Outil", valeur: "Le tableau de numération" },
   ],
   definition: {
     texte:
-      "Un nombre entier sert à compter des quantités entières, sans virgule (0, 1, 2, 3…). On l'écrit avec les dix chiffres de 0 à 9, et la valeur de chaque chiffre dépend de sa position.",
+      "Un nombre entier n'a pas de virgule : 0, 1, 2, 3… On l'écrit avec dix chiffres, de 0 à 9. La place d'un chiffre s'appelle son rang.",
   },
   figure: {
-    schema: tableauNumeration(
-      "Le nombre 4 273",
-      ["4", "2", "7", "3"],
-      ["4 000", "200", "70", "3"],
-      "La valeur d'un chiffre dépend de sa colonne."
-    ),
-    legende: "Chaque chiffre lu selon son rang : 4 273 = 4 000 + 200 + 70 + 3.",
+    schema: figure4273,
+    legende: "4 273 = 4 000 + 200 + 70 + 3.",
   },
   proprietes: [
     {
-      titre: "La position donne la valeur",
-      micros: ["entier_rang"],
-      texte: "Dans 4 273, le 2 vaut 200 : c'est le rang qui compte, pas le chiffre seul.",
+      titre: "La place donne la valeur",
+      micros: ["entier_rang", "entier_decomposer"],
+      texte: "Dans 4 273, le 2 vaut 200. C'est sa place qui compte.",
       schema: additionDesRangs,
     },
     {
-      titre: "Comparer",
+      titre: "Le plus long gagne",
       micros: ["entier_comparer"],
-      texte: "Le plus de chiffres gagne ; à égalité, on compare de gauche à droite.",
+      texte: "Le nombre qui a le plus de chiffres est le plus grand. 1 042 dépasse 98.",
       schema: lePlusLongGagne,
     },
     {
       titre: "Encadrer",
       micros: ["entier_encadrer"],
-      texte: "Placer entre deux nombres ronds qui se suivent : 40 < 47 < 50.",
-      schema: encadrerEntreDeuxDizaines,
+      texte: "Encadrer, c'est coincer un nombre entre deux nombres ronds. 40 < 47 < 50.",
+      schema: encadrer47,
+    },
+    {
+      titre: "Le zéro garde la place",
+      micros: ["entier_lire_ecrire"],
+      texte: "Un rang vide garde un 0. Sans lui, 1 042 deviendrait 142.",
+      schema: leZeroQuiTientLaPlace,
     },
   ],
   reel: {
     texte:
-      "Les entiers sont partout : un prix, le nombre de places d'un bus, le score d'un match. Comparer deux prix, c'est comparer deux entiers ; dire « environ 300 personnes », c'est encadrer.",
+      "Un score, un prix, un nombre de pages : ce sont des entiers. Pour trouver le moins cher, on compare deux entiers. Pour dire « environ 300 spectateurs », on encadre. Les entiers servent partout.",
   },
   historique: {
     texte:
-      "Nos dix chiffres viennent d'Inde (vers le 5e siècle). Le zéro comme vrai nombre a été décrit par Brahmagupta en 628. Cette écriture par position a remplacé les chiffres romains, peu pratiques pour calculer.",
+      "Nos dix chiffres viennent d'Inde. En 628, le savant Brahmagupta explique le zéro. Grâce au zéro, la place d'un chiffre donne sa valeur. Les chiffres romains n'avaient pas de zéro.",
   },
   methode: [
-    { titre: "Je repère le rang", texte: "De droite à gauche : unités, dizaines, centaines, milliers." , schema: rangDesDizaines , micros: ["entier_rang"] },
-    { titre: "Je compare", texte: "Le plus long gagne ; sinon, chiffre par chiffre depuis la gauche." , schema: leDroitierGagne , micros: ["entier_comparer"] },
-    { titre: "Je vérifie le zéro", texte: "Chaque rang vide garde un 0 : 1 042, pas 142." , schema: leZeroQuiTientLaPlace , micros: ["entier_lire_ecrire"] },
+    {
+      titre: "Je range dans le tableau",
+      micros: ["entier_rang"],
+      texte: "J'écris un chiffre par case, en partant des unités. Dans 352, le 5 tombe aux dizaines.",
+      schema: rang352,
+    },
+    {
+      titre: "Je compare de gauche à droite",
+      micros: ["entier_comparer"],
+      texte: "Même nombre de chiffres ? Je compare d'abord les centaines. 9 centaines battent 8 centaines.",
+      schema: compare908,
+    },
+    {
+      titre: "Je vérifie le zéro",
+      micros: ["entier_lire_ecrire"],
+      texte: "Un rang sans rien reçoit un 0. Trois cent quatre s'écrit 304.",
+      schema: zero304,
+    },
   ],
   usages: [
-    { titre: "Lire → écrire", detail: "Des mots aux chiffres : « deux mille trente-cinq » → 2 035." , micros: ["entier_lire_ecrire"] },
-    { titre: "Comparer → ranger", detail: "Trouver le plus grand ou ranger : 3 045 < 3 405 < 3 450." , micros: ["entier_comparer"] },
-    { titre: "Décomposer / encadrer", detail: "4 206 = 4 000 + 200 + 6, ou 300 < 326 < 400." , micros: ["entier_decomposer", "entier_encadrer"] },
+    {
+      titre: "Ranger des nombres",
+      micros: ["entier_comparer"],
+      detail: "Les trois ont 3 milliers. Je regarde les centaines : 3 045 < 3 405 < 3 450.",
+      schema: ranger3045,
+    },
+    {
+      titre: "Dire « environ »",
+      micros: ["entier_encadrer"],
+      detail: "5 280 est entre 5 000 et 6 000. Il y a un peu plus de 5 000.",
+      schema: encadrer5280,
+    },
+    {
+      titre: "Des mots aux chiffres",
+      micros: ["entier_lire_ecrire"],
+      detail: "Deux mille trente-cinq, c'est 2 000 + 35. J'écris 2 035.",
+      schema: ecrire2035,
+    },
   ],
   exemples: [
     {
-      titre: "Écrire et repérer un rang",
+      titre: "Écrire et trouver un rang",
       micros: ["entier_lire_ecrire", "entier_rang"],
-      donnees: "On donne « mille quarante-deux ».",
-      question: "Écris-le en chiffres, puis donne le chiffre des dizaines.",
-      schema: (
-        <CanvasRenderer
-          figure={{
-            kind: "tableau_donnees",
-            title: "1 042",
-            headers: ["Milliers", "Centaines", "Dizaines", "Unités"],
-            rows: [{ label: "Chiffre", values: ["1", "0", "4", "2"] }],
-            highlight: { cell: { row: 0, col: 2 } },
-            caption: "Un zéro tient le rang des centaines.",
-          }}
-        />
-      ),
+      donnees: "On lit « mille quarante-deux ».",
+      question: "Écris-le en chiffres. Quel est le chiffre des dizaines ?",
+      schema: exemple1042,
       solution:
-        "Mille quarante-deux = 1 000 + 42. On écrit 1 042, avec un zéro aux centaines. Le chiffre des dizaines est 4.",
+        "Mille quarante-deux, c'est 1 000 + 42. Il n'y a pas de centaine : j'écris un 0. Le nombre est 1 042. Le chiffre des dizaines est 4.",
+    },
+    {
+      titre: "Décomposer un nombre",
+      micros: ["entier_decomposer"],
+      donnees: "On donne le nombre 2 845.",
+      question: "Décompose 2 845.",
+      schema: exemple2845,
+      solution:
+        "Il y a 2 milliers, 8 centaines, 4 dizaines et 5 unités. Chaque chiffre donne sa valeur. Donc 2 845 = 2 000 + 800 + 40 + 5.",
     },
     {
       titre: "Comparer deux nombres",
@@ -319,169 +418,101 @@ export const ficheEntiers6e: FicheCoursData = {
       question: "Quel est le plus grand ?",
       schema: tableauComparaison,
       solution:
-        "Les deux ont 3 centaines. On compare les dizaines : 5 dizaines dépassent 4. Donc 354 est le plus grand.",
+        "Les deux ont 3 chiffres. Les deux ont 3 centaines. Je compare les dizaines : 5 dépasse 4. Donc 354 est le plus grand.",
     },
     {
-      titre: "Décomposer un nombre",
-      micros: ["entier_decomposer"],
-      donnees: "On donne le nombre 2 845.",
-      question: "Décompose 2 845.",
-      schema: tableauNumeration(
-        "2 845",
-        ["2", "8", "4", "5"],
-        ["2 000", "800", "40", "5"],
-        "2 845 = 2 000 + 800 + 40 + 5."
-      ),
-      solution:
-        "Chaque chiffre selon sa colonne : 2 milliers, 8 centaines, 4 dizaines, 5 unités. Donc 2 845 = 2 000 + 800 + 40 + 5.",
-    },
-    {
-      titre: "Encadrer un nombre",
+      titre: "Encadrer entre deux centaines",
       micros: ["entier_encadrer"],
-      donnees: "On veut encadrer 47 entre deux dizaines.",
-      question: "Entre quelles dizaines se trouve 47 ?",
-      schema: droiteEncadrement,
+      donnees: "On regarde le nombre 380.",
+      question: "Entre quelles centaines qui se suivent se trouve 380 ?",
+      schema: exemple380,
       solution:
-        "Sur la droite graduée, 47 est après 40 et avant 50. On écrit 40 < 47 < 50.",
+        "380 a 3 centaines. Il est plus grand que 300. Il est plus petit que 400. On écrit 300 < 380 < 400.",
     },
   ],
   pieges,
   aRetenir,
   entrainement: [
     {
-      question: "Écris en chiffres : deux mille trente-cinq.",
-      correction:
-        "Deux mille trente-cinq = 2 000 + 35. Pas de centaines : on place un zéro à ce rang. On écrit 2 035.",
+      question: "Écris en chiffres : quatre-vingt-dix.",
+      correction: "Quatre-vingt-dix, c'est 80 + 10. J'écris 90.",
+      micros: ["entier_lire_ecrire"],
     },
     {
-      question: "Dans 2 845, quel est le chiffre des centaines et sa valeur ? Décompose ensuite.",
-      correction:
-        "De droite à gauche : 5 unités, 4 dizaines, 8 centaines, 2 milliers. Le chiffre des centaines est 8, il vaut 800. Décomposition : 2 845 = 2 000 + 800 + 40 + 5.",
+      question: "Dans 7 306, quel est le chiffre des centaines ?",
+      correction: "Je pars de la droite : 6 unités, 0 dizaine, 3 centaines. Le chiffre des centaines est 3.",
+      micros: ["entier_rang"],
     },
     {
-      question: "Quel est le plus grand : 2 305 ou 2 350 ? Puis encadre 2 305 entre deux centaines.",
-      correction:
-        "Mêmes milliers et centaines. On compare les dizaines : 5 > 0, donc 2 350 est le plus grand. Et 2 300 < 2 305 < 2 400.",
+      question: "Quel est le plus petit : 1 480 ou 1 408 ?",
+      correction: "Même nombre de milliers et de centaines. 0 dizaine contre 8 dizaines : 1 408 est le plus petit.",
+      micros: ["entier_comparer"],
     },
     {
-      question: "Défi : le plus petit nombre de 4 chiffres avec 3, 0, 5 et 1 (une seule fois chacun) ?",
-      correction:
-        "Un nombre ne commence pas par 0. On place d'abord le plus petit chiffre non nul (1), puis 0, 3, 5. Réponse : 1 035.",
-      micros: ["entier_decomposer", "entier_defi"],
+      question: "Décompose 706.",
+      correction: "7 centaines, 0 dizaine, 6 unités. Donc 706 = 700 + 6.",
+      micros: ["entier_decomposer"],
+    },
+    {
+      question: "Encadre 326 entre deux centaines qui se suivent.",
+      correction: "326 a 3 centaines. On écrit 300 < 326 < 400.",
+      micros: ["entier_encadrer"],
+    },
+    {
+      question: "Défi : avec 3, 0, 5 et 1, une fois chacun, écris le plus petit nombre de 4 chiffres.",
+      correction: "Le 0 ne peut pas être en premier. Je mets 1, puis 0, puis 3, puis 5. Réponse : 1 035.",
+      micros: ["entier_defi"],
+      schema: defi1035,
     },
   ],
+  tiMargo: {
+    objectif: "La place d'un chiffre donne sa valeur !",
+    definition: "Dix chiffres suffisent pour écrire tous les nombres !",
+    methode: "Un chiffre par case, en partant des unités !",
+    pieges: "Un rang vide ? J'écris 0 !",
+    retenir: "Plus de chiffres, plus grand !",
+    exercice: "À toi ! Commence par la droite.",
+  },
   coachHref: "/coach-ia/maths?classe=6e",
 };
 
+// Le mode classe est ENGENDRÉ depuis la fiche (`slidesDepuisFiche`) : ce
+// tableau reste exporté pour la page, mais il n'est pas projeté.
+// ⛔ AUCUN LATEX DANS LES DIAPOS.
 export const slidesEntiers6e: ClasseSlide[] = [
   {
     titre: "Objectif du cours",
     badge: "Entiers - 6e",
+    schema: figure4273,
     section: {
       type: "objectif",
-      phrase: "Lire, comparer, décomposer et encadrer les entiers",
-      sousPhrase:
-        "Les entiers servent à compter et à ranger. Tout repose sur une idée : la position d'un chiffre donne sa valeur.",
-      encadre: {
-        titre: "L'idée",
-        texte: "Dans 352, le 5 ne vaut pas 5 : il vaut 50, car il est au rang des dizaines.",
-      },
-    },
-  },
-  {
-    titre: "À quoi ça sert ?",
-    badge: "Utilité & histoire",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "info",
-        titre: "Au quotidien",
-        contenu:
-          "Prix d'un jeu, places d'un bus, score d'un match : comparer deux prix, c'est comparer deux entiers.",
-      },
-      droite: {
-        variante: "histoire",
-        titre: "Le savais-tu ?",
-        contenu:
-          "Nos chiffres viennent d'Inde et le zéro a été décrit par Brahmagupta en 628. Ils ont remplacé les chiffres romains.",
-      },
-    },
-  },
-  {
-    titre: "Les 3 réflexes",
-    badge: "Méthode",
-    section: {
-      type: "cartes",
-      cartes: ficheEntiers6e.methode.map((m) => ({ titre: m.titre, texte: m.texte })),
-    },
-  },
-  {
-    titre: "Quelle question ?",
-    badge: "3 gestes",
-    section: {
-      type: "cartes",
-      cartes: ficheEntiers6e.usages.map((u) => ({ titre: u.titre, texte: u.detail })),
+      phrase: "La place d'un chiffre donne sa valeur",
+      sousPhrase: "Dans 4 273, le 2 vaut 200.",
     },
   },
   {
     titre: "Exemple guidé",
     badge: "Comparer",
+    teinte: "exemple",
+    schema: tableauComparaison,
     section: {
       type: "exemple",
       enonce: "On compare 345 et 354.",
       question: "Quel est le plus grand ?",
-      correction:
-        "Mêmes centaines. On compare les dizaines : 5 > 4, donc 354 est le plus grand.",
-    },
-  },
-  {
-    titre: "Autre exemple",
-    badge: "Décomposer",
-    section: {
-      type: "exemple",
-      enonce: "On donne le nombre 2 845.",
-      question: "Décompose-le.",
-      correction: "2 milliers, 8 centaines, 4 dizaines, 5 unités : 2 845 = 2 000 + 800 + 40 + 5.",
-    },
-  },
-  {
-    titre: "Pièges & à retenir",
-    badge: "Vigilance",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "piege",
-        titre: "Pièges à éviter",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {pieges.map((piege) => (
-              <li key={piege}>• {piege}</li>
-            ))}
-          </ul>
-        ),
-      },
-      droite: {
-        variante: "ok",
-        titre: "À retenir",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {aRetenir.map((point) => (
-              <li key={point}>• {point}</li>
-            ))}
-          </ul>
-        ),
-      },
+      correction: "Mêmes centaines. 5 dizaines battent 4 dizaines : 354 est le plus grand.",
     },
   },
   {
     titre: "À toi de jouer",
     badge: "Exercice flash",
+    teinte: "exercice",
+    schema: defi1035,
     section: {
       type: "exercice",
-      enonce: "Défi : on dispose des chiffres 3, 0, 5 et 1, une seule fois chacun.",
-      question: "Quel est le plus petit nombre de quatre chiffres possible ?",
-      indice: "Un nombre ne peut pas commencer par 0.",
-      correction: "On commence par le plus petit chiffre non nul (1), puis 0, 3, 5 : la réponse est 1 035.",
+      enonce: "Avec 3, 0, 5 et 1, une fois chacun.",
+      question: "Quel est le plus petit nombre de 4 chiffres ?",
+      indice: "Le 0 ne peut pas être en premier.",
+      correction: "1, puis 0, 3, 5 : 1 035.",
     },
   },
 ];

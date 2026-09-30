@@ -1,30 +1,99 @@
 // ─── Fiche de cours : les nombres décimaux (6e) ────────────────────────────────
 // Fiche « en blocs » alignée sur la banque du coach
 // lib/tutor-v4/questionBank/6e/maths/decimaux.bank.ts (notionId decimal_nombre).
-// Refaite au standard « montrer, pas raconter » (retour Frédéric 13/07) : les
-// nombres MONTRÉS dans le tableau de numération (prolongé après la virgule) et
-// l'addition posée virgule sous virgule (canvas du coach). Épisode 2 de la
-// mini-série « sens du nombre » 6e, à la suite des entiers.
 //
-// Micro-compétences couvertes :
-// - decimal_lire_ecrire         → definition, figure (3,45), exemple « Lire/écrire »
-//                                 (25/10 → 2,5, droite graduée), usages 1, entraînement 1
-// - decimal_rang                → propriété « Les rangs », exemple « Le rang » (12,764,
-//                                 tableau), methode « Lire le rang », entraînement 1
-// - decimal_comparer            → propriété « Comparer », exemple « Comparer » (2,5 vs
-//                                 2,45, tableau), usages 2, piège 1, entraînement 2
-// - decimal_additionner         → propriété « Calculer », exemple « Additionner »
-//                                 (3,45 + 1,70 posé), methode « Aligner », piège 3, entraînement 3
-// - decimal_multiplier          → usages 3, entraînement 4 (2,5 × 6)
-// - decimal_diviser_par_entier  → usages 3, entraînement 4 (9,6 ÷ 3, en dixièmes)
-// - decimal_defi                → entraînement 4 / slide « exercice flash » (intercaler)
+// ⭐ RÉÉCRITE LE 30/09/2026 POUR DES 6e QUI LISENT DIFFICILEMENT : phrases
+// courtes, une idée par phrase, un dessin sur CHAQUE bloc (ce sont les diapos
+// du mode classe), et Ti Margo dans le champ `tiMargo`.
+//
+// ⛔ LE CALCUL EST PARTI. La fiche de juin posait 3,45 + 1,7 et parlait de
+// × et ÷ : ce sont les micros de la notion `decimal_calcul`, qui a sa propre
+// fiche (`maths-6e-decimal-calcul.tsx`). Ici, les SIX micros de
+// `decimal_nombre`, dont arrondir et encadrer, que juin ne couvrait pas.
+//
+// Micro-compétences 6/6 :
+// - decimal_lire_ecrire → définition + figure (3,45), propriété « Un décimal a
+//                         sa place », usage 1 (25/10), exemple 1 (15/10),
+//                         entraînement 1 (7/10)
+// - decimal_rang        → propriété « Les rangs continuent » (grille), méthode 1
+//                         (3,264), exemple 2 (12,764), entraînement 2 (4,58)
+// - decimal_comparer    → propriété « Comparer » (0,7 et 0,65), méthode 2
+//                         (0,5 = 0,50), usage 2 (2,5 € et 2,45 €), exemple 3
+//                         (0,305 et 0,35), entraînement 3 (0,52 et 0,507)
+// - decimal_arrondir    → propriété « Arrondir » (12,7), méthode 3 (4,382),
+//                         usage 3 (19,99 €), exemple 4 (3,96), entraînement 4
+//                         (9,146)
+// - decimal_encadrer    → propriété « Encadrer » (7,38), exemple 5 (entre 2,5
+//                         et 2,6), entraînement 5 (5,206)
+// - decimal_defi        → réel (le requin à 2,75 m/s), entraînement 6
+//                         (3,5 et 3,45), dessiné
+// Tous les nombres sortent de la banque (sauf 3,45 et la grille de 45, dessins
+// gardés de juin). ⛔ La feuille `maths-6e-decimal-nombre.tsx` n'en reprend
+// aucun (elle les exclut en tête).
+//
+// ⚠️ `number_line` écrit en 14 : cadre de 240 (11,8 px dans le bloc de 226
+// d'un téléphone, mesuré). Au-delà de six graduations, les nombres se touchent.
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
 
-// Le tableau de numération PROLONGÉ après la virgule : l'élève VOIT que les
-// rangs continuent en dixièmes, centièmes, millièmes.
+const BLEU = "#2563eb";
+const VERT = "#16a34a";
+const ROUGE = "#dc2626";
+
+type Pt = { value: number; label: string; color?: string };
+
+/** La droite de la fiche : cadre plat, réglages fixés une fois. */
+const droite = (min: number, max: number, pas: number, points: Pt[]) => (
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min,
+      max,
+      step: pas,
+      points,
+      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
+      size: { width: 240, height: 90 },
+    }}
+  />
+);
+
+/** Un dessin et sa phrase, sous lui. */
+const legende = (dessin: React.ReactNode, texte: string) => (
+  <div>
+    {dessin}
+    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+  </div>
+);
+
+/** Le tableau de numération prolongé après la virgule, une case allumée. */
+const rangs = (
+  title: string,
+  headers: string[],
+  chiffres: string[],
+  col: number,
+  caption: string
+) => (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title,
+      headers,
+      rows: [{ label: "Chiffre", values: chiffres }],
+      highlight: { cell: { row: 0, col } },
+      caption,
+    }}
+  />
+);
+
+// ─── Les dessins ──────────────────────────────────────────────────────────────
+// Trois familles qui alternent : le TABLEAU (les rangs après la virgule), la
+// DROITE (un décimal a sa place, entre deux voisins) et la GRILLE de cent
+// carreaux (pourquoi les rangs continuent). Deux blocs voisins ne portent
+// jamais la même famille.
+
+// LA FIGURE : 3,45 dans le tableau, chaque chiffre avec sa valeur.
 const tableauDecimal345 = (
   <CanvasRenderer
     figure={{
@@ -35,105 +104,19 @@ const tableauDecimal345 = (
         { label: "Chiffre", values: ["3", ",", "4", "5"] },
         { label: "Vaut", values: ["3", "", "0,4", "0,05"] },
       ],
-      caption: "3,45 = 3 + 0,4 + 0,05.",
+      caption: "3,45 = 3 + 0,4 + 0,05",
     }}
   />
 );
 
-const tableauRang = (
-  <CanvasRenderer
-    figure={{
-      kind: "tableau_donnees",
-      title: "Les rangs de 12,764",
-      headers: ["Dizaines", "Unités", ",", "Dixièmes", "Centièmes", "Millièmes"],
-      rows: [{ label: "Chiffre", values: ["1", "2", ",", "7", "6", "4"] }],
-      highlight: { cell: { row: 0, col: 3 } },
-      caption: "Après la virgule : dixièmes (7), centièmes (6), millièmes (4).",
-    }}
-  />
-);
-
-const tableauComparer = (
-  <CanvasRenderer
-    figure={{
-      kind: "tableau_donnees",
-      title: "2,5 ou 2,45 ?",
-      headers: ["Unités", ",", "Dixièmes", "Centièmes"],
-      rows: [
-        { label: "2,50", values: ["2", ",", "5", "0"] },
-        { label: "2,45", values: ["2", ",", "4", "5"] },
-      ],
-      highlight: { col: 2 },
-      caption: "Mêmes unités. 5 dixièmes dépassent 4 : 2,5 est plus grand.",
-    }}
-  />
-);
-
-const additionPosee = (
-  <CanvasRenderer
-    figure={{
-      kind: "calcul_pose",
-      operation: "addition",
-      numbers: ["3,45", "1,70"],
-      result: "5,15",
-      display: { showResult: true },
-    }}
-  />
-);
-
-const droite25 = (
-  <CanvasRenderer
-    figure={{
-      kind: "number_line",
-      min: 0,
-      max: 3,
-      step: 0.5,
-      points: [{ value: 2.5, label: "2,5", color: "#16a34a" }],
-    }}
-  />
-);
-
-// ─── Les six dessins des blocs ────────────────────────────────────────────────
-// ⭐ TROIS TABLEAUX DE NUMÉRATION SERVAIENT DÉJÀ (figure, exemples 2 et 3), plus
-// un calcul posé et une droite graduée. Six blocs de plus au tableau et la fiche
-// serait illisible d'uniformité (REGLES.md § 2 bis). Deux nouveautés portent
-// l'essentiel : la droite graduée montre qu'un décimal est un NOMBRE, coincé
-// entre deux entiers ; la grille de cent carreaux montre POURQUOI les rangs
-// continuent — un carreau vaut un centième, une colonne vaut un dixième.
-//
-// ⛔ PAS DE `schema_barre` ICI. Essayé pour « la virgule sépare » : 3 et 0,45
-// donnent des parts de 87 % et 13 %, et « partie décimale » ne tient pas dans les
-// 13 %. Même piège d'échelle que sur la fiche des nombres entiers.
-
-/** Un dessin et sa phrase, sous lui. */
-const legende = (dessin: React.ReactNode, texte: string) => (
-  <div>
-    {dessin}
-    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
-  </div>
-);
-
-// ⭐ UN DÉCIMAL EST UN NOMBRE, ET IL A SA PLACE. La partie entière n'est pas une
-// moitié de l'écriture : c'est l'entier juste EN DESSOUS. 3,45 est entre 3 et 4,
-// et plus près de 3 — ce qu'aucun tableau de rangs ne dit.
+// UN DÉCIMAL A SA PLACE : 3,45 entre 3 et 4, plus près de 3.
 const entreTroisEtQuatre = legende(
-  <CanvasRenderer
-    figure={{
-      kind: "number_line",
-      min: 3,
-      max: 4,
-      step: 0.25,
-      points: [{ value: 3.45, label: "3,45", color: "#16a34a" }],
-      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
-      size: { width: 260, height: 95 },
-    }}
-  />,
-  "3,45 est entre 3 et 4 : sa partie entière est 3"
+  droite(3, 4, 0.25, [{ value: 3.45, label: "3,45", color: VERT }]),
+  "3,45 est entre 3 et 4"
 );
 
-// ⭐ POURQUOI LES RANGS CONTINUENT. Un carreau sur cent, c'est un centième ; une
-// colonne entière, c'est un dixième. Le tableau NOMME les rangs, la grille montre
-// ce qu'ils valent — et que dix centièmes font bien un dixième.
+// POURQUOI LES RANGS CONTINUENT : une colonne = un dixième, un carreau = un
+// centième.
 const grilleDesCentiemes = legende(
   <CanvasRenderer
     figure={{
@@ -143,89 +126,158 @@ const grilleDesCentiemes = legende(
       size: { width: 240, height: 210 },
     }}
   />,
-  "45 carreaux sur 100 : 0,45 — soit 4 colonnes et 5 carreaux"
+  "4 colonnes et 5 carreaux : 0,45"
 );
 
-// LE MÊME POINT, DEUX ÉCRITURES. Le tableau de l'exemple 3 compare rang par
-// rang ; la droite dit quelque chose qu'il ne peut pas dire — 0,5 et 0,50 ne sont
-// pas deux nombres voisins, c'est le MÊME endroit.
-const cinqDixiemesEtCinquanteCentiemes = legende(
-  <CanvasRenderer
-    figure={{
-      kind: "number_line",
-      min: 0,
-      max: 1,
-      step: 0.25,
-      points: [{ value: 0.5, label: "0,5 = 0,50", color: "#2563eb" }],
-      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
-      size: { width: 260, height: 95 },
-    }}
-  />,
-  "un seul point, deux façons de l'écrire"
-);
-
-// LIRE UN RANG, C'EST POSER LE DOIGT SUR UNE COLONNE. Même objet que l'exemple 2,
-// autre nombre et autre colonne allumée : ici les CENTIÈMES.
-const lireLesCentiemes = (
+// COMPARER : 0,7 contre 0,65 (banque). On compare les dixièmes.
+const comparer07 = (
   <CanvasRenderer
     figure={{
       kind: "tableau_donnees",
-      title: "Les rangs de 8,306",
-      headers: ["Unités", ",", "Dixièmes", "Centièmes", "Millièmes"],
-      rows: [{ label: "Chiffre", values: ["8", ",", "3", "0", "6"] }],
-      highlight: { cell: { row: 0, col: 3 } },
-      caption: "Le chiffre des centièmes est 0, pas 6.",
-    }}
-  />
-);
-
-// AJOUTER DES ZÉROS NE CHANGE RIEN — et c'est exactement ce qui surprend. Trois
-// écritures, une seule valeur : le seul dessin de la fiche dont le message est
-// qu'il ne se passe RIEN.
-const lesZerosInutiles = (
-  <CanvasRenderer
-    figure={{
-      kind: "tableau_donnees",
-      title: "Trois écritures, un seul nombre",
-      headers: ["On écrit", "Ça se lit", "Ça vaut"],
+      title: "0,7 ou 0,65 ?",
+      headers: ["Unités", ",", "Dixièmes", "Centièmes"],
       rows: [
-        { values: ["0,5", "5 dixièmes", "0,5"] },
-        { values: ["0,50", "50 centièmes", "0,5"] },
-        { values: ["0,500", "500 millièmes", "0,5"] },
+        { label: "0,70", values: ["0", ",", "7", "0"] },
+        { label: "0,65", values: ["0", ",", "6", "5"] },
       ],
       highlight: { col: 2 },
-      caption: "Les zéros de droite ne changent pas la valeur.",
+      caption: "7 dixièmes battent 6 dixièmes.",
     }}
   />
 );
 
-// ⭐ ALIGNER LES VIRGULES, ET LE ZÉRO SERT ENFIN. L'exemple 4 pose deux nombres
-// qui ont déjà le même nombre de décimales ; ici 12,4 en a une et 3,75 en a deux.
-// C'est le cas où la méthode précédente devient utile : on écrit 12,40.
-const alignerAvecUnZero = legende(
-  <CanvasRenderer
-    figure={{
-      kind: "calcul_pose",
-      operation: "addition",
-      title: "12,4 + 3,75",
-      numbers: ["12,40", "3,75"],
-      result: "16,15",
-      display: { showResult: true },
-    }}
-  />,
-  "12,4 devient 12,40 : les virgules tombent l'une sous l'autre"
+// ARRONDIR : 12,7 est plus près de 13 que de 12.
+const arrondir127 = legende(
+  droite(12, 13, 0.2, [{ value: 12.7, label: "12,7", color: BLEU }]),
+  "12,7 est plus près de 13 : arrondi 13"
 );
 
+// ENCADRER : deux encadrements de 7,38, le second plus serré.
+const encadrer738 = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Encadrer 7,38",
+      headers: ["Au rang de…", "Encadrement"],
+      rows: [
+        { values: ["l'unité", "7 < 7,38 < 8"] },
+        { values: ["du dixième", "7,3 < 7,38 < 7,4"] },
+      ],
+      highlight: { row: 1 },
+      caption: "Au dixième, c'est plus serré.",
+    }}
+  />
+);
+
+// MÉTHODE 1 : le 6 de 3,264 est aux centièmes.
+const rang3264 = rangs(
+  "Le nombre 3,264",
+  ["Unités", ",", "Dixièmes", "Centièmes", "Millièmes"],
+  ["3", ",", "2", "6", "4"],
+  3,
+  "Le 6 est le 2e après la virgule : centièmes."
+);
+
+// MÉTHODE 2 : 0,5 et 0,50, un seul point.
+const cinqDixiemes = legende(
+  droite(0, 1, 0.25, [{ value: 0.5, label: "0,5 = 0,50", color: BLEU }]),
+  "Un seul point, deux écritures"
+);
+
+// MÉTHODE 3 : arrondir 4,382 au dixième. Le chiffre d'après est 8.
+const arrondir4382 = rangs(
+  "4,382 au dixième",
+  ["Unités", ",", "Dixièmes", "Centièmes", "Millièmes"],
+  ["4", ",", "3", "8", "2"],
+  3,
+  "Le chiffre d'après est 8 : on monte à 4,4."
+);
+
+// USAGE 1 : 25/10 = 2,5 sur la droite.
+const droite25 = legende(
+  droite(0, 3, 0.5, [{ value: 2.5, label: "2,5", color: VERT }]),
+  "25 dixièmes = 2,5"
+);
+
+// USAGE 2 : deux prix de fruits (banque, sans le lieu).
+const tableauPrix = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "2,5 € ou 2,45 € ?",
+      headers: ["Unités", ",", "Dixièmes", "Centièmes"],
+      rows: [
+        { label: "2,50", values: ["2", ",", "5", "0"] },
+        { label: "2,45", values: ["2", ",", "4", "5"] },
+      ],
+      highlight: { col: 2 },
+      caption: "5 dixièmes battent 4 dixièmes.",
+    }}
+  />
+);
+
+// USAGE 3 : 19,99 € collé à 20 €.
+const prix1999 = legende(
+  droite(19, 20, 0.2, [{ value: 19.99, label: "19,99", color: ROUGE }]),
+  "19,99 € : presque 20 €"
+);
+
+// EXEMPLES
+const exemple15 = legende(
+  droite(0, 2, 0.5, [{ value: 1.5, label: "1,5", color: VERT }]),
+  "15 dixièmes = 1 unité et 5 dixièmes"
+);
+
+const tableauRang = rangs(
+  "Le nombre 12,764",
+  ["Dizaines", "Unités", ",", "Dixièmes", "Centièmes", "Millièmes"],
+  ["1", "2", ",", "7", "6", "4"],
+  3,
+  "Juste après la virgule : les dixièmes."
+);
+
+const exemple0305 = legende(
+  droite(0.3, 0.36, 0.02, [
+    { value: 0.305, label: "0,305", color: ROUGE },
+    { value: 0.35, label: "0,35", color: VERT },
+  ]),
+  "0,305 est à gauche : il est plus petit"
+);
+
+const exemple396 = rangs(
+  "3,96 au dixième",
+  ["Unités", ",", "Dixièmes", "Centièmes"],
+  ["3", ",", "9", "6"],
+  3,
+  "6 : on monte. 3,9 devient 4,0."
+);
+
+const exemple255 = legende(
+  droite(2.5, 2.6, 0.02, [{ value: 2.55, label: "2,55", color: BLEU }]),
+  "2,55 est entre 2,5 et 2,6"
+);
+
+// LE DÉFI a son dessin : 3,5 contre 3,45 sur la droite.
+const defi35 = legende(
+  droite(3, 4, 0.25, [
+    { value: 3.45, label: "3,45", color: ROUGE },
+    { value: 3.5, label: "3,5", color: VERT },
+  ]),
+  "3,5 est un peu plus à droite"
+);
+
+// ─── Les textes courts ────────────────────────────────────────────────────────
+
 const pieges = [
-  "Croire que 2,45 dépasse 2,5 : 2,5 = 2,50, et 50 centièmes valent plus que 45.",
-  "Confondre les rangs : dans 5,83, le 8 est aux dixièmes, le 3 aux centièmes.",
-  "Additionner sans aligner les virgules : on écrit 1,7 = 1,70, puis virgule sous virgule.",
+  "Croire que 0,45 dépasse 0,5, parce que 45 dépasse 5. Or 0,5 = 0,50.",
+  "Lire 0,09 comme 9 dixièmes. Le 9 est au 2e rang : c'est 9 centièmes.",
+  "Couper au lieu d'arrondir. 12,78 arrondi au dixième donne 12,8, pas 12,7.",
 ];
 
 const aRetenir = [
-  "Un décimal = une partie entière + une virgule + une partie décimale.",
   "Après la virgule : dixièmes, centièmes, millièmes.",
-  "On peut ajouter des zéros à droite sans changer le nombre : 0,5 = 0,50.",
+  "Pour comparer, j'écris le même nombre de chiffres après la virgule.",
+  "Pour arrondir, je regarde le chiffre d'après : 5 ou plus, je monte.",
 ];
 
 export const ficheDecimaux6e: FicheCoursData = {
@@ -235,67 +287,109 @@ export const ficheDecimaux6e: FicheCoursData = {
   notion: "decimal-nombre",
   titre: "Les nombres décimaux",
   accroche:
-    "Un nombre décimal, c'est un nombre à virgule (2,5 ; 0,75). La virgule prolonge le tableau de numération : après les unités viennent les dixièmes, les centièmes…",
+    "Un prix, une taille, un temps de course : souvent, il y a une virgule. La virgule sert à être précis.",
   identite: [
-    { label: "Mots clés", valeur: "Virgule, partie entière, dixième, centième" },
-    { label: "Le secret", valeur: "Après la virgule, les rangs continuent vers la droite" },
-    { label: "Outil", valeur: "Le tableau de numération, prolongé après la virgule" },
+    { label: "Mots clés", valeur: "Virgule, dixième, centième, arrondi" },
+    { label: "Le secret", valeur: "Après la virgule, les rangs continuent" },
+    { label: "Outil", valeur: "Le tableau de numération, prolongé" },
   ],
   definition: {
     texte:
-      "Un nombre décimal a une partie entière et une partie décimale, séparées par une virgule. Dans 3,45, la partie entière est 3 et la partie décimale vaut 45 centièmes.",
+      "Un nombre décimal s'écrit avec une virgule. À gauche, c'est la partie entière. À droite, c'est la partie décimale : dixièmes, centièmes, millièmes.",
   },
   figure: {
     schema: tableauDecimal345,
-    legende: "Chaque chiffre selon son rang, même après la virgule : 3,45 = 3 + 0,4 + 0,05.",
+    legende: "3,45, c'est 3 unités, 4 dixièmes et 5 centièmes.",
   },
   proprietes: [
     {
-      titre: "La virgule sépare",
+      titre: "Un décimal a sa place",
       micros: ["decimal_lire_ecrire"],
-      texte: "Partie entière à gauche, partie décimale à droite : 3,45 → 3 et 45 centièmes.",
+      texte: "3,45 est entre 3 et 4. Sa partie entière est 3.",
       schema: entreTroisEtQuatre,
     },
     {
       titre: "Les rangs continuent",
       micros: ["decimal_rang"],
-      texte: "Après la virgule : dixièmes, puis centièmes, puis millièmes.",
+      texte: "Une colonne de la grille vaut un dixième. Un carreau vaut un centième.",
       schema: grilleDesCentiemes,
     },
     {
       titre: "Comparer",
       micros: ["decimal_comparer"],
-      texte: "Même nombre de décimales (0,5 = 0,50), puis on compare rang par rang.",
-      schema: cinqDixiemesEtCinquanteCentiemes,
+      texte: "Je compare les parties entières, puis les dixièmes. 0,7 est plus grand que 0,65.",
+      schema: comparer07,
+    },
+    {
+      titre: "Arrondir",
+      micros: ["decimal_arrondir"],
+      texte: "Arrondir, c'est choisir le voisin le plus proche. 12,7 arrondi à l'unité donne 13.",
+      schema: arrondir127,
+    },
+    {
+      titre: "Encadrer",
+      micros: ["decimal_encadrer"],
+      texte: "Encadrer, c'est coincer un nombre entre deux voisins. 7,3 < 7,38 < 7,4.",
+      schema: encadrer738,
     },
   ],
   reel: {
     texte:
-      "Les décimaux servent à être précis : un fruit à 2,45 €, une taille de 1,65 m, un chrono de 10,25 s. Dire qu'un requin nage à 2,75 m/s est plus exact que 3 m/s.",
+      "Un fruit coûte 2,45 €. Une élève mesure 1,52 m. Un requin nage à 2,75 m par seconde. Dire 2,75 est plus précis que dire 3.",
   },
   historique: {
     texte:
-      "« Décimal » vient de dix : on compte en base 10. En 1585, Simon Stevin montre l'intérêt d'écrire les dixièmes et centièmes ; la virgule se répand au début du XVIIe siècle.",
+      "« Décimal » vient du latin decem, qui veut dire dix. En 1585, Simon Stevin explique comment écrire les dixièmes. La virgule arrive un peu plus tard. Aux États-Unis, on écrit encore un point : 2.5.",
   },
   methode: [
-    { titre: "Je lis le rang", texte: "1er après la virgule = dixièmes, 2e = centièmes, 3e = millièmes." , schema: lireLesCentiemes , micros: ["decimal_rang"] },
-    { titre: "J'ajoute des zéros", texte: "Pour comparer ou poser : 0,5 = 0,50, la valeur ne change pas." , schema: lesZerosInutiles , micros: ["decimal_comparer"] },
-    { titre: "J'aligne les virgules", texte: "Pour additionner : virgule sous virgule, puis on calcule." , schema: alignerAvecUnZero , micros: ["decimal_lire_ecrire"] },
+    {
+      titre: "Je lis le rang",
+      micros: ["decimal_rang"],
+      texte: "Je compte depuis la virgule. 1er chiffre : dixièmes. 2e : centièmes. 3e : millièmes.",
+      schema: rang3264,
+    },
+    {
+      titre: "J'ajoute des zéros",
+      micros: ["decimal_comparer"],
+      texte: "0,5 = 0,50 : c'est le même nombre. Je peux alors comparer 50 et 45 centièmes.",
+      schema: cinqDixiemes,
+    },
+    {
+      titre: "Je regarde le chiffre d'après",
+      micros: ["decimal_arrondir"],
+      texte: "Pour arrondir au dixième, je regarde les centièmes. 5 ou plus : je monte.",
+      schema: arrondir4382,
+    },
   ],
   usages: [
-    { titre: "Lire → écrire", detail: "D'une fraction décimale au nombre : 25/10 = 2,5." , micros: ["decimal_lire_ecrire"] },
-    { titre: "Comparer", detail: "Même nombre de décimales, puis rang par rang : 2,50 > 2,45." , micros: ["decimal_comparer"] },
-    { titre: "Calculer", detail: "Additionner (virgules alignées) ; ×/÷ par un entier en pensant en dixièmes." , micros: ["decimal_arrondir"] },
+    {
+      titre: "D'une fraction au décimal",
+      micros: ["decimal_lire_ecrire"],
+      detail: "25/10, c'est 25 dixièmes. 20 dixièmes font 2 unités : 25/10 = 2,5.",
+      schema: droite25,
+    },
+    {
+      titre: "Comparer deux prix",
+      micros: ["decimal_comparer"],
+      detail: "2,5 € ou 2,45 € ? J'écris 2,50. Le fruit à 2,5 € est le plus cher.",
+      schema: tableauPrix,
+    },
+    {
+      titre: "Arrondir un prix",
+      micros: ["decimal_arrondir"],
+      detail: "19,99 € est à 1 centime de 20 €. Arrondi à l'unité, il vaut 20 €.",
+      schema: prix1999,
+    },
   ],
   exemples: [
     {
-      titre: "Lire et écrire",
+      titre: "Écrire en décimal",
       micros: ["decimal_lire_ecrire"],
-      donnees: "On a la fraction 25/10.",
+      donnees: "On a la fraction 15/10.",
       question: "Écris-la en nombre décimal.",
-      schema: droite25,
+      schema: exemple15,
       solution:
-        "25/10, c'est 25 dixièmes. 20 dixièmes font 2 unités, il reste 5 dixièmes. Donc 25/10 = 2,5.",
+        "15/10, c'est 15 dixièmes. 10 dixièmes font 1 unité. Il reste 5 dixièmes. Donc 15/10 = 1,5.",
     },
     {
       titre: "Le rang d'un chiffre",
@@ -304,176 +398,120 @@ export const ficheDecimaux6e: FicheCoursData = {
       question: "Quel est le chiffre des dixièmes ?",
       schema: tableauRang,
       solution:
-        "Juste après la virgule, c'est le rang des dixièmes : 7. Puis 6 aux centièmes et 4 aux millièmes.",
+        "Les dixièmes viennent juste après la virgule. C'est le 7. Ensuite, 6 centièmes et 4 millièmes.",
     },
     {
-      titre: "Comparer deux prix",
+      titre: "Comparer deux décimaux",
       micros: ["decimal_comparer"],
-      donnees: "Un jus à 2,5 € et un autre à 2,45 €.",
-      question: "Lequel est le plus cher ?",
-      schema: tableauComparer,
+      donnees: "On compare 0,305 et 0,35.",
+      question: "Lequel est le plus petit ?",
+      schema: exemple0305,
       solution:
-        "On écrit 2,5 = 2,50. Mêmes unités : on compare les dixièmes, 5 > 4. Le jus à 2,5 € est le plus cher.",
+        "J'écris 0,35 = 0,350. Je compare 305 et 350 millièmes. 305 est plus petit. Donc 0,305 est le plus petit.",
     },
     {
-      titre: "Additionner",
-      micros: ["decimal_lire_ecrire"],
-      donnees: "On calcule 3,45 + 1,7.",
-      question: "Combien font 3,45 + 1,7 ?",
-      schema: additionPosee,
+      titre: "Arrondir au dixième",
+      micros: ["decimal_arrondir"],
+      donnees: "On veut arrondir 3,96 au dixième.",
+      question: "Quelle est sa valeur arrondie ?",
+      schema: exemple396,
       solution:
-        "On écrit 1,7 = 1,70, puis virgule sous virgule. On additionne colonne par colonne : 3,45 + 1,70 = 5,15.",
+        "3,96 est entre 3,9 et 4,0. Le chiffre des centièmes est 6. 6 ou plus : je monte. L'arrondi est 4,0.",
+    },
+    {
+      titre: "Intercaler un nombre",
+      micros: ["decimal_encadrer"],
+      donnees: "On cherche un nombre entre 2,5 et 2,6.",
+      question: "Donne un nombre décimal entre 2,5 et 2,6.",
+      schema: exemple255,
+      solution:
+        "J'écris 2,50 et 2,60. Entre les deux, il y a 2,51, 2,52… jusqu'à 2,59. Par exemple, 2,55.",
     },
   ],
   pieges,
   aRetenir,
   entrainement: [
     {
-      question: "Écris 7/10 en nombre décimal, puis donne le chiffre des dixièmes de 12,764.",
-      correction:
-        "7/10 = 7 dixièmes = 0,7. Dans 12,764, le premier chiffre après la virgule est 7 : c'est le chiffre des dixièmes.",
+      question: "Écris 7/10 en nombre décimal.",
+      correction: "7/10, c'est 7 dixièmes. On écrit 0,7.",
+      micros: ["decimal_lire_ecrire"],
     },
     {
-      question: "Quel est le plus petit : 0,305 ou 0,35 ?",
-      correction:
-        "On écrit 0,35 = 0,350. On compare 305 millièmes et 350 millièmes : 305 est plus petit. Donc 0,305.",
-      micros: ["decimal_comparer", "decimal_encadrer"],
+      question: "Dans 4,58, quel chiffre est au rang des dixièmes ?",
+      correction: "Le 1er chiffre après la virgule est 5. C'est le chiffre des dixièmes.",
+      micros: ["decimal_rang"],
     },
     {
-      question: "Calcule 3,45 + 1,7.",
-      correction:
-        "On écrit 1,7 = 1,70, on aligne les virgules : 3,45 + 1,70 = 5,15.",
+      question: "Quel est le plus petit : 0,52 ou 0,507 ?",
+      correction: "J'écris 0,520 et 0,507. 507 est plus petit que 520. Donc 0,507 est le plus petit.",
+      micros: ["decimal_comparer"],
     },
     {
-      question: "Un objet coûte 2,5 €. Combien coûtent 6 objets ? Puis calcule 9,6 ÷ 3.",
+      question: "Arrondis 9,146 au centième.",
+      correction: "9,146 est entre 9,14 et 9,15. Le chiffre des millièmes est 6 : je monte. L'arrondi est 9,15.",
+      micros: ["decimal_arrondir"],
+    },
+    {
+      question: "Encadre 5,206 à l'unité, puis au centième.",
+      correction: "À l'unité : 5 < 5,206 < 6. Au centième : 5,20 < 5,206 < 5,21.",
+      micros: ["decimal_encadrer"],
+    },
+    {
+      question: "Défi : explique pourquoi 3,5 est plus grand que 3,45, alors que 45 dépasse 5.",
       correction:
-        "2,5 × 6 = 15, donc 15 €. Pour la division : 9,6 = 96 dixièmes, 96 ÷ 3 = 32, soit 32 dixièmes = 3,2.",
+        "Mêmes unités : 3. Je compare les dixièmes : 5 contre 4. Donc 3,5 est plus grand. On peut aussi écrire 3,50 et 3,45.",
       micros: ["decimal_defi"],
+      schema: defi35,
     },
   ],
+  tiMargo: {
+    objectif: "La virgule sert à être précis !",
+    definition: "Après la virgule, les rangs continuent !",
+    methode: "Même nombre de chiffres, puis je compare !",
+    pieges: "0,5 est plus grand que 0,45 !",
+    retenir: "5 ou plus ? J'arrondis vers le haut !",
+    exercice: "À toi ! Commence par la partie entière.",
+  },
   coachHref: "/coach-ia/maths?classe=6e",
 };
 
+// Le mode classe est ENGENDRÉ depuis la fiche (`slidesDepuisFiche`) : ce
+// tableau reste exporté pour la page, mais il n'est pas projeté.
+// ⛔ AUCUN LATEX DANS LES DIAPOS.
 export const slidesDecimaux6e: ClasseSlide[] = [
   {
     titre: "Objectif du cours",
     badge: "Décimaux - 6e",
+    schema: tableauDecimal345,
     section: {
       type: "objectif",
-      phrase: "Lire, comparer et calculer avec les nombres à virgule",
-      sousPhrase:
-        "La virgule prolonge le tableau de numération : après les unités viennent les dixièmes, les centièmes…",
-      encadre: {
-        titre: "L'idée",
-        texte: "La virgule permet d'écrire des nombres plus précis que les entiers.",
-      },
-    },
-  },
-  {
-    titre: "À quoi ça sert ?",
-    badge: "Utilité & histoire",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "info",
-        titre: "Au quotidien",
-        contenu:
-          "Les prix (2,45 €), les tailles (1,65 m), les chronos (10,25 s) : les décimaux servent à être précis.",
-      },
-      droite: {
-        variante: "histoire",
-        titre: "Le savais-tu ?",
-        contenu:
-          "« Décimal » vient de dix : on compte en base 10. Simon Stevin popularise cette écriture en 1585.",
-      },
-    },
-  },
-  {
-    titre: "Le rang des chiffres",
-    badge: "Après la virgule",
-    section: {
-      type: "cartes",
-      cartes: [
-        { titre: "Dixièmes", texte: "1er chiffre après la virgule. Dans 12,764, c'est le 7." },
-        { titre: "Centièmes", texte: "2e chiffre après la virgule. Dans 12,764, c'est le 6." },
-        { titre: "Millièmes", texte: "3e chiffre après la virgule. Dans 12,764, c'est le 4." },
-      ],
-    },
-  },
-  {
-    titre: "Les 3 réflexes",
-    badge: "Méthode",
-    section: {
-      type: "cartes",
-      cartes: ficheDecimaux6e.methode.map((m) => ({ titre: m.titre, texte: m.texte })),
-    },
-  },
-  {
-    titre: "Selon la situation",
-    badge: "3 usages",
-    section: {
-      type: "cartes",
-      cartes: ficheDecimaux6e.usages.map((u) => ({ titre: u.titre, texte: u.detail })),
+      phrase: "Lire, comparer et arrondir les nombres à virgule",
+      sousPhrase: "Après la virgule : dixièmes, centièmes, millièmes.",
     },
   },
   {
     titre: "Exemple guidé",
     badge: "Comparer",
+    teinte: "exemple",
+    schema: exemple0305,
     section: {
       type: "exemple",
-      enonce: "Un jus à 2,5 €, un autre à 2,45 €.",
-      question: "Lequel est le plus cher ?",
-      correction: "2,5 = 2,50. Mêmes unités, on compare les dixièmes : 5 > 4, donc 2,5 € est le plus cher.",
-    },
-  },
-  {
-    titre: "Autre exemple",
-    badge: "Additionner",
-    section: {
-      type: "exemple",
-      enonce: "On calcule 3,45 + 1,7.",
-      question: "Combien font 3,45 + 1,7 ?",
-      correction: "On écrit 1,7 = 1,70, virgule sous virgule : 3,45 + 1,70 = 5,15.",
-    },
-  },
-  {
-    titre: "Pièges & à retenir",
-    badge: "Vigilance",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "piege",
-        titre: "Pièges à éviter",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {pieges.map((piege) => (
-              <li key={piege}>• {piege}</li>
-            ))}
-          </ul>
-        ),
-      },
-      droite: {
-        variante: "ok",
-        titre: "À retenir",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {aRetenir.map((point) => (
-              <li key={point}>• {point}</li>
-            ))}
-          </ul>
-        ),
-      },
+      enonce: "On compare 0,305 et 0,35.",
+      question: "Lequel est le plus petit ?",
+      correction: "0,35 = 0,350. 305 millièmes contre 350 : 0,305 est le plus petit.",
     },
   },
   {
     titre: "À toi de jouer",
     badge: "Exercice flash",
+    teinte: "exercice",
+    schema: exemple255,
     section: {
       type: "exercice",
-      enonce: "On cherche un nombre décimal entre 3,4 et 3,5.",
-      question: "Propose un nombre décimal compris entre 3,4 et 3,5.",
-      indice: "Écris 3,4 = 3,40 et 3,5 = 3,50, puis cherche entre les deux.",
-      correction: "Par exemple 3,45 : on a bien 3,40 < 3,45 < 3,50.",
+      enonce: "On cherche un nombre entre 2,5 et 2,6.",
+      question: "Propose un nombre décimal entre les deux.",
+      indice: "Écris 2,50 et 2,60.",
+      correction: "Par exemple 2,55 : 2,50 < 2,55 < 2,60.",
     },
   },
 ];

@@ -47,3 +47,16 @@ Doutes : demi-carreaux (découpage/recollement, absent de la banque) ; côté d'
 "maths/6e/decimal-nombre": { titre: "Les nombres décimaux : 20 exercices corrigés", resume: "Lire et écrire un décimal, le rang d'un chiffre, comparer et ranger, arrondir à l'unité, au dixième, au centième, encadrer et intercaler. Un lancer de poids, le prix du gazole, un compteur de vélo, une course de 100 m, des fruits sur la balance, la pluie de la semaine." },
 "maths/6e/decimal-calcul": { titre: "Calculer avec les nombres décimaux : 20 exercices corrigés", resume: "Additionner et soustraire virgule sous virgule, multiplier, multiplier par 0,1, 0,01, 0,001, diviser par un entier en continuant après la virgule, contrôler avec un ordre de grandeur. Des courses au marché, une recette de crêpes, un relais, une sortie au parc, des tomates du potager, l'eau de la douche." },
 Doutes : décimal × décimal (2,5 × 1,4) ; 10 ÷ 3 arrondi en ★★ ; 450 ÷ 24 (diviseur à 2 chiffres) ; « cases » pour intervalles ; dates 1914/1945/1969, fièvre 38 °C.
+
+## Réécriture des fiches de juin (30/09)
+- Lot fractions/%/proportionnalité : 3/3 ✓ au débordement (pourcentages +290 → 0), Ti Margo 6 clés, tsc propre.
+  Doutes : fraction d'une quantité retirée de fraction-nombre (c'est fraction_calcul) ; 2/3 ≈ 0,67 dans la banque ; garder « N × p ÷ 100 » ? ; tailles 140/170 cm modèles ; historique (Égyptiens, %, marchands italiens) à vérifier.
+- ⚠️ scripts/mesurer-mode-classe.mjs (autre session) : prend le badge « Propriété k / k » pour le compteur et s'arrête → ne lit que quelques diapos. À signaler, pas à nous.
+- Lot nombres (entiers, décimaux, calcul mental, calcul posé) : 4/4 ✓ (calcul mental +107 → 0), Ti Margo 6 clés, 6/6 micros.
+  Doutes : décimaux ne parlent plus de calcul (c'est decimal_calcul) et couvrent enfin arrondir/encadrer ; 4,23 × 10 et 645 ÷ 10 dans le calcul mental (banque) ; « emprunt » plus nommé dans la soustraction posée (reste sur le dessin).
+  ⚠️ tsc : 14 erreurs dans lib/tutor-v4/questionBank/4e/maths/puissances.bank.ts (autre session).
+- Lot grandeurs (longueurs, périmètres, aires, volumes) : 4/4 ✓ (périmètres +224, aires +174, volumes +190 → 0), Ti Margo 6 clés.
+  Doutes : conversions d'aire retirées de aire-surface (c'est aire-unite) ; tableau de conversion des longueurs (7 colonnes) remplacé par barre + droites — y tient-il ? ; L × l × h gardée (défis de la banque), pas de litres.
+  À vérifier à l'œil : calcul_pose (7 + 3 + 7 + 3 ; 7 × 7) sur la page réelle.
+- Lot données/probas/algo/cercle : 4/4 ✓ (algo +499, données +340, cercle +416, probas +273 → 0), Ti Margo 6 clés, tsc propre.
+  Doutes : « lire un tableau » est à stat_enquete ; probabilité en fraction en 6e ? ; ⭐ cercle : juin posait la corde de 8 m sur un DIAMÈTRE (16 m) — corrigé sur un rayon ; Archimède « entre 3,140 et 3,143 » ; algo : le carré en 8 blocs retiré (débordait).

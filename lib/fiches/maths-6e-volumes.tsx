@@ -1,136 +1,176 @@
 // ─── Fiche de cours : les volumes (6e) ─────────────────────────────────────────
 // Fiche « en blocs » alignée sur la banque du coach
-// lib/tutor-v4/questionBank/6e/maths/volumes.bank.ts (notion volume_solide).
+// lib/tutor-v4/questionBank/6e/maths/volumes.bank.ts (notionId volume_solide).
 //
-// Micro-compétences couvertes → blocs :
-// - volume_unite      → définition, carte d'identité, usage « Lire une mesure »,
-//                       piège « cm² vs cm³ », exercices 1 et slide unités
-// - volume_compter    → propriété « Compter les cubes », usage, exemple 1,
-//                       exercice 2
-// - volume_comparer   → propriété « Comparer deux solides », usage, exercice 3
-// - volume_assemblage → propriété « Assembler des solides », usage, exercice 4
-// - volume_lire       → usage « Lire une mesure », exemple 1, à retenir
-// - volume_defi       → formule du pavé droit (défis de la banque), exemple 2,
-//                       exercice 4, slide « Défi »
+// ⭐ RÉÉCRITE LE 30/09/2026 POUR DES 6e QUI LISENT DIFFICILEMENT : phrases
+// courtes, une idée par phrase, un dessin sur CHAQUE bloc, Ti Margo au mode
+// classe. Les nombres sont ceux de la banque ; la feuille d'exercices
+// (lib/fiches-exercices/maths-6e-volume-solide.tsx) n'en partage aucun.
+//
+// Micro-compétences 6/6 :
+// - volume_unite      → définition + figure (le cube de 1 cm), méthode 1,
+//                       usage « Choisir l'unité », piège 1, entraînement 1
+// - volume_compter    → propriété 1 (3 couches de 6), méthode 2 (le tas de 13),
+//                       exemple 1 (3 couches de 5), entraînement 2
+// - volume_comparer   → propriété 2 (12 cubes, deux formes), usage « Comparer »
+//                       (14 contre 12), piège 3
+// - volume_assemblage → propriété 3 (8 + 4), méthode 3 (le L soudé),
+//                       entraînement 3 (18 + 12)
+// - volume_lire       → usage « Lire une mesure » (10 cm³)
+// - volume_defi       → formule du pavé, exemples 2 (la boîte 2 × 3 × 2) et 3
+//                       (le cube de 3 cm), entraînement 4 (24 cm² au lieu de cm³)
+//
+// ⛔ DEUX SOLIDES = UN SEUL DESSIN. Empilés l'un sous l'autre (deux canvas),
+// ils débordaient de 118 à 190 px au mode classe (mesuré le 30/09). Le canvas
+// `solide_3d` ne sait poser qu'un assemblage, à origine fixe : les deux solides
+// côte à côte sont donc un SVG local (`deuxSolides`), en perspective cavalière
+// comme la feuille d'exercices, noms en 16 px dans un cadre de 300 au plus
+// (16 × 226/300 = 12 px sur un téléphone).
+// ⚠️ Sur les exemples, le compte « N cubes unités » du canvas est ÉTEINT : il
+// donnait la réponse avant qu'on la cherche.
 
+import type { ReactNode } from "react";
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+import { slidesDepuisFiche } from "@/lib/fiches/slidesDepuisFiche";
 
-// Un assemblage de petits cubes unités (canvas solide_3d du coach) : le volume
-// se MONTRE en comptant les cubes, exactement comme dans les exercices.
-function cubesPave(longueur: number, largeur: number, hauteur: number) {
-  const cubes: Array<{ x: number; y: number; z: number }> = [];
+type Cube = { x: number; y: number; z: number };
+
+function cubesPave(longueur: number, largeur: number, hauteur: number): Cube[] {
+  const cubes: Cube[] = [];
   for (let z = 0; z < hauteur; z++)
     for (let y = 0; y < largeur; y++)
       for (let x = 0; x < longueur; x++) cubes.push({ x, y, z });
   return cubes;
 }
 
-function assemblage(longueur: number, largeur: number, hauteur: number) {
-  return (
-    <CanvasRenderer
-      figure={{
-        kind: "solide_3d",
-        solide: "assemblage_cubes",
-        cubes: cubesPave(longueur, largeur, hauteur),
-        display: { showLabels: true },
-      }}
-    />
-  );
-}
-
-// Le pavé droit avec ses trois dimensions nommées (pour la formule L × l × h).
-function paveLabelle(
-  longueur: number,
-  largeur: number,
-  hauteur: number,
-  labels: { longueur?: string; largeur?: string; hauteur?: string },
-) {
-  return (
-    <CanvasRenderer
-      figure={{
-        kind: "solide_3d",
-        solide: "pave_droit",
-        dimensions: { longueur, largeur, hauteur },
-        // ⚠️ « la base » AU LIEU DE « base rectangulaire ». Le canvas écrit ce
-        // mot au centre de la face du bas ; depuis que ses étiquettes sont en
-        // 19 px, les 18 signes de « base rectangulaire » s'étalent sur 180 px et
-        // touchaient le « l » de la largeur (mesuré). Le mot « rectangulaire »
-        // ne dit rien de plus que le dessin.
-        labels: { aireBase: "la base", ...labels },
-        display: { showLabels: true, showDimensions: true },
-      }}
-    />
-  );
-}
-
-// ─── Les six dessins des blocs ────────────────────────────────────────────────
-// ⭐ QUATRE PAVÉS ÉTAIENT DÉJÀ LÀ, TOUS RECTANGULAIRES (4×2×2, 4×2×3, 5×1×3,
-// 2×3×2). En ajouter six autres du même genre aurait fait dix boîtes qui se
-// ressemblent (REGLES.md § 2 bis). Ce qui distingue les six nouveaux : un
-// empilement IRRÉGULIER là où il faut compter, deux solides de MÊME volume et de
-// formes différentes, une soudure visible en L, et un tableau — parce que
-// « cm³ n'est pas cm² » est une affaire d'écriture, pas de solide.
-
-/** Un dessin et sa phrase, sous lui. */
-const legende = (dessin: React.ReactNode, texte: string) => (
-  <div>
-    {dessin}
-    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
-  </div>
-);
-
-// ⛔ ON EMPILE, ON NE JUXTAPOSE PAS (§ 2 ter) : deux solides côte à côte dans une
-// carte de 225 px recevraient 110 px chacun.
-const pile = (items: { dessin: React.ReactNode; nom: string }[]) => (
-  <div className="grid grid-cols-1 gap-2">
-    {items.map((it) => (
-      <div key={it.nom}>
-        {it.dessin}
-        <p className="mt-1 text-center text-xs font-black text-slate-700">{it.nom}</p>
-      </div>
-    ))}
-  </div>
-);
-
-/** Un tas de cubes quelconque, décrit case par case. */
-function tas(cubes: Array<{ x: number; y: number; z: number }>) {
+/** Un tas de cubes unités (canvas du coach). `compte` écrit « N cubes unités ». */
+function tas(cubes: Cube[], compte = true) {
   return (
     <CanvasRenderer
       figure={{
         kind: "solide_3d",
         solide: "assemblage_cubes",
         cubes,
-        display: { showLabels: true },
+        display: { showLabels: compte },
       }}
     />
   );
 }
 
-// DES COUCHES IDENTIQUES, DONC UNE MULTIPLICATION. Trois étages de six cubes :
-// on compte une fois, on multiplie. L'exemple 1 fait 3 couches de 5 — ici c'est
-// 3 couches de 6, et surtout la couche est un RECTANGLE, pas une ligne.
-const troisCouchesDeSix = legende(assemblage(3, 2, 3), "une couche de 6, trois couches : 3 × 6 = 18");
+const assemblage = (l: number, w: number, h: number, compte = true) => tas(cubesPave(l, w, h), compte);
 
-// ⭐ MÊME VOLUME, FORMES DIFFÉRENTES. C'est toute la propriété, et un seul solide
-// ne peut pas la dire : il en faut deux, et il faut qu'ils ne se ressemblent pas.
-const memeVolumeDeuxFormes = pile([
-  { dessin: assemblage(6, 2, 1), nom: "6 × 2 × 1 = 12 cubes" },
-  { dessin: assemblage(3, 2, 2), nom: "3 × 2 × 2 = 12 cubes aussi" },
+/** Un dessin et sa phrase, sous lui. */
+const legende = (dessin: ReactNode, texte: string) => (
+  <div>
+    {dessin}
+    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+  </div>
+);
+
+// ─── Deux pavés de cubes côte à côte (SVG local) ─────────────────────────────
+
+const ARETE = "#1e3a8a";
+const ENCRE = "#0f172a";
+/** Perspective cavalière : fuyantes à 45°, réduites de moitié. */
+const K = 0.5 * Math.SQRT1_2;
+
+type Pave = { l: number; w: number; h: number; nom: string };
+
+const deuxSolides = (liste: Pave[]) => {
+  const ECART = 1.4;
+  const larg = liste.map((p) => p.l + K * p.w);
+  const Wu = larg.reduce((s, v) => s + v, 0) + ECART * (liste.length - 1);
+  const Hu = Math.max(...liste.map((p) => p.h + K * p.w));
+  const u = Math.min(26, 280 / Wu, 120 / Hu);
+  const bas = Hu * u;
+  const trait = { stroke: ARETE, strokeWidth: 1.2, strokeLinejoin: "round" as const };
+  const dessin: ReactNode[] = [];
+  let x0 = 0;
+  liste.forEach((p, i) => {
+    const ox = x0;
+    const P = (x: number, y: number, z: number) =>
+      `${(ox + (x + K * y) * u).toFixed(1)},${(bas - (z + K * y) * u).toFixed(1)}`;
+    // L'ordre du peintre : du fond vers l'avant, du bas vers le haut.
+    for (let y = p.w - 1; y >= 0; y--)
+      for (let z = 0; z < p.h; z++)
+        for (let x = 0; x < p.l; x++)
+          dessin.push(
+            <g key={`${i}-${x}-${y}-${z}`}>
+              <polygon points={`${P(x, y, z)} ${P(x + 1, y, z)} ${P(x + 1, y, z + 1)} ${P(x, y, z + 1)}`} fill="#bfdbfe" {...trait} />
+              <polygon points={`${P(x, y, z + 1)} ${P(x + 1, y, z + 1)} ${P(x + 1, y + 1, z + 1)} ${P(x, y + 1, z + 1)}`} fill="#eff6ff" {...trait} />
+              <polygon points={`${P(x + 1, y, z)} ${P(x + 1, y + 1, z)} ${P(x + 1, y + 1, z + 1)} ${P(x + 1, y, z + 1)}`} fill="#93c5fd" {...trait} />
+            </g>
+          );
+    dessin.push(
+      <text key={`n${i}`} x={(ox + (larg[i] * u) / 2).toFixed(1)} y={(bas + 22).toFixed(1)} textAnchor="middle" fontSize={16} fontWeight={900} fill={ENCRE}>
+        {p.nom}
+      </text>
+    );
+    x0 += (larg[i] + ECART) * u;
+  });
+  const W = Wu * u + 6;
+  const H = bas + 30;
+  return (
+    <svg
+      viewBox={`-3 -3 ${W.toFixed(1)} ${H.toFixed(1)}`}
+      className="mx-auto block h-auto w-full"
+      role="img"
+      aria-label={`Deux solides en cubes : ${liste.map((p) => p.nom).join(" et ")}`}
+    >
+      {dessin}
+    </svg>
+  );
+};
+
+// ─── Les dessins ──────────────────────────────────────────────────────────────
+
+// LA FIGURE : le cube unité lui-même, 1 cm de côté.
+const cubeUnite = (
+  <CanvasRenderer
+    figure={{
+      kind: "solide_3d",
+      solide: "cube",
+      dimensions: { cote: 1 },
+      // aireBase vide : « base carrée », écrit d'office sur la face du bas,
+      // touchait le « 1 cm » de la profondeur (rendu vérifié le 30/09).
+      labels: { cote: "1 cm", aireBase: "" },
+      display: { showLabels: true, showDimensions: true },
+    }}
+  />
+);
+
+// COUCHES IDENTIQUES → UNE MULTIPLICATION : trois étages de six cubes.
+const troisCouchesDeSix = legende(assemblage(3, 2, 3), "Une couche de 6, trois couches : 3 × 6 = 18.");
+
+// MÊME VOLUME, FORMES DIFFÉRENTES : il faut deux solides qui ne se ressemblent pas.
+const memeVolumeDeuxFormes = deuxSolides([
+  { l: 6, w: 2, h: 1, nom: "12 cubes" },
+  { l: 3, w: 2, h: 2, nom: "12 cubes" },
 ]);
 
-// COLLER, C'EST ADDITIONNER. Les deux morceaux sont montrés SÉPARÉS : la somme
-// se fait dans la tête de l'élève, pas dans le dessin. La méthode, plus bas,
-// montrera le résultat soudé.
-const deuxSolidesSepares = pile([
-  { dessin: assemblage(2, 2, 2), nom: "le premier : 8 cubes" },
-  { dessin: assemblage(2, 2, 1), nom: "le second : 4 cubes" },
+// COLLER, C'EST ADDITIONNER : les deux morceaux avant d'être collés.
+const huitEtQuatre = deuxSolides([
+  { l: 2, w: 2, h: 2, nom: "8 cubes" },
+  { l: 2, w: 2, h: 1, nom: "4 cubes" },
 ]);
 
-// L'UNITÉ EST UNE AFFAIRE D'ÉCRITURE, PAS DE SOLIDE. Aucun empilement ne peut
-// montrer la différence entre cm, cm² et cm³ : c'est le petit chiffre en haut
-// qui la fait. Seul dessin de la fiche sans un seul cube.
+// LE PAVÉ ET SES TROIS DIMENSIONS, pour la formule. « L », « l », « h » et
+// « la base » : les mots entiers se chevauchaient (mesuré).
+const paveFormule = (
+  <CanvasRenderer
+    figure={{
+      kind: "solide_3d",
+      solide: "pave_droit",
+      dimensions: { longueur: 4, largeur: 2, hauteur: 3 },
+      labels: { aireBase: "la base", longueur: "L", largeur: "l", hauteur: "h" },
+      display: { showLabels: true, showDimensions: true },
+    }}
+  />
+);
+
+// MÉTHODE 1 : le petit chiffre fait l'unité. Seul dessin sans un cube.
 const lesTroisUnites = (
   <CanvasRenderer
     figure={{
@@ -147,9 +187,7 @@ const lesTroisUnites = (
   />
 );
 
-// ⭐ CELUI-LÀ NE SE CALCULE PAS : IL SE COMPTE. Neuf cubes au sol, quatre
-// au-dessus — aucune formule ne marche, et deux cubes du fond sont cachés par
-// ceux de devant. C'est exactement le piège n° 2 de la fiche, dessiné.
+// MÉTHODE 2 : un tas IRRÉGULIER. Aucune formule : on compte, cachés compris.
 const tasIrregulier = legende(
   tas([
     ...[0, 1, 2].flatMap((x) => [0, 1, 2].map((y) => ({ x, y, z: 0 }))),
@@ -158,11 +196,10 @@ const tasIrregulier = legende(
     { x: 0, y: 1, z: 1 },
     { x: 1, y: 1, z: 1 },
   ]),
-  "9 au sol + 4 dessus = 13 — sans oublier ceux du fond"
+  "9 au sol + 4 dessus = 13, cachés compris."
 );
 
-// LA SOUDURE SE VOIT. Les deux morceaux de la propriété, recollés : le solide en
-// L n'est plus un pavé, et pourtant son volume est bien 8 + 4.
+// MÉTHODE 3 : les deux morceaux de la propriété 3, soudés en L.
 const solideRecolleEnL = legende(
   tas([
     ...[0, 1].flatMap((x) => [0, 1].flatMap((y) => [0, 1].map((z) => ({ x, y, z })))),
@@ -171,32 +208,54 @@ const solideRecolleEnL = legende(
     { x: 3, y: 0, z: 0 },
     { x: 3, y: 1, z: 0 },
   ]),
-  "collés : 8 + 4 = 12 cubes, aucun n'a disparu"
+  "Collés : 8 + 4 = 12. Aucun cube ne disparaît."
+);
+
+// USAGES
+const dixCubes = legende(assemblage(5, 2, 1), "10 cm³ = 10 cubes de 1 cm³.");
+
+const quatorzeContreDouze = (
+  <CanvasRenderer
+    figure={{
+      kind: "stat_graph",
+      graphType: "barres",
+      title: "Nombre de cubes",
+      data: [
+        { label: "Solide A", value: 14, color: "#16a34a" },
+        { label: "Solide B", value: 12, color: "#2563eb" },
+      ],
+      display: { showValues: true, showLabels: true, highlightIndex: 0 },
+      size: { width: 240, height: 170 },
+    }}
+  />
+);
+
+const quelleUnite = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      headers: ["Pour mesurer", "L'unité"],
+      rows: [
+        { values: ["un dé à jouer", "cm³"] },
+        { values: ["un aquarium", "cm³"] },
+        { values: ["une piscine", "m³"] },
+      ],
+      highlight: { col: 1 },
+    }}
+  />
 );
 
 const pieges = [
-  "Confondre cm² (une aire, une surface plate) et cm³ (un volume, de la place en 3 dimensions).",
-  "Oublier des cubes cachés derrière ou en dessous quand on compte un empilement.",
-  "Comparer deux volumes écrits dans des unités différentes sans faire attention.",
+  "Écrire cm² pour un volume. Un volume s'écrit en cm³.",
+  "Oublier les cubes cachés, derrière ou en dessous.",
+  "Juger à la hauteur. Le plus haut n'a pas toujours le plus de cubes.",
 ];
 
 const aRetenir = [
-  "Le volume, c'est la place occupée dans l'espace : on le mesure en unités cubes (cm³, m³).",
-  "Un solide fait de cubes unités a pour volume le nombre de cubes : on compte, couche par couche.",
-  "Quand on assemble deux solides, on additionne leurs volumes ; quand on coupe puis recolle, le volume ne change pas.",
+  "Le volume, c'est la place prise. Il s'écrit en cm³ ou en m³.",
+  "Couches pareilles : je compte une couche, puis je multiplie.",
+  "Je colle deux solides : j'additionne leurs volumes.",
 ];
-
-const paveDefinition = assemblage(4, 2, 2);
-// ⚠️ « L », « l », « h » ET NON LES MOTS EN ENTIER : « largeur » chevauchait la
-// mention « base rectangulaire » que le canvas écrit lui-même sous le pavé
-// (mesuré). Les trois lettres sont d'ailleurs celles de la formule.
-const paveFormule = paveLabelle(4, 2, 3, {
-  longueur: "L",
-  largeur: "l",
-  hauteur: "h",
-});
-const paveTroisCouches = assemblage(5, 1, 3);
-const paveBoite = assemblage(2, 3, 2);
 
 export const ficheVolumes6e: FicheCoursData = {
   matiere: "maths",
@@ -205,278 +264,155 @@ export const ficheVolumes6e: FicheCoursData = {
   notion: "volume-solide",
   titre: "Les volumes",
   accroche:
-    "Le volume, c'est la place qu'un objet occupe dans l'espace. En 6e, on le mesure en comptant des petits cubes : compter, comparer, assembler, tout part de là.",
+    "Le volume, c'est la place que prend un objet. En 6e, on le mesure en comptant des petits cubes !",
   identite: [
-    { label: "Prérequis", valeur: "Multiplication, cube et pavé droit, unités de mesure" },
-    { label: "Idée clé", valeur: "Volume = nombre de cubes unités qui remplissent le solide" },
-    { label: "Unités", valeur: "cm³ (centimètre cube), m³ (mètre cube)" },
+    { label: "Le mot clé", valeur: "Le cube unité : 1 cm³" },
+    { label: "Le secret", valeur: "Une couche, puis je multiplie" },
+    { label: "Unités", valeur: "cm³ et m³ (avec le petit 3)" },
   ],
   definition: {
     texte:
-      "Le volume d'un solide est la place qu'il occupe dans l'espace. On le mesure en unités cubes : on compte combien de petits cubes identiques remplissent le solide. Un cube de 1 cm de côté est le cube unité : son volume est 1 cm³.",
+      "Le volume, c'est la place que prend un solide. On le mesure en petits cubes. Un cube de 1 cm de côté a un volume de 1 cm³.",
   },
   figure: {
-    schema: paveDefinition,
-    legende: "Le volume = le nombre de petits cubes qui remplissent le solide : on les compte, couche par couche.",
+    schema: cubeUnite,
+    legende: "Ce petit cube, c'est 1 cm³. Le volume compte ces cubes.",
   },
   proprietes: [
     {
-      titre: "Compter les cubes",
+      titre: "Compter par couches",
       micros: ["volume_compter"],
-      texte:
-        "Un solide construit avec des cubes unités a pour volume le nombre total de cubes. Pour un empilement régulier, on compte une couche, puis on multiplie par le nombre de couches. Exemple : 3 couches de 5 cubes, c'est 3 × 5 = 15 cubes.",
+      texte: "Les couches sont pareilles ? Je compte une couche, puis je multiplie. 3 × 6 = 18 cubes.",
       schema: troisCouchesDeSix,
     },
     {
-      titre: "Comparer deux solides",
+      titre: "Même volume, autre forme",
       micros: ["volume_comparer"],
-      texte:
-        "Pour comparer deux volumes écrits dans la même unité, on compare simplement les nombres. Deux solides de formes différentes peuvent avoir le même volume : ce qui compte, c'est le nombre de cubes.",
+      texte: "Pour comparer, je compte les cubes. Deux formes différentes peuvent avoir le même volume.",
       schema: memeVolumeDeuxFormes,
     },
     {
-      titre: "Assembler des solides",
+      titre: "Coller, c'est additionner",
       micros: ["volume_assemblage"],
-      texte:
-        "Quand on colle deux solides, le volume total est la somme des deux volumes. Et si on coupe un solide en morceaux puis qu'on les recolle, le volume ne change pas : aucun cube n'a disparu.",
-      schema: deuxSolidesSepares,
+      texte: "Je colle deux solides : j'additionne leurs cubes. 8 + 4 = 12 cubes.",
+      schema: huitEtQuatre,
     },
   ],
   reel: {
     texte:
-      "Le volume est partout : la taille d'un aquarium pour savoir combien d'eau il contient, le carton de déménagement pour savoir ce qui rentre dedans, le coffre de la voiture avant de partir en vacances, ou la brique de jus au supermarché. À chaque fois, la question est la même : combien de place ?",
+      "Un aquarium, un carton, un coffre de voiture : tout a un volume. Avant de remplir, on se demande s'il y a assez de place. Le volume répond à cette question.",
   },
   historique: {
     texte:
-      "Vers 250 avant J.-C., le savant grec Archimède devait vérifier si la couronne du roi Hiéron était en or pur, sans l'abîmer. Dans son bain, il remarque que son corps fait monter l'eau : un objet plongé dans l'eau déplace exactement son volume. Il aurait crié « Eurêka ! » (« J'ai trouvé ! »). Grâce à cette idée, il mesura le volume de la couronne et prouva que l'orfèvre avait triché.",
+      "Il y a plus de 2 000 ans vivait Archimède, un savant grec. Dans son bain, il voit l'eau monter. Un objet plongé pousse autant d'eau que son volume. Il aurait crié : « Eurêka ! »",
   },
   formule: {
-    contexte: "Pavé droit rempli de cubes unités (les défis de la fiche)",
-    expression: "Volume = L × l × h (longueur × largeur × hauteur)",
-    legende: "On compte les cubes d'une couche, puis on multiplie par le nombre de couches.",
+    contexte: "Le pavé droit rempli de cubes",
+    expression: "Volume du pavé = L × l × h",
+    legende: "Une couche : L × l cubes. Puis je multiplie par les h couches.",
     schema: paveFormule,
   },
   methode: [
     {
-      titre: "Repérer l'unité",
+      titre: "Je lis l'unité",
       micros: ["volume_unite"],
-      texte:
-        "Le petit 3 signale un volume : cm³, m³. Sans lui, ce n'est pas un volume (cm est une longueur, cm² une aire).",
+      texte: "Le petit 3 dit « volume ». cm est une longueur, cm² une aire.",
       schema: lesTroisUnites,
     },
     {
-      titre: "Compter les cubes",
+      titre: "Je compte tous les cubes",
       micros: ["volume_compter"],
-      texte:
-        "On compte les cubes unités couche par couche, sans oublier ceux cachés derrière ou en dessous. Couches identiques : on multiplie.",
+      texte: "Je compte couche par couche. Je n'oublie pas les cubes cachés.",
       schema: tasIrregulier,
     },
     {
-      titre: "Additionner si on assemble",
+      titre: "J'additionne si je colle",
       micros: ["volume_assemblage"],
-      texte:
-        "Deux solides collés : on additionne leurs volumes. Un solide coupé puis recollé garde le même volume.",
+      texte: "Deux solides collés : j'additionne. Aucun cube ne disparaît.",
       schema: solideRecolleEnL,
     },
   ],
   usages: [
     {
-      titre: "Compter un volume",
-      micros: ["volume_compter"],
-      detail:
-        "Le solide est fait de cubes unités : son volume est le nombre de cubes. Empilement régulier : nombre de couches × cubes par couche.",
+      titre: "Lire une mesure",
+      micros: ["volume_lire"],
+      detail: "Dans « 10 cm³ », le nombre 10 compte les cubes. L'unité cm³ dit leur taille.",
+      schema: dixCubes,
     },
     {
       titre: "Comparer deux volumes",
       micros: ["volume_comparer"],
-      detail:
-        "Même unité : on compare les nombres. 14 cubes contre 12 cubes : le solide de 14 cubes a le plus grand volume.",
+      detail: "A a 14 cubes, B en a 12. A a le plus grand volume.",
+      schema: quatorzeContreDouze,
     },
     {
-      titre: "Lire et assembler",
-      micros: ["volume_lire", "volume_assemblage"],
-      detail:
-        "Dans « 18 cm³ », le volume vaut 18, soit 18 cubes de 1 cm³. Si on réunit deux solides, on additionne : 4 cubes + 3 cubes = 7 cubes.",
+      titre: "Choisir l'unité",
+      micros: ["volume_unite"],
+      detail: "Un petit objet se mesure en cm³. Une piscine se mesure en m³.",
+      schema: quelleUnite,
     },
   ],
   exemples: [
     {
       titre: "Compter les cubes d'un pavé",
       micros: ["volume_compter"],
-      donnees: "Un pavé est formé de 3 couches de 5 cubes unités chacune.",
-      question: "Quel est son volume en cubes unités ?",
-      schema: paveTroisCouches,
-      solution:
-        "Chaque couche contient 5 cubes et il y a 3 couches identiques. On calcule 3 × 5 = 15. Le volume du pavé est 15 cubes unités, soit 15 cm³ si chaque cube vaut 1 cm³.",
+      donnees: "Un pavé a 3 couches de 5 cubes unités.",
+      question: "Quel est son volume ?",
+      schema: assemblage(5, 1, 3, false),
+      solution: "Une couche a 5 cubes. Il y a 3 couches pareilles. 3 × 5 = 15. Le volume est 15 cubes unités.",
     },
     {
-      titre: "Remplir une boîte (défi)",
+      titre: "Remplir une boîte",
       micros: ["volume_defi"],
-      donnees: "Une boîte a pour dimensions 2 cm, 3 cm et 2 cm.",
-      question: "Combien de cubes de 1 cm³ faut-il pour la remplir entièrement ?",
-      schema: paveBoite,
-      solution:
-        "On calcule le volume de la boîte : longueur × largeur × hauteur = 2 × 3 × 2 = 12. La boîte a un volume de 12 cm³, il faut donc 12 cubes de 1 cm³ pour la remplir.",
+      donnees: "Une boîte mesure 2 cm, 3 cm et 2 cm.",
+      question: "Combien de cubes de 1 cm³ faut-il pour la remplir ?",
+      schema: assemblage(2, 3, 2, false),
+      solution: "Au fond : 2 × 3 = 6 cubes. Il y a 2 couches : 6 × 2 = 12. Il faut 12 cubes de 1 cm³.",
+    },
+    {
+      titre: "Le défi du cube",
+      micros: ["volume_defi"],
+      donnees: "Un cube a une arête de 3 cm.",
+      question: "Quel est son volume ?",
+      schema: assemblage(3, 3, 3, false),
+      solution: "Une couche : 3 × 3 = 9 cubes. Il y a 3 couches : 9 × 3 = 27. Le volume est 27 cm³.",
     },
   ],
   pieges,
   aRetenir,
   entrainement: [
     {
-      question: "Quelle unité choisir pour mesurer le volume d'un aquarium : cm, cm², cm³ ou kg ?",
-      correction:
-        "Un volume mesure la place occupée en 3 dimensions, donc une unité cube. cm est une longueur, cm² une aire, kg une masse. La bonne réponse est cm³.",
+      question: "Quelle unité pour le volume d'un aquarium : cm, cm², cm³ ou kg ?",
+      correction: "Un volume a un petit 3. La bonne réponse est cm³.",
       micros: ["volume_unite", "volume_lire"],
     },
     {
-      question: "Un pavé est formé de 2 rangées de 4 cubes unités. Quel est son volume ?",
-      correction:
-        "On compte les cubes : 2 rangées de 4 cubes, donc 2 × 4 = 8. Le volume est 8 cubes unités.",
+      question: "Un pavé a 2 rangées de 4 cubes unités. Quel est son volume ?",
+      correction: "2 × 4 = 8. Le volume est 8 cubes unités.",
+      micros: ["volume_compter"],
     },
     {
-      question:
-        "Le solide A contient 14 cubes unités, le solide B en contient 12. Lequel a le plus grand volume, et de combien de cubes ?",
-      correction:
-        "Le volume, c'est le nombre de cubes. 14 est plus grand que 12, donc A a le plus grand volume. L'écart est 14 − 12 = 2 : A a 2 cubes de plus.",
+      question: "On colle un solide de 18 cm³ et un solide de 12 cm³. Quel est le volume total ?",
+      correction: "Coller, c'est additionner : 18 + 12 = 30. Le volume total est 30 cm³.",
+      micros: ["volume_assemblage"],
     },
     {
-      question:
-        "Défi : on assemble un solide de 18 cm³ et un solide de 12 cm³. Quel est le volume total ? Et quel est le volume d'un cube de 3 cm d'arête ?",
-      correction:
-        "Assembler, c'est additionner : 18 + 12 = 30, donc 30 cm³. Pour le cube : arête × arête × arête = 3 × 3 × 3 = 27, donc 27 cm³.",
+      question: "Défi : un élève écrit que sa boîte a un volume de 24 cm². Qu'est-ce qui cloche ?",
+      correction: "cm² est une unité d'aire. Un volume s'écrit en cm³ : 24 cm³.",
+      micros: ["volume_defi", "volume_unite"],
     },
   ],
+  tiMargo: {
+    objectif: "Le volume, ça se compte en cubes !",
+    definition: "Ce petit cube, c'est 1 cm³ !",
+    formule: "Une couche, puis je multiplie !",
+    pieges: "Attention aux cubes cachés !",
+    retenir: "Un volume a un petit 3 : cm³ !",
+    exercice: "À toi ! Cherche le petit 3.",
+  },
   coachHref: "/coach-ia/maths?classe=6e",
 };
 
-export const slidesVolumes6e: ClasseSlide[] = [
-  {
-    titre: "Objectif du cours",
-    badge: "Volumes - 6e",
-    section: {
-      type: "objectif",
-      phrase: "Mesurer la place qu'un solide occupe dans l'espace",
-      sousPhrase:
-        "Le volume se mesure en unités cubes : on compte les petits cubes qui remplissent le solide.",
-      encadre: {
-        titre: "L'idée",
-        texte: "Un cube de 1 cm de côté est le cube unité : son volume vaut 1 cm³.",
-      },
-    },
-  },
-  {
-    titre: "À quoi ça sert ?",
-    badge: "Utilité & histoire",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "info",
-        titre: "Au quotidien",
-        contenu:
-          "L'eau d'un aquarium, ce qui rentre dans un carton de déménagement, le coffre de la voiture, la brique de jus : le volume répond à la question « combien de place ? ».",
-      },
-      droite: {
-        variante: "histoire",
-        titre: "Le savais-tu ?",
-        contenu:
-          "Vers 250 avant J.-C., Archimède découvre dans son bain qu'un objet plongé dans l'eau déplace son volume. Eurêka ! Il prouve que la couronne du roi n'était pas en or pur.",
-      },
-    },
-  },
-  {
-    titre: "L'unité de volume",
-    badge: "cm³ et m³",
-    section: {
-      type: "objectif",
-      phrase: "Un volume se mesure en unités cubes",
-      sousPhrase:
-        "12 cm est une longueur, 12 cm² une aire, 12 kg une masse. Seul 12 cm³ est un volume.",
-      encadre: {
-        titre: "Le réflexe",
-        texte: "Le petit 3 signale les trois dimensions : longueur, largeur, hauteur.",
-      },
-    },
-  },
-  {
-    titre: "Les 3 réflexes",
-    badge: "Méthode",
-    section: {
-      type: "cartes",
-      cartes: ficheVolumes6e.methode.map((m) => ({
-        titre: m.titre,
-        texte: m.texte,
-      })),
-    },
-  },
-  {
-    titre: "Selon la question",
-    badge: "3 situations",
-    section: {
-      type: "cartes",
-      cartes: ficheVolumes6e.usages.map((u) => ({
-        titre: u.titre,
-        texte: u.detail,
-      })),
-    },
-  },
-  {
-    titre: "Exemple guidé",
-    badge: "Compter les cubes",
-    section: {
-      type: "exemple",
-      enonce: "Un pavé est formé de 3 couches de 5 cubes unités chacune.",
-      question: "Quel est son volume ?",
-      correction: "3 couches de 5 cubes : 3 × 5 = 15. Le volume est 15 cubes unités.",
-    },
-  },
-  {
-    titre: "Défi",
-    badge: "Remplir une boîte",
-    section: {
-      type: "exemple",
-      enonce: "Une boîte mesure 2 cm × 3 cm × 2 cm.",
-      question: "Combien de cubes de 1 cm³ pour la remplir ?",
-      correction: "Volume = 2 × 3 × 2 = 12 cm³, donc 12 cubes de 1 cm³.",
-    },
-  },
-  {
-    titre: "Pièges & à retenir",
-    badge: "Vigilance",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "piege",
-        titre: "Pièges à éviter",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {pieges.map((piege) => (
-              <li key={piege}>• {piege}</li>
-            ))}
-          </ul>
-        ),
-      },
-      droite: {
-        variante: "ok",
-        titre: "À retenir",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {aRetenir.map((point) => (
-              <li key={point}>• {point}</li>
-            ))}
-          </ul>
-        ),
-      },
-    },
-  },
-  {
-    titre: "À toi de jouer",
-    badge: "Exercice flash",
-    section: {
-      type: "exercice",
-      enonce: "On assemble un solide de 8 cubes et un solide de 4 cubes.",
-      question: "Quel est le volume total ?",
-      indice: "Assembler, c'est additionner les cubes.",
-      correction: "8 + 4 = 12. Le volume total est 12 cubes unités.",
-    },
-  },
-];
+// Le mode classe est engendré depuis la fiche (slidesDepuisFiche) : ce tableau
+// n'est qu'un interrupteur, un tableau vide couperait le mode classe.
+export const slidesVolumes6e: ClasseSlide[] = slidesDepuisFiche(ficheVolumes6e);

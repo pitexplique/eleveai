@@ -1,34 +1,35 @@
 // ─── Fiche de cours : les aires (6e) ────────────────────────────────────────────
 // Fiche « en blocs » alignée sur la banque du coach
-// lib/tutor-v4/questionBank/6e/maths/aires.bank.ts.
+// lib/tutor-v4/questionBank/6e/maths/aires.bank.ts (notionId aire_surface).
 //
-// Correspondance micro-compétences → blocs :
-// - aire_comprendre  → définition, propriétés 1-2 (l'unité EST un carré, compter)
-// - aire_compter     → propriété 2, usage « Compter les carreaux », entraînement 1
-// - aire_comparer    → propriété 3 (comparer sans mesurer), propriété 6 (convertir),
-//                      méthode « Même unité avant de comparer », exemple 4
-// - aire_rectangle   → propriété 4, formule, exemple 1, entraînement 3
-// - aire_carre       → propriété 5, formule, entraînement 3
-// - aire_decomposer  → propriété 7, usage « Découper la figure », exemples 2-3
-// - aire_probleme    → bloc réel, problème du jardin (entraînement 6)
-// - aire_defi        → piège « aire ≠ périmètre », défi (entraînement 4)
+// ⭐ RÉÉCRITE LE 30/09/2026 POUR DES 6e QUI LISENT DIFFICILEMENT : phrases
+// courtes, une idée par phrase, un dessin sur CHAQUE bloc, Ti Margo au mode
+// classe. Les nombres sont ceux de la banque ; la feuille d'exercices
+// (lib/fiches-exercices/maths-6e-aire-surface.tsx) n'en partage aucun.
 //
-// ⭐ LE BO, RELU LE 21/08/2026 (extrait envoyé par Frédéric). Trois attendus
-// manquaient à la fiche, et ce sont ceux que l'élève rate au contrôle :
-//   · « 1 cm² est l'aire d'un carré de 1 cm de côté » — l'unité est un OBJET,
-//     pas une notation qu'on recopie à la fin d'un calcul ;
-//   · « comparer des aires SANS avoir recours à la mesure, par superposition ou
-//     par découpage et recollement » — comparer vient AVANT calculer ;
-//   · « effectuer des conversions d'aire » : 1 m² = 100 dm², 1 dm² = 100 cm².
-//     C'est × 100 à chaque étage, pas × 10 — et ça ne se retient pas, ça se voit
-//     sur le carré de 1 dm découpé en 10 × 10 carrés de 1 cm.
+// Micro-compétences de aire_surface 6/6 (+ les deux automatismes utiles) :
+// - aire_rectangle  → propriété 2 (6 × 4), formule (4 rangées de 6), méthode 2,
+//                     exemple 1 (8 × 5), entraînement 2
+// - aire_carre      → propriété 3 (5 × 5), méthode 2 (7 × 7), entraînement 3
+// - aire_comparer   → propriété 4 (les mêmes 12 carreaux recollés), méthode 3,
+//                     usage 2 (jardin 7 × 3 ou potager de 5), exemple 4
+//                     (250 cm² ou 3 dm²)
+// - aire_decomposer → propriété 5 (le T), usage 3 (le zigzag), exemples 2 (le L)
+//                     et 3 (la figure biscornue)
+// - aire_probleme   → usage 2 (le jardin et le potager)
+// - aire_defi       → entraînement 4 (même aire, périmètres différents) et 5
+//                     (carré de 36 cm²)
+// - aire_comprendre, aire_compter (notion voisine aire_unite) → définition +
+//   figure, propriété 1, usage 1, entraînement 1.
 //
-// ⭐ LE DESSIN SE CHOISIT POUR CE QU'IL MONTRE (REGLES.md § 2 bis). Les sept
-// propriétés portent sept images de nature différente : le carré-unité, les
-// carreaux COMPTÉS un à un, deux figures superposables, le rectangle CÔTÉ (on ne
-// compte plus, on multiplie), le carré codé, le décimètre carré découpé en cent,
-// la figure tordue. Et les figures tordues sont là exprès (Frédéric, 21/08) :
-// sur un rectangle, l'élève applique une formule sans réfléchir.
+// ⭐ LES CONVERSIONS D'AIRE (1 dm² = 100 cm²) VIVENT DANS LA FICHE VOISINE
+// `maths-6e-aire-unite.tsx` (aire_convertir) : ici elles ne servent qu'à
+// comparer (exemple 4).
+//
+// ⛔ UN SEUL DESSIN PAR BLOC, JAMAIS DEUX EMPILÉS : projetés, deux
+// quadrillages l'un sous l'autre débordaient de 103 à 155 px (mesuré le
+// 30/09). Deux formes à comparer tiennent dans UN quadrillage, côte à côte.
+// ⛔ PAS DE TABLEAU DE CONVERSION (BO 6e : « déconseillé à ce stade »).
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
@@ -37,8 +38,6 @@ import { slidesDepuisFiche } from "@/lib/fiches/slidesDepuisFiche";
 
 type Case = [number, number];
 
-// Toutes les cases pleines d'un bloc rectangulaire (row, col), pour dessiner une
-// aire « carreau par carreau » avec le canvas figure_libre du coach.
 function rectCells(rows: number, cols: number, r0 = 0, c0 = 0): Case[] {
   const cells: Case[] = [];
   for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) cells.push([r0 + r, c0 + c]);
@@ -46,14 +45,10 @@ function rectCells(rows: number, cols: number, r0 = 0, c0 = 0): Case[] {
 }
 
 /**
- * Le quadrillage. `unites` marque chaque carreau d'un « 1 » : c'est le dessin de
- * « compter », pas celui de « calculer ». `contour` trace le tour en rouge —
- * réservé aux blocs qui opposent justement l'aire au périmètre.
- *
- * ⚠️ `cellSize` se règle, il ne se subit pas : le SVG se met à l'échelle de son
- * bloc (226 px sur un téléphone). À 32 px la case, une grille de 8 colonnes fait
- * 288 px de viewBox et ses chiffres tombent à 10 px. À 24, elle en fait 224 et
- * ils restent à 13.
+ * Le quadrillage. `unites` marque chaque carreau d'un « 1 » (compter),
+ * `contour` trace le tour en rouge (opposer l'aire au périmètre).
+ * ⚠️ À 32 px la case, 8 colonnes tombent à 10 px de chiffre sur un téléphone ;
+ * au-delà de 6 colonnes, 24 px.
  */
 const grille = (
   rows: number,
@@ -103,7 +98,7 @@ const rectangleCote = (
   );
 };
 
-/** Un dessin et sa phrase, sous lui — pour dire ce que la figure ne dit pas seule. */
+/** Un dessin et sa phrase, sous lui. */
 const legende = (dessin: React.ReactNode, texte: string) => (
   <div>
     {dessin}
@@ -111,33 +106,21 @@ const legende = (dessin: React.ReactNode, texte: string) => (
   </div>
 );
 
-// Deux dessins l'un SOUS l'autre : dans une carte, on empile, on ne juxtapose
-// pas (REGLES.md § 2 ter). Côte à côte, chacun tomberait à 80 px de large.
-const empiler = (
-  haut: React.ReactNode,
-  hautLabel: string,
-  bas: React.ReactNode,
-  basLabel: string
-) => (
-  <div className="space-y-2">
-    <div>
-      {haut}
-      <p className="mt-1 text-center text-xs font-black text-sky-700">{hautLabel}</p>
-    </div>
-    <div>
-      {bas}
-      <p className="mt-1 text-center text-xs font-black text-emerald-700">{basLabel}</p>
-    </div>
-  </div>
+/** Un tableau de deux colonnes (jamais trois). */
+const tableau = (headers: [string, string], lignes: [string, string][], ligneForte?: number) => (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      headers,
+      rows: lignes.map((values) => ({ values })),
+      highlight: ligneForte === undefined ? { col: 1 } : { row: ligneForte },
+    }}
+  />
 );
 
-// ⭐ DES FIGURES TORDUES, PAS SEULEMENT DES RECTANGLES (Frédéric, 21/08/2026).
-// Sur une forme usuelle, l'élève applique une formule sans réfléchir ; c'est sur
-// une figure biscornue qu'il doit vraiment choisir entre compter et découper.
-// `figure_libre` est fait pour ça — et le BO de 6e demande justement des aires
-// « par pavage, découpage et recollement ».
+// ─── Les formes ───────────────────────────────────────────────────────────────
 
-// L'escalier : quatre marches, 10 carreaux. Ni rectangle, ni carré.
+// L'escalier de la définition : dix carreaux, ni rectangle ni carré.
 const escalier: Case[] = [
   [0, 0],
   [1, 0], [1, 1],
@@ -145,8 +128,17 @@ const escalier: Case[] = [
   [3, 0], [3, 1], [3, 2], [3, 3],
 ];
 
-// Neuf carreaux en forme de croix : on les compte, même si la figure n'a
-// aucune forme usuelle.
+// Douze carreaux en rectangle 3 × 4 (compter).
+const bloc12: Case[] = rectCells(3, 4);
+
+// COMPARER SANS MESURER, dans UN quadrillage : les 12 carreaux en rectangle à
+// gauche, les MÊMES 12 recollés en L à droite (colonne 4 vide entre les deux).
+const memeAire: Case[] = [...rectCells(3, 4, 0, 0), ...rectCells(2, 4, 0, 5), ...rectCells(2, 2, 2, 5)];
+
+// Le T de la propriété « découper » : 5 carreaux en haut + 2 en dessous.
+const formeT: Case[] = [...rectCells(1, 5, 0, 0), [1, 2], [2, 2]];
+
+// La croix de l'usage 1 : neuf carreaux, aucune forme connue.
 const croix: Case[] = [
   [0, 1],
   [1, 0], [1, 1], [1, 2],
@@ -154,85 +146,85 @@ const croix: Case[] = [
   [3, 1], [3, 2],
 ];
 
-// Un zigzag en S : six carreaux, deux décrochements. Aucune formule ne marche,
-// et pourtant l'aire se lit d'un coup d'œil quand on compte.
+// Le zigzag de l'usage 3 : six carreaux, trois rectangles de 2.
 const zigzag: Case[] = [
   [0, 0], [0, 1],
   [1, 1], [1, 2],
   [2, 2], [2, 3],
 ];
 
-// La figure biscornue de l'exemple 3 : neuf carreaux, trois décrochements.
-// Elle ne ressemble à rien de connu — c'est exactement l'intérêt.
+// La figure en L de l'exemple 2 : rectangle 4 × 3 (12) + carré 2 × 2 (4) = 16.
+const figureL: Case[] = [...rectCells(3, 4, 0, 0), ...rectCells(2, 2, 3, 0)];
+
+// La figure biscornue de l'exemple 3 : 2 + 4 + 3 = 9 carreaux.
 const biscornue: Case[] = [
   [0, 0], [0, 1],
   [1, 0], [1, 1], [1, 2], [1, 3],
   [2, 2], [2, 3], [2, 4],
 ];
 
-// LE DÉCOUPAGE-RECOLLEMENT du BO : douze carreaux rangés en rectangle, puis les
-// MÊMES douze carreaux en L. Deux formes, une seule aire — et sans mesurer.
-const bloc12: Case[] = rectCells(3, 4);
-const formeL12: Case[] = [...rectCells(2, 4, 0, 0), ...rectCells(2, 2, 2, 0)];
+// ─── Les dessins qui ne sont pas des quadrillages ─────────────────────────────
 
-// La figure en L de l'exemple 2 : rectangle 4 × 3 (12) + carré 2 × 2 (4) = 16.
-const figureL: Case[] = [...rectCells(3, 4, 0, 0), ...rectCells(2, 2, 3, 0)];
+const choisirLaMethode = tableau(
+  ["La forme", "Je fais"],
+  [
+    ["Rectangle", "longueur × largeur"],
+    ["Carré", "côté × côté"],
+    ["Figure tordue", "je découpe"],
+  ]
+);
 
-// Le décimètre carré, découpé en cent centimètres carrés : 1 dm = 10 cm, donc le
-// carré de 1 dm contient 10 × 10 carrés de 1 cm. C'est CE dessin qui explique
-// pourquoi on multiplie par 100 et non par 10.
-const centCarres = grille(10, 10, rectCells(10, 10), { cellSize: 20 });
-
-// ⛔ PAS DE TABLEAU DE CONVERSION (BO 6e, relu le 22/08/2026) : « le recours à
-// un tableau de conversion est déconseillé à ce stade de l'apprentissage ».
-// Ce tableau-ci ne convertit rien — il dit ce que CHAQUE unité EST, et c'est
-// exactement ce que le BO demande de mémoriser : « l'élève sait que 1 cm² est
-// l'aire d'un carré de 1 cm de côté […], que 1 mm² est l'aire d'un carré de
-// 1 mm de côté et que 1 km² est l'aire d'un carré de 1 km de côté ».
-const tableauUnites = (
+const carreSeptPose = (
   <CanvasRenderer
     figure={{
-      kind: "tableau_donnees",
-      headers: ["Unité", "C'est l'aire d'un carré de côté"],
-      rows: [
-        { values: ["1 mm²", "1 mm"] },
-        { values: ["1 cm²", "1 cm"] },
-        { values: ["1 dm²", "1 dm"] },
-        { values: ["1 m²", "1 m"] },
-        { values: ["1 km²", "1 km"] },
-      ],
-      highlight: { col: 1 },
+      kind: "calcul_pose",
+      operation: "multiplication",
+      title: "Carré de 7 cm de côté",
+      numbers: ["7", "7"],
+      result: "49",
+      display: { showResult: true, compact: false },
+      questionLabel: "49 : c'est l'aire, en cm².",
     }}
   />
 );
 
-// La comparaison de l'exemple 4, posée : on ne convertit pas dans un tableau
-// d'unités, on ramène les deux aires à la même unité et on compare les nombres.
-const tableauComparaison = (
-  <CanvasRenderer
-    figure={{
-      kind: "tableau_donnees",
-      headers: ["Objet", "Aire donnée", "La même aire, en cm²"],
-      rows: [
-        { values: ["Affiche", "250 cm²", "250"] },
-        { values: ["Feuille", "3 dm²", "3 × 100 = 300"] },
-      ],
-      highlight: { col: 2 },
-    }}
-  />
+const lePetitDeux = tableau(
+  ["J'écris", "C'est"],
+  [
+    ["24 cm", "une longueur"],
+    ["24 cm²", "une aire"],
+  ],
+  1
+);
+
+const jardinOuPotager = tableau(
+  ["Terrain", "Aire"],
+  [
+    ["Jardin 7 m × 3 m", "21 m²"],
+    ["Potager 5 m × 5 m", "25 m²"],
+  ],
+  1
+);
+
+const afficheOuFeuille = tableau(
+  ["Aire donnée", "En cm²"],
+  [
+    ["Affiche : 250 cm²", "250 cm²"],
+    ["Feuille : 3 dm²", "300 cm²"],
+  ],
+  1
 );
 
 const pieges = [
-  "Confondre l'aire (la surface à l'intérieur) et le périmètre (le tour de la figure).",
-  "Convertir une aire comme une longueur : de dm² à cm², on multiplie par 100, pas par 10.",
-  "Oublier l'unité carrée : une aire s'écrit en cm² ou en m², jamais en cm ou en m.",
-  "Additionner longueur et largeur au lieu de les multiplier pour l'aire d'un rectangle.",
+  "Confondre aire et périmètre. L'aire, c'est l'intérieur. Le périmètre, c'est le tour.",
+  "Additionner longueur et largeur. Pour une aire, je multiplie.",
+  "Oublier le petit 2. Une aire s'écrit en cm², pas en cm.",
 ];
 
 const aRetenir = [
-  "1 cm² est l'aire d'un carré de 1 cm de côté (pareil pour 1 dm² et 1 m²).",
-  "Aire du rectangle = longueur × largeur. Aire du carré = côté × côté.",
-  "On change d'étage en multipliant par 100 : 1 m² = 100 dm², 1 dm² = 100 cm².",
+  "L'aire, c'est la place à l'intérieur. Elle s'écrit en cm² ou en m².",
+  "Rectangle : longueur × largeur. Carré : côté × côté.",
+  "Figure tordue : je la découpe, puis j'additionne les morceaux.",
 ];
 
 export const ficheAires6e: FicheCoursData = {
@@ -242,171 +234,103 @@ export const ficheAires6e: FicheCoursData = {
   notion: "aire-surface",
   titre: "Les aires",
   accroche:
-    "L'aire, c'est la place qu'une figure occupe à l'intérieur de son contour. On la mesure en carrés-unité : comparer sans mesurer, compter des carreaux, multiplier pour un rectangle ou un carré, découper les figures tordues.",
+    "L'aire, c'est la place à l'intérieur d'une figure. On compte des carreaux, on multiplie, ou on découpe !",
   identite: [
-    { label: "Prérequis", valeur: "Multiplication, rectangle, carré, quadrillage" },
-    { label: "Formules clés", valeur: "Rectangle : L × l ; carré : c × c" },
-    { label: "Unités", valeur: "cm², dm², m² — on change d'étage par × 100" },
+    { label: "Le mot clé", valeur: "L'aire : l'intérieur de la figure" },
+    { label: "Le secret", valeur: "Multiplier, c'est compter plus vite" },
+    { label: "Unités", valeur: "cm², m² (avec le petit 2)" },
   ],
   definition: {
     texte:
-      "L'aire d'une figure est la mesure de la surface qu'elle occupe, c'est-à-dire tout l'intérieur de la figure. On la mesure avec un carré-unité : 1 cm² est l'aire d'un carré de 1 cm de côté, 1 dm² celle d'un carré de 1 dm de côté, 1 m² celle d'un carré de 1 m de côté.",
+      "L'aire, c'est la place à l'intérieur d'une figure. On la mesure en carreaux. 1 cm² est l'aire d'un carré de 1 cm de côté.",
   },
   figure: {
-    // Le tour en rouge, l'intérieur en bleu : le seul dessin de la fiche qui
-    // montre les DEUX grandeurs à la fois — c'est là que se joue la confusion
-    // aire / périmètre, et on la règle sur la définition.
-    schema: grille(4, 5, rectCells(3, 4), { contour: true }),
-    legende:
-      "En rouge, le tour de la figure : c'est le périmètre. En bleu, tout l'intérieur : c'est l'aire.",
+    schema: grille(4, 4, escalier, { contour: true }),
+    legende: "En rouge, le tour : le périmètre. En bleu, l'intérieur : l'aire.",
   },
   proprietes: [
     {
-      titre: "L'unité est un carré",
-      texte:
-        "1 cm² est l'aire d'un carré de 1 cm de côté. De même pour 1 mm², 1 dm², 1 m² et 1 km² : chaque unité d'aire est le carré construit sur l'unité de longueur qui porte son nom.",
-      schema: legende(
-        rectangleCote(140, 140, { AB: "1 cm", BC: "1 cm", CD: "1 cm", DA: "1 cm" }),
-        "ce carré-là, c'est 1 cm²"
-      ),
-    },
-    {
-      titre: "Compter les unités",
-      texte:
-        "Sur un quadrillage, l'aire d'une figure est le nombre de carreaux unités qu'elle recouvre. 12 carreaux recouverts, c'est une aire de 12 unités d'aire.",
+      titre: "Compter les carreaux",
+      micros: ["aire_compter", "aire_comprendre"],
+      texte: "Chaque carreau vaut 1 unité d'aire. 12 carreaux, c'est une aire de 12 unités.",
       schema: grille(3, 4, bloc12, { unites: true }),
-    },
-    {
-      titre: "Comparer sans mesurer",
-      micros: ["aire_comparer"],
-      texte:
-        "Deux figures se comparent par superposition, ou par découpage et recollement : si les morceaux de l'une remplissent exactement l'autre, elles ont la même aire.",
-      // Les MÊMES douze carreaux, rangés autrement : l'aire n'a pas bougé, et
-      // personne n'a mesuré quoi que ce soit.
-      schema: empiler(
-        grille(3, 4, bloc12, { contour: true }),
-        "12 carreaux",
-        grille(4, 4, formeL12, { contour: true }),
-        "les mêmes 12, recollés : même aire"
-      ),
     },
     {
       titre: "L'aire du rectangle",
       micros: ["aire_rectangle"],
-      texte:
-        "Aire du rectangle = longueur × largeur. Un rectangle de 6 cm sur 4 cm a une aire de 6 × 4 = 24 cm².",
+      texte: "Aire = longueur × largeur. 6 × 4 = 24 cm².",
       schema: rectangleCote(186, 124, { AB: "6 cm", BC: "4 cm" }),
     },
     {
       titre: "L'aire du carré",
       micros: ["aire_carre"],
-      texte:
-        "Dans un carré, tous les côtés sont égaux. Aire du carré = côté × côté. Un carré de côté 5 cm a une aire de 5 × 5 = 25 cm².",
-      schema: rectangleCote(150, 150, {
-        AB: "5 cm",
-        BC: "5 cm",
-        CD: "5 cm",
-        DA: "5 cm",
-      }),
+      texte: "Tous les côtés sont égaux. Aire = côté × côté : 5 × 5 = 25 cm².",
+      schema: rectangleCote(150, 150, { AB: "5 cm", BC: "5 cm", CD: "5 cm", DA: "5 cm" }),
     },
     {
-      titre: "Convertir : × 100 par étage",
-      texte:
-        "En 6e, deux conversions seulement : 1 m² = 100 dm² et 1 dm² = 100 cm², car un côté 10 fois plus grand donne 10 × 10 = 100 carrés. Dans l'autre sens, 1 cm² est le centième de 1 dm² : 1 cm² = 0,01 dm².",
-      schema: legende(centCarres, "1 dm de côté = 10 cm × 10 cm = 100 carrés de 1 cm²"),
+      titre: "Comparer sans mesurer",
+      micros: ["aire_comparer"],
+      texte: "Je découpe et je recolle les morceaux. Si rien ne manque, les deux aires sont égales.",
+      schema: legende(grille(4, 9, memeAire, { contour: true }), "Les mêmes 12 carreaux, rangés autrement."),
     },
     {
-      titre: "Décomposer une figure",
+      titre: "Découper une figure",
       micros: ["aire_decomposer"],
-      texte:
-        "Une figure tordue (en L, en escalier, en zigzag) se découpe en rectangles et en carrés. L'aire totale est la somme des aires des morceaux, s'ils ne se chevauchent pas.",
-      schema: grille(4, 4, escalier, { contour: true }),
+      texte: "Je coupe la figure en rectangles. J'additionne les aires des morceaux.",
+      schema: legende(grille(3, 5, formeT, { unites: true, contour: true }), "5 en haut + 2 en dessous = 7."),
     },
   ],
   reel: {
     texte:
-      "On calcule des aires tous les jours : le nombre de pots de peinture pour un mur, le carrelage d'une salle de bain, la pelouse à semer dans un jardin, la surface d'un appartement sur une annonce. À chaque fois, la question est la même : quelle surface faut-il couvrir ?",
+      "Pour peindre un mur, on calcule son aire. Pour poser du carrelage aussi. Une annonce donne la surface d'un logement en m². La question est toujours : quelle surface couvrir ?",
   },
   historique: {
     texte:
-      "Il y a plus de 4000 ans, en Égypte, le Nil débordait chaque année et effaçait les limites des champs. Des arpenteurs, surnommés les tendeurs de corde, remesuraient alors la surface de chaque parcelle pour répartir les terres et calculer l'impôt. Mesurer des aires est l'un des plus vieux métiers des mathématiques.",
+      "En Égypte, le Nil débordait chaque année. L'eau effaçait les limites des champs. Des arpenteurs remesuraient alors chaque champ. L'aire servait à calculer l'impôt.",
   },
   formule: {
-    contexte: "Rectangle de longueur L et de largeur l",
-    expression: "A(rectangle) = L × l ; A(carré) = c × c",
-    legende:
-      "Pourquoi ça marche : 5 rangées de 8 carreaux, c'est 5 × 8 = 40 carreaux. Multiplier, c'est compter plus vite.",
-    // Le dessin qui JUSTIFIE la formule : les 40 carreaux sont là, chacun
-    // marqué « 1 », rangés en 5 rangées de 8.
-    schema: grille(5, 8, rectCells(5, 8), { unites: true }),
+    contexte: "Rectangle L sur l, carré de côté c",
+    expression: "Rectangle : L × l ; carré : c × c",
+    legende: "4 rangées de 6 carreaux : 4 × 6 = 24. Multiplier, c'est compter vite.",
+    schema: grille(4, 6, rectCells(4, 6), { unites: true }),
   },
   methode: [
     {
-      titre: "Regarder la figure",
-      texte:
-        "Est-ce un rectangle, un carré, ou une figure tordue sur quadrillage ? La forme décide de la méthode : formule, comptage ou découpage.",
-      // Le réflexe est un CHOIX : il lui faut donc les deux cas, l'un sous
-      // l'autre (§ 2 ter). Un seul dessin ne montrerait aucune décision.
-      schema: empiler(
-        grille(3, 4, bloc12, { contour: true }),
-        "forme usuelle → une formule",
-        grille(5, 4, figureL, { contour: true }),
-        "forme tordue → on découpe"
-      ),
+      titre: "Je regarde la forme",
+      micros: ["aire_rectangle", "aire_carre", "aire_decomposer"],
+      texte: "La forme décide du calcul. Rectangle ou carré : une formule. Sinon, je découpe.",
+      schema: choisirLaMethode,
     },
     {
-      titre: "Calculer avec la bonne formule",
+      titre: "Je multiplie",
       micros: ["aire_rectangle", "aire_carre"],
-      texte:
-        "Rectangle : longueur × largeur. Carré : côté × côté. Sur quadrillage : compter les carreaux unités recouverts.",
-      schema: (
-        <CanvasRenderer
-          figure={{
-            kind: "calcul_pose",
-            operation: "multiplication",
-            title: "Rectangle 8 cm × 5 cm",
-            numbers: ["8", "5"],
-            result: "40",
-            display: { showResult: true, compact: false },
-            questionLabel: "40 : c'est l'aire, en cm².",
-          }}
-        />
-      ),
+      texte: "Carré de 7 cm de côté : 7 × 7 = 49. L'aire est 49 cm².",
+      schema: carreSeptPose,
     },
     {
-      titre: "La même unité, puis l'unité carrée",
-      texte:
-        "On termine toujours par l'unité : 24 cm², 40 m². Et avant de comparer deux aires, on les met dans la même unité — la mesure en dm² est 100 fois plus petite que la mesure en cm².",
-      schema: tableauUnites,
+      titre: "J'écris l'unité carrée",
+      micros: ["aire_comparer"],
+      texte: "Une aire s'écrit avec le petit 2. Pour comparer, je mets les aires dans la même unité.",
+      schema: lePetitDeux,
     },
   ],
   usages: [
     {
       titre: "Compter les carreaux",
-      micros: ["aire_comparer"],
-      detail:
-        "Sur un quadrillage, on compte les carreaux unités recouverts par la figure. 9 carreaux recouverts donnent une aire de 9 unités d'aire.",
-      // Une figure SANS forme usuelle : compter marche quand même. C'est ce que
-      // le rectangle numéroté de la propriété 2 ne peut pas montrer.
+      micros: ["aire_compter"],
+      detail: "La figure n'a pas de nom ? Je compte ses carreaux : 9 unités d'aire.",
       schema: grille(4, 3, croix, { unites: true }),
     },
     {
-      titre: "Calculer rectangle ou carré",
-      micros: ["aire_rectangle", "aire_carre"],
-      detail:
-        "On connaît les dimensions : rectangle = longueur × largeur, carré = côté × côté. On n'oublie pas l'unité carrée à la fin.",
-      schema: empiler(
-        rectangleCote(180, 78, { AB: "7 cm", BC: "3 cm" }),
-        "7 × 3 = 21 cm²",
-        rectangleCote(130, 130, { AB: "5 cm", BC: "5 cm" }),
-        "5 × 5 = 25 cm²"
-      ),
+      titre: "Choisir le plus grand terrain",
+      micros: ["aire_probleme", "aire_comparer"],
+      detail: "Jardin : 7 × 3 = 21 m². Potager : 5 × 5 = 25 m². Le potager est plus grand.",
+      schema: jardinOuPotager,
     },
     {
       titre: "Découper la figure",
       micros: ["aire_decomposer"],
-      detail:
-        "La figure n'est ni un rectangle ni un carré ? On la découpe en morceaux simples, on calcule l'aire de chaque morceau, puis on additionne.",
+      detail: "Le zigzag, ce sont 3 morceaux de 2 carreaux. 2 + 2 + 2 = 6 carreaux.",
       schema: grille(3, 4, zigzag, { contour: true }),
     },
   ],
@@ -414,90 +338,76 @@ export const ficheAires6e: FicheCoursData = {
     {
       titre: "L'aire d'un rectangle",
       micros: ["aire_rectangle"],
-      donnees: "Un rectangle mesure 8 cm de longueur et 5 cm de largeur.",
-      question: "Calculer son aire.",
-      // L'énoncé donne des DIMENSIONS, pas un quadrillage : le dessin dit la
-      // même chose que le texte, et l'élève applique la formule.
+      donnees: "Un rectangle mesure 8 cm sur 5 cm.",
+      question: "Quelle est son aire ?",
       schema: rectangleCote(192, 120, { AB: "8 cm", BC: "5 cm" }),
-      solution:
-        "C'est un rectangle, donc aire = longueur × largeur = 8 × 5 = 40. Son aire est 40 cm². Attention : 8 + 5 + 8 + 5 = 26 cm, c'est son périmètre, pas son aire.",
+      solution: "Aire = longueur × largeur. 8 × 5 = 40. L'aire est 40 cm². Attention : 8 + 5 + 8 + 5 = 26 cm, c'est le tour.",
     },
     {
       titre: "Une figure en L",
       micros: ["aire_decomposer"],
-      donnees:
-        "Une figure en L est formée d'un rectangle de 4 cm sur 3 cm et d'un carré de côté 2 cm, sans chevauchement.",
-      question: "Calculer son aire totale.",
+      donnees: "Un rectangle de 4 cm sur 3 cm et un carré de 2 cm.",
+      question: "Quelle est l'aire de la figure en L ?",
       schema: grille(5, 4, figureL, { contour: true }),
-      solution:
-        "Aire du rectangle : 4 × 3 = 12 cm². Aire du carré : 2 × 2 = 4 cm². Aire totale : 12 + 4 = 16 cm².",
+      solution: "Rectangle : 4 × 3 = 12 cm². Carré : 2 × 2 = 4 cm². Total : 12 + 4 = 16 cm².",
     },
     {
       titre: "Une figure biscornue",
       micros: ["aire_decomposer"],
-      donnees:
-        "Une figure tracée sur un quadrillage (carreaux de 1 cm²) : elle n'est ni un rectangle, ni un carré, et son contour fait trois décrochements.",
-      question: "Quelle est son aire ?",
-      schema: grille(3, 5, biscornue, { unites: true, contour: true }),
-      solution:
-        "Aucune formule ne s'applique : on compte les carreaux recouverts, rangée par rangée. 2 + 4 + 3 = 9 carreaux. L'aire est 9 cm². (On peut aussi la découper en un carré 2 × 2, puis deux morceaux de 2 et 3 carreaux : 4 + 2 + 3 = 9.)",
+      donnees: "Chaque carreau mesure 1 cm².",
+      question: "Quelle est l'aire de cette figure ?",
+      schema: grille(3, 5, biscornue, { contour: true }),
+      solution: "Aucune formule ne marche. Je compte rangée par rangée : 2 + 4 + 3 = 9. L'aire est 9 cm².",
     },
     {
       titre: "Comparer deux aires",
       micros: ["aire_comparer"],
-      donnees: "Une affiche a une aire de 250 cm². Une feuille a une aire de 3 dm².",
-      question: "Laquelle occupe la plus grande surface ?",
-      schema: tableauComparaison,
-      solution:
-        "On met tout dans la même unité. 1 dm² = 100 cm², donc 3 dm² = 3 × 100 = 300 cm². On compare alors 250 cm² et 300 cm² : c'est la feuille qui a la plus grande aire.",
+      donnees: "Une affiche : 250 cm². Une feuille : 3 dm².",
+      question: "Laquelle a la plus grande aire ?",
+      schema: afficheOuFeuille,
+      solution: "1 dm² = 100 cm². Donc 3 dm² = 300 cm². 300 est plus grand que 250 : c'est la feuille.",
     },
   ],
   pieges,
   aRetenir,
   entrainement: [
     {
-      question:
-        "Sur un quadrillage, une figure en escalier recouvre 1 carreau sur la première rangée, puis 2, puis 3, puis 4. Quelle est son aire ?",
-      correction:
-        "Aucune formule ici : on compte rangée par rangée. 1 + 2 + 3 + 4 = 10 carreaux unités. L'aire de l'escalier est 10 unités d'aire.",
+      question: "Une surface couvre 3 rangées de 4 carreaux unités. Quelle est son aire ?",
+      correction: "3 × 4 = 12. L'aire est 12 unités d'aire.",
+      micros: ["aire_compter"],
     },
     {
-      question:
-        "Un carré de 1 dm de côté est découpé en carrés de 1 cm de côté. Combien y en a-t-il ? Complète : 1 dm² = ... cm².",
-      correction:
-        "1 dm = 10 cm, donc le carré contient 10 rangées de 10 carrés, soit 10 × 10 = 100 carrés de 1 cm². Donc 1 dm² = 100 cm².",
+      question: "Calcule l'aire d'un rectangle de 4 cm sur 3 cm.",
+      correction: "4 × 3 = 12. L'aire est 12 cm².",
+      micros: ["aire_rectangle"],
     },
     {
-      question: "Calcule l'aire d'un rectangle de 6 cm sur 4 cm, puis celle d'un carré de côté 7 cm.",
-      correction:
-        "Rectangle : aire = longueur × largeur = 6 × 4 = 24 cm². Carré : aire = côté × côté = 7 × 7 = 49 cm².",
+      question: "Calcule l'aire d'un carré de 9 cm de côté.",
+      correction: "9 × 9 = 81. L'aire est 81 cm². Attention : 4 × 9 = 36 cm, c'est le tour.",
+      micros: ["aire_carre"],
     },
     {
-      question:
-        "Défi : deux rectangles peuvent-ils avoir la même aire mais des périmètres différents ?",
-      correction:
-        "Oui. Un rectangle de 3 cm sur 4 cm et un rectangle de 2 cm sur 6 cm ont tous les deux une aire de 12 cm². Mais leurs périmètres valent 14 cm et 16 cm : l'aire et le périmètre sont deux grandeurs différentes.",
+      question: "Défi : deux rectangles peuvent-ils avoir la même aire, mais pas le même tour ?",
+      correction: "Oui. 3 × 4 et 2 × 6 font tous les deux 12 cm². Leurs tours font 14 cm et 16 cm.",
       micros: ["aire_defi"],
     },
     {
-      question: "Convertis 3,7 m² en dm², puis 370 cm² en dm².",
-      correction:
-        "1 m² = 100 dm², donc 3,7 m² = 3,7 × 100 = 370 dm². Dans l'autre sens, 1 dm² = 100 cm² : la mesure en dm² est 100 fois plus petite que la mesure en cm², donc 370 cm² = 370 ÷ 100 = 3,7 dm².",
-    },
-    {
-      question:
-        "Problème : un jardin rectangulaire mesure 7 m de long et 3 m de large. On veut le comparer à un potager carré de côté 5 m. Lequel a la plus grande aire ?",
-      correction:
-        "Aire du jardin : 7 × 3 = 21 m². Aire du potager : 5 × 5 = 25 m². Les deux aires sont en m², on compare les nombres : 25 est plus grand que 21. C'est le potager carré qui a la plus grande aire.",
-      micros: ["aire_probleme"],
+      question: "Défi : un carré a une aire de 36 cm². Combien mesure un côté ?",
+      correction: "Je cherche le nombre qui, fois lui-même, fait 36. 6 × 6 = 36. Le côté mesure 6 cm.",
+      micros: ["aire_defi"],
     },
   ],
+  tiMargo: {
+    objectif: "L'aire, c'est l'intérieur !",
+    definition: "Le tour en rouge, l'aire en bleu !",
+    formule: "Multiplier, c'est compter vite !",
+    pieges: "Pour l'aire, je multiplie, je n'ajoute pas !",
+    retenir: "Une aire s'écrit avec un petit 2 : cm² !",
+    exercice: "À toi ! Compte les carreaux.",
+  },
   coachHref: "/coach-ia/maths?classe=6e",
 };
 
-// ⛔ LE DIAPORAMA NE S'ÉCRIT PLUS À LA MAIN (20/08/2026). `FicheCoursClient`
-// fabrique lui-même les slides depuis la fiche — une par propriété, par réflexe,
-// par usage, par exemple, par exercice, chacune avec SON dessin. Le tableau
-// écrit ici ne servait plus qu'à diverger. On l'engendre donc de la même source :
-// il ne reste qu'un interrupteur (un tableau vide éteindrait le mode classe).
+// Le mode classe est engendré depuis la fiche (slidesDepuisFiche) : ce tableau
+// n'est qu'un interrupteur, un tableau vide couperait le mode classe.
 export const slidesAires6e: ClasseSlide[] = slidesDepuisFiche(ficheAires6e);

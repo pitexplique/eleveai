@@ -1,30 +1,54 @@
 // ─── Fiche de cours : lire et interpréter des données (6e) ─────────────────────
-// Fiche « en blocs » créée pour coller EXACTEMENT à la banque du coach
-// (lib/tutor-v4/questionBank/6e/maths/donnees.bank.ts).
+// Fiche « en blocs » alignée sur la banque du coach
+// (lib/tutor-v4/questionBank/6e/maths/donnees.bank.ts, notionId stat_donnee).
+// Réécrite le 30/09/2026 au standard des fiches de 6e (étalon :
+// `maths-6e-stat-enquete.tsx`) : phrases courtes, un dessin par bloc, Ti Margo.
 //
-// Couverture des micro-compétences de la banque (pour la relecture du prof) :
-// - stat_donnee_lire_tableau     → definition, proprietes (Le tableau croise...),
-//                                  methode (Repérer la bonne ligne), usages (carte 1),
-//                                  exemples (ex. 1), entrainement (Q1)
-// - stat_donnee_lire_graphique   → definition, proprietes (Le graphique montre...),
-//                                  usages (carte 2), exemples (ex. 2),
-//                                  entrainement (Q2), reel
-// - stat_donnee_lire_circulaire  → definition, proprietes (Le circulaire montre...),
-//                                  usages (carte 3), entrainement (Q3),
-//                                  slides (diagramme circulaire), pieges (3)
-// - stat_donnee_prelever         → methode (Repérer la bonne ligne/colonne),
-//                                  usages (carte 1), exemples (ex. 1), pieges (1)
-// - stat_donnee_comparer         → proprietes, methode (Comparer avant de conclure),
-//                                  exemples (ex. 2), entrainement (Q4), pieges (2)
-// - stat_donnee_interpreter      → methode (Comparer avant de conclure), reel,
-//                                  aRetenir, pieges (2), slide « à toi de jouer »
-// - stat_donnee_defi             → entrainement (Q4 : total/effectif), aRetenir
+// Micro-compétences 6/6 — mapping micro → blocs :
+//   stat_donnee_lire_graphique  → propriété 2, méthode 1, entraînement 2
+//   stat_donnee_lire_circulaire → figure, propriété 3, usage 2, entraînement 3
+//   stat_donnee_prelever        → propriété 1, méthode 2, exemple 1, entraînement 1
+//   stat_donnee_comparer        → propriété 4, méthode 3, exemple 2
+//   stat_donnee_interpreter     → méthode 3, usage 3, entraînement 5
+//   stat_donnee_defi            → usage 1, exemple 3, entraînement 4
+// ⚠️ `stat_donnee_lire_tableau` appartient désormais à la notion `stat_enquete`
+// (voir microSkills.ts) : c'est la fiche `maths-6e-stat-enquete.tsx` qui le porte.
+//
+// ⭐ TOUS LES NOMBRES VIENNENT DE LA BANQUE : Filles × Natation 6 (et Garçons 7),
+// Le Tampon × Bus 12, loisirs 16 / 9 / 12, football 12 / natation 8 / danse 10,
+// sondage 8 + 12 + 5 = 25, « Comédie » la moitié de 20, marché (mangues 12 et 9,
+// letchis 7 et 10), 36 élèves dont 12 au football, 30 élèves dont 12 au football.
+// ⛔ La feuille d'exercices `lib/fiches-exercices/maths-6e-stat-donnee.tsx`
+// (hérissons, arbres du parc, CDI, déchets, hand, compteur de vélos…) : aucun
+// exemple commun avec elle.
+//
+// ⭐ CETTE FICHE PARLE DE TROIS REPRÉSENTATIONS : chaque dessin dit une chose que
+// les autres ne disent pas (REGLES.md § 2 bis) — la structure du tableau, le
+// titre qui donne le sens, le plus haut bâton, le bâton qu'on CHERCHE, le
+// demi-disque, l'écart devenu une longueur, deux barres presque égales, le total
+// mis bout à bout, et la classe qui n'est pas le collège.
+//
+// ⚠️ LES `size` SONT MESURÉES, PAS ESTIMÉES. `StatGraphCanvas` et
+// `SchemaBarreCanvas` écrivent en 12 px dans un viewBox fixe : le bloc d'un
+// dessin ne fait que 226 px sur un téléphone de 375, il faut donc rester sous
+// ~245 de large pour garder 11 px.
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+import { avecMargo } from "@/components/fiches/TiMargoBulle";
 
-// Le diagramme circulaire du coach : les parts d'un total (20 élèves).
+/** Un dessin et sa phrase, sous lui. */
+const legende = (dessin: React.ReactNode, texte: string) => (
+  <div>
+    {dessin}
+    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
+  </div>
+);
+
+// ─── Les dessins ──────────────────────────────────────────────────────────────
+
+// LA FIGURE : un diagramme circulaire, des parts d'un total (20 élèves).
 const camembertAnimaux = (
   <CanvasRenderer
     figure={{
@@ -37,69 +61,13 @@ const camembertAnimaux = (
         { label: "Oiseau", value: 4 },
       ],
       display: { showValues: true, showLabels: true },
-      // ⚠️ AJOUTÉ LE 24/08 : sans `size`, le canvas prend 320 de large et ses
-      // noms de secteurs tombent à 8,8 px sur un téléphone, où même le bloc de
-      // la figure ne fait que 225. Le défaut était là depuis l'écriture de la
-      // fiche — invisible sur un écran d'ordinateur.
       size: { width: 240, height: 200 },
     }}
   />
 );
 
-// Le tableau à double entrée : la valeur se lit au croisement ligne × colonne.
-const tableauActivites = (
-  <CanvasRenderer
-    figure={{
-      kind: "tableau_donnees",
-      headers: ["Filles", "Garçons"],
-      rows: [
-        { label: "Football", values: [5, 9] },
-        { label: "Natation", values: [6, 7] },
-        { label: "Danse", values: [8, 3] },
-      ],
-      highlight: { cell: { row: 1, col: 0 } },
-      questionLabel: "Ligne « Natation » × colonne « Filles » = 6.",
-    }}
-  />
-);
-
-// Le graphique en barres : la hauteur donne la valeur, le sport est le plus haut.
-const graphLoisirs = (
-  <CanvasRenderer
-    figure={{
-      kind: "stat_graph",
-      graphType: "barres",
-      title: "Loisirs préférés de la classe",
-      data: [
-        { label: "Sport", value: 16 },
-        { label: "Lecture", value: 9 },
-        { label: "Jeux", value: 12 },
-      ],
-      display: { showValues: true, showLabels: true, highlightIndex: 0 },
-      // Même correction que le camembert ci-dessus : 9,5 px sur un téléphone.
-      size: { width: 240, height: 200 },
-    }}
-  />
-);
-
-// ─── Les sept dessins des blocs ───────────────────────────────────────────────
-// ⭐ CETTE FICHE PARLE DE TROIS REPRÉSENTATIONS : les répéter est inévitable, les
-// répéter POUR LA MÊME CHOSE ne l'est pas (REGLES.md § 2 bis). Chaque dessin ci-
-// dessous dit quelque chose qu'aucun autre ne dit : la structure du tableau, le
-// titre qui donne l'unité, le plus haut bâton, le bâton qu'on CHERCHE (et qui
-// n'est pas le plus haut), le demi-disque, l'écart devenu une longueur, et deux
-// barres presque égales que seul le nombre départage.
-
-/** Un dessin et sa phrase, sous lui. */
-const legende = (dessin: React.ReactNode, texte: string) => (
-  <div>
-    {dessin}
-    <p className="mt-1 text-center text-xs font-black text-slate-600">{texte}</p>
-  </div>
-);
-
-// LA STRUCTURE DU TABLEAU. Des lignes nommées, des colonnes nommées, et la
-// valeur au croisement des deux. Les communes sont celles du coach (La Réunion).
+// LA STRUCTURE DU TABLEAU. La valeur au croisement d'une ligne et d'une
+// colonne. Les communes sont celles de la banque du coach.
 const tableauTransports = (
   <CanvasRenderer
     figure={{
@@ -110,30 +78,12 @@ const tableauTransports = (
         { label: "Saint-Pierre", values: [9, 14] },
       ],
       highlight: { cell: { row: 0, col: 0 } },
-      questionLabel: "Ligne « Le Tampon » × colonne « Bus » = 12.",
+      questionLabel: "Ligne « Le Tampon », colonne « Bus » : 12",
     }}
   />
 );
 
-// LE TITRE FAIT LE SENS. Sans lui, « 24 » ne veut rien dire — 24 quoi ? C'est
-// tout l'objet de la première étape de méthode, et c'est le seul dessin de la
-// fiche dont le sujet n'est pas un nombre mais les MOTS qui l'entourent.
-const tableauTemperatures = (
-  <CanvasRenderer
-    figure={{
-      kind: "tableau_donnees",
-      title: "Températures de la semaine (°C)",
-      headers: ["Lun", "Mar", "Mer", "Jeu"],
-      rows: [{ label: "Midi", values: [24, 27, 22, 26] }],
-      highlight: { row: 0 },
-      questionLabel: "Sans le titre, 24 ne veut rien dire : 24 quoi ?",
-    }}
-  />
-);
-
-// LE PLUS HAUT SE VOIT SANS COMPTER. Des bâtons, pas des barres : la fiche
-// montre déjà des barres à l'exemple 2, et deux dessins jumeaux, c'est une
-// règle de moins.
+// LE PLUS HAUT SE VOIT SANS COMPTER.
 const batonsFruits = (
   <CanvasRenderer
     figure={{
@@ -146,17 +96,64 @@ const batonsFruits = (
         { label: "Kiwi", value: 4 },
       ],
       display: { showValues: true, showLabels: true, highlightIndex: 1 },
-      // ⚠️ MESURÉ, PAS ESTIMÉ. `StatGraphCanvas` écrit ses étiquettes en 12 px
-      // dans un viewBox fixe : à 300 de large, elles tombent à 8,7 px dans une
-      // carte de propriété de 225. Le cadre serré à 230 les rend à 11,7.
       size: { width: 230, height: 190 },
     }}
   />
 );
 
-// ⭐ CE N'EST PAS LE PLUS HAUT QU'ON CHERCHE. Le même graphique, mais c'est le
-// bâton de SA catégorie qui est allumé — le kiwi, le plus petit. Repérer n'est
-// pas comparer : la carte d'à côté dit le contraire, et c'est voulu.
+// LA MOITIÉ DU DISQUE : 10 sur 20, le secteur occupe la moitié du tour.
+const camembertMoitie = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "stat_graph",
+      graphType: "camembert",
+      title: "Trajet du matin (20 élèves)",
+      data: [
+        { label: "Bus", value: 10 },
+        { label: "À pied", value: 5 },
+        { label: "Voiture", value: 5 },
+      ],
+      display: { showValues: true, showLabels: true, highlightIndex: 0 },
+      size: { width: 210, height: 190 },
+    }}
+  />,
+  "Le bus prend la moitié du disque : 10 élèves sur 20."
+);
+
+// L'ÉCART EST UNE LONGUEUR. Les 8 de la natation et les 4 qui manquent font les
+// 12 du football (banque : « combien de plus au football qu'à la natation ? »).
+const ecartEnBarre = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      // ⚠️ Au-delà de ~28 caractères, le titre déborde du cadre, en silence.
+      title: "Football 12, natation 8",
+      total: "12",
+      parts: [
+        { label: "natation", value: "8" },
+        { label: "l'écart", value: "4" },
+      ],
+      questionLabel: "12 − 8 = 4 : voilà l'écart",
+      size: { width: 240, height: 190 },
+    }}
+  />
+);
+
+// LE TITRE FAIT LE SENS. Sans lui, « 24 » ne veut rien dire.
+const tableauTemperatures = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Températures de la semaine (°C)",
+      headers: ["Lun", "Mar", "Mer", "Jeu"],
+      rows: [{ label: "Midi", values: [24, 27, 22, 26] }],
+      highlight: { row: 0 },
+      questionLabel: "Sans le titre : 24 quoi ?",
+    }}
+  />
+);
+
+// ⭐ CE N'EST PAS LE PLUS HAUT QU'ON CHERCHE : c'est le bâton de SA catégorie.
 const batonKiwiCherche = legende(
   <CanvasRenderer
     figure={{
@@ -172,60 +169,10 @@ const batonKiwiCherche = legende(
       size: { width: 230, height: 190 },
     }}
   />,
-  "on cherche le kiwi : c'est SON bâton qu'on lit, pas le plus haut"
+  "On cherche le kiwi : on lit SON bâton."
 );
 
-// LA MOITIÉ DU DISQUE. Le camembert de la figure montre « des parts » ; celui-ci
-// montre LA moitié — 10 sur 20, et le secteur occupe exactement la moitié du
-// tour. C'est la phrase de la propriété, dessinée.
-const camembertMoitie = legende(
-  <CanvasRenderer
-    figure={{
-      kind: "stat_graph",
-      graphType: "camembert",
-      title: "Trajet du matin (20 élèves)",
-      data: [
-        { label: "Bus", value: 10 },
-        { label: "À pied", value: 5 },
-        { label: "Voiture", value: 5 },
-      ],
-      display: { showValues: true, showLabels: true, highlightIndex: 0 },
-      // Le camembert porte ses noms de secteurs AUTOUR du disque : il lui faut
-      // un cadre encore plus serré que les bâtons pour tenir les 11 px.
-      size: { width: 210, height: 190 },
-    }}
-  />,
-  "le bus prend la moitié du disque : 10 élèves sur 20"
-);
-
-// L'ÉCART EST UNE LONGUEUR. Aucun graphique ne montre une soustraction : la
-// hauteur d'un bâton dit une valeur, jamais une différence. Mis bout à bout, les
-// 9 de la lecture et les 7 qui manquent font les 16 du sport — et l'écart, lui,
-// se voit.
-const ecartEnBarre = (
-  <CanvasRenderer
-    figure={{
-      kind: "schema_barre",
-      // ⚠️ Au-delà de ~28 caractères, le titre déborde du cadre, en silence.
-      title: "Sport 16, lecture 9",
-      total: "16",
-      parts: [
-        { label: "lecture", value: "9" },
-        { label: "l'écart", value: "7" },
-      ],
-      questionLabel: "16 − 9 = 7 : voilà l'écart",
-      // ⚠️ DEUX RÉGLAGES, DEUX MESURES. La HAUTEUR : 175 px collent les
-      // étiquettes à la phrase du bas. La LARGEUR : à 300, « lecture » et
-      // « l'écart » tombent à 9,1 px sur un téléphone, où le bloc ne fait que
-      // 225 — `SchemaBarreCanvas` écrit en 12 px, il faut rester sous 245.
-      size: { width: 240, height: 190 },
-    }}
-  />
-);
-
-// DEUX BARRES QUE L'ŒIL NE DÉPARTAGE PAS. 12 et 11 : à l'œil elles se valent,
-// et c'est exactement le piège n° 2 de cette fiche. Le dessin ne tranche pas —
-// ce sont les nombres écrits dessus qui tranchent.
+// DEUX BARRES QUE L'ŒIL NE DÉPARTAGE PAS : ce sont les nombres qui tranchent.
 const barresPresqueEgales = legende(
   <CanvasRenderer
     figure={{
@@ -240,19 +187,126 @@ const barresPresqueEgales = legende(
       size: { width: 230, height: 190 },
     }}
   />,
-  "à l'œil, elles se valent — 12 et 11 tranchent"
+  "À l'œil, elles se valent. 12 et 11 tranchent."
 );
 
+// LE TOTAL, BOUT À BOUT : les trois catégories du sondage refont les 25.
+const barreTotal = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      title: "Comment viens-tu ?",
+      total: "25",
+      parts: [
+        { label: "à pied", value: "8", color: "#bbf7d0" },
+        { label: "bus", value: "12", color: "#fde68a" },
+        { label: "voiture", value: "5", color: "#bfdbfe" },
+      ],
+      questionLabel: "8 + 12 + 5 = 25 élèves",
+      display: { showTotal: true, showPartLabels: true, showValues: true, showQuestion: true },
+      size: { width: 240, height: 190 },
+    }}
+  />
+);
+
+// LA MOITIÉ, SANS AUTRE NOMBRE : la banque ne donne que « Comédie = la moitié
+// de 20 ». Le reste du disque n'a pas de détail, et c'est voulu.
+const camembertComedie = (
+  <CanvasRenderer
+    figure={{
+      kind: "stat_graph",
+      graphType: "camembert",
+      title: "Film préféré (20 personnes)",
+      data: [
+        { label: "Comédie", value: 10 },
+        { label: "Autres", value: 10 },
+      ],
+      display: { showValues: false, showLabels: true, highlightIndex: 0 },
+      size: { width: 210, height: 190 },
+    }}
+  />
+);
+
+// LA CLASSE N'EST PAS LE COLLÈGE. On n'a interrogé qu'un morceau du tout.
+const barreClasseCollege = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      title: "Le collège",
+      total: "tous",
+      parts: [
+        { label: "ma classe", value: "", color: "#fde68a" },
+        { label: "les autres", value: "", color: "#e2e8f0" },
+      ],
+      questionLabel: "on n'a interrogé que ma classe",
+      display: { showTotal: true, showPartLabels: true, showValues: false, showQuestion: true },
+      size: { width: 220, height: 190 },
+    }}
+  />
+);
+
+// L'EXEMPLE 1 : un tableau à double entrée, filles et garçons.
+const tableauActivites = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      headers: ["Filles", "Garçons"],
+      rows: [
+        { label: "Football", values: [5, 9] },
+        { label: "Natation", values: [6, 7] },
+        { label: "Danse", values: [8, 3] },
+      ],
+      highlight: { cell: { row: 1, col: 0 } },
+    }}
+  />
+);
+
+// L'EXEMPLE 2 : le graphique des loisirs.
+const graphLoisirs = (
+  <CanvasRenderer
+    figure={{
+      kind: "stat_graph",
+      graphType: "barres",
+      title: "Loisirs préférés",
+      data: [
+        { label: "Sport", value: 16 },
+        { label: "Lecture", value: 9 },
+        { label: "Jeux", value: 12 },
+      ],
+      display: { showValues: true, showLabels: true, highlightIndex: 0 },
+      size: { width: 230, height: 190 },
+    }}
+  />
+);
+
+// L'EXEMPLE 3 (défi) : le marché sur toute la journée.
+const tableauMarcheJournee = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Ventes au marché",
+      headers: ["Matin", "Après-midi"],
+      rows: [
+        { label: "Mangues", values: [12, 9] },
+        { label: "Letchis", values: [7, 10] },
+      ],
+      highlight: { row: 0 },
+    }}
+  />
+);
+
+// ─── Les textes ───────────────────────────────────────────────────────────────
+
 const pieges = [
-  "Se tromper de ligne ou de colonne dans un tableau à double entrée : on doit lire la valeur au croisement de la bonne ligne ET de la bonne colonne.",
-  "Se fier seulement à l'impression visuelle : un bâton qui « paraît » plus haut ou un secteur qui « paraît » plus grand ne remplace pas la lecture des vraies valeurs.",
-  "Généraliser à tort : si une enquête porte sur une classe, on ne peut pas conclure sur tout le collège. Une conclusion ne vaut que pour le groupe étudié.",
+  "Lire la mauvaise colonne. Pour les filles en natation, on lit 6, pas 7.",
+  "Croire ses yeux. Un bâton qui paraît plus haut ne suffit pas : on lit les nombres.",
+  "Conclure trop grand. Une enquête dans une classe ne parle pas de tout le collège.",
 ];
 
 const aRetenir = [
-  "On lit toujours d'abord le titre et les légendes : ils disent ce que représentent les nombres.",
-  "Dans un tableau à double entrée, la donnée se trouve au croisement d'une ligne et d'une colonne.",
-  "Avant de conclure, on compare les valeurs exactes : la plus grande, la plus petite, ou leur écart.",
+  "On lit d'abord le titre : il dit ce que comptent les nombres.",
+  "Dans un tableau, la donnée est au croisement d'une ligne et d'une colonne.",
+  "Pour comparer, on soustrait. Pour un total, on additionne tout.",
 ];
 
 export const ficheDonnees6e: FicheCoursData = {
@@ -262,300 +316,201 @@ export const ficheDonnees6e: FicheCoursData = {
   notion: "stat-donnee",
   titre: "Lire et interpréter des données",
   accroche:
-    "Un sondage, un score de match, la météo de la semaine : les données sont partout. En 6e, on apprend à les lire dans un tableau, un graphique ou un diagramme circulaire, puis à les comparer pour en tirer une vraie conclusion.",
+    "Un sondage, un score, la météo : les données sont partout. On apprend à les lire, puis à les comparer.",
   identite: [
-    { label: "Prérequis", valeur: "Compter, additionner et comparer des nombres entiers" },
-    { label: "Idée clé", valeur: "Une donnée se lit précisément avant de s'interpréter" },
-    { label: "Outil", valeur: "Le tableau, le graphique en barres et le diagramme circulaire" },
+    { label: "Les mots clés", valeur: "Tableau, graphique, diagramme circulaire" },
+    { label: "Le secret", valeur: "On lit le titre avant les nombres" },
+    { label: "Le contrôle", valeur: "On compare des nombres, pas des dessins" },
   ],
   definition: {
     texte:
-      "Une donnée est une information chiffrée : un nombre d'élèves, une quantité vendue, une durée. Une série de données, c'est un ensemble de ces informations rangées par catégories. Pour les présenter clairement, on utilise trois représentations : le tableau (des lignes et des colonnes), le graphique en barres (des bâtons de hauteurs différentes) et le diagramme circulaire (un disque partagé en secteurs).",
+      "Une donnée est un nombre qui compte quelque chose : des élèves, des ventes, des buts. On la range dans un tableau, un graphique ou un diagramme circulaire. Lire une donnée, c'est trouver le bon nombre au bon endroit.",
   },
   figure: {
     schema: camembertAnimaux,
-    legende: "Un diagramme circulaire : chaque secteur est une part du total. Le plus grand secteur est la catégorie la plus fréquente.",
+    legende: "Chaque part du disque est une catégorie : le chien a la plus grande.",
   },
   proprietes: [
     {
-      titre: "Le tableau croise lignes et colonnes",
+      titre: "Ligne et colonne",
       micros: ["stat_donnee_prelever"],
       texte:
-        "Un tableau range les données en lignes et en colonnes. Dans un tableau à double entrée, chaque valeur se lit au croisement d'une ligne et d'une colonne : par exemple la ligne « Natation » et la colonne « Filles ».",
+        "Dans un tableau, la donnée est au croisement d'une ligne et d'une colonne. On suit la ligne, puis on descend la colonne.",
       schema: tableauTransports,
     },
     {
-      titre: "Le graphique montre les grandeurs d'un coup d'oeil",
+      titre: "La hauteur du bâton",
       micros: ["stat_donnee_lire_graphique"],
       texte:
-        "Dans un graphique en barres, chaque catégorie est un bâton dont la hauteur donne la valeur. Plus le bâton est haut, plus la valeur est grande : on repère très vite le plus grand et le plus petit.",
+        "Chaque bâton est une catégorie. Plus il est haut, plus le nombre est grand.",
       schema: batonsFruits,
     },
     {
-      titre: "Le diagramme circulaire montre des parts",
+      titre: "Les parts du disque",
       micros: ["stat_donnee_lire_circulaire"],
       texte:
-        "Un diagramme circulaire partage un disque en secteurs, un par catégorie. Plus un secteur est grand, plus la catégorie est fréquente. Un secteur qui occupe la moitié du disque représente la moitié du total.",
+        "Plus la part est grande, plus la catégorie est fréquente. La moitié du disque, c'est la moitié du total.",
       schema: camembertMoitie,
     },
     {
-      titre: "Comparer, c'est chercher un écart",
+      titre: "L'écart",
       micros: ["stat_donnee_comparer"],
       texte:
-        "Comparer deux données, c'est regarder laquelle est la plus grande, la plus petite, ou calculer leur écart par une soustraction. Le total, lui, s'obtient en additionnant toutes les valeurs.",
+        "Pour comparer deux nombres, on fait une soustraction. Football 12, natation 8 : l'écart est 4.",
       schema: ecartEnBarre,
     },
   ],
   reel: {
     texte:
-      "On lit des données tous les jours : la météo présente les températures de la semaine dans un tableau, un journal sportif compare les buts marqués dans un graphique, un sondage montre les réponses dans un diagramme circulaire. Savoir lire ces représentations, c'est comprendre l'information sans se laisser tromper.",
+      "La météo range les températures dans un tableau. Un journal de sport compare les buts avec des barres. Un sondage montre ses réponses dans un disque. Savoir les lire, c'est ne pas se laisser tromper.",
   },
   historique: {
     texte:
-      "L'ingénieur écossais William Playfair a inventé le graphique en barres et le diagramme circulaire à la fin du 18e siècle. En 1786, il publie le premier graphique en barres pour montrer le commerce de l'Écosse, puis le premier « camembert » en 1801. Avant lui, on présentait presque tout sous forme de longs tableaux de chiffres, bien plus difficiles à comparer d'un coup d'oeil.",
+      "Avant 1786, on présentait les nombres dans de longs tableaux. Cette année-là, l'Écossais William Playfair dessine le premier graphique en barres. En 1801, il invente le diagramme circulaire. Depuis, on compare d'un coup d'œil.",
   },
   methode: [
     {
-      titre: "Lire le titre et les légendes",
+      titre: "Lire le titre",
       micros: ["stat_donnee_lire_graphique"],
       texte:
-        "On commence toujours par lire le titre : il dit de quoi parlent les données. On repère ensuite les catégories et les unités, pour savoir ce que représente chaque nombre.",
+        "Le titre dit ce que comptent les nombres. Sans lui, 24 ne veut rien dire.",
       schema: tableauTemperatures,
     },
     {
-      titre: "Repérer la bonne ligne ou la bonne colonne",
+      titre: "Trouver sa catégorie",
       micros: ["stat_donnee_prelever"],
       texte:
-        "Dans un tableau, on suit la ligne de la catégorie cherchée, puis la bonne colonne. La valeur est à leur croisement. Dans un graphique, on repère le bon bâton ou le bon secteur, puis on lit sa valeur.",
+        "On cherche SA catégorie, pas la plus grande. Puis on lit son nombre.",
       schema: batonKiwiCherche,
     },
     {
-      titre: "Comparer avant de conclure",
+      titre: "Comparer les nombres",
       micros: ["stat_donnee_comparer", "stat_donnee_interpreter"],
       texte:
-        "Une conclusion doit s'appuyer sur des valeurs lues, pas sur une impression. On compare les nombres exacts (le plus grand, le plus petit, l'écart) avant d'affirmer quoi que ce soit.",
+        "Deux barres peuvent sembler égales. Ce sont les nombres écrits qui tranchent.",
       schema: barresPresqueEgales,
     },
   ],
   usages: [
     {
-      titre: "Lire un tableau",
-      micros: ["stat_donnee_prelever"],
+      titre: "Trouver un total",
+      micros: ["stat_donnee_defi"],
       detail:
-        "Retrouver une valeur en suivant la ligne et la colonne. Dans un tableau à double entrée, on lit au croisement des deux : ligne « Le Tampon », colonne « Bus » donne le nombre cherché.",
+        "On additionne toutes les catégories. 8 + 12 + 5 = 25 : 25 élèves ont répondu.",
+      schema: barreTotal,
     },
     {
-      titre: "Lire un graphique",
-      micros: ["stat_donnee_lire_graphique"],
-      detail:
-        "Repérer le bâton d'une catégorie et lire sa hauteur. On voit immédiatement quelle catégorie a la plus grande ou la plus petite valeur.",
-    },
-    {
-      titre: "Lire un diagramme circulaire",
+      titre: "Lire une moitié",
       micros: ["stat_donnee_lire_circulaire"],
       detail:
-        "Repérer un secteur et lire sa valeur. Le plus grand secteur est la catégorie la plus fréquente ; un demi-disque vaut la moitié du total.",
+        "20 personnes ont répondu. La comédie prend la moitié du disque : 20 ÷ 2 = 10 personnes.",
+      schema: camembertComedie,
+    },
+    {
+      titre: "Conclure juste",
+      micros: ["stat_donnee_interpreter"],
+      detail:
+        "Une enquête dans ma classe parle de ma classe. Elle ne dit rien de tout le collège.",
+      schema: barreClasseCollege,
     },
   ],
   exemples: [
     {
-      titre: "Prélever une valeur dans un tableau",
+      titre: "Filles en natation",
       micros: ["stat_donnee_prelever"],
-      donnees:
-        "Un tableau donne le nombre d'élèves par activité et par groupe. Football : 5 filles et 9 garçons. Natation : 6 filles et 7 garçons. Danse : 8 filles et 3 garçons.",
-      question: "Combien de filles ont choisi la natation ?",
+      donnees: "Ce tableau compte les élèves par sport, filles et garçons.",
+      question: "Combien de filles font de la natation ?",
       schema: tableauActivites,
       solution:
-        "On cherche la ligne « Natation », puis la colonne « Filles ». La valeur au croisement de cette ligne et de cette colonne est 6. Donc 6 filles ont choisi la natation. On ne lit pas la colonne « Garçons », sinon on trouverait 7 par erreur.",
+        "On suit la ligne « Natation ». On descend la colonne « Filles ». On lit 6 : 6 filles font de la natation.",
     },
     {
-      titre: "Comparer les valeurs d'un graphique",
+      titre: "Le loisir préféré",
       micros: ["stat_donnee_comparer"],
-      donnees:
-        "Un graphique en barres montre les loisirs préférés d'une classe. Sport : 16. Lecture : 9. Jeux : 12.",
-      question: "Quelle est l'activité préférée, et combien d'élèves de plus la choisissent par rapport à la lecture ?",
+      donnees: "Sport : 16. Lecture : 9. Jeux : 12.",
+      question: "Quel loisir est préféré ? De combien devance-t-il la lecture ?",
       schema: graphLoisirs,
       solution:
-        "On compare les trois hauteurs : 16, 9 et 12. La plus grande valeur est 16, donc l'activité préférée est le sport. Pour l'écart avec la lecture, on soustrait : 16 - 9 = 7. Il y a donc 7 élèves de plus qui préfèrent le sport.",
+        "16 est le plus grand nombre : c'est le sport. On soustrait : 16 − 9 = 7. Le sport a 7 élèves de plus.",
+    },
+    {
+      titre: "Toute la journée",
+      micros: ["stat_donnee_defi"],
+      donnees: "Mangues : 12 puis 9. Letchis : 7 puis 10.",
+      question: "Quel fruit s'est le plus vendu dans la journée ?",
+      schema: tableauMarcheJournee,
+      solution:
+        "Mangues : 12 + 9 = 21. Letchis : 7 + 10 = 17. 21 est plus grand : ce sont les mangues.",
     },
   ],
   pieges,
   aRetenir,
   entrainement: [
     {
-      question:
-        "Un tableau indique le nombre d'élèves par activité. Football : 12. Natation : 8. Danse : 10. Combien d'élèves ont choisi la danse ?",
-      correction:
-        "On repère la ligne « Danse » et on lit la valeur indiquée. La ligne « Danse » indique 10. Donc 10 élèves ont choisi la danse.",
+      question: "Football : 12. Natation : 8. Danse : 10. Combien d'élèves font de la danse ?",
+      correction: "On lit la ligne « Danse » : 10 élèves.",
+      micros: ["stat_donnee_prelever"],
     },
     {
       question:
-        "Un graphique en barres montre les livres empruntés : lundi 5, mardi 9, mercredi 6. Quel jour a-t-on emprunté le plus de livres ?",
-      correction:
-        "On compare les trois hauteurs : 5, 9 et 6. La plus grande valeur est 9, pour mardi. C'est donc mardi que l'on a emprunté le plus de livres.",
+        "Livres empruntés : lundi 5, mardi 9, mercredi 6. Quel jour en a-t-on emprunté le plus ?",
+      correction: "On compare 5, 9 et 6. Le plus grand est 9 : c'est mardi.",
+      micros: ["stat_donnee_lire_graphique"],
     },
     {
       question:
-        "Un diagramme circulaire représente 20 élèves. Le secteur « Chien » occupe exactement la moitié du disque. Combien d'élèves préfèrent le chien ?",
-      correction:
-        "Un secteur qui occupe la moitié du disque représente la moitié du total. On calcule la moitié de 20 : 20 ÷ 2 = 10. Donc 10 élèves préfèrent le chien.",
+        "Un diagramme circulaire compte 20 élèves. « Chien » prend la moitié du disque. Combien d'élèves ?",
+      correction: "La moitié de 20 : 20 ÷ 2 = 10 élèves.",
+      micros: ["stat_donnee_lire_circulaire"],
+    },
+    {
+      question: "30 élèves ont répondu. 12 font du football. Combien NE font PAS de football ?",
+      correction: "On soustrait : 30 − 12 = 18 élèves.",
+      micros: ["stat_donnee_defi"],
     },
     {
       question:
-        "Défi : un sondage indique 8 élèves à pied, 12 en bus et 5 en voiture. Combien d'élèves ont répondu au sondage en tout ?",
-      correction:
-        "L'effectif total est la somme de toutes les catégories. On additionne : 8 + 12 + 5 = 25. Donc 25 élèves ont répondu au sondage.",
-      micros: ["stat_donnee_interpreter", "stat_donnee_defi"],
+        "36 élèves ont répondu. 12 préfèrent le football. Est-ce « la moitié de la classe » ?",
+      correction: "Non. La moitié de 36, c'est 18. Or 12 est plus petit que 18.",
+      micros: ["stat_donnee_interpreter"],
     },
   ],
+  tiMargo: {
+    objectif: "Un nombre, ça se lit au bon endroit !",
+    definition: "Tableau, barres ou disque : trois façons de ranger !",
+    methode: "D'abord le titre, ensuite les nombres !",
+    pieges: "Tes yeux peuvent te tromper. Lis les nombres !",
+    retenir: "Comparer, c'est soustraire. Un total, c'est additionner !",
+    exercice: "Suis la ligne, puis la colonne !",
+  },
   coachHref: "/coach-ia/maths?classe=6e",
 };
 
+// ⛔ Le mode classe est ENGENDRÉ depuis la fiche (`slidesDepuisFiche`) : ce
+// tableau reste exporté pour la page, mais il n'est pas projeté.
 export const slidesDonnees6e: ClasseSlide[] = [
   {
     titre: "Objectif du cours",
     badge: "Données - 6e",
+    teinte: "objectif",
+    schema: avecMargo(camembertAnimaux, "Un nombre, ça se lit au bon endroit !", "joie"),
     section: {
       type: "objectif",
-      phrase: "Lire des données, puis en tirer une vraie conclusion",
-      sousPhrase:
-        "Tableau, graphique en barres, diagramme circulaire : trois façons de présenter des données. On apprend à y lire une valeur, puis à comparer.",
-      encadre: {
-        titre: "L'idée",
-        texte: "On lit d'abord la valeur exacte. On conclut seulement après avoir comparé.",
-      },
-    },
-  },
-  {
-    titre: "À quoi ça sert ?",
-    badge: "Utilité & histoire",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "info",
-        titre: "Au quotidien",
-        contenu:
-          "La météo de la semaine, les buts d'un match, les réponses d'un sondage : partout, on lit des données pour comprendre l'information.",
-      },
-      droite: {
-        variante: "histoire",
-        titre: "Le savais-tu ?",
-        contenu:
-          "L'Écossais William Playfair a inventé le graphique en barres en 1786 et le diagramme circulaire en 1801, pour rendre les chiffres plus faciles à comparer.",
-      },
-    },
-  },
-  {
-    titre: "Les 3 réflexes",
-    badge: "Méthode",
-    section: {
-      type: "cartes",
-      cartes: ficheDonnees6e.methode.map((m) => ({
-        titre: m.titre,
-        texte: m.texte,
-      })),
-    },
-  },
-  {
-    titre: "La définition",
-    badge: "À connaître",
-    section: {
-      type: "objectif",
-      phrase: "Une donnée est une information chiffrée, rangée par catégories",
-      sousPhrase:
-        "On la présente dans un tableau (lignes et colonnes), un graphique en barres (des bâtons) ou un diagramme circulaire (un disque en secteurs).",
-      encadre: {
-        titre: "Attention",
-        texte: "Une impression visuelle ne suffit pas : on lit toujours les vraies valeurs.",
-      },
-    },
-  },
-  {
-    titre: "Selon la représentation",
-    badge: "3 lectures",
-    section: {
-      type: "cartes",
-      cartes: ficheDonnees6e.usages.map((u) => ({
-        titre: u.titre,
-        texte: u.detail,
-      })),
-    },
-  },
-  {
-    titre: "Exemple guidé",
-    badge: "Lire un tableau à double entrée",
-    section: {
-      type: "exemple",
-      enonce:
-        "Un tableau donne : Natation, 6 filles et 7 garçons.",
-      question: "Combien de filles ont choisi la natation ?",
-      correction:
-        "On croise la ligne « Natation » et la colonne « Filles » : on lit 6. Réponse : 6 filles.",
-    },
-  },
-  {
-    titre: "Autre exemple",
-    badge: "Comparer un graphique",
-    section: {
-      type: "exemple",
-      enonce: "Un graphique montre : Sport 16, Lecture 9, Jeux 12.",
-      question: "Quelle est l'activité préférée, et de combien devance-t-elle la lecture ?",
-      correction:
-        "La plus grande valeur est 16 (Sport). L'écart avec la lecture : 16 - 9 = 7. Le sport devance la lecture de 7 élèves.",
-    },
-  },
-  {
-    titre: "Lire un diagramme circulaire",
-    badge: "Les parts d'un disque",
-    section: {
-      type: "exemple",
-      enonce:
-        "Un diagramme circulaire représente 20 personnes. Le secteur « Comédie » occupe la moitié du disque.",
-      question: "Combien de personnes préfèrent la comédie ?",
-      correction:
-        "La moitié du disque, c'est la moitié du total : 20 ÷ 2 = 10. Donc 10 personnes préfèrent la comédie.",
-    },
-  },
-  {
-    titre: "Pièges & à retenir",
-    badge: "Vigilance",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "piege",
-        titre: "Pièges à éviter",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {pieges.map((piege) => (
-              <li key={piege}>• {piege}</li>
-            ))}
-          </ul>
-        ),
-      },
-      droite: {
-        variante: "ok",
-        titre: "À retenir",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {aRetenir.map((point) => (
-              <li key={point}>• {point}</li>
-            ))}
-          </ul>
-        ),
-      },
+      phrase: "Lire des données, puis les comparer",
+      sousPhrase: "Tableau, barres ou disque : on trouve le bon nombre, puis on compare.",
     },
   },
   {
     titre: "À toi de jouer",
     badge: "Exercice flash",
+    teinte: "exercice",
+    schema: avecMargo(tableauActivites, "Suis la ligne, puis la colonne !"),
     section: {
       type: "exercice",
-      enonce:
-        "Défi : un sondage indique 8 élèves à pied, 12 en bus et 5 en voiture.",
-      question: "Combien d'élèves ont répondu au sondage en tout ?",
-      indice: "L'effectif total, c'est la somme de toutes les catégories.",
-      correction:
-        "On additionne toutes les valeurs : 8 + 12 + 5 = 25. Donc 25 élèves ont répondu.",
+      enonce: "Filles et garçons, par sport.",
+      question: "Combien de filles font de la natation ?",
+      indice: "Ligne « Natation », colonne « Filles ».",
+      correction: "On lit 6 : 6 filles.",
     },
   },
 ];

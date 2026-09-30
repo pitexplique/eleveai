@@ -1,82 +1,44 @@
 // ─── Fiche de cours : algorithmique et programmation (6e) ──────────────────────
-// Fiche « en blocs » créée pour coller EXACTEMENT à la banque du coach
-// (lib/tutor-v4/questionBank/6e/maths/algorithmique.bank.ts).
+// Fiche « en blocs » alignée sur la banque du coach
+// (lib/tutor-v4/questionBank/6e/maths/algorithmique.bank.ts, notionId
+// algo_programmation). Réécrite le 30/09/2026 au standard des fiches de 6e
+// (étalon : `maths-6e-stat-enquete.tsx`) : phrases courtes, un dessin par bloc,
+// Ti Margo.
 //
-// Couverture des micro-compétences de la banque (pour la relecture du prof) :
-// - algo_sequence        → definition, proprietes (L'ordre compte),
-//                          methode (Lire dans l'ordre), usages (carte 3),
-//                          entrainement (Q1), pieges (1)
-// - algo_deplacement     → identite (Idée clé), methode (Exécuter pas à pas),
-//                          usages (carte 1), exemples (ex. 1),
-//                          entrainement (Q2), slides (déplacement guidé)
-// - algo_repetition      → proprietes (La répétition raccourcit),
-//                          methode (Chercher les répétitions), usages (carte 2),
-//                          exemples (ex. 2), entrainement (Q3), pieges (2)
-// - algo_lire_programme  → usages (carte 3), methode (Exécuter pas à pas),
-//                          exemples (ex. 2), entrainement (Q3), slide « prévoir »
-// - algo_figure          → proprietes (La répétition raccourcit),
-//                          entrainement (Q4), slide « figure », pieges (3)
-// - algo_defi            → entrainement (Q4), slide « exercice flash »
+// Micro-compétences 6/6 — mapping micro → blocs :
+//   algo_sequence       → définition + figure, propriété 1, méthode 1,
+//                         entraînement 1
+//   algo_deplacement    → propriété 2, méthode 2, usage 2, exemple 1,
+//                         entraînement 2
+//   algo_repetition     → propriété 3, méthode 3, exemple 2, entraînement 3
+//   algo_lire_programme → propriété 4, méthode 1, usage 3, entraînement 4
+//   algo_figure         → usage 1, exemple 3
+//   algo_defi           → usage 3, exemple 3, entraînement 5
+//
+// ⭐ TOUS LES NOMBRES VIENNENT DE LA BANQUE : avancer 3 puis 2 cases (5),
+// répéter 4 fois « avancer de 10 » (40), répéter 3 fois avancer / tourner de
+// 90° (le carré raté), le carré en 4 × 90°, répéter 3 fois « avancer de 5 »
+// puis avancer de 4 (19), le robot vers l'Est qui fait demi-tour, (1) Avancer
+// (2) Tourner (3) Avancer, répéter 2 fois « Avancer · Avancer » (4), répéter
+// 5 fois « tourner de 72° » (360°), 4 fois 60° au lieu de 90°.
+// ⛔ La feuille d'exercices `lib/fiches-exercices/maths-6e-algo-programmation.tsx`
+// (6 fois 15, 5 fois « Hop ! », Nina et son carré de 30, le triangle à 120°,
+// les marches, le potager, la course d'orientation…) : aucun exemple commun.
+//
+// ⭐ LE CANVAS `scratch` EMPILE DES BLOCS, ET C'EST TOUT CE QU'IL SAIT FAIRE.
+// Une fiche où chaque bloc est un programme devient une colonne de blocs
+// colorés (REGLES.md § 2 bis). Le Scratch garde donc la définition, l'ordre,
+// la boucle, l'erreur, le point de départ, la distance à prévoir et deux
+// exemples ; le TRAJET se dessine sur un quadrillage (`reperage`), l'exécution
+// dans un tableau, et la boucle devient une multiplication.
+// ⛔ Le carré « 8 blocs contre 1 boucle » (deux programmes empilés) a été
+// retiré : sa diapo débordait de 183 px à 1280 × 800. La boucle seule, avec sa
+// légende, dit la même chose.
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
-
-// Un programme Scratch dessiné par le moteur du coach : les mêmes blocs colorés
-// que l'élève assemble dans ses exercices.
-const progSequence = (
-  <CanvasRenderer
-    figure={{
-      kind: "scratch",
-      title: "Un programme = une suite d'instructions",
-      blocks: [
-        { type: "event" },
-        { type: "move", value: 10 },
-        { type: "turn", value: 90 },
-        { type: "say", text: "Bonjour !" },
-      ],
-    }}
-  />
-);
-
-// Exemple 1 : un déplacement (avancer 3, tourner, avancer 2).
-const progDeplacement = (
-  <CanvasRenderer
-    figure={{
-      kind: "scratch",
-      title: "Un déplacement",
-      blocks: [
-        { type: "event" },
-        { type: "move", value: 3 },
-        { type: "turn", value: 90 },
-        { type: "move", value: 2 },
-      ],
-    }}
-  />
-);
-
-// Exemple 2 : une répétition (répéter 4 fois : avancer de 10).
-const progRepetition = (
-  <CanvasRenderer
-    figure={{
-      kind: "scratch",
-      title: "Une répétition",
-      blocks: [
-        { type: "event" },
-        { type: "repeat", times: 4, children: [{ type: "move", value: 10 }] },
-      ],
-    }}
-  />
-);
-
-// ─── Les six dessins des blocs ────────────────────────────────────────────────
-// ⭐ LE CANVAS `scratch` EMPILE DES BLOCS, ET C'EST TOUT CE QU'IL SAIT FAIRE.
-// Trois programmes servaient déjà (figure, exemples 1 et 2) : six de plus et la
-// fiche serait une colonne de blocs colorés (REGLES.md § 2 bis). Trois blocs
-// gardent donc le Scratch — mais toujours PAR PAIRE, parce qu'un programme seul
-// ne montre jamais qu'un autre ordre donnerait autre chose. Les trois derniers
-// sortent : le catalogue dit que `scratch` n'est ⛔ pas pour un tableau
-// d'exécution, et c'est justement ce qui manque à la méthode.
+import { avecMargo } from "@/components/fiches/TiMargoBulle";
 
 /** Un dessin et sa phrase, sous lui. */
 const legende = (dessin: React.ReactNode, texte: string) => (
@@ -99,9 +61,25 @@ const pile = (items: { dessin: React.ReactNode; nom: string }[]) => (
   </div>
 );
 
-// ⭐ LES MÊMES DEUX BLOCS, DANS LES DEUX ORDRES. Un programme seul ne peut pas
-// dire que l'ordre compte : il faut voir la paire. Rien d'autre ne change entre
-// ces deux dessins — ni les blocs, ni les valeurs, seulement leur rang.
+// ─── Les dessins ──────────────────────────────────────────────────────────────
+
+// LA FIGURE : un programme, une suite de blocs lus de haut en bas.
+const progSequence = (
+  <CanvasRenderer
+    figure={{
+      kind: "scratch",
+      title: "Un programme",
+      blocks: [
+        { type: "event" },
+        { type: "move", value: 10 },
+        { type: "turn", value: 90 },
+        { type: "say", text: "Bonjour !" },
+      ],
+    }}
+  />
+);
+
+// ⭐ LES MÊMES DEUX BLOCS, DANS LES DEUX ORDRES : seule la place change.
 const lesDeuxOrdres = pile([
   {
     dessin: (
@@ -117,7 +95,7 @@ const lesDeuxOrdres = pile([
         }}
       />
     ),
-    nom: "on part tout droit, puis on pivote",
+    nom: "Il part tout droit, puis il pivote.",
   },
   {
     dessin: (
@@ -133,88 +111,71 @@ const lesDeuxOrdres = pile([
         }}
       />
     ),
-    nom: "on pivote sur place, puis on part de côté",
+    nom: "Il pivote, puis il part de côté.",
   },
 ]);
 
-// ⭐ LE MÊME CARRÉ, ÉCRIT DEUX FOIS. « La répétition raccourcit » ne se voit pas
-// sur une boucle isolée — elle se voit contre les huit blocs qu'elle remplace.
-const longEtCourt = pile([
-  {
-    dessin: (
-      <CanvasRenderer
-        figure={{
-          kind: "scratch",
-          title: "Sans boucle",
-          blocks: [
-            { type: "move", value: 10 },
-            { type: "turn", value: 90 },
-            { type: "move", value: 10 },
-            { type: "turn", value: 90 },
-            { type: "move", value: 10 },
-            { type: "turn", value: 90 },
-            { type: "move", value: 10 },
-            { type: "turn", value: 90 },
-          ],
-        }}
-      />
-    ),
-    nom: "8 blocs pour un carré",
-  },
-  {
-    dessin: (
-      <CanvasRenderer
-        figure={{
-          kind: "scratch",
-          title: "Avec une boucle",
-          blocks: [
-            {
-              type: "repeat",
-              times: 4,
-              children: [
-                { type: "move", value: 10 },
-                { type: "turn", value: 90 },
-              ],
-            },
-          ],
-        }}
-      />
-    ),
-    nom: "le même carré, en 1 boucle",
-  },
-]);
+// AVANCER N'EST PAS TOURNER : ce que chaque bloc change.
+const tableauAvancerTourner = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      headers: ["Le bloc", "Ce qui change"],
+      rows: [
+        { values: ["avancer de 10", "la place"] },
+        { values: ["tourner de 90°", "la direction"] },
+      ],
+      highlight: { col: 1 },
+      questionLabel: "Tourner ne fait faire aucun pas.",
+    }}
+  />
+);
 
-// ⭐ L'ERREUR EXÉCUTÉE TELLE QUELLE. On voulait 90°, on a tapé 9° : la machine ne
-// corrige pas, elle obéit. Le seul programme FAUX de la fiche — et il fallait
-// qu'il existe, sinon la propriété reste une phrase.
-const leProgrammeQuiObeit = legende(
+// LA BOUCLE : le carré en un seul bloc « répéter ».
+const boucleCarre = legende(
   <CanvasRenderer
     figure={{
       kind: "scratch",
-      title: "On voulait un carré",
+      title: "Avec une boucle",
       blocks: [
-        { type: "event" },
         {
           type: "repeat",
           times: 4,
           children: [
             { type: "move", value: 10 },
-            { type: "turn", value: 9 },
+            { type: "turn", value: 90 },
           ],
         },
       ],
     }}
   />,
-  "9° au lieu de 90° : la machine trace un éventail, sans rien dire"
+  "Le carré en 1 boucle, au lieu de 8 blocs."
 );
 
-// LIRE DANS L'ORDRE, C'EST COMMENCER PAR LE DRAPEAU. Un programme ordinaire,
-// mais dont la légende désigne le point de départ : c'est le geste, pas le code.
+// ⭐ L'ERREUR EXÉCUTÉE TELLE QUELLE : 9° au lieu de 90°. Sans boucle, pour ne
+// pas ressembler au carré juste au-dessus.
+const leProgrammeQuiObeit = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "scratch",
+      title: "On voulait un angle droit",
+      blocks: [
+        { type: "event" },
+        { type: "move", value: 50 },
+        { type: "turn", value: 9 },
+        { type: "move", value: 50 },
+      ],
+    }}
+  />,
+  "9° au lieu de 90° : il tourne de 9°, sans rien dire."
+);
+
+// LIRE DANS L'ORDRE, C'EST COMMENCER PAR LE DRAPEAU.
 const parOuCommencer = legende(
   <CanvasRenderer
     figure={{
       kind: "scratch",
-      title: "Par où commence-t-on ?",
+      title: "Par où commencer ?",
       blocks: [
         { type: "event" },
         { type: "move", value: 5 },
@@ -223,63 +184,172 @@ const parOuCommencer = legende(
       ],
     }}
   />,
-  "toujours par le drapeau vert, puis de haut en bas"
+  "D'abord le drapeau vert, puis de haut en bas."
 );
 
-// ⭐ CE QUE `scratch` NE SAIT PAS FAIRE. Le catalogue est explicite : ce canvas
-// montre des blocs empilés, ⛔ pas un tableau d'exécution. Or « faire comme si
-// on était la machine », c'est exactement remplir ce tableau-là — une ligne par
-// instruction, et l'on voit la position changer.
+// ⭐ JOUER LA MACHINE : une ligne par instruction, rien ne se saute.
+// (`scratch` n'est ⛔ pas pour un tableau d'exécution : voir le catalogue.)
 const tableauDExecution = (
   <CanvasRenderer
     figure={{
       kind: "tableau_donnees",
       title: "On joue la machine",
-      headers: ["L'instruction", "Position", "Direction"],
+      headers: ["Position", "Direction"],
       rows: [
-        { label: "départ", values: ["—", "0", "→"] },
-        { label: "avancer 5", values: ["5 pas", "5", "→"] },
-        { label: "tourner 90°", values: ["—", "5", "↓"] },
+        { label: "départ", values: ["0", "→"] },
+        { label: "avancer 5", values: ["5", "→"] },
+        { label: "tourner 90°", values: ["5", "↓"] },
       ],
-      highlight: { col: 1 },
-      caption: "Une ligne par instruction : rien ne se saute.",
+      highlight: { col: 0 },
     }}
   />
 );
 
-// ⭐ UNE BOUCLE EST UNE MULTIPLICATION. Quatre tours de 10 pas font 40 pas : le
-// tableau de proportionnalité dit pourquoi, là où le programme ne montre que le
-// nombre de tours.
+// ⭐ UNE BOUCLE EST UNE MULTIPLICATION : 3 tours de 20 pas font 60 pas.
 const laBoucleEstUneMultiplication = legende(
   <CanvasRenderer
     figure={{
       kind: "tableau_proportionnalite",
       rows: 2,
-      cols: 4,
+      cols: 3,
       rowLabels: ["tours", "pas"],
       values: [
-        ["1", "2", "3", "4"],
-        ["10", "20", "30", "40"],
+        ["1", "2", "3"],
+        ["20", "40", "60"],
       ],
       missing: [],
-      highlightedCells: [{ row: 1, col: 3 }],
+      highlightedCells: [{ row: 1, col: 2 }],
       display: { showRowLabels: true, showColLabels: false, showGrid: true },
-      size: { width: 250, height: 150 },
+      size: { width: 230, height: 150 },
     }}
   />,
-  "répéter 4 fois « avancer de 10 » : 40 pas en tout"
+  "3 fois « avancer de 20 » : 3 × 20 = 60 pas."
 );
 
+// LE CARRÉ, TRACÉ SUR LE QUADRILLAGE : 4 côtés, 4 quarts de tour.
+const carreSurQuadrillage = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "reperage",
+      grid: { rows: 5, cols: 5 },
+      path: {
+        start: { x: 1, y: 1, label: "D" },
+        steps: [
+          { direction: "droite", count: 3 },
+          { direction: "haut", count: 3 },
+          { direction: "gauche", count: 3 },
+          { direction: "bas", count: 3 },
+        ],
+        showArrows: true,
+      },
+      display: { showAxes: false, showCoordinates: false, showPointLabels: true },
+      size: { width: 230, height: 220 },
+    }}
+  />,
+  "4 fois : avancer, tourner de 90°. Il revient à D."
+);
+
+// LE DEMI-TOUR : deux quarts de tour, et la direction s'inverse.
+const tableauDemiTour = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Le robot tourne",
+      headers: ["Le robot", "Il regarde"],
+      rows: [
+        { values: ["au départ", "l'Est"] },
+        { values: ["après un demi-tour", "l'Ouest"] },
+      ],
+      highlight: { cell: { row: 1, col: 1 } },
+    }}
+  />
+);
+
+// PRÉVOIR UNE DISTANCE : ce qui est dans la boucle, puis ce qui est après.
+const progDistance = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "scratch",
+      title: "Combien de pas ?",
+      blocks: [
+        { type: "event" },
+        { type: "repeat", times: 3, children: [{ type: "move", value: 5 }] },
+        { type: "move", value: 4 },
+      ],
+    }}
+  />,
+  "3 × 5 = 15, puis 15 + 4 = 19 pas."
+);
+
+// L'EXEMPLE 1 : le trajet, dessiné sur le quadrillage.
+// y monte vers le haut dans `reperage` : « bas » fait descendre.
+const trajetLutin = (
+  <CanvasRenderer
+    figure={{
+      kind: "reperage",
+      grid: { rows: 4, cols: 5 },
+      path: {
+        start: { x: 1, y: 3, label: "D" },
+        steps: [
+          { direction: "droite", count: 3 },
+          { direction: "bas", count: 2 },
+        ],
+        showArrows: true,
+      },
+      target: { x: 4, y: 1, label: "A" },
+      display: { showAxes: false, showCoordinates: false, showPointLabels: true, showTarget: true },
+      size: { width: 240, height: 200 },
+    }}
+  />
+);
+
+// L'EXEMPLE 2 : répéter 4 fois « avancer de 10 ».
+const progRepetition = (
+  <CanvasRenderer
+    figure={{
+      kind: "scratch",
+      title: "Une répétition",
+      blocks: [
+        { type: "event" },
+        { type: "repeat", times: 4, children: [{ type: "move", value: 10 }] },
+      ],
+    }}
+  />
+);
+
+// L'EXEMPLE 3 (défi) : le carré raté, 3 tours au lieu de 4.
+const progCarreRate = (
+  <CanvasRenderer
+    figure={{
+      kind: "scratch",
+      title: "On voulait un carré",
+      blocks: [
+        { type: "event" },
+        {
+          type: "repeat",
+          times: 3,
+          children: [
+            { type: "move", value: 50 },
+            { type: "turn", value: 90 },
+          ],
+        },
+      ],
+    }}
+  />
+);
+
+// ─── Les textes ───────────────────────────────────────────────────────────────
+
 const pieges = [
-  "Changer l'ordre des instructions sans y penser : si on tourne avant d'avancer, le lutin ne va pas au même endroit. L'ordre fait partie du programme.",
-  "Oublier que la boucle répète : dans « répéter 4 fois : avancer de 10 », le lutin avance 4 × 10 = 40 pas, pas seulement 10.",
-  "Utiliser le mauvais angle ou le mauvais nombre de côtés : pour un carré, il faut répéter 4 fois et tourner de 90°, pas 3 fois ou 60°.",
+  "Changer l'ordre sans y penser. Tourner puis avancer ne mène pas au même endroit.",
+  "Oublier les tours de boucle. Répéter 4 fois « avancer de 10 », c'est 40 pas.",
+  "Croire que tourner fait avancer. « Tourner de 90° » ne fait faire aucun pas.",
 ];
 
 const aRetenir = [
-  "Un algorithme est une suite d'instructions précises, exécutées dans l'ordre, de haut en bas.",
-  "Une répétition (boucle) refait plusieurs fois les mêmes instructions : c'est plus court à écrire.",
-  "Pour prévoir le résultat, on exécute le programme pas à pas, sans oublier de compter les tours de boucle.",
+  "Un programme se lit dans l'ordre : du drapeau vert, de haut en bas.",
+  "Avancer change la place. Tourner change seulement la direction.",
+  "Une boucle refait ses blocs à chaque tour : on multiplie par le nombre de tours.",
 ];
 
 export const ficheAlgorithmique6e: FicheCoursData = {
@@ -289,283 +359,198 @@ export const ficheAlgorithmique6e: FicheCoursData = {
   notion: "algo-programmation",
   titre: "Algorithmique et programmation",
   accroche:
-    "Programmer, c'est donner à une machine une suite d'ordres clairs qu'elle exécute sans deviner. En 6e, on apprend à lire un programme, à faire déplacer un personnage, à utiliser une répétition et à prévoir ce qui va se passer.",
+    "Programmer, c'est donner des ordres clairs à une machine. Elle fait exactement ce qu'on lui dit, sans deviner.",
   identite: [
-    { label: "Prérequis", valeur: "Suivre des consignes dans l'ordre, compter et calculer de petites additions et multiplications" },
-    { label: "Idée clé", valeur: "L'ordinateur fait exactement ce qu'on lui dit, ni plus, ni moins" },
-    { label: "Outil", valeur: "Scratch : on assemble des blocs pour déplacer un lutin et tracer des figures" },
+    { label: "Les mots clés", valeur: "Instruction, programme, boucle" },
+    { label: "Le secret", valeur: "La machine fait ce qui est écrit, pas ce qu'on veut" },
+    { label: "L'outil", valeur: "Scratch : des blocs qu'on empile" },
   ],
   definition: {
     texte:
-      "Un algorithme est une suite d'instructions précises et ordonnées qui permet d'obtenir un résultat. Un programme, c'est un algorithme écrit pour une machine. Les instructions s'exécutent une par une, de haut en bas, dans l'ordre où elles sont écrites.",
+      "Un algorithme est une suite d'instructions, dans l'ordre. Un programme, c'est un algorithme écrit pour une machine. La machine lit les blocs un par un, de haut en bas.",
   },
   figure: {
     schema: progSequence,
-    legende: "Un programme Scratch : les blocs s'exécutent dans l'ordre, de haut en bas.",
+    legende: "Les blocs s'exécutent de haut en bas.",
   },
   proprietes: [
     {
       titre: "L'ordre compte",
       micros: ["algo_sequence"],
       texte:
-        "Les instructions s'exécutent dans l'ordre, de haut en bas. Si on change l'ordre, le résultat peut changer : « avancer puis tourner » ne mène pas au même endroit que « tourner puis avancer ».",
+        "Les blocs s'exécutent dans l'ordre. Si on change l'ordre, le résultat peut changer.",
       schema: lesDeuxOrdres,
     },
     {
-      titre: "La répétition raccourcit",
-      micros: ["algo_repetition"],
-      texte:
-        "Quand une même action revient plusieurs fois, on utilise une boucle « répéter … fois » au lieu de tout réécrire. « Répéter 4 fois : avancer, tourner de 90° » trace un carré avec quelques blocs seulement.",
-      schema: longEtCourt,
+      titre: "Avancer ou tourner",
+      micros: ["algo_deplacement"],
+      texte: "Avancer change la place du lutin. Tourner change seulement sa direction.",
+      schema: tableauAvancerTourner,
     },
     {
-      titre: "L'ordinateur exécute sans deviner",
+      titre: "La boucle répète",
+      micros: ["algo_repetition"],
+      texte:
+        "Une boucle refait les mêmes blocs plusieurs fois. On n'a pas besoin de tout réécrire.",
+      schema: boucleCarre,
+    },
+    {
+      titre: "La machine obéit",
       micros: ["algo_lire_programme"],
       texte:
-        "La machine ne comprend pas ce qu'on voulait faire : elle applique les instructions telles quelles. Si un bloc est faux ou mal placé, elle exécute l'erreur sans la corriger. C'est à nous d'être précis.",
+        "La machine ne devine pas ce qu'on voulait. Elle fait ce qui est écrit, même une erreur.",
       schema: leProgrammeQuiObeit,
     },
   ],
   reel: {
     texte:
-      "Les algorithmes sont partout, même sans ordinateur : une recette de cuisine est une suite d'étapes à suivre dans l'ordre. Un GPS calcule ton trajet en enchaînant des instructions (« tourne à droite, continue tout droit »). Dans un jeu vidéo, chaque personnage suit un programme qui décide de ses déplacements.",
+      "Une recette de cuisine est une suite d'étapes, dans l'ordre. Un GPS donne des ordres : « tourne à droite, continue tout droit ». Dans un jeu vidéo, chaque personnage suit un programme. Un robot aspirateur aussi.",
   },
   historique: {
     texte:
-      "Le mot « algorithme » vient du nom du savant Al-Khwarizmi, mathématicien qui vivait à Bagdad au 9e siècle et expliquait comment résoudre des problèmes étape par étape. Bien plus tard, le langage Scratch a été créé en 2007 pour apprendre à programmer en assemblant des blocs colorés, sans avoir à taper de code.",
+      "Le mot « algorithme » vient du nom d'Al-Khwarizmi. Ce savant vivait à Bagdad, il y a plus de 1 000 ans. Il expliquait les calculs étape par étape. Scratch, lui, est né en 2007 pour programmer avec des blocs.",
   },
   methode: [
     {
-      titre: "Lire dans l'ordre",
+      titre: "Partir du drapeau",
       micros: ["algo_sequence", "algo_lire_programme"],
-      texte:
-        "On lit le programme de haut en bas, comme un texte. On repère d'abord le bloc de départ (« quand le drapeau vert est cliqué »), puis chaque instruction dans l'ordre.",
+      texte: "On commence au drapeau vert. Puis on lit chaque bloc, de haut en bas.",
       schema: parOuCommencer,
     },
     {
-      titre: "Exécuter pas à pas",
+      titre: "Jouer la machine",
       micros: ["algo_deplacement"],
       texte:
-        "On fait comme si on était la machine : on suit chaque instruction une par une et on note ce qui se passe (position, direction). On ne saute aucune étape.",
+        "On suit les blocs un par un. À chaque bloc, on note la place et la direction.",
       schema: tableauDExecution,
     },
     {
-      titre: "Chercher les répétitions",
+      titre: "Compter les tours",
       micros: ["algo_repetition"],
       texte:
-        "On repère les blocs à l'intérieur d'un « répéter … fois » : ils sont exécutés plusieurs fois. On multiplie l'action par le nombre de tours pour trouver le résultat total.",
+        "Un bloc dans une boucle se refait à chaque tour. On multiplie par le nombre de tours.",
       schema: laBoucleEstUneMultiplication,
     },
   ],
   usages: [
     {
-      titre: "Suivre ou écrire un déplacement",
+      titre: "Tracer un carré",
+      micros: ["algo_figure"],
+      detail:
+        "Un carré a 4 côtés et 4 angles droits. On répète 4 fois : avancer, tourner de 90°.",
+      schema: carreSurQuadrillage,
+    },
+    {
+      titre: "S'orienter",
       micros: ["algo_deplacement"],
       detail:
-        "Faire avancer un lutin (« avancer de 10 ») ou le faire tourner (« tourner de 90° »). Avancer change la position, tourner change la direction : ce sont deux actions différentes.",
+        "Un robot regarde vers l'Est. Il fait un demi-tour : il regarde maintenant vers l'Ouest.",
+      schema: tableauDemiTour,
     },
     {
-      titre: "Utiliser une répétition",
-      micros: ["algo_repetition"],
+      titre: "Prévoir une distance",
+      micros: ["algo_lire_programme", "algo_defi"],
       detail:
-        "Regrouper une action qui se répète dans une boucle : « répéter 3 fois : avancer de 20 » fait avancer de 3 × 20 = 60 pas, en trois blocs au lieu de six.",
-    },
-    {
-      titre: "Prévoir le résultat",
-      micros: ["algo_lire_programme"],
-      detail:
-        "Lire un programme pour dire à l'avance ce que fait le lutin : quelle distance il parcourt, quelle figure il trace, ce qu'il dit à la fin.",
+        "On calcule d'abord la boucle, puis on ajoute la suite. 3 × 5 + 4 = 19 pas.",
+      schema: progDistance,
     },
   ],
   exemples: [
     {
-      titre: "Suivre un déplacement sur un quadrillage",
+      titre: "Le trajet du lutin",
       micros: ["algo_deplacement"],
-      donnees:
-        "Un lutin part d'une case et suit ce programme : avance de 3 cases, tourne à droite (quart de tour), avance de 2 cases.",
-      question: "Combien de cases le lutin a-t-il parcourues en tout, et a-t-il changé de direction ?",
-      schema: progDeplacement,
+      donnees: "Le lutin avance de 3 cases, tourne d'un quart de tour, puis avance de 2 cases.",
+      question: "Combien de cases parcourt-il ?",
+      schema: trajetLutin,
       solution:
-        "On exécute pas à pas. Le lutin avance d'abord de 3 cases, puis il tourne à droite : il regarde maintenant dans une nouvelle direction, mais il n'avance pas pendant qu'il tourne. Ensuite il avance de 2 cases. Pour la distance, on additionne seulement les blocs « avancer » : 3 + 2 = 5 cases. Le lutin a bien changé de direction une fois, au moment du quart de tour.",
+        "On compte seulement les blocs « avancer ». Tourner ne fait pas avancer. 3 + 2 = 5 cases.",
     },
     {
-      titre: "Comprendre une répétition",
+      titre: "La boucle de 4 tours",
       micros: ["algo_repetition"],
-      donnees:
-        "Un lutin suit le programme : répéter 4 fois « avancer de 10 pas ».",
-      question: "Quelle distance totale le lutin parcourt-il ?",
+      donnees: "Le programme répète 4 fois « avancer de 10 ».",
+      question: "De combien de pas le lutin avance-t-il ?",
       schema: progRepetition,
       solution:
-        "Le bloc « avancer de 10 » est placé à l'intérieur de la boucle : il est donc exécuté à chaque tour. La boucle fait 4 tours, et à chaque tour le lutin avance de 10 pas. On multiplie : 4 × 10 = 40. Le lutin parcourt 40 pas au total. C'est le piège classique : la boucle ne fait pas avancer une seule fois, mais 4 fois.",
+        "Le bloc est dans la boucle : il se fait 4 fois. 4 × 10 = 40. Le lutin avance de 40 pas.",
+    },
+    {
+      titre: "Le carré raté",
+      micros: ["algo_figure", "algo_defi"],
+      donnees: "Pour un carré, un élève répète 3 fois : avancer de 50, tourner de 90°.",
+      question: "Son programme est-il juste ?",
+      schema: progCarreRate,
+      solution:
+        "Non. Un carré a 4 côtés, et il n'en trace que 3. Il faut répéter 4 fois.",
     },
   ],
   pieges,
   aRetenir,
   entrainement: [
     {
-      question:
-        "Un programme contient, dans l'ordre : « avancer », « tourner », « avancer ». Quelle est la 2e instruction, et combien y a-t-il d'instructions en tout ?",
-      correction:
-        "On lit le programme de haut en bas et on compte les instructions dans l'ordre : 1re = avancer, 2e = tourner, 3e = avancer. La 2e instruction est donc « tourner ». En tout, le programme contient 3 instructions.",
+      question: "Programme : (1) Avancer (2) Tourner (3) Avancer. Quelle est la 2e instruction ?",
+      correction: "On lit dans l'ordre : la 2e instruction est « Tourner ».",
+      micros: ["algo_sequence"],
     },
     {
       question:
-        "Un robot regarde vers le Nord. Il fait un quart de tour à droite, puis encore un quart de tour à droite. Vers où regarde-t-il à la fin ?",
-      correction:
-        "On exécute pas à pas. Un quart de tour à droite depuis le Nord amène vers l'Est. Un deuxième quart de tour à droite depuis l'Est amène vers le Sud. À la fin, le robot regarde vers le Sud. (Deux quarts de tour font un demi-tour, donc la direction opposée au Nord.)",
+        "Un robot regarde vers le Nord. Il tourne deux fois à droite, d'un quart de tour. Vers où regarde-t-il ?",
+      correction: "Nord, puis Est, puis Sud. Il regarde vers le Sud.",
+      micros: ["algo_deplacement"],
+    },
+    {
+      question: "Répéter 2 fois « Avancer · Avancer ». Combien de fois « Avancer » est-il fait ?",
+      correction: "2 blocs, 2 tours : 2 × 2 = 4 fois.",
+      micros: ["algo_repetition"],
+    },
+    {
+      question: "Répéter 5 fois « tourner de 72° ». De combien le lutin tourne-t-il en tout ?",
+      correction: "5 × 72 = 360°. Il fait un tour complet.",
+      micros: ["algo_lire_programme"],
     },
     {
       question:
-        "Un lutin avance d'abord de 10 pas, puis répète 3 fois « avancer de 20 pas ». Quelle distance totale parcourt-il ?",
-      correction:
-        "On sépare ce qui est hors de la boucle et ce qui est dedans. Hors boucle : le lutin avance de 10 pas. Dans la boucle : « avancer de 20 » est répété 3 fois, soit 3 × 20 = 60 pas. On additionne le tout : 10 + 60 = 70. Le lutin parcourt 70 pas au total.",
-    },
-    {
-      question:
-        "Un élève veut tracer un carré. Il écrit : répéter 3 fois « avancer de 50, tourner de 90° ». Son programme est-il correct ? Sinon, comment le corriger ?",
-      correction:
-        "Un carré a 4 côtés et 4 angles droits. Le programme ne répète que 3 fois : il ne trace donc que 3 côtés, la figure reste ouverte. Le programme n'est pas correct. Pour le corriger, il faut remplacer « répéter 3 fois » par « répéter 4 fois » : ainsi le lutin trace les 4 côtés et referme le carré. L'angle de 90° est bien le bon.",
-      micros: ["algo_figure", "algo_defi"],
+        "Défi : pour un carré, un élève répète 4 fois « avancer de 50, tourner de 60° ». Est-ce juste ?",
+      correction: "Non. Un carré a des angles droits : il faut tourner de 90°, pas de 60°.",
+      micros: ["algo_defi"],
     },
   ],
+  tiMargo: {
+    objectif: "Une machine fait ce qu'on écrit, pas ce qu'on pense !",
+    definition: "Un programme se lit de haut en bas !",
+    methode: "Je joue la machine, bloc par bloc !",
+    pieges: "Tourner ne fait pas avancer d'un seul pas !",
+    retenir: "Une boucle ? Je multiplie par le nombre de tours !",
+    exercice: "Commence toujours au drapeau vert !",
+  },
   coachHref: "/coach-ia/maths?classe=6e",
 };
 
+// ⛔ Le mode classe est ENGENDRÉ depuis la fiche (`slidesDepuisFiche`) : ce
+// tableau reste exporté pour la page, mais il n'est pas projeté.
 export const slidesAlgorithmique6e: ClasseSlide[] = [
   {
     titre: "Objectif du cours",
     badge: "Algorithmique - 6e",
+    teinte: "objectif",
+    schema: avecMargo(progSequence, "Une machine fait ce qu'on écrit !", "joie"),
     section: {
       type: "objectif",
       phrase: "Lire un programme et prévoir ce qu'il fait",
-      sousPhrase:
-        "Programmer, c'est donner une suite d'ordres clairs à une machine. Tout repose sur une idée : l'ordinateur exécute exactement ce qu'on lui dit.",
-      encadre: {
-        titre: "L'idée",
-        texte:
-          "« Avancer puis tourner » ne donne pas le même résultat que « tourner puis avancer ». L'ordre fait partie du programme.",
-      },
-    },
-  },
-  {
-    titre: "À quoi ça sert ?",
-    badge: "Utilité & histoire",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "info",
-        titre: "Au quotidien",
-        contenu:
-          "Une recette de cuisine, un itinéraire de GPS, les personnages d'un jeu vidéo : tous suivent une suite d'instructions dans l'ordre.",
-      },
-      droite: {
-        variante: "histoire",
-        titre: "Le savais-tu ?",
-        contenu:
-          "Le mot « algorithme » vient d'Al-Khwarizmi, savant de Bagdad au 9e siècle. Le langage Scratch, lui, a été créé en 2007 pour programmer en assemblant des blocs.",
-      },
-    },
-  },
-  {
-    titre: "La définition",
-    badge: "À connaître",
-    section: {
-      type: "objectif",
-      phrase: "Un algorithme est une suite d'instructions précises et ordonnées",
-      sousPhrase:
-        "Un programme, c'est un algorithme écrit pour une machine. Les instructions s'exécutent une par une, de haut en bas.",
-      encadre: {
-        titre: "Attention",
-        texte:
-          "L'ordinateur ne devine pas ce que tu voulais faire : il applique tes instructions telles quelles, même si elles sont fausses.",
-      },
-    },
-  },
-  {
-    titre: "Les 3 réflexes",
-    badge: "Méthode",
-    section: {
-      type: "cartes",
-      cartes: ficheAlgorithmique6e.methode.map((m) => ({
-        titre: m.titre,
-        texte: m.texte,
-      })),
-    },
-  },
-  {
-    titre: "Selon ce que l'on cherche",
-    badge: "3 gestes",
-    section: {
-      type: "cartes",
-      cartes: ficheAlgorithmique6e.usages.map((u) => ({
-        titre: u.titre,
-        texte: u.detail,
-      })),
-    },
-  },
-  {
-    titre: "Exemple guidé",
-    badge: "Suivre un déplacement",
-    section: {
-      type: "exemple",
-      enonce:
-        "Un lutin suit ce programme : avance de 3 cases, tourne à droite (quart de tour), avance de 2 cases.",
-      question: "Combien de cases parcourt-il en tout ?",
-      correction:
-        "On additionne seulement les blocs « avancer » : 3 + 2 = 5 cases. Tourner change la direction, mais ne fait pas avancer.",
-    },
-  },
-  {
-    titre: "Autre exemple",
-    badge: "Prévoir avec une boucle",
-    section: {
-      type: "exemple",
-      enonce: "Un lutin suit : répéter 4 fois « avancer de 10 pas ».",
-      question: "Quelle distance totale parcourt-il ?",
-      correction:
-        "Le bloc « avancer de 10 » est dans la boucle : il est exécuté 4 fois. Donc 4 × 10 = 40 pas.",
-    },
-  },
-  {
-    titre: "Pièges & à retenir",
-    badge: "Vigilance",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "piege",
-        titre: "Pièges à éviter",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {pieges.map((piege) => (
-              <li key={piege}>• {piege}</li>
-            ))}
-          </ul>
-        ),
-      },
-      droite: {
-        variante: "ok",
-        titre: "À retenir",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {aRetenir.map((point) => (
-              <li key={point}>• {point}</li>
-            ))}
-          </ul>
-        ),
-      },
+      sousPhrase: "La machine lit les blocs dans l'ordre, sans deviner.",
     },
   },
   {
     titre: "À toi de jouer",
     badge: "Exercice flash",
+    teinte: "exercice",
+    schema: avecMargo(progRepetition, "Je multiplie par le nombre de tours !"),
     section: {
       type: "exercice",
-      enonce:
-        "Un élève veut tracer un carré. Il écrit : répéter 3 fois « avancer de 50, tourner de 90° ».",
-      question: "Son programme est-il correct ? Sinon, comment le corriger ?",
-      indice: "Un carré a 4 côtés.",
-      correction:
-        "Non : avec 3 répétitions, il ne trace que 3 côtés. Il faut remplacer « répéter 3 fois » par « répéter 4 fois » pour fermer le carré.",
+      enonce: "Répéter 4 fois « avancer de 10 ».",
+      question: "Combien de pas en tout ?",
+      indice: "Le bloc se refait à chaque tour.",
+      correction: "4 × 10 = 40 pas.",
     },
   },
 ];

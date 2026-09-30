@@ -2,27 +2,38 @@
 // Fiche « en blocs » alignée sur la banque du coach
 // lib/tutor-v4/questionBank/6e/maths/proportionnalite.bank.ts
 // (notionId prop_proportionnalite).
-// Refaite au standard « montrer, pas raconter » (retour Frédéric 13/07) : la
-// proportionnalité MONTRÉE dans le tableau du coach (coefficient, cellule « ? »,
-// passage par l'unité) plutôt que racontée. Propriétés = une ligne chacune.
 //
-// Micro-compétences couvertes :
-// - prop_reconnaitre → propriété « Reconnaître », exemple « Reconnaître » (table ×2),
-//                      piège 1, entraînement 1
-// - prop_coeff       → definition, figure (table cahiers, coefficient), propriété
-//                      « Le coefficient », formule
-// - prop_direct      → exemple « Compléter » (4e proportionnelle), entraînement 2
-// - prop_table       → exemple « Compléter » (tableau), usages 3, entraînement 3
-// - prop_unite       → propriété « Passer par l'unité », methode, exemple « Recette »,
-//                      usages 2, entraînement 3
-// - prop_defi        → entraînement 4 (vitesse) + slide « exercice flash »
+// ⭐ RÉÉCRITE LE 30/09/2026 AU STANDARD DES 6e QUI LISENT DIFFICILEMENT :
+// phrases courtes, une idée par phrase, un dessin sur CHAQUE bloc, Ti Margo en
+// mode classe (champ `tiMargo`). Les dessins justes de juin sont gardés.
+//
+// Micro-compétences 6/6 (le champ `micros` de chaque bloc fait foi) :
+// - prop_reconnaitre → propriété 1 (× 2 contre + 3), réflexe 1, usage 1 (l'âge
+//                      et la taille), exemple 1 (2 billets 6 €, 4 billets 11 €)
+// - prop_coeff       → définition + figure (cahiers × 2), propriété 2 (× 3),
+//                      formule, entraînement 3 (3 objets, 12 €)
+// - prop_unite       → propriété 3 (15 € pour 5), réflexe 2 (4 objets, 12 €),
+//                      exemple 3 (4 personnes, 200 g de farine), entraînements 1 et 2
+// - prop_table       → propriété 4 (2 potions, 10 pièces), usage 2 (4 coffres,
+//                      12 pièces), exemple 2 (3 cahiers, 6 €), entraînement 4
+// - prop_direct      → réflexe 3 (7 × 3 = 21 €), usage 3 (10 maillots, 50 €),
+//                      exemple 3, entraînement 1
+// - prop_defi        → exemple 3 (la recette de la banque), entraînement 5
+// Nombres de la banque, sauf les entraînements de juin (stylos, tickets, crêpes,
+// cycliste) gardés tels quels. ⛔ Aucun exemple commun avec la feuille
+// `lib/fiches-exercices/maths-6e-prop-proportionnalite.tsx` (elle évite les nôtres).
+//
+// ⭐ LE TABLEAU NE REVIENT QUE LÀ OÙ IL EST LE GESTE (coefficient, case à
+// compléter). Ailleurs : la barre découpée (revenir à 1), la barre recollée
+// (multiplier), un diagramme (ce qui n'est PAS proportionnel).
+// ⛔ AUCUN LATEX, aucun tableau de plus de 3 colonnes courtes.
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+import { avecMargo } from "@/components/fiches/TiMargoBulle";
 
-// Le tableau de proportionnalité du coach (le même que dans les exercices) :
-// l'élève VOIT les deux lignes et le « ? » à trouver.
+/** Le tableau de proportionnalité du coach (le même que dans les exercices). */
 function tableauProp(
   rowLabels: string[],
   values: string[][],
@@ -39,19 +50,11 @@ function tableauProp(
         missing: [],
         highlightedCells: highlight,
         display: { showRowLabels: true, showColLabels: false, showGrid: true },
+        size: { width: 240, height: 130 },
       }}
     />
   );
 }
-
-// ─── Les six dessins des blocs ────────────────────────────────────────────────
-// ⭐ LE TABLEAU DE PROPORTIONNALITÉ SERVAIT DÉJÀ CINQ FOIS (figure, formule, les
-// trois exemples). Six de plus et la fiche entière n'aurait été qu'un seul
-// dessin répété onze fois (REGLES.md § 2 bis). Il ne revient donc que deux fois,
-// pour deux lectures différentes — le coefficient entre les LIGNES, puis la
-// COLONNE du 1 — et les quatre autres blocs montrent ce qu'un tableau ne montre
-// pas : l'alignement des points, un tout découpé en parts égales, et deux
-// grandeurs simplement nommées.
 
 /** Un dessin et sa phrase, sous lui. */
 const legende = (dessin: React.ReactNode, texte: string) => (
@@ -61,76 +64,91 @@ const legende = (dessin: React.ReactNode, texte: string) => (
   </div>
 );
 
-// LE COEFFICIENT VIT ENTRE LES DEUX LIGNES. La case allumée est celle qu'on
-// obtient en multipliant celle du dessus — c'est le geste, pas le résultat.
-const leCoefficient = legende(
-  tableauProp(
-    ["objets", "prix (€)"],
-    [
-      ["1", "2", "3", "5"],
-      ["2", "4", "6", "10"],
-    ],
-    [{ row: 1, col: 3 }]
-  ),
-  "d'une ligne à l'autre, toujours × 2"
-);
-
-// ⭐ RECONNAÎTRE, C'EST DISPOSER D'UN CONTRE-EXEMPLE. Une seule situation
-// proportionnelle ne prouve rien : ce qui apprend à reconnaître, c'est de voir
-// À CÔTÉ une situation qui n'en est pas. La seconde ligne ajoute 3 à chaque fois
-// — régulier, mais pas proportionnel. C'est le piège n° 1 de la fiche, dessiné.
-//
-// ⛔ CE BLOC A D'ABORD PORTÉ UN GRAPHIQUE (des points alignés passant par
-// l'origine), et c'était la meilleure image — mais `fonctionGraphique` ne tient
-// pas dans une carte de propriété : son repère est calculé sur un viewBox de
-// 320, ses graduations tombaient à 9,5 px dans 228, et les rogner sort les axes
-// du cadre. Mesuré, essayé, abandonné : le graphique demande un bloc large.
-const proportionnelOuPas = legende(
-  <CanvasRenderer
-    figure={{
-      kind: "tableau_donnees",
-      title: "Proportionnel ou pas ?",
-      headers: ["1", "2", "3", "La règle"],
-      rows: [
-        { label: "prix A", values: ["2", "4", "6", "× 2"] },
-        { label: "prix B", values: ["2", "5", "8", "+ 3"] },
-      ],
-      highlight: { row: 0 },
-    }}
-  />,
-  "A double quand la quantité double · B, non"
-);
-
-// REVENIR À L'UNITÉ, C'EST DÉCOUPER. Le tout vaut 15 €, il y a 5 objets : la
-// barre montre les cinq parts ÉGALES, donc la division. Le tableau, lui, ne
-// montre jamais un partage — il montre des nombres déjà calculés.
-const leToutEnCinqParts = (
+/** `n` parts égales de valeur `v`, bout à bout. */
+const barre = (titre: string, total: string, n: number, v: string, question: string, etiquette = "") => (
   <CanvasRenderer
     figure={{
       kind: "schema_barre",
-      title: "15 € pour 5 objets",
-      total: "15 €",
-      parts: [
-        { label: "1", value: "3" },
-        { label: "1", value: "3" },
-        { label: "1", value: "3" },
-        { label: "1", value: "3" },
-        { label: "1", value: "3" },
-      ],
-      questionLabel: "15 ÷ 5 = 3 € l'objet",
-      // ⚠️ Largeur sous 245, hauteur à 190 (§ 2 quater).
+      title: titre,
+      total,
+      parts: Array.from({ length: n }, () => ({ label: etiquette, value: v })),
+      questionLabel: question,
       size: { width: 240, height: 190 },
     }}
   />
 );
 
-// LIRE, C'EST NOMMER LES DEUX GRANDEURS — et rien de plus. Aucun calcul, aucun
-// coefficient : le seul dessin de la fiche où il n'y a rien à trouver.
+// ─── Les dessins ──────────────────────────────────────────────────────────────
+
+// LA FIGURE : les cahiers, toujours × 2.
+const tableauCahiers = tableauProp(
+  ["cahiers", "prix (€)"],
+  [
+    ["1", "3", "5"],
+    ["2", "6", "10"],
+  ],
+  [
+    { row: 0, col: 0 },
+    { row: 1, col: 0 },
+  ]
+);
+
+// PROPRIÉTÉ 1 : RECONNAÎTRE, C'EST VOIR LE CONTRE-EXEMPLE. A multiplie, B ajoute.
+const proportionnelOuPas = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Proportionnel ou pas ?",
+      headers: ["Objets", "Prix A", "Prix B"],
+      rows: [
+        { values: ["1", "2", "2"] },
+        { values: ["2", "4", "5"] },
+        { values: ["3", "6", "8"] },
+      ],
+      highlight: { col: 1 },
+    }}
+  />,
+  "A : toujours × 2 · B : + 3, pas proportionnel"
+);
+
+// PROPRIÉTÉ 2 : le coefficient, lu entre les deux lignes (1 cahier = 3 €).
+const leCoefficient = legende(
+  tableauProp(
+    ["objets", "prix (€)"],
+    [
+      ["1", "2", "4"],
+      ["3", "6", "12"],
+    ],
+    [{ row: 1, col: 2 }]
+  ),
+  "Toujours × 3 : le coefficient est 3"
+);
+
+// PROPRIÉTÉ 3 : revenir à 1, c'est découper. 15 € en 5 parts de 3.
+const leToutEnCinqParts = barre("15 € pour 5 objets", "15 €", 5, "3", "15 ÷ 5 = 3 € l'objet", "1");
+
+// PROPRIÉTÉ 4 : une colonne × 3, l'autre aussi (le jeu vidéo de la banque).
+const potions = legende(
+  tableauProp(
+    ["potions", "pièces"],
+    [
+      ["2", "6"],
+      ["10", "?"],
+    ],
+    [{ row: 1, col: 1 }]
+  ),
+  "6 potions = 3 fois 2 potions : 3 × 10 = 30"
+);
+
+// LA FORMULE : 5 cahiers à 2 €, recollés.
+const cinqCahiers = barre("5 cahiers à 2 €", "10 €", 5, "2", "2 × 5 = 10 €");
+
+// RÉFLEXE 1 : nommer les deux grandeurs, rien d'autre.
 const lesDeuxGrandeurs = (
   <CanvasRenderer
     figure={{
       kind: "tableau_donnees",
-      title: "Deux grandeurs, à chaque fois",
+      title: "Deux grandeurs",
       headers: ["La première", "La seconde"],
       rows: [
         { values: ["des objets", "un prix"] },
@@ -142,9 +160,7 @@ const lesDeuxGrandeurs = (
   />
 );
 
-// LA COLONNE DU 1, ALLUMÉE. C'est le même tableau que la propriété, lu tout
-// autrement : là on regardait les deux lignes, ici on regarde UNE colonne, et
-// la case à trouver est laissée vide.
+// RÉFLEXE 2 : la colonne du 1, laissée vide.
 const laColonneDeLUnite = legende(
   tableauProp(
     ["objets", "prix (€)"],
@@ -154,43 +170,92 @@ const laColonneDeLUnite = legende(
     ],
     [{ row: 1, col: 0 }]
   ),
-  "on cherche d'abord le prix de 1 : 12 ÷ 4 = 3"
+  "D'abord le prix de 1 : 12 ÷ 4 = 3"
 );
 
-// MULTIPLIER, C'EST RECOLLER LES PARTS. La propriété découpait 15 € en cinq
-// parts de 3 ; ici on part de la part et on en met sept bout à bout. Même
-// dessin, geste inverse — et c'est exactement la méthode en deux temps.
-const septPartsRecollees = (
+// RÉFLEXE 3 : multiplier, c'est recoller 7 parts de 3.
+const septPartsRecollees = barre("7 objets à 3 €", "21 €", 7, "3", "7 × 3 = 21 €", "3");
+
+// USAGE 1 : l'âge et la taille (banque). La taille ne double pas.
+const ageTaille = (
+  <CanvasRenderer
+    figure={{
+      kind: "stat_graph",
+      graphType: "barres",
+      title: "Taille (cm)",
+      data: [
+        { label: "10 ans", value: 140, color: "#bfdbfe" },
+        { label: "20 ans", value: 170, color: "#bbf7d0" },
+        { label: "× 2 ?", value: 280, color: "#fecaca" },
+      ],
+      display: { showValues: true, showLabels: true },
+      size: { width: 210, height: 180 },
+    }}
+  />
+);
+
+// USAGE 2 : 4 coffres, 12 pièces ; 8 coffres, le double.
+const coffres = tableauProp(
+  ["coffres", "pièces"],
+  [
+    ["4", "8"],
+    ["12", "24"],
+  ],
+  [{ row: 1, col: 1 }]
+);
+
+// USAGE 3 : 10 maillots pour 50 € ; la moitié, 5 maillots.
+const maillots = (
   <CanvasRenderer
     figure={{
       kind: "schema_barre",
-      title: "7 objets à 3 €",
-      total: "21 €",
+      title: "10 maillots : 50 €",
+      total: "50 €",
       parts: [
-        { label: "3", value: "3" },
-        { label: "3", value: "3" },
-        { label: "3", value: "3" },
-        { label: "3", value: "3" },
-        { label: "3", value: "3" },
-        { label: "3", value: "3" },
-        { label: "3", value: "3" },
+        { label: "5 maillots", value: "25 €", color: "#bfdbfe" },
+        { label: "5 maillots", value: "25 €", color: "#e2e8f0" },
       ],
-      questionLabel: "7 × 3 = 21 €",
+      questionLabel: "La moitié : 50 ÷ 2 = 25 €",
       size: { width: 240, height: 190 },
     }}
   />
 );
 
+// EXEMPLES
+const billets = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      headers: ["Billets", "Prix"],
+      rows: [
+        { values: ["2", "6 €"] },
+        { values: ["4", "11 €"] },
+      ],
+      highlight: { cell: { row: 1, col: 1 } },
+      questionLabel: "6 × 2 = 12 €, pas 11 €",
+    }}
+  />
+);
+const cahiersACompleter = tableauProp(
+  ["cahiers", "prix (€)"],
+  [
+    ["3", "5"],
+    ["6", "?"],
+  ],
+  [{ row: 1, col: 1 }]
+);
+const farine = barre("200 g pour 4 personnes", "200 g", 4, "50", "200 ÷ 4 = 50 g par personne", "1");
+
 const pieges = [
-  "Croire qu'ajouter le même nombre suffit : c'est multiplier, pas additionner.",
-  "Oublier de revenir à l'unité avant de multiplier.",
-  "Mélanger les deux lignes du tableau (quantité et prix).",
+  "Ajouter au lieu de multiplier. + 3 à chaque fois, ce n'est pas proportionnel.",
+  "Multiplier trop vite. Je cherche d'abord la valeur pour 1.",
+  "Mélanger les deux lignes. Les objets en haut, les prix en bas.",
 ];
 
 const aRetenir = [
-  "Proportionnel = on multiplie toujours par le même nombre (le coefficient).",
-  "Le passage par l'unité est la méthode la plus simple en 6e.",
-  "Une addition identique ne prouve pas une proportionnalité.",
+  "Proportionnel : on multiplie toujours par le même nombre.",
+  "Ce nombre s'appelle le coefficient.",
+  "Je reviens à 1, puis je multiplie.",
 ];
 
 export const ficheProportionnalite6e: FicheCoursData = {
@@ -200,124 +265,124 @@ export const ficheProportionnalite6e: FicheCoursData = {
   notion: "prop-proportionnalite",
   titre: "La proportionnalité",
   accroche:
-    "Une situation est proportionnelle quand on passe d'une grandeur à l'autre en multipliant toujours par le même nombre : le coefficient.",
+    "Deux fois plus de cahiers, deux fois plus cher : c'est la proportionnalité. On apprend à la reconnaître et à s'en servir.",
   identite: [
     { label: "Mots clés", valeur: "Coefficient, tableau, unité" },
     { label: "Le secret", valeur: "Toujours × le même nombre" },
-    { label: "Méthode reine", valeur: "Le passage par l'unité" },
+    { label: "Méthode reine", valeur: "Revenir à 1" },
   ],
   definition: {
     texte:
-      "Deux grandeurs sont proportionnelles quand on passe des valeurs de l'une à celles de l'autre en multipliant toujours par le même nombre. Ce nombre s'appelle le coefficient de proportionnalité.",
+      "Deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre. Ce nombre s'appelle le coefficient. Il fait passer d'une ligne du tableau à l'autre.",
   },
   figure: {
-    schema: tableauProp(
-      ["Cahiers", "Prix (€)"],
-      [
-        ["1", "3", "5"],
-        ["2", "6", "10"],
-      ],
-      [
-        { row: 0, col: 0 },
-        { row: 1, col: 0 },
-      ]
-    ),
-    legende: "D'une ligne à l'autre, on multiplie toujours par 2 : le coefficient.",
+    schema: tableauCahiers,
+    legende: "D'une ligne à l'autre, toujours × 2 : le coefficient est 2.",
   },
   proprietes: [
     {
-      titre: "Le coefficient",
-      micros: ["prop_coeff"],
-      texte: "On passe d'une ligne à l'autre en multipliant par le même nombre (ici × 2).",
-      schema: leCoefficient,
-    },
-    {
       titre: "Reconnaître",
       micros: ["prop_reconnaitre"],
-      texte: "Si une grandeur double, l'autre double ; si elle triple, l'autre triple.",
+      texte: "Si une grandeur double, l'autre double aussi. Ajouter le même nombre ne suffit pas.",
       schema: proportionnelOuPas,
     },
     {
-      titre: "Passer par l'unité",
+      titre: "Le coefficient",
+      micros: ["prop_coeff"],
+      texte: "Je divise un prix par sa quantité : 6 ÷ 2 = 3. Le coefficient est 3 partout.",
+      schema: leCoefficient,
+    },
+    {
+      titre: "Revenir à 1",
       micros: ["prop_unite"],
-      texte: "On cherche la valeur pour 1, puis on multiplie par la quantité voulue.",
+      texte: "Je cherche d'abord la valeur pour 1. 5 objets pour 15 € : 1 objet coûte 3 €.",
       schema: leToutEnCinqParts,
+    },
+    {
+      titre: "Multiplier une colonne",
+      micros: ["prop_table"],
+      texte: "Si une quantité est multipliée par 3, l'autre aussi. 6 potions coûtent 3 fois plus que 2.",
+      schema: potions,
     },
   ],
   reel: {
     texte:
-      "La proportionnalité est partout : recettes, échelles de cartes, prix au kilo, vitesse, mélanges (sirop, peinture), conversions.",
+      "Une recette pour 6 au lieu de 4 : toutes les quantités changent. Le prix des pommes dépend de leur masse. Un sirop se mélange toujours avec la même dose d'eau. Sur une carte, les distances suivent les vraies.",
   },
   historique: {
     texte:
-      "On utilise les proportions depuis l'Antiquité : Égyptiens et Grecs s'en servaient pour construire et commercer. La fameuse « règle de trois » est enseignée depuis des siècles.",
+      "Les proportions servent depuis l'Antiquité. Les marchands s'en servaient pour fixer leurs prix. Leur méthode s'appelle la « règle de trois ». On l'enseigne depuis des siècles.",
   },
   formule: {
-    contexte: "Tableau de proportionnalité",
-    expression: "valeur d'arrivée = coefficient × valeur de départ",
-    legende: "1 cahier = 2 € (coefficient 2), donc 3 cahiers = 6 € et 5 cahiers = 10 €.",
-    schema: tableauProp(
-      ["Cahiers", "Prix (€)"],
-      [
-        ["3", "5"],
-        ["6", "10"],
-      ]
-    ),
+    contexte: "Avec le coefficient",
+    expression: "prix = coefficient × quantité",
+    legende: "1 cahier coûte 2 €. Donc 5 cahiers coûtent 2 × 5 = 10 €.",
+    schema: cinqCahiers,
   },
   methode: [
-    { titre: "Je lis", texte: "Les deux grandeurs : objets et prix, personnes et masse, temps et distance…" , schema: lesDeuxGrandeurs , micros: ["prop_reconnaitre"] },
-    { titre: "Je reviens à 1", texte: "Je cherche la valeur pour 1 unité (une division)." , schema: laColonneDeLUnite , micros: ["prop_unite"] },
-    { titre: "Je multiplie", texte: "Je multiplie cette valeur par la quantité demandée." , schema: septPartsRecollees , micros: ["prop_direct"] },
+    {
+      titre: "Je nomme les deux grandeurs",
+      micros: ["prop_reconnaitre"],
+      texte: "Je cherche ce qui change : des objets et un prix, un temps et une distance.",
+      schema: lesDeuxGrandeurs,
+    },
+    {
+      titre: "Je reviens à 1",
+      micros: ["prop_unite"],
+      texte: "Je divise pour trouver la valeur d'un seul. 4 objets pour 12 € : 12 ÷ 4 = 3 €.",
+      schema: laColonneDeLUnite,
+    },
+    {
+      titre: "Je multiplie",
+      micros: ["prop_direct"],
+      texte: "Je multiplie la valeur d'un seul par la quantité voulue. 7 objets : 7 × 3 = 21 €.",
+      schema: septPartsRecollees,
+    },
   ],
   usages: [
-    { titre: "Reconnaître", detail: "On double une quantité → l'autre double aussi." , micros: ["prop_reconnaitre"] },
-    { titre: "Revenir à l'unité", detail: "Valeur pour 1, puis × la quantité : 1 cahier = 2 €, 5 cahiers = 10 €." , micros: ["prop_unite"] },
-    { titre: "Compléter un tableau", detail: "On trouve la case « ? » avec le coefficient ou l'unité." , micros: ["prop_table"] },
+    {
+      titre: "Pas toujours proportionnel",
+      micros: ["prop_reconnaitre"],
+      detail: "L'âge et la taille ne sont pas proportionnels. À 20 ans, on ne mesure pas le double de ses 10 ans.",
+      schema: ageTaille,
+    },
+    {
+      titre: "Dans un jeu vidéo",
+      micros: ["prop_table"],
+      detail: "4 coffres coûtent 12 pièces. 8 coffres, c'est le double : 24 pièces.",
+      schema: coffres,
+    },
+    {
+      titre: "Pour une équipe",
+      micros: ["prop_direct"],
+      detail: "10 maillots coûtent 50 €. 5 maillots, c'est la moitié : 25 €.",
+      schema: maillots,
+    },
   ],
   exemples: [
     {
       titre: "Reconnaître",
       micros: ["prop_reconnaitre"],
-      donnees: "1 cahier → 2 €, 2 cahiers → 4 €, 3 cahiers → 6 €.",
-      question: "Est-ce proportionnel ?",
-      schema: tableauProp(
-        ["Cahiers", "Prix (€)"],
-        [
-          ["1", "2", "3"],
-          ["2", "4", "6"],
-        ]
-      ),
-      solution: "On multiplie toujours par 2 d'une ligne à l'autre : oui, c'est proportionnel.",
+      donnees: "2 billets coûtent 6 €. 4 billets coûtent 11 €.",
+      question: "Le prix est-il proportionnel au nombre de billets ?",
+      schema: billets,
+      solution: "Les billets passent de 2 à 4 : c'est le double. Le double de 6 €, c'est 12 €. Or on paie 11 €. Ce n'est pas proportionnel.",
     },
     {
       titre: "Compléter un tableau",
-      micros: ["prop_table"],
+      micros: ["prop_table", "prop_unite"],
       donnees: "3 cahiers coûtent 6 €.",
       question: "Combien coûtent 5 cahiers ?",
-      schema: tableauProp(
-        ["Cahiers", "Prix (€)"],
-        [
-          ["3", "5"],
-          ["6", "?"],
-        ],
-        [{ row: 1, col: 1 }]
-      ),
-      solution: "1 cahier = 6 ÷ 3 = 2 €. Donc 5 cahiers = 5 × 2 = 10 €.",
+      schema: cahiersACompleter,
+      solution: "1 cahier coûte 6 ÷ 3 = 2 €. 5 cahiers coûtent 5 × 2 = 10 €.",
     },
     {
-      titre: "Recette (passage par l'unité)",
-      micros: ["prop_unite", "prop_direct"],
-      donnees: "Pour 4 personnes, il faut 200 g de riz.",
-      question: "Combien pour 6 personnes ?",
-      schema: tableauProp(
-        ["Personnes", "Riz (g)"],
-        [
-          ["4", "6"],
-          ["200", "?"],
-        ],
-        [{ row: 1, col: 1 }]
-      ),
-      solution: "1 personne = 200 ÷ 4 = 50 g. Donc 6 personnes = 6 × 50 = 300 g.",
+      titre: "Une recette",
+      micros: ["prop_unite", "prop_direct", "prop_defi"],
+      donnees: "Pour 4 personnes, il faut 200 g de farine.",
+      question: "Combien de farine pour 6 personnes ?",
+      schema: farine,
+      solution: "Pour 1 personne : 200 ÷ 4 = 50 g. Pour 6 personnes : 6 × 50 = 300 g. Il faut 300 g de farine.",
     },
   ],
   pieges,
@@ -325,130 +390,73 @@ export const ficheProportionnalite6e: FicheCoursData = {
   entrainement: [
     {
       question: "2 stylos coûtent 4 €. Combien coûtent 7 stylos ?",
-      correction: "1 stylo = 4 ÷ 2 = 2 €, donc 7 stylos = 7 × 2 = 14 €.",
+      correction: "1 stylo coûte 4 ÷ 2 = 2 €. 7 stylos coûtent 7 × 2 = 14 €.",
+      micros: ["prop_unite", "prop_direct"],
     },
     {
       question: "5 tickets coûtent 15 €. Combien coûtent 3 tickets ?",
-      correction: "1 ticket = 15 ÷ 5 = 3 €, donc 3 tickets = 3 × 3 = 9 €.",
+      correction: "1 ticket coûte 15 ÷ 5 = 3 €. 3 tickets coûtent 3 × 3 = 9 €.",
+      micros: ["prop_unite"],
+    },
+    {
+      question: "3 objets coûtent 12 €. Quel est le coefficient ?",
+      correction: "12 ÷ 3 = 4. Le coefficient est 4 : un objet coûte 4 €.",
+      micros: ["prop_coeff"],
     },
     {
       question: "Pour 10 crêpes, il faut 250 g de farine. Combien pour 20 crêpes ?",
-      correction: "20 crêpes, c'est 2 × 10 crêpes, donc 2 × 250 = 500 g de farine.",
+      correction: "20 crêpes, c'est le double de 10. Il faut le double de farine : 500 g.",
+      micros: ["prop_table"],
     },
     {
-      question: "Un cycliste parcourt 12 km en 30 min à vitesse régulière. Quelle distance en 1 h ?",
-      correction: "1 h = 2 × 30 min, donc il parcourt 2 × 12 = 24 km.",
+      question: "Un cycliste roule toujours à la même vitesse. Il fait 12 km en 30 min. Combien en 1 h ?",
+      correction: "1 h, c'est 2 fois 30 min. Il roule 2 fois plus loin : 24 km.",
       micros: ["prop_defi"],
     },
   ],
+  tiMargo: {
+    objectif: "Toujours × le même nombre !",
+    definition: "Ce nombre magique, c'est le coefficient !",
+    methode: "D'abord la valeur d'un seul, ensuite je multiplie !",
+    pieges: "+ 3 à chaque fois, ce n'est pas proportionnel !",
+    retenir: "Je reviens à 1, puis je multiplie !",
+    exercice: "À toi ! Cherche le prix d'un stylo.",
+  },
   coachHref: "/coach-ia/maths?classe=6e",
 };
 
+// ⛔ Ce tableau n'est plus projeté (le mode classe est engendré par la fiche,
+// `slidesDepuisFiche`) : la page le passe encore, il reste court.
 export const slidesProportionnalite6e: ClasseSlide[] = [
   {
     titre: "Objectif du cours",
     badge: "Proportionnalité - 6e",
+    teinte: "objectif",
+    schema: avecMargo(tableauCahiers, "Toujours × le même nombre !", "joie"),
     section: {
       type: "objectif",
       phrase: "Reconnaître une situation proportionnelle",
-      sousPhrase: "On vérifie si les deux grandeurs changent toujours avec le même multiplicateur.",
-      encadre: {
-        titre: "La question",
-        texte: "Si je multiplie une ligne, est-ce que l'autre est multipliée pareil ?",
-      },
+      sousPhrase: "D'une ligne à l'autre, on multiplie toujours par le même nombre.",
     },
   },
   {
-    titre: "À quoi ça sert ?",
-    badge: "Utilité & histoire",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "info",
-        titre: "Au quotidien",
-        contenu: "Recettes, échelles de cartes, prix au kilo, vitesse, mélanges (sirop, peinture).",
-      },
-      droite: {
-        variante: "histoire",
-        titre: "Le savais-tu ?",
-        contenu: "On utilise les proportions depuis l'Antiquité. La « règle de trois » est enseignée depuis des siècles.",
-      },
-    },
-  },
-  {
-    titre: "Les 3 réflexes",
-    badge: "Méthode",
-    section: {
-      type: "cartes",
-      cartes: ficheProportionnalite6e.usages.map((u) => ({ titre: u.titre, texte: u.detail })),
-    },
-  },
-  {
-    titre: "La méthode au tableau",
-    badge: "Passage par l'unité",
-    section: {
-      type: "etapes",
-      etapes: ficheProportionnalite6e.methode.map((m) => m.texte),
-    },
-  },
-  {
-    titre: "Exemple guidé",
-    badge: "Prix de cahiers",
-    section: {
-      type: "exemple",
-      enonce: "3 cahiers coûtent 6 €.",
-      question: "Combien coûtent 5 cahiers ?",
-      correction: "1 cahier = 2 €, donc 5 cahiers = 5 × 2 = 10 €.",
-    },
-  },
-  {
-    titre: "Autre exemple",
-    badge: "Recette",
-    section: {
-      type: "exemple",
-      enonce: "Pour 4 personnes, il faut 200 g de riz.",
-      question: "Combien pour 6 personnes ?",
-      correction: "1 personne = 50 g, donc 6 personnes = 6 × 50 = 300 g.",
-    },
-  },
-  {
-    titre: "Pièges & à retenir",
+    titre: "Pièges à éviter",
     badge: "Vigilance",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "piege",
-        titre: "Pièges à éviter",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {pieges.map((piege) => (
-              <li key={piege}>• {piege}</li>
-            ))}
-          </ul>
-        ),
-      },
-      droite: {
-        variante: "ok",
-        titre: "À retenir",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {aRetenir.map((point) => (
-              <li key={point}>• {point}</li>
-            ))}
-          </ul>
-        ),
-      },
-    },
+    teinte: "piege",
+    schema: avecMargo(proportionnelOuPas, "+ 3 à chaque fois, ce n'est pas proportionnel !", "attention"),
+    section: { type: "etapes", etapes: pieges },
   },
   {
     titre: "À toi de jouer",
     badge: "Exercice flash",
+    teinte: "exercice",
+    schema: avecMargo(leToutEnCinqParts, "À toi ! Reviens d'abord à 1.", "joie"),
     section: {
       type: "exercice",
       enonce: "2 stylos coûtent 4 €.",
       question: "Combien coûtent 7 stylos ?",
       indice: "Cherche d'abord le prix d'un stylo.",
-      correction: "1 stylo = 2 €, donc 7 stylos = 14 €.",
+      correction: "1 stylo coûte 2 €. 7 stylos coûtent 14 €.",
     },
   },
 ];

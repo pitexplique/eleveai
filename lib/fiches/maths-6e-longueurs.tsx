@@ -1,103 +1,78 @@
 // ─── Fiche de cours : les longueurs (6e) ────────────────────────────────────────
 // Fiche « en blocs » alignée sur la banque du coach
-// lib/tutor-v4/questionBank/6e/maths/longueurs.bank.ts (notion aire_longueur).
+// lib/tutor-v4/questionBank/6e/maths/longueurs.bank.ts (notionId aire_longueur).
 //
-// Micro-compétences couvertes → blocs :
-// - aire_longueur_mesurer   → proprietes (choisir l'unité), usages (Mesurer), méthode, exemples
-// - aire_longueur_unite     → proprietes (les unités du mm au km), formule, aRetenir
-// - aire_longueur_convertir → proprietes (tableau de conversion), usages (Convertir), exemples, entrainement
-// - aire_longueur_comparer  → proprietes (comparer), usages (Comparer), entrainement
-// - aire_longueur_probleme  → methode, exemples, entrainement (couper, ajouter, partager)
-// - aire_longueur_defi      → pieges, entrainement (question de raisonnement)
+// ⭐ RÉÉCRITE LE 30/09/2026 POUR DES 6e QUI LISENT DIFFICILEMENT : phrases
+// courtes, une idée par phrase, un dessin sur CHAQUE bloc, Ti Margo au mode
+// classe. Les nombres sont ceux de la banque ; la feuille d'exercices
+// (lib/fiches-exercices/maths-6e-aire-longueur.tsx) n'en partage aucun.
+//
+// Micro-compétences 6/6 :
+// - aire_longueur_mesurer   → définition + figure (le trait de 8 cm), propriété
+//                             « Une unité pour chaque taille », méthode 1,
+//                             usage « Mesurer un objet » (7 cm)
+// - aire_longueur_unite     → propriété « Dix fois plus petit », formule,
+//                             à retenir
+// - aire_longueur_convertir → propriété « Convertir » (2 m = 200 cm), méthode 2
+//                             (4 km), exemple 1 (2,5 m), entraînement 1 et 2
+// - aire_longueur_comparer  → propriété « Comparer » (1,5 m et 140 cm), usage
+//                             « Choisir la plus longue » (3 km et 2 800 m),
+//                             exemple 3 (2 m ou 190 cm)
+// - aire_longueur_probleme  → méthode 3 (2 m et 30 cm), usage « Partager »
+//                             (4 m en 2), exemple 2 (le ruban), entraînement 3
+// - aire_longueur_defi      → exemple 4 (entre 1 m et 150 cm), entraînement 4 et 5
+//
+// ⛔ PLUS DE TABLEAU DE CONVERSION À SEPT COLONNES : dans une carte de 226 px,
+// huit colonnes s'écrasent, et la consigne est « trois colonnes courtes au
+// plus ». La conversion se MONTRE : un mètre en dix morceaux, 2 m posés sur une
+// droite en centimètres, la multiplication posée.
+// ⚠️ `schema_barre` écrit en 12 px sur la largeur du viewBox : cadre de 240
+// (12 × 226/240 = 11,3 px), jamais le défaut de 340 (8 px, mesuré).
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+import { slidesDepuisFiche } from "@/lib/fiches/slidesDepuisFiche";
 
-const pieges = [
-  "Comparer deux longueurs sans les mettre dans la même unité (2 m et 150 cm).",
-  "Se tromper de sens : on multiplie pour aller vers une unité plus petite, on divise pour aller vers une plus grande.",
-  "Choisir une unité pas adaptée : on ne mesure pas une ville en centimètres, ni un crayon en kilomètres.",
-];
+const BLEU = "#0ea5e9";
+const ORANGE = "#f59e0b";
+const VERT = "#16a34a";
+const ROUGE = "#dc2626";
+const GRIS = "#64748b";
 
-const aRetenir = [
-  "1 km = 1 000 m ; 1 m = 100 cm ; 1 cm = 10 mm.",
-  "Pour comparer deux longueurs, on les convertit d'abord dans la même unité.",
-  "D'une unité à sa voisine, on multiplie ou on divise par 10.",
-];
+type Pt = { value: number; label: string; color?: string };
 
-// Une règle graduée (canvas du coach) : le trait mesuré se lit sur les graduations.
-const regleMesure = (
+/** Une droite graduée plate, réglée une fois. */
+const droite = (min: number, max: number, pas: number, points: Pt[]) => (
   <CanvasRenderer
     figure={{
       kind: "number_line",
-      min: 0,
-      max: 12,
-      // ⚠️ MESURÉ LE 24/08 : à `step: 1`, treize nombres sur 320 px de viewBox
-      // rendaient 10,3 px sur un téléphone. Une graduation tous les 2 — les
-      // POINTS, eux, restent posés à la valeur exacte.
-      step: 2,
-      points: [
-        { value: 0, label: "0", color: "#64748b" },
-        { value: 8, label: "8 cm", color: "#0ea5e9" },
-      ],
+      min,
+      max,
+      step: pas,
+      points,
       display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true, showZero: true },
       size: { width: 260, height: 95 },
     }}
   />
 );
 
-// Le tableau de conversion du coach : chaque colonne vaut 10 fois sa voisine de droite.
-const tableUnites = (
+/** Deux barres côte à côte : la plus haute est la plus longue. */
+const barres = (a: { label: string; value: number }, b: { label: string; value: number }) => (
   <CanvasRenderer
     figure={{
-      kind: "tableau_donnees",
-      headers: ["km", "hm", "dam", "m", "dm", "cm", "mm"],
-      rows: [
-        { label: "1 m", values: ["", "", "", "1", "0", "0", ""] },
-        { label: "1 km", values: ["1", "0", "0", "0", "", "", ""] },
+      kind: "stat_graph",
+      graphType: "barres",
+      title: "En centimètres",
+      data: [
+        { label: a.label, value: a.value, color: VERT },
+        { label: b.label, value: b.value, color: ROUGE },
       ],
-      questionLabel: "1 m = 100 cm et 1 km = 1 000 m : on complète de zéros jusqu'à la colonne voulue.",
+      display: { showValues: true, showLabels: true, highlightIndex: 0 },
+      size: { width: 240, height: 170 },
     }}
   />
 );
-
-// Conversion 2,5 m → cm posée dans le tableau (m, dm, cm = 2, 5, 0 → 250).
-const tableDeuxCinq = (
-  <CanvasRenderer
-    figure={{
-      kind: "tableau_donnees",
-      headers: ["km", "hm", "dam", "m", "dm", "cm", "mm"],
-      rows: [{ label: "2,5 m", values: ["", "", "", "2", "5", "0", ""] }],
-      highlight: { cell: { row: 0, col: 5 } },
-      questionLabel: "On lit jusqu'à la colonne cm : 2,5 m = 250 cm.",
-    }}
-  />
-);
-
-// Le ruban coupé, en barre : 200 cm = 50 cm coupés + le reste cherché.
-const barreRuban = (
-  <CanvasRenderer
-    figure={{
-      kind: "schema_barre",
-      total: "200 cm",
-      parts: [
-        { label: "coupé", value: "50 cm", color: "#f59e0b" },
-        { label: "reste", unknown: true, color: "#0ea5e9" },
-      ],
-      questionLabel: "Le ruban fait 200 cm ; on en coupe 50 cm.",
-      display: { showTotal: true, showPartLabels: true, showValues: true, showQuestion: true },
-    }}
-  />
-);
-
-// ─── Les six dessins des blocs ────────────────────────────────────────────────
-// ⭐ LE TABLEAU DE CONVERSION SERT DÉJÀ DEUX FOIS, et il est la tentation de
-// cette fiche : tout y passerait. Il ne revient qu'une fois, sur l'étape de
-// méthode dont le geste EST de compter des colonnes. Ailleurs, on montre ce
-// qu'un tableau ne montre pas : à quoi sert chaque unité, ce que « dix fois plus
-// petit » veut dire en longueur, et pourquoi deux nombres ne se comparent pas
-// tant qu'ils ne sont pas dans la même unité (REGLES.md § 2 bis).
 
 /** Un dessin et sa phrase, sous lui. */
 const legende = (dessin: React.ReactNode, texte: string) => (
@@ -107,9 +82,16 @@ const legende = (dessin: React.ReactNode, texte: string) => (
   </div>
 );
 
-// CHOISIR L'UNITÉ, C'EST CHOISIR L'OBJET. Le tableau de conversion aligne sept
-// colonnes sans dire à quoi elles servent ; celui-ci associe chaque unité à une
-// chose qu'un élève de 6e a déjà tenue dans la main.
+// ─── Les dessins ──────────────────────────────────────────────────────────────
+
+// LA FIGURE : la règle. Une graduation tous les 2 (treize nombres rendaient
+// 10,3 px sur un téléphone, mesuré le 24/08) ; le point reste posé sur 8.
+const regleMesure = droite(0, 12, 2, [
+  { value: 0, label: "0", color: GRIS },
+  { value: 8, label: "8 cm", color: BLEU },
+]);
+
+// UNE UNITÉ POUR CHAQUE TAILLE : chaque unité, un objet tenu dans la main.
 const aQuoiSertChaqueUnite = (
   <CanvasRenderer
     figure={{
@@ -117,7 +99,7 @@ const aQuoiSertChaqueUnite = (
       title: "Quelle unité pour quoi ?",
       headers: ["Unité", "Pour mesurer"],
       rows: [
-        { values: ["mm", "l'épaisseur d'une pièce"] },
+        { values: ["mm", "une pièce (épaisseur)"] },
         { values: ["cm", "un crayon"] },
         { values: ["m", "une salle de classe"] },
         { values: ["km", "deux villes"] },
@@ -127,53 +109,55 @@ const aQuoiSertChaqueUnite = (
   />
 );
 
-// ⭐ « DIX FOIS PLUS PETIT », EN LONGUEUR. Le tableau fait glisser des chiffres
-// de colonne en colonne ; la barre montre ce que ce glissement VEUT DIRE — un
-// mètre, ce sont dix décimètres mis bout à bout.
+// DIX FOIS PLUS PETIT, EN LONGUEUR. Deux parts et pas dix : dix parts de 20 px
+// faisaient sortir les étiquettes du cadre (mesuré). Un dixième MONTRÉ contre
+// le reste dit la même chose, en lisible.
 const leMetreEnDixMorceaux = (
   <CanvasRenderer
     figure={{
       kind: "schema_barre",
-      // ⚠️ DEUX PARTS, PAS DIX. Première version : dix parts de 1 dm. Mesuré au
-      // rendu, chacune faisait 20 px de large et les étiquettes sortaient du
-      // cadre. Un dixième MONTRÉ contre le reste dit la même chose, en lisible.
       title: "1 dm dans 1 m",
       total: "1 m",
       parts: [
-        { label: "1 dm", value: "1", color: "#f59e0b" },
-        { label: "les 9 autres", value: "9", color: "#0ea5e9" },
+        { label: "1 dm", value: "1", color: ORANGE },
+        { label: "les 9 autres", value: "9", color: BLEU },
       ],
-      questionLabel: "1 dm, c'est un dixième du mètre",
-      // ⚠️ Largeur sous 245, hauteur à 190 (§ 2 quater).
+      questionLabel: "1 m = 10 dm = 100 cm",
       size: { width: 240, height: 190 },
     }}
   />
 );
 
-// ⭐ POURQUOI ON NE COMPARE PAS DIRECTEMENT. Sur une droite graduée en
-// centimètres, 150 et 140 se rangent tout seuls — mais il a fallu écrire 1,5 m
-// en centimètres AVANT de pouvoir les y poser. C'est tout l'objet de la
-// propriété, et aucun tableau ne le montre.
-const comparerDansLaMemeUnite = legende(
-  <CanvasRenderer
-    figure={{
-      kind: "number_line",
-      min: 100,
-      max: 200,
-      step: 25,
-      points: [
-        { value: 140, label: "140 cm", color: "#dc2626" },
-        { value: 150, label: "1,5 m", color: "#16a34a" },
-      ],
-      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true },
-      size: { width: 280, height: 95 },
-    }}
-  />,
-  "1,5 m vaut 150 cm : il dépasse 140 cm"
+// CONVERTIR : 2 m posés sur une droite graduée en centimètres. La longueur ne
+// bouge pas, seul le nombre change.
+const deuxMetresEnCm = legende(
+  droite(0, 300, 100, [
+    { value: 100, label: "1 m", color: VERT },
+    { value: 200, label: "2 m", color: BLEU },
+  ]),
+  "Graduée en cm : 2 m tombe sur 200."
 );
 
-// REPÉRER, C'EST VOIR QUE LES UNITÉS NE SONT PAS LES MÊMES. Le seul dessin de la
-// fiche où il n'y a rien à calculer : on constate le mélange, c'est tout.
+// COMPARER : 1,5 m écrit en cm, puis deux barres. On voit enfin qui dépasse.
+const unVirguleCinqContre140 = barres({ label: "1,5 m", value: 150 }, { label: "140 cm", value: 140 });
+
+// LA FORMULE : les trois égalités, une par ligne. Deux colonnes seulement.
+const lesEgalites = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      headers: ["J'ai", "C'est"],
+      rows: [
+        { values: ["1 km", "1 000 m"] },
+        { values: ["1 m", "100 cm"] },
+        { values: ["1 cm", "10 mm"] },
+      ],
+      highlight: { col: 1 },
+    }}
+  />
+);
+
+// MÉTHODE 1 : on constate le mélange d'unités, rien à calculer.
 const lesUnitesMelangees = (
   <CanvasRenderer
     figure={{
@@ -185,29 +169,23 @@ const lesUnitesMelangees = (
         { values: ["30 cm", "des centimètres"] },
       ],
       highlight: { col: 1 },
-      caption: "Deux unités différentes : on ne peut pas encore additionner.",
+      caption: "Deux unités : je ne calcule pas encore.",
     }}
   />
 );
 
-// LE TABLEAU, ET SEULEMENT ICI. Convertir, c'est compter des colonnes : c'est le
-// bloc dont le geste est exactement celui-là.
-const convertirEnColonnes = (
-  <CanvasRenderer
-    figure={{
-      kind: "tableau_donnees",
-      title: "2 m en centimètres",
-      headers: ["km", "hm", "dam", "m", "dm", "cm", "mm"],
-      rows: [{ label: "2 m", values: ["", "", "", "2", "0", "0", ""] }],
-      highlight: { cell: { row: 0, col: 5 } },
-      caption: "Deux colonnes à droite : 2 m = 200 cm.",
-    }}
-  />
+// MÉTHODE 2 : 4 km posés sur une droite graduée en mètres, un trait par km.
+// (Une multiplication posée 4 × 1 000 s'étirait en colonne d'un chiffre par
+// ligne dans une carte : rendu vérifié le 30/09.)
+const quatreKm = legende(
+  droite(0, 4000, 1000, [
+    { value: 1000, label: "1 km", color: VERT },
+    { value: 4000, label: "4 km", color: BLEU },
+  ]),
+  "Graduée en m : 4 km tombe sur 4 000."
 );
 
-// UNE FOIS TOUT EN CENTIMÈTRES, LE CALCUL EST UNE ADDITION ORDINAIRE. La barre
-// remet les deux longueurs bout à bout — et l'unité, elle, ne se calcule pas :
-// elle s'écrit dans la réponse.
+// MÉTHODE 3 : tout en cm, les deux longueurs bout à bout.
 const additionnerEnCentimetres = (
   <CanvasRenderer
     figure={{
@@ -215,14 +193,96 @@ const additionnerEnCentimetres = (
       title: "2 m et 30 cm",
       total: "230 cm",
       parts: [
-        { label: "2 m", value: "200", color: "#0ea5e9" },
-        { label: "30 cm", value: "30", color: "#f59e0b" },
+        { label: "2 m", value: "200", color: BLEU },
+        { label: "30 cm", value: "30", color: ORANGE },
       ],
       questionLabel: "200 + 30 = 230 cm",
       size: { width: 240, height: 190 },
     }}
   />
 );
+
+// USAGES
+const gommeSeptCm = droite(0, 10, 2, [{ value: 7, label: "7 cm", color: BLEU }]);
+
+const deuxBalades = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "Deux balades à vélo",
+      headers: ["Balade", "En mètres"],
+      rows: [
+        { values: ["A : 3 km", "3 000 m"] },
+        { values: ["B : 2 800 m", "2 800 m"] },
+      ],
+      highlight: { row: 0 },
+    }}
+  />
+);
+
+const rubanEnDeux = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      total: "4 m",
+      parts: [
+        { label: "1re part", value: "2 m", color: BLEU },
+        { label: "2e part", value: "2 m", color: ORANGE },
+      ],
+      questionLabel: "4 ÷ 2 = 2 m",
+      display: { showTotal: true, showPartLabels: true, showValues: true, showQuestion: true },
+      size: { width: 240, height: 190 },
+    }}
+  />
+);
+
+// EXEMPLES
+const cordeEnCm = droite(0, 300, 50, [{ value: 250, label: "2,5 m", color: BLEU }]);
+
+const barreRuban = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      total: "200 cm",
+      parts: [
+        { label: "coupé", value: "50 cm", color: ORANGE },
+        { label: "reste", unknown: true, color: BLEU },
+      ],
+      questionLabel: "2 m = 200 cm",
+      display: { showTotal: true, showPartLabels: true, showValues: true, showQuestion: true },
+      size: { width: 240, height: 190 },
+    }}
+  />
+);
+
+const deuxMetresContre190 = barres({ label: "2 m", value: 200 }, { label: "190 cm", value: 190 });
+
+const entreUnEtUnCinq = (
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min: 100,
+      max: 150,
+      step: 10,
+      intervalles: [{ de: 100, a: 150, deInclus: false, aInclus: false, color: ORANGE }],
+      points: [{ value: 120, label: "120 cm", color: BLEU }],
+      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true, showZero: false },
+      size: { width: 260, height: 95 },
+    }}
+  />
+);
+
+const pieges = [
+  "Comparer les nombres sans regarder l'unité. 150 cm, c'est moins que 2 m.",
+  "Se tromper de sens. Vers une unité plus petite, le nombre grandit.",
+  "Oublier l'unité dans la réponse. « 250 » tout seul ne veut rien dire.",
+];
+
+const aRetenir = [
+  "1 km = 1 000 m ; 1 m = 100 cm ; 1 cm = 10 mm.",
+  "Pour comparer, je mets d'abord tout dans la même unité.",
+  "Unité plus petite : le nombre grandit. Unité plus grande : il diminue.",
+];
 
 export const ficheLongueurs6e: FicheCoursData = {
   matiere: "maths",
@@ -231,109 +291,108 @@ export const ficheLongueurs6e: FicheCoursData = {
   notion: "aire-longueur",
   titre: "Les longueurs",
   accroche:
-    "Une longueur mesure la taille d'un objet ou une distance. En 6e, on apprend à choisir la bonne unité, à convertir d'une unité à l'autre et à comparer des longueurs.",
+    "Un crayon, un stade, la route de l'école : tout a une longueur. On apprend à la mesurer, à la convertir et à la comparer.",
   identite: [
-    { label: "Prérequis", valeur: "Multiplier et diviser par 10, 100, 1 000" },
-    { label: "Unités clés", valeur: "mm, cm, dm, m, km" },
-    { label: "Outil", valeur: "Règle graduée et tableau de conversion" },
+    { label: "Le mot clé", valeur: "L'unité : mm, cm, m, km" },
+    { label: "Le secret", valeur: "La même unité avant de comparer" },
+    { label: "Outil", valeur: "La règle graduée" },
   ],
   definition: {
     texte:
-      "Une longueur mesure une distance ou la taille d'un segment. On l'exprime toujours avec une unité : le mètre (m) est l'unité principale, avec ses multiples (km) et ses sous-multiples (dm, cm, mm).",
+      "Une longueur, c'est la taille d'un objet ou une distance. On la mesure avec une règle. On l'écrit toujours avec une unité.",
   },
   figure: {
     schema: regleMesure,
-    legende: "On mesure avec une règle graduée : ce trait s'arrête sur 8, il mesure donc 8 cm.",
+    legende: "Le trait part de 0 et s'arrête sur 8 : il mesure 8 cm.",
   },
   proprietes: [
     {
-      titre: "Les unités, du mm au km",
-      micros: ["aire_longueur_unite"],
-      texte:
-        "Du plus petit au plus grand : millimètre (mm), centimètre (cm), décimètre (dm), mètre (m), décamètre (dam), hectomètre (hm), kilomètre (km). On choisit l'unité adaptée : mm pour l'épaisseur d'une pièce, cm pour un crayon, m pour une salle, km pour la distance entre deux villes.",
+      titre: "Une unité pour chaque taille",
+      micros: ["aire_longueur_mesurer"],
+      texte: "Je choisis l'unité selon la taille de l'objet. Un crayon se mesure en cm, deux villes en km.",
       schema: aQuoiSertChaqueUnite,
     },
     {
-      titre: "Le tableau de conversion",
-      micros: ["aire_longueur_convertir"],
-      texte:
-        "Chaque unité vaut 10 fois l'unité juste plus petite. Pour convertir, on multiplie par 10 à chaque colonne vers la droite (unité plus petite), on divise par 10 à chaque colonne vers la gauche (unité plus grande). Exemple : 2 m = 200 cm et 300 cm = 3 m.",
+      titre: "Dix fois plus petit",
+      micros: ["aire_longueur_unite"],
+      texte: "Chaque unité vaut 10 fois la suivante. Donc 1 m = 10 dm = 100 cm.",
       schema: leMetreEnDixMorceaux,
     },
     {
-      titre: "Comparer des longueurs",
+      titre: "Convertir, c'est changer d'unité",
+      micros: ["aire_longueur_convertir"],
+      texte: "La longueur ne change pas. Seul le nombre change : 2 m = 200 cm.",
+      schema: deuxMetresEnCm,
+    },
+    {
+      titre: "Comparer dans la même unité",
       micros: ["aire_longueur_comparer"],
-      texte:
-        "On ne peut comparer deux longueurs que dans la même unité. On convertit d'abord, puis on compare les nombres. Exemple : 1,5 m = 150 cm, donc 1,5 m est plus grand que 140 cm.",
-      schema: comparerDansLaMemeUnite,
+      texte: "J'écris 1,5 m en cm : 150 cm. Et 150 cm, c'est plus que 140 cm.",
+      schema: unVirguleCinqContre140,
     },
   ],
   reel: {
     texte:
-      "Les longueurs sont partout : la taille sur le carnet de santé, la distance d'un trajet sur le GPS, les mesures d'un meuble avant de l'acheter, la longueur d'un terrain de sport. Savoir convertir évite les erreurs : une étagère de 80 cm ne rentre pas dans un espace de 0,5 m.",
+      "Ta taille est écrite dans ton carnet de santé. Un GPS donne les distances en km. Une étagère de 80 cm ne rentre pas dans 0,5 m. Savoir convertir évite l'erreur.",
   },
   historique: {
     texte:
-      "Avant, chaque région mesurait avec ses propres unités : le pied, le pouce, la toise... Impossible de se comprendre ! Pendant la Révolution française, en 1795, la France invente le mètre, une unité identique pour tous. Ce système métrique est aujourd'hui utilisé presque partout dans le monde.",
+      "Autrefois, on mesurait en pieds et en pouces. Chaque région avait les siens. En 1795, la France invente le mètre. Aujourd'hui, presque tout le monde l'utilise.",
   },
   formule: {
-    contexte: "Les conversions à connaître par cœur",
+    contexte: "Les égalités à connaître",
     expression: "1 km = 1 000 m ; 1 m = 100 cm ; 1 cm = 10 mm",
-    legende: "D'une unité à sa voisine, on multiplie ou on divise par 10.",
-    schema: tableUnites,
+    legende: "D'une unité à sa voisine : × 10 ou ÷ 10.",
+    schema: lesEgalites,
   },
   methode: [
     {
-      titre: "Repérer",
-      micros: ["aire_longueur_mesurer"],
-      texte:
-        "On lit les longueurs données dans l'énoncé et on regarde bien leurs unités. Sont-elles toutes les mêmes ?",
+      titre: "Je regarde les unités",
+      micros: ["aire_longueur_mesurer", "aire_longueur_comparer"],
+      texte: "Je lis chaque longueur avec son unité. Si les unités sont différentes, je ne calcule pas encore.",
       schema: lesUnitesMelangees,
     },
     {
-      titre: "Convertir",
+      titre: "Je convertis",
       micros: ["aire_longueur_convertir"],
-      texte:
-        "Si les unités sont différentes, on met tout dans la même unité : on multiplie vers une unité plus petite, on divise vers une plus grande.",
-      schema: convertirEnColonnes,
+      texte: "Vers une unité plus petite, je multiplie. 4 km = 4 × 1 000 = 4 000 m.",
+      schema: quatreKm,
     },
     {
-      titre: "Calculer",
+      titre: "Je calcule avec l'unité",
       micros: ["aire_longueur_probleme"],
-      texte:
-        "Une fois dans la même unité, on peut comparer, additionner ou soustraire les longueurs. On n'oublie pas l'unité dans la réponse.",
+      texte: "Tout est en cm : j'additionne. 200 + 30 = 230 cm, sans oublier l'unité.",
       schema: additionnerEnCentimetres,
     },
   ],
   usages: [
     {
-      titre: "Mesurer",
-      micros: ["aire_longueur_mesurer"],
-      detail:
-        "On choisit l'unité adaptée à la taille de l'objet : mm pour ce qui est très fin, cm pour les petits objets, m pour une pièce, km pour les grandes distances.",
+      titre: "Mesurer un objet",
+      micros: ["aire_longueur_mesurer", "aire_longueur_convertir"],
+      detail: "La gomme s'arrête sur le 7 de la règle. Elle mesure 7 cm, c'est-à-dire 70 mm.",
+      schema: gommeSeptCm,
     },
     {
-      titre: "Convertir",
-      micros: ["aire_longueur_convertir"],
-      detail:
-        "On change d'unité sans changer la longueur : 2 m = 200 cm, 4 km = 4 000 m, 70 mm = 7 cm. On multiplie ou on divise par 10, 100 ou 1 000.",
-    },
-    {
-      titre: "Comparer",
+      titre: "Choisir la plus longue",
       micros: ["aire_longueur_comparer"],
-      detail:
-        "On met toutes les longueurs dans la même unité, puis on compare les nombres. La plus grande longueur est celle qui a le plus grand nombre.",
+      detail: "Balade A : 3 km, soit 3 000 m. Elle est plus longue que 2 800 m.",
+      schema: deuxBalades,
+    },
+    {
+      titre: "Partager une longueur",
+      micros: ["aire_longueur_probleme"],
+      detail: "Un ruban de 4 m est coupé en 2 parts égales. Chaque part mesure 4 ÷ 2 = 2 m.",
+      schema: rubanEnDeux,
     },
   ],
   exemples: [
     {
-      titre: "Convertir des mètres en centimètres",
+      titre: "Des mètres en centimètres",
       micros: ["aire_longueur_convertir"],
       donnees: "Une corde mesure 2,5 m.",
-      question: "Quelle est sa longueur en cm ?",
-      schema: tableDeuxCinq,
-      solution:
-        "1 m = 100 cm, donc on multiplie par 100 : 2,5 × 100 = 250. La corde mesure 250 cm.",
+      question: "Combien mesure-t-elle en cm ?",
+      schema: cordeEnCm,
+      solution: "1 m = 100 cm. Je multiplie par 100. 2,5 × 100 = 250. La corde mesure 250 cm.",
     },
     {
       titre: "Un problème avec deux unités",
@@ -341,167 +400,65 @@ export const ficheLongueurs6e: FicheCoursData = {
       donnees: "Un ruban mesure 2 m. On en coupe 50 cm.",
       question: "Quelle longueur reste-t-il, en cm ?",
       schema: barreRuban,
-      solution:
-        "On met tout en cm : 2 m = 200 cm. Puis on soustrait : 200 − 50 = 150. Il reste 150 cm de ruban.",
+      solution: "Je mets tout en cm : 2 m = 200 cm. Je soustrais : 200 − 50 = 150. Il reste 150 cm.",
+    },
+    {
+      titre: "Le plus grand",
+      micros: ["aire_longueur_comparer"],
+      donnees: "Deux cordes : l'une mesure 2 m, l'autre 190 cm.",
+      question: "Laquelle est la plus longue ?",
+      schema: deuxMetresContre190,
+      solution: "J'écris 2 m en cm : 200 cm. 200 est plus grand que 190. La corde de 2 m est la plus longue.",
+    },
+    {
+      titre: "Le défi",
+      micros: ["aire_longueur_defi"],
+      donnees: "Un objet mesure plus de 1 m, mais moins de 150 cm.",
+      question: "Donne une longueur possible, en cm.",
+      schema: entreUnEtUnCinq,
+      solution: "1 m = 100 cm. L'objet mesure entre 100 cm et 150 cm. Par exemple 120 cm. Il y a d'autres réponses !",
     },
   ],
   pieges,
   aRetenir,
   entrainement: [
     {
-      question: "Convertis 4 km en mètres.",
-      correction:
-        "1 km = 1 000 m. On multiplie par 1 000 : 4 × 1 000 = 4 000. Donc 4 km = 4 000 m.",
+      question: "Convertis 3 km en mètres.",
+      correction: "1 km = 1 000 m. 3 × 1 000 = 3 000. Donc 3 km = 3 000 m.",
+      micros: ["aire_longueur_convertir"],
     },
     {
       question: "Convertis 150 cm en mètres.",
-      correction:
-        "100 cm = 1 m. On divise par 100 : 150 ÷ 100 = 1,5. Donc 150 cm = 1,5 m.",
+      correction: "100 cm = 1 m. Je divise par 100 : 150 ÷ 100 = 1,5. Donc 150 cm = 1,5 m.",
+      micros: ["aire_longueur_convertir"],
     },
     {
-      question: "Quel est le plus grand : 2 m ou 190 cm ?",
-      correction:
-        "On met tout en cm : 2 m = 200 cm. Comme 200 cm est plus grand que 190 cm, c'est 2 m le plus grand.",
+      question: "Une planche de 3 m est coupée en 3 parts égales. Combien mesure une part ?",
+      correction: "3 ÷ 3 = 1. Une part mesure 1 m.",
+      micros: ["aire_longueur_probleme"],
     },
     {
-      question:
-        "Une planche de 3 m est partagée en 3 parts égales. Puis explique pourquoi on ne mesure pas une ville en centimètres.",
-      correction:
-        "Chaque part mesure 3 ÷ 3 = 1 m. Pour la ville : une ville est très grande, le centimètre est une unité trop petite. On choisit toujours une unité adaptée à la taille de ce qu'on mesure : ici, le kilomètre.",
-      micros: ["aire_longueur_probleme", "aire_longueur_defi"],
+      question: "Pourquoi ne mesure-t-on pas une ville en centimètres ?",
+      correction: "Une ville est très grande. Le cm est bien trop petit. On choisit le km.",
+      micros: ["aire_longueur_defi", "aire_longueur_mesurer"],
+    },
+    {
+      question: "Léa marche 1 km, puis encore 250 m. Quelle distance a-t-elle faite, en mètres ?",
+      correction: "1 km = 1 000 m. 1 000 + 250 = 1 250. Léa a fait 1 250 m.",
+      micros: ["aire_longueur_defi", "aire_longueur_probleme"],
     },
   ],
+  tiMargo: {
+    objectif: "Chaque longueur a son unité !",
+    definition: "Une longueur sans unité ne veut rien dire !",
+    methode: "D'abord les unités, ensuite le calcul !",
+    pieges: "150 cm, c'est moins que 2 m !",
+    retenir: "1 m = 100 cm, à savoir par cœur !",
+    exercice: "À toi ! Mets tout dans la même unité.",
+  },
   coachHref: "/coach-ia/maths?classe=6e",
 };
 
-export const slidesLongueurs6e: ClasseSlide[] = [
-  {
-    titre: "Objectif du cours",
-    badge: "Longueurs - 6e",
-    section: {
-      type: "objectif",
-      phrase: "Mesurer, convertir et comparer des longueurs",
-      sousPhrase:
-        "Une longueur mesure une distance ou la taille d'un segment. Elle s'exprime toujours avec une unité.",
-      encadre: {
-        titre: "L'idée",
-        texte: "La bonne unité au bon moment : mm, cm, m ou km.",
-      },
-    },
-  },
-  {
-    titre: "À quoi ça sert ?",
-    badge: "Utilité & histoire",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "info",
-        titre: "Au quotidien",
-        contenu:
-          "Sa taille sur le carnet de santé, la distance d'un trajet, les mesures d'un meuble, la longueur d'un terrain de sport.",
-      },
-      droite: {
-        variante: "histoire",
-        titre: "Le savais-tu ?",
-        contenu:
-          "Avant 1795, chaque région mesurait en pieds, pouces ou toises. La Révolution française invente le mètre : une unité pour tous.",
-      },
-    },
-  },
-  {
-    titre: "Les unités",
-    badge: "Du mm au km",
-    section: {
-      type: "objectif",
-      phrase: "1 km = 1 000 m ; 1 m = 100 cm ; 1 cm = 10 mm",
-      sousPhrase:
-        "mm pour ce qui est très fin, cm pour un crayon, m pour une salle, km pour une grande distance.",
-      encadre: {
-        titre: "La règle",
-        texte: "D'une unité à sa voisine : × 10 ou ÷ 10.",
-      },
-    },
-  },
-  {
-    titre: "Les 3 réflexes",
-    badge: "Méthode",
-    section: {
-      type: "cartes",
-      cartes: ficheLongueurs6e.methode.map((m) => ({
-        titre: m.titre,
-        texte: m.texte,
-      })),
-    },
-  },
-  {
-    titre: "Selon ce que l'on cherche",
-    badge: "3 situations",
-    section: {
-      type: "cartes",
-      cartes: ficheLongueurs6e.usages.map((u) => ({
-        titre: u.titre,
-        texte: u.detail,
-      })),
-    },
-  },
-  {
-    titre: "Exemple guidé",
-    badge: "Convertir",
-    section: {
-      type: "exemple",
-      enonce: "Une corde mesure 2,5 m.",
-      question: "Quelle est sa longueur en cm ?",
-      correction: "1 m = 100 cm, donc 2,5 × 100 = 250. La corde mesure 250 cm.",
-    },
-  },
-  {
-    titre: "Autre exemple",
-    badge: "Problème",
-    section: {
-      type: "exemple",
-      enonce: "Un ruban mesure 2 m. On en coupe 50 cm.",
-      question: "Quelle longueur reste-t-il, en cm ?",
-      correction: "2 m = 200 cm, puis 200 − 50 = 150. Il reste 150 cm.",
-    },
-  },
-  {
-    titre: "Pièges & à retenir",
-    badge: "Vigilance",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "piege",
-        titre: "Pièges à éviter",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {pieges.map((piege) => (
-              <li key={piege}>• {piege}</li>
-            ))}
-          </ul>
-        ),
-      },
-      droite: {
-        variante: "ok",
-        titre: "À retenir",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {aRetenir.map((point) => (
-              <li key={point}>• {point}</li>
-            ))}
-          </ul>
-        ),
-      },
-    },
-  },
-  {
-    titre: "À toi de jouer",
-    badge: "Exercice flash",
-    section: {
-      type: "exercice",
-      enonce: "Quel est le plus grand : 1,5 m ou 140 cm ?",
-      question: "Compare les deux longueurs.",
-      indice: "Mets tout dans la même unité : 1 m = 100 cm.",
-      correction: "1,5 m = 150 cm. Comme 150 cm > 140 cm, c'est 1,5 m le plus grand.",
-    },
-  },
-];
+// Le mode classe est engendré depuis la fiche (slidesDepuisFiche) : ce tableau
+// n'est qu'un interrupteur, un tableau vide couperait le mode classe.
+export const slidesLongueurs6e: ClasseSlide[] = slidesDepuisFiche(ficheLongueurs6e);

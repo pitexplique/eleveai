@@ -1,36 +1,39 @@
 // ─── Fiche de cours : premiers pas en probabilités (6e) ────────────────────────
-// Fiche « en blocs » créée pour coller EXACTEMENT à la banque du coach
-// (lib/tutor-v4/questionBank/6e/maths/probabilites.bank.ts).
-// C'est la DÉCOUVERTE des probabilités en 6e : vocabulaire, issues, intuition.
-// PAS de calcul P = favorables/possibles (ça, c'est la fiche 4e « probabilites »).
+// Fiche « en blocs » alignée sur la banque du coach
+// (lib/tutor-v4/questionBank/6e/maths/probabilites.bank.ts, notionId
+// proba_experience). Réécrite le 30/09/2026 au standard des fiches de 6e
+// (étalon : `maths-6e-stat-enquete.tsx`) : phrases courtes, un dessin par bloc,
+// Ti Margo. C'est la DÉCOUVERTE : vocabulaire, issues, comparer, l'échelle de
+// 0 à 1. Pas de formule favorables ÷ possibles.
 //
-// Couverture des micro-compétences de la banque (pour la relecture du prof) :
-// - proba_vocabulaire → definition, proprietes (Certain, possible, impossible),
-//                       usages (carte 1), pieges (1), aRetenir (1), entrainement (Q1)
-// - proba_issue       → definition, proprietes (Lister toutes les issues),
-//                       methode (Lister), usages (carte 2), exemples (ex. 1),
-//                       entrainement (Q2), slides (exemple guidé)
-// - proba_comparer    → proprietes (Plus, moins ou aussi probable), methode (Comparer),
-//                       usages (carte 3), exemples (ex. 2), entrainement (Q3)
-// - proba_estimer     → proprietes (L'échelle de 0 à 1), reel, aRetenir (2),
-//                       entrainement (Q4), slides (exercice flash)
-// - proba_lire        → methode (Compter), usages (carte 2 et 3), exemples (ex. 2),
-//                       pieges (2)
-// - proba_defi        → pieges (3), aRetenir (3), entrainement (Q4), slide « pièges »
-
+// Micro-compétences 6/6 — mapping micro → blocs :
+//   proba_vocabulaire → propriété 1, usage 1, exemple 3, entraînement 1
+//   proba_issue       → définition + figure, propriété 2, méthode 1, exemple 1,
+//                       entraînement 2
+//   proba_comparer    → propriété 3, méthode 3, exemple 2, entraînement 3
+//   proba_estimer     → propriété 4, usage 2, entraînement 4
+//   proba_lire        → méthode 2, exemple 1
+//   proba_defi        → usage 3, entraînement 5
 //
-// ⭐ SEPT DESSINS, SEPT IMAGES DIFFÉRENTES (REGLES.md § 2 bis). Le piège de cette
-// fiche-là est le dé : il est parlant, donc il revenait partout, et sept dés
-// alignés font sept règles identiques aux yeux d'un élève de 6e. Chaque bloc
-// porte donc l'objet qui montre SA chose : un sac d'une seule couleur (le
-// certain et l'impossible se voient d'un coup), un tableau qui liste les issues
-// de trois expériences, une roue aux secteurs inégaux (le plus grand gagne), la
-// graduation de 0 à 1, une roue aux secteurs égaux (on fait le tour, on n'oublie
-// rien), une barre de 6 dont 3 sont favorables, et des barres qu'on compare.
+// ⭐ TOUS LES NOMBRES VIENNENT DE LA BANQUE : le dé (pair : 2, 4, 6 ; « plus
+// de 4 » : 5 et 6 ; « obtenir 7 », « obtenir 6 », « entre 1 et 6 »), le sac
+// 4 rouges / 2 bleues / 1 verte, 7 rouges et 1 bleue, 5 rouges et 2 bleues,
+// 3 + 4 + 2 = 9 billes, la probabilité « 1,5 », pair ou impair.
+// ⛔ La feuille d'exercices `lib/fiches-exercices/maths-6e-proba-experience.tsx`
+// (roue 1-3-5-7-9-11, sac 6 vertes / 3 jaunes / 1 noire, roue B-O-V, « au
+// moins 4 », Léo et ses deux couleurs, tombola…) : aucun exemple commun.
+//
+// ⭐ UN OBJET PAR BLOC (REGLES.md § 2 bis). Le piège de cette fiche est le dé :
+// il est parlant, donc il revenait partout. Chaque bloc porte l'objet qui montre
+// SA chose : le sac d'une seule couleur (certain et impossible d'un coup), le
+// tableau des issues, la roue inégale, la graduation de 0 à 1, la roue égale,
+// la barre des issues favorables, les barres qu'on compare, le sac presque tout
+// rouge, et la graduation qui déborde de 1.
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+import { avecMargo } from "@/components/fiches/TiMargoBulle";
 
 type Face = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -48,7 +51,9 @@ const legende = (dessin: React.ReactNode, texte: string) => (
   </div>
 );
 
-// Un dé à 6 faces (canvas du coach) : la définition « 6 issues » se voit.
+// ─── Les dessins ──────────────────────────────────────────────────────────────
+
+// LA FIGURE : un dé à 6 faces, donc 6 issues.
 const deSixFaces = (
   <CanvasRenderer
     figure={{
@@ -59,41 +64,7 @@ const deSixFaces = (
   />
 );
 
-// Le même dé, les nombres pairs surlignés (3 issues favorables).
-const dePairs = (
-  <CanvasRenderer
-    figure={{
-      kind: "probabilites",
-      variant: "de",
-      de: { faces: [1, 2, 3, 4, 5, 6] as Face[], surligne: [2, 4, 6] as Face[] },
-    }}
-  />
-);
-
-// Le sac de billes : 4 rouges, 2 bleues, 1 verte — on compte pour comparer.
-const sacBilles = (
-  <CanvasRenderer
-    figure={{
-      kind: "probabilites",
-      variant: "billes",
-      billes: {
-        elements: [
-          { couleur: "#dc2626" },
-          { couleur: "#dc2626" },
-          { couleur: "#dc2626" },
-          { couleur: "#dc2626" },
-          { couleur: "#2563eb" },
-          { couleur: "#2563eb" },
-          { couleur: "#16a34a" },
-        ],
-      },
-    }}
-  />
-);
-
-// LE CERTAIN ET L'IMPOSSIBLE DANS UN SEUL DESSIN. Un sac où toutes les billes
-// sont rouges dit les deux extrêmes d'un coup d'œil : tirer rouge arrive à tous
-// les coups, tirer bleu n'arrive jamais. Aucune liste de mots ne fait ça.
+// LE CERTAIN ET L'IMPOSSIBLE DANS UN SEUL DESSIN : un sac tout rouge.
 const sacUneSeuleCouleur = legende(
   <CanvasRenderer
     figure={{
@@ -110,29 +81,28 @@ const sacUneSeuleCouleur = legende(
       },
     }}
   />,
-  "tirer rouge : certain · tirer bleu : impossible"
+  "Tirer rouge : certain. Tirer bleu : impossible."
 );
 
-// LISTER, C'EST ÉCRIRE LA COLONNE ENTIÈRE. Trois expériences, leurs issues et
-// leur compte : ce que la propriété demande, c'est de ne rien laisser dehors.
+// LISTER, C'EST NE RIEN LAISSER DEHORS. Deux colonnes : l'expérience, ses issues.
 const tableauDesIssues = (
   <CanvasRenderer
     figure={{
       kind: "tableau_donnees",
-      headers: ["Expérience", "Ses issues", "Combien"],
+      headers: ["Expérience", "Nombre d'issues"],
       rows: [
-        { values: ["Un dé", "1 à 6", "6"] },
-        { values: ["Une pièce", "pile, face", "2"] },
-        { values: ["7 billes", "une par bille", "7"] },
+        { values: ["un dé", "6"] },
+        { values: ["une pièce", "2 : pile, face"] },
+        { values: ["un sac de 7 billes", "7"] },
       ],
-      highlight: { col: 2 },
+      highlight: { col: 1 },
     }}
   />
 );
 
-// LE PLUS GRAND SECTEUR GAGNE. C'est la roue de l'exercice 3 de la fiche —
-// A grand, B et C petits et de même taille : l'élève retrouve dans le cours
-// exactement la figure sur laquelle on l'interroge plus bas.
+// LE PLUS GRAND SECTEUR GAGNE. A grand, B et C petits et de même taille.
+// ⚠️ Sans `size`, le canvas prend 320 de large et ses lettres tombent à 9,8 px
+// dans une carte de 225. Cadre serré à 250 : 11,8 px (mesuré sur la page).
 const roueInegale = legende(
   <CanvasRenderer
     figure={{
@@ -145,17 +115,16 @@ const roueInegale = legende(
           { label: "C", poids: 1, couleur: VERT },
         ],
       },
-      // ⚠️ MESURÉ SUR LA PAGE, pas dans `apercu-canvas.mjs` qui l'avait laissée
-      // passer : sans `size`, le canvas prend 320 de large et ses lettres
-      // tombent à 9,8 px dans une carte de 225. Cadre serré à 250 : 11,8 px.
       size: { width: 250, height: 200 },
     }}
   />,
-  "A a le plus de chances · B et C sont aussi probables"
+  "A a le plus de chances. B et C, autant l'un que l'autre."
 );
 
-// LA GRADUATION DES CHANCES. Le seul dessin de la fiche qui porte des NOMBRES :
-// une chance se range entre 0 et 1, comme n'importe quel nombre sur une droite.
+// LA GRADUATION DES CHANCES, de 0 à 1.
+// ⛔ Les étiquettes « jamais » / « toujours » aux deux bouts sortaient du cadre
+// (« toujours » occupait [241 ; 303] dans 300, mesuré par apercu-canvas). Les
+// bouts restent donc sans mot, en couleur ; le mot va au milieu, où il tient.
 const echelleDesChances = legende(
   <CanvasRenderer
     figure={{
@@ -164,8 +133,9 @@ const echelleDesChances = legende(
       max: 1,
       step: 0.25,
       points: [
-        { value: 0, label: "jamais", color: ROUGE },
-        { value: 1, label: "toujours", color: VERT },
+        { value: 0, label: "", color: ROUGE },
+        { value: 0.5, label: "pile", color: JAUNE },
+        { value: 1, label: "", color: VERT },
       ],
       display: {
         showTicks: true,
@@ -174,15 +144,13 @@ const echelleDesChances = legende(
         showPointLabels: true,
         showZero: true,
       },
-      size: { width: 300, height: 95 },
+      size: { width: 260, height: 95 },
     }}
   />,
-  "0 = impossible · 1 = certain"
+  "0 impossible, 1 certain. Pile : une chance sur deux."
 );
 
-// FAIRE LE TOUR SANS RIEN OUBLIER. Un disque complet : quatre secteurs, quatre
-// issues, et il ne reste pas de place pour une cinquième. C'est le geste de la
-// méthode « Lister », là où le tableau de la propriété en donnait la trace.
+// FAIRE LE TOUR SANS RIEN OUBLIER : quatre secteurs, quatre issues.
 const roueEgale = legende(
   <CanvasRenderer
     figure={{
@@ -199,67 +167,168 @@ const roueEgale = legende(
       size: { width: 250, height: 200 },
     }}
   />,
-  "4 secteurs, donc 4 issues — et pas une de plus"
+  "4 secteurs : 4 issues, pas une de plus."
 );
 
-// COMPTER, C'EST DÉCOUPER LE TOUT. Les 6 issues du dé mises bout à bout, les 3
-// favorables d'un côté : le rapport se voit avant d'être écrit. Les nombres sont
-// ceux de l'exemple 1, pour que l'élève les reconnaisse.
-const barreDesIssues = (
+// COMPTER LES BONNES ISSUES : « plus de 4 » sur un dé, c'est 5 et 6.
+const barrePlusDe4 = (
   <CanvasRenderer
     figure={{
       kind: "schema_barre",
-      // ⚠️ Au-delà de ~28 caractères, le titre déborde du cadre en silence
-      // (mesuré sur la fiche des périmètres).
-      title: "Les 6 issues d'un dé",
+      // ⚠️ Au-delà de ~28 caractères, le titre déborde du cadre en silence.
+      title: "Obtenir plus de 4",
       total: "6 issues",
       parts: [
-        { label: "pairs", value: "3", color: VERT },
-        { label: "impairs", value: "3", color: GRIS },
+        { label: "5 ou 6", value: "2", color: VERT },
+        { label: "1 à 4", value: "4", color: GRIS },
       ],
-      questionLabel: "3 issues sur 6 sont paires",
-      // ⚠️ DEUX RÉGLAGES, DEUX MESURES DIFFÉRENTES. La HAUTEUR : 175 px collaient
-      // « pairs » / « impairs » à la phrase du bas (le canvas pose les étiquettes
-      // à 144 et la phrase à hauteur − 18) — piège déjà payé sur les périmètres.
-      // La LARGEUR : à 300, ces mêmes étiquettes tombent à 9 px dans une carte de
-      // 225 ; `SchemaBarreCanvas` écrit en 12 px, il faut donc rester sous 245.
+      questionLabel: "2 issues sur 6 font gagner",
+      // `SchemaBarreCanvas` écrit en 12 px : rester sous 245 de large, et 190 de
+      // haut pour ne pas coller les étiquettes à la phrase du bas.
       size: { width: 240, height: 190 },
     }}
   />
 );
 
-// COMPARER, C'EST METTRE CÔTE À CÔTE. Trois événements du même dé, la hauteur
-// donne le nombre d'issues qui les réalisent : la barre la plus haute est
-// l'événement le plus probable, sans un mot de plus.
+// COMPARER, C'EST METTRE CÔTE À CÔTE trois événements du même dé.
 const barresAComparer = (
   <CanvasRenderer
     figure={{
       kind: "stat_graph",
       graphType: "barres",
-      title: "Issues favorables",
+      title: "Issues qui font gagner",
       data: [
         { label: "« 6 »", value: 1, color: BLEU },
         { label: "pair", value: 3, color: VERT },
         { label: "plus de 2", value: 4, color: ROUGE },
       ],
       display: { showValues: true, showLabels: true, highlightIndex: 2 },
-      // `StatGraphCanvas` écrit en 12 px : au-delà de 245 de viewBox, une carte
-      // de 225 le descend sous le seuil.
       size: { width: 230, height: 190 },
     }}
   />
 );
 
+// LES BONS MOTS, en deux colonnes.
+const tableauDesMots = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "On lance un dé",
+      headers: ["Événement", "Le mot"],
+      rows: [
+        { values: ["obtenir 7", "impossible"] },
+        { values: ["obtenir 6", "possible"] },
+        { values: ["obtenir 1 à 6", "certain"] },
+      ],
+      highlight: { col: 1 },
+    }}
+  />
+);
+
+// PRESQUE TOUT ROUGE : tirer rouge est proche de 1 (banque : 7 rouges, 1 bleue).
+const sacPresqueRouge = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "probabilites",
+      variant: "billes",
+      billes: {
+        elements: [
+          { couleur: ROUGE },
+          { couleur: ROUGE },
+          { couleur: ROUGE },
+          { couleur: ROUGE },
+          { couleur: ROUGE },
+          { couleur: ROUGE },
+          { couleur: ROUGE },
+          { couleur: BLEU },
+        ],
+      },
+    }}
+  />,
+  "7 rouges, 1 bleue : tirer rouge est proche de 1."
+);
+
+// ⭐ 1,5 SORT DE L'ÉCHELLE. La graduation est prolongée exprès jusqu'à 2 : le
+// point rouge tombe AU-DELÀ du certain, là où aucune chance ne peut aller.
+const echelleDepassee = legende(
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min: 0,
+      max: 2,
+      step: 0.5,
+      points: [
+        { value: 1, label: "certain", color: VERT },
+        { value: 1.5, label: "?", color: ROUGE },
+      ],
+      display: {
+        showTicks: true,
+        showValues: true,
+        showPoints: true,
+        showPointLabels: true,
+        showZero: true,
+      },
+      size: { width: 260, height: 95 },
+    }}
+  />,
+  "Rien ne dépasse le certain : 1,5 est faux."
+);
+
+// L'EXEMPLE 1 : le dé, les faces paires allumées.
+const dePairs = (
+  <CanvasRenderer
+    figure={{
+      kind: "probabilites",
+      variant: "de",
+      de: { faces: [1, 2, 3, 4, 5, 6] as Face[], surligne: [2, 4, 6] as Face[] },
+    }}
+  />
+);
+
+// L'EXEMPLE 2 : le sac de billes, 4 rouges, 2 bleues, 1 verte.
+const sacBilles = (
+  <CanvasRenderer
+    figure={{
+      kind: "probabilites",
+      variant: "billes",
+      billes: {
+        elements: [
+          { couleur: ROUGE },
+          { couleur: ROUGE },
+          { couleur: ROUGE },
+          { couleur: ROUGE },
+          { couleur: BLEU },
+          { couleur: BLEU },
+          { couleur: VERT },
+        ],
+      },
+    }}
+  />
+);
+
+// L'EXEMPLE 3 : le 6 est-il impossible ? Une seule face allumée.
+const deSix = (
+  <CanvasRenderer
+    figure={{
+      kind: "probabilites",
+      variant: "de",
+      de: { faces: [1, 2, 3, 4, 5, 6] as Face[], surligne: [6] as Face[] },
+    }}
+  />
+);
+
+// ─── Les textes ───────────────────────────────────────────────────────────────
+
 const pieges = [
-  "Confondre « possible » et « certain » : obtenir 6 avec un dé est possible, mais pas certain, car les autres faces peuvent sortir.",
-  "Conclure sans compter : en regardant vite un sac de billes, on peut se tromper. On compte les billes de chaque couleur avant de décider.",
-  "Oublier une issue : si on liste 1, 2, 3, 4, 5 pour un dé, on oublie le 6 et tout le raisonnement devient faux.",
+  "Dire « certain » pour « possible ». Obtenir 6 est possible, pas certain.",
+  "Oublier une issue. Écrire 1, 2, 3, 4, 5 pour un dé, c'est oublier le 6.",
+  "Conclure sans compter. On compte les billes de chaque couleur avant de décider.",
 ];
 
 const aRetenir = [
-  "Quatre mots à distinguer : un événement impossible n'arrive jamais, un événement certain arrive toujours, entre les deux un événement est possible et plus ou moins probable.",
-  "Une chance se mesure sur une échelle de 0 (impossible) à 1 (certain) : plus l'événement a de chances, plus on s'approche de 1.",
-  "Avant de conclure, on liste toutes les issues et on les compte : c'est ce qui rend une réponse sûre plutôt qu'une simple impression.",
+  "Impossible : jamais. Certain : toujours. Possible : peut-être.",
+  "Une chance se range entre 0 (impossible) et 1 (certain).",
+  "On liste toutes les issues, puis on compte celles qui font gagner.",
 ];
 
 export const ficheProbabilites6e: FicheCoursData = {
@@ -269,281 +338,199 @@ export const ficheProbabilites6e: FicheCoursData = {
   notion: "proba-experience",
   titre: "Premiers pas en probabilités",
   accroche:
-    "Lancer un dé, tirer une bille, jouer à pile ou face : on ne sait pas à l'avance ce qui va sortir, c'est le hasard. En 6e, on apprend à en parler avec les bons mots (possible, certain, impossible), à repérer les résultats possibles et à dire quel événement a le plus de chances.",
+    "Un dé, une pièce, une bille tirée d'un sac : c'est le hasard qui décide. On apprend à en parler avec les bons mots.",
   identite: [
-    { label: "Prérequis", valeur: "Compter, comparer des petits nombres" },
-    { label: "Idée clé", valeur: "Certaines choses sont sûres, d'autres impossibles, la plupart sont plus ou moins probables" },
-    { label: "Vocabulaire", valeur: "Hasard, expérience aléatoire, issue, événement, probabilité" },
+    { label: "Les mots clés", valeur: "Issue, impossible, possible, certain" },
+    { label: "Le secret", valeur: "On liste toutes les issues, puis on compte" },
+    { label: "L'échelle", valeur: "De 0 (impossible) à 1 (certain)" },
   ],
   definition: {
     texte:
-      "Une expérience aléatoire est une expérience dont on ne connaît pas le résultat à l'avance : il dépend du hasard, comme lancer un dé ou tirer une bille. Chaque résultat possible s'appelle une issue. Lancer un dé à 6 faces a 6 issues : 1, 2, 3, 4, 5 ou 6.",
+      "Une expérience aléatoire, c'est quand le hasard décide du résultat. Chaque résultat possible s'appelle une issue. Un dé a 6 issues : 1, 2, 3, 4, 5 et 6.",
   },
   figure: {
     schema: deSixFaces,
-    legende: "Lancer ce dé est une expérience aléatoire : il a 6 issues possibles (1, 2, 3, 4, 5 ou 6).",
+    legende: "On lance le dé : 6 issues possibles.",
   },
   proprietes: [
     {
-      titre: "Certain, possible, impossible",
+      titre: "Impossible ou certain",
       micros: ["proba_vocabulaire"],
       texte:
-        "Un événement impossible ne peut jamais se produire (obtenir 7 avec un dé classique). Un événement certain se produit toujours (obtenir un nombre entre 1 et 6). Entre les deux, un événement possible peut arriver, sans être garanti (obtenir 6).",
+        "Un événement impossible n'arrive jamais. Un événement certain arrive toujours ; entre les deux, il est possible.",
       schema: sacUneSeuleCouleur,
     },
     {
-      titre: "Lister toutes les issues",
+      titre: "Toutes les issues",
       micros: ["proba_issue"],
       texte:
-        "Avant tout, on cherche tous les résultats possibles. Un dé a 6 issues, une pièce en a 2 (pile ou face), un sac de billes en a autant que de billes. Si on en oublie une, la suite est faussée.",
+        "On écrit tous les résultats possibles, sans en oublier. Une pièce a 2 issues, un sac de 7 billes en a 7.",
       schema: tableauDesIssues,
     },
     {
-      titre: "Plus, moins ou aussi probable",
+      titre: "Le plus grand gagne",
       micros: ["proba_comparer"],
       texte:
-        "Un événement est d'autant plus probable qu'il a de résultats qui le réalisent. Sur un dé, « obtenir un nombre pair » (2, 4 ou 6) est plus probable qu'« obtenir 6 » tout seul. Deux événements sont aussi probables quand ils ont autant de chances chacun.",
+        "Sur une roue, le plus grand secteur a le plus de chances. Deux secteurs égaux ont autant de chances.",
       schema: roueInegale,
     },
     {
-      titre: "L'échelle de 0 à 1",
+      titre: "De 0 à 1",
       micros: ["proba_estimer"],
-      texte:
-        "On mesure une chance entre 0 et 1. 0, c'est impossible ; 1, c'est certain. Un événement qui a beaucoup de chances est proche de 1 ; un événement qui en a peu est proche de 0. Une chance n'est jamais plus grande que 1.",
+      texte: "On range une chance entre 0 et 1. 0, c'est impossible ; 1, c'est certain.",
       schema: echelleDesChances,
     },
   ],
   reel: {
     texte:
-      "Le hasard est partout : à pile ou face pour choisir qui commence, avec les dés d'un jeu de société, dans une tombola. La météo aussi en parle : « 80 % de risque de pluie », c'est proche de 1, il pleuvra sûrement ; « 5 % », c'est proche de 0, il fera sec. Savoir dire « probable » ou « peu probable » aide à décider.",
+      "On joue à pile ou face pour savoir qui commence. Les jeux de société lancent des dés. La météo dit « 80 % de risque de pluie » : c'est presque certain. Avec les bons mots, on décide mieux.",
   },
   historique: {
     texte:
-      "Les probabilités sont nées d'un jeu d'argent. En 1654, un joueur demande de l'aide à Blaise Pascal pour partager équitablement une mise quand une partie de dés s'arrête avant la fin. Pascal échange des lettres avec Pierre de Fermat, et ensemble ils posent les premières idées du calcul des chances. Une science entière est ainsi née d'une question de jeu.",
+      "En 1654, une partie de dés s'arrête avant la fin. Un joueur demande à Blaise Pascal comment partager l'argent. Pascal en parle par lettres avec Pierre de Fermat. De ce jeu naît le calcul des chances.",
   },
   methode: [
     {
-      titre: "Lister les issues",
+      titre: "Lister",
       micros: ["proba_issue"],
-      texte:
-        "On écrit tous les résultats possibles de l'expérience : les 6 faces d'un dé, les 2 côtés d'une pièce, les billes du sac. On vérifie qu'on n'en oublie aucun.",
+      texte: "On écrit toutes les issues. On vérifie qu'on n'en oublie aucune.",
       schema: roueEgale,
     },
     {
-      titre: "Compter",
+      titre: "Compter les bonnes",
       micros: ["proba_lire"],
       texte:
-        "On compte combien d'issues au total, puis combien réalisent l'événement qui nous intéresse (les issues favorables). Sur un dé, « nombre pair » a 3 issues favorables : 2, 4 et 6.",
-      schema: barreDesIssues,
+        "On compte les issues qui font gagner. « Plus de 4 » sur un dé : 5 et 6, donc 2 issues.",
+      schema: barrePlusDe4,
     },
     {
       titre: "Comparer",
       micros: ["proba_comparer"],
       texte:
-        "Pour dire quel événement est le plus probable, on compare le nombre d'issues favorables : le plus de chances gagne. On peut aussi situer une chance sur l'échelle de 0 à 1.",
+        "L'événement qui a le plus d'issues gagnantes a le plus de chances.",
       schema: barresAComparer,
     },
   ],
   usages: [
     {
-      titre: "Utiliser les bons mots",
+      titre: "Choisir le bon mot",
       micros: ["proba_vocabulaire"],
       detail:
-        "Choisir entre impossible, possible, probable et certain selon la situation : obtenir un nombre entre 1 et 6 avec un dé est certain ; obtenir 7 est impossible.",
+        "Obtenir 7 avec un dé est impossible. Obtenir 6 est possible, mais pas certain.",
+      schema: tableauDesMots,
     },
     {
-      titre: "Identifier les issues",
-      micros: ["proba_issue"],
+      titre: "Proche de 0 ou de 1 ?",
+      micros: ["proba_estimer"],
       detail:
-        "Repérer et compter tous les résultats possibles : combien de faces sur un dé, combien de secteurs sur une roue, combien de billes dans un sac.",
+        "Le sac a 7 billes rouges et 1 bleue. Tirer rouge est très probable : c'est proche de 1.",
+      schema: sacPresqueRouge,
     },
     {
-      titre: "Comparer et estimer",
-      micros: ["proba_comparer", "proba_estimer"],
+      titre: "Vérifier une chance",
+      micros: ["proba_defi"],
       detail:
-        "Dire quel événement a le plus de chances, ou situer une chance entre 0 (impossible) et 1 (certain) : « proche de 1 » quand c'est très probable.",
+        "Une chance ne dépasse jamais 1. Si on lit « 1,5 », il y a une erreur.",
+      schema: echelleDepassee,
     },
   ],
   exemples: [
     {
-      titre: "Compter les issues d'un dé",
+      titre: "Les faces paires",
       micros: ["proba_issue", "proba_lire"],
-      donnees: "On lance un dé classique à 6 faces.",
-      question: "Combien y a-t-il d'issues possibles ? Combien réalisent l'événement « obtenir un nombre pair » ?",
+      donnees: "On lance un dé à 6 faces.",
+      question: "Combien d'issues ? Combien sont paires ?",
       schema: dePairs,
       solution:
-        "Les issues possibles sont les faces du dé : 1, 2, 3, 4, 5 et 6, soit 6 issues. Parmi elles, les nombres pairs sont 2, 4 et 6 : 3 issues réalisent l'événement « obtenir un nombre pair ». Il y a donc 6 issues au total et 3 issues favorables.",
+        "Le dé a 6 faces : 6 issues. Les nombres pairs sont 2, 4 et 6. Donc 3 issues sur 6 sont paires.",
     },
     {
-      titre: "Comparer dans un sac de billes",
+      titre: "Le sac de billes",
       micros: ["proba_comparer"],
-      donnees: "Un sac contient 4 billes rouges, 2 billes bleues et 1 bille verte. On tire une bille au hasard.",
-      question: "Quelle couleur a le plus de chances d'être tirée ? Laquelle en a le moins ?",
+      donnees: "Le sac : 4 billes rouges, 2 bleues, 1 verte.",
+      question: "Quelle couleur a le plus de chances ? Et le moins ?",
       schema: sacBilles,
       solution:
-        "On compte les billes de chaque couleur : 4 rouges, 2 bleues, 1 verte. La couleur qui a le plus de billes est la plus probable : c'est le rouge, avec 4 billes. Celle qui en a le moins est la moins probable : c'est le vert, avec 1 seule bille. Tirer une bille rouge est donc plus probable que tirer une bille verte.",
+        "4 rouges, c'est le plus : le rouge a le plus de chances. 1 verte : le vert en a le moins.",
+    },
+    {
+      titre: "Le 6, impossible ?",
+      micros: ["proba_vocabulaire"],
+      donnees: "Un élève dit : « Obtenir 6 avec un dé, c'est impossible. »",
+      question: "A-t-il raison ?",
+      schema: deSix,
+      solution:
+        "Non. Le dé a une face 6 : le 6 peut sortir. C'est possible, mais pas certain.",
     },
   ],
   pieges,
   aRetenir,
   entrainement: [
     {
-      question: "Range ces trois événements du moins probable au plus probable pour un dé : « obtenir 6 », « obtenir un nombre entre 1 et 6 », « obtenir 7 ».",
-      correction:
-        "« Obtenir 7 » est impossible avec un dé classique : aucune issue ne le réalise, c'est le moins probable. « Obtenir 6 » est possible : une seule face sur six. « Obtenir un nombre entre 1 et 6 » est certain : toutes les faces le réalisent. Du moins au plus probable : obtenir 7 (impossible), obtenir 6 (possible), obtenir un nombre entre 1 et 6 (certain).",
+      question:
+        "Avec un dé, range du moins probable au plus probable : « obtenir 6 », « obtenir 1 à 6 », « obtenir 7 ».",
+      correction: "Obtenir 7 (impossible), puis obtenir 6 (possible), puis obtenir 1 à 6 (certain).",
+      micros: ["proba_vocabulaire"],
     },
     {
-      question: "Un sac contient 3 billes rouges, 4 billes bleues et 2 billes vertes. Combien d'issues possibles y a-t-il quand on tire une bille au hasard ?",
-      correction:
-        "Chaque bille est un résultat possible : le nombre d'issues est le nombre total de billes. On additionne : 3 + 4 + 2 = 9. Il y a donc 9 issues possibles.",
+      question:
+        "Un sac contient 3 billes rouges, 4 bleues et 2 vertes. On tire une bille. Combien d'issues ?",
+      correction: "Une issue par bille : 3 + 4 + 2 = 9 issues.",
+      micros: ["proba_issue"],
     },
     {
-      question: "Sur une roue, le secteur A est grand, les secteurs B et C sont petits et de même taille. Quelle lettre a le plus de chances ? B et C sont-elles aussi probables ?",
-      correction:
-        "Sur une roue, plus un secteur est grand, plus l'issue est probable. Le secteur A est le plus grand : la lettre A a le plus de chances d'être obtenue. Les secteurs B et C ont la même taille : les issues B et C sont donc aussi probables l'une que l'autre.",
+      question: "Un sac contient 5 billes rouges et 2 bleues. Quelle couleur est la plus probable ?",
+      correction: "Le rouge : il y a plus de billes rouges (5) que de bleues (2).",
+      micros: ["proba_comparer"],
     },
     {
-      question: "Défi : un camarade dit « la probabilité de gagner est 1,5 ». Pourquoi est-ce impossible ? Que dois-tu toujours vérifier avant de le croire ?",
-      correction:
-        "Une chance se mesure entre 0 et 1 : 0 pour impossible, 1 pour certain. La valeur 1 correspond déjà à un événement certain, donc rien ne peut dépasser 1 : une probabilité de 1,5 n'a pas de sens. Avant de croire qu'un événement est « très probable », on ne se fie pas à une impression : on liste toutes les issues, on compte les issues favorables et on compare au total.",
+      question:
+        "Un sac contient 5 billes rouges et 5 bleues. Rouge et bleu ont-ils autant de chances ?",
+      correction: "Oui : il y a autant de rouges que de bleues.",
+      micros: ["proba_estimer"],
+    },
+    {
+      question: "Défi : avec un dé, a-t-on plus de chances d'obtenir un nombre pair ou impair ?",
+      correction: "Pair : 2, 4, 6. Impair : 1, 3, 5. 3 issues chacun : autant de chances.",
       micros: ["proba_defi"],
     },
   ],
+  tiMargo: {
+    objectif: "Le hasard, ça se raconte avec les bons mots !",
+    definition: "Une issue, c'est un résultat possible !",
+    methode: "Je liste tout, puis je compte !",
+    pieges: "Possible, ce n'est pas certain !",
+    retenir: "De 0, jamais, à 1, toujours !",
+    exercice: "Compte les billes avant de répondre !",
+  },
   coachHref: "/coach-ia/maths?classe=6e",
 };
 
+// ⛔ Le mode classe est ENGENDRÉ depuis la fiche (`slidesDepuisFiche`) : ce
+// tableau reste exporté pour la page, mais il n'est pas projeté.
 export const slidesProbabilites6e: ClasseSlide[] = [
   {
     titre: "Objectif du cours",
     badge: "Probabilités - 6e",
+    teinte: "objectif",
+    schema: avecMargo(deSixFaces, "Le hasard, ça se raconte avec les bons mots !", "joie"),
     section: {
       type: "objectif",
       phrase: "Parler du hasard avec les bons mots",
-      sousPhrase:
-        "Lancer un dé, tirer une bille : on ne sait pas le résultat à l'avance. On apprend à dire si un événement est possible, certain ou impossible, et lequel a le plus de chances.",
-      encadre: {
-        titre: "L'idée",
-        texte: "Obtenir 7 avec un dé est impossible, obtenir un nombre entre 1 et 6 est certain, obtenir 6 est simplement possible.",
-      },
-    },
-  },
-  {
-    titre: "À quoi ça sert ?",
-    badge: "Utilité & histoire",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "info",
-        titre: "Au quotidien",
-        contenu:
-          "Pile ou face pour choisir, les dés d'un jeu, la météo : « 80 % de risque de pluie », c'est proche de certain ; « 5 % », c'est proche d'impossible.",
-      },
-      droite: {
-        variante: "histoire",
-        titre: "Le savais-tu ?",
-        contenu:
-          "En 1654, Blaise Pascal et Pierre de Fermat échangent des lettres pour partager équitablement une mise à un jeu de dés interrompu. Le calcul des probabilités est né de ce jeu.",
-      },
-    },
-  },
-  {
-    titre: "Le vocabulaire",
-    badge: "À connaître",
-    section: {
-      type: "objectif",
-      phrase: "Une expérience aléatoire, des issues, un événement",
-      sousPhrase:
-        "Une expérience aléatoire a un résultat qui dépend du hasard. Chaque résultat possible est une issue. Un dé a 6 issues, une pièce en a 2.",
-      encadre: {
-        titre: "Attention",
-        texte: "« Possible » et « certain », ce n'est pas pareil : obtenir 6 est possible, mais pas certain, car les autres faces peuvent sortir.",
-      },
-    },
-  },
-  {
-    titre: "Les 3 réflexes",
-    badge: "Méthode",
-    section: {
-      type: "cartes",
-      cartes: ficheProbabilites6e.methode.map((m) => ({
-        titre: m.titre,
-        texte: m.texte,
-      })),
-    },
-  },
-  {
-    titre: "Selon ce que l'on cherche",
-    badge: "3 gestes",
-    section: {
-      type: "cartes",
-      cartes: ficheProbabilites6e.usages.map((u) => ({
-        titre: u.titre,
-        texte: u.detail,
-      })),
-    },
-  },
-  {
-    titre: "Exemple guidé",
-    badge: "Compter les issues",
-    section: {
-      type: "exemple",
-      enonce: "On lance un dé classique à 6 faces.",
-      question: "Combien d'issues possibles ? Combien réalisent « obtenir un nombre pair » ?",
-      correction:
-        "Issues possibles : 1, 2, 3, 4, 5, 6, soit 6 issues. Nombres pairs : 2, 4 et 6, soit 3 issues favorables.",
-    },
-  },
-  {
-    titre: "Autre exemple",
-    badge: "Comparer",
-    section: {
-      type: "exemple",
-      enonce: "Un sac contient 4 billes rouges, 2 bleues et 1 verte.",
-      question: "Quelle couleur a le plus de chances ? Laquelle en a le moins ?",
-      correction:
-        "La plus présente est la plus probable : le rouge (4 billes). La moins présente est la moins probable : le vert (1 bille).",
-    },
-  },
-  {
-    titre: "Pièges & à retenir",
-    badge: "Vigilance",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "piege",
-        titre: "Pièges à éviter",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {pieges.map((piege) => (
-              <li key={piege}>• {piege}</li>
-            ))}
-          </ul>
-        ),
-      },
-      droite: {
-        variante: "ok",
-        titre: "À retenir",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {aRetenir.map((point) => (
-              <li key={point}>• {point}</li>
-            ))}
-          </ul>
-        ),
-      },
+      sousPhrase: "Impossible, possible, certain : et quel événement a le plus de chances ?",
     },
   },
   {
     titre: "À toi de jouer",
     badge: "Exercice flash",
+    teinte: "exercice",
+    schema: avecMargo(sacBilles, "Compte les billes avant de répondre !"),
     section: {
       type: "exercice",
-      enonce:
-        "Un camarade dit : « la probabilité de gagner est 1,5 ».",
-      question: "Pourquoi est-ce impossible ?",
-      indice: "Une chance se mesure entre 0 (impossible) et 1 (certain).",
-      correction:
-        "1 correspond déjà à un événement certain : rien ne peut dépasser 1. Une probabilité de 1,5 n'a pas de sens.",
+      enonce: "4 billes rouges, 2 bleues, 1 verte.",
+      question: "Quelle couleur a le plus de chances ?",
+      indice: "Compte les billes de chaque couleur.",
+      correction: "Le rouge : 4 billes, c'est le plus.",
     },
   },
 ];

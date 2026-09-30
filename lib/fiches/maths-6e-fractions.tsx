@@ -1,82 +1,48 @@
 // ─── Fiche de cours : les fractions (6e) ────────────────────────────────────────
-// Fiche « découverte » : lire, représenter, comparer une fraction, calculer la
-// fraction d'une quantité — PAS d'addition de fractions (fiche 5e). Alignée sur
-// la banque du coach lib/tutor-v4/questionBank/6e/maths/fractions.bank.ts
-// (notionId fraction_nombre).
-// Refaite au standard « montrer, pas raconter » (retour Frédéric 13/07) : les
-// fractions DESSINÉES par le canvas du coach (disque, barre, grille, comparaison)
-// plutôt que racontées. Propriétés = une ligne chacune.
+// Fiche « découverte » alignée sur la banque du coach
+// lib/tutor-v4/questionBank/6e/maths/fractions.bank.ts (notionId fraction_nombre).
+// Lire, dessiner, comparer une fraction, la placer, la voir dépasser 1.
+// ⛔ PAS de calcul de fractions : c'est la fiche `maths-6e-fraction-calcul.tsx`
+// (la micro fraction_quantite y est passée le 22/08). La part d'une quantité ne
+// revient ici que par le DÉFI (fraction_defi : les 12 biscuits, les billes).
 //
-// Micro-compétences couvertes :
-// - fraction_lire_ecrire  → definition, figure (disque 3/4), exemple « Lire »
-//                           (5/6, disque), usages 1, entraînement 1
-// - fraction_representer  → propriété « Parts égales », exemple « Représenter »
-//                           (3/4, grille), usages 2, piège 3, entraînement 2
-// - fraction_comparer     → propriété « Comparer », exemple « Comparer » (1/3 vs
-//                           1/5, barres), piège 2, entraînement 4
-// ⚠️ CET EN-TÊTE N'EST PLUS LA SOURCE : depuis le 25/08, chaque bloc porte son
-// champ `micros`, et `npm run verifier:micros` le vérifie contre la banque. Il
-// citait `fraction_quantite`, un identifiant de l'ANCIEN modèle de connaissances
-// (`lib/tutor-v4/knowledge/6e.maths.knowledge.json`, figé au 14/08 et lu par
-// `lib/tutor/`, le tuteur d'avant). La banque vive — celle que le coach utilise,
-// via `catalog.ts` → `buildKnowledge6eMaths()` → `microSkills.ts` — dit
-// `fraction_mixte`, `fraction_comparer` et `fraction_defi`. Un commentaire peut
-// vieillir sans que rien ne le signale ; un champ, non.
-// - fraction_decimal      → propriété « Écriture décimale », entraînement 4
-// - fraction_defi         → propriété « Fractions égales » (2/4 = 1/2), aRetenir 3,
-//                           entraînement 2 + slide « exercice flash »
+// ⭐ RÉÉCRITE LE 30/09/2026 AU STANDARD DES 6e QUI LISENT DIFFICILEMENT :
+// phrases courtes, une idée par phrase, un dessin sur CHAQUE bloc, Ti Margo en
+// mode classe (champ `tiMargo`). Les dessins justes de juin sont gardés.
+//
+// Micro-compétences 6/6 (le champ `micros` de chaque bloc fait foi) :
+// - fraction_lire_ecrire → définition + figure (disque 3/4), propriété 1 (2/5),
+//                          réflexe 1, usage 1 (gâteau 2/8), exemple 1 (5/6),
+//                          entraînement 1
+// - fraction_representer → propriété 2 (parts inégales), réflexe 2 (grille 4/6),
+//                          exemple 2 (grille 3/4), entraînement 2
+// - fraction_comparer    → propriété 3 (3/5 et 4/5), exemple 3 (1/3 et 1/5),
+//                          entraînement 4
+// - fraction_decimal     → propriété 4 (1/4 · 1/2 · 3/4 sur la droite), usage 3
+//                          (le tableau des quatre à connaître), entraînement 4
+// - fraction_defi        → propriété 5 (2/4 = 1/2), exemple 4 (2/3 de 15 billes),
+//                          entraînements 2 et 5 (1/3 de 12 biscuits)
+// - fraction_mixte       → propriété 6 (7/4), réflexe 3 (3/4 et 5/4 autour de 1),
+//                          usage 2 (5/4 · 3/2 · 7/4), entraînement 3 (8/5)
+// Tous les nombres sortent de la banque. ⛔ Aucun exemple commun avec la feuille
+// `lib/fiches-exercices/maths-6e-fraction-nombre.tsx` (elle évite les nôtres).
+//
+// ⛔ AUCUN LATEX : les fractions s'écrivent « 3/4 » partout. Le mode classe les
+// projette telles quelles, sans KaTeX.
+// ⚠️ TOUTES LES `size` SONT MESURÉES. `FractionCanvas` écrit en 13 px dans un
+// viewBox fixe : à 320 (son défaut), 9,1 px dans une carte ; à 250, 11,7 px.
+// `number_line` écrit en 14 : cadre de 260, jamais le défaut (320).
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
+import { avecMargo } from "@/components/fiches/TiMargoBulle";
 
-// Les fractions DESSINÉES par le moteur du coach (le même dessin que dans les
-// exercices) : disque, grille, barre, comparaison.
-const disque34 = (
-  <CanvasRenderer
-    figure={{ kind: "fraction", model: "circle", fraction: { numerator: 3, denominator: 4 } }}
-  />
-);
-const disque56 = (
-  <CanvasRenderer
-    figure={{ kind: "fraction", model: "circle", fraction: { numerator: 5, denominator: 6 } }}
-  />
-);
-const grille34 = (
-  <CanvasRenderer
-    figure={{ kind: "fraction", model: "grid", grid: { rows: 2, cols: 2, shaded: 3 } }}
-  />
-);
-const barre34 = (
-  <CanvasRenderer
-    figure={{ kind: "fraction", model: "bar", fraction: { numerator: 3, denominator: 4 } }}
-  />
-);
-const compare1315 = (
-  <CanvasRenderer
-    figure={{
-      kind: "fraction",
-      model: "compare",
-      fractions: [
-        { numerator: 1, denominator: 3 },
-        { numerator: 1, denominator: 5 },
-      ],
-    }}
-  />
-);
+const BLEU = "#2563eb";
+const VERT = "#16a34a";
+const ROUGE = "#dc2626";
 
-// ─── Les sept dessins des blocs ───────────────────────────────────────────────
-// ⭐ LE CANVAS `fraction` A QUATRE MODÈLES, ET LES QUATRE ÉTAIENT DÉJÀ PRIS
-// (disque, grille, barre, comparaison). Les répéter tels quels aurait donné sept
-// fois la même image (REGLES.md § 2 bis). Trois blocs sortent donc du canvas des
-// fractions — et c'est le catalogue qui l'impose : « `fraction` montre l'objet,
-// PAS l'opération ». D'où la droite graduée pour l'écriture décimale (une
-// fraction est un NOMBRE, il se place), le tableau pour décoder l'écriture, et
-// le schéma en barre pour « les 3/4 de 12 », qui est un calcul.
-//
-// ⚠️ TOUTES LES `size` SONT MESURÉES. `FractionCanvas` écrit ses étiquettes de
-// comparaison en 13 px dans un viewBox fixe : à 320 (son défaut), elles tombent
-// à 9,1 px dans une carte de 225. À 250, elles rendent 11,7.
+type Frac = { numerator: number; denominator: number; label?: string };
 
 /** Un dessin et sa phrase, sous lui. */
 const legende = (dessin: React.ReactNode, texte: string) => (
@@ -86,30 +52,54 @@ const legende = (dessin: React.ReactNode, texte: string) => (
   </div>
 );
 
-// LE HAUT ET LE BAS, SUR UNE BARRE. La formule montre déjà 3/4 en barre : ici
-// c'est 2/5, et la légende nomme ce que le dessin ne sait pas écrire.
-const barre25 = legende(
-  <CanvasRenderer
-    figure={{
-      kind: "fraction",
-      model: "bar",
-      fraction: { numerator: 2, denominator: 5 },
-      size: { width: 250, height: 200 },
-    }}
-  />,
-  "2 parts prises (en haut) sur 5 parts égales (en bas)"
+/** Une fraction du coach (disque, barre), cadre de 250. */
+const fraction = (model: "bar" | "circle", f: Frac, hauteur = 200) => (
+  <CanvasRenderer figure={{ kind: "fraction", model, fraction: f, size: { width: 250, height: hauteur } }} />
 );
 
-// ⭐ LE CONTRE-EXEMPLE, ET C'EST LE SEUL DE LA FICHE. `unequalParts` découpe la
-// barre en morceaux inégaux : on voit tout de suite qu'aucune fraction ne peut
-// s'écrire là-dessus. Une propriété qui dit « toujours » se montre en dessinant
-// le cas où c'est FAUX — aucune barre correcte ne fait ça.
-//
-// ⚠️ PAS DE LÉGENDE ICI, ET C'EST MESURÉ : le canvas écrit DÉJÀ « Attention :
-// les parts ne sont pas égales » sous la barre quand `unequalParts` est posé.
-// Une phrase de plus aurait fait trois avertissements pour une seule idée.
-// (Vu au rendu — la lecture du type ne le disait pas.)
-const partsInegales = (
+/** Deux barres l'une sous l'autre, même longueur : l'œil compare. */
+const comparer = (a: Frac, b: Frac) => (
+  <CanvasRenderer
+    figure={{ kind: "fraction", model: "compare", fractions: [a, b], size: { width: 250, height: 210 } }}
+  />
+);
+
+/** Une grille de carreaux égaux, `colories` en couleur. */
+const grille = (rows: number, cols: number, colories: number) => (
+  <CanvasRenderer
+    figure={{ kind: "fraction", model: "grid", grid: { rows, cols, shaded: colories }, size: { width: 250, height: 200 } }}
+  />
+);
+
+/** La droite graduée de la fiche : cadre plat, réglages fixés une fois. */
+const droite = (min: number, max: number, pas: number, points: { value: number; label: string; color: string }[]) => (
+  <CanvasRenderer
+    figure={{
+      kind: "number_line",
+      min,
+      max,
+      step: pas,
+      points,
+      display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true, showZero: true },
+      size: { width: 260, height: 90 },
+    }}
+  />
+);
+
+// ─── Les dessins ──────────────────────────────────────────────────────────────
+
+// LA FIGURE : le disque coupé en 4, 3 parts prises.
+const disque34 = fraction("circle", { numerator: 3, denominator: 4 });
+
+// PROPRIÉTÉ 1 : le haut et le bas, sur une barre (2/5 de la banque).
+const barre25 = legende(
+  fraction("bar", { numerator: 2, denominator: 5 }),
+  "2 parts prises sur 5 parts égales"
+);
+
+// PROPRIÉTÉ 2 : LE CONTRE-EXEMPLE. Le canvas écrit déjà « Attention : les parts
+// ne sont pas égales » sous la barre : pas de légende en plus.
+const partsInegalesDessin = (
   <CanvasRenderer
     figure={{
       kind: "fraction",
@@ -121,146 +111,126 @@ const partsInegales = (
   />
 );
 
-// COMPARER À MÊME DÉNOMINATEUR. L'exemple 3 traite l'autre cas (même numérateur,
-// 1/3 contre 1/5) : celui-ci prend 3/5 contre 4/5, où c'est le HAUT qui décide.
+// PROPRIÉTÉ 3 : même bas, c'est le haut qui décide.
 const compare3545 = legende(
-  <CanvasRenderer
-    figure={{
-      kind: "fraction",
-      model: "compare",
-      fractions: [
-        { numerator: 3, denominator: 5 },
-        { numerator: 4, denominator: 5 },
-      ],
-      size: { width: 250, height: 210 },
-    }}
-  />,
-  "même bas : c'est le haut qui décide — 4/5 > 3/5"
+  comparer({ numerator: 3, denominator: 5 }, { numerator: 4, denominator: 5 }),
+  "Même bas : 4/5 est plus grand que 3/5"
 );
 
-// UNE FRACTION EST UN NOMBRE, DONC ELLE SE PLACE. Le seul dessin de la fiche qui
-// ne découpe rien : 1/4, 1/2 et 3/4 posés entre 0 et 1, à l'endroit exact où on
-// lit 0,25 · 0,5 · 0,75.
+// PROPRIÉTÉ 4 : une fraction est un nombre, elle a sa place sur la droite.
 const fractionsSurLaDroite = legende(
-  <CanvasRenderer
-    figure={{
-      kind: "number_line",
-      min: 0,
-      max: 1,
-      step: 0.25,
-      points: [
-        { value: 0.25, label: "1/4", color: "#2563eb" },
-        { value: 0.5, label: "1/2", color: "#16a34a" },
-        { value: 0.75, label: "3/4", color: "#dc2626" },
-      ],
-      display: {
-        showTicks: true,
-        showValues: true,
-        showPoints: true,
-        showPointLabels: true,
-        showZero: true,
-      },
-      size: { width: 260, height: 95 },
-    }}
-  />,
+  droite(0, 1, 0.25, [
+    { value: 0.25, label: "1/4", color: BLEU },
+    { value: 0.5, label: "1/2", color: VERT },
+    { value: 0.75, label: "3/4", color: ROUGE },
+  ]),
   "1/4 = 0,25 · 1/2 = 0,5 · 3/4 = 0,75"
 );
 
-// ⭐ UNE FRACTION PEUT DÉPASSER 1, ET C'EST CE QUI SURPREND. Tous les autres
-// dessins de la fiche découpent UN objet, donc restent sous 1. Celui-ci pose la
-// fraction sur une droite qui va jusqu'à 3 : on voit 7/4 coincé entre 1 et 2, et
-// l'on comprend du même coup pourquoi il s'écrit aussi « 1 et 3/4 ».
-const septQuartsEncadre = legende(
-  <CanvasRenderer
-    figure={{
-      kind: "number_line",
-      min: 0,
-      max: 3,
-      step: 1,
-      points: [
-        { value: 1, label: "1", color: "#2563eb" },
-        { value: 1.75, label: "7/4", color: "#16a34a" },
-        { value: 2, label: "2", color: "#2563eb" },
-      ],
-      display: {
-        showTicks: true,
-        showValues: true,
-        showPoints: true,
-        showPointLabels: true,
-        showZero: true,
-      },
-      size: { width: 260, height: 95 },
-    }}
-  />,
-  "7/4 est entre 1 et 2 : c'est 1 entier et 3/4"
+// PROPRIÉTÉ 5 : deux écritures, la même moitié (défi de la banque : 2/4 = 1/2).
+const compare1224 = legende(
+  comparer({ numerator: 1, denominator: 2 }, { numerator: 2, denominator: 4 }),
+  "La même longueur : 2/4 = 1/2"
 );
 
-// DÉCODER L'ÉCRITURE, PAS LE GÂTEAU. Toutes les autres images de la fiche
-// découpent quelque chose ; celle-ci lit les deux nombres, l'un après l'autre.
+// PROPRIÉTÉ 6 : 7/4 dépasse 1, coincé entre 1 et 2.
+const septQuartsEncadre = legende(
+  droite(0, 3, 1, [
+    { value: 1, label: "1", color: BLEU },
+    { value: 1.75, label: "7/4", color: VERT },
+    { value: 2, label: "2", color: BLEU },
+  ]),
+  "7/4 est entre 1 et 2 : 1 entier et 3/4"
+);
+
+// RÉFLEXE 1 : décoder l'écriture, ligne par ligne. Deux colonnes, pas trois.
 const anatomieDeLEcriture = (
   <CanvasRenderer
     figure={{
       kind: "tableau_donnees",
       title: "Lire 3/4",
-      headers: ["Où", "Le nombre", "Ce que ça dit"],
+      headers: ["Le nombre", "Ce qu'il dit"],
       rows: [
-        { values: ["en haut", "3", "parts prises"] },
-        { values: ["en bas", "4", "parts du partage"] },
+        { values: ["4 en bas", "4 parts égales"] },
+        { values: ["3 en haut", "3 parts prises"] },
       ],
-      highlight: { col: 2 },
+      highlight: { col: 1 },
     }}
   />
 );
 
-// DESSINER, C'EST PARTAGER PUIS COLORIER. La grille de l'exemple 2 fait 2 × 2 ;
-// celle-ci fait 2 × 3, et ce sont les nombres de l'usage « Pour 4/6 ».
-const grille46 = legende(
-  <CanvasRenderer
-    figure={{
-      kind: "fraction",
-      model: "grid",
-      grid: { rows: 2, cols: 3, shaded: 4 },
-      size: { width: 250, height: 200 },
-    }}
-  />,
-  "6 parts égales, on en colorie 4"
+// RÉFLEXE 2 : couper puis colorier. 6 carreaux, 4 coloriés (4/6 de la banque).
+const grille46 = legende(grille(2, 3, 4), "6 parts égales, j'en colorie 4");
+
+// RÉFLEXE 3 : comparer à 1. 3/4 reste avant 1, 5/4 passe après.
+const autourDeUn = legende(
+  droite(0, 2, 0.5, [
+    { value: 0.75, label: "3/4", color: BLEU },
+    { value: 1.25, label: "5/4", color: ROUGE },
+  ]),
+  "3 < 4 : avant 1 · 5 > 4 : après 1"
 );
 
-// ⛔ CALCULER N'EST PAS DÉCOUPER (CATALOGUE.md : « `fraction` montre l'objet, pas
-// l'opération »). Les 3/4 de 12 : le tout vaut 12, une part vaut 3, on en prend
-// trois. Ce sont les nombres de la formule et de l'usage.
-const troisQuartsDeDouze = (
+// USAGE 1 : un gâteau en 8, 2 parts mangées (banque).
+const gateau28 = fraction("circle", { numerator: 2, denominator: 8 });
+
+// USAGE 2 : ranger 5/4, 3/2 et 1 + 3/4 (banque) : tous entre 1 et 2.
+const rangerEntreUnEtDeux = droite(1, 2, 0.25, [
+  { value: 1.25, label: "5/4", color: BLEU },
+  { value: 1.5, label: "3/2", color: VERT },
+  { value: 1.75, label: "7/4", color: ROUGE },
+]);
+
+// USAGE 3 : les quatre écritures décimales à connaître (banque).
+const tableDecimales = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      title: "À connaître par cœur",
+      headers: ["Fraction", "Décimal"],
+      rows: [
+        { values: ["1/2", "0,5"] },
+        { values: ["1/4", "0,25"] },
+        { values: ["3/4", "0,75"] },
+        { values: ["1/5", "0,2"] },
+      ],
+      highlight: { col: 1 },
+    }}
+  />
+);
+
+// EXEMPLES
+const disque56 = fraction("circle", { numerator: 5, denominator: 6 });
+const grille34 = grille(2, 2, 3);
+const compare1315 = comparer({ numerator: 1, denominator: 3 }, { numerator: 1, denominator: 5 });
+// Les 2/3 de 15 billes : le tout en 3 parts de 5, on en donne 2.
+const billes = (
   <CanvasRenderer
     figure={{
       kind: "schema_barre",
-      // ⚠️ Au-delà de ~28 caractères, le titre déborde du cadre, en silence.
-      title: "Les 3/4 de 12",
-      total: "12",
+      title: "15 billes en 3 parts",
+      total: "15",
       parts: [
-        { label: "prise", value: "3" },
-        { label: "prise", value: "3" },
-        { label: "prise", value: "3" },
-        { label: "reste", value: "3" },
+        { label: "donnée", value: "5" },
+        { label: "donnée", value: "5" },
+        { label: "gardée", value: "5" },
       ],
-      questionLabel: "12 ÷ 4 = 3, puis 3 × 3 = 9",
-      // ⚠️ La HAUTEUR à 190 décolle les étiquettes de la phrase du bas ; la
-      // LARGEUR doit rester sous 245, sinon ces étiquettes tombent sous 11 px
-      // dans une carte de 225 (`SchemaBarreCanvas` écrit en 12 px).
+      questionLabel: "15 ÷ 3 = 5, puis 2 × 5 = 10",
       size: { width: 240, height: 190 },
     }}
   />
 );
 
 const pieges = [
-  "Confondre numérateur (en haut) et dénominateur (en bas) : 3/4 n'est pas 4/3.",
-  "Croire que 1/5 dépasse 1/3 : plus on partage, plus les parts sont petites (1/3 > 1/5).",
-  "Écrire une fraction sans parts égales : sans parts égales, pas de fraction.",
+  "Mettre en haut les parts du partage. 3/4 n'est pas 4/3.",
+  "Croire que 1/5 est plus grand que 1/3. Plus on coupe, plus les parts sont petites.",
+  "Chercher 7/4 près de 7. Il est entre 1 et 2.",
 ];
 
 const aRetenir = [
-  "Numérateur (haut) = parts prises ; dénominateur (bas) = parts du partage.",
-  "Une fraction n'a de sens que si le tout est partagé en parts égales.",
-  "Deux fractions peuvent valoir la même quantité : 2/4 = 1/2.",
+  "En bas : les parts du partage. En haut : les parts prises.",
+  "Pas de parts égales, pas de fraction.",
+  "Le haut dépasse le bas : la fraction dépasse 1.",
 ];
 
 export const ficheFractions6e: FicheCoursData = {
@@ -270,93 +240,122 @@ export const ficheFractions6e: FicheCoursData = {
   notion: "fraction-nombre",
   titre: "Les fractions",
   accroche:
-    "Une fraction dit « une partie d'un tout » : 3/4 d'une pizza, la moitié d'un gâteau. On apprend à la lire, la dessiner, la comparer et calculer la fraction d'une quantité.",
+    "On partage un gâteau, une pizza ou une heure avec des fractions. On apprend à les lire, les dessiner et les comparer.",
   identite: [
-    { label: "Mots clés", valeur: "Numérateur (haut), dénominateur (bas)" },
-    { label: "Le secret", valeur: "Un tout partagé en parts égales" },
+    { label: "Mots clés", valeur: "Numérateur (en haut), dénominateur (en bas)" },
+    { label: "Le secret", valeur: "Des parts égales, toujours" },
     { label: "Outil", valeur: "Un dessin : disque, barre ou grille" },
   ],
   definition: {
     texte:
-      "Une fraction représente des parts d'un tout partagé en parts égales. Le numérateur (en haut) compte les parts prises ; le dénominateur (en bas) compte les parts du partage. 3/4 = 3 parts prises sur 4 parts égales.",
+      "Une fraction dit combien de parts on prend dans un tout. Le tout est coupé en parts égales. Le nombre du bas compte les parts, celui du haut les parts prises.",
   },
   figure: {
     schema: disque34,
-    legende: "3/4 : le tout partagé en 4 parts égales, 3 sont prises.",
+    legende: "3/4 : 4 parts égales, 3 sont prises.",
   },
   proprietes: [
     {
-      titre: "Numérateur et dénominateur",
+      titre: "En haut, en bas",
       micros: ["fraction_lire_ecrire"],
-      texte: "En haut, les parts prises ; en bas, le nombre total de parts égales.",
+      texte: "Le dénominateur, en bas, compte les parts du partage. Le numérateur, en haut, compte les parts prises.",
       schema: barre25,
     },
     {
       titre: "Toujours des parts égales",
       micros: ["fraction_representer"],
-      texte: "Sans parts égales, on ne peut pas écrire de fraction.",
-      schema: partsInegales,
+      texte: "Sans parts égales, pas de fraction. Je vérifie les parts avant d'écrire.",
+      schema: partsInegalesDessin,
     },
     {
       titre: "Comparer",
       micros: ["fraction_comparer"],
-      texte: "Même dénominateur → plus grand numérateur ; même numérateur → plus petit dénominateur.",
+      texte: "Même nombre en bas : le plus grand en haut gagne. 4/5 est plus grand que 3/5.",
       schema: compare3545,
     },
     {
-      titre: "Écriture décimale",
+      titre: "Une fraction est un nombre",
       micros: ["fraction_decimal"],
-      texte: "À connaître : 1/2 = 0,5 ; 1/4 = 0,25 ; 3/4 = 0,75.",
+      texte: "Une fraction a sa place sur la droite. 1/2 = 0,5 et 1/4 = 0,25.",
       schema: fractionsSurLaDroite,
     },
     {
-      titre: "Plus grand qu'un entier",
+      titre: "Deux fractions égales",
+      micros: ["fraction_defi"],
+      texte: "Deux fractions peuvent dire la même quantité. 2/4 et 1/2, c'est la même moitié.",
+      schema: compare1224,
+    },
+    {
+      titre: "Plus grand que 1",
       micros: ["fraction_mixte"],
-      texte:
-        "Une fraction peut dépasser 1 : 7/4 se place entre 1 et 2, et s'écrit aussi « 1 et 3/4 ».",
+      texte: "Quand le haut dépasse le bas, la fraction dépasse 1. 7/4, c'est 1 entier et 3/4.",
       schema: septQuartsEncadre,
     },
   ],
   reel: {
     texte:
-      "Les fractions sont partout : une pizza en 8 parts dont on mange 3 (3/8), 1/2 litre de lait dans une recette, « trois quarts d'heure » = 3/4 d'une heure = 45 min.",
+      "Au goûter, on partage un gâteau en parts égales. Une recette demande 1/2 litre de lait. Trois quarts d'heure, c'est 3/4 d'une heure. Au basket, un quart-temps dure 1/4 du match.",
   },
   historique: {
     texte:
-      "Vers 1550 av. J.-C., les Égyptiens partageaient déjà le pain avec des fractions comme 1/2 ou 1/3. Le mot « fraction » vient du latin fractio : « casser en morceaux ».",
-  },
-  formule: {
-    contexte: "Prendre une fraction d'une quantité",
-    expression: "3/4 de 12 = (12 ÷ 4) × 3 = 9",
-    legende: "On divise par le dénominateur (une part), puis on multiplie par le numérateur.",
-    schema: barre34,
+      "Il y a près de 4 000 ans, les Égyptiens utilisaient déjà des fractions. Ils écrivaient surtout des fractions avec 1 en haut, comme 1/2 ou 1/3. Le mot « fraction » vient du latin. Il veut dire « casser ».",
   },
   methode: [
-    { titre: "Je repère", texte: "Numérateur en haut (parts prises), dénominateur en bas (parts du partage)." , schema: anatomieDeLEcriture , micros: ["fraction_lire_ecrire"] },
-    { titre: "Je dessine", texte: "Autant de parts égales que le dénominateur, je colorie le numérateur." , schema: grille46 , micros: ["fraction_representer"] },
-    { titre: "Je calcule", texte: "Fraction d'une quantité : je divise par le bas, je multiplie par le haut." , schema: troisQuartsDeDouze },
+    {
+      titre: "Je lis le bas d'abord",
+      micros: ["fraction_lire_ecrire"],
+      texte: "Je compte toutes les parts : c'est le nombre du bas. Puis je compte les parts prises : c'est le haut.",
+      schema: anatomieDeLEcriture,
+    },
+    {
+      titre: "Je dessine",
+      micros: ["fraction_representer"],
+      texte: "Je coupe en autant de parts égales que le nombre du bas. Je colorie le nombre du haut.",
+      schema: grille46,
+    },
+    {
+      titre: "Je compare à 1",
+      micros: ["fraction_mixte"],
+      texte: "Le haut est plus petit que le bas : la fraction est avant 1. Le haut est plus grand : elle dépasse 1.",
+      schema: autourDeUn,
+    },
   ],
   usages: [
-    { titre: "Lire → écrire", detail: "3 parts prises sur 5 parts égales s'écrit 3/5." , micros: ["fraction_lire_ecrire"] },
-    { titre: "Représenter", detail: "Pour 4/6 : 6 parts égales, on en colorie 4." , micros: ["fraction_representer"] },
-    { titre: "Une quantité", detail: "Les 3/4 de 12 : (12 ÷ 4) × 3 = 9." },
+    {
+      titre: "Dire une part",
+      micros: ["fraction_lire_ecrire"],
+      detail: "Un gâteau est coupé en 8 parts égales. On en mange 2 : c'est 2/8 du gâteau.",
+      schema: gateau28,
+    },
+    {
+      titre: "Ranger des fractions",
+      micros: ["fraction_mixte"],
+      detail: "5/4, 3/2 et 7/4 sont entre 1 et 2. Je range ce qui dépasse 1 : 1/4, puis 1/2, puis 3/4.",
+      schema: rangerEntreUnEtDeux,
+    },
+    {
+      titre: "Écrire en décimal",
+      micros: ["fraction_decimal"],
+      detail: "Quatre fractions se connaissent par cœur. 1/5, c'est 0,2.",
+      schema: tableDecimales,
+    },
   ],
   exemples: [
     {
       titre: "Lire et écrire",
       micros: ["fraction_lire_ecrire"],
-      donnees: "Un gâteau est partagé en 6 parts égales, on en prend 5.",
-      question: "Quelle fraction a-t-on prise ?",
+      donnees: "Un gâteau est coupé en 6 parts égales. On en prend 5.",
+      question: "Quelle fraction du gâteau a-t-on prise ?",
       schema: disque56,
-      solution: "6 parts égales → dénominateur 6. 5 parts prises → numérateur 5. On a pris 5/6.",
+      solution: "Le gâteau a 6 parts égales : 6 en bas. On en prend 5 : 5 en haut. On a pris 5/6 du gâteau.",
     },
     {
-      titre: "Représenter",
+      titre: "Dessiner une fraction",
       micros: ["fraction_representer"],
-      donnees: "On veut représenter 3/4 d'une figure.",
-      question: "Combien de parts colorier, et sur combien ?",
+      donnees: "On veut colorier 3/4 d'un carré.",
+      question: "En combien de parts couper ? Combien colorier ?",
       schema: grille34,
-      solution: "Dénominateur 4 : la figure a 4 parts égales. Numérateur 3 : on en colorie 3.",
+      solution: "Le bas vaut 4 : je coupe le carré en 4 parts égales. Le haut vaut 3 : j'en colorie 3.",
     },
     {
       titre: "Comparer",
@@ -364,158 +363,89 @@ export const ficheFractions6e: FicheCoursData = {
       donnees: "On compare 1/3 et 1/5.",
       question: "Laquelle est la plus grande ?",
       schema: compare1315,
-      solution: "Même numérateur (1). Plus on partage, plus les parts sont petites : 1/3 > 1/5.",
+      solution: "En haut, c'est 1 des deux côtés. Un tiers est plus gros qu'un cinquième. Donc 1/3 est plus grand que 1/5.",
     },
     {
-      titre: "Fraction d'une quantité",
-      donnees: "Une boîte contient 15 billes, on en donne les 2/3.",
+      titre: "Une part de billes",
+      micros: ["fraction_defi"],
+      donnees: "Une boîte contient 15 billes. On en donne les 2/3.",
       question: "Combien de billes donne-t-on ?",
-      schema: (
-        <CanvasRenderer
-          figure={{ kind: "fraction", model: "bar", fraction: { numerator: 2, denominator: 3 } }}
-        />
-      ),
-      solution: "Une part : 15 ÷ 3 = 5. Puis 2 × 5 = 10. On donne 10 billes.",
+      schema: billes,
+      solution: "Je coupe 15 en 3 parts égales : 15 ÷ 3 = 5. J'en prends 2 : 2 × 5 = 10. On donne 10 billes.",
     },
   ],
   pieges,
   aRetenir,
   entrainement: [
     {
-      question: "Une pizza est partagée en 8 parts égales, tu en manges 3. Quelle fraction ?",
-      correction: "8 parts égales → dénominateur 8. 3 parts mangées → numérateur 3. Tu as mangé 3/8.",
+      question: "Une pizza est coupée en 8 parts égales. Tu en manges 3. Quelle fraction as-tu mangée ?",
+      correction: "8 parts égales : 8 en bas. 3 parts mangées : 3 en haut. Tu as mangé 3/8.",
       micros: ["fraction_lire_ecrire"],
     },
     {
-      question: "Combien de parts colorier pour 2/4 d'une figure en 4 parts ? Quelle fraction égale ?",
-      correction: "Numérateur 2 : on colorie 2 parts sur 4. Or 2 sur 4, c'est la moitié : 2/4 = 1/2.",
+      question: "Une figure a 4 parts égales. Combien en colorier pour 2/4 ? Quelle fraction plus simple dit la même chose ?",
+      correction: "J'en colorie 2 sur 4. C'est la moitié : 2/4 = 1/2.",
+      micros: ["fraction_representer", "fraction_defi"],
     },
     {
-      question: "Les 3/4 de 12, c'est combien ?",
-      correction: "12 ÷ 4 = 3 (une part), puis 3 × 3 = 9. Les 3/4 de 12, c'est 9.",
-      micros: ["fraction_decimal"],
+      question: "Complète : 8/5 = 1 + …/5.",
+      correction: "5 cinquièmes font 1. Il reste 8 − 5 = 3 cinquièmes. Donc 8/5 = 1 + 3/5.",
+      micros: ["fraction_mixte"],
     },
     {
       question: "Compare 2/3 et 3/4.",
-      correction: "En décimal : 3/4 = 0,75 et 2/3 ≈ 0,67. Comme 0,75 > 0,67, la plus grande est 3/4.",
-      micros: ["fraction_comparer", "fraction_defi"],
+      correction: "3/4 = 0,75. 2/3 fait environ 0,67. Donc 3/4 est la plus grande.",
+      micros: ["fraction_comparer", "fraction_decimal"],
+    },
+    {
+      question: "Dans une boîte de 12 biscuits, Léa mange 1/3 de la boîte. Combien de biscuits mange-t-elle ?",
+      correction: "Je coupe 12 en 3 parts égales : 12 ÷ 3 = 4. Léa mange 4 biscuits.",
+      micros: ["fraction_defi"],
     },
   ],
+  tiMargo: {
+    objectif: "Une fraction, ce sont des parts égales !",
+    definition: "En bas, on coupe. En haut, on prend !",
+    methode: "Je lis toujours le nombre du bas d'abord !",
+    pieges: "Plus on coupe, plus les parts sont petites !",
+    retenir: "Pas de parts égales, pas de fraction !",
+    exercice: "À toi ! Compte les parts de la pizza.",
+  },
   coachHref: "/coach-ia/maths?classe=6e",
 };
 
+// ⛔ Ce tableau n'est plus projeté (le mode classe est engendré par la fiche,
+// `slidesDepuisFiche`) : la page le passe encore, il reste court.
 export const slidesFractions6e: ClasseSlide[] = [
   {
     titre: "Objectif du cours",
     badge: "Fractions - 6e",
+    teinte: "objectif",
+    schema: avecMargo(disque34, "Une fraction, ce sont des parts égales !", "joie"),
     section: {
       type: "objectif",
-      phrase: "Dire « une partie d'un tout » avec un nombre",
-      sousPhrase: "Une fraction, ce sont des parts prises dans un tout partagé en parts égales.",
-      encadre: { titre: "L'idée", texte: "3/4, c'est 3 parts prises sur 4 parts égales." },
+      phrase: "Lire, dessiner et comparer une fraction",
+      sousPhrase: "3/4, c'est 3 parts prises sur 4 parts égales.",
     },
   },
   {
-    titre: "À quoi ça sert ?",
-    badge: "Utilité & histoire",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "info",
-        titre: "Au quotidien",
-        contenu: "Une pizza en 8 dont on mange 3 (3/8), 1/2 litre de lait, trois quarts d'heure (45 min).",
-      },
-      droite: {
-        variante: "histoire",
-        titre: "Le savais-tu ?",
-        contenu: "Vers 1550 av. J.-C., les Égyptiens partageaient le pain avec 1/2 ou 1/3. « Fraction » = « casser en morceaux ».",
-      },
-    },
-  },
-  {
-    titre: "Les deux nombres",
-    badge: "Vocabulaire",
-    section: {
-      type: "objectif",
-      phrase: "3/5 = 3 parts prises sur 5 parts égales",
-      sousPhrase: "Numérateur (haut) = parts prises. Dénominateur (bas) = parts du partage.",
-      encadre: { titre: "Attention", texte: "Une fraction n'a de sens que si les parts sont égales." },
-    },
-  },
-  {
-    titre: "Les 3 réflexes",
-    badge: "Méthode",
-    section: {
-      type: "cartes",
-      cartes: ficheFractions6e.methode.map((m) => ({ titre: m.titre, texte: m.texte })),
-    },
-  },
-  {
-    titre: "Selon ce que l'on cherche",
-    badge: "3 situations",
-    section: {
-      type: "cartes",
-      cartes: ficheFractions6e.usages.map((u) => ({ titre: u.titre, texte: u.detail })),
-    },
-  },
-  {
-    titre: "Exemple guidé",
-    badge: "Comparer",
-    section: {
-      type: "exemple",
-      enonce: "On compare 1/3 et 1/5.",
-      question: "Laquelle est la plus grande ?",
-      correction: "Même numérateur : plus on partage, plus les parts sont petites. Donc 1/3 > 1/5.",
-    },
-  },
-  {
-    titre: "Autre exemple",
-    badge: "Fraction d'une quantité",
-    section: {
-      type: "exemple",
-      enonce: "Une boîte contient 15 billes, on en donne les 2/3.",
-      question: "Combien de billes donne-t-on ?",
-      correction: "Une part : 15 ÷ 3 = 5. Puis 2 × 5 = 10. On donne 10 billes.",
-    },
-  },
-  {
-    titre: "Pièges & à retenir",
+    titre: "Pièges à éviter",
     badge: "Vigilance",
-    section: {
-      type: "duo",
-      gauche: {
-        variante: "piege",
-        titre: "Pièges à éviter",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {pieges.map((piege) => (
-              <li key={piege}>• {piege}</li>
-            ))}
-          </ul>
-        ),
-      },
-      droite: {
-        variante: "ok",
-        titre: "À retenir",
-        contenu: (
-          <ul className="grid gap-3 text-2xl leading-snug">
-            {aRetenir.map((point) => (
-              <li key={point}>• {point}</li>
-            ))}
-          </ul>
-        ),
-      },
-    },
+    teinte: "piege",
+    schema: avecMargo(compare1315, "Plus on coupe, plus les parts sont petites !", "attention"),
+    section: { type: "etapes", etapes: pieges },
   },
   {
     titre: "À toi de jouer",
     badge: "Exercice flash",
+    teinte: "exercice",
+    schema: avecMargo(billes, "À toi ! Coupe d'abord en parts égales.", "joie"),
     section: {
       type: "exercice",
-      enonce: "Une boîte contient 12 biscuits, Léa en mange 1/3.",
+      enonce: "Une boîte contient 12 biscuits. Léa en mange 1/3.",
       question: "Combien de biscuits mange-t-elle ?",
-      indice: "Divise 12 par le dénominateur.",
-      correction: "Une part : 12 ÷ 3 = 4. Léa mange 4 biscuits.",
+      indice: "Coupe 12 en 3 parts égales.",
+      correction: "12 ÷ 3 = 4. Léa mange 4 biscuits.",
     },
   },
 ];

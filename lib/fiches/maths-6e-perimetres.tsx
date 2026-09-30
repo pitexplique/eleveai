@@ -1,26 +1,30 @@
 // ─── Fiche de cours : les périmètres (6e) ──────────────────────────────────────
-// Fiche « en blocs » créée pour coller EXACTEMENT à la banque du coach
+// Fiche « en blocs » alignée sur la banque du coach
 // (lib/tutor-v4/questionBank/6e/maths/perimetres.bank.ts, notionId aire_perimetre).
 //
-// Couverture des micro-compétences de la banque (pour la relecture du prof) :
-// - aire_perimetre_comprendre → accroche, définition + figure, propriété 1
-//                               (un périmètre est une LONGUEUR), pièges 1 et 3
-// - aire_perimetre_carre      → propriété 2, usage 1, exemple 1, formule
-// - aire_perimetre_rectangle  → propriété 3, usage 2, exemple 2, formule
-// - aire_perimetre_figure     → propriétés 4 et 5, usage 3, exemples 3 et 4
-// - aire_perimetre_probleme   → reel, entraînement (le grillage)
-// - aire_perimetre_defi       → entraînement (retrouver le côté, les deux carrés)
+// ⭐ RÉÉCRITE LE 30/09/2026 POUR DES 6e QUI LISENT DIFFICILEMENT : phrases
+// courtes, une idée par phrase, un dessin sur CHAQUE bloc, Ti Margo au mode
+// classe. Les nombres sont ceux de la banque ; la feuille d'exercices
+// (lib/fiches-exercices/maths-6e-aire-perimetre.tsx) n'en partage aucun.
 //
-// ⭐ LE DISQUE N'EST PAS ICI. Le BO de 6e demande aussi le périmètre du disque
-// (proportionnel au diamètre, P = π × d) : c'est devenu sa propre notion,
-// `cercle_disque`, ouverte le 21/08/2026 — donc sa propre fiche. Une fiche = un
-// notionId, sinon le badge « 📖 Fiche » du coach ne sait plus quoi allumer.
+// Micro-compétences 6/6 :
+// - aire_perimetre_comprendre → définition + figure (l'escalier), propriété 1
+//                               (le tour déplié, 5 × 4), méthode 1, pièges 1 et 3
+// - aire_perimetre_carre      → propriété 2 (5 cm), méthode 2, usage 1 (7 cm),
+//                               exemple 1 (9 cm), entraînement 1
+// - aire_perimetre_rectangle  → propriété 3 (6 × 2), méthode 2, usage 2 (6 × 4),
+//                               entraînement 2 (5 × 2)
+// - aire_perimetre_figure     → propriété 4 (le zigzag), usage 3 (3, 4, 5, 6 cm),
+//                               exemple 3 (le L), entraînement 3
+// - aire_perimetre_probleme   → méthode 3, exemple 2 (le grillage du jardin 8 × 3)
+// - aire_perimetre_defi       → exemple 4 (deux carrés de 3 recollés),
+//                               entraînement 4 (côté d'un carré de 28 cm) et 5
 //
-// ⭐ LE DESSIN SE CHOISIT POUR CE QU'IL MONTRE (REGLES.md § 2 bis). Les cinq
-// propriétés portent cinq images de nature différente : le tour DÉPLIÉ en une
-// barre (un périmètre est une longueur, pas une surface), le carré codé, le
-// rectangle coté, une figure tordue dont on suit le contour rouge, et deux
-// morceaux recollés dont le trait du milieu DISPARAÎT.
+// ⭐ LE DISQUE N'EST PAS ICI : c'est la notion `cercle_disque`, sa propre fiche.
+//
+// ⛔ UN SEUL DESSIN PAR BLOC, JAMAIS DEUX EMPILÉS : projetés, deux quadrillages
+// l'un sous l'autre débordaient de 95 px (mesuré le 30/09). Les deux carrés
+// séparés ET recollés tiennent dans UN quadrillage, côte à côte.
 
 import type { ClasseSlide } from "@/components/fiches/ModeClasse";
 import type { FicheCoursData } from "@/lib/fiches/types";
@@ -35,27 +39,19 @@ function rectCells(rows: number, cols: number, r0 = 0, c0 = 0): Case[] {
   return cells;
 }
 
-/**
- * Le quadrillage, contour en ROUGE. Ici le contour est le sujet — c'est le
- * périmètre lui-même, alors que sur la fiche des aires c'était le remplissage.
- */
-const grille = (
-  rows: number,
-  cols: number,
-  cells: Case[],
-  opts: { cellSize?: number } = {}
-) => (
+/** Le quadrillage, contour en ROUGE : ici le contour EST le périmètre. */
+const grille = (rows: number, cols: number, cells: Case[], cellSize?: number) => (
   <CanvasRenderer
     figure={{
       kind: "figure_libre",
-      size: { cellSize: opts.cellSize ?? (cols > 6 ? 24 : 32) },
+      size: { cellSize: cellSize ?? (cols > 6 ? 24 : 32) },
       grid: { rows, cols, filledCells: cells },
       display: { showGrid: true, showFilled: true, showPerimeter: true },
     }}
   />
 );
 
-/** Un quadrilatère coté, ses quatre angles droits codés. */
+/** Un rectangle (ou un carré) coté, ses quatre angles droits codés. */
 const rectangleCote = (
   largeur: number,
   hauteur: number,
@@ -90,72 +86,10 @@ const legende = (dessin: React.ReactNode, texte: string) => (
   </div>
 );
 
-// Dans une carte, on EMPILE (REGLES.md § 2 ter) : côte à côte, chaque dessin
-// tomberait à 80 px de large.
-const empiler = (
-  haut: React.ReactNode,
-  hautLabel: string,
-  bas: React.ReactNode,
-  basLabel: string
-) => (
-  <div className="space-y-2">
-    <div>
-      {haut}
-      <p className="mt-1 text-center text-xs font-black text-rose-700">{hautLabel}</p>
-    </div>
-    <div>
-      {bas}
-      <p className="mt-1 text-center text-xs font-black text-emerald-700">{basLabel}</p>
-    </div>
-  </div>
-);
+// ─── Les dessins ──────────────────────────────────────────────────────────────
 
-// ⭐ LE TOUR DÉPLIÉ. Un périmètre est une LONGUEUR : mis bout à bout, les
-// quatre côtés du rectangle 8 × 3 font une barre de 22 cm. Aucun autre dessin
-// de la fiche ne dit ça — et c'est la confusion n°1 avec l'aire.
-const tourDeplie = (
-  <CanvasRenderer
-    figure={{
-      kind: "schema_barre",
-      // ⚠️ Le titre est écrit en 15 px sur la largeur du viewBox : au-delà de
-      // ~28 caractères il DÉBORDE du cadre, en silence. Vu au rendu, pas à la
-      // lecture (REGLES.md § 2 ter).
-      title: "Le tour du rectangle 8 × 3",
-      total: "22 cm",
-      parts: [
-        { label: "L", value: "8" },
-        { label: "l", value: "3" },
-        { label: "L", value: "8" },
-        { label: "l", value: "3" },
-      ],
-      questionLabel: "8 + 3 + 8 + 3 = 22 cm",
-      // 175 px de haut collaient les étiquettes L / l à la phrase du bas :
-      // le canvas pose les unes à 144 et l'autre à hauteur − 18.
-      size: { width: 320, height: 190 },
-    }}
-  />
-);
-
-// Le mémo des trois calculs. Un tableau, pas trois dessins : ce qui change
-// d'une ligne à l'autre est le CALCUL, pas la figure.
-const memoCalculs = (
-  <CanvasRenderer
-    figure={{
-      kind: "tableau_donnees",
-      headers: ["Figure", "Ce qu'on additionne", "Le calcul"],
-      rows: [
-        { values: ["Carré", "4 côtés égaux", "P = 4 × c"] },
-        { values: ["Rectangle", "2 longueurs, 2 largeurs", "P = 2 × (L + l)"] },
-        { values: ["Figure quelconque", "tous les côtés du contour", "on additionne"] },
-      ],
-      highlight: { col: 2 },
-    }}
-  />
-);
-
-// ⭐ DES FIGURES TORDUES (Frédéric, 21/08/2026) : sur un rectangle, l'élève
-// applique une formule sans réfléchir. Le périmètre d'une figure biscornue, lui,
-// se suit du doigt.
+// LA FIGURE : un escalier. Le contour rouge se suit du doigt ; les traits gris
+// de l'intérieur ne comptent pas.
 const escalier: Case[] = [
   [0, 0],
   [1, 0], [1, 1],
@@ -163,33 +97,111 @@ const escalier: Case[] = [
   [3, 0], [3, 1], [3, 2], [3, 3],
 ];
 
-// La figure en L de l'exemple 3 : bloc 2 × 4 en haut, bloc 2 × 2 en bas.
-// Son tour fait 4 + 2 + 2 + 2 + 2 + 4 = 16 carreaux.
-const figureL: Case[] = [...rectCells(2, 4, 0, 0), ...rectCells(2, 2, 2, 0)];
+// ⭐ LE TOUR DÉPLIÉ (banque : « Un rectangle mesure 5 cm sur 4 cm. Que vaut
+// son périmètre ? »). Un périmètre est une LONGUEUR : les quatre côtés bout à
+// bout font une barre de 18 cm. Cadre de 240 : 12 × 226/240 = 11,3 px (le
+// cadre de 320 donnait 8,5 px, mesuré).
+const tourDeplie = (
+  <CanvasRenderer
+    figure={{
+      kind: "schema_barre",
+      title: "Le tour du rectangle 5 × 4",
+      total: "18 cm",
+      parts: [
+        { label: "L", value: "5" },
+        { label: "l", value: "4" },
+        { label: "L", value: "5" },
+        { label: "l", value: "4" },
+      ],
+      questionLabel: "5 + 4 + 5 + 4 = 18 cm",
+      size: { width: 240, height: 190 },
+    }}
+  />
+);
 
-// Le zigzag : six carreaux, deux décrochements — le contour serpente.
+// Le zigzag : six carreaux, deux décrochements. Aucune formule ne marche.
 const zigzag: Case[] = [
   [0, 0], [0, 1],
   [1, 1], [1, 2],
   [2, 2], [2, 3],
 ];
 
-// LE RECOLLEMENT. Deux carrés de 3 séparés : 12 + 12 = 24 de tour. Recollés :
-// 18 seulement — le trait du milieu n'est plus un bord.
-const deuxCarresSepares: Case[] = [...rectCells(3, 3, 0, 0), ...rectCells(3, 3, 0, 4)];
-const deuxCarresRecolles: Case[] = rectCells(3, 6);
+// La croix de la méthode 1 : cinq carreaux, douze côtés de carreau au tour.
+const croix: Case[] = [[0, 1], [1, 0], [1, 1], [1, 2], [2, 1]];
+
+// La figure en L de l'exemple 3 : bloc 2 × 4 en haut, bloc 2 × 2 en bas.
+// Son tour fait 4 + 2 + 2 + 2 + 2 + 4 = 16 carreaux.
+const figureL: Case[] = [...rectCells(2, 4, 0, 0), ...rectCells(2, 2, 2, 0)];
+
+// LE RECOLLEMENT, dans UN SEUL quadrillage : deux carrés de 3 séparés (à
+// gauche), puis les mêmes recollés (à droite). Sans texte dans le dessin.
+const deuxCarres: Case[] = [
+  ...rectCells(3, 3, 0, 0),
+  ...rectCells(3, 3, 0, 4),
+  ...rectCells(3, 6, 0, 8),
+];
+
+// Le mémo : deux colonnes, jamais trois.
+const memoCalculs = (
+  <CanvasRenderer
+    figure={{
+      kind: "tableau_donnees",
+      headers: ["Figure", "Périmètre"],
+      rows: [
+        { values: ["Carré", "4 × côté"] },
+        { values: ["Rectangle", "2 × (L + l)"] },
+        { values: ["Autre figure", "j'additionne tout"] },
+      ],
+      highlight: { col: 1 },
+    }}
+  />
+);
+
+// USAGE 3 : une figure sans nom, dessinée à l'échelle (30 px pour 1 cm) :
+// 3 cm en haut, 5 cm penché, 6 cm en bas, 4 cm à gauche.
+const quatreCotes = (
+  <CanvasRenderer
+    figure={{
+      kind: "quadrilatere",
+      size: { width: 270, height: 210 },
+      points: {
+        A: { x: 45, y: 45 },
+        B: { x: 135, y: 45 },
+        C: { x: 225, y: 165 },
+        D: { x: 45, y: 165 },
+      },
+      sideLabels: { AB: "3 cm", BC: "5 cm", CD: "6 cm", DA: "4 cm" },
+      display: { showPoints: true, showLabels: true, showSides: true, showAngles: false },
+      marks: { rightAnglesAt: ["A", "D"] },
+    }}
+  />
+);
+
+// MÉTHODE 3 : l'addition posée du tour d'un rectangle de 7 cm sur 3 cm.
+const additionPosee = (
+  <CanvasRenderer
+    figure={{
+      kind: "calcul_pose",
+      operation: "addition",
+      title: "7 + 3 + 7 + 3",
+      numbers: ["7", "3", "7", "3"],
+      result: "20",
+      display: { showResult: true, compact: false },
+      questionLabel: "20 cm : c'est le tour.",
+    }}
+  />
+);
 
 const pieges = [
-  "Confondre aire et périmètre : 5 × 4 = 20 donne l'aire du rectangle de 5 cm sur 4 cm, pas son périmètre. Le périmètre, c'est le tour : 2 × (5 + 4) = 18 cm.",
-  "Oublier que chaque côté compte deux fois dans un rectangle : 6 + 2 = 8 cm n'est que la moitié du tour, le périmètre vaut 2 × (6 + 2) = 16 cm.",
-  "Additionner les périmètres de deux morceaux recollés : le trait de recollement n'est plus un bord, il ne compte plus.",
-  "Se tromper d'unité : un périmètre est une longueur, il s'écrit en cm ou en m, jamais en cm² (réservé aux aires).",
+  "Calculer 5 × 4 = 20. C'est l'aire ! Le tour fait 5 + 4 + 5 + 4 = 18 cm.",
+  "S'arrêter à 6 + 2 = 8 cm. C'est seulement la moitié du tour.",
+  "Écrire cm². Un périmètre est une longueur : il s'écrit en cm.",
 ];
 
 const aRetenir = [
-  "Le périmètre d'une figure, c'est la longueur de son contour : tout son tour, en cm ou en m.",
-  "Carré : P = 4 × c. Rectangle : P = 2 × (L + l).",
-  "Pour une figure quelconque, on additionne les longueurs de tous les côtés du contour extérieur.",
+  "Le périmètre, c'est la longueur du tour de la figure.",
+  "Carré : 4 × côté. Rectangle : 2 × (longueur + largeur).",
+  "Autre figure : j'additionne tous les côtés du tour.",
 ];
 
 export const fichePerimetres6e: FicheCoursData = {
@@ -199,148 +211,100 @@ export const fichePerimetres6e: FicheCoursData = {
   notion: "aire-perimetre",
   titre: "Les périmètres",
   accroche:
-    "Le périmètre d'une figure, c'est la longueur de son tour. On en a besoin dès qu'on veut entourer quelque chose : un jardin, un cadre, un terrain. En 6e, on apprend à le calculer pour le carré, le rectangle et n'importe quelle figure, même tordue.",
+    "Le périmètre, c'est la longueur du tour d'une figure. Carré, rectangle ou figure tordue : on sait tous les calculer !",
   identite: [
-    { label: "Prérequis", valeur: "Additionner, multiplier, unités de longueur (cm, m)" },
-    { label: "Idée clé", valeur: "Le périmètre = la longueur du contour de la figure" },
-    { label: "Outil", valeur: "La règle graduée (et le calcul mental)" },
+    { label: "Le mot clé", valeur: "Le tour de la figure" },
+    { label: "Le secret", valeur: "Je suis le bord avec le doigt" },
+    { label: "Outil", valeur: "La règle graduée" },
   ],
   definition: {
     texte:
-      "Le périmètre d'une figure est la longueur de son contour, c'est-à-dire de tout son tour. C'est une longueur : on l'exprime avec une unité de longueur, comme le centimètre (cm) ou le mètre (m), jamais en cm².",
+      "Le périmètre d'une figure est la longueur de son tour. On suit le bord, sans rien oublier. C'est une longueur : on l'écrit en cm ou en m.",
   },
   figure: {
-    // Une figure TORDUE dès la définition : le contour rouge se suit du doigt,
-    // et les traits gris du quadrillage montrent bien ce qui n'en fait pas
-    // partie.
     schema: grille(4, 4, escalier),
-    legende:
-      "Le périmètre, c'est tout le contour (en rouge) : on suit le tour de la figure, jamais les traits de l'intérieur.",
+    legende: "Le tour, c'est le trait rouge. Les traits gris de l'intérieur ne comptent pas.",
   },
   proprietes: [
     {
-      titre: "C'est une longueur",
+      titre: "Le tour, mis bout à bout",
       micros: ["aire_perimetre_comprendre"],
-      texte:
-        "Mis bout à bout, les côtés d'une figure font une seule longueur : le périmètre. Il se mesure en cm ou en m, jamais en cm².",
+      texte: "Je mets les côtés bout à bout : j'obtiens une seule longueur. C'est le périmètre.",
       schema: tourDeplie,
     },
     {
       titre: "Le carré",
       micros: ["aire_perimetre_carre"],
-      texte:
-        "Un carré a 4 côtés de la même longueur. Son périmètre vaut donc 4 fois la longueur d'un côté : P = 4 × c. Exemple : un carré de côté 5 cm a un périmètre de 4 × 5 = 20 cm.",
-      schema: rectangleCote(150, 150, {
-        AB: "5 cm",
-        BC: "5 cm",
-        CD: "5 cm",
-        DA: "5 cm",
-      }),
+      texte: "Un carré a 4 côtés égaux. P = 4 × côté : 4 × 5 = 20 cm.",
+      schema: rectangleCote(150, 150, { AB: "5 cm", BC: "5 cm", CD: "5 cm", DA: "5 cm" }),
     },
     {
       titre: "Le rectangle",
       micros: ["aire_perimetre_rectangle"],
-      texte:
-        "Un rectangle a 2 longueurs et 2 largeurs. Son périmètre vaut P = 2 × (L + l). Exemple : pour 8 cm sur 3 cm, on calcule 2 × (8 + 3) = 2 × 11 = 22 cm.",
-      schema: rectangleCote(192, 72, { AB: "L = 8 cm", BC: "l = 3 cm" }),
+      texte: "2 longueurs et 2 largeurs. P = 2 × (6 + 2) = 2 × 8 = 16 cm.",
+      // « 6 cm » et non « L = 6 cm » : sur un rectangle aussi plat, l'étiquette
+      // longue touchait le point B (rendu vérifié le 30/09).
+      schema: rectangleCote(192, 72, { AB: "6 cm", BC: "2 cm" }),
     },
     {
-      titre: "Une figure quelconque",
+      titre: "Une figure tordue",
       micros: ["aire_perimetre_figure"],
-      texte:
-        "Quand la figure n'a pas de formule, on additionne les longueurs de tous les côtés du contour. On ne compte que le contour extérieur, jamais les traits à l'intérieur de la figure.",
-      schema: legende(grille(3, 4, zigzag), "on suit le rouge, jamais le gris"),
-    },
-    {
-      titre: "Deux morceaux recollés",
-      micros: ["aire_perimetre_figure"],
-      texte:
-        "En recollant deux figures, le périmètre n'est pas la somme des deux périmètres : le trait de recollement disparaît, il n'est plus un bord.",
-      schema: empiler(
-        grille(3, 7, deuxCarresSepares),
-        "séparés : 12 + 12 = 24 de tour",
-        grille(3, 6, deuxCarresRecolles),
-        "recollés : 18 seulement"
-      ),
+      texte: "Pas de formule : j'additionne tous les côtés du tour. Les traits de l'intérieur ne comptent pas.",
+      schema: legende(grille(3, 4, zigzag), "Je suis le rouge, jamais le gris."),
     },
   ],
   reel: {
     texte:
-      "Calculer un périmètre, c'est répondre à une vraie question : quelle longueur de grillage pour clôturer le jardin ? Quelle longueur de baguette pour encadrer un dessin ? Quelle longueur de ruban pour faire le tour d'un paquet cadeau ? Quelle distance pour faire le tour du terrain de sport ?",
+      "Un grillage fait le tour d'un jardin. Une baguette fait le tour d'un cadre. Un ruban fait le tour d'un cadeau. Pour les acheter, on calcule un périmètre.",
   },
   historique: {
     texte:
-      "Le mot « périmètre » vient du grec : « peri » (autour) et « metron » (mesure). Vers 3000 avant J.-C., les arpenteurs d'Égypte mesuraient déjà le tour des champs avec des cordes à nœuds : après chaque crue du Nil, il fallait retrouver les limites de chaque parcelle.",
+      "« Périmètre » vient du grec : « autour » et « mesure ». En Égypte, le Nil débordait chaque année. Les champs perdaient leurs limites. Des arpenteurs les retraçaient avec des cordes.",
   },
   formule: {
-    contexte: "Carré de côté c, rectangle de longueur L et de largeur l",
-    expression: "P(carré) = 4 × c ; P(rectangle) = 2 × (L + l)",
-    legende: "Pour une figure quelconque : on additionne tous les côtés du contour.",
+    contexte: "Carré de côté c, rectangle L sur l",
+    expression: "Carré : P = 4 × c ; rectangle : P = 2 × (L + l)",
+    legende: "Pour une autre figure, j'additionne tous les côtés.",
     schema: memoCalculs,
   },
   methode: [
     {
-      titre: "Repérer",
+      titre: "Je suis le tour du doigt",
       micros: ["aire_perimetre_comprendre"],
-      texte:
-        "On suit le contour de la figure avec le doigt et on repère la longueur de chaque côté. On ne garde que le tour extérieur.",
-      schema: legende(grille(4, 4, escalier), "un tour complet, décrochement par décrochement"),
+      texte: "Je pars d'un coin et je fais tout le tour. Je compte chaque côté une seule fois.",
+      schema: legende(grille(3, 3, croix), "12 côtés de carreau : P = 12 cm."),
     },
     {
-      titre: "Écrire",
+      titre: "Je choisis le calcul",
       micros: ["aire_perimetre_carre", "aire_perimetre_rectangle"],
-      texte:
-        "On choisit le bon calcul : 4 × c pour un carré, 2 × (L + l) pour un rectangle, la somme de tous les côtés sinon.",
-      schema: rectangleCote(192, 72, { AB: "L = 8 cm", BC: "l = 3 cm" }),
+      texte: "Carré : 4 × côté. Rectangle : 2 × (L + l). Sinon, j'additionne tout.",
+      schema: rectangleCote(192, 96, { AB: "L", BC: "l" }),
     },
     {
-      titre: "Calculer",
+      titre: "Je calcule et j'écris l'unité",
       micros: ["aire_perimetre_probleme"],
-      texte:
-        "On effectue le calcul, puis on écrit la réponse avec son unité de longueur : cm, m... jamais cm².",
-      // La MÊME addition que la propriété 1, mais posée : là c'était une
-      // longueur qu'on voyait, ici c'est un calcul qu'on effectue.
-      schema: (
-        <CanvasRenderer
-          figure={{
-            kind: "calcul_pose",
-            operation: "addition",
-            title: "Le tour du rectangle 8 cm × 3 cm",
-            numbers: ["8", "3", "8", "3"],
-            result: "22",
-            display: { showResult: true, compact: false },
-            questionLabel: "22 : c'est le périmètre, en cm.",
-          }}
-        />
-      ),
+      texte: "Je fais le calcul. Puis j'écris l'unité : cm ou m, jamais cm².",
+      schema: additionPosee,
     },
   ],
   usages: [
     {
       titre: "Le carré",
       micros: ["aire_perimetre_carre"],
-      detail:
-        "Les 4 côtés sont égaux : périmètre = 4 × côté. Un carré de côté 7 cm a un périmètre de 4 × 7 = 28 cm.",
-      schema: rectangleCote(140, 140, {
-        AB: "7 cm",
-        BC: "7 cm",
-        CD: "7 cm",
-        DA: "7 cm",
-      }),
+      detail: "Un carré de 7 cm de côté. P = 4 × 7 = 28 cm.",
+      schema: rectangleCote(140, 140, { AB: "7 cm", BC: "7 cm", CD: "7 cm", DA: "7 cm" }),
     },
     {
       titre: "Le rectangle",
       micros: ["aire_perimetre_rectangle"],
-      detail:
-        "2 longueurs et 2 largeurs : périmètre = 2 × (L + l). Un rectangle de 6 cm sur 4 cm a un périmètre de 2 × (6 + 4) = 20 cm.",
+      detail: "Un rectangle de 6 cm sur 4 cm. P = 2 × (6 + 4) = 20 cm.",
       schema: rectangleCote(186, 124, { AB: "6 cm", BC: "4 cm" }),
     },
     {
-      titre: "La figure quelconque",
+      titre: "Une figure sans nom",
       micros: ["aire_perimetre_figure"],
-      detail:
-        "Pas de formule : on additionne tous les côtés du contour. Sur un quadrillage, on compte les traits rouges un à un.",
-      schema: grille(4, 4, figureL),
+      detail: "Ses côtés mesurent 3, 5, 6 et 4 cm. P = 3 + 5 + 6 + 4 = 18 cm.",
+      schema: quatreCotes,
     },
   ],
   exemples: [
@@ -348,47 +312,33 @@ export const fichePerimetres6e: FicheCoursData = {
       titre: "Le périmètre d'un carré",
       micros: ["aire_perimetre_carre"],
       donnees: "Un carré a un côté de 9 cm.",
-      question: "Calculer son périmètre.",
-      schema: rectangleCote(150, 150, {
-        AB: "9 cm",
-        BC: "9 cm",
-        CD: "9 cm",
-        DA: "9 cm",
-      }),
-      solution:
-        "Un carré a 4 côtés égaux. P = 4 × 9 = 36 cm. Attention : 9 × 9 = 81 donnerait l'aire, pas le périmètre.",
+      question: "Quel est son périmètre ?",
+      schema: rectangleCote(150, 150, { AB: "9 cm", BC: "9 cm", CD: "9 cm", DA: "9 cm" }),
+      solution: "Un carré a 4 côtés égaux. P = 4 × 9 = 36 cm. Attention : 9 × 9 donne l'aire, pas le tour.",
     },
     {
-      titre: "Le périmètre d'un rectangle",
-      micros: ["aire_perimetre_rectangle"],
-      donnees: "Un rectangle mesure 8 cm de longueur et 3 cm de largeur.",
-      question: "Calculer son périmètre.",
-      schema: rectangleCote(192, 72, { AB: "8 cm", BC: "3 cm" }),
-      solution:
-        "Un rectangle a 2 longueurs et 2 largeurs. P = 2 × (8 + 3) = 2 × 11 = 22 cm. Attention : 8 × 3 = 24 donnerait l'aire.",
+      titre: "Le grillage du jardin",
+      micros: ["aire_perimetre_probleme", "aire_perimetre_rectangle"],
+      donnees: "Un jardin rectangulaire mesure 8 m sur 3 m.",
+      question: "Quelle longueur de grillage pour faire le tour ?",
+      schema: rectangleCote(192, 72, { AB: "8 m", BC: "3 m" }),
+      solution: "Le grillage fait le tour. P = 2 × (8 + 3) = 22. Il faut 22 m de grillage.",
     },
     {
-      titre: "Une figure tordue sur quadrillage",
+      titre: "Une figure en L",
       micros: ["aire_perimetre_figure"],
-      donnees: "Une figure en L sur un quadrillage dont les carreaux mesurent 1 cm de côté.",
-      question: "Calculer son périmètre.",
+      donnees: "Chaque carreau mesure 1 cm de côté.",
+      question: "Quel est le périmètre de la figure en L ?",
       schema: grille(4, 4, figureL),
-      solution:
-        "Aucune formule ne s'applique : on suit le contour rouge et on compte les traits. En partant du coin en haut à gauche : 4 vers la droite, 2 vers le bas, 2 vers la gauche, 2 vers le bas, 2 vers la gauche, 4 vers le haut. P = 4 + 2 + 2 + 2 + 2 + 4 = 16 cm.",
+      solution: "Pas de formule : je suis le tour rouge. 4 + 2 + 2 + 2 + 2 + 4 = 16. Le périmètre est 16 cm.",
     },
     {
       titre: "Deux carrés recollés",
-      micros: ["aire_perimetre_figure"],
-      donnees: "On colle deux carrés de 3 cm de côté par un côté entier.",
-      question: "Quel est le périmètre de la figure obtenue ?",
-      schema: empiler(
-        grille(3, 7, deuxCarresSepares),
-        "séparés : 12 cm + 12 cm",
-        grille(3, 6, deuxCarresRecolles),
-        "recollés : un rectangle 6 cm × 3 cm"
-      ),
-      solution:
-        "On obtient un rectangle de 6 cm sur 3 cm : P = 2 × (6 + 3) = 18 cm. Ce n'est PAS 12 + 12 = 24 cm : le côté de recollement, compté deux fois, n'est plus un bord — on perd 3 + 3 = 6 cm.",
+      micros: ["aire_perimetre_defi", "aire_perimetre_figure"],
+      donnees: "Deux carrés de 3 cm, collés par un côté (à droite).",
+      question: "Quel est le périmètre de la figure collée ?",
+      schema: grille(3, 14, deuxCarres, 16),
+      solution: "Ils forment un rectangle 6 × 3. P = 2 × (6 + 3) = 18 cm. Le côté collé ne compte plus.",
     },
   ],
   pieges,
@@ -396,46 +346,41 @@ export const fichePerimetres6e: FicheCoursData = {
   entrainement: [
     {
       question: "Un carré a un côté de 6 cm. Calcule son périmètre.",
-      correction:
-        "Étape 1 : un carré a 4 côtés égaux. Étape 2 : P = 4 × 6. Étape 3 : P = 24 cm. On vérifie l'unité : le cm, une unité de longueur.",
+      correction: "4 côtés égaux : P = 4 × 6 = 24 cm.",
+      micros: ["aire_perimetre_carre"],
     },
     {
-      question: "Un rectangle mesure 8 cm de long et 3 cm de large. Calcule son périmètre.",
-      correction:
-        "Étape 1 : un rectangle a 2 longueurs et 2 largeurs. Étape 2 : P = 2 × (8 + 3) = 2 × 11. Étape 3 : P = 22 cm. Attention : 8 × 3 = 24 donnerait l'aire, pas le périmètre.",
+      question: "Un rectangle mesure 5 cm sur 2 cm. Calcule son périmètre.",
+      correction: "P = 2 × (5 + 2) = 2 × 7 = 14 cm.",
+      micros: ["aire_perimetre_rectangle"],
     },
     {
-      question:
-        "Sur un quadrillage à carreaux de 1 cm, une figure en escalier occupe un carré de 4 carreaux sur 4. Quel est son périmètre ?",
-      correction:
-        "On suit le contour marche par marche. Chaque marche donne un pas vers la droite puis un pas vers le bas : au total, les pas horizontaux valent 4 cm et les pas verticaux 4 cm. Avec le grand côté du bas (4 cm) et le grand côté de gauche (4 cm), P = 4 + 4 + 4 + 4 = 16 cm.",
-    },
-    {
-      question:
-        "Problème : un jardin rectangulaire mesure 8 m de long et 3 m de large. Quelle longueur de grillage faut-il pour faire tout le tour ?",
-      correction:
-        "Étape 1 : le grillage suit tout le tour du jardin, on cherche donc le périmètre. Étape 2 : P = 2 × (8 + 3) = 2 × 11 = 22 m. Étape 3 : il faut 22 m de grillage.",
-      micros: ["aire_perimetre_probleme"],
-    },
-    {
-      question:
-        "Défi : on recolle deux carrés de 5 cm de côté par un côté entier. Le périmètre de la figure obtenue vaut-il 40 cm ?",
-      correction:
-        "Non. On obtient un rectangle de 10 cm sur 5 cm : P = 2 × (10 + 5) = 30 cm. Les deux périmètres séparés font bien 20 + 20 = 40 cm, mais le côté de recollement (5 cm) était compté deux fois et n'est plus un bord : 40 − 5 − 5 = 30 cm.",
+      question: "Les carreaux mesurent 1 cm. Quel est le périmètre de l'escalier de la définition ?",
+      correction: "Je suis le tour : 4 en bas, 4 à gauche, et 4 + 4 pour les marches. P = 16 cm.",
+      micros: ["aire_perimetre_figure"],
     },
     {
       question: "Défi : un carré a un périmètre de 28 cm. Combien mesure un côté ?",
-      correction:
-        "Étape 1 : le périmètre d'un carré vaut 4 × côté. Étape 2 : on fait le calcul à l'envers : côté = 28 ÷ 4. Étape 3 : un côté mesure 7 cm. Vérification : 4 × 7 = 28 cm.",
+      correction: "Je fais le calcul à l'envers : 28 ÷ 4 = 7. Un côté mesure 7 cm. Je vérifie : 4 × 7 = 28.",
+      micros: ["aire_perimetre_defi"],
+    },
+    {
+      question: "Défi : on colle deux carrés de 5 cm par un côté. Le périmètre vaut-il 40 cm ?",
+      correction: "Non. On obtient un rectangle de 10 cm sur 5 cm. P = 2 × (10 + 5) = 30 cm.",
       micros: ["aire_perimetre_defi"],
     },
   ],
+  tiMargo: {
+    objectif: "Le périmètre, c'est le tour !",
+    definition: "Je suis le bord avec le doigt !",
+    formule: "Carré : 4 fois le côté !",
+    pieges: "5 × 4, c'est l'aire, pas le tour !",
+    retenir: "Un tour s'écrit en cm, jamais en cm² !",
+    exercice: "À toi ! Compte les 4 côtés.",
+  },
   coachHref: "/coach-ia/maths?classe=6e",
 };
 
-// ⛔ LE DIAPORAMA NE S'ÉCRIT PLUS À LA MAIN (20/08/2026). `FicheCoursClient`
-// fabrique lui-même les slides depuis la fiche — une par propriété, par réflexe,
-// par usage, par exemple, par exercice, chacune avec SON dessin. On l'engendre
-// donc de la même source : il ne reste qu'un interrupteur (un tableau vide
-// éteindrait le mode classe).
+// Le mode classe est engendré depuis la fiche (slidesDepuisFiche) : ce tableau
+// n'est qu'un interrupteur, un tableau vide couperait le mode classe.
 export const slidesPerimetres6e: ClasseSlide[] = slidesDepuisFiche(fichePerimetres6e);
