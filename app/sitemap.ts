@@ -723,18 +723,20 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
   ],
   "/fiches-cours/maths/6e/entier-nombre": [
     {
-      id: "8DFgt3TCoH8",
-      title: "Les nombres entiers — Maths 6e — EleveAI",
+      // 01/10/2026 : la version PARLÉE remplace la muette d'août (8DFgt3TCoH8).
+      id: "Zx0Ow1AWVI4",
+      title: "Comprendre les nombres entiers en 4 minutes — Maths 6e",
       description:
-        "Lire, écrire, comparer, décomposer et encadrer les nombres entiers, avec le tableau de numération et la droite graduée (6e).",
+        "Dans 4 273, le 2 vaut 200 : c'est la place qui compte. Le tableau de numération, le zéro qui garde la place, comparer et encadrer les nombres entiers (6e).",
     },
   ],
   "/fiches-cours/maths/6e/decimal-nombre": [
     {
-      id: "hiFUDrIMZrU",
-      title: "Les nombres décimaux — Maths 6e — EleveAI",
+      // 01/10/2026 : la version PARLÉE remplace la muette de juillet (hiFUDrIMZrU).
+      id: "hv_ZFkFVk00",
+      title: "Tout comprendre sur les nombres décimaux — Maths 6e",
       description:
-        "Lire, comparer et calculer avec les nombres décimaux : le tableau de numération prolongé après la virgule et l'addition posée virgule sous virgule (6e).",
+        "D'où viennent les nombres décimaux : on coupe l'unité en 10, puis encore en 10. Les rangs après la virgule, comparer, arrondir, encadrer et intercaler (6e).",
     },
   ],
   "/fiches-cours/maths/6e/fraction-nombre": [
