@@ -585,10 +585,17 @@ export const FICHES_REGISTRE: Record<string, FicheEntry> = {
     resume:
       "Lire une échelle et passer du plan à la réalité, utiliser un rapport d'agrandissement — et comprendre pourquoi doubler les longueurs quadruple l'aire et multiplie le volume par huit.",
   },
-  "maths/4e/prop-ratio-pourcentage": {
-    titre: "Ratios et pourcentages",
+  // ⭐ 02/10/2026 : « Ratios et pourcentages » devient deux fiches, comme le
+  // coach (l'ancienne adresse redirige vers les pourcentages, next.config.ts).
+  "maths/4e/prop-ratio": {
+    titre: "Les ratios",
     resume:
-      "Le ratio dit « tant contre tant », le pourcentage « tant sur cent » : exprimer et simplifier un ratio, le relier à l'égalité de quotients, partager une quantité selon deux ou trois parts, et manier le coefficient multiplicateur.",
+      "Écrire un ratio « tant contre tant » et le simplifier, le traduire en égalité de quotients (a/2 = b/3), utiliser un ratio à trois termes et partager une quantité selon un ratio : total des parts, une part, puis chaque part. Avec un mélange de peinture, un smoothie, une playlist, des arbres à planter et des animaux d'une forêt.",
+  },
+  "maths/4e/prop-pourcentages": {
+    titre: "Les pourcentages",
+    resume:
+      "Calculer p % d'un nombre, de tête à partir de 10 % (double, triple, moitié, 100 %, 200 %), retrouver un pourcentage ou un total, puis augmenter ou baisser une valeur avec le coefficient multiplicateur, sans tomber dans le piège + 20 % puis − 20 %. Des exemples de leur âge : batterie de téléphone, tirs au basket, soldes, club de handball, potager, ticket de bus.",
   },
   "maths/4e/puissance-ecriture": {
     titre: "Puissances et notation scientifique",
@@ -1702,13 +1709,6 @@ export const FICHES_ALIAS: Record<string, string> = {
   "maths/premiere-spe/derivation-tangente": "maths/premiere-spe/derivation",
   "maths/premiere-spe/derivation-formules": "maths/premiere-spe/derivation",
   "maths/premiere-spe/derivation-operations": "maths/premiere-spe/derivation",
-
-  /* ⏳ RATIOS / POURCENTAGES DE 4e (02/10/2026). Le coach a coupé la notion en
-     deux ; la fiche commune sert les deux EN ATTENDANT qu'elle soit coupée à
-     son tour (décidé par Frédéric : une fiche par notion). Retirer ces deux
-     lignes quand `prop-ratio` et `prop-pourcentages` existeront. */
-  "maths/4e/prop-ratio": "maths/4e/prop-ratio-pourcentage",
-  "maths/4e/prop-pourcentages": "maths/4e/prop-ratio-pourcentage",
 };
 
 /** La classe où la fiche est réellement rangée, quand elle diffère de celle

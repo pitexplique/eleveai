@@ -600,13 +600,17 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Reconnaître la proportionnalité dans un tableau ou sur un graphique, le coefficient et le retour à l'unité, la quatrième proportionnelle par le produit en croix. Une imprimante 3D, un ressort, une trailleuse, la pâte à pain, les ombres au soleil, des panneaux solaires, des pompes qui vident un bassin. Un dessin dans chaque corrigé.",
   },
-  "maths/4e/prop-ratio-pourcentage": {
-    titre: "Ratios, partages et pourcentages : 20 exercices corrigés",
-    // ⏳ 02/10/2026 : le coach a coupé la notion en deux ; cette feuille sert
-    // les deux en attendant d'être coupée à son tour.
-    notionsCoach: ["prop_ratio", "prop_pourcentages"],
+  // ⭐ 02/10/2026 : « Ratios, partages et pourcentages » devient deux feuilles,
+  // comme le coach (l'ancienne adresse redirige vers les pourcentages).
+  "maths/4e/prop-ratio": {
+    titre: "Ratios : 20 exercices corrigés",
     resume:
-      "Écrire et simplifier un ratio a : b, le traduire par une égalité de quotients, partager selon deux ou trois parts avec la barre dessinée, calculer un pourcentage, passer par le coefficient multiplicateur, enchaîner deux évolutions. Le braquet d'un vélo, le déclin des animaux sauvages, le CO₂ de l'air.",
+      "Écrire et simplifier un ratio, le traduire par une égalité de quotients, utiliser un ratio à trois termes, partager une quantité en deux ou trois parts. Puis les défis : retrouver les parts à partir d'un écart, enchaîner deux ratios, ajouter une quantité pour atteindre un nouveau ratio. Un triathlon, des flamants et des hérons, un compost, une prairie fleurie, le braquet d'un vélo, l'eau et ses atomes.",
+  },
+  "maths/4e/prop-pourcentages": {
+    titre: "Pourcentages : 20 exercices corrigés",
+    resume:
+      "Calculer de tête 10 %, 20 %, 30 %, 5 %, 100 % et 200 % en partant de 10 %, prendre un pourcentage, écrire une part en pourcentage et retrouver le tout ; passer par le coefficient multiplicateur, calculer un taux d'évolution, remonter à la valeur de départ, enchaîner deux évolutions. Le CO₂ de l'air, le déclin des animaux sauvages, une course solidaire, une voiture qui perd de sa valeur, des promotions sur le chocolat.",
   },
   "maths/4e/prop-echelle": {
     titre: "Échelles, agrandissements et réductions : 20 exercices corrigés",

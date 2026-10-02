@@ -71,6 +71,13 @@ export function insecables(texte: string): string {
       // Avant le guillemet fermant et les signes doubles. Une suite d'espaces
       // devient UNE insécable — deux espaces avant un `?` étaient déjà une faute.
       .replace(/[ \t]+(?=[»;?!:])/g, INSECABLE)
+      // ⭐ 02/10/2026 — un nombre et son « % » ou son « € » ne se séparent pas.
+      // Vu sur la fiche des pourcentages de 4e à 375 px : « 100 » en fin de
+      // ligne, « % » seul au début de la suivante ; pareil pour « 8 € ».
+      // Seulement après un CHIFFRE : « en % » ou « le € » ne sont pas visés.
+      // ⚠️ Dans une formule, « % » s'écrit `\%` : l'antislash le précède, pas
+      // une espace, et la règle ne l'atteint pas.
+      .replace(/(\d)[ \t]+(?=[%€])/g, `$1${INSECABLE}`)
   );
 }
 

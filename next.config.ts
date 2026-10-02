@@ -141,6 +141,23 @@ const nextConfig = {
         destination: "/contact",
         permanent: true,
       },
+      // ─── 02/10/2026 — RATIOS ET POURCENTAGES DE 4e : UNE FICHE DEVIENT DEUX ─
+      // Le coach a coupé la notion (`prop_ratio` + `prop_pourcentages`) ;
+      // Frédéric : « une fiche pour chaque notion ». L'ancienne adresse était au
+      // sitemap, dans les QR des PDF imprimés ET dans la description de la
+      // vidéo YouTube du calcul mental des pourcentages
+      // (manim/manifeste-youtube.json, champ `fiche`) : d'où les POURCENTAGES
+      // comme destination, c'est ce que cette vidéo enseigne.
+      {
+        source: "/fiches-cours/maths/4e/prop-ratio-pourcentage",
+        destination: "/fiches-cours/maths/4e/prop-pourcentages",
+        permanent: true,
+      },
+      {
+        source: "/fiches-exercices/maths/4e/prop-ratio-pourcentage",
+        destination: "/fiches-exercices/maths/4e/prop-pourcentages",
+        permanent: true,
+      },
       // ⛔⛔ LES TROIS PAGES QUI VENDAIENT À UN ÉTABLISSEMENT (31/08/2026).
       // Frédéric : « on n'a pas le droit de vendre à un établissement en tant
       // que contractuel en CDI ». Ce n'est donc pas un arbitrage commercial
