@@ -178,9 +178,25 @@ export const notions: NotionSource[] = [
   // prérequis de `prop_probleme` citaient `prop_pourcentage` et
   // `prop_evolution`, qui partent ici. Ils ont été allégés (voir microSkills),
   // sans quoi les deux notions se seraient mutuellement dépendantes.
+  //
+  // ⭐ SCINDÉE À SON TOUR LE 02/10/2026, à la demande de Frédéric : « les quatre
+  // premières micros, c'est pour le ratio, les quatre autres pour le
+  // pourcentage ». Deux objets, deux notions — chacune avec son défi, comme
+  // d'habitude, et les pourcentages gagnent une micro de CALCUL MENTAL
+  // (10 %, 20 %, 30 %, 5 %, 100 %, 200 %). La 5e garde `prop_ratio_pourcentage`.
+  // ⚠️ Les fiches de cours et d'exercices restent UNE fiche pour l'instant :
+  // FICHES_ALIAS et `notionsCoach` y renvoient les deux notions, en attendant
+  // qu'elles soient coupées à leur tour.
   {
-    id: "prop_ratio_pourcentage",
-    label: "Ratios et pourcentages",
+    id: "prop_ratio",
+    label: "Ratios",
+    boId: "BO4P1",
+    prerequis: ["prop_proportionnalite"],
+    levels: [1, 2, 3],
+  },
+  {
+    id: "prop_pourcentages",
+    label: "Pourcentages",
     boId: "BO4P1",
     prerequis: ["prop_proportionnalite"],
     levels: [1, 2, 3],

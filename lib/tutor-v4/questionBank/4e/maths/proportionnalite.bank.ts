@@ -24,9 +24,12 @@
  * étaient restés dans `prop_defi` (notion prop_proportionnalite) après la
  * scission du 28/08, qui a envoyé les pourcentages dans prop_ratio_pourcentage.
  * Un élève du chapitre « Proportionnalité » tombait donc sur des pourcentages
- * au défi. Ils portent maintenant `microId: "prop_ratio_defi"` (« Défis sur
+ * au défi. Ils portent maintenant `microId: "prop_pourcentage_defi"` (« Défis sur
  * les ratios et les pourcentages ») : leurs `id` n'ont pas changé, rien n'est
  * supprimé.
+ * ⭐ 02/10/2026 — la notion est coupée en deux : ces sept défis et les micros
+ * de pourcentage vont dans `prop_pourcentages`, micro `prop_pourcentage_defi`
+ * (« Défis sur les pourcentages »).
  * ⭐ 30/09/2026 — les gabarits tirent une SITUATION × une TOURNURE : les élèves
  * de 4e de Frédéric voyaient revenir la même phrase (mesure :
  * scripts/mesurer-squelettes-coach.ts).
@@ -1510,6 +1513,275 @@ function genPourcentage(types: Array<"partie" | "aide" | "taux" | "total" | "fra
   };
 }
 
+/* ---------- Calcul mental : 10 %, 20 %, 30 %, 5 %, 100 %, 200 % ----------
+ * ⭐ 02/10/2026, demandé par Frédéric avec la scission de la notion. Six
+ * pourcentages qui se calculent DE TÊTE, tous à partir de 10 % : diviser par
+ * 10, puis doubler (20 %), tripler (30 %), prendre la moitié (5 %) ; 100 %,
+ * c'est la quantité entière, 200 %, son double. L'explication donne TOUJOURS
+ * ce chemin, jamais « N × p ÷ 100 » : c'est le geste mental qu'on enseigne.
+ * Les situations « partie d'un tout » reprennent POURCENTAGES (on n'y met ni
+ * 100 % ni 200 % : « 200 % des élèves viennent à vélo » n'a pas de sens) ;
+ * celles de COMPARAISON (« cette année vaut 200 % de l'an dernier ») acceptent
+ * les six. */
+
+type MentalP = 5 | 10 | 20 | 30 | 100 | 200;
+
+/** Le chemin mental, en une phrase, et le calcul qui va avec. */
+function cheminMental(p: number, N: number): { methode: string; calcul: string } {
+  const d = N / 10;
+  switch (p) {
+    case 10:
+      return { methode: "10 %, c’est un dixième : on divise par 10.", calcul: `${N} ÷ 10 = ${fr(d)}.` };
+    case 20:
+      return { methode: "20 %, c’est le double de 10 %.", calcul: `10 % de ${N} = ${fr(d)}, donc 20 % = 2 × ${fr(d)} = ${fr(2 * d)}.` };
+    case 30:
+      return { methode: "30 %, c’est le triple de 10 %.", calcul: `10 % de ${N} = ${fr(d)}, donc 30 % = 3 × ${fr(d)} = ${fr(3 * d)}.` };
+    case 5:
+      return { methode: "5 %, c’est la moitié de 10 %.", calcul: `10 % de ${N} = ${fr(d)}, donc 5 % = ${fr(d)} ÷ 2 = ${fr(d / 2)}.` };
+    case 100:
+      return { methode: "100 %, c’est la quantité tout entière : on ne change rien.", calcul: `100 % de ${N} = ${N}.` };
+    default:
+      return { methode: "200 %, c’est deux fois la quantité : on la double.", calcul: `200 % de ${N} = 2 × ${N} = ${2 * N}.` };
+  }
+}
+
+const DEF_MENTAL = "p % d’une quantité, c’est p parts sur 100 de cette quantité ; 10 % en est le dixième.";
+
+/** Des comparaisons « ceci vaut p % de cela » : elles acceptent 100 % et 200 %. */
+type SituationComparaison = {
+  avant: (N: number) => string;
+  apres: (p: number) => string;
+  q: string;
+  nom: string;
+  u: string;
+  N: number[];
+};
+
+const COMPARAISONS: SituationComparaison[] = [
+  { avant: (N) => `L’an dernier, un club de judo comptait ${N} adhérents.`, apres: (p) => `Cette année, le nombre d’adhérents représente ${p} % de celui de l’an dernier.`, q: "Combien d’adhérents le club compte-t-il cette année ?", nom: "le nombre d’adhérents de cette année", u: "adhérents", N: [40, 60, 80, 120, 140, 160, 200] },
+  { avant: (N) => `Au printemps, un plant de tomate mesurait ${N} cm.`, apres: (p) => `En été, sa hauteur atteint ${p} % de sa hauteur du printemps.`, q: "Combien mesure-t-il en été, en cm ?", nom: "sa hauteur en été", u: "cm", N: [40, 60, 80, 100, 120] },
+  { avant: (N) => `En semaine, un plombier facture une intervention ${N} €.`, apres: (p) => `Le dimanche, il facture ${p} % de ce tarif.`, q: "Combien coûte une intervention le dimanche, en € ?", nom: "le tarif du dimanche", u: "€", N: [60, 80, 120, 140, 160, 180] },
+  { avant: (N) => `Mardi, Malik a parcouru ${N} km à vélo.`, apres: (p) => `Samedi, il parcourt ${p} % de cette distance.`, q: "Combien de kilomètres parcourt-il samedi ?", nom: "la distance du samedi", u: "km", N: [20, 40, 60, 80] },
+  { avant: (N) => `Une vidéo de vulgarisation a fait ${N} vues le premier jour.`, apres: (p) => `Le deuxième jour, son nombre de vues atteint ${p} % de celui du premier jour.`, q: "Combien de vues a-t-elle faites le deuxième jour ?", nom: "le nombre de vues du deuxième jour", u: "vues", N: [200, 400, 600, 800, 1000, 1200] },
+  { avant: (N) => `L’an dernier, un verger a produit ${N} kg de pommes.`, apres: (p) => `Cette année, la récolte vaut ${p} % de celle de l’an dernier.`, q: "Combien de kilogrammes de pommes a-t-il produits cette année ?", nom: "la récolte de cette année", u: "kg", N: [200, 300, 400, 600, 800] },
+  { avant: (N) => `En janvier, Chloé a économisé ${N} €.`, apres: (p) => `En février, elle économise ${p} % de la somme de janvier.`, q: "Combien économise-t-elle en février ?", nom: "la somme économisée en février", u: "€", N: [20, 40, 60, 80, 100, 120] },
+  { avant: (N) => `Il y a dix ans, un marais abritait ${N} hérons.`, apres: (p) => `Aujourd’hui, leur nombre représente ${p} % de celui d’il y a dix ans.`, q: "Combien de hérons le marais abrite-t-il aujourd’hui ?", nom: "le nombre de hérons aujourd’hui", u: "hérons", N: [40, 60, 80, 120, 200] },
+  { avant: (N) => `Avec un tuyau d’arrosage, on remplit une piscine de ${N} L en une heure.`, apres: (p) => `Avec une pompe, on remplit en une heure ${p} % de cette quantité.`, q: "Combien de litres la pompe remplit-elle en une heure ?", nom: "le volume rempli par la pompe", u: "L", N: [400, 600, 800, 1000, 1200] },
+  { avant: (N) => `En janvier, une chaîne de cuisine comptait ${N} abonnés.`, apres: (p) => `En juin, son nombre d’abonnés vaut ${p} % de celui de janvier.`, q: "Combien a-t-elle d’abonnés en juin ?", nom: "le nombre d’abonnés en juin", u: "abonnés", N: [200, 400, 600, 1000, 2000] },
+  { avant: (N) => `Il y a vingt ans, un tableau a été acheté ${N} €.`, apres: (p) => `Aujourd’hui, il vaut ${p} % de son prix d’achat.`, q: "Combien vaut-il aujourd’hui, en € ?", nom: "sa valeur aujourd’hui", u: "€", N: [200, 400, 600, 800, 1000] },
+  { avant: (N) => `L’an dernier, une cantine a servi ${N} repas végétariens par mois.`, apres: (p) => `Cette année, elle en sert ${p} % de ce nombre.`, q: "Combien de repas végétariens sert-elle par mois cette année ?", nom: "le nombre de repas végétariens de cette année", u: "repas", N: [120, 160, 200, 240, 300] },
+  { avant: (N) => `Lundi, une boulangerie a vendu ${N} baguettes.`, apres: (p) => `Dimanche, elle en vend ${p} % du nombre de lundi.`, q: "Combien de baguettes vend-elle dimanche ?", nom: "le nombre de baguettes vendues dimanche", u: "baguettes", N: [100, 140, 160, 200, 240] },
+  { avant: (N) => `En 2015, une commune comptait ${N} panneaux solaires sur ses toits.`, apres: (p) => `Aujourd’hui, leur nombre atteint ${p} % de celui de 2015.`, q: "Combien de panneaux solaires compte-t-elle aujourd’hui ?", nom: "le nombre de panneaux aujourd’hui", u: "panneaux", N: [40, 80, 120, 160, 200] },
+];
+
+function tirerComparaison(taux: number[]) {
+  for (let essai = 0; essai < 300; essai++) {
+    const s = randomChoice(COMPARAISONS);
+    const N = randomChoice(s.N);
+    const p = randomChoice(taux);
+    if ((N * p) % 100 === 0) return { s, N, p, x: (N * p) / 100 };
+  }
+  return { s: COMPARAISONS[0], N: 80, p: 200, x: 160 };
+}
+
+/** p % de N, de tête : sans contexte, dans une partie d'un tout, ou dans une comparaison. */
+function genMental(taux: MentalP[], sources: Array<"nu" | "partie" | "comparaison">) {
+  const source = randomChoice(sources);
+  const tauxPartie = taux.filter((p) => p <= 30);
+  let text: string;
+  let x: number;
+  let N: number;
+  let p: number;
+  let conclusion: string;
+  if (source === "partie" && tauxPartie.length) {
+    const t = tirerPourcentage(tauxPartie);
+    ({ N, p, x } = t);
+    const s = t.s;
+    const k = randomInt(0, 5);
+    if (k === 0) text = `${s.cadre(N)} ${s.part(p)} ${s.qPart} Calcule-le de tête.`;
+    else if (k === 1) text = `Sans calculatrice : ${minuscule(s.cadre(N))} ${s.part(p)} ${s.qPart}`;
+    else if (k === 2) text = `${s.cadre(N)} ${s.part(p)} Trouve de tête ${s.nomPart}.`;
+    else if (k === 3) text = `${s.cadre(N)} ${s.part(p)} En partant de 10 %, calcule mentalement ${s.nomPart}.`;
+    else if (k === 4) text = `Calcul mental. ${s.cadre(N)} ${s.part(p)} ${s.qPart}`;
+    else text = `De tête, calcule ${s.nomPart} : ${minuscule(s.cadre(N))} ${s.part(p)}`;
+    conclusion = `${s.nomPart} : ${fr(x)} ${s.u}.`;
+  } else if (source === "comparaison" || source === "partie") {
+    const t = tirerComparaison(taux);
+    ({ N, p, x } = t);
+    const s = t.s;
+    const k = randomInt(0, 4);
+    if (k === 0) text = `${s.avant(N)} ${s.apres(p)} ${s.q}`;
+    else if (k === 1) text = `${s.avant(N)} ${s.apres(p)} Calcule de tête ${s.nom}.`;
+    else if (k === 2) text = `De tête : ${minuscule(s.avant(N))} ${s.apres(p)} ${s.q}`;
+    else if (k === 3) text = `${s.avant(N)} ${s.apres(p)} Sans poser d’opération, trouve ${s.nom}.`;
+    else text = `Calcul mental. ${s.avant(N)} ${s.apres(p)} ${s.q}`;
+    conclusion = `${s.nom} : ${fr(x)} ${s.u}.`;
+  } else {
+    p = randomChoice(taux);
+    N = randomChoice(p === 5 ? [20, 40, 60, 80, 120, 140, 160, 180, 240, 300] : [30, 40, 50, 60, 70, 80, 90, 120, 150, 250, 300, 450]);
+    x = (N * p) / 100;
+    const k = randomInt(0, 5);
+    if (k === 0) text = `Calcule de tête ${p} % de ${N}.`;
+    else if (k === 1) text = `Combien vaut ${p} % de ${N} ? Réponds sans poser d’opération.`;
+    else if (k === 2) text = `Sans calculatrice, donne ${p} % de ${N}.`;
+    else if (k === 3) text = `Complète de tête : ${p} % de ${N} = …`;
+    else if (k === 4) text = `Trouve mentalement ${p} % de ${N}.`;
+    else text = `Quel nombre représente ${p} % de ${N} ? Calcule-le de tête.`;
+    conclusion = `${p} % de ${N} = ${fr(x)}.`;
+  }
+  const c = cheminMental(p, N);
+  return {
+    text,
+    format: "short" as const,
+    expected: attendu(x),
+    comparator: "number_equal" as const,
+    explanation: expl(DEF_MENTAL, c.methode, c.calcul, conclusion),
+  };
+}
+
+/** On connaît 10 % (ou 5 %) du tout ; on en déduit de tête un autre pourcentage. */
+function genMentalDeduire() {
+  for (let essai = 0; essai < 300; essai++) {
+    const s = randomChoice(POURCENTAGES);
+    const N = randomChoice(s.N);
+    const connu = Math.random() < 0.7 ? 10 : 5;
+    const cible = connu === 10 ? randomChoice([20, 30, 5, 100]) : randomChoice([10, 20, 100]);
+    if ((N * connu) % 100 !== 0 || (N * cible) % 100 !== 0) continue;
+    const xc = (N * connu) / 100;
+    const xq = (N * cible) / 100;
+    const k = randomInt(0, 3);
+    const question =
+      cible === 100 && k === 0
+        ? s.qTotal
+        : k === 1
+          ? `Sans calculatrice, trouve ${cible} % ${s.desTotal}.`
+          : k === 2
+            ? `À partir de ce renseignement, calcule de tête ${cible} % ${s.desTotal}.`
+            : `Combien font ${cible} % ${s.desTotal} ?`;
+    const lien =
+      connu === 10
+        ? cible === 20 ? "20 %, c’est 2 fois 10 %." : cible === 30 ? "30 %, c’est 3 fois 10 %." : cible === 5 ? "5 %, c’est la moitié de 10 %." : "100 %, c’est 10 fois 10 %."
+        : cible === 10 ? "10 %, c’est 2 fois 5 %." : cible === 20 ? "20 %, c’est 4 fois 5 %." : "100 %, c’est 20 fois 5 %.";
+    const facteur = cible / connu;
+    return {
+      text: `${s.totalInconnu(xc, connu)} ${question}`,
+      format: "short" as const,
+      expected: attendu(xq),
+      comparator: "number_equal" as const,
+      explanation: expl(
+        DEF_MENTAL,
+        `on n’a pas besoin du total : on part de ${connu} % et on s’en sert comme d’une brique. ${lien}`,
+        `${connu} % valent ${fr(xc)}, donc ${cible} % valent ${facteur < 1 ? `${fr(xc)} ÷ 2` : `${fr(facteur)} × ${fr(xc)}`} = ${fr(xq)}.`,
+        `${cible} % ${s.desTotal}, c’est ${fr(xq)} ${s.u}.`,
+      ),
+    };
+  }
+  return genMental([10], ["nu"]);
+}
+
+const PRENOMS_MENTAL: Array<[string, "il" | "elle"]> = [
+  ["Léa", "elle"], ["Malik", "il"], ["Inès", "elle"], ["Hugo", "il"], ["Nour", "elle"],
+  ["Sacha", "il"], ["Emma", "elle"], ["Yanis", "il"], ["Chloé", "elle"], ["Kenzo", "il"],
+  ["Jade", "elle"], ["Noah", "il"], ["Lina", "elle"], ["Tom", "il"],
+];
+
+const METHODES_MENTAL: Record<MentalP, string> = {
+  10: "diviser le nombre par 10",
+  20: "diviser par 10, puis doubler",
+  30: "diviser par 10, puis multiplier par 3",
+  5: "diviser par 10, puis prendre la moitié",
+  100: "garder le nombre tel quel",
+  200: "doubler le nombre",
+};
+/** Les fausses méthodes qu'on entend vraiment. */
+const PIEGES_METHODE: Record<MentalP, string[]> = {
+  10: ["diviser le nombre par 100", "enlever 10 au nombre"],
+  20: ["diviser le nombre par 20", "diviser par 10, puis ajouter 2"],
+  30: ["diviser le nombre par 30", "diviser par 10, puis ajouter 3"],
+  5: ["diviser le nombre par 5", "diviser par 10, puis doubler"],
+  100: ["diviser le nombre par 100", "multiplier le nombre par 100"],
+  200: ["ajouter 200 au nombre", "diviser le nombre par 2"],
+};
+
+/** QCM : quelle méthode pour calculer p % de N de tête ? */
+function genMentalMethode() {
+  const p = randomChoice<MentalP>([10, 20, 30, 5, 100, 200]);
+  const N = randomChoice([40, 60, 80, 120, 140, 160, 240, 300]);
+  const [P, pron] = randomChoice(PRENOMS_MENTAL);
+  const k = randomInt(0, 4);
+  const text =
+    k === 0
+      ? `Pour calculer de tête ${p} % de ${N}, quelle méthode est la bonne ?`
+      : k === 1
+        ? `${P} veut calculer ${p} % de ${N} sans calculatrice. Que doit-${pron} faire ?`
+        : k === 2
+          ? `Quelle méthode permet de trouver mentalement ${p} % d’un nombre, par exemple de ${N} ?`
+          : k === 3
+            ? `${P} doit trouver ${p} % de ${N} de tête. Quelle est la bonne façon de s’y prendre ?`
+            : `Calcul mental : comment obtenir ${p} % de ${N} sans poser d’opération ?`;
+  const correct = METHODES_MENTAL[p];
+  const autres = ([10, 20, 30, 5, 100, 200] as MentalP[]).filter((q) => q !== p).map((q) => METHODES_MENTAL[q]);
+  const c = cheminMental(p, N);
+  return {
+    text,
+    format: "qcm" as const,
+    // Deux méthodes voisines en réserve : pour 5 %, « diviser par 10, puis
+    // doubler » est à la fois un piège et la méthode de 20 % — le doublon
+    // tomberait au tri et le QCM n'aurait plus que trois lignes.
+    choices: makeChoices(correct, [...PIEGES_METHODE[p], ...shuffle(autres).slice(0, 2)]),
+    expected: [correct],
+    comparator: "mcq_exact" as const,
+    explanation: expl(DEF_MENTAL, c.methode, c.calcul, `la bonne méthode : ${correct}.`),
+  };
+}
+
+/** Vrai ou faux : une affirmation d'élève, juste une fois sur deux. */
+function genMentalVraiFaux() {
+  const p = randomChoice<MentalP>([10, 20, 30, 5, 100, 200]);
+  const N = randomChoice([40, 60, 80, 120, 140, 160, 240, 300]);
+  const x = (N * p) / 100;
+  // Les erreurs qu'on entend : 5 % pris pour un cinquième, 200 % pour « + 200 »…
+  const faux: Record<MentalP, number[]> = {
+    10: [N - 10, N / 100],
+    20: [N / 20, N / 10 + 2],
+    30: [N - 30, N / 10 + 3],
+    5: [N / 5, N / 10 * 2],
+    100: [1, N / 100],
+    200: [N + 200, N / 2],
+  };
+  const juste = Math.random() < 0.5;
+  const annonce = juste ? x : randomChoice(faux[p].filter((v) => v !== x));
+  const [P, pron] = randomChoice(PRENOMS_MENTAL);
+  const k = randomInt(0, 4);
+  const text =
+    k === 0
+      ? `${P} affirme : « ${p} % de ${N}, c’est ${fr(annonce)}. » A-t-${pron} raison ?`
+      : k === 1
+        ? `Calcul mental — ${P} trouve que ${p} % de ${N} font ${fr(annonce)}. A-t-${pron} raison ?`
+        : k === 2
+          ? `Vrai ou faux ? D’après ${P}, ${p} % de ${N} = ${fr(annonce)}.`
+          : k === 3
+            ? `Au tableau, ${P} écrit : ${p} % de ${N} = ${fr(annonce)}. Est-ce juste ?`
+            : `Vrai ou faux ? ${p} % de ${N}, c’est ${fr(annonce)}.`;
+  const vf = k === 2 || k === 4;
+  const oui = vf ? "vrai" : "oui";
+  const non = vf ? "faux" : "non";
+  const c = cheminMental(p, N);
+  return {
+    text,
+    format: "qcm" as const,
+    choices: [oui, non],
+    expected: [juste ? oui : non],
+    comparator: "mcq_exact" as const,
+    explanation: expl(
+      DEF_MENTAL,
+      c.methode,
+      c.calcul,
+      juste ? `${fr(annonce)} est juste.` : `${fr(annonce)} est faux : ${p} % de ${N} = ${fr(x)}.`,
+    ),
+  };
+}
+
 export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   // PROP_RECONNAITRE
@@ -1833,7 +2105,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_pourcentage_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_pourcentage",
     difficulty: 1,
     theme: "neutral",
@@ -1854,7 +2126,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_pourcentage_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_pourcentage",
     difficulty: 2,
     theme: "neutral",
@@ -1875,7 +2147,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_pourcentage_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_pourcentage",
     difficulty: 2,
     theme: "neutral",
@@ -1888,7 +2160,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_pourcentage_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_pourcentage",
     difficulty: 3,
     theme: "neutral",
@@ -1901,7 +2173,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_pourcentage_tpl_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_pourcentage",
     difficulty: 3,
     theme: "reunion",
@@ -1914,7 +2186,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_pourcentage_tpl_4",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_pourcentage",
     difficulty: 3,
     theme: "neutral",
@@ -1926,6 +2198,102 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
 
   // =========================
+  // PROP_POURCENTAGE_MENTAL (02/10/2026)
+  // ★1 : 10 %, 100 %, 200 % · ★2 : 20 %, 30 %, 5 % · ★3 : déduire, méthode, vrai/faux
+  // =========================
+  {
+    kind: "template",
+    id: "prop_pourcentage_mental_tpl_1_dix",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_mental",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "10 %, c’est diviser par 10.",
+    tags: ["pourcentage", "calcul_mental", "template"],
+    generate: () => genMental([10], ["nu", "partie", "partie", "comparaison"]),
+  },
+  {
+    kind: "template",
+    id: "prop_pourcentage_mental_tpl_2_cent_deux_cents",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_mental",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "100 %, c’est tout ; 200 %, c’est le double.",
+    tags: ["pourcentage", "calcul_mental", "template"],
+    generate: () => genMental([100, 200], ["nu", "comparaison", "comparaison"]),
+  },
+  {
+    kind: "template",
+    id: "prop_pourcentage_mental_tpl_3_vingt_trente_cinq",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_mental",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Commence par 10 % : double-le, triple-le ou prends sa moitié.",
+    tags: ["pourcentage", "calcul_mental", "template"],
+    generate: () => genMental([20, 30, 5], ["nu", "partie", "partie", "comparaison"]),
+  },
+  {
+    kind: "template",
+    id: "prop_pourcentage_mental_tpl_4_six_taux",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_mental",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Tout part de 10 %.",
+    tags: ["pourcentage", "calcul_mental", "template"],
+    generate: () => genMental([10, 20, 30, 5, 100, 200], ["comparaison", "comparaison", "nu"]),
+  },
+  {
+    kind: "template",
+    id: "prop_pourcentage_mental_tpl_5_deduire",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_mental",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Pas besoin du total : pars du pourcentage que tu connais.",
+    tags: ["pourcentage", "calcul_mental", "template"],
+    generate: () => genMentalDeduire(),
+  },
+  {
+    kind: "template",
+    id: "prop_pourcentage_mental_tpl_6_methode",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_mental",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Quel lien avec 10 % ?",
+    tags: ["pourcentage", "calcul_mental", "qcm", "template"],
+    generate: () => genMentalMethode(),
+  },
+  {
+    kind: "template",
+    id: "prop_pourcentage_mental_tpl_7_vrai_faux",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_mental",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Refais le calcul en partant de 10 %.",
+    tags: ["pourcentage", "calcul_mental", "qcm", "piege", "template"],
+    generate: () => genMentalVraiFaux(),
+  },
+
+  // =========================
   // PROP_COEFF_MULT
   // =========================
   {
@@ -1933,7 +2301,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_multiplicateur_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_coeff_multiplicateur",
     difficulty: 2,
     theme: "neutral",
@@ -1954,7 +2322,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_multiplicateur_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_coeff_multiplicateur",
     difficulty: 2,
     theme: "neutral",
@@ -1975,7 +2343,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_multiplicateur_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_coeff_multiplicateur",
     difficulty: 3,
     theme: "neutral",
@@ -1988,7 +2356,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_multiplicateur_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_coeff_multiplicateur",
     difficulty: 3,
     theme: "neutral",
@@ -2001,7 +2369,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_multiplicateur_tpl_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_coeff_multiplicateur",
     difficulty: 4,
     theme: "neutral",
@@ -2018,7 +2386,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_evolution_fixed_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_evolution",
     difficulty: 2,
     theme: "neutral",
@@ -2039,7 +2407,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_evolution_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_evolution",
     difficulty: 2,
     theme: "neutral",
@@ -2060,7 +2428,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_evolution_tpl_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_evolution",
     difficulty: 3,
     theme: "neutral",
@@ -2073,7 +2441,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_evolution_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_evolution",
     difficulty: 3,
     theme: "neutral",
@@ -2086,7 +2454,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_evolution_tpl_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_evolution",
     difficulty: 4,
     theme: "reunion",
@@ -2099,7 +2467,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_evolution_tpl_4",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_evolution",
     difficulty: 4,
     theme: "neutral",
@@ -2112,7 +2480,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_evolution_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_evolution",
     difficulty: 4,
     theme: "neutral",
@@ -2253,8 +2621,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_defi_fixed_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
-    microId: "prop_ratio_defi",
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Un prix augmente de 20 %, puis baisse de 20 %. Revient-il au prix initial ?",
@@ -2287,8 +2655,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_defi_tpl_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
-    microId: "prop_ratio_defi",
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Une évolution successive se traite avec des coefficients multiplicateurs.",
@@ -2313,8 +2681,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_defi_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
-    microId: "prop_ratio_defi",
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique l’erreur : « augmenter de 30 %, c’est multiplier par 0,3 ».",
@@ -2333,8 +2701,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_defi_open_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
-    microId: "prop_ratio_defi",
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi une réduction de 25 % ne correspond pas à multiplier par 25.",
@@ -2793,7 +3161,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_pourcentage_fixed_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_pourcentage",
     difficulty: 2,
     theme: "neutral",
@@ -2814,7 +3182,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_pourcentage_tpl_5",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_pourcentage",
     difficulty: 2,
     theme: "neutral",
@@ -2827,7 +3195,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_pourcentage_tpl_4_reduction",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_pourcentage",
     difficulty: 3,
     theme: "neutral",
@@ -2841,7 +3209,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_pourcentage_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_pourcentage",
     difficulty: 2,
     theme: "neutral",
@@ -2864,7 +3232,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_multiplicateur_fixed_4",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_coeff_multiplicateur",
     difficulty: 2,
     theme: "neutral",
@@ -2886,7 +3254,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_multiplicateur_fixed_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_coeff_multiplicateur",
     difficulty: 2,
     theme: "neutral",
@@ -2908,7 +3276,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_multiplicateur_tpl_4",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_coeff_multiplicateur",
     difficulty: 3,
     theme: "neutral",
@@ -2921,7 +3289,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_multiplicateur_tpl_3_appliquer",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_coeff_multiplicateur",
     difficulty: 3,
     theme: "neutral",
@@ -2934,7 +3302,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_multiplicateur_open_1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_coeff_multiplicateur",
     difficulty: 3,
     theme: "neutral",
@@ -2957,7 +3325,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_evolution_fixed_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_evolution",
     difficulty: 3,
     theme: "neutral",
@@ -2978,7 +3346,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_evolution_tpl_5",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_evolution",
     difficulty: 3,
     theme: "neutral",
@@ -2991,7 +3359,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_evolution_open_2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_evolution",
     difficulty: 4,
     theme: "neutral",
@@ -3084,8 +3452,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_defi_fixed_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
-    microId: "prop_ratio_defi",
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_defi",
     difficulty: 4,
     theme: "neutral",
     text: "Un prix augmente de 10 % puis baisse de 10 %. Retrouve-t-on le prix de départ ?",
@@ -3106,8 +3474,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_defi_tpl_1_successif",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
-    microId: "prop_ratio_defi",
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "On applique d’abord la première évolution, puis la seconde.",
@@ -3119,8 +3487,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_defi_open_3",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
-    microId: "prop_ratio_defi",
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_defi",
     difficulty: 5,
     theme: "neutral",
     text: "Explique pourquoi deux évolutions en pourcentage ne s’additionnent pas toujours simplement.",
@@ -3224,7 +3592,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_pourcentage_tpl_etoile1",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_pourcentage",
     difficulty: 1,
     theme: "neutral",
@@ -3237,7 +3605,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_pourcentage_tpl_etoile1_fraction",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_pourcentage",
     difficulty: 1,
     theme: "neutral",
@@ -3250,7 +3618,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_coeff_multiplicateur_tpl_etoile2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_coeff_multiplicateur",
     difficulty: 2,
     theme: "neutral",
@@ -3263,7 +3631,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     id: "prop_evolution_tpl_etoile2",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     microId: "prop_evolution",
     difficulty: 2,
     theme: "neutral",

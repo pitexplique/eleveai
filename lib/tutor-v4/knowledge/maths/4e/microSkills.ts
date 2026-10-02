@@ -513,53 +513,80 @@ export const microSkills: MicroSkillSource[] = [
   //   · le ratio à TROIS TERMES (2 : 3 : 7), que le BO écrit noir sur blanc et
   //     dont la 5e n'a aucun item — vérifié, zéro occurrence ;
   //   · le PARTAGE d'une quantité selon un ratio, la compétence du programme.
+  //
+  // ⭐ 02/10/2026 — LA NOTION EST COUPÉE EN DEUX (voir notions.ts) : les quatre
+  // micros de ratio + leur défi dans `prop_ratio`, les micros de pourcentage +
+  // le calcul mental + leur défi dans `prop_pourcentages`. Les `id` des micros
+  // n'ont pas changé : seul leur `notionId` a bougé.
   {
     id: "prop_rapport",
     label: "Exprimer et utiliser un ratio",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_ratio",
     prerequis: ["prop_reconnaitre", "fraction_simplifier"],
   },
   {
     id: "prop_ratio_quotients",
     label: "Relier un ratio à une égalité de quotients",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_ratio",
     prerequis: ["prop_rapport", "fraction_egale"],
   },
   {
     id: "prop_ratio_trois",
     label: "Utiliser un ratio à trois termes",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_ratio",
     prerequis: ["prop_ratio_quotients"],
   },
   {
     id: "prop_ratio_partager",
     label: "Partager une quantité selon un ratio",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_ratio",
     prerequis: ["prop_ratio_trois", "prop_quatrieme"],
   },
+  // Le défi des ratios garde l'identifiant de l'ancien défi commun ; les défis
+  // de pourcentage sont partis dans `prop_pourcentage_defi`.
+  {
+    id: "prop_ratio_defi",
+    label: "Défis sur les ratios",
+    notionId: "prop_ratio",
+    prerequis: ["prop_ratio_partager"],
+  },
+
+  /* =========================
+     POURCENTAGES
+  ========================= */
   {
     id: "prop_pourcentage",
     label: "Calculer et interpréter un pourcentage",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     prerequis: ["prop_coeff"],
+  },
+  // ⭐ NOUVELLE LE 02/10/2026, demandée par Frédéric : les pourcentages qui se
+  // calculent DE TÊTE — 10 % (diviser par 10), 20 % et 30 % (le double, le
+  // triple de 10 %), 5 % (la moitié de 10 %), 100 % (le nombre lui-même) et
+  // 200 % (son double). Banque : `pourcentages-mental.bank.ts`.
+  {
+    id: "prop_pourcentage_mental",
+    label: "Calculer de tête 10 %, 20 %, 30 %, 5 %, 100 %, 200 %",
+    notionId: "prop_pourcentages",
+    prerequis: ["prop_pourcentage"],
   },
   {
     id: "prop_coeff_multiplicateur",
     label: "Utiliser un coefficient multiplicateur",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     prerequis: ["prop_pourcentage", "prop_coeff"],
   },
   {
     id: "prop_evolution",
     label: "Interpréter une évolution en pourcentage",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_pourcentages",
     prerequis: ["prop_pourcentage", "prop_coeff_multiplicateur"],
   },
   {
-    id: "prop_ratio_defi",
-    label: "Défis sur les ratios et les pourcentages",
-    notionId: "prop_ratio_pourcentage",
-    prerequis: ["prop_ratio_partager", "prop_evolution"],
+    id: "prop_pourcentage_defi",
+    label: "Défis sur les pourcentages",
+    notionId: "prop_pourcentages",
+    prerequis: ["prop_evolution", "prop_pourcentage_mental"],
   },
 
   /* =========================

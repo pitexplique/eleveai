@@ -253,6 +253,16 @@ export const NOTIONS: NotionLexique[] = [
     ],
   },
   {
+    // ⭐ AJOUTÉE LE 02/10/2026 avec la notion `prop_pourcentages` de 4e, à la
+    // demande de Frédéric. « pourcentage » était un alias de la
+    // proportionnalité : un élève de 4e qui le tapait ouvrait une notion qui n'a
+    // plus aucun pourcentage depuis le 28/08. ⚠️ AVANT « calcul » et
+    // « proportionnalite » : le premier alias qui accroche gagne, et « calculer
+    // un pourcentage » partait sur le calcul général.
+    id: "pourcentages", label: "les pourcentages", matiere: "maths",
+    alias: ["pourcentage", "pourcentages", "pour cent", "coefficient multiplicateur"],
+  },
+  {
     id: "calcul", label: "le calcul", matiere: "maths",
     alias: ["calcul", "calculs", "calculer", "addition", "additionner", "soustraction", "soustraire", "multiplication", "multiplier", "division", "diviser", "table", "tables", "tables de multiplication", "poser une operation", "compter"],
   },
@@ -319,7 +329,7 @@ export const NOTIONS: NotionLexique[] = [
   },
   {
     id: "proportionnalite", label: "la proportionnalité", matiere: "maths",
-    alias: ["proportionnalite", "proportionnel", "pourcentage", "pourcentages", "echelle", "produit en croix", "regle de trois", "vitesse"],
+    alias: ["proportionnalite", "proportionnel", "echelle", "produit en croix", "regle de trois", "vitesse"],
   },
   {
     id: "equations", label: "les équations", matiere: "maths",

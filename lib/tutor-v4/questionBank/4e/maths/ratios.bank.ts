@@ -1,5 +1,9 @@
 // lib/tutor-v4/questionBank/4e/maths/ratios.bank.ts
 //
+// ⭐ 02/10/2026 — la notion est coupée en deux : ce fichier porte `prop_ratio`
+// (ses quatre micros et son défi) ; les deux défis-ponts ratio → pourcentage
+// sont partis au défi de `prop_pourcentages`.
+//
 // ⭐ LES CINQ MICROS NEUVES DE `prop_ratio_pourcentage` (28/08/2026). Les
 // trois micros de pourcentage de la notion — `prop_pourcentage`,
 // `prop_coeff_multiplicateur`, `prop_evolution` — gardent leurs items dans
@@ -535,7 +539,7 @@ export const ratiosBank: TutorBankItemV4[] = [
     id: "4e_prop_rapport_tpl_1_exprimer",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_ratio",
     microId: "prop_rapport",
     difficulty: 2,
     theme: "neutral",
@@ -587,7 +591,7 @@ export const ratiosBank: TutorBankItemV4[] = [
     id: "4e_prop_rapport_tpl_2_utiliser",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_ratio",
     microId: "prop_rapport",
     difficulty: 3,
     theme: "neutral",
@@ -642,7 +646,7 @@ export const ratiosBank: TutorBankItemV4[] = [
     id: "4e_prop_rapport_tpl_4_melange",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_ratio",
     microId: "prop_rapport",
     difficulty: 3,
     theme: "neutral",
@@ -712,7 +716,7 @@ export const ratiosBank: TutorBankItemV4[] = [
     id: "4e_prop_rapport_tpl_3_egaux",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_ratio",
     microId: "prop_rapport",
     difficulty: 2,
     theme: "neutral",
@@ -767,7 +771,7 @@ export const ratiosBank: TutorBankItemV4[] = [
     id: "4e_prop_rapport_fixed_un_pour_un",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_ratio",
     microId: "prop_rapport",
     difficulty: 1,
     theme: "neutral",
@@ -794,7 +798,7 @@ export const ratiosBank: TutorBankItemV4[] = [
     id: "4e_prop_ratio_quotients_fixed_definition",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_ratio",
     microId: "prop_ratio_quotients",
     difficulty: 2,
     theme: "neutral",
@@ -816,7 +820,7 @@ export const ratiosBank: TutorBankItemV4[] = [
     id: "4e_prop_ratio_quotients_tpl_1_trouver",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_ratio",
     microId: "prop_ratio_quotients",
     difficulty: 3,
     theme: "neutral",
@@ -861,7 +865,7 @@ export const ratiosBank: TutorBankItemV4[] = [
     id: "4e_prop_ratio_quotients_tpl_2_reconnaitre",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_ratio",
     microId: "prop_ratio_quotients",
     difficulty: 3,
     theme: "neutral",
@@ -908,7 +912,7 @@ export const ratiosBank: TutorBankItemV4[] = [
     id: "4e_prop_ratio_quotients_tpl_3_fraction_du_total",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_ratio",
     microId: "prop_ratio_quotients",
     difficulty: 3,
     theme: "neutral",
@@ -965,7 +969,7 @@ export const ratiosBank: TutorBankItemV4[] = [
     id: "4e_prop_ratio_trois_tpl_1_calculer",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_ratio",
     microId: "prop_ratio_trois",
     difficulty: 4,
     theme: "neutral",
@@ -1018,7 +1022,7 @@ export const ratiosBank: TutorBankItemV4[] = [
     id: "4e_prop_ratio_trois_tpl_2_egalite",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_ratio",
     microId: "prop_ratio_trois",
     difficulty: 3,
     theme: "neutral",
@@ -1077,7 +1081,7 @@ export const ratiosBank: TutorBankItemV4[] = [
     id: "4e_prop_ratio_partager_tpl_1_deux_parts",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_ratio",
     microId: "prop_ratio_partager",
     difficulty: 4,
     theme: "neutral",
@@ -1121,7 +1125,7 @@ export const ratiosBank: TutorBankItemV4[] = [
     id: "4e_prop_ratio_partager_tpl_2_trois_parts",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_ratio",
     microId: "prop_ratio_partager",
     difficulty: 5,
     theme: "neutral",
@@ -1169,7 +1173,7 @@ export const ratiosBank: TutorBankItemV4[] = [
     id: "4e_prop_ratio_partager_tpl_3_remonter",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_ratio",
     microId: "prop_ratio_partager",
     difficulty: 5,
     theme: "neutral",
@@ -1224,8 +1228,10 @@ export const ratiosBank: TutorBankItemV4[] = [
     id: "4e_prop_ratio_defi_tpl_1_recette",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
-    microId: "prop_ratio_defi",
+    // Un pont ratio → pourcentage : il va au défi des POURCENTAGES (02/10), où
+    // l'élève a déjà vu les ratios. Son `id` ne change pas.
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Compte le total des parts, puis ramène la part cherchée à 100.",
@@ -1275,7 +1281,7 @@ export const ratiosBank: TutorBankItemV4[] = [
     id: "4e_prop_ratio_defi_tpl_2_reunion",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
+    notionId: "prop_ratio",
     microId: "prop_ratio_defi",
     difficulty: 5,
     theme: "neutral",
@@ -1330,8 +1336,9 @@ export const ratiosBank: TutorBankItemV4[] = [
     id: "4e_prop_ratio_defi_tpl_3_evolution",
     niveau: "4e",
     matiere: "maths",
-    notionId: "prop_ratio_pourcentage",
-    microId: "prop_ratio_defi",
+    // Une évolution en pourcentage appliquée à un ratio : défi des POURCENTAGES.
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_defi",
     difficulty: 5,
     theme: "neutral",
     hint: "Applique l'évolution, puis simplifie le nouveau ratio.",
@@ -1382,6 +1389,202 @@ export const ratiosBank: TutorBankItemV4[] = [
             ? ", déjà sous forme simplifiée.\n\n"
             : ` ; en divisant les deux nombres par ${g}, on obtient ${correct}.\n\n`) +
           "Conclusion : ⚠️ l'autre quantité n'a pas bougé — l'évolution ne porte que sur une part, et c'est ce qui change le ratio.",
+      };
+    },
+  },
+
+  /* =========================================================================
+     PROP_RATIO_DEFI — 02/10/2026 : le défi des RATIOS SEULS, depuis que la
+     notion est coupée. Trois raisonnements qui ne se font pas en un geste :
+     retrouver les parts à partir d'un ÉCART, enchaîner deux ratios en un ratio
+     à trois termes, et AJOUTER une quantité pour atteindre un nouveau ratio.
+  ========================================================================= */
+  {
+    kind: "template",
+    id: "4e_prop_ratio_defi_tpl_4_ecart",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_ratio",
+    microId: "prop_ratio_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "L'écart correspond à la différence des deux nombres du ratio : c'est un nombre de parts.",
+    tags: ["ratio", "defi", "template"],
+    generate: () => {
+      const d = randomChoice(DUOS);
+      const pas = randomChoice(d.pas);
+      const [p, q] = ratioSimple(1, 7, 2, 9);
+      const v = randomInt(2, 8) * pas;
+      const A = p * v;
+      const B = q * v;
+      const plus: Cote = B > A ? "b" : "a";
+      const moins = autre(plus);
+      const ecartParts = Math.abs(q - p);
+      const ecart = ecartParts * v;
+      const lab = `${d.a} : ${d.b}`;
+      const ratio = `${d.cadre}, le ratio ${lab} est ${p} : ${q}.`;
+      const dit = estCompte(d)
+        ? `Il y a ${ecart} ${nomDe(d, plus)} de plus que ${deDe(d, moins)}.`
+        : `On utilise ${ecart} ${d.unite} ${deDe(d, plus)} de plus que ${deDe(d, moins)}.`;
+      const cible = randomInt(0, 2);
+      const question =
+        cible === 0
+          ? estCompte(d)
+            ? `Combien y a-t-il ${d.deA} et ${d.deB} en tout ?`
+            : `Quelle quantité totale obtient-on, en ${d.unite} ?`
+          : combien(d, cible === 1 ? "a" : "b");
+      const rep = cible === 0 ? A + B : cible === 1 ? A : B;
+      const ordre = Math.random() < 0.5;
+      const text = ordre ? `${ratio} ${dit} ${question}` : `${dit.replace(/\.$/, "")}, et le ratio ${lab} est ${p} : ${q} ${cadreMin(d)}. ${question}`;
+      return {
+        text,
+        format: "short",
+        expected: [String(rep)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : un ratio p : q découpe les quantités en parts toutes égales.\n\n" +
+          "Méthode : l'écart entre les deux quantités vaut l'écart entre les deux nombres du ratio, en parts. On en déduit la valeur d'une part.\n\n" +
+          `Calcul : ${Math.max(p, q)} − ${Math.min(p, q)} = ${ecartParts} part${ecartParts > 1 ? "s" : ""} valent ${ecart}, donc une part vaut ${ecart} ÷ ${ecartParts} = ${v}. ` +
+          `${cap(leDe(d, "a"))} : ${p} × ${v} = ${A} ; ${leDe(d, "b")} : ${q} × ${v} = ${B}.` +
+          (cible === 0 ? ` En tout : ${A} + ${B} = ${A + B}.` : "") +
+          `\n\nConclusion : la réponse est ${rep}. ⚠️ L'écart n'est PAS une des deux quantités : c'est ${ecartParts} part${ecartParts > 1 ? "s" : ""}.`,
+        canvas: barre({
+          parts: [
+            { label: `${d.a} (${p})`, unknown: true },
+            { label: `${d.b} (${q})`, unknown: true },
+          ],
+          question: `écart : ${ecart}`,
+        }),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "4e_prop_ratio_defi_tpl_5_enchainer",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_ratio",
+    microId: "prop_ratio_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Fais coïncider les deux nombres qui parlent de la quantité commune.",
+    tags: ["ratio", "ratio_trois", "defi", "qcm", "template"],
+    generate: () => {
+      let p = 2, q = 3, r = 4, s = 5;
+      for (let essai = 0; essai < 200; essai++) {
+        [p, q] = ratioSimple(1, 6, 2, 6);
+        [r, s] = ratioSimple(2, 6, 1, 7);
+        if (q !== r && (q * r) / pgcd(q, r) <= 30) break;
+      }
+      const L = (q * r) / pgcd(q, r);
+      let a = (p * L) / q;
+      let b = L;
+      let c = (s * L) / r;
+      const g = pgcd(pgcd(a, b), c);
+      a /= g; b /= g; c /= g;
+      const correct = `${a} : ${b} : ${c}`;
+      const lettres = Math.random() < 0.35;
+      let text: string;
+      if (lettres) {
+        const [x, y, z] = randomChoice(LETTRES3);
+        text = Math.random() < 0.5
+          ? `On sait que ${x} : ${y} = ${p} : ${q} et que ${y} : ${z} = ${r} : ${s}. Quel est le ratio ${x} : ${y} : ${z}, avec les plus petits entiers possibles ?`
+          : `Les nombres ${x}, ${y} et ${z} vérifient ${x} : ${y} = ${p} : ${q} et ${y} : ${z} = ${r} : ${s}. Écris le ratio ${x} : ${y} : ${z} sous forme simplifiée.`;
+      } else {
+        const t = randomChoice(TRIOS);
+        const [n0, n1, n2] = t.noms;
+        text = Math.random() < 0.5
+          ? `${t.cadre}, le ratio ${n0} : ${n1} est ${p} : ${q}, et le ratio ${n1} : ${n2} est ${r} : ${s}. Quel est le ratio ${ratioNoms3(t)}, avec les plus petits entiers possibles ?`
+          : `${t.cadre}, on sait que ${n0} : ${n1} = ${p} : ${q} et ${n1} : ${n2} = ${r} : ${s}. Parmi ces réponses, quel est le ratio ${ratioNoms3(t)} simplifié ?`;
+      }
+      return {
+        text,
+        format: "qcm",
+        choices: makeChoices(correct, [
+          `${p} : ${q} : ${s}`,
+          `${p} : ${r} : ${s}`,
+          `${p} : ${q + r} : ${s}`,
+          `${c} : ${b} : ${a}`,
+          `${a} : ${c} : ${b}`,
+          `${p * r} : ${q * r} : ${s}`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : un ratio ne change pas quand on multiplie tous ses nombres par un même nombre.\n\n" +
+          `Méthode : la quantité du milieu vaut ${q} parts dans le premier ratio et ${r} dans le second. On les ramène au même nombre, ${L}, le plus petit multiple commun de ${q} et ${r}.\n\n` +
+          `Calcul : ${p} : ${q} = ${(p * L) / q} : ${L} (× ${L / q}) et ${r} : ${s} = ${L} : ${(s * L) / r} (× ${L / r}). On assemble : ${(p * L) / q} : ${L} : ${(s * L) / r}` +
+          (g > 1 ? `, puis on divise par ${g}.\n\n` : ".\n\n") +
+          `Conclusion : le ratio est ${correct}. ⚠️ Recoller « ${p} : ${q} » et « ${s} » sans égaliser la quantité du milieu est le piège.`,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "4e_prop_ratio_defi_tpl_6_ajouter",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_ratio",
+    microId: "prop_ratio_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "L'autre quantité ne bouge pas : c'est elle qui fixe la nouvelle valeur d'une part.",
+    tags: ["ratio", "defi", "template"],
+    generate: () => {
+      const CIBLES: readonly [number, number][] = [[1, 1], [2, 1], [3, 2], [4, 3], [5, 4], [3, 1], [5, 3], [5, 2]];
+      for (let essai = 0; essai < 300; essai++) {
+        const d = randomChoice(DUOS);
+        const pas = randomChoice(d.pas);
+        const [pa, pb] = ratioSimple(1, 6, 2, 8);
+        const v = randomInt(2, 6) * pas;
+        const A = pa * v;
+        const B = pb * v;
+        const c: Cote = Math.random() < 0.5 ? "a" : "b";
+        const o = autre(c);
+        const C = c === "a" ? A : B;
+        const O = c === "a" ? B : A;
+        const [rc, ro] = randomChoice(CIBLES);
+        if ((O * rc) % ro !== 0) continue;
+        const nouveau = (O * rc) / ro;
+        if (nouveau <= C) continue;
+        const ajout = nouveau - C;
+        const lab = `${d.a} : ${d.b}`;
+        const cibleTxt = c === "a" ? `${rc} : ${ro}` : `${ro} : ${rc}`;
+        const k = randomInt(0, 2);
+        const debut =
+          k === 0
+            ? situation(d, A, B)
+            : k === 1
+              ? `${d.cadre}, le ratio ${lab} est ${pa} : ${pb}, et ${ilYa(d)} ${qte(d, o, O)}.`
+              : `${d.cadre}, ${ilYa(d)} ${qte(d, c, C)} ; le ratio ${lab} est ${pa} : ${pb}.`;
+        const question = estCompte(d)
+          ? `Combien ${deDe(d, c)} faut-il ajouter pour que le ratio ${lab} devienne ${cibleTxt} ?`
+          : `Quelle quantité ${deDe(d, c)} faut-il ajouter, en ${d.unite}, pour que le ratio ${lab} devienne ${cibleTxt} ?`;
+        const etape0 =
+          k === 2
+            ? `${cap(leDe(d, c))} : ${C} pour ${c === "a" ? pa : pb} parts, donc une part vaut ${v} ; ${leDe(d, o)} : ${c === "a" ? pb : pa} × ${v} = ${O}. `
+            : "";
+        return {
+          text: `${debut} ${question}`,
+          format: "short",
+          expected: [String(ajout)],
+          comparator: "number_equal",
+          explanation:
+            "Définition : deux quantités sont dans le ratio r : s quand elles valent r parts et s parts de même taille.\n\n" +
+            `Méthode : on n'ajoute rien ${a_(leDe(d, o))} : cette quantité fixe la taille d'une part dans le NOUVEAU ratio.\n\n` +
+            `Calcul : ${etape0}Dans le ratio ${cibleTxt}, ${leDe(d, o)} = ${ro} part${ro > 1 ? "s" : ""}, donc une part vaut ${O} ÷ ${ro} = ${O / ro}. ` +
+            `Il faut alors ${rc} × ${O / ro} = ${nouveau} pour ${leDe(d, c)}. On en a ${C} : il faut en ajouter ${nouveau} − ${C} = ${ajout}.\n\n` +
+            `Conclusion : il faut ajouter ${ajout}${estCompte(d) ? "" : ` ${d.unite}`}.`,
+        };
+      }
+      // Repli sûr : 9 filles, 15 garçons → 1 : 1.
+      return {
+        text: "Dans une classe, il y a 9 filles et 15 garçons. Combien de filles faut-il ajouter pour que le ratio filles : garçons devienne 1 : 1 ?",
+        format: "short",
+        expected: ["6"],
+        comparator: "number_equal",
+        explanation:
+          "Définition : le ratio 1 : 1 veut dire autant de filles que de garçons.\n\nMéthode : les garçons ne changent pas.\n\nCalcul : 15 − 9 = 6.\n\nConclusion : il faut ajouter 6 filles.",
       };
     },
   },

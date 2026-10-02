@@ -602,6 +602,9 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
   },
   "maths/4e/prop-ratio-pourcentage": {
     titre: "Ratios, partages et pourcentages : 20 exercices corrigés",
+    // ⏳ 02/10/2026 : le coach a coupé la notion en deux ; cette feuille sert
+    // les deux en attendant d'être coupée à son tour.
+    notionsCoach: ["prop_ratio", "prop_pourcentages"],
     resume:
       "Écrire et simplifier un ratio a : b, le traduire par une égalité de quotients, partager selon deux ou trois parts avec la barre dessinée, calculer un pourcentage, passer par le coefficient multiplicateur, enchaîner deux évolutions. Le braquet d'un vélo, le déclin des animaux sauvages, le CO₂ de l'air.",
   },

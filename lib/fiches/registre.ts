@@ -1702,6 +1702,13 @@ export const FICHES_ALIAS: Record<string, string> = {
   "maths/premiere-spe/derivation-tangente": "maths/premiere-spe/derivation",
   "maths/premiere-spe/derivation-formules": "maths/premiere-spe/derivation",
   "maths/premiere-spe/derivation-operations": "maths/premiere-spe/derivation",
+
+  /* ⏳ RATIOS / POURCENTAGES DE 4e (02/10/2026). Le coach a coupé la notion en
+     deux ; la fiche commune sert les deux EN ATTENDANT qu'elle soit coupée à
+     son tour (décidé par Frédéric : une fiche par notion). Retirer ces deux
+     lignes quand `prop-ratio` et `prop-pourcentages` existeront. */
+  "maths/4e/prop-ratio": "maths/4e/prop-ratio-pourcentage",
+  "maths/4e/prop-pourcentages": "maths/4e/prop-ratio-pourcentage",
 };
 
 /** La classe où la fiche est réellement rangée, quand elle diffère de celle

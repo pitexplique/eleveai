@@ -321,7 +321,9 @@ const THEMES: ThemeEval[] = [
     quoi: "Proportionnalité, statistiques, probabilités — et lire un programme.",
     notions: [
       "prop_proportionnalite",
-      "prop_ratio_pourcentage",
+      // Coupée en deux le 02/10/2026 : les ratios, puis les pourcentages.
+      "prop_ratio",
+      "prop_pourcentages",
       "stat_statistique",
       "proba_experience",
       "algo_programmation",

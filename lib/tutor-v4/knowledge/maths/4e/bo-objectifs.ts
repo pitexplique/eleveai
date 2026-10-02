@@ -659,7 +659,7 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     objectif: "Notion de ratio.",
     page: 134,
     micros: ["prop_rapport", "prop_ratio_quotients", "prop_ratio_trois"],
-    note: "✅ COMBLÉ LE 28/08/2026 par la notion `prop_ratio_pourcentage`, scindée de `prop_proportionnalite` comme l'avait déjà fait la 5e. ⭐ Les DEUX notations du BO sont couvertes, y compris celle à trois termes (a/2 = b/3 = c/7) dont la 5e n'a aucun item — vérifié, zéro occurrence.",
+    note: "✅ COMBLÉ LE 28/08/2026 par la notion `prop_ratio_pourcentage`, scindée de `prop_proportionnalite` comme l'avait déjà fait la 5e — puis coupée à son tour le 02/10/2026 : les ratios vivent dans `prop_ratio`, les pourcentages dans `prop_pourcentages`. ⭐ Les DEUX notations du BO sont couvertes, y compris celle à trois termes (a/2 = b/3 = c/7) dont la 5e n'a aucun item — vérifié, zéro occurrence.",
   },
   {
     id: "4e-B-proportionnalite-4",
@@ -706,6 +706,7 @@ export const objectifsBO4eMaths: ObjectifBO[] = [
     page: 134,
     micros: [
       "prop_pourcentage",
+      "prop_pourcentage_mental",
       "prop_probleme",
       "prop_defi",
       "echelle_distance_reelle",

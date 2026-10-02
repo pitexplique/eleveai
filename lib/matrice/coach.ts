@@ -134,7 +134,8 @@ export const NOTION_COACH_MATHS: TableNotions = {
   // de 5e qui tapait « ratio » ouvrait la proportionnalité générale, pas les
   // ratios. Les deux classes entrent donc ensemble, comme pour les puissances.
   ratio: {
-    "5e": "prop_ratio_pourcentage", "4e": "prop_ratio_pourcentage",
+    // 4e : la notion est coupée en deux depuis le 02/10/2026.
+    "5e": "prop_ratio_pourcentage", "4e": "prop_ratio",
   },
   // ⭐ AJOUTÉES LE 31/08/2026 avec les deux notions du dernier bloc de 4e.
   // ⛔⛔ Et c'est le plus gros trou de matrice trouvé : « repérage »,
@@ -221,6 +222,18 @@ export const NOTION_COACH_MATHS: TableNotions = {
     "5e": "relatif_nombre",
     seconde: "reels_intervalles",
     "premiere-spe": "derivation_nombre_derive",
+  },
+  // ⭐ AJOUTÉ LE 02/10/2026 (voir lexique.ts). Toutes les classes que
+  // « pourcentage » ouvrait déjà via la proportionnalité y sont reprises —
+  // sinon elles retomberaient sur la page générale du coach. Et trois y
+  // GAGNENT leur propre notion, qu'aucun mot n'ouvrait : le CM2 (`pourcentage`),
+  // la 6e (`pourcentage_nombre`), la 5e (`prop_ratio_pourcentage`).
+  pourcentages: {
+    cm1: "proportionnalite", cm2: "pourcentage",
+    "6e": "pourcentage_nombre", "5e": "prop_ratio_pourcentage",
+    "4e": "prop_pourcentages", "3e": "prop_proportionnalite",
+    seconde: "information_chiffree_evolutions",
+    premiere: "auto_taux_evolution",
   },
   proportionnalite: {
     cm1: "proportionnalite", cm2: "proportionnalite",
