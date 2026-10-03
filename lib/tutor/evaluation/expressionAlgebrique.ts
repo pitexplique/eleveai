@@ -172,6 +172,32 @@ export function estDeveloppee(reponse: string): boolean {
   return !/[()]/.test(membreUtile(reponse).gauche);
 }
 
+/**
+ * Réduite (03/10/2026, signalé par l'agent des expressions de 4e) : développée,
+ * ET chaque sorte de terme n'apparaît qu'UNE fois — « 3x + 2x » est équivalent
+ * à 5x et sans parenthèse, mais il n'est pas réduit. La sorte d'un terme, c'est
+ * ses lettres avec leurs exposants (x², x, xy, rien pour un nombre).
+ */
+export function estReduite(reponse: string): boolean {
+  if (!estDeveloppee(reponse)) return false;
+  const t = membreUtile(reponse)
+    .gauche.replace(/[−–]/g, "-")
+    .replace(/²/g, "^2")
+    .replace(/³/g, "^3")
+    .replace(/\s+/g, "")
+    .toLowerCase();
+  const termes = t.split(/(?<=[^+\-*^/(])(?=[+-])/).filter(Boolean);
+  const vues = new Set<string>();
+  for (const terme of termes) {
+    const exposants: Record<string, number> = {};
+    for (const m of terme.matchAll(/([a-z])(?:\^(\d+))?/g)) exposants[m[1]] = (exposants[m[1]] ?? 0) + Number(m[2] ?? 1);
+    const sorte = Object.keys(exposants).sort().map((l) => `${l}${exposants[l]}`).join("");
+    if (vues.has(sorte)) return false;
+    vues.add(sorte);
+  }
+  return true;
+}
+
 /** Factorisée : au moins une parenthèse, et pas de + ou − au premier niveau (hors signe de tête). */
 export function estFactorisee(reponse: string): boolean {
   const t = membreUtile(reponse).gauche.replace(/[−–]/g, "-").replace(/\s+/g, "");

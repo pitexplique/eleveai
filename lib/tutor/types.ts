@@ -11,6 +11,7 @@ export type ComparatorName =
   | "contains_keyword"
   | "expression_equivalente"
   | "expression_developpee"
+  | "expression_reduite"
   | "expression_factorisee";
 
 export type BoCompetence = {

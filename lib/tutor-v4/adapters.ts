@@ -66,6 +66,7 @@ type LegacyEvaluatorQuestion = {
     | "contains_keyword"
   | "expression_equivalente"
   | "expression_developpee"
+  | "expression_reduite"
   | "expression_factorisee";
   hint?: string;
 };

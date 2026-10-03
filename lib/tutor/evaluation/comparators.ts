@@ -2,7 +2,7 @@
 //lib/evaluation/comparators.ts
 import { answersMatch } from "@/lib/answerMatch";
 import type { ComparatorName } from "@/lib/tutor/types";
-import { estDeveloppee, estFactorisee, expressionsEquivalentes } from "@/lib/tutor/evaluation/expressionAlgebrique";
+import { estFactorisee, estReduite, expressionsEquivalentes } from "@/lib/tutor/evaluation/expressionAlgebrique";
 
 function normalize(value: string) {
  const normalized = value
@@ -74,8 +74,12 @@ export function compareAnswer(args: {
     // lib/tutor/evaluation/expressionAlgebrique.ts.
     case "expression_equivalente":
       return args.expected.some((exp) => expressionsEquivalentes(args.answer, exp));
+    // ⭐ 03/10 : « développe » veut dire en classe « développe ET réduis » — x² + 3x + 3x + 9 ne passe pas pour (x + 3)².
     case "expression_developpee":
-      return estDeveloppee(args.answer) && args.expected.some((exp) => expressionsEquivalentes(args.answer, exp));
+      return estReduite(args.answer) && args.expected.some((exp) => expressionsEquivalentes(args.answer, exp));
+    // « Réduis », « Développe et réduis » : équivalente, sans parenthèse, et chaque sorte de terme une seule fois.
+    case "expression_reduite":
+      return estReduite(args.answer) && args.expected.some((exp) => expressionsEquivalentes(args.answer, exp));
     case "expression_factorisee":
       return estFactorisee(args.answer) && args.expected.some((exp) => expressionsEquivalentes(args.answer, exp));
 
