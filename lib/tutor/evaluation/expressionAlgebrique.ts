@@ -131,11 +131,36 @@ function assigner(lettres: string[], k: number): Valeurs {
 
 const proche = (a: number, b: number) => Math.abs(a - b) <= 1e-7 * Math.max(1, Math.abs(a), Math.abs(b));
 
-/** Vrai si `reponse` et `attendue` sont la même expression (ou la même égalité, à un facteur près). */
+/** Deux expressions sans signe « = » prennent-elles la même valeur partout ? */
+function memeExpression(r: string, a: string): boolean {
+  const lettres = [...new Set([...lettresDe(r), ...lettresDe(a)])];
+  if (lettres.length > 3) return false;
+  for (let k = 0; k < JEUX.length; k++) {
+    const v = assigner(lettres, k);
+    const x = evaluer(r, v), y = evaluer(a, v);
+    if (x === null || y === null || !proche(x, y)) return false;
+  }
+  return true;
+}
+
+/**
+ * Vrai si `reponse` et `attendue` sont la même expression ; pour une ÉGALITÉ,
+ * les deux membres doivent se correspondre, dans un ordre ou dans l'autre.
+ * ⛔ 03/10/2026 (signalé par l'agent des équations) : comparer « à un facteur
+ * près » acceptait « x = 8 » pour la traduction « x + 3 = 11 » — même
+ * solution, mais ce n'est pas une traduction. Désormais « 3 + x = 11 » et
+ * « 11 = x + 3 » passent, « x = 8 » et « 2x + 6 = 22 » non.
+ */
 export function expressionsEquivalentes(reponse: string, attendue: string): boolean {
   const R = membreUtile(reponse);
   const A = membreUtile(attendue);
   if ((R.droite === null) !== (A.droite === null)) return false;
+  if (R.droite !== null && A.droite !== null) {
+    return (
+      (memeExpression(R.gauche, A.gauche) && memeExpression(R.droite, A.droite)) ||
+      (memeExpression(R.gauche, A.droite) && memeExpression(R.droite, A.gauche))
+    );
+  }
   const lettres = [...new Set([...lettresDe(reponse), ...lettresDe(attendue)])];
   if (lettres.length > 3) return false;
   let facteur: number | null = null;
@@ -198,7 +223,47 @@ export function estReduite(reponse: string): boolean {
   return true;
 }
 
-/** Factorisée : au moins une parenthèse, et pas de + ou − au premier niveau (hors signe de tête). */
+const pgcd = (a: number, b: number): number => (b === 0 ? Math.abs(a) : pgcd(b, a % b));
+
+/**
+ * Factorisée LE PLUS POSSIBLE (03/10/2026, Frédéric : « dis le plus possible ») :
+ * aucune parenthèse de la réponse ne garde un facteur commun à ses termes.
+ * 2(3x + 6) est refusé pour 6x + 12 (3 et 6 ont encore 3 en commun) ;
+ * 2(x² + 3x) pour 2x² + 6x (x est encore en commun) ; 6(x + 2) et 2x(x + 3)
+ * sont acceptés. Les coefficients décimaux ne sont pas jugés (pas de pgcd).
+ */
+function parenthesesSansFacteurCommun(t: string): boolean {
+  for (let i = 0; i < t.length; i++) {
+    if (t[i] !== "(") continue;
+    let prof = 1, j = i + 1;
+    while (j < t.length && prof > 0) {
+      if (t[j] === "(") prof++;
+      else if (t[j] === ")") prof--;
+      j++;
+    }
+    const dedans = t.slice(i + 1, j - 1);
+    if (dedans.includes("(")) continue; // une parenthèse imbriquée : on juge les plus intérieures
+    const termes = dedans.split(/(?<=[^+\-*^/])(?=[+-])/).filter(Boolean);
+    if (termes.length < 2) continue;
+    let g = 0, decimal = false;
+    const exposants: Record<string, number>[] = [];
+    for (const terme of termes) {
+      const coef = /^[+-]?(\d+(?:\.\d+)?)?/.exec(terme)?.[1];
+      const c = coef === undefined ? 1 : Number(coef);
+      if (!Number.isInteger(c)) decimal = true;
+      else g = pgcd(g, c);
+      const e: Record<string, number> = {};
+      for (const m of terme.matchAll(/([a-z])(?:\^(\d+))?/g)) e[m[1]] = (e[m[1]] ?? 0) + Number(m[2] ?? 1);
+      exposants.push(e);
+    }
+    if (!decimal && g > 1) return false;
+    const lettres = Object.keys(exposants[0]);
+    if (lettres.some((l) => exposants.every((e) => (e[l] ?? 0) > 0))) return false;
+  }
+  return true;
+}
+
+/** Factorisée : au moins une parenthèse, pas de + ou − au premier niveau, et rien de plus à mettre en facteur. */
 export function estFactorisee(reponse: string): boolean {
   const t = membreUtile(reponse).gauche.replace(/[−–]/g, "-").replace(/\s+/g, "");
   if (!t.includes("(")) return false;
@@ -209,5 +274,5 @@ export function estFactorisee(reponse: string): boolean {
     else if (c === ")") prof--;
     else if ((c === "+" || c === "-") && prof === 0 && i > 0 && !/[*×·^(]/.test(t[i - 1])) return false;
   }
-  return true;
+  return parenthesesSansFacteurCommun(t.toLowerCase().replace(/(\d),(\d)/g, "$1.$2").replace(/²/g, "^2").replace(/³/g, "^3"));
 }
