@@ -739,6 +739,16 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
         "D'où viennent les nombres décimaux : on coupe l'unité en 10, puis encore en 10. Les rangs après la virgule, comparer, arrondir, encadrer et intercaler (6e).",
     },
   ],
+  "/fiches-cours/maths/4e/prop-ratio": [
+    {
+      // 02/10/2026 : la première vidéo PARLÉE de 4e, née avec la fiche.
+      id: "9hMxwfwLIGE",
+      title: "Tout comprendre sur les ratios — Maths 4e",
+      description:
+        "Un ratio, c'est tant contre tant : simplifier comme une fraction, a/2 = b/3 et la valeur d'une part, le ratio à trois nombres, partager 84 € selon 1 : 2 : 4 (4e).",
+      ajoutee: "2026-10-02",
+    },
+  ],
   "/fiches-cours/maths/6e/fraction-nombre": [
     {
       id: "KT6rurM3Q3E",
