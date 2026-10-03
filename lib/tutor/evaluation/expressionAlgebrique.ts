@@ -209,11 +209,19 @@ export function estReduite(reponse: string): boolean {
     .gauche.replace(/[−–]/g, "-")
     .replace(/²/g, "^2")
     .replace(/³/g, "^3")
+    .replace(/(\d),(\d)/g, "$1.$2")
     .replace(/\s+/g, "")
     .toLowerCase();
   const termes = t.split(/(?<=[^+\-*^/(])(?=[+-])/).filter(Boolean);
   const vues = new Set<string>();
   for (const terme of termes) {
+    // Un terme réduit : UN nombre (facultatif), puis chaque lettre UNE fois.
+    // « 3x × 4x », « 3x·4x », « x*x » ne le sont pas (03/10, agent de 3e).
+    // « 3*x », « 3×x » : un signe fois juste après le nombre est permis.
+    const t1 = terme.replace(/^[+-]/, "").replace(/^(\d+(?:\.\d+)?)[*×·]/, "$1");
+    if (/[*×·/]/.test(t1) || !/^(\d+(\.\d+)?)?([a-z](\^\d+)?)*$/.test(t1)) return false;
+    const lettresTerme = t1.match(/[a-z]/g) ?? [];
+    if (new Set(lettresTerme).size !== lettresTerme.length) return false;
     const exposants: Record<string, number> = {};
     for (const m of terme.matchAll(/([a-z])(?:\^(\d+))?/g)) exposants[m[1]] = (exposants[m[1]] ?? 0) + Number(m[2] ?? 1);
     const sorte = Object.keys(exposants).sort().map((l) => `${l}${exposants[l]}`).join("");
