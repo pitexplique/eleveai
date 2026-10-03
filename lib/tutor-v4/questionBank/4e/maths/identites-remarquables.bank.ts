@@ -12,8 +12,11 @@
  * a² + 2ab + b². (x + 3)² s’écrit (x + 3)(x + 3), puis on fait les quatre
  * produits et on réduit. Les gabarits ci-dessous expliquent TOUJOURS ainsi.
  * La factorisation par une identité lue à l’envers (x² − 9 = (x − 3)(x + 3))
- * est passée en 3e : les quelques items qui en restent ici sont signalés à
- * Frédéric, pas supprimés.
+ * est passée en 3e : le 03/10, Frédéric a fait SORTIR les quatre items qui en
+ * restaient (defi_fixed_3, reconnaitre_fixed_4, _fixed_5, reconnaitre_tpl_3)
+ * et RÉÉCRIRE sans formule ceux qui l’exigeaient (choisir_fixed_2, _3, _5,
+ * choisir_tpl_2, choisir_open_1) ; leurs versions d’origine sont gardées hors
+ * du dépôt pour la 3e.
  *
  * ⛔⛔ 30/09–03/10/2026 — « DES QUESTIONS REVIENNENT SOUVENT ». 5 à 15
  * squelettes d’énoncé par micro, 10 à 18 répétitions sur une série de 20.
@@ -61,8 +64,6 @@ type Facteur = Terme[];
 type Forme = "somme" | "difference" | "produit";
 
 const LETTRES = ["x", "a", "t", "n", "y", "z"];
-/** Sans « a » : là où l’explication cite une formule en a et b. */
-const LETTRES_SANS_A = ["x", "t", "n", "y", "z"];
 const NOMS_EXPR = ["A", "B", "C", "D", "E", "F", "G", "K", "P"];
 
 const PRENOMS: { n: string; il: "il" | "elle" }[] = [
@@ -445,6 +446,56 @@ function genDevQcm(formes: Forme[], o: { coef?: boolean; inverse?: boolean; situ
       bonne,
       pieges(e).map((t) => `$${somme(t, L)}$`),
     ),
+    expected: [bonne],
+    comparator: "mcq_exact",
+    explanation: explication(e),
+  };
+}
+
+/** Reconnaître, parmi quatre, la forme développée réduite juste (sens direct). */
+function genFormeDeveloppeeJuste(): TutorGeneratedQuestionV4 {
+  const L = randomChoice(LETTRES);
+  const e = tirerExpr(randomChoice<Forme>(["somme", "difference", "produit"]), L, { coef: true, inverse: true });
+  const bonne = `$${somme(red(e), L)}$`;
+  const P = randomChoice(PRENOMS);
+  const text = randomChoice([
+    `Parmi ces quatre expressions, laquelle est la forme développée réduite de $${e.tex}$ ?`,
+    `Une seule de ces expressions est égale à $${e.tex}$. Laquelle ?`,
+    `${P.n} a développé $${e.tex}$ de quatre façons différentes. Quelle est la bonne ?`,
+    `Reconnais le bon développement de $${e.tex}$.`,
+    `Laquelle de ces expressions obtient-on en développant puis en réduisant $${e.tex}$ ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: qcm(
+      bonne,
+      pieges(e).map((t) => `$${somme(t, L)}$`),
+    ),
+    expected: [bonne],
+    comparator: "mcq_exact",
+    explanation: explication(e),
+  };
+}
+
+/** Quel développement est juste ? Les propositions sont des égalités complètes. */
+function genQuelDevJuste(): TutorGeneratedQuestionV4 {
+  const L = randomChoice(LETTRES);
+  const e = tirerExpr(randomChoice<Forme>(["somme", "difference", "produit"]), L, { coef: true, inverse: true });
+  const eg = (t: Terme[]) => `$${e.tex} = ${somme(t, L)}$`;
+  const bonne = eg(red(e));
+  const P = randomChoice(PRENOMS);
+  const text = randomChoice([
+    `Quel développement de $${e.tex}$ est juste ?`,
+    `Une seule de ces égalités est vraie pour toutes les valeurs de $${L}$. Laquelle ?`,
+    `${P.n} hésite entre ces quatre développements de $${e.tex}$. Lequel est juste ?`,
+    `Quelle égalité est juste ?`,
+    `Pour développer $${e.tex}$, on fait les quatre produits. Quelle égalité obtient-on ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: qcm(bonne, pieges(e).map(eg)),
     expected: [bonne],
     comparator: "mcq_exact",
     explanation: explication(e),
@@ -1149,10 +1200,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     expected: ["car le carré signifie multiplier par soi-même"],
     comparator: "mcq_exact",
     hint: "Un carré signifie qu’une expression est multipliée par elle-même.",
-    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
-          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+    explanation: "Méthode : un carré, c’est une expression multipliée par elle-même, comme (x + 3)² = (x + 3)(x + 3) ; un produit de deux parenthèses se développe par les quatre produits (double distributivité), puis on réduit.\n\n" +
+          "Calcul : " +
           ("(x + 3)² signifie (x + 3) multiplié par lui-même, donc (x + 3)(x + 3).") +
-          "\n\nConclusion : la formule donne directement l’expression correcte.",
+          "\n\nConclusion : on passe toujours par le produit de deux parenthèses et ses quatre produits, sans formule à retenir.",
     tags: ["litteral_identite_remarquable", "double_distributivite", "sens"],
   },
   {
@@ -1201,10 +1252,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     expected: ["x² + 4x + 4"],
     comparator: "mcq_exact",
     hint: "Fais les 4 produits : x×x, x×2, 2×x, 2×2.",
-    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
-          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+    explanation: "Méthode : un carré, c’est une expression multipliée par elle-même, comme (x + 3)² = (x + 3)(x + 3) ; un produit de deux parenthèses se développe par les quatre produits (double distributivité), puis on réduit.\n\n" +
+          "Calcul : " +
           ("(x + 2)(x + 2) = x² + 2x + 2x + 4 = x² + 4x + 4.") +
-          "\n\nConclusion : la formule donne directement l’expression correcte.",
+          "\n\nConclusion : on passe toujours par le produit de deux parenthèses et ses quatre produits, sans formule à retenir.",
     tags: ["litteral_identite_remarquable", "double_distributivite"],
   },
   {
@@ -1273,10 +1324,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     expected: ["(x + 4)(x + 4)", "x²", "4x", "8x", "16"],
     comparator: "contains_keyword",
     hint: "Commence par écrire (x + 4)² sous forme de produit.",
-    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
-          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+    explanation: "Méthode : un carré, c’est une expression multipliée par elle-même, comme (x + 3)² = (x + 3)(x + 3) ; un produit de deux parenthèses se développe par les quatre produits (double distributivité), puis on réduit.\n\n" +
+          "Calcul : " +
           ("(x + 4)² = (x + 4)(x + 4) = x² + 4x + 4x + 16 = x² + 8x + 16.") +
-          "\n\nConclusion : la formule donne directement l’expression correcte.",
+          "\n\nConclusion : on passe toujours par le produit de deux parenthèses et ses quatre produits, sans formule à retenir.",
     tags: ["litteral_identite_remarquable", "open", "justification"],
   },
 
@@ -1298,10 +1349,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     expected: ["(x + 5)²"],
     comparator: "mcq_exact",
     hint: "On cherche une somme entre parenthèses élevée au carré.",
-    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
-          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
-          ("(x + 5)² est bien de la forme (a + b)².") +
-          "\n\nConclusion : la formule donne directement l’expression correcte.",
+    explanation: "Méthode : un carré, c’est une expression multipliée par elle-même, comme (x + 3)² = (x + 3)(x + 3) ; un produit de deux parenthèses se développe par les quatre produits (double distributivité), puis on réduit.\n\n" +
+          "Calcul : " +
+          ("(x + 5)² est une somme entre parenthèses multipliée par elle-même : (x + 5)² = (x + 5)(x + 5).") +
+          "\n\nConclusion : on passe toujours par le produit de deux parenthèses et ses quatre produits, sans formule à retenir.",
     tags: ["litteral_identite_remarquable", "reconnaitre"],
   },
   {
@@ -1318,11 +1369,11 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     choices: ["(x - 3)(x + 3)", "(x + 3)²", "(x - 3)²", "x² + 9"],
     expected: ["(x - 3)(x + 3)"],
     comparator: "mcq_exact",
-    hint: "La différence de deux carrés vient de (a - b)(a + b).",
-    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
-          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
-          ("(x - 3)(x + 3) correspond à la forme (a - b)(a + b), qui donne a² - b².") +
-          "\n\nConclusion : la formule donne directement l’expression correcte.",
+    hint: "Fais les quatre produits de chaque proposition : laquelle donne x² moins un nombre, sans terme en x ?",
+    explanation: "Méthode : un carré, c’est une expression multipliée par elle-même, comme (x + 3)² = (x + 3)(x + 3) ; un produit de deux parenthèses se développe par les quatre produits (double distributivité), puis on réduit.\n\n" +
+          "Calcul : " +
+          ("(x - 3)(x + 3) = x × x + x × 3 + (-3) × x + (-3) × 3 = x² + 3x - 3x - 9 = x² - 9 : les termes en x s’annulent, il reste x² moins 3², une différence de deux carrés.") +
+          "\n\nConclusion : on passe toujours par le produit de deux parenthèses et ses quatre produits, sans formule à retenir.",
     tags: ["litteral_identite_remarquable", "difference_carres"],
   },
   {
@@ -1362,10 +1413,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     expected: ["x² + 6x + 9"],
     comparator: "mcq_exact",
     hint: "Pense à (x + 3)(x + 3).",
-    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
-          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+    explanation: "Méthode : un carré, c’est une expression multipliée par elle-même, comme (x + 3)² = (x + 3)(x + 3) ; un produit de deux parenthèses se développe par les quatre produits (double distributivité), puis on réduit.\n\n" +
+          "Calcul : " +
           ("(x + 3)² = (x + 3)(x + 3) = x² + 6x + 9.") +
-          "\n\nConclusion : la formule donne directement l’expression correcte.",
+          "\n\nConclusion : on passe toujours par le produit de deux parenthèses et ses quatre produits, sans formule à retenir.",
     tags: ["litteral_identite_remarquable", "developper"],
   },
   {
@@ -1388,10 +1439,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     expected: ["x² - 8x + 16"],
     comparator: "mcq_exact",
     hint: "Pense à (x - 4)(x - 4).",
-    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
-          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+    explanation: "Méthode : un carré, c’est une expression multipliée par elle-même, comme (x + 3)² = (x + 3)(x + 3) ; un produit de deux parenthèses se développe par les quatre produits (double distributivité), puis on réduit.\n\n" +
+          "Calcul : " +
           ("(x - 4)² = (x - 4)(x - 4) = x² - 4x - 4x + 16 = x² - 8x + 16.") +
-          "\n\nConclusion : la formule donne directement l’expression correcte.",
+          "\n\nConclusion : on passe toujours par le produit de deux parenthèses et ses quatre produits, sans formule à retenir.",
     tags: ["litteral_identite_remarquable", "developper", "signe"],
   },
   {
@@ -1413,11 +1464,11 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     ],
     expected: ["x² - 25"],
     comparator: "mcq_exact",
-    hint: "C’est une différence de deux carrés.",
-    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
-          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
-          ("(x - 5)(x + 5) = x² - 25.") +
-          "\n\nConclusion : la formule donne directement l’expression correcte.",
+    hint: "Fais les quatre produits : les deux termes en x s’annulent.",
+    explanation: "Méthode : un carré, c’est une expression multipliée par elle-même, comme (x + 3)² = (x + 3)(x + 3) ; un produit de deux parenthèses se développe par les quatre produits (double distributivité), puis on réduit.\n\n" +
+          "Calcul : " +
+          ("(x - 5)(x + 5) = x × x + x × 5 + (-5) × x + (-5) × 5 = x² + 5x - 5x - 25 = x² - 25.") +
+          "\n\nConclusion : on passe toujours par le produit de deux parenthèses et ses quatre produits, sans formule à retenir.",
     tags: ["litteral_identite_remarquable", "difference_carres"],
   },
   {
@@ -1509,10 +1560,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     expected: ["écrire (x + 7)(x + 7), puis appliquer la double distributivité"],
     comparator: "mcq_exact",
     hint: "Un carré d’expression signifie produit par soi-même.",
-    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
-          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+    explanation: "Méthode : un carré, c’est une expression multipliée par elle-même, comme (x + 3)² = (x + 3)(x + 3) ; un produit de deux parenthèses se développe par les quatre produits (double distributivité), puis on réduit.\n\n" +
+          "Calcul : " +
           ("La méthode correcte est de passer par (x + 7)(x + 7), puis de développer.") +
-          "\n\nConclusion : la formule donne directement l’expression correcte.",
+          "\n\nConclusion : on passe toujours par le produit de deux parenthèses et ses quatre produits, sans formule à retenir.",
     tags: ["litteral_identite_remarquable", "choisir"],
   },
   {
@@ -1560,10 +1611,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     expected: ["non"],
     comparator: "mcq_exact",
     hint: "Il manque le double produit.",
-    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
-          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
+    explanation: "Méthode : un carré, c’est une expression multipliée par elle-même, comme (x + 3)² = (x + 3)(x + 3) ; un produit de deux parenthèses se développe par les quatre produits (double distributivité), puis on réduit.\n\n" +
+          "Calcul : " +
           ("Non. (x + 5)² = (x + 5)(x + 5) = x² + 10x + 25. Il manque 10x.") +
-          "\n\nConclusion : la formule donne directement l’expression correcte.",
+          "\n\nConclusion : on passe toujours par le produit de deux parenthèses et ses quatre produits, sans formule à retenir.",
     tags: ["litteral_identite_remarquable", "erreur", "defi"],
   },
   {
@@ -1580,11 +1631,11 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     choices: ["oui", "non"],
     expected: ["non"],
     comparator: "mcq_exact",
-    hint: "Il confond carré d’une différence et différence de deux carrés.",
-    explanation: "Définition : une identité remarquable est une formule qui permet de développer ou factoriser rapidement certaines expressions.\n\n" +
-          "Méthode : on reconnaît la forme (a + b)², (a - b)² ou (a + b)(a - b).\n\nCalcul : " +
-          ("Non. (x - 4)² = x² - 8x + 16. En revanche, (x - 4)(x + 4) = x² - 16.") +
-          "\n\nConclusion : la formule donne directement l’expression correcte.",
+    hint: "Écris (x - 4)² = (x - 4)(x - 4) et fais les quatre produits : n’oublie aucun terme en x.",
+    explanation: "Méthode : un carré, c’est une expression multipliée par elle-même, comme (x + 3)² = (x + 3)(x + 3) ; un produit de deux parenthèses se développe par les quatre produits (double distributivité), puis on réduit.\n\n" +
+          "Calcul : " +
+          ("Non. (x - 4)² = (x - 4)(x - 4) = x² - 4x - 4x + 16 = x² - 8x + 16. C’est (x - 4)(x + 4) = x² + 4x - 4x - 16 qui donne x² - 16.") +
+          "\n\nConclusion : on passe toujours par le produit de deux parenthèses et ses quatre produits, sans formule à retenir.",
     tags: ["litteral_identite_remarquable", "erreur", "defi"],
   },
   {
@@ -1710,9 +1761,8 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     comparator: "mcq_exact",
     hint: "Le carré d’une somme n’est pas la somme des carrés.",
     explanation:
-      "Définition : $(a + b)^2 = a^2 + 2ab + b^2$, et non $a^2 + b^2$.\n\n" +
-      "Méthode : on compare chaque égalité à la vraie formule.\n\n" +
-      "Calcul : $(x + 3)^2 = x^2 + 6x + 9$, donc « $= x^2 + 9$ » est faux.\n\n" +
+      "Méthode : un carré, c’est une expression multipliée par elle-même ; on écrit le produit de deux parenthèses et on fait les quatre produits.\n\n" +
+      "Calcul : $(x + 3)^2 = (x + 3)(x + 3) = x \\times x + x \\times 3 + 3 \\times x + 3 \\times 3 = x^2 + 6x + 9$, donc « $= x^2 + 9$ » est faux : il oublie les deux produits $3x$.\n\n" +
       "Conclusion : l’égalité fausse est $(x + 3)^2 = x^2 + 9$.",
     tags: ["litteral_identite_remarquable", "erreur", "qcm"],
   },
@@ -1774,50 +1824,9 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
       "Conclusion : c’est $(x - 6)^2$.",
     tags: ["litteral_identite_remarquable", "reconnaitre", "qcm"],
   },
-  {
-    kind: "fixed",
-    id: "litteral_identite_reconnaitre_fixed_4",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "litteral_identite_remarquable",
-    microId: "litteral_identite_reconnaitre",
-    difficulty: 2,
-    theme: "neutral",
-    text: "De quelle identité provient l’expression développée $x^2 + 10x + 25$ ?",
-    format: "qcm",
-    choices: ["$(x + 5)^2$", "$(x - 5)^2$", "$(x - 5)(x + 5)$", "$(x + 10)^2$"],
-    expected: ["$(x + 5)^2$"],
-    comparator: "mcq_exact",
-    hint: "Cherche un carré : 25 = 5², et 10 = 2 × 5.",
-    explanation:
-      "Définition : $(a + b)^2 = a^2 + 2ab + b^2$.\n\n" +
-      "Méthode : on identifie $b^2 = 25$ donc $b = 5$, et on vérifie $2b = 10$.\n\n" +
-      "Calcul : $x^2 + 10x + 25 = (x + 5)^2$.\n\n" +
-      "Conclusion : l’identité est $(x + 5)^2$.",
-    tags: ["litteral_identite_remarquable", "reconnaitre", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "litteral_identite_reconnaitre_fixed_5",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "litteral_identite_remarquable",
-    microId: "litteral_identite_reconnaitre",
-    difficulty: 2,
-    theme: "neutral",
-    text: "L’expression $x^2 - 49$ correspond à quelle identité ?",
-    format: "qcm",
-    choices: ["$(x - 7)(x + 7)$", "$(x - 7)^2$", "$(x + 7)^2$", "$(x - 49)(x + 1)$"],
-    expected: ["$(x - 7)(x + 7)$"],
-    comparator: "mcq_exact",
-    hint: "C’est une différence de deux carrés : 49 = 7².",
-    explanation:
-      "Définition : $a^2 - b^2 = (a - b)(a + b)$.\n\n" +
-      "Méthode : on reconnaît $49 = 7^2$.\n\n" +
-      "Calcul : $x^2 - 49 = (x - 7)(x + 7)$.\n\n" +
-      "Conclusion : c’est $(x - 7)(x + 7)$.",
-    tags: ["litteral_identite_remarquable", "reconnaitre", "difference_carres", "qcm"],
-  },
+  // ⛔ 03/10/2026 : `litteral_identite_reconnaitre_fixed_4` (x² + 10x + 25 →
+  // (x + 5)²) et `_fixed_5` (x² − 49 → (x − 7)(x + 7)) sont sortis de la 4e,
+  // décision de Frédéric : une identité lue à l’envers, c’est de la 3e.
   {
     kind: "template",
     id: "litteral_identite_reconnaitre_tpl_2",
@@ -1833,59 +1842,20 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "litteral_identite_reconnaitre_tpl_3",
+    // ⛔ 03/10/2026 : remplace `litteral_identite_reconnaitre_tpl_3` (remonter
+    // de la forme développée à l’identité = factorisation, sortie en 3e sur
+    // décision de Frédéric). Ici on reste dans le SENS DIRECT : reconnaître,
+    // parmi plusieurs, le développement juste.
+    id: "litteral_identite_reconnaitre_tpl_forme_developpee_1",
     niveau: "4e",
     matiere: "maths",
     notionId: "litteral_identite_remarquable",
     microId: "litteral_identite_reconnaitre",
     difficulty: 3,
     theme: "neutral",
-    hint: "Le terme du milieu et le signe indiquent l’identité.",
+    hint: "Écris le produit de deux parenthèses, fais les quatre produits, puis cherche le résultat parmi les propositions.",
     tags: ["litteral_identite_remarquable", "reconnaitre", "developpe", "template"],
-    // ⚠️ SIGNALÉ À FRÉDÉRIC (03/10/2026) : ce gabarit remonte de la forme
-    // développée à l’identité — une identité lue à l’envers, donc de la 3e.
-    // Gardé (à lui de trancher) ; seules la lettre et la consigne varient.
-    generate: () => {
-      const a = randomInt(2, 9);
-      const L = randomChoice(LETTRES);
-      const mid = 2 * a;
-      const sq = a * a;
-      const mode = randomChoice(["somme", "difference", "carres"]);
-      const expr =
-        mode === "somme"
-          ? `${L}^2 + ${mid}${L} + ${sq}`
-          : mode === "difference"
-          ? `${L}^2 - ${mid}${L} + ${sq}`
-          : `${L}^2 - ${sq}`;
-      const correct =
-        mode === "somme"
-          ? `$(${L} + ${a})^2$`
-          : mode === "difference"
-          ? `$(${L} - ${a})^2$`
-          : `$(${L} - ${a})(${L} + ${a})$`;
-      const text = randomChoice([
-        `L’expression développée $${expr}$ provient de quelle identité ?`,
-        `Quelle expression, une fois développée, donne $${expr}$ ?`,
-        `$${expr}$ est la forme développée de :`,
-        `De quelle expression le développement donne-t-il $${expr}$ ?`,
-      ]);
-      return {
-        text,
-        format: "qcm",
-        choices: shuffle([
-          `$(${L} + ${a})^2$`,
-          `$(${L} - ${a})^2$`,
-          `$(${L} - ${a})(${L} + ${a})$`,
-          `$(${L} + ${a})(${L} + ${a + 1})$`,
-        ]),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation:
-          "Méthode : on développe chaque proposition par les quatre produits et on compare.\n\n" +
-          "Calcul : le signe du terme en " + `$${L}$` + " et la présence de ce terme indiquent la bonne parenthèse.\n\n" +
-          `Conclusion : $${expr}$ est la forme développée de ${correct}.`,
-      };
-    },
+    generate: () => genFormeDeveloppeeJuste(),
   },
   {
     kind: "template",
@@ -1917,8 +1887,8 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     explanation:
       "Définition : $(a + b)^2$ est un carré ; $(a - b)(a + b)$ est un produit somme-différence.\n\n" +
       "Méthode : on regarde si l’expression est un carré ou le produit d’une somme par une différence.\n\n" +
-      "Calcul : $(a + b)^2$ donne $a^2 + 2ab + b^2$ ; $(a - b)(a + b)$ donne $a^2 - b^2$.\n\n" +
-      "Conclusion : le carré garde un double produit, le produit somme-différence l’élimine.",
+      "Calcul : $(a + b)^2 = (a + b)(a + b) = a^2 + ab + ab + b^2$ : les deux produits croisés s’ajoutent. $(a - b)(a + b) = a^2 + ab - ab - b^2$ : les deux produits croisés s’annulent.\n\n" +
+      "Conclusion : dans le carré, les deux parenthèses sont identiques et les produits croisés restent ; dans le produit somme-différence, un signe change et ils disparaissent.",
     tags: ["litteral_identite_remarquable", "reconnaitre", "open"],
   },
 
@@ -1937,11 +1907,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     choices: ["$x^2 + 12x + 36$", "$x^2 + 36$", "$x^2 + 6x + 36$", "$x^2 + 12x + 12$"],
     expected: ["$x^2 + 12x + 36$"],
     comparator: "mcq_exact",
-    hint: "$2 \\times 6 = 12$ et $6^2 = 36$.",
+    hint: "Écris $(x + 6)(x + 6)$ et fais les quatre produits.",
     explanation:
-      "Définition : $(a + b)^2 = a^2 + 2ab + b^2$.\n\n" +
-      "Méthode : ici $a = x$, $b = 6$.\n\n" +
-      "Calcul : $(x + 6)^2 = x^2 + 12x + 36$.\n\n" +
+      "Méthode : un carré, c’est une expression multipliée par elle-même ; on fait les quatre produits, puis on réduit.\n\n" +
+      "Calcul : $(x + 6)^2 = (x + 6)(x + 6) = x \\times x + x \\times 6 + 6 \\times x + 6 \\times 6 = x^2 + 6x + 6x + 36 = x^2 + 12x + 36$.\n\n" +
       "Conclusion : le résultat est $x^2 + 12x + 36$.",
     tags: ["litteral_identite_remarquable", "developper", "qcm"],
   },
@@ -1959,11 +1928,10 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     choices: ["$x^2 - 49$", "$x^2 + 49$", "$x^2 - 14x + 49$", "$x^2 - 14x - 49$"],
     expected: ["$x^2 - 49$"],
     comparator: "mcq_exact",
-    hint: "Différence de deux carrés.",
+    hint: "Fais les quatre produits : les termes en x s’annulent.",
     explanation:
-      "Définition : $(a - b)(a + b) = a^2 - b^2$.\n\n" +
-      "Méthode : les termes en x s’annulent.\n\n" +
-      "Calcul : $(x - 7)(x + 7) = x^2 - 49$.\n\n" +
+      "Méthode : on fait les quatre produits (double distributivité), puis on réduit.\n\n" +
+      "Calcul : $(x - 7)(x + 7) = x \\times x + x \\times 7 + (-7) \\times x + (-7) \\times 7 = x^2 + 7x - 7x - 49 = x^2 - 49$.\n\n" +
       "Conclusion : le résultat est $x^2 - 49$.",
     tags: ["litteral_identite_remarquable", "developper", "difference_carres", "qcm"],
   },
@@ -2004,22 +1972,23 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     microId: "litteral_identite_choisir",
     difficulty: 3,
     theme: "neutral",
-    text: "Quelle formule s’applique pour développer $(a + b)^2$ ?",
+    // ⛔ 03/10/2026 : réécrit SANS formule (décision de Frédéric) ; l’ancienne
+    // version (« Quelle formule s’applique… a² + 2ab + b² ») est gardée pour la 3e.
+    text: "Pour développer $(x + 3)^2$, quel produit faut-il d’abord écrire ?",
     format: "qcm",
     choices: [
-      "$a^2 + 2ab + b^2$",
-      "$a^2 + b^2$",
-      "$a^2 - 2ab + b^2$",
-      "$a^2 - b^2$",
+      "$(x + 3)(x + 3)$",
+      "$(x + 3) \\times 2$",
+      "$x^2 \\times 3^2$",
+      "$(x + 3) + (x + 3)$",
     ],
-    expected: ["$a^2 + 2ab + b^2$"],
+    expected: ["$(x + 3)(x + 3)$"],
     comparator: "mcq_exact",
-    hint: "C’est le carré d’une somme.",
+    hint: "Un carré, c’est une expression multipliée par elle-même.",
     explanation:
-      "Définition : le carré d’une somme suit $(a + b)^2 = a^2 + 2ab + b^2$.\n\n" +
-      "Méthode : on choisit la formule correspondant à la somme au carré.\n\n" +
-      "Calcul : $(a + b)^2 = a^2 + 2ab + b^2$.\n\n" +
-      "Conclusion : la formule est $a^2 + 2ab + b^2$.",
+      "Méthode : un carré, c’est une expression multipliée par elle-même, comme $5^2 = 5 \\times 5$.\n\n" +
+      "Calcul : $(x + 3)^2 = (x + 3)(x + 3) = x \\times x + x \\times 3 + 3 \\times x + 3 \\times 3 = x^2 + 6x + 9$.\n\n" +
+      "Conclusion : on écrit d’abord $(x + 3)(x + 3)$, puis on fait les quatre produits.",
     tags: ["litteral_identite_remarquable", "choisir", "qcm"],
   },
   {
@@ -2031,22 +2000,23 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     microId: "litteral_identite_choisir",
     difficulty: 3,
     theme: "neutral",
-    text: "Quelle formule s’applique pour développer $(a - b)^2$ ?",
+    // ⛔ 03/10/2026 : réécrit SANS formule (décision de Frédéric) ; l’ancienne
+    // version (« Quelle formule s’applique… a² − 2ab + b² ») est gardée pour la 3e.
+    text: "Pourquoi $(x - 4)^2$ n’est-il pas égal à $x^2 - 16$ ?",
     format: "qcm",
     choices: [
-      "$a^2 - 2ab + b^2$",
-      "$a^2 + 2ab + b^2$",
-      "$a^2 - b^2$",
-      "$a^2 + b^2$",
+      "car $(x - 4)(x - 4)$ donne quatre produits, dont deux termes en $x$ : on trouve $x^2 - 8x + 16$",
+      "car un carré change tous les signes : on trouve $x^2 + 16$",
+      "car un carré, c’est le double : on trouve $2x - 8$",
+      "en fait, $(x - 4)^2$ est bien égal à $x^2 - 16$",
     ],
-    expected: ["$a^2 - 2ab + b^2$"],
+    expected: ["car $(x - 4)(x - 4)$ donne quatre produits, dont deux termes en $x$ : on trouve $x^2 - 8x + 16$"],
     comparator: "mcq_exact",
-    hint: "C’est le carré d’une différence.",
+    hint: "Écris $(x - 4)^2$ comme un produit de deux parenthèses et fais les quatre produits.",
     explanation:
-      "Définition : le carré d’une différence suit $(a - b)^2 = a^2 - 2ab + b^2$.\n\n" +
-      "Méthode : on choisit la formule avec le double produit négatif.\n\n" +
-      "Calcul : $(a - b)^2 = a^2 - 2ab + b^2$.\n\n" +
-      "Conclusion : la formule est $a^2 - 2ab + b^2$.",
+      "Méthode : un carré, c’est une expression multipliée par elle-même ; on fait les quatre produits.\n\n" +
+      "Calcul : $(x - 4)^2 = (x - 4)(x - 4) = x \\times x + x \\times (-4) + (-4) \\times x + (-4) \\times (-4) = x^2 - 4x - 4x + 16 = x^2 - 8x + 16$.\n\n" +
+      "Conclusion : $x^2 - 16$ oublie les deux produits croisés $-4x$ et $-4x$, et se trompe de signe sur $16$.",
     tags: ["litteral_identite_remarquable", "choisir", "qcm"],
   },
   {
@@ -2085,17 +2055,23 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     microId: "litteral_identite_choisir",
     difficulty: 3,
     theme: "neutral",
-    text: "Quelle formule s’applique pour développer $(a - b)(a + b)$ ?",
+    // ⛔ 03/10/2026 : réécrit SANS formule (décision de Frédéric) ; l’ancienne
+    // version (« Quelle formule s’applique… a² − b² ») est gardée pour la 3e.
+    text: "Pour développer $(x - 5)(x + 5)$, faut-il faire quatre produits ou deux ?",
     format: "qcm",
-    choices: ["$a^2 - b^2$", "$a^2 + b^2$", "$a^2 - 2ab + b^2$", "$a^2 + 2ab + b^2$"],
-    expected: ["$a^2 - b^2$"],
+    choices: [
+      "quatre produits : $x \\times x$, $x \\times 5$, $(-5) \\times x$, $(-5) \\times 5$ ; puis les deux termes en $x$ s’annulent",
+      "deux produits seulement : $x \\times x$ et $5 \\times 5$",
+      "deux produits seulement : $x \\times 5$ et $(-5) \\times x$",
+      "un seul produit : $x \\times x$",
+    ],
+    expected: ["quatre produits : $x \\times x$, $x \\times 5$, $(-5) \\times x$, $(-5) \\times 5$ ; puis les deux termes en $x$ s’annulent"],
     comparator: "mcq_exact",
-    hint: "C’est la différence de deux carrés.",
+    hint: "Chaque terme de la première parenthèse multiplie chaque terme de la seconde.",
     explanation:
-      "Définition : $(a - b)(a + b) = a^2 - b^2$.\n\n" +
-      "Méthode : on choisit la différence de deux carrés.\n\n" +
-      "Calcul : les termes croisés s’annulent.\n\n" +
-      "Conclusion : la formule est $a^2 - b^2$.",
+      "Méthode : deux parenthèses de deux termes donnent toujours quatre produits (double distributivité).\n\n" +
+      "Calcul : $(x - 5)(x + 5) = x \\times x + x \\times 5 + (-5) \\times x + (-5) \\times 5 = x^2 + 5x - 5x - 25 = x^2 - 25$.\n\n" +
+      "Conclusion : on fait quatre produits ; les termes $5x$ et $-5x$ s’annulent, il reste $x^2 - 25$.",
     tags: ["litteral_identite_remarquable", "choisir", "qcm"],
   },
   {
@@ -2107,51 +2083,11 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     microId: "litteral_identite_choisir",
     difficulty: 4,
     theme: "neutral",
-    hint: "Associe l’expression à la bonne formule.",
-    tags: ["litteral_identite_remarquable", "choisir", "formule", "template"],
-    // ⚠️ SIGNALÉ À FRÉDÉRIC (03/10/2026) : ce gabarit EXIGE la formule
-    // a² + 2ab + b², hors du programme de 4e qu’il a choisi. Gardé (à lui de
-    // trancher) ; seules la lettre (jamais « a », pour ne pas la mêler à la
-    // formule) et la consigne varient.
-    generate: () => {
-      const a = randomInt(2, 9);
-      const L = randomChoice(LETTRES_SANS_A);
-      const mode = randomChoice(["somme", "difference", "carres"]);
-      const expression =
-        mode === "somme"
-          ? `(${L} + ${a})^2`
-          : mode === "difference"
-          ? `(${L} - ${a})^2`
-          : `(${L} - ${a})(${L} + ${a})`;
-      const correct =
-        mode === "somme"
-          ? "$a^2 + 2ab + b^2$"
-          : mode === "difference"
-          ? "$a^2 - 2ab + b^2$"
-          : "$a^2 - b^2$";
-      const text = randomChoice([
-        `Quelle formule faut-il appliquer pour développer $${expression}$ ?`,
-        `Pour développer $${expression}$, quelle formule utiliser ?`,
-        `$${expression}$ se développe avec quelle formule ?`,
-      ]);
-      return {
-        text,
-        format: "qcm",
-        choices: shuffle([
-          "$a^2 + 2ab + b^2$",
-          "$a^2 - 2ab + b^2$",
-          "$a^2 - b^2$",
-          "$a^2 + b^2$",
-        ]),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : chaque identité remarquable a sa formule.\n\n" +
-          "Méthode : on identifie la structure de l’expression.\n\n" +
-          `Calcul : $${expression}$ se développe avec ${correct}.\n\n` +
-          `Conclusion : la formule est ${correct}.`,
-      };
-    },
+    hint: "Refais les quatre produits, réduis, puis compare avec chaque proposition.",
+    tags: ["litteral_identite_remarquable", "choisir", "template"],
+    // ⛔ 03/10/2026 : réécrit SANS formule (décision de Frédéric). L’ancien
+    // « Quelle formule faut-il appliquer… » est gardé pour la 3e.
+    generate: () => genQuelDevJuste(),
   },
   {
     kind: "template",
@@ -2188,44 +2124,24 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     microId: "litteral_identite_choisir",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique quand utiliser une identité remarquable plutôt que la double distributivité classique.",
+    // ⛔ 03/10/2026 : réécrit SANS formule ni « différence de deux carrés »
+    // (décision de Frédéric) ; l’ancienne version est gardée pour la 3e.
+    text: "Explique comment développer $(x + 5)^2$, et pourquoi on ne trouve pas $x^2 + 25$.",
     format: "open",
-    expected: ["carré", "différence de deux carrés", "rapide"],
+    expected: ["(x + 5)(x + 5)", "(x+5)(x+5)", "quatre produits", "4 produits", "10x", "double distributivité"],
     comparator: "contains_keyword",
-    hint: "Pense aux formes $(a+b)^2$, $(a-b)^2$, $(a-b)(a+b)$.",
+    hint: "Écris $(x + 5)^2$ comme un produit de deux parenthèses, puis compte les produits.",
     explanation:
-      "Définition : les identités remarquables sont des raccourcis pour des formes précises.\n\n" +
-      "Méthode : on les utilise pour un carré de somme, un carré de différence ou une différence de deux carrés.\n\n" +
-      "Calcul : sinon, on revient à la double distributivité classique.\n\n" +
-      "Conclusion : on choisit une identité remarquable quand la forme correspond, car c’est plus rapide.",
+      "Méthode : un carré, c’est une expression multipliée par elle-même ; on l’écrit comme un produit de deux parenthèses, puis on fait les quatre produits.\n\n" +
+      "Calcul : $(x + 5)^2 = (x + 5)(x + 5) = x \\times x + x \\times 5 + 5 \\times x + 5 \\times 5 = x^2 + 5x + 5x + 25 = x^2 + 10x + 25$.\n\n" +
+      "Conclusion : $x^2 + 25$ ne garde que deux des quatre produits ; il manque $5x + 5x = 10x$.",
     tags: ["litteral_identite_remarquable", "choisir", "open"],
   },
 
   // ---------- IR_DEFIS ----------
-  {
-    kind: "fixed",
-    id: "litteral_identite_defi_fixed_3",
-    niveau: "4e",
-    matiere: "maths",
-    notionId: "litteral_identite_remarquable",
-    microId: "litteral_identite_defi",
-    difficulty: 4,
-    theme: "neutral",
-    // ⚠️ SIGNALÉ À FRÉDÉRIC (03/10/2026) : FACTORISATION par une identité
-    // (x² − 9 = (x − 3)(x + 3)), passée en 3e le 30/09. Gardé, à lui de trancher.
-    text: "Factoriser $x^2 - 9$ à l’aide d’une identité remarquable.",
-    format: "qcm",
-    choices: ["$(x - 3)(x + 3)$", "$(x - 9)(x + 1)$", "$(x - 3)^2$", "$(x + 3)^2$"],
-    expected: ["$(x - 3)(x + 3)$"],
-    comparator: "mcq_exact",
-    hint: "$x^2 - 9$ est une différence de deux carrés.",
-    explanation:
-      "Définition : $a^2 - b^2 = (a - b)(a + b)$.\n\n" +
-      "Méthode : on reconnaît $9 = 3^2$.\n\n" +
-      "Calcul : $x^2 - 9 = (x - 3)(x + 3)$.\n\n" +
-      "Conclusion : la forme factorisée est $(x - 3)(x + 3)$.",
-    tags: ["litteral_identite_remarquable", "defi", "factorisation", "qcm"],
-  },
+  // ⛔ 03/10/2026 : `litteral_identite_defi_fixed_3` (factoriser x² − 9) est
+  // sorti de la 4e, décision de Frédéric — la factorisation par une identité est
+  // de la 3e. Source gardée hors du dépôt pour la banque de 3e.
   {
     kind: "fixed",
     id: "litteral_identite_defi_fixed_4",
@@ -2235,17 +2151,16 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     microId: "litteral_identite_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "En utilisant une identité remarquable, calculer $101^2$ (avec $101 = 100 + 1$).",
+    text: "Calculer $101^2$ de tête, en écrivant $101 = 100 + 1$ et en développant $(100 + 1)(100 + 1)$.",
     format: "qcm",
     choices: ["10201", "10001", "11000", "10101"],
     expected: ["10201"],
     comparator: "mcq_exact",
-    hint: "$(100 + 1)^2 = 100^2 + 2 \\times 100 \\times 1 + 1^2$.",
+    hint: "Fais les quatre produits : $100 \\times 100$, $100 \\times 1$, $1 \\times 100$, $1 \\times 1$.",
     explanation:
-      "Définition : $(a + b)^2 = a^2 + 2ab + b^2$.\n\n" +
-      "Méthode : on pose $a = 100$, $b = 1$.\n\n" +
-      "Calcul : $100^2 + 2 \\times 100 + 1 = 10000 + 200 + 1 = 10201$.\n\n" +
-      "Conclusion : $101^2 = 10201$.",
+      "Méthode : $101^2 = (100 + 1)(100 + 1)$ ; on fait les quatre produits, faciles de tête.\n\n" +
+      "Calcul : $100 \\times 100 + 100 \\times 1 + 1 \\times 100 + 1 \\times 1 = 10\\,000 + 100 + 100 + 1 = 10\\,201$.\n\n" +
+      "Conclusion : $101^2 = 10\\,201$.",
     tags: ["litteral_identite_remarquable", "defi", "calcul_malin", "qcm"],
   },
   {
@@ -2285,14 +2200,13 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Explique pourquoi $(a + b)^2$ n’est pas égal à $a^2 + b^2$.",
     format: "open",
-    expected: ["double produit", "2ab", "manque"],
+    expected: ["double produit", "2ab", "ab + ab", "quatre produits", "4 produits", "manque", "oubli"],
     comparator: "contains_keyword",
-    hint: "Il y a un terme supplémentaire dans le développement.",
+    hint: "Écris $(a + b)^2 = (a + b)(a + b)$ et compte les produits.",
     explanation:
-      "Définition : $(a + b)^2 = a^2 + 2ab + b^2$.\n\n" +
-      "Méthode : on développe le carré comme un produit par soi-même.\n\n" +
-      "Calcul : $(a + b)(a + b) = a^2 + ab + ab + b^2 = a^2 + 2ab + b^2$.\n\n" +
-      "Conclusion : il manque le double produit $2ab$, donc $(a + b)^2 \\neq a^2 + b^2$.",
+      "Méthode : un carré, c’est une expression multipliée par elle-même : on écrit $(a + b)(a + b)$ et on fait les quatre produits.\n\n" +
+      "Calcul : $(a + b)(a + b) = a \\times a + a \\times b + b \\times a + b \\times b = a^2 + ab + ab + b^2$.\n\n" +
+      "Conclusion : $a^2 + b^2$ ne garde que deux des quatre produits ; il manque $ab + ab$, donc $(a + b)^2 \\neq a^2 + b^2$.",
     tags: ["litteral_identite_remarquable", "defi", "open"],
   },
 ];
