@@ -749,6 +749,17 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-10-02",
     },
   ],
+  "/fiches-cours/maths/4e/prop-pourcentages": [
+    {
+      // 03/10/2026 : la vidéo PARLÉE des pourcentages de 4e (calcul mental
+      // « tout part de 10 % », coefficient, piège − 20 % / + 20 %).
+      id: "4aBnDf5iXTA",
+      title: "Tout comprendre sur les pourcentages — Maths 4e",
+      description:
+        "De tête, tout part de 10 % ; retrouver un pourcentage ; le coefficient multiplicateur ; le pourcentage d'évolution ; et pourquoi − 20 % puis + 20 % ne ramène pas au départ (4e).",
+      ajoutee: "2026-10-03",
+    },
+  ],
   "/fiches-cours/maths/6e/fraction-nombre": [
     {
       id: "KT6rurM3Q3E",
