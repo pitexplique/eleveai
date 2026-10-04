@@ -330,7 +330,7 @@ const SITUATIONS_FAMILLE = [
   { gn: "le volume d'un aquarium", f: false, unite: "cm³", famille: "produit", calcul: "des centimètres × des centimètres × des centimètres" },
   { gn: "la surface d'un terrain de handball", f: true, unite: "m²", famille: "produit", calcul: "des mètres × des mètres" },
   { gn: "l'énergie produite par des panneaux solaires", f: true, unite: "kWh", famille: "produit", calcul: "des kilowatts × des heures" },
-  { gn: "le travail fourni par une équipe de maçons", f: false, unite: "homme·jour", famille: "produit", calcul: "des personnes × des jours" },
+  { gn: "le volume d'un carton de déménagement", f: false, unite: "dm³", famille: "produit", calcul: "des décimètres × des décimètres × des décimètres" },
   { gn: "le volume d'une piscine", f: false, unite: "m³", famille: "produit", calcul: "des mètres × des mètres × des mètres" },
   { gn: "la surface d'un mur à peindre", f: true, unite: "m²", famille: "produit", calcul: "des mètres × des mètres" },
   { gn: "l'aire d'un panneau publicitaire", f: true, unite: "m²", famille: "produit", calcul: "des mètres × des mètres" },
