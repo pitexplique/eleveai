@@ -489,6 +489,15 @@ export const microSkills: MicroSkillSource[] = [
     // de proportionnalité n'a pas besoin des pourcentages pour se poser.
     prerequis: ["prop_quatrieme", "prop_coeff"],
   },
+  // ⭐ AJOUTÉE LE 04/10/2026, demandée par Frédéric : « à la fin, trouver la
+  // relation qui relie deux grandeurs ». y = k × x, k lu sur une paire, un
+  // tableau ou un graphique. Dernière micro de la notion, avant le défi.
+  {
+    id: "prop_relation",
+    label: "Trouver la relation qui relie deux grandeurs proportionnelles",
+    notionId: "prop_proportionnalite",
+    prerequis: ["prop_coeff", "prop_graphique"],
+  },
   // Le libellé disait « et les pourcentages » : ils ne sont plus ici.
   // (Commentaire sorti de l'objet le 30/09/2026 : entre `id` et `label`, il
   // cachait la micro aux contrôles des feuilles d'exercices, qui lisent

@@ -2058,6 +2058,208 @@ function genGraphVraiFaux() {
   return genGraphReconnaitre();
 }
 
+/* ---------- Trouver la relation qui relie deux grandeurs (04/10/2026) ----------
+ * ⭐ Demandée par Frédéric le 03/10 : « à la fin, trouver la relation qui relie
+ * deux grandeurs ». C'est la dernière micro de la notion, avant le défi : on
+ * écrit y = k × x, avec k lu sur une paire, un tableau ou un graphique.
+ * ⛔ Mêmes règles que le graphique : x et k ENTIERS, la division tombe juste ;
+ * UN seul geste par question (trouver k, OU choisir la formule) — jamais
+ * « trouve la relation puis calcule y pour x = 7 ».
+ * Les situations sont celles du graphique (SITUATIONS_GRAPH).
+ */
+
+/** « la masse de pommes (en kg) » ; pas d'unité redite pour un nombre d'objets. */
+function grandeurEn(g: string, u: string) {
+  return /^le nombre/.test(g) ? g : `${g} (en ${u})`;
+}
+
+/** « On note x la masse de pommes (en kg) et y le prix (en €). » */
+function notation(s: SituationGraph) {
+  return `On note x ${grandeurEn(s.x, s.ux)} et y ${grandeurEn(s.y, s.uy)}.`;
+}
+
+/** Trois abscisses entières distinctes, rangées, sans 1 (sinon k se lit d'un coup d'œil). */
+function troisAbscisses(xmax: number) {
+  const pool = shuffle(Array.from({ length: Math.max(3, xmax - 1) }, (_, i) => i + 2)).slice(0, 3);
+  return pool.sort((a, b) => a - b);
+}
+
+/** Les formules fausses d'une table y = k × x dont la 1re colonne est (n ; m). */
+function formulesFausses(k: number, n: number, m: number) {
+  return [`y = x + ${m - n}`, `x = ${k} × y`, `y = ${k + 1} × x`, `y = x ÷ ${k}`];
+}
+
+/** ★1 — Une seule paire (n ; m) : compléter y = … × x. */
+function genRelationPaire() {
+  const s = randomChoice(SITUATIONS_GRAPH);
+  const k = randomChoice(s.ks);
+  const n = randomInt(2, s.xmax);
+  const m = k * n;
+  const t = randomInt(0, 2);
+  const donnee =
+    t === 0
+      ? `Pour x = ${n}, on a y = ${m}.`
+      : t === 1
+        ? `On sait que y = ${m} quand x = ${n}.`
+        : `Un relevé donne x = ${n} et y = ${m}.`;
+  return {
+    text: `${notation(s)} Les deux grandeurs sont proportionnelles. ${donnee} Complète la relation : y = … × x.`,
+    format: "short" as const,
+    expected: [String(k)],
+    comparator: "number_equal" as const,
+    explanation: expl(
+      "deux grandeurs proportionnelles sont reliées par une relation y = k × x, où k est le coefficient de proportionnalité.",
+      "je divise y par x.",
+      `${m} ÷ ${n} = ${k}.`,
+      `la relation est y = ${k} × x.`,
+    ),
+  };
+}
+
+/** ★1 — Un tableau : choisir la bonne formule parmi quatre. */
+function genRelationTableauQcm() {
+  const s = randomChoice(SITUATIONS_GRAPH);
+  const k = randomChoice(s.ks);
+  const xs = troisAbscisses(s.xmax);
+  const ys = xs.map((x) => k * x);
+  const t = randomInt(0, 2);
+  const question =
+    t === 0
+      ? "Quelle relation relie y à x ?"
+      : t === 1
+        ? "Quelle formule permet de calculer y à partir de x ?"
+        : "Parmi ces formules, laquelle correspond au tableau ?";
+  return {
+    text: `${notation(s)} Voici un tableau de proportionnalité. ${question}`,
+    format: "qcm" as const,
+    choices: makeChoices(`y = ${k} × x`, formulesFausses(k, xs[0], ys[0])),
+    expected: [`y = ${k} × x`],
+    comparator: "mcq_exact" as const,
+    explanation: expl(
+      "dans un tableau de proportionnalité, on passe de x à y en multipliant toujours par le même nombre k : y = k × x.",
+      "je divise chaque y par son x.",
+      xs.map((x, i) => `${ys[i]} ÷ ${x} = ${k}`).join(" ; ") + ".",
+      `on multiplie toujours par ${k} : y = ${k} × x.`,
+    ),
+    canvas: tableauProportionnaliteCanvas({
+      rowLabels: ["x", "y"],
+      values: [xs.map(String), ys.map(String)],
+      missing: [],
+    }),
+  };
+}
+
+/** ★2 — Un tableau : trouver k soi-même (réponse courte). */
+function genRelationTableauCourt() {
+  const s = randomChoice(SITUATIONS_GRAPH);
+  const k = randomChoice(s.ks);
+  const xs = troisAbscisses(s.xmax);
+  const ys = xs.map((x) => k * x);
+  const t = randomInt(0, 1);
+  return {
+    text:
+      t === 0
+        ? `${notation(s)} Ce tableau est un tableau de proportionnalité. Complète la relation : y = … × x.`
+        : `${notation(s)} D'après ce tableau de proportionnalité, par quel nombre multiplie-t-on x pour obtenir y ?`,
+    format: "short" as const,
+    expected: [String(k)],
+    comparator: "number_equal" as const,
+    explanation: expl(
+      "deux grandeurs proportionnelles sont reliées par y = k × x.",
+      "je divise un y par son x, puis je vérifie sur une autre colonne.",
+      `${ys[0]} ÷ ${xs[0]} = ${k} ; contrôle : ${ys[2]} ÷ ${xs[2]} = ${k}.`,
+      `y = ${k} × x.`,
+    ),
+    canvas: tableauProportionnaliteCanvas({
+      rowLabels: ["x", "y"],
+      values: [xs.map(String), ys.map(String)],
+      missing: [],
+    }),
+  };
+}
+
+/** ★2 — Un graphique (droite par l'origine) : choisir la bonne formule. */
+function genRelationGraphique() {
+  const s = randomChoice(SITUATIONS_GRAPH);
+  const k = randomChoice(s.ks);
+  const xm = Math.min(s.xmax, Math.floor(30 / k));
+  const pts = Array.from({ length: xm + 1 }, (_, i) => ({ x: i, y: k * i }));
+  const t = randomInt(0, 1);
+  return {
+    text:
+      t === 0
+        ? `${notation(s)} Le graphique montre une situation de proportionnalité. Quelle relation relie y à x ?`
+        : `${notation(s)} Les points sont alignés avec l'origine. Quelle formule donne y en fonction de x ?`,
+    format: "qcm" as const,
+    choices: makeChoices(`y = ${k} × x`, [`y = x + ${k}`, `x = ${k} × y`, `y = ${k + 1} × x`]),
+    expected: [`y = ${k} × x`],
+    comparator: "mcq_exact" as const,
+    explanation: expl(
+      "une droite qui passe par l'origine représente une relation y = k × x ; k est la valeur de y pour x = 1.",
+      "je pars de 1 sur l'axe horizontal, je monte jusqu'au point, je lis l'axe vertical.",
+      `pour x = 1, on lit y = ${k}. Contrôle : pour x = 2, on lit ${2 * k} = ${k} × 2.`,
+      `y = ${k} × x.`,
+    ),
+    canvas: repereProp(s, pts, { a: k, b: 0 }),
+  };
+}
+
+/**
+ * ★3 — Le piège de la première colonne : un tableau y = k × x, ou un tableau
+ * y = x + d qui commence par la MÊME colonne. Une seule tâche, choisir la
+ * formule ; la difficulté est de vérifier TOUTES les colonnes.
+ */
+function genRelationPiege() {
+  // ⛔ Frédéric, 04/10 : PAS de contexte ici. Un tableau « vélo : 10, 11, 12 kcal
+  // en 2, 3, 4 min » n'est pas plausible. Et on l'enlève dans les DEUX cas :
+  // sans contexte seulement quand c'est faux, l'absence trahirait la réponse.
+  const k = randomChoice([2, 3, 4, 5]);
+  const prop = Math.random() < 0.5;
+  const xs = troisAbscisses(8);
+  const d = (k - 1) * xs[0];
+  const ys = xs.map((x) => (prop ? k * x : x + d));
+  // Sans contexte, ce sont les LETTRES qui varient (sinon la phrase revient).
+  const [X, Y] = randomChoice([["x", "y"], ["a", "b"], ["n", "p"], ["t", "d"]] as const);
+  const fois = `${Y} = ${k} × ${X}`;
+  const plus = `${Y} = ${X} + ${d}`;
+  const juste = prop ? fois : plus;
+  const autre = prop ? plus : fois;
+  const intro = randomChoice([
+    `Voici un tableau de valeurs de deux grandeurs ${X} et ${Y}.`,
+    `Ce tableau donne des valeurs de ${X} et de ${Y}.`,
+    `On a relevé ces valeurs de ${X} et de ${Y}.`,
+    "Observe ce tableau de valeurs.",
+  ]);
+  const question = randomChoice([
+    `Quelle relation relie ${Y} à ${X} ? Vérifie toutes les colonnes.`,
+    `Quelle formule permet de calculer ${Y} à partir de ${X} ?`,
+    `Attention, ce n'est peut-être pas un tableau de proportionnalité. Quelle formule donne ${Y} ?`,
+    "Lucas a trouvé une formule avec la première colonne seulement. Quelle est la formule qui marche pour tout le tableau ?",
+    "Quelle formule est vraie pour les trois colonnes ?",
+    `Par quelle formule passe-t-on de ${X} à ${Y} ?`,
+  ]);
+  return {
+    text: `${intro} ${question}`,
+    format: "qcm" as const,
+    choices: makeChoices(juste, [autre, `${X} = ${k} × ${Y}`, `${Y} = ${k + 1} × ${X}`]),
+    expected: [juste],
+    comparator: "mcq_exact" as const,
+    explanation: expl(
+      "une relation doit marcher pour CHAQUE colonne, pas seulement pour la première.",
+      `la 1re colonne (${xs[0]} ; ${ys[0]}) marche avec ${fois} ET avec ${plus} : je teste la dernière colonne.`,
+      `pour ${X} = ${xs[2]} : ${k} × ${xs[2]} = ${k * xs[2]} et ${xs[2]} + ${d} = ${xs[2] + d} ; le tableau donne ${ys[2]}.`,
+      prop
+        ? `${fois} : les grandeurs sont proportionnelles.`
+        : `${plus} : on AJOUTE ${d}, les grandeurs ne sont pas proportionnelles.`,
+    ),
+    canvas: tableauProportionnaliteCanvas({
+      rowLabels: [X, Y],
+      values: [xs.map(String), ys.map(String)],
+      missing: [],
+    }),
+  };
+}
+
 export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   // PROP_RECONNAITRE
@@ -2418,6 +2620,53 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     hint: "Regarde le point d'abscisse 0.",
     tags: ["prop_proportionnalite", "graphique", "qcm", "template", "canvas"],
     generate: () => genGraphVraiFaux(),
+  },
+
+  // =========================
+  // PROP_RELATION (04/10/2026) — trouver y = k × x, un seul geste par question
+  // ★1 une paire, un tableau (QCM) · ★2 un tableau (court), un graphique · ★3 le piège de la 1re colonne
+  // =========================
+  {
+    kind: "template", id: "prop_relation_tpl_1_paire", niveau: "4e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_relation", difficulty: 1, theme: "neutral",
+    hint: "Divise y par x.",
+    tags: ["prop_proportionnalite", "relation", "formule", "template"],
+    generate: () => genRelationPaire(),
+  },
+  {
+    kind: "template", id: "prop_relation_tpl_2_tableau_qcm", niveau: "4e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_relation", difficulty: 1, theme: "neutral",
+    hint: "Par quel nombre multiplie-t-on x pour obtenir y ?",
+    tags: ["prop_proportionnalite", "relation", "qcm", "template", "canvas"],
+    generate: () => genRelationTableauQcm(),
+  },
+  {
+    kind: "template", id: "prop_relation_tpl_3_tableau_court", niveau: "4e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_relation", difficulty: 2, theme: "neutral",
+    hint: "Divise un y par son x, puis vérifie sur une autre colonne.",
+    tags: ["prop_proportionnalite", "relation", "formule", "template", "canvas"],
+    generate: () => genRelationTableauCourt(),
+  },
+  {
+    kind: "template", id: "prop_relation_tpl_4_graphique", niveau: "4e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_relation", difficulty: 2, theme: "neutral",
+    hint: "Lis y pour x = 1.",
+    tags: ["prop_proportionnalite", "relation", "graphique", "qcm", "template", "canvas"],
+    generate: () => genRelationGraphique(),
+  },
+  {
+    kind: "template", id: "prop_relation_tpl_5_piege", niveau: "4e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_relation", difficulty: 3, theme: "neutral",
+    hint: "La formule doit marcher pour TOUTES les colonnes.",
+    tags: ["prop_proportionnalite", "relation", "piege", "qcm", "template", "canvas"],
+    generate: () => genRelationPiege(),
+  },
+  {
+    kind: "template", id: "prop_relation_tpl_6_piege_bis", niveau: "4e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_relation", difficulty: 3, theme: "neutral",
+    hint: "Teste la dernière colonne.",
+    tags: ["prop_proportionnalite", "relation", "piege", "qcm", "template", "canvas"],
+    generate: () => genRelationPiege(),
   },
 
   // =========================
