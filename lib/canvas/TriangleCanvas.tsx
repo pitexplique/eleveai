@@ -135,6 +135,9 @@ export default function TriangleCanvas({ figure }: Props) {
   const sideBC = figure.sideLabels?.BC;
   const sideCA = figure.sideLabels?.CA;
 
+  // Le cache blanc d'une cote couvre TOUT son texte (« 3x + 2 » dépassait des 44 d'origine).
+  const largeurCote = (t?: string) => Math.max(44, (t?.length ?? 0) * 9 + 10);
+
   const mAB = mid(A, B);
   const mBC = mid(B, C);
   const mCA = mid(C, A);
@@ -389,9 +392,9 @@ export default function TriangleCanvas({ figure }: Props) {
             {sideAB ? (
               <g>
                 <rect
-                  x={mAB.x - 22}
+                  x={mAB.x - largeurCote(sideAB) / 2}
                   y={mAB.y + 2}
-                  width={44}
+                  width={largeurCote(sideAB)}
                   height={20}
                   rx={5}
                   fill="white"
@@ -416,9 +419,9 @@ export default function TriangleCanvas({ figure }: Props) {
             {sideBC ? (
               <g>
                 <rect
-                  x={mBC.x - 22}
+                  x={mBC.x - largeurCote(sideBC) / 2}
                   y={mBC.y - 12}
-                  width={44}
+                  width={largeurCote(sideBC)}
                   height={20}
                   rx={5}
                   fill="white"
@@ -443,9 +446,9 @@ export default function TriangleCanvas({ figure }: Props) {
             {sideCA ? (
               <g>
                 <rect
-                  x={mCA.x - 22}
+                  x={mCA.x - largeurCote(sideCA) / 2}
                   y={mCA.y - 12}
-                  width={44}
+                  width={largeurCote(sideCA)}
                   height={20}
                   rx={5}
                   fill="white"
