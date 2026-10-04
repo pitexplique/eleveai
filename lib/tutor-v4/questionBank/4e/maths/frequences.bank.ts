@@ -1443,7 +1443,7 @@ export const frequencesBank: TutorBankItemV4[] = [
     explanation:
       "Définition : sur un petit nombre d'essais, une fréquence peut s'écarter beaucoup de la probabilité sans que rien ne soit anormal.\n\n" +
       "Méthode : on se demande toujours SUR COMBIEN D'ESSAIS avant de juger un écart.\n\n" +
-      "Calcul : obtenir 7 « pile » sur 10 avec une pièce équilibrée arrive environ une fois sur huit — c'est courant. Obtenir 700 « pile » sur 1 000 n'arriverait pratiquement jamais.\n\n" +
+      "Calcul : obtenir au moins 7 « pile » sur 10 avec une pièce équilibrée arrive environ une fois sur six — c'est courant. Obtenir 700 « pile » sur 1 000 n'arriverait pratiquement jamais.\n\n" +
       "Conclusion : ⭐ c'est la TAILLE DE L'ÉCHANTILLON qui décide de ce qu'on a le droit de conclure. Le même pourcentage ne dit pas la même chose sur 10 essais et sur 1 000.",
     tags: ["frequence", "echantillon", "valeur_particuliere", "qcm"],
   },
