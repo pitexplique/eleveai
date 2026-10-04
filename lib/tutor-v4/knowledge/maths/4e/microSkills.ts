@@ -454,6 +454,16 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "prop_proportionnalite",
     prerequis: ["prop_reconnaitre"],
   },
+  // ⭐ AJOUTÉE LE 03/10/2026, demandée par Frédéric : « une micro proportionnalité
+  // et graphique ». Le graphique (points alignés avec l'origine) est attendu en
+  // 4e et la fiche de cours le montre depuis le 30/09 ; le coach n'avait rien.
+  // Dessin : `fonctionGraphique` (points, droite, trait de lecture).
+  {
+    id: "prop_graphique",
+    label: "Reconnaître et utiliser la proportionnalité sur un graphique",
+    notionId: "prop_proportionnalite",
+    prerequis: ["prop_reconnaitre", "prop_table"],
+  },
   {
     id: "prop_coeff",
     label: "Utiliser un coefficient de proportionnalité ou un passage à l’unité",

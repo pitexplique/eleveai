@@ -39,6 +39,7 @@ import type {
   TutorBankItemV4,
   TableauProportionnaliteCanvasData,
 } from "@/lib/tutor-v4/types";
+import type { FonctionGraphiqueCanvasData } from "@/lib/tutor-v4/types_canvas";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -1782,6 +1783,281 @@ function genMentalVraiFaux() {
   };
 }
 
+/* ---------- Proportionnalité et graphique (03/10/2026) ----------
+ * ⭐ Demandée par Frédéric : « une micro proportionnalité et graphique ». Le
+ * critère du programme de 4e : deux grandeurs sont proportionnelles quand leurs
+ * points sont ALIGNÉS AVEC L'ORIGINE du repère. Deux contre-exemples : une
+ * droite qui ne passe pas par l'origine, des points qui ne sont pas alignés.
+ * ⛔ Frédéric, 03/10 : « des nombres entiers dont la divisibilité tombe juste »
+ * et « on ne rajoute pas une difficulté à une difficulté ». Chaque point est
+ * (x ; k × x) avec x et k entiers ; chaque question ne demande QU'UN geste
+ * (reconnaître, OU lire une ordonnée, OU lire une abscisse, OU lire le
+ * coefficient) — pas « lire le coefficient puis l'appliquer ailleurs ».
+ * Le dessin est `fonctionGraphique` : un quadrillage d'une unité par case,
+ * donc des valeurs ≤ 30 et xmax ≤ 10 (sinon la grille devient illisible).
+ */
+type SituationGraph = {
+  /** Titre du repère : « prix (€) selon la masse (kg) ». */
+  titre: string;
+  /** Grandeur en abscisse, puis en ordonnée, avec article. */
+  x: string;
+  y: string;
+  ux: string;
+  uy: string;
+  /** Coefficients entiers (y = k × x) et abscisse maximale. */
+  ks: number[];
+  xmax: number;
+  /** Question de lecture pour une abscisse donnée. */
+  qLire: (x: number) => string;
+  /** Question inverse : pour une ordonnée donnée, quelle abscisse ? */
+  qInverse: (y: number) => string;
+  /** Question « pour une unité ». */
+  qUnite: string;
+};
+
+const SITUATIONS_GRAPH: SituationGraph[] = [
+  { titre: "prix (€) selon la masse (kg)", x: "la masse de pommes", y: "le prix", ux: "kg", uy: "€", ks: [2, 3], xmax: 8, qLire: (x) => `Combien coûtent ${x} kg de pommes ?`, qInverse: (y) => `Quelle masse de pommes achète-t-on avec ${y} € ?`, qUnite: "Quel est le prix d'un kilogramme de pommes ?" },
+  { titre: "prix (€) selon le volume (L)", x: "le volume de jus", y: "le prix", ux: "L", uy: "€", ks: [2, 3], xmax: 8, qLire: (x) => `Combien coûtent ${x} L de jus ?`, qInverse: (y) => `Quel volume de jus achète-t-on avec ${y} € ?`, qUnite: "Quel est le prix d'un litre de jus ?" },
+  { titre: "prix (€) selon le nombre de cahiers", x: "le nombre de cahiers", y: "le prix", ux: "cahiers", uy: "€", ks: [2, 3], xmax: 8, qLire: (x) => `Combien coûtent ${x} cahiers ?`, qInverse: (y) => `Combien de cahiers achète-t-on avec ${y} € ?`, qUnite: "Quel est le prix d'un cahier ?" },
+  { titre: "distance (km) selon la durée (h)", x: "la durée de marche", y: "la distance", ux: "h", uy: "km", ks: [4, 5], xmax: 6, qLire: (x) => `Quelle distance parcourt-on en ${x} h ?`, qInverse: (y) => `En combien d'heures parcourt-on ${y} km ?`, qUnite: "Quelle distance parcourt-on en une heure ?" },
+  { titre: "volume (L) selon la durée (min)", x: "la durée de remplissage", y: "le volume d'eau", ux: "min", uy: "L", ks: [3, 4], xmax: 7, qLire: (x) => `Quel volume d'eau coule en ${x} min ?`, qInverse: (y) => `En combien de minutes coulent ${y} L d'eau ?`, qUnite: "Quel volume d'eau coule en une minute ?" },
+  { titre: "allongement (cm) selon la masse (kg)", x: "la masse accrochée au ressort", y: "l'allongement", ux: "kg", uy: "cm", ks: [2, 3, 4], xmax: 7, qLire: (x) => `De combien s'allonge le ressort avec ${x} kg ?`, qInverse: (y) => `Quelle masse faut-il accrocher pour que le ressort s'allonge de ${y} cm ?`, qUnite: "De combien s'allonge le ressort pour 1 kg ?" },
+  { titre: "pages imprimées selon la durée (min)", x: "la durée d'impression", y: "le nombre de pages", ux: "min", uy: "pages", ks: [4, 5], xmax: 6, qLire: (x) => `Combien de pages sont imprimées en ${x} min ?`, qInverse: (y) => `En combien de minutes imprime-t-on ${y} pages ?`, qUnite: "Combien de pages sont imprimées en une minute ?" },
+  { titre: "crêpes selon le nombre d'œufs", x: "le nombre d'œufs", y: "le nombre de crêpes", ux: "œufs", uy: "crêpes", ks: [4, 5], xmax: 6, qLire: (x) => `Combien de crêpes fait-on avec ${x} œufs ?`, qInverse: (y) => `Combien d'œufs faut-il pour ${y} crêpes ?`, qUnite: "Combien de crêpes fait-on avec un œuf ?" },
+  { titre: "prix (€) selon le nombre de tickets", x: "le nombre de tickets de bus", y: "le prix", ux: "tickets", uy: "€", ks: [2], xmax: 10, qLire: (x) => `Combien coûtent ${x} tickets ?`, qInverse: (y) => `Combien de tickets achète-t-on avec ${y} € ?`, qUnite: "Quel est le prix d'un ticket ?" },
+  { titre: "temps de lecture (min) selon les pages", x: "le nombre de pages lues", y: "le temps de lecture", ux: "pages", uy: "min", ks: [2, 3], xmax: 9, qLire: (x) => `Combien de minutes faut-il pour lire ${x} pages ?`, qInverse: (y) => `Combien de pages lit-on en ${y} min ?`, qUnite: "Combien de minutes faut-il pour lire une page ?" },
+  { titre: "distance (cm) selon la durée (min)", x: "la durée", y: "la distance parcourue par un escargot", ux: "min", uy: "cm", ks: [3], xmax: 9, qLire: (x) => `Quelle distance l'escargot parcourt-il en ${x} min ?`, qInverse: (y) => `En combien de minutes l'escargot parcourt-il ${y} cm ?`, qUnite: "Quelle distance l'escargot parcourt-il en une minute ?" },
+  { titre: "charge (%) selon la durée (min)", x: "la durée de charge", y: "la charge gagnée par la batterie", ux: "min", uy: "%", ks: [3, 4], xmax: 7, qLire: (x) => `Quelle charge gagne-t-on en ${x} min ?`, qInverse: (y) => `En combien de minutes gagne-t-on ${y} % de charge ?`, qUnite: "Quelle charge gagne-t-on en une minute ?" },
+  { titre: "prix (€) selon le nombre de mois", x: "le nombre de mois d'abonnement", y: "le prix payé", ux: "mois", uy: "€", ks: [3], xmax: 9, qLire: (x) => `Combien paie-t-on pour ${x} mois ?`, qInverse: (y) => `Combien de mois d'abonnement paie-t-on avec ${y} € ?`, qUnite: "Combien coûte un mois d'abonnement ?" },
+  { titre: "calories selon la durée (min)", x: "la durée de vélo", y: "le nombre de kilocalories dépensées", ux: "min", uy: "kcal", ks: [4, 5], xmax: 6, qLire: (x) => `Combien de kilocalories dépense-t-on en ${x} min ?`, qInverse: (y) => `En combien de minutes dépense-t-on ${y} kcal ?`, qUnite: "Combien de kilocalories dépense-t-on en une minute ?" },
+  { titre: "graines (g) selon le nombre d'oiseaux", x: "le nombre d'oiseaux", y: "la masse de graines", ux: "oiseaux", uy: "g", ks: [3, 4], xmax: 7, qLire: (x) => `Quelle masse de graines faut-il pour ${x} oiseaux ?`, qInverse: (y) => `Combien d'oiseaux nourrit-on avec ${y} g de graines ?`, qUnite: "Quelle masse de graines faut-il pour un oiseau ?" },
+  { titre: "longueur (m) selon le nombre de planches", x: "le nombre de planches", y: "la longueur de la clôture", ux: "planches", uy: "m", ks: [2, 3], xmax: 8, qLire: (x) => `Quelle longueur de clôture fait-on avec ${x} planches ?`, qInverse: (y) => `Combien de planches faut-il pour ${y} m de clôture ?`, qUnite: "Quelle longueur fait une planche ?" },
+];
+
+/** Le repère du coach : des points, une droite grisée (facultative), un trait de lecture. */
+function repereProp(
+  s: SituationGraph,
+  points: { x: number; y: number }[],
+  droite?: { a: number; b: number },
+  lecture?: { x?: number; y?: number },
+): FonctionGraphiqueCanvasData {
+  const xmax = Math.max(s.xmax, ...points.map((p) => p.x));
+  const ymax = Math.min(32, Math.max(...points.map((p) => p.y), droite ? droite.a * xmax + droite.b : 0) + 2);
+  // ⭐ LE BAS DU REPÈRE = LE PAS DES GRADUATIONS (03/10). Les nombres de l'axe
+  // horizontal s'écrivent SOUS l'axe : avec un bas à 0, ils sortaient du cadre
+  // et l'élève ne pouvait rien lire. Mais le canvas gradue l'axe vertical à
+  // partir de son bas : un bas à −1 donnait 1, 3, 5… On prend donc pour bas
+  // −pas, le pas que le canvas choisira (même calcul que lui : un chiffre tous
+  // les 16 px sur 240), et les graduations retombent sur 2, 4, 6… ou 3, 6, 9…
+  let ymin = -1;
+  for (let pas = 1; pas <= 4; pas++) {
+    const ecart = 240 / Math.max(1, ymax + pas);
+    if (Math.max(1, Math.ceil(16 / ecart)) === pas) {
+      ymin = -pas;
+      break;
+    }
+  }
+  return {
+    kind: "fonctionGraphique",
+    titre: s.titre,
+    // ⚠️ xmin −1 et non 0 : avec un bord à 0, le point d'abscisse 0 — celui
+    // qui DÉCIDE (est-ce (0 ; 0) ?) — était coupé en deux par le cadre (vu le
+    // 03/10). Le bas, lui, est calculé plus haut.
+    xmin: -1,
+    xmax,
+    ymin,
+    ymax,
+    grille: true,
+    // ⚠️ Les points sont posés en POINTS (ronds), pas en courbe de type
+    // "points" : celle-ci les RELIE par une ligne brisée, et la question porte
+    // justement sur leur alignement (vu dans le coach le 03/10).
+    courbes: droite
+      ? [{ id: "d", type: droite.b === 0 ? ("lineaire" as const) : ("affine" as const), a: droite.a, b: droite.b, couleur: "#94a3b8" }]
+      : [],
+    points: points.map((p) => ({ x: p.x, y: p.y, couleur: "#2563eb" })),
+    misesEnEvidence: lecture
+      ? [{
+          ...(lecture.x !== undefined ? { verticale: { x: lecture.x, couleur: "#dc2626" } } : {}),
+          ...(lecture.y !== undefined ? { horizontale: { y: lecture.y, couleur: "#dc2626" } } : {}),
+        }]
+      : undefined,
+    size: { width: 320, height: 240 },
+  };
+}
+
+const RAISONS_GRAPH = {
+  prop: "Oui : les points sont alignés avec l'origine",
+  affine: "Non : les points sont alignés, mais pas avec l'origine",
+  courbe: "Non : les points ne sont pas alignés",
+};
+
+/** ★1 — Reconnaître : proportionnel, ou non (droite sans l'origine, ou points non alignés). */
+function genGraphReconnaitre() {
+  for (let essai = 0; essai < 200; essai++) {
+    const s = randomChoice(SITUATIONS_GRAPH);
+    const k = randomChoice(s.ks);
+    const forme = randomChoice(["prop", "prop", "affine", "courbe"] as const);
+    const b = randomChoice([2, 3, 4]);
+    const n = Math.min(s.xmax, 5);
+    let pts: { x: number; y: number }[];
+    if (forme === "prop") pts = Array.from({ length: n + 1 }, (_, x) => ({ x, y: k * x }));
+    else if (forme === "affine") pts = Array.from({ length: n }, (_, x) => ({ x, y: k * x + b }));
+    // Une croissance qui s'accélère : 0, 1, 3, 6, 10… (les écarts grandissent de 1), × k.
+    else pts = [0, 1, 2, 3, 4].map((x) => ({ x, y: (k * x * (x + 1)) / 2 }));
+    if (Math.max(...pts.map((p) => p.y)) > 30) continue;
+    const t = randomInt(0, 3);
+    const text =
+      t === 0
+        ? `Ce graphique représente ${s.y} selon ${s.x}. Est-ce une situation de proportionnalité ?`
+        : t === 1
+          ? `Observe le graphique. ${cap(s.y)} est-il proportionnel ${aArt(s.x)} ?`
+          : t === 2
+            ? `Sur ce graphique, on a placé ${s.y} selon ${s.x}. Les deux grandeurs sont-elles proportionnelles ?`
+            : `Peut-on dire, avec ce graphique, que ${s.y} est proportionnel ${aArt(s.x)} ?`;
+    return {
+      text,
+      format: "qcm" as const,
+      choices: shuffle(Object.values(RAISONS_GRAPH)),
+      expected: [RAISONS_GRAPH[forme]],
+      comparator: "mcq_exact" as const,
+      explanation: expl(
+        "deux grandeurs sont proportionnelles quand leurs points sont ALIGNÉS AVEC L'ORIGINE du repère.",
+        "je regarde deux choses : les points sont-ils sur une même droite ? Cette droite passe-t-elle par le point (0 ; 0) ?",
+        forme === "prop"
+          ? `les points sont alignés et la droite passe par l'origine : chaque ordonnée vaut ${k} fois l'abscisse.`
+          : forme === "affine"
+            ? `les points sont alignés, mais pour 0 on lit ${b}, pas 0 : la droite ne passe pas par l'origine.`
+            : "les points ne sont pas sur une même droite : les écarts entre deux points voisins grandissent.",
+        forme === "prop" ? "c'est une situation de proportionnalité." : "ce n'est pas une situation de proportionnalité.",
+      ),
+      canvas: repereProp(s, pts),
+    };
+  }
+  return genProbleme(3);
+}
+
+/** ★2 — Lire une ordonnée : le trait rouge part de l'abscisse donnée. */
+function genGraphLire() {
+  const s = randomChoice(SITUATIONS_GRAPH);
+  const k = randomChoice(s.ks);
+  const xm = Math.min(s.xmax, Math.floor(30 / k));
+  const x = randomInt(2, xm - 1);
+  const pts = Array.from({ length: xm + 1 }, (_, i) => ({ x: i, y: k * i }));
+  const t = randomInt(0, 2);
+  const text =
+    t === 0
+      ? `D'après le graphique : ${minuscule(s.qLire(x))}`
+      : t === 1
+        ? `Lis la réponse sur le graphique. ${s.qLire(x)}`
+        : `Le graphique représente ${s.y} selon ${s.x}. ${s.qLire(x)}`;
+  return {
+    text,
+    format: "short" as const,
+    expected: [String(k * x)],
+    comparator: "number_equal" as const,
+    explanation: expl(
+      "sur le graphique, chaque point donne une valeur de chaque grandeur.",
+      `je pars de ${x} sur l'axe horizontal, je monte jusqu'au point, puis je lis l'axe vertical.`,
+      `on lit ${k * x}.`,
+      `la réponse est ${k * x} ${s.uy}.`,
+    ),
+    canvas: repereProp(s, pts, { a: k, b: 0 }, { x }),
+  };
+}
+
+/** ★2 — Lire une abscisse : la lecture inverse, le trait rouge part de l'ordonnée. */
+function genGraphInverse() {
+  const s = randomChoice(SITUATIONS_GRAPH);
+  const k = randomChoice(s.ks);
+  const xm = Math.min(s.xmax, Math.floor(30 / k));
+  const x = randomInt(2, xm - 1);
+  const pts = Array.from({ length: xm + 1 }, (_, i) => ({ x: i, y: k * i }));
+  const t = randomInt(0, 1);
+  const text =
+    t === 0 ? `D'après le graphique : ${minuscule(s.qInverse(k * x))}` : `Lis la réponse sur le graphique. ${s.qInverse(k * x)}`;
+  return {
+    text,
+    format: "short" as const,
+    expected: [String(x)],
+    comparator: "number_equal" as const,
+    explanation: expl(
+      "on peut lire un graphique dans les deux sens.",
+      `je pars de ${k * x} sur l'axe vertical, je vais jusqu'au point, puis je descends lire l'axe horizontal.`,
+      `on lit ${x}.`,
+      `la réponse est ${x} ${s.ux}.`,
+    ),
+    canvas: repereProp(s, pts, { a: k, b: 0 }, { y: k * x }),
+  };
+}
+
+/** ★3 — Lire le coefficient : la valeur pour UNE unité, lue sur le point d'abscisse 1. */
+function genGraphCoeff() {
+  const s = randomChoice(SITUATIONS_GRAPH);
+  const k = randomChoice(s.ks);
+  const xm = Math.min(s.xmax, Math.floor(30 / k));
+  const pts = Array.from({ length: xm + 1 }, (_, i) => ({ x: i, y: k * i }));
+  const t = randomInt(0, 2);
+  const text =
+    t === 0
+      ? `Ce graphique représente ${s.y} selon ${s.x}, une situation de proportionnalité. ${s.qUnite}`
+      : t === 1
+        ? `Avec le graphique, trouve le coefficient de proportionnalité. ${s.qUnite}`
+        : `Le graphique est une droite qui passe par l'origine. ${s.qUnite}`;
+  return {
+    text,
+    format: "short" as const,
+    expected: [String(k)],
+    comparator: "number_equal" as const,
+    explanation: expl(
+      "le coefficient de proportionnalité, c'est la valeur pour une unité : l'ordonnée du point d'abscisse 1.",
+      "je pars de 1 sur l'axe horizontal, je monte jusqu'au point, puis je lis l'axe vertical.",
+      `on lit ${k}. Contrôle : pour 2, on lit ${2 * k} = 2 × ${k}.`,
+      `pour une unité : ${k} ${s.uy}. Le coefficient est ${k}.`,
+    ),
+    canvas: repereProp(s, pts, { a: k, b: 0 }, { x: 1, y: k }),
+  };
+}
+
+/** ★3 — Vrai ou faux sur un graphique (droite par l'origine, ou non) : une seule phrase à juger. */
+function genGraphVraiFaux() {
+  for (let essai = 0; essai < 100; essai++) {
+    const s = randomChoice(SITUATIONS_GRAPH);
+    const k = randomChoice(s.ks);
+    const prop = Math.random() < 0.5;
+    const b = prop ? 0 : randomChoice([2, 3, 4]);
+    const xm = Math.min(s.xmax, 6);
+    if (k * xm + b > 30) continue;
+    const pts = Array.from({ length: xm + 1 }, (_, i) => ({ x: i, y: k * i + b }));
+    const affirmation = randomInt(0, 2);
+    const phrase =
+      affirmation === 0
+        ? `${cap(s.y)} est proportionnel ${aArt(s.x)}.`
+        : affirmation === 1
+          ? `Si ${s.x} double, ${s.y} double aussi.`
+          : `Pour 0, ${s.y} vaut 0.`;
+    const t = randomInt(0, 1);
+    const text =
+      t === 0 ? `Vrai ou faux ? D'après le graphique : « ${phrase} »` : `Observe le graphique. Cette phrase est-elle vraie : « ${phrase} » ?`;
+    return {
+      text,
+      format: "qcm" as const,
+      choices: ["vrai", "faux"],
+      expected: [prop ? "vrai" : "faux"],
+      comparator: "mcq_exact" as const,
+      explanation: expl(
+        "un graphique de proportionnalité est une droite qui passe par l'origine.",
+        "je regarde le point d'abscisse 0 : est-ce (0 ; 0) ?",
+        prop
+          ? `pour 0, on lit 0, et la droite passe par l'origine : y = ${k} × x. Pour 1 on lit ${k}, pour 2 on lit ${2 * k} : le double.`
+          : `pour 0, on lit ${b}, pas 0. Pour 1 on lit ${k + b}, pour 2 on lit ${2 * k + b} : ce n'est pas le double.`,
+        prop ? "c'est vrai." : "c'est faux.",
+      ),
+      canvas: repereProp(s, pts, { a: k, b }),
+    };
+  }
+  return genGraphReconnaitre();
+}
+
 export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   // PROP_RECONNAITRE
@@ -2095,6 +2371,53 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     hint: "Même prix au kg.",
     tags: ["prop_proportionnalite", "reunion", "quatrieme_proportionnelle", "template", "canvas"],
     generate: () => genQuatrieme(2),
+  },
+
+  // =========================
+  // PROP_GRAPHIQUE (03/10/2026) — un seul geste par question
+  // ★1 reconnaître · ★2 lire une ordonnée, lire une abscisse · ★3 coefficient, vrai/faux
+  // =========================
+  {
+    kind: "template", id: "prop_graphique_tpl_1_reconnaitre", niveau: "4e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_graphique", difficulty: 1, theme: "neutral",
+    hint: "Les points sont-ils alignés ? La droite passe-t-elle par l'origine ?",
+    tags: ["prop_proportionnalite", "graphique", "qcm", "template", "canvas"],
+    generate: () => genGraphReconnaitre(),
+  },
+  {
+    kind: "template", id: "prop_graphique_tpl_2_reconnaitre_bis", niveau: "4e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_graphique", difficulty: 1, theme: "neutral",
+    hint: "Proportionnel : alignés AVEC l'origine.",
+    tags: ["prop_proportionnalite", "graphique", "qcm", "template", "canvas"],
+    generate: () => genGraphReconnaitre(),
+  },
+  {
+    kind: "template", id: "prop_graphique_tpl_3_lire", niveau: "4e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_graphique", difficulty: 2, theme: "neutral",
+    hint: "Monte jusqu'au point, puis lis l'axe vertical.",
+    tags: ["prop_proportionnalite", "graphique", "lecture", "template", "canvas"],
+    generate: () => genGraphLire(),
+  },
+  {
+    kind: "template", id: "prop_graphique_tpl_4_inverse", niveau: "4e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_graphique", difficulty: 2, theme: "neutral",
+    hint: "Va jusqu'au point, puis descends lire l'axe horizontal.",
+    tags: ["prop_proportionnalite", "graphique", "lecture", "template", "canvas"],
+    generate: () => genGraphInverse(),
+  },
+  {
+    kind: "template", id: "prop_graphique_tpl_5_coefficient", niveau: "4e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_graphique", difficulty: 3, theme: "neutral",
+    hint: "Le coefficient, c'est la valeur pour une unité.",
+    tags: ["prop_proportionnalite", "graphique", "coefficient", "template", "canvas"],
+    generate: () => genGraphCoeff(),
+  },
+  {
+    kind: "template", id: "prop_graphique_tpl_6_vrai_faux", niveau: "4e", matiere: "maths",
+    notionId: "prop_proportionnalite", microId: "prop_graphique", difficulty: 3, theme: "neutral",
+    hint: "Regarde le point d'abscisse 0.",
+    tags: ["prop_proportionnalite", "graphique", "qcm", "template", "canvas"],
+    generate: () => genGraphVraiFaux(),
   },
 
   // =========================
