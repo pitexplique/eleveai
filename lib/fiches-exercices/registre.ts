@@ -697,7 +697,7 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
   "maths/4e/litteral-factorisation": {
     titre: "La factorisation : 20 exercices corrigés",
     resume:
-      "Le plus grand facteur commun, factoriser par un nombre, une lettre ou un nombre négatif, le « 1 » caché, et vérifier en développant — le terrain de handball, le potager, la forêt, l'étang. Le rectangle découpé dessiné dans les corrigés.",
+      "Repérer le plus grand facteur commun (un nombre, une lettre ou les deux), factoriser le plus possible, avec trois termes ou après avoir réduit, et toujours vérifier en redéveloppant. Du calcul mental (17 × 23 + 17 × 77), les maillots d'un club de basket, l'aire d'un rectangle, des périmètres de polygones réguliers, une fresque, trois nombres qui se suivent, un jardin agrandi et un relais solidaire.",
   },
   "maths/4e/litteral-distributivite": {
     titre: "La distributivité : 20 exercices corrigés",

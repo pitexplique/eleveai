@@ -133,6 +133,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "expressions-litterales-4e-cours-exercices-corriges.pdf",
   "expressions-litterales-seconde-20-exercices-corriges.pdf",
   "expressions-litterales-seconde-cours-exercices-corriges.pdf",
+  "factorisation-4e-20-exercices-corriges.pdf",
   "factorisation-4e-cours-exercices-corriges.pdf",
   "familles-de-mots-et-contraires-en-cm1-2026-2027-cours-exercices-corriges.pdf",
   "figures-planes-cm2-cours-exercices-corriges.pdf",
