@@ -103,13 +103,17 @@ function evaluer(texte: string, v: Valeurs): number | null {
 }
 
 /** « A = 3x + 6 » → « 3x + 6 » ; une égalité entre deux expressions est gardée. */
-function membreUtile(t: string): { gauche: string; droite: string | null } {
+function membreUtile(t: string): { gauche: string; droite: string | null; nom?: string } {
   const morceaux = t.split("=");
   if (morceaux.length === 1) return { gauche: t, droite: null };
   if (morceaux.length !== 2) return { gauche: t, droite: null };
   const [g, d] = morceaux;
   // « A = … », « E = … » : un nom d'expression en majuscule seul à gauche.
-  if (/^\s*[A-Z]\s*$/.test(g)) return { gauche: d, droite: null };
+  if (/^\s*[A-Z]\s*$/.test(g)) return { gauche: d, droite: null, nom: g.trim().toLowerCase() };
+  // ⭐ 04/10/2026 (Frédéric) : « p = 3n + 5 » pour « P = 3 × n + 5 » — une
+  // minuscule seule qui n'apparaît pas à droite est aussi un nom.
+  if (/^\s*[a-z]\s*$/.test(g) && !d.toLowerCase().includes(g.trim()))
+    return { gauche: d, droite: null, nom: g.trim() };
   return { gauche: g, droite: d };
 }
 
@@ -154,6 +158,7 @@ function memeExpression(r: string, a: string): boolean {
 export function expressionsEquivalentes(reponse: string, attendue: string): boolean {
   const R = membreUtile(reponse);
   const A = membreUtile(attendue);
+  if (R.nom && A.nom && R.nom !== A.nom) return false;
   if ((R.droite === null) !== (A.droite === null)) return false;
   if (R.droite !== null && A.droite !== null) {
     return (
