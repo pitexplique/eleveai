@@ -890,6 +890,15 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
         "|x + 5|, c'est la distance à 5 ou à −5 ? Les ensembles de nombres, les crochets qui disent « compris » ou « exclu », et la valeur absolue qui est une distance : tout se lit sur la droite graduée (seconde).",
       ajoutee: "2026-09-21",
     },
+    {
+      // 04/10/2026 : « Les bases » n'a pas de classe — « Symboles et notations »
+      // se rattache ici, la fiche qui porte déjà ℕ ⊂ ℤ ⊂ 𝔻 ⊂ ℚ ⊂ ℝ, ∈ et |x|.
+      id: "8hfB2Qj3TP8",
+      title: "Symboles et notations en maths : ∀, ∃, ∈, ⇒, Σ… les lire comme une phrase",
+      description:
+        "∀ n ∈ ℕ, Σ k = n(n+1)/2 : une phrase en français écrite en raccourci. Les ensembles de nombres, appartient et inclus dans, pour tout et il existe, implique et équivaut à (l'erreur de la réciproque), sigma et la valeur absolue — avec un récapitulatif à garder.",
+      ajoutee: "2026-10-04",
+    },
   ],
   "/fiches-cours/maths/seconde/developpement-factorisation-2de": [
     {
