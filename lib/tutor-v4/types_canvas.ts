@@ -541,6 +541,8 @@ export type FonctionTableauCanvasData = {
     index: number;
   };
   highlightIndex?: number;
+  /** En-têtes des deux lignes ; « x » et « f(x) » par défaut (la notation f(x) n'arrive qu'en 3e). */
+  etiquettes?: { x: string; y: string };
   size?: { width?: number; height?: number };
 };
 

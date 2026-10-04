@@ -27,7 +27,7 @@ export default function FonctionTableauCanvas({ figure }: Props) {
         <tbody>
           <tr>
             <th className="border border-slate-300 bg-slate-100 px-3 py-2 font-black text-slate-900">
-              x
+              {figure.etiquettes?.x ?? "x"}
             </th>
 
             {xValues.map((x, index) => {
@@ -50,7 +50,7 @@ export default function FonctionTableauCanvas({ figure }: Props) {
 
           <tr>
             <th className="border border-slate-300 bg-sky-100 px-3 py-2 font-black text-sky-900">
-              f(x)
+              {figure.etiquettes?.y ?? "f(x)"}
             </th>
 
             {yValues.map((y, index) => {

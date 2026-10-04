@@ -96,6 +96,7 @@ function tableauValeurs(params: {
   missing?: { type: "image" | "antecedent"; index: number };
   highlightIndex?: number;
   consigne?: string;
+  etiquettes?: { x: string; y: string };
 }): FonctionTableauCanvasData {
   return {
     kind: "fonction_tableau",
@@ -104,6 +105,7 @@ function tableauValeurs(params: {
     missing: params.missing,
     highlightIndex: params.highlightIndex,
     consigne: params.consigne,
+    etiquettes: params.etiquettes,
     size: { width: 320, height: 170 },
   };
 }
@@ -1596,7 +1598,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
           xValues: xs,
           yValues: ys,
           highlightIndex: i,
-          consigne: `${s.x.col} → ${s.y.col}`,
+          etiquettes: { x: s.x.col, y: s.y.col },
         }),
       };
     },
@@ -1675,7 +1677,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
         canvas: tableauValeurs({
           xValues: xs,
           yValues: ys,
-          consigne: `${s.x.col} → ${s.y.col}`,
+          etiquettes: { x: s.x.col, y: s.y.col },
         }),
       };
     },
@@ -1756,7 +1758,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
           xValues: xs,
           yValues: ys,
           missing: { type: "image", index: manquant },
-          consigne: `${s.x.col} → ${s.y.col}`,
+          etiquettes: { x: s.x.col, y: s.y.col },
         }),
       };
     },
@@ -2109,7 +2111,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
         canvas: tableauValeurs({
           xValues: xs,
           yValues: ys,
-          consigne: `${s.x.col} → ${s.y.col}`,
+          etiquettes: { x: s.x.col, y: s.y.col },
         }),
       };
     },
@@ -2478,7 +2480,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
         canvas: tableauValeurs({
           xValues: xs,
           yValues: ys,
-          consigne: `${s.x.col} → ${s.y.col}`,
+          etiquettes: { x: s.x.col, y: s.y.col },
         }),
       };
     },
