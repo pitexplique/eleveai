@@ -13,6 +13,12 @@
 // côtés (et non posé au hasard), le rectangle garde à peu près ses
 // proportions, les noms des sommets du dessin sont ceux de l'énoncé.
 //
+// ⛔ 04/10/2026 — LES UNITÉS (« rajoute ABSOLUMENT les unités ! », Frédéric) :
+// chaque réponse chiffrée porte son unité dans `expected` (« 24 cm » : « 24 »,
+// « 24cm » passent, « 24 m » est refusé), l'énoncé dit l'unité attendue
+// (voir `avecUnite`, au bas du fichier) et l'explication conclut avec elle.
+// Seule exception : un coefficient (« par combien est-il multiplié ? »).
+//
 // ⭐ π : la réponse attendue accepte l'arrondi obtenu avec la touche π ET
 // celui obtenu avec 3,14 quand ils diffèrent — l'élève de 4e utilise l'un ou
 // l'autre, et les deux sont justes.
@@ -65,19 +71,30 @@ const M = (n: number) => `$${T(n)}$`;
 /** Une mesure dans le texte : « $12{,}5$ m ». */
 const q = (n: number, u: string) => `${M(n)} ${u}`;
 
-/** Réponses acceptées pour un nombre (« 12,5 » ; « 1250 » et « 1 250 »). */
-function rep(n: number): string[] {
+/**
+ * ⛔ 04/10/2026 — « Périmètres : rajoute ABSOLUMENT les unités ! » (Frédéric).
+ * Réponses acceptées pour une MESURE, unité comprise : « 12,5 cm » ; « 1250 m »
+ * et « 1 250 m ». Avec l'unité dans `expected`, number_equal accepte « 12,5 »,
+ * « 12,5 cm », « 12,5cm » et REFUSE « 12,5 m » (mesuré le 04/10).
+ * Pour un nombre d'objets, `u` est le nom compté (« tours », « rouleaux »).
+ */
+function rep(n: number, u: string): string[] {
   const v = arrondi(n, 3);
   const s = String(v).replace(".", ",");
-  return Math.abs(v) >= 1000 ? [s, fr(v)] : [s];
+  const nums = Math.abs(v) >= 1000 ? [s, fr(v)] : [s];
+  const out = nums.map((x) => `${x} ${u}`);
+  if (u === "€") out.push(...nums.map((x) => `${x} euros`));
+  return out;
 }
+/** Un nom compté, accordé : « 1 rouleau », « 3 rouleaux ». */
+const compte = (n: number, sing: string, plur: string) => (n === 1 ? sing : plur);
 
 /** Un calcul avec π, arrondi à `d` décimales : touche π et 3,14 acceptés. */
-function avecPi(f: (pi: number) => number, d: number) {
+function avecPi(f: (pi: number) => number, d: number, u: string) {
   const a = arrondi(f(Math.PI), d);
   const b = arrondi(f(3.14), d);
-  const exp = [String(a).replace(".", ",")];
-  if (b !== a) exp.push(String(b).replace(".", ","));
+  const exp = [`${String(a).replace(".", ",")} ${u}`];
+  if (b !== a) exp.push(`${String(b).replace(".", ",")} ${u}`);
   const note = b !== a ? ` (avec $\\pi \\approx 3{,}14$, on trouve $${T(b)}$, accepté aussi)` : "";
   return { val: a, exp, note };
 }
@@ -137,7 +154,7 @@ const PRENOMS = [
 type Prenom = (typeof PRENOMS)[number];
 const il = (p: Prenom) => (p.f ? "elle" : "il");
 /** « de Léa », « d’Ethan », « d’Inès », « d’Hugo ». */
-const deP = (p: Prenom) => (/^[aeiouyéèêâîôœh]/i.test(p.p) ? "d’" : "de ") + p.p;
+const deP = (p: Prenom) => (/^[aeiouéèêâîôœh]/i.test(p.p) ? "d’" : "de ") + p.p;
 
 const RECT_NOMS = ["ABCD", "EFGH", "MNOP", "RSTU", "IJKL", "WXYZ", "PQRS", "KLMN"];
 const TRI_NOMS = ["ABC", "EFG", "RST", "KLM", "IJK", "MNP", "DEF", "UVW", "XYZ", "PQR"];
@@ -332,7 +349,7 @@ function questionGrille(niveau: number): Q {
     `${cap(g.sq)} est un carré de ${q(v, u)} de côté.`,
     `${cap(g.sq)} mesure ${q(v, u)} de côté.`,
   ]);
-  const enUa = ua !== u ? ` Donne la réponse en ${ua}.` : "";
+  const enUa = ` Donne la réponse en ${ua}.`;
   const question = randomChoice([
     `Quel est le périmètre ${de(g.obj)} ?${enUa}`,
     `Calcule la longueur du contour ${de(g.obj)}, en ${ua}.`,
@@ -343,7 +360,7 @@ function questionGrille(niveau: number): Q {
   return {
     text: `${g.intro}.${f.mot ? ` Le contour forme une figure${f.mot}.` : ""} ${enonce} ${question}`,
     format: "short",
-    expected: rep(res),
+    expected: rep(res, ua),
     comparator: "number_equal",
     explanation: E(
       DEF_P,
@@ -707,7 +724,7 @@ function compPolygone(): Q {
   return {
     text,
     format: "short",
-    expected: rep(P),
+    expected: rep(P, u),
     comparator: "number_equal",
     explanation: E(
       DEF_P,
@@ -756,7 +773,7 @@ function compRegulier(): Q {
   return {
     text,
     format: "short",
-    expected: rep(P),
+    expected: rep(P, o.u),
     comparator: "number_equal",
     explanation: E(
       DEF_P,
@@ -804,7 +821,7 @@ function compEchelle(): Q {
   return {
     text,
     format: "short",
-    expected: rep(res),
+    expected: rep(res, u),
     comparator: "number_equal",
     explanation: E(
       "le périmètre est une longueur : il change comme les longueurs.",
@@ -840,7 +857,7 @@ function rectFigure(decimaux: boolean): Q {
   return {
     text,
     format: "short",
-    expected: rep(P),
+    expected: rep(P, u),
     comparator: "number_equal",
     explanation: E(
       DEF_P,
@@ -870,7 +887,7 @@ function rectTexte(): Q {
   return {
     text,
     format: "short",
-    expected: rep(P),
+    expected: rep(P, u),
     comparator: "number_equal",
     explanation: E(
       DEF_P,
@@ -925,7 +942,7 @@ function rectObjet(): Q {
   return {
     text,
     format: "short",
-    expected: rep(P),
+    expected: rep(P, o.u),
     comparator: "number_equal",
     explanation: E(
       DEF_P,
@@ -952,7 +969,7 @@ function rectMateriau(): Q {
   return {
     text,
     format: "short",
-    expected: rep(P),
+    expected: rep(P, u),
     comparator: "number_equal",
     explanation: E(
       `la longueur ${deNu(c.mat)} suit tout le contour : on cherche le périmètre.`,
@@ -983,7 +1000,7 @@ function rectConversion(): Q {
   return {
     text,
     format: "short",
-    expected: rep(res),
+    expected: rep(res, ua),
     comparator: "number_equal",
     explanation: E(
       `${DEF_P} On n’additionne que des longueurs exprimées dans la même unité.`,
@@ -1021,7 +1038,7 @@ function rectInverse(): Q {
   return {
     text,
     format: "short",
-    expected: rep(res),
+    expected: rep(res, ua),
     comparator: "number_equal",
     explanation: E(
       "$P = 2 \\times (L + l)$, donc la moitié du périmètre vaut $L + l$.",
@@ -1051,7 +1068,7 @@ function carreFigure(): Q {
   return {
     text,
     format: "short",
-    expected: rep(P),
+    expected: rep(P, u),
     comparator: "number_equal",
     explanation: E(
       DEF_P,
@@ -1096,7 +1113,7 @@ function carreObjet(): Q {
   return {
     text,
     format: "short",
-    expected: rep(P),
+    expected: rep(P, o.u),
     comparator: "number_equal",
     explanation: E(DEF_P, "un carré a 4 côtés égaux : $P = 4 \\times c$.", `$4 \\times ${T(c)} = ${T(P)}$.`, `le périmètre est ${q(P, o.u)}.`),
   };
@@ -1121,7 +1138,7 @@ function carreMateriau(): Q {
   return {
     text,
     format: "short",
-    expected: rep(P),
+    expected: rep(P, u),
     comparator: "number_equal",
     explanation: E(DEF_P, "on fait le tour d’un carré : $P = 4 \\times c$.", `$4 \\times ${T(c)} = ${T(P)}$.`, `il faut ${q(P, u)} ${deNu(ctx.mat)}.`),
   };
@@ -1145,7 +1162,7 @@ function carreInverse(): Q {
   return {
     text,
     format: "short",
-    expected: rep(c),
+    expected: rep(c, u),
     comparator: "number_equal",
     explanation: E("pour un carré, $P = 4 \\times c$.", "on divise le périmètre par 4.", `$${T(P)} \\div 4 = ${T(c)}$.`, `le côté mesure ${q(c, u)}.`),
   };
@@ -1186,7 +1203,7 @@ function carreProbleme(): Q {
     return {
       text,
       format: "short",
-      expected: rep(res),
+      expected: rep(res, o.u),
       comparator: "number_equal",
       explanation: E(DEF_P, "on calcule le tour d’un carré, puis on multiplie par le nombre de carrés.", `$4 \\times ${T(c)} = ${T(4 * c)}$ ; $${T(4 * c)} \\times ${n} = ${T(res)}$.`, `il faut ${q(res, o.u)} ${deNu(o.mat)}.`),
     };
@@ -1204,7 +1221,7 @@ function carreProbleme(): Q {
     return {
       text,
       format: "short",
-      expected: rep(res),
+      expected: rep(res, "m"),
       comparator: "number_equal",
       explanation: E(DEF_P, "on calcule le tour complet, puis on retire la largeur de l’ouverture.", `$4 \\times ${T(c)} = ${T(4 * c)}$ ; $${T(4 * c)} - ${T(g)} = ${T(res)}$.`, `il faut ${q(res, "m")} ${deNu(ctx.mat)}.`),
     };
@@ -1220,7 +1237,7 @@ function carreProbleme(): Q {
   return {
     text,
     format: "short",
-    expected: rep(res),
+    expected: rep(res, lieu.u),
     comparator: "number_equal",
     explanation: E("un tour correspond au périmètre.", "on calcule un tour, puis on multiplie par le nombre de tours.", `$4 \\times ${T(c)} = ${T(4 * c)}$ ; $${T(4 * c)} \\times ${k} = ${T(res)}$.`, `${p.p} parcourt ${q(res, lieu.u)}.`),
   };
@@ -1239,7 +1256,7 @@ function carreDefi(): Q {
     return {
       text,
       format: "short",
-      expected: rep(c),
+      expected: rep(c, "cm"),
       comparator: "number_equal",
       explanation: E("pour un carré, $P = 4 \\times c$.", `on convertit : ${q(P / 100, "m")} $=$ ${q(P, "cm")}, puis on divise par 4.`, `$${T(P)} \\div 4 = ${T(c)}$.`, `le côté mesure ${q(c, "cm")}.`),
     };
@@ -1257,7 +1274,7 @@ function carreDefi(): Q {
     return {
       text,
       format: "short",
-      expected: rep(c),
+      expected: rep(c, u),
       comparator: "number_equal",
       explanation: E("deux figures de même périmètre ont des contours de même longueur.", "on calcule le périmètre du rectangle, puis on le divise par 4.", `$2 \\times (${T(L)} + ${T(l)}) = ${T(2 * (L + l))}$ ; $${T(2 * (L + l))} \\div 4 = ${T(c)}$.`, `le côté du carré mesure ${q(c, u)}.`),
     };
@@ -1272,7 +1289,7 @@ function carreDefi(): Q {
   return {
     text,
     format: "short",
-    expected: rep(c),
+    expected: rep(c, u),
     comparator: "number_equal",
     explanation: E("la longueur du contour reste la même.", "périmètre du triangle $= 3 \\times$ côté, puis côté du carré $=$ périmètre $\\div 4$.", `$3 \\times ${T(tc)} = ${T(3 * tc)}$ ; $${T(3 * tc)} \\div 4 = ${T(c)}$.`, `le côté du carré mesure ${q(c, u)}.`),
   };
@@ -1301,7 +1318,7 @@ function triTexte(): Q {
   return {
     text,
     format: "short",
-    expected: rep(P),
+    expected: rep(P, u),
     comparator: "number_equal",
     explanation: E(DEF_P, "un triangle a trois côtés : on les additionne.", `$${T(a)} + ${T(b)} + ${T(c)} = ${T(P)}$.`, `le périmètre est ${q(P, u)}.`),
     ...(t === 3 || t === 0 ? { canvas: triCanvas(nom, a, b, c, { AB: `${a} ${u}`, BC: `${b} ${u}`, CA: `${c} ${u}` }) } : {}),
@@ -1342,7 +1359,7 @@ function triFigure(): Q {
   return {
     text: `${intro} ${question}`,
     format: "short",
-    expected: rep(P),
+    expected: rep(P, o.u),
     comparator: "number_equal",
     explanation: E(DEF_P, "on additionne les trois longueurs lues sur la figure.", `$${T(a)} + ${T(b)} + ${T(c)} = ${T(P)}$.`, `le périmètre est ${q(P, o.u)}.`),
     canvas: triCanvas(nom, a, b, c, { AB: `${a} ${o.u}`, BC: `${b} ${o.u}`, CA: `${c} ${o.u}` }),
@@ -1377,7 +1394,7 @@ function triEquilateral(): Q {
   return {
     text,
     format: "short",
-    expected: rep(P),
+    expected: rep(P, o.u),
     comparator: "number_equal",
     explanation: E("un triangle équilatéral a trois côtés égaux.", "$P = 3 \\times$ côté.", `$3 \\times ${T(c)} = ${T(P)}$.`, `le périmètre est ${q(P, o.u)}.`),
   };
@@ -1400,7 +1417,7 @@ function triIsoceleFigure(): Q {
   return {
     text,
     format: "short",
-    expected: rep(P),
+    expected: rep(P, u),
     comparator: "number_equal",
     explanation: E(
       `un triangle isocèle en ${apex} a deux côtés égaux : ${nom[2]}${nom[0]} $=$ ${nom[1]}${nom[2]}.`,
@@ -1442,7 +1459,7 @@ function triIsoceleProbleme(): Q {
   return {
     text,
     format: "short",
-    expected: rep(P),
+    expected: rep(P, o.u),
     comparator: "number_equal",
     explanation: E(
       "un triangle isocèle a deux côtés égaux.",
@@ -1469,7 +1486,7 @@ function triInverse(): Q {
     return {
       text,
       format: "short",
-      expected: rep(c),
+      expected: rep(c, u),
       comparator: "number_equal",
       explanation: E("le périmètre est la somme des trois côtés.", "on retire du périmètre les deux côtés connus.", `$${T(P)} - ${T(a)} - ${T(b)} = ${T(c)}$.`, `le troisième côté mesure ${q(c, u)}.`),
     };
@@ -1486,7 +1503,7 @@ function triInverse(): Q {
     return {
       text,
       format: "short",
-      expected: rep(c),
+      expected: rep(c, o.u),
       comparator: "number_equal",
       explanation: E("un triangle équilatéral a trois côtés égaux.", "côté $=$ périmètre $\\div 3$.", `$${T(P)} \\div 3 = ${T(c)}$.`, `le côté mesure ${q(c, o.u)}.`),
     };
@@ -1502,7 +1519,7 @@ function triInverse(): Q {
     return {
       text,
       format: "short",
-      expected: rep(base),
+      expected: rep(base, u),
       comparator: "number_equal",
       explanation: E("un triangle isocèle a deux côtés égaux.", "base $=$ périmètre $- 2 \\times$ côté égal.", `$${T(P)} - 2 \\times ${T(s)} = ${T(P)} - ${T(2 * s)} = ${T(base)}$.`, `la base mesure ${q(base, u)}.`),
     };
@@ -1514,7 +1531,7 @@ function triInverse(): Q {
   return {
     text,
     format: "short",
-    expected: rep(s),
+    expected: rep(s, u),
     comparator: "number_equal",
     explanation: E("un triangle isocèle a deux côtés égaux.", "on retire la base, puis on partage en deux.", `$${T(P)} - ${T(base)} = ${T(2 * s)}$ ; $${T(2 * s)} \\div 2 = ${T(s)}$.`, `chaque côté égal mesure ${q(s, u)}.`),
   };
@@ -1555,7 +1572,7 @@ function composeToit(): Q {
     return {
       text,
       format: "short",
-      expected: rep(P),
+      expected: rep(P, u),
       comparator: "number_equal",
       explanation: E(
         `${DEF_P} Le côté commun au rectangle et au triangle est À L’INTÉRIEUR : il ne compte pas.`,
@@ -1578,7 +1595,7 @@ function composeToit(): Q {
   return {
     text,
     format: "short",
-    expected: rep(P),
+    expected: rep(P, u),
     comparator: "number_equal",
     explanation: E(
       `${DEF_P} La largeur collée contre le triangle est intérieure : elle ne compte pas.`,
@@ -1621,7 +1638,7 @@ function composeAccole(): Q {
     return {
       text,
       format: "short",
-      expected: rep(P),
+      expected: rep(P, u),
       comparator: "number_equal",
       explanation: E(
         `${DEF_P} La partie du côté où le carré est collé est intérieure.`,
@@ -1647,7 +1664,7 @@ function composeAccole(): Q {
   return {
     text,
     format: "short",
-    expected: rep(P),
+    expected: rep(P, u),
     comparator: "number_equal",
     explanation: E(DEF_P, "on additionne les six côtés du contour.", `$${cotes.map(T).join(" + ")} = ${T(P)}$.`, `le périmètre est ${q(P, u)}.`),
   };
@@ -1671,7 +1688,7 @@ function composeDemiDisque(): Q {
   const l = randomInt(o.l[0], o.l[1]);
   const u = o.u;
   const d = randomChoice([0, 1]);
-  const r = o.n === 2 ? avecPi((pi) => 2 * L + pi * l, d) : avecPi((pi) => 2 * L + l + (pi * l) / 2, d);
+  const r = o.n === 2 ? avecPi((pi) => 2 * L + pi * l, d, u) : avecPi((pi) => 2 * L + l + (pi * l) / 2, d, u);
   const forme =
     o.n === 2
       ? `un rectangle de ${q(L, u)} sur ${q(l, u)} et deux demi-cercles de diamètre ${q(l, u)}, un à chaque bout`
@@ -1729,7 +1746,7 @@ function probTours(): Q {
     return {
       text: `${p.p} fait ${k} fois le tour ${de(lieu.un)} rectangulaire de ${q(L, "m")} sur ${q(l, "m")}. Quelle distance parcourt-${il(p)}, en m ?`,
       format: "short",
-      expected: rep(D),
+      expected: rep(D, "m"),
       comparator: "number_equal",
       explanation: expl(`${p.p} parcourt ${q(D, "m")}.`),
     };
@@ -1737,22 +1754,22 @@ function probTours(): Q {
     return {
       text: `En s’entraînant, ${p.p} court ${k} tours autour ${de(lieu.un)} rectangulaire de ${q(L, "m")} de long et ${q(l, "m")} de large. Quelle distance a-t-${il(p)} parcourue, en km ?`,
       format: "short",
-      expected: rep(D / 1000),
+      expected: rep(D / 1000, "km"),
       comparator: "number_equal",
-      explanation: expl(`${q(D, "m")} $=$ ${q(D / 1000, "km")}.`),
+      explanation: expl(`${q(D, "m")} $=$ ${q(D / 1000, "km")} : ${p.p} a parcouru ${q(D / 1000, "km")}.`),
     };
   if (t === 2)
     return {
       text: `Pour s’entraîner, ${p.p} doit courir ${q(D, "m")} autour ${de(lieu.un)} rectangulaire de ${q(L, "m")} sur ${q(l, "m")}. Combien de tours doit-${il(p)} faire ?`,
       format: "short",
-      expected: rep(k),
+      expected: rep(k, "tours"),
       comparator: "number_equal",
       explanation: E("un tour correspond au périmètre.", "on calcule un tour, puis on cherche combien de tours font la distance.", `$2 \\times (${T(L)} + ${T(l)}) = ${T(P)}$ m ; $${T(D)} \\div ${T(P)} = ${k}$.`, `${p.p} doit faire ${k} tours.`),
     };
   return {
     text: `Un tour ${de(lieu.un)}, rectangle de ${q(L, "m")} sur ${q(l, "m")} : ${p.p} en fait ${k}. Quelle distance totale, en m ?`,
     format: "short",
-    expected: rep(D),
+    expected: rep(D, "m"),
     comparator: "number_equal",
     explanation: expl(`la distance totale est ${q(D, "m")}.`),
   };
@@ -1788,7 +1805,7 @@ function probTriangle(): Q {
     return {
       text,
       format: "short",
-      expected: rep(P),
+      expected: rep(P, o.u),
       comparator: "number_equal",
       explanation: E(DEF_P, "on additionne les trois côtés.", `$${T(a)} + ${T(b)} + ${T(c)} = ${T(P)}$.`, `il faut ${q(P, o.u)} ${deNu(o.mat)}.`),
     };
@@ -1806,7 +1823,7 @@ function probTriangle(): Q {
     return {
       text,
       format: "short",
-      expected: rep(res),
+      expected: rep(res, "cm"),
       comparator: "number_equal",
       explanation: E(DEF_P, "on calcule le tour d’un triangle, puis on multiplie par le nombre d’objets.", `$${T(a)} + ${T(b)} + ${T(c)} = ${T(P)}$ ; $${T(P)} \\times ${n} = ${T(res)}$.`, `il faut ${q(res, "cm")} ${deNu(o.mat)}.`),
     };
@@ -1823,7 +1840,7 @@ function probTriangle(): Q {
   return {
     text: `${course} relie trois points ${nom[0]}, ${nom[1]} et ${nom[2]} : ${nom[0]}${nom[1]} $=$ ${q(A, "m")}, ${nom[1]}${nom[2]} $=$ ${q(B, "m")} et ${nom[2]}${nom[0]} $=$ ${q(C, "m")}. ${p.p} fait ${k} boucles. Quelle distance parcourt-${il(p)}, en ${enKm ? "km" : "m"} ?`,
     format: "short",
-    expected: rep(enKm ? D / 1000 : D),
+    expected: enKm ? rep(D / 1000, "km") : rep(D, "m"),
     comparator: "number_equal",
     explanation: E("une boucle correspond au périmètre du triangle.", "on additionne les trois côtés, puis on multiplie par le nombre de boucles.", `$${T(A)} + ${T(B)} + ${T(C)} = ${T(A + B + C)}$ m ; $${T(A + B + C)} \\times ${k} = ${T(D)}$ m${enKm ? `, soit ${q(D / 1000, "km")}` : ""}.`, `${p.p} parcourt ${enKm ? q(D / 1000, "km") : q(D, "m")}.`),
   };
@@ -1846,7 +1863,7 @@ function probPortail(): Q {
   return {
     text,
     format: "short",
-    expected: rep(res),
+    expected: rep(res, "m"),
     comparator: "number_equal",
     explanation: E(DEF_P, "on calcule le tour complet, puis on retire l’ouverture.", `$2 \\times (${T(L)} + ${T(l)}) = ${T(P)}$ ; $${T(P)} - ${T(g)} = ${T(res)}$.`, `il faut ${q(res, "m")} ${deNu(c.mat)}.`),
   };
@@ -1896,7 +1913,7 @@ function probCout(): Q {
   return {
     text: `${text}${Math.abs(Pm * prix - cout) > 1e-9 ? " Arrondis au centime." : ""}`,
     format: "short",
-    expected: rep(cout),
+    expected: rep(cout, "€"),
     comparator: "number_equal",
     explanation: E(
       "le prix dépend de la longueur à poser, c’est-à-dire du périmètre.",
@@ -1926,7 +1943,7 @@ function probRouleaux(): Q {
     return {
       text,
       format: "short",
-      expected: rep(rouleau - P),
+      expected: rep(rouleau - P, "m"),
       comparator: "number_equal",
       explanation: E(DEF_P, "on calcule le périmètre, puis on le retire de la longueur achetée.", `$2 \\times (${T(L)} + ${T(l)}) = ${T(P)}$ ; $${T(rouleau)} - ${T(P)} = ${T(rouleau - P)}$.`, `il restera ${q(rouleau - P, "m")}.`),
     };
@@ -1941,24 +1958,26 @@ function probRouleaux(): Q {
     return {
       text,
       format: "short",
-      expected: rep(n),
+      expected: rep(n, compte(n, "rouleau", "rouleaux")),
       comparator: "number_equal",
-      explanation: E(DEF_P, "on calcule le périmètre, puis on cherche combien de rouleaux le couvrent (on arrondit au-dessus : un rouleau entamé s’achète entier).", `$2 \\times (${T(L)} + ${T(l)}) = ${T(P)}$ ; $${T(P)} \\div ${R} \\approx ${T(arrondi(P / R, 2))}$, donc ${n} rouleaux.`, `il faut acheter ${n} rouleaux.`),
+      explanation: E(DEF_P, "on calcule le périmètre, puis on cherche combien de rouleaux le couvrent (on arrondit au-dessus : un rouleau entamé s’achète entier).", `$2 \\times (${T(L)} + ${T(l)}) = ${T(P)}$ m ; $${T(P)} \\div ${R} \\approx ${T(arrondi(P / R, 2))}$, donc ${n} ${compte(n, "rouleau", "rouleaux")}.`, `il faut acheter ${n} ${compte(n, "rouleau", "rouleaux")}.`),
     };
   }
   const ds = [1, 2, 2.5, 3, 4, 5].filter((d) => Number.isInteger(P / d));
   const d = randomChoice(ds);
   const n = P / d;
-  const text = randomChoice([
-    `On plante un piquet tous les ${q(d, "m")} tout autour ${de(c.un)} rectangulaire de ${q(L, "m")} sur ${q(l, "m")}, en commençant par un coin. Combien de piquets faut-il ?`,
-    `Autour ${de(c.le)}, un rectangle de ${q(L, "m")} sur ${q(l, "m")}, ${p.p} place un poteau tous les ${q(d, "m")}, en partant d’un coin. Combien de poteaux pose-t-${il(p)} ?`,
-  ]);
+  const piquets = Math.random() < 0.5;
+  const mot = piquets ? "piquets" : "poteaux";
+  const tousLes = d === 1 ? "tous les mètres" : `tous les ${q(d, "m")}`;
+  const text = piquets
+    ? `On plante un piquet ${tousLes} tout autour ${de(c.un)} rectangulaire de ${q(L, "m")} sur ${q(l, "m")}, en commençant par un coin. Combien de piquets faut-il ?`
+    : `Autour ${de(c.le)}, un rectangle de ${q(L, "m")} sur ${q(l, "m")}, ${p.p} place un poteau ${tousLes}, en partant d’un coin. Combien de poteaux pose-t-${il(p)} ?`;
   return {
     text,
     format: "short",
-    expected: rep(n),
+    expected: rep(n, mot),
     comparator: "number_equal",
-    explanation: E(DEF_P, "sur un contour fermé, il y a autant de piquets que d’intervalles : périmètre $\\div$ écart.", `$2 \\times (${T(L)} + ${T(l)}) = ${T(P)}$ ; $${T(P)} \\div ${T(d)} = ${T(n)}$.`, `il en faut ${n}.`),
+    explanation: E(DEF_P, `sur un contour fermé, il y a autant de ${mot} que d’intervalles : périmètre $\\div$ écart.`, `$2 \\times (${T(L)} + ${T(l)}) = ${T(P)}$ m ; $${T(P)} \\div ${T(d)} = ${T(n)}$.`, `il faut ${n} ${mot}.`),
   };
 }
 
@@ -1983,7 +2002,7 @@ function probCercle(): Q {
   if (t === 0) {
     const D = randomInt(50, 70);
     const n = randomChoice([10, 20, 50, 100, 200]);
-    const r = avecPi((pi) => (pi * D * n) / 100, d);
+    const r = avecPi((pi) => (pi * D * n) / 100, d, "m");
     return {
       text: randomChoice([
         `La roue du vélo ${deP(p)} a un diamètre de ${q(D, "cm")}. Quelle distance parcourt-${il(p)} quand la roue fait ${n} tours ? Donne-la en mètres, arrondie ${MOT_ARRONDI[d]}.`,
@@ -1998,7 +2017,7 @@ function probCercle(): Q {
   }
   if (t === 3) {
     const C = randomInt(80, 400);
-    const r = avecPi((pi) => C / pi, d);
+    const r = avecPi((pi) => C / pi, d, "cm");
     const obj = randomChoice(["un tronc d’arbre", "un vieux chêne", "une colonne de temple", "un baobab", "un séquoia"]);
     return {
       text: randomChoice([
@@ -2014,7 +2033,7 @@ function probCercle(): Q {
   const o = randomChoice(CERCLES);
   const R = randomInt(o.r[0], o.r[1]);
   const donneDiam = Math.random() < 0.5;
-  const r = avecPi((pi) => 2 * pi * R, d);
+  const r = avecPi((pi) => 2 * pi * R, d, o.u);
   const donnee = donneDiam ? `de diamètre ${q(2 * R, o.u)}` : `de rayon ${q(R, o.u)}`;
   const text =
     t === 1
@@ -2155,7 +2174,7 @@ function defiCompare(): Q {
   // Deux noms SANS lettre commune (pas « MNOP » et « KLMN »).
   while ([...n2].some((x) => n1.includes(x))) n2 = randomChoice(RECT_NOMS);
   const a = randomInt(3, 15);
-  const b = randomInt(2, a);
+  const b = randomInt(2, a - 1); // un vrai rectangle, pas un carré
   let c2: number;
   let d2: number;
   if (egal) {
@@ -2200,7 +2219,7 @@ function defiAugmente(): Q {
         `Un rectangle mesure ${q(L, u)} sur ${q(l, u)}. On allonge sa longueur de ${q(a, u)} et sa largeur de ${q(b, u)}. De combien son périmètre augmente-t-il ?`,
       ]),
       format: "short",
-      expected: rep(inc),
+      expected: rep(inc, u),
       comparator: "number_equal",
       explanation: E("$P = 2 \\times (L + l)$.", `chaque longueur gagne ${q(a, u)} et chaque largeur ${q(b, u)} : il y a deux longueurs et deux largeurs.`, `$2 \\times ${T(a)} + 2 \\times ${T(b)} = ${T(inc)}$ (ancien périmètre $${T(P)}$, nouveau $${T(P + inc)}$).`, `le périmètre augmente de ${q(inc, u)}.`),
     };
@@ -2213,7 +2232,7 @@ function defiAugmente(): Q {
         `Un rectangle de ${q(L, u)} sur ${q(l, u)} est agrandi : $+ ${T(a)}$ ${u} sur la longueur, $+ ${T(b)}$ ${u} sur la largeur. Quel est son nouveau périmètre ?`,
       ]),
       format: "short",
-      expected: rep(newP),
+      expected: rep(newP, u),
       comparator: "number_equal",
       explanation: E("$P = 2 \\times (L + l)$.", "on calcule les nouvelles dimensions, puis le périmètre.", `$${T(L)} + ${T(a)} = ${T(L + a)}$ ; $${T(l)} + ${T(b)} = ${T(l + b)}$ ; $2 \\times (${T(L + a)} + ${T(l + b)}) = ${T(newP)}$.`, `le nouveau périmètre est ${q(newP, u)}.`),
     };
@@ -2226,7 +2245,7 @@ function defiAugmente(): Q {
       `Le côté d’un carré passe de ${q(s, u)} à ${q(s + k, u)}. De combien son périmètre a-t-il augmenté ?`,
     ]),
     format: "short",
-    expected: rep(4 * k),
+    expected: rep(4 * k, u),
     comparator: "number_equal",
     explanation: E("$P = 4 \\times c$.", "chacun des 4 côtés gagne la même longueur.", `$4 \\times ${T(k)} = ${T(4 * k)}$ (de $${T(4 * s)}$ à $${T(4 * (s + k))}$).`, `le périmètre augmente de ${q(4 * k, u)}.`),
   };
@@ -2259,7 +2278,7 @@ function defiLitteral(): Q {
         `Exprime le périmètre ${de(desc)} en fonction de $${lettre}$, puis calcule-le pour $${lettre} = ${v}$ (en ${u}).`,
       ]),
       format: "short",
-      expected: rep(P),
+      expected: rep(P, u),
       comparator: "number_equal",
       explanation: E(DEF_P, `on écrit le périmètre en fonction de ${lettre} : $${f.formule}$, puis on remplace ${lettre} par $${v}$.`, `$${f.coef} \\times ${v}${f.cst ? ` + ${f.cst}` : ""} = ${T(P)}$.`, `le périmètre vaut ${q(P, u)}.`),
     };
@@ -2271,9 +2290,9 @@ function defiLitteral(): Q {
       `Trouve $${lettre}$ sachant qu’${desc} a un périmètre de ${q(P, u)}.`,
     ]),
     format: "short",
-    expected: rep(v),
+    expected: rep(v, u),
     comparator: "number_equal",
-    explanation: E(DEF_P, `le périmètre s’écrit $${f.formule}$ ; on résout $${f.coef}${lettre}${f.cst ? ` + ${f.cst}` : ""} = ${T(P)}$.`, `${f.cst ? `$${f.coef}${lettre} = ${T(P)} - ${f.cst} = ${T(P - f.cst)}$, puis ` : ""}$${lettre} = ${T(P - f.cst)} \\div ${f.coef} = ${v}$.`, `$${lettre} = ${v}$.`),
+    explanation: E(DEF_P, `le périmètre s’écrit $${f.formule}$ ; on résout $${f.coef}${lettre}${f.cst ? ` + ${f.cst}` : ""} = ${T(P)}$.`, `${f.cst ? `$${f.coef}${lettre} = ${T(P)} - ${f.cst} = ${T(P - f.cst)}$, puis ` : ""}$${lettre} = ${T(P - f.cst)} \\div ${f.coef} = ${v}$.`, `$${lettre} = ${v}$ ${u}.`),
   };
 }
 
@@ -2294,7 +2313,7 @@ function defiCorde(): Q {
   const d = randomChoice([1, 2]);
   if (t === 0) {
     const delta = randomInt(1, 20);
-    const r = avecPi((pi) => 2 * pi * delta, d);
+    const r = avecPi((pi) => 2 * pi * delta, d, o.u);
     return {
       text: randomChoice([
         `On entoure ${o.gn} d’une corde bien tendue. On veut maintenant qu’elle passe partout à ${q(delta, o.u)} du bord. De combien faut-il l’allonger ? Arrondis ${MOT_ARRONDI[d]}.`,
@@ -2313,7 +2332,7 @@ function defiCorde(): Q {
   }
   if (t === 1) {
     const dd = randomInt(1, 30);
-    const r = avecPi((pi) => pi * dd, d);
+    const r = avecPi((pi) => pi * dd, d, o.u);
     return {
       text: randomChoice([
         `Le diamètre ${o.gn.startsWith("la Terre") ? "d’un cercle tracé autour de la Terre" : de(o.gn)} augmente de ${q(dd, o.u)}. De combien augmente la longueur de son tour ? Arrondis ${MOT_ARRONDI[d]}.`,
@@ -2334,7 +2353,8 @@ function defiCorde(): Q {
       `Si le rayon ${de(cercle)} ${mot}, par quel nombre son périmètre est-il multiplié ?`,
     ]),
     format: "short",
-    expected: rep(k),
+    // Un COEFFICIENT multiplicateur : un nombre sans unité.
+    expected: [String(k)],
     comparator: "number_equal",
     explanation: E("la longueur d’un cercle est $2\\pi r$ : elle est proportionnelle au rayon.", `si $r$ est multiplié par $${k}$, $2\\pi r$ l’est aussi (ce n’est pas l’aire, qui serait multipliée par $${k * k}$).`, `$2\\pi \\times (${k}r) = ${k} \\times 2\\pi r$.`, `le périmètre est multiplié par $${k}$.`),
   };
@@ -2355,7 +2375,7 @@ function defiEgal(): Q {
         `Un carré a le même périmètre qu’un rectangle de ${q(L, u)} sur ${q(l, u)}. Combien mesure son côté ?`,
       ]),
       format: "short",
-      expected: rep(c),
+      expected: rep(c, u),
       comparator: "number_equal",
       explanation: E("même périmètre = même longueur de contour.", "on calcule le périmètre du rectangle, puis on le partage en 4 côtés égaux.", `$2 \\times (${T(L)} + ${T(l)}) = ${T(2 * (L + l))}$ ; $${T(2 * (L + l))} \\div 4 = ${T(c)}$.`, `le côté mesure ${q(c, u)}.`),
     };
@@ -2370,7 +2390,7 @@ function defiEgal(): Q {
         `Avec un fil qui faisait le tour d’un carré de côté ${q(c, u)}, ${p.p} forme un triangle équilatéral. Combien mesure chaque côté ?`,
       ]),
       format: "short",
-      expected: rep(tc),
+      expected: rep(tc, u),
       comparator: "number_equal",
       explanation: E("même périmètre = même longueur de contour.", "périmètre du carré $= 4 \\times$ côté, puis côté du triangle $=$ périmètre $\\div 3$.", `$4 \\times ${T(c)} = ${T(4 * c)}$ ; $${T(4 * c)} \\div 3 = ${T(tc)}$.`, `le côté du triangle mesure ${q(tc, u)}.`),
     };
@@ -2386,7 +2406,7 @@ function defiEgal(): Q {
         `${p.p} transforme un enclos carré de ${q(c, u)} de côté en enclos rectangulaire de ${q(L, u)} de long, sans changer la longueur de clôture. Quelle sera la largeur ?`,
       ]),
       format: "short",
-      expected: rep(l),
+      expected: rep(l, u),
       comparator: "number_equal",
       explanation: E("même périmètre = même longueur de contour.", "périmètre du carré, puis demi-périmètre moins la longueur.", `$4 \\times ${T(c)} = ${T(4 * c)}$ ; $${T(4 * c)} \\div 2 = ${T(2 * c)}$ ; $${T(2 * c)} - ${T(L)} = ${T(l)}$.`, `la largeur mesure ${q(l, u)}.`),
     };
@@ -2401,7 +2421,7 @@ function defiEgal(): Q {
       `On reforme en carré une ficelle qui faisait le tour d’un triangle de côtés ${q(x, u)}, ${q(y, u)} et ${q(z, u)}. Quel est le côté du carré ?`,
     ]),
     format: "short",
-    expected: rep((x + y + z) / 4),
+    expected: rep((x + y + z) / 4, u),
     comparator: "number_equal",
     explanation: E("même périmètre = même longueur de contour.", "on additionne les côtés du triangle, puis on divise par 4.", `$${T(x)} + ${T(y)} + ${T(z)} = ${T(x + y + z)}$ ; $${T(x + y + z)} \\div 4 = ${T((x + y + z) / 4)}$.`, `le côté du carré mesure ${q((x + y + z) / 4, u)}.`),
   };
@@ -2417,7 +2437,35 @@ const base = {
   theme: "neutral" as const,
 };
 
-export const perimetresBank: TutorBankItemV4[] = [
+/* ---------------------------------------------------------------------------
+   ⛔ 04/10/2026 — L'ÉNONCÉ DIT L'UNITÉ ATTENDUE, TOUJOURS.
+   L'unité est lue dans `expected` (« 24 cm » → cm). Si l'énoncé ne la
+   demande pas déjà (« en cm », « Combien de centimètres… », « Combien de
+   rouleaux… »), on ajoute « Donne la réponse en cm. » — même quand une seule
+   unité apparaît dans le texte.
+--------------------------------------------------------------------------- */
+const MOT_UNITE: Record<string, string> = { ...UMOT, "€": "euros" };
+/** L'unité de la réponse attendue, ou null si elle n'en a pas (QCM de mots). */
+function uniteAttendue(expected: readonly string[]): string | null {
+  const m = /^−?[\d\s]+(?:,\d+)?\s+(\S.*)$/.exec(String(expected[0] ?? "").trim());
+  return m ? m[1] : null;
+}
+/** L'énoncé demande-t-il déjà cette unité ? */
+function enonceDitUnite(text: string, u: string): boolean {
+  const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const fin = "(?![A-Za-zÀ-ÿ²³])";
+  const formes = [esc(u), ...(MOT_UNITE[u] ? [esc(MOT_UNITE[u])] : [])];
+  return formes.some((f) =>
+    new RegExp(`(\\ben |\\(en |Combien de |combien de |nombre de )${f}${fin}`).test(text)
+  );
+}
+function avecUnite<T extends { text: string; expected: string[] }>(q: T): T {
+  const u = uniteAttendue(q.expected);
+  if (!u || enonceDitUnite(q.text, u)) return q;
+  return { ...q, text: `${q.text} Donne la réponse en ${MOT_UNITE[u] && u === "€" ? "euros" : u}.` };
+}
+
+const ITEMS: TutorBankItemV4[] = [
   // =========================
   // PERIMETRE_COMPRENDRE
   // =========================
@@ -2518,16 +2566,16 @@ export const perimetresBank: TutorBankItemV4[] = [
     microId: "aire_perimetre_rectangle",
     difficulty: 1,
     theme: "neutral",
-    text: "Calculer le périmètre d’un rectangle de longueur 8 cm et de largeur 3 cm.",
+    text: "Calcule le périmètre d’un rectangle de longueur 8 cm et de largeur 3 cm. Donne la réponse en cm.",
     format: "short",
-    expected: ["22"],
+    expected: ["22 cm"],
     comparator: "number_equal",
     hint: "P = 2 × (L + l).",
     explanation:
       "Définition : un périmètre mesure la longueur du contour d’une figure.\n\n" +
           "Méthode : on repère tous les côtés du contour et on vérifie qu’ils sont dans la même unité.\n\nCalcul : " +
           ("Le périmètre d’un rectangle vaut 2 × (8 + 3) = 2 × 11 = 22.") +
-          "\n\nConclusion : on obtient la longueur totale du contour.",
+          "\n\nConclusion : le périmètre vaut 22 cm.",
     tags: ["aire_perimetre", "rectangle"],
   },
   {
@@ -2579,15 +2627,15 @@ export const perimetresBank: TutorBankItemV4[] = [
     microId: "aire_perimetre_carre",
     difficulty: 1,
     theme: "neutral",
-    text: "Calculer le périmètre d’un carré de côté 6 cm.",
+    text: "Calcule le périmètre d’un carré de côté 6 cm. Donne la réponse en cm.",
     format: "short",
-    expected: ["24"],
+    expected: ["24 cm"],
     comparator: "number_equal",
     hint: "Un carré a 4 côtés égaux.",
     explanation: "Définition : un périmètre mesure la longueur du contour d’une figure.\n\n" +
           "Méthode : on repère tous les côtés du contour et on vérifie qu’ils sont dans la même unité.\n\nCalcul : " +
           ("P = 4 × 6 = 24.") +
-          "\n\nConclusion : on obtient la longueur totale du contour.",
+          "\n\nConclusion : le périmètre vaut 24 cm.",
     tags: ["aire_perimetre", "carre"],
   },
   {
@@ -2626,15 +2674,15 @@ export const perimetresBank: TutorBankItemV4[] = [
     microId: "aire_perimetre_triangle",
     difficulty: 1,
     theme: "neutral",
-    text: "Calculer le périmètre d’un triangle dont les côtés mesurent 5 cm, 7 cm et 8 cm.",
+    text: "Calcule le périmètre d’un triangle dont les côtés mesurent 5 cm, 7 cm et 8 cm. Donne la réponse en cm.",
     format: "short",
-    expected: ["20"],
+    expected: ["20 cm"],
     comparator: "number_equal",
     hint: "Additionne les 3 côtés.",
     explanation: "Définition : un périmètre mesure la longueur du contour d’une figure.\n\n" +
           "Méthode : on repère tous les côtés du contour et on vérifie qu’ils sont dans la même unité.\n\nCalcul : " +
           ("P = 5 + 7 + 8 = 20.") +
-          "\n\nConclusion : on obtient la longueur totale du contour.",
+          "\n\nConclusion : le périmètre vaut 20 cm.",
     tags: ["aire_perimetre", "triangle"],
   },
   {
@@ -2954,7 +3002,7 @@ export const perimetresBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un rectangle a une longueur de $7$ cm et une largeur de $5$ cm. Quel est son périmètre (en cm) ?",
     format: "short",
-    expected: ["24"],
+    expected: ["24 cm"],
     comparator: "number_equal",
     hint: "$2 \\times (7 + 5)$.",
     explanation:
@@ -3017,7 +3065,7 @@ export const perimetresBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un rectangle a un périmètre de $30$ cm et une largeur de $6$ cm. Quelle est sa longueur (en cm) ?",
     format: "short",
-    expected: ["9"],
+    expected: ["9 cm"],
     comparator: "number_equal",
     hint: "$L = \\dfrac{30}{2} - 6$.",
     explanation:
@@ -3063,7 +3111,7 @@ export const perimetresBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un carré a un côté de $9$ cm. Quel est son périmètre (en cm) ?",
     format: "short",
-    expected: ["36"],
+    expected: ["36 cm"],
     comparator: "number_equal",
     hint: "$4 \\times 9$.",
     explanation:
@@ -3081,7 +3129,7 @@ export const perimetresBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Le périmètre d’un carré est $28$ cm. Quel est son côté (en cm) ?",
     format: "short",
-    expected: ["7"],
+    expected: ["7 cm"],
     comparator: "number_equal",
     hint: "$\\dfrac{28}{4}$.",
     explanation:
@@ -3144,7 +3192,7 @@ export const perimetresBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un carré a un côté de $12$ cm. Quel est son périmètre (en cm) ?",
     format: "short",
-    expected: ["48"],
+    expected: ["48 cm"],
     comparator: "number_equal",
     hint: "$4 \\times 12$.",
     explanation:
@@ -3235,7 +3283,7 @@ export const perimetresBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un triangle a un périmètre de $20$ cm. Deux de ses côtés mesurent $6$ cm et $7$ cm. Combien mesure le troisième (en cm) ?",
     format: "short",
-    expected: ["7"],
+    expected: ["7 cm"],
     comparator: "number_equal",
     hint: "$20 - 6 - 7$.",
     explanation:
@@ -3294,8 +3342,8 @@ export const perimetresBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Une figure est formée d’un carré de côté $5$ cm et d’un rectangle accolé de $5$ cm sur $3$ cm. Le côté commun (collé) mesure $5$ cm. Quel est le périmètre extérieur (en cm) ?",
     format: "qcm",
-    choices: ["$26$", "$36$", "$31$", "$20$"],
-    expected: ["$26$"],
+    choices: ["$26$ cm", "$36$ cm", "$31$ cm", "$20$ cm"],
+    expected: ["$26$ cm"],
     comparator: "mcq_exact",
     hint: "On ne compte pas le côté collé (deux fois).",
     explanation:
@@ -3386,7 +3434,7 @@ export const perimetresBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "On veut faire $2$ tours d’une piste rectangulaire de $30$ m sur $20$ m. Quelle distance parcourt-on (en m) ?",
     format: "short",
-    expected: ["200"],
+    expected: ["200 m"],
     comparator: "number_equal",
     hint: "Un tour = périmètre ; puis $\\times 2$.",
     explanation:
@@ -3561,3 +3609,8 @@ export const perimetresBank: TutorBankItemV4[] = [
     tags: ["aire_perimetre", "defi", "open"],
   },
 ];
+
+/** Chaque question chiffrée dit son unité (voir `avecUnite`). */
+export const perimetresBank: TutorBankItemV4[] = ITEMS.map((it) =>
+  it.kind === "template" ? { ...it, generate: () => avecUnite(it.generate()) } : it
+);
