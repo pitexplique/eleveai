@@ -739,6 +739,16 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
         "D'où viennent les nombres décimaux : on coupe l'unité en 10, puis encore en 10. Les rangs après la virgule, comparer, arrondir, encadrer et intercaler (6e).",
     },
   ],
+  "/fiches-cours/maths/6e/decimal-calcul": [
+    {
+      // 04/10/2026 : la vidéo PARLÉE du calcul avec les décimaux.
+      id: "QFQsyW-CXw8",
+      title: "Calculer avec les nombres décimaux — Maths 6e",
+      description:
+        "Additionner et soustraire virgule sous virgule, multiplier en oubliant puis en remettant la virgule, multiplier par 0,1, partager un nombre décimal (6e).",
+      ajoutee: "2026-10-04",
+    },
+  ],
   "/fiches-cours/maths/4e/prop-ratio": [
     {
       // 02/10/2026 : la première vidéo PARLÉE de 4e, née avec la fiche.
@@ -758,6 +768,17 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       description:
         "De tête, tout part de 10 % ; retrouver un pourcentage ; le coefficient multiplicateur ; le pourcentage d'évolution ; et pourquoi − 20 % puis + 20 % ne ramène pas au départ (4e).",
       ajoutee: "2026-10-03",
+    },
+  ],
+  "/fiches-cours/maths/4e/prop-proportionnalite": [
+    {
+      // 04/10/2026 : la vidéo PARLÉE de la proportionnalité de 4e (le bowling
+      // proportionnel contre le taxi, le graphique, le produit en croix, y = 7 × x).
+      id: "ORVPvsNFTpY",
+      title: "Tout comprendre sur la proportionnalité — Maths 4e",
+      description:
+        "Reconnaître la proportionnalité dans un tableau et sur un graphique, le coefficient, le passage à l'unité, le produit en croix et ses pièges, puis écrire la relation y = 7 × x (4e).",
+      ajoutee: "2026-10-04",
     },
   ],
   "/fiches-cours/maths/6e/fraction-nombre": [
