@@ -245,6 +245,197 @@ function genSituationFacto(table: SituFacto[]): TutorGeneratedQuestionV4 {
 }
 
 /* =========================================================
+   FACTEUR NÉGATIF (5 étoiles) — décision de Frédéric du 05/10/2026
+   −5x − 15 = −5(x + 3), −4x + 12 = −4(x − 3), −6x² − 9x = −3x(2x + 3).
+
+   ⛔ Correction : `expression_factorisee` accepte TOUT produit équivalent,
+   donc aussi 5(−x − 3) quand on demande −5 en facteur. On corrige ici en
+   `exact_text` avec la liste des écritures du SEUL produit demandé : ordre
+   des termes dans la parenthèse, « - », « − » ou « – », « × », « * » ou rien,
+   facteur devant ou derrière, x² ou x^2 ; les espaces sont ignorés par le
+   comparateur. Le premier élément de `expected` est l’écriture affichée.
+   ========================================================= */
+
+/** Vrai signe moins pour l’affichage d’une expression (pas dans les mots : « A-t-il »). */
+const M = (s: string) => s.replace(/-/g, "−");
+/** Un facteur négatif dans un calcul s’écrit entre parenthèses : (−5). */
+const par = (s: string) => (s.startsWith("-") ? `(${s})` : s);
+
+function permutations<T>(a: T[]): T[][] {
+  if (a.length <= 1) return [a];
+  return a.flatMap((x, i) => permutations([...a.slice(0, i), ...a.slice(i + 1)]).map((p) => [x, ...p]));
+}
+
+/** Multiplie deux parties littérales : x × x = x², x × rien = x. */
+function fois(a?: string, b?: string): string {
+  if (!a) return b ?? "";
+  if (!b) return a;
+  return a === b ? `${a}²` : `${a}${b}`;
+}
+
+/** Toutes les écritures acceptées du produit F × (t), F imposé. */
+function ecrituresProduit(F: Terme, t: Terme[]): string[] {
+  const f = mono(F[0], F[1] ?? "");
+  const fp = `(${f})`;
+  const facteurs = [f, fp];
+  if (F[0] === -1 && !F[1]) facteurs.push("-");
+  const base = new Set<string>();
+  for (const p of permutations(t)) {
+    const P = `(${somme(p).replace(/\s/g, "")})`;
+    for (const g of facteurs) {
+      base.add(`${g}${P}`);
+      if (g !== "-") {
+        base.add(`${g}×${P}`);
+        base.add(`${g}*${P}`);
+      }
+    }
+    for (const op of ["", "×", "*"]) base.add(`${P}${op}${fp}`);
+  }
+  const out = new Set<string>();
+  for (const s of base)
+    for (const moins of ["-", "−", "–"])
+      for (const carre of ["²", "^2"]) out.add(s.replace(/-/g, moins).replace(/²/g, carre));
+  return [...out];
+}
+
+type FactoNeg = {
+  F: Terme;
+  t: Terme[];
+  /** l’expression développée, termes dans l’ordre affiché, vrai signe moins */
+  e: string;
+  /** le facteur, vrai signe moins */
+  f: string;
+  /** la forme factorisée attendue, vrai signe moins */
+  res: string;
+  /** les termes développés, dans l’ordre affiché */
+  dev: Terme[];
+};
+
+/** Construit F × (t) ; l’expression développée est affichée dans un ordre éventuellement mélangé. */
+function factoNeg(F: Terme, t: Terme[], melanger = Math.random() < 0.35): FactoNeg {
+  const dev0: Terme[] = t.map(([c, l]) => [F[0] * c, fois(F[1], l)]);
+  let dev = dev0;
+  if (melanger) {
+    const autre = shuffle(dev0);
+    if (somme(autre) !== somme(dev0)) dev = autre;
+    else dev = [...dev0].reverse();
+  }
+  const f = mono(F[0], F[1] ?? "");
+  return { F, t, e: M(somme(dev)), f: M(f), res: M(`${f}(${somme(t)})`), dev };
+}
+
+/** « (−15) ÷ (−5) = 3 ; (−5x) ÷ (−5) = x » : chaque terme divisé par le facteur. */
+function divisions(c: FactoNeg): string {
+  const f = mono(c.F[0], c.F[1] ?? "");
+  return c.t
+    .map(([co, l]) => {
+      const d = mono(c.F[0] * co, fois(c.F[1], l));
+      return M(`${par(d)} ÷ ${par(f)} = ${mono(co, l ?? "")}`);
+    })
+    .join(" ; ");
+}
+
+/** « −5 × x + (−5) × 3 = −5x − 15 » : le contrôle en redéveloppant. */
+function controle(c: FactoNeg): string {
+  const f = mono(c.F[0], c.F[1] ?? "");
+  const produits = c.t.map(([co, l], i) => `${i === 0 ? f : par(f)} × ${par(mono(co, l ?? ""))}`).join(" + ");
+  return M(`${f}(${somme(c.t)}) = ${produits} = ${somme(c.t.map(([co, l]) => [c.F[0] * co, fois(c.F[1], l)] as Terme))}`);
+}
+
+/** Le piège nommé : le signe de la parenthèse oublié. */
+function piegeSigne(c: FactoNeg): string {
+  const faux: Terme[] = c.t.map(([co, l], i) => (i === 0 ? [co, l] : [-co, l]));
+  const f = mono(c.F[0], c.F[1] ?? "");
+  const redev = somme(faux.map(([co, l]) => [c.F[0] * co, fois(c.F[1], l)] as Terme));
+  return M(
+    `Piège : diviser par un facteur négatif change le signe de CHAQUE terme. Oublier un changement de signe, comme dans ${f}(${somme(faux)}), redonnerait ${redev}, pas ${somme(c.t.map(([co, l]) => [c.F[0] * co, fois(c.F[1], l)] as Terme))}.`,
+  );
+}
+
+function questionNeg(texte: string, c: FactoNeg, methode: string): TutorGeneratedQuestionV4 {
+  return {
+    text: texte,
+    format: "short",
+    expected: [c.res, ...ecrituresProduit(c.F, c.t)],
+    comparator: "exact_text",
+    explanation:
+      `${DEF}\n\n` +
+      `Méthode : ${methode} On divise CHAQUE terme par ${c.f} : ${divisions(c)}.\n\n` +
+      `Calcul : ${c.e} = ${c.res}.\n\n` +
+      `Conclusion : on contrôle en redéveloppant : ${controle(c)}. On retrouve bien l’expression de départ.\n\n` +
+      piegeSigne(c),
+  };
+}
+
+/** Une parenthèse à deux termes (lettre et nombre) ou trois termes (l², l, nombre), lettre en tête et positive. */
+function interieur(l: string, o: { premiers?: boolean; mMax?: number } = {}): Terme[] {
+  for (;;) {
+    if (Math.random() < 0.3) {
+      const m = randomInt(1, 2);
+      const p = randomChoice([1, -1]) * randomInt(1, 6);
+      const b = randomChoice([1, -1]) * randomInt(1, 9);
+      if (!o.premiers || pgcd(pgcd(m, p), b) === 1) return [[m, `${l}²`], [p, l], [b]];
+    } else {
+      const m = randomInt(1, o.mMax ?? 3);
+      const b = randomChoice([1, -1]) * randomInt(1, 9);
+      if (!o.premiers || pgcd(m, b) === 1) return [[m, l], [b]];
+    }
+  }
+}
+
+/** Petites situations où un facteur négatif a un sens : chaque fois, on PERD k. */
+type SituNeg = (k: number, l: string, b: number) => readonly [string, string];
+const SITU_NEG: SituNeg[] = [
+  (k, l, b) => [`Dans un jeu, chaque erreur coûte ${k} points. Un joueur fait ${l} erreurs au premier niveau et ${b} au second.`, "la variation de son score"],
+  (k, l, b) => [`Pendant la nuit, la température baisse de ${k} °C par heure. On l’observe pendant ${l} heures, puis encore ${b} heures.`, "la variation de température (en °C)"],
+  (k, l, b) => [`Un plongeur descend de ${k} m par minute, pendant ${l} minutes, puis encore ${b} minutes.`, "son altitude par rapport à la surface (en m)"],
+  (k, l, b) => [`Un abonnement retire ${k} € par mois d’un compte, pendant ${l} mois, puis ${b} mois de plus.`, "la variation du solde du compte (en €)"],
+  (k, l, b) => [`Une citerne perd ${k} L d’eau par heure ; la fuite dure ${l} heures, puis encore ${b} heures.`, "la variation du volume d’eau (en L)"],
+  (k, l, b) => [`La batterie d’un téléphone perd ${k} % par heure de vidéo ; on regarde ${l} heures de vidéo, puis encore ${b} heures.`, "la variation de la charge (en %)"],
+  (k, l, b) => [`Un glacier recule de ${k} m par an, pendant ${l} années, puis ${b} années de plus.`, "la variation de la position de son front (en m)"],
+  (k, l, b) => [`Une benne descend dans un puits de mine à ${k} m par seconde, pendant ${l} secondes, puis encore ${b} secondes.`, "son altitude par rapport à l’entrée du puits (en m)"],
+  (k, l, b) => [`Un randonneur descend un sentier en perdant ${k} m d’altitude par minute, pendant ${l} minutes, puis ${b} minutes de plus.`, "sa variation d’altitude (en m)"],
+];
+
+/** Une situation courte : la variation vaut −k·l − k·b = −k(l + b). */
+function situationNeg(): { c: FactoNeg; contexte: string; q: string } {
+  const k = randomInt(2, 9);
+  const b = randomInt(2, 9);
+  const l = randomChoice(LETTRES_SITUATION);
+  const [contexte, q] = randomChoice(SITU_NEG)(k, l, b);
+  return { c: factoNeg([-k], [[1, l], [b]], false), contexte, q };
+}
+
+/** Le développement de G × (u), écrit avec le vrai signe moins. */
+function devStr(G: Terme, u: Terme[]): string {
+  return M(somme(u.map(([co, l]) => [G[0] * co, fois(G[1], l)] as Terme)));
+}
+
+const STEM_NEG_IMPOSE: Array<(e: string, f: string) => string> = [
+  (e, f) => `Factorise ${e} en mettant ${f} en facteur.`,
+  (e, f) => `Mets ${f} en facteur dans ${e}.`,
+  (e, f) => `Écris ${e} sous la forme ${f} × (…).`,
+  (e, f) => `On veut ${f} devant la parenthèse : factorise ${e}.`,
+  (e, f) => `Factorise ${e}, en prenant ${f} comme facteur commun.`,
+  (e, f) => `Factorise A = ${e} en mettant ${f} en facteur.`,
+];
+
+const STEM_NEG_MAX_NOMBRE: Array<(e: string) => string> = [
+  (e) => `Factorise ${e} en mettant en facteur un nombre négatif, le plus grand possible en valeur absolue.`,
+  (e) => `Mets en facteur dans ${e} le nombre négatif de plus grande valeur absolue possible.`,
+  (e) => `Écris ${e} comme un produit dont le premier facteur est un nombre négatif, le plus grand possible en valeur absolue.`,
+  (e) => `Factorise ${e} au maximum, avec un nombre négatif devant la parenthèse.`,
+  (e) => `Factorise B = ${e} : mets en facteur un nombre négatif, de valeur absolue la plus grande possible.`,
+];
+
+const STEM_NEG_MAX_LETTRE: Array<(e: string) => string> = [
+  (e) => `Factorise ${e} au maximum, avec un facteur commun négatif devant la parenthèse.`,
+  (e) => `Mets en facteur dans ${e} tout ce qui est commun aux deux termes, précédé d’un signe −.`,
+  (e) => `Factorise ${e} : le facteur commun doit être négatif et le plus grand possible (nombre et lettre).`,
+  (e) => `Écris ${e} comme un produit, avec le plus grand facteur commun précédé d’un signe − devant la parenthèse.`,
+];
+
+/* =========================================================
    LA BANQUE
    ========================================================= */
 
@@ -1163,5 +1354,166 @@ export const factorisationBank: TutorBankItemV4[] = [
       "Calcul : par exemple 3(x + 2) = 3x + 6 (développer), et 3x + 6 = 3(x + 2) (factoriser).\n\n" +
       "Conclusion : factoriser est l’opération inverse du développement.",
     tags: ["litteral_factorisation", "defi", "open"],
+  },
+
+  // ---------- FACTEUR NÉGATIF (★5, 05/10/2026) ----------
+  {
+    kind: "template",
+    id: "litteral_factorisation_defi_tpl_negatif_impose",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factorisation_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Divise CHAQUE terme par le facteur imposé : diviser par un nombre négatif change le signe.",
+    tags: ["litteral_factorisation", "defi", "facteur_negatif", "template"],
+    generate: () => {
+      const r = Math.random();
+      if (r < 0.2) {
+        const s = situationNeg();
+        const texte = randomChoice([
+          `${s.contexte} ${maj(s.q)} vaut ${s.c.e}. Factorise cette expression en mettant ${s.c.f} en facteur.`,
+          `${s.contexte} On trouve que ${s.q} vaut ${s.c.e}. Écris-la sous la forme ${s.c.f} × (…).`,
+          `${s.contexte} ${maj(s.q)} s’écrit ${s.c.e}. Mets ${s.c.f} en facteur.`,
+        ]);
+        return questionNeg(texte, s.c, `on perd ${-s.c.F[0]} à chaque fois : le facteur imposé est ${s.c.f}.`);
+      }
+      const l = randomChoice(LETTRES);
+      let F: Terme;
+      let t: Terme[];
+      // ⭐ 05/10 : la parenthèse est toujours « finie » (plus rien en commun),
+      // sinon le facteur imposé n'est pas le plus grand et l'élève est piégé.
+      if (r < 0.6) {
+        F = [-randomInt(2, 9)];
+        t = interieur(l, { premiers: true });
+      } else if (r < 0.72) {
+        F = [-1];
+        t = interieur(l, { premiers: true });
+      } else {
+        F = [-randomInt(1, 6), l];
+        let m: number, b: number;
+        do {
+          m = randomInt(1, 3);
+          b = randomChoice([1, -1]) * randomInt(1, 9);
+        } while (pgcd(m, b) !== 1);
+        t = [[m, l], [b]];
+      }
+      const c = factoNeg(F, t);
+      return questionNeg(randomChoice(STEM_NEG_IMPOSE)(c.e, c.f), c, `le facteur commun imposé est ${c.f}.`);
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_factorisation_defi_tpl_negatif_max",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factorisation_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Cherche le plus grand facteur commun, mets un signe − devant, puis divise chaque terme par ce facteur négatif.",
+    tags: ["litteral_factorisation", "defi", "facteur_negatif", "template"],
+    generate: () => {
+      const l = randomChoice(LETTRES);
+      if (Math.random() < 0.3) {
+        const k = randomInt(1, 6);
+        let m = randomInt(1, 3);
+        let b = randomInt(1, 9);
+        while (pgcd(m, b) !== 1) {
+          m = randomInt(1, 3);
+          b = randomInt(1, 9);
+        }
+        const c = factoNeg([-k, l], [[m, l], [randomChoice([1, -1]) * b]]);
+        const methode =
+          k === 1
+            ? `les coefficients n’ont pas de diviseur commun autre que 1, mais ${l} est dans chaque terme ; on met en facteur ${c.f}.`
+            : `${k} divise les deux coefficients et ${l} est dans chaque terme ; le plus grand facteur commun est ${mono(k, l)}, on prend ${c.f}.`;
+        return questionNeg(randomChoice(STEM_NEG_MAX_LETTRE)(c.e), c, methode);
+      }
+      const g = randomInt(2, 9);
+      const c = factoNeg([-g], interieur(l, { premiers: true }));
+      const co = c.dev.map(([x]) => Math.abs(x));
+      const coeffs = `${co.slice(0, -1).join(", ")} et ${co[co.length - 1]}`;
+      return questionNeg(
+        randomChoice(STEM_NEG_MAX_NOMBRE)(c.e),
+        c,
+        `sans les signes, les coefficients sont ${coeffs} ; leur plus grand diviseur commun est ${g}, on prend son opposé, ${c.f}.`,
+      );
+    },
+  },
+  {
+    kind: "template",
+    id: "litteral_factorisation_defi_tpl_negatif_qcm",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "litteral_factorisation",
+    microId: "litteral_factorisation_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Développe chaque proposition : une seule redonne exactement l’expression de départ.",
+    tags: ["litteral_factorisation", "defi", "facteur_negatif", "qcm", "template"],
+    generate: () => {
+      const l = randomChoice(LETTRES);
+      const r = Math.random();
+      let c: FactoNeg;
+      let contexte = "";
+      let q = "";
+      if (r < 0.2) {
+        const s = situationNeg();
+        c = s.c;
+        contexte = s.contexte;
+        q = s.q;
+      } else if (r < 0.65) {
+        c = factoNeg([-randomInt(2, 9)], interieur(l, { premiers: true }));
+      } else {
+        let m = randomInt(1, 3);
+        let b = randomInt(1, 9);
+        while (pgcd(m, b) !== 1) {
+          m = randomInt(1, 3);
+          b = randomInt(1, 9);
+        }
+        c = factoNeg([-randomInt(2, 6), l], [[m, l], [randomChoice([1, -1]) * b]]);
+      }
+      const k = -c.F[0];
+      const L = c.F[1];
+      const signe: Terme[] = c.t.map(([co, lt], i) => (i === 0 ? [co, lt] : [-co, lt]));
+      const positif: Terme = [k, L];
+      // facteur incomplet : la lettre oubliée dans le facteur, ou le nombre resté non divisé
+      const incomplet: [Terme, Terme[]] = L
+        ? [[-k], c.t]
+        : [c.F, c.t.map(([co, lt]) => (lt ? [co, lt] : [co * k]) as Terme)];
+      const pieges: Array<[Terme, Terme[], string]> = [
+        [c.F, signe, "signe oublié dans la parenthèse"],
+        [positif, c.t, "facteur positif, le signe − a disparu"],
+        [incomplet[0], incomplet[1], L ? `facteur incomplet, la lettre ${L} est oubliée` : `facteur incomplet, un terme n’a pas été divisé par ${c.f}`],
+      ];
+      const ecrit = (G: Terme, u: Terme[]) => M(`${mono(G[0], G[1] ?? "")}(${somme(u)})`);
+      const choices = shuffle([c.res, ...pieges.map(([G, u]) => ecrit(G, u))]);
+      const [nom, pr] = randomChoice(ELEVES);
+      const text = contexte
+        ? `${contexte} ${maj(q)} vaut ${c.e}. Quelle écriture factorisée de cette expression est juste ?`
+        : randomChoice([
+            `Parmi ces produits, lequel est égal à ${c.e} ?`,
+            `Quelle est la factorisation juste de ${c.e} avec ${c.f} en facteur ?`,
+            `${nom} veut mettre ${c.f} en facteur dans ${c.e}. Quelle écriture doit-${pr} choisir ?`,
+            `Développe chaque proposition : laquelle redonne ${c.e} ?`,
+            `Une seule de ces factorisations de ${c.e} est juste. Laquelle ?`,
+          ]);
+      return {
+        text,
+        format: "qcm",
+        choices,
+        expected: [c.res],
+        comparator: "mcq_exact",
+        explanation:
+          `${DEF}\n\n` +
+          `Méthode : on divise CHAQUE terme par ${c.f} : ${divisions(c)}.\n\n` +
+          `Calcul : ${c.e} = ${c.res}. Les autres propositions sont fausses : ` +
+          pieges.map(([G, u, nomPiege]) => `${ecrit(G, u)} redonne ${devStr(G, u)} (${nomPiege})`).join(" ; ") +
+          `.\n\n` +
+          `Conclusion : on contrôle en redéveloppant : ${controle(c)}. La bonne réponse est ${c.res}.`,
+      };
+    },
   },
 ];
