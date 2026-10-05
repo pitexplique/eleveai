@@ -66,6 +66,371 @@ Calcul : ${calcul}
 Conclusion : ${conclusion}`;
 }
 
+/* =========================================================
+   LES SITUATIONS ET LES TOURNURES
+   ⛔ Mesuré le 05/10/2026 (scripts/mesurer-squelettes-coach.ts) :
+   3 à 10 squelettes par micro, 14 à 19 questions sur 20 déjà
+   vues dans une série. Les élèves réels sont des 6e en
+   remédiation : ils reconnaissent la PHRASE, pas les nombres.
+   « 3 sachets de 7 billes » et « 4 sachets de 9 billes », c'est
+   la même question pour eux. Chaque gabarit tire donc une
+   situation ET une tournure.
+========================================================= */
+
+function cap(s: string) {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+// « de » s'élide devant une voyelle : « combien d'œufs », « combien de billes ».
+function de(mot: string) {
+  return /^[aeiouyàâéèêîïôœ]/i.test(mot) ? `d'${mot}` : `de ${mot}`;
+}
+
+function pl(n: number, formes: readonly [string, string]) {
+  return n === 1 ? formes[0] : formes[1];
+}
+
+const PRENOMS: readonly (readonly [string, "f" | "m"])[] = [
+  ["Léa", "f"], ["Hugo", "m"], ["Inès", "f"], ["Noah", "m"], ["Maëlys", "f"],
+  ["Rayan", "m"], ["Chloé", "f"], ["Malik", "m"], ["Jade", "f"], ["Tom", "m"],
+  ["Aya", "f"], ["Lucas", "m"], ["Zoé", "f"], ["Enzo", "m"], ["Sofia", "f"],
+  ["Nathan", "m"], ["Lina", "f"], ["Yanis", "m"],
+];
+
+function tirePrenom() {
+  const [nom, genre] = randomChoice(PRENOMS);
+  return { nom, il: genre === "f" ? "elle" : "il", Il: genre === "f" ? "Elle" : "Il" };
+}
+
+// Le moment où l'on surprend un calcul — pour les « a-t-il raison ? ».
+const MOMENTS = [
+  "Au tableau",
+  "Pendant le calcul mental",
+  "Dans son cahier",
+  "Au jeu des tables",
+  "Pendant la correction",
+  "Sur son ardoise",
+] as const;
+
+// Des paquets tous pareils : a contenants de b objets (b ≤ 10).
+type Groupes = {
+  lieu: string;
+  contenant: readonly [string, string];
+  prep: string;
+  objet: readonly [string, string];
+  verbe: string;
+};
+const GROUPES: readonly Groupes[] = [
+  { lieu: "à la boulangerie", contenant: ["plateau", "plateaux"], prep: "sur", objet: ["croissant", "croissants"], verbe: "pose" },
+  { lieu: "au marché", contenant: ["cagette", "cagettes"], prep: "dans", objet: ["mangue", "mangues"], verbe: "met" },
+  { lieu: "à la cantine", contenant: ["table", "tables"], prep: "à", objet: ["élève", "élèves"], verbe: "installe" },
+  { lieu: "dans la classe", contenant: ["trousse", "trousses"], prep: "dans", objet: ["crayon", "crayons"], verbe: "range" },
+  { lieu: "au gymnase", contenant: ["équipe", "équipes"], prep: "dans", objet: ["joueur", "joueurs"], verbe: "met" },
+  { lieu: "dans le potager", contenant: ["rangée", "rangées"], prep: "dans", objet: ["salade", "salades"], verbe: "plante" },
+  { lieu: "à la bibliothèque", contenant: ["étagère", "étagères"], prep: "sur", objet: ["livre", "livres"], verbe: "range" },
+  { lieu: "à la ferme", contenant: ["boîte", "boîtes"], prep: "dans", objet: ["œuf", "œufs"], verbe: "range" },
+  { lieu: "à la fête de l'école", contenant: ["sachet", "sachets"], prep: "dans", objet: ["bonbon", "bonbons"], verbe: "glisse" },
+  { lieu: "au magasin de jouets", contenant: ["coffret", "coffrets"], prep: "dans", objet: ["petite voiture", "petites voitures"], verbe: "range" },
+  { lieu: "à la piscine", contenant: ["ligne d'eau", "lignes d'eau"], prep: "dans", objet: ["nageur", "nageurs"], verbe: "place" },
+  { lieu: "dans la cuisine", contenant: ["assiette", "assiettes"], prep: "sur", objet: ["crêpe", "crêpes"], verbe: "pose" },
+  { lieu: "au stade", contenant: ["banc", "bancs"], prep: "sur", objet: ["supporter", "supporters"], verbe: "installe" },
+  { lieu: "à la poste", contenant: ["carnet", "carnets"], prep: "dans", objet: ["timbre", "timbres"], verbe: "met" },
+  { lieu: "à la pâtisserie", contenant: ["boîte", "boîtes"], prep: "dans", objet: ["macaron", "macarons"], verbe: "range" },
+  { lieu: "au club de foot", contenant: ["filet", "filets"], prep: "dans", objet: ["ballon", "ballons"], verbe: "met" },
+  { lieu: "au marché de Saint-Paul", contenant: ["barquette", "barquettes"], prep: "dans", objet: ["letchi", "letchis"], verbe: "met" },
+  { lieu: "à l'atelier de peinture", contenant: ["pot", "pots"], prep: "dans", objet: ["pinceau", "pinceaux"], verbe: "range" },
+];
+
+/** « a contenants de b objets », posé de quatre façons, demandé de trois. */
+function enonceGroupes(s: Groupes, a: number, b: number) {
+  const P = tirePrenom();
+  const cont = pl(a, s.contenant);
+  const obj = pl(b, s.objet);
+  const constat = randomChoice([
+    `${cap(s.lieu)}, ${P.nom} ${s.verbe} ${b} ${obj} ${s.prep} chaque ${s.contenant[0]}. Il y a ${a} ${cont}.`,
+    `${cap(s.lieu)}, on compte ${a} ${cont} de ${b} ${obj}.`,
+    `${cap(s.lieu)}, voici ${a} ${cont}. ${cap(s.prep)} chaque ${s.contenant[0]}, il y a ${b} ${obj}.`,
+    `${P.nom} compte ${a} ${cont} ${s.lieu}, avec ${b} ${obj} ${s.prep} chaque ${s.contenant[0]}.`,
+  ]);
+  const question = randomChoice([
+    `Combien ${de(s.objet[1])} en tout ?`,
+    `Combien y a-t-il ${de(s.objet[1])} au total ?`,
+    `Quel est le nombre total ${de(s.objet[1])} ?`,
+  ]);
+  return { constat, question };
+}
+
+// Des rangées : r lignes de c objets (le quadrillage).
+type Rangees = {
+  ou: string;
+  ligne: readonly [string, string];
+  prep: string;
+  objet: readonly [string, string];
+};
+const RANGEES: readonly Rangees[] = [
+  { ou: "Dans la salle de spectacle", ligne: ["rangée", "rangées"], prep: "dans", objet: ["fauteuil", "fauteuils"] },
+  { ou: "Dans le verger", ligne: ["rangée", "rangées"], prep: "dans", objet: ["pommier", "pommiers"] },
+  { ou: "Sur la tablette de chocolat", ligne: ["rangée", "rangées"], prep: "dans", objet: ["carré", "carrés"] },
+  { ou: "Sur le parking de l'école", ligne: ["file", "files"], prep: "dans", objet: ["place", "places"] },
+  { ou: "Sur le mur de la salle de bains", ligne: ["rangée", "rangées"], prep: "dans", objet: ["carreau", "carreaux"] },
+  { ou: "Sur la planche de timbres", ligne: ["ligne", "lignes"], prep: "sur", objet: ["timbre", "timbres"] },
+  { ou: "Dans la boîte de chocolats", ligne: ["rangée", "rangées"], prep: "dans", objet: ["chocolat", "chocolats"] },
+  { ou: "Pour la photo de classe", ligne: ["rang", "rangs"], prep: "dans", objet: ["élève", "élèves"] },
+  { ou: "Dans le champ de maïs", ligne: ["rangée", "rangées"], prep: "dans", objet: ["pied", "pieds"] },
+  { ou: "Dans la serre", ligne: ["rangée", "rangées"], prep: "dans", objet: ["pot de fleurs", "pots de fleurs"] },
+  { ou: "Sur la façade de l'immeuble", ligne: ["étage", "étages"], prep: "à", objet: ["fenêtre", "fenêtres"] },
+  { ou: "Dans le casier à bouteilles", ligne: ["rangée", "rangées"], prep: "dans", objet: ["bouteille", "bouteilles"] },
+  { ou: "Dans la classe", ligne: ["rangée", "rangées"], prep: "dans", objet: ["table", "tables"] },
+  { ou: "Sur la mosaïque", ligne: ["ligne", "lignes"], prep: "sur", objet: ["pastille", "pastilles"] },
+];
+
+// Des lots plus gros, pour la multiplication posée : b contenants de a objets.
+type Lots = {
+  lieu: string;
+  contenant: readonly [string, string];
+  prep: string;
+  objet: readonly [string, string];
+  verbe: string;
+};
+const LOTS: readonly Lots[] = [
+  { lieu: "à la papeterie", contenant: ["carton", "cartons"], prep: "dans", objet: ["cahier", "cahiers"], verbe: "range" },
+  { lieu: "à l'imprimerie", contenant: ["paquet", "paquets"], prep: "dans", objet: ["affiche", "affiches"], verbe: "met" },
+  { lieu: "au supermarché", contenant: ["palette", "palettes"], prep: "sur", objet: ["bouteille", "bouteilles"], verbe: "pose" },
+  { lieu: "à la ferme", contenant: ["caisse", "caisses"], prep: "dans", objet: ["œuf", "œufs"], verbe: "range" },
+  { lieu: "à la bibliothèque", contenant: ["caisse", "caisses"], prep: "dans", objet: ["livre", "livres"], verbe: "range" },
+  { lieu: "au club de tennis", contenant: ["panier", "paniers"], prep: "dans", objet: ["balle", "balles"], verbe: "met" },
+  { lieu: "à la fête foraine", contenant: ["carnet", "carnets"], prep: "dans", objet: ["ticket", "tickets"], verbe: "agrafe" },
+  { lieu: "chez le fleuriste", contenant: ["seau", "seaux"], prep: "dans", objet: ["tulipe", "tulipes"], verbe: "met" },
+  { lieu: "à la mercerie", contenant: ["boîte", "boîtes"], prep: "dans", objet: ["bouton", "boutons"], verbe: "range" },
+  { lieu: "au magasin de bricolage", contenant: ["sachet", "sachets"], prep: "dans", objet: ["clou", "clous"], verbe: "met" },
+  { lieu: "à la boulangerie", contenant: ["plaque", "plaques"], prep: "sur", objet: ["pain au chocolat", "pains au chocolat"], verbe: "pose" },
+  { lieu: "au stade", contenant: ["tribune", "tribunes"], prep: "dans", objet: ["siège", "sièges"], verbe: "installe" },
+  { lieu: "à l'école", contenant: ["boîte", "boîtes"], prep: "dans", objet: ["craie", "craies"], verbe: "range" },
+  { lieu: "au verger", contenant: ["cageot", "cageots"], prep: "dans", objet: ["pomme", "pommes"], verbe: "met" },
+  { lieu: "à la coopérative de Saint-Joseph", contenant: ["barquette", "barquettes"], prep: "dans", objet: ["letchi", "letchis"], verbe: "met" },
+  { lieu: "à la confiserie", contenant: ["bocal", "bocaux"], prep: "dans", objet: ["bonbon", "bonbons"], verbe: "verse" },
+];
+
+/** « b contenants de a objets », pour les gros lots. */
+function enonceLots(s: Lots, a: number, b: number) {
+  const P = tirePrenom();
+  const obj = s.objet[1];
+  return randomChoice([
+    `${cap(s.lieu)}, on ${s.verbe} ${a} ${pl(a, s.objet)} ${s.prep} chaque ${s.contenant[0]}. Combien ${de(obj)} dans ${b} ${pl(b, s.contenant)} ?`,
+    `${cap(s.lieu)}, il y a ${b} ${pl(b, s.contenant)} de ${a} ${pl(a, s.objet)}. Combien ${de(obj)} cela fait-il ?`,
+    `${cap(s.lieu)}, ${P.nom} reçoit ${b} ${pl(b, s.contenant)}. Chaque ${s.contenant[0]} contient ${a} ${pl(a, s.objet)}. Quel est le nombre total ${de(obj)} ?`,
+  ]);
+}
+
+// Des lots de 10 ou de 100, pour multiplier par 10 et par 100.
+const PAR_10_100: readonly { un: string; lot: readonly [string, string]; par: 10 | 100; objet: string }[] = [
+  { un: "un", lot: ["carnet", "carnets"], par: 10, objet: "timbres" },
+  { un: "une", lot: ["boîte", "boîtes"], par: 10, objet: "œufs" },
+  { un: "un", lot: ["paquet", "paquets"], par: 100, objet: "feuilles" },
+  { un: "un", lot: ["sachet", "sachets"], par: 100, objet: "perles" },
+  { un: "une", lot: ["boîte", "boîtes"], par: 100, objet: "trombones" },
+  { un: "un", lot: ["rouleau", "rouleaux"], par: 10, objet: "pièces" },
+  { un: "une", lot: ["plaque", "plaques"], par: 100, objet: "carreaux" },
+  { un: "une", lot: ["barquette", "barquettes"], par: 10, objet: "fraises" },
+  { un: "un", lot: ["lot", "lots"], par: 10, objet: "crayons" },
+  { un: "un", lot: ["sac", "sacs"], par: 100, objet: "billes" },
+  { un: "un", lot: ["pack", "packs"], par: 10, objet: "bouteilles" },
+  { un: "une", lot: ["boîte", "boîtes"], par: 100, objet: "punaises" },
+  { un: "une", lot: ["planche", "planches"], par: 10, objet: "autocollants" },
+  { un: "un", lot: ["paquet", "paquets"], par: 10, objet: "mouchoirs" },
+];
+
+// Le calcul « nu » : une seule phrase, c'est un seul squelette. Douze façons
+// de demander le même produit.
+// ⚠️ `pose` : pour la multiplication posée, on retire les tournures « de tête ».
+function enonceProduit(a: number, b: number, pose = false) {
+  const tournures = [
+    `Combien font ${a} × ${b} ?`,
+    `Calcule ${a} × ${b}.`,
+    `Quel est le résultat de ${a} × ${b} ?`,
+    `${a} fois ${b}, cela fait combien ?`,
+    `Complète : ${a} × ${b} = …`,
+    `Que vaut ${a} × ${b} ?`,
+    `Combien obtient-on en multipliant ${a} par ${b} ?`,
+    `Trouve le résultat de ${a} × ${b}.`,
+    `De tête : ${a} × ${b} = ?`,
+    `Combien font ${a} multiplié par ${b} ?`,
+    `Trouve le nombre caché : ${a} × ${b} = ?`,
+    `${tirePrenom().nom} doit calculer ${a} × ${b}. Quel résultat doit-on trouver ?`,
+    `Quel est le produit de ${a} par ${b} ?`,
+    `Multiplie ${a} par ${b}. Quel nombre obtiens-tu ?`,
+    `Si l'on prend ${a} fois le nombre ${b}, combien obtient-on ?`,
+    `${a} × ${b} = ? Choisis le bon résultat.`,
+    `Combien vaut ${a} × ${b} ?`,
+  ];
+  return randomChoice(pose ? tournures.filter((t) => !t.startsWith("De tête")) : tournures);
+}
+
+// Des quantités à trois chiffres qui reviennent : il faut qu'elles soient
+// plausibles (pas de cageot de 933 pommes).
+const GROS_LOTS: readonly { fait: (a: number) => string; demande: (b: number) => string; objet: string }[] = [
+  { fait: (a) => `Chaque jour, une boulangerie fait ${a} baguettes.`, demande: (b) => `Combien de baguettes fait-elle en ${b} jours ?`, objet: "baguettes" },
+  { fait: (a) => `Un avion transporte ${a} passagers à chaque vol.`, demande: (b) => `Combien de passagers transporte-t-il en ${b} vols ?`, objet: "passagers" },
+  { fait: (a) => `Un livre compte ${a} pages.`, demande: (b) => `Combien de pages dans ${b} exemplaires de ce livre ?`, objet: "pages" },
+  { fait: (a) => `Une salle de spectacle a ${a} places.`, demande: (b) => `Combien de spectateurs pour ${b} soirées complètes ?`, objet: "spectateurs" },
+  { fait: (a) => `Un camion livre ${a} briques à chaque voyage.`, demande: (b) => `Combien de briques livre-t-il en ${b} voyages ?`, objet: "briques" },
+  { fait: (a) => `Un club vend ${a} billets à chaque match.`, demande: (b) => `Combien de billets vend-il en ${b} matchs ?`, objet: "billets" },
+  { fait: (a) => `Un car parcourt ${a} km par jour.`, demande: (b) => `Combien de kilomètres parcourt-il en ${b} jours ?`, objet: "kilomètres" },
+  { fait: (a) => `Une machine remplit ${a} bouteilles en une heure.`, demande: (b) => `Combien de bouteilles remplit-elle en ${b} heures ?`, objet: "bouteilles" },
+  { fait: (a) => `Un cinéma accueille ${a} spectateurs à chaque séance.`, demande: (b) => `Combien de spectateurs pour ${b} séances ?`, objet: "spectateurs" },
+  { fait: (a) => `Un maraîcher récolte ${a} kg de tomates chaque semaine.`, demande: (b) => `Combien de kilos récolte-t-il en ${b} semaines ?`, objet: "kilos" },
+  { fait: (a) => `Il faut ${a} perles pour un collier.`, demande: (b) => `Combien de perles faut-il pour ${b} colliers ?`, objet: "perles" },
+  { fait: (a) => `Un train compte ${a} places assises.`, demande: (b) => `Combien de places dans ${b} trains identiques ?`, objet: "places" },
+  { fait: (a) => `Une imprimante imprime ${a} pages par jour.`, demande: (b) => `Combien de pages imprime-t-elle en ${b} jours ?`, objet: "pages" },
+  { fait: (a) => `Un rouleau contient ${a} timbres.`, demande: (b) => `Combien de timbres dans ${b} rouleaux ?`, objet: "timbres" },
+];
+
+/** Le facteur qui manque : t × ? = p. */
+function enonceFacteur(t: number, p: number) {
+  const P = tirePrenom();
+  return randomChoice([
+    `Complète : ${t} × … = ${p}`,
+    `Complète : … × ${t} = ${p}`,
+    `Quel nombre manque ? ${t} × ? = ${p}`,
+    `Par combien faut-il multiplier ${t} pour obtenir ${p} ?`,
+    `Combien de fois faut-il prendre ${t} pour arriver à ${p} ?`,
+    `Dans la table de ${t}, quel nombre multiplié par ${t} donne ${p} ?`,
+    `${t} fois combien font ${p} ?`,
+    `${P.nom} pense à un nombre. Multiplié par ${t}, il donne ${p}. Quel est ce nombre ?`,
+    `En comptant de ${t} en ${t} depuis 0, combien de bonds faut-il pour arriver à ${p} ?`,
+  ]);
+}
+
+/** Le facteur qui manque, raconté : on remplit des contenants de t. */
+function enonceFacteurGroupes(s: Groupes, t: number, total: number) {
+  const P = tirePrenom();
+  return randomChoice([
+    `${cap(s.lieu)}, on ${s.verbe} ${total} ${s.objet[1]}, ${t} ${s.prep} chaque ${s.contenant[0]}. Combien ${de(s.contenant[1])} faut-il ?`,
+    `${cap(s.lieu)}, ${P.nom} ${s.verbe} ${t} ${pl(t, s.objet)} ${s.prep} chaque ${s.contenant[0]}. ${P.Il} a ${total} ${s.objet[1]}. Combien ${de(s.contenant[1])} lui faut-il ?`,
+  ]);
+}
+
+/** L'appui qui fait retrouver t × n sans réciter. */
+function appui(t: number, n: number) {
+  const p = t * n;
+  switch (t) {
+    case 2:
+      return `2 × ${n}, c'est le double de ${n} : ${n} + ${n} = ${p}.`;
+    case 3:
+      return `3 × ${n}, c'est le double de ${n}, plus encore ${n} : ${2 * n} + ${n} = ${p}.`;
+    case 4:
+      return `4 × ${n}, c'est le double du double : le double de ${n} est ${2 * n}, et le double de ${2 * n} est ${p}.`;
+    case 5:
+      return `5 × ${n}, c'est la moitié de 10 × ${n} = ${10 * n} : la moitié de ${10 * n} est ${p}.`;
+    case 10:
+      return n === 10
+        ? "10 × 10 : dans 10, le 1 est une dizaine ; 1 dizaine devient 1 centaine : 100."
+        : `10 × ${n} : ${n} ${n === 1 ? "unité devient" : "unités deviennent"} ${n} ${n === 1 ? "dizaine" : "dizaines"} : ${p}.`;
+    case 6:
+      return `6 × ${n} = 5 × ${n} + ${n} = ${5 * n} + ${n} = ${p}.`;
+    case 7:
+      return `7 × ${n} = 5 × ${n} + 2 × ${n} = ${5 * n} + ${2 * n} = ${p}.`;
+    case 8:
+      return `8 × ${n}, c'est le double de 4 × ${n} = ${4 * n} : ${4 * n} + ${4 * n} = ${p}.`;
+    case 9:
+      return `9 × ${n} = 10 × ${n} - ${n} = ${10 * n} - ${n} = ${p}.`;
+    default:
+      return `${t} × ${n} = ${p}.`;
+  }
+}
+
+/**
+ * « Un élève dit que a × b = w. A-t-il raison ? » — une fois sur deux il a
+ * raison. Les propositions : « c'est juste », ou « c'est faux : a × b = … ».
+ * `faux` doit fournir au moins quatre valeurs différentes du bon produit.
+ */
+function affirmation(a: number, b: number, faux: readonly number[]) {
+  const p = a * b;
+  const autres = Array.from(new Set(faux)).filter((v) => v !== p && v > 0);
+  const juste = Math.random() < 0.5;
+  const w = juste ? p : randomChoice(autres);
+  const P = tirePrenom();
+  const moment = randomChoice(MOMENTS);
+  const text = randomChoice([
+    `${moment}, ${P.nom} écrit ${a} × ${b} = ${w}. Est-ce juste ?`,
+    `${moment}, ${P.nom} annonce : « ${a} × ${b} = ${w} ». A-t-${P.il} raison ?`,
+    `${moment}, ${P.nom} affirme que ${a} fois ${b} font ${w}. Qu'en penses-tu ?`,
+    `${moment}, on lit : ${a} × ${b} = ${w}. Vrai ou faux ?`,
+    `${P.nom} parie que ${a} × ${b} = ${w}. A-t-${P.il} gagné son pari ?`,
+    `Le robot calculateur de ${P.nom} affiche ${a} × ${b} = ${w}. Peut-on lui faire confiance ?`,
+    `Pour vérifier, ${P.nom} relit son calcul : ${a} × ${b} = ${w}. Faut-il le corriger ?`,
+    `Dans l'exercice, la réponse proposée pour ${a} × ${b} est ${w}. Est-elle bonne ?`,
+    `${P.nom} récite : « ${a} fois ${b}, ${w} ». Vrai ou faux ?`,
+    `${moment}, ${P.nom} complète ${a} × ${b} = … avec ${w}. Est-ce le bon nombre ?`,
+  ]);
+  const corrige = (v: number) => `c'est faux : ${a} × ${b} = ${v}`;
+  const correct = juste ? "c'est juste" : corrige(p);
+  const pieges = juste
+    ? autres.map(corrige)
+    : ["c'est juste", ...autres.filter((v) => v !== w).map(corrige)];
+  return { text, choices: makeChoices(correct, pieges), expected: [correct], juste, w, p };
+}
+
+/** Les chiffres de a multipliés un par un, retenue comprise (a × b, b à un chiffre). */
+function etapesPosee(a: number, b: number) {
+  const chiffres = String(a).split("").map(Number).reverse();
+  const rangs = ["Unités", "Dizaines", "Centaines"];
+  let retenue = 0;
+  const phrases: string[] = [];
+  chiffres.forEach((c, i) => {
+    const prod = b * c;
+    const tot = prod + retenue;
+    const calc = retenue > 0 ? `${b} × ${c} = ${prod}, plus la retenue ${retenue}, égale ${tot}` : `${b} × ${c} = ${prod}`;
+    if (i === chiffres.length - 1) {
+      phrases.push(`${rangs[i]} : ${calc}, on écrit ${tot}.`);
+    } else {
+      const r = Math.floor(tot / 10);
+      phrases.push(r > 0 ? `${rangs[i]} : ${calc}, on écrit ${tot % 10} et on retient ${r}.` : `${rangs[i]} : ${calc}, on écrit ${tot}, pas de retenue.`);
+      retenue = r;
+    }
+  });
+  return `${phrases.join(" ")} Résultat : ${a * b}.`;
+}
+
+/**
+ * ⛔ Décision de Frédéric (05/10/2026) : multiplier par 10 ou 100 s'explique
+ * UNIQUEMENT par la valeur des chiffres, jamais par « on ajoute un zéro ».
+ * Son modèle : « Méthode : multiplier par 10, c'est rendre chaque chiffre dix
+ * fois plus grand : il monte d'une colonne. Calcul : 4 dizaines deviennent
+ * 4 centaines, 5 unités deviennent 5 dizaines : 450. » (×100 : deux colonnes).
+ */
+function methode10(facteur: number) {
+  return facteur === 10
+    ? "Multiplier par 10, c'est rendre chaque chiffre dix fois plus grand : il monte d'une colonne."
+    : "Multiplier par 100, c'est rendre chaque chiffre cent fois plus grand : il monte de deux colonnes.";
+}
+const DEF_COLONNES = "Dans un nombre, chaque chiffre vaut selon sa colonne : unités, dizaines, centaines, milliers.";
+function calcul10(n: number, facteur: number) {
+  return `${cap(montee(n, facteur))} : ${n * facteur}.`;
+}
+
+/** Ce que devient chaque chiffre de n multiplié par 10 ou 100 : il MONTE. */
+function montee(n: number, facteur: number) {
+  const noms: readonly (readonly [string, string])[] = [
+    ["unité", "unités"], ["dizaine", "dizaines"], ["centaine", "centaines"],
+    ["millier", "milliers"], ["dizaine de milliers", "dizaines de milliers"],
+  ];
+  const saut = facteur === 10 ? 1 : 2;
+  return String(n)
+    .split("")
+    .map(Number)
+    .reverse()
+    .map((c, i) => (c === 0 ? "" : `${c} ${pl(c, noms[i])} ${c === 1 ? "devient" : "deviennent"} ${c} ${pl(c, noms[i + saut])}`))
+    .filter(Boolean)
+    .reverse()
+    .join(", ");
+}
+
+/** Une addition de n répétée k fois : « 6 + 6 + 6 ». */
+function repete(n: number, k: number) {
+  return Array(k).fill(n).join(" + ");
+}
+
 export const multiplicationBank: TutorBankItemV4[] = [
   /* =========================================================
      CE2_TABLES_2_3_4_5_10 — les tables faciles
@@ -154,20 +519,109 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const table = randomChoice([2, 3, 4, 5, 10]);
       const n = randomInt(2, 10);
       const produit = table * n;
+      // L'ordre change d'un tirage à l'autre : 3 × 7 et 7 × 3 sont la même case.
+      const tourne = Math.random() < 0.5;
+      const [a, b] = tourne ? [n, table] : [table, n];
+      const text =
+        table === 2 && Math.random() < 0.2
+          ? randomChoice([`Quel est le double de ${n} ?`, `Combien fait ${n} pris deux fois ?`])
+          : Math.random() < 0.2
+            ? randomChoice([
+                `Dans la table de ${table}, combien font ${a} × ${b} ?`,
+                `Récite la table de ${table} : ${a} × ${b} = ?`,
+              ])
+            : enonceProduit(a, b);
       return {
-        text: `Combien font ${table} × ${n} ?`,
+        text,
         format: "short",
         expected: [String(produit)],
         comparator: "number_equal",
         explanation: exp(
           "Multiplier, c'est additionner plusieurs fois le même nombre.",
           "On s'appuie sur un résultat qu'on connaît déjà, puis on ajuste.",
-          table === 2
-            ? `${table} × ${n}, c'est le double de ${n} : ${n} + ${n} = ${produit}.`
-            : table === 10
-              ? `${table} × ${n} : chaque unité de ${n} devient une dizaine, donc ${produit}.`
-              : `${table} × ${n} = ${n} pris ${table} fois, soit ${produit}. On peut aussi dire ${n} × ${table}, c'est le même résultat.`,
-          `${table} × ${n} = ${produit}.`,
+          `${appui(table, n)}${tourne && n !== table ? ` Et ${n} × ${table}, c'est le même résultat : l'ordre ne change rien.` : ""}`,
+          `${a} × ${b} = ${produit}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_tables_2_3_4_5_10_tpl_3",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_tables_2_3_4_5_10",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Combien de paquets, et combien dans chaque paquet ? Puis récite la bonne table.",
+    tags: ["ce2", "multiplication", "tables", "probleme", "template"],
+    generate: () => {
+      const s = randomChoice(GROUPES);
+      const table = randomChoice([2, 3, 4, 5, 10]);
+      const n = randomInt(2, 9);
+      // La table est tantôt le nombre de paquets, tantôt leur contenu.
+      const [a, b] = Math.random() < 0.5 ? [n, table] : [table, n];
+      const total = a * b;
+      const { constat, question } = enonceGroupes(s, a, b);
+      return {
+        text: `${constat} ${question}`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Quand des paquets contiennent tous la même chose, on multiplie au lieu d'additionner.",
+          "On multiplie le nombre de paquets par ce que chacun contient, en s'appuyant sur la table qu'on connaît.",
+          `${a} × ${b} = ${total}. ${appui(table, n)}`,
+          `Il y a ${total} ${s.objet[1]}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_tables_2_3_4_5_10_tpl_4",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_tables_2_3_4_5_10",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compte les bonds un par un : la table défile toute seule.",
+    tags: ["ce2", "multiplication", "tables", "bonds", "template"],
+    generate: () => {
+      const sauteur = randomChoice([
+        ["Une grenouille", "elle"],
+        ["Un kangourou", "il"],
+        ["Une sauterelle", "elle"],
+        ["Un robot", "il"],
+        ["Un lapin", "il"],
+        ["Une puce", "elle"],
+        ["Un pion", "il"],
+        ["Une coccinelle", "elle"],
+        ["Un écureuil", "il"],
+        ["Un margouillat", "il"],
+      ] as const);
+      const [S, il] = sauteur;
+      const table = randomChoice([2, 3, 4, 5, 10]);
+      const n = randomInt(2, 10);
+      const produit = table * n;
+      const suite = Array.from({ length: n }, (_, i) => table * (i + 1)).join(", ");
+      const text = randomChoice([
+        `${S} avance de ${table} cases à chaque saut, en partant de la case 0. Sur quelle case arrive-t-${il} après ${n} sauts ?`,
+        `Sur une piste graduée, ${S.charAt(0).toLowerCase() + S.slice(1)} part de 0 et fait ${n} bonds de ${table}. Où arrive-t-${il} ?`,
+        `${S} fait ${n} sauts de ${table} cases, depuis la case 0. Sur quel nombre se pose-t-${il} ?`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: [String(produit)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Faire plusieurs bonds de même longueur, c'est multiplier.",
+          `On compte de ${table} en ${table} depuis 0, autant de fois qu'il y a de bonds.`,
+          `${suite} : ${n} bonds de ${table} mènent à ${produit}, car ${n} × ${table} = ${produit}.`,
+          `${il === "elle" ? "Elle" : "Il"} arrive sur la case ${produit}.`,
         ),
       };
     },
@@ -187,8 +641,11 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const table = randomChoice([2, 3, 4, 5, 10]);
       const n = randomInt(2, 10);
       const produit = table * n;
+      // Une fois sur deux, le facteur manquant est raconté : des paquets à remplir.
+      const s = randomChoice(GROUPES);
+      const raconte = Math.random() < 0.5;
       return {
-        text: `Complète : ${table} × ... = ${produit}`,
+        text: raconte ? enonceFacteurGroupes(s, table, produit) : enonceFacteur(table, produit),
         format: "short",
         expected: [String(n)],
         comparator: "number_equal",
@@ -196,7 +653,84 @@ export const multiplicationBank: TutorBankItemV4[] = [
           "Chercher le nombre qui manque dans une multiplication, c'est parcourir la table à l'envers.",
           "On récite la table jusqu'à tomber sur le total.",
           `Dans la table de ${table}, on cherche ${produit} : ${table} × ${n} = ${produit}. Le nombre qui manque est ${n}.`,
-          `Il manque ${n}.`,
+          raconte ? `Il faut ${n} ${s.contenant[1]}.` : `Il manque ${n}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_tables_2_3_4_5_10_tpl_5",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_tables_2_3_4_5_10",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Refais le calcul toi-même avant de juger.",
+    tags: ["ce2", "multiplication", "tables", "vrai_faux", "qcm", "template"],
+    generate: () => {
+      const table = randomChoice([2, 3, 4, 5, 10]);
+      const n = randomInt(2, 10);
+      const [a, b] = Math.random() < 0.5 ? [table, n] : [n, table];
+      const p = table * n;
+      const q = affirmation(a, b, [p + table, p - table, p + 1, p - 1, p + n, p + 10]);
+      return {
+        text: q.text,
+        format: "qcm",
+        choices: q.choices,
+        expected: q.expected,
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Pour juger un calcul, on le refait soi-même.",
+          "On retrouve le produit avec un appui sûr, puis on compare.",
+          `${appui(table, n)} ${q.juste ? `Le résultat annoncé, ${q.w}, est le bon.` : `Le résultat annoncé, ${q.w}, est faux.`}`,
+          q.juste ? `C'est juste : ${a} × ${b} = ${p}.` : `C'est faux : ${a} × ${b} = ${p}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_tables_2_3_4_5_10_tpl_6",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_tables_2_3_4_5_10",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compte de tant en tant depuis 0 : lequel de ces nombres tombe juste ?",
+    tags: ["ce2", "multiplication", "tables", "reconnaitre", "qcm", "template"],
+    generate: () => {
+      const table = randomChoice([2, 3, 4, 5, 10]);
+      const k = randomInt(2, 10);
+      const bon = table * k;
+      // Les pièges sont VOISINS du bon nombre, et aucun n'est dans la table.
+      const pieges = [bon + 1, bon - 1, bon + 2, bon - 2, bon + 3, bon - 3, bon + table + 1, bon - table + 1]
+        .filter((v) => v > 0 && v % table !== 0)
+        .map(String);
+      const s = randomChoice(GROUPES);
+      const P = tirePrenom();
+      const text = randomChoice([
+        `Lequel de ces nombres est dans la table de ${table} ?`,
+        `Quel nombre peut-on obtenir en multipliant ${table} par un nombre entier ?`,
+        `En comptant de ${table} en ${table} à partir de 0, quel nombre va-t-on dire ?`,
+        `Quel nombre est un résultat de la table de ${table} ?`,
+        `${P.nom} récite la table de ${table}. Quel nombre va-t-${P.il} dire ?`,
+        `${cap(s.lieu)}, on fait des ${s.contenant[1]} de ${table} ${s.objet[1]}, sans qu'il en reste. Lequel de ces nombres ${de(s.objet[1])} convient ?`,
+        `${cap(s.lieu)}, on ${s.verbe} ${table} ${s.objet[1]} ${s.prep} chaque ${s.contenant[0]}, et tout est rempli. Combien ${de(s.objet[1])} peut-il y avoir ?`,
+      ]);
+      return {
+        text,
+        format: "qcm",
+        choices: makeChoices(String(bon), pieges),
+        expected: [String(bon)],
+        comparator: "mcq_exact",
+        explanation: exp(
+          `Les résultats de la table de ${table} sont ce qu'on obtient en comptant de ${table} en ${table} depuis 0.`,
+          `On cherche, parmi les nombres proposés, celui qui s'écrit ${table} × quelque chose.`,
+          `${table} × ${k} = ${bon} : ${bon} est dans la table de ${table}. Les autres tombent juste à côté.`,
+          `C'est ${bon}.`,
         ),
       };
     },
@@ -294,18 +828,148 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const table = randomChoice([6, 7, 8, 9]);
       const n = randomInt(2, 10);
       const produit = table * n;
+      const tourne = Math.random() < 0.5;
+      const [a, b] = tourne ? [n, table] : [table, n];
+      const text =
+        Math.random() < 0.2
+          ? randomChoice([
+              `Dans la table de ${table}, combien font ${a} × ${b} ?`,
+              `Récite la table de ${table} : ${a} × ${b} = ?`,
+            ])
+          : enonceProduit(a, b);
       return {
-        text: `Combien font ${table} × ${n} ?`,
+        text,
         format: "short",
         expected: [String(produit)],
         comparator: "number_equal",
         explanation: exp(
           "Dans une multiplication, on peut échanger les deux nombres sans changer le résultat.",
           "On s'appuie sur un produit voisin plus facile, puis on ajuste.",
-          table === 9
-            ? `${table} × ${n} = 10 × ${n} - ${n} = ${10 * n} - ${n} = ${produit}.`
-            : `${table} × ${n} = ${(table - 1) * n} + ${n} = ${produit}, en partant de ${table - 1} × ${n}. On peut aussi écrire ${n} × ${table} : c'est le même résultat.`,
-          `${table} × ${n} = ${produit}.`,
+          `${appui(table, n)}${tourne && n !== table ? ` Et ${n} × ${table}, c'est le même résultat : l'ordre ne change rien.` : ""}`,
+          `${a} × ${b} = ${produit}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_tables_6_7_8_9_tpl_3",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_tables_6_7_8_9",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Combien de paquets, combien dans chacun ? Puis passe par un produit voisin.",
+    tags: ["ce2", "multiplication", "tables", "probleme", "template"],
+    generate: () => {
+      const s = randomChoice(GROUPES);
+      const table = randomChoice([6, 7, 8, 9]);
+      const n = randomInt(3, 9);
+      const [a, b] = Math.random() < 0.5 ? [n, table] : [table, n];
+      const total = a * b;
+      const { constat, question } = enonceGroupes(s, a, b);
+      return {
+        text: `${constat} ${question}`,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Quand des paquets contiennent tous la même chose, on multiplie au lieu d'additionner.",
+          "On multiplie le nombre de paquets par ce que chacun contient, en passant par un produit plus facile.",
+          `${a} × ${b} = ${total}. ${appui(table, n)}`,
+          `Il y a ${total} ${s.objet[1]}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_tables_6_7_8_9_tpl_4",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_tables_6_7_8_9",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Pars du résultat qu'on te donne : il n'y a presque rien à refaire.",
+    tags: ["ce2", "multiplication", "tables", "methode", "template"],
+    generate: () => {
+      const table = randomChoice([6, 7, 8, 9]);
+      const P = tirePrenom();
+      const genre = randomChoice(["plus", "moins", "ordre", "double"] as const);
+      // Le « double » n'existe que pour 6 et 8 (moitiés : 3 et 4).
+      const sorte = genre === "double" && table % 2 !== 0 ? "plus" : genre;
+      if (sorte === "plus" || sorte === "moins") {
+        const n = sorte === "plus" ? randomInt(2, 8) : randomInt(3, 10);
+        const m = sorte === "plus" ? n + 1 : n - 1;
+        const p = table * n;
+        const r = table * m;
+        const text =
+          sorte === "plus"
+            ? randomChoice([
+                `Tu sais que ${table} × ${n} = ${p}. Ajoute un ${table} de plus : combien font ${table} × ${m} ?`,
+                `Sachant que ${table} × ${n} = ${p}, calcule ${table} × ${m} en ajoutant ${table}.`,
+                `${P.nom} connaît ${table} × ${n} = ${p}. Que trouve-t-${P.il} pour ${table} × ${m} ?`,
+              ])
+            : randomChoice([
+                `Tu sais que ${table} × ${n} = ${p}. Enlève un ${table} : combien font ${table} × ${m} ?`,
+                `Sachant que ${table} × ${n} = ${p}, calcule ${table} × ${m} en retirant ${table}.`,
+                `${P.nom} part de ${table} × ${n} = ${p} pour trouver ${table} × ${m}. Quel résultat obtient-${P.il} ?`,
+              ]);
+        return {
+          text,
+          format: "short",
+          expected: [String(r)],
+          comparator: "number_equal",
+          explanation: exp(
+            `Passer de ${table} × ${n} à ${table} × ${m}, c'est prendre ${table} une fois ${sorte === "plus" ? "de plus" : "de moins"}.`,
+            `On part du résultat connu et on ${sorte === "plus" ? "ajoute" : "retire"} ${table}.`,
+            sorte === "plus" ? `${p} + ${table} = ${r}.` : `${p} - ${table} = ${r}.`,
+            `${table} × ${m} = ${r}.`,
+          ),
+        };
+      }
+      if (sorte === "ordre") {
+        const n = randomInt(2, 5);
+        const p = table * n;
+        const text = randomChoice([
+          `Si ${n} × ${table} = ${p}, que vaut ${table} × ${n} ?`,
+          `${P.nom} sait que ${n} × ${table} = ${p}. Combien font ${table} × ${n} ?`,
+          `On retourne ${n} × ${table} = ${p}. Que vaut ${table} × ${n} ?`,
+        ]);
+        return {
+          text,
+          format: "short",
+          expected: [String(p)],
+          comparator: "number_equal",
+          explanation: exp(
+            "Dans une multiplication, on peut échanger les deux nombres sans changer le résultat.",
+            "On retourne le calcul pour retomber sur une table qu'on connaît déjà.",
+            `${n} rangées de ${table} ou ${table} rangées de ${n} : c'est le même quadrillage, ${p} cases.`,
+            `${table} × ${n} = ${p}.`,
+          ),
+        };
+      }
+      const moitie = table / 2;
+      const n = randomInt(3, 9);
+      const q = moitie * n;
+      const p = table * n;
+      const text = randomChoice([
+        `${table} × ${n}, c'est le double de ${moitie} × ${n}. Sachant que ${moitie} × ${n} = ${q}, combien font ${table} × ${n} ?`,
+        `${P.nom} sait que ${moitie} × ${n} = ${q}. Pour ${table} × ${n}, ${P.il} double. Que trouve-t-${P.il} ?`,
+        `Double ${moitie} × ${n} = ${q} : combien font ${table} × ${n} ?`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: [String(p)],
+        comparator: "number_equal",
+        explanation: exp(
+          `${table} est le double de ${moitie} : ${table} × ${n} est donc le double de ${moitie} × ${n}.`,
+          "On part du produit connu et on le double.",
+          `${q} + ${q} = ${p}.`,
+          `${table} × ${n} = ${p}.`,
         ),
       };
     },
@@ -325,8 +989,10 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const table = randomChoice([6, 7, 8, 9]);
       const n = randomInt(2, 10);
       const produit = table * n;
+      const s = randomChoice(GROUPES);
+      const raconte = Math.random() < 0.5;
       return {
-        text: `Complète : ... × ${table} = ${produit}`,
+        text: raconte ? enonceFacteurGroupes(s, table, produit) : enonceFacteur(table, produit),
         format: "short",
         expected: [String(n)],
         comparator: "number_equal",
@@ -334,7 +1000,91 @@ export const multiplicationBank: TutorBankItemV4[] = [
           "Chercher le nombre qui manque, c'est parcourir la table à l'envers.",
           "On récite la table de ce nombre jusqu'à tomber sur le total.",
           `Dans la table de ${table}, on cherche ${produit} : ${n} × ${table} = ${produit}. Le nombre qui manque est ${n}.`,
-          `Il manque ${n}.`,
+          raconte ? `Il faut ${n} ${s.contenant[1]}.` : `Il manque ${n}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_tables_6_7_8_9_tpl_5",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_tables_6_7_8_9",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Refais le calcul par un produit voisin avant de juger.",
+    tags: ["ce2", "multiplication", "tables", "vrai_faux", "piege", "qcm", "template"],
+    generate: () => {
+      const table = randomChoice([6, 7, 8, 9]);
+      const n = randomInt(3, 9);
+      const [a, b] = Math.random() < 0.5 ? [table, n] : [n, table];
+      const p = table * n;
+      // Les confusions qui reviennent chaque année, en plus des voisins.
+      const CONFUSIONS: Record<number, number[]> = {
+        54: [56, 45, 64], 56: [54, 63, 58, 48], 63: [64, 56, 72], 48: [46, 42, 64],
+        42: [48, 36, 49], 72: [74, 81, 63], 49: [48, 42, 56], 64: [63, 56, 46],
+        36: [32, 42, 38], 81: [72, 89, 18],
+      };
+      const q = affirmation(a, b, [...(CONFUSIONS[p] ?? []), p + table, p - table, p + 1, p - 1, p + n]);
+      return {
+        text: q.text,
+        format: "qcm",
+        choices: q.choices,
+        expected: q.expected,
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Pour juger un calcul, on le refait soi-même.",
+          "On retrouve le produit par un appui sûr, puis on compare.",
+          `${appui(table, n)} ${q.juste ? `Le résultat annoncé, ${q.w}, est le bon.` : `Le résultat annoncé, ${q.w}, est faux.`}`,
+          q.juste ? `C'est juste : ${a} × ${b} = ${p}.` : `C'est faux : ${a} × ${b} = ${p}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_tables_6_7_8_9_tpl_6",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_tables_6_7_8_9",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Calcule chaque proposition : une seule tombe juste.",
+    tags: ["ce2", "multiplication", "tables", "choisir_calcul", "qcm", "template"],
+    generate: () => {
+      const table = randomChoice([6, 7, 8, 9]);
+      const n = randomInt(3, 9);
+      const p = table * n;
+      // Des calculs voisins, dont aucun ne vaut p (6 × 4 et 8 × 3 font tous deux 24).
+      const pieges = [
+        [table, n + 1], [table + 1, n], [table - 1, n], [table, n - 1], [table + 1, n - 1], [table - 1, n + 1],
+      ]
+        .filter(([x, y]) => x * y !== p)
+        .map(([x, y]) => `${x} × ${y}`);
+      const correct = `${table} × ${n}`;
+      const P = tirePrenom();
+      const intro = randomChoice(["", "Jeu des tables. ", "Défi du jour. ", "Calcul mental. "]);
+      const question = randomChoice([
+        `Quel calcul donne ${p} ?`,
+        `Lequel de ces calculs a pour résultat ${p} ?`,
+        `${P.nom} cherche une multiplication égale à ${p}. Laquelle choisir ?`,
+        `Dans quelle case de la table trouve-t-on ${p} ?`,
+        `Quel produit vaut ${p} ?`,
+      ]);
+      return {
+        text: `${intro}${question}`,
+        format: "qcm",
+        choices: makeChoices(correct, pieges),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Chaque résultat de la table correspond à un calcul.",
+          "On calcule chaque proposition et on garde celle qui donne le bon nombre.",
+          `${appui(table, n)} Les autres calculs sont voisins, mais ne donnent pas ${p}.`,
+          `C'est ${correct}.`,
         ),
       };
     },
@@ -439,22 +1189,63 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const paquets = randomInt(3, 8);
       const parPaquet = randomInt(3, 9);
       const total = paquets * parPaquet;
-      const objet = randomChoice([
-        { nom: "billes", contenant: "sachets" },
-        { nom: "letchis", contenant: "barquettes" },
-        { nom: "crayons", contenant: "trousses" },
-        { nom: "bouchons", contenant: "boîtes" },
-      ]);
+      const s = randomChoice(GROUPES);
+      const { constat, question } = enonceGroupes(s, paquets, parPaquet);
       return {
-        text: `Il y a ${paquets} ${objet.contenant} de ${parPaquet} ${objet.nom}. Combien de ${objet.nom} en tout ?`,
+        text: `${constat} ${question}`,
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
         explanation: exp(
           "Quand des paquets contiennent tous la même chose, on multiplie au lieu d'additionner.",
           "On multiplie le nombre de paquets par ce que chacun contient.",
-          `${paquets} × ${parPaquet} = ${total}. C'est plus court que d'écrire ${parPaquet} ${paquets} fois de suite.`,
-          `Il y a ${total} ${objet.nom}.`,
+          `${paquets} × ${parPaquet} = ${total}. C'est plus court que d'écrire ${repete(parPaquet, paquets)}.`,
+          `Il y a ${total} ${s.objet[1]}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_sens_tpl_3",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_sens",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Des paquets tous pareils : c'est le signe ×.",
+    tags: ["ce2", "multiplication", "sens", "choisir_calcul", "qcm", "template"],
+    generate: () => {
+      const s = randomChoice(GROUPES);
+      const a = randomInt(3, 8);
+      let b = randomInt(3, 9);
+      if (b === a) b = a + 1;
+      const { constat } = enonceGroupes(s, a, b);
+      const question = randomChoice([
+        `Quel calcul donne le nombre total ${de(s.objet[1])} ?`,
+        `Quel calcul faut-il faire pour savoir combien il y a ${de(s.objet[1])} ?`,
+        `Quelle opération permet de trouver le nombre ${de(s.objet[1])} ?`,
+      ]);
+      const correct = `${a} × ${b}`;
+      return {
+        text: `${constat} ${question}`,
+        format: "qcm",
+        // ⚠️ « b × a » serait juste aussi : il n'est jamais parmi les pièges.
+        choices: makeChoices(correct, [
+          `${a} + ${b}`,
+          b > a ? `${b} - ${a}` : `${a} - ${b}`,
+          `${a} × ${a}`,
+          `${b} × ${b}`,
+          `${a} + ${a}`,
+        ]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Quand on réunit des paquets qui contiennent tous la même chose, on multiplie.",
+          "On repère le nombre de paquets et ce que contient chacun.",
+          `${a} paquets de ${b} : ${correct} = ${a * b}. Le calcul ${a} + ${b} ne donnerait que ${a + b} : il ajoute le nombre de paquets au contenu d'un seul paquet.`,
+          `Le bon calcul est ${correct}.`,
         ),
       };
     },
@@ -473,9 +1264,18 @@ export const multiplicationBank: TutorBankItemV4[] = [
     generate: () => {
       const n = randomInt(3, 9);
       const fois = randomInt(3, 6);
-      const somme = Array(fois).fill(n).join(" + ");
+      const somme = repete(n, fois);
+      const P = tirePrenom();
       return {
-        text: `Quel calcul remplace ${somme} ?`,
+        // La longueur de l'addition change le squelette ; la tournure aussi.
+        text: randomChoice([
+          `Quel calcul remplace ${somme} ?`,
+          `Quelle multiplication est égale à ${somme} ?`,
+          `${P.nom} écrit ${somme}. Comment l'écrire plus vite ?`,
+          `Comment écrire ${somme} avec le signe × ?`,
+          `Quelle écriture plus courte donne ${somme} ?`,
+          `Au lieu d'écrire ${somme}, que peut-on écrire ?`,
+        ]),
         format: "qcm",
         // ⚠️ Quand `fois` vaut `n`, deux des pièges retombent sur la bonne
         // réponse et disparaissent au tri : on en écrit assez pour qu'il en
@@ -494,6 +1294,84 @@ export const multiplicationBank: TutorBankItemV4[] = [
           "On compte combien de fois le nombre est répété : c'est le premier facteur.",
           `Le ${n} est écrit ${fois} fois : cela s'écrit ${fois} × ${n}, et vaut ${fois * n}.`,
           `C'est ${fois} × ${n}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_sens_tpl_4",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_sens",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Combien de rangées, et combien dans chaque rangée ?",
+    tags: ["ce2", "multiplication", "sens", "rangees", "template"],
+    generate: () => {
+      const s = randomChoice(RANGEES);
+      const r = randomInt(3, 9);
+      const c = randomInt(3, 9);
+      const total = r * c;
+      const lignes = pl(r, s.ligne);
+      const objets = pl(c, s.objet);
+      const text = randomChoice([
+        `${s.ou}, il y a ${r} ${lignes} de ${c} ${objets}. Combien ${de(s.objet[1])} en tout ?`,
+        `${s.ou}, on voit ${r} ${lignes}, avec ${c} ${objets} ${s.prep} chaque ${s.ligne[0]}. Combien ${de(s.objet[1])} y a-t-il ?`,
+        `${s.ou}, les ${s.objet[1]} forment ${r} ${lignes} de ${c}. Combien y en a-t-il ?`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un quadrillage de rangées toutes pareilles se compte par une multiplication.",
+          "On multiplie le nombre de rangées par le nombre d'objets dans une rangée.",
+          `${r} × ${c} = ${total}. On pourrait aussi compter par colonnes : ${c} × ${r} = ${total}, c'est le même quadrillage.`,
+          `Il y a ${total} ${s.objet[1]}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_sens_tpl_5",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_sens",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le premier nombre dit combien de fois on écrit le second.",
+    tags: ["ce2", "multiplication", "sens", "addition_iteree", "qcm", "template"],
+    generate: () => {
+      const a = randomInt(3, 5);
+      let b = randomInt(2, 9);
+      if (b === a) b = a + 2;
+      const correct = repete(b, a);
+      const P = tirePrenom();
+      const intro = randomChoice(["", "Retour à l'addition. ", "Vérification. ", "Petit défi. "]);
+      const question = randomChoice([
+        `Quelle addition donne le même résultat que ${a} × ${b} ?`,
+        `${P.nom} veut vérifier ${a} × ${b} avec une addition. Laquelle doit-${P.il} écrire ?`,
+        `Quelle addition est égale à ${a} × ${b} ?`,
+        `${a} × ${b}, ce sont ${a} paquets de ${b}. Quelle addition correspond ?`,
+        `Quelle addition se cache derrière ${a} × ${b} ?`,
+      ]);
+      return {
+        text: `${intro}${question}`,
+        format: "qcm",
+        // ⚠️ « a répété b fois » serait juste aussi : il n'est jamais parmi les pièges.
+        choices: makeChoices(correct, [`${a} + ${b}`, repete(b, a + 1), repete(b, a - 1), repete(b + 1, a)]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Une multiplication remplace une addition de nombres tous égaux.",
+          `${a} × ${b}, ce sont ${a} paquets de ${b} : on écrit ${b} autant de fois qu'il y a de paquets.`,
+          `${correct} = ${a * b}, et ${a} × ${b} = ${a * b}. L'addition ${a} + ${b} ne donne que ${a + b}.`,
+          `C'est ${correct}.`,
         ),
       };
     },
@@ -607,20 +1485,20 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const a = randomInt(13, 98);
       const b = randomInt(3, 9);
       const produit = a * b;
-      const unites = a % 10;
-      const dizaines = Math.floor(a / 10);
-      const retenue = Math.floor((unites * b) / 10);
       return {
-        text: `Combien font ${a} × ${b} ?`,
+        text: randomChoice([
+          enonceProduit(a, b, true),
+          enonceProduit(a, b, true),
+          `Pose et calcule ${a} × ${b}.`,
+          `Pose l'opération ${a} × ${b}. Quel résultat trouves-tu ?`,
+        ]),
         format: "short",
         expected: [String(produit)],
         comparator: "number_equal",
         explanation: exp(
           "On multiplie chaque chiffre en partant des unités, et le chiffre des dizaines d'un produit devient une retenue.",
           "On écrit les unités du produit, on garde les dizaines, on les ajoute au produit suivant.",
-          retenue > 0
-            ? `${b} × ${unites} = ${b * unites} : on écrit ${(b * unites) % 10} et on retient ${retenue}. Puis ${b} × ${dizaines} = ${b * dizaines}, plus la retenue ${retenue}, égale ${b * dizaines + retenue}. Résultat : ${produit}.`
-            : `${b} × ${unites} = ${b * unites}, pas de retenue. Puis ${b} × ${dizaines} = ${b * dizaines}. Résultat : ${produit}.`,
+          etapesPosee(a, b),
           `${a} × ${b} = ${produit}.`,
         ),
         canvas: calculPose({
@@ -634,35 +1512,233 @@ export const multiplicationBank: TutorBankItemV4[] = [
   },
   {
     kind: "template",
-    id: "ce2_multiplication_posee_tpl_2",
+    id: "ce2_multiplication_posee_tpl_5",
     niveau: "ce2",
     matiere: "maths",
     notionId: "multiplication",
     microId: "ce2_multiplication_posee",
-    difficulty: 4,
-    theme: "reunion",
-    hint: "Un seul paquet, puis autant de paquets : c'est une multiplication.",
-    tags: ["ce2", "multiplication", "posee", "reunion", "template"],
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Un seul contenant, puis autant de contenants : c'est une multiplication.",
+    tags: ["ce2", "multiplication", "posee", "probleme", "template"],
     generate: () => {
-      const parBoite = randomInt(24, 96);
-      const boites = randomInt(3, 8);
+      const parBoite = randomInt(12, 49);
+      const boites = randomInt(2, 5);
       const total = parBoite * boites;
-      const contexte = randomChoice([
-        { quoi: "letchis", ou: "à la coopérative de Saint-Joseph", contenant: "barquettes" },
-        { quoi: "bouchons", ou: "au snack du Tampon", contenant: "boîtes" },
-        { quoi: "cahiers", ou: "à la papeterie de Saint-Louis", contenant: "cartons" },
-      ]);
+      const s = randomChoice(LOTS);
       return {
-        text: `${contexte.ou.charAt(0).toUpperCase() + contexte.ou.slice(1)}, on range ${parBoite} ${contexte.quoi} dans chaque ${contexte.contenant.replace(/s$/, "")}. Combien de ${contexte.quoi} dans ${boites} ${contexte.contenant} ?`,
+        text: enonceLots(s, parBoite, boites),
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
         explanation: exp(
           "Quand des contenants reçoivent tous la même quantité, on multiplie.",
           "On pose la multiplication et on commence par les unités, en surveillant la retenue.",
-          `${parBoite} × ${boites} = ${total}.`,
-          `Il y a ${total} ${contexte.quoi}.`,
+          `${parBoite} × ${boites}. ${etapesPosee(parBoite, boites)}`,
+          `Il y a ${total} ${s.objet[1]}.`,
         ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_posee_tpl_6",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_posee",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Tout commence à droite : le chiffre des unités, multiplié par le nombre du bas.",
+    tags: ["ce2", "multiplication", "posee", "retenue", "methode", "template"],
+    generate: () => {
+      // Le geste plutôt que le résultat : la colonne des unités, et sa retenue.
+      let a = randomInt(13, 98);
+      let b = randomInt(3, 9);
+      while (((a % 10) * b) < 10) {
+        a = randomInt(13, 98);
+        b = randomInt(3, 9);
+      }
+      const u = a % 10;
+      const prod = u * b;
+      const P = tirePrenom();
+      const intro = randomChoice([
+        `On pose ${a} × ${b}.`,
+        `${P.nom} pose la multiplication ${a} × ${b}.`,
+        `Au tableau, la maîtresse pose ${a} × ${b}.`,
+        `Pour calculer ${a} × ${b}, ${P.nom} pose l'opération.`,
+      ]);
+      const sorte = randomChoice(["retenue", "retenue", "unites", "premier"] as const);
+      const question =
+        sorte === "retenue"
+          ? randomChoice([
+              "Quelle retenue faut-il noter après avoir multiplié les unités ?",
+              "Après le calcul des unités, quel nombre part en retenue ?",
+            ])
+          : sorte === "unites"
+            ? randomChoice([
+                "Quel chiffre écrit-on dans la colonne des unités du résultat ?",
+                "Quel est le chiffre des unités du résultat ?",
+              ])
+            : randomChoice([
+                "Combien vaut le premier produit à calculer, celui des unités ?",
+                "Quel est le résultat de la toute première multiplication à faire ?",
+              ]);
+      const reponse = sorte === "retenue" ? Math.floor(prod / 10) : sorte === "unites" ? prod % 10 : prod;
+      return {
+        text: `${intro} ${question}`,
+        format: "short",
+        expected: [String(reponse)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Dans une multiplication posée, on commence par les unités ; si le produit dépasse 9, ses dizaines passent en retenue.",
+          `On multiplie le chiffre des unités de ${a}, le ${u}, par ${b}.`,
+          etapesPosee(a, b),
+          sorte === "retenue"
+            ? `La retenue est ${reponse}.`
+            : sorte === "unites"
+              ? `Le chiffre des unités du résultat est ${reponse}.`
+              : `Le premier produit vaut ${reponse}.`,
+        ),
+        canvas: calculPose({
+          operation: "multiplication",
+          numbers: [String(a), String(b)],
+          result: String(a * b),
+          display: { showResult: false, showRetenues: false },
+        }),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_posee_tpl_2",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_posee",
+    difficulty: 4,
+    // Ses trois décors étaient réunionnais ; seize décors variés désormais,
+    // dont un seul à La Réunion : le thème redevient neutre.
+    theme: "neutral",
+    hint: "Un seul paquet, puis autant de paquets : c'est une multiplication.",
+    tags: ["ce2", "multiplication", "posee", "probleme", "template"],
+    generate: () => {
+      const parBoite = randomInt(24, 96);
+      const boites = randomInt(3, 8);
+      const total = parBoite * boites;
+      const s = randomChoice(LOTS);
+      return {
+        text: enonceLots(s, parBoite, boites),
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Quand des contenants reçoivent tous la même quantité, on multiplie.",
+          "On pose la multiplication et on commence par les unités, en surveillant la retenue.",
+          `${parBoite} × ${boites}. ${etapesPosee(parBoite, boites)}`,
+          `Il y a ${total} ${s.objet[1]}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_posee_tpl_7",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_posee",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Refais la colonne des unités : que devient le chiffre des dizaines du produit ?",
+    tags: ["ce2", "multiplication", "posee", "retenue", "piege", "qcm", "template"],
+    generate: () => {
+      // On tire jusqu'à avoir une vraie retenue aux unités.
+      let a = randomInt(13, 98);
+      let b = randomInt(3, 9);
+      while (((a % 10) * b) < 10) {
+        a = randomInt(13, 98);
+        b = randomInt(3, 9);
+      }
+      const u = a % 10;
+      const d = Math.floor(a / 10);
+      const retenue = Math.floor((u * b) / 10);
+      const produit = a * b;
+      const oubli = b * d * 10 + ((u * b) % 10);
+      const P = tirePrenom();
+      const moment = randomChoice(MOMENTS);
+      const text = randomChoice([
+        `${moment}, ${P.nom} pose ${a} × ${b} et trouve ${oubli}. ${P.Il} a oublié la retenue. Quel est le bon résultat ?`,
+        `${moment}, ${P.nom} calcule ${a} × ${b} en posant l'opération. ${P.Il} écrit ${oubli}, sans ajouter la retenue. Que fallait-il trouver ?`,
+        `${moment}, ${P.nom} annonce ${a} × ${b} = ${oubli}. Quel est le résultat juste ?`,
+        `${P.nom} a posé ${a} × ${b} et trouvé ${oubli}. La maîtresse entoure la colonne des dizaines. Quel résultat fallait-il écrire ?`,
+        `Sur la feuille de ${P.nom}, on lit ${a} × ${b} = ${oubli} : la petite retenue n'est pas écrite. Corrige le résultat.`,
+        `Le robot de la classe a posé ${a} × ${b} et affiche ${oubli}. Il a oublié une retenue. Quel est le vrai résultat ?`,
+        `${P.nom} trouve ${oubli} pour ${a} × ${b}. ${P.Il} a bien écrit le chiffre des unités, mais a perdu la retenue. Que vaut ${a} × ${b} ?`,
+        `Dans la correction, ${a} × ${b} = ${oubli} est barré en rouge. Quel est le bon produit ?`,
+      ]);
+      return {
+        text,
+        format: "qcm",
+        choices: makeChoices(String(produit), [String(oubli), String(produit + 10), String(produit - b), String(produit + b)]),
+        expected: [String(produit)],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Quand un produit dépasse 9, son chiffre des dizaines est une retenue : il rejoint le rang suivant.",
+          "On écrit les unités du produit, on garde les dizaines en retenue, et on les ajoute au produit suivant.",
+          `${etapesPosee(a, b)} Sans la retenue ${retenue}, on écrit ${b * d} au lieu de ${b * d + retenue} devant le ${(u * b) % 10} : c'est le ${oubli} trouvé.`,
+          `${a} × ${b} = ${produit}.`,
+        ),
+        canvas: calculPose({
+          operation: "multiplication",
+          numbers: [String(a), String(b)],
+          result: String(produit),
+          retenues: [String(retenue)],
+          display: { showResult: false, showRetenues: false },
+        }),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_posee_tpl_8",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_posee",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Trois chiffres, trois colonnes : unités, dizaines, centaines, sans oublier les retenues.",
+    tags: ["ce2", "multiplication", "posee", "trois_chiffres", "template", "canvas"],
+    generate: () => {
+      const a = randomInt(102, 989);
+      const b = randomInt(2, 9);
+      const produit = a * b;
+      const s = randomChoice(GROS_LOTS);
+      const raconte = Math.random() < 0.5;
+      const P = tirePrenom();
+      return {
+        text: raconte
+          ? randomChoice([
+              `${s.fait(a)} ${s.demande(b)}`,
+              `Pour son exposé, ${P.nom} a relevé ceci : ${s.fait(a).charAt(0).toLowerCase() + s.fait(a).slice(1)} ${s.demande(b)}`,
+            ])
+          : randomChoice([enonceProduit(a, b, true), `Pose et calcule ${a} × ${b}.`, `Pose l'opération ${a} × ${b}. Quel résultat trouves-tu ?`]),
+        format: "short",
+        expected: [String(produit)],
+        comparator: "number_equal",
+        explanation: exp(
+          "On multiplie chaque chiffre en partant des unités ; quand un produit dépasse 9, ses dizaines passent en retenue.",
+          "On avance colonne par colonne, de droite à gauche, en ajoutant la retenue au produit suivant.",
+          etapesPosee(a, b),
+          raconte ? `${a} × ${b} = ${produit} : cela fait ${produit} ${s.objet}.` : `${a} × ${b} = ${produit}.`,
+        ),
+        canvas: calculPose({
+          operation: "multiplication",
+          numbers: [String(a), String(b)],
+          result: String(produit),
+          display: { showResult: false, showRetenues: false },
+        }),
       };
     },
   },
@@ -777,7 +1853,16 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const d = Math.floor(b / 10);
       const produit = a * b;
       return {
-        text: `Combien font ${a} × ${b} ?`,
+        text: randomChoice([
+          enonceProduit(a, b, true),
+          enonceProduit(a, b, true),
+          `Pose et calcule ${a} × ${b}.`,
+          `Pose l'opération ${a} × ${b}, en deux lignes. Quel résultat trouves-tu ?`,
+          `Calcule ${a} × ${b} en posant l'opération : n'oublie pas de décaler la deuxième ligne.`,
+          `Pose ${a} × ${b} : une ligne pour les unités, une pour les dizaines. Quel est le total ?`,
+          `Calcule ${a} × ${b} en posant l'opération en colonnes.`,
+          `${tirePrenom().nom} pose ${a} × ${b} sur son cahier. Quel résultat doit-on trouver après l'addition des deux lignes ?`,
+        ]),
         format: "short",
         expected: [String(produit)],
         comparator: "number_equal",
@@ -814,8 +1899,22 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const d = Math.floor(b / 10);
       const produit = a * b;
       const sansDecalage = a * u + a * d;
+      const P = tirePrenom();
+      const moment = randomChoice(MOMENTS);
       return {
-        text: `Un élève pose ${a} × ${b}. Il écrit ses deux lignes l'une sous l'autre, sans décaler la seconde, et trouve ${sansDecalage}. Quel est le bon résultat ?`,
+        text: randomChoice([
+          `${moment}, ${P.nom} pose ${a} × ${b}. ${P.Il} écrit ses deux lignes l'une sous l'autre, sans décaler la seconde, et trouve ${sansDecalage}. Quel est le bon résultat ?`,
+          `${moment}, ${P.nom} calcule ${a} × ${b} et annonce ${sansDecalage}. ${P.Il} a oublié de décaler la deuxième ligne. Que fallait-il trouver ?`,
+          `${moment}, ${P.nom} trouve ${a} × ${b} = ${sansDecalage}, car sa ligne des dizaines n'est pas décalée. Quel est le résultat juste ?`,
+          `${P.nom} a posé ${a} × ${b} en deux lignes, mais la seconde commence sous les unités. ${P.Il} trouve ${sansDecalage}. Que fallait-il trouver ?`,
+          `Le robot de la classe pose ${a} × ${b} sans décaler sa deuxième ligne et affiche ${sansDecalage}. Quel est le bon résultat ?`,
+          `Sur la feuille de ${P.nom}, ${a} × ${b} = ${sansDecalage} : la deuxième ligne n'a pas été décalée d'une colonne. Corrige le résultat.`,
+          `Dans la correction, ${a} × ${b} = ${sansDecalage} est barré en rouge : la ligne des dizaines n'était pas décalée. Quel est le bon produit ?`,
+          `${P.nom} additionne ${a * u} et ${a * d} pour calculer ${a} × ${b}, et trouve ${sansDecalage}. Quel résultat aurait-${P.il} dû trouver ?`,
+          `« ${a} × ${b} = ${sansDecalage} », dit ${P.nom}. Mais sa deuxième ligne n'est pas décalée. Quel est le produit exact ?`,
+          `En posant ${a} × ${b}, ${P.nom} a aligné ses deux lignes à droite et trouve ${sansDecalage}. Quel est le bon résultat ?`,
+          `Un calcul posé donne ${a} × ${b} = ${sansDecalage}, sans décalage de la deuxième ligne. Retrouve le résultat juste.`,
+        ]),
         format: "qcm",
         choices: makeChoices(String(produit), [
           String(sansDecalage),
@@ -831,6 +1930,45 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${u} × ${a} = ${a * u}, c'est juste. Mais le ${d} de ${b} vaut ${d * 10}, pas ${d} : sa ligne est ${d * 10} × ${a} = ${a * d * 10}, et non ${a * d}. Le total est ${a * u} + ${a * d * 10} = ${produit}.`,
           `${a} × ${b} = ${produit}.`,
         ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "ce2_multiplication_posee_tpl_9",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_posee",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Pose le nombre à deux chiffres en dessous : deux lignes, la seconde décalée.",
+    tags: ["ce2", "multiplication", "posee", "deux_chiffres", "probleme", "template", "canvas"],
+    generate: () => {
+      const a = randomInt(23, 98);
+      const b = randomInt(12, 39);
+      const u = b % 10;
+      const d = Math.floor(b / 10);
+      const produit = a * b;
+      const s = randomChoice(LOTS);
+      return {
+        text: enonceLots(s, a, b),
+        format: "short",
+        expected: [String(produit)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Quand des contenants reçoivent tous la même quantité, on multiplie ; par un nombre à deux chiffres, la multiplication posée a deux lignes.",
+          "On multiplie par les unités, puis par les dizaines en décalant d'un rang, puis on additionne les deux lignes.",
+          `${a} × ${b} : ${u} × ${a} = ${a * u}. Puis ${d} dizaine${d > 1 ? "s" : ""} : ${d * 10} × ${a} = ${a * d * 10}. On additionne : ${a * u} + ${a * d * 10} = ${produit}.`,
+          `Il y a ${produit} ${s.objet[1]}.`,
+        ),
+        canvas: calculPose({
+          operation: "multiplication",
+          numbers: [String(a), String(b)],
+          result: String(produit),
+          display: { showResult: false, showRetenues: false },
+        }),
       };
     },
   },
@@ -941,8 +2079,20 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const a = randomInt(3, 9);
       const b = randomInt(4, 25);
       const produit = a * b;
+      const P = tirePrenom();
+      const intro = randomChoice(["", "Vocabulaire. ", "Attention au mot. "]);
+      const question = randomChoice([
+        `Quel est le produit de ${a} et de ${b} ?`,
+        `Calcule le produit de ${a} par ${b}.`,
+        `Le produit de ${a} et de ${b}, c'est combien ?`,
+        `Donne le produit des nombres ${a} et ${b}.`,
+        `${P.nom} doit trouver le produit de ${a} et de ${b}. Que doit-${P.il} répondre ?`,
+        `Quel nombre est le produit de ${a} par ${b} ?`,
+        `${a} et ${b} sont les facteurs d'une multiplication. Quel est son produit ?`,
+        `Que vaut le produit de ${a} et de ${b} ?`,
+      ]);
       return {
-        text: `Quel est le produit de ${a} et de ${b} ?`,
+        text: `${intro}${question}`,
         format: "qcm",
         choices: makeChoices(String(produit), [
           String(a + b),
@@ -978,8 +2128,25 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const n = randomInt(3, 9);
       const k = randomInt(3, 9);
       const multiple = n * k;
+      const s = randomChoice(GROUPES);
+      const P = tirePrenom();
       return {
-        text: `Lequel de ces nombres est un multiple de ${n} ?`,
+        text:
+          Math.random() < 0.5
+            ? randomChoice([
+                `${cap(s.lieu)}, on veut faire des ${s.contenant[1]} de ${n} ${s.objet[1]}, sans qu'il en reste. Lequel de ces nombres ${de(s.objet[1])} convient ?`,
+                `${cap(s.lieu)}, on ${s.verbe} ${n} ${s.objet[1]} ${s.prep} chaque ${s.contenant[0]}, et il ne reste rien à ranger. Combien ${de(s.objet[1])} peut-il y avoir en tout ?`,
+              ])
+            : randomChoice([
+                `Lequel de ces nombres est un multiple de ${n} ?`,
+                `Parmi ces nombres, lequel est un multiple de ${n} ?`,
+                `Quel nombre est un multiple de ${n} ?`,
+                `${P.nom} cherche un multiple de ${n}. Lequel doit-${P.il} choisir ?`,
+                `Coche le seul multiple de ${n}.`,
+                `Quel nombre est dans la table de ${n} ?`,
+                `En comptant de ${n} en ${n} depuis 0, quel nombre va-t-on dire ?`,
+                `Un seul de ces nombres est un multiple de ${n}. Lequel ?`,
+              ]),
         format: "qcm",
         choices: makeChoices(String(multiple), [
           String(multiple + 1),
@@ -994,6 +2161,213 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `On parcourt la table de ${n} et on cherche lequel des nombres proposés y tombe.`,
           `${n} × ${k} = ${multiple} : ${multiple} est bien un multiple de ${n}. Les trois autres tombent à côté de la table — juste à côté, mais à côté.`,
           `C'est ${multiple}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_vocabulaire_tpl_3",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_vocabulaire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Les nombres qu'on multiplie sont les facteurs ; le résultat est le produit.",
+    tags: ["ce2", "multiplication", "vocabulaire", "facteur", "produit", "qcm", "template"],
+    generate: () => {
+      const a = randomInt(3, 9);
+      let b = randomInt(4, 12);
+      if (b === a) b = a + 1;
+      const p = a * b;
+      const P = tirePrenom();
+      const intro = randomChoice([
+        `Au tableau, on lit ${a} × ${b} = ${p}.`,
+        `${P.nom} écrit l'égalité ${a} × ${b} = ${p}.`,
+        `Dans son cahier, ${P.nom} a noté ${a} × ${b} = ${p}.`,
+        `On sait que ${a} × ${b} = ${p}.`,
+        `Voici une multiplication : ${a} × ${b} = ${p}.`,
+      ]);
+      const sorte = randomChoice(["nomProduit", "nomFacteur", "facteurs", "produit"] as const);
+      const q =
+        sorte === "nomProduit"
+          ? {
+              question: randomChoice([`Comment appelle-t-on le nombre ${p} ?`, `Quel nom donne-t-on à ${p} dans cette égalité ?`]),
+              correct: "le produit",
+              pieges: ["un facteur", "la somme", "un terme"],
+              conclusion: `${p} est le produit.`,
+            }
+          : sorte === "nomFacteur"
+            ? {
+                question: randomChoice([`Comment appelle-t-on le nombre ${a} ?`, `Quel nom donne-t-on à ${a} dans cette égalité ?`]),
+                correct: "un facteur",
+                pieges: ["le produit", "un terme", "la différence"],
+                conclusion: `${a} est un facteur.`,
+              }
+            : sorte === "facteurs"
+              ? {
+                  question: randomChoice(["Quels sont les facteurs de cette multiplication ?", "Quels nombres sont les facteurs ?"]),
+                  correct: `${a} et ${b}`,
+                  pieges: [`${p} seulement`, `${a} et ${p}`, `${b} et ${p}`],
+                  conclusion: `Les facteurs sont ${a} et ${b}.`,
+                }
+              : {
+                  question: randomChoice(["Quel est le produit ?", "Quel nombre est le produit dans cette égalité ?"]),
+                  correct: String(p),
+                  pieges: [String(a), String(b), String(a + b)],
+                  conclusion: `Le produit est ${p}.`,
+                };
+      return {
+        text: `${intro} ${q.question}`,
+        format: "qcm",
+        choices: makeChoices(q.correct, q.pieges),
+        expected: [q.correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Dans une multiplication, les nombres qu'on multiplie s'appellent les facteurs ; le résultat s'appelle le produit.",
+          "On repère ce qui est multiplié, puis ce qui est obtenu.",
+          `Dans ${a} × ${b} = ${p}, ${a} et ${b} sont les facteurs et ${p} est le produit. « Terme » et « somme » sont des mots de l'addition.`,
+          q.conclusion,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_vocabulaire_tpl_4",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_vocabulaire",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Le produit est le résultat ; il manque un des nombres qu'on a multipliés.",
+    tags: ["ce2", "multiplication", "vocabulaire", "facteur", "template"],
+    generate: () => {
+      const a = randomInt(3, 9);
+      const k = randomInt(2, 10);
+      const p = a * k;
+      const P = tirePrenom();
+      const intro = randomChoice(["", "Devinette. ", "Défi du jour. "]);
+      const question = randomChoice([
+        `Le produit de ${a} et d'un autre nombre est ${p}. Quel est cet autre nombre ?`,
+        `${P.nom} multiplie ${a} par un nombre et obtient le produit ${p}. Quel est ce nombre ?`,
+        `${a} est un facteur d'une multiplication dont le produit est ${p}. Quel est l'autre facteur ?`,
+        `Le produit vaut ${p} et l'un des facteurs vaut ${a}. Quel est l'autre facteur ?`,
+        `Complète avec le facteur qui manque : ${a} × … = ${p}.`,
+        `Trouve le second facteur : le produit de ${a} et de ce facteur est ${p}.`,
+      ]);
+      return {
+        text: `${intro}${question}`,
+        format: "short",
+        expected: [String(k)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Les facteurs sont les nombres qu'on multiplie ; le produit est le résultat.",
+          `On cherche, dans la table de ${a}, le nombre qui donne ${p}.`,
+          `${a} × ${k} = ${p} : l'autre facteur est ${k}.`,
+          `L'autre facteur est ${k}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_vocabulaire_tpl_5",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_vocabulaire",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Trois des nombres sont dans la table. Cherche l'intrus.",
+    tags: ["ce2", "multiplication", "vocabulaire", "multiple", "intrus", "qcm", "template"],
+    generate: () => {
+      const n = randomInt(3, 9);
+      // Trois multiples différents, et un intrus voisin d'un multiple.
+      const ks = shuffle([2, 3, 4, 5, 6, 7, 8, 9, 10]).slice(0, 4);
+      const multiples = ks.slice(0, 3).map((k) => String(n * k));
+      const intrus = n * ks[3] + randomChoice([1, -1, 2]);
+      const s = randomChoice(GROUPES);
+      const P = tirePrenom();
+      const text =
+        Math.random() < 0.5
+          ? randomChoice([
+              `${cap(s.lieu)}, on fait des ${s.contenant[1]} de ${n} ${s.objet[1]}. Avec lequel de ces nombres ${de(s.objet[1])} en restera-t-il ?`,
+              `${cap(s.lieu)}, ${P.nom} veut mettre ${n} ${s.objet[1]} ${s.prep} chaque ${s.contenant[0]}, sans qu'il en reste. Lequel de ces nombres ${de(s.objet[1])} ne convient pas ?`,
+            ])
+          : randomChoice([
+              `Lequel de ces nombres n'est PAS un multiple de ${n} ?`,
+              `Parmi ces nombres, lequel n'est pas dans la table de ${n} ?`,
+              `Trouve l'intrus : trois de ces nombres sont des multiples de ${n}, pas le quatrième. Lequel ?`,
+              `${P.nom} a écrit des multiples de ${n}, mais s'est trompé${P.il === "elle" ? "e" : ""} une fois. Quel nombre n'est pas un multiple de ${n} ?`,
+              `Quel nombre ne tombe pas juste dans la table de ${n} ?`,
+              `En comptant de ${n} en ${n} depuis 0, quel nombre ne dira-t-on jamais ?`,
+              `Un seul de ces nombres n'est pas un résultat de la table de ${n}. Lequel ?`,
+            ]);
+      return {
+        text,
+        format: "qcm",
+        choices: makeChoices(String(intrus), multiples),
+        expected: [String(intrus)],
+        comparator: "mcq_exact",
+        explanation: exp(
+          `Un multiple de ${n} est un nombre qu'on obtient dans la table de ${n}.`,
+          `On cherche chaque nombre dans la table de ${n}.`,
+          `${ks.slice(0, 3).map((k) => `${n} × ${k} = ${n * k}`).join(", ")} : ces trois-là sont des multiples de ${n}. ${intrus} tombe entre deux résultats de la table.`,
+          `L'intrus est ${intrus}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_vocabulaire_tpl_6",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_vocabulaire",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Essaie chaque proposition : dans quelle table le nombre tombe-t-il juste ?",
+    tags: ["ce2", "multiplication", "vocabulaire", "multiple", "qcm", "template"],
+    generate: () => {
+      const n = randomInt(3, 9);
+      const k = randomInt(3, 9);
+      const p = n * k;
+      // Les pièges ne divisent pas p : un seul choix est juste.
+      const pieges = [2, 3, 4, 5, 6, 7, 8, 9, 10].filter((x) => x !== n && p % x !== 0).map(String);
+      const s = randomChoice(GROUPES);
+      const P = tirePrenom();
+      // Une fois sur deux, la question est racontée.
+      const text =
+        Math.random() < 0.5
+          ? randomChoice([
+              `${cap(s.lieu)}, on répartit ${p} ${s.objet[1]} en ${s.contenant[1]} identiques, sans qu'il en reste. Combien peut-il y en avoir ${s.prep} chaque ${s.contenant[0]} ?`,
+              `${cap(s.lieu)}, ${P.nom} veut répartir ${p} ${s.objet[1]} sans reste, le même nombre ${s.prep} chaque ${s.contenant[0]}. Lequel de ces nombres peut-${P.il} mettre ${s.prep} chaque ${s.contenant[0]} ?`,
+            ])
+          : randomChoice([
+              `${p} est un multiple de quel nombre ?`,
+              `${p} est dans la table de quel nombre ?`,
+              `De quel nombre ${p} est-il un multiple ?`,
+              `Parmi ces nombres, lequel a ${p} dans sa table ?`,
+              `Dans quelle table trouve-t-on ${p} ?`,
+              `${p} tombe juste dans la table de quel nombre ?`,
+              `${P.nom} dit que ${p} est un multiple d'un de ces nombres. Lequel ?`,
+              `On peut écrire ${p} = … × un nombre entier. Quel nombre peut remplacer les points ?`,
+            ]);
+      return {
+        text,
+        format: "qcm",
+        choices: makeChoices(String(n), pieges),
+        expected: [String(n)],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Un nombre est un multiple de n s'il est dans la table de n.",
+          "On cherche, parmi les nombres proposés, celui dont la table contient le nombre.",
+          `${n} × ${k} = ${p} : ${p} est dans la table de ${n}. Les autres propositions ne tombent pas juste.`,
+          `${p} est un multiple de ${n}.`,
         ),
       };
     },
@@ -1023,11 +2397,11 @@ export const multiplicationBank: TutorBankItemV4[] = [
     ],
     expected: ["elles deviennent des dizaines"],
     comparator: "mcq_exact",
-    hint: "10 fois plus grand, c'est un rang plus haut.",
+    hint: "Dix fois plus grand, c'est une colonne plus à gauche.",
     explanation: exp(
-      "Multiplier par 10, c'est rendre chaque chiffre dix fois plus grand : il monte d'un rang.",
-      "On fait glisser tous les chiffres d'une place vers la gauche, et un zéro vient occuper les unités.",
-      "3 × 10 = 30 : les 3 unités sont devenues 3 dizaines. Le zéro n'est pas « ajouté », il remplit la place des unités laissée vide.",
+      "Dans un nombre, chaque chiffre vaut selon sa colonne : unités, dizaines, centaines, milliers.",
+      "Multiplier par 10, c'est rendre chaque chiffre dix fois plus grand : il monte d'une colonne.",
+      "Pour 3 × 10 : 3 unités deviennent 3 dizaines : 30.",
       "Les unités deviennent des dizaines.",
     ),
     tags: ["ce2", "multiplication", "par_10", "definition", "qcm"],
@@ -1045,11 +2419,11 @@ export const multiplicationBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["4700"],
     comparator: "number_equal",
-    hint: "Chaque chiffre monte de DEUX rangs.",
+    hint: "Chaque chiffre monte de DEUX colonnes.",
     explanation: exp(
-      "Multiplier par 100, c'est faire monter chaque chiffre de deux rangs.",
-      "Les unités deviennent des centaines, les dizaines des milliers, et deux zéros occupent les places libérées.",
-      "Les 7 unités deviennent 7 centaines et les 4 dizaines deviennent 4 milliers : 4700.",
+      "Dans un nombre, chaque chiffre vaut selon sa colonne : unités, dizaines, centaines, milliers.",
+      "Multiplier par 100, c'est rendre chaque chiffre cent fois plus grand : il monte de deux colonnes.",
+      "4 dizaines deviennent 4 milliers, 7 unités deviennent 7 centaines : 4700.",
       "47 × 100 = 4700.",
     ),
     tags: ["ce2", "multiplication", "par_100"],
@@ -1067,11 +2441,11 @@ export const multiplicationBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["100"],
     comparator: "number_equal",
-    hint: "Dix dizaines, cela porte un nom.",
+    hint: "Le 1 de 10 est une dizaine. Que devient-il, dix fois plus grand ?",
     explanation: exp(
-      "Multiplier par 10 fait monter chaque chiffre d'un rang.",
-      "On applique la règle à 10 : son 1 est une dizaine, il devient une centaine.",
-      "10 × 10 = 100. Dix paquets de dix font cent : c'est ce que montre une plaque de cent carreaux, dix rangées de dix.",
+      "Dans un nombre, chaque chiffre vaut selon sa colonne : unités, dizaines, centaines, milliers.",
+      "Multiplier par 10, c'est rendre chaque chiffre dix fois plus grand : il monte d'une colonne.",
+      "Dans 10, le 1 est une dizaine : 1 dizaine devient 1 centaine : 100. C'est ce que montre une plaque de cent carreaux, dix rangées de dix.",
       "10 × 10 = 100.",
     ),
     tags: ["ce2", "multiplication", "par_10", "remarquable"],
@@ -1085,21 +2459,27 @@ export const multiplicationBank: TutorBankItemV4[] = [
     microId: "ce2_multiplication_10_100",
     difficulty: 2,
     theme: "neutral",
-    hint: "Chaque chiffre monte d'un rang par 10, de deux rangs par 100.",
+    hint: "Chaque chiffre monte d'une colonne par 10, de deux colonnes par 100.",
     tags: ["ce2", "multiplication", "par_10", "template"],
     generate: () => {
       const facteur = randomChoice([10, 100]);
       const n = facteur === 100 ? randomInt(2, 99) : randomInt(2, 999);
       const produit = n * facteur;
+      const [a, b] = Math.random() < 0.3 ? [facteur, n] : [n, facteur];
       return {
-        text: `Combien font ${n} × ${facteur} ?`,
+        text: randomChoice([
+          enonceProduit(a, b),
+          enonceProduit(a, b),
+          `Rends ${n} ${facteur === 10 ? "dix" : "cent"} fois plus grand. Quel nombre obtiens-tu ?`,
+          `Quel nombre est ${facteur === 10 ? "dix" : "cent"} fois plus grand que ${n} ?`,
+        ]),
         format: "short",
         expected: [String(produit)],
         comparator: "number_equal",
         explanation: exp(
-          `Multiplier par ${facteur}, c'est faire monter chaque chiffre de ${facteur === 10 ? "un rang" : "deux rangs"}.`,
-          "On fait glisser les chiffres vers la gauche, et les places libérées sont occupées par des zéros.",
-          `Les ${n % 10} unités de ${n} deviennent ${n % 10} ${facteur === 10 ? "dizaines" : "centaines"}, et ainsi de suite : ${n} × ${facteur} = ${produit}.`,
+          DEF_COLONNES,
+          methode10(facteur),
+          calcul10(n, facteur),
           `${n} × ${facteur} = ${produit}.`,
         ),
       };
@@ -1114,22 +2494,150 @@ export const multiplicationBank: TutorBankItemV4[] = [
     microId: "ce2_multiplication_10_100",
     difficulty: 4,
     theme: "neutral",
-    hint: "Combien de rangs les chiffres ont-ils monté ?",
+    hint: "De combien de colonnes les chiffres ont-ils monté ?",
     tags: ["ce2", "multiplication", "par_10", "template"],
     generate: () => {
       const facteur = randomChoice([10, 100]);
       const n = facteur === 100 ? randomInt(2, 99) : randomInt(2, 999);
       const produit = n * facteur;
+      const P = tirePrenom();
       return {
-        text: `Par combien faut-il multiplier ${n} pour obtenir ${produit} ?`,
+        text: randomChoice([
+          `Par combien faut-il multiplier ${n} pour obtenir ${produit} ?`,
+          `Complète : ${n} × … = ${produit}`,
+          `${P.nom} transforme ${n} en ${produit} avec une seule multiplication. Par quel nombre a-t-${P.il} multiplié ?`,
+          `De ${n} à ${produit}, par combien a-t-on multiplié ?`,
+          `Quel nombre manque ? ${n} × ? = ${produit}`,
+          `${produit} est combien de fois plus grand que ${n} ?`,
+          `On a multiplié ${n} par 10 ou par 100, et on a trouvé ${produit}. Par lequel ?`,
+          `Les chiffres de ${n} sont devenus ${produit}. Par combien a-t-on multiplié ?`,
+          `La machine à multiplier transforme ${n} en ${produit}. Multiplie-t-elle par 10 ou par 100 ?`,
+          `${P.nom} écrit ${n}, puis ${produit}. De combien de colonnes les chiffres ont-ils monté ? Donne le nombre par lequel on a multiplié.`,
+          `Quel est le facteur manquant : ${n} × … = ${produit} ?`,
+          `${n} × 10 ou ${n} × 100 : lequel donne ${produit} ? Par quel nombre faut-il multiplier ?`,
+        ]),
         format: "short",
         expected: [String(facteur)],
         comparator: "number_equal",
         explanation: exp(
-          "Multiplier par 10 fait monter les chiffres d'un rang, par 100 de deux rangs.",
-          "On compare les deux écritures et on compte les rangs gagnés.",
-          `De ${n} à ${produit}, les chiffres ont monté de ${facteur === 10 ? "un rang" : "deux rangs"} : on a multiplié par ${facteur}.`,
+          DEF_COLONNES,
+          "Multiplier par 10, c'est rendre chaque chiffre dix fois plus grand : il monte d'une colonne. Par 100, il monte de deux colonnes. On compte les colonnes gagnées.",
+          `${calcul10(n, facteur)} Chaque chiffre a monté de ${facteur === 10 ? "une colonne" : "deux colonnes"} : on a multiplié par ${facteur}.`,
           `Il faut multiplier par ${facteur}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_10_100_tpl_3",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_10_100",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Des paquets de 10 ou de 100 : chaque chiffre monte d'une ou de deux colonnes.",
+    tags: ["ce2", "multiplication", "par_10", "par_100", "probleme", "template"],
+    generate: () => {
+      const s = randomChoice(PAR_10_100);
+      const n = randomInt(2, 99);
+      const total = n * s.par;
+      const lots = pl(n, s.lot);
+      const P = tirePrenom();
+      const text = randomChoice([
+        `${cap(s.un)} ${s.lot[0]} contient ${s.par} ${s.objet}. Combien ${de(s.objet)} dans ${n} ${lots} ?`,
+        `${P.nom} achète ${n} ${lots} de ${s.par} ${s.objet}. Combien ${de(s.objet)} rapporte-t-${P.il} ?`,
+        `On réunit ${n} ${lots} de ${s.par} ${s.objet}. Quel est le nombre total ${de(s.objet)} ?`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation: exp(
+          `On multiplie le nombre de lots par ${s.par}. ${DEF_COLONNES}`,
+          methode10(s.par),
+          `${n} × ${s.par} : ${calcul10(n, s.par)}`,
+          `Il y a ${total} ${s.objet}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_10_100_tpl_4",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_10_100",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Fais redescendre chaque chiffre d'une colonne (pour 10) ou de deux colonnes (pour 100).",
+    tags: ["ce2", "multiplication", "par_10", "par_100", "facteur_manquant", "template"],
+    generate: () => {
+      const s = randomChoice(PAR_10_100);
+      const n = randomInt(2, 99);
+      const total = n * s.par;
+      const P = tirePrenom();
+      const raconte = Math.random() < 0.5;
+      const text = raconte
+        ? randomChoice([
+            `Pour avoir ${total} ${s.objet}, combien ${de(s.lot[1])} de ${s.par} faut-il ?`,
+            `${P.nom} a ${total} ${s.objet} et les range en ${s.lot[1]} de ${s.par}. Combien ${de(s.lot[1])} remplit-${P.il} ?`,
+          ])
+        : randomChoice([
+            `Quel nombre multiplié par ${s.par} donne ${total} ?`,
+            `Complète : … × ${s.par} = ${total}`,
+            `${P.nom} pense à un nombre. Multiplié par ${s.par}, il donne ${total}. Quel est ce nombre ?`,
+            `${total} est ${s.par === 10 ? "dix" : "cent"} fois plus grand qu'un nombre. Lequel ?`,
+            `Quel nombre manque ? ? × ${s.par} = ${total}`,
+            `La machine à multiplier par ${s.par} a affiché ${total}. Quel nombre y avait-on mis ?`,
+            `Par quel nombre faut-il multiplier ${s.par} pour obtenir ${total} ?`,
+          ]);
+      return {
+        text,
+        format: "short",
+        expected: [String(n)],
+        comparator: "number_equal",
+        explanation: exp(
+          `${methode10(s.par)} ${DEF_COLONNES}`,
+          `On cherche le nombre dont les chiffres, une fois montés de ${s.par === 10 ? "une colonne" : "deux colonnes"}, donnent ${total}.`,
+          `${n} × ${s.par} : ${calcul10(n, s.par)}`,
+          raconte ? `Il faut ${n} ${pl(n, s.lot)}.` : `Le nombre cherché est ${n}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_10_100_tpl_5",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_10_100",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Ne compte pas les zéros : regarde de combien de colonnes chaque chiffre monte.",
+    tags: ["ce2", "multiplication", "par_10", "par_100", "vrai_faux", "piege", "qcm", "template"],
+    generate: () => {
+      const facteur = randomChoice([10, 100]);
+      // Un nombre qui finit par 0, une fois sur deux : c'est là que la
+      // recette « on ajoute un zéro » se perd.
+      const n = Math.random() < 0.5 ? 10 * randomInt(2, 9) : facteur === 100 ? randomInt(12, 99) : randomInt(12, 999);
+      const p = n * facteur;
+      const q = affirmation(n, facteur, [p * 10, p / 10, n * (facteur === 10 ? 100 : 10), p + facteur, p + 1]);
+      return {
+        text: q.text,
+        format: "qcm",
+        choices: q.choices,
+        expected: q.expected,
+        comparator: "mcq_exact",
+        explanation: exp(
+          DEF_COLONNES,
+          `${methode10(facteur)} On refait le calcul chiffre par chiffre, puis on compare.`,
+          `${calcul10(n, facteur)} ${q.juste ? `Le résultat annoncé, ${q.w}, est le bon.` : `Le résultat annoncé, ${q.w}, est faux.`}`,
+          q.juste ? `C'est juste : ${n} × ${facteur} = ${p}.` : `C'est faux : ${n} × ${facteur} = ${p}.`,
         ),
       };
     },
@@ -1195,20 +2703,46 @@ export const multiplicationBank: TutorBankItemV4[] = [
     hint: "Cherche d'abord le contenu d'un seul rang.",
     tags: ["ce2", "multiplication", "defi", "template"],
     generate: () => {
-      const rangees = randomInt(4, 9);
-      const parRangee = randomInt(4, 9);
-      const boites = randomInt(2, 5);
-      const total = rangees * parRangee * boites;
+      // Trois étages emboîtés : des grands contenants, des rangs, des objets.
+      const s = randomChoice([
+        { grand: ["boîte", "boîtes"], v1: "a", ligne: ["rangée", "rangées"], v2: "a", objet: ["œuf", "œufs"] },
+        { grand: ["immeuble", "immeubles"], v1: "a", ligne: ["étage", "étages"], v2: "a", objet: ["fenêtre", "fenêtres"] },
+        { grand: ["tablette", "tablettes"], v1: "a", ligne: ["rangée", "rangées"], v2: "a", objet: ["carré", "carrés"] },
+        { grand: ["salle de cinéma", "salles de cinéma"], v1: "compte", ligne: ["rangée", "rangées"], v2: "compte", objet: ["fauteuil", "fauteuils"] },
+        { grand: ["train", "trains"], v1: "tire", ligne: ["wagon", "wagons"], v2: "a", objet: ["fenêtre", "fenêtres"] },
+        { grand: ["armoire", "armoires"], v1: "a", ligne: ["étagère", "étagères"], v2: "porte", objet: ["classeur", "classeurs"] },
+        { grand: ["jardin", "jardins"], v1: "a", ligne: ["allée", "allées"], v2: "est bordée de", objet: ["rosier", "rosiers"] },
+        { grand: ["camion", "camions"], v1: "transporte", ligne: ["caisse", "caisses"], v2: "contient", objet: ["bouteille", "bouteilles"] },
+        { grand: ["album", "albums"], v1: "a", ligne: ["page", "pages"], v2: "porte", objet: ["autocollant", "autocollants"] },
+        { grand: ["carton", "cartons"], v1: "contient", ligne: ["paquet", "paquets"], v2: "contient", objet: ["biscuit", "biscuits"] },
+        { grand: ["étagère", "étagères"], v1: "porte", ligne: ["bocal", "bocaux"], v2: "contient", objet: ["bonbon", "bonbons"] },
+        { grand: ["parking", "parkings"], v1: "a", ligne: ["niveau", "niveaux"], v2: "a", objet: ["place", "places"] },
+      ] as const);
+      const r = randomInt(3, 9);
+      const c = randomInt(3, 9);
+      const k = randomInt(2, 5);
+      const parGrand = r * c;
+      const total = parGrand * k;
+      const P = tirePrenom();
+      const lignes = s.ligne[1];
+      const objets = s.objet[1];
+      const fem = ["boîte", "tablette", "salle de cinéma", "armoire", "étagère"].includes(s.grand[0]);
+      const unSeul = fem ? `une seule ${s.grand[0]}` : `un seul ${s.grand[0]}`;
+      const text = randomChoice([
+        `Chaque ${s.grand[0]} ${s.v1} ${r} ${lignes}, et chaque ${s.ligne[0]} ${s.v2} ${c} ${objets}. Combien ${de(objets)} dans ${k} ${s.grand[1]} ?`,
+        `${P.nom} regarde ${k} ${s.grand[1]} : ${r} ${lignes} par ${s.grand[0]}, ${c} ${objets} par ${s.ligne[0]}. Combien ${de(objets)} en tout ?`,
+        `Il y a ${k} ${s.grand[1]}. Chaque ${s.grand[0]} ${s.v1} ${r} ${lignes} de ${c} ${objets}. Quel est le nombre total ${de(objets)} ?`,
+      ]);
       return {
-        text: `Dans une boîte, les œufs sont rangés en ${rangees} rangées de ${parRangee}. Combien d'œufs dans ${boites} boîtes ?`,
+        text,
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
         explanation: exp(
-          "Un problème à deux étapes se résout dans l'ordre : d'abord une boîte, ensuite toutes les boîtes.",
-          "On multiplie les rangées par leur contenu, puis le résultat par le nombre de boîtes.",
-          `Une boîte contient ${rangees} × ${parRangee} = ${rangees * parRangee} œufs. Pour ${boites} boîtes : ${rangees * parRangee} × ${boites} = ${total}.`,
-          `Il y a ${total} œufs.`,
+          `Un problème à deux étapes se résout dans l'ordre : d'abord ${unSeul}, ensuite le tout.`,
+          `On multiplie les ${lignes} par leur contenu, puis le résultat par le nombre ${de(s.grand[1])}.`,
+          `Pour ${unSeul} : ${r} × ${c} = ${parGrand} ${objets}. Pour ${k} ${s.grand[1]} : ${parGrand} × ${k} = ${total}.`,
+          `Il y a ${total} ${objets}.`,
         ),
       };
     },
@@ -1225,19 +2759,128 @@ export const multiplicationBank: TutorBankItemV4[] = [
     hint: "Décompose : le nombre rond d'abord, le reste ensuite.",
     tags: ["ce2", "multiplication", "defi", "template"],
     generate: () => {
-      const n = randomInt(11, 19);
+      // 11 à 19, ou 21 à 29 : le nombre rond est 10 ou 20.
+      const rond = randomChoice([10, 20]);
+      const u = randomInt(1, 9);
+      const n = rond + u;
       const b = randomInt(3, 9);
       const produit = n * b;
+      const P = tirePrenom();
+      const intro = randomChoice(["", "Calcul mental. ", "Sans poser. "]);
+      const question = randomChoice([
+        `Pour calculer ${n} × ${b} de tête, on décompose ${n} en ${rond} + ${u}. Combien font ${n} × ${b} ?`,
+        `${P.nom} calcule ${n} × ${b} de tête en coupant ${n} en ${rond} et ${u}. Quel résultat trouve-t-${P.il} ?`,
+        `Calcule ${n} × ${b} : pense à ${rond} × ${b}, puis à ${u} × ${b}.`,
+        `${n} × ${b}, c'est ${rond} × ${b} plus ${u} × ${b}. Combien cela fait-il ?`,
+        `Combien font ${n} × ${b} ? Astuce : ${n} = ${rond} + ${u}.`,
+        `De tête : ${n} × ${b} = ? Commence par ${rond} × ${b}.`,
+      ]);
       return {
-        text: `Pour calculer ${n} × ${b} de tête, on décompose ${n} en 10 + ${n - 10}. Combien font ${n} × ${b} ?`,
+        text: `${intro}${question}`,
         format: "short",
         expected: [String(produit)],
         comparator: "number_equal",
         explanation: exp(
           "Un nombre décomposé se multiplie morceau par morceau, puis on rassemble.",
           "On multiplie chaque morceau par le même nombre, puis on additionne les deux résultats.",
-          `10 × ${b} = ${10 * b}, et ${n - 10} × ${b} = ${(n - 10) * b}. On additionne : ${10 * b} + ${(n - 10) * b} = ${produit}.`,
+          `${rond} × ${b} = ${rond * b}, et ${u} × ${b} = ${u * b}. On additionne : ${rond * b} + ${u * b} = ${produit}.`,
           `${n} × ${b} = ${produit}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_defi_tpl_3",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Calcule les deux produits avec un appui sûr, puis compare.",
+    tags: ["ce2", "multiplication", "defi", "comparer", "qcm", "template"],
+    generate: () => {
+      const a = randomInt(11, 30);
+      const b = randomChoice([2, 4, 6, 8]);
+      // Trois cas : un facteur bouge d'un cran dans chaque sens, ou bien on
+      // double l'un et on prend la moitié de l'autre — et là, c'est égal.
+      const cas = randomChoice(["plus", "moins", "double"] as const);
+      const [c, d] = cas === "plus" ? [a + 1, b - 1] : cas === "moins" ? [a - 1, b + 1] : [a * 2, b / 2];
+      const A = `${a} × ${b}`;
+      const B = `${c} × ${d}`;
+      const pA = a * b;
+      const pB = c * d;
+      const correct = pA === pB ? "ils sont égaux" : pA > pB ? A : B;
+      const P = tirePrenom();
+      const intro = randomChoice(["", "Défi. ", "Sans te presser. "]);
+      const question = randomChoice([
+        `Lequel est le plus grand : ${A} ou ${B} ?`,
+        `${P.nom} hésite entre ${A} et ${B}. Lequel donne le plus grand résultat ?`,
+        `Compare ${A} et ${B}. Quel produit est le plus grand ?`,
+      ]);
+      const [premier, second] = Math.random() < 0.5 ? [A, B] : [B, A];
+      return {
+        text: `${intro}${question.replace(`${A} ou ${B}`, `${premier} ou ${second}`).replace(`${A} et ${B}`, `${premier} et ${second}`)}`,
+        format: "qcm",
+        choices: makeChoices(correct, [A, B, "ils sont égaux", "on ne peut pas savoir"]),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation: exp(
+          "Enlever 1 à un facteur et l'ajouter à l'autre change le produit ; doubler l'un et prendre la moitié de l'autre ne le change pas.",
+          "On calcule chacun des deux produits, puis on compare.",
+          `${A} = ${pA} et ${B} = ${pB}. On compare ${pA} et ${pB}.`,
+          correct === "ils sont égaux" ? `Ils sont égaux : ${pA} dans les deux cas.` : `Le plus grand est ${correct}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "ce2_multiplication_defi_tpl_4",
+    niveau: "ce2",
+    matiere: "maths",
+    notionId: "multiplication",
+    microId: "ce2_multiplication_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Deux achats, deux multiplications, puis une addition.",
+    tags: ["ce2", "multiplication", "defi", "deux_etapes", "monnaie", "template"],
+    generate: () => {
+      const s = randomChoice([
+        { lieu: "à la librairie", o1: "livres", o2: "magazines" },
+        { lieu: "au marché", o1: "melons", o2: "ananas" },
+        { lieu: "au magasin de sport", o1: "paires de chaussettes", o2: "ballons" },
+        { lieu: "à la papeterie", o1: "classeurs", o2: "trousses" },
+        { lieu: "au cinéma", o1: "places", o2: "boissons" },
+        { lieu: "à la fête foraine", o1: "tours de manège", o2: "barbes à papa" },
+        { lieu: "au musée", o1: "billets d'entrée", o2: "cartes postales" },
+        { lieu: "chez le fleuriste", o1: "bouquets", o2: "plantes" },
+        { lieu: "à la piscine", o1: "entrées", o2: "bonnets de bain" },
+        { lieu: "au zoo", o1: "billets", o2: "glaces" },
+        { lieu: "au magasin de jouets", o1: "puzzles", o2: "balles" },
+        { lieu: "à la boulangerie", o1: "tartes", o2: "gâteaux" },
+      ] as const);
+      const a = randomInt(2, 9);
+      const x = randomInt(2, 9);
+      const b = randomInt(2, 9);
+      const y = randomInt(2, 9);
+      const total = a * x + b * y;
+      const P = tirePrenom();
+      const text = randomChoice([
+        `${cap(s.lieu)}, ${P.nom} achète ${a} ${s.o1} à ${x} € pièce et ${b} ${s.o2} à ${y} € pièce. Combien paie-t-${P.il} en tout ?`,
+        `${cap(s.lieu)}, on paie ${a} ${s.o1} à ${x} € pièce et ${b} ${s.o2} à ${y} € pièce. Quel est le prix total, en euros ?`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: [String(total)],
+        comparator: "number_equal",
+        explanation: exp(
+          "Un problème à deux étapes se résout dans l'ordre : chaque achat d'abord, la somme ensuite.",
+          "On multiplie la quantité par le prix pour chaque achat, puis on additionne les deux montants.",
+          `${a} × ${x} = ${a * x} € et ${b} × ${y} = ${b * y} €. On additionne : ${a * x} + ${b * y} = ${total} €.`,
+          `Le total est ${total} €.`,
         ),
       };
     },
