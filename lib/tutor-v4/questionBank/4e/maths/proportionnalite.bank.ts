@@ -2286,6 +2286,17 @@ function formulesFausses(k: number, n: number, m: number) {
   return [`y = x + ${m - n}`, `x = ${k} × y`, `y = ${k + 1} × x`, `y = x ÷ ${k}`];
 }
 
+/**
+ * Les réponses acceptées pour « y = … × x » : le nombre k seul, ou la relation
+ * entière telle qu'un élève l'écrit (Frédéric, 05/10 : « y = 3x » et
+ * « y = 3*x » étaient comptés faux). Les espaces sont ignorés, et « 3*x »,
+ * « 3 × x » valent « 3x » pour le correcteur (lib/answerMatch.ts).
+ */
+function relationAcceptee(k: number) {
+  const formes = [`${k}x`, `${k}.x`, `x*${k}`, `x×${k}`];
+  return [String(k), ...formes, ...formes.map((f) => `y=${f}`)];
+}
+
 /** ★1 — Une seule paire (n ; m) : compléter y = … × x. */
 function genRelationPaire() {
   const s = randomChoice(SITUATIONS_GRAPH);
@@ -2302,7 +2313,7 @@ function genRelationPaire() {
   return {
     text: `${notation(s)} Les deux grandeurs sont proportionnelles. ${donnee} Complète la relation : y = … × x.`,
     format: "short" as const,
-    expected: [String(k)],
+    expected: relationAcceptee(k),
     comparator: "number_equal" as const,
     explanation: expl(
       "deux grandeurs proportionnelles sont reliées par une relation y = k × x, où k est le coefficient de proportionnalité.",
@@ -2359,7 +2370,7 @@ function genRelationTableauCourt() {
         ? `${notation(s)} Ce tableau est un tableau de proportionnalité. Complète la relation : y = … × x.`
         : `${notation(s)} D'après ce tableau de proportionnalité, par quel nombre multiplie-t-on x pour obtenir y ?`,
     format: "short" as const,
-    expected: [String(k)],
+    expected: relationAcceptee(k),
     comparator: "number_equal" as const,
     explanation: expl(
       "deux grandeurs proportionnelles sont reliées par y = k × x.",

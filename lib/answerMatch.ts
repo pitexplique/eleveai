@@ -18,6 +18,16 @@ export function normalizeAnswer(value: string) {
     .replace(/\s+/g, " ");
 }
 
+// 05/10/2026 (Frédéric) : « 7x » et « 7*x » sont la même réponse, partout.
+// On efface le signe fois (*, ×, ·) quand il est suivi d'une lettre ou d'une
+// parenthèse : 7*t → 7t, 2 × (x + 1) → 2(x+1), 3*a*b → 3ab, π × r² → πr².
+// Entre deux nombres (3 × 4) il reste : ce n'est pas une multiplication implicite.
+function sansFoisImplicite(value: string) {
+  return value
+    .replace(/ /g, "")
+    .replace(/([0-9a-zà-öø-ÿα-ω²³)])[*×·](?=[a-zà-öø-ÿα-ω(])/g, "$1");
+}
+
 type NumberWithUnit = { num: number; unit: string };
 
 // « 190cm », « 190 cm », « 12 élèves », « 25 cm² », « 8 m3 », « -1.5 » → nombre
@@ -60,6 +70,9 @@ export function answersMatch(userAnswer: string, expectedAnswer: string) {
 
   // « 190cm » vs « 190 cm » : mêmes caractères une fois les espaces retirés.
   if (user.replace(/ /g, "") === expected.replace(/ /g, "")) return true;
+
+  // « 7*x », « 7 × x » vs « 7x ».
+  if (sansFoisImplicite(user) === sansFoisImplicite(expected)) return true;
 
   const userNumber = Number(user);
   const expectedNumber = Number(expected);
