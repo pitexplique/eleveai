@@ -61,14 +61,23 @@ function description(v) {
   }
   // ⭐ L'URL de la longue est notée dans le manifeste (`url`) dès qu'elle est
   // en ligne : chaque short de la même série la reprend sans copier-coller.
-  if (v.type === "short") {
+  // ⛔ 05/10/2026 : les vidéos parlées de 6e et 4e portent DÉJÀ leurs liens dans
+  // l'accroche (leçon complète, exercices, fiche, coach). Les rajouter ici les
+  // doublait — et un short sans `fiche` finissait sur « coach maths : undefined ».
+  const acc = String(v.accroche || "");
+  if (v.type === "short" && !acc.includes("La leçon complète")) {
     const longue = m.videos.find((x) => x.id === v.renvoie_vers);
     l.push(`La vidéo complète : ${longue?.url || "[coller ici l'URL de la vidéo longue]"}`);
   }
-  if (String(v.fiche || "").includes("/fiches-cours/")) {
+  // La classe se lit dans la série (« Maths 6e » → 6e) ; « seconde » par défaut,
+  // comme avant, pour les séries de seconde qui ne la nomment pas ainsi.
+  const classe = (String(v.serie || "").match(/^Maths (\S+)$/) || [])[1] || "seconde";
+  if (acc.includes("coach-ia") || acc.includes("La leçon complète")) {
+    // liens déjà dans l'accroche
+  } else if (String(v.fiche || "").includes("/fiches-cours/")) {
     l.push(`La fiche de cours : ${v.fiche}`);
-    l.push("S'entraîner avec le coach : https://www.eleveai.fr/coach-ia/maths?classe=seconde");
-  } else {
+    l.push(`S'entraîner avec le coach : https://www.eleveai.fr/coach-ia/maths?classe=${classe}`);
+  } else if (v.fiche) {
     l.push(`S'entraîner sur le coach maths : ${v.fiche}`);
   }
   // Une vidéo d'actualité porte ses sources : elles vont dans la description.

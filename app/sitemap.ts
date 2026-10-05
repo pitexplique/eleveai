@@ -749,6 +749,16 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-10-04",
     },
   ],
+  "/fiches-cours/maths/6e/fraction-calcul": [
+    {
+      // 05/10/2026 : la vidéo PARLÉE du calcul avec les fractions.
+      id: "RYwm7UYg9zk",
+      title: "Calculer avec les fractions — Maths 6e",
+      description:
+        "Prendre une fraction d'un nombre, additionner et soustraire des fractions, le piège 1/2 + 1/3, multiplier une fraction par un entier (6e).",
+      ajoutee: "2026-10-05",
+    },
+  ],
   "/fiches-cours/maths/4e/prop-ratio": [
     {
       // 02/10/2026 : la première vidéo PARLÉE de 4e, née avec la fiche.
