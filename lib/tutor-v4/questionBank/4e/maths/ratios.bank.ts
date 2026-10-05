@@ -1,8 +1,8 @@
 // lib/tutor-v4/questionBank/4e/maths/ratios.bank.ts
 //
 // ⭐ 02/10/2026 — la notion est coupée en deux : ce fichier porte `prop_ratio`
-// (ses quatre micros et son défi) ; les deux défis-ponts ratio → pourcentage
-// sont partis au défi de `prop_pourcentages`.
+// (ses quatre micros et son défi). Les deux défis-ponts ratio → pourcentage,
+// passés au défi de `prop_pourcentages`, en ont été RETIRÉS le 05/10/2026.
 //
 // ⭐ LES CINQ MICROS NEUVES DE `prop_ratio_pourcentage` (28/08/2026). Les
 // trois micros de pourcentage de la notion — `prop_pourcentage`,
@@ -1221,61 +1221,12 @@ export const ratiosBank: TutorBankItemV4[] = [
   },
 
   /* =========================================================================
-     PROP_RATIO_DEFI — ratios ET pourcentages, comme le veut la notion
+     PROP_RATIO_DEFI
+     ⛔ 05/10/2026, Frédéric : « dans les défis de pourcentages ce sont des
+     pourcentages successifs », pas des ratios. Les deux ponts ratio → %
+     (`4e_prop_ratio_defi_tpl_1_recette`, `..._tpl_3_evolution`), versés au
+     défi des pourcentages le 02/10, sont RETIRÉS (l'historique git les garde).
   ========================================================================= */
-  {
-    kind: "template",
-    id: "4e_prop_ratio_defi_tpl_1_recette",
-    niveau: "4e",
-    matiere: "maths",
-    // Un pont ratio → pourcentage : il va au défi des POURCENTAGES (02/10), où
-    // l'élève a déjà vu les ratios. Son `id` ne change pas.
-    notionId: "prop_pourcentages",
-    microId: "prop_pourcentage_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Compte le total des parts, puis ramène la part cherchée à 100.",
-    tags: ["ratio", "pourcentage", "defi", "template"],
-    generate: () => {
-      // ⚠️ Des couples dont la SOMME divise 100 : le pourcentage tombe juste.
-      const [ra, rb] = randomChoice([
-        [1, 3], [3, 1], [1, 4], [4, 1], [2, 3], [3, 2], [1, 9], [3, 7],
-        [7, 3], [9, 11], [7, 13], [3, 17], [1, 19], [11, 14], [6, 19],
-      ] as const);
-      const somme = ra + rb;
-      const d = randomChoice(DUOS);
-      const c: Cote = Math.random() < 0.5 ? "a" : "b";
-      const pX = c === "a" ? ra : rb;
-      const pO = c === "a" ? rb : ra;
-      const pct = (pX * 100) / somme;
-      const leX = leDe(d, c);
-      const lab = `${d.a} : ${d.b}`;
-      const t = randomInt(0, 2);
-      const text =
-        t === 0
-          ? `${d.cadre}, le ratio ${lab} est ${ra} : ${rb}. Quel pourcentage du total ${accordRepresente(leX)} ${leX} ?`
-          : t === 1
-            ? `${d.cadre}, on a ${lab} = ${ra} : ${rb}. Quelle part du total, en pourcentage, revient ${a_(leX)} ?`
-            : `Le ratio ${lab} vaut ${ra} : ${rb} ${cadreMin(d)}. Exprime en pourcentage la part ${deDe(d, c)} dans le total.`;
-      return {
-        text,
-        format: "short",
-        expected: [String(pct), `${pct} %`, `${pct}%`],
-        comparator: "number_equal",
-        explanation:
-          "Définition : un pourcentage est une part rapportée à 100.\n\n" +
-          "Méthode : on compte le total des parts, puis on rapporte la part cherchée à ce total.\n\n" +
-          `Calcul : ${ra} + ${rb} = ${somme} parts. ${cap(leX)} en ${leX.startsWith("les ") ? "occupent" : "occupe"} ${pX}, soit ${pX}/${somme} = ${pct}/100 = ${pct} %.\n\n` +
-          `Conclusion : ⚠️ le piège est de rapporter à l'AUTRE quantité (${pX}/${pO}) au lieu du total.`,
-        // ⭐ Le camembert dit tout : le secteur cherché est visiblement une part
-        // DU DISQUE ENTIER, pas une part du secteur voisin.
-        canvas: camembert([
-          { label: d.a, value: ra, color: "#64748b" },
-          { label: d.b, value: rb, color: "#f59e0b" },
-        ]),
-      };
-    },
-  },
   {
     kind: "template",
     id: "4e_prop_ratio_defi_tpl_2_reunion",
@@ -1328,67 +1279,6 @@ export const ratiosBank: TutorBankItemV4[] = [
           parts: [0, 1, 2].map((n) => ({ label: et[n], unknown: true })),
           question: `ratio ${r}`,
         }),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "4e_prop_ratio_defi_tpl_3_evolution",
-    niveau: "4e",
-    matiere: "maths",
-    // Une évolution en pourcentage appliquée à un ratio : défi des POURCENTAGES.
-    notionId: "prop_pourcentages",
-    microId: "prop_pourcentage_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Applique l'évolution, puis simplifie le nouveau ratio.",
-    tags: ["ratio", "pourcentage", "evolution", "defi", "qcm", "template"],
-    generate: () => {
-      const d = randomChoice(DUOS);
-      const pas = randomChoice(d.pas);
-      const c: Cote = Math.random() < 0.5 ? "a" : "b";
-      const hausse = Math.random() < 0.6;
-      const pctEv = hausse ? randomChoice([10, 20, 50, 100]) : randomChoice([10, 20, 50]);
-      // La quantité qui change est un multiple de 10 : l'évolution tombe juste.
-      const change = randomChoice([10, 20, 30, 40, 50, 60]) * pas;
-      const fixe = randomChoice([15, 25, 35, 45, 12, 18]) * pas;
-      const avant = { a: c === "a" ? change : fixe, b: c === "a" ? fixe : change };
-      const coef = hausse ? 1 + pctEv / 100 : 1 - pctEv / 100;
-      const nouv = Math.round(change * coef);
-      const apres = { a: c === "a" ? nouv : fixe, b: c === "a" ? fixe : nouv };
-      const g = pgcd(apres.a, apres.b);
-      const correct = `${apres.a / g} : ${apres.b / g}`;
-      const g0 = pgcd(avant.a, avant.b);
-      const lab = `${d.a} : ${d.b}`;
-      const evol = estCompte(d)
-        ? `Le nombre ${deDe(d, c)} ${hausse ? "augmente" : "diminue"} de ${pctEv} %.`
-        : `On ${hausse ? "augmente" : "diminue"} la quantité ${deDe(d, c)} de ${pctEv} %.`;
-      const t = randomInt(0, 1);
-      const text =
-        t === 0
-          ? `${situation(d, avant.a, avant.b)} ${evol} Quel est le nouveau ratio ${lab}, simplifié ?`
-          : `${situation(d, avant.a, avant.b)} ${evol} Parmi ces réponses, quel est le ratio ${lab} après ce changement, sous forme simplifiée ?`;
-      return {
-        text,
-        format: "qcm",
-        choices: makeChoices(correct, [
-          `${avant.a / g0} : ${avant.b / g0}`,
-          `${apres.b / g} : ${apres.a / g}`,
-          `${apres.a} : ${apres.b}`,
-          `${apres.a / g} : ${apres.b / g + 1}`,
-          `${apres.a / g + 1} : ${apres.b / g}`,
-          `${pctEv} : 100`,
-        ]),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation:
-          `Définition : ${hausse ? "augmenter" : "diminuer"} de ${pctEv} %, c'est multiplier par ${dec(coef)}.\n\n` +
-          "Méthode : on applique l'évolution à la seule quantité concernée, puis on simplifie le ratio obtenu.\n\n" +
-          `Calcul : ${change} × ${dec(coef)} = ${nouv}. Le ratio ${lab} devient ${apres.a} : ${apres.b}` +
-          (g === 1
-            ? ", déjà sous forme simplifiée.\n\n"
-            : ` ; en divisant les deux nombres par ${g}, on obtient ${correct}.\n\n`) +
-          "Conclusion : ⚠️ l'autre quantité n'a pas bougé — l'évolution ne porte que sur une part, et c'est ce qui change le ratio.",
       };
     },
   },

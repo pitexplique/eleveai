@@ -1193,6 +1193,203 @@ function genSuccessives(memeTaux: boolean) {
   return genNouvelleValeur([10, 20]);
 }
 
+/* ---------- Défis : des pourcentages SUCCESSIFS — 05/10/2026 ----------
+   ⛔ Frédéric : « dans défis ce sont des pourcentages successifs », et aussi
+   « 0,975 correspond à une baisse de ? ». Quatre raisonnements :
+   l'évolution GLOBALE de deux évolutions, l'évolution qui fait REVENIR au
+   départ, la valeur de DÉPART retrouvée à rebours, et le TAUX caché derrière
+   un coefficient à trois décimales. */
+
+/** Nombre à la française jusqu'au millième : 0,975 (fr() s'arrête au centième). */
+function frMillieme(n: number) {
+  return String(Math.round(n * 1000) / 1000).replace(".", ",");
+}
+
+/** « hausse de 21 % », « baisse de 4 % », « aucune évolution ». */
+function libelleEvol(g: number) {
+  if (g === 0) return "aucune évolution : on revient au départ";
+  return g > 0 ? `hausse de ${fr(g)} %` : `baisse de ${fr(-g)} %`;
+}
+
+/** Deux évolutions successives → l'évolution globale, en QCM. */
+function genTauxGlobal() {
+  const taux = [10, 20, 25, 30, 40, 50];
+  for (let essai = 0; essai < 300; essai++) {
+    const s = randomChoice(EVOLUTIONS);
+    const a = randomChoice(taux);
+    const b = randomChoice(taux);
+    const h1 = Math.random() < 0.5;
+    const h2 = Math.random() < 0.5;
+    const c1 = h1 ? 100 + a : 100 - a;
+    const c2 = h2 ? 100 + b : 100 - b;
+    if ((c1 * c2) % 100 !== 0) continue;
+    const g = (c1 * c2) / 100 - 100;
+    const somme = (h1 ? a : -a) + (h2 ? b : -b);
+    if (g === somme) continue; // jamais : un produit n'égale la somme que si un taux est nul
+    const w1 = mots(h1);
+    const w2 = mots(h2);
+    const t = randomInt(0, 2);
+    const text =
+      t === 0
+        ? `${cap(s.nom)} ${w1.verbe} de ${a} %, puis ${w2.verbe} de ${b} %. Quelle est l’évolution globale ?`
+        : t === 1
+          ? `Une ${w1.nomEvol} de ${a} % est suivie d’une ${w2.nomEvol} de ${b} %, sur ${s.nom}. À quelle évolution unique cela revient-il ?`
+          : `En deux temps, ${s.nom} subit une ${w1.nomEvol} de ${a} % puis une ${w2.nomEvol} de ${b} %. Au total, de combien a-t-${s.genre === "m" ? "il" : "elle"} évolué ?`;
+    const correct = libelleEvol(g);
+    const cg = (100 + g) / 100;
+    return {
+      text,
+      format: "qcm" as const,
+      choices: makeChoices(correct, [
+        libelleEvol(somme),
+        libelleEvol(-g),
+        libelleEvol(-somme),
+        libelleEvol(0),
+        libelleEvol(g + (g > 0 ? 10 : -10)),
+      ]),
+      expected: [correct],
+      comparator: "mcq_exact" as const,
+      explanation: expl(
+        "des évolutions successives se traduisent par des coefficients multiplicateurs qui se MULTIPLIENT ; les pourcentages ne s’ajoutent pas.",
+        `${w1.nomEvol} de ${a} % : × ${fr(c1 / 100)} ; ${w2.nomEvol} de ${b} % : × ${fr(c2 / 100)}.`,
+        `${fr(c1 / 100)} × ${fr(c2 / 100)} = ${fr(cg)}, soit ${fr(100 + g)} % de la valeur de départ.`,
+        `${correct}${g !== somme ? ` — et non ${libelleEvol(somme)}, qu’on obtiendrait en additionnant les pourcentages` : ""}.`,
+      ),
+    };
+  }
+  return genSuccessives(false);
+}
+
+/** Après une évolution, quelle évolution fait revenir à la valeur de départ ? */
+const RETOURS: { h: boolean; a: number; b: number }[] = [
+  { h: true, a: 25, b: 20 },
+  { h: true, a: 100, b: 50 },
+  { h: true, a: 300, b: 75 },
+  { h: true, a: 150, b: 60 },
+  { h: true, a: 400, b: 80 },
+  { h: false, a: 20, b: 25 },
+  { h: false, a: 50, b: 100 },
+  { h: false, a: 75, b: 300 },
+  { h: false, a: 60, b: 150 },
+  { h: false, a: 80, b: 400 },
+];
+
+function genRetour() {
+  for (let essai = 0; essai < 300; essai++) {
+    const s = randomChoice(EVOLUTIONS);
+    const v = randomChoice(s.valeurs);
+    const r = randomChoice(RETOURS);
+    const c1 = r.h ? 100 + r.a : 100 - r.a;
+    if ((v * c1) % 100 !== 0) continue;
+    const mid = (v * c1) / 100;
+    const w1 = mots(r.h);
+    const w2 = mots(!r.h);
+    const t = randomInt(0, 2);
+    const text =
+      t === 0
+        ? `${s.etat(v)}. ${cap(s.ce)} ${w1.verbe} de ${r.a} % et passe à ${mid} ${s.u}. De quel pourcentage doit-${s.genre === "m" ? "il" : "elle"} ${r.h ? "baisser" : "augmenter"} pour revenir à ${v} ${s.u} ?`
+        : t === 1
+          ? `${s.etat(v)}. Après une ${w1.nomEvol} de ${r.a} %, quelle ${w2.nomEvol}, en pourcentage, ramène ${s.ce} à sa valeur de départ ?`
+          : `${s.etat(v)}, puis ${s.ce} ${w1.verbe} de ${r.a} %. Quel pourcentage ${w2.taux} faut-il ensuite pour retrouver exactement ${v} ${s.u} ?`;
+    return {
+      text,
+      format: "short" as const,
+      expected: [String(r.b)],
+      comparator: "number_equal" as const,
+      explanation: expl(
+        `la ${w2.nomEvol} s’applique à la NOUVELLE valeur (${mid} ${s.u}), pas à ${v} ${s.u} : ce n’est donc pas ${r.a} %.`,
+        `on cherche le pourcentage ${w2.taux} entre ${mid} et ${v} : (variation ÷ ${mid}) × 100.`,
+        `variation = ${r.h ? `${mid} − ${v}` : `${v} − ${mid}`} = ${Math.abs(mid - v)} ; (${Math.abs(mid - v)} ÷ ${mid}) × 100 = ${r.b}. Vérification : ${fr(c1 / 100)} × ${fr((r.h ? 100 - r.b : 100 + r.b) / 100)} = 1.`,
+        `il faut une ${w2.nomEvol} de ${r.b} %.`,
+      ),
+    };
+  }
+  return genSuccessives(true);
+}
+
+/** Valeur finale connue après deux évolutions → valeur de départ, à rebours. */
+function genDepart() {
+  const taux = [10, 20, 25, 50];
+  for (let essai = 0; essai < 400; essai++) {
+    const s = randomChoice(EVOLUTIONS);
+    const v = randomChoice(s.valeurs);
+    const a = randomChoice(taux);
+    const b = randomChoice(taux);
+    const h1 = Math.random() < 0.6;
+    const h2 = Math.random() < 0.5;
+    const c1 = h1 ? 100 + a : 100 - a;
+    const c2 = h2 ? 100 + b : 100 - b;
+    if ((v * c1 * c2) % 10000 !== 0) continue;
+    const fin = (v * c1 * c2) / 10000;
+    const cg = (c1 * c2) / 10000;
+    const w1 = mots(h1);
+    const w2 = mots(h2);
+    const text =
+      Math.random() < 0.5
+        ? `Après une ${w1.nomEvol} de ${a} % puis une ${w2.nomEvol} de ${b} %, ${s.nom} vaut ${fin} ${s.u}. Quelle était sa valeur de départ ?`
+        : `${cap(s.nom)} a d’abord ${w1.participe} de ${a} %, puis ${w2.participe} de ${b} %. ${s.genre === "m" ? "Il" : "Elle"} vaut maintenant ${fin} ${s.u}. Combien valait-${s.genre === "m" ? "il" : "elle"} au départ ?`;
+    return {
+      text,
+      format: "short" as const,
+      expected: attendu(v),
+      comparator: "number_equal" as const,
+      explanation: expl(
+        "départ × coefficient global = arrivée ; pour remonter, on DIVISE par le coefficient global (enlever les pourcentages ne marche pas).",
+        `coefficient global = ${fr(c1 / 100)} × ${fr(c2 / 100)} = ${frMillieme(cg)}.`,
+        `${fin} ÷ ${frMillieme(cg)} = ${v}. Vérification : ${v} × ${fr(c1 / 100)} = ${fr((v * c1) / 100)}, puis × ${fr(c2 / 100)} = ${fin}.`,
+        `la valeur de départ était ${v} ${s.u}.`,
+      ),
+    };
+  }
+  return genSuccessives(false);
+}
+
+/** « 0,975 correspond à une baisse de ? » — taux à virgule, coefficient au millième. */
+function genCoeffMillieme() {
+  // Taux en dixièmes de pour cent : 25 = 2,5 %.
+  const dixiemes = [5, 15, 25, 35, 45, 75, 125, 175, 225, 8, 12, 32];
+  const s = randomChoice(EVOLUTIONS);
+  const d = randomChoice(dixiemes);
+  const hausse = Math.random() < 0.5;
+  const w = mots(hausse);
+  const p = d / 10;
+  const c = (1000 + (hausse ? d : -d)) / 1000;
+  const C = frMillieme(c);
+  const pctReste = hausse ? 100 + p : 100 - p;
+  const explanation = expl(
+    "multiplier par 1 + p ÷ 100, c’est augmenter de p % ; multiplier par 1 − p ÷ 100, c’est diminuer de p %.",
+    `${C} = ${fr(pctReste)} ÷ 100 : on garde ${fr(pctReste)} % de la valeur de départ.`,
+    hausse ? `${fr(pctReste)} % − 100 % = ${fr(p)} %.` : `100 % − ${fr(pctReste)} % = ${fr(p)} %.`,
+    `multiplier par ${C}, c’est une ${w.nomEvol} de ${fr(p)} % ⚠️ et non de ${fr(pctReste)} %.`,
+  );
+  const t = randomInt(0, 3);
+  if (t <= 1) {
+    const text =
+      t === 0
+        ? `Multiplier par ${C} correspond à une ${w.nomEvol} de combien de pour cent ?`
+        : `${cap(s.nom)} est ${s.genre === "m" ? "multiplié" : "multipliée"} par ${C}. Quel est le pourcentage ${w.taux} ?`;
+    return { text, format: "short" as const, expected: attendu(p), comparator: "number_equal" as const, explanation };
+  }
+  const correct = libelleEvol(hausse ? p : -p);
+  const text =
+    t === 2
+      ? `À quelle évolution correspond le coefficient multiplicateur ${C} ?`
+      : `On multiplie ${s.nom} par ${C}. Que se passe-t-il ?`;
+  return {
+    text,
+    format: "qcm" as const,
+    choices: makeChoices(correct, [
+      libelleEvol(hausse ? -p : p),
+      libelleEvol(hausse ? pctReste : -pctReste),
+      libelleEvol(hausse ? p / 10 : -p / 10),
+      libelleEvol(hausse ? p * 10 : -p * 10),
+    ]),
+    expected: [correct],
+    comparator: "mcq_exact" as const,
+    explanation,
+  };
+}
+
 /** Pourcentage d'une quantité : situation « partie d'un tout ». */
 type SituationPct = {
   cadre: (N: number) => string;
@@ -3203,10 +3400,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     expected: ["non"],
     comparator: "mcq_exact",
     hint: "La baisse de 20 % ne s’applique pas au prix initial, mais au prix augmenté.",
-    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          ("Non. Par exemple, 100 € augmente de 20 % : 120 €. Puis 120 € baisse de 20 % : 96 €.") +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
+    explanation:
+      "Définition : des évolutions successives se traduisent par des coefficients multiplicateurs qui se multiplient.\n\n" +
+      "Méthode : + 20 %, c’est × 1,2 ; − 20 %, c’est × 0,8 ; coefficient global = 1,2 × 0,8.\n\n" +
+      "Calcul : 1,2 × 0,8 = 0,96. Par exemple, 100 € → 120 € → 96 €.\n\n" +
+      "Conclusion : non. La baisse de 20 % porte sur 120 €, pas sur 100 € : le prix final est 4 % plus bas.",
     tags: ["prop_proportionnalite", "defi", "evolution", "piege"],
   },
   {
@@ -3250,43 +3448,47 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   },
   {
     kind: "fixed",
+    // 05/10/2026 : venu du défi, qui ne garde que les pourcentages SUCCESSIFS.
     id: "prop_defi_open_1",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_pourcentages",
-    microId: "prop_pourcentage_defi",
-    difficulty: 5,
+    microId: "prop_coeff_multiplicateur",
+    difficulty: 4,
     theme: "neutral",
     text: "Explique l’erreur : « augmenter de 30 %, c’est multiplier par 0,3 ».",
     format: "open",
     expected: ["1,3", "100", "30"],
     comparator: "contains_keyword",
     hint: "Quand on augmente, on garde 100 % et on ajoute 30 %.",
-    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          ("Augmenter de 30 %, c’est passer à 130 % de la valeur initiale, donc multiplier par 1,3.") +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["prop_proportionnalite", "defi", "open", "erreur"],
+    explanation:
+      "Définition : augmenter de p %, c’est multiplier par 1 + p ÷ 100.\n\n" +
+      "Méthode : on garde les 100 % de départ et on ajoute 30 % : 100 % + 30 % = 130 %.\n\n" +
+      "Calcul : 130 % = 130 ÷ 100 = 1,3. Multiplier par 0,3 ne garderait que 30 % de la valeur : elle baisserait !\n\n" +
+      "Conclusion : augmenter de 30 %, c’est multiplier par 1,3, pas par 0,3.",
+    tags: ["prop_proportionnalite", "coefficient", "open", "erreur"],
   },
   {
     kind: "fixed",
+    // 05/10/2026 : venu du défi, qui ne garde que les pourcentages SUCCESSIFS.
     id: "prop_defi_open_2",
     niveau: "4e",
     matiere: "maths",
     notionId: "prop_pourcentages",
-    microId: "prop_pourcentage_defi",
-    difficulty: 5,
+    microId: "prop_coeff_multiplicateur",
+    difficulty: 4,
     theme: "neutral",
     text: "Explique pourquoi une réduction de 25 % ne correspond pas à multiplier par 25.",
     format: "open",
     expected: ["75", "0,75", "reste"],
     comparator: "contains_keyword",
     hint: "Après une baisse de 25 %, il reste 75 %.",
-    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
-          "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
-          ("Une réduction de 25 % signifie qu’il reste 75 % de la valeur initiale. On multiplie donc par 0,75, pas par 25.") +
-          "\n\nConclusion : la valeur trouvée respecte la situation de proportionnalité.",
-    tags: ["prop_proportionnalite", "defi", "open", "erreur"],
+    explanation:
+      "Définition : diminuer de p %, c’est multiplier par 1 − p ÷ 100.\n\n" +
+      "Méthode : après une réduction de 25 %, il reste 100 % − 25 % = 75 % de la valeur.\n\n" +
+      "Calcul : 75 % = 75 ÷ 100 = 0,75. Multiplier par 25 rendrait la valeur 25 fois plus grande.\n\n" +
+      "Conclusion : une réduction de 25 %, c’est multiplier par 0,75.",
+    tags: ["prop_proportionnalite", "coefficient", "open", "erreur"],
   },
 
   /* =========================================================
@@ -4074,6 +4276,60 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       "Calcul : par exemple +10 % puis +10 % donne ×1,1×1,1 = ×1,21, soit +21 % (pas +20 %).\n\n" +
       "Conclusion : on multiplie les coefficients, donc les pourcentages ne s’additionnent pas simplement.",
     tags: ["prop_proportionnalite", "defi", "open"],
+  },
+  // 05/10/2026 — le défi = des pourcentages SUCCESSIFS (Frédéric). « Un peu
+  // difficile pour des 4e, mais ce sont des défis. »
+  {
+    kind: "template",
+    id: "prop_defi_tpl_3_taux_global",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Multiplie les deux coefficients multiplicateurs, puis lis le pourcentage.",
+    tags: ["pourcentage", "defi", "successif", "qcm", "template"],
+    generate: () => genTauxGlobal(),
+  },
+  {
+    kind: "template",
+    id: "prop_defi_tpl_4_coeff_millieme",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Écris le coefficient en pourcentage (× 100), puis compare à 100 %.",
+    tags: ["pourcentage", "defi", "coefficient", "template"],
+    generate: () => genCoeffMillieme(),
+  },
+  {
+    kind: "template",
+    id: "prop_defi_tpl_5_retour",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "La seconde évolution part de la NOUVELLE valeur, pas de celle du départ.",
+    tags: ["pourcentage", "defi", "successif", "template"],
+    generate: () => genRetour(),
+  },
+  {
+    kind: "template",
+    id: "prop_defi_tpl_6_depart",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "prop_pourcentages",
+    microId: "prop_pourcentage_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Calcule le coefficient global, puis divise la valeur finale par ce coefficient.",
+    tags: ["pourcentage", "defi", "successif", "template"],
+    generate: () => genDepart(),
   },
 
   /* =========================================================
