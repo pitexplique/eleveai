@@ -10,8 +10,12 @@
 // SEULEMENT — un nombre, une lettre, ou les deux — et contrôle en
 // redéveloppant. AUCUNE identité remarquable lue à l'envers (ni x² − 9, ni
 // x² + 6x + 9, ni a² − b² : c'est la 3e ; l'ancienne feuille les avait aux
-// exercices 6, 11 et 18, c'est la raison de la réécriture). Pas de facteur
-// négatif mis en facteur, pas de parenthèse commune, pas d'équation produit.
+// exercices 6, 11 et 18, c'est la raison de la réécriture). Pas de parenthèse
+// commune, pas d'équation produit.
+// ⭐ FACTEUR NÉGATIF (Frédéric, 04/10 : « il faut des facteurs négatifs, c'est
+// le 5 étoiles ») : exercice 16, en fin de ★★, consigne explicite (« en mettant
+// −5 en facteur »), tableau de division « ÷ (−5) » ; il remplace l'exercice à
+// deux lettres (3ab + 6a…).
 // « Factorise » veut dire factoriser LE PLUS POSSIBLE, avec le plus grand
 // facteur commun entier : le piège est nommé aux exercices 3, 5, 11, 14, 19, 20.
 //
@@ -35,8 +39,8 @@
 // avec trois termes et la lettre prise pour commune (9), factoriser avant de
 // réduire (10), un facteur trop petit (11), chercher le facteur avec un seul
 // terme (12), deux essais pris pour une preuve (13, 18), une seule
-// factorisation possible (14), une lettre qui n'est pas dans tous les termes
-// (16), une longueur lue comme une aire (17), 4 qui ne divise pas 6 (19), les
+// factorisation possible (14), le signe gardé quand on divise par un nombre
+// négatif, −5(x − 3) au lieu de −5(x + 3) (16), une longueur lue comme une aire (17), 4 qui ne divise pas 6 (19), les
 // 250 m enlevés une seule fois (20).
 //
 // Pas de fait réel : tout (club de basket, fresque, jardin, relais) est un
@@ -56,7 +60,7 @@
 //
 // Micro-compétences : litteral_facteur_commun (1, 3, 4, 5, 8, 10, 11, 14, 16),
 // litteral_factoriser_simple (2, 3, 4, 5, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17,
-// 18, 19, 20), litteral_factoriser_verifier (3, 6, 8, 9, 12, 13, 17, 19, 20),
+// 18, 19, 20), litteral_factoriser_verifier (3, 6, 8, 9, 12, 13, 16, 17, 19, 20),
 // litteral_factorisation_defi (3, 7, 8, 13, 14, 16, 18, 20). 4/4.
 
 import type { ReactNode } from "react";
@@ -133,6 +137,7 @@ const rectangle = (k: string, parts: string[], aires: string[], legende?: string
  * ⭐ LE TABLEAU DE DIVISION : chaque terme (avec son signe, sauf le premier)
  * dans une case, une flèche « ÷ facteur », et ce qui reste, en vert, dans la
  * case du dessous. La ligne du bas recolle le tout : la somme = le produit.
+ * Un facteur NÉGATIF (« −5 ») s'écrit « ÷ (−5) » sur les flèches.
  * ⛔ Deux ou trois termes ; 6 signes au plus par case.
  */
 const division = (facteur: string, termes: string[], quotients: string[]) => {
@@ -153,7 +158,7 @@ const division = (facteur: string, termes: string[], quotients: string[]) => {
               <line x1={cx} y1={38} x2={cx} y2={78} stroke={NOIR} strokeWidth={2} />
               <path d={`M ${cx - 6} ${71} L ${cx} ${79} L ${cx + 6} ${71}`} fill="none" stroke={NOIR} strokeWidth={2} />
               <text x={cx + 7} y={63} fontSize="14" fontWeight="900" fill={ORANGE}>
-                {`÷ ${facteur}`}
+                {facteur.startsWith("−") ? `÷ (${facteur})` : `÷ ${facteur}`}
               </text>
               <rect x={cx - bw / 2} y={82} width={bw} height={30} rx={6} fill="#dcfce7" stroke={VERT} strokeWidth={2} />
               <text x={cx} y={103} textAnchor="middle" fontSize="15" fontWeight="800" fill={NOIR}>
@@ -323,7 +328,7 @@ export const exercicesFactorisation4e: FicheExercicesData = {
   notion: "litteral-factorisation",
   titre: "La factorisation",
   accroche:
-    "Vingt exercices, du geste seul au problème : repérer le facteur commun, factoriser par un nombre, par une lettre ou par les deux, factoriser le plus possible, et toujours vérifier en développant. Du calcul mental, les maillots d'un club de basket, des périmètres, une fresque, trois nombres qui se suivent, un jardin agrandi, un relais. Un rappel de cours avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : étape par étape, avec le pourquoi, le piège nommé, et un dessin.",
+    "Vingt exercices, du geste seul au problème : repérer le facteur commun, factoriser par un nombre, par une lettre ou par les deux, factoriser le plus possible, mettre un nombre négatif en facteur, et toujours vérifier en développant. Du calcul mental, les maillots d'un club de basket, des périmètres, une fresque, trois nombres qui se suivent, un jardin agrandi, un relais. Un rappel de cours avant chaque niveau. Cherche d'abord au brouillon, puis ouvre la correction : étape par étape, avec le pourquoi, le piège nommé, et un dessin.",
 
   fichesCours: [{ href: "/fiches-cours/maths/4e/litteral-factorisation", titre: "La factorisation" }],
   coachHref: "/coach-ia/maths?classe=4e",
@@ -414,13 +419,14 @@ export const exercicesFactorisation4e: FicheExercicesData = {
         "Le facteur commun : le plus grand nombre qui divise tous les coefficients, fois les lettres présentes dans TOUS les termes.",
         "Je divise chaque terme par le facteur commun : autant de termes dans la parenthèse qu'au départ, et un $1$ quand un terme est le facteur lui-même.",
         "Je contrôle : plus rien n'est commun dans la parenthèse, et le développement redonne l'expression de départ.",
+        "Avec un facteur NÉGATIF, chaque terme change de signe dans la parenthèse : $-2a - 6 = -2(a + 3)$.",
       ],
       exercices: [
         {
           enonce: "Factorise le plus possible, puis vérifie en développant.\na) $8x + 12y - 4$\nb) $7x^2 - 14x + 21$\nc) $10t^2 + 25t$",
           correction:
             "Avec trois termes, le facteur commun doit diviser les TROIS.\na) $4$ divise $8$, $12$ et $4$ ; aucune lettre n'est dans les trois termes. $8x \\div 4 = 2x$, $12y \\div 4 = 3y$ et $4 \\div 4 = 1$ : $8x + 12y - 4 = 4(2x + 3y - 1)$.\nVérification : $4 \\times 2x + 4 \\times 3y - 4 \\times 1 = 8x + 12y - 4$.\nb) $7$ divise $7$, $14$ et $21$ ; le dernier terme n'a pas de $x$, donc $x$ n'est pas commun. $7x^2 - 14x + 21 = 7(x^2 - 2x + 3)$.\nVérification : $7 \\times x^2 - 7 \\times 2x + 7 \\times 3 = 7x^2 - 14x + 21$.\nc) $5$ divise $10$ et $25$, et $t$ est dans les deux termes : le facteur commun est $5t$. $10t^2 + 25t = 5t(2t + 5)$.\nVérification : $5t \\times 2t + 5t \\times 5 = 10t^2 + 25t$.\n⛔ Le piège du a) : écrire $4(2x + 3y)$, en perdant le dernier terme. Il y a trois termes au départ : il en faut trois dans la parenthèse.\n⛔ Le piège du b) : mettre $7x$ en facteur. $21$ n'a pas de $x$ : la lettre n'est pas commune aux trois termes.\nRéponse : a) $4(2x + 3y - 1)$ ; b) $7(x^2 - 2x + 3)$ ; c) $5t(2t + 5)$.",
-          schema: division("4", ["8x", "+ 12y", "− 4"], ["2x", "+ 3y", "− 1"]),
+          schema: ecranSeulement(division("4", ["8x", "+ 12y", "− 4"], ["2x", "+ 3y", "− 1"])),
           micros: ["litteral_factoriser_simple", "litteral_factoriser_verifier"],
         },
         {
@@ -471,11 +477,11 @@ export const exercicesFactorisation4e: FicheExercicesData = {
           micros: ["litteral_factoriser_simple"],
         },
         {
-          enonce: "Deux lettres. Factorise le plus possible.\na) $3ab + 6a$\nb) $10xy - 15y$\nc) $4n^2 + 2n$\nd) $7xy + 7x$",
+          enonce: "Cette fois, on met un nombre NÉGATIF en facteur.\na) Factorise $-5x - 15$ en mettant $-5$ en facteur.\nb) Factorise $-4x + 12$ en mettant $-4$ en facteur.\nc) Factorise $-6x^2 - 9x$ en mettant $-3x$ en facteur.\nd) Factorise $-2y + 14$ en mettant un nombre négatif en facteur.\nVérifie chaque réponse en redéveloppant.",
           correction:
-            "Je cherche le plus grand nombre commun, puis CHAQUE lettre présente dans tous les termes.\na) $3$ divise $3$ et $6$ ; $a$ est dans les deux termes, $b$ seulement dans le premier. Le facteur commun est $3a$ : $3ab \\div 3a = b$ et $6a \\div 3a = 2$, donc $3ab + 6a = 3a(b + 2)$.\nb) $5$ et $y$ : $10xy \\div 5y = 2x$ et $15y \\div 5y = 3$, donc $10xy - 15y = 5y(2x - 3)$.\nc) $2$ et $n$ : $4n^2 \\div 2n = 2n$ et $2n \\div 2n = 1$, donc $4n^2 + 2n = 2n(2n + 1)$.\nd) $7$ et $x$ : $7xy \\div 7x = y$ et $7x \\div 7x = 1$, donc $7xy + 7x = 7x(y + 1)$.\n⭐ Contrôle du b) : $5y \\times 2x - 5y \\times 3 = 10xy - 15y$.\n⛔ Le piège du a) : mettre $3ab$ en facteur. La lettre $b$ n'est pas dans $6a$ : elle ne peut pas sortir.\nRéponse : a) $3a(b + 2)$ ; b) $5y(2x - 3)$ ; c) $2n(2n + 1)$ ; d) $7x(y + 1)$.",
-          schema: ecranSeulement(fleches("5y", ["2x", "− 3"], "10xy − 15y")),
-          micros: ["litteral_facteur_commun", "litteral_factoriser_simple", "litteral_factorisation_defi"],
+            "Je divise CHAQUE terme par le facteur négatif, avec la règle des signes : diviser par un nombre négatif change le signe de chaque terme.\na) $-5x \\div (-5) = x$ et $-15 \\div (-5) = 3$ : $-5x - 15 = -5(x + 3)$. Les deux termes étaient négatifs ; dans la parenthèse, ils deviennent positifs.\nb) $-4x \\div (-4) = x$ et $12 \\div (-4) = -3$ : $-4x + 12 = -4(x - 3)$.\nc) $-6x^2 \\div (-3x) = 2x$ et $-9x \\div (-3x) = 3$ : $-6x^2 - 9x = -3x(2x + 3)$.\nd) Je prends $-2$, qui divise $-2$ et $14$ : $-2y \\div (-2) = y$ et $14 \\div (-2) = -7$, donc $-2y + 14 = -2(y - 7)$.\nVérification du b) en redéveloppant : $(-4) \\times x + (-4) \\times (-3) = -4x + 12$. Et du a) : $(-5) \\times x + (-5) \\times 3 = -5x - 15$.\n⛔ Le piège du a) : écrire $-5(x - 3)$, en gardant le signe moins du $-15$. Or $-15 \\div (-5) = 3$ : moins divisé par moins donne plus. En redéveloppant $-5(x - 3)$, on trouverait $-5x + 15$, pas l'expression de départ.\nRéponse : a) $-5(x + 3)$ ; b) $-4(x - 3)$ ; c) $-3x(2x + 3)$ ; d) $-2(y - 7)$.",
+          schema: division("−5", ["−5x", "− 15"], ["x", "+ 3"]),
+          micros: ["litteral_facteur_commun", "litteral_factoriser_simple", "litteral_factoriser_verifier", "litteral_factorisation_defi"],
         },
       ],
     },

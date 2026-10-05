@@ -69,27 +69,31 @@ function monome(t) {
 }
 const normal = (s) => String(s).replace(/\{,\}/g, ".").replace(/(\d),(\d)/g, "$1.$2").replace(/−/g, "-").replace(/²/g, "^2");
 /** « k(a + b − c) » est factorisée le plus possible : k entier, termes de la parenthèse sans nombre ni lettre commun. */
-function maximale(produit) {
+// `negatif` : la consigne IMPOSE un facteur négatif (exercice 16) — le facteur
+// doit alors être négatif, et le plus grand en valeur absolue.
+function maximale(produit, negatif = false) {
   const m = /^([^()]+)\((.*)\)$/.exec(normal(produit).trim());
   if (!m) return false;
   const k = monome(m[1]);
   const termes = m[2].replace(/ - /g, " + -").split(" + ").map(monome);
-  if (!Number.isInteger(k.coef) || k.coef < 1 || termes.length < 2) return false;
+  if (!Number.isInteger(k.coef) || (negatif ? k.coef > -1 : k.coef < 1) || termes.length < 2) return false;
   if (!termes.every((t) => Number.isInteger(t.coef))) return false;
   if (termes.map((t) => t.coef).reduce(pgcd) !== 1) return false;
   const toutes = new Set(termes.flatMap((t) => Object.keys(t.lettres)));
   return [...toutes].every((l) => Math.min(...termes.map((t) => t.lettres[l] ?? 0)) === 0);
 }
 /** Une factorisation attendue : égale au départ, et poussée au bout. */
-function facto(k, depart, produit, { enonce = true } = {}) {
+function facto(k, depart, produit, { enonce = true, negatif = false } = {}) {
   vrai(`${k}. ${produit} redéveloppé redonne ${depart}`, identiques(depart, produit));
-  vrai(`${k}. ${produit} : factorisée le plus possible`, maximale(produit));
+  vrai(`${k}. ${produit} : factorisée le plus possible${negatif ? " (facteur négatif imposé)" : ""}`, maximale(produit, negatif));
   if (enonce) enonceDit(k, `$${depart}$`);
 }
 
 /* ═══ 1. Toutes les égalités des corrigés ═══ */
 /** Les factorisations justes mais inachevées, écrites EXPRÈS (ex. 14 b et c). */
 const PAS_FINIES = ["3(x^2 + 7x)", "x(3x + 21)"];
+/** Les exercices dont la consigne impose un facteur NÉGATIF (Frédéric, 04/10). */
+const NEGATIF_IMPOSE = [16];
 feuille.corrections.forEach((txt, i) => {
   for (const [, m] of txt.matchAll(/\$([^$]*)\$/g)) {
     if (!m.includes(" = ") || /\\neq|\\approx|\\dots/.test(m)) continue;
@@ -110,7 +114,7 @@ feuille.corrections.forEach((txt, i) => {
     const [premier, dernier] = [membres[0].trim(), membres.at(-1).trim()];
     const somme = /\s[+-]\s/.test(premier.replace(/\([^()]*\)/g, "")) && !/\\times/.test(m);
     if (somme && /^[^()\s]+\([^()]*\)$/.test(dernier) && !PAS_FINIES.includes(dernier))
-      vrai(`${i + 1}. « ${m} » : factorisée le plus possible`, maximale(dernier));
+      vrai(`${i + 1}. « ${m} » : factorisée le plus possible`, maximale(dernier, NEGATIF_IMPOSE.includes(i + 1)));
   }
   vrai(`${i + 1}. un piège nommé`, /⛔|⚠️/.test(txt));
   vrai(`${i + 1}. une « Réponse : » à la fin`, txt.split("\\n").at(-1).startsWith("Réponse : "));
@@ -153,8 +157,8 @@ function rect(k, role) {
 function div(k, role) {
   const [fac, termes, quot] = dessin("division", k, role);
   vrai(`${k}. division : autant de restes que de termes`, termes.length === quot.length);
-  termes.forEach((t, i) => vrai(`${k}. division : ${t} = ${fac} × (${quot[i]})`, identiques(t, `${fac}*(${quot[i]})`)));
-  vrai(`${k}. division : ${fac}(${quot.join(" ")}) le plus possible`, maximale(`${fac}(${quot.join(" ")})`));
+  termes.forEach((t, i) => vrai(`${k}. division : ${t} = ${fac} × (${quot[i]})`, identiques(t, `(${fac})*(${quot[i]})`)));
+  vrai(`${k}. division : ${fac}(${quot.join(" ")}) le plus possible`, maximale(`${fac}(${quot.join(" ")})`, NEGATIF_IMPOSE.includes(k) && fac.startsWith("−")));
   return { fac, somme: termes.join(" "), produit: `${fac}(${quot.join(" ")})` };
 }
 
@@ -192,7 +196,7 @@ essai("3", () => {
     enonceDit(3, `$${p}$`);
     vrai(`3a. ${p} = ${depart}`, identiques(p, depart));
   });
-  const finis = eleves.filter(maximale);
+  const finis = eleves.filter((p) => maximale(p));
   vrai("3b. seul Yanis a fini", finis.length === 1 && finis[0] === "6(3x + 4)");
   vrai("3b. 6 est le plus grand diviseur de 18 et 24", pgcd(18, 24) === 6);
   facto(3, "20t - 30", "10(2t - 3)");
@@ -343,12 +347,25 @@ essai("15", () => {
   vrai("15. ses trois côtés portent 3x + 2", ["AB", "BC", "CA"].every((s) => opts.cotes[s] === "3x + 2"));
 });
 essai("16", () => {
-  const L = [["3ab + 6a", "3a(b + 2)"], ["10xy - 15y", "5y(2x - 3)"], ["4n^2 + 2n", "2n(2n + 1)"], ["7xy + 7x", "7x(y + 1)"]];
-  L.forEach(([d, p]) => facto(16, d, p));
-  dit(16, `Réponse : ${L.map(([, p], i) => `${"abcd"[i]}) $${p}$`).join(" ; ")}.`);
-  vrai("16. le piège : 3ab ne divise pas 6a", !Number.isInteger(val("(6a)/(3ab)", { ...JEUX[0], a: 2, b: 5 })));
-  const [k, termes, dev] = dessin("fleches", 16);
-  vrai("16. les flèches du b)", identiques(`${k}*(${termes.join(" ")})`, dev) && identiques(dev, "10xy - 15y"));
+  // [départ, facteur imposé par la consigne (null : « un nombre négatif »), réponse]
+  const L = [["-5x - 15", "-5", "-5(x + 3)"], ["-4x + 12", "-4", "-4(x - 3)"], ["-6x^2 - 9x", "-3x", "-3x(2x + 3)"], ["-2y + 14", null, "-2(y - 7)"]];
+  L.forEach(([d, impose, p]) => {
+    facto(16, d, p, { negatif: true });
+    const facteur = /^([^()]+)\(/.exec(p)[1];
+    if (impose) {
+      vrai(`16. la consigne impose ${impose}`, e(16).includes(`$${d}$ en mettant $${impose}$ en facteur`) && facteur === impose);
+      // Recalcul indépendant : chaque terme du départ divisé par le facteur imposé, pour chaque jeu de valeurs.
+      const termes = d.replace(/ - /g, " + -").split(" + ");
+      const reste = termes.map((t) => `(${t})/(${impose})`).join(" + ");
+      vrai(`16. ${d} ÷ (${impose}), terme par terme, redonne la parenthèse de ${p}`, identiques(reste, p.slice(facteur.length)));
+    } else vrai("16d. « un nombre négatif » : facteur entier négatif", e(16).includes(`$${d}$ en mettant un nombre négatif en facteur`) && /^-\d+$/.test(facteur));
+  });
+  dit(16, `Réponse : ${L.map(([, , p], i) => `${"abcd"[i]}) $${p}$`).join(" ; ")}.`);
+  vrai("16. le piège −5(x − 3) redonne −5x + 15, pas le départ", !identiques("-5(x - 3)", "-5x - 15") && identiques("-5(x - 3)", "-5x + 15"));
+  dit(16, "écrire $-5(x - 3)$");
+  vrai("16. −15 ÷ (−5) = +3", val("-15 \\div (-5)") === 3);
+  const d = div(16);
+  vrai("16. le tableau de division est le a), ÷ (−5)", d.fac === "−5" && identiques(d.somme, "-5x - 15") && identiques(d.produit, "-5(x + 3)"));
 });
 essai("17", () => {
   const r = rect(17, "figure");
