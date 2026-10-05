@@ -133,7 +133,7 @@ essai("6", () => {
   meme("6b. lecture en 4", fois(Q(4), k), Q(6));
   const [, , marques] = dessin("repere", 6, "schema");
   meme("6. le point marqué est sur la droite", fois(D(String(marques[0].x)), k), D(String(marques[0].y)));
-  dit(6, `Réponse : a) une droite par l'origine ; b) $${T(fois(Q(4), k))}$ L ; c) $${T(fois(Q(30), k))}$ L ; d) $${T(div(Q(60), k))}$ minutes.`);
+  dit(6, `Réponse : a) une droite par l'origine ; b) $${T(fois(Q(4), k))}$ L ; c) $${T(fois(Q(30), k))}$ L ; d) $${T(div(Q(60), k))}$ minutes ; e) $V = ${T(k)} \\times t$.`);
 });
 essai("7", () => {
   const u = div(Q(240), Q(3));
@@ -207,7 +207,7 @@ essai("15", () => {
 });
 essai("16", () => {
   const { coef, B } = coefTable(16);
-  dit(16, `Réponse : $${T(B[2])}$ ; $${T(B[3])}$ ; $${T(B[4])}$.`);
+  dit(16, `Réponse : $${T(B[2])}$ ; $${T(B[3])}$ ; $${T(B[4])}$ ; $y = ${T(coef)} \\times x$.`);
   meme("16. coefficient", coef, ev("2{,}4"));
 });
 essai("17", () => {

@@ -51,10 +51,13 @@
 //
 // ⭐ Recalcul indépendant : `scripts/verifier-exercices-4e-prop-proportionnalite.mjs`.
 //
-// Micro-compétences : prop_reconnaitre (1, 2, 6, 8, 12, 14, 18, 20), prop_table
-// (3, 7, 9, 16), prop_coeff (3, 4, 6, 9, 11, 14, 17, 19), prop_quatrieme (4, 5,
-// 6, 10, 13, 15, 17, 18, 19), prop_probleme (10, 11, 12, 13, 15, 17, 18, 19,
-// 20), prop_defi (7, 8, 12, 14, 16, 20). 6/6.
+// Micro-compétences : prop_reconnaitre (1, 2, 8, 12, 14, 18, 20), prop_table
+// (3, 7, 9, 16), prop_graphique (2, 6, 12), prop_coeff (3, 4, 6, 9, 11, 14, 17,
+// 19), prop_quatrieme (4, 5, 6, 10, 13, 15, 17, 18, 19), prop_probleme (10, 11,
+// 12, 13, 15, 17, 18, 19, 20), prop_relation (6, 16), prop_defi (7, 8, 12, 14,
+// 16, 20). 8/8.
+// ⭐ 05/10/2026 : les deux micros neuves du coach (graphique, relation) sont
+// rattachées ; 6 e) et la fin du 16 écrivent la relation (V = 1,5 × t, y = 2,4 × x).
 
 import type { ReactNode } from "react";
 import CanvasRenderer from "@/lib/canvas/CanvasRenderer";
@@ -285,7 +288,7 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
           ], undefined, true),
           correction:
             "Une situation de proportionnalité a pour graphique des points ALIGNÉS avec l'ORIGINE : il faut les deux conditions.\n(d1) est une droite qui passe par l'origine : c'est une situation de proportionnalité. Je le vérifie : $(1 ; 2)$, $(2 ; 4)$, $(5 ; 10)$, et à chaque fois $y = 2 \\times x$.\n(d2) est une droite, mais elle coupe l'axe vertical en $3$, pas à l'origine : pas proportionnelle.\n(d3) passe par l'origine, mais ce n'est pas une droite, elle se courbe : pas proportionnelle.\n⛔ Le piège : dire « (d2) est une droite, donc c'est proportionnel ». Une droite qui ne passe pas par l'origine ne représente pas une situation de proportionnalité.\nRéponse : seule (d1).",
-          micros: ["prop_reconnaitre"],
+          micros: ["prop_graphique", "prop_reconnaitre"],
         },
         {
           enonce: "Le prix des noix de cajou est proportionnel à leur masse. Complète le tableau, en commençant par le coefficient.",
@@ -317,12 +320,12 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
           micros: ["prop_quatrieme"],
         },
         {
-          enonce: "Un arrosage au goutte-à-goutte donne de l'eau de façon régulière. Le graphique donne le volume d'eau versé (en litres, verticalement) selon la durée (en minutes, horizontalement).\na) Pourquoi le volume est-il proportionnel à la durée ?\nb) Lis sur le graphique le volume versé en $4$ minutes.\nc) Calcule le volume versé en $30$ minutes.\nd) En combien de minutes verse-t-il $60$ litres ?",
+          enonce: "Un arrosage au goutte-à-goutte donne de l'eau de façon régulière. Le graphique donne le volume d'eau versé (en litres, verticalement) selon la durée (en minutes, horizontalement).\na) Pourquoi le volume est-il proportionnel à la durée ?\nb) Lis sur le graphique le volume versé en $4$ minutes.\nc) Calcule le volume versé en $30$ minutes.\nd) En combien de minutes verse-t-il $60$ litres ?\ne) On note $t$ la durée (en min) et $V$ le volume (en L). Écris la relation qui donne $V$ en fonction de $t$.",
           figure: repere([-1, 7, -1, 10], [{ pts: [[0, 0], [6, 9]] }], [], undefined, true),
           correction:
-            "a) Le graphique est une droite qui passe par l'origine : le volume est proportionnel à la durée.\nb) Je pars de $4$ sur l'axe HORIZONTAL (les minutes), je monte jusqu'à la droite, puis je lis sur l'axe vertical : $6$ litres.\nc) Le coefficient : $6 \\div 4 = 1{,}5$ litre par minute. $30 \\times 1{,}5 = 45$ litres.\nd) Je fais le chemin inverse : $60 \\div 1{,}5 = 40$ minutes.\n⛔ Le piège du b) : partir de $4$ sur l'axe vertical, et lire $2{,}7$ environ. Les minutes sont sur l'axe horizontal.\nRéponse : a) une droite par l'origine ; b) $6$ L ; c) $45$ L ; d) $40$ minutes.",
+            "a) Le graphique est une droite qui passe par l'origine : le volume est proportionnel à la durée.\nb) Je pars de $4$ sur l'axe HORIZONTAL (les minutes), je monte jusqu'à la droite, puis je lis sur l'axe vertical : $6$ litres.\nc) Le coefficient : $6 \\div 4 = 1{,}5$ litre par minute. $30 \\times 1{,}5 = 45$ litres.\nd) Je fais le chemin inverse : $60 \\div 1{,}5 = 40$ minutes.\ne) Le coefficient est $1{,}5$ : je multiplie toujours la durée par $1{,}5$. La relation s'écrit $V = 1{,}5 \\times t$. Contrôle sur le graphique : pour $t = 4$, $1{,}5 \\times 4 = 6$.\n⛔ Le piège du b) : partir de $4$ sur l'axe vertical, et lire $2{,}7$ environ. Les minutes sont sur l'axe horizontal.\nRéponse : a) une droite par l'origine ; b) $6$ L ; c) $45$ L ; d) $40$ minutes ; e) $V = 1{,}5 \\times t$.",
           schema: ecranSeulement(repere([-1, 7, -1, 10], [{ pts: [[0, 0], [6, 9]] }], [{ x: 4, y: 6, label: "(4 ; 6)" }], undefined, true)),
-          micros: ["prop_reconnaitre", "prop_coeff", "prop_quatrieme"],
+          micros: ["prop_graphique", "prop_relation", "prop_coeff", "prop_quatrieme"],
         },
         {
           enonce: "Pour $3$ personnes, une recette de pâte à crumble demande $240$ g de farine. La quantité de farine est proportionnelle au nombre de personnes.\nLéo dit : « Pour $5$ personnes, il faut $242$ g : j'ajoute $2$, comme pour les personnes. »\nZoé dit : « Pour $6$ personnes, il faut $480$ g. Pour $5$ personnes, j'enlève la part d'une personne. »\nQui a raison ? Calcule la quantité de farine pour $5$ personnes.",
@@ -397,7 +400,7 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
             { pts: [[0, 0], [4.2, 12.6]] },
             { pts: [[0, 4], [4.5, 13]], couleur: ORANGE },
           ], [{ x: 4, y: 12 }], undefined, true)),
-          micros: ["prop_reconnaitre", "prop_probleme", "prop_defi"],
+          micros: ["prop_graphique", "prop_reconnaitre", "prop_probleme", "prop_defi"],
         },
         {
           enonce: "Pour un mortier, un maçon mélange toujours $1$ sac de ciment de $25$ kg avec $75$ kg de sable. Les masses de ciment et de sable sont proportionnelles.\na) Quelle masse de ciment faut-il pour $180$ kg de sable ?\nb) Combien de sacs de ciment faut-il acheter ?",
@@ -433,12 +436,12 @@ export const exercicesProportionnalite4e: FicheExercicesData = {
           micros: ["prop_quatrieme", "prop_probleme"],
         },
         {
-          enonce: "Ce tableau est un tableau de proportionnalité. Complète-le SANS calculer le coefficient, en écrivant chaque nombre du haut comme une somme ou une différence de nombres déjà connus. Vérifie ensuite avec le coefficient.",
+          enonce: "Ce tableau est un tableau de proportionnalité. Complète-le SANS calculer le coefficient, en écrivant chaque nombre du haut comme une somme ou une différence de nombres déjà connus. Vérifie ensuite avec le coefficient, puis écris la relation qui donne $y$ en fonction de $x$.",
           figure: tableauCoef(["x", "y"], ["7", "11", "18", "4", "29"], ["16,8", "26,4", "…", "…", "…"], "?"),
           correction:
-            "$18 = 7 + 11$ : j'additionne les colonnes, $16{,}8 + 26{,}4 = 43{,}2$.\n$4 = 11 - 7$ : je soustrais, $26{,}4 - 16{,}8 = 9{,}6$.\n$29 = 18 + 11$ : $43{,}2 + 26{,}4 = 69{,}6$.\nVérification par le coefficient : $16{,}8 \\div 7 = 2{,}4$. Puis $18 \\times 2{,}4 = 43{,}2$ ; $4 \\times 2{,}4 = 9{,}6$ ; $29 \\times 2{,}4 = 69{,}6$.\n⛔ Le piège : chercher un calcul compliqué. Quand les nombres du haut se combinent, les nombres du bas se combinent de la même façon.\nRéponse : $43{,}2$ ; $9{,}6$ ; $69{,}6$.",
+            "$18 = 7 + 11$ : j'additionne les colonnes, $16{,}8 + 26{,}4 = 43{,}2$.\n$4 = 11 - 7$ : je soustrais, $26{,}4 - 16{,}8 = 9{,}6$.\n$29 = 18 + 11$ : $43{,}2 + 26{,}4 = 69{,}6$.\nVérification par le coefficient : $16{,}8 \\div 7 = 2{,}4$. Puis $18 \\times 2{,}4 = 43{,}2$ ; $4 \\times 2{,}4 = 9{,}6$ ; $29 \\times 2{,}4 = 69{,}6$.\nLa relation : je multiplie toujours $x$ par $2{,}4$, donc $y = 2{,}4 \\times x$.\n⛔ Le piège : chercher un calcul compliqué. Quand les nombres du haut se combinent, les nombres du bas se combinent de la même façon.\nRéponse : $43{,}2$ ; $9{,}6$ ; $69{,}6$ ; $y = 2{,}4 \\times x$.",
           schema: ecranSeulement(tableauCoef(["x", "y"], ["7", "11", "18", "4", "29"], ["16,8", "26,4", "!43,2", "!9,6", "!69,6"], "2,4")),
-          micros: ["prop_defi", "prop_table"],
+          micros: ["prop_defi", "prop_table", "prop_relation"],
         },
       ],
     },

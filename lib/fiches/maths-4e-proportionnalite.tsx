@@ -13,8 +13,11 @@
 // diapos écrites à la main, qui ne suivaient pas la fiche.
 //
 // Alignée sur la banque `lib/tutor-v4/questionBank/4e/maths/proportionnalite.bank.ts`,
-// notionId prop_proportionnalite : prop_reconnaitre, prop_table, prop_coeff,
-// prop_quatrieme, prop_probleme, prop_defi.
+// notionId prop_proportionnalite : prop_reconnaitre, prop_table, prop_graphique,
+// prop_coeff, prop_quatrieme, prop_probleme, prop_relation, prop_defi.
+// ⭐ 05/10/2026 : les deux micros neuves du coach ont leur bloc — le graphique
+// (« Sur un graphique », lu aussi pour une valeur) et la relation y = k × x
+// (bloc « La relation », lue sur le graphique au point d'abscisse 1).
 // ⛔ Aucun exemple de la feuille d'exercices de 4e n'est repris (piles, noix de
 // cajou, flyers, imprimante 3D, miel, vélos, mortier, ressort, trailleuse,
 // pâte à pain, ombres, panneaux, pompes).
@@ -102,12 +105,14 @@ const trampoline = legende(
 const pieges = [
   "Croire qu'un tableau régulier est proportionnel. Ajouter toujours le même nombre, ce n'est pas multiplier toujours par le même nombre.",
   "Dire « c'est une droite, donc c'est proportionnel ». La droite doit aussi passer par l'origine.",
+  "Trouver la relation avec la première colonne seulement. Elle doit marcher pour TOUTES les colonnes.",
   "Faire un produit en croix sans avoir vérifié que la situation est proportionnelle. Le calcul donne alors un résultat faux, sans prévenir.",
 ];
 
 const aRetenir = [
   "Proportionnel : on passe d'une grandeur à l'autre en multipliant toujours par le même nombre, le coefficient.",
   "Sur un graphique : des points alignés avec l'origine.",
+  "La relation : y = k × x, où k est le coefficient. Sur le graphique, k est la valeur de y pour x = 1.",
   "Case vide d'un tableau de proportionnalité : je multiplie les deux nombres de la diagonale complète, puis je divise par le troisième.",
 ];
 
@@ -118,7 +123,7 @@ export const ficheProportionnalite4e: FicheCoursData = {
   notion: "prop-proportionnalite",
   titre: "La proportionnalité",
   accroche:
-    "Proportionnel, c'est multiplier toujours par le même nombre. En 4e, on le reconnaît aussi sur un graphique, et on trouve une valeur manquante avec le produit en croix.",
+    "Proportionnel, c'est multiplier toujours par le même nombre. En 4e, on le reconnaît aussi sur un graphique, on écrit la relation y = k × x, et on trouve une valeur manquante avec le produit en croix.",
   identite: [
     { label: "Le secret", valeur: "Multiplier toujours par le même nombre" },
     { label: "L'outil de 4e", valeur: "Le produit en croix" },
@@ -159,12 +164,25 @@ export const ficheProportionnalite4e: FicheCoursData = {
     },
     {
       titre: "Sur un graphique",
-      micros: ["prop_reconnaitre"],
+      micros: ["prop_graphique", "prop_reconnaitre"],
       texte:
-        "Une situation de proportionnalité donne des points alignés avec l'origine. La droite bleue passe par l'origine : proportionnel. La droite orange ne passe pas par l'origine : pas proportionnel.",
+        "Une situation de proportionnalité donne des points alignés avec l'origine. La droite bleue passe par l'origine : proportionnel. La droite orange ne passe pas par l'origine : pas proportionnel. Pour lire une valeur, je pars de l'axe horizontal, je monte jusqu'à la droite, puis je lis l'axe vertical.",
       schema: legende(
         repere([-1, 5, -1, 9], [{ pts: [[0, 0], [4.5, 9]] }, { pts: [[0, 3], [5, 8]], couleur: ORANGE }], [{ x: 0, y: 0 }]),
         "bleue : par l'origine ; orange : non",
+      ),
+    },
+    {
+      titre: "La relation",
+      micros: ["prop_relation", "prop_graphique"],
+      texte:
+        "Deux grandeurs proportionnelles sont reliées par y = k × x, où k est le coefficient. Pour les places de match : prix = 9 × nombre de places. Pour trouver k, je divise un y par son x. Sur le graphique, k est la valeur de y pour x = 1.",
+      schema: legende(
+        repere([-1, 5, -1, 9], [{ pts: [[0, 0], [4.5, 9]] }], [
+          { x: 1, y: 2, label: "(1 ; 2)" },
+          { x: 3, y: 6, label: "(3 ; 6)" },
+        ]),
+        "pour x = 1, y = 2 : la relation est y = 2 × x",
       ),
     },
     {
@@ -237,13 +255,18 @@ export const ficheProportionnalite4e: FicheCoursData = {
   usages: [
     {
       titre: "Reconnaître",
-      micros: ["prop_reconnaitre"],
+      micros: ["prop_reconnaitre", "prop_graphique"],
       detail: "Dans un tableau : le même quotient partout. Sur un graphique : des points alignés avec l'origine.",
     },
     {
       titre: "Trouver une valeur",
       micros: ["prop_quatrieme", "prop_coeff"],
       detail: "Une seule valeur : le produit en croix. Plusieurs valeurs : le coefficient, calculé une fois.",
+    },
+    {
+      titre: "Écrire la relation",
+      micros: ["prop_relation"],
+      detail: "Je calcule k une fois, je vérifie sur toutes les colonnes, puis j'écris y = k × x.",
     },
     {
       titre: "Résoudre un problème",
@@ -315,7 +338,12 @@ export const ficheProportionnalite4e: FicheCoursData = {
     {
       question: "Un graphique est une droite qui passe par l'origine et par le point (4 ; 6). Est-ce une situation de proportionnalité ? Quel est le coefficient ?",
       correction: "Oui : c'est une droite qui passe par l'origine. Le coefficient est 6 ÷ 4 = 1,5.",
-      micros: ["prop_reconnaitre", "prop_coeff"],
+      micros: ["prop_graphique", "prop_coeff"],
+    },
+    {
+      question: "Dans un tableau, x = 3 donne y = 12, x = 5 donne y = 20 et x = 8 donne y = 32. Quelle relation relie y à x ?",
+      correction: "12 ÷ 3 = 4, 20 ÷ 5 = 4 et 32 ÷ 8 = 4 : le même coefficient partout. La relation est y = 4 × x.",
+      micros: ["prop_relation", "prop_table"],
     },
     {
       question: "Il faut 2,5 kg de farine pour 6 pizzas. Combien en faut-il pour 9 pizzas ?",
