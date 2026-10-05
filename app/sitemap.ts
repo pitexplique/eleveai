@@ -749,6 +749,16 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-10-04",
     },
   ],
+  "/fiches-cours/maths/6e/demi-droite-graduee": [
+    {
+      // 05/10/2026 : la vidéo PARLÉE de la demi-droite graduée.
+      id: "975J99l0A8w",
+      title: "La demi-droite graduée : lire, placer, graduer — Maths 6e",
+      description:
+        "L'origine, le pas, lire une abscisse, placer un nombre décimal et une fraction sur une demi-droite graduée, graduer un segment (6e).",
+      ajoutee: "2026-10-05",
+    },
+  ],
   "/fiches-cours/maths/6e/fraction-calcul": [
     {
       // 05/10/2026 : la vidéo PARLÉE du calcul avec les fractions.
