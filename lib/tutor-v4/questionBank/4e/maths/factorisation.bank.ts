@@ -78,7 +78,7 @@ type Terme = [number, string?];
 function mono(c: number, l = ""): string {
   if (!l) return String(c);
   if (c === 1) return l;
-  if (c === -1) return `-${l}`;
+  if (c === -1) return `−${l}`;
   return `${c}${l}`;
 }
 
@@ -88,8 +88,8 @@ function somme(termes: Terme[]): string {
   return t
     .map(([c, l], i) => {
       const m = mono(Math.abs(c), l ?? "");
-      if (i === 0) return c < 0 ? `-${m}` : m;
-      return c < 0 ? ` - ${m}` : ` + ${m}`;
+      if (i === 0) return c < 0 ? `−${m}` : m;
+      return c < 0 ? ` − ${m}` : ` + ${m}`;
     })
     .join("");
 }
@@ -294,7 +294,7 @@ function ecrituresProduit(F: Terme, t: Terme[]): string[] {
   const out = new Set<string>();
   for (const s of base)
     for (const moins of ["-", "−", "–"])
-      for (const carre of ["²", "^2"]) out.add(s.replace(/-/g, moins).replace(/²/g, carre));
+      for (const carre of ["²", "^2"]) out.add(s.replace(/[-−]/g, moins).replace(/²/g, carre));
   return [...out];
 }
 
@@ -578,16 +578,16 @@ export const factorisationBank: TutorBankItemV4[] = [
     microId: "litteral_factoriser_simple",
     difficulty: 2,
     theme: "neutral",
-    text: "Factoriser : 5x - 20",
+    text: "Factoriser : 5x − 20",
     format: "qcm",
-    choices: ["5(x - 4)", "5(x + 4)", "x(5 - 20)", "5x(1 - 4)"],
-    expected: ["5(x - 4)"],
+    choices: ["5(x − 4)", "5(x + 4)", "x(5 − 20)", "5x(1 − 4)"],
+    expected: ["5(x − 4)"],
     comparator: "mcq_exact",
     hint: "20 = 5 × 4.",
     explanation:
       `${DEF}\n\n` +
       "Méthode : on cherche un facteur commun, puis on met ce facteur devant une parenthèse.\n\nCalcul : " +
-      "5x - 20 = 5 × x - 5 × 4 = 5(x - 4)." +
+      "5x − 20 = 5 × x − 5 × 4 = 5(x − 4)." +
       "\n\nConclusion : la forme finale est un produit équivalent à l’expression de départ.",
     tags: ["litteral_factorisation", "simple", "signe"],
   },
@@ -741,12 +741,12 @@ export const factorisationBank: TutorBankItemV4[] = [
       const b = randomInt(2, 9);
       const l = randomChoice(LETTRES);
       const s = randomChoice([1, -1] as const);
-      const sg = s === 1 ? "+" : "-";
+      const sg = s === 1 ? "+" : "−";
       const e = `${k}${l} ${sg} ${k * b}`;
       const juste = `${k}(${l} ${sg} ${b})`;
       const erreurs: Array<[string, string]> = [
         [`${k}(${l} ${sg} ${k * b})`, `${k}(${l} ${sg} ${k * b}) = ${k}${l} ${sg} ${k * k * b}`],
-        [`${k}(${l} ${s === 1 ? "-" : "+"} ${b})`, `${k}(${l} ${s === 1 ? "-" : "+"} ${b}) = ${k}${l} ${s === 1 ? "-" : "+"} ${k * b}`],
+        [`${k}(${l} ${s === 1 ? "−" : "+"} ${b})`, `${k}(${l} ${s === 1 ? "−" : "+"} ${b}) = ${k}${l} ${s === 1 ? "−" : "+"} ${k * b}`],
         [`${k}${l}(1 ${sg} ${b})`, `${k}${l}(1 ${sg} ${b}) = ${k}${l} ${sg} ${k * b}${l}`],
       ];
       const correct = Math.random() < 0.45;
@@ -1105,7 +1105,7 @@ export const factorisationBank: TutorBankItemV4[] = [
       const l = randomChoice(LETTRES);
       const b = randomInt(2, 9);
       const s = randomChoice([1, -1] as const);
-      const sg = s === 1 ? "+" : "-";
+      const sg = s === 1 ? "+" : "−";
       const e = `${l}² ${sg} ${b}${l}`;
       const juste = `${l}(${l} ${sg} ${b})`;
       const erreurs: Array<[string, string]> = [
@@ -1172,14 +1172,14 @@ export const factorisationBank: TutorBankItemV4[] = [
         ];
       } else if (forme === 1) {
         const c = tirageLettre({ mMax: 1 });
-        const sgS = c.s === 1 ? "+" : "-";
+        const sgS = c.s === 1 ? "+" : "−";
         e = c.e;
         correct = c.res;
         const [u] = c.t;
         const lettreEnTete = Boolean(u[1]);
         pieges = lettreEnTete
-          ? [`${c.L}(${c.L} ${sgS} ${c.b}${c.L})`, `${c.L}(${c.L} ${c.s === 1 ? "-" : "+"} ${c.b})`, `${c.b}${c.L}(${c.L} ${sgS} 1)`]
-          : [`${c.L}(${c.b}${c.L} ${sgS} ${c.L})`, `${c.L}(${c.b} ${c.s === 1 ? "-" : "+"} ${c.L})`, `${c.b}${c.L}(1 ${sgS} ${c.L})`];
+          ? [`${c.L}(${c.L} ${sgS} ${c.b}${c.L})`, `${c.L}(${c.L} ${c.s === 1 ? "−" : "+"} ${c.b})`, `${c.b}${c.L}(${c.L} ${sgS} 1)`]
+          : [`${c.L}(${c.b}${c.L} ${sgS} ${c.L})`, `${c.L}(${c.b} ${c.s === 1 ? "−" : "+"} ${c.L})`, `${c.b}${c.L}(1 ${sgS} ${c.L})`];
       } else {
         const k = randomInt(2, 6);
         const b = randomInt(2, 9);
