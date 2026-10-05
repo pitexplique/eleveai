@@ -13,6 +13,8 @@ export function normalizeAnswer(value: string) {
     .trim()
     .toLowerCase()
     .replace(/,/g, ".")
+    // 05/10/2026 : le vrai moins « − » affiché vaut le « - » du clavier.
+    .replace(/[−–]/g, "-")
     .replace(/\s+/g, " ");
 }
 

@@ -9,6 +9,8 @@ function normalize(value: string) {
     .trim()
     .toLowerCase()
     .replace(/\s+/g, " ")
+    // 05/10/2026 : le vrai moins « − » (affiché) et le « - » du clavier sont le même signe.
+    .replace(/[−–]/g, "-")
     .replace(/\s*\/\s*/g, "/")
     .replace(/\s*:\s*/g, "/")
     .replace(/\bsur\b/g, "/")
