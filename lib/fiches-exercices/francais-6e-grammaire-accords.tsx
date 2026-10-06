@@ -408,7 +408,7 @@ export const exercicesAccords6e: FicheExercicesData = {
   notion: "grammaire-accords",
   titre: "Les accords et les homophones",
   accroche:
-    "Embarque avec Jules Verne !\n— 20 exercices pour écrire juste la fin des mots\n— QCM, mots à entourer, lettres à corriger\n— 3 dictées, lues par un adulte\n— 4 défis à étoiles\n— une correction pas à pas après chaque exercice",
+    "Embarque avec Jules Verne !\n— 20 exercices pour écrire juste la fin des mots\n— QCM, mots à entourer, lettres à corriger\n— 4 dictées, lues par un adulte\n— 4 défis à étoiles\n— une correction pas à pas après chaque exercice",
 
   ouverture: ouvertureBd,
   mascotte: mascotteMargo,

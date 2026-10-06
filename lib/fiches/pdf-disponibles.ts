@@ -4,6 +4,7 @@
 // téléchargement ne s'affiche que pour celles-là.
 export const PDF_DISPONIBLES = new Set<string>([
   "accord-du-participe-passe-2026-2027-5e-cours-exercices-corriges.pdf",
+  "accords-et-les-homophones-6e-20-exercices-corriges.pdf",
   "accords-et-les-homophones-6e-cours-exercices-corriges.pdf",
   "accords-et-les-homophones-en-cm1-2026-2027-cours-exercices-corriges.pdf",
   "agrandissement-reduction-et-echelles-4e-cours-exercices-corriges.pdf",

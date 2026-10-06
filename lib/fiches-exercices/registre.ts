@@ -26,7 +26,7 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
   "francais/6e/grammaire-accords": {
     titre: "Les accords et les homophones : 20 exercices corrigés",
     resume:
-      "Accorder dans le groupe nominal, accorder le verbe avec son sujet, le participe passé avec être et avec avoir, choisir entre a et à, et et est, son et sont, on et ont. À bord du Nautilus, autour du monde avec Phileas Fogg, puis quatre défis : le centre de la Terre, la Lune, la bouteille à la mer, le ballon. QCM, mots à entourer, lettres à corriger et trois dictées.",
+      "Accorder dans le groupe nominal, accorder le verbe avec son sujet, le participe passé avec être et avec avoir, choisir entre a et à, et et est, son et sont, on et ont. À bord du Nautilus, autour du monde avec Phileas Fogg, puis quatre défis : le centre de la Terre, la Lune, la bouteille à la mer, le ballon. QCM, mots à entourer, lettres à corriger et quatre dictées.",
   },
   // ⭐ LA 6e (30/09/2026) — Frédéric : « toutes les fiches d'exercices faites
   // pour eux ». Dans l'ordre du coach ; phrases courtes, ils lisent parfois mal.
