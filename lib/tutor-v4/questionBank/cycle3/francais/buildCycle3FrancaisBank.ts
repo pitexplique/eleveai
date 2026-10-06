@@ -6,6 +6,7 @@ import type {
   TutorGeneratedQuestionV4,
 } from "@/lib/tutor-v4/types";
 import type { MicroSkillSource } from "@/lib/tutor-v4/knowledge/buildKnowledge";
+import { contentFingerprint } from "@/lib/tutor-v4/fingerprint";
 import {
   generateConjugationItem,
   generateInfinitifItem,
@@ -26,7 +27,13 @@ type Generated = TutorGeneratedQuestionV4 & {
 };
 
 function shuffle<T>(items: readonly T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
+  // Fisher-Yates sur `alea` : amorcé pendant `makeChoices`, libre sinon.
+  const t = [...items];
+  for (let i = t.length - 1; i > 0; i--) {
+    const j = Math.floor(alea() * (i + 1));
+    [t[i], t[j]] = [t[j], t[i]];
+  }
+  return t;
 }
 
 /** ⭐ DEUX, TROIS OU QUATRE PROPOSITIONS — quatre est un maximum, jamais une
@@ -95,7 +102,43 @@ function garderUnLeurreAussiLong(
   return [pick(assezLongs), ...tires.filter((d) => d !== remplace)];
 }
 
-function makeChoices(correct: string, wrongs: readonly string[]) {
+/** ⛔⛔ UNE MÊME QUESTION GARDE LES MÊMES PROPOSITIONS (05/10/2026). Frédéric :
+ *  ses 6e « tombent sur la même question mais avec des choix différents » —
+ *  « Léa observait le margouillat… », « Le vieux chêne dominait la cour… ».
+ *  Cause : le moteur reconnaît une question déjà vue à son EMPREINTE, texte +
+ *  propositions (`fingerprint.ts`). Les leurres étant retirés au hasard à
+ *  chaque service, la même phrase revenait avec une autre empreinte, et le
+ *  moteur la croyait neuve.
+ *  ⭐ Le tirage des propositions est donc AMORCÉ par l'énoncé et la bonne
+ *  réponse : même question → mêmes propositions → même empreinte → écartée
+ *  tant qu'elle est dans la mémoire de l'élève. L'ordre à l'écran, lui, reste
+ *  mélangé par le moteur. La taille (2, 3 ou 4) se tire de la même façon : les
+ *  proportions de `TAILLES` sont tenues sur l'ensemble des énoncés. */
+let alea: () => number = Math.random;
+
+function amorce(cle: string): () => number {
+  let h = 2166136261;
+  for (let i = 0; i < cle.length; i++) h = Math.imul(h ^ cle.charCodeAt(i), 16777619);
+  return () => {
+    h = (h + 0x6d2b79f5) | 0;
+    let t = Math.imul(h ^ (h >>> 15), 1 | h);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function makeChoices(correct: string, wrongs: readonly string[], cle?: string) {
+  if (cle === undefined) return makeChoicesLibres(correct, wrongs);
+  const avant = alea;
+  alea = amorce(`${cle}||${correct}`);
+  try {
+    return makeChoicesLibres(correct, wrongs, TAILLES[Math.floor(alea() * TAILLES.length)]);
+  } finally {
+    alea = avant;
+  }
+}
+
+function makeChoicesLibres(correct: string, wrongs: readonly string[], tailleImposee?: number) {
   // Jamais deux fois la même ligne. Un gabarit dont le piège coïncide avec la
   // bonne réponse (les coordonnées inversées quand x = y, un arrondi égal à la
   // valeur de départ…) affichait la même proposition deux fois, et l'élève
@@ -106,7 +149,7 @@ function makeChoices(correct: string, wrongs: readonly string[]) {
   // le découpage à quatre l'emportait. L'élève voyait alors quatre pièges et
   // rien d'autre. On la met de côté, on tire les distracteurs, on mélange.
   const candidats = Array.from(new Set(wrongs)).filter((w) => w !== correct);
-  const taille = tailleSuivante();
+  const taille = tailleImposee ?? tailleSuivante();
   const distracteurs =
     taille === 2 && candidats.length > 1
       ? leurreLePlusProche(correct, candidats)
@@ -119,7 +162,7 @@ function exp(methode: string, exemple: string, conclusion: string) {
 }
 
 function pick<T>(items: readonly T[]): T {
-  return items[Math.floor(Math.random() * items.length)];
+  return items[Math.floor(alea() * items.length)];
 }
 
 // ── Conversion d'un item de banque vers une question generee ────────────────
@@ -142,7 +185,7 @@ function asQcm(item: QcmItem): Generated {
   return {
     text: item.text,
     format: "qcm",
-    choices: makeChoices(item.correct, item.wrongs),
+    choices: makeChoices(item.correct, item.wrongs, item.text),
     expected: [item.correct],
     comparator: "mcq_exact",
     explanation: exp(
@@ -167,7 +210,21 @@ function asShort(item: ShortItem): Generated {
   };
 }
 
+/** Ce que le moteur demande d'éviter pendant le `generate` en cours (empreintes
+ *  des questions déjà vues par l'élève). Posé par `makeTemplate`. */
+let eviterCourant: ReadonlySet<string> | undefined;
+
 function qcm(pool: readonly QcmItem[]): Generated {
+  /* ⭐ On tire d'abord parmi les énoncés que l'élève n'a pas vus : leurs
+     propositions étant fixées par l'énoncé (voir `makeChoices`), leur empreinte
+     se calcule d'avance. Le retirage aveugle du moteur (dix essais) échouait
+     sur un pool de quinze dont douze déjà vus. */
+  if (eviterCourant?.size) {
+    const neufs = pool
+      .map(asQcm)
+      .filter((g) => !eviterCourant!.has(contentFingerprint(g.text, g.choices)));
+    if (neufs.length) return pick(neufs);
+  }
   return asQcm(pick(pool));
 }
 
@@ -8559,10 +8616,16 @@ function questionForNotion(notionId: string, microId: string): Generated {
   return qcm(LECTURE);
 }
 
+/** Un générateur à correcteur (6e, 05/10/2026 — voir
+ *  `questionBank/6e/francais/generateurs/types.ts`). Il sert quatre questions
+ *  sur cinq ; la cinquième vient de l'ancien pool écrit main. */
+type GenerateurAvecCorrecteur = { generer: () => QcmItem };
+
 function makeTemplate(
   level: Cycle3PrimaryLevel,
   micro: MicroSkillSource,
-  variant: 0 | 1
+  variant: 0 | 1,
+  generateur?: GenerateurAvecCorrecteur
 ): TutorBankItemV4 {
   return {
     kind: "template",
@@ -8575,19 +8638,28 @@ function makeTemplate(
     theme: "neutral",
     hint: micro.label,
     tags: [level, micro.notionId, micro.id, "cycle3", "francais", "template"],
-    generate: () => questionForNotion(micro.notionId, micro.id),
+    generate: (ctx) => {
+      eviterCourant = ctx?.eviter;
+      try {
+        if (generateur && Math.random() < 0.8) return asQcm(generateur.generer());
+        return questionForNotion(micro.notionId, micro.id);
+      } finally {
+        eviterCourant = undefined;
+      }
+    },
   };
 }
 
 export function buildCycle3FrancaisBank(
   level: Cycle3PrimaryLevel,
-  microSkills: readonly MicroSkillSource[]
+  microSkills: readonly MicroSkillSource[],
+  generateurs: Readonly<Record<string, GenerateurAvecCorrecteur>> = {}
 ): TutorBankItemV4[] {
   return microSkills.flatMap((micro) => [
-    makeTemplate(level, micro, 0),
-    makeTemplate(level, micro, 1),
+    makeTemplate(level, micro, 0, generateurs[micro.id]),
+    makeTemplate(level, micro, 1, generateurs[micro.id]),
     {
-      ...makeTemplate(level, micro, 1),
+      ...makeTemplate(level, micro, 1, generateurs[micro.id]),
       id: `${level}_${micro.id}_fr_cycle3_tpl_3_defi`,
       difficulty: 4,
       tags: [level, micro.notionId, micro.id, "cycle3", "francais", "template", "defi"],

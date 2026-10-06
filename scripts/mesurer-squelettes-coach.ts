@@ -30,6 +30,8 @@ import { mathsCe1QuestionBank } from "@/lib/tutor-v4/questionBank/ce1/maths/inde
 import { mathsCe2QuestionBank } from "@/lib/tutor-v4/questionBank/ce2/maths/index";
 import { mathsCm1QuestionBank } from "@/lib/tutor-v4/questionBank/cm1/maths/index";
 import { mathsCm2QuestionBank } from "@/lib/tutor-v4/questionBank/cm2/maths/index";
+import { maths6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/maths/index";
+import { francais6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/francais/index";
 
 const BANQUES: Record<string, any[]> = {
   "4e": maths4eQuestionBank,
@@ -38,9 +40,13 @@ const BANQUES: Record<string, any[]> = {
   ce2: mathsCe2QuestionBank,
   cm1: mathsCm1QuestionBank,
   cm2: mathsCm2QuestionBank,
+  "6e": maths6eQuestionBank,
+  "6e-francais": francais6eQuestionBank,
 };
-const [classe, ...notions] = process.argv.slice(2);
+const [classe, ...demandees] = process.argv.slice(2);
 const B = BANQUES[classe];
+// « toutes » : chaque notion de la banque, dans l'ordre où elle apparaît.
+const notions = demandees[0] === "toutes" && B ? [...new Set(B.map((i) => i.notionId as string))] : demandees;
 if (!B || !notions.length) {
   console.log(`usage : npx --yes tsx@4 scripts/mesurer-squelettes-coach.ts <${Object.keys(BANQUES).join("|")}> <notionId> …`);
   process.exit(2);
@@ -57,12 +63,23 @@ const squelette = (t: string) =>
     .replace(/[−-]?\d+(?:[,.]\d+)?/g, "#")
     .replace(/\s+/g, " ")
     .trim();
-const texte = (it: any) => String(it.kind === "template" ? it.generate().text : it.text);
+import { contentFingerprint } from "@/lib/tutor-v4/fingerprint";
+
+/* ⭐ 05/10/2026 — LE SQUELETTE COMPTE AUSSI LA BONNE RÉPONSE. En français,
+   « Choisis le groupe nominal correctement accordé » est une consigne fixe dont
+   la RÉPONSE change à chaque tirage : ce sont des questions différentes. Et
+   « Léa observait le margouillat… » servi avec d'autres leurres reste la MÊME
+   question — la phrase et la réponse ne bougent pas. Les nombres de la réponse
+   passent eux aussi en « # » : rien ne change pour les maths. */
+const tirer = (it: any, eviter?: Set<string>) => (it.kind === "template" ? it.generate({ eviter }) : it);
+const cle = (q: any) => `${squelette(String(q.text))}||${squelette(String((q.expected ?? [])[0] ?? ""))}`;
+const texte = (it: any) => cle(tirer(it));
 
 /** Une série de 20 à une étoile, tirée comme le coach : répétitions de squelettes. */
 function serie(items: any[]) {
   const figesVus = new Set<string>();
   const vus = new Set<string>();
+  const empreintes = new Set<string>();
   let rep = 0;
   for (let q = 0; q < 20; q++) {
     let cands = items.filter((i) => i.kind === "template" || !figesVus.has(i.id));
@@ -71,7 +88,11 @@ function serie(items: any[]) {
     let r = Math.random() * poids.reduce((a, b) => a + b, 0);
     const it = cands[cands.findIndex((_, k) => (r -= poids[k]) < 0)] ?? cands[0];
     if (it.kind !== "template") figesVus.add(it.id);
-    const s = squelette(texte(it));
+    // Comme le moteur : le gabarit reçoit les empreintes vues, puis dix retirages.
+    let q = tirer(it, empreintes);
+    for (let k = 0; k < 10 && it.kind === "template" && empreintes.has(contentFingerprint(q.text, q.choices)); k++) q = tirer(it, empreintes);
+    empreintes.add(contentFingerprint(q.text, q.choices));
+    const s = cle(q);
     if (vus.has(s)) rep++;
     vus.add(s);
   }
@@ -87,7 +108,7 @@ for (const n of notions) {
   for (const m of micros) {
     const its = items.filter((i) => i.microId === m);
     const sk = new Set<string>();
-    for (const i of its) for (let k = 0; k < (i.kind === "template" ? 300 : 1); k++) sk.add(squelette(texte(i)));
+    for (const i of its) for (let k = 0; k < (i.kind === "template" ? 300 : 1); k++) sk.add(texte(i));
     const etoiles = [...new Set(its.map((i) => i.difficulty))].sort();
     const parEtoile = etoiles.map((d) => {
       const exacts = its.filter((i) => i.difficulty === d);
