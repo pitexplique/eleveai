@@ -29,6 +29,12 @@
 // (scripts/verifier-latex.ts).
 
 import type { TutorBankItemV4, FractionCanvasData } from "@/lib/tutor-v4/types";
+// ⭐ 06/10/2026 — varier la PHRASE (situation × tournure × prénom), pas seulement
+// les nombres : mêmes prénoms et mêmes partages que fractions.bank.ts. Chaque
+// gabarit a son correcteur dans correcteurs/fractions-calcul.ts.
+import {
+  PRENOMS, PARTAGES, tirer, deuxPrenoms, il, Il, deP, egales, Maj, attendusFraction,
+} from "./fractions.bank";
 
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
@@ -76,6 +82,83 @@ function barre(n: number, d: number): FractionCanvasData {
     fraction: { numerator: n, denominator: d, label: `${n}/${d}`, color: "#6366f1" },
     display: { showLabel: true, showFraction: true, showParts: true },
     size: { width: 320, height: 130 },
+  };
+}
+
+function pgcd(a: number, b: number): number {
+  return b ? pgcd(b, a % b) : a;
+}
+type P = (typeof PRENOMS)[number];
+/** k fois la fraction f, dans la vie courante. `u` : unité de la réponse. */
+const PRODUITS: { t: (x: P, k: number, f: string) => string; u?: string }[] = [
+  { t: (x, k, f) => `${x.p} boit ${f} L de jus chaque jour pendant ${k} jours. Combien de litres boit-${il(x)} en tout ?`, u: "L" },
+  { t: (x, k, f) => `${x.p} mange ${f} de pizza à chaque repas, pendant ${k} repas. Quelle quantité de pizza mange-t-${il(x)} en tout ?` },
+  { t: (x, k, f) => `${x.p} court ${f} km chaque matin, ${k} matins de suite. Combien de kilomètres court-${il(x)} en tout ?`, u: "km" },
+  { t: (x, k, f) => `Une recette demande ${f} kg de farine. ${x.p} fait la recette ${k} fois. Combien de kilogrammes de farine utilise-t-${il(x)} ?`, u: "kg" },
+  { t: (x, k, f) => `${x.p} coupe ${k} morceaux de ruban de ${f} m chacun. Quelle longueur de ruban, en mètres, utilise-t-${il(x)} ?`, u: "m" },
+  { t: (x, k, f) => `Chaque bouteille contient ${f} L d’eau. ${x.p} en achète ${k}. Combien de litres d’eau achète-t-${il(x)} ?`, u: "L" },
+  { t: (x, k, f) => `${x.p} nage ${f} km à chaque séance. ${Il(x)} fait ${k} séances. Combien de kilomètres nage-t-${il(x)} ?`, u: "km" },
+  { t: (x, k, f) => `Le chat ${deP(x)} mange ${f} kg de croquettes par semaine. Combien de kilogrammes mange-t-il en ${k} semaines ?`, u: "kg" },
+  { t: (x, k, f) => `${x.p} remplit ${k} verres de ${f} L chacun. Combien de litres de jus faut-il ?`, u: "L" },
+  { t: (x, k, f) => `${x.p} met ${f} kg de pommes dans chaque sachet. ${Il(x)} prépare ${k} sachets. Combien de kilogrammes de pommes faut-il ?`, u: "kg" },
+  { t: (x, k, f) => `Dans le jardin, ${x.p} plante ${k} rangées de ${f} m de long. Quelle longueur, en mètres, cela fait-il en tout ?`, u: "m" },
+  { t: (x, k, f) => `Le vélo ${deP(x)} roule ${f} km par minute. Combien de kilomètres parcourt-il en ${k} minutes ?`, u: "km" },
+  { t: (x, k, f) => `${x.p} calcule ${k} × ${f}. Quel résultat trouve-t-${il(x)} ?` },
+  { t: (x, k, f) => `Aide ${x.p} : que vaut ${f} × ${k} ?` },
+  { t: (x, k, f) => `${x.p} prend ${k} fois ${f}. Quelle fraction obtient-${il(x)} ?` },
+  { t: (x, k, f) => `Donne à ${x.p} la valeur de ${k} × ${f}.` },
+  { t: (x, k, f) => `${x.p} doit compléter : ${k} × ${f} = … Que doit-${il(x)} écrire ?` },
+];
+/** On prend n/d d'un total : combien en reste-t-il ? */
+const RESTES: { objets: string; t: (x: P, total: number, f: string) => string }[] = [
+  { objets: "fruits", t: (x, T, f) => `${x.p} a un panier de ${T} fruits. ${Il(x)} en donne les ${f} à ses voisins. Combien de fruits lui reste-t-il ?` },
+  { objets: "billes", t: (x, T, f) => `${x.p} a ${T} billes. ${Il(x)} en perd les ${f} pendant la récréation. Combien de billes lui reste-t-il ?` },
+  { objets: "pages", t: (x, T, f) => `Le livre ${deP(x)} a ${T} pages. ${Il(x)} en a lu les ${f}. Combien de pages lui reste-t-il à lire ?` },
+  { objets: "euros", t: (x, T, f) => `${x.p} a ${T} € d’économies. ${Il(x)} en dépense les ${f} pour un jeu. Combien d’euros lui reste-t-il ?` },
+  { objets: "cartes", t: (x, T, f) => `${x.p} a ${T} cartes. ${Il(x)} en échange les ${f}. Combien de cartes garde-t-${il(x)} ?` },
+  { objets: "graines", t: (x, T, f) => `${x.p} a un sachet de ${T} graines. ${Il(x)} en sème les ${f}. Combien de graines reste-t-il dans le sachet ?` },
+  { objets: "km", t: (x, T, f) => `Le trajet à vélo ${deP(x)} fait ${T} km. ${Il(x)} en a déjà fait les ${f}. Combien de kilomètres lui reste-t-il ?` },
+  { objets: "biscuits", t: (x, T, f) => `${x.p} prépare ${T} biscuits pour la fête. Les invités en mangent les ${f}. Combien de biscuits reste-t-il ?` },
+  { objets: "photos", t: (x, T, f) => `${x.p} a ${T} photos de vacances. ${Il(x)} en imprime les ${f}. Combien de photos ne sont pas imprimées ?` },
+  { objets: "minutes", t: (x, T, f) => `L’entraînement de natation ${deP(x)} dure ${T} minutes. Les ${f} du temps sont passés à nager le crawl. Combien de minutes reste-t-il pour les autres nages ?` },
+  { objets: "élèves", t: (x, T, f) => `Au collège ${deP(x)}, il y a ${T} élèves en sixième. Les ${f} viennent à pied. Combien d’élèves ne viennent pas à pied ?` },
+  { objets: "places", t: (x, T, f) => `Le car de la sortie ${deP(x)} a ${T} places. Les ${f} sont occupées. Combien de places sont libres ?` },
+];
+/** Un total, deux groupes en fractions, « les autres » : combien ? */
+const GROUPES: { t: (x: P, total: number, f1: string, f2: string) => string }[] = [
+  { t: (x, T, a, b) => `Au collège ${deP(x)}, il y a ${T} élèves en sixième. ${a} font de l’espagnol, ${b} de l’allemand, les autres du chinois. Combien d’élèves font du chinois ?` },
+  { t: (x, T, a, b) => `Au club ${deP(x)}, il y a ${T} enfants. ${a} font du foot, ${b} du basket, les autres du judo. Combien d’enfants font du judo ?` },
+  { t: (x, T, a, b) => `${x.p} a un sachet de ${T} bonbons. ${a} sont rouges, ${b} sont jaunes, les autres sont verts. Combien de bonbons sont verts ?` },
+  { t: (x, T, a, b) => `${x.p} range ${T} livres. ${a} sont des BD, ${b} des romans, les autres des documentaires. Combien de documentaires y a-t-il ?` },
+  { t: (x, T, a, b) => `Dans le jardin ${deP(x)}, il y a ${T} fleurs. ${a} sont des roses, ${b} des tulipes, les autres des marguerites. Combien de marguerites y a-t-il ?` },
+  { t: (x, T, a, b) => `${x.p} a ${T} €. ${Il(x)} dépense ${a} de cette somme pour un livre et ${b} pour une place de cinéma. Combien d’euros lui reste-t-il ?` },
+  { t: (x, T, a, b) => `Au potager, ${x.p} plante ${T} légumes. ${a} sont des tomates, ${b} des salades, les autres des carottes. Combien de carottes plante-t-${il(x)} ?` },
+  { t: (x, T, a, b) => `Sur ${T} photos ${deP(x)}, ${a} montrent la mer, ${b} la montagne, les autres la ville. Combien de photos montrent la ville ?` },
+  { t: (x, T, a, b) => `L’orchestre de l’école ${deP(x)} compte ${T} musiciens. ${a} jouent du violon, ${b} de la flûte, les autres des percussions. Combien jouent des percussions ?` },
+  { t: (x, T, a, b) => `${x.p} a ${T} billes. ${Il(x)} en donne ${a} à son frère et ${b} à sa sœur. Combien de billes garde-t-${il(x)} ?` },
+  { t: (x, T, a, b) => `À la cantine, ${T} élèves déjeunent avec ${x.p}. ${a} choisissent le poisson, ${b} les pâtes, les autres la salade. Combien choisissent la salade ?` },
+  { t: (x, T, a, b) => `L’aquarium ${deP(x)} a ${T} poissons. ${a} sont rouges, ${b} sont bleus, les autres sont jaunes. Combien de poissons sont jaunes ?` },
+];
+/** k × n/d en situation : la réponse en fraction (et simplifiée, et entière si elle l'est). */
+function questionProduit(k: number, n: number, d: number) {
+  const x = tirer(PRENOMS);
+  const s = tirer(PRODUITS);
+  const f = `${n}/${d}`;
+  const N = k * n;
+  const g = pgcd(N, d);
+  const entier = N % d === 0;
+  const attendus = attendusFraction(N, d);
+  // Une réponse entière porte l'unité de la situation (« 4 km »).
+  const expected = entier && s.u ? [`${N / d} ${s.u}`, ...attendus] : attendus;
+  return {
+    text: s.t(x, k, f),
+    format: "short" as const,
+    expected,
+    comparator: "fraction_decimal_equivalent" as const,
+    explanation: expl(
+      `${k} × ${f} = (${k} × ${n})/${d} = ${N}/${d}. Seul le numérateur est multiplié : le dénominateur ne change pas.` +
+        (g > 1 ? ` On simplifie par ${g} : ${N}/${d} = ${N / g}/${d / g}${entier ? ` = ${N / d}` : ""}.` : ""),
+    ),
   };
 }
 
@@ -197,13 +280,31 @@ export const fractionsCalculBank: TutorBankItemV4[] = [
       // Le dénominateur divise le nombre : on veut un résultat entier, pour que
       // la MÉTHODE reste au premier plan.
       const d = [3, 4, 5, 6][randomInt(0, 3)];
-      const n = randomInt(2, d - 1);
+      let n = randomInt(2, d - 1);
+      // Pas de 2/4 ni de 3/6 : une fraction de 6e s'écrit simplifiée quand on la donne.
+      while ((d === 4 && n === 2) || (d === 6 && n !== 5)) n = randomInt(2, d - 1);
       const part = randomInt(3, 12);
       const nombre = d * part;
+      const x = tirer(PRENOMS);
+      const f = `${n}/${d}`;
+      const tournures = [
+        `Combien font les ${f} de ${nombre} ?`,
+        `Calcule ${f} de ${nombre}.`,
+        `Que valent les ${f} de ${nombre} ?`,
+        `Complète : ${f} × ${nombre} = …`,
+        `Complète : ${f} de ${nombre} = …`,
+        `${x.p} calcule les ${f} de ${nombre}. Quel résultat doit-${il(x)} trouver ?`,
+        `Donne la valeur de ${f} × ${nombre}. Aide ${x.p}.`,
+        `${x.p} dit : « ${f} de ${nombre}, c’est ${nombre} ÷ ${d}, puis × ${n}. » Combien trouve-t-${il(x)} ?`,
+        `Dans un jeu, ${x.p} gagne les ${f} de ${nombre} points. Combien de points gagne-t-${il(x)} ?`,
+        `${x.p} a ${nombre} € d’économies et en dépense les ${f}. Combien d’euros dépense-t-${il(x)} ?`,
+      ];
+      const k = randomInt(0, tournures.length - 1);
+      const euros = k === tournures.length - 1;
       return {
-        text: `Combien font les ${n}/${d} de ${nombre} ?`,
+        text: tournures[k],
         format: "short",
-        expected: [String(n * part)],
+        expected: euros ? [`${n * part} €`, String(n * part)] : [String(n * part)],
         comparator: "number_equal",
         explanation: expl(
           `Un ${d}e de ${nombre} vaut ${nombre} ÷ ${d} = ${part}, donc ${n}/${d} de ${nombre} = ${n} × ${part} = ${n * part}.`
@@ -420,10 +521,21 @@ export const fractionsCalculBank: TutorBankItemV4[] = [
       const d = randomInt(4, 12);
       const a = randomInt(1, d - 2);
       const b = randomInt(1, d - a - 1);
+      const s = tirer(PARTAGES);
+      const x = tirer(PRENOMS);
+      const tournures = [
+        `${x.p} calcule ${a}/${d} + ${b}/${d}. Quel résultat trouve-t-${il(x)} ?`,
+        `Aide ${x.p} : que vaut ${a}/${d} + ${b}/${d} ?`,
+        `${x.p} écrit ${a}/${d} + ${b}/${d} en une seule fraction. Laquelle ?`,
+        `${x.p} ${s.verbe} ${a}/${d} ${s.du} le matin et ${b}/${d} l’après-midi. Quelle fraction ${s.du} a-t-${il(x)} ${s.pp}e en tout ?`,
+        `${x.p} ${s.verbe} d’abord ${a}/${d} ${s.du}, puis encore ${b}/${d}. Quelle fraction ${s.du} cela fait-il ?`,
+        `${x.p} additionne ${b}/${d} et ${a}/${d}. Quel résultat trouve-t-${il(x)} ?`,
+        `Samedi, ${x.p} ${s.verbe} ${a}/${d} ${s.du}. Dimanche, ${b}/${d}. Combien en tout, en fraction ${s.du} ?`,
+      ];
       return {
-        text: `Calcule ${a}/${d} + ${b}/${d}.`,
+        text: tirer(tournures),
         format: "short",
-        expected: [`${a + b}/${d}`, `${a + b} / ${d}`],
+        expected: attendusFraction(a + b, d),
         comparator: "fraction_decimal_equivalent",
         explanation: expl(`${a}/${d} + ${b}/${d} = (${a} + ${b})/${d} = ${a + b}/${d}.`),
         canvas: deuxBarres([a, d], [b, d], `${a}/${d} et ${b}/${d}`),
@@ -447,13 +559,127 @@ export const fractionsCalculBank: TutorBankItemV4[] = [
       const grand = d * k; // le grand dénominateur est un multiple du petit
       const a = randomInt(1, d - 1 || 1);
       const b = randomInt(1, grand - a * k - 1 || 1);
+      const s = tirer(PARTAGES);
+      const x = tirer(PRENOMS);
+      const [p, q] = Math.random() < 0.5 ? [`${a}/${d}`, `${b}/${grand}`] : [`${b}/${grand}`, `${a}/${d}`];
+      const tournures = [
+        `${x.p} calcule ${p} + ${q}. Quel résultat trouve-t-${il(x)} ?`,
+        `Aide ${x.p} : que vaut ${p} + ${q} ?`,
+        `${x.p} donne la valeur de ${p} + ${q} avec le dénominateur ${grand}. Laquelle ?`,
+        `${x.p} ${s.verbe} ${p} ${s.du}, puis ${q}. Quelle fraction ${s.du} a-t-${il(x)} ${s.pp}e en tout ?`,
+        `${x.p} additionne ${p} et ${q}. Quel résultat trouve-t-${il(x)} ?`,
+        `Le matin, ${x.p} ${s.verbe} ${p} ${s.du}. Le soir, ${q}. Quelle fraction ${s.du} cela fait-il ?`,
+      ];
       return {
-        text: `Calcule ${a}/${d} + ${b}/${grand}.`,
+        text: tirer(tournures),
         format: "short",
-        expected: [`${a * k + b}/${grand}`, `${a * k + b} / ${grand}`],
+        expected: attendusFraction(a * k + b, grand),
         comparator: "fraction_decimal_equivalent",
         explanation: expl(
           `${grand} est un multiple de ${d} : ${a}/${d} = ${a * k}/${grand}. Donc ${a}/${d} + ${b}/${grand} = ${a * k}/${grand} + ${b}/${grand} = ${a * k + b}/${grand}.`
+        ),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "fraction_additionner_tpl_soustraire",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_calcul",
+    microId: "fraction_additionner",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Même dénominateur : on soustrait les numérateurs. Le tout entier, c’est d/d.",
+    tags: ["fraction_calcul", "soustraction", "template"],
+    generate: () => {
+      const s = tirer(PARTAGES);
+      const x = tirer(PRENOMS);
+      const d = randomInt(3, Math.min(12, s.dMax));
+      const reste = Math.random() < 0.5; // « il en reste » : 1 − a/d
+      const a = randomInt(reste ? 1 : 2, d - 1);
+      const b = reste ? 0 : randomInt(1, a - 1);
+      const n = reste ? d - a : a - b;
+      const tournures = reste
+        ? [
+            `${x.p} ${s.verbe} ${a}/${d} ${s.du}. Quelle fraction ${s.du} reste-t-il ?`,
+            `${x.p} calcule 1 − ${a}/${d}. Que trouve-t-${il(x)} ? (1, c’est ${d}/${d}.)`,
+            `${Maj(s.le)} ${deP(x)} a ${d} ${s.unite} ${egales(s)}. ${Il(x)} en a ${s.pp} ${a}/${d}. Quelle fraction reste-t-il ?`,
+            `Aide ${x.p} : que vaut 1 − ${a}/${d} ? (1, c’est ${d}/${d}.)`,
+          ]
+        : [
+            `${x.p} calcule ${a}/${d} − ${b}/${d}. Quel résultat trouve-t-${il(x)} ?`,
+            `Aide ${x.p} : que vaut ${a}/${d} − ${b}/${d} ?`,
+            `${x.p} avait ${a}/${d} ${s.du}. ${Il(x)} en ${s.verbe} ${b}/${d}. Quelle fraction ${s.du} lui reste-t-il ?`,
+            `${x.p} écrit ${a}/${d} − ${b}/${d} en une seule fraction. Laquelle ?`,
+            `${x.p} soustrait ${b}/${d} de ${a}/${d}. Quel résultat trouve-t-${il(x)} ?`,
+          ];
+      return {
+        text: tirer(tournures),
+        format: "short",
+        expected: attendusFraction(n, d),
+        comparator: "fraction_decimal_equivalent",
+        explanation: expl(
+          reste
+            ? `Le tout entier, c’est ${d}/${d}. ${d}/${d} − ${a}/${d} = (${d} − ${a})/${d} = ${n}/${d}.`
+            : `Même dénominateur : ${a}/${d} − ${b}/${d} = (${a} − ${b})/${d} = ${n}/${d}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "fraction_additionner_tpl_partage_reste",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_calcul",
+    microId: "fraction_additionner",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Écris tout avec le plus grand dénominateur, puis enlève du tout (d/d).",
+    tags: ["fraction_calcul", "addition", "soustraction", "probleme", "template"],
+    generate: () => {
+      // Le problème type du BO : « Leïla choisit une part égale au quart, Léo une
+      // part égale au sixième. Quelle fraction reste-t-il ? » — ici avec des
+      // dénominateurs multiples l'un de l'autre (programme de 6e).
+      const s = tirer(PARTAGES);
+      const [x, y] = deuxPrenoms();
+      let d = 2, k = 2, a = 1, b = 1;
+      do {
+        d = randomInt(2, 5);
+        k = randomInt(2, 4);
+        a = randomInt(1, d - 1);
+        b = randomInt(1, d * k - 1);
+      } while (a * k + b >= d * k || d * k > 16);
+      const D = d * k;
+      const pris = a * k + b;
+      const n = D - pris;
+      const cas = tirer(["reste", "reste", "ensemble", "difference"] as const);
+      const debut = `${x.p} ${s.verbe} ${a}/${d} ${s.du}. ${y.p} en ${s.verbe} ${b}/${D}.`;
+      const question =
+        cas === "reste"
+          ? tirer([`Quelle fraction ${s.du} reste-t-il ?`, `Quelle fraction ${s.du} n’a pas été ${s.pp}e ?`])
+          : cas === "ensemble"
+            ? `Quelle fraction ${s.du} ont-${x.f && y.f ? "elles" : "ils"} ${s.pp}e à eux deux ?`
+            : `Quelle fraction ${s.du} ${x.p} a-t-${il(x)} ${s.pp}e de plus que ${y.p} ?`;
+      // « de plus » n'a de sens que si x en a pris plus.
+      const diff = a * k - b;
+      const casFinal = cas === "difference" && diff <= 0 ? "reste" : cas;
+      const questionFinale = casFinal === cas ? question : `Quelle fraction ${s.du} reste-t-il ?`;
+      const num = casFinal === "reste" ? n : casFinal === "ensemble" ? pris : diff;
+      return {
+        text: `${debut} ${questionFinale}`,
+        format: "short",
+        expected: attendusFraction(num, D),
+        comparator: "fraction_decimal_equivalent",
+        explanation: expl(
+          `${D} est un multiple de ${d} : ${a}/${d} = ${a * k}/${D}. ` +
+            (casFinal === "reste"
+              ? `Pris en tout : ${a * k}/${D} + ${b}/${D} = ${pris}/${D}. Le tout, c’est ${D}/${D} : il reste ${D}/${D} − ${pris}/${D} = ${n}/${D}.`
+              : casFinal === "ensemble"
+                ? `${a * k}/${D} + ${b}/${D} = ${pris}/${D}.`
+                : `${a * k}/${D} − ${b}/${D} = ${diff}/${D}.`),
         ),
       };
     },
@@ -655,18 +881,69 @@ export const fractionsCalculBank: TutorBankItemV4[] = [
     tags: ["fraction_calcul", "multiplication", "template"],
     generate: () => {
       const d = randomInt(3, 9);
-      const n = randomInt(1, d - 1);
+      let n = randomInt(2, d - 1);
+      while (pgcd(n, d) !== 1) n = randomInt(2, d - 1);
       const k = randomInt(2, 6);
-      return {
-        text: `Calcule ${k} × ${n}/${d}.`,
-        format: "short",
-        expected: [`${k * n}/${d}`, `${k * n} / ${d}`],
-        comparator: "fraction_decimal_equivalent",
-        explanation: expl(
-          `${k} × ${n}/${d} = ${k} × ${n} sur ${d} = ${k * n}/${d}. Le dénominateur ne change pas.`
-        ),
-        canvas: barre(k * n, d),
-      };
+      // ⚠️ 06/10/2026 : la barre montrait le RÉSULTAT (k × n parts) : elle montre
+      // désormais la fraction de départ, celle qu'on prend k fois.
+      return { ...questionProduit(k, n, d), canvas: barre(n, d) };
+    },
+  },
+  {
+    kind: "template",
+    id: "fraction_multiplier_entier_tpl_unitaire",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_calcul",
+    microId: "fraction_multiplier_entier",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "3 fois 1/5, c’est 3 cinquièmes : 3/5.",
+    tags: ["fraction_calcul", "multiplication", "template"],
+    generate: () => {
+      const d = randomInt(3, 10);
+      return questionProduit(randomInt(2, d - 1), 1, d);
+    },
+  },
+  {
+    kind: "template",
+    id: "fraction_multiplier_entier_tpl_simplifier",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_calcul",
+    microId: "fraction_multiplier_entier",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Multiplie le numérateur, puis regarde si la fraction se simplifie.",
+    tags: ["fraction_calcul", "multiplication", "simplification", "template"],
+    generate: () => {
+      // k et d ont un diviseur commun : le résultat se simplifie (5 × 3/10 = 15/10 = 3/2).
+      let d = 4, n = 1, k = 2;
+      do {
+        d = tirer([4, 6, 8, 9, 10, 12]);
+        n = randomInt(1, d - 1);
+        k = randomInt(2, 8);
+      } while (pgcd(n, d) !== 1 || pgcd(k * n, d) === 1 || (k * n) % d === 0);
+      return questionProduit(k, n, d);
+    },
+  },
+  {
+    kind: "template",
+    id: "fraction_multiplier_entier_tpl_entier",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_calcul",
+    microId: "fraction_multiplier_entier",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "k × n/d : si d divise k, divise d’abord, puis multiplie.",
+    tags: ["fraction_calcul", "multiplication", "template"],
+    generate: () => {
+      const d = randomInt(2, 6);
+      let n = randomInt(1, d - 1);
+      while (pgcd(n, d) !== 1) n = randomInt(1, d - 1);
+      const k = d * randomInt(2, 4);
+      return questionProduit(k, n, d);
     },
   },
 
@@ -822,20 +1099,65 @@ export const fractionsCalculBank: TutorBankItemV4[] = [
     hint: "Calcule la part mangée, puis retire-la du total.",
     tags: ["fraction_calcul", "defi", "template"],
     generate: () => {
-      const d = [3, 4, 5, 6][randomInt(0, 3)];
+      const d = [3, 4, 5, 6, 8][randomInt(0, 4)];
       const part = randomInt(3, 8);
       const total = d * part;
-      const n = randomInt(1, d - 1);
+      // n ≥ 2 : « les 3/4 de… » ; « les 1/4 » ne se dit pas.
+      let n = randomInt(2, d - 1);
+      while (pgcd(n, d) !== 1) n = randomInt(2, d - 1);
       const mange = n * part;
-      const fruits = ["letchis", "mangues", "ananas", "goyaviers"];
-      const fruit = fruits[randomInt(0, fruits.length - 1)];
+      const x = tirer(PRENOMS);
+      const r = tirer(RESTES);
       return {
-        text: `Un panier contient ${total} ${fruit}. On en prend les ${n}/${d}. Combien en reste-t-il ?`,
+        text: r.t(x, total, `${n}/${d}`),
         format: "short",
         expected: [String(total - mange)],
         comparator: "number_equal",
         explanation: expl(
-          `${n}/${d} de ${total} = ${n} × ${total} ÷ ${d} = ${mange}. Il reste ${total} − ${mange} = ${total - mange} ${fruit}.`
+          `${n}/${d} de ${total} = ${total} ÷ ${d} × ${n} = ${part} × ${n} = ${mange}. Il reste ${total} − ${mange} = ${total - mange} ${r.objets}.`
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "fraction_calcul_defi_tpl_deux_fractions",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "fraction_calcul",
+    microId: "fraction_calcul_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Calcule chaque groupe en nombre, puis retire-les du total.",
+    tags: ["fraction_calcul", "defi", "probleme", "template"],
+    generate: () => {
+      // Le problème type du BO : « 30 élèves : 2/5 font de l'espagnol, 1/3 de
+      // l'allemand, les autres du chinois. » Deux fractions d'un même total.
+      let d1 = 2, d2 = 3, n1 = 1, n2 = 1, total = 12;
+      do {
+        d1 = randomInt(2, 6);
+        d2 = randomInt(2, 8);
+        n1 = randomInt(1, d1 - 1);
+        n2 = randomInt(1, d2 - 1);
+        const m = (d1 * d2) / pgcd(d1, d2);
+        total = m * randomInt(1, Math.max(1, Math.floor(60 / m)));
+      } while (
+        d1 === d2 || pgcd(n1, d1) !== 1 || pgcd(n2, d2) !== 1 ||
+        n1 / d1 + n2 / d2 >= 1 || total < 12 || total > 60
+      );
+      const g1 = (total / d1) * n1;
+      const g2 = (total / d2) * n2;
+      const reste = total - g1 - g2;
+      const x = tirer(PRENOMS);
+      const c = tirer(GROUPES);
+      return {
+        text: c.t(x, total, `${n1}/${d1}`, `${n2}/${d2}`),
+        format: "short",
+        expected: [String(reste)],
+        comparator: "number_equal",
+        explanation: expl(
+          `${n1}/${d1} de ${total} : ${total} ÷ ${d1} × ${n1} = ${g1}. ${n2}/${d2} de ${total} : ${total} ÷ ${d2} × ${n2} = ${g2}. ` +
+            `Il reste ${total} − ${g1} − ${g2} = ${reste}.`,
         ),
       };
     },
@@ -852,17 +1174,29 @@ export const fractionsCalculBank: TutorBankItemV4[] = [
     hint: "Le tout vaut d/d : retire la part connue.",
     tags: ["fraction_calcul", "defi", "template"],
     generate: () => {
-      const d = randomInt(5, 12);
-      const n = randomInt(1, d - 2);
+      // On partage ce qui se mange : « partager un mur » ne se dit pas.
+      const s = tirer(PARTAGES.filter((p) => p.dMax >= 8 && /mange|croque/.test(p.verbe)));
+      const [x, y] = deuxPrenoms();
+      const d = randomInt(5, Math.min(12, s.dMax));
+      const a = randomInt(1, d - 3);
+      const b = randomInt(1, d - a - 1);
+      const n = d - a - b;
+      const tournures = [
+        `${x.p} et ${y.p} partagent ${s.un} en ${d} ${s.unite} ${egales(s)}. ${x.p} en ${s.verbe} ${a}/${d}, ${y.p} ${b}/${d}. Quelle fraction ${s.du} reste-t-il ?`,
+        `${Maj(s.un)} a ${d} ${s.unite} ${egales(s)}. ${x.p} en ${s.verbe} ${a}/${d}, puis ${y.p} en ${s.verbe} ${b}/${d}. Quelle fraction ${s.du} reste-t-il ?`,
+        `${x.p} ${s.verbe} ${a}/${d} ${s.du} et ${y.p} ${b}/${d}. Quelle fraction ${s.du} n’a pas été ${s.pp}e ?`,
+        `Sur ${s.le} ${deP(x)}, ${a}/${d} sont pour ${x.p} et ${b}/${d} pour ${y.p}. Quelle fraction reste-t-il pour les autres ?`,
+      ];
       return {
-        text: `Une tablette de chocolat est partagée en ${d} carrés égaux. On en mange ${n}/${d}. Quelle fraction de la tablette reste-t-il ?`,
+        text: tirer(tournures),
         format: "short",
-        expected: [`${d - n}/${d}`, `${d - n} / ${d}`],
+        expected: attendusFraction(n, d),
         comparator: "fraction_decimal_equivalent",
         explanation: expl(
-          `La tablette entière vaut ${d}/${d}. On enlève ${n}/${d} : il reste ${d}/${d} − ${n}/${d} = ${d - n}/${d}.`
+          `Pris : ${a}/${d} + ${b}/${d} = ${a + b}/${d}. Le tout vaut ${d}/${d} : il reste ${d}/${d} − ${a + b}/${d} = ${n}/${d}.`
         ),
-        canvas: barre(d - n, d),
+        // Les deux parts prises, côte à côte ; le reste, c'est à l'élève de le trouver.
+        canvas: deuxBarres([a, d], [b, d], `${a}/${d} et ${b}/${d}`),
       };
     },
   },

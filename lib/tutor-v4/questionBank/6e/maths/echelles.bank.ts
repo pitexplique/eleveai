@@ -80,6 +80,106 @@ function versLePlan(echelleLabel: string, reelDistance: string, question?: strin
   });
 }
 
+/* ---------------------------------------------------------------------------
+   ⛔⛔ 06/10/2026 — « LES MÊMES QUESTIONS REVIENNENT ». Mesuré le 05/10 : 6 à 9
+   squelettes d'énoncé par micro, 12 à 17 répétitions sur 20. Chaque gabarit
+   compose désormais un DOCUMENT (plan ou carte, table ci-dessous) × un OBJET
+   mesuré × une TOURNURE × un PRÉNOM. Mesure : scripts/mesurer-squelettes-
+   coach.ts 6e prop_echelle ; correcteurs : correcteurs/echelles.ts.
+   ⭐ L'échelle « 1/200 » est gardée (Frédéric, 06/10), et l'énoncé dit TOUJOURS
+   ce qu'elle veut dire : « 1 cm sur le plan représente 200 cm en vrai ».
+   Toute autre division s'écrit « ÷ ».
+--------------------------------------------------------------------------- */
+type Prenom = { n: string; f: boolean };
+const PRENOMS: readonly Prenom[] = [
+  { n: "Léa", f: true }, { n: "Inès", f: true }, { n: "Jade", f: true }, { n: "Chloé", f: true },
+  { n: "Aïcha", f: true }, { n: "Maëlys", f: true }, { n: "Yasmine", f: true }, { n: "Emma", f: true },
+  { n: "Noémie", f: true }, { n: "Fatou", f: true }, { n: "Lina", f: true }, { n: "Zoé", f: true },
+  { n: "Anaïs", f: true }, { n: "Mei", f: true }, { n: "Hugo", f: false }, { n: "Tom", f: false },
+  { n: "Nathan", f: false }, { n: "Adam", f: false }, { n: "Rayan", f: false }, { n: "Lucas", f: false },
+  { n: "Moussa", f: false }, { n: "Enzo", f: false }, { n: "Ibrahim", f: false }, { n: "Théo", f: false },
+  { n: "Kenji", f: false }, { n: "Ilyes", f: false }, { n: "Malik", f: false }, { n: "Yanis", f: false },
+];
+const pick = <T,>(a: readonly T[]): T => a[randomInt(0, a.length - 1)];
+const VOYELLE = /^[aeiouhâàéèêîïôûœ]/i;
+const deP = (n: string) => (VOYELLE.test(n) ? `d’${n}` : `de ${n}`);
+const il = (P: Prenom) => (P.f ? "elle" : "il");
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+/** « que la cour », « qu’un sentier », « qu’une route ». */
+const que = (gn: string) => (VOYELLE.test(gn) ? `qu’${gn}` : `que ${gn}`);
+/** « le salon » → « du salon », « la cour » → « de la cour », « l’allée » → « de l’allée ». */
+const du = (gn: string) => (gn.startsWith("le ") ? "du " + gn.slice(3) : "de " + gn);
+
+/**
+ * Un document à l'échelle : `doc(P)` avec son article (« le plan du collège »),
+ * le mot court (« le plan », « la carte »), des objets qu'on y mesure, les
+ * longueurs réelles possibles pour 1 cm (`ks`, dans l'unité `u`) et la plus
+ * grande mesure plausible sur le papier (`cmMax`).
+ */
+type DocEch = { doc: (P: Prenom) => string; court: string; objets: readonly string[]; ks: readonly number[]; u: "m" | "km"; cmMax: number };
+const DOCS_ECH: readonly DocEch[] = [
+  { doc: (P) => `le plan de la maison ${deP(P.n)}`, court: "le plan", objets: ["le salon", "la cuisine", "le couloir", "la terrasse"], ks: [1, 2], u: "m", cmMax: 8 },
+  { doc: () => "le plan du collège", court: "le plan", objets: ["la cour", "le préau", "le gymnase", "le couloir principal"], ks: [2, 5, 10], u: "m", cmMax: 12 },
+  { doc: (P) => `le plan du jardin ${deP(P.n)}`, court: "le plan", objets: ["l’allée", "la haie", "le potager", "la pelouse"], ks: [1, 2, 5], u: "m", cmMax: 10 },
+  { doc: () => "le plan d’un stade", court: "le plan", objets: ["la ligne droite de la piste", "la tribune", "le terrain de foot"], ks: [5, 10, 20], u: "m", cmMax: 12 },
+  { doc: () => "le plan d’un camping", court: "le plan", objets: ["l’allée principale", "la plage du lac", "le chemin des sanitaires"], ks: [10, 20, 25], u: "m", cmMax: 12 },
+  { doc: () => "le plan d’un zoo", court: "le plan", objets: ["l’enclos des girafes", "le chemin des visiteurs", "le bassin des otaries"], ks: [10, 20, 50], u: "m", cmMax: 12 },
+  { doc: () => "le plan d’un parc", court: "le plan", objets: ["le bassin", "la promenade", "l’aire de jeux"], ks: [10, 20, 50], u: "m", cmMax: 12 },
+  { doc: (P) => `le plan du quartier ${deP(P.n)}`, court: "le plan", objets: ["la rue principale", "l’avenue", "le boulevard"], ks: [20, 50, 100], u: "m", cmMax: 12 },
+  { doc: () => "le plan d’une piscine", court: "le plan", objets: ["le grand bassin", "le petit bassin", "la pataugeoire"], ks: [1, 2, 5], u: "m", cmMax: 10 },
+  { doc: () => "le plan d’une ferme", court: "le plan", objets: ["la clôture du pré", "le hangar", "le chemin du verger"], ks: [5, 10, 20], u: "m", cmMax: 12 },
+  { doc: () => "le plan d’un port", court: "le plan", objets: ["la jetée", "le quai", "la digue"], ks: [10, 20, 50], u: "m", cmMax: 12 },
+  { doc: () => "une carte de randonnée", court: "la carte", objets: ["le sentier du lac", "la montée au refuge", "le chemin des crêtes"], ks: [1, 2], u: "km", cmMax: 12 },
+  { doc: () => "une carte routière", court: "la carte", objets: ["la route entre deux villes", "le trajet jusqu’à la plage", "l’autoroute du sud"], ks: [5, 10, 20], u: "km", cmMax: 12 },
+  { doc: () => "la carte d’une île", court: "la carte", objets: ["la côte nord", "la route du volcan", "le chemin du phare"], ks: [2, 4, 5], u: "km", cmMax: 12 },
+  { doc: () => "une carte de La Réunion", court: "la carte", objets: ["un sentier dans les Hauts", "une route côtière", "un chemin de randonnée"], ks: [2, 4, 5], u: "km", cmMax: 12 },
+  { doc: (P) => `la carte du tour à vélo ${deP(P.n)}`, court: "la carte", objets: ["la première étape", "la descente", "la route du retour"], ks: [1, 2, 5], u: "km", cmMax: 12 },
+  { doc: () => "la carte d’un parc national", court: "la carte", objets: ["la route forestière", "le sentier des cascades", "la piste cyclable"], ks: [1, 2], u: "km", cmMax: 12 },
+];
+
+/** Les échelles écrites en fraction : des plans et des maquettes (la mesure du papier en cm). */
+const ECH_NUM: readonly { n: number; doc: (P: Prenom) => string; court: string; objets: readonly string[]; cmMax: number }[] = [
+  { n: 50, doc: (P) => `la maquette du bateau ${deP(P.n)}`, court: "la maquette", objets: ["la coque", "le mât"], cmMax: 30 },
+  { n: 100, doc: (P) => `le plan de la chambre ${deP(P.n)}`, court: "le plan", objets: ["le mur du fond", "le lit", "la fenêtre"], cmMax: 6 },
+  { n: 100, doc: () => "le plan d’une cuisine", court: "le plan", objets: ["le plan de travail", "le mur du four"], cmMax: 6 },
+  { n: 200, doc: () => "le plan d’un appartement", court: "le plan", objets: ["le séjour", "le couloir", "la chambre"], cmMax: 6 },
+  { n: 200, doc: (P) => `la maquette de la maison ${deP(P.n)}`, court: "la maquette", objets: ["la façade", "le garage"], cmMax: 8 },
+  { n: 250, doc: () => "le plan d’une école", court: "le plan", objets: ["la classe", "le préau"], cmMax: 8 },
+  { n: 500, doc: () => "le plan d’un gymnase", court: "le plan", objets: ["la salle de sport", "le terrain de handball"], cmMax: 10 },
+  { n: 1000, doc: () => "le plan d’un village", court: "le plan", objets: ["la place", "la rue de l’église"], cmMax: 12 },
+];
+/** « l’échelle 1/200 (1 cm sur le plan représente 200 cm en vrai) ». */
+const echNum = (n: number, court: string) => `l’échelle 1/${n} (1 cm sur ${court} représente ${n} cm en vrai)`;
+
+/**
+ * Les anciennes questions ouvertes, FERMÉES (coordinateur, 06/10) : un mot-clé
+ * numérique en `contains_keyword` acceptait toute réponse contenant ce chiffre.
+ * Un nombre attendu → réponse courte `number_equal` avec unité ; une
+ * explication → QCM dont les leurres sont les erreurs du chapitre.
+ */
+type CasFerme = { q: string; r: string; nombre?: { v: string; u: string }; qcm?: { bonne: string; leurres: string[] } };
+function fermer(c: CasFerme) {
+  if (c.nombre) return { format: "short" as const, expected: [`${c.nombre.v} ${c.nombre.u}`, c.nombre.v], comparator: "number_equal" as const };
+  const q = c.qcm!;
+  return {
+    format: "qcm" as const,
+    choices: [q.bonne, ...q.leurres].sort(() => Math.random() - 0.5),
+    expected: [q.bonne],
+    comparator: "mcq_exact" as const,
+  };
+}
+
+/** Un document, un objet, une échelle « 1 cm représente k u », une mesure sur le papier. */
+function tirerDoc(demi = false) {
+  const d = pick(DOCS_ECH);
+  const P = pick(PRENOMS);
+  const k = pick(d.ks);
+  const cm = randomInt(2, d.cmMax) - (demi && Math.random() < 0.4 ? 0.5 : 0);
+  // Le propriétaire du document n'est pas celui qui le lit (« Léa regarde le plan de la maison de Tom »).
+  const proprio = pick(PRENOMS.filter((x) => x.n !== P.n));
+  return { d, P, k, cm, reel: Math.round(cm * k * 100) / 100, objet: pick(d.objets), docTxt: d.doc(proprio) };
+}
+
 export const echelles6eBank: TutorBankItemV4[] = [
   // =========================
   // ECHELLE_COMPRENDRE — ce que dit une échelle
@@ -169,27 +269,109 @@ export const echelles6eBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Multiplie par le même nombre des deux côtés.",
     tags: ["prop_echelle", "comprendre", "template"],
+    // 06/10 : la linéarité — on connaît ce que valent PLUSIEURS cm (pas 1 cm).
     generate: () => {
-      const parCm = randomInt(2, 20) * 5;
-      const cm = randomInt(2, 9);
-      const supports = [
-        { quoi: "le plan d'un quartier", unite: "m" },
-        { quoi: "la carte d'une randonnée", unite: "m" },
-        { quoi: "le plan d'un stade", unite: "m" },
-      ];
-      const s = supports[randomInt(0, supports.length - 1)];
+      for (;;) {
+        const { d, P, k, docTxt, objet } = tirerDoc();
+        const c1 = randomInt(2, 4);
+        const fois = randomInt(2, 3);
+        const c2 = c1 * fois;
+        if (c2 > d.cmMax) continue;
+        const [r1, r2] = [c1 * k, c2 * k];
+        const text = pick([
+          `Sur ${docTxt}, ${c1} cm représentent ${nombre(r1)} ${d.u} dans la réalité. Que représentent ${c2} cm ? Réponds en ${d.u}.`,
+          `${P.n} lit sur ${docTxt} : « ${c1} cm pour ${nombre(r1)} ${d.u} ». ${cap(objet)} mesure ${c2} cm sur ${d.court}. Quelle est sa longueur réelle, en ${d.u} ?`,
+          `Sur ${docTxt}, ${c1} cm correspondent à ${nombre(r1)} ${d.u}. Combien de ${d.u === "m" ? "mètres" : "kilomètres"} représentent ${c2} cm ?`,
+        ]);
+        return {
+          text,
+          format: "short",
+          expected: [`${nombre(r2)} ${d.u}`, nombre(r2)],
+          comparator: "number_equal",
+          explanation: ex(
+            "une échelle relie proportionnellement la longueur du plan et la longueur réelle.",
+            "on multiplie par le même nombre des deux côtés — c'est la propriété de linéarité.",
+            `${c2} cm, c'est ${fois} fois ${c1} cm. La longueur réelle est donc ${fois} fois ${nombre(r1)} ${d.u} : ${fois} × ${nombre(r1)} = ${nombre(r2)} ${d.u}.`,
+            `${c2} cm représentent ${nombre(r2)} ${d.u}.`
+          ),
+          canvas: correspondance(`${c1} cm ↔ ${nombre(r1)} ${d.u}`, `${c1} cm`, `${nombre(r1)} ${d.u}`, `Et ${c2} cm ?`),
+        };
+      }
+    },
+  },
+  {
+    kind: "template",
+    id: "6e_echelle_comprendre_tpl_lire",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "prop_echelle",
+    microId: "echelle_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "2 cm, c'est 2 fois 1 cm : la longueur réelle est 2 fois plus grande.",
+    tags: ["prop_echelle", "comprendre", "template"],
+    generate: () => {
+      const { d, P, k, cm, reel, docTxt, objet } = tirerDoc();
+      const text = pick([
+        `Sur ${docTxt}, on lit : « 1 cm sur ${d.court} correspond à ${k} ${d.u} dans la réalité ». Que représentent ${cm} cm sur ${d.court} ? Réponds en ${d.u}.`,
+        `${P.n} regarde ${docTxt} : 1 cm représente ${k} ${d.u}. ${cap(objet)} mesure ${cm} cm sur ${d.court}. Quelle est sa longueur réelle, en ${d.u} ?`,
+        `Sur ${docTxt}, 1 cm représente ${k} ${d.u}. Combien de ${d.u === "m" ? "mètres" : "kilomètres"} représentent ${cm} cm ?`,
+        `L’échelle ${du(d.court)} est « 1 cm pour ${k} ${d.u} ». ${P.n} mesure ${objet} : ${cm} cm. Quelle longueur cela fait-il en vrai, en ${d.u} ?`,
+      ]);
       return {
-        text: `Sur ${s.quoi}, on lit : « 1 cm correspond à ${parCm} ${s.unite} ». Que représentent ${cm} cm ? (Réponds en ${s.unite}.)`,
+        text,
         format: "short",
-        expected: [String(cm * parCm)],
+        expected: [`${nombre(reel)} ${d.u}`, nombre(reel)],
         comparator: "number_equal",
         explanation: ex(
-          "une échelle relie proportionnellement la longueur du plan et la longueur réelle.",
-          "on multiplie par le même nombre des deux côtés — c'est la propriété de linéarité.",
-          `1 cm vaut ${parCm} ${s.unite}. Or ${cm} cm, c'est ${cm} fois 1 cm : la longueur réelle est donc ${cm} fois ${parCm} ${s.unite}, soit ${cm} × ${parCm} = ${cm * parCm} ${s.unite}.`,
-          `${cm} cm représentent ${cm * parCm} ${s.unite}.`
+          "une échelle indique à quelle longueur réelle correspond une longueur du plan.",
+          "on utilise la linéarité : autant de fois 1 cm, autant de fois la longueur réelle.",
+          `1 cm vaut ${k} ${d.u}. Or ${cm} cm, c'est ${cm} fois 1 cm : ${cm} × ${k} = ${nombre(reel)} ${d.u}.`,
+          `${cm} cm représentent ${nombre(reel)} ${d.u}.`
         ),
-        canvas: correspondance(`1 cm ↔ ${parCm} ${s.unite}`, "1 cm", `${parCm} ${s.unite}`, `Et ${cm} cm ?`),
+        canvas: correspondance(`1 cm ↔ ${k} ${d.u}`, "1 cm", `${k} ${d.u}`, `Et ${cm} cm ?`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "6e_echelle_comprendre_qcm_tpl_fraction",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "prop_echelle",
+    microId: "echelle_comprendre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "L'échelle 1/200 n'a pas d'unité : les deux longueurs se mesurent dans la même unité.",
+    tags: ["prop_echelle", "comprendre", "qcm", "template"],
+    generate: () => {
+      const e = pick(ECH_NUM);
+      const P = pick(PRENOMS);
+      const mot = e.court.replace(/^(le|la) /, "");
+      const bonne = `1 cm sur ${e.court} représente ${e.n} cm en vrai`;
+      const leurres = [
+        `1 cm sur ${e.court} représente ${e.n} m en vrai`,
+        `${e.court} est ${e.n} fois plus grand${e.court.startsWith("la") ? "e" : ""} que la réalité`,
+        `${e.court} mesure ${e.n} cm de long`,
+        `1 cm sur ${e.court} représente ${e.n} km en vrai`,
+      ];
+      return {
+        text: pick([
+          `${cap(e.doc(P))} est à l'échelle 1/${e.n}. Qu'est-ce que cela signifie ?`,
+          `${pick(PRENOMS.filter((x) => x.n !== P.n)).n} lit « échelle 1/${e.n} » sur ${e.doc(P)}. Que veut dire cette échelle ?`,
+          `Sur ${e.doc(P)}, il est écrit : échelle 1/${e.n}. Choisis la bonne explication.`,
+        ]),
+        format: "qcm",
+        choices: [bonne, ...leurres.sort(() => Math.random() - 0.5).slice(0, 3)].sort(() => Math.random() - 0.5),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: ex(
+          "une échelle écrite en fraction compare deux longueurs mesurées dans LA MÊME unité.",
+          `on lit 1/${e.n} comme « 1 sur ${e.court} pour ${e.n} en vrai », dans la même unité des deux côtés.`,
+          `1 cm sur ${e.court} correspond à ${e.n} cm en réalité. Changer d'unité en route (« 1 cm pour ${e.n} m ») multiplierait la réalité par cent. Et ${mot === "maquette" ? "la maquette" : "le plan"} est plus petit${mot === "maquette" ? "e" : ""} que la réalité, pas plus grand${mot === "maquette" ? "e" : ""}.`,
+          `l'échelle 1/${e.n} réduit toutes les longueurs ${e.n} fois.`
+        ),
+        // Pas de figure ici : elle afficherait « 1 cm ↔ ${e.n} cm », c'est-à-dire la réponse.
       };
     },
   },
@@ -204,30 +386,49 @@ export const echelles6eBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Parle des deux longueurs et de ce qui les relie.",
     tags: ["prop_echelle", "comprendre", "template", "ouverte"],
+    // 06/10 : trois questions ouvertes, chacune sur un document et des nombres tirés.
     generate: () => {
-      const cas = [
+      const { d, P, k, cm, reel, docTxt } = tirerDoc();
+      const e = pick(ECH_NUM);
+      const c1 = randomInt(2, 3);
+      const fois = randomInt(2, 4);
+      // 06/10 (coordinateur) : plus de question ouverte à mots-clés. Un nombre → réponse
+      // courte avec unité ; une explication → QCM sur les pièges du chapitre.
+      const cas: CasFerme[] = [
         {
-          q: "Explique ce que veut dire l'échelle « 1 cm pour 10 m » sur le plan d'un collège.",
-          mots: ["plan", "réalité", "realite", "10", "proportionnel", "multiplie", "correspond"],
-          r: "Elle donne la règle de traduction entre le papier et le terrain : chaque centimètre mesuré sur le plan représente dix mètres dans la cour. Comme c'est une situation de proportionnalité, la règle vaut pour toutes les longueurs — 2 cm font 20 m, 5 cm font 50 m, la moitié d'un centimètre fait 5 m. Sans cette indication, un plan ne dit rien des vraies dimensions : il ne donne que des formes.",
+          q: `Sur ${docTxt}, on lit « 1 cm pour ${k} ${d.u} ». ${P.n} mesure ${cm} cm sur ${d.court}. Quelle longueur cela représente-t-il en vrai, en ${d.u} ?`,
+          nombre: { v: nombre(reel), u: d.u },
+          r: `Chaque centimètre mesuré sur ${d.court} représente ${k} ${d.u} en vrai. Comme c'est une situation de proportionnalité, la règle vaut pour toutes les longueurs : ${cm} cm, c'est ${cm} fois 1 cm, donc ${cm} × ${k} = ${nombre(reel)} ${d.u}.`,
         },
         {
-          q: "Une échelle s'écrit parfois « 1 cm pour 10 m », parfois « 1/200 ». Explique la différence entre ces deux écritures.",
-          mots: ["unité", "unite", "même", "meme", "sans", "fraction", "200"],
-          r: "La première précise les unités : un centimètre sur le plan pour dix mètres en vrai, et on peut l'appliquer directement. La seconde n'a aucune unité : 1/200 signifie 1 sur le plan pour 200 en réalité, dans l'unité qu'on veut, pourvu que ce soit la même des deux côtés. Un centimètre sur le plan fait donc 200 centimètres en vrai, soit 2 mètres. L'erreur classique est de lire « 1 cm pour 200 m », ce qui multiplie la réalité par cent.",
+          q: `${cap(e.doc(P))} est à ${echNum(e.n, e.court)}. Pourquoi ne doit-on pas lire « 1 cm pour ${e.n} m » ? Choisis la bonne explication.`,
+          qcm: {
+            bonne: `1/${e.n} n'a pas d'unité : 1 cm sur ${e.court} représente ${e.n} cm, pas ${e.n} m`,
+            leurres: [
+              `parce que ${e.n} m ne tiendrait pas sur une feuille`,
+              `parce qu'il faut lire « ${e.n} cm pour 1 cm »`,
+              `parce que l'échelle ne sert qu'aux cartes`,
+            ],
+          },
+          r: `L'échelle 1/${e.n} n'a aucune unité : elle dit 1 sur ${e.court} pour ${e.n} en réalité, dans la même unité des deux côtés. 1 cm représente donc ${e.n} cm en vrai, soit ${nombre(e.n / 100)} m. Lire « 1 cm pour ${e.n} m » changerait d'unité en route et multiplierait la réalité par cent.`,
         },
         {
-          q: "Pourquoi dit-on qu'une échelle est une situation de proportionnalité ?",
-          mots: ["multiplie", "même nombre", "meme nombre", "double", "linéarité", "linearite", "toutes"],
-          r: "Parce que si on double une longueur sur le plan, la longueur réelle double aussi ; si on la triple, elle triple. Le lien entre les deux est le même partout sur le plan, quelle que soit la longueur mesurée. C'est exactement la propriété de linéarité, et c'est elle qui permet de tout calculer à partir d'une seule correspondance connue, sans jamais mesurer sur le terrain.",
+          q: `Sur ${docTxt}, ${c1} cm représentent ${nombre(c1 * k)} ${d.u}. Pourquoi ${c1 * fois} cm représentent-ils ${nombre(c1 * fois * k)} ${d.u} ? Choisis la bonne explication.`,
+          qcm: {
+            bonne: `${c1 * fois} cm, c'est ${fois} fois ${c1} cm : la longueur réelle est aussi ${fois} fois plus grande`,
+            leurres: [
+              `on ajoute ${c1 * fois - c1} cm, donc on ajoute ${nombre((c1 * fois - c1))} ${d.u}`,
+              `on multiplie ${c1 * fois} par ${c1}`,
+              `les deux longueurs n'ont pas de lien`,
+            ],
+          },
+          r: `${c1 * fois} cm, c'est ${fois} fois ${c1} cm. Comme l'échelle est une situation de proportionnalité, la longueur réelle est aussi ${fois} fois plus grande : ${fois} × ${nombre(c1 * k)} = ${nombre(c1 * fois * k)} ${d.u}. C'est la propriété de linéarité.`,
         },
       ];
       const c = cas[randomInt(0, cas.length - 1)];
       return {
         text: c.q,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
+        ...fermer(c),
         explanation: ex(
           "une échelle relie proportionnellement les longueurs du plan et celles de la réalité.",
           "on raisonne par linéarité, jamais par produit en croix — il n'est pas au programme de 6e.",
@@ -326,22 +527,66 @@ export const echelles6eBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Du plan vers la réalité : on agrandit.",
     tags: ["prop_echelle", "reelle", "template"],
+    // 06/10 : un document de la table × un objet × quatre tournures ; mesure parfois en demi-cm.
     generate: () => {
-      const parCm = [2, 4, 5, 10, 20, 25, 50][randomInt(0, 6)];
-      const cm = randomInt(3, 12);
-      const unite = parCm >= 20 ? "m" : "km";
+      const { d, P, k, cm, reel, docTxt, objet } = tirerDoc(true);
+      const motU = d.u === "m" ? "mètres" : "kilomètres";
+      const text = pick([
+        `Sur ${docTxt}, 1 cm représente ${k} ${d.u}. ${cap(objet)} mesure ${nombre(cm)} cm sur ${d.court}. Quelle est sa longueur réelle, en ${d.u} ?`,
+        `${P.n} mesure ${objet} sur ${docTxt} : ${nombre(cm)} cm. Sur ${d.court}, 1 cm représente ${k} ${d.u}. Quelle est la vraie longueur, en ${d.u} ?`,
+        `${cap(objet)} mesure ${nombre(cm)} cm sur ${docTxt}, où 1 cm représente ${k} ${d.u}. Calcule sa longueur réelle en ${d.u}.`,
+        `Sur ${docTxt} (1 cm pour ${k} ${d.u}), ${P.n} mesure ${objet} : ${nombre(cm)} cm. Combien de ${motU} cela fait-il en réalité ?`,
+      ]);
       return {
-        text: `Sur une carte, 1 cm représente ${parCm} ${unite}. Deux villages sont séparés de ${cm} cm sur la carte. Quelle est la distance réelle, en ${unite} ?`,
+        text,
         format: "short",
-        expected: [String(cm * parCm)],
+        expected: [`${nombre(reel)} ${d.u}`, nombre(reel)],
         comparator: "number_equal",
         explanation: ex(
           "du plan vers la réalité, on agrandit.",
-          "on multiplie la distance de la carte par ce que vaut 1 cm.",
-          `1 cm vaut ${parCm} ${unite}. Pour ${cm} cm, on multiplie par ${cm} des deux côtés : ${cm} × ${parCm} = ${cm * parCm} ${unite}.`,
-          `la distance réelle est de ${cm * parCm} ${unite}.`
+          "on multiplie la mesure du papier par ce que vaut 1 cm.",
+          `1 cm vaut ${k} ${d.u}. Pour ${nombre(cm)} cm, on multiplie par ${nombre(cm)} : ${nombre(cm)} × ${k} = ${nombre(reel)} ${d.u}.`,
+          `la longueur réelle est de ${nombre(reel)} ${d.u}.`
         ),
-        canvas: versLeReel(`1 cm ↔ ${parCm} ${unite}`, `${cm} cm`, "Distance réelle ?"),
+        canvas: versLeReel(`1 cm ↔ ${k} ${d.u}`, `${nombre(cm)} cm`, "Longueur réelle ?"),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "6e_echelle_reelle_tpl_fraction",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "prop_echelle",
+    microId: "echelle_distance_reelle",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "1/200 : 1 cm sur le plan fait 200 cm en vrai. Multiplie, puis convertis les cm en m.",
+    tags: ["prop_echelle", "reelle", "template", "fraction"],
+    generate: () => {
+      const e = pick(ECH_NUM);
+      const P = pick(PRENOMS);
+      const objet = pick(e.objets);
+      const c = randomInt(2, e.cmMax);
+      const enCm = c * e.n;
+      const m = enCm / 100;
+      const text = pick([
+        `${cap(e.doc(P))} est à ${echNum(e.n, e.court)}. Sur ${e.court}, ${objet} mesure ${c} cm. Quelle est sa longueur réelle, en mètres ?`,
+        `Sur ${e.doc(P)}, à ${echNum(e.n, e.court)}, ${objet} mesure ${c} cm. Combien de mètres cela fait-il en vrai ?`,
+        `${cap(objet)} mesure ${c} cm sur ${e.doc(P)}. L’échelle est 1/${e.n} : 1 cm sur ${e.court} représente ${e.n} cm en vrai. Calcule sa longueur réelle en mètres.`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: [`${nombre(m)} m`, nombre(m)],
+        comparator: "number_equal",
+        explanation: ex(
+          `l'échelle 1/${e.n} signifie 1 sur ${e.court} pour ${e.n} en réalité, dans la même unité.`,
+          `on multiplie par ${e.n} en gardant les centimètres, puis on convertit à la fin (100 cm = 1 m).`,
+          `${c} cm sur ${e.court} donnent ${c} × ${e.n} = ${enCm} cm en réalité. ${enCm} cm ÷ 100 = ${nombre(m)} m.`,
+          `la longueur réelle est de ${nombre(m)} m.`
+        ),
+        canvas: versLeReel(`1/${e.n}`, `${c} cm`, "Longueur réelle ?"),
       };
     },
   },
@@ -356,30 +601,40 @@ export const echelles6eBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Dis dans quel sens on va, et comment vérifier que le résultat est plausible.",
     tags: ["prop_echelle", "reelle", "template", "ouverte"],
+    // 06/10 : trois questions ouvertes, chacune sur un document et des nombres tirés.
     generate: () => {
-      const cas = [
+      let t = tirerDoc();
+      // L'erreur « on a divisé » doit tomber sur au plus deux décimales.
+      while (!Number.isInteger((t.cm * 100) / t.k) || t.k === 1) t = tirerDoc();
+      const { d, P, k, cm, reel, docTxt, objet } = t;
+      const e = pick(ECH_NUM);
+      const c2 = randomInt(2, e.cmMax);
+      const faux = cm / k;
+      // 06/10 (coordinateur) : un nombre → réponse courte avec unité ; une erreur → QCM.
+      const cas: CasFerme[] = [
         {
-          q: "Explique comment passer d'une distance mesurée sur une carte à la distance réelle, et comment vérifier que ton résultat est plausible.",
-          mots: ["multiplie", "agrandit", "plus grand", "1 cm", "vérifie", "verifie"],
-          r: "Je regarde d'abord ce que vaut 1 cm en réalité, puis je multiplie ma mesure par ce nombre : c'est la propriété de linéarité. Comme on va du plan vers le terrain, on agrandit toujours — le résultat doit donc être bien plus grand que ma mesure en centimètres. Si je trouve une valeur plus petite, j'ai divisé au lieu de multiplier. Et je vérifie que l'ordre de grandeur est crédible : quelques dizaines de kilomètres entre deux villes de l'île, pas quelques mètres.",
+          q: `${cap(objet)} mesure ${cm} cm sur ${docTxt}, où 1 cm représente ${k} ${d.u}. ${P.n} cherche sa longueur réelle. Que doit-${il(P)} trouver, en ${d.u} ?`,
+          nombre: { v: nombre(reel), u: d.u },
+          r: `Je regarde ce que vaut 1 cm en réalité : ${k} ${d.u}. ${cm} cm, c'est ${cm} fois 1 cm, donc je multiplie : ${cm} × ${k} = ${nombre(reel)} ${d.u}. On va du papier vers le terrain : on agrandit, le résultat doit être plus grand que la mesure du plan.`,
         },
         {
-          q: "Sur un plan à l'échelle 1/200, une pièce mesure 4 cm. Explique tout le calcul, y compris la conversion.",
-          mots: ["200", "800", "cm", "8", "mètres", "metres", "100"],
-          r: "L'échelle 1/200 n'a pas d'unité : elle dit 1 sur le plan pour 200 en réalité, dans la même unité. Je garde donc les centimètres et je multiplie : 4 × 200 = 800 cm. Ce nombre est juste, mais peu parlant pour une pièce — je le convertis en mètres à la fin, en divisant par 100, puisque 100 cm font 1 m. La pièce mesure 8 m, ce qui est une taille crédible pour une pièce.",
+          q: `${cap(e.doc(P))} est à ${echNum(e.n, e.court)}. ${cap(pick(e.objets))} y mesure ${c2} cm. Quelle est sa longueur réelle, en mètres ?`,
+          nombre: { v: nombre((c2 * e.n) / 100), u: "m" },
+          r: `L'échelle 1/${e.n} dit 1 sur ${e.court} pour ${e.n} en réalité, dans la même unité. Je garde les centimètres et je multiplie : ${c2} × ${e.n} = ${c2 * e.n} cm. Puis je convertis : ${c2 * e.n} ÷ 100 = ${nombre((c2 * e.n) / 100)} m, puisque 100 cm font 1 m.`,
         },
         {
-          q: "Pourquoi vaut-il mieux vérifier le SENS du calcul avant de vérifier le calcul lui-même ?",
-          mots: ["divise", "multiplie", "impossible", "bon sens", "grand", "petit"],
-          r: "Parce qu'une erreur de sens saute aux yeux sans refaire un seul calcul. Si un couloir de 6 cm sur un plan à 1 cm pour 5 m « mesure » 1,2 m en réalité, c'est impossible : la réalité est forcément plus grande que le plan. On sait alors tout de suite qu'on a divisé au lieu de multiplier. Vérifier les chiffres prend du temps ; vérifier le sens prend deux secondes et attrape l'erreur la plus fréquente du chapitre.",
+          q: `Sur ${docTxt}, 1 cm représente ${k} ${d.u}. ${P.n} pense ${que(objet)} (${cm} cm sur ${d.court}) mesure ${nombre(faux)} ${d.u} en vrai. Quelle est son erreur ?`,
+          qcm: {
+            bonne: `${il(P)} a divisé au lieu de multiplier : la bonne longueur est ${nombre(reel)} ${d.u}`,
+            leurres: [`${il(P)} a oublié de convertir en centimètres`, "aucune erreur, le calcul est juste", `${il(P)} aurait dû multiplier par 100`],
+          },
+          r: `${cm} ÷ ${k} = ${nombre(faux)} : ${P.n} a divisé au lieu de multiplier. Or la réalité est plus grande que le plan. Il fallait faire ${cm} × ${k} = ${nombre(reel)} ${d.u}.`,
         },
       ];
       const c = cas[randomInt(0, cas.length - 1)];
       return {
         text: c.q,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
+        ...fermer(c),
         explanation: ex(
           "du plan vers la réalité, on agrandit.",
           "linéarité ou retour à l'unité, puis contrôle de l'ordre de grandeur.",
@@ -480,23 +735,65 @@ export const echelles6eBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "De la réalité vers le plan : on réduit.",
     tags: ["prop_echelle", "plan", "template"],
+    // 06/10 : un document de la table × un objet × quatre tournures ; le résultat peut être un demi-cm.
     generate: () => {
-      const parCm = [2, 4, 5, 10, 20, 25][randomInt(0, 5)];
-      const cmPlan = randomInt(3, 12) * (Math.random() < 0.4 ? 0.5 : 1);
-      const reel = Number((cmPlan * parCm).toFixed(2));
-      const unite = parCm >= 20 ? "m" : "km";
+      const { d, P, k, cm, reel, docTxt, objet } = tirerDoc(true);
+      const text = pick([
+        `Sur ${docTxt}, 1 cm représente ${k} ${d.u}. En vrai, ${objet} mesure ${nombre(reel)} ${d.u}. Quelle longueur faut-il tracer sur ${d.court}, en cm ?`,
+        `${P.n} dessine ${docTxt}, où 1 cm représente ${k} ${d.u}. ${cap(objet)} mesure ${nombre(reel)} ${d.u} en réalité. Combien de centimètres doit-${il(P)} tracer ?`,
+        `En réalité, ${objet} mesure ${nombre(reel)} ${d.u}. Sur ${docTxt}, 1 cm représente ${k} ${d.u}. Quelle est sa longueur sur ${d.court}, en cm ?`,
+        `Sur ${docTxt} (1 cm pour ${k} ${d.u}), quelle longueur occupe ${objet}, qui mesure ${nombre(reel)} ${d.u} en vrai ? Réponds en cm.`,
+      ]);
       return {
-        text: `Sur une carte, 1 cm représente ${parCm} ${unite}. Un trajet réel mesure ${nombre(reel)} ${unite}. Quelle longueur occupe-t-il sur la carte, en cm ?`,
+        text,
         format: "short",
-        expected: [nombre(cmPlan), String(cmPlan)],
+        expected: [`${nombre(cm)} cm`, nombre(cm)],
         comparator: "number_equal",
         explanation: ex(
           "de la réalité vers le plan, on réduit.",
           "on cherche combien de fois la longueur correspondant à 1 cm tient dans la longueur réelle.",
-          `1 cm représente ${parCm} ${unite}. Dans ${nombre(reel)} ${unite}, il y a ${nombre(reel)} ÷ ${parCm} = ${nombre(cmPlan)} fois ${parCm} ${unite}. Le trajet occupe donc ${nombre(cmPlan)} cm sur la carte.`,
-          `${nombre(cmPlan)} cm sur la carte.`
+          `1 cm représente ${k} ${d.u}. Dans ${nombre(reel)} ${d.u}, il y a ${nombre(reel)} ÷ ${k} = ${nombre(cm)} fois ${k} ${d.u}. Il faut donc tracer ${nombre(cm)} cm.`,
+          `${nombre(cm)} cm sur ${d.court}.`
         ),
-        canvas: versLePlan(`1 cm ↔ ${parCm} ${unite}`, `${nombre(reel)} ${unite}`, "Longueur sur la carte ?"),
+        canvas: versLePlan(`1 cm ↔ ${k} ${d.u}`, `${nombre(reel)} ${d.u}`, "Longueur sur le plan ?"),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "6e_echelle_plan_tpl_fraction",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "prop_echelle",
+    microId: "echelle_distance_plan",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Convertis d'abord les mètres en centimètres, puis divise par le nombre de l'échelle.",
+    tags: ["prop_echelle", "plan", "template", "fraction"],
+    generate: () => {
+      const e = pick(ECH_NUM);
+      const P = pick(PRENOMS);
+      const objet = pick(e.objets);
+      const c = randomInt(2, e.cmMax) - (Math.random() < 0.3 ? 0.5 : 0);
+      const enCm = c * e.n;
+      const m = enCm / 100;
+      const text = pick([
+        `${cap(e.doc(P))} est à ${echNum(e.n, e.court)}. En vrai, ${objet} mesure ${nombre(m)} m. Quelle est sa longueur sur ${e.court}, en cm ?`,
+        `Sur ${e.doc(P)}, à ${echNum(e.n, e.court)}, combien de centimètres faut-il pour ${objet}, qui mesure ${nombre(m)} m en vrai ?`,
+        `En réalité, ${objet} mesure ${nombre(m)} m. L’échelle ${du(e.court)} est 1/${e.n} : 1 cm sur ${e.court} représente ${e.n} cm en vrai. Quelle longueur faut-il tracer, en cm ?`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: [`${nombre(c)} cm`, nombre(c)],
+        comparator: "number_equal",
+        explanation: ex(
+          `l'échelle 1/${e.n} signifie 1 cm sur ${e.court} pour ${e.n} cm en réalité.`,
+          `on convertit la longueur réelle en cm, puis on cherche combien de fois ${e.n} cm y tiennent.`,
+          `${nombre(m)} m = ${enCm} cm. ${enCm} ÷ ${e.n} = ${nombre(c)}. Il faut tracer ${nombre(c)} cm.`,
+          `${nombre(c)} cm sur ${e.court}.`
+        ),
+        canvas: versLePlan(`1/${e.n}`, `${nombre(m)} m`, "Longueur sur le plan ?"),
       };
     },
   },
@@ -511,30 +808,46 @@ export const echelles6eBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Explique le sens, puis la méthode, sans produit en croix.",
     tags: ["prop_echelle", "plan", "template", "ouverte"],
+    // 06/10 : trois questions ouvertes, chacune sur un document et des nombres tirés.
     generate: () => {
-      const cas = [
+      let t = tirerDoc(true);
+      while (t.k === 1) t = tirerDoc(true);
+      const { d, P, k, cm, reel, docTxt, objet } = t;
+      // Pour la question « nombre à virgule », une mesure qui tombe sur un demi-cm.
+      const cmDemi = Number.isInteger(cm) ? cm + 0.5 : cm;
+      const reelDemi = cmDemi * k;
+      // 06/10 (coordinateur) : un nombre → réponse courte avec unité ; une explication → QCM.
+      const cas: CasFerme[] = [
         {
-          q: "Explique comment savoir quelle longueur donner, sur un plan, à un mur de 24 m, sachant que 1 cm représente 8 m.",
-          mots: ["divise", "3", "combien de fois", "réduit", "reduit", "8"],
-          r: "Je cherche combien de fois la longueur représentée par 1 cm tient dans la longueur réelle : 24 ÷ 8 = 3. Le mur occupera donc 3 cm sur le plan. Le sens du calcul est facile à retrouver : on passe du terrain au papier, donc on réduit, donc on divise. Multiplier donnerait 192 cm, soit près de deux mètres de plan pour un seul mur.",
+          q: `Sur ${docTxt}, 1 cm représente ${k} ${d.u}. En vrai, ${objet} mesure ${nombre(reel)} ${d.u}. ${P.n} veut en faire le dessin. Quelle longueur doit-${il(P)} tracer sur ${d.court}, en cm ?`,
+          nombre: { v: nombre(cm), u: "cm" },
+          r: `Je cherche combien de fois ${k} ${d.u} tiennent dans ${nombre(reel)} ${d.u} : ${nombre(reel)} ÷ ${k} = ${nombre(cm)}. Il faut tracer ${nombre(cm)} cm. On passe du terrain au papier : on réduit, donc on divise.`,
         },
         {
-          q: "Sur une carte, un trajet de 30 km occupe 7,5 cm alors que 1 cm vaut 4 km. Explique pourquoi il est normal de trouver un nombre à virgule.",
-          mots: ["pas entier", "virgule", "divise", "30", "4", "7,5", "millimètres", "millimetres"],
-          r: "Parce que rien n'oblige la longueur réelle à être un multiple exact de ce que représente 1 cm. Ici 30 ÷ 4 = 7,5 : le trajet occupe sept centimètres et demi, ce qu'une règle graduée en millimètres permet parfaitement de tracer. Arrondir à 7 ou à 8 cm fausserait le dessin. Un résultat décimal n'est pas le signe d'une erreur, c'est le cas le plus fréquent.",
+          q: `Sur ${docTxt}, 1 cm représente ${k} ${d.u}. ${cap(objet)} mesure ${nombre(reelDemi)} ${d.u} en vrai : sur ${d.court}, cela fait ${nombre(cmDemi)} cm. Est-il normal de trouver un nombre à virgule ? Choisis la bonne réponse.`,
+          qcm: {
+            bonne: `oui : ${nombre(reelDemi)} n'est pas un multiple de ${k}, et on trace ${nombre(cmDemi)} cm avec une règle en millimètres`,
+            leurres: [
+              `non : il faut arrondir à ${Math.floor(cmDemi)} cm`,
+              "non : un plan ne contient que des nombres entiers",
+              "non : il fallait multiplier au lieu de diviser",
+            ],
+          },
+          r: `Rien n'oblige la longueur réelle à être un multiple exact de ${k} ${d.u}. Ici ${nombre(reelDemi)} ÷ ${k} = ${nombre(cmDemi)} : on trace ${nombre(cmDemi)} cm, ce qu'une règle graduée en millimètres permet très bien. Arrondir fausserait le dessin.`,
         },
         {
-          q: "Comment retrouver, sans hésiter, s'il faut multiplier ou diviser dans un problème d'échelle ?",
-          mots: ["sens", "plan", "réalité", "realite", "réduit", "reduit", "agrandit", "plus grand"],
-          r: "Je regarde d'où je pars et où je vais. Du plan vers la réalité, on agrandit : le résultat doit être bien plus grand que la mesure du plan, donc je multiplie. De la réalité vers le plan, on réduit pour faire tenir le terrain sur une feuille, donc je divise. Il suffit ensuite de regarder le résultat : s'il est du mauvais côté, l'opération était la mauvaise. Le sens se vérifie avant les chiffres.",
+          q: `Sur ${docTxt}, 1 cm représente ${k} ${d.u}. ${P.n} pense ${que(objet)} (${nombre(reel)} ${d.u} en vrai) doit mesurer ${nombre(reel * k)} cm sur ${d.court}. Quelle est son erreur ?`,
+          qcm: {
+            bonne: `${il(P)} a multiplié au lieu de diviser : il faut tracer ${nombre(cm)} cm`,
+            leurres: [`${il(P)} a oublié de convertir en mètres`, "aucune erreur, le calcul est juste", `${il(P)} aurait dû ajouter ${k} cm`],
+          },
+          r: `${nombre(reel)} × ${k} = ${nombre(reel * k)} : ${P.n} a multiplié au lieu de diviser. Or le dessin est plus petit que la réalité. Il fallait faire ${nombre(reel)} ÷ ${k} = ${nombre(cm)} cm.`,
         },
       ];
       const c = cas[randomInt(0, cas.length - 1)];
       return {
         text: c.q,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
+        ...fermer(c),
         explanation: ex(
           "de la réalité vers le plan, on réduit.",
           "on divise par ce que représente 1 cm, sans jamais poser de produit en croix.",
@@ -604,23 +917,87 @@ export const echelles6eBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Retour à l'unité : cherche d'abord ce que vaut 1 cm.",
     tags: ["prop_echelle", "defi", "template"],
+    // 06/10 : retour à l'unité — que vaut 1 cm ? ou, en deux temps, que valent c2 cm ?
     generate: () => {
-      const parCm = [2, 3, 4, 5, 6, 8, 10][randomInt(0, 6)];
-      const cm = randomInt(2, 9);
-      const reel = cm * parCm;
-      const unite = "m";
+      for (;;) {
+        const { d, P, k, docTxt, objet } = tirerDoc();
+        const c = randomInt(2, 5);
+        const c2 = randomInt(2, d.cmMax);
+        if (c2 % c === 0 || c % c2 === 0) continue;
+        const R = c * k;
+        const motU = d.u === "m" ? "mètres" : "kilomètres";
+        const versUn = Math.random() < 0.5;
+        const text = versUn
+          ? pick([
+              `Sur ${docTxt}, ${c} cm représentent ${nombre(R)} ${d.u} en vrai. Que représente 1 cm, en ${d.u} ?`,
+              `${P.n} lit sur ${docTxt} : « ${c} cm pour ${nombre(R)} ${d.u} ». Quelle est l'échelle : 1 cm pour combien de ${motU} ?`,
+              `Sur ${docTxt}, ${c} cm correspondent à ${nombre(R)} ${d.u}. Combien de ${motU} représente 1 cm ?`,
+            ])
+          : pick([
+              `Sur ${docTxt}, ${c} cm représentent ${nombre(R)} ${d.u}. ${cap(objet)} mesure ${c2} cm sur ${d.court}. Quelle est sa longueur réelle, en ${d.u} ?`,
+              `${P.n} lit sur ${docTxt} : « ${c} cm pour ${nombre(R)} ${d.u} ». Combien de ${motU} représentent ${c2} cm ?`,
+            ]);
+        const y = versUn ? k : c2 * k;
+        return {
+          text,
+          format: "short",
+          expected: [`${nombre(y)} ${d.u}`, nombre(y)],
+          comparator: "number_equal",
+          explanation: ex(
+            "le retour à l'unité consiste à chercher ce que vaut UNE unité avant de traiter le reste.",
+            "on divise la longueur réelle par le nombre de centimètres, puis on multiplie si besoin.",
+            `${c} cm représentent ${nombre(R)} ${d.u}. Un seul centimètre en représente ${c} fois moins : ${nombre(R)} ÷ ${c} = ${nombre(k)} ${d.u}.` +
+              (versUn ? "" : ` Pour ${c2} cm : ${c2} × ${nombre(k)} = ${nombre(y)} ${d.u}.`),
+            versUn ? `1 cm représente ${nombre(k)} ${d.u}.` : `${c2} cm représentent ${nombre(y)} ${d.u}.`
+          ),
+          canvas: correspondance("1 cm ↔ ?", `${c} cm`, `${nombre(R)} ${d.u}`, versUn ? "Que vaut 1 cm ?" : `Et ${c2} cm ?`),
+        };
+      }
+    },
+  },
+  {
+    kind: "template",
+    id: "6e_echelle_defi_tpl_perimetre",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "prop_echelle",
+    microId: "echelle_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Toutes les longueurs sont réduites de la même façon : le tour du rectangle aussi.",
+    tags: ["prop_echelle", "defi", "template", "perimetre"],
+    generate: () => {
+      const TERRAINS = ["Un potager", "Une cour", "Un enclos à chèvres", "Une piscine", "Un parking", "Un jardin", "Une salle de sport", "Un terrain de basket", "Une prairie", "Un bassin"];
+      const t = pick(TERRAINS);
+      const P = pick(PRENOMS);
+      const k = pick([2, 4, 5, 10]);
+      const a = randomInt(3, 12);
+      const b = randomInt(2, a - 1);
+      const versPlan = Math.random() < 0.5;
+      const per = 2 * (a + b);
+      const text = versPlan
+        ? pick([
+            `${t} rectangulaire mesure ${a * k} m sur ${b * k} m. ${P.n} en fait un dessin avec 1 cm pour ${k} m. Quel est le tour du rectangle dessiné, en cm ?`,
+            `${P.n} dessine à l'échelle « 1 cm pour ${k} m » ${t.toLowerCase()} rectangulaire de ${a * k} m sur ${b * k} m. Quel est le périmètre du dessin, en cm ?`,
+          ])
+        : pick([
+            `Sur un plan où 1 cm représente ${k} m, ${t.toLowerCase()} rectangulaire mesure ${a} cm sur ${b} cm. Quel est son périmètre réel, en m ?`,
+            `${P.n} mesure sur un plan ${t.toLowerCase()} rectangulaire : ${a} cm sur ${b} cm. Sur ce plan, 1 cm représente ${k} m. Combien de mètres de clôture faut-il pour en faire le tour ?`,
+          ]);
+      const y = versPlan ? per : per * k;
       return {
-        text: `Sur un plan, une longueur réelle de ${reel} ${unite} est représentée par ${cm} cm. Que représente 1 cm sur ce plan, en ${unite} ?`,
+        text,
         format: "short",
-        expected: [String(parCm)],
+        expected: versPlan ? [`${y} cm`, String(y)] : [`${y} m`, String(y)],
         comparator: "number_equal",
         explanation: ex(
-          "le retour à l'unité consiste à chercher ce que vaut UNE unité avant de traiter le reste.",
-          "on divise la longueur réelle par le nombre de centimètres du plan.",
-          `${cm} cm représentent ${reel} ${unite}. Un seul centimètre en représente ${cm} fois moins : ${reel} ÷ ${cm} = ${parCm} ${unite}. L'échelle du plan est donc « 1 cm pour ${parCm} ${unite} ».`,
-          `1 cm représente ${parCm} ${unite}.`
+          "chaque longueur du plan s'obtient en réduisant la longueur réelle de la même façon.",
+          "on convertit les deux côtés, puis on calcule le périmètre (le tour du rectangle).",
+          versPlan
+            ? `${a * k} ÷ ${k} = ${a} cm et ${b * k} ÷ ${k} = ${b} cm. Le tour du dessin : (${a} + ${b}) × 2 = ${per} cm.`
+            : `${a} cm représentent ${a} × ${k} = ${a * k} m et ${b} cm représentent ${b * k} m. Le tour réel : (${a * k} + ${b * k}) × 2 = ${per * k} m.`,
+          versPlan ? `le périmètre du dessin est de ${per} cm.` : `le périmètre réel est de ${per * k} m.`
         ),
-        canvas: correspondance("1 cm ↔ ?", `${cm} cm`, `${reel} ${unite}`, "Que vaut 1 cm ?"),
       };
     },
   },
@@ -635,34 +1012,51 @@ export const echelles6eBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Explique la stratégie, pas seulement le résultat.",
     tags: ["prop_echelle", "defi", "template", "ouverte"],
+    // 06/10 : trois questions ouvertes, chacune sur un document et des nombres tirés.
     generate: () => {
-      const cas = [
+      let t = tirerDoc();
+      while (t.k === 1) t = tirerDoc();
+      const { d, P, k, docTxt } = t;
+      const c = randomInt(2, 5);
+      let c2 = randomInt(2, d.cmMax);
+      while (c2 % c === 0 || c % c2 === 0) c2 = randomInt(2, Math.max(d.cmMax, 7));
+      const R = c * k;
+      const kt = pick([2, 4, 5, 10]);
+      const a = randomInt(3, 12);
+      const b = randomInt(2, a - 1);
+      const terrain = pick(["un potager", "une cour", "un enclos", "un jardin", "un parking", "une prairie"]);
+      const cas: CasFerme[] = [
         {
-          q: "Sur un plan, 3 cm représentent 12 m, et on te demande ce que représentent 7 cm. Explique ta stratégie.",
-          mots: ["1 cm", "unité", "unite", "4", "divise", "multiplie", "28"],
-          r: "Je passe par l'unité. Puisque 3 cm valent 12 m, un centimètre en vaut trois fois moins : 12 ÷ 3 = 4 m. Je connais maintenant l'échelle, « 1 cm pour 4 m », et je peux traiter n'importe quelle longueur : 7 cm valent 7 × 4 = 28 m. Le retour à l'unité coûte une division de plus, mais il donne une règle réutilisable au lieu d'un résultat isolé.",
+          q: `Sur ${docTxt}, ${c} cm représentent ${nombre(R)} ${d.u}. Passe par l'unité, puis trouve ce que représentent ${c2} cm, en ${d.u}.`,
+          nombre: { v: nombre(c2 * k), u: d.u },
+          r: `Je passe par l'unité. ${c} cm valent ${nombre(R)} ${d.u}, donc 1 cm vaut ${c} fois moins : ${nombre(R)} ÷ ${c} = ${nombre(k)} ${d.u}. Puis ${c2} cm valent ${c2} × ${nombre(k)} = ${nombre(c2 * k)} ${d.u}. Le retour à l'unité donne une règle réutilisable.`,
         },
         {
-          q: "Un terrain de 40 m sur 20 m est dessiné à l'échelle 1 cm pour 5 m. Explique comment obtenir le périmètre du dessin de deux façons différentes.",
-          mots: ["côtés", "cotes", "8", "4", "24", "périmètre", "perimetre", "réduit", "reduit"],
-          r: "Première façon : je réduis chaque côté, 40 ÷ 5 = 8 cm et 20 ÷ 5 = 4 cm, puis je fais le tour du rectangle dessiné, soit (8 + 4) × 2 = 24 cm. Seconde façon : je calcule d'abord le périmètre réel, (40 + 20) × 2 = 120 m, puis je le réduis, 120 ÷ 5 = 24 cm. Les deux donnent le même résultat, parce que toutes les longueurs sont réduites de la même façon — c'est encore la proportionnalité.",
+          q: `${cap(terrain)} de ${a * kt} m sur ${b * kt} m est dessiné à l'échelle 1 cm pour ${kt} m. Quelle méthode donne le périmètre du dessin ?`,
+          qcm: {
+            bonne: `réduire chaque côté (÷ ${kt}), puis faire le tour : ${2 * (a + b)} cm`,
+            leurres: [
+              `faire le tour en mètres et garder ce nombre : ${2 * (a + b) * kt} cm`,
+              `multiplier chaque côté par ${kt}, puis faire le tour : ${2 * (a + b) * kt * kt} cm`,
+              `additionner les deux côtés réduits : ${a + b} cm`,
+            ],
+          },
+          r: `Première façon : je réduis chaque côté, ${a * kt} ÷ ${kt} = ${a} cm et ${b * kt} ÷ ${kt} = ${b} cm, puis je fais le tour : (${a} + ${b}) × 2 = ${2 * (a + b)} cm. Seconde façon : le périmètre réel, (${a * kt} + ${b * kt}) × 2 = ${2 * (a + b) * kt} m, que je réduis : ${2 * (a + b) * kt} ÷ ${kt} = ${2 * (a + b)} cm. Toutes les longueurs sont réduites de la même façon.`,
         },
         {
-          q: "Pourquoi le produit en croix n'est-il pas nécessaire pour résoudre un problème d'échelle en 6e ?",
-          mots: ["unité", "unite", "linéarité", "linearite", "multiplie", "divise", "sens", "comprendre"],
-          r: "Parce que deux procédures suffisent, et elles gardent le sens visible. Le retour à l'unité cherche ce que vaut 1 cm, et tout le reste s'en déduit. La linéarité dit que si on double la longueur du plan, la longueur réelle double aussi. Dans les deux cas, je sais à chaque étape ce que représente le nombre que j'écris. Le produit en croix donnerait la même réponse, mais comme une recette, sans que rien n'indique si l'on agrandit ou si l'on réduit.",
+          q: `${P.n} lit sur ${docTxt} : « ${c} cm pour ${nombre(R)} ${d.u} ». Que vaut 1 cm sur ce document, en ${d.u} ?`,
+          nombre: { v: nombre(k), u: d.u },
+          r: `${c} cm valent ${nombre(R)} ${d.u}. Un seul centimètre vaut ${c} fois moins : ${nombre(R)} ÷ ${c} = ${nombre(k)} ${d.u}. L'échelle est « 1 cm pour ${nombre(k)} ${d.u} ».`,
         },
       ];
-      const c = cas[randomInt(0, cas.length - 1)];
+      const choisi = cas[randomInt(0, cas.length - 1)];
       return {
-        text: c.q,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
+        text: choisi.q,
+        ...fermer(choisi),
         explanation: ex(
           "une échelle se traite par retour à l'unité ou par linéarité.",
           "on cherche ce que vaut 1 cm, puis on multiplie ou on divise selon le sens.",
-          c.r,
+          choisi.r,
           "on garde le raisonnement, il vaut pour tout plan et toute maquette."
         ),
       };

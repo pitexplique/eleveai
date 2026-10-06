@@ -31,6 +31,224 @@ function expl(calcul: string) {
   );
 }
 
+/* ---------------------------------------------------------------------------
+   ⛔⛔ 06/10/2026 — « LES MÊMES QUESTIONS REVIENNENT ». Mesuré le 05/10 : 8 à
+   11 squelettes d'énoncé par micro, 12 à 18 répétitions sur 20 (« Si 3 objets
+   coûtent 12 €… »). Chaque gabarit compose désormais une SITUATION (table
+   ci-dessous) × une TOURNURE × un PRÉNOM. Mesure : scripts/mesurer-squelettes-
+   coach.ts 6e prop_proportionnalite ; correcteurs : correcteurs/proportionnalite.ts.
+   ⛔ Dans chaque phrase, la QUANTITÉ vient avant la VALEUR (« Pour 4 crêpes, il
+   faut 120 g de farine ») et aucun autre nombre n'apparaît : le correcteur relit
+   les nombres dans l'ordre. ⛔ Division : « ÷ », jamais la barre.
+--------------------------------------------------------------------------- */
+type Prenom = { n: string; f: boolean };
+const PRENOMS: readonly Prenom[] = [
+  { n: "Léa", f: true }, { n: "Inès", f: true }, { n: "Jade", f: true }, { n: "Chloé", f: true },
+  { n: "Aïcha", f: true }, { n: "Maëlys", f: true }, { n: "Yasmine", f: true }, { n: "Emma", f: true },
+  { n: "Noémie", f: true }, { n: "Fatou", f: true }, { n: "Lina", f: true }, { n: "Zoé", f: true },
+  { n: "Anaïs", f: true }, { n: "Mei", f: true }, { n: "Hugo", f: false }, { n: "Tom", f: false },
+  { n: "Nathan", f: false }, { n: "Adam", f: false }, { n: "Rayan", f: false }, { n: "Lucas", f: false },
+  { n: "Moussa", f: false }, { n: "Enzo", f: false }, { n: "Ibrahim", f: false }, { n: "Théo", f: false },
+  { n: "Kenji", f: false }, { n: "Ilyes", f: false }, { n: "Malik", f: false }, { n: "Yanis", f: false },
+];
+const VOYELLE = /^[aeiouhâàéèêîïôûœ]/i;
+const de = (n: string) => (VOYELLE.test(n) ? `d’${n}` : `de ${n}`);
+const il = (P: Prenom) => (P.f ? "elle" : "il");
+const randomInt = (a: number, b: number) => Math.floor(Math.random() * (b - a + 1)) + a;
+
+/** 1800 → « 1 800 », 1.5 → « 1,5 ». */
+function fr(x: number): string {
+  const r = Math.round(x * 100) / 100;
+  return Number.isInteger(r) ? r.toLocaleString("fr-FR").replace(/[  ]/g, " ") : String(r).replace(".", ",");
+}
+/** « 1 croissant », « 3 croissants ». */
+const nb = (n: number, sg: string, pl: string) => `${fr(n)} ${n === 1 ? sg : pl}`;
+/** Le verbe accordé : « coûte » ou « coûtent ». */
+const acc = (n: number, sg: string, pl: string) => (n === 1 ? sg : pl);
+
+/**
+ * Une situation de proportionnalité. `q(n)` : la quantité ; `phrase(n, x, P)` :
+ * la donnée (quantité AVANT valeur) ; `question(m, P)` : on demande la valeur
+ * pour m ; `unite(m)` : « Combien coûte 1 … ? » ; `u` : l'unité de la réponse
+ * (vide pour un nombre d'objets) ; `taux` : valeurs possibles pour UNE unité.
+ */
+type SitProp = {
+  q: (n: number) => string;
+  phrase: (n: number, x: number, P: Prenom) => string;
+  question: (m: number, P: Prenom) => string;
+  u: string;
+  /** Le nom de la valeur quand elle n'a pas d'unité (« pièces »). */
+  v?: string;
+  taux: readonly number[];
+  nMax: number;
+};
+/** La valeur écrite avec son unité ou son nom : « 9 € », « 600 pièces ». */
+const valeur = (s: SitProp, x: number) => `${fr(x)} ${s.u || s.v}`;
+const SITUATIONS_PROP: readonly SitProp[] = [
+  { q: (n) => nb(n, "croissant", "croissants"), phrase: (n, x) => `À la boulangerie, ${nb(n, "croissant", "croissants")} ${acc(n, "coûte", "coûtent")} ${fr(x)} €.`, question: (m) => `Combien ${acc(m, "coûte", "coûtent")} ${nb(m, "croissant", "croissants")} ?`, u: "€", taux: [1, 1.5, 2], nMax: 12 },
+  { q: (n) => nb(n, "ticket de bus", "tickets de bus"), phrase: (n, x) => `${nb(n, "ticket de bus", "tickets de bus")} ${acc(n, "coûte", "coûtent")} ${fr(x)} €.`, question: (m) => `Quel est le prix de ${nb(m, "ticket", "tickets")} ?`, u: "€", taux: [1.5, 2, 2.5, 3], nMax: 10 },
+  { q: (n) => `${fr(n)} kg de pommes`, phrase: (n, x) => `Au marché, ${fr(n)} kg de pommes ${acc(n, "coûte", "coûtent")} ${fr(x)} €.`, question: (m) => `Combien ${acc(m, "coûte", "coûtent")} ${fr(m)} kg de pommes ?`, u: "€", taux: [2, 2.5, 3, 3.5, 4], nMax: 10 },
+  { q: (n) => nb(n, "crêpe", "crêpes"), phrase: (n, x) => `Pour ${nb(n, "crêpe", "crêpes")}, il faut ${fr(x)} g de farine.`, question: (m) => `Combien de grammes de farine faut-il pour ${nb(m, "crêpe", "crêpes")} ?`, u: "g", taux: [20, 25, 30, 40, 50], nMax: 12 },
+  { q: (n) => nb(n, "heure", "heures"), phrase: (n, x, P) => `En ${nb(n, "heure", "heures")}, ${P.n} parcourt ${fr(x)} km à vélo, toujours à la même vitesse.`, question: (m, P) => `Combien de kilomètres parcourt-${il(P)} en ${nb(m, "heure", "heures")} ?`, u: "km", taux: [12, 15, 18, 20], nMax: 5 },
+  { q: (n) => nb(n, "minute", "minutes"), phrase: (n, x) => `En ${nb(n, "minute", "minutes")}, un robinet remplit ${fr(x)} L d’eau.`, question: (m) => `Combien de litres remplit-il en ${nb(m, "minute", "minutes")} ?`, u: "L", taux: [6, 8, 10, 12, 15], nMax: 10 },
+  { q: (n) => nb(n, "jour", "jours"), phrase: (n, x, P) => `En ${nb(n, "jour", "jours")}, le chien ${de(P.n)} mange ${fr(x)} g de croquettes.`, question: (m) => `Combien de grammes de croquettes mange-t-il en ${nb(m, "jour", "jours")} ?`, u: "g", taux: [150, 200, 250, 300], nMax: 7 },
+  { q: (n) => nb(n, "boîte", "boîtes"), phrase: (n, x) => `${nb(n, "boîte de construction", "boîtes de construction identiques")} ${acc(n, "contient", "contiennent")} ${fr(x)} pièces.`, question: (m) => `Combien de pièces y a-t-il dans ${nb(m, "boîte", "boîtes")} ?`, u: "", v: "pièces", taux: [50, 80, 100, 120, 150], nMax: 10 },
+  { q: (n) => nb(n, "chanson", "chansons"), phrase: (n, x, P) => `Dans la playlist ${de(P.n)}, ${nb(n, "chanson", "chansons de même durée")} ${acc(n, "dure", "durent")} ${fr(x)} minutes.`, question: (m) => `Combien de minutes ${acc(m, "dure", "durent")} ${nb(m, "chanson", "chansons")} ?`, u: "min", taux: [3, 3.5, 4, 4.5, 5], nMax: 12 },
+  { q: (n) => nb(n, "marche", "marches"), phrase: (n, x) => `Dans un escalier, ${nb(n, "marche", "marches identiques")} ${acc(n, "monte", "montent")} de ${fr(x)} cm.`, question: (m) => `De combien de centimètres ${acc(m, "monte", "montent")} ${nb(m, "marche", "marches")} ?`, u: "cm", taux: [15, 16, 17, 17.5, 18, 20], nMax: 12 },
+  { q: (n) => nb(n, "longueur", "longueurs"), phrase: (n, x, P) => `À la piscine, ${P.n} nage ${nb(n, "longueur", "longueurs")} de bassin : cela fait ${fr(x)} m.`, question: (m) => `Combien de mètres ${acc(m, "fait", "font")} ${nb(m, "longueur", "longueurs")} de ce bassin ?`, u: "m", taux: [25, 50], nMax: 12 },
+  { q: (n) => nb(n, "semaine", "semaines"), phrase: (n, x) => `En ${nb(n, "semaine", "semaines")}, les poules d’une ferme pondent ${fr(x)} œufs.`, question: (m) => `Combien d’œufs pondent-elles en ${nb(m, "semaine", "semaines")} ?`, u: "", v: "œufs", taux: [20, 30, 35, 40], nMax: 8 },
+  { q: (n) => nb(n, "sachet", "sachets"), phrase: (n, x) => `${nb(n, "sachet de graines", "sachets de graines identiques")} ${acc(n, "pèse", "pèsent")} ${fr(x)} g.`, question: (m) => `Combien ${acc(m, "pèse", "pèsent")} ${nb(m, "sachet", "sachets")} ?`, u: "g", taux: [25, 40, 50, 60], nMax: 10 },
+  { q: (n) => nb(n, "pot", "pots"), phrase: (n, x) => `Avec ${nb(n, "pot", "pots")} de peinture, on peint ${fr(x)} m² de mur.`, question: (m) => `Combien de mètres carrés peut-on peindre avec ${nb(m, "pot", "pots")} ?`, u: "m²", taux: [5, 6, 8, 10], nMax: 8 },
+  { q: (n) => `${fr(n)} m de tissu`, phrase: (n, x) => `${fr(n)} m de tissu ${acc(n, "coûte", "coûtent")} ${fr(x)} €.`, question: (m) => `Combien ${acc(m, "coûte", "coûtent")} ${fr(m)} m de ce tissu ?`, u: "€", taux: [3, 4, 4.5, 5, 6, 7.5, 8], nMax: 10 },
+  { q: (n) => nb(n, "barquette", "barquettes"), phrase: (n, x) => `Au marché de Saint-Paul, à La Réunion, ${nb(n, "barquette", "barquettes")} de letchis ${acc(n, "coûte", "coûtent")} ${fr(x)} €.`, question: (m) => `Combien ${acc(m, "coûte", "coûtent")} ${nb(m, "barquette", "barquettes")} ?`, u: "€", taux: [3, 3.5, 4, 5], nMax: 8 },
+  { q: (n) => nb(n, "heure", "heures"), phrase: (n, x, P) => `En ${nb(n, "heure", "heures")} de marche, le groupe ${de(P.n)} parcourt ${fr(x)} km.`, question: (m) => `Combien de kilomètres le groupe parcourt-il en ${nb(m, "heure", "heures")} ?`, u: "km", taux: [3, 3.5, 4, 4.5, 5], nMax: 6 },
+  { q: (n) => nb(n, "minute", "minutes"), phrase: (n, x) => `En ${nb(n, "minute", "minutes")}, un escargot avance de ${fr(x)} cm.`, question: (m) => `De combien de centimètres avance-t-il en ${nb(m, "minute", "minutes")} ?`, u: "cm", taux: [4.5, 5, 6, 7, 8], nMax: 10 },
+  { q: (n) => nb(n, "corde", "cordes"), phrase: (n, x) => `Au magasin de musique, ${nb(n, "corde", "cordes")} de guitare ${acc(n, "coûte", "coûtent")} ${fr(x)} €.`, question: (m) => `Combien ${acc(m, "coûte", "coûtent")} ${nb(m, "corde", "cordes")} ?`, u: "€", taux: [2, 2.5, 3, 4, 5], nMax: 6 },
+  { q: (n) => nb(n, "rangée", "rangées"), phrase: (n, x, P) => `Dans le potager ${de(P.n)}, ${nb(n, "rangée", "rangées")} de salades ${acc(n, "compte", "comptent")} ${fr(x)} salades.`, question: (m) => `Combien de salades y a-t-il dans ${nb(m, "rangée", "rangées")} ?`, u: "", v: "salades", taux: [6, 8, 10, 12], nMax: 8 },
+];
+
+/** La réponse avec son unité : « 24 € », « 120 g », « 36 ». */
+const avecU = (x: number, u: string) => (u ? `${fr(x)} ${u}` : fr(x));
+/** Les formes acceptées de la réponse. */
+const reponses = (x: number, u: string) => (u ? [avecU(x, u), fr(x)] : [fr(x)]);
+
+/** Une situation, un prénom, un taux entier ou non (`decimal`), une quantité de départ. */
+function tirerProp(opts: { decimal?: boolean; nMin?: number } = {}) {
+  for (;;) {
+    const s = randomChoice([...SITUATIONS_PROP]);
+    const t = randomChoice(s.taux.filter((x) => (opts.decimal ? true : Number.isInteger(x))));
+    if (t == null) continue;
+    const n = randomInt(opts.nMin ?? 2, Math.min(s.nMax, 9));
+    if (!Number.isInteger(n * t * 100)) continue;
+    return { s, t, n, x: n * t, P: randomChoice([...PRENOMS]) };
+  }
+}
+
+/** Deux relevés d'une même situation (quantité × k), proportionnels une fois sur deux. */
+function deuxReleves(ks: readonly number[]) {
+  for (;;) {
+    const { s, t, P } = tirerProp();
+    const k = randomChoice([...ks]);
+    const n1 = randomInt(1, 4);
+    if (n1 * k > Math.max(s.nMax, 4)) continue;
+    const n2 = n1 * k;
+    const x1 = n1 * t;
+    const prop = Math.random() < 0.5;
+    const pas = x1 >= 50 ? 10 : 1;
+    const x2 = prop ? n2 * t : n2 * t + randomChoice([-1, 1]) * pas * randomInt(1, 2);
+    // 06/10 (coordinateur) : « 6 croissants coûtent 9 € », pas « Pour 6 croissants, cela fait 9 € ».
+    const text = `${s.phrase(n1, x1, P)} ${s.phrase(n2, x2, P)}`;
+    const explication = prop
+      ? `On passe de ${fr(n1)} à ${fr(n2)} en multipliant par ${k}. La valeur aussi : ${fr(x1)} × ${k} = ${fr(x2)}. C’est proportionnel.`
+      : `On passe de ${fr(n1)} à ${fr(n2)} en multipliant par ${k}. Mais ${fr(x1)} × ${k} = ${fr(n2 * t)}, et pas ${fr(x2)}. Ce n’est pas proportionnel.`;
+    return { text, prop, explication };
+  }
+}
+
+/** Une colonne connue, la quantité multipliée par k : en phrase ou en tableau décrit. */
+function colonneFoisK() {
+  for (;;) {
+    const { s, t, P } = tirerProp();
+    const k = randomChoice([2, 3, 4, 5]);
+    const n1 = randomInt(1, 4);
+    const m = n1 * k;
+    if (m > Math.max(s.nMax, 6)) continue;
+    const x1 = n1 * t;
+    const y = m * t;
+    const text = randomChoice([true, true, false])
+      ? `${s.phrase(n1, x1, P)} ${s.question(m, P)}`
+      : `Complète ce tableau de proportionnalité : ${s.q(n1)} → ${valeur(s, x1)} ; ${s.q(m)} → ?`;
+    const explication = `On passe de ${fr(n1)} à ${fr(m)} en multipliant par ${k}. La valeur est aussi multipliée par ${k} : ${fr(x1)} × ${k} = ${fr(y)}.`;
+    return { s, t, n1, x1, m, y, text, explication };
+  }
+}
+
+const egalNb = (a: number, b: number) => Math.abs(a - b) < 1e-9;
+
+/** Le coefficient de proportionnalité : la valeur pour une unité (décimale si `decimal`). */
+function coefficient(decimal: boolean) {
+  for (;;) {
+    const { s, t, P } = tirerProp({ decimal });
+    if (decimal && Number.isInteger(t)) continue;
+    const n1 = randomInt(2, Math.min(s.nMax, 8));
+    const x1 = n1 * t;
+    const question = randomChoice([
+      "Quel est le coefficient de proportionnalité ?",
+      "Par quel nombre multiplie-t-on la quantité pour trouver la valeur ?",
+      "Trouve le coefficient de proportionnalité.",
+      "Quel nombre multiplie la quantité pour donner la valeur ?",
+    ]);
+    let text = `${s.phrase(n1, x1, P)} ${question}`;
+    if (Math.random() < 0.4) {
+      const n2 = randomInt(2, Math.min(s.nMax, 9));
+      if (n2 === n1) continue;
+      text = `Voici un tableau de proportionnalité : ${s.q(n1)} → ${valeur(s, x1)} ; ${s.q(n2)} → ${valeur(s, n2 * t)}. ${question}`;
+    }
+    return { text, t, n1, x1, explication: `La valeur pour une unité : ${fr(x1)} ÷ ${fr(n1)} = ${fr(t)}. On multiplie la quantité par ${fr(t)} : ${fr(n1)} × ${fr(t)} = ${fr(x1)}. Le coefficient est ${fr(t)}.` };
+  }
+}
+
+/** Le passage à l'unité : n → x, que vaut 1 ? (`decimal` : une valeur non entière). */
+function versUnite(decimal: boolean) {
+  for (;;) {
+    const { s, t, P } = tirerProp({ decimal });
+    if (decimal && Number.isInteger(t)) continue;
+    const n = randomInt(2, Math.min(s.nMax, 9));
+    const x = n * t;
+    const text = randomChoice([
+      () => `${s.phrase(n, x, P)} ${s.question(1, P)}`,
+      () => `${s.phrase(n, x, P)} Passe à l’unité. ${s.question(1, P)}`,
+      () => `${s.phrase(n, x, P)} ${randomChoice(["Aide", "Explique à"])} ${randomChoice([...PRENOMS]).n} : ${s.question(1, P).replace(/^./, (c) => c.toLowerCase())}`,
+      () => `Complète ce tableau de proportionnalité : ${s.q(n)} → ${valeur(s, x)} ; ${s.q(1)} → ?`,
+    ])();
+    return { s, t, n, x, text, explication: `On passe à l’unité : on divise par ${fr(n)}. ${fr(x)} ÷ ${fr(n)} = ${fr(t)}.` };
+  }
+}
+
+/** n → x connu, on demande m = n ÷ k : la valeur est divisée par k aussi. */
+function colonneDiviseeK(ks: readonly number[], moitie: boolean) {
+  for (;;) {
+    const { s, t, P } = tirerProp({ decimal: Math.random() < 0.3 });
+    const k = randomChoice([...ks]);
+    const m = randomInt(1, 4);
+    const n = m * k;
+    if (n > Math.max(s.nMax, 6)) continue;
+    const [x, y] = [n * t, m * t];
+    const forme = randomInt(0, 3);
+    const text =
+      forme === 3
+        ? `Complète ce tableau de proportionnalité : ${s.q(n)} → ${valeur(s, x)} ; ${s.q(m)} → ?`
+        : forme === 2 && moitie
+          ? `${s.phrase(n, x, P)} Cette fois, la quantité est deux fois plus petite. ${s.question(m, P)}`
+          : `${s.phrase(n, x, P)} ${s.question(m, P)}`;
+    const explication = `On passe de ${fr(n)} à ${fr(m)} en divisant par ${k}. On divise aussi la valeur par ${k} : ${fr(x)} ÷ ${k} = ${fr(y)}.`;
+    return { s, n, x, m, y, text, explication };
+  }
+}
+
+/**
+ * Le défi : n → x, on demande m, ni multiple ni diviseur de n — il faut passer
+ * par la valeur pour 1. `decimal` : cette valeur est décimale (9 € pour 6).
+ */
+function parLUnite(decimal: boolean) {
+  for (;;) {
+    const { s, t, P } = tirerProp({ decimal });
+    if (decimal && Number.isInteger(t)) continue;
+    const n = randomInt(2, Math.min(s.nMax, 8));
+    const m = randomInt(2, Math.max(s.nMax, 6));
+    if (m === n || m % n === 0 || n % m === 0) continue;
+    const [x, y] = [n * t, m * t];
+    const text = randomChoice([
+      () => `${s.phrase(n, x, P)} ${s.question(m, P)}`,
+      () => `Défi : ${s.phrase(n, x, P).replace(/^./, (c) => c.toLowerCase())} ${s.question(m, P)}`,
+      () => `${s.phrase(n, x, P)} Passe par l’unité. ${s.question(m, P)}`,
+      () => `Complète ce tableau de proportionnalité : ${s.q(n)} → ${valeur(s, x)} ; ${s.q(m)} → ?`,
+    ])();
+    const explication = `Pour 1 : ${fr(x)} ÷ ${fr(n)} = ${fr(t)}. Pour ${fr(m)} : ${fr(m)} × ${fr(t)} = ${fr(y)}.`;
+    return { s, t, n, x, m, y, text, explication };
+  }
+}
+
 export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   // PROP_RECONNAITRE
@@ -700,10 +918,17 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi la situation suivante n’est pas proportionnelle : 2 tickets coûtent 4 € et 4 tickets coûtent 10 €.",
-    format: "short",
-    expected: ["double", "8", "10", "pas proportionnelle"],
-    comparator: "contains_keyword",
+    // 06/10 : QCM sur les pièges, plus de mot-clé numérique.
+    text: "2 tickets coûtent 4 € et 4 tickets coûtent 10 €. Pourquoi ce n’est pas proportionnel ?",
+    format: "qcm",
+    choices: [
+      "le nombre de tickets double, mais le prix ne double pas : il faudrait 8 €",
+      "parce que 10 est plus grand que 4",
+      "parce que le prix augmente quand on achète plus",
+      "en fait, c’est proportionnel",
+    ],
+    expected: ["le nombre de tickets double, mais le prix ne double pas : il faudrait 8 €"],
+    comparator: "mcq_exact",
     hint: "Si on double la quantité, le prix devrait doubler aussi.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
@@ -773,27 +998,47 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Regarde si le même coefficient s’applique aux deux lignes.",
     tags: ["prop_proportionnalite", "reconnaitre", "template"],
+    // 06/10 : une situation de la table, deux relevés ; proportionnels une fois sur deux.
     generate: () => {
-      const qty = randomChoice([2, 3, 4]);
-      const coef = randomChoice([2, 3]);
-      const unit = randomChoice([2, 3, 4]);
-      const total = qty * unit;
-      const targetQty = qty * coef;
-      const isProp = Math.random() > 0.5;
-      const targetTotal = isProp ? total * coef : total * coef + 1;
-
+      const r = deuxReleves([2, 3, 4, 5]);
       return {
-        text: `La situation suivante est-elle proportionnelle : ${qty} objets coûtent ${total} € et ${targetQty} objets coûtent ${targetTotal} € ?`,
+        text: `${r.text} ${randomChoice([
+          "Est-ce une situation de proportionnalité ? Réponds par oui ou non.",
+          "Ces deux relevés sont-ils proportionnels ? Réponds par oui ou non.",
+          "Peut-on dire que c’est proportionnel ? Réponds par oui ou non.",
+          "Oui ou non : la valeur est-elle proportionnelle à la quantité ?",
+        ])}`,
         format: "short",
-        expected: [isProp ? "oui" : "non"],
+        expected: [r.prop ? "oui" : "non"],
         comparator: "contains_keyword",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
-          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
-          "Calcul : " +
-          (isProp
-          ? `On passe de ${qty} à ${targetQty} en multipliant par ${coef}, et le prix passe aussi de ${total} à ${targetTotal} en multipliant par ${coef}. La situation est donc proportionnelle.`
-          : `On passe de ${qty} à ${targetQty} en multipliant par ${coef}, mais le prix ne suit pas exactement le même coefficient. La situation n’est donc pas proportionnelle.`) +
-          "\n\nConclusion : on garde la réponse obtenue.",
+        explanation: expl(r.explication),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "prop_reconnaitre_qcm_tpl_double",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_reconnaitre",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Si la quantité double, la valeur doit doubler aussi.",
+    tags: ["prop_proportionnalite", "reconnaitre", "qcm", "template"],
+    generate: () => {
+      const r = deuxReleves([2, 3]);
+      return {
+        text: `${r.text} ${randomChoice([
+          "Est-ce proportionnel ?",
+          "Est-ce une situation de proportionnalité ?",
+          "La valeur suit-elle la quantité de façon proportionnelle ?",
+        ])}`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: [r.prop ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation: expl(r.explication),
       };
     },
   },
@@ -808,27 +1053,31 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Cherche la situation où le prix suit exactement le même coefficient que la quantité.",
     tags: ["prop_proportionnalite", "reconnaitre", "qcm", "template"],
+    // 06/10 : quatre relevés d'une même situation, un seul proportionnel.
     generate: () => {
-      const good = "2 objets coûtent 6 € et 6 objets coûtent 18 €";
-      const choices = shuffle([
-        good,
-        "2 objets coûtent 6 € et 6 objets coûtent 17 €",
-        "3 objets coûtent 9 € et 6 objets coûtent 17 €",
-        "4 objets coûtent 8 € et 8 objets coûtent 15 €",
-      ]);
-
+      const { s, t, P } = tirerProp();
+      const ligne = (n1: number, k: number, ecart: number) =>
+        `${s.q(n1)} : ${valeur(s, n1 * t)} ; ${s.q(n1 * k)} : ${valeur(s, n1 * k * t + ecart)}`;
+      const n0 = randomInt(2, 4);
+      const k0 = randomChoice([2, 3]);
+      const bonne = ligne(n0, k0, 0);
+      const pas = t >= 10 ? 10 : 1;
+      const leurres = [1, 2, 3, 4, 5].map((i) => ligne(randomInt(2, 4), randomChoice([2, 3]), (i % 2 ? 1 : -1) * pas * randomInt(1, 2)));
       return {
-        text: "Quelle situation est proportionnelle ?",
+        text: randomChoice([
+          `${P.n} a noté plusieurs relevés. Un seul est proportionnel. Lequel ?`,
+          "Quel relevé est proportionnel ?",
+          `Aide ${P.n} : dans quel relevé la valeur est-elle proportionnelle à la quantité ?`,
+          "Une seule de ces listes est proportionnelle. Laquelle ?",
+        ]),
         format: "qcm",
-        choices,
-        expected: [good],
+        choices: makeChoices(bonne, leurres),
+        expected: [bonne],
         comparator: "mcq_exact",
-        explanation:
-          "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
-          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
-          "Calcul : " +
-          ("Dans la bonne réponse, on passe de 2 à 6 objets en multipliant par 3, et le prix passe aussi de 6 € à 18 € en multipliant par 3.") +
-          "\n\nConclusion : on garde la réponse obtenue.",
+        explanation: expl(
+          `Dans le bon relevé, on passe de ${fr(n0)} à ${fr(n0 * k0)} en multipliant par ${k0}, et la valeur aussi : ${fr(n0 * t)} × ${k0} = ${fr(n0 * k0 * t)}. ` +
+            "Dans les autres, la valeur n’est pas multipliée par le même nombre.",
+        ),
       };
     },
   },
@@ -847,24 +1096,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Utilise le coefficient multiplicateur.",
     tags: ["prop_proportionnalite", "tableau", "template"],
+    // 06/10 : une colonne × k — en phrase, ou en tableau décrit en ligne.
     generate: () => {
-      const a = randomChoice([2, 3, 4]);
-      const coef = randomChoice([2, 3, 4]);
-      const unitPrice = randomChoice([2, 3, 4]);
-      const total = a * unitPrice;
-      const targetQty = a * coef;
-      const targetTotal = total * coef;
-
+      const c = colonneFoisK();
       return {
-        text: `Si ${a} objets coûtent ${total} €, combien coûtent ${targetQty} objets ?`,
+        text: c.text,
         format: "short",
-        expected: [String(targetTotal), `${targetTotal}€`, `${targetTotal} €`],
+        expected: reponses(c.y, c.s.u),
         comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
-          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
-          "Calcul : " +
-          (`On passe de ${a} à ${targetQty} objets en multipliant par ${coef}. Le prix est donc aussi multiplié par ${coef} : ${total} × ${coef} = ${targetTotal} €.`) +
-          "\n\nConclusion : on garde la réponse obtenue.",
+        explanation: expl(c.explication),
       };
     },
   },
@@ -879,25 +1119,25 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Repère par combien on multiplie la quantité.",
     tags: ["prop_proportionnalite", "tableau", "template"],
+    // 06/10 : la linéarité additive — deux colonnes connues, on cherche leur somme.
     generate: () => {
-      const qty = randomChoice([2, 3, 5]);
-      const coef = randomChoice([2, 3]);
-      const unit = randomChoice([2, 4, 5]);
-      const total = qty * unit;
-      const newQty = qty * coef;
-      const newTotal = total * coef;
-
-      return {
-        text: `${qty} billets coûtent ${total} €. Combien coûtent ${newQty} billets ?`,
-        format: "short",
-        expected: [String(newTotal), `${newTotal}€`, `${newTotal} €`],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
-          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
-          "Calcul : " +
-          (`On passe de ${qty} à ${newQty} billets en multipliant par ${coef}. Le prix passe donc de ${total} € à ${newTotal} €.`) +
-          "\n\nConclusion : on garde la réponse obtenue.",
-      };
+      for (;;) {
+        const { s, t, P } = tirerProp();
+        const n1 = randomInt(1, 5);
+        const n2 = randomInt(1, 5);
+        if (n1 === n2 || n1 + n2 > Math.max(s.nMax, 6)) continue;
+        const [x1, x2, m] = [n1 * t, n2 * t, n1 + n2];
+        const text = randomChoice([true, false])
+          ? `${s.phrase(n1, x1, P)} ${s.phrase(n2, x2, P)} ${s.question(m, P)}`
+          : `Voici un tableau de proportionnalité : ${s.q(n1)} → ${valeur(s, x1)} ; ${s.q(n2)} → ${valeur(s, x2)} ; ${s.q(m)} → ? ${randomChoice(["Complète la dernière case.", "Trouve la valeur manquante.", "Quelle valeur faut-il écrire ?"])}`;
+        return {
+          text,
+          format: "short",
+          expected: reponses(m * t, s.u),
+          comparator: "number_equal",
+          explanation: expl(`${fr(m)} = ${fr(n1)} + ${fr(n2)}. On additionne donc les valeurs : ${fr(x1)} + ${fr(x2)} = ${fr(m * t)}.`),
+        };
+      }
     },
   },
   {
@@ -912,34 +1152,19 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     hint: "Multiplie aussi le prix par le même coefficient.",
     tags: ["prop_proportionnalite", "tableau", "qcm", "template"],
     generate: () => {
-      const qty = randomChoice([2, 3, 4]);
-      const coef = randomChoice([2, 3]);
-      // Les deux pièges sont « on ajoute le prix d'un objet » et « on ajoute le
-      // coefficient ». Quand le prix unitaire vaut le coefficient, c'est la
-      // même proposition écrite deux fois.
-      const unit = randomChoice([2, 3, 4].filter((u) => u !== coef));
-      const total = qty * unit;
-      const targetQty = qty * coef;
-      const good = total * coef;
-
-      const choices = shuffle([
-        String(good),
-        String(good + unit),
-        String(good + coef),
-        String(total),
-      ]);
+      const c = colonneFoisK();
+      const { s, x1, n1, m, y } = c;
+      // Les pièges : ajouter l'écart des quantités (erreur additive), garder la
+      // valeur de départ, ajouter une unité de trop.
+      const choices = makeChoices(avecU(y, s.u), [x1 + (m - n1), x1, y + c.t, y + m, y - c.t].filter((v) => v > 0).map((v) => avecU(v, s.u)));
 
       return {
-        text: `Si ${qty} objets coûtent ${total} €, combien coûtent ${targetQty} objets ?`,
+        text: c.text,
         format: "qcm",
         choices,
-        expected: [String(good)],
+        expected: [avecU(y, s.u)],
         comparator: "mcq_exact",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
-          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
-          "Calcul : " +
-          (`On passe de ${qty} à ${targetQty} objets en multipliant par ${coef}. Le prix est donc ${total} × ${coef} = ${good} €.`) +
-          "\n\nConclusion : on garde la réponse obtenue.",
+        explanation: expl(c.explication),
       };
     },
   },
@@ -958,21 +1183,67 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Cherche la valeur pour 1 objet.",
     tags: ["prop_proportionnalite", "coefficient", "template"],
+    // 06/10 : le coefficient = la valeur pour UNE unité, lu dans une phrase ou un tableau.
     generate: () => {
-      const qty = randomChoice([2, 3, 4, 5]);
-      const unit = randomChoice([2, 3, 4]);
-      const total = qty * unit;
-
+      const c = coefficient(false);
       return {
-        text: `Dans une situation où ${qty} objets coûtent ${total} €, quel est le coefficient de proportionnalité ?`,
+        text: c.text,
         format: "short",
-        expected: [String(unit)],
+        expected: [fr(c.t)],
         comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
-          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
-          "Calcul : " +
-          (`${qty} objets coûtent ${total} €, donc 1 objet coûte ${total} ÷ ${qty} = ${unit} €. Le coefficient est ${unit}.`) +
-          "\n\nConclusion : on garde la réponse obtenue.",
+        explanation: expl(c.explication),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "prop_coeff_tpl_decimal",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Divise la valeur par la quantité : le résultat peut être un nombre décimal.",
+    tags: ["prop_proportionnalite", "coefficient", "template"],
+    generate: () => {
+      const c = coefficient(true);
+      return {
+        text: c.text,
+        format: "short",
+        expected: [fr(c.t)],
+        comparator: "number_equal",
+        explanation: expl(c.explication),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "prop_coeff_tpl_utiliser",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_coeff",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Valeur = quantité × coefficient.",
+    tags: ["prop_proportionnalite", "coefficient", "template"],
+    generate: () => {
+      let { s, t, P } = tirerProp({ decimal: Math.random() < 0.5 });
+      // Sans la phrase de la situation, « pondent-elles » n'a pas de sujet : on écarte ces questions.
+      while (/-(?:t-)?(?:il|elle)s?\b/.test(s.question(2, P))) ({ s, t, P } = tirerProp({ decimal: Math.random() < 0.5 }));
+      const m = randomInt(3, Math.max(s.nMax, 6));
+      const debut = randomChoice([
+        `Dans cette situation, le coefficient de proportionnalité est ${fr(t)}.`,
+        `On multiplie toujours la quantité par ${fr(t)} pour obtenir la valeur.`,
+        `Le coefficient de proportionnalité vaut ${fr(t)}.`,
+      ]);
+      return {
+        text: `${debut} ${s.question(m, P)}`,
+        format: "short",
+        expected: reponses(m * t, s.u),
+        comparator: "number_equal",
+        explanation: expl(`Valeur = quantité × coefficient : ${fr(m)} × ${fr(t)} = ${fr(m * t)}.`),
       };
     },
   },
@@ -988,31 +1259,16 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     hint: "Le coefficient est le prix d’un seul objet.",
     tags: ["prop_proportionnalite", "coefficient", "qcm", "template"],
     generate: () => {
-      const unit = randomChoice([2, 3, 4]);
-      // Les pièges sont la quantité, le total et « un de plus ». Si la quantité
-      // vaut le prix unitaire ou ce prix plus un, deux propositions se
-      // confondent.
-      const qty = randomChoice(
-        [2, 3, 4, 5].filter((q) => q !== unit && q !== unit + 1),
-      );
-      const total = qty * unit;
-
+      const c = coefficient(false);
+      // Les pièges : la quantité, la valeur, l'écart (erreur additive), un de plus.
+      const leurres = [c.n1, c.x1, c.x1 - c.n1, c.t + 1, c.n1 * c.x1].filter((v) => v > 0 && !egalNb(v, c.t)).map(fr);
       return {
-        text: `Si ${qty} objets coûtent ${total} €, quel est le coefficient de proportionnalité ?`,
+        text: c.text,
         format: "qcm",
-        choices: shuffle([
-          String(unit),
-          String(qty),
-          String(total),
-          String(unit + 1),
-        ]),
-        expected: [String(unit)],
+        choices: makeChoices(fr(c.t), leurres),
+        expected: [fr(c.t)],
         comparator: "mcq_exact",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
-          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
-          "Calcul : " +
-          (`${total} ÷ ${qty} = ${unit}. Le coefficient de proportionnalité est donc ${unit}.`) +
-          "\n\nConclusion : on garde la réponse obtenue.",
+        explanation: expl(c.explication),
       };
     },
   },
@@ -1031,22 +1287,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Divise par le nombre d’objets.",
     tags: ["prop_proportionnalite", "unite", "template"],
+    // 06/10 : passage à l'unité, valeur entière.
     generate: () => {
-      const qty = randomChoice([2, 3, 4, 5]);
-      const unit = randomChoice([2, 3, 4]);
-      const total = qty * unit;
-
-      return {
-        text: `${qty} objets coûtent ${total} €. Combien coûte 1 objet ?`,
-        format: "short",
-        expected: [String(unit), `${unit}€`, `${unit} €`],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
-          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
-          "Calcul : " +
-          (`Pour passer à l’unité, on divise ${total} € par ${qty}. On obtient ${unit} €.`) +
-          "\n\nConclusion : on garde la réponse obtenue.",
-      };
+      const c = versUnite(false);
+      return { text: c.text, format: "short", expected: reponses(c.t, c.s.u), comparator: "number_equal", explanation: expl(c.explication) };
     },
   },
   {
@@ -1060,22 +1304,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Passe à l’unité.",
     tags: ["prop_proportionnalite", "unite", "template"],
+    // 06/10 : passage à l'unité, valeur décimale (2,5 € le ticket).
     generate: () => {
-      const qty = randomChoice([2, 4, 5, 6]);
-      const unit = randomChoice([1, 2, 3, 4]);
-      const total = qty * unit;
-
-      return {
-        text: `${qty} stylos coûtent ${total} €. Combien coûte 1 stylo ?`,
-        format: "short",
-        expected: [String(unit), `${unit}€`, `${unit} €`],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
-          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
-          "Calcul : " +
-          (`${total} € ÷ ${qty} = ${unit} €. Un stylo coûte donc ${unit} €.`) +
-          "\n\nConclusion : on garde la réponse obtenue.",
-      };
+      const c = versUnite(true);
+      return { text: c.text, format: "short", expected: reponses(c.t, c.s.u), comparator: "number_equal", explanation: expl(c.explication) };
     },
   },
   {
@@ -1090,32 +1322,16 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     hint: "Il faut partager le prix total par la quantité.",
     tags: ["prop_proportionnalite", "unite", "qcm", "template"],
     generate: () => {
-      const unit = randomChoice([2, 3, 4]);
-      // Mêmes collisions que pour le coefficient : la quantité ne doit valoir
-      // ni le prix d'un objet, ni ce prix plus un.
-      const qty = randomChoice(
-        [2, 3, 4, 5].filter((q) => q !== unit && q !== unit + 1),
-      );
-      const total = qty * unit;
-
-      const choices = shuffle([
-        String(unit),
-        String(unit + 1),
-        String(total),
-        String(qty),
-      ]);
-
+      const c = versUnite(Math.random() < 0.3);
+      // Les pièges : la valeur totale, la quantité, l'écart (erreur additive), un de plus.
+      const leurres = [c.x, c.n, c.x - c.n, c.t + 1, c.x * c.n].filter((v) => v > 0 && !egalNb(v, c.t)).map((v) => avecU(v, c.s.u));
       return {
-        text: `${qty} objets coûtent ${total} €. Combien coûte 1 objet ?`,
+        text: c.text,
         format: "qcm",
-        choices,
-        expected: [String(unit)],
+        choices: makeChoices(avecU(c.t, c.s.u), leurres),
+        expected: [avecU(c.t, c.s.u)],
         comparator: "mcq_exact",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
-          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
-          "Calcul : " +
-          (`${total} ÷ ${qty} = ${unit}. Un objet coûte donc ${unit} €.`) +
-          "\n\nConclusion : on garde la réponse obtenue.",
+        explanation: expl(c.explication),
       };
     },
   },
@@ -1134,25 +1350,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Si la quantité diminue, le prix diminue dans la même proportion.",
     tags: ["prop_proportionnalite", "direct", "template"],
+    // 06/10 : la quantité est divisée par 2, 3 ou 4 — la valeur aussi.
     generate: () => {
-      const qty = randomChoice([4, 6, 8]);
-      const unit = randomChoice([2, 3, 4]);
-      const total = qty * unit;
-      const divisor = randomChoice([2, 4]);
-      const targetQty = qty / divisor;
-      const targetTotal = total / divisor;
-
-      return {
-        text: `Si ${qty} objets coûtent ${total} €, combien coûtent ${targetQty} objets ?`,
-        format: "short",
-        expected: [String(targetTotal), `${targetTotal}€`, `${targetTotal} €`],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
-          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
-          "Calcul : " +
-          (`On passe de ${qty} à ${targetQty} objets en divisant par ${divisor}. On divise donc aussi le prix par ${divisor} : ${total} ÷ ${divisor} = ${targetTotal} €.`) +
-          "\n\nConclusion : on garde la réponse obtenue.",
-      };
+      const c = colonneDiviseeK([2, 3, 4], false);
+      return { text: c.text, format: "short", expected: reponses(c.y, c.s.u), comparator: "number_equal", explanation: expl(c.explication) };
     },
   },
   {
@@ -1166,24 +1367,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Passe à la moitié.",
     tags: ["prop_proportionnalite", "direct", "template"],
+    // 06/10 : la moitié, en tableau ou avec une consigne qui le dit.
     generate: () => {
-      const qty = randomChoice([6, 8, 10]);
-      const unit = randomChoice([2, 3, 5]);
-      const total = qty * unit;
-      const targetQty = qty / 2;
-      const targetTotal = total / 2;
-
-      return {
-        text: `${qty} billets coûtent ${total} €. Combien coûtent ${targetQty} billets ?`,
-        format: "short",
-        expected: [String(targetTotal), `${targetTotal}€`, `${targetTotal} €`],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
-          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
-          "Calcul : " +
-          (`${targetQty} est la moitié de ${qty}, donc le prix est la moitié de ${total} €. On obtient ${targetTotal} €.`) +
-          "\n\nConclusion : on garde la réponse obtenue.",
-      };
+      const c = colonneDiviseeK([2], true);
+      return { text: c.text, format: "short", expected: reponses(c.y, c.s.u), comparator: "number_equal", explanation: expl(c.explication) };
     },
   },
   {
@@ -1198,30 +1385,16 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     hint: "Si on divise la quantité par 2, on divise aussi le prix par 2.",
     tags: ["prop_proportionnalite", "direct", "sport", "qcm", "template"],
     generate: () => {
-      const qty = randomChoice([4, 6, 8]);
-      const unit = randomChoice([2, 3]);
-      const total = qty * unit;
-      const targetQty = qty / 2;
-      const good = total / 2;
-
-      const choices = shuffle([
-        String(good),
-        String(good + 1),
-        String(good + 2),
-        String(total),
-      ]);
-
+      const c = colonneDiviseeK([2, 3, 4], false);
+      // Les pièges : retirer l'écart des quantités (erreur additive), garder la valeur, un de plus.
+      const leurres = [c.x - (c.n - c.m), c.x, c.y + 1, c.y * 2 === c.x ? c.y + 2 : c.y * 2].filter((v) => v > 0 && !egalNb(v, c.y)).map((v) => avecU(v, c.s.u));
       return {
-        text: `Pour une équipe de sport, ${qty} maillots coûtent ${total} €. Combien coûtent ${targetQty} maillots ?`,
+        text: c.text,
         format: "qcm",
-        choices,
-        expected: [String(good)],
+        choices: makeChoices(avecU(c.y, c.s.u), leurres),
+        expected: [avecU(c.y, c.s.u)],
         comparator: "mcq_exact",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
-          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
-          "Calcul : " +
-          (`${targetQty} est la moitié de ${qty}. Le prix est donc la moitié de ${total} €, soit ${good} €.`) +
-          "\n\nConclusion : on garde la réponse obtenue.",
+        explanation: expl(c.explication),
       };
     },
   },
@@ -1240,23 +1413,63 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Passe d’abord à l’unité.",
     tags: ["prop_proportionnalite", "defi", "template"],
+    // 06/10 : passage par l'unité, valeur pour une unité souvent décimale.
     generate: () => {
-      const qty = randomChoice([2, 3, 4]);
-      const unit = randomChoice([2, 3, 5]);
-      const total = qty * unit;
-      const targetQty = randomChoice([5, 6, 7]);
-
-      return {
-        text: `Si ${qty} objets coûtent ${total} €, combien coûtent ${targetQty} objets ?`,
-        format: "short",
-        expected: [String(targetQty * unit), `${targetQty * unit}€`, `${targetQty * unit} €`],
-        comparator: "number_equal",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
-          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
-          "Calcul : " +
-          (`${qty} objets coûtent ${total} €, donc 1 objet coûte ${unit} €. Alors ${targetQty} objets coûtent ${targetQty} × ${unit} = ${targetQty * unit} €.`) +
-          "\n\nConclusion : on garde la réponse obtenue.",
-      };
+      const c = parLUnite(true);
+      return { text: c.text, format: "short", expected: reponses(c.y, c.s.u), comparator: "number_equal", explanation: expl(c.explication) };
+    },
+  },
+  {
+    kind: "template",
+    id: "prop_defi_tpl_unite3",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Ni le double ni la moitié : passe d’abord par la valeur pour 1.",
+    tags: ["prop_proportionnalite", "defi", "template"],
+    generate: () => {
+      const c = parLUnite(false);
+      return { text: c.text, format: "short", expected: reponses(c.y, c.s.u), comparator: "number_equal", explanation: expl(c.explication) };
+    },
+  },
+  {
+    kind: "template",
+    id: "prop_defi_qcm_tpl_offres",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "prop_proportionnalite",
+    microId: "prop_defi",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Calcule le prix d’un seul objet dans chaque offre, puis compare.",
+    tags: ["prop_proportionnalite", "defi", "qcm", "template"],
+    generate: () => {
+      for (;;) {
+        const s = randomChoice(SITUATIONS_PROP.filter((x) => x.u === "€"));
+        const P = randomChoice([...PRENOMS]);
+        const [t1, t2] = [randomChoice([...s.taux]), Math.random() < 0.2 ? -1 : randomChoice([...s.taux])];
+        const n1 = randomInt(2, Math.min(s.nMax, 8));
+        const n2 = randomInt(2, Math.min(s.nMax, 8));
+        const t2b = t2 === -1 ? t1 : t2;
+        if (n1 === n2) continue;
+        const [x1, x2] = [n1 * t1, n2 * t2b];
+        const bonne = egalNb(t1, t2b) ? "elles se valent" : t1 < t2b ? "l’offre A" : "l’offre B";
+        return {
+          text: `${P.n} compare deux offres. Offre A : ${s.q(n1)} pour ${fr(x1)} €. Offre B : ${s.q(n2)} pour ${fr(x2)} €. ${randomChoice([
+            "Quelle offre est la moins chère pour un seul ?",
+            "Avec quelle offre l’unité coûte-t-elle le moins cher ?",
+            `Quelle offre ${P.n} doit-${il(P)} choisir pour payer le moins cher à l’unité ?`,
+          ])}`,
+          format: "qcm",
+          choices: ["l’offre A", "l’offre B", "elles se valent"],
+          expected: [bonne],
+          comparator: "mcq_exact",
+          explanation: expl(`Offre A : ${fr(x1)} ÷ ${fr(n1)} = ${fr(t1)} € pour un seul. Offre B : ${fr(x2)} ÷ ${fr(n2)} = ${fr(t2b)} € pour un seul. Réponse : ${bonne}.`),
+        };
+      }
     },
   },
   {
@@ -1271,31 +1484,17 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     hint: "Cherche le prix d’un objet puis multiplie.",
     tags: ["prop_proportionnalite", "defi", "qcm", "template"],
     generate: () => {
-      const qty = randomChoice([2, 3, 4]);
-      const unit = randomChoice([2, 3, 4]);
-      const total = qty * unit;
-      const targetQty = randomChoice([5, 6, 7]);
-      const good = targetQty * unit;
-
+      const c = parLUnite(Math.random() < 0.5);
+      // Quand on demande une unité de plus que l'énoncé, « une de moins » retombe
+      // sur la valeur de départ : makeChoices écarte les doublons.
+      const leurres = [c.y + c.t, c.y - c.t, c.x, c.x + (c.m - c.n), c.n * c.m].filter((v) => v > 0 && !egalNb(v, c.y)).map((v) => avecU(v, c.s.u));
       return {
-        text: `Si ${qty} objets coûtent ${total} €, combien coûtent ${targetQty} objets ?`,
+        text: c.text,
         format: "qcm",
-        // Quand on demande le prix d'un objet de plus que l'énoncé, « un objet
-        // de moins » retombe sur le prix de départ : deux pièges, une seule
-        // ligne. D'où le produit croisé farfelu, gardé en réserve.
-        choices: makeChoices(`${good} €`, [
-          `${good + unit} €`,
-          `${good - unit} €`,
-          `${total} €`,
-          `${qty * targetQty} €`,
-        ]),
-        expected: [`${good} €`],
+        choices: makeChoices(avecU(c.y, c.s.u), leurres),
+        expected: [avecU(c.y, c.s.u)],
         comparator: "mcq_exact",
-        explanation: "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
-          "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
-          "Calcul : " +
-          (`${qty} objets coûtent ${total} €, donc 1 objet coûte ${unit} €. Alors ${targetQty} objets coûtent ${good} €.`) +
-          "\n\nConclusion : on garde la réponse obtenue.",
+        explanation: expl(c.explication),
       };
     },
   },

@@ -30,7 +30,7 @@
 // n'est pas écrite. Une demi-droite graduée en dixièmes demanderait d'apprendre
 // des traits secondaires au composant.
 
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 
 function entierAleatoire(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -76,6 +76,383 @@ function droite(
       showZero: true,
     },
     size: { width: 340, height: 130 },
+  };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// LES GÉNÉRATEURS VARIÉS (06/10/2026)
+//
+// ⛔ Mesuré le 05/10 : 7 ou 8 squelettes par micro, 13 à 18 répétitions sur 20.
+// Chaque gabarit compose désormais une SITUATION (sentier, règle, cuve,
+// thermomètre…) × une TOURNURE × un PRÉNOM, et la figure suit les nombres :
+// les noms des points de la figure sont ceux de l'énoncé. Le correcteur
+// (correcteurs/demi-droite.ts) relit la FIGURE et refait la lecture.
+// ═══════════════════════════════════════════════════════════════════════════
+
+type Prenom = { nom: string; f: boolean };
+const PRENOMS: Prenom[] = [
+  { nom: "Inès", f: true }, { nom: "Lucas", f: false }, { nom: "Aya", f: true }, { nom: "Noah", f: false },
+  { nom: "Chloé", f: true }, { nom: "Mamadou", f: false }, { nom: "Léa", f: true }, { nom: "Yanis", f: false },
+  { nom: "Sofia", f: true }, { nom: "Ethan", f: false }, { nom: "Fatou", f: true }, { nom: "Karim", f: false },
+  { nom: "Maëlys", f: true }, { nom: "Liam", f: false }, { nom: "Jade", f: true }, { nom: "Rayan", f: false },
+  { nom: "Amina", f: true }, { nom: "Tom", f: false }, { nom: "Zoé", f: true }, { nom: "Enzo", f: false },
+  { nom: "Lina", f: true }, { nom: "Nathan", f: false }, { nom: "Mei", f: true }, { nom: "Ilyes", f: false },
+  { nom: "Manon", f: true }, { nom: "Théo", f: false }, { nom: "Anaïs", f: true }, { nom: "Sacha", f: false },
+  { nom: "Nour", f: true }, { nom: "Diego", f: false },
+];
+const choix = <T,>(t: readonly T[]): T => t[Math.floor(Math.random() * t.length)];
+const prenom = () => choix(PRENOMS);
+const il = (p: Prenom) => (p.f ? "elle" : "il");
+const de = (p: Prenom) => (/^[aeiouyàâéèêëîïôûü]/i.test(p.nom) ? `d'${p.nom}` : `de ${p.nom}`);
+const rond = (n: number) => Number(n.toFixed(6));
+function melange<T>(t: T[]): T[] {
+  return [...t].sort(() => Math.random() - 0.5);
+}
+
+/** Une graduation lisible : `pas` entre deux traits étiquetés, `nb` intervalles (cinq au plus). */
+type Echelle = { pas: number; nb: number; min: number };
+
+function echelle(etoile: number): Echelle {
+  // Pas de 0,25 ici : le milieu de deux quarts (0,375) est trop dur à lire en 6e.
+  const pas = choix(etoile <= 2 ? [1, 2, 5, 10] : etoile === 3 ? [0.2, 0.5, 1, 2] : [0.1, 0.2, 0.5, 5, 10]);
+  const nb = choix([4, 5]);
+  const depart = etoile <= 2 ? 0 : choix([0, 0, 1, 2, 3]);
+  return { pas, nb, min: rond(depart * pas * nb) };
+}
+
+/** Le milieu d'un intervalle (seul endroit lisible sans graduation intermédiaire). */
+const milieu = (e: Echelle, k: number) => rond(e.min + (k + 0.5) * e.pas);
+
+const SITUATIONS_DROITE: { u: string; lettre: string; texte: (p: Prenom, L: string) => string; question: (p: Prenom, L: string) => string }[] = [
+  { u: "", lettre: "A", texte: (p, L) => `Sur cette demi-droite graduée, ${p.nom} a placé le point ${L}.`, question: () => "Quelle est son abscisse ?" },
+  { u: "", lettre: "M", texte: (p, L) => `${p.nom} regarde le point ${L} sur la demi-droite graduée.`, question: (p) => `Quelle abscisse doit-${il(p)} lire ?` },
+  { u: "km", lettre: "R", texte: (p, L) => `La demi-droite représente le sentier ${de(p)}, gradué en km. Le refuge est au point ${L}.`, question: () => "À quel kilomètre se trouve le refuge ?" },
+  { u: "cm", lettre: "T", texte: (p, L) => `La demi-droite représente une règle graduée en cm. ${p.nom} a fait un trait au point ${L}.`, question: () => "Quelle longueur ce trait indique-t-il ?" },
+  { u: "L", lettre: "N", texte: (p, L) => `La demi-droite représente la cuve d'eau de pluie ${de(p)}, graduée en L. Le niveau est au point ${L}.`, question: () => "Combien de litres contient la cuve ?" },
+  { u: "°C", lettre: "T", texte: (p, L) => `La demi-droite représente le thermomètre du jardin ${de(p)}, gradué en °C. Le liquide s'arrête au point ${L}.`, question: () => "Quelle température indique-t-il ?" },
+  { u: "kg", lettre: "F", texte: (p, L) => `La demi-droite représente le cadran de la balance ${de(p)}, gradué en kg. L'aiguille montre le point ${L}.`, question: () => "Quelle masse indique la balance ?" },
+  { u: "m", lettre: "S", texte: (p, L) => `La demi-droite représente la piste de course, graduée en m. ${p.nom} s'est arrêté${p.f ? "e" : ""} au point ${L}.`, question: (p) => `À combien de mètres du départ est-${il(p)} ?` },
+  { u: "km", lettre: "V", texte: (p, L) => `La demi-droite représente la route à vélo ${de(p)}, graduée en km. Le point ${L} marque sa pause goûter.`, question: (p) => `À quel kilomètre fait-${il(p)} la pause ?` },
+  { u: "", lettre: "E", texte: (p, L) => `Le professeur ${de(p)} a placé le point ${L} sur la demi-droite graduée.`, question: () => "Lis son abscisse." },
+  { u: "L", lettre: "J", texte: (p, L) => `La demi-droite représente un pichet de jus gradué en L. ${p.nom} l'a rempli jusqu'au point ${L}.`, question: () => "Combien de litres de jus y a-t-il ?" },
+  { u: "cm", lettre: "H", texte: (p, L) => `La demi-droite représente la toise de la classe, graduée en cm. Le haut de la plante ${de(p)} est au point ${L}.`, question: () => "Quelle hauteur indique la toise ?" },
+];
+
+/** Petites unités : la lecture se fait sur des pas de 1, 2, 5, 10 ou en dixièmes selon la situation. */
+function genLire(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
+  const p = prenom();
+  const s = choix(SITUATIONS_DROITE);
+  const e = echelle(etoile);
+  const k = Math.floor(Math.random() * e.nb);
+  const v = milieu(e, k);
+  const bas = rond(e.min + k * e.pas);
+  const haut = rond(bas + e.pas);
+  const canvas = droite(e.min, rond(e.min + e.nb * e.pas), e.pas, [{ value: v, label: s.lettre }]);
+  const expl = explDroite(
+    `Les graduations vont de ${virgule(e.pas)} en ${virgule(e.pas)}. Le point ${s.lettre} est entre ${virgule(bas)} et ${virgule(haut)}, juste au milieu : son abscisse est la moitié du chemin, ${virgule(bas)} + ${virgule(rond(e.pas / 2))} = ${virgule(v)}.`,
+  );
+  const text = `${s.texte(p, s.lettre)} ${s.question(p, s.lettre)}`;
+  if (etoile === 4) {
+    // Les pièges : compter les traits au lieu de lire leur valeur, croire que le pas vaut 1.
+    const rang = k + 0.5;
+    const leurres = [rond(rang), rond(e.min + rang), rond(v * 10), rond(bas)].filter((x) => x !== v);
+    const avecU = (x: number) => (s.u ? `${virgule(x)} ${s.u}` : virgule(x));
+    const vus = new Set<number>();
+    const uniques = leurres.filter((x) => !vus.has(x) && vus.add(x)).slice(0, 3);
+    return {
+      text,
+      format: "qcm",
+      choices: melange([avecU(v), ...uniques.map(avecU)]),
+      expected: [avecU(v)],
+      comparator: "mcq_exact",
+      explanation: expl + " Attention : compter les traits donne un rang, pas une abscisse ; il faut d'abord lire ce que vaut un intervalle.",
+      canvas,
+    };
+  }
+  return {
+    text,
+    format: "short",
+    expected: s.u ? [`${virgule(v)} ${s.u}`, virgule(v)] : [virgule(v)],
+    comparator: "number_equal",
+    explanation: expl,
+    canvas,
+  };
+}
+
+const LETTRES_PLACER = [
+  ["A", "B", "C"],
+  ["R", "S", "T"],
+  ["E", "F", "G"],
+  ["K", "L", "M"],
+  ["U", "V", "W"],
+];
+
+const SITUATIONS_PLACER: { u: string; intro: (p: Prenom, l: string[]) => string; question: (p: Prenom, x: string) => string }[] = [
+  { u: "", intro: () => "", question: (p, x) => `Quel point a pour abscisse ${x} ?` },
+  { u: "", intro: (p) => `${p.nom} cherche un point sur la demi-droite graduée.`, question: (p, x) => `Lequel a pour abscisse ${x} ?` },
+  { u: "km", intro: (p, l) => `La demi-droite représente le sentier ${de(p)}, gradué en km. Les points ${l.join(", ")} sont des refuges.`, question: (p, x) => `Quel refuge est au kilomètre ${x} ?` },
+  { u: "cm", intro: (p, l) => `La demi-droite représente une règle graduée en cm. ${p.nom} a marqué les points ${l.join(", ")}.`, question: (p, x) => `Quel point est à ${x} cm ?` },
+  { u: "L", intro: (p, l) => `La demi-droite représente un seau gradué en L. Les points ${l.join(", ")} sont trois niveaux d'eau.`, question: (p, x) => `Quel niveau correspond à ${x} L ?` },
+  { u: "m", intro: (p, l) => `La demi-droite représente la piste du stade, graduée en m. ${p.nom} a posé trois plots : ${l.join(", ")}.`, question: (p, x) => `Quel plot est à ${x} m du départ ?` },
+  { u: "kg", intro: (p, l) => `La demi-droite représente le cadran d'une balance, gradué en kg. Les points ${l.join(", ")} sont trois pesées ${de(p)}.`, question: (p, x) => `Quelle pesée indique ${x} kg ?` },
+  { u: "°C", intro: (p, l) => `La demi-droite représente un thermomètre gradué en °C. ${p.nom} a noté trois relevés : ${l.join(", ")}.`, question: (p, x) => `Quel relevé indique ${x} °C ?` },
+  { u: "", intro: (p, l) => `Le professeur ${de(p)} a placé les points ${l.join(", ")}.`, question: (p, x) => `${p.nom} doit trouver le point d'abscisse ${x}. Lequel est-ce ?` },
+];
+
+function genPlacer(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
+  const p = prenom();
+  const s = choix(SITUATIONS_PLACER);
+  const noms = choix(LETTRES_PLACER);
+  const e = echelle(etoile);
+  const creux: number[] = [];
+  while (creux.length < 3) {
+    const c = Math.floor(Math.random() * e.nb);
+    if (!creux.includes(c)) creux.push(c);
+  }
+  creux.sort((a, b) => a - b);
+  const valeurs = creux.map((c) => milieu(e, c));
+  const cible = Math.floor(Math.random() * 3);
+  // Étoile 4 : parfois aucun point ne convient (2,03 n'est pas 2,3).
+  const aucun = etoile === 4 && Math.random() < 0.2;
+  const vc = valeurs[cible];
+  const piege = rond(Math.floor(vc) + rond(vc - Math.floor(vc)) / 10); // 2,3 → 2,03
+  // ⛔ 06/10/2026 : jamais plus de deux chiffres après la virgule (2,35 → 2,035 est refusé).
+  const deuxChiffres = (v: number) => Number.isInteger(rond(v * 100));
+  const x = !aucun ? vc : piege !== vc && deuxChiffres(piege) ? piege : rond(e.min + e.nb * e.pas + e.pas / 2);
+  if (aucun && valeurs.includes(x)) return genPlacer(etoile);
+  const xEcrit = virgule(x);
+  const text = [s.intro(p, noms), s.question(p, xEcrit)].filter(Boolean).join(" ");
+  const bonne = aucun ? "aucun des trois" : noms[cible];
+  return {
+    text,
+    format: "qcm",
+    choices: [...noms, "aucun des trois"],
+    expected: [bonne],
+    comparator: "mcq_exact",
+    explanation: explDroite(
+      `Un intervalle vaut ${virgule(e.pas)}. Les points ${noms.join(", ")} ont pour abscisses ${valeurs.map(virgule).join(" ; ")}. ${
+        aucun ? `${xEcrit} n'est aucune d'elles : ${xEcrit} et ${virgule(valeurs[cible])} ne sont pas le même nombre.` : `${xEcrit} est l'abscisse de ${noms[cible]}, au milieu de son intervalle.`
+      }`,
+    ),
+    canvas: droite(e.min, rond(e.min + e.nb * e.pas), e.pas, valeurs.map((v, i) => ({ value: v, label: noms[i] }))),
+  };
+}
+
+const FRACTIONS_INTRO: ((p: Prenom, d: number, L: string) => string)[] = [
+  (p, d, L) => `L'unité est partagée en ${d} parts égales. Quelle fraction est l'abscisse du point ${L} ?`,
+  (p, d, L) => `Sur cette demi-droite, l'unité est partagée en ${d} parts égales. ${p.nom} a placé le point ${L}. Écris son abscisse sous forme de fraction.`,
+  (p, d, L) => `Chaque unité est coupée en ${d} parts égales. ${p.nom} cherche l'abscisse du point ${L}. Quelle fraction doit-${il(p)} écrire ?`,
+  (p, d, L) => `Sur la frise ${de(p)}, chaque unité est partagée en ${d} parts égales. ${p.nom} a marqué le point ${L}. Quelle fraction est son abscisse ?`,
+  (p, d, L) => `Le sentier ${de(p)} est gradué : chaque kilomètre est partagé en ${d} parts égales. Le point ${L} marque sa pause. Écris son abscisse sous forme de fraction.`,
+  (p, d, L) => `Le professeur ${de(p)} a partagé l'unité en ${d} parts égales et a placé le point ${L}. Quelle fraction a-t-il placée ?`,
+];
+
+function genFraction(etoile: 2 | 3 | 4 | 5): TutorGeneratedQuestionV4 {
+  const p = prenom();
+  const L = choix(["A", "B", "C", "D", "M", "P"]);
+
+  if (etoile === 2 || etoile === 3) {
+    const d = choix([2, 4, 5]);
+    let n = etoile === 2 ? 1 + Math.floor(Math.random() * (d - 1)) : 1 + Math.floor(Math.random() * (2 * d - 1));
+    if (n === d) n -= 1;
+    // Cinq intervalles au plus : au-delà de 1, la figure montre de 1 à 2 (sauf en demis).
+    const [min, max] = n <= d ? [0, 1] : d === 2 ? [0, 2] : [1, 2];
+    const v = rond(n / d);
+    return {
+      text: choix(FRACTIONS_INTRO)(p, d, L),
+      format: "short",
+      expected: [`${n}/${d}`, virgule(v)],
+      comparator: "fraction_decimal_equivalent",
+      explanation: explDroite(
+        min === 1
+          ? `Chaque graduation vaut 1/${d}. La figure commence à 1, c'est-à-dire ${d}/${d}. De 1 jusqu'à ${L}, on compte encore ${n - d} part${n - d > 1 ? "s" : ""} : en tout ${d} + ${n - d} = ${n} parts depuis l'origine. L'abscisse de ${L} est ${n}/${d}, plus grande que 1. En écriture décimale : ${virgule(v)}.`
+          : `Chaque graduation vaut 1/${d}. De l'origine jusqu'à ${L}, on compte ${n} parts : l'abscisse de ${L} est ${n}/${d}${n > d ? `, plus grande que 1 puisque ${d}/${d} vaut déjà 1` : ""}. En écriture décimale : ${virgule(v)}.`,
+      ),
+      canvas: droite(min, max, rond(1 / d), [{ value: v, label: L }]),
+    };
+  }
+
+  if (etoile === 4) {
+    const d = choix([2, 4, 5]);
+    if (Math.random() < 0.5) {
+      // Quel point a pour abscisse n/d ? (trois points sur les graduations)
+      const noms = choix(LETTRES_PLACER);
+      const max = d === 2 ? 2 : 1;
+      const rangs: number[] = [];
+      while (rangs.length < 3) {
+        const r = 1 + Math.floor(Math.random() * (d * max - 1));
+        if (!rangs.includes(r)) rangs.push(r);
+      }
+      if (d * max - 1 < 3) return genFraction(etoile);
+      rangs.sort((a, b) => a - b);
+      const cible = Math.floor(Math.random() * 3);
+      const n = rangs[cible];
+      const text = choix([
+        `Quel point a pour abscisse ${n}/${d} ?`,
+        `${p.nom} doit trouver le point d'abscisse ${n}/${d}. Lequel est-ce ?`,
+        `Sur cette demi-droite, l'unité est partagée en ${d}. Où se trouve ${n}/${d} ?`,
+        `Sur la frise ${de(p)}, chaque unité est partagée en ${d}. Quel point marque ${n}/${d} ?`,
+        `${p.nom} a placé trois points. Lequel a pour abscisse ${n}/${d} ?`,
+        `Le sentier ${de(p)} est partagé en ${d} parts par kilomètre. Quel point est à ${n}/${d} de kilomètre du départ ?`,
+      ]);
+      return {
+        text,
+        format: "qcm",
+        choices: [...noms, "aucun des trois"],
+        expected: [noms[cible]],
+        comparator: "mcq_exact",
+        explanation: explDroite(`L'unité est partagée en ${d} parts égales : chaque graduation vaut 1/${d}. On compte ${n} parts depuis l'origine : c'est le point ${noms[cible]}.`),
+        canvas: droite(0, max, rond(1 / d), rangs.map((r, i) => ({ value: rond(r / d), label: noms[i] }))),
+      };
+    }
+    // Entre quels entiers ?
+    const den = choix([2, 3, 4, 5, 10]);
+    let n = 2 + Math.floor(Math.random() * (4 * den));
+    if (n % den === 0) n += 1;
+    const e = Math.floor(n / den);
+    const text = choix([
+      `Entre quels deux entiers consécutifs se place ${n}/${den} sur une demi-droite graduée ?`,
+      `${p.nom} veut placer ${n}/${den} sur une demi-droite graduée. Entre quels entiers doit-${il(p)} chercher ?`,
+      `Sur une demi-droite graduée, ${n}/${den} se trouve entre :`,
+      `${p.nom} a parcouru ${n}/${den} de kilomètre. Entre quels nombres entiers de kilomètres se trouve-t-${il(p)} ?`,
+      `${p.nom} a bu ${n}/${den} de litre de jus en une semaine. Cette quantité est comprise :`,
+      `Sur sa frise, ${p.nom} doit placer ${n}/${den}. Entre quelles graduations entières le met-${il(p)} ?`,
+    ]);
+    const leurres = [`entre ${e + 1} et ${e + 2}`, e > 0 ? `entre ${e - 1} et ${e}` : `entre ${e + 2} et ${e + 3}`, `entre ${n} et ${n + 1}`];
+    return {
+      text,
+      format: "qcm",
+      choices: melange([`entre ${e} et ${e + 1}`, ...[...new Set(leurres)].filter((x) => x !== `entre ${e} et ${e + 1}`)]),
+      expected: [`entre ${e} et ${e + 1}`],
+      comparator: "mcq_exact",
+      explanation: explDroite(`${den} parts font une unité. ${e * den}/${den} = ${e} et ${(e + 1) * den}/${den} = ${e + 1}. Comme ${n} est entre ${e * den} et ${(e + 1) * den}, ${n}/${den} est entre ${e} et ${e + 1}. Le piège est de chercher vers ${n} : le numérateur compte des parts, pas des unités.`),
+    };
+  }
+
+  // Étoile 5 : la plus à droite (comparer par la place), ou même point, autre écriture.
+  if (Math.random() < 0.45) {
+    const den = choix([3, 4, 5, 6, 8, 10]);
+    const nums = new Set<number>();
+    while (nums.size < 4) nums.add(1 + Math.floor(Math.random() * (2 * den)));
+    const fr = [...nums].filter((x) => x !== den).slice(0, 4);
+    if (fr.length < 3) return genFraction(etoile);
+    const droiteMax = Math.max(...fr);
+    const gauche = Math.random() < 0.4;
+    const cible = gauche ? Math.min(...fr) : droiteMax;
+    const ecr = (x: number) => `${x}/${den}`;
+    const sens = gauche ? "le plus à gauche (le plus près de l'origine)" : "le plus à droite";
+    const text = choix([
+      `${p.nom} place ${fr.map(ecr).join(" ; ")} sur une demi-droite graduée. Quelle fraction est ${sens} ?`,
+      `Sur une demi-droite graduée, laquelle de ces fractions est placée ${sens} ?`,
+      `Quatre élèves placent chacun une fraction : ${fr.map(ecr).join(" ; ")}. Quelle fraction est ${sens} ?`,
+      `Sur la frise ${de(p)}, quelle fraction est ${sens} ?`,
+    ]);
+    return {
+      text,
+      format: "qcm",
+      choices: melange(fr.map(ecr)),
+      expected: [ecr(cible)],
+      comparator: "mcq_exact",
+      explanation: explDroite(`Toutes ces fractions comptent des ${den === 2 ? "demis" : `parts de 1/${den}`} : plus on compte de parts, plus on va loin de l'origine. ${ecr(cible)} a ${gauche ? "le moins" : "le plus"} de parts, elle est donc ${sens}.`),
+    };
+  }
+  const d = choix([2, 3, 4, 5]);
+  let n = 1 + Math.floor(Math.random() * (2 * d - 1));
+  if (n === d) n += 1; // n/d = 1 : (n + k)/(d + k) vaudrait 1 aussi.
+  const k = choix([2, 3]);
+  const bonne = `${n * k}/${d * k}`;
+  const leurres = [`${n + k}/${d + k}`, `${n * k}/${d}`, `${n}/${d * k}`].filter((x) => x !== bonne);
+  const text = choix([
+    `Le point A a pour abscisse ${n}/${d}. Quelle autre fraction désigne le même point ?`,
+    `${p.nom} place ${n}/${d} sur une demi-droite graduée. Quelle fraction tombe exactement au même endroit ?`,
+    `Quelle fraction a la même place que ${n}/${d} sur une demi-droite graduée ?`,
+    `Sur sa frise, ${p.nom} a marqué ${n}/${d}. Son voisin a partagé chaque unité ${k} fois plus finement. Quelle fraction doit-il écrire pour le même point ?`,
+    `${p.nom} a parcouru ${n}/${d} de kilomètre. Quelle autre écriture donne exactement la même distance ?`,
+    `Le professeur ${de(p)} demande une fraction égale à ${n}/${d}. Laquelle convient ?`,
+  ]);
+  return {
+    text,
+    format: "qcm",
+    choices: melange([bonne, ...leurres]),
+    expected: [bonne],
+    comparator: "mcq_exact",
+    explanation: explDroite(
+      `Partager chaque part en ${k} donne des parts ${k} fois plus petites, mais il en faut ${k} fois plus pour aller au même endroit : ${n}/${d} = ${bonne}. Ajouter le même nombre en haut et en bas (${n + k}/${d + k}) change la place du point.`,
+    ),
+  };
+}
+
+const PARTS_MOTS: Record<number, string> = { 2: "en deux", 3: "en tiers", 4: "en quarts", 5: "en cinquièmes", 6: "en sixièmes", 8: "en huitièmes", 10: "en dixièmes" };
+
+/** `pron` : « la » ou « le », selon le genre de l'objet partagé. */
+const SUPPORTS: { u: string; pron: string; objet: (p: Prenom, L: string) => string }[] = [
+  { u: "cm", pron: "la", objet: (p, L) => `${p.nom} gradue une bande de papier de ${L} cm` },
+  { u: "cm", pron: "la", objet: (p, L) => `${p.nom} prépare une frise chronologique de ${L} cm` },
+  { u: "cm", pron: "le", objet: (p, L) => `Pour un jeu de l'oie, ${p.nom} trace un chemin de ${L} cm` },
+  { u: "m", pron: "la", objet: (p, L) => `${p.nom} fait des nœuds sur une corde de ${L} m` },
+  { u: "cm", pron: "le", objet: (p, L) => `${p.nom} gradue un ruban de ${L} cm` },
+  { u: "m", pron: "la", objet: (p, L) => `Au stade, ${p.nom} pose des plots le long d'une ligne de ${L} m` },
+  { u: "cm", pron: "la", objet: (p, L) => `${p.nom} gradue une baguette de bois de ${L} cm` },
+  { u: "m", pron: "la", objet: (p, L) => `Dans le jardin, ${p.nom} plante des piquets le long d'une allée de ${L} m` },
+  { u: "cm", pron: "le", objet: (p, L) => `${p.nom} dessine un segment de ${L} cm` },
+  { u: "cm", pron: "la", objet: (p, L) => `${p.nom} gradue une règle en carton de ${L} cm` },
+];
+
+function genGraduer(etoile: 2 | 3 | 4): TutorGeneratedQuestionV4 {
+  const p = prenom();
+  const s = choix(SUPPORTS);
+  const parts = choix([2, 3, 4, 5, 6, 8, 10]);
+  const pasEntier = etoile === 2 || Math.random() < 0.6;
+  const pas = pasEntier ? 1 + Math.floor(Math.random() * 6) : choix([0.5, 1.5, 2.5]);
+  const L = rond(parts * pas);
+  const mots = Math.random() < 0.5 && PARTS_MOTS[parts] ? PARTS_MOTS[parts] : `en ${parts} parts égales`;
+  const debut = `${s.objet(p, virgule(L))} et ${il(p)} ${s.pron} partage ${mots}.`;
+  const forme = choix(etoile === 2 ? ["pas", "pas", "traits"] : etoile === 3 ? ["pas", "distance", "traits", "total"] : ["distance", "traits", "total", "nbParts"]);
+
+  if (forme === "pas") {
+    return {
+      text: `${debut} ${choix(["Combien mesure une part ?", `Tous les combien place-t-${il(p)} une graduation ?`, "Quelle est la longueur d'une part ?"])}`,
+      format: "short",
+      expected: [`${virgule(pas)} ${s.u}`, virgule(pas)],
+      comparator: "number_equal",
+      explanation: explDroite(`Partager en ${parts} parts égales, c'est diviser la longueur par ${parts} : ${virgule(L)} ÷ ${parts} = ${virgule(pas)} ${s.u}. Vérification : ${parts} × ${virgule(pas)} = ${virgule(L)}.`),
+    };
+  }
+  if (forme === "distance") {
+    const k = 1 + Math.floor(Math.random() * (parts - 1));
+    return {
+      text: `${debut} ${choix([`À quelle distance du début se trouve la ${k === 1 ? "1re" : `${k}e`} graduation ?`, `Où place-t-${il(p)} la graduation ${k}/${parts} ? Donne sa distance au début.`])}`,
+      format: "short",
+      expected: [`${virgule(rond(k * pas))} ${s.u}`, virgule(rond(k * pas))],
+      comparator: "number_equal",
+      explanation: explDroite(`Une part vaut ${virgule(L)} ÷ ${parts} = ${virgule(pas)} ${s.u}. La graduation n° ${k} est à ${k} parts du début : ${k} × ${virgule(pas)} = ${virgule(rond(k * pas))} ${s.u}.`),
+    };
+  }
+  if (forme === "traits") {
+    return {
+      text: `${debut} ${choix([`Combien de traits doit-${il(p)} tracer à l'intérieur, sans compter les deux bouts ?`, "Combien de marques faut-il à l'intérieur, sans compter les extrémités ?"])}`,
+      format: "short",
+      expected: [String(parts - 1)],
+      comparator: "number_equal",
+      explanation: explDroite(`Pour ${parts} parts, il faut ${parts - 1} séparations : les deux bouts existent déjà. C'est comme les poteaux d'une clôture : un de moins que de parts à l'intérieur.`),
+    };
+  }
+  if (forme === "total") {
+    return {
+      text: `${debut} ${choix([`Combien de graduations y a-t-il en tout, en comptant les deux bouts ?`, "Combien de marques en tout, extrémités comprises ?"])}`,
+      format: "short",
+      expected: [String(parts + 1)],
+      comparator: "number_equal",
+      explanation: explDroite(`${parts - 1} traits à l'intérieur, plus les 2 extrémités : ${parts - 1} + 2 = ${parts + 1} graduations. Il y a toujours une graduation de plus que de parts.`),
+    };
+  }
+  // nbParts : on connaît le pas, on cherche le nombre de parts.
+  return {
+    text: `${s.objet(p, virgule(L))}. ${choix([`${p.nom} veut une graduation tous les ${virgule(pas)} ${s.u}. En combien de parts égales partage-t-${il(p)} la longueur ?`, `Les graduations sont espacées de ${virgule(pas)} ${s.u}. Combien de parts égales y a-t-il ?`])}`,
+    format: "short",
+    expected: [String(parts)],
+    comparator: "number_equal",
+    explanation: explDroite(`On cherche combien de fois ${virgule(pas)} ${s.u} tient dans ${virgule(L)} ${s.u} : ${virgule(L)} ÷ ${virgule(pas)} = ${parts} parts.`),
   };
 }
 
@@ -175,27 +552,22 @@ export const demiDroiteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Cherche les deux graduations qui encadrent le point, puis leur milieu.",
     tags: ["demi_droite_graduee", "lire", "template"],
-    generate: () => {
-      const debut = entierAleatoire(0, 6);
-      // Le point tombe entre deux graduations, jamais dessus : sinon il n'y a
-      // rien à lire, la valeur est déjà écrite sous le trait.
-      const rang = entierAleatoire(0, 4);
-      const abscisse = Number((debut + rang * 0.2 + 0.1).toFixed(1));
-      const bas = Number((debut + rang * 0.2).toFixed(1));
-      const haut = Number((bas + 0.2).toFixed(1));
-      const nom = ["A", "B", "C", "D", "E"][entierAleatoire(0, 4)];
-
-      return {
-        text: `Quelle est l'abscisse du point ${nom} ?`,
-        format: "short",
-        expected: [virgule(abscisse), String(abscisse)],
-        comparator: "number_equal",
-        explanation: explDroite(
-          `Les graduations vont de 0,2 en 0,2. ${nom} se trouve entre ${virgule(bas)} et ${virgule(haut)}, à égale distance des deux : son abscisse est ${virgule(abscisse)}. On écrit ${nom}(${virgule(abscisse)}).`
-        ),
-        canvas: droite(debut, debut + 1, 0.2, [{ value: abscisse, label: nom }]),
-      };
-    },
+    // Le point tombe entre deux graduations, jamais dessus : sinon il n'y a
+    // rien à lire, la valeur est déjà écrite sous le trait.
+    generate: () => genLire(3),
+  },
+  {
+    kind: "template",
+    id: "abscisse_lire_tpl_et2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "demi_droite_graduee",
+    microId: "abscisse_lire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Lis la valeur de deux graduations voisines : le point est juste au milieu.",
+    tags: ["demi_droite_graduee", "lire", "canvas", "template"],
+    generate: () => genLire(2),
   },
   {
     kind: "template",
@@ -206,35 +578,11 @@ export const demiDroiteBank: TutorBankItemV4[] = [
     microId: "abscisse_lire",
     difficulty: 4,
     theme: "neutral",
-    hint: "Parle de ce que vaut UN intervalle avant de parler du point.",
-    tags: ["demi_droite_graduee", "lire", "template", "ouverte"],
-    generate: () => {
-      const cas = [
-        {
-          q: "Explique la méthode pour lire l'abscisse d'un point qui ne tombe pas sur une graduation.",
-          mots: ["intervalle", "vaut", "encadrent", "milieu", "partage", "graduations"],
-          r: "On regarde d'abord ce que vaut UN intervalle : on prend deux graduations écrites et on fait la différence — de 0,4 à 0,6 il y a 0,2. On repère ensuite les deux graduations qui encadrent le point. S'il est au milieu, son abscisse est le milieu des deux nombres ; sinon on partage l'intervalle en parts égales et on compte. Lire une abscisse commence toujours par lire l'échelle.",
-        },
-        {
-          q: "Un élève dit que l'abscisse d'un point est 3 parce que c'est la troisième graduation après l'origine. Explique son erreur.",
-          mots: ["rang", "valeur", "compte", "échelle", "echelle", "0,2", "graduation"],
-          r: "Il confond le RANG de la graduation et sa VALEUR. La troisième graduation n'a pas pour abscisse 3 : tout dépend de ce que vaut un intervalle. Si les graduations vont de 0,2 en 0,2, la troisième est à 0,6. Compter les traits ne suffit jamais — il faut d'abord lire ce qu'un trait vaut.",
-        },
-        {
-          q: "Pourquoi dit-on que chaque point d'une demi-droite graduée a UNE SEULE abscisse ?",
-          mots: ["une place", "unique", "seul", "distance", "origine"],
-          r: "Parce que l'abscisse mesure la distance du point à l'origine, avec l'unité choisie sur la droite. Un point est à une distance et une seule de l'origine : il ne peut donc porter qu'un nombre. Et inversement, chaque nombre a une place et une seule. C'est ce qui fait de la demi-droite graduée une image fidèle des nombres.",
-        },
-      ];
-      const c = cas[entierAleatoire(0, cas.length - 1)];
-      return {
-        text: c.q,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
-        explanation: explDroite(c.r),
-      };
-    },
+    hint: "Ce que vaut UN intervalle d'abord ; compter les traits donne un rang, pas une abscisse.",
+    tags: ["demi_droite_graduee", "lire", "canvas", "template", "piege"],
+    // 06/10/2026 : l'ancienne question ouverte (3 phrases fixes) revenait à
+    // l'identique ; son piège (rang ou valeur ?) devient un QCM sur figure.
+    generate: () => genLire(4),
   },
 
   // =========================
@@ -325,45 +673,21 @@ export const demiDroiteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Situe le nombre entre deux graduations avant de regarder les points.",
     tags: ["demi_droite_graduee", "placer", "template"],
-    generate: () => {
-      const debut = entierAleatoire(0, 5);
-      // Trois positions distinctes parmi cinq creux possibles, pour que les
-      // étiquettes ne se chevauchent jamais.
-      const creux = [0, 1, 2, 3, 4];
-      const choisis: number[] = [];
-      while (choisis.length < 3) {
-        const c = creux[entierAleatoire(0, creux.length - 1)];
-        if (!choisis.includes(c)) choisis.push(c);
-      }
-      choisis.sort((a, b) => a - b);
-
-      const valeurs = choisis.map((c) => Number((debut + c * 0.2 + 0.1).toFixed(1)));
-      const noms = ["A", "B", "C"];
-      const cible = entierAleatoire(0, 2);
-      const abscisse = valeurs[cible];
-      const bas = Number((abscisse - 0.1).toFixed(1));
-      const haut = Number((abscisse + 0.1).toFixed(1));
-
-      return {
-        text: `Quel point a pour abscisse ${virgule(abscisse)} ?`,
-        format: "qcm",
-        choices: ["A", "B", "C", "aucun des trois"],
-        expected: [noms[cible]],
-        comparator: "mcq_exact",
-        explanation: explDroite(
-          `${virgule(abscisse)} se place entre les graduations ${virgule(bas)} et ${virgule(haut)}, à égale distance des deux : c'est ${noms[cible]}. Les deux autres points ont pour abscisses ${valeurs
-            .filter((_, i) => i !== cible)
-            .map((v) => virgule(v))
-            .join(" et ")}.`
-        ),
-        canvas: droite(
-          debut,
-          debut + 1,
-          0.2,
-          valeurs.map((v, i) => ({ value: v, label: noms[i] }))
-        ),
-      };
-    },
+    // Trois positions distinctes parmi les creux, pour que les étiquettes ne se chevauchent jamais.
+    generate: () => genPlacer(3),
+  },
+  {
+    kind: "template",
+    id: "abscisse_placer_tpl_et2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "demi_droite_graduee",
+    microId: "abscisse_placer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Cherche entre quelles graduations se trouve le nombre, puis regarde le point du milieu.",
+    tags: ["demi_droite_graduee", "placer", "canvas", "template"],
+    generate: () => genPlacer(2),
   },
   {
     kind: "template",
@@ -374,35 +698,11 @@ export const demiDroiteBank: TutorBankItemV4[] = [
     microId: "abscisse_placer",
     difficulty: 4,
     theme: "neutral",
-    hint: "Dis d'abord entre quels nombres tu cherches, ensuite où exactement.",
-    tags: ["demi_droite_graduee", "placer", "template", "ouverte"],
-    generate: () => {
-      const cas = [
-        {
-          q: "Explique comment tu t'y prends pour placer 2,7 sur une demi-droite graduée de 0 à 5, graduée d'unité en unité.",
-          mots: ["entre 2 et 3", "sept", "dixièmes", "dixiemes", "partage", "10"],
-          r: "Je repère d'abord entre quels entiers il tombe : 2,7 est entre 2 et 3, puisque sa partie entière est 2. Je partage ensuite l'intervalle de 2 à 3 en dix parts égales, car il s'agit de dixièmes, et je compte sept de ces parts à partir de 2. Le point est donc nettement plus près de 3 que de 2.",
-        },
-        {
-          q: "Deux élèves placent 0,4 et 0,04 sur la même demi-droite graduée de 0 à 1. Explique lequel est le plus proche de l'origine, et pourquoi.",
-          mots: ["0,04", "centième", "centieme", "plus petit", "dix fois", "proche"],
-          r: "0,04 est bien plus proche de l'origine. 0,4 vaut 4 dixièmes, presque la moitié de l'unité ; 0,04 ne vaut que 4 centièmes, soit dix fois moins. Sur une droite graduée de 0 à 1, 0,4 se voit très bien, alors que 0,04 est collé à l'origine — c'est un des intérêts de la droite : elle rend l'écart visible.",
-        },
-        {
-          q: "Pourquoi une demi-droite graduée aide-t-elle à comprendre qu'entre 1,2 et 1,3 il y a d'autres nombres ?",
-          mots: ["intervalle", "partager", "encore", "centième", "centieme", "infinité", "infinite"],
-          r: "Parce qu'entre les deux graduations il reste un intervalle, et qu'un intervalle peut toujours se partager. En le coupant en dix, on fait apparaître 1,21 ; 1,22 ; … ; 1,29. En recoupant l'un d'eux, on en fait apparaître dix autres. La droite montre qu'il reste toujours de la place, alors que la seule écriture à virgule ne le dit pas.",
-        },
-      ];
-      const c = cas[entierAleatoire(0, cas.length - 1)];
-      return {
-        text: c.q,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
-        explanation: explDroite(c.r),
-      };
-    },
+    hint: "Dis d'abord entre quelles graduations tu cherches. Attention : 2,03 n'est pas 2,3.",
+    tags: ["demi_droite_graduee", "placer", "canvas", "template", "piege"],
+    // 06/10/2026 : l'ancienne question ouverte (3 phrases fixes) revenait à
+    // l'identique ; son piège (0,4 ou 0,04 ?) devient un QCM sur figure.
+    generate: () => genPlacer(4),
   },
 
   // =========================
@@ -508,30 +808,35 @@ export const demiDroiteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Compte les parts depuis l'origine : c'est le numérateur.",
     tags: ["demi_droite_graduee", "fraction", "template"],
-    generate: () => {
-      const denominateur = [2, 4, 5][entierAleatoire(0, 2)];
-      const pas = 1 / denominateur;
-      // Le numérateur dépasse parfois le dénominateur : le BO demande
-      // explicitement les fractions supérieures à 1.
-      const numerateur = entierAleatoire(1, 2 * denominateur - 1);
-      const abscisse = Number((numerateur * pas).toFixed(4));
-      const max = numerateur > denominateur ? 2 : 1;
-
-      return {
-        text: `L'unité est partagée en ${denominateur} parts égales. Quelle fraction a pour abscisse le point A ?`,
-        format: "short",
-        expected: [`${numerateur}/${denominateur}`, virgule(abscisse), String(abscisse)],
-        comparator: "fraction_decimal_equivalent",
-        explanation: explDroite(
-          `Chaque graduation vaut 1/${denominateur}. De l'origine jusqu'à A, on en compte ${numerateur} : l'abscisse de A est ${numerateur}/${denominateur}${
-            numerateur > denominateur
-              ? `, une fraction plus grande que 1 puisque ${denominateur}/${denominateur} vaut déjà 1`
-              : ""
-          }. En écriture décimale, cela fait ${virgule(abscisse)}.`
-        ),
-        canvas: droite(0, max, pas, [{ value: abscisse, label: "A" }]),
-      };
-    },
+    // Le numérateur dépasse parfois le dénominateur : le BO demande
+    // explicitement les fractions supérieures à 1.
+    generate: () => genFraction(3),
+  },
+  {
+    kind: "template",
+    id: "abscisse_fraction_tpl_et2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "demi_droite_graduee",
+    microId: "abscisse_fraction",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Le dénominateur dit en combien de parts l'unité est coupée ; le numérateur compte les parts.",
+    tags: ["demi_droite_graduee", "fraction", "canvas", "template"],
+    generate: () => genFraction(2),
+  },
+  {
+    kind: "template",
+    id: "abscisse_fraction_tpl_et4",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "demi_droite_graduee",
+    microId: "abscisse_fraction",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Combien de parts font une unité entière ? Compte les parts depuis l'origine.",
+    tags: ["demi_droite_graduee", "fraction", "template"],
+    generate: () => genFraction(4),
   },
   {
     kind: "template",
@@ -542,35 +847,11 @@ export const demiDroiteBank: TutorBankItemV4[] = [
     microId: "abscisse_fraction",
     difficulty: 5,
     theme: "neutral",
-    hint: "Une fraction n'est pas seulement une part de gâteau : c'est un nombre qui a une place.",
-    tags: ["demi_droite_graduee", "fraction", "template", "ouverte"],
-    generate: () => {
-      const cas = [
-        {
-          q: "Explique comment placer 5/4 sur une demi-droite graduée, et pourquoi c'est possible même si 5 est plus grand que 4.",
-          mots: ["quarts", "quatre", "1", "au-delà", "au dela", "cinq", "dépasse", "depasse"],
-          r: "Je partage chaque unité en quatre parts égales, puis je compte cinq de ces quarts depuis l'origine. Les quatre premiers m'amènent exactement sur 1 ; le cinquième me fait dépasser l'unité. 5/4 se place donc un quart après 1. Rien n'oblige une fraction à rester en dessous de 1 : la droite continue, et les quarts aussi.",
-        },
-        {
-          q: "En quoi placer des fractions sur une demi-droite graduée montre-t-il qu'une fraction est un NOMBRE, et pas seulement un morceau ?",
-          mots: ["place", "nombre", "entre", "entiers", "intercale", "comparer"],
-          r: "Un morceau de gâteau n'a pas de place sur une droite : il n'est ni avant ni après un autre. Une fraction, si — elle occupe un point précis, entre deux entiers, et on peut dire laquelle est la plus grande en regardant qui est le plus à droite. C'est ce qui la fait entrer dans la famille des nombres : elle s'intercale entre les entiers qu'on connaissait déjà.",
-        },
-        {
-          q: "Explique pourquoi 2/4 et 1/2 sont au même endroit sur une demi-droite graduée.",
-          mots: ["même point", "meme point", "égales", "egales", "moitié", "moitie", "partage"],
-          r: "Prendre deux parts sur quatre ou une part sur deux revient à couvrir exactement la même longueur depuis l'origine : dans les deux cas on est à la moitié de l'unité. Les deux écritures désignent donc le MÊME point, donc le même nombre. La droite le rend évident, alors que les deux écritures n'ont aucun chiffre en commun.",
-        },
-      ];
-      const c = cas[entierAleatoire(0, cas.length - 1)];
-      return {
-        text: c.q,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
-        explanation: explDroite(c.r),
-      };
-    },
+    hint: "Une fraction est un nombre qui a une place : 2/4 et 1/2 sont au même point.",
+    tags: ["demi_droite_graduee", "fraction", "template"],
+    // 06/10/2026 : l'ancienne question ouverte (3 phrases fixes) revenait à
+    // l'identique ; son troisième cas (même point, autre écriture) devient un QCM tiré.
+    generate: () => genFraction(5),
   },
 
   // =========================
@@ -649,22 +930,20 @@ export const demiDroiteBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Un pas = la longueur totale divisée par le nombre de parts.",
     tags: ["demi_droite_graduee", "graduer", "template"],
-    generate: () => {
-      const parts = [2, 3, 4, 5, 6][entierAleatoire(0, 4)];
-      const pas = entierAleatoire(2, 6);
-      const longueur = parts * pas;
-      const rang = entierAleatoire(1, parts - 1);
-
-      return {
-        text: `Un segment de ${longueur} cm est gradué en ${parts} parts égales. À quelle distance de l'origine se trouve la graduation ${rang}/${parts} ? (Réponds en cm.)`,
-        format: "short",
-        expected: [String(rang * pas)],
-        comparator: "number_equal",
-        explanation: explDroite(
-          `Une part vaut ${longueur} ÷ ${parts} = ${pas} cm. La graduation ${rang}/${parts} est la ${rang}e : elle se trouve à ${rang} × ${pas} = ${rang * pas} cm de l'origine. Vérification : ${parts} × ${pas} = ${longueur} cm, le segment entier.`
-        ),
-      };
-    },
+    generate: () => genGraduer(3),
+  },
+  {
+    kind: "template",
+    id: "abscisse_graduer_tpl_et2",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "demi_droite_graduee",
+    microId: "abscisse_graduer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Une part = la longueur totale divisée par le nombre de parts.",
+    tags: ["demi_droite_graduee", "graduer", "template"],
+    generate: () => genGraduer(2),
   },
   {
     kind: "template",
@@ -675,34 +954,10 @@ export const demiDroiteBank: TutorBankItemV4[] = [
     microId: "abscisse_graduer",
     difficulty: 4,
     theme: "neutral",
-    hint: "Explique le calcul du pas, puis le comptage des traits.",
-    tags: ["demi_droite_graduee", "graduer", "template", "ouverte"],
-    generate: () => {
-      const cas = [
-        {
-          q: "Explique comment graduer en tiers un segment de 15 cm, sans essayer au hasard.",
-          mots: ["divise", "3", "5", "égales", "egales", "deux traits", "part"],
-          r: "Je cherche d'abord ce que vaut UNE part : le segment fait 15 cm et je veux 3 parts égales, donc chaque part mesure 15 ÷ 3 = 5 cm. Je place ensuite une graduation à 5 cm et une autre à 10 cm — deux traits seulement, car les deux extrémités sont déjà là. Je vérifie que la dernière part va bien de 10 à 15 cm.",
-        },
-        {
-          q: "Pourquoi faut-il UN trait de moins que le nombre de parts quand on gradue un segment ?",
-          mots: ["extrémités", "extremites", "déjà", "deja", "séparation", "separation", "un de moins"],
-          r: "Parce que les traits sont des séparations entre les parts, et non les parts elles-mêmes. Les deux bouts du segment existent déjà : ils ne sont pas à tracer. Pour 4 parts il n'y a que 3 endroits où couper, comme il y a un intervalle de moins que de poteaux dans une clôture. Compter les traits comme s'ils étaient les parts donne toujours un de trop.",
-        },
-        {
-          q: "Un segment doit être gradué en quarts, mais sa longueur ne se divise pas en un nombre entier de centimètres. Explique ce qu'on fait.",
-          mots: ["décimal", "decimal", "millimètre", "millimetre", "divise", "quand même", "quand meme"],
-          r: "On divise quand même : le pas n'a aucune obligation d'être un nombre entier de centimètres. Un segment de 10 cm gradué en quarts donne des parts de 10 ÷ 4 = 2,5 cm, que la règle sait mesurer puisqu'elle porte les millimètres. C'est justement à ça que servent les nombres décimaux — mesurer quand les entiers ne suffisent plus.",
-        },
-      ];
-      const c = cas[entierAleatoire(0, cas.length - 1)];
-      return {
-        text: c.q,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
-        explanation: explDroite(c.r),
-      };
-    },
+    hint: "Le pas d'abord (longueur ÷ nombre de parts), puis le comptage : un trait de moins que de parts à l'intérieur.",
+    tags: ["demi_droite_graduee", "graduer", "template", "piege"],
+    // 06/10/2026 : l'ancienne question ouverte (3 phrases fixes) revenait à
+    // l'identique ; ses trois cas (pas, traits, pas décimal) sont devenus tirés.
+    generate: () => genGraduer(4),
   },
 ];
