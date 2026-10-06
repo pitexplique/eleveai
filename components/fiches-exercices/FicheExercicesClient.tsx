@@ -94,7 +94,11 @@ export default function FicheExercicesClient({ fiche }: { fiche: FicheExercicesD
     <main className="min-h-screen bg-[#f5f8ff] text-slate-800 print:bg-white">
       <article className="mx-auto max-w-5xl px-5 py-8 sm:px-8 print:max-w-none print:px-0 print:py-0">
         <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-300/40 sm:p-8 print:rounded-none print:border-0 print:p-0 print:shadow-none">
-          <header className="border-b border-slate-200 pb-6">
+          <header className="relative border-b border-slate-200 pb-6">
+            {/* La mascotte, en haut à droite (Frédéric, 06/10/2026 : « mets-le
+                en haut à droite »). Posée dans le coin, à hauteur du bouton de
+                retour : elle ne pousse rien vers le bas. */}
+            {fiche.mascotte ? <div className="absolute -top-2 right-0 z-10">{fiche.mascotte}</div> : null}
             {/* La remontée vers le hub — un élève qui a fini cette feuille doit
                 trouver la suivante sans repasser par l'accueil. Écran seulement. */}
             <nav className="screen-only mb-4">
@@ -138,9 +142,11 @@ export default function FicheExercicesClient({ fiche }: { fiche: FicheExercicesD
                 contrôle
               </span>
             </h1>
-            <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600 print:text-sm">
+            <p className="mt-4 max-w-3xl whitespace-pre-line text-base leading-7 text-slate-600 print:text-sm">
               <TexteMath>{fiche.accroche}</TexteMath>
             </p>
+
+            {fiche.ouverture ? <div className="mt-5 print:mt-3">{fiche.ouverture}</div> : null}
 
             {/* Les portes voisines : le cours à relire, le coach pour en refaire,
                 le PDF pour imprimer. Un papier ne renvoie nulle part : screen-only. */}

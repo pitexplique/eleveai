@@ -77,6 +77,15 @@ export type FicheExercicesData = {
   /** Le titre NU, « L'exponentielle » : le h1 et le nom du PDF se construisent dessus. */
   titre: string;
   accroche: string;
+  /**
+   * ⭐ L'OUVERTURE (06/10/2026, première feuille de français) : un dessin sous
+   * l'accroche, avant le premier niveau. Frédéric : « au début on pourrait
+   * mettre un SVG avec des mots et des auteurs », « et Ti Margo ». Facultative :
+   * les feuilles de maths n'en ont pas.
+   */
+  ouverture?: ReactNode;
+  /** La mascotte (Ti Margo), flottante en haut à droite de l'en-tête. */
+  mascotte?: ReactNode;
   series: SerieExercices[];
   /** Les fiches de cours à relire, dans l'ordre. */
   fichesCours: { href: string; titre: string }[];

@@ -20,6 +20,14 @@ type FicheExercicesEntry = {
 };
 
 export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
+  // ⭐ LE FRANÇAIS DE 6e (06/10/2026) — Frédéric : « pour coach français il
+  // faut générer les fiches exercices », « faire rêver, apprendre », QCM,
+  // dictées, mots à entourer, défis. La clé = la notion du coach en tirets.
+  "francais/6e/grammaire-accords": {
+    titre: "Les accords et les homophones : 20 exercices corrigés",
+    resume:
+      "Accorder dans le groupe nominal, accorder le verbe avec son sujet, le participe passé avec être et avec avoir, choisir entre a et à, et et est, son et sont, on et ont. À bord du Nautilus, autour du monde avec Phileas Fogg, puis quatre défis : le centre de la Terre, la Lune, la bouteille à la mer, le ballon. QCM, mots à entourer, lettres à corriger et trois dictées.",
+  },
   // ⭐ LA 6e (30/09/2026) — Frédéric : « toutes les fiches d'exercices faites
   // pour eux ». Dans l'ordre du coach ; phrases courtes, ils lisent parfois mal.
   "maths/6e/entier-nombre": {

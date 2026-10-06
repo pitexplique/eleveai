@@ -4,6 +4,7 @@
 import type { FicheExercicesData } from "@/lib/fiches-exercices/types";
 
 export const CHARGEURS_FICHES_EXERCICES: Record<string, () => Promise<FicheExercicesData>> = {
+  "francais/6e/grammaire-accords": () => import("@/lib/fiches-exercices/francais-6e-grammaire-accords").then((m) => m.exercicesAccords6e),
   "maths/6e/entier-nombre": () => import("@/lib/fiches-exercices/maths-6e-entier-nombre").then((m) => m.exercicesEntierNombre6e),
   "maths/6e/decimal-nombre": () => import("@/lib/fiches-exercices/maths-6e-decimal-nombre").then((m) => m.exercicesDecimalNombre6e),
   "maths/6e/decimal-calcul": () => import("@/lib/fiches-exercices/maths-6e-decimal-calcul").then((m) => m.exercicesDecimalCalcul6e),
