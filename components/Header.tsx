@@ -694,6 +694,29 @@ export default function Header() {
                   seraient retrouvés sur le même écran en fin de page. */}
           </Link>
 
+          {/* ── LA PORTE DE RETOUR ────────────────────────────────────────
+              L'onglet « 🏠 Accueil » est parti le 06/08 avec le journal, puis
+              revenu le soir même : Frédéric lui-même ne l'a pas trouvé en
+              revenant de /espace-eleves. Si l'auteur du site cherche la sortie,
+              un élève de 6ᵉ ne la cherche pas — il part.
+              ⛔ MAIS PAS SUR L'ACCUEIL ELLE-MÊME (`!paper`) : là, le lien
+              répéterait la destination du logo à deux centimètres.
+              Hors du bloc d'audience : c'est une porte de RETOUR, pas une porte
+              d'audience — elle vaut pour tout le monde, connecté ou non.
+              ⛔ LE MOT, PLUS L'ICÔNE (Frédéric, 07/10/2026 : « les élèves ne
+              voient pas l'icône maison »), et COLLÉ À « EleveAI » (même jour :
+              « mets Accueil à côté de EleveAI ») : le nom du site et le retour
+              se lisent d'un même regard, avant la paire photo + Ti Margo. */}
+          {!paper && (
+            <Link
+              prefetch={false}
+              href="/accueil"
+              className="hidden shrink-0 rounded-full px-2.5 py-2 text-sm font-black text-white/85 transition hover:bg-white/15 hover:text-white lg:inline-flex"
+            >
+              Accueil
+            </Link>
+          )}
+
           {/* ⭐ « METS UN PLUS ENTRE LES DEUX — C'EST UNE COLLABORATION » (Frédéric,
               20/09/2026, en voyant la première version en ligne). Ti Margo
               chevauchait la photo, comme un ornement posé sur elle ; le « + » en
@@ -765,32 +788,6 @@ export default function Header() {
               <path d="M9.6 4.6v7.8l6.9-3.9z" fill="#fff" />
             </svg>
           </a>
-
-          {/* ── LA PORTE DE RETOUR ────────────────────────────────────────
-              L'onglet « 🏠 Accueil » est parti le 06/08 avec le journal, puis
-              revenu le soir même : Frédéric lui-même ne l'a pas trouvé en
-              revenant de /espace-eleves. Si l'auteur du site cherche la sortie,
-              un élève de 6ᵉ ne la cherche pas — il part.
-              ⛔ MAIS PAS SUR L'ACCUEIL ELLE-MÊME (`!paper`) : là, le lien
-              répéterait la destination du logo à deux centimètres.
-              Hors du bloc d'audience : c'est une porte de RETOUR, pas une porte
-              d'audience — elle vaut pour tout le monde, connecté ou non. */}
-          {!paper && (
-            <Link
-              prefetch={false}
-              href="/accueil"
-              className={`hidden shrink-0 rounded-full px-2.5 py-2 text-sm font-black transition lg:inline-flex ${
-                paper
-                  ? "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10"
-                  : "text-white/85 hover:bg-white/15 hover:text-white"
-              }`}
-            >
-              {/* ⛔ LE MOT, PLUS L'ICÔNE (Frédéric, 07/10/2026 : « les élèves ne
-                  voient pas l'icône maison »). Un 🏠 seul ne se lit pas comme un
-                  lien ; « Accueil » écrit, si. */}
-              Accueil
-            </Link>
-          )}
         </div>
 
         {/* ── ZONE 2 : LA NAVIGATION, au centre de la page ──────────────── */}
