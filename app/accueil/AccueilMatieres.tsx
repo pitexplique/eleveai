@@ -460,15 +460,21 @@ function CarteNiveau({
    *  celui qu'on mesure. */
   pister?: () => void;
 }) {
-  /* ⭐ TOUTE LA LIGNE EST CLIQUABLE (07/10/2026). Frédéric : « on a envie de
+  /* ⭐ TOUTE LA CARTE EST UN LIEN (07/10/2026). Frédéric : « on a envie de
      cliquer sur toute la ligne, or le clic ne fonctionne que sur Voir les
-     notions ». Le lien reste le bouton (un seul lien, lu une fois par les
-     lecteurs d'écran), mais son `::after` s'étire sur toute la carte. */
+     notions », puis « il faut que toute la ligne soit cliquable, même
+     l'intérieur ».
+     ⛔ PAS DE `::after` ÉTIRÉ SUR LE BOUTON — essayé le même jour, il ratait un
+     clic sur deux : le `hover:brightness-110` du bouton est un `filter`, et un
+     filtre fait du bouton le bloc conteneur de son `::after`. Au survol, la
+     zone de clic se rétractait à la taille du bouton, la souris n'était plus
+     dessus, et le clic tombait sur la carte. Un seul `<Link>` qui EST la
+     carte n'a pas ce piège. */
   const cliquable = notions.length > 0;
-  return (
-    <article
-      className={`relative flex overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:border-slate-300 hover:shadow-md ${cliquable ? "cursor-pointer hover:bg-slate-50" : ""}`}
-    >
+  const classes =
+    "group flex overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:border-slate-300 hover:shadow-md";
+  const corps = (
+    <>
       <div
         className={`flex w-16 shrink-0 items-center justify-center px-1 text-center text-sm font-black leading-tight text-white sm:w-20 ${teinte.chip}`}
       >
@@ -483,7 +489,7 @@ function CarteNiveau({
               <span className="ml-2 text-xs font-medium text-slate-500">{niveau.sous}</span>
             )}
           </h3>
-          {notions.length > 0 ? (
+          {cliquable ? (
             <p className="mt-0.5 text-sm leading-snug text-slate-600">
               <span className="font-semibold text-slate-500">Comprend : </span>
               {notions.map((n, i) => (
@@ -501,19 +507,31 @@ function CarteNiveau({
           )}
         </div>
 
-        {notions.length > 0 && (
-          <Link
-            prefetch={false}
-            href={href}
-            onClick={pister}
-            className={`inline-flex shrink-0 items-center gap-1 self-start rounded-lg px-3 py-2 text-sm font-bold text-white shadow-sm transition hover:brightness-110 after:absolute after:inset-0 after:content-[''] sm:self-center ${teinte.chip}`}
+        {/* Le « bouton » n'est plus qu'une étiquette : c'est la carte entière
+            qui navigue. Il s'éclaircit quand on survole N'IMPORTE OÙ sur elle. */}
+        {cliquable && (
+          <span
+            className={`inline-flex shrink-0 items-center gap-1 self-start rounded-lg px-3 py-2 text-sm font-bold text-white shadow-sm transition group-hover:brightness-110 sm:self-center ${teinte.chip}`}
           >
             {verbe}
             <ChevronRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
+          </span>
         )}
       </div>
-    </article>
+    </>
+  );
+
+  if (!cliquable) return <article className={classes}>{corps}</article>;
+  return (
+    <Link
+      prefetch={false}
+      href={href}
+      onClick={pister}
+      aria-label={`${niveau.nom} : ${verbe}`}
+      className={`${classes} hover:bg-slate-50`}
+    >
+      {corps}
+    </Link>
   );
 }
 
