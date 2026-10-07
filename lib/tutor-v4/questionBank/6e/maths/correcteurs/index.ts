@@ -20,7 +20,10 @@ import { CORRECTEURS as mediatrice } from "./mediatrice";
 import { CORRECTEURS as perimetres } from "./perimetres";
 import { CORRECTEURS as pourcentages } from "./pourcentages";
 import { CORRECTEURS as proportionnalite } from "./proportionnalite";
+import { CORRECTEURS as quadrilateres } from "./quadrilateres";
+import { CORRECTEURS as symetrie } from "./symetrie";
 import { CORRECTEURS as triangles } from "./triangles";
+import { CORRECTEURS as visionEspace } from "./vision-espace";
 import { CORRECTEURS as volumes } from "./volumes";
 
 // Un fichier par banque : ils sont écrits en parallèle (06/10/2026).
@@ -46,6 +49,9 @@ export const CORRECTEURS_6E: CorrecteursMaths = {
   ...perimetres,
   ...pourcentages,
   ...proportionnalite,
+  ...quadrilateres,
+  ...symetrie,
   ...triangles,
+  ...visionEspace,
   ...volumes,
 };

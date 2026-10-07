@@ -32,7 +32,8 @@
 // où est la face. Chaque énoncé précise donc ce qu'on regarde — « la longueur
 // et la hauteur » — au lieu de compter sur une orientation implicite.
 
-import type { TutorBankItemV4, Solide3DCanvasData, FigureLibreCanvasData } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4, Solide3DCanvasData, FigureLibreCanvasData, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import { PRENOMS, type Prenom } from "./entiers.bank";
 
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
@@ -107,6 +108,283 @@ const enL: Cube[] = [
   { x: 0, y: 0, z: 2 },
 ];
 
+// ═══════════════════════════════════════════════════════════════════════════
+// ⭐ 06/10/2026 — DES SITUATIONS, PAS UNE PHRASE. Mesuré le 05/10 : 6 à 11
+// squelettes par micro, 12 à 18 répétitions sur 20. Chaque gabarit compose
+// maintenant une situation (caisses au marché, briques de jeu, morceaux de
+// sucre, dés…) × une tournure × des prénoms, et TIRE l'assemblage (pavé,
+// colonnes de hauteurs variées décrites rangée par rangée) : le canvas dessine
+// exactement les cubes décrits. Plus aucune question ouverte à mot-clé.
+// Les correcteurs : correcteurs/vision-espace.ts (ils recomptent les cubes du
+// canvas et refont les vues).
+// ═══════════════════════════════════════════════════════════════════════════
+
+type QV = TutorGeneratedQuestionV4;
+const pickV = <T,>(a: readonly T[]): T => a[Math.floor(Math.random() * a.length)];
+const ilV = (p: Prenom) => (p.f ? "elle" : "il");
+const IlV = (p: Prenom) => (p.f ? "Elle" : "Il");
+/** « 12 carreaux », « 1 carreau », « 8 cubes ». */
+const nb = (k: number, mot: string) => `${k} ${mot}${k > 1 && !mot.endsWith("x") ? (mot === "carreau" ? "x" : "s") : ""}`;
+function courteV(text: string, v: number, mot: string, explication: string, canvas?: Solide3DCanvasData): QV {
+  return { text, format: "short", expected: [nb(v, mot)], comparator: "number_equal", explanation: expl(explication), ...(canvas ? { canvas } : {}) };
+}
+function qcmV(text: string, bonne: string, leurres: string[], explication: string, canvas?: Solide3DCanvasData): QV {
+  return { text, format: "qcm", choices: shuffle([bonne, ...leurres]), expected: [bonne], comparator: "mcq_exact", explanation: expl(explication), ...(canvas ? { canvas } : {}) };
+}
+/** Des cubes de la vie de tous les jours. */
+const CUBES_VIE: { dit: (p: Prenom) => string }[] = [
+  { dit: (p) => `${p.nom} empile des caisses cubiques au marché.` },
+  { dit: (p) => `${p.nom} construit avec des briques cubiques de son jeu.` },
+  { dit: (p) => `${p.nom} range des morceaux de sucre dans une boîte.` },
+  { dit: (p) => `${p.nom} empile des dés identiques sur la table.` },
+  { dit: (p) => `${p.nom} assemble des cubes de bois en classe.` },
+  { dit: (p) => `Dans son jeu vidéo, ${p.nom} pose des blocs cubiques.` },
+  { dit: (p) => `${p.nom} empile des cartons cubiques dans le garage.` },
+  { dit: (p) => `${p.nom} fabrique un mur avec des glaçons cubiques.` },
+  { dit: (p) => `${p.nom} range des boîtes cubiques sur une étagère.` },
+  { dit: (p) => `Au centre de loisirs, ${p.nom} empile des coussins cubiques.` },
+];
+const ctxV = (p: Prenom = pickV(PRENOMS)) => pickV(CUBES_VIE).dit(p);
+const VUES = [
+  { nom: "de dessus", dit: "vue de dessus (on voit la longueur et la largeur)", a: 0, b: 1 },
+  { nom: "de face", dit: "vue de face (on voit la longueur et la hauteur)", a: 0, b: 2 },
+  { nom: "de droite", dit: "vue de droite (on voit la largeur et la hauteur)", a: 1, b: 2 },
+] as const;
+/** Un pavé plein décrit en phrase : « 4 cubes de long, 3 de large et 2 de haut ». */
+const direPave = (L: number, l: number, h: number) => `${L} cubes de long, ${l} de large et ${h} de haut`;
+
+/** Des colonnes de cubes posées sur un quadrillage : deux rangées, devant et derrière. */
+type Hauteurs = { devant: number[]; derriere: number[] };
+function tirerHauteurs(): Hauteurs {
+  for (;;) {
+    const n = randomInt(2, 4);
+    const devant = Array.from({ length: n }, () => randomInt(0, 3));
+    const derriere = Array.from({ length: n }, () => randomInt(0, 3));
+    const total = [...devant, ...derriere].reduce((a, b) => a + b, 0);
+    if (total >= 3 && devant.some((x) => x > 0) && derriere.some((x) => x > 0)) return { devant, derriere };
+  }
+}
+const direRangee = (r: number[]) => `${r.slice(0, -1).join(", ")} et ${r[r.length - 1]}`;
+const direHauteurs = (h: Hauteurs) =>
+  `Il y a deux rangées de ${h.devant.length} colonnes. Rangée de devant, de gauche à droite : ${direRangee(h.devant)} cubes. Rangée de derrière : ${direRangee(h.derriere)} cubes.`;
+function cubesDe(h: Hauteurs): Cube[] {
+  const c: Cube[] = [];
+  [h.devant, h.derriere].forEach((r, y) => r.forEach((k, x) => { for (let z = 0; z < k; z++) c.push({ x, y, z }); }));
+  return c;
+}
+const vuesDe = (h: Hauteurs) => ({
+  dessus: [...h.devant, ...h.derriere].filter((k) => k > 0).length,
+  face: h.devant.reduce((s, k, i) => s + Math.max(k, h.derriere[i]), 0),
+  droite: Math.max(...h.devant) + Math.max(...h.derriere),
+  total: [...h.devant, ...h.derriere].reduce((a, b) => a + b, 0),
+});
+
+// ─── VISION_VUES ────────────────────────────────────────────────────────────
+function genVisionVues(etoile: 2 | 3 | 4): QV {
+  const p = pickV(PRENOMS);
+  if (etoile === 4) {
+    const h = tirerHauteurs();
+    const v = vuesDe(h);
+    const [quoi, n, pq] = pickV([
+      ["vue de dessus", v.dessus, `De dessus, chaque colonne non vide donne UN carreau, quelle que soit sa hauteur : ${v.dessus} colonnes, donc ${v.dessus} carreaux.`],
+      ["vue de face", v.face, `De face, on voit pour chaque position la colonne la plus haute (devant ou derrière) : ${h.devant.map((k, i) => Math.max(k, h.derriere[i])).join(" + ")} = ${v.face} carreaux.`],
+      ["vue de droite", v.droite, `De droite, chaque rangée montre sa colonne la plus haute : ${Math.max(...h.devant)} pour la rangée de devant, ${Math.max(...h.derriere)} pour celle de derrière, soit ${v.droite} carreaux.`],
+    ] as const);
+    return courteV(
+      `${ctxV(p)} ${direHauteurs(h)} ${pickV([`Combien de carreaux contient la ${quoi} ?`, `Dessine la ${quoi} : combien de carreaux colories-tu ?`, `Combien de carreaux compte la ${quoi} de cet assemblage ?`])}`,
+      n, "carreau", pq, assemblage(cubesDe(h)),
+    );
+  }
+  const L = randomInt(2, 6), l = randomInt(2, 5), hh = randomInt(2, 4);
+  const dims = [L, l, hh];
+  const vue = pickV(VUES);
+  const n = dims[vue.a] * dims[vue.b];
+  if (etoile === 3 && pickV([true, false])) {
+    // Quelle vue a ce nombre de carreaux ? (les trois vues doivent être différentes)
+    const ns = VUES.map((w) => dims[w.a] * dims[w.b]);
+    if (new Set(ns).size === 3)
+      return qcmV(
+        `${ctxV(p)} ${IlV(p)} forme un pavé plein de ${direPave(L, l, hh)}. Quelle vue contient ${n} carreaux ?`,
+        `la vue ${vue.nom}`,
+        VUES.filter((w) => w !== vue).map((w) => `la vue ${w.nom}`).concat("aucune des trois"),
+        `Vue de dessus : ${L} × ${l} = ${ns[0]} carreaux. Vue de face : ${L} × ${hh} = ${ns[1]}. Vue de droite : ${l} × ${hh} = ${ns[2]}. C’est la vue ${vue.nom}.`,
+        assemblage(pave(L, l, hh)),
+      );
+  }
+  return courteV(
+    `${ctxV(p)} ${IlV(p)} forme un pavé plein de ${direPave(L, l, hh)}. ${pickV([`Combien de carreaux contient sa ${vue.dit} ?`, `Sur sa ${vue.dit}, combien de carreaux y a-t-il ?`, `${p.nom} dessine la ${vue.dit}. Combien de carreaux ?`])}`,
+    n, "carreau",
+    `Cette vue montre un rectangle de ${dims[vue.a]} sur ${dims[vue.b]} : ${dims[vue.a]} × ${dims[vue.b]} = ${n} carreaux. La troisième dimension part vers l’arrière et ne se voit pas.`,
+    assemblage(pave(L, l, hh)),
+  );
+}
+
+// ─── VISION_DENOMBRER ───────────────────────────────────────────────────────
+function genVisionDenombrer(etoile: 2 | 3 | 4 | 5): QV {
+  const p = pickV(PRENOMS);
+  if (etoile <= 3) {
+    const L = randomInt(2, 5), l = randomInt(2, 4), h = randomInt(2, etoile === 2 ? 3 : 4);
+    const famille = etoile === 2 ? "pave" : pickV(["pave", "etages", "ajouter"] as const);
+    if (famille === "etages") {
+      return courteV(
+        `${ctxV(p)} Chaque étage est un rectangle de ${L} cubes sur ${l}. Il y a ${h} étages identiques. ${pickV(["Combien de cubes en tout ?", "Combien de cubes a-t-" + ilV(p) + " utilisés ?"])}`,
+        L * l * h, "cube",
+        `Un étage contient ${L} × ${l} = ${L * l} cubes. Avec ${h} étages : ${L * l} × ${h} = ${L * l * h} cubes.`,
+        assemblage(pave(L, l, h)),
+      );
+    }
+    if (famille === "ajouter") {
+      return courteV(
+        `${ctxV(p)} ${IlV(p)} a déjà un pavé plein de ${direPave(L, l, h)}. ${IlV(p)} ajoute un étage identique par-dessus. ${pickV(["Combien de cubes faut-il ajouter ?", "Combien de cubes ajoute-t-" + ilV(p) + " ?"])}`,
+        L * l, "cube",
+        `Un étage est un rectangle de ${L} sur ${l} : ${L} × ${l} = ${L * l} cubes à ajouter.`,
+        assemblage(pave(L, l, h)),
+      );
+    }
+    return courteV(
+      `${ctxV(p)} ${IlV(p)} forme un pavé plein de ${direPave(L, l, h)}. ${pickV(["Combien de cubes contient-il ?", "Combien de cubes a-t-" + ilV(p) + " utilisés ?", "Compte les cubes, même ceux qu’on ne voit pas. Combien y en a-t-il ?"])}`,
+      L * l * h, "cube",
+      `Un étage contient ${L} × ${l} = ${L * l} cubes, et il y a ${h} étages : ${L * l} × ${h} = ${L * l * h} cubes. Les cubes cachés comptent aussi.`,
+      assemblage(pave(L, l, h)),
+    );
+  }
+  if (etoile === 4) {
+    const famille = pickV(["pyramide", "colonnes"] as const);
+    if (famille === "pyramide") {
+      const n = randomInt(2, 4);
+      const etages: number[] = [];
+      for (let i = n; i >= 1; i--) etages.push(i * i);
+      const total = etages.reduce((a, b) => a + b, 0);
+      const cubes: Cube[] = [];
+      for (let z = 0; z < n; z++) for (let x = 0; x < n - z; x++) for (let y = 0; y < n - z; y++) cubes.push({ x, y, z });
+      return courteV(
+        `${ctxV(p)} ${IlV(p)} construit une pyramide de ${n} étages : chaque étage est un carré de cubes, de côté ${Array.from({ length: n }, (_, i) => n - i).join(", puis ")} en montant. ${pickV(["Combien de cubes en tout ?", "Combien de cubes faut-il, y compris ceux qu’on ne voit pas ?"])}`,
+        total, "cube",
+        `On compte étage par étage : ${etages.join(" + ")} = ${total} cubes. Les cubes du dessous et du fond sont cachés, mais ils comptent.`,
+        assemblage(cubes),
+      );
+    }
+    const h = tirerHauteurs();
+    const v = vuesDe(h);
+    return courteV(
+      `${ctxV(p)} ${direHauteurs(h)} ${pickV(["Combien de cubes en tout ?", "Combien de cubes a-t-" + ilV(p) + " posés ?"])}`,
+      v.total, "cube",
+      `On additionne les colonnes : ${[...h.devant, ...h.derriere].join(" + ")} = ${v.total} cubes.`,
+      assemblage(cubesDe(h)),
+    );
+  }
+  // ★5 : compléter jusqu'à un pavé plein.
+  const h = tirerHauteurs();
+  const v = vuesDe(h);
+  const H = Math.max(...h.devant, ...h.derriere);
+  const plein = 2 * h.devant.length * H;
+  return courteV(
+    `${ctxV(p)} ${direHauteurs(h)} ${IlV(p)} veut obtenir un pavé plein de ${h.devant.length} cubes de long, 2 de large et ${H} de haut. ${pickV(["Combien de cubes doit-" + ilV(p) + " ajouter ?", "Combien de cubes manque-t-il ?"])}`,
+    plein - v.total, "cube",
+    `Le pavé plein contient ${h.devant.length} × 2 × ${H} = ${plein} cubes. Il y en a déjà ${v.total}. Il manque ${plein} − ${v.total} = ${plein - v.total} cubes.`,
+    assemblage(cubesDe(h)),
+  );
+}
+
+// ─── VISION_REPRESENTATION : solides, patrons, perspective ─────────────────
+const SOLIDES: { nom: string; faces: number; aretes: number; sommets: number; detail: string }[] = [
+  { nom: "un cube", faces: 6, aretes: 12, sommets: 8, detail: "6 faces carrées" },
+  { nom: "un pavé droit", faces: 6, aretes: 12, sommets: 8, detail: "6 faces rectangulaires" },
+  { nom: "une pyramide à base carrée", faces: 5, aretes: 8, sommets: 5, detail: "1 base carrée et 4 faces triangulaires" },
+  { nom: "un prisme droit à base triangulaire", faces: 5, aretes: 9, sommets: 6, detail: "2 bases triangulaires et 3 faces rectangulaires" },
+];
+const OBJETS_SOLIDES: { dit: string; solide: string }[] = [
+  { dit: "un dé à jouer", solide: "un cube" },
+  { dit: "un morceau de sucre", solide: "un cube" },
+  { dit: "une boîte à chaussures", solide: "un pavé droit" },
+  { dit: "une brique de lait", solide: "un pavé droit" },
+  { dit: "une boîte de céréales", solide: "un pavé droit" },
+  { dit: "une tente canadienne", solide: "un prisme droit à base triangulaire" },
+  { dit: "une barre de chocolat triangulaire", solide: "un prisme droit à base triangulaire" },
+  { dit: "le toit d’un clocher", solide: "une pyramide à base carrée" },
+  { dit: "une pyramide d’Égypte", solide: "une pyramide à base carrée" },
+];
+function genVisionRepresentation(etoile: 2 | 3 | 4): QV {
+  const p = pickV(PRENOMS);
+  if (etoile === 2) {
+    const o = pickV(OBJETS_SOLIDES);
+    const s = SOLIDES.find((x) => x.nom === o.solide)!;
+    const [quoi, n] = pickV([["faces", s.faces], ["arêtes", s.aretes], ["sommets", s.sommets]] as const);
+    const autres = [...new Set([4, 5, 6, 8, 9, 12].filter((k) => k !== n))].sort(() => Math.random() - 0.5).slice(0, 3);
+    return qcmV(
+      `${p.nom} observe ${o.dit} : c’est ${o.solide}. ${pickV([`Combien de ${quoi} a ce solide ?`, `Combien de ${quoi} compte-t-${ilV(p)} ?`])}`,
+      `${n} ${quoi}`,
+      autres.map((k) => `${k} ${quoi}`),
+      `${o.solide.charAt(0).toUpperCase() + o.solide.slice(1)} a ${s.faces} faces (${s.detail}), ${s.aretes} arêtes et ${s.sommets} sommets.`,
+    );
+  }
+  if (etoile === 3) {
+    const famille = pickV(["patron", "arêtes", "morceaux"] as const);
+    if (famille === "patron") {
+      const s = pickV(SOLIDES);
+      return qcmV(
+        `${p.nom} découpe le patron d’${s.nom} pour le plier. ${pickV(["Combien de morceaux (faces) a ce patron ?", "Combien de faces doit avoir son patron ?"])}`,
+        `${s.faces} faces`,
+        [4, 5, 6, 8].filter((k) => k !== s.faces).map((k) => `${k} faces`),
+        `Le patron contient autant de faces que le solide : ${s.detail}, soit ${s.faces} faces.`,
+      );
+    }
+    const L = randomInt(4, 12), l = randomInt(2, 8), h = randomInt(2, 9);
+    if (famille === "arêtes") {
+      return {
+        text: `Pour une maquette, ${p.nom} fabrique le squelette d’un pavé droit de ${L} cm de long, ${l} cm de large et ${h} cm de haut, avec des pailles. ${pickV(["Quelle longueur de paille faut-il en tout ?", "Combien de centimètres de paille utilise-t-" + ilV(p) + " ?"])}`,
+        format: "short",
+        expected: [`${4 * (L + l + h)} cm`],
+        comparator: "number_equal",
+        explanation: expl(`Un pavé a 12 arêtes : 4 de ${L} cm, 4 de ${l} cm et 4 de ${h} cm. Total : 4 × ${L} + 4 × ${l} + 4 × ${h} = ${4 * (L + l + h)} cm.`),
+      };
+    }
+    const [a, b, nom] = pickV([[L, l, "longueur et largeur"], [L, h, "longueur et hauteur"], [l, h, "largeur et hauteur"]] as const);
+    if (L === l || L === h || l === h) return genVisionRepresentation(3);
+    return qcmV(
+      `${p.nom} dessine le patron d’une boîte en forme de pavé droit : ${L} cm de long, ${l} cm de large et ${h} cm de haut. Combien de faces de ${a} cm sur ${b} cm a ce patron ?`,
+      "2 faces",
+      ["1 face", "4 faces", "6 faces"],
+      `Un pavé a 6 faces, égales deux à deux (faces opposées). Les faces de ${a} cm sur ${b} cm (${nom}) sont 2 : celle de devant et celle de derrière, ou celle du dessus et celle du dessous.`,
+    );
+  }
+  // ★4 : la perspective cavalière.
+  const s = pickV(["un cube", "un pavé droit"] as const);
+  const [question, bonne, leurres, pq] = pickV([
+    [`Sur sa perspective cavalière d’${s}, combien d’arêtes sont cachées (en pointillés) ?`, "3 arêtes", ["0 arête", "4 arêtes", "6 arêtes"], "On ne voit pas les 3 arêtes qui partent du sommet caché, au fond en bas : elles se tracent en pointillés."],
+    [`Sur sa perspective cavalière d’${s}, combien de faces voit-on entièrement ?`, "3 faces", ["2 faces", "4 faces", "6 faces"], "On voit la face de devant, celle du dessus et celle de côté : 3 faces. Les 3 autres sont cachées."],
+    [`Sur sa perspective cavalière d’${s}, combien de sommets sont cachés ?`, "1 sommet", ["0 sommet", "2 sommets", "4 sommets"], "Un seul sommet est caché : celui du fond, en bas, d’où partent les 3 arêtes en pointillés."],
+    [`Sur sa perspective cavalière d’${s}, comment sont dessinées des arêtes parallèles en vrai ?`, "parallèles aussi", ["perpendiculaires", "toujours en pointillés", "deux fois plus longues"], "La perspective cavalière conserve le parallélisme : des arêtes parallèles en vrai restent parallèles sur le dessin."],
+  ] as const);
+  return qcmV(`${p.nom} dessine ${pickV(OBJETS_SOLIDES.filter((o) => o.solide === s)).dit} en perspective. ${question}`, bonne, [...leurres], pq);
+}
+
+// ─── VISION_DEFI : le grand cube peint puis découpé ─────────────────────────
+const CUBES_PEINTS: { dit: (p: Prenom, n: number) => string; adj: string }[] = [
+  { dit: (p, n) => `${p.nom} peint en rouge un grand cube de bois de ${n} cubes de côté, puis le découpe en ${n ** 3} petits cubes.`, adj: "peinte" },
+  { dit: (p, n) => `Un gâteau en forme de cube de ${n} parts de côté est recouvert de glaçage sur ses 6 faces. ${p.nom} le coupe en ${n ** 3} petits cubes.`, adj: "glacée" },
+  { dit: (p, n) => `${p.nom} trempe dans la peinture un cube formé de ${n ** 3} petits cubes (${n} sur ${n} sur ${n}), puis le démonte.`, adj: "peinte" },
+  { dit: (p, n) => `Un bloc de fromage cubique de ${n} sur ${n} sur ${n} a une croûte sur ses 6 faces. ${p.nom} le coupe en ${n ** 3} petits cubes.`, adj: "avec de la croûte" },
+  { dit: (p, n) => `${p.nom} recouvre de papier doré un cube de ${n} sur ${n} sur ${n} formé de petits cubes, puis le démonte.`, adj: "dorée" },
+];
+function genVisionDefi(): QV {
+  const p = pickV(PRENOMS);
+  const n = randomInt(3, 6);
+  const c = pickV(CUBES_PEINTS);
+  const [quoi, plur, v, pq] = pickV([
+    ["aucune face", false, (n - 2) ** 3, `Ce sont ceux du cœur, qui ne touchent aucune face : un cube de ${n - 2} sur ${n - 2} sur ${n - 2}, soit ${(n - 2) ** 3}.`],
+    ["exactement une face", false, 6 * (n - 2) ** 2, `Sur chaque face, les petits cubes du milieu (sans les bords) : ${n - 2} × ${n - 2} = ${(n - 2) ** 2}. Il y a 6 faces : 6 × ${(n - 2) ** 2} = ${6 * (n - 2) ** 2}.`],
+    ["exactement deux faces", true, 12 * (n - 2), `Ce sont ceux des arêtes, sans les coins : ${n - 2} par arête. Un cube a 12 arêtes : 12 × ${n - 2} = ${12 * (n - 2)}.`],
+    ["exactement trois faces", true, 8, "Ce sont les petits cubes des coins : un cube a 8 sommets, donc 8 coins."],
+  ] as const);
+  const adj = c.adj.startsWith("avec") ? c.adj : `${c.adj}${plur ? "s" : ""}`;
+  const ont = quoi === "aucune face" ? "n’ont" : "ont"; // « combien n’ont aucune face… »
+  return courteV(
+    `${c.dit(p, n)} ${pickV([`Combien de petits cubes ${ont} ${quoi} ${adj} ?`, `Parmi les petits cubes, combien ${ont} ${quoi} ${adj} ?`])}`,
+    v, "cube", pq,
+  );
+}
+
 export const visionEspaceBank: TutorBankItemV4[] = [
   // =========================
   // VISION_VUES — dessus, face, gauche, droite
@@ -122,7 +400,7 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un pavé est formé de cubes : 4 de long, 3 de large, 2 de haut. Sa vue de dessus est un rectangle. Combien de carreaux contient-elle ?",
     format: "short",
-    expected: ["12"],
+    expected: ["12 carreaux"],
     comparator: "number_equal",
     hint: "Vue de dessus : on ne voit que la longueur et la largeur.",
     explanation: expl(
@@ -142,7 +420,7 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Le même pavé (4 de long, 3 de large, 2 de haut) est regardé de face, c'est-à-dire en voyant sa longueur et sa hauteur. Combien de carreaux contient cette vue ?",
     format: "short",
-    expected: ["8"],
+    expected: ["8 carreaux"],
     comparator: "number_equal",
     hint: "De face, on voit la longueur et la hauteur.",
     explanation: expl(
@@ -165,7 +443,7 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Toujours le même pavé (4 de long, 3 de large, 2 de haut). Combien de carreaux contient sa vue de droite, où l'on voit la largeur et la hauteur ?",
     format: "short",
-    expected: ["6"],
+    expected: ["6 carreaux"],
     comparator: "number_equal",
     hint: "De droite, on voit la largeur et la hauteur.",
     explanation: expl(
@@ -209,7 +487,7 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Observe l'assemblage en escalier. Combien de carreaux contient sa vue de dessus ?",
     format: "short",
-    expected: ["3"],
+    expected: ["3 carreaux"],
     comparator: "number_equal",
     hint: "Vu d'en haut, une colonne de cubes empilés ne fait qu'un seul carreau.",
     explanation: expl(
@@ -229,27 +507,20 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Chaque vue ne montre que DEUX des trois dimensions.",
     tags: ["vision_espace", "vues", "template"],
-    generate: () => {
-      const L = randomInt(2, 6);
-      const l = randomInt(2, 5);
-      const h = randomInt(2, 4);
-      const vues = [
-        { nom: "de dessus, où l'on voit la longueur et la largeur", n: L * l, a: L, b: l },
-        { nom: "de face, où l'on voit la longueur et la hauteur", n: L * h, a: L, b: h },
-        { nom: "de droite, où l'on voit la largeur et la hauteur", n: l * h, a: l, b: h },
-      ];
-      const v = vues[randomInt(0, vues.length - 1)];
-      return {
-        text: `Un pavé est formé de cubes : ${L} de long, ${l} de large, ${h} de haut. Combien de carreaux contient sa vue ${v.nom} ?`,
-        format: "short",
-        expected: [String(v.n)],
-        comparator: "number_equal",
-        explanation: expl(
-          `Cette vue montre un rectangle de ${v.a} sur ${v.b}, soit ${v.a} × ${v.b} = ${v.n} carreaux. La troisième dimension part vers l'arrière et ne se voit pas.`
-        ),
-        canvas: assemblage(pave(L, l, h)),
-      };
-    },
+    generate: () => genVisionVues(3),
+  },
+  {
+    kind: "template",
+    id: "vision_vues_tpl_pave",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_vues",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Chaque vue ne montre que DEUX des trois dimensions.",
+    tags: ["vision_espace", "vues", "template", "canvas"],
+    generate: () => genVisionVues(2),
   },
   {
     kind: "template",
@@ -262,33 +533,9 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Dis ce que chaque vue montre, et ce qu'elle perd.",
     tags: ["vision_espace", "vues", "template", "ouverte"],
-    generate: () => {
-      const cas = [
-        {
-          q: "Explique pourquoi une vue d'un assemblage ne montre jamais que deux des trois dimensions.",
-          mots: ["profondeur", "arrière", "arriere", "deux", "troisième", "troisieme", "plat"],
-          r: "Une vue est un dessin PLAT : elle n'a que deux directions, une largeur et une hauteur sur la feuille. La troisième dimension de l'objet part vers l'arrière, dans la direction du regard, et se retrouve écrasée. C'est pour cela qu'il faut plusieurs vues pour décrire un assemblage.",
-        },
-        {
-          q: "Explique pourquoi la vue de dessus d'un escalier de cubes contient moins de carreaux qu'il n'y a de cubes.",
-          mots: ["colonne", "empilés", "empiles", "au-dessus", "un seul", "cachent"],
-          r: "Vu d'en haut, tous les cubes d'une même colonne se cachent les uns les autres : la colonne entière ne laisse voir qu'un seul carreau, qu'elle contienne un cube ou cinq. La vue de dessus compte donc les colonnes, pas les cubes.",
-        },
-        {
-          q: "Explique pourquoi la vue de gauche et la vue de droite d'un pavé plein ont les mêmes dimensions.",
-          mots: ["opposées", "opposees", "faces", "identiques", "largeur", "hauteur"],
-          r: "Ce sont les deux faces opposées du pavé, et dans un pavé les faces opposées sont identiques : toutes deux mesurent la largeur sur la hauteur. Les deux vues ont donc le même nombre de carreaux — même si, sur un assemblage creux, l'image dessinée peut différer.",
-        },
-      ];
-      const c = cas[randomInt(0, cas.length - 1)];
-      return {
-        text: c.q,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
-        explanation: expl(c.r),
-      };
-    },
+    // 06/10/2026 : l'ancienne question ouverte à mots-clés devient un calcul de vue
+    // sur des colonnes de hauteurs variées (les cubes cachés ne comptent pas double).
+    generate: () => genVisionVues(4),
   },
 
   // =========================
@@ -305,7 +552,7 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un pavé plein est formé de cubes : 3 de long, 2 de large, 2 de haut. Combien de cubes contient-il ?",
     format: "short",
-    expected: ["12"],
+    expected: ["12 cubes"],
     comparator: "number_equal",
     hint: "Compte un étage, puis multiplie par le nombre d'étages.",
     explanation: expl(
@@ -325,7 +572,7 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Observe l'assemblage en escalier. Combien de cubes le composent ?",
     format: "short",
-    expected: ["6"],
+    expected: ["6 cubes"],
     comparator: "number_equal",
     hint: "Compte étage par étage : combien au rez-de-chaussée, puis au-dessus ?",
     explanation: expl(
@@ -370,7 +617,7 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un empilement a 3 étages : 9 cubes au rez-de-chaussée, 4 au premier, 1 au second. Combien de cubes en tout ?",
     format: "short",
-    expected: ["14"],
+    expected: ["14 cubes"],
     comparator: "number_equal",
     hint: "On additionne les étages.",
     explanation: expl("9 + 4 + 1 = 14 cubes. Compter par étages évite d'oublier ceux du fond."),
@@ -387,21 +634,20 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Un étage, puis le nombre d'étages.",
     tags: ["vision_espace", "denombrer", "template"],
-    generate: () => {
-      const L = randomInt(2, 5);
-      const l = randomInt(2, 4);
-      const h = randomInt(2, 4);
-      return {
-        text: `Un pavé plein est formé de cubes : ${L} de long, ${l} de large, ${h} de haut. Combien de cubes contient-il ?`,
-        format: "short",
-        expected: [String(L * l * h)],
-        comparator: "number_equal",
-        explanation: expl(
-          `Un étage contient ${L} × ${l} = ${L * l} cubes, et il y a ${h} étages : ${L * l} × ${h} = ${L * l * h} cubes.`
-        ),
-        canvas: assemblage(pave(L, l, h)),
-      };
-    },
+    generate: () => genVisionDenombrer(3),
+  },
+  {
+    kind: "template",
+    id: "vision_denombrer_tpl_pave",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_denombrer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Un étage, puis le nombre d'étages.",
+    tags: ["vision_espace", "denombrer", "template", "canvas"],
+    generate: () => genVisionDenombrer(2),
   },
   {
     kind: "template",
@@ -414,21 +660,7 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Additionne les étages, du bas vers le haut.",
     tags: ["vision_espace", "denombrer", "template"],
-    generate: () => {
-      const n = randomInt(3, 5);
-      const etages: number[] = [];
-      for (let i = n; i >= 1; i--) etages.push(i * i);
-      const total = etages.reduce((a, b) => a + b, 0);
-      return {
-        text: `Un empilement en pyramide a ${n} étages : ${etages.map((e) => `${e}`).join(", puis ")} cubes en montant. Combien de cubes en tout ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: expl(
-          `On additionne les étages : ${etages.join(" + ")} = ${total} cubes. Chaque étage est un carré de côté décroissant.`
-        ),
-      };
-    },
+    generate: () => genVisionDenombrer(4),
   },
   {
     kind: "template",
@@ -441,33 +673,9 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Décris une méthode qui ne dépend pas de ce qu'on voit.",
     tags: ["vision_espace", "denombrer", "template", "ouverte"],
-    generate: () => {
-      const cas = [
-        {
-          q: "Explique comment compter les cubes d'un empilement sans oublier ceux qui sont cachés.",
-          mots: ["étage", "etage", "additionne", "par étages", "rez", "colonne"],
-          r: "On ne compte pas ce qu'on voit, on compte par ÉTAGES : combien de cubes au rez-de-chaussée, combien au premier, combien au second, puis on additionne. Chaque cube d'un étage supérieur en repose forcément sur un autre, ce qui permet de retrouver ceux du fond même sans les voir.",
-        },
-        {
-          q: "Un élève compte 9 cubes sur un dessin, mais l'assemblage en contient 14. Explique d'où vient l'écart.",
-          mots: ["cachés", "caches", "derrière", "derriere", "dessous", "voit"],
-          r: "Il a compté les cubes VISIBLES. Les autres sont cachés derrière ceux du premier plan ou dessous ceux du dessus : le dessin ne les montre pas, mais ils sont là — sans eux, l'empilement s'effondrerait. Il faut donc raisonner sur la structure, pas sur l'image.",
-        },
-        {
-          q: "Explique pourquoi le nombre de cubes d'un pavé plein se calcule en multipliant ses trois dimensions.",
-          mots: ["étage", "etage", "multiplie", "rectangle", "hauteur", "trois"],
-          r: "Un étage est un rectangle de cubes : il en contient longueur × largeur. Tous les étages sont identiques, et il y en a autant que la hauteur. On multiplie donc le nombre de cubes d'un étage par le nombre d'étages, ce qui revient à multiplier les trois dimensions.",
-        },
-      ];
-      const c = cas[randomInt(0, cas.length - 1)];
-      return {
-        text: c.q,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
-        explanation: expl(c.r),
-      };
-    },
+    // 06/10/2026 : l'ancienne question ouverte devient un calcul : combien de cubes
+    // manque-t-il pour compléter le pavé ? (il faut compter aussi les cubes cachés).
+    generate: () => genVisionDenombrer(5),
   },
 
   // =========================
@@ -509,7 +717,7 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Combien de carrés compte le patron d'un cube ?",
     format: "short",
-    expected: ["6"],
+    expected: ["6 carrés"],
     comparator: "number_equal",
     hint: "Autant que le cube a de faces.",
     explanation: expl(
@@ -578,24 +786,20 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Compte les faces du solide.",
     tags: ["vision_espace", "representation", "template"],
-    generate: () => {
-      const solides = [
-        { nom: "un cube", faces: 6, detail: "6 faces carrées" },
-        { nom: "un pavé droit", faces: 6, detail: "6 faces rectangulaires, égales deux à deux" },
-        { nom: "une pyramide à base carrée", faces: 5, detail: "1 base carrée et 4 faces triangulaires" },
-        { nom: "un prisme droit à base triangulaire", faces: 5, detail: "2 bases triangulaires et 3 faces rectangulaires" },
-      ];
-      const s = solides[randomInt(0, solides.length - 1)];
-      return {
-        text: `Combien de faces compte le patron de ${s.nom} ?`,
-        format: "short",
-        expected: [String(s.faces)],
-        comparator: "number_equal",
-        explanation: expl(
-          `Le patron contient autant de morceaux que le solide a de faces : ${s.detail}, soit ${s.faces} faces.`
-        ),
-      };
-    },
+    generate: () => genVisionRepresentation(3),
+  },
+  {
+    kind: "template",
+    id: "vision_representation_tpl_faces_aretes",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_representation",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compte les faces, puis les arêtes (les bords), puis les sommets (les coins).",
+    tags: ["vision_espace", "representation", "template", "solides"],
+    generate: () => genVisionRepresentation(2),
   },
   {
     kind: "template",
@@ -608,33 +812,9 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Dis ce que chaque représentation garde, et ce qu'elle perd.",
     tags: ["vision_espace", "representation", "template", "ouverte"],
-    generate: () => {
-      const cas = [
-        {
-          q: "Explique pourquoi un cube dessiné en perspective ne montre pas six carrés.",
-          mots: ["parallélogramme", "parallelogramme", "penchée", "penchee", "plat", "déforme", "deforme"],
-          r: "Une feuille est plate : pour donner l'illusion du volume, on penche les faces qui partent vers l'arrière, et un carré penché devient un parallélogramme. Le dessin conserve le nombre de faces et les arêtes parallèles, mais pas les angles droits.",
-        },
-        {
-          q: "Explique la différence entre un patron et une perspective cavalière.",
-          mots: ["plié", "plie", "à plat", "a plat", "volume", "faces", "illusion"],
-          r: "Le patron est le solide DÉPLIÉ à plat : toutes les faces y sont en vraie grandeur, mais on ne voit plus le volume. La perspective cavalière montre au contraire le solide en volume, mais elle déforme les faces qui partent vers l'arrière. L'une sert à construire, l'autre à comprendre la forme.",
-        },
-        {
-          q: "Explique pourquoi il faut plusieurs vues pour décrire un assemblage de cubes sans ambiguïté.",
-          mots: ["une seule", "cachés", "caches", "hauteur", "dessus", "plusieurs"],
-          r: "Chaque vue perd une dimension : celle de dessus ne dit rien des hauteurs, celles de face et de côté ne disent pas où sont les colonnes. Une seule vue laisse donc plusieurs assemblages possibles. En les croisant, on lève presque toute l'ambiguïté — presque, car un cube complètement caché reste invisible sur les quatre.",
-        },
-      ];
-      const c = cas[randomInt(0, cas.length - 1)];
-      return {
-        text: c.q,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
-        explanation: expl(c.r),
-      };
-    },
+    // 06/10/2026 : l'ancienne question ouverte devient un QCM sur la perspective
+    // cavalière (arêtes cachées, faces visibles, parallélisme conservé).
+    generate: () => genVisionRepresentation(4),
   },
 
   // =========================
@@ -676,7 +856,7 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un cube de 3 sur 3 sur 3 est peint en rouge à l'extérieur, puis découpé en 27 petits cubes. Combien de petits cubes n'ont AUCUNE face peinte ?",
     format: "short",
-    expected: ["1"],
+    expected: ["1 cube"],
     comparator: "number_equal",
     hint: "Lequel ne touche aucune paroi ?",
     explanation: expl(
@@ -696,19 +876,7 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le cœur d'un cube est lui-même un cube, plus petit de deux unités dans chaque direction.",
     tags: ["vision_espace", "defi", "template"],
-    generate: () => {
-      const n = randomInt(3, 5);
-      const interieur = (n - 2) ** 3;
-      return {
-        text: `Un cube de ${n} sur ${n} sur ${n} est peint en rouge à l'extérieur, puis découpé en ${n ** 3} petits cubes. Combien n'ont aucune face peinte ?`,
-        format: "short",
-        expected: [String(interieur)],
-        comparator: "number_equal",
-        explanation: expl(
-          `Les cubes sans peinture forment le cœur du grand cube : on enlève une couche de chaque côté, donc deux unités dans chaque direction. Le cœur est un cube de ${n - 2} sur ${n - 2} sur ${n - 2}, soit ${interieur} petits cubes.`
-        ),
-      };
-    },
+    generate: () => genVisionDefi(),
   },
   {
     kind: "template",
@@ -721,33 +889,9 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Raisonne sur ce qui touche l'extérieur et ce qui ne le touche pas.",
     tags: ["vision_espace", "defi", "template", "ouverte"],
-    generate: () => {
-      const cas = [
-        {
-          q: "Explique pourquoi les quatre vues d'un assemblage ne suffisent pas toujours à le reconstituer.",
-          mots: ["caché", "cache", "entouré", "entoure", "invisible", "aucune vue"],
-          r: "Un cube entouré de tous les côtés n'apparaît sur aucune vue : le retirer ne change aucune des quatre images. Deux assemblages différant seulement par ce cube ont donc les mêmes vues. Les vues décrivent l'enveloppe, pas l'intérieur.",
-        },
-        {
-          q: "Dans un grand cube peint puis découpé, explique où se trouvent les petits cubes sans aucune face peinte.",
-          mots: ["intérieur", "interieur", "cœur", "coeur", "centre", "couche", "touche pas"],
-          r: "Ce sont ceux qui ne touchent aucune paroi : ils forment le cœur du grand cube. On les obtient en retirant une couche sur chaque face, donc deux unités dans chaque direction. Pour un cube de côté n, ils forment un cube de côté n − 2.",
-        },
-        {
-          q: "Explique comment reconstituer un assemblage à partir de sa vue de dessus et de sa vue de face.",
-          mots: ["colonne", "hauteur", "dessus", "face", "croise"],
-          r: "La vue de dessus indique où se trouvent les colonnes de cubes, sur le quadrillage du sol. La vue de face indique la hauteur maximale de chaque rangée. En croisant les deux, on attribue à chaque colonne une hauteur compatible — mais il reste parfois plusieurs solutions, et c'est là qu'une troisième vue sert.",
-        },
-      ];
-      const c = cas[randomInt(0, cas.length - 1)];
-      return {
-        text: c.q,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
-        explanation: expl(c.r),
-      };
-    },
+    // 06/10/2026 : l'ancienne question ouverte devient un calcul (cubes du cœur,
+    // des faces, des arêtes, des coins) : on mêle les colonnes et les vues.
+    generate: () => (Math.random() < 0.5 ? genVisionDefi() : genVisionDenombrer(5)),
   },
 ];
 
