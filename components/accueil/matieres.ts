@@ -256,12 +256,14 @@ export const ACTIONS: { id: ActionId; label: string; court: string }[] = [
 export function actionsPour(m: MatiereAccueil) {
   return ACTIONS.flatMap((a) => {
     if (a.id !== "lecon") return [a];
-    const laUne = m.id === MATIERE_DE_LA_UNE;
+    // ⛔ 28/09/2026 : la Une (« Leçon du jour ») est retirée de l'accueil,
+    // Frédéric la jugeait inadéquate. L'onglet ne sert plus que des rituels,
+    // maths comprises, et s'appelle donc « Rituels » partout.
     const desRituels = (RITUELS[m.id] ?? []).length > 0;
-    // ⛔ Ni Une ni rituel (l'IA, l'économie) : pas d'onglet du tout. Un onglet
+    // ⛔ Pas de rituel (l'IA, l'économie) : pas d'onglet du tout. Un onglet
     // qui ne sert qu'à s'excuser de n'avoir rien coûte un clic pour rien.
-    if (!laUne && !desRituels) return [];
-    return [laUne ? a : { ...a, label: "Rituels", court: "Rituels" }];
+    if (!desRituels) return [];
+    return [{ ...a, label: "Rituels", court: "Rituels" }];
   });
 }
 

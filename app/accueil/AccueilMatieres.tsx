@@ -114,7 +114,6 @@
 // déjà dans le paquet du navigateur.
 
 import { Fragment, useMemo, useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import {
   Bot,
@@ -133,7 +132,6 @@ import {
 } from "lucide-react";
 import { track } from "@vercel/analytics";
 import BandeauMatiere from "@/components/accueil/BandeauMatiere";
-import DateDuJour from "@/components/accueil/DateDuJour";
 import RangeeDefilante from "@/components/accueil/RangeeDefilante";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
 import {
@@ -142,7 +140,6 @@ import {
   TEINTES,
   matierePar,
   notionsDe,
-  MATIERE_DE_LA_UNE,
   RITUELS,
   LIENS_MATIERE,
   LIEN_DANS_ACTIONS,
@@ -153,7 +150,6 @@ import {
   type Niveau,
 } from "@/components/accueil/matieres";
 import { ficheHrefPourCoach } from "@/lib/fiches/registre";
-import { UNE_COURANTE } from "@/lib/accueil/une";
 
 /** L'identifiant du panneau, partage par les cinq onglets : un seul panneau
  *  est rendu a la fois, donc tous les `aria-controls` le designent. */
@@ -980,19 +976,15 @@ function PanneauPhoto() {
    plutôt que d'être déplacée, parce que la Une se range par CYCLE (lycée,
    collège, primaire) et pas par matière — les découper serait réécrire une.ts
    pour un cas. */
+/* ⛔ LA UNE EST RETIRÉE DE L'ACCUEIL (28/09/2026). Frédéric : « sur la page
+   d'accueil il faut enlever leçon du jour qui n'est pas adéquat ». En maths,
+   l'onglet s'appelle désormais « Rituels », comme partout ailleurs.
+   `lib/accueil/une.ts` reste : le sitemap y lit encore les shorts. */
 function PanneauLecon({ matiere }: { matiere: MatiereAccueil }) {
   const rituels = RITUELS[matiere.id] ?? [];
-  const montreLaUne = matiere.id === MATIERE_DE_LA_UNE && Boolean(UNE_COURANTE);
 
   return (
     <div className="space-y-6">
-      {/* ⭐ LA UNE PASSE DEVANT LES RITUELS (24/09/2026), et c'est la suite
-          logique du renommage de l'onglet : là où il s'appelle « Leçon du
-          jour », la leçon du jour doit être la première chose qu'on voit.
-          Elle était sous les rituels depuis la veille — l'onglet promettait une
-          chose et en servait une autre, en dessous du pli sur téléphone. */}
-      {montreLaUne && <LaUne />}
-
       {rituels.length > 0 && (
         <section>
           <h2 className="mb-2 text-sm font-bold uppercase tracking-wide text-slate-500">
@@ -1021,72 +1013,6 @@ function PanneauLecon({ matiere }: { matiere: MatiereAccueil }) {
           ⚠️ Si `actionsPour` change un jour, rétablir un repli ici : un panneau
           qui se rend vide est pire qu'un panneau qui explique. */}
     </div>
-  );
-}
-
-function LaUne() {
-  if (!UNE_COURANTE) return null;
-  return (
-    <section className="space-y-3">
-      <h2 className="text-sm font-bold uppercase tracking-wide text-slate-500">
-        {/* ⭐ LA DATE SE CALCULE, ELLE NE SE RETAPE PLUS (24/09/2026).
-            `UNE_COURANTE.jour` reste le REPLI — la valeur du premier rendu, la
-            même côté serveur et côté client, donc aucune erreur d'hydratation.
-            Le navigateur la remplace ensuite par la vraie date du visiteur.
-            ⚠️ Le champ `jour` de une.ts garde donc son rôle d'origine : dire
-            quand la Une a CHANGÉ. C'est l'affichage qui ne le lit plus comme
-            « aujourd'hui ». Voir components/accueil/DateDuJour.tsx. */}
-        La leçon du jour · <DateDuJour repli={UNE_COURANTE.jour} />
-      </h2>
-      <div className="grid gap-3 lg:grid-cols-3">
-        {UNE_COURANTE.diapos.map((d) => (
-          <article
-            key={d.cycle}
-            className="flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
-          >
-            <div className="flex gap-3 p-3">
-              <Image
-                src={d.short.vignette}
-                alt=""
-                width={216}
-                height={384}
-                sizes="72px"
-                className="h-24 w-[54px] shrink-0 rounded-lg object-cover"
-              />
-              <div className="min-w-0">
-                <span className="inline-flex rounded-full bg-teal-50 px-2 py-0.5 text-xs font-bold text-teal-700">
-                  {d.onglet}
-                </span>
-                <p className="mt-1 text-sm font-semibold leading-snug text-slate-900">
-                  {d.accroche}
-                </p>
-                <p className="mt-0.5 text-xs text-slate-500">{d.notion}</p>
-              </div>
-            </div>
-            <div className="mt-auto flex flex-wrap gap-1.5 border-t border-slate-100 p-3">
-              <a
-                href={`https://www.youtube.com/shorts/${d.short.id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex rounded-lg bg-slate-900 px-2.5 py-1.5 text-xs font-bold text-white hover:bg-slate-700"
-              >
-                Voir le short
-              </a>
-              {d.liens.map((l) => (
-                <Link
-                  prefetch={false}
-                  key={l.href}
-                  href={l.href}
-                  className="inline-flex rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-bold text-slate-700 hover:bg-slate-50"
-                >
-                  {l.court}
-                </Link>
-              ))}
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
   );
 }
 
