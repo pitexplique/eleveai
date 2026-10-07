@@ -1255,5 +1255,16 @@ export function ficheExercicesHrefPourCoach(
       return `/fiches-exercices/${k}`;
     }
   }
-  return null;
+  return PAGES_A_IMPRIMER_HORS_REGISTRE[`${matiere}/${c}/${coachNotionId}`] ?? null;
 }
+
+/** ⭐ 07/10/2026 — des pages à imprimer SANS classe, hors du registre : les
+ *  tables de multiplication (six feuilles, la division par la table). Le bouton
+ *  « Exercices » des notions qui les travaillent y mène, faute de feuille propre. */
+const PAGES_A_IMPRIMER_HORS_REGISTRE: Record<string, string> = {
+  "maths/ce1/multiplication": "/tables-de-multiplication",
+  "maths/ce2/multiplication": "/tables-de-multiplication",
+  "maths/ce2/division": "/tables-de-multiplication",
+  "maths/cm1/tables_multiplication": "/tables-de-multiplication",
+  "maths/cm1/division": "/tables-de-multiplication",
+};

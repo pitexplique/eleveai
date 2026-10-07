@@ -24,6 +24,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Download, Palette, Printer, RefreshCw, Sparkles } from "lucide-react";
+import { QRCodeSVG } from "qrcode.react";
 import { DOSSIER_PDF } from "@/lib/fiches/pdf";
 import { PDF_DISPONIBLES } from "@/lib/fiches/pdf-disponibles";
 
@@ -31,6 +32,12 @@ const PDF_COULEUR = "tables-de-multiplication-1-a-10-a-imprimer.pdf";
 const PDF_NB = "tables-de-multiplication-1-a-10-a-imprimer-noir-et-blanc.pdf";
 
 const FACTEURS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+// ⭐ LA VIDÉO « Les bases » (07/10/2026) : sur la page à l'écran, en QR code sur
+// le papier (feuille 5 et corrigé) — un lien ne se clique pas sur une feuille.
+const VIDEO_ID = "3ISJ48NHGd8";
+const VIDEO_URL = `https://youtu.be/${VIDEO_ID}`;
+const VIDEO_TITRE = "Une multiplication, deux divisions";
 
 /** Une couleur par table : le trait et le fond. En noir et blanc, tout est noir sur blanc. */
 const COULEURS: Record<number, { trait: string; fond: string }> = {
@@ -320,6 +327,25 @@ function Jetons({ cadre, nb }: { cadre: "aucun" | "colonnes" | "rangees"; nb: bo
   );
 }
 
+/** Le QR code de la vidéo, pour la feuille imprimée. */
+function QrVideo({ nb }: { nb: boolean }) {
+  return (
+    <div
+      className="mt-4 flex items-center gap-3 rounded-2xl border-2 p-3"
+      style={{ borderColor: nb ? NB.trait : "#fecdd3", background: nb ? NB.fond : "#fff1f2" }}
+    >
+      <div className="shrink-0 rounded-lg bg-white p-1">
+        <QRCodeSVG value={VIDEO_URL} size={64} aria-label="QR code vers la vidéo" />
+      </div>
+      <p className="text-sm leading-5 text-slate-700">
+        <b className="text-slate-900">La vidéo : « {VIDEO_TITRE} »</b>
+        <br />
+        Scanne le QR code avec un téléphone pour la voir.
+      </p>
+    </div>
+  );
+}
+
 // ─── La page ─────────────────────────────────────────────────────────────────
 
 export default function TablesClient() {
@@ -423,6 +449,22 @@ export default function TablesClient() {
             <a href="#diviser">5. Multiplier et diviser</a>
             <a href="#corrige">6. Corrigé</a>
           </nav>
+          {/* ⛔ Pas d'autoplay : le lecteur s'affiche à l'arrêt, l'élève appuie lui-même. */}
+          <div className="mt-5 max-w-2xl">
+            <p className="mb-2 text-sm font-black text-slate-900">
+              La vidéo : « {VIDEO_TITRE} »
+            </p>
+            <div className="aspect-video w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-900">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${VIDEO_ID}`}
+                title={VIDEO_TITRE}
+                loading="lazy"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="h-full w-full"
+              />
+            </div>
+          </div>
           <p className="mt-4 text-sm text-slate-500">
             Pour s&apos;entraîner en ligne :{" "}
             <Link href="/coach-ia/maths" className="font-bold text-sky-700 underline">
@@ -529,6 +571,7 @@ export default function TablesClient() {
               </li>
             ))}
           </ol>
+          <QrVideo nb={nb} />
         </Feuille>
 
         {/* ── 6. Le corrigé ── */}
@@ -547,6 +590,7 @@ export default function TablesClient() {
             <b>Les tables à compléter et le tableau à remplir :</b> les réponses sont sur la
             feuille 1 et la feuille 2.
           </p>
+          <QrVideo nb={nb} />
         </Feuille>
       </article>
 
