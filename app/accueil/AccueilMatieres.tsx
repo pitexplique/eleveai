@@ -535,8 +535,178 @@ function CarteNiveau({
   );
 }
 
+/* ═══ LES CLASSES RANGÉES PAR CYCLE, FAÇON IXL (07/10/2026) ═══════════════
+   Frédéric : « on pourrait pas faire lycée : terminale etc, collège : 3e,
+   primaire, et résumé à l'intérieur de chaque bloc », capture d'IXL à
+   l'appui (Pre-K / Kindergarten / First grade), puis « 3 colonnes c'est bien,
+   lisible ».
+   ⭐ UNE CARTE = UNE CLASSE DE LA MATIÈRE CHOISIE EN HAUT. Frédéric : « en haut
+   on clique sur la matière » — la carte ne répète donc pas les autres
+   matières, et elle reste UN SEUL lien, cliquable partout (sa demande du même
+   jour : « toute la ligne cliquable, même l'intérieur »).
+   ⚠️ L'ORDRE DANS UN CYCLE RESTE DÉCROISSANT (Term → 2de, 3e → 6e, CM2 → CP) :
+   c'est sa décision du 13/09, rappelée en tête de matieres.ts.
+   ⛔ AUCUN `filter` sur un enfant de la carte qui contiendrait la zone de
+   clic : c'est ce qui faisait rater un clic sur deux sur l'ancienne carte. */
+/** Les matières rangées par CLASSE. Les langues et l'économie vont par palier
+ *  CECRL, l'IA par référentiel Pix : elles gardent leur liste. */
+const MATIERES_PAR_CLASSE: MatiereId[] = ["maths", "francais"];
+
+const CYCLES: {
+  id: string;
+  titre: string;
+  niveaux: string[];
+  pastille: string;
+  bord: string;
+  texte: string;
+}[] = [
+  {
+    id: "lycee",
+    titre: "Lycée",
+    niveaux: ["terminale-spe", "premiere-spe", "premiere", "seconde", "stmg"],
+    pastille: "bg-teal-600",
+    bord: "border-teal-300 hover:border-teal-500",
+    texte: "text-teal-700",
+  },
+  {
+    id: "college",
+    titre: "Collège",
+    niveaux: ["3e", "4e", "5e", "6e"],
+    pastille: "bg-violet-600",
+    bord: "border-violet-300 hover:border-violet-500",
+    texte: "text-violet-700",
+  },
+  {
+    id: "primaire",
+    titre: "Primaire",
+    niveaux: ["cm2", "cm1", "ce2", "ce1", "cp"],
+    pastille: "bg-orange-500",
+    bord: "border-orange-300 hover:border-orange-500",
+    texte: "text-orange-700",
+  },
+  {
+    id: "autres",
+    titre: "Et aussi",
+    niveaux: ["adulte"],
+    pastille: "bg-sky-600",
+    bord: "border-sky-300 hover:border-sky-500",
+    texte: "text-sky-700",
+  },
+];
+
+function PanneauCycles({ matiere }: { matiere: MatiereAccueil }) {
+  const blocs = useMemo(
+    () =>
+      CYCLES.map((cycle) => ({
+        cycle,
+        cartes: cycle.niveaux
+          .map((id) => {
+            const niveau = matiere.niveaux.find((n) => n.id === id);
+            if (!niveau) return null;
+            const notions = notionsDe(matiere.cle, id);
+            return {
+              niveau,
+              total: notions.length,
+              // Le résumé est tiré du coach, jamais écrit à la main : il
+              // vieillirait dès qu'une notion y entre.
+              // Une phrase, donc une minuscule après la virgule — sauf un sigle
+              // (« PGCD »), qu'on reconnaît à sa deuxième lettre capitale.
+              resume: notions
+                .slice(0, 4)
+                .map((n, i) =>
+                  i > 0 && /^\p{Lu}\p{Ll}/u.test(n.label)
+                    ? n.label[0].toLowerCase() + n.label.slice(1)
+                    : n.label,
+                ),
+            };
+          })
+          .filter((c): c is NonNullable<typeof c> => c !== null),
+      })).filter((b) => b.cartes.length > 0),
+    [matiere],
+  );
+
+  return (
+    <div className="space-y-8">
+      {blocs.map(({ cycle, cartes }) => (
+        <section key={cycle.id} aria-labelledby={`cycle-${cycle.id}`}>
+          <h2
+            id={`cycle-${cycle.id}`}
+            className={`mb-3 text-lg font-black uppercase tracking-wide ${cycle.texte}`}
+          >
+            {cycle.titre}
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {cartes.map(({ niveau, total, resume }) => {
+              const contenu = (
+                <>
+                  <h3 className="flex items-center gap-3">
+                    <span
+                      className={`flex h-9 min-w-9 shrink-0 items-center justify-center rounded-full px-2 text-sm font-black text-white ${cycle.pastille}`}
+                    >
+                      {niveau.label}
+                    </span>
+                    <span className={`min-w-0 text-xl font-bold leading-tight ${cycle.texte}`}>
+                      {niveau.nom}
+                      {niveau.sous && (
+                        <span className="block text-xs font-medium text-slate-500">
+                          {niveau.sous}
+                        </span>
+                      )}
+                    </span>
+                  </h3>
+                  {total > 0 ? (
+                    <>
+                      <p className="mt-2 flex-1 text-sm leading-snug text-slate-600">
+                        {resume.join(", ")}, et plus encore.
+                      </p>
+                      <p
+                        className={`mt-3 flex items-center justify-end gap-0.5 border-t border-slate-200 pt-2 text-sm font-semibold ${cycle.texte}`}
+                      >
+                        Voir les {total} notions
+                        <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                      </p>
+                    </>
+                  ) : (
+                    /* ⛔ ON NE PROMET PAS CE QUI N'EST PAS ÉCRIT. */
+                    <p className="mt-2 text-sm text-slate-500">Pas encore de notion à ce niveau.</p>
+                  )}
+                </>
+              );
+              const classes = `flex flex-col rounded-xl border bg-white p-4 shadow-sm transition ${cycle.bord}`;
+              if (total === 0)
+                return (
+                  <article key={niveau.id} className={classes}>
+                    {contenu}
+                  </article>
+                );
+              return (
+                <Link
+                  key={niveau.id}
+                  prefetch={false}
+                  href={`/coach-ia/${matiere.slug}?classe=${niveau.id}&from=accueil`}
+                  onClick={() => track("accueil_classe", { matiere: matiere.id, classe: niveau.id })}
+                  className={`${classes} hover:bg-slate-50 hover:shadow-md`}
+                >
+                  {contenu}
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+      ))}
+    </div>
+  );
+}
+
 /* ═══ LE PANNEAU « COACH IA » — celui qui s'ouvre par défaut ══════════════ */
 function PanneauCoach({ matiere }: { matiere: MatiereAccueil }) {
+  // Les matières rangées par CLASSE passent par les cycles ; les langues,
+  // l'économie et l'IA (paliers A1 → B2, référentiel Pix) gardent leur liste.
+  if (MATIERES_PAR_CLASSE.includes(matiere.id)) return <PanneauCycles matiere={matiere} />;
+  return <PanneauListe matiere={matiere} />;
+}
+
+function PanneauListe({ matiere }: { matiere: MatiereAccueil }) {
   const lignes = useMemo(
     () =>
       matiere.niveaux.map((niveau) => {
