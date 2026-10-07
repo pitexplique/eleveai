@@ -1,6 +1,7 @@
 import type { CorrecteursMaths } from "./types";
 import { CORRECTEURS as aires } from "./aires";
 import { CORRECTEURS as algebre } from "./algebre";
+import { CORRECTEURS as algorithmique } from "./algorithmique";
 import { CORRECTEURS as angles } from "./angles";
 import { CORRECTEURS as bissectrice } from "./bissectrice";
 import { CORRECTEURS as calculMental } from "./calcul-mental";
@@ -10,6 +11,7 @@ import { CORRECTEURS as cercleCirconscrit } from "./cercle-circonscrit";
 import { CORRECTEURS as decimaux } from "./decimaux";
 import { CORRECTEURS as demiDroite } from "./demi-droite";
 import { CORRECTEURS as distances } from "./distances";
+import { CORRECTEURS as donnees } from "./donnees";
 import { CORRECTEURS as durees } from "./durees";
 import { CORRECTEURS as echelles } from "./echelles";
 import { CORRECTEURS as entiers } from "./entiers";
@@ -19,6 +21,7 @@ import { CORRECTEURS as longueurs } from "./longueurs";
 import { CORRECTEURS as mediatrice } from "./mediatrice";
 import { CORRECTEURS as perimetres } from "./perimetres";
 import { CORRECTEURS as pourcentages } from "./pourcentages";
+import { CORRECTEURS as probabilites } from "./probabilites";
 import { CORRECTEURS as proportionnalite } from "./proportionnalite";
 import { CORRECTEURS as quadrilateres } from "./quadrilateres";
 import { CORRECTEURS as symetrie } from "./symetrie";
@@ -30,6 +33,7 @@ import { CORRECTEURS as volumes } from "./volumes";
 export const CORRECTEURS_6E: CorrecteursMaths = {
   ...aires,
   ...algebre,
+  ...algorithmique,
   ...angles,
   ...bissectrice,
   ...calculMental,
@@ -39,6 +43,7 @@ export const CORRECTEURS_6E: CorrecteursMaths = {
   ...decimaux,
   ...demiDroite,
   ...distances,
+  ...donnees,
   ...durees,
   ...echelles,
   ...entiers,
@@ -48,6 +53,7 @@ export const CORRECTEURS_6E: CorrecteursMaths = {
   ...mediatrice,
   ...perimetres,
   ...pourcentages,
+  ...probabilites,
   ...proportionnalite,
   ...quadrilateres,
   ...symetrie,

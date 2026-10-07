@@ -2,9 +2,12 @@
 
 import type {
   TutorBankItemV4,
+  TutorGeneratedQuestionV4,
+  DifficultyLevel,
   TableauDonneesCanvasData,
   StatGraphCanvasData,
 } from "@/lib/tutor-v4/types";
+import { PRENOMS, pick, de, type Prenom } from "./entiers.bank";
 
 function randomChoice<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -28,6 +31,1170 @@ function statGraphCanvas(
 
 function se(def: string, meth: string, obs: string, ccl: string) {
   return `Définition : ${def}\n\nMéthode : ${meth}\n\nObservation : ${obs}\n\nConclusion : ${ccl}`;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ⭐ 07/10/2026 — DES SITUATIONS, PAS UNE PHRASE (PASSATION-COACH-MATHS-6E).
+   Mesuré le 07/10 avant réparation : 10 à 34 squelettes par micro, 12 à 18
+   répétitions sur 20 (« Combien de livres ont été empruntés # ? » revenait à
+   l'identique). Chaque gabarit compose maintenant une SITUATION (seize relevés
+   de la vie d'un enfant de 11 ans, un seul à La Réunion) × une TOURNURE × un
+   PRÉNOM, et dessine le tableau ou le diagramme avec les MÊMES nombres.
+   Le correcteur (correcteurs/donnees.ts) relit la figure et la question, et
+   refait le calcul sans passer par le gabarit.
+   ⛔ Pas de barre de fraction (notion de données) : « la moitié », « ÷ 2 ».
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+type Q = TutorGeneratedQuestionV4;
+const il = (p: Prenom) => (p.f ? "elle" : "il");
+const Il = (p: Prenom) => (p.f ? "Elle" : "Il");
+const maj = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+function entre(a: number, b: number) {
+  return a + Math.floor(Math.random() * (b - a + 1));
+}
+/** `n` éléments distincts de `arr`, dans l'ordre d'origine (les jours restent dans l'ordre). */
+function tirerSans<T>(arr: readonly T[], n: number): T[] {
+  return shuffle(arr.map((_, i) => i))
+    .slice(0, n)
+    .sort((x, y) => x - y)
+    .map((i) => arr[i]);
+}
+function valeursDistinctes(n: number, min: number, max: number): number[] {
+  const s = new Set<number>();
+  while (s.size < n) s.add(entre(min, max));
+  return shuffle([...s]);
+}
+/** « que Mai », « qu’Avril », « qu’À pied ». */
+const que = (x: string) => (/^[AEIOUÉÈÊÀÂÎ]/i.test(x) ? `qu’${x}` : `que ${x}`);
+/** « d’élèves », « de livres ». */
+const deMot = (mot: string) => (/^[aeiouéèêh]/i.test(mot) ? `d’${mot}` : `de ${mot}`);
+
+function gab(
+  id: string,
+  notionId: string,
+  microId: string,
+  difficulty: DifficultyLevel,
+  hint: string,
+  tags: string[],
+  generate: () => Q,
+): TutorBankItemV4 {
+  return { kind: "template", id, niveau: "6e", matiere: "maths", notionId, microId, difficulty, theme: "neutral", hint, tags, generate };
+}
+
+type Cat = { label: string; gn: string };
+const cat = (label: string, gn: string): Cat => ({ label, gn });
+const jours = (n: number) =>
+  ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"].slice(0, n).map((j) => cat(j, `le ${j.toLowerCase()}`));
+
+type CtxStat = {
+  titre: string;
+  entete: string;
+  intro: (p: Prenom) => string;
+  /** Le mot écrit après le nombre dans la réponse (« 12 élèves »). */
+  unite: string;
+  quel: string;
+  combien: (c: Cat, p: Prenom) => string;
+  tout: (p: Prenom) => string;
+  cats: Cat[];
+  min: number;
+  max: number;
+  /** ⛔ 07/10 : « effectif » seulement quand on compte des personnes ou des objets ;
+   *  sinon la grandeur (« la distance », « le nombre de jours de pluie »). */
+  grandeur?: { mot: string; fem: boolean };
+};
+
+const SPORTS = [
+  cat("Football", "le football"), cat("Natation", "la natation"), cat("Basket", "le basket"),
+  cat("Danse", "la danse"), cat("Judo", "le judo"), cat("Tennis", "le tennis"), cat("Escalade", "l’escalade"),
+];
+const INSTRUMENTS = [
+  cat("Guitare", "la guitare"), cat("Piano", "le piano"), cat("Batterie", "la batterie"),
+  cat("Violon", "le violon"), cat("Flûte", "la flûte"), cat("Trompette", "la trompette"),
+];
+const TRANSPORTS = [
+  cat("À pied", "à pied"), cat("Bus", "en bus"), cat("Vélo", "à vélo"),
+  cat("Voiture", "en voiture"), cat("Trottinette", "en trottinette"), cat("Train", "en train"),
+];
+const PARFUMS = [
+  cat("Vanille", "à la vanille"), cat("Chocolat", "au chocolat"), cat("Fraise", "à la fraise"),
+  cat("Pistache", "à la pistache"), cat("Citron", "au citron"), cat("Framboise", "à la framboise"),
+];
+const GARNITURES = [
+  cat("Sucre", "au sucre"), cat("Chocolat", "au chocolat"), cat("Confiture", "à la confiture"),
+  cat("Miel", "au miel"), cat("Citron", "au citron"), cat("Caramel", "au caramel"),
+];
+const LEGUMES = [
+  cat("Tomates", "de tomates"), cat("Salades", "de salades"), cat("Radis", "de radis"),
+  cat("Carottes", "de carottes"), cat("Courgettes", "de courgettes"), cat("Poireaux", "de poireaux"),
+];
+const FRUITS = [
+  cat("Pommes", "de pommes"), cat("Poires", "de poires"), cat("Fraises", "de fraises"),
+  cat("Cerises", "de cerises"), cat("Abricots", "d’abricots"), cat("Prunes", "de prunes"),
+];
+const OISEAUX = [
+  cat("Moineaux", "moineaux"), cat("Merles", "merles"), cat("Pigeons", "pigeons"),
+  cat("Corbeaux", "corbeaux"), cat("Pinsons", "pinsons"), cat("Rouges-gorges", "rouges-gorges"),
+];
+
+const CTX_STAT: CtxStat[] = [
+  {
+    titre: "Sport préféré", entete: "Nombre d’élèves", unite: "élèves", quel: "Quel sport",
+    intro: (p) => `${p.nom} a demandé à chaque élève de sa classe son sport préféré.`,
+    combien: (c) => `combien d’élèves ont choisi ${c.gn}`,
+    tout: () => "combien d’élèves ont répondu",
+    cats: SPORTS, min: 2, max: 12,
+  },
+  {
+    titre: "Cagettes vendues au marché", entete: "Cagettes vendues", unite: "cagettes", quel: "Quel fruit",
+    intro: (p) => `${p.nom} aide ses parents au marché. ${Il(p)} note les cagettes de fruits vendues.`,
+    combien: (c) => `combien de cagettes ${c.gn} ont été vendues`,
+    tout: () => "combien de cagettes ont été vendues",
+    cats: FRUITS, min: 4, max: 30,
+  },
+  {
+    titre: "Livres empruntés", entete: "Livres empruntés", unite: "livres", quel: "Quel jour",
+    intro: (p) => `${p.nom} aide à la médiathèque. ${Il(p)} compte les livres empruntés chaque jour.`,
+    combien: (c) => `combien de livres ont été empruntés ${c.gn}`,
+    tout: () => "combien de livres ont été empruntés",
+    cats: jours(6).slice(1), min: 12, max: 60,
+  },
+  {
+    titre: "Oiseaux observés", entete: "Nombre d’oiseaux", unite: "oiseaux", quel: "Quel oiseau",
+    intro: (p) => `Dans son jardin, ${p.nom} compte les oiseaux pendant une heure.`,
+    combien: (c, p) => `combien de ${c.gn} ${p.nom} a-t-${il(p)} comptés`,
+    tout: (p) => `combien d’oiseaux ${p.nom} a-t-${il(p)} comptés`,
+    cats: OISEAUX, min: 2, max: 18,
+  },
+  {
+    titre: "Instrument choisi", entete: "Nombre d’élèves", unite: "élèves", quel: "Quel instrument",
+    intro: (p) => `À l’école de musique, ${p.nom} note l’instrument choisi par chaque élève.`,
+    combien: (c) => `combien d’élèves ont choisi ${c.gn}`,
+    tout: () => "combien d’élèves ont choisi un instrument",
+    cats: INSTRUMENTS, min: 2, max: 14,
+  },
+  {
+    titre: "Trajet jusqu’au collège", entete: "Nombre d’élèves", unite: "élèves", quel: "Quel moyen de transport",
+    intro: (p) => `${p.nom} demande aux élèves de sa classe comment ils viennent au collège.`,
+    combien: (c) => `combien d’élèves viennent ${c.gn}`,
+    tout: () => "combien d’élèves ont répondu",
+    cats: TRANSPORTS, min: 2, max: 14,
+  },
+  {
+    titre: "Animaux à la maison", entete: "Nombre d’élèves", unite: "élèves", quel: "Quel animal",
+    intro: (p) => `${p.nom} demande aux élèves de son club quel animal ils ont à la maison.`,
+    combien: (c) => `combien d’élèves ont ${c.gn}`,
+    tout: () => "combien d’élèves ont répondu",
+    cats: [
+      cat("Chat", "un chat"), cat("Chien", "un chien"), cat("Lapin", "un lapin"),
+      cat("Poisson", "un poisson"), cat("Hamster", "un hamster"), cat("Tortue", "une tortue"),
+    ],
+    min: 1, max: 12,
+  },
+  {
+    titre: "Cornets de glace vendus", entete: "Cornets vendus", unite: "cornets", quel: "Quel parfum",
+    intro: (p) => `À la fête du village, ${p.nom} tient le stand de glaces. ${Il(p)} compte les cornets vendus.`,
+    combien: (c) => `combien de cornets ${c.gn} ont été vendus`,
+    tout: () => "combien de cornets ont été vendus",
+    cats: PARFUMS, min: 5, max: 40,
+  },
+  {
+    titre: "Plants du potager", entete: "Nombre de plants", unite: "plants", quel: "Quel légume",
+    intro: (p) => `Au potager de l’école, ${p.nom} compte les plants de chaque légume.`,
+    combien: (c) => `combien de plants ${c.gn} y a-t-il`,
+    tout: () => "combien de plants y a-t-il",
+    cats: LEGUMES, min: 3, max: 25,
+  },
+  {
+    titre: "Crêpes vendues", entete: "Crêpes vendues", unite: "crêpes", quel: "Quelle garniture",
+    intro: (p) => `À la kermesse, ${p.nom} tient le stand de crêpes.`,
+    combien: (c) => `combien de crêpes ${c.gn} ont été vendues`,
+    tout: () => "combien de crêpes ont été vendues",
+    cats: GARNITURES, min: 4, max: 35,
+  },
+  {
+    titre: "Jours de pluie", entete: "Jours de pluie", unite: "jours", quel: "Quel mois",
+    grandeur: { mot: "nombre de jours de pluie", fem: false },
+    intro: (p) => `${p.nom} note chaque jour s’il a plu. ${Il(p)} fait le compte de chaque mois.`,
+    combien: (c) => `combien de jours de pluie y a-t-il eu ${c.gn}`,
+    tout: () => "combien de jours de pluie y a-t-il eu",
+    cats: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin"].map((m) => cat(m, `en ${m.toLowerCase()}`)),
+    min: 2, max: 20,
+  },
+  {
+    titre: "Distance parcourue à vélo", entete: "Distance (km)", unite: "km", quel: "Quel jour",
+    grandeur: { mot: "distance", fem: true },
+    intro: (p) => `Pendant les vacances, ${p.nom} fait une randonnée à vélo. ${Il(p)} note la distance parcourue chaque jour.`,
+    combien: (c, p) => `combien de kilomètres ${p.nom} a-t-${il(p)} parcourus ${c.gn}`,
+    tout: (p) => `combien de kilomètres ${p.nom} a-t-${il(p)} parcourus`,
+    cats: jours(6), min: 8, max: 45,
+  },
+  {
+    titre: "Graines germées", entete: "Graines germées", unite: "graines", quel: "Quel jour",
+    intro: (p) => `En sciences, ${p.nom} a semé des haricots. ${Il(p)} compte les graines qui germent chaque jour.`,
+    combien: (c) => `combien de graines ont germé ${c.gn}`,
+    tout: () => "combien de graines ont germé",
+    cats: jours(5), min: 1, max: 15,
+  },
+  {
+    titre: "Genre de film préféré", entete: "Nombre d’élèves", unite: "élèves", quel: "Quel genre de film",
+    intro: (p) => `Au club cinéma, ${p.nom} demande à chacun son genre de film préféré.`,
+    combien: (c) => `combien d’élèves préfèrent ${c.gn}`,
+    tout: () => "combien d’élèves ont répondu",
+    cats: [
+      cat("Comédies", "les comédies"), cat("Aventure", "les films d’aventure"),
+      cat("Dessins animés", "les dessins animés"), cat("Documentaires", "les documentaires"),
+      cat("Science-fiction", "la science-fiction"),
+    ],
+    min: 2, max: 12,
+  },
+  {
+    titre: "Barquettes vendues", entete: "Barquettes vendues", unite: "barquettes", quel: "Quel fruit",
+    intro: (p) => `Au marché de Saint-Paul, à La Réunion, ${p.nom} compte les barquettes de fruits vendues.`,
+    combien: (c) => `combien de barquettes ${c.gn} ont été vendues`,
+    tout: () => "combien de barquettes ont été vendues",
+    cats: [
+      cat("Letchis", "de letchis"), cat("Mangues", "de mangues"), cat("Ananas", "d’ananas"),
+      cat("Goyaviers", "de goyaviers"), cat("Bananes", "de bananes"),
+    ],
+    min: 4, max: 30,
+  },
+  {
+    titre: "Objets fabriqués", entete: "Objets fabriqués", unite: "objets", quel: "Quel groupe",
+    intro: (p) => `À l’atelier de bricolage, ${p.nom} compte les objets fabriqués par chaque groupe.`,
+    combien: (c) => `combien d’objets ${c.gn} a-t-il fabriqués`,
+    tout: () => "combien d’objets ont été fabriqués",
+    cats: ["rouge", "bleu", "vert", "jaune", "orange"].map((x) => cat(`Groupe ${x}`, `le groupe ${x}`)),
+    min: 3, max: 20,
+  },
+];
+
+type Support = "tableau" | "barres" | "batons" | "camembert";
+const NOM_SUPPORT: Record<Support, string> = {
+  tableau: "le tableau",
+  barres: "le diagramme en barres",
+  batons: "le diagramme en bâtons",
+  camembert: "le diagramme circulaire",
+};
+type Serie = { ctx: CtxStat; p: Prenom; cats: Cat[]; v: number[]; support: Support };
+
+function tirerSerie(n: number, support: Support, ctx: CtxStat = pick(CTX_STAT)): Serie {
+  return { ctx, p: pick(PRENOMS), cats: tirerSans(ctx.cats, n), v: valeursDistinctes(n, ctx.min, ctx.max), support };
+}
+
+/** Le tableau ou le diagramme, avec EXACTEMENT les nombres de la série. */
+function figure(s: Serie, opts: { cache?: number; surligne?: number } = {}): Q["canvas"] {
+  if (s.support === "tableau")
+    return tableauDonneesCanvas({
+      title: s.ctx.titre,
+      headers: [s.ctx.entete],
+      rows: s.cats.map((c, i) => ({ label: c.label, values: [i === opts.cache ? "?" : s.v[i]] })),
+      ...(opts.surligne !== undefined ? { highlight: { cell: { row: opts.surligne, col: 0 } } } : {}),
+      caption: `Relevé ${de(s.p.nom)}.`,
+    });
+  return statGraphCanvas({
+    graphType: s.support,
+    title: s.ctx.titre,
+    data: s.cats.map((c, i) => ({ label: c.label, value: s.v[i] })),
+    display: { showLabels: true, showValues: true, ...(opts.surligne !== undefined ? { highlightIndex: opts.surligne } : {}) },
+  });
+}
+
+const somme = (v: number[]) => v.reduce((a, b) => a + b, 0);
+const supp = (s: Serie) => NOM_SUPPORT[s.support];
+/** L'unité en toutes lettres dans une question (« kilomètres » plutôt que « km »). */
+const motU = (s: { ctx: { unite: string } }) => (s.ctx.unite === "km" ? "kilomètres" : s.ctx.unite);
+/** « le plus grand effectif », « la plus petite distance », « le plus grand nombre de jours de pluie ». */
+function pg(s: Serie, max: boolean): string {
+  const g = s.ctx.grandeur ?? { mot: "effectif", fem: false };
+  return `${g.fem ? "la" : "le"} plus ${max ? "grand" : "petit"}${g.fem ? "e" : ""} ${g.mot}`;
+}
+/** Le début de l'énoncé : la situation, parfois réduite au titre de la figure. */
+function amorce(s: Serie): string {
+  return pick([
+    () => s.ctx.intro(s.p),
+    () => s.ctx.intro(s.p),
+    () => `${maj(supp(s))} ${de(s.p.nom)} s’intitule « ${s.ctx.titre} ».`,
+  ])();
+}
+
+/** K1 — lire une valeur. */
+function qLire(s: Serie, i = entre(0, s.cats.length - 1)): Q {
+  const c = s.cats[i];
+  const q = s.ctx.combien(c, s.p);
+  const text = pick([
+    () => `${amorce(s)} ${maj(q)} ?`,
+    () => `${amorce(s)} D’après ${supp(s)}, ${q} ?`,
+    () => `${amorce(s)} Lis ${supp(s)}. ${maj(q)} ?`,
+    () => `${amorce(s)} Regarde ${supp(s)}. ${maj(q)} ?`,
+  ])();
+  // « Combien de merles… ? » : la réponse se compte en merles, pas en « oiseaux ».
+  const u = s.ctx.unite === "oiseaux" && !/oiseaux/.test(text) ? c.gn : s.ctx.unite;
+  return {
+    text,
+    format: "short",
+    expected: [`${s.v[i]} ${u}`],
+    comparator: "number_equal",
+    explanation: se(
+      "lire une donnée, c’est repérer la bonne catégorie et le nombre qui lui correspond.",
+      `on cherche « ${c.label} » dans ${supp(s)}, puis on lit le nombre associé.`,
+      `En face de « ${c.label} », on lit ${s.v[i]}.`,
+      `la réponse est ${s.v[i]} ${u}.`,
+    ),
+    canvas: figure(s, { surligne: s.support === "tableau" && Math.random() < 0.5 ? i : undefined }),
+  };
+}
+
+/** K3 — l'effectif total. */
+function qTotal(s: Serie): Q {
+  const t = somme(s.v);
+  const text = pick([
+    () => `${amorce(s)} ${maj(s.ctx.tout(s.p))} en tout ?`,
+    () => `${amorce(s)} D’après ${supp(s)}, ${s.ctx.tout(s.p)} au total ?`,
+    () => `${amorce(s)} Additionne toutes les valeurs. Combien ${deMot(motU(s))} y a-t-il en tout ?`,
+    () => `${amorce(s)} Quel est le nombre total ${deMot(motU(s))} ?`,
+  ])();
+  return {
+    text,
+    format: "short",
+    expected: [`${t} ${s.ctx.unite}`],
+    comparator: "number_equal",
+    explanation: se(
+      "l’effectif total est la somme de tous les effectifs.",
+      "on lit chaque valeur, puis on les additionne toutes.",
+      `${s.v.join(" + ")} = ${t}.`,
+      `il y a ${t} ${s.ctx.unite} en tout.`,
+    ),
+    canvas: figure(s),
+  };
+}
+
+/** K4 — l'écart entre deux catégories (la première est la plus grande). */
+function qDiff(s: Serie): Q {
+  let [i, j] = shuffle(s.cats.map((_, k) => k)).slice(0, 2);
+  if (s.v[i] < s.v[j]) [i, j] = [j, i];
+  const A = s.cats[i].label;
+  const B = s.cats[j].label;
+  const d = s.v[i] - s.v[j];
+  const u = s.ctx.unite;
+  const text = pick([
+    () => `${amorce(s)} Combien ${deMot(motU(s))} de plus pour ${A} que pour ${B} ?`,
+    () => `${amorce(s)} ${A} a combien ${deMot(motU(s))} de plus ${que(B)} ?`,
+    () => `${amorce(s)} Combien ${deMot(motU(s))} séparent ${A} et ${B} ?`,
+    () => `${amorce(s)} Calcule l’écart, en nombre ${deMot(motU(s))}, entre ${A} et ${B}.`,
+  ])();
+  return {
+    text,
+    format: "short",
+    expected: [`${d} ${u}`],
+    comparator: "number_equal",
+    explanation: se(
+      "comparer deux effectifs, c’est calculer leur différence.",
+      "on lit les deux valeurs, puis on soustrait la plus petite de la plus grande.",
+      `« ${A} » : ${s.v[i]} ; « ${B} » : ${s.v[j]}. ${s.v[i]} − ${s.v[j]} = ${d}.`,
+      `l’écart est de ${d} ${u}.`,
+    ),
+    canvas: figure(s),
+  };
+}
+
+/** K5 — deux catégories réunies. */
+function qSomme2(s: Serie): Q {
+  const [i, j] = shuffle(s.cats.map((_, k) => k)).slice(0, 2).sort((x, y) => x - y);
+  const A = s.cats[i].label;
+  const B = s.cats[j].label;
+  const t = s.v[i] + s.v[j];
+  const u = s.ctx.unite;
+  const text = pick([
+    () => `${amorce(s)} Combien ${deMot(motU(s))} pour ${A} et ${B} réunis ?`,
+    () => `${amorce(s)} Additionne les ${motU(s)} ${de(A)} et ${de(B)}. Combien en trouves-tu ?`,
+    () => `${amorce(s)} Ensemble, combien ${deMot(motU(s))} comptent ${A} et ${B} ?`,
+  ])();
+  return {
+    text,
+    format: "short",
+    expected: [`${t} ${u}`],
+    comparator: "number_equal",
+    explanation: se(
+      "réunir deux catégories, c’est additionner leurs effectifs.",
+      "on lit les deux valeurs, puis on les additionne.",
+      `${s.v[i]} + ${s.v[j]} = ${t}.`,
+      `cela fait ${t} ${u}.`,
+    ),
+    canvas: figure(s),
+  };
+}
+
+/** Quatre propositions au plus, la bonne réponse toujours dedans. */
+function choixLabels(s: Serie, bon: number): string[] {
+  const autres = shuffle(s.cats.map((_, k) => k).filter((k) => k !== bon)).slice(0, 3);
+  return shuffle([bon, ...autres].map((k) => s.cats[k].label));
+}
+
+/** K2 — la catégorie au plus grand (ou au plus petit) effectif. */
+function qExtreme(s: Serie, max = Math.random() < 0.6): Q {
+  const k = s.v.indexOf(max ? Math.max(...s.v) : Math.min(...s.v));
+  const qu = s.ctx.quel;
+  const text = max
+    ? pick([
+        () => `${amorce(s)} ${qu} a ${pg(s, true)} ?`,
+        () => `${amorce(s)} D’après ${supp(s)}, ${qu.toLowerCase()} arrive en tête ?`,
+        () => `${amorce(s)} Compare les valeurs. ${qu} a ${pg(s, true)} ?`,
+      ])()
+    : pick([
+        () => `${amorce(s)} ${qu} a ${pg(s, false)} ?`,
+        () => `${amorce(s)} D’après ${supp(s)}, ${qu.toLowerCase()} arrive en dernier ?`,
+        () => `${amorce(s)} Compare les valeurs. ${qu} a ${pg(s, false)} ?`,
+      ])();
+  return {
+    text,
+    format: "qcm",
+    choices: choixLabels(s, k),
+    expected: [s.cats[k].label],
+    comparator: "mcq_exact",
+    explanation: se(
+      "comparer des effectifs, c’est chercher la plus grande ou la plus petite valeur.",
+      "on lit toutes les valeurs, puis on les compare.",
+      `Les valeurs sont ${s.cats.map((c, i) => `${c.label} ${s.v[i]}`).join(", ")}. La ${max ? "plus grande" : "plus petite"} est ${s.v[k]}.`,
+      `la réponse est « ${s.cats[k].label} ».`,
+    ),
+    canvas: figure(s),
+  };
+}
+
+/** K11 — l'écart entre le plus grand et le plus petit effectif. */
+function qEcartExtremes(s: Serie): Q {
+  const M = Math.max(...s.v);
+  const m = Math.min(...s.v);
+  const text = pick([
+    () => `${amorce(s)} Combien ${deMot(motU(s))} séparent ${pg(s, true)} et ${pg(s, false)} ?`,
+    () => `${amorce(s)} Calcule l’écart, en nombre ${deMot(motU(s))}, entre ${pg(s, true)} et ${pg(s, false)}.`,
+  ])();
+  return {
+    text,
+    format: "short",
+    expected: [`${M - m} ${s.ctx.unite}`],
+    comparator: "number_equal",
+    explanation: se(
+      "l’écart entre deux effectifs est leur différence.",
+      "on repère la plus grande et la plus petite valeur, puis on soustrait.",
+      `Le plus grand effectif est ${M}, le plus petit ${m} : ${M} − ${m} = ${M - m}.`,
+      `l’écart est de ${M - m} ${s.ctx.unite}.`,
+    ),
+    canvas: figure(s),
+  };
+}
+
+/** K10 — retrouver la catégorie qui a un effectif donné. */
+function qInverse(s: Serie, k = entre(0, s.cats.length - 1)): Q {
+  const u = s.ctx.unite;
+  const text = pick([
+    () => `${amorce(s)} ${s.ctx.quel} correspond à ${s.v[k]} ${u} ?`,
+    () => `${amorce(s)} Dans ${supp(s)}, quelle catégorie a la valeur ${s.v[k]} ?`,
+    () => `${amorce(s)} On lit ${s.v[k]} ${u}. ${s.ctx.quel} est-ce ?`,
+  ])();
+  return {
+    text,
+    format: "qcm",
+    choices: choixLabels(s, k),
+    expected: [s.cats[k].label],
+    comparator: "mcq_exact",
+    explanation: se(
+      "on peut lire un tableau ou un diagramme dans les deux sens.",
+      `on cherche la valeur ${s.v[k]}, puis on lit la catégorie qui lui correspond.`,
+      `La valeur ${s.v[k]} est celle de « ${s.cats[k].label} ».`,
+      `la réponse est « ${s.cats[k].label} ».`,
+    ),
+    canvas: figure(s),
+  };
+}
+
+/** K6 — une valeur cachée, retrouvée grâce au total (tableau seulement). */
+function qManquant(s: Serie): Q {
+  const k = entre(0, s.cats.length - 1);
+  const t = somme(s.v);
+  const connus = s.v.filter((_, i) => i !== k);
+  const u = s.ctx.unite;
+  const A = s.cats[k].label;
+  const text = pick([
+    () => `${amorce(s)} Il y a ${t} ${u} en tout. Une case est effacée. Quel nombre faut-il écrire pour ${A} ?`,
+    () => `${amorce(s)} Le total est de ${t} ${u}. Retrouve le nombre effacé, celui ${de(A)}.`,
+    () => `${amorce(s)} Le total vaut ${t} ${u}, mais la case ${A} est effacée. Que vaut-elle ?`,
+  ])();
+  return {
+    text,
+    format: "short",
+    expected: [`${s.v[k]} ${u}`],
+    comparator: "number_equal",
+    explanation: se(
+      "la somme de tous les effectifs est égale à l’effectif total.",
+      "on additionne les effectifs connus, puis on les retire du total.",
+      `${connus.join(" + ")} = ${somme(connus)}, et ${t} − ${somme(connus)} = ${s.v[k]}.`,
+      `il faut écrire ${s.v[k]} pour « ${A} ».`,
+    ),
+    canvas: figure({ ...s, support: "tableau" }, { cache: k }),
+  };
+}
+
+/** K9 — quelle phrase est vraie ? Les phrases suivent des modèles fixes, que le correcteur sait relire. */
+function qVrai(s: Serie, modeles: ("plusQue" | "max" | "min" | "total" | "ecart" | "moitie" | "double")[]): Q {
+  const n = s.cats.length;
+  // Sans guillemets (07/10) : les élèves lisent « Juin a 9 jours de plus que Mai ».
+  const L = (k: number) => s.cats[k].label;
+  const u = s.ctx.unite;
+  const M = deMot(s.ctx.unite === "jours" ? "jours de pluie" : motU(s));
+  const t = somme(s.v);
+  const iMax = s.v.indexOf(Math.max(...s.v));
+  const iMin = s.v.indexOf(Math.min(...s.v));
+  const vraies: string[] = [];
+  const fausses: string[] = [];
+  const paires: [number, number][] = [];
+  for (let a = 0; a < n; a++) for (let b = 0; b < n; b++) if (a !== b) paires.push([a, b]);
+  for (const m of modeles) {
+    for (const [a, b] of paires) {
+      if (m === "plusQue") (s.v[a] > s.v[b] ? vraies : fausses).push(`${L(a)} a plus ${M} ${que(L(b))}.`);
+      if (m === "ecart") {
+        const d = s.v[a] - s.v[b];
+        if (d > 0) {
+          vraies.push(`${L(a)} a ${d} ${u} de plus ${que(L(b))}.`);
+          fausses.push(`${L(a)} a ${d + pick([1, 2, 3])} ${u} de plus ${que(L(b))}.`);
+          fausses.push(`${L(b)} a ${d} ${u} de plus ${que(L(a))}.`);
+        }
+      }
+      if (m === "double") (s.v[a] === 2 * s.v[b] ? vraies : fausses).push(`${L(a)} a deux fois plus ${M} ${que(L(b))}.`);
+    }
+    for (let a = 0; a < n; a++) {
+      if (m === "max") (a === iMax ? vraies : fausses).push(`${L(a)} a le plus ${M}.`);
+      if (m === "min") (a === iMin ? vraies : fausses).push(`${L(a)} a le moins ${M}.`);
+      if (m === "moitie") (2 * s.v[a] > t ? vraies : fausses).push(`${L(a)} fait plus de la moitié du total.`);
+    }
+    if (m === "total") {
+      const uu = u === "jours" ? "jours de pluie" : u;
+      vraies.push(`Il y a ${t} ${uu} en tout.`);
+      fausses.push(`Il y a ${t + pick([-2, -1, 1, 2, 10])} ${uu} en tout.`);
+    }
+  }
+  // La phrase vraie vient en priorité du modèle le plus exigeant (le premier).
+  const prem = vraies.filter((x) => (modeles[0] === "plusQue" ? / a plus .+ que / : modeles[0] === "max" ? / a le plus / : modeles[0] === "min" ? / a le moins / : modeles[0] === "total" ? /en tout/ : modeles[0] === "ecart" ? /de plus que/ : modeles[0] === "moitie" ? /moitié/ : /double/).test(x));
+  const juste = pick(prem.length ? prem : vraies);
+  const pieges = shuffle([...new Set(fausses)]).slice(0, 3);
+  const text = pick([
+    () => `${amorce(s)} Lis ${supp(s)}. Quelle phrase est vraie ?`,
+    () => `${amorce(s)} Quelle affirmation est juste ?`,
+    () => `${amorce(s)} ${s.p.nom} écrit quatre phrases. Une seule dit vrai : laquelle ?`,
+    () => `${amorce(s)} Laquelle de ces conclusions est correcte ?`,
+  ])();
+  return {
+    text,
+    format: "qcm",
+    choices: shuffle([juste, ...pieges]),
+    expected: [juste],
+    comparator: "mcq_exact",
+    explanation: se(
+      "interpréter des données, c’est vérifier chaque phrase avec les nombres.",
+      "on lit toutes les valeurs, puis on teste chaque phrase.",
+      `Les valeurs sont ${s.cats.map((c, i) => `${c.label} ${s.v[i]}`).join(", ")} (total ${t}). Seule la phrase « ${juste} » est vérifiée.`,
+      `on garde « ${juste} ».`,
+    ),
+    canvas: figure(s),
+  };
+}
+
+/** K12 — la catégorie qui fait la moitié (ou le quart) du total, sur un diagramme circulaire. */
+function qPart(quart = Math.random() < 0.4): Q {
+  const ctx = pick(CTX_STAT);
+  const n = quart ? 4 : pick([3, 4]);
+  const cats = tirerSans(ctx.cats, n);
+  // Les autres font 1 (moitié) ou 3 (quart) fois la part cherchée.
+  let v: number[];
+  let k: number;
+  for (;;) {
+    // Au moins 6 : il faut pouvoir partager le reste en valeurs distinctes.
+    const part = entre(Math.max(6, ctx.min), Math.max(8, Math.min(ctx.max, quart ? 15 : 20)));
+    const reste = quart ? 3 * part : part;
+    const autres = n - 1;
+    const tir = valeursDistinctes(autres, 1, reste - 1);
+    const s0 = somme(tir.slice(0, autres - 1));
+    const dernier = reste - s0;
+    const vals = [...tir.slice(0, autres - 1), dernier];
+    if (dernier < 1 || new Set([...vals, part]).size !== n) continue;
+    k = entre(0, n - 1);
+    v = [...vals];
+    v.splice(k, 0, part);
+    break;
+  }
+  const s: Serie = { ctx, p: pick(PRENOMS), cats, v: v!, support: "camembert" };
+  const mot = quart ? "le quart" : "la moitié";
+  const text = pick([
+    () => `${amorce(s)} Quelle catégorie représente ${mot} du total ?`,
+    () => `${amorce(s)} Un secteur occupe exactement ${mot} du disque. Lequel ?`,
+    () => `${amorce(s)} ${s.ctx.quel} fait ${mot} du total ?`,
+  ])();
+  const t = somme(s.v);
+  return {
+    text,
+    format: "qcm",
+    choices: choixLabels(s, k!),
+    expected: [cats[k!].label],
+    comparator: "mcq_exact",
+    explanation: se(
+      `${mot} du total s’obtient en divisant le total par ${quart ? 4 : 2}.`,
+      "on calcule le total, on le divise, puis on cherche le secteur qui a cette valeur.",
+      `Total : ${s.v.join(" + ")} = ${t}. ${t} ÷ ${quart ? 4 : 2} = ${t / (quart ? 4 : 2)} : c’est « ${cats[k!].label} ».`,
+      `« ${cats[k!].label} » représente ${mot} du total.`,
+    ),
+    canvas: figure(s),
+  };
+}
+
+/* ───── Tableaux à double entrée ───── */
+
+type CtxDouble = {
+  titre: string;
+  intro: (p: Prenom) => string;
+  lignes: Cat[];
+  cols: Cat[];
+  /** [question sans « ? », unité de la réponse] */
+  cellule: (r: Cat, k: Cat, p: Prenom) => [string, string];
+  totalLigne: (r: Cat, p: Prenom) => [string, string];
+  totalCol: (k: Cat, p: Prenom) => [string, string];
+  min: number;
+  max: number;
+};
+const FILLES_GARCONS = [cat("Filles", "filles"), cat("Garçons", "garçons")];
+const WEEKEND = [cat("Samedi", "le samedi"), cat("Dimanche", "le dimanche"), cat("Mercredi", "le mercredi")];
+const CTX_DOUBLE: CtxDouble[] = [
+  {
+    titre: "Sport préféré des élèves du collège",
+    intro: (p) => `${p.nom} a fait une enquête sur le sport préféré des élèves du collège.`,
+    lignes: SPORTS, cols: FILLES_GARCONS,
+    cellule: (r, k) => [`combien de ${k.gn} ont choisi ${r.gn}`, k.gn],
+    totalLigne: (r) => [`combien d’élèves ont choisi ${r.gn} en tout`, "élèves"],
+    totalCol: (k) => [`combien de ${k.gn} ont répondu en tout`, k.gn],
+    min: 1, max: 15,
+  },
+  {
+    titre: "Instrument choisi",
+    intro: (p) => `À l’école de musique, ${p.nom} compte les inscriptions par instrument.`,
+    lignes: INSTRUMENTS, cols: FILLES_GARCONS,
+    cellule: (r, k) => [`combien de ${k.gn} ont choisi ${r.gn}`, k.gn],
+    totalLigne: (r) => [`combien d’élèves ont choisi ${r.gn} en tout`, "élèves"],
+    totalCol: (k) => [`combien de ${k.gn} sont inscrits en tout`, k.gn],
+    min: 1, max: 12,
+  },
+  {
+    titre: "Cagettes vendues au marché",
+    intro: (p) => `${p.nom} aide ses parents au marché. ${Il(p)} note les cagettes vendues chaque jour de marché.`,
+    lignes: FRUITS, cols: WEEKEND,
+    cellule: (r, k) => [`combien de cagettes ${r.gn} ont été vendues ${k.gn}`, "cagettes"],
+    totalLigne: (r) => [`combien de cagettes ${r.gn} ont été vendues en tout`, "cagettes"],
+    totalCol: (k) => [`combien de cagettes ont été vendues ${k.gn} en tout`, "cagettes"],
+    min: 3, max: 25,
+  },
+  {
+    titre: "Crêpes vendues",
+    intro: (p) => `${p.nom} tient le stand de crêpes de la kermesse pendant plusieurs jours.`,
+    lignes: GARNITURES, cols: WEEKEND,
+    cellule: (r, k) => [`combien de crêpes ${r.gn} ont été vendues ${k.gn}`, "crêpes"],
+    totalLigne: (r) => [`combien de crêpes ${r.gn} ont été vendues en tout`, "crêpes"],
+    totalCol: (k) => [`combien de crêpes ont été vendues ${k.gn} en tout`, "crêpes"],
+    min: 3, max: 30,
+  },
+  {
+    titre: "Cornets vendus cet été",
+    intro: (p) => `${p.nom} aide un glacier pendant l’été. ${Il(p)} recopie les ventes de chaque mois.`,
+    lignes: PARFUMS, cols: ["Juin", "Juillet", "Août"].map((m) => cat(m, `en ${m.toLowerCase()}`)),
+    cellule: (r, k) => [`combien de cornets ${r.gn} ont été vendus ${k.gn}`, "cornets"],
+    totalLigne: (r) => [`combien de cornets ${r.gn} ont été vendus en tout`, "cornets"],
+    totalCol: (k) => [`combien de cornets ont été vendus ${k.gn} en tout`, "cornets"],
+    min: 10, max: 60,
+  },
+  {
+    titre: "Trajet jusqu’au collège",
+    intro: (p) => `${p.nom} interroge trois classes sur leur trajet jusqu’au collège.`,
+    lignes: TRANSPORTS, cols: ["bleue", "verte", "jaune"].map((x) => cat(`Classe ${x}`, `de la classe ${x}`)),
+    cellule: (r, k) => [`combien d’élèves ${k.gn} viennent ${r.gn}`, "élèves"],
+    totalLigne: (r) => [`combien d’élèves viennent ${r.gn} en tout`, "élèves"],
+    totalCol: (k) => [`combien d’élèves ${k.gn} ont répondu en tout`, "élèves"],
+    min: 1, max: 12,
+  },
+  {
+    titre: "Plants du potager",
+    intro: (p) => `Le potager de l’école a plusieurs carrés. ${p.nom} compte les plants de chacun.`,
+    lignes: LEGUMES, cols: ["nord", "sud", "est"].map((x) => cat(`Carré ${x}`, `dans le carré ${x}`)),
+    cellule: (r, k) => [`combien de plants ${r.gn} y a-t-il ${k.gn}`, "plants"],
+    totalLigne: (r) => [`combien de plants ${r.gn} y a-t-il en tout`, "plants"],
+    totalCol: (k) => [`combien de plants y a-t-il ${k.gn} en tout`, "plants"],
+    min: 2, max: 20,
+  },
+  {
+    titre: "Oiseaux observés",
+    intro: (p) => `${p.nom} observe les oiseaux de son jardin à deux moments de la journée.`,
+    lignes: OISEAUX, cols: [cat("Matin", "le matin"), cat("Soir", "le soir")],
+    cellule: (r, k, p) => [`combien de ${r.gn} ${p.nom} a-t-${il(p)} comptés ${k.gn}`, r.gn],
+    totalLigne: (r, p) => [`combien de ${r.gn} ${p.nom} a-t-${il(p)} comptés en tout`, r.gn],
+    totalCol: (k, p) => [`combien d’oiseaux ${p.nom} a-t-${il(p)} comptés ${k.gn} en tout`, "oiseaux"],
+    min: 1, max: 15,
+  },
+];
+
+type Double = { ctx: CtxDouble; p: Prenom; lignes: Cat[]; cols: Cat[]; v: number[][] };
+function tirerDouble(nl: number, nc: number): Double {
+  const ctx = pick(CTX_DOUBLE);
+  const cols = ctx.cols.slice(0, Math.min(nc, ctx.cols.length));
+  const lignes = tirerSans(ctx.lignes, nl);
+  return { ctx, p: pick(PRENOMS), lignes, cols, v: lignes.map(() => cols.map(() => entre(ctx.min, ctx.max))) };
+}
+function figureDouble(d: Double, surligne?: [number, number]): Q["canvas"] {
+  return tableauDonneesCanvas({
+    title: d.ctx.titre,
+    headers: d.cols.map((k) => k.label),
+    rows: d.lignes.map((r, i) => ({ label: r.label, values: d.v[i] })),
+    ...(surligne ? { highlight: { cell: { row: surligne[0], col: surligne[1] } } } : {}),
+    caption: "Tableau à double entrée.",
+  });
+}
+
+/** K7 — lire une case d'un tableau à double entrée. */
+function qCellule(d: Double, aide = false): Q {
+  const i = entre(0, d.lignes.length - 1);
+  const j = entre(0, d.cols.length - 1);
+  const r = d.lignes[i];
+  const k = d.cols[j];
+  const [q, u] = d.ctx.cellule(r, k, d.p);
+  const intro = d.ctx.intro(d.p);
+  const text = aide
+    ? pick([
+        () => `${intro} Cherche la ligne ${r.label} et la colonne ${k.label}. ${maj(q)} ?`,
+        () => `${intro} Lis la case au croisement de la ligne ${r.label} et de la colonne ${k.label}. ${maj(q)} ?`,
+      ])()
+    : pick([
+        () => `${intro} ${maj(q)} ?`,
+        () => `${intro} Lis le tableau. ${maj(q)} ?`,
+        () => `D’après le tableau ${de(d.p.nom)}, ${q} ?`,
+      ])();
+  return {
+    text,
+    format: "short",
+    expected: [`${d.v[i][j]} ${u}`],
+    comparator: "number_equal",
+    explanation: se(
+      "dans un tableau à double entrée, une donnée se lit au croisement d’une ligne et d’une colonne.",
+      `on suit la ligne « ${r.label} » jusqu’à la colonne « ${k.label} ».`,
+      `Au croisement, on lit ${d.v[i][j]}.`,
+      `la réponse est ${d.v[i][j]} ${u}.`,
+    ),
+    canvas: figureDouble(d, aide ? [i, j] : undefined),
+  };
+}
+
+/** K7 inverse — dans une colonne, quelle ligne porte ce nombre ? */
+function qCelluleInverse(d: Double): Q {
+  const j = entre(0, d.cols.length - 1);
+  // Valeurs distinctes dans la colonne : une seule ligne peut convenir.
+  const col = valeursDistinctes(d.lignes.length, d.ctx.min, d.ctx.max);
+  d.lignes.forEach((_, i) => (d.v[i][j] = col[i]));
+  const i = entre(0, d.lignes.length - 1);
+  const k = d.cols[j];
+  const N = d.v[i][j];
+  const text = pick([
+    () => `${d.ctx.intro(d.p)} Dans la colonne ${k.label}, quelle ligne contient le nombre ${N} ?`,
+    () => `${d.ctx.intro(d.p)} On lit ${N} dans la colonne ${k.label}. Sur quelle ligne ?`,
+  ])();
+  const autres = shuffle(d.lignes.map((_, x) => x).filter((x) => x !== i)).slice(0, 3);
+  return {
+    text,
+    format: "qcm",
+    choices: shuffle([i, ...autres].map((x) => d.lignes[x].label)),
+    expected: [d.lignes[i].label],
+    comparator: "mcq_exact",
+    explanation: se(
+      "un tableau à double entrée se lit aussi à l’envers : de la case vers la ligne.",
+      `on descend la colonne « ${k.label} » jusqu’au nombre ${N}.`,
+      `Le nombre ${N} est sur la ligne « ${d.lignes[i].label} ».`,
+      `la réponse est « ${d.lignes[i].label} ».`,
+    ),
+    canvas: figureDouble(d),
+  };
+}
+
+/** K8 — total d'une ligne ou d'une colonne. */
+function qTotalDouble(d: Double, sens: "ligne" | "colonne"): Q {
+  const intro = d.ctx.intro(d.p);
+  if (sens === "ligne") {
+    const i = entre(0, d.lignes.length - 1);
+    const r = d.lignes[i];
+    const [q, u] = d.ctx.totalLigne(r, d.p);
+    const t = somme(d.v[i]);
+    return {
+      text: pick([() => `${intro} ${maj(q)} ?`, () => `${intro} Additionne la ligne ${r.label}. ${maj(q)} ?`, () => `D’après le tableau ${de(d.p.nom)}, ${q} ?`])(),
+      format: "short",
+      expected: [`${t} ${u}`],
+      comparator: "number_equal",
+      explanation: se(
+        "le total d’une ligne est la somme de toutes ses cases.",
+        `on additionne les cases de la ligne « ${r.label} ».`,
+        `${d.v[i].join(" + ")} = ${t}.`,
+        `la réponse est ${t} ${u}.`,
+      ),
+      canvas: figureDouble(d),
+    };
+  }
+  const j = entre(0, d.cols.length - 1);
+  const k = d.cols[j];
+  const [q, u] = d.ctx.totalCol(k, d.p);
+  const col = d.v.map((l) => l[j]);
+  const t = somme(col);
+  return {
+    text: pick([() => `${intro} ${maj(q)} ?`, () => `${intro} Additionne la colonne ${k.label}. ${maj(q)} ?`, () => `D’après le tableau ${de(d.p.nom)}, ${q} ?`])(),
+    format: "short",
+    expected: [`${t} ${u}`],
+    comparator: "number_equal",
+    explanation: se(
+      "le total d’une colonne est la somme de toutes ses cases.",
+      `on additionne les cases de la colonne « ${k.label} ».`,
+      `${col.join(" + ")} = ${t}.`,
+      `la réponse est ${t} ${u}.`,
+    ),
+    canvas: figureDouble(d),
+  };
+}
+
+/* ───── Enquêtes : planifier, mesurer, construire le tableau ───── */
+
+/** Un sujet d'enquête, et les trois défauts de question que l'élève doit écarter. */
+type SujetEnquete = { quoi: string; bonne: string; theme: string };
+const SUJETS_ENQUETE: SujetEnquete[] = [
+  { quoi: "le sport préféré", bonne: "« Quel est ton sport préféré parmi : football, danse, judo, natation ? »", theme: "le sport" },
+  { quoi: "le temps d’écran", bonne: "« Combien d’heures passes-tu devant un écran le mercredi ? »", theme: "les écrans" },
+  { quoi: "le moyen de transport pour venir au collège", bonne: "« Comment viens-tu au collège : à pied, en bus, à vélo ou en voiture ? »", theme: "le trajet du matin" },
+  { quoi: "les lectures de vacances", bonne: "« Combien de livres as-tu lus pendant les vacances ? »", theme: "la lecture" },
+  { quoi: "l’heure du coucher", bonne: "« À quelle heure te couches-tu le dimanche soir ? »", theme: "le sommeil" },
+  { quoi: "le fruit préféré", bonne: "« Quel est ton fruit préféré parmi : pomme, banane, fraise, orange ? »", theme: "les fruits" },
+  { quoi: "le nombre de frères et sœurs", bonne: "« Combien as-tu de frères et sœurs ? »", theme: "la famille" },
+  { quoi: "l’animal préféré", bonne: "« Quel est ton animal préféré parmi : chat, chien, cheval, lapin ? »", theme: "les animaux" },
+  { quoi: "le petit-déjeuner", bonne: "« Combien de jours par semaine prends-tu un petit-déjeuner ? »", theme: "le petit-déjeuner" },
+  { quoi: "l’instrument de musique préféré", bonne: "« Quel instrument préfères-tu parmi : guitare, piano, batterie, flûte ? »", theme: "la musique" },
+  { quoi: "le temps de trajet jusqu’au collège", bonne: "« Combien de minutes dure ton trajet jusqu’au collège ? »", theme: "le trajet" },
+  { quoi: "la saison préférée", bonne: "« Quelle est ta saison préférée parmi : printemps, été, automne, hiver ? »", theme: "les saisons" },
+];
+/** Les trois pièges d'une question d'enquête (repérés aussi par le correcteur). */
+const deTheme = (t: string) => (t.startsWith("le ") ? `du ${t.slice(3)}` : t.startsWith("les ") ? `des ${t.slice(4)}` : `de ${t}`);
+const piegesQuestion = (s: SujetEnquete) => [
+  `« Que penses-tu ${deTheme(s.theme)} ? »`,
+  `« ${maj(s.theme)}, c’est vraiment important, non ? »`,
+  `« Aimes-tu un peu ${s.theme}, ou pas trop ? »`,
+];
+
+/** Population visée, et un groupe qui n'en représente qu'une partie. */
+type Population = { tous: string; sort: string; biais: string[]; autres: string[] };
+const POPULATIONS: Population[] = [
+  {
+    tous: "des élèves du collège",
+    sort: "des élèves tirés au sort dans toutes les classes",
+    biais: ["les élèves du club informatique", "les élèves présents au CDI à midi", "les élèves qui attendent le bus", "les élèves de l’association sportive", "les élèves qui mangent à la cantine"],
+    autres: ["les professeurs du collège", "seulement ses meilleurs amis", "les délégués de chaque classe seulement"],
+  },
+  {
+    tous: "des habitants de son quartier",
+    sort: "des habitants tirés au sort dans toutes les rues du quartier",
+    biais: ["les clients de la boulangerie à 7 heures", "les joueurs du club de foot", "les parents qui attendent devant l’école", "les personnes assises au parc"],
+    autres: ["seulement sa famille", "les élèves de sa classe", "les touristes de passage"],
+  },
+  {
+    tous: "des élèves de sa classe",
+    sort: "tous les élèves de la classe, un par un",
+    biais: ["les élèves assis au premier rang", "les filles seulement", "les garçons seulement", "les élèves du club théâtre"],
+    autres: ["les élèves d’une autre classe", "seulement ses meilleurs amis", "les professeurs de la classe"],
+  },
+];
+
+function qPlanifierQuestion(): Q {
+  const s = pick(SUJETS_ENQUETE);
+  const p = pick(PRENOMS);
+  const text = pick([
+    () => `${p.nom} prépare une enquête sur ${s.quoi} des élèves de sa classe. Quelle question doit-${il(p)} poser ?`,
+    () => `${p.nom} veut connaître ${s.quoi} de ses camarades. Quelle question permet de compter les réponses ?`,
+    () => `Pour une enquête sur ${s.quoi}, ${p.nom} hésite entre quatre questions. Laquelle est la meilleure ?`,
+  ])();
+  return {
+    text,
+    format: "qcm",
+    choices: shuffle([s.bonne, ...piegesQuestion(s)]),
+    expected: [s.bonne],
+    comparator: "mcq_exact",
+    explanation: se(
+      "une question d’enquête doit appeler une réponse précise, la même pour deux personnes qui pensent la même chose.",
+      "on écarte les questions vagues, celles qui soufflent la réponse et celles qui se répondent « un peu ».",
+      `${s.bonne} donne des réponses qu’on peut ranger et compter. « Que penses-tu… » donne autant de réponses que de personnes. « …, non ? » souffle la réponse. « Un peu, ou pas trop » ne se compte pas.`,
+      "on garde la question précise et neutre.",
+    ),
+  };
+}
+
+function qPlanifierQui(): Q {
+  const s = pick(SUJETS_ENQUETE);
+  const pop = pick(POPULATIONS);
+  const p = pick(PRENOMS);
+  const biais = pick(pop.biais);
+  const text = pick([
+    () => `${p.nom} veut connaître ${s.quoi} ${pop.tous}. Qui doit-${il(p)} interroger ?`,
+    () => `Enquête ${de(p.nom)} : ${s.quoi} ${pop.tous}. Quel groupe faut-il interroger ?`,
+    () => `${p.nom} prépare une enquête sur ${s.quoi} ${pop.tous}. Qui faut-il interroger pour ne fausser personne ?`,
+  ])();
+  return {
+    text,
+    format: "qcm",
+    choices: shuffle([pop.sort, biais, ...shuffle(pop.autres).slice(0, 2)]),
+    expected: [pop.sort],
+    comparator: "mcq_exact",
+    explanation: se(
+      "les personnes interrogées doivent représenter tout le groupe sur lequel on veut conclure.",
+      "on cherche le groupe où chacun avait une chance d’être choisi.",
+      `Interroger ${biais} laisse de côté tous les autres : le résultat serait faussé. Seul le choix « ${pop.sort} » donne une chance à chacun.`,
+      "on interroge un groupe qui ressemble à toute la population.",
+    ),
+  };
+}
+
+const VERDICT_FAUSSE = "le résultat sera faussé : ce groupe ne représente pas tout le monde";
+const VERDICT_BONNE = "l’enquête est bien construite : chacun avait une chance d’être interrogé";
+function qPlanifierJuger(): Q {
+  const s = pick(SUJETS_ENQUETE);
+  const pop = pick(POPULATIONS);
+  const p = pick(PRENOMS);
+  const bien = Math.random() < 0.4;
+  const groupe = bien ? pop.sort : pick(pop.biais);
+  const juste = bien ? VERDICT_BONNE : VERDICT_FAUSSE;
+  const text = pick([
+    () => `${p.nom} veut connaître ${s.quoi} ${pop.tous}. ${Il(p)} interroge ${groupe}. Que peut-on dire de son enquête ?`,
+    () => `Pour connaître ${s.quoi} ${pop.tous}, ${p.nom} interroge ${groupe}. Son enquête est-elle bien faite ?`,
+  ])();
+  return {
+    text,
+    format: "qcm",
+    choices: shuffle([VERDICT_FAUSSE, VERDICT_BONNE, "l’enquête est fiable dès qu’on interroge au moins 30 personnes", "l’enquête est fausse parce qu’elle ne contient aucun calcul"]),
+    expected: [juste],
+    comparator: "mcq_exact",
+    explanation: se(
+      "une enquête n’est fiable que si le groupe interrogé ressemble à toute la population étudiée.",
+      "on se demande qui n’avait aucune chance d’être interrogé.",
+      bien
+        ? `Avec « ${groupe} », personne n’est mis de côté. Le nombre de personnes ou la présence d’un calcul ne changent rien à cela.`
+        : `Avec « ${groupe} », beaucoup de personnes n’avaient aucune chance d’être interrogées. Interroger plus de monde dans ce même groupe ne corrigerait rien, et aucun calcul ne rattrape un mauvais choix.`,
+      bien ? "l’enquête est bien construite." : "le résultat sera faussé.",
+    ),
+  };
+}
+
+/** Des mesures à consigner : la grandeur, l'objet mesuré, l'unité de la colonne. */
+const MESURES = [
+  { quoi: (n: number) => `la taille de ${n} camarades`, col: "Taille (cm)" },
+  { quoi: (n: number) => `la masse de ${n} pommes`, col: "Masse (g)" },
+  { quoi: (n: number) => `la longueur de ${n} feuilles d’arbre`, col: "Longueur (cm)" },
+  { quoi: (n: number) => `la durée de ${n} trajets en bus`, col: "Durée (min)" },
+  { quoi: (n: number) => `la température de l’eau pendant ${n} jours`, col: "Température (°C)" },
+  { quoi: (n: number) => `la hauteur de ${n} plants de haricot`, col: "Hauteur (cm)" },
+  { quoi: (n: number) => `le temps de course de ${n} coureurs`, col: "Temps (s)" },
+  { quoi: (n: number) => `la masse de ${n} cailloux ramassés`, col: "Masse (g)" },
+  { quoi: (n: number) => `la longueur de ${n} sauts en longueur`, col: "Longueur (cm)" },
+  { quoi: (n: number) => `le nombre de pas de ${n} élèves pour traverser la cour`, col: "Nombre de pas" },
+];
+function qLignesMesure(): Q {
+  const m = pick(MESURES);
+  const n = entre(5, 24);
+  const p = pick(PRENOMS);
+  const text = pick([
+    () => `${p.nom} doit relever ${m.quoi(n)} dans un tableau. Combien de lignes de données faut-il, sans compter l’en-tête ?`,
+    () => `${p.nom} prépare un tableau pour noter ${m.quoi(n)}. Une ligne par mesure. Combien de lignes de données en tout ?`,
+    () => `Pour consigner ${m.quoi(n)}, ${p.nom} trace un tableau. L’en-tête est « ${m.col} ». Combien de lignes de mesures faut-il prévoir ?`,
+  ])();
+  return {
+    text,
+    format: "short",
+    expected: [`${n} lignes`],
+    comparator: "number_equal",
+    explanation: se(
+      "un tableau de mesures a une ligne par objet mesuré, plus une ligne d’en-tête qui nomme les colonnes.",
+      "on compte les mesures à relever.",
+      `Il y a ${n} mesures, donc ${n} lignes de données. L’en-tête, lui, annonce « ${m.col} » : l’unité s’écrit là, une seule fois.`,
+      `il faut ${n} lignes.`,
+    ),
+  };
+}
+
+/** Conversions d'une mesure notée dans la mauvaise unité. [unité notée, unité de la colonne, facteur, mot de la colonne] */
+const CONVERSIONS = [
+  { de: "kg", vers: "g", f: 1000, grandeur: "Masse", la: "la masse", objets: ["pastèques", "sacs de farine", "melons", "cartables"] },
+  { de: "m", vers: "cm", f: 100, grandeur: "Taille", la: "la taille", objets: ["camarades", "plants de tournesol", "frères et sœurs"] },
+  { de: "cm", vers: "mm", f: 10, grandeur: "Longueur", la: "la longueur", objets: ["crayons", "vis", "insectes", "feuilles"] },
+  { de: "min", vers: "s", f: 60, grandeur: "Temps", la: "le temps", objets: ["courses", "chansons", "épreuves de natation"] },
+  { de: "h", vers: "min", f: 60, grandeur: "Durée", la: "la durée", objets: ["films", "randonnées", "trajets en train"] },
+  { de: "L", vers: "cL", f: 100, grandeur: "Volume", la: "le volume", objets: ["bouteilles", "arrosoirs", "carafes"] },
+];
+const virgule = (x: number) => String(Math.round(x * 100) / 100).replace(".", ",");
+const milliers = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+/** Une valeur notée dans l'unité « de », plausible, qui donne un entier dans l'unité « vers ». */
+function valeurConvertible(c: (typeof CONVERSIONS)[number]): number {
+  if (c.de === "kg") return pick([1.2, 1.5, 2, 2.5, 3.4, 4.25, 0.8, 0.75, 6.5, 1.05]);
+  if (c.de === "m") return pick([1.35, 1.42, 1.5, 1.28, 1.61, 0.95, 1.8]);
+  if (c.de === "cm") return pick([12.5, 8.4, 15, 3.7, 17.2, 2.5]);
+  if (c.de === "min") return pick([2, 3, 1.5, 4, 2.5, 5]);
+  if (c.de === "h") return pick([1.5, 2, 1.25, 2.5, 3, 0.75]);
+  return pick([1.5, 2, 0.75, 1.25, 5, 10]);
+}
+function qConvertirMesure(): Q {
+  const c = pick(CONVERSIONS);
+  const p = pick(PRENOMS);
+  const x = valeurConvertible(c);
+  const r = Math.round(x * c.f);
+  const obj = pick(c.objets);
+  const col = `${c.grandeur} (${c.vers})`;
+  const text = pick([
+    () => `${p.nom} relève ${c.la} de plusieurs ${obj}. La colonne s’intitule « ${col} ». Une mesure a été notée ${virgule(x)} ${c.de}. Quel nombre faut-il écrire dans la colonne ?`,
+    () => `Dans le tableau ${de(p.nom)}, la colonne « ${col} » contient une erreur : ${virgule(x)} ${c.de}. Convertis cette mesure pour la colonne.`,
+    () => `${p.nom} mesure des ${obj}. Son tableau est en ${c.vers}, mais une mesure est notée ${virgule(x)} ${c.de}. Combien cela fait-il en ${c.vers} ?`,
+  ])();
+  return {
+    text,
+    format: "short",
+    expected: [`${milliers(r)} ${c.vers}`, `${r} ${c.vers}`, String(r)],
+    comparator: "number_equal",
+    explanation: se(
+      "toutes les mesures d’une colonne s’écrivent dans la même unité, celle de l’en-tête.",
+      `1 ${c.de} = ${c.f} ${c.vers} : on multiplie par ${c.f}.`,
+      `${virgule(x)} × ${c.f} = ${milliers(r)}.`,
+      `on écrit ${milliers(r)} ${c.vers}.`,
+    ),
+  };
+}
+function qComparerMesures(): Q {
+  const c = pick(CONVERSIONS.filter((k) => k.de !== "cm"));
+  const p = pick(PRENOMS);
+  // Une mesure dans la grande unité, trois dans la petite, toutes différentes une fois converties.
+  let vals: number[] = [];
+  let x = 0;
+  for (;;) {
+    x = valeurConvertible(c);
+    const g = Math.round(x * c.f);
+    vals = [g, ...valeursDistinctes(3, Math.max(1, Math.round(g * 0.4)), Math.round(g * 1.6))];
+    if (new Set(vals).size === 4) break;
+  }
+  const max = Math.random() < 0.6;
+  const cible = max ? Math.max(...vals) : Math.min(...vals);
+  const ecrit = (v: number, k: number) => (k === 0 ? `${virgule(x)} ${c.de}` : `${milliers(v)} ${c.vers}`);
+  const choix = vals.map(ecrit);
+  const juste = choix[vals.indexOf(cible)];
+  const obj = pick(c.objets);
+  const mot = max ? "la plus grande" : "la plus petite";
+  const text = pick([
+    () => `${p.nom} a relevé ${c.la} de quatre ${obj}, sans faire attention aux unités. Quelle mesure est ${mot} ?`,
+    () => `Dans le tableau ${de(p.nom)}, les unités sont mélangées. Laquelle de ces mesures est ${mot} ?`,
+  ])();
+  return {
+    text,
+    format: "qcm",
+    choices: shuffle(choix),
+    expected: [juste],
+    comparator: "mcq_exact",
+    explanation: se(
+      "on ne compare deux mesures que dans la même unité.",
+      `on convertit tout en ${c.vers} : 1 ${c.de} = ${c.f} ${c.vers}.`,
+      `${virgule(x)} ${c.de} = ${milliers(vals[0])} ${c.vers}. On compare ${vals.map(milliers).join(", ")} : ${mot} est ${milliers(cible)} ${c.vers}.`,
+      `la réponse est ${juste}.`,
+    ),
+  };
+}
+
+/** Réponses brutes d'une enquête (mots simples, en minuscules). */
+const LISTES_BRUTES = [
+  { sujet: "leur sport préféré", mots: ["football", "danse", "judo", "tennis", "natation"] },
+  { sujet: "leur animal préféré", mots: ["chat", "chien", "lapin", "poisson", "cheval"] },
+  { sujet: "leur parfum de glace préféré", mots: ["vanille", "chocolat", "fraise", "citron", "pistache"] },
+  { sujet: "leur moyen de transport", mots: ["bus", "vélo", "marche", "voiture", "train"] },
+  { sujet: "leur instrument préféré", mots: ["guitare", "piano", "flûte", "violon", "batterie"] },
+  { sujet: "leur couleur préférée", mots: ["rouge", "bleu", "vert", "jaune", "violet"] },
+  { sujet: "leur saison préférée", mots: ["printemps", "été", "automne", "hiver"] },
+  { sujet: "leur fruit préféré", mots: ["pomme", "banane", "fraise", "orange", "kiwi"] },
+];
+function listeBrute(n: number, k: number) {
+  const L = pick(LISTES_BRUTES);
+  const mots = tirerSans(L.mots, Math.min(k, L.mots.length));
+  const rep = Array.from({ length: n }, () => pick(mots));
+  // Chaque réponse possible apparaît au moins une fois.
+  mots.forEach((m, i) => (rep[i] = m));
+  return { L, mots, rep: shuffle(rep) };
+}
+function qCompterBrut(): Q {
+  const n = entre(10, 16);
+  const { L, mots, rep } = listeBrute(n, entre(3, 4));
+  const p = pick(PRENOMS);
+  const m = pick(mots);
+  const eff = rep.filter((x) => x === m).length;
+  const text = pick([
+    () => `${p.nom} a demandé à ${n} élèves ${L.sujet}. Réponses : ${rep.join(", ")}. Quel est l’effectif de la réponse ${m} ?`,
+    () => `Voici les réponses brutes recueillies par ${p.nom} sur ${L.sujet} : ${rep.join(", ")}. Combien d’élèves ont répondu ${m} ?`,
+    () => `${p.nom} construit le tableau des effectifs. Réponses notées : ${rep.join(", ")}. Quel nombre écrire en face de ${m} ?`,
+  ])();
+  return {
+    text,
+    format: "short",
+    expected: [`${eff} élèves`],
+    comparator: "number_equal",
+    explanation: se(
+      "l’effectif d’une réponse est le nombre de fois où elle apparaît.",
+      "on parcourt la liste une seule fois, en barrant chaque réponse comptée.",
+      `« ${m} » apparaît ${eff} fois. Vérification : les effectifs de ${mots.join(", ")} font ${mots.map((x) => rep.filter((y) => y === x).length).join(" + ")} = ${n}.`,
+      `l’effectif de « ${m} » est ${eff}.`,
+    ),
+  };
+}
+function qLignesEffectifs(): Q {
+  const n = entre(10, 15);
+  const { L, mots, rep } = listeBrute(n, entre(3, 5));
+  const p = pick(PRENOMS);
+  const text = pick([
+    () => `${p.nom} a demandé à ${n} élèves ${L.sujet}. Réponses : ${rep.join(", ")}. Combien de lignes de données son tableau des effectifs doit-il avoir ?`,
+    () => `Réponses brutes de l’enquête ${de(p.nom)} : ${rep.join(", ")}. Une ligne par réponse possible : combien de lignes faut-il ?`,
+  ])();
+  return {
+    text,
+    format: "short",
+    expected: [`${mots.length} lignes`],
+    comparator: "number_equal",
+    explanation: se(
+      "un tableau d’effectifs a une ligne par réponse POSSIBLE, pas une ligne par élève.",
+      "on liste les réponses différentes de la liste.",
+      `Les réponses différentes sont : ${mots.join(", ")}. Cela fait ${mots.length} lignes, et non ${n}.`,
+      `il faut ${mots.length} lignes.`,
+    ),
+  };
+}
+function qControleSomme(): Q {
+  const k = entre(3, 4);
+  const L = pick(LISTES_BRUTES);
+  const mots = tirerSans(L.mots, Math.min(k, L.mots.length));
+  const eff = mots.map(() => entre(2, 9));
+  const s = somme(eff);
+  const ecart = entre(1, 3);
+  const manque = Math.random() < 0.6;
+  const N = manque ? s + ecart : s - ecart;
+  const p = pick(PRENOMS);
+  const tab = mots.map((m, i) => `${m} ${eff[i]}`).join(", ");
+  const text = manque
+    ? `${p.nom} a interrogé ${N} élèves sur ${L.sujet}. Son tableau donne : ${tab}. Combien de réponses manquent ?`
+    : `${p.nom} a interrogé ${N} élèves sur ${L.sujet}. Son tableau donne : ${tab}. Combien de réponses ont été comptées en trop ?`;
+  return {
+    text,
+    format: "short",
+    expected: [`${ecart} réponses`],
+    comparator: "number_equal",
+    explanation: se(
+      "la somme des effectifs doit redonner le nombre de personnes interrogées.",
+      "on additionne les effectifs, puis on compare au nombre d’élèves interrogés.",
+      `${eff.join(" + ")} = ${s}, au lieu de ${N}. ${manque ? `Il manque ${N} − ${s} = ${ecart}` : `Il y a ${s} − ${N} = ${ecart} réponses en trop`}.`,
+      `${ecart} réponses ${manque ? "manquent" : "sont en trop"}.`,
+    ),
+  };
 }
 
 export const donneesBank: TutorBankItemV4[] = [
@@ -68,50 +1235,12 @@ export const donneesBank: TutorBankItemV4[] = [
     }),
   },
 
-  {
-    kind: "template",
-    id: "6e_stat_stat_stat_donnee_lire_tableau_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_enquete",
-    microId: "stat_donnee_lire_tableau",
-    difficulty: 2,
-    theme: "reunion",
-    hint: "Repère la bonne ligne dans le tableau.",
-    tags: ["stat_donnee", "tableau", "reunion", "template", "canvas"],
-    generate: () => {
-      const fruits = [
-        { label: "Mangues", value: randomChoice([8, 10, 12, 15]) },
-        { label: "Ananas", value: randomChoice([6, 9, 11, 14]) },
-        { label: "Letchis", value: randomChoice([7, 13, 16, 18]) },
-      ];
-      const target = randomChoice(fruits);
-
-      return {
-        text: `Au marché, combien de ${target.label.toLowerCase()} ont été vendus ?`,
-        format: "short",
-        expected: [String(target.value)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : lire un tableau consiste à retrouver une information organisée.\n\n" +
-          "Méthode : on cherche la ligne qui correspond au fruit demandé.\n\n" +
-          `Observation : la ligne ${target.label} indique ${target.value}.\n\n` +
-          `Conclusion : ${target.value} ${target.label.toLowerCase()} ont été vendus.`,
-        canvas: tableauDonneesCanvas({
-          title: "Ventes au marché",
-          headers: ["Quantité vendue"],
-          rows: fruits.map((f) => ({
-            label: f.label,
-            values: [f.value],
-          })),
-          highlight: {
-            cell: { row: fruits.findIndex((f) => f.label === target.label), col: 0 },
-          },
-          caption: "Marché de Saint-Pierre.",
-        }),
-      };
-    },
-  },
+  gab(
+    "6e_stat_stat_stat_donnee_lire_tableau_tpl_1", "stat_enquete", "stat_donnee_lire_tableau", 2,
+    "Repère la bonne ligne dans le tableau.",
+    ["stat_donnee", "tableau", "lecture", "template", "canvas"],
+    () => qLire(tirerSerie(entre(4, 5), "tableau")),
+  ),
 
   {
     kind: "fixed",
@@ -122,10 +1251,16 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_lire_tableau",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment tu fais pour lire correctement une information dans un tableau.",
-    format: "open",
-    expected: ["ligne", "colonne", "valeur", "titre", "repérer"],
-    comparator: "contains_keyword",
+    text: "Pour lire correctement une information dans un tableau, que fais-tu ?",
+    format: "qcm",
+    choices: [
+      "je lis le titre, je repère la bonne ligne et la bonne colonne, puis je lis la case",
+      "je lis le plus grand nombre du tableau",
+      "je lis la première case en haut à gauche",
+      "j’additionne toutes les cases du tableau",
+    ],
+    expected: ["je lis le titre, je repère la bonne ligne et la bonne colonne, puis je lis la case"],
+    comparator: "mcq_exact",
     hint: "Parle de la ligne, de la colonne et de la valeur lue.",
     explanation:
       "Définition : un tableau organise des informations en lignes et en colonnes.\n\n" +
@@ -170,44 +1305,12 @@ export const donneesBank: TutorBankItemV4[] = [
     }),
   },
 
-  {
-    kind: "template",
-    id: "6e_stat_stat_stat_donnee_lire_graphique_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_donnee",
-    microId: "stat_donnee_lire_graphique",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Lis la valeur au-dessus du bâton demandé.",
-    tags: ["stat_donnee", "graphique", "template", "canvas"],
-    generate: () => {
-      const data = [
-        { label: "Lundi", value: randomChoice([5, 6, 7, 8]) },
-        { label: "Mardi", value: randomChoice([8, 9, 10, 11]) },
-        { label: "Mercredi", value: randomChoice([4, 5, 6, 7]) },
-      ];
-      const index = randomChoice([0, 1, 2]);
-      const target = data[index];
-
-      return {
-        text: `Combien de livres ont été empruntés ${target.label.toLowerCase()} ?`,
-        format: "short",
-        expected: [String(target.value)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : un graphique permet de représenter visuellement des données.\n\n" +
-          "Méthode : on repère la catégorie demandée, puis on lit la valeur associée.\n\n" +
-          `Observation : pour ${target.label}, la valeur indiquée est ${target.value}.\n\n` +
-          `Conclusion : ${target.value} livres ont été empruntés ${target.label.toLowerCase()}.`,
-        canvas: statGraphCanvas({
-          graphType: "barres",
-          data,
-          display: { showLabels: true, showValues: true, highlightIndex: index },
-        }),
-      };
-    },
-  },
+  gab(
+    "6e_stat_stat_stat_donnee_lire_graphique_tpl_1", "stat_donnee", "stat_donnee_lire_graphique", 2,
+    "Lis la valeur au-dessus de la barre demandée.",
+    ["stat_donnee", "graphique", "template", "canvas"],
+    () => qLire(tirerSerie(entre(4, 5), pick(["barres", "batons"] as const))),
+  ),
 
   {
     kind: "fixed",
@@ -218,10 +1321,16 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_lire_graphique",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi un graphique peut aider à mieux comprendre des données.",
-    format: "open",
-    expected: ["voir", "comparer", "valeurs", "plus grand", "plus petit"],
-    comparator: "contains_keyword",
+    text: "Pourquoi un graphique aide-t-il à comprendre des données ?",
+    format: "qcm",
+    choices: [
+      "on voit d’un coup d’œil les valeurs les plus grandes et les plus petites",
+      "il change les valeurs pour les rendre plus simples",
+      "il donne toujours la bonne conclusion sans rien lire",
+      "il remplace le titre et les nombres",
+    ],
+    expected: ["on voit d’un coup d’œil les valeurs les plus grandes et les plus petites"],
+    comparator: "mcq_exact",
     hint: "Parle de la comparaison visuelle.",
     explanation:
       "Définition : un graphique représente des données sous une forme visuelle.\n\n" +
@@ -268,47 +1377,12 @@ export const donneesBank: TutorBankItemV4[] = [
     }),
   },
 
-  {
-    kind: "template",
-    id: "6e_stat_stat_stat_donnee_prelever_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_donnee",
-    microId: "stat_donnee_prelever",
-    difficulty: 3,
-    theme: "reunion",
-    hint: "Cherche le croisement entre la bonne ligne et la bonne colonne.",
-    tags: ["stat_donnee", "prelever", "reunion", "tableau_double_entree", "template", "canvas"],
-    generate: () => {
-      const rows = [
-        { label: "Saint-Pierre", values: [12, 8] },
-        { label: "Le Tampon", values: [9, 11] },
-        { label: "Saint-Joseph", values: [7, 10] },
-      ];
-      const rowIndex = randomChoice([0, 1, 2]);
-      const colIndex = randomChoice([0, 1]);
-      const colLabel = colIndex === 0 ? "Bus" : "Voiture";
-
-      return {
-        text: `Dans le tableau, combien d’élèves de ${rows[rowIndex].label} viennent en ${colLabel.toLowerCase()} ?`,
-        format: "short",
-        expected: [String(rows[rowIndex].values[colIndex])],
-        comparator: "number_equal",
-        explanation:
-          "Définition : prélever une donnée, c’est lire une information précise dans un document.\n\n" +
-          "Méthode : on repère la ligne de la ville et la colonne du moyen de transport.\n\n" +
-          `Observation : au croisement ${rows[rowIndex].label} / ${colLabel}, on lit ${rows[rowIndex].values[colIndex]}.\n\n` +
-          `Conclusion : ${rows[rowIndex].values[colIndex]} élèves sont concernés.`,
-        canvas: tableauDonneesCanvas({
-          title: "Moyen de transport des élèves",
-          headers: ["Bus", "Voiture"],
-          rows,
-          highlight: { cell: { row: rowIndex, col: colIndex } },
-          caption: "Exemple de données locales à La Réunion.",
-        }),
-      };
-    },
-  },
+  gab(
+    "6e_stat_stat_stat_donnee_prelever_tpl_1", "stat_donnee", "stat_donnee_prelever", 3,
+    "Cherche le croisement entre la bonne ligne et la bonne colonne.",
+    ["stat_donnee", "prelever", "tableau_double_entree", "template", "canvas"],
+    () => qCellule(tirerDouble(entre(3, 4), entre(2, 3))),
+  ),
 
   {
     kind: "fixed",
@@ -319,10 +1393,16 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_prelever",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi il faut lire le titre, les lignes et les colonnes avant de répondre à une question sur un tableau.",
-    format: "open",
-    expected: ["titre", "ligne", "colonne", "information", "erreur"],
-    comparator: "contains_keyword",
+    text: "Pourquoi faut-il lire le titre, les lignes et les colonnes avant de répondre à une question sur un tableau ?",
+    format: "qcm",
+    choices: [
+      "pour savoir de quoi parle le tableau et ne pas lire la mauvaise case",
+      "parce que la réponse est toujours écrite dans le titre",
+      "pour compter le nombre de cases du tableau",
+      "ce n’est pas utile : il suffit de lire le premier nombre",
+    ],
+    expected: ["pour savoir de quoi parle le tableau et ne pas lire la mauvaise case"],
+    comparator: "mcq_exact",
     hint: "Explique comment éviter de lire la mauvaise donnée.",
     explanation:
       "Définition : un tableau donne des informations organisées.\n\n" +
@@ -369,50 +1449,12 @@ export const donneesBank: TutorBankItemV4[] = [
     }),
   },
 
-  {
-    kind: "template",
-    id: "6e_stat_stat_stat_donnee_comparer_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_donnee",
-    microId: "stat_donnee_comparer",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Cherche la valeur la plus grande.",
-    tags: ["stat_donnee", "comparer", "graphique", "template", "canvas"],
-    generate: () => {
-      const data = [
-        { label: "A", value: randomChoice([6, 8, 10]) },
-        { label: "B", value: randomChoice([11, 13, 15]) },
-        { label: "C", value: randomChoice([5, 7, 9]) },
-      ];
-   const maxIndex = data.reduce(
-    (bestIndex, item, index) =>
-        item.value > data[bestIndex].value ? index : bestIndex,
-    0
-    );
-
-    const max = data[maxIndex];
-
-      return {
-        text: "Quel groupe a obtenu le plus grand résultat ?",
-        format: "qcm",
-        choices: shuffle(data.map((d) => d.label)),
-        expected: [max.label],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : comparer des données permet d’identifier la valeur la plus grande ou la plus petite.\n\n" +
-          "Méthode : on compare les valeurs des groupes A, B et C.\n\n" +
-          `Calcul : la plus grande valeur est ${max.value}, pour le groupe ${max.label}.\n\n` +
-          `Conclusion : le groupe ${max.label} a obtenu le plus grand résultat.`,
-        canvas: statGraphCanvas({
-          graphType: "barres",
-          data,
-          display: { showLabels: true, showValues: true, highlightIndex: maxIndex },
-        }),
-      };
-    },
-  },
+  gab(
+    "6e_stat_stat_stat_donnee_comparer_tpl_1", "stat_donnee", "stat_donnee_comparer", 3,
+    "Compare toutes les valeurs avant de choisir.",
+    ["stat_donnee", "comparer", "graphique", "template", "canvas"],
+    () => qExtreme(tirerSerie(5, pick(["barres", "batons"] as const))),
+  ),
 
   {
     kind: "fixed",
@@ -423,10 +1465,16 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_comparer",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment comparer plusieurs données dans un tableau ou un graphique.",
-    format: "open",
-    expected: ["valeurs", "plus grand", "plus petit", "comparer", "ligne"],
-    comparator: "contains_keyword",
+    text: "Comment comparer plusieurs données dans un tableau ou un graphique ?",
+    format: "qcm",
+    choices: [
+      "je lis chaque valeur, puis je compare les nombres",
+      "je regarde seulement la couleur des barres",
+      "je choisis la catégorie écrite en premier",
+      "je compare la longueur des noms des catégories",
+    ],
+    expected: ["je lis chaque valeur, puis je compare les nombres"],
+    comparator: "mcq_exact",
     hint: "Parle des valeurs et de ce qu’on cherche.",
     explanation:
       "Définition : comparer des données, c’est étudier les différences entre plusieurs valeurs.\n\n" +
@@ -477,55 +1525,12 @@ export const donneesBank: TutorBankItemV4[] = [
     }),
   },
 
-  {
-    kind: "template",
-    id: "6e_stat_stat_stat_donnee_interpreter_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_donnee",
-    microId: "stat_donnee_interpreter",
-    difficulty: 4,
-    theme: "reunion",
-    hint: "Une conclusion doit être justifiée par les données.",
-    tags: ["stat_donnee", "interpreter", "reunion", "template", "canvas"],
-    generate: () => {
-      const data = [
-        { label: "Plage", value: randomChoice([10, 12, 14]) },
-        { label: "Volcan", value: randomChoice([15, 17, 19]) },
-        { label: "Forêt", value: randomChoice([6, 8, 9]) },
-      ];
-        const maxIndex = data.reduce(
-        (bestIndex, item, index) =>
-            item.value > data[bestIndex].value ? index : bestIndex,
-        0
-        );
-
-        const max = data[maxIndex];
-
-      return {
-        text: "Quelle conclusion peut-on tirer du graphique ?",
-        format: "qcm",
-        choices: shuffle([
-          `${max.label} est le lieu préféré du groupe`,
-          "Tous les lieux ont le même nombre de votes",
-          "La forêt est forcément le lieu préféré",
-          "On ne peut rien lire sur le graphique",
-        ]),
-        expected: [`${max.label} est le lieu préféré du groupe`],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : interpréter, c’est utiliser les données pour formuler une conclusion.\n\n" +
-          "Méthode : on cherche la valeur la plus grande dans le graphique.\n\n" +
-          `Observation : ${max.label} obtient ${max.value} votes, c’est la plus grande valeur.\n\n` +
-          `Conclusion : ${max.label} est le lieu préféré du groupe.`,
-        canvas: statGraphCanvas({
-          graphType: "barres",
-          data,
-          display: { showLabels: true, showValues: true, highlightIndex: maxIndex },
-        }),
-      };
-    },
-  },
+  gab(
+    "6e_stat_stat_stat_donnee_interpreter_tpl_1", "stat_donnee", "stat_donnee_interpreter", 4,
+    "Vérifie chaque phrase avec les nombres : une seule tient.",
+    ["stat_donnee", "interpreter", "template", "canvas"],
+    () => qVrai(tirerSerie(4, pick(["barres", "batons", "tableau"] as const)), pick([["total", "ecart", "plusQue"], ["ecart", "total", "max"]] as const).slice()),
+  ),
 
   {
     kind: "fixed",
@@ -537,9 +1542,15 @@ export const donneesBank: TutorBankItemV4[] = [
     difficulty: 5,
     theme: "neutral",
     text: "Un camarade affirme une conclusion à partir d’un graphique. Que dois-tu vérifier avant d’être d’accord ?",
-    format: "open",
-    expected: ["titre", "valeurs", "légende", "comparer", "vérifier"],
-    comparator: "contains_keyword",
+    format: "qcm",
+    choices: [
+      "le titre, les catégories et les valeurs écrites sur le graphique",
+      "rien : un graphique ne se trompe jamais",
+      "seulement la couleur des barres",
+      "que le camarade parle avec assurance",
+    ],
+    expected: ["le titre, les catégories et les valeurs écrites sur le graphique"],
+    comparator: "mcq_exact",
     hint: "Ne te contente pas de l’impression visuelle.",
     explanation:
       "Définition : une conclusion doit être appuyée par des données exactes.\n\n" +
@@ -585,46 +1596,12 @@ export const donneesBank: TutorBankItemV4[] = [
     }),
   },
 
-  {
-    kind: "template",
-    id: "6e_stat_stat_donnee_defi_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_donnee",
-    microId: "stat_donnee_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Commence par lire toutes les valeurs utiles.",
-    tags: ["stat_donnee", "defi", "total", "template", "canvas"],
-    generate: () => {
-      const a = randomChoice([6, 8, 10]);
-      const b = randomChoice([7, 9, 11]);
-      const c = randomChoice([5, 12, 13]);
-      const total = a + b + c;
-
-      return {
-        text: "Combien de réponses ont été recueillies au total ?",
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : le total correspond à la somme de toutes les valeurs du tableau.\n\n" +
-          "Méthode : on lit les trois effectifs puis on les additionne.\n\n" +
-          `Calcul : ${a} + ${b} + ${c} = ${total}.\n\n` +
-          `Conclusion : ${total} réponses ont été recueillies au total.`,
-        canvas: tableauDonneesCanvas({
-          title: "Réponses à une enquête",
-          headers: ["Effectif"],
-          rows: [
-            { label: "Réponse A", values: [a] },
-            { label: "Réponse B", values: [b] },
-            { label: "Réponse C", values: [c] },
-          ],
-          questionLabel: "Cherche le total des réponses.",
-        }),
-      };
-    },
-  },
+  gab(
+    "6e_stat_stat_donnee_defi_tpl_1", "stat_donnee", "stat_donnee_defi", 5,
+    "Additionne ce que tu connais, puis compare au total.",
+    ["stat_donnee", "defi", "total", "template", "canvas"],
+    () => qManquant(tirerSerie(5, "tableau")),
+  ),
 
   {
     kind: "fixed",
@@ -635,10 +1612,16 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi les données doivent être organisées clairement dans un tableau ou un graphique.",
-    format: "open",
-    expected: ["lire", "comparer", "comprendre", "erreur", "organiser"],
-    comparator: "contains_keyword",
+    text: "Pourquoi les données doivent-elles être organisées clairement dans un tableau ou un graphique ?",
+    format: "qcm",
+    choices: [
+      "pour les lire et les comparer vite, sans se tromper",
+      "pour avoir plus de données",
+      "pour que les nombres deviennent plus grands",
+      "parce qu’un tableau change les réponses des personnes",
+    ],
+    expected: ["pour les lire et les comparer vite, sans se tromper"],
+    comparator: "mcq_exact",
     hint: "Pense à la lecture, à la comparaison et aux erreurs possibles.",
     explanation:
       "Définition : organiser des données, c’est les présenter de manière claire.\n\n" +
@@ -661,9 +1644,15 @@ export const donneesBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     text: "Un élève répond sans lire le titre du tableau. Pourquoi est-ce risqué ?",
-    format: "open",
-    expected: ["titre", "comprendre", "données", "erreur", "contexte"],
-    comparator: "contains_keyword",
+    format: "qcm",
+    choices: [
+      "sans le titre, il ne sait pas de quoi parlent les nombres ni dans quelle unité",
+      "ce n’est pas risqué : le titre ne sert jamais",
+      "parce que le titre contient toujours la réponse",
+      "parce qu’un tableau sans titre est forcément faux",
+    ],
+    expected: ["sans le titre, il ne sait pas de quoi parlent les nombres ni dans quelle unité"],
+    comparator: "mcq_exact",
     hint: "Le titre explique ce que représentent les données.",
     explanation:
       "Définition : le titre d’un tableau indique le sujet des données.\n\n" +
@@ -673,47 +1662,12 @@ export const donneesBank: TutorBankItemV4[] = [
     tags: ["stat_donnee", "tableau", "open", "erreur", "langage"],
   },
 
-  {
-    kind: "template",
-    id: "6e_stat_stat_stat_donnee_prelever_tpl_2_cellule_surlignee",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_donnee",
-    microId: "stat_donnee_prelever",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Lis la cellule surlignée.",
-    tags: ["stat_donnee", "prelever", "cellule", "template", "canvas"],
-    generate: () => {
-      const rows = [
-        { label: "6A", values: [12, 8] },
-        { label: "6B", values: [9, 11] },
-        { label: "6C", values: [14, 6] },
-      ];
-
-      const rowIndex = randomChoice([0, 1, 2]);
-      const colIndex = randomChoice([0, 1]);
-
-      return {
-        text: "Quelle valeur est surlignée dans le tableau ?",
-        format: "short",
-        expected: [String(rows[rowIndex].values[colIndex])],
-        comparator: "number_equal",
-        explanation:
-          "Définition : prélever une donnée, c’est lire une valeur précise.\n\n" +
-          "Méthode : on repère la cellule surlignée.\n\n" +
-          `Observation : la cellule surlignée contient ${rows[rowIndex].values[colIndex]}.\n\n` +
-          `Conclusion : la valeur demandée est ${rows[rowIndex].values[colIndex]}.`,
-        canvas: tableauDonneesCanvas({
-          title: "Résultats d’un sondage",
-          headers: ["Oui", "Non"],
-          rows,
-          highlight: { cell: { row: rowIndex, col: colIndex } },
-          caption: "La cellule jaune indique la donnée à lire.",
-        }),
-      };
-    },
-  },
+  gab(
+    "6e_stat_stat_stat_donnee_prelever_tpl_2_cellule_surlignee", "stat_donnee", "stat_donnee_prelever", 2,
+    "Suis la ligne avec le doigt jusqu’à la bonne colonne : la case est surlignée.",
+    ["stat_donnee", "prelever", "cellule", "template", "canvas"],
+    () => qCellule(tirerDouble(3, 2), true),
+  ),
 
   {
     kind: "fixed",
@@ -725,9 +1679,15 @@ export const donneesBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     text: "Un élève dit : « 15 est plus petit que 9 parce que le bâton paraît plus bas ». Que doit-il vérifier ?",
-    format: "open",
-    expected: ["valeur", "échelle", "graphique", "lire", "vérifier"],
-    comparator: "contains_keyword",
+    format: "qcm",
+    choices: [
+      "les nombres écrits et l’échelle du graphique : 15 est plus grand que 9",
+      "rien : le bâton le plus bas a toujours la plus petite valeur",
+      "la couleur des bâtons",
+      "l’ordre des catégories de gauche à droite",
+    ],
+    expected: ["les nombres écrits et l’échelle du graphique : 15 est plus grand que 9"],
+    comparator: "mcq_exact",
     hint: "Il faut lire les valeurs et l’échelle.",
     explanation:
       "Définition : comparer des données demande de lire les valeurs exactes.\n\n" +
@@ -737,45 +1697,12 @@ export const donneesBank: TutorBankItemV4[] = [
     tags: ["stat_donnee", "comparer", "open", "erreur", "verification"],
   },
 
-  {
-    kind: "template",
-    id: "6e_stat_stat_stat_donnee_comparer_tpl_2_difference",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_donnee",
-    microId: "stat_donnee_comparer",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Calcule la différence entre les deux valeurs.",
-    tags: ["stat_donnee", "comparer", "difference", "template", "canvas"],
-    generate: () => {
-      const a = randomChoice([12, 14, 16, 18]);
-      const b = randomChoice([5, 7, 9, 10]);
-      const diff = a - b;
-
-      return {
-        text: "Combien y a-t-il de réponses de plus pour A que pour B ?",
-        format: "short",
-        expected: [String(diff)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : comparer deux données peut consister à calculer leur différence.\n\n" +
-          "Méthode : on soustrait la plus petite valeur à la plus grande.\n\n" +
-          `Calcul : ${a} - ${b} = ${diff}.\n\n` +
-          `Conclusion : il y a ${diff} réponses de plus pour A que pour B.`,
-        canvas: tableauDonneesCanvas({
-          title: "Réponses recueillies",
-          headers: ["Effectif"],
-          rows: [
-            { label: "Réponse A", values: [a] },
-            { label: "Réponse B", values: [b] },
-          ],
-          highlight: { col: 0 },
-          questionLabel: "Compare les deux effectifs.",
-        }),
-      };
-    },
-  },
+  gab(
+    "6e_stat_stat_stat_donnee_comparer_tpl_2_difference", "stat_donnee", "stat_donnee_comparer", 3,
+    "Calcule la différence entre les deux valeurs.",
+    ["stat_donnee", "comparer", "difference", "template", "canvas"],
+    () => qDiff(tirerSerie(entre(4, 5), pick(["barres", "batons", "tableau"] as const))),
+  ),
 
   {
     kind: "fixed",
@@ -786,10 +1713,16 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_interpreter",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi une conclusion doit être justifiée par une donnée du tableau ou du graphique.",
-    format: "open",
-    expected: ["donnée", "valeur", "preuve", "justifier", "conclusion"],
-    comparator: "contains_keyword",
+    text: "Pourquoi une conclusion doit-elle s’appuyer sur une donnée du tableau ou du graphique ?",
+    format: "qcm",
+    choices: [
+      "parce que sans valeur lue, la conclusion n’est qu’une impression",
+      "parce qu’une conclusion doit être la plus longue possible",
+      "ce n’est pas nécessaire si on est sûr de soi",
+      "parce que le tableau donne toujours la conclusion écrite",
+    ],
+    expected: ["parce que sans valeur lue, la conclusion n’est qu’une impression"],
+    comparator: "mcq_exact",
     hint: "Une conclusion doit s’appuyer sur une valeur lue.",
     explanation:
       "Définition : interpréter des données, c’est formuler une conclusion à partir de valeurs observées.\n\n" +
@@ -799,47 +1732,12 @@ export const donneesBank: TutorBankItemV4[] = [
     tags: ["stat_donnee", "interpreter", "open", "justification", "raisonnement"],
   },
 
-  {
-    kind: "template",
-    id: "6e_stat_stat_donnee_defi_tpl_2_double_entree_total_ligne",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_donnee",
-    microId: "stat_donnee_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Additionne les valeurs de la ligne demandée.",
-    tags: ["stat_donnee", "defi", "tableau_double_entree", "total", "template", "canvas"],
-    generate: () => {
-      const rows = [
-        { label: "Basket", values: [7, 8] },
-        { label: "Natation", values: [6, 5] },
-        { label: "Danse", values: [9, 4] },
-      ];
-
-      const rowIndex = randomChoice([0, 1, 2]);
-      const total = rows[rowIndex].values[0] + rows[rowIndex].values[1];
-
-      return {
-        text: `Combien d’élèves ont choisi ${rows[rowIndex].label.toLowerCase()} au total ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : le total d’une ligne est la somme des valeurs de cette ligne.\n\n" +
-          "Méthode : on lit les deux valeurs de la ligne demandée, puis on les additionne.\n\n" +
-          `Calcul : ${rows[rowIndex].values[0]} + ${rows[rowIndex].values[1]} = ${total}.\n\n` +
-          `Conclusion : ${total} élèves ont choisi ${rows[rowIndex].label.toLowerCase()}.`,
-        canvas: tableauDonneesCanvas({
-          title: "Activités choisies",
-          headers: ["Filles", "Garçons"],
-          rows,
-          highlight: { row: rowIndex },
-          caption: "Pour trouver un total de ligne, on additionne les colonnes.",
-        }),
-      };
-    },
-  },
+  gab(
+    "6e_stat_stat_donnee_defi_tpl_2_double_entree_total_ligne", "stat_donnee", "stat_donnee_defi", 5,
+    "Additionne toutes les cases de la ligne demandée.",
+    ["stat_donnee", "defi", "tableau_double_entree", "total", "template", "canvas"],
+    () => qTotalDouble(tirerDouble(entre(3, 4), entre(2, 3)), "ligne"),
+  ),
     /* =========================
      RENFORT FINAL — DONNÉES 6e
   ========================= */
@@ -853,10 +1751,16 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_lire_tableau",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique la différence entre une ligne et une colonne dans un tableau.",
-    format: "open",
-    expected: ["ligne", "horizontale", "colonne", "verticale", "tableau"],
-    comparator: "contains_keyword",
+    text: "Dans un tableau, quelle est la différence entre une ligne et une colonne ?",
+    format: "qcm",
+    choices: [
+      "une ligne est horizontale (de gauche à droite), une colonne est verticale (de haut en bas)",
+      "une ligne est verticale, une colonne est horizontale",
+      "il n’y a aucune différence",
+      "une ligne contient des mots, une colonne contient des nombres",
+    ],
+    expected: ["une ligne est horizontale (de gauche à droite), une colonne est verticale (de haut en bas)"],
+    comparator: "mcq_exact",
     hint: "Une ligne se lit souvent de gauche à droite ; une colonne de haut en bas.",
     explanation:
       "Définition : un tableau organise les données en lignes et en colonnes.\n\n" +
@@ -866,47 +1770,12 @@ export const donneesBank: TutorBankItemV4[] = [
     tags: ["stat_donnee", "tableau", "open", "vocabulaire"],
   },
 
-  {
-    kind: "template",
-    id: "6e_stat_stat_stat_donnee_lire_tableau_tpl_2_total_colonne",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_enquete",
-    microId: "stat_donnee_lire_tableau",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Additionne les valeurs de la colonne.",
-    tags: ["stat_donnee", "tableau", "total", "template", "canvas"],
-    generate: () => {
-      const a = randomChoice([5, 6, 7, 8]);
-      const b = randomChoice([9, 10, 11]);
-      const c = randomChoice([3, 4, 5, 6]);
-      const total = a + b + c;
-
-      return {
-        text: "Quel est le total des effectifs du tableau ?",
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : le total est la somme de toutes les valeurs utiles.\n\n" +
-          "Méthode : on lit les effectifs puis on les additionne.\n\n" +
-          `Calcul : ${a} + ${b} + ${c} = ${total}.\n\n` +
-          `Conclusion : le total est ${total}.`,
-        canvas: tableauDonneesCanvas({
-          title: "Effectifs par atelier",
-          headers: ["Effectif"],
-          rows: [
-            { label: "Atelier A", values: [a] },
-            { label: "Atelier B", values: [b] },
-            { label: "Atelier C", values: [c] },
-          ],
-          highlight: { col: 0 },
-          questionLabel: "Additionne les effectifs.",
-        }),
-      };
-    },
-  },
+  gab(
+    "6e_stat_stat_stat_donnee_lire_tableau_tpl_2_total_colonne", "stat_enquete", "stat_donnee_lire_tableau", 3,
+    "Additionne les valeurs de la colonne.",
+    ["stat_donnee", "tableau", "total", "template", "canvas"],
+    () => (Math.random() < 0.65 ? qTotal(tirerSerie(entre(3, 4), "tableau")) : qLire(tirerSerie(5, "tableau"))),
+  ),
 
   {
     kind: "fixed",
@@ -918,9 +1787,15 @@ export const donneesBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     text: "Un élève regarde seulement le bâton le plus haut sans lire les valeurs. Pourquoi peut-il se tromper ?",
-    format: "open",
-    expected: ["valeurs", "échelle", "graphique", "lire", "vérifier"],
-    comparator: "contains_keyword",
+    format: "qcm",
+    choices: [
+      "l’échelle peut tromper : il faut lire les nombres pour comparer",
+      "il ne peut pas se tromper : le bâton le plus haut a toujours raison",
+      "parce que les bâtons changent de taille tout seuls",
+      "parce qu’il faut d’abord compter les bâtons",
+    ],
+    expected: ["l’échelle peut tromper : il faut lire les nombres pour comparer"],
+    comparator: "mcq_exact",
     hint: "Il faut lire les nombres, pas seulement regarder la forme.",
     explanation:
       "Définition : lire un graphique demande de relier une catégorie à une valeur.\n\n" +
@@ -930,55 +1805,12 @@ export const donneesBank: TutorBankItemV4[] = [
     tags: ["stat_donnee", "graphique", "open", "erreur", "verification"],
   },
 
-  {
-    kind: "template",
-    id: "6e_stat_stat_stat_donnee_lire_graphique_tpl_2_plus_petit",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_donnee",
-    microId: "stat_donnee_lire_graphique",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Cherche le bâton le plus bas.",
-    tags: ["stat_donnee", "graphique", "minimum", "template", "canvas"],
-    generate: () => {
-      const data = [
-        { label: "A", value: randomChoice([12, 14, 16]) },
-        { label: "B", value: randomChoice([5, 6, 7]) },
-        { label: "C", value: randomChoice([9, 10, 11]) },
-      ];
-
-      const minIndex = data.reduce(
-        (bestIndex, item, index) =>
-          item.value < data[bestIndex].value ? index : bestIndex,
-        0
-      );
-
-      const min = data[minIndex];
-
-      return {
-        text: "Quel groupe a la plus petite valeur ?",
-        format: "qcm",
-        choices: shuffle(data.map((d) => d.label)),
-        expected: [min.label],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : comparer un graphique permet de repérer la plus petite valeur.\n\n" +
-          "Méthode : on compare les hauteurs ou les valeurs indiquées.\n\n" +
-          `Observation : la plus petite valeur est ${min.value}, pour le groupe ${min.label}.\n\n` +
-          `Conclusion : le groupe ${min.label} a la plus petite valeur.`,
-        canvas: statGraphCanvas({
-          graphType: "barres",
-          data,
-          display: {
-            showLabels: true,
-            showValues: true,
-            highlightIndex: minIndex,
-          },
-        }),
-      };
-    },
-  },
+  gab(
+    "6e_stat_stat_stat_donnee_lire_graphique_tpl_2_plus_petit", "stat_donnee", "stat_donnee_lire_graphique", 3,
+    "Compare les hauteurs des barres, puis vérifie avec les nombres.",
+    ["stat_donnee", "graphique", "minimum", "template", "canvas"],
+    () => qExtreme(tirerSerie(entre(4, 5), pick(["barres", "batons"] as const))),
+  ),
 
   {
     kind: "fixed",
@@ -1012,10 +1844,16 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_prelever",
     difficulty: 4,
     theme: "neutral",
-    text: "Décris la méthode pour lire une donnée dans un tableau à deux entrées.",
-    format: "open",
-    expected: ["ligne", "colonne", "croisement", "valeur", "tableau"],
-    comparator: "contains_keyword",
+    text: "Quelle est la méthode pour lire une donnée dans un tableau à deux entrées ?",
+    format: "qcm",
+    choices: [
+      "repérer la bonne ligne, puis la bonne colonne, et lire la case à leur croisement",
+      "lire seulement la bonne ligne, la colonne n’a pas d’importance",
+      "additionner la ligne et la colonne",
+      "lire la dernière case du tableau",
+    ],
+    expected: ["repérer la bonne ligne, puis la bonne colonne, et lire la case à leur croisement"],
+    comparator: "mcq_exact",
     hint: "La donnée se trouve au croisement.",
     explanation:
       "Définition : un tableau à deux entrées organise les données selon deux critères.\n\n" +
@@ -1025,48 +1863,12 @@ export const donneesBank: TutorBankItemV4[] = [
     tags: ["stat_donnee", "prelever", "open", "methode"],
   },
 
-  {
-    kind: "template",
-    id: "6e_stat_stat_stat_donnee_comparer_tpl_3_ecart_graphique",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_donnee",
-    microId: "stat_donnee_comparer",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "L’écart se calcule avec une soustraction.",
-    tags: ["stat_donnee", "comparer", "ecart", "template", "canvas"],
-    generate: () => {
-      const a = randomChoice([18, 20, 22]);
-      const b = randomChoice([9, 11, 13]);
-      const c = randomChoice([14, 15, 16]);
-      const diff = a - b;
-
-      return {
-        text: "Quel est l’écart entre la plus grande et la plus petite valeur ?",
-        format: "short",
-        expected: [String(diff)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : l’écart entre deux valeurs est leur différence.\n\n" +
-          "Méthode : on repère la plus grande valeur et la plus petite valeur.\n\n" +
-          `Calcul : ${a} - ${b} = ${diff}.\n\n` +
-          `Conclusion : l’écart est ${diff}.`,
-        canvas: statGraphCanvas({
-          graphType: "barres",
-          data: [
-            { label: "A", value: a },
-            { label: "B", value: b },
-            { label: "C", value: c },
-          ],
-          display: {
-            showLabels: true,
-            showValues: true,
-          },
-        }),
-      };
-    },
-  },
+  gab(
+    "6e_stat_stat_stat_donnee_comparer_tpl_3_ecart_graphique", "stat_donnee", "stat_donnee_comparer", 4,
+    "L’écart se calcule avec une soustraction.",
+    ["stat_donnee", "comparer", "ecart", "template", "canvas"],
+    () => (Math.random() < 0.6 ? qEcartExtremes(tirerSerie(5, pick(["barres", "batons"] as const))) : qDiff(tirerSerie(5, pick(["barres", "batons"] as const)))),
+  ),
 
   {
     kind: "fixed",
@@ -1078,9 +1880,15 @@ export const donneesBank: TutorBankItemV4[] = [
     difficulty: 5,
     theme: "neutral",
     text: "Un graphique montre que 12 élèves préfèrent le sport dans une classe. Un élève conclut : “Tous les élèves du collège préfèrent le sport.” Pourquoi cette conclusion est-elle abusive ?",
-    format: "open",
-    expected: ["classe", "collège", "données", "échantillon", "conclusion"],
-    comparator: "contains_keyword",
+    format: "qcm",
+    choices: [
+      "les données ne concernent qu’une classe : on ne peut pas conclure pour tout le collège",
+      "elle n’est pas abusive : 12 élèves, c’est beaucoup",
+      "parce que le graphique est mal dessiné",
+      "parce qu’il aurait fallu calculer une moyenne",
+    ],
+    expected: ["les données ne concernent qu’une classe : on ne peut pas conclure pour tout le collège"],
+    comparator: "mcq_exact",
     hint: "Les données ne concernent qu’une classe.",
     explanation:
       "Définition : une conclusion doit rester liée aux données étudiées.\n\n" +
@@ -1099,10 +1907,16 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_interpreter",
     difficulty: 5,
     theme: "neutral",
-    text: "À partir d’un tableau de données, explique la différence entre observer une donnée et faire une hypothèse.",
-    format: "open",
-    expected: ["observer", "donnée", "valeur", "hypothèse", "supposer"],
-    comparator: "contains_keyword",
+    text: "Devant un tableau de données, quelle est la différence entre observer une donnée et faire une hypothèse ?",
+    format: "qcm",
+    choices: [
+      "observer, c’est lire ce qui est écrit ; une hypothèse est une idée qu’il faudra vérifier",
+      "c’est la même chose",
+      "une hypothèse est toujours vraie, une observation peut être fausse",
+      "observer, c’est deviner ; une hypothèse, c’est lire le tableau",
+    ],
+    expected: ["observer, c’est lire ce qui est écrit ; une hypothèse est une idée qu’il faudra vérifier"],
+    comparator: "mcq_exact",
     hint: "Observer, c’est lire ce qui est écrit ; faire une hypothèse, c’est proposer une idée à vérifier.",
     explanation:
       "Définition : observer une donnée, c’est lire une valeur présente dans le tableau.\n\n" +
@@ -1112,51 +1926,12 @@ export const donneesBank: TutorBankItemV4[] = [
     tags: ["stat_donnee", "interpreter", "open", "hypothese", "scientifique"],
   },
 
-  {
-    kind: "template",
-    id: "6e_stat_stat_donnee_defi_tpl_3_deux_variables_total_colonne",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_donnee",
-    microId: "stat_donnee_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Additionne les valeurs de la colonne demandée.",
-    tags: ["stat_donnee", "defi", "tableau_double_entree", "total_colonne", "template", "canvas"],
-    generate: () => {
-      const rows = [
-        { label: "6A", values: [6, 8] },
-        { label: "6B", values: [7, 5] },
-        { label: "6C", values: [4, 9] },
-      ];
-
-      const colIndex = randomChoice([0, 1]);
-      const headers = ["Demi-pension", "Externe"];
-      const total =
-        rows[0].values[colIndex] +
-        rows[1].values[colIndex] +
-        rows[2].values[colIndex];
-
-      return {
-        text: `Combien y a-t-il d’élèves dans la colonne ${headers[colIndex]} au total ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : le total d’une colonne est la somme des valeurs de cette colonne.\n\n" +
-          "Méthode : on lit les valeurs de la colonne demandée, puis on les additionne.\n\n" +
-          `Calcul : ${rows[0].values[colIndex]} + ${rows[1].values[colIndex]} + ${rows[2].values[colIndex]} = ${total}.\n\n` +
-          `Conclusion : le total de la colonne ${headers[colIndex]} est ${total}.`,
-        canvas: tableauDonneesCanvas({
-          title: "Organisation des élèves",
-          headers,
-          rows,
-          highlight: { col: colIndex },
-          caption: "On additionne uniquement les valeurs de la colonne surlignée.",
-        }),
-      };
-    },
-  },
+  gab(
+    "6e_stat_stat_donnee_defi_tpl_3_deux_variables_total_colonne", "stat_donnee", "stat_donnee_defi", 5,
+    "Additionne toutes les cases de la colonne demandée.",
+    ["stat_donnee", "defi", "tableau_double_entree", "total_colonne", "template", "canvas"],
+    () => qTotalDouble(tirerDouble(entre(3, 4), entre(2, 3)), "colonne"),
+  ),
 
   {
     kind: "fixed",
@@ -1167,10 +1942,16 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Décris une démarche simple pour répondre sérieusement à une question à partir de données.",
-    format: "open",
-    expected: ["lire", "repérer", "comparer", "calculer", "conclure"],
-    comparator: "contains_keyword",
+    text: "Quelle démarche permet de répondre sérieusement à une question à partir de données ?",
+    format: "qcm",
+    choices: [
+      "lire le document, repérer les valeurs utiles, calculer ou comparer, puis conclure",
+      "conclure d’abord, puis chercher une valeur qui va dans ce sens",
+      "choisir la réponse qui paraît la plus logique sans lire",
+      "recopier tous les nombres du tableau",
+    ],
+    expected: ["lire le document, repérer les valeurs utiles, calculer ou comparer, puis conclure"],
+    comparator: "mcq_exact",
     hint: "Pense aux étapes : lire, chercher, vérifier, conclure.",
     explanation:
       "Définition : une démarche sérieuse s’appuie sur des données vérifiées.\n\n" +
@@ -1382,188 +2163,31 @@ export const donneesBank: TutorBankItemV4[] = [
     }),
   },
 
-  {
-    kind: "template",
-    id: "6e_stat_stat_donnee_lire_circulaire_tpl_1_lire_secteur",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_donnee",
-    microId: "stat_donnee_lire_circulaire",
-    difficulty: 1,
-    theme: "neutral",
-    hint: "Repère le secteur demandé et lis sa valeur.",
-    tags: ["stat_donnee", "circulaire", "camembert", "lecture", "template", "canvas"],
-    generate: () => {
-      const cats = randomChoice([
-        ["À pied", "Bus", "Voiture", "Vélo"],
-        ["Mangues", "Letchis", "Ananas", "Bananes"],
-        ["Lecture", "Sport", "Jeux", "Musique"],
-      ]);
-      const values = [
-        randomChoice([6, 8, 10]),
-        randomChoice([4, 5, 7]),
-        randomChoice([3, 9, 11]),
-        randomChoice([2, 12, 14]),
-      ];
-      const index = Math.floor(Math.random() * cats.length);
-      const correct = String(values[index]);
-
-      return {
-        text: `Dans ce diagramme circulaire, quelle est la valeur du secteur « ${cats[index]} » ?`,
-        format: "short",
-        expected: [correct],
-        comparator: "number_equal",
-        explanation:
-          "Définition : chaque secteur d’un diagramme circulaire représente une catégorie.\n\n" +
-          "Méthode : on repère le secteur demandé, puis on lit sa valeur.\n\n" +
-          `Observation : le secteur « ${cats[index]} » indique ${correct}.\n\n` +
-          `Conclusion : la valeur cherchée est ${correct}.`,
-        canvas: statGraphCanvas({
-          graphType: "camembert",
-          title: "Diagramme circulaire",
-          data: cats.map((c, i) => ({ label: c, value: values[i] })),
-          display: { showLabels: true, showValues: true, highlightIndex: index },
-        }),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "6e_stat_stat_donnee_lire_circulaire_tpl_2_plus_grand",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_donnee",
-    microId: "stat_donnee_lire_circulaire",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Le plus grand secteur correspond à la plus grande valeur.",
-    tags: ["stat_donnee", "circulaire", "camembert", "comparer", "template", "canvas"],
-    generate: () => {
-      const cats = randomChoice([
-        ["Football", "Natation", "Danse", "Basket"],
-        ["Chien", "Chat", "Lapin", "Poisson"],
-        ["Rouge", "Bleu", "Vert", "Jaune"],
-      ]);
-      const values = shuffle([
-        randomChoice([5, 6, 7]),
-        randomChoice([9, 10, 11]),
-        randomChoice([13, 14, 16]),
-        randomChoice([2, 3, 4]),
-      ]);
-      let maxIndex = 0;
-      for (let i = 1; i < values.length; i++) {
-        if (values[i] > values[maxIndex]) maxIndex = i;
-      }
-      const correct = cats[maxIndex];
-
-      return {
-        text: "Dans ce diagramme circulaire, quelle catégorie est représentée par le plus grand secteur ?",
-        format: "qcm",
-        choices: shuffle([...cats]),
-        expected: [correct],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : le plus grand secteur correspond à la catégorie la plus fréquente.\n\n" +
-          "Méthode : on compare les valeurs des secteurs.\n\n" +
-          `Observation : la plus grande valeur est ${values[maxIndex]}, pour « ${correct} ».\n\n` +
-          `Conclusion : la catégorie la plus représentée est « ${correct} ».`,
-        canvas: statGraphCanvas({
-          graphType: "camembert",
-          title: "Diagramme circulaire",
-          data: cats.map((c, i) => ({ label: c, value: values[i] })),
-          display: { showLabels: true, showValues: true, highlightIndex: maxIndex },
-        }),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "6e_stat_stat_donnee_lire_circulaire_tpl_3_total",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_donnee",
-    microId: "stat_donnee_lire_circulaire",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Additionne les valeurs de tous les secteurs.",
-    tags: ["stat_donnee", "circulaire", "camembert", "total", "template", "canvas"],
-    generate: () => {
-      const cats = randomChoice([
-        ["Maths", "Français", "Sport"],
-        ["Pizza", "Pâtes", "Salade"],
-        ["Été", "Hiver", "Printemps"],
-      ]);
-      const values = [
-        randomChoice([8, 10, 12]),
-        randomChoice([5, 7, 9]),
-        randomChoice([3, 6, 11]),
-      ];
-      const total = values.reduce((a, b) => a + b, 0);
-
-      return {
-        text: "Dans ce diagramme circulaire, combien de personnes ont répondu en tout ?",
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : le total est la somme de toutes les valeurs des secteurs.\n\n" +
-          "Méthode : on additionne toutes les valeurs.\n\n" +
-          `Observation : ${values.join(" + ")} = ${total}.\n\n` +
-          `Conclusion : ${total} personnes ont répondu en tout.`,
-        canvas: statGraphCanvas({
-          graphType: "camembert",
-          title: "Diagramme circulaire",
-          data: cats.map((c, i) => ({ label: c, value: values[i] })),
-          display: { showLabels: true, showValues: true },
-        }),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "6e_stat_stat_donnee_lire_circulaire_tpl_4_difference",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_donnee",
-    microId: "stat_donnee_lire_circulaire",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Calcule l’écart entre les deux secteurs.",
-    tags: ["stat_donnee", "circulaire", "camembert", "difference", "template", "canvas"],
-    generate: () => {
-      const cats = randomChoice([
-        ["Bus", "Voiture", "Vélo"],
-        ["Letchis", "Mangues", "Ananas"],
-        ["Bleu", "Rouge", "Vert"],
-      ]);
-      const grand = randomChoice([12, 14, 16]);
-      const petit = randomChoice([4, 6, 7]);
-      const autre = randomChoice([8, 9, 10]);
-      const values = [grand, petit, autre];
-      const diff = grand - petit;
-
-      return {
-        text: `Dans ce diagramme circulaire, combien y a-t-il de « ${cats[0]} » de plus que de « ${cats[1]} » ?`,
-        format: "short",
-        expected: [String(diff)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : comparer deux secteurs, c’est calculer l’écart entre leurs valeurs.\n\n" +
-          "Méthode : on soustrait la plus petite valeur à la plus grande.\n\n" +
-          `Observation : ${grand} - ${petit} = ${diff}.\n\n` +
-          `Conclusion : il y a ${diff} « ${cats[0]} » de plus que de « ${cats[1]} ».`,
-        canvas: statGraphCanvas({
-          graphType: "camembert",
-          title: "Diagramme circulaire",
-          data: cats.map((c, i) => ({ label: c, value: values[i] })),
-          display: { showLabels: true, showValues: true, highlightIndex: 0 },
-        }),
-      };
-    },
-  },
+  gab(
+    "6e_stat_stat_donnee_lire_circulaire_tpl_1_lire_secteur", "stat_donnee", "stat_donnee_lire_circulaire", 1,
+    "Repère le secteur demandé et lis sa valeur.",
+    ["stat_donnee", "circulaire", "camembert", "lecture", "template", "canvas"],
+    () => qLire(tirerSerie(entre(3, 4), "camembert")),
+  ),
+  gab(
+    "6e_stat_stat_donnee_lire_circulaire_tpl_2_plus_grand", "stat_donnee", "stat_donnee_lire_circulaire", 2,
+    "Le plus grand secteur correspond à la plus grande valeur.",
+    ["stat_donnee", "circulaire", "camembert", "comparer", "template", "canvas"],
+    () => qExtreme(tirerSerie(4, "camembert")),
+  ),
+  gab(
+    "6e_stat_stat_donnee_lire_circulaire_tpl_3_total",
+    "stat_donnee", "stat_donnee_lire_circulaire", 2,
+    "Additionne les valeurs de tous les secteurs.",
+    ["stat_donnee", "circulaire", "camembert", "total", "template", "canvas"],
+    () => qTotal(tirerSerie(entre(3, 4), "camembert")),
+  ),
+  gab(
+    "6e_stat_stat_donnee_lire_circulaire_tpl_4_difference", "stat_donnee", "stat_donnee_lire_circulaire", 3,
+    "Calcule l’écart entre les deux secteurs, ou compare un secteur au disque entier.",
+    ["stat_donnee", "circulaire", "camembert", "difference", "template", "canvas"],
+    () => (Math.random() < 0.5 ? qDiff(tirerSerie(4, "camembert")) : qPart()),
+  ),
 
   /* ========================= TOP-UP — STAT_DONNEE_LIRE_TABLEAU ========================= */
   {
@@ -1834,10 +2458,11 @@ export const donneesBank: TutorBankItemV4[] = [
     id: "6e_stat_interpreter_topup_4",
     niveau: "6e", matiere: "maths", notionId: "stat_donnee", microId: "stat_donnee_interpreter",
     difficulty: 3, theme: "neutral",
-    text: "Dans une classe de 25 élèves, 5 ont eu la grippe. Quelle fraction de la classe a eu la grippe ?",
-    format: "qcm", choices: ["1/5", "1/2", "1/25", "5/5"], expected: ["1/5"], comparator: "mcq_exact",
-    hint: "5 sur 25, on simplifie.",
-    explanation: se("interpréter, c’est exprimer une part par rapport au total.", "on écrit la fraction 5/25 puis on simplifie.", "5/25 = 1/5.", "un cinquième de la classe a eu la grippe."),
+    // ⛔ 07/10/2026 : plus de barre de fraction hors des notions de fractions (consigne du 06/10).
+    text: "Dans une classe de 25 élèves, 5 ont eu la grippe. Quelle part de la classe a eu la grippe ?",
+    format: "qcm", choices: ["1 élève sur 5", "1 élève sur 2", "1 élève sur 25", "tous les élèves"], expected: ["1 élève sur 5"], comparator: "mcq_exact",
+    hint: "Fais des groupes de 5 élèves : combien de groupes dans la classe ?",
+    explanation: se("interpréter, c’est exprimer une part par rapport au total.", "on cherche combien de fois 5 tient dans 25.", "25 ÷ 5 = 5 : il y a 5 groupes de 5 élèves, et 1 malade par groupe en moyenne.", "1 élève sur 5 a eu la grippe, soit un cinquième de la classe."),
     tags: ["stat_donnee", "interpreter", "fraction", "qcm"],
   },
 
@@ -1995,105 +2620,20 @@ export const donneesBank: TutorBankItemV4[] = [
     ),
     tags: ["stat_enquete", "planifier", "qcm"],
   },
-  {
-    kind: "template",
-    id: "stat_enquete_planifier_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_enquete",
-    microId: "stat_enquete_planifier",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Demande-toi qui n'a aucune chance d'être interrogé.",
-    tags: ["stat_enquete", "planifier", "template"],
-    generate: () => {
-      const cas = [
-        {
-          sujet: "le temps passé devant les écrans par les élèves du collège",
-          mauvais: "les élèves qui sortent du club informatique",
-          bon: "des élèves tirés au sort dans toutes les classes",
-        },
-        {
-          sujet: "le moyen de transport des élèves pour venir au collège",
-          mauvais: "les élèves qui descendent du bus le matin",
-          bon: "des élèves tirés au sort dans toutes les classes",
-        },
-        {
-          sujet: "le petit-déjeuner des élèves du collège",
-          mauvais: "les élèves qui font la queue à la cafétéria",
-          bon: "des élèves tirés au sort dans toutes les classes",
-        },
-        {
-          sujet: "le livre préféré des élèves du collège",
-          mauvais: "les élèves présents au CDI à midi",
-          bon: "des élèves tirés au sort dans toutes les classes",
-        },
-      ];
-      const c = randomChoice(cas);
-      return {
-        text: `On veut connaître ${c.sujet}. Qui faut-il interroger ?`,
-        format: "qcm",
-        choices: shuffle([
-          c.bon,
-          c.mauvais,
-          "les délégués de chaque classe seulement",
-          "les professeurs du collège",
-        ]),
-        expected: [c.bon],
-        comparator: "mcq_exact",
-        explanation: se(
-          "les personnes interrogées doivent représenter l'ensemble sur lequel on veut conclure.",
-          "on cherche un groupe où chaque élève du collège a une chance d'être choisi.",
-          `Interroger ${c.mauvais} met de côté tous les autres, et fausse le résultat. Les délégués ne sont pas des élèves comme les autres, et les professeurs ne sont pas des élèves du tout. Seul un tirage au sort dans toutes les classes donne à chacun une chance d'être interrogé.`,
-          "on interroge un groupe qui ressemble à toute la population étudiée."
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "stat_enquete_planifier_tpl_ouverte",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_enquete",
-    microId: "stat_enquete_planifier",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Parle de la question, de qui on interroge, et de ce qu'on note.",
-    tags: ["stat_enquete", "planifier", "template", "ouverte"],
-    generate: () => {
-      const cas = [
-        {
-          q: "Explique les étapes à prévoir AVANT de commencer à recueillir les données d'une enquête.",
-          mots: ["question", "qui", "interroge", "noter", "tableau", "avant"],
-          r: "On fixe d'abord la question exacte, formulée de façon que deux personnes d'accord répondent pareil. On décide ensuite qui on interroge, et on vérifie que ce groupe représente bien l'ensemble sur lequel on veut conclure. On prépare enfin la façon de noter les réponses — le plus souvent un tableau, avec une ligne par personne ou une ligne par réponse possible. Tout cela se décide avant, parce qu'aucun calcul ne rattrape une enquête mal préparée.",
-        },
-        {
-          q: "Un élève veut connaître le dessert préféré du collège et interroge dix camarades à la sortie du self. Explique pourquoi son enquête peut donner un résultat faussé.",
-          mots: ["self", "demi-pensionnaires", "externes", "représente", "represente", "dix", "peu"],
-          r: "À la sortie du self, il n'interroge que des demi-pensionnaires : les externes, qui mangent chez eux, n'ont aucune chance d'être choisis. Son groupe ne représente donc pas tout le collège. S'y ajoute un second problème : dix personnes, c'est très peu, et le hasard peut à lui seul faire ressortir un dessert. Un groupe mal choisi et un groupe trop petit faussent le résultat de deux façons différentes.",
-        },
-        {
-          q: "Pourquoi la formulation de la question compte-t-elle autant que le nombre de personnes interrogées ?",
-          mots: ["oriente", "influence", "précise", "precise", "comparer", "même", "meme"],
-          r: "Parce qu'une question mal formulée fausse toutes les réponses à la fois, même si on interroge le collège entier. Une question qui oriente — « le sport, c'est important, non ? » — souffle sa réponse. Une question vague donne des réponses qu'on ne peut ni compter ni comparer. Interroger plus de monde ne fait alors qu'accumuler des réponses inexploitables.",
-        },
-      ];
-      const c = randomChoice(cas);
-      return {
-        text: c.q,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
-        explanation: se(
-          "planifier une enquête, c'est décider ce qu'on cherche, auprès de qui, et comment on l'enregistre.",
-          "on fixe la question, la population, puis le support de recueil.",
-          c.r,
-          "on garde le raisonnement, il vaut pour toute enquête."
-        ),
-      };
-    },
-  },
+  gab(
+    "stat_enquete_planifier_tpl_1", "stat_enquete", "stat_enquete_planifier", 3,
+    "Demande-toi qui n'a aucune chance d'être interrogé.",
+    ["stat_enquete", "planifier", "template"],
+    qPlanifierQui,
+  ),
+  // ⭐ 07/10/2026 : ancienne question OUVERTE à mots-clés (« qui » suffisait),
+  // devenue un QCM sur le même piège — le biais d'échantillon.
+  gab(
+    "stat_enquete_planifier_tpl_ouverte", "stat_enquete", "stat_enquete_planifier", 4,
+    "Qui n'avait aucune chance d'être interrogé ?",
+    ["stat_enquete", "planifier", "piege", "template"],
+    qPlanifierJuger,
+  ),
 
   // ═══════════════════════════════════════════════════════════════════════════
   // STAT_ENQUETE_MESURER — réaliser des mesures et les consigner
@@ -2213,83 +2753,20 @@ export const donneesBank: TutorBankItemV4[] = [
     ),
     tags: ["stat_enquete", "mesurer", "piege", "qcm"],
   },
-  {
-    kind: "template",
-    id: "stat_enquete_mesurer_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_enquete",
-    microId: "stat_enquete_mesurer",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Une ligne par objet mesuré, une colonne par grandeur.",
-    tags: ["stat_enquete", "mesurer", "template"],
-    generate: () => {
-      const cas = [
-        { quoi: "la taille de 12 élèves", grandeur: "Taille", unite: "cm", lignes: 12 },
-        { quoi: "la masse de 8 cailloux ramassés", grandeur: "Masse", unite: "g", lignes: 8 },
-        { quoi: "la longueur de 10 feuilles d'arbre", grandeur: "Longueur", unite: "cm", lignes: 10 },
-        { quoi: "la durée de 6 trajets en bus", grandeur: "Durée", unite: "min", lignes: 6 },
-      ];
-      const c = randomChoice(cas);
-      return {
-        text: `Tu dois relever ${c.quoi} et les consigner dans un tableau. Combien de LIGNES de données ton tableau contiendra-t-il, en plus de l'en-tête ?`,
-        format: "short",
-        expected: [String(c.lignes)],
-        comparator: "number_equal",
-        explanation: se(
-          "un tableau de mesures porte une ligne par objet mesuré, et une ligne d'en-tête qui nomme les colonnes.",
-          "on compte les objets mesurés : c'est le nombre de lignes de données.",
-          `Il y a ${c.lignes} mesures à relever, donc ${c.lignes} lignes de données. L'en-tête, lui, ne contient aucune mesure : il annonce les colonnes, ici « ${c.grandeur} (${c.unite}) ». L'unité s'écrit dans cet en-tête, une seule fois, et les cases ne portent que des nombres.`,
-          `on garde ${c.lignes} lignes de données.`
-        ),
-      };
-    },
-  },
-  {
-    kind: "template",
-    id: "stat_enquete_mesurer_tpl_ouverte",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_enquete",
-    microId: "stat_enquete_mesurer",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Pense à l'unité, et à ce qu'on doit pouvoir relire plus tard.",
-    tags: ["stat_enquete", "mesurer", "template", "ouverte"],
-    generate: () => {
-      const cas = [
-        {
-          q: "Explique comment organiser un tableau pour relever la taille de tous les élèves de ta classe.",
-          mots: ["colonne", "ligne", "prénom", "prenom", "unité", "unite", "cm", "en-tête", "en-tete"],
-          r: "Je prévois deux colonnes : la première identifie l'élève (son prénom ou un numéro), la seconde reçoit sa taille. En haut, l'en-tête annonce « Taille (cm) », avec l'unité écrite une seule fois. Puis une ligne par élève, remplie au fur et à mesure des mesures. Ainsi je peux relire le tableau plus tard et savoir exactement à qui correspond chaque nombre.",
-        },
-        {
-          q: "Pourquoi faut-il écrire les mesures pendant qu'on les fait, et non les retenir pour les noter à la fin ?",
-          mots: ["oublie", "mémoire", "memoire", "erreur", "recommencer", "ordre"],
-          r: "Parce que la mémoire perd des données et en mélange l'ordre : au bout de quelques mesures, on ne sait plus laquelle appartient à qui. Une donnée perdue ne se retrouve pas, il faut recommencer toute la mesure. Noter au fur et à mesure coûte quelques secondes et garantit qu'on pourra tout relire — c'est pour cela qu'on prépare le tableau AVANT de commencer.",
-        },
-        {
-          q: "Un tableau de masses contient 1,2 kg, 800 g et 0,5 kg. Explique le problème et comment le corriger.",
-          mots: ["unité", "unite", "même", "meme", "convertir", "0,8", "comparer"],
-          r: "Les trois mesures ne sont pas dans la même unité : en lisant les nombres seuls, 800 semble le plus grand alors que 800 g ne valent que 0,8 kg. Tant que les unités diffèrent, on ne peut ni comparer ni additionner. Je choisis donc une unité pour toute la colonne — le kilogramme, par exemple — et je convertis : 1,2 kg ; 0,8 kg ; 0,5 kg. L'en-tête indique alors « Masse (kg) ».",
-        },
-      ];
-      const c = randomChoice(cas);
-      return {
-        text: c.q,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
-        explanation: se(
-          "consigner des mesures, c'est les écrire de façon à pouvoir les relire et les comparer.",
-          "une ligne par objet mesuré, une unité unique annoncée dans l'en-tête.",
-          c.r,
-          "on garde le raisonnement, il vaut pour tout relevé."
-        ),
-      };
-    },
-  },
+  gab(
+    "stat_enquete_mesurer_tpl_1", "stat_enquete", "stat_enquete_mesurer", 3,
+    "Toute la colonne s'écrit dans l'unité de l'en-tête.",
+    ["stat_enquete", "mesurer", "unite", "template"],
+    qConvertirMesure,
+  ),
+  // ⭐ 07/10/2026 : ancienne question OUVERTE à mots-clés (« cm » suffisait),
+  // devenue un QCM sur le même piège — des unités mélangées dans une colonne.
+  gab(
+    "stat_enquete_mesurer_tpl_ouverte", "stat_enquete", "stat_enquete_mesurer", 4,
+    "Convertis tout dans la même unité avant de comparer.",
+    ["stat_enquete", "mesurer", "unite", "piege", "template"],
+    qComparerMesures,
+  ),
 
   // ═══════════════════════════════════════════════════════════════════════════
   // STAT_CONSTRUIRE_TABLEAU — construire un tableau d'effectifs
@@ -2388,100 +2865,117 @@ export const donneesBank: TutorBankItemV4[] = [
     ),
     tags: ["stat_enquete", "construire", "short"],
   },
-  {
-    kind: "template",
-    id: "stat_construire_tableau_tpl_1",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_enquete",
-    microId: "stat_construire_tableau",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "La somme des effectifs vaut le nombre de personnes interrogées.",
-    tags: ["stat_enquete", "construire", "template"],
-    generate: () => {
-      const jeux = [
-        { titre: "Sport préféré", labels: ["Football", "Natation", "Danse", "Escalade"] },
-        { titre: "Transport pour venir au collège", labels: ["Bus", "Vélo", "Marche", "Voiture"] },
-        { titre: "Fruit préféré", labels: ["Mangue", "Letchi", "Ananas", "Banane"] },
-        { titre: "Matière préférée", labels: ["Maths", "Français", "Histoire", "SVT"] },
-      ];
-      const j = randomChoice(jeux);
-      const effectifs = j.labels.map(() => Math.floor(Math.random() * 8) + 2);
-      const total = effectifs.reduce((a, b) => a + b, 0);
-      const cache = Math.floor(Math.random() * j.labels.length);
-      const connus = effectifs.filter((_, i) => i !== cache);
-      const sommeConnus = connus.reduce((a, b) => a + b, 0);
+  gab(
+    "stat_construire_tableau_tpl_1", "stat_enquete", "stat_construire_tableau", 3,
+    "Compte chaque réponse en la barrant ; la somme des effectifs redonne le total.",
+    ["stat_enquete", "construire", "template"],
+    () => (Math.random() < 0.6 ? qCompterBrut() : qManquant(tirerSerie(4, "tableau"))),
+  ),
+  // ⭐ 07/10/2026 : ancienne question OUVERTE à mots-clés (« ligne » suffisait),
+  // devenue une réponse numérique sur les mêmes pièges : une ligne par réponse
+  // POSSIBLE, et le contrôle par la somme des effectifs.
+  gab(
+    "stat_construire_tableau_tpl_ouverte", "stat_enquete", "stat_construire_tableau", 4,
+    "Une ligne par réponse possible ; la somme des effectifs redonne le nombre de personnes interrogées.",
+    ["stat_enquete", "construire", "controle", "template"],
+    () => (Math.random() < 0.55 ? qControleSomme() : qLignesEffectifs()),
+  ),
 
-      return {
-        text: `On a interrogé ${total} élèves. Le tableau est presque complet : ${j.labels
-          .filter((_, i) => i !== cache)
-          .map((l, i) => `${l} ${connus[i]}`)
-          .join(", ")}. Quel est l'effectif de « ${j.labels[cache]} » ?`,
-        format: "short",
-        expected: [String(effectifs[cache])],
-        comparator: "number_equal",
-        explanation: se(
-          "la somme des effectifs est égale au nombre de personnes interrogées.",
-          "on additionne les effectifs connus, puis on retire cette somme du total.",
-          `Les effectifs connus font ${connus.join(" + ")} = ${sommeConnus}. Comme ${total} élèves ont été interrogés et que chacun n'a donné qu'une réponse, il reste ${total} − ${sommeConnus} = ${effectifs[cache]} élèves pour « ${j.labels[cache]} ». Vérification : ${effectifs.join(" + ")} = ${total}.`,
-          `on garde ${effectifs[cache]}.`
-        ),
-        canvas: tableauDonneesCanvas({
-          title: `${j.titre} (${total} élèves)`,
-          headers: ["Effectif"],
-          // `values` accepte string | number : le « ? » de la case à trouver
-          // n'a donc besoin d'aucun contournement de type.
-          rows: j.labels.map((l, i) => ({
-            label: l,
-            values: [i === cache ? "?" : effectifs[i]],
-          })),
-        }),
-      };
+  /* ═════ GABARITS AJOUTÉS LE 07/10/2026 : une étoile servie sans gabarit
+     revenait aux seuls items figés, vus une fois puis resservis. ═════ */
+
+  gab(
+    "6e_stat_lire_tableau_tpl_e1", "stat_enquete", "stat_donnee_lire_tableau", 1,
+    "Repère la bonne ligne, puis lis le nombre.",
+    ["stat_donnee", "tableau", "lecture", "template", "canvas"],
+    () => qLire(tirerSerie(3, "tableau")),
+  ),
+  gab(
+    "6e_stat_lire_tableau_tpl_e4", "stat_enquete", "stat_donnee_lire_tableau", 4,
+    "Lis le tableau dans les deux sens : de la ligne vers le nombre, ou du nombre vers la ligne.",
+    ["stat_donnee", "tableau", "lecture", "template", "canvas"],
+    () => (Math.random() < 0.5 ? qInverse(tirerSerie(entre(4, 5), "tableau")) : qSomme2(tirerSerie(entre(4, 5), "tableau"))),
+  ),
+  gab(
+    "6e_stat_lire_graphique_tpl_e1", "stat_donnee", "stat_donnee_lire_graphique", 1,
+    "Repère la barre demandée et lis le nombre écrit au-dessus.",
+    ["stat_donnee", "graphique", "lecture", "template", "canvas"],
+    () => qLire(tirerSerie(3, pick(["barres", "batons"] as const))),
+  ),
+  gab(
+    "6e_stat_lire_graphique_tpl_e4", "stat_donnee", "stat_donnee_lire_graphique", 4,
+    "Cherche le nombre, puis remonte à sa barre.",
+    ["stat_donnee", "graphique", "lecture", "template", "canvas"],
+    () => (Math.random() < 0.5 ? qInverse(tirerSerie(entre(4, 5), pick(["barres", "batons"] as const))) : qSomme2(tirerSerie(entre(4, 5), pick(["barres", "batons"] as const)))),
+  ),
+  gab(
+    "6e_stat_prelever_tpl_e4", "stat_donnee", "stat_donnee_prelever", 4,
+    "Une donnée se lit au croisement d’une ligne et d’une colonne, dans les deux sens.",
+    ["stat_donnee", "prelever", "tableau_double_entree", "template", "canvas"],
+    () => (Math.random() < 0.5 ? qCelluleInverse(tirerDouble(4, 3)) : qCellule(tirerDouble(4, 3))),
+  ),
+  gab(
+    "6e_stat_comparer_tpl_e1", "stat_donnee", "stat_donnee_comparer", 1,
+    "Compare les trois nombres du tableau.",
+    ["stat_donnee", "comparer", "tableau", "template", "canvas"],
+    () => qExtreme(tirerSerie(3, "tableau")),
+  ),
+  gab(
+    "6e_stat_comparer_tpl_e2", "stat_donnee", "stat_donnee_comparer", 2,
+    "Pour savoir combien de plus, on soustrait le plus petit du plus grand.",
+    ["stat_donnee", "comparer", "difference", "template", "canvas"],
+    () => qDiff(tirerSerie(entre(3, 4), "tableau")),
+  ),
+  gab(
+    "6e_stat_interpreter_tpl_e2", "stat_donnee", "stat_donnee_interpreter", 2,
+    "Vérifie chaque phrase avec les nombres.",
+    ["stat_donnee", "interpreter", "template", "canvas"],
+    () => qVrai(tirerSerie(3, pick(["barres", "batons", "tableau"] as const)), [pick(["max", "min", "plusQue"] as const), "plusQue", "max", "min"]),
+  ),
+  gab(
+    "6e_stat_interpreter_tpl_e3", "stat_donnee", "stat_donnee_interpreter", 3,
+    "Vérifie chaque phrase avec les nombres : une seule tient.",
+    ["stat_donnee", "interpreter", "template", "canvas"],
+    () => qVrai(tirerSerie(4, pick(["barres", "batons", "tableau", "camembert"] as const)), [pick(["ecart", "plusQue"] as const), "plusQue", "max", "min", "ecart"]),
+  ),
+  gab(
+    "6e_stat_interpreter_tpl_e5", "stat_donnee", "stat_donnee_interpreter", 5,
+    "Calcule le total avant de juger « plus de la moitié ».",
+    ["stat_donnee", "interpreter", "moitie", "template", "canvas"],
+    () => {
+      // Des relevés à petits nombres : une catégorie majoritaire reste plausible (pas 122 livres).
+      const s = tirerSerie(4, pick(["barres", "camembert", "tableau"] as const), pick(CTX_STAT.filter((c) => c.max <= 25)));
+      // Une fois sur deux, une catégorie dépasse à elle seule la moitié du total.
+      if (Math.random() < 0.5) {
+        const k = entre(0, 3);
+        const autres = somme(s.v) - s.v[k];
+        s.v[k] = autres + entre(1, 5);
+      }
+      return qVrai(s, [pick(["moitie", "total", "ecart"] as const), "moitie", "total", "ecart", "double"]);
     },
-  },
-  {
-    kind: "template",
-    id: "stat_construire_tableau_tpl_ouverte",
-    niveau: "6e",
-    matiere: "maths",
-    notionId: "stat_enquete",
-    microId: "stat_construire_tableau",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Explique le passage de la liste brute au tableau qui compte.",
-    tags: ["stat_enquete", "construire", "template", "ouverte"],
-    generate: () => {
-      const cas = [
-        {
-          q: "Tu as recueilli 25 réponses écrites à la suite sur une feuille. Explique comment en faire un tableau qui se lit d'un coup d'œil.",
-          mots: ["réponses possibles", "reponses possibles", "ligne", "compte", "effectif", "coche", "somme"],
-          r: "Je commence par lister les réponses POSSIBLES — elles sont peu nombreuses — et je fais une ligne pour chacune, pas une ligne par élève. Je parcours ensuite ma feuille une seule fois, en cochant chaque réponse dans la bonne ligne. Je compte enfin les coches : c'est l'effectif. Vingt-cinq réponses illisibles deviennent quatre lignes qu'on lit d'un regard, et je vérifie en additionnant les effectifs, qui doivent redonner 25.",
-        },
-        {
-          q: "Explique pourquoi un tableau d'effectifs a une ligne par réponse possible, et non une ligne par personne interrogée.",
-          mots: ["résumer", "resumer", "compte", "lisible", "recopier", "possible"],
-          r: "Parce que le tableau sert à RÉSUMER, pas à recopier. Une ligne par personne redonnerait la liste brute, tout aussi illisible, en plus long. Une ligne par réponse possible transforme la liste en comptage : on ne voit plus qui a répondu quoi, mais on voit immédiatement ce qui l'emporte. On perd le détail individuel, et c'est justement ce qu'on cherche — un tableau d'effectifs répond à « combien », pas à « qui ».",
-        },
-        {
-          q: "Comment vérifier qu'un tableau d'effectifs est complet, et que peut signaler une erreur ?",
-          mots: ["somme", "total", "interrogées", "interrogees", "oublié", "oublie", "deux fois"],
-          r: "On additionne tous les effectifs : la somme doit redonner exactement le nombre de personnes interrogées, puisque chacune a donné une réponse et une seule. Si la somme est trop petite, des réponses ont été oubliées ou une catégorie manque au tableau. Si elle est trop grande, quelqu'un a été compté deux fois — souvent en repassant sur une ligne déjà cochée. C'est un contrôle qui prend dix secondes et attrape les deux erreurs les plus fréquentes.",
-        },
-      ];
-      const c = randomChoice(cas);
-      return {
-        text: c.q,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
-        explanation: se(
-          "un tableau d'effectifs range des observations en comptant combien de fois chaque réponse apparaît.",
-          "une ligne par réponse possible, un comptage, puis un contrôle par la somme.",
-          c.r,
-          "on garde le raisonnement, il vaut pour tout recueil."
-        ),
-      };
-    },
-  },
+  ),
+  gab(
+    "stat_enquete_planifier_tpl_e2", "stat_enquete", "stat_enquete_planifier", 2,
+    "Une bonne question appelle une réponse précise, sans la souffler.",
+    ["stat_enquete", "planifier", "question", "template"],
+    qPlanifierQuestion,
+  ),
+  gab(
+    "stat_enquete_mesurer_tpl_e2", "stat_enquete", "stat_enquete_mesurer", 2,
+    "Une ligne par mesure ; l'en-tête ne compte pas.",
+    ["stat_enquete", "mesurer", "template"],
+    qLignesMesure,
+  ),
+  gab(
+    "6e_stat_defi_tpl_e3", "stat_donnee", "stat_donnee_defi", 3,
+    "Lis toutes les valeurs, puis additionne.",
+    ["stat_donnee", "defi", "total", "template", "canvas"],
+    () => (Math.random() < 0.6 ? qTotal(tirerSerie(5, pick(["barres", "batons"] as const))) : qSomme2(tirerSerie(5, pick(["barres", "batons"] as const)))),
+  ),
+  gab(
+    "6e_stat_defi_tpl_e4", "stat_donnee", "stat_donnee_defi", 4,
+    "Une case effacée se retrouve avec le total.",
+    ["stat_donnee", "defi", "total", "template", "canvas"],
+    () => (Math.random() < 0.6 ? qManquant(tirerSerie(4, "tableau")) : qTotalDouble(tirerDouble(3, 2), pick(["ligne", "colonne"] as const))),
+  ),
 ];
