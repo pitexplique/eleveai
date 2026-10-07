@@ -460,8 +460,15 @@ function CarteNiveau({
    *  celui qu'on mesure. */
   pister?: () => void;
 }) {
+  /* ⭐ TOUTE LA LIGNE EST CLIQUABLE (07/10/2026). Frédéric : « on a envie de
+     cliquer sur toute la ligne, or le clic ne fonctionne que sur Voir les
+     notions ». Le lien reste le bouton (un seul lien, lu une fois par les
+     lecteurs d'écran), mais son `::after` s'étire sur toute la carte. */
+  const cliquable = notions.length > 0;
   return (
-    <article className="flex overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:border-slate-300 hover:shadow-md">
+    <article
+      className={`relative flex overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:border-slate-300 hover:shadow-md ${cliquable ? "cursor-pointer hover:bg-slate-50" : ""}`}
+    >
       <div
         className={`flex w-16 shrink-0 items-center justify-center px-1 text-center text-sm font-black leading-tight text-white sm:w-20 ${teinte.chip}`}
       >
@@ -499,7 +506,7 @@ function CarteNiveau({
             prefetch={false}
             href={href}
             onClick={pister}
-            className={`inline-flex shrink-0 items-center gap-1 self-start rounded-lg px-3 py-2 text-sm font-bold text-white shadow-sm transition hover:brightness-110 sm:self-center ${teinte.chip}`}
+            className={`inline-flex shrink-0 items-center gap-1 self-start rounded-lg px-3 py-2 text-sm font-bold text-white shadow-sm transition hover:brightness-110 after:absolute after:inset-0 after:content-[''] sm:self-center ${teinte.chip}`}
           >
             {verbe}
             <ChevronRight className="h-4 w-4" aria-hidden="true" />
