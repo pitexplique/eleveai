@@ -779,15 +779,16 @@ export default function Header() {
             <Link
               prefetch={false}
               href="/accueil"
-              title="Accueil"
               className={`hidden shrink-0 rounded-full px-2.5 py-2 text-sm font-black transition lg:inline-flex ${
                 paper
                   ? "text-[#1d1c16]/85 hover:bg-[#1d1c16]/10"
                   : "text-white/85 hover:bg-white/15 hover:text-white"
               }`}
             >
-              <span aria-hidden="true">🏠</span>
-              <span className="sr-only">Accueil</span>
+              {/* ⛔ LE MOT, PLUS L'ICÔNE (Frédéric, 07/10/2026 : « les élèves ne
+                  voient pas l'icône maison »). Un 🏠 seul ne se lit pas comme un
+                  lien ; « Accueil » écrit, si. */}
+              Accueil
             </Link>
           )}
         </div>
