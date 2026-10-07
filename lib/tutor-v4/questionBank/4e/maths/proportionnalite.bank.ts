@@ -117,9 +117,20 @@ function fr(n: number) {
   return formatNumber(n).replace(".", ",");
 }
 
-/** Réponse attendue : un décimal est accepté avec point OU virgule. */
-function attendu(n: number) {
-  return Number.isInteger(n) ? [String(n)] : [formatNumber(n), fr(n)];
+/**
+ * Réponse attendue, écrite à la française (le comparateur accepte aussi le
+ * point : « 1.3 » vaut « 1,3 »). ⭐ 07/10/2026 (Frédéric) : l'UNITÉ va dans la
+ * réponse quand c'est une mesure (« 12 € », « 45 min ») ; l'élève peut
+ * l'omettre, mais pas en écrire une autre (lib/answerMatch.ts). Pour un
+ * dénombrement (« 12 pages », « 300 habitants »), pas d'unité.
+ * ⚠️ Plus de forme « 1.3 » en tête : le contrôle commun refuse le point décimal.
+ */
+const UNITES_MESURE = new Set(["€", "km", "m", "cm", "g", "kg", "L", "mL", "kWh", "m²", "h", "min", "%", "Go", "tonnes", "hectares"]);
+function attendu(n: number, u = "") {
+  const unite = u === "minutes" ? "min" : u === "heures" ? "h" : u;
+  if (!UNITES_MESURE.has(unite)) return [fr(n)];
+  const enLettres = unite === "min" ? [`${fr(n)} minutes`] : unite === "h" ? [`${fr(n)} heures`] : [];
+  return [`${fr(n)} ${unite}`, ...enLettres];
 }
 
 function cap(s: string) {
@@ -632,7 +643,8 @@ function genQuatrieme(niveau: 1 | 2 | 3) {
   return {
     text,
     format: "short" as const,
-    expected: attendu(rep),
+    // Le tableau (t = 4) demande une case : pas d'unité.
+    expected: attendu(rep, canvas ? "" : inverse ? s.uA : s.uB),
     comparator: "number_equal" as const,
     explanation: inverse
       ? expl(
@@ -718,7 +730,7 @@ function genCoeff(niveau: 1 | 2 | 3) {
     return {
       text,
       format: "short" as const,
-      expected: attendu(m),
+      expected: attendu(m, s.uB),
       comparator: "number_equal" as const,
       explanation: expl(
         DEF_PROP,
@@ -731,7 +743,9 @@ function genCoeff(niveau: 1 | 2 | 3) {
   return {
     text,
     format: "short" as const,
-    expected: attendu(k),
+    // « Quel est le prix d’un ballon ? » (t = 1, 2) : une mesure, avec son unité ;
+    // « Par quel nombre multiplie-t-on… ? » (t = 3, 4) : un nombre seul.
+    expected: attendu(k, t <= 2 ? s.uB : ""),
     comparator: "number_equal" as const,
     explanation: expl(
       DEF_PROP,
@@ -817,7 +831,7 @@ function genProbleme(niveau: 3 | 4) {
     return {
       text,
       format: "short" as const,
-      expected: attendu(rep),
+      expected: attendu(rep, inverse ? s.uA : s.uB),
       comparator: "number_equal" as const,
       explanation: expl(
         DEF_PROP,
@@ -845,7 +859,7 @@ function genProbleme(niveau: 3 | 4) {
     return {
       text: `${cap(s.lien(n1, m1))}. Calcule la différence entre ${s.valeurB(n3)} et ${s.valeurB(n2)}.`,
       format: "short" as const,
-      expected: attendu(m3 - m2),
+      expected: attendu(m3 - m2, s.uB),
       comparator: "number_equal" as const,
       explanation: expl(
         DEF_PROP,
@@ -858,7 +872,7 @@ function genProbleme(niveau: 3 | 4) {
   return {
     text: `${cap(s.lien2(n1, m1))}. Calcule ${s.valeurB(n2)}, puis ${s.valeurB(n3)}, et donne la somme des deux résultats.`,
     format: "short" as const,
-    expected: attendu(m2 + m3),
+    expected: attendu(m2 + m3, s.uB),
     comparator: "number_equal" as const,
     explanation: expl(
       DEF_PROP,
@@ -1029,7 +1043,7 @@ function genNouvelleValeur(taux: number[]) {
   return {
     text,
     format: "short" as const,
-    expected: attendu(res),
+    expected: attendu(res, s.u),
     comparator: "number_equal" as const,
     explanation: expl(
       `une ${w.nomEvol} de p % revient à multiplier par ${hausse ? "1 + p ÷ 100" : "1 − p ÷ 100"}.`,
@@ -1053,7 +1067,7 @@ function genTauxEvolution(taux: number[]) {
   return {
     text,
     format: "short" as const,
-    expected: [String(p)],
+    expected: attendu(p, "%"),
     comparator: "number_equal" as const,
     explanation: expl(
       "le pourcentage d’évolution est égal à (variation ÷ valeur de départ) × 100.",
@@ -1122,7 +1136,7 @@ function genCoeffVersTaux(taux: number[]) {
   return {
     text,
     format: "short" as const,
-    expected: [String(p)],
+    expected: attendu(p, "%"),
     comparator: "number_equal" as const,
     explanation: expl(
       "multiplier par 1 + p ÷ 100, c’est augmenter de p % ; multiplier par 1 − p ÷ 100, c’est diminuer de p %.",
@@ -1144,7 +1158,7 @@ function genAppliquerCoeff(taux: number[]) {
   return {
     text,
     format: "short" as const,
-    expected: attendu(res),
+    expected: attendu(res, s.u),
     comparator: "number_equal" as const,
     explanation: expl(
       `une ${w.nomEvol} de p % revient à multiplier par ${hausse ? "1 + p ÷ 100" : "1 − p ÷ 100"}.`,
@@ -1180,7 +1194,7 @@ function genSuccessives(memeTaux: boolean) {
     return {
       text,
       format: "short" as const,
-      expected: attendu(res),
+      expected: attendu(res, s.u),
       comparator: "number_equal" as const,
       explanation: expl(
         "des évolutions successives se traduisent par des coefficients multiplicateurs qui se multiplient ; les pourcentages ne s’ajoutent pas.",
@@ -1294,7 +1308,7 @@ function genRetour() {
     return {
       text,
       format: "short" as const,
-      expected: [String(r.b)],
+      expected: attendu(r.b, "%"),
       comparator: "number_equal" as const,
       explanation: expl(
         `la ${w2.nomEvol} s’applique à la NOUVELLE valeur (${mid} ${s.u}), pas à ${v} ${s.u} : ce n’est donc pas ${r.a} %.`,
@@ -1331,7 +1345,7 @@ function genDepart() {
     return {
       text,
       format: "short" as const,
-      expected: attendu(v),
+      expected: attendu(v, s.u),
       comparator: "number_equal" as const,
       explanation: expl(
         "départ × coefficient global = arrivée ; pour remonter, on DIVISE par le coefficient global (enlever les pourcentages ne marche pas).",
@@ -1368,7 +1382,7 @@ function genCoeffMillieme() {
       t === 0
         ? `Multiplier par ${C} correspond à une ${w.nomEvol} de combien de pour cent ?`
         : `${cap(s.nom)} est ${s.genre === "m" ? "multiplié" : "multipliée"} par ${C}. Quel est le pourcentage ${w.taux} ?`;
-    return { text, format: "short" as const, expected: attendu(p), comparator: "number_equal" as const, explanation };
+    return { text, format: "short" as const, expected: attendu(p, "%"), comparator: "number_equal" as const, explanation };
   }
   const correct = libelleEvol(hausse ? p : -p);
   const text =
@@ -1680,7 +1694,7 @@ function genPourcentage(types: Array<"partie" | "aide" | "taux" | "total" | "fra
     return {
       text,
       format: "short" as const,
-      expected: [String(p)],
+      expected: attendu(p, "%"),
       comparator: "number_equal" as const,
       explanation: expl(defPct, "pourcentage = partie ÷ total × 100.", `${x} ÷ ${N} × 100 = ${p}.`, `cela représente ${p} %.`),
     };
@@ -1689,7 +1703,7 @@ function genPourcentage(types: Array<"partie" | "aide" | "taux" | "total" | "fra
     return {
       text: `${s.totalInconnu(x, p)} ${s.qTotal}`,
       format: "short" as const,
-      expected: [String(N)],
+      expected: attendu(N, s.u),
       comparator: "number_equal" as const,
       explanation: expl(
         defPct,
@@ -1705,7 +1719,7 @@ function genPourcentage(types: Array<"partie" | "aide" | "taux" | "total" | "fra
   return {
     text,
     format: "short" as const,
-    expected: [String(x)],
+    expected: attendu(x, s.u),
     comparator: "number_equal" as const,
     explanation: expl(defPct, `${p} % de ${N} = ${N} × ${p} ÷ 100.`, `${N} × ${p} ÷ 100 = ${x}.`, `la réponse est ${x} ${s.u}.`),
   };
@@ -1753,23 +1767,29 @@ type SituationComparaison = {
   nom: string;
   u: string;
   N: number[];
+  /**
+   * ⛔ 07/10/2026 (coordinateur) : les pourcentages PLAUSIBLES pour la situation.
+   * « Dimanche, elle en vend 5 % du nombre de lundi », « les panneaux solaires
+   * atteignent 5 % de ceux de 2015 » : justes, mais pas crédibles.
+   */
+  plausible: [number, number];
 };
 
 const COMPARAISONS: SituationComparaison[] = [
-  { avant: (N) => `L’an dernier, un club de judo comptait ${N} adhérents.`, apres: (p) => `Cette année, le nombre d’adhérents représente ${p} % de celui de l’an dernier.`, q: "Combien d’adhérents le club compte-t-il cette année ?", nom: "le nombre d’adhérents de cette année", u: "adhérents", N: [40, 60, 80, 120, 140, 160, 200] },
-  { avant: (N) => `Au printemps, un plant de tomate mesurait ${N} cm.`, apres: (p) => `En été, sa hauteur atteint ${p} % de sa hauteur du printemps.`, q: "Combien mesure-t-il en été, en cm ?", nom: "sa hauteur en été", u: "cm", N: [40, 60, 80, 100, 120] },
-  { avant: (N) => `En semaine, un plombier facture une intervention ${N} €.`, apres: (p) => `Le dimanche, il facture ${p} % de ce tarif.`, q: "Combien coûte une intervention le dimanche, en € ?", nom: "le tarif du dimanche", u: "€", N: [60, 80, 120, 140, 160, 180] },
-  { avant: (N) => `Mardi, Malik a parcouru ${N} km à vélo.`, apres: (p) => `Samedi, il parcourt ${p} % de cette distance.`, q: "Combien de kilomètres parcourt-il samedi ?", nom: "la distance du samedi", u: "km", N: [20, 40, 60, 80] },
-  { avant: (N) => `Une vidéo de vulgarisation a fait ${N} vues le premier jour.`, apres: (p) => `Le deuxième jour, son nombre de vues atteint ${p} % de celui du premier jour.`, q: "Combien de vues a-t-elle faites le deuxième jour ?", nom: "le nombre de vues du deuxième jour", u: "vues", N: [200, 400, 600, 800, 1000, 1200] },
-  { avant: (N) => `L’an dernier, un verger a produit ${N} kg de pommes.`, apres: (p) => `Cette année, la récolte vaut ${p} % de celle de l’an dernier.`, q: "Combien de kilogrammes de pommes a-t-il produits cette année ?", nom: "la récolte de cette année", u: "kg", N: [200, 300, 400, 600, 800] },
-  { avant: (N) => `En janvier, Chloé a économisé ${N} €.`, apres: (p) => `En février, elle économise ${p} % de la somme de janvier.`, q: "Combien économise-t-elle en février ?", nom: "la somme économisée en février", u: "€", N: [20, 40, 60, 80, 100, 120] },
-  { avant: (N) => `Il y a dix ans, un marais abritait ${N} hérons.`, apres: (p) => `Aujourd’hui, leur nombre représente ${p} % de celui d’il y a dix ans.`, q: "Combien de hérons le marais abrite-t-il aujourd’hui ?", nom: "le nombre de hérons aujourd’hui", u: "hérons", N: [40, 60, 80, 120, 200] },
-  { avant: (N) => `Avec un tuyau d’arrosage, on remplit une piscine de ${N} L en une heure.`, apres: (p) => `Avec une pompe, on remplit en une heure ${p} % de cette quantité.`, q: "Combien de litres la pompe remplit-elle en une heure ?", nom: "le volume rempli par la pompe", u: "L", N: [400, 600, 800, 1000, 1200] },
-  { avant: (N) => `En janvier, une chaîne de cuisine comptait ${N} abonnés.`, apres: (p) => `En juin, son nombre d’abonnés vaut ${p} % de celui de janvier.`, q: "Combien a-t-elle d’abonnés en juin ?", nom: "le nombre d’abonnés en juin", u: "abonnés", N: [200, 400, 600, 1000, 2000] },
-  { avant: (N) => `Il y a vingt ans, un tableau a été acheté ${N} €.`, apres: (p) => `Aujourd’hui, il vaut ${p} % de son prix d’achat.`, q: "Combien vaut-il aujourd’hui, en € ?", nom: "sa valeur aujourd’hui", u: "€", N: [200, 400, 600, 800, 1000] },
-  { avant: (N) => `L’an dernier, une cantine a servi ${N} repas végétariens par mois.`, apres: (p) => `Cette année, elle en sert ${p} % de ce nombre.`, q: "Combien de repas végétariens sert-elle par mois cette année ?", nom: "le nombre de repas végétariens de cette année", u: "repas", N: [120, 160, 200, 240, 300] },
-  { avant: (N) => `Lundi, une boulangerie a vendu ${N} baguettes.`, apres: (p) => `Dimanche, elle en vend ${p} % du nombre de lundi.`, q: "Combien de baguettes vend-elle dimanche ?", nom: "le nombre de baguettes vendues dimanche", u: "baguettes", N: [100, 140, 160, 200, 240] },
-  { avant: (N) => `En 2015, une commune comptait ${N} panneaux solaires sur ses toits.`, apres: (p) => `Aujourd’hui, leur nombre atteint ${p} % de celui de 2015.`, q: "Combien de panneaux solaires compte-t-elle aujourd’hui ?", nom: "le nombre de panneaux aujourd’hui", u: "panneaux", N: [40, 80, 120, 160, 200] },
+  { avant: (N) => `L’an dernier, un club de judo comptait ${N} adhérents.`, apres: (p) => `Cette année, le nombre d’adhérents représente ${p} % de celui de l’an dernier.`, q: "Combien d’adhérents le club compte-t-il cette année ?", nom: "le nombre d’adhérents de cette année", u: "adhérents", N: [40, 60, 80, 120, 140, 160, 200], plausible: [50, 150] },
+  { avant: (N) => `Au printemps, un plant de tomate mesurait ${N} cm.`, apres: (p) => `En été, sa hauteur atteint ${p} % de sa hauteur du printemps.`, q: "Combien mesure-t-il en été, en cm ?", nom: "sa hauteur en été", u: "cm", N: [40, 60, 80, 100, 120], plausible: [100, 200] },
+  { avant: (N) => `En semaine, un plombier facture une intervention ${N} €.`, apres: (p) => `Le dimanche, il facture ${p} % de ce tarif.`, q: "Combien coûte une intervention le dimanche, en € ?", nom: "le tarif du dimanche", u: "€", N: [60, 80, 120, 140, 160, 180], plausible: [100, 200] },
+  { avant: (N) => `Mardi, Malik a parcouru ${N} km à vélo.`, apres: (p) => `Samedi, il parcourt ${p} % de cette distance.`, q: "Combien de kilomètres parcourt-il samedi ?", nom: "la distance du samedi", u: "km", N: [20, 40, 60, 80], plausible: [20, 200] },
+  { avant: (N) => `Une vidéo de vulgarisation a fait ${N} vues le premier jour.`, apres: (p) => `Le deuxième jour, son nombre de vues atteint ${p} % de celui du premier jour.`, q: "Combien de vues a-t-elle faites le deuxième jour ?", nom: "le nombre de vues du deuxième jour", u: "vues", N: [200, 400, 600, 800, 1000, 1200], plausible: [5, 200] },
+  { avant: (N) => `L’an dernier, un verger a produit ${N} kg de pommes.`, apres: (p) => `Cette année, la récolte vaut ${p} % de celle de l’an dernier.`, q: "Combien de kilogrammes de pommes a-t-il produits cette année ?", nom: "la récolte de cette année", u: "kg", N: [200, 300, 400, 600, 800], plausible: [50, 150] },
+  { avant: (N) => `En janvier, Chloé a économisé ${N} €.`, apres: (p) => `En février, elle économise ${p} % de la somme de janvier.`, q: "Combien économise-t-elle en février ?", nom: "la somme économisée en février", u: "€", N: [20, 40, 60, 80, 100, 120], plausible: [10, 200] },
+  { avant: (N) => `Il y a dix ans, un marais abritait ${N} hérons.`, apres: (p) => `Aujourd’hui, leur nombre représente ${p} % de celui d’il y a dix ans.`, q: "Combien de hérons le marais abrite-t-il aujourd’hui ?", nom: "le nombre de hérons aujourd’hui", u: "hérons", N: [40, 60, 80, 120, 200], plausible: [20, 200] },
+  { avant: (N) => `Avec un tuyau d’arrosage, on remplit une piscine de ${N} L en une heure.`, apres: (p) => `Avec une pompe, on remplit en une heure ${p} % de cette quantité.`, q: "Combien de litres la pompe remplit-elle en une heure ?", nom: "le volume rempli par la pompe", u: "L", N: [400, 600, 800, 1000, 1200], plausible: [100, 200] },
+  { avant: (N) => `En janvier, une chaîne de cuisine comptait ${N} abonnés.`, apres: (p) => `En juin, son nombre d’abonnés vaut ${p} % de celui de janvier.`, q: "Combien a-t-elle d’abonnés en juin ?", nom: "le nombre d’abonnés en juin", u: "abonnés", N: [200, 400, 600, 1000, 2000], plausible: [100, 200] },
+  { avant: (N) => `Il y a vingt ans, un tableau a été acheté ${N} €.`, apres: (p) => `Aujourd’hui, il vaut ${p} % de son prix d’achat.`, q: "Combien vaut-il aujourd’hui, en € ?", nom: "sa valeur aujourd’hui", u: "€", N: [200, 400, 600, 800, 1000], plausible: [20, 200] },
+  { avant: (N) => `L’an dernier, une cantine a servi ${N} repas végétariens par mois.`, apres: (p) => `Cette année, elle en sert ${p} % de ce nombre.`, q: "Combien de repas végétariens sert-elle par mois cette année ?", nom: "le nombre de repas végétariens de cette année", u: "repas", N: [120, 160, 200, 240, 300], plausible: [50, 200] },
+  { avant: (N) => `Lundi, une boulangerie a vendu ${N} baguettes.`, apres: (p) => `Dimanche, elle en vend ${p} % du nombre de lundi.`, q: "Combien de baguettes vend-elle dimanche ?", nom: "le nombre de baguettes vendues dimanche", u: "baguettes", N: [100, 140, 160, 200, 240], plausible: [20, 150] },
+  { avant: (N) => `En 2015, une commune comptait ${N} panneaux solaires sur ses toits.`, apres: (p) => `Aujourd’hui, leur nombre atteint ${p} % de celui de 2015.`, q: "Combien de panneaux solaires compte-t-elle aujourd’hui ?", nom: "le nombre de panneaux aujourd’hui", u: "panneaux", N: [40, 80, 120, 160, 200], plausible: [100, 200] },
 ];
 
 function tirerComparaison(taux: number[]) {
@@ -1777,9 +1797,14 @@ function tirerComparaison(taux: number[]) {
     const s = randomChoice(COMPARAISONS);
     const N = randomChoice(s.N);
     const p = randomChoice(taux);
-    if ((N * p) % 100 === 0) return { s, N, p, x: (N * p) / 100 };
+    if ((N * p) % 100 === 0 && p >= s.plausible[0] && p <= s.plausible[1]) return { s, N, p, x: (N * p) / 100 };
   }
-  return { s: COMPARAISONS[0], N: 80, p: 200, x: 160 };
+  // Repli : la première combinaison plausible, à défaut l'économie de Chloé à 100 %.
+  for (const s of COMPARAISONS)
+    for (const N of s.N)
+      for (const p of taux)
+        if ((N * p) % 100 === 0 && p >= s.plausible[0] && p <= s.plausible[1]) return { s, N, p, x: (N * p) / 100 };
+  return { s: COMPARAISONS[6], N: 100, p: 100, x: 100 };
 }
 
 /** p % de N, de tête : sans contexte, dans une partie d'un tout, ou dans une comparaison. */
@@ -1791,10 +1816,12 @@ function genMental(taux: MentalP[], sources: Array<"nu" | "partie" | "comparaiso
   let N: number;
   let p: number;
   let conclusion: string;
+  let unite = "";
   if (source === "partie" && tauxPartie.length) {
     const t = tirerPourcentage(tauxPartie);
     ({ N, p, x } = t);
     const s = t.s;
+    unite = s.u;
     const k = randomInt(0, 5);
     if (k === 0) text = `${s.cadre(N)} ${s.part(p)} ${s.qPart} Calcule-le de tête.`;
     else if (k === 1) text = `Sans calculatrice : ${minuscule(s.cadre(N))} ${s.part(p)} ${s.qPart}`;
@@ -1807,6 +1834,7 @@ function genMental(taux: MentalP[], sources: Array<"nu" | "partie" | "comparaiso
     const t = tirerComparaison(taux);
     ({ N, p, x } = t);
     const s = t.s;
+    unite = s.u;
     const k = randomInt(0, 4);
     if (k === 0) text = `${s.avant(N)} ${s.apres(p)} ${s.q}`;
     else if (k === 1) text = `${s.avant(N)} ${s.apres(p)} Calcule de tête ${s.nom}.`;
@@ -1831,7 +1859,7 @@ function genMental(taux: MentalP[], sources: Array<"nu" | "partie" | "comparaiso
   return {
     text,
     format: "short" as const,
-    expected: attendu(x),
+    expected: attendu(x, unite),
     comparator: "number_equal" as const,
     explanation: expl(DEF_MENTAL, c.methode, c.calcul, conclusion),
   };
@@ -1864,7 +1892,7 @@ function genMentalDeduire() {
     return {
       text: `${s.totalInconnu(xc, connu)} ${question}`,
       format: "short" as const,
-      expected: attendu(xq),
+      expected: attendu(xq, s.u),
       comparator: "number_equal" as const,
       explanation: expl(
         DEF_MENTAL,
@@ -2082,6 +2110,12 @@ function repereProp(
   };
 }
 
+/** L'accord avec la grandeur : « la charge gagnée … est-elle proportionnelle », pas « est proportionnel » (vu le 07/10). */
+function estProp(y: string, question: boolean) {
+  const fem = /^la /.test(y);
+  return `${question ? (fem ? "est-elle" : "est-il") : "est"} ${fem ? "proportionnelle" : "proportionnel"}`;
+}
+
 const RAISONS_GRAPH = {
   prop: "Oui : les points sont alignés avec l'origine",
   affine: "Non : les points sont alignés, mais pas avec l'origine",
@@ -2107,10 +2141,10 @@ function genGraphReconnaitre() {
       t === 0
         ? `Ce graphique représente ${s.y} selon ${s.x}. Est-ce une situation de proportionnalité ?`
         : t === 1
-          ? `Observe le graphique. ${cap(s.y)} est-il proportionnel ${aArt(s.x)} ?`
+          ? `Observe le graphique. ${cap(s.y)} ${estProp(s.y, true)} ${aArt(s.x)} ?`
           : t === 2
             ? `Sur ce graphique, on a placé ${s.y} selon ${s.x}. Les deux grandeurs sont-elles proportionnelles ?`
-            : `Peut-on dire, avec ce graphique, que ${s.y} est proportionnel ${aArt(s.x)} ?`;
+            : `Peut-on dire, avec ce graphique, ${que(`${s.y} ${estProp(s.y, false)} ${aArt(s.x)}`)} ?`;
     return {
       text,
       format: "qcm" as const,
@@ -2150,7 +2184,7 @@ function genGraphLire() {
   return {
     text,
     format: "short" as const,
-    expected: [String(k * x)],
+    expected: attendu(k * x, s.uy),
     comparator: "number_equal" as const,
     explanation: expl(
       "sur le graphique, chaque point donne une valeur de chaque grandeur.",
@@ -2175,7 +2209,7 @@ function genGraphInverse() {
   return {
     text,
     format: "short" as const,
-    expected: [String(x)],
+    expected: attendu(x, s.ux),
     comparator: "number_equal" as const,
     explanation: expl(
       "on peut lire un graphique dans les deux sens.",
@@ -2203,7 +2237,7 @@ function genGraphCoeff() {
   return {
     text,
     format: "short" as const,
-    expected: [String(k)],
+    expected: attendu(k, s.uy),
     comparator: "number_equal" as const,
     explanation: expl(
       "le coefficient de proportionnalité, c'est la valeur pour une unité : l'ordonnée du point d'abscisse 1.",
@@ -2228,7 +2262,7 @@ function genGraphVraiFaux() {
     const affirmation = randomInt(0, 2);
     const phrase =
       affirmation === 0
-        ? `${cap(s.y)} est proportionnel ${aArt(s.x)}.`
+        ? `${cap(s.y)} ${estProp(s.y, false)} ${aArt(s.x)}.`
         : affirmation === 1
           ? `Si ${s.x} double, ${s.y} double aussi.`
           : `Pour 0, ${s.y} vaut 0.`;
@@ -2559,10 +2593,18 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_reconnaitre",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi la situation suivante est proportionnelle : 3 kg coûtent 12 € et 5 kg coûtent 20 €.",
-    format: "open",
-    expected: ["12", "3", "20", "5", "coefficient"],
-    comparator: "contains_keyword",
+    // ⛔ 07/10/2026 : c'était une question ouverte à mots-clés « 12 », « 3 »… :
+    // n'importe quelle réponse contenant « 3 » passait. QCM sur les mêmes pièges.
+    text: "3 kg coûtent 12 € et 5 kg coûtent 20 €. Pourquoi cette situation est-elle proportionnelle ?",
+    format: "qcm",
+    choices: [
+      "12 ÷ 3 = 4 et 20 ÷ 5 = 4 : le prix d’un kilogramme est toujours 4 €",
+      "on ajoute 2 kg et on ajoute 8 € : on ajoute toujours la même chose",
+      "plus on achète de pommes, plus on paie",
+      "12 et 20 sont tous les deux des nombres pairs",
+    ],
+    expected: ["12 ÷ 3 = 4 et 20 ÷ 5 = 4 : le prix d’un kilogramme est toujours 4 €"],
+    comparator: "mcq_exact",
     hint: "Calcule le prix pour 1 kg ou compare les coefficients.",
     explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
@@ -2707,10 +2749,17 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_coeff",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment trouver le coefficient de proportionnalité quand 6 → 42.",
-    format: "open",
-    expected: ["42", "6", "divise", "7"],
-    comparator: "contains_keyword",
+    // ⛔ 07/10/2026 : mots-clés « 42 », « 6 », « 7 » → QCM sur les mêmes pièges.
+    text: "Dans un tableau de proportionnalité, 6 correspond à 42. Comment trouve-t-on le coefficient de proportionnalité ?",
+    format: "qcm",
+    choices: [
+      "on calcule 42 ÷ 6 = 7",
+      "on calcule 42 − 6 = 36",
+      "on calcule 42 × 6 = 252",
+      "on calcule 6 ÷ 42",
+    ],
+    expected: ["on calcule 42 ÷ 6 = 7"],
+    comparator: "mcq_exact",
     hint: "On divise l’image par le nombre de départ.",
     explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
@@ -3264,10 +3313,17 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_evolution",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi une baisse de 20 % correspond à multiplier par 0,8.",
-    format: "open",
-    expected: ["100", "20", "80", "0,8"],
-    comparator: "contains_keyword",
+    // ⛔ 07/10/2026 : mots-clés « 100 », « 20 »… → QCM sur les mêmes pièges.
+    text: "Pourquoi une baisse de 20 % revient-elle à multiplier par 0,8 ?",
+    format: "qcm",
+    choices: [
+      "il reste 100 % − 20 % = 80 % de la valeur, et 80 % = 80 ÷ 100 = 0,8",
+      "on enlève 0,2 à la valeur",
+      "on divise la valeur par 20",
+      "20 % s’écrit 0,8",
+    ],
+    expected: ["il reste 100 % − 20 % = 80 % de la valeur, et 80 % = 80 ÷ 100 = 0,8"],
+    comparator: "mcq_exact",
     hint: "Après une baisse de 20 %, il reste 80 %.",
     explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
@@ -3340,10 +3396,17 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_probleme",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment résoudre : 4 cahiers coûtent 12 €. Combien coûtent 7 cahiers ?",
-    format: "open",
-    expected: ["12", "4", "3", "7", "21"],
-    comparator: "contains_keyword",
+    // ⛔ 07/10/2026 : mots-clés « 3 », « 7 »… → QCM sur les mêmes pièges.
+    text: "4 cahiers coûtent 12 €. Quelle démarche permet de trouver le prix de 7 cahiers ?",
+    format: "qcm",
+    choices: [
+      "un cahier coûte 12 ÷ 4 = 3 €, donc 7 cahiers coûtent 7 × 3 = 21 €",
+      "on passe de 4 à 7 en ajoutant 3, donc 7 cahiers coûtent 12 + 3 = 15 €",
+      "7 cahiers coûtent 12 × 7 = 84 €",
+      "7 cahiers coûtent 12 + 7 = 19 €",
+    ],
+    expected: ["un cahier coûte 12 ÷ 4 = 3 €, donc 7 cahiers coûtent 7 × 3 = 21 €"],
+    comparator: "mcq_exact",
     hint: "Passe par le prix d’un cahier.",
     explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre.\n\n" +
           "Méthode : on vérifie si le même coefficient multiplicateur relie les deux grandeurs.\n\nCalcul : " +
@@ -3467,10 +3530,17 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_coeff_multiplicateur",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique l’erreur : « augmenter de 30 %, c’est multiplier par 0,3 ».",
-    format: "open",
-    expected: ["1,3", "100", "30"],
-    comparator: "contains_keyword",
+    // ⛔ 07/10/2026 : mots-clés « 100 », « 30 »… → QCM sur les mêmes pièges.
+    text: "Lina dit : « augmenter de 30 %, c’est multiplier par 0,3 ». Où est son erreur ?",
+    format: "qcm",
+    choices: [
+      "on garde 100 % et on ajoute 30 % : on multiplie par 1,3",
+      "il faut multiplier par 30",
+      "il faut multiplier par 0,7",
+      "il n’y a pas d’erreur",
+    ],
+    expected: ["on garde 100 % et on ajoute 30 % : on multiplie par 1,3"],
+    comparator: "mcq_exact",
     hint: "Quand on augmente, on garde 100 % et on ajoute 30 %.",
     explanation:
       "Définition : augmenter de p %, c’est multiplier par 1 + p ÷ 100.\n\n" +
@@ -3489,10 +3559,17 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_coeff_multiplicateur",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi une réduction de 25 % ne correspond pas à multiplier par 25.",
-    format: "open",
-    expected: ["75", "0,75", "reste"],
-    comparator: "contains_keyword",
+    // ⛔ 07/10/2026 : mots-clés « 75 », « 0,75 » → QCM sur les mêmes pièges.
+    text: "Une réduction de 25 % ne revient pas à multiplier par 25. Par quoi multiplie-t-on, et pourquoi ?",
+    format: "qcm",
+    choices: [
+      "par 0,75 : il reste 100 % − 25 % = 75 % du prix",
+      "par 0,25 : on garde 25 % du prix",
+      "par 1,25 : on ajoute 25 % au prix",
+      "par 75 : il reste 75 % du prix",
+    ],
+    expected: ["par 0,75 : il reste 100 % − 25 % = 75 % du prix"],
+    comparator: "mcq_exact",
     hint: "Après une baisse de 25 %, il reste 75 %.",
     explanation:
       "Définition : diminuer de p %, c’est multiplier par 1 − p ÷ 100.\n\n" +
@@ -3998,10 +4075,17 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_pourcentage",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique comment calculer un pourcentage d’un nombre.",
-    format: "open",
-    expected: ["100", "multiplie", "divise"],
-    comparator: "contains_keyword",
+    // ⛔ 07/10/2026 : le mot-clé « 100 » seul suffisait → QCM.
+    text: "Comment calcule-t-on p % d’un nombre N ?",
+    format: "qcm",
+    choices: [
+      "on multiplie N par p, puis on divise par 100",
+      "on divise N par p",
+      "on ajoute p à N",
+      "on multiplie N par p",
+    ],
+    expected: ["on multiplie N par p, puis on divise par 100"],
+    comparator: "mcq_exact",
     hint: "p % de N = N × p ÷ 100.",
     explanation:
       "Définition : un pourcentage est une proportion sur 100.\n\n" +
@@ -4091,10 +4175,17 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_coeff_multiplicateur",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi augmenter de 50 % revient à multiplier par 1,5.",
-    format: "open",
-    expected: ["100", "50", "1,5"],
-    comparator: "contains_keyword",
+    // ⛔ 07/10/2026 : mots-clés « 100 », « 50 » → QCM sur les mêmes pièges.
+    text: "Pourquoi augmenter de 50 % revient-il à multiplier par 1,5 ?",
+    format: "qcm",
+    choices: [
+      "on garde 100 % et on ajoute 50 % : 150 % = 150 ÷ 100 = 1,5",
+      "50 % s’écrit 1,5",
+      "on ajoute 1,5 à la valeur",
+      "on multiplie par 50, puis on divise par 1,5",
+    ],
+    expected: ["on garde 100 % et on ajoute 50 % : 150 % = 150 ÷ 100 = 1,5"],
+    comparator: "mcq_exact",
     hint: "On garde 100 % et on ajoute 50 %.",
     explanation:
       "Définition : augmenter de p %, c’est ajouter p % à 100 %.\n\n" +
@@ -4148,10 +4239,17 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_evolution",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment calculer le pourcentage d’évolution entre deux valeurs.",
-    format: "open",
-    expected: ["variation", "départ", "100"],
-    comparator: "contains_keyword",
+    // ⛔ 07/10/2026 : le mot-clé « 100 » seul suffisait → QCM.
+    text: "Comment calcule-t-on le pourcentage d’évolution entre une valeur de départ et une valeur d’arrivée ?",
+    format: "qcm",
+    choices: [
+      "(variation ÷ valeur de départ) × 100",
+      "(variation ÷ valeur d’arrivée) × 100",
+      "valeur d’arrivée − valeur de départ",
+      "valeur d’arrivée ÷ valeur de départ",
+    ],
+    expected: ["(variation ÷ valeur de départ) × 100"],
+    comparator: "mcq_exact",
     hint: "On compare la variation à la valeur de départ.",
     explanation:
       "Définition : le pourcentage d’évolution compare la variation à la valeur de départ.\n\n" +

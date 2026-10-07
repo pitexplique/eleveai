@@ -617,7 +617,8 @@ export const ratiosBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(val[o])],
+        // Unité dans la réponse quand on MESURE (« 18 kg ») ; un compte reste nu.
+        expected: [estCompte(d) ? String(val[o]) : `${val[o]} ${d.unite}`],
         comparator: "number_equal",
         explanation:
           "Définition : dans un ratio, les deux parts se multiplient par le même nombre.\n\n" +
@@ -675,12 +676,12 @@ export const ratiosBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(ml[o])],
+        expected: [`${ml[o]} mL`],
         comparator: "number_equal",
         explanation:
           "Définition : dans un ratio, les deux quantités se multiplient par le même nombre.\n\n" +
           `Méthode : on ramène d'abord à UNE part, puis on multiplie par la part ${deN[o]}.\n\n` +
-          `Calcul : une part vaut ${ml[c]} ÷ ${part[c]} = ${dose} mL. Il faut ${part[o]} parts ${deN[o]}, soit ${part[o]} × ${dose} = ${ml[o]} mL.\n\n` +
+          `Calcul : une part vaut ${ml[c]} ÷ ${part[c]} = ${dose} mL. Il faut ${part[o]} part${part[o] > 1 ? "s" : ""} ${deN[o]}, soit ${part[o]} × ${dose} = ${ml[o]} mL.\n\n` +
           `Conclusion : ⚠️ le mélange fera ${ml.a + ml.b} mL en tout — le ratio ne dit PAS le volume final, seulement le rapport ${nom.a} : ${nom.b}.`,
         canvas: {
           kind: "contenance",
@@ -804,14 +805,15 @@ export const ratiosBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Deux nombres a et b sont dans le ratio 2 : 3. Quelle égalité traduit cela ?",
     format: "qcm",
-    choices: ["a/2 = b/3", "a/3 = b/2", "a × 2 = b × 3", "a + 2 = b + 3"],
-    expected: ["a/2 = b/3"],
+    // ⛔ 07/10/2026 : la division s'écrit « ÷ », jamais avec la barre (Frédéric).
+    choices: ["a ÷ 2 = b ÷ 3", "a ÷ 3 = b ÷ 2", "a × 2 = b × 3", "a + 2 = b + 3"],
+    expected: ["a ÷ 2 = b ÷ 3"],
     comparator: "mcq_exact",
     hint: "Chaque nombre se divise par SA part.",
     explanation:
-      "Définition : a et b sont dans le ratio 2 : 3 lorsque a/2 = b/3. Chaque nombre est divisé par la part qui lui correspond.\n\n" +
+      "Définition : a et b sont dans le ratio 2 : 3 lorsque a ÷ 2 = b ÷ 3. Chaque nombre est divisé par la part qui lui correspond.\n\n" +
       "Méthode : on garde l'ordre — a va avec 2, b va avec 3.\n\n" +
-      "Calcul : si a = 10, alors a/2 = 5, donc b/3 = 5 et b = 15.\n\n" +
+      "Calcul : si a = 10, alors a ÷ 2 = 5, donc b ÷ 3 = 5 et b = 15.\n\n" +
       "Conclusion : cette égalité est ce qui rend le ratio calculable. ⚠️ a × 2 = b × 3 croise les parts et donne un autre ratio.",
     tags: ["ratio", "quotients", "valeur_particuliere", "qcm"],
   },
@@ -843,19 +845,19 @@ export const ratiosBank: TutorBankItemV4[] = [
         t === 0
           ? `Deux nombres ${L1} et ${L2} sont dans le ratio ${ra} : ${rb}, et ${K} = ${vK}. Combien vaut ${U} ?`
           : t === 1
-            ? `On sait que ${L1}/${ra} = ${L2}/${rb} et que ${K} = ${vK}. Calcule ${U}.`
+            ? `On sait que ${L1} ÷ ${ra} = ${L2} ÷ ${rb} et que ${K} = ${vK}. Calcule ${U}.`
             : t === 2
-              ? `Les nombres ${L1} et ${L2} vérifient ${L1}/${ra} = ${L2}/${rb}. Si ${K} = ${vK}, que vaut ${U} ?`
-              : `${d.cadre}, on note ${L1} ${grandeur(d, "a")} et ${L2} ${grandeur(d, "b")}. On sait que ${L1}/${ra} = ${L2}/${rb} et que ${K} = ${vK}. Combien vaut ${U} ?`;
+              ? `Les nombres ${L1} et ${L2} vérifient ${L1} ÷ ${ra} = ${L2} ÷ ${rb}. Si ${K} = ${vK}, que vaut ${U} ?`
+              : `${d.cadre}, on note ${L1} ${grandeur(d, "a")} et ${L2} ${grandeur(d, "b")}. On sait que ${L1} ÷ ${ra} = ${L2} ÷ ${rb} et que ${K} = ${vK}. Combien vaut ${U} ?`;
       return {
         text,
         format: "short",
         expected: [String(vU)],
         comparator: "number_equal",
         explanation:
-          `Définition : ${L1} et ${L2} dans le ratio ${ra} : ${rb} signifie ${L1}/${ra} = ${L2}/${rb}.\n\n` +
+          `Définition : ${L1} et ${L2} dans le ratio ${ra} : ${rb} signifie ${L1} ÷ ${ra} = ${L2} ÷ ${rb}.\n\n` +
           "Méthode : on calcule la valeur commune des deux quotients, puis on remonte.\n\n" +
-          `Calcul : ${K}/${pK} = ${vK}/${pK} = ${q}. Donc ${U}/${pU} = ${q}, et ${U} = ${pU} × ${q} = ${vU}.\n\n` +
+          `Calcul : ${K} ÷ ${pK} = ${vK} ÷ ${pK} = ${q}. Donc ${U} ÷ ${pU} = ${q}, et ${U} = ${pU} × ${q} = ${vU}.\n\n` +
           `Conclusion : ${U} = ${vU}.`,
       };
     },
@@ -869,7 +871,7 @@ export const ratiosBank: TutorBankItemV4[] = [
     microId: "prop_ratio_quotients",
     difficulty: 3,
     theme: "neutral",
-    hint: "Le dénominateur de chaque quotient donne sa part.",
+    hint: "Le diviseur de chaque quotient donne sa part.",
     tags: ["ratio", "quotients", "qcm", "template"],
     generate: () => {
       const [L1, L2] = randomChoice(LETTRES2);
@@ -879,12 +881,12 @@ export const ratiosBank: TutorBankItemV4[] = [
       const t = randomInt(0, 3);
       const text =
         t === 0
-          ? `On sait que ${L1}/${a} = ${L2}/${b}. Dans quel ratio sont ${L1} et ${L2} ?`
+          ? `On sait que ${L1} ÷ ${a} = ${L2} ÷ ${b}. Dans quel ratio sont ${L1} et ${L2} ?`
           : t === 1
-            ? `Deux nombres ${L1} et ${L2} vérifient ${L2}/${b} = ${L1}/${a}. Quel est le ratio ${L1} : ${L2} ?`
+            ? `Deux nombres ${L1} et ${L2} vérifient ${L2} ÷ ${b} = ${L1} ÷ ${a}. Quel est le ratio ${L1} : ${L2} ?`
             : t === 2
-              ? `L'égalité ${L1}/${a} = ${L2}/${b} est vraie. Quel ratio ${L1} : ${L2} traduit-elle ?`
-              : `${d.cadre}, on note ${L1} ${grandeur(d, "a")} et ${L2} ${grandeur(d, "b")}. On a ${L1}/${a} = ${L2}/${b}. Quel est le ratio ${d.a} : ${d.b} ?`;
+              ? `L'égalité ${L1} ÷ ${a} = ${L2} ÷ ${b} est vraie. Quel ratio ${L1} : ${L2} traduit-elle ?`
+              : `${d.cadre}, on note ${L1} ${grandeur(d, "a")} et ${L2} ${grandeur(d, "b")}. On a ${L1} ÷ ${a} = ${L2} ÷ ${b}. Quel est le ratio ${d.a} : ${d.b} ?`;
       return {
         text,
         format: "qcm",
@@ -898,7 +900,7 @@ export const ratiosBank: TutorBankItemV4[] = [
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
-          "Définition : dans l'égalité de quotients, chaque dénominateur EST la part du nombre écrit au-dessus.\n\n" +
+          "Définition : dans l'égalité de quotients, chaque diviseur EST la part du nombre qu'il divise.\n\n" +
           `Méthode : ${L1} est divisé par ${a}, ${L2} est divisé par ${b}.\n\n` +
           `Calcul : ${L1} et ${L2} sont donc dans le ratio ${correct}.\n\n` +
           "Conclusion : ⚠️ l'ordre suit celui des nombres, pas celui dans lequel les quotients sont écrits.",
@@ -925,7 +927,10 @@ export const ratiosBank: TutorBankItemV4[] = [
       const c: Cote = Math.random() < 0.5 ? "a" : "b";
       const pX = c === "a" ? ra : rb;
       const pO = c === "a" ? rb : ra;
-      const correct = `${pX}/${s}`;
+      // ⛔ 07/10/2026 : ici la fraction EST l'objet (« quelle fraction du
+      // total ») ; on l'écrit en fraction posée, jamais « 2/9 » à la barre.
+      const fr = (n: number, m: number) => `$\\frac{${n}}{${m}}$`;
+      const correct = fr(pX, s);
       const leX = leDe(d, c);
       const [L1, L2] = randomChoice(LETTRES2);
       const LX = c === "a" ? L1 : L2;
@@ -940,19 +945,19 @@ export const ratiosBank: TutorBankItemV4[] = [
         text,
         format: "qcm",
         choices: makeChoices(correct, [
-          `${pX}/${pO}`,
-          `${pO}/${s}`,
-          `${pO}/${pX}`,
-          `1/${s}`,
-          `${pX}/${s + 1}`,
+          fr(pX, pO),
+          fr(pO, s),
+          fr(pO, pX),
+          fr(1, s),
+          fr(pX, s + 1),
         ]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
           "Définition : dans un ratio, chaque nombre compte des parts égales ; le total en compte la SOMME.\n\n" +
           "Méthode : on additionne les parts, puis on met la part cherchée sur ce total.\n\n" +
-          `Calcul : ${ra} + ${rb} = ${s} parts en tout, dont ${pX} : la fraction est ${correct}.\n\n` +
-          `Conclusion : ⚠️ ${pX}/${pO} compare à l'AUTRE quantité, pas au total.`,
+          `Calcul : ${ra} + ${rb} = ${s} parts en tout, dont ${pX}. La fraction est ${correct}.\n\n` +
+          `Conclusion : ⚠️ ${fr(pX, pO)} compare à l'AUTRE quantité, pas au total.`,
         canvas: camembert([
           { label: t === 2 ? L1 : d.a, value: ra, color: "#2563eb" },
           { label: t === 2 ? L2 : d.b, value: rb, color: "#f59e0b" },
@@ -999,7 +1004,7 @@ export const ratiosBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(v[j])],
+        expected: [t !== 3 && T.unite ? `${v[j]} ${T.unite}` : String(v[j])],
         comparator: "number_equal",
         explanation:
           `Définition : un ratio ${r} entre trois quantités signifie que leurs trois quotients par ${p[0]}, ${p[1]} et ${p[2]} sont ÉGAUX.\n\n` +
@@ -1042,7 +1047,7 @@ export const ratiosBank: TutorBankItemV4[] = [
       const [A, B, C] = randomChoice(LETTRES3);
       const T = randomChoice(TRIOS);
       const r = `${p[0]} : ${p[1]} : ${p[2]}`;
-      const correct = `${A}/${p[0]} = ${B}/${p[1]} = ${C}/${p[2]}`;
+      const correct = `${A} ÷ ${p[0]} = ${B} ÷ ${p[1]} = ${C} ÷ ${p[2]}`;
       const t = randomInt(0, 3);
       const text =
         t === 0
@@ -1056,17 +1061,17 @@ export const ratiosBank: TutorBankItemV4[] = [
         text,
         format: "qcm",
         choices: makeChoices(correct, [
-          `${A}/${p[2]} = ${B}/${p[1]} = ${C}/${p[0]}`,
+          `${A} ÷ ${p[2]} = ${B} ÷ ${p[1]} = ${C} ÷ ${p[0]}`,
           `${A} × ${p[0]} = ${B} × ${p[1]} = ${C} × ${p[2]}`,
           `${A} + ${p[0]} = ${B} + ${p[1]} = ${C} + ${p[2]}`,
-          `${A}/${p[1]} = ${B}/${p[0]} = ${C}/${p[2]}`,
-          `${p[0]}/${A} = ${p[1]}/${B} = ${p[2]}/${C}`,
+          `${A} ÷ ${p[1]} = ${B} ÷ ${p[0]} = ${C} ÷ ${p[2]}`,
+          `${p[0]} ÷ ${A} = ${p[1]} ÷ ${B} = ${p[2]} ÷ ${C}`,
         ]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
           "Définition : un ratio à trois termes se lit exactement comme celui à deux, une part par nombre.\n\n" +
-          "Méthode : chaque lettre passe au-dessus, sa part au-dessous, dans l'ordre où elles sont écrites.\n\n" +
+          "Méthode : chaque lettre est divisée par SA part, dans l'ordre où elles sont écrites.\n\n" +
           `Calcul : ${A} va avec ${p[0]}, ${B} avec ${p[1]}, ${C} avec ${p[2]}.\n\n` +
           "Conclusion : les trois quotients sont égaux entre eux — c'est ce qui permet de tout calculer à partir d'un seul nombre connu.",
       };
@@ -1102,7 +1107,7 @@ export const ratiosBank: TutorBankItemV4[] = [
       return {
         text: `${P.sit(`${total} ${P.u}`, r, A, B)} ${P.q(X)}`,
         format: "short",
-        expected: [String(rep)],
+        expected: [`${rep} ${P.u}`],
         comparator: "number_equal",
         explanation:
           "Définition : partager selon un ratio, c'est découper la quantité en parts toutes égales, puis en donner un certain nombre à chacun.\n\n" +
@@ -1153,7 +1158,7 @@ export const ratiosBank: TutorBankItemV4[] = [
       return {
         text: `${P.sit(`${total} ${P.u}`, r, R)} ${P.q(R[i])}`,
         format: "short",
-        expected: [String(rep)],
+        expected: [`${rep} ${P.u}`],
         comparator: "number_equal",
         explanation:
           "Définition : chaque nombre du ratio dit combien de parts revient à chacun.\n\n" +
@@ -1267,7 +1272,7 @@ export const ratiosBank: TutorBankItemV4[] = [
           ? `${P.sit(`${total} ${P.u}`, r, R)} Quelle est la différence entre la part ${de(R[i])} et celle ${de(R[j])}, ${P.en} ?`
           : `${P.sit(`${total} ${P.u}`, r, R)} Que valent ensemble la part ${de(R[i])} et celle ${de(R[j])}, ${P.en} ?`,
         format: "short",
-        expected: [String(rep)],
+        expected: [`${rep} ${P.u}`],
         comparator: "number_equal",
         explanation:
           "Définition : partager selon un ratio, c'est faire des parts toutes égales et en distribuer un nombre donné.\n\n" +
@@ -1329,7 +1334,7 @@ export const ratiosBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(rep)],
+        expected: [estCompte(d) ? String(rep) : `${rep} ${d.unite}`],
         comparator: "number_equal",
         explanation:
           "Définition : un ratio p : q découpe les quantités en parts toutes égales.\n\n" +
@@ -1452,12 +1457,12 @@ export const ratiosBank: TutorBankItemV4[] = [
           : `Quelle quantité ${deDe(d, c)} faut-il ajouter, en ${d.unite}, pour que le ratio ${lab} devienne ${cibleTxt} ?`;
         const etape0 =
           k === 2
-            ? `${cap(leDe(d, c))} : ${C} pour ${c === "a" ? pa : pb} parts, donc une part vaut ${v} ; ${leDe(d, o)} : ${c === "a" ? pb : pa} × ${v} = ${O}. `
+            ? `${leDe(d, c)} : ${C} pour ${c === "a" ? pa : pb} parts, donc une part vaut ${v} ; ${leDe(d, o)} : ${c === "a" ? pb : pa} × ${v} = ${O}. `
             : "";
         return {
           text: `${debut} ${question}`,
           format: "short",
-          expected: [String(ajout)],
+          expected: [estCompte(d) ? String(ajout) : `${ajout} ${d.unite}`],
           comparator: "number_equal",
           explanation:
             "Définition : deux quantités sont dans le ratio r : s quand elles valent r parts et s parts de même taille.\n\n" +

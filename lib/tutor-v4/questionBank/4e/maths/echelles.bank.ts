@@ -112,6 +112,13 @@ const ECHELLES = [
 
 const echelleDe = (d: number) => ECHELLES.find((x) => x.d === d)!;
 
+// ⛔ Frédéric (06/10/2026) : l'échelle « 1/200 » est gardée, mais TOUJOURS
+// expliquée dans l'énoncé : « 1 cm sur le plan représente 200 cm en vrai ».
+const surDoc = (doc: string) => (/carte/.test(doc) ? "la carte" : /maquette/.test(doc) ? "la maquette" : "le plan");
+const sens = (doc: string, D: string) => `1 cm sur ${surDoc(doc)} représente ${D} cm en vrai`;
+/** Virgule décimale, SANS espace des milliers : la forme que l'élève tape. */
+const dec = (n: number) => String(n).replace(".", ",");
+
 // ⭐ LES PLANS, chacun avec les échelles qui lui vont et des objets qu'on y
 // mesure. `cms` borne la mesure sur le plan quand un grand nombre rendrait
 // l'objet absurde (un couloir de 24 m).
@@ -268,12 +275,15 @@ export const echellesBank: TutorBankItemV4[] = [
       const doc = randomChoice(DOCUMENTS);
       const e = echelleDe(randomChoice(doc.ds));
       const D = fr(e.d);
+      // ⛔ 07/10 : l'échelle est expliquée en centimètres ; la question porte
+      // sur la CONVERSION de ces centimètres en mètres ou en kilomètres.
+      const S = sens(doc.doc, D);
       const text = randomChoice([
-        () => `Sur ${doc.doc} à l'échelle 1/${D}, que représente 1 cm ?`,
-        () => `${cap(doc.doc)} porte l'échelle 1/${D}. Quelle distance réelle représente 1 cm ?`,
-        () => `Échelle 1/${D} sur ${doc.doc} : à quelle longueur réelle correspond 1 cm mesuré dessus ?`,
-        () => `Tu lis « 1/${D} » dans le coin ${de(doc.doc)}. Que vaut, en vrai, 1 cm de ce document ?`,
-        () => `Pour lire ${doc.doc} au 1/${D}, il faut savoir ce que vaut 1 cm. Que représente-t-il dans la réalité ?`,
+        () => `Sur ${doc.doc} à l'échelle 1/${D}, ${S}. Quelle distance réelle cela fait-il, en m ou en km ?`,
+        () => `${cap(doc.doc)} porte l'échelle 1/${D} : ${S}. Écris cette distance réelle en m ou en km.`,
+        () => `Échelle 1/${D} sur ${doc.doc} : ${S}. À quelle longueur réelle, en m ou en km, correspond 1 cm mesuré dessus ?`,
+        () => `Tu lis « 1/${D} » dans le coin ${de(doc.doc)}. Cela veut dire que ${S}. Que vaut ce centimètre en vrai, en m ou en km ?`,
+        () => `Pour lire ${doc.doc} au 1/${D}, il faut savoir que ${S}. Combien cela fait-il, en m ou en km ?`,
       ])();
       return {
         text,
@@ -335,9 +345,11 @@ export const echellesBank: TutorBankItemV4[] = [
         "du même estuaire",
       ]);
       const [x, y] = Math.random() < 0.5 ? [petit, grand] : [grand, petit];
+      // ⛔ Chaque échelle est expliquée (Frédéric, 06/10).
+      const sensDeux = `Sur la première, 1 cm représente ${fr(x.d)} cm en vrai ; sur la seconde, 1 cm représente ${fr(y.d)} cm en vrai.`;
       const intro = randomChoice([
-        `Deux cartes ${lieu} : l'une au 1/${fr(x.d)}, l'autre au 1/${fr(y.d)}.`,
-        `On compare deux cartes ${lieu}, au 1/${fr(x.d)} et au 1/${fr(y.d)}.`,
+        `Deux cartes ${lieu} : l'une au 1/${fr(x.d)}, l'autre au 1/${fr(y.d)}. ${sensDeux}`,
+        `On compare deux cartes ${lieu}, au 1/${fr(x.d)} et au 1/${fr(y.d)}. ${sensDeux}`,
       ]);
       const q = randomChoice([
         { t: "Laquelle montre le plus de DÉTAILS ?", bonne: petit, fin: "le PLUS PETIT dénominateur donne la carte la plus détaillée" },
@@ -371,7 +383,7 @@ export const echellesBank: TutorBankItemV4[] = [
     microId: "echelle_comprendre",
     difficulty: 1,
     theme: "neutral",
-    text: "Une échelle 1/500 correspond à quoi ?",
+    text: "Sur un plan à l'échelle 1/500, 1 cm sur le plan représente 500 cm en vrai. Cette échelle correspond à quoi ?",
     format: "qcm",
     choices: [
       "une réduction : le dessin est plus petit que la réalité",
@@ -412,16 +424,19 @@ export const echellesBank: TutorBankItemV4[] = [
       const cmPlan = randomChoice(p.cms ?? [2, 3, 4, 5, 6, 8, 12]);
       const reelCm = cmPlan * d;
       const reelM = reelCm / 100;
+      const S = sens(p.doc, D);
       const text = randomChoice([
-        () => `Sur ${p.doc} à l'échelle 1/${D}, ${objet} mesure ${cmPlan} cm. Quelle est sa longueur réelle, en mètres ?`,
-        () => `${cap(p.doc)} est à l'échelle 1/${D}. On y mesure ${objet} : ${cmPlan} cm. Quelle longueur cela représente-t-il en réalité, en mètres ?`,
-        () => `Sur ${p.doc} au 1/${D}, on mesure ${cmPlan} cm pour ${objet}. Calcule sa longueur réelle, en mètres.`,
-        () => `Échelle : 1/${D}. Sur ${p.doc}, ${objet} fait ${cmPlan} cm. Quelle est sa vraie longueur, en m ?`,
+        () => `Sur ${p.doc} à l'échelle 1/${D}, ${objet} mesure ${cmPlan} cm. Ici, ${S}. Quelle est sa longueur réelle, en mètres ?`,
+        () => `${cap(p.doc)} est à l'échelle 1/${D} : ${S}. On y mesure ${objet} : ${cmPlan} cm. Quelle longueur cela représente-t-il en réalité, en mètres ?`,
+        () => `Sur ${p.doc} au 1/${D}, on mesure ${cmPlan} cm pour ${objet}. On sait que ${S}. Calcule sa longueur réelle, en mètres.`,
+        () => `Échelle : 1/${D}, donc ${S}. Sur ${p.doc}, ${objet} fait ${cmPlan} cm. Quelle est sa vraie longueur, en m ?`,
       ])();
       return {
         text,
         format: "short",
-        expected: [String(reelM), fr(reelM)],
+        // L'unité dans la réponse ; la forme « 1 500 » (espace des milliers)
+        // est acceptée en plus, nue, car le comparateur ne lit pas « 1 500 m ».
+        expected: [`${dec(reelM)} m`, `${fr(reelM)} m`, fr(reelM)],
         comparator: "number_equal",
         explanation:
           "Définition : du plan vers la réalité, on AGRANDIT — donc on multiplie.\n\n" +
@@ -458,11 +473,12 @@ export const echellesBank: TutorBankItemV4[] = [
       const reelKm = reelCm / 100000;
       const correct = `${fr(reelKm)} km`;
       const un = l.f ? "l'une de l'autre" : "l'un de l'autre";
+      const S = sens(l.carte, D);
       const text = randomChoice([
-        () => `Sur ${l.carte} au 1/${D}, ${l.paire} sont distant${l.f ? "es" : "s"} de ${cmPlan} cm. Quelle distance les sépare réellement ?`,
-        () => `Sur ${l.carte} au 1/${D}, ${cmPlan} cm séparent ${l.paire}. Quelle est la distance réelle ?`,
-        () => `${cap(l.carte)}, à l'échelle 1/${D}, place ${l.paire} à ${cmPlan} cm ${un}. Combien de kilomètres en vrai ?`,
-        () => `On mesure ${cmPlan} cm entre ${l.paire} sur ${l.carte} (échelle 1/${D}). À quelle distance réelle cela correspond-il ?`,
+        () => `Sur ${l.carte} au 1/${D}, ${l.paire} sont distant${l.f ? "es" : "s"} de ${cmPlan} cm. Ici, ${S}. Quelle distance les sépare réellement ?`,
+        () => `Sur ${l.carte} au 1/${D}, ${cmPlan} cm séparent ${l.paire}. On sait que ${S}. Quelle est la distance réelle ?`,
+        () => `${cap(l.carte)}, à l'échelle 1/${D}, place ${l.paire} à ${cmPlan} cm ${un}. Ici, ${S}. Combien de kilomètres en vrai ?`,
+        () => `On mesure ${cmPlan} cm entre ${l.paire} sur ${l.carte} (échelle 1/${D} : ${S}). À quelle distance réelle cela correspond-il ?`,
       ])();
       return {
         text,
@@ -508,16 +524,17 @@ export const echellesBank: TutorBankItemV4[] = [
       const reelCm = cmPlan * d;
       const reelM = reelCm / 100;
       const M = fr(reelM);
+      const S = sens(p.doc, D);
       const text = randomChoice([
-        () => `On dessine ${p.doc} à l'échelle 1/${D}. ${cap(objet)} mesure ${M} m en vrai. Quelle longueur faut-il tracer, en cm ?`,
-        () => `${cap(objet)} mesure ${M} m. Sur ${p.doc} au 1/${D}, quelle longueur lui donne-t-on, en cm ?`,
-        () => `Pour ${p.doc} au 1/${D}, calcule en cm la longueur à tracer pour ${objet}, qui mesure ${M} m en réalité.`,
-        () => `Échelle 1/${D}. Dans la réalité, ${objet} fait ${M} m. Quelle sera sa longueur sur ${p.doc}, en centimètres ?`,
+        () => `On dessine ${p.doc} à l'échelle 1/${D} : ${S}. ${cap(objet)} mesure ${M} m en vrai. Quelle longueur faut-il tracer, en cm ?`,
+        () => `${cap(objet)} mesure ${M} m. Sur ${p.doc} au 1/${D}, ${S}. Quelle longueur lui donne-t-on, en cm ?`,
+        () => `Sur ${p.doc} au 1/${D}, ${S}. Calcule en cm la longueur à tracer pour ${objet}, qui mesure ${M} m en réalité.`,
+        () => `Échelle 1/${D}, donc ${S}. Dans la réalité, ${objet} fait ${M} m. Quelle sera sa longueur sur ${p.doc}, en centimètres ?`,
       ])();
       return {
         text,
         format: "short",
-        expected: [String(cmPlan)],
+        expected: [`${cmPlan} cm`],
         comparator: "number_equal",
         explanation:
           "Définition : de la réalité vers le plan, on RÉDUIT — donc on divise.\n\n" +
@@ -597,7 +614,7 @@ export const echellesBank: TutorBankItemV4[] = [
         explanation:
           "Définition : l'échelle est le rapport entre la mesure du plan et la mesure réelle, dans la MÊME unité.\n\n" +
           "Méthode : on met tout en centimètres, puis on divise le réel par le plan.\n\n" +
-          `Calcul : ${M} m = ${fr(reelM * 100)} cm. Et ${fr(reelM * 100)} ÷ ${cmPlan} = ${fr(d)}, donc l'échelle est 1/${fr(d)}.\n\n` +
+          `Calcul : ${M} m = ${fr(reelM * 100)} cm. Et ${fr(reelM * 100)} ÷ ${cmPlan} = ${fr(d)}, donc l'échelle est 1/${fr(d)} : 1 cm sur le plan représente ${fr(d)} cm en vrai.\n\n` +
           "Conclusion : choisir une échelle, c'est répondre à « par combien dois-je réduire ? ».",
       };
     },
@@ -650,7 +667,7 @@ export const echellesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(rep)],
+        expected: [`${rep} cm`],
         comparator: "number_equal",
         explanation:
           "Définition : un agrandissement de rapport k multiplie toutes les longueurs par k, et ne change aucun angle.\n\n" +
@@ -761,7 +778,7 @@ export const echellesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(r)],
+        expected: [`${r} cm`],
         comparator: "number_equal",
         explanation:
           `Définition : réduire d'un rapport 1/${k}, c'est multiplier les longueurs par 1/${k} — donc les diviser par ${k}.\n\n` +
@@ -875,7 +892,7 @@ export const echellesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(aire * k * k)],
+        expected: [`${aire * k * k} ${u}`],
         comparator: "number_equal",
         explanation:
           "Définition : une aire est un produit de DEUX longueurs. Chacune étant multipliée par k, l'aire l'est par k × k.\n\n" +
@@ -975,7 +992,7 @@ export const echellesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(volume * K3)],
+        expected: [`${volume * K3} cm³`],
         comparator: "number_equal",
         explanation:
           "Définition : un volume est un produit de TROIS longueurs. Chacune multipliée par k, le volume l'est par k × k × k.\n\n" +
@@ -1056,7 +1073,7 @@ export const echellesBank: TutorBankItemV4[] = [
       const text = randomChoice([
         () => `Une maquette ${deNu(c.n)} contient ${v} L. ${cap(leVrai)} ${c.n} est ${k} fois plus ${grand} EN LONGUEUR. Combien contient-${il} ?`,
         () => `${cap(leVrai)} ${c.n} est ${k} fois plus ${grand} que sa maquette dans chaque dimension. La maquette contient ${v} L : combien de litres contient ${leVrai} ${c.n} ?`,
-        () => `Maquette au 1/${k} d'${un} ${c.n} : elle contient ${v} L. Quelle est la contenance réelle ?`,
+        () => `Maquette au 1/${k} d'${un} ${c.n} : 1 cm sur la maquette représente ${k} cm en vrai. Elle contient ${v} L. Quelle est la contenance réelle ?`,
       ])();
       return {
         text,
@@ -1116,7 +1133,7 @@ export const echellesBank: TutorBankItemV4[] = [
           "Définition : l'échelle est le rapport plan / réalité, dans la MÊME unité.\n\n" +
           "Méthode : on convertit la distance réelle en centimètres, puis on divise par la mesure du plan.\n\n" +
           `Calcul : ${km} km = ${fr(km * 100000)} cm. Et ${fr(km * 100000)} ÷ ${cm} = ${fr(d)}.\n\n` +
-          `Conclusion : l'échelle est 1/${fr(d)}.`,
+          `Conclusion : l'échelle est 1/${fr(d)} : 1 cm sur la carte représente ${fr(d)} cm en vrai.`,
       };
     },
   },
@@ -1198,8 +1215,8 @@ export const echellesBank: TutorBankItemV4[] = [
         { qte: "sacs d'engrais", action: "fertiliser", obj: "une pelouse" },
         { qte: "rouleaux de papier peint", action: "tapisser", obj: "un mur" },
         { qte: "sacs de gravier", action: "couvrir", obj: "une allée" },
-        { qte: "kilos de semences", action: "ensemencer", obj: "une parcelle" },
-        { qte: "litres de vernis", action: "vernir", obj: "un parquet" },
+        { qte: "kilos de semences", action: "ensemencer", obj: "une parcelle", u: "kg" },
+        { qte: "litres de vernis", action: "vernir", obj: "un parquet", u: "L" },
         { qte: "boîtes de carrelage", action: "carreler", obj: "une terrasse" },
         { qte: "palettes de gazon", action: "engazonner", obj: "un terrain de jeu" },
         { qte: "sachets de graines de fleurs", action: "semer", obj: "un parterre" },
@@ -1223,7 +1240,8 @@ export const echellesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(n * k * k)],
+        // Une mesure porte son unité (« 12 L ») ; un compte de pots reste nu.
+        expected: ["u" in r && r.u ? `${n * k * k} ${r.u}` : String(n * k * k)],
         comparator: "number_equal",
         explanation:
           `Définition : la quantité de ${r.qte} est proportionnelle à l'AIRE à couvrir, pas aux longueurs.\n\n` +

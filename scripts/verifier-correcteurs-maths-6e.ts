@@ -11,17 +11,23 @@
 //   2. le correcteur PROPRE au gabarit, qui recalcule à partir du texte lu.
 // Un gabarit sans correcteur est en défaut.
 //
-// Usage : npx --yes tsx@4 scripts/verifier-correcteurs-maths-6e.ts [notionId|fichier|microId …]
-//   (sans argument : toute la 6e)
+// Usage : npx --yes tsx@4 scripts/verifier-correcteurs-maths-6e.ts [4e] [notionId|fichier|microId …]
+//   (sans argument : toute la 6e ; « 4e » en premier : la 4e, depuis le 07/10/2026)
 
 import { maths6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/maths/index";
 import { CORRECTEURS_6E } from "@/lib/tutor-v4/questionBank/6e/maths/correcteurs";
+import { maths4eQuestionBank } from "@/lib/tutor-v4/questionBank/4e/maths/index";
+import { CORRECTEURS_4E } from "@/lib/tutor-v4/questionBank/4e/maths/correcteurs";
 import { compareAnswer } from "@/lib/tutor/evaluation/comparators";
 import type { TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 
 const TIRAGES = 500;
-const filtres = process.argv.slice(2);
-const gabarits = (maths6eQuestionBank as any[]).filter(
+const args = process.argv.slice(2);
+const en4e = args[0] === "4e";
+const filtres = args.filter((a) => a !== "4e" && a !== "6e");
+const BANQUE: any[] = en4e ? maths4eQuestionBank : maths6eQuestionBank;
+const CORRECTEURS = en4e ? CORRECTEURS_4E : CORRECTEURS_6E;
+const gabarits = BANQUE.filter(
   (i) =>
     i.kind === "template" &&
     (!filtres.length || filtres.some((f) => i.notionId === f || i.microId === f || i.id.startsWith(f))),
@@ -34,7 +40,8 @@ const gabarits = (maths6eQuestionBank as any[]).filter(
 // Fraction OBJET D'ÉTUDE : fractions, probabilités, pourcentages (25/100),
 // fractions décimales (7/10 = 0,7), abscisses d'une demi-droite (1/4) et
 // échelles « 1/200 » (Frédéric, 06/10 : « échelle 1/200 oui »).
-const NOTION_A_FRACTIONS = /^(fraction_|proba_|pourcentage_|decimal_nombre$|demi_droite_graduee$|prop_echelle$)/;
+// 4e : prop_pourcentages (25/100) aussi.
+const NOTION_A_FRACTIONS = /^(fraction_|proba_|pourcentage_|decimal_nombre$|demi_droite_graduee$|prop_echelle$|prop_pourcentages$)/;
 const BARRE_ENTRE_NOMBRES = /(?<![\d/])\d+(?:[,.]\d+)?\s*\/\s*\d+(?![\d/])/;
 
 function reglesCommunes(q: TutorGeneratedQuestionV4, notionId: string): string[] {
@@ -67,7 +74,7 @@ const parMicro = new Map<string, any[]>();
 for (const g of gabarits) parMicro.set(g.microId, [...(parMicro.get(g.microId) ?? []), g]);
 for (const [micro, gs] of parMicro) {
   for (const g of gs) {
-    const corriger = CORRECTEURS_6E[g.id];
+    const corriger = CORRECTEURS[g.id];
     const distinctes = new Set<string>();
     let probleme: string | null = corriger ? null : "aucun correcteur pour ce gabarit";
     for (let k = 0; k < TIRAGES && !probleme; k++) {
