@@ -1627,6 +1627,9 @@ export const RESSOURCES: RessourceEleveAI[] = [
     promesse:
       "Les tables, le grand tableau, des tables à compléter et la division par les tables, avec le corrigé. Un seul PDF, couleur ou noir et blanc.",
     url: "/tables-de-multiplication",
+    // ⭐ 07/10 — Frédéric : « quand je tape table de multiplication… pas la page
+    // spéciale ». La recherche d'en-tête ne lit que les ressources à mots-clés.
+    motsCles: ["table de multiplication", "tables de multiplication", "table", "multiplication", "imprimer", "pdf", "division", "diviser"],
     niveaux: ["ce1", "ce2", "cm1", "cm2", "6e", "5e", "prof", "parent"],
     matiere: "maths",
     notions: ["calcul"],
