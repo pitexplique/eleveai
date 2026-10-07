@@ -1616,6 +1616,26 @@ export const RESSOURCES: RessourceEleveAI[] = [
     statut: "validee",
   },
   {
+    /**
+     * ⭐ LES TABLES DE MULTIPLICATION À IMPRIMER (07/10/2026). Une page SANS
+     * classe — ses 6e révisent les tables sur les coachs CE1 à CM2 selon leur
+     * niveau. Six feuilles, un seul PDF, en couleur ou en noir et blanc, et la
+     * division par la table (« 12 = 3 × 4 donc 12 : 4 = 3 et 12 : 3 = 4 »).
+     */
+    id: "tables-de-multiplication",
+    titre: "Les tables de multiplication de 1 à 10 à imprimer",
+    promesse:
+      "Les tables, le grand tableau, des tables à compléter et la division par les tables, avec le corrigé. Un seul PDF, couleur ou noir et blanc.",
+    url: "/tables-de-multiplication",
+    niveaux: ["ce1", "ce2", "cm1", "cm2", "6e", "5e", "prof", "parent"],
+    matiere: "maths",
+    notions: ["calcul"],
+    intentions: ["comprendre", "entrainer", "preparer"],
+    type: "fiche",
+    resultat: "corrige",
+    statut: "validee",
+  },
+  {
     id: "dico",
     titre: "Le dico des mots et des gestes",
     promesse: "Le mot de la consigne qu'on n'a pas compris.",

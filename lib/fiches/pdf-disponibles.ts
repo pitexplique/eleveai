@@ -379,6 +379,8 @@ export const PDF_DISPONIBLES = new Set<string>([
   "symetrie-centrale-5e-cours-exercices-corriges.pdf",
   "tableau-croise-premiere-20-exercices-corriges.pdf",
   "tableau-de-variations-premiere-20-exercices-corriges.pdf",
+  "tables-de-multiplication-1-a-10-a-imprimer-noir-et-blanc.pdf",
+  "tables-de-multiplication-1-a-10-a-imprimer.pdf",
   "tableur-premiere-20-exercices-corriges.pdf",
   "taux-d-evolution-moyen-premiere-20-exercices-corriges.pdf",
   "taux-d-evolution-premiere-20-exercices-corriges.pdf",

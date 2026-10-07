@@ -192,6 +192,9 @@ const ROUTES: RouteConfig[] = [
   // Les rituels de langue (25/07) — « 5 mots par jour » A1→B2, répétition espacée.
   { path: "/anglais-du-jour",  priority: 0.9,  changeFrequency: "daily",  lastMod: new Date("2026-07-25") },
   { path: "/espagnol-du-jour", priority: 0.9,  changeFrequency: "daily",  lastMod: new Date("2026-07-25") },
+  // ⭐ LES TABLES DE MULTIPLICATION (07/10/2026) — page sans classe, six
+  // feuilles, deux PDF (couleur, noir et blanc) qui entrent seuls par PDF_DISPONIBLES.
+  { path: "/tables-de-multiplication", priority: 0.9, changeFrequency: "monthly", lastMod: new Date("2026-10-07") },
   { path: "/calcul-rapide",   priority: 0.95, changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   { path: "/english-maths",   priority: 0.9,  changeFrequency: "daily",  lastMod: LASTMOD_CORE },
   // Semaine « Les baleines sont là ! » depuis le 16/07 (remplace le foot).

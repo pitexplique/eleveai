@@ -107,6 +107,7 @@ const outils = [
   { label: "Coach Brevet", href: "/coach-brevet" },
   { label: "Coach Bac Spé", href: "/coach-bac-spe" },
   { label: "Calcul rapide", href: "/calcul-rapide" },
+  { label: "Tables de multiplication à imprimer", href: "/tables-de-multiplication" },
   { label: "English Maths", href: "/english-maths" },
   { label: "Défis du jour", href: "/defis-du-jour" },
   { label: "Cartes de révision", href: "/cahier-vacances-cartes" },
