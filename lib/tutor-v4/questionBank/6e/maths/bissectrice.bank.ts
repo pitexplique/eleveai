@@ -31,7 +31,8 @@
 // le rentrant. Le programme se limite au saillant, et le mot est dans
 // l'intitulé même de l'objectif.
 
-import type { TutorBankItemV4, DroitesCanvasData, AngleCanvasData } from "@/lib/tutor-v4/types";
+import type { TutorBankItemV4, DroitesCanvasData, AngleCanvasData, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import { PRENOMS, de, type Prenom } from "./entiers.bank";
 
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
@@ -52,13 +53,13 @@ function expl(calcul: string) {
 }
 
 /** Un angle seul, avec sa mesure — le point de départ avant de le partager. */
-function angleSeul(deg: number, mesure?: string): AngleCanvasData {
+function angleSeul(deg: number, mesure?: string, noms?: { s: string; u: string; v: string }): AngleCanvasData {
   return {
     kind: "angle",
     size: { width: 300, height: 240 },
     angle: {
       angleDeg: deg,
-      labels: { vertex: "O", left: "A", right: "B", angle: mesure },
+      labels: { vertex: noms?.s ?? "O", left: noms?.u ?? "A", right: noms?.v ?? "B", angle: mesure },
       display: { showLabels: true, showMeasure: Boolean(mesure), showArc: true },
     },
   };
@@ -69,10 +70,15 @@ function angleSeul(deg: number, mesure?: string): AngleCanvasData {
  * Le canvas `angle` ne sait dessiner qu'un angle ; `droites` sait poser
  * plusieurs demi-droites au même point, et c'est ce qu'il faut ici.
  */
-function angleEtBissectrice(deg: number, opts: { bissectriceJuste?: boolean } = {}): DroitesCanvasData {
+function angleEtBissectrice(
+  deg: number,
+  opts: { bissectriceJuste?: boolean; partage?: number; noms?: { s: string; u: string; v: string; w: string } } = {},
+): DroitesCanvasData {
   const O = { x: 60, y: 225 };
   const L = 175;
-  const partage = opts.bissectriceJuste === false ? deg * 0.3 : deg / 2;
+  // `partage` : l'angle, en degrés, entre le côté [OB) et la demi-droite [OC).
+  const partage = opts.partage ?? (opts.bissectriceJuste === false ? deg * 0.3 : deg / 2);
+  const n = opts.noms ?? { s: "O", u: "A", v: "B", w: "C" };
   const rad = (d: number) => (d * Math.PI) / 180;
   const bout = (d: number) => ({
     x: O.x + L * Math.cos(rad(d)),
@@ -97,12 +103,405 @@ function angleEtBissectrice(deg: number, opts: { bissectriceJuste?: boolean } = 
       },
     ],
     points: [
-      { x: O.x, y: O.y, label: "O", highlight: true },
-      { x: A.x, y: A.y, label: "A" },
-      { x: B.x, y: B.y, label: "B" },
-      { x: C.x, y: C.y, label: "C", color: "#2563eb" },
+      { x: O.x, y: O.y, label: n.s, highlight: true },
+      { x: A.x, y: A.y, label: n.u },
+      { x: B.x, y: B.y, label: n.v },
+      { x: C.x, y: C.y, label: n.w, color: "#2563eb" },
     ],
     display: { showLabels: true, showPoints: true },
+  };
+}
+
+// =====================================================================
+// ⭐ 06/10/2026 — DES SITUATIONS, PAS UNE PHRASE (PASSATION-COACH-MATHS-6E-CONSIGNE.md).
+// Mesuré le 05/10 : 5 à 9 squelettes par micro, 14 à 18 répétitions sur 20 —
+// l'angle s'appelait toujours AOB. Les gabarits tirent maintenant les noms
+// des points, un angle de la vie (éventail, ciseaux, coin de jardin…), une
+// tournure et un prénom ; les figures portent les noms et les mesures de
+// l'énoncé. Les « Explique… » à mots-clés (« 180 » validait n'importe quelle
+// réponse contenant ce nombre) sont devenus des QCM sur les mêmes pièges.
+// Correcteurs : correcteurs/bissectrice.ts.
+// =====================================================================
+type Q = TutorGeneratedQuestionV4;
+const pick = <T,>(arr: readonly T[]): T => arr[Math.floor(Math.random() * arr.length)];
+const fr = (n: number) => String(Math.round(n * 100) / 100).replace(".", ",");
+const prenom = (): Prenom => pick(PRENOMS);
+const il = (P: Prenom) => (P.f ? "elle" : "il");
+const LETTRES = "ABCDEFGHIJKLMNPRSTUVWXYZ".split("");
+/** Les noms d'un angle USV (sommet S) et de sa bissectrice [SW). */
+function nomsAngle() {
+  const [s, u, v, w] = shuffle(LETTRES).slice(0, 4);
+  return { s, u, v, w, nom: `${u}${s}${v}` };
+}
+/** Des angles de la vie, avec leurs mesures plausibles (en degrés). */
+type AngleReel = { nom: string; min: number; max: number };
+const ANGLES_REELS: AngleReel[] = [
+  { nom: "l’ouverture d’un éventail", min: 90, max: 170 },
+  { nom: "l’ouverture d’une paire de ciseaux", min: 20, max: 70 },
+  { nom: "l’ouverture d’un compas", min: 20, max: 90 },
+  { nom: "le coin d’un jardin", min: 60, max: 130 },
+  { nom: "l’angle entre deux routes", min: 30, max: 150 },
+  { nom: "l’ouverture d’une porte", min: 30, max: 120 },
+  { nom: "la pointe d’une part de tarte", min: 30, max: 72 },
+  { nom: "l’ouverture d’un livre posé debout", min: 60, max: 160 },
+  { nom: "l’angle entre deux branches d’un arbre", min: 25, max: 80 },
+  { nom: "le faisceau d’un phare", min: 20, max: 60 },
+  { nom: "l’angle d’une rampe de lancement", min: 20, max: 60 },
+  { nom: "l’ouverture des bras d’un danseur", min: 60, max: 170 },
+  { nom: "l’angle entre les aiguilles d’une horloge", min: 30, max: 150 },
+  { nom: "le coin d’une voile", min: 30, max: 90 },
+];
+const angleReel = () => pick(ANGLES_REELS);
+/** Une mesure d'angle entière dans [min, max] ; `pair` pour une moitié entière. */
+function mesureDe(a: AngleReel, pair = false) {
+  const x = randomInt(a.min, a.max);
+  return pair && x % 2 ? x + 1 : x;
+}
+/** La phrase qui pose l'angle USV dans sa situation. */
+function introAngle(n: ReturnType<typeof nomsAngle>, a: AngleReel, mesure: number, P: Prenom) {
+  return pick([
+    `${P.nom} mesure ${a.nom} : l’angle ${n.nom} mesure ${fr(mesure)}°.`,
+    `Sur le dessin ${de(P.nom)}, ${a.nom} est l’angle ${n.nom}, qui mesure ${fr(mesure)}°.`,
+    `L’angle ${n.nom} représente ${a.nom}. Il mesure ${fr(mesure)}°.`,
+    `${P.nom} trace un angle ${n.nom} de ${fr(mesure)}° pour représenter ${a.nom}.`,
+  ]);
+}
+
+// ----- BISSECTRICE_DEFINITION
+function genBisConnaitre(): Q {
+  const n = nomsAngle();
+  const P = prenom();
+  const mode = pick(["definition", "symetrie", "unique"] as const);
+  const intro = pick([`${P.nom} trace la bissectrice de l’angle ${n.nom}.`, `Sur le cahier ${de(P.nom)}, il y a un angle ${n.nom}.`, `${P.nom} étudie l’angle ${n.nom}, de sommet ${n.s}.`]);
+  if (mode === "definition") {
+    const juste = `la droite qui partage l’angle ${n.nom} en deux angles égaux`;
+    return {
+      text: `${intro} ${pick([`Qu’est-ce que la bissectrice de l’angle ${n.nom} ?`, `Quelle est la définition de la bissectrice de l’angle ${n.nom} ?`])}`,
+      format: "qcm",
+      choices: shuffle([juste, `la droite qui passe par le sommet ${n.s}`, `la droite perpendiculaire au côté [${n.s}${n.u})`, `le segment [${n.u}${n.v}]`]),
+      expected: [juste],
+      comparator: "mcq_exact",
+      explanation: expl(`La bissectrice partage l’angle ${n.nom} en DEUX ANGLES ÉGAUX, côte à côte. Passer par le sommet ${n.s} ne suffit pas : une infinité de droites le font.`),
+    };
+  }
+  if (mode === "symetrie") {
+    const juste = "son axe de symétrie";
+    return {
+      text: `${intro} ${pick([`Que représente aussi la bissectrice de l’angle ${n.nom} ?`, `La bissectrice de l’angle ${n.nom} est aussi…`])}`,
+      format: "qcm",
+      choices: shuffle([juste, "un de ses côtés", "la perpendiculaire à un côté", `la médiatrice de [${n.u}${n.v}], toujours`]),
+      expected: [juste],
+      comparator: "mcq_exact",
+      explanation: expl(`En pliant le long de la bissectrice, le côté [${n.s}${n.u}) vient sur le côté [${n.s}${n.v}) : c’est l’axe de symétrie de l’angle.`),
+    };
+  }
+  const juste = "une seule";
+  return {
+    text: `${intro} ${pick([`Combien de bissectrices l’angle ${n.nom} a-t-il ?`, `L’angle ${n.nom} a combien de bissectrices ?`])}`,
+    format: "qcm",
+    choices: shuffle([juste, "deux", "une infinité", "aucune"]),
+    expected: [juste],
+    comparator: "mcq_exact",
+    explanation: expl("Une seule demi-droite partage l’angle en deux parts égales : si on la tourne un peu, une part grandit et l’autre rétrécit."),
+  };
+}
+function genBisMoitie(): Q {
+  const n = nomsAngle();
+  const P = prenom();
+  const a = angleReel();
+  const m = mesureDe(a);
+  const moitie = m / 2;
+  return {
+    text: `${introAngle(n, a, m, P)} ${pick([
+      `La bissectrice [${n.s}${n.w}) le partage en deux angles égaux. Combien mesure chacun ?`,
+      `Combien mesure l’angle ${n.u}${n.s}${n.w}, si [${n.s}${n.w}) est la bissectrice ?`,
+      `${P.nom} trace sa bissectrice [${n.s}${n.w}). Combien mesure l’angle ${n.w}${n.s}${n.v} ?`,
+    ])}`,
+    format: "short",
+    expected: [`${fr(moitie)}°`],
+    comparator: "number_equal",
+    explanation: expl(`La bissectrice partage l’angle en deux angles égaux : ${fr(m)} ÷ 2 = ${fr(moitie)}°.`),
+    canvas: angleSeul(m, `${fr(m)}°`, { s: n.s, u: n.u, v: n.v }),
+  };
+}
+function genBisFigure(): Q {
+  const n = nomsAngle();
+  const P = prenom();
+  const a = angleReel();
+  const m = mesureDe(a, true);
+  const juste = Math.random() < 0.5;
+  const ecart = Math.min(pick([6, 8, 10, 12, 14]), m / 2 - 5);
+  const p1 = juste ? m / 2 : m / 2 + (Math.random() < 0.5 ? ecart : -ecart);
+  const p2 = m - p1;
+  const c = {
+    oui: `oui : les angles ${n.u}${n.s}${n.w} et ${n.w}${n.s}${n.v} sont égaux`,
+    non: `non : les angles ${n.u}${n.s}${n.w} et ${n.w}${n.s}${n.v} ne sont pas égaux`,
+    sommet: `oui : elle passe par le sommet ${n.s}`,
+    quarante: "non : une bissectrice fait toujours 45°",
+  };
+  return {
+    text: `${introAngle(n, a, m, P)} ${P.nom} trace la demi-droite [${n.s}${n.w}) : l’angle ${n.u}${n.s}${n.w} mesure ${fr(p2)}° et l’angle ${n.w}${n.s}${n.v} mesure ${fr(p1)}°. [${n.s}${n.w}) est-elle la bissectrice de l’angle ${n.nom} ?`,
+    format: "qcm",
+    choices: shuffle(Object.values(c)),
+    expected: [juste ? c.oui : c.non],
+    comparator: "mcq_exact",
+    explanation: expl(juste ? `${fr(p2)}° et ${fr(p1)}° : les deux angles sont égaux, [${n.s}${n.w}) est la bissectrice.` : `${fr(p2)}° et ${fr(p1)}° : les deux parts sont différentes. Passer par le sommet ne suffit pas, ce n’est pas la bissectrice.`),
+    canvas: angleEtBissectrice(m, { partage: p1, noms: n }),
+  };
+}
+function genBisRaisons(): Q {
+  const n = nomsAngle();
+  const P = prenom();
+  const cas = pick([
+    {
+      q: `${P.nom} dit : « Ma demi-droite part du sommet ${n.s}, donc c’est la bissectrice de l’angle ${n.nom}. » A-t-${il(P)} raison ?`,
+      juste: "non : il faut aussi qu’elle partage l’angle en deux angles égaux",
+      faux: ["oui : partir du sommet suffit", "oui, si elle est à l’intérieur de l’angle", "non : une bissectrice ne part jamais du sommet"],
+      r: "Une infinité de demi-droites partent du sommet. Une seule partage l’angle en deux angles égaux : c’est la bissectrice.",
+    },
+    {
+      q: `En quoi la bissectrice de l’angle ${n.nom} ressemble-t-elle à la médiatrice d’un segment ?`,
+      juste: "les deux partagent en deux parts égales et sont des axes de symétrie",
+      faux: ["les deux sont perpendiculaires à un côté", "les deux passent par un sommet", "elles ne se ressemblent pas du tout"],
+      r: "La médiatrice partage un segment en deux longueurs égales, la bissectrice partage un angle en deux angles égaux ; toutes deux sont des axes de symétrie et s’obtiennent par pliage.",
+    },
+    {
+      q: `Pourquoi précise-t-on « angle saillant » quand on parle de la bissectrice de l’angle ${n.nom} ?`,
+      juste: "deux demi-droites forment deux angles : on partage le plus petit",
+      faux: ["parce que l’angle dépasse de la figure", "parce que l’angle mesure plus de 180°", "ce mot ne sert à rien"],
+      r: "Deux demi-droites de même origine forment deux angles : le saillant, plus petit que 180°, et le rentrant. En 6e, on partage le saillant.",
+    },
+  ]);
+  return {
+    text: cas.q,
+    format: "qcm",
+    choices: shuffle([cas.juste, ...cas.faux]),
+    expected: [cas.juste],
+    comparator: "mcq_exact",
+    explanation: expl(cas.r),
+  };
+}
+
+// ----- BISSECTRICE_CONSTRUIRE
+function genBisRapporteurQcm(): Q {
+  const n = nomsAngle();
+  const P = prenom();
+  if (Math.random() < 0.3) {
+    const juste = `la bissectrice de l’angle ${n.nom}`;
+    return {
+      text: `${P.nom} plie sa feuille pour amener le côté [${n.s}${n.u}) exactement sur le côté [${n.s}${n.v}). Que représente le pli ?`,
+      format: "qcm",
+      choices: shuffle([juste, `la médiatrice de [${n.u}${n.v}]`, `la perpendiculaire à [${n.s}${n.u})`, `un nouveau côté de l’angle`]),
+      expected: [juste],
+      comparator: "mcq_exact",
+      explanation: expl("Le pli amène un côté sur l’autre : les deux parts de l’angle se superposent, elles sont égales. Le pli est la bissectrice."),
+    };
+  }
+  const a = angleReel();
+  const m = mesureDe(a);
+  const moitie = m / 2;
+  const pieges = [45, m, Math.min(180, 2 * m), moitie + 10, moitie - 10, 90].filter((x) => x > 0 && x <= 180 && x !== moitie);
+  return {
+    text: `${introAngle(n, a, m, P)} ${P.nom} veut tracer sa bissectrice au rapporteur, le zéro sur le côté [${n.s}${n.v}). ${pick(["À quelle graduation doit-" + il(P) + " marquer un point ?", "Quelle graduation faut-il viser ?"])}`,
+    format: "qcm",
+    choices: shuffle([`${fr(moitie)}°`, ...shuffle([...new Set(pieges)]).slice(0, 3).map((x) => `${fr(x)}°`)]),
+    expected: [`${fr(moitie)}°`],
+    comparator: "mcq_exact",
+    explanation: expl(`La bissectrice est à la moitié de l’angle, en partant du côté où est le zéro : ${fr(m)} ÷ 2 = ${fr(moitie)}°.`),
+    canvas: angleSeul(m, `${fr(m)}°`, { s: n.s, u: n.u, v: n.v }),
+  };
+}
+function genBisGraduation(): Q {
+  const n = nomsAngle();
+  const P = prenom();
+  const a = angleReel();
+  const m = mesureDe(a);
+  const moitie = m / 2;
+  return {
+    text: `${introAngle(n, a, m, P)} ${pick([
+      `À quelle graduation du rapporteur faut-il marquer un point pour tracer sa bissectrice ?`,
+      `${P.nom} pose le rapporteur sur ${n.s}, le zéro sur [${n.s}${n.v}). Quelle graduation marque-t-${il(P)} pour la bissectrice ?`,
+    ])}`,
+    format: "short",
+    expected: [`${fr(moitie)}°`],
+    comparator: "number_equal",
+    explanation: expl(`${fr(m)} ÷ 2 = ${fr(moitie)}. On aligne le zéro du rapporteur sur un côté, le centre sur le sommet, et on marque la graduation ${fr(moitie)}°.`),
+    canvas: angleSeul(m, `${fr(m)}°`, { s: n.s, u: n.u, v: n.v }),
+  };
+}
+function genBisConstruireRaisons(): Q {
+  const n = nomsAngle();
+  const P = prenom();
+  const mode = pick(["quarante", "quarante", "etapes", "pliage"] as const);
+  if (mode === "quarante") {
+    let m = randomInt(50, 170);
+    if (m === 90) m = 100;
+    const autre = m - 45;
+    const juste = `les deux parts font 45° et ${autre}° : ce n’est pas la bissectrice`;
+    return {
+      text: `L’angle ${n.nom} mesure ${m}°. Pour le partager en deux, ${P.nom} trace une demi-droite à 45° du côté [${n.s}${n.v}). Que se passe-t-il ?`,
+      format: "qcm",
+      choices: shuffle([juste, "c’est juste : 45° est toujours la bonne mesure", "les deux parts font 45° chacune", "l’angle devient un angle droit"]),
+      expected: [juste],
+      comparator: "mcq_exact",
+      explanation: expl(`De l’autre côté, il reste ${m} − 45 = ${autre}° : les deux parts sont différentes. La bonne mesure était ${m} ÷ 2 = ${fr(m / 2)}°. 45° ne convient que pour un angle droit.`),
+    };
+  }
+  if (mode === "etapes") {
+    const juste = "mesurer l’angle, diviser par 2, puis marquer cette graduation";
+    return {
+      text: `${P.nom} écrit le programme pour tracer au rapporteur la bissectrice de l’angle ${n.nom}. Quel est le bon ordre ?`,
+      format: "qcm",
+      choices: shuffle([juste, "marquer 45°, puis mesurer l’angle", "diviser par 2, puis mesurer l’angle", "mesurer l’angle, multiplier par 2, puis marquer"]),
+      expected: [juste],
+      comparator: "mcq_exact",
+      explanation: expl("On mesure d’abord l’angle, on calcule sa moitié, puis on marque cette graduation en partant d’un côté, et on trace la demi-droite depuis le sommet."),
+    };
+  }
+  const juste = "les deux parts se superposent : elles sont égales";
+  return {
+    text: `${P.nom} trouve la bissectrice de l’angle ${n.nom} par pliage, sans rien mesurer. Pourquoi est-ce juste ?`,
+    format: "qcm",
+    choices: shuffle([juste, "le pli fait toujours 45°", "le pli passe par le milieu de [" + [n.u, n.v].sort().join("") + "]", "parce que la feuille est carrée"]),
+    expected: [juste],
+    comparator: "mcq_exact",
+    explanation: expl(`En amenant [${n.s}${n.u}) sur [${n.s}${n.v}), les deux parts de l’angle se superposent : elles sont égales, quelle que soit la mesure de l’angle.`),
+  };
+}
+
+// ----- BISSECTRICE_PROBLEME
+function genBisDoubleMoitie(): Q {
+  const n = nomsAngle();
+  const P = prenom();
+  const a = angleReel();
+  const m = mesureDe(a);
+  const moitie = m / 2;
+  const canvas = angleEtBissectrice(m, { noms: n });
+  if (Math.random() < 0.5) {
+    return {
+      text: `${P.nom} a tracé [${n.s}${n.w}), la bissectrice de l’angle ${n.nom}, qui représente ${a.nom}. L’angle ${n.u}${n.s}${n.w} mesure ${fr(moitie)}°. ${pick([`Combien mesure l’angle ${n.nom} ?`, `Quelle est la mesure de l’angle ${n.nom} ?`])}`,
+      format: "short",
+      expected: [`${fr(m)}°`],
+      comparator: "number_equal",
+      explanation: expl(`Les angles ${n.u}${n.s}${n.w} et ${n.w}${n.s}${n.v} sont égaux, donc l’angle ${n.nom} vaut ${fr(moitie)} + ${fr(moitie)} = ${fr(m)}°.`),
+      canvas,
+    };
+  }
+  return {
+    text: `${introAngle(n, a, m, P)} [${n.s}${n.w}) est sa bissectrice. ${pick([`Combien mesure l’angle ${n.w}${n.s}${n.v} ?`, `Calcule l’angle ${n.u}${n.s}${n.w}.`])}`,
+    format: "short",
+    expected: [`${fr(moitie)}°`],
+    comparator: "number_equal",
+    explanation: expl(`${fr(m)} ÷ 2 = ${fr(moitie)}°.`),
+    canvas,
+  };
+}
+function genBisProblemes(): Q {
+  const P = prenom();
+  const [E, F, G] = shuffle(LETTRES).slice(0, 3);
+  const mode = pick(["plat", "equilateral", "isocele", "triangle", "droit"] as const);
+  if (mode === "plat")
+    return {
+      text: `${P.nom} trace la bissectrice d’un angle plat ${E}${F}${G}. Combien mesure chacun des deux angles obtenus ?`,
+      format: "short",
+      expected: ["90°"],
+      comparator: "number_equal",
+      explanation: expl("Un angle plat mesure 180°. Sa bissectrice le partage en deux angles de 180 ÷ 2 = 90° : elle est perpendiculaire aux deux côtés."),
+    };
+  if (mode === "droit")
+    return {
+      text: `${P.nom} trace la bissectrice de l’angle droit ${E}${F}${G}. Combien mesure chacun des deux angles obtenus ?`,
+      format: "short",
+      expected: ["45°"],
+      comparator: "number_equal",
+      explanation: expl("Un angle droit mesure 90°. Sa bissectrice forme deux angles de 90 ÷ 2 = 45°."),
+    };
+  if (mode === "equilateral")
+    return {
+      text: `Le triangle ${E}${F}${G} est équilatéral. ${P.nom} trace la bissectrice de l’angle en ${E}. Combien mesurent les deux angles obtenus ?`,
+      format: "short",
+      expected: ["30°"],
+      comparator: "number_equal",
+      explanation: expl("Chaque angle d’un triangle équilatéral mesure 180 ÷ 3 = 60°. La bissectrice le partage en deux : 60 ÷ 2 = 30°."),
+    };
+  if (mode === "isocele") {
+    const base = randomInt(20, 80);
+    const sommet = 180 - 2 * base;
+    return {
+      text: `Le triangle ${E}${F}${G} est isocèle en ${E}, et ses angles à la base mesurent ${base}°. ${P.nom} trace la bissectrice de l’angle en ${E}. Combien mesure chacun des deux angles obtenus ?`,
+      format: "short",
+      expected: [`${fr(sommet / 2)}°`],
+      comparator: "number_equal",
+      explanation: expl(`L’angle en ${E} mesure 180 − ${base} − ${base} = ${sommet}°. Sa bissectrice le partage en deux : ${sommet} ÷ 2 = ${fr(sommet / 2)}°.`),
+    };
+  }
+  const x = randomInt(30, 80);
+  const y = randomInt(30, 80);
+  const z = 180 - x - y;
+  return {
+    text: `Dans le triangle ${E}${F}${G}, l’angle en ${E} mesure ${x}° et l’angle en ${F} mesure ${y}°. ${P.nom} trace la bissectrice de l’angle en ${G}. Combien mesure chacun des deux angles obtenus ?`,
+    format: "short",
+    expected: [`${fr(z / 2)}°`],
+    comparator: "number_equal",
+    explanation: expl(`L’angle en ${G} mesure 180 − ${x} − ${y} = ${z}°. Sa bissectrice le partage en deux : ${z} ÷ 2 = ${fr(z / 2)}°.`),
+  };
+}
+
+// ----- BISSECTRICE_DEFI
+function genBisQuart(): Q {
+  const n = nomsAngle();
+  const P = prenom();
+  const a = angleReel();
+  const m = mesureDe(a);
+  const quart = m / 4;
+  return {
+    text: `${introAngle(n, a, m, P)} ${P.nom} trace sa bissectrice, puis la bissectrice de l’une des deux moitiés. ${pick(["Combien mesure le plus petit angle obtenu ?", "Quelle est la mesure du plus petit angle ?"])}`,
+    format: "short",
+    expected: [`${fr(quart)}°`],
+    comparator: "number_equal",
+    explanation: expl(`Première bissectrice : ${fr(m)} ÷ 2 = ${fr(m / 2)}°. Seconde : ${fr(m / 2)} ÷ 2 = ${fr(quart)}°.`),
+    canvas: angleSeul(m, `${fr(m)}°`, { s: n.s, u: n.u, v: n.v }),
+  };
+}
+function genBisDefiRaisons(): Q {
+  const n = nomsAngle();
+  const P = prenom();
+  const mode = pick(["tourner", "entiers", "medtriatrice"] as const);
+  if (mode === "tourner") {
+    const m = 2 * randomInt(20, 85);
+    const d = pick([1, 2, 3, 5]);
+    const juste = `${m / 2 + d}° et ${m / 2 - d}° : ce n’est plus la bissectrice`;
+    return {
+      text: `L’angle ${n.nom} mesure ${m}°, et [${n.s}${n.w}) est sa bissectrice. ${P.nom} tourne [${n.s}${n.w}) de ${d}° vers [${n.s}${n.u}). Que deviennent les deux angles ?`,
+      format: "qcm",
+      choices: shuffle([juste, `${m / 2}° et ${m / 2}° : rien ne change`, `${m / 2 + d}° et ${m / 2 + d}°`, `${m / 2 - d}° et ${m / 2 - d}°`]),
+      expected: [juste],
+      comparator: "mcq_exact",
+      explanation: expl(`L’angle ${n.w}${n.s}${n.v} gagne ${d}° et l’angle ${n.u}${n.s}${n.w} perd ${d}° : ${m / 2 + d}° et ${m / 2 - d}°. Une seule position partage l’angle en deux parts égales : la bissectrice est unique.`),
+    };
+  }
+  if (mode === "entiers") {
+    // Des angles dont la 3e moitié n'est plus entière (90 → 45 → 22,5 → 11,25).
+    const m = pick([90, 60, 100, 140, 180, 20, 36, 44, 52, 76, 84]);
+    const suite = [m / 2, m / 4, m / 8];
+    const juste = `non : ${fr(m)}°, puis ${suite.map((x) => `${fr(x)}°`).join(", puis ")}`;
+    return {
+      text: `${P.nom} part d’un angle de ${m}° et trace des bissectrices de plus en plus petites. ${P.nom} affirme qu’on tombe toujours sur un nombre entier de degrés. A-t-${il(P)} raison ?`,
+      format: "qcm",
+      choices: shuffle([juste, "oui : une moitié de nombre entier est toujours entière", "oui, si on s’arrête à deux bissectrices", "non : on finit par tomber sur des nombres négatifs"]),
+      expected: [juste],
+      comparator: "mcq_exact",
+      explanation: expl(`On divise par 2 à chaque fois : ${[m, ...suite].map((x) => `${fr(x)}°`).join(" → ")}. Un nombre décimal apparaît vite : une mesure d’angle n’est pas forcément entière.`),
+    };
+  }
+  const juste = "on partage une longueur pour l’une, un angle pour l’autre";
+  return {
+    text: `${P.nom} compare la bissectrice de l’angle ${n.nom} et la médiatrice du segment [${[n.u, n.v].sort().join("")}]. Qu’est-ce qui change entre les deux ?`,
+    format: "qcm",
+    choices: shuffle([juste, "l’une est un axe de symétrie, l’autre non", "l’une s’obtient par pliage, l’autre jamais", "rien ne change, c’est la même droite"]),
+    expected: [juste],
+    comparator: "mcq_exact",
+    explanation: expl("Toutes deux partagent en deux parts égales, sont des axes de symétrie et s’obtiennent par pliage. Ce qui change, c’est ce qu’on partage : une LONGUEUR pour la médiatrice, une MESURE D’ANGLE pour la bissectrice."),
   };
 }
 
@@ -147,7 +546,7 @@ export const bissectriceBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "La bissectrice d'un angle de 80° le partage en deux angles. Combien mesure chacun ?",
     format: "short",
-    expected: ["40"],
+    expected: ["40°"],
     comparator: "number_equal",
     hint: "Deux parts égales, donc la moitié.",
     explanation: expl("80 ÷ 2 = 40. Chacun des deux angles mesure 40°."),
@@ -241,18 +640,33 @@ export const bissectriceBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "La bissectrice coupe l'angle en deux moitiés.",
     tags: ["bissectrice_angle", "definition", "template"],
-    generate: () => {
-      const moitie = randomInt(10, 84);
-      const angle = 2 * moitie;
-      return {
-        text: `La bissectrice d'un angle de ${angle}° le partage en deux angles adjacents. Combien mesure chacun d'eux ?`,
-        format: "short",
-        expected: [String(moitie), `${moitie}°`],
-        comparator: "number_equal",
-        explanation: expl(`${angle} ÷ 2 = ${moitie}. Chacun des deux angles mesure ${moitie}°.`),
-        canvas: angleSeul(angle, `${angle}°`),
-      };
-    },
+    generate: () => genBisMoitie(),
+  },
+  {
+    kind: "template",
+    id: "bissectrice_definition_tpl_connaitre",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "bissectrice_angle",
+    microId: "bissectrice_definition",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "La bissectrice coupe l’angle en deux angles égaux.",
+    tags: ["bissectrice_angle", "definition", "template", "qcm"],
+    generate: () => genBisConnaitre(),
+  },
+  {
+    kind: "template",
+    id: "bissectrice_definition_tpl_figure",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "bissectrice_angle",
+    microId: "bissectrice_definition",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Compare les deux angles de part et d’autre de la demi-droite.",
+    tags: ["bissectrice_angle", "definition", "template", "canvas", "qcm"],
+    generate: () => genBisFigure(),
   },
   {
     kind: "template",
@@ -264,34 +678,8 @@ export const bissectriceBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     hint: "Dis ce qu'il faut vérifier, pas seulement ce qu'on voit.",
-    tags: ["bissectrice_angle", "definition", "template", "ouverte"],
-    generate: () => {
-      const cas = [
-        {
-          q: "Explique pourquoi passer par le sommet d'un angle ne suffit pas à être sa bissectrice.",
-          mots: ["égaux", "egaux", "deux parts", "moitié", "moitie", "infinité", "infinite"],
-          r: "Une infinité de droites passent par le sommet d'un angle, et elles le découpent de toutes les façons possibles. Une seule le partage en deux angles ÉGAUX, et c'est elle la bissectrice. Il faut donc vérifier l'égalité des deux parts, pas seulement le passage par le sommet.",
-        },
-        {
-          q: "Explique en quoi la bissectrice d'un angle ressemble à la médiatrice d'un segment.",
-          mots: ["deux parts", "égales", "egales", "symétrie", "symetrie", "pliage", "milieu"],
-          r: "Les deux coupent un objet en deux parts égales, et les deux sont son axe de symétrie. La médiatrice partage un segment en deux morceaux de même longueur et amène A sur B par pliage ; la bissectrice partage un angle en deux angles de même mesure et amène un côté sur l'autre par pliage.",
-        },
-        {
-          q: "Explique pourquoi on précise « angle saillant » dans la définition de la bissectrice.",
-          mots: ["rentrant", "saillant", "deux angles", "180"],
-          r: "Deux demi-droites de même origine forment deux angles : le saillant, plus petit que l'angle plat, et le rentrant, qui est tout le reste du tour. Sans préciser, on ne saurait pas lequel on partage. Le programme de 6e se limite au saillant.",
-        },
-      ];
-      const c = cas[randomInt(0, cas.length - 1)];
-      return {
-        text: c.q,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
-        explanation: expl(c.r),
-      };
-    },
+    tags: ["bissectrice_angle", "definition", "template", "qcm"],
+    generate: () => genBisRaisons(),
   },
 
   // =========================
@@ -360,7 +748,7 @@ export const bissectriceBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un angle mesure 110°. À quelle graduation faut-il marquer un point pour tracer sa bissectrice ?",
     format: "short",
-    expected: ["55"],
+    expected: ["55°"],
     comparator: "number_equal",
     hint: "La moitié de la mesure, en partant d'un côté.",
     explanation: expl(
@@ -405,20 +793,20 @@ export const bissectriceBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "On divise la mesure par 2, puis on marque cette graduation.",
     tags: ["bissectrice_angle", "construire", "template"],
-    generate: () => {
-      const moitie = randomInt(12, 87);
-      const angle = 2 * moitie;
-      return {
-        text: `Un angle mesure ${angle}°. À quelle graduation du rapporteur faut-il marquer un point pour tracer sa bissectrice ?`,
-        format: "short",
-        expected: [String(moitie), `${moitie}°`],
-        comparator: "number_equal",
-        explanation: expl(
-          `${angle} ÷ 2 = ${moitie}. On aligne le zéro du rapporteur sur un côté, le centre sur le sommet, et on marque la graduation ${moitie}°.`
-        ),
-        canvas: angleSeul(angle, `${angle}°`),
-      };
-    },
+    generate: () => genBisGraduation(),
+  },
+  {
+    kind: "template",
+    id: "bissectrice_construire_tpl_rapporteur",
+    niveau: "6e",
+    matiere: "maths",
+    notionId: "bissectrice_angle",
+    microId: "bissectrice_construire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La bissectrice est à la moitié de la mesure de l’angle.",
+    tags: ["bissectrice_angle", "construire", "template", "qcm"],
+    generate: () => genBisRapporteurQcm(),
   },
   {
     kind: "template",
@@ -430,34 +818,8 @@ export const bissectriceBank: TutorBankItemV4[] = [
     difficulty: 5,
     theme: "neutral",
     hint: "Écris des étapes qu'un camarade peut suivre sans te voir faire.",
-    tags: ["bissectrice_angle", "construire", "template", "ouverte"],
-    generate: () => {
-      const cas = [
-        {
-          q: "Écris un programme de construction de la bissectrice d'un angle au rapporteur.",
-          mots: ["mesure", "diviser", "moitié", "moitie", "sommet", "graduation", "tracer"],
-          r: "1. Poser le centre du rapporteur sur le sommet de l'angle et aligner le zéro sur un côté. 2. Lire la mesure de l'angle. 3. Diviser cette mesure par 2. 4. Sans bouger le rapporteur, marquer un point à la graduation obtenue. 5. Tracer la demi-droite qui part du sommet et passe par ce point.",
-        },
-        {
-          q: "Explique pourquoi le pliage donne la bissectrice sans qu'on ait besoin de mesurer quoi que ce soit.",
-          mots: ["superpose", "symétrie", "symetrie", "égales", "egales", "pli", "côté sur", "cote sur"],
-          r: "En amenant un côté exactement sur l'autre, les deux parts de l'angle se superposent : elles sont donc égales, quelle que soit la mesure de l'angle. Le pli est l'axe de symétrie de l'angle, c'est-à-dire sa bissectrice — et on n'a jamais eu besoin de connaître un nombre de degrés.",
-        },
-        {
-          q: "Explique pourquoi il ne faut pas apprendre par cœur que « la bissectrice est à 45° ».",
-          mots: ["dépend", "depend", "moitié", "moitie", "90", "angle droit"],
-          r: "45° n'est la bonne réponse que pour un angle DROIT, puisque 90 ÷ 2 = 45. Pour tout autre angle, la moitié est différente : 55° pour un angle de 110°, 30° pour un angle de 60°. La bissectrice se calcule à partir de l'angle qu'on partage, elle ne se récite pas.",
-        },
-      ];
-      const c = cas[randomInt(0, cas.length - 1)];
-      return {
-        text: c.q,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
-        explanation: expl(c.r),
-      };
-    },
+    tags: ["bissectrice_angle", "construire", "template", "qcm"],
+    generate: () => genBisConstruireRaisons(),
   },
 
   // =========================
@@ -474,7 +836,7 @@ export const bissectriceBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Quelle est la mesure des deux angles formés par la bissectrice d'un angle droit ?",
     format: "short",
-    expected: ["45"],
+    expected: ["45°"],
     comparator: "number_equal",
     hint: "Un angle droit mesure 90°.",
     explanation: expl("Un angle droit mesure 90°, donc sa bissectrice forme deux angles de 90 ÷ 2 = 45°."),
@@ -491,7 +853,7 @@ export const bissectriceBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Quelle est la mesure des deux angles formés par la bissectrice d'un angle plat ?",
     format: "short",
-    expected: ["90"],
+    expected: ["90°"],
     comparator: "number_equal",
     hint: "Un angle plat mesure 180°.",
     explanation: expl(
@@ -510,7 +872,7 @@ export const bissectriceBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "La demi-droite [OC) est la bissectrice de l'angle AOB, et l'angle AOC mesure 37°. Combien mesure l'angle AOB ?",
     format: "short",
-    expected: ["74"],
+    expected: ["74°"],
     comparator: "number_equal",
     hint: "L'angle entier vaut deux fois la moitié.",
     explanation: expl(
@@ -530,7 +892,7 @@ export const bissectriceBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Dans un triangle équilatéral, combien mesurent les deux angles formés par la bissectrice d'un de ses angles ?",
     format: "short",
-    expected: ["30"],
+    expected: ["30°"],
     comparator: "number_equal",
     hint: "Commence par la mesure d'un angle du triangle équilatéral.",
     explanation: expl(
@@ -549,30 +911,7 @@ export const bissectriceBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Selon ce qu'on te donne, tu divises ou tu multiplies par 2.",
     tags: ["bissectrice_angle", "probleme", "template"],
-    generate: () => {
-      const moitie = randomInt(15, 80);
-      const angle = 2 * moitie;
-      const versLeTout = Math.random() < 0.5;
-      return versLeTout
-        ? {
-            text: `La demi-droite [OC) est la bissectrice de l'angle AOB, et l'angle AOC mesure ${moitie}°. Combien mesure l'angle AOB ?`,
-            format: "short",
-            expected: [String(angle), `${angle}°`],
-            comparator: "number_equal",
-            explanation: expl(
-              `Les deux angles AOC et COB sont égaux, donc l'angle AOB vaut ${moitie} + ${moitie} = ${angle}°.`
-            ),
-            canvas: angleEtBissectrice(angle),
-          }
-        : {
-            text: `La demi-droite [OC) est la bissectrice de l'angle AOB, qui mesure ${angle}°. Combien mesure l'angle COB ?`,
-            format: "short",
-            expected: [String(moitie), `${moitie}°`],
-            comparator: "number_equal",
-            explanation: expl(`${angle} ÷ 2 = ${moitie}. L'angle COB mesure ${moitie}°.`),
-            canvas: angleEtBissectrice(angle),
-          };
-    },
+    generate: () => genBisDoubleMoitie(),
   },
   {
     kind: "template",
@@ -584,34 +923,8 @@ export const bissectriceBank: TutorBankItemV4[] = [
     difficulty: 5,
     theme: "neutral",
     hint: "Appuie-toi sur l'égalité des deux angles, pas sur le dessin.",
-    tags: ["bissectrice_angle", "probleme", "template", "ouverte"],
-    generate: () => {
-      const cas = [
-        {
-          q: "Explique pourquoi la bissectrice d'un angle plat est perpendiculaire à ses deux côtés.",
-          mots: ["180", "90", "moitié", "moitie", "droit"],
-          r: "Un angle plat mesure 180°. Sa bissectrice le partage en deux angles égaux, donc de 180 ÷ 2 = 90° chacun. Un angle de 90° est un angle droit : la bissectrice est donc perpendiculaire aux deux côtés, qui sont alignés.",
-        },
-        {
-          q: "On connaît seulement l'un des deux angles formés par une bissectrice. Explique comment retrouver l'angle entier.",
-          mots: ["deux fois", "double", "égaux", "egaux", "multiplie", "somme"],
-          r: "Les deux angles formés sont égaux par définition de la bissectrice. L'angle entier est donc la somme des deux, c'est-à-dire le double de celui qu'on connaît. Si l'un mesure 37°, l'angle entier mesure 74°.",
-        },
-        {
-          q: "Explique pourquoi la bissectrice d'un angle d'un triangle équilatéral forme deux angles de 30°.",
-          mots: ["60", "180", "trois", "équilatéral", "equilateral", "moitié", "moitie"],
-          r: "Dans un triangle équilatéral, les trois angles sont égaux et leur somme vaut 180° : chacun mesure donc 180 ÷ 3 = 60°. La bissectrice partage l'un d'eux en deux parts égales : 60 ÷ 2 = 30°.",
-        },
-      ];
-      const c = cas[randomInt(0, cas.length - 1)];
-      return {
-        text: c.q,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
-        explanation: expl(c.r),
-      };
-    },
+    tags: ["bissectrice_angle", "probleme", "template"],
+    generate: () => genBisProblemes(),
   },
 
   // =========================
@@ -628,7 +941,7 @@ export const bissectriceBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un angle mesure 90°. On trace sa bissectrice, puis la bissectrice de l'une des deux moitiés. Combien mesure le plus petit angle obtenu ?",
     format: "short",
-    expected: ["22,5", "22.5"],
+    expected: ["22,5°"],
     comparator: "number_equal",
     hint: "On divise deux fois par 2.",
     explanation: expl(
@@ -672,20 +985,7 @@ export const bissectriceBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Partage deux fois de suite.",
     tags: ["bissectrice_angle", "defi", "template"],
-    generate: () => {
-      const quart = randomInt(8, 40);
-      const angle = 4 * quart;
-      return {
-        text: `Un angle mesure ${angle}°. On trace sa bissectrice, puis la bissectrice de l'une des deux moitiés. Combien mesure le plus petit angle obtenu ?`,
-        format: "short",
-        expected: [String(quart), `${quart}°`],
-        comparator: "number_equal",
-        explanation: expl(
-          `La première bissectrice donne ${angle} ÷ 2 = ${2 * quart}°. La seconde partage cette moitié en deux : ${2 * quart} ÷ 2 = ${quart}°.`
-        ),
-        canvas: angleSeul(angle, `${angle}°`),
-      };
-    },
+    generate: () => genBisQuart(),
   },
   {
     kind: "template",
@@ -697,33 +997,7 @@ export const bissectriceBank: TutorBankItemV4[] = [
     difficulty: 5,
     theme: "neutral",
     hint: "Compare avec la médiatrice, et dis ce qui joue le rôle de quoi.",
-    tags: ["bissectrice_angle", "defi", "template", "ouverte"],
-    generate: () => {
-      const cas = [
-        {
-          q: "Explique pourquoi la bissectrice d'un angle est unique.",
-          mots: ["une seule", "unique", "déplace", "deplace", "égales", "egales"],
-          r: "Si on fait tourner d'un degré la demi-droite qui partage l'angle, l'une des deux parts gagne ce degré et l'autre le perd : elles ne sont plus égales. Il n'existe donc qu'une seule position qui convienne, et la bissectrice est unique.",
-        },
-        {
-          q: "Compare la bissectrice d'un angle et la médiatrice d'un segment : qu'ont-elles en commun, et qu'est-ce qui change ?",
-          mots: ["deux parts", "égales", "egales", "symétrie", "symetrie", "angle", "segment", "pliage"],
-          r: "Toutes deux coupent un objet en deux parts égales et en sont l'axe de symétrie ; toutes deux s'obtiennent par pliage, en amenant une extrémité ou un côté sur l'autre. Ce qui change est l'objet et la grandeur partagée : la médiatrice partage une LONGUEUR, la bissectrice partage une MESURE D'ANGLE.",
-        },
-        {
-          q: "Un élève affirme qu'en traçant plusieurs fois de suite des bissectrices, on finit toujours par tomber sur un nombre entier de degrés. Qu'en penses-tu ?",
-          mots: ["non", "22,5", "22.5", "moitié", "moitie", "décimal", "decimal"],
-          r: "C'est faux. Partager 90° donne 45°, puis 22,5° : dès la deuxième bissectrice, le nombre n'est plus entier. Une mesure d'angle est un nombre comme un autre, elle peut avoir une partie décimale — et en continuant, on obtient 11,25°, puis 5,625°.",
-        },
-      ];
-      const c = cas[randomInt(0, cas.length - 1)];
-      return {
-        text: c.q,
-        format: "open",
-        expected: c.mots,
-        comparator: "contains_keyword",
-        explanation: expl(c.r),
-      };
-    },
+    tags: ["bissectrice_angle", "defi", "template", "qcm"],
+    generate: () => genBisDefiRaisons(),
   },
 ];
