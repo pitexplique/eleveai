@@ -211,6 +211,32 @@ const ICONES_ACTION: Record<ActionId, typeof Calculator> = {
    « MATHÉMATIQUES : » était coupé et rien ne permettait de le ramener.
    Le mot-clé `safe` dit au navigateur de retomber sur `start` dès que ça
    déborde : centré quand ça tient, aligné à gauche quand ça ne tient pas. */
+/* ⭐ UNE COULEUR PAR MATIÈRE, PRISE SUR LA ROSE CHROMATIQUE (07/10/2026).
+   Frédéric : « les matières sont toutes de la même couleur, il faut leur
+   mettre des couleurs, du peps, en suivant la rose chromatique ». Six matières,
+   six couleurs de la rose — les trois primaires et les trois secondaires :
+   maths bleu, français rouge, économie vert, anglais violet, espagnol orange,
+   IA jaune. Même règle que les cycles plus bas : des couleurs de la rose,
+   ⛔ jamais des nuances d'une même famille.
+   L'icône est dans une pastille PLEINE, et le nom dans sa couleur, ouverte ou
+   non (« du peps » : les pastilles pâles du premier essai ne l'avaient pas).
+   La matière ouverte se reconnaît au soulignement, au fond léger et à sa
+   pastille un peu plus grosse.
+   ⚠️ Le jaune ne se lit pas en texte blanc ni en texte jaune sur blanc : son
+   icône pleine est en brun foncé, son libellé en ambre.
+   ⚠️ Classes Tailwind écrites EN ENTIER, sinon Tailwind ne les voit pas. */
+const COULEURS_MATIERE: Record<
+  MatiereId,
+  { repos: string; plein: string; texte: string; survol: string; trait: string; fond: string }
+> = {
+  maths: { repos: "bg-blue-100 text-blue-600", plein: "bg-blue-600 text-white", texte: "text-blue-700", survol: "hover:text-blue-700", trait: "bg-blue-600", fond: "bg-blue-50" },
+  francais: { repos: "bg-red-100 text-red-600", plein: "bg-red-600 text-white", texte: "text-red-700", survol: "hover:text-red-700", trait: "bg-red-600", fond: "bg-red-50" },
+  economie: { repos: "bg-green-100 text-green-600", plein: "bg-green-600 text-white", texte: "text-green-700", survol: "hover:text-green-700", trait: "bg-green-600", fond: "bg-green-50" },
+  anglais: { repos: "bg-violet-100 text-violet-600", plein: "bg-violet-600 text-white", texte: "text-violet-700", survol: "hover:text-violet-700", trait: "bg-violet-600", fond: "bg-violet-50" },
+  espagnol: { repos: "bg-orange-100 text-orange-600", plein: "bg-orange-500 text-white", texte: "text-orange-700", survol: "hover:text-orange-700", trait: "bg-orange-500", fond: "bg-orange-50" },
+  ia: { repos: "bg-yellow-100 text-yellow-700", plein: "bg-yellow-400 text-yellow-950", texte: "text-amber-700", survol: "hover:text-amber-700", trait: "bg-yellow-400", fond: "bg-yellow-50" },
+};
+
 function LigneMatieres({
   actif,
   choisir,
@@ -237,6 +263,7 @@ function LigneMatieres({
         {MATIERES.map((m) => {
           const Icone = ICONES_MATIERE[m.id];
           const ouvert = m.id === actif;
+          const c = COULEURS_MATIERE[m.id];
           return (
             <button
               key={m.id}
@@ -245,17 +272,19 @@ function LigneMatieres({
               aria-current={ouvert ? "page" : undefined}
               className={[
                 "relative flex shrink-0 flex-col items-center gap-1 px-3 py-2.5 text-sm font-semibold transition sm:px-5",
-                ouvert
-                  ? "text-teal-700"
-                  : "text-slate-600 hover:bg-slate-50 hover:text-slate-900",
+                ouvert ? `${c.texte} ${c.fond}` : `${c.texte} hover:bg-slate-50`,
               ].join(" ")}
             >
-              <Icone className="h-5 w-5" strokeWidth={ouvert ? 2.4 : 1.9} aria-hidden="true" />
+              <span
+                className={`flex h-8 w-8 items-center justify-center rounded-full transition ${c.plein} ${ouvert ? "scale-110 shadow-md" : "shadow-sm"}`}
+              >
+                <Icone className="h-[18px] w-[18px]" strokeWidth={ouvert ? 2.4 : 2} aria-hidden="true" />
+              </span>
               <span className="whitespace-nowrap">{m.label}</span>
               {ouvert && (
                 <span
                   aria-hidden="true"
-                  className="absolute inset-x-2 bottom-0 h-[3px] rounded-t bg-teal-600"
+                  className={`absolute inset-x-2 bottom-0 h-[3px] rounded-t ${c.trait}`}
                 />
               )}
             </button>
