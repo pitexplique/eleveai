@@ -552,6 +552,17 @@ function CarteNiveau({
  *  CECRL, l'IA par référentiel Pix : elles gardent leur liste. */
 const MATIERES_PAR_CLASSE: MatiereId[] = ["maths", "francais"];
 
+/* ⭐ LES COULEURS (07/10/2026). Frédéric : « ça manque de couleurs », puis
+   « pour chaque niveau tu choisis 3 couleurs, lycée collège primaire, puis 4
+   couleurs secondaires ». Une couleur PRINCIPALE par cycle (le bandeau du
+   titre : vert d'eau, violet, orange), et 4 SECONDAIRES de la même famille
+   qui alternent sur ses cartes — chaque classe a sa teinte, comme chez IXL,
+   sans que le cycle se perde.
+   ⚠️ Les classes Tailwind sont écrites EN ENTIER (`bg-teal-500`) : un nom
+   construit dans le JSX ne serait pas vu par Tailwind, la carte sortirait
+   blanche. */
+type Teinte = { pastille: string; fond: string; bord: string; texte: string; bouton: string };
+
 const CYCLES: {
   id: string;
   titre: string;
@@ -559,6 +570,9 @@ const CYCLES: {
   pastille: string;
   bord: string;
   texte: string;
+  /** Les 4 couleurs SECONDAIRES des cartes du cycle, de la même famille que
+   *  sa couleur principale. */
+  cartes: Teinte[];
 }[] = [
   {
     id: "lycee",
@@ -567,6 +581,7 @@ const CYCLES: {
     pastille: "bg-teal-600",
     bord: "border-teal-300 hover:border-teal-500",
     texte: "text-teal-700",
+    cartes: [{ pastille: "bg-teal-500", fond: "bg-teal-50", bord: "border-teal-300 hover:border-teal-500", texte: "text-teal-700", bouton: "bg-teal-600" }, { pastille: "bg-emerald-500", fond: "bg-emerald-50", bord: "border-emerald-300 hover:border-emerald-500", texte: "text-emerald-700", bouton: "bg-emerald-600" }, { pastille: "bg-cyan-500", fond: "bg-cyan-50", bord: "border-cyan-300 hover:border-cyan-500", texte: "text-cyan-700", bouton: "bg-cyan-600" }, { pastille: "bg-sky-500", fond: "bg-sky-50", bord: "border-sky-300 hover:border-sky-500", texte: "text-sky-700", bouton: "bg-sky-500" }],
   },
   {
     id: "college",
@@ -575,6 +590,7 @@ const CYCLES: {
     pastille: "bg-violet-600",
     bord: "border-violet-300 hover:border-violet-500",
     texte: "text-violet-700",
+    cartes: [{ pastille: "bg-violet-500", fond: "bg-violet-50", bord: "border-violet-300 hover:border-violet-500", texte: "text-violet-700", bouton: "bg-violet-500" }, { pastille: "bg-purple-500", fond: "bg-purple-50", bord: "border-purple-300 hover:border-purple-500", texte: "text-purple-700", bouton: "bg-purple-500" }, { pastille: "bg-fuchsia-500", fond: "bg-fuchsia-50", bord: "border-fuchsia-300 hover:border-fuchsia-500", texte: "text-fuchsia-700", bouton: "bg-fuchsia-500" }, { pastille: "bg-indigo-500", fond: "bg-indigo-50", bord: "border-indigo-300 hover:border-indigo-500", texte: "text-indigo-700", bouton: "bg-indigo-500" }],
   },
   {
     id: "primaire",
@@ -583,6 +599,7 @@ const CYCLES: {
     pastille: "bg-orange-500",
     bord: "border-orange-300 hover:border-orange-500",
     texte: "text-orange-700",
+    cartes: [{ pastille: "bg-orange-500", fond: "bg-orange-50", bord: "border-orange-300 hover:border-orange-500", texte: "text-orange-700", bouton: "bg-orange-500" }, { pastille: "bg-amber-500", fond: "bg-amber-50", bord: "border-amber-300 hover:border-amber-500", texte: "text-amber-800", bouton: "bg-amber-500" }, { pastille: "bg-rose-500", fond: "bg-rose-50", bord: "border-rose-300 hover:border-rose-500", texte: "text-rose-700", bouton: "bg-rose-500" }, { pastille: "bg-red-500", fond: "bg-red-50", bord: "border-red-300 hover:border-red-500", texte: "text-red-700", bouton: "bg-red-500" }],
   },
   {
     id: "autres",
@@ -591,6 +608,7 @@ const CYCLES: {
     pastille: "bg-sky-600",
     bord: "border-sky-300 hover:border-sky-500",
     texte: "text-sky-700",
+    cartes: [{ pastille: "bg-sky-500", fond: "bg-sky-50", bord: "border-sky-300 hover:border-sky-500", texte: "text-sky-700", bouton: "bg-sky-500" }],
   },
 ];
 
@@ -631,21 +649,27 @@ function PanneauCycles({ matiere }: { matiere: MatiereAccueil }) {
         <section key={cycle.id} aria-labelledby={`cycle-${cycle.id}`}>
           <h2
             id={`cycle-${cycle.id}`}
-            className={`mb-3 text-lg font-black uppercase tracking-wide ${cycle.texte}`}
+            className="mb-3 flex items-center gap-3"
           >
-            {cycle.titre}
+            <span
+              className={`rounded-full px-4 py-1 text-base font-black uppercase tracking-wide text-white shadow-sm ${cycle.pastille}`}
+            >
+              {cycle.titre}
+            </span>
+            <span aria-hidden="true" className={`h-1 flex-1 rounded-full opacity-30 ${cycle.pastille}`} />
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {cartes.map(({ niveau, total, resume }) => {
+            {cartes.map(({ niveau, total, resume }, i) => {
+              const c = cycle.cartes[i % cycle.cartes.length];
               const contenu = (
                 <>
                   <h3 className="flex items-center gap-3">
                     <span
-                      className={`flex h-9 min-w-9 shrink-0 items-center justify-center rounded-full px-2 text-sm font-black text-white ${cycle.pastille}`}
+                      className={`flex h-9 min-w-9 shrink-0 items-center justify-center rounded-full px-2 text-sm font-black text-white shadow-sm ${c.pastille}`}
                     >
                       {niveau.label}
                     </span>
-                    <span className={`min-w-0 text-xl font-bold leading-tight ${cycle.texte}`}>
+                    <span className={`min-w-0 text-xl font-bold leading-tight ${c.texte}`}>
                       {niveau.nom}
                       {niveau.sous && (
                         <span className="block text-xs font-medium text-slate-500">
@@ -656,14 +680,18 @@ function PanneauCycles({ matiere }: { matiere: MatiereAccueil }) {
                   </h3>
                   {total > 0 ? (
                     <>
-                      <p className="mt-2 flex-1 text-sm leading-snug text-slate-600">
+                      <p className="mt-2 flex-1 text-sm leading-snug text-slate-700">
                         {resume.join(", ")}, et plus encore.
                       </p>
                       <p
-                        className={`mt-3 flex items-center justify-end gap-0.5 border-t border-slate-200 pt-2 text-sm font-semibold ${cycle.texte}`}
+                        className="mt-3 flex justify-end"
                       >
-                        Voir les {total} notions
-                        <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                        <span
+                          className={`inline-flex items-center gap-0.5 rounded-lg px-3 py-1.5 text-sm font-bold text-white shadow-sm transition group-hover:brightness-110 ${c.bouton}`}
+                        >
+                          Voir les {total} notions
+                          <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                        </span>
                       </p>
                     </>
                   ) : (
@@ -672,7 +700,7 @@ function PanneauCycles({ matiere }: { matiere: MatiereAccueil }) {
                   )}
                 </>
               );
-              const classes = `flex flex-col rounded-xl border bg-white p-4 shadow-sm transition ${cycle.bord}`;
+              const classes = `group flex flex-col rounded-xl border-2 p-4 shadow-sm transition ${c.fond} ${c.bord}`;
               if (total === 0)
                 return (
                   <article key={niveau.id} className={classes}>
@@ -685,7 +713,7 @@ function PanneauCycles({ matiere }: { matiere: MatiereAccueil }) {
                   prefetch={false}
                   href={`/coach-ia/${matiere.slug}?classe=${niveau.id}&from=accueil`}
                   onClick={() => track("accueil_classe", { matiere: matiere.id, classe: niveau.id })}
-                  className={`${classes} hover:bg-slate-50 hover:shadow-md`}
+                  className={`${classes} hover:-translate-y-0.5 hover:shadow-md`}
                 >
                   {contenu}
                 </Link>
