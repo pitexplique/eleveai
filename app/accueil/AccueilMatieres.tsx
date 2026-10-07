@@ -648,9 +648,18 @@ function PanneauCycles({ matiere }: { matiere: MatiereAccueil }) {
   );
 
   return (
-    <div className="space-y-8">
+    /* ⭐ LES CYCLES EN COLONNES (07/10/2026, essai). Frédéric : « tu as mis en
+       lignes lycée collège primaire adulte, il faut les mettre en colonnes », puis
+       « 3 colonnes : lycée collège primaire, et adulte à la fin en ligne ».
+       Une colonne par cycle, ses classes empilées ; « Et aussi » (Adultes)
+       passe dessous, sur toute la largeur. Une seule colonne au téléphone. */
+    <div className="grid items-start gap-6 md:grid-cols-3">
       {blocs.map(({ cycle, cartes }) => (
-        <section key={cycle.id} aria-labelledby={`cycle-${cycle.id}`}>
+        <section
+          key={cycle.id}
+          aria-labelledby={`cycle-${cycle.id}`}
+          className={cycle.id === "autres" ? "md:col-span-3" : undefined}
+        >
           <h2
             id={`cycle-${cycle.id}`}
             className="mb-3 flex items-center gap-3"
@@ -662,7 +671,11 @@ function PanneauCycles({ matiere }: { matiere: MatiereAccueil }) {
             </span>
             <span aria-hidden="true" className={`h-1 flex-1 rounded-full opacity-30 ${cycle.pastille}`} />
           </h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div
+            className={
+              cycle.id === "autres" ? "grid gap-3 md:grid-cols-3" : "flex flex-col gap-3"
+            }
+          >
             {cartes.map(({ niveau, total, resume }, i) => {
               const c = cycle.cartes[i % cycle.cartes.length];
               const contenu = (
@@ -673,7 +686,7 @@ function PanneauCycles({ matiere }: { matiere: MatiereAccueil }) {
                     >
                       {niveau.label}
                     </span>
-                    <span className={`min-w-0 text-xl font-bold leading-tight ${c.texte}`}>
+                    <span className={`min-w-0 text-lg font-bold leading-tight ${c.texte}`}>
                       {niveau.nom}
                       {niveau.sous && (
                         <span className="block text-xs font-medium text-slate-500">
