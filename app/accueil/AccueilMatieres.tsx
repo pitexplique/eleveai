@@ -548,63 +548,71 @@ function CarteNiveau({
  *  CECRL, l'IA par référentiel Pix : elles gardent leur liste. */
 const MATIERES_PAR_CLASSE: MatiereId[] = ["maths", "francais"];
 
-/* ⭐ LES COULEURS (07/10/2026). Frédéric : « ça manque de couleurs », puis
-   « pour chaque niveau tu choisis 3 couleurs, lycée collège primaire, puis 4
-   couleurs secondaires ». Une couleur PRINCIPALE par cycle (le bandeau du
-   titre : vert d'eau, violet, orange), et 4 SECONDAIRES de la même famille
-   qui alternent sur ses cartes — chaque classe a sa teinte, comme chez IXL,
-   sans que le cycle se perde.
-   ⚠️ Les classes Tailwind sont écrites EN ENTIER (`bg-teal-500`) : un nom
+/* ⭐ LES COULEURS, PRISES SUR LE CERCLE CHROMATIQUE (07/10/2026).
+   Frédéric : « ça manque de couleurs », puis « pour chaque niveau tu choisis 3
+   couleurs, lycée collège primaire, puis 4 couleurs secondaires », puis — après
+   un premier essai en nuances d'une même famille — « tu as utilisé des
+   nuances, moi je demande des couleurs complémentaires, voir la rose
+   chromatique ».
+   -> Les TROIS PRIMAIRES pour les cycles : bleu (lycée), rouge (collège),
+   jaune (primaire). Les QUATRE SECONDAIRES, éloignées sur la rose, pour les
+   cartes : orange, vert, violet, turquoise.
+   ⭐ CHAQUE CYCLE OUVRE SUR LA COMPLÉMENTAIRE DE SA PRIMAIRE — l'opposée sur
+   la rose : orange sous le bleu, vert sous le rouge, violet sous le jaune. Le
+   bandeau et la première carte se répondent au lieu de se confondre.
+   ⛔ PAS DE NUANCES D'UNE MÊME FAMILLE : c'était le premier essai, refusé.
+   ⚠️ Les classes Tailwind sont écrites EN ENTIER (`bg-orange-500`) : un nom
    construit dans le JSX ne serait pas vu par Tailwind, la carte sortirait
    blanche. */
 type Teinte = { pastille: string; fond: string; bord: string; texte: string; bouton: string };
+
+const ORANGE: Teinte = { pastille: "bg-orange-500", fond: "bg-orange-50", bord: "border-orange-300 hover:border-orange-500", texte: "text-orange-700", bouton: "bg-orange-600" };
+const VERT: Teinte = { pastille: "bg-green-600", fond: "bg-green-50", bord: "border-green-300 hover:border-green-500", texte: "text-green-700", bouton: "bg-green-600" };
+const VIOLET: Teinte = { pastille: "bg-violet-600", fond: "bg-violet-50", bord: "border-violet-300 hover:border-violet-500", texte: "text-violet-700", bouton: "bg-violet-600" };
+const TURQUOISE: Teinte = { pastille: "bg-cyan-500", fond: "bg-cyan-50", bord: "border-cyan-300 hover:border-cyan-500", texte: "text-cyan-700", bouton: "bg-cyan-600" };
 
 const CYCLES: {
   id: string;
   titre: string;
   niveaux: string[];
+  /** La couleur PRIMAIRE du cycle : le bandeau de son titre. */
   pastille: string;
-  bord: string;
-  texte: string;
-  /** Les 4 couleurs SECONDAIRES des cartes du cycle, de la même famille que
-   *  sa couleur principale. */
+  /** Le texte du bandeau. ⚠️ Noir sur le jaune : le blanc ne s'y lit pas. */
+  titreTexte: string;
+  /** Les 4 SECONDAIRES, la complémentaire du cycle en tête. */
   cartes: Teinte[];
 }[] = [
   {
     id: "lycee",
     titre: "Lycée",
     niveaux: ["terminale-spe", "premiere-spe", "premiere", "seconde", "stmg"],
-    pastille: "bg-teal-600",
-    bord: "border-teal-300 hover:border-teal-500",
-    texte: "text-teal-700",
-    cartes: [{ pastille: "bg-teal-500", fond: "bg-teal-50", bord: "border-teal-300 hover:border-teal-500", texte: "text-teal-700", bouton: "bg-teal-600" }, { pastille: "bg-emerald-500", fond: "bg-emerald-50", bord: "border-emerald-300 hover:border-emerald-500", texte: "text-emerald-700", bouton: "bg-emerald-600" }, { pastille: "bg-cyan-500", fond: "bg-cyan-50", bord: "border-cyan-300 hover:border-cyan-500", texte: "text-cyan-700", bouton: "bg-cyan-600" }, { pastille: "bg-sky-500", fond: "bg-sky-50", bord: "border-sky-300 hover:border-sky-500", texte: "text-sky-700", bouton: "bg-sky-500" }],
+    pastille: "bg-blue-600",
+    titreTexte: "text-white",
+    cartes: [ORANGE, VERT, VIOLET, TURQUOISE],
   },
   {
     id: "college",
     titre: "Collège",
     niveaux: ["3e", "4e", "5e", "6e"],
-    pastille: "bg-violet-600",
-    bord: "border-violet-300 hover:border-violet-500",
-    texte: "text-violet-700",
-    cartes: [{ pastille: "bg-violet-500", fond: "bg-violet-50", bord: "border-violet-300 hover:border-violet-500", texte: "text-violet-700", bouton: "bg-violet-500" }, { pastille: "bg-purple-500", fond: "bg-purple-50", bord: "border-purple-300 hover:border-purple-500", texte: "text-purple-700", bouton: "bg-purple-500" }, { pastille: "bg-fuchsia-500", fond: "bg-fuchsia-50", bord: "border-fuchsia-300 hover:border-fuchsia-500", texte: "text-fuchsia-700", bouton: "bg-fuchsia-500" }, { pastille: "bg-indigo-500", fond: "bg-indigo-50", bord: "border-indigo-300 hover:border-indigo-500", texte: "text-indigo-700", bouton: "bg-indigo-500" }],
+    pastille: "bg-red-600",
+    titreTexte: "text-white",
+    cartes: [VERT, TURQUOISE, ORANGE, VIOLET],
   },
   {
     id: "primaire",
     titre: "Primaire",
     niveaux: ["cm2", "cm1", "ce2", "ce1", "cp"],
-    pastille: "bg-orange-500",
-    bord: "border-orange-300 hover:border-orange-500",
-    texte: "text-orange-700",
-    cartes: [{ pastille: "bg-orange-500", fond: "bg-orange-50", bord: "border-orange-300 hover:border-orange-500", texte: "text-orange-700", bouton: "bg-orange-500" }, { pastille: "bg-amber-500", fond: "bg-amber-50", bord: "border-amber-300 hover:border-amber-500", texte: "text-amber-800", bouton: "bg-amber-500" }, { pastille: "bg-rose-500", fond: "bg-rose-50", bord: "border-rose-300 hover:border-rose-500", texte: "text-rose-700", bouton: "bg-rose-500" }, { pastille: "bg-red-500", fond: "bg-red-50", bord: "border-red-300 hover:border-red-500", texte: "text-red-700", bouton: "bg-red-500" }],
+    pastille: "bg-yellow-400",
+    titreTexte: "text-yellow-950",
+    cartes: [VIOLET, ORANGE, TURQUOISE, VERT],
   },
   {
     id: "autres",
     titre: "Et aussi",
     niveaux: ["adulte"],
-    pastille: "bg-sky-600",
-    bord: "border-sky-300 hover:border-sky-500",
-    texte: "text-sky-700",
-    cartes: [{ pastille: "bg-sky-500", fond: "bg-sky-50", bord: "border-sky-300 hover:border-sky-500", texte: "text-sky-700", bouton: "bg-sky-500" }],
+    pastille: "bg-slate-600",
+    titreTexte: "text-white",
+    cartes: [TURQUOISE],
   },
 ];
 
@@ -648,7 +656,7 @@ function PanneauCycles({ matiere }: { matiere: MatiereAccueil }) {
             className="mb-3 flex items-center gap-3"
           >
             <span
-              className={`rounded-full px-4 py-1 text-base font-black uppercase tracking-wide text-white shadow-sm ${cycle.pastille}`}
+              className={`rounded-full px-4 py-1 text-base font-black uppercase tracking-wide shadow-sm ${cycle.titreTexte} ${cycle.pastille}`}
             >
               {cycle.titre}
             </span>
