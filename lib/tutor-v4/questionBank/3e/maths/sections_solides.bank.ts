@@ -102,16 +102,18 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
   microId: "section_reconnaitre",
   difficulty: 2,
   theme: "neutral",
-  text: "Explique avec tes mots ce qu’est une section plane d’un solide.",
-  format: "open",
-  expected: ["couper", "plan", "solide", "figure"],
-  comparator: "contains_keyword",
-  hint: "Imagine que l’on tranche un solide avec une surface plate.",
+  // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : la section est une figure plane (une aire, pas un volume).
+  text: "On coupe un cube de 5 cm d’arête par un plan parallèle à une face.\nQuelle est l’aire de la section ?",
+  format: "qcm",
+  choices: ["25 cm²", "125 cm³", "20 cm", "10 cm²"],
+  expected: ["25 cm²"],
+  comparator: "mcq_exact",
+  hint: "La section a la même forme et la même taille qu’une face du cube.",
   explanation:
-    "Définition : une section plane est une figure obtenue quand un plan coupe un solide.\n\n" +
-    "Méthode : on imagine une coupe nette réalisée par une surface plane.\n\n" +
-    "Observation : la coupe obtenue est une figure plane.\n\n" +
-    "Conclusion : une section plane est donc une figure plane obtenue par découpe d’un solide.",
+    "Définition : une section plane est la figure plane obtenue quand un plan coupe un solide.\n\n" +
+    "Méthode : ici, la section est un carré, pareil qu’une face : 5 cm de côté.\n\n" +
+    "Calcul : 5 × 5 = 25, donc 25 cm². 125 cm³ est le volume du cube. 20 cm est le périmètre du carré. 10 cm² vient de 5 × 2.\n\n" +
+    "Conclusion : l’aire de la section est 25 cm².",
   canvas: sectionSolideCanvas({
     solide: "cube",
     section: "parallele_face",
@@ -125,7 +127,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
       showPlane: true,
     },
   }),
-  tags: ["section", "solide", "open", "definition", "canvas"],
+  tags: ["section", "solide", "qcm", "definition", "canvas"],
 },
 
 {
@@ -320,17 +322,18 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
     microId: "section_pave_cube",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi la section d’un pavé droit par un plan parallèle à une face est un rectangle.",
-    format: "open",
-    expected: ["plan", "parallèle", "face", "rectangle"],
-    comparator: "contains_keyword",
-    hint: "Compare la section avec la face à laquelle le plan est parallèle.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : la section est pareille que la face parallèle.
+    text: "Un pavé droit mesure 6 cm × 4 cm × 3 cm. On le coupe parallèlement à la face de 6 cm sur 4 cm.\nQuelle est l’aire de la section ?",
+    format: "short",
+    expected: ["24 cm²"],
+    comparator: "number_equal",
+    hint: "La section est un rectangle pareil que la face de 6 cm sur 4 cm.",
     explanation:
       "Définition : une section plane est la figure obtenue par une coupe d’un solide.\n\n" +
-      "Méthode : si le plan de coupe est parallèle à une face, la section a la même forme que cette face.\n\n" +
-      "Observation : une face d’un pavé droit est un rectangle.\n\n" +
-      "Conclusion : la section obtenue est donc un rectangle.",
-    tags: ["section", "pave_droit", "open", "justification"],
+      "Méthode : le plan est parallèle à la face de 6 cm sur 4 cm, donc la section est un rectangle de 6 cm sur 4 cm.\n\n" +
+      "Calcul : 6 × 4 = 24.\n\n" +
+      "Conclusion : l’aire de la section est 24 cm².",
+    tags: ["section", "pave_droit", "short", "justification"],
   },
 
   {
@@ -506,17 +509,19 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
     microId: "section_cylindre",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi la section d’un cylindre par un plan parallèle à sa base est un disque.",
-    format: "open",
-    expected: ["cylindre", "base", "parallèle", "disque"],
-    comparator: "contains_keyword",
-    hint: "Le plan est parallèle à la base du cylindre.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : la section est un disque pareil que la base.
+    text: "Un cylindre a un rayon de 3 cm. On le coupe parallèlement à sa base.\nQuelle est l’aire de la section ?",
+    format: "qcm",
+    choices: ["9π cm²", "6π cm²", "3π cm²", "36π cm²"],
+    expected: ["9π cm²"],
+    comparator: "mcq_exact",
+    hint: "La section est un disque de même rayon que la base.",
     explanation:
       "Définition : une section plane est obtenue par la coupe d’un solide avec un plan.\n\n" +
-      "Méthode : quand le plan est parallèle à la base, la section a la même forme que la base.\n\n" +
-      "Observation : la base d’un cylindre est un disque.\n\n" +
-      "Conclusion : la section est donc un disque.",
-    tags: ["section", "cylindre", "open", "justification"],
+      "Méthode : le plan est parallèle à la base, donc la section est un disque de rayon 3 cm. Aire d’un disque : π × r².\n\n" +
+      "Calcul : π × 3² = 9π. 6π vient de 3 × 2 au lieu de 3². 36π vient du diamètre 6 mis à la place du rayon.\n\n" +
+      "Conclusion : l’aire de la section est 9π cm².",
+    tags: ["section", "cylindre", "qcm", "justification"],
   },
 
   {
@@ -735,27 +740,8 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
     tags: ["section", "cone", "triangle", "qcm", "canvas"],
   },
 
-  {
-    kind: "fixed",
-    id: "3e_section_cone_pyramide_open_1",
-    niveau: "3e",
-    matiere: "maths",
-    notionId: "sections_solides",
-    microId: "section_cone_pyramide",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Explique pourquoi la section d’une pyramide par un plan parallèle à sa base est une réduction de la base.",
-    format: "open",
-    expected: ["pyramide", "plan", "parallèle", "base", "réduction"],
-    comparator: "contains_keyword",
-    hint: "La section garde la forme de la base, mais elle est plus petite.",
-    explanation:
-      "Définition : une section plane est obtenue quand un plan coupe un solide.\n\n" +
-      "Méthode : dans une pyramide, un plan parallèle à la base coupe les arêtes latérales de manière proportionnelle.\n\n" +
-      "Observation : la figure obtenue a la même forme que la base, mais avec des dimensions plus petites.\n\n" +
-      "Conclusion : la section est donc une réduction de la base.",
-    tags: ["section", "pyramide", "open", "reduction"],
-  },
+  // 08/10/2026 : « 3e_section_cone_pyramide_open_1 » (pyramide de 10 cm coupée à
+  // mi-hauteur) supprimée par Frédéric : doublon des questions à 8 cm.
 
   {
     kind: "template",
@@ -947,16 +933,17 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
   microId: "section_calculer_longueur",
   difficulty: 4,
   theme: "neutral",
-  text: "Explique la méthode pour calculer une diagonale dans une section rectangulaire.",
-  format: "open",
-  expected: ["rectangle", "triangle", "pythagore", "diagonale"],
-  comparator: "contains_keyword",
-  hint: "La diagonale du rectangle crée un triangle rectangle.",
+  // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : la diagonale par Pythagore.
+  text: "Une section rectangulaire mesure 5 cm sur 12 cm.\nQuelle est la longueur de sa diagonale ?",
+  format: "short",
+  expected: ["13 cm"],
+  comparator: "number_equal",
+  hint: "La diagonale coupe le rectangle en deux triangles rectangles : utilise Pythagore.",
   explanation:
-    "Définition : une section rectangulaire est une figure plane en forme de rectangle.\n\n" +
-    "Méthode : la diagonale d’un rectangle forme deux triangles rectangles.\n\n" +
-    "Calcul : on peut appliquer le théorème de Pythagore avec les deux côtés perpendiculaires.\n\n" +
-    "Conclusion : la diagonale se calcule grâce au théorème de Pythagore.",
+    "Définition : la diagonale d’un rectangle est l’hypoténuse d’un triangle rectangle de côtés 5 cm et 12 cm.\n\n" +
+    "Méthode : on applique le théorème de Pythagore : d² = 5² + 12².\n\n" +
+    "Calcul : d² = 25 + 144 = 169, donc d = 13.\n\n" +
+    "Conclusion : la diagonale mesure 13 cm.",
   canvas: sectionSolideCanvas({
     solide: "pave_droit",
     section: "diagonale",
@@ -970,7 +957,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
       showPlane: true,
     },
   }),
-  tags: ["section", "pythagore", "open", "methode", "canvas"],
+  tags: ["section", "pythagore", "short", "methode", "canvas"],
 },
 
 {
@@ -1022,17 +1009,18 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
     microId: "section_defi",
     difficulty: 5,
     theme: "reunion",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : coupe horizontale = disque pareil que la base.
     text:
-      "À La Réunion, on modélise un réservoir cylindrique vertical. On le coupe horizontalement, parallèlement à sa base. Quelle est la forme de la section obtenue ? Justifie brièvement.",
-    format: "open",
-    expected: ["disque", "base", "parallèle"],
-    comparator: "contains_keyword",
-    hint: "La coupe est parallèle à la base du cylindre.",
+      "Un réservoir cylindrique vertical a un diamètre de 3 m. On le coupe horizontalement.\nQuel est le rayon du disque obtenu ?",
+    format: "short",
+    expected: ["1,5 m"],
+    comparator: "number_equal",
+    hint: "La section est un disque pareil que la base. Le rayon est la moitié du diamètre.",
     explanation:
       "Définition : une section plane est la figure obtenue lorsqu’un plan coupe un solide.\n\n" +
-      "Méthode : pour un cylindre, une coupe parallèle à la base donne une figure de même forme que la base.\n\n" +
-      "Observation : la base d’un cylindre est un disque.\n\n" +
-      "Conclusion : la section obtenue est donc un disque.",
+      "Méthode : la coupe horizontale est parallèle à la base, donc la section est un disque de même diamètre que la base : 3 m.\n\n" +
+      "Calcul : rayon = 3 ÷ 2 = 1,5.\n\n" +
+      "Conclusion : le disque obtenu a un rayon de 1,5 m.",
     canvas: sectionSolideCanvas({
       solide: "cylindre",
       section: "parallele_base",
@@ -1046,7 +1034,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
         showPlane: true,
       },
     }),
-    tags: ["section", "cylindre", "reunion", "defi", "open", "canvas"],
+    tags: ["section", "cylindre", "reunion", "defi", "short", "canvas"],
   },
 
   {
@@ -1058,17 +1046,19 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
     microId: "section_defi",
     difficulty: 5,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : même forme que la base, en plus petit.
     text:
-      "Une pyramide est coupée par un plan parallèle à sa base carrée. Décris la section obtenue et explique pourquoi.",
-    format: "open",
-    expected: ["carré", "parallèle", "base", "réduction"],
-    comparator: "contains_keyword",
-    hint: "La section garde la forme de la base.",
+      "Une pyramide a une base carrée de 8 cm de côté. On la coupe parallèlement à sa base.\nQuelle section peut-on obtenir ?",
+    format: "qcm",
+    choices: ["un carré de 4 cm", "un carré de 10 cm", "un rectangle de 8 cm sur 4 cm", "un triangle"],
+    expected: ["un carré de 4 cm"],
+    comparator: "mcq_exact",
+    hint: "La section garde la forme de la base, mais en plus petit.",
     explanation:
       "Définition : une section plane est obtenue par la coupe d’un solide avec un plan.\n\n" +
-      "Méthode : dans une pyramide, une coupe parallèle à la base donne une figure de même forme que la base.\n\n" +
-      "Observation : la base est un carré, donc la section est aussi un carré plus petit.\n\n" +
-      "Conclusion : la section est une réduction de la base carrée.",
+      "Méthode : dans une pyramide, une coupe parallèle à la base donne une réduction de la base : même forme, plus petite.\n\n" +
+      "Observation : la base est un carré de 8 cm, donc la section est un carré de moins de 8 cm. Un carré de 10 cm serait plus grand que la base. Le triangle s’obtient en coupant par le sommet.\n\n" +
+      "Conclusion : on peut obtenir un carré de 4 cm (coupe à mi-hauteur).",
     canvas: sectionSolideCanvas({
       solide: "pyramide",
       section: "parallele_base",
@@ -1082,7 +1072,7 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
         showPlane: true,
       },
     }),
-    tags: ["section", "pyramide", "defi", "open", "canvas"],
+    tags: ["section", "pyramide", "defi", "qcm", "canvas"],
   },
 
   {
@@ -1094,64 +1084,76 @@ export const sectionsSolidesBank: TutorBankItemV4[] = [
     microId: "section_defi",
     difficulty: 5,
     theme: "reunion",
-    hint: "Identifie d’abord le solide, puis l’orientation de la coupe.",
-    tags: ["section", "defi", "reunion", "template", "open", "canvas"],
+    hint: "Repère la base ou la face parallèle au plan de coupe.",
+    tags: ["section", "defi", "reunion", "template", "short", "canvas"],
+    // 08/10/2026 : précise et simple (Frédéric) — trois situations, chacune avec
+    // ses nombres tirés au sort et UNE réponse chiffrée.
     generate: () => {
-      const situations = [
-        {
-          solide: "cylindre" as const,
-          section: "parallele_base" as const,
-          contexte:
-            "Une citerne d’eau cylindrique est coupée horizontalement pour faire un schéma.",
-          expected: "disque",
-          keywords: ["cylindre", "base", "parallèle", "disque"],
-          titre: "Citerne cylindrique",
-        },
-        {
-          solide: "pave_droit" as const,
-          section: "parallele_face" as const,
-          contexte:
-            "Une boîte rectangulaire de matériel scolaire est coupée parallèlement à une de ses faces.",
-          expected: "rectangle",
-          keywords: ["pavé", "face", "parallèle", "rectangle"],
-          titre: "Boîte rectangulaire",
-        },
-        {
-          solide: "cone" as const,
-          section: "parallele_base" as const,
-          contexte:
-            "Une maquette de volcan en forme de cône est coupée par un plan parallèle à sa base.",
-          expected: "disque",
-          keywords: ["cône", "base", "parallèle", "disque"],
-          titre: "Maquette de volcan",
-        },
-      ];
+      const cas = randomChoice(["citerne", "boite", "volcan"] as const);
 
-      const s = randomChoice(situations);
+      if (cas === "citerne") {
+        const rayon = randomInt(1, 5);
+        const diametre = 2 * rayon;
+        return {
+          text: `Une citerne d’eau cylindrique a un rayon de ${rayon} m. On la coupe horizontalement.\nQuel est le diamètre du disque obtenu ?`,
+          format: "short",
+          expected: [`${diametre} m`],
+          comparator: "number_equal",
+          explanation:
+            "Définition : une section plane est la figure obtenue lorsqu’un plan coupe un solide.\n\n" +
+            `Méthode : la coupe horizontale est parallèle à la base, donc la section est un disque pareil que la base : rayon ${rayon} m.\n\n` +
+            `Calcul : diamètre = 2 × ${rayon} = ${diametre}.\n\n` +
+            `Conclusion : le disque obtenu a un diamètre de ${diametre} m.`,
+          canvas: sectionSolideCanvas({
+            solide: "cylindre",
+            section: "parallele_base",
+            labels: { titre: "Citerne cylindrique", section: "disque" },
+            display: { showLabels: true, showSectionName: false, showPlane: true },
+          }),
+        };
+      }
 
+      if (cas === "boite") {
+        const longueur = randomChoice([20, 25, 30, 40]);
+        const largeur = randomChoice([10, 12, 15]);
+        const hauteur = randomChoice([5, 8]);
+        const aire = longueur * largeur;
+        return {
+          text: `Une boîte en forme de pavé droit mesure ${longueur} cm × ${largeur} cm × ${hauteur} cm. On la coupe parallèlement à la face de ${longueur} cm sur ${largeur} cm.\nQuelle est l’aire de la section ?`,
+          format: "short",
+          expected: [`${aire} cm²`],
+          comparator: "number_equal",
+          explanation:
+            "Définition : une section plane est la figure obtenue lorsqu’un plan coupe un solide.\n\n" +
+            `Méthode : le plan est parallèle à la face de ${longueur} cm sur ${largeur} cm, donc la section est un rectangle de ${longueur} cm sur ${largeur} cm.\n\n` +
+            `Calcul : ${longueur} × ${largeur} = ${aire}.\n\n` +
+            `Conclusion : l’aire de la section est ${aire} cm².`,
+          canvas: sectionSolideCanvas({
+            solide: "pave_droit",
+            section: "parallele_face",
+            labels: { titre: "Boîte en pavé droit", section: "rectangle" },
+            display: { showLabels: true, showSectionName: false, showPlane: true },
+          }),
+        };
+      }
+
+      const rayonBase = randomChoice([4, 6, 8, 10, 12]);
+      const rayonSection = rayonBase / 2;
       return {
-        text:
-          `${s.contexte} Quelle est la forme de la section obtenue ? Justifie brièvement.`,
-        format: "open",
-        expected: s.keywords,
-        comparator: "contains_keyword",
+        text: `Une maquette de volcan est un cône de rayon de base ${rayonBase} cm. On la coupe parallèlement à la base, à mi-hauteur.\nQuel est le rayon du disque obtenu ?`,
+        format: "short",
+        expected: [`${rayonSection} cm`],
+        comparator: "number_equal",
         explanation:
-          "Définition : une section plane est la figure obtenue lorsqu’un plan coupe un solide.\n\n" +
-          "Méthode : on identifie le solide et l’orientation du plan de coupe.\n\n" +
-          `Observation : ici, la coupe donne une section en forme de ${s.expected}.\n\n` +
-          `Conclusion : la section obtenue est donc un ${s.expected}.`,
+          "Définition : la section d’un cône par un plan parallèle à la base est une réduction de la base : un disque plus petit.\n\n" +
+          "Méthode : à mi-hauteur, les longueurs sont divisées par 2.\n\n" +
+          `Calcul : ${rayonBase} ÷ 2 = ${rayonSection}.\n\n` +
+          `Conclusion : le disque obtenu a un rayon de ${rayonSection} cm.`,
         canvas: sectionSolideCanvas({
-          solide: s.solide,
-          section: s.section,
-          labels: {
-            titre: s.titre,
-            section: s.expected,
-          },
-          display: {
-            showLabels: true,
-            showSectionName: false,
-            showPlane: true,
-          },
+          solide: "cone",
+          section: "parallele_base",
+          labels: { titre: "Maquette de volcan", section: "disque" },
+          display: { showLabels: true, showSectionName: false, showPlane: true },
         }),
       };
     },

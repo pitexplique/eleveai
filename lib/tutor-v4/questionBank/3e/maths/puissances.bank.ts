@@ -85,17 +85,18 @@ export const puissancesBank: TutorBankItemV4[] = [
     microId: "entier_puissance_comprendre",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique ce que signifie 5⁴.",
-    format: "open",
-    expected: ["5", "4", "multiplier", "5×5×5×5"],
-    comparator: "contains_keyword",
-    hint: "Pense au nombre de fois où on multiplie.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Calcule 5⁴.",
+    format: "short",
+    expected: ["625"],
+    comparator: "number_equal",
+    hint: "5⁴ = 5 × 5 × 5 × 5 : quatre facteurs 5.",
     explanation:
-      `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
-      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
-      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
-      ("5⁴ signifie 5 × 5 × 5 × 5, soit 5 multiplié 4 fois par lui-même.") +
-      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
+      `Définition : 5⁴ est le produit de quatre facteurs égaux à 5.\n\n` +
+      `Méthode : on écrit 5⁴ = 5 × 5 × 5 × 5, puis on calcule pas à pas. Attention : 5⁴ n’est pas 5 × 4.\n\n` +
+      `Calcul : 5 × 5 = 25 ; 25 × 5 = 125 ; 125 × 5 = 625.\n\n` +
+      `Conclusion : 5⁴ = 625.`,
+    tags: ["entier_puissance", "definition", "short"],
   },
 
   {
@@ -112,18 +113,26 @@ export const puissancesBank: TutorBankItemV4[] = [
       const base = randomInt(2, 6);
       const exp = randomInt(2, 4);
 
-      const correct = Array(exp).fill(base).join(" × ");
+      const produit = Array(exp).fill(base).join(" × ");
+      const valeur = base ** exp;
+      // Les étapes : 4 × 4 = 16 ; 16 × 4 = 64…
+      const etapes: string[] = [];
+      let acc = base;
+      for (let i = 1; i < exp; i++) {
+        etapes.push(`${acc} × ${base} = ${acc * base}`);
+        acc *= base;
+      }
 
+      // 08/10/2026 : précise et simple (Frédéric) — un nombre à trouver, plus une écriture à recopier.
       return {
-        text: `Développer $${base}^{${exp}}$.`,
+        text: `Calcule $${base}^{${exp}}$.`,
         format: "short",
-        expected: [correct],
-        comparator: "contains_keyword",
-        explanation: `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
-          `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
-          `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
-          (`$${base}^{${exp}}$ = ${correct}.`) +
-          `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
+        expected: [String(valeur)],
+        comparator: "number_equal",
+        explanation: `Définition : $${base}^{${exp}}$ est le produit de ${exp} facteurs égaux à ${base}.\n\n` +
+          `Méthode : on écrit $${base}^{${exp}}$ = ${produit}, puis on calcule pas à pas. Attention : ce n’est pas ${base} × ${exp}.\n\n` +
+          `Calcul : ${etapes.join(" ; ")}.\n\n` +
+          `Conclusion : $${base}^{${exp}}$ = ${valeur}.`,
       };
     },
   },
@@ -491,7 +500,8 @@ export const puissancesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Quelle écriture décimale correspond à 3,2 × 10⁴ ?",
     format: "qcm",
-    choices: ["32", "320", "3 200", "32 000"],
+    // 08/10/2026 : le leurre « 32 » était ACCEPTÉ (le correcteur lit « 32 000 » comme 32 + l’unité « 000 ») : remplacé par 320 000.
+    choices: ["320", "3 200", "32 000", "320 000"],
     expected: ["32 000"],
     comparator: "mcq_exact",
     hint: "Multiplier par 10⁴ déplace la virgule de 4 rangs vers la droite.",
@@ -512,18 +522,19 @@ export const puissancesBank: TutorBankItemV4[] = [
     microId: "entier_puissance_ecriture_scientifique",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi 42 × 10³ n’est pas une écriture scientifique.",
-    format: "open",
-    expected: ["42", "entre", "1", "10", "scientifique"],
-    comparator: "contains_keyword",
-    hint: "Regarde le nombre placé devant la puissance de 10.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Quelle est l’écriture scientifique de 42 × 10³ ?",
+    format: "qcm",
+    choices: ["4,2 × 10⁴", "4,2 × 10³", "4,2 × 10²", "0,42 × 10⁵"],
+    expected: ["4,2 × 10⁴"],
+    comparator: "mcq_exact",
+    hint: "Le nombre devant la puissance de 10 doit être entre 1 et 10 (10 exclu).",
     explanation:
-      `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
-      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
-      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
-      ("42 × 10³ n’est pas une écriture scientifique car 42 n’est pas compris entre 1 et 10. On écrirait plutôt 4,2 × 10⁴.") +
-      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
-    tags: ["entier_puissance", "ecriture_scientifique", "open", "raisonnement"],
+      `Définition : en écriture scientifique, le nombre devant est entre 1 et 10 (10 exclu). 42 est trop grand.\n\n` +
+      `Méthode : 42 = 4,2 × 10. On remplace 42 par 4,2 × 10.\n\n` +
+      `Calcul : 42 × 10³ = 4,2 × 10 × 10³ = 4,2 × 10⁴. Avec 4,2 × 10³, on a oublié le × 10. 0,42 est plus petit que 1.\n\n` +
+      `Conclusion : 42 × 10³ = 4,2 × 10⁴.`,
+    tags: ["entier_puissance", "ecriture_scientifique", "qcm"],
   },
 
   {
@@ -649,18 +660,18 @@ export const puissancesBank: TutorBankItemV4[] = [
     microId: "entier_puissance_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi 2³ × 2⁴ = 2⁷, mais 2³ + 2⁴ n’est pas égal à 2⁷.",
-    format: "open",
-    expected: ["multiplie", "additionne les exposants", "addition", "pas"],
-    comparator: "contains_keyword",
-    hint: "La règle d’addition des exposants fonctionne pour un produit de puissances de même base.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde le piège : 2³ + 2⁴ n’est pas 2⁷.
+    text: "Calcule 2³ + 2⁴.",
+    format: "short",
+    expected: ["24"],
+    comparator: "number_equal",
+    hint: "Calcule 2³, puis 2⁴, puis additionne.",
     explanation:
-      `Définition : une puissance est une écriture qui résume des multiplications répétées d’un même nombre.\n\n` +
-      `Méthode : on utilise la définition d’une puissance ou les règles sur les puissances de même base et les puissances de 10.\n\n` +
-      `Calcul : on applique la règle choisie, puis on simplifie l’écriture si nécessaire. ` +
-      ("Dans un produit de puissances de même base, on additionne les exposants : 2³ × 2⁴ = 2⁷. Mais pour une somme, cette règle ne s’applique pas : 2³ + 2⁴ = 8 + 16 = 24.") +
-      `\n\nConclusion : l’écriture obtenue est la réponse attendue.`,
-    tags: ["entier_puissance", "defi", "open", "raisonnement"],
+      `Définition : on additionne les exposants seulement dans un PRODUIT : 2³ × 2⁴ = 2⁷. Pas dans une somme.\n\n` +
+      `Méthode : on calcule chaque puissance, puis on additionne.\n\n` +
+      `Calcul : 2³ = 8 et 2⁴ = 16. Donc 2³ + 2⁴ = 8 + 16 = 24. Ce n’est pas 2⁷ = 128.\n\n` +
+      `Conclusion : 2³ + 2⁴ = 24.`,
+    tags: ["entier_puissance", "defi", "short", "erreur"],
   },
 
   {

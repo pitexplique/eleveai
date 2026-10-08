@@ -415,17 +415,18 @@ export const transformationsBank: TutorBankItemV4[] = [
     microId: "sym_symetrie_translation_rotation",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique en une phrase la différence entre une translation et une rotation.",
-    format: "open",
-    expected: ["glisse", "tourne", "centre", "angle"],
-    comparator: "contains_keyword",
-    hint: "La translation glisse, la rotation tourne.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : une rotation tourne autour d’un centre, d’un angle.
+    text: "Une figure tourne d’un quart de tour autour du point O.\nQuel est l’angle de cette rotation, en degrés ?",
+    format: "short",
+    expected: ["90", "90°"],
+    comparator: "number_equal",
+    hint: "Un tour complet fait 360°.",
     explanation:
-      "Définition : une translation est un glissement, tandis qu’une rotation est un mouvement autour d’un centre.\n\n" +
-      "Méthode : on regarde si la figure garde la même orientation ou si elle tourne.\n\n" +
-      "Calcul : dans une translation, tous les points ont le même déplacement ; dans une rotation, ils tournent autour d’un centre selon un angle.\n\n" +
-      "Conclusion : translation = glissement ; rotation = mouvement autour d’un centre.",
-    tags: ["transformation", "open", "vocabulaire"],
+      "Définition : une rotation fait tourner une figure autour d’un centre, d’un certain angle. Une translation, elle, fait glisser sans tourner.\n\n" +
+      "Méthode : un tour complet fait 360°. On prend le quart.\n\n" +
+      "Calcul : 360 ÷ 4 = 90.\n\n" +
+      "Conclusion : c’est une rotation de centre O et d’angle 90°.",
+    tags: ["transformation", "rotation", "calcul"],
   },
   /* =========================
      TRANSFO_HOMOTHETIE_RECONNAITRE
@@ -708,17 +709,18 @@ export const transformationsBank: TutorBankItemV4[] = [
     microId: "sym_homothetie_reconnaitre",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique en une phrase comment reconnaître une homothétie sur une figure.",
-    format: "open",
-    expected: ["centre", "alignés", "rapport", "agrandie", "réduite"],
-    comparator: "contains_keyword",
-    hint: "Parle du centre, de l’alignement et du rapport.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : on reconnaît l’homothétie par son rapport.
+    text: "Le triangle A'B'C' est l’image du triangle ABC par une homothétie. AB = 4 cm et A'B' = 10 cm.\nQuel est le rapport de l’homothétie ?",
+    format: "short",
+    expected: ["2,5", "5/2"],
+    comparator: "number_equal",
+    hint: "Rapport = longueur image ÷ longueur de départ.",
     explanation:
-      "Définition : une homothétie transforme une figure à partir d’un centre et d’un rapport.\n\n" +
-      "Méthode : on vérifie que le centre, un point et son image sont alignés.\n\n" +
-      "Calcul : on compare les longueurs correspondantes pour trouver le rapport.\n\n" +
-      "Conclusion : on reconnaît une homothétie grâce au centre, à l’alignement et au rapport d’agrandissement ou de réduction.",
-    tags: ["transformation", "homothetie", "open", "methode"],
+      "Définition : une homothétie multiplie toutes les longueurs par le même nombre : son rapport.\n\n" +
+      "Méthode : on divise la longueur image par la longueur de départ : A'B' ÷ AB.\n\n" +
+      "Calcul : 10 ÷ 4 = 2,5.\n\n" +
+      "Conclusion : le rapport est 2,5. La figure est agrandie.",
+    tags: ["transformation", "homothetie", "rapport", "calcul"],
   },
     /* =========================
      TRANSFO_HOMOTHETIE_CONSTRUIRE
@@ -949,17 +951,18 @@ export const transformationsBank: TutorBankItemV4[] = [
     microId: "sym_homothetie_construire",
     difficulty: 4,
     theme: "neutral",
-    text: "Décris les étapes pour construire l’image d’un triangle par homothétie de centre O et de rapport k.",
-    format: "open",
-    expected: ["droite", "centre", "alignés", "rapport", "sommet"],
-    comparator: "contains_keyword",
-    hint: "Explique comment construire l’image de chaque sommet.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : chaque sommet image se place sur [OA), à k fois la distance.
+    text: "On construit l’image du triangle ABC par l’homothétie de centre O et de rapport 2. OA = 3,5 cm.\nÀ quelle distance de O place-t-on A' ?",
+    format: "short",
+    expected: ["7", "7 cm"],
+    comparator: "number_equal",
+    hint: "OA' = rapport × OA.",
     explanation:
-      "Définition : une homothétie transforme chaque point d’une figure à partir d’un centre et d’un rapport.\n\n" +
-      "Méthode : pour chaque sommet, on trace la droite qui passe par le centre O et ce sommet.\n\n" +
-      "Calcul : on place l’image du sommet à une distance multipliée par le rapport k.\n\n" +
-      "Conclusion : en reliant les sommets images, on obtient l’image du triangle.",
-    tags: ["transformation", "homothetie", "construction", "open"],
+      "Définition : l’homothétie de centre O et de rapport 2 envoie A sur A', avec A' sur la demi-droite [OA) et OA' = 2 × OA.\n\n" +
+      "Méthode : on multiplie la distance OA par le rapport. On fait pareil pour B et C, puis on relie A', B', C'.\n\n" +
+      "Calcul : 2 × 3,5 = 7.\n\n" +
+      "Conclusion : on place A' sur [OA), à 7 cm de O.",
+    tags: ["transformation", "homothetie", "construction", "calcul"],
   },
     /* =========================
      TRANSFO_HOMOTHETIE_RAPPORT
@@ -1254,17 +1257,18 @@ export const transformationsBank: TutorBankItemV4[] = [
     microId: "sym_homothetie_rapport",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment calculer le rapport d’une homothétie quand on connaît OA et OA'.",
-    format: "open",
-    expected: ["diviser", "OA'", "OA", "rapport", "distance"],
-    comparator: "contains_keyword",
-    hint: "Le rapport est distance image ÷ distance de départ.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : k = OA' ÷ OA (et pas OA ÷ OA').
+    text: "Par une homothétie de centre O, OA = 8 cm et OA' = 6 cm.\nQuel est le rapport k ?",
+    format: "short",
+    expected: ["0,75", "3/4", "6/8"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "k = OA' ÷ OA : la distance image divisée par la distance de départ.",
     explanation:
-      "Définition : le rapport d’une homothétie indique par combien les distances au centre sont multipliées.\n\n" +
-      "Méthode : on compare la distance image OA' à la distance de départ OA.\n\n" +
-      "Calcul : on calcule k = OA' ÷ OA.\n\n" +
-      "Conclusion : le rapport se calcule en divisant la distance image par la distance initiale.",
-    tags: ["transformation", "homothetie", "rapport", "open"],
+      "Définition : le rapport k indique par combien les distances au centre sont multipliées.\n\n" +
+      "Méthode : k = OA' ÷ OA. On ne fait pas OA ÷ OA'.\n\n" +
+      "Calcul : 6 ÷ 8 = 0,75.\n\n" +
+      "Conclusion : k = 0,75 (ou 3/4). Il est plus petit que 1 : c’est une réduction.",
+    tags: ["transformation", "homothetie", "rapport", "calcul"],
   },
     /* =========================
      TRANSFO_EFFETS
@@ -1626,17 +1630,18 @@ export const transformationsBank: TutorBankItemV4[] = [
     microId: "sym_transformation_effet",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique la différence entre l’effet d’une homothétie sur les longueurs, les aires et les volumes.",
-    format: "open",
-    expected: ["longueurs", "k", "aires", "k²", "volumes", "k³"],
-    comparator: "contains_keyword",
-    hint: "Longueurs : k ; aires : k² ; volumes : k³.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : longueurs × k, volumes × k³.
+    text: "Un cube de 3 cm d’arête est agrandi par une homothétie de rapport 2.\nQuel est le volume du cube agrandi, en cm³ ?",
+    format: "short",
+    expected: ["216", "216 cm³"],
+    comparator: "number_equal",
+    hint: "Calcule d’abord la nouvelle arête.",
     explanation:
-      "Définition : une homothétie de rapport k agit différemment selon la grandeur étudiée.\n\n" +
-      "Méthode : on distingue longueurs, aires et volumes.\n\n" +
-      "Calcul : les longueurs sont multipliées par k, les aires par k² et les volumes par k³.\n\n" +
-      "Conclusion : il faut adapter le coefficient à la grandeur étudiée.",
-    tags: ["transformation", "effets", "open", "methode"],
+      "Définition : une homothétie de rapport k multiplie les longueurs par k, les aires par k² et les volumes par k³.\n\n" +
+      "Méthode : la nouvelle arête vaut 2 × 3 = 6 cm. On calcule le volume du nouveau cube.\n\n" +
+      "Calcul : 6 × 6 × 6 = 216. On retrouve aussi 27 × 2³ = 27 × 8 = 216.\n\n" +
+      "Conclusion : le volume est 216 cm³ (et non 27 × 2 = 54).",
+    tags: ["transformation", "effets", "volume", "calcul"],
   },
     /* =========================
      TRANSFO_DEFIS
@@ -1839,17 +1844,18 @@ export const transformationsBank: TutorBankItemV4[] = [
     microId: "sym_transformation_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Une figure est agrandie par homothétie de rapport 3. Explique pourquoi son aire n’est pas seulement multipliée par 3.",
-    format: "open",
-    expected: ["aire", "k²", "3²", "9", "deux dimensions"],
-    comparator: "contains_keyword",
-    hint: "Une aire dépend de deux dimensions.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : les DEUX dimensions sont multipliées par 3.
+    text: "Un rectangle de 2 cm sur 4 cm est agrandi par une homothétie de rapport 3.\nQuelle est l’aire du rectangle agrandi, en cm² ?",
+    format: "short",
+    expected: ["72", "72 cm²"],
+    comparator: "number_equal",
+    hint: "Calcule d’abord les nouvelles dimensions.",
     explanation:
-      "Définition : une aire dépend de deux dimensions.\n\n" +
-      "Méthode : si les longueurs sont multipliées par k, alors les deux dimensions de l’aire sont multipliées par k.\n\n" +
-      "Calcul : avec k = 3, l’aire est multipliée par 3² = 9.\n\n" +
-      "Conclusion : l’aire est multipliée par 9, pas seulement par 3.",
-    tags: ["transformation", "defi", "open", "aire", "raisonnement"],
+      "Définition : une aire dépend de deux dimensions. Avec un rapport k, chacune est multipliée par k.\n\n" +
+      "Méthode : nouvelles dimensions : 2 × 3 = 6 cm et 4 × 3 = 12 cm.\n\n" +
+      "Calcul : 6 × 12 = 72. On retrouve aussi 8 × 3² = 8 × 9 = 72.\n\n" +
+      "Conclusion : l’aire est 72 cm². Elle est multipliée par 9, pas seulement par 3 (8 × 3 = 24 est faux).",
+    tags: ["transformation", "defi", "aire", "calcul"],
   },
 
   {
@@ -1861,17 +1867,18 @@ export const transformationsBank: TutorBankItemV4[] = [
     microId: "sym_transformation_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi une translation, une rotation et une symétrie conservent les longueurs, alors qu’une homothétie peut les modifier.",
-    format: "open",
-    expected: ["translation", "rotation", "symétrie", "conservent", "homothétie", "rapport"],
-    comparator: "contains_keyword",
-    hint: "Les trois premières ne changent pas la taille ; l’homothétie utilise un rapport.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : la rotation conserve, l’homothétie multiplie.
+    text: "Le segment [AB] mesure 7 cm. On lui applique une rotation, puis une homothétie de rapport 2.\nQuelle est sa longueur à la fin ?",
+    format: "short",
+    expected: ["14", "14 cm"],
+    comparator: "number_equal",
+    hint: "Une rotation ne change pas les longueurs. Une homothétie les multiplie par son rapport.",
     explanation:
-      "Définition : translation, rotation et symétrie sont des transformations qui ne déforment pas la figure.\n\n" +
-      "Méthode : elles déplacent, tournent ou retournent la figure en gardant la même taille.\n\n" +
-      "Calcul : une homothétie utilise un rapport k qui multiplie les longueurs.\n\n" +
-      "Conclusion : translation, rotation et symétrie conservent les longueurs, alors que l’homothétie peut agrandir ou réduire.",
-    tags: ["transformation", "defi", "open", "comparaison"],
+      "Définition : translation, rotation et symétrie conservent les longueurs. Une homothétie de rapport k multiplie les longueurs par k.\n\n" +
+      "Méthode : après la rotation, le segment mesure encore 7 cm. Puis l’homothétie le multiplie par 2.\n\n" +
+      "Calcul : 7 × 2 = 14.\n\n" +
+      "Conclusion : le segment mesure 14 cm à la fin.",
+    tags: ["transformation", "defi", "comparaison", "calcul"],
   },
 
   /* ===== SYM_SYMETRIE_TRANSLATION_ROTATION (compléments) ===== */

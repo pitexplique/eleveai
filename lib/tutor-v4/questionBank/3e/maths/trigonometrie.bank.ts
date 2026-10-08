@@ -250,17 +250,20 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     microId: "trigo_triangle_rectangle",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi le côté opposé et le côté adjacent dépendent de l’angle choisi.",
-    format: "open",
-    expected: ["angle", "opposé", "adjacent", "hypoténuse"],
-    comparator: "contains_keyword",
-    hint: "Change d’angle : les côtés ne jouent plus le même rôle.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Le triangle ABC est rectangle en A.\nPar rapport à l’angle C, quel est le côté adjacent ?",
+    format: "qcm",
+    choices: ["AC", "AB", "BC"],
+    expected: ["AC"],
+    comparator: "mcq_exact",
+    hint: "Le côté adjacent touche l’angle C, et ce n’est pas l’hypoténuse.",
     explanation:
-      "Définition : en trigonométrie, les mots opposé et adjacent se définissent par rapport à un angle aigu.\n\n" +
-      "Méthode : on choisit d’abord l’angle étudié, puis on regarde les côtés autour de cet angle.\n\n" +
-      "Calcul : dans un même triangle rectangle, si on change d’angle, le côté opposé et le côté adjacent peuvent s’inverser.\n\n" +
-      "Conclusion : il faut toujours préciser l’angle avant de choisir sinus, cosinus ou tangente.",
-    tags: ["trigo_trigonometrie", "open", "raisonnement"],
+      "Définition : le côté adjacent touche l’angle étudié ; l’hypoténuse est en face de l’angle droit.\n\n" +
+      "Méthode : on se place sur l’angle C. L’hypoténuse est BC. Il reste AC et AB.\n\n" +
+      "Calcul : AC touche l’angle C : c’est l’adjacent. AB est en face de C : c’est l’opposé.\n\n" +
+      "Conclusion : le côté adjacent est AC. ⚠️ Pour l’angle B, l’adjacent serait AB : il change avec l’angle.",
+    canvas: triangleTrigoCanvas({ angleAt: "C", sideLabels: {} }),
+    tags: ["trigo_trigonometrie", "cotes", "qcm", "canvas"],
   },
 
   /* =========================
@@ -548,17 +551,18 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     microId: "trigo_calculer_longueur",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi il faut d’abord identifier l’hypoténuse avant de choisir une formule de trigonométrie.",
-    format: "open",
-    expected: ["hypoténuse", "sinus", "cosinus", "triangle", "rectangle"],
-    comparator: "contains_keyword",
-    hint: "Deux formules utilisent l’hypoténuse.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Le triangle EFG est rectangle en E. FG = 10 cm et l’angle F mesure 35°.\nCalcule EG, arrondi au dixième.",
+    format: "short",
+    expected: ["5,7", "5.7", "5,7 cm", "5.7 cm"],
+    comparator: "number_equal",
+    hint: "Repère d’abord l’hypoténuse : c’est le côté en face de l’angle droit E.",
     explanation:
-      "Définition : l’hypoténuse est le plus grand côté du triangle rectangle et le côté opposé à l’angle droit.\n\n" +
-      "Méthode : avant de choisir sinus, cosinus ou tangente, on repère l’hypoténuse, le côté opposé et le côté adjacent.\n\n" +
-      "Calcul : sinus et cosinus utilisent l’hypoténuse, alors que tangente ne l’utilise pas.\n\n" +
-      "Conclusion : identifier l’hypoténuse évite de choisir une mauvaise formule.",
-    tags: ["trigo_trigonometrie", "calcul_longueur", "open", "raisonnement"],
+      "Définition : l’hypoténuse est en face de l’angle droit : ici FG. Pour l’angle F, EG est le côté opposé.\n\n" +
+      "Méthode : opposé et hypoténuse, c’est le sinus : sin(F) = EG ÷ FG.\n\n" +
+      "Calcul : EG = 10 × sin(35°) ≈ 5,736, donc EG ≈ 5,7 cm.\n\n" +
+      "Conclusion : EG ≈ 5,7 cm. ⚠️ Avec le cosinus, on trouverait 8,2 : c’est le côté adjacent EF.",
+    tags: ["trigo_trigonometrie", "calcul_longueur", "sinus", "arrondi"],
   },
 
   /* =========================
@@ -631,17 +635,18 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     microId: "trigo_calculer_angle",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi on utilise cos⁻¹, sin⁻¹ ou tan⁻¹ pour calculer un angle.",
-    format: "open",
-    expected: ["angle", "inverse", "cos", "sin", "tan"],
-    comparator: "contains_keyword",
-    hint: "Quand l’angle est inconnu, on inverse le ratio trigonométrique.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Le triangle ABC est rectangle en A. AB = 5 cm et BC = 8 cm.\nCalcule l’angle B, arrondi au degré.",
+    format: "short",
+    expected: ["51", "51°", "51 °", "51 degrés"],
+    comparator: "number_equal",
+    hint: "AB est adjacent à l’angle B, BC est l’hypoténuse : c’est le cosinus.",
     explanation:
-      "Définition : cos⁻¹, sin⁻¹ et tan⁻¹ sont les fonctions inverses du cosinus, du sinus et de la tangente.\n\n" +
-      "Méthode : quand on connaît un rapport de longueurs mais pas l’angle, on utilise la fonction inverse adaptée.\n\n" +
-      "Calcul : si cos(angle) = 0,5, alors angle = cos⁻¹(0,5) = 60°.\n\n" +
-      "Conclusion : les fonctions inverses permettent de retrouver un angle à partir d’un rapport de longueurs.",
-    tags: ["trigo_trigonometrie", "angle", "open", "calculatrice"],
+      "Définition : quand on cherche un angle, on utilise la touche cos⁻¹ (ou Arccos) de la calculatrice.\n\n" +
+      "Méthode : cos(B) = adjacent ÷ hypoténuse = AB ÷ BC.\n\n" +
+      "Calcul : cos(B) = 5 ÷ 8 = 0,625, puis B = cos⁻¹(0,625) ≈ 51,3°.\n\n" +
+      "Conclusion : l’angle B mesure environ 51°.",
+    tags: ["trigo_trigonometrie", "angle", "calculatrice", "arrondi"],
   },
 
   /* =========================
@@ -702,17 +707,20 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     microId: "trigo_choisir_rapport",
     difficulty: 4,
     theme: "neutral",
-    text: "Donne une méthode simple pour choisir entre sinus, cosinus et tangente.",
-    format: "open",
-    expected: ["opposé", "adjacent", "hypoténuse", "choisir"],
-    comparator: "contains_keyword",
-    hint: "Commence par identifier les côtés utiles.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Le triangle ABC est rectangle en A. On connaît AB et AC.\nPour calculer l’angle B, quel rapport utilises-tu ?",
+    format: "qcm",
+    choices: ["tangente", "sinus", "cosinus"],
+    expected: ["tangente"],
+    comparator: "mcq_exact",
+    hint: "Pour l’angle B : AB est l’adjacent, AC est l’opposé.",
     explanation:
-      "Définition : sinus, cosinus et tangente sont trois rapports de longueurs dans un triangle rectangle.\n\n" +
-      "Méthode : on identifie l’angle étudié, puis les côtés opposé, adjacent et hypoténuse.\n\n" +
-      "Calcul : si on utilise opposé/hypoténuse, c’est sinus ; adjacent/hypoténuse, c’est cosinus ; opposé/adjacent, c’est tangente.\n\n" +
-      "Conclusion : choisir le bon ratio revient à repérer les deux côtés utiles.",
-    tags: ["trigo_trigonometrie", "choisir_ratio", "open", "methode"],
+      "Définition : sinus = opposé ÷ hypoténuse ; cosinus = adjacent ÷ hypoténuse ; tangente = opposé ÷ adjacent.\n\n" +
+      "Méthode : on repère les deux côtés connus par rapport à l’angle B.\n\n" +
+      "Observation : AC est l’opposé, AB est l’adjacent. On ne connaît pas l’hypoténuse BC.\n\n" +
+      "Conclusion : opposé et adjacent, c’est la tangente : tan(B) = AC ÷ AB.",
+    canvas: triangleTrigoCanvas({ angleAt: "B", sideLabels: {} }),
+    tags: ["trigo_trigonometrie", "choisir_ratio", "qcm", "canvas"],
   },
 
   /* =========================
@@ -781,17 +789,18 @@ export const trigonometrieBank: TutorBankItemV4[] = [
     microId: "trigo_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi la trigonométrie est utile quand Pythagore ne suffit pas.",
-    format: "open",
-    expected: ["angle", "longueur", "triangle", "rectangle", "pythagore"],
-    comparator: "contains_keyword",
-    hint: "Pythagore relie seulement les longueurs, pas directement les angles.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Une échelle de 5 m est posée contre un mur. Elle fait un angle de 60° avec le sol.\nÀ quelle distance du mur est le pied de l’échelle ?",
+    format: "short",
+    expected: ["2,5", "2.5", "2,5 m", "2.5 m"],
+    comparator: "number_equal",
+    hint: "On ne connaît qu’une longueur : Pythagore ne suffit pas. Utilise l’angle de 60°.",
     explanation:
-      "Définition : le théorème de Pythagore relie les longueurs des côtés d’un triangle rectangle.\n\n" +
-      "Méthode : quand un angle intervient dans le problème, on utilise la trigonométrie.\n\n" +
-      "Calcul : sinus, cosinus et tangente permettent de relier un angle aigu avec deux côtés du triangle rectangle.\n\n" +
-      "Conclusion : la trigonométrie est utile pour calculer des longueurs ou des angles quand un angle est connu ou recherché.",
-    tags: ["trigo_trigonometrie", "defi", "open", "raisonnement"],
+      "Définition : le mur, le sol et l’échelle forment un triangle rectangle ; l’échelle est l’hypoténuse.\n\n" +
+      "Méthode : la distance au mur touche l’angle de 60° : c’est l’adjacent. On utilise le cosinus.\n\n" +
+      "Calcul : distance = 5 × cos(60°) = 5 × 0,5 = 2,5.\n\n" +
+      "Conclusion : le pied de l’échelle est à 2,5 m du mur.",
+    tags: ["trigo_trigonometrie", "defi", "cosinus", "probleme"],
   },
 
   /* =========================

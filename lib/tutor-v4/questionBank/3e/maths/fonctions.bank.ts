@@ -135,16 +135,17 @@ export const fonctionsBank: TutorBankItemV4[] = [
     microId: "fonction_vocabulaire",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique avec tes mots ce qu’est une fonction.",
-    format: "open",
-    expected: ["associe", "nombre", "image"],
-    comparator: "contains_keyword",
-    hint: "Une fonction relie deux nombres.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : image et antécédent dans f(3) = 8.
+    text: "On sait que f(3) = 8.\nQuel est l’antécédent de 8 ?",
+    format: "short",
+    expected: ["3"],
+    comparator: "number_equal",
+    hint: "L’antécédent est le nombre de départ, celui entre les parenthèses.",
     explanation:
-    "Définition : une fonction est une règle qui associe à un nombre de départ un nombre résultat.\n\n" +
-    "Le nombre de départ s’appelle un antécédent. Le nombre obtenu s’appelle une image.\n\n" +
-    "Exemple : si f(3) = 8, alors 3 est un antécédent et 8 est son image.\n\n" +
-    "Conclusion : une fonction permet de relier deux grandeurs, comme une durée et un prix.", tags: ["fonction", "definition"]
+    "Définition : une fonction associe à un nombre de départ (l’antécédent) un nombre résultat (l’image).\n\n" +
+    "Méthode : dans f(3) = 8, le nombre entre parenthèses est le départ, le nombre après « = » est le résultat.\n\n" +
+    "Lecture : 3 est le départ, 8 est le résultat. Donc 8 est l’image de 3, et 3 est un antécédent de 8.\n\n" +
+    "Conclusion : l’antécédent de 8 est 3.", tags: ["fonction", "definition", "antecedent", "short"]
     },
 
 /* =========================
@@ -303,24 +304,32 @@ explanation:
   microId: "fonction_tableau",
   difficulty: 3,
   theme: "neutral",
-  hint: "Regarde comment évoluent les valeurs.",
-  tags: ["fonction", "tableau", "open"],
+  hint: "Trouve la règle : on multiplie x par un nombre, puis on ajoute f(0).",
+  tags: ["fonction", "tableau", "short", "canvas"],
   generate: () => {
-    const xValues = [0, 1, 2, 3];
-    const yValues = [1, 3, 5, 7];
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée (la règle du tableau), avec un nombre à trouver et un tirage.
+    const a = randomInt(2, 5);
+    const b = randomInt(1, 6);
+    const xValues = [0, 1, 2, 10];
+    const yValues: Array<number | "?"> = [b, a + b, 2 * a + b, "?"];
+    const y10 = 10 * a + b;
 
     return {
-      text: "Explique comment on passe de x à f(x) dans ce tableau.",
-      format: "open",
-      expected: ["multiplie", "2", "ajoute", "1"],
-      comparator: "contains_keyword",
+      text: "Dans ce tableau, on passe toujours de x à f(x) par la même règle.\nQuelle est l’image de 10 ?",
+      format: "short",
+      expected: [String(y10)],
+      comparator: "number_equal",
       explanation:
-        "On remarque que f(x) = 2x + 1 : on multiplie x par 2 puis on ajoute 1.",
+        `Définition : la règle d’une fonction transforme chaque x en f(x).\n\n` +
+        `Méthode : f(0) = ${b}, puis f(x) augmente de ${a} quand x augmente de 1. La règle est : multiplier x par ${a}, puis ajouter ${b}.\n\n` +
+        `Calcul : f(10) = ${a} × 10 + ${b} = ${10 * a} + ${b} = ${y10}.\n\n` +
+        `Conclusion : l’image de 10 est ${y10}.`,
       canvas: fonctionTableauCanvas({
         titre: "Comprendre une fonction",
         xValues,
         yValues,
-         consigne: "Observe la règle qui permet de passer de x à f(x).",
+        missing: { type: "image", index: 3 },
+        consigne: "Trouve la règle qui permet de passer de x à f(x).",
       })
     };
   }
@@ -473,16 +482,32 @@ explanation:
   microId: "fonction_affine_lineaire",
   difficulty: 4,
   theme: "neutral",
-  hint: "Regarde comment évoluent les valeurs.",
-  tags: ["fonction", "affine_fonction", "open"],
+  hint: "Sur une droite, f(x) augmente toujours de la même quantité quand x augmente de 1.",
+  tags: ["fonction", "affine_fonction", "short", "canvas"],
   generate: () => {
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : droite = augmentation régulière.
+    const a = randomInt(1, 2);
+    const b = randomInt(-2, 2);
+    const f1 = a + b;
+    const f2 = 2 * a + b;
+
     return {
-      text: "Explique comment reconnaître une fonction affine sur un graphique.",
-      format: "open",
-      expected: ["droite", "ligne", "constante"],
-      comparator: "contains_keyword",
+      text: `Cette droite représente une fonction affine f.\nf(0) = ${b} et f(1) = ${f1}. Combien vaut f(2) ?`,
+      format: "short",
+      expected: [String(f2)],
+      comparator: "number_equal",
       explanation:
-        "Une fonction affine est représentée par une droite. L’augmentation est régulière (variation constante).",
+        `Définition : la représentation d’une fonction affine est une droite : f(x) augmente toujours de la même quantité quand x augmente de 1.\n\n` +
+        `Méthode : on calcule de combien f(x) augmente de x = 0 à x = 1, puis on ajoute encore cette quantité.\n\n` +
+        `Calcul : de f(0) = ${b} à f(1) = ${f1}, f(x) augmente de ${a}. Donc f(2) = ${f1} + ${a} = ${f2}.\n\n` +
+        `Conclusion : f(2) = ${f2}.`,
+      canvas: fonctionGraphiqueCanvas({
+        titre: "Droite d’une fonction affine",
+        a,
+        b,
+        type: "affine",
+        point: { x: 1, y: f1, label: `(1 ; ${f1})` },
+      }),
     };
   }
 },
@@ -560,16 +585,25 @@ explanation:
   microId: "fonction_defi",
   difficulty: 5,
   theme: "neutral",
-  hint: "Réfléchis au sens concret.",
-  tags: ["fonction", "defi", "open"],
+  hint: "Cherche le nombre de mois x tel que f(x) soit égal au prix payé.",
+  tags: ["fonction", "defi", "short", "modelisation", "antecedent"],
   generate: () => {
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : la fonction modélise un prix ; on cherche un antécédent.
+    const a = randomInt(8, 15);
+    const b = randomChoice([10, 15, 20, 25, 30]);
+    const m = randomInt(2, 8);
+    const prix = a * m + b;
+
     return {
-      text: "Explique pourquoi une fonction peut modéliser une situation réelle.",
-      format: "open",
-      expected: ["relie", "grandeurs", "depend"],
-      comparator: "contains_keyword",
+      text: `Une salle de sport coûte f(x) = ${a}x + ${b} euros pour x mois.\nLéa a payé ${prix} €. Pendant combien de mois ?`,
+      format: "short",
+      expected: [String(m)],
+      comparator: "number_equal",
       explanation:
-        "Une fonction permet de relier deux grandeurs : une dépend de l’autre (prix, distance, temps…).",
+        `Définition : f(x) est le prix pour x mois. On cherche l’antécédent de ${prix}.\n\n` +
+        `Méthode : on enlève l’inscription, puis on divise par le prix d’un mois.\n\n` +
+        `Calcul : ${prix} − ${b} = ${prix - b}, puis ${prix - b} ÷ ${a} = ${m}. Vérification : ${a} × ${m} + ${b} = ${prix}.\n\n` +
+        `Conclusion : Léa a payé ${m} mois.`,
     };
   }
 },

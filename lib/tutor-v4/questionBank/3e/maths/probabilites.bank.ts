@@ -303,17 +303,24 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_vocabulaire",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique avec tes mots ce qu’est une expérience aléatoire.",
-    format: "open",
-    expected: ["résultat", "avance"],
-    comparator: "contains_keyword",
-    hint: "On ne peut pas savoir avec certitude le résultat avant de faire l’expérience.",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique avec tes mots ce qu’est une expérience aléatoire ».
+    text: "Laquelle de ces expériences est aléatoire ?",
+    format: "qcm",
+    choices: [
+      "tirer une carte sans regarder",
+      "compter les élèves de la classe",
+      "mesurer la longueur de sa table",
+      "calculer 7 × 8",
+    ],
+    expected: ["tirer une carte sans regarder"],
+    comparator: "mcq_exact",
+    hint: "Aléatoire : on ne peut pas savoir le résultat à l’avance.",
     explanation:
-      "Définition : une expérience aléatoire est une expérience dont le résultat n’est pas connu à l’avance.\n\n" +
-      "Méthode : pour reconnaître une expérience aléatoire, on vérifie s’il y a plusieurs résultats possibles.\n\n" +
-      "Calcul : lancer un dé est aléatoire car on peut obtenir 1, 2, 3, 4, 5 ou 6.\n\n" +
-      "Conclusion : une expérience aléatoire dépend du hasard.",
-    tags: ["proba_experience", "vocabulaire", "open"],
+      "Définition : une expérience aléatoire est une expérience dont on ne connaît pas le résultat à l’avance.\n\n" +
+      "Méthode : on se demande si on peut prévoir le résultat.\n\n" +
+      "Calcul : quand on tire une carte sans regarder, on ne sait pas laquelle on aura. Compter, mesurer ou calculer donne toujours le même résultat.\n\n" +
+      "Conclusion : tirer une carte sans regarder est une expérience aléatoire.",
+    tags: ["proba_experience", "vocabulaire", "qcm"],
   },
 
   /* =========================
@@ -419,18 +426,19 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_issue",
     difficulty: 2,
     theme: "neutral",
-    text: "On lance un dé équilibré. Explique pourquoi il y a 6 issues possibles.",
-    format: "open",
-    expected: ["1", "2", "3", "4", "5", "6"],
-    comparator: "contains_keyword",
-    hint: "Liste les résultats possibles.",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « On lance un dé. Explique pourquoi il y a 6 issues possibles ».
+    text: "On lance une pièce (Pile ou Face), puis un dé à 6 faces. Combien y a-t-il d’issues possibles ?",
+    format: "short",
+    expected: ["12"],
+    comparator: "number_equal",
+    // Frédéric (08/10) : plus de tableau à l'écran, il donnait la réponse.
+    hint: "Fais un tableau : Pile ou Face sur une ligne, les 6 faces du dé sur l’autre.",
     explanation:
       "Définition : une issue est un résultat possible d’une expérience aléatoire.\n\n" +
-      "Méthode : pour connaître le nombre d’issues, on liste tous les résultats possibles.\n\n" +
-      "Calcul : avec un dé, les issues sont 1, 2, 3, 4, 5 et 6.\n\n" +
-      "Conclusion : il y a donc 6 issues possibles.",
-    canvas: deCanvas(),
-    tags: ["proba_experience", "issue", "open", "de", "canvas"],
+      "Méthode : on liste toutes les issues dans un tableau.\n\n" +
+      "Calcul : avec Pile, il y a 6 issues (P1, P2, P3, P4, P5, P6). Avec Face, il y en a 6 aussi. 6 + 6 = 12.\n\n" +
+      "Conclusion : il y a 12 issues possibles.",
+    tags: ["proba_experience", "issue", "short"],
   },
 
   /* =========================
@@ -569,18 +577,20 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_equiprobabilite",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi un dé équilibré correspond à une situation d’équiprobabilité.",
-    format: "open",
-    expected: ["même", "probabilité", "faces"],
-    comparator: "contains_keyword",
-    hint: "Aucune face n’est favorisée.",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi un dé équilibré correspond à une situation d’équiprobabilité ».
+    text: "On lance un dé équilibré. Quelle face a le plus de chances de sortir ?",
+    format: "qcm",
+    choices: ["le 6", "le 1", "le 3", "toutes autant"],
+    expected: ["toutes autant"],
+    comparator: "mcq_exact",
+    hint: "Équilibré : aucune face n’est favorisée.",
     explanation:
       "Définition : une situation est équiprobable lorsque toutes les issues ont la même probabilité.\n\n" +
-      "Méthode : on vérifie si toutes les faces du dé ont la même chance d’apparaître.\n\n" +
-      "Calcul : avec un dé équilibré, aucune face n’est favorisée.\n\n" +
-      "Conclusion : chaque face a la même probabilité d’apparaître.",
+      "Méthode : on regarde si une face est favorisée.\n\n" +
+      "Calcul : le dé est équilibré, donc chaque face a la même probabilité : 1/6.\n\n" +
+      "Conclusion : toutes les faces ont autant de chances de sortir. Le 6 n’est pas plus rare que les autres.",
     canvas: deCanvas(),
-    tags: ["proba_experience", "equiprobabilite", "open", "de", "canvas"],
+    tags: ["proba_experience", "equiprobabilite", "qcm", "de", "canvas"],
   },
 
   /* =========================
@@ -742,18 +752,19 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_calculer",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi la probabilité d’obtenir un nombre pair avec un dé équilibré est 3/6.",
-    format: "open",
-    expected: ["2", "4", "6", "3", "6"],
-    comparator: "contains_keyword",
-    hint: "Compte les issues favorables puis les issues possibles.",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi P(nombre pair) = 3/6 » (déjà demandé par 3e_proba_calculer_fixed_1).
+    text: "On lance un dé équilibré. Quelle est la probabilité d’obtenir un multiple de 3 ?",
+    format: "short",
+    expected: ["2/6", "1/3"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "Écris les multiples de 3 du dé, puis compte toutes les issues.",
     explanation:
       "Définition : une probabilité se calcule en comparant les cas favorables aux cas possibles.\n\n" +
-      "Méthode : on liste d’abord les nombres pairs du dé.\n\n" +
-      "Calcul : les nombres pairs sont 2, 4 et 6 : il y a 3 cas favorables sur 6 issues possibles.\n\n" +
-      "Conclusion : la probabilité est 3/6.",
-    canvas: deCanvas([2, 4, 6]),
-    tags: ["proba_experience", "calculer", "open", "de", "canvas"],
+      "Méthode : on liste d’abord les multiples de 3 du dé.\n\n" +
+      "Calcul : les multiples de 3 sont 3 et 6 : il y a 2 cas favorables sur 6 issues possibles.\n\n" +
+      "Conclusion : la probabilité est 2/6 = 1/3.",
+    canvas: deCanvas([3, 6]),
+    tags: ["proba_experience", "calculer", "short", "de", "canvas"],
   },
 
   /* =========================
@@ -947,17 +958,19 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi une probabilité égale à 0 correspond à un événement impossible.",
-    format: "open",
-    expected: ["0", "impossible", "aucun"],
-    comparator: "contains_keyword",
-    hint: "Une probabilité de 0 signifie qu’il n’y a aucun cas favorable.",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi une probabilité égale à 0 correspond à un événement impossible ».
+    text: "On lance un dé équilibré à 6 faces. Quelle est la probabilité d’obtenir 7 ?",
+    format: "short",
+    expected: ["0", "0/6"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "Combien de faces portent le nombre 7 ?",
     explanation:
-      "Définition : une probabilité égale à 0 correspond à un événement impossible.\n\n" +
-      "Méthode : on regarde le nombre de cas favorables.\n\n" +
-      "Calcul : s’il n’y a aucun cas favorable, alors la probabilité vaut 0.\n\n" +
-      "Conclusion : une probabilité de 0 signifie que l’événement ne peut pas se produire.",
-    tags: ["proba_experience", "defi", "open", "impossible"],
+      "Définition : un événement impossible a une probabilité égale à 0.\n\n" +
+      "Méthode : on compte les cas favorables.\n\n" +
+      "Calcul : aucune face ne porte le nombre 7 : 0 cas favorable sur 6. 0 ÷ 6 = 0.\n\n" +
+      "Conclusion : obtenir 7 est impossible, sa probabilité est 0.",
+    canvas: deCanvas(),
+    tags: ["proba_experience", "defi", "short", "impossible", "canvas"],
   },
 
   /* =========================

@@ -114,17 +114,17 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     microId: "entier_multiple_diviseur",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi 8 est un diviseur de 56.",
-    format: "open",
-    expected: ["56", "8", "7"],
-    comparator: "contains_keyword",
-    hint: "Écris 56 comme un produit contenant 8.",
-    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
-      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
-      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
-      ("8 est un diviseur de 56 car 56 = 8 × 7.") +
-      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["entier_arithmetique", "diviseur", "open"],
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "8 est un diviseur de 56. Complète : 56 = 8 × …",
+    format: "short",
+    expected: ["7"],
+    comparator: "number_equal",
+    hint: "Cherche dans la table de 8.",
+    explanation: `Définition : 8 est un diviseur de 56 quand 56 = 8 × un entier.\n\n` +
+      `Méthode : on cherche 56 dans la table de 8, ou on calcule 56 ÷ 8.\n\n` +
+      `Calcul : 8 × 7 = 56, donc 56 ÷ 8 = 7.\n\n` +
+      `Conclusion : 56 = 8 × 7. Il manque 7.`,
+    tags: ["entier_arithmetique", "diviseur", "short"],
   },
 
   {
@@ -345,17 +345,17 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     microId: "entier_critere_divisibilite",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi 738 est divisible par 3.",
-    format: "open",
-    expected: ["7", "3", "8", "18", "3"],
-    comparator: "contains_keyword",
-    hint: "Additionne les chiffres.",
-    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
-      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
-      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
-      ("7 + 3 + 8 = 18, et 18 est divisible par 3. Donc 738 est divisible par 3.") +
-      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["entier_arithmetique", "criteres", "open"],
+    // 08/10/2026 : précise et simple (Frédéric) — l’étape clé du critère par 3.
+    text: "Pour savoir si 738 est divisible par 3, on additionne ses chiffres.\nQuelle est cette somme ?",
+    format: "short",
+    expected: ["18"],
+    comparator: "number_equal",
+    hint: "Les chiffres de 738 sont 7, 3 et 8.",
+    explanation: `Définition : un nombre est divisible par 3 quand la somme de ses chiffres est divisible par 3.\n\n` +
+      `Méthode : on additionne les chiffres de 738 : 7, 3 et 8.\n\n` +
+      `Calcul : 7 + 3 + 8 = 18. Et 18 = 3 × 6 : 18 est divisible par 3.\n\n` +
+      `Conclusion : la somme vaut 18, donc 738 est divisible par 3.`,
+    tags: ["entier_arithmetique", "criteres", "short"],
   },
 
   /* =========================
@@ -507,17 +507,17 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     microId: "entier_nombre_premier",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi 21 n’est pas un nombre premier.",
-    format: "open",
-    expected: ["21", "3", "7"],
-    comparator: "contains_keyword",
-    hint: "Écris 21 comme un produit.",
-    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
-      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
-      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
-      ("21 n’est pas premier car 21 = 3 × 7. Il a donc d’autres diviseurs que 1 et 21.") +
-      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["entier_arithmetique", "nombre_premier", "open"],
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "21 n’est pas un nombre premier. Complète : 21 = 3 × …",
+    format: "short",
+    expected: ["7"],
+    comparator: "number_equal",
+    hint: "Cherche 21 dans la table de 3.",
+    explanation: `Définition : un nombre premier a exactement deux diviseurs : 1 et lui-même.\n\n` +
+      `Méthode : on écrit 21 comme un produit de deux entiers plus grands que 1.\n\n` +
+      `Calcul : 3 × 7 = 21. Donc 3 et 7 sont aussi des diviseurs de 21.\n\n` +
+      `Conclusion : 21 = 3 × 7. Il a plus de deux diviseurs : il n’est pas premier.`,
+    tags: ["entier_arithmetique", "nombre_premier", "short"],
   },
     /* =========================
      ARITH_DECOMPOSER
@@ -765,17 +765,17 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     microId: "entier_arithmetique_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi un nombre pair supérieur à 2 n’est pas premier.",
-    format: "open",
-    expected: ["pair", "2", "divisible"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : un pair plus grand que 2 se divise par 2.
+    text: "Un seul nombre pair est premier. Lequel ?",
+    format: "short",
+    expected: ["2"],
+    comparator: "number_equal",
     hint: "Un nombre pair est divisible par 2.",
-    explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
-      `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
-      `Calcul : on utilise les données de la question pour justifier la réponse. ` +
-      ("Un nombre pair supérieur à 2 est divisible par 2 et par lui-même. Il a donc plus de deux diviseurs, donc il n’est pas premier.") +
-      `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
-    tags: ["entier_arithmetique", "defi", "open"],
+    explanation: `Définition : un nombre premier a exactement deux diviseurs : 1 et lui-même.\n\n` +
+      `Méthode : un nombre pair est divisible par 2. On regarde s’il a d’autres diviseurs.\n\n` +
+      `Calcul : 2 a pour diviseurs 1 et 2 : il est premier. 4 a pour diviseurs 1, 2 et 4 : il n’est pas premier. Tout pair plus grand que 2 a au moins 1, 2 et lui-même.\n\n` +
+      `Conclusion : le seul nombre pair premier est 2.`,
+    tags: ["entier_arithmetique", "defi", "short", "nombre_premier"],
   },
 
   {
@@ -820,17 +820,30 @@ export const arithmetiqueBank: TutorBankItemV4[] = [
     hint: "Un nombre premier n’a que deux diviseurs.",
     tags: ["entier_arithmetique", "defi", "nombre_premier", "template"],
     generate: () => {
+      // 08/10/2026 : précise et simple (Frédéric) — un QCM : le premier parmi des impairs
+      // qui « ont l’air » premiers (vrais pièges d’élève : 39, 49, 51, 57…).
       const n = randomChoice([31, 37, 41, 43, 47]);
+      const pieges: Record<number, string> = {
+        27: "27 = 3 × 9",
+        33: "33 = 3 × 11",
+        35: "35 = 5 × 7",
+        39: "39 = 3 × 13",
+        49: "49 = 7 × 7",
+        51: "51 = 3 × 17",
+        57: "57 = 3 × 19",
+      };
+      const leurres = shuffle(Object.keys(pieges).map(Number)).slice(0, 3);
+      const choices = shuffle([n, ...leurres]).map(String);
       return {
-        text: `Explique pourquoi ${n} est un nombre premier.`,
-        format: "open",
-        expected: [String(n), "1"],
-        comparator: "contains_keyword",
-        explanation: `Définition : l’arithmétique étudie les diviseurs, les multiples, les critères de divisibilité, les nombres premiers et les diviseurs communs.\n\n` +
-          `Méthode : on repère la propriété utile, puis on vérifie avec une égalité, un critère ou une décomposition.\n\n` +
-          `Calcul : on utilise les données de la question pour justifier la réponse. ` +
-          (`${n} n’est divisible par aucun entier autre que 1 et lui-même. Il est donc premier.`) +
-          `\n\nConclusion : la réponse est donc celle indiquée, avec une justification arithmétique.`,
+        text: `Lequel de ces nombres est premier ?`,
+        format: "qcm",
+        choices,
+        expected: [String(n)],
+        comparator: "mcq_exact",
+        explanation: `Définition : un nombre premier a exactement deux diviseurs : 1 et lui-même.\n\n` +
+          `Méthode : pour chaque nombre, on cherche un petit diviseur : 2, 3, 5, 7.\n\n` +
+          `Calcul : ${leurres.map((l) => pieges[l]).join(" ; ")} : ils ne sont pas premiers. ${n} ne se divise ni par 2, ni par 3, ni par 5. Et 7 × 7 = 49 dépasse déjà ${n}.\n\n` +
+          `Conclusion : ${n} est premier.`,
       };
     },
   },

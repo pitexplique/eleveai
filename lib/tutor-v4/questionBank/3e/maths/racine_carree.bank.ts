@@ -397,17 +397,19 @@ export const racineCarreeBank: TutorBankItemV4[] = [
   microId: "entier_racine_calculer",
   difficulty: 4,
   theme: "neutral",
-  text: "Explique pourquoi √49 = 7 et non -7.",
-  format: "open",
-  expected: ["racine", "positive", "7", "carré"],
-  comparator: "contains_keyword",
-  hint: "La racine carrée désigne le nombre positif.",
+  // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : √49 vaut 7, pas -7.
+  text: "Combien vaut √49 ?",
+  format: "qcm",
+  choices: ["7", "-7", "7 ou -7", "24,5"],
+  expected: ["7"],
+  comparator: "mcq_exact",
+  hint: "√49 est le nombre POSITIF dont le carré vaut 49.",
   explanation:
-    "Définition : la notation √a désigne toujours la racine carrée positive.\n\n" +
-    "Méthode : on cherche le nombre positif dont le carré vaut 49.\n\n" +
-    "Calcul : 7² = 49 et (-7)² = 49, mais √49 désigne uniquement la valeur positive.\n\n" +
-    "Conclusion : √49 = 7 et non -7.",
-  tags: ["entier_racine", "calcul", "open", "signe"],
+    "Définition : √a désigne toujours le nombre positif dont le carré vaut a.\n\n" +
+    "Méthode : on cherche le nombre positif qui, multiplié par lui-même, donne 49.\n\n" +
+    "Calcul : 7 × 7 = 49. Aussi (-7) × (-7) = 49, mais -7 est négatif : ce n’est pas √49. 24,5 vient de 49 ÷ 2 : une racine n’est pas une moitié.\n\n" +
+    "Conclusion : √49 = 7.",
+  tags: ["entier_racine", "calcul", "qcm", "signe"],
 },
 
 /* =========================
@@ -531,14 +533,19 @@ explanation:
   microId: "entier_racine_encadrer",
   difficulty: 4,
   theme: "neutral",
-  text: "Explique pourquoi 6 < √40 < 7.",
-  format: "open",
-  expected: ["6²", "36", "7²", "49", "40"],
-  comparator: "contains_keyword",
-  hint: "Compare 40 avec 36 et 49.",
+  // 08/10/2026 : précise et simple (Frédéric)
+  text: "√40 est entre deux entiers qui se suivent. Lesquels ?",
+  format: "qcm",
+  choices: ["6 et 7", "5 et 6", "20 et 21", "36 et 49"],
+  expected: ["6 et 7"],
+  comparator: "mcq_exact",
+  hint: "Cherche les carrés parfaits juste avant et juste après 40.",
   explanation:
-    "6² = 36 et 7² = 49. Comme 36 < 40 < 49, alors 6 < √40 < 7.",
-  tags: ["entier_racine", "encadrer", "open", "raisonnement"],
+    "Définition : encadrer √40, c’est trouver deux entiers qui se suivent, l’un avant, l’autre après √40.\n\n" +
+    "Méthode : on cherche les carrés parfaits autour de 40.\n\n" +
+    "Calcul : 6² = 36 et 7² = 49. Comme 36 < 40 < 49, on a 6 < √40 < 7. 36 et 49 sont les carrés, pas les racines. 20 vient de 40 ÷ 2.\n\n" +
+    "Conclusion : √40 est entre 6 et 7.",
+  tags: ["entier_racine", "encadrer", "qcm"],
 },
 
 /* =========================
@@ -663,17 +670,18 @@ explanation:
   microId: "entier_racine_defi",
   difficulty: 5,
   theme: "neutral",
-  text: "Explique pourquoi la racine carrée est utile dans le théorème de Pythagore.",
-  format: "open",
-  expected: ["carré", "longueur", "hypoténuse", "racine", "pythagore"],
-  comparator: "contains_keyword",
-  hint: "Pythagore donne souvent le carré d’une longueur.",
-explanation:
-  "Définition : le théorème de Pythagore donne souvent le carré d’une longueur.\n\n" +
-  "Méthode : pour retrouver la longueur elle-même, on utilise la racine carrée.\n\n" +
-  "Calcul : si h² = 100, alors h = √100 = 10.\n\n" +
-  "Conclusion : la racine carrée est utile pour passer du carré d’une longueur à la longueur.",
-  tags: ["entier_racine", "defi", "open", "pythagore_theoreme", "raisonnement"],
+  // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : Pythagore donne h², la racine donne h.
+  text: "Dans un triangle rectangle, Pythagore donne : h² = 100 (h en cm).\nCombien mesure h ?",
+  format: "short",
+  expected: ["10 cm"],
+  comparator: "number_equal",
+  hint: "Cherche le nombre positif dont le carré vaut 100.",
+  explanation:
+    "Définition : Pythagore donne le CARRÉ d’une longueur. Pour avoir la longueur, on prend la racine carrée.\n\n" +
+    "Méthode : h² = 100, donc h = √100.\n\n" +
+    "Calcul : 10 × 10 = 100, donc √100 = 10. Ce n’est pas 50 (100 ÷ 2).\n\n" +
+    "Conclusion : h = 10 cm.",
+  tags: ["entier_racine", "defi", "short", "pythagore_theoreme"],
 },
 
 /* =========================

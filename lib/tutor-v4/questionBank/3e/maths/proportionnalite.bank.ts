@@ -452,18 +452,20 @@ ${x2} → ?`,
   microId: "prop_evolution",
   difficulty: 4,
   theme: "neutral",
-  text: "Explique pourquoi une augmentation de 20% ne revient pas à ajouter 20.",
-  format: "open",
-  expected: ["20%", "dépend", "valeur", "0,2", "pourcentage"],
-  comparator: "contains_keyword",
-  hint: "20% dépend de la valeur de départ.",
+  // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : + 20 % n’est pas + 20 (le leurre 70 €).
+  text: "Un prix de 50 € augmente de 20 %.\nQuel est le nouveau prix ?",
+  format: "qcm",
+  choices: ["60 €", "70 €", "10 €", "1 000 €"],
+  expected: ["60 €"],
+  comparator: "mcq_exact",
+  hint: "Calcule d’abord 20 % de 50.",
   explanation:
-    `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
-    `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
-    `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
-    ("Ajouter 20 est une quantité fixe. Augmenter de 20% dépend de la valeur de départ : on ajoute 20/100 de cette valeur.") +
-    `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
-  tags: ["prop_proportionnalite", "evolution", "open", "raisonnement"],
+    `Définition : augmenter de 20 %, c’est ajouter 20 % du prix de départ.\n\n` +
+    `Méthode : on calcule 20 % de 50, puis on l’ajoute à 50.\n\n` +
+    `Calcul : 20 % de 50 = 50 × 20 ÷ 100 = 10. Puis 50 + 10 = 60. ` +
+    `70 € ajoute 20 € au lieu de 20 % ; 10 € est seulement l’augmentation.\n\n` +
+    `Conclusion : le nouveau prix est 60 €.`,
+  tags: ["prop_proportionnalite", "evolution", "qcm", "raisonnement"],
 },
 
 /* =========================
@@ -642,18 +644,18 @@ ${x2} → ?`,
   microId: "prop_defi",
   difficulty: 5,
   theme: "neutral",
-  text: "Explique pourquoi la vitesse moyenne est une situation de proportionnalité lorsque la vitesse est constante.",
-  format: "open",
-  expected: ["distance", "temps", "vitesse", "proportionnel", "constant"],
-  comparator: "contains_keyword",
-  hint: "Si la vitesse est constante, distance = vitesse × temps.",
+  // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : à vitesse constante, la distance est proportionnelle au temps.
+  text: "Un train roule à vitesse constante. Il parcourt 120 km en 2 h.\nQuelle distance parcourt-il en 5 h ?",
+  format: "short",
+  expected: ["300 km", "300"],
+  comparator: "number_equal",
+  hint: "Cherche d’abord la distance parcourue en 1 h.",
   explanation:
-    `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
-    `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
-    `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
-    ("Lorsque la vitesse est constante, la distance parcourue est proportionnelle au temps : distance = vitesse × temps. Le coefficient de proportionnalité est la vitesse.") +
-    `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
-  tags: ["prop_proportionnalite", "defi", "vitesse", "open"],
+    `Définition : à vitesse constante, la distance est proportionnelle au temps. Le coefficient est la vitesse.\n\n` +
+    `Méthode : on calcule la vitesse (distance en 1 h), puis on multiplie par 5.\n\n` +
+    `Calcul : 120 ÷ 2 = 60 km en 1 h. Puis 60 × 5 = 300 km.\n\n` +
+    `Conclusion : en 5 h, le train parcourt 300 km.`,
+  tags: ["prop_proportionnalite", "defi", "vitesse", "short"],
 },
 
 {
@@ -727,18 +729,19 @@ ${x2} → ?`,
   microId: "prop_defi",
   difficulty: 5,
   theme: "neutral",
-  text: "Explique pourquoi une augmentation de 10% suivie d’une augmentation de 20% ne correspond pas à une augmentation de 30%.",
-  format: "open",
-  expected: ["coefficient", "1,1", "1,2", "1,32", "32"],
-  comparator: "contains_keyword",
-  hint: "Multiplie les coefficients multiplicateurs.",
+  // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : + 10 % puis + 20 % ne fait pas + 30 % (132 €, pas 130 €).
+  text: "Un prix de 100 € augmente de 10 %, puis le nouveau prix augmente de 20 %.\nQuel est le prix final ?",
+  format: "short",
+  expected: ["132 €", "132"],
+  comparator: "number_equal",
+  hint: "Calcule d’abord le prix après + 10 %. Les 20 % se calculent sur ce nouveau prix.",
   explanation:
-    `Définition : dans une situation de proportionnalité, deux grandeurs varient avec un même coefficient multiplicateur.\n\n` +
-    `Méthode : on choisit la formule adaptée : coefficient, produit en croix, pourcentage, vitesse, débit ou densité.\n\n` +
-    `Calcul : on remplace les valeurs de l’énoncé dans la formule puis on calcule. ` +
-    ("Une hausse de 10% correspond à ×1,1 et une hausse de 20% à ×1,2. Au total, on multiplie par 1,1 × 1,2 = 1,32, soit une hausse de 32%, pas 30%.") +
-    `\n\nConclusion : on obtient la valeur demandée avec l’unité ou le pourcentage adapté.`,
-  tags: ["prop_proportionnalite", "defi", "evolution", "open"],
+    `Définition : chaque pourcentage se calcule sur le prix du moment.\n\n` +
+    `Méthode : on fait les deux hausses l’une après l’autre.\n\n` +
+    `Calcul : 10 % de 100 = 10, donc 100 + 10 = 110 €. Puis 20 % de 110 = 22, donc 110 + 22 = 132 €. ` +
+    `130 € serait juste si on ajoutait 30 % de 100 : ce n’est pas le cas.\n\n` +
+    `Conclusion : le prix final est 132 € (une hausse de 32 %, pas de 30 %).`,
+  tags: ["prop_proportionnalite", "defi", "evolution", "short"],
 },
 
 /* =========================

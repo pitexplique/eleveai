@@ -321,17 +321,19 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_reconnaitre",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique la différence entre un triangle isocèle et un triangle équilatéral.",
-    format: "open",
-    expected: ["deux", "trois", "côtés"],
-    comparator: "contains_keyword",
-    hint: "Compare le nombre de côtés égaux.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : deux côtés égaux = isocèle, pas équilatéral.
+    text: "Un triangle a des côtés de 5 cm, 5 cm et 7 cm.\nQuelle est sa nature ?",
+    format: "qcm",
+    choices: ["isocèle", "équilatéral", "rectangle", "quelconque"],
+    expected: ["isocèle"],
+    comparator: "mcq_exact",
+    hint: "Compte les côtés de même longueur.",
     explanation:
-      "Définition : un triangle isocèle possède au moins deux côtés égaux ; un triangle équilatéral possède trois côtés égaux.\n\n" +
-      "Méthode : on regarde combien de côtés ont la même longueur.\n\n" +
-      "Calcul : deux côtés égaux suffisent pour isocèle ; trois côtés égaux donnent équilatéral.\n\n" +
-      "Conclusion : tout triangle équilatéral est isocèle, mais tout triangle isocèle n’est pas forcément équilatéral.",
-    tags: ["triangle", "open", "nature"],
+      "Définition : un triangle isocèle a deux côtés égaux ; un triangle équilatéral a trois côtés égaux.\n\n" +
+      "Méthode : on compte les côtés de même longueur.\n\n" +
+      "Calcul : 5 cm et 5 cm sont égaux, 7 cm est différent : deux côtés égaux seulement. Il n’est pas rectangle : 5² + 5² = 50 et 7² = 49.\n\n" +
+      "Conclusion : le triangle est isocèle.",
+    tags: ["triangle", "nature", "qcm"],
   },
     /* =========================
      TRIANGLE_ANGLES
@@ -541,17 +543,18 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_angle",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment trouver un angle manquant dans un triangle.",
-    format: "open",
-    expected: ["180", "somme", "soustraire"],
-    comparator: "contains_keyword",
-    hint: "Utilise la somme des angles d’un triangle.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Dans un triangle, deux angles mesurent 48° et 67°.\nCombien mesure le troisième angle ?",
+    format: "short",
+    expected: ["65", "65°"],
+    comparator: "number_equal",
+    hint: "La somme des trois angles d’un triangle est 180°.",
     explanation:
       "Définition : dans un triangle, la somme des trois angles est 180°.\n\n" +
-      "Méthode : on additionne les angles connus, puis on soustrait cette somme à 180°.\n\n" +
-      "Calcul : si deux angles mesurent 50° et 60°, alors le troisième vaut 180 - 50 - 60 = 70°.\n\n" +
-      "Conclusion : on trouve l’angle manquant en complétant à 180°.",
-    tags: ["triangle", "angles", "open"],
+      "Méthode : on additionne les deux angles connus, puis on enlève cette somme à 180°.\n\n" +
+      "Calcul : 48 + 67 = 115, puis 180 − 115 = 65.\n\n" +
+      "Conclusion : le troisième angle mesure 65°.",
+    tags: ["triangle", "angles", "calcul"],
   },
     /* =========================
      TRIANGLE_INEGALITE
@@ -726,17 +729,18 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_inegalite",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment vérifier si trois longueurs peuvent former un triangle.",
-    format: "open",
-    expected: ["plus grand", "somme", "inférieur"],
-    comparator: "contains_keyword",
-    hint: "Il suffit de comparer la plus grande longueur à la somme des deux autres.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : le plus grand côté < somme des deux autres.
+    text: "Un triangle a deux côtés de 4 cm et 7 cm.\nLe troisième côté mesure un nombre entier de cm. Quelle est sa plus grande longueur possible ?",
+    format: "short",
+    expected: ["10", "10 cm"],
+    comparator: "number_equal",
+    hint: "Le plus grand côté doit être strictement plus petit que la somme des deux autres.",
     explanation:
-      "Définition : l’inégalité triangulaire permet de savoir si un triangle est constructible.\n\n" +
-      "Méthode : on repère la plus grande longueur, puis on la compare à la somme des deux autres.\n\n" +
-      "Calcul : si la plus grande longueur est strictement inférieure à cette somme, le triangle existe.\n\n" +
-      "Conclusion : cette vérification suffit pour décider si les trois longueurs forment un triangle.",
-    tags: ["triangle", "inegalite_triangulaire", "open"],
+      "Définition : dans un triangle, le plus grand côté est strictement plus petit que la somme des deux autres.\n\n" +
+      "Méthode : on calcule la somme 4 + 7, puis on prend le nombre entier juste en dessous.\n\n" +
+      "Calcul : 4 + 7 = 11. Avec 11 cm, les points seraient alignés. Le troisième côté doit être plus petit que 11 cm.\n\n" +
+      "Conclusion : la plus grande longueur entière possible est 10 cm.",
+    tags: ["triangle", "inegalite_triangulaire", "calcul"],
   },
     /* =========================
      TRIANGLE_DEFIS
@@ -950,27 +954,8 @@ export const trianglesBank: TutorBankItemV4[] = [
     tags: ["triangle", "defi", "piege", "inegalite"],
   },
 
-  {
-    kind: "fixed",
-    id: "3e_triangle_defi_open_1",
-    niveau: "3e",
-    matiere: "maths",
-    notionId: "triangle_figure",
-    microId: "triangle_defi",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Explique pourquoi un triangle équilatéral est aussi un triangle isocèle.",
-    format: "open",
-    expected: ["trois", "deux", "côtés"],
-    comparator: "contains_keyword",
-    hint: "Un triangle isocèle doit avoir au moins deux côtés égaux.",
-    explanation:
-      "Définition : un triangle isocèle possède au moins deux côtés égaux, tandis qu’un triangle équilatéral possède trois côtés égaux.\n\n" +
-      "Méthode : on compare les deux définitions.\n\n" +
-      "Calcul : si un triangle a trois côtés égaux, alors il a forcément au moins deux côtés égaux.\n\n" +
-      "Conclusion : tout triangle équilatéral est aussi isocèle.",
-    tags: ["triangle", "defi", "open", "nature"],
-  },
+  // 08/10/2026 : « 3e_triangle_defi_open_1 » (équilatéral, est-il isocèle ? oui/non)
+  // supprimée par Frédéric.
 
   {
     kind: "fixed",
@@ -981,17 +966,18 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi la somme des angles d’un triangle ne peut pas dépasser 180°.",
-    format: "open",
-    expected: ["somme", "angles", "180"],
-    comparator: "contains_keyword",
-    hint: "Utilise la propriété de la somme des angles d’un triangle.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : il ne reste que 180° à partager.
+    text: "Dans un triangle, un angle mesure 100°.\nCombien mesurent les deux autres angles ensemble ?",
+    format: "short",
+    expected: ["80", "80°"],
+    comparator: "number_equal",
+    hint: "Les trois angles font 180° en tout.",
     explanation:
-      "Définition : dans un triangle, la somme des trois angles est toujours égale à 180°.\n\n" +
-      "Méthode : on utilise cette propriété pour vérifier si des mesures sont possibles.\n\n" +
-      "Calcul : si la somme dépasse 180°, il est impossible de former un triangle.\n\n" +
-      "Conclusion : la somme des angles d’un triangle ne peut pas dépasser 180°.",
-    tags: ["triangle", "defi", "open", "angles"],
+      "Définition : dans un triangle, la somme des trois angles est 180°.\n\n" +
+      "Méthode : on enlève l’angle connu à 180°.\n\n" +
+      "Calcul : 180 − 100 = 80. Les deux autres angles se partagent 80° : aucun ne peut mesurer 90°.\n\n" +
+      "Conclusion : les deux autres angles mesurent 80° ensemble.",
+    tags: ["triangle", "defi", "angles", "calcul"],
   },
 
   /* =========================

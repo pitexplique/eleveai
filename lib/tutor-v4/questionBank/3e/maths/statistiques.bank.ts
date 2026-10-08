@@ -231,17 +231,18 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_lire_tableau",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique ce que signifie : « vélo : 12 élèves » dans un tableau statistique.",
-    format: "open",
-    expected: ["vélo", "12", "élèves"],
-    comparator: "contains_keyword",
-    hint: "Tu dois dire quelle catégorie est concernée et combien d’élèves sont concernés.",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique ce que signifie : « vélo : 12 élèves » dans un tableau statistique ».
+    text: "Un tableau indique comment les élèves viennent au collège : vélo : 12 élèves ; bus : 9 élèves ; à pied : 4 élèves. Combien d’élèves de plus viennent à vélo qu’en bus ?",
+    format: "short",
+    expected: ["3"],
+    comparator: "number_equal",
+    hint: "Lis l’effectif du vélo, puis celui du bus.",
     explanation:
-      "Définition : dans un tableau statistique, une catégorie est associée à un effectif.\n\n" +
-      "Méthode : on lit la catégorie, puis le nombre placé en face.\n\n" +
-      "Calcul : ici, la catégorie est « vélo » et l’effectif est 12.\n\n" +
-      "Conclusion : cela signifie que 12 élèves sont dans la catégorie vélo.",
-    tags: ["stat_statistique", "tableau", "open", "effectif"],
+      "Définition : dans un tableau statistique, chaque catégorie est associée à un effectif.\n\n" +
+      "Méthode : on lit les deux effectifs, puis on les soustrait.\n\n" +
+      "Calcul : vélo : 12 élèves ; bus : 9 élèves. 12 − 9 = 3.\n\n" +
+      "Conclusion : 3 élèves de plus viennent à vélo.",
+    tags: ["stat_statistique", "tableau", "short", "effectif"],
   },
     /* =========================
      STAT_LIRE_GRAPHIQUE
@@ -497,27 +498,8 @@ export const statistiquesBank: TutorBankItemV4[] = [
     },
   },
 
-  {
-    kind: "fixed",
-    id: "3e_stat_lire_graphique_open_1",
-    niveau: "3e",
-    matiere: "maths",
-    notionId: "stat_statistique",
-    microId: "stat_lire_graphique",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Explique comment lire une information dans un diagramme en barres.",
-    format: "open",
-    expected: ["barre", "hauteur", "valeur"],
-    comparator: "contains_keyword",
-    hint: "Tu dois parler de la catégorie et de la hauteur de la barre.",
-    explanation:
-      "Définition : un diagramme en barres représente des valeurs par des hauteurs.\n\n" +
-      "Méthode : on repère la catégorie demandée, puis on lit la hauteur de sa barre.\n\n" +
-      "Calcul : la hauteur donne directement la valeur ou l’effectif associé.\n\n" +
-      "Conclusion : pour lire un diagramme en barres, on associe chaque catégorie à la hauteur de sa barre.",
-    tags: ["stat_statistique", "graphique", "open"],
-  },
+  // 08/10/2026 : « 3e_stat_lire_graphique_open_1 » (lire une barre dont la
+  // valeur est écrite) supprimée par Frédéric : trop facile.
     /* =========================
      STAT_EFFECTIF_FREQUENCE
   ========================= */
@@ -777,17 +759,18 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_effectif_frequence",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment calculer une fréquence à partir d’un effectif et d’un effectif total.",
-    format: "open",
-    expected: ["effectif", "total", "divise"],
-    comparator: "contains_keyword",
-    hint: "C’est un quotient.",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique comment calculer une fréquence à partir d’un effectif et d’un effectif total ».
+    text: "Dans un club de 20 élèves, 5 font du judo. Quelle est la fréquence des élèves qui font du judo ? Donne-la sous forme décimale.",
+    format: "short",
+    expected: ["0,25", "5/20", "1/4"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "Fréquence = effectif ÷ effectif total.",
     explanation:
       "Définition : une fréquence mesure la part d’une catégorie dans une série statistique.\n\n" +
       "Méthode : on divise l’effectif de la catégorie par l’effectif total.\n\n" +
-      "Calcul : par exemple, si 10 élèves sur 25 font du sport, la fréquence est 10 ÷ 25 = 0,4.\n\n" +
-      "Conclusion : calculer une fréquence revient à comparer une partie au total.",
-    tags: ["stat_statistique", "frequence", "open", "methode"],
+      "Calcul : 5 ÷ 20 = 0,25.\n\n" +
+      "Conclusion : la fréquence des élèves qui font du judo est 0,25 (soit 25 %).",
+    tags: ["stat_statistique", "frequence", "short", "methode"],
   },
     /* =========================
      STAT_MOYENNE
@@ -1021,17 +1004,18 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_moyenne",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment calculer la moyenne d’une série de valeurs.",
-    format: "open",
-    expected: ["additionne", "divise", "nombre"],
-    comparator: "contains_keyword",
-    hint: "Il y a deux étapes : additionner puis diviser.",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique comment calculer la moyenne d’une série de valeurs ».
+    text: "Calcule la moyenne de la série : 6 ; 9 ; 11 ; 14.",
+    format: "short",
+    expected: ["10"],
+    comparator: "number_equal",
+    hint: "Il y a deux étapes : additionner puis diviser par le nombre de valeurs.",
     explanation:
       "Définition : la moyenne est un indicateur qui résume une série de valeurs.\n\n" +
       "Méthode : on additionne toutes les valeurs, puis on divise par le nombre de valeurs.\n\n" +
-      "Calcul : par exemple, pour 8 ; 10 ; 12, on calcule (8 + 10 + 12) ÷ 3 = 10.\n\n" +
-      "Conclusion : calculer une moyenne revient à répartir équitablement la somme des valeurs.",
-    tags: ["stat_statistique", "moyenne", "open", "methode"],
+      "Calcul : 6 + 9 + 11 + 14 = 40. Il y a 4 valeurs : 40 ÷ 4 = 10.\n\n" +
+      "Conclusion : la moyenne de la série est 10.",
+    tags: ["stat_statistique", "moyenne", "short", "methode"],
   },
 
   {
@@ -1043,17 +1027,18 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_moyenne",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi la moyenne n’est pas toujours une valeur de la série.",
-    format: "open",
-    expected: ["somme", "divise", "valeurs"],
-    comparator: "contains_keyword",
-    hint: "La moyenne est le résultat d’un calcul.",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi la moyenne n’est pas toujours une valeur de la série ».
+    text: "Calcule la moyenne de la série : 9 ; 12 ; 16 ; 17.",
+    format: "short",
+    expected: ["13,5"],
+    comparator: "number_equal",
+    hint: "La moyenne est le résultat d’un calcul : elle peut tomber entre deux valeurs.",
     explanation:
       "Définition : la moyenne est une valeur calculée à partir de toutes les valeurs de la série.\n\n" +
       "Méthode : on additionne toutes les valeurs puis on divise par leur nombre.\n\n" +
-      "Calcul : par exemple, la moyenne de 10 et 11 est 10,5, même si 10,5 n’apparaît pas dans la série.\n\n" +
-      "Conclusion : la moyenne peut ne pas être une valeur observée.",
-    tags: ["stat_statistique", "moyenne", "open", "interpretation"],
+      "Calcul : 9 + 12 + 16 + 17 = 54. Il y a 4 valeurs : 54 ÷ 4 = 13,5.\n\n" +
+      "Conclusion : la moyenne est 13,5. Ce n’est aucune des valeurs de la série : c’est normal, la moyenne est un calcul.",
+    tags: ["stat_statistique", "moyenne", "short", "interpretation"],
   },
     /* =========================
      STAT_MEDIANE
@@ -1284,17 +1269,18 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_mediane",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi il faut ranger une série avant de déterminer sa médiane.",
-    format: "open",
-    expected: ["ranger", "ordre", "centrale"],
-    comparator: "contains_keyword",
-    hint: "La médiane dépend de la position centrale.",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi il faut ranger une série avant de déterminer sa médiane ».
+    text: "Quelle est la médiane de la série : 15 ; 3 ; 20 ; 8 ; 11 ?",
+    format: "short",
+    expected: ["11"],
+    comparator: "number_equal",
+    hint: "Range d’abord la série dans l’ordre croissant.",
     explanation:
-      "Définition : la médiane est une valeur centrale dans une série rangée.\n\n" +
-      "Méthode : on doit ranger les valeurs dans l’ordre croissant pour connaître leur position.\n\n" +
-      "Calcul : sans rangement, on risque de choisir une valeur qui n’est pas réellement au centre.\n\n" +
-      "Conclusion : ranger la série est indispensable pour déterminer correctement la médiane.",
-    tags: ["stat_statistique", "mediane", "open"],
+      "Définition : la médiane est la valeur centrale d’une série RANGÉE.\n\n" +
+      "Méthode : on range les valeurs dans l’ordre croissant, puis on prend celle du milieu.\n\n" +
+      "Calcul : série rangée : 3 ; 8 ; 11 ; 15 ; 20. La valeur du milieu (la 3e sur 5) est 11.\n\n" +
+      "Conclusion : la médiane est 11. Sans ranger, on aurait pris 20, qui n’est pas au centre.",
+    tags: ["stat_statistique", "mediane", "short"],
   },
 
   /* =========================

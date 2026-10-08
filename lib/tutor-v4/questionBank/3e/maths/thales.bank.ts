@@ -547,18 +547,19 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_calculer_longueur",
     difficulty: 4,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric)
     text:
-      "Explique la méthode pour calculer une longueur avec le théorème de Thalès.",
-    format: "open",
-    expected: ["parallèles", "rapports", "produit", "croix"],
-    comparator: "contains_keyword",
-    hint: "Tu dois parler des droites parallèles et des rapports égaux.",
+      "A, M, B sont alignés, A, N, C sont alignés et (MN) // (BC).\nAM = 3 cm, AB = 9 cm et MN = 2 cm. Calcule BC.",
+    format: "short",
+    expected: ["6", "6 cm"],
+    comparator: "number_equal",
+    hint: "Écris AM/AB = MN/BC. AB est combien de fois AM ?",
     explanation:
-      "Définition : le théorème de Thalès s’applique quand deux droites parallèles coupent deux droites sécantes.\n\n" +
-      "Méthode : on vérifie le parallélisme, puis on écrit les rapports de longueurs correspondantes.\n\n" +
-      "Calcul : on remplace les longueurs connues et on utilise un produit en croix pour trouver la longueur manquante.\n\n" +
-      "Conclusion : Thalès permet de calculer une longueur grâce à la proportionnalité.",
-    tags: ["thales_theoreme", "calculer_longueur", "open", "methode"],
+      "Définition : avec (MN) // (BC), le théorème de Thalès donne AM/AB = AN/AC = MN/BC.\n\n" +
+      "Méthode : on utilise AM/AB = MN/BC, puis un produit en croix.\n\n" +
+      "Calcul : 3/9 = 2/BC, donc BC = 9 × 2 ÷ 3 = 18 ÷ 3 = 6.\n\n" +
+      "Conclusion : BC = 6 cm.",
+    tags: ["thales_theoreme", "calculer_longueur", "calcul"],
   },
     /* =========================
      THALES_RECIPROQUE
@@ -750,18 +751,19 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_reciproque",
     difficulty: 5,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : rapports égaux ⇒ droites parallèles.
     text:
-      "Explique comment utiliser la réciproque du théorème de Thalès pour prouver que deux droites sont parallèles.",
-    format: "open",
-    expected: ["alignés", "rapports", "égaux", "parallèles"],
-    comparator: "contains_keyword",
-    hint: "Tu dois parler des points alignés et des rapports égaux.",
+      "A, M, B sont alignés et A, N, C sont alignés dans le même ordre. AM = 2 cm, AB = 6 cm et AN = 3 cm.\nQuelle longueur AC faut-il pour que (MN) // (BC) ?",
+    format: "short",
+    expected: ["9", "9 cm"],
+    comparator: "number_equal",
+    hint: "Il faut AN/AC = AM/AB. AB est combien de fois AM ?",
     explanation:
-      "Définition : la réciproque de Thalès permet de démontrer un parallélisme.\n\n" +
-      "Méthode : on vérifie d’abord que les points sont alignés dans le même ordre, puis on compare deux rapports de longueurs correspondantes.\n\n" +
-      "Calcul : si les rapports sont égaux, alors les droites correspondantes sont parallèles.\n\n" +
-      "Conclusion : la réciproque transforme une égalité de rapports en conclusion de parallélisme.",
-    tags: ["thales_theoreme", "reciproque", "open", "redaction"],
+      "Définition : réciproque de Thalès : si les points sont alignés dans le même ordre et si AM/AB = AN/AC, alors (MN) // (BC).\n\n" +
+      "Méthode : on cherche AC pour que AN/AC soit égal à AM/AB.\n\n" +
+      "Calcul : AM/AB = 2/6 : AB vaut 3 fois AM. Il faut donc AC = 3 × AN = 3 × 3 = 9.\n\n" +
+      "Conclusion : avec AC = 9 cm, les rapports sont égaux et (MN) // (BC).",
+    tags: ["thales_theoreme", "reciproque", "calcul"],
   },
     /* =========================
      THALES_REDIGER
@@ -852,30 +854,29 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_rediger",
     difficulty: 5,
     theme: "neutral",
-    hint: "Rédige : conditions, rapports, remplacement, calcul, conclusion.",
+    hint: "Écris AM/AB = AN/AC, remplace, puis fais un produit en croix.",
     tags: ["thales_theoreme", "rediger", "calcul", "template"],
 
+    // 08/10/2026 : précise et simple (Frédéric) — le calcul rédigé, avec un produit en croix (AB n’est pas un multiple entier de AM).
     generate: () => {
-      const AM = randomChoice([2, 3, 4]);
-      const k = randomChoice([2, 3]);
-      const AB = AM * k;
-      const AN = randomChoice([3, 4, 5]);
-      const AC = AN * k;
+      const m = randomChoice([1, 2, 3, 4]);
+      const n = randomChoice([2, 3, 4, 5].filter((x) => x !== m));
+      const AM = 2 * m;
+      const AB = 3 * m;
+      const AN = 2 * n;
+      const AC = 3 * n;
 
       return {
         text:
-          `Rédiger le calcul de AC sachant que A, M, B sont alignés, A, N, C sont alignés, (MN) // (BC), ` +
-          `AM = ${AM} cm, AB = ${AB} cm et AN = ${AN} cm.`,
-        format: "open",
-        expected: ["alignés", "parallèles", "AM", "AB", "AN", "AC"],
-        comparator: "contains_keyword",
+          `A, M, B sont alignés, A, N, C sont alignés et (MN) // (BC). ` +
+          `AM = ${AM} cm, AB = ${AB} cm et AN = ${AN} cm.\nCalcule AC.`,
+        format: "short",
+        expected: [String(AC)],
+        comparator: "number_equal",
         explanation:
-          "Définition : le théorème de Thalès permet de calculer une longueur dans une configuration de droites parallèles.\n\n" +
-          "Méthode : on rédige les conditions, puis les rapports.\n\n" +
-          `Calcul : les points A, M, B sont alignés, les points A, N, C sont alignés et (MN) // (BC).\n` +
-          `D’après le théorème de Thalès : AM/AB = AN/AC.\n` +
-          `Donc ${AM}/${AB} = ${AN}/AC.\n` +
-          `Comme ${AB} = ${k} × ${AM}, on obtient AC = ${k} × ${AN} = ${AC}.\n\n` +
+          "Définition : le théorème de Thalès permet de calculer une longueur quand (MN) // (BC).\n\n" +
+          "Méthode : on écrit AM/AB = AN/AC, on remplace, puis on fait un produit en croix.\n\n" +
+          `Calcul : ${AM}/${AB} = ${AN}/AC, donc AC = ${AB} × ${AN} ÷ ${AM} = ${AB * AN} ÷ ${AM} = ${AC}.\n\n` +
           `Conclusion : AC = ${AC} cm.`,
         canvas: thalesCanvas({
           sideLabels: {
@@ -898,18 +899,19 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_rediger",
     difficulty: 5,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’étape « remplacer puis produit en croix » de la rédaction.
     text:
-      "Explique les étapes d’une rédaction complète avec le théorème de Thalès.",
-    format: "open",
-    expected: ["alignés", "parallèles", "rapports", "conclusion"],
-    comparator: "contains_keyword",
-    hint: "Pense à l’ordre : conditions → théorème → rapports → calcul → conclusion.",
+      "Dans une rédaction avec Thalès, on arrive à : 4/10 = 6/AC.\nCalcule AC.",
+    format: "short",
+    expected: ["15", "15 cm"],
+    comparator: "number_equal",
+    hint: "Produit en croix : AC = 10 × 6 ÷ 4.",
     explanation:
-      "Définition : une rédaction complète avec Thalès doit justifier l’utilisation du théorème.\n\n" +
-      "Méthode : on écrit d’abord les points alignés et les droites parallèles, puis on cite le théorème.\n\n" +
-      "Calcul : on écrit les rapports, on remplace par les valeurs et on calcule la longueur cherchée.\n\n" +
-      "Conclusion : on termine par une phrase avec l’unité.",
-    tags: ["thales_theoreme", "redaction", "open", "methode"],
+      "Définition : dans une égalité de deux fractions, on trouve le terme manquant par un produit en croix.\n\n" +
+      "Méthode : AC = 10 × 6 ÷ 4.\n\n" +
+      "Calcul : 10 × 6 = 60, puis 60 ÷ 4 = 15.\n\n" +
+      "Conclusion : AC = 15 cm. On termine la rédaction par cette phrase, avec l’unité.",
+    tags: ["thales_theoreme", "redaction", "calcul"],
   },
   /* =========================
      THALES_DEFIS
@@ -1124,18 +1126,24 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_defi",
     difficulty: 5,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : le théorème calcule, la réciproque prouve.
     text:
-      "Explique la différence entre le théorème de Thalès et sa réciproque.",
-    format: "open",
-    expected: ["calculer", "longueur", "prouver", "parallèles"],
-    comparator: "contains_keyword",
-    hint: "Le théorème calcule une longueur ; la réciproque prouve un parallélisme.",
+      "A, M, B sont alignés et A, N, C sont alignés. AM = 3, AB = 6, AN = 4 et AC = 8.\nOn veut savoir si (MN) // (BC). Que faut-il utiliser ?",
+    format: "qcm",
+    choices: [
+      "la réciproque de Thalès",
+      "le théorème de Thalès",
+      "le théorème de Pythagore",
+    ],
+    expected: ["la réciproque de Thalès"],
+    comparator: "mcq_exact",
+    hint: "On ne sait pas encore si les droites sont parallèles : on veut le prouver.",
     explanation:
-      "Définition : le théorème de Thalès et sa réciproque n’ont pas le même objectif.\n\n" +
-      "Méthode : le théorème s’utilise quand les parallèles sont connues ; la réciproque s’utilise quand on veut prouver le parallélisme.\n\n" +
-      "Calcul : avec le théorème, on écrit des rapports pour calculer une longueur. Avec la réciproque, on compare des rapports pour conclure que des droites sont parallèles.\n\n" +
-      "Conclusion : théorème = calculer ; réciproque = prouver.",
-    tags: ["thales_theoreme", "defi", "open", "theoreme", "reciproque"],
+      "Définition : le théorème de Thalès calcule une longueur quand on SAIT que les droites sont parallèles. La réciproque PROUVE que des droites sont parallèles.\n\n" +
+      "Méthode : ici, on veut prouver un parallélisme. On compare AM/AB et AN/AC.\n\n" +
+      "Calcul : AM/AB = 3/6 = 1/2 et AN/AC = 4/8 = 1/2.\n\n" +
+      "Conclusion : on utilise la réciproque de Thalès (et ici (MN) // (BC)).",
+    tags: ["thales_theoreme", "defi", "theoreme", "reciproque", "qcm"],
   },
 
   /* =========================

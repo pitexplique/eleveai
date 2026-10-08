@@ -876,17 +876,18 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_comprendre",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique à quoi sert une lettre dans une expression littérale.",
-    format: "open",
-    expected: ["nombre", "inconnu", "variable"],
-    comparator: "contains_keyword",
-    hint: "Une lettre permet de représenter un nombre qu’on ne connaît pas ou qui peut changer.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Une place de cinéma coûte 4 €. On achète x places.\nÉcris le prix total (en €) en fonction de x.",
+    format: "short",
+    expected: ["4x"],
+    comparator: "expression_reduite",
+    hint: "Pour 2 places : 4 × 2. Pour x places : 4 × x.",
     explanation:
-      "Définition : une lettre dans une expression littérale représente un nombre inconnu ou variable.\n\n" +
-      "Méthode : on utilise cette lettre pour écrire une règle générale ou traduire une situation.\n\n" +
-      "Calcul : par exemple, si x est le nombre de places achetées et qu’une place coûte 4 €, le prix total est 4x.\n\n" +
-      "Conclusion : une lettre permet de généraliser un calcul.",
-    tags: ["litteral", "open", "definition"],
+      "Définition : la lettre x représente un nombre qui peut changer : ici, le nombre de places.\n\n" +
+      "Méthode : le prix total = prix d’une place × nombre de places.\n\n" +
+      "Calcul : 4 × x s’écrit 4x. Pour 3 places : 4 × 3 = 12 €.\n\n" +
+      "Conclusion : le prix total est 4x euros.",
+    tags: ["litteral", "short", "definition"],
   },
 
   /* =========================
@@ -1203,17 +1204,18 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_substituer",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi il faut mettre les nombres négatifs entre parenthèses lorsqu’on remplace une lettre.",
-    format: "open",
-    expected: ["signe", "parentheses", "negatif"],
-    comparator: "contains_keyword",
-    hint: "Les parenthèses évitent les erreurs de signe.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Calcule x² pour x = -3.",
+    format: "short",
+    expected: ["9"],
+    comparator: "number_equal",
+    hint: "Écris le nombre négatif entre parenthèses : (-3)².",
     explanation:
-      "Définition : lorsqu’on remplace une lettre par un nombre négatif, on doit conserver son signe.\n\n" +
-      "Méthode : on écrit le nombre négatif entre parenthèses.\n\n" +
-      "Calcul : par exemple 3x devient 3 × (-2) et non 3 × -2 sans précaution.\n\n" +
-      "Conclusion : les parenthèses évitent les erreurs de calcul et de signe.",
-    tags: ["litteral", "open", "negatif"],
+      "Définition : x² = x × x.\n\n" +
+      "Méthode : on remplace x par -3 en mettant des parenthèses : (-3)².\n\n" +
+      "Calcul : (-3)² = (-3) × (-3) = 9. Sans parenthèses, on lit -3² = -9 : c’est faux ici.\n\n" +
+      "Conclusion : pour x = -3, x² = 9.",
+    tags: ["litteral", "short", "negatif"],
   },
 
   /* =========================
@@ -1551,17 +1553,19 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_reduire",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique ce que signifie « termes semblables » en calcul littéral.",
-    format: "open",
-    expected: ["meme", "lettre", "puissance"],
-    comparator: "contains_keyword",
-    hint: "Les termes doivent avoir la même partie littérale.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Lequel de ces termes peut s’additionner avec 3x ?",
+    format: "qcm",
+    choices: ["-2x", "3y", "3x²", "3"],
+    expected: ["-2x"],
+    comparator: "mcq_exact",
+    hint: "Il faut la même lettre, avec la même puissance.",
     explanation:
-      "Définition : deux termes sont semblables lorsqu’ils possèdent la même partie littérale.\n\n" +
-      "Méthode : on compare les lettres et leurs puissances.\n\n" +
-      "Calcul : par exemple 3x et -2x sont semblables, mais 3x et 3y ne le sont pas.\n\n" +
-      "Conclusion : seuls les termes semblables peuvent être regroupés.",
-    tags: ["reduction", "open", "vocabulaire"],
+      "Définition : deux termes sont semblables quand ils ont la même lettre avec la même puissance.\n\n" +
+      "Méthode : on compare la partie avec les lettres, pas le nombre devant.\n\n" +
+      "Calcul : 3x + (-2x) = x. Mais 3x + 3y, 3x + 3x² et 3x + 3 ne se réduisent pas.\n\n" +
+      "Conclusion : -2x est semblable à 3x.",
+    tags: ["reduction", "qcm", "vocabulaire"],
   },
 
   /* =========================
@@ -1914,17 +1918,18 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_developper",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique ce que signifie développer une expression.",
-    format: "open",
-    expected: ["parenthèses", "multiplie", "distributivité"],
-    comparator: "contains_keyword",
-    hint: "Développer sert souvent à supprimer les parenthèses.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Développe 3(x + 2).",
+    format: "short",
+    expected: ["3x + 6"],
+    comparator: "expression_developpee",
+    hint: "Le 3 multiplie x ET 2.",
     explanation:
-      "Définition : développer une expression signifie transformer un produit avec parenthèses en une somme ou une différence.\n\n" +
-      "Méthode : on utilise la distributivité en multipliant chaque terme de la parenthèse.\n\n" +
-      "Calcul : par exemple, 3(x + 2) = 3x + 6.\n\n" +
-      "Conclusion : développer permet de supprimer les parenthèses correctement.",
-    tags: ["litteral", "developper", "open"],
+      "Définition : développer, c’est transformer un produit en somme : on supprime la parenthèse.\n\n" +
+      "Méthode : on multiplie chaque terme de la parenthèse par 3.\n\n" +
+      "Calcul : 3(x + 2) = 3 × x + 3 × 2 = 3x + 6.\n\n" +
+      "Conclusion : 3(x + 2) = 3x + 6.",
+    tags: ["litteral", "developper", "short"],
   },
 
   /* =========================
@@ -2567,17 +2572,18 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_factoriser",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment factoriser x² - 49.",
-    format: "open",
-    expected: ["différence", "49", "(x - 7)(x + 7)"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Factorise x² - 49.",
+    format: "short",
+    expected: ["(x - 7)(x + 7)"],
+    comparator: "expression_factorisee",
     hint: "49 = 7² : c’est une différence de deux carrés.",
     explanation:
       "Définition : a² - b² = (a - b)(a + b).\n\n" +
       "Méthode : on reconnaît 49 = 7².\n\n" +
       "Calcul : x² - 49 = (x - 7)(x + 7).\n\n" +
       "Conclusion : la forme factorisée est (x - 7)(x + 7).",
-    tags: ["litteral_factorisation", "difference_carres", "open"],
+    tags: ["litteral_factorisation", "difference_carres", "short"],
   },
 
   {
@@ -2589,17 +2595,18 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_factoriser",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment vérifier qu’une factorisation est correcte.",
-    format: "open",
-    expected: ["développer", "retrouver", "expression"],
-    comparator: "contains_keyword",
-    hint: "On peut développer la forme factorisée.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un élève factorise 6x + 12 en 6(x + 12).\nPour vérifier, développe 6(x + 12).",
+    format: "short",
+    expected: ["6x + 72"],
+    comparator: "expression_developpee",
+    hint: "Le 6 multiplie x ET 12.",
     explanation:
-      "Définition : factoriser transforme une somme en produit.\n\n" +
-      "Méthode : pour vérifier, on développe la forme factorisée.\n\n" +
-      "Calcul : si on propose 3(x + 4), on développe : 3x + 12.\n\n" +
-      "Conclusion : la factorisation est correcte si on retrouve l’expression de départ lorsqu’on développe.",
-    tags: ["litteral", "factoriser", "open", "verification"],
+      "Définition : développer une forme factorisée doit redonner l’expression de départ.\n\n" +
+      "Méthode : on multiplie chaque terme de la parenthèse par 6.\n\n" +
+      "Calcul : 6(x + 12) = 6x + 72. On ne retrouve pas 6x + 12 : la factorisation est fausse. La bonne est 6(x + 2), car 6 × 2 = 12.\n\n" +
+      "Conclusion : 6(x + 12) = 6x + 72.",
+    tags: ["litteral", "factoriser", "short", "verification"],
   },
 
   /* =========================
@@ -2792,6 +2799,7 @@ export const calculLitteralBank: TutorBankItemV4[] = [
         format: "qcm",
         choices: makeChoices(cas.bon, cas.pieges),
         expected: [cas.bon],
+        // 08/10/2026 : QCM corrigé au texte exact (correcteur réparé, commit 88376d05).
         comparator: "mcq_exact",
         explanation:
           `Définition : ${id.formule}.\n\n` +
@@ -3035,17 +3043,18 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_identite",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique à quoi servent les identités remarquables.",
-    format: "open",
-    expected: ["développer", "factoriser", "plus vite"],
-    comparator: "contains_keyword",
-    hint: "Elles permettent de gagner du temps.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Développe (x + 3)² avec l’identité (a + b)² = a² + 2ab + b².",
+    format: "short",
+    expected: ["x² + 6x + 9"],
+    comparator: "expression_developpee",
+    hint: "Ici a = x et b = 3.",
     explanation:
-      "Définition : les identités remarquables sont des égalités utiles à connaître.\n\n" +
-      "Méthode : elles servent à développer ou factoriser rapidement certaines expressions.\n\n" +
-      "Calcul : par exemple, (x + 3)² peut être développé directement sans double distributivité.\n\n" +
-      "Conclusion : les identités remarquables permettent de calculer plus vite et plus efficacement.",
-    tags: ["identites", "open"],
+      "Définition : (a + b)² = a² + 2ab + b².\n\n" +
+      "Méthode : on remplace a par x et b par 3.\n\n" +
+      "Calcul : x² + 2 × x × 3 + 3² = x² + 6x + 9. Attention : x² + 9 oublie le terme 6x.\n\n" +
+      "Conclusion : (x + 3)² = x² + 6x + 9.",
+    tags: ["identites", "short"],
   },
 
   {
@@ -3057,17 +3066,18 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_identite",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment vérifier que x² - 25 = (x - 5)(x + 5).",
-    format: "open",
-    expected: ["développer", "x²", "25"],
-    comparator: "contains_keyword",
-    hint: "Développe (x - 5)(x + 5).",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Pour vérifier que x² - 25 = (x - 5)(x + 5), développe (x - 5)(x + 5).",
+    format: "short",
+    expected: ["x² - 25"],
+    comparator: "expression_developpee",
+    hint: "Développe (x - 5)(x + 5) : les termes en x s’annulent.",
     explanation:
       "Définition : on vérifie une factorisation en développant le produit obtenu.\n\n" +
       "Méthode : on développe (x - 5)(x + 5) par double distributivité, ou avec (a - b)(a + b) = a² - b².\n\n" +
       "Calcul : (x - 5)(x + 5) = x² + 5x - 5x - 25 = x² - 25.\n\n" +
       "Conclusion : on retrouve x² - 25, donc la factorisation est juste.",
-    tags: ["litteral_factorisation", "verifier", "open"],
+    tags: ["litteral_factorisation", "verifier", "short"],
   },
 
   /* =========================
@@ -3485,6 +3495,7 @@ export const calculLitteralBank: TutorBankItemV4[] = [
         format: "qcm",
         choices: makeChoices(cas.r, cas.pieges),
         expected: [cas.r],
+        // 08/10/2026 : QCM corrigé au texte exact (correcteur réparé, commit 88376d05).
         comparator: "mcq_exact",
         explanation:
           `Définition : pour montrer qu’un résultat est vrai pour TOUS les nombres, on développe et on réduit l’expression littérale.\n\n` +
@@ -3532,17 +3543,19 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique la différence entre développer, réduire et factoriser.",
-    format: "open",
-    expected: ["développer", "réduire", "factoriser"],
-    comparator: "contains_keyword",
-    hint: "Développer enlève des parenthèses, réduire regroupe, factoriser met en produit.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "On transforme 3x + 6 en 3(x + 2).\nQu’a-t-on fait ?",
+    format: "qcm",
+    choices: ["factoriser", "développer", "réduire"],
+    expected: ["factoriser"],
+    comparator: "mcq_exact",
+    hint: "3x + 6 est une somme ; 3(x + 2) est un produit.",
     explanation:
-      "Définition : développer, réduire et factoriser sont trois transformations d’écritures littérales.\n\n" +
-      "Méthode : développer supprime des parenthèses, réduire regroupe les termes semblables, factoriser transforme une somme en produit.\n\n" +
-      "Calcul : par exemple, 3(x + 2) se développe en 3x + 6 ; 3x + 2x se réduit en 5x ; 3x + 6 se factorise en 3(x + 2).\n\n" +
-      "Conclusion : ces trois techniques servent à changer la forme d’une expression selon l’objectif.",
-    tags: ["litteral", "defi", "open", "synthese"],
+      "Définition : factoriser transforme une somme en produit. Développer fait l’inverse. Réduire regroupe les termes semblables (3x + 2x = 5x).\n\n" +
+      "Méthode : on regarde la forme de départ et la forme d’arrivée.\n\n" +
+      "Calcul : 3x + 6 est une somme ; 3(x + 2) est un produit, car 3 × x = 3x et 3 × 2 = 6.\n\n" +
+      "Conclusion : on a factorisé.",
+    tags: ["litteral", "defi", "qcm", "synthese"],
   },
 
   {
@@ -3554,17 +3567,18 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi on peut vérifier une factorisation en développant.",
-    format: "open",
-    expected: ["factorisation", "développer", "retrouve"],
-    comparator: "contains_keyword",
-    hint: "Développer est l’opération inverse de factoriser.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "On a factorisé 5x - 15 en 5(x - 3).\nPour vérifier, développe 5(x - 3).",
+    format: "short",
+    expected: ["5x - 15"],
+    comparator: "expression_developpee",
+    hint: "Développer est l’inverse de factoriser : 5 multiplie x ET -3.",
     explanation:
-      "Définition : factoriser transforme une somme en produit, tandis que développer transforme un produit en somme.\n\n" +
-      "Méthode : pour vérifier une factorisation, on développe la forme factorisée.\n\n" +
-      "Calcul : si 4x + 12 = 4(x + 3), alors en développant 4(x + 3), on retrouve 4x + 12.\n\n" +
-      "Conclusion : une factorisation est correcte si le développement redonne l’expression de départ.",
-    tags: ["litteral", "defi", "open", "verification"],
+      "Définition : factoriser transforme une somme en produit ; développer fait l’inverse.\n\n" +
+      "Méthode : on développe la forme factorisée et on compare avec l’expression de départ.\n\n" +
+      "Calcul : 5(x - 3) = 5 × x - 5 × 3 = 5x - 15.\n\n" +
+      "Conclusion : on retrouve 5x - 15, donc la factorisation est juste.",
+    tags: ["litteral", "defi", "short", "verification"],
   },
 
   /* ===== LITTERAL_COMPRENDRE (compléments) ===== */

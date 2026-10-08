@@ -123,18 +123,18 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     microId: "fraction_rationnel_reconnaitre",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi 0,75 est un nombre rationnel.",
-    format: "open",
-    expected: ["fraction", "75/100", "3/4", "rationnel"],
-    comparator: "contains_keyword",
-    hint: "Essaie d’écrire 0,75 sous forme de fraction.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Écris 0,75 sous forme de fraction irréductible.",
+    format: "short",
+    expected: ["3/4"],
+    comparator: "exact_text",
+    hint: "0,75 = 75 centièmes. Puis simplifie.",
     explanation:
-      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
-      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
-      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
-      ("0,75 est rationnel car 0,75 = 75/100 = 3/4. Il peut donc s’écrire sous forme d’une fraction.") +
-      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["fraction_rationnel", "open", "raisonnement"],
+      `Définition : un nombre rationnel peut s’écrire a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : 0,75 = 75 centièmes, donc 0,75 = 75/100. Puis on simplifie.\n\n` +
+      `Calcul : on divise le haut et le bas par 25 : 75 ÷ 25 = 3 et 100 ÷ 25 = 4. Donc 75/100 = 3/4.\n\n` +
+      `Conclusion : 0,75 = 3/4. C’est une fraction : 0,75 est un nombre rationnel.`,
+    tags: ["fraction_rationnel", "short", "ecritures"],
   },
 
   {
@@ -285,18 +285,18 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     microId: "fraction_rationnel_ecriture",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi 0,4 = 2/5.",
-    format: "open",
-    expected: ["0,4", "4/10", "2/5", "simplifie"],
-    comparator: "contains_keyword",
-    hint: "Écris 0,4 sous forme de fraction décimale.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Complète : 0,4 = 4/10 = …/5.",
+    format: "short",
+    expected: ["2"],
+    comparator: "number_equal",
+    hint: "Pour passer de 10 à 5, on divise par 2. Fais pareil en haut.",
     explanation:
-      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
-      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
-      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
-      ("0,4 = 4/10. En simplifiant par 2, on obtient 2/5.") +
-      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["fraction_rationnel", "open", "ecritures"],
+      `Définition : un nombre rationnel peut s’écrire a/b, avec a et b entiers et b non nul.\n\n` +
+      `Méthode : 0,4 = 4 dixièmes = 4/10. On divise le haut et le bas par le même nombre.\n\n` +
+      `Calcul : 10 ÷ 2 = 5, donc 4 ÷ 2 = 2. Ainsi 4/10 = 2/5.\n\n` +
+      `Conclusion : 0,4 = 2/5. Il manque 2.`,
+    tags: ["fraction_rationnel", "short", "ecritures"],
   },
 
   {
@@ -455,18 +455,19 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     microId: "fraction_rationnel_comparer",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi -3/4 est plus petit que -1/2.",
-    format: "open",
-    expected: ["négatif", "-0,75", "-0,5", "plus petit"],
-    comparator: "contains_keyword",
-    hint: "Compare leurs écritures décimales.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Quel est le plus petit de ces trois nombres ?",
+    format: "qcm",
+    choices: ["-3/4", "-1/2", "-1/4"],
+    expected: ["-3/4"],
+    comparator: "mcq_exact",
+    hint: "Écris chaque nombre en décimal. Le plus petit est le plus à gauche.",
     explanation:
-      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
-      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
-      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
-      ("-3/4 = -0,75 et -1/2 = -0,5. Sur une droite graduée, -0,75 est plus à gauche que -0,5, donc -3/4 est plus petit.") +
-      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["fraction_rationnel", "comparer", "open", "negatif"],
+      `Définition : sur une droite graduée, le plus petit nombre est le plus à gauche.\n\n` +
+      `Méthode : on écrit chaque fraction en décimal.\n\n` +
+      `Calcul : -3/4 = -0,75 ; -1/2 = -0,5 ; -1/4 = -0,25. Le plus à gauche est -0,75. Attention : 3/4 est plus grand que 1/2, mais -3/4 est plus petit que -1/2.\n\n` +
+      `Conclusion : le plus petit est -3/4.`,
+    tags: ["fraction_rationnel", "comparer", "qcm", "negatif"],
   },
 
   {
@@ -663,18 +664,18 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     microId: "fraction_rationnel_calculer",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi 2/3 × 3/5 = 2/5.",
-    format: "open",
-    expected: ["multiplie", "numérateurs", "dénominateurs", "6/15", "2/5"],
-    comparator: "contains_keyword",
-    hint: "Multiplie puis simplifie.",
+    // 08/10/2026 : précise et simple (Frédéric) — toutes les écritures justes acceptées.
+    text: "Calcule 2/3 × 3/5.",
+    format: "short",
+    expected: ["2/5", "6/15", "4/10", "0,4"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "Multiplie les numérateurs entre eux, puis les dénominateurs entre eux.",
     explanation:
-      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
-      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
-      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
-      ("On calcule 2/3 × 3/5 = 6/15. En simplifiant par 3, on obtient 2/5.") +
-      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["fraction_rationnel", "calcul", "open", "produit"],
+      `Définition : pour multiplier deux fractions, on multiplie les numérateurs entre eux et les dénominateurs entre eux.\n\n` +
+      `Méthode : on multiplie, puis on simplifie.\n\n` +
+      `Calcul : 2 × 3 = 6 et 3 × 5 = 15, donc 2/3 × 3/5 = 6/15. On simplifie par 3 : 6/15 = 2/5.\n\n` +
+      `Conclusion : 2/3 × 3/5 = 2/5.`,
+    tags: ["fraction_rationnel", "calcul", "short", "produit"],
   },
 
   {
@@ -853,18 +854,18 @@ export const nombresRationnelsBank: TutorBankItemV4[] = [
     microId: "fraction_rationnel_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi tout nombre décimal fini est rationnel.",
-    format: "open",
-    expected: ["fraction", "10", "100", "1000", "rationnel"],
-    comparator: "contains_keyword",
-    hint: "Un décimal fini peut s’écrire avec un dénominateur 10, 100 ou 1000.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : un décimal s’écrit sur 10, 100, 1000…
+    text: "Écris 0,125 sous forme de fraction irréductible.",
+    format: "short",
+    expected: ["1/8"],
+    comparator: "exact_text",
+    hint: "0,125 = 125 millièmes. Puis simplifie.",
     explanation:
-      `Définition : un nombre rationnel est un nombre qui peut s’écrire sous la forme a/b, avec a et b entiers et b non nul.\n\n` +
-      `Méthode : on écrit les nombres sous une forme adaptée : fraction, décimal ou même dénominateur, puis on calcule ou on compare.\n\n` +
-      `Calcul : on effectue les transformations ou les opérations nécessaires étape par étape. ` +
-      ("Tout nombre décimal fini peut s’écrire sous forme d’une fraction dont le dénominateur est 10, 100, 1000, etc. Il est donc rationnel.") +
-      `\n\nConclusion : le résultat obtenu donne la réponse attendue sous forme exacte ou simplifiée.`,
-    tags: ["fraction_rationnel", "defi", "open", "raisonnement"],
+      `Définition : un nombre décimal s’écrit toujours sur 10, 100, 1000… C’est donc une fraction : il est rationnel.\n\n` +
+      `Méthode : 0,125 = 125 millièmes = 125/1000. Puis on simplifie.\n\n` +
+      `Calcul : on divise le haut et le bas par 125 : 125 ÷ 125 = 1 et 1000 ÷ 125 = 8. Donc 125/1000 = 1/8.\n\n` +
+      `Conclusion : 0,125 = 1/8.`,
+    tags: ["fraction_rationnel", "defi", "short", "ecritures"],
   },
 
   {

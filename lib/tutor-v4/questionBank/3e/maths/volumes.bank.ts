@@ -47,6 +47,41 @@ function formatNumber(n: number) {
   return Number.isInteger(n) ? String(n) : String(Math.round(n * 100) / 100);
 }
 
+// 08/10/2026 : précise et simple (Frédéric) — toutes les écritures justes de
+// « aπ » : 300π, 300 pi, 300 × π, avec ou sans unité. Si a est une fraction
+// (32/3), on accepte 32/3 π, (32/3)π, 32π/3 et l'arrondi au centième 10,67π.
+// ⚠️ Le nombre seul (« 300 ») passe aussi : answersMatch lit « 300 pi » comme
+// 300 suivi d'une unité « pi », et une unité omise est tolérée. C'était déjà le
+// cas avant (« 300 » était dans les attendus).
+function pgcd(a: number, b: number): number {
+  return b === 0 ? Math.abs(a) : pgcd(b, a % b);
+}
+
+function ecrituresAPi(numerateur: number, denominateur: number, unite: string): string[] {
+  const g = pgcd(numerateur, denominateur);
+  const n = numerateur / g;
+  const d = denominateur / g;
+  const formes: string[] = [];
+  for (const p of ["π", "pi"]) {
+    if (d === 1) {
+      formes.push(`${n}${p}`);
+    } else {
+      formes.push(`${n}/${d}${p}`, `(${n}/${d})${p}`, `${n}${p}/${d}`);
+      formes.push(`${formatNumber(n / d).replace(".", ",")}${p}`);
+    }
+  }
+  const uniteClavier = unite.replace("³", "3");
+  return [...formes, ...formes.map((f) => `${f} ${unite}`), ...formes.map((f) => `${f} ${uniteClavier}`)];
+}
+
+// 08/10/2026 : « aπ » lisible dans la correction, (32/3)π si a n'est pas entier.
+function aPiTexte(numerateur: number, denominateur: number): string {
+  const g = pgcd(numerateur, denominateur);
+  const n = numerateur / g;
+  const d = denominateur / g;
+  return d === 1 ? `${n}π` : `(${n}/${d})π`;
+}
+
 function solideCanvas(
   params: Omit<Solide3DCanvasData, "kind">
 ): Solide3DCanvasData {
@@ -126,17 +161,19 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_comprendre",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique en une phrase pourquoi un volume s’exprime avec une unité au cube.",
-    format: "open",
-    expected: ["trois", "dimensions", "cube", "longueur", "largeur", "hauteur"],
-    comparator: "contains_keyword",
-    hint: "Un volume dépend de trois dimensions.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : cm × cm × cm = cm³.
+    text: "Un pavé droit mesure 2 cm, 3 cm et 4 cm.\nQuel est son volume ?",
+    format: "qcm",
+    choices: ["24 cm³", "24 cm²", "24 cm", "9 cm³"],
+    expected: ["24 cm³"],
+    comparator: "mcq_exact",
+    hint: "On multiplie les trois longueurs.",
     explanation:
-    "Définition : un volume dépend de trois dimensions.\n\n" +
-    "Méthode : on pense à un pavé droit : longueur, largeur et hauteur.\n\n" +
-    "Calcul : une unité de volume correspond à unité × unité × unité, par exemple cm × cm × cm = cm³.\n\n" +
-    "Conclusion : un volume s’exprime avec une unité au cube.",
-    tags: ["volume", "open", "raisonnement"],
+    "Définition : un volume dépend de trois longueurs : longueur, largeur, hauteur.\n\n" +
+    "Méthode : on multiplie les trois longueurs. L’unité aussi est multipliée trois fois : cm × cm × cm = cm³.\n\n" +
+    "Calcul : 2 × 3 × 4 = 24, donc 24 cm³. 9 vient de 2 + 3 + 4 : on n’additionne pas. Le cm² sert pour une aire.\n\n" +
+    "Conclusion : le volume est 24 cm³.",
+    tags: ["volume", "qcm", "raisonnement"],
     },
 
   {
@@ -502,10 +539,11 @@ export const volumesBank: TutorBankItemV4[] = [
       const coeff = r2 * hauteur;
 
       return {
-        text: `Un cylindre a un rayon de ${rayon} cm et une hauteur de ${hauteur} cm. Donner son volume sous la forme aπ.`,
+        // 08/10/2026 : précise et simple (Frédéric)
+        text: `Un cylindre a un rayon de ${rayon} cm et une hauteur de ${hauteur} cm.\nDonne son volume sous la forme aπ (exemple : 12π).`,
         format: "short",
-        expected: [`${coeff}π`, `${coeff} pi`, `${coeff}`],
-        comparator: "contains_keyword",
+        expected: ecrituresAPi(coeff, 1, "cm³"),
+        comparator: "exact_text",
         explanation:
           `Définition : le volume d’un cylindre se calcule avec la formule V = π × r² × hauteur.\n\n` +
           `Méthode : on calcule d’abord l’aire de la base circulaire, puis on multiplie par la hauteur.\n\n` +
@@ -544,10 +582,11 @@ export const volumesBank: TutorBankItemV4[] = [
       const coeff = rayon * rayon * hauteur;
 
       return {
-        text: `Un cylindre a un diamètre de ${diametre} cm et une hauteur de ${hauteur} cm. Donner son volume sous la forme aπ.`,
+        // 08/10/2026 : précise et simple (Frédéric)
+        text: `Un cylindre a un diamètre de ${diametre} cm et une hauteur de ${hauteur} cm.\nDonne son volume sous la forme aπ (exemple : 12π).`,
         format: "short",
-        expected: [`${coeff}π`, `${coeff} pi`, `${coeff}`],
-        comparator: "contains_keyword",
+        expected: ecrituresAPi(coeff, 1, "cm³"),
+        comparator: "exact_text",
         explanation:
           `Définition : dans la formule du cylindre, on utilise le rayon, pas le diamètre.\n\n` +
           `Méthode : on commence par diviser le diamètre par 2 pour obtenir le rayon.\n\n` +
@@ -577,16 +616,17 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_cylindre",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi le volume d’un cylindre de rayon r et de hauteur h vaut π × r² × h.",
-    format: "open",
-    expected: ["aire", "base", "disque", "hauteur", "π"],
-    comparator: "contains_keyword",
-    hint: "La base est un disque.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : V = aire de base × hauteur.
+    text: "La base d’un cylindre a une aire de 20 cm². Sa hauteur est 7 cm.\nQuel est son volume ?",
+    format: "short",
+    expected: ["140 cm³"],
+    comparator: "number_equal",
+    hint: "Volume = aire de base × hauteur.",
     explanation:
-      "Définition : un cylindre est un solide formé par une base circulaire répétée sur une hauteur.\n\n" +
-      "Méthode : la base est un disque d’aire π × r², puis on multiplie par la hauteur h.\n\n" +
-      "Calcul : V = aire de base × hauteur = π × r² × h.\n\n" +
-      "Conclusion : le volume d’un cylindre de rayon r et de hauteur h vaut π × r² × h.", tags: ["volume", "cylindre", "open", "raisonnement"],
+      "Définition : un cylindre, c’est sa base (un disque) empilée sur toute la hauteur.\n\n" +
+      "Méthode : on multiplie l’aire de la base par la hauteur. C’est pour cela que V = π × r² × h : π × r² est l’aire du disque.\n\n" +
+      "Calcul : 20 × 7 = 140.\n\n" +
+      "Conclusion : le volume est 140 cm³.", tags: ["volume", "cylindre", "short", "raisonnement"],
       },
 
   /* =========================
@@ -680,15 +720,16 @@ export const volumesBank: TutorBankItemV4[] = [
       ]);
 
       return {
-        text: `${objet} est modélisé par une boule de rayon ${rayon} cm. Donner son volume sous la forme aπ.`,
+        // 08/10/2026 : précise et simple (Frédéric) — a peut être une fraction : 32/3 π et 10,67π passent.
+        text: `${objet} est modélisé par une boule de rayon ${rayon} cm.\nDonne son volume sous la forme aπ (exemple : 12π).`,
         format: "short",
-        expected: [`${formatNumber(coeff)}π`, `${formatNumber(coeff)} pi`, `${formatNumber(coeff)}`],
-        comparator: "contains_keyword",
+        expected: ecrituresAPi(4 * cube, 3, "cm³"),
+        comparator: "exact_text",
         explanation:
           "Définition : le volume d'une boule vaut $V = \\dfrac{4}{3}\\pi r^3$ — il dépend du CUBE du rayon, pas du rayon.\n\n" +
           "Méthode : on calcule d'abord le cube du rayon, puis on multiplie par 4 et on divise par 3. Garder $\\pi$ en facteur évite d'arrondir trop tôt.\n\n" +
-          `Calcul : $${rayon}^3 = ${cube}$, puis $\\dfrac{4 \\times ${cube}}{3} = ${formatNumber(coeff)}$.\n\n` +
-          `Conclusion : le volume vaut $${formatNumber(coeff)}\\pi$ cm³. ⚠️ Dépendre du CUBE change tout : doubler le rayon ne double pas le volume, il le multiplie par HUIT. Une boule de ${rayon * 2} cm de rayon aurait un volume de $${formatNumber(coeff * 8)}\\pi$ cm³.`,
+          `Calcul : $${rayon}^3 = ${cube}$, puis $\\dfrac{4 \\times ${cube}}{3} = ${Number.isInteger(coeff) ? coeff : `\\dfrac{${4 * cube}}{3} \\approx ${formatNumber(coeff).replace(".", "{,}")}`}$.\n\n` +
+          `Conclusion : le volume vaut ${aPiTexte(4 * cube, 3)} cm³. ⚠️ Dépendre du CUBE change tout : doubler le rayon ne double pas le volume, il le multiplie par HUIT. Une boule de ${rayon * 2} cm de rayon aurait un volume de ${aPiTexte(32 * cube, 3)} cm³.`,
         canvas: solideCanvas({
           solide: "boule",
           dimensions: { rayon },
@@ -716,15 +757,17 @@ export const volumesBank: TutorBankItemV4[] = [
       const coeff = (4 * rayon * rayon * rayon) / 3;
 
       return {
-        text: `Une boule a un diamètre de ${diametre} cm. Donner son volume sous la forme aπ.`,
+        // 08/10/2026 : précise et simple (Frédéric) — a peut être une fraction : 32/3 π et 10,67π passent.
+        text: `Une boule a un diamètre de ${diametre} cm.\nDonne son volume sous la forme aπ (exemple : 12π).`,
         format: "short",
-        expected: [`${formatNumber(coeff)}π`, `${formatNumber(coeff)} pi`, `${formatNumber(coeff)}`],
-        comparator: "contains_keyword",
+        expected: ecrituresAPi(4 * rayon ** 3, 3, "cm³"),
+        comparator: "exact_text",
         explanation:
           `Définition : la formule du volume d’une boule utilise le rayon.\n\n` +
           `Méthode : on commence par calculer le rayon en divisant le diamètre par 2.\n\n` +
-          `Calcul : rayon = ${diametre} ÷ 2 = ${rayon} cm. Donc V = (4/3)π × ${rayon}³ = ${formatNumber(coeff)}π cm³.\n\n` +
-          `Conclusion : le volume de la boule est ${formatNumber(coeff)}π cm³.`,
+          `Calcul : rayon = ${diametre} ÷ 2 = ${rayon} cm. Donc V = (4/3)π × ${rayon}³ = (4 × ${rayon ** 3} ÷ 3)π = ${aPiTexte(4 * rayon ** 3, 3)} cm³` +
+          `${Number.isInteger(coeff) ? "" : ` (environ ${formatNumber(coeff).replace(".", ",")}π cm³)`}.\n\n` +
+          `Conclusion : le volume de la boule est ${aPiTexte(4 * rayon ** 3, 3)} cm³.`,
           canvas: solideCanvas({
           solide: "boule",
           dimensions: { rayon },
@@ -747,17 +790,19 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_boule",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi il faut utiliser le rayon, et non le diamètre, dans la formule du volume d’une boule.",
-    format: "open",
-    expected: ["rayon", "diamètre", "moitié", "formule"],
-    comparator: "contains_keyword",
-    hint: "La formule contient r, pas d.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : le rayon, pas le diamètre.
+    text: "Une boule a un diamètre de 12 cm.\nQuel est son volume ?",
+    format: "qcm",
+    choices: ["288π cm³", "2304π cm³", "864π cm³", "144π cm³"],
+    expected: ["288π cm³"],
+    comparator: "mcq_exact",
+    hint: "La formule V = (4/3)πr³ contient le rayon r, pas le diamètre.",
     explanation:
-      "Définition : la formule du volume d’une boule contient le rayon r.\n\n" +
-      "Méthode : si on connaît le diamètre, il faut d’abord calculer le rayon.\n\n" +
-      "Calcul : le rayon est la moitié du diamètre, donc r = d ÷ 2.\n\n" +
-      "Conclusion : il faut utiliser le rayon dans la formule V = (4/3)πr³.",
-    tags: ["volume", "boule", "open", "raisonnement"],
+      "Définition : la formule du volume d’une boule contient le rayon r : V = (4/3)πr³.\n\n" +
+      "Méthode : on calcule d’abord le rayon : r = 12 ÷ 2 = 6 cm.\n\n" +
+      "Calcul : 6³ = 216, puis 4 × 216 ÷ 3 = 288. 2304π vient du diamètre 12 mis à la place du rayon. 864π oublie le « ÷ 3 ». 144π est 4πr², l’aire de la sphère.\n\n" +
+      "Conclusion : le volume est 288π cm³.",
+    tags: ["volume", "boule", "qcm", "raisonnement"],
   },
 
   /* =========================
@@ -884,14 +929,19 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_agrandissement_reduction",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi un agrandissement de rapport k multiplie les volumes par k³.",
-    format: "open",
-    expected: ["longueur", "largeur", "hauteur", "trois", "k", "cube"],
-    comparator: "contains_keyword",
-    hint: "Un volume dépend de trois dimensions.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : k × k × k = k³.
+    text: "Un cube a des arêtes de 1 cm. On multiplie ses arêtes par 2.\nQuel est son nouveau volume ?",
+    format: "qcm",
+    choices: ["8 cm³", "2 cm³", "4 cm³", "6 cm³"],
+    expected: ["8 cm³"],
+    comparator: "mcq_exact",
+    hint: "Le nouveau cube a des arêtes de 2 cm.",
     explanation:
-      "Un volume dépend de trois dimensions. Si chaque longueur est multipliée par k, alors le volume est multiplié par k × k × k = k³.",
-    tags: ["volume", "agrandissement", "open", "raisonnement"],
+      "Définition : un volume dépend de trois longueurs.\n\n" +
+      "Méthode : le nouveau cube a des arêtes de 2 cm. On multiplie les trois arêtes.\n\n" +
+      "Calcul : 2 × 2 × 2 = 8. Le volume passe de 1 cm³ à 8 cm³ : il est multiplié par 2³ = 8, pas par 2.\n\n" +
+      "Conclusion : le nouveau volume est 8 cm³.",
+    tags: ["volume", "agrandissement", "qcm", "raisonnement"],
   },
 
   /* =========================
@@ -1038,17 +1088,18 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_unite",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi 1 dm³ = 1 000 cm³.",
-    format: "open",
-    expected: ["10", "10", "10", "1000", "cube"],
-    comparator: "contains_keyword",
-    hint: "1 dm = 10 cm, et un cube a trois dimensions.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : 10 × 10 × 10 = 1 000.
+    text: "Une boîte en forme de cube a des arêtes de 1 dm, c’est-à-dire 10 cm.\nCombien de petits cubes de 1 cm³ peut-on ranger dedans ?",
+    format: "short",
+    expected: ["1000"],
+    comparator: "number_equal",
+    hint: "Une couche, c’est 10 rangées de 10 petits cubes.",
     explanation:
-      "Définition : les unités de volume dépendent de trois dimensions.\n\n" +
-      "Méthode : on transforme chaque décimètre en centimètres.\n\n" +
-      "Calcul : 1 dm = 10 cm, donc 1 dm³ = 10 × 10 × 10 = 1 000 cm³.\n\n" +
-      "Conclusion : 1 dm³ = 1 000 cm³.",
-    tags: ["volume", "conversion", "open", "raisonnement"],
+      "Définition : 1 dm³ est le volume d’un cube de 1 dm d’arête, soit 10 cm.\n\n" +
+      "Méthode : une couche contient 10 × 10 petits cubes, et il y a 10 couches.\n\n" +
+      "Calcul : 10 × 10 × 10 = 1 000.\n\n" +
+      "Conclusion : on range 1 000 petits cubes : 1 dm³ = 1 000 cm³.",
+    tags: ["volume", "conversion", "short", "raisonnement"],
   },
 
   /* =========================
@@ -1095,10 +1146,11 @@ export const volumesBank: TutorBankItemV4[] = [
       const coeff = rayon * rayon * hauteur;
 
       return {
-        text: `À La Réunion, un réservoir cylindrique a un rayon de ${rayon} m et une hauteur de ${hauteur} m. Donner son volume sous la forme aπ.`,
+        // 08/10/2026 : précise et simple (Frédéric)
+        text: `Un réservoir cylindrique a un rayon de ${rayon} m et une hauteur de ${hauteur} m.\nDonne son volume sous la forme aπ (exemple : 12π).`,
         format: "short",
-        expected: [`${coeff}π`, `${coeff} pi`, `${coeff}`],
-        comparator: "contains_keyword",
+        expected: ecrituresAPi(coeff, 1, "m³"),
+        comparator: "exact_text",
         explanation:
           `Définition : le volume d’un cylindre vaut V = π × r² × hauteur.\n\n` +
           `Méthode : on remplace le rayon et la hauteur par les valeurs données.\n\n` +
@@ -1178,13 +1230,11 @@ export const volumesBank: TutorBankItemV4[] = [
       const coeffBoule = (4 * rayonBoule ** 3) / 3;
 
       return {
-        text: `Un solide est formé d’un cylindre de rayon ${rayonCylindre} cm et de hauteur ${hauteurCylindre} cm, puis d’une boule de rayon ${rayonBoule} cm. Donner le volume total sous la forme aπ.`,
-        format: "open",
-        expected: [
-          String(formatNumber(coeffCylindre + coeffBoule)),
-          "π",
-        ],
-        comparator: "contains_keyword",
+        // 08/10/2026 : précise et simple (Frédéric)
+        text: `Un solide est fait d’un cylindre (rayon ${rayonCylindre} cm, hauteur ${hauteurCylindre} cm) et d’une boule (rayon ${rayonBoule} cm).\nDonne son volume total sous la forme aπ (exemple : 12π).`,
+        format: "short",
+        expected: ecrituresAPi(coeffCylindre + coeffBoule, 1, "cm³"),
+        comparator: "exact_text",
        explanation:
         `Définition : le volume total d’un solide composé est la somme des volumes de ses parties.\n\n` +
         `Méthode : on calcule séparément le volume du cylindre et le volume de la boule, puis on additionne.\n\n` +
@@ -1203,17 +1253,19 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique la différence entre le volume d’un cylindre et le volume d’une boule dans le choix de la formule.",
-    format: "open",
-    expected: ["cylindre", "boule", "hauteur", "rayon", "formule"],
-    comparator: "contains_keyword",
-    hint: "Un cylindre a une hauteur, une boule n’en a pas.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : une formule par solide.
+    text: "Un cylindre a un rayon de 3 cm et une hauteur de 6 cm. Une boule a un rayon de 3 cm.\nLequel a le plus grand volume ?",
+    format: "qcm",
+    choices: ["le cylindre", "la boule", "les deux sont égaux"],
+    expected: ["le cylindre"],
+    comparator: "mcq_exact",
+    hint: "Cylindre : V = πr²h. Boule : V = (4/3)πr³.",
     explanation:
-      "Définition : chaque solide a une formule de volume adaptée à sa forme.\n\n" +
-      "Méthode : on repère si le solide possède une hauteur ou seulement un rayon.\n\n" +
-      "Calcul : un cylindre a une hauteur, donc V = πr²h. Une boule n’a pas de hauteur, donc V = (4/3)πr³.\n\n" +
-      "Conclusion : on ne choisit pas la même formule pour un cylindre et pour une boule.",
-    tags: ["volume", "defi", "open", "raisonnement"],
+      "Définition : chaque solide a sa formule. Cylindre : V = πr²h. Boule : V = (4/3)πr³.\n\n" +
+      "Méthode : on calcule les deux volumes sous la forme aπ, puis on compare.\n\n" +
+      "Calcul : cylindre : π × 3² × 6 = 54π cm³. Boule : 4 × 27 ÷ 3 = 36, donc 36π cm³.\n\n" +
+      "Conclusion : 54π > 36π, le cylindre a le plus grand volume.",
+    tags: ["volume", "defi", "qcm", "raisonnement"],
   },
 
   /* =========================

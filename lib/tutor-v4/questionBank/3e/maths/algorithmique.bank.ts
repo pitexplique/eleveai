@@ -332,18 +332,34 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_defi",
     difficulty: 5,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : suivre variable, boucle puis condition, dans l’ordre.
     text:
-      "Explique une méthode pour analyser un programme Scratch contenant variables, boucle et condition.",
-    format: "open",
-    expected: ["variable", "boucle", "condition", "ordre"],
-    comparator: "contains_keyword",
-    hint: "Analyse le programme étape par étape.",
+      "x vaut 3. On répète 4 fois : ajouter 2 à x.\nPuis : si x > 10, dire x × 2 ; sinon, dire x.\nQuel nombre est dit ?",
+    format: "short",
+    expected: ["22"],
+    comparator: "number_equal",
+    hint: "Calcule d’abord x après la boucle, puis teste la condition.",
     explanation:
-      "Définition : analyser un programme consiste à prévoir son comportement.\n\n" +
-      "Méthode : on suit les blocs dans l’ordre : valeur initiale, effet des boucles, puis test des conditions.\n\n" +
-      "Exécution : on met à jour les variables après chaque instruction.\n\n" +
-      "Conclusion : cette méthode permet de comprendre le résultat du programme.",
-    tags: ["algo_programmation", "defi", "open", "scratch"],
+      "Définition : analyser un programme, c’est suivre les blocs dans l’ordre.\n\n" +
+      "Méthode : valeur de départ, puis effet de la boucle, puis test de la condition.\n\n" +
+      "Exécution : x = 3 + 2 × 4 = 11. 11 > 10 est vrai, donc on dit 11 × 2 = 22. Répondre 11, c’est oublier la condition.\n\n" +
+      "Conclusion : le nombre dit est 22.",
+    canvas: scratchCanvas("Variable, boucle, condition", [
+      { type: "event" },
+      { type: "set_variable", variable: "x", value: 3 },
+      {
+        type: "repeat",
+        times: 4,
+        children: [{ type: "change_variable", variable: "x", value: 2 }],
+      },
+      {
+        type: "if_else",
+        condition: "x > 10",
+        children: [{ type: "say", text: "x × 2" }],
+        elseChildren: [{ type: "say", text: "x" }],
+      },
+    ]),
+    tags: ["algo_programmation", "defi", "short", "scratch", "canvas"],
   },
     {
     kind: "template",
@@ -649,18 +665,29 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_variable_boucle",
     difficulty: 5,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : partir de la valeur de départ, puis chaque répétition.
     text:
-      "Explique comment suivre une variable qui change dans une boucle.",
-    format: "open",
-    expected: ["valeur", "départ", "boucle", "répétition"],
-    comparator: "contains_keyword",
-    hint: "Commence par la valeur de départ, puis applique chaque répétition.",
+      "score vaut 5. On répète 4 fois : ajouter 3 à score.\nQuelle est la valeur finale de score ?",
+    format: "short",
+    expected: ["17"],
+    comparator: "number_equal",
+    hint: "Commence par 5, puis ajoute 3 à chaque tour : 4 tours.",
     explanation:
-      "Définition : une variable peut changer plusieurs fois pendant l’exécution d’un programme.\n\n" +
-      "Méthode : on note la valeur de départ, puis on applique la modification à chaque répétition.\n\n" +
-      "Exécution : si on ajoute 3 pendant 4 répétitions, la variable augmente de 12.\n\n" +
-      "Conclusion : suivre une variable demande de respecter l’ordre des blocs.",
-    tags: ["algo_programmation", "variable", "boucle", "open", "methode"],
+      "Définition : dans une boucle, la variable change à chaque répétition.\n\n" +
+      "Méthode : on part de la valeur de départ, puis on applique la modification à chaque tour.\n\n" +
+      "Exécution : 5 → 8 → 11 → 14 → 17. Soit 5 + 3 × 4 = 17. Répondre 12, c’est oublier la valeur de départ.\n\n" +
+      "Conclusion : score vaut 17.",
+    canvas: scratchCanvas("Suivre une variable", [
+      { type: "event" },
+      { type: "set_variable", variable: "score", value: 5 },
+      {
+        type: "repeat",
+        times: 4,
+        children: [{ type: "change_variable", variable: "score", value: 3 }],
+      },
+      { type: "say", text: "score" },
+    ]),
+    tags: ["algo_programmation", "variable", "boucle", "short", "canvas"],
   },
 
   /* =========================
@@ -989,18 +1016,29 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
   microId: "algo_defi",
   difficulty: 5,
   theme: "neutral",
+  // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : on repère l’erreur en suivant les valeurs (ici, l’initialisation).
   text:
-    "Explique comment repérer une erreur dans un programme Scratch.",
-  format: "open",
-  expected: ["variable", "condition", "boucle", "ordre"],
-  comparator: "contains_keyword",
-  hint: "Parle de l’ordre des instructions et des valeurs calculées.",
+    "Ce programme doit calculer 5 × 4 = 20 : il ajoute 5 quatre fois à total.\nMais il commence par « mettre total à 5 ». Quel nombre affiche-t-il ?",
+  format: "short",
+  expected: ["25"],
+  comparator: "number_equal",
+  hint: "Suis total tour par tour, en partant de 5.",
   explanation:
-    "Définition : déboguer signifie rechercher une erreur dans un programme.\n\n" +
-    "Méthode : on vérifie les variables, les conditions, les répétitions et l’ordre des blocs.\n\n" +
-    "Exécution : on peut suivre les valeurs étape par étape pour repérer l’erreur.\n\n" +
-    "Conclusion : un bon débogage consiste à tester méthodiquement chaque partie du programme.",
-  tags: ["algo_programmation", "correction", "open", "defi", "methode"],
+    "Définition : déboguer, c’est suivre les valeurs pour trouver où le programme se trompe.\n\n" +
+    "Méthode : on part de la valeur de départ, puis on applique chaque tour de boucle.\n\n" +
+    "Exécution : 5 → 10 → 15 → 20 → 25. Le programme affiche 25 au lieu de 20.\n\n" +
+    "Conclusion : il affiche 25 ; l’erreur est le départ : il fallait mettre total à 0.",
+  canvas: scratchCanvas("Trouver l’erreur", [
+    { type: "event" },
+    { type: "set_variable", variable: "total", value: 5 },
+    {
+      type: "repeat",
+      times: 4,
+      children: [{ type: "change_variable", variable: "total", value: 5 }],
+    },
+    { type: "say", text: "total" },
+  ]),
+  tags: ["algo_programmation", "correction", "short", "defi", "canvas"],
 },
 
 {

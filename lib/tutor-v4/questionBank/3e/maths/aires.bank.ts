@@ -283,27 +283,8 @@ export const airesBank: TutorBankItemV4[] = [
     },
   },
 
-  {
-    kind: "fixed",
-    id: "3e_aire_comprendre_open_1",
-    niveau: "3e",
-    matiere: "maths",
-    notionId: "aire_surface",
-    microId: "aire_comprendre",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Explique avec tes mots la différence entre aire et périmètre.",
-    format: "open",
-    expected: ["surface", "contour"],
-    comparator: "contains_keyword",
-    hint: "Utilise les mots surface et contour.",
-    explanation:
-      "Définition : l’aire mesure une surface, le périmètre mesure un contour.\n\n" +
-      "Méthode : pour distinguer les deux, on se demande si on remplit la figure ou si on en fait le tour.\n\n" +
-      "Calcul : compter des carreaux donne une aire ; additionner les côtés donne un périmètre.\n\n" +
-      "Conclusion : l’aire correspond à l’intérieur de la figure, le périmètre à son contour.",
-    tags: ["aire", "perimetre", "open"],
-  },
+  // 08/10/2026 : « 3e_aire_comprendre_open_1 » (aire d'un rectangle 7 × 3)
+  // supprimée par Frédéric : trop facile pour la 3e.
     /* =========================
      AIRE_TRIANGLE
   ========================= */
@@ -520,17 +501,18 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_triangle",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi on divise par 2 dans la formule de l’aire d’un triangle.",
-    format: "open",
-    expected: ["rectangle", "moitie", "base", "hauteur"],
-    comparator: "contains_keyword",
-    hint: "Compare avec un rectangle de même base et de même hauteur.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un rectangle de 8 cm sur 5 cm est coupé par sa diagonale en deux triangles.\nQuelle est l’aire d’un de ces triangles, en cm² ?",
+    format: "short",
+    expected: ["20", "20 cm²"],
+    comparator: "number_equal",
+    hint: "Les deux triangles sont pareils : chacun est la moitié du rectangle.",
     explanation:
-      "Définition : un triangle peut être vu comme la moitié d’un rectangle de même base et de même hauteur.\n\n" +
-      "Méthode : on compare les deux surfaces.\n\n" +
-      "Calcul : le rectangle a pour aire base × hauteur ; le triangle correspondant en occupe la moitié.\n\n" +
-      "Conclusion : on divise donc par 2 pour obtenir l’aire du triangle.",
-    tags: ["aire", "triangle", "open", "justification"],
+      "Définition : la diagonale coupe le rectangle en deux triangles identiques.\n\n" +
+      "Méthode : aire du triangle = aire du rectangle ÷ 2 : c’est pour ça qu’on divise par 2.\n\n" +
+      "Calcul : 8 × 5 = 40, puis 40 ÷ 2 = 20.\n\n" +
+      "Conclusion : un triangle a une aire de 20 cm².",
+    tags: ["aire", "triangle", "moitie"],
   },
     /* =========================
      AIRE_DISQUE
@@ -721,17 +703,19 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_disque",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique la différence entre l’aire d’un disque et le périmètre d’un cercle.",
-    format: "open",
-    expected: ["surface", "contour", "πr²", "2πr"],
-    comparator: "contains_keyword",
-    hint: "L’aire mesure l’intérieur, le périmètre mesure le tour.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un disque a un rayon de 3 cm.\nQuelle est son aire, arrondie au dixième ?",
+    format: "qcm",
+    choices: ["28,3 cm²", "18,8 cm", "9,4 cm²", "113,1 cm²"],
+    expected: ["28,3 cm²"],
+    comparator: "mcq_exact",
+    hint: "Aire du disque = π × rayon × rayon.",
     explanation:
-      "Définition : l’aire d’un disque mesure sa surface, tandis que le périmètre d’un cercle mesure son contour.\n\n" +
-      "Méthode : on choisit la formule selon ce qu’on cherche.\n\n" +
-      "Calcul : aire = πr² ; périmètre = 2πr.\n\n" +
-      "Conclusion : il ne faut pas confondre surface et contour.",
-    tags: ["aire", "disque", "open", "perimetre"],
+      "Définition : l’aire du disque est π × r² ; la longueur du cercle est 2 × π × r.\n\n" +
+      "Méthode : on met le rayon au carré : 3² = 9.\n\n" +
+      "Calcul : π × 9 ≈ 28,27, donc 28,3 cm². 18,8 cm est la longueur du cercle. 9,4 oublie le carré. 113,1 prend le diamètre 6 au lieu du rayon.\n\n" +
+      "Conclusion : l’aire est environ 28,3 cm².",
+    tags: ["aire", "disque", "qcm", "perimetre"],
   },
     /* =========================
      AIRE_FIGURE_COMPOSEE
@@ -933,18 +917,18 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_figure_composee",
     difficulty: 5,
     theme: "neutral",
-    text:
-      "Explique pourquoi il est souvent utile de découper une figure composée en plusieurs figures simples.",
-    format: "open",
-    expected: ["calcul", "simple", "rectangle", "triangle", "disque"],
-    comparator: "contains_keyword",
-    hint: "Les formules sont connues pour les figures simples.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Une figure est formée d’un carré de 6 cm de côté et d’un triangle posé dessus, de base 6 cm et de hauteur 4 cm.\nQuelle est son aire, en cm² ?",
+    format: "short",
+    expected: ["48", "48 cm²"],
+    comparator: "number_equal",
+    hint: "Calcule l’aire du carré, puis celle du triangle, puis additionne.",
     explanation:
-      "Définition : une figure composée est formée de plusieurs figures simples.\n\n" +
-      "Méthode : on découpe la figure pour utiliser les formules connues.\n\n" +
-      "Calcul : on calcule chaque aire séparément puis on additionne ou on soustrait.\n\n" +
-      "Conclusion : cela rend les calculs plus simples et plus fiables.",
-    tags: ["aire", "figure_composee", "open"],
+      "Définition : une figure composée se découpe en figures simples.\n\n" +
+      "Méthode : aire totale = aire du carré + aire du triangle.\n\n" +
+      "Calcul : carré : 6 × 6 = 36. Triangle : 6 × 4 ÷ 2 = 12. Total : 36 + 12 = 48.\n\n" +
+      "Conclusion : l’aire de la figure est 48 cm².",
+    tags: ["aire", "figure_composee"],
   },
     /* =========================
      AIRE_AGRANDISSEMENT_REDUCTION
@@ -1141,18 +1125,18 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_agrandissement_reduction",
     difficulty: 5,
     theme: "neutral",
-    text:
-      "Explique pourquoi les aires sont multipliées par le carré du coefficient d’agrandissement.",
-    format: "open",
-    expected: ["longueur", "largeur", "carré", "produit"],
-    comparator: "contains_keyword",
-    hint: "Une aire dépend de deux dimensions.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Une figure a une aire de 5 cm². On l’agrandit avec un coefficient 3.\nQuelle est sa nouvelle aire, en cm² ?",
+    format: "short",
+    expected: ["45", "45 cm²"],
+    comparator: "number_equal",
+    hint: "Les longueurs sont multipliées par 3, les aires par 3 × 3.",
     explanation:
-      "Définition : une aire dépend de deux longueurs.\n\n" +
-      "Méthode : si chaque longueur est multipliée par k, alors le produit est multiplié par k × k.\n\n" +
-      "Calcul : k × k = k².\n\n" +
-      "Conclusion : les aires sont multipliées par le carré du coefficient.",
-    tags: ["aire", "agrandissement", "open"],
+      "Définition : dans un agrandissement de coefficient k, les aires sont multipliées par k².\n\n" +
+      "Méthode : une aire dépend de deux longueurs, chacune multipliée par 3 : l’aire est multipliée par 3 × 3 = 9.\n\n" +
+      "Calcul : 5 × 9 = 45.\n\n" +
+      "Conclusion : la nouvelle aire est 45 cm². ⚠️ 15 cm² (5 × 3) est l’erreur la plus fréquente.",
+    tags: ["aire", "agrandissement"],
   },
     /* =========================
      AIRE_DEFIS
@@ -1374,18 +1358,18 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_defi",
     difficulty: 5,
     theme: "neutral",
-    text:
-      "Explique pourquoi il faut toujours vérifier l’unité lorsqu’on calcule une aire.",
-    format: "open",
-    expected: ["cm²", "m²", "surface", "unité"],
-    comparator: "contains_keyword",
-    hint: "Une aire ne s’exprime pas en cm mais en cm².",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un rectangle mesure 2 m sur 30 cm.\nQuelle est son aire, en cm² ?",
+    format: "short",
+    expected: ["6000", "6 000", "6000 cm²", "6 000 cm²"],
+    comparator: "number_equal",
+    hint: "Mets d’abord les deux longueurs dans la même unité : 2 m = 200 cm.",
     explanation:
-      "Définition : une aire mesure une surface.\n\n" +
-      "Méthode : on utilise des unités carrées adaptées.\n\n" +
-      "Calcul : une aire peut être exprimée en cm², m², km²…\n\n" +
-      "Conclusion : vérifier l’unité permet d’éviter les erreurs de sens.",
-    tags: ["aire", "open", "unite"],
+      "Définition : pour calculer une aire, les deux longueurs doivent être dans la même unité.\n\n" +
+      "Méthode : on convertit 2 m en cm : 2 m = 200 cm.\n\n" +
+      "Calcul : 200 × 30 = 6 000.\n\n" +
+      "Conclusion : l’aire est 6 000 cm². ⚠️ 2 × 30 = 60 mélange les m et les cm.",
+    tags: ["aire", "unite", "conversion"],
   },
 
   /* ===== AIRE_COMPRENDRE (compléments) ===== */

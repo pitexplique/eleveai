@@ -313,17 +313,18 @@ export const affineBank: TutorBankItemV4[] = [
     microId: "affine_reconnaitre",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique avec tes mots comment reconnaître une fonction affine.",
-    format: "open",
-    expected: ["ax", "b", "droite"],
-    comparator: "contains_keyword",
-    hint: "Tu peux parler de la formule f(x) = ax + b ou de la droite sur un graphique.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : reconnaître la forme ax + b, même écrite dans l’autre sens.
+    text: "f(x) = 5 − 2x est une fonction affine f(x) = ax + b.\nQuelle est la valeur de a ?",
+    format: "short",
+    expected: ["−2", "-2"],
+    comparator: "number_equal",
+    hint: "a est le nombre qui multiplie x, avec son signe.",
     explanation:
-      "Définition : une fonction affine est une fonction de la forme f(x) = ax + b.\n\n" +
-      "Méthode : on peut la reconnaître par sa formule ou par sa représentation graphique.\n\n" +
-      "Calcul : par exemple, f(x) = 2x + 3 est affine, et son graphique est une droite.\n\n" +
-      "Conclusion : une fonction affine se reconnaît par la forme ax + b ou par une droite sur un graphique.",
-    tags: ["affine_fonction", "reconnaitre", "open"],
+      "Définition : une fonction affine s’écrit f(x) = ax + b. a est le nombre devant x.\n\n" +
+      "Méthode : on réécrit f(x) dans l’ordre ax + b : 5 − 2x = −2x + 5.\n\n" +
+      "Calcul : le nombre devant x est −2, et b = 5. Répondre 5, c’est prendre b ; répondre 2, c’est oublier le signe −.\n\n" +
+      "Conclusion : a = −2.",
+    tags: ["affine_fonction", "reconnaitre", "short"],
   },
     /* =========================
      AFFINE_COEFF_DIRECTEUR
@@ -551,17 +552,18 @@ export const affineBank: TutorBankItemV4[] = [
     microId: "affine_coeff_directeur",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique ce que représente le coefficient directeur d’une fonction affine.",
-    format: "open",
-    expected: ["variation", "pente", "augmente"],
-    comparator: "contains_keyword",
-    hint: "Tu peux parler de la pente ou de la variation de f(x).",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : a = ce que gagne f(x) quand x augmente de 1.
+    text: "f(x) = 3x + 1.\nQuand x augmente de 1, de combien f(x) augmente-t-il ?",
+    format: "short",
+    expected: ["3"],
+    comparator: "number_equal",
+    hint: "Calcule f(4) puis f(5), et fais la différence.",
     explanation:
       "Définition : le coefficient directeur est le nombre a dans f(x) = ax + b.\n\n" +
-      "Méthode : on l’interprète comme la variation de f(x) lorsque x augmente de 1.\n\n" +
-      "Calcul : si a = 3, alors quand x augmente de 1, f(x) augmente de 3.\n\n" +
-      "Conclusion : le coefficient directeur mesure la pente ou la variation régulière de la fonction affine.",
-    tags: ["affine_fonction", "coefficient_directeur", "open"],
+      "Méthode : quand x augmente de 1, f(x) augmente de a.\n\n" +
+      "Calcul : f(4) = 3 × 4 + 1 = 13 et f(5) = 3 × 5 + 1 = 16. 16 − 13 = 3.\n\n" +
+      "Conclusion : f(x) augmente de 3, le coefficient directeur.",
+    tags: ["affine_fonction", "coefficient_directeur", "short"],
   },
   
     /* =========================
@@ -782,17 +784,18 @@ export const affineBank: TutorBankItemV4[] = [
     microId: "affine_ordonnee_origine",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique ce que représente l’ordonnée à l’origine d’une fonction affine.",
-    format: "open",
-    expected: ["f(0)", "axe", "ordonnées"],
-    comparator: "contains_keyword",
-    hint: "Tu peux parler de f(0) ou du point où la droite coupe l’axe vertical.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : l’ordonnée à l’origine, c’est f(0).
+    text: "f(x) = 4x − 3.\nLa droite de f coupe l’axe des ordonnées. En quelle ordonnée ?",
+    format: "short",
+    expected: ["−3", "-3"],
+    comparator: "number_equal",
+    hint: "Sur l’axe des ordonnées, x = 0. Calcule f(0).",
     explanation:
-      "Définition : l’ordonnée à l’origine est la valeur de la fonction quand x = 0.\n\n" +
-      "Méthode : dans une formule f(x) = ax + b, c’est b ; sur un graphique, c’est le point où la droite coupe l’axe des ordonnées.\n\n" +
-      "Calcul : par exemple, pour f(x) = 2x + 5, on a f(0) = 5.\n\n" +
-      "Conclusion : l’ordonnée à l’origine correspond à la valeur de départ de la fonction.",
-    tags: ["affine_fonction", "ordonnee_origine", "open"],
+      "Définition : l’ordonnée à l’origine est la valeur de f(x) quand x = 0.\n\n" +
+      "Méthode : on calcule f(0).\n\n" +
+      "Calcul : f(0) = 4 × 0 − 3 = −3. Répondre 4, c’est prendre le coefficient directeur.\n\n" +
+      "Conclusion : la droite coupe l’axe des ordonnées en −3.",
+    tags: ["affine_fonction", "ordonnee_origine", "short"],
   },
     /* =========================
      AFFINE_CALCUL_IMAGE
@@ -1032,17 +1035,18 @@ export const affineBank: TutorBankItemV4[] = [
     microId: "affine_calcul_image",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment calculer l’image d’un nombre par une fonction affine.",
-    format: "open",
-    expected: ["remplace", "x", "calcule"],
-    comparator: "contains_keyword",
-    hint: "Il faut remplacer x par le nombre donné.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "f(x) = 3x − 2.\nCalcule f(4).",
+    format: "short",
+    expected: ["10"],
+    comparator: "number_equal",
+    hint: "Remplace x par 4.",
     explanation:
-      "Définition : l’image d’un nombre est le résultat obtenu en appliquant la fonction à ce nombre.\n\n" +
-      "Méthode : dans f(x) = ax + b, on remplace x par le nombre donné.\n\n" +
-      "Calcul : par exemple, si f(x) = 2x + 3, alors f(4) = 2 × 4 + 3 = 11.\n\n" +
-      "Conclusion : calculer une image revient à remplacer x puis à effectuer le calcul.",
-    tags: ["affine_fonction", "image", "open", "methode"],
+      "Définition : f(4) est l’image de 4 par f.\n\n" +
+      "Méthode : dans f(x) = 3x − 2, on remplace x par 4.\n\n" +
+      "Calcul : f(4) = 3 × 4 − 2 = 12 − 2 = 10.\n\n" +
+      "Conclusion : f(4) = 10.",
+    tags: ["affine_fonction", "image", "short"],
   },
     /* =========================
      AFFINE_EXPRESSION
@@ -1284,17 +1288,24 @@ export const affineBank: TutorBankItemV4[] = [
     microId: "affine_expression",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment déterminer l’expression d’une fonction affine à partir d’un tableau.",
-    format: "open",
-    expected: ["f(0)", "variation", "ax", "b"],
-    comparator: "contains_keyword",
-    hint: "Cherche d’abord b avec f(0), puis a avec la variation.",
+    // 08/10/2026 : précise et simple (Frédéric) — un tableau précis ; toutes les écritures justes acceptées.
+    text: "f est une fonction affine. Voici son tableau de valeurs.\nÉcris f(x) sous la forme ax + b.",
+    format: "short",
+    expected: ["2x + 5", "f(x) = 2x + 5", "5 + 2x", "f(x) = 5 + 2x", "2 × x + 5", "f(x) = 2 × x + 5", "y = 2x + 5", "y = 5 + 2x"],
+    comparator: "exact_text",
+    hint: "b = f(0). a = de combien f(x) augmente quand x augmente de 1.",
     explanation:
       "Définition : une fonction affine s’écrit f(x) = ax + b.\n\n" +
-      "Méthode : dans un tableau, on lit f(0) pour trouver b, puis on regarde de combien f(x) varie quand x augmente de 1 pour trouver a.\n\n" +
-      "Calcul : si f(0) = 5 et si f(x) augmente de 2 quand x augmente de 1, alors b = 5 et a = 2.\n\n" +
-      "Conclusion : l’expression est alors f(x) = 2x + 5.",
-    tags: ["affine_fonction", "expression", "open", "methode"],
+      "Méthode : on lit f(0) pour trouver b, puis on regarde de combien f(x) augmente quand x augmente de 1 pour trouver a.\n\n" +
+      "Calcul : f(0) = 5, donc b = 5. De 5 à 7, puis de 7 à 9 : + 2 à chaque fois, donc a = 2.\n\n" +
+      "Conclusion : f(x) = 2x + 5.",
+    canvas: fonctionTableauCanvas({
+      titre: "Tableau de valeurs de f",
+      xValues: [0, 1, 2, 3],
+      yValues: [5, 7, 9, 11],
+      consigne: "Lis f(0), puis regarde de combien f(x) augmente.",
+    }),
+    tags: ["affine_fonction", "expression", "short", "canvas"],
   },
     /* =========================
      AFFINE_GRAPHIQUE
@@ -1551,17 +1562,25 @@ export const affineBank: TutorBankItemV4[] = [
     microId: "affine_graphique",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment lire graphiquement l’expression d’une fonction affine.",
-    format: "open",
-    expected: ["droite", "ordonnée", "coefficient", "origine"],
-    comparator: "contains_keyword",
-    hint: "Il faut repérer l’ordonnée à l’origine et le coefficient directeur.",
+    // 08/10/2026 : précise et simple (Frédéric) — une droite précise ; on lit a.
+    // Frédéric (08/10) : les points ne sont plus écrits, on LIT le graphique.
+    text: "La droite représente f(x) = ax + b.\nLis le graphique : quelle est la valeur de a ?",
+    format: "short",
+    expected: ["2"],
+    comparator: "number_equal",
+    hint: "De x = 0 à x = 1, de combien la droite monte-t-elle ?",
     explanation:
-      "Définition : une fonction affine s’écrit f(x) = ax + b.\n\n" +
-      "Méthode : on lit b au point où la droite coupe l’axe vertical, puis on détermine a avec la pente de la droite.\n\n" +
-      "Calcul : si la droite coupe l’axe vertical en 3 et monte de 2 quand x augmente de 1, alors b = 3 et a = 2.\n\n" +
-      "Conclusion : l’expression est f(x) = 2x + 3.",
-    tags: ["affine_fonction", "graphique", "open", "expression"],
+      "Définition : dans f(x) = ax + b, a est le coefficient directeur.\n\n" +
+      "Méthode : quand x augmente de 1, la droite monte de a.\n\n" +
+      "Calcul : de (0 ; 1) à (1 ; 3), x augmente de 1 et f(x) passe de 1 à 3 : 3 − 1 = 2. Répondre 1, c’est lire b ; répondre 3, c’est lire f(1).\n\n" +
+      "Conclusion : a = 2 (et b = 1, donc f(x) = 2x + 1).",
+    canvas: fonctionGraphiqueCanvas({
+      titre: "Droite de f",
+      a: 2,
+      b: 1,
+      point: { x: 1, y: 3, label: "(1 ; 3)" },
+    }),
+    tags: ["affine_fonction", "graphique", "short", "canvas"],
   },
     /* =========================
      AFFINE_PROBLEMES
@@ -1785,17 +1804,18 @@ export const affineBank: TutorBankItemV4[] = [
     microId: "affine_probleme",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi une fonction affine peut modéliser une situation réelle.",
-    format: "open",
-    expected: ["variation", "fixe", "proportionnelle", "grandeurs"],
-    comparator: "contains_keyword",
-    hint: "Pense à une situation avec un coût fixe puis un coût variable.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : une partie fixe + une partie par km.
+    text: "Un taxi coûte 4 € au départ, puis 2 € par km.\nCombien coûte un trajet de 10 km ?",
+    format: "short",
+    expected: ["24"],
+    comparator: "number_equal",
+    hint: "Prix = 2 × (nombre de km) + 4.",
     explanation:
-      "Définition : une fonction affine modélise une situation où une grandeur dépend d’une autre avec une évolution régulière.\n\n" +
-      "Méthode : on distingue une partie fixe et une partie qui varie toujours de la même façon.\n\n" +
-      "Calcul : par exemple, un taxi facture un prix de départ puis un prix par kilomètre.\n\n" +
-      "Conclusion : les fonctions affines permettent de représenter de nombreuses situations de la vie réelle.",
-    tags: ["affine_fonction", "probleme", "open", "modelisation"],
+      "Définition : le prix est une fonction affine du nombre de km : f(x) = 2x + 4.\n\n" +
+      "Méthode : on remplace x par 10.\n\n" +
+      "Calcul : f(10) = 2 × 10 + 4 = 20 + 4 = 24. 20 € oublie le prix de départ ; 60 € multiplie aussi le départ par 10.\n\n" +
+      "Conclusion : le trajet coûte 24 €.",
+    tags: ["affine_fonction", "probleme", "short", "modelisation"],
   },
     /* =========================
      AFFINE_DEFIS
@@ -2033,17 +2053,19 @@ export const affineBank: TutorBankItemV4[] = [
     microId: "affine_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique comment comparer deux fonctions affines dans une situation de tarifs.",
-    format: "open",
-    expected: ["calcule", "même", "x", "compare"],
-    comparator: "contains_keyword",
-    hint: "Il faut comparer les prix pour une même valeur de x.",
+    // 08/10/2026 : précise et simple (Frédéric) — deux tarifs précis, une durée précise.
+    text: "Offre A : 30 € par mois.\nOffre B : 10 € d’inscription, puis 25 € par mois.\nPour 3 mois, quelle offre est la moins chère ?",
+    format: "qcm",
+    choices: ["offre B", "offre A", "même prix"],
+    expected: ["offre B"],
+    comparator: "mcq_exact",
+    hint: "Calcule le prix de chaque offre pour 3 mois.",
     explanation:
-      "Définition : comparer deux fonctions affines consiste à comparer leurs images pour une même valeur de x.\n\n" +
-      "Méthode : dans une situation de tarifs, on choisit la même quantité ou la même durée pour les deux offres.\n\n" +
-      "Calcul : on calcule f(x) et g(x), puis on compare les deux résultats.\n\n" +
-      "Conclusion : l’offre la moins chère est celle qui donne la plus petite image pour cette valeur de x.",
-    tags: ["affine_fonction", "defi", "open", "comparaison"],
+      "Définition : comparer deux tarifs, c’est calculer les deux prix pour la même durée.\n\n" +
+      "Méthode : on calcule le prix de A et le prix de B pour 3 mois.\n\n" +
+      "Calcul : A : 30 × 3 = 90 €. B : 25 × 3 + 10 = 75 + 10 = 85 €.\n\n" +
+      "Conclusion : pour 3 mois, l’offre B est la moins chère (85 € contre 90 €).",
+    tags: ["affine_fonction", "defi", "qcm", "comparaison"],
   },
 
   {
@@ -2055,17 +2077,19 @@ export const affineBank: TutorBankItemV4[] = [
     microId: "affine_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique la différence entre coefficient directeur et ordonnée à l’origine.",
-    format: "open",
-    expected: ["coefficient", "variation", "origine", "f(0)"],
-    comparator: "contains_keyword",
-    hint: "L’un indique la pente, l’autre indique la valeur de départ.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : ne pas confondre a et b, même dans l’autre ordre.
+    text: "h(x) = 2 + 5x.\nQuelle est son ordonnée à l’origine ?",
+    format: "qcm",
+    choices: ["2", "5", "7", "0"],
+    expected: ["2"],
+    comparator: "mcq_exact",
+    hint: "L’ordonnée à l’origine, c’est h(0).",
     explanation:
-      "Définition : dans f(x) = ax + b, a est le coefficient directeur et b est l’ordonnée à l’origine.\n\n" +
-      "Méthode : on interprète a comme la variation régulière, et b comme la valeur quand x = 0.\n\n" +
-      "Calcul : dans f(x) = 2x + 5, le coefficient directeur est 2 et l’ordonnée à l’origine est 5.\n\n" +
-      "Conclusion : le coefficient directeur indique la pente, tandis que l’ordonnée à l’origine indique la valeur de départ.",
-    tags: ["affine_fonction", "defi", "open", "synthese"],
+      "Définition : dans h(x) = ax + b, a est le coefficient directeur (devant x) et b est l’ordonnée à l’origine.\n\n" +
+      "Méthode : on calcule h(0).\n\n" +
+      "Calcul : h(0) = 2 + 5 × 0 = 2. 5 est le coefficient directeur ; 7 vient de 2 + 5 ; 0 confond « origine » et zéro.\n\n" +
+      "Conclusion : l’ordonnée à l’origine est 2.",
+    tags: ["affine_fonction", "defi", "qcm", "synthese"],
   },
 
   /* ===== AFFINE_RECONNAITRE (compléments) ===== */

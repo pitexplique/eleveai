@@ -127,27 +127,8 @@ export const perimetresBank: TutorBankItemV4[] = [
     tags: ["perimetre", "aire", "piege"],
   },
 
-  {
-    kind: "fixed",
-    id: "3e_aire_perimetre_comprendre_open_1",
-    niveau: "3e",
-    matiere: "maths",
-    notionId: "aire_perimetre",
-    microId: "aire_perimetre_comprendre",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Explique avec tes mots ce qu’est le périmètre d’une figure.",
-    format: "open",
-    expected: ["contour", "tour", "longueur"],
-    comparator: "contains_keyword",
-    hint: "Imagine que tu marches autour de la figure.",
-    explanation:
-      "Définition : le périmètre est la longueur du contour d’une figure.\n\n" +
-      "Méthode : pour le trouver, on additionne les longueurs des côtés qui forment le tour.\n\n" +
-      "Calcul : par exemple, le périmètre d’un triangle est la somme de ses trois côtés.\n\n" +
-      "Conclusion : le périmètre mesure le tour de la figure.",
-    tags: ["perimetre", "open", "definition"],
-  },
+  // 08/10/2026 : « 3e_aire_perimetre_comprendre_open_1 » (périmètre d'un
+  // rectangle 9 × 4) supprimée par Frédéric : doublon du défi, trop facile.
   /* =========================
      PERIMETRE_POLYGONE
   ========================= */
@@ -370,17 +351,18 @@ export const perimetresBank: TutorBankItemV4[] = [
     microId: "aire_perimetre_polygone",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment calculer le périmètre d’un polygone.",
-    format: "open",
-    expected: ["additionne", "côtés", "contour"],
-    comparator: "contains_keyword",
-    hint: "Un polygone est formé de plusieurs côtés.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un pentagone a des côtés de 4 cm, 6 cm, 3 cm, 5 cm et 7 cm.\nQuel est son périmètre, en cm ?",
+    format: "short",
+    expected: ["25", "25 cm"],
+    comparator: "number_equal",
+    hint: "Additionne les longueurs des cinq côtés.",
     explanation:
-      "Définition : le périmètre d’un polygone est la longueur totale de son contour.\n\n" +
-      "Méthode : on repère tous les côtés du contour.\n\n" +
-      "Calcul : on additionne toutes leurs longueurs.\n\n" +
-      "Conclusion : le périmètre est la somme des côtés du polygone.",
-    tags: ["perimetre", "polygone", "open"],
+      "Définition : le périmètre d’un polygone est la longueur de son contour.\n\n" +
+      "Méthode : on additionne tous les côtés.\n\n" +
+      "Calcul : 4 + 6 + 3 + 5 + 7 = 25.\n\n" +
+      "Conclusion : le périmètre est 25 cm.",
+    tags: ["perimetre", "polygone"],
   },
     /* =========================
      PERIMETRE_CERCLE
@@ -569,17 +551,19 @@ export const perimetresBank: TutorBankItemV4[] = [
     microId: "aire_perimetre_cercle",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique la différence entre la longueur d’un cercle et l’aire d’un disque.",
-    format: "open",
-    expected: ["contour", "surface", "2πr", "πr²"],
-    comparator: "contains_keyword",
-    hint: "La longueur mesure le tour, l’aire mesure l’intérieur.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un cercle a un rayon de 5 cm.\nQuelle est sa longueur, arrondie au dixième ?",
+    format: "qcm",
+    choices: ["31,4 cm", "78,5 cm", "15,7 cm", "62,8 cm"],
+    expected: ["31,4 cm"],
+    comparator: "mcq_exact",
+    hint: "Longueur du cercle = 2 × π × rayon.",
     explanation:
-      "Définition : la longueur du cercle mesure son contour, l’aire du disque mesure sa surface intérieure.\n\n" +
-      "Méthode : on choisit la formule selon ce que l’on cherche.\n\n" +
-      "Calcul : longueur = 2πr ; aire = πr².\n\n" +
-      "Conclusion : il faut bien distinguer contour et surface.",
-    tags: ["perimetre", "cercle", "open", "aire"],
+      "Définition : la longueur du cercle est 2 × π × r ; l’aire du disque est π × r².\n\n" +
+      "Méthode : on remplace r par 5.\n\n" +
+      "Calcul : 2 × π × 5 ≈ 31,42, donc 31,4 cm. 78,5 est l’aire du disque (π × 5²). 15,7 oublie le 2. 62,8 prend le diamètre 10 au lieu du rayon.\n\n" +
+      "Conclusion : la longueur du cercle est environ 31,4 cm.",
+    tags: ["perimetre", "cercle", "qcm", "aire"],
   },
     /* =========================
      PERIMETRE_FIGURE_COMPOSEE
@@ -802,18 +786,18 @@ export const perimetresBank: TutorBankItemV4[] = [
     microId: "aire_perimetre_figure_composee",
     difficulty: 5,
     theme: "neutral",
-    text:
-      "Explique comment calculer le périmètre d’une figure composée.",
-    format: "open",
-    expected: ["contour", "segments", "arcs", "extérieur"],
-    comparator: "contains_keyword",
-    hint: "Il faut suivre seulement le bord extérieur de la figure.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Une figure est formée d’un carré de 4 cm de côté et d’un demi-disque collé sur un de ses côtés.\nQuel est son périmètre, arrondi au dixième ?",
+    format: "short",
+    expected: ["18,3", "18.3", "18,3 cm", "18.3 cm"],
+    comparator: "number_equal",
+    hint: "Ne compte que le bord extérieur : le côté collé au demi-disque est à l’intérieur.",
     explanation:
-      "Définition : le périmètre d’une figure composée est la longueur totale de son contour extérieur.\n\n" +
-      "Méthode : on repère toutes les parties du bord : segments droits et éventuellement arcs de cercle.\n\n" +
-      "Calcul : on additionne uniquement les longueurs du contour extérieur.\n\n" +
-      "Conclusion : pour éviter les erreurs, il faut suivre le tour de la figure dans l’ordre.",
-    tags: ["perimetre", "figure_composee", "open"],
+      "Définition : le périmètre d’une figure composée est la longueur de son bord extérieur.\n\n" +
+      "Méthode : on compte 3 côtés du carré, plus le demi-cercle de diamètre 4 cm.\n\n" +
+      "Calcul : 3 × 4 = 12. Demi-cercle : π × 4 ÷ 2 ≈ 6,28. Total : 12 + 6,28 ≈ 18,28.\n\n" +
+      "Conclusion : le périmètre est environ 18,3 cm. ⚠️ 22,3 compte en trop le côté intérieur.",
+    tags: ["perimetre", "figure_composee", "arrondi"],
   },
     /* =========================
      PERIMETRE_DEFIS
@@ -1011,17 +995,19 @@ export const perimetresBank: TutorBankItemV4[] = [
     microId: "aire_perimetre_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi deux figures peuvent avoir la même aire mais des périmètres différents.",
-    format: "open",
-    expected: ["aire", "surface", "périmètre", "contour"],
-    comparator: "contains_keyword",
-    hint: "Compare une surface et un contour.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    // Frédéric (08/10) : on demande l'ÉCART, l'idée « même aire, périmètres différents » devient le calcul.
+    text: "Un carré de 6 cm de côté et un rectangle de 9 cm sur 4 cm ont la même aire : 36 cm².\nDe combien de cm le périmètre du rectangle dépasse-t-il celui du carré ?",
+    format: "short",
+    expected: ["2", "2 cm"],
+    comparator: "number_equal",
+    hint: "Calcule les deux périmètres, puis la différence.",
     explanation:
-      "Définition : l’aire mesure la surface, tandis que le périmètre mesure le contour.\n\n" +
-      "Méthode : deux figures peuvent occuper la même surface mais avoir des formes différentes.\n\n" +
-      "Calcul : un rectangle long et étroit peut avoir la même aire qu’un carré, mais un contour plus grand.\n\n" +
-      "Conclusion : aire et périmètre ne varient pas toujours de la même façon.",
-    tags: ["perimetre", "aire", "open", "defi"],
+      "Définition : l’aire mesure la surface, le périmètre mesure le tour.\n\n" +
+      "Méthode : on calcule le périmètre de chaque figure, puis on soustrait.\n\n" +
+      "Calcul : rectangle 9 + 4 + 9 + 4 = 26 cm ; carré 6 × 4 = 24 cm ; 26 − 24 = 2.\n\n" +
+      "Conclusion : 2 cm de plus : même aire, mais pas le même périmètre.",
+    tags: ["perimetre", "aire", "qcm", "defi"],
   },
 
   /* ===== PERIMETRE_COMPRENDRE (compléments) ===== */

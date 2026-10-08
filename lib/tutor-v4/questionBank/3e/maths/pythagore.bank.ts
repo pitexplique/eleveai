@@ -240,18 +240,18 @@ export const pythagore3eBank: TutorBankItemV4[] = [
     microId: "pythagore_reconnaitre",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi on ne peut pas utiliser directement le théorème de Pythagore dans n’importe quel triangle.",
-    format: "open",
-    expected: ["triangle", "rectangle"],
-    comparator: "contains_keyword",
-    hint: "Le théorème de Pythagore demande une condition avant de commencer.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : l’angle droit dit où est l’hypoténuse.
+    text: "Le triangle EFG est rectangle en F. EF = 6 cm et FG = 8 cm.\nCombien mesure EG ?",
+    format: "short",
+    expected: ["10", "10 cm"],
+    comparator: "number_equal",
+    hint: "L’angle droit est en F : l’hypoténuse est le côté en face de F.",
     explanation:
-      `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
-      `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
-      `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
-      ("On ne peut pas utiliser directement le théorème de Pythagore dans n’importe quel triangle, car ce théorème s’applique seulement dans un triangle rectangle. Il faut donc d’abord savoir ou prouver que le triangle est rectangle.") +
-      `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
-    tags: ["pythagore_theoreme", "reconnaitre", "open"],
+      `Définition : le théorème de Pythagore s’utilise seulement dans un triangle rectangle. L’hypoténuse est le côté en face de l’angle droit.\n\n` +
+      `Méthode : l’angle droit est en F, donc l’hypoténuse est [EG]. On écrit EG² = EF² + FG².\n\n` +
+      `Calcul : EG² = 6² + 8² = 36 + 64 = 100. Donc EG = √100 = 10.\n\n` +
+      `Conclusion : EG mesure 10 cm.`,
+    tags: ["pythagore_theoreme", "reconnaitre", "hypotenuse"],
   },
 
   // =========================
@@ -357,23 +357,29 @@ export const pythagore3eBank: TutorBankItemV4[] = [
     microId: "pythagore_calculer_hypotenuse",
     difficulty: 3,
     theme: "neutral",
-    hint: "Ta réponse doit expliquer pourquoi on additionne les carrés.",
-    tags: ["pythagore_theoreme", "hypotenuse", "open", "redaction"],
+    hint: "Pour l’hypoténuse, on additionne les carrés des deux autres côtés.",
+    tags: ["pythagore_theoreme", "hypotenuse", "redaction"],
+    // 08/10/2026 : précise et simple (Frédéric) — l’étape clé de la rédaction : BC² = AB² + AC².
     generate: () => {
       const { a, b, c } = randomChoice(pythagoreanTriples);
+      const labels = randomChoice(triangleNames);
+      const ab = sideName(labels, "AB");
+      const ac = `${labels.A}${labels.C}`;
+      const bc = sideName(labels, "BC");
 
       return {
-        text: `Rédige une justification pour montrer que l’hypoténuse vaut ${c} cm si les côtés de l’angle droit mesurent ${a} cm et ${b} cm.`,
-        format: "open",
-        expected: [String(a), String(b), String(c), "Pythagore"],
-        comparator: "contains_keyword",
-        explanation: `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
-          `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
-          `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
-          (`Dans un triangle rectangle, d’après le théorème de Pythagore, le carré de l’hypoténuse est égal à la somme des carrés des deux côtés de l’angle droit. On calcule : ${a}² + ${b}² = ${a * a} + ${b * b} = ${
-          c * c
-        }. Donc l’hypoténuse vaut √${c * c} = ${c} cm.`) +
-          `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
+        text: `Le triangle ${labels.A}${labels.B}${labels.C} est rectangle en ${labels.A}. ${ab} = ${a} cm et ${ac} = ${b} cm.\nCalcule ${bc}².`,
+        format: "short",
+        expected: [String(c * c)],
+        comparator: "number_equal",
+        explanation: `Définition : dans un triangle rectangle, le carré de l’hypoténuse est égal à la somme des carrés des deux autres côtés.\n\n` +
+          `Méthode : l’angle droit est en ${labels.A}, donc l’hypoténuse est [${bc}]. On écrit ${bc}² = ${ab}² + ${ac}².\n\n` +
+          `Calcul : ${bc}² = ${a}² + ${b}² = ${a * a} + ${b * b} = ${c * c}.\n\n` +
+          `Conclusion : ${bc}² = ${c * c}, donc ${bc} = √${c * c} = ${c} cm.`,
+        canvas: rightTriangleFigure({
+          labels,
+          sideLabels: { AB: String(a), CA: String(b), BC: "?" },
+        }),
       };
     },
   },
@@ -487,27 +493,31 @@ export const pythagore3eBank: TutorBankItemV4[] = [
     microId: "pythagore_calculer_cote",
     difficulty: 4,
     theme: "neutral",
-    hint: "Explique pourquoi il faut soustraire les carrés.",
-    tags: ["pythagore_theoreme", "cote", "open", "redaction"],
+    hint: "Pour un côté de l’angle droit, on soustrait les carrés.",
+    tags: ["pythagore_theoreme", "cote", "redaction"],
+    // 08/10/2026 : précise et simple (Frédéric) — l’étape clé : AC² = BC² − AB² (on soustrait).
     generate: () => {
       const triple = randomChoice(pythagoreanTriples);
       const knownLeg = triple.a;
       const missingLeg = triple.b;
+      const labels = randomChoice(triangleNames);
+      const ab = sideName(labels, "AB");
+      const ac = `${labels.A}${labels.C}`;
+      const bc = sideName(labels, "BC");
 
       return {
-        text: `Rédige une justification pour montrer que l’autre côté de l’angle droit vaut ${missingLeg} cm si l’hypoténuse vaut ${triple.c} cm et un côté vaut ${knownLeg} cm.`,
-        format: "open",
-        expected: [String(triple.c), String(knownLeg), String(missingLeg), "Pythagore"],
-        comparator: "contains_keyword",
-        explanation: `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
-          `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
-          `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
-          (`Dans un triangle rectangle, d’après le théorème de Pythagore, le carré de l’hypoténuse est égal à la somme des carrés des deux côtés de l’angle droit. Ici, on connaît l’hypoténuse et un côté. On calcule donc : ${triple.c}² - ${knownLeg}² = ${
-          triple.c * triple.c
-        } - ${knownLeg * knownLeg} = ${missingLeg * missingLeg}. La longueur cherchée vaut √${
-          missingLeg * missingLeg
-        } = ${missingLeg} cm.`) +
-          `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
+        text: `Le triangle ${labels.A}${labels.B}${labels.C} est rectangle en ${labels.A}. ${bc} = ${triple.c} cm et ${ab} = ${knownLeg} cm.\nCalcule ${ac}².`,
+        format: "short",
+        expected: [String(missingLeg * missingLeg)],
+        comparator: "number_equal",
+        explanation: `Définition : dans un triangle rectangle, ${bc}² = ${ab}² + ${ac}² ([${bc}] est l’hypoténuse).\n\n` +
+          `Méthode : on cherche un côté de l’angle droit, donc on soustrait : ${ac}² = ${bc}² − ${ab}².\n\n` +
+          `Calcul : ${ac}² = ${triple.c}² − ${knownLeg}² = ${triple.c * triple.c} − ${knownLeg * knownLeg} = ${missingLeg * missingLeg}.\n\n` +
+          `Conclusion : ${ac}² = ${missingLeg * missingLeg}, donc ${ac} = √${missingLeg * missingLeg} = ${missingLeg} cm.`,
+        canvas: rightTriangleFigure({
+          labels,
+          sideLabels: { AB: String(knownLeg), CA: "?", BC: String(triple.c) },
+        }),
       };
     },
   },
@@ -626,24 +636,30 @@ export const pythagore3eBank: TutorBankItemV4[] = [
     microId: "pythagore_reciproque",
     difficulty: 4,
     theme: "neutral",
-    hint: "Ta réponse doit contenir la comparaison des carrés et une conclusion.",
-    tags: ["pythagore_theoreme", "reciproque", "open", "redaction"],
+    hint: "Repère d’abord le plus grand côté : il n’entre pas dans la somme.",
+    tags: ["pythagore_theoreme", "reciproque", "redaction"],
+    // 08/10/2026 : précise et simple (Frédéric) — l’étape clé de la réciproque : la somme des carrés des deux PETITS côtés.
+    // Frédéric (08/10) : l'élève conclut lui-même (« est-il rectangle ? ») ; une fois sur
+    // deux le grand côté est allongé de 1 cm, et le triangle n'est PAS rectangle.
     generate: () => {
       const triple = randomChoice(pythagoreanTriples);
+      const rectangle = Math.random() < 0.5;
+      const c = rectangle ? triple.c : triple.c + 1;
       const left = triple.a * triple.a + triple.b * triple.b;
+      const ordre = shuffle([triple.a, triple.b, c]);
 
       return {
-        text: `Rédige une justification pour montrer qu’un triangle de côtés ${triple.a} cm, ${triple.b} cm et ${triple.c} cm est rectangle.`,
-        format: "open",
-        expected: [String(triple.a), String(triple.b), String(triple.c), "rectangle"],
-        comparator: "contains_keyword",
-        explanation: `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
-          `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
-          `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
-          (`Le plus grand côté mesure ${triple.c} cm. On compare la somme des carrés des deux plus petits côtés avec le carré du plus grand côté : ${triple.a}² + ${triple.b}² = ${left} et ${triple.c}² = ${
-          triple.c * triple.c
-        }. Les deux résultats sont égaux. Donc, d’après la réciproque du théorème de Pythagore, le triangle est rectangle.`) +
-          `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
+        text: `Un triangle a pour côtés ${ordre[0]} cm, ${ordre[1]} cm et ${ordre[2]} cm.\nEst-il rectangle ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: [rectangle ? "oui" : "non"],
+        comparator: "mcq_exact",
+        explanation: `Définition : pour la réciproque de Pythagore, on compare la somme des carrés des deux plus petits côtés avec le carré du plus grand.\n\n` +
+          `Méthode : le plus grand côté mesure ${c} cm. Les deux plus petits mesurent ${triple.a} cm et ${triple.b} cm.\n\n` +
+          `Calcul : ${triple.a}² + ${triple.b}² = ${triple.a * triple.a} + ${triple.b * triple.b} = ${left}. Et ${c}² = ${c * c}.\n\n` +
+          (rectangle
+            ? `Conclusion : ${left} = ${c * c}, donc le triangle est rectangle.`
+            : `Conclusion : ${left} ≠ ${c * c}, donc le triangle n’est pas rectangle.`),
       };
     },
   },
@@ -718,18 +734,23 @@ export const pythagore3eBank: TutorBankItemV4[] = [
     microId: "pythagore_rediger",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique la différence entre le théorème de Pythagore et sa réciproque.",
-    format: "open",
-    expected: ["théorème", "réciproque", "rectangle"],
-    comparator: "contains_keyword",
-    hint: "Dans un cas, on sait déjà que le triangle est rectangle. Dans l’autre, on veut le vérifier.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : le théorème calcule, la réciproque prouve.
+    text: "Le triangle ABC est rectangle en A. AB = 6 cm et AC = 8 cm. On cherche BC.\nQue faut-il utiliser ?",
+    format: "qcm",
+    choices: [
+      "le théorème de Pythagore",
+      "la réciproque de Pythagore",
+      "le théorème de Thalès",
+    ],
+    expected: ["le théorème de Pythagore"],
+    comparator: "mcq_exact",
+    hint: "On sait déjà que le triangle est rectangle, et on cherche une longueur.",
     explanation:
-      `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
-      `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
-      `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
-      ("Le théorème de Pythagore sert à calculer une longueur dans un triangle dont on sait déjà qu’il est rectangle. La réciproque sert à montrer qu’un triangle est rectangle à partir de ses trois longueurs.") +
-      `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
-    tags: ["pythagore_theoreme", "redaction", "open"],
+      `Définition : le théorème de Pythagore calcule une longueur dans un triangle rectangle. La réciproque prouve qu’un triangle est rectangle.\n\n` +
+      `Méthode : ici, on sait déjà que ABC est rectangle en A, et on cherche BC.\n\n` +
+      `Calcul : BC² = 6² + 8² = 36 + 64 = 100, donc BC = 10 cm.\n\n` +
+      `Conclusion : on utilise le théorème de Pythagore. Il n’y a pas de droites parallèles, donc pas de Thalès.`,
+    tags: ["pythagore_theoreme", "redaction", "qcm"],
   },
 
   // =========================
@@ -802,30 +823,37 @@ export const pythagore3eBank: TutorBankItemV4[] = [
     microId: "pythagore_defi",
     difficulty: 5,
     theme: "neutral",
-    hint: "Commence par repérer le plus grand côté, puis vérifie l’égalité de Pythagore.",
-    tags: ["pythagore_theoreme", "defi", "open", "brevet"],
+    hint: "Compare le carré du plus grand côté avec la somme des carrés des deux autres. L’angle droit serait en face du plus grand côté.",
+    tags: ["pythagore_theoreme", "defi", "brevet", "reciproque"],
+    // 08/10/2026 : précise et simple (Frédéric) — type brevet : rectangle ou non, et si oui, en quel sommet.
     generate: () => {
       const isRight = randomChoice([true, false]);
       const triple = isRight
         ? randomChoice(pythagoreanTriples)
         : randomChoice(falseTriples);
+      const labels = randomChoice(triangleNames);
+      const ab = sideName(labels, "AB");
+      const ac = `${labels.A}${labels.C}`;
+      const bc = sideName(labels, "BC");
 
       const left = triple.a * triple.a + triple.b * triple.b;
       const right = triple.c * triple.c;
+      const nonRectangle = "pas rectangle";
+      const bonne = left === right ? labels.A : nonRectangle;
 
       return {
-        text: `Type brevet : un triangle a pour longueurs ${triple.a} cm, ${triple.b} cm et ${triple.c} cm. Rédige une réponse complète pour dire s’il est rectangle ou non.`,
-        format: "open",
-        expected: [String(triple.a), String(triple.b), String(triple.c)],
-        comparator: "contains_keyword",
+        text: `Le triangle ${labels.A}${labels.B}${labels.C} a pour côtés ${ab} = ${triple.a} cm, ${ac} = ${triple.b} cm et ${bc} = ${triple.c} cm.\nEst-il rectangle ? Si oui, en quel sommet ?`,
+        format: "qcm",
+        choices: shuffle([labels.A, labels.B, labels.C]).concat([nonRectangle]),
+        expected: [bonne],
+        comparator: "mcq_exact",
         explanation:
-          `Définition : dans un triangle rectangle, le théorème de Pythagore relie les carrés des longueurs des trois côtés.\n\n` +
-          `Méthode : on repère l’hypoténuse ou le plus grand côté, puis on choisit le théorème direct ou sa réciproque.\n\n` +
-          `Calcul : on compare ou on calcule les carrés des longueurs indiquées. ` +
+          `Définition : réciproque de Pythagore : si le carré du plus grand côté est égal à la somme des carrés des deux autres, le triangle est rectangle.\n\n` +
+          `Méthode : le plus grand côté est [${bc}]. On compare ${bc}² avec ${ab}² + ${ac}².\n\n` +
+          `Calcul : ${bc}² = ${triple.c}² = ${right} et ${ab}² + ${ac}² = ${triple.a * triple.a} + ${triple.b * triple.b} = ${left}.\n\n` +
           (left === right
-            ? `Le plus grand côté mesure ${triple.c} cm. On compare ${triple.a}² + ${triple.b}² et ${triple.c}² : ${left} = ${right}. L’égalité de Pythagore est vérifiée. Donc, d’après la réciproque du théorème de Pythagore, le triangle est rectangle.`
-            : `Le plus grand côté mesure ${triple.c} cm. On compare ${triple.a}² + ${triple.b}² et ${triple.c}² : ${left} ≠ ${right}. L’égalité de Pythagore n’est pas vérifiée. Donc le triangle n’est pas rectangle.`) +
-          `\n\nConclusion : on peut alors donner la longueur cherchée ou conclure sur le triangle.`,
+            ? `Conclusion : ${right} = ${left}, donc le triangle est rectangle. L’angle droit est en face de [${bc}], en ${labels.A}.`
+            : `Conclusion : ${right} ≠ ${left}, donc le triangle n’est pas rectangle.`),
       };
     },
   },

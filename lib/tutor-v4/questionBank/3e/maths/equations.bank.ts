@@ -177,27 +177,7 @@ export const equationsBank: TutorBankItemV4[] = [
   },
 },
 
-{
-  kind: "fixed",
-  id: "3e_equation_reconnaitre_open_1",
-  niveau: "3e",
-  matiere: "maths",
-  notionId: "equation_resolution",
-  microId: "equation_reconnaitre",
-  difficulty: 2,
-  theme: "neutral",
-  text: "Explique avec tes mots ce qu’est une équation.",
-  format: "open",
-  expected: ["égalité", "inconnue"],
-  comparator: "contains_keyword",
-  hint: "Utilise les mots égalité et inconnue.",
-  explanation:
-    "Définition : une équation est une égalité qui contient une inconnue.\n\n" +
-    "Méthode : pour reconnaître une équation, on cherche un signe égal et une lettre.\n\n" +
-    "Calcul : par exemple, 2x + 3 = 11 est une équation car elle contient x et =.\n\n" +
-    "Conclusion : une équation sert à chercher une valeur inconnue.",
-  tags: ["equation", "reconnaitre", "open"],
-},
+// 08/10/2026 : « 3e_equation_reconnaitre_open_1 » (x + 5 = 9) supprimée par Frédéric : trop facile pour la 3e.
 {
   kind: "fixed",
   id: "3e_equation_simple_fixed_1",
@@ -427,17 +407,18 @@ export const equationsBank: TutorBankItemV4[] = [
   microId: "equation_resoudre_simple",
   difficulty: 3,
   theme: "neutral",
-  text: "Explique pourquoi on doit faire la même opération des deux côtés d’une équation.",
-  format: "open",
-  expected: ["égalité", "deux côtés", "conserver"],
-  comparator: "contains_keyword",
-  hint: "Une équation est une égalité : il faut garder l’équilibre.",
+  // 08/10/2026 : précise et simple (Frédéric)
+  text: "On résout 3x + 5 = 20.\nOn enlève 5 des deux côtés : 3x = … Quel nombre obtient-on à droite ?",
+  format: "short",
+  expected: ["15"],
+  comparator: "number_equal",
+  hint: "À droite aussi, on enlève 5 : 20 − 5.",
   explanation:
-    "Définition : une équation est une égalité entre deux expressions.\n\n" +
-    "Méthode : pour conserver l’égalité, on effectue la même opération sur les deux membres.\n\n" +
-    "Calcul : si on enlève 5 à gauche, on doit aussi enlever 5 à droite.\n\n" +
-    "Conclusion : faire la même opération des deux côtés permet de garder une équation équivalente.",
-  tags: ["equation", "raisonnement", "open"],
+    "Définition : une équation est une égalité, comme une balance en équilibre.\n\n" +
+    "Méthode : pour garder l’égalité, on fait la même opération des deux côtés.\n\n" +
+    "Calcul : à gauche, 3x + 5 − 5 = 3x. À droite, 20 − 5 = 15. Donc 3x = 15.\n\n" +
+    "Conclusion : on obtient 15 (et ensuite x = 15 ÷ 3 = 5).",
+  tags: ["equation", "raisonnement", "short"],
 },
 {
   kind: "fixed",
@@ -623,17 +604,18 @@ export const equationsBank: TutorBankItemV4[] = [
   microId: "equation_resoudre_developper",
   difficulty: 4,
   theme: "neutral",
-  text: "Explique pourquoi il faut développer 2(x + 5) avant de résoudre 2(x + 5) = 18.",
-  format: "open",
-  expected: ["développer", "2x", "10", "isoler"],
-  comparator: "contains_keyword",
-  hint: "Le 2 multiplie toute la parenthèse.",
+  // 08/10/2026 : précise et simple (Frédéric)
+  text: "Pour résoudre 2(x + 5) = 18, on développe d’abord 2(x + 5).\nÉcris 2(x + 5) sans parenthèses.",
+  format: "short",
+  expected: ["2x + 10"],
+  comparator: "expression_developpee",
+  hint: "Le 2 multiplie x ET 5.",
   explanation:
-    "Définition : développer permet de supprimer une parenthèse en distribuant le facteur à chaque terme.\n\n" +
-    "Méthode : on transforme 2(x + 5) en une expression sans parenthèses.\n\n" +
-    "Calcul : 2(x + 5) = 2x + 10. L’équation devient 2x + 10 = 18, puis 2x = 8, donc x = 4.\n\n" +
-    "Conclusion : développer aide à obtenir une équation plus simple à résoudre.",
-  tags: ["equation", "developper", "open", "raisonnement"],
+    "Définition : développer, c’est supprimer la parenthèse en multipliant chaque terme.\n\n" +
+    "Méthode : 2 multiplie x, puis 2 multiplie 5.\n\n" +
+    "Calcul : 2(x + 5) = 2 × x + 2 × 5 = 2x + 10. L’équation devient 2x + 10 = 18, donc 2x = 8 et x = 4.\n\n" +
+    "Conclusion : 2(x + 5) = 2x + 10.",
+  tags: ["equation", "developper", "short", "raisonnement"],
 },
 {
   kind: "fixed",
@@ -644,10 +626,12 @@ export const equationsBank: TutorBankItemV4[] = [
   microId: "equation_produit_nul",
   difficulty: 3,
   theme: "neutral",
-  text: "Résoudre : (x - 3)(x + 5) = 0",
-  format: "open",
-  expected: ["3", "-5"],
-  comparator: "contains_keyword",
+  // 08/10/2026 : précise et simple (Frédéric)
+  text: "Quelles sont les solutions de (x - 3)(x + 5) = 0 ?",
+  format: "qcm",
+  choices: ["x = 3 ou x = -5", "x = -3 ou x = 5", "x = 3 ou x = 5", "x = 3 seulement"],
+  expected: ["x = 3 ou x = -5"],
+  comparator: "mcq_exact",
   hint: "Un produit est nul si au moins un facteur est nul.",
   explanation:
     "Définition : un produit est nul si au moins un de ses facteurs est nul.\n\n" +
@@ -697,14 +681,22 @@ export const equationsBank: TutorBankItemV4[] = [
   hint: "Annule chaque facteur séparément.",
   tags: ["equation", "produit_nul", "template"],
   generate: () => {
+    // 08/10/2026 : précise et simple (Frédéric) — un QCM, deux solutions DIFFÉRENTES.
     const a = randomInt(1, 9);
-    const b = randomInt(1, 9);
+    let b = randomInt(1, 9);
+    while (b === a) b = randomInt(1, 9);
+    const correct = `x = ${a} ou x = ${b}`;
 
     return {
-      text: `Résoudre : (x - ${a})(x - ${b}) = 0`,
-      format: "open",
-      expected: [String(a), String(b)],
-      comparator: "contains_keyword",
+      text: `Quelles sont les solutions de (x - ${a})(x - ${b}) = 0 ?`,
+      format: "qcm",
+      choices: makeChoices(correct, [
+        `x = -${a} ou x = -${b}`,
+        `x = ${a} seulement`,
+        `x = ${b} seulement`,
+      ]),
+      expected: [correct],
+      comparator: "mcq_exact",
       explanation:
         `Définition : un produit est nul si au moins un facteur est nul.\n\n` +
         `Méthode : on annule chaque facteur séparément.\n\n` +
@@ -729,11 +721,12 @@ export const equationsBank: TutorBankItemV4[] = [
     const a = randomInt(1, 9);
     const b = randomInt(1, 9);
 
+    // 08/10/2026 : précise et simple (Frédéric) — une seule réponse : la solution négative.
     return {
-      text: `Résoudre : (x - ${a})(x + ${b}) = 0`,
-      format: "open",
-      expected: [String(a), String(-b)],
-      comparator: "contains_keyword",
+      text: `L’équation (x - ${a})(x + ${b}) = 0 a deux solutions.\nDonne la solution négative.`,
+      format: "short",
+      expected: [String(-b), `x = ${-b}`, `x=${-b}`],
+      comparator: "number_equal",
       explanation:
         `Définition : un produit est nul si au moins un facteur est nul.\n\n` +
         `Méthode : on résout séparément x - ${a} = 0 et x + ${b} = 0.\n\n` +
@@ -759,13 +752,15 @@ export const equationsBank: TutorBankItemV4[] = [
     const solution1 = randomInt(1, 8);
     const b = a * solution1;
 
-    const solution2 = randomInt(1, 8);
+    let solution2 = randomInt(1, 8);
+    while (solution2 === solution1) solution2 = randomInt(1, 8);
 
+    // 08/10/2026 : précise et simple (Frédéric) — on donne une solution, l’élève trouve l’autre.
     return {
-      text: `Résoudre : (${a}x - ${b})(x - ${solution2}) = 0`,
-      format: "open",
-      expected: [String(solution1), String(solution2)],
-      comparator: "contains_keyword",
+      text: `L’équation (${a}x - ${b})(x - ${solution2}) = 0 a pour solution x = ${solution2}.\nQuelle est l’autre solution ?`,
+      format: "short",
+      expected: [String(solution1), `x = ${solution1}`, `x=${solution1}`],
+      comparator: "number_equal",
       explanation:
         `Définition : pour qu’un produit soit nul, il suffit qu’un de ses facteurs soit nul.\n\n` +
         `Méthode : on annule chaque facteur séparément.\n\n` +
@@ -858,17 +853,18 @@ export const equationsBank: TutorBankItemV4[] = [
   microId: "equation_produit_nul",
   difficulty: 4,
   theme: "neutral",
-  text: "Explique pourquoi l’équation (x - 5)(x + 3) = 0 a deux solutions.",
-  format: "open",
-  expected: ["produit", "nul", "facteur", "5", "-3"],
-  comparator: "contains_keyword",
-  hint: "Chaque facteur peut être nul.",
+  // 08/10/2026 : précise et simple (Frédéric)
+  text: "On remplace x par -3 dans (x - 5)(x + 3).\nQuel résultat obtient-on ?",
+  format: "short",
+  expected: ["0"],
+  comparator: "number_equal",
+  hint: "Calcule d’abord -3 + 3.",
   explanation:
     "Définition : un produit est nul si au moins un facteur est nul.\n\n" +
-    "Méthode : on cherche les valeurs qui annulent chacun des deux facteurs.\n\n" +
-    "Calcul : x - 5 = 0 donne x = 5. Et x + 3 = 0 donne x = -3.\n\n" +
-    "Conclusion : l’équation a deux solutions : 5 et -3.",
-  tags: ["equation", "produit_nul", "open", "raisonnement"],
+    "Méthode : on remplace x par -3 dans chaque facteur.\n\n" +
+    "Calcul : -3 - 5 = -8 et -3 + 3 = 0. Donc (-8) × 0 = 0.\n\n" +
+    "Conclusion : on obtient 0. Donc -3 est une solution de (x - 5)(x + 3) = 0, comme 5.",
+  tags: ["equation", "produit_nul", "short", "raisonnement"],
 },
 {
   kind: "fixed",
@@ -1062,17 +1058,18 @@ export const equationsBank: TutorBankItemV4[] = [
   microId: "equation_verifier",
   difficulty: 3,
   theme: "neutral",
-  text: "Explique comment vérifier si un nombre est solution d’une équation.",
-  format: "open",
-  expected: ["remplace", "égalité", "vraie"],
-  comparator: "contains_keyword",
-  hint: "On remplace l’inconnue par le nombre proposé.",
+  // 08/10/2026 : précise et simple (Frédéric)
+  text: "On veut savoir si 3 est solution de 4x - 2 = 10.\nCalcule 4x - 2 pour x = 3.",
+  format: "short",
+  expected: ["10"],
+  comparator: "number_equal",
+  hint: "Remplace x par 3 : 4 × 3 - 2.",
   explanation:
-    "Définition : vérifier une solution consiste à savoir si une valeur rend l’équation vraie.\n\n" +
-    "Méthode : on remplace l’inconnue par la valeur proposée dans l’équation.\n\n" +
-    "Calcul : si les deux membres donnent le même résultat, l’égalité est vraie.\n\n" +
-    "Conclusion : le nombre est solution seulement s’il rend l’égalité vraie.",
-  tags: ["equation", "verifier", "open", "methode"],
+    "Définition : un nombre est solution s’il rend l’égalité vraie.\n\n" +
+    "Méthode : on remplace x par 3 dans le membre de gauche.\n\n" +
+    "Calcul : 4 × 3 - 2 = 12 - 2 = 10.\n\n" +
+    "Conclusion : on trouve 10, comme à droite. Donc 3 est solution.",
+  tags: ["equation", "verifier", "short", "methode"],
 },
 
 {
@@ -1302,17 +1299,18 @@ export const equationsBank: TutorBankItemV4[] = [
   microId: "equation_probleme",
   difficulty: 4,
   theme: "neutral",
-  text: "Explique les étapes pour résoudre un problème avec une équation.",
-  format: "open",
-  expected: ["inconnue", "équation", "résoudre", "vérifier"],
-  comparator: "contains_keyword",
-  hint: "Pense aux étapes : choisir x, traduire, résoudre, conclure.",
+  // 08/10/2026 : précise et simple (Frédéric)
+  text: "Le triple d’un nombre, augmenté de 2, vaut 17.\nQuel est ce nombre ?",
+  format: "short",
+  expected: ["5", "x = 5", "x=5"],
+  comparator: "number_equal",
+  hint: "Appelle x le nombre : 3x + 2 = 17.",
   explanation:
-    "Définition : résoudre un problème avec une équation consiste à utiliser une inconnue pour traduire une situation.\n\n" +
-    "Méthode : on choisit une inconnue, on écrit une équation, on la résout, puis on répond à la question.\n\n" +
-    "Calcul : par exemple, si 3x + 2 = 17, alors 3x = 15, donc x = 5.\n\n" +
-    "Conclusion : il faut toujours terminer par une phrase qui répond au problème.",
-  tags: ["equation", "probleme", "open", "methode"],
+    "Définition : on traduit le problème par une équation, avec x le nombre cherché.\n\n" +
+    "Méthode : le triple de x s’écrit 3x. Augmenté de 2 : 3x + 2. L’équation est 3x + 2 = 17.\n\n" +
+    "Calcul : 3x = 17 - 2 = 15, puis x = 15 ÷ 3 = 5. Vérification : 3 × 5 + 2 = 17.\n\n" +
+    "Conclusion : le nombre est 5.",
+  tags: ["equation", "probleme", "short", "methode"],
 },
 
 {
