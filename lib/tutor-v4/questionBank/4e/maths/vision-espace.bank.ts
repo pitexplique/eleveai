@@ -260,7 +260,10 @@ const SECTIONS = [
     adv: "parallèlement à sa base",
     forme: "un rectangle",
     rep: "une coupe parallèle à une face",
-    leurres: ["une coupe passant par trois sommets", "une coupe passant par la pointe", "aucune coupe ne donne cette forme"],
+    // ⛔ 08/10/2026 — un plan qui passe par deux arêtes opposées d'un pavé passe
+    // par trois sommets (et même quatre) et donne AUSSI un rectangle : ce
+    // leurre était juste. Restent deux leurres, le QCM a trois lignes.
+    leurres: ["une coupe passant par la pointe", "aucune coupe ne donne cette forme"],
     objets: ["un pavé droit", "un cake", "une plaquette de beurre", "une boîte à chaussures", "un bloc de pâte d'amande"],
   },
   {
@@ -482,9 +485,11 @@ export const visionEspaceBank: TutorBankItemV4[] = [
       const wrongs = cas.pl
         ? ["des disques", "des triangles", "des rectangles", "des carrés", "des losanges", "des trapèzes"]
         : ["un disque", "un triangle", "un rectangle", "un carré", "un losange", "un trapèze"];
-      // Un carré est un rectangle : on ne met pas « rectangle » en leurre d'un carré.
+      // Un carré est un rectangle ET un losange : ni l'un ni l'autre en leurre d'un carré.
       const leurres = wrongs.filter(
-        (w) => !(cas.rep.includes("carré") && w.includes("rectangle")) && !(cas.rep.includes("rectangle") && w.includes("carré"))
+        (w) =>
+          !(cas.rep.includes("carré") && (w.includes("rectangle") || w.includes("losange"))) &&
+          !(cas.rep.includes("rectangle") && w.includes("carré"))
       );
       return {
         text,
@@ -545,13 +550,14 @@ export const visionEspaceBank: TutorBankItemV4[] = [
       return {
         text,
         format: "qcm",
-        choices: makeChoices(cas.forme, [
-          "un carré",
-          "un rectangle",
-          "un disque",
-          "un triangle",
-          "un losange",
-        ]),
+        // ⛔ 08/10/2026 — un carré est AUSSI un rectangle et un losange : ces
+        // deux leurres étaient de bonnes réponses quand la vue est un carré.
+        choices: makeChoices(
+          cas.forme,
+          ["un carré", "un rectangle", "un disque", "un triangle", "un losange"].filter(
+            (w) => !(cas.forme === "un carré" && (w === "un rectangle" || w === "un losange"))
+          )
+        ),
         expected: [cas.forme],
         comparator: "mcq_exact",
         explanation:
@@ -658,14 +664,19 @@ export const visionEspaceBank: TutorBankItemV4[] = [
       return {
         text,
         format: "qcm",
-        choices: makeChoices(cas.patron, [
-          "6 carrés",
-          "6 rectangles",
-          "2 disques et un rectangle",
-          "1 disque et une portion de disque",
-          "1 carré et 4 triangles",
-          "2 triangles et 3 rectangles",
-        ]),
+        // ⛔ 08/10/2026 — six carrés SONT six rectangles : « 6 rectangles » n'est
+        // pas un leurre pour le patron d'un cube.
+        choices: makeChoices(
+          cas.patron,
+          [
+            "6 carrés",
+            "6 rectangles",
+            "2 disques et un rectangle",
+            "1 disque et une portion de disque",
+            "1 carré et 4 triangles",
+            "2 triangles et 3 rectangles",
+          ].filter((w) => !(cas.patron === "6 carrés" && w === "6 rectangles"))
+        ),
         expected: [cas.patron],
         comparator: "mcq_exact",
         explanation:
@@ -779,13 +790,17 @@ export const visionEspaceBank: TutorBankItemV4[] = [
       return {
         text,
         format: "qcm",
-        choices: makeChoices(cas.forme, [
-          "un carré",
-          "un rectangle",
-          "un disque",
-          "un triangle",
-          "un losange",
-        ]),
+        // ⛔ 08/10/2026 — un carré est AUSSI un rectangle et un losange ; et la
+        // tranche d'un cylindre ou d'un pavé PEUT être carrée (cylindre aussi
+        // haut que large) : « un carré » n'est pas un leurre d'« un rectangle ».
+        choices: makeChoices(
+          cas.forme,
+          ["un carré", "un rectangle", "un disque", "un triangle", "un losange"].filter(
+            (w) =>
+              !(cas.forme === "un carré" && (w === "un rectangle" || w === "un losange")) &&
+              !(cas.forme === "un rectangle" && w === "un carré")
+          )
+        ),
         expected: [cas.forme],
         comparator: "mcq_exact",
         explanation:
@@ -861,15 +876,21 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     generate: () => {
       const cas = randomChoice([
         { liste: ["un cube", "un pavé droit", "un prisme droit", "une boule"], intrus: "une boule", pourquoi: "les trois autres ont des faces planes et des arêtes ; la boule n'en a aucune" },
-        { liste: ["un cylindre", "un cône", "une boule", "un cube"], intrus: "un cube", pourquoi: "les trois autres ont une surface courbe ; le cube n'en a pas" },
-        { liste: ["un cône", "une pyramide", "un cylindre"], intrus: "un cylindre", pourquoi: "le cône et la pyramide se terminent en pointe, le cylindre non" },
+        // ⛔ 08/10/2026 — chaque liste n'a plus qu'UN intrus. Avant : dans « un
+        // cylindre, un cône, une boule, un cube », le cône était AUSSI seul à
+        // avoir une pointe ; dans « un cône, une pyramide, un cylindre », la
+        // pyramide était seule sans surface courbe ; etc. Le correcteur teste
+        // trois propriétés (surface courbe, pointe, deux bases parallèles) et le
+        // solide modèle.
+        { liste: ["une boîte de conserve", "une bougie cylindrique", "un rouleau d'essuie-tout", "une boîte à chaussures"], intrus: "une boîte à chaussures", pourquoi: "les trois autres ont une surface courbe (ce sont des cylindres) ; la boîte à chaussures, un pavé droit, n'a que des faces planes" },
+        { liste: ["un cône", "un cornet de glace", "un chapeau de fête pointu", "un cylindre"], intrus: "un cylindre", pourquoi: "les trois autres se terminent en pointe (ce sont des cônes) ; le cylindre non" },
         { liste: ["un cube", "un pavé droit", "un prisme droit", "un cône"], intrus: "un cône", pourquoi: "les trois autres ont deux bases identiques et parallèles" },
-        { liste: ["une boule", "un cylindre", "un cône", "une pyramide"], intrus: "une pyramide", pourquoi: "les trois autres ont une surface courbe" },
-        { liste: ["un cube", "un pavé droit", "une pyramide", "un cylindre"], intrus: "un cylindre", pourquoi: "les trois autres n'ont que des faces planes ; le cylindre a une surface courbe" },
+        { liste: ["une boule", "une bille", "un ballon de basket", "une pyramide"], intrus: "une pyramide", pourquoi: "les trois autres sont des boules, avec une surface courbe ; la pyramide n'a que des faces planes" },
+        { liste: ["un cube", "un pavé droit", "un prisme droit", "un cylindre"], intrus: "un cylindre", pourquoi: "les trois autres n'ont que des faces planes ; le cylindre a une surface courbe" },
         { liste: ["un cube", "un pavé droit", "un prisme droit", "une pyramide"], intrus: "une pyramide", pourquoi: "les trois autres ont deux bases identiques et parallèles ; la pyramide n'a qu'une base et une pointe" },
         { liste: ["un dé à jouer", "une brique de lait", "une boîte à chaussures", "un ballon de foot"], intrus: "un ballon de foot", pourquoi: "les trois autres se modélisent par des pavés droits (le dé est un cube, donc un pavé) ; le ballon est une boule" },
         { liste: ["une boîte de conserve", "un rouleau d'essuie-tout", "une bougie cylindrique", "un cornet de glace"], intrus: "un cornet de glace", pourquoi: "les trois autres sont des cylindres ; le cornet est un cône" },
-        { liste: ["la pyramide du Louvre", "un cornet de glace", "un chapeau de fête pointu", "une boîte de conserve"], intrus: "une boîte de conserve", pourquoi: "les trois autres se terminent en pointe ; la boîte de conserve (un cylindre) non" },
+        { liste: ["un tipi", "un cornet de glace", "un chapeau de fête pointu", "une boîte de conserve"], intrus: "une boîte de conserve", pourquoi: "les trois autres se terminent en pointe ; la boîte de conserve (un cylindre) non" },
         { liste: ["un dé à jouer", "un morceau de sucre", "un glaçon cubique", "une brique de lait"], intrus: "une brique de lait", pourquoi: "les trois autres sont des cubes ; la brique de lait est un pavé droit dont les faces ne sont pas toutes des carrés" },
         { liste: ["un ballon de basket", "une bille", "une orange", "une boîte de camembert"], intrus: "une boîte de camembert", pourquoi: "les trois autres se modélisent par des boules ; la boîte de camembert est un cylindre" },
         { liste: ["une tente canadienne", "un toit à deux pentes", "une boîte de barre chocolatée triangulaire", "une pyramide d'Égypte"], intrus: "une pyramide d'Égypte", pourquoi: "les trois autres sont des prismes droits à base triangulaire ; la pyramide n'a qu'une base" },

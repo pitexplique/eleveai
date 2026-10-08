@@ -65,12 +65,28 @@ const net = (x: number) => Math.round(x * 10000) / 10000;
 function fr(n: number): string {
   const x = net(n);
   return Number.isInteger(x)
-    ? x.toLocaleString("fr-FR").replace(/[  ]/g, " ")
+    ? x.toLocaleString("fr-FR").replace(/[  ]/g, " ")
     : String(x).replace(".", ",");
 }
 
-/** La réponse attendue d'une question à saisir : « 2.5 » et « 2,5 ». */
-const attendu = (x: number) => Array.from(new Set([String(net(x)), fr(x)]));
+/** La réponse attendue d'une question à saisir, UNITÉ COMPRISE quand l'énoncé en
+ *  impose une (Frédéric, 06/10) : « 2,7 g/cm³ » d'abord. Suivent les écritures
+ *  que le comparateur ne rapproche pas tout seul : le nombre nu quand l'unité a
+ *  une barre (« 20 » pour « 20 km/h »), les milliers serrés (« 4200 m »), les
+ *  exposants tapés en chiffres (« g/cm3 ») et l'unité en toutes lettres
+ *  (« 15 minutes », « 54 euros »). « 2.7 » est accepté par le comparateur, qui
+ *  lit la virgule et le point de la même façon. */
+const EN_LETTRES: Record<string, string> = { "€": "euros", min: "minutes", h: "heures", s: "secondes", j: "jours" };
+function attendu(x: number, u = ""): string[] {
+  const f = fr(x);
+  if (!u) return Array.from(new Set([f, f.replace(/ /g, "")]));
+  const l = [`${f} ${u}`];
+  if (u.includes("/") || f.includes(" ")) l.push(f);
+  if (f.includes(" ")) l.push(`${f.replace(/ /g, "")} ${u}`);
+  if (/[²³]/.test(u)) l.push(`${f} ${u.replace(/²/g, "2").replace(/³/g, "3")}`);
+  if (EN_LETTRES[u]) l.push(`${f} ${EN_LETTRES[u]}`);
+  return Array.from(new Set(l));
+}
 
 /* ---------------------------------------------------------------------------
    Petite grammaire : les tables écrivent leurs groupes nominaux AVEC l'article
@@ -505,7 +521,7 @@ export const grandeursBank: TutorBankItemV4[] = [
       return {
         text: randomChoice(c.textes),
         format: "short",
-        expected: attendu(c.res),
+        expected: attendu(c.res, c.u),
         comparator: "number_equal",
         explanation:
           `Définition : ${c.def}.\n\n` +
@@ -582,7 +598,7 @@ export const grandeursBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: attendu(q),
+        expected: attendu(q, s.u),
         comparator: "number_equal",
         explanation:
           `Définition : ${s.cherche} est une grandeur QUOTIENT, en ${s.u}.\n\n` +
@@ -670,16 +686,18 @@ export const grandeursBank: TutorBankItemV4[] = [
       const pu = randomChoice(p.pu);
       const qte = randomChoice(p.q);
       const total = net(pu * qte);
-      const text = randomChoice([
+      const k = Math.floor(Math.random() * 4);
+      const text = [
         `${cap(p.lieu)}, ${qte} ${p.u} ${p.part} coûtent ${fr(total)} €. Quel est le prix ${p.par}, en ${p.unite} ?`,
         `On paie ${fr(total)} € pour ${qte} ${p.u} ${p.part} ${p.lieu}. Calcule le prix ${p.par}, en ${p.unite}.`,
         `${cap(p.lieu)}, la facture s'élève à ${fr(total)} € pour ${qte} ${p.u} ${p.part}. Combien coûte ${p.un}, en euros ?`,
         `Prix payé ${p.lieu} : ${fr(total)} € ; quantité : ${qte} ${p.u} ${p.part}. Quel est le prix ${p.par}, en ${p.unite} ?`,
-      ]);
+      ][k];
       return {
         text,
         format: "short",
-        expected: attendu(pu),
+        // « en euros » : la réponse est un prix en € ; sinon dans l'unité demandée (€/kg…).
+        expected: attendu(pu, k === 2 ? "€" : p.unite),
         comparator: "number_equal",
         explanation:
           `Définition : un prix ${p.par} est une grandeur quotient, en ${p.unite}.\n\n` +
@@ -896,7 +914,7 @@ export const grandeursBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: attendu(resultat),
+        expected: attendu(resultat, c.vers),
         comparator: "number_equal",
         explanation:
           "Définition : convertir vers une unité PLUS PETITE donne un nombre plus grand — il en faut davantage.\n\n" +
@@ -951,7 +969,8 @@ export const grandeursBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: attendu(rep),
+        // « Combien de litres… en une heure ? » : « 1 800 L » est aussi une bonne réponse.
+        expected: [...attendu(rep, versHeure ? "L/h" : "L/min"), ...(text.startsWith("Combien de litres") || text.startsWith("En une heure") ? [`${fr(rep)} L`] : [])],
         comparator: "number_equal",
         explanation:
           "Définition : un débit est une grandeur quotient — des litres PAR unité de temps. Convertir le débit, c'est convertir la durée du dénominateur.\n\n" +
@@ -1012,7 +1031,8 @@ export const grandeursBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: attendu(rep),
+        // « combien de mètres… en une seconde ? » : « 25 m » est aussi une bonne réponse.
+        expected: [...attendu(rep, versMs ? "m/s" : "km/h"), ...(text.includes("combien de mètres") ? [`${fr(rep)} m`] : [])],
         comparator: "number_equal",
         explanation:
           "Définition : une vitesse est une grandeur quotient ; on convertit le haut (km → m) ET le bas (h → s).\n\n" +
@@ -1101,10 +1121,12 @@ export const grandeursBank: TutorBankItemV4[] = [
         { gn: "l'argent", part: "d'argent", g: 10.5 },
         { gn: "le béton", part: "de béton", g: 2.4 },
         { gn: "le verre", part: "de verre", g: 2.5 },
-        { gn: "le liège", part: "de liège", g: 0.24 },
+        // ⛔ 08/10/2026 — masses volumiques AU DIXIÈME (Frédéric) : le liège (0,24),
+        // l'essence (0,75) et le lait (1,03) sont sortis de la table.
+        { gn: "le bois de pin", part: "de bois de pin", g: 0.5 },
         { gn: "le bois de chêne", part: "de bois de chêne", g: 0.7 },
-        { gn: "l'essence", part: "d'essence", g: 0.75 },
-        { gn: "le lait", part: "de lait", g: 1.03 },
+        { gn: "l'alcool", part: "d'alcool", g: 0.8 },
+        { gn: "le zinc", part: "de zinc", g: 7.1 },
         { gn: "le granit", part: "de granit", g: 2.7 },
         { gn: "le sable sec", part: "de sable sec", g: 1.6 },
       ]);
@@ -1125,7 +1147,7 @@ export const grandeursBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: attendu(rep),
+        expected: attendu(rep, versKg ? "kg/m³" : "g/cm³"),
         comparator: "number_equal",
         explanation:
           "Définition : une masse volumique est une grandeur quotient — une masse PAR unité de volume.\n\n" +
@@ -1343,7 +1365,7 @@ export const grandeursBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: attendu(n2),
+        expected: attendu(n2, s.res),
         comparator: "number_equal",
         explanation:
           `Définition : ${s.nomQ} est une grandeur quotient, en ${s.u}.\n\n` +
@@ -1519,7 +1541,7 @@ export const grandeursBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: attendu(minutes),
+        expected: attendu(minutes, "min"),
         comparator: "number_equal",
         explanation:
           "Définition : une vitesse est un quotient, distance ÷ durée ; donc la durée est distance ÷ vitesse.\n\n" +
@@ -1545,6 +1567,20 @@ const PRENOMS = [
   { p: "Chloé", il: "elle" },
   { p: "Noah", il: "il" },
   { p: "Maëlle", il: "elle" },
+  { p: "Yanis", il: "il" },
+  { p: "Aïcha", il: "elle" },
+  { p: "Tom", il: "il" },
+  { p: "Lina", il: "elle" },
+  { p: "Kenzo", il: "il" },
+  { p: "Jade", il: "elle" },
+  { p: "Adam", il: "il" },
+  { p: "Manon", il: "elle" },
+  { p: "Ilan", il: "il" },
+  { p: "Fatou", il: "elle" },
+  { p: "Hugo", il: "il" },
+  { p: "Zoé", il: "elle" },
+  { p: "Mathis", il: "il" },
+  { p: "Nour", il: "elle" },
 ] as const;
 
 // Une grandeur, son unité, une unité IMPOSSIBLE mais tentante, et d'autres

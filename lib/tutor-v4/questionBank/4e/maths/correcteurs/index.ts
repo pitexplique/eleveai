@@ -10,6 +10,7 @@ import { CORRECTEURS as expressionsLitterales } from "./expressions-litterales";
 import { CORRECTEURS as factorisation } from "./factorisation";
 import { CORRECTEURS as fonctions } from "./fonctions";
 import { CORRECTEURS as fractions } from "./fractions";
+import { CORRECTEURS as grandeurs } from "./grandeurs";
 import { CORRECTEURS as identitesRemarquables } from "./identites-remarquables";
 import { CORRECTEURS as nombresPremiers } from "./nombres-premiers";
 import { CORRECTEURS as operationsRelatifs } from "./operations-relatifs";
@@ -24,6 +25,8 @@ import { CORRECTEURS as reperage } from "./reperage";
 import { CORRECTEURS as thales } from "./thales";
 import { CORRECTEURS as transformations } from "./transformations";
 import { CORRECTEURS as triangles } from "./triangles";
+import { CORRECTEURS as visionEspace } from "./vision-espace";
+import { CORRECTEURS as volumes } from "./volumes";
 
 // Un fichier par banque (proportionnalité le 07/10, le reste à partir du 08/10).
 export const CORRECTEURS_4E: CorrecteursMaths = {
@@ -38,6 +41,7 @@ export const CORRECTEURS_4E: CorrecteursMaths = {
   ...factorisation,
   ...fonctions,
   ...fractions,
+  ...grandeurs,
   ...identitesRemarquables,
   ...nombresPremiers,
   ...operationsRelatifs,
@@ -52,4 +56,6 @@ export const CORRECTEURS_4E: CorrecteursMaths = {
   ...thales,
   ...transformations,
   ...triangles,
+  ...visionEspace,
+  ...volumes,
 };

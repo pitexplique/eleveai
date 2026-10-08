@@ -99,6 +99,22 @@ function fr(n: number): string {
   return dec ? `${entier},${dec}` : entier;
 }
 
+/**
+ * ⛔ 08/10/2026 — la réponse attendue porte son UNITÉ (Frédéric, 06/10) : « 400 cm³ »
+ * d'abord, écrit à la française (« 2,5 L », pas « 2.5 »). Suivent les écritures
+ * que le comparateur ne rapproche pas tout seul : les milliers serrés
+ * (« 10000 cm³ » pour « 10 000 cm³ »), le nombre nu quand il a des espaces,
+ * l'exposant tapé en chiffre (« cm3 ») et « litres » en toutes lettres.
+ */
+function avecUnite(x: number, u: string): string[] {
+  const f = fr(x);
+  const l = [`${f} ${u}`];
+  if (f.includes(" ")) l.push(`${f.replace(/ /g, "")} ${u}`, f);
+  if (/[²³]/.test(u)) l.push(`${f} ${u.replace("²", "2").replace("³", "3")}`);
+  if (u === "L") l.push(`${f} litres`);
+  return Array.from(new Set(l));
+}
+
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
 /** « un aquarium » → « d’un aquarium », « une cuve » → « d’une cuve ». */
@@ -136,10 +152,13 @@ function piAttendus(c: number, u: string): string[] {
   // le nombre 50 suivi de l'unité « pi », et tolère l'unité omise — « 50 »
   // passerait. « 50 pi cm³ » (deux mots après le nombre) n'a pas ce défaut.
   const formes = [`${a}π`, `${a} × π`, `${a} * π`];
+  // ⛔ 08/10/2026 — l'écriture AVEC l'unité en tête (« 12 000π cm³ », espace des
+  // milliers comme le reste du fichier) : c'est la réponse affichée.
   return [
+    `${fr(c)}π ${u}³`,
     ...formes,
     ...[...formes, `${a} pi`].flatMap((f) => [`${f} ${u}³`, `${f} ${u}3`]),
-  ];
+  ].filter((x, i, t) => t.indexOf(x) === i);
 }
 
 type Unite = "cm" | "dm" | "m";
@@ -629,7 +648,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(volume)],
+        expected: avecUnite(volume, `${u}³`),
         comparator: "number_equal",
         explanation: explAireBase(aireBase, hauteur, u, du(o.un)),
         ...(o.solide === "un cylindre"
@@ -667,7 +686,10 @@ export const volumesBank: TutorBankItemV4[] = [
       const hauteur = tirer(o.h);
       const volume = aireBase * hauteur;
       const u = o.u;
-      const juste = Math.random() < 0.35;
+      // ⛔ 08/10/2026 — 2 m² et 2 m : 2 + 2 = 2 × 2. Le « faux » volume était
+      // juste et la réponse attendue « non » : quand la somme vaut le produit,
+      // le volume proposé est le bon.
+      const juste = Math.random() < 0.35 || aireBase + hauteur === volume;
       const propose = juste ? volume : aireBase + hauteur;
       const p = randomChoice(PRENOMS);
       const text = randomChoice([
@@ -760,7 +782,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(volume)],
+        expected: avecUnite(volume, `${u}³`),
         comparator: "number_equal",
         explanation: explPave(longueur, largeur, hauteur, u, du(o.un)),
         canvas: solideCanvas({
@@ -808,7 +830,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(volume)],
+        expected: avecUnite(volume, `${u}³`),
         comparator: "number_equal",
         explanation: explPave(longueur, largeur, hauteur, u, du(o.un)),
         canvas: solideCanvas({
@@ -888,7 +910,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(volume)],
+        expected: avecUnite(volume, `${u}³`),
         comparator: "number_equal",
         explanation:
           `Définition : le volume d’un prisme droit est aire de base × hauteur.\n\n` +
@@ -938,7 +960,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(volume)],
+        expected: avecUnite(volume, `${u}³`),
         comparator: "number_equal",
         explanation:
           `Définition : le volume d’un prisme droit est aire de base × hauteur.\n\n` +
@@ -1180,7 +1202,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(rep)],
+        expected: avecUnite(rep, versLitres ? "L" : "m³"),
         comparator: "number_equal",
         explanation:
           `Définition : 1 m³ = 1 000 dm³ et 1 dm³ = 1 L, donc 1 m³ = 1 000 L.\n\n` +
@@ -1240,7 +1262,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(y)],
+        expected: avecUnite(y, cas.vers),
         comparator: "number_equal",
         explanation:
           `Définition : 1 L = 1 dm³ = 1 000 cm³ et 1 m³ = 1 000 dm³ = 1 000 L.\n\n` +
@@ -1323,7 +1345,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(rep)],
+        expected: avecUnite(rep, enLitres ? "L" : "m³"),
         comparator: "number_equal",
         explanation:
           `Définition : le volume d’un pavé droit est longueur × largeur × hauteur, et 1 m³ = 1 000 L.\n\n` +
@@ -1492,17 +1514,26 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi la formule Volume = aire de base × hauteur fonctionne pour un prisme droit.",
-    format: "open",
-    expected: ["base", "hauteur", "empile", "aire"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 — était une question OUVERTE validée par un seul mot
+    // (« base », « aire »…) : toute phrase qui contenait « base » passait.
+    // QCM sur les mêmes idées, avec les raisonnements faux des élèves.
+    text: "Pourquoi la formule Volume = aire de base × hauteur fonctionne-t-elle pour un prisme droit ?",
+    format: "qcm",
+    choices: [
+      "parce que le prisme est fait de la même base empilée tout le long de sa hauteur",
+      "parce qu’on additionne l’aire de la base et la hauteur",
+      "parce que toutes les faces d’un prisme ont la même aire",
+      "parce que la base d’un prisme est toujours un rectangle",
+    ],
+    expected: ["parce que le prisme est fait de la même base empilée tout le long de sa hauteur"],
+    comparator: "mcq_exact",
     hint: "Imagine que l’on empile la même base plusieurs fois.",
     explanation:
       "Définition : un prisme droit garde la même base tout le long de sa hauteur.\n\n" +
       "Méthode : on imagine la base empilée régulièrement sur la hauteur.\n\n" +
       "Calcul : aire de base × hauteur donne la place occupée par l’empilement.\n\n" +
       "Conclusion : la formule Volume = aire de base × hauteur fonctionne pour un prisme droit.",
-    tags: ["volume", "defi", "open", "raisonnement"],
+    tags: ["volume", "defi", "qcm", "raisonnement"],
   },
 
   /* =========================================================
@@ -1636,7 +1667,7 @@ export const volumesBank: TutorBankItemV4[] = [
       const b = randomChoice(BRIQUES);
       const text = randomChoice([
         `Une seule couche de ${b.pl} est posée sur la table. Chaque ${b.sg} compte pour une unité de volume. Quel est le volume de la couche ?`,
-        `Sur un plateau, on aligne des ${b.pl} en rangées, sur une seule épaisseur. Quel volume occupent-ils, si ${unB(b)} vaut une unité ?`,
+        `Sur un plateau, on aligne des ${b.pl} en rangées, sur une seule épaisseur. Quel volume occupent-${b.f ? "elles" : "ils"}, si ${unB(b)} vaut une unité ?`,
         `Combien d’unités de volume compte cette plaque de ${b.pl} ? On prend ${unB(b)} comme unité.`,
         `Ce dallage de ${b.pl} n’a qu’un étage. Quel est son volume, en prenant ${unB(b)} comme unité ?`,
       ]);
@@ -1938,7 +1969,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(volume)],
+        expected: avecUnite(volume, `${u}³`),
         comparator: "number_equal",
         explanation: explAireBase(aireBase, hauteur, u, du(o.un)),
       };
@@ -1971,7 +2002,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(aireBase)],
+        expected: avecUnite(aireBase, `${u}²`),
         comparator: "number_equal",
         explanation:
           `Définition : comme Volume = aire de base × hauteur, on a aire de base = volume ÷ hauteur.\n\n` +
@@ -2008,7 +2039,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(hauteur)],
+        expected: avecUnite(hauteur, u),
         comparator: "number_equal",
         explanation:
           `Définition : comme Volume = aire de base × hauteur, on a hauteur = volume ÷ aire de base.\n\n` +
@@ -2087,7 +2118,14 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "qcm",
-        choices: makeChoices(correct, [`${fr(A)} + ${h}`, `${fr(A)} × ${h} × ${h}`, `${fr(A)} ÷ ${h}`]),
+        // ⛔ 08/10/2026 — un calcul faux qui donne le BON nombre (2 + 2 = 2 × 2)
+        // serait une seconde bonne réponse : on l'écarte.
+        choices: makeChoices(
+          correct,
+          ([[`${fr(A)} + ${h}`, A + h], [`${fr(A)} × ${h} × ${h}`, A * h * h], [`${fr(A)} ÷ ${h}`, A / h]] as [string, number][])
+            .filter(([, v]) => v !== A * h)
+            .map(([c]) => c)
+        ),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
@@ -2218,7 +2256,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(volume)],
+        expected: avecUnite(volume, `${u}³`),
         comparator: "number_equal",
         explanation:
           `Définition : le volume d’un cube est arête × arête × arête.\n\n` +
@@ -2263,7 +2301,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(volume)],
+        expected: avecUnite(volume, `${u}³`),
         comparator: "number_equal",
         explanation: explPave(longueur, largeur, hauteur, u, du(o.un)),
       };
@@ -2291,7 +2329,7 @@ export const volumesBank: TutorBankItemV4[] = [
       const chercheHauteur = Math.random() < 0.6;
       const connu1 = longueur;
       const connu2 = chercheHauteur ? largeur : hauteur;
-      const rep = chercheHauteur ? hauteur : largeur;
+      const rep: number = chercheHauteur ? hauteur : largeur;
       const mot = chercheHauteur ? "hauteur" : "largeur";
       const autre = chercheHauteur ? `${longueur} ${u} de long et ${largeur} ${u} de large` : `${longueur} ${u} de long et ${hauteur} ${u} de haut`;
       const text = randomChoice([
@@ -2303,7 +2341,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(rep)],
+        expected: avecUnite(rep, u),
         comparator: "number_equal",
         explanation:
           `Définition : le volume d’un pavé droit est le produit de ses trois dimensions, donc une dimension = volume ÷ (produit des deux autres).\n\n` +
@@ -2383,7 +2421,14 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "qcm",
-        choices: makeChoices(correct, [`${L} + ${l} + ${h}`, `${L} × ${l}`, `2 × (${L} + ${l}) × ${h}`]),
+        // ⛔ 08/10/2026 — un calcul faux qui donne le BON nombre (h = 1 : L × l ;
+        // 6 et 3 : 2 × (6 + 3) = 6 × 3) serait une seconde bonne réponse : écarté.
+        choices: makeChoices(
+          correct,
+          ([[`${L} + ${l} + ${h}`, L + l + h], [`${L} × ${l}`, L * l], [`2 × (${L} + ${l}) × ${h}`, 2 * (L + l) * h]] as [string, number][])
+            .filter(([, v]) => v !== L * l * h)
+            .map(([c]) => c)
+        ),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
@@ -2507,7 +2552,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(volume)],
+        expected: avecUnite(volume, `${u}³`),
         comparator: "number_equal",
         explanation:
           `Définition : le volume d’un prisme droit est aire de base × hauteur.\n\n` +
@@ -2546,7 +2591,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(volume)],
+        expected: avecUnite(volume, `${u}³`),
         comparator: "number_equal",
         explanation:
           `Définition : le volume d’un prisme droit est aire de base × hauteur.\n\n` +
@@ -2585,7 +2630,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(volume)],
+        expected: avecUnite(volume, `${u}³`),
         comparator: "number_equal",
         explanation:
           `Définition : le volume d’un prisme droit est aire de base × hauteur.\n\n` +
@@ -2629,7 +2674,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(rep)],
+        expected: avecUnite(rep, chercheH ? u : `${u}²`),
         comparator: "number_equal",
         explanation:
           `Définition : Volume = aire de base × hauteur, donc ${chercheH ? "hauteur = volume ÷ aire de base" : "aire de base = volume ÷ hauteur"}.\n\n` +
@@ -2831,7 +2876,7 @@ export const volumesBank: TutorBankItemV4[] = [
       const hauteur = tirer(o.h);
       const u = o.u;
       const v = rayon * rayon * hauteur;
-      const ecr = (k: number) => `${k}π ${u}³`;
+      const ecr = (k: number) => `${fr(k)}π ${u}³`;
       const correct = ecr(v);
       const text = randomChoice([
         `${cap(o.un)} a un rayon de ${rayon} ${u} et une hauteur de ${hauteur} ${u}. Quel est son volume exact ?`,
@@ -2887,7 +2932,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(v), fr(v).replace(/ /g, "")],
+        expected: avecUnite(v, `${u}³`),
         comparator: "number_equal",
         explanation:
           `Définition : le volume d’un cylindre est π × rayon² × hauteur.\n\n` +
@@ -2996,7 +3041,7 @@ export const volumesBank: TutorBankItemV4[] = [
       const u = o.u;
       const a = rayon * rayon;
       const v = a * hauteur;
-      const ecr = (k: number) => `${k}π ${u}³`;
+      const ecr = (k: number) => `${fr(k)}π ${u}³`;
       const correct = ecr(v);
       const text = randomChoice([
         `La base ${de(o.un)} est un disque d’aire ${a}π ${u}², et sa hauteur est ${hauteur} ${u}. Quel est son volume ?`,
@@ -3044,7 +3089,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(A * h)],
+        expected: avecUnite(A * h, `${u}³`),
         comparator: "number_equal",
         explanation: explAireBase(A, h, u, du(o.un)),
       };
@@ -3129,7 +3174,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(versCm3 ? cm3 : litres)],
+        expected: avecUnite(versCm3 ? cm3 : litres, versCm3 ? "cm³" : "L"),
         comparator: "number_equal",
         explanation:
           `Définition : 1 L = 1 dm³ = 1 000 cm³.\n\n` +
@@ -3177,7 +3222,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(versDm3 ? dm3 : cm3)],
+        expected: avecUnite(versDm3 ? dm3 : cm3, versDm3 ? "dm³" : "cm³"),
         comparator: "number_equal",
         explanation:
           `Définition : 1 dm = 10 cm, donc 1 dm³ = 10 × 10 × 10 cm³ = 1 000 cm³.\n\n` +
@@ -3233,7 +3278,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(versDm3 ? dm3 : m3)],
+        expected: avecUnite(versDm3 ? dm3 : m3, versDm3 ? "dm³" : "m³"),
         comparator: "number_equal",
         explanation:
           `Définition : 1 m = 10 dm, donc 1 m³ = 10 × 10 × 10 dm³ = 1 000 dm³.\n\n` +
@@ -3342,7 +3387,7 @@ export const volumesBank: TutorBankItemV4[] = [
         ? randomChoice([
             `${cap(o.un)} peut contenir ${litres} L. Quelle est sa contenance en dm³ ?`,
             `On verse ${litres} L ${o.liq} dans ${o.un}. Combien de dm³ cela représente-t-il ?`,
-            `Exprime en dm³ la contenance ${de(o.un)} : ${litres} litres.`,
+            `Exprime en dm³ la contenance ${de(o.un)} : ${litres} ${litres >= 2 ? "litres" : "litre"}.`,
           ])
         : randomChoice([
             `Le volume intérieur ${de(o.un)} est de ${litres} dm³. Combien de litres ${o.liq} peut-${o.il} contenir ?`,
@@ -3352,7 +3397,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(litres)],
+        expected: avecUnite(litres, versDm3 ? "dm³" : "L"),
         comparator: "number_equal",
         explanation:
           `Définition : 1 litre correspond exactement à 1 dm³.\n\n` +
@@ -3376,9 +3421,16 @@ export const volumesBank: TutorBankItemV4[] = [
     tags: ["volume", "conversion", "litre", "pave", "template"],
     generate: () => {
       const o = randomChoice(PAVES.filter((p) => !/salle|allumettes/.test(p.un)));
-      const L = tirer(o.L);
-      const l = tirer(o.l);
-      const h = tirer(o.h);
+      let L = tirer(o.L);
+      let l = tirer(o.l);
+      let h = tirer(o.h);
+      // ⛔ 08/10/2026 — deux décimales au plus en situation : 24 × 12 × 8 = 2 304 cm³
+      // donnait 2,304 L. En cm, on retire jusqu'à un volume multiple de 10 cm³.
+      for (let k = 0; k < 200 && o.u === "cm" && (L * l * h) % 10 !== 0; k++) {
+        L = tirer(o.L);
+        l = tirer(o.l);
+        h = tirer(o.h);
+      }
       const u = o.u;
       const v = L * l * h;
       const litres = u === "cm" ? v / 1000 : u === "dm" ? v : v * 1000;
@@ -3397,7 +3449,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(litres)],
+        expected: avecUnite(litres, "L"),
         comparator: "number_equal",
         explanation:
           `Définition : volume d’un pavé droit = longueur × largeur × hauteur ; 1 L = 1 dm³ = 1 000 cm³ et 1 m³ = 1 000 L.\n\n` +
@@ -3482,7 +3534,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(rep)],
+        expected: avecUnite(rep, avecSeaux ? "seaux" : "L"),
         comparator: "number_equal",
         explanation:
           `Définition : le volume d’un pavé droit est longueur × largeur × hauteur, et 1 dm³ = 1 L.\n\n` +
@@ -3550,7 +3602,7 @@ export const volumesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [num(litres)],
+        expected: avecUnite(litres, "L"),
         comparator: "number_equal",
         explanation:
           `Définition : le volume d’un cylindre est π × rayon² × hauteur, et 1 L = 1 dm³ = 1 000 cm³.\n\n` +
@@ -3625,16 +3677,24 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique comment passer d’un volume exprimé en dm³ à un volume exprimé en litres, et donne un exemple.",
-    format: "open",
-    expected: ["litre", "dm", "égal", "1"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 — était une question OUVERTE dont un mot-clé était « 1 » :
+    // toute réponse contenant un 1 passait. QCM sur les mêmes pièges.
+    text: "Comment passe-t-on d’un volume en dm³ à un volume en litres ? Par exemple, 5 dm³ = … L.",
+    format: "qcm",
+    choices: [
+      "on garde le même nombre, car 1 dm³ = 1 L : 5 dm³ = 5 L",
+      "on multiplie par 1 000, car 1 dm³ = 1 000 L : 5 dm³ = 5 000 L",
+      "on divise par 1 000 : 5 dm³ = 0,005 L",
+      "on multiplie par 10, car 1 dm = 10 cm : 5 dm³ = 50 L",
+    ],
+    expected: ["on garde le même nombre, car 1 dm³ = 1 L : 5 dm³ = 5 L"],
+    comparator: "mcq_exact",
     hint: "Pense à l’égalité entre le litre et le dm³.",
     explanation:
       "Définition : le litre est l’unité de contenance liée au dm³.\n\n" +
       "Méthode : comme 1 L = 1 dm³, un volume en dm³ donne directement le même nombre de litres.\n\n" +
       "Calcul : par exemple, 5 dm³ = 5 L.\n\n" +
       "Conclusion : pour passer des dm³ aux litres, on garde le même nombre car 1 dm³ = 1 L.",
-    tags: ["volume", "defi", "open", "litre"],
+    tags: ["volume", "defi", "qcm", "litre"],
   },
 ];
