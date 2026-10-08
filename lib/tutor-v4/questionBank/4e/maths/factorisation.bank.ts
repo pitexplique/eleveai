@@ -531,10 +531,12 @@ export const factorisationBank: TutorBankItemV4[] = [
     microId: "litteral_facteur_commun",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi 4 est un facteur commun dans 4x + 20.",
-    format: "open",
-    expected: ["4", "multiplie", "x", "5"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés (« 4 », « 5 ») → QCM.
+    text: "Pourquoi 4 est-il un facteur commun dans 4x + 20 ?",
+    format: "qcm",
+    choices: ["car 4x = 4 × x et 20 = 4 × 5", "car 4 + 20 = 24", "car 4x et 20 contiennent la lettre x", "car 20 est le plus grand nombre"],
+    expected: ["car 4x = 4 × x et 20 = 4 × 5"],
+    comparator: "mcq_exact",
     hint: "Écris chaque terme sous forme d’un produit par 4.",
     explanation:
       `${DEF}\n\n` +
@@ -665,10 +667,11 @@ export const factorisationBank: TutorBankItemV4[] = [
     microId: "litteral_factoriser_simple",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi 6x + 18 = 6(x + 3).",
-    format: "open",
-    expected: ["6", "facteur commun", "x", "3"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → réponse jugée par le comparateur.
+    text: "Écris 6x et 18 comme des produits par 6, puis factorise 6x + 18.",
+    format: "short",
+    expected: ["6(x + 3)"],
+    comparator: "expression_factorisee",
     hint: "Écris 6x et 18 comme des produits par 6.",
     explanation:
       `${DEF}\n\n` +
@@ -839,17 +842,20 @@ export const factorisationBank: TutorBankItemV4[] = [
         juste = `${l}(${l} + ${b})`;
         pourquoi = `le ${l} mis en facteur ne doit plus apparaître dans le second terme. En développant ${faux}, on trouve ${l}² + ${b}${l}²`;
       }
+      // ⛔ 08/10/2026 : c’était une question ouverte à mots-clés, dont deux NOMBRES seuls
+      // (« 2 », « 9 » : toute réponse qui les contenait passait). L’élève corrige
+      // maintenant la factorisation ; le comparateur d’expression la juge.
       const text = randomChoice([
-        `Un élève écrit : ${e} = ${faux}. Explique son erreur.`,
-        `${nom} factorise ${e} et obtient ${faux}. Quelle erreur a-t-${pr} faite ? Corrige-la.`,
-        `La factorisation ${e} = ${faux} est fausse. Explique pourquoi et donne la bonne.`,
-        `Trouve et explique l’erreur : ${e} = ${faux}.`,
+        `Un élève écrit : ${e} = ${faux}. C’est faux : écris la bonne factorisation de ${e}.`,
+        `${nom} factorise ${e} et obtient ${faux}. Quelle erreur a-t-${pr} faite ? Corrige-la en écrivant la bonne factorisation.`,
+        `La factorisation ${e} = ${faux} est fausse. Développe ${faux} pour le voir, puis donne la bonne factorisation.`,
+        `Trouve l’erreur dans ${e} = ${faux}, puis factorise correctement ${e}.`,
       ]);
       return {
         text,
-        format: "open",
-        expected: ["erreur", "développ", String(b), String(k), "facteur"],
-        comparator: "contains_keyword",
+        format: "short",
+        expected: [juste],
+        comparator: "expression_factorisee",
         explanation:
           `${DEF}\n\n` +
           "Méthode : on développe la proposition pour la contrôler.\n\n" +
@@ -1030,10 +1036,12 @@ export const factorisationBank: TutorBankItemV4[] = [
     microId: "litteral_facteur_commun",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi x est un facteur commun dans x² + 7x.",
-    format: "open",
-    expected: ["x", "x²", "7x"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés (« x » suffisait) → QCM.
+    text: "Pourquoi x est-il un facteur commun dans x² + 7x ?",
+    format: "qcm",
+    choices: ["car x² = x × x et 7x = 7 × x", "car x² + 7x = 8x", "car 7 est un multiple de x", "car x n’apparaît que dans x²"],
+    expected: ["car x² = x × x et 7x = 7 × x"],
+    comparator: "mcq_exact",
     hint: "Écris chaque terme comme un produit faisant apparaître x.",
     explanation:
       "Définition : un facteur commun apparaît dans tous les termes.\n\n" +
@@ -1219,10 +1227,17 @@ export const factorisationBank: TutorBankItemV4[] = [
     microId: "litteral_factoriser_verifier",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment vérifier qu’une factorisation est correcte.",
-    format: "open",
-    expected: ["développer", "produit", "départ"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM.
+    text: "Comment vérifier qu’une factorisation est correcte ?",
+    format: "qcm",
+    choices: [
+      "on développe le produit obtenu : on doit retrouver l’expression de départ",
+      "on vérifie qu’il y a une parenthèse",
+      "on additionne les nombres de la parenthèse",
+      "on regarde si le nombre devant la parenthèse est le plus grand",
+    ],
+    expected: ["on développe le produit obtenu : on doit retrouver l’expression de départ"],
+    comparator: "mcq_exact",
     hint: "La factorisation est l’inverse du développement.",
     explanation:
       "Définition : factoriser et développer sont des opérations inverses.\n\n" +
@@ -1343,10 +1358,17 @@ export const factorisationBank: TutorBankItemV4[] = [
     microId: "litteral_factorisation_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi la factorisation est l’opération inverse du développement.",
-    format: "open",
-    expected: ["produit", "somme", "inverse"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM.
+    text: "Pourquoi dit-on que factoriser est l’opération inverse de développer ?",
+    format: "qcm",
+    choices: [
+      "développer change un produit en somme, factoriser change une somme en produit : 3(x + 2) = 3x + 6",
+      "factoriser et développer donnent toujours un produit",
+      "factoriser, c’est seulement réduire une somme",
+      "développer fait disparaître les lettres",
+    ],
+    expected: ["développer change un produit en somme, factoriser change une somme en produit : 3(x + 2) = 3x + 6"],
+    comparator: "mcq_exact",
     hint: "Développer transforme un produit en somme ; factoriser fait l’inverse.",
     explanation:
       "Définition : développer transforme un produit en somme ; factoriser transforme une somme en produit.\n\n" +

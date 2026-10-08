@@ -51,7 +51,9 @@ function attendu(v: number): string[] {
   const r = arr(v);
   const base = String(Math.abs(r));
   const out = new Set<string>();
-  for (const s of [base.replace(".", ","), base]) {
+  // ⚠️ 08/10 : plus de variante « 2.5 » : `answersMatch` lit déjà le point comme
+  // la virgule, et un point décimal ne s'écrit pas dans une réponse affichée.
+  for (const s of [base.replace(".", ",")]) {
     if (r < 0) {
       out.add("-" + s);
       out.add("−" + s);
@@ -59,6 +61,23 @@ function attendu(v: number): string[] {
   }
   if (!Number.isInteger(r)) out.add((r < 0 ? "-" : "") + Math.abs(r).toFixed(2).replace(".", ","));
   return [...out];
+}
+
+/** Les autres écritures courantes d'une unité (`answersMatch` refuse « 5 min » pour « 5 minutes »). */
+const AUTRES_ECRITURES: Record<string, string[]> = {
+  "€": ["euros"],
+  minutes: ["min"],
+  heures: ["h"],
+  heure: ["h"],
+  jours: ["j"],
+  ans: ["années"],
+};
+
+/** 08/10 : quand la réponse est une MESURE, `expected` porte l'unité (« 12 semaines », « 56 € »). */
+function avecUnite(nombres: string[], u?: string): string[] {
+  if (!u) return nombres;
+  const unites = [u, ...(AUTRES_ECRITURES[u] ?? [])];
+  return nombres.flatMap((n) => unites.map((w) => `${n} ${w}`));
 }
 
 type Terme = [number, string];
@@ -128,6 +147,12 @@ function deuxPrenoms(): [Prenom, Prenom] {
   return [a, b];
 }
 const ilsDe = (a: Prenom, b: Prenom) => (a.f && b.f ? "elles" : "ils");
+// ⚠️ 08/10 : « la part de Inès », « plus que Enzo » → élision devant une voyelle.
+const voyelle = (s: string) => /^[aeiouyéèêâîôûh]/i.test(s);
+/** « de Léa », « d’Inès ». */
+const de_ = (s: string) => (voyelle(s) ? `d’${s}` : `de ${s}`);
+/** « que Léa », « qu’Enzo ». */
+const que_ = (s: string) => (voyelle(s) ? `qu’${s}` : `que ${s}`);
 
 const MULT: Record<number, string> = { 2: "le double", 3: "le triple", 4: "le quadruple" };
 
@@ -536,7 +561,7 @@ function questionResoudre(formes: ((L: string) => FormeR)[]): Q {
 function situationSimple(): Q {
   const L = lettre();
   const q = randomChoice(PRENOMS);
-  const cas: (() => { text: string; f: FormeR })[] = [
+  const cas: (() => { text: string; f: FormeR; u?: string })[] = [
     () => {
       const s = randomInt(-8, 12), b = randomInt(2, 12), c = s + b;
       const eq = `${L} + ${b} = ${nb(c)}`;
@@ -549,8 +574,9 @@ function situationSimple(): Q {
       const s = randomInt(20, 150), b = randomInt(10, 180), c = s - b;
       const eq = `${L} - ${b} = ${nb(c)}`;
       return {
-        text: `Le compte de ${q.nom} affichait $${L}$ €. Après un achat de ${b} €, il affiche $${nb(c)}$ €. On a donc $${eq}$. Combien y avait-il sur le compte avant l’achat ?`,
+        text: `Le compte ${de_(q.nom)} affichait $${L}$ €. Après un achat de ${b} €, il affiche $${nb(c)}$ €. On a donc $${eq}$. Combien y avait-il sur le compte avant l’achat ?`,
         f: { eq, sol: s, methode: `on ajoute ${b} aux deux côtés.`, calcul: `$${L} = ${nb(c)} + ${b} = ${s}$.` },
+        u: "€",
       };
     },
     () => {
@@ -575,6 +601,7 @@ function situationSimple(): Q {
       return {
         text: `Une balance est en équilibre : d’un côté, un paquet de $${L}$ g et une masse de ${b} g ; de l’autre, ${c} g. On a donc $${eq}$. Quelle est la masse du paquet ?`,
         f: { eq, sol: s, methode: `on soustrait ${b} des deux côtés.`, calcul: `$${L} = ${c} - ${b} = ${s}$.` },
+        u: "g",
       };
     },
     () => {
@@ -591,11 +618,12 @@ function situationSimple(): Q {
       return {
         text: `${a} amis se partagent équitablement une addition de ${c} €. Chacun paie $${L}$ €, donc $${eq}$. Combien paie chacun ?`,
         f: { eq, sol: s, methode: `on divise les deux côtés par ${a}.`, calcul: `$${L} = ${c} \\div ${a} = ${s}$.` },
+        u: "€",
       };
     },
   ];
-  const { text, f } = randomChoice(cas)();
-  return { text, format: "short", expected: attendu(f.sol), comparator: "number_equal", explanation: explRes(L, f) };
+  const { text, f, u } = randomChoice(cas)();
+  return { text, format: "short", expected: avecUnite(attendu(f.sol), u), comparator: "number_equal", explanation: explRes(L, f) };
 }
 
 function genSimple(etoile: 1 | 2): Q {
@@ -1053,7 +1081,8 @@ function genVerifier(etoile: 2 | 3): Q {
 // PROBLÈMES MIS EN ÉQUATION
 // =========================================================
 
-type Probleme = { text: string; sol: number; eq: string; inconnue: string; calcul: string; conclusion: string; prix?: boolean };
+/** `u` : l'unité de la réponse quand c'est une MESURE (règle du 06/10 : elle va dans `expected`). */
+type Probleme = { text: string; sol: number; eq: string; inconnue: string; calcul: string; conclusion: string; prix?: boolean; u?: string };
 
 function problemes(etoile: 3 | 4 | 5): Probleme {
   const [q, r] = deuxPrenoms();
@@ -1081,7 +1110,7 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
         `Un taxi facture ${b} € de prise en charge, puis ${a} € par kilomètre. Une course a coûté ${c} €. Combien de kilomètres a-t-on parcourus ?`,
         `Une course en taxi a coûté ${c} €. Le chauffeur compte ${b} € de prise en charge et ${a} € par kilomètre. Quelle distance, en km, a-t-on parcourue ?`,
       ]);
-      return { text: t, sol: s, eq: `${a}x + ${b} = ${c}`, inconnue: "x le nombre de kilomètres", calcul: finir(a, b, c, s, "x"), conclusion: `la course fait ${s} km` };
+      return { text: t, sol: s, eq: `${a}x + ${b} = ${c}`, inconnue: "x le nombre de kilomètres", calcul: finir(a, b, c, s, "x"), conclusion: `la course fait ${s} km`, u: "km" };
     },
     () => {
       const lieu = randomChoice([
@@ -1093,10 +1122,10 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
       ]);
       const F = randomInt(10, 30), pu = randomInt(3, 8), s = randomInt(4, 20), T = F + pu * s;
       const t = randomChoice([
-        `${lieu[0]} propose une carte annuelle à ${F} €, puis ${pu} € par ${lieu[1]}. ${q.nom} a dépensé ${T} € cette année. Combien de ${lieu[2]} cela représente-t-il ?`,
-        `${q.nom} a payé ${T} € en tout : ${F} € pour la carte annuelle, puis ${pu} € par ${lieu[1]}. Combien de ${lieu[2]} a-t-${il(q)} payées ?`,
+        `${lieu[0]} propose une carte annuelle à ${F} €, puis ${pu} € par ${lieu[1]}. ${q.nom} a dépensé ${T} € cette année. Combien ${de_(lieu[2])} cela représente-t-il ?`,
+        `${q.nom} a payé ${T} € en tout : ${F} € pour la carte annuelle, puis ${pu} € par ${lieu[1]}. Combien ${de_(lieu[2])} a-t-${il(q)} payées ?`,
       ]);
-      return { text: t, sol: s, eq: `${pu}x + ${F} = ${T}`, inconnue: `x le nombre de ${lieu[2]}`, calcul: finir(pu, F, T, s, "x"), conclusion: `cela fait ${s} ${lieu[2]}` };
+      return { text: t, sol: s, eq: `${pu}x + ${F} = ${T}`, inconnue: `x le nombre ${de_(lieu[2])}`, calcul: finir(pu, F, T, s, "x"), conclusion: `cela fait ${s} ${lieu[2]}` };
     },
     () => {
       const E = randomInt(5, 40), e = randomInt(3, 12), s = randomInt(3, 15), T = E + e * s;
@@ -1104,7 +1133,7 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
         `${q.nom} a déjà ${E} € dans sa tirelire. Chaque semaine, ${il(q)} y ajoute ${e} €. Au bout de combien de semaines aura-t-${il(q)} ${T} € ?`,
         `Pour s’offrir un objet à ${T} €, ${q.nom} part de ${E} € d’économies et met ${e} € de côté chaque semaine. Combien de semaines devra-t-${il(q)} attendre ?`,
       ]);
-      return { text: t, sol: s, eq: `${e}x + ${E} = ${T}`, inconnue: "x le nombre de semaines", calcul: finir(e, E, T, s, "x"), conclusion: `il faut ${s} semaines` };
+      return { text: t, sol: s, eq: `${e}x + ${E} = ${T}`, inconnue: "x le nombre de semaines", calcul: finir(e, E, T, s, "x"), conclusion: `il faut ${s} semaines`, u: "semaines" };
     },
     () => {
       const d = randomInt(20, 90), rr = randomInt(2, 9), s = randomInt(5, 30), T = d + rr * s;
@@ -1112,15 +1141,15 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
         `Un récupérateur d’eau de pluie contient déjà ${d} L. Pendant un orage, il se remplit de ${rr} L par minute. Au bout de combien de minutes contiendra-t-il ${T} L ?`,
         `Pendant une averse, une cuve qui contenait ${d} L reçoit ${rr} L d’eau par minute. Elle contient maintenant ${T} L. Combien de minutes l’averse a-t-elle duré ?`,
       ]);
-      return { text: t, sol: s, eq: `${rr}x + ${d} = ${T}`, inconnue: "x le nombre de minutes", calcul: finir(rr, d, T, s, "x"), conclusion: `il faut ${s} minutes` };
+      return { text: t, sol: s, eq: `${rr}x + ${d} = ${T}`, inconnue: "x le nombre de minutes", calcul: finir(rr, d, T, s, "x"), conclusion: `il faut ${s} minutes`, u: "minutes" };
     },
     () => {
       const a = randomInt(2, 4), s = randomInt(5, 30), T = (a + 1) * s;
       const t = randomChoice([
         `${q.nom} a des billes. ${r.nom} en a ${MULT[a]}. ${ilsDe(q, r) === "elles" ? "Elles" : "Ils"} en ont ${T} à ${ilsDe(q, r) === "elles" ? "elles" : "eux"} deux. Combien de billes a ${q.nom} ?`,
-        `${r.nom} possède ${MULT[a]} du nombre de cartes de ${q.nom}. Ensemble, ${ilsDe(q, r)} ont ${T} cartes. Combien de cartes a ${q.nom} ?`,
+        `${r.nom} possède ${MULT[a]} du nombre de cartes ${de_(q.nom)}. Ensemble, ${ilsDe(q, r)} ont ${T} cartes. Combien de cartes a ${q.nom} ?`,
       ]);
-      return { text: t, sol: s, eq: `x + ${a}x = ${T}`, inconnue: `x le nombre d’objets de ${q.nom}`, calcul: `on réduit : $${a + 1}x = ${T}$, donc $x = ${T} \\div ${a + 1} = ${s}$.`, conclusion: `${q.nom} en a ${s}` };
+      return { text: t, sol: s, eq: `x + ${a}x = ${T}`, inconnue: `x le nombre d’objets ${de_(q.nom)}`, calcul: `on réduit : $${a + 1}x = ${T}$, donc $x = ${T} \\div ${a + 1} = ${s}$.`, conclusion: `${q.nom} en a ${s}` };
     },
     () => {
       const d = randomInt(2, 8), v = randomInt(3, 5), s = randomInt(2, 6), T = d + v * s;
@@ -1128,7 +1157,7 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
         `Un randonneur a déjà parcouru ${d} km. Il marche ensuite à ${v} km/h. Au bout de combien d’heures aura-t-il parcouru ${T} km en tout ?`,
         `Sur un sentier de ${T} km, une randonneuse a déjà fait ${d} km. Elle avance à ${v} km/h. Combien d’heures lui faut-il encore ?`,
       ]);
-      return { text: t, sol: s, eq: `${v}x + ${d} = ${T}`, inconnue: "x le nombre d’heures", calcul: finir(v, d, T, s, "x"), conclusion: `il faut ${s} heures` };
+      return { text: t, sol: s, eq: `${v}x + ${d} = ${T}`, inconnue: "x le nombre d’heures", calcul: finir(v, d, T, s, "x"), conclusion: `il faut ${s} heures`, u: "heures" };
     },
     () => {
       const L0 = randomInt(8, 15), a = randomInt(2, 4), s = randomInt(2, 8), T = L0 + a * s;
@@ -1144,7 +1173,7 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
         `Un plant de tomate mesure ${h} cm. Il grandit de ${g} cm par semaine. Dans combien de semaines mesurera-t-il ${T} cm ?`,
         `Au jardin, un tournesol de ${h} cm pousse de ${g} cm chaque semaine. Au bout de combien de semaines atteindra-t-il ${T} cm ?`,
       ]);
-      return { text: t, sol: s, eq: `${g}x + ${h} = ${T}`, inconnue: "x le nombre de semaines", calcul: finir(g, h, T, s, "x"), conclusion: `il faut ${s} semaines` };
+      return { text: t, sol: s, eq: `${g}x + ${h} = ${T}`, inconnue: "x le nombre de semaines", calcul: finir(g, h, T, s, "x"), conclusion: `il faut ${s} semaines`, u: "semaines" };
     },
     () => {
       const F = randomInt(5, 15), pu = randomInt(8, 20), s = randomInt(2, 6), T = F + pu * s;
@@ -1152,15 +1181,15 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
         `Un groupe de musique loue un studio de répétition : ${F} € de frais de réservation, puis ${pu} € par heure. La note s’élève à ${T} €. Combien d’heures ont-ils répété ?`,
         `Un studio d’enregistrement compte ${F} € de réservation et ${pu} € de l’heure. Une chorale a payé ${T} €. Combien d’heures a duré la séance ?`,
       ]);
-      return { text: t, sol: s, eq: `${pu}x + ${F} = ${T}`, inconnue: "x le nombre d’heures", calcul: finir(pu, F, T, s, "x"), conclusion: `cela fait ${s} heures` };
+      return { text: t, sol: s, eq: `${pu}x + ${F} = ${T}`, inconnue: "x le nombre d’heures", calcul: finir(pu, F, T, s, "x"), conclusion: `cela fait ${s} heures`, u: "heures" };
     },
     () => {
       const F = randomInt(8, 20), pu = randomInt(2, 5), s = randomInt(2, 10), T = F + pu * s;
       const t = randomChoice([
         `Un forfait mobile coûte ${F} € par mois, plus ${pu} € par Go supplémentaire. Ce mois-ci, la facture est de ${T} €. Combien de Go supplémentaires ont été consommés ?`,
-        `La facture de téléphone de ${q.nom} s’élève à ${T} € : ${F} € d’abonnement et ${pu} € par Go en plus du forfait. Combien de Go en plus a-t-${il(q)} utilisés ?`,
+        `La facture de téléphone ${de_(q.nom)} s’élève à ${T} € : ${F} € d’abonnement et ${pu} € par Go en plus du forfait. Combien de Go en plus a-t-${il(q)} utilisés ?`,
       ]);
-      return { text: t, sol: s, eq: `${pu}x + ${F} = ${T}`, inconnue: "x le nombre de Go supplémentaires", calcul: finir(pu, F, T, s, "x"), conclusion: `${s} Go supplémentaires` };
+      return { text: t, sol: s, eq: `${pu}x + ${F} = ${T}`, inconnue: "x le nombre de Go supplémentaires", calcul: finir(pu, F, T, s, "x"), conclusion: `${s} Go supplémentaires`, u: "Go" };
     },
     () => {
       const pu = randomInt(1, 3), an = randomInt(2, 4), s = randomInt(3, 12), T = pu * s + an;
@@ -1183,9 +1212,9 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
       const ils = q.f && lien.f ? "elles" : "ils";
       const t = randomChoice([
         `${q.nom} a ${a} ans de plus que ${lien.son}. À ${eux} deux, ${ils} ont ${S} ans. Quel âge a ${lien.son} ?`,
-        `La somme des âges de ${q.nom} et de ${lien.son} est ${S} ans. ${q.nom} est l’aîné${q.f ? "e" : ""}, de ${a} ans. Quel est l’âge ${lien.le} ?`,
+        `La somme des âges ${de_(q.nom)} et de ${lien.son} est ${S} ans. ${q.nom} est l’aîné${q.f ? "e" : ""}, de ${a} ans. Quel est l’âge ${lien.le} ?`,
       ]);
-      return { text: t, sol: s, eq: `x + (x + ${a}) = ${S}`, inconnue: `x l’âge ${lien.le}`, calcul: `on réduit : $2x + ${a} = ${S}$, donc $2x = ${S - a}$, puis $x = ${s}$.`, conclusion: `${lien.son} a ${s} ans` };
+      return { text: t, sol: s, eq: `x + (x + ${a}) = ${S}`, inconnue: `x l’âge ${lien.le}`, calcul: `on réduit : $2x + ${a} = ${S}$, donc $2x = ${S - a}$, puis $x = ${s}$.`, conclusion: `${lien.son} a ${s} ans`, u: "ans" };
     },
     () => {
       const duo = randomChoice([
@@ -1195,12 +1224,13 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
         ["Un père", "du père", "sa fille", "de la fille"],
       ]);
       const k = randomInt(3, 5), s = randomInt(6, 14), S = (k + 1) * s;
-      const mot = k === 3 ? "le triple" : k === 4 ? "le quadruple" : "cinq fois";
+      // ⚠️ 08/10 : « le triple DE l’âge », mais « cinq fois l’âge » (et non « cinq fois de l’âge »).
+      const mot = k === 3 ? "le triple de" : k === 4 ? "le quadruple de" : "cinq fois";
       const t = randomChoice([
-        `${duo[0]} a ${mot} de l’âge de ${duo[2]}. À eux deux, ils ont ${S} ans. Quel est l’âge ${duo[3]} ?`,
-        `La somme des âges ${duo[1]} et ${duo[3]} vaut ${S} ans ; l’âge de l’adulte est ${mot} de celui de l’enfant. Quel est l’âge ${duo[3]} ?`,
+        `${duo[0]} a ${mot} l’âge de ${duo[2]}. À eux deux, ils ont ${S} ans. Quel est l’âge ${duo[3]} ?`,
+        `La somme des âges ${duo[1]} et ${duo[3]} vaut ${S} ans ; l’âge de l’adulte est ${mot} celui de l’enfant. Quel est l’âge ${duo[3]} ?`,
       ]);
-      return { text: t, sol: s, eq: `x + ${k}x = ${S}`, inconnue: `x l’âge ${duo[3]}`, calcul: `on réduit : $${k + 1}x = ${S}$, donc $x = ${S} \\div ${k + 1} = ${s}$.`, conclusion: `l’âge ${duo[3]} est ${s} ans` };
+      return { text: t, sol: s, eq: `x + ${k}x = ${S}`, inconnue: `x l’âge ${duo[3]}`, calcul: `on réduit : $${k + 1}x = ${S}$, donc $x = ${S} \\div ${k + 1} = ${s}$.`, conclusion: `l’âge ${duo[3]} est ${s} ans`, u: "ans" };
     },
     () => {
       const obj = randomChoice([["d’un jardin", "m", 4, 20], ["d’un cadre photo", "cm", 10, 30], ["d’un tapis", "cm", 60, 120], ["d’un potager", "m", 2, 8], ["d’une piscine", "m", 4, 10], ["d’un terrain de jeu", "m", 10, 30]] as [string, string, number, number][]);
@@ -1209,7 +1239,7 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
         `La longueur ${obj[0]} rectangulaire dépasse sa largeur de ${a} ${obj[1]}. Son périmètre est de ${P} ${obj[1]}. Quelle est sa largeur ?`,
         `Le périmètre ${obj[0]} rectangulaire mesure ${P} ${obj[1]}, et sa longueur mesure ${a} ${obj[1]} de plus que sa largeur. Calcule sa largeur.`,
       ]);
-      return { text: t, sol: s, eq: `2(x + x + ${a}) = ${P}`, inconnue: `x la largeur en ${obj[1]}`, calcul: `on développe et on réduit : $4x + ${2 * a} = ${P}$, donc $4x = ${P - 2 * a}$, puis $x = ${P - 2 * a} \\div 4 = ${s}$.`, conclusion: `la largeur est ${s} ${obj[1]}` };
+      return { text: t, sol: s, eq: `2(x + x + ${a}) = ${P}`, inconnue: `x la largeur en ${obj[1]}`, calcul: `on développe et on réduit : $4x + ${2 * a} = ${P}$, donc $4x = ${P - 2 * a}$, puis $x = ${P - 2 * a} \\div 4 = ${s}$.`, conclusion: `la largeur est ${s} ${obj[1]}`, u: obj[1] };
     },
     () => {
       const b = randomInt(4, 12), s = randomInt(Math.floor(b / 2) + 1, 15), P = 2 * s + b;
@@ -1218,16 +1248,16 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
         `Un panneau triangulaire isocèle a un périmètre de ${P} dm ; sa base mesure ${b} dm. Combien mesure chacun des deux autres côtés ?`,
       ]);
       const u = t.includes(" dm") ? "dm" : "cm";
-      return { text: t, sol: s, eq: `2x + ${b} = ${P}`, inconnue: `x la longueur d’un côté égal, en ${u}`, calcul: finir(2, b, P, s, "x"), conclusion: `chaque côté égal mesure ${s} ${u}` };
+      return { text: t, sol: s, eq: `2x + ${b} = ${P}`, inconnue: `x la longueur d’un côté égal, en ${u}`, calcul: finir(2, b, P, s, "x"), conclusion: `chaque côté égal mesure ${s} ${u}`, u };
     },
     () => {
       const d = randomInt(2, 20), s = randomInt(10, 60), S = 2 * s + d;
       const quoi = randomChoice(["une cagnotte de", "un gain de", "une prime de"]);
       const t = randomChoice([
-        `${q.nom} et ${r.nom} se partagent ${quoi} ${S} €. ${r.nom} reçoit ${d} € de plus que ${q.nom}. Combien reçoit ${q.nom} ?`,
-        `On partage ${S} € entre ${q.nom} et ${r.nom}, de sorte que ${r.nom} ait ${d} € de plus. Quelle est la part de ${q.nom} ?`,
+        `${q.nom} et ${r.nom} se partagent ${quoi} ${S} €. ${r.nom} reçoit ${d} € de plus ${que_(q.nom)}. Combien reçoit ${q.nom} ?`,
+        `On partage ${S} € entre ${q.nom} et ${r.nom}, de sorte que ${r.nom} ait ${d} € de plus. Quelle est la part ${de_(q.nom)} ?`,
       ]);
-      return { text: t, sol: s, eq: `x + (x + ${d}) = ${S}`, inconnue: `x la part de ${q.nom}`, calcul: `on réduit : $2x + ${d} = ${S}$, donc $2x = ${S - d}$, puis $x = ${s}$.`, conclusion: `${q.nom} reçoit ${s} €` };
+      return { text: t, sol: s, eq: `x + (x + ${d}) = ${S}`, inconnue: `x la part ${de_(q.nom)}`, calcul: `on réduit : $2x + ${d} = ${S}$, donc $2x = ${S - d}$, puis $x = ${s}$.`, conclusion: `${q.nom} reçoit ${s} €`, u: "€" };
     },
     () => {
       const s = randomInt(5, 40), S = 3 * s + 3;
@@ -1250,7 +1280,7 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
         `${q.nom} achète ${n} ${objet[0]} et ${objet[1]} à ${euros(t0)} €. ${Il(q)} paie ${euros(T)} €. Quel est le prix ${objet[2]}, en € ?`,
         `Pour ${n} ${objet[0]} et ${objet[1]} à ${euros(t0)} €, ${q.nom} a payé ${euros(T)} €. Combien coûte ${objet[3]} ?`,
       ]);
-      return { text: t, sol: pu, eq: `${n}x + ${nb(t0)} = ${nb(T)}`, inconnue: `x le prix ${objet[2]}, en €`, calcul: finir(n, t0, T, pu, "x"), conclusion: `le prix ${objet[2]} est ${euros(pu)} €`, prix: true };
+      return { text: t, sol: pu, eq: `${n}x + ${nb(t0)} = ${nb(T)}`, inconnue: `x le prix ${objet[2]}, en €`, calcul: finir(n, t0, T, pu, "x"), conclusion: `le prix ${objet[2]} est ${euros(pu)} €`, prix: true, u: "€" };
     },
     () => {
       const a = randomInt(2, 8), s = randomInt(12, 25), T = 2 * s - a;
@@ -1287,7 +1317,7 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
       const d = randomInt(1, 4), s = randomInt(3, 8), T = 4 * s + d;
       return {
         text: `${q.nom} s’entraîne pour une course. Mardi, ${il(q)} court ${d} km de plus que lundi ; mercredi, le double de lundi. En trois jours, ${il(q)} a couru ${T} km. Combien de kilomètres a-t-${il(q)} courus lundi ?`,
-        sol: s, eq: `x + (x + ${d}) + 2x = ${T}`, inconnue: "x la distance de lundi, en km", calcul: `on réduit : $4x + ${d} = ${T}$, donc $4x = ${T - d}$, puis $x = ${s}$.`, conclusion: `${s} km lundi`,
+        sol: s, eq: `x + (x + ${d}) + 2x = ${T}`, inconnue: "x la distance de lundi, en km", calcul: `on réduit : $4x + ${d} = ${T}$, donc $4x = ${T - d}$, puis $x = ${s}$.`, conclusion: `${s} km lundi`, u: "km",
       };
     },
   ];
@@ -1308,7 +1338,7 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
         `Pour louer ${objet[0]}, le loueur A demande ${F1} € puis ${p1} € par ${objet[1]} ; le loueur B demande ${F2} € puis ${p2} € par ${objet[1]}. Pour combien d’${objet[2]} les deux loueurs demandent-ils le même prix ?`.replace("d’jours", "de jours"),
         `Location ${objet[0].replace(/^un /, "d’un ").replace(/^une /, "d’une ")} : formule A à ${F1} € plus ${p1} € par ${objet[1]}, formule B à ${F2} € plus ${p2} € par ${objet[1]}. Pour quelle durée les deux formules coûtent-elles autant ?`,
       ]);
-      return { text: t, sol: s, eq: `${F1} + ${p1}x = ${F2} + ${p2}x`, inconnue: `x le nombre d’${objet[2]}`.replace("d’jours", "de jours"), calcul: `on soustrait $${p2}x$ et ${F1} des deux côtés : $${ex([dlt, "x"])} = ${F2 - F1}$` + (dlt === 1 ? "." : `, puis $x = ${F2 - F1} \\div ${dlt} = ${s}$.`), conclusion: `les prix sont égaux pour ${s} ${objet[2]}` };
+      return { text: t, sol: s, eq: `${F1} + ${p1}x = ${F2} + ${p2}x`, inconnue: `x le nombre d’${objet[2]}`.replace("d’jours", "de jours"), calcul: `on soustrait $${p2}x$ et ${F1} des deux côtés : $${ex([dlt, "x"])} = ${F2 - F1}$` + (dlt === 1 ? "." : `, puis $x = ${F2 - F1} \\div ${dlt} = ${s}$.`), conclusion: `les prix sont égaux pour ${s} ${objet[2]}`, u: objet[2] };
     },
     () => {
       const parent = randomChoice([["son père", "il"], ["sa mère", "elle"], ["son oncle", "il"], ["sa tante", "elle"]]);
@@ -1317,10 +1347,10 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
         if (A - f < 20 || A > 60) continue;
         const mot = k === 2 ? "le double" : "le triple";
         const t = randomChoice([
-          `${q.nom} a ${f} ans et ${parent[0]} a ${A} ans. Dans combien d’années ${parent[0]} aura-t-${parent[1]} ${mot} de l’âge de ${q.nom} ?`,
-          `Aujourd’hui, ${q.nom} a ${f} ans et ${parent[0]} ${A} ans. Dans combien d’années l’âge de ${parent[0]} sera-t-il ${mot} de celui de ${q.nom} ?`,
+          `${q.nom} a ${f} ans et ${parent[0]} a ${A} ans. Dans combien d’années ${parent[0]} aura-t-${parent[1]} ${mot} de l’âge ${de_(q.nom)} ?`,
+          `Aujourd’hui, ${q.nom} a ${f} ans et ${parent[0]} ${A} ans. Dans combien d’années l’âge de ${parent[0]} sera-t-il ${mot} de celui ${de_(q.nom)} ?`,
         ]);
-        return { text: t, sol: s, eq: `${A} + x = ${k}(${f} + x)`, inconnue: "x le nombre d’années", calcul: `on développe : $${A} + x = ${k * f} + ${k}x$, puis on soustrait $x$ et ${k * f} : $${A - k * f} = ${ex([k - 1, "x"])}$` + (k === 2 ? `, donc $x = ${s}$.` : `, donc $x = ${A - k * f} \\div ${k - 1} = ${s}$.`), conclusion: `dans ${s} ans` };
+        return { text: t, sol: s, eq: `${A} + x = ${k}(${f} + x)`, inconnue: "x le nombre d’années", calcul: `on développe : $${A} + x = ${k * f} + ${k}x$, puis on soustrait $x$ et ${k * f} : $${A - k * f} = ${ex([k - 1, "x"])}$` + (k === 2 ? `, donc $x = ${s}$.` : `, donc $x = ${A - k * f} \\div ${k - 1} = ${s}$.`), conclusion: `dans ${s} ans`, u: "ans" };
       }
     },
     () => {
@@ -1329,7 +1359,7 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
         `${q.nom} a ${E1} € et économise ${e1} € par semaine. ${r.nom} a ${E2} € et économise ${e2} € par semaine. Dans combien de semaines auront-${ilsDe(q, r)} la même somme ?`,
         `${r.nom} part de ${E2} € et ajoute ${e2} € chaque semaine ; ${q.nom} part de ${E1} € et ajoute ${e1} € chaque semaine. Au bout de combien de semaines auront-${ilsDe(q, r)} autant d’argent ?`,
       ]);
-      return { text: t, sol: s, eq: `${E1} + ${e1}x = ${E2} + ${e2}x`, inconnue: "x le nombre de semaines", calcul: `on soustrait $${e2}x$ et ${E1} des deux côtés : $${ex([dlt, "x"])} = ${E2 - E1}$` + (dlt === 1 ? "." : `, puis $x = ${E2 - E1} \\div ${dlt} = ${s}$.`), conclusion: `dans ${s} semaines` };
+      return { text: t, sol: s, eq: `${E1} + ${e1}x = ${E2} + ${e2}x`, inconnue: "x le nombre de semaines", calcul: `on soustrait $${e2}x$ et ${E1} des deux côtés : $${ex([dlt, "x"])} = ${E2 - E1}$` + (dlt === 1 ? "." : `, puis $x = ${E2 - E1} \\div ${dlt} = ${s}$.`), conclusion: `dans ${s} semaines`, u: "semaines" };
     },
     () => {
       const r1 = randomInt(2, 8), r2 = randomInt(2, 8), s = randomInt(3, 15), V1 = randomInt(10, 60), V2 = V1 + (r1 + r2) * s;
@@ -1337,7 +1367,7 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
         `Une cuve contient ${V1} L et se remplit de ${r1} L par minute. Une autre contient ${V2} L et se vide de ${r2} L par minute. Au bout de combien de minutes contiendront-elles la même quantité d’eau ?`,
         `Un bassin de ${V2} L se vide de ${r2} L par minute pendant qu’un autre, qui contient ${V1} L, se remplit de ${r1} L par minute. Quand contiendront-ils autant d’eau ? Réponds en minutes.`,
       ]);
-      return { text: t, sol: s, eq: `${V1} + ${r1}x = ${V2} - ${r2}x`, inconnue: "x le nombre de minutes", calcul: `on ajoute $${r2}x$ et on soustrait ${V1} : $${r1 + r2}x = ${V2 - V1}$, donc $x = ${V2 - V1} \\div ${r1 + r2} = ${s}$.`, conclusion: `au bout de ${s} minutes` };
+      return { text: t, sol: s, eq: `${V1} + ${r1}x = ${V2} - ${r2}x`, inconnue: "x le nombre de minutes", calcul: `on ajoute $${r2}x$ et on soustrait ${V1} : $${r1 + r2}x = ${V2 - V1}$, donc $x = ${V2 - V1} \\div ${r1 + r2} = ${s}$.`, conclusion: `au bout de ${s} minutes`, u: "minutes" };
     },
     () => {
       const b = randomInt(1, 3), a = b + randomInt(1, 3), s = randomInt(2, 6), h2 = randomInt(b * s + 3, b * s + 15), h1 = h2 + (a - b) * s;
@@ -1345,7 +1375,7 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
         `Une bougie mesure ${h1} cm et raccourcit de ${a} cm par heure. Une autre mesure ${h2} cm et raccourcit de ${b} cm par heure. Au bout de combien d’heures auront-elles la même hauteur ?`,
         `On allume en même temps deux bougies : l’une de ${h1} cm, qui perd ${a} cm par heure, l’autre de ${h2} cm, qui perd ${b} cm par heure. Quand auront-elles la même taille ? Réponds en heures.`,
       ]);
-      return { text: t, sol: s, eq: `${h1} - ${a}x = ${h2} - ${ex([b, "x"])}`, inconnue: "x le nombre d’heures", calcul: `on ajoute $${a}x$ et on soustrait ${h2} : $${h1 - h2} = ${ex([a - b, "x"])}$` + (a - b === 1 ? "." : `, donc $x = ${h1 - h2} \\div ${a - b} = ${s}$.`), conclusion: `au bout de ${s} heures` };
+      return { text: t, sol: s, eq: `${h1} - ${a}x = ${h2} - ${ex([b, "x"])}`, inconnue: "x le nombre d’heures", calcul: `on ajoute $${a}x$ et on soustrait ${h2} : $${h1 - h2} = ${ex([a - b, "x"])}$` + (a - b === 1 ? "." : `, donc $x = ${h1 - h2} \\div ${a - b} = ${s}$.`), conclusion: `au bout de ${s} heures`, u: "heures" };
     },
     () => {
       const b = randomInt(3, 15), a = b + randomInt(2, 10), s = randomInt(2, 10), h1 = randomInt(10, 50), h2 = h1 + (a - b) * s;
@@ -1354,7 +1384,7 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
         `Deux ${plante.nom} : ${plante.f ? "l’une" : "l’un"} mesure ${h1} cm et pousse de ${a} cm par jour, l’autre mesure ${h2} cm et pousse de ${b} cm par jour. Au bout de combien de jours auront-${plante.f ? "elles" : "ils"} la même hauteur ?`,
         `Au jardin, ${q.nom} observe deux ${plante.nom}. ${plante.f ? "La première" : "Le premier"} fait ${h1} cm et grandit de ${a} cm par jour ; ${plante.f ? "la seconde" : "le second"} fait ${h2} cm et grandit de ${b} cm par jour. Dans combien de jours ${plante.f ? "seront-elles" : "seront-ils"} aussi ${plante.f ? "hautes" : "hauts"} l’${plante.f ? "une" : "un"} que l’autre ?`,
       ]);
-      return { text: t, sol: s, eq: `${h1} + ${a}x = ${h2} + ${b}x`, inconnue: "x le nombre de jours", calcul: `on soustrait $${b}x$ et ${h1} : $${a - b}x = ${h2 - h1}$, donc $x = ${h2 - h1} \\div ${a - b} = ${s}$.`, conclusion: `au bout de ${s} jours` };
+      return { text: t, sol: s, eq: `${h1} + ${a}x = ${h2} + ${b}x`, inconnue: "x le nombre de jours", calcul: `on soustrait $${b}x$ et ${h1} : $${a - b}x = ${h2 - h1}$, donc $x = ${h2 - h1} \\div ${a - b} = ${s}$.`, conclusion: `au bout de ${s} jours`, u: "jours" };
     },
     () => {
       const a = randomInt(3, 9), c = randomInt(2, a - 1);
@@ -1373,7 +1403,7 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
         `Forfait A : ${fa} € par mois et ${pa} € par Go consommé. Forfait B : ${fb} € par mois et ${pb} € par Go. Pour combien de Go les deux forfaits coûtent-ils autant ?`,
         `${q.nom} hésite entre deux abonnements mobiles : ${fa} € par mois plus ${pa} € par Go, ou ${fb} € par mois plus ${pb} € par Go. Pour quelle consommation, en Go, paierait-${il(q)} la même somme ?`,
       ]);
-      return { text: t, sol: s, eq: `${fa} + ${ex([pa, "x"])} = ${fb} + ${ex([pb, "x"])}`, inconnue: "x le nombre de Go", calcul: resolutionDeuxMembres(pa, fa, pb, fb, s, "x"), conclusion: `pour ${s} Go` };
+      return { text: t, sol: s, eq: `${fa} + ${ex([pa, "x"])} = ${fb} + ${ex([pb, "x"])}`, inconnue: "x le nombre de Go", calcul: resolutionDeuxMembres(pa, fa, pb, fb, s, "x"), conclusion: `pour ${s} Go`, u: "Go" };
     },
     () => {
       const q2 = randomInt(1, 2), pu = q2 + 1, s = randomInt(4, 12), F = s;
@@ -1392,7 +1422,7 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
         `Un cycliste part avec ${d} km d’avance et roule à ${v1} km/h. ${q.nom} part derrière lui à ${v2} km/h. Au bout de combien d’heures ${q.nom} le rattrape-t-${il(q)} ?`,
         `Lors d’une course, ${q.nom} a ${d} km de retard sur ${r.nom}. ${r.nom} roule à ${v1} km/h et ${q.nom} à ${v2} km/h. Combien d’heures faut-il à ${q.nom} pour rejoindre ${r.nom} ?`,
       ]);
-      return { text: t, sol: s, eq: `${d} + ${v1}x = ${v2}x`, inconnue: "x le nombre d’heures", calcul: `on soustrait $${v1}x$ des deux côtés : $${d} = ${ex([dv, "x"])}$` + (dv === 1 ? "." : `, donc $x = ${d} \\div ${dv} = ${s}$.`), conclusion: `au bout de ${s} heure${s > 1 ? "s" : ""}` };
+      return { text: t, sol: s, eq: `${d} + ${v1}x = ${v2}x`, inconnue: "x le nombre d’heures", calcul: `on soustrait $${v1}x$ des deux côtés : $${d} = ${ex([dv, "x"])}$` + (dv === 1 ? "." : `, donc $x = ${d} \\div ${dv} = ${s}$.`), conclusion: `au bout de ${s} heure${s > 1 ? "s" : ""}`, u: s > 1 ? "heures" : "heure" };
     },
     () => {
       for (;;) {
@@ -1411,7 +1441,7 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
         `Un village compte ${P1} habitants et en gagne ${g} par an. Un autre compte ${P2} habitants et en perd ${pe} par an. Dans combien d’années auront-ils le même nombre d’habitants ?`,
         `Deux communes : la première a ${P1} habitants et grandit de ${g} habitants par an ; la seconde a ${P2} habitants et en perd ${pe} chaque année. Au bout de combien d’années auront-elles autant d’habitants ?`,
       ]);
-      return { text: t, sol: s, eq: `${P1} + ${g}x = ${P2} - ${pe}x`, inconnue: "x le nombre d’années", calcul: `on ajoute $${pe}x$ et on soustrait ${P1} : $${g + pe}x = ${P2 - P1}$, donc $x = ${P2 - P1} \\div ${g + pe} = ${s}$.`, conclusion: `dans ${s} ans` };
+      return { text: t, sol: s, eq: `${P1} + ${g}x = ${P2} - ${pe}x`, inconnue: "x le nombre d’années", calcul: `on ajoute $${pe}x$ et on soustrait ${P1} : $${g + pe}x = ${P2 - P1}$, donc $x = ${P2 - P1} \\div ${g + pe} = ${s}$.`, conclusion: `dans ${s} ans`, u: "ans" };
     },
   ];
   return randomChoice(etoile === 3 ? P3 : etoile === 4 ? P4 : P5)();
@@ -1419,12 +1449,12 @@ function problemes(etoile: 3 | 4 | 5): Probleme {
 
 function genProbleme(etoile: 3 | 4 | 5): Q {
   const pb = problemes(etoile);
-  const expected = attendu(pb.sol);
-  if (pb.prix) expected.push(euros(pb.sol));
+  const nombres = attendu(pb.sol);
+  if (pb.prix) nombres.push(euros(pb.sol));
   return {
     text: pb.text,
     format: "short",
-    expected: [...new Set(expected)],
+    expected: avecUnite([...new Set(nombres)], pb.u),
     comparator: "number_equal",
     explanation:
       `Définition : on choisit l’inconnue, ici ${pb.inconnue}, puis on traduit l’énoncé par une équation.\n\n` +
@@ -1486,84 +1516,140 @@ function genVerdict(): Q {
   };
 }
 
-/** ★4 (réponse rédigée) : justifier qu'un nombre est solution. */
-function genJustifier(): Q {
-  const L = lettre();
-  const q = randomChoice(PRENOMS);
-  const f = formeVerif(randomChoice([2, 3]) as 2 | 3, L);
-  const r = remplacer(f, f.sol, L);
-  const k = nb(f.sol);
-  const tours = [
-    `Explique pourquoi $${L} = ${k}$ est solution de $${f.eq}$.`,
-    `Montre que $${k}$ est solution de l’équation $${f.eq}$.`,
-    `Justifie que l’équation $${f.eq}$ admet $${k}$ pour solution.`,
-    `${q.nom} affirme que $${L} = ${k}$ vérifie $${f.eq}$. Justifie qu’${il(q)} a raison.`,
-  ];
-  return {
-    text: randomChoice(tours),
-    format: "open",
-    expected: ["remplace", "égal", "vérifi", String(arr(f.G(f.sol)))],
-    comparator: "contains_keyword",
-    explanation:
-      "Définition : un nombre est solution s’il rend l’égalité vraie.\n\n" +
-      "Méthode : on remplace l’inconnue par ce nombre et on compare les deux membres.\n\n" +
-      `Calcul : ${r.txt}\n\n` +
-      `Conclusion : l’égalité est vraie pour $${L} = ${k}$, donc $${k}$ est solution.`,
-  };
+/** Les calculs « on remplace » d'un membre qui dépend de l'inconnue : « $3 \times 4 + 5 = 17$ ». */
+function calculsMembres(f: FormeV, k: number, gauche = f.G(k), droite = f.D(k)): string {
+  const parts: string[] = [];
+  if (f.Gt(k) !== nb(arr(f.G(k)))) parts.push(`$${f.Gt(k)} = ${nb(arr(gauche))}$`);
+  if (f.Dt) parts.push(`$${f.Dt(k)} = ${nb(arr(droite))}$`);
+  return parts.join(" et ");
 }
 
-/** ★4 (réponse rédigée) : trouver l'erreur d'un élève. */
+/**
+ * ★4 : justifier qu'un nombre est solution.
+ * ⛔ 08/10 : c'était une réponse rédigée en `contains_keyword` dont un mot-clé
+ * était un NOMBRE seul (« 29 » acceptait « 129 ») : devenu un QCM sur les mêmes
+ * pièges — un calcul faux, un autre nombre remplacé, « 3x » lu « 34 » pour x = 4.
+ */
+function genJustifier(): Q {
+  for (;;) {
+    const L = lettre();
+    const q = randomChoice(PRENOMS);
+    const f = formeVerif(randomChoice([2, 3]) as 2 | 3, L);
+    const s = f.sol;
+    const r = remplacer(f, s, L);
+    const k = nb(s);
+    const bonne = calculsMembres(f, s);
+    const varie = f.Gt(s) !== nb(arr(f.G(s))); // le membre de gauche dépend de l'inconnue
+    const faux = [
+      // un calcul faux (une erreur de priorité ou de signe ne tombe jamais juste)
+      varie ? calculsMembres(f, s, f.G(s) + randomChoice([1, -1, 2, 10])) : calculsMembres(f, s, f.G(s), f.D(s) + randomChoice([1, -1, 2, 10])),
+      // un autre nombre remplacé
+      calculsMembres(f, s + 1),
+      calculsMembres(f, s - 1),
+    ];
+    // « 3x » pour x = 4 lu « 34 » : la juxtaposition prise pour une écriture de nombre.
+    const m = f.Gt(s).match(/^(\d+) \\times (\d)( [+-] \d+)?$/);
+    if (m && varie && !f.Dt) {
+      const lu = Number(m[1] + m[2]) + (m[3] ? Number(m[3].replace(/ /g, "")) : 0);
+      faux.unshift(`$${m[1]}${m[2]}${m[3] ?? ""} = ${lu}$`);
+    }
+    const choix = qcm(bonne, faux.filter((x) => x && x !== bonne));
+    if (choix.length < 4) continue;
+    const tours = [
+      `Quel calcul montre que $${L} = ${k}$ est solution de $${f.eq}$ ?`,
+      `Pour montrer que $${k}$ est solution de l’équation $${f.eq}$, quel calcul faut-il écrire ?`,
+      `Quel calcul justifie que l’équation $${f.eq}$ admet $${k}$ pour solution ?`,
+      `${q.nom} affirme que $${L} = ${k}$ vérifie $${f.eq}$. Quel calcul le prouve ?`,
+    ];
+    return {
+      text: randomChoice(tours),
+      format: "qcm",
+      choices: choix,
+      expected: [bonne],
+      comparator: "mcq_exact",
+      explanation:
+        "Définition : un nombre est solution s’il rend l’égalité vraie.\n\n" +
+        "Méthode : on remplace l’inconnue par CE nombre, on calcule sans erreur, et on compare les deux membres.\n\n" +
+        `Calcul : ${r.txt}\n\n` +
+        `Conclusion : l’égalité est vraie pour $${L} = ${k}$, donc $${k}$ est solution. ⚠️ Un calcul avec un autre nombre, ou un calcul faux, ne prouve rien.`,
+    };
+  }
+}
+
+/**
+ * ★4 : trouver l'erreur d'un élève.
+ * ⛔ 08/10 : c'était une réponse rédigée en `contains_keyword` (mots-clés « 6 »,
+ * « signe », « erreur »… : « il y a une erreur » passait). Devenu un QCM : les six
+ * erreurs classiques, écrites avec les nombres du calcul, servent de pièges les
+ * unes aux autres.
+ */
 function genErreur(): Q {
   const L = lettre();
   const q = randomChoice(PRENOMS);
-  const a = randomInt(2, 6), b = randomInt(2, 9), s = randomInt(1, 9);
-  const erreurs: (() => { calcul: string; mots: string[]; correction: string })[] = [
+  const a = randomInt(2, 6);
+  let b = randomInt(2, 9);
+  if (b === a) b++; // « multiplié par 4 au lieu de multiplier par 4 » n'aurait pas de sens
+  let s = randomInt(1, 9);
+  // ⚠️ 08/10 (correcteur) : « 2t = 4, donc t = 4 − 2 = 2 » tombe juste par hasard — pas d'erreur à trouver.
+  if (a * s - a === s) s++;
+  const c = randomInt(1, a - 1 || 1), d = (a - c) * s + b;
+  const I = Il(q).toLowerCase();
+  const cL = ex([c, L]);
+  // ⛔ 08/10 (Frédéric) : les pièges sont des erreurs POSSIBLES sur CETTE équation —
+  // pas de « parenthèse oubliée » s'il n'y a pas de parenthèse. Chaque cas a sa
+  // bonne explication et trois fausses, écrites avec ses propres nombres.
+  const erreurs: (() => { calcul: string; correction: string; bonne: string; pieges: string[] })[] = [
     () => ({
       calcul: `$${a}${L} = ${a * s}$, donc $${L} = ${a * s} - ${a} = ${a * s - a}$`,
-      mots: ["divis", "multipli", "soustra"],
       correction: `$${a}${L}$ signifie $${a} \\times ${L}$ : il faut diviser par ${a}, pas soustraire ${a}. On obtient $${L} = ${a * s} \\div ${a} = ${s}$.`,
+      bonne: `${I} a soustrait ${a} au lieu de diviser par ${a}`,
+      pieges: [`${I} a divisé par ${a} au lieu de soustraire ${a}`, `${I} a multiplié par ${a} au lieu de diviser par ${a}`, `${I} a ajouté ${a} au lieu de diviser par ${a}`],
     }),
     () => ({
       calcul: `$${L} + ${b} = ${s + b}$, donc $${L} = ${s + b} + ${b} = ${s + 2 * b}$`,
-      mots: ["soustra", "enlev", "retir"],
       correction: `pour annuler « + ${b} », il faut soustraire ${b} des deux côtés : $${L} = ${s + b} - ${b} = ${s}$.`,
+      bonne: `${I} a ajouté ${b} au lieu de soustraire ${b}`,
+      pieges: [`${I} a soustrait ${b} au lieu d’ajouter ${b}`, `${I} a divisé par ${b} au lieu de soustraire ${b}`, `${I} a multiplié par ${b} au lieu de soustraire ${b}`],
     }),
     () => ({
       calcul: `$${a}(${L} + ${b}) = ${a * (s + b)}$, donc $${a}${L} + ${b} = ${a * (s + b)}$`,
-      mots: ["développ", "distribu", String(a * b), "parenth"],
       correction: `${a} multiplie toute la parenthèse : $${a}(${L} + ${b}) = ${a}${L} + ${a * b}$. On obtient $${a}${L} = ${a * s}$, puis $${L} = ${s}$.`,
+      bonne: `${I} n’a multiplié que $${L}$ par ${a}, pas le ${b} de la parenthèse`,
+      pieges: [`${I} n’a multiplié que le ${b} par ${a}, pas $${L}$`, `${I} a développé alors qu’il fallait diviser par ${a}`, `${I} a ajouté ${a} au lieu de multiplier la parenthèse par ${a}`],
     }),
-    () => {
-      const c = randomInt(1, a - 1 || 1), d = (a - c) * s + b;
-      return {
-        calcul: `$${a}${L} + ${b} = ${ex([c, L])} + ${d}$, donc $${a + c}${L} = ${d - b}$`,
-        mots: ["soustra", "signe", String(a - c)],
-        correction: `pour enlever $${ex([c, L])}$ du membre de droite, on le soustrait des deux côtés : $${ex([a - c, L])} = ${d - b}$, donc $${L} = ${s}$.`,
-      };
-    },
+    () => ({
+      calcul: `$${a}${L} + ${b} = ${cL} + ${d}$, donc $${a + c}${L} = ${d - b}$`,
+      correction: `pour enlever $${cL}$ du membre de droite, on le soustrait des deux côtés : $${ex([a - c, L])} = ${d - b}$, donc $${L} = ${s}$.`,
+      bonne: `${I} a ajouté $${cL}$ au lieu de le soustraire des deux côtés`,
+      pieges: [`${I} a soustrait ${b} au lieu d’ajouter ${b}`, `${I} a soustrait ${d} au lieu de ${b}`, `${I} a divisé par ${a} au lieu de soustraire $${cL}$`],
+    }),
     () => ({
       calcul: `$\\frac{${L}}{${a}} = ${b}$, donc $${L} = ${b} \\div ${a}$`,
-      mots: ["multipli", String(a * b)],
       correction: `pour annuler la division par ${a}, on multiplie les deux côtés par ${a} : $${L} = ${b} \\times ${a} = ${a * b}$.`,
+      bonne: `${I} a divisé par ${a} au lieu de multiplier par ${a}`,
+      pieges: [`${I} a soustrait ${a} au lieu de multiplier par ${a}`, `${I} a ajouté ${a} au lieu de multiplier par ${a}`, `${I} a multiplié par ${b} au lieu de multiplier par ${a}`],
     }),
     () => ({
       calcul: `$${b} - ${L} = ${nb(b - s)}$, donc $${L} = ${nb(b - s)} - ${b} = ${nb(-s)}$`,
-      mots: ["opposé", "signe", String(s)],
       correction: `on obtient $-${L} = ${nb(-s)}$, donc $${L} = ${s}$ : il ne faut pas oublier le signe « − » devant $${L}$.`,
+      bonne: `${I} a oublié le signe « − » devant $${L}$`,
+      pieges: [`${I} a soustrait ${b} au lieu d’ajouter ${b}`, `${I} a divisé par ${b} au lieu de soustraire ${b}`, `${I} a ajouté ${b} au lieu de soustraire ${b}`],
     }),
   ];
   const e = randomChoice(erreurs)();
   const tours = [
-    `${q.nom} écrit : « ${e.calcul} ». Explique son erreur.`,
-    `Où est l’erreur dans ce calcul de ${q.nom} : « ${e.calcul} » ?`,
-    `${q.nom} affirme : « ${e.calcul} ». Explique pourquoi c’est faux.`,
-    `Corrige le raisonnement suivant et explique l’erreur : « ${e.calcul} ».`,
+    `${q.nom} écrit : « ${e.calcul} ». Quelle est son erreur ?`,
+    `Où est l’erreur dans ce calcul ${de_(q.nom)} : « ${e.calcul} » ?`,
+    `${q.nom} affirme : « ${e.calcul} ». Pourquoi est-ce faux ?`,
+    `Voici le raisonnement ${de_(q.nom)} : « ${e.calcul} ». Qu’est-ce qui ne va pas ?`,
   ];
+  const bonne = e.bonne;
   return {
     text: randomChoice(tours),
-    format: "open",
-    expected: [...e.mots, "erreur"],
-    comparator: "contains_keyword",
+    format: "qcm",
+    choices: qcm(bonne, e.pieges),
+    expected: [bonne],
+    comparator: "mcq_exact",
     explanation:
       "Définition : on transforme une équation en faisant la MÊME opération sur ses deux membres, l’opération qui annule celle qu’on veut supprimer.\n\n" +
       "Méthode : on repère l’étape fautive et on la refait.\n\n" +
@@ -2054,10 +2140,12 @@ export const equationsBank: TutorBankItemV4[] = [
     microId: "equation_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi $x = 3$ est solution de $2x + 1 = 7$.",
-    format: "open",
-    expected: ["remplace", "6 + 1", "vérifi", "égal"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10 : ex-réponse ouverte à mots-clés chiffrés → QCM sur les mêmes pièges.
+    text: "Quel calcul prouve que $x = 3$ est solution de $2x + 1 = 7$ ?",
+    format: "qcm",
+    choices: ["$2 \\times 3 + 1 = 7$", "$23 + 1 = 24$", "$2 \\times (3 + 1) = 8$", "$2 \\times 4 + 1 = 9$"],
+    expected: ["$2 \\times 3 + 1 = 7$"],
+    comparator: "mcq_exact",
     hint: "Remplace x par 3 dans l’équation.",
     explanation:
       "Définition : un nombre est solution s’il rend l’égalité vraie.\n\n" +
@@ -2119,7 +2207,7 @@ export const equationsBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     hint: "Remplace l’inconnue par le nombre et calcule chaque membre.",
-    tags: ["equation", "open", "justification"],
+    tags: ["equation", "qcm", "justification"],
     generate: () => genJustifier(),
   },
   {
@@ -2132,7 +2220,7 @@ export const equationsBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     hint: "Regarde quelle opération a été faite, et laquelle il fallait faire.",
-    tags: ["equation", "open", "erreur"],
+    tags: ["equation", "qcm", "erreur"],
     generate: () => genErreur(),
   },
 
@@ -2430,10 +2518,11 @@ export const equationsBank: TutorBankItemV4[] = [
     microId: "equation_traduire",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique comment traduire « le double de $x$ augmenté de 1 vaut 9 » en équation.",
-    format: "open",
-    expected: ["2x", "1", "9"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10 : ex-réponse ouverte à mots-clés chiffrés → comparateur d'expression.
+    text: "Traduis par une équation : « le double de $x$ augmenté de 1 vaut 9 ».",
+    format: "short",
+    expected: ["2x + 1 = 9"],
+    comparator: "expression_equivalente",
     hint: "Traduis chaque morceau séparément.",
     explanation:
       "Définition : on traduit la phrase morceau par morceau.\n\n" +
@@ -2569,10 +2658,17 @@ export const equationsBank: TutorBankItemV4[] = [
     microId: "equation_resoudre_simple",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique comment résoudre $x + 4 = 9$.",
-    format: "open",
-    expected: ["soustraire", "4", "5"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10 : ex-réponse ouverte à mots-clés chiffrés → QCM sur les mêmes pièges.
+    text: "Comment résoudre $x + 4 = 9$ ?",
+    format: "qcm",
+    choices: [
+      "on soustrait 4 des deux côtés : $x = 5$",
+      "on ajoute 4 des deux côtés : $x = 13$",
+      "on divise les deux côtés par 4 : $x = 9 \\div 4$",
+      "on soustrait 4 à gauche seulement : $x = 9$",
+    ],
+    expected: ["on soustrait 4 des deux côtés : $x = 5$"],
+    comparator: "mcq_exact",
     hint: "On annule le + 4.",
     explanation:
       "Définition : on isole x en gardant l’égalité équilibrée.\n\n" +
@@ -2687,10 +2783,17 @@ export const equationsBank: TutorBankItemV4[] = [
     microId: "equation_resoudre_reduction",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi il faut réduire avant de résoudre $2x + 4x = 18$.",
-    format: "open",
-    expected: ["6x", "réduire", "3"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10 : ex-réponse ouverte à mots-clés chiffrés → QCM sur les mêmes pièges.
+    text: "Pour résoudre $2x + 4x = 18$, on réduit d’abord le premier membre. Que trouve-t-on ?",
+    format: "qcm",
+    choices: [
+      "$6x = 18$, donc $x = 3$",
+      "$8x = 18$, donc $x = 18 \\div 8$",
+      "$6x^2 = 18$, donc $x^2 = 3$",
+      "$6 + x = 18$, donc $x = 12$",
+    ],
+    expected: ["$6x = 18$, donc $x = 3$"],
+    comparator: "mcq_exact",
     hint: "Regroupe les termes en x.",
     explanation:
       "Définition : on regroupe les termes semblables avant de résoudre.\n\n" +
@@ -2826,10 +2929,17 @@ export const equationsBank: TutorBankItemV4[] = [
     microId: "equation_resoudre_distributivite",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique deux façons de commencer la résolution de $2(x + 3) = 14$.",
-    format: "open",
-    expected: ["diviser", "développer", "4"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10 : ex-réponse ouverte à mots-clés chiffrés → QCM sur les mêmes pièges.
+    text: "Quelles sont deux bonnes façons de commencer la résolution de $2(x + 3) = 14$ ?",
+    format: "qcm",
+    choices: [
+      "diviser les deux membres par 2 ($x + 3 = 7$), ou développer ($2x + 6 = 14$)",
+      "diviser les deux membres par 2 ($x + 3 = 7$), ou développer ($2x + 3 = 14$)",
+      "soustraire 3 ($2x = 11$), ou développer ($2x + 6 = 14$)",
+      "soustraire 2 ($x + 3 = 12$), ou développer ($2x + 5 = 14$)",
+    ],
+    expected: ["diviser les deux membres par 2 ($x + 3 = 7$), ou développer ($2x + 6 = 14$)"],
+    comparator: "mcq_exact",
     hint: "On peut diviser par 2 ou développer.",
     explanation:
       "Définition : on peut isoler la parenthèse ou la développer.\n\n" +
@@ -2954,10 +3064,12 @@ export const equationsBank: TutorBankItemV4[] = [
     microId: "equation_verifier",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique comment vérifier que 4 est solution de $2x + 1 = 9$.",
-    format: "open",
-    expected: ["remplace", "4", "9"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10 : ex-réponse ouverte à mots-clés chiffrés → QCM sur les mêmes pièges.
+    text: "Quel calcul vérifie que 4 est solution de $2x + 1 = 9$ ?",
+    format: "qcm",
+    choices: ["$2 \\times 4 + 1 = 9$", "$24 + 1 = 25$", "$2 \\times (4 + 1) = 10$", "$2 \\times 9 + 1 = 19$"],
+    expected: ["$2 \\times 4 + 1 = 9$"],
+    comparator: "mcq_exact",
     hint: "Remplace x par 4 dans le premier membre.",
     explanation:
       "Définition : une solution rend l’égalité vraie.\n\n" +
@@ -3071,10 +3183,11 @@ export const equationsBank: TutorBankItemV4[] = [
     microId: "equation_probleme",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment mettre en équation : « le double d’un nombre augmenté de 5 vaut 17 ».",
-    format: "open",
-    expected: ["2x", "5", "17"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10 : ex-réponse ouverte à mots-clés chiffrés → comparateur d'expression.
+    text: "Mets en équation, en notant $x$ le nombre : « le double d’un nombre augmenté de 5 vaut 17 ».",
+    format: "short",
+    expected: ["2x + 5 = 17"],
+    comparator: "expression_equivalente",
     hint: "Choisis x pour le nombre inconnu.",
     explanation:
       "Définition : on choisit une inconnue et on traduit la phrase.\n\n" +

@@ -194,6 +194,33 @@ const heures = unites("heure", "heures");
 const semaines = unites("semaine", "semaines");
 const euros = (v: number) => `${fr(v)} €`;
 
+/* ⭐ 08/10/2026 — L'UNITÉ DANS LA RÉPONSE (règle de Frédéric du 06/10) : quand
+   la réponse est une MESURE (€, km, min, heures, L, °C…), `expected` la porte,
+   avec ses autres écritures courantes (« 6 heures » et « 6 h ») : `answersMatch`
+   accepte une unité omise, mais pas une abréviation qu'il ne connaît pas. Un
+   dénombrement (séances, pizzas, parties…) reste un nombre nu. */
+const MESURES = /^(€|km|m|cm|min|minutes?|heures?|semaines?|jours?|secondes?|Go|%|litres?|°C|kg|g|m³|m²|cm²|cm³)$/;
+const AUTRES_ECRITURES: Record<string, string[]> = {
+  "€": ["euros"],
+  min: ["minutes"],
+  minute: ["min"],
+  minutes: ["min"],
+  heure: ["h"],
+  heures: ["h"],
+  jour: ["j"],
+  jours: ["j"],
+  seconde: ["s"],
+  secondes: ["s"],
+  litre: ["L"],
+  litres: ["L"],
+};
+function avecUnite(v: number, u: (n: number) => string): string[] {
+  const nombre = (v < 0 ? "−" : "") + String(Math.abs(v)).replace(".", ",");
+  const unite = u(v).replace(/^[−-]?[\d  ,]+\s*/, "").trim();
+  if (!MESURES.test(unite)) return [nombre];
+  return [unite, ...(AUTRES_ECRITURES[unite] ?? [])].map((w) => `${nombre} ${w}`);
+}
+
 /* ---------------------------------------------------------------------------
    LES SITUATIONS DE DÉPENDANCE « × a puis + b » : une valeur de départ fixée
    (b, la prise en charge, l'inscription, l'eau déjà présente…) puis un
@@ -1587,7 +1614,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(ys[i])],
+        expected: avecUnite(ys[i], s.y.u),
         comparator: "number_equal",
         explanation:
           "Définition : un tableau de valeurs est l'un des modes de représentation d'une dépendance.\n\n" +
@@ -1630,7 +1657,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(ys[i])],
+        expected: avecUnite(ys[i], s.y.u),
         comparator: "number_equal",
         explanation:
           "Définition : chaque colonne du tableau associe une valeur de départ à une valeur d'arrivée.\n\n" +
@@ -1667,7 +1694,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(xs[i])],
+        expected: avecUnite(xs[i], s.x.u),
         comparator: "number_equal",
         explanation:
           "Définition : on peut lire un tableau dans les DEUX SENS.\n\n" +
@@ -1709,7 +1736,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(xs[i])],
+        expected: avecUnite(xs[i], s.x.u),
         comparator: "number_equal",
         explanation:
           "Définition : lire un tableau à l'envers, c'est retrouver la valeur de départ qui a donné un résultat.\n\n" +
@@ -1747,7 +1774,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(ys[manquant])],
+        expected: avecUnite(ys[manquant], s.y.u),
         comparator: "number_equal",
         explanation:
           "Définition : quand un tableau suit une règle, on peut compléter n'importe quelle case.\n\n" +
@@ -1791,7 +1818,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(v)],
+        expected: avecUnite(v, s.y.u),
         comparator: "number_equal",
         explanation:
           "Définition : un tableau qui suit une règle se prolonge au-delà des colonnes écrites.\n\n" +
@@ -1831,7 +1858,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(cible.y)],
+        expected: avecUnite(cible.y, s.y.u),
         comparator: "number_equal",
         explanation:
           "Définition : sur un graphique, chaque point associe une valeur de départ à une valeur d'arrivée.\n\n" +
@@ -1872,7 +1899,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(b)],
+        expected: avecUnite(b, s.y.u),
         comparator: "number_equal",
         explanation:
           "Définition : le point au-dessus de 0 donne la valeur de DÉPART, avant toute unité.\n\n" +
@@ -1914,7 +1941,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(cible.x)],
+        expected: avecUnite(cible.x, s.x.u),
         comparator: "number_equal",
         explanation:
           "Définition : on lit un graphique dans les deux sens, comme un tableau.\n\n" +
@@ -1957,7 +1984,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(cible.x)],
+        expected: avecUnite(cible.x, s.x.u),
         comparator: "number_equal",
         explanation:
           "Définition : chercher la valeur de départ qui donne un résultat, c'est lire le graphique à l'envers.\n\n" +
@@ -2184,7 +2211,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(total)],
+        expected: avecUnite(total, s.y.u),
         comparator: "number_equal",
         explanation:
           `Définition : ${s.y.nom} DÉPEND ${de(s.x.nom)} — une valeur de départ fixe un seul résultat.\n\n` +
@@ -2217,7 +2244,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(n)],
+        expected: avecUnite(n, s.x.u),
         comparator: "number_equal",
         explanation:
           "Définition : on cherche la valeur de départ à partir du résultat — le sens inverse de la dépendance.\n\n" +
@@ -2249,7 +2276,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(v)],
+        expected: avecUnite(v, f.u),
         comparator: "number_equal",
         explanation:
           "Définition : une formule est un mode de représentation d'une dépendance — une valeur de la lettre donne un seul résultat.\n\n" +
@@ -2288,7 +2315,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(sens === "aller" ? v : n)],
+        expected: sens === "aller" ? avecUnite(v, d.y.u) : avecUnite(n, d.x.u),
         comparator: "number_equal",
         explanation:
           `Définition : ${d.y.nom} dépend ${de(d.x.nom)} : chaque unité retire ${a}.\n\n` +
@@ -2470,7 +2497,7 @@ export const fonctionsBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(n)],
+        expected: avecUnite(n, s.x.u),
         comparator: "number_equal",
         explanation:
           "Définition : la question donne le RÉSULTAT et demande la valeur de départ — le sens inverse de la lecture, au-delà du tableau.\n\n" +

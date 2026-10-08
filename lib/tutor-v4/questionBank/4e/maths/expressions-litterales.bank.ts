@@ -471,10 +471,12 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     microId: "litteral_expression_comprendre",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique ce que représente la lettre x dans une expression comme 3x + 5.",
-    format: "open",
-    expected: ["lettre", "nombre", "variable"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM sur les mêmes confusions.
+    text: "Dans l’expression 3x + 5, que représente la lettre x ?",
+    format: "qcm",
+    choices: ["un nombre qui peut changer", "le signe de multiplication", "toujours le nombre 10", "une unité de mesure"],
+    expected: ["un nombre qui peut changer"],
+    comparator: "mcq_exact",
     hint: "La lettre peut représenter un nombre qui change.",
     explanation:
       "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
@@ -692,10 +694,11 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     microId: "litteral_expression_traduire",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi « le triple de x diminué de 4 » se traduit par 3x - 4.",
-    format: "open",
-    expected: ["triple", "3x", "diminué", "4"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → l’élève écrit l’expression.
+    text: "Traduis par une expression littérale : « le triple de x diminué de 4 ».",
+    format: "short",
+    expected: ["3x - 4"],
+    comparator: "expression_equivalente",
     hint: "Traduis séparément « triple » puis « diminué de 4 ».",
     explanation:
       "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
@@ -843,10 +846,11 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     microId: "litteral_expression_substituer",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment calculer 3x + 2 pour x = 4.",
-    format: "open",
-    expected: ["remplace", "4", "3", "14"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : mots-clés numériques (« 4 », « 3 ») → réponse chiffrée.
+    text: "Remplace x par 4 dans 3x + 2. Quel nombre obtient-on ?",
+    format: "short",
+    expected: ["14"],
+    comparator: "number_equal",
     hint: "Remplace x par 4 puis effectue le calcul.",
     explanation:
       "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
@@ -984,10 +988,12 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     microId: "litteral_expression_reduire",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi on ne peut pas réduire 2x + 3 en 5x.",
-    format: "open",
-    expected: ["2x", "3", "pas", "semblables"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM sur le même piège.
+    text: "Peut-on réduire 2x + 3 en 5x ?",
+    format: "qcm",
+    choices: ["non : 2x et 3 ne sont pas des termes semblables", "oui : 2 + 3 = 5", "oui : on ajoute 3 au coefficient de x"],
+    expected: ["non : 2x et 3 ne sont pas des termes semblables"],
+    comparator: "mcq_exact",
     hint: "Compare 2x et 3 : sont-ils de même nature ?",
     explanation:
       "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
@@ -1009,16 +1015,16 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     microId: "litteral_expression_defi",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi 3x + 2x peut se réduire en 5x.",
-    format: "open",
-    expected: [
-      "5x",
-      "termes semblables",
-      "coefficients",
-      "même lettre",
-      "meme lettre",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés (« 5x » suffisait) → QCM.
+    text: "Pourquoi 3x + 2x peut-il s’écrire 5x ?",
+    format: "qcm",
+    choices: [
+      "3x et 2x sont des termes semblables : 3 fois x plus 2 fois x, c’est 5 fois x",
+      "on multiplie 3x par 2x",
+      "on additionne toujours les coefficients, même devant des lettres différentes",
     ],
-    comparator: "contains_keyword",
+    expected: ["3x et 2x sont des termes semblables : 3 fois x plus 2 fois x, c’est 5 fois x"],
+    comparator: "mcq_exact",
     hint: "3x et 2x représentent des quantités de même nature.",
     explanation:
       "Définition : une expression littérale contient des lettres qui représentent des nombres.\n\n" +
@@ -1080,29 +1086,39 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     hint: "Sépare ce qui est fixe de ce qui dépend de la lettre.",
-    tags: ["expression", "defi", "open", "situation"],
+    tags: ["expression", "defi", "qcm", "situation"],
+    // ⛔ 08/10/2026 : c’était une question ouverte à mots-clés (« 10 », « 90 », « h ») —
+    // toute réponse contenant ces nombres passait. Devenue un QCM sur le même piège :
+    // confondre la partie fixe et ce qui change avec la lettre.
     generate: () => {
       const S = randomChoice(SITUATIONS);
-      const [a, b] = S.tirer();
+      let [a, b] = S.tirer();
+      if (a === b) b += S.signe === 1 ? 1 : 5;
       const termes: Terme[] = S.signe === 1 ? [[a, S.l], [b, ""]] : [[b, ""], [-a, S.l]];
       const E = ecrire(termes);
+      const surLePas = Math.random() < 0.5;
+      const X = surLePas ? a : b;
       const text = randomChoice([
-        `${S.decrire(a, b)} On note ${S.l} ${S.quoi}. Explique pourquoi ${S.grandeur} s’écrit ${E}.`,
-        `${S.decrire(a, b)} Lina affirme que ${S.grandeur} vaut ${E}, où ${S.l} est ${S.quoi}. Justifie son expression.`,
-        `${S.decrire(a, b)} D’où viennent le ${a} et le ${b} dans l’expression ${E} ? (${S.l} désigne ${S.quoi}.)`,
+        `${S.decrire(a, b)} On note ${S.l} ${S.quoi} ; ${S.grandeur} s’écrit ${E}. Que représente le nombre ${X} dans cette expression ?`,
+        `${S.decrire(a, b)} Lina affirme que ${S.grandeur} vaut ${E}, où ${S.l} est ${S.quoi}. D’où vient le ${X} de son expression ?`,
+        `${S.decrire(a, b)} D’où vient le nombre ${X} dans l’expression ${E} ? (${S.l} désigne ${S.quoi}.)`,
       ]);
+      const pas = `ce qui ${S.signe === 1 ? "s’ajoute" : "se retire"} chaque fois que ${S.l} augmente de 1`;
+      const depart = `la valeur de départ, quand ${S.l} vaut 0`;
+      const bon = surLePas ? pas : depart;
       return {
         text,
-        format: "open",
-        expected: [String(a), String(b), S.l],
-        comparator: "contains_keyword",
+        format: "qcm",
+        choices: melange([pas, depart, `la valeur de ${S.l}`, `le résultat final`]),
+        expected: [bon],
+        comparator: "mcq_exact",
         explanation:
           DEF_TRADUIRE +
           `Méthode : on sépare la partie fixe (${b}) de la partie qui dépend de ${S.l} (${a} par unité).\n\n` +
           (S.signe === 1
             ? `Calcul : pour ${S.l} unités, la partie variable vaut ${a} × ${S.l} = ${ecrire([[a, S.l]])} ; on ajoute la partie fixe ${b}.\n\n`
             : `Calcul : au départ on a ${b} ; on retire ${a} pour chaque unité, soit ${a} × ${S.l} = ${ecrire([[a, S.l]])}.\n\n`) +
-          `Conclusion : ${S.grandeur} s’écrit ${E}.`,
+          `Conclusion : le ${X} est ${bon}.`,
       };
     },
   },
@@ -1455,7 +1471,8 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
       const absC = Math.abs(C);
       const choices = choixQcm(correct, [
         C > 0 ? `${absA}(${l} + ${absC})` : `${absA}(${l} ${MOINS} ${absC})`,
-        ecrire([[Math.sign(A) * absC, l], [Math.sign(C) * absA, ""]]),
+        // ⛔ 08/10 (correcteur) : coefficients échangés = la bonne réponse quand |A| = |C| (« 2 moins le double de t »).
+        ...(absA === absC ? [] : [ecrire([[Math.sign(A) * absC, l], [Math.sign(C) * absA, ""]])]),
         ecrire([[1, l], [A + C, ""]]),
         ecrire([[A, l], [-C, ""]]),
         ecrire([[A + C, l]]),
@@ -1983,7 +2000,8 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
         { p1: "Chloé", p2: "Adam", verbe: "a économisé", u: "euros", mult: true, v: () => randomInt(12, 50) },
         { p1: "Nathan", p2: "Sofia", verbe: "a", u: "cartes", mult: true, v: () => randomInt(10, 40) },
       ]);
-      const l = randomChoice(["x", "n", "a", "k"]);
+      // ⛔ 08/10 (relecture) : pas la lettre « a » — « Marie a a ans » se lit mal.
+      const l = randomChoice(["x", "n", "p", "k"]);
       const c = randomInt(2, 9);
       const v = ctx.v() + c;
       const relations = [
@@ -2030,10 +2048,17 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
     microId: "litteral_expression_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique la différence entre le coefficient et le terme constant dans l’expression $4x + 7$.",
-    format: "open",
-    expected: ["coefficient", "4", "constant", "7"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : mots-clés numériques (« 4 », « 7 ») → QCM sur la même confusion.
+    text: "Dans l’expression $4x + 7$, quel est le rôle de 4 et de 7 ?",
+    format: "qcm",
+    choices: [
+      "4 est le coefficient de x ; 7 est le terme constant",
+      "7 est le coefficient de x ; 4 est le terme constant",
+      "4 et 7 sont tous les deux des coefficients de x",
+      "4 + 7 = 11 est le coefficient de x",
+    ],
+    expected: ["4 est le coefficient de x ; 7 est le terme constant"],
+    comparator: "mcq_exact",
     hint: "L’un est devant la lettre, l’autre est un nombre seul.",
     explanation:
       "Définition : le coefficient est le nombre devant la lettre ; le terme constant est un nombre seul.\n\n" +
@@ -2104,7 +2129,7 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
           { t: `On achète ${k} paquets ; chacun contient ${l} biscuits et ${c} bonbons. Écris le nombre total de friandises en fonction de ${l}.`, E: `${k}(${l} + ${c})`, m: `un paquet contient ${l} + ${c} friandises, et il y a ${k} paquets` },
           { t: `${k} amis partent en week-end ; chacun paie ${l} € de repas et ${c} € de transport. Écris la dépense totale du groupe en fonction de ${l}.`, E: `${k}(${l} + ${c})`, m: `chacun dépense ${l} + ${c} €, et ils sont ${k}` },
           { t: `Une étagère porte ${k} rangées ; chaque rangée contient ${l} livres, dont on retire ${c} livres abîmés par rangée. Écris le nombre de livres restants en fonction de ${l}.`, E: `${k}(${l} ${MOINS} ${c})`, m: `il reste ${l} ${MOINS} ${c} livres par rangée, et il y a ${k} rangées` },
-          { t: `Un jardinier plante ${k} rangs de salades ; chaque rang compte ${l} salades, mais ${c} plants par rang n’ont pas poussé. Écris le nombre de salades réussies en fonction de ${l}.`, E: `${k}(${l} ${MOINS} ${c})`, m: `il y a ${l} ${MOINS} ${c} salades réussies par rang, et ${k} rangs` },
+          { t: `Un jardinier plante ${k} rangs de salades ; chaque rang compte ${l} salades, mais ${c} plants par rang n’ont pas poussé. Écris le nombre de salades réussies en fonction de ${l}.`, E: `${k}(${l} ${MOINS} ${c})`, m: `chaque rang compte ${l} ${MOINS} ${c} salades réussies, et il y a ${k} rangs` },
           { t: `Un triangle équilatéral a pour côté ${l} + ${c} (en cm). Écris son périmètre en fonction de ${l}.`, E: `3(${l} + ${c})`, m: `le périmètre est 3 × côté = 3 × (${l} + ${c})` },
         ]);
         return {
@@ -2221,10 +2246,13 @@ export const expressionsLitteralesBank: TutorBankItemV4[] = [
       const a = randomInt(2, 12);
       const b0 = randomInt(1, 9);
       const b = b0 === a ? 1 : b0; // jamais deux coefficients égaux (un « rectangle » 4y sur 4y serait un carré)
+      const c3 = randomInt(Math.abs(a - b) + 1, a + b - 1); // troisième côté d’un triangle qui existe
       if (Math.random() < 0.3) {
         const ctx = randomChoice([
-          { t: `Un rectangle a pour longueur ${a}${l} et pour largeur ${b === 1 ? l : `${b}${l}`}. Son périmètre s’écrit ${ecrire([[a, l], [b, l], [a, l], [b, l]])}. Réduis cette expression.`, T: [[a, l], [b, l], [a, l], [b, l]] as Terme[] },
-          { t: `Un triangle a des côtés de longueurs ${a}${l}, ${b === 1 ? l : `${b}${l}`} et ${l}. Écris son périmètre sous forme réduite.`, T: [[a, l], [b, l], [1, l]] as Terme[] },
+          // ⛔ 08/10 (relecture) : la longueur est la plus grande des deux dimensions.
+          { t: `Un rectangle a pour longueur ${Math.max(a, b)}${l} et pour largeur ${Math.min(a, b) === 1 ? l : `${Math.min(a, b)}${l}`}. Son périmètre s’écrit ${ecrire([[Math.max(a, b), l], [Math.min(a, b), l], [Math.max(a, b), l], [Math.min(a, b), l]])}. Réduis cette expression.`, T: [[a, l], [b, l], [a, l], [b, l]] as Terme[] },
+          // ⛔ 08/10 (correcteur) : « 5x, 3x et x » n'existe pas (5x > 3x + x) ; le troisième côté respecte l'inégalité triangulaire.
+          { t: `Un triangle a des côtés de longueurs ${a}${l}, ${b === 1 ? l : `${b}${l}`} et ${c3 === 1 ? l : `${c3}${l}`}. Écris son périmètre sous forme réduite.`, T: [[a, l], [b, l], [c3, l]] as Terme[] },
           { t: `Un sac contient ${a}${l} billes rouges et ${b === 1 ? l : `${b}${l}`} billes bleues. Écris le nombre total de billes sous forme réduite.`, T: [[a, l], [b, l]] as Terme[] },
           { t: `Une ficelle mesure ${a + b}${l} cm ; on en coupe ${b === 1 ? l : `${b}${l}`} cm. Écris la longueur restante sous forme réduite.`, T: [[a + b, l], [-b, l]] as Terme[] },
         ]);

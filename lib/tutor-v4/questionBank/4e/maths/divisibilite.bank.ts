@@ -102,7 +102,8 @@ const tireContexte = (nbContexte: number, nbPur: number) =>
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 const min1 = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
 /** « de » devant un nom sans article, avec élision : « de roses », « d'œufs ». */
-const deNu = (n: string) => (/^[aeiouyéèêhœ]/i.test(n) ? "d'" + n : "de " + n);
+// ⚠️ 08/10 : pas d'élision devant « y » consonne : « de yaourts ».
+const deNu = (n: string) => (/^[aeiouéèêhœ]/i.test(n) ? "d'" + n : "de " + n);
 /** « 1, 2, 3 et 4 » */
 const listeEt = (xs: readonly (string | number)[]) =>
   xs.length <= 1 ? xs.join("") : `${xs.slice(0, -1).join(", ")} et ${xs[xs.length - 1]}`;
@@ -1000,10 +1001,13 @@ export const divisibiliteBank: TutorBankItemV4[] = [
       ]);
       const multiples = (x: number) =>
         Array.from({ length: ppcm / x }, (_, k) => x * (k + 1)).join(", ");
+      // L'énoncé impose l'unité : elle est dans la réponse, avec son abréviation
+      // (« 24 min » doit passer aussi, `answersMatch` ne connaît pas « min »).
+      const ABREGE: Record<string, string> = { minutes: "min", secondes: "s", heures: "h", jours: "j" };
       return {
         text,
         format: "short",
-        expected: [String(ppcm)],
+        expected: [`${ppcm} ${cas.u}`, `${ppcm} ${ABREGE[cas.u]}`],
         comparator: "number_equal",
         explanation:
           "Définition : deux phénomènes qui se répètent retombent ensemble sur un MULTIPLE COMMUN de leurs périodes.\n\n" +
@@ -1108,11 +1112,14 @@ export const divisibiliteBank: TutorBankItemV4[] = [
       const P = randomChoice(ctxs);
       // Trois chiffres connus (nombre de 4 chiffres), ou deux si le contexte
       // n'admet pas des milliers d'objets.
-      const nbConnus = !enContexte || P.max >= 1000 ? 3 : 2;
+      // ⚠️ 08/10 : le nombre, chiffre effacé compris, ne dépasse pas `max` (une
+      // fleuriste n'a pas 8 7?4 roses) : le premier chiffre est borné.
+      const nbConnus = !enContexte || P.max >= 2000 ? 3 : 2;
+      const premierMax = !enContexte ? 9 : Math.min(9, Math.floor(P.max / (nbConnus === 3 ? 1000 : 100)) - 1);
       let chiffres: number[] = [];
       let sommeConnue = 0;
       do {
-        chiffres = [randomInt(1, 9), ...Array.from({ length: nbConnus - 1 }, () => randomInt(0, 9))];
+        chiffres = [randomInt(1, premierMax), ...Array.from({ length: nbConnus - 1 }, () => randomInt(0, 9))];
         sommeConnue = chiffres.reduce((s, c) => s + c, 0);
         // Par 9 : on écarte le cas où 0 ET 9 conviendraient — la réponse doit être unique.
       } while (par === 9 && sommeConnue % 9 === 0);

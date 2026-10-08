@@ -740,7 +740,10 @@ function genMethode(): TutorGeneratedQuestionV4 {
     somme: "carré d’une somme",
     difference: "carré d’une différence",
     produit: "produit d’une somme par une différence",
-    classique: "double distributivité classique",
+    // ⛔ 08/10/2026 : « double distributivité classique » était aussi juste pour les
+    // trois autres cas (en 4e, TOUT se développe par les quatre produits). Le choix
+    // porte désormais sur la FORME reconnue.
+    classique: "aucun de ces trois cas (deux parenthèses quelconques)",
   };
   let E: string;
   let calc: string;
@@ -755,7 +758,7 @@ function genMethode(): TutorGeneratedQuestionV4 {
   }
   const P = randomChoice(PRENOMS);
   const text = randomChoice([
-    `Quelle méthode reconnais-tu pour développer $${E}$ ?`,
+    `Quel cas reconnais-tu dans $${E}$ avant de le développer ?`,
     `Pour développer $${E}$, quel cas reconnais-tu ?`,
     `Avant de développer $${E}$, ${P.n} cherche de quel cas il s’agit. Lequel ?`,
     `Quel cas de développement correspond à $${E}$ ?`,
@@ -1052,17 +1055,20 @@ function genExpliqueErreur(): TutorGeneratedQuestionV4 {
   );
   const terme = somme([{ c: B, d: 1 }], L);
   const P = randomChoice(PRENOMS);
+  // ⛔ 08/10/2026 : c’était une question ouverte à mots-clés (« double produit »,
+  // « manque », « oubli »… : le vocabulaire de la formule, que la 4e n’emploie pas,
+  // et des mots qui passaient seuls). L’élève corrige maintenant le calcul.
   const text = randomChoice([
-    `Explique l’erreur : $${e.tex} = ${claim}$.`,
-    `${P.n} a écrit $${e.tex} = ${claim}$. Explique-lui son erreur.`,
-    `Où est l’erreur dans $${e.tex} = ${claim}$ ?`,
-    `Pourquoi l’égalité $${e.tex} = ${claim}$ est-elle fausse ?`,
+    `L’égalité $${e.tex} = ${claim}$ est fausse. Écris le bon développement réduit de $${e.tex}$.`,
+    `${P.n} a écrit $${e.tex} = ${claim}$. Corrige son calcul : donne la forme développée réduite de $${e.tex}$.`,
+    `Où est l’erreur dans $${e.tex} = ${claim}$ ? Écris $${e.tex}$ comme un produit de deux parenthèses, puis donne le bon développement réduit.`,
+    `Pourquoi l’égalité $${e.tex} = ${claim}$ est-elle fausse ? Refais le calcul et donne la forme développée réduite.`,
   ]);
   return {
     text,
-    format: "open",
-    expected: ["double produit", `${Math.abs(B)}${L}`, "manque", "oubli", `terme en ${L}`],
-    comparator: "contains_keyword",
+    format: "short",
+    expected: [somme(r, L, false)],
+    comparator: "expression_developpee",
     explanation: explication(
       e,
       `l’erreur est d’avoir élevé chaque terme au carré : on oublie les deux produits croisés, qui donnent $${terme}$. ` +
@@ -1319,10 +1325,11 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     microId: "litteral_identite_lier_distributivite",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi (x + 4)² donne x² + 8x + 16 en passant par la double distributivité.",
-    format: "open",
-    expected: ["(x + 4)(x + 4)", "x²", "4x", "8x", "16"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → réponse jugée par le comparateur.
+    text: "Écris (x + 4)² comme un produit de deux parenthèses, fais les quatre produits, puis réduis.",
+    format: "short",
+    expected: ["x² + 8x + 16"],
+    comparator: "expression_developpee",
     hint: "Commence par écrire (x + 4)² sous forme de produit.",
     explanation: "Méthode : un carré, c’est une expression multipliée par elle-même, comme (x + 3)² = (x + 3)(x + 3) ; un produit de deux parenthèses se développe par les quatre produits (double distributivité), puis on réduit.\n\n" +
           "Calcul : " +
@@ -1364,7 +1371,8 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     microId: "litteral_identite_reconnaitre",
     difficulty: 2,
     theme: "neutral",
-    text: "Quelle expression correspond à une différence de deux carrés ?",
+    // ⛔ 08/10/2026 : « différence de deux carrés » (vocabulaire de la formule) → on demande le résultat.
+    text: "Laquelle de ces expressions donne x² − 9 une fois développée et réduite ?",
     format: "qcm",
     choices: ["(x - 3)(x + 3)", "(x + 3)²", "(x - 3)²", "x² + 9"],
     expected: ["(x - 3)(x + 3)"],
@@ -1372,7 +1380,7 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     hint: "Fais les quatre produits de chaque proposition : laquelle donne x² moins un nombre, sans terme en x ?",
     explanation: "Méthode : un carré, c’est une expression multipliée par elle-même, comme (x + 3)² = (x + 3)(x + 3) ; un produit de deux parenthèses se développe par les quatre produits (double distributivité), puis on réduit.\n\n" +
           "Calcul : " +
-          ("(x - 3)(x + 3) = x × x + x × 3 + (-3) × x + (-3) × 3 = x² + 3x - 3x - 9 = x² - 9 : les termes en x s’annulent, il reste x² moins 3², une différence de deux carrés.") +
+          ("(x - 3)(x + 3) = x × x + x × 3 + (-3) × x + (-3) × 3 = x² + 3x - 3x - 9 = x² - 9 : les termes en x s’annulent.") +
           "\n\nConclusion : on passe toujours par le produit de deux parenthèses et ses quatre produits, sans formule à retenir.",
     tags: ["litteral_identite_remarquable", "difference_carres"],
   },
@@ -1610,7 +1618,7 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     choices: ["oui", "non"],
     expected: ["non"],
     comparator: "mcq_exact",
-    hint: "Il manque le double produit.",
+    hint: "Écris (x + 5)(x + 5) et fais les quatre produits.",
     explanation: "Méthode : un carré, c’est une expression multipliée par elle-même, comme (x + 3)² = (x + 3)(x + 3) ; un produit de deux parenthèses se développe par les quatre produits (double distributivité), puis on réduit.\n\n" +
           "Calcul : " +
           ("Non. (x + 5)² = (x + 5)(x + 5) = x² + 10x + 25. Il manque 10x.") +
@@ -1788,10 +1796,11 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     microId: "litteral_identite_lier_distributivite",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi $(x - 3)^2$ donne $x^2 - 6x + 9$ en passant par la double distributivité.",
-    format: "open",
-    expected: ["(x - 3)(x - 3)", "6x", "9", "x²"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → réponse jugée par le comparateur.
+    text: "Écris $(x - 3)^2$ comme un produit de deux parenthèses, fais les quatre produits, puis réduis.",
+    format: "short",
+    expected: ["x² - 6x + 9"],
+    comparator: "expression_developpee",
     hint: "Écris d’abord le carré comme un produit.",
     explanation:
       "Définition : un carré est un produit par soi-même.\n\n" +
@@ -1879,16 +1888,23 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     microId: "litteral_identite_reconnaitre",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment distinguer une expression de la forme $(a + b)^2$ d’une expression de la forme $(a - b)(a + b)$.",
-    format: "open",
-    expected: ["carré", "différence", "signe"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés (lettres a et b, proches de la formule) → QCM avec des nombres.
+    text: "Qu’est-ce qui distingue $(x + 3)^2$ de $(x - 3)(x + 3)$ ?",
+    format: "qcm",
+    choices: [
+      "$(x + 3)^2 = (x + 3)(x + 3)$ : deux parenthèses identiques ; dans $(x - 3)(x + 3)$, un signe change",
+      "rien : ce sont deux écritures de la même expression",
+      "$(x - 3)(x + 3)$ est aussi un carré",
+      "$(x + 3)^2$ n’a que deux produits à faire",
+    ],
+    expected: ["$(x + 3)^2 = (x + 3)(x + 3)$ : deux parenthèses identiques ; dans $(x - 3)(x + 3)$, un signe change"],
+    comparator: "mcq_exact",
     hint: "L’une est un carré, l’autre un produit somme-différence.",
     explanation:
-      "Définition : $(a + b)^2$ est un carré ; $(a - b)(a + b)$ est un produit somme-différence.\n\n" +
-      "Méthode : on regarde si l’expression est un carré ou le produit d’une somme par une différence.\n\n" +
-      "Calcul : $(a + b)^2 = (a + b)(a + b) = a^2 + ab + ab + b^2$ : les deux produits croisés s’ajoutent. $(a - b)(a + b) = a^2 + ab - ab - b^2$ : les deux produits croisés s’annulent.\n\n" +
-      "Conclusion : dans le carré, les deux parenthèses sont identiques et les produits croisés restent ; dans le produit somme-différence, un signe change et ils disparaissent.",
+      "Définition : $(x + 3)^2$ est un carré ; $(x - 3)(x + 3)$ est le produit d’une somme par une différence.\n\n" +
+      "Méthode : on regarde si les deux parenthèses sont identiques, ou si un signe change.\n\n" +
+      "Calcul : $(x + 3)(x + 3) = x^2 + 3x + 3x + 9 = x^2 + 6x + 9$ : les termes en $x$ s’ajoutent. $(x - 3)(x + 3) = x^2 + 3x - 3x - 9 = x^2 - 9$ : ils s’annulent.\n\n" +
+      "Conclusion : dans le carré, les deux parenthèses sont identiques et les termes en $x$ restent ; dans le produit d’une somme par une différence, un signe change et ils disparaissent.",
     tags: ["litteral_identite_remarquable", "reconnaitre", "open"],
   },
 
@@ -2033,15 +2049,16 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     choices: [
       "la double distributivité classique",
       "le carré d’une somme",
-      "la différence de deux carrés",
+      "le produit d’une somme par une différence",
       "le carré d’une différence",
     ],
     expected: ["la double distributivité classique"],
     comparator: "mcq_exact",
     hint: "Les deux parenthèses ne sont ni identiques ni de la forme somme-différence.",
+    // ⛔ 08/10/2026 : plus de « identité remarquable » ni de « différence de deux carrés » (décision de Frédéric).
     explanation:
-      "Définition : une identité remarquable ne s’applique que pour des formes précises.\n\n" +
-      "Méthode : ici les parenthèses sont différentes et ne forment pas $(a-b)(a+b)$.\n\n" +
+      "Définition : un carré a deux parenthèses identiques ; le produit d’une somme par une différence a les mêmes termes, avec « + » dans l’une et « − » dans l’autre.\n\n" +
+      "Méthode : ici les parenthèses sont différentes et n’ont pas les mêmes termes, comme $(x - 2)(x + 2)$ les aurait.\n\n" +
       "Calcul : on développe par double distributivité classique.\n\n" +
       "Conclusion : on utilise la double distributivité classique.",
     tags: ["litteral_identite_remarquable", "choisir", "qcm"],
@@ -2126,10 +2143,11 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     theme: "neutral",
     // ⛔ 03/10/2026 : réécrit SANS formule ni « différence de deux carrés »
     // (décision de Frédéric) ; l’ancienne version est gardée pour la 3e.
-    text: "Explique comment développer $(x + 5)^2$, et pourquoi on ne trouve pas $x^2 + 25$.",
-    format: "open",
-    expected: ["(x + 5)(x + 5)", "(x+5)(x+5)", "quatre produits", "4 produits", "10x", "double distributivité"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → réponse jugée par le comparateur.
+    text: "Développe et réduis $(x + 5)^2$ en l’écrivant comme un produit de deux parenthèses (attention : on ne trouve pas $x^2 + 25$).",
+    format: "short",
+    expected: ["x² + 10x + 25"],
+    comparator: "expression_developpee",
     hint: "Écris $(x + 5)^2$ comme un produit de deux parenthèses, puis compte les produits.",
     explanation:
       "Méthode : un carré, c’est une expression multipliée par elle-même ; on l’écrit comme un produit de deux parenthèses, puis on fait les quatre produits.\n\n" +
@@ -2198,15 +2216,23 @@ export const identitesRemarquablesBank: TutorBankItemV4[] = [
     microId: "litteral_identite_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi $(a + b)^2$ n’est pas égal à $a^2 + b^2$.",
-    format: "open",
-    expected: ["double produit", "2ab", "ab + ab", "quatre produits", "4 produits", "manque", "oubli"],
-    comparator: "contains_keyword",
-    hint: "Écris $(a + b)^2 = (a + b)(a + b)$ et compte les produits.",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés (« double produit », « 2ab », « manque »…) :
+    // le vocabulaire de la formule, que la 4e n’emploie pas → QCM avec des nombres.
+    text: "Pourquoi $(x + 3)^2$ n’est-il pas égal à $x^2 + 9$ ?",
+    format: "qcm",
+    choices: [
+      "$(x + 3)(x + 3)$ fait quatre produits : $x^2 + 3x + 3x + 9$ ; $x^2 + 9$ oublie $3x + 3x$",
+      "parce que $3^2 = 6$",
+      "parce qu’il faut multiplier par 2 : $(x + 3)^2 = 2x + 6$",
+      "il est égal : on élève chaque terme au carré",
+    ],
+    expected: ["$(x + 3)(x + 3)$ fait quatre produits : $x^2 + 3x + 3x + 9$ ; $x^2 + 9$ oublie $3x + 3x$"],
+    comparator: "mcq_exact",
+    hint: "Écris $(x + 3)^2 = (x + 3)(x + 3)$ et compte les produits.",
     explanation:
-      "Méthode : un carré, c’est une expression multipliée par elle-même : on écrit $(a + b)(a + b)$ et on fait les quatre produits.\n\n" +
-      "Calcul : $(a + b)(a + b) = a \\times a + a \\times b + b \\times a + b \\times b = a^2 + ab + ab + b^2$.\n\n" +
-      "Conclusion : $a^2 + b^2$ ne garde que deux des quatre produits ; il manque $ab + ab$, donc $(a + b)^2 \\neq a^2 + b^2$.",
+      "Méthode : un carré, c’est une expression multipliée par elle-même : on écrit $(x + 3)(x + 3)$ et on fait les quatre produits.\n\n" +
+      "Calcul : $(x + 3)(x + 3) = x \\times x + x \\times 3 + 3 \\times x + 3 \\times 3 = x^2 + 3x + 3x + 9 = x^2 + 6x + 9$.\n\n" +
+      "Conclusion : $x^2 + 9$ ne garde que deux des quatre produits ; il manque $3x + 3x = 6x$, donc $(x + 3)^2 \\neq x^2 + 9$.",
     tags: ["litteral_identite_remarquable", "defi", "open"],
   },
 ];

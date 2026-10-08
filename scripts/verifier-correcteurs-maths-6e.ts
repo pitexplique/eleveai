@@ -42,11 +42,16 @@ const gabarits = BANQUE.filter(
 // échelles « 1/200 » (Frédéric, 06/10 : « échelle 1/200 oui »).
 // 4e : prop_pourcentages (25/100) aussi.
 const NOTION_A_FRACTIONS = /^(fraction_|proba_|pourcentage_|decimal_nombre$|demi_droite_graduee$|prop_echelle$|prop_pourcentages$)/;
+// 4e (08/10/2026) : la fraction est AUSSI au programme dans les équations (x = 5/3),
+// le calcul littéral, Thalès et le cosinus (rapports de longueurs), les puissances
+// (10⁻² = 1/100). La règle reste entière ailleurs (relatifs, divisibilité,
+// géométrie, statistiques…).
+const NOTION_A_FRACTIONS_4E = /^(equation_|litteral_|thales_|trigo_|puissance_)/;
 const BARRE_ENTRE_NOMBRES = /(?<![\d/])\d+(?:[,.]\d+)?\s*\/\s*\d+(?![\d/])/;
 
 function reglesCommunes(q: TutorGeneratedQuestionV4, notionId: string): string[] {
   const p: string[] = [];
-  if (!NOTION_A_FRACTIONS.test(notionId))
+  if (!NOTION_A_FRACTIONS.test(notionId) && !(en4e && NOTION_A_FRACTIONS_4E.test(notionId)))
     for (const s of [q.text, ...(q.choices ?? []), ...(q.expected ?? []), q.explanation ?? ""].map(String)) {
       const m = s.match(BARRE_ENTRE_NOMBRES);
       if (m) p.push(`barre de fraction pour une division : « ${m[0]} » (écrire « : » ou « ÷ ») dans « ${s.slice(0, 120)} »`);

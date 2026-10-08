@@ -1,12 +1,29 @@
 import type { CorrecteursMaths } from "./types";
+import { CORRECTEURS as algorithmique } from "./algorithmique";
+import { CORRECTEURS as distributivite } from "./distributivite";
+import { CORRECTEURS as divisibilite } from "./divisibilite";
+import { CORRECTEURS as echelles } from "./echelles";
+import { CORRECTEURS as equations } from "./equations";
+import { CORRECTEURS as expressionsLitterales } from "./expressions-litterales";
+import { CORRECTEURS as factorisation } from "./factorisation";
+import { CORRECTEURS as fonctions } from "./fonctions";
+import { CORRECTEURS as identitesRemarquables } from "./identites-remarquables";
+import { CORRECTEURS as nombresPremiers } from "./nombres-premiers";
 import { CORRECTEURS as proportionnalite } from "./proportionnalite";
 import { CORRECTEURS as ratios } from "./ratios";
-import { CORRECTEURS as echelles } from "./echelles";
 
-// 07/10/2026 : la proportionnalité d'abord (cours de Frédéric le 08/10) ; les
-// autres chapitres de 4e s'ajouteront ici, un fichier par banque.
+// Un fichier par banque (proportionnalité le 07/10, le reste à partir du 08/10).
 export const CORRECTEURS_4E: CorrecteursMaths = {
+  ...algorithmique,
+  ...distributivite,
+  ...divisibilite,
+  ...echelles,
+  ...equations,
+  ...expressionsLitterales,
+  ...factorisation,
+  ...fonctions,
+  ...identitesRemarquables,
+  ...nombresPremiers,
   ...proportionnalite,
   ...ratios,
-  ...echelles,
 };

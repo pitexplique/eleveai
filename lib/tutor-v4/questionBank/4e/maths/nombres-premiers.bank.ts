@@ -645,16 +645,19 @@ export const nombresPremiersBank: TutorBankItemV4[] = [
       const cible = Math.random() < 0.6 ? "numérateur" : "dénominateur";
       const reponse = cible === "numérateur" ? na : nb;
       const enSituation = Math.random() < 0.65;
+      // ⛔ Pas de barre « 70/154 » (Frédéric, 06/10) : la fraction s'écrit en vraie
+      // fraction, $\frac{70}{154}$, comme dans fractions.bank.ts.
+      const F = `$\\frac{${num}}{${den}}$`;
       const text = enSituation
         ? `${randomChoice(PROPORTIONS)(num, den)} ${randomChoice([
-            `Écris la fraction ${num}/${den} sous forme irréductible. Quel est son ${cible} ?`,
-            `Cette part vaut ${num}/${den}. Simplifie-la au maximum et donne son ${cible}.`,
-            `Quelle est la fraction irréductible égale à ${num}/${den} ? Donne son ${cible}.`,
+            `Écris la fraction ${F} sous forme irréductible. Quel est son ${cible} ?`,
+            `Cette part vaut ${F}. Simplifie-la au maximum et donne son ${cible}.`,
+            `Quelle est la fraction irréductible égale à ${F} ? Donne son ${cible}.`,
           ])}`
         : randomChoice([
-            `Rends la fraction ${num}/${den} irréductible. Donne le ${cible} de la fraction simplifiée.`,
-            `Simplifie ${num}/${den} jusqu'à obtenir une fraction irréductible. Quel est son ${cible} ?`,
-            `En décomposant ${num} et ${den} en facteurs premiers, rends ${num}/${den} irréductible. Quel ${cible} obtiens-tu ?`,
+            `Rends la fraction ${F} irréductible. Donne le ${cible} de la fraction simplifiée.`,
+            `Simplifie ${F} jusqu'à obtenir une fraction irréductible. Quel est son ${cible} ?`,
+            `En décomposant ${num} et ${den} en facteurs premiers, rends ${F} irréductible. Quel ${cible} obtiens-tu ?`,
           ]);
       return {
         text,
@@ -664,7 +667,7 @@ export const nombresPremiersBank: TutorBankItemV4[] = [
         explanation:
           "Définition : une fraction est irréductible quand son numérateur et son dénominateur n'ont plus aucun diviseur commun autre que 1.\n\n" +
           "Méthode : on décompose le haut et le bas en facteurs premiers, puis on barre tous les facteurs communs.\n\n" +
-          `Calcul : ${num} = ${decomposer(num).join(" × ")} et ${den} = ${decomposer(den).join(" × ")}. En barrant les facteurs communs, il reste ${na}/${nb}.\n\n` +
+          `Calcul : ${num} = ${decomposer(num).join(" × ")} et ${den} = ${decomposer(den).join(" × ")}. En barrant les facteurs communs, il reste $\\frac{${na}}{${nb}}$.\n\n` +
           `Conclusion : le ${cible} vaut ${reponse}. ⭐ C'est ici que la décomposition SERT : elle montre d'un coup tout ce qui peut se barrer, au lieu de simplifier par petits pas au hasard.`,
       };
     },

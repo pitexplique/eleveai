@@ -278,7 +278,7 @@ const SITU_MAISON: Situation[] = [
   (k, b, l) => [`Une étagère a ${k} niveaux ; sur chacun, on range ${l} livres et ${b} boîtes.`, "le nombre total d’objets rangés"],
   (k, b, l) => [`Un électricien installe ${k} guirlandes de ${l} + ${b} ampoules chacune.`, "le nombre total d’ampoules"],
   (k, b, l) => [`Un peintre achète ${k} lots contenant chacun ${l} pinceaux et ${b} rouleaux.`, "le nombre total d’outils"],
-  (k, b, l) => [`Une maison a ${k} fenêtres identiques ; chacune a ${l} vitres fixes et ${b} vitres qui s’ouvrent.`, "le nombre total de vitres"],
+  (k, b, l) => [`Une maison a ${k} fenêtres identiques ; chacune compte ${l} vitres fixes et ${b} vitres qui s’ouvrent.`, "le nombre total de vitres"],
 ];
 
 const SITU_ACHAT: Situation[] = [
@@ -651,10 +651,11 @@ export const distributiviteBank: TutorBankItemV4[] = [
     microId: "litteral_distributivite_simple",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi 4(x + 3) donne 4x + 12.",
-    format: "open",
-    expected: ["4", "multiplie", "x", "3"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés (« 4 », « 3 ») → réponse jugée par le comparateur.
+    text: "Développe 4(x + 3) en multipliant chaque terme de la parenthèse par 4.",
+    format: "short",
+    expected: ["4x + 12"],
+    comparator: "expression_developpee",
     hint: "Le nombre devant la parenthèse multiplie chaque terme.",
     explanation:
       "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
@@ -763,10 +764,11 @@ export const distributiviteBank: TutorBankItemV4[] = [
     microId: "litteral_distributivite_double",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi (x + 2)(x + 3) donne x² + 5x + 6.",
-    format: "open",
-    expected: ["x²", "2x", "3x", "6"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → réponse jugée par le comparateur.
+    text: "Fais les quatre produits de (x + 2)(x + 3), puis réduis. Quelle expression obtiens-tu ?",
+    format: "short",
+    expected: ["x² + 5x + 6"],
+    comparator: "expression_developpee",
     hint: "Écris les quatre produits.",
     explanation:
       "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
@@ -862,10 +864,11 @@ export const distributiviteBank: TutorBankItemV4[] = [
     microId: "litteral_distributivite_reduire",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment réduire 2x + 7 + 3x.",
-    format: "open",
-    expected: ["2x", "3x", "5x", "7"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → réponse jugée par le comparateur.
+    text: "Réduis 2x + 7 + 3x en regroupant les termes semblables.",
+    format: "short",
+    expected: ["5x + 7"],
+    comparator: "expression_developpee",
     hint: "Regroupe seulement les termes semblables.",
     explanation:
       "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
@@ -1368,10 +1371,17 @@ export const distributiviteBank: TutorBankItemV4[] = [
     microId: "litteral_distributivite_reconnaitre",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi 3(x + 2) n’est pas encore une expression développée.",
-    format: "open",
-    expected: ["parenthèse", "développer", "3"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM sur les mêmes confusions.
+    text: "Pourquoi 3(x + 2) n’est-il pas encore une expression développée ?",
+    format: "qcm",
+    choices: [
+      "il reste une parenthèse à distribuer : c’est un produit",
+      "il contient la lettre x",
+      "il n’est pas réduit : 3 + 2 = 5",
+      "il contient un nombre",
+    ],
+    expected: ["il reste une parenthèse à distribuer : c’est un produit"],
+    comparator: "mcq_exact",
     hint: "Regarde s’il reste une parenthèse avec un coefficient devant.",
     explanation:
       "Définition : la distributivité permet de transformer un produit en somme, par exemple a × (b + c) = a × b + a × c.\n\n" +
@@ -1404,17 +1414,29 @@ export const distributiviteBank: TutorBankItemV4[] = [
       const e = `${m}(${somme(t)})`;
       const res = somme(t.map(([c, lt]) => [m * c, lt] as Terme));
       const [nom] = randomChoice(ELEVES);
+      // ⛔ 08/10/2026 : c’était une question ouverte à mots-clés (« chaque », « multipli »…) —
+      // « je multiplie » suffisait. Devenue un QCM sur les erreurs qu’on rencontre en classe.
       const text = randomChoice([
-        `Explique pourquoi ${e} donne ${res}.`,
-        `Justifie, en une ou deux phrases, l’égalité ${e} = ${res}.`,
-        `${nom} ne comprend pas pourquoi ${e} = ${res}. Explique-lui.`,
-        `Comment passe-t-on de ${e} à ${res} ? Explique.`,
+        `Pourquoi ${e} donne-t-il ${res} ?`,
+        `Quelle phrase justifie l’égalité ${e} = ${res} ?`,
+        `${nom} ne comprend pas pourquoi ${e} = ${res}. Quelle explication lui donner ?`,
+        `Comment passe-t-on de ${e} à ${res} ?`,
       ]);
+      const pm = m < 0 ? `(${m})` : String(m);
+      const second = t[1][0];
+      const ps = second < 0 ? `(${second})` : String(second);
+      const bon = `${m} multiplie chacun des deux termes : ${pm} × ${l} et ${pm} × ${ps}`;
       return {
         text,
-        format: "open",
-        expected: ["multipli", "chaque", "distribu", "les deux termes"],
-        comparator: "contains_keyword",
+        format: "qcm",
+        choices: shuffle([
+          bon,
+          `${m} multiplie seulement le premier terme : ${pm} × ${l}`,
+          `on ajoute ${m} à chacun des deux termes`,
+          `on multiplie ${l} par ${Math.abs(second)}`,
+        ]),
+        expected: [bon],
+        comparator: "mcq_exact",
         explanation: expli(
           `le facteur ${m} multiplie chacun des deux termes de la parenthèse.`,
           `${e} = ${m < 0 ? `(${m})` : m} × ${l} + ${m < 0 ? `(${m})` : m} × ${t[1][0] < 0 ? `(${t[1][0]})` : t[1][0]} = ${res}.`,
@@ -1474,17 +1496,20 @@ export const distributiviteBank: TutorBankItemV4[] = [
         juste = somme([[1, l, 2], [b + c, l], [b * c]]);
         pourquoi = `il manque les deux produits ${l} × ${c} et ${b} × ${l} : il faut faire quatre produits`;
       }
+      // ⛔ 08/10/2026 : c’était une question ouverte à mots-clés (« erreur », « signe »…) —
+      // « il y a une erreur » passait. L’élève corrige maintenant le calcul : la bonne
+      // forme développée réduite, jugée par le comparateur d’expression.
       const text = randomChoice([
-        `Explique l’erreur dans l’égalité : ${e} = ${faux}.`,
-        `${nom} écrit ${e} = ${faux}. Quelle erreur a-t-${pr} faite ? Corrige-la.`,
-        `Le calcul ${e} = ${faux} est faux. Explique pourquoi et donne le bon résultat.`,
-        `Trouve et explique l’erreur : ${e} = ${faux}.`,
+        `${nom} écrit ${e} = ${faux}. C’est faux : écris le bon développement réduit de ${e}.`,
+        `${nom} écrit ${e} = ${faux}. Quelle erreur a-t-${pr} faite ? Corrige-la en donnant la bonne forme développée réduite.`,
+        `Le calcul ${e} = ${faux} est faux. Donne le bon résultat, développé et réduit.`,
+        `Trouve l’erreur dans ${e} = ${faux}, puis écris la bonne forme développée et réduite.`,
       ]);
       return {
         text,
-        format: "open",
-        expected: ["erreur", "multipli", "signe", "produit", "oubli"],
-        comparator: "contains_keyword",
+        format: "short",
+        expected: [juste],
+        comparator: "expression_developpee",
         explanation: expli("on refait le développement terme par terme et on compare.", `${e} = ${juste}.`, `l’erreur : ${pourquoi}. Le bon résultat est ${juste}.`),
       };
     },
@@ -1544,7 +1569,7 @@ export const distributiviteBank: TutorBankItemV4[] = [
     generate: () => {
       const k = randomInt(2, 6);
       const b = randomInt(2, 6);
-      const c = randomInt(1, k * b - 1);
+      const c = randomInt(2, k * b - 1); // ≥ 2 : « 1 aubergines » serait faux (relu le 08/10)
       const l = randomChoice(LETTRES_SITUATION);
       const [t, q, s] = randomChoice([
         [`Dans une réserve, ${k} enclos abritent chacun ${l} tortues et ${b} iguanes. On relâche ensuite ${c} iguanes dans la nature.`, "le nombre d’animaux restant dans les enclos", -1],
@@ -1560,7 +1585,8 @@ export const distributiviteBank: TutorBankItemV4[] = [
         `${t} Exprime ${q} en fonction de ${l}, sous forme développée et réduite.`,
         `${t} Écris ${q} sans parenthèses et sous forme réduite.`,
         `${t} Quelle expression réduite donne ${q} ?`,
-        `${t} Donne ${q} sous la forme a${l} + b, avec a et b des nombres.`,
+        // ⛔ 08/10 : « sous la forme aa + b » quand la lettre est a — les nombres s’appellent m et p.
+        `${t} Donne ${q} sous la forme m${l} + p, avec m et p des nombres.`,
       ]);
       const blocs: Bloc[] = [
         { kind: "p", m: k, t: [[1, l], [b]] },
@@ -1849,10 +1875,17 @@ export const distributiviteBank: TutorBankItemV4[] = [
     microId: "litteral_distributivite_reconnaitre",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique la différence entre une forme factorisée et une forme développée.",
-    format: "open",
-    expected: ["produit", "somme", "parenthèse"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM.
+    text: "Quelle phrase décrit bien une forme factorisée et une forme développée ?",
+    format: "qcm",
+    choices: [
+      "factorisée : un produit, comme 3(x + 2) ; développée : une somme, comme 3x + 6",
+      "factorisée : une somme, comme 3x + 6 ; développée : un produit, comme 3(x + 2)",
+      "les deux sont des sommes, écrites dans un ordre différent",
+      "une forme développée contient toujours une parenthèse",
+    ],
+    expected: ["factorisée : un produit, comme 3(x + 2) ; développée : une somme, comme 3x + 6"],
+    comparator: "mcq_exact",
     hint: "L’une est un produit, l’autre une somme.",
     explanation:
       "Définition : une forme factorisée est écrite comme un produit (avec parenthèses) ; une forme développée est écrite comme une somme.\n\n" +
@@ -1951,10 +1984,17 @@ export const distributiviteBank: TutorBankItemV4[] = [
     microId: "litteral_distributivite_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi la double distributivité demande quatre produits.",
-    format: "open",
-    expected: ["chaque terme", "quatre", "produits"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM sur les erreurs de copie.
+    text: "Combien de produits faut-il effectuer pour développer (x + 2)(x + 5), et pourquoi ?",
+    format: "qcm",
+    choices: [
+      "4 : chaque terme de la première parenthèse multiplie chaque terme de la seconde",
+      "2 : on multiplie les premiers termes entre eux, puis les derniers entre eux",
+      "3 : un produit pour chaque terme différent",
+      "1 : on multiplie les deux parenthèses d’un seul coup",
+    ],
+    expected: ["4 : chaque terme de la première parenthèse multiplie chaque terme de la seconde"],
+    comparator: "mcq_exact",
     hint: "Chaque terme de la première parenthèse rencontre chaque terme de la seconde.",
     explanation:
       "Définition : dans un produit de deux parenthèses à deux termes, chaque terme de l’une multiplie chaque terme de l’autre.\n\n" +

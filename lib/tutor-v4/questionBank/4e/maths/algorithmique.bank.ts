@@ -789,7 +789,8 @@ const VARS_EXPR = [
   { v: "t", intro: "Dans un jeu, la variable t contient un nombre tiré au hasard." },
   { v: "y", intro: "Un programme range dans la variable y le nombre tapé par l’utilisateur." },
   { v: "k", intro: "Un robot range dans la variable k le nombre lu sur son capteur." },
-  { v: "m", intro: "Dans un jeu de cartes, la variable m contient la valeur de la carte tirée." },
+  // 08/10 : x va de −5 à 9 ; une carte à −3 n'existe pas, une température si.
+  { v: "m", intro: "Un thermomètre range dans la variable m la température lue, en °C." },
   { v: "a", intro: "Une calculatrice programmée garde le nombre saisi dans la variable a." },
 ];
 
@@ -1792,6 +1793,10 @@ function genModifierObjectif() {
     const opN = randomChoice(OPS);
     const sN = randomInt(c.min + 1, c.max);
     if (opA === opN && sA === sN) return null;
+    // ⚠️ 08/10 : « vies < 5 » et « vies ≤ 4 » sont la MÊME condition pour un
+    // nombre entier : l'ancienne condition serait une seconde bonne réponse.
+    const pareilles = Array.from({ length: 400 }, (_, i) => i - 150).every((x) => cmp(x, opA, sA) === cmp(x, opN, sN));
+    if (pareilles) return null;
     const m = messages(c, opN, sN).alors;
     const cond = (o: Cmp, s: number) => `${c.v} ${o} ${s}`;
     const bon = cond(opN, sN);
@@ -1853,8 +1858,10 @@ function genCorrigerCondition() {
     const op = randomChoice(OPS);
     const s = randomInt(c.min + 1, c.max);
     const bon = `${c.v} ${op} ${s}`;
-    const fausses = [...OPS.filter((o) => o !== op).map((o) => `${c.v} ${o} ${s}`), `${c.v} ${op} ${s + 1}`, `${c.v} ${op} ${s - 1}`];
-    const erreur = randomChoice(fausses);
+    const faussesC: { op: Cmp; s: number }[] = [...OPS.filter((o) => o !== op).map((o) => ({ op: o, s })), { op, s: s + 1 }, { op, s: s - 1 }];
+    const fausses = faussesC.map((f) => `${c.v} ${f.op} ${f.s}`);
+    const iErreur = randomInt(0, fausses.length - 1);
+    const erreur = fausses[iErreur];
     const choix = makeChoices(bon, fausses.filter((f) => f !== erreur).concat(erreur));
     if (!choix || !choix.includes(erreur)) return null;
     const m = messages(c, op, s).alors;
@@ -1869,7 +1876,9 @@ function genCorrigerCondition() {
         [`« ${ph} » se traduit par “${bon}”`, `la condition “${erreur}” ne donne pas le même résultat pour toutes les valeurs`],
         `il faut écrire “${bon}”.`
       ),
-      canvas: canvasDe("Corriger la condition", [{ k: "si", c: { v: c.v, op, s }, alors: [{ k: "dire", t: m }] }]),
+      // ⛔ 08/10 : le canvas s'affiche AVEC l'énoncé ; il montrait la BONNE
+      // condition, c'est-à-dire la réponse. Il montre le programme à corriger.
+      canvas: canvasDe("Corriger la condition", [{ k: "si", c: { v: c.v, op: faussesC[iErreur].op, s: faussesC[iErreur].s }, alors: [{ k: "dire", t: m }] }]),
     };
   });
 }
@@ -1899,7 +1908,7 @@ function genQuelleModification() {
     const bonne = randomChoice(options);
     const T = bonne.r;
     if (T === F || options.filter((o) => o.r === T).length > 1) return null;
-    const q = randomChoice([`Quelle modification permet d’obtenir ${v} = ${T} à la fin ?`, `Que faut-il changer pour que ${v} vaille ${T} à la fin ?`, `Quelle modification fait finir le programme avec ${v} égal à ${T} ?`]);
+    const q = randomChoice([`Quelle modification permet d’obtenir ${v} = ${T} à la fin ?`, `Que faut-il changer pour ${/^[aeiouyéèêàâîôûœ]/i.test(v) ? "qu’" : "que "}${v} vaille ${T} à la fin ?`, `Quelle modification fait finir le programme avec ${v} égal à ${T} ?`]);
     const st = executer(prog(a, n, k, fin));
     return {
       text: `${c.intro} Le programme ${progTxt(prog(a, n, k, fin))} se termine avec ${v} = ${F}. ${q}`,
@@ -2458,10 +2467,17 @@ const FIGES: TutorBankItemV4[] = [
     microId: "algo_condition",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique la différence entre les conditions “score > 10” et “score ≥ 10”.",
-    format: "open",
-    expected: ["10", "égal", "egal", "strictement", "compte pas", "inclut"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10 : ex-réponse ouverte (mot-clé « 10 » seul) → QCM sur les mêmes pièges.
+    text: "Quelle est la différence entre les conditions “score > 10” et “score ≥ 10” ?",
+    format: "qcm",
+    choices: [
+      "pour score = 10, la première est fausse et la seconde vraie",
+      "pour score = 10, la première est vraie et la seconde fausse",
+      "aucune : elles donnent toujours le même résultat",
+      "pour score = 11, elles donnent des résultats différents",
+    ],
+    expected: ["pour score = 10, la première est fausse et la seconde vraie"],
+    comparator: "mcq_exact",
     hint: "Que se passe-t-il si score vaut exactement 10 ?",
     explanation:
       "Définition : une condition est un test logique qui peut être vrai ou faux.\n\n" +
