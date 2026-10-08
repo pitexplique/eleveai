@@ -2219,21 +2219,30 @@ function genCompareRectCarre(): Q {
 const EXPLIQUE_CONTEXTES = ["deux jardins", "deux tapis", "deux tablettes de chocolat", "deux nappes", "deux terrains", "deux affiches", "deux pièces d’un appartement", "deux parcelles", "deux plaques de bois", "deux figures dessinées sur un quadrillage"] as const;
 const EXEMPLES_MEME_AIRE: readonly [number, number, number][] = [[1, 4, 2], [2, 8, 4], [4, 9, 6], [1, 9, 3], [3, 12, 6], [2, 18, 6], [4, 16, 8], [1, 16, 4], [4, 25, 10], [1, 36, 6]];
 
-/** ★5 — rédiger : pourquoi deux figures différentes peuvent avoir la même aire. */
+const EXPLIQUE_CHOIX = [
+  "l’aire mesure la surface occupée : deux formes différentes peuvent couvrir la même surface",
+  "deux figures de formes différentes ont toujours des aires différentes",
+  "deux figures de même aire ont forcément le même périmètre",
+  "deux figures de même aire ont forcément la même forme",
+] as const;
+
+/** ★5 — pourquoi deux figures différentes peuvent avoir la même aire (QCM depuis le 08/10). */
 function genExpliqueMemeAire(): Q {
   const ctx = randomChoice(EXPLIQUE_CONTEXTES);
   const [a, b, c] = randomChoice(EXEMPLES_MEME_AIRE);
-  const [p] = randomChoice(PRENOMS);
+  const [p, pr] = randomChoice(PRENOMS);
   return {
     text: randomChoice([
-      `Explique pourquoi ${ctx} de formes différentes peuvent avoir la même aire. Tu peux t’appuyer sur un rectangle de $${a}$ sur $${b}$ et un carré de côté $${c}$.`,
-      `${p} pense que ${ctx} de formes différentes ont forcément des aires différentes. Explique-lui pourquoi c’est faux.`,
-      `Un rectangle de $${a}$ sur $${b}$ et un carré de côté $${c}$ : explique ce qu’ils ont en commun, alors que leurs formes diffèrent.`,
-      `Avec l’exemple de ${ctx}, explique en une ou deux phrases la différence entre « même forme » et « même aire ».`,
+      `${cap(ctx)} de formes différentes peuvent avoir la même aire. Pourquoi ? Pense à un rectangle de $${a}$ sur $${b}$ et à un carré de côté $${c}$.`,
+      `${p} pense que ${ctx} de formes différentes ont forcément des aires différentes. Quelle phrase montre qu’${pr} se trompe ?`,
+      `Un rectangle de $${a}$ sur $${b}$ et un carré de côté $${c}$ ont des formes différentes. Quelle phrase est juste ?`,
+      `Avec l’exemple de ${ctx}, quelle phrase explique la différence entre « même forme » et « même aire » ?`,
     ]),
-    format: "open",
-    expected: ["même", "aire", "surface", "différentes"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : c'était une question ouverte validée par « même » ou « aire » ; QCM sur les mêmes pièges.
+    format: "qcm",
+    choices: shuffle([...EXPLIQUE_CHOIX]),
+    expected: [EXPLIQUE_CHOIX[0]],
+    comparator: "mcq_exact",
     explanation:
       "Définition : l’aire mesure la surface occupée, quelle que soit la forme.\n\n" +
       "Méthode : on calcule l’aire de chaque figure et on compare.\n\n" +
@@ -2247,9 +2256,15 @@ function genAgrandissementAire(): Q {
   const o = randomChoice(OBJETS_AGRANDIS);
   const reduit = Math.random() < 0.3;
   const k = reduit ? 2 : randomChoice([2, 3, 4, 5]);
-  const [u, A] = reduit
-    ? randomChoice<[string, number]>([["cm", 4 * randomInt(5, 30)], ["dm", 4 * randomInt(2, 15)], ["mm", 4 * randomInt(20, 60)]])
-    : randomChoice<[string, number]>([["cm", randomInt(5, 40)], ["dm", randomInt(2, 15)], ["mm", randomInt(50, 200)]]);
+  // ⛔ 08/10/2026 : l'unité suit la taille de l'objet (« un timbre de 5 dm² » sortait).
+  const grand = /drapeau|affiche|vitrail|panneau|tapis|plan/.test(o.n);
+  const [u, A] = grand
+    ? reduit
+      ? (["dm", 4 * randomInt(2, 15)] as [string, number])
+      : (["dm", randomInt(2, 15)] as [string, number])
+    : reduit
+      ? randomChoice<[string, number]>([["cm", 4 * randomInt(5, 30)], ["mm", 4 * randomInt(20, 60)]])
+      : randomChoice<[string, number]>([["cm", randomInt(5, 40)], ["mm", randomInt(50, 200)]]);
   const res = reduit ? A / 4 : A * k * k;
   const [p, pr] = randomChoice(PRENOMS);
   return {
@@ -2388,8 +2403,8 @@ function genAireLitterale(): Q {
   return {
     text: randomChoice([
       `${cap(un(o))} ${pred} (longueurs en cm). Pour $${lettre} = ${v}$, quelle est son aire, en ${U2("cm")} ?`,
-      `${p} dessine ${un(o)} qui ${pred}, les longueurs étant en cm. Quelle aire trouve-t-${pr} pour $${lettre} = ${v}$ ?`,
-      `On note $${lettre}$ une longueur en cm. ${cap(un(o))} ${pred}. Calcule son aire lorsque $${lettre} = ${v}$.`,
+      `${p} dessine ${un(o)} qui ${pred}, les longueurs étant en cm. Quelle aire trouve-t-${pr} pour $${lettre} = ${v}$, en ${U2("cm")} ?`,
+      `On note $${lettre}$ une longueur en cm. ${cap(un(o))} ${pred}. Calcule son aire lorsque $${lettre} = ${v}$, en ${U2("cm")}.`,
     ]),
     format: "short",
     expected: [ans(A)],
@@ -2406,7 +2421,7 @@ function genAireLitterale(): Q {
    LA BANQUE
 =========================================================================== */
 
-export const airesBank: TutorBankItemV4[] = [
+const ITEMS: TutorBankItemV4[] = [
   // =========================
   // AIRE_COMPRENDRE
   // =========================
@@ -2468,10 +2483,17 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_comprendre",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique la différence entre aire et périmètre.",
-    format: "open",
-    expected: ["aire", "surface", "périmètre", "contour"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : questions ouvertes validées par un mot vague ou un nombre seul → QCM sur les mêmes pièges.
+    text: "Quelle phrase dit juste la différence entre aire et périmètre ?",
+    format: "qcm",
+    choices: [
+      "l’aire mesure la surface intérieure ; le périmètre mesure la longueur du contour",
+      "l’aire mesure la longueur du contour ; le périmètre mesure la surface",
+      "l’aire et le périmètre sont deux noms de la même mesure",
+      "le périmètre est toujours le double de l’aire",
+    ],
+    expected: ["l’aire mesure la surface intérieure ; le périmètre mesure la longueur du contour"],
+    comparator: "mcq_exact",
     hint: "L’un mesure l’intérieur, l’autre le tour.",
     explanation:
       "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
@@ -2552,10 +2574,16 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_rectangle",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi l’aire d’un rectangle de longueur 8 cm et de largeur 3 cm vaut 24 cm².",
-    format: "open",
-    expected: ["8", "3", "24", "multiplie"],
-    comparator: "contains_keyword",
+    text: "L’aire d’un rectangle de longueur 8 cm et de largeur 3 cm vaut 24 cm². Pourquoi ?",
+    format: "qcm",
+    choices: [
+      "on multiplie la longueur par la largeur : 8 × 3 = 24",
+      "on additionne les quatre côtés : 8 + 3 + 8 + 3 = 22",
+      "on multiplie la somme par 2 : (8 + 3) × 2 = 22",
+      "on additionne la longueur et la largeur : 8 + 3 = 11",
+    ],
+    expected: ["on multiplie la longueur par la largeur : 8 × 3 = 24"],
+    comparator: "mcq_exact",
     hint: "On multiplie la longueur par la largeur.",
     explanation:
       "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
@@ -2660,10 +2688,16 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_triangle",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi on divise par 2 dans la formule de l’aire d’un triangle.",
-    format: "open",
-    expected: ["rectangle", "moitié", "2"],
-    comparator: "contains_keyword",
+    text: "Pourquoi divise-t-on par 2 dans la formule de l’aire d’un triangle ?",
+    format: "qcm",
+    choices: [
+      "un triangle est la moitié d’un rectangle de même base et de même hauteur",
+      "un triangle a deux côtés égaux",
+      "la hauteur d’un triangle est toujours la moitié de sa base",
+      "on divise par 2 pour obtenir le périmètre",
+    ],
+    expected: ["un triangle est la moitié d’un rectangle de même base et de même hauteur"],
+    comparator: "mcq_exact",
     hint: "Un triangle peut être vu comme la moitié d’un rectangle.",
     explanation:
       "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
@@ -2718,10 +2752,16 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_parallelogramme",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi on utilise la hauteur et non le côté incliné pour calculer l’aire d’un parallélogramme.",
-    format: "open",
-    expected: ["hauteur", "base", "côté incliné"],
-    comparator: "contains_keyword",
+    text: "Pourquoi utilise-t-on la hauteur et non le côté incliné pour calculer l’aire d’un parallélogramme ?",
+    format: "qcm",
+    choices: [
+      "en découpant un triangle et en le recollant, le parallélogramme devient un rectangle de même base, dont la largeur est la hauteur",
+      "le côté incliné est toujours plus court que la hauteur",
+      "le côté incliné sert seulement pour les triangles",
+      "on peut prendre l’un ou l’autre, on trouve la même aire",
+    ],
+    expected: ["en découpant un triangle et en le recollant, le parallélogramme devient un rectangle de même base, dont la largeur est la hauteur"],
+    comparator: "mcq_exact",
     hint: "La hauteur est perpendiculaire à la base.",
     explanation:
       "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
@@ -2769,10 +2809,16 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_figure",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment calculer l’aire d’une figure dessinée sur un quadrillage.",
-    format: "open",
-    expected: ["compter", "carrés", "unité"],
-    comparator: "contains_keyword",
+    text: "Comment calcule-t-on l’aire d’une figure dessinée sur un quadrillage ?",
+    format: "qcm",
+    choices: [
+      "on compte les carreaux qu’elle recouvre, puis on multiplie par l’aire d’un carreau",
+      "on compte les côtés de carreau sur son bord",
+      "on compte les sommets de la figure",
+      "on multiplie le nombre de lignes du quadrillage par le nombre de colonnes, même hors de la figure",
+    ],
+    expected: ["on compte les carreaux qu’elle recouvre, puis on multiplie par l’aire d’un carreau"],
+    comparator: "mcq_exact",
     hint: "Chaque petit carré représente une unité d’aire.",
     explanation:
       "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
@@ -3789,3 +3835,34 @@ export const airesBank: TutorBankItemV4[] = [
     generate: () => genAireLitterale(),
   },
 ];
+
+/* ---------------------------------------------------------------------------
+   ⛔ 08/10/2026 — LES RÉPONSES CHIFFRÉES PORTENT LEUR UNITÉ ET UNE VIRGULE.
+   « 13.5 » (point anglais) devient « 13,5 » ; quand l’énoncé impose l’unité
+   (« en $\text{cm}^2$ », « Combien d’ares… »), elle entre dans `expected` :
+   « 13,5 m² ». number_equal accepte alors « 13,5 », « 13,5 m² », « 13,5m2 »
+   et REFUSE « 13,5 m ». Comme pour les périmètres (04/10).
+--------------------------------------------------------------------------- */
+const UNITE_DEMANDEE =
+  /(?:(?:\ben|\(en|[Cc]ombien de|nombre de|…) |[Cc]ombien d’|nombre d’)(mm²|cm²|dm²|m²|km²|ha|ares|unités²|unités|mm|cm|dm|m|km|€|euros|grammes|litres|kWh)(?![\p{L}²³])/gu;
+/** Les écritures de l’unité : le symbole d’abord, puis le mot (« 1200 g » et « 1200 grammes »). */
+const ECRITURES: Record<string, string[]> = { "€": ["€", "euros"], euros: ["€", "euros"], grammes: ["g", "grammes"], litres: ["L", "litres"] };
+function avecUniteAire(q: Q): Q {
+  const e0 = String(q.expected?.[0] ?? "");
+  if (q.comparator !== "number_equal" || !/^-?\d+(?:\.\d+)?$/.test(e0)) return q;
+  const texte = q.text
+    .replace(/\$\\text\{([a-z]+)\}\^2\$/g, "$1²")
+    .replace(/\$[^$]*\$/g, "#");
+  const lues = [...texte.matchAll(UNITE_DEMANDEE)];
+  const u = lues.length ? lues[lues.length - 1][1] : null;
+  const formes = u ? ECRITURES[u] ?? [u] : [""];
+  const nombres = q.expected.map((x) => x.replace(".", ","));
+  return { ...q, expected: formes.flatMap((f) => nombres.map((v) => (f ? `${v} ${f}` : v))) };
+}
+
+export const airesBank: TutorBankItemV4[] = ITEMS.map((it) =>
+  it.kind === "template"
+    ? { ...it, generate: () => avecUniteAire(it.generate()) }
+    : // Les items figés aussi : « (en cm²) » → « 36 cm² ».
+      ({ ...it, expected: avecUniteAire(it as unknown as Q).expected } as TutorBankItemV4)
+);

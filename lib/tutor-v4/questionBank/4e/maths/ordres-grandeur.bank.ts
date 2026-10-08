@@ -128,21 +128,35 @@ const PRENOMS = [
  * « 4,5*10⁻⁹ »… Les espaces sont déjà tolérés par le comparateur.
  * ⛔ Pas de `contains_keyword` : « 4,5×10^-97 » doit être refusé.
  */
-function sciVariantes(m: number, e: number): string[] {
-  const ms = [...new Set([fr(m), String(Math.round(m * 1e6) / 1e6)])];
+// ⛔ 08/10/2026 : plus de point décimal anglais dans les réponses (« 4.5×10^-9 ») —
+// le comparateur change déjà la virgule de l'élève en point, « 4,5 » suffit. Le
+// point de multiplication (« 6.10^3 ») s'écrit « 6. 10^3 » : le comparateur
+// retire les espaces, l'élève qui tape « 6.10^3 » est donc accepté.
+// `unites` : les façons d'écrire l'unité imposée par l'énoncé (« m », « mètres »),
+// que l'élève peut ajouter derrière sa réponse.
+function sciVariantes(m: number, e: number, unites: readonly string[] = []): string[] {
   const moins = String(e).replace("-", "−");
   const exps = [...new Set([`10^${e}`, `10^(${e})`, `10^{${e}}`, `10${sup(e)}`, `10^${moins}`, `10^(${moins})`])];
-  const out: string[] = [`${fr(m)} × 10^${e}`];
-  for (const mm of ms) for (const f of ["×", "x", "*", "."]) for (const x of exps) out.push(`${mm}${f}${x}`);
-  if (m === 1) out.push(...exps);
-  return [...new Set(out)];
+  const nus: string[] = [`${fr(m)} × 10^${e}`];
+  for (const f of ["×", "x", "*", ". "]) for (const x of exps) nus.push(`${fr(m)}${f}${x}`);
+  if (m === 1) nus.push(...exps);
+  const avecUnite = unites.flatMap((u) => nus.map((s) => `${s} ${u}`));
+  return [...new Set(unites.length ? [avecUnite[0], ...nus, ...avecUnite] : nus)];
 }
 
 /** Un entier, et ses écritures acceptables : « 5000000 », « 5 000 000 », « 5×10^6 ». */
-function nombreVariantes(v: number): string[] {
+function nombreVariantes(v: number, unites: readonly string[] = []): string[] {
   const e = Math.floor(Math.log10(v) + 1e-9);
   const m = Math.round((v / Math.pow(10, e)) * 1e6) / 1e6;
-  return [...new Set([String(v), fr(v), ...(e >= 3 ? sciVariantes(m, e) : [])])];
+  const nus = [String(v), fr(v)];
+  return [
+    ...new Set([
+      ...(unites.length ? [`${v} ${unites[0]}`] : []),
+      ...nus,
+      ...unites.flatMap((u) => nus.map((s) => `${s} ${u}`)),
+      ...(e >= 3 ? sciVariantes(m, e, unites) : []),
+    ]),
+  ];
 }
 
 /* ---------------------------------------------------------------------------
@@ -645,7 +659,7 @@ export const ordresGrandeurBank: TutorBankItemV4[] = [
       return {
         text: `${phrase} ${question}`,
         format: "short",
-        expected: sciVariantes(n, c.e),
+        expected: sciVariantes(n, c.e, [UNITES[c.u].sym, UNITES[c.u].pl, UNITES[c.u].nom]),
         comparator: "exact_text",
         explanation:
           "Définition : un préfixe se remplace par sa puissance de dix, et le nombre reste devant.\n\n" +
@@ -974,7 +988,7 @@ export const ordresGrandeurBank: TutorBankItemV4[] = [
       return {
         text: `${phrase} ${question} (Réponds par 10, 100, 1 000…)`,
         format: "short",
-        expected: [String(estimation), fr(estimation), `10^${k}`, `10${sup(k)}`],
+        expected: [`${estimation} €`, String(estimation), fr(estimation), `${fr(estimation)} €`, `10^${k}`, `10${sup(k)}`, `10^${k} €`, `10${sup(k)} €`],
         comparator: "number_equal",
         explanation:
           "Définition : un ordre de grandeur remplace chaque nombre par la puissance de dix la plus proche.\n\n" +
@@ -1320,7 +1334,7 @@ export const ordresGrandeurBank: TutorBankItemV4[] = [
       return {
         text: `${phrase} ${question} (Réponds par un nombre.)`,
         format: "short",
-        expected: nombreVariantes(resultat),
+        expected: nombreVariantes(resultat, [mot(c.petit, c.u, resultat), mot(c.petit, c.u, 1), prefixe(c.petit).symbole + UNITES[c.u].sym]),
         comparator: "number_equal",
         explanation:
           "Définition : passer d'un préfixe à un autre, c'est soustraire leurs exposants.\n\n" +

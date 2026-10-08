@@ -1211,7 +1211,8 @@ function carreProbleme(): Q {
   if (t === 1) {
     const ctx = randomChoice(CONTOURS_CARRES.filter((x) => x.porte));
     const c = randomInt(ctx.l[0], ctx.l[1]);
-    const g = randomChoice([1, 1.5, 2, 2.5, 3, 4]);
+    // ⛔ 08/10/2026 : l'ouverture est plus étroite que le côté.
+    const g = randomChoice([1, 1.5, 2, 2.5, 3, 4].filter((x) => x < c));
     const res = 4 * c - g;
     const ouv = randomChoice(["un portail", "un passage", "une entrée", "un portillon"]);
     const text = randomChoice([
@@ -1733,13 +1734,15 @@ const LIEUX_RECT = [
 
 function probTours(): Q {
   const lieu = randomChoice(LIEUX_RECT);
-  const L = randomInt(lieu.L[0], lieu.L[1]);
-  const l = randomInt(lieu.l[0], lieu.l[1]);
+  const t = randomInt(0, 3);
+  // ⛔ 08/10/2026 : en km, deux décimales au plus (« 1,794 km » sortait) : dimensions multiples de 5 m.
+  const pas = t === 1 ? 5 : 1;
+  const L = Math.round(randomInt(lieu.L[0], lieu.L[1]) / pas) * pas;
+  const l = Math.round(randomInt(lieu.l[0], lieu.l[1]) / pas) * pas;
   const P = 2 * (L + l);
   const k = randomInt(2, 8);
   const D = k * P;
   const p = randomChoice(PRENOMS);
-  const t = randomInt(0, 3);
   const expl = (res: string) =>
     E("un tour correspond au périmètre.", "on calcule un tour, puis on multiplie par le nombre de tours.", `$2 \\times (${T(L)} + ${T(l)}) = ${T(P)}$ m ; $${T(P)} \\times ${k} = ${T(D)}$ m.`, res);
   if (t === 0)
@@ -1849,7 +1852,8 @@ function probTriangle(): Q {
 function probPortail(): Q {
   const c = randomChoice(CONTOURS.filter((x) => x.porte));
   const { L, l } = dims(c, true);
-  const g = randomChoice([1, 1.5, 2, 2.5, 3, 4]);
+  // ⛔ 08/10/2026 : l'ouverture est plus étroite que le plus petit côté (un portillon de 2,5 m sur un côté de 2 m sortait).
+  const g = randomChoice([1, 1.5, 2, 2.5, 3, 4].filter((x) => x < l));
   const P = 2 * (L + l);
   const res = P - g;
   const ouv = randomChoice(["un portail", "un portillon", "un passage", "une entrée"]);
@@ -1901,7 +1905,8 @@ function probCout(): Q {
   // Un prix s'écrit avec deux décimales : « 1,10 € », pas « 1,1 € ».
   const prixTxt = Number.isInteger(prix) ? M(prix) : `$${prix.toFixed(2).replace(".", "{,}")}$`;
   const Pm = u === "cm" ? P / 100 : P;
-  const cout = arrondi(Pm * prix, 2);
+  // ⛔ 08/10/2026 : calcul en millièmes d'euro ENTIERS — en virgule flottante, 29,585 s'arrondissait à 29,58.
+  const cout = Math.round(Math.round(Pm * prix * 1000) / 10) / 100;
   const p = randomChoice(PRENOMS);
   const text = randomChoice([
     `${cap(c.un)} est ${desc}. Le mètre ${deNu(c.mat)} coûte ${prixTxt} €. Combien coûte la longueur ${deNu(c.mat)} nécessaire pour ${pour(c.but, c.le)} ?`,
@@ -2177,14 +2182,15 @@ function defiCompare(): Q {
   const b = randomInt(2, a - 1); // un vrai rectangle, pas un carré
   let c2: number;
   let d2: number;
+  // ⛔ 08/10/2026 : ni l'un ni l'autre ne doit être un carré (« 3 cm sur 3 cm » sortait).
   if (egal) {
     const s = a + b;
-    c2 = randomInt(Math.ceil(s / 2), s - 1);
+    c2 = randomInt(Math.floor(s / 2) + 1, s - 1);
     d2 = s - c2;
     if (c2 === a) { c2 += 1; d2 -= 1; }
   } else {
     c2 = randomInt(3, 15);
-    d2 = randomInt(2, c2);
+    d2 = randomInt(2, c2 - 1);
     if (c2 + d2 === a + b) c2 += 1;
   }
   const P1 = 2 * (a + b);
@@ -3596,10 +3602,17 @@ const ITEMS: TutorBankItemV4[] = [
     microId: "aire_perimetre_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi deux figures peuvent avoir le même périmètre mais des formes différentes.",
-    format: "open",
-    expected: ["périmètre", "contour", "forme"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : c'était une question ouverte validée par le seul mot « périmètre » ; QCM sur les mêmes pièges.
+    text: "Un carré de 5 cm de côté et un rectangle de 7 cm sur 3 cm ont tous deux un périmètre de 20 cm. Pourquoi deux figures de formes différentes peuvent-elles avoir le même périmètre ?",
+    format: "qcm",
+    choices: [
+      "le périmètre ne mesure que la longueur du contour, qu’on peut répartir de bien des façons",
+      "c’est impossible : deux formes différentes ont toujours des périmètres différents",
+      "parce qu’elles ont aussi la même aire",
+      "parce qu’elles ont le même nombre de côtés",
+    ],
+    expected: ["le périmètre ne mesure que la longueur du contour, qu’on peut répartir de bien des façons"],
+    comparator: "mcq_exact",
     hint: "Le périmètre mesure le contour, pas la forme.",
     explanation:
       "Définition : le périmètre est la longueur totale du contour.\n\n" +
