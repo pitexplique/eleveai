@@ -2889,7 +2889,7 @@ export const decimauxBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Quel est l’arrondi de 6,3 à l’unité près ?",
     format: "qcm",
-    choices: ["6", "7", "6,0", "6,3"],
+    choices: ["6", "7", "5", "6,3"], // 08/10/2026 : « 6,0 » vaut 6, retiré
     expected: ["6"],
     comparator: "mcq_exact",
     hint: "Le chiffre des dixièmes est 3.",
@@ -3138,7 +3138,8 @@ export const decimauxBank: TutorBankItemV4[] = [
         choices: makeChoices(correct, [
           String(entier + 1),
           decimal,
-          `${entier},0`,
+          // 08/10/2026 : « 6,0 » vaut 6, c'était une 2e bonne réponse.
+          String(entier - 1),
         ]),
         expected: [correct],
         comparator: "mcq_exact",

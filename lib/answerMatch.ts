@@ -34,7 +34,11 @@ type NumberWithUnit = { num: number; unit: string };
 // + unité éventuelle. L'unité doit être un seul mot (lettres, chiffres pour les
 // exposants « cm2 », %, °, €, ², ³) : « 4 ou 5 » ne passe pas.
 function parseNumberWithUnit(value: string): NumberWithUnit | null {
-  const match = value.match(/^(-?\d+(?:\.\d+)?)\s*([a-zà-öø-ÿ€%°²³0-9]{0,15})$/);
+  // ⛔ 08/10/2026 : « 32 000 » était lu « 32 » + unité « 000 », si bien que
+  // « 32 » passait pour « 32 000 ». On colle d'abord les espaces des milliers,
+  // et une unité ne commence jamais par un chiffre.
+  value = value.replace(/(\d) (?=\d{3}(?!\d))/g, "$1");
+  const match = value.match(/^(-?\d+(?:\.\d+)?)\s*((?:[a-zà-öø-ÿ€%°²³][a-zà-öø-ÿ€%°²³0-9]{0,14})?)$/);
   if (!match) return null;
 
   const num = Number(match[1]);
@@ -44,6 +48,8 @@ function parseNumberWithUnit(value: string): NumberWithUnit | null {
 }
 
 function sameUnit(userUnit: string, expectedUnit: string) {
+  // ⛔ 08/10/2026 : « pi » n'est pas une unité : « 300 » ne vaut pas « 300 pi ».
+  if (/^pi$/.test(userUnit) !== /^pi$/.test(expectedUnit)) return false;
   // Unité omise d'un côté : l'énoncé fixe déjà l'unité, on accepte.
   if (!userUnit || !expectedUnit) return true;
   // Tolère le pluriel, les accents (« eleve » vs « élèves ») et les exposants

@@ -177,7 +177,9 @@ export const monnaieBank: TutorBankItemV4[] = [
         // On en écrit assez pour qu'il en reste toujours trois après le tri.
         choices: makeChoices(euro(total), [
           euroFautif(total),
-          `${e},${c}0 €`,
+          // 08/10/2026 : au-dessus de 9 centimes, « 2,340 € » VAUT 2,34 € : ce
+          // n'était pas un piège mais une 2e bonne réponse (QCM désormais stricts).
+          ...(c < 10 ? [`${e},${c}0 €`] : []),
           `${total} €`,
           `${c},${String(e).padStart(2, "0")} €`,
           `${e + 1},${String(c).padStart(2, "0")} €`,

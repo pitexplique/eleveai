@@ -1590,7 +1590,7 @@ export const decimauxBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Quelle écriture décimale correspond à 9/10 ?",
     format: "qcm",
-    choices: ["0,09", "0,9", "9,0", "0,900"],
+    choices: ["0,09", "0,9", "9,0", "0,009"], // 08/10/2026 : « 0,900 » vaut 0,9, retiré
     expected: ["0,9"],
     comparator: "mcq_exact",
     hint: "9/10 signifie 9 dixièmes.",

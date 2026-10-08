@@ -55,8 +55,16 @@ export function compareAnswer(args: {
   // answersMatch tolère les espaces en plus/en moins et les unités ajoutées
   // ou omises (« 190cm », « 5 cm » pour « 5 »…) — voir lib/answerMatch.ts.
   switch (args.comparator) {
-    case "exact_text":
+    // ⛔ 08/10/2026 — un QCM se corrige au TEXTE EXACT du choix cliqué (l'écran
+    // envoie le choix tel quel). Avant, il passait par la comparaison tolérante :
+    // majuscules et espaces ignorés, lettre lue comme une unité. En français,
+    // « la cloche sonne à midi. » était compté juste pour « La cloche… »,
+    // « aussi tôt » pour « aussitôt » ; en maths « 2 » pour « 2x ». Mesuré :
+    // sur 228 033 QCM tirés, la bonne réponse est toujours exactement un choix.
     case "mcq_exact":
+      return args.expected.some((exp) => String(exp).trim() === String(args.answer).trim());
+
+    case "exact_text":
     case "number_equal":
       return args.expected.some(
         (exp) => normalize(exp) === a || answersMatch(args.answer, exp)
