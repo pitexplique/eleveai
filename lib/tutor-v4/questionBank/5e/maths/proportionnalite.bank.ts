@@ -32,6 +32,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   // PROP_RECONNAITRE
   // =========================
+  // 08/10/2026 : précise et simple (Frédéric) — oui/non en QCM, plus de mot-clé.
   {
     kind: "fixed",
     id: "prop_reconnaitre_fixed_1",
@@ -42,9 +43,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     difficulty: 1,
     theme: "neutral",
     text: "Si 3 cahiers coûtent 9 € et 6 cahiers coûtent 18 €, la situation est-elle proportionnelle ?",
-    format: "short",
+    format: "qcm",
+    choices: ["oui", "non"],
     expected: ["oui"],
-    comparator: "contains_keyword",
+    comparator: "mcq_exact",
     hint: "Quand on multiplie la quantité par un nombre, le prix doit être multiplié par le même nombre.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre avec un même coefficient.\n\n" +
@@ -53,6 +55,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
     tags: ["prop_proportionnalite", "reconnaitre"],
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "prop_reconnaitre_fixed_2",
@@ -63,9 +66,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     difficulty: 1,
     theme: "neutral",
     text: "Si 4 billets coûtent 10 € et 8 billets coûtent 21 €, la situation est-elle proportionnelle ?",
-    format: "short",
+    format: "qcm",
+    choices: ["oui", "non"],
     expected: ["non"],
-    comparator: "contains_keyword",
+    comparator: "mcq_exact",
     hint: "Si on double la quantité, l’autre grandeur doit aussi doubler.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre avec un même coefficient.\n\n" +
@@ -74,6 +78,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
     tags: ["prop_proportionnalite", "reconnaitre"],
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "prop_reconnaitre_fixed_3",
@@ -84,9 +89,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     difficulty: 2,
     theme: "reunion",
     text: "Au marché de Saint-Pierre, 2 ananas coûtent 6 € et 5 ananas coûtent 15 €. La situation est-elle proportionnelle ?",
-    format: "short",
+    format: "qcm",
+    choices: ["oui", "non"],
     expected: ["oui"],
-    comparator: "contains_keyword",
+    comparator: "mcq_exact",
     hint: "Vérifie si le prix d’un ananas reste le même.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre avec un même coefficient.\n\n" +
@@ -400,6 +406,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   // PROP_RATIO
   // =========================
+  // 08/10/2026 : précise et simple (Frédéric) — écriture unique « 2:3 » (exact_text ;
+  // « 2 : 3 » et « 2/3 » passent par la normalisation du comparateur).
   {
     kind: "fixed",
     id: "prop_rapport_fixed_1",
@@ -409,10 +417,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_rapport",
     difficulty: 2,
     theme: "cuisine",
-    text: "Dans un mélange, il y a 2 doses de sirop pour 3 doses d’eau. Quel est le ratio sirop:eau ?",
+    text: "Dans un mélange, il y a 2 doses de sirop pour 3 doses d’eau. Écris le ratio sirop:eau (exemple : 1:4).",
     format: "short",
-    expected: ["2:3", "2 pour 3", "2/3"],
-    comparator: "contains_keyword",
+    expected: ["2:3", "2 : 3", "2 pour 3"],
+    comparator: "exact_text",
     hint: "Écris les deux quantités dans l’ordre demandé.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre avec un même coefficient.\n\n" +
@@ -421,6 +429,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
     tags: ["prop_proportionnalite", "ratio", "cuisine"],
   },
+  // 08/10/2026 : précise et simple (Frédéric) — l'énoncé dit « sans le simplifier » :
+  // une seule réponse, 4:6.
   {
     kind: "fixed",
     id: "prop_rapport_fixed_2",
@@ -430,11 +440,11 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_rapport",
     difficulty: 2,
     theme: "sport",
-    text: "Dans une équipe, il y a 4 filles et 6 garçons. Quel est le ratio filles:garçons ?",
+    text: "Dans une équipe, il y a 4 filles et 6 garçons. Écris le ratio filles:garçons, sans le simplifier.",
     format: "short",
-    expected: ["4:6", "4 pour 6", "4/6"],
-    comparator: "contains_keyword",
-    hint: "On ne te demande pas forcément de simplifier ici.",
+    expected: ["4:6", "4 : 6", "4 pour 6"],
+    comparator: "exact_text",
+    hint: "Écris les deux nombres de l’énoncé, dans l’ordre demandé.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre avec un même coefficient.\n\n" +
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
@@ -757,6 +767,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
     tags: ["prop_proportionnalite", "defi", "coefficient_multiplicateur", "neutral"],
   },
+  // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi 5 tickets
+  // à 12 € et 10 tickets à 25 € n'est pas proportionnel ». Désormais : le prix
+  // qu'il FAUDRAIT (24 €), qui montre l'écart avec 25 €.
   {
     kind: "fixed",
     id: "prop_defi_fixed_3",
@@ -766,15 +779,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi la situation suivante n’est pas proportionnelle : 5 tickets coûtent 12 € et 10 tickets coûtent 25 €.",
+    text: "5 tickets coûtent 12 €. Si le prix est proportionnel, combien coûtent 10 tickets ?",
     format: "short",
-    expected: ["double", "24", "25", "pas proportionnelle"],
-    comparator: "contains_keyword",
-    hint: "Si on double la quantité, la deuxième grandeur doit aussi doubler.",
+    expected: ["24 €", "24"],
+    comparator: "number_equal",
+    hint: "Si on double la quantité, le prix double aussi.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre avec un même coefficient.\n\n" +
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
-          ("Quand on passe de 5 à 10 tickets, on double la quantité. Si la situation était proportionnelle, le prix devrait passer de 12 € à 24 €. Or ici il passe à 25 €. Ce n’est donc pas une situation proportionnelle.") +
+          ("De 5 à 10 tickets, on multiplie par 2. Le prix est aussi multiplié par 2 : 12 × 2 = 24 €. Un vendeur qui demande 25 € n’applique pas la proportionnalité.") +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
     tags: ["prop_proportionnalite", "defi", "raisonnement"],
   },
@@ -825,15 +838,17 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       const targetTotal = isProp ? total * coef : total * coef + randomChoice([1, 2]);
 
       return {
-        text: `La situation suivante est-elle proportionnelle : ${qty} objets coûtent ${total} € et ${targetQty} objets coûtent ${targetTotal} € ?`,
-        format: "short",
+        // 08/10/2026 : précise et simple (Frédéric) — oui/non en QCM.
+        text: `${qty} objets coûtent ${total} € et ${targetQty} objets coûtent ${targetTotal} €. La situation est-elle proportionnelle ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
         expected: [isProp ? "oui" : "non"],
-        comparator: "contains_keyword",
+        comparator: "mcq_exact",
         explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre avec un même coefficient.\n\n" +
           "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
           (isProp
           ? `On passe de ${qty} à ${targetQty} en multipliant par ${coef}, et le prix passe aussi de ${total} à ${targetTotal} en multipliant par ${coef}. La situation est proportionnelle.`
-          : `On passe de ${qty} à ${targetQty} en multipliant par ${coef}, mais le prix ne suit pas exactement le même coefficient. La situation n’est donc pas proportionnelle.`) +
+          : `On passe de ${qty} à ${targetQty} en multipliant par ${coef}. Le prix devrait être ${total} × ${coef} = ${total * coef} €. Or il vaut ${targetTotal} €. La situation n’est donc pas proportionnelle.`) +
           "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
       };
     },
@@ -1178,9 +1193,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       };
     },
   },
-    /* =========================
-     QUESTIONS OUVERTES — PROPORTIONNALITÉ
+  /* =========================
+     ANCIENNES QUESTIONS OUVERTES — PROPORTIONNALITÉ
+     08/10/2026 : précises et simples (Frédéric : « les questions open doivent
+     être précises et simples »). Avant : « Explique comment… / pourquoi… »,
+     corrigé par UN mot-clé (« 3 » suffisait). Désormais : un cas chiffré, un
+     calcul, une seule réponse. Les id restent (historique des élèves).
   ========================= */
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "prop_reconnaitre_open_1",
@@ -1190,17 +1210,17 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_reconnaitre",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi 3 cahiers coûtent 9 € et 6 cahiers coûtent 18 € est une situation proportionnelle.",
-    format: "open",
-    expected: ["double", "3", "6", "9", "18"],
-    comparator: "contains_keyword",
-    hint: "Regarde si les deux grandeurs sont multipliées par le même nombre.",
-    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre avec un même coefficient.\n\n" +
-          "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
-          ("On passe de 3 à 6 cahiers en multipliant par 2, et de 9 € à 18 € en multipliant aussi par 2. La situation est proportionnelle.") +
-          "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["prop_proportionnalite", "open", "reconnaitre"],
+    text: "3 cahiers coûtent 9 € et 6 cahiers coûtent 18 €. Le nombre de cahiers est multiplié par 2. Par combien le prix est-il multiplié ?",
+    format: "short",
+    expected: ["2"],
+    comparator: "number_equal",
+    hint: "Divise 18 par 9.",
+    explanation: expl(
+      "18 ÷ 9 = 2. Le prix est multiplié par 2, comme le nombre de cahiers. Les deux grandeurs sont multipliées par le même nombre : la situation est proportionnelle.",
+    ),
+    tags: ["prop_proportionnalite", "short", "reconnaitre"],
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "prop_table_open_1",
@@ -1210,17 +1230,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_table",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment trouver le prix de 9 cahiers si 3 cahiers coûtent 12 €.",
-    format: "open",
-    expected: ["3", "9", "12", "36"],
-    comparator: "contains_keyword",
+    text: "3 cahiers coûtent 12 €. Combien coûtent 9 cahiers ?",
+    format: "short",
+    expected: ["36 €", "36"],
+    comparator: "number_equal",
     hint: "De 3 à 9, on multiplie par 3.",
-    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre avec un même coefficient.\n\n" +
-          "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
-          ("On passe de 3 à 9 cahiers en multipliant par 3. Le prix est donc aussi multiplié par 3 : 12 × 3 = 36 €.") +
-          "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["prop_proportionnalite", "open", "tableau"],
+    explanation: expl("De 3 à 9 cahiers, on multiplie par 3. Le prix est aussi multiplié par 3 : 12 × 3 = 36 €."),
+    tags: ["prop_proportionnalite", "short", "tableau"],
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "prop_quatrieme_open_1",
@@ -1230,17 +1248,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_quatrieme",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment calculer le prix de 7 objets si 4 objets coûtent 12 €.",
-    format: "open",
-    expected: ["12", "4", "3", "7", "21"],
-    comparator: "contains_keyword",
-    hint: "Passe par le prix d’un objet.",
-    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre avec un même coefficient.\n\n" +
-          "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
-          ("4 objets coûtent 12 €, donc 1 objet coûte 3 €. Alors 7 objets coûtent 7 × 3 = 21 €.") +
-          "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["prop_proportionnalite", "open", "quatrieme_proportionnelle"],
+    text: "4 objets coûtent 12 €. Combien coûtent 7 objets ?",
+    format: "short",
+    expected: ["21 €", "21"],
+    comparator: "number_equal",
+    hint: "Cherche d’abord le prix d’un objet.",
+    explanation: expl("Un objet coûte 12 ÷ 4 = 3 €. Donc 7 objets coûtent 7 × 3 = 21 €."),
+    tags: ["prop_proportionnalite", "short", "quatrieme_proportionnelle"],
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "prop_coeff_open_1",
@@ -1250,17 +1266,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_coeff",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment trouver le coefficient de proportionnalité si 4 stylos coûtent 20 €.",
-    format: "open",
-    expected: ["20", "4", "5", "divise"],
-    comparator: "contains_keyword",
-    hint: "Le coefficient correspond ici au prix d’un stylo.",
-    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre avec un même coefficient.\n\n" +
-          "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
-          ("On divise 20 par 4 : 20 ÷ 4 = 5. Le coefficient de proportionnalité est 5.") +
-          "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["prop_proportionnalite", "open", "coefficient"],
+    text: "4 stylos coûtent 20 €. Quel est le coefficient de proportionnalité (le prix d’un stylo) ?",
+    format: "short",
+    expected: ["5"],
+    comparator: "number_equal",
+    hint: "Divise le prix par le nombre de stylos.",
+    explanation: expl("On divise le prix par la quantité : 20 ÷ 4 = 5. Le coefficient est 5 (un stylo coûte 5 €)."),
+    tags: ["prop_proportionnalite", "short", "coefficient"],
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "prop_rapport_open_1",
@@ -1270,17 +1284,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_rapport",
     difficulty: 3,
     theme: "cuisine",
-    text: "Explique pourquoi avec un ratio sirop:eau de 2:5, 8 verres de sirop nécessitent 20 verres d’eau.",
-    format: "open",
-    expected: ["2", "5", "8", "20", "multiplie"],
-    comparator: "contains_keyword",
+    text: "Le ratio sirop:eau est 2:5. On met 8 verres de sirop. Combien faut-il de verres d’eau ?",
+    format: "short",
+    expected: ["20"],
+    comparator: "number_equal",
     hint: "De 2 à 8, on multiplie par 4.",
-    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre avec un même coefficient.\n\n" +
-          "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
-          ("Le ratio est 2:5. On passe de 2 à 8 en multipliant par 4, donc on multiplie aussi 5 par 4 : il faut 20 verres d’eau.") +
-          "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["prop_proportionnalite", "open", "ratio"],
+    explanation: expl("De 2 à 8 verres de sirop, on multiplie par 4. On multiplie aussi l’eau par 4 : 5 × 4 = 20 verres d’eau."),
+    tags: ["prop_proportionnalite", "short", "ratio"],
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "prop_pourcentage_open_1",
@@ -1290,17 +1302,16 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_pourcentage",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment calculer 25 % de 80.",
-    format: "open",
-    expected: ["25", "quart", "80", "20"],
-    comparator: "contains_keyword",
+    text: "Calcule 25 % de 80.",
+    format: "short",
+    expected: ["20"],
+    comparator: "number_equal",
     hint: "25 %, c’est un quart.",
-    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre avec un même coefficient.\n\n" +
-          "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
-          ("25 % correspond à un quart. Un quart de 80 vaut 20, donc 25 % de 80 = 20.") +
-          "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["prop_proportionnalite", "open", "pourcentage"],
+    explanation: expl("25 %, c’est un quart. Un quart de 80 : 80 ÷ 4 = 20. Donc 25 % de 80 = 20."),
+    tags: ["prop_proportionnalite", "short", "pourcentage"],
   },
+  // 08/10/2026 : précise et simple (Frédéric) — leurres : garder 15 % au lieu de
+  // 85 % (0,15), confondre baisse et hausse (1,15).
   {
     kind: "fixed",
     id: "prop_coeff_multiplicateur_open_1",
@@ -1310,17 +1321,18 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_coeff_multiplicateur",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi une réduction de 15 % correspond à multiplier par 0,85.",
-    format: "open",
-    expected: ["100", "15", "85", "0,85"],
-    comparator: "contains_keyword",
-    hint: "Après une réduction de 15 %, il reste 85 %.",
-    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre avec un même coefficient.\n\n" +
-          "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
-          ("Une réduction de 15 % signifie qu’il reste 85 % de la valeur initiale. Or 85 % = 85/100 = 0,85.") +
-          "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["prop_proportionnalite", "open", "coefficient_multiplicateur"],
+    text: "Un prix baisse de 15 %. Par quel nombre le multiplie-t-on ?",
+    format: "qcm",
+    choices: ["0,85", "0,15", "1,15"],
+    expected: ["0,85"],
+    comparator: "mcq_exact",
+    hint: "Après une baisse de 15 %, il reste 85 %.",
+    explanation: expl("Après une baisse de 15 %, il reste 100 % − 15 % = 85 % du prix. Et 85 % = 0,85. On multiplie donc par 0,85."),
+    tags: ["prop_proportionnalite", "qcm", "coefficient_multiplicateur"],
   },
+  // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique son erreur »
+  // (l'élève ajoutait au lieu de multiplier). Les leurres sont ces erreurs
+  // d'addition : 12 + 10 = 22 (on ajoute l'écart des quantités), 12 + 15 = 27.
   {
     kind: "fixed",
     id: "prop_defi_open_1",
@@ -1330,21 +1342,20 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève dit : « Si 5 tickets coûtent 12 €, alors 10 tickets coûtent 25 € parce qu’on ajoute 13 ». Explique son erreur.",
-    format: "open",
-    expected: ["double", "24", "25", "proportionnelle", "erreur"],
-    comparator: "contains_keyword",
-    hint: "Si la quantité double, le prix doit doubler aussi.",
-    explanation: "Définition : deux grandeurs sont proportionnelles quand on passe de l’une à l’autre avec un même coefficient.\n\n" +
-          "Méthode : on utilise le coefficient de proportionnalité, un tableau ou un produit en croix.\n\nCalcul : " +
-          ("L’élève raisonne par addition. En proportionnalité, on utilise une multiplication. Si 5 tickets coûtent 12 €, alors 10 tickets devraient coûter 24 €, pas 25 €.") +
-          "\n\nConclusion : la valeur obtenue respecte la proportionnalité.",
-    tags: ["prop_proportionnalite", "open", "defi", "erreur"],
+    text: "5 tickets coûtent 12 €. Le prix est proportionnel. Combien coûtent 15 tickets ?",
+    format: "qcm",
+    choices: ["36 €", "22 €", "27 €"],
+    expected: ["36 €"],
+    comparator: "mcq_exact",
+    hint: "En proportionnalité, on multiplie : on n’ajoute pas.",
+    explanation: expl("De 5 à 15 tickets, on multiplie par 3. Le prix aussi : 12 × 3 = 36 €. Ajouter 10 (ou 15) au prix est une erreur : en proportionnalité, on multiplie."),
+    tags: ["prop_proportionnalite", "qcm", "defi", "erreur"],
   },
 
   // =========================
   // TOP-UP — PROP_RECONNAITRE (+3)
   // =========================
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "prop_reconnaitre_fixed_4",
@@ -1355,13 +1366,17 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     difficulty: 2,
     theme: "neutral",
     text: "Si 5 places coûtent 25 € et 8 places coûtent 40 €, la situation est-elle proportionnelle ?",
-    format: "short",
+    format: "qcm",
+    choices: ["oui", "non"],
     expected: ["oui"],
-    comparator: "contains_keyword",
+    comparator: "mcq_exact",
     hint: "Calcule le prix d’une place dans chaque cas.",
     explanation: expl("25 ÷ 5 = 5 € et 40 ÷ 8 = 5 €. Le prix unitaire est constant : la situation est proportionnelle."),
     tags: ["prop_proportionnalite", "reconnaitre"],
   },
+  // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique comment vérifier
+  // à partir d'un tableau ». Désormais : un tableau précis, qui n'est PAS
+  // proportionnel à la dernière colonne (7 × 3 = 21, pas 20).
   {
     kind: "fixed",
     id: "prop_reconnaitre_open_2",
@@ -1371,13 +1386,14 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_reconnaitre",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment vérifier qu’une situation est proportionnelle à partir d’un tableau de valeurs.",
-    format: "open",
-    expected: ["coefficient", "même", "quotient"],
-    comparator: "contains_keyword",
-    hint: "Compare les quotients d’une grandeur par l’autre.",
-    explanation: expl("On calcule le quotient de chaque valeur par sa correspondante : si on obtient toujours le même coefficient, la situation est proportionnelle."),
-    tags: ["prop_proportionnalite", "reconnaitre", "open"],
+    text: "Dans un tableau, 2 donne 6, 4 donne 12 et 7 donne 20. Est-ce un tableau de proportionnalité ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Calcule 6 ÷ 2, 12 ÷ 4, puis 20 ÷ 7.",
+    explanation: expl("6 ÷ 2 = 3 et 12 ÷ 4 = 3. Mais 7 × 3 = 21, pas 20. Le coefficient n’est pas toujours le même : ce n’est pas un tableau de proportionnalité."),
+    tags: ["prop_proportionnalite", "reconnaitre", "qcm"],
   },
   {
     kind: "fixed",
@@ -1487,6 +1503,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     explanation: expl("120 km en 2 h, donc 60 km en 1 h. En 5 h : 5 × 60 = 300 km."),
     tags: ["prop_proportionnalite", "quatrieme_proportionnelle"],
   },
+  // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique la méthode du
+  // passage à l'unité ». Désormais : un cas où on passe par 1 kg.
   {
     kind: "fixed",
     id: "prop_quatrieme_open_2",
@@ -1496,13 +1514,13 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_quatrieme",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique la méthode du passage à l’unité pour trouver une quatrième proportionnelle.",
-    format: "open",
-    expected: ["unité", "diviser", "multiplier"],
-    comparator: "contains_keyword",
-    hint: "On cherche d’abord la valeur pour 1.",
-    explanation: expl("On divise pour trouver la valeur d’une seule unité, puis on multiplie par la quantité demandée."),
-    tags: ["prop_proportionnalite", "quatrieme_proportionnelle", "open"],
+    text: "5 kg de pommes coûtent 15 €. Combien coûtent 8 kg ?",
+    format: "short",
+    expected: ["24 €", "24"],
+    comparator: "number_equal",
+    hint: "Cherche d’abord le prix de 1 kg.",
+    explanation: expl("Passage à l’unité : 1 kg coûte 15 ÷ 5 = 3 €. Donc 8 kg coûtent 8 × 3 = 24 €."),
+    tags: ["prop_proportionnalite", "quatrieme_proportionnelle", "short"],
   },
   {
     kind: "template",
@@ -1584,6 +1602,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     explanation: expl("250 ÷ 5 = 50. Le coefficient est 50 g de farine par crêpe."),
     tags: ["prop_proportionnalite", "coefficient", "cuisine"],
   },
+  // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique ce que représente
+  // le coefficient ». Désormais : le prix d'une unité, sur un cas décimal.
   {
     kind: "fixed",
     id: "prop_coeff_open_2",
@@ -1593,13 +1613,13 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_coeff",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique ce que représente le coefficient de proportionnalité dans une situation prix/quantité.",
-    format: "open",
-    expected: ["prix", "unité", "un"],
-    comparator: "contains_keyword",
-    hint: "C’est le prix d’une seule unité.",
-    explanation: expl("Le coefficient de proportionnalité est le prix d’une seule unité (le prix unitaire). On multiplie la quantité par ce coefficient pour obtenir le prix total."),
-    tags: ["prop_proportionnalite", "coefficient", "open"],
+    text: "6 croissants coûtent 7,20 €. Le coefficient de proportionnalité est le prix d’un croissant. Combien vaut-il ?",
+    format: "short",
+    expected: ["1,20 €", "1,2", "1,20"],
+    comparator: "number_equal",
+    hint: "Divise le prix par le nombre de croissants.",
+    explanation: expl("Le coefficient, c’est le prix d’un croissant : 7,20 ÷ 6 = 1,20 €. On multiplie le nombre de croissants par 1,20 pour avoir le prix."),
+    tags: ["prop_proportionnalite", "coefficient", "short"],
   },
   {
     kind: "fixed",
@@ -1646,6 +1666,7 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   // =========================
   // TOP-UP — PROP_RAPPORT (+5)
   // =========================
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "prop_rapport_fixed_3",
@@ -1655,10 +1676,10 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_rapport",
     difficulty: 2,
     theme: "neutral",
-    text: "Dans une classe, il y a 3 garçons pour 5 filles. Quel est le ratio garçons:filles ?",
+    text: "Dans une classe, il y a 3 garçons pour 5 filles. Écris le ratio garçons:filles (exemple : 1:4).",
     format: "short",
-    expected: ["3:5", "3 pour 5", "3/5"],
-    comparator: "contains_keyword",
+    expected: ["3:5", "3 : 5", "3 pour 5"],
+    comparator: "exact_text",
     hint: "Écris les deux quantités dans l’ordre demandé.",
     explanation: expl("Il y a 3 garçons pour 5 filles : le ratio garçons:filles est 3:5."),
     tags: ["prop_proportionnalite", "ratio"],
@@ -1680,6 +1701,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     explanation: expl("Le ratio est 1:3. Pour 5 doses de vinaigre, il faut 5 × 3 = 15 doses d’huile."),
     tags: ["prop_proportionnalite", "ratio", "cuisine"],
   },
+  // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique ce que signifie
+  // un ratio de 2:3 ». Désormais : on s'en sert sur un cas (2 filles pour 3 garçons).
   {
     kind: "fixed",
     id: "prop_rapport_open_2",
@@ -1689,13 +1712,13 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_rapport",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique ce que signifie un ratio de 2:3 entre deux quantités.",
-    format: "open",
-    expected: ["2", "3", "pour"],
-    comparator: "contains_keyword",
-    hint: "Pour chaque groupe de 2 de la première, il y a 3 de la seconde.",
-    explanation: expl("Un ratio 2:3 signifie que pour 2 parts de la première grandeur, il y a 3 parts de la seconde."),
-    tags: ["prop_proportionnalite", "ratio", "open"],
+    text: "Le ratio filles:garçons est 2:3. Il y a 10 filles. Combien y a-t-il de garçons ?",
+    format: "short",
+    expected: ["15"],
+    comparator: "number_equal",
+    hint: "Pour 2 filles, il y a 3 garçons.",
+    explanation: expl("Le ratio 2:3 veut dire : 2 filles pour 3 garçons. De 2 à 10 filles, on multiplie par 5. Les garçons aussi : 3 × 5 = 15 garçons."),
+    tags: ["prop_proportionnalite", "ratio", "short"],
   },
   {
     kind: "fixed",
@@ -1840,6 +1863,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     explanation: expl("Après une réduction de 50 %, il reste 50 % du prix, soit 0,5."),
     tags: ["prop_proportionnalite", "coefficient_multiplicateur"],
   },
+  // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique comment trouver
+  // le coefficient d'une baisse de p % ». Désormais : un p précis (35).
   {
     kind: "fixed",
     id: "prop_coeff_multiplicateur_open_2",
@@ -1849,13 +1874,13 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_coeff_multiplicateur",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment trouver le coefficient multiplicateur d’une baisse de p %.",
-    format: "open",
-    expected: ["100", "soustrait", "1"],
-    comparator: "contains_keyword",
-    hint: "On part de 100 % et on retire p %.",
-    explanation: expl("Pour une baisse de p %, il reste (100 − p) % du prix. On divise par 100 : le coefficient est 1 − p/100."),
-    tags: ["prop_proportionnalite", "coefficient_multiplicateur", "open"],
+    text: "Quel est le coefficient multiplicateur d’une baisse de 35 % ?",
+    format: "short",
+    expected: ["0,65", "0.65"],
+    comparator: "number_equal",
+    hint: "On part de 100 % et on retire 35 %.",
+    explanation: expl("Après une baisse de 35 %, il reste 100 % − 35 % = 65 % du prix. Et 65 % = 0,65. Le coefficient est 0,65."),
+    tags: ["prop_proportionnalite", "coefficient_multiplicateur", "short"],
   },
   {
     kind: "fixed",
@@ -1942,6 +1967,8 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     explanation: expl("15 L en 3 min, donc 5 L par minute. En 8 min : 8 × 5 = 40 L."),
     tags: ["prop_proportionnalite", "probleme"],
   },
+  // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi le
+  // produit en croix permet… ». Désormais : on s'en sert (4 → 10, 6 → ?).
   {
     kind: "fixed",
     id: "prop_probleme_open_1",
@@ -1951,13 +1978,13 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_probleme",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi le produit en croix permet de résoudre un problème de proportionnalité.",
-    format: "open",
-    expected: ["produit", "croix", "égaux"],
-    comparator: "contains_keyword",
-    hint: "Dans un tableau proportionnel, les produits en croix sont égaux.",
-    explanation: expl("Dans un tableau de proportionnalité, les produits en croix sont égaux. On peut donc retrouver une valeur inconnue en posant cette égalité."),
-    tags: ["prop_proportionnalite", "probleme", "open"],
+    text: "Dans un tableau de proportionnalité, 4 donne 10. Que donne 6 ?",
+    format: "short",
+    expected: ["15"],
+    comparator: "number_equal",
+    hint: "Produit en croix : 6 × 10 ÷ 4.",
+    explanation: expl("Produit en croix : 6 × 10 ÷ 4 = 60 ÷ 4 = 15. Vérification : 10 ÷ 4 = 2,5 et 6 × 2,5 = 15."),
+    tags: ["prop_proportionnalite", "probleme", "short"],
   },
   {
     kind: "fixed",
@@ -2159,6 +2186,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   /* ===== PROP_RATIO_DEFI =====
      Il manquait les questions ouvertes : un élève de 5e doit savoir dire ce
      qu'il fait d'un pourcentage, pas seulement le calculer. */
+  // 08/10/2026 : précise et simple (Frédéric). Avant : « Le prix revient-il au
+  // départ ? Explique. » Désormais : on part de 100 € et on calcule le prix
+  // final (96 €) ; la réponse fausse attendue, 100 €, montre le piège.
   {
     kind: "fixed",
     id: "prop_ratio_defi_open_1",
@@ -2168,16 +2198,17 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_ratio_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Un magasin augmente un prix de 20 %, puis le baisse de 20 %. Le prix revient-il au point de départ ? Explique.",
-    format: "open",
-    expected: ["non", "plus petit", "moins", "pas le même", "pas le meme", "baisse"],
-    comparator: "contains_keyword",
-    hint: "Prends 100 € et fais les deux opérations l’une après l’autre.",
+    text: "Un prix de 100 € augmente de 20 %, puis baisse de 20 %. Quel est le prix final ?",
+    format: "short",
+    expected: ["96 €", "96"],
+    comparator: "number_equal",
+    hint: "Fais les deux calculs l’un après l’autre : la baisse se calcule sur le nouveau prix.",
     explanation: expl(
-      "Non. Partons de 100 € : après une hausse de 20 %, le prix est de 120 €. La baisse de 20 % s’applique alors à 120 €, pas à 100 € : elle retire 24 €, ce qui donne 96 €. Un pourcentage s’applique toujours à la valeur du moment, jamais à celle du départ.",
+      "Après la hausse : 100 + 20 = 120 €. La baisse de 20 % se calcule sur 120 € : 20 % de 120 = 24 €. Prix final : 120 − 24 = 96 €. Le prix ne revient pas à 100 €.",
     ),
-    tags: ["prop_ratio_pourcentage", "defi", "open", "piege"],
+    tags: ["prop_ratio_pourcentage", "defi", "short", "piege"],
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "prop_ratio_defi_open_2",
@@ -2187,16 +2218,19 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_ratio_defi",
     difficulty: 4,
     theme: "reunion",
-    text: "Dans une classe de 25 élèves du collège de Saint-Louis, 15 font de l’espagnol. Explique comment exprimer cette proportion en pourcentage.",
-    format: "open",
-    expected: ["100", "60", "sur 100", "quatrième", "quatrieme", "produit en croix"],
-    comparator: "contains_keyword",
-    hint: "Un pourcentage, c’est une proportion ramenée à 100.",
+    text: "Dans une classe de 25 élèves du collège de Saint-Louis, 15 font de l’espagnol. Quel pourcentage des élèves fait de l’espagnol ?",
+    format: "short",
+    expected: ["60 %", "60"],
+    comparator: "number_equal",
+    hint: "Un pourcentage, c’est sur 100 : de 25 à 100, on multiplie par 4.",
     explanation: expl(
-      "Un pourcentage, c’est le nombre d’élèves qu’il y aurait s’ils étaient 100 en tout. On cherche donc la quatrième proportionnelle : 15 pour 25, combien pour 100 ? 100 ÷ 25 = 4, donc 15 × 4 = 60. Il y a 60 % d’élèves qui font de l’espagnol.",
+      "Un pourcentage, c’est le nombre sur 100. De 25 à 100, on multiplie par 4. Donc 15 × 4 = 60. Il y a 60 % des élèves qui font de l’espagnol.",
     ),
-    tags: ["prop_ratio_pourcentage", "defi", "open", "reunion"],
+    tags: ["prop_ratio_pourcentage", "defi", "short", "reunion"],
   },
+  // 08/10/2026 : précise et simple (Frédéric). Le nombre de « oui » est tiré
+  // entre 2 et total − 2 : avec 20, 25 ou 50 personnes, le pourcentage est
+  // toujours entier (avant, 25 personnes donnait parfois 7,5 personnes).
   {
     kind: "template",
     id: "prop_ratio_defi_tpl_2",
@@ -2206,20 +2240,20 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_ratio_defi",
     difficulty: 5,
     theme: "neutral",
-    hint: "Dis à quel total tu ramènes la proportion, et par combien tu multiplies.",
-    tags: ["prop_ratio_pourcentage", "defi", "open", "template"],
+    hint: "Ramène à 100 personnes : par combien multiplies-tu ?",
+    tags: ["prop_ratio_pourcentage", "defi", "short", "template"],
     generate: () => {
       const total = randomChoice([20, 25, 50]);
-      const part = randomChoice([2, 3, 4, 6, 7]) * (total / 10);
+      const part = 2 + Math.floor(Math.random() * (total - 3));
       const facteur = 100 / total;
       return {
-        text: `Sur ${total} personnes interrogées, ${part} répondent « oui ». Explique comment tu exprimes cette proportion en pourcentage.`,
-        format: "open",
-        expected: ["100", "sur 100", "multipli", "quatrième", "quatrieme", "produit en croix"],
-        comparator: "contains_keyword",
+        text: `Sur ${total} personnes interrogées, ${part} répondent « oui ». Quel pourcentage répond « oui » ?`,
+        format: "short",
+        expected: [`${part * facteur} %`, String(part * facteur)],
+        comparator: "number_equal",
         explanation: expl(
-          `Un pourcentage ramène la proportion à un total de 100. On passe de ${total} à 100 en multipliant par ${facteur}. ` +
-            `On applique le même facteur à la part : ${part} × ${facteur} = ${part * facteur}. La réponse est ${part * facteur} %.`,
+          `Un pourcentage, c’est sur 100. De ${total} à 100, on multiplie par ${facteur}. ` +
+            `Donc ${part} × ${facteur} = ${part * facteur}. ${part * facteur} % des personnes répondent « oui ».`,
         ),
       };
     },

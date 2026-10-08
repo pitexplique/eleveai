@@ -111,17 +111,14 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_organiser",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi il faut organiser les données avant de les représenter.",
-    format: "open",
-    expected: ["classer", "compter", "effectifs"],
-    comparator: "contains_keyword",
-    hint: "Avant un graphique, il faut savoir combien il y a de données dans chaque catégorie.",
-    explanation:
-      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
-          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
-          ("On organise les données pour les classer et compter les effectifs. Ensuite, on peut construire un tableau ou un graphique.") +
-          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["stat_statistique", "organiser", "open"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi il faut organiser les données… ».
+    text: "Sport préféré de 10 élèves : foot, basket, foot, judo, foot, basket, judo, foot, basket, foot. Combien d’élèves ont choisi le foot ?",
+    format: "short",
+    expected: ["5"],
+    comparator: "number_equal",
+    hint: "Compte les « foot » un par un.",
+    explanation: expl("On compte les « foot » de la liste : il y en a 5. Basket : 3. Judo : 2. Compter chaque catégorie, c’est organiser les données : 5 + 3 + 2 = 10 élèves."),
+    tags: ["stat_statistique", "organiser", "short"],
   },
 
   /* =========================
@@ -241,17 +238,24 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_lire_graphique",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment trouver la catégorie la plus fréquente sur un diagramme en barres.",
-    format: "open",
-    expected: ["barre", "plus haute", "effectif"],
-    comparator: "contains_keyword",
-    hint: "Observe la hauteur des barres.",
-    explanation:
-      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
-          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
-          ("La catégorie la plus fréquente est celle dont la barre est la plus haute, car elle a le plus grand effectif.") +
-          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["stat_statistique", "graphique", "open"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique comment trouver la catégorie la plus fréquente… ».
+    text: "D’après le graphique, quelle couleur a été choisie le plus souvent ?",
+    format: "qcm",
+    choices: ["Rouge", "Bleu", "Vert", "Jaune"],
+    expected: ["Bleu"],
+    comparator: "mcq_exact",
+    hint: "Cherche la barre la plus haute.",
+    explanation: expl("La barre la plus haute est celle du bleu : 11. C’est la couleur choisie le plus souvent."),
+    tags: ["stat_statistique", "graphique", "canvas", "qcm"],
+    canvas: statGraphCanvas({
+      graphType: "barres",
+      data: [
+        { label: "Rouge", value: 6 },
+        { label: "Bleu", value: 11 },
+        { label: "Vert", value: 8 },
+        { label: "Jaune", value: 4 },
+      ],
+    }),
   },
   {
     kind: "template",
@@ -372,17 +376,14 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_effectif_frequence",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment calculer une fréquence à partir d’un effectif.",
-    format: "open",
-    expected: ["effectif", "total", "divise"],
-    comparator: "contains_keyword",
-    hint: "Il faut comparer l’effectif à l’effectif total.",
-    explanation:
-      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
-          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
-          ("Pour calculer une fréquence, on divise l’effectif de la catégorie par l’effectif total.") +
-          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["stat_statistique", "frequence", "open"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique comment calculer une fréquence… ».
+    text: "Dans une classe de 20 élèves, 8 portent des lunettes. Quelle est la fréquence des élèves à lunettes ?",
+    format: "short",
+    expected: ["0,4", "0.4", "2/5", "4/10", "8/20", "40 %", "40%"],
+    comparator: "number_equal",
+    hint: "Fréquence = effectif ÷ effectif total.",
+    explanation: expl("On divise l’effectif par l’effectif total : 8 ÷ 20 = 0,4. La fréquence est 0,4, soit 40 %."),
+    tags: ["stat_statistique", "frequence", "short"],
   },
 
   /* =========================
@@ -460,17 +461,22 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_representer",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi un diagramme en barres peut aider à comparer des effectifs.",
-    format: "open",
-    expected: ["barres", "hauteur", "comparer", "effectifs"],
-    comparator: "contains_keyword",
-    hint: "Regarde le rôle de la hauteur des barres.",
-    explanation:
-      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
-          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
-          ("La hauteur des barres représente les effectifs. On peut donc comparer rapidement les catégories.") +
-          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["stat_statistique", "representation", "open"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi un diagramme en barres aide à comparer… ».
+    text: "D’après le graphique, combien d’élèves de plus ont choisi le foot plutôt que le basket ?",
+    format: "short",
+    expected: ["5"],
+    comparator: "number_equal",
+    hint: "Lis les deux barres, puis fais la différence.",
+    explanation: expl("La barre du foot monte à 12, celle du basket à 7. 12 − 7 = 5. Le foot a 5 élèves de plus."),
+    tags: ["stat_statistique", "representation", "canvas", "short"],
+    canvas: statGraphCanvas({
+      graphType: "barres",
+      data: [
+        { label: "Foot", value: 12 },
+        { label: "Basket", value: 7 },
+        { label: "Natation", value: 5 },
+      ],
+    }),
   },
 
   /* =========================
@@ -503,27 +509,8 @@ export const statistiquesBank: TutorBankItemV4[] = [
           "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
     tags: ["stat_statistique", "representation", "camembert", "qcm"],
   },
-  {
-    kind: "fixed",
-    id: "stat_representation_choisir_open_1",
-    niveau: "5e",
-    matiere: "maths",
-    notionId: "stat_statistique",
-    microId: "stat_representation_choisir",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Explique la différence entre un tableau statistique et un diagramme en barres.",
-    format: "open",
-    expected: ["tableau", "graphique", "barres", "effectifs"],
-    comparator: "contains_keyword",
-    hint: "Le tableau organise les données ; le graphique les visualise.",
-    explanation:
-      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
-          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
-          ("Un tableau présente les données sous forme de lignes et de colonnes. Un diagramme en barres permet de visualiser et comparer les effectifs.") +
-          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["stat_statistique", "representation", "open"],
-  },
+  // 08/10/2026 : « stat_representation_choisir_open_1 » (quelle barre est la
+  // plus haute ?) supprimée par Frédéric : trop facile.
 
   /* =========================
      STAT_MOYENNE
@@ -609,17 +596,15 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_moyenne",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment calculer la moyenne de 10 ; 12 ; 14.",
-    format: "open",
-    expected: ["additionne", "divise", "3", "12"],
-    comparator: "contains_keyword",
-    hint: "Il y a deux étapes.",
-    explanation:
-      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
-          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
-          ("On additionne les trois valeurs : 10 + 12 + 14 = 36. Puis on divise par 3 : 36 ÷ 3 = 12.") +
-          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["stat_statistique", "moyenne", "open"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique comment calculer la moyenne de 10 ; 12 ; 14 »
+    // (doublon de stat_moyenne_fixed_1 : autres nombres).
+    text: "Calcule la moyenne de 7 ; 11 ; 15.",
+    format: "short",
+    expected: ["11"],
+    comparator: "number_equal",
+    hint: "Additionne les trois nombres, puis divise par 3.",
+    explanation: expl("On additionne : 7 + 11 + 15 = 33. Il y a 3 valeurs : 33 ÷ 3 = 11. La moyenne est 11."),
+    tags: ["stat_statistique", "moyenne", "short"],
   },
 
   /* =========================
@@ -663,17 +648,15 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève dit : « La moyenne de 10, 12 et 14 est 36 ». Explique son erreur.",
-    format: "open",
-    expected: ["somme", "diviser", "3", "12"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « … est 36. Explique son erreur. »
+    text: "Un élève dit : « La moyenne de 10 ; 12 ; 14 est 36. » Quelle est la bonne moyenne ?",
+    format: "qcm",
+    choices: ["12", "36", "18"],
+    expected: ["12"],
+    comparator: "mcq_exact",
     hint: "36 est la somme, pas la moyenne.",
-    explanation:
-      "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
-          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
-          ("L’élève a seulement additionné les valeurs. Il faut ensuite diviser par le nombre de valeurs : 36 ÷ 3 = 12.") +
-          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-    tags: ["stat_statistique", "defi", "open", "erreur"],
+    explanation: expl("L’élève a seulement additionné : 10 + 12 + 14 = 36. Il faut ensuite diviser par le nombre de valeurs, 3 : 36 ÷ 3 = 12."),
+    tags: ["stat_statistique", "defi", "qcm", "erreur"],
   },
   {
     kind: "template",
@@ -808,13 +791,14 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_organiser",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique l’intérêt d’un tableau d’effectifs par rapport à une liste brute de données.",
-    format: "open",
-    expected: ["classer", "compter", "lisible"],
-    comparator: "contains_keyword",
-    hint: "Pense à la lisibilité.",
-    explanation: expl("Un tableau d’effectifs classe et compte les données : il les rend plus lisibles qu’une longue liste."),
-    tags: ["stat_statistique", "organiser", "open"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique l’intérêt d’un tableau d’effectifs… ».
+    text: "Notes de 8 élèves : 12 ; 15 ; 12 ; 10 ; 15 ; 12 ; 18 ; 10. Combien d’élèves ont eu 12 ?",
+    format: "short",
+    expected: ["3"],
+    comparator: "number_equal",
+    hint: "Compte les 12 un par un.",
+    explanation: expl("On compte les 12 de la liste : il y en a 3. Dans un tableau d’effectifs, on lirait directement : 10 → 2, 12 → 3, 15 → 2, 18 → 1."),
+    tags: ["stat_statistique", "organiser", "short"],
   },
   {
     kind: "template",
@@ -982,13 +966,14 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_lire_tableau",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique comment retrouver l’effectif total à partir d’un tableau statistique.",
-    format: "open",
-    expected: ["additionne", "effectifs"],
-    comparator: "contains_keyword",
-    hint: "On combine toutes les colonnes.",
-    explanation: expl("On additionne tous les effectifs du tableau pour obtenir l’effectif total."),
-    tags: ["stat_statistique", "tableau", "open"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique comment retrouver l’effectif total… ».
+    text: "Animal préféré : chat 7 élèves, chien 9 élèves, poisson 4 élèves, lapin 5 élèves. Quel est l’effectif total ?",
+    format: "short",
+    expected: ["25"],
+    comparator: "number_equal",
+    hint: "Additionne tous les effectifs.",
+    explanation: expl("On additionne tous les effectifs : 7 + 9 + 4 + 5 = 25. L’effectif total est 25."),
+    tags: ["stat_statistique", "tableau", "short"],
   },
   {
     kind: "template",
@@ -1156,13 +1141,23 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_lire_graphique",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment lire l’effectif d’une catégorie sur un diagramme en barres.",
-    format: "open",
-    expected: ["hauteur", "barre", "axe"],
-    comparator: "contains_keyword",
-    hint: "On projette la barre sur l’axe vertical.",
-    explanation: expl("On repère le haut de la barre, puis on lit la valeur correspondante sur l’axe vertical."),
-    tags: ["stat_statistique", "graphique", "open"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique comment lire l’effectif d’une catégorie… ».
+    text: "D’après le graphique, combien d’élèves ont choisi la natation ?",
+    format: "short",
+    expected: ["6"],
+    comparator: "number_equal",
+    hint: "Regarde le haut de la barre « Natation ».",
+    explanation: expl("On repère le haut de la barre « Natation », puis on lit la valeur : 6. Six élèves ont choisi la natation."),
+    tags: ["stat_statistique", "graphique", "canvas", "short"],
+    canvas: statGraphCanvas({
+      graphType: "barres",
+      data: [
+        { label: "Foot", value: 9 },
+        { label: "Natation", value: 6 },
+        { label: "Danse", value: 11 },
+      ],
+      highlightIndex: 1,
+    }),
   },
   {
     kind: "template",
@@ -1292,13 +1287,15 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_effectif_frequence",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi une fréquence ne peut pas dépasser 1.",
-    format: "open",
-    expected: ["effectif", "total", "part"],
-    comparator: "contains_keyword",
-    hint: "L’effectif d’une catégorie ne dépasse pas le total.",
-    explanation: expl("La fréquence est l’effectif d’une part divisé par le total. Une part ne peut pas dépasser le total, donc la fréquence reste inférieure ou égale à 1."),
-    tags: ["stat_statistique", "frequence", "open"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi une fréquence ne peut pas dépasser 1 ».
+    text: "Lequel de ces nombres ne peut PAS être une fréquence ?",
+    format: "qcm",
+    choices: ["1,5", "0,5", "1", "0"],
+    expected: ["1,5"],
+    comparator: "mcq_exact",
+    hint: "Une part ne peut pas dépasser le total.",
+    explanation: expl("Fréquence = effectif ÷ total. L’effectif ne dépasse jamais le total, donc la fréquence est entre 0 et 1. 0 (personne) et 1 (tout le monde) sont possibles. 1,5 est plus grand que 1 : impossible."),
+    tags: ["stat_statistique", "frequence", "qcm"],
   },
   {
     kind: "template",
@@ -1447,13 +1444,14 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_representer",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique le rôle de l’échelle quand on construit un diagramme en barres.",
-    format: "open",
-    expected: ["echelle", "hauteur", "effectif"],
-    comparator: "contains_keyword",
-    hint: "L’échelle relie carreaux et effectifs.",
-    explanation: expl("L’échelle indique combien d’unités vaut un carreau. Elle fixe la hauteur de chaque barre selon son effectif."),
-    tags: ["stat_statistique", "representation", "open"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique le rôle de l’échelle… ».
+    text: "Sur un diagramme en barres, 1 carreau représente 2 élèves. La barre du foot mesure 7 carreaux. Combien d’élèves ont choisi le foot ?",
+    format: "short",
+    expected: ["14"],
+    comparator: "number_equal",
+    hint: "Chaque carreau vaut 2 élèves.",
+    explanation: expl("L’échelle dit : 1 carreau = 2 élèves. 7 carreaux = 7 × 2 = 14 élèves."),
+    tags: ["stat_statistique", "representation", "short"],
   },
   {
     kind: "template",
@@ -1655,13 +1653,14 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_representation_choisir",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique dans quel cas un diagramme circulaire est préférable à un diagramme en barres.",
-    format: "open",
-    expected: ["part", "total", "circulaire"],
-    comparator: "contains_keyword",
-    hint: "Pense aux parts d’un tout.",
-    explanation: expl("Le diagramme circulaire est préférable quand on veut montrer la part de chaque catégorie dans le total."),
-    tags: ["stat_statistique", "representation", "open"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique dans quel cas un diagramme circulaire est préférable… ».
+    text: "40 élèves ont répondu. Sur le diagramme circulaire, le foot occupe un quart du disque. Combien d’élèves ont choisi le foot ?",
+    format: "short",
+    expected: ["10"],
+    comparator: "number_equal",
+    hint: "Un quart du disque, c’est un quart des élèves.",
+    explanation: expl("Le disque entier, ce sont les 40 élèves. Un quart du disque : 40 ÷ 4 = 10 élèves. Le diagramme circulaire montre la part de chaque catégorie dans le total."),
+    tags: ["stat_statistique", "representation", "camembert", "short"],
   },
   {
     kind: "fixed",
@@ -1757,13 +1756,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_moyenne",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi la moyenne d’une série est comprise entre la plus petite et la plus grande valeur.",
-    format: "open",
-    expected: ["entre", "petite", "grande"],
-    comparator: "contains_keyword",
-    hint: "La moyenne « équilibre » les valeurs.",
-    explanation: expl("La moyenne équilibre les valeurs : elle ne peut pas être plus petite que le minimum ni plus grande que le maximum."),
-    tags: ["stat_statistique", "moyenne", "open"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi la moyenne est comprise entre la plus petite et la plus grande valeur ».
+    text: "Quelle est la moyenne de 8 ; 12 ; 13 ?",
+    format: "qcm",
+    // Frédéric (08/10) : choix 11, 10, 9, 13.
+    choices: ["11", "10", "9", "13"],
+    expected: ["11"],
+    comparator: "mcq_exact",
+    hint: "Additionne les trois notes, puis divise par 3.",
+    explanation: expl("8 + 12 + 13 = 33, puis 33 ÷ 3 = 11. Vérification : 11 est bien entre la plus petite valeur (8) et la plus grande (13)."),
+    tags: ["stat_statistique", "moyenne", "qcm"],
   },
   {
     kind: "template",
@@ -1879,13 +1881,14 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève affirme : « Ajouter une note de 0 ne change pas la moyenne ». Explique pourquoi c’est faux.",
-    format: "open",
-    expected: ["diminue", "somme", "valeurs"],
-    comparator: "contains_keyword",
-    hint: "Le nombre de valeurs augmente, pas la somme.",
-    explanation: expl("Ajouter un 0 garde la même somme mais augmente le nombre de valeurs : la moyenne diminue donc."),
-    tags: ["stat_statistique", "defi", "open", "erreur"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Ajouter une note de 0 ne change pas la moyenne. Explique pourquoi c’est faux ».
+    text: "Léa a eu 10 et 14 : sa moyenne est 12. Elle a ensuite un 0. Quelle est sa nouvelle moyenne ?",
+    format: "short",
+    expected: ["8"],
+    comparator: "number_equal",
+    hint: "Il y a maintenant 3 notes.",
+    explanation: expl("La somme ne change pas : 10 + 14 + 0 = 24. Mais il y a 3 notes : 24 ÷ 3 = 8. Le 0 fait baisser la moyenne de 12 à 8."),
+    tags: ["stat_statistique", "defi", "short", "erreur"],
   },
   {
     kind: "template",
@@ -2024,34 +2027,41 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_representation_choisir",
     difficulty: 4,
     theme: "neutral",
-    hint: "Dis ce que la représentation doit faire voir : des parts, une comparaison, ou une évolution.",
-    tags: ["stat_statistique", "representation", "open", "template"],
+    hint: "Que faut-il faire voir : des parts, une comparaison, ou une évolution ?",
+    tags: ["stat_statistique", "representation", "qcm", "template"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Quelle représentation choisis-tu, et pourquoi ? »
+    // corrigé par un mot-clé. Désormais : QCM à trois graphiques, les mêmes trois situations.
     generate: () => {
       const cas = randomChoice([
         {
-          situation: "la part de chaque matière dans l’emploi du temps d’une semaine",
+          // Frédéric (08/10) : « l'emploi du temps » se défendait aussi en barres.
+          situation: "comment une pizza a été partagée entre 4 amis",
+          bonne: "un diagramme circulaire",
           quoi: "un partage d’un tout",
           reponse:
-            "les heures de toutes les matières mises bout à bout font la semaine entière : un diagramme circulaire montre d’un coup quelle matière prend la plus grosse part.",
+            "les 4 parts forment la pizza entière : un diagramme circulaire montre d’un coup qui a eu la plus grosse part.",
         },
         {
           situation: "le nombre de visiteurs d’un musée mois par mois sur un an",
+          bonne: "un graphique en ligne",
           quoi: "une évolution dans le temps",
           reponse:
             "les mois se suivent dans l’ordre : un graphique en ligne fait voir la montée en saison et la baisse ensuite.",
         },
         {
           situation: "le nombre d’élèves dans chacune des six classes de 5e",
+          bonne: "un diagramme en barres",
           quoi: "une comparaison de quantités",
           reponse:
             "les six classes n’ont pas d’ordre naturel et ne forment pas un tout à partager : un diagramme en barres les compare directement, hauteur contre hauteur.",
         },
       ]);
       return {
-        text: `On veut représenter ${cas.situation}. Quelle représentation choisis-tu, et pourquoi ?`,
-        format: "open",
-        expected: ["circulaire", "barres", "ligne", "camembert", "part", "compar", "évolution", "evolution"],
-        comparator: "contains_keyword",
+        text: `On veut représenter ${cas.situation}. Quel graphique choisir ?`,
+        format: "qcm",
+        choices: shuffle(["un diagramme circulaire", "un graphique en ligne", "un diagramme en barres"]),
+        expected: [cas.bonne],
+        comparator: "mcq_exact",
         explanation: expl(
           `Ici, ce qu’il faut faire voir, c’est ${cas.quoi} : ${cas.reponse}`,
         ),

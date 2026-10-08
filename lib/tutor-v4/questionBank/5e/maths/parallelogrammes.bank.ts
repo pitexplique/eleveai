@@ -192,15 +192,17 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "para_reconnaitre",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment vérifier, sur un dessin, qu’un quadrilatère est bien un parallélogramme.",
-    format: "open",
-    expected: ["parallèles", "paralleles", "opposés", "opposes", "deux paires", "codage", "règle", "regle"],
-    comparator: "contains_keyword",
-    hint: "Combien de paires faut-il vérifier ?",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique comment vérifier… ».
+    text: "Pour être un parallélogramme, combien de paires de côtés parallèles faut-il ? Réponds par un nombre.",
+    format: "short",
+    expected: ["2"],
+    comparator: "number_equal",
+    hint: "Avec une seule paire, c’est un trapèze.",
     explanation: expl(
-      "On vérifie que les côtés qui se font face sont parallèles, et cela pour LES DEUX paires. Sur une figure, c’est le codage — des petites flèches identiques sur deux côtés — qui l’indique ; sinon on prolonge les côtés à la règle pour voir s’ils se croisent.",
+      "Il faut 2 paires de côtés parallèles. Avec une seule paire, c’est un trapèze. Sur une figure, le codage (des petites flèches) montre les côtés parallèles.",
     ),
-    tags: ["parallelogramme", "open", "methode"],
+    tags: ["parallelogramme", "short", "methode"],
+    canvas: paraCanvas(),
   },
   {
     kind: "template",
@@ -309,15 +311,17 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "para_cotes_angles",
     difficulty: 5,
     theme: "neutral",
-    text: "Un élève affirme : « dans un parallélogramme, tous les angles sont égaux ». Explique son erreur.",
-    format: "open",
-    expected: ["opposés", "opposes", "consécutifs", "consecutifs", "180", "rectangle", "pas tous"],
-    comparator: "contains_keyword",
-    hint: "Quels angles sont égaux, et lesquels ne le sont pas ?",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « tous les angles sont égaux », explique l'erreur.
+    text: "Un élève dit : « dans un parallélogramme, tous les angles sont égaux ». Dans ABCD, l’angle en A mesure 65°. Combien mesure l’angle en B ?",
+    format: "short",
+    expected: ["115"],
+    comparator: "number_equal",
+    hint: "A et B sont consécutifs : leur somme fait 180°.",
     explanation: expl(
-      "Seuls les angles OPPOSÉS sont égaux. Deux angles consécutifs, eux, sont supplémentaires : leur somme fait 180°. Ils ne sont donc égaux que si chacun vaut 90° — et dans ce cas la figure est un rectangle, pas un parallélogramme quelconque.",
+      "A et B sont consécutifs. Leur somme fait 180°. 180 − 65 = 115. L’angle en B mesure 115°, pas 65°. L’élève se trompe : seuls les angles opposés sont égaux.",
     ),
-    tags: ["parallelogramme", "angles", "open", "piege"],
+    tags: ["parallelogramme", "angles", "short", "piege"],
+    canvas: paraCanvas({ angleLabels: { A: "65°", B: "?" } }),
   },
   {
     kind: "template",
@@ -357,20 +361,26 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "para_cotes_angles",
     difficulty: 4,
     theme: "neutral",
-    hint: "Dis quelle propriété tu utilises avant de donner le nombre.",
-    tags: ["parallelogramme", "cotes", "open", "template"],
+    hint: "Cherche le côté qui fait face à celui demandé.",
+    tags: ["parallelogramme", "cotes", "short", "template"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique comment tu trouves CD ».
+    // Désormais on demande CD ou DA ; AB ≠ BC pour que le leurre (l'autre côté) se voie.
     generate: () => {
       const ab = randomChoice([5, 6, 7, 8, 9]);
-      const bc = randomChoice([3, 4, 5, 11]);
+      const bc = randomChoice([3, 4, 5, 11].filter((x) => x !== ab));
+      const demandeCD = randomChoice([true, false]);
+      const rep = demandeCD ? ab : bc;
       return {
-        text: `Dans le parallélogramme ABCD, AB = ${ab} cm et BC = ${bc} cm. Explique comment tu trouves la longueur de CD, sans la mesurer.`,
-        format: "open",
-        expected: ["opposés", "opposes", "même longueur", "meme longueur", "égaux", "egaux", String(ab)],
-        comparator: "contains_keyword",
+        text: `Dans le parallélogramme ABCD, AB = ${ab} cm et BC = ${bc} cm. Combien mesure ${demandeCD ? "CD" : "DA"} ?`,
+        format: "short",
+        expected: [`${rep} cm`, String(rep)],
+        comparator: "number_equal",
         explanation: expl(
-          `CD est le côté opposé à AB. Dans un parallélogramme, deux côtés opposés ont la même longueur : CD = ${ab} cm. ` +
-            `Le côté BC, lui, est opposé à DA : DA mesure donc ${bc} cm.`,
+          demandeCD
+            ? `CD fait face à AB. Deux côtés opposés ont la même longueur. CD = AB = ${ab} cm.`
+            : `DA fait face à BC. Deux côtés opposés ont la même longueur. DA = BC = ${bc} cm.`,
         ),
+        canvas: paraCanvas({ sideLabels: { AB: `${ab} cm`, BC: `${bc} cm`, [demandeCD ? "CD" : "DA"]: "?" } }),
       };
     },
   },
@@ -451,15 +461,17 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "para_diagonales",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique le lien entre le centre de symétrie d’un parallélogramme et ses diagonales.",
-    format: "open",
-    expected: ["milieu", "croisement", "demi-tour", "coupent", "centre"],
-    comparator: "contains_keyword",
-    hint: "Que devient chaque sommet après un demi-tour autour du point de croisement ?",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique le lien entre le centre de symétrie et les diagonales ».
+    text: "Les diagonales du parallélogramme ABCD se coupent en O. Quel est le symétrique de A par rapport à O ?",
+    format: "qcm",
+    choices: ["C", "B", "D"],
+    expected: ["C"],
+    comparator: "mcq_exact",
+    hint: "Fais un demi-tour autour de O : A va sur le sommet d’en face.",
     explanation: expl(
-      "Le centre de symétrie est exactement le point où les diagonales se coupent. Un demi-tour autour de ce point envoie A sur C et B sur D : chaque sommet prend la place de celui d’en face. C’est possible précisément parce que ce point est le milieu des deux diagonales.",
+      "O est le milieu de la diagonale [AC]. Un demi-tour autour de O envoie A sur C. Le point O est le centre de symétrie du parallélogramme.",
     ),
-    tags: ["parallelogramme", "diagonales", "open", "raisonnement"],
+    tags: ["parallelogramme", "diagonales", "qcm", "symetrie"],
     canvas: paraCanvas({ diagonales: true }),
   },
   {
@@ -501,18 +513,22 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "para_diagonales",
     difficulty: 5,
     theme: "neutral",
-    hint: "Dis ce que le point de croisement est pour chaque diagonale.",
-    tags: ["parallelogramme", "diagonales", "open", "template"],
+    hint: "Le point de croisement est le milieu de la diagonale.",
+    tags: ["parallelogramme", "diagonales", "short", "template"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique comment tu trouves la distance… ».
+    // Des noms de sommets variés (EFGH, MNPQ…) ; la diagonale entière est donnée, on demande la moitié.
     generate: () => {
-      const d = randomChoice([10, 12, 14, 16, 18]);
+      const d = randomChoice([10, 12, 14, 16, 18, 20, 22]);
+      const s = tourner(sommetsPara(), randomInt(0, 3));
+      const [p, , r] = s;
       return {
-        text: `Dans un parallélogramme, une diagonale mesure ${d} cm. Explique comment tu trouves la distance entre un sommet et le point de croisement des diagonales.`,
-        format: "open",
-        expected: ["milieu", "moitié", "moitie", "divise", String(d / 2)],
-        comparator: "contains_keyword",
+        text: `Les diagonales du parallélogramme ${s.join("")} se coupent en O. La diagonale ${seg(p, r)} mesure ${d} cm. Combien mesure ${lg(p, "O")} ?`,
+        format: "short",
+        expected: [`${d / 2} cm`, String(d / 2)],
+        comparator: "number_equal",
         explanation: expl(
-          `Les diagonales se coupent en leur milieu : le point de croisement partage la diagonale en deux morceaux égaux. ` +
-            `Chaque morceau mesure ${d} ÷ 2 = ${d / 2} cm.`,
+          `Les diagonales se coupent en leur milieu. O est le milieu de ${seg(p, r)}. ` +
+            `${lg(p, "O")} = ${d} ÷ 2 = ${d / 2} cm.`,
         ),
       };
     },
@@ -591,15 +607,18 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "para_particuliers",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi tout carré est un losange, mais que tout losange n’est pas un carré.",
-    format: "open",
-    expected: ["quatre côtés", "quatre cotes", "égaux", "egaux", "angle droit", "angles droits", "penché", "penche"],
-    comparator: "contains_keyword",
-    hint: "Compare ce que chaque figure exige.",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi tout carré est un losange, mais… ».
+    text: "ABCD est un losange. Son angle en A mesure 70°. Est-ce un carré ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Un carré a quatre angles droits.",
     explanation: expl(
-      "Un losange exige quatre côtés égaux. Un carré a quatre côtés égaux : il remplit donc la condition, tout carré est un losange. Mais un carré exige EN PLUS quatre angles droits, et un losange penché ne les a pas. La condition du carré est plus exigeante.",
+      "Un carré a quatre côtés égaux ET quatre angles droits. Ce losange a un angle de 70°, pas de 90°. Ce n’est pas un carré. Un losange n’est pas toujours un carré. Mais un carré est toujours un losange.",
     ),
-    tags: ["parallelogramme", "open", "inclusion", "raisonnement"],
+    tags: ["parallelogramme", "qcm", "inclusion", "raisonnement"],
+    canvas: paraCanvas({ variante: "losange", angleLabels: { A: "70°" } }),
   },
   {
     kind: "template",
@@ -639,20 +658,25 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "para_particuliers",
     difficulty: 5,
     theme: "neutral",
-    hint: "Dis ce qui manque, ou ce qui suffit déjà.",
-    tags: ["parallelogramme", "particuliers", "open", "template"],
+    hint: "Regarde ce que chaque figure exige : côtés égaux, angles droits.",
+    tags: ["parallelogramme", "particuliers", "qcm", "template"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Est-ce que… forcément… ? Explique. ».
+    // Désormais un QCM oui / non, avec deux cas « non » (le rectangle, le losange ne sont pas des carrés).
     generate: () => {
       const cas = randomChoice([
-        { figure: "losange", question: "un carré", reponse: "oui, car un carré a bien quatre côtés égaux", mots: ["oui", "quatre côtés", "quatre cotes", "égaux", "egaux"] },
-        { figure: "rectangle", question: "un carré", reponse: "oui, car un carré a bien quatre angles droits", mots: ["oui", "angles droits", "quatre angles"] },
-        { figure: "carré", question: "un losange", reponse: "non, car un losange n’a pas forcément d’angles droits", mots: ["non", "angle", "droit", "penché", "penche"] },
+        { q: "Un carré est-il toujours un losange ?", oui: true, pourquoi: "Un losange a quatre côtés égaux. Un carré a quatre côtés égaux. Donc un carré est toujours un losange." },
+        { q: "Un carré est-il toujours un rectangle ?", oui: true, pourquoi: "Un rectangle a quatre angles droits. Un carré a quatre angles droits. Donc un carré est toujours un rectangle." },
+        { q: "Un losange est-il toujours un carré ?", oui: false, pourquoi: "Un carré a quatre angles droits. Un losange penché n’a pas d’angle droit. Donc un losange n’est pas toujours un carré." },
+        { q: "Un rectangle est-il toujours un carré ?", oui: false, pourquoi: "Un carré a quatre côtés égaux. Un rectangle de 6 cm sur 4 cm n’a pas ses quatre côtés égaux. Donc un rectangle n’est pas toujours un carré." },
       ]);
+      const rep = cas.oui ? "oui" : "non";
       return {
-        text: `Est-ce que ${cas.question} est forcément un ${cas.figure} ? Explique.`,
-        format: "open",
-        expected: cas.mots,
-        comparator: "contains_keyword",
-        explanation: expl(`La réponse est ${cas.reponse}.`),
+        text: cas.q,
+        format: "qcm",
+        choices: shuffle(["oui", "non"]),
+        expected: [rep],
+        comparator: "mcq_exact",
+        explanation: expl(cas.pourquoi),
       };
     },
   },
@@ -713,15 +737,17 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "para_construire",
     difficulty: 5,
     theme: "neutral",
-    text: "Décris les étapes pour construire un parallélogramme ABCD dont tu connais AB = 6 cm, BC = 4 cm et l’angle en B qui mesure 60°.",
-    format: "open",
-    expected: ["rapporteur", "règle", "regle", "compas", "60", "parallèle", "parallele", "reporte"],
-    comparator: "contains_keyword",
-    hint: "Commence par ce que tu peux tracer sans rien deviner.",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Décris les étapes pour construire ABCD… ».
+    text: "On construit le parallélogramme ABCD : AB = 6 cm, BC = 4 cm, angle en B de 60°. A, B et C sont tracés. À quelle distance de C faut-il placer D ?",
+    format: "short",
+    expected: ["6 cm", "6"],
+    comparator: "number_equal",
+    hint: "[CD] fait face à [AB].",
     explanation: expl(
-      "On trace AB = 6 cm à la règle. Au sommet B, on ouvre un angle de 60° au rapporteur et on reporte BC = 4 cm sur ce côté. Il reste D : on le place au compas, à 6 cm de C et à 4 cm de A, puisque les côtés opposés sont égaux. On peut aussi tracer les parallèles à AB passant par C et à BC passant par A.",
+      "On trace AB = 6 cm, puis l’angle de 60° en B au rapporteur, puis BC = 4 cm. Pour D : [CD] fait face à [AB], donc CD = 6 cm. On trace un arc de compas de 6 cm autour de C. (Et un arc de 4 cm autour de A.)",
     ),
-    tags: ["parallelogramme", "construire", "open", "methode"],
+    tags: ["parallelogramme", "construire", "short", "methode"],
+    canvas: paraCanvas({ angleLabels: { B: "60°" }, sideLabels: { AB: "6 cm", BC: "4 cm", CD: "?" } }),
   },
   {
     kind: "template",
@@ -766,20 +792,32 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "para_construire",
     difficulty: 5,
     theme: "neutral",
-    hint: "Nomme la propriété qui te dit où placer le sommet.",
-    tags: ["parallelogramme", "construire", "open", "template"],
+    hint: "Côtés opposés : même longueur. Angles consécutifs : 180° à eux deux.",
+    tags: ["parallelogramme", "construire", "short", "template"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique comment construire ABCD avec AB et un angle en A ».
+    // Désormais une mesure à préparer pour la construction : CD, l'angle en B ou l'angle en C.
     generate: () => {
       const ab = randomChoice([5, 6, 7]);
       const angle = randomChoice([50, 60, 70, 110]);
+      const quoi = randomChoice(["CD", "B", "C"] as const);
+      const rep = quoi === "CD" ? ab : quoi === "B" ? 180 - angle : angle;
+      const text =
+        quoi === "CD"
+          ? `On construit le parallélogramme ABCD avec AB = ${ab} cm et un angle de ${angle}° en A. Quelle longueur faut-il donner à CD ?`
+          : `On construit le parallélogramme ABCD avec AB = ${ab} cm et un angle de ${angle}° en A. Quel angle faut-il tracer en ${quoi} ?`;
+      const calcul =
+        quoi === "CD"
+          ? `[CD] fait face à [AB]. Deux côtés opposés ont la même longueur. CD = ${ab} cm.`
+          : quoi === "B"
+            ? `A et B sont consécutifs : leur somme fait 180°. 180 − ${angle} = ${180 - angle}. On trace ${180 - angle}° en B.`
+            : `A et C sont opposés : ils sont égaux. On trace ${angle}° en C.`;
       return {
-        text: `Explique comment construire un parallélogramme ABCD avec AB = ${ab} cm et un angle de ${angle}° en A.`,
-        format: "open",
-        expected: ["rapporteur", "règle", "regle", "compas", String(angle), "opposés", "opposes"],
-        comparator: "contains_keyword",
-        explanation: expl(
-          `On trace AB = ${ab} cm à la règle, puis on ouvre l’angle de ${angle}° en A au rapporteur et on trace le côté AD à la longueur voulue. ` +
-            `Le sommet C se place ensuite au compas : BC = AD et CD = AB, puisque les côtés opposés d’un parallélogramme sont égaux.`,
-        ),
+        text,
+        format: "short",
+        expected: quoi === "CD" ? [`${rep} cm`, String(rep)] : [`${rep}°`, String(rep)],
+        comparator: "number_equal",
+        explanation: expl(calcul),
+        canvas: paraCanvas({ angleLabels: { A: `${angle}°`, ...(quoi === "CD" ? {} : { [quoi]: "?" }) }, sideLabels: { AB: `${ab} cm`, ...(quoi === "CD" ? { CD: "?" } : {}) } }),
       };
     },
   },
@@ -838,15 +876,17 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "para_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi il suffit de savoir qu’un quadrilatère a ses diagonales qui se coupent en leur milieu pour affirmer que c’est un parallélogramme.",
-    format: "open",
-    expected: ["symétrie", "symetrie", "demi-tour", "centre", "réciproque", "reciproque", "milieu"],
-    comparator: "contains_keyword",
-    hint: "Que fait un demi-tour autour du point de croisement ?",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi il suffit que les diagonales se coupent en leur milieu ».
+    text: "Les diagonales [EG] et [FH] du quadrilatère EFGH se coupent en I. EI = IG = 5 cm et FI = IH = 3 cm. EFGH est-il un parallélogramme ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "I est-il le milieu des deux diagonales ?",
     explanation: expl(
-      "Si les diagonales se coupent en leur milieu, un demi-tour autour de ce point envoie chaque sommet sur celui d’en face. La figure revient exactement sur elle-même, donc chaque côté a pour image le côté opposé. Or un demi-tour transforme une droite en une droite parallèle : les côtés opposés sont donc parallèles deux à deux. C’est bien un parallélogramme.",
+      "EI = IG : I est le milieu de [EG]. FI = IH : I est le milieu de [FH]. Les diagonales se coupent en leur milieu. Cela suffit : EFGH est un parallélogramme. Les diagonales n’ont pas besoin d’avoir la même longueur.",
     ),
-    tags: ["parallelogramme", "defi", "open", "raisonnement", "reciproque"],
+    tags: ["parallelogramme", "defi", "qcm", "raisonnement", "reciproque"],
   },
   {
     kind: "template",
@@ -884,8 +924,10 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "para_defi",
     difficulty: 5,
     theme: "neutral",
-    hint: "Dis quelle propriété manque, ou laquelle suffit.",
-    tags: ["parallelogramme", "defi", "open", "template"],
+    hint: "Pense à un trapèze, à un cerf-volant : vérifient-ils aussi cette propriété ?",
+    tags: ["parallelogramme", "defi", "qcm", "template"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Cela suffit-il ? Explique. » au mot-clé.
+    // Désormais QCM oui / non ; deux cas « non » ajoutés (diagonales perpendiculaires, de même longueur).
     generate: () => {
       const cas = randomChoice([
         {
@@ -908,16 +950,25 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
           suffit: true,
           pourquoi: "quatre côtés égaux font un losange, et tout losange est un parallélogramme.",
         },
+        {
+          fait: "ses diagonales sont perpendiculaires",
+          suffit: false,
+          pourquoi: "un cerf-volant a des diagonales perpendiculaires, et ce n’est pas un parallélogramme.",
+        },
+        {
+          fait: "ses diagonales ont la même longueur",
+          suffit: false,
+          pourquoi: "un trapèze isocèle a des diagonales de même longueur, et ce n’est pas un parallélogramme.",
+        },
       ]);
       return {
-        text: `D’un quadrilatère, on sait seulement que ${cas.fait}. Cela suffit-il pour affirmer que c’est un parallélogramme ? Explique.`,
-        format: "open",
-        expected: cas.suffit
-          ? ["oui", "suffit", "caractéristique", "caracteristique", "parallélogramme", "parallelogramme"]
-          : ["non", "trapèze", "trapeze", "une seule", "deux paires", "suffit pas"],
-        comparator: "contains_keyword",
+        text: `Un quadrilatère a une seule propriété connue : ${cas.fait}. Est-ce forcément un parallélogramme ?`,
+        format: "qcm",
+        choices: shuffle(["oui", "non"]),
+        expected: [cas.suffit ? "oui" : "non"],
+        comparator: "mcq_exact",
         explanation: expl(
-          `${cas.suffit ? "Oui, cela suffit" : "Non, cela ne suffit pas"} : ${cas.pourquoi}`,
+          `${cas.suffit ? "Oui" : "Non"} : ${cas.pourquoi}`,
         ),
       };
     },

@@ -155,17 +155,19 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_comprendre",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique en une phrase pourquoi un volume s’exprime souvent avec une unité au cube.",
-    format: "open",
-    expected: ["longueur", "largeur", "hauteur", "trois", "dimensions", "cube"],
-    comparator: "contains_keyword",
-    hint: "Pense aux trois dimensions d’un solide.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "On calcule 2 cm × 3 cm × 4 cm.\nQuel est le résultat ?",
+    format: "qcm",
+    choices: ["24 cm³", "24 cm²", "24 cm", "9 cm"],
+    expected: ["24 cm³"],
+    comparator: "mcq_exact",
+    hint: "On multiplie trois longueurs : cm × cm × cm.",
     explanation:
       "Définition : le volume mesure l’espace occupé par un solide.\n\n" +
-          "Méthode : on choisit la formule du solide, puis on remplace par les dimensions données.\n\nCalcul : " +
-          ("Un volume concerne trois dimensions : longueur, largeur et hauteur. C’est pour cela qu’on utilise des unités cubes comme cm³.") +
-          "\n\nConclusion : le volume ou la grandeur obtenu répond à la question.",
-    tags: ["volume", "open", "raisonnement"],
+          "Méthode : on multiplie trois longueurs, donc l’unité est cm × cm × cm = cm³.\n\nCalcul : " +
+          ("2 × 3 × 4 = 24. Trois longueurs multipliées donnent des cm³. 9 cm, c’est l’addition 2 + 3 + 4.") +
+          "\n\nConclusion : le résultat est 24 cm³.",
+    tags: ["volume", "unite", "qcm"],
   },
 
   {
@@ -339,17 +341,19 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_pave",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi le volume d’un pavé droit de dimensions 4 cm, 3 cm et 5 cm vaut 60 cm³.",
-    format: "open",
-    expected: ["4", "3", "5", "multiplie", "60"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un pavé droit mesure 4 cm, 3 cm et 5 cm.\nQuel est son volume ?",
+    format: "qcm",
+    choices: ["60 cm³", "60 cm²", "12 cm", "20 cm³"],
+    expected: ["60 cm³"],
+    comparator: "mcq_exact",
     hint: "Utilise la formule longueur × largeur × hauteur.",
     explanation:
       "Définition : le volume mesure l’espace occupé par un solide.\n\n" +
-          "Méthode : on choisit la formule du solide, puis on remplace par les dimensions données.\n\nCalcul : " +
-          ("On multiplie les trois dimensions du pavé droit : 4 × 3 × 5 = 60. Le volume vaut donc 60 cm³.") +
-          "\n\nConclusion : le volume ou la grandeur obtenu répond à la question.",
-    tags: ["volume", "pave_droit", "open", "raisonnement"],
+          "Méthode : volume du pavé droit = longueur × largeur × hauteur.\n\nCalcul : " +
+          ("4 × 3 × 5 = 60, donc 60 cm³. 12 cm, c’est l’addition 4 + 3 + 5. 20 cm³ oublie une dimension.") +
+          "\n\nConclusion : le volume est 60 cm³.",
+    tags: ["volume", "pave_droit", "qcm"],
   },
 
   {
@@ -668,16 +672,18 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_cylindre",
     difficulty: 3,
     theme: "neutral",
-    text: "Un cylindre a un rayon de 3 cm et une hauteur de 5 cm. Donner son volume sous la forme aπ.",
-    format: "short",
-    expected: ["45π", "45 pi", "45"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un cylindre a un rayon de 3 cm et une hauteur de 5 cm.\nQuel est son volume ?",
+    format: "qcm",
+    choices: ["45π cm³", "15π cm³", "30π cm³", "180π cm³"],
+    expected: ["45π cm³"],
+    comparator: "mcq_exact",
     hint: "Aire de base = π × r².",
     explanation:
       "Définition : le volume mesure l’espace occupé par un solide.\n\n" +
-          "Méthode : on choisit la formule du solide, puis on remplace par les dimensions données.\n\nCalcul : " +
-          ("Aire de base = π × 3² = 9π cm². Volume = 9π × 5 = 45π cm³.") +
-          "\n\nConclusion : le volume ou la grandeur obtenu répond à la question.",
+          "Méthode : volume du cylindre = π × rayon × rayon × hauteur.\n\nCalcul : " +
+          ("Aire de base = π × 3 × 3 = 9π cm². Volume = 9π × 5 = 45π cm³. 15π oublie le carré du rayon. 30π calcule 3 × 2 au lieu de 3 × 3. 180π prend le diamètre 6 cm comme rayon.") +
+          "\n\nConclusion : le volume est 45π cm³.",
     canvas: solideCanvas({
       solide: "cylindre",
       dimensions: { rayon: 3, hauteur: 5 },
@@ -747,17 +753,25 @@ export const volumesBank: TutorBankItemV4[] = [
       const hauteur = randomInt(3, 10);
       const coeff = rayon * rayon * hauteur;
 
+      // 08/10/2026 : précise et simple (Frédéric) — QCM, leurres = vraies erreurs.
+      const bonne = `${coeff}π cm³`;
       return {
-        text: `Un cylindre a un rayon de ${rayon} cm et une hauteur de ${hauteur} cm. Donner son volume sous la forme aπ.`,
-        format: "short",
-        expected: [`${coeff}π`, `${coeff} pi`, `${coeff}`],
-        comparator: "contains_keyword",
+        text: `Un cylindre a un rayon de ${rayon} cm et une hauteur de ${hauteur} cm.\nQuel est son volume ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `${rayon * hauteur}π cm³`,
+          `${2 * rayon * hauteur}π cm³`,
+          `${4 * coeff}π cm³`,
+          `${coeff}π cm²`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
         explanation: "Définition : le volume mesure l’espace occupé par un solide.\n\n" +
-          "Méthode : on choisit la formule du solide, puis on remplace par les dimensions données.\n\nCalcul : " +
-          (`Aire de base = π × ${rayon}² = ${
+          "Méthode : volume du cylindre = π × rayon × rayon × hauteur.\n\nCalcul : " +
+          (`Aire de base = π × ${rayon} × ${rayon} = ${
           rayon * rayon
         }π cm². Volume = ${rayon * rayon}π × ${hauteur} = ${coeff}π cm³.`) +
-          "\n\nConclusion : le volume ou la grandeur obtenu répond à la question.",
+          `\n\nConclusion : le volume est ${coeff}π cm³.`,
         canvas: solideCanvas({
           solide: "cylindre",
           dimensions: { rayon, hauteur },
@@ -790,15 +804,22 @@ export const volumesBank: TutorBankItemV4[] = [
       const hauteur = randomChoice([4, 5, 6, 8]);
       const coeff = rayon * rayon * hauteur;
 
+      // 08/10/2026 : précise et simple (Frédéric) — le piège reste le diamètre pris pour le rayon.
+      const bonne = `${coeff}π cm³`;
       return {
-        text: `Un cylindre a un diamètre de ${diametre} cm et une hauteur de ${hauteur} cm. Donner son volume sous la forme aπ.`,
-        format: "short",
-        expected: [`${coeff}π`, `${coeff} pi`, `${coeff}`],
-        comparator: "contains_keyword",
+        text: `Un cylindre a un diamètre de ${diametre} cm et une hauteur de ${hauteur} cm.\nQuel est son volume ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `${diametre * diametre * hauteur}π cm³`,
+          `${rayon * hauteur}π cm³`,
+          `${diametre * hauteur}π cm³`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
         explanation: "Définition : le volume mesure l’espace occupé par un solide.\n\n" +
-          "Méthode : on choisit la formule du solide, puis on remplace par les dimensions données.\n\nCalcul : " +
-          (`Le rayon vaut ${diametre} ÷ 2 = ${rayon} cm. Volume = π × ${rayon}² × ${hauteur} = ${coeff}π cm³.`) +
-          "\n\nConclusion : le volume ou la grandeur obtenu répond à la question.",
+          "Méthode : on trouve d’abord le rayon, puis volume = π × rayon × rayon × hauteur.\n\nCalcul : " +
+          (`Le rayon vaut ${diametre} ÷ 2 = ${rayon} cm. Volume = π × ${rayon} × ${rayon} × ${hauteur} = ${coeff}π cm³. ${diametre * diametre * hauteur}π prend le diamètre comme rayon.`) +
+          `\n\nConclusion : le volume est ${coeff}π cm³.`,
         canvas: solideCanvas({
           solide: "cylindre",
           dimensions: { rayon, hauteur },
@@ -823,17 +844,19 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_cylindre",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi, pour calculer le volume d’un cylindre, on multiplie l’aire du disque de base par la hauteur.",
-    format: "open",
-    expected: ["base", "disque", "hauteur", "empile", "aire"],
-    comparator: "contains_keyword",
-    hint: "Imagine que le cylindre est formé de très nombreuses bases identiques empilées.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Le disque de base d’un cylindre a une aire de 28 cm². Le cylindre a une hauteur de 10 cm.\nQuel est son volume ?",
+    format: "qcm",
+    choices: ["280 cm³", "38 cm³", "280 cm²"],
+    expected: ["280 cm³"],
+    comparator: "mcq_exact",
+    hint: "On empile le disque de base sur toute la hauteur : aire de base × hauteur.",
     explanation:
       "Définition : le volume mesure l’espace occupé par un solide.\n\n" +
-          "Méthode : on choisit la formule du solide, puis on remplace par les dimensions données.\n\nCalcul : " +
-          ("Un cylindre peut être vu comme un disque de base que l’on empile sur une certaine hauteur. On multiplie donc l’aire de la base par la hauteur.") +
-          "\n\nConclusion : le volume ou la grandeur obtenu répond à la question.",
-    tags: ["volume", "cylindre", "open", "raisonnement"],
+          "Méthode : volume du cylindre = aire du disque de base × hauteur.\n\nCalcul : " +
+          ("28 × 10 = 280, donc 280 cm³. 38, c’est l’addition 28 + 10. Un volume s’écrit en cm³, pas en cm².") +
+          "\n\nConclusion : le volume est 280 cm³.",
+    tags: ["volume", "cylindre", "qcm"],
   },
 
   /* =========================
@@ -988,17 +1011,19 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_assemblage",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi on peut additionner les volumes de deux solides assemblés sans superposition.",
-    format: "open",
-    expected: ["additionne", "somme", "volumes", "sans", "superposition"],
-    comparator: "contains_keyword",
-    hint: "Aucun morceau d’espace n’est compté deux fois.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "On colle un cube de 8 cm³ contre un pavé droit de 20 cm³.\nQuel est le volume du solide obtenu ?",
+    format: "qcm",
+    choices: ["28 cm³", "160 cm³", "12 cm³", "28 cm²"],
+    expected: ["28 cm³"],
+    comparator: "mcq_exact",
+    hint: "Les deux solides ne se chevauchent pas : on additionne les volumes.",
     explanation:
       "Définition : le volume mesure l’espace occupé par un solide.\n\n" +
-          "Méthode : on choisit la formule du solide, puis on remplace par les dimensions données.\n\nCalcul : " +
-          ("Si les deux solides sont assemblés sans superposition, ils occupent deux parties différentes de l’espace. Le volume total est donc la somme des deux volumes.") +
-          "\n\nConclusion : le volume ou la grandeur obtenu répond à la question.",
-    tags: ["volume", "assemblage", "open", "raisonnement"],
+          "Méthode : les deux solides occupent deux places différentes, donc on additionne leurs volumes.\n\nCalcul : " +
+          ("8 + 20 = 28, donc 28 cm³. 160 vient de 8 × 20 : on ne multiplie pas des volumes.") +
+          "\n\nConclusion : le volume est 28 cm³.",
+    tags: ["volume", "assemblage", "qcm"],
   },
 
   /* =========================
@@ -1164,17 +1189,19 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_unite",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi 1 dm³ = 1 000 cm³.",
-    format: "open",
-    expected: ["10", "10", "10", "1000", "cube"],
-    comparator: "contains_keyword",
-    hint: "1 dm = 10 cm, et un cube a trois dimensions.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un cube a une arête de 1 dm, c’est-à-dire 10 cm.\nQuel est son volume en cm³ ?",
+    format: "qcm",
+    choices: ["1 000 cm³", "100 cm³", "30 cm³", "10 cm³"],
+    expected: ["1 000 cm³"],
+    comparator: "mcq_exact",
+    hint: "Volume du cube = arête × arête × arête.",
     explanation:
       "Définition : le volume mesure l’espace occupé par un solide.\n\n" +
-          "Méthode : on choisit la formule du solide, puis on remplace par les dimensions données.\n\nCalcul : " +
-          ("Comme 1 dm = 10 cm, alors 1 dm³ = 10 cm × 10 cm × 10 cm = 1 000 cm³.") +
-          "\n\nConclusion : le volume ou la grandeur obtenu répond à la question.",
-    tags: ["volume", "conversion", "open", "raisonnement"],
+          "Méthode : volume du cube = arête × arête × arête, avec l’arête en cm.\n\nCalcul : " +
+          ("10 × 10 × 10 = 1 000, donc 1 dm³ = 1 000 cm³. 100 vient de 10 × 10 (une aire). 30 vient de 10 + 10 + 10.") +
+          "\n\nConclusion : le volume est 1 000 cm³.",
+    tags: ["volume", "conversion", "qcm"],
   },
 
   /* =========================
@@ -1303,15 +1330,22 @@ export const volumesBank: TutorBankItemV4[] = [
       const hauteurPrisme = randomChoice([3, 4, 5]);
       const volumePrisme = aireBasePrisme * hauteurPrisme;
 
+      // 08/10/2026 : précise et simple (Frédéric) — QCM, leurres = vraies erreurs.
+      const bonne = `${coeffCylindre}π + ${volumePrisme} cm³`;
       return {
-        text: `Un assemblage est formé d’un cylindre de rayon ${rayon} cm et de hauteur ${hauteurCylindre} cm, et d’un prisme droit de volume ${volumePrisme} cm³. Donner le volume total sous la forme aπ + b.`,
-        format: "open",
-        expected: [String(coeffCylindre), String(volumePrisme), "π"],
-        comparator: "contains_keyword",
+        text: `On colle un cylindre (rayon ${rayon} cm, hauteur ${hauteurCylindre} cm) et un prisme droit de ${volumePrisme} cm³.\nQuel est le volume total ?`,
+        format: "qcm",
+        choices: makeChoices(bonne, [
+          `${coeffCylindre + volumePrisme}π cm³`,
+          `${rayon * hauteurCylindre}π + ${volumePrisme} cm³`,
+          `${2 * rayon * hauteurCylindre}π + ${volumePrisme} cm³`,
+        ]),
+        expected: [bonne],
+        comparator: "mcq_exact",
         explanation: "Définition : le volume mesure l’espace occupé par un solide.\n\n" +
-          "Méthode : on choisit la formule du solide, puis on remplace par les dimensions données.\n\nCalcul : " +
-          (`Volume du cylindre = π × ${rayon}² × ${hauteurCylindre} = ${coeffCylindre}π cm³. Volume du prisme = ${volumePrisme} cm³. Volume total = ${coeffCylindre}π + ${volumePrisme} cm³.`) +
-          "\n\nConclusion : le volume ou la grandeur obtenu répond à la question.",
+          "Méthode : on calcule le volume du cylindre, puis on ajoute celui du prisme.\n\nCalcul : " +
+          (`Volume du cylindre = π × ${rayon} × ${rayon} × ${hauteurCylindre} = ${coeffCylindre}π cm³. Volume total = ${coeffCylindre}π + ${volumePrisme} cm³. On ne peut pas ajouter ${coeffCylindre}π et ${volumePrisme} en un seul nombre de π.`) +
+          `\n\nConclusion : le volume total est ${coeffCylindre}π + ${volumePrisme} cm³.`,
         canvas: solideCanvas({
           solide: "cylindre",
           dimensions: { rayon, hauteur: hauteurCylindre },
@@ -1336,17 +1370,19 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi la formule Volume = aire de base × hauteur fonctionne pour un prisme droit ou un cylindre.",
-    format: "open",
-    expected: ["base", "hauteur", "empile", "aire", "volume"],
-    comparator: "contains_keyword",
-    hint: "Imagine que l’on empile la même base sur toute la hauteur.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un prisme droit et un cylindre ont tous les deux une base de 12 cm² et une hauteur de 5 cm.\nLequel a le plus grand volume ?",
+    format: "qcm",
+    choices: ["le prisme", "le cylindre", "ils sont égaux"],
+    expected: ["ils sont égaux"],
+    comparator: "mcq_exact",
+    hint: "Pour les deux solides : volume = aire de base × hauteur.",
     explanation:
       "Définition : le volume mesure l’espace occupé par un solide.\n\n" +
-          "Méthode : on choisit la formule du solide, puis on remplace par les dimensions données.\n\nCalcul : " +
-          ("Un prisme droit ou un cylindre peut être vu comme une base que l’on empile sur une certaine hauteur. Le volume est donc l’aire de cette base multipliée par la hauteur.") +
-          "\n\nConclusion : le volume ou la grandeur obtenu répond à la question.",
-    tags: ["volume", "defi", "open", "raisonnement"],
+          "Méthode : pour un prisme droit comme pour un cylindre, volume = aire de base × hauteur.\n\nCalcul : " +
+          ("Prisme : 12 × 5 = 60 cm³. Cylindre : 12 × 5 = 60 cm³.") +
+          "\n\nConclusion : les deux volumes sont égaux.",
+    tags: ["volume", "defi", "qcm"],
   },
 
   /* =========================
@@ -1396,13 +1432,15 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_comprendre",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique la différence entre une aire et un volume.",
-    format: "open",
-    expected: ["surface", "espace", "cube"],
-    comparator: "contains_keyword",
-    hint: "L’une est plate, l’autre occupe l’espace.",
-    explanation: expl("L’aire mesure une surface plane (en cm²) ; le volume mesure l’espace occupé par un solide (en cm³)."),
-    tags: ["volume", "definition", "open"],
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un cube a une arête de 2 cm.\nQuel est son volume ?",
+    format: "qcm",
+    choices: ["8 cm³", "4 cm²", "6 cm", "8 cm²"],
+    expected: ["8 cm³"],
+    comparator: "mcq_exact",
+    hint: "Volume du cube = arête × arête × arête.",
+    explanation: expl("2 × 2 × 2 = 8, donc 8 cm³. 4 cm² est l’aire d’une face (une surface plate), pas le volume. 6 cm vient de 2 + 2 + 2."),
+    tags: ["volume", "definition", "qcm"],
   },
   {
     kind: "fixed",
@@ -1584,13 +1622,15 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_prisme",
     difficulty: 3,
     theme: "neutral",
-    text: "Pour trouver le volume d’un prisme droit, de quelles deux grandeurs a-t-on besoin ?",
-    format: "open",
-    expected: ["aire", "base", "hauteur"],
-    comparator: "contains_keyword",
-    hint: "Pense à la formule.",
-    explanation: expl("On a besoin de l’aire de la base et de la hauteur : Volume = aire de base × hauteur."),
-    tags: ["volume", "prisme", "open"],
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : choisir les deux bonnes grandeurs.
+    text: "Un prisme droit a une base d’aire 9 cm² et de périmètre 14 cm. Sa hauteur est 4 cm.\nQuel est son volume ?",
+    format: "qcm",
+    choices: ["36 cm³", "56 cm³", "13 cm³", "36 cm²"],
+    expected: ["36 cm³"],
+    comparator: "mcq_exact",
+    hint: "Volume = aire de base × hauteur. Le périmètre ne sert pas.",
+    explanation: expl("On utilise l’aire de la base et la hauteur : 9 × 4 = 36, donc 36 cm³. 56 vient de 14 × 4 : le périmètre ne sert pas pour le volume."),
+    tags: ["volume", "prisme", "qcm"],
   },
   {
     kind: "template",
@@ -1683,12 +1723,14 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_cylindre",
     difficulty: 3,
     theme: "neutral",
-    text: "Un cylindre a un rayon de 2 cm et une hauteur de 10 cm. Donne son volume sous la forme aπ.",
-    format: "short",
-    expected: ["40π", "40 pi", "40"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un cylindre a un rayon de 2 cm et une hauteur de 10 cm.\nQuel est son volume ?",
+    format: "qcm",
+    choices: ["40π cm³", "20π cm³", "160π cm³", "40π cm²"],
+    expected: ["40π cm³"],
+    comparator: "mcq_exact",
     hint: "Aire de base = π × r².",
-    explanation: expl("Aire de base = π × 2² = 4π cm². Volume = 4π × 10 = 40π cm³."),
+    explanation: expl("Aire de base = π × 2 × 2 = 4π cm². Volume = 4π × 10 = 40π cm³. 20π oublie le carré du rayon. 160π prend le diamètre 4 cm comme rayon."),
     tags: ["volume", "cylindre", "pi", "canvas"],
     canvas: solideCanvas({
       solide: "cylindre",

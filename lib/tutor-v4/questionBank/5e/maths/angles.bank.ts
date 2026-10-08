@@ -179,6 +179,7 @@ export const anglesBank: TutorBankItemV4[] = [
     tags: ["angle_mesure", "lire", "angle_droit", "qcm"],
     canvas: angleCanvas({ angleDeg: 90, showMeasure: false, showRightAngle: true }),
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "angle_lire_open_1",
@@ -188,16 +189,15 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_lire",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique comment reconnaître le sommet d’un angle.",
-    format: "open",
-    expected: ["sommet", "côtés", "rejoignent"],
-    comparator: "contains_keyword",
+    text: "Observe la figure. Quel point est le sommet de l’angle ?",
+    format: "qcm",
+    choices: ["D", "E", "F"],
+    expected: ["E"],
+    comparator: "mcq_exact",
     hint: "Regarde le point commun aux deux côtés de l’angle.",
-    explanation: "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
-          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
-          ("Le sommet d’un angle est le point où les deux côtés de l’angle se rejoignent.") +
-          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angle_mesure", "lire", "open", "vocabulaire"],
+    explanation: expl("Les deux côtés de l’angle partent du même point : E. C’est le sommet. On note l’angle DEF, avec le sommet au milieu."),
+    tags: ["angle_mesure", "lire", "qcm", "vocabulaire", "canvas"],
+    canvas: angleCanvas({ angleDeg: 50, showMeasure: false, labels: { vertex: "E", left: "D", right: "F" } }),
   },
   {
     kind: "template",
@@ -301,6 +301,7 @@ export const anglesBank: TutorBankItemV4[] = [
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angle_mesure", "mesurer", "rapporteur", "piege", "qcm"],
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "angle_mesurer_open_1",
@@ -310,17 +311,13 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_mesurer",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique les deux précautions importantes pour mesurer un angle avec un rapporteur.",
-    format: "open",
-    expected: ["centre", "sommet", "zéro", "côté"],
-    comparator: "contains_keyword",
-    hint: "Pense au centre du rapporteur et au zéro.",
-    explanation:
-      "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
-          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
-          ("Il faut placer le centre du rapporteur sur le sommet de l’angle, puis aligner le zéro du rapporteur avec un côté de l’angle.") +
-          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angle_mesure", "mesurer", "open", "rapporteur"],
+    text: "Un côté de l’angle passe par le 0 de la graduation extérieure. L’autre côté passe par 50 (extérieure) et 130 (intérieure). Combien mesure l’angle ?",
+    format: "short",
+    expected: ["50"],
+    comparator: "number_equal",
+    hint: "On lit sur la graduation qui part de 0.",
+    explanation: expl("Le premier côté est sur le 0 de la graduation extérieure. On lit donc sur la graduation extérieure : 50. L’angle mesure 50°."),
+    tags: ["angle_mesure", "mesurer", "short", "rapporteur"],
   },
   {
     kind: "template",
@@ -426,6 +423,7 @@ export const anglesBank: TutorBankItemV4[] = [
     tags: ["angle_mesure", "tracer", "obtus", "qcm"],
     canvas: angleCanvas({ angleDeg: 120, showMeasure: true }),
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "angle_tracer_open_1",
@@ -435,17 +433,14 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_tracer",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment tracer un angle de 70° avec un rapporteur.",
-    format: "open",
-    expected: ["sommet", "rapporteur", "70", "demi-droite"],
-    comparator: "contains_keyword",
-    hint: "Décris les étapes : sommet, premier côté, rapporteur, graduation.",
-    explanation:
-      "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
-          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
-          ("On place le sommet, on trace un premier côté, on place le centre du rapporteur sur le sommet, on repère 70°, puis on trace le second côté.") +
-          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angle_mesure", "tracer", "open", "methode"],
+    text: "Tu viens de tracer un angle de 70°. Pour vérifier ton tracé : il doit être aigu ou obtus ?",
+    format: "qcm",
+    choices: ["obtus", "aigu", "droit"],
+    expected: ["aigu"],
+    comparator: "mcq_exact",
+    hint: "Compare 70° à 90°.",
+    explanation: expl("70° est plus petit que 90° : l’angle tracé doit être aigu. S’il est obtus, tu as lu 110 sur la mauvaise graduation."),
+    tags: ["angle_mesure", "tracer", "qcm", "verification"],
   },
   {
     kind: "template",
@@ -542,6 +537,7 @@ export const anglesBank: TutorBankItemV4[] = [
           "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
     tags: ["angle_mesure", "estimer", "qcm", "piege"],
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "angle_estimer_open_1",
@@ -551,17 +547,15 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_estimer",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment savoir si un angle est aigu ou obtus sans le mesurer précisément.",
-    format: "open",
-    expected: ["90", "droit", "plus petit", "plus grand"],
-    comparator: "contains_keyword",
+    text: "Observe la figure. Compare l’angle à un angle droit. L’angle est :",
+    format: "qcm",
+    choices: ["aigu", "obtus", "droit"],
+    expected: ["obtus"],
+    comparator: "mcq_exact",
     hint: "Compare l’angle à un angle droit.",
-    explanation:
-      "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
-          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
-          ("On compare l’angle à 90°. S’il est plus petit que 90°, il est aigu. S’il est plus grand que 90° et plus petit que 180°, il est obtus.") +
-          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angle_mesure", "estimer", "open", "raisonnement"],
+    explanation: expl("L’angle est plus ouvert qu’un angle droit (90°) et moins qu’un angle plat (180°) : il est obtus."),
+    tags: ["angle_mesure", "estimer", "qcm", "canvas"],
+    canvas: angleCanvas({ angleDeg: 125, showMeasure: false, placeholder: "?" }),
   },
   {
     kind: "template",
@@ -605,6 +599,7 @@ export const anglesBank: TutorBankItemV4[] = [
   // =========================
   // ANGLE_DEFIS
   // =========================
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "angle_defi_fixed_1",
@@ -614,18 +609,14 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève dit : « Cet angle est obtus car il est grand ». Explique pourquoi cette justification est insuffisante.",
-    format: "open",
-    expected: ["90", "180", "mesure", "obtus"],
-    comparator: "contains_keyword",
-    hint: "Un angle obtus a une définition précise.",
-    explanation:
-      "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
-          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
-          ("Dire qu’un angle est grand ne suffit pas. Un angle obtus mesure plus de 90° et moins de 180°.") +
-          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
-    tags: ["angle_mesure", "defi", "open", "raisonnement", "piege"],
-    canvas: angleCanvas({ angleDeg: 120, showMeasure: false, placeholder: "?" }),
+    text: "Un angle obtus mesure plus de 90° et moins de 180°. Lequel de ces angles est obtus ?",
+    format: "qcm",
+    choices: ["85°", "90°", "120°", "180°"],
+    expected: ["120°"],
+    comparator: "mcq_exact",
+    hint: "« Grand » ne suffit pas : regarde les seuils 90° et 180°.",
+    explanation: expl("120° est entre 90° et 180° : il est obtus. 180° est grand, mais c’est un angle plat. 90° est droit. 85° est aigu."),
+    tags: ["angle_mesure", "defi", "qcm", "raisonnement", "piege"],
   },
   {
     kind: "fixed",
@@ -705,6 +696,7 @@ export const anglesBank: TutorBankItemV4[] = [
       };
     },
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "template",
     id: "angle_defi_open_tpl_1",
@@ -715,26 +707,22 @@ export const anglesBank: TutorBankItemV4[] = [
     difficulty: 5,
     theme: "neutral",
     hint: "Utilise les seuils 90° et 180°.",
-    tags: ["angle_mesure", "defi", "open", "template"],
+    tags: ["angle_mesure", "defi", "qcm", "template"],
     generate: () => {
-      const a = randomChoice([35, 60, 110, 135]);
+      const a = randomChoice([35, 60, 85, 95, 110, 135, 150]);
       const type = angleType(a);
 
       return {
-        text: `Explique pourquoi un angle de ${a}° est un angle ${type}.`,
-        format: "open",
-        expected:
+        text: `Un angle mesure ${a}°. Quelle est sa nature ?`,
+        format: "qcm",
+        choices: ["aigu", "droit", "obtus", "plat"],
+        expected: [type],
+        comparator: "mcq_exact",
+        explanation: expl(
           type === "aigu"
-            ? [String(a), "90", "aigu"]
-            : [String(a), "90", "180", "obtus"],
-        comparator: "contains_keyword",
-        explanation:
-          "Définition : un angle mesure l’ouverture entre deux demi-droites et s’exprime en degrés.\n\n" +
-          "Méthode : on identifie le sommet, les côtés ou la mesure, puis on utilise la règle ou le rapporteur.\n\nCalcul : " +
-          (type === "aigu"
-            ? `${a}° est inférieur à 90°, donc c’est un angle aigu.`
-            : `${a}° est supérieur à 90° et inférieur à 180°, donc c’est un angle obtus.`) +
-          "\n\nConclusion : la mesure ou le nom trouvé convient pour cet angle.",
+            ? `${a}° est plus petit que 90° : l’angle est aigu.`
+            : `${a}° est plus grand que 90° et plus petit que 180° : l’angle est obtus.`,
+        ),
         canvas: angleCanvas({ angleDeg: a, showMeasure: true }),
       };
     },
@@ -798,6 +786,7 @@ export const anglesBank: TutorBankItemV4[] = [
     tags: ["angle_mesure", "lire", "obtus", "qcm"],
     canvas: angleCanvas({ angleDeg: 130, showMeasure: true }),
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "angle_lire_open_2",
@@ -807,13 +796,14 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_lire",
     difficulty: 2,
     theme: "neutral",
-    text: "Dans la notation d’un angle AOB, que désigne la lettre du milieu ?",
-    format: "open",
-    expected: ["sommet", "milieu"],
-    comparator: "contains_keyword",
-    hint: "Pense au point où les côtés se rejoignent.",
-    explanation: expl("La lettre du milieu (ici O) désigne le sommet de l’angle, le point où se rejoignent les deux côtés."),
-    tags: ["angle_mesure", "lire", "open", "vocabulaire"],
+    text: "On note un angle RST. Quel point est son sommet ?",
+    format: "qcm",
+    choices: ["R", "S", "T"],
+    expected: ["S"],
+    comparator: "mcq_exact",
+    hint: "Le sommet est toujours la lettre du milieu.",
+    explanation: expl("Dans l’angle RST, la lettre du milieu est S. C’est le sommet : le point où les deux côtés se rejoignent."),
+    tags: ["angle_mesure", "lire", "qcm", "vocabulaire"],
   },
   {
     kind: "template",
@@ -1094,6 +1084,7 @@ export const anglesBank: TutorBankItemV4[] = [
     explanation: expl("88° est très proche de 90°, la mesure d’un angle droit."),
     tags: ["angle_mesure", "estimer", "angle_droit", "qcm"],
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "angle_estimer_open_2",
@@ -1103,13 +1094,14 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_estimer",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment estimer rapidement si un angle est aigu ou obtus sans rapporteur.",
-    format: "open",
-    expected: ["90", "droit", "comparer"],
-    comparator: "contains_keyword",
-    hint: "On compare visuellement à un angle droit.",
-    explanation: expl("On compare visuellement l’angle à un angle droit (90°, le coin d’une feuille) : plus petit = aigu, plus grand = obtus."),
-    tags: ["angle_mesure", "estimer", "open"],
+    text: "Un angle est plus ouvert que le coin d’une feuille, mais moins qu’une ligne droite. Il est :",
+    format: "qcm",
+    choices: ["aigu", "plat", "obtus"],
+    expected: ["obtus"],
+    comparator: "mcq_exact",
+    hint: "Le coin d’une feuille est un angle droit (90°).",
+    explanation: expl("Le coin d’une feuille fait 90°. Une ligne droite fait 180°. Entre les deux, l’angle est obtus."),
+    tags: ["angle_mesure", "estimer", "qcm"],
   },
   {
     kind: "fixed",
@@ -1418,6 +1410,7 @@ export const anglesBank: TutorBankItemV4[] = [
     ),
     tags: ["angle_mesure", "paires", "reunion", "supplementaire"],
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "angle_paires_open_1",
@@ -1427,16 +1420,16 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_paires",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique la différence entre deux angles complémentaires et deux angles supplémentaires.",
-    format: "open",
-    expected: ["90", "180", "droit", "plat"],
-    comparator: "contains_keyword",
-    hint: "Pense à l’angle que chaque paire forme une fois les deux angles réunis.",
-    explanation: expl(
-      "Deux angles complémentaires ont pour somme 90° : réunis, ils forment un angle droit. Deux angles supplémentaires ont pour somme 180° : réunis, ils forment un angle plat.",
-    ),
-    tags: ["angle_mesure", "paires", "open", "vocabulaire"],
+    text: "Deux angles mesurent 35° et 55°. Ils sont :",
+    format: "qcm",
+    choices: ["supplémentaires", "complémentaires", "ni l’un ni l’autre"],
+    expected: ["complémentaires"],
+    comparator: "mcq_exact",
+    hint: "Additionne les deux mesures.",
+    explanation: expl("35 + 55 = 90. La somme fait 90° : les angles sont complémentaires. (Supplémentaires : la somme ferait 180°.)"),
+    tags: ["angle_mesure", "paires", "qcm", "vocabulaire"],
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "angle_paires_open_2",
@@ -1446,15 +1439,13 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_paires",
     difficulty: 4,
     theme: "neutral",
-    text: "Deux droites se croisent. Explique pourquoi deux angles opposés par le sommet ont la même mesure.",
-    format: "open",
-    expected: ["180", "supplémentaire", "supplementaire", "plat", "même", "meme"],
-    comparator: "contains_keyword",
-    hint: "Regarde l’angle qui est entre les deux : il est voisin de l’un ET de l’autre.",
-    explanation: expl(
-      "Appelons a l’un des angles et b celui qui le touche. Ensemble ils forment un angle plat : a + b = 180°. L’angle opposé à a touche lui aussi b, donc il vaut également 180 - b. Les deux angles opposés par le sommet valent donc la même chose.",
-    ),
-    tags: ["angle_mesure", "paires", "open", "raisonnement"],
+    text: "Deux droites se croisent. Deux angles voisins forment un angle plat. L’un mesure 130°. Combien mesure l’autre ?",
+    format: "short",
+    expected: ["50"],
+    comparator: "number_equal",
+    hint: "Un angle plat mesure 180°.",
+    explanation: expl("Les deux angles voisins font 180° : 180 − 130 = 50. L’autre angle mesure 50°. L’angle opposé au 130° est voisin du même angle de 50° : il mesure aussi 180 − 50 = 130°. C’est pour cela que deux angles opposés par le sommet ont la même mesure."),
+    tags: ["angle_mesure", "paires", "short", "raisonnement"],
   },
   {
     kind: "template",
@@ -1486,6 +1477,7 @@ export const anglesBank: TutorBankItemV4[] = [
       };
     },
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "template",
     id: "angle_paires_tpl_2",
@@ -1495,17 +1487,17 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_paires",
     difficulty: 4,
     theme: "neutral",
-    hint: "Dis quelle somme tu vises, puis quelle soustraction tu poses.",
-    tags: ["angle_mesure", "paires", "open", "template"],
+    hint: "Deux angles complémentaires font 90° à eux deux.",
+    tags: ["angle_mesure", "paires", "short", "template"],
     generate: () => {
       const a = randomChoice([22, 38, 41, 57, 63, 78]);
       return {
-        text: `Un angle mesure ${a}°. Explique comment tu trouves la mesure de son complémentaire.`,
-        format: "open",
-        expected: ["90", "soustra", "retire", "enlève", "enleve", "moins"],
-        comparator: "contains_keyword",
+        text: `Un angle mesure ${a}°. Combien mesure son complémentaire ?`,
+        format: "short",
+        expected: [String(90 - a)],
+        comparator: "number_equal",
         explanation: expl(
-          `Deux angles complémentaires ont pour somme 90°. On retire donc la mesure connue de 90 : 90 - ${a} = ${90 - a}°.`,
+          `Deux angles complémentaires font 90° à eux deux. On calcule 90 − ${a} = ${90 - a}. Le complémentaire mesure ${90 - a}°.`,
         ),
       };
     },
@@ -1671,6 +1663,7 @@ export const anglesBank: TutorBankItemV4[] = [
     ),
     tags: ["angle_mesure", "paralleles", "reunion", "correspondant"],
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "angle_paralleles_open_1",
@@ -1680,16 +1673,16 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_paralleles",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment reconnaître deux angles alternes-internes sur une figure.",
-    format: "open",
-    expected: ["entre", "part et d", "côté", "cote", "sécante", "secante", "croisement"],
-    comparator: "contains_keyword",
-    hint: "Regarde où ils sont par rapport aux deux droites, puis par rapport à la sécante.",
-    explanation: expl(
-      "Deux angles alternes-internes sont tous les deux ENTRE les deux droites coupées — c’est le mot « internes » — et de part et d’autre de la sécante — c’est le mot « alternes ». Ils sont donc à deux croisements différents, en diagonale l’un de l’autre.",
-    ),
-    tags: ["angle_mesure", "paralleles", "open", "vocabulaire"],
+    text: "Deux angles sont entre les deux droites, et de part et d’autre de la sécante. Comment s’appellent-ils ?",
+    format: "qcm",
+    choices: ["correspondants", "opposés par le sommet", "alternes-internes"],
+    expected: ["alternes-internes"],
+    comparator: "mcq_exact",
+    hint: "« Internes » : entre les droites. « Alternes » : de part et d’autre de la sécante.",
+    explanation: expl("Entre les deux droites : « internes ». De part et d’autre de la sécante : « alternes ». Ce sont des angles alternes-internes."),
+    tags: ["angle_mesure", "paralleles", "qcm", "vocabulaire"],
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "angle_paralleles_open_2",
@@ -1699,15 +1692,14 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_paralleles",
     difficulty: 5,
     theme: "neutral",
-    text: "Une sécante coupe deux droites. Deux angles correspondants mesurent 60° et 68°. Que peux-tu en conclure sur les deux droites ? Explique.",
-    format: "open",
-    expected: ["pas parallèles", "pas paralleles", "non parallèles", "non paralleles", "coupent", "sécantes", "secantes"],
-    comparator: "contains_keyword",
-    hint: "Si elles étaient parallèles, que devrait-on lire ?",
-    explanation: expl(
-      "Si les deux droites étaient parallèles, les angles correspondants seraient égaux. Ici ils valent 60° et 68° : ils ne le sont pas. Les deux droites ne sont donc pas parallèles — prolongées assez loin, elles finiront par se couper.",
-    ),
-    tags: ["angle_mesure", "paralleles", "open", "raisonnement"],
+    text: "Une sécante coupe deux droites. Deux angles correspondants mesurent 60° et 68°. Les deux droites sont-elles parallèles ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Si elles étaient parallèles, les deux angles seraient égaux.",
+    explanation: expl("Si les droites étaient parallèles, les angles correspondants seraient égaux. Or 60° n’est pas égal à 68°. Les droites ne sont pas parallèles."),
+    tags: ["angle_mesure", "paralleles", "qcm", "raisonnement"],
   },
   {
     kind: "template",
@@ -1744,6 +1736,7 @@ export const anglesBank: TutorBankItemV4[] = [
       };
     },
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "template",
     id: "angle_paralleles_tpl_2",
@@ -1753,17 +1746,17 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_paralleles",
     difficulty: 5,
     theme: "neutral",
-    hint: "Nomme la propriété que tu utilises, puis dis ce qu’elle donne.",
-    tags: ["angle_mesure", "paralleles", "open", "template"],
+    hint: "Droites parallèles : deux angles correspondants sont égaux.",
+    tags: ["angle_mesure", "paralleles", "short", "template"],
     generate: () => {
       const a = randomChoice([42, 56, 63, 71, 84]);
       return {
-        text: `Les droites (d1) et (d2) sont parallèles, coupées par une sécante. Un angle mesure ${a}°. Explique comment tu trouves la mesure de son angle correspondant, sans rapporteur.`,
-        format: "open",
-        expected: ["parallèles", "paralleles", "correspondant", "égaux", "egaux", "même mesure", "meme mesure"],
-        comparator: "contains_keyword",
+        text: `Les droites (d1) et (d2) sont parallèles, coupées par une sécante. Un angle mesure ${a}°. Combien mesure son angle correspondant ?`,
+        format: "short",
+        expected: [String(a)],
+        comparator: "number_equal",
         explanation: expl(
-          `Comme les deux droites sont parallèles, deux angles correspondants ont la même mesure. Il n’y a rien à calculer : l’angle cherché mesure lui aussi ${a}°.`,
+          `Les droites sont parallèles. Donc deux angles correspondants ont la même mesure. Pas de calcul : l’angle cherché mesure ${a}°.`,
         ),
       };
     },

@@ -119,15 +119,17 @@ export const divisibiliteBank: TutorBankItemV4[] = [
     microId: "div_multiple_diviseur",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique la différence entre « multiple de 5 » et « diviseur de 5 ».",
-    format: "open",
-    expected: ["table", "multipliant", "multiplie", "plus grand", "plus petit", "divise"],
-    comparator: "contains_keyword",
-    hint: "L’un est plus grand que 5, l’autre plus petit.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "15 est-il un multiple de 5 ou un diviseur de 5 ?",
+    format: "qcm",
+    choices: ["un multiple", "un diviseur", "les deux"],
+    expected: ["un multiple"],
+    comparator: "mcq_exact",
+    hint: "15 est-il dans la table de 5 ?",
     explanation: expl(
-      "Les multiples de 5 sont les nombres de sa table : 0, 5, 10, 15, 20… Ils sont plus grands que 5 (sauf 0 et 5 lui-même). Les diviseurs de 5 sont les nombres qui divisent 5 sans reste : 1 et 5, donc pas plus grands que 5.",
+      "5 × 3 = 15 : 15 est dans la table de 5. C’est donc un multiple de 5. Les diviseurs de 5 sont seulement 1 et 5. Un multiple est plus grand, un diviseur est plus petit.",
     ),
-    tags: ["divisibilite", "open", "vocabulaire"],
+    tags: ["divisibilite", "qcm", "vocabulaire"],
   },
   {
     kind: "template",
@@ -167,19 +169,29 @@ export const divisibiliteBank: TutorBankItemV4[] = [
     microId: "div_multiple_diviseur",
     difficulty: 3,
     theme: "neutral",
-    hint: "Dis dans quel sens tu lis la multiplication.",
-    tags: ["divisibilite", "open", "template"],
+    hint: "Le grand nombre est le multiple, les petits sont les diviseurs.",
+    tags: ["divisibilite", "qcm", "template"],
+    // 08/10/2026 : précise et simple (Frédéric)
+    // Avant : « Explique ce que a × b = c apprend sur les multiples et les diviseurs ».
+    // Désormais : on lit l'égalité dans un sens tiré au hasard (multiple ou diviseur).
     generate: () => {
       const a = randomChoice([4, 6, 7, 8, 9]);
       const b = randomChoice([5, 7, 8, 9, 12]);
+      const p = a * b;
+      const sensDiviseur = randomChoice([true, false]);
+      const bonne = sensDiviseur ? "diviseur" : "multiple";
       return {
-        text: `On sait que ${a} × ${b} = ${a * b}. Explique ce que cette égalité apprend sur les multiples et les diviseurs de ${a * b}.`,
-        format: "open",
-        expected: ["multiple", "diviseur", String(a), String(b)],
-        comparator: "contains_keyword",
+        text: sensDiviseur
+          ? `On sait que ${a} × ${b} = ${p}. Complète : ${a} est un ... de ${p}.`
+          : `On sait que ${a} × ${b} = ${p}. Complète : ${p} est un ... de ${a}.`,
+        format: "qcm",
+        choices: shuffle(["multiple", "diviseur"]),
+        expected: [bonne],
+        comparator: "mcq_exact",
         explanation: expl(
-          `${a * b} s’obtient en multipliant ${a} par ${b} : c’est donc un multiple de ${a} et un multiple de ${b}. ` +
-            `Lue dans l’autre sens, la même égalité dit que ${a} et ${b} sont deux diviseurs de ${a * b}.`,
+          sensDiviseur
+            ? `${a} × ${b} = ${p}, donc ${p} ÷ ${a} = ${b} sans reste. ${a} est un diviseur de ${p}.`
+            : `${a} × ${b} = ${p} : ${p} est dans la table de ${a}. ${p} est un multiple de ${a}.`,
         ),
       };
     },
@@ -260,15 +272,17 @@ export const divisibiliteBank: TutorBankItemV4[] = [
     microId: "div_critere_2_5_10",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi il suffit de regarder le dernier chiffre pour savoir si un nombre est divisible par 5.",
-    format: "open",
-    expected: ["dizaine", "0", "5", "reste", "unités", "unites"],
-    comparator: "contains_keyword",
-    hint: "Une dizaine entière, est-elle divisible par 5 ?",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "On veut savoir si 4 738 est divisible par 5. Quel chiffre suffit-il de regarder ?",
+    format: "qcm",
+    choices: ["8", "4", "3", "7"],
+    expected: ["8"],
+    comparator: "mcq_exact",
+    hint: "Une dizaine entière est toujours divisible par 5.",
     explanation: expl(
-      "Toutes les dizaines sont déjà divisibles par 5 : 10, 20, 30… se partagent en parts de 5 sans reste. Ce qui décide, c’est donc uniquement ce qui reste après les dizaines, c’est-à-dire le chiffre des unités. Il doit être 0 ou 5.",
+      "4 738 = 4 730 + 8. 4 730 est fait de dizaines : il est divisible par 5. Tout dépend donc du chiffre des unités, 8. Ce n’est ni 0 ni 5 : 4 738 n’est pas divisible par 5.",
     ),
-    tags: ["divisibilite", "critere", "open", "raisonnement"],
+    tags: ["divisibilite", "critere", "qcm", "raisonnement"],
   },
   {
     kind: "template",
@@ -312,15 +326,21 @@ export const divisibiliteBank: TutorBankItemV4[] = [
     microId: "div_critere_2_5_10",
     difficulty: 3,
     theme: "neutral",
-    hint: "Nomme le critère que tu utilises avant de conclure.",
-    tags: ["divisibilite", "critere", "open", "template"],
+    hint: "Regarde le chiffre des unités, rien d’autre.",
+    tags: ["divisibilite", "critere", "qcm", "template"],
+    // 08/10/2026 : précise et simple (Frédéric)
+    // Avant : « dis par lesquels de 2, 5 et 10… Explique. » (mot-clé). Désormais un QCM court.
     generate: () => {
-      const n = randomChoice([130, 245, 372, 480, 615, 728, 890]);
+      const n = randomChoice([130, 245, 372, 480, 615, 728, 890, 371, 417]);
+      const d2 = n % 2 === 0;
+      const d5 = n % 5 === 0;
+      const bonne = d2 && d5 ? "par 2, 5 et 10" : d2 ? "par 2 seulement" : d5 ? "par 5 seulement" : "par aucun";
       return {
-        text: `Sans poser aucune division, dis par lesquels de 2, 5 et 10 le nombre ${n} est divisible. Explique.`,
-        format: "open",
-        expected: ["unités", "unites", "dernier chiffre", String(n % 10), "pair"],
-        comparator: "contains_keyword",
+        text: `Par lesquels de 2, 5 et 10 le nombre ${n} est-il divisible ?`,
+        format: "qcm",
+        choices: shuffle(["par 2, 5 et 10", "par 2 seulement", "par 5 seulement", "par aucun"]),
+        expected: [bonne],
+        comparator: "mcq_exact",
         explanation: expl(
           `Le chiffre des unités de ${n} est ${n % 10}. ` +
             `Divisible par 2 : ${n % 2 === 0 ? "oui" : "non"}. Par 5 : ${n % 5 === 0 ? "oui" : "non"}. Par 10 : ${n % 10 === 0 ? "oui" : "non"}. ` +
@@ -405,15 +425,17 @@ export const divisibiliteBank: TutorBankItemV4[] = [
     microId: "div_critere_3_9",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment savoir si 4 152 est divisible par 3, sans poser la division.",
-    format: "open",
-    expected: ["somme", "additionne", "12", "chiffres"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Sans poser la division : 4 152 est-il divisible par 3 ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
     hint: "Additionne les quatre chiffres.",
     explanation: expl(
-      "On additionne tous les chiffres : 4 + 1 + 5 + 2 = 12. Comme 12 est dans la table de 3, le nombre 4 152 est divisible par 3. Si la somme reste grande, on peut recommencer sur elle : 1 + 2 = 3.",
+      "On additionne tous les chiffres : 4 + 1 + 5 + 2 = 12. 12 est dans la table de 3. Donc 4 152 est divisible par 3.",
     ),
-    tags: ["divisibilite", "critere", "open", "methode"],
+    tags: ["divisibilite", "critere", "qcm", "methode"],
   },
   {
     kind: "template",
@@ -453,16 +475,18 @@ export const divisibiliteBank: TutorBankItemV4[] = [
     microId: "div_critere_3_9",
     difficulty: 4,
     theme: "neutral",
-    hint: "Dis ce que tu additionnes, puis ce que tu regardes.",
-    tags: ["divisibilite", "critere", "open", "template"],
+    hint: "Additionne tous les chiffres du nombre.",
+    tags: ["divisibilite", "critere", "short", "template"],
+    // 08/10/2026 : précise et simple (Frédéric)
+    // Avant : « Explique comment savoir si n est divisible par 9 » (mot-clé). Désormais l'élève fait l'étape clé : la somme.
     generate: () => {
       const n = randomChoice([126, 315, 432, 549, 657, 828, 945]);
       const s = sommeChiffres(n);
       return {
-        text: `Explique comment savoir, sans poser de division, si ${n} est divisible par 9.`,
-        format: "open",
-        expected: ["somme", "additionne", String(s), "chiffres"],
-        comparator: "contains_keyword",
+        text: `Pour savoir si ${n} est divisible par 9, on additionne ses chiffres. Combien trouves-tu ?`,
+        format: "short",
+        expected: [String(s)],
+        comparator: "number_equal",
         explanation: expl(
           `On additionne les chiffres : ${String(n).split("").join(" + ")} = ${s}. ` +
             `${s} est dans la table de 9, donc ${n} est divisible par 9.`,
@@ -538,15 +562,16 @@ export const divisibiliteBank: TutorBankItemV4[] = [
     microId: "div_lister_diviseurs",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique une méthode sûre pour trouver TOUS les diviseurs d’un nombre sans en oublier.",
-    format: "open",
-    expected: ["paire", "couple", "1", "ordre", "essaie", "essaye"],
-    comparator: "contains_keyword",
-    hint: "Chaque diviseur en amène un autre.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "On cherche les diviseurs de 18 par paires : 1 × 18, 2 × 9, 3 × ... Complète la dernière paire.",
+    format: "short",
+    expected: ["6"],
+    comparator: "number_equal",
+    hint: "Chaque diviseur en amène un autre : 18 ÷ 3 = ?",
     explanation: expl(
-      "On essaie dans l’ordre : 1, puis 2, puis 3… Chaque fois que la division tombe juste, on note DEUX diviseurs d’un coup : celui qu’on essaie et le quotient obtenu. Pour 18 : 1 et 18, 2 et 9, 3 et 6. On s’arrête quand les deux nombres de la paire se rejoignent.",
+      "18 ÷ 3 = 6, donc 3 × 6 = 18. Les paires sont 1 et 18, 2 et 9, 3 et 6. Les diviseurs de 18 sont 1, 2, 3, 6, 9 et 18. Chercher par paires évite d’en oublier.",
     ),
-    tags: ["divisibilite", "diviseurs", "open", "methode"],
+    tags: ["divisibilite", "diviseurs", "short", "methode"],
   },
   {
     kind: "template",
@@ -583,21 +608,27 @@ export const divisibiliteBank: TutorBankItemV4[] = [
     microId: "div_lister_diviseurs",
     difficulty: 5,
     theme: "neutral",
-    hint: "Dis quelles paires tu trouves, dans l’ordre.",
-    tags: ["divisibilite", "diviseurs", "open", "template"],
+    hint: "Cherche par paires : 1 et le nombre, 2 et sa moitié…",
+    tags: ["divisibilite", "diviseurs", "short", "template"],
+    // 08/10/2026 : précise et simple (Frédéric)
+    // Avant : « Explique comment tu trouves tous les diviseurs de n » (mot-clé).
+    // Désormais : une liste où il manque UN diviseur (ni 1 ni n), à retrouver par les paires.
     generate: () => {
       const n = randomChoice([24, 30, 32, 42, 48]);
       const liste = diviseurs(n);
+      const manquant = randomChoice(liste.slice(1, -1));
+      const trouee = liste.filter((d) => d !== manquant);
       return {
-        text: `Explique comment tu trouves tous les diviseurs de ${n}.`,
-        format: "open",
-        expected: ["paire", "couple", "1", String(n), "ordre"],
-        comparator: "contains_keyword",
+        text: `Voici des diviseurs de ${n} : ${trouee.join(", ")}. Il en manque un. Lequel ?`,
+        format: "short",
+        expected: [String(manquant)],
+        comparator: "number_equal",
         explanation: expl(
-          `On essaie dans l’ordre et on note les paires : ${liste
+          `On cherche par paires : ${liste
             .slice(0, Math.ceil(liste.length / 2))
-            .map((d) => `${d} et ${n / d}`)
-            .join(", ")}. ` + `Au total : ${liste.join(", ")}.`,
+            .map((d) => `${d} × ${n / d}`)
+            .join(", ")}. ` +
+            `${manquant} va avec ${n / manquant} : c’est lui qui manquait. Au total : ${liste.join(", ")}.`,
         ),
       };
     },
@@ -654,15 +685,16 @@ export const divisibiliteBank: TutorBankItemV4[] = [
     microId: "div_defi",
     difficulty: 5,
     theme: "neutral",
-    text: `Un élève simplifie ${frac(35, 40)} en ${frac(7, 8)}. Explique par quoi il a divisé, et comment il pouvait le trouver sans essayer au hasard.`,
-    format: "open",
-    expected: ["5", "unités", "unites", "0 ou 5", "critère", "critere", "termine"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: `Un élève simplifie ${frac(35, 40)} en ${frac(7, 8)}. Par quel nombre a-t-il divisé en haut et en bas ?`,
+    format: "short",
+    expected: ["5"],
+    comparator: "number_equal",
     hint: "Regarde le chiffre des unités des deux nombres.",
     explanation: expl(
-      "Il a divisé les deux nombres par 5 : 35 ÷ 5 = 7 et 40 ÷ 5 = 8. Le critère le donnait tout de suite — 35 se termine par 5 et 40 par 0, donc les deux sont divisibles par 5. Le critère évite de tâtonner.",
+      "35 se termine par 5 et 40 par 0 : les deux sont divisibles par 5. 35 ÷ 5 = 7 et 40 ÷ 5 = 8. Il a divisé par 5.",
     ),
-    tags: ["divisibilite", "defi", "open", "fraction", "latex"],
+    tags: ["divisibilite", "defi", "short", "fraction", "latex"],
   },
   {
     kind: "template",
@@ -704,20 +736,25 @@ export const divisibiliteBank: TutorBankItemV4[] = [
     microId: "div_defi",
     difficulty: 5,
     theme: "neutral",
-    hint: "Nomme le critère qui te met sur la piste.",
-    tags: ["divisibilite", "defi", "open", "template", "latex"],
+    hint: "Le nombre doit diviser le haut ET le bas.",
+    tags: ["divisibilite", "defi", "qcm", "template", "latex"],
+    // 08/10/2026 : précise et simple (Frédéric)
+    // Avant : « Explique par quoi tu peux simplifier… et comment tu le vois » (mot-clé).
+    // Désormais un QCM : un seul choix divise les deux nombres ; chaque leurre divise
+    // UN des deux seulement (l'erreur d'élève : ne regarder qu'un nombre).
     generate: () => {
       const cas = randomChoice([
-        { a: 18, b: 27, par: 9, critere: "la somme des chiffres de chacun est dans la table de 9 (1 + 8 = 9 et 2 + 7 = 9)" },
-        { a: 25, b: 45, par: 5, critere: "les deux se terminent par 5" },
-        { a: 14, b: 21, par: 7, critere: "les deux sont dans la table de 7" },
-        { a: 30, b: 42, par: 6, critere: "les deux sont pairs et la somme de leurs chiffres est divisible par 3" },
+        { a: 18, b: 27, par: 9, pieges: ["2", "6"], critere: "la somme des chiffres de chacun est dans la table de 9 (1 + 8 = 9 et 2 + 7 = 9)" },
+        { a: 25, b: 45, par: 5, pieges: ["3", "9", "15"], critere: "les deux se terminent par 5" },
+        { a: 14, b: 21, par: 7, pieges: ["2", "3"], critere: "les deux sont dans la table de 7" },
+        { a: 30, b: 42, par: 6, pieges: ["5", "10", "7"], critere: "les deux sont pairs et la somme de leurs chiffres est divisible par 3" },
       ]);
       return {
-        text: `Explique par quoi tu peux simplifier ${frac(cas.a, cas.b)}, et comment tu le vois sans essayer au hasard.`,
-        format: "open",
-        expected: [String(cas.par), "critère", "critere", "somme", "termine", "table"],
-        comparator: "contains_keyword",
+        text: `Par lequel de ces nombres peux-tu simplifier ${frac(cas.a, cas.b)} ?`,
+        format: "qcm",
+        choices: shuffle([String(cas.par), ...cas.pieges]),
+        expected: [String(cas.par)],
+        comparator: "mcq_exact",
         explanation: expl(
           `On divise par ${cas.par}, parce que ${cas.critere}. ` +
             `On obtient ${cas.a / cas.par}/${cas.b / cas.par}.`,

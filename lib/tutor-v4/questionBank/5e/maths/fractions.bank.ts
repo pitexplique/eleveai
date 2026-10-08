@@ -78,10 +78,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_egale",
     difficulty: 1,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric)
     text: "$\\dfrac{1}{2}$ et $\\dfrac{2}{4}$ représentent-ils la même quantité ?",
-    format: "short",
+    format: "qcm",
+    choices: ["oui", "non"],
     expected: ["oui"],
-    comparator: "contains_keyword",
+    comparator: "mcq_exact",
     hint: "On peut multiplier le numérateur et le dénominateur par le même nombre.",
     explanation:
       "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
@@ -99,10 +101,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_egale",
     difficulty: 1,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric)
     text: "$\\dfrac{3}{5}$ et $\\dfrac{6}{10}$ sont-elles égales ?",
-    format: "short",
+    format: "qcm",
+    choices: ["oui", "non"],
     expected: ["oui"],
-    comparator: "contains_keyword",
+    comparator: "mcq_exact",
     hint: "Passe de 3/5 à une fraction de dénominateur 10.",
     explanation:
       "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
@@ -120,10 +124,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_egale",
     difficulty: 2,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric)
     text: "$\\dfrac{2}{3}$ et $\\dfrac{4}{5}$ sont-elles égales ?",
-    format: "short",
+    format: "qcm",
+    choices: ["oui", "non"],
     expected: ["non"],
-    comparator: "contains_keyword",
+    comparator: "mcq_exact",
     hint: "Cherche si on peut obtenir l’une en multipliant l’autre en haut et en bas par le même nombre.",
     explanation:
       "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
@@ -174,10 +180,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const d2 = isEqual ? d * k : d * k + 1;
 
       return {
+        // 08/10/2026 : précise et simple (Frédéric)
         text: `$\\dfrac{${n}}{${d}}$ et $\\dfrac{${n2}}{${d2}}$ sont-elles égales ?`,
-        format: "short",
+        format: "qcm",
+        choices: ["oui", "non"],
         expected: [isEqual ? "oui" : "non"],
-        comparator: "contains_keyword",
+        comparator: "mcq_exact",
         explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           (isEqual
@@ -299,10 +307,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_rationnel",
     difficulty: 1,
     theme: "neutral",
-    text: "Une fraction comme $\\dfrac{3}{5}$ représente-t-elle un nombre rationnel ?",
-    format: "short",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Le nombre $\\dfrac{3}{5}$ est-il un nombre rationnel ?",
+    format: "qcm",
+    choices: ["oui", "non"],
     expected: ["oui"],
-    comparator: "contains_keyword",
+    comparator: "mcq_exact",
     hint: "Un nombre rationnel peut s’écrire comme quotient de deux entiers.",
     explanation:
       "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
@@ -367,10 +377,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_comparer",
     difficulty: 2,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric)
     text: "Quel est le plus grand : $\\dfrac{1}{2}$ ou $\\dfrac{3}{4}$ ?",
-    format: "short",
+    format: "qcm",
+    choices: ["3/4", "1/2"],
     expected: ["3/4"],
-    comparator: "contains_keyword",
+    comparator: "mcq_exact",
     hint: "Tu peux comparer leurs valeurs décimales ou utiliser des fractions de même dénominateur.",
     explanation:
       "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
@@ -388,10 +400,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_comparer",
     difficulty: 2,
     theme: "neutral",
-    text: "Compare $\\dfrac{2}{3}$ et $\\dfrac{3}{5}$. Réponds par >, < ou =.",
-    format: "short",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Compare $\\dfrac{2}{3}$ et $\\dfrac{3}{5}$.",
+    format: "qcm",
+    choices: [">", "<", "="],
     expected: [">"],
-    comparator: "contains_keyword",
+    comparator: "mcq_exact",
     hint: "Tu peux comparer 2 × 5 et 3 × 3.",
     explanation:
       "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
@@ -456,10 +470,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const sign = v1 > v2 ? ">" : v1 < v2 ? "<" : "=";
 
       return {
-        text: `Compare $\\dfrac{${n1}}{${d1}}$ et $\\dfrac{${n2}}{${d2}}$. Réponds par >, < ou =.`,
-        format: "short",
+        // 08/10/2026 : précise et simple (Frédéric)
+        text: `Compare $\\dfrac{${n1}}{${d1}}$ et $\\dfrac{${n2}}{${d2}}$.`,
+        format: "qcm",
+        choices: [">", "<", "="],
         expected: [sign],
-        comparator: "contains_keyword",
+        comparator: "mcq_exact",
         explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
           "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
           (`${n1}/${d1} ${sign} ${n2}/${d2}.`) +
@@ -855,16 +871,16 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi $\\dfrac{1}{3}$ est plus grand que $\\dfrac{1}{4}$.",
-    format: "open",
-    expected: ["plus grand", "parts", "quart", "tiers"],
-    comparator: "contains_keyword",
-    hint: "Quand on partage la même quantité en moins de parts, les parts sont plus grandes.",
-    explanation:
-      "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
-          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
-          ("Si on partage une même quantité en 3 parts égales, chaque part est plus grande que si on la partage en 4 parts égales. Donc 1/3 > 1/4.") +
-          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "On partage le même gâteau. Quelle part est la plus grande : $\\dfrac{1}{3}$ ou $\\dfrac{1}{4}$ du gâteau ?",
+    format: "qcm",
+    choices: ["1/3", "1/4", "elles sont égales"],
+    expected: ["1/3"],
+    comparator: "mcq_exact",
+    hint: "Quand on partage le même gâteau en moins de parts, les parts sont plus grandes.",
+    explanation: expl(
+      "En 3 parts, chaque part est plus grande qu’en 4 parts. Donc 1/3 > 1/4. Attention : 4 est plus grand que 3, mais 1/4 est plus petit que 1/3.",
+    ),
     tags: ["fraction_nombre", "defi", "raisonnement"],
   },
   {
@@ -922,16 +938,14 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_egale",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi $\\dfrac{1}{2}$ et $\\dfrac{2}{4}$ représentent la même quantité.",
-    format: "open",
-    expected: ["multiplie", "numérateur", "dénominateur", "2"],
-    comparator: "contains_keyword",
-    hint: "On passe de 1/2 à 2/4 en multipliant en haut et en bas par le même nombre.",
-    explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
-          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
-          ("1/2 = 2/4 car on multiplie le numérateur et le dénominateur par 2.") +
-          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fraction_nombre", "open", "fraction_nombre_egales"],
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Complète : $\\dfrac{1}{2} = \\dfrac{?}{4}$.",
+    format: "short",
+    expected: ["2"],
+    comparator: "number_equal",
+    hint: "Pour passer de 2 à 4, on multiplie par 2. On fait pareil en haut.",
+    explanation: expl("En bas, 2 × 2 = 4. En haut, on multiplie aussi par 2 : 1 × 2 = 2. Donc 1/2 = 2/4."),
+    tags: ["fraction_nombre", "fraction_nombre_egales"],
   },
   {
     kind: "fixed",
@@ -942,16 +956,14 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_simplifier",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique comment simplifier la fraction $\\dfrac{12}{18}$.",
-    format: "open",
-    expected: ["divise", "6", "2/3"],
-    comparator: "contains_keyword",
-    hint: "Cherche un diviseur commun à 12 et 18.",
-    explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
-          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
-          ("12 et 18 sont divisibles par 6. Donc 12/18 = 2/3.") +
-          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fraction_nombre", "open", "simplifier"],
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Simplifie $\\dfrac{12}{18}$ le plus possible.",
+    format: "short",
+    expected: ["2/3"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "12 et 18 sont tous les deux dans la table de 6.",
+    explanation: expl("12 ÷ 6 = 2 et 18 ÷ 6 = 3. Donc 12/18 = 2/3."),
+    tags: ["fraction_nombre", "simplifier"],
   },
   {
     kind: "fixed",
@@ -962,16 +974,14 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_comparer",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi $\\dfrac{2}{3}$ est plus grand que $\\dfrac{3}{5}$.",
-    format: "open",
-    expected: ["2/3", "3/5", "10", "9"],
-    comparator: "contains_keyword",
-    hint: "Tu peux comparer par produit en croix.",
-    explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
-          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
-          ("On compare 2 × 5 = 10 et 3 × 3 = 9. Comme 10 > 9, alors 2/3 > 3/5.") +
-          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fraction_nombre", "open", "comparer"],
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Pour comparer $\\dfrac{2}{3}$ et $\\dfrac{3}{5}$, on les écrit sur 15. Complète : $\\dfrac{2}{3} = \\dfrac{?}{15}$.",
+    format: "short",
+    expected: ["10"],
+    comparator: "number_equal",
+    hint: "3 × 5 = 15. Multiplie aussi 2 par 5.",
+    explanation: expl("3 × 5 = 15, donc 2 × 5 = 10 : 2/3 = 10/15. De même, 3/5 = 9/15. Comme 10 > 9, 2/3 > 3/5."),
+    tags: ["fraction_nombre", "comparer"],
   },
   {
     kind: "fixed",
@@ -982,16 +992,14 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_additionner",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi $\\dfrac{1}{2} + \\dfrac{1}{3}$ = $\\dfrac{5}{6}$.",
-    format: "open",
-    expected: ["même dénominateur", "3/6", "2/6", "5/6"],
-    comparator: "contains_keyword",
-    hint: "Mets 1/2 et 1/3 au même dénominateur.",
-    explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
-          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
-          ("1/2 = 3/6 et 1/3 = 2/6. Donc 1/2 + 1/3 = 3/6 + 2/6 = 5/6.") +
-          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fraction_nombre", "open", "addition"],
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Complète : $\\dfrac{1}{2} + \\dfrac{1}{3} = \\dfrac{3}{6} + \\dfrac{?}{6}$.",
+    format: "short",
+    expected: ["2"],
+    comparator: "number_equal",
+    hint: "Écris 1/3 avec le dénominateur 6.",
+    explanation: expl("3 × 2 = 6, donc 1 × 2 = 2 : 1/3 = 2/6. Alors 1/2 + 1/3 = 3/6 + 2/6 = 5/6."),
+    tags: ["fraction_nombre", "addition"],
   },
   {
     kind: "fixed",
@@ -1002,16 +1010,15 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_multiplier",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment calculer $\\dfrac{2}{3} \\times \\dfrac{3}{4}$.",
-    format: "open",
-    expected: ["multiplie", "numérateurs", "dénominateurs", "1/2"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    // Frédéric (08/10) : 1/2 est juste aussi → réponse tapée, simplifiée ou non.
+    text: "Calcule $\\dfrac{2}{3} \\times \\dfrac{3}{4}$.",
+    format: "short",
+    expected: ["6/12", "1/2", "3/6", "0,5"],
+    comparator: "fraction_decimal_equivalent",
     hint: "Multiplie les numérateurs entre eux et les dénominateurs entre eux.",
-    explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
-          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
-          ("2/3 × 3/4 = 6/12, puis on simplifie : 6/12 = 1/2.") +
-          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fraction_nombre", "open", "produit"],
+    explanation: expl("En haut : 2 × 3 = 6. En bas : 3 × 4 = 12. Donc 2/3 × 3/4 = 6/12 (qui se simplifie en 1/2)."),
+    tags: ["fraction_nombre", "produit", "qcm"],
   },
   {
     kind: "fixed",
@@ -1022,16 +1029,14 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_quantite",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment calculer $\\dfrac{3}{4}$ de 20.",
-    format: "open",
-    expected: ["20", "4", "5", "15"],
-    comparator: "contains_keyword",
-    hint: "Commence par calculer 1/4 de 20.",
-    explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
-          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
-          ("1/4 de 20 vaut 5, donc 3/4 de 20 vaut 3 × 5 = 15.") +
-          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fraction_nombre", "open", "quantite"],
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Calcule $\\dfrac{3}{4}$ de 24.",
+    format: "short",
+    expected: ["18"],
+    comparator: "number_equal",
+    hint: "Commence par calculer 1/4 de 24.",
+    explanation: expl("1/4 de 24 : 24 ÷ 4 = 6. Puis 3/4 de 24 : 3 × 6 = 18."),
+    tags: ["fraction_nombre", "quantite"],
   },
   {
     kind: "fixed",
@@ -1042,16 +1047,14 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_oppose",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique ce qu’est l’opposé de $\\dfrac{3}{5}$.",
-    format: "open",
-    expected: ["signe", "-3/5", "0"],
-    comparator: "contains_keyword",
-    hint: "Deux nombres opposés ont des signes contraires et leur somme vaut 0.",
-    explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
-          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
-          ("L’opposé de 3/5 est -3/5. Les deux nombres ont des signes contraires et leur somme vaut 0.") +
-          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fraction_nombre", "open", "oppose"],
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Calcule $\\dfrac{3}{5} + \\left(-\\dfrac{3}{5}\\right)$.",
+    format: "short",
+    expected: ["0"],
+    comparator: "number_equal",
+    hint: "3/5 et -3/5 sont opposés.",
+    explanation: expl("3/5 et -3/5 sont des nombres opposés. La somme de deux nombres opposés vaut 0."),
+    tags: ["fraction_nombre", "oppose"],
   },
   {
     kind: "fixed",
@@ -1062,16 +1065,15 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_calcul_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève écrit : $\\dfrac{1}{2} + \\dfrac{1}{3}$ = $\\dfrac{2}{5}$. Explique son erreur.",
-    format: "open",
-    expected: ["dénominateur", "même dénominateur", "5/6", "erreur"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un élève écrit : $\\dfrac{1}{2} + \\dfrac{1}{3} = \\dfrac{2}{5}$. C’est faux. Quel est le bon résultat ?",
+    format: "qcm",
+    choices: ["5/6", "2/5", "2/6", "1/6"],
+    expected: ["5/6"],
+    comparator: "mcq_exact",
     hint: "On n’additionne pas les dénominateurs entre eux.",
-    explanation: "Définition : une fraction représente un partage ou un quotient avec un numérateur et un dénominateur.\n\n" +
-          "Méthode : on applique la règle adaptée : lire, simplifier, comparer ou calculer avec les fractions.\n\nCalcul : " +
-          ("L’élève additionne les numérateurs et les dénominateurs séparément. Il faut mettre au même dénominateur : 1/2 = 3/6 et 1/3 = 2/6, donc le résultat est 5/6.") +
-          "\n\nConclusion : la fraction ou le nombre obtenu est la bonne réponse.",
-    tags: ["fraction_nombre", "open", "defi", "erreur"],
+    explanation: expl("On met au même dénominateur : 1/2 = 3/6 et 1/3 = 2/6. Donc 1/2 + 1/3 = 3/6 + 2/6 = 5/6."),
+    tags: ["fraction_nombre", "defi", "erreur", "qcm"],
   },
     /* =========================
      RENFORT — FRACTION CANVAS 5e
@@ -1227,10 +1229,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const sign = va > vb ? ">" : va < vb ? "<" : "=";
 
       return {
-        text: `Compare $\\dfrac{${s.a[0]}}{${s.a[1]}}$ et $\\dfrac{${s.b[0]}}{${s.b[1]}}$. Réponds par >, < ou =.`,
-        format: "short",
+        // 08/10/2026 : précise et simple (Frédéric)
+        text: `Compare $\\dfrac{${s.a[0]}}{${s.a[1]}}$ et $\\dfrac{${s.b[0]}}{${s.b[1]}}$.`,
+        format: "qcm",
+        choices: [">", "<", "="],
         expected: [sign],
-        comparator: "contains_keyword",
+        comparator: "mcq_exact",
         explanation:
           "Définition : comparer deux fractions, c’est déterminer laquelle représente la plus grande quantité.\n\n" +
           "Méthode : on peut observer les portions colorées ou comparer par calcul.\n\n" +
@@ -1355,17 +1359,18 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_additionner",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève écrit : $\\dfrac{1}{2} + \\dfrac{1}{3}$ = $\\dfrac{2}{5}$. Quelle est son erreur ?",
-    format: "open",
-    expected: ["dénominateur", "même dénominateur", "5/6", "additionne"],
-    comparator: "contains_keyword",
-    hint: "On n’additionne pas les dénominateurs entre eux.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un élève écrit : $\\dfrac{1}{2} + \\dfrac{1}{3} = \\dfrac{2}{5}$. C’est faux. Quel est le plus petit dénominateur commun à 2 et 3 ?",
+    format: "short",
+    expected: ["6"],
+    comparator: "number_equal",
+    hint: "Cherche le plus petit nombre qui est à la fois dans la table de 2 et dans la table de 3.",
     explanation:
       "Définition : pour additionner deux fractions, il faut utiliser un dénominateur commun.\n\n" +
-      "Méthode : on transforme les fractions avant d’additionner.\n\n" +
-      "Calcul : 1/2 = 3/6 et 1/3 = 2/6, donc 1/2 + 1/3 = 5/6.\n\n" +
-      "Conclusion : l’erreur est d’avoir additionné les dénominateurs.",
-    tags: ["fraction_nombre", "erreur", "open", "addition"],
+      "Méthode : on cherche le plus petit nombre dans la table de 2 et dans la table de 3.\n\n" +
+      "Calcul : 6 = 2 × 3. Donc 1/2 = 3/6 et 1/3 = 2/6, puis 1/2 + 1/3 = 5/6.\n\n" +
+      "Conclusion : l’erreur est d’avoir additionné les dénominateurs (2 + 3 = 5) ; le bon dénominateur est 6.",
+    tags: ["fraction_nombre", "erreur", "addition"],
   },
 
   // =========================
@@ -1508,10 +1513,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_rationnel",
     difficulty: 2,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric)
     text: "Le nombre entier 4 est-il un nombre rationnel ?",
-    format: "short",
+    format: "qcm",
+    choices: ["oui", "non"],
     expected: ["oui"],
-    comparator: "contains_keyword",
+    comparator: "mcq_exact",
     hint: "Peut-on écrire 4 comme un quotient d’entiers ?",
     explanation: expl("Oui : 4 = 4/1, c’est un quotient de deux entiers, donc 4 est un nombre rationnel."),
     tags: ["fraction_nombre", "rationnel"],
@@ -1578,13 +1585,14 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_rationnel",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique ce qu’est un nombre rationnel.",
-    format: "open",
-    expected: ["quotient", "entiers", "fraction"],
-    comparator: "contains_keyword",
-    hint: "Pense à une écriture sous forme de fraction.",
-    explanation: expl("Un nombre rationnel est un nombre qui peut s’écrire comme le quotient de deux entiers (une fraction), le dénominateur étant non nul."),
-    tags: ["fraction_nombre", "rationnel", "open"],
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un nombre rationnel est un quotient de deux entiers. Écris 5 ÷ 7 sous forme de fraction.",
+    format: "short",
+    expected: ["5/7"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "Le nombre divisé va en haut, le diviseur en bas.",
+    explanation: expl("5 ÷ 7 s’écrit 5/7 : 5 en haut (numérateur), 7 en bas (dénominateur). C’est un nombre rationnel."),
+    tags: ["fraction_nombre", "rationnel"],
   },
   {
     kind: "fixed",
@@ -1616,10 +1624,12 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_comparer",
     difficulty: 2,
     theme: "neutral",
-    text: "Compare $\\dfrac{5}{8}$ et $\\dfrac{3}{8}$. Réponds par >, < ou =.",
-    format: "short",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Compare $\\dfrac{5}{8}$ et $\\dfrac{3}{8}$.",
+    format: "qcm",
+    choices: [">", "<", "="],
     expected: [">"],
-    comparator: "contains_keyword",
+    comparator: "mcq_exact",
     hint: "Même dénominateur : on compare les numérateurs.",
     explanation: expl("Même dénominateur : 5 > 3, donc 5/8 > 3/8."),
     tags: ["fraction_nombre", "comparer"],
@@ -1651,12 +1661,14 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_comparer",
     difficulty: 2,
     theme: "neutral",
-    text: "Une fraction est-elle plus grande ou plus petite que 1 quand son numérateur est plus petit que son dénominateur ? Réponds par 'plus petite' ou 'plus grande'.",
-    format: "short",
-    expected: ["plus petite"],
-    comparator: "contains_keyword",
-    hint: "Compare par exemple 3/4 à 1.",
-    explanation: expl("Si le numérateur est plus petit que le dénominateur (ex. 3/4), la fraction est plus petite que 1."),
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Compare $\\dfrac{5}{7}$ et 1.",
+    format: "qcm",
+    choices: [">", "<", "="],
+    expected: ["<"],
+    comparator: "mcq_exact",
+    hint: "1 = 7/7.",
+    explanation: expl("1 = 7/7. Comme 5 < 7, 5/7 < 7/7, donc 5/7 < 1. Un numérateur plus petit que le dénominateur donne une fraction plus petite que 1."),
     tags: ["fraction_nombre", "comparer"],
   },
   {
@@ -1682,10 +1694,12 @@ export const fractionsBank: TutorBankItemV4[] = [
       const right = n2 * d1;
       const signe = left > right ? ">" : left < right ? "<" : "=";
       return {
-        text: `Compare $\\dfrac{${n1}}{${d1}}$ et $\\dfrac{${n2}}{${d2}}$. Réponds par >, < ou =.`,
-        format: "short",
+        // 08/10/2026 : précise et simple (Frédéric)
+        text: `Compare $\\dfrac{${n1}}{${d1}}$ et $\\dfrac{${n2}}{${d2}}$.`,
+        format: "qcm",
+        choices: [">", "<", "="],
         expected: [signe],
-        comparator: "contains_keyword",
+        comparator: "mcq_exact",
         explanation: expl(`Produits en croix : ${n1} × ${d2} = ${left} et ${n2} × ${d1} = ${right}, donc ${n1}/${d1} ${signe} ${n2}/${d2}.`),
       };
     },
@@ -1795,13 +1809,14 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_multiplier",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment on multiplie deux fractions.",
-    format: "open",
-    expected: ["numérateurs", "dénominateurs", "multiplie"],
-    comparator: "contains_keyword",
-    hint: "Pense aux numérateurs et aux dénominateurs séparément.",
-    explanation: expl("On multiplie les numérateurs entre eux et les dénominateurs entre eux, puis on simplifie si possible."),
-    tags: ["fraction_nombre", "produit", "open"],
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Calcule $\\dfrac{2}{5} \\times \\dfrac{3}{7}$.",
+    format: "short",
+    expected: ["6/35"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "Multiplie les numérateurs entre eux et les dénominateurs entre eux.",
+    explanation: expl("En haut : 2 × 3 = 6. En bas : 5 × 7 = 35. Donc 2/5 × 3/7 = 6/35."),
+    tags: ["fraction_nombre", "produit"],
   },
   {
     kind: "template",
@@ -2005,13 +2020,15 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_oppose",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique la différence entre l’opposé et l’inverse d’une fraction.",
-    format: "open",
-    expected: ["signe", "échange", "inverse"],
-    comparator: "contains_keyword",
-    hint: "L’un change le signe, l’autre échange haut et bas.",
-    explanation: expl("L’opposé change le signe de la fraction ; l’inverse échange le numérateur et le dénominateur."),
-    tags: ["fraction_nombre", "oppose", "open"],
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "L’inverse de $\\dfrac{2}{3}$ est $\\dfrac{3}{2}$. Quel est l’opposé de $\\dfrac{2}{3}$ ?",
+    format: "qcm",
+    choices: ["-2/3", "3/2", "-3/2"],
+    expected: ["-2/3"],
+    comparator: "mcq_exact",
+    hint: "L’opposé change seulement le signe. L’inverse échange le haut et le bas.",
+    explanation: expl("L’opposé change seulement le signe : l’opposé de 2/3 est -2/3. L’inverse, lui, échange le haut et le bas : 3/2."),
+    tags: ["fraction_nombre", "oppose", "qcm"],
   },
   {
     kind: "template",
@@ -2124,13 +2141,15 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_calcul_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève dit : « $\\dfrac{2}{3} \\times \\dfrac{2}{3}$ = $\\dfrac{4}{3}$ ». Explique son erreur.",
-    format: "open",
-    expected: ["dénominateurs", "multiplie", "4/9"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un élève écrit : $\\dfrac{2}{3} \\times \\dfrac{2}{3} = \\dfrac{4}{3}$. C’est faux. Quel est le bon résultat ?",
+    format: "qcm",
+    choices: ["4/9", "4/3", "4/6", "2/3"],
+    expected: ["4/9"],
+    comparator: "mcq_exact",
     hint: "On multiplie aussi les dénominateurs.",
-    explanation: expl("Il faut multiplier aussi les dénominateurs : 2/3 × 2/3 = 4/9, pas 4/3."),
-    tags: ["fraction_nombre", "defi", "open", "erreur"],
+    explanation: expl("En haut : 2 × 2 = 4. En bas : 3 × 3 = 9. Donc 2/3 × 2/3 = 4/9. L’élève a oublié de multiplier les dénominateurs."),
+    tags: ["fraction_nombre", "defi", "erreur", "qcm"],
   },
   {
     kind: "fixed",
@@ -2260,15 +2279,17 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Un élève affirme : « $\\dfrac{3}{8}$ est plus grand que $\\dfrac{1}{2}$, parce que 3 est plus grand que 1 et 8 est plus grand que 2 ». Explique son erreur.",
-    format: "open",
-    expected: ["même dénominateur", "meme denominateur", "4/8", "moitié", "moitie", "séparément", "separement"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un élève dit : « $\\dfrac{3}{8} > \\dfrac{1}{2}$ car 3 > 1 et 8 > 2 ». Compare toi-même $\\dfrac{3}{8}$ et $\\dfrac{1}{2}$.",
+    format: "qcm",
+    choices: [">", "<", "="],
+    expected: ["<"],
+    comparator: "mcq_exact",
     hint: "Combien de huitièmes font une moitié ?",
     explanation: expl(
       "On ne compare pas les numérateurs et les dénominateurs séparément. Il faut le même dénominateur : 1/2 = 4/8. On compare alors 3/8 et 4/8, et 3 < 4. Donc 3/8 est plus PETIT que 1/2.",
     ),
-    tags: ["fraction_nombre", "defi", "open", "piege"],
+    tags: ["fraction_nombre", "defi", "qcm", "piege"],
   },
   {
     kind: "template",
@@ -2310,17 +2331,19 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_defi",
     difficulty: 5,
     theme: "neutral",
-    hint: "Dis à quoi tu compares la fraction avant de trancher.",
-    tags: ["fraction_nombre", "defi", "open", "template"],
+    hint: "Écris 1/2 avec le même dénominateur.",
+    tags: ["fraction_nombre", "defi", "qcm", "template"],
+    // 08/10/2026 : précise et simple (Frédéric)
     generate: () => {
       const d = randomChoice([4, 6, 8, 10]);
       const n = randomChoice([d / 2 - 1, d / 2 + 1]);
       const plusGrand = n > d / 2;
       return {
-        text: `La fraction $\\dfrac{${n}}{${d}}$ est-elle plus grande ou plus petite que $\\dfrac{1}{2}$ ? Explique comment tu le sais.`,
-        format: "open",
-        expected: ["moitié", "moitie", `${d / 2}/${d}`, "demi", "compare"],
-        comparator: "contains_keyword",
+        text: `La fraction $\\dfrac{${n}}{${d}}$ est-elle plus grande ou plus petite que $\\dfrac{1}{2}$ ?`,
+        format: "qcm",
+        choices: ["plus grande", "plus petite"],
+        expected: [plusGrand ? "plus grande" : "plus petite"],
+        comparator: "mcq_exact",
         explanation: expl(
           `On écrit 1/2 avec le dénominateur ${d} : 1/2 = ${d / 2}/${d}. On compare alors ${n}/${d} et ${d / 2}/${d} : ` +
             (plusGrand

@@ -202,6 +202,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     }),
   },
 
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "5e_sym_centrale_reconnaitre_open_1",
@@ -211,17 +212,14 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     microId: "sym_centrale_reconnaitre",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique en une phrase ce qu’est une symétrie centrale.",
-    format: "open",
-    expected: ["demi-tour", "centre", "point", "180"],
-    comparator: "contains_keyword",
-    hint: "Utilise les mots centre et demi-tour.",
-    explanation:
-      "Définition : une symétrie centrale est un demi-tour autour d’un point appelé centre.\n\n" +
-      "Méthode : on décrit le mouvement de la figure.\n\n" +
-      "Calcul : un demi-tour correspond à 180°.\n\n" +
-      "Conclusion : une symétrie centrale est un demi-tour autour d’un centre.",
-    tags: ["sym_centrale", "open", "vocabulaire"],
+    text: "Une symétrie centrale fait tourner la figure autour du centre. De combien de degrés ?",
+    format: "qcm",
+    choices: ["90°", "180°", "360°"],
+    expected: ["180°"],
+    comparator: "mcq_exact",
+    hint: "Une symétrie centrale, c’est un demi-tour.",
+    explanation: expl("Une symétrie centrale est un demi-tour. Un tour complet fait 360°. Un demi-tour fait 360 ÷ 2 = 180°."),
+    tags: ["sym_centrale", "qcm", "vocabulaire"],
   },
 
   /* =========================
@@ -349,6 +347,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     tags: ["sym_centrale", "point", "erreur", "alignement"],
   },
 
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "5e_sym_centrale_point_open_1",
@@ -358,17 +357,13 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     microId: "sym_centrale_point",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique les étapes pour construire l’image A' d’un point A par symétrie centrale de centre O.",
-    format: "open",
-    expected: ["droite", "alignés", "OA", "OA'", "milieu", "centre"],
-    comparator: "contains_keyword",
-    hint: "Trace la droite puis reporte la distance.",
-    explanation:
-      "Définition : dans une symétrie centrale, le centre est le milieu entre un point et son image.\n\n" +
-      "Méthode : on trace la droite (AO), puis on place A' de l’autre côté de O.\n\n" +
-      "Calcul : on reporte la distance OA pour avoir OA' = OA.\n\n" +
-      "Conclusion : A' est construit lorsque O est le milieu de [AA'].",
-    tags: ["sym_centrale", "point", "open", "construction"],
+    text: "A' est le symétrique de A par rapport à O. OA = 4 cm. Combien mesure le segment [AA'] ?",
+    format: "short",
+    expected: ["8 cm", "8"],
+    comparator: "number_equal",
+    hint: "O est au milieu de [AA'].",
+    explanation: expl("On trace la droite (AO). On reporte OA' = OA = 4 cm de l’autre côté de O. Donc AA' = 4 + 4 = 8 cm."),
+    tags: ["sym_centrale", "point", "short", "construction"],
   },
 
   /* =========================
@@ -520,6 +515,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     tags: ["sym_centrale", "figure", "erreur"],
   },
 
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "5e_sym_centrale_figure_open_1",
@@ -529,60 +525,54 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     microId: "sym_centrale_figure",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment construire l’image d’un triangle ABC par symétrie centrale de centre O.",
-    format: "open",
-    expected: ["A'", "B'", "C'", "sommets", "relier", "centre"],
-    comparator: "contains_keyword",
-    hint: "Construis l’image de chaque sommet.",
-    explanation:
-      "Définition : l’image d’un triangle s’obtient en transformant ses trois sommets.\n\n" +
-      "Méthode : on construit A', B' et C' par symétrie centrale de centre O.\n\n" +
-      "Calcul : O doit être le milieu de [AA'], [BB'] et [CC'].\n\n" +
-      "Conclusion : en reliant A', B' et C', on obtient le triangle image.",
-    tags: ["sym_centrale", "figure", "open", "construction"],
+    text: "Tu construis l’image du quadrilatère ABCD par la symétrie de centre O. Combien de points images dois-tu construire ?",
+    format: "short",
+    expected: ["4"],
+    comparator: "number_equal",
+    hint: "On construit l’image de chaque sommet.",
+    explanation: expl("Le quadrilatère a 4 sommets : A, B, C et D. On construit A', B', C' et D', puis on les relie dans le même ordre. Il faut 4 points images."),
+    tags: ["sym_centrale", "figure", "short", "construction"],
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
-  kind: "fixed",
-  id: "5e_sym_centrale_figure_open_2_justifier_canvas",
-  niveau: "5e",
-  matiere: "maths",
-  notionId: "sym_centrale",
-  microId: "sym_centrale_figure",
-  difficulty: 4,
-  theme: "neutral",
-  text: "Observe la figure. Justifie pourquoi la figure rouge est bien l’image de la figure bleue par symétrie centrale de centre O.",
-  format: "open",
-  expected: ["alignés", "milieu", "centre", "distance", "sommets"],
-  comparator: "contains_keyword",
-  hint: "Tu dois parler des sommets, de l’alignement et du milieu.",
-  explanation:
-    "Définition : deux figures sont symétriques par rapport à O si chaque point et son image ont O pour milieu.\n\n" +
-    "Méthode : on vérifie plusieurs sommets correspondants.\n\n" +
-    "Calcul : les sommets de départ, leurs images et le centre O sont alignés, avec des distances égales de part et d’autre de O.\n\n" +
-    "Conclusion : la figure rouge est bien l’image de la figure bleue par symétrie centrale.",
-  tags: ["sym_centrale", "figure", "open", "justification", "canvas"],
-  canvas: transformationCanvas({
-    transformation: "symetrie_centrale",
-    grid: { rows: 8, cols: 8 },
-    source: {
-      label: "F",
-      points: [
-        { x: 2, y: 2 },
-        { x: 4, y: 2 },
-        { x: 2, y: 5 },
-      ],
-    },
-    image: {
-      label: "F'",
-      points: [
-        { x: 6, y: 6 },
-        { x: 4, y: 6 },
-        { x: 6, y: 3 },
-      ],
-    },
-    center: { point: { x: 4, y: 4 }, label: "O" },
-  }),
-},
+    kind: "fixed",
+    id: "5e_sym_centrale_figure_open_2_justifier_canvas",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_figure",
+    difficulty: 4,
+    theme: "neutral",
+    text: "Observe la figure. Un sommet de F et son image dans F' sont reliés par un segment. Où se trouve O sur ce segment ?",
+    format: "qcm",
+    choices: ["à une extrémité", "au milieu", "en dehors"],
+    expected: ["au milieu"],
+    comparator: "mcq_exact",
+    hint: "Dans une symétrie centrale, le centre est au milieu.",
+    explanation: expl("Pour chaque sommet de F, le sommet et son image sont alignés avec O, à la même distance de O. O est donc au milieu du segment. F' est bien l’image de F."),
+    tags: ["sym_centrale", "figure", "qcm", "justification", "canvas"],
+    canvas: transformationCanvas({
+      transformation: "symetrie_centrale",
+      grid: { rows: 8, cols: 8 },
+      source: {
+        label: "F",
+        points: [
+          { x: 2, y: 2 },
+          { x: 4, y: 2 },
+          { x: 2, y: 5 },
+        ],
+      },
+      image: {
+        label: "F'",
+        points: [
+          { x: 6, y: 6 },
+          { x: 4, y: 6 },
+          { x: 6, y: 3 },
+        ],
+      },
+      center: { point: { x: 4, y: 4 }, label: "O" },
+    }),
+  },
 
   /* =========================
      SYM_CENTRALE_PROPRIETES
@@ -741,6 +731,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     tags: ["sym_centrale", "propriete", "erreur"],
   },
 
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "5e_sym_centrale_propriete_open_1",
@@ -750,17 +741,13 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     microId: "sym_centrale_propriete",
     difficulty: 4,
     theme: "neutral",
-    text: "Cite deux propriétés conservées par la symétrie centrale.",
-    format: "open",
-    expected: ["longueurs", "angles", "alignement", "parallélisme"],
-    comparator: "contains_keyword",
-    hint: "Pense à ce qui ne change pas dans la figure.",
-    explanation:
-      "Définition : une symétrie centrale ne déforme pas les figures.\n\n" +
-      "Méthode : on compare la figure de départ et son image.\n\n" +
-      "Calcul : elle conserve les longueurs, les angles, l’alignement et le parallélisme.\n\n" +
-      "Conclusion : on peut citer par exemple les longueurs et les angles.",
-    tags: ["sym_centrale", "propriete", "open"],
+    text: "Un angle de la figure mesure 40°. Par une symétrie centrale, combien mesure son image ?",
+    format: "short",
+    expected: ["40°", "40"],
+    comparator: "number_equal",
+    hint: "La symétrie centrale ne déforme pas la figure.",
+    explanation: expl("La symétrie centrale conserve les angles (et aussi les longueurs). L’image de l’angle mesure 40°."),
+    tags: ["sym_centrale", "propriete", "short"],
   },
 
   /* =========================
@@ -865,6 +852,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     }),
   },
 
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "5e_sym_centrale_defi_open_1",
@@ -874,39 +862,34 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     microId: "sym_centrale_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi une symétrie centrale conserve la forme et la taille d’une figure.",
-    format: "open",
-    expected: ["demi-tour", "longueurs", "angles", "conserve", "taille"],
-    comparator: "contains_keyword",
-    hint: "Pense au demi-tour : la figure ne se déforme pas.",
-    explanation:
-      "Définition : une symétrie centrale est un demi-tour autour d’un centre.\n\n" +
-      "Méthode : un demi-tour déplace les points sans étirer ni réduire la figure.\n\n" +
-      "Calcul : les longueurs et les angles sont conservés.\n\n" +
-      "Conclusion : la symétrie centrale conserve donc la forme et la taille.",
-    tags: ["sym_centrale", "defi", "open", "raisonnement"],
+    text: "Par une symétrie centrale, quelle est l’image d’un carré de côté 3 cm ?",
+    format: "qcm",
+    choices: ["un carré de côté 6 cm", "un carré de côté 3 cm", "un rectangle"],
+    expected: ["un carré de côté 3 cm"],
+    comparator: "mcq_exact",
+    hint: "Un demi-tour ne change ni la forme ni la taille.",
+    explanation: expl("Une symétrie centrale est un demi-tour : elle conserve les longueurs et les angles. L’image est un carré de même côté : 3 cm."),
+    tags: ["sym_centrale", "defi", "qcm", "raisonnement"],
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
-  kind: "fixed",
-  id: "5e_sym_centrale_defi_open_3_doute_raisonnable",
-  niveau: "5e",
-  matiere: "maths",
-  notionId: "sym_centrale",
-  microId: "sym_centrale_defi",
-  difficulty: 5,
-  theme: "neutral",
-  text: "Un camarade affirme que deux figures sont symétriques par rapport à O. Quelles vérifications dois-tu faire avant d’être d’accord ?",
-  format: "open",
-  expected: ["alignement", "milieu", "distances", "centre", "sommets"],
-  comparator: "contains_keyword",
-  hint: "Ne te contente pas de regarder rapidement : vérifie plusieurs sommets.",
-  explanation:
-    "Définition : deux figures sont symétriques par rapport à O si chaque point et son image ont O pour milieu.\n\n" +
-    "Méthode : on vérifie plusieurs sommets correspondants.\n\n" +
-    "Calcul : il faut contrôler l’alignement avec O et l’égalité des distances de part et d’autre du centre.\n\n" +
-    "Conclusion : on peut être d’accord seulement si ces vérifications sont vraies pour tous les sommets importants.",
-  tags: ["sym_centrale", "defi", "open", "verification", "raisonnement"],
-},
+    kind: "fixed",
+    id: "5e_sym_centrale_defi_open_3_doute_raisonnable",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_defi",
+    difficulty: 5,
+    theme: "neutral",
+    text: "B, O et B' sont alignés. OB = 3 cm et OB' = 4 cm. B' est-il le symétrique de B par rapport à O ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Il faut aussi que O soit au milieu de [BB'].",
+    explanation: expl("Être alignés ne suffit pas. Il faut aussi OB' = OB. Ici 4 cm n’est pas égal à 3 cm : O n’est pas au milieu. B' n’est pas le symétrique de B."),
+    tags: ["sym_centrale", "defi", "qcm", "verification", "raisonnement"],
+  },
     /* =========================
      RENFORT — RECONNAÎTRE
   ========================= */
@@ -934,27 +917,25 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     tags: ["sym_centrale", "erreur", "symetrie_axiale", "comparaison"],
   },
 
-{
-  kind: "fixed",
-  id: "5e_sym_centrale_reconnaitre_open_2_vocabulaire",
-  niveau: "5e",
-  matiere: "maths",
-  notionId: "sym_centrale",
-  microId: "sym_centrale_reconnaitre",
-  difficulty: 3,
-  theme: "neutral",
-  text: "Explique avec tes mots pourquoi on dit qu’une symétrie centrale est définie par un centre.",
-  format: "open",
-  expected: ["centre", "demi-tour", "point", "image", "milieu"],
-  comparator: "contains_keyword",
-  hint: "Parle du point autour duquel la figure fait un demi-tour.",
-  explanation:
-    "Définition : une symétrie centrale est un demi-tour autour d’un point appelé centre.\n\n" +
-    "Méthode : on identifie l’élément qui permet de construire les images.\n\n" +
-    "Calcul : pour chaque point A, son image A' est placée de l’autre côté du centre, avec O milieu de [AA'].\n\n" +
-    "Conclusion : on dit qu’elle est définie par un centre car ce point permet de construire toutes les images.",
-  tags: ["sym_centrale", "open", "vocabulaire", "raisonnement"],
-},
+  // 08/10/2026 : précise et simple (Frédéric)
+  {
+    kind: "fixed",
+    id: "5e_sym_centrale_reconnaitre_open_2_vocabulaire",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    text: "Une symétrie centrale est définie par :",
+    format: "qcm",
+    choices: ["une droite", "un point", "un segment"],
+    expected: ["un point"],
+    comparator: "mcq_exact",
+    hint: "Le mot « centrale » vient de « centre ».",
+    explanation: expl("Une symétrie centrale est définie par un point : son centre. Une symétrie définie par une droite (un axe) est une symétrie axiale."),
+    tags: ["sym_centrale", "qcm", "vocabulaire"],
+  },
   /* =========================
      RENFORT — CONSTRUIRE POINT
   ========================= */
@@ -1210,6 +1191,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     },
   },
 
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "5e_sym_centrale_defi_fixed_2_point_invariant",
@@ -1219,17 +1201,14 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     microId: "sym_centrale_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Dans une figure, le point O est le centre de symétrie. Explique pourquoi O ne change pas de position.",
-    format: "open",
-    expected: ["centre", "invariant", "image", "lui-même", "ne bouge pas"],
-    comparator: "contains_keyword",
-    hint: "Le centre est son propre symétrique.",
-    explanation:
-      "Définition : un point invariant est un point qui ne change pas de position.\n\n" +
-      "Méthode : dans une symétrie centrale, on regarde le centre.\n\n" +
-      "Calcul : l’image du centre O est O lui-même.\n\n" +
-      "Conclusion : O ne change pas de position car c’est le point invariant de la symétrie centrale.",
-    tags: ["sym_centrale", "defi", "point_invariant", "open"],
+    text: "Quelle est l’image du centre O par la symétrie de centre O ?",
+    format: "qcm",
+    choices: ["il n’a pas d’image", "le point O"],
+    expected: ["le point O"],
+    comparator: "mcq_exact",
+    hint: "Le centre est à 0 cm de lui-même.",
+    explanation: expl("O est à 0 cm de lui-même. Son image est donc à 0 cm de O : c’est O. Le centre ne bouge pas."),
+    tags: ["sym_centrale", "defi", "point_invariant", "qcm"],
   },
 
   /* =========================
@@ -1276,6 +1255,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     explanation: expl("La symétrie axiale se fait par rapport à un axe (une droite) ; la symétrie centrale se fait par rapport à un centre (un point)."),
     tags: ["sym_centrale", "reconnaitre", "qcm"],
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "5e_sym_centrale_reconnaitre_open_x1",
@@ -1285,13 +1265,14 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     microId: "sym_centrale_reconnaitre",
     difficulty: 2,
     theme: "neutral",
-    text: "Cite un exemple de la vie courante qui évoque une symétrie centrale.",
-    format: "open",
-    expected: ["demi-tour", "carte", "roue", "centre"],
-    comparator: "contains_keyword",
-    hint: "Pense aux cartes à jouer ou à un demi-tour.",
-    explanation: expl("Une carte à jouer (comme une dame ou un roi) reste identique après un demi-tour : c’est un exemple de symétrie centrale autour de son centre."),
-    tags: ["sym_centrale", "reconnaitre", "open"],
+    text: "Laquelle de ces lettres reste la même après un demi-tour ?",
+    format: "qcm",
+    choices: ["A", "N", "E"],
+    expected: ["N"],
+    comparator: "mcq_exact",
+    hint: "Tourne la feuille à l’envers et regarde la lettre.",
+    explanation: expl("Après un demi-tour, N redevient N : elle a un centre de symétrie. A et E ont un axe de symétrie, mais après un demi-tour ils sont à l’envers."),
+    tags: ["sym_centrale", "reconnaitre", "qcm"],
   },
 
   /* =========================
@@ -1320,33 +1301,9 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     explanation: expl("A, O et A' sont alignés et O est le milieu du segment [AA'] : OA = OA'."),
     tags: ["sym_centrale", "point", "qcm"],
   },
-  {
-    kind: "template",
-    id: "5e_sym_centrale_point_tpl_x1",
-    niveau: "5e",
-    matiere: "maths",
-    notionId: "sym_centrale",
-    microId: "sym_centrale_point",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Coordonnées de A' : (2×ox − x ; 2×oy − y).",
-    tags: ["sym_centrale", "point", "coordonnees", "template"],
-    generate: () => {
-      const ox = randomChoice([3, 4, 5]);
-      const oy = randomChoice([3, 4, 5]);
-      const x = randomChoice([0, 1, 2]);
-      const y = randomChoice([0, 1, 2]);
-      const xp = 2 * ox - x;
-      const yp = 2 * oy - y;
-      return {
-        text: `O(${ox};${oy}) est le centre de symétrie et A(${x};${y}). Quelles sont les coordonnées de A' ?`,
-        format: "short",
-        expected: [`(${xp};${yp})`, `(${xp}; ${yp})`, `${xp};${yp}`],
-        comparator: "contains_keyword",
-        explanation: expl(`A' a pour coordonnées (2×${ox} − ${x} ; 2×${oy} − ${y}) = (${xp};${yp}).`),
-      };
-    },
-  },
+  // 08/10/2026 : Frédéric retire les deux questions de COORDONNÉES du symétrique
+  // et du centre (« 5e_sym_centrale_point_tpl_x1 », « 5e_sym_centrale_defi_fixed_x2 ») :
+  // pas au programme de 5e.
   {
     kind: "fixed",
     id: "5e_sym_centrale_point_fixed_x2",
@@ -1386,6 +1343,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     explanation: expl("La symétrie centrale conserve les longueurs et les aires : la figure et son image ont la même aire."),
     tags: ["sym_centrale", "figure", "qcm"],
   },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "5e_sym_centrale_figure_open_x1",
@@ -1395,13 +1353,14 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     microId: "sym_centrale_figure",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi il suffit de construire l’image des sommets pour obtenir l’image d’un polygone.",
-    format: "open",
-    expected: ["sommets", "relie", "image"],
-    comparator: "contains_keyword",
-    hint: "On relie ensuite les images.",
-    explanation: expl("On construit l’image de chaque sommet, puis on relie ces images dans le même ordre : on obtient l’image du polygone."),
-    tags: ["sym_centrale", "figure", "open"],
+    text: "Par une symétrie centrale, A a pour image A', B a pour image B' et C a pour image C'. Quelle est l’image du segment [AB] ?",
+    format: "qcm",
+    choices: ["[A'C']", "[B'C']", "[A'B']"],
+    expected: ["[A'B']"],
+    comparator: "mcq_exact",
+    hint: "On relie les images dans le même ordre.",
+    explanation: expl("[AB] relie A et B. Son image relie leurs images : A' et B'. C'est [A'B']. Il suffit donc de construire les sommets, puis de les relier."),
+    tags: ["sym_centrale", "figure", "qcm"],
   },
 
   /* =========================
@@ -1425,23 +1384,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     explanation: expl("Le parallélogramme possède un centre de symétrie : un demi-tour autour du point d’intersection de ses diagonales le laisse inchangé."),
     tags: ["sym_centrale", "defi", "qcm"],
   },
-  {
-    kind: "fixed",
-    id: "5e_sym_centrale_defi_fixed_x2",
-    niveau: "5e",
-    matiere: "maths",
-    notionId: "sym_centrale",
-    microId: "sym_centrale_defi",
-    difficulty: 5,
-    theme: "neutral",
-    text: "A(1;2) a pour image A'(5;6) par une symétrie centrale. Quelles sont les coordonnées du centre O ?",
-    format: "short",
-    expected: ["(3;4)", "(3; 4)", "3;4"],
-    comparator: "contains_keyword",
-    hint: "O est le milieu de [AA'].",
-    explanation: expl("O est le milieu de [AA'] : ((1+5)/2 ; (2+6)/2) = (3;4)."),
-    tags: ["sym_centrale", "defi", "coordonnees"],
-  },
+  // 08/10/2026 : précise et simple (Frédéric)
   {
     kind: "fixed",
     id: "5e_sym_centrale_defi_open_x1",
@@ -1451,12 +1394,12 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     microId: "sym_centrale_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève dit : « La symétrie centrale change la taille de la figure ». Explique son erreur.",
-    format: "open",
-    expected: ["conserve", "longueurs", "taille", "même"],
-    comparator: "contains_keyword",
+    text: "Un triangle a un périmètre de 15 cm. Par une symétrie centrale, quel est le périmètre de son image ?",
+    format: "short",
+    expected: ["15 cm", "15"],
+    comparator: "number_equal",
     hint: "La symétrie conserve les longueurs.",
-    explanation: expl("La symétrie centrale conserve les longueurs et les angles : la figure image a exactement la même taille que la figure de départ."),
-    tags: ["sym_centrale", "defi", "open", "erreur"],
+    explanation: expl("La symétrie centrale conserve les longueurs : chaque côté garde sa mesure. Le périmètre de l’image est 15 cm."),
+    tags: ["sym_centrale", "defi", "short", "erreur"],
   },
 ];

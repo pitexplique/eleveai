@@ -125,10 +125,11 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_lire",
     difficulty: 2,
     theme: "reunion",
+    // 08/10/2026 : précise et simple (Frédéric)
     text: "La température au volcan est de 3 °C en dessous de zéro. Écris cette température.",
     format: "short",
-    expected: ["-3", "-3°C", "-3 °C"],
-    comparator: "contains_keyword",
+    expected: ["-3", "-3 °C"],
+    comparator: "number_equal",
     hint: "En dessous de zéro → signe -.",
     explanation:
       "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
@@ -238,10 +239,12 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_signe",
     difficulty: 2,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric)
     text: "Complète : un nombre situé à gauche de 0 sur une droite graduée est ...",
-    format: "short",
-    expected: ["négatif", "negatif"],
-    comparator: "contains_keyword",
+    format: "qcm",
+    choices: ["négatif", "positif", "nul"],
+    expected: ["négatif"],
+    comparator: "mcq_exact",
     hint: "À gauche de 0 → signe -.",
     explanation:
       "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
@@ -350,7 +353,7 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     text: "Au Maïdo, il fait -1 °C le matin et +6 °C l’après-midi. Quelle température est la plus grande ?",
     format: "short",
     expected: ["+6", "6", "+6 °C", "6 °C"],
-    comparator: "contains_keyword",
+    comparator: "number_equal", // 08/10/2026 : précise et simple (Frédéric)
     hint: "Une température positive est plus grande qu’une température négative.",
     explanation:
       "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
@@ -797,17 +800,18 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Trouve deux nombres différents qui ont la même valeur absolue et dont l’un est plus grand que 0.",
-    format: "open",
-    expected: ["-3 et 3", "-4 et 4", "-5 et 5", "-6 et 6", "-7 et 7"],
-    comparator: "contains_keyword",
-    hint: "Pense à deux nombres opposés.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Quel autre nombre a la même valeur absolue que -7 ?",
+    format: "short",
+    expected: ["+7", "7"],
+    comparator: "number_equal",
+    hint: "Pense à l’opposé de -7.",
     explanation:
       "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
-          ("Deux nombres opposés ont la même valeur absolue. Par exemple -3 et +3 ont tous les deux pour valeur absolue 3.") +
+          ("-7 est à 7 graduations de 0. L’autre nombre à 7 graduations de 0 est +7, de l’autre côté. Deux nombres opposés ont la même valeur absolue.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatif", "defi", "valeur_absolue", "raisonnement"],
+    tags: ["relatif", "defi", "valeur_absolue", "short"],
   },
   {
     kind: "fixed",
@@ -818,10 +822,11 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_defi",
     difficulty: 5,
     theme: "reunion",
+    // 08/10/2026 : précise et simple (Frédéric)
     text: "Au lever du jour, la température au sommet est de -2 °C. Elle augmente de 5 degrés dans la matinée puis redescend de 3 degrés le soir. Quelle est la température finale ?",
-    format: "open",
-    expected: ["0", "0°C", "0 °C"],
-    comparator: "contains_keyword",
+    format: "short",
+    expected: ["0", "0 °C"],
+    comparator: "number_equal",
     hint: "Pars de -2, puis ajoute 5, puis enlève 3.",
     explanation:
       "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
@@ -1376,16 +1381,17 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_lire",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi « 7 au-dessous de zéro » s’écrit -7.",
-    format: "open",
-    expected: ["dessous", "zéro", "négatif", "-7"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Écris avec son signe : 7 au-dessous de zéro.",
+    format: "short",
+    expected: ["-7"],
+    comparator: "number_equal",
     hint: "En dessous de zéro, on utilise le signe moins.",
     explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Un nombre situé au-dessous de zéro est négatif. Donc 7 au-dessous de zéro s’écrit -7.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatif", "open", "lecture"],
+    tags: ["relatif", "short", "lecture"],
   },
   {
     kind: "fixed",
@@ -1396,16 +1402,18 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_signe",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi 0 n’est ni positif ni négatif.",
-    format: "open",
-    expected: ["0", "ni", "positif", "négatif"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Le nombre 0 est-il positif ou négatif ?",
+    format: "qcm",
+    choices: ["ni l’un ni l’autre", "positif", "négatif"],
+    expected: ["ni l’un ni l’autre"],
+    comparator: "mcq_exact",
     hint: "0 est la séparation entre les nombres positifs et négatifs.",
     explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("0 n’est ni positif ni négatif : il sert de frontière entre les nombres positifs et les nombres négatifs.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatif", "open", "signe", "zero"],
+    tags: ["relatif", "qcm", "signe", "zero"],
   },
   {
     kind: "fixed",
@@ -1416,16 +1424,18 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_comparer",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi -4 est plus grand que -7.",
-    format: "open",
-    expected: ["droite", "droite graduée", "-4", "-7", "plus proche de 0"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Quel est le plus grand : -4 ou -7 ?",
+    format: "qcm",
+    choices: ["-4", "-7"],
+    expected: ["-4"],
+    comparator: "mcq_exact",
     hint: "Parmi deux négatifs, le plus proche de 0 est le plus grand.",
     explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("Sur une droite graduée, -4 est à droite de -7. Il est aussi plus proche de 0. Donc -4 > -7.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatif", "open", "comparaison"],
+    tags: ["relatif", "qcm", "comparaison"],
   },
   {
     kind: "fixed",
@@ -1436,16 +1446,17 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_placer",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment placer le nombre -3 sur une droite graduée.",
-    format: "open",
-    expected: ["0", "gauche", "3", "-3"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Sur une droite graduée, on part de 0 et on avance de 3 graduations vers la gauche. Sur quel nombre arrive-t-on ?",
+    format: "short",
+    expected: ["-3"],
+    comparator: "number_equal",
     hint: "Les nombres négatifs sont à gauche de 0.",
     explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
-          ("Pour placer -3, on part de 0 puis on se déplace de 3 unités vers la gauche.") +
+          ("À gauche de 0, les nombres sont négatifs. 3 graduations à gauche de 0, c’est -3. Pour placer -3, on fait donc ce chemin.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatif", "open", "placement"],
+    tags: ["relatif", "short", "placement"],
   },
   {
     kind: "fixed",
@@ -1456,16 +1467,17 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_oppose",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi -6 et +6 sont opposés.",
-    format: "open",
-    expected: ["distance", "0", "-6", "+6", "opposés"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Quel est l’opposé de -6 ?",
+    format: "short",
+    expected: ["+6", "6"],
+    comparator: "number_equal",
     hint: "Ils sont à la même distance de 0 mais de deux côtés différents.",
     explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("-6 et +6 sont opposés car ils sont à la même distance de 0, mais de chaque côté de 0.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatif", "open", "oppose"],
+    tags: ["relatif", "short", "oppose"],
   },
   {
     kind: "fixed",
@@ -1476,16 +1488,17 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_valeur_absolue",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi la valeur absolue de -5 est 5.",
-    format: "open",
-    expected: ["distance", "0", "-5", "5"],
-    comparator: "contains_keyword",
-    hint: "La valeur absolue mesure la distance à zéro.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Sur une droite graduée, à combien de graduations de 0 se trouve -5 ?",
+    format: "short",
+    expected: ["5"],
+    comparator: "number_equal",
+    hint: "Compte les graduations entre 0 et -5.",
     explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
-          ("La valeur absolue de -5 est sa distance à 0. Cette distance vaut 5.") +
+          ("De 0 à -5, on compte 5 graduations. La distance à 0 vaut 5 : c’est la valeur absolue de -5. Une distance n’est jamais négative.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatif", "open", "valeur_absolue"],
+    tags: ["relatif", "short", "valeur_absolue"],
   },
   {
     kind: "fixed",
@@ -1496,16 +1509,18 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève dit : « -8 est plus grand que -3 parce que 8 est plus grand que 3 ». Explique son erreur.",
-    format: "open",
-    expected: ["négatifs", "-3", "-8", "droite", "erreur"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un élève dit : « -8 est plus grand que -3, car 8 est plus grand que 3 ». Quel est le plus grand ?",
+    format: "qcm",
+    choices: ["-3", "-8"],
+    expected: ["-3"],
+    comparator: "mcq_exact",
     hint: "Avec les nombres négatifs, le plus grand est celui qui est le plus proche de 0.",
     explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
           ("L’élève compare seulement 8 et 3, mais il oublie les signes. Sur une droite graduée, -3 est plus proche de 0 et se trouve à droite de -8. Donc -3 > -8.") +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
-    tags: ["relatif", "open", "defi", "erreur"],
+    tags: ["relatif", "qcm", "defi", "erreur"],
   },
 
   // =========================
@@ -1604,10 +1619,12 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_signe",
     difficulty: 2,
     theme: "neutral",
-    text: "Un nombre situé à droite de 0 sur une droite graduée est ...",
-    format: "short",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Complète : un nombre situé à droite de 0 sur une droite graduée est ...",
+    format: "qcm",
+    choices: ["positif", "négatif", "nul"],
     expected: ["positif"],
-    comparator: "contains_keyword",
+    comparator: "mcq_exact",
     hint: "À droite de 0.",
     explanation: expl("À droite de 0, les nombres sont positifs."),
     tags: ["relatif", "signe"],
@@ -1816,13 +1833,21 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_placer",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment placer le nombre -4 sur une droite graduée.",
-    format: "open",
-    expected: ["gauche", "zéro", "4"],
-    comparator: "contains_keyword",
-    hint: "On part de 0 vers la gauche.",
-    explanation: expl("On part de 0 et on compte 4 graduations vers la gauche : on arrive au point d’abscisse -4."),
-    tags: ["relatif", "placement", "open"],
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Quel point est placé au nombre -4 ?",
+    format: "qcm",
+    choices: ["A", "B", "C", "D"],
+    expected: ["C"],
+    comparator: "mcq_exact",
+    hint: "On part de 0 et on compte 4 graduations vers la gauche.",
+    explanation: expl("On part de 0 et on compte 4 graduations vers la gauche : on arrive au point C. Le point A est à +4, de l’autre côté de 0."),
+    tags: ["relatif", "placement", "qcm", "canvas"],
+    canvas: numberLine([
+      { value: 4, label: "A" },
+      { value: -3, label: "B" },
+      { value: -4, label: "C" },
+      { value: -5, label: "D" },
+    ]),
   },
 
   // =========================

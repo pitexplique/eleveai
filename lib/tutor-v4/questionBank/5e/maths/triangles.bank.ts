@@ -154,26 +154,8 @@ export const trianglesBank: TutorBankItemV4[] = [
     tags: ["triangle_figure", "sommets", "qcm"],
     canvas: triangleCanvas({}),
   },
-  {
-    kind: "fixed",
-    id: "triangle_reconnaitre_open_1",
-    niveau: "5e",
-    matiere: "maths",
-    notionId: "triangle_figure",
-    microId: "triangle_reconnaitre",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Explique ce qu’est un triangle.",
-    format: "open",
-    expected: ["3", "côtés", "sommets"],
-    comparator: "contains_keyword",
-    hint: "Pense au nombre de côtés et de sommets.",
-    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
-          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
-          ("Un triangle est une figure qui possède 3 côtés, 3 sommets et 3 angles.") +
-          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangle_figure", "reconnaitre", "open"],
-  },
+  // 08/10/2026 : « triangle_reconnaitre_open_1 » (une figure à 3 côtés, son nom ?)
+  // supprimée par Frédéric : trop facile pour la 5e.
 
   // =========================
   // TRIANGLE_NATURE
@@ -253,16 +235,15 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_nature",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment reconnaître un triangle rectangle sur une figure.",
-    format: "open",
-    expected: ["angle droit", "90", "carré"],
-    comparator: "contains_keyword",
-    hint: "Cherche le codage de l’angle droit.",
-    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
-          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
-          ("On reconnaît un triangle rectangle lorsqu’un de ses angles est droit, c’est-à-dire égal à 90°.") +
-          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangle_figure", "nature", "rectangle", "open"],
+    // 08/10/2026 : précise et simple (Frédéric).
+    text: "Sur la figure, le petit carré code un angle droit. En quel sommet est l’angle droit ?",
+    format: "qcm",
+    choices: ["A","B","C"],
+    expected: ["A"],
+    comparator: "mcq_exact",
+    hint: "Cherche le petit carré dans un coin du triangle.",
+    explanation: expl("Le petit carré est dans le coin A. L’angle en A est droit : il mesure 90°. Le triangle ABC est rectangle en A."),
+    tags: ["triangle_figure","nature","rectangle","qcm"],
     canvas: triangleCanvas({ type: "rectangle" }),
   },
   {
@@ -385,16 +366,14 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_inegalite",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi on ne peut pas construire un triangle de côtés 2 cm, 3 cm et 8 cm.",
-    format: "open",
-    expected: ["2", "3", "8", "somme", "plus petit"],
-    comparator: "contains_keyword",
-    hint: "Regarde la somme des deux plus petits côtés.",
-    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
-          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
-          ("On ne peut pas le construire car 2 + 3 = 5, et 5 est inférieur à 8. Les deux petits côtés ne peuvent pas rejoindre le grand côté.") +
-          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangle_figure", "construire", "open", "raisonnement"],
+    // 08/10/2026 : précise et simple (Frédéric).
+    text: "Un triangle aurait des côtés de 2 cm, 3 cm et 8 cm. Combien font les deux plus petits côtés ensemble ?",
+    format: "short",
+    expected: ["5 cm","5"],
+    comparator: "number_equal",
+    hint: "Additionne 2 et 3.",
+    explanation: expl("2 + 3 = 5. Or 5 est plus petit que 8. Les deux petits côtés sont trop courts pour se rejoindre : on ne peut pas construire ce triangle."),
+    tags: ["triangle_figure","construire","short","raisonnement"],
   },
   {
     kind: "template",
@@ -517,16 +496,15 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_somme_angle",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment trouver l’angle manquant dans un triangle quand on connaît les deux autres.",
-    format: "open",
-    expected: ["180", "soustraire", "angles"],
-    comparator: "contains_keyword",
-    hint: "La somme des trois angles d’un triangle vaut 180°.",
-    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
-          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
-          ("On additionne les deux angles connus, puis on soustrait cette somme à 180°.") +
-          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangle_figure", "somme_angle", "open", "methode"],
+    // 08/10/2026 : précise et simple (Frédéric).
+    text: "Dans le triangle ABC, l’angle en A mesure 70° et l’angle en B mesure 45°. Combien mesure l’angle en C ?",
+    format: "short",
+    expected: ["65°","65"],
+    comparator: "number_equal",
+    hint: "Les trois angles font 180° en tout.",
+    explanation: expl("Les trois angles font 180°. 70 + 45 = 115. 180 − 115 = 65. L’angle en C mesure 65°."),
+    tags: ["triangle_figure","somme_angle","short","methode"],
+    canvas: triangleCanvas({ angleLabels: { A: "70°", B: "45°", C: "?" } }),
   },
   {
     kind: "template",
@@ -578,17 +556,16 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève affirme : « Ce triangle est rectangle car il a un côté horizontal. » Explique son erreur.",
-    format: "open",
-    expected: ["angle droit", "90", "horizontal"],
-    comparator: "contains_keyword",
-    hint: "Un triangle rectangle dépend d’un angle, pas de l’orientation d’un côté.",
-    explanation: "Définition : un triangle est une figure à trois côtés et trois sommets.\n\n" +
-          "Méthode : on utilise les propriétés des triangles, des angles ou des constructions.\n\nCalcul : " +
-          ("Un triangle est rectangle s’il possède un angle droit. Avoir un côté horizontal ne suffit pas.") +
-          "\n\nConclusion : la propriété ou la mesure obtenue convient pour ce triangle.",
-    tags: ["triangle_figure", "defi", "open", "piege", "rectangle"],
-    canvas: triangleCanvas({ type: "quelconque" }),
+    // 08/10/2026 : précise et simple (Frédéric).
+    text: "Un élève dit : « ce triangle est rectangle car il a un côté horizontal ». Ses angles mesurent 50°, 60° et 70°. Est-il rectangle ?",
+    format: "qcm",
+    choices: ["oui","non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Un triangle rectangle a un angle de 90°.",
+    explanation: expl("Un triangle rectangle a un angle de 90°. Ici, les angles mesurent 50°, 60° et 70° : aucun ne fait 90°. Il n’est pas rectangle. Un côté horizontal ne veut rien dire."),
+    tags: ["triangle_figure","defi","qcm","piege","rectangle"],
+    canvas: triangleCanvas({ type: "quelconque", angleLabels: { A: "60°", B: "50°", C: "70°" } }),
   },
   {
     kind: "fixed",
@@ -765,13 +742,16 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_reconnaitre",
     difficulty: 2,
     theme: "neutral",
-    text: "Décris les trois éléments qui composent un triangle.",
-    format: "open",
-    expected: ["côtés", "sommets", "angles"],
-    comparator: "contains_keyword",
-    hint: "Pense aux côtés, aux sommets et aux angles.",
-    explanation: expl("Un triangle est formé de 3 côtés, 3 sommets et 3 angles."),
-    tags: ["triangle_figure", "reconnaitre", "open"],
+    // 08/10/2026 : précise et simple (Frédéric).
+    text: "Dans le triangle ABC, les côtés [AB] et [AC] forment un angle. En quel sommet est cet angle ?",
+    format: "qcm",
+    choices: ["A","B","C"],
+    expected: ["A"],
+    comparator: "mcq_exact",
+    hint: "Quel point [AB] et [AC] ont-ils en commun ?",
+    explanation: expl("[AB] et [AC] partent tous les deux du point A. Ils forment l’angle en A. Un triangle a 3 côtés, 3 sommets et 3 angles."),
+    tags: ["triangle_figure","reconnaitre","qcm"],
+    canvas: triangleCanvas({}),
   },
   {
     kind: "fixed",
@@ -892,13 +872,15 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_nature",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique la différence entre un triangle isocèle et un triangle équilatéral.",
-    format: "open",
-    expected: ["deux", "trois", "côtés"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric).
+    text: "Un triangle a des côtés de 5 cm, 5 cm et 3 cm. Quelle est sa nature ?",
+    format: "qcm",
+    choices: ["isocèle","équilatéral","rectangle"],
+    expected: ["isocèle"],
+    comparator: "mcq_exact",
     hint: "Compte les côtés égaux.",
-    explanation: expl("Un triangle isocèle a deux côtés égaux ; un triangle équilatéral a ses trois côtés égaux."),
-    tags: ["triangle_figure", "nature", "open"],
+    explanation: expl("Deux côtés sont égaux (5 cm et 5 cm), le troisième non (3 cm). Le triangle est isocèle. Équilatéral, il faudrait trois côtés égaux."),
+    tags: ["triangle_figure","nature","qcm"],
   },
   {
     kind: "template",
@@ -1000,13 +982,14 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_construire",
     difficulty: 3,
     theme: "neutral",
-    text: "Décris les étapes pour construire un triangle dont on connaît les trois longueurs de côtés.",
-    format: "open",
-    expected: ["règle", "compas", "côté"],
-    comparator: "contains_keyword",
-    hint: "Base à la règle, puis arcs au compas.",
-    explanation: expl("On trace un côté à la règle, puis on trace deux arcs de cercle au compas (un de chaque extrémité) avec les deux autres longueurs ; leur intersection donne le troisième sommet."),
-    tags: ["triangle_figure", "construire", "open"],
+    // 08/10/2026 : précise et simple (Frédéric).
+    text: "On construit le triangle ABC : AB = 8 cm, AC = 5 cm, BC = 6 cm. [AB] est tracé. Quel écartement faut-il au compas pour l’arc de centre B ?",
+    format: "short",
+    expected: ["6 cm","6"],
+    comparator: "number_equal",
+    hint: "Le compas pointé en B reporte la longueur BC.",
+    explanation: expl("Pointe en B, on reporte BC = 6 cm. Pointe en A, on reporte AC = 5 cm. Les deux arcs se coupent en C."),
+    tags: ["triangle_figure","construire","short"],
   },
   {
     kind: "template",
@@ -1110,13 +1093,14 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_somme_angle",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment trouver un angle d’un triangle quand on connaît les deux autres.",
-    format: "open",
-    expected: ["180", "soustrait", "somme"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric).
+    text: "Dans un triangle, deux angles mesurent 25° et 110°. Combien mesure le troisième ?",
+    format: "short",
+    expected: ["45°","45"],
+    comparator: "number_equal",
     hint: "Pars de 180°.",
-    explanation: expl("On soustrait la somme des deux angles connus à 180° pour obtenir le troisième angle."),
-    tags: ["triangle_figure", "somme_angle", "open"],
+    explanation: expl("Les trois angles font 180°. 25 + 110 = 135. 180 − 135 = 45. Le troisième angle mesure 45°."),
+    tags: ["triangle_figure","somme_angle","short"],
   },
   {
     kind: "template",
@@ -1191,13 +1175,16 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève dit : « Un triangle peut avoir des angles de 100°, 50° et 40° ». Explique pourquoi c’est faux.",
-    format: "open",
-    expected: ["180", "somme", "190"],
-    comparator: "contains_keyword",
-    hint: "Additionne les trois angles.",
-    explanation: expl("La somme 100 + 50 + 40 = 190° dépasse 180°. C’est impossible pour un triangle."),
-    tags: ["triangle_figure", "defi", "open", "somme_angle", "erreur"],
+    // 08/10/2026 : précise et simple (Frédéric).
+    // Frédéric (08/10) : l'élève conclut lui-même.
+    text: "Un triangle peut-il avoir des angles de 100°, 50° et 40° ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Additionne les trois angles et compare avec 180°.",
+    explanation: expl("100 + 50 + 40 = 190. Dans un triangle, les trois angles font toujours 180°. 190 n’est pas 180 : ce triangle n’existe pas, l’élève se trompe."),
+    tags: ["triangle_figure","defi","short","somme_angle","erreur"],
   },
   {
     kind: "fixed",

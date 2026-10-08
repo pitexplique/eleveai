@@ -453,17 +453,19 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_comprendre",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique avec tes mots la différence entre aire et périmètre.",
-    format: "open",
-    expected: ["aire", "surface", "intérieur", "périmètre", "contour"],
-    comparator: "contains_keyword",
-    hint: "L’un concerne l’intérieur, l’autre le contour.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un rectangle mesure 6 cm sur 4 cm.\nQuel est son périmètre ?",
+    format: "qcm",
+    choices: ["20 cm", "24 cm²", "10 cm", "24 cm"],
+    expected: ["20 cm"],
+    comparator: "mcq_exact",
+    hint: "Le périmètre, c’est le tour de la figure.",
     explanation:
-      "Définition : l’aire mesure la surface intérieure d’une figure, le périmètre mesure la longueur de son contour.\n\n" +
-      "Méthode : on se demande si l’on remplit la figure ou si l’on fait le tour.\n\n" +
-      "Observation : remplir correspond à l’aire ; faire le tour correspond au périmètre.\n\n" +
-      "Conclusion : aire et périmètre sont deux grandeurs différentes.",
-    tags: ["aire_surface", "open", "perimetre", "vocabulaire"],
+      "Définition : le périmètre mesure la longueur du contour ; l’aire mesure la surface intérieure.\n\n" +
+      "Méthode : on fait le tour : 6 + 4 + 6 + 4.\n\n" +
+      "Calcul : 6 + 4 + 6 + 4 = 20, donc 20 cm. 24 cm² est l’aire (6 × 4). 10 cm n’est que la moitié du tour.\n\n" +
+      "Conclusion : le périmètre est 20 cm.",
+    tags: ["aire_surface", "perimetre", "qcm"],
   },
 
   {
@@ -475,17 +477,25 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_comprendre",
     difficulty: 3,
     theme: "neutral",
-    text: "Pourquoi utilise-t-on souvent des unités comme cm² ou m² pour exprimer une aire ?",
-    format: "open",
-    expected: ["surface", "carré", "unité", "cm²", "m²"],
-    comparator: "contains_keyword",
-    hint: "Une aire peut être vue comme un nombre de petits carrés.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "On couvre un rectangle avec 6 carrés de 1 cm de côté.\nQuelle est son aire ?",
+    format: "qcm",
+    choices: ["6 cm²", "6 cm", "6 cm³", "10 cm"],
+    expected: ["6 cm²"],
+    comparator: "mcq_exact",
+    hint: "Un carré de 1 cm de côté a une aire de 1 cm².",
     explanation:
       "Définition : une aire mesure une surface.\n\n" +
-      "Méthode : on peut mesurer une surface avec des carrés unités.\n\n" +
-      "Observation : un carré de 1 cm sur 1 cm a une aire de 1 cm².\n\n" +
-      "Conclusion : on utilise des unités au carré comme cm² ou m² pour exprimer une aire.",
-    tags: ["aire_surface", "open", "unite", "raisonnement"],
+      "Méthode : on compte les carrés de 1 cm de côté : chacun vaut 1 cm².\n\n" +
+      "Observation : 6 carrés de 1 cm² font 6 cm². 10 cm est le périmètre (3 + 2 + 3 + 2). Le cm³ sert pour un volume.\n\n" +
+      "Conclusion : l’aire est 6 cm².",
+    canvas: figureLibreAireCanvas({
+      rows: 2,
+      cols: 3,
+      filledCells: rectangleCells(2, 3),
+      showPerimeter: false,
+    }),
+    tags: ["aire_surface", "unite", "qcm", "canvas"],
   },
 
   /* =========================
@@ -715,17 +725,19 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_triangle",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique la méthode pour calculer l’aire d’un triangle quand on connaît une base et la hauteur associée.",
-    format: "open",
-    expected: ["base", "hauteur", "multiplie", "divise", "2"],
-    comparator: "contains_keyword",
-    hint: "Il faut parler de la base, de la hauteur et de la division par 2.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un triangle a une base de 8 cm et une hauteur associée de 5 cm.\nQuelle est son aire ?",
+    format: "qcm",
+    choices: ["20 cm²", "40 cm²", "13 cm²", "20 cm"],
+    expected: ["20 cm²"],
+    comparator: "mcq_exact",
+    hint: "Aire du triangle = base × hauteur ÷ 2.",
     explanation:
       "Définition : l’aire d’un triangle dépend d’une base et de la hauteur associée.\n\n" +
-      "Méthode : on multiplie la base par la hauteur, puis on divise le résultat par 2.\n\n" +
-      "Observation : cette division par 2 vient du fait qu’un triangle est la moitié d’un parallélogramme de même base et de même hauteur.\n\n" +
-      "Conclusion : aire = base × hauteur ÷ 2.",
-    tags: ["aire_surface", "triangle", "open", "methode"],
+      "Méthode : on multiplie la base par la hauteur, puis on divise par 2.\n\n" +
+      "Calcul : 8 × 5 = 40, puis 40 ÷ 2 = 20. 40 cm² oublie le ÷ 2. 13 vient de 8 + 5.\n\n" +
+      "Conclusion : l’aire est 20 cm².",
+    tags: ["aire_surface", "triangle", "qcm"],
   },
 
   {
@@ -737,17 +749,19 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_triangle",
     difficulty: 4,
     theme: "neutral",
-    text: "Pourquoi la hauteur utilisée dans la formule de l’aire d’un triangle doit-elle être associée à la base choisie ?",
-    format: "open",
-    expected: ["hauteur", "base", "perpendiculaire", "associée"],
-    comparator: "contains_keyword",
-    hint: "La hauteur doit être perpendiculaire à la base.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : prendre la hauteur, pas le côté.
+    text: "Dans un triangle ABC, la base [AB] mesure 10 cm, le côté [AC] mesure 5 cm et la hauteur issue de C mesure 4 cm.\nQuelle est son aire ?",
+    format: "qcm",
+    choices: ["20 cm²", "25 cm²", "40 cm²", "50 cm²"],
+    expected: ["20 cm²"],
+    comparator: "mcq_exact",
+    hint: "On prend la hauteur perpendiculaire à [AB], pas le côté [AC].",
     explanation:
-      "Définition : la hauteur d’un triangle est une distance perpendiculaire à une base.\n\n" +
-      "Méthode : quand on choisit une base, il faut utiliser la hauteur qui tombe perpendiculairement sur cette base.\n\n" +
-      "Observation : utiliser une hauteur qui ne correspond pas à la base donne un calcul faux.\n\n" +
-      "Conclusion : dans la formule, la base et la hauteur doivent être associées.",
-    tags: ["aire_surface", "triangle", "open", "hauteur", "raisonnement"],
+      "Définition : la hauteur associée à la base [AB] est perpendiculaire à [AB].\n\n" +
+      "Méthode : aire = base × hauteur associée ÷ 2. Le côté [AC] n’est pas la hauteur.\n\n" +
+      "Calcul : 10 × 4 = 40, puis 40 ÷ 2 = 20. 25 cm² utilise le côté [AC] (10 × 5 ÷ 2). 40 cm² oublie le ÷ 2.\n\n" +
+      "Conclusion : l’aire est 20 cm².",
+    tags: ["aire_surface", "triangle", "hauteur", "qcm"],
   },
   /* =========================
      AIRE_PARALLELOGRAMME
@@ -955,17 +969,19 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_parallelogramme",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique la méthode pour calculer l’aire d’un parallélogramme.",
-    format: "open",
-    expected: ["base", "hauteur", "multiplie"],
-    comparator: "contains_keyword",
-    hint: "Parle de la base et de la hauteur associée.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un parallélogramme a une base de 7 cm et une hauteur associée de 4 cm.\nQuelle est son aire ?",
+    format: "qcm",
+    choices: ["28 cm²", "14 cm²", "11 cm²", "28 cm"],
+    expected: ["28 cm²"],
+    comparator: "mcq_exact",
+    hint: "Aire du parallélogramme = base × hauteur (sans diviser par 2).",
     explanation:
-      "Définition : l’aire d’un parallélogramme dépend d’une base et de la hauteur correspondante.\n\n" +
+      "Définition : l’aire d’un parallélogramme dépend d’une base et de la hauteur associée.\n\n" +
       "Méthode : on multiplie la base par la hauteur associée.\n\n" +
-      "Observation : il ne faut pas utiliser un côté oblique à la place de la hauteur.\n\n" +
-      "Conclusion : aire = base × hauteur.",
-    tags: ["aire_surface", "parallelogramme", "open", "methode"],
+      "Calcul : 7 × 4 = 28. 14 cm² divise par 2 comme pour un triangle. 11 vient de 7 + 4.\n\n" +
+      "Conclusion : l’aire est 28 cm².",
+    tags: ["aire_surface", "parallelogramme", "qcm"],
   },
 
   {
@@ -977,17 +993,19 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_parallelogramme",
     difficulty: 4,
     theme: "neutral",
-    text: "Pourquoi ne peut-on pas utiliser n’importe quel côté comme hauteur dans un parallélogramme ?",
-    format: "open",
-    expected: ["perpendiculaire", "base", "hauteur"],
-    comparator: "contains_keyword",
-    hint: "La hauteur doit être perpendiculaire à la base.",
+    // 08/10/2026 : précise et simple (Frédéric) — garde l’idée : le côté oblique n’est pas la hauteur.
+    text: "Un parallélogramme a une base de 8 cm, un côté oblique de 5 cm et une hauteur de 4 cm.\nQuelle est son aire ?",
+    format: "qcm",
+    choices: ["32 cm²", "40 cm²", "20 cm²", "16 cm²"],
+    expected: ["32 cm²"],
+    comparator: "mcq_exact",
+    hint: "La hauteur est perpendiculaire à la base. Le côté oblique ne sert pas.",
     explanation:
-      "Définition : la hauteur est une distance perpendiculaire à une base.\n\n" +
-      "Méthode : quand on choisit une base, on doit prendre la hauteur correspondante.\n\n" +
-      "Observation : un côté oblique n’est généralement pas une hauteur.\n\n" +
-      "Conclusion : la hauteur doit être perpendiculaire à la base choisie.",
-    tags: ["aire_surface", "parallelogramme", "raisonnement", "open"],
+      "Définition : la hauteur est perpendiculaire à la base ; le côté oblique ne l’est pas.\n\n" +
+      "Méthode : aire = base × hauteur.\n\n" +
+      "Calcul : 8 × 4 = 32. 40 cm² utilise le côté oblique (8 × 5). 16 cm² divise par 2 comme pour un triangle.\n\n" +
+      "Conclusion : l’aire est 32 cm².",
+    tags: ["aire_surface", "parallelogramme", "hauteur", "qcm"],
   },
   /* =========================
      AIRE_COMPOSER
@@ -1258,18 +1276,20 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_composer",
     difficulty: 4,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric)
     text:
-      "Explique la méthode pour calculer l’aire d’une figure composée.",
-    format: "open",
-    expected: ["découper", "figures", "additionner"],
-    comparator: "contains_keyword",
-    hint: "Parle du découpage en formes simples.",
+      "On découpe une figure en un rectangle de 15 cm² et un triangle de 6 cm².\nQuelle est l’aire de la figure ?",
+    format: "qcm",
+    choices: ["21 cm²", "90 cm²", "9 cm²", "21 cm"],
+    expected: ["21 cm²"],
+    comparator: "mcq_exact",
+    hint: "On additionne les aires des morceaux.",
     explanation:
       "Définition : une figure composée est formée de plusieurs figures simples.\n\n" +
-      "Méthode : on découpe la figure puis on calcule chaque aire.\n\n" +
-      "Observation : on additionne ensuite les résultats.\n\n" +
-      "Conclusion : on obtient ainsi l’aire totale.",
-    tags: ["aire_surface", "composees", "open", "methode"],
+      "Méthode : on découpe la figure, puis on additionne les aires des morceaux.\n\n" +
+      "Calcul : 15 + 6 = 21. 90 vient de 15 × 6 ; 9 vient de 15 − 6.\n\n" +
+      "Conclusion : l’aire de la figure est 21 cm².",
+    tags: ["aire_surface", "composees", "qcm"],
   },
 
   {
@@ -1564,18 +1584,20 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_defi",
     difficulty: 5,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric)
     text:
-      "Explique la différence entre une aire et un périmètre.",
-    format: "open",
-    expected: ["surface", "contour", "aire", "périmètre"],
-    comparator: "contains_keyword",
-    hint: "L’un mesure la surface, l’autre le contour.",
+      "Un carré a un côté de 5 cm.\nQuelle est son aire ?",
+    format: "qcm",
+    choices: ["25 cm²", "20 cm", "20 cm²", "10 cm²"],
+    expected: ["25 cm²"],
+    comparator: "mcq_exact",
+    hint: "Aire du carré = côté × côté.",
     explanation:
-      "Définition : l’aire mesure la surface intérieure d’une figure.\n\n" +
-      "Définition : le périmètre mesure le contour d’une figure.\n\n" +
-      "Observation : on n’utilise pas les mêmes unités.\n\n" +
-      "Conclusion : aire et périmètre sont deux notions différentes.",
-    tags: ["aire_surface", "perimetre", "open", "defi"],
+      "Définition : l’aire mesure la surface intérieure ; le périmètre mesure le contour.\n\n" +
+      "Méthode : aire du carré = côté × côté.\n\n" +
+      "Calcul : 5 × 5 = 25. 20 cm est le périmètre (5 + 5 + 5 + 5). 10 vient de 5 × 2.\n\n" +
+      "Conclusion : l’aire est 25 cm².",
+    tags: ["aire_surface", "perimetre", "qcm", "defi"],
   },
 
   {
@@ -1669,17 +1691,19 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_comprendre",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique la différence entre l’aire et le périmètre d’une figure.",
-    format: "open",
-    expected: ["surface", "contour", "périmètre"],
-    comparator: "contains_keyword",
-    hint: "L’un mesure l’intérieur, l’autre le tour.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Un rectangle mesure 5 cm sur 2 cm.\nQue vaut 14 cm : son aire ou son périmètre ?",
+    format: "qcm",
+    choices: ["son périmètre", "son aire"],
+    expected: ["son périmètre"],
+    comparator: "mcq_exact",
+    hint: "L’aire s’écrit en cm², le périmètre en cm.",
     explanation:
       "Définition : l’aire mesure la surface intérieure, le périmètre mesure la longueur du contour.\n\n" +
-      "Méthode : on repère si l’on parle de l’intérieur ou du tour.\n\n" +
-      "Observation : l’aire s’exprime en cm², le périmètre en cm.\n\n" +
-      "Conclusion : l’aire est la surface, le périmètre est le tour de la figure.",
-    tags: ["aire_surface", "perimetre", "open"],
+      "Méthode : on calcule les deux.\n\n" +
+      "Calcul : périmètre = 5 + 2 + 5 + 2 = 14 cm. Aire = 5 × 2 = 10 cm².\n\n" +
+      "Conclusion : 14 cm est le périmètre.",
+    tags: ["aire_surface", "perimetre", "qcm"],
   },
 
   /* =========================
@@ -1796,17 +1820,25 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_composer",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment calculer l’aire d’une figure en forme de L.",
-    format: "open",
-    expected: ["découpe", "rectangles", "additionne"],
-    comparator: "contains_keyword",
-    hint: "On la sépare en rectangles.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Cette figure en L est faite de deux rectangles : 6 cm sur 2 cm et 3 cm sur 2 cm.\nQuelle est son aire ?",
+    format: "qcm",
+    choices: ["18 cm²", "72 cm²", "13 cm²", "18 cm"],
+    expected: ["18 cm²"],
+    comparator: "mcq_exact",
+    hint: "Calcule l’aire de chaque rectangle, puis additionne.",
     explanation:
-      "Définition : une figure en L peut se décomposer en figures simples.\n\n" +
-      "Méthode : on découpe le L en deux rectangles.\n\n" +
-      "Calcul : on calcule l’aire de chaque rectangle puis on les additionne.\n\n" +
-      "Conclusion : l’aire du L est la somme des aires des deux rectangles.",
-    tags: ["aire_surface", "composer", "open"],
+      "Définition : une figure en L se découpe en deux rectangles.\n\n" +
+      "Méthode : on calcule l’aire de chaque rectangle, puis on additionne.\n\n" +
+      "Calcul : 6 × 2 = 12 et 3 × 2 = 6. Puis 12 + 6 = 18. 72 vient de 12 × 6 ; 13 vient de 6 + 2 + 3 + 2.\n\n" +
+      "Conclusion : l’aire du L est 18 cm².",
+    canvas: figureLibreAireCanvas({
+      rows: 4,
+      cols: 6,
+      filledCells: lShapeCells({ rows: 4, cols: 6, cutRows: 2, cutCols: 3 }),
+      showPerimeter: false,
+    }),
+    tags: ["aire_surface", "composer", "qcm", "canvas"],
   },
 
   /* =========================

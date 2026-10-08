@@ -189,6 +189,10 @@ export const conversionsBank: TutorBankItemV4[] = [
       },
     ],
   },
+  // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique avec tes mots
+  // comment savoir… si le nombre devient plus grand ou plus petit ». Désormais :
+  // un cas (3,5 m en cm). Leurres : « plus petit » (on divise par réflexe),
+  // « le même » (la longueur ne change pas, donc le nombre non plus).
   {
     kind: "fixed",
     id: "5e_conversion_decimal_open_1_sens_de_la_conversion",
@@ -198,25 +202,19 @@ export const conversionsBank: TutorBankItemV4[] = [
     microId: "conversion_decimal",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique avec tes mots comment savoir, avant même de calculer, si le nombre va devenir plus grand ou plus petit quand on change d’unité.",
-    format: "open",
-    expected: [
-      "plus petite",
-      "plus grande",
-      "multiplie",
-      "divise",
-      "unité",
-      "unite",
-    ],
-    comparator: "contains_keyword",
-    hint: "Compare la taille de l’unité de départ et celle de l’unité d’arrivée.",
+    text: "On écrit 3,5 m en centimètres. Sans calculer : le nombre obtenu est-il plus grand ou plus petit que 3,5 ?",
+    format: "qcm",
+    choices: ["plus grand", "plus petit", "le même"],
+    expected: ["plus grand"],
+    comparator: "mcq_exact",
+    hint: "Le centimètre est plus petit que le mètre : il en faut beaucoup plus.",
     explanation: exp(
-      "changer d’unité ne change pas la grandeur, seulement le nombre qui la mesure.",
-      "on compare les deux unités : si l’unité d’arrivée est plus petite, il en faut davantage.",
-      "d’un litre vers des centilitres, l’unité rétrécit cent fois, donc le nombre est multiplié par 100.",
-      "unité plus petite, nombre plus grand — et l’inverse."
+      "changer d’unité ne change pas la longueur, seulement le nombre qui la mesure.",
+      "l’unité d’arrivée (cm) est plus petite que l’unité de départ (m) : il en faut davantage.",
+      "1 m = 100 cm, donc 3,5 m = 3,5 × 100 = 350 cm.",
+      "unité plus petite, nombre plus grand : 350 est plus grand que 3,5."
     ),
-    tags: ["grandeur_conversion", "oral"],
+    tags: ["grandeur_conversion", "qcm"],
   },
   {
     kind: "template",
@@ -398,6 +396,9 @@ export const conversionsBank: TutorBankItemV4[] = [
       },
     ],
   },
+  // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi
+  // 1 h 70 min ne va pas ». Désormais : le calcul, avec l'erreur de l'élève en
+  // leurre (1 h 70 min), et l'oubli de l'heure de départ (1 h 10 min).
   {
     kind: "fixed",
     id: "5e_conversion_duree_open_1_pourquoi_pas_soixante_dix",
@@ -407,18 +408,19 @@ export const conversionsBank: TutorBankItemV4[] = [
     microId: "conversion_duree",
     difficulty: 3,
     theme: "neutral",
-    text: "Un élève écrit : « 1 h 50 min + 20 min = 1 h 70 min ».\nExplique pourquoi cette écriture ne va pas, et donne la bonne.",
-    format: "open",
-    expected: ["60", "soixante", "heure", "2 h 10", "2h10", "retenue"],
-    comparator: "contains_keyword",
-    hint: "Que se passe-t-il quand les minutes dépassent 60 ?",
+    text: "Calcule 1 h 50 min + 20 min.",
+    format: "qcm",
+    choices: ["2 h 10 min", "1 h 70 min", "1 h 10 min"],
+    expected: ["2 h 10 min"],
+    comparator: "mcq_exact",
+    hint: "60 minutes font 1 heure.",
     explanation: exp(
       "une durée en minutes ne dépasse jamais 59 : à 60, on change d’heure.",
       "on additionne les minutes, puis on convertit tout ce qui dépasse 60.",
       "50 + 20 = 70, et 70 min = 1 h 10 min, donc 1 h + 1 h 10 = 2 h 10 min.",
-      "l’écriture correcte est 2 h 10 min."
+      "1 h 50 min + 20 min = 2 h 10 min (et non 1 h 70 min)."
     ),
-    tags: ["grandeur_conversion", "oral"],
+    tags: ["grandeur_conversion", "qcm"],
   },
   {
     kind: "template",
@@ -598,6 +600,9 @@ export const conversionsBank: TutorBankItemV4[] = [
       },
     ],
   },
+  // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique ce qu'il faut
+  // faire avant d'additionner des kg et des g ». Désormais : le calcul 2 kg + 300 g
+  // en grammes (l'erreur « 302 » est refusée).
   {
     kind: "fixed",
     id: "5e_conversion_avant_calcul_open_1_deux_unites",
@@ -607,25 +612,18 @@ export const conversionsBank: TutorBankItemV4[] = [
     microId: "conversion_avant_calcul",
     difficulty: 3,
     theme: "neutral",
-    text: "Un problème donne une masse en kilogrammes et une autre en grammes, puis demande la masse totale.\nExplique ce qu’il faut faire avant d’additionner, et pourquoi.",
-    format: "open",
-    expected: [
-      "convertir",
-      "conversion",
-      "même unité",
-      "meme unite",
-      "unité",
-      "unite",
-    ],
-    comparator: "contains_keyword",
-    hint: "Peut-on ajouter des kilogrammes à des grammes tels quels ?",
+    text: "Un sac de riz pèse 2 kg et un sac de sucre pèse 300 g. Quelle est la masse totale, en grammes ?",
+    format: "short",
+    expected: ["2300 g", "2300", "2 300"],
+    comparator: "number_equal",
+    hint: "Convertis d’abord 2 kg en grammes.",
     explanation: exp(
-      "une addition n’a de sens qu’entre grandeurs exprimées dans la même unité.",
-      "on choisit une unité commune, on convertit, puis on additionne.",
-      "2 kg + 300 g devient 2 000 g + 300 g = 2 300 g.",
-      "on convertit d’abord, sinon on additionne des nombres qui ne comptent pas la même chose."
+      "on additionne seulement des masses écrites dans la même unité.",
+      "on convertit d’abord les kilogrammes en grammes, puis on additionne.",
+      "2 kg = 2 000 g. Donc 2 000 g + 300 g = 2 300 g.",
+      "la masse totale est 2 300 g (et non 302 : on n’ajoute pas des kg à des g)."
     ),
-    tags: ["grandeur_conversion", "oral"],
+    tags: ["grandeur_conversion", "short"],
   },
   {
     kind: "template",
@@ -804,6 +802,9 @@ export const conversionsBank: TutorBankItemV4[] = [
       },
     ],
   },
+  // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique comment il aurait
+  // pu s'en apercevoir ». Désormais : choisir la bonne unité. Leurres : m (l'erreur
+  // de l'élève), mm (14 mm, c'est la taille d'un ongle).
   {
     kind: "fixed",
     id: "5e_conversion_coherence_open_1_stylo_de_quatorze_metres",
@@ -813,19 +814,11 @@ export const conversionsBank: TutorBankItemV4[] = [
     microId: "conversion_coherence",
     difficulty: 3,
     theme: "neutral",
-    text: "Un élève trouve qu’un stylo mesure 14 mètres.\nExplique comment il aurait pu s’en apercevoir tout seul, sans refaire le calcul.",
-    format: "open",
-    expected: [
-      "ordre de grandeur",
-      "trop grand",
-      "centimètre",
-      "centimetre",
-      "cm",
-      "réel",
-      "reel",
-      "comparer",
-    ],
-    comparator: "contains_keyword",
+    text: "Un élève trouve qu’un stylo mesure 14 m. C’est faux. Un stylo mesure environ 14…",
+    format: "qcm",
+    choices: ["cm", "m", "mm"],
+    expected: ["cm"],
+    comparator: "mcq_exact",
     hint: "À quoi ressemblerait un objet de 14 mètres ?",
     explanation: exp(
       "un résultat de mesure se relit toujours en pensant à l’objet réel.",
@@ -833,7 +826,7 @@ export const conversionsBank: TutorBankItemV4[] = [
       "14 m, c’est la hauteur d’un immeuble de quatre étages ; un stylo mesure environ 14 cm.",
       "l’erreur porte sur l’unité, et l’ordre de grandeur suffisait à la voir."
     ),
-    tags: ["grandeur_conversion", "oral"],
+    tags: ["grandeur_conversion", "qcm"],
   },
   {
     kind: "template",

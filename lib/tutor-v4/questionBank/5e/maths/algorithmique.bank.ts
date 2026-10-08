@@ -211,17 +211,25 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_sequence",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi l’ordre des instructions est important dans un programme.",
-    format: "open",
-    expected: ["ordre", "instructions", "résultat"],
-    comparator: "contains_keyword",
-    hint: "Imagine une recette où les étapes sont mélangées.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "x vaut 3. Le programme multiplie x par 2, puis ajoute 5 à x. Quelle valeur affiche-t-il ?",
+    format: "short",
+    expected: ["11"],
+    comparator: "number_equal",
+    hint: "Fais les blocs dans l’ordre, de haut en bas.",
     explanation:
-      "Définition : un programme est une suite d’instructions ordonnées.\n\n" +
-      "Méthode : on lit les instructions dans l’ordre pour prévoir le résultat.\n\n" +
-      "Exécution : si on change l’ordre, le programme peut produire un autre résultat.\n\n" +
-      "Conclusion : l’ordre des instructions est essentiel.",
-    tags: ["algo_programmation", "sequence", "open", "raisonnement"],
+      "Définition : un programme est une suite d’instructions faites dans l’ordre.\n\n" +
+      "Méthode : on fait chaque bloc l’un après l’autre, de haut en bas.\n\n" +
+      "Exécution : 3 × 2 = 6, puis 6 + 5 = 11. Dans l’autre ordre, on trouverait (3 + 5) × 2 = 16.\n\n" +
+      "Conclusion : le programme affiche 11. L’ordre change le résultat.",
+    tags: ["algo_programmation", "sequence", "short", "raisonnement"],
+    canvas: scratchCanvas("L’ordre compte", [
+      { type: "event" },
+      { type: "set_variable", variable: "x", value: 3 },
+      { type: "set_variable", variable: "x", value: "x × 2" },
+      { type: "change_variable", variable: "x", value: 5 },
+      { type: "say", text: "x" },
+    ]),
   },
     /* =========================
      ALGO_ENTREES_SORTIES
@@ -442,17 +450,25 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_entree_sortie",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique la différence entre une entrée et une sortie dans un programme.",
-    format: "open",
-    expected: ["entrée", "sortie", "utilisateur", "programme"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Dans ce programme, quel bloc donne la sortie ?",
+    format: "qcm",
+    choices: ["dire", "demander", "mettre"],
+    expected: ["dire"],
+    comparator: "mcq_exact",
     hint: "L’entrée vient de l’utilisateur ; la sortie est donnée par le programme.",
     explanation:
-      "Définition : une entrée est une information reçue par le programme ; une sortie est une information produite par le programme.\n\n" +
-      "Méthode : on repère ce qui est demandé à l’utilisateur et ce qui est affiché ensuite.\n\n" +
-      "Exécution : “demander” récupère une entrée ; “dire” affiche une sortie.\n\n" +
-      "Conclusion : entrée et sortie sont deux rôles différents dans un programme.",
-    tags: ["algo_programmation", "entree", "sortie", "open", "vocabulaire"],
+      "Définition : une entrée est ce que le programme reçoit ; une sortie est ce qu’il affiche.\n\n" +
+      "Méthode : on cherche le bloc qui montre un résultat à l’écran.\n\n" +
+      "Exécution : « demander » reçoit l’âge : c’est l’entrée. « dire » affiche le résultat : c’est la sortie.\n\n" +
+      "Conclusion : la sortie est donnée par le bloc « dire ».",
+    tags: ["algo_programmation", "entree", "sortie", "qcm", "vocabulaire"],
+    canvas: scratchCanvas("Entrée et sortie", [
+      { type: "event" },
+      { type: "ask", text: "Quel est ton âge ?" },
+      { type: "set_variable", variable: "âge", value: "réponse" },
+      { type: "say", text: "âge + 1" },
+    ]),
   },
     /* =========================
      ALGO_FORMULE_BLOCS
@@ -687,17 +703,18 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_formule_bloc",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment traduire un programme de calcul en formule.",
-    format: "open",
-    expected: ["ordre", "opération", "variable", "formule"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Programme : choisir x, multiplier par 3, puis ajouter 5. Écris la formule du résultat.",
+    format: "short",
+    expected: ["3x + 5", "3 × x + 5"],
+    comparator: "expression_equivalente",
     hint: "Il faut suivre les instructions dans l’ordre.",
     explanation:
-      "Définition : traduire un programme de calcul en formule consiste à écrire les opérations avec une variable.\n\n" +
-      "Méthode : on remplace le nombre de départ par une variable, puis on écrit les opérations dans l’ordre.\n\n" +
-      "Exécution : si le programme dit “multiplier par 3 puis ajouter 5”, on écrit 3 × x + 5.\n\n" +
-      "Conclusion : il faut respecter l’ordre des instructions.",
-    tags: ["algo_programmation", "formule", "open", "methode"],
+      "Définition : traduire un programme en formule, c’est écrire ses calculs avec la lettre x.\n\n" +
+      "Méthode : on part de x et on écrit les opérations dans l’ordre.\n\n" +
+      "Exécution : x multiplié par 3 donne 3 × x. On ajoute 5 : 3 × x + 5, soit 3x + 5.\n\n" +
+      "Conclusion : la formule est 3x + 5 (et pas 3 × (x + 5)).",
+    tags: ["algo_programmation", "formule", "short", "methode"],
   },
     /* =========================
      ALGO_EXPRESSION_VALEUR
@@ -922,17 +939,18 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_expression_valeur",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment calculer la valeur d’une expression contenant une variable.",
-    format: "open",
-    expected: ["remplacer", "variable", "valeur", "calcul"],
-    comparator: "contains_keyword",
-    hint: "Il faut remplacer la variable par le nombre donné.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "x vaut 4. Calcule 3 × x + 2.",
+    format: "short",
+    expected: ["14"],
+    comparator: "number_equal",
+    hint: "Il faut remplacer x par 4.",
     explanation:
-      "Définition : une expression contenant une variable peut prendre différentes valeurs.\n\n" +
-      "Méthode : on remplace la variable par le nombre donné.\n\n" +
-      "Exécution : par exemple, si x = 3, alors x + 5 = 3 + 5 = 8.\n\n" +
-      "Conclusion : il faut remplacer puis calculer.",
-    tags: ["algo_programmation", "expression", "open", "methode"],
+      "Définition : une expression avec une variable change de valeur quand la variable change.\n\n" +
+      "Méthode : on remplace x par le nombre donné, puis on calcule (la multiplication d’abord).\n\n" +
+      "Exécution : 3 × 4 + 2 = 12 + 2 = 14.\n\n" +
+      "Conclusion : l’expression vaut 14.",
+    tags: ["algo_programmation", "expression", "short", "methode"],
   },
     /* =========================
      ALGO_PREVOIR_EXPRESSION
@@ -1146,17 +1164,26 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_prevoir_expression",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique comment prévoir le résultat d’un programme sans l’exécuter.",
-    format: "open",
-    expected: ["ordre", "variable", "calcul", "résultat"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "L’utilisateur répond 6. Quelle valeur le programme affiche-t-il ?",
+    format: "short",
+    expected: ["9"],
+    comparator: "number_equal",
     hint: "Il faut suivre les valeurs étape par étape.",
     explanation:
-      "Définition : prévoir un programme, c’est anticiper son résultat avant de le lancer.\n\n" +
-      "Méthode : on lit les instructions dans l’ordre et on suit les variables.\n\n" +
-      "Exécution : à chaque bloc, on met à jour la valeur concernée.\n\n" +
-      "Conclusion : on peut trouver le résultat final sans exécuter le programme.",
-    tags: ["algo_programmation", "prevoir", "open", "methode"],
+      "Définition : prévoir un programme, c’est trouver son résultat avant de le lancer.\n\n" +
+      "Méthode : on lit les blocs dans l’ordre et on suit la variable.\n\n" +
+      "Exécution : x vaut 6. Puis x × 2 = 12. Puis 12 − 3 = 9.\n\n" +
+      "Conclusion : le programme affiche 9.",
+    tags: ["algo_programmation", "prevoir", "short", "methode"],
+    canvas: scratchCanvas("Prévoir", [
+      { type: "event" },
+      { type: "ask", text: "Choisis un nombre" },
+      { type: "set_variable", variable: "x", value: "réponse" },
+      { type: "set_variable", variable: "x", value: "x × 2" },
+      { type: "change_variable", variable: "x", value: -3 },
+      { type: "say", text: "x" },
+    ]),
   },
     /* =========================
      ALGO_PARAMETRES
@@ -1375,17 +1402,24 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_parametre",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique ce qu’est un paramètre dans un bloc Scratch.",
-    format: "open",
-    expected: ["valeur", "modifier", "bloc", "programme"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Ce programme trace un carré de côté 50. On veut un côté de 80. Quel nombre faut-il changer ?",
+    format: "qcm",
+    choices: ["50", "90", "4"],
+    expected: ["50"],
+    comparator: "mcq_exact",
     hint: "Pense aux nombres dans les blocs avancer, tourner ou répéter.",
     explanation:
-      "Définition : un paramètre est une valeur modifiable dans un bloc.\n\n" +
-      "Méthode : on repère ce qui peut être changé : distance, angle, nombre de répétitions, valeur d’une variable.\n\n" +
-      "Exécution : changer “avancer de 10” en “avancer de 50” change le déplacement.\n\n" +
-      "Conclusion : un paramètre permet d’adapter le comportement du programme.",
-    tags: ["algo_programmation", "parametre", "open", "vocabulaire"],
+      "Définition : un paramètre est un nombre qu’on peut changer dans un bloc.\n\n" +
+      "Méthode : on cherche le bloc qui règle la longueur du côté.\n\n" +
+      "Exécution : 50 est la longueur dans « avancer ». 90 est l’angle, 4 le nombre de côtés.\n\n" +
+      "Conclusion : on remplace 50 par 80 dans « avancer de 50 ».",
+    tags: ["algo_programmation", "parametre", "qcm", "vocabulaire"],
+    canvas: scratchCanvas("Carré", [
+      { type: "event" },
+      { type: "pen", text: "stylo en position d’écriture" },
+      { type: "repeat", times: 4, children: [{ type: "move", value: 50 }, { type: "turn", value: 90 }] },
+    ]),
   },
     /* =========================
      ALGO_TESTS_CONDITIONS
@@ -1643,18 +1677,24 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_test_condition",
     difficulty: 5,
     theme: "neutral",
-    text:
-      "Explique avec tes mots ce qu’est une condition dans un programme Scratch.",
-    format: "open",
-    expected: ["vrai", "faux", "tester", "si"],
-    comparator: "contains_keyword",
-    hint: "Pense au bloc “si ... alors”.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "note vaut 8. Le lutin dit-il « Bravo » ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Regarde si la condition « note > 10 » est vraie.",
     explanation:
-      "Définition : une condition est un test logique.\n\n" +
-      "Méthode : le programme vérifie si quelque chose est vrai ou faux.\n\n" +
-      "Exécution : si la condition est vraie, les blocs à l’intérieur sont exécutés.\n\n" +
-      "Conclusion : une condition permet au programme de prendre une décision.",
-    tags: ["algo_programmation", "condition", "open", "vocabulaire"],
+      "Définition : une condition est un test : elle est vraie ou fausse.\n\n" +
+      "Méthode : on teste la condition avec la valeur de la variable.\n\n" +
+      "Exécution : 8 > 10 est faux. Le bloc « dire Bravo » n’est donc pas exécuté.\n\n" +
+      "Conclusion : non, le lutin ne dit rien.",
+    tags: ["algo_programmation", "condition", "qcm", "vocabulaire"],
+    canvas: scratchCanvas("Condition", [
+      { type: "event" },
+      { type: "set_variable", variable: "note", value: 8 },
+      { type: "if", condition: "note > 10", children: [{ type: "say", text: "Bravo" }] },
+    ]),
   },
     /* =========================
      ALGO_BOUCLE
@@ -1896,17 +1936,22 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_boucle",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi une boucle peut rendre un programme plus court.",
-    format: "open",
-    expected: ["répéter", "instructions", "plus court", "mêmes blocs"],
-    comparator: "contains_keyword",
-    hint: "Pense à un carré : avancer puis tourner plusieurs fois.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Ce programme trace un carré. Sans la boucle, combien de blocs « avancer » et « tourner » faut-il écrire en tout ?",
+    format: "short",
+    expected: ["8"],
+    comparator: "number_equal",
+    hint: "La boucle fait 4 tours, avec 2 blocs à chaque tour.",
     explanation:
-      "Définition : une boucle répète automatiquement des instructions.\n\n" +
-      "Méthode : au lieu d’écrire plusieurs fois les mêmes blocs, on les place dans une boucle.\n\n" +
-      "Exécution : pour tracer un carré, on peut répéter 4 fois “avancer puis tourner”.\n\n" +
-      "Conclusion : la boucle rend le programme plus court et plus lisible.",
-    tags: ["algo_programmation", "boucle", "open", "optimisation"],
+      "Définition : une boucle répète automatiquement des blocs.\n\n" +
+      "Méthode : on compte les blocs d’un tour, puis on multiplie par le nombre de tours.\n\n" +
+      "Exécution : 2 blocs × 4 tours = 8 blocs. Avec la boucle, on n’en écrit que 2.\n\n" +
+      "Conclusion : sans boucle, il faut 8 blocs. La boucle rend le programme plus court.",
+    tags: ["algo_programmation", "boucle", "short", "optimisation"],
+    canvas: scratchCanvas("Carré", [
+      { type: "event" },
+      { type: "repeat", times: 4, children: [{ type: "move", value: 50 }, { type: "turn", value: 90 }] },
+    ]),
   },
 
   /* =========================
@@ -2090,18 +2135,28 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_construire_defi",
     difficulty: 5,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric)
     text:
-      "Explique comment tu peux vérifier qu’un programme Scratch donne le bon résultat.",
-    format: "open",
-    expected: ["tester", "valeur", "étapes", "résultat"],
-    comparator: "contains_keyword",
-    hint: "Tu peux choisir une valeur simple et suivre les blocs un par un.",
+      "Ce programme doit afficher le double du nombre, plus 1 : avec 5, il devrait afficher 11.\nOn tape 5. Quelle valeur affiche-t-il vraiment ?",
+    // Frédéric (08/10) : plus de oui/non (une chance sur deux) → la valeur affichée.
+    format: "short",
+    expected: ["12"],
+    comparator: "number_equal",
+    hint: "Suis les blocs un par un avec x = 5.",
     explanation:
-      "Définition : vérifier un programme consiste à contrôler son résultat.\n\n" +
-      "Méthode : on choisit une valeur d’entrée simple, puis on suit les blocs étape par étape.\n\n" +
-      "Exécution : à chaque instruction, on met à jour la variable ou l’action réalisée.\n\n" +
-      "Conclusion : on compare le résultat obtenu avec le résultat attendu.",
-    tags: ["algo_programmation", "defi", "debug", "open", "methode"],
+      "Définition : vérifier un programme, c’est le tester avec une valeur simple.\n\n" +
+      "Méthode : on suit les blocs un par un, puis on compare avec le résultat attendu.\n\n" +
+      "Exécution : x vaut 5. On ajoute 1 : 6. On multiplie par 2 : 12. Il affiche 12, pas 11.\n\n" +
+      "Conclusion : il affiche 12, pas 11 : les deux blocs de calcul sont dans le mauvais ordre.",
+    tags: ["algo_programmation", "defi", "debug", "qcm", "methode"],
+    canvas: scratchCanvas("Le programme à vérifier", [
+      { type: "event" },
+      { type: "ask", text: "Choisis un nombre" },
+      { type: "set_variable", variable: "x", value: "réponse" },
+      { type: "change_variable", variable: "x", value: 1 },
+      { type: "set_variable", variable: "x", value: "x × 2" },
+      { type: "say", text: "x" },
+    ]),
   },
 
   /* =========================
@@ -2173,18 +2228,26 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_sequence",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique ce qu’est une séquence d’instructions.",
-    format: "open",
-    expected: ["suite", "ordre", "instructions"],
-    comparator: "contains_keyword",
-    hint: "Pense à une recette.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "x vaut 10. Le programme ajoute 5 à x, puis enlève 3 à x. Quelle valeur affiche-t-il ?",
+    format: "short",
+    expected: ["12"],
+    comparator: "number_equal",
+    hint: "Fais les blocs l’un après l’autre.",
     explanation: expl(
-      "une séquence est une suite d’instructions.",
-      "on exécute chaque instruction l’une après l’autre.",
-      "comme une recette, on suit les blocs dans l’ordre, de haut en bas.",
-      "une séquence est une suite d’instructions exécutées dans l’ordre."
+      "une séquence est une suite d’instructions faites l’une après l’autre.",
+      "on suit les blocs dans l’ordre, de haut en bas.",
+      "10 + 5 = 15, puis 15 − 3 = 12.",
+      "le programme affiche 12."
     ),
-    tags: ["algo_programmation", "sequence", "open"],
+    tags: ["algo_programmation", "sequence", "short"],
+    canvas: scratchCanvas("Séquence", [
+      { type: "event" },
+      { type: "set_variable", variable: "x", value: 10 },
+      { type: "change_variable", variable: "x", value: 5 },
+      { type: "change_variable", variable: "x", value: -3 },
+      { type: "say", text: "x" },
+    ]),
   },
   {
     kind: "template",
@@ -2362,18 +2425,26 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_formule_bloc",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment traduire la formule « aire = longueur × largeur » avec des blocs.",
-    format: "open",
-    expected: ["opérateur", "multiplier", "longueur"],
-    comparator: "contains_keyword",
-    hint: "On utilise un bloc opérateur ×.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "longueur vaut 7 et largeur vaut 4. Le programme met aire à longueur × largeur. Quelle valeur affiche-t-il ?",
+    format: "short",
+    expected: ["28"],
+    comparator: "number_equal",
+    hint: "Le bloc opérateur × multiplie les deux variables.",
     explanation: expl(
-      "une formule se traduit par un assemblage de blocs opérateurs.",
-      "on relie les variables avec l’opérateur de la formule.",
-      "on place “longueur × largeur” dans un bloc opérateur de multiplication.",
-      "l’aire est donnée par le bloc “longueur × largeur”."
+      "une formule se traduit par un bloc opérateur.",
+      "on remplace chaque variable par sa valeur dans le bloc « longueur × largeur ».",
+      "7 × 4 = 28.",
+      "le programme affiche 28."
     ),
-    tags: ["algo_programmation", "formule", "open"],
+    tags: ["algo_programmation", "formule", "short"],
+    canvas: scratchCanvas("Aire d’un rectangle", [
+      { type: "event" },
+      { type: "set_variable", variable: "longueur", value: 7 },
+      { type: "set_variable", variable: "largeur", value: 4 },
+      { type: "set_variable", variable: "aire", value: "longueur × largeur" },
+      { type: "say", text: "aire" },
+    ]),
   },
   {
     kind: "template",
@@ -2555,18 +2626,25 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_prevoir_expression",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment prévoir la valeur affichée par un programme qui calcule x + 10.",
-    format: "open",
-    expected: ["valeur", "x", "remplace"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Le programme demande x, puis affiche x + 10. L’utilisateur répond 25. Quelle valeur s’affiche ?",
+    format: "short",
+    expected: ["35"],
+    comparator: "number_equal",
     hint: "On remplace x par la valeur saisie.",
     explanation: expl(
       "prévoir, c’est calculer le résultat à l’avance.",
-      "on remplace la variable par la valeur d’entrée.",
-      "on calcule x + 10 avec la valeur de x choisie.",
-      "le résultat affiché est x + 10 pour la valeur de x donnée."
+      "on remplace x par la réponse de l’utilisateur.",
+      "25 + 10 = 35.",
+      "le programme affiche 35."
     ),
-    tags: ["algo_programmation", "prevoir", "expression", "open"],
+    tags: ["algo_programmation", "prevoir", "expression", "short"],
+    canvas: scratchCanvas("x + 10", [
+      { type: "event" },
+      { type: "ask", text: "Choisis un nombre" },
+      { type: "set_variable", variable: "x", value: "réponse" },
+      { type: "say", text: "x + 10" },
+    ]),
   },
   {
     kind: "template",
@@ -2639,18 +2717,23 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_parametre",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique à quoi sert un paramètre dans un bloc Scratch.",
-    format: "open",
-    expected: ["valeur", "modifier", "bloc"],
-    comparator: "contains_keyword",
-    hint: "Il permet d’adapter le comportement du bloc.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Dans ce programme, on change « avancer de 30 » en « avancer de 50 ». De combien de pas le lutin avance-t-il en tout ?",
+    format: "short",
+    expected: ["150 pas", "150"],
+    comparator: "number_equal",
+    hint: "La boucle fait 3 tours avec le nouveau paramètre.",
     explanation: expl(
-      "un paramètre est une valeur que l’on peut régler dans un bloc.",
-      "on change le paramètre pour adapter l’action.",
-      "par exemple, changer la distance d’“avancer de …” modifie le déplacement.",
-      "le paramètre permet de modifier le comportement du bloc."
+      "un paramètre est un nombre que l’on peut régler dans un bloc.",
+      "on garde la boucle et on utilise le nouveau nombre : 50.",
+      "3 × 50 = 150.",
+      "le lutin avance de 150 pas en tout."
     ),
-    tags: ["algo_programmation", "parametre", "open"],
+    tags: ["algo_programmation", "parametre", "short"],
+    canvas: scratchCanvas("Avancer", [
+      { type: "event" },
+      { type: "repeat", times: 3, children: [{ type: "move", value: 30 }] },
+    ]),
   },
   {
     kind: "template",
@@ -2726,18 +2809,25 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_test_condition",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique ce que fait un bloc “si … alors” en Scratch.",
-    format: "open",
-    expected: ["condition", "vraie", "exécute"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "score vaut 15. Quelle valeur le programme affiche-t-il ?",
+    format: "short",
+    expected: ["15"],
+    comparator: "number_equal",
     hint: "Le bloc à l’intérieur ne s’exécute pas toujours.",
     explanation: expl(
-      "le bloc “si … alors” teste une condition.",
-      "on regarde si la condition est vraie ou fausse.",
-      "si la condition est vraie, les blocs à l’intérieur s’exécutent ; sinon ils sont ignorés.",
-      "le bloc “si” exécute son contenu seulement quand la condition est vraie."
+      "le bloc « si … alors » teste une condition.",
+      "si la condition est vraie, on fait les blocs à l’intérieur ; sinon on les saute.",
+      "15 > 20 est faux : on n’ajoute pas 10. score reste à 15.",
+      "le programme affiche 15 (et pas 25)."
     ),
-    tags: ["algo_programmation", "condition", "open"],
+    tags: ["algo_programmation", "condition", "short"],
+    canvas: scratchCanvas("Si … alors", [
+      { type: "event" },
+      { type: "set_variable", variable: "score", value: 15 },
+      { type: "if", condition: "score > 20", children: [{ type: "change_variable", variable: "score", value: 10 }] },
+      { type: "say", text: "score" },
+    ]),
   },
   {
     kind: "template",
@@ -2815,18 +2905,23 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_boucle",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique l’avantage d’utiliser une boucle plutôt que de répéter les blocs à la main.",
-    format: "open",
-    expected: ["répéter", "court", "blocs"],
-    comparator: "contains_keyword",
-    hint: "Pense à la longueur du programme.",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Ce programme trace un hexagone. Sans la boucle, combien de blocs « avancer » et « tourner » faut-il écrire en tout ?",
+    format: "short",
+    expected: ["12"],
+    comparator: "number_equal",
+    hint: "La boucle fait 6 tours, avec 2 blocs à chaque tour.",
     explanation: expl(
-      "une boucle factorise des instructions répétées.",
-      "on compare un programme avec et sans boucle.",
-      "la boucle évite d’écrire plusieurs fois les mêmes blocs : le programme est plus court et plus clair.",
-      "la boucle rend le programme plus court à écrire."
+      "une boucle répète des blocs à notre place.",
+      "on compte les blocs d’un tour, puis on multiplie par le nombre de tours.",
+      "2 blocs × 6 tours = 12 blocs. Avec la boucle, on n’en écrit que 2.",
+      "sans boucle, il faut 12 blocs : la boucle rend le programme plus court."
     ),
-    tags: ["algo_programmation", "boucle", "open"],
+    tags: ["algo_programmation", "boucle", "short"],
+    canvas: scratchCanvas("Hexagone", [
+      { type: "event" },
+      { type: "repeat", times: 6, children: [{ type: "move", value: 40 }, { type: "turn", value: 60 }] },
+    ]),
   },
   {
     kind: "template",
@@ -2954,18 +3049,25 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_construire_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève dit : « Une boucle qui répète 0 fois exécute quand même les blocs une fois ». Explique son erreur.",
-    format: "open",
-    expected: ["0", "aucune", "exécute"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "score vaut 5. Le programme répète 0 fois « ajouter 2 à score ». Quelle valeur affiche-t-il ?",
+    format: "short",
+    expected: ["5"],
+    comparator: "number_equal",
     hint: "Combien de fois répète-t-on si le nombre est 0 ?",
     explanation: expl(
-      "une boucle “répéter n fois” exécute les blocs exactement n fois.",
+      "une boucle « répéter n fois » fait ses blocs exactement n fois.",
       "on remplace n par 0.",
-      "répéter 0 fois signifie n’exécuter aucune fois les blocs.",
-      "l’élève se trompe : avec 0, les blocs ne sont pas exécutés."
+      "répéter 0 fois, c’est ne jamais ajouter 2. score reste à 5.",
+      "le programme affiche 5 (et pas 7)."
     ),
-    tags: ["algo_programmation", "defi", "boucle", "open", "erreur"],
+    tags: ["algo_programmation", "defi", "boucle", "short", "erreur"],
+    canvas: scratchCanvas("Répéter 0 fois", [
+      { type: "event" },
+      { type: "set_variable", variable: "score", value: 5 },
+      { type: "repeat", times: 0, children: [{ type: "change_variable", variable: "score", value: 2 }] },
+      { type: "say", text: "score" },
+    ]),
   },
   {
     kind: "template",
@@ -3017,18 +3119,27 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment on peut prévoir le résultat d’un programme sans le lancer.",
-    format: "open",
-    expected: ["ligne", "instruction", "une par une", "variable", "suit", "tableau"],
-    comparator: "contains_keyword",
-    hint: "Que fais-tu de la valeur des variables à chaque étape ?",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "a vaut 2 et b vaut 5. Le programme met a à a + b, puis met b à a × 2. Que vaut b à la fin ?",
+    format: "short",
+    expected: ["14"],
+    comparator: "number_equal",
+    hint: "Note la valeur de a et de b après chaque bloc.",
     explanation: expl(
-      "prévoir un programme, c’est l’exécuter dans sa tête avant la machine.",
-      "on lit les instructions une par une, dans l’ordre, en notant la valeur de chaque variable après chaque ligne.",
-      "on tient une sorte de tableau : une colonne par variable, une ligne par instruction. À la fin du tableau, on lit le résultat.",
-      "on connaît le résultat avant de cliquer, et on sait où regarder si la machine dit autre chose.",
+      "prévoir un programme, c’est le faire dans sa tête avant la machine.",
+      "on lit les blocs un par un, et on note la valeur de chaque variable après chaque bloc.",
+      "a = 2 + 5 = 7. Puis b = 7 × 2 = 14 : on prend la NOUVELLE valeur de a.",
+      "b vaut 14 à la fin (et pas 4)."
     ),
-    tags: ["algo_programmation", "defi", "open", "methode"],
+    tags: ["algo_programmation", "defi", "short", "methode"],
+    canvas: scratchCanvas("Suivre deux variables", [
+      { type: "event" },
+      { type: "set_variable", variable: "a", value: 2 },
+      { type: "set_variable", variable: "b", value: 5 },
+      { type: "set_variable", variable: "a", value: "a + b" },
+      { type: "set_variable", variable: "b", value: "a × 2" },
+      { type: "say", text: "b" },
+    ]),
   },
   {
     kind: "fixed",
@@ -3039,10 +3150,12 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Un programme fait : mettre nombre à 5, puis « ajouter 3 à nombre » répété 4 fois. Un élève annonce 8. Explique son erreur.",
-    format: "open",
-    expected: ["une seule fois", "quatre fois", "4 fois", "répète", "repete", "17"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "nombre vaut 5. Le programme répète 4 fois « ajouter 3 à nombre ». Un élève annonce 8. Quel est le bon résultat ?",
+    format: "qcm",
+    choices: ["17", "8", "12", "32"],
+    expected: ["17"],
+    comparator: "mcq_exact",
     hint: "Combien de fois l’instruction « ajouter 3 » est-elle exécutée ?",
     explanation: expl(
       "une boucle « répéter n fois » exécute son contenu n fois, pas une seule.",
@@ -3050,7 +3163,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       "l’élève n’a compté qu’un seul ajout : 5 + 3 = 8. Or l’instruction tourne 4 fois : 5 + 3 + 3 + 3 + 3 = 5 + 12 = 17.",
       "la variable nombre vaut 17 à la fin, pas 8.",
     ),
-    tags: ["algo_programmation", "defi", "open", "piege", "boucle"],
+    tags: ["algo_programmation", "defi", "qcm", "piege", "boucle"],
     canvas: scratchCanvas("Le compte est bon ?", [
       { type: "event" },
       { type: "set_variable", variable: "nombre", value: 5 },
@@ -3068,17 +3181,28 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     difficulty: 5,
     theme: "neutral",
     hint: "Dis combien de fois la boucle tourne, puis ce que ça ajoute en tout.",
-    tags: ["algo_programmation", "defi", "open", "template"],
+    tags: ["algo_programmation", "defi", "qcm", "template"],
+    // 08/10/2026 : précise et simple (Frédéric). QCM dont les leurres sont les
+    // vraies erreurs : un seul tour (début + ajout), oubli du départ (ajout × tours),
+    // départ compté à chaque tour ((début + ajout) × tours).
     generate: () => {
-      const debut = randomChoice([2, 4, 5, 10]);
-      const ajout = randomChoice([2, 3, 5, 6]);
-      const times = randomChoice([3, 4, 5, 6]);
+      let debut = randomChoice([2, 4, 5, 10]);
+      let ajout = randomChoice([2, 3, 5, 6]);
+      let times = randomChoice([3, 4, 5, 6]);
+      // Seule collision possible entre leurres : début + ajout = ajout × tours.
+      while (debut + ajout === ajout * times) {
+        debut = randomChoice([2, 4, 5, 10]);
+        ajout = randomChoice([2, 3, 5, 6]);
+        times = randomChoice([3, 4, 5, 6]);
+      }
       const final = debut + ajout * times;
+      const pieges = [debut + ajout, ajout * times, (debut + ajout) * times].map(String);
       return {
-        text: `La variable total vaut ${debut}. Le programme répète ${times} fois « ajouter ${ajout} à total ». Explique comment tu trouves la valeur finale sans lancer le programme.`,
-        format: "open",
-        expected: [String(ajout * times), "fois", "multipli", "ajoute", String(final)],
-        comparator: "contains_keyword",
+        text: `La variable total vaut ${debut}. Le programme répète ${times} fois « ajouter ${ajout} à total ». Quelle valeur affiche-t-il ?`,
+        format: "qcm",
+        choices: shuffle([String(final), ...pieges]),
+        expected: [String(final)],
+        comparator: "mcq_exact",
         explanation: expl(
           "une boucle répète son contenu un nombre connu de fois.",
           "on calcule d’abord l’augmentation totale, puis on l’ajoute à la valeur de départ.",

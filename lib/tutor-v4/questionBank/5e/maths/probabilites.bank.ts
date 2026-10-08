@@ -204,17 +204,15 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_vocabulaire",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique avec tes mots ce qu’est une expérience aléatoire.",
-    format: "open",
-    expected: ["résultat", "avance", "hasard"],
-    comparator: "contains_keyword",
-    hint: "On ne peut pas savoir avec certitude le résultat avant de faire l’expérience.",
-    explanation:
-      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
-          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
-          ("Une expérience aléatoire est une expérience dont on ne connaît pas le résultat à l’avance.") +
-          "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["proba_experience", "vocabulaire", "open"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique avec tes mots ce qu’est une expérience aléatoire ».
+    text: "Laquelle de ces expériences est aléatoire ?",
+    format: "qcm",
+    choices: ["lancer une pièce", "compter les élèves de la classe", "mesurer sa table", "peser un sac de 1 kg"],
+    expected: ["lancer une pièce"],
+    comparator: "mcq_exact",
+    hint: "Aléatoire : on ne peut pas savoir le résultat à l’avance.",
+    explanation: expl("Quand on lance une pièce, on ne sait pas à l’avance si on aura pile ou face : c’est le hasard. Compter, mesurer, peser donnent un résultat qu’on peut retrouver à chaque fois."),
+    tags: ["proba_experience", "vocabulaire", "qcm"],
   },
   {
     kind: "fixed",
@@ -225,17 +223,15 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_vocabulaire",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique la différence entre une issue et un événement.",
-    format: "open",
-    expected: ["issue", "résultat", "événement", "plusieurs"],
-    comparator: "contains_keyword",
-    hint: "Une issue est un résultat possible ; un événement peut contenir une ou plusieurs issues.",
-    explanation:
-      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
-          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
-          ("Une issue est un résultat possible. Un événement est une condition qui peut regrouper une ou plusieurs issues.") +
-          "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["proba_experience", "vocabulaire", "open"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique la différence entre une issue et un événement ».
+    text: "On lance un dé. Combien d’issues réalisent l’événement « obtenir un nombre impair » ?",
+    format: "short",
+    expected: ["3"],
+    comparator: "number_equal",
+    hint: "Écris les nombres impairs du dé.",
+    explanation: expl("Les nombres impairs du dé sont 1, 3 et 5. L’événement « obtenir un nombre impair » regroupe donc 3 issues."),
+    tags: ["proba_experience", "vocabulaire", "short"],
+    canvas: deCanvas([1, 3, 5]),
   },
 
   // =========================
@@ -346,17 +342,14 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_issue",
     difficulty: 2,
     theme: "neutral",
-    text: "On lance un dé équilibré. Explique pourquoi il y a 6 issues possibles.",
-    format: "open",
-    expected: ["1", "2", "3", "4", "5", "6"],
-    comparator: "contains_keyword",
-    hint: "Liste les résultats possibles du dé.",
-    explanation:
-      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
-          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
-          ("Les issues possibles sont 1, 2, 3, 4, 5 et 6. Il y a donc 6 issues possibles.") +
-          "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["proba_experience", "issue", "open"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi il y a 6 issues possibles » (dé).
+    text: "On fait tourner une roue numérotée de 1 à 8. Combien y a-t-il d’issues possibles ?",
+    format: "short",
+    expected: ["8"],
+    comparator: "number_equal",
+    hint: "Liste les numéros possibles.",
+    explanation: expl("La roue peut s’arrêter sur 1, 2, 3, 4, 5, 6, 7 ou 8. Il y a donc 8 issues possibles."),
+    tags: ["proba_experience", "issue", "short"],
     canvas: deCanvas(),
   },
   {
@@ -485,17 +478,15 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_equiprobabilite",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi une roue avec 3 secteurs rouges et 1 secteur bleu n’est pas équiprobable.",
-    format: "open",
-    expected: ["rouge", "bleu", "3", "1", "même chance"],
-    comparator: "contains_keyword",
-    hint: "Les couleurs ne sont pas présentes en même quantité.",
-    explanation:
-      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
-          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
-          ("Le rouge apparaît 3 fois et le bleu 1 fois. Les deux couleurs n’ont pas la même chance d’être obtenues.") +
-          "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["proba_experience", "equiprobabilite", "open", "raisonnement"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi une roue 3 rouges / 1 bleu n’est pas équiprobable ».
+    text: "La roue a 3 secteurs rouges et 1 secteur bleu, tous de même taille. Quelle couleur a le plus de chances de sortir ?",
+    format: "qcm",
+    choices: ["Rouge", "Bleu", "autant l’une que l’autre"],
+    expected: ["Rouge"],
+    comparator: "mcq_exact",
+    hint: "Compte les secteurs de chaque couleur.",
+    explanation: expl("Le rouge occupe 3 secteurs sur 4, le bleu 1 seul. Rouge a plus de chances de sortir : la roue n’est pas équiprobable."),
+    tags: ["proba_experience", "equiprobabilite", "qcm", "raisonnement"],
     canvas: roueCanvas([
       { label: "Rouge", poids: 3, couleur: couleurs.rouge },
       { label: "Bleu", poids: 1, couleur: couleurs.bleu },
@@ -677,18 +668,15 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_calculer",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi la probabilité d’obtenir un nombre pair avec un dé équilibré est $\\dfrac{3}{6}$.",
-    format: "open",
-    expected: ["2", "4", "6", "3", "6"],
-    comparator: "contains_keyword",
-    hint: "Compte les nombres pairs, puis le nombre total d’issues.",
-    explanation:
-      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
-          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
-          ("Les nombres pairs sont 2, 4 et 6 : il y a 3 issues favorables sur 6 issues possibles. La probabilité est donc 3/6.") +
-          "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["proba_experience", "calcul", "de", "open"],
-    canvas: deCanvas([2, 4, 6]),
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi P(nombre pair) = 3/6 ».
+    text: "On lance un dé équilibré. Quelle est la probabilité d’obtenir un nombre impair ?",
+    format: "short",
+    expected: ["3/6", "1/2", "0,5"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "Compte les nombres impairs, puis le nombre total d’issues.",
+    explanation: expl("Les nombres impairs sont 1, 3 et 5 : 3 issues favorables sur 6 issues possibles. La probabilité est 3/6 = 1/2."),
+    tags: ["proba_experience", "calcul", "de", "short"],
+    canvas: deCanvas([1, 3, 5]),
   },
   {
     kind: "template",
@@ -805,17 +793,15 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève dit : « Sur un dé, obtenir un nombre pair a une probabilité de $\\dfrac{2}{6}$ car il y a le mot pair. » Explique son erreur.",
-    format: "open",
-    expected: ["2", "4", "6", "3/6", "erreur"],
-    comparator: "contains_keyword",
-    hint: "Il faut compter les issues favorables.",
-    explanation:
-      "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
-          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
-          ("Les issues favorables sont 2, 4 et 6 : il y en a 3. La probabilité est donc 3/6, pas 2/6.") +
-          "\n\nConclusion : la probabilité obtenue répond à la question.",
-    tags: ["proba_experience", "defi", "open", "erreur", "piege"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « … 2/6 car il y a le mot pair. Explique son erreur. »
+    text: "Un élève dit : « Avec un dé, la probabilité d’obtenir un nombre pair est 2/6. » Quelle est la bonne probabilité ?",
+    format: "qcm",
+    choices: ["3/6", "2/6", "1/6", "6/3"],
+    expected: ["3/6"],
+    comparator: "mcq_exact",
+    hint: "Compte les nombres pairs du dé : 2, 4, …",
+    explanation: expl("Les nombres pairs du dé sont 2, 4 et 6 : il y en a 3, pas 2. La probabilité est 3/6."),
+    tags: ["proba_experience", "defi", "qcm", "erreur", "piege"],
     canvas: deCanvas([2, 4, 6]),
   },
   {
@@ -944,24 +930,41 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_defi",
     difficulty: 5,
     theme: "neutral",
-    hint: "Compare les poids des secteurs.",
-    tags: ["proba_experience", "roue", "defi", "open", "template"],
+    hint: "Compte les secteurs de chaque couleur.",
+    tags: ["proba_experience", "roue", "defi", "template"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi Rouge est l’issue la plus
+    // probable sur cette roue » (toujours la même roue). Désormais : nombres de secteurs tirés,
+    // et soit la couleur la plus probable (QCM), soit la probabilité d’une couleur (réponse courte).
     generate: () => {
+      const noms = ["Rouge", "Bleu", "Vert"] as const;
+      const teintes = [couleurs.rouge, couleurs.bleu, couleurs.vert];
+      // Trois nombres distincts : une seule couleur est la plus probable.
+      const ns = shuffle([randomInt(4, 5), randomInt(2, 3), 1]);
+      const total = ns[0] + ns[1] + ns[2];
+      const decrire = `La roue a ${total} secteurs de même taille : ${ns[0]} rouge(s), ${ns[1]} bleu(s), ${ns[2]} vert(s).`;
+      const canvas = roueCanvas(noms.map((label, i) => ({ label, poids: ns[i], couleur: teintes[i] })));
+      if (Math.random() < 0.5) {
+        const iMax = ns.indexOf(Math.max(...ns));
+        return {
+          text: `${decrire} Quelle couleur a le plus de chances de sortir ?`,
+          format: "qcm" as const,
+          choices: [...noms],
+          expected: [noms[iMax]],
+          comparator: "mcq_exact" as const,
+          explanation: expl(`${noms[iMax]} occupe ${ns[iMax]} secteurs sur ${total} : c’est la couleur qui a le plus de secteurs, donc le plus de chances de sortir.`),
+          canvas,
+        };
+      }
+      const i = randomInt(0, 2);
+      const bonne = rawFraction(ns[i], total);
+      const reduite = fraction(ns[i], total);
       return {
-        text: "Explique pourquoi Rouge est l’issue la plus probable sur cette roue.",
-        format: "open",
-        expected: ["rouge", "poids", "plus grand"],
-        comparator: "contains_keyword",
-        explanation:
-          "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
-          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
-          ("Le secteur Rouge a un poids 3, alors que Bleu et Vert ont chacun un poids 1. Rouge occupe donc la plus grande partie de la roue.") +
-          "\n\nConclusion : la probabilité obtenue répond à la question.",
-        canvas: roueCanvas([
-          { label: "Rouge", poids: 3, couleur: couleurs.rouge },
-          { label: "Bleu", poids: 1, couleur: couleurs.bleu },
-          { label: "Vert", poids: 1, couleur: couleurs.vert },
-        ]),
+        text: `${decrire} Quelle est la probabilité d’obtenir ${noms[i]} ?`,
+        format: "short" as const,
+        expected: bonne === reduite ? [bonne] : [bonne, reduite],
+        comparator: "fraction_decimal_equivalent" as const,
+        explanation: expl(`${noms[i]} occupe ${ns[i]} secteur(s) sur ${total}. La probabilité est ${bonne}${bonne === reduite ? "" : ` = ${reduite}`}.`),
+        canvas,
       };
     },
   },
@@ -1048,13 +1051,15 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_vocabulaire",
     difficulty: 3,
     theme: "neutral",
-    text: "Pourquoi dit-on qu’une expérience est aléatoire ? Donne un exemple.",
-    format: "open",
-    expected: ["hasard", "prévoir", "prevoir", "avance", "sait pas", "plusieurs"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Pourquoi dit-on qu’une expérience est aléatoire ? Donne un exemple. »
+    text: "Avant de lancer un dé, peut-on savoir quelle face va sortir ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
     hint: "Pense à ce qu’on peut dire, ou pas, AVANT de lancer.",
-    explanation: expl("Une expérience est aléatoire quand on connaît tous les résultats possibles, mais qu’on ne peut pas prévoir à l’avance lequel sortira : c’est le hasard qui décide. Lancer un dé, tirer une bille dans un sac : à chaque fois, plusieurs résultats sont possibles."),
-    tags: ["proba_experience", "vocabulaire", "open"],
+    explanation: expl("Non. On connaît les 6 faces possibles, mais on ne peut pas savoir laquelle sortira : c’est le hasard qui décide. C’est pour cela que lancer un dé est une expérience aléatoire."),
+    tags: ["proba_experience", "vocabulaire", "qcm"],
   },
 
   // =========================
@@ -1105,13 +1110,18 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_issue",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique la différence entre une issue favorable et une issue possible.",
-    format: "open",
-    expected: ["favorable", "possible", "événement"],
-    comparator: "contains_keyword",
-    hint: "Les favorables réalisent l’événement.",
-    explanation: expl("Les issues possibles sont tous les résultats de l’expérience. Les issues favorables sont celles qui réalisent l’événement demandé."),
-    tags: ["proba_experience", "issue", "open"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique la différence entre une issue favorable et une issue possible ».
+    text: "Un sac contient 3 billes rouges et 5 billes bleues. On tire une bille. Combien y a-t-il d’issues favorables à « tirer une bille rouge » ?",
+    format: "short",
+    expected: ["3"],
+    comparator: "number_equal",
+    hint: "Favorables : seulement les billes rouges.",
+    explanation: expl("Les issues possibles sont les 8 billes du sac. Les issues favorables sont les billes rouges : il y en a 3."),
+    tags: ["proba_experience", "issue", "short"],
+    canvas: billesCanvas([
+      ...Array.from({ length: 3 }, () => ({ couleur: couleurs.rouge, label: "R" })),
+      ...Array.from({ length: 5 }, () => ({ couleur: couleurs.bleu, label: "B" })),
+    ]),
   },
   {
     kind: "template",
@@ -1211,13 +1221,15 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_equiprobabilite",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique ce que signifie « équiprobable ».",
-    format: "open",
-    expected: ["même", "chance", "issues"],
-    comparator: "contains_keyword",
-    hint: "Toutes les issues...",
-    explanation: expl("Une situation est équiprobable quand toutes les issues ont la même chance de se produire."),
-    tags: ["proba_experience", "equiprobabilite", "open"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique ce que signifie « équiprobable » ».
+    text: "Un sac contient 2 billes rouges et 2 billes bleues. Rouge et bleu ont-ils la même chance d’être tirés ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Compte les billes de chaque couleur.",
+    explanation: expl("Il y a autant de rouges que de bleues : 2 et 2. Rouge et bleu ont la même chance, 2/4 chacun : on dit qu’ils sont équiprobables."),
+    tags: ["proba_experience", "equiprobabilite", "qcm"],
   },
   {
     kind: "template",
@@ -1351,13 +1363,18 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève dit : « La probabilité de tirer une bille rouge est 4 ». Explique pourquoi c’est impossible.",
-    format: "open",
-    expected: ["0", "1", "probabilité"],
-    comparator: "contains_keyword",
-    hint: "Une probabilité a des bornes.",
-    explanation: expl("Une probabilité est toujours comprise entre 0 et 1. La valeur 4 est impossible : l’élève a sûrement donné un effectif, pas une probabilité."),
-    tags: ["proba_experience", "defi", "open", "erreur"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « … est 4. Explique pourquoi c’est impossible. »
+    text: "Un sac contient 4 billes rouges et 6 billes bleues. Quelle est la probabilité de tirer une bille rouge ?",
+    format: "short",
+    expected: ["4/10", "2/5", "0,4"],
+    comparator: "fraction_decimal_equivalent",
+    hint: "Une probabilité est entre 0 et 1 : ce n’est pas 4.",
+    explanation: expl("Il y a 4 billes rouges sur 4 + 6 = 10 billes. La probabilité est 4/10 = 0,4. Répondre « 4 », c’est donner le nombre de billes rouges, pas la probabilité."),
+    tags: ["proba_experience", "defi", "short", "erreur"],
+    canvas: billesCanvas([
+      ...Array.from({ length: 4 }, () => ({ couleur: couleurs.rouge, label: "R" })),
+      ...Array.from({ length: 6 }, () => ({ couleur: couleurs.bleu, label: "B" })),
+    ]),
   },
   {
     kind: "template",
@@ -1456,7 +1473,9 @@ export const probabilitesBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     hint: "Demande-toi si la chose peut arriver jamais, toujours, ou parfois.",
-    tags: ["proba_experience", "vocabulaire", "open", "template"],
+    tags: ["proba_experience", "vocabulaire", "qcm", "template"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « … certain, impossible, ou ni l’un ni l’autre ? Explique. »
+    // corrigé par un mot-clé. Désormais un QCM à trois réponses, et deux cas « ni l’un ni l’autre ».
     generate: () => {
       const cas = randomChoice([
         {
@@ -1483,14 +1502,29 @@ export const probabilitesBank: TutorBankItemV4[] = [
           proba: "1",
           pourquoi: "la pièce retombe forcément sur l’une des deux faces.",
         },
+        {
+          phrase: "obtenir 6 en lançant un dé à six faces",
+          nature: "ni l’un ni l’autre",
+          proba: "1/6",
+          pourquoi: "le 6 peut sortir, mais pas à coup sûr : une issue sur six convient.",
+        },
+        {
+          phrase: "tirer une bille rouge dans un sac de 2 billes rouges et 3 billes bleues",
+          nature: "ni l’un ni l’autre",
+          proba: "2/5",
+          pourquoi: "une bille rouge peut sortir, mais une bleue aussi : 2 issues sur 5 conviennent.",
+        },
       ]);
       return {
-        text: `L’événement « ${cas.phrase} » est-il certain, impossible, ou ni l’un ni l’autre ? Explique.`,
-        format: "open",
-        expected: [cas.nature, cas.proba, "aucune", "toutes"],
-        comparator: "contains_keyword",
+        text: `L’événement « ${cas.phrase} » est-il certain, impossible, ou ni l’un ni l’autre ?`,
+        format: "qcm",
+        choices: ["certain", "impossible", "ni l’un ni l’autre"],
+        expected: [cas.nature],
+        comparator: "mcq_exact",
         explanation: expl(
-          `Cet événement est ${cas.nature} : ${cas.pourquoi} Sa probabilité vaut donc ${cas.proba}.`,
+          cas.nature === "ni l’un ni l’autre"
+            ? `Ni l’un ni l’autre : ${cas.pourquoi} Sa probabilité vaut ${cas.proba}, entre 0 et 1.`
+            : `Cet événement est ${cas.nature} : ${cas.pourquoi} Sa probabilité vaut donc ${cas.proba}.`,
         ),
       };
     },

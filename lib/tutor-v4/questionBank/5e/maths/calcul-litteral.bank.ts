@@ -1,10 +1,6 @@
 //calcul-litteral.bank.ts
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 
-function shuffle<T>(arr: T[]): T[] {
-  return [...arr].sort(() => Math.random() - 0.5);
-}
-
 function randomChoice<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -39,10 +35,11 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_expression_comprendre",
     difficulty: 1,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric)
     text: "Dans l’expression 3x + 2, quelle lettre représente un nombre ?",
     format: "short",
     expected: ["x"],
-    comparator: "contains_keyword",
+    comparator: "exact_text",
     hint: "La lettre sert à représenter un nombre que l’on ne connaît pas encore.",
     explanation:
       "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
@@ -60,17 +57,16 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_expression_comprendre",
     difficulty: 1,
     theme: "neutral",
-    text: "Dans l’écriture 5a, que signifie le 5 ?",
-    format: "short",
-    expected: ["multiplie", "fois", "coefficient"],
-    comparator: "contains_keyword",
-    hint: "5a veut dire 5 multiplié par a.",
-    explanation:
-      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
-          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
-          ("Dans 5a, le 5 est le coefficient : il signifie que l’on multiplie a par 5.") +
-          "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["litteral_calcul", "expression"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « que signifie le 5 ? »
+    // (un mot-clé). Leurres : 5 + 3 (addition) et « 53 » (chiffres collés).
+    text: "On prend a = 3. Combien vaut 5a ?",
+    format: "qcm",
+    choices: ["8", "15", "53"],
+    expected: ["15"],
+    comparator: "mcq_exact",
+    hint: "5a veut dire 5 × a.",
+    explanation: expl("5a veut dire 5 × a. Pour a = 3 : 5 × 3 = 15. Le 5 multiplie a."),
+    tags: ["litteral_calcul", "expression", "qcm"],
   },
   {
     kind: "fixed",
@@ -81,10 +77,12 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_expression_comprendre",
     difficulty: 1,
     theme: "neutral",
-    text: "L’écriture 2x signifie-t-elle 2 + x ou 2 × x ?",
-    format: "short",
-    expected: ["2 × x", "2x", "2*x", "2 fois x", "2 multiplié par x"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric)
+    text: "Que veut dire l’écriture 2x ?",
+    format: "qcm",
+    choices: ["2 + x", "2 × x"],
+    expected: ["2 × x"],
+    comparator: "mcq_exact",
     hint: "Quand un nombre est collé à une lettre, cela signifie une multiplication.",
     explanation:
       "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
@@ -177,8 +175,9 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Traduis par une expression littérale : « un nombre x augmenté de 3 »",
     format: "short",
-    expected: ["x+3", "x + 3"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric) — l'expression est comparée, plus un mot-clé.
+    expected: ["x + 3"],
+    comparator: "expression_reduite",
     hint: "« augmenté de 3 » correspond à + 3.",
     explanation:
       "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
@@ -198,8 +197,9 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Traduis par une expression littérale : « le double de x »",
     format: "short",
-    expected: ["2x", "2*x", "2 x"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric) — l'expression est comparée, plus un mot-clé.
+    expected: ["2x"],
+    comparator: "expression_reduite",
     hint: "Le double signifie multiplier par 2.",
     explanation:
       "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
@@ -219,8 +219,9 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Traduis par une expression littérale : « 5 de plus que y »",
     format: "short",
-    expected: ["y+5", "y + 5"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric) — l'expression est comparée, plus un mot-clé.
+    expected: ["y + 5"],
+    comparator: "expression_reduite",
     hint: "« de plus que y » signifie qu’on ajoute 5 à y.",
     explanation:
       "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
@@ -240,8 +241,9 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Traduis par une expression littérale : « le triple d’un nombre n diminué de 4 »",
     format: "short",
-    expected: ["3n-4", "3n - 4", "3*n-4", "3*n - 4"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric) — l'expression est comparée, plus un mot-clé.
+    expected: ["3n - 4"],
+    comparator: "expression_reduite",
     hint: "Le triple de n donne 3n, puis on enlève 4.",
     explanation:
       "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
@@ -283,6 +285,7 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Repère les mots : double, triple, augmenté de, diminué de.",
     tags: ["litteral_calcul", "traduire", "template"],
+    // 08/10/2026 : précise et simple (Frédéric) — l'expression est comparée, plus un mot-clé.
     generate: () => {
       const n = randomChoice([2, 3, 4, 5, 6, 7, 8]);
       const op = randomChoice(["augmente", "diminue"]);
@@ -290,8 +293,8 @@ export const calculLitteralBank: TutorBankItemV4[] = [
         return {
           text: `Traduis par une expression littérale : « le double de x augmenté de ${n} »`,
           format: "short",
-          expected: [`2x+${n}`, `2x + ${n}`],
-          comparator: "contains_keyword",
+          expected: [`2x + ${n}`],
+          comparator: "expression_reduite",
           explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           (`Le double de x est 2x, puis on ajoute ${n}, donc on obtient 2x + ${n}.`) +
@@ -301,8 +304,8 @@ export const calculLitteralBank: TutorBankItemV4[] = [
       return {
         text: `Traduis par une expression littérale : « le triple de x diminué de ${n} »`,
         format: "short",
-        expected: [`3x-${n}`, `3x - ${n}`],
-        comparator: "contains_keyword",
+        expected: [`3x - ${n}`],
+        comparator: "expression_reduite",
         explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
           "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
           (`Le triple de x est 3x, puis on enlève ${n}, donc on obtient 3x - ${n}.`) +
@@ -462,10 +465,11 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_reduire",
     difficulty: 2,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric) — la réponse doit VALOIR 2x et être réduite.
     text: "Réduis : x + x",
     format: "short",
-    expected: ["2x", "2*x", "2 x"],
-    comparator: "contains_keyword",
+    expected: ["2x"],
+    comparator: "expression_reduite",
     hint: "Un x plus un autre x, cela fait deux x.",
     explanation:
       "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
@@ -483,10 +487,11 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_reduire",
     difficulty: 2,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric) — la réponse doit VALOIR 5x et être réduite.
     text: "Réduis : 3x + 2x",
     format: "short",
-    expected: ["5x", "5*x", "5 x"],
-    comparator: "contains_keyword",
+    expected: ["5x"],
+    comparator: "expression_reduite",
     hint: "On additionne les coefficients des termes semblables.",
     explanation:
       "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
@@ -504,10 +509,11 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_reduire",
     difficulty: 2,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric) — la réponse doit VALOIR 3x et être réduite.
     text: "Réduis : 4x - x",
     format: "short",
-    expected: ["3x", "3*x", "3 x"],
-    comparator: "contains_keyword",
+    expected: ["3x"],
+    comparator: "expression_reduite",
     hint: "4x - x = 4x - 1x.",
     explanation:
       "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
@@ -525,10 +531,11 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_reduire",
     difficulty: 3,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric) — la réponse doit VALOIR 2x + 3 et être réduite.
     text: "Réduis : x + x + 3",
     format: "short",
-    expected: ["2x+3", "2x + 3", "3+2x", "3 + 2x"],
-    comparator: "contains_keyword",
+    expected: ["2x + 3"],
+    comparator: "expression_reduite",
     hint: "Regroupe les termes en x ensemble.",
     explanation:
       "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
@@ -546,10 +553,11 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_reduire",
     difficulty: 3,
     theme: "neutral",
+    // 08/10/2026 : précise et simple (Frédéric) — la réponse doit VALOIR x² et être réduite.
     text: "Réduis : x × x",
     format: "short",
-    expected: ["x²", "x^2"],
-    comparator: "contains_keyword",
+    expected: ["x²"],
+    comparator: "expression_reduite",
     hint: "Multiplier x par x donne le carré de x.",
     explanation:
       "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
@@ -591,24 +599,26 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Additionne ou soustrais les coefficients des termes semblables.",
     tags: ["litteral_calcul", "reduire", "template"],
+    // 08/10/2026 : précise et simple (Frédéric) — la réponse doit VALOIR le résultat et être réduite
+    // (avant, « 2x - 2x » attendait « 0x », et « 5x + n'importe quoi » passait).
     generate: () => {
       const a = randomChoice([2, 3, 4, 5, 6]);
       const b = randomChoice([1, 2, 3, 4, 5]);
       const sign = randomChoice(["+", "-"]);
       const result = sign === "+" ? a + b : a - b;
+      const terme = (k: number) => (k === 0 ? "0" : k === 1 ? "x" : k === -1 ? "−x" : k < 0 ? `−${-k}x` : `${k}x`);
+      const bx = b === 1 ? "x" : `${b}x`;
+      const ecrit = sign === "+" ? "+" : "−";
 
       return {
-        text: `Réduis : ${a}x ${sign} ${b}x`,
+        text: `Réduis : ${a}x ${ecrit} ${bx}`,
         format: "short",
-        expected: [`${result}x`, `${result}*x`, `${result} x`],
-        comparator: "contains_keyword",
-        explanation:
-          "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
-          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
-          (sign === "+"
-            ? `${a}x + ${b}x = ${result}x.`
-            : `${a}x - ${b}x = ${result}x.`) +
-          "\n\nConclusion : l’expression obtenue répond à la question.",
+        expected: [result === 0 ? "0" : `${result}x`],
+        comparator: "expression_reduite",
+        explanation: expl(
+          `On ${sign === "+" ? "additionne" : "soustrait"} les coefficients : ${a} ${ecrit} ${b} = ${result < 0 ? `−${-result}` : result}. ` +
+            `Donc ${a}x ${ecrit} ${bx} = ${terme(result)}.`,
+        ),
       };
     },
   },
@@ -625,17 +635,16 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi 3x + 2x peut se réduire en 5x.",
-    format: "open",
-    expected: ["5x", "termes semblables", "coefficients", "meme lettre"],
-    comparator: "contains_keyword",
-    hint: "3x et 2x représentent des quantités de même nature.",
-    explanation:
-      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
-          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
-          ("3x et 2x sont des termes semblables car ils contiennent la même lettre x. On peut donc additionner leurs coefficients : 3 + 2 = 5, d’où 5x.") +
-          "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["litteral_calcul", "defi", "raisonnement"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi 3x + 2x
+    // peut se réduire en 5x » (déjà posé par litteral_reduire_fixed_2). Désormais :
+    // regrouper les termes en x quand un nombre est placé entre eux.
+    text: "Réduis : 3x + 2 + 2x",
+    format: "short",
+    expected: ["5x + 2"],
+    comparator: "expression_reduite",
+    hint: "Regroupe les termes en x. Le 2 tout seul reste à part.",
+    explanation: expl("3x et 2x ont la même lettre : 3x + 2x = 5x. Le 2 n’a pas de lettre : il reste seul. Donc 3x + 2 + 2x = 5x + 2."),
+    tags: ["litteral_calcul", "defi", "reduire"],
   },
   {
     kind: "fixed",
@@ -688,17 +697,16 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "5x × 2 se réduit en 10x, mais 5x + 2 ne se réduit pas. Explique cette différence.",
-    format: "open",
-    expected: ["multipli", "produit", "addition", "semblables", "facteur"],
-    comparator: "contains_keyword",
-    hint: "Dans un produit, le 2 multiplie tout ; dans une somme, il reste à côté.",
-    explanation:
-      "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
-          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
-          ("Dans 5x × 2, le 2 est un facteur : il multiplie 5x, donc 5 × 2 × x = 10x. Dans 5x + 2, le 2 s’ajoute : ce n’est pas un terme semblable à 5x, il n’a pas de lettre. On ne peut donc rien regrouper.") +
-          "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["litteral_calcul", "defi", "piege", "raisonnement"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique la différence
+    // entre 5x × 2 et 5x + 2 ». Désormais : le produit à réduire ; « 7x » (le
+    // piège de l'addition) est refusé par le correcteur.
+    text: "Réduis : 5x × 2",
+    format: "short",
+    expected: ["10x"],
+    comparator: "expression_reduite",
+    hint: "Le 2 multiplie : 5 × 2, puis on garde le x.",
+    explanation: expl("5x × 2 = 5 × 2 × x = 10x. Attention : 5x + 2 ne se réduit pas, car le 2 s’ajoute et n’a pas de lettre."),
+    tags: ["litteral_calcul", "defi", "piege", "reduire"],
   },
   {
     kind: "fixed",
@@ -850,19 +858,30 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Fais attention : on ne peut réduire que les termes semblables.",
     tags: ["litteral_calcul", "defi", "template", "piege"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : réponse courte « non »
+    // au mot-clé, toujours « non ». Désormais un QCM oui / non, et une fois sur
+    // deux une somme qui SE réduit (ax + bx), pour que la réponse ne soit pas devinée.
     generate: () => {
       const a = randomChoice([2, 3, 4, 5]);
-      const b = randomChoice([1, 2, 3, 4, 5]);
-      const good = `${a}x+${b}`;
+      const b = randomChoice([2, 3, 4, 5]);
+      const reductible = randomChoice([true, false]);
+      if (reductible) {
+        return {
+          text: `Peut-on réduire l’expression ${a}x + ${b}x ?`,
+          format: "qcm",
+          choices: ["oui", "non"],
+          expected: ["oui"],
+          comparator: "mcq_exact",
+          explanation: expl(`${a}x et ${b}x ont la même lettre : ce sont des termes semblables. ${a}x + ${b}x = ${a + b}x.`),
+        };
+      }
       return {
-        text: `Peut-on réduire l’expression ${a}x + ${b} ? Réponds par oui ou non.`,
-        format: "short",
+        text: `Peut-on réduire l’expression ${a}x + ${b} ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
         expected: ["non"],
-        comparator: "contains_keyword",
-        explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
-          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
-          (`${a}x et ${b} ne sont pas des termes semblables. L’expression ${good.replace("+", " + ")} ne se réduit pas.`) +
-          "\n\nConclusion : l’expression obtenue répond à la question.",
+        comparator: "mcq_exact",
+        explanation: expl(`${a}x a une lettre, ${b} n’en a pas : ce ne sont pas des termes semblables. ${a}x + ${b} ne se réduit pas (ce n’est pas ${a + b}x).`),
       };
     },
   },
@@ -906,16 +925,16 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_expression_comprendre",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique avec tes mots ce que signifie l’écriture 4x.",
-    format: "open",
-    expected: ["4", "x", "multiplier"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique avec tes mots
+    // ce que signifie 4x ». Leurres : 4 + 5 (addition) et « 45 » (chiffres collés).
+    text: "On prend x = 5. Combien vaut 4x ?",
+    format: "qcm",
+    choices: ["9", "20", "45"],
+    expected: ["20"],
+    comparator: "mcq_exact",
     hint: "Quand un nombre est collé à une lettre, cela signifie une multiplication.",
-    explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
-          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
-          ("4x signifie 4 × x : on multiplie le nombre représenté par x par 4.") +
-          "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["litteral_calcul", "open", "expression"],
+    explanation: expl("4x veut dire 4 × x. Pour x = 5 : 4 × 5 = 20."),
+    tags: ["litteral_calcul", "qcm", "expression"],
   },
   {
     kind: "fixed",
@@ -926,16 +945,17 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_traduire",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi « le double de x augmenté de 5 » se traduit par 2x + 5 et non par 2(x + 5).",
-    format: "open",
-    expected: ["double", "x", "ajoute", "5"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi 2x + 5
+    // et non 2(x + 5) ». Désormais l'élève calcule ; le leurre 16 = 2 × (3 + 5)
+    // est l'erreur de la parenthèse, 13 = 3 + 2 × 5.
+    text: "On prend x = 3. Calcule « le double de x augmenté de 5 ».",
+    format: "qcm",
+    choices: ["16", "11", "13"],
+    expected: ["11"],
+    comparator: "mcq_exact",
     hint: "On prend d’abord le double de x, puis on ajoute 5.",
-    explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
-          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
-          ("Le double de x est 2x. Ensuite on augmente ce résultat de 5, donc on obtient 2x + 5.") +
-          "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["litteral_calcul", "open", "traduire", "piege"],
+    explanation: expl("Le double de x : 2 × 3 = 6. Augmenté de 5 : 6 + 5 = 11. L’expression est 2x + 5, pas 2(x + 5) : 2 × (3 + 5) = 16 n’est pas la bonne réponse."),
+    tags: ["litteral_calcul", "qcm", "traduire", "piege"],
   },
   {
     kind: "fixed",
@@ -946,16 +966,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_substituer",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique les étapes pour calculer 3x + 2 lorsque x = 4.",
-    format: "open",
-    expected: ["remplace", "4", "3", "14"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique les étapes… ».
+    text: "Calcule la valeur de 3x + 2 pour x = 4.",
+    format: "short",
+    expected: ["14"],
+    comparator: "number_equal",
     hint: "Commence par remplacer x par 4.",
-    explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
-          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
-          ("On remplace x par 4 : 3x + 2 = 3 × 4 + 2 = 12 + 2 = 14.") +
-          "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["litteral_calcul", "open", "substituer"],
+    explanation: expl("On remplace x par 4 : 3x + 2 = 3 × 4 + 2 = 12 + 2 = 14."),
+    tags: ["litteral_calcul", "short", "substituer"],
   },
   {
     kind: "fixed",
@@ -966,16 +984,15 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_reduire",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi 3x + 2x = 5x.",
-    format: "open",
-    expected: ["termes semblables", "coefficients", "3", "2", "5"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi
+    // 3x + 2x = 5x ». Désormais le sens de la réduction, par un nombre.
+    text: "Combien de fois x y a-t-il dans 3x + 2x ?",
+    format: "short",
+    expected: ["5"],
+    comparator: "number_equal",
     hint: "3x et 2x contiennent la même lettre.",
-    explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
-          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
-          ("3x et 2x sont des termes semblables. On additionne les coefficients : 3 + 2 = 5, donc 3x + 2x = 5x.") +
-          "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["litteral_calcul", "open", "reduire"],
+    explanation: expl("3 fois x plus 2 fois x, cela fait 3 + 2 = 5 fois x. Donc 3x + 2x = 5x."),
+    tags: ["litteral_calcul", "short", "reduire"],
   },
   {
     kind: "fixed",
@@ -986,16 +1003,17 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_reduire",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi 3x + 2 ne peut pas se réduire en 5x.",
-    format: "open",
-    expected: ["pas", "termes semblables", "lettre", "constant"],
-    comparator: "contains_keyword",
-    hint: "3x contient une lettre, mais 2 n’en contient pas.",
-    explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
-          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
-          ("3x est un terme avec la lettre x, alors que 2 est un terme constant. Ce ne sont pas des termes semblables, donc on ne peut pas écrire 3x + 2 = 5x.") +
-          "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["litteral_calcul", "open", "reduire", "piege"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi 3x + 2
+    // ne peut pas se réduire en 5x ». Désormais l'élève calcule pour x = 2 ; le
+    // leurre 10 est la valeur de 5x (le piège), 12 = 3 × (2 + 2).
+    text: "On prend x = 2. Combien vaut 3x + 2 ?",
+    format: "qcm",
+    choices: ["10", "8", "12"],
+    expected: ["8"],
+    comparator: "mcq_exact",
+    hint: "Remplace x par 2. Fais d’abord la multiplication.",
+    explanation: expl("3x + 2 = 3 × 2 + 2 = 6 + 2 = 8. Or 5x = 5 × 2 = 10. On ne trouve pas le même nombre : 3x + 2 n’est pas égal à 5x. Le 2 n’a pas de lettre, il ne se regroupe pas avec 3x."),
+    tags: ["litteral_calcul", "qcm", "reduire", "piege"],
   },
   {
     kind: "fixed",
@@ -1006,16 +1024,16 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève écrit : 2x + 3x = 5x². Explique son erreur.",
-    format: "open",
-    expected: ["coefficients", "additionne", "pas", "x²", "5x"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique son erreur ».
+    // Leurres : 5x² (l'erreur de l'élève), 6x et 6x² (multiplier au lieu d'additionner).
+    text: "Un élève écrit : 2x + 3x = 5x². Quel est le bon résultat de 2x + 3x ?",
+    format: "qcm",
+    choices: ["5x²", "5x", "6x", "6x²"],
+    expected: ["5x"],
+    comparator: "mcq_exact",
     hint: "On additionne les coefficients, mais on ne multiplie pas les lettres.",
-    explanation: "Définition : une expression littérale contient des nombres, des lettres et des opérations.\n\n" +
-          "Méthode : on remplace la lettre par la valeur donnée ou on simplifie l’écriture.\n\nCalcul : " +
-          ("L’élève confond addition et multiplication. Dans 2x + 3x, on additionne seulement les coefficients : 2 + 3 = 5. Donc 2x + 3x = 5x, pas 5x².") +
-          "\n\nConclusion : l’expression obtenue répond à la question.",
-    tags: ["litteral_calcul", "open", "defi", "erreur"],
+    explanation: expl("Dans 2x + 3x, on additionne les coefficients : 2 + 3 = 5. Le x reste x. Donc 2x + 3x = 5x, pas 5x²."),
+    tags: ["litteral_calcul", "qcm", "defi", "erreur"],
   },
 
   // =========================
@@ -1065,13 +1083,16 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_expression_comprendre",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi on peut écrire 3 × x plus simplement.",
-    format: "open",
-    expected: ["3x", "signe", "multiplication"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi on peut
+    // écrire 3 × x plus simplement ». Leurres : 3 + x, x3 (ordre inversé).
+    text: "Comment écrit-on 3 × x plus simplement ?",
+    format: "qcm",
+    choices: ["3 + x", "3x", "x3"],
+    expected: ["3x"],
+    comparator: "mcq_exact",
     hint: "On peut supprimer le signe ×.",
-    explanation: expl("Quand un nombre multiplie une lettre, on supprime le signe × : 3 × x s’écrit 3x."),
-    tags: ["litteral_calcul", "expression", "open"],
+    explanation: expl("Quand un nombre multiplie une lettre, on supprime le signe × et on écrit le nombre devant : 3 × x s’écrit 3x."),
+    tags: ["litteral_calcul", "expression", "qcm"],
   },
 
   // =========================
@@ -1088,8 +1109,9 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Traduis par une expression littérale : « un nombre x diminué de 7 »",
     format: "short",
-    expected: ["x-7", "x - 7"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric) — l'expression est comparée, plus un mot-clé.
+    expected: ["x - 7"],
+    comparator: "expression_reduite",
     hint: "Diminuer, c’est soustraire.",
     explanation: expl("« diminué de 7 » se traduit par − 7 : l’expression est x − 7."),
     tags: ["litteral_calcul", "traduire"],
@@ -1123,13 +1145,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Augmenter, c’est ajouter.",
     tags: ["litteral_calcul", "traduire", "template"],
+    // 08/10/2026 : précise et simple (Frédéric) — l'expression est comparée, plus un mot-clé.
     generate: () => {
       const n = randomInt(2, 9);
       return {
         text: `Traduis par une expression littérale : « un nombre n augmenté de ${n} »`,
         format: "short",
-        expected: [`n+${n}`, `n + ${n}`],
-        comparator: "contains_keyword",
+        expected: [`n + ${n}`],
+        comparator: "expression_reduite",
         explanation: expl(`« augmenté de ${n} » se traduit par + ${n} : l’expression est n + ${n}.`),
       };
     },
@@ -1212,8 +1235,9 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Réduis : 2x + 5x",
     format: "short",
-    expected: ["7x", "7*x", "7 x"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric) — la réponse doit VALOIR 7x et être réduite.
+    expected: ["7x"],
+    comparator: "expression_reduite",
     hint: "On additionne les coefficients de x.",
     explanation: expl("On additionne les coefficients : 2 + 5 = 7, donc 2x + 5x = 7x."),
     tags: ["litteral_calcul", "reduire"],
@@ -1235,7 +1259,8 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "L’égalité 3x + 1 = 10 est-elle vraie pour x = 3 ?",
     format: "qcm",
-    choices: ["oui", "non", "on ne peut pas savoir", "seulement si x est positif"],
+    // 08/10/2026 : précise et simple (Frédéric) — choix courts, plus de phrase.
+    choices: ["oui", "non"],
     expected: ["oui"],
     comparator: "mcq_exact",
     hint: "Remplace x par 3 dans le membre de gauche, puis compare.",
@@ -1255,7 +1280,8 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "L’égalité 3x + 1 = 10 est-elle vraie pour x = 2 ?",
     format: "qcm",
-    choices: ["non", "oui", "on ne peut pas savoir", "seulement si x est entier"],
+    // 08/10/2026 : précise et simple (Frédéric) — choix courts, plus de phrase.
+    choices: ["oui", "non"],
     expected: ["non"],
     comparator: "mcq_exact",
     hint: "Calcule les deux membres séparément avant de conclure.",
@@ -1275,13 +1301,9 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Pour quelles valeurs de x l’égalité x + 5 = 5 + x est-elle vraie ?",
     format: "qcm",
-    choices: [
-      "pour toutes les valeurs de x",
-      "seulement pour x = 0",
-      "seulement pour x = 5",
-      "pour aucune valeur de x",
-    ],
-    expected: ["pour toutes les valeurs de x"],
+    // 08/10/2026 : précise et simple (Frédéric) — choix courts (un mot ou un nombre).
+    choices: ["toutes", "x = 0", "x = 5", "aucune"],
+    expected: ["toutes"],
     comparator: "mcq_exact",
     hint: "Essaie avec deux ou trois valeurs différentes avant de trancher.",
     explanation: expl(
@@ -1317,14 +1339,14 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_tester",
     difficulty: 3,
     theme: "reunion",
-    text: "Au marché de Saint-Paul, un letchi coûte 1 € et le panier 2 €. Le prix total est donné par p = x + 2, où x est le nombre de letchis. L’égalité est-elle vérifiée pour x = 7 et p = 9 ?",
-    format: "qcm",
-    choices: ["oui", "non", "on ne peut pas savoir", "seulement si le panier est gratuit"],
-    expected: ["oui"],
-    comparator: "mcq_exact",
-    hint: "Remplace x par 7, puis compare au prix annoncé.",
+    // 08/10/2026 (Frédéric) : énoncé raccourci, on calcule p.
+    text: "Au marché de Saint-Paul, le prix p d’un panier de x letchis est p = x + 2.\nCombien vaut p pour x = 7 ?",
+    format: "short",
+    expected: ["9", "9 €"],
+    comparator: "number_equal",
+    hint: "Remplace x par 7.",
     explanation: expl(
-      "On remplace x par 7 : 7 + 2 = 9. Le prix annoncé est bien 9 €. L’égalité est donc vérifiée pour ce couple de valeurs.",
+      "On remplace x par 7 : p = 7 + 2 = 9. Le panier coûte 9 €.",
     ),
     tags: ["litteral_calcul", "tester", "reunion", "qcm"],
   },
@@ -1337,15 +1359,18 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_tester",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment vérifier si x = 5 rend l’égalité 2x - 3 = 7 vraie.",
-    format: "open",
-    expected: ["remplace", "membre", "compare", "calcule"],
-    comparator: "contains_keyword",
-    hint: "Dis ce que tu fais du x, puis ce que tu compares.",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique comment vérifier
+    // si x = 5 rend l'égalité vraie ». Désormais l'élève fait la vérification.
+    text: "L’égalité 2x − 3 = 7 est-elle vraie pour x = 5 ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["oui"],
+    comparator: "mcq_exact",
+    hint: "Remplace x par 5 à gauche, calcule, puis compare avec 7.",
     explanation: expl(
-      "On remplace x par 5 dans le membre de gauche : 2 × 5 - 3 = 10 - 3 = 7. On calcule ensuite le membre de droite : 7. On compare les deux résultats : ils sont égaux, donc x = 5 rend l’égalité vraie.",
+      "On remplace x par 5 à gauche : 2 × 5 − 3 = 10 − 3 = 7. À droite, on lit 7. Les deux côtés sont égaux : l’égalité est vraie pour x = 5.",
     ),
-    tags: ["litteral_calcul", "tester", "open", "methode"],
+    tags: ["litteral_calcul", "tester", "qcm", "methode"],
   },
   {
     kind: "fixed",
@@ -1356,15 +1381,19 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_tester",
     difficulty: 5,
     theme: "neutral",
-    text: "Un élève teste l’égalité 4x = 12 pour x = 3, trouve que c’est vrai, et conclut : « cette égalité est vraie pour tous les nombres ». Explique son erreur.",
-    format: "open",
-    expected: ["une seule", "seulement", "autre valeur", "essaye", "essaie", "contre-exemple", "pas toutes"],
-    comparator: "contains_keyword",
-    hint: "Que se passe-t-il si on essaie x = 1 ?",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Un élève conclut que
+    // l'égalité est vraie pour tous les nombres. Explique son erreur ». Désormais
+    // l'élève teste lui-même le contre-exemple x = 1.
+    text: "L’égalité 4x = 12 est vraie pour x = 3. Est-elle vraie aussi pour x = 1 ?",
+    format: "qcm",
+    choices: ["oui", "non"],
+    expected: ["non"],
+    comparator: "mcq_exact",
+    hint: "Remplace x par 1 : combien vaut 4x ?",
     explanation: expl(
-      "Tester une valeur ne renseigne que sur cette valeur-là. Avec x = 1 : 4 × 1 = 4, ce qui n’est pas 12. L’égalité est donc fausse pour x = 1. Elle n’est vraie que pour x = 3 : un seul essai réussi ne prouve rien pour les autres nombres.",
+      "Pour x = 1 : 4 × 1 = 4, et 4 n’est pas égal à 12. L’égalité est fausse pour x = 1. Être vraie pour une valeur ne veut pas dire être vraie pour tous les nombres.",
     ),
-    tags: ["litteral_calcul", "tester", "open", "piege"],
+    tags: ["litteral_calcul", "tester", "qcm", "piege"],
   },
   {
     kind: "template",
@@ -1386,7 +1415,8 @@ export const calculLitteralBank: TutorBankItemV4[] = [
       return {
         text: `L’égalité ${a}x + ${b} = ${droite} est-elle vraie pour x = ${x} ?`,
         format: "qcm",
-        choices: shuffle(["oui", "non", "on ne peut pas savoir", "seulement si x est positif"]),
+        // 08/10/2026 : précise et simple (Frédéric) — choix courts, plus de phrase.
+        choices: ["oui", "non"],
         expected: [juste ? "oui" : "non"],
         comparator: "mcq_exact",
         explanation: expl(
@@ -1408,20 +1438,30 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_tester",
     difficulty: 4,
     theme: "neutral",
-    hint: "Dis ce que tu remplaces, ce que tu calcules, et ce que tu compares.",
-    tags: ["litteral_calcul", "tester", "open", "template"],
+    hint: "Remplace x par la valeur donnée à gauche, calcule, puis compare avec la droite.",
+    tags: ["litteral_calcul", "tester", "qcm", "template"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique comment savoir si
+    // x = … rend l'égalité vraie », toujours vraie. Désormais un QCM oui / non ;
+    // une fois sur deux, le membre de droite est faux de 1 à 3 (une erreur de calcul).
     generate: () => {
       const a = randomInt(2, 7);
-      const b = randomInt(1, 9);
       const x = randomInt(2, 9);
+      // Le membre de gauche reste positif (au moins 4) : un seul calcul, pas de relatif.
+      const b = randomInt(1, Math.min(9, a * x - 4));
+      const gauche = a * x - b;
+      const juste = randomChoice([true, false]);
+      const droite = juste ? gauche : gauche + randomChoice([-3, -2, -1, 1, 2, 3]);
       return {
-        text: `Explique comment savoir si x = ${x} rend l’égalité ${a}x - ${b} = ${a * x - b} vraie.`,
-        format: "open",
-        expected: ["remplace", "membre", "compare", "calcule"],
-        comparator: "contains_keyword",
+        text: `L’égalité ${a}x − ${b} = ${droite} est-elle vraie pour x = ${x} ?`,
+        format: "qcm",
+        choices: ["oui", "non"],
+        expected: [juste ? "oui" : "non"],
+        comparator: "mcq_exact",
         explanation: expl(
-          `On remplace x par ${x} dans le membre de gauche : ${a} × ${x} - ${b} = ${a * x} - ${b} = ${a * x - b}. ` +
-            `Le membre de droite vaut ${a * x - b}. Les deux résultats sont égaux, donc l’égalité est vraie pour x = ${x}.`,
+          `On remplace x par ${x} à gauche : ${a} × ${x} − ${b} = ${a * x} − ${b} = ${gauche}. À droite, on lit ${droite}. ` +
+            (juste
+              ? `Les deux côtés sont égaux : l’égalité est vraie pour x = ${x}.`
+              : `${gauche} n’est pas égal à ${droite} : l’égalité est fausse pour x = ${x}.`),
         ),
       };
     },
@@ -1442,8 +1482,9 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Développe : 3(x + 2)",
     format: "short",
-    expected: ["3x + 6", "3x+6", "6 + 3x"],
-    comparator: "exact_text",
+    // 08/10/2026 : précise et simple (Frédéric) — toute écriture développée et réduite de 3x + 6 passe.
+    expected: ["3x + 6"],
+    comparator: "expression_developpee",
     hint: "Le 3 multiplie CE QUI EST DANS la parenthèse, les deux termes.",
     explanation: expl(
       "Le facteur 3 se distribue sur chaque terme : 3 × x = 3x, puis 3 × 2 = 6. On obtient 3x + 6.",
@@ -1461,8 +1502,9 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Développe : 4(x - 1)",
     format: "short",
-    expected: ["4x - 4", "4x-4", "4x − 4"],
-    comparator: "exact_text",
+    // 08/10/2026 : précise et simple (Frédéric) — toute écriture développée et réduite de 4x − 4 passe.
+    expected: ["4x - 4"],
+    comparator: "expression_developpee",
     hint: "Le signe moins reste : le 4 multiplie aussi le 1 qu’on retire.",
     explanation: expl(
       "Le facteur 4 se distribue sur les deux termes : 4 × x = 4x, puis 4 × 1 = 4, qu’on retire. On obtient 4x - 4.",
@@ -1478,15 +1520,12 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_distributivite",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève écrit : 5(x + 3) = 5x + 3. Où est son erreur ?",
+    // 08/10/2026 : précise et simple (Frédéric) — choix courts. Leurres : 5x + 3
+    // (l'erreur de l'élève), 5x + 8 (5 + 3), 8x (tout additionné).
+    text: "Un élève écrit : 5(x + 3) = 5x + 3. Quel est le bon développement ?",
     format: "qcm",
-    choices: [
-      "il a oublié de multiplier le 3 par 5",
-      "il a oublié de multiplier le x par 5",
-      "il fallait additionner 5 et 3",
-      "il n’y a pas d’erreur",
-    ],
-    expected: ["il a oublié de multiplier le 3 par 5"],
+    choices: ["5x + 3", "5x + 15", "5x + 8", "8x"],
+    expected: ["5x + 15"],
     comparator: "mcq_exact",
     hint: "Compte les termes de la parenthèse : combien doivent être multipliés ?",
     explanation: expl(
@@ -1505,8 +1544,9 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Développe : 2(3x + 4)",
     format: "short",
-    expected: ["6x + 8", "6x+8", "8 + 6x"],
-    comparator: "exact_text",
+    // 08/10/2026 : précise et simple (Frédéric) — toute écriture développée et réduite de 6x + 8 passe.
+    expected: ["6x + 8"],
+    comparator: "expression_developpee",
     hint: "2 × 3x, c’est 6x : les deux nombres se multiplient, la lettre reste.",
     explanation: expl(
       "2 × 3x = 6x, puis 2 × 4 = 8. On obtient 6x + 8.",
@@ -1524,8 +1564,9 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     theme: "reunion",
     text: "Un planteur de Saint-Joseph a un champ rectangulaire de 5 m de large. Sa longueur mesure (x + 3) m. Écris l’aire du champ sous forme développée.",
     format: "short",
-    expected: ["5x + 15", "5x+15", "15 + 5x"],
-    comparator: "exact_text",
+    // 08/10/2026 : précise et simple (Frédéric) — toute écriture développée et réduite de 5x + 15 passe.
+    expected: ["5x + 15"],
+    comparator: "expression_developpee",
     hint: "L’aire d’un rectangle, c’est largeur × longueur.",
     explanation: expl(
       "L’aire vaut 5 × (x + 3). Le facteur 5 se distribue : 5 × x = 5x et 5 × 3 = 15. L’aire développée s’écrit 5x + 15 (en m²).",
@@ -1541,15 +1582,19 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_distributivite",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi 3(x + 2) n’est pas égal à 3x + 2.",
-    format: "open",
-    expected: ["tous les termes", "les deux termes", "aussi", "chaque terme", "oublié", "oublie"],
-    comparator: "contains_keyword",
-    hint: "Essaie avec x = 1 : les deux écritures donnent-elles le même nombre ?",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi 3(x + 2)
+    // n'est pas égal à 3x + 2 ». Désormais l'élève calcule pour x = 1 ; le leurre 5
+    // est la valeur de 3x + 2 (le facteur oublié), 6 = 3 + 1 + 2.
+    text: "On prend x = 1. Combien vaut 3(x + 2) ?",
+    format: "qcm",
+    choices: ["5", "9", "6"],
+    expected: ["9"],
+    comparator: "mcq_exact",
+    hint: "Calcule d’abord la parenthèse : 1 + 2.",
     explanation: expl(
-      "Le facteur 3 multiplie chaque terme de la parenthèse, donc aussi le 2 : 3(x + 2) = 3x + 6. On le vérifie avec x = 1 : à gauche 3 × (1 + 2) = 9, à droite 3 × 1 + 2 = 5. Les deux écritures ne donnent pas le même nombre.",
+      "3(x + 2) = 3 × (1 + 2) = 3 × 3 = 9. Or 3x + 2 = 3 × 1 + 2 = 5. Ce n’est pas le même nombre : 3(x + 2) n’est pas égal à 3x + 2. Le 3 multiplie aussi le 2 : 3(x + 2) = 3x + 6.",
     ),
-    tags: ["litteral_calcul", "distributivite", "open", "piege"],
+    tags: ["litteral_calcul", "distributivite", "qcm", "piege"],
   },
   {
     kind: "fixed",
@@ -1560,15 +1605,18 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_distributivite",
     difficulty: 5,
     theme: "neutral",
-    text: "Un rectangle de hauteur k est coupé en deux morceaux, l’un de largeur a, l’autre de largeur b. Explique pourquoi son aire s’écrit aussi bien k(a + b) que ka + kb.",
-    format: "open",
-    expected: ["aire", "deux morceaux", "somme", "ajoute", "additionne", "même", "meme"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi l'aire
+    // s'écrit k(a + b) et ka + kb » (lettres seulement). Désormais avec des nombres ;
+    // l'explication montre les deux façons de compter.
+    text: "Un rectangle a une hauteur de 4 cm. Il est coupé en deux morceaux de largeurs 3 cm et 5 cm. Quelle est son aire ?",
+    format: "short",
+    expected: ["32 cm²", "32"],
+    comparator: "number_equal",
     hint: "Compte l’aire de deux façons : en un seul bloc, puis morceau par morceau.",
     explanation: expl(
-      "En un seul bloc, la largeur totale vaut a + b et l’aire vaut k(a + b). Morceau par morceau, le premier a pour aire ka, le second kb, et la somme fait ka + kb. C’est le même rectangle mesuré de deux façons, donc les deux écritures sont égales.",
+      "En un seul bloc : 4 × (3 + 5) = 4 × 8 = 32. Morceau par morceau : 4 × 3 + 4 × 5 = 12 + 20 = 32. On trouve la même aire : 32 cm². C’est pour cela que k(a + b) = ka + kb.",
     ),
-    tags: ["litteral_calcul", "distributivite", "open", "raisonnement"],
+    tags: ["litteral_calcul", "distributivite", "short", "raisonnement"],
   },
   {
     kind: "template",
@@ -1593,11 +1641,9 @@ export const calculLitteralBank: TutorBankItemV4[] = [
       return {
         text: `Développe : ${k}(${gauche} ${signe} ${b})`,
         format: "short",
-        expected: [
-          `${coefficient}x ${signe} ${constante}`,
-          `${coefficient}x${signe}${constante}`,
-        ],
-        comparator: "exact_text",
+        // 08/10/2026 : précise et simple (Frédéric) — « 15 + 5x » passe aussi, « 5(x + 3) » non.
+        expected: [`${coefficient}x ${signe} ${constante}`],
+        comparator: "expression_developpee",
         explanation: expl(
           `${k} × ${gauche} = ${coefficient}x, puis ${k} × ${b} = ${constante}. ` +
             `On obtient ${coefficient}x ${signe} ${constante}.`,
@@ -1614,16 +1660,19 @@ export const calculLitteralBank: TutorBankItemV4[] = [
     microId: "litteral_distributivite",
     difficulty: 4,
     theme: "neutral",
-    hint: "Dis sur quoi le facteur se distribue, puis donne les deux produits.",
-    tags: ["litteral_calcul", "distributivite", "open", "template"],
+    hint: "Le facteur multiplie aussi le nombre de la parenthèse.",
+    tags: ["litteral_calcul", "distributivite", "short", "template"],
+    // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique, étape par étape,
+    // comment tu développes k(x + b) ». Désormais l'élève complète le terme qu'on
+    // oublie le plus : k × b (le piège « b » est refusé, c'est un nombre exact).
     generate: () => {
       const k = randomInt(3, 8);
       const b = randomInt(2, 9);
       return {
-        text: `Explique, étape par étape, comment tu développes ${k}(x + ${b}).`,
-        format: "open",
-        expected: ["chaque terme", "les deux termes", "distribu", "multipli"],
-        comparator: "contains_keyword",
+        text: `Complète : ${k}(x + ${b}) = ${k}x + …`,
+        format: "short",
+        expected: [String(k * b)],
+        comparator: "number_equal",
         explanation: expl(
           `Le facteur ${k} se distribue sur chacun des deux termes de la parenthèse : ${k} × x = ${k}x, puis ${k} × ${b} = ${k * b}. ` +
             `On additionne les deux résultats : ${k}(x + ${b}) = ${k}x + ${k * b}.`,
