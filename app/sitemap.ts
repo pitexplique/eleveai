@@ -1117,6 +1117,36 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-09-20",
     },
   ],
+  // ⭐ 07-08/10/2026 — TROIS LEÇONS « LES BASES », chacune sur UNE page, celle
+  // qui l'affiche : la page des tables (lecteur en haut), et les fiches de cours
+  // des notions où `notion_ressources` la porte (micro_id vide).
+  "/tables-de-multiplication": [
+    {
+      id: "3ISJ48NHGd8",
+      title: "Une multiplication, deux divisions : diviser avec ses tables de multiplication",
+      description:
+        "56 : 8 sans poser la division. 12 billes en 3 rangées de 4 : 3 × 4 = 12, donc 12 : 4 = 3 et 12 : 3 = 4. La famille de trois nombres, diviser en lisant le grand tableau, et deux pièges (4 : 12, 13 : 4).",
+      ajoutee: "2026-10-07",
+    },
+  ],
+  "/fiches-cours/maths/4e/nombre-premier": [
+    {
+      id: "0SMk_9elRFI",
+      title: "Pourquoi 13 ne se range pas : les nombres premiers avec des billes",
+      description:
+        "12 billes se rangent en rectangles, 13 billes ne se rangent qu'en une seule rangée. Les diviseurs, la définition d'un nombre premier, 1 et 2, le crible d'Ératosthène jusqu'à 30, et le piège : impair ne veut pas dire premier.",
+      ajoutee: "2026-10-07",
+    },
+  ],
+  "/fiches-cours/maths/3e/entier-arithmetique": [
+    {
+      id: "EVkMNamCUAw",
+      title: "Décomposer en facteurs premiers : les nombres premiers, briques de tous les nombres",
+      description:
+        "On casse 60 billes jusqu'aux nombres premiers : 60 = 2 × 2 × 3 × 5. L'arbre, un autre chemin et les mêmes briques, les divisions par 2, 3, 5, 7, les puissances, et le problème du fleuriste (60 roses, 84 tulipes, 12 bouquets).",
+      ajoutee: "2026-10-08",
+    },
+  ],
 };
 
 // Une vidéo déjà déclarée sur sa fiche ne l'est pas une seconde fois à l'accueil.
