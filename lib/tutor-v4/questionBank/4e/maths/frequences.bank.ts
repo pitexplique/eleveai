@@ -578,7 +578,8 @@ const PRENOMS = [
 /** « de Léa », « d'Inès », « d'un journaliste », « d'une association ». */
 function deQui(q: string): string {
   const s = q.replace(/^Un /, "un ").replace(/^Une /, "une ");
-  return /^[AEIOUYÉÈÂaeiouyéèâ]/.test(s) ? `d'${s}` : `de ${s}`;
+  // ⛔ 08/10 : pas de « Y » — « de Yanis », pas « d'Yanis ».
+  return /^[AEIOUÉÈÂaeiouéèâ]/.test(s) ? `d'${s}` : `de ${s}`;
 }
 
 function deuxPrenoms(): [string, string] {
@@ -713,7 +714,7 @@ export const frequencesBank: TutorBankItemV4[] = [
       return {
         text: `${raconter(c, qui, n, k)} ${q}`,
         format: "short",
-        expected: [`${k}/${n}`, irr, fr(k / n), String(k / n)],
+        expected: [`${k}/${n}`, irr, fr(k / n)],
         comparator: "number_equal",
         explanation:
           "Définition : la fréquence d'une issue est le nombre de fois où elle s'est produite, divisé par le nombre total d'essais.\n\n" +
@@ -806,11 +807,12 @@ export const frequencesBank: TutorBankItemV4[] = [
         `En pourcentage, quelle est la fréquence de sortie du ${face} ?`,
         `Exprime en pourcentage la fréquence du ${face}.`,
       ]);
-      const v = (succes / total) * 100;
+      // ⛔ 08/10 : (7 ÷ 50) × 100 valait 14,000000000000002 dans les réponses acceptées.
+      const v = Math.round((succes * 1000) / total) / 10;
       return {
         text: `${recit} ${q}`,
         format: "short",
-        expected: [pct(succes, total), fr(v), String(v)],
+        expected: [pct(succes, total), fr(v)],
         comparator: "number_equal",
         explanation:
           "Définition : la fréquence observée est le nombre de succès divisé par le nombre d'essais.\n\n" +
@@ -932,7 +934,7 @@ export const frequencesBank: TutorBankItemV4[] = [
         forme === "pct"
           ? [`${p} %`, String(p)]
           : forme === "dec"
-            ? [fr(dec), String(dec), irr, `${k}/${n}`]
+            ? [fr(dec), irr, `${k}/${n}`]
             : [irr];
       return {
         text: `${raconter(c, qui, n, k)} ${q}`,
@@ -968,7 +970,9 @@ export const frequencesBank: TutorBankItemV4[] = [
       const text = randomChoice([
         `${qui} ${c.action(N)}. La fréquence ${c.freq} est de ${p} %. ${c.combien}`,
         `${qui} ${c.action(N)}. La fréquence ${c.freq} vaut ${fr(p / 100)}. ${c.combien}`,
-        `Sur ${N} ${c.essais}, la fréquence ${c.freq} a été de ${p} % (${qui} ${c.action(N)}). ${c.combien}`,
+        // ⛔ 08/10 : plus de parenthèse autour de l'action — « (Malo ouvre 25 coffres
+        // dans un jeu vidéo (le jeu annonce…)) » faisait deux parenthèses imbriquées.
+        `Sur ${N} ${c.essais}, la fréquence ${c.freq} a été de ${p} % : c'est le relevé ${deQui(qui)}, qui ${c.action(N)}. ${c.combien}`,
         `${qui} ${c.action(N)} ; la fréquence ${c.freq} est égale à ${fracIrr(k, n)}. ${c.combien}`,
       ]);
       return {
@@ -1264,17 +1268,18 @@ export const frequencesBank: TutorBankItemV4[] = [
         `Pour estimer la probabilité de l'issue ${c.evt}, ${a} ${c.action(fr(na))} et ${b} ${c.action(fr(nb))}. Quelle fréquence observée faut-il croire le plus ?`,
         `${a} ${c.action(fr(na))}, ${b} ${c.action(fr(nb))}. Chacun calcule la fréquence de l'issue ${c.evt}. Quelle fréquence approche le mieux la probabilité ?`,
       ]);
-      const correct = `celle de ${aPetit ? b : a}`;
+      // ⛔ 08/10 : « celle de Adam » → « celle d'Adam ».
+      const correct = `celle ${deQui(aPetit ? b : a)}`;
       return {
         text,
         format: "qcm",
-        choices: shuffle([`celle de ${a}`, `celle de ${b}`, "les deux se valent"]),
+        choices: shuffle([`celle ${deQui(a)}`, `celle ${deQui(b)}`, "les deux se valent"]),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
           "Définition : la fréquence observée approche la probabilité d'autant mieux que les essais sont nombreux.\n\n" +
           "Méthode : on compare les nombres d'essais, pas les résultats.\n\n" +
-          `Calcul : ${fr(grand)} ${c.essais} contre ${fr(petit)} — la série de ${aPetit ? b : a} est ${fr(Math.round(grand / petit))} fois plus grande (environ).\n\n` +
+          `Calcul : ${fr(grand)} ${c.essais} contre ${fr(petit)} — la série ${deQui(aPetit ? b : a)} est ${fr(Math.round(grand / petit))} fois plus grande (environ).\n\n` +
           `Conclusion : ⚠️ cela ne veut PAS dire que la série de ${fr(petit)} ${c.essais} est fausse. Elle est simplement moins informative : elle laisse plus de place au hasard.`,
       };
     },
@@ -1306,7 +1311,7 @@ export const frequencesBank: TutorBankItemV4[] = [
         if (vals.every((v) => v > 0 && v < 100) && new Set(vals).size === 4) break;
       }
       const qui = randomChoice(PRENOMS);
-      const sujet = randomChoice([qui, "On", `La classe de ${qui}`]);
+      const sujet = randomChoice([qui, "On", `La classe ${deQui(qui)}`]);
       const action = c.action("5 000");
       const recit = randomChoice([
         `${sujet} ${action} et calcule la fréquence de l'issue ${c.evt} en cours de route : ${fr(f10)} % après 10 ${c.essais}, ${fr(f100)} % après 100, ${fr(f1000)} % après 1 000 et ${fr(f5000)} % après 5 000.`,
@@ -1364,9 +1369,10 @@ export const frequencesBank: TutorBankItemV4[] = [
         return {
           text: `${fait} Que vaut maintenant la probabilité d'obtenir l'issue ${c.evt} au prochain ${c.essai} ?`,
           format: "qcm",
+          // ⛔ 08/10 : pour une pièce, « 1/1 » sortait comme leurre.
           choices: choixValeurs({ t: correct, v: num / den }, [
-            { t: `${num}/${den - 1}`, v: num / (den - 1) },
-            { t: `${num + 1}/${den}`, v: (num + 1) / den },
+            ...(den - 1 > 1 ? [{ t: `${num}/${den - 1}`, v: num / (den - 1) }] : []),
+            ...(num + 1 < den ? [{ t: `${num + 1}/${den}`, v: (num + 1) / den }] : []),
             { t: "0", v: 0 },
             { t: "1", v: 1 },
             { t: `${num}/${den + 1}`, v: num / (den + 1) },
@@ -1689,7 +1695,7 @@ export const frequencesBank: TutorBankItemV4[] = [
       const text = randomChoice([
         `${qui} ${c.action(N)} : la fréquence de l'issue ${c.evt} est de ${pObs} %, contre ${p0} % prévus par la probabilité. Combien de fois l'issue ${c.evt} s'est-elle produite de plus que prévu ?`,
         `${qui} ${c.action(N)}. La probabilité de l'issue ${c.evt} vaut ${probaTxt(c)}, mais sa fréquence observée est de ${pObs} %. Combien de fois en trop l'issue ${c.evt} est-elle sortie, par rapport à ce que prévoit la probabilité ?`,
-        `Sur ${N} ${c.essais}, l'issue ${c.evt} a une fréquence de ${pObs} % au lieu des ${p0} % attendus (${qui} ${c.action(N)}). Calcule l'écart entre le nombre de fois observé et le nombre de fois attendu.`,
+        `Sur ${N} ${c.essais}, l'issue ${c.evt} a une fréquence de ${pObs} % au lieu des ${p0} % attendus : c'est le relevé ${deQui(qui)}, qui ${c.action(N)}. Calcule l'écart entre le nombre de fois observé et le nombre de fois attendu.`,
       ]);
       return {
         text,
@@ -1722,10 +1728,17 @@ export const frequencesBank: TutorBankItemV4[] = [
     generate: () => {
       const c = tirerCtx(CONTEXTES_PROBA);
       const { num, den } = c.proba!;
-      const n = randomChoice([600, 1200, 2000, 3000].filter((x) => (x * num) % den === 0));
-      const attendu = (n * num) / den;
-      const observe = Math.round(attendu * randomChoice([1.3, 1.4, 1.5, 1.6, 1.8]));
-      const q = queueBinomiale(n, num / den, observe);
+      // ⛔ 08/10 : 78 « 9 » sur 600 tirages (60 attendus) arrive une fois sur cent :
+      // ce n'est pas assez rare pour dire « oui, l'écart est trop grand ». On tire
+      // jusqu'à un écart qui arrive moins d'une fois sur mille.
+      let n = 1200, attendu = 200, observe = 300, q = 0;
+      for (let t = 0; t < 100; t++) {
+        n = randomChoice([600, 1200, 2000, 3000].filter((x) => (x * num) % den === 0));
+        attendu = (n * num) / den;
+        observe = Math.round(attendu * randomChoice([1.3, 1.4, 1.5, 1.6, 1.8]));
+        q = queueBinomiale(n, num / den, observe);
+        if (q < 0.001) break;
+      }
       const qui = randomChoice(PRENOMS);
       const N = fr(n), A = fr(attendu), O = fr(observe);
       const recit = randomChoice([
@@ -1786,7 +1799,7 @@ export const frequencesBank: TutorBankItemV4[] = [
       const PT = probaTxt(c);
       const recit = randomChoice([
         `${a} ${c.action(fr(n))} : ${c.res(fr(observe))}.`,
-        `Sur ${fr(n)} ${c.essais}, ${c.resNom(fr(observe))} (${a} ${c.action(fr(n))}).`,
+        `Sur ${fr(n)} ${c.essais}, ${c.resNom(fr(observe))} : c'est le relevé ${deQui(a)}, qui ${c.action(fr(n))}.`,
         `${a} ${c.action(fr(n))} et obtient l'issue ${c.evt} ${fr(observe)} fois.`,
       ]);
       const dits = `${a} dit : « la probabilité n'est donc pas ${PT} ». ${b} dit : « il faut continuer jusqu'à retomber exactement sur la proportion ${PT} ».`;
@@ -1830,7 +1843,7 @@ export const frequencesBank: TutorBankItemV4[] = [
       const recit = randomChoice([
         `${qui} ${c.action(fr(n))} : ${c.res(fr(k))}.`,
         `${qui} ${c.action(fr(n))}. Sur ces ${fr(n)} ${c.essais}, ${c.resNom(fr(k))}.`,
-        `${cap(c.resNom(fr(k)))} sur ${fr(n)} ${c.essais} : c'est le relevé de ${qui}, qui ${c.action(fr(n))}.`,
+        `${cap(c.resNom(fr(k)))} sur ${fr(n)} ${c.essais} : c'est le relevé ${deQui(qui)}, qui ${c.action(fr(n))}.`,
       ]);
       const q = randomChoice([
         `Estime la probabilité de l'issue ${c.evt}, en pourcentage.`,
@@ -1878,7 +1891,7 @@ export const frequencesBank: TutorBankItemV4[] = [
       const qui = randomChoice(PRENOMS);
       const text = randomChoice([
         `${qui} ${c.action(fr(n))} : la fréquence de l'issue ${c.evt} est de ${p} %. ${qui} recommence avec ${fr(m)} autres ${c.essais}. Combien de fois peut-on s'attendre, environ, à l'issue ${c.evt} ?`,
-        `Sur ${fr(n)} ${c.essais}, la fréquence de l'issue ${c.evt} a été de ${p} % (${qui} ${c.action(fr(n))}). Sur ${fr(m)} autres ${c.essais}, combien de fois l'issue ${c.evt} devrait-elle se produire environ ?`,
+        `Sur ${fr(n)} ${c.essais}, la fréquence de l'issue ${c.evt} a été de ${p} % : c'est le relevé ${deQui(qui)}, qui ${c.action(fr(n))}. Sur ${fr(m)} autres ${c.essais}, combien de fois l'issue ${c.evt} devrait-elle se produire environ ?`,
         `D'après ${fr(n)} ${c.essais}, l'issue ${c.evt} a une fréquence de ${fr(p / 100)}. Prévois le nombre approximatif d'issues ${c.evt} sur ${fr(m)} nouveaux essais.`,
       ]);
       return {

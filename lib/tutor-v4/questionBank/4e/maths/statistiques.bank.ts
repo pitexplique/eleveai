@@ -71,7 +71,8 @@ type QG = TutorGeneratedQuestionV4;
 
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 /** « de » devant un nom sans article, avec élision : « d'élèves », « de familles ». */
-const deNu = (n: string) => (/^[aeiouyéèêâîôû]/i.test(n) ? "d'" + n : "de " + n);
+// ⛔ 08/10 : pas de « y » — « de Yanis », pas « d'Yanis ».
+const deNu = (n: string) => (/^[aeiouéèêâîôû]/i.test(n) ? "d'" + n : "de " + n);
 /** « le club » → « du club », « les ventes » → « des ventes », « la 4e A » → « de la 4e A ». */
 function de(gn: string): string {
   if (gn.startsWith("le ")) return "du " + gn.slice(3);
@@ -1904,10 +1905,17 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_lire_tableau",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique ce que signifie : « marche : 18 élèves » dans un tableau statistique.",
-    format: "open",
-    expected: ["marche", "18", "élèves"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10 : question ouverte à mots-clés (« 18 » suffisait) → QCM sur les mêmes pièges.
+    text: "Dans un tableau statistique, on lit : « marche : 18 élèves ». Que signifie cette ligne ?",
+    format: "qcm",
+    choices: [
+      "18 élèves appartiennent à la catégorie « marche »",
+      "la marche représente 18 % des élèves",
+      "il y a 18 catégories dans le tableau",
+      "la moyenne des élèves qui marchent est 18",
+    ],
+    expected: ["18 élèves appartiennent à la catégorie « marche »"],
+    comparator: "mcq_exact",
     hint: "Il faut dire quelle catégorie est concernée et combien d’élèves sont concernés.",
     explanation:
       "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
@@ -2000,10 +2008,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_lire_graphique",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment lire une information dans un diagramme en barres.",
-    format: "open",
-    expected: ["barre", "hauteur", "valeur"],
-    comparator: "contains_keyword",
+    text: "Comment lit-on l'effectif d'une catégorie dans un diagramme en barres ?",
+    format: "qcm",
+    choices: [
+      "on repère la barre de la catégorie et on lit sa hauteur",
+      "on compte le nombre de barres du diagramme",
+      "on mesure la largeur de la barre",
+      "on additionne les hauteurs de toutes les barres",
+    ],
+    expected: ["on repère la barre de la catégorie et on lit sa hauteur"],
+    comparator: "mcq_exact",
     hint: "Tu dois parler de la catégorie et de la hauteur de la barre.",
     explanation:
       "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
@@ -2075,10 +2089,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_effectif",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment trouver l’effectif total dans une série statistique.",
-    format: "open",
-    expected: ["additionne", "effectifs", "total"],
-    comparator: "contains_keyword",
+    text: "Comment trouve-t-on l’effectif total d’une série statistique ?",
+    format: "qcm",
+    choices: [
+      "on additionne les effectifs de toutes les valeurs",
+      "on additionne toutes les valeurs de la série",
+      "on prend le plus grand effectif",
+      "on compte le nombre de valeurs différentes",
+    ],
+    expected: ["on additionne les effectifs de toutes les valeurs"],
+    comparator: "mcq_exact",
     hint: "On regroupe toutes les catégories.",
     explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
@@ -2152,7 +2172,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Lis l’effectif de la catégorie puis divise par le total.",
     tags: ["stat_statistique", "frequence", "graphique", "canvas"],
-    generate: () => genFreq(randomChoice<Forme>(["decimal", "pourcentage", "fraction"]), "graphique"),
+    generate: () => genFreq(randomChoice<Forme>(["decimal", "pourcentage"]), "graphique"),
   },
 
   {
@@ -2164,10 +2184,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_frequence",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment calculer une fréquence à partir d’un effectif et d’un effectif total.",
-    format: "open",
-    expected: ["effectif", "total", "divise"],
-    comparator: "contains_keyword",
+    text: "Comment calcule-t-on la fréquence d’une catégorie à partir de son effectif ?",
+    format: "qcm",
+    choices: [
+      "on divise son effectif par l’effectif total",
+      "on divise l’effectif total par son effectif",
+      "on divise son effectif par l’effectif d’une autre catégorie",
+      "on multiplie son effectif par l’effectif total",
+    ],
+    expected: ["on divise son effectif par l’effectif total"],
+    comparator: "mcq_exact",
     hint: "C’est un quotient.",
     explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
@@ -2275,10 +2301,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_moyenne",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi la moyenne n’est pas toujours une valeur de la série.",
-    format: "open",
-    expected: ["somme", "divise", "valeurs"],
-    comparator: "contains_keyword",
+    text: "Pourquoi la moyenne n’est-elle pas toujours une valeur de la série ?",
+    format: "qcm",
+    choices: [
+      "parce que c’est la somme des valeurs divisée par leur nombre : un calcul qui peut tomber entre deux valeurs",
+      "parce que c’est toujours la valeur du milieu de la série",
+      "parce qu’on oublie la plus grande valeur",
+      "c’est faux : la moyenne est toujours une valeur de la série",
+    ],
+    expected: ["parce que c’est la somme des valeurs divisée par leur nombre : un calcul qui peut tomber entre deux valeurs"],
+    comparator: "mcq_exact",
     hint: "La moyenne est un calcul, pas forcément une valeur observée.",
     explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
@@ -2371,10 +2403,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_mediane",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi il faut d’abord ranger une série avant de déterminer sa médiane.",
-    format: "open",
-    expected: ["ranger", "ordre", "centrale"],
-    comparator: "contains_keyword",
+    text: "Pourquoi faut-il ranger une série avant de chercher sa médiane ?",
+    format: "qcm",
+    choices: [
+      "parce que la médiane est la valeur centrale de la série rangée dans l’ordre croissant",
+      "parce que la médiane est la première valeur de la série",
+      "parce que ranger la série change sa moyenne",
+      "ce n’est pas nécessaire : on prend la valeur écrite au milieu",
+    ],
+    expected: ["parce que la médiane est la valeur centrale de la série rangée dans l’ordre croissant"],
+    comparator: "mcq_exact",
     hint: "La médiane dépend de la position centrale.",
     explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
@@ -2446,10 +2484,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_etendue",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique ce que mesure l’étendue d’une série statistique.",
-    format: "open",
-    expected: ["maximum", "minimum", "écart"],
-    comparator: "contains_keyword",
+    text: "Que mesure l’étendue d’une série statistique ?",
+    format: "qcm",
+    choices: [
+      "l’écart entre la plus grande et la plus petite valeur",
+      "la valeur la plus fréquente",
+      "la plus grande valeur de la série",
+      "la somme de la plus grande et de la plus petite valeur",
+    ],
+    expected: ["l’écart entre la plus grande et la plus petite valeur"],
+    comparator: "mcq_exact",
     hint: "L’étendue compare les extrêmes.",
     explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
@@ -2534,10 +2578,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_interpreter",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique la différence entre moyenne, médiane et étendue.",
-    format: "open",
-    expected: ["moyenne", "médiane", "étendue"],
-    comparator: "contains_keyword",
+    text: "Quelle phrase décrit correctement la moyenne, la médiane et l’étendue ?",
+    format: "qcm",
+    choices: [
+      "la moyenne partage le total, la médiane coupe la série rangée en deux, l’étendue mesure l’écart entre les extrêmes",
+      "la moyenne coupe la série rangée en deux, la médiane partage le total, l’étendue est la plus grande valeur",
+      "les trois indicateurs donnent toujours le même nombre",
+      "la moyenne et la médiane mesurent l’écart entre les extrêmes, l’étendue partage le total",
+    ],
+    expected: ["la moyenne partage le total, la médiane coupe la série rangée en deux, l’étendue mesure l’écart entre les extrêmes"],
+    comparator: "mcq_exact",
     hint: "La moyenne résume, la médiane coupe la série, l’étendue mesure l’écart.",
     explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
@@ -2587,10 +2637,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_probleme",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi les statistiques aident à comparer deux groupes.",
-    format: "open",
-    expected: ["moyenne", "médiane", "étendue"],
-    comparator: "contains_keyword",
+    text: "Pour comparer les notes de deux classes, que faut-il regarder ?",
+    format: "qcm",
+    choices: [
+      "un indicateur de position (moyenne ou médiane) ET un indicateur de dispersion (étendue)",
+      "seulement la meilleure note de chaque classe",
+      "seulement le nombre d’élèves de chaque classe",
+      "seulement la moyenne : elle dit tout de la série",
+    ],
+    expected: ["un indicateur de position (moyenne ou médiane) ET un indicateur de dispersion (étendue)"],
+    comparator: "mcq_exact",
     hint: "Utilise au moins deux indicateurs.",
     explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
@@ -2648,10 +2704,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi une valeur extrême peut modifier fortement une moyenne.",
-    format: "open",
-    expected: ["valeur", "extrême", "moyenne"],
-    comparator: "contains_keyword",
+    text: "Pourquoi une valeur extrême peut-elle modifier fortement une moyenne ?",
+    format: "qcm",
+    choices: [
+      "parce que la moyenne utilise TOUTES les valeurs : une valeur très grande fait grossir la somme",
+      "parce que la moyenne ne garde que la valeur du milieu",
+      "parce qu’une valeur extrême change le nombre de valeurs",
+      "c’est faux : une valeur extrême ne change jamais la moyenne",
+    ],
+    expected: ["parce que la moyenne utilise TOUTES les valeurs : une valeur très grande fait grossir la somme"],
+    comparator: "mcq_exact",
     hint: "La moyenne utilise toutes les valeurs.",
     explanation: "Définition : les statistiques permettent d’organiser et de résumer une série de données.\n\n" +
           "Méthode : on choisit l’indicateur demandé : effectif, fréquence, moyenne, médiane ou étendue.\n\nCalcul : " +
@@ -2749,10 +2811,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_lire_tableau",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique comment trouver l’effectif total à partir d’un tableau.",
-    format: "open",
-    expected: ["additionne", "effectifs", "total"],
-    comparator: "contains_keyword",
+    text: "Un tableau donne l’effectif de chaque catégorie. Comment obtient-on l’effectif total ?",
+    format: "qcm",
+    choices: [
+      "on additionne les effectifs de toutes les catégories",
+      "on prend l’effectif de la dernière catégorie",
+      "on compte le nombre de catégories",
+      "on multiplie les effectifs entre eux",
+    ],
+    expected: ["on additionne les effectifs de toutes les catégories"],
+    comparator: "mcq_exact",
     hint: "On regroupe toutes les catégories.",
     explanation:
       "Définition : l’effectif total est la somme des effectifs.\n\n" +
@@ -2847,10 +2915,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_lire_graphique",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique l’avantage d’un graphique par rapport à un tableau de données.",
-    format: "open",
-    expected: ["visuel", "comparer", "rapide"],
-    comparator: "contains_keyword",
+    text: "Quel est l’avantage d’un diagramme par rapport à un tableau de données ?",
+    format: "qcm",
+    choices: [
+      "on compare les catégories d’un coup d’œil",
+      "il donne des effectifs plus exacts que le tableau",
+      "il calcule la moyenne tout seul",
+      "il contient plus de données que le tableau",
+    ],
+    expected: ["on compare les catégories d’un coup d’œil"],
+    comparator: "mcq_exact",
     hint: "Pense à la lecture visuelle.",
     explanation:
       "Définition : un graphique représente visuellement les données.\n\n" +
@@ -2967,10 +3041,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_effectif",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique la différence entre une valeur et son effectif.",
-    format: "open",
-    expected: ["valeur", "effectif", "nombre"],
-    comparator: "contains_keyword",
+    text: "Dans la série des notes d’une classe, la note 14 a pour effectif 5. Que veut dire cette phrase ?",
+    format: "qcm",
+    choices: [
+      "5 élèves ont eu la note 14",
+      "14 élèves ont eu la note 5",
+      "la moyenne de la classe est 14",
+      "la note 14 est la 5e de la série",
+    ],
+    expected: ["5 élèves ont eu la note 14"],
+    comparator: "mcq_exact",
     hint: "L’une est observée, l’autre est un comptage.",
     explanation:
       "Définition : la valeur est la donnée observée, l’effectif est le nombre de fois où elle apparaît.\n\n" +
@@ -3014,8 +3094,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Fréquence = effectif ÷ total.",
     tags: ["stat_statistique", "frequence", "decimal", "template"],
-    generate: () =>
-      genFreq(randomChoice<Forme>(["decimal", "fraction"]), Math.random() < 0.5 ? "texte" : "tableau"),
+    // ⛔ 08/10 : plus de fréquence « sous forme de fraction » en statistiques —
+    // la barre 44/80 est refusée hors des notions de fractions et de
+    // probabilités (règle de Frédéric du 06/10) ; la fraction reste en proba_frequence.
+    generate: () => genFreq("decimal", randomChoice(["texte", "tableau", "graphique"] as const)),
   },
   {
     kind: "template",
@@ -3061,10 +3143,11 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_frequence",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment passer d’une fréquence décimale à un pourcentage.",
-    format: "open",
-    expected: ["multiplie", "100", "pourcentage"],
-    comparator: "contains_keyword",
+    text: "Une fréquence vaut 0,35. Comment l’écrit-on en pourcentage ?",
+    format: "qcm",
+    choices: ["35 %", "0,35 %", "3,5 %", "350 %"],
+    expected: ["35 %"],
+    comparator: "mcq_exact",
     hint: "On change d’écriture en multipliant.",
     explanation:
       "Définition : un pourcentage est une fréquence exprimée sur 100.\n\n" +
@@ -3132,10 +3215,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_moyenne",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique la méthode pour calculer une moyenne.",
-    format: "open",
-    expected: ["additionne", "divise", "nombre"],
-    comparator: "contains_keyword",
+    text: "Quelle est la méthode pour calculer la moyenne d’une série ?",
+    format: "qcm",
+    choices: [
+      "on additionne toutes les valeurs, puis on divise par le nombre de valeurs",
+      "on prend la valeur du milieu de la série rangée",
+      "on soustrait la plus petite valeur de la plus grande",
+      "on additionne la plus grande et la plus petite valeur, puis on divise par 2",
+    ],
+    expected: ["on additionne toutes les valeurs, puis on divise par le nombre de valeurs"],
+    comparator: "mcq_exact",
     hint: "Deux étapes : somme puis division.",
     explanation:
       "Définition : la moyenne résume une série par une seule valeur.\n\n" +
@@ -3230,10 +3319,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_mediane",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment trouver la médiane d’une série ayant un nombre pair de valeurs.",
-    format: "open",
-    expected: ["ranger", "deux", "moyenne"],
-    comparator: "contains_keyword",
+    text: "Une série rangée a un nombre PAIR de valeurs. Comment trouve-t-on sa médiane ?",
+    format: "qcm",
+    choices: [
+      "on prend la moyenne des deux valeurs centrales",
+      "on prend la plus petite des deux valeurs centrales",
+      "on prend la moyenne de toute la série",
+      "il n’y a pas de médiane",
+    ],
+    expected: ["on prend la moyenne des deux valeurs centrales"],
+    comparator: "mcq_exact",
     hint: "Il y a deux valeurs centrales.",
     explanation:
       "Définition : avec un nombre pair de valeurs, il y a deux valeurs centrales.\n\n" +
@@ -3345,10 +3440,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_etendue",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi l’étendue ne dépend que de deux valeurs.",
-    format: "open",
-    expected: ["maximum", "minimum", "extrêmes"],
-    comparator: "contains_keyword",
+    text: "De quelles valeurs de la série l’étendue dépend-elle ?",
+    format: "qcm",
+    choices: [
+      "seulement de la plus grande et de la plus petite valeur",
+      "de toutes les valeurs de la série",
+      "seulement de la valeur du milieu",
+      "seulement de la valeur la plus fréquente",
+    ],
+    expected: ["seulement de la plus grande et de la plus petite valeur"],
+    comparator: "mcq_exact",
     hint: "Quelles valeurs interviennent dans le calcul ?",
     explanation:
       "Définition : l’étendue = maximum - minimum.\n\n" +
@@ -3425,7 +3526,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_interpreter",
     difficulty: 3,
     theme: "neutral",
-    text: "La moyenne d’une classe est 11/20. Peut-on en déduire la note de chaque élève ?",
+    text: "La moyenne d’une classe est 11 sur 20. Peut-on en déduire la note de chaque élève ?",
     format: "qcm",
     choices: ["non", "oui"],
     expected: ["non"],
@@ -3447,10 +3548,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_interpreter",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi il est utile d’utiliser plusieurs indicateurs pour décrire une série.",
-    format: "open",
-    expected: ["moyenne", "étendue", "dispersion"],
-    comparator: "contains_keyword",
+    text: "Pourquoi utilise-t-on plusieurs indicateurs pour décrire une série ?",
+    format: "qcm",
+    choices: [
+      "parce qu’un seul ne dit pas tout : la moyenne situe la série, l’étendue dit si elle est dispersée",
+      "parce que les indicateurs donnent toujours des résultats différents",
+      "parce qu’un indicateur peut être faux",
+      "c’est inutile : la moyenne suffit toujours",
+    ],
+    expected: ["parce qu’un seul ne dit pas tout : la moyenne situe la série, l’étendue dit si elle est dispersée"],
+    comparator: "mcq_exact",
     hint: "Un seul indicateur ne dit pas tout.",
     explanation:
       "Définition : chaque indicateur décrit un aspect différent.\n\n" +
@@ -3565,10 +3672,11 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_probleme",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique quel indicateur choisir pour connaître le niveau moyen d’une classe.",
-    format: "open",
-    expected: ["moyenne", "somme", "divise"],
-    comparator: "contains_keyword",
+    text: "Quel indicateur choisir pour connaître le niveau moyen d’une classe ?",
+    format: "qcm",
+    choices: ["la moyenne", "l’étendue", "l’effectif total", "la plus grande note"],
+    expected: ["la moyenne"],
+    comparator: "mcq_exact",
     hint: "Niveau moyen = moyenne.",
     explanation:
       "Définition : la moyenne donne le niveau global.\n\n" +
@@ -3645,10 +3753,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi la médiane peut mieux représenter une série que la moyenne quand il y a une valeur très grande.",
-    format: "open",
-    expected: ["médiane", "extrême", "moyenne"],
-    comparator: "contains_keyword",
+    text: "Une série contient une valeur très grande. Pourquoi la médiane peut-elle mieux la représenter que la moyenne ?",
+    format: "qcm",
+    choices: [
+      "parce que la médiane dépend du rang des valeurs : la valeur extrême ne la tire pas vers le haut",
+      "parce que la médiane est toujours plus grande que la moyenne",
+      "parce que la médiane utilise la somme de toutes les valeurs",
+      "parce que la médiane ignore toutes les valeurs",
+    ],
+    expected: ["parce que la médiane dépend du rang des valeurs : la valeur extrême ne la tire pas vers le haut"],
+    comparator: "mcq_exact",
     hint: "Pense à l’effet d’une valeur extrême.",
     explanation:
       "Définition : la médiane est la valeur centrale, peu sensible aux extrêmes.\n\n" +
@@ -3701,10 +3815,16 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi deux séries peuvent avoir la même moyenne mais des étendues très différentes.",
-    format: "open",
-    expected: ["moyenne", "étendue", "dispersion"],
-    comparator: "contains_keyword",
+    text: "Les séries 9 ; 10 ; 11 et 0 ; 10 ; 20 ont la même moyenne, 10. Que montre leur étendue ?",
+    format: "qcm",
+    choices: [
+      "la seconde est beaucoup plus dispersée : étendue 20 contre 2",
+      "les deux séries sont identiques puisque la moyenne est la même",
+      "la première est plus dispersée : étendue 11 contre 10",
+      "on ne peut pas calculer l’étendue quand les moyennes sont égales",
+    ],
+    expected: ["la seconde est beaucoup plus dispersée : étendue 20 contre 2"],
+    comparator: "mcq_exact",
     hint: "La moyenne ne dit rien sur la dispersion.",
     explanation:
       "Définition : la moyenne mesure le niveau, l’étendue mesure la dispersion.\n\n" +

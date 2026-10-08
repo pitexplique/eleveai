@@ -10,6 +10,7 @@ import { CORRECTEURS as expressionsLitterales } from "./expressions-litterales";
 import { CORRECTEURS as factorisation } from "./factorisation";
 import { CORRECTEURS as fonctions } from "./fonctions";
 import { CORRECTEURS as fractions } from "./fractions";
+import { CORRECTEURS as frequences } from "./frequences";
 import { CORRECTEURS as grandeurs } from "./grandeurs";
 import { CORRECTEURS as identitesRemarquables } from "./identites-remarquables";
 import { CORRECTEURS as nombresPremiers } from "./nombres-premiers";
@@ -17,11 +18,13 @@ import { CORRECTEURS as operationsRelatifs } from "./operations-relatifs";
 import { CORRECTEURS as ordresGrandeur } from "./ordres-grandeur";
 import { CORRECTEURS as parallelogrammes } from "./parallelogrammes";
 import { CORRECTEURS as perimetres } from "./perimetres";
+import { CORRECTEURS as probabilites } from "./probabilites";
 import { CORRECTEURS as proportionnalite } from "./proportionnalite";
 import { CORRECTEURS as puissances } from "./puissances";
 import { CORRECTEURS as pythagore } from "./pythagore";
 import { CORRECTEURS as ratios } from "./ratios";
 import { CORRECTEURS as reperage } from "./reperage";
+import { CORRECTEURS as statistiques } from "./statistiques";
 import { CORRECTEURS as thales } from "./thales";
 import { CORRECTEURS as transformations } from "./transformations";
 import { CORRECTEURS as triangles } from "./triangles";
@@ -41,6 +44,7 @@ export const CORRECTEURS_4E: CorrecteursMaths = {
   ...factorisation,
   ...fonctions,
   ...fractions,
+  ...frequences,
   ...grandeurs,
   ...identitesRemarquables,
   ...nombresPremiers,
@@ -48,11 +52,13 @@ export const CORRECTEURS_4E: CorrecteursMaths = {
   ...ordresGrandeur,
   ...parallelogrammes,
   ...perimetres,
+  ...probabilites,
   ...proportionnalite,
   ...puissances,
   ...pythagore,
   ...ratios,
   ...reperage,
+  ...statistiques,
   ...thales,
   ...transformations,
   ...triangles,

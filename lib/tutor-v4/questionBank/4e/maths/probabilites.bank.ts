@@ -160,8 +160,10 @@ function reponsesFraction(n: number, d: number, irreductible: boolean): string[]
   if (irreductible) return [irr(n, d)];
   const out = [`${n}/${d}`, irr(n, d)];
   for (let k = 1; d0 * k <= Math.max(400, d); k++) out.push(`${n0 * k}/${d0 * k}`);
+  // ⛔ 08/10 : 1/32 = 0,03125 était accepté sous la forme ARRONDIE « 0,0313 ».
+  // On n'ajoute l'écriture décimale que si elle tient en quatre décimales.
   const v = decimalExact(n, d);
-  if (v !== null) out.push(fr(v));
+  if (v !== null && Math.abs(Math.round(v * 10000) / 10000 - v) < 1e-12) out.push(fr(v));
   return Array.from(new Set(out));
 }
 function consigneFraction(irreductible: boolean): string {
@@ -2493,10 +2495,21 @@ function genDefiRoueExplique(): Genere {
   const cs = shuffle(COULEURS.filter((c) => c.ms !== "blanc")).slice(0, 3);
   const m = randomInt(2, 4);
   return {
-    text: `Sur la roue ${lieu}, le secteur ${cs[0].ms} est ${m} fois plus grand que chacun des secteurs ${cs[1].ms} et ${cs[2].ms}. Explique pourquoi « obtenir ${leCoul(cs[0])} » est l'issue la plus probable.`,
-    format: "open",
-    expected: [cs[0].ms, "plus grand", "secteur", "probab"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10 : c'était une question ouverte validée par des mots-clés
+    // (« secteur » suffisait) → QCM sur les mêmes pièges (compter les couleurs).
+    text: `Sur la roue ${lieu}, le secteur ${cs[0].ms} est ${m} fois plus grand que chacun des secteurs ${cs[1].ms} et ${cs[2].ms}. ${randomChoice([
+      `Pourquoi « obtenir ${leCoul(cs[0])} » est-il l'issue la plus probable ?`,
+      `Quelle raison explique que « obtenir ${leCoul(cs[0])} » soit l'issue la plus probable ?`,
+    ])}`,
+    format: "qcm",
+    choices: shuffle([
+      `parce que le secteur ${cs[0].ms} occupe ${m} parts sur ${m + 2} de la roue`,
+      "parce qu'il y a trois couleurs : chacune a une chance sur trois",
+      `parce que ${leCoul(cs[0])} est cité en premier`,
+      `parce que ${leCoul(cs[0])} est une couleur plus voyante`,
+    ]),
+    expected: [`parce que le secteur ${cs[0].ms} occupe ${m} parts sur ${m + 2} de la roue`],
+    comparator: "mcq_exact",
     explanation: expl(
       "sur une roue, une issue est d'autant plus probable que son secteur est grand.",
       "on compare la place occupée par chaque couleur.",
@@ -2641,10 +2654,17 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_vocabulaire",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique avec tes mots ce qu’est une expérience aléatoire.",
-    format: "open",
-    expected: ["résultat", "avance"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10 : question ouverte à mots-clés (« résultat » suffisait) → QCM sur les mêmes pièges.
+    text: "Qu’est-ce qu’une expérience aléatoire ?",
+    format: "qcm",
+    choices: [
+      "une expérience dont on ne peut pas prévoir le résultat à l’avance",
+      "une expérience qui donne toujours le même résultat",
+      "une expérience dont le résultat est impossible",
+      "une expérience qu’on ne peut faire qu’une seule fois",
+    ],
+    expected: ["une expérience dont on ne peut pas prévoir le résultat à l’avance"],
+    comparator: "mcq_exact",
     hint: "On ne peut pas savoir avec certitude le résultat avant de faire l’expérience.",
     explanation:
       "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
@@ -2701,10 +2721,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_issue",
     difficulty: 2,
     theme: "neutral",
-    text: "On lance un dé équilibré. Explique pourquoi il y a 6 issues possibles.",
-    format: "open",
-    expected: ["1", "2", "3", "4", "5", "6"],
-    comparator: "contains_keyword",
+    text: "On lance un dé équilibré à 6 faces. Pourquoi y a-t-il 6 issues possibles ?",
+    format: "qcm",
+    choices: [
+      "parce que le dé peut tomber sur 1, 2, 3, 4, 5 ou 6",
+      "parce qu’on lance le dé 6 fois",
+      "parce que 6 est le plus grand nombre du dé",
+      "parce que chaque issue a une probabilité de 6",
+    ],
+    expected: ["parce que le dé peut tomber sur 1, 2, 3, 4, 5 ou 6"],
+    comparator: "mcq_exact",
     hint: "Liste les résultats possibles du dé.",
     explanation:
       "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
@@ -2789,10 +2815,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_evenement",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi l’événement « obtenir 8 » est impossible lorsqu’on lance un dé à 6 faces.",
-    format: "open",
-    expected: ["8", "dé", "6"],
-    comparator: "contains_keyword",
+    text: "On lance un dé à 6 faces. Pourquoi l’événement « obtenir 8 » est-il impossible ?",
+    format: "qcm",
+    choices: [
+      "parce qu’aucune face du dé ne porte le nombre 8",
+      "parce que 8 est un nombre pair",
+      "parce que 8 a très peu de chances de sortir",
+      "parce qu’il faudrait lancer le dé 8 fois",
+    ],
+    expected: ["parce qu’aucune face du dé ne porte le nombre 8"],
+    comparator: "mcq_exact",
     hint: "Regarde les faces possibles du dé.",
     explanation:
       "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
@@ -2905,10 +2937,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_calculer_fraction",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi la probabilité d’obtenir un nombre pair avec un dé équilibré est 3/6.",
-    format: "open",
-    expected: ["2", "4", "6", "3", "6"],
-    comparator: "contains_keyword",
+    text: "On lance un dé équilibré à 6 faces. Pourquoi la probabilité d’obtenir un nombre pair est-elle 3/6 ?",
+    format: "qcm",
+    choices: [
+      "parce que 3 faces sur 6 sont paires : 2, 4 et 6",
+      "parce que 3 est la moitié de 6",
+      "parce que le plus petit nombre pair est 2 et qu’il y a 6 faces",
+      "parce qu’on a 3 chances de lancer le dé",
+    ],
+    expected: ["parce que 3 faces sur 6 sont paires : 2, 4 et 6"],
+    comparator: "mcq_exact",
     hint: "Compte les nombres pairs, puis le nombre total d’issues.",
     explanation:
       "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
@@ -2965,10 +3003,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_convertir",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi une probabilité de 1/2 correspond à 50 %.",
-    format: "open",
-    expected: ["1/2", "0,5", "50"],
-    comparator: "contains_keyword",
+    text: "Pourquoi une probabilité de 1/2 correspond-elle à 50 % ?",
+    format: "qcm",
+    choices: [
+      "parce que 1/2 = 0,5 et 0,5 × 100 = 50",
+      "parce que 1/2 s’écrit 1,2 en nombre décimal",
+      "parce que 50 est la moitié de 1/2",
+      "parce que toute probabilité vaut 50 %",
+    ],
+    expected: ["parce que 1/2 = 0,5 et 0,5 × 100 = 50"],
+    comparator: "mcq_exact",
     hint: "1/2 signifie une chance sur deux.",
     explanation:
       "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
@@ -3024,10 +3068,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_comparer",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi 1/2 est plus grand que 1/4.",
-    format: "open",
-    expected: ["moitié", "quart"],
-    comparator: "contains_keyword",
+    text: "Pourquoi la probabilité 1/2 est-elle plus grande que 1/4 ?",
+    format: "qcm",
+    choices: [
+      "parce qu’une moitié est plus grande qu’un quart : 1/2 = 2/4",
+      "parce que 4 est plus grand que 2",
+      "parce que 1/4 = 0,4 et 1/2 = 0,2",
+      "c’est faux : 1/4 est plus grand, car 4 > 2",
+    ],
+    expected: ["parce qu’une moitié est plus grande qu’un quart : 1/2 = 2/4"],
+    comparator: "mcq_exact",
     hint: "Compare une moitié et un quart.",
     explanation:
       "Définition : une probabilité mesure la chance qu’un événement se produise, entre 0 et 1.\n\n" +
@@ -3251,10 +3301,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_vocabulaire",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique la différence entre une issue et un événement.",
-    format: "open",
-    expected: ["issue", "événement", "résultat"],
-    comparator: "contains_keyword",
+    text: "Quelle phrase décrit correctement la différence entre une issue et un événement ?",
+    format: "qcm",
+    choices: [
+      "une issue est UN résultat possible ; un événement est un ensemble d’issues",
+      "une issue est un ensemble de résultats ; un événement est un seul résultat",
+      "une issue et un événement sont la même chose",
+      "un événement est toujours impossible, une issue toujours possible",
+    ],
+    expected: ["une issue est UN résultat possible ; un événement est un ensemble d’issues"],
+    comparator: "mcq_exact",
     hint: "L’un est un seul résultat, l’autre un ensemble.",
     explanation:
       "Définition : une issue est un résultat unique ; un événement est un ensemble d’issues.\n\n" +
@@ -3366,10 +3422,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_issue",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique comment trouver le nombre d’issues d’une expérience.",
-    format: "open",
-    expected: ["résultats", "possibles", "compte"],
-    comparator: "contains_keyword",
+    text: "Comment trouve-t-on le nombre d’issues d’une expérience aléatoire ?",
+    format: "qcm",
+    choices: [
+      "on liste tous les résultats possibles, puis on les compte",
+      "on fait l’expérience une fois et on regarde le résultat",
+      "on compte seulement les résultats favorables",
+      "c’est toujours 6",
+    ],
+    expected: ["on liste tous les résultats possibles, puis on les compte"],
+    comparator: "mcq_exact",
     hint: "On liste les résultats possibles.",
     explanation:
       "Définition : le nombre d’issues est le nombre de résultats possibles.\n\n" +
@@ -3489,10 +3551,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_evenement",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique ce qu’est l’événement contraire d’un événement.",
-    format: "open",
-    expected: ["contraire", "issues", "réalisent"],
-    comparator: "contains_keyword",
+    text: "Qu’est-ce que l’événement contraire d’un événement A ?",
+    format: "qcm",
+    choices: [
+      "l’événement formé de TOUTES les issues qui ne réalisent pas A",
+      "une autre issue, prise au hasard, qui ne réalise pas A",
+      "l’événement impossible",
+      "l’événement formé des issues qui réalisent A",
+    ],
+    expected: ["l’événement formé de TOUTES les issues qui ne réalisent pas A"],
+    comparator: "mcq_exact",
     hint: "Toutes les issues qui ne réalisent pas l’événement.",
     explanation:
       "Définition : l’événement contraire regroupe toutes les issues qui ne réalisent pas l’événement.\n\n" +
@@ -3649,10 +3717,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_equiprobabilite",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique ce que signifie une situation équiprobable, avec un exemple.",
-    format: "open",
-    expected: ["même", "probabilité", "issues"],
-    comparator: "contains_keyword",
+    text: "Laquelle de ces situations est équiprobable ?",
+    format: "qcm",
+    choices: [
+      "lancer un dé équilibré : chaque face a la même probabilité, 1/6",
+      "tirer un penalty : marquer ou rater",
+      "lancer une punaise : pointe en haut ou pointe en bas",
+      "regarder le ciel demain : pluie ou pas de pluie",
+    ],
+    expected: ["lancer un dé équilibré : chaque face a la même probabilité, 1/6"],
+    comparator: "mcq_exact",
     hint: "Pense au dé équilibré.",
     explanation:
       "Définition : une situation est équiprobable si toutes les issues ont la même probabilité.\n\n" +
@@ -3759,10 +3833,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_calculer_fraction",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique la formule qui permet de calculer une probabilité.",
-    format: "open",
-    expected: ["favorables", "possibles", "divise"],
-    comparator: "contains_keyword",
+    text: "Les issues étant équiprobables, comment calcule-t-on la probabilité d’un événement ?",
+    format: "qcm",
+    choices: [
+      "nombre de cas favorables ÷ nombre de cas possibles",
+      "nombre de cas possibles ÷ nombre de cas favorables",
+      "nombre de cas favorables ÷ nombre de cas défavorables",
+      "nombre de cas favorables × nombre de cas possibles",
+    ],
+    expected: ["nombre de cas favorables ÷ nombre de cas possibles"],
+    comparator: "mcq_exact",
     hint: "C’est un quotient.",
     explanation:
       "Définition : une probabilité est un quotient.\n\n" +
@@ -3896,10 +3976,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_convertir",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi une probabilité est toujours comprise entre 0 % et 100 %.",
-    format: "open",
-    expected: ["0", "100", "impossible"],
-    comparator: "contains_keyword",
+    text: "Pourquoi une probabilité est-elle toujours comprise entre 0 % et 100 % ?",
+    format: "qcm",
+    choices: [
+      "parce que les cas favorables sont au plus aussi nombreux que les cas possibles : 0 % = impossible, 100 % = certain",
+      "parce qu’on arrondit toujours les pourcentages",
+      "parce qu’une probabilité est toujours égale à 50 %",
+      "c’est faux : une probabilité peut dépasser 100 %",
+    ],
+    expected: ["parce que les cas favorables sont au plus aussi nombreux que les cas possibles : 0 % = impossible, 100 % = certain"],
+    comparator: "mcq_exact",
     hint: "0 = impossible, 100 % = certain.",
     explanation:
       "Définition : une probabilité est comprise entre 0 et 1, soit 0 % et 100 %.\n\n" +
@@ -4016,10 +4102,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_comparer",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment comparer deux probabilités données en fractions de dénominateurs différents.",
-    format: "open",
-    expected: ["même dénominateur", "comparer", "pourcentage"],
-    comparator: "contains_keyword",
+    text: "Comment comparer deux probabilités écrites en fractions de dénominateurs différents, comme 2/3 et 3/5 ?",
+    format: "qcm",
+    choices: [
+      "on les écrit au même dénominateur (10/15 et 9/15), ou en pourcentage, puis on compare",
+      "on compare seulement les numérateurs : 3 > 2",
+      "on compare seulement les dénominateurs : 5 > 3",
+      "on ne peut pas les comparer",
+    ],
+    expected: ["on les écrit au même dénominateur (10/15 et 9/15), ou en pourcentage, puis on compare"],
+    comparator: "mcq_exact",
     hint: "On peut les mettre au même dénominateur ou en pourcentage.",
     explanation:
       "Définition : comparer deux probabilités, c’est comparer deux fractions.\n\n" +
@@ -4131,10 +4223,16 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi la probabilité d’un événement et celle de son contraire ont pour somme 1.",
-    format: "open",
-    expected: ["contraire", "1", "toutes les issues"],
-    comparator: "contains_keyword",
+    text: "Pourquoi la probabilité d’un événement et celle de son contraire ont-elles pour somme 1 ?",
+    format: "qcm",
+    choices: [
+      "parce qu’à eux deux ils regroupent toutes les issues, une seule fois chacune",
+      "parce qu’un événement et son contraire ont toujours la probabilité 1/2",
+      "parce que l’événement contraire est impossible",
+      "c’est faux : la somme vaut 2",
+    ],
+    expected: ["parce qu’à eux deux ils regroupent toutes les issues, une seule fois chacune"],
+    comparator: "mcq_exact",
     hint: "Ensemble, ils couvrent toutes les issues.",
     explanation:
       "Définition : un événement et son contraire couvrent toutes les issues possibles.\n\n" +
