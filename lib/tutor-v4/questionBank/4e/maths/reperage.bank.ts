@@ -310,7 +310,8 @@ export const reperageBank: TutorBankItemV4[] = [
     tags: ["reperage", "abscisse", "placer", "qcm", "template", "canvas"],
     generate: () => {
       const pas = randomChoice([1, 2, 5]);
-      const v = randomInt(-4, 4) * pas;
+      // ⚠️ 08/10 : jamais 0 — ses leurres devenaient « à gauche de l'origine, à 0 graduation ».
+      const v = randomChoice([-4, -3, -2, -1, 1, 2, 3, 4]) * pas;
       const nom = randomChoice(NOMS_POINTS);
       const cote = v < 0 ? "à gauche de l'origine" : v > 0 ? "à droite de l'origine" : "sur l'origine";
       const nb = Math.abs(v / pas);
@@ -661,7 +662,7 @@ export const reperageBank: TutorBankItemV4[] = [
       const tournures = [
         `${forme} a pour longueur ${u(L)} (le long de l'axe des abscisses), pour largeur ${u(l)} (en profondeur) et pour hauteur ${u(h)}. L'un de ses sommets est à l'origine du repère. Quelles sont les coordonnées du ${cas.nom} ?`,
         `On repère ${p.objet}${estPave ? "" : ", en forme de pavé droit,"} avec un sommet à l'origine : ${u(L)} le long de l'axe des abscisses, ${u(l)} en profondeur et ${u(h)} en hauteur. Où se trouve le ${cas.nom} ? Donne ses coordonnées.`,
-        `Dans un repère de l'espace, ${p.objet} occupe un pavé droit : ${u(L)} en abscisse, ${u(l)} en profondeur, ${u(h)} en altitude, et un sommet à l'origine. Quelles coordonnées a le ${cas.nom} ?`,
+        `Dans un repère de l'espace, ${estPave ? "on place un pavé droit" : `${p.objet} occupe un pavé droit`} : ${u(L)} en abscisse, ${u(l)} en profondeur, ${u(h)} en altitude, et un sommet à l'origine. Quelles coordonnées a le ${cas.nom} ?`,
       ];
       return {
         text: randomChoice(tournures),

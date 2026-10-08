@@ -91,7 +91,8 @@ function tirerNom(): Nom {
 function deuxNoms(): [Nom, Nom] {
   const n1 = tirerNom();
   let n2 = tirerNom();
-  while (n2.nom === n1.nom) n2 = tirerNom();
+  // ⚠️ 08/10 : aucune lettre commune (« EFGH » et « DEFG » se confondaient).
+  while ([...n2.nom].some((l) => n1.nom.includes(l))) n2 = tirerNom();
   return [n1, n2];
 }
 
@@ -153,6 +154,74 @@ const POINTS: Record<Forme, QuadrilatereCanvasData["points"]> = {
   cerfvolant: { A: { x: 150, y: 200 }, B: { x: 225, y: 105 }, C: { x: 150, y: 40 }, D: { x: 75, y: 105 } },
 };
 
+/* ⭐ 08/10/2026 — LA FIGURE RESPECTE SES MESURES. Un parallélogramme étiqueté
+   « 49 » et « 58 » se dessinait avec le côté de 49 plus long que celui de 58,
+   un angle de 140° avec un angle aigu de 66°. `formeMesuree` recalcule les
+   points d'un parallélogramme à partir des étiquettes chiffrées (côtés,
+   angle, hauteur, diagonales) ; sans mesure, la forme par défaut reste. */
+const nombreDe = (s?: string) => {
+  const m = String(s ?? "").match(/^(\d+(?:,\d+)?)/);
+  return m ? Number(m[1].replace(",", ".")) : null;
+};
+type Pt = { x: number; y: number };
+/** Met A et B en bas, C et D au-dessus, dans le cadre 300 × 230 (marges pour les étiquettes). */
+function caser(P: Record<Sommet, Pt>): QuadrilatereCanvasData["points"] {
+  const ks: Sommet[] = ["A", "B", "C", "D"];
+  // AB horizontal, D au-dessus.
+  const ang = Math.atan2(P.B.y - P.A.y, P.B.x - P.A.x);
+  const R = (p: Pt): Pt => {
+    const x = p.x - P.A.x, y = p.y - P.A.y;
+    return { x: x * Math.cos(-ang) - y * Math.sin(-ang), y: x * Math.sin(-ang) + y * Math.cos(-ang) };
+  };
+  let Q = Object.fromEntries(ks.map((k) => [k, R(P[k])])) as Record<Sommet, Pt>;
+  if (Q.D.y < 0) Q = Object.fromEntries(ks.map((k) => [k, { x: Q[k].x, y: -Q[k].y }])) as Record<Sommet, Pt>;
+  const xs = ks.map((k) => Q[k].x), ys = ks.map((k) => Q[k].y);
+  const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+  const s = Math.min(200 / (x1 - x0), 110 / (y1 - y0));
+  const ox = 150 - (s * (x0 + x1)) / 2;
+  const arr = (v: number) => Math.round(v * 10) / 10;
+  return Object.fromEntries(ks.map((k) => [k, { x: arr(ox + s * Q[k].x), y: arr(175 - s * (Q[k].y - y0)) }])) as QuadrilatereCanvasData["points"];
+}
+function formeMesuree(
+  forme: Forme,
+  o: { cotes?: Partial<Record<Cote, string>>; angles?: Partial<Record<Sommet, string>>; hauteur?: string }
+): QuadrilatereCanvasData["points"] | null {
+  if (forme !== "para" && forme !== "paraG") return null;
+  const c = o.cotes ?? {};
+  const ab = nombreDe(c.AB) ?? nombreDe(c.CD);
+  const ad = nombreDe(c.BC) ?? nombreDe(c.DA);
+  const p = nombreDe(c.AC);
+  const q = nombreDe(c.BD);
+  const h = nombreDe(o.hauteur);
+  let angA: number | null = null;
+  for (const k of ["A", "B", "C", "D"] as Sommet[]) {
+    const v = nombreDe(o.angles?.[k]);
+    if (v != null) angA = k === "A" || k === "C" ? v : 180 - v;
+  }
+  const RAD = Math.PI / 180;
+  // Diagonales et un côté : le triangle OAB (OA = p ÷ 2, OB = q ÷ 2) fixe tout.
+  if (p != null && q != null) {
+    const oa = p / 2, ob = q / 2;
+    const cote = ab ?? Math.sqrt(oa * oa + ob * ob - 2 * oa * ob * Math.cos(70 * RAD));
+    const t = Math.acos((oa * oa + ob * ob - cote * cote) / (2 * oa * ob));
+    const A = { x: -oa, y: 0 }, C = { x: oa, y: 0 };
+    const B = { x: -ob * Math.cos(t), y: -ob * Math.sin(t) };
+    const D = { x: -B.x, y: -B.y };
+    return caser({ A, B, C, D });
+  }
+  if (ab == null && ad == null && angA == null && h == null) return null;
+  const AB = ab ?? (ad != null ? ad * 1.5 : h != null ? h * 1.6 : 1.5);
+  let a = angA ?? (forme === "paraG" ? 116 : 66);
+  let AD = ad ?? (h != null ? h / Math.sin(a * RAD) : AB * 0.64);
+  // La hauteur et le côté incliné fixent l'angle : sin A = h ÷ AD.
+  if (h != null && ad != null && h < ad) a = Math.asin(h / ad) / RAD;
+  if (h != null && ad == null) AD = h / Math.sin(a * RAD);
+  const A = { x: 0, y: 0 }, B = { x: AB, y: 0 };
+  const D = { x: AD * Math.cos(a * RAD), y: AD * Math.sin(a * RAD) };
+  const C = { x: B.x + D.x, y: D.y };
+  return caser({ A, B, C, D });
+}
+
 function figure(
   n: Nom,
   forme: Forme,
@@ -182,7 +251,7 @@ function figure(
   }
   const canvas: QuadrilatereCanvasData = {
     kind: "quadrilatere",
-    points: POINTS[forme],
+    points: formeMesuree(forme, o) ?? POINTS[forme],
     labels: { A: n.A, B: n.B, C: n.C, D: n.D },
     display: {
       showPoints: true,
@@ -405,7 +474,8 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
         canvas = figure(n, "quelconque", { cotes: { AB: `${a} cm`, BC: `${b} cm`, CD: `${c} cm`, DA: `${d} cm` } });
         raison = `Les côtés opposés [${sg(n, "AB")}] et [${sg(n, "CD")}] mesurent ${a} cm et ${c} cm : ils ne sont pas égaux. Or dans un parallélogramme, les côtés opposés ont la même longueur.`;
       } else {
-        const [a, b] = shuffle([4, 5, 6, 7, 8, 9]).slice(0, 2);
+        // Le dessin a [AB] et [DA] plus longs que [BC] et [CD] : a > b.
+        const [a, b] = shuffle([4, 5, 6, 7, 8, 9]).slice(0, 2).sort((x, y) => y - x);
         canvas = figure(n, "cerfvolant", { cotes: { AB: `${a} cm`, DA: `${a} cm`, BC: `${b} cm`, CD: `${b} cm` } });
         raison = `Ce sont des côtés CONSÉCUTIFS qui sont égaux ([${sg(n, "AB")}] et [${sg(n, "DA")}] mesurent ${a} cm). Les côtés opposés [${sg(n, "AB")}] et [${sg(n, "CD")}] mesurent ${a} cm et ${b} cm : ${N} est un cerf-volant, pas un parallélogramme.`;
       }
@@ -440,10 +510,17 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "quadrilatere_parallelogramme_reconnaitre",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi un rectangle est un parallélogramme particulier.",
-    format: "open",
-    expected: ["rectangle", "côtés opposés", "parallèles"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés (« rectangle » suffisait) → QCM sur les mêmes pièges.
+    text: "Pourquoi un rectangle est-il un parallélogramme particulier ?",
+    format: "qcm",
+    choices: [
+      "parce que ses côtés opposés sont parallèles deux à deux",
+      "parce qu'il a quatre côtés",
+      "parce que ses diagonales sont perpendiculaires",
+      "parce que ses quatre côtés ont la même longueur",
+    ],
+    expected: ["parce que ses côtés opposés sont parallèles deux à deux"],
+    comparator: "mcq_exact",
     hint: "Observe les côtés opposés d’un rectangle.",
     explanation:
       "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
@@ -521,14 +598,14 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(rep)],
+        expected: [`${rep} ${ctx.u}`],
         comparator: "number_equal",
         explanation:
           DEF +
           "Méthode : dans un parallélogramme, les côtés opposés ont la même longueur.\n\n" +
           `Calcul : [${Z}] est opposé à [${sg(n, connu)}], donc ${Z} = ${sg(n, connu)} = ${rep} ${ctx.u}.\n\n` +
           `Conclusion : ${Z} = ${rep} ${ctx.u}.`,
-        canvas: figure(n, "para", { cotes: { [c1]: `${a}`, [c2]: `${b}`, [demande]: "?" } }),
+        canvas: figure(n, "para", { cotes: { [c1]: `${a} ${ctx.u}`, [c2]: `${b} ${ctx.u}`, [demande]: "?" } }),
       };
     },
   },
@@ -568,7 +645,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(rep)],
+        expected: [`${rep}°`],
         comparator: "number_equal",
         explanation:
           DEF +
@@ -590,10 +667,17 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "quadrilatere_parallelogramme_propriete",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique quelles propriétés possèdent les côtés opposés d’un parallélogramme.",
-    format: "open",
-    expected: ["opposés", "parallèles", "égaux"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM sur les mêmes pièges.
+    text: "Quelles propriétés possèdent les côtés opposés d’un parallélogramme ?",
+    format: "qcm",
+    choices: [
+      "ils sont parallèles et de même longueur",
+      "ils sont parallèles, mais de longueurs différentes",
+      "ils sont de même longueur, mais pas forcément parallèles",
+      "ils sont perpendiculaires",
+    ],
+    expected: ["ils sont parallèles et de même longueur"],
+    comparator: "mcq_exact",
     hint: "Il y a deux propriétés importantes : direction et longueur.",
     explanation:
       "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
@@ -671,14 +755,14 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(rep)],
+        expected: [`${rep} cm`],
         comparator: "number_equal",
         explanation:
           DEF +
           `Méthode : les diagonales se coupent en leur milieu ${O}, donc chaque côté du triangle issu de ${O} est la moitié d'une diagonale.\n\n` +
           `Calcul : ${p} ÷ 2 = ${oa} et ${q} ÷ 2 = ${ob}, puis ${oa} + ${ob} + ${cote} = ${rep}.\n\n` +
           `Conclusion : le périmètre du triangle ${tri.t} est ${rep} cm.`,
-        canvas: figure(n, "para", { diagonales: true, cotes: { AC: `${p}`, BD: `${q}`, [tri.s]: `${cote}` } }),
+        canvas: figure(n, "para", { diagonales: true, cotes: { AC: `${p} cm`, BD: `${q} cm`, [tri.s]: `${cote} cm` } }),
       };
     },
   },
@@ -743,10 +827,17 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "quadrilatere_parallelogramme_diagonale",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique ce que signifie : « les diagonales d’un parallélogramme se coupent en leur milieu ».",
-    format: "open",
-    expected: ["diagonales", "milieu", "moitiés"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM sur les mêmes pièges.
+    text: "Que signifie : « les diagonales d’un parallélogramme se coupent en leur milieu » ?",
+    format: "qcm",
+    choices: [
+      "leur point commun partage chacune des deux diagonales en deux moitiés égales",
+      "le point commun est le milieu d’une seule des deux diagonales",
+      "les deux diagonales ont la même longueur",
+      "les deux diagonales sont perpendiculaires",
+    ],
+    expected: ["leur point commun partage chacune des deux diagonales en deux moitiés égales"],
+    comparator: "mcq_exact",
     hint: "Chaque diagonale est partagée en deux morceaux égaux.",
     explanation:
       "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
@@ -808,7 +899,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
           d: `${sg(n, "AB")} = ${sg(n, "CD")} = ${a} cm et (${sg(n, "AB")}) // (${sg(n, "CD")})`,
           oui: true,
           r: `le même couple de côtés opposés [${sg(n, "AB")}] et [${sg(n, "CD")}] est à la fois parallèle et de même longueur : c'est suffisant.`,
-          f: figure(n, "para", { codage: false, cotes: { AB: `${a}`, CD: `${a}` } }),
+          f: figure(n, "para", { codage: false, cotes: { AB: `${a} cm`, CD: `${a} cm` } }),
         },
         {
           d: `${sg(n, "AB")} = ${sg(n, "CD")} = ${a} cm et (${sg(n, "AD")}) // (${sg(n, "BC")})`,
@@ -820,7 +911,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
           d: `${sg(n, "AB")} = ${sg(n, "CD")} = ${a} cm et ${sg(n, "BC")} = ${sg(n, "DA")} = ${b} cm`,
           oui: true,
           r: "les côtés opposés sont égaux deux à deux : c'est suffisant (pour un quadrilatère non croisé).",
-          f: figure(n, "para", { codage: false, cotes: { AB: `${a}`, CD: `${a}`, BC: `${b}`, DA: `${b}` } }),
+          f: figure(n, "para", { codage: false, cotes: { AB: `${a} cm`, CD: `${a} cm`, BC: `${b} cm`, DA: `${b} cm` } }),
         },
         {
           d: `${sg(n, "AB")} = ${sg(n, "BC")} = ${a} cm et ${sg(n, "CD")} = ${sg(n, "DA")} = ${b} cm`,
@@ -891,10 +982,17 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "quadrilatere_parallelogramme_montrer",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment montrer qu’un quadrilatère est un parallélogramme à partir de ses diagonales.",
-    format: "open",
-    expected: ["diagonales", "milieu", "parallélogramme"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM sur les mêmes pièges.
+    text: "Pour montrer qu’un quadrilatère est un parallélogramme à partir de ses diagonales, que faut-il prouver ?",
+    format: "qcm",
+    choices: [
+      "que ses diagonales ont le même milieu",
+      "que ses diagonales ont la même longueur",
+      "que ses diagonales sont perpendiculaires",
+      "que leur point commun est le milieu de l’une d’elles",
+    ],
+    expected: ["que ses diagonales ont le même milieu"],
+    comparator: "mcq_exact",
     hint: "Cherche la propriété réciproque avec les diagonales.",
     explanation:
       "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
@@ -918,7 +1016,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un parallélogramme a une aire de 42 cm² et une base de 7 cm. Quelle est sa hauteur, en cm ?",
     format: "short",
-    expected: ["6"],
+    expected: ["6 cm"],
     comparator: "number_equal",
     hint: "Si base × hauteur = aire, alors hauteur = aire ÷ base.",
     explanation: "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
@@ -958,14 +1056,14 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(area)],
+        expected: [`${area} ${uu}`],
         comparator: "number_equal",
         explanation:
           "Définition : l'aire d'un parallélogramme est base × hauteur, la hauteur étant perpendiculaire à la base.\n\n" +
           "Méthode : on multiplie la base par la hauteur qui lui est associée.\n\n" +
           `Calcul : ${fr(base)} × ${fr(height)} = ${fr(area)}.\n\n` +
           `Conclusion : l'aire de ${N} est ${fr(area)} ${uu}.`,
-        canvas: figure(n, "para", { cotes: { AB: `${base}` }, hauteur: `${height}` }),
+        canvas: figure(n, "para", { cotes: { AB: `${base} ${ctx.u}` }, hauteur: `${height} ${ctx.u}` }),
       };
     },
   },
@@ -1011,7 +1109,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
           `Méthode : on prend la base [${sg(n, "AB")}] et la hauteur ${n.D}${n.H}, pas le côté incliné [${sg(n, "AD")}].\n\n` +
           `Calcul : ${base} × ${height} = ${base * height}.${juste ? "" : ` Le résultat ${annonce} vient de ${base} × ${side} : on a pris le côté incliné.`}\n\n` +
           `Conclusion : l'aire est ${base * height} cm², donc ${juste ? "le résultat annoncé est juste" : "le résultat annoncé est faux"}.`,
-        canvas: figure(n, "para", { cotes: { AB: `${base}`, DA: `${side}` }, hauteur: `${height}` }),
+        canvas: figure(n, "para", { cotes: { AB: `${base} cm`, DA: `${side} cm` }, hauteur: `${height} cm` }),
       };
     },
   },
@@ -1024,10 +1122,17 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "quadrilatere_parallelogramme_aire",
     difficulty: 3,
     theme: "neutral",
-    text: "Deux parallélogrammes ont la même base et la même hauteur, mais l’un est beaucoup plus penché que l’autre. Ont-ils la même aire ? Explique.",
-    format: "open",
-    expected: ["oui", "même", "meme", "base", "hauteur", "penché", "penche"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés (« oui » ou « non » passaient : « non » contient… « même ») → QCM.
+    text: "Deux parallélogrammes ont la même base et la même hauteur, mais l’un est beaucoup plus penché que l’autre. Ont-ils la même aire ?",
+    format: "qcm",
+    choices: [
+      "oui : l’aire ne dépend que de la base et de la hauteur",
+      "non : le plus penché a la plus grande aire, car son côté incliné est plus long",
+      "non : le plus penché a la plus petite aire",
+      "on ne peut pas savoir sans la longueur des côtés inclinés",
+    ],
+    expected: ["oui : l’aire ne dépend que de la base et de la hauteur"],
+    comparator: "mcq_exact",
     hint: "Quels sont les deux nombres qui entrent dans le calcul de l’aire ?",
     explanation:
       "Définition : un parallélogramme est un quadrilatère dont les côtés opposés sont parallèles deux à deux.\n\n" +
@@ -1076,7 +1181,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(cout)],
+        expected: [`${cout} €`],
         comparator: "number_equal",
         explanation:
           "Définition : la surface d'un parallélogramme est base × hauteur.\n\n" +
@@ -1178,18 +1283,32 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
           : property === "cotes_egaux"
             ? { d: `${sg(n, "AB")} = ${sg(n, "CD")} et ${sg(n, "AD")} = ${sg(n, "BC")}`, k: ["opposés", "parallélogramme"], e: `Un quadrilatère (non croisé) dont les côtés opposés sont égaux deux à deux est un parallélogramme.` }
             : { d: `${O} est à la fois le milieu de [${sg(n, "AC")}] et de [${sg(n, "BD")}]`, k: ["milieu", "parallélogramme"], e: `Les diagonales [${sg(n, "AC")}] et [${sg(n, "BD")}] se coupent en leur milieu ${O} : ${N} est donc un parallélogramme.` };
+      // ⛔ 08/10/2026 : c'était une question OUVERTE validée par un mot-clé
+      // (« parallélogramme » suffisait) → QCM : la bonne propriété contre les
+      // réciproques fausses qu'on cite à sa place.
+      const DEFI = "un quadrilatère dont les côtés opposés sont parallèles deux à deux est un parallélogramme (définition)";
+      const LONG = "un quadrilatère non croisé dont les côtés opposés ont la même longueur deux à deux est un parallélogramme";
+      const DIAG = "un quadrilatère dont les diagonales se coupent en leur milieu est un parallélogramme";
+      const juste = property === "cotes_paralleles" ? DEFI : property === "cotes_egaux" ? LONG : DIAG;
       const t = randomInt(0, 2);
       const text =
         t === 0
-          ? `${qui} ${N}, et l'on sait que ${data.d}. Explique pourquoi ${N} est un parallélogramme.`
+          ? `${qui} ${N}, et l'on sait que ${data.d}. Quelle propriété justifie que ${N} est un parallélogramme ?`
           : t === 1
-            ? `On sait que, dans le quadrilatère ${N}, ${data.d}. Rédige une justification : pourquoi ${N} est-il un parallélogramme ?`
-            : `${N} est un quadrilatère où ${data.d}. Quelle propriété permet d'affirmer que c'est un parallélogramme ? Explique.`;
+            ? `On sait que, dans le quadrilatère ${N}, ${data.d}. Pour justifier que ${N} est un parallélogramme, quelle phrase faut-il écrire ?`
+            : `${N} est un quadrilatère où ${data.d}. Quelle propriété permet d'affirmer que c'est un parallélogramme ?`;
       return {
         text,
-        format: "open",
-        expected: data.k,
-        comparator: "contains_keyword",
+        format: "qcm",
+        choices: [
+          DEFI,
+          LONG,
+          DIAG,
+          "un quadrilatère dont les diagonales ont la même longueur est un parallélogramme",
+          "un quadrilatère qui a deux côtés parallèles est un parallélogramme",
+        ].filter((c, i) => c === juste || i >= 3 || Math.random() < 0.5).slice(0, 4),
+        expected: [juste],
+        comparator: "mcq_exact",
         explanation:
           DEF +
           "Méthode : on cite la propriété (définition ou réciproque) qui correspond exactement aux données.\n\n" +
@@ -1239,7 +1358,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(h2)],
+        expected: [`${h2} cm`],
         comparator: "number_equal",
         explanation:
           "Définition : l'aire d'un parallélogramme est base × hauteur.\n\n" +
@@ -1654,14 +1773,14 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(perimetre)],
+        expected: [`${perimetre} ${ctx.u}`],
         comparator: "number_equal",
         explanation:
           "Définition : dans un parallélogramme, les côtés opposés sont égaux deux à deux.\n\n" +
           "Méthode : le périmètre vaut deux fois la somme de deux côtés consécutifs.\n\n" +
           `Calcul : 2 × (${a} + ${b}) = 2 × ${a + b} = ${perimetre}.\n\n` +
           `Conclusion : le périmètre de ${N} est ${perimetre} ${ctx.u}.`,
-        canvas: figure(n, "para", { cotes: { [c1]: `${a}`, [c2]: `${b}` } }),
+        canvas: figure(n, "para", { cotes: { [c1]: `${a} ${ctx.u}`, [c2]: `${b} ${ctx.u}` } }),
       };
     },
   },
@@ -1709,7 +1828,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(rep)],
+        expected: [`${rep}°`],
         comparator: "number_equal",
         explanation:
           "Définition : dans un parallélogramme, deux angles opposés sont égaux et deux angles consécutifs ont pour somme 180°.\n\n" +
@@ -1759,14 +1878,14 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(L)],
+        expected: [`${L} ${ctx.u}`],
         comparator: "number_equal",
         explanation:
           DEF +
           "Méthode : dans un parallélogramme, les côtés opposés ont la même longueur.\n\n" +
           `Calcul : [${Z}] est opposé à [${X}], donc ${Z} = ${X} = ${L} ${ctx.u}.\n\n` +
           `Conclusion : ${Z} = ${L} ${ctx.u}.`,
-        canvas: figure(n, "para", { cotes: { [c]: `${L}`, [o]: "?" } }),
+        canvas: figure(n, "para", { cotes: { [c]: `${L} ${ctx.u}`, [o]: "?" } }),
       };
     },
   },
@@ -1889,14 +2008,14 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [fr(rep)],
+        expected: [`${fr(rep)} ${ctx.u}`],
         comparator: "number_equal",
         explanation:
           "Définition : dans un parallélogramme, les diagonales se coupent en leur milieu.\n\n" +
           `Méthode : ${O} est le milieu de [${D}], donc ${D} = 2 × ${demi}.\n\n` +
           (versEntier ? `Calcul : 2 × ${fr(moitie)} = ${fr(tout)}.\n\n` : `Calcul : ${fr(tout)} ÷ 2 = ${fr(moitie)}.\n\n`) +
           `Conclusion : ${versEntier ? D : demi} = ${fr(rep)} ${ctx.u}.`,
-        canvas: figure(n, "para", { diagonales: true, ...(versEntier ? {} : { cotes: { [diag]: fr(tout) } }) }),
+        canvas: figure(n, "para", { diagonales: true, ...(versEntier ? {} : { cotes: { [diag]: `${fr(tout)} ${ctx.u}` } }) }),
       };
     },
   },
@@ -1934,14 +2053,14 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(rep)],
+        expected: [`${rep} cm`],
         comparator: "number_equal",
         explanation:
           "Définition : dans un parallélogramme, les diagonales se coupent en leur milieu.\n\n" +
           `Méthode : le segment [${O}${n[sommet]}] est la moitié de la diagonale [${diag}].\n\n` +
           `Calcul : ${diag} ÷ 2 = ${rep * 2} ÷ 2 = ${rep}.\n\n` +
           `Conclusion : ${O}${n[sommet]} = ${rep} cm.`,
-        canvas: figure(n, "para", { diagonales: true, cotes: { AC: `${p}`, BD: `${q}` } }),
+        canvas: figure(n, "para", { diagonales: true, cotes: { AC: `${p} cm`, BD: `${q} cm` } }),
       };
     },
   },
@@ -1977,7 +2096,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(v)],
+        expected: [`${v} ${ctx.u}`],
         comparator: "number_equal",
         explanation:
           "Définition : dans un parallélogramme, les diagonales se coupent en leur milieu.\n\n" +
@@ -1997,10 +2116,17 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "quadrilatere_parallelogramme_diagonale",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique la différence entre les diagonales d’un parallélogramme quelconque et celles d’un rectangle.",
-    format: "open",
-    expected: ["milieu", "rectangle", "égales"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM sur les mêmes pièges.
+    text: "Quelle différence y a-t-il entre les diagonales d’un parallélogramme quelconque et celles d’un rectangle ?",
+    format: "qcm",
+    choices: [
+      "les deux se coupent en leur milieu, mais seules celles du rectangle ont toujours la même longueur",
+      "seules celles du rectangle se coupent en leur milieu",
+      "seules celles du rectangle sont perpendiculaires",
+      "il n’y a aucune différence",
+    ],
+    expected: ["les deux se coupent en leur milieu, mais seules celles du rectangle ont toujours la même longueur"],
+    comparator: "mcq_exact",
     hint: "Les deux types se coupent en leur milieu, mais une seule famille a des diagonales égales.",
     explanation:
       "Définition : dans un parallélogramme, les diagonales se coupent en leur milieu.\n\n" +
@@ -2056,7 +2182,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
             : t === 1
               ? `${objet.intro} On sait que ${sg(n, autre)} = ${d} ${u}. Les diagonales se croisent en ${O} : combien mesure [${O}${n[sommet]}] ?`
               : `${objet.intro} Ses diagonales se coupent en ${O}, et ${sg(n, autre)} = ${d} ${u}. Calcule ${n[sommet]}${O}.`;
-        expected = String(d / 2);
+        expected = `${d / 2} ${u}`;
         explication =
           `Méthode : dans un ${objet.f === "rect" ? "rectangle" : "carré"}, les diagonales ont la même longueur et se coupent en leur milieu. Attention : [${O}${n[sommet]}] est sur l'AUTRE diagonale, [${sg(n, memeDiag)}].\n\n` +
           `Calcul : ${sg(n, memeDiag)} = ${sg(n, autre)} = ${d}, donc ${O}${n[sommet]} = ${d} ÷ 2 = ${d / 2}.\n\n` +
@@ -2070,7 +2196,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
             : t === 1 || !objet.intro.includes("cerf-volant")
               ? `${objet.intro} Ses diagonales se coupent en ${O}. Quelle est la mesure de l'angle ${n.A}${O}${n.B} ?`
               : `${objet.intro} Les deux baguettes du cerf-volant suivent ses diagonales. Quel angle font-elles entre elles ?`;
-        expected = "90";
+        expected = "90°";
         explication =
           "Méthode : les diagonales d'un losange sont perpendiculaires (et se coupent en leur milieu).\n\n" +
           "Calcul : deux droites perpendiculaires forment un angle droit, soit 90°.\n\n" +
@@ -2328,13 +2454,14 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
           d: `${sg(n, "AB")} = ${sg(n, "CD")} = ${a} cm et ${sg(n, "BC")} = ${sg(n, "DA")} = ${b} cm`,
           oui: true,
           r: "les côtés opposés sont égaux deux à deux",
-          f: figure(n, "para", { codage: false, cotes: { AB: `${a}`, CD: `${a}`, BC: `${b}`, DA: `${b}` } }),
+          f: figure(n, "para", { codage: false, cotes: { AB: `${a} cm`, CD: `${a} cm`, BC: `${b} cm`, DA: `${b} cm` } }),
         },
         {
-          d: `${sg(n, "AB")} = ${sg(n, "DA")} = ${a} cm et ${sg(n, "BC")} = ${sg(n, "CD")} = ${b} cm`,
+          // Le cerf-volant dessiné a [AB] et [DA] plus longs : le plus grand des deux nombres y va.
+          d: `${sg(n, "AB")} = ${sg(n, "DA")} = ${Math.max(a, b)} cm et ${sg(n, "BC")} = ${sg(n, "CD")} = ${Math.min(a, b)} cm`,
           oui: false,
-          r: `ce sont des côtés consécutifs qui sont égaux ; les côtés opposés [${sg(n, "AB")}] et [${sg(n, "CD")}] mesurent ${a} cm et ${b} cm : c'est un cerf-volant`,
-          f: figure(n, "cerfvolant", { cotes: { AB: `${a}`, DA: `${a}`, BC: `${b}`, CD: `${b}` } }),
+          r: `ce sont des côtés consécutifs qui sont égaux ; les côtés opposés [${sg(n, "AB")}] et [${sg(n, "CD")}] mesurent ${Math.max(a, b)} cm et ${Math.min(a, b)} cm : c'est un cerf-volant`,
+          f: figure(n, "cerfvolant", { cotes: { AB: `${Math.max(a, b)} cm`, DA: `${Math.max(a, b)} cm`, BC: `${Math.min(a, b)} cm`, CD: `${Math.min(a, b)} cm` } }),
         },
         {
           d: `(${sg(n, "AB")}) // (${sg(n, "CD")}) et (${sg(n, "AD")}) // (${sg(n, "BC")})`,
@@ -2346,7 +2473,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
           d: `(${sg(n, "AB")}) // (${sg(n, "CD")}), ${sg(n, "AD")} = ${a} cm et ${sg(n, "BC")} = ${b} cm`,
           oui: false,
           r: `les côtés opposés [${sg(n, "AD")}] et [${sg(n, "BC")}] n'ont pas la même longueur (${a} cm et ${b} cm), ce qui est impossible dans un parallélogramme`,
-          f: figure(n, "trapeze", { cotes: { DA: `${a}`, BC: `${b}` } }),
+          f: figure(n, "trapeze", { cotes: { DA: `${a} cm`, BC: `${b} cm` } }),
         },
         {
           d: `${O} est le milieu de [${sg(n, "AC")}] et de [${sg(n, "BD")}]`,
@@ -2395,10 +2522,17 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "quadrilatere_parallelogramme_montrer",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment montrer qu’un quadrilatère est un parallélogramme à partir des longueurs de ses côtés.",
-    format: "open",
-    expected: ["côtés opposés", "égaux", "parallélogramme"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM sur les mêmes pièges.
+    text: "Pour montrer qu’un quadrilatère (non croisé) est un parallélogramme à partir des longueurs de ses côtés, que faut-il prouver ?",
+    format: "qcm",
+    choices: [
+      "que ses côtés opposés sont égaux deux à deux",
+      "que deux de ses côtés consécutifs sont égaux",
+      "que deux de ses côtés ont la même longueur",
+      "que la somme de ses côtés est paire",
+    ],
+    expected: ["que ses côtés opposés sont égaux deux à deux"],
+    comparator: "mcq_exact",
     hint: "Pense à la propriété réciproque sur les longueurs.",
     explanation:
       "Définition : un parallélogramme a ses côtés opposés parallèles deux à deux.\n\n" +
@@ -2447,7 +2581,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Calculer l’aire d’un parallélogramme de base 12 cm et de hauteur 6 cm.",
     format: "short",
-    expected: ["72"],
+    expected: ["72 cm²"],
     comparator: "number_equal",
     hint: "Aire = base × hauteur.",
     explanation:
@@ -2457,12 +2591,13 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       "Conclusion : l’aire est 72 cm².",
     canvas: {
       kind: "quadrilatere",
-      points: { A: { x: 60, y: 165 }, B: { x: 215, y: 165 }, C: { x: 255, y: 75 }, D: { x: 100, y: 75 } },
       labels: { A: "A", B: "B", C: "C", D: "D" },
-      sideLabels: { AB: "12" },
+      // 08/10 : points recalculés pour que la base (12 cm) et la hauteur (6 cm) gardent leur rapport.
+      points: { A: { x: 50, y: 175 }, B: { x: 226.6, y: 175 }, C: { x: 250, y: 86.7 }, D: { x: 73.4, y: 86.7 } },
+      sideLabels: { AB: "12 cm" },
       display: { showPoints: true, showLabels: true, showSides: true, showAngles: false, showDiagonals: false },
       marks: { parallelSides: [["AB", "CD"], ["BC", "DA"]] },
-      height: { fromVertex: "D", onSide: "AB", label: "6" },
+      height: { fromVertex: "D", onSide: "AB", label: "6 cm" },
       size: { width: 300, height: 230 },
     },
     tags: ["parallelogramme", "aire"],
@@ -2495,19 +2630,19 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
           : t === 1
             ? `${ctx.intro(N)} On connaît trois longueurs : la base ${sg(n, "AB")} = ${base} ${u}, le côté ${sg(n, "AD")} = ${side} ${u} et la hauteur ${H} = ${height} ${u}. Calcule son aire.`
             : t === 2
-              ? `${ctx.intro(N)} Ses côtés mesurent ${base} ${u} et ${side} ${u}. La hauteur issue de ${n.D}, perpendiculaire à [${sg(n, "AB")}], mesure ${height} ${u}. Quelle est son aire ?`
+              ? `${ctx.intro(N)} Ses côtés [${sg(n, "AB")}] et [${sg(n, "AD")}] mesurent ${base} ${u} et ${side} ${u}. La hauteur issue de ${n.D}, perpendiculaire à [${sg(n, "AB")}], mesure ${height} ${u}. Quelle est son aire ?`
               : `${ctx.intro(N)} Quelle est son aire, sachant que [${sg(n, "AB")}] mesure ${base} ${u}, [${sg(n, "AD")}] ${side} ${u}, et que ${H} = ${height} ${u} est la hauteur sur [${sg(n, "AB")}] ?`;
       return {
         text,
         format: "short",
-        expected: [String(area)],
+        expected: [`${area} ${u}²`],
         comparator: "number_equal",
         explanation:
           "Définition : l'aire d'un parallélogramme est base × hauteur.\n\n" +
           `Méthode : on multiplie la base [${sg(n, "AB")}] par la hauteur ${H} qui lui est perpendiculaire ; le côté [${sg(n, "AD")}] = ${side} ${u} ne sert pas.\n\n` +
           `Calcul : ${base} × ${height} = ${fr(area)}.\n\n` +
           `Conclusion : l'aire de ${N} est ${fr(area)} ${u}².`,
-        canvas: figure(n, "para", { cotes: { AB: `${base}`, DA: `${side}` }, hauteur: `${height}` }),
+        canvas: figure(n, "para", { cotes: { AB: `${base} ${u}`, DA: `${side} ${u}` }, hauteur: `${height} ${u}` }),
       };
     },
   },
@@ -2542,14 +2677,14 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(height)],
+        expected: [`${height} ${ctx.u}`],
         comparator: "number_equal",
         explanation:
           "Définition : aire = base × hauteur, donc hauteur = aire ÷ base.\n\n" +
           "Méthode : on divise l'aire par la base.\n\n" +
           `Calcul : ${fr(area)} ÷ ${base} = ${height}.\n\n` +
           `Conclusion : la hauteur mesure ${height} ${ctx.u}.`,
-        canvas: figure(n, "para", { cotes: { AB: `${base}` }, hauteur: "?" }),
+        canvas: figure(n, "para", { cotes: { AB: `${base} ${ctx.u}` }, hauteur: "?" }),
       };
     },
   },
@@ -2584,14 +2719,14 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(base)],
+        expected: [`${base} ${ctx.u}`],
         comparator: "number_equal",
         explanation:
           "Définition : aire = base × hauteur, donc base = aire ÷ hauteur.\n\n" +
           "Méthode : on divise l'aire par la hauteur.\n\n" +
           `Calcul : ${fr(area)} ÷ ${height} = ${base}.\n\n` +
           `Conclusion : la base mesure ${base} ${ctx.u}.`,
-        canvas: figure(n, "para", { cotes: { AB: "?" }, hauteur: `${height}` }),
+        canvas: figure(n, "para", { cotes: { AB: "?" }, hauteur: `${height} ${ctx.u}` }),
       };
     },
   },
@@ -2643,14 +2778,14 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(rep)],
+        expected: [demandeAire ? `${rep} cm²` : `${rep} cm`],
         comparator: "number_equal",
         explanation:
           "Définition : l'aire d'un parallélogramme est base × hauteur, avec n'importe quel côté comme base, pourvu qu'on prenne LA hauteur qui lui est perpendiculaire.\n\n" +
           `Méthode : on calcule l'aire avec [${sg(n, "AB")}] et sa hauteur${demandeAire ? "" : `, puis on divise par ${sg(n, "AD")}`}.\n\n` +
           `Calcul : ${b1} × ${h1} = ${area}${demandeAire ? "" : `, puis ${area} ÷ ${b2} = ${h2}`}.\n\n` +
           `Conclusion : ${demandeAire ? `l'aire de ${N} est ${area} cm²` : `la hauteur relative à [${sg(n, "AD")}] mesure ${h2} cm`}.`,
-        canvas: figure(n, "para", { cotes: { AB: `${b1}`, DA: `${b2}` }, hauteur: `${h1}` }),
+        canvas: figure(n, "para", { cotes: { AB: `${b1} cm`, DA: `${b2} cm` }, hauteur: `${h1} cm` }),
       };
     },
   },
@@ -2689,14 +2824,14 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(area)],
+        expected: [`${area} ${u}²`],
         comparator: "number_equal",
         explanation:
           "Définition : l'aire d'un parallélogramme est base × hauteur.\n\n" +
           "Méthode : on multiplie la base par la hauteur.\n\n" +
           `Calcul : ${base} × ${height} = ${fr(area)}.\n\n` +
           `Conclusion : l'aire est ${fr(area)} ${u}².`,
-        canvas: figure(n, "para", { cotes: { AB: `${base}` }, hauteur: `${height}` }),
+        canvas: figure(n, "para", { cotes: { AB: `${base} ${u}` }, hauteur: `${height} ${u}` }),
       };
     },
   },
@@ -2713,7 +2848,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un jardin a la forme d’un parallélogramme de base 15 m et de hauteur 8 m. Quelle est sa surface ?",
     format: "short",
-    expected: ["120"],
+    expected: ["120 m²"],
     comparator: "number_equal",
     hint: "Surface = base × hauteur.",
     explanation:
@@ -2734,7 +2869,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Une parcelle en forme de parallélogramme a deux côtés consécutifs de 20 m et 12 m. Quel est son périmètre ?",
     format: "short",
-    expected: ["64"],
+    expected: ["64 m"],
     comparator: "number_equal",
     hint: "Périmètre = 2 × (somme de deux côtés consécutifs).",
     explanation:
@@ -2793,16 +2928,16 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       const t = randomInt(0, 3);
       const text =
         t === 0
-          ? `${ter.intro(N)} Ses côtés mesurent ${base} m et ${side} m, et la distance entre ses deux grands côtés parallèles est de ${height} m. Quelle est sa surface, en m² ?`
+          ? `${ter.intro(N)} Ses côtés mesurent ${base} m et ${side} m, et la distance entre ses deux côtés de ${base} m est de ${height} m. Quelle est sa surface, en m² ?`
           : t === 1
-            ? `${ter.intro(N)} On a mesuré ${sg(n, "AB")} = ${base} m, ${sg(n, "AD")} = ${side} m, et la hauteur relative à [${sg(n, "AB")}] : ${height} m. Combien de mètres carrés couvre-t-il ?`
+            ? `${ter.intro(N)} On a mesuré ${sg(n, "AB")} = ${base} m, ${sg(n, "AD")} = ${side} m, et la hauteur relative à [${sg(n, "AB")}] : ${height} m. Combien de mètres carrés couvre ${N} ?`
             : t === 2
               ? `${ter.intro(N)} Sa base [${sg(n, "AB")}] mesure ${base} m, son côté [${sg(n, "AD")}] ${side} m et sa hauteur ${height} m. Calcule sa surface.`
               : `${ter.intro(N)} Quelle est sa surface, sachant que ${sg(n, "AB")} = ${base} m, que ${sg(n, "BC")} = ${side} m et que la hauteur sur [${sg(n, "AB")}] mesure ${height} m ?`;
       return {
         text,
         format: "short",
-        expected: [String(area)],
+        expected: [`${area} m²`],
         comparator: "number_equal",
         explanation:
           "Définition : la surface d'un parallélogramme est base × hauteur.\n\n" +
@@ -2845,7 +2980,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(rep)],
+        expected: [`${rep} m`],
         comparator: "number_equal",
         explanation:
           "Définition : faire le tour, c'est le périmètre ; dans un parallélogramme, les côtés opposés sont égaux.\n\n" +
@@ -2886,7 +3021,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(b)],
+        expected: [`${b} ${ctx.u}`],
         comparator: "number_equal",
         explanation:
           "Définition : périmètre = 2 × (somme de deux côtés consécutifs).\n\n" +
@@ -2937,7 +3072,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(rep)],
+        expected: [`${rep} m`],
         comparator: "number_equal",
         explanation:
           "Définition : surface = base × hauteur.\n\n" +
@@ -2987,7 +3122,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(rep)],
+        expected: [`${rep}°`],
         comparator: "number_equal",
         explanation:
           "Définition : dans un parallélogramme, deux angles consécutifs sont supplémentaires et deux angles opposés sont égaux.\n\n" +
@@ -3032,7 +3167,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
         return {
           text,
           format: "short",
-          expected: [String(area)],
+          expected: [`${area} m²`],
           comparator: "number_equal",
           explanation:
             "Définition : la surface d'un parallélogramme est base × hauteur.\n\n" +
@@ -3055,7 +3190,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(p)],
+        expected: [`${p} m`],
         comparator: "number_equal",
         explanation:
           "Définition : dans un parallélogramme, les côtés opposés sont égaux.\n\n" +
@@ -3074,10 +3209,17 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "quadrilatere_parallelogramme_probleme",
     difficulty: 4,
     theme: "neutral",
-    text: "Un terrain en forme de parallélogramme doit être à la fois clôturé et engazonné. Explique quelles grandeurs il faut calculer.",
-    format: "open",
-    expected: ["périmètre", "aire", "clôture"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM sur les mêmes pièges.
+    text: "Un terrain en forme de parallélogramme doit être à la fois clôturé et engazonné. Quelles grandeurs faut-il calculer ?",
+    format: "qcm",
+    choices: [
+      "le périmètre pour la clôture, l’aire pour le gazon",
+      "l’aire pour la clôture, le périmètre pour le gazon",
+      "seulement l’aire, qui sert aux deux",
+      "seulement le périmètre, qui sert aux deux",
+    ],
+    expected: ["le périmètre pour la clôture, l’aire pour le gazon"],
+    comparator: "mcq_exact",
     hint: "Clôturer fait penser au tour, engazonner à la surface.",
     explanation:
       "Définition : le périmètre mesure le tour, l’aire mesure la surface.\n\n" +
@@ -3236,7 +3378,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(base)],
+        expected: [`${base} cm`],
         comparator: "number_equal",
         explanation:
           "Définition : aire du rectangle = longueur × largeur ; aire du parallélogramme = base × hauteur.\n\n" +
@@ -3287,7 +3429,7 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(rep)],
+        expected: [avecNombres ? `${rep} cm²` : String(rep)],
         comparator: "number_equal",
         explanation:
           "Définition : l'aire d'un parallélogramme est base × hauteur.\n\n" +
@@ -3365,10 +3507,17 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "quadrilatere_parallelogramme_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi un rectangle est un parallélogramme, mais un parallélogramme n’est pas toujours un rectangle.",
-    format: "open",
-    expected: ["côtés opposés", "parallèles", "angles droits"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM sur les mêmes pièges.
+    text: "Pourquoi un rectangle est-il un parallélogramme, alors qu’un parallélogramme n’est pas toujours un rectangle ?",
+    format: "qcm",
+    choices: [
+      "le rectangle a ses côtés opposés parallèles, et en plus quatre angles droits qu’un parallélogramme n’a pas forcément",
+      "le rectangle a quatre côtés égaux, le parallélogramme non",
+      "le parallélogramme a toujours des angles droits, le rectangle non",
+      "les diagonales d’un parallélogramme sont toujours égales, pas celles d’un rectangle",
+    ],
+    expected: ["le rectangle a ses côtés opposés parallèles, et en plus quatre angles droits qu’un parallélogramme n’a pas forcément"],
+    comparator: "mcq_exact",
     hint: "Pense à ce qui distingue le rectangle : ses angles.",
     explanation:
       "Définition : un parallélogramme a ses côtés opposés parallèles deux à deux.\n\n" +
@@ -3386,10 +3535,17 @@ export const parallelogrammesBank: TutorBankItemV4[] = [
     microId: "quadrilatere_parallelogramme_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi on peut transformer un parallélogramme en rectangle de même aire pour calculer son aire.",
-    format: "open",
-    expected: ["base", "hauteur", "aire"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM sur les mêmes pièges.
+    text: "Pourquoi peut-on transformer un parallélogramme en rectangle de même aire pour calculer son aire ?",
+    format: "qcm",
+    choices: [
+      "on découpe un triangle d’un côté et on le recolle de l’autre : on obtient un rectangle de même base et de même hauteur",
+      "on redresse le parallélogramme : son côté incliné devient la hauteur du rectangle",
+      "un rectangle de même périmètre a toujours la même aire",
+      "on multiplie les deux côtés du parallélogramme, comme pour un rectangle",
+    ],
+    expected: ["on découpe un triangle d’un côté et on le recolle de l’autre : on obtient un rectangle de même base et de même hauteur"],
+    comparator: "mcq_exact",
     hint: "On découpe un triangle d’un côté pour le recoller de l’autre.",
     explanation:
       "Définition : l’aire d’un parallélogramme est base × hauteur.\n\n" +

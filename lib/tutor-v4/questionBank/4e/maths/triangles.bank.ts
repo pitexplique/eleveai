@@ -93,13 +93,112 @@ const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
  * Ce qui est illisible ici l'est partout.
  */
 function triangle(data: Partial<TriangleCanvasData> = {}): TriangleCanvasData {
-  return {
+  // ⭐ 08/10 : la forme suit les mesures étiquetées (voir `dessiner`, plus bas).
+  return dessiner({
     kind: "triangle",
     points: { A: { x: 30, y: 150 }, B: { x: 210, y: 150 }, C: { x: 112, y: 38 } },
     display: { showPoints: true, showLabels: true, showSides: true },
     size: { width: 240, height: 180 },
     ...data,
-  } as TriangleCanvasData;
+  } as TriangleCanvasData);
+}
+
+/* ---------------------------------------------------------------------------
+   ⭐ 08/10/2026 — LA FIGURE RESPECTE SES CODAGES. Jusqu'ici, tous les triangles
+   avaient la même forme : un angle étiqueté « 118° » se dessinait aigu, deux
+   côtés de 4 cm et 12 cm de même longueur. `dessiner` recalcule les points à
+   partir des mesures étiquetées (trois angles, trois côtés, deux côtés et
+   l'angle entre eux, ou deux côtés seuls avec un angle choisi), puis fait
+   TOURNER les noms (A→B→C, ordre conservé) pour que le plus grand angle soit
+   en haut : les deux angles de la base restent aigus, et les étiquettes,
+   placées par le canvas à gauche, à droite et au-dessus, tombent bien.
+--------------------------------------------------------------------------- */
+type Cote = TriangleCanvasSideLabel;
+const SUIVANT: Record<K, K> = { A: "B", B: "C", C: "A" };
+const COTE_SUIVANT: Record<Cote, Cote> = { AB: "BC", BC: "CA", CA: "AB" };
+const RAD = Math.PI / 180;
+
+/** Le nombre d'une étiquette « 12 cm », « 4,5 m », « 56° » ; null pour « ? » ou « ». */
+function mesureEtiquette(s: string | undefined): number | null {
+  const m = String(s ?? "").match(/^(\d+(?:,\d+)?)/);
+  return m ? Number(m[1].replace(",", ".")) : null;
+}
+
+function dessiner(c: TriangleCanvasData): TriangleCanvasData {
+  const ang: Partial<Record<K, number>> = {};
+  for (const k of ["A", "B", "C"] as K[]) {
+    const v = mesureEtiquette(c.angleLabels?.[k]);
+    if (v != null) ang[k] = v;
+  }
+  const cot: Partial<Record<Cote, number>> = {};
+  for (const s of ["AB", "BC", "CA"] as Cote[]) {
+    const v = mesureEtiquette(c.sideLabels?.[s]);
+    if (v != null) cot[s] = v;
+  }
+  // Les trois angles, en degrés, à partir de ce qui est étiqueté.
+  let A: number | null = null;
+  let B: number | null = null;
+  const nA = Object.keys(ang).length;
+  const nC = Object.keys(cot).length;
+  const loiCos = (opp: number, x: number, y: number) => Math.acos((x * x + y * y - opp * opp) / (2 * x * y)) / RAD;
+  if (nA >= 2) {
+    A = ang.A ?? 180 - ang.B! - ang.C!;
+    B = ang.B ?? 180 - A - ang.C!;
+  } else if (nC === 3) {
+    A = loiCos(cot.BC!, cot.AB!, cot.CA!);
+    B = loiCos(cot.CA!, cot.AB!, cot.BC!);
+  } else if (cot.AB != null && cot.CA != null) {
+    // Deux côtés autour de A : l'angle en A est donné, ou choisi pour une figure lisible.
+    const a = ang.A ?? 50 + Math.random() * 25;
+    const bc = Math.sqrt(cot.AB ** 2 + cot.CA ** 2 - 2 * cot.AB * cot.CA * Math.cos(a * RAD));
+    A = a;
+    B = loiCos(cot.CA, cot.AB, bc);
+  }
+  if (A == null || B == null) return c; // rien de mesuré : la forme par défaut
+  const angles: Record<K, number> = { A, B, C: 180 - A - B };
+  // La rotation des noms : le plus grand angle va en C.
+  let r = 0;
+  const plusGrand = (["A", "B", "C"] as K[]).reduce((m, k) => (angles[k] > angles[m] ? k : m), "A" as K);
+  let k = plusGrand;
+  while (k !== "C") {
+    k = SUIVANT[k];
+    r++;
+  }
+  const tourne = (x: K) => {
+    let y = x;
+    for (let i = 0; i < r; i++) y = SUIVANT[y];
+    return y;
+  };
+  const tourneCote = (x: Cote) => {
+    let y = x;
+    for (let i = 0; i < r; i++) y = COTE_SUIVANT[y];
+    return y;
+  };
+  const parK = <T,>(o: Partial<Record<K, T>> | undefined) =>
+    o ? (Object.fromEntries(Object.entries(o).map(([x, v]) => [tourne(x as K), v])) as Partial<Record<K, T>>) : undefined;
+  const parCote = <T,>(o: Partial<Record<Cote, T>> | undefined) =>
+    o ? (Object.fromEntries(Object.entries(o).map(([x, v]) => [tourneCote(x as Cote), v])) as Partial<Record<Cote, T>>) : undefined;
+  const a2: Record<K, number> = { A: 0, B: 0, C: 0 };
+  for (const x of ["A", "B", "C"] as K[]) a2[tourne(x)] = angles[x];
+  // A = (0, 0), B = (1, 0), C au-dessus ; AC = sin B ÷ sin C (loi des sinus, AB = 1).
+  const ac = Math.sin(a2.B * RAD) / Math.sin(a2.C * RAD);
+  const cx = ac * Math.cos(a2.A * RAD);
+  const cy = ac * Math.sin(a2.A * RAD);
+  const s = Math.min(180, 112 / cy);
+  const g = (240 - s) / 2;
+  const arr = (v: number) => Math.round(v * 10) / 10;
+  return {
+    ...c,
+    points: {
+      A: { x: arr(g), y: 150 },
+      B: { x: arr(g + s), y: 150 },
+      C: { x: arr(g + s * cx), y: arr(150 - s * cy) },
+    },
+    labels: parK(c.labels),
+    angleLabels: parK(c.angleLabels),
+    sideLabels: parCote(c.sideLabels),
+    height: c.height ? { ...c.height, fromVertex: tourne(c.height.fromVertex) } : undefined,
+  };
 }
 
 /* ---------------------------------------------------------------------------
@@ -384,7 +483,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(c)],
+        expected: [`${c}°`],
         comparator: "number_equal",
         explanation:
           "Définition : la somme des trois angles d'un triangle vaut toujours 180°.\n\n" +
@@ -613,7 +712,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(d)],
+        expected: [`${d} ${u}`],
         comparator: "number_equal",
         explanation:
           "Définition : un point de la médiatrice d'un segment est à la même distance de ses deux extrémités. Les trois médiatrices d'un triangle se coupent en un point O, centre du cercle qui passe par les trois sommets : le cercle circonscrit.\n\n" +
@@ -768,7 +867,16 @@ export const trianglesBank: TutorBankItemV4[] = [
       // Le côté et l'angle donnés dans le premier triangle, et leurs correspondants.
       const cotes: [K, K][] = [["A", "B"], ["B", "C"], ["A", "C"]];
       const [c1, c2] = shuffle(cotes);
-      const kAng = randomChoice<K>(["A", "B", "C"]);
+      // ⚠️ 08/10 : l'angle tiré au hasard rendait parfois le triangle IMPOSSIBLE
+      // ([RS] = 8, [ST] = 3 et 56° en R : le côté opposé à R est trop court).
+      // Hors de l'angle compris, on vérifie que le côté opposé atteint la droite.
+      const commun = c1.find((x) => c2.includes(x))!;
+      let kAng = randomChoice<K>(["A", "B", "C"]);
+      if (kAng !== commun) {
+        const lAdj = c1.includes(kAng) ? x0 : y0;
+        const lOpp = c1.includes(kAng) ? y0 : x0;
+        if (lOpp <= lAdj * Math.sin(angle * (Math.PI / 180)) + 0.5) kAng = commun;
+      }
       const s1 = `${t1[c1[0]]}${t1[c1[1]]}`;
       const s2 = `${t1[c2[0]]}${t1[c2[1]]}`;
       const s1b = `${t2[c1[0]]}${t2[c1[1]]}`;
@@ -785,7 +893,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       const donnees = `[${s1}] mesure ${cote} ${u}, [${s2}] mesure ${autreCote} ${u} et l'angle en ${t1[kAng]} mesure ${angle}°`;
       const ordre = `${t1.A} correspond à ${t2.A}, ${t1.B} à ${t2.B}, ${t1.C} à ${t2.C}`;
       const text = randomChoice([
-        `Les triangles ${t1.n} et ${t2.n} sont égaux. Dans ${t1.n}, ${donnees}. Combien mesure ${question} ?`,
+        `Les triangles ${t1.n} et ${t2.n} sont égaux, dans l'ordre des lettres. Dans ${t1.n}, ${donnees}. Combien mesure ${question} ?`,
         `${pr.s} Ces triangles sont égaux (${ordre}). Dans ${t1.n}, ${donnees}. Que mesure ${question} ?`,
         `${pr.s} Ces triangles sont superposables, dans l'ordre des lettres. On sait que, dans ${t1.n}, ${donnees}. Donne la mesure de ${question}.`,
         `Dans le triangle ${t1.n}, ${donnees}. Le triangle ${t2.n} lui est égal (${ordre}). Quelle est la mesure de ${question} ?`,
@@ -795,7 +903,7 @@ export const trianglesBank: TutorBankItemV4[] = [
       return {
         text,
         format: "short",
-        expected: [String(reponse)],
+        expected: [demande === "angle" ? `${reponse}°` : `${reponse} ${u}`],
         comparator: "number_equal",
         explanation:
           "Définition : deux triangles égaux sont superposables — chaque côté correspond à un côté, chaque angle à un angle.\n\n" +
@@ -1088,18 +1196,18 @@ export const trianglesBank: TutorBankItemV4[] = [
       const text = reduction
         ? randomChoice([
             `${intro} On sait que ${pAB} = ${a} cm, ${gAB} = ${a * k} cm et ${gAC} = ${b * k} cm. Combien mesure ${pAC} ?`,
-            `Les triangles ${t1.n}, sur ${ctx.p}, et ${t2.n}, sur ${ctx.g}, sont semblables. ${pAB} = ${a} cm et ${gAB} = ${a * k} cm. Sachant que ${gAC} = ${b * k} cm, calcule ${pAC}.`,
-            `Sur ${ctx.g}, on voit le triangle ${t2.n}, avec ${gAB} = ${a * k} cm et ${gAC} = ${b * k} cm. Sur ${ctx.p}, le triangle semblable ${t1.n} a ${pAB} = ${a} cm. Que mesure ${pAC} ?`,
+            `Les triangles ${t1.n}, sur ${ctx.p}, et ${t2.n}, sur ${ctx.g}, sont semblables, dans l'ordre des lettres. ${pAB} = ${a} cm et ${gAB} = ${a * k} cm. Sachant que ${gAC} = ${b * k} cm, calcule ${pAC}.`,
+            `Sur ${ctx.g}, on voit le triangle ${t2.n}, avec ${gAB} = ${a * k} cm et ${gAC} = ${b * k} cm. Sur ${ctx.p}, le triangle semblable ${t1.n} (dans l'ordre des lettres) a ${pAB} = ${a} cm. Que mesure ${pAC} ?`,
           ])
         : randomChoice([
             `${intro} On sait que ${pAB} = ${a} cm, ${gAB} = ${a * k} cm et ${pAC} = ${b} cm. Combien mesure ${gAC} ?`,
-            `Les triangles ${t1.n}, sur ${ctx.p}, et ${t2.n}, sur ${ctx.g}, sont semblables. ${pAB} = ${a} cm et ${gAB} = ${a * k} cm. Sachant que ${pAC} = ${b} cm, calcule ${gAC}.`,
-            `Sur ${ctx.p}, le triangle ${t1.n} a ${pAB} = ${a} cm et ${pAC} = ${b} cm. Sur ${ctx.g}, le triangle semblable ${t2.n} a ${gAB} = ${a * k} cm. Que mesure ${gAC} ?`,
+            `Les triangles ${t1.n}, sur ${ctx.p}, et ${t2.n}, sur ${ctx.g}, sont semblables, dans l'ordre des lettres. ${pAB} = ${a} cm et ${gAB} = ${a * k} cm. Sachant que ${pAC} = ${b} cm, calcule ${gAC}.`,
+            `Sur ${ctx.p}, le triangle ${t1.n} a ${pAB} = ${a} cm et ${pAC} = ${b} cm. Sur ${ctx.g}, le triangle semblable ${t2.n} (dans l'ordre des lettres) a ${gAB} = ${a * k} cm. Que mesure ${gAC} ?`,
           ]);
       return {
         text,
         format: "short",
-        expected: [String(reponse)],
+        expected: [`${reponse} cm`],
         comparator: "number_equal",
         explanation:
           "Définition : dans deux triangles semblables, tous les côtés sont multipliés par le MÊME rapport.\n\n" +

@@ -419,7 +419,7 @@ function questionDistanceRotation(tournures: (O: string, P: string) => string[])
   return {
     text: `${o.s(P, O, d, an.t)} ${q.t}`,
     format: "short",
-    expected: [String(rep)],
+    expected: [`${rep} ${o.u}`],
     comparator: "number_equal",
     explanation:
       `Définition : une rotation de centre ${O} conserve la distance au centre : ${O}${P} = ${O}${P}', quel que soit l'angle.\n\n` +
@@ -558,10 +558,17 @@ export const transformationsBank: TutorBankItemV4[] = [
     microId: "sym_axiale",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment vérifier qu’un point A' est l’image de A par symétrie axiale.",
-    format: "open",
-    expected: ["axe", "distance", "perpendiculaire", "milieu", "médiatrice"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés (« axe » suffisait) → QCM sur les mêmes pièges.
+    text: "Comment vérifier qu’un point A' est l’image de A par la symétrie d’axe (d) ?",
+    format: "qcm",
+    choices: [
+      "on vérifie que (d) est la médiatrice de [AA'] : perpendiculaire à [AA'] en son milieu",
+      "on vérifie seulement que A et A' sont à la même distance de (d)",
+      "on vérifie que (d) passe par A et par A'",
+      "on vérifie que [AA'] est parallèle à (d)",
+    ],
+    expected: ["on vérifie que (d) est la médiatrice de [AA'] : perpendiculaire à [AA'] en son milieu"],
+    comparator: "mcq_exact",
     hint: "Parle de l’axe et des distances.",
     explanation:
       "Définition : dans une symétrie axiale, l’axe joue le rôle d’un miroir.\n\n" +
@@ -721,10 +728,17 @@ export const transformationsBank: TutorBankItemV4[] = [
     microId: "sym_centrale",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment vérifier qu’un point A' est bien l’image de A par symétrie centrale de centre O.",
-    format: "open",
-    expected: ["alignés", "milieu", "OA", "OA'", "centre"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés (« centre » suffisait) → QCM sur les mêmes pièges.
+    text: "Comment vérifier qu’un point A' est bien l’image de A par la symétrie de centre O ?",
+    format: "qcm",
+    choices: [
+      "on vérifie que O est le milieu de [AA']",
+      "on vérifie seulement que OA = OA'",
+      "on vérifie seulement que A, O et A' sont alignés",
+      "on vérifie que A' est sur la perpendiculaire à (OA) passant par O",
+    ],
+    expected: ["on vérifie que O est le milieu de [AA']"],
+    comparator: "mcq_exact",
     hint: "Il faut parler d’alignement et de milieu.",
     explanation:
       "Définition : dans une symétrie centrale de centre O, A, O et A' sont alignés.\n\n" +
@@ -833,10 +847,17 @@ export const transformationsBank: TutorBankItemV4[] = [
     microId: "sym_translation",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment reconnaître une translation sur une figure.",
-    format: "open",
-    expected: ["même", "déplacement", "direction", "sens", "longueur"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés (« même » suffisait) → QCM sur les mêmes pièges.
+    text: "Comment reconnaître qu’une figure est l’image d’une autre par une translation ?",
+    format: "qcm",
+    choices: [
+      "tous les points ont glissé du même déplacement : même direction, même sens, même longueur",
+      "la figure a été retournée comme dans un miroir",
+      "la figure a tourné autour d’un point",
+      "la figure a la même forme, mais une taille différente",
+    ],
+    expected: ["tous les points ont glissé du même déplacement : même direction, même sens, même longueur"],
+    comparator: "mcq_exact",
     hint: "Tous les points se déplacent de la même façon.",
     explanation:
       "Définition : une translation déplace une figure selon un vecteur.\n\n" +
@@ -948,10 +969,17 @@ export const transformationsBank: TutorBankItemV4[] = [
     microId: "sym_rotation",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment reconnaître une rotation sur une figure.",
-    format: "open",
-    expected: ["centre", "angle", "tourne", "distance", "conservée"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés (« centre » suffisait) → QCM sur les mêmes pièges.
+    text: "Comment reconnaître qu’une figure est l’image d’une autre par une rotation ?",
+    format: "qcm",
+    choices: [
+      "chaque point a tourné du même angle autour d’un même centre, en gardant sa distance au centre",
+      "tous les points ont glissé du même déplacement",
+      "la figure a été retournée comme dans un miroir",
+      "chaque point s’est éloigné du centre",
+    ],
+    expected: ["chaque point a tourné du même angle autour d’un même centre, en gardant sa distance au centre"],
+    comparator: "mcq_exact",
     hint: "Parle du centre et de l’angle.",
     explanation:
       "Définition : une rotation fait tourner une figure autour d’un centre.\n\n" +
@@ -1013,7 +1041,7 @@ export const transformationsBank: TutorBankItemV4[] = [
       return {
         text: `${o.s(l, P, Q)} On applique ${t.nom} à la figure. ${question}`,
         format: "short",
-        expected: [String(l)],
+        expected: [`${l} ${o.u}`],
         comparator: "number_equal",
         explanation:
           `Définition : ${t.court} conserve les longueurs : elle déplace, tourne ou retourne la figure sans la déformer.\n\n` +
@@ -1056,10 +1084,17 @@ export const transformationsBank: TutorBankItemV4[] = [
     microId: "sym_transformation_propriete",
     difficulty: 4,
     theme: "neutral",
-    text: "Cite deux propriétés conservées par une symétrie centrale, une translation ou une rotation.",
-    format: "open",
-    expected: ["longueurs", "angles", "alignement", "parallélisme"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM sur les mêmes pièges.
+    text: "Qu’est-ce qui est conservé par une symétrie centrale, une translation ou une rotation ?",
+    format: "qcm",
+    choices: [
+      "les longueurs et les angles",
+      "les longueurs, mais pas les angles",
+      "les angles, mais pas les longueurs",
+      "seulement la position de la figure",
+    ],
+    expected: ["les longueurs et les angles"],
+    comparator: "mcq_exact",
     hint: "Pense à ce qui ne change pas dans la figure.",
     explanation:
       "Définition : ces transformations ne déforment pas les figures.\n\n" +
@@ -1139,10 +1174,17 @@ export const transformationsBank: TutorBankItemV4[] = [
     microId: "sym_transformation_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique la différence entre une symétrie axiale, une symétrie centrale, une translation et une rotation.",
-    format: "open",
-    expected: ["axe", "centre", "glissement", "tourne", "angle"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM sur les mêmes pièges.
+    text: "Quelle phrase décrit correctement les quatre transformations ?",
+    format: "qcm",
+    choices: [
+      "symétrie axiale : un miroir (un axe) ; symétrie centrale : un demi-tour (un centre) ; translation : un glissement ; rotation : on tourne d’un angle autour d’un centre",
+      "symétrie axiale : un demi-tour ; symétrie centrale : un miroir ; translation : un glissement ; rotation : on tourne autour d’un centre",
+      "symétrie axiale : un miroir ; symétrie centrale : un glissement ; translation : un demi-tour ; rotation : on tourne autour d’un centre",
+      "symétrie axiale : un miroir ; symétrie centrale : un demi-tour ; translation : on tourne autour d’un centre ; rotation : un glissement",
+    ],
+    expected: ["symétrie axiale : un miroir (un axe) ; symétrie centrale : un demi-tour (un centre) ; translation : un glissement ; rotation : on tourne d’un angle autour d’un centre"],
+    comparator: "mcq_exact",
     hint: "Associe chaque transformation à son indice principal.",
     explanation:
       "Définition : les transformations se distinguent par leur élément caractéristique.\n\n" +
@@ -1233,7 +1275,7 @@ export const transformationsBank: TutorBankItemV4[] = [
       return {
         text: `${o.s(P, O, d)} ${q.t}`,
         format: "short",
-        expected: [String(rep)],
+        expected: [`${rep} ${o.u}`],
         comparator: "number_equal",
         explanation:
           `Définition : dans la symétrie de centre ${O}, le centre est le MILIEU du segment qui relie un point à son image : ${P}, ${O} et ${P}' sont alignés et ${O}${P} = ${O}${P}'.\n\n` +
@@ -1406,7 +1448,7 @@ export const transformationsBank: TutorBankItemV4[] = [
       return {
         text: `${o.s(angle, A, B, C)} On applique ${t.nom} à la figure. ${question}`,
         format: "short",
-        expected: [String(angle)],
+        expected: [`${angle}°`],
         comparator: "number_equal",
         explanation:
           `Définition : ${t.court} conserve les angles, comme toutes les symétries, translations et rotations.\n\n` +
@@ -1980,7 +2022,7 @@ export const transformationsBank: TutorBankItemV4[] = [
       return {
         text: `${r.s(d)} ${q.t}`,
         format: "short",
-        expected: [String(rep)],
+        expected: [`${rep} ${r.u}`],
         comparator: "number_equal",
         explanation:
           `Définition : dans une symétrie axiale, ${r.ligne} joue le rôle du miroir : un point et son image sont à la même distance de l'axe, de part et d'autre.\n\n` +
@@ -2062,10 +2104,17 @@ export const transformationsBank: TutorBankItemV4[] = [
     microId: "sym_axiale",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi l’axe d’une symétrie axiale est appelé « axe de symétrie ».",
-    format: "open",
-    expected: ["miroir", "axe", "distance"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés (« axe » suffisait) → QCM sur les mêmes pièges.
+    text: "Pourquoi l’axe d’une symétrie axiale joue-t-il le rôle d’un miroir ?",
+    format: "qcm",
+    choices: [
+      "chaque point et son image sont de part et d’autre de l’axe, à la même distance, sur une perpendiculaire à l’axe",
+      "chaque point et son image sont du même côté de l’axe",
+      "l’image est la figure qui a glissé le long de l’axe",
+      "l’image est la figure qui a tourné autour de l’axe d’un quart de tour",
+    ],
+    expected: ["chaque point et son image sont de part et d’autre de l’axe, à la même distance, sur une perpendiculaire à l’axe"],
+    comparator: "mcq_exact",
     hint: "Pense à l’effet miroir.",
     explanation:
       "Définition : l’axe agit comme un miroir entre la figure et son image.\n\n" +
@@ -2172,10 +2221,17 @@ export const transformationsBank: TutorBankItemV4[] = [
     microId: "sym_centrale",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi une symétrie centrale est aussi appelée « demi-tour ».",
-    format: "open",
-    expected: ["demi-tour", "180", "centre"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés (« 180 » seul suffisait) → QCM sur les mêmes pièges.
+    text: "Pourquoi une symétrie centrale est-elle aussi appelée « demi-tour » ?",
+    format: "qcm",
+    choices: [
+      "parce qu’elle fait tourner la figure de 180° autour du centre",
+      "parce qu’elle fait tourner la figure de 90° autour du centre",
+      "parce qu’elle retourne la figure comme dans un miroir",
+      "parce qu’elle déplace la figure de la moitié de sa longueur",
+    ],
+    expected: ["parce qu’elle fait tourner la figure de 180° autour du centre"],
+    comparator: "mcq_exact",
     hint: "Pense à une rotation de 180°.",
     explanation:
       "Définition : une symétrie centrale de centre O équivaut à une rotation de 180° autour de O.\n\n" +
@@ -2295,10 +2351,17 @@ export const transformationsBank: TutorBankItemV4[] = [
     microId: "sym_translation",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique ce qu’est le vecteur d’une translation.",
-    format: "open",
-    expected: ["direction", "sens", "longueur"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM sur les mêmes pièges.
+    text: "Que faut-il connaître pour décrire complètement le déplacement d’une translation (sa flèche) ?",
+    format: "qcm",
+    choices: [
+      "sa direction, son sens et sa longueur",
+      "seulement sa longueur",
+      "sa direction et sa longueur, mais pas son sens",
+      "un centre et un angle",
+    ],
+    expected: ["sa direction, son sens et sa longueur"],
+    comparator: "mcq_exact",
     hint: "Trois informations : direction, sens, longueur.",
     explanation:
       "Définition : le vecteur d’une translation indique le déplacement à appliquer à chaque point.\n\n" +
@@ -2363,10 +2426,17 @@ export const transformationsBank: TutorBankItemV4[] = [
     microId: "sym_rotation",
     difficulty: 3,
     theme: "neutral",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM sur les mêmes pièges.
     text: "Quelles informations faut-il pour définir une rotation ?",
-    format: "open",
-    expected: ["centre", "angle", "sens"],
-    comparator: "contains_keyword",
+    format: "qcm",
+    choices: [
+      "un centre, un angle et un sens de rotation",
+      "seulement un angle",
+      "un axe et une distance",
+      "une direction, un sens et une longueur",
+    ],
+    expected: ["un centre, un angle et un sens de rotation"],
+    comparator: "mcq_exact",
     hint: "Trois éléments dont le centre.",
     explanation:
       "Définition : une rotation est définie par un centre, un angle et un sens.\n\n" +
@@ -2423,7 +2493,7 @@ export const transformationsBank: TutorBankItemV4[] = [
       return {
         text: `${o.s(p)} On applique ${t.nom} à cette forme. ${question}`,
         format: "short",
-        expected: [String(p)],
+        expected: [`${p} ${o.u}`],
         comparator: "number_equal",
         explanation:
           `Définition : ${t.court} conserve les longueurs, donc le périmètre.\n\n` +
@@ -2554,10 +2624,17 @@ export const transformationsBank: TutorBankItemV4[] = [
     microId: "sym_transformation_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi les transformations vues en 4e (symétries, translation, rotation) ne changent pas la taille des figures.",
-    format: "open",
-    expected: ["longueurs", "conservées", "déforme"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés → QCM sur les mêmes pièges.
+    text: "Pourquoi les transformations vues en 4e (symétries, translation, rotation) ne changent-elles pas la taille des figures ?",
+    format: "qcm",
+    choices: [
+      "parce qu’elles conservent les longueurs : elles déplacent la figure sans la déformer",
+      "parce qu’elles conservent seulement les angles",
+      "parce que l’image est toujours tracée au même endroit",
+      "elles la changent : l’image est toujours plus grande",
+    ],
+    expected: ["parce qu’elles conservent les longueurs : elles déplacent la figure sans la déformer"],
+    comparator: "mcq_exact",
     hint: "Pense à ce que ces transformations conservent.",
     explanation:
       "Définition : ces transformations sont des isométries.\n\n" +
@@ -2847,7 +2924,8 @@ export const transformationsBank: TutorBankItemV4[] = [
       return {
         text: `${s.s} ${question}`,
         format: "qcm",
-        choices: shuffle([T, R, A, C]),
+        // ⚠️ 08/10 : un demi-tour EST une rotation : « une rotation » était alors une seconde bonne réponse.
+        choices: shuffle([T, s.r === C ? "une rotation d'un quart de tour" : R, A, C]),
         expected: [s.r],
         comparator: "mcq_exact",
         explanation:
@@ -2992,7 +3070,7 @@ export const transformationsBank: TutorBankItemV4[] = [
       return {
         text: g.t,
         format: "short",
-        expected: [String(g.a)],
+        expected: [`${g.a}°`],
         comparator: "number_equal",
         explanation:
           "Définition : une rotation est définie par un centre et un angle ; un tour complet fait 360°.\n\n" +
@@ -3157,7 +3235,7 @@ export const transformationsBank: TutorBankItemV4[] = [
       return {
         text: cap(text),
         format: "short",
-        expected: [String(rep)],
+        expected: [centre ? `${d} cm` : `${m.v}${m.u}`],
         comparator: "number_equal",
         explanation: centre
           ? `Définition : une rotation de centre ${O} et la symétrie de centre ${O} conservent toutes deux la distance à ${O}.\n\n` +
