@@ -51,10 +51,14 @@ function tex(n: number) {
   return String(n).replace(".", "{,}");
 }
 
-/** Réponses acceptées : point ou virgule. */
-function reponses(n: number) {
-  const s = String(n);
-  return s.includes(".") ? [s, s.replace(".", ",")] : [s];
+/**
+ * La réponse attendue : virgule française, et l'unité quand l'énoncé en impose
+ * une (« 2,9 cm », règle de Frédéric). ⚠️ 08/10/2026 : plus de « 2.9 » en
+ * premier — c'est la réponse affichée ; le comparateur accepte le point de
+ * toute façon, et l'unité omise par l'élève.
+ */
+function reponses(n: number, u = "") {
+  return [u ? `${fmt(n)} ${u}` : fmt(n)];
 }
 
 function cosD(a: number) {
@@ -177,11 +181,14 @@ const RAPPORTS = [0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0
 
 /** Une hypoténuse et un adjacent au dixième dont le quotient est un rapport rond. */
 function tirerRapport() {
-  for (let k = 0; k < 200; k++) {
+  for (let k = 0; k < 400; k++) {
     const r = randomChoice(RAPPORTS);
     const h = tirerLongueur(4, 25);
     const d = arrondir(h * r, 0.01);
-    if (Number.isInteger(arrondir(d * 10, 0.01)) && d > 0) return { r, h, d };
+    // ⛔ 08/10/2026 (trouvé par le correcteur) : il faut d ÷ h = r EXACTEMENT.
+    // Avant, d était arrondi (12,9 × 0,55 = 7,095 → 7,1) et l'élève devait
+    // répondre 0,55 alors que 7,1 ÷ 12,9 = 0,5503…
+    if (Math.abs(h * r - d) < 1e-9 && Math.abs(d * 10 - Math.round(d * 10)) < 1e-9 && d > 0) return { r, h, d };
   }
   return { r: 0.6, h: 20, d: 12 };
 }
@@ -654,7 +661,7 @@ function genLongueur(o: OptsLongueur) {
     return {
       text,
       format: "short",
-      expected: reponses(res),
+      expected: reponses(res, u),
       comparator: "number_equal",
       explanation:
         "Définition : $\\cos = \\dfrac{\\text{adjacent}}{\\text{hypoténuse}}$, et dans un triangle rectangle les deux angles aigus ont pour somme $90^\\circ$.\n\n" +
@@ -666,8 +673,14 @@ function genLongueur(o: OptsLongueur) {
   }
 
   if (o.mode === "cosDonne") {
-    const r = randomChoice(RAPPORTS);
-    const h = tirerLongueur(4, 30);
+    // ⛔ 08/10/2026 (trouvé par le correcteur) : aucun arrondi n'est annoncé, donc
+    // h × cos doit tomber juste au centième (6,9 × 0,35 = 2,415 attendait « 2,42 »).
+    let r = randomChoice(RAPPORTS);
+    let h = tirerLongueur(4, 30);
+    for (let k = 0; k < 200 && Math.abs(h * r * 100 - Math.round(h * r * 100)) > 1e-6; k++) {
+      r = randomChoice(RAPPORTS);
+      h = tirerLongueur(4, 30);
+    }
     const res = arrondir(h * r, 0.01);
     const text = randomChoice([
       `Dans le triangle $${t.nom}$ rectangle en $${t.A}$, $${c.hyp} = ${tex(h)}$ ${u} et $\\cos(${ang}) = ${tex(r)}$. Calcule $${c.adj}$${arr}.`,
@@ -677,7 +690,7 @@ function genLongueur(o: OptsLongueur) {
     return {
       text,
       format: "short",
-      expected: reponses(res),
+      expected: reponses(res, u),
       comparator: "number_equal",
       explanation:
         `Définition : $\\cos(${ang}) = \\dfrac{${c.adj}}{${c.hyp}}$ (adjacent sur hypoténuse).\n\n` +
@@ -705,7 +718,7 @@ function genLongueur(o: OptsLongueur) {
     return {
       text: tourAdj(h, donneeAngle),
       format: "short",
-      expected: reponses(res),
+      expected: reponses(res, u),
       comparator: "number_equal",
       explanation:
         `Définition : dans le triangle $${t.nom}$ rectangle en $${t.A}$, l'hypoténuse est $[${c.hyp}]$ et le côté adjacent à $${ang}$ est $[${c.adj}]$ ; $\\cos(${ang}) = \\dfrac{${c.adj}}{${c.hyp}}$.\n\n` +
@@ -738,7 +751,7 @@ function genLongueur(o: OptsLongueur) {
   return {
     text,
     format: "short",
-    expected: reponses(res),
+    expected: reponses(res, u),
     comparator: "number_equal",
     explanation:
       `Définition : $\\cos(${ang}) = \\dfrac{${c.adj}}{${c.hyp}}$ : $[${c.adj}]$ est l'adjacent, $[${c.hyp}]$ l'hypoténuse (en face de l'angle droit $${t.A}$).\n\n` +
@@ -1081,7 +1094,9 @@ type Inconnue = "adj" | "hyp" | "angle" | "cosDonne" | "opp2" | "angle2" | "opp3
 function genProbleme(inc: Inconnue): any {
   for (let essai = 0; essai < 50; essai++) {
     const ctx = randomChoice(CONTEXTES);
-    if (ctx.douce && (inc === "angle" || inc === "hyp")) continue;
+    // ⛔ 08/10/2026 (trouvé par le correcteur) : avec une pente de 3°, le cosinus
+    // arrondi au centième vaut 1 — « cos(B) = 1 » n'est pas un angle aigu.
+    if (ctx.douce && (inc === "angle" || inc === "hyp" || inc === "cosDonne")) continue;
     const t = tirerTriangle();
     const c = configurer(t, ctx.vertical ? "C" : "B");
     const S = c.S;
@@ -1099,10 +1114,12 @@ function genProbleme(inc: Inconnue): any {
       `Définition : dans le triangle $${t.nom}$ rectangle en $${t.A}$, l'hypoténuse $[${c.hyp}]$ représente ${ctx.obj}, ` +
       `et le côté $[${c.adj}]$, adjacent à l'angle $\\widehat{${S}}$, représente ${ctx.adj}` +
       (inc === "opp2" || inc === "angle2" || inc === "opp3" ? ` ; le côté $[${c.opp}]$ représente ${ctx.opp}.` : ".");
+    // Une longueur se donne en mètres (« 3,1 m ») ; un angle, en degrés sans unité écrite.
+    const enM = !(inc === "angle" || inc === "angle2");
     const finir = (question: string, res: number, methode: string, calcul: string, conclusion: string, canvas: any) => ({
       text: `${ctx.intro} ${modele} ${question}`,
       format: "short",
-      expected: reponses(res),
+      expected: reponses(res, enM ? "m" : ""),
       comparator: "number_equal",
       explanation: `${def}\n\nMéthode : ${methode}\n\nCalcul : ${calcul}\n\nConclusion : ${conclusion}`,
       canvas,
@@ -1128,6 +1145,8 @@ function genProbleme(inc: Inconnue): any {
 
     if (inc === "cosDonne") {
       const r = arrondir(cosD(a), 0.01);
+      // Une pente très faible (tyrolienne à 5°) donnerait aussi « cos = 1 ».
+      if (r >= 0.995) continue;
       const res = arrondir(h * r, pas);
       const q = randomChoice([
         `${Obj} mesure ${fmt(h)} m et, pour ${ctx.angle}, on prend $\\cos(\\widehat{${S}}) = ${tex(r)}$. Calcule ${ctx.adj}${arr}.`,
@@ -1420,7 +1439,7 @@ function genDefiOppose() {
   return {
     text,
     format: "short",
-    expected: reponses(res),
+    expected: reponses(res, u),
     comparator: "number_equal",
     explanation:
       `Définition : $[${c.opp}]$ est OPPOSÉ à $${ang}$ : le cosinus ne le donne pas directement.\n\n` +
@@ -1450,7 +1469,8 @@ function genDefiPerimetre() {
   return {
     text,
     format: "short",
-    expected: reponses(res),
+    // Un périmètre : l'unité est OBLIGATOIRE dans la réponse (Frédéric).
+    expected: reponses(res, u),
     comparator: "number_equal",
     explanation:
       "Définition : le périmètre est la somme des trois côtés ; on n'en connaît qu'un.\n\n" +
@@ -2671,10 +2691,17 @@ export const cosinusBank: TutorBankItemV4[] = [
     microId: "cos_probleme",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique quand on utilise le cosinus pour résoudre un problème dans un triangle rectangle.",
-    format: "open",
-    expected: ["adjacent", "hypoténuse", "angle"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : QCM, plus une question à mots-clés (règle de Frédéric).
+    text: "Dans un triangle rectangle, quand utilise-t-on le cosinus d’un angle aigu ?",
+    format: "qcm",
+    choices: [
+      "quand on connaît les deux côtés de l’angle droit et qu’on cherche seulement l’hypoténuse",
+      "quand le problème relie cet angle, son côté adjacent et l’hypoténuse",
+      "dans n’importe quel triangle, même sans angle droit",
+      "quand le problème relie cet angle, le côté opposé et le côté adjacent",
+    ],
+    expected: ["quand le problème relie cet angle, son côté adjacent et l’hypoténuse"],
+    comparator: "mcq_exact",
     hint: "Le cosinus relie l’adjacent et l’hypoténuse.",
     explanation:
       "Définition : $\\cos(\\theta) = \\dfrac{\\text{adjacent}}{\\text{hypoténuse}}$.\n\n" +
@@ -2757,10 +2784,16 @@ export const cosinusBank: TutorBankItemV4[] = [
     microId: "cos_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi le cosinus d’un angle aigu est toujours compris entre 0 et 1.",
-    format: "open",
-    expected: ["adjacent", "hypoténuse", "plus grand"],
-    comparator: "contains_keyword",
+    text: "Pourquoi le cosinus d’un angle aigu est-il toujours compris entre 0 et 1 ?",
+    format: "qcm",
+    choices: [
+      "parce qu’un angle aigu mesure moins de 1°",
+      "parce que l’hypoténuse est plus courte que le côté adjacent",
+      "parce que le côté adjacent est plus court que l’hypoténuse, le plus grand côté",
+      "parce qu’on arrondit toujours le cosinus au dixième",
+    ],
+    expected: ["parce que le côté adjacent est plus court que l’hypoténuse, le plus grand côté"],
+    comparator: "mcq_exact",
     hint: "Compare l’adjacent et l’hypoténuse.",
     explanation:
       "Définition : $\\cos(\\theta) = \\dfrac{\\text{adjacent}}{\\text{hypoténuse}}$.\n\n" +

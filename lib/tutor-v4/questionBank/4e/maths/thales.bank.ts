@@ -707,7 +707,8 @@ function genCalcul(
   return {
     text,
     format: "short",
-    expected: [String(r.valeur), fr(r.valeur)],
+    // ⚠️ 08/10/2026 : l'unité dans la réponse, et plus de « 2.4 » à point anglais.
+    expected: [`${fr(r.valeur)} ${lg.u}`],
     comparator: "number_equal",
     explanation,
     canvas: figure(n, sides),
@@ -769,7 +770,7 @@ function genRecipRapports(): TutorGeneratedQuestionV4 {
   return {
     text: `${cadreSansPara(n, s.intro)} On a ${AM} = ${fr(am)} ${u} et ${AB} = ${fr(ab)} ${u}. ${q}`,
     format: "short",
-    expected: [String(rapport), fr(rapport)],
+    expected: [fr(rapport)],
     comparator: "number_equal",
     explanation: expl(
       DEF_RECIPROQUE,
@@ -1068,7 +1069,14 @@ function genRedigerQcm(): TutorGeneratedQuestionV4 {
   };
 }
 
-/** ★4 — rédaction ouverte (mots-clés), avec les lettres tirées. */
+/**
+ * ★4 — la rédaction, avec les lettres tirées.
+ * ⛔ 08/10/2026 (règle de Frédéric) : ce n'est plus une question ouverte à
+ * mots-clés — « triangle » ou « parallèle » suffisaient à faire accepter
+ * n'importe quelle phrase. C'est un QCM de rédactions sur les vrais pièges :
+ * la réciproque citée à la place du théorème, un rapport renversé, les
+ * longueurs mal associées, l'égalité qui ne contient pas les longueurs connues.
+ */
 function genRedigerOuvert(genre: "debut" | "egalite" | "raisonnement"): TutorGeneratedQuestionV4 {
   const n = randomChoice(NOMS_THALES);
   const s = tireSupport();
@@ -1079,34 +1087,68 @@ function genRedigerOuvert(genre: "debut" | "egalite" | "raisonnement"): TutorGen
   const T = L(n, cible);
   const data = r.connus.map((x) => `${L(n, x)} = ${fr(lg.v[x])} ${lg.u}`);
   const avant = s.intro ? `${s.intro}, on étudie un triangle coupé par une droite. ` : "";
-  const [e1, e2] = r.egalite.split(" = ");
-  const text =
-    genre === "egalite"
-      ? `${avant}On sait que (${MN}) // (${BC}), avec ${n.M} ∈ [${AB}] et ${n.N} ∈ [${AC}], et que ${liste(data)}. ${randomChoice([
-          `Écris l'égalité de rapports de Thalès qui permet de trouver ${T}.`,
-          `Quelle égalité de rapports utilises-tu pour calculer ${T} ?`,
-          `Écris les rapports égaux utiles pour trouver ${T}.`,
-        ])}`
-      : genre === "debut"
-        ? `${avant}${randomChoice([
-            `Rédige le début du raisonnement pour calculer ${T}`,
-            `Écris les deux premières phrases de la démonstration qui mène à ${T}`,
-            `Commence la rédaction du calcul de ${T}`,
-          ])}, sachant que ${n.M} ∈ [${AB}], ${n.N} ∈ [${AC}], (${MN}) // (${BC}), et que ${liste(data)}.`
-        : `${avant}${randomChoice([
-            `Rédige le raisonnement de Thalès pour calculer ${T}`,
-            `Rédige la démonstration complète qui donne ${T}`,
-            `Justifie par une rédaction complète le calcul de ${T}`,
-          ])} (${data.join(", ")}, ${n.M} ∈ [${AB}], ${n.N} ∈ [${AC}], (${MN}) // (${BC})).`;
-  const expected =
-    genre === "egalite" ? [e1.trim(), e2.trim(), "Thalès"] : ["triangle", "parallèle", e1.trim(), e2.trim()];
+  const [e1, e2] = r.egalite.split(" = ").map((x) => x.trim());
+  // Les rapports écrits avec les lettres : renversé, mal associé, et le « troisième » de la chaîne.
+  const renverse = (x: string) => x.split("/").reverse().join("/");
+  const i = RAPPORTS.findIndex((p) => p.includes(cible));
+  const autres = [0, 1, 2].filter((x) => x !== i).map((x) => `${L(n, RAPPORTS[x][0])}/${L(n, RAPPORTS[x][1])}`);
+  const troisieme = autres.find((x) => x !== e1 && x !== e2)!;
+  const melange = `${e1.split("/")[0]}/${e2.split("/")[1]} = ${e2.split("/")[0]}/${e1.split("/")[1]}`;
+  const config = `Dans le triangle ${tri}, ${n.M} ∈ [${AB}], ${n.N} ∈ [${AC}] et (${MN}) // (${BC}).`;
+  let text: string;
+  let bon: string;
+  let leurres: string[];
+  if (genre === "egalite") {
+    text = `${avant}On sait que (${MN}) // (${BC}), avec ${n.M} ∈ [${AB}] et ${n.N} ∈ [${AC}], et que ${liste(data)}. ${randomChoice([
+      `Quelle égalité de rapports permet de trouver ${T} ?`,
+      `Quelle égalité de rapports utilises-tu pour calculer ${T} ?`,
+      `Quels rapports égaux sont utiles pour trouver ${T} ?`,
+    ])}`;
+    bon = `${e1} = ${e2}`;
+    leurres = [
+      `${e1} = ${renverse(e2)}`,
+      melange,
+      // ⛔ 08/10/2026 (Frédéric) : jamais un leurre VRAI. « e1 = troisième rapport »
+      // était juste (seulement inutile) : l'élève avait raison de le choisir.
+      `${e1} = ${renverse(troisieme)}`,
+      `${renverse(e1)} = ${e2}`,
+    ];
+  } else if (genre === "debut") {
+    text = `${avant}${randomChoice([
+      `On rédige le début du raisonnement pour calculer ${T}`,
+      `On écrit les deux premières phrases de la démonstration qui mène à ${T}`,
+      `On commence la rédaction du calcul de ${T}`,
+    ])}, sachant que ${n.M} ∈ [${AB}], ${n.N} ∈ [${AC}], (${MN}) // (${BC}), et que ${liste(data)}. Quel début est correct ?`;
+    bon = `${config} D'après le théorème de Thalès, ${CHAINE(n)}.`;
+    const [r1, r2b, r3] = CHAINE(n).split(" = ");
+    leurres = [
+      `${config} D'après la réciproque du théorème de Thalès, ${CHAINE(n)}.`,
+      `${config} D'après le théorème de Thalès, ${r1} = ${renverse(r2b)} = ${r3}.`,
+      `Dans le triangle ${tri}, ${n.M} ∈ [${AB}], ${n.N} ∈ [${AC}] et (${MN}) ⊥ (${BC}). D'après le théorème de Thalès, ${CHAINE(n)}.`,
+    ];
+  } else {
+    text = `${avant}${randomChoice([
+      `On rédige le raisonnement de Thalès pour calculer ${T}`,
+      `On rédige la démonstration complète qui donne ${T}`,
+      `On justifie par une rédaction complète le calcul de ${T}`,
+    ])} (${data.join(", ")}, ${n.M} ∈ [${AB}], ${n.N} ∈ [${AC}], (${MN}) // (${BC})). Quelle rédaction est correcte ?`;
+    const fin = (prop: string, eg: string, v: number) => `D'après ${prop}, ${eg}, donc ${T} = ${fr(v)} ${lg.u}.`;
+    bon = fin("le théorème de Thalès", r.egalite, r.valeur);
+    leurres = [
+      fin("la réciproque du théorème de Thalès", r.egalite, r.valeur),
+      fin("le théorème de Thalès", melange, r.inverse),
+      ...(r.additif > 0 ? [fin("le théorème de Thalès", r.egalite, r.additif)] : []),
+      fin("le théorème de Thalès", `${e1} = ${renverse(e2)}`, r.inverse),
+    ];
+  }
   const sides: Partial<Record<Seg, string>> = { [cible]: "?" };
   for (const x of r.connus) sides[x] = `${fr(lg.v[x])} ${lg.u}`;
   return {
     text,
-    format: "open",
-    expected,
-    comparator: "contains_keyword",
+    format: "qcm",
+    choices: makeChoices(bon, leurres),
+    expected: [bon],
+    comparator: "mcq_exact",
     explanation: expl(
       DEF_THALES,
       `« Dans le triangle ${tri}, ${n.M} ∈ [${AB}], ${n.N} ∈ [${AC}] et (${MN}) // (${BC}). D'après le théorème de Thalès, ${CHAINE(n)}. »`,
@@ -1152,8 +1194,11 @@ function poseObjet(o: (typeof OBJETS)[number], n: Noms, parallele: boolean): str
     : `${o.objet} est ${schem} par le triangle ${tri} : ${pos}, et ${o.mn} [${MN}] relie ${n.M} à ${n.N} ; ${o.bc} correspond à [${BC}].`;
 }
 
+/** « une latte » → « la latte » : la pièce est déjà présentée, on la reprend au défini. */
+const defini = (gn: string) => gn.replace(/^une /, "la ").replace(/^un /, "le ");
+
 function nomCible(o: (typeof OBJETS)[number], n: Noms, c: Seg): string {
-  if (c === "MN") return `la longueur ${de(o.mn)} [${L(n, "MN")}]`;
+  if (c === "MN") return `la longueur ${de(defini(o.mn))} [${L(n, "MN")}]`;
   if (c === "BC") return `${o.bcLong} ${L(n, "BC")}`;
   return `la longueur ${L(n, c)}`;
 }
@@ -1193,7 +1238,7 @@ function genDefiObjet(cibles: Seg[], simple: boolean, qcm: boolean): TutorGenera
   return {
     text,
     format: "short",
-    expected: [String(r.valeur), fr(r.valeur)],
+    expected: [`${fr(r.valeur)} ${lg.u}`],
     comparator: "number_equal",
     explanation,
   };
@@ -1207,7 +1252,8 @@ function genDefiReciproque(): TutorGeneratedQuestionV4 {
   const { lg } = longueursReciproque(o.f, false, egal);
   const v = lg.v;
   const AM = L(n, "AM"), AB = L(n, "AB"), AN = L(n, "AN"), AC = L(n, "AC"), MN = L(n, "MN"), BC = L(n, "BC");
-  const piece = `${cap(o.mn)} est-${/^(la|une) /.test(o.mn) ? "elle" : "il"} bien parallèle ${a(o.bc)} ?`;
+  // ⚠️ 08/10/2026 : « Une latte est-elle bien parallèle… » → « La latte… » (elle est déjà présentée).
+  const piece = `${cap(defini(o.mn))} est-${/^(la|une) /.test(o.mn) ? "elle" : "il"} bien parallèle ${a(o.bc)} ?`;
   const q = randomChoice([
     `Peut-on affirmer que (${MN}) est parallèle à (${BC}) ?`,
     piece,
@@ -1302,7 +1348,7 @@ function genDefiOmbre(): TutorGeneratedQuestionV4 {
   return {
     text: `${g.lieu}, ${petitePhrase} ${grandePhrase} ${q}`,
     format: "short",
-    expected: [String(valeur), fr(valeur)],
+    expected: [`${fr(valeur)} m`],
     comparator: "number_equal",
     explanation: expl(
       "les rayons du soleil sont parallèles : l'objet, son ombre et le rayon forment une configuration de Thalès, donc hauteurs et ombres sont proportionnelles.",
@@ -1344,7 +1390,7 @@ function genDefiCoefficient(): TutorGeneratedQuestionV4 {
   return {
     text: `${debut} ${donnees(n, lg, [x, y])} ${q}`,
     format: "short",
-    expected: [String(valeur), fr(valeur)],
+    expected: [fr(valeur)],
     comparator: "number_equal",
     explanation: expl(
       "dans une configuration de Thalès, le grand triangle est un agrandissement du petit : toutes ses longueurs sont multipliées par le même coefficient.",
@@ -1749,10 +1795,17 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_rediger",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique la différence entre le théorème de Thalès et sa réciproque.",
-    format: "open",
-    expected: ["théorème", "réciproque", "parallèle"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : QCM, plus une question à mots-clés (règle de Frédéric).
+    text: "Quelle est la différence entre le théorème de Thalès et sa réciproque ?",
+    format: "qcm",
+    choices: [
+      "Le théorème prouve que des droites sont parallèles ; la réciproque calcule une longueur.",
+      "Le théorème calcule une longueur quand on SAIT que les droites sont parallèles ; la réciproque PROUVE que des droites sont parallèles.",
+      "Le théorème sert dans un triangle rectangle ; la réciproque dans un triangle quelconque.",
+      "Il n'y a aucune différence : ce sont deux noms de la même propriété.",
+    ],
+    expected: ["Le théorème calcule une longueur quand on SAIT que les droites sont parallèles ; la réciproque PROUVE que des droites sont parallèles."],
+    comparator: "mcq_exact",
     hint: "Dans un cas, on sait déjà que les droites sont parallèles. Dans l’autre, on veut le prouver.",
     explanation:
       "Définition : le théorème de Thalès relie des longueurs dans une configuration avec des droites parallèles.\n\n" +
@@ -1984,10 +2037,16 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_configuration",
     difficulty: 2,
     theme: "neutral",
-    text: "Décris les éléments d’une configuration de Thalès dans un triangle.",
-    format: "open",
-    expected: ["triangle", "parallèle", "points"],
-    comparator: "contains_keyword",
+    text: "Dans le triangle ABC, quels éléments forment une configuration de Thalès ?",
+    format: "qcm",
+    choices: [
+      "M sur [AB], N sur [AC], et (MN) perpendiculaire à (BC)",
+      "M sur [AB], N sur [AC], et (AM) parallèle à (AN)",
+      "M sur [AB], N sur [AC], et (MN) parallèle à (BC)",
+      "M milieu de [AB], et (MN) coupe (BC)",
+    ],
+    expected: ["M sur [AB], N sur [AC], et (MN) parallèle à (BC)"],
+    comparator: "mcq_exact",
     hint: "Pense au triangle, aux points sur deux côtés et à la parallèle.",
     explanation:
       "Définition : une configuration de Thalès comprend un triangle, deux points sur deux côtés issus d’un même sommet, et une droite parallèle au troisième côté.\n\n" +
@@ -2116,10 +2175,16 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_rapport",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment associer les longueurs dans l’égalité de Thalès.",
-    format: "open",
-    expected: ["demi-droite", "correspondantes", "AM"],
-    comparator: "contains_keyword",
+    text: "Dans le triangle ABC, M ∈ [AB], N ∈ [AC] et (MN) // (BC). Comment associe-t-on les longueurs dans l’égalité de Thalès ?",
+    format: "qcm",
+    choices: [
+      "AM avec AC, AN avec AB, MN avec BC",
+      "AM avec BC, AN avec AB, MN avec AC",
+      "dans n’importe quel ordre : le résultat est le même",
+      "AM avec AB, AN avec AC, MN avec BC : chaque longueur du petit triangle avec celle qui lui correspond dans le grand",
+    ],
+    expected: ["AM avec AB, AN avec AC, MN avec BC : chaque longueur du petit triangle avec celle qui lui correspond dans le grand"],
+    comparator: "mcq_exact",
     hint: "Les longueurs d’une même demi-droite vont ensemble.",
     explanation:
       "Définition : on compare les longueurs correspondantes des deux demi-droites issues du sommet.\n\n" +
@@ -2229,10 +2294,10 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_calculer_longueur",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment calculer AC quand AM = 3, AB = 9 et AN = 5.",
-    format: "open",
-    expected: ["AM/AB", "AN/AC", "15"],
-    comparator: "contains_keyword",
+    text: "Dans le triangle ABC, M ∈ [AB], N ∈ [AC] et (MN) // (BC). On donne AM = 3 cm, AB = 9 cm et AN = 5 cm. Combien mesure AC ?",
+    format: "short",
+    expected: ["15 cm"],
+    comparator: "number_equal",
     hint: "Écris l’égalité des rapports puis isole AC.",
     explanation:
       "Définition : Thalès donne AM/AB = AN/AC.\n\n" +
@@ -2375,10 +2440,11 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_reciproque_verifier",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment vérifier que deux rapports sont égaux avec le produit en croix.",
-    format: "open",
-    expected: ["produit en croix", "égaux", "multiplie"],
-    comparator: "contains_keyword",
+    text: "Pour vérifier que AM/AB = AN/AC avec le produit en croix, quels produits compare-t-on ?",
+    format: "qcm",
+    choices: ["AM × AB et AN × AC", "AM × AC et AB × AN", "AM × AN et AB × AC", "AM + AC et AB + AN"],
+    expected: ["AM × AC et AB × AN"],
+    comparator: "mcq_exact",
     hint: "On multiplie en croix et on compare.",
     explanation:
       "Définition : deux rapports a/b et c/d sont égaux si a × d = b × c.\n\n" +
@@ -2533,10 +2599,16 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_reciproque_conclure",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique ce qu’on conclut avec la réciproque de Thalès, et à quelle condition.",
-    format: "open",
-    expected: ["rapports", "égaux", "parallèle"],
-    comparator: "contains_keyword",
+    text: "Avec la réciproque du théorème de Thalès (M ∈ [AB], N ∈ [AC]), que conclut-on, et à quelle condition ?",
+    format: "qcm",
+    choices: [
+      "AM/AB = AN/AC, si (MN) // (BC)",
+      "(MN) // (BC), si AM/AB = AN/AC et si les points sont alignés dans le même ordre",
+      "le triangle ABC est rectangle, si AM/AB = AN/AC",
+      "(MN) est perpendiculaire à (BC), si AM/AB = AN/AC",
+    ],
+    expected: ["(MN) // (BC), si AM/AB = AN/AC et si les points sont alignés dans le même ordre"],
+    comparator: "mcq_exact",
     hint: "Condition = rapports égaux ; conclusion = parallélisme.",
     explanation:
       "Définition : la réciproque conclut au parallélisme.\n\n" +
@@ -2637,10 +2709,16 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_rediger",
     difficulty: 4,
     theme: "neutral",
-    text: "Rédige les étapes pour calculer une longueur avec le théorème de Thalès.",
-    format: "open",
-    expected: ["configuration", "rapports", "calcul"],
-    comparator: "contains_keyword",
+    text: "Dans quel ordre rédige-t-on le calcul d’une longueur avec le théorème de Thalès ?",
+    format: "qcm",
+    choices: [
+      "le calcul, puis l’égalité des rapports, puis la configuration",
+      "l’égalité des rapports, puis le calcul, sans citer le parallélisme",
+      "la configuration, puis le calcul, puis la réciproque du théorème",
+      "la configuration et le parallélisme, puis l’égalité des rapports, puis le calcul",
+    ],
+    expected: ["la configuration et le parallélisme, puis l’égalité des rapports, puis le calcul"],
+    comparator: "mcq_exact",
     hint: "Trois étapes : configuration, rapports, calcul.",
     explanation:
       "Définition : une rédaction comporte trois étapes.\n\n" +
@@ -2788,10 +2866,10 @@ export const thalesBank: TutorBankItemV4[] = [
     microId: "thales_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique comment Thalès permet de mesurer la hauteur d’un arbre sans y monter.",
-    format: "open",
-    expected: ["ombre", "proportionnel", "hauteur"],
-    comparator: "contains_keyword",
+    text: "Un bâton vertical de 1 m a une ombre de 2 m. Au même moment, l’ombre d’un arbre mesure 16 m. Quelle est la hauteur de l’arbre, en m ?",
+    format: "short",
+    expected: ["8 m"],
+    comparator: "number_equal",
     hint: "On compare l’ombre d’un objet connu et celle de l’arbre.",
     explanation:
       "Définition : les rayons du soleil créent des triangles semblables (configuration de Thalès).\n\n" +

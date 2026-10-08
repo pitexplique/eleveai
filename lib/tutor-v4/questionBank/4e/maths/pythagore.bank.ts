@@ -525,7 +525,9 @@ function situationHypotenuse(arrondir: boolean) {
   let [a, b] = randomChoice(s.triplets);
   const pas = s.triplets.some((t) => t.some((x) => !Number.isInteger(x))) ? 0.1 : 1;
   if (arrondir) {
-    if (randomChoice([true, false])) a = Math.round((a + pas) * 10) / 10;
+    // ⚠️ 08/10/2026 : jamais deux côtés égaux (« une piscine rectangulaire de 21 m sur 21 m » est un carré).
+    const bougerA = randomChoice([true, false]) ? Math.round((a + pas) * 10) / 10 !== b : Math.round((b + pas) * 10) / 10 === a;
+    if (bougerA) a = Math.round((a + pas) * 10) / 10;
     else b = Math.round((b + pas) * 10) / 10;
   }
   const S = sq(a) + sq(b);
@@ -612,6 +614,19 @@ const PUR_RACINE = [
 ];
 const UNITES_AIRE = ["mm", "cm", "dm", "m"];
 
+/**
+ * ⭐ 08/10/2026 : l'unité de la réponse quand l'énoncé en impose une (règle de
+ * Frédéric : « 24 cm » dans `expected`). Une aire (`aire`) se lit sur une
+ * LONGUEUR de l'énoncé (« 5 cm » → « cm² ») ; un côté se lit sur une AIRE
+ * (« 49 m² » → « m »). Les dénombrements (chaises, cases) n'en ont pas.
+ */
+function avecUnite(valeur: number | string, text: string, aire: boolean): string {
+  const m = text.match(/\d (mm|cm|dm|m)(²?)(?![a-zà-ÿ])/);
+  if (!m) return String(valeur);
+  if (aire) return m[2] ? String(valeur) : `${valeur} ${m[1]}²`;
+  return m[2] ? `${valeur} ${m[1]}` : String(valeur);
+}
+
 function explCarre(n: number): string {
   return (
     "Définition : le carré d’un nombre, c’est ce nombre multiplié par lui-même.\n\n" +
@@ -643,7 +658,7 @@ function genCarreRacineCourt(): Q {
   return {
     text,
     format: "short",
-    expected: [String(modeCarre ? S : n)],
+    expected: [avecUnite(modeCarre ? S : n, text, modeCarre)],
     comparator: "number_equal",
     explanation: modeCarre ? explCarre(n) : explRacine(n),
   };
@@ -724,10 +739,11 @@ function genSommeCarres(): Q {
     `Pour un carrelage, on pose un carré de ${a} carreaux sur ${a} et un autre de ${b} carreaux sur ${b}. Combien de carreaux faut-il ?`,
     `Deux bassins carrés ont pour côtés ${a} m et ${b} m. Quelle est leur surface totale, en m² ?`,
   ];
+  const text = randomChoice(formes);
   return {
-    text: randomChoice(formes),
+    text,
     format: "short",
-    expected: [String(r)],
+    expected: [avecUnite(r, text, true)],
     comparator: "number_equal",
     explanation:
       "Définition : le carré d’un nombre est ce nombre multiplié par lui-même.\n\n" +
@@ -758,10 +774,11 @@ function genDiffCarres(): Q {
     `Un carré de ${a} carreaux sur ${a} contient un motif carré de ${b} carreaux sur ${b}. Combien de carreaux sont hors du motif ?`,
     `Une place carrée de ${a} m de côté a en son centre une fontaine carrée de ${b} m de côté. Quelle surface reste pour les promeneurs, en m² ?`,
   ];
+  const text = randomChoice(formes);
   return {
-    text: randomChoice(formes),
+    text,
     format: "short",
-    expected: [String(r)],
+    expected: [avecUnite(r, text, true)],
     comparator: "number_equal",
     explanation:
       "Définition : on calcule chaque carré séparément.\n\n" +
@@ -1109,7 +1126,7 @@ function genHypNomme(): Q {
   return {
     text,
     format: "short",
-    expected: [String(h)],
+    expected: [`${fr(h)} ${u}`],
     comparator: "number_equal",
     explanation: explHypNomme(t, x1, x2, u),
     canvas: figureALEchelle({
@@ -1171,7 +1188,7 @@ function coteNomme(sorte: SorteTriplet, arrondir: boolean): Q {
   return {
     text,
     format: "short",
-    expected: [fr(x2)],
+    expected: [`${fr(x2)} ${u}`],
     comparator: "number_equal",
     explanation: explCoteNomme(t, h, x1, u),
     canvas: figureALEchelle({
@@ -1227,7 +1244,7 @@ function genHypQcmSituation(): Q {
 /** ★3 — réponse tapée, la moitié des tirages à arrondir au dixième. */
 function genHypSituation(): Q {
   const r = situationHypotenuse(randomChoice([true, false]));
-  return { text: r.text, format: "short", expected: [fr(r.c)], comparator: "number_equal", explanation: r.explanation };
+  return { text: r.text, format: "short", expected: [r.L(r.c)], comparator: "number_equal", explanation: r.explanation };
 }
 
 /** ★3 — QCM : un côté de l'angle droit dans une situation. */
@@ -1250,63 +1267,107 @@ function genCoteQcmSituation(): Q {
 /** ★3 — réponse tapée, la moitié des tirages à arrondir au dixième. */
 function genCoteSituation(): Q {
   const r = situationCote(randomChoice([true, false]));
-  return { text: r.text, format: "short", expected: [fr(r.b)], comparator: "number_equal", explanation: r.explanation };
+  return { text: r.text, format: "short", expected: [r.L(r.b)], comparator: "number_equal", explanation: r.explanation };
 }
 
-/** ★3 (hypoténuse) — justifier un résultat donné. */
+// ⛔ 08/10/2026 (règle de Frédéric) : plus de question ouverte à mots-clés —
+// « 14 », « 48 » ou « carré » suffisaient à faire accepter n'importe quelle
+// phrase. Les « explique » deviennent des QCM sur les MÊMES pièges : additionner
+// les longueurs, soustraire au lieu d'additionner (ou l'inverse), oublier la racine.
+
+/** Le calcul complet « a² + b² = S, donc c = √S = r » (ou « ≈ r » quand la racine ne tombe pas juste). */
+function chaineCalcul(x: number, op: "+" | "-", y: number, u: string): string {
+  const S = op === "+" ? sq(x) + sq(y) : Math.round((sq(x) - sq(y)) * 10000) / 10000;
+  const r = arrondi1(Math.sqrt(Math.abs(S)));
+  return `${fr(x)}² ${op} ${fr(y)}² = ${fr(S)}, donc la longueur vaut √${fr(S)} ${racineExacte(S) ? "=" : "≈"} ${fr(r)} ${u}`;
+}
+
+/** Les leurres d'un calcul de Pythagore : longueurs additionnées, mauvaise opération, racine oubliée. */
+function leurresCalcul(x: number, op: "+" | "-", y: number, u: string): string[] {
+  const S = op === "+" ? sq(x) + sq(y) : Math.round((sq(x) - sq(y)) * 10000) / 10000;
+  const [g, p] = x >= y ? [x, y] : [y, x];
+  return [
+    op === "+" ? chaineCalcul(g, "-", p, u) : chaineCalcul(x, "+", y, u),
+    `${fr(x)} ${op === "+" ? "+" : "-"} ${fr(y)} = ${fr(Math.round((op === "+" ? x + y : x - y) * 100) / 100)}, donc la longueur vaut ${fr(Math.round((op === "+" ? x + y : x - y) * 100) / 100)} ${u}`,
+    `${fr(x)}² ${op} ${fr(y)}² = ${fr(S)}, donc la longueur vaut ${fr(S)} ${u}`,
+  ];
+}
+
+/** ★3 (hypoténuse) — justifier un résultat donné : quel calcul ? */
 function genHypExplique(): Q {
   if (randomChoice([true, false])) {
     const t = tirerTriangle();
     const [x1, x2, h] = tirerTriplet("varie");
     const u = randomChoice(UNITES);
     const text = randomChoice([
-      `Le triangle ${t.nom} est rectangle en ${t.droit}, avec ${t.c1} = ${fr(x1)} ${u} et ${t.c2} = ${fr(x2)} ${u}. Explique pourquoi ${t.hyp} = ${fr(h)} ${u}.`,
-      `Justifie que, dans le triangle ${t.nom} rectangle en ${t.droit} où ${t.c1} = ${fr(x1)} ${u} et ${t.c2} = ${fr(x2)} ${u}, l’hypoténuse mesure ${fr(h)} ${u}.`,
-      `Un camarade affirme : « Dans le triangle ${t.nom} rectangle en ${t.droit}, avec ${t.c1} = ${fr(x1)} ${u} et ${t.c2} = ${fr(x2)} ${u}, on a ${t.hyp} = ${fr(h)} ${u}. » Explique son calcul.`,
+      `Le triangle ${t.nom} est rectangle en ${t.droit}, avec ${t.c1} = ${fr(x1)} ${u} et ${t.c2} = ${fr(x2)} ${u}. Quel calcul prouve que ${t.hyp} = ${fr(h)} ${u} ?`,
+      `Dans le triangle ${t.nom} rectangle en ${t.droit}, ${t.c1} = ${fr(x1)} ${u} et ${t.c2} = ${fr(x2)} ${u}. Quel calcul justifie que l’hypoténuse mesure ${fr(h)} ${u} ?`,
+      `Un camarade affirme : « Dans le triangle ${t.nom} rectangle en ${t.droit}, avec ${t.c1} = ${fr(x1)} ${u} et ${t.c2} = ${fr(x2)} ${u}, on a ${t.hyp} = ${fr(h)} ${u}. » Quel calcul a-t-il fait ?`,
     ]);
+    const bon = chaineCalcul(x1, "+", x2, u);
     return {
       text,
-      format: "open",
-      expected: [fr(x1), fr(x2), fr(h), "carré"],
-      comparator: "contains_keyword",
+      format: "qcm",
+      choices: qcm(bon, leurresCalcul(x1, "+", x2, u)),
+      expected: [bon],
+      comparator: "mcq_exact",
       explanation: explHypNomme(t, x1, x2, u),
     };
   }
   const r = situationHypotenuse(false);
+  const bon = chaineCalcul(r.a, "+", r.b, r.s.unite);
   return {
-    text: `${r.text} Explique ton raisonnement : quel est le triangle rectangle, quelle est son hypoténuse, quel calcul fais-tu ?`,
-    format: "open",
-    expected: [fr(r.a), fr(r.b), fr(r.c), "carré"],
-    comparator: "contains_keyword",
+    text: `${r.text} Quel calcul donne la réponse ?`,
+    format: "qcm",
+    choices: qcm(bon, leurresCalcul(r.a, "+", r.b, r.s.unite)),
+    expected: [bon],
+    comparator: "mcq_exact",
     explanation: r.explanation,
   };
 }
 
-/** ★4 (côté) — justifier un côté de l'angle droit. */
+/** ★4 (côté) — justifier un côté de l'angle droit : quel calcul, ou quelle longueur ? */
 function genCoteExplique(): Q {
   if (randomChoice([true, false])) {
     const t = tirerTriangle();
     const [x1, x2, h] = tirerTriplet("varie");
     const u = randomChoice(UNITES);
-    const text = randomChoice([
-      `Le triangle ${t.nom} est rectangle en ${t.droit}, avec ${t.hyp} = ${fr(h)} ${u} et ${t.c1} = ${fr(x1)} ${u}. Explique pourquoi ${t.c2} = ${fr(x2)} ${u}.`,
-      `Justifie que ${t.c2} = ${fr(x2)} ${u} dans le triangle ${t.nom} rectangle en ${t.droit}, où ${t.hyp} = ${fr(h)} ${u} et ${t.c1} = ${fr(x1)} ${u}.`,
-      `Une élève trouve ${t.c2} = ${fr(Math.round(Math.sqrt(sq(h) + sq(x1)) * 10) / 10)} ${u} dans le triangle ${t.nom} rectangle en ${t.droit}, avec ${t.hyp} = ${fr(h)} ${u} et ${t.c1} = ${fr(x1)} ${u}. Explique son erreur et donne la bonne longueur.`,
-    ]);
+    const faux = arrondi1(Math.sqrt(sq(h) + sq(x1)));
+    const mode = randomInt(0, 2);
+    if (mode === 2) {
+      // L'élève a additionné les carrés : on demande la bonne longueur.
+      const L = (x: number) => `${fr(x)} ${u}`;
+      return {
+        text: `Une élève trouve ${t.c2} = ${L(faux)} dans le triangle ${t.nom} rectangle en ${t.droit}, avec ${t.hyp} = ${L(h)} et ${t.c1} = ${L(x1)}. Elle s’est trompée. Quelle est la bonne longueur ${t.c2} ?`,
+        format: "qcm",
+        choices: qcm(L(x2), [L(faux), L(h - x1), L(h + x1), L(sq(h) - sq(x1))]),
+        expected: [L(x2)],
+        comparator: "mcq_exact",
+        explanation: explCoteNomme(t, h, x1, u),
+      };
+    }
+    const text = [
+      `Le triangle ${t.nom} est rectangle en ${t.droit}, avec ${t.hyp} = ${fr(h)} ${u} et ${t.c1} = ${fr(x1)} ${u}. Quel calcul prouve que ${t.c2} = ${fr(x2)} ${u} ?`,
+      `Dans le triangle ${t.nom} rectangle en ${t.droit}, ${t.hyp} = ${fr(h)} ${u} et ${t.c1} = ${fr(x1)} ${u}. Quel calcul justifie que ${t.c2} = ${fr(x2)} ${u} ?`,
+    ][mode];
+    const bon = chaineCalcul(h, "-", x1, u);
     return {
       text,
-      format: "open",
-      expected: [fr(h), fr(x1), fr(x2), "soustrait"],
-      comparator: "contains_keyword",
+      format: "qcm",
+      choices: qcm(bon, leurresCalcul(h, "-", x1, u)),
+      expected: [bon],
+      comparator: "mcq_exact",
       explanation: explCoteNomme(t, h, x1, u),
     };
   }
   const r = situationCote(false);
+  const bon = chaineCalcul(r.c, "-", r.a, r.s.unite);
   return {
-    text: `${r.text} Explique ton raisonnement : quelle longueur est l’hypoténuse, et pourquoi soustrais-tu ?`,
-    format: "open",
-    expected: [fr(r.a), fr(r.b), fr(r.c), "soustrait"],
-    comparator: "contains_keyword",
+    text: `${r.text} Quel calcul donne la réponse ?`,
+    format: "qcm",
+    choices: qcm(bon, leurresCalcul(r.c, "-", r.a, r.s.unite)),
+    expected: [bon],
+    comparator: "mcq_exact",
     explanation: r.explanation,
   };
 }
@@ -1405,7 +1466,8 @@ function genSommeCarresTriangle(): Q {
   return {
     text,
     format: "short",
-    expected: [fr(v), String(v)],
+    // « 1 225 » et « 1225 » : la seconde pour qui tape sans espace (jamais « 42.25 »).
+    expected: [...new Set([fr(v), fr(v).replace(/ /g, "")])],
     comparator: "number_equal",
     explanation:
       "Définition : la réciproque se prépare par deux calculs séparés.\n\n" +
@@ -1431,7 +1493,7 @@ function genPlusGrandCote(): Q {
   return {
     text,
     format: "short",
-    expected: [fr(c)],
+    expected: [`${fr(c)} ${u}`],
     comparator: "number_equal",
     explanation:
       "Définition : si le triangle est rectangle, son hypoténuse est forcément son plus grand côté.\n\n" +
@@ -1449,15 +1511,27 @@ function genVerifierExplique(): Q {
   const u = randomChoice(UNITES);
   const liste = listeCotes(t, a, b, c, u);
   const text = randomChoice([
-    `Dans le triangle ${t.nom}, ${liste}. Explique comment vérifier si l’égalité de Pythagore est vraie, puis conclus.`,
-    `Le triangle ${t.nom} a pour côtés ${liste}. Ces longueurs vérifient-elles l’égalité de Pythagore ? Justifie par deux calculs.`,
-    `Un élève affirme que les longueurs ${liste} du triangle ${t.nom} vérifient l’égalité de Pythagore. A-t-il raison ? Explique.`,
+    `Dans le triangle ${t.nom}, ${liste}. L’égalité de Pythagore est-elle vraie ? Choisis la bonne justification.`,
+    `Le triangle ${t.nom} a pour côtés ${liste}. Ces longueurs vérifient-elles l’égalité de Pythagore ? Choisis les deux calculs justes et la bonne conclusion.`,
+    `Un élève affirme que les longueurs ${liste} du triangle ${t.nom} vérifient l’égalité de Pythagore. A-t-il raison ? Choisis la bonne justification.`,
   ]);
+  // ⛔ 08/10/2026 : un QCM, plus une question à mots-clés (« carré » suffisait).
+  const C = sq(c);
+  const S = sq(a) + sq(b);
+  const conclure = (egaux: boolean) => (egaux ? "les deux résultats sont égaux : l’égalité est vraie." : "les deux résultats sont différents : l’égalité est fausse.");
+  const [gc, pc] = a > b ? [t.c1, t.c2] : [t.c2, t.c1];
+  const [gv, pv] = a > b ? [a, b] : [b, a];
+  const bon = `${t.hyp}² = ${fr(C)} et ${t.c1}² + ${t.c2}² = ${fr(S)} : ${conclure(egal(C, S))}`;
   return {
     text,
-    format: "open",
-    expected: [fr(sq(c)), fr(sq(a) + sq(b)), "carré", vrai ? "égal" : "pas"],
-    comparator: "contains_keyword",
+    format: "qcm",
+    choices: qcm(bon, [
+      `${t.hyp}² = ${fr(C)} et ${t.c1}² + ${t.c2}² = ${fr(S)} : ${conclure(!egal(C, S))}`,
+      `${gc}² = ${fr(sq(gv))} et ${pc}² + ${t.hyp}² = ${fr(sq(pv) + C)} : ${conclure(false)}`,
+      `${t.hyp} = ${fr(c)} et ${t.c1} + ${t.c2} = ${fr(Math.round((a + b) * 10) / 10)} : ${conclure(false)}`,
+    ]),
+    expected: [bon],
+    comparator: "mcq_exact",
     explanation:
       "Définition : l’égalité de Pythagore compare le carré du plus grand côté à la somme des carrés des deux autres.\n\n" +
       "Méthode : on repère le plus grand côté et on fait deux calculs séparés.\n\n" +
@@ -1626,15 +1700,26 @@ function genConclureExplique(): Q {
   const u = uniteDe(a, b, c);
   const liste = listeCotes(t, a, b, c, u);
   const text = randomChoice([
-    `Le triangle ${t.nom} a pour côtés ${liste}. Est-il rectangle ? Rédige ta réponse en citant la propriété utilisée.`,
-    `Dans le triangle ${t.nom}, ${liste}. Explique, avec deux calculs séparés, si ce triangle est rectangle.`,
-    `Justifie si le triangle ${t.nom}, où ${liste}, est rectangle ou non.`,
+    `Le triangle ${t.nom} a pour côtés ${liste}. Est-il rectangle ? Choisis la conclusion correctement rédigée.`,
+    `Dans le triangle ${t.nom}, ${liste}. Après les deux calculs séparés, quelle conclusion faut-il écrire ?`,
+    `Le triangle ${t.nom}, où ${liste}, est-il rectangle ou non ? Quelle phrase conclut correctement ?`,
   ]);
+  // ⛔ 08/10/2026 : un QCM sur les pièges de la conclusion (théorème au lieu de
+  // la réciproque, mauvais sommet, « presque »), plus une question à mots-clés.
+  const conclusions = {
+    reciproque: `D’après la réciproque du théorème de Pythagore, ${t.nom} est rectangle en ${t.droit}.`,
+    theoreme: `D’après le théorème de Pythagore, ${t.nom} est rectangle en ${t.droit}.`,
+    sommet: `D’après la réciproque du théorème de Pythagore, ${t.nom} est rectangle en ${t.p}.`,
+    non: `${t.nom} n’est pas rectangle : s’il l’était, ${t.hyp}² serait égal à ${t.c1}² + ${t.c2}².`,
+    presque: `${t.nom} est presque rectangle en ${t.droit}.`,
+  };
+  const bon = vrai ? conclusions.reciproque : conclusions.non;
   return {
     text,
-    format: "open",
-    expected: vrai ? ["réciproque", "rectangle", fr(sq(c))] : ["pas rectangle", "n’est pas", fr(sq(c))],
-    comparator: "contains_keyword",
+    format: "qcm",
+    choices: qcm(bon, vrai ? [conclusions.theoreme, conclusions.sommet, conclusions.non] : [conclusions.reciproque, conclusions.presque, conclusions.theoreme]),
+    expected: [bon],
+    comparator: "mcq_exact",
     explanation:
       "Définition : la réciproque du théorème de Pythagore permet de prouver qu’un triangle est rectangle.\n\n" +
       "Méthode : plus grand côté, puis « d’une part », « d’autre part », puis la phrase de conclusion.\n\n" +
@@ -1826,26 +1911,52 @@ function genRedigeOpen(): Q {
   const t = tirerTriangle();
   const [x1, x2, h] = tirerTriplet("varie");
   const u = randomChoice(UNITES);
+  // ⛔ 08/10/2026 : un QCM de rédactions (une seule juste), plus une question à
+  // mots-clés (« rectangle » suffisait). Pièges : la réciproque citée à la place
+  // du théorème, l'opération inversée, la racine oubliée.
+  const question = randomChoice(["Quelle rédaction est juste ?", "Laquelle de ces rédactions est correcte ?", "Quelle rédaction recopier ?"]);
+  const debut = (prop: string) => `${t.nom} est rectangle en ${t.droit}, donc d’après ${prop}`;
+  const TH = "le théorème de Pythagore";
+  const RE = "la réciproque du théorème de Pythagore";
   if (randomChoice([true, false])) {
+    const S = sq(x1) + sq(x2);
+    const ligne = (prop: string, op: string, v: number, r: string) =>
+      `${debut(prop)}, ${t.hyp}² = ${t.c1}² ${op} ${t.c2}² = ${fr(x1)}² ${op} ${fr(x2)}² = ${fr(v)}, donc ${t.hyp} = ${r}.`;
+    const bon = ligne(TH, "+", S, `√${fr(S)} = ${fr(h)} ${u}`);
     return {
       text: randomChoice([
-        `Le triangle ${t.nom} est rectangle en ${t.droit}, avec ${t.c1} = ${fr(x1)} ${u} et ${t.c2} = ${fr(x2)} ${u}. Rédige le calcul de ${t.hyp}.`,
-        `Rédige en trois lignes le calcul de l’hypoténuse du triangle ${t.nom} rectangle en ${t.droit}, sachant que ${t.c1} = ${fr(x1)} ${u} et ${t.c2} = ${fr(x2)} ${u}.`,
+        `Le triangle ${t.nom} est rectangle en ${t.droit}, avec ${t.c1} = ${fr(x1)} ${u} et ${t.c2} = ${fr(x2)} ${u}. On calcule ${t.hyp}. ${question}`,
+        `On rédige le calcul de l’hypoténuse du triangle ${t.nom} rectangle en ${t.droit}, sachant que ${t.c1} = ${fr(x1)} ${u} et ${t.c2} = ${fr(x2)} ${u}. ${question}`,
       ]),
-      format: "open",
-      expected: ["rectangle", "Pythagore", `${t.hyp}²`],
-      comparator: "contains_keyword",
+      format: "qcm",
+      choices: qcm(bon, [
+        ligne(RE, "+", S, `√${fr(S)} = ${fr(h)} ${u}`),
+        ligne(TH, "+", S, `${fr(S)} ${u}`),
+        `${debut(TH)}, ${t.hyp} = ${t.c1} + ${t.c2} = ${fr(x1)} + ${fr(x2)} = ${fr(x1 + x2)} ${u}.`,
+      ]),
+      expected: [bon],
+      comparator: "mcq_exact",
       explanation: explHypNomme(t, x1, x2, u),
     };
   }
+  const D = sq(h) - sq(x1);
+  const ligne = (prop: string, op: string, v: number, r: string) =>
+    `${debut(prop)}, ${t.hyp}² = ${t.c1}² + ${t.c2}², donc ${t.c2}² = ${t.hyp}² ${op} ${t.c1}² = ${fr(h)}² ${op} ${fr(x1)}² = ${fr(v)}, donc ${t.c2} = ${r}.`;
+  const bon = ligne(TH, "-", D, `√${fr(D)} = ${fr(x2)} ${u}`);
+  const Sf = sq(h) + sq(x1);
   return {
     text: randomChoice([
-      `Le triangle ${t.nom} est rectangle en ${t.droit}, avec ${t.hyp} = ${fr(h)} ${u} et ${t.c1} = ${fr(x1)} ${u}. Rédige le calcul de ${t.c2}.`,
-      `Rédige en trois lignes le calcul de ${t.c2} dans le triangle ${t.nom} rectangle en ${t.droit}, où l’hypoténuse mesure ${fr(h)} ${u} et ${t.c1} = ${fr(x1)} ${u}.`,
+      `Le triangle ${t.nom} est rectangle en ${t.droit}, avec ${t.hyp} = ${fr(h)} ${u} et ${t.c1} = ${fr(x1)} ${u}. On calcule ${t.c2}. ${question}`,
+      `On rédige le calcul de ${t.c2} dans le triangle ${t.nom} rectangle en ${t.droit}, où l’hypoténuse mesure ${fr(h)} ${u} et ${t.c1} = ${fr(x1)} ${u}. ${question}`,
     ]),
-    format: "open",
-    expected: ["rectangle", "Pythagore", `${t.c2}²`],
-    comparator: "contains_keyword",
+    format: "qcm",
+    choices: qcm(bon, [
+      ligne(RE, "-", D, `√${fr(D)} = ${fr(x2)} ${u}`),
+      ligne(TH, "+", Sf, `√${fr(Sf)} ${racineExacte(Sf) ? "=" : "≈"} ${fr(arrondi1(Math.sqrt(Sf)))} ${u}`),
+      ligne(TH, "-", D, `${fr(D)} ${u}`),
+    ]),
+    expected: [bon],
+    comparator: "mcq_exact",
     explanation: explCoteNomme(t, h, x1, u),
   };
 }
@@ -1885,7 +1996,7 @@ function genDiagonaleRectangle(): Q {
         `Le carré ${R} mesure ${L(cote)} de côté. Calcule la longueur de la diagonale [${P1}${P3}], arrondie au dixième.`,
       ]),
       format: "short",
-      expected: [fr(d)],
+      expected: [L(d)],
       comparator: "number_equal",
       explanation:
         `Définition : un carré a quatre angles droits ; le triangle ${P1}${P2}${P3} est rectangle en ${P2}, d’hypoténuse [${P1}${P3}].\n\n` +
@@ -1909,7 +2020,7 @@ function genDiagonaleRectangle(): Q {
   return {
     text,
     format: "short",
-    expected: [fr(d)],
+    expected: [L(d)],
     comparator: "number_equal",
     explanation:
       `Définition : un rectangle a quatre angles droits ; la diagonale est l’hypoténuse d’un triangle rectangle dont les côtés de l’angle droit sont la longueur et la largeur.\n\n` +
@@ -1926,7 +2037,7 @@ const DENIVELES: { lieu: string; trajet: string }[] = [
   { lieu: "À Montmartre", trajet: "un funiculaire" },
   { lieu: "Dans une station de ski", trajet: "un téléski" },
   { lieu: "Dans un parc d’aventure", trajet: "une tyrolienne" },
-  { lieu: "Dans le Jura", trajet: "une piste de luge rectiligne" },
+  { lieu: "Dans le Jura", trajet: "un remonte-pente rectiligne" },
   { lieu: "À La Réunion, au-dessus d’une ravine", trajet: "un câble de tyrolienne" },
   { lieu: "À La Réunion, dans le cirque de Salazie", trajet: "un sentier rectiligne" },
 ];
@@ -1937,7 +2048,8 @@ function genDenivele(): Q {
   const base = `${d.lieu}, ${d.trajet} relie deux points`;
   const texte =
     cherche === "hyp"
-      ? `${base} : le point d’arrivée est ${h} m plus haut que le départ, et ${l} m plus loin à l’horizontale. Quelle est la longueur du trajet en ligne droite ?`
+      ? // ⚠️ 08/10/2026 : « l'arrivée plus haut que le départ » ne va pas à une tyrolienne, qui descend.
+        `${base} : l’un est ${h} m plus haut que l’autre, et ils sont écartés de ${l} m à l’horizontale. Quelle est la longueur du trajet en ligne droite ?`
       : cherche === "hauteur"
         ? `${base} distants de ${c} m en ligne droite. À l’horizontale, ils sont écartés de ${l} m. Quel est le dénivelé entre les deux points ?`
         : `${base} distants de ${c} m en ligne droite, avec un dénivelé de ${h} m. Quelle est la distance horizontale entre les deux points ?`;
@@ -1945,7 +2057,7 @@ function genDenivele(): Q {
   return {
     text: texte,
     format: "short",
-    expected: [String(rep)],
+    expected: [`${rep} m`],
     comparator: "number_equal",
     explanation:
       "Définition : le trajet en ligne droite, la distance horizontale et le dénivelé forment un triangle rectangle ; le trajet est l’hypoténuse.\n\n" +
@@ -1993,61 +2105,66 @@ function genLequelRectangle(): Q {
 }
 
 /** ★5 — problèmes en deux étapes : périmètre, raccourci, aller-retour. */
+// ⚠️ 08/10/2026 : chaque contexte a son échelle (`k`, multiplie le triplet) et
+// son unité. Avant, « un champ de 4 m sur 3 m » ou « un panneau de 3 cm » sortaient.
+const DEUX_ETAPES: { mode: 0 | 1 | 2; u: string; k: number; t: (a: number, b: number) => string }[] = [
+  { mode: 0, u: "m", k: 1, t: (a, b) => `Un jardin a la forme d’un triangle rectangle dont les côtés de l’angle droit mesurent ${a} m et ${b} m. Quelle longueur de clôture faut-il pour en faire le tour ?` },
+  { mode: 0, u: "dm", k: 1, t: (a, b) => `Une voile triangulaire, rectangle au pied du mât, a deux bords perpendiculaires de ${a} dm et ${b} dm. On coud un ourlet tout autour. Quelle est la longueur de l’ourlet, en dm ?` },
+  { mode: 0, u: "cm", k: 10, t: (a, b) => `Un panneau de signalisation est un triangle rectangle dont les côtés de l’angle droit mesurent ${a} cm et ${b} cm. Quel est son périmètre, en cm ?` },
+  { mode: 0, u: "km", k: 1, t: (a, b) => `Un randonneur fait une boucle : ${a} km vers le nord, ${b} km vers l’est, puis il revient en ligne droite au départ. Quelle distance totale parcourt-il, en km ?` },
+  { mode: 1, u: "m", k: 10, t: (a, b) => `Pour traverser un parc rectangulaire de ${a} m sur ${b} m, Paul longe deux côtés. Combien de mètres économiserait-il en coupant tout droit en diagonale ?` },
+  { mode: 1, u: "m", k: 10, t: (a, b) => `Un champ rectangulaire mesure ${a} m sur ${b} m. Un chien va d’un coin au coin opposé en ligne droite, son maître en longeant les bords. Combien de mètres le maître fait-il de plus ?` },
+  { mode: 1, u: "m", k: 5, t: (a, b) => `Pour aller d’un coin à l’autre d’une place rectangulaire de ${a} m sur ${b} m, on peut longer deux côtés ou traverser en diagonale. Quelle distance gagne-t-on en traversant ?` },
+  { mode: 2, u: "m", k: 1, t: (a, b) => `Un drone monte verticalement de ${a} m, avance horizontalement de ${b} m, puis revient en ligne droite à son point de départ. Quelle distance totale a-t-il parcourue ?` },
+  { mode: 2, u: "m", k: 1, t: (a, b) => `Une nageuse traverse une piscine de ${a} m sur ${b} m en diagonale, puis revient au départ en longeant les deux bords. Quelle distance a-t-elle nagée en tout ?` },
+  { mode: 2, u: "km", k: 1, t: (a, b) => `Un bateau fait ${a} km vers l’est puis ${b} km vers le sud, et rentre au port en ligne droite. Combien de kilomètres a-t-il parcourus en tout ?` },
+];
+
 function genProblemeDeuxEtapes(): Q {
-  const mode = randomInt(0, 2);
-  const [a, b, c] = tirerTriplet("simple");
+  const ctx = randomChoice(DEUX_ETAPES);
+  const mode = ctx.mode;
+  let [a, b, c] = tirerTriplet("simple").map((x) => x * ctx.k);
+  // La piscine : pas de bassin de 3 m sur 4 m, ni de « 15 m sur 15 m » (un carré).
+  if (ctx.t(1, 2).includes("piscine")) while (Math.min(a, b) < 5) [a, b, c] = tirerTriplet("simple");
+  // La voile : au moins 1 m (10 dm) de côté (Frédéric, 08/10 : « pas de voile de 4 dm »).
+  if (ctx.t(1, 2).includes("voile")) while (Math.min(a, b) < 10) [a, b, c] = tirerTriplet("simple");
+  const u = ctx.u;
   if (mode === 0) {
-    const ctx = randomChoice([
-      `Un jardin a la forme d’un triangle rectangle dont les côtés de l’angle droit mesurent ${a} m et ${b} m. Quelle longueur de clôture faut-il pour en faire le tour ?`,
-      `Une voile triangulaire, rectangle au pied du mât, a deux bords perpendiculaires de ${a} dm et ${b} dm. On coud un ourlet tout autour. Quelle est la longueur de l’ourlet, en dm ?`,
-      `Un panneau de signalisation est un triangle rectangle dont les côtés de l’angle droit mesurent ${a} cm et ${b} cm. Quel est son périmètre, en cm ?`,
-      `Un randonneur fait une boucle : ${a} km vers le nord, ${b} km vers l’est, puis il revient en ligne droite au départ. Quelle distance totale parcourt-il, en km ?`,
-    ]);
     return {
-      text: ctx,
+      text: ctx.t(a, b),
       format: "short",
-      expected: [String(a + b + c)],
+      expected: [`${a + b + c} ${u}`],
       comparator: "number_equal",
       explanation:
         "Définition : il faut les TROIS côtés ; le troisième est l’hypoténuse d’un triangle rectangle.\n\n" +
         "Méthode : on calcule d’abord l’hypoténuse avec Pythagore, puis on additionne les trois longueurs.\n\n" +
-        `Calcul : ${a}² + ${b}² = ${a * a} + ${b * b} = ${c * c}, donc le troisième côté mesure √${c * c} = ${c}. Puis ${a} + ${b} + ${c} = ${a + b + c}.\n\n` +
-        `Conclusion : la réponse est ${a + b + c}.`,
+        `Calcul : ${a}² + ${b}² = ${fr(a * a)} + ${fr(b * b)} = ${fr(c * c)}, donc le troisième côté mesure √${fr(c * c)} = ${c} ${u}. Puis ${a} + ${b} + ${c} = ${a + b + c}.\n\n` +
+        `Conclusion : la réponse est ${a + b + c} ${u}.`,
     };
   }
   if (mode === 1) {
-    const ctx = randomChoice([
-      `Pour traverser un parc rectangulaire de ${a} m sur ${b} m, Paul longe deux côtés. Combien de mètres économiserait-il en coupant tout droit en diagonale ?`,
-      `Un champ rectangulaire mesure ${a} m sur ${b} m. Un chien va d’un coin au coin opposé en ligne droite, son maître en longeant les bords. Combien de mètres le maître fait-il de plus ?`,
-      `Pour aller d’un coin à l’autre d’une place rectangulaire de ${a} m sur ${b} m, on peut longer deux côtés ou traverser en diagonale. Quelle distance gagne-t-on en traversant ?`,
-    ]);
     return {
-      text: ctx,
+      text: ctx.t(a, b),
       format: "short",
-      expected: [String(a + b - c)],
+      expected: [`${a + b - c} ${u}`],
       comparator: "number_equal",
       explanation:
         "Définition : la diagonale est l’hypoténuse du triangle rectangle formé par deux côtés du rectangle.\n\n" +
         "Méthode : on calcule la diagonale, puis on la retire au trajet qui longe les bords.\n\n" +
-        `Calcul : diagonale² = ${a}² + ${b}² = ${c * c}, donc diagonale = ${c} m. En longeant : ${a} + ${b} = ${a + b} m. Gain : ${a + b} - ${c} = ${a + b - c} m.\n\n` +
+        `Calcul : diagonale² = ${a}² + ${b}² = ${fr(c * c)}, donc diagonale = ${c} m. En longeant : ${a} + ${b} = ${a + b} m. Gain : ${a + b} - ${c} = ${a + b - c} m.\n\n` +
         `Conclusion : on gagne ${a + b - c} m.`,
     };
   }
-  const ctx = randomChoice([
-    `Un drone monte verticalement de ${a} m, avance horizontalement de ${b} m, puis revient en ligne droite à son point de départ. Quelle distance totale a-t-il parcourue ?`,
-    `Une nageuse traverse une piscine de ${a} m sur ${b} m en diagonale, puis revient au départ en longeant les deux bords. Quelle distance a-t-elle nagée en tout ?`,
-    `Un bateau fait ${a} km vers l’est puis ${b} km vers le sud, et rentre au port en ligne droite. Combien de kilomètres a-t-il parcourus en tout ?`,
-  ]);
   return {
-    text: ctx,
+    text: ctx.t(a, b),
     format: "short",
-    expected: [String(a + b + c)],
+    expected: [`${a + b + c} ${u}`],
     comparator: "number_equal",
     explanation:
       "Définition : le retour en ligne droite est l’hypoténuse d’un triangle rectangle.\n\n" +
       "Méthode : on calcule cette hypoténuse, puis on additionne les trois trajets.\n\n" +
-      `Calcul : ${a}² + ${b}² = ${a * a} + ${b * b} = ${c * c}, donc le trajet direct mesure ${c}. Total : ${a} + ${b} + ${c} = ${a + b + c}.\n\n` +
-      `Conclusion : la distance totale est ${a + b + c}.`,
+      `Calcul : ${a}² + ${b}² = ${fr(a * a)} + ${fr(b * b)} = ${fr(c * c)}, donc le trajet direct mesure ${c} ${u}. Total : ${a} + ${b} + ${c} = ${a + b + c}.\n\n` +
+      `Conclusion : la distance totale est ${a + b + c} ${u}.`,
   };
 }
 
@@ -2079,7 +2196,7 @@ function genDeplacement(): Q {
   return {
     text,
     format: "short",
-    expected: [fr(c)],
+    expected: [L(c)],
     comparator: "number_equal",
     explanation:
       "Définition : les deux trajets sont perpendiculaires : ils forment les côtés de l’angle droit ; la distance directe est l’hypoténuse.\n\n" +
@@ -2096,16 +2213,25 @@ function genDefiExplique(): Q {
   const u = randomChoice(UNITES);
   const liste = listeCotes(t, a, b, c, u);
   const mode = randomInt(0, 2);
+  // ⛔ 08/10/2026 : un QCM (quelle propriété ?), plus une question à mots-clés.
   const text = [
-    `Un élève connaît les trois longueurs du triangle ${t.nom} : ${liste}. Explique pourquoi il doit utiliser la réciproque et non le théorème direct pour savoir si ${t.nom} est rectangle.`,
-    `On sait que le triangle ${t.nom} est rectangle en ${t.droit}, et on connaît ${t.c1} = ${fr(a)} ${u} et ${t.c2} = ${fr(b)} ${u}. Explique quelle propriété utiliser pour calculer ${t.hyp}, et pourquoi pas la réciproque.`,
-    `Une élève écrit : « Dans le triangle ${t.nom}, ${liste}, donc d’après le théorème de Pythagore ${t.nom} est rectangle. » Explique ce qui ne va pas dans sa rédaction.`,
+    `Un élève connaît les trois longueurs du triangle ${t.nom} : ${liste}. Il veut savoir si ${t.nom} est rectangle. Quelle propriété doit-il utiliser ?`,
+    `On sait que le triangle ${t.nom} est rectangle en ${t.droit}, et on connaît ${t.c1} = ${fr(a)} ${u} et ${t.c2} = ${fr(b)} ${u}. Quelle propriété permet de calculer ${t.hyp} ?`,
+    `Une élève écrit : « Dans le triangle ${t.nom}, ${liste}, donc d’après le théorème de Pythagore ${t.nom} est rectangle. » Quelle propriété aurait-elle dû citer ?`,
   ][mode];
+  const PROPRIETES = [
+    "la réciproque du théorème de Pythagore",
+    "le théorème de Pythagore",
+    "le théorème de Thalès",
+    "la réciproque du théorème de Thalès",
+  ];
+  const bon = mode === 1 ? PROPRIETES[1] : PROPRIETES[0];
   return {
     text,
-    format: "open",
-    expected: mode === 1 ? ["théorème", "rectangle", "calculer"] : ["réciproque", "rectangle", "longueurs"],
-    comparator: "contains_keyword",
+    format: "qcm",
+    choices: shuffle(PROPRIETES),
+    expected: [bon],
+    comparator: "mcq_exact",
     explanation:
       "Définition : le théorème de Pythagore part d’un triangle qu’on SAIT rectangle et sert à calculer une longueur ; la réciproque part de trois longueurs et sert à PROUVER que le triangle est rectangle.\n\n" +
       "Méthode : on se demande ce qu’on sait déjà (l’angle droit ?) et ce qu’on cherche (une longueur ? un angle droit ?).\n\n" +
@@ -2268,10 +2394,12 @@ export const pythagoreBank: TutorBankItemV4[] = [
     microId: "pythagore_carre_racine",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi 3² ne vaut pas 6.",
-    format: "open",
-    expected: ["3", "3", "9"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : QCM, plus une question à mots-clés (« 3 » suffisait).
+    text: "Pourquoi 3² ne vaut-il pas 6 ?",
+    format: "qcm",
+    choices: ["3² = 3 + 3 = 6 : il vaut bien 6", "3² = 3 × 2 = 6 : il vaut bien 6", "3² = 3 × 3 = 9 ; 6, c’est 3 × 2", "3² s’écrit 33"],
+    expected: ["3² = 3 × 3 = 9 ; 6, c’est 3 × 2"],
+    comparator: "mcq_exact",
     hint: "Un carré signifie multiplier le nombre par lui-même.",
     explanation: "Définition : dans un triangle rectangle, le théorème de Pythagore relie les longueurs des trois côtés.\n\n" +
           "Méthode : on commence par vérifier que le triangle est rectangle et par repérer l’hypoténuse.\n\nCalcul : " +
@@ -2397,10 +2525,16 @@ export const pythagoreBank: TutorBankItemV4[] = [
     microId: "pythagore_reconnaitre",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi on ne peut pas toujours utiliser le théorème de Pythagore dans n’importe quel triangle.",
-    format: "open",
-    expected: ["triangle", "rectangle"],
-    comparator: "contains_keyword",
+    text: "Peut-on utiliser le théorème de Pythagore dans n’importe quel triangle ?",
+    format: "qcm",
+    choices: [
+      "oui, dans tous les triangles",
+      "non : seulement dans un triangle isocèle",
+      "non : seulement quand les trois côtés sont connus",
+      "non : seulement dans un triangle rectangle",
+    ],
+    expected: ["non : seulement dans un triangle rectangle"],
+    comparator: "mcq_exact",
     hint: "Le théorème de Pythagore demande une condition sur le triangle.",
     explanation:
       "Définition : dans un triangle rectangle, le théorème de Pythagore relie les longueurs des trois côtés.\n\n" +
@@ -2491,7 +2625,7 @@ export const pythagoreBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Quand on cherche l’hypoténuse, on additionne les carrés des deux côtés de l’angle droit.",
-    tags: ["pythagore_theoreme_theoreme", "hypotenuse", "open", "template"],
+    tags: ["pythagore_theoreme_theoreme", "hypotenuse", "qcm", "template"],
     generate: () => genHypExplique(),
   },
 
@@ -2590,7 +2724,7 @@ export const pythagoreBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     hint: "Quand on cherche un côté de l’angle droit, on soustrait les carrés.",
-    tags: ["pythagore_theoreme_theoreme", "cote", "open", "template"],
+    tags: ["pythagore_theoreme_theoreme", "cote", "qcm", "template"],
     generate: () => genCoteExplique(),
   },
 
@@ -2696,7 +2830,7 @@ export const pythagoreBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Compare la somme des carrés des deux plus petits côtés avec le carré du plus grand.",
-    tags: ["pythagore_theoreme_theoreme", "reciproque", "verifier", "open", "template"],
+    tags: ["pythagore_theoreme_theoreme", "reciproque", "verifier", "qcm", "template"],
     generate: () => genVerifierExplique(),
   },
 
@@ -2781,7 +2915,7 @@ export const pythagoreBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     hint: "Le triangle est rectangle si l’égalité de Pythagore est vraie.",
-    tags: ["pythagore_theoreme_theoreme", "reciproque", "conclure", "open", "template"],
+    tags: ["pythagore_theoreme_theoreme", "reciproque", "conclure", "qcm", "template"],
     generate: () => genConclureExplique(),
   },
   // =========================
@@ -2880,10 +3014,16 @@ export const pythagoreBank: TutorBankItemV4[] = [
     microId: "pythagore_rediger",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique la différence entre utiliser le théorème de Pythagore et utiliser sa réciproque.",
-    format: "open",
-    expected: ["théorème", "réciproque", "rectangle"],
-    comparator: "contains_keyword",
+    text: "Quelle est la différence entre le théorème de Pythagore et sa réciproque ?",
+    format: "qcm",
+    choices: [
+      "Le théorème calcule une longueur dans un triangle qu’on SAIT rectangle ; la réciproque PROUVE qu’un triangle est rectangle.",
+      "Le théorème prouve qu’un triangle est rectangle ; la réciproque calcule une longueur.",
+      "Le théorème sert pour l’hypoténuse ; la réciproque pour les côtés de l’angle droit.",
+      "Il n’y a aucune différence : ce sont deux noms de la même propriété.",
+    ],
+    expected: ["Le théorème calcule une longueur dans un triangle qu’on SAIT rectangle ; la réciproque PROUVE qu’un triangle est rectangle."],
+    comparator: "mcq_exact",
     hint: "Dans un cas, on sait déjà que le triangle est rectangle. Dans l’autre, on veut le vérifier.",
     explanation:
       "Définition : dans un triangle rectangle, le théorème de Pythagore relie les longueurs des trois côtés.\n\n" +
@@ -2981,7 +3121,7 @@ export const pythagoreBank: TutorBankItemV4[] = [
     difficulty: 5,
     theme: "neutral",
     hint: "Commence par repérer si on calcule une longueur ou si on vérifie que le triangle est rectangle.",
-    tags: ["pythagore_theoreme_theoreme", "defi", "open", "raisonnement", "template"],
+    tags: ["pythagore_theoreme_theoreme", "defi", "qcm", "raisonnement", "template"],
     generate: () => genDefiExplique(),
   },
 
@@ -3106,10 +3246,16 @@ export const pythagoreBank: TutorBankItemV4[] = [
     microId: "pythagore_reconnaitre",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique comment repérer l’hypoténuse dans un triangle rectangle.",
-    format: "open",
-    expected: ["opposé", "angle droit", "grand"],
-    comparator: "contains_keyword",
+    text: "Comment repère-t-on l’hypoténuse d’un triangle rectangle ?",
+    format: "qcm",
+    choices: [
+      "c’est le côté horizontal de la figure",
+      "c’est l’un des deux côtés qui forment l’angle droit",
+      "c’est le côté opposé à l’angle droit, le plus grand des trois",
+      "c’est le côté nommé avec les deux premières lettres du triangle",
+    ],
+    expected: ["c’est le côté opposé à l’angle droit, le plus grand des trois"],
+    comparator: "mcq_exact",
     hint: "Pense à la position par rapport à l’angle droit.",
     explanation:
       "Définition : l’hypoténuse est le côté opposé à l’angle droit.\n\n" +
@@ -3199,10 +3345,16 @@ export const pythagoreBank: TutorBankItemV4[] = [
     microId: "pythagore_calculer_hypotenuse",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi, pour trouver l’hypoténuse, on additionne les carrés des côtés de l’angle droit.",
-    format: "open",
-    expected: ["additionne", "carrés", "hypoténuse"],
-    comparator: "contains_keyword",
+    text: "Pour trouver l’hypoténuse avec le théorème de Pythagore, que fait-on ?",
+    format: "qcm",
+    choices: [
+      "on additionne les deux côtés de l’angle droit",
+      "on additionne les carrés des côtés de l’angle droit, puis on prend la racine carrée",
+      "on soustrait les carrés des côtés de l’angle droit, puis on prend la racine carrée",
+      "on additionne les carrés des côtés de l’angle droit, et c’est la longueur cherchée",
+    ],
+    expected: ["on additionne les carrés des côtés de l’angle droit, puis on prend la racine carrée"],
+    comparator: "mcq_exact",
     hint: "Pense à la formule c² = a² + b².",
     explanation:
       "Définition : le théorème de Pythagore donne c² = a² + b².\n\n" +
@@ -3292,10 +3444,16 @@ export const pythagoreBank: TutorBankItemV4[] = [
     microId: "pythagore_calculer_cote",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi, pour trouver un côté de l’angle droit, on soustrait au lieu d’additionner.",
-    format: "open",
-    expected: ["soustrait", "hypoténuse", "carré"],
-    comparator: "contains_keyword",
+    text: "Pour trouver un côté de l’angle droit, pourquoi soustrait-on au lieu d’additionner ?",
+    format: "qcm",
+    choices: [
+      "parce que le côté cherché est toujours le plus grand",
+      "parce qu’on soustrait les longueurs, sans les mettre au carré",
+      "parce que côté² = autre côté² - hypoténuse²",
+      "parce que hypoténuse² = côté² + autre côté², donc côté² = hypoténuse² - autre côté²",
+    ],
+    expected: ["parce que hypoténuse² = côté² + autre côté², donc côté² = hypoténuse² - autre côté²"],
+    comparator: "mcq_exact",
     hint: "Compare la formule à celle de l’hypoténuse.",
     explanation:
       "Définition : c² = a² + b², donc b² = c² - a².\n\n" +
@@ -3385,10 +3543,16 @@ export const pythagoreBank: TutorBankItemV4[] = [
     microId: "pythagore_reciproque_verifier",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique quels carrés on compare pour vérifier l’égalité de Pythagore.",
-    format: "open",
-    expected: ["plus grand", "carrés", "somme"],
-    comparator: "contains_keyword",
+    text: "Pour vérifier l’égalité de Pythagore, quels nombres compare-t-on ?",
+    format: "qcm",
+    choices: [
+      "le carré du plus grand côté et la somme des carrés des deux autres",
+      "le plus grand côté et la somme des deux autres",
+      "le carré du plus petit côté et la somme des carrés des deux autres",
+      "la somme des carrés des trois côtés et le carré du plus grand",
+    ],
+    expected: ["le carré du plus grand côté et la somme des carrés des deux autres"],
+    comparator: "mcq_exact",
     hint: "Deux petits côtés contre le plus grand.",
     explanation:
       "Définition : on compare la somme des carrés des deux plus petits côtés au carré du plus grand.\n\n" +
@@ -3478,10 +3642,16 @@ export const pythagoreBank: TutorBankItemV4[] = [
     microId: "pythagore_reciproque_conclure",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment conclure qu’un triangle n’est PAS rectangle avec la réciproque.",
-    format: "open",
-    expected: ["égalité", "fausse", "rectangle"],
-    comparator: "contains_keyword",
+    text: "Quand peut-on conclure qu’un triangle n’est PAS rectangle ?",
+    format: "qcm",
+    choices: [
+      "quand le carré du plus grand côté et la somme des carrés des deux autres sont presque égaux",
+      "quand le plus grand côté est plus court que la somme des deux autres",
+      "quand le carré du plus grand côté n’est pas égal à la somme des carrés des deux autres : s’il était rectangle, ils seraient égaux",
+      "jamais : on peut seulement prouver qu’un triangle est rectangle",
+    ],
+    expected: ["quand le carré du plus grand côté n’est pas égal à la somme des carrés des deux autres : s’il était rectangle, ils seraient égaux"],
+    comparator: "mcq_exact",
     hint: "Que se passe-t-il si l’égalité de Pythagore est fausse ?",
     explanation:
       "Définition : la réciproque conclut selon l’égalité de Pythagore.\n\n" +
@@ -3582,7 +3752,7 @@ export const pythagoreBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     hint: "Annonce le triangle rectangle puis l’égalité de Pythagore.",
-    tags: ["pythagore_theoreme_theoreme", "redaction", "open", "template"],
+    tags: ["pythagore_theoreme_theoreme", "redaction", "qcm", "template"],
     generate: () => genRedigeOpen(),
   },
   {
@@ -3595,9 +3765,15 @@ export const pythagoreBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     text: "Pourquoi doit-on préciser « rectangle en A » dans une rédaction avec le théorème direct de Pythagore ?",
-    format: "open",
-    expected: ["rectangle", "hypothèse", "appliquer"],
-    comparator: "contains_keyword",
+    format: "qcm",
+    choices: [
+      "pour donner le nom du triangle",
+      "parce que le théorème ne s’applique que dans un triangle rectangle, et que l’angle droit désigne l’hypoténuse",
+      "parce que A est toujours le sommet de l’angle droit",
+      "ce n’est pas nécessaire",
+    ],
+    expected: ["parce que le théorème ne s’applique que dans un triangle rectangle, et que l’angle droit désigne l’hypoténuse"],
+    comparator: "mcq_exact",
     hint: "C’est l’hypothèse qui autorise le théorème.",
     explanation:
       "Définition : le théorème direct s’applique seulement si le triangle est rectangle.\n\n" +
@@ -3700,10 +3876,16 @@ export const pythagoreBank: TutorBankItemV4[] = [
     microId: "pythagore_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique comment Pythagore permet de calculer une distance qu’on ne peut pas mesurer directement.",
-    format: "open",
-    expected: ["triangle rectangle", "hypoténuse", "carrés"],
-    comparator: "contains_keyword",
+    text: "Comment le théorème de Pythagore permet-il de calculer une distance qu’on ne peut pas mesurer directement ?",
+    format: "qcm",
+    choices: [
+      "on additionne les deux autres distances",
+      "on la mesure sur un triangle quelconque",
+      "on multiplie par 2 la plus grande distance connue",
+      "on en fait un côté d’un triangle rectangle dont on connaît les deux autres côtés",
+    ],
+    expected: ["on en fait un côté d’un triangle rectangle dont on connaît les deux autres côtés"],
+    comparator: "mcq_exact",
     hint: "On forme un triangle rectangle avec des distances connues.",
     explanation:
       "Définition : Pythagore relie les côtés d’un triangle rectangle.\n\n" +
