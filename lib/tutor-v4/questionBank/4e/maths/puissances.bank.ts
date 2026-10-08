@@ -724,7 +724,8 @@ export const puissancesBank: TutorBankItemV4[] = [
       return {
         text: randomChoice(tournures),
         format: "short",
-        expected: [decimal, decimal.replace(",", ".")],
+        // « 0.01 » se tape aussi : `number_equal` l'accepte sans variante écrite.
+        expected: [decimal],
         // ⛔ 30/09/2026 : `contains_keyword` acceptait « 0,035 » pour 0,03 (la réponse CONTIENT l'attendu).
         comparator: "number_equal",
         explanation:
@@ -809,7 +810,7 @@ export const puissancesBank: TutorBankItemV4[] = [
         comparator: "number_equal",
         explanation:
           "Définition : 10ᵏ, c’est 10 écrit k fois en facteur.\n\n" +
-          "Méthode : chaque facteur 10 ajoute un zéro.\n\n" +
+          "Méthode : chaque facteur 10 rend le nombre dix fois plus grand : 10, 100, 1 000…\n\n" +
           `Calcul : ${p} = 1 suivi de ${k} zéros = ${fr(10 ** k)}.\n\n` +
           `Conclusion : l’exposant d’une puissance de 10 COMPTE LES ZÉROS.`,
       };
@@ -920,8 +921,8 @@ export const puissancesBank: TutorBankItemV4[] = [
         comparator: "number_equal",
         explanation:
           "Définition : multiplier par 10ᵏ, c’est multiplier k fois par 10.\n\n" +
-          "Méthode : chaque multiplication par 10 décale la virgule d’un rang vers la droite.\n\n" +
-          `Calcul : ${fr(mantisse)} × 10${exposant(k)} = ${fr(mantisse)} décalé de ${k} rangs = ${fr(resultat)}.\n\n` +
+          "Méthode : multiplier par 10 rend chaque chiffre dix fois plus grand : les unités deviennent des dizaines, les dixièmes des unités. La virgule se retrouve un rang plus à droite.\n\n" +
+          `Calcul : ${fr(mantisse)} × 10${exposant(k)} = ${fr(mantisse)} multiplié ${k} fois par 10 = ${fr(resultat)}.\n\n` +
           `Conclusion : ${e} = ${fr(resultat)}.`,
       };
     },
@@ -1318,13 +1319,13 @@ export const puissancesBank: TutorBankItemV4[] = [
         const p = randomInt(3, 7);
         e = Math.random() < 0.5 ? `10${exposant(p)} × 10` : `10 × 10${exposant(p)}`;
         valeur = 10 ** (p + 1);
-        calcul = `${e} = ${fr(10 ** p)} × 10 = ${fr(valeur)}. Multiplier par 10 ajoute un zéro : ${p + 1} zéros.`;
+        calcul = `${e} = ${fr(10 ** p)} × 10 = ${fr(valeur)}. Il y a ${p} + 1 = ${p + 1} facteurs 10 : 1 suivi de ${p + 1} zéros.`;
       } else {
         const q = randomInt(1, 3);
         const p = q + randomInt(2, 4);
         e = `10${exposant(p)} ÷ ${dix(q)}`;
         valeur = 10 ** (p - q);
-        calcul = `${e} = ${fr(10 ** p)} ÷ ${fr(10 ** q)} = ${fr(valeur)}. On retire ${q} zéro${q > 1 ? "s" : ""} aux ${p} : il en reste ${p - q}.`;
+        calcul = `${e} = ${fr(10 ** p)} ÷ ${fr(10 ** q)} = ${fr(valeur)}. En effet ${fr(10 ** q)} × ${fr(valeur)} = ${fr(10 ** p)} : il reste ${p} − ${q} = ${p - q} facteurs 10.`;
         const P = `10${exposant(p)}`;
         const Q = dix(q);
         situations = [
@@ -1763,7 +1764,7 @@ export const puissancesBank: TutorBankItemV4[] = [
           etape: "question", nom: "façons",
         },
         {
-          debut: `Dans une chaîne d’entraide, chaque personne prévenue prévient à son tour 2 nouvelles personnes.`,
+          debut: `Une chaîne d’entraide démarre : une personne prévient 2 personnes (1re vague), puis chaque personne prévenue prévient à son tour 2 nouvelles personnes.`,
           questions: [`Combien de personnes sont prévenues à la ${n}e vague ?`, `À la ${n}e vague, combien de nouvelles personnes reçoivent le message ?`],
           etape: "vague", nom: "personnes",
         },

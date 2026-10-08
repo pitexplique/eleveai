@@ -92,6 +92,18 @@ function reponsesTapees(x: Q, brut?: Q): string[] {
   if (brut && !(brut.n === x.n && brut.d === x.d) && brut.d !== 0) r.push(`${brut.n}/${brut.d}`);
   return Array.from(new Set(r));
 }
+/**
+ * ⛔ 08/10/2026 — quand la consigne EXIGE la forme simplifiée (« simplifie le résultat
+ * si possible », « sous la forme la plus simple », « irréductible »), la fraction non
+ * simplifiée n'est plus acceptée : ni en variante tapée, ni par les groupes
+ * d'équivalence de `fraction_decimal_equivalent` (qui prend « 2/4 » pour « 1/2 »).
+ */
+const EXIGE_SIMPLIFIE = /simplifi|la plus simple|irréductible|au maximum/;
+function attenduCalcul(text: string, r: Q, brut: Q): Pick<Genere, "expected" | "comparator"> {
+  return EXIGE_SIMPLIFIE.test(text)
+    ? { expected: reponsesTapees(r), comparator: "exact_text" }
+    : { expected: reponsesTapees(r, brut), comparator: "fraction_decimal_equivalent" };
+}
 /** 0,75 — virgule française, quatre décimales au plus. */
 const virgule = (v: number) => String(Math.round(v * 10000) / 10000).replace(".", ",");
 /** 0{,}75 — la même, dans une formule. */
@@ -224,7 +236,7 @@ const ETAPES: { s: (a: string, b: string) => string; total: string; reste: strin
   { s: (a, b) => `Une famille consacre ${a} de son budget au logement et ${b} à l'alimentation.`, total: "Quelle fraction du budget ces deux postes représentent-ils ensemble ?", reste: "Quelle fraction du budget reste-t-il pour les autres dépenses ?" },
   { s: (a, b) => `Dans un potager, on plante des salades sur ${a} de la surface et des carottes sur ${b}.`, total: "Quelle fraction du potager est plantée ?", reste: "Quelle fraction du potager reste libre ?" },
   { s: (a, b) => `Une cycliste fait ${a} de son parcours sur piste cyclable et ${b} sur une petite route.`, total: "Quelle fraction du parcours cela représente-t-il en tout ?", reste: "Quelle fraction du parcours se fait sur d'autres voies ?" },
-  { s: (a, b) => `Une cuve d'arrosage perd ${a} de son contenu la première semaine et ${b} la deuxième.`, total: "Quelle fraction du contenu a-t-elle perdue en deux semaines ?", reste: "Quelle fraction du contenu reste-t-il dans la cuve ?" },
+  { s: (a, b) => `Une cuve d'arrosage perd ${a} de son contenu de départ la première semaine, et encore ${b} de ce contenu de départ la deuxième.`, total: "Quelle fraction du contenu a-t-elle perdue en deux semaines ?", reste: "Quelle fraction du contenu reste-t-il dans la cuve ?" },
   { s: (a, b) => `Dans une playlist, ${a} des morceaux sont du rap et ${b} du reggae.`, total: "Quelle fraction des morceaux sont du rap ou du reggae ?", reste: "Quelle fraction des morceaux ne sont ni du rap ni du reggae ?" },
   { s: (a, b) => `Parmi les adhérents d'un club, ${a} font du football et ${b} du basket.`, total: "Quelle fraction des adhérents pratiquent l'un de ces deux sports ?", reste: "Quelle fraction des adhérents ne pratiquent aucun de ces deux sports ?" },
   { s: (a, b) => `Un maçon monte ${a} d'un mur le matin et ${b} l'après-midi.`, total: "Quelle fraction du mur a-t-il montée dans la journée ?", reste: "Quelle fraction du mur reste-t-il à monter ?" },
@@ -608,7 +620,8 @@ function genSimplifierCourt(niveau: 1 | 2): { g: Genere; F: Q } {
       text: randomChoice(enoncesSimplifier($m(tf(F.n, F.d)))),
       format: "short",
       expected: [pq(base)],
-      comparator: "fraction_decimal_equivalent",
+      // 08/10/2026 : « simplifie au maximum » — `fraction_decimal_equivalent` acceptait « 2/4 » pour « 1/2 ».
+      comparator: "exact_text",
       explanation: explSimplifier(F, base, k),
     },
   };
@@ -797,11 +810,14 @@ function genVersDecimalCourt(sur: 10 | 100): Genere {
   return {
     text: randomChoice(enoncesVersDecimal($m(tf(n, sur)), x)),
     format: "short",
-    expected: [String(v), virgule(v)],
+    // 08/10/2026 : plus de variante « 0.3 » (point anglais) ; `number_equal` accepte « 0.3 » tapé.
+    expected: [virgule(v)],
     comparator: "number_equal",
     explanation: expl(
       "une fraction est un quotient : $\\frac{a}{b} = a \\div b$.",
-      sur === 10 ? "diviser par 10 décale la virgule d'un rang vers la gauche." : "diviser par 100 décale la virgule de deux rangs vers la gauche.",
+      sur === 10
+        ? "diviser par 10 rend chaque chiffre dix fois plus petit : les unités deviennent des dixièmes."
+        : "diviser par 100 rend chaque chiffre cent fois plus petit : les unités deviennent des centièmes.",
       `$${n} \\div ${sur} = ${tv(v)}$.`,
       `$${tf(n, sur)} = ${tv(v)}$.`,
     ),
@@ -1036,7 +1052,8 @@ function genGrille(): Genere {
     text: randomChoice(textes),
     format: "short",
     expected: [pq(r)],
-    comparator: "fraction_decimal_equivalent",
+    // 08/10/2026 : « fraction irréductible » — `fraction_decimal_equivalent` acceptait « 2/4 » pour « 1/2 ».
+    comparator: "exact_text",
     explanation: expl(
       "une fraction est une écriture d'un nombre rationnel : ici, le nombre de cases comptées sur le nombre total de cases.",
       "on compte les cases, on écrit la fraction, puis on la simplifie.",
@@ -1156,11 +1173,14 @@ function genSigne(): { g: Genere; a: Q; b: Q } {
   return {
     a,
     b,
+    // ⛔ 08/10/2026 : c'était une réponse courte à MOT-CLÉ (« < ») : « <> » ou « 1/2 < 3 >… »
+    // passaient. Le choix entre les trois signes devient un QCM.
     g: {
       text: randomChoice(enoncesSigne($m(tf(a.n, a.d)), $m(tf(b.n, b.d)))),
-      format: "short",
+      format: "qcm",
+      choices: ["<", "=", ">"],
       expected: [signe],
-      comparator: "contains_keyword",
+      comparator: "mcq_exact",
       explanation: explComparer(a, b, signe),
     },
   };
@@ -1344,11 +1364,11 @@ function genSommeQcm(niveau: 2 | 3 | 4): Genere {
 function genSommeCourt(niveau: 2 | 3, canvas = false): Genere {
   const { termes, forme, r } = tirerSomme(niveau, canvas);
   const D = termes.reduce((acc, t) => ppcm(acc, t.x.d), 1);
+  const text = randomChoice(enoncesSomme(termes, forme));
   const g: Genere = {
-    text: randomChoice(enoncesSomme(termes, forme)),
+    text,
     format: "short",
-    expected: reponsesTapees(r, { n: r.n * (D / r.d), d: D }),
-    comparator: "fraction_decimal_equivalent",
+    ...attenduCalcul(text, r, { n: r.n * (D / r.d), d: D }),
     explanation: explSomme(termes, r),
   };
   if (canvas) {
@@ -1472,8 +1492,7 @@ function genProduitCourt(): Genere {
   return {
     text,
     format: "short",
-    expected: reponsesTapees(r, { n: A.n * B.n, d: A.d * B.d }),
-    comparator: "fraction_decimal_equivalent",
+    ...attenduCalcul(text, r, { n: A.n * B.n, d: A.d * B.d }),
     explanation: explProduit(A, B, r),
   };
 }
@@ -1697,8 +1716,7 @@ function genQuotientCourt(): Genere {
   return {
     text,
     format: "short",
-    expected: reponsesTapees(r, { n: s * A.n * B.d, d: s * A.d * B.n }),
-    comparator: "fraction_decimal_equivalent",
+    ...attenduCalcul(text, r, { n: s * A.n * B.d, d: s * A.d * B.n }),
     explanation: explQuotient(A, B, r),
   };
 }
@@ -2028,7 +2046,15 @@ function genDefiReste(): Genere {
   };
 }
 
-/** ★5 : une erreur d'élève à expliquer. */
+/** Les règles des erreurs de `genDefiErreur` : chacune ne parle que de SON opération. */
+const LECONS_DEFI = {
+  somme: "on n'additionne pas les dénominateurs : on met d'abord les fractions au même dénominateur.",
+  produit: "pour multiplier, on multiplie les numérateurs entre eux ET les dénominateurs entre eux ; le dénominateur commun ne sert qu'à additionner.",
+  division: "diviser par une fraction, c'est multiplier par son INVERSE, pas par la fraction elle-même.",
+  inverse: "l'opposé change le signe (somme nulle) ; l'inverse échange le numérateur et le dénominateur (produit égal à 1).",
+};
+
+/** ★5 : une erreur d'élève, et la règle qui la corrige. */
 function genDefiErreur(): Genere {
   const p = randomChoice(PRENOMS);
   const type = randomChoice(["somme", "produit", "division", "inverse"]);
@@ -2048,7 +2074,7 @@ function genDefiErreur(): Genere {
     const D = ppcm(a.d, b.d);
     juste = `$${tq(a)} + ${tq(b)} = \\frac{${(a.n * D) / a.d}}{${D}} + \\frac{${(b.n * D) / b.d}}{${D}} = ${tq(r)}$`;
     mots = ["dénominateur", "commun", "même", pq(r)];
-    lecon = "on n'additionne pas les dénominateurs : on met d'abord les fractions au même dénominateur.";
+    lecon = LECONS_DEFI.somme;
   } else if (type === "produit") {
     const D = ppcm(a.d, b.d);
     const na = (a.n * D) / a.d;
@@ -2057,30 +2083,36 @@ function genDefiErreur(): Genere {
     const r = qMul(a, b);
     juste = `$${tq(a)} \\times ${tq(b)} = \\frac{${a.n * b.n}}{${a.d * b.d}}${r.n !== a.n * b.n || r.d !== a.d * b.d ? ` = ${tq(r)}` : ""}$`;
     mots = ["dénominateurs", "numérateurs", "multipli", pq(r)];
-    lecon = "pour multiplier, on multiplie les numérateurs entre eux ET les dénominateurs entre eux ; le dénominateur commun ne sert qu'à additionner.";
+    lecon = LECONS_DEFI.produit;
   } else if (type === "division") {
     e = `$${tq(a)} \\div ${tq(b)} = ${tf(a.n * b.n, a.d * b.d)}$`;
     const r = qDiv(a, b);
     juste = `$${tq(a)} \\div ${tq(b)} = ${tq(a)} \\times ${tf(b.d, b.n)} = ${tq(r)}$`;
     mots = ["inverse", pq(r)];
-    lecon = "diviser par une fraction, c'est multiplier par son INVERSE, pas par la fraction elle-même.";
+    lecon = LECONS_DEFI.division;
   } else {
     e = `l'inverse de $${tq(a)}$ est $-${tq(a)}$`;
     juste = `l'inverse de $${tq(a)}$ est $${tf(a.d, a.n)}$, car $${tq(a)} \\times ${tf(a.d, a.n)} = 1$`;
     mots = ["inverse", "opposé", "échange", pq(q(a.d, a.n))];
-    lecon = "l'opposé change le signe (somme nulle) ; l'inverse échange le numérateur et le dénominateur (produit égal à 1).";
+    lecon = LECONS_DEFI.inverse;
   }
+  // ⛔ 08/10/2026 : c'était une question OUVERTE à mots-clés (« 5/21 », « inverse »…) :
+  // toute réponse contenant la fraction ou le mot passait. Devenue un QCM sur la RÈGLE
+  // à rappeler ; les trois autres règles parlent d'une autre opération.
+  void mots;
   const textes = [
-    `${p.nom} écrit : ${e}. Explique son erreur.`,
-    `${p.nom} affirme que ${e}. A-t-${p.il} raison ? Justifie.`,
-    `Dans sa copie, ${p.nom} a écrit : ${e}. Où est l'erreur ? Donne le bon résultat.`,
-    `D'après ${p.nom}, ${e}. Explique pourquoi c'est faux, puis corrige.`,
+    `${p.nom} écrit : ${e}. Quelle règle a-t-${p.il} oubliée ?`,
+    `${p.nom} affirme que ${e}. C'est faux : quelle règle faut-il lui rappeler ?`,
+    `Dans sa copie, ${p.nom} a écrit : ${e}. D'où vient l'erreur ?`,
+    `D'après ${p.nom}, ${e}. Quelle règle corrige cette erreur ?`,
   ];
+  const majuscule = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
   return {
     text: randomChoice(textes),
-    format: "open",
-    expected: mots,
-    comparator: "contains_keyword",
+    format: "qcm",
+    choices: shuffle(Object.values(LECONS_DEFI)).map(majuscule),
+    expected: [majuscule(lecon)],
+    comparator: "mcq_exact",
     explanation: expl(
       "chaque opération sur les fractions a sa règle.",
       lecon,
@@ -2237,16 +2269,23 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_simplifier",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi 8/12 peut se simplifier en 2/3.",
-    format: "open",
-    expected: ["divise", "4", "2/3"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : ouverte à mots-clés (« 4 », « 2/3 ») → QCM sur les mêmes pièges.
+    text: "Pourquoi $\\frac{8}{12}$ peut-elle se simplifier en $\\frac{2}{3}$ ?",
+    format: "qcm",
+    choices: [
+      "On divise 8 et 12 par le même nombre, 4.",
+      "On soustrait 6 à 8 et à 12.",
+      "On divise 8 par 4 et 12 par 3.",
+      "On divise seulement le dénominateur par 4.",
+    ],
+    expected: ["On divise 8 et 12 par le même nombre, 4."],
+    comparator: "mcq_exact",
     hint: "Cherche par quel nombre on divise 8 et 12.",
     explanation: "Définition : une fraction représente un quotient ; le numérateur est au-dessus et le dénominateur est en dessous.\n\n" +
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("On divise 8 et 12 par 4 : 8/12 = 2/3.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fraction_nombre", "simplifier", "open"],
+    tags: ["fraction_nombre", "simplifier", "qcm"],
   },
 
   // =========================
@@ -2320,16 +2359,23 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_rationnel",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi 0,5 est un nombre rationnel.",
-    format: "open",
-    expected: ["0,5", "1/2", "fraction"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : ouverte à mots-clés (« 0,5 », « 1/2 ») → QCM sur les mêmes pièges.
+    text: "Pourquoi 0,5 est-il un nombre rationnel ?",
+    format: "qcm",
+    choices: [
+      "Parce qu'il s'écrit comme un quotient de deux entiers : 0,5 = 1/2.",
+      "Parce qu'il est plus petit que 1.",
+      "Parce qu'il s'écrit avec une virgule.",
+      "Parce qu'il est positif.",
+    ],
+    expected: ["Parce qu'il s'écrit comme un quotient de deux entiers : 0,5 = 1/2."],
+    comparator: "mcq_exact",
     hint: "Essaie d’écrire 0,5 sous forme de fraction.",
     explanation: "Définition : une fraction représente un quotient ; le numérateur est au-dessus et le dénominateur est en dessous.\n\n" +
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("0,5 = 1/2. Comme il peut s’écrire sous forme de fraction, c’est un nombre rationnel.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fraction_nombre", "rationnel", "open"],
+    tags: ["fraction_nombre", "rationnel", "qcm"],
   },
 
   // =========================
@@ -2418,16 +2464,17 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_additionner",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi 1/2 + 1/3 ne vaut pas 2/5.",
-    format: "open",
-    expected: ["dénominateur", "commun", "5/6"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : ouverte à mots-clés (« 5/6 ») → réponse numérique : le bon résultat.
+    text: "$\\frac{1}{2} + \\frac{1}{3}$ ne vaut pas $\\frac{2}{5}$ : on n'additionne pas les dénominateurs. Que vaut cette somme ? Donne une fraction irréductible.",
+    format: "short",
+    expected: ["5/6"],
+    comparator: "exact_text",
     hint: "On n’additionne pas les dénominateurs.",
     explanation: "Définition : une fraction représente un quotient ; le numérateur est au-dessus et le dénominateur est en dessous.\n\n" +
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("Il faut mettre au même dénominateur : 1/2 = 3/6 et 1/3 = 2/6, donc 1/2 + 1/3 = 5/6.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fraction_nombre", "addition", "erreur", "open"],
+    tags: ["fraction_nombre", "addition", "erreur", "court"],
   },
 
   // =========================
@@ -2552,16 +2599,23 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_diviser",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique la méthode pour diviser par une fraction.",
-    format: "open",
-    expected: ["multiplier", "inverse"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : ouverte à mots-clés vagues → QCM sur les mêmes pièges.
+    text: "Quelle est la méthode pour diviser par une fraction ?",
+    format: "qcm",
+    choices: [
+      "On multiplie par son inverse.",
+      "On multiplie par son opposé.",
+      "On divise les numérateurs entre eux et on garde le dénominateur.",
+      "On met les deux fractions au même dénominateur, puis on divise les dénominateurs.",
+    ],
+    expected: ["On multiplie par son inverse."],
+    comparator: "mcq_exact",
     hint: "On ne divise pas directement : on transforme.",
     explanation: "Définition : une fraction représente un quotient ; le numérateur est au-dessus et le dénominateur est en dessous.\n\n" +
           "Méthode : on applique la règle des fractions adaptée : simplifier, comparer, additionner ou multiplier.\n\nCalcul : " +
           ("Pour diviser par une fraction, on multiplie par son inverse.") +
           "\n\nConclusion : la fraction ou le nombre obtenu répond à la question.",
-    tags: ["fraction_nombre", "division", "open"],
+    tags: ["fraction_nombre", "division", "qcm"],
   },
 
   // =========================
@@ -2674,8 +2728,8 @@ export const fractionsBank: TutorBankItemV4[] = [
     difficulty: 5,
     theme: "neutral",
     hint: "Repère l’erreur classique.",
-    tags: ["fraction_nombre", "defi", "open", "erreur"],
-    // Une vraie erreur d'élève, chiffrée : addition, produit, division ou inverse.
+    tags: ["fraction_nombre", "defi", "qcm", "erreur"],
+    // Une vraie erreur d'élève, chiffrée : addition, produit, division ou inverse — QCM sur la règle.
     generate: () => genDefiErreur(),
   },
     /* =========================
@@ -2840,17 +2894,24 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_additionner",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève écrit : 1/2 + 1/3 = 2/5. Explique son erreur.",
-    format: "open",
-    expected: ["dénominateur", "commun", "5/6", "additionne"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : ouverte à mots-clés (« 5/6 ») → QCM sur les mêmes pièges.
+    text: "Un élève écrit : $\\frac{1}{2} + \\frac{1}{3} = \\frac{2}{5}$. Quelle est son erreur ?",
+    format: "qcm",
+    choices: [
+      "Il a additionné les dénominateurs : il fallait d'abord un dénominateur commun (3/6 + 2/6 = 5/6).",
+      "Il aurait dû multiplier les numérateurs : 1 × 1 = 1.",
+      "Il aurait dû inverser la deuxième fraction.",
+      "Il n'y a pas d'erreur.",
+    ],
+    expected: ["Il a additionné les dénominateurs : il fallait d'abord un dénominateur commun (3/6 + 2/6 = 5/6)."],
+    comparator: "mcq_exact",
     hint: "On n’additionne pas les dénominateurs.",
     explanation:
       "Définition : pour additionner deux fractions, il faut utiliser un dénominateur commun.\n\n" +
       "Méthode : on transforme les fractions avant d’additionner.\n\n" +
       "Calcul : 1/2 = 3/6 et 1/3 = 2/6, donc 1/2 + 1/3 = 5/6.\n\n" +
       "Conclusion : l’erreur est d’avoir additionné les dénominateurs.",
-    tags: ["fraction_nombre", "erreur", "open", "addition"],
+    tags: ["fraction_nombre", "erreur", "qcm", "addition"],
   },
 
   /* =========================================================
@@ -3058,17 +3119,18 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_simplifier",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique comment simplifier la fraction $\\frac{12}{18}$.",
-    format: "open",
-    expected: ["divise", "6", "2/3"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : ouverte à mots-clés (« 6 », « 2/3 ») → réponse numérique.
+    text: "Pour simplifier $\\frac{12}{18}$ en une seule étape, par quel nombre divise-t-on le numérateur et le dénominateur ?",
+    format: "short",
+    expected: ["6"],
+    comparator: "number_equal",
     hint: "Cherche par quel nombre diviser 12 et 18.",
     explanation:
       "Définition : simplifier, c’est diviser le numérateur et le dénominateur par un même nombre.\n\n" +
       "Méthode : on divise 12 et 18 par leur diviseur commun 6.\n\n" +
       "Calcul : $\\frac{12}{18} = \\frac{2}{3}$.\n\n" +
       "Conclusion : la forme simplifiée est $\\frac{2}{3}$.",
-    tags: ["fraction_nombre", "simplifier", "open"],
+    tags: ["fraction_nombre", "simplifier", "court"],
   },
 
   // ---------- FRACTION_DECIMAL ----------
@@ -3201,17 +3263,24 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_decimal",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique comment transformer $\\frac{3}{4}$ en nombre décimal.",
-    format: "open",
-    expected: ["divise", "0,75", "quotient"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : ouverte à mots-clés (« 0,75 ») → QCM sur les mêmes pièges.
+    text: "Comment transformer $\\frac{3}{4}$ en nombre décimal ?",
+    format: "qcm",
+    choices: [
+      "On divise 3 par 4 : 3 ÷ 4 = 0,75.",
+      "On divise 4 par 3.",
+      "On écrit les deux chiffres après la virgule : 0,34.",
+      "On soustrait : 4 − 3 = 1.",
+    ],
+    expected: ["On divise 3 par 4 : 3 ÷ 4 = 0,75."],
+    comparator: "mcq_exact",
     hint: "Une fraction est un quotient.",
     explanation:
       "Définition : une fraction est aussi un quotient.\n\n" +
       "Méthode : on divise le numérateur par le dénominateur.\n\n" +
       "Calcul : $3 \\div 4 = 0{,}75$.\n\n" +
       "Conclusion : $\\frac{3}{4} = 0{,}75$.",
-    tags: ["fraction_nombre", "decimal", "open"],
+    tags: ["fraction_nombre", "decimal", "qcm"],
   },
 
   // ---------- FRACTION_RATIONNEL ----------
@@ -3343,17 +3412,24 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_rationnel",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi tout nombre entier est aussi un nombre rationnel.",
-    format: "open",
-    expected: ["entier", "fraction", "1"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : ouverte à mots-clés (« 1 ») → QCM sur les mêmes pièges.
+    text: "Pourquoi tout nombre entier est-il aussi un nombre rationnel ?",
+    format: "qcm",
+    choices: [
+      "Parce qu'il s'écrit comme une fraction de dénominateur 1 : 7 = 7/1.",
+      "Parce qu'il n'a pas de virgule.",
+      "Parce qu'il est toujours positif.",
+      "Parce qu'il s'écrit 1/7.",
+    ],
+    expected: ["Parce qu'il s'écrit comme une fraction de dénominateur 1 : 7 = 7/1."],
+    comparator: "mcq_exact",
     hint: "Écris un entier comme une fraction de dénominateur 1.",
     explanation:
       "Définition : un nombre rationnel s’écrit $\\frac{a}{b}$ avec $b \\neq 0$.\n\n" +
       "Méthode : on écrit l’entier sur un dénominateur 1.\n\n" +
       "Calcul : par exemple $7 = \\frac{7}{1}$.\n\n" +
       "Conclusion : tout entier est un rationnel car il s’écrit comme fraction de dénominateur 1.",
-    tags: ["fraction_nombre", "rationnel", "open"],
+    tags: ["fraction_nombre", "rationnel", "qcm"],
   },
 
   // ---------- FRACTION_COMPARER ----------
@@ -3666,17 +3742,24 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_multiplier",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique la règle pour multiplier deux fractions.",
-    format: "open",
-    expected: ["numérateurs", "dénominateurs", "multiplie"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : ouverte à mots-clés vagues → QCM sur les mêmes pièges.
+    text: "Quelle est la règle pour multiplier deux fractions ?",
+    format: "qcm",
+    choices: [
+      "On multiplie les numérateurs entre eux et les dénominateurs entre eux.",
+      "On met au même dénominateur, puis on multiplie les numérateurs et on garde le dénominateur commun.",
+      "On multiplie les numérateurs et on garde le premier dénominateur.",
+      "On multiplie la première fraction par l’inverse de la seconde.",
+    ],
+    expected: ["On multiplie les numérateurs entre eux et les dénominateurs entre eux."],
+    comparator: "mcq_exact",
     hint: "Que fait-on des numérateurs ? des dénominateurs ?",
     explanation:
       "Définition : multiplier deux fractions donne une nouvelle fraction.\n\n" +
       "Méthode : on multiplie les numérateurs entre eux et les dénominateurs entre eux.\n\n" +
       "Calcul : $\\frac{a}{b} \\times \\frac{c}{d} = \\frac{a\\times c}{b\\times d}$.\n\n" +
       "Conclusion : on multiplie les numérateurs entre eux et les dénominateurs entre eux, puis on simplifie.",
-    tags: ["fraction_nombre", "produit", "open"],
+    tags: ["fraction_nombre", "produit", "qcm"],
   },
 
   // ---------- FRACTION_INVERSE ----------
@@ -3805,17 +3888,24 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_inverse",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique comment trouver l’inverse d’une fraction et donne un exemple.",
-    format: "open",
-    expected: ["échange", "numérateur", "dénominateur"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : ouverte à mots-clés vagues → QCM sur les mêmes pièges.
+    text: "Comment trouve-t-on l’inverse d’une fraction non nulle ?",
+    format: "qcm",
+    choices: [
+      "On échange le numérateur et le dénominateur : l’inverse de 3/4 est 4/3.",
+      "On change son signe : l’inverse de 3/4 est -3/4.",
+      "On soustrait la fraction à 1 : l’inverse de 3/4 est 1/4.",
+      "On double le dénominateur : l’inverse de 3/4 est 3/8.",
+    ],
+    expected: ["On échange le numérateur et le dénominateur : l’inverse de 3/4 est 4/3."],
+    comparator: "mcq_exact",
     hint: "Pense à ce qu’on échange.",
     explanation:
       "Définition : l’inverse d’une fraction s’obtient en échangeant numérateur et dénominateur.\n\n" +
       "Méthode : on met le numérateur en bas et le dénominateur en haut.\n\n" +
       "Calcul : par exemple l’inverse de $\\frac{3}{4}$ est $\\frac{4}{3}$.\n\n" +
       "Conclusion : on échange numérateur et dénominateur.",
-    tags: ["fraction_nombre", "inverse", "open"],
+    tags: ["fraction_nombre", "inverse", "qcm"],
   },
 
   // ---------- FRACTION_DIVISER ----------
@@ -4034,17 +4124,18 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_quantite",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment calculer $\\frac{3}{5}$ de 40.",
-    format: "open",
-    expected: ["divise", "5", "24"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : ouverte à mots-clés (« 5 », « 24 ») → réponse numérique.
+    text: "Calcule $\\frac{3}{5}$ de 40 en divisant d'abord par le dénominateur.",
+    format: "short",
+    expected: ["24"],
+    comparator: "number_equal",
     hint: "Divise d’abord par le dénominateur.",
     explanation:
       "Définition : prendre une fraction d’un nombre, c’est multiplier.\n\n" +
       "Méthode : on divise 40 par 5, puis on multiplie par 3.\n\n" +
       "Calcul : $40 \\div 5 = 8$, puis $8 \\times 3 = 24$.\n\n" +
       "Conclusion : $\\frac{3}{5}$ de 40 vaut 24.",
-    tags: ["fraction_nombre", "quantite", "open"],
+    tags: ["fraction_nombre", "quantite", "court"],
   },
 
   // ---------- FRACTION_OPPOSE ----------
@@ -4176,17 +4267,24 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_oppose",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique ce qu’est l’opposé d’une fraction et pourquoi leur somme est nulle.",
-    format: "open",
-    expected: ["signe", "0", "somme"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : ouverte à mots-clés (« 0 ») → QCM sur les mêmes pièges.
+    text: "Qu’est-ce que l’opposé d’une fraction ?",
+    format: "qcm",
+    choices: [
+      "La même fraction avec le signe changé : leur somme vaut 0.",
+      "La fraction retournée (numérateur et dénominateur échangés) : leur produit vaut 1.",
+      "Le nombre 0, car une fraction plus 0 reste la même fraction.",
+      "La fraction dont on a doublé le numérateur.",
+    ],
+    expected: ["La même fraction avec le signe changé : leur somme vaut 0."],
+    comparator: "mcq_exact",
     hint: "Pense à ce que vaut un nombre plus son opposé.",
     explanation:
       "Définition : l’opposé d’une fraction est cette fraction avec le signe changé.\n\n" +
       "Méthode : on ajoute la fraction et son opposé.\n\n" +
       "Calcul : $\\frac{a}{b} + \\left(-\\frac{a}{b}\\right) = 0$.\n\n" +
       "Conclusion : leur somme est nulle, c’est pourquoi ce sont des opposés.",
-    tags: ["fraction_nombre", "oppose", "open"],
+    tags: ["fraction_nombre", "oppose", "qcm"],
   },
 
   // ---------- FRACTION_DEFIS ----------
@@ -4292,17 +4390,24 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi diviser par une fraction plus petite que 1 donne un résultat plus grand que le nombre de départ.",
-    format: "open",
-    expected: ["inverse", "multiplier", "plus grand"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : ouverte à mots-clés vagues → QCM sur les mêmes pièges.
+    text: "Pourquoi diviser un nombre positif par une fraction plus petite que 1 (et positive) donne-t-il un résultat plus grand que ce nombre ?",
+    format: "qcm",
+    choices: [
+      "Parce que diviser par cette fraction revient à multiplier par son inverse, qui est plus grand que 1.",
+      "Parce que diviser fait toujours grandir un nombre.",
+      "Parce que diviser par cette fraction revient à multiplier par son opposé.",
+      "Parce que le dénominateur est plus petit que le numérateur.",
+    ],
+    expected: ["Parce que diviser par cette fraction revient à multiplier par son inverse, qui est plus grand que 1."],
+    comparator: "mcq_exact",
     hint: "Diviser par une fraction, c’est multiplier par son inverse (qui est plus grand que 1).",
     explanation:
       "Définition : diviser par une fraction revient à multiplier par son inverse.\n\n" +
       "Méthode : si la fraction est plus petite que 1, son inverse est plus grand que 1.\n\n" +
       "Calcul : par exemple $6 \\div \\frac{1}{2} = 6 \\times 2 = 12$.\n\n" +
       "Conclusion : multiplier par un nombre plus grand que 1 donne un résultat plus grand.",
-    tags: ["fraction_nombre", "defi", "open"],
+    tags: ["fraction_nombre", "defi", "qcm"],
   },
   {
     kind: "fixed",
@@ -4313,17 +4418,24 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi on peut toujours écrire un nombre décimal comme une fraction, donc comme un rationnel.",
-    format: "open",
-    expected: ["décimal", "fraction", "10"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : ouverte à mots-clés (« 10 ») → QCM sur les mêmes pièges.
+    text: "Pourquoi peut-on toujours écrire un nombre décimal comme une fraction, donc comme un rationnel ?",
+    format: "qcm",
+    choices: [
+      "Parce qu'il s'écrit sur 10, 100, 1 000… : 0,25 = 25/100.",
+      "Parce qu'il a une virgule.",
+      "Parce qu'il est toujours plus petit que 1.",
+      "Parce qu'on peut l'arrondir à l'unité.",
+    ],
+    expected: ["Parce qu'il s'écrit sur 10, 100, 1 000… : 0,25 = 25/100."],
+    comparator: "mcq_exact",
     hint: "Pense aux dixièmes, centièmes…",
     explanation:
       "Définition : un nombre rationnel s’écrit comme quotient de deux entiers.\n\n" +
       "Méthode : un décimal s’écrit sur 10, 100, 1000… selon le nombre de chiffres après la virgule.\n\n" +
       "Calcul : par exemple $0{,}25 = \\frac{25}{100} = \\frac{1}{4}$.\n\n" +
       "Conclusion : tout décimal est une fraction, donc un nombre rationnel.",
-    tags: ["fraction_nombre", "defi", "rationnel", "open"],
+    tags: ["fraction_nombre", "defi", "rationnel", "qcm"],
   },
 
   /* =========================================================

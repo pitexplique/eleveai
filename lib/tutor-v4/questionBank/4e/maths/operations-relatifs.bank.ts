@@ -376,7 +376,8 @@ const SIT_REUNION: Sit[] = [
 // ⭐ Un seul contexte réunionnais dans la grande table (le Piton des Neiges).
 const SIT_TOUTES: Sit[] = [...SIT_TEMP, ...SIT_ALT, ...SIT_ARGENT, ...SIT_SCORE, SIT_REUNION[0]];
 
-const PREFIXES_SIT = ["", "Traduis la situation par un calcul de nombres relatifs. ", "Avec des nombres relatifs : "];
+// (08/10/2026) « Avec des nombres relatifs : La carte… » laissait une majuscule après les deux-points.
+const PREFIXES_SIT = ["", "Traduis la situation par un calcul de nombres relatifs. ", "Utilise les nombres relatifs. "];
 const SUFFIXES_VAR = [
   "Réponds par un nombre relatif (négatif s’il s’agit d’une baisse).",
   "Donne un nombre relatif : positif pour une hausse, négatif pour une baisse.",
@@ -1306,6 +1307,19 @@ const FORMES_5: Forme[] = [
    DÉFIS : erreurs typiques, expressions à comparer, nombres manquants.
 --------------------------------------------------------------------------- */
 type Erreur = { e: string; juste: number; faux: number; regle: string; mots: string[] };
+
+/** Les règles des ERREURS, et quand chacune PEUT expliquer un calcul (ses opérations y figurent).
+ *  Une règle ne sert de leurre qu'à un calcul qu'elle ne peut pas expliquer (08/10/2026). */
+const REGLES_ERREURS: { regle: string; possible: (e: string) => boolean }[] = [
+  { regle: "le produit de deux nombres négatifs est positif", possible: (e) => e.includes("×") },
+  { regle: "soustraire un nombre négatif revient à ajouter son opposé", possible: (e) => e.includes(" - ") },
+  { regle: "la somme de deux nombres négatifs est négative", possible: (e) => e.includes(" + ") },
+  { regle: "la multiplication est prioritaire sur l’addition", possible: (e) => e.includes("×") && / [+-] /.test(e) },
+  { regle: "le quotient de deux nombres de signes contraires est négatif", possible: (e) => e.includes("÷") },
+  { regle: "pour deux nombres de signes contraires, le résultat prend le signe du plus éloigné de zéro", possible: (e) => / [+-] /.test(e) },
+  { regle: "quand on retire plus que ce qu’on a, le résultat est négatif", possible: (e) => e.includes(" - ") },
+];
+const majuscule = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 const ERREURS: (() => Erreur)[] = [
   () => {
     const a = randomInt(2, 9), b = randomInt(2, 9);
@@ -1481,7 +1495,7 @@ function genManquant0(): Q {
   );
 }
 
-export const operationsRelatifsBank: TutorBankItemV4[] = [
+const banqueRelatifs: TutorBankItemV4[] = [
   // =========================
   // RELATIF_ADDITION
   // =========================
@@ -1543,14 +1557,21 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_addition",
     difficulty: 2,
     theme: "neutral",
-    text: "Explique pourquoi (-5) + (-4) = -9.",
-    format: "open",
-    expected: ["deux", "négatifs", "-9"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés (« -9 », « deux ») devenue un QCM sur les mêmes pièges.
+    text: "Pourquoi a-t-on (-5) + (-4) = -9 ?",
+    format: "qcm",
+    choices: [
+      "Les deux nombres sont négatifs : on additionne leurs distances à zéro (5 + 4 = 9) et le résultat reste négatif.",
+      "Deux signes « moins » donnent un « plus », puis on change le signe à la fin.",
+      "On soustrait les distances à zéro : 5 - 4 = 1, puis on ajoute 8.",
+      "Le résultat prend le signe du nombre le plus proche de zéro.",
+    ],
+    expected: ["Les deux nombres sont négatifs : on additionne leurs distances à zéro (5 + 4 = 9) et le résultat reste négatif."],
+    comparator: "mcq_exact",
     hint: "Deux nombres négatifs s’additionnent comme deux pertes.",
     explanation:
       "On additionne deux nombres négatifs : les distances à zéro s’additionnent et le résultat reste négatif. Donc (-5) + (-4) = -9.",
-    tags: ["relatif", "addition", "open"],
+    tags: ["relatif", "addition", "qcm"],
   },
 
   // =========================
@@ -1614,14 +1635,21 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_soustraction",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi 5 - (-3) = 8.",
-    format: "open",
-    expected: ["soustraire", "négatif", "ajouter", "opposé"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : ouverte à mots-clés vagues → QCM sur les mêmes pièges.
+    text: "Pourquoi a-t-on 5 - (-3) = 8 ?",
+    format: "qcm",
+    choices: [
+      "Soustraire -3 revient à ajouter son opposé, 3 : 5 + 3 = 8.",
+      "Deux signes « moins » côte à côte s'annulent toujours, même dans 5 - 3.",
+      "On soustrait les distances à zéro : 5 - 3 = 2, puis on change le signe.",
+      "Soustraire un nombre négatif revient à soustraire son opposé : 5 - 3.",
+    ],
+    expected: ["Soustraire -3 revient à ajouter son opposé, 3 : 5 + 3 = 8."],
+    comparator: "mcq_exact",
     hint: "Transformer la soustraction en addition.",
     explanation:
       "Soustraire -3 revient à ajouter son opposé, donc 5 - (-3) = 5 + 3 = 8.",
-    tags: ["relatif", "soustraction", "open"],
+    tags: ["relatif", "soustraction", "qcm"],
   },
 
   // =========================
@@ -1685,14 +1713,21 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_multiplication",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique pourquoi le produit de deux nombres négatifs est positif.",
-    format: "open",
-    expected: ["deux", "négatifs", "positif"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés (« deux », « positif ») devenue un QCM sur les mêmes pièges.
+    text: "Pourquoi le produit de deux nombres négatifs est-il positif ?",
+    format: "qcm",
+    choices: [
+      "Les deux facteurs ont le même signe, et un produit de deux nombres de même signe est positif.",
+      "On additionne leurs distances à zéro, et le résultat garde le signe des deux nombres.",
+      "Le résultat prend le signe du nombre le plus éloigné de zéro.",
+      "Un produit est toujours positif, quels que soient les signes.",
+    ],
+    expected: ["Les deux facteurs ont le même signe, et un produit de deux nombres de même signe est positif."],
+    comparator: "mcq_exact",
     hint: "Pense à la règle des signes.",
     explanation:
       "D’après la règle des signes, le produit de deux nombres de même signe est positif. Deux nombres négatifs ont le même signe, donc leur produit est positif.",
-    tags: ["relatif", "multiplication", "open"],
+    tags: ["relatif", "multiplication", "qcm"],
   },
 
   // =========================
@@ -1756,14 +1791,21 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_division",
     difficulty: 3,
     theme: "neutral",
-    text: "Explique comment déterminer le signe d’un quotient de deux nombres relatifs.",
-    format: "open",
-    expected: ["même signe", "positif", "signes différents", "négatif"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : ouverte à mots-clés vagues → QCM sur les mêmes pièges.
+    text: "Comment détermine-t-on le signe d’un quotient de deux nombres relatifs ?",
+    format: "qcm",
+    choices: [
+      "Même signe : quotient positif ; signes différents : quotient négatif.",
+      "Il prend le signe du nombre le plus éloigné de zéro.",
+      "Il prend toujours le signe du premier nombre.",
+      "Un quotient est toujours positif.",
+    ],
+    expected: ["Même signe : quotient positif ; signes différents : quotient négatif."],
+    comparator: "mcq_exact",
     hint: "C’est la même règle que pour le produit.",
     explanation:
       "Si les deux nombres ont le même signe, le quotient est positif. S’ils ont des signes différents, le quotient est négatif.",
-    tags: ["relatif", "division", "open"],
+    tags: ["relatif", "division", "qcm"],
   },
 
   // =========================
@@ -1822,14 +1864,21 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_calcul",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi dans (-3) × 4 + 5, il faut commencer par la multiplication.",
-    format: "open",
-    expected: ["priorité", "multiplication", "addition"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : ouverte à mots-clés vagues → QCM sur les mêmes pièges.
+    text: "Pourquoi, dans (-3) × 4 + 5, faut-il commencer par la multiplication ?",
+    format: "qcm",
+    choices: [
+      "Parce que la multiplication est prioritaire sur l’addition : (-3) × 4 = -12, puis -12 + 5 = -7.",
+      "Parce qu’on calcule toujours de gauche à droite, quelle que soit l’opération.",
+      "Parce que le nombre négatif doit être traité en premier.",
+      "On peut commencer par l’addition : 4 + 5 = 9, puis (-3) × 9 donne le même résultat.",
+    ],
+    expected: ["Parce que la multiplication est prioritaire sur l’addition : (-3) × 4 = -12, puis -12 + 5 = -7."],
+    comparator: "mcq_exact",
     hint: "Pense aux priorités opératoires.",
     explanation:
       "La multiplication est prioritaire sur l’addition. On calcule donc d’abord (-3) × 4 = -12, puis -12 + 5 = -7.",
-    tags: ["relatif", "calcul", "open"],
+    tags: ["relatif", "calcul", "qcm"],
   },
 
   // =========================
@@ -1917,22 +1966,27 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_operation_defi",
     difficulty: 5,
     theme: "neutral",
-    hint: "Corrige le signe et explique la règle.",
-    tags: ["relatif", "defi", "open", "erreur"],
+    hint: "Refais le calcul : quelle règle des signes ou des priorités n’a pas été respectée ?",
+    tags: ["relatif", "defi", "qcm", "erreur"],
+    // ⛔ 08/10/2026 : c'était une question OUVERTE à mots-clés (« 25 », « -5 », « signe »…) :
+    // toute réponse contenant le chiffre passait. Devenue un QCM sur la RÈGLE oubliée ;
+    // les leurres sont des règles qui ne peuvent pas expliquer ce calcul.
     generate: () => {
       const er = randomChoice(ERREURS)();
       const [nom, pr] = randomChoice(ELEVES);
+      const leurres = shuffle(REGLES_ERREURS.filter((r) => r.regle !== er.regle && !r.possible(er.e))).slice(0, 3);
       const text = randomChoice([
-        `${nom} écrit : ${er.e} = ${er.faux}. Explique son erreur.`,
-        `Dans la copie de ${nom}, on lit : ${er.e} = ${er.faux}. Quelle règle a-t-${pr} oubliée ? Donne le bon résultat.`,
-        `${nom} pense que ${er.e} = ${er.faux}. Explique-lui pourquoi c’est faux.`,
-        `Corrige le calcul de ${nom} : ${er.e} = ${er.faux}, et justifie ta correction.`,
+        `${nom} écrit : ${er.e} = ${er.faux}. Quelle règle a-t-${pr} oubliée ?`,
+        `Dans la copie de ${nom}, on lit : ${er.e} = ${er.faux}. D’où vient l’erreur ?`,
+        `${nom} pense que ${er.e} = ${er.faux}. Quelle règle faut-il lui rappeler ?`,
+        `Le calcul de ${nom} est faux : ${er.e} = ${er.faux}. Quelle règle permet de le corriger ?`,
       ]);
       return {
         text,
-        format: "open",
-        expected: [...er.mots, String(er.juste)],
-        comparator: "contains_keyword",
+        format: "qcm",
+        choices: shuffle([er.regle, ...leurres.map((r) => r.regle)]).map(majuscule),
+        expected: [majuscule(er.regle)],
+        comparator: "mcq_exact",
         explanation: expl(
           `${er.regle}.`,
           `on refait le calcul ${er.e} en appliquant cette règle.`,
@@ -2589,17 +2643,19 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_probleme",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment modéliser par un calcul de relatifs : « il fait -3 °C, la température baisse encore de 5 °C ».",
-    format: "open",
-    expected: ["addition", "négatif", "-8"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : question ouverte à mots-clés (« -8 ») devenue un QCM sur les mêmes pièges.
+    text: "Quel calcul de relatifs traduit la situation « il fait -3 °C, la température baisse encore de 5 °C » ?",
+    format: "qcm",
+    choices: ["-3 + (-5) = -8", "-3 + 5 = 2", "-3 - (-5) = 2", "3 + (-5) = -2"],
+    expected: ["-3 + (-5) = -8"],
+    comparator: "mcq_exact",
     hint: "Une baisse se traduit par l’ajout d’un nombre négatif.",
     explanation:
       "Définition : une baisse se traduit par l’ajout d’un nombre négatif.\n\n" +
       "Méthode : on écrit -3 + (-5).\n\n" +
       "Calcul : -3 + (-5) = -8.\n\n" +
       "Conclusion : la température finale est -8 °C.",
-    tags: ["relatif", "probleme", "open"],
+    tags: ["relatif", "probleme", "qcm"],
   },
 
   // ---------- RELATIF_OPERATION_DEFI ----------
@@ -2773,17 +2829,24 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     microId: "relatif_operation_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique comment trouver rapidement le signe d’un long produit de nombres relatifs.",
-    format: "open",
-    expected: ["facteurs négatifs", "pair", "impair"],
-    comparator: "contains_keyword",
+    // ⛔ 08/10/2026 : ouverte à mots-clés vagues → QCM sur les mêmes pièges.
+    text: "Comment trouver rapidement le signe d’un long produit de nombres relatifs non nuls ?",
+    format: "qcm",
+    choices: [
+      "On compte les facteurs négatifs : nombre pair → positif, nombre impair → négatif.",
+      "On regarde le signe du facteur le plus éloigné de zéro.",
+      "On regarde le signe du premier facteur.",
+      "On compte les facteurs positifs : nombre pair → positif, nombre impair → négatif.",
+    ],
+    expected: ["On compte les facteurs négatifs : nombre pair → positif, nombre impair → négatif."],
+    comparator: "mcq_exact",
     hint: "Compte le nombre de facteurs négatifs.",
     explanation:
       "Définition : le signe d’un produit dépend du nombre de facteurs négatifs.\n\n" +
       "Méthode : on compte les facteurs négatifs.\n\n" +
       "Calcul : si ce nombre est pair, le produit est positif ; s’il est impair, il est négatif.\n\n" +
       "Conclusion : on regarde la parité du nombre de facteurs négatifs.",
-    tags: ["relatif", "defi", "open"],
+    tags: ["relatif", "defi", "qcm"],
   },
 
   /* =========================================================
@@ -2988,3 +3051,23 @@ export const operationsRelatifsBank: TutorBankItemV4[] = [
     generate: () => genManquant(),
   },
 ];
+
+/* ---------------------------------------------------------------------------
+   ⛔ 08/10/2026 — LE SIGNE MOINS S'ÉCRIT « − » (U+2212), PAS LE TIRET « - » :
+   « −3 », « (−3) », « 5 − 3 », « −4(a + 6) ». Les générateurs écrivent « - »
+   (plus simple à composer) ; on remplace à la sortie, dans tout ce que l'élève
+   lit. Un tiret entre deux lettres (« a-t-elle », « Saint-Gilles ») reste.
+   Le comparateur `number_equal` accepte « -3 » tapé au clavier pour « −3 ».
+--------------------------------------------------------------------------- */
+const TIRET_SIGNE = /(?<![\p{L}\d])-(?=\s?[\d(…]|\s?[a-z](?!\p{L}))/gu;
+const moins = (s: string) => s.replace(TIRET_SIGNE, "−");
+function typo<T>(q: T): T {
+  const r: Record<string, unknown> = { ...(q as Record<string, unknown>) };
+  for (const k of ["text", "explanation", "hint"]) if (typeof r[k] === "string") r[k] = moins(r[k] as string);
+  for (const k of ["choices", "expected"]) if (Array.isArray(r[k])) r[k] = (r[k] as string[]).map((s) => moins(String(s)));
+  return r as T;
+}
+
+export const operationsRelatifsBank: TutorBankItemV4[] = banqueRelatifs.map((item) =>
+  item.kind === "template" ? { ...item, hint: item.hint ? moins(item.hint) : item.hint, generate: () => typo(item.generate()) } : typo(item),
+);
