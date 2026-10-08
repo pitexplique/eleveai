@@ -1195,17 +1195,19 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève écrit que le volume d’une boîte est 24 cm². Qu’est-ce qui cloche dans sa réponse ?",
-    format: "short",
-    expected: ["cm³", "cm3", "trois dimensions", "3 dimensions", "cube", "aire"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : question rendue précise (Frédéric).
+    text: "Un élève écrit : « le volume de la boîte est 24 cm² ».\nQuelle est la bonne écriture ?",
+    format: "qcm",
+    choices: ["24 cm³", "24 cm²", "24 cm"],
+    expected: ["24 cm³"],
+    comparator: "mcq_exact",
     hint: "Regarde l’unité, pas le nombre.",
     explanation:
       "Définition : un volume mesure la place occupée par un solide.\n\n" +
-      "Méthode : on compte les cubes unités ou on utilise les dimensions données.\n\n" +
+      "Méthode : un volume s’écrit en cm³ (des petits cubes).\n\n" +
       "Calcul : " +
-      ("Le nombre peut être juste, mais l’unité ne l’est pas. Le cm² mesure une surface, une grandeur plate, à deux dimensions. Une boîte occupe un espace : longueur, largeur ET hauteur, donc trois dimensions. Le volume s’exprime en cm³.") +
-      "\n\nConclusion : on garde la réponse obtenue.",
+      ("Le nombre 24 est juste. Mais le cm² sert pour une aire, et le cm pour une longueur.") +
+      "\n\nConclusion : le volume est 24 cm³.",
     tags: ["volume_solide", "defi", "raisonnement"],
   },
   {

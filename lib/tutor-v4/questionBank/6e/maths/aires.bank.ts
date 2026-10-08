@@ -1886,17 +1886,19 @@ export const airesBank: TutorBankItemV4[] = [
     microId: "aire_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Pourquoi une aire ne peut-elle pas s’exprimer en cm³ ?",
-    format: "short",
-    expected: ["aire", "cm²", "volume", "cm³"],
-    comparator: "contains_keyword",
-    hint: "Une aire mesure une surface, pas un volume.",
+    // 08/10/2026 : question rendue précise (Frédéric).
+    text: "Un rectangle mesure 5 cm sur 3 cm.\nQuelle est son aire ?",
+    format: "qcm",
+    choices: ["15 cm²", "15 cm³", "15 cm", "16 cm"],
+    expected: ["15 cm²"],
+    comparator: "mcq_exact",
+    hint: "Une aire mesure une surface : elle s’écrit en cm².",
     explanation:
       "Définition : une aire mesure la surface occupée par une figure.\n\n" +
-      "Méthode : on repère la figure, les mesures utiles ou les carreaux, puis on applique la formule adaptée.\n\n" +
+      "Méthode : aire du rectangle = longueur × largeur. L’unité est le cm².\n\n" +
       "Calcul : " +
-      ("Une aire mesure une surface en 2 dimensions, donc elle s’exprime en cm². Le cm³ sert à mesurer un volume en 3 dimensions.") +
-      "\n\nConclusion : on garde la réponse obtenue.",
+      ("5 × 3 = 15, donc 15 cm². Le cm³ sert pour un volume. 16 cm est le périmètre.") +
+      "\n\nConclusion : l’aire est 15 cm².",
     tags: ["aire_surface", "defi", "raisonnement"],
   },
   {

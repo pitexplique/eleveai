@@ -1213,17 +1213,19 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_comparer",
     difficulty: 3,
     theme: "neutral",
-    text: "Quel est le plus grand : 1,5 m ou 140 cm ?",
-    format: "short",
-    expected: ["1,5 m", "1.5 m", "150 cm"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : question rendue précise (Frédéric).
+    text: "Quelle longueur est la plus grande : 1,5 m ou 140 cm ?",
+    format: "qcm",
+    choices: ["1,5 m", "140 cm"],
+    expected: ["1,5 m"],
+    comparator: "mcq_exact",
     hint: "1,5 m = 150 cm.",
     explanation:
       "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
-      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Méthode : on écrit les deux longueurs dans la même unité.\n\n" +
       "Calcul : " +
-      ("1,5 m = 150 cm. Comme 150 cm est plus grand que 140 cm, la plus grande longueur est 1,5 m.") +
-      "\n\nConclusion : on garde la réponse obtenue.",
+      ("1,5 m = 150 cm. 150 cm est plus grand que 140 cm.") +
+      "\n\nConclusion : la plus grande longueur est 1,5 m.",
     tags: ["aire_longueur", "comparaison"],
   },
   {
@@ -1235,17 +1237,19 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_comparer",
     difficulty: 3,
     theme: "neutral",
-    text: "Quel est le plus petit : 2 m ou 190 cm ?",
-    format: "short",
-    expected: ["190 cm", "1,9 m", "1.9 m"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : question rendue précise (Frédéric).
+    text: "Quelle longueur est la plus petite : 2 m ou 190 cm ?",
+    format: "qcm",
+    choices: ["2 m", "190 cm"],
+    expected: ["190 cm"],
+    comparator: "mcq_exact",
     hint: "2 m = 200 cm.",
     explanation:
       "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
-      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Méthode : on écrit les deux longueurs dans la même unité.\n\n" +
       "Calcul : " +
-      ("2 m = 200 cm. Comme 190 cm est plus petit que 200 cm, la plus petite longueur est 190 cm.") +
-      "\n\nConclusion : on garde la réponse obtenue.",
+      ("2 m = 200 cm. 190 cm est plus petit que 200 cm.") +
+      "\n\nConclusion : la plus petite longueur est 190 cm.",
     tags: ["aire_longueur", "comparaison"],
   },
   {
@@ -1280,17 +1284,19 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_comparer",
     difficulty: 3,
     theme: "reunion",
-    text: "Quel sentier est le plus long : 3 km ou 2800 m ?",
-    format: "short",
-    expected: ["3 km", "3000 m"],
-    comparator: "contains_keyword",
-    hint: "3 km = 3000 m.",
+    // 08/10/2026 : question rendue précise (Frédéric).
+    text: "Quel sentier est le plus long : 3 km ou 2 800 m ?",
+    format: "qcm",
+    choices: ["3 km", "2 800 m"],
+    expected: ["3 km"],
+    comparator: "mcq_exact",
+    hint: "3 km = 3 000 m.",
     explanation:
       "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
-      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Méthode : on écrit les deux longueurs dans la même unité.\n\n" +
       "Calcul : " +
-      ("3 km = 3000 m. Comme 3000 m est plus grand que 2800 m, le sentier de 3 km est le plus long.") +
-      "\n\nConclusion : on garde la réponse obtenue.",
+      ("3 km = 3 000 m. 3 000 m est plus grand que 2 800 m.") +
+      "\n\nConclusion : le sentier de 3 km est le plus long.",
     tags: ["aire_longueur", "comparaison", "reunion"],
   },
 
@@ -1443,17 +1449,19 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Pourquoi ne peut-on pas mesurer une ville en centimètres ?",
-    format: "short",
-    expected: ["unité adaptée", "trop petit", "pas adapté", "grande distance"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : question rendue précise (Frédéric).
+    text: "On mesure la distance entre deux villes.\nQuelle unité choisir ?",
+    format: "qcm",
+    choices: ["le kilomètre (km)", "le mètre (m)", "le centimètre (cm)"],
+    expected: ["le kilomètre (km)"],
+    comparator: "mcq_exact",
     hint: "On choisit une unité adaptée à la taille de ce qu’on mesure.",
     explanation:
       "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
-      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Méthode : pour une grande distance, on prend une grande unité.\n\n" +
       "Calcul : " +
-      ("Une ville est très grande. Le centimètre est une unité trop petite et pas adaptée pour mesurer une si grande distance. On utilise plutôt les kilomètres.") +
-      "\n\nConclusion : on garde la réponse obtenue.",
+      ("5 km = 5 000 m = 500 000 cm. En m ou en cm, le nombre est trop grand.") +
+      "\n\nConclusion : on choisit le kilomètre (km).",
     tags: ["aire_longueur", "defi", "raisonnement"],
   },
   {
@@ -1465,17 +1473,18 @@ export const longueursBank: TutorBankItemV4[] = [
     microId: "aire_longueur_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi 2 m est plus grand que 150 cm.",
+    // 08/10/2026 : question rendue précise (Frédéric).
+    text: "Pour comparer 2 m et 150 cm, on écrit 2 m en cm.\nCombien fait 2 m en cm ?",
     format: "short",
-    expected: ["200", "150", "cm", "m"],
-    comparator: "contains_keyword",
-    hint: "Convertis tout dans la même unité.",
+    expected: ["200 cm"],
+    comparator: "number_equal",
+    hint: "1 m = 100 cm.",
     explanation:
       "Définition : une longueur mesure une distance ou la taille d’un segment.\n\n" +
-      "Méthode : on repère les longueurs données et on vérifie les unités.\n\n" +
+      "Méthode : pour comparer, on écrit les deux longueurs dans la même unité.\n\n" +
       "Calcul : " +
-      ("2 m = 200 cm. Comme 200 cm est plus grand que 150 cm, 2 m est plus grand que 150 cm.") +
-      "\n\nConclusion : on garde la réponse obtenue.",
+      ("1 m = 100 cm, donc 2 m = 2 × 100 = 200 cm. 200 cm est plus grand que 150 cm.") +
+      "\n\nConclusion : 2 m = 200 cm, donc 2 m est plus grand que 150 cm.",
     tags: ["aire_longueur", "defi", "raisonnement"],
   },
   {

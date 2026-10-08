@@ -1136,13 +1136,14 @@ export const cercleBank: TutorBankItemV4[] = [
     microId: "cercle_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi deux disques de diamètres différents ont toujours le même quotient tour ÷ diamètre.",
+    // 08/10/2026 : question rendue précise (Frédéric).
+    text: "Un disque a un diamètre de 20 cm. Son tour mesure 62,8 cm.\nCalcule tour ÷ diamètre.",
     format: "short",
-    expected: ["proportionnel", "π", "pi", "coefficient"],
-    comparator: "contains_keyword",
-    hint: "Le tour et le diamètre grandissent ensemble, dans le même rapport.",
+    expected: ["3,14"],
+    comparator: "number_equal",
+    hint: "Calcule 62,8 ÷ 20.",
     explanation: expl(
-      "Le tour d’un disque est proportionnel à son diamètre : quand on multiplie le diamètre par un nombre, le tour est multiplié par le même nombre. Le quotient tour ÷ diamètre ne change donc jamais — c’est le coefficient de proportionnalité, le nombre π ≈ 3,14."
+      "62,8 ÷ 20 = 3,14. Pour tous les disques, petits ou grands, tour ÷ diamètre donne le même nombre : π ≈ 3,14."
     ),
     tags: ["cercle_disque", "defi", "raisonnement"],
   },

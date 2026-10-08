@@ -1298,17 +1298,19 @@ export const perimetresBank: TutorBankItemV4[] = [
     microId: "aire_perimetre_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Pourquoi le périmètre d’une figure ne peut-il pas s’exprimer en cm² ?",
-    format: "short",
-    expected: ["longueur", "cm", "aire", "cm²"],
-    comparator: "contains_keyword",
-    hint: "Le périmètre mesure un contour, pas une surface.",
+    // 08/10/2026 : question rendue précise (Frédéric).
+    text: "Un carré a des côtés de 3 cm.\nQuel est son périmètre ?",
+    format: "qcm",
+    choices: ["12 cm", "12 cm²", "9 cm²", "9 cm"],
+    expected: ["12 cm"],
+    comparator: "mcq_exact",
+    hint: "Le périmètre est une longueur : il s’écrit en cm, pas en cm².",
     explanation:
       "Définition : un périmètre mesure la longueur du contour d’une figure.\n\n" +
-      "Méthode : on repère tous les côtés du contour et on additionne les longueurs utiles.\n\n" +
+      "Méthode : on additionne les 4 côtés. C’est une longueur : l’unité est le cm.\n\n" +
       "Calcul : " +
-      ("Le périmètre mesure une longueur, donc il s’exprime en cm, m, etc. Les cm² servent à mesurer une aire, c’est-à-dire une surface.") +
-      "\n\nConclusion : on garde la réponse obtenue.",
+      ("4 × 3 = 12, donc 12 cm. Le cm² sert pour l’aire : 3 × 3 = 9 cm².") +
+      "\n\nConclusion : le périmètre est 12 cm.",
     tags: ["aire_perimetre", "defi", "raisonnement"],
   },
   {
@@ -1320,17 +1322,18 @@ export const perimetresBank: TutorBankItemV4[] = [
     microId: "aire_perimetre_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi un carré de côté 6 cm a un périmètre plus grand qu’un carré de côté 4 cm.",
+    // 08/10/2026 : question rendue précise (Frédéric).
+    text: "Carré A : côté 6 cm. Carré B : côté 4 cm.\nLe périmètre de A a combien de cm de plus que celui de B ?",
     format: "short",
-    expected: ["6", "4", "24", "16"],
-    comparator: "contains_keyword",
-    hint: "Compare 4 × 6 et 4 × 4.",
+    expected: ["8 cm"],
+    comparator: "number_equal",
+    hint: "Calcule 4 × 6 et 4 × 4.",
     explanation:
       "Définition : un périmètre mesure la longueur du contour d’une figure.\n\n" +
-      "Méthode : on repère tous les côtés du contour et on additionne les longueurs utiles.\n\n" +
+      "Méthode : périmètre d’un carré = 4 × côté. Puis on fait la différence.\n\n" +
       "Calcul : " +
-      ("Un carré de côté 6 cm a pour périmètre 4 × 6 = 24 cm. Un carré de côté 4 cm a pour périmètre 4 × 4 = 16 cm. Comme 24 est plus grand que 16, son périmètre est plus grand.") +
-      "\n\nConclusion : on garde la réponse obtenue.",
+      ("A : 4 × 6 = 24 cm. B : 4 × 4 = 16 cm. 24 − 16 = 8 cm.") +
+      "\n\nConclusion : le périmètre de A a 8 cm de plus.",
     tags: ["aire_perimetre", "defi", "raisonnement"],
   },
   {
