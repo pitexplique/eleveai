@@ -346,6 +346,7 @@ function corrigerTriErreur(q: Q): string[] {
   if (!b || !h || !s || !a) return ["base, hauteur, côté oblique ou aire annoncée illisibles"];
   const [bv, hv, sv] = [num(b[1]), num(h[1]), num(s[1])];
   if (sv <= hv) return ["le côté oblique devrait être plus long que la hauteur"];
+  if (/Vrai/.test(t)) return ["« Vrai ? » appelle vrai / faux, pas oui / non"];
   const juste = egal(a.v, (bv * hv) / 2) && a.u === `${b[2]}²` ? "oui" : "non";
   return [...(q.expected[0] === juste ? [] : [`attendu « ${q.expected[0]} », l'aire vaut ${(bv * hv) / 2}`]), ...qcmUnique(q, (c) => c === juste)];
 }
@@ -618,8 +619,12 @@ function corrigerAffirmationPara(q: Q): string[] {
   const a = mesures(t, AIRE)[0];
   if (!b || !h || !s || !a) return ["base, hauteur, côté ou aire annoncée illisibles"];
   if (s.v <= h.v) return ["le côté penché devrait être plus long que la hauteur"];
-  const juste = egal(a.v, b.v * h.v) && a.u === `${b.u}²` ? "oui" : "non";
-  return [...(q.expected[0] === juste ? [] : [`attendu « ${q.expected[0]} », l'aire vaut ${b.v * h.v}`]), ...qcmUnique(q, (c) => c === juste)];
+  const vrai = egal(a.v, b.v * h.v) && a.u === `${b.u}²`;
+  // « Vrai ou faux ? » se répond par vrai / faux ; les autres tournures par oui / non.
+  const vf = /Vrai ou faux/.test(t);
+  const juste = vf ? (vrai ? "vrai" : "faux") : vrai ? "oui" : "non";
+  const p = JSON.stringify([...(q.choices ?? [])].sort()) === JSON.stringify(vf ? ["faux", "vrai"] : ["non", "oui"]) ? [] : ["les propositions ne répondent pas à la question posée"];
+  return [...p, ...(q.expected[0] === juste ? [] : [`attendu « ${q.expected[0]} », l'aire vaut ${b.v * h.v}`]), ...qcmUnique(q, (c) => c === juste)];
 }
 
 const PRENOMS = ["Léa", "Hugo", "Inès", "Nathan", "Chloé", "Yanis", "Manon", "Lucas", "Sarah", "Tom", "Jade", "Adam"];

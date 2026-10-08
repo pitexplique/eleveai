@@ -1235,7 +1235,7 @@ function genTriErreur(): Q {
     text: randomChoice([
       `${p} calcule l’aire ${dUn(o)} triangulaire de base ${lg(b, u)}, de hauteur ${lg(h, u)}, dont un côté oblique mesure ${lg(s, u)}. ${cap(pr)} trouve ${ar(trouve, u)}. A-t-${pr} raison ?`,
       `${cap(un(o))} triangulaire a une base de ${lg(b, u)}, une hauteur de ${lg(h, u)} et un côté oblique de ${lg(s, u)}. ${p} annonce une aire de ${ar(trouve, u)}. Est-ce juste ?`,
-      `Base ${lg(b, u)}, hauteur ${lg(h, u)}, côté oblique ${lg(s, u)} : ${p} affirme que l’aire ${duN(o)} triangulaire vaut ${ar(trouve, u)}. Vrai ?`,
+      `Base ${lg(b, u)}, hauteur ${lg(h, u)}, côté oblique ${lg(s, u)} : ${p} affirme que l’aire ${duN(o)} triangulaire vaut ${ar(trouve, u)}. Est-ce exact ?`,
     ]),
     format: "qcm",
     choices: ["oui", "non"],
@@ -2161,16 +2161,19 @@ function genAffirmationPara(): Q {
   const juste = Math.random() < 0.3;
   const annonce = juste ? b * h : b * s;
   const [p, pr] = randomChoice(PRENOMS);
-  const correct = juste ? "oui" : "non";
+  // ⛔ 08/10/2026 : « Vrai ou faux ? » se répond par « vrai / faux », pas « oui / non ».
+  const tournure = randomInt(0, 3);
+  const vf = tournure === 3;
+  const correct = vf ? (juste ? "vrai" : "faux") : juste ? "oui" : "non";
   return {
-    text: randomChoice([
+    text: [
       `${p} affirme que l’aire ${dUn(o)} en forme de parallélogramme de base ${lg(b, u)}, de côté ${lg(s, u)} et de hauteur ${lg(h, u)} vaut ${ar(annonce, u)}. A-t-${pr} raison ?`,
       `${cap(un(o))} en forme de parallélogramme : base ${lg(b, u)}, côté penché ${lg(s, u)}, hauteur ${lg(h, u)}. ${p} annonce ${ar(annonce, u)}. Est-ce juste ?`,
       `Un parallélogramme a une base de ${lg(b, u)}, des côtés obliques de ${lg(s, u)} et une hauteur de ${lg(h, u)}. Son aire vaut-elle ${ar(annonce, u)} ?`,
       `Vrai ou faux ? « L’aire ${dUn(o)} en forme de parallélogramme (base ${lg(b, u)}, côté ${lg(s, u)}, hauteur ${lg(h, u)}) est ${ar(annonce, u)}. »`,
-    ]),
+    ][tournure],
     format: "qcm",
-    choices: ["oui", "non"],
+    choices: vf ? ["vrai", "faux"] : ["oui", "non"],
     expected: [correct],
     comparator: "mcq_exact",
     explanation:

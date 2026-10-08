@@ -1905,6 +1905,8 @@ function probCout(): Q {
   // Un prix s'écrit avec deux décimales : « 1,10 € », pas « 1,1 € ».
   const prixTxt = Number.isInteger(prix) ? M(prix) : `$${prix.toFixed(2).replace(".", "{,}")}$`;
   const Pm = u === "cm" ? P / 100 : P;
+  /** Un montant en LaTeX : entier tel quel, sinon deux décimales (« 91{,}20 »). */
+  const euros = (x: number) => (Number.isInteger(x) ? T(x) : x.toFixed(2).replace(".", "{,}"));
   // ⛔ 08/10/2026 : calcul en millièmes d'euro ENTIERS — en virgule flottante, 29,585 s'arrondissait à 29,58.
   const cout = Math.round(Math.round(Pm * prix * 1000) / 10) / 100;
   const p = randomChoice(PRENOMS);
@@ -1918,13 +1920,16 @@ function probCout(): Q {
   return {
     text: `${text}${Math.abs(Pm * prix - cout) > 1e-9 ? " Arrondis au centime." : ""}`,
     format: "short",
-    expected: rep(cout, "€"),
+    // ⛔ 08/10/2026 : un prix s'affiche avec deux chiffres après la virgule (« 91,20 € ») ; « 91,2 € » reste accepté.
+    expected: Number.isInteger(cout)
+      ? rep(cout, "€")
+      : [...new Set([`${cout.toFixed(2).replace(".", ",")} €`, `${cout.toFixed(2).replace(".", ",")} euros`, ...rep(cout, "€")])],
     comparator: "number_equal",
     explanation: E(
       "le prix dépend de la longueur à poser, c’est-à-dire du périmètre.",
       "on calcule le périmètre (en m, puisque le prix est donné au mètre), puis on le multiplie par le prix d’un mètre.",
-      `${calc}${conv} ; $${T(Pm)} \\times ${T(prix)} ${Math.abs(Pm * prix - cout) > 1e-9 ? "\\approx" : "="} ${T(cout)}$ €.`,
-      `la dépense est de ${M(cout)} €.`
+      `${calc}${conv} ; $${T(Pm)} \\times ${prixTxt.slice(1, -1)} ${Math.abs(Pm * prix - cout) > 1e-9 ? "\\approx" : "="} ${euros(cout)}$ €.`,
+      `la dépense est de $${euros(cout)}$ €.`
     ),
   };
 }

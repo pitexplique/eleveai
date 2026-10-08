@@ -557,6 +557,9 @@ function corrigerCout(q: Q): string[] {
   const cout = Math.round(Math.round(exact * 1000) / 10) / 100;
   const p: string[] = [];
   if (!egal(exact, cout) && !/Arrondis au centime/.test(t)) p.push("le coût ne tombe pas juste et l'énoncé ne dit pas d'arrondir");
+  // Un prix s'écrit avec deux chiffres après la virgule : « 5,70 € », « 91,20 € ».
+  if (/,\d$/.test(prix[1])) p.push(`prix « ${prix[1]} € » : il faut deux chiffres après la virgule`);
+  if (!Number.isInteger(cout) && !/^\d+,\d\d €$/.test(plat(q.expected[0]))) p.push(`montant affiché « ${q.expected[0]} » : il faut deux chiffres après la virgule`);
   return [...p, ...verifierMesure(q, cout, "€"), ...ditUnite(t, "€")];
 }
 
