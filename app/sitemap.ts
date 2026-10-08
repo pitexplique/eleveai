@@ -762,6 +762,16 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-10-05",
     },
   ],
+  "/fiches-cours/maths/5e/relatif-nombre": [
+    {
+      // 08/10/2026 : la première vidéo PARLÉE de 5e, les nombres relatifs.
+      id: "rhmbSQdLjXw",
+      title: "Les nombres relatifs — Maths 5e",
+      description:
+        "Lire un nombre relatif, le placer sur une droite graduée, comparer deux relatifs (le piège −7 et −4), l'opposé et la distance à zéro (5e).",
+      ajoutee: "2026-10-08",
+    },
+  ],
   "/fiches-cours/maths/6e/fraction-calcul": [
     {
       // 05/10/2026 : la vidéo PARLÉE du calcul avec les fractions.
