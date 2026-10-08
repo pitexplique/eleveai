@@ -301,10 +301,12 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_reconnaitre",
     difficulty: 1,
     theme: "neutral",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
     text: "Comment s’appelle le point commun aux deux côtés d’un angle ?",
-    format: "short",
-    expected: ["sommet", "le sommet"],
-    comparator: "contains_keyword",
+    format: "qcm",
+    choices: ["le sommet", "le milieu", "le centre", "le côté"],
+    expected: ["le sommet"],
+    comparator: "mcq_exact",
     hint: "C’est le point de départ des deux demi-droites.",
     explanation:
       "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
@@ -605,10 +607,12 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_comparer",
     difficulty: 2,
     theme: "neutral",
-    text: "Un angle de 45° est-il plus petit ou plus grand qu’un angle droit ?",
-    format: "short",
-    expected: ["plus petit", "petit"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
+    text: "Un angle mesure 45°. Comparé à un angle droit, il est :",
+    format: "qcm",
+    choices: ["plus petit", "égal", "plus grand"],
+    expected: ["plus petit"],
+    comparator: "mcq_exact",
     hint: "Un angle droit mesure 90°.",
     explanation:
       "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
@@ -627,10 +631,12 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_comparer",
     difficulty: 2,
     theme: "neutral",
-    text: "Un angle de 120° est-il plus petit ou plus grand qu’un angle droit ?",
-    format: "short",
-    expected: ["plus grand", "grand"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
+    text: "Un angle mesure 120°. Comparé à un angle droit, il est :",
+    format: "qcm",
+    choices: ["plus petit", "égal", "plus grand"],
+    expected: ["plus grand"],
+    comparator: "mcq_exact",
     hint: "Compare 120° à 90°.",
     explanation:
       "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
@@ -801,10 +807,12 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_mesurer",
     difficulty: 1,
     theme: "neutral",
-    text: "Avec quel instrument mesure-t-on un angle ?",
-    format: "short",
-    expected: ["rapporteur", "un rapporteur"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
+    text: "Avec quel instrument mesure-t-on un angle en degrés ?",
+    format: "qcm",
+    choices: ["l’équerre", "le rapporteur", "le compas", "la règle graduée"],
+    expected: ["le rapporteur"],
+    comparator: "mcq_exact",
     hint: "C’est l’instrument gradué utilisé en géométrie.",
     explanation:
       "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
@@ -897,10 +905,12 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_tracer",
     difficulty: 2,
     theme: "neutral",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
     text: "Quel instrument est le plus utile pour tracer un angle de 40° ?",
-    format: "short",
-    expected: ["rapporteur", "un rapporteur"],
-    comparator: "contains_keyword",
+    format: "qcm",
+    choices: ["le compas", "l’équerre", "le rapporteur", "la règle graduée"],
+    expected: ["le rapporteur"],
+    comparator: "mcq_exact",
     hint: "C’est le même instrument que pour mesurer un angle.",
     explanation:
       "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
@@ -919,10 +929,12 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_tracer",
     difficulty: 2,
     theme: "neutral",
-    text: "Pour tracer un angle, il faut d’abord placer : le sommet ou les graduations ?",
-    format: "short",
-    expected: ["sommet", "le sommet"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
+    text: "Pour tracer un angle, que place-t-on en premier ?",
+    format: "qcm",
+    choices: ["le sommet", "les graduations", "le 2e côté"],
+    expected: ["le sommet"],
+    comparator: "mcq_exact",
     hint: "Les deux côtés partent de ce point.",
     explanation:
       "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
@@ -996,10 +1008,12 @@ export const anglesBank: TutorBankItemV4[] = [
     microId: "angle_defi",
     difficulty: 3,
     theme: "neutral",
-    text: "Un angle de 90° est-il plus petit, égal ou plus grand qu’un angle droit ?",
-    format: "short",
-    expected: ["égal", "egal"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
+    text: "Un angle mesure 90°. Comparé à un angle droit, il est :",
+    format: "qcm",
+    choices: ["plus petit", "égal", "plus grand"],
+    expected: ["égal"],
+    comparator: "mcq_exact",
     hint: "Un angle droit mesure 90°.",
     explanation:
       "Définition : un angle mesure l’ouverture entre deux demi-droites.\n\n" +
@@ -1928,8 +1942,10 @@ export const anglesBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "angle_tracer_topup_1", niveau: "6e", matiere: "maths",
     notionId: "angle_mesure", microId: "angle_tracer", difficulty: 1, theme: "neutral",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
     text: "Quel instrument utilise-t-on pour tracer précisément un angle de 60° ?",
-    format: "short", expected: ["rapporteur", "un rapporteur"], comparator: "contains_keyword",
+    format: "qcm", choices: ["l’équerre", "le compas", "la règle graduée", "le rapporteur"],
+    expected: ["le rapporteur"], comparator: "mcq_exact",
     hint: "Le même que pour mesurer un angle.",
     explanation: expl("Pour tracer précisément un angle de 60°, on utilise un rapporteur, gradué en degrés."),
     tags: ["angle_mesure", "tracer", "instrument"],

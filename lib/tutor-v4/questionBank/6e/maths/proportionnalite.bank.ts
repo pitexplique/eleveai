@@ -262,16 +262,18 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_reconnaitre",
     difficulty: 1,
     theme: "neutral",
-    text: "Si 1 cahier coûte toujours le même prix, la situation est-elle proportionnelle ?",
-    format: "short",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
+    text: "Un cahier coûte 2 €. Le prix payé est-il proportionnel au nombre de cahiers ?",
+    format: "qcm",
+    choices: ["oui", "non"],
     expected: ["oui"],
-    comparator: "contains_keyword",
-    hint: "Quand le prix unitaire reste constant, c’est proportionnel.",
+    comparator: "mcq_exact",
+    hint: "Combien coûtent 2 cahiers ? 3 cahiers ?",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
       "Méthode : on cherche le coefficient de proportionnalité ou le passage entre les grandeurs.\n\n" +
       "Calcul : " +
-      ("Une situation est proportionnelle quand le prix par objet reste le même. Si 1 cahier coûte toujours le même prix, alors la situation est proportionnelle.") +
+      ("1 cahier coûte 2 €, 2 cahiers coûtent 4 €, 3 cahiers coûtent 6 €. On multiplie toujours le nombre de cahiers par 2. La situation est proportionnelle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["prop_proportionnalite", "reconnaitre"],
   },
@@ -284,10 +286,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_reconnaitre",
     difficulty: 1,
     theme: "neutral",
-    text: "Si 2 pommes coûtent 4 € et 4 pommes coûtent 8 €, la situation est-elle proportionnelle ?",
-    format: "short",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
+    text: "2 pommes coûtent 4 €. 4 pommes coûtent 8 €. Le prix est-il proportionnel au nombre de pommes ?",
+    format: "qcm",
+    choices: ["oui", "non"],
     expected: ["oui"],
-    comparator: "contains_keyword",
+    comparator: "mcq_exact",
     hint: "Quand on double la quantité, le prix double aussi.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
@@ -306,10 +310,12 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
     microId: "prop_reconnaitre",
     difficulty: 2,
     theme: "neutral",
-    text: "Si 2 billets coûtent 6 € mais 4 billets coûtent 11 €, la situation est-elle proportionnelle ?",
-    format: "short",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
+    text: "2 billets coûtent 6 €. 4 billets coûtent 11 €. Le prix est-il proportionnel au nombre de billets ?",
+    format: "qcm",
+    choices: ["oui", "non"],
     expected: ["non"],
-    comparator: "contains_keyword",
+    comparator: "mcq_exact",
     hint: "Si on double la quantité, le prix devrait aussi doubler.",
     explanation:
       "Définition : deux grandeurs sont proportionnelles quand on multiplie toujours par le même nombre.\n\n" +
@@ -1003,14 +1009,15 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
       const r = deuxReleves([2, 3, 4, 5]);
       return {
         text: `${r.text} ${randomChoice([
-          "Est-ce une situation de proportionnalité ? Réponds par oui ou non.",
-          "Ces deux relevés sont-ils proportionnels ? Réponds par oui ou non.",
-          "Peut-on dire que c’est proportionnel ? Réponds par oui ou non.",
-          "Oui ou non : la valeur est-elle proportionnelle à la quantité ?",
+          "Est-ce une situation de proportionnalité ?",
+          "Ces deux relevés sont-ils proportionnels ?",
+          "Est-ce proportionnel ?",
         ])}`,
-        format: "short",
+        // 08/10/2026 : précise et corrigée strictement (Frédéric) — QCM oui / non.
+        format: "qcm",
+        choices: ["oui", "non"],
         expected: [r.prop ? "oui" : "non"],
-        comparator: "contains_keyword",
+        comparator: "mcq_exact",
         explanation: expl(r.explication),
       };
     },
@@ -1503,8 +1510,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "prop_reconnaitre_topup_1", niveau: "6e", matiere: "maths",
     notionId: "prop_proportionnalite", microId: "prop_reconnaitre", difficulty: 2, theme: "neutral",
-    text: "Si 3 kg de fruits coûtent 9 € et 6 kg coûtent 18 €, la situation est-elle proportionnelle ?",
-    format: "short", expected: ["oui"], comparator: "contains_keyword",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
+    text: "3 kg de fruits coûtent 9 €. 6 kg coûtent 18 €. Le prix est-il proportionnel à la masse ?",
+    format: "qcm", choices: ["oui", "non"], expected: ["oui"], comparator: "mcq_exact",
     hint: "Quand on double la quantité, le prix double aussi.",
     explanation: expl("On passe de 3 kg à 6 kg en multipliant par 2 ; le prix passe de 9 € à 18 € en multipliant aussi par 2. La situation est proportionnelle."),
     tags: ["prop_proportionnalite", "reconnaitre"],
@@ -1521,8 +1529,9 @@ export const proportionnaliteBank: TutorBankItemV4[] = [
   {
     kind: "fixed", id: "prop_reconnaitre_topup_3", niveau: "6e", matiere: "maths",
     notionId: "prop_proportionnalite", microId: "prop_reconnaitre", difficulty: 2, theme: "neutral",
-    text: "Un tableau indique : 1 → 5, 2 → 10, 3 → 15. Cette situation est-elle proportionnelle ?",
-    format: "short", expected: ["oui"], comparator: "contains_keyword",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
+    text: "Un tableau indique : 1 → 5, 2 → 10, 3 → 15. Est-ce une situation de proportionnalité ?",
+    format: "qcm", choices: ["oui", "non"], expected: ["oui"], comparator: "mcq_exact",
     hint: "Cherche si on multiplie toujours par le même nombre.",
     explanation: expl("On passe de chaque nombre du haut à celui du bas en multipliant par 5 (1×5=5, 2×5=10, 3×5=15). C’est donc une situation proportionnelle, de coefficient 5."),
     tags: ["prop_proportionnalite", "reconnaitre", "tableau"],

@@ -1231,8 +1231,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Comment nomme-t-on un triangle qui a pour sommets A, B et C ?",
     format: "short",
-    expected: ["triangle abc", "abc", "ABC"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric). L’ordre des lettres est libre.
+    expected: ["ABC", "ACB", "BAC", "BCA", "CAB", "CBA", "triangle ABC", "triangle ACB", "triangle BAC", "triangle BCA", "triangle CAB", "triangle CBA"],
+    comparator: "exact_text",
     hint: "On écrit souvent : triangle ABC.",
     explanation:
       "Définition : un triangle est un polygone qui possède 3 côtés.\n\n" +
@@ -1265,8 +1266,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un triangle a pour sommets D, E et F. Comment peut-on le nommer ?",
     format: "short",
-    expected: ["triangle def", "def", "DEF"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric). L’ordre des lettres est libre.
+    expected: ["DEF", "DFE", "EDF", "EFD", "FDE", "FED", "triangle DEF", "triangle DFE", "triangle EDF", "triangle EFD", "triangle FDE", "triangle FED"],
+    comparator: "exact_text",
     hint: "On écrit les trois sommets dans l’ordre : triangle DEF.",
     explanation:
       "Définition : un triangle est un polygone qui possède 3 côtés.\n\n" +
@@ -1524,10 +1526,12 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_type_cote",
     difficulty: 1,
     theme: "neutral",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
     text: "Un triangle a deux côtés de même longueur. Quel est son type ?",
-    format: "short",
-    expected: ["isocèle", "isocele"],
-    comparator: "contains_keyword",
+    format: "qcm",
+    choices: ["isocèle", "équilatéral", "rectangle", "quelconque"],
+    expected: ["isocèle"],
+    comparator: "mcq_exact",
     hint: "Deux côtés égaux → triangle isocèle.",
     explanation:
       "Définition : un triangle est un polygone qui possède 3 côtés.\n\n" +
@@ -1546,10 +1550,12 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_type_cote",
     difficulty: 1,
     theme: "neutral",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
     text: "Un triangle a trois côtés de même longueur. Quel est son type ?",
-    format: "short",
-    expected: ["équilatéral", "equilateral"],
-    comparator: "contains_keyword",
+    format: "qcm",
+    choices: ["isocèle", "équilatéral", "rectangle", "quelconque"],
+    expected: ["équilatéral"],
+    comparator: "mcq_exact",
     hint: "Trois côtés égaux → triangle équilatéral.",
     explanation:
       "Définition : un triangle est un polygone qui possède 3 côtés.\n\n" +
@@ -1697,10 +1703,12 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_type_angle",
     difficulty: 1,
     theme: "neutral",
-    text: "Un triangle possède un angle droit. Quel est son type ?",
-    format: "short",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
+    text: "Un triangle a un angle droit. Quel est son type ?",
+    format: "qcm",
+    choices: ["isocèle", "équilatéral", "rectangle", "quelconque"],
     expected: ["rectangle"],
-    comparator: "contains_keyword",
+    comparator: "mcq_exact",
     hint: "Un angle droit → triangle rectangle.",
     explanation:
       "Définition : un triangle est un polygone qui possède 3 côtés.\n\n" +
@@ -1719,10 +1727,12 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_type_angle",
     difficulty: 1,
     theme: "neutral",
-    text: "Un triangle a un angle supérieur à 90°. Quel est son type ?",
-    format: "short",
-    expected: ["obtus"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
+    text: "Un triangle a un angle de plus de 90°. Quel est son type ?",
+    format: "qcm",
+    choices: ["rectangle", "obtusangle", "équilatéral", "isocèle"],
+    expected: ["obtusangle"],
+    comparator: "mcq_exact",
     hint: "Un angle > 90° → triangle obtusangle.",
     explanation:
       "Définition : un triangle est un polygone qui possède 3 côtés.\n\n" +
@@ -2027,11 +2037,13 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_possible_ou_non",
     difficulty: 3,
     theme: "neutral",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
     text: "Peut-on construire un triangle de côtés 2 cm, 3 cm et 6 cm ?",
-    format: "short",
+    format: "qcm",
+    choices: ["oui", "non"],
     expected: ["non"],
-    comparator: "contains_keyword",
-    hint: "2 + 3 < 6, donc ce n’est pas possible.",
+    comparator: "mcq_exact",
+    hint: "Calcule 2 + 3 et compare avec 6.",
     explanation:
       "Définition : un triangle est un polygone qui possède 3 côtés.\n\n" +
       "Méthode : on observe les côtés, les sommets et les angles du triangle.\n\n" +
@@ -2165,16 +2177,18 @@ export const trianglesBank: TutorBankItemV4[] = [
     microId: "triangle_defi",
     difficulty: 1,
     theme: "neutral",
-    text: "Un triangle a deux côtés égaux. Quel est son type ?",
-    format: "short",
-    expected: ["isocèle", "isocele"],
-    comparator: "contains_keyword",
-    hint: "Deux côtés égaux → triangle isocèle.",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric). Texte varié : doublon de triangle_type_cote_fixed_1.
+    text: "Dans le triangle ABC, AB = 5 cm, AC = 5 cm et BC = 3 cm. Quel est son type ?",
+    format: "qcm",
+    choices: ["isocèle", "équilatéral", "rectangle", "quelconque"],
+    expected: ["isocèle"],
+    comparator: "mcq_exact",
+    hint: "Combien de côtés ont la même longueur ?",
     explanation:
       "Définition : un triangle est un polygone qui possède 3 côtés.\n\n" +
       "Méthode : on observe les côtés, les sommets et les angles du triangle.\n\n" +
       "Calcul : " +
-      ("Un triangle qui a deux côtés égaux est un triangle isocèle.") +
+      ("AB = AC = 5 cm : deux côtés ont la même longueur. Un triangle qui a deux côtés égaux est un triangle isocèle.") +
       "\n\nConclusion : on garde la réponse obtenue.",
     tags: ["triangle_figure", "defi", "types"],
   },
@@ -2584,8 +2598,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     difficulty: 1, theme: "neutral",
     text: "Un triangle a pour sommets K, L et M. Comment peut-on le nommer ?",
     format: "short",
-    expected: ["triangle klm", "klm", "KLM"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric). L’ordre des lettres est libre.
+    expected: ["KLM", "KML", "LKM", "LMK", "MKL", "MLK", "triangle KLM", "triangle KML", "triangle LKM", "triangle LMK", "triangle MKL", "triangle MLK"],
+    comparator: "exact_text",
     hint: "On écrit les trois sommets : triangle KLM.",
     explanation: expl("On nomme un triangle avec ses trois sommets : triangle KLM."),
     tags: ["triangle_figure", "nommage"],
@@ -2598,8 +2613,9 @@ export const trianglesBank: TutorBankItemV4[] = [
     difficulty: 1, theme: "neutral",
     text: "Un triangle a pour sommets R, S et T. Comment peut-on le nommer ?",
     format: "short",
-    expected: ["triangle rst", "rst", "RST"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric). L’ordre des lettres est libre.
+    expected: ["RST", "RTS", "SRT", "STR", "TRS", "TSR", "triangle RST", "triangle RTS", "triangle SRT", "triangle STR", "triangle TRS", "triangle TSR"],
+    comparator: "exact_text",
     hint: "On écrit les trois sommets : triangle RST.",
     explanation: expl("On nomme un triangle avec ses trois sommets : triangle RST."),
     tags: ["triangle_figure", "nommage"],
@@ -3086,10 +3102,12 @@ export const trianglesBank: TutorBankItemV4[] = [
     niveau: "6e", matiere: "maths",
     notionId: "triangle_propriete", microId: "triangle_possible_ou_non",
     difficulty: 2, theme: "neutral",
-    text: "Peut-on construire un triangle de côtés 6 cm, 8 cm et 10 cm ? Réponds par oui ou non.",
-    format: "short",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
+    text: "Peut-on construire un triangle de côtés 6 cm, 8 cm et 10 cm ?",
+    format: "qcm",
+    choices: ["oui", "non"],
     expected: ["oui"],
-    comparator: "contains_keyword",
+    comparator: "mcq_exact",
     hint: "6 + 8 > 10.",
     explanation: expl("La somme de deux côtés (6 + 8 = 14) est plus grande que le troisième (10). Le triangle est possible."),
     tags: ["triangle_figure", "construction"],

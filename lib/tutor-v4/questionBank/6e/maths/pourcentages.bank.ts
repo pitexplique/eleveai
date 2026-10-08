@@ -257,10 +257,12 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     microId: "pourcentage_comprendre",
     difficulty: 1,
     theme: "neutral",
-    text: "Que signifie 25 % ?",
-    format: "short",
-    expected: ["25 sur 100", "25/100", "25 / 100"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
+    text: "25 % veut dire :",
+    format: "qcm",
+    choices: ["25 sur 100", "25 sur 10", "25 sur 25", "100 sur 25"],
+    expected: ["25 sur 100"],
+    comparator: "mcq_exact",
     hint: "Le symbole % veut dire “sur 100”.",
     explanation:
       "Définition : un pourcentage exprime une proportion sur 100.\n\n" +
@@ -279,10 +281,12 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     microId: "pourcentage_comprendre",
     difficulty: 1,
     theme: "neutral",
-    text: "Sur une affiche, on lit « 50 % ». Que veut dire 50 % ?",
-    format: "short",
-    expected: ["50 sur 100", "50/100", "50 / 100", "la moitié", "moitié"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
+    text: "Sur une affiche, on lit « 50 % ». 50 %, c’est :",
+    format: "qcm",
+    choices: ["la moitié", "le quart", "le tiers", "le double"],
+    expected: ["la moitié"],
+    comparator: "mcq_exact",
     hint: "50 %, c’est 50 sur 100.",
     explanation:
       "Définition : un pourcentage exprime une proportion sur 100.\n\n" +
@@ -301,10 +305,11 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     microId: "pourcentage_comprendre",
     difficulty: 1,
     theme: "neutral",
-    text: "Écris « 10 % » avec le mot « sur ».",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
+    text: "Écris 10 % sous la forme d’une fraction sur 100.",
     format: "short",
-    expected: ["10 sur 100", "10/100", "10 / 100"],
-    comparator: "contains_keyword",
+    expected: ["10/100", "10 sur 100"],
+    comparator: "exact_text",
     hint: "Un pourcentage se lit toujours “sur 100”.",
     explanation:
       "Définition : un pourcentage exprime une proportion sur 100.\n\n" +
@@ -969,10 +974,12 @@ export const pourcentagesBank: TutorBankItemV4[] = [
     microId: "pourcentage_defi",
     difficulty: 3,
     theme: "neutral",
-    text: "Parmi 100 élèves, 25 % font du basket et 50 % font du football. Quel sport est le plus pratiqué ?",
-    format: "short",
-    expected: ["football"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : précise et corrigée strictement (Frédéric).
+    text: "Dans un collège, 25 % des élèves font du basket et 50 % font du football. Quel sport est le plus pratiqué ?",
+    format: "qcm",
+    choices: ["le basket", "le football", "les deux autant"],
+    expected: ["le football"],
+    comparator: "mcq_exact",
     hint: "Compare 25 % et 50 %.",
     explanation:
       "Définition : un pourcentage exprime une proportion sur 100.\n\n" +
