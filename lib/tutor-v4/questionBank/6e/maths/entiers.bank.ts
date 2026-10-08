@@ -1145,10 +1145,12 @@ export const entiersBank: TutorBankItemV4[] = [
     microId: "entier_decomposer",
     difficulty: 1,
     theme: "neutral",
-    text: "Décompose 352 en centaines, dizaines et unités.",
+    // 08/10/2026 (Frédéric : « précises et simples ») : « Décompose 352 » en
+    // contains_keyword acceptait « 2 » tout seul. Une question, un nombre.
+    text: "Dans 352, que vaut le chiffre 5 ?",
     format: "short",
-    expected: ["300", "50", "2"],
-    comparator: "contains_keyword",
+    expected: ["50"],
+    comparator: "number_equal",
     hint: "3 centaines, 5 dizaines, 2 unités.",
     explanation:
       "Définition : un nombre entier sert à compter ou à ranger des quantités.\n\n" +
@@ -1167,10 +1169,10 @@ export const entiersBank: TutorBankItemV4[] = [
     microId: "entier_decomposer",
     difficulty: 2,
     theme: "neutral",
-    text: "Décompose 4 206.",
+    text: "Complète : 4 206 = 4 000 + … + 6",
     format: "short",
-    expected: ["4000", "200", "6"],
-    comparator: "contains_keyword",
+    expected: ["200"],
+    comparator: "number_equal",
     hint: "4 milliers, 2 centaines, 0 dizaine, 6 unités.",
     explanation:
       "Définition : un nombre entier sert à compter ou à ranger des quantités.\n\n" +
@@ -1239,10 +1241,11 @@ export const entiersBank: TutorBankItemV4[] = [
     microId: "entier_encadrer",
     difficulty: 2,
     theme: "neutral",
-    text: "Encadre 47 entre deux dizaines consécutives.",
+    // 08/10/2026 : « Encadre 47 » en contains_keyword acceptait « 40 » seul.
+    text: "Complète avec la dizaine qui suit : 40 < 47 < …",
     format: "short",
-    expected: ["40", "50"],
-    comparator: "contains_keyword",
+    expected: ["50"],
+    comparator: "number_equal",
     hint: "47 est entre 40 et 50.",
     explanation:
       "Définition : un nombre entier sert à compter ou à ranger des quantités.\n\n" +
@@ -1261,10 +1264,10 @@ export const entiersBank: TutorBankItemV4[] = [
     microId: "entier_encadrer",
     difficulty: 2,
     theme: "neutral",
-    text: "Encadre 326 entre deux centaines consécutives.",
+    text: "Complète avec la centaine juste avant : … < 326 < 400",
     format: "short",
-    expected: ["300", "400"],
-    comparator: "contains_keyword",
+    expected: ["300"],
+    comparator: "number_equal",
     hint: "326 est entre 300 et 400.",
     explanation:
       "Définition : un nombre entier sert à compter ou à ranger des quantités.\n\n" +

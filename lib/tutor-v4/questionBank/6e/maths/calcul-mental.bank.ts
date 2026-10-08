@@ -1094,8 +1094,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "À la boulangerie, Léa achète une tarte à 5 €, un jus à 3 € ainsi qu’un gâteau à 26 €. Combien Léa va-t-elle payer en tout ?",
     format: "short",
-    expected: ["34", "34 €", "34€"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : correction stricte (contains_keyword acceptait 134 pour 34). « 34 € » passe (unité).
+    expected: ["34", "34 €", "34 euros"],
+    comparator: "number_equal",
     hint: "Additionne 5 + 3 + 26.",
     explanation:
       "Définition : le calcul mental permet de trouver un résultat sans poser l’opération.\n\n" +
@@ -1160,8 +1161,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un spectacle commence à 15 h 35 et dure 1 heure et 25 minutes. À quelle heure se termine-t-il ?",
     format: "short",
-    expected: ["17 h 00", "17h00", "17:00", "17 h"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : correction stricte (contains_keyword acceptait « 17 h 45 » pour 17 h).
+    expected: ["17 h 00", "17:00", "17 h", "17 heures", "17 h 00 min", "17 heures 00"],
+    comparator: "exact_text",
     hint: "Ajoute 1 heure puis 25 minutes.",
     explanation:
       "Définition : le calcul mental permet de trouver un résultat sans poser l’opération.\n\n" +

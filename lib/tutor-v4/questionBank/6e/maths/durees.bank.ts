@@ -793,8 +793,9 @@ export const dureesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Une séance de cinéma commence à 17 h 40 et dure 110 minutes. À quelle heure se termine-t-elle ?",
     format: "short",
-    expected: ["19 h 30", "19h30", "19:30", "19h 30"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : correction stricte (contains_keyword acceptait 155 pour 55). Espaces ignorés.
+    expected: ["19 h 30", "19:30", "19 h 30 min", "19 heures 30", "19 heures 30 minutes"],
+    comparator: "exact_text",
     hint: "Commence par écrire 110 minutes en heures et minutes.",
     explanation: expl(
       "110 min = 60 min + 50 min = 1 h 50 min. On avance d'abord jusqu'à l'heure ronde : de 17 h 40 à 18 h, il y a 20 min. Il reste 1 h 30 min à ajouter : 18 h + 1 h 30 = 19 h 30."
@@ -816,8 +817,9 @@ export const dureesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un cours commence à 8 h 15 et se termine à 9 h 10. Combien de temps dure-t-il ?",
     format: "short",
-    expected: ["55 min", "55 minutes", "55"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : correction stricte (contains_keyword acceptait 155 pour 55). « 55 » seul passe (unité omise).
+    expected: ["55 min", "55 minutes", "55 mn"],
+    comparator: "exact_text",
     hint: "Passe par 9 h : de 8 h 15 à 9 h, puis de 9 h à 9 h 10.",
     explanation: expl(
       "De 8 h 15 à 9 h, il y a 45 min. De 9 h à 9 h 10, il y a 10 min. La durée du cours est 45 + 10 = 55 min."
@@ -836,8 +838,9 @@ export const dureesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un train part à 14 h 25 et arrive à 16 h 05. Quelle est la durée du trajet ?",
     format: "short",
-    expected: ["1 h 40", "1h40", "100 min", "100 minutes"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : correction stricte (contains_keyword acceptait 155 pour 55).
+    expected: ["1 h 40", "1 h 40 min", "1 heure 40", "1 heure 40 minutes", "1 h 40 minutes", "100 min", "100 minutes"],
+    comparator: "exact_text",
     hint: "De 14 h 25 à 16 h 25, il y a 2 h — c'est trop de 20 minutes.",
     explanation: expl(
       "De 14 h 25 à 15 h, il y a 35 min. De 15 h à 16 h, il y a 1 h. De 16 h à 16 h 05, il y a 5 min. Total : 35 min + 1 h + 5 min = 1 h 40 min."
@@ -855,8 +858,9 @@ export const dureesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un film se termine à 22 h 10. Il a duré 1 h 55. À quelle heure a-t-il commencé ?",
     format: "short",
-    expected: ["20 h 15", "20h15", "20:15"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : correction stricte (contains_keyword acceptait 155 pour 55).
+    expected: ["20 h 15", "20:15", "20 h 15 min", "20 heures 15", "20 heures 15 minutes"],
+    comparator: "exact_text",
     hint: "On recule : d'abord 1 h, puis 55 min.",
     explanation: expl(
       "On recule de 1 h : 22 h 10 − 1 h = 21 h 10. Puis de 55 min : de 21 h 10 on recule 10 min jusqu'à 21 h, puis encore 45 min, ce qui donne 20 h 15."
@@ -899,8 +903,9 @@ export const dureesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Il est 17 h 22. Lis l'affichage et donne l'heure qu'il sera dans 50 minutes.",
     format: "short",
-    expected: ["18 h 12", "18h12", "18:12"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : correction stricte (contains_keyword acceptait 155 pour 55).
+    expected: ["18 h 12", "18:12", "18 h 12 min", "18 heures 12", "18 heures 12 minutes"],
+    comparator: "exact_text",
     hint: "De 17 h 22 à 18 h, il y a 38 minutes.",
     explanation: expl(
       "De 17 h 22 à 18 h, il y a 38 min. Il reste 50 − 38 = 12 min à ajouter après 18 h : il sera 18 h 12."
@@ -1024,8 +1029,9 @@ export const dureesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Écris 150 minutes en heures et minutes.",
     format: "short",
-    expected: ["2 h 30", "2h30", "2 h 30 min"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : correction stricte (contains_keyword acceptait 155 pour 55).
+    expected: ["2 h 30", "2 h 30 min", "2 h 30 minutes", "2 heures 30", "2 heures 30 minutes"],
+    comparator: "exact_text",
     hint: "Combien de fois 60 tient-il dans 150 ?",
     explanation: expl(
       "150 ÷ 60 = 2 et il reste 30, car 2 × 60 = 120 et 150 − 120 = 30. Donc 150 min = 2 h 30 min."
@@ -1042,9 +1048,12 @@ export const dureesBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     text: "Combien font 34 990 secondes en heures, minutes et secondes ?",
-    format: "short",
-    expected: ["9 h 43 min 10 s", "9 h 43 min 10", "9h43min10s", "9 h 43 10"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : correction stricte (contains_keyword acceptait 155 pour 55) ; trois unités
+    // en saisie libre, c'est fragile : QCM. Leurres : base 100 partout, base 100 sur le reste.
+    format: "qcm",
+    choices: ["9 h 43 min 10 s", "3 h 49 min 90 s", "9 h 25 min 90 s"],
+    expected: ["9 h 43 min 10 s"],
+    comparator: "mcq_exact",
     hint: "Une heure vaut 3 600 secondes.",
     explanation: expl(
       "34 990 ÷ 3 600 = 9, car 9 × 3 600 = 32 400, et il reste 34 990 − 32 400 = 2 590 s. Puis 2 590 ÷ 60 = 43, car 43 × 60 = 2 580, et il reste 10 s. Donc 34 990 s = 9 h 43 min 10 s."
@@ -1061,9 +1070,12 @@ export const dureesBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     text: "Combien font 609 heures en semaines, jours et heures ?",
-    format: "short",
-    expected: ["3 semaines 4 jours 9 heures", "3 semaines, 4 jours et 9 heures", "3 4 9"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : correction stricte (contains_keyword acceptait 155 pour 55) ; trois unités
+    // en saisie libre, c'est fragile : QCM. Leurres : base 100 (6|09), jours pris pour des semaines.
+    format: "qcm",
+    choices: ["3 semaines 4 jours 9 h", "6 jours 9 h", "25 semaines 9 h"],
+    expected: ["3 semaines 4 jours 9 h"],
+    comparator: "mcq_exact",
     hint: "Un jour vaut 24 h, une semaine 7 jours.",
     explanation: expl(
       "609 ÷ 24 = 25 jours et il reste 9 h (25 × 24 = 600). Puis 25 ÷ 7 = 3 semaines et il reste 4 jours (3 × 7 = 21). Donc 609 h = 3 semaines, 4 jours et 9 heures."
@@ -1420,8 +1432,10 @@ export const dureesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un élève a 26 heures de cours par semaine, en séances de 55 minutes. Quelle est la durée hebdomadaire réelle de ses cours, en heures et minutes ?",
     format: "short",
-    expected: ["23 h 50", "23h50", "1430 min"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : correction stricte (contains_keyword acceptait 155 pour 55). On demande
+    // « en heures et minutes » : 1 430 min n'est plus acceptée.
+    expected: ["23 h 50", "23 h 50 min", "23 h 50 minutes", "23 heures 50", "23 heures 50 minutes"],
+    comparator: "exact_text",
     hint: "26 séances de 55 minutes, puis on convertit.",
     explanation: expl(
       "26 × 55 = 1 430 minutes. Puis 1 430 ÷ 60 = 23 et il reste 50 (23 × 60 = 1 380). La durée réelle est 23 h 50 min — soit un peu plus de 2 heures de moins que les « 26 heures » annoncées."
@@ -1469,8 +1483,9 @@ export const dureesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un réveil sonne à 6 h 30. On appuie trois fois sur « répéter », qui décale la sonnerie de 9 minutes à chaque fois. À quelle heure sonne-t-il pour de bon ?",
     format: "short",
-    expected: ["6 h 57", "6h57"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : correction stricte (contains_keyword acceptait 155 pour 55).
+    expected: ["6 h 57", "06 h 57", "6:57", "06:57", "6 h 57 min", "6 heures 57", "6 heures 57 minutes"],
+    comparator: "exact_text",
     hint: "Trois fois neuf minutes.",
     explanation: expl("3 × 9 = 27 minutes. 6 h 30 + 27 min = 6 h 57."),
     tags: ["duree_temps", "defi", "short"],
@@ -1486,8 +1501,9 @@ export const dureesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un film commence à 23 h 20 et dure 1 h 50. À quelle heure se termine-t-il ?",
     format: "short",
-    expected: ["1 h 10", "1h10", "01:10"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : correction stricte (contains_keyword acceptait « 11 h 10 » pour 1 h 10).
+    expected: ["1 h 10", "01 h 10", "1:10", "01:10", "1 h 10 min", "1 heure 10", "1 h 10 du matin"],
+    comparator: "exact_text",
     hint: "Attention : on passe minuit.",
     explanation: expl(
       "De 23 h 20 à minuit, il y a 40 min. Il reste 1 h 50 − 40 min = 1 h 10 après minuit. Le film se termine à 1 h 10 du matin, le lendemain."
