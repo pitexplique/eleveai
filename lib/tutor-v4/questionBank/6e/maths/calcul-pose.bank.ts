@@ -284,6 +284,11 @@ function genAdditionDecimaux() {
   return { text: formePose(`${nb(a)} + ${nb(b)}`), format: "short" as const, expected: attendus(s), comparator: "number_equal" as const, explanation: explication, canvas: canvasPose("addition", a, b) };
 }
 
+/** Leurres sans doublon : 788 − 394 = 394 rendait « a + b = r » et « a + r = b » identiques (08/10/2026). */
+function distincts(good: string, pieges: string[]) {
+  return [...new Set(pieges)].filter((x) => x !== good);
+}
+
 /** « Quelle addition vérifie a − b = r ? » : une seule égalité vraie parmi les propositions. */
 function genVerifierSoustraction(a: number, b: number) {
   const r = a - b;
@@ -305,7 +310,7 @@ function genVerifierSoustraction(a: number, b: number) {
       `Vérifie la soustraction ${e} avec l’opération inverse.\nQuelle égalité choisis-tu ?`,
     ]),
     format: "qcm" as const,
-    choices: shuffle([good, ...shuffle(pieges).slice(0, 3)]),
+    choices: shuffle([good, ...shuffle(distincts(good, pieges)).slice(0, 3)]),
     expected: [good],
     comparator: "mcq_exact" as const,
     explanation: cpe(
@@ -488,7 +493,7 @@ function genVerifierInverse(grand: boolean) {
     const r = a - b;
     e = `${nb(a)} − ${nb(b)} = ${nb(r)}`;
     good = `${nb(r)} + ${nb(b)} = ${nb(a)}`;
-    pieges = [`${nb(a)} + ${nb(b)} = ${nb(r)}`, `${nb(r)} − ${nb(b)} = ${nb(a)}`, `${nb(a)} + ${nb(r)} = ${nb(b)}`];
+    pieges = [`${nb(a)} + ${nb(b)} = ${nb(r)}`, `${nb(r)} − ${nb(b)} = ${nb(a)}`, `${nb(a)} + ${nb(r)} = ${nb(b)}`, `${nb(b)} − ${nb(r)} = ${nb(a)}`];
     canvas = canvasPose("soustraction", a, b);
   } else if (op === "multiplication") {
     const a = randomInt(grand ? 120 : 21, grand ? 999 : 99);
@@ -519,7 +524,7 @@ function genVerifierInverse(grand: boolean) {
       `Le professeur demande à ${p.nom} de vérifier ${e}.\nQuelle égalité doit-${il(p)} écrire ?`,
     ]),
     format: "qcm" as const,
-    choices: shuffle([good, ...shuffle(pieges).slice(0, 3)]),
+    choices: shuffle([good, ...shuffle(distincts(good, pieges)).slice(0, 3)]),
     expected: [good],
     comparator: "mcq_exact" as const,
     explanation: cpe(
@@ -576,35 +581,63 @@ function genOrdreGrandeur() {
   };
 }
 
-/** « Retrouve le bon résultat » : un élève a oublié une retenue. */
+const RANGS = ["unités", "dizaines", "centaines", "milliers", "dizaines de mille"];
+
+/**
+ * Les retenues réelles d'une opération posée : [rang qui la reçoit, effet de l'oubli].
+ * Addition, multiplication : oublier la retenue c qui va au rang k ôte c × 10^k.
+ * Soustraction (on ajoute 10 en haut, 1 en bas au rang suivant) : oublier le 1 du bas ajoute 10^k.
+ */
+function retenuesReelles(op: "addition" | "soustraction" | "multiplication", a: number, b: number): [number, number][] {
+  const da = String(a).split("").reverse().map(Number);
+  const db = String(b).split("").reverse().map(Number);
+  const out: [number, number][] = [];
+  let c = 0;
+  for (let i = 0; i < da.length; i++) {
+    if (op === "addition") c = Math.floor((da[i] + (db[i] ?? 0) + c) / 10);
+    else if (op === "multiplication") c = Math.floor((da[i] * b + c) / 10);
+    else c = da[i] < (db[i] ?? 0) + c ? 1 : 0;
+    // La retenue de la dernière colonne s'écrit telle quelle : on ne la compte pas.
+    if (c > 0 && i + 1 < da.length)
+      out.push([i + 1, op === "soustraction" ? 10 ** (i + 1) : -c * 10 ** (i + 1)]);
+  }
+  return out;
+}
+
+/** « Retrouve le bon résultat » : un élève a oublié une VRAIE retenue de son calcul (08/10/2026 : avant, ±10 ou ±100 au hasard). */
 function genCorrigerErreur() {
   const p = pick(PRENOMS);
   const op = pick(["addition", "multiplication", "soustraction"] as const);
   let a: number;
   let b: number;
-  if (op === "addition") [a, b] = avecRetenueAdd(pick([3, 4]), 3);
-  else if (op === "soustraction") [a, b] = avecRetenueSous(pick([3, 4]));
-  else {
-    a = randomInt(123, 987);
-    b = randomInt(3, 9);
-  }
+  let retenues: [number, number][];
+  do {
+    if (op === "addition") [a, b] = avecRetenueAdd(pick([3, 4]), 3);
+    else if (op === "soustraction") [a, b] = avecRetenueSous(pick([3, 4]));
+    else {
+      a = randomInt(123, 987);
+      b = randomInt(3, 9);
+    }
+    retenues = retenuesReelles(op, a, b);
+  } while (!retenues.length);
   const juste = op === "addition" ? a + b : op === "soustraction" ? a - b : a * b;
-  const faux = juste + pick([10, -10, 100, -100].filter((x) => juste + x > 0));
+  const [rang, ecart] = pick(retenues);
+  const faux = juste + ecart;
   const e = `${nb(a)} ${SIGNES[op]} ${nb(b)}`;
   return {
     text: pick([
-      `${p.nom} a posé ${e} et a trouvé ${nb(faux)}. ${Il(p)} s’est trompé${p.f ? "e" : ""} dans une retenue.\nQuel est le bon résultat ?`,
-      `Sur le cahier ${de(p.nom)}, on lit : ${e} = ${nb(faux)}. C’est faux.\nÉcris le bon résultat.`,
-      `${p.nom} annonce ${nb(faux)} pour ${e}. Refais le calcul.\nQuel est le résultat juste ?`,
-      `Le résultat ${nb(faux)} pour ${e} est faux.\nPose l’opération et donne le bon résultat.`,
+      `${p.nom} a posé ${e} et a trouvé ${nb(faux)}. ${Il(p)} a oublié une retenue.\nQuel est le bon résultat ?`,
+      `Sur le cahier ${de(p.nom)}, on lit : ${e} = ${nb(faux)}. Une retenue a été oubliée.\nÉcris le bon résultat.`,
+      `${p.nom} annonce ${nb(faux)} pour ${e}. ${Il(p)} a oublié une retenue : refais le calcul.\nQuel est le résultat juste ?`,
+      `Le résultat ${nb(faux)} pour ${e} est faux : il manque une retenue.\nPose l’opération et donne le bon résultat.`,
     ]),
     format: "short" as const,
     expected: attendus(juste),
     comparator: "number_equal" as const,
     explanation: cpe(
-      "une erreur de retenue décale un chiffre du résultat.",
+      "une retenue oubliée fausse le chiffre de la colonne suivante.",
       "on repose l’opération colonne par colonne, en écrivant les retenues.",
-      `${e} = ${nb(juste)}, et non ${nb(faux)}.`,
+      `${e} = ${nb(juste)}, et non ${nb(faux)} : la retenue oubliée allait dans la colonne des ${RANGS[rang]}.`,
       `le bon résultat est ${nb(juste)}.`,
     ),
     canvas: canvasPose(op, a, b),
@@ -738,30 +771,21 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_addition_posee",
     difficulty: 1,
     theme: "neutral",
-    text: "Dans une addition posée, pourquoi faut-il aligner les unités sous les unités ?",
+    // 08/10/2026 : « pourquoi aligner ? » (leurre : « pour que l’opération soit
+    // plus jolie ») devient un geste : où écrire le chiffre. Pas de canvas : il montrerait la réponse.
+    text: "On pose l’addition 1 247 + 35.\nSous quel chiffre de 1 247 faut-il écrire le 5 de 35 ?",
     format: "qcm",
-    choices: [
-      "pour additionner les chiffres de même rang",
-      "pour que l’opération soit plus jolie",
-      "pour additionner les chiffres au hasard",
-      "pour éviter les retenues",
-    ],
-    expected: ["pour additionner les chiffres de même rang"],
+    choices: ["sous le 7", "sous le 1", "sous le 2", "sous le 4"],
+    expected: ["sous le 7"],
     comparator: "mcq_exact",
-    hint: "On additionne unités avec unités, dizaines avec dizaines.",
-    explanation:
-      "Définition : poser une addition consiste à aligner les chiffres de même rang.\n\n" +
-      "Méthode : on place les unités sous les unités, les dizaines sous les dizaines, les centaines sous les centaines.\n\n" +
-      "Calcul : cela permet d’additionner correctement chaque colonne.\n\n" +
-      "Conclusion : il faut aligner les chiffres de même rang.",
-    tags: ["entier_calcul_pose", "addition", "methode", "qcm"],
-    canvas: calculPoseCanvas({
-      operation: "addition",
-      title: "Addition posée",
-      numbers: ["247", "35"],
-      result: "282",
-      questionLabel: "Observe l’alignement des chiffres.",
-    }),
+    hint: "Le 5 de 35, ce sont des unités. Où sont les unités de 1 247 ?",
+    explanation: cpe(
+      "dans une addition posée, on aligne les chiffres de même rang : unités sous unités, dizaines sous dizaines.",
+      "on aligne les nombres à droite, par leur chiffre des unités.",
+      "le 5 (unités) va sous le 7 (unités), le 3 (dizaines) sous le 4 (dizaines). 1 247 + 35 = 1 282.",
+      "on écrit le 5 sous le 7.",
+    ),
+    tags: ["entier_calcul_pose", "addition", "methode", "rangs", "qcm"],
   },
 
   {
@@ -832,24 +856,29 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_addition_posee",
     difficulty: 3,
     theme: "neutral",
-    text: "Un élève calcule 247 + 35 en écrivant 35 sous 247 sans aligner les unités. Pourquoi risque-t-il de se tromper ?",
-    format: "open",
-    expected: ["unités", "dizaines", "aligner", "rang", "colonnes"],
-    comparator: "contains_keyword",
-    hint: "Parle des unités et des dizaines.",
-    explanation:
-      "Définition : chaque chiffre a un rang : unités, dizaines, centaines.\n\n" +
-      "Méthode : dans une addition posée, on aligne les chiffres de même rang.\n\n" +
-      "Calcul : si les unités ne sont pas sous les unités, on additionne des rangs différents.\n\n" +
-      "Conclusion : l’élève risque de faire une erreur d’alignement.",
-    tags: ["entier_calcul_pose", "addition", "open", "erreur", "alignement"],
+    // 08/10/2026 (Frédéric : « elles sont vagues ») : les 18 questions ouvertes
+    // de ce fichier, corrigées par UN mot-clé (« résultat » suffisait), sont
+    // devenues des cas précis à réponse unique. Les id sont gardés.
+    text: "Pour calculer 247 + 35, Lucas écrit le 3 sous le 2 et le 5 sous le 4 : il décale 35 d’un rang vers la gauche.\nQuelle addition a-t-il faite en réalité ?",
+    format: "qcm",
+    choices: ["247 + 350", "247 + 35", "247 + 3 500", "2 470 + 35"],
+    expected: ["247 + 350"],
+    comparator: "mcq_exact",
+    hint: "Le 5 de 35 est sous le 4 de 247 : il est à la place des dizaines.",
+    explanation: cpe(
+      "chaque chiffre a un rang : unités, dizaines, centaines. Dans une addition posée, les unités vont sous les unités.",
+      "on regarde où Lucas a placé chaque chiffre de 35.",
+      "le 5 est dans la colonne des dizaines et le 3 dans celle des centaines : il a ajouté 350. 247 + 350 = 597, alors que 247 + 35 = 282.",
+      "il a calculé 247 + 350. Il faut aligner les unités.",
+    ),
+    tags: ["entier_calcul_pose", "addition", "erreur", "alignement", "qcm"],
     canvas: calculPoseCanvas({
       operation: "addition",
-      title: "Attention à l’alignement",
+      title: "La bonne disposition",
       numbers: ["247", "35"],
-      result: "282",
       highlight: { col: 2 },
-      questionLabel: "Les unités doivent être dans la même colonne.",
+      questionLabel: "Les unités sous les unités.",
+      display: { showResult: false, showRetenues: false },
     }),
   },
 
@@ -866,33 +895,19 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_soustraction_posee",
     difficulty: 1,
     theme: "neutral",
-    text: "Dans une soustraction posée, pourquoi faut-il aligner les chiffres de même rang ?",
+    text: "On pose la soustraction 584 − 31.\nSous quel chiffre de 584 faut-il écrire le 3 de 31 ?",
     format: "qcm",
-    choices: [
-      "pour soustraire unités avec unités, dizaines avec dizaines",
-      "pour éviter de calculer",
-      "pour changer le nombre",
-      "pour additionner les lignes",
-    ],
-    expected: ["pour soustraire unités avec unités, dizaines avec dizaines"],
+    choices: ["sous le 8", "sous le 5", "sous le 4"],
+    expected: ["sous le 8"],
     comparator: "mcq_exact",
-    hint: "On travaille colonne par colonne.",
-    explanation:
-      "Définition : poser une soustraction consiste à organiser les chiffres par rang.\n\n" +
-      "Méthode : on aligne unités, dizaines, centaines.\n\n" +
-      "Calcul : on soustrait ensuite colonne par colonne.\n\n" +
-      "Conclusion : l’alignement est indispensable.",
-    tags: ["entier_calcul_pose", "soustraction", "methode", "qcm"],
-    canvas: calculPoseCanvas({
-      operation: "soustraction",
-      title: "Soustraction posée",
-      numbers: ["584", "231"],
-      result: "353",
-      display: {
-      showResult: false,
-      showRetenues: false,
-  },
-    }),
+    hint: "Le 3 de 31, ce sont des dizaines. Où sont les dizaines de 584 ?",
+    explanation: cpe(
+      "dans une soustraction posée, on aligne les chiffres de même rang.",
+      "on aligne les nombres à droite : le 1 (unités) sous le 4, le 3 (dizaines) sous le 8.",
+      "584 − 31 = 553.",
+      "on écrit le 3 sous le 8.",
+    ),
+    tags: ["entier_calcul_pose", "soustraction", "methode", "rangs", "qcm"],
   },
 
   {
@@ -967,17 +982,18 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_soustraction_posee",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique comment vérifier une soustraction avec une addition.",
-    format: "open",
-    expected: ["addition", "résultat", "soustrait", "nombre de départ", "vérifier"],
-    comparator: "contains_keyword",
-    hint: "On ajoute le résultat au nombre soustrait.",
-    explanation:
-      "Définition : vérifier une soustraction permet de contrôler le résultat.\n\n" +
-      "Méthode : on ajoute le résultat de la soustraction au nombre que l’on a soustrait.\n\n" +
-      "Calcul : si 584 - 231 = 353, alors 353 + 231 = 584.\n\n" +
-      "Conclusion : l’addition permet de vérifier la soustraction.",
-    tags: ["entier_calcul_pose", "soustraction", "open", "verification"],
+    text: "Tom pose 702 − 358 et trouve 354. Pour vérifier, il calcule 354 + 358.\nQuel nombre trouve-t-il ?",
+    format: "short",
+    expected: ["712"],
+    comparator: "number_equal",
+    hint: "Pose l’addition 354 + 358. Si Tom avait juste, tu retrouverais 702.",
+    explanation: cpe(
+      "on vérifie une soustraction avec une addition : résultat + nombre enlevé = nombre de départ.",
+      "on additionne le résultat de Tom et le nombre enlevé.",
+      "354 + 358 = 712, et non 702. Le bon calcul : 702 − 358 = 344, et 344 + 358 = 702.",
+      "il trouve 712 : Tom s’est trompé, la bonne différence est 344.",
+    ),
+    tags: ["entier_calcul_pose", "soustraction", "verification"],
   },
     /* =========================
      POSE_MULTIPLICATION
@@ -992,29 +1008,23 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_multiplication_posee",
     difficulty: 1,
     theme: "neutral",
-    text: "Dans une multiplication posée, pourquoi faut-il bien aligner les chiffres ?",
+    text: "On pose 124 × 23. Première ligne : 124 × 3 = 372. La deuxième ligne calcule 124 × 2 dizaines, c’est-à-dire 124 × 20.\nQuel nombre écrit-on sur la deuxième ligne ?",
     format: "qcm",
-    choices: [
-      "pour respecter le rang des chiffres",
-      "pour éviter de multiplier",
-      "pour changer le résultat",
-      "pour écrire moins de chiffres",
-    ],
-    expected: ["pour respecter le rang des chiffres"],
+    choices: ["2 480", "248", "24 800", "372"],
+    expected: ["2 480"],
     comparator: "mcq_exact",
-    hint: "Chaque chiffre a un rang : unités, dizaines, centaines.",
-    explanation:
-      "Définition : une multiplication posée organise les calculs par rang.\n\n" +
-      "Méthode : on multiplie les chiffres en respectant leur position.\n\n" +
-      "Calcul : les unités, dizaines et centaines ne représentent pas les mêmes valeurs.\n\n" +
-      "Conclusion : l’alignement permet de respecter le rang des chiffres.",
-    tags: ["entier_calcul_pose", "multiplication", "methode", "qcm"],
+    hint: "Le 2 de 23 vaut 2 dizaines : on multiplie par 20, pas par 2.",
+    explanation: cpe(
+      "dans une multiplication posée, chaque ligne respecte la valeur du chiffre par lequel on multiplie.",
+      "le 2 de 23 vaut 20 : la deuxième ligne est 124 × 20, chaque chiffre de 248 passe au rang supérieur.",
+      "124 × 20 = 2 480, puis 372 + 2 480 = 2 852.",
+      "on écrit 2 480 sur la deuxième ligne.",
+    ),
+    tags: ["entier_calcul_pose", "multiplication", "methode", "rangs", "qcm"],
     canvas: calculPoseCanvas({
       operation: "multiplication",
       title: "Multiplication posée",
-      numbers: ["124", "3"],
-      result: "372",
-
+      numbers: ["124", "23"],
        display: {
           showResult: false,
           showRetenues: false,
@@ -1089,22 +1099,22 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_multiplication_posee",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève calcule 126 × 4 et oublie une retenue. Pourquoi son résultat peut-il être faux ?",
-    format: "open",
-    expected: ["retenue", "colonne", "multiplier", "reporter", "résultat"],
-    comparator: "contains_keyword",
-    hint: "Une retenue oubliée change les colonnes suivantes.",
-    explanation:
-      "Définition : une retenue est une quantité à reporter dans la colonne suivante.\n\n" +
-      "Méthode : dans une multiplication posée, on doit reporter chaque retenue au bon endroit.\n\n" +
-      "Calcul : si une retenue est oubliée, la colonne suivante n’est plus correcte.\n\n" +
-      "Conclusion : oublier une retenue peut rendre tout le résultat faux.",
-    tags: ["entier_calcul_pose", "multiplication", "open", "erreur", "retenue"],
+    text: "Inès pose 126 × 4. Elle calcule 4 × 6 = 24, écrit 4… et oublie de retenir 2. Elle trouve 484 au lieu de 504.\nDe combien son résultat est-il trop petit ?",
+    format: "short",
+    expected: ["20"],
+    comparator: "number_equal",
+    hint: "La retenue 2 est dans la colonne des dizaines : combien vaut-elle ?",
+    explanation: cpe(
+      "une retenue se reporte dans la colonne suivante.",
+      "4 × 6 = 24 : on écrit 4 unités et on retient 2 dizaines.",
+      "504 − 484 = 20 : c’est la retenue oubliée, 2 dizaines = 20.",
+      "son résultat est trop petit de 20.",
+    ),
+    tags: ["entier_calcul_pose", "multiplication", "erreur", "retenue"],
     canvas: calculPoseCanvas({
       operation: "multiplication",
       title: "Erreur fréquente : retenue oubliée",
       numbers: ["126", "4"],
-      result: "504",
       questionLabel: "La retenue doit être reportée.",
        display: {
           showResult: false,
@@ -1126,22 +1136,18 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_division_posee",
     difficulty: 2,
     theme: "neutral",
-    text: "Dans une division euclidienne, le reste doit être...",
+    text: "On divise un nombre par 5 (division euclidienne). Ici, 37 = 5 × 7 + 2.\nQuels restes sont possibles quand on divise par 5 ?",
     format: "qcm",
-    choices: [
-      "plus petit que le diviseur",
-      "plus grand que le diviseur",
-      "égal au dividende",
-      "toujours égal à 1",
-    ],
-    expected: ["plus petit que le diviseur"],
+    choices: ["0, 1, 2, 3 ou 4", "1, 2, 3, 4 ou 5", "seulement 0", "n’importe quel nombre"],
+    expected: ["0, 1, 2, 3 ou 4"],
     comparator: "mcq_exact",
-    hint: "Si le reste est trop grand, on peut encore diviser.",
-    explanation:
-      "Définition : dans une division euclidienne, on écrit dividende = diviseur × quotient + reste.\n\n" +
-      "Méthode : on vérifie toujours que le reste est plus petit que le diviseur.\n\n" +
-      "Calcul : si le reste est supérieur ou égal au diviseur, le quotient n’est pas assez grand.\n\n" +
-      "Conclusion : le reste doit être plus petit que le diviseur.",
+    hint: "Avec un reste de 5, on pourrait encore faire un groupe de 5.",
+    explanation: cpe(
+      "dans une division euclidienne, le reste est plus petit que le diviseur.",
+      "si le reste valait 5 ou plus, on pourrait former un groupe de plus.",
+      "37 = 5 × 7 + 2 : le reste 2 est plus petit que 5. 35 = 5 × 7 + 0 : le reste peut être 0.",
+      "les restes possibles sont 0, 1, 2, 3 ou 4.",
+    ),
     tags: ["entier_calcul_pose", "division", "reste", "qcm"],
     canvas: calculPoseCanvas({
       operation: "division",
@@ -1217,17 +1223,18 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_division_posee",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi, dans une division euclidienne, le reste doit être plus petit que le diviseur.",
-    format: "open",
-    expected: ["reste", "diviseur", "plus petit", "quotient", "encore"],
-    comparator: "contains_keyword",
-    hint: "Si le reste est encore plus grand que le diviseur, on peut continuer.",
-    explanation:
-      "Définition : une division euclidienne donne un quotient et un reste.\n\n" +
-      "Méthode : le quotient doit être le plus grand possible sans dépasser le dividende.\n\n" +
-      "Calcul : si le reste est supérieur ou égal au diviseur, on peut ajouter 1 au quotient.\n\n" +
-      "Conclusion : le reste doit donc être plus petit que le diviseur.",
-    tags: ["entier_calcul_pose", "division", "open", "raisonnement"],
+    text: "Sami range 38 œufs dans des boîtes de 6. Il dit : « 5 boîtes pleines, il reste 8 œufs. »\nAvec ces 8 œufs, combien de boîtes pleines peut-il encore remplir ?",
+    format: "short",
+    expected: ["1"],
+    comparator: "number_equal",
+    hint: "Une boîte contient 6 œufs. Il en reste 8.",
+    explanation: cpe(
+      "dans une division euclidienne, le reste est toujours plus petit que le diviseur.",
+      "si le reste dépasse 6, on peut encore remplir une boîte.",
+      "8 œufs = 1 boîte de 6 + 2 œufs. Donc 38 = 6 × 6 + 2.",
+      "il peut remplir 1 boîte de plus : 6 boîtes pleines, reste 2. Le reste 8 était trop grand.",
+    ),
+    tags: ["entier_calcul_pose", "division", "reste", "raisonnement"],
   },
 
   /* =========================
@@ -1327,17 +1334,18 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_calcul_verifier",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi vérifier un calcul est aussi important que trouver un résultat.",
-    format: "open",
-    expected: ["erreur", "vérifier", "résultat", "calcul", "corriger"],
-    comparator: "contains_keyword",
-    hint: "Même un bon calculateur peut faire une erreur de retenue ou d’alignement.",
-    explanation:
-      "Définition : vérifier un calcul consiste à contrôler si le résultat est cohérent.\n\n" +
-      "Méthode : on peut refaire le calcul, utiliser l’opération inverse ou estimer le résultat.\n\n" +
-      "Observation : une erreur de retenue, d’alignement ou de signe peut changer le résultat.\n\n" +
-      "Conclusion : vérifier permet de repérer et corriger les erreurs.",
-    tags: ["entier_calcul_pose", "verification", "open", "raisonnement"],
+    text: "Emma pose 386 + 247 et trouve 533. Elle vérifie avec un ordre de grandeur : 390 + 250 = 640. C’est trop loin de 533.\nRefais le calcul : quel est le bon résultat ?",
+    format: "short",
+    expected: ["633"],
+    comparator: "number_equal",
+    hint: "Pose 386 + 247 colonne par colonne, sans oublier les retenues.",
+    explanation: cpe(
+      "un ordre de grandeur sert à repérer un résultat impossible.",
+      "on repose l’addition : 6 + 7 = 13, on retient 1 ; 8 + 4 + 1 = 13, on retient 1 ; 3 + 2 + 1 = 6.",
+      "386 + 247 = 633, proche de 640. Emma avait oublié la retenue des centaines.",
+      "le bon résultat est 633.",
+    ),
+    tags: ["entier_calcul_pose", "verification", "estimation", "retenue"],
   },
 
   /* =========================
@@ -1430,17 +1438,19 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_calcul_pose_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Un camarade trouve un résultat différent du tien dans un calcul posé. Que peux-tu faire pour vérifier qui a raison ?",
-    format: "open",
-    expected: ["vérifier", "retenue", "alignement", "opération inverse", "recalculer"],
-    comparator: "contains_keyword",
-    hint: "Cherche les erreurs possibles : alignement, retenues, opération inverse.",
-    explanation:
-      "Définition : vérifier un calcul permet de contrôler la validité d’un résultat.\n\n" +
-      "Méthode : on peut refaire le calcul, vérifier les retenues, contrôler l’alignement et utiliser une opération inverse.\n\n" +
-      "Observation : deux résultats différents indiquent qu’au moins un calcul doit être vérifié.\n\n" +
-      "Conclusion : on doit raisonner et vérifier avant de décider qui a raison.",
-    tags: ["entier_calcul_pose", "defi", "open", "verification", "raisonnement"],
+    text: "Pour 615 − 278, Léo trouve 337 et Nina trouve 347.\nVérifie avec une addition : qui a raison ?",
+    format: "qcm",
+    choices: ["Léo", "Nina", "les deux", "aucun des deux"],
+    expected: ["Léo"],
+    comparator: "mcq_exact",
+    hint: "Ajoute 278 à chaque résultat : lequel redonne 615 ?",
+    explanation: cpe(
+      "on vérifie une soustraction avec l’addition : résultat + nombre enlevé = nombre de départ.",
+      "on ajoute 278 au résultat de chacun.",
+      "337 + 278 = 615 ; 347 + 278 = 625.",
+      "c’est Léo qui a raison : 615 − 278 = 337.",
+    ),
+    tags: ["entier_calcul_pose", "defi", "verification", "qcm"],
   },
     /* =========================
      RENFORT — CALCUL POSÉ 6e
@@ -1455,17 +1465,19 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_addition_posee",
     difficulty: 4,
     theme: "neutral",
-    text: "Avant de poser une addition, pourquoi peut-il être utile d’estimer le résultat ?",
-    format: "open",
-    expected: ["estimer", "ordre de grandeur", "vérifier", "erreur", "résultat"],
-    comparator: "contains_keyword",
-    hint: "Une estimation aide à repérer un résultat impossible.",
-    explanation:
-      "Définition : estimer un résultat, c’est chercher un ordre de grandeur avant le calcul exact.\n\n" +
-      "Méthode : on arrondit les nombres pour prévoir environ le résultat.\n\n" +
-      "Observation : si le résultat exact est très loin de l’estimation, il faut vérifier le calcul.\n\n" +
-      "Conclusion : estimer aide à repérer les erreurs.",
-    tags: ["entier_calcul_pose", "addition", "open", "estimation", "verification"],
+    text: "Avant de poser 498 + 307, Nora estime le résultat.\nQuel est le meilleur ordre de grandeur ?",
+    format: "qcm",
+    choices: ["800", "700", "8 000", "80"],
+    expected: ["800"],
+    comparator: "mcq_exact",
+    hint: "498 est proche de 500 et 307 est proche de 300.",
+    explanation: cpe(
+      "estimer, c’est calculer avec des nombres arrondis pour prévoir le résultat.",
+      "on arrondit 498 à 500 et 307 à 300.",
+      "500 + 300 = 800. Le calcul exact : 498 + 307 = 805.",
+      "l’ordre de grandeur est 800.",
+    ),
+    tags: ["entier_calcul_pose", "addition", "estimation", "qcm"],
   },
 
   {
@@ -1496,17 +1508,19 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_soustraction_posee",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève calcule 235 - 487. Que dois-tu remarquer avant de poser la soustraction en 6e ?",
-    format: "open",
-    expected: ["235", "487", "plus petit", "plus grand", "impossible"],
-    comparator: "contains_keyword",
-    hint: "Compare les deux nombres avant de soustraire.",
-    explanation:
-      "Définition : en 6e, on travaille souvent les soustractions où le premier nombre est plus grand que le second.\n\n" +
-      "Méthode : avant de poser, on compare les deux nombres.\n\n" +
-      "Observation : 235 est plus petit que 487.\n\n" +
-      "Conclusion : cette soustraction ne donne pas un nombre entier positif.",
-    tags: ["entier_calcul_pose", "soustraction", "open", "comparaison", "erreur"],
+    text: "Une ville A compte 235 habitants, une ville B en compte 487. Pour trouver l’écart, Malo pose 235 − 487.\nQuelle soustraction faut-il poser ?",
+    format: "qcm",
+    choices: ["487 − 235", "235 − 487", "487 + 235", "235 + 487"],
+    expected: ["487 − 235"],
+    comparator: "mcq_exact",
+    hint: "Compare les deux nombres : on enlève le plus petit au plus grand.",
+    explanation: cpe(
+      "l’écart entre deux nombres, c’est le plus grand moins le plus petit.",
+      "on compare : 487 est plus grand que 235.",
+      "487 − 235 = 252.",
+      "il faut poser 487 − 235 : l’écart est de 252 habitants.",
+    ),
+    tags: ["entier_calcul_pose", "soustraction", "comparaison", "erreur", "qcm"],
   },
 
   {
@@ -1535,17 +1549,18 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_multiplication_posee",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi estimer le résultat d’une multiplication peut aider à repérer une erreur.",
-    format: "open",
-    expected: ["estimer", "ordre de grandeur", "multiplication", "erreur", "vérifier"],
-    comparator: "contains_keyword",
-    hint: "Par exemple, 198 × 4 est proche de 200 × 4.",
-    explanation:
-      "Définition : estimer, c’est chercher un résultat approché.\n\n" +
-      "Méthode : on arrondit un nombre pour calculer mentalement un ordre de grandeur.\n\n" +
-      "Calcul : par exemple, 198 × 4 est proche de 200 × 4 = 800.\n\n" +
-      "Conclusion : si le résultat trouvé est très loin de 800, il faut vérifier.",
-    tags: ["entier_calcul_pose", "multiplication", "open", "estimation", "verification"],
+    text: "Karim pose 198 × 4 et trouve 492. Pour vérifier, il estime avec 200 × 4.\nQuel ordre de grandeur trouve-t-il ?",
+    format: "short",
+    expected: ["800"],
+    comparator: "number_equal",
+    hint: "198 est proche de 200. Calcule 200 × 4.",
+    explanation: cpe(
+      "estimer, c’est calculer avec des nombres arrondis.",
+      "on arrondit 198 à 200, puis on calcule 200 × 4.",
+      "200 × 4 = 800. 492 est bien trop loin : le bon résultat est 198 × 4 = 792.",
+      "l’ordre de grandeur est 800, donc Karim s’est trompé.",
+    ),
+    tags: ["entier_calcul_pose", "multiplication", "estimation", "verification"],
   },
 
   {
@@ -1599,17 +1614,18 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_division_posee",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève écrit : 47 ÷ 5 = 8 reste 7. Pourquoi cette division est-elle incorrecte ?",
-    format: "open",
-    expected: ["reste", "diviseur", "plus petit", "5", "7"],
-    comparator: "contains_keyword",
-    hint: "Le reste doit être plus petit que le diviseur.",
-    explanation:
-      "Définition : dans une division euclidienne, le reste doit être plus petit que le diviseur.\n\n" +
-      "Méthode : on vérifie le reste.\n\n" +
-      "Calcul : ici, le reste 7 est plus grand que le diviseur 5.\n\n" +
-      "Conclusion : la division est incorrecte.",
-    tags: ["entier_calcul_pose", "division", "open", "erreur", "reste"],
+    text: "Un élève écrit : 47 ÷ 5 = 8 reste 7. Le reste 7 est plus grand que 5 : il s’est trompé.\nQuel est le bon reste ?",
+    format: "short",
+    expected: ["2"],
+    comparator: "number_equal",
+    hint: "Dans 7, il y a encore une fois 5. Le quotient devient 9.",
+    explanation: cpe(
+      "dans une division euclidienne, le reste est plus petit que le diviseur.",
+      "le reste 7 contient encore 5 : on ajoute 1 au quotient et on enlève 5 au reste.",
+      "47 = 5 × 9 + 2.",
+      "le bon reste est 2 (quotient 9).",
+    ),
+    tags: ["entier_calcul_pose", "division", "erreur", "reste"],
     canvas: calculPoseCanvas({
       operation: "division",
       title: "Reste trop grand",
@@ -1657,17 +1673,18 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_calcul_verifier",
     difficulty: 5,
     theme: "neutral",
-    text: "Un résultat te paraît étrange. Quelles vérifications peux-tu faire avant de le valider ?",
-    format: "open",
-    expected: ["estimer", "refaire", "opération inverse", "retenue", "alignement"],
-    comparator: "contains_keyword",
-    hint: "Pense à l’estimation, aux retenues et aux opérations inverses.",
-    explanation:
-      "Définition : vérifier un calcul, c’est contrôler sa cohérence.\n\n" +
-      "Méthode : on peut estimer, refaire le calcul, vérifier les retenues, l’alignement ou utiliser une opération inverse.\n\n" +
-      "Observation : ces vérifications permettent de repérer une erreur.\n\n" +
-      "Conclusion : on ne valide pas un résultat sans contrôle.",
-    tags: ["entier_calcul_pose", "verification", "open", "doute_raisonnable"],
+    text: "Paul pose 96 ÷ 4 et trouve 34. Pour vérifier, il calcule 34 × 4.\nQuel nombre trouve-t-il ?",
+    format: "short",
+    expected: ["136"],
+    comparator: "number_equal",
+    hint: "Si Paul avait juste, 34 × 4 redonnerait 96.",
+    explanation: cpe(
+      "on vérifie une division avec une multiplication : quotient × diviseur = dividende.",
+      "on multiplie le résultat de Paul par 4.",
+      "34 × 4 = 136, et non 96. Le bon calcul : 96 ÷ 4 = 24, car 24 × 4 = 96.",
+      "il trouve 136 : Paul s’est trompé, le bon quotient est 24.",
+    ),
+    tags: ["entier_calcul_pose", "verification", "operation_inverse", "doute_raisonnable"],
   },
 
   {
@@ -1693,17 +1710,19 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_calcul_pose_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi comprendre le problème est nécessaire avant de poser une opération.",
-    format: "open",
-    expected: ["comprendre", "opération", "addition", "soustraction", "choisir"],
-    comparator: "contains_keyword",
-    hint: "On ne pose pas une opération au hasard.",
-    explanation:
-      "Définition : un problème demande de choisir l’opération adaptée à la situation.\n\n" +
-      "Méthode : on lit la question, on repère les données utiles et on comprend l’action demandée.\n\n" +
-      "Observation : si on choisit la mauvaise opération, le calcul peut être juste mais la réponse fausse.\n\n" +
-      "Conclusion : comprendre le problème est nécessaire avant de calculer.",
-    tags: ["entier_calcul_pose", "defi", "open", "raisonnement", "choix_operation"],
+    text: "Une salle de cinéma a 18 rangées de 24 sièges. Pour compter les sièges, Zoé pose 24 + 18 = 42. Son calcul est juste, mais sa réponse est fausse.\nQuelle opération fallait-il poser ?",
+    format: "qcm",
+    choices: ["24 × 18", "24 + 18", "24 − 18", "24 ÷ 18"],
+    expected: ["24 × 18"],
+    comparator: "mcq_exact",
+    hint: "Chaque rangée a 24 sièges, et il y a 18 rangées pareilles.",
+    explanation: cpe(
+      "quand une même quantité se répète, on multiplie.",
+      "on repère : 24 sièges, répétés 18 fois.",
+      "24 × 18 = 432.",
+      "il fallait poser 24 × 18 : la salle a 432 sièges.",
+    ),
+    tags: ["entier_calcul_pose", "defi", "raisonnement", "choix_operation", "qcm"],
   },
     /* =========================
      RENFORT FINAL — LANGAGE ET CONTRÔLE
@@ -1718,17 +1737,19 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_addition_posee",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique la différence entre le chiffre des unités, le chiffre des dizaines et le chiffre des centaines dans une addition posée.",
-    format: "open",
-    expected: ["unités", "dizaines", "centaines", "rang", "aligner"],
-    comparator: "contains_keyword",
-    hint: "Chaque chiffre n’a pas la même valeur selon sa position.",
-    explanation:
-      "Définition : le rang d’un chiffre indique sa valeur dans le nombre.\n\n" +
-      "Méthode : dans une addition posée, on aligne les chiffres de même rang.\n\n" +
-      "Observation : les unités valent 1, les dizaines valent 10 et les centaines valent 100.\n\n" +
-      "Conclusion : connaître les rangs permet de poser correctement l’addition.",
-    tags: ["entier_calcul_pose", "addition", "open", "rangs", "langage"],
+    text: "Dans l’addition posée 4 375 + 1 268, on commence par les unités : 5 + 8 = 13. On écrit 3 et on retient 1.\nQue vaut ce 1 retenu ?",
+    format: "qcm",
+    choices: ["1 dizaine", "1 unité", "1 centaine", "1 millier"],
+    expected: ["1 dizaine"],
+    comparator: "mcq_exact",
+    hint: "13 unités, c’est 1 dizaine et 3 unités.",
+    explanation: cpe(
+      "10 unités font 1 dizaine.",
+      "13 unités = 1 dizaine + 3 unités : on écrit 3 unités et on reporte la dizaine dans la colonne des dizaines.",
+      "colonne des dizaines : 7 + 6 + 1 = 14. Au bout : 4 375 + 1 268 = 5 643.",
+      "le 1 retenu vaut 1 dizaine.",
+    ),
+    tags: ["entier_calcul_pose", "addition", "rangs", "retenue", "qcm"],
   },
 
   {
@@ -1755,17 +1776,18 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_soustraction_posee",
     difficulty: 4,
     theme: "neutral",
-    text: "Pourquoi dit-on que l’addition peut être l’opération inverse d’une soustraction ?",
-    format: "open",
-    expected: ["addition", "soustraction", "inverse", "vérifier", "résultat"],
-    comparator: "contains_keyword",
-    hint: "Si tu enlèves puis que tu remets, tu retrouves le nombre de départ.",
-    explanation:
-      "Définition : deux opérations sont inverses lorsqu’elles permettent de revenir au nombre de départ.\n\n" +
-      "Méthode : après une soustraction, on peut ajouter le nombre soustrait.\n\n" +
-      "Calcul : si 584 - 231 = 353, alors 353 + 231 = 584.\n\n" +
-      "Conclusion : l’addition permet de vérifier et d’inverser la soustraction.",
-    tags: ["entier_calcul_pose", "soustraction", "open", "operation_inverse"],
+    text: "On sait que 535 + 365 = 900.\nSans poser de calcul, combien vaut 900 − 365 ?",
+    format: "short",
+    expected: ["535"],
+    comparator: "number_equal",
+    hint: "Si on ajoute 365 à 535 pour arriver à 900, que reste-t-il quand on enlève 365 à 900 ?",
+    explanation: cpe(
+      "l’addition et la soustraction sont des opérations inverses : enlever ce qu’on a ajouté ramène au départ.",
+      "on lit l’égalité à l’envers : 900, c’est 535 et 365 ensemble.",
+      "900 − 365 = 535.",
+      "900 − 365 vaut 535.",
+    ),
+    tags: ["entier_calcul_pose", "soustraction", "operation_inverse"],
   },
 
   {
@@ -1791,17 +1813,19 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_multiplication_posee",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique pourquoi une multiplication peut remplacer une addition répétée.",
-    format: "open",
-    expected: ["addition", "répétée", "fois", "multiplication", "même"],
-    comparator: "contains_keyword",
-    hint: "Par exemple, 4 + 4 + 4 peut s’écrire 3 × 4.",
-    explanation:
-      "Définition : une multiplication correspond souvent à une addition répétée du même nombre.\n\n" +
-      "Méthode : on repère combien de fois la même quantité est répétée.\n\n" +
-      "Calcul : 4 + 4 + 4 = 3 × 4.\n\n" +
-      "Conclusion : la multiplication permet d’écrire plus rapidement une addition répétée.",
-    tags: ["entier_calcul_pose", "multiplication", "open", "sens_operation"],
+    text: "Quelle multiplication remplace l’addition 7 + 7 + 7 + 7 + 7 + 7 + 7 + 7 + 7 ?",
+    format: "qcm",
+    choices: ["9 × 7", "7 × 7", "9 + 7", "7 × 10"],
+    expected: ["9 × 7"],
+    comparator: "mcq_exact",
+    hint: "Compte combien de fois le nombre 7 est écrit.",
+    explanation: cpe(
+      "une addition du même nombre répété s’écrit avec une multiplication.",
+      "on compte les 7 : il y en a 9.",
+      "7 + 7 + 7 + 7 + 7 + 7 + 7 + 7 + 7 = 9 × 7 = 63.",
+      "c’est 9 × 7.",
+    ),
+    tags: ["entier_calcul_pose", "multiplication", "sens_operation", "qcm"],
   },
 
   {
@@ -1845,17 +1869,24 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_division_posee",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique avec tes mots ce que représentent le quotient et le reste dans une division euclidienne.",
-    format: "open",
-    expected: ["quotient", "reste", "division", "partage", "ce qui reste"],
-    comparator: "contains_keyword",
-    hint: "Le quotient est ce qu’on obtient pour chaque part ; le reste est ce qui ne peut pas être partagé.",
-    explanation:
-      "Définition : dans une division euclidienne, le quotient indique le nombre de parts complètes et le reste indique ce qui reste.\n\n" +
-      "Méthode : on interprète la division comme un partage ou un groupement.\n\n" +
-      "Observation : le reste doit être plus petit que le diviseur.\n\n" +
-      "Conclusion : quotient et reste permettent de décrire précisément le résultat de la division.",
-    tags: ["entier_calcul_pose", "division", "open", "quotient", "reste"],
+    text: "On distribue 50 cartes à 6 joueurs, le plus possible et autant à chacun : 50 = 6 × 8 + 2.\nQue représente le nombre 2 ?",
+    format: "qcm",
+    choices: [
+      "les cartes qui restent dans le paquet",
+      "les cartes de chaque joueur",
+      "les joueurs sans carte",
+      "les tours de distribution",
+    ],
+    expected: ["les cartes qui restent dans le paquet"],
+    comparator: "mcq_exact",
+    hint: "Chaque joueur a 8 cartes. 6 × 8 = 48. Et les 2 autres ?",
+    explanation: cpe(
+      "dans une division euclidienne, le quotient est la part de chacun, le reste ce qu’on ne peut plus partager.",
+      "on lit 50 = 6 × 8 + 2 : 6 joueurs, 8 cartes chacun, 2 cartes en trop.",
+      "6 × 8 = 48 cartes distribuées ; 50 − 48 = 2.",
+      "le 2 est le reste : les cartes qui restent dans le paquet.",
+    ),
+    tags: ["entier_calcul_pose", "division", "quotient", "reste", "qcm"],
   },
 
   {
@@ -1887,17 +1918,19 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_calcul_verifier",
     difficulty: 5,
     theme: "neutral",
-    text: "Un élève trouve un résultat faux mais sa méthode semble correcte. Explique pourquoi il faut vérifier les détails du calcul.",
-    format: "open",
-    expected: ["retenue", "alignement", "détail", "erreur", "vérifier"],
-    comparator: "contains_keyword",
-    hint: "Une petite erreur dans une colonne peut changer tout le résultat.",
-    explanation:
-      "Définition : un calcul posé dépend de plusieurs étapes précises.\n\n" +
-      "Méthode : on vérifie les alignements, les retenues et chaque colonne.\n\n" +
-      "Observation : une méthode correcte peut donner un résultat faux si une petite erreur est faite.\n\n" +
-      "Conclusion : vérifier les détails permet de corriger le calcul.",
-    tags: ["entier_calcul_pose", "verification", "open", "erreur", "rigueur"],
+    text: "Hugo pose 305 − 128 et trouve 187. Le bon résultat est 177.\nDans quelle colonne s’est-il trompé ?",
+    format: "qcm",
+    choices: ["les dizaines", "les unités", "les centaines"],
+    expected: ["les dizaines"],
+    comparator: "mcq_exact",
+    hint: "Compare 187 et 177 chiffre par chiffre.",
+    explanation: cpe(
+      "un calcul posé se fait colonne par colonne : une seule colonne fausse suffit à fausser le résultat.",
+      "unités : 15 − 8 = 7, on retient 1. Dizaines : 10 − (2 + 1) = 7, on retient 1. Centaines : 3 − (1 + 1) = 1.",
+      "Hugo a écrit 8 aux dizaines : il a fait 10 − 2 en oubliant la retenue.",
+      "l’erreur est dans la colonne des dizaines.",
+    ),
+    tags: ["entier_calcul_pose", "verification", "erreur", "retenue", "qcm"],
   },
 
   {
@@ -1923,17 +1956,24 @@ export const calculPoseBank: TutorBankItemV4[] = [
     microId: "entier_calcul_pose_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Après un calcul posé dans un problème, pourquoi faut-il écrire une phrase-réponse ?",
-    format: "open",
-    expected: ["phrase", "réponse", "unité", "problème", "conclusion"],
-    comparator: "contains_keyword",
-    hint: "Le nombre seul ne suffit pas toujours à répondre au problème.",
-    explanation:
-      "Définition : une phrase-réponse relie le calcul au contexte du problème.\n\n" +
-      "Méthode : on reprend les mots de la question et on ajoute l’unité si nécessaire.\n\n" +
-      "Observation : un résultat numérique seul peut être incomplet.\n\n" +
-      "Conclusion : la phrase-réponse permet de conclure clairement.",
-    tags: ["entier_calcul_pose", "defi", "open", "redaction", "conclusion"],
+    text: "Pour une sortie, 5 cars partent avec 48 élèves chacun. On a posé 48 × 5 = 240.\nCombien d’élèves partent ? Choisis la bonne phrase-réponse.",
+    format: "qcm",
+    choices: [
+      "240 élèves partent en sortie.",
+      "La réponse est 240.",
+      "Il y a 240 cars.",
+      "48 × 5 = 240.",
+    ],
+    expected: ["240 élèves partent en sortie."],
+    comparator: "mcq_exact",
+    hint: "La phrase reprend les mots de la question et dit de quoi on parle : des élèves.",
+    explanation: cpe(
+      "une phrase-réponse répond à la question avec ses mots et son unité.",
+      "la question parle d’élèves : la réponse doit dire « 240 élèves ».",
+      "48 × 5 = 240 élèves (et non 240 cars).",
+      "la bonne phrase est « 240 élèves partent en sortie. »",
+    ),
+    tags: ["entier_calcul_pose", "defi", "redaction", "conclusion", "qcm"],
   },
 
   /* ===== TOP-UP — ENTIER_CALCUL_VERIFIER ===== */
