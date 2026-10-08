@@ -2254,17 +2254,21 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_lire_ecrire",
     difficulty: 4,
     theme: "neutral",
-    text: "Explique ce que représentent le numérateur et le dénominateur dans une fraction.",
-    format: "open",
-    expected: ["numérateur", "dénominateur", "parts", "total", "prises"],
-    comparator: "contains_keyword",
-    hint: "Le haut indique les parts prises, le bas indique les parts au total.",
+    // 08/10/2026 : question ouverte rendue précise (Frédéric : « les questions open doivent être précises »).
+    // Avant : « Explique ce que représentent le numérateur et le dénominateur ». Leurres :
+    // confondre le haut et le bas, confondre « en tout » et « ce qui reste ».
+    text: "Inès mange 3/8 d’une pizza coupée en parts égales.\nQue dit le 8 ?",
+    format: "qcm",
+    choices: ["8 parts en tout", "8 parts mangées", "8 parts qui restent"],
+    expected: ["8 parts en tout"],
+    comparator: "mcq_exact",
+    hint: "Le nombre du bas dit en combien de parts on coupe la pizza.",
     explanation:
-      "Définition : une fraction s’écrit avec un numérateur et un dénominateur.\n\n" +
-      "Méthode : on lit d’abord le nombre de parts prises, puis le nombre total de parts.\n\n" +
-      "Observation : le numérateur indique les parts prises et le dénominateur indique les parts égales au total.\n\n" +
-      "Conclusion : comprendre ces deux nombres permet de lire correctement une fraction.",
-    tags: ["fraction_nombre", "open", "vocabulaire", "raisonnement"],
+      "Définition : dans 3/8, le nombre du bas (8) est le dénominateur, le nombre du haut (3) est le numérateur.\n\n" +
+      "Méthode : le dénominateur dit en combien de parts égales on coupe. Le numérateur dit combien de parts on prend.\n\n" +
+      "Observation : la pizza a 8 parts en tout. Inès en mange 3. Il en reste 8 − 3 = 5.\n\n" +
+      "Conclusion : le 8 dit que la pizza a 8 parts en tout.",
+    tags: ["fraction_nombre", "qcm", "vocabulaire", "raisonnement"],
   },
 
   {
@@ -2276,17 +2280,21 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_comparer",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi 1/3 est plus grand que 1/5.",
-    format: "open",
-    expected: ["parts", "égales", "plus petites", "tiers", "cinquième"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : question ouverte rendue précise (Frédéric : « les questions open doivent être précises »).
+    // Avant : « Explique pourquoi 1/3 est plus grand que 1/5 ». Leurres : « 5 > 3 donc
+    // 1/5 > 1/3 » et « même numérateur donc égales », deux erreurs d’élèves courantes.
+    text: "Quelle fraction est la plus grande : 1/3 ou 1/5 ?",
+    format: "qcm",
+    choices: ["1/3", "1/5", "elles sont égales"],
+    expected: ["1/3"],
+    comparator: "mcq_exact",
     hint: "Quand on partage en plus de parts, chaque part est plus petite.",
     explanation:
-      "Définition : une fraction partage un tout en parts égales.\n\n" +
-      "Méthode : on compare la taille d’une part dans chaque partage.\n\n" +
-      "Observation : si on partage un même tout en 5 parts, chaque part est plus petite que si on le partage en 3 parts.\n\n" +
+      "Définition : 1/3, c’est 1 part quand on coupe en 3 parts égales. 1/5, c’est 1 part quand on coupe en 5 parts égales.\n\n" +
+      "Méthode : on compare la taille d’une part, pour le même tout.\n\n" +
+      "Observation : couper en 5 donne des parts plus petites que couper en 3. Attention : 5 est plus grand que 3, mais cela rend chaque part plus PETITE.\n\n" +
       "Conclusion : 1/3 est plus grand que 1/5.",
-    tags: ["fraction_nombre", "open", "comparaison", "raisonnement"],
+    tags: ["fraction_nombre", "qcm", "comparaison", "raisonnement"],
   },
 
   {
@@ -2298,17 +2306,21 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Un élève dit : « 3/6 est plus petit que 1/2, parce qu’il y a plus de parts. » Explique son erreur.",
-    format: "open",
-    expected: ["même", "égales", "egales", "moitié", "moitie", "3 sur 6", "plus petites"],
-    comparator: "contains_keyword",
+    // 08/10/2026 : question ouverte rendue précise (Frédéric : « les questions open doivent être précises »).
+    // Avant : « Explique son erreur » (un mot-clé suffisait). Leurres : les deux
+    // comparaisons fausses qu’un élève fait en regardant seulement les nombres.
+    text: "Léo dit : « 3/6 est plus petit que 1/2. »\nCompare 3/6 et 1/2.",
+    format: "qcm",
+    choices: ["3/6 = 1/2", "3/6 < 1/2", "3/6 > 1/2"],
+    expected: ["3/6 = 1/2"],
+    comparator: "mcq_exact",
     hint: "Coupe une barre en 6 parts, puis prends-en 3. Qu’obtiens-tu ?",
     explanation:
-      "Définition : deux fractions sont équivalentes si elles représentent la même quantité.\n\n" +
-      "Méthode : on compare les portions du même tout.\n\n" +
-      "Observation : couper en 6 donne bien plus de parts qu’en 2, mais chaque part est plus petite. Prendre 3 parts sur 6, c’est prendre la moitié de la barre — exactement comme 1 part sur 2.\n\n" +
-      "Conclusion : 3/6 et 1/2 représentent la même quantité, elles ne sont ni plus grandes ni plus petites l’une que l’autre.",
-    tags: ["fraction_nombre", "open", "equivalence", "raisonnement"],
+      "Définition : deux fractions sont égales si elles représentent la même quantité.\n\n" +
+      "Méthode : on multiplie le haut et le bas de 1/2 par le même nombre, 3.\n\n" +
+      "Observation : 1/2 = 3/6. Couper en 6 donne plus de parts, mais des parts plus petites. 3 parts sur 6, c’est la moitié.\n\n" +
+      "Conclusion : 3/6 = 1/2. Léo a tort.",
+    tags: ["fraction_nombre", "qcm", "equivalence", "raisonnement"],
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -2595,106 +2607,136 @@ export const fractionsBank: TutorBankItemV4[] = [
     microId: "fraction_mixte",
     difficulty: 5,
     theme: "neutral",
-    hint: "Explique ta stratégie de tri AVANT de parler de calcul.",
-    tags: ["fraction_nombre", "mixte", "template", "ouverte"],
+    hint: "Compare d’abord à 1, puis à 1/2.",
+    tags: ["fraction_nombre", "mixte", "template", "qcm"],
+    // 08/10/2026 : question ouverte rendue précise (Frédéric : « les questions open
+    // doivent être précises », puis « précises ET SIMPLES »). Avant : 2 cas sur 4
+    // en « Explique… » corrigés par un mot-clé, 2 QCM de MÉTHODE au texte long.
+    // Désormais 4 cas précis, une seule idée chacun, toujours en QCM, dont les
+    // leurres sont de vraies erreurs d'élève :
+    //   1. ranger trois fractions (repères 1 et 1/2) — leurres : ranger par les
+    //      numérateurs, par les dénominateurs, à l'envers ;
+    //   2. comparaison directe : « 7/4 ou 9/4 ? » (même dénominateur) ou
+    //      « 5/4 est-il plus grand que 1 ? » (choix courts, l'explication va dans explanation) ;
+    //   3. encadrer n/d — leurre « entre n et n + 1 » (lire le numérateur comme des unités) ;
+    //   4. plus petite ou plus grande que 1/2 (le double du numérateur).
     generate: () => {
       const x = tirer(PRENOMS);
       const NOMS: Record<number, string> = { 2: "demis", 3: "tiers", 4: "quarts", 5: "cinquièmes", 6: "sixièmes" };
-      // Une fraction sous 1/2, une au-dessus (et sous 1) : a/b avec 2a < b, c/d avec b/2 < c < d.
-      const sousMoitie = () => { const b = entierMixte(3, 9); return [entierMixte(1, Math.ceil(b / 2) - 1), b]; };
-      const surMoitie = () => { const d = entierMixte(3, 9); return [entierMixte(Math.floor(d / 2) + 1, d - 1), d]; };
+      // Une fraction sous 1/2, une au-dessus (et sous 1) : a/b avec 2a < b, c/d avec d/2 < c < d.
+      const sousMoitie = (dMin = 3, dMax = 9) => { const b = entierMixte(dMin, dMax); return [entierMixte(1, Math.ceil(b / 2) - 1), b]; };
+      const surMoitie = (dMin = 3, dMax = 9) => { const d = entierMixte(dMin, dMax); return [entierMixte(Math.floor(d / 2) + 1, d - 1), d]; };
       const mixte = (n: number, d: number) => `${n}/${d} = ${Math.floor(n / d)} + ${n % d}/${d}`;
-      const approx = (v: number) => decimalComma(Number(v.toFixed(2)));
-      const pgcd2 = (a: number, b: number): number => (b ? pgcd2(b, a % b) : a);
-      const cas = [
+      type Cas = { q: string; bonne: string; pieges: string[]; r: string; conclusion: string };
+      const cas: (() => Cas)[] = [
         () => {
+          // Trois fractions : une sous 1/2, une entre 1/2 et 1, une entre 1 et 2.
           const [a, b] = sousMoitie();
           const [c, d] = surMoitie();
-          const d3 = entierMixte(2, 5);
-          const r3 = entierMixte(1, d3 - 1);
-          let d4 = entierMixte(2, 6);
-          let r4 = entierMixte(1, d4 - 1);
-          while (r4 * d3 === r3 * d4 || d4 === d3) { d4 = entierMixte(2, 6); r4 = entierMixte(1, d4 - 1); }
-          const [p, g] = r3 / d3 < r4 / d4 ? [[d3 + r3, d3], [d4 + r4, d4]] : [[d4 + r4, d4], [d3 + r3, d3]];
-          const ppcm = [b, d, d3, d4].reduce((m, k) => (m * k) / pgcd2(m, k), 1);
-          const liste = shuffle([`${a}/${b}`, `${c}/${d}`, `${p[0]}/${p[1]}`, `${g[0]}/${g[1]}`]).join(" ; ");
+          const m = entierMixte(2, 5);
+          const n = entierMixte(m + 1, 2 * m - 1);
+          const fr: [number, number][] = [[a, b], [c, d], [n, m]];
+          const s = (t: [number, number][]) => t.map(([u, v]) => `${u}/${v}`).join(" < ");
+          const bonne = s(fr);
+          const parNum = [...fr].sort((u, v) => u[0] - v[0]);
+          const parDen = [...fr].sort((u, v) => u[1] - v[1]);
+          const candidats = [
+            new Set(fr.map((f) => f[0])).size === 3 ? s(parNum) : "",
+            new Set(fr.map((f) => f[1])).size === 3 ? s(parDen) : "",
+            s([...fr].reverse()),
+            s([fr[1], fr[0], fr[2]]),
+            s([fr[0], fr[2], fr[1]]),
+            s([fr[2], fr[0], fr[1]]),
+          ];
+          const pieges = Array.from(new Set(candidats.filter((k) => k && k !== bonne))).slice(0, 3);
+          const liste = shuffle(fr.map(([u, v]) => `${u}/${v}`)).join(" ; ");
           return {
-            q: `Pour ranger ${liste}, ${x.p} veut tout mettre au même dénominateur. Quelle méthode est plus rapide ?`,
-            mots: [] as string[],
-            qcm: {
-              bonne: "comparer d’abord chaque fraction à 1, puis à la moitié",
-              pieges: [
-                "ranger les fractions selon leurs numérateurs",
-                "ranger les fractions selon leurs dénominateurs",
-                "il n’y a pas plus rapide que le même dénominateur",
-              ],
-            },
-            r: `On compare d'abord chaque nombre à 1 : ${a}/${b} et ${c}/${d} ont un numérateur plus petit que leur dénominateur, ils sont sous 1 ; ${p[0]}/${p[1]} et ${g[0]}/${g[1]} sont au-dessus. La liste est déjà coupée en deux groupes sans un seul calcul. Il ne reste qu'à trier à l'intérieur : ${a}/${b} est sous la moitié, ${c}/${d} au-dessus ; et ${mixte(p[0], p[1])} est plus petit que ${mixte(g[0], g[1])}. On obtient ${a}/${b} < ${c}/${d} < ${p[0]}/${p[1]} < ${g[0]}/${g[1]}. Mettre au même dénominateur aurait demandé de trouver ${ppcm}.`,
+            q: tirer([
+              `Range dans l’ordre croissant : ${liste}.`,
+              `${x.p} range ces fractions de la plus petite à la plus grande : ${liste}. Quel est le bon rangement ?`,
+            ]),
+            bonne,
+            pieges,
+            r: `On compare d’abord à 1. ${n}/${m} a un numérateur plus grand que son dénominateur : ${n}/${m} dépasse 1. Les deux autres sont plus petites que 1. Puis on compare à 1/2. Le double de ${a} est ${2 * a}, plus petit que ${b} : ${a}/${b} < 1/2. Le double de ${c} est ${2 * c}, plus grand que ${d} : 1/2 < ${c}/${d}.`,
+            conclusion: `${bonne}.`,
           };
         },
         () => {
-          const e = entierMixte(1, 3);
-          const d1 = entierMixte(2, 6);
-          const r1 = entierMixte(1, d1 - 1);
-          let d2 = d1;
-          let r2 = r1;
-          while (d2 === d1 || r2 * d1 === r1 * d2) {
-            d2 = entierMixte(2, 6);
-            r2 = entierMixte(1, d2 - 1);
+          // 08/10 (Frédéric : « précises ET SIMPLES ») : comparaison directe.
+          const d = entierMixte(2, 6);
+          if (Math.random() < 0.5) {
+            // Même dénominateur, deux fractions plus grandes que 1.
+            const n1 = entierMixte(d + 1, 3 * d);
+            let n2 = entierMixte(d + 1, 3 * d);
+            while (n2 === n1) n2 = entierMixte(d + 1, 3 * d);
+            const [pe, gr] = n1 < n2 ? [n1, n2] : [n2, n1];
+            return {
+              q: `Quelle fraction est la plus grande : ${n1}/${d} ou ${n2}/${d} ?`,
+              bonne: `${gr}/${d}`,
+              pieges: [`${pe}/${d}`, "elles sont égales"],
+              r: `Les deux fractions comptent des ${NOMS[d]}. ${gr} ${NOMS[d]}, c’est plus que ${pe} ${NOMS[d]}. Donc ${pe}/${d} < ${gr}/${d}.`,
+              conclusion: `la plus grande est ${gr}/${d}.`,
+            };
           }
-          const [n1, n2] = [e * d1 + r1, e * d2 + r2];
-          const plus = r1 / d1 > r2 / d2 ? `${n1}/${d1}` : `${n2}/${d2}`;
+          // Plus grand que 1 ? oui / non.
+          let n = entierMixte(1, 3 * d);
+          while (n === d) n = entierMixte(1, 3 * d);
+          const sup = n > d;
           return {
-            q: `${x.p} compare ${n1}/${d1} et ${n2}/${d2}. Pourquoi l'écriture mixte rend-elle la comparaison plus facile ?`,
-            mots: [] as string[],
-            qcm: {
-              bonne: "les deux nombres ont le même entier : il ne reste qu’à comparer ce qui dépasse",
-              pieges: [
-                "il suffit de comparer les numérateurs",
-                "il suffit de comparer les dénominateurs",
-                "l’écriture mixte change la valeur des nombres",
-              ],
-            },
-            r: `Sous forme mixte, ${mixte(n1, d1)} et ${mixte(n2, d2)}. Les deux ont le même entier ${e} : il ne sert donc à rien de le comparer, et toute la question se joue sur ce qui dépasse, ${r1}/${d1} contre ${r2}/${d2}. Comme ${r1}/${d1} vaut environ ${approx(r1 / d1)} et ${r2}/${d2} environ ${approx(r2 / d2)}, c'est ${plus} le plus grand. L'écriture mixte met de côté la partie commune et ne laisse à comparer que la différence.`,
+            q: `${n}/${d} est-il plus grand que 1 ?`,
+            bonne: sup ? "oui" : "non",
+            pieges: [sup ? "non" : "oui", "il est égal à 1"],
+            r: `1 = ${d}/${d}. Le numérateur ${n} est ${sup ? "plus grand" : "plus petit"} que le dénominateur ${d}. Donc ${sup ? `${d}/${d} < ${n}/${d}` : `${n}/${d} < ${d}/${d}`}.`,
+            conclusion: `${n}/${d} est ${sup ? "plus grand" : "plus petit"} que 1 : la réponse est ${sup ? "oui" : "non"}.`,
           };
         },
         () => {
+          // Le piège : lire le numérateur comme des unités.
           const d = entierMixte(2, 6);
           let n = entierMixte(d + 1, 3 * d - 1);
           while (n % d === 0) n = entierMixte(d + 1, 3 * d - 1);
           const e = Math.floor(n / d);
           const nom = NOMS[d];
+          const bonne = `entre ${e} et ${e + 1}`;
           return {
-            q: `${x.p} range ${n}/${d} après ${n} parce que « ${n} est le plus grand nombre écrit ». Explique son erreur.`,
-            mots: [nom, "numérateur", "numerateur", "unités", "unites", `entre ${e} et ${e + 1}`, "dénominateur", "denominateur"],
-            r: `${Il(x)} lit le numérateur comme ${x.f ? "si elle" : "s'il"} comptait des unités, alors qu'on compte des ${nom.toUpperCase()}. ${n} ${nom}, ce n'est pas ${n} : ${d} ${nom} font déjà 1, donc ${n} ${nom} font ${e} et ${n - e * d} ${nom} (${mixte(n, d)}), un nombre situé entre ${e} et ${e + 1}. Le dénominateur dit dans quelle unité on compte ; sans lui, le numérateur ne veut rien dire.`,
+            q: `${x.p} dit : « ${n}/${d} est plus grand que ${n}. » ${Il(x)} se trompe.\nEntre quels entiers se trouve ${n}/${d} ?`,
+            bonne,
+            pieges: [`entre ${n} et ${n + 1}`, `entre ${e + 1} et ${e + 2}`, `entre ${e - 1} et ${e}`],
+            r: `${n}/${d}, ce sont ${n} ${nom}, pas ${n} unités. ${d} ${nom} font 1. ${e} × ${d} = ${e * d} et ${e + 1} × ${d} = ${(e + 1) * d}. Donc ${mixte(n, d)}, un nombre situé entre ${e} et ${e + 1}.`,
+            conclusion: `${n}/${d} est ${bonne}.`,
           };
         },
         () => {
-          const [a, b] = sousMoitie();
-          const [c, d] = surMoitie();
+          // Plus petite ou plus grande que 1/2 : on double le numérateur.
+          const sous = Math.random() < 0.5;
+          const [a, b] = sous ? sousMoitie() : surMoitie();
+          const bonne = sous ? "plus petite que 1/2" : "plus grande que 1/2";
           return {
-            q: `Explique à ${x.p} pourquoi comparer une fraction à 1/2 aide à la ranger. Prends l'exemple de ${a}/${b} et ${c}/${d}.`,
-            mots: ["moitié", "moitie", "double", "numérateur", "numerateur", "dénominateur", "denominateur", "repère", "repere"],
-            r: `Une fraction vaut 1/2 quand son dénominateur est le double de son numérateur : 3/6, 4/8, 5/10. Il suffit donc de comparer le double du numérateur au dénominateur. Pour ${c}/${d}, le double de ${c} est ${2 * c}, plus grand que ${d} : la fraction dépasse 1/2. Pour ${a}/${b}, le double de ${a} est ${2 * a}, plus petit que ${b} : elle est en dessous. Sans aucun calcul, on sait que ${a}/${b} < ${c}/${d}. 1 et 1/2 sont deux repères qui découpent la liste avant tout calcul.`,
+            q: tirer([
+              `${a}/${b} est-elle plus petite ou plus grande que 1/2 ?`,
+              `${x.p} se demande si ${a}/${b} est plus petite ou plus grande que 1/2. Qu’en penses-tu ?`,
+            ]),
+            bonne,
+            pieges: [sous ? "plus grande que 1/2" : "plus petite que 1/2", "égale à 1/2"],
+            r: `Une fraction vaut 1/2 quand le dénominateur est le double du numérateur, comme 3/6 ou 4/8. Le double de ${a} est ${2 * a}, ${sous ? "plus petit" : "plus grand"} que ${b}. Donc ${sous ? `${a}/${b} < 1/2` : `1/2 < ${a}/${b}`}.`,
+            conclusion: `${a}/${b} est ${bonne}.`,
           };
         },
       ];
-      const c: { q: string; mots: string[]; r: string; qcm?: { bonne: string; pieges: string[] } } =
-        cas[entierMixte(0, cas.length - 1)]();
-      // ⛔ 06/10 : plus aucun mot-clé purement numérique (« 1 » acceptait toute
-      // réponse contenant un 1) : ces cas-là sont devenus des QCM.
+      const c = cas[entierMixte(0, cas.length - 1)]();
       return {
         text: c.q,
-        ...(c.qcm
-          ? { format: "qcm" as const, choices: shuffle([c.qcm.bonne, ...c.qcm.pieges]), expected: [c.qcm.bonne], comparator: "mcq_exact" as const }
-          : { format: "open" as const, expected: c.mots, comparator: "contains_keyword" as const }),
+        format: "qcm" as const,
+        choices: shuffle([c.bonne, ...c.pieges]),
+        expected: [c.bonne],
+        comparator: "mcq_exact" as const,
         explanation:
-          "Définition : ordonner une liste de fractions, c’est les placer les unes par rapport aux autres — pas nécessairement les calculer.\n\n" +
-          "Méthode : on utilise les repères 1 et 1/2, puis l’encadrement par deux entiers consécutifs.\n\n" +
+          "Définition : ranger des fractions, c’est les placer les unes par rapport aux autres, souvent sans calcul.\n\n" +
+          "Méthode : on compare d’abord à 1, puis à 1/2. Pour un nombre plus grand que 1, on cherche entre quels entiers il se trouve.\n\n" +
           "Observation : " +
           c.r +
-          "\n\nConclusion : on garde le raisonnement, il vaut pour toute liste.",
+          "\n\nConclusion : " +
+          c.conclusion,
       };
     },
   },

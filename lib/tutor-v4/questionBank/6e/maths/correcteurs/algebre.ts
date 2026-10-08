@@ -83,33 +83,82 @@ function prenomDeLaQuestion(t: string, candidats: string[]): string | null {
   return null;
 }
 
+/** Valeur d'un calcul avec parenthèses simples : « (320 − 70 + 80) ÷ 3 ». */
+function evalueParentheses(s: string): number {
+  return evalue(s.replace(/\(([^()]+)\)/g, (_, e: string) => String(evalue(e))));
+}
+
 /**
- * Les questions d'explication. Ouvertes : au moins un mot-clé, et AUCUN mot-clé
- * purement numérique (« 6 » accepterait toute réponse contenant un 6).
- * QCM : la bonne réponse est recalculée quand elle est chiffrée.
+ * Les anciennes questions d'explication (« _tpl_ouverte »).
+ * 08/10/2026 : plus AUCUNE question ouverte (Frédéric : « les questions open
+ * doivent être précises »). Chaque cas est relu dans le texte et recalculé :
+ * réponse courte = la bonne valeur ; QCM = UN SEUL choix juste, et c'est l'attendu.
  */
 export function ouverte(q: TutorGeneratedQuestionV4): string[] {
-  if (q.format === "open") {
-    if (!q.expected.length) return ["aucun mot-clé"];
-    const num = q.expected.filter((m) => /^\s*\d+(?:[,/]\d+)?\s*$/.test(String(m)));
-    return num.length ? [`mot-clé purement numérique : ${num.join(", ")}`] : [];
-  }
+  if (q.format === "open" || q.comparator === "contains_keyword") return ["question ouverte : elle doit être un cas précis (08/10)"];
   const p: string[] = [];
-  if (q.comparator !== "mcq_exact" || !(q.choices ?? []).includes(String(q.expected[0]))) p.push("QCM mal formé");
-  // Motif : « d + (n − 1) × p » pour n maisons.
-  const m = q.text.match(/la première en demande (\d+), chaque maison ajoutée (\d+) de plus\. .*? pour (\d+) maisons/);
-  if (m) {
-    const [d, pas, n] = m.slice(1).map(Number);
-    const bon = d + (n - 1) * pas;
-    const justes = (q.choices ?? []).filter((c) => /^[\d +×]+$/.test(c) && evalue(c) === bon);
-    if (justes.length !== 1 || justes[0] !== q.expected[0]) p.push(`une seule proposition doit valoir ${bon} : ${justes.join(" | ")}`);
+  const t = q.text;
+  const ch = q.choices ?? [];
+  if (q.format === "qcm") {
+    if (q.comparator !== "mcq_exact" || !ch.includes(String(q.expected[0]))) p.push("QCM mal formé");
+    if (new Set(ch).size !== ch.length) p.push("choix en double");
+    if (ch.length < 3) p.push("au moins trois choix attendus");
+    // Frédéric (08/10) : l'élève calcule le nombre, il ne choisit pas une formule.
+    for (const c of ch) if (/[+−×÷]/.test(c)) p.push(`choix en formule : ${c}`);
   }
-  // Deux paniers : la bonne méthode annule la partie commune et divise la différence.
-  if (/Deux paniers contiennent les mêmes/.test(q.text) && !/s’annulent : on divise la différence/.test(String(q.expected[0])))
-    p.push("la bonne méthode est d'annuler la partie commune et de diviser la différence");
-  // Trois enfants, double et triple : 1 + 2 + 3 = 6 parts.
-  if (/le double du premier et le troisième le triple/.test(q.text) && !/^6 parts/.test(String(q.expected[0])))
-    p.push("le total vaut 6 parts (1 + 2 + 3)");
+  /** Un seul choix chiffré vaut `bon`, et c'est l'attendu. */
+  const unSeul = (bon: number) => {
+    const justes = ch.filter((c) => /^[\d ()+−×÷]+$/.test(c) && Math.abs(evalueParentheses(c) - bon) < 1e-9);
+    if (justes.length !== 1 || justes[0] !== q.expected[0]) p.push(`une seule proposition doit valoir ${bon} : ${justes.join(" | ")}`);
+  };
+  let m: RegExpMatchArray | null;
+  if ((m = t.match(/la première en demande (\d+), chaque maison ajoutée (\d+) de plus\. .*? pour (\d+) maisons/))) {
+    const [d, pas, n] = m.slice(1).map(Number);
+    p.push(...attendu(q, d + (n - 1) * pas));
+  } else if ((m = t.match(/somme (\d+)\. Le plus grand dépasse le plus petit de (\d+)\. Quel est le plus petit/))) {
+    const [S, e] = m.slice(1).map(Number);
+    if ((S - e) % 2 || S <= e) p.push(`${S} − ${e} ne se partage pas en deux`);
+    unSeul((S - e) / 2);
+  } else if ((m = t.match(/prime de (\d+) € .*?L’or a (\d+) € de plus .*?le bronze (\d+) € de moins/))) {
+    const [T, P, M] = m.slice(1).map(Number);
+    if ((T - P + M) % 3) p.push("la prime d'argent n'est pas entière");
+    p.push(...attendu(q, (T - P + M) / 3, "€"));
+  } else if ((m = t.match(/(\d+) barres égales\. Elles font (\d+) en tout/))) {
+    const [n, T] = m.slice(1).map(Number);
+    if (T % n) p.push(`${T} ne se partage pas en ${n}`);
+    p.push(...attendu(q, T / n));
+  } else if (/Deux paniers contiennent les mêmes/.test(t)) {
+    m = t.match(/a (\d+) .+? de plus et coûte (\d+) € de plus/);
+    if (!m) return [...p, "deux paniers : nombre ou prix en plus introuvable"];
+    const [n, d] = m.slice(1).map(Number);
+    if (d % n) p.push(`${d} € ne se partage pas en ${n}`);
+    p.push(...attendu(q, d / n, "€"));
+  } else if ((m = t.match(/coûtent (\d+) € ensemble\. Peut-on trouver/))) {
+    if (!/^non/.test(String(q.expected[0]))) p.push("une seule information ne suffit pas : la réponse est non");
+    if (ch.filter((c) => /^non/.test(c)).length !== 1) p.push("un seul choix « non » attendu");
+  } else if ((m = t.match(/^.+? coûte (\d+) €\. .+? et (\d+) .+? coûtent (\d+) €\./))) {
+    const [P, n, T] = m.slice(1).map(Number);
+    if ((T - P) % n || T <= P) p.push(`${T} − ${P} ne se partage pas en ${n}`);
+    p.push(...attendu(q, (T - P) / n, "€"));
+  } else if ((m = t.match(/vaut (\d+) à l’étape 1\. On ajoute (\d+) à chaque étape\. Combien vaut l’étape (\d+)/))) {
+    const [a, pas, k] = m.slice(1).map(Number);
+    unSeul(a + (k - 1) * pas);
+  } else if ((m = t.match(/commence par (\d+), (\d+), (\d+)… De combien augmente/))) {
+    const [a, b, c] = m.slice(1).map(Number);
+    if (b - a !== c - b || b <= a) p.push("l'écart n'est pas constant");
+    p.push(...attendu(q, b - a));
+  } else if ((m = t.match(/: (\d+) \S+ à l’étape 1, puis (\d+) de plus à chaque étape\. .*?a utilisé (\d+) /))) {
+    const [d, pas, T] = m.slice(1).map(Number);
+    if ((T - d) % pas || T <= d) p.push(`${T} − ${d} ne se partage pas en ajouts de ${pas}`);
+    p.push(...attendu(q, (T - d) / pas + 1));
+  } else if (/le double du premier/.test(t) && /le triple/.test(t)) {
+    // Trois enfants, double et triple : 1 + 2 + 3 = 6 parts.
+    p.push(...attendu(q, 6));
+  } else if ((m = t.match(/(\d+) parts égales et encore (\d+) font (\d+) en tout/))) {
+    const [n, k, T] = m.slice(1).map(Number);
+    if ((T - k) % n || T <= k) p.push(`${T} − ${k} ne se partage pas en ${n}`);
+    p.push(...attendu(q, (T - k) / n));
+  } else p.push("cas inconnu");
   return p;
 }
 

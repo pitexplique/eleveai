@@ -1058,15 +1058,20 @@ export const fractionsCalculBank: TutorBankItemV4[] = [
     microId: "fraction_calcul_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Explique pourquoi on ne peut pas additionner 1/2 et 1/3 en additionnant les numérateurs entre eux et les dénominateurs entre eux.",
-    format: "short",
-    expected: ["même dénominateur", "meme denominateur", "parts", "taille"],
-    comparator: "contains_keyword",
-    hint: "Deux fractions ne s'additionnent que si leurs parts ont la même taille.",
+    // 08/10/2026 : question ouverte rendue précise (Frédéric : « les questions open doivent être précises »).
+    // Avant : « Explique pourquoi on ne peut pas additionner 1/2 et 1/3… » (un mot-clé suffisait).
+    // Les leurres sont de vraies erreurs : 2/6 (tout additionner), 2/4 (garder un
+    // dénominateur sans changer 1/2), 3/8 (2/4 + 1/4, puis additionner les dénominateurs).
+    text: "Tom calcule 1/2 + 1/4. Il ajoute les numérateurs et les dénominateurs : il trouve 2/6.\nQuel est le bon résultat ?",
+    format: "qcm",
+    choices: ["3/4", "2/6", "2/4", "3/8"],
+    expected: ["3/4"],
+    comparator: "mcq_exact",
+    hint: "Écris 1/2 en quarts : 1/2 = 2/4.",
     explanation: expl(
-      "Un demi et un tiers ne sont pas des parts de la même taille : on ne peut pas les compter ensemble tant qu'on ne les a pas exprimées avec le même dénominateur. 1/2 = 3/6 et 1/3 = 2/6, donc la somme vaut 5/6 — et pas 2/5, qui serait même plus petit que 1/2."
+      "on ne peut ajouter que des parts de même taille. 1/2 = 2/4. Donc 1/2 + 1/4 = 2/4 + 1/4 = 3/4. Le résultat de Tom, 2/6, est plus petit que 1/2 : c'est impossible, car on ajoute quelque chose à 1/2."
     ),
-    tags: ["fraction_calcul", "defi", "raisonnement"],
+    tags: ["fraction_calcul", "defi", "raisonnement", "qcm"],
   },
   {
     kind: "fixed",

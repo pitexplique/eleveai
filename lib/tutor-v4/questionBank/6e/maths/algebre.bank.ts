@@ -133,14 +133,33 @@ const ARTICLES: { un: string; pl: string; f: boolean; prix: [number, number] }[]
   { un: "un ananas", pl: "ananas", f: false, prix: [2, 5] },
 ];
 /**
- * Une question d'explication : ouverte (mots-clés), ou QCM sur les mêmes pièges.
- * ⛔ 06/10 : plus aucun mot-clé purement numérique — « 6 » acceptait toute
- * réponse contenant un 6. Ces cas-là sont des QCM.
+ * Les anciennes questions d'explication (gabarits « _tpl_ouverte »).
+ * 08/10/2026 : question ouverte rendue précise (Frédéric : « les questions open
+ * doivent être précises », puis « précises ET SIMPLES »). Avant : « Explique… »
+ * corrigé par UN mot-clé, qui laissait tout passer. Désormais chaque cas est un
+ * calcul précis à réponse unique : une réponse courte (nombre), ou un QCM dont
+ * les leurres sont de vraies erreurs d'élève.
  */
-function ouverteOuQcm(c: { q: string; mots: string[]; r: string; qcm?: { bonne: string; pieges: string[] } }) {
-  return c.qcm
-    ? { text: c.q, format: "qcm" as const, choices: shuffle([c.qcm.bonne, ...c.qcm.pieges]), expected: [c.qcm.bonne], comparator: "mcq_exact" as const, explanation: expl(c.r) }
-    : { text: c.q, format: "open" as const, expected: c.mots, comparator: "contains_keyword" as const, explanation: expl(c.r) };
+function precise(c: {
+  q: string;
+  r: string;
+  qcm?: { bonne: string; pieges: string[] };
+  rep?: number;
+  u?: string;
+  canvas?: SchemaBarreCanvasData;
+}) {
+  const fig = c.canvas ? { canvas: c.canvas } : {};
+  if (c.qcm)
+    return { text: c.q, format: "qcm" as const, choices: shuffle([c.qcm.bonne, ...c.qcm.pieges]), expected: [c.qcm.bonne], comparator: "mcq_exact" as const, explanation: expl(c.r), ...fig };
+  const rep = c.rep as number;
+  return {
+    text: c.q,
+    format: "short" as const,
+    expected: c.u ? [`${rep} ${c.u}`, String(rep)] : [String(rep)],
+    comparator: "number_equal" as const,
+    explanation: expl(c.r),
+    ...fig,
+  };
 }
 /** « de cubes », « d’allumettes ». */
 const deM = (m: { unite: string }) => (/^[aeiouéè]/.test(m.unite) ? `d’${m.unite}` : `de ${m.unite}`);
@@ -436,42 +455,60 @@ export const algebreBank: TutorBankItemV4[] = [
     microId: "algebre_barres",
     difficulty: 5,
     theme: "neutral",
-    hint: "Décris ce que tu dessines, puis ce que tu corriges.",
-    tags: ["algebre_probleme", "barres", "template", "ouverte"],
+    hint: "Dessine les barres, puis retire ce qui dépasse.",
+    tags: ["algebre_probleme", "barres", "template", "qcm"],
+    // 08/10/2026 : question ouverte rendue précise (Frédéric : « les questions open doivent être précises »).
+    // Avant : « Explique comment un schéma aide… », « Explique pourquoi on ajoute… »,
+    // « pourquoi pas d'équation ? ». Désormais : le plus petit des deux nombres
+    // (leurres : oublier l'écart, oublier de diviser, donner le plus grand), le
+    // montant de la prime d'argent (réponse courte), une barre d'un schéma.
+    // ⛔ Aucun QCM dont les choix sont des formules : l'élève calcule le NOMBRE.
     generate: () => {
-      const x = tirer(PRENOMS);
       const cas = [
         () => {
+          // Écart pair : S ÷ 2 (le leurre « oublier l'écart ») reste entier.
           const petit = randomInt(8, 40);
-          const ecart = randomInt(4, 20);
+          let ecart = 2 * randomInt(2, 10);
+          while (ecart === petit || ecart === 2 * petit) ecart = 2 * randomInt(2, 10);
           const S = 2 * petit + ecart;
+          // Leurres : oublier de diviser, donner le plus grand, oublier l'écart (tous distincts).
+          const pieges = [S - ecart, petit + ecart, S / 2].map(String);
           return {
-            q: `Explique à ${x.p} comment un schéma en barres aide à résoudre : « deux nombres ont pour somme ${S}, le plus grand dépasse le plus petit de ${ecart} ».`,
-            mots: ["deux barres", "écart", "ecart", "retire", "égales", "egales", "moitié", "moitie"],
-            r: `On dessine deux barres l'une sous l'autre, la seconde plus longue de ${ecart}. Le total des deux vaut ${S}. Si on coupe le morceau de ${ecart} qui dépasse, les deux barres deviennent égales et le total tombe à ${S} − ${ecart} = ${2 * petit} : chaque barre vaut donc ${2 * petit} ÷ 2 = ${petit}. Le plus petit est ${petit}, le plus grand ${petit} + ${ecart} = ${petit + ecart}.`,
+            q: `Deux nombres ont pour somme ${S}. Le plus grand dépasse le plus petit de ${ecart}. Quel est le plus petit ?`,
+            qcm: { bonne: String(petit), pieges },
+            r: `On dessine deux barres. La grande dépasse de ${ecart}. On retire ce morceau : ${S} − ${ecart} = ${2 * petit}. Il reste deux barres égales : ${2 * petit} ÷ 2 = ${petit}. Le plus petit est ${petit}.`,
           };
         },
         () => {
           const argent = randomInt(40, 150);
           const plus = randomInt(10, 60);
-          const moins = randomInt(10, argent - 10);
+          let moins = randomInt(10, argent - 10);
+          while (moins === plus) moins = randomInt(10, argent - 10);
           const T = 3 * argent + plus - moins;
           return {
-            q: `Une prime de ${T} € est partagée : l'or reçoit ${plus} € de plus que l'argent, le bronze ${moins} € de moins. Explique à ${x.p} pourquoi on ajoute ${moins} au total avant de diviser par 3.`,
-            mots: ["manque", "bronze", "égales", "egales", "corrige", "trois parts"],
-            r: `Les trois primes valent chacune la prime d'argent, sauf que l'or a ${plus} € en PLUS et le bronze ${moins} € en MOINS. Pour rendre les trois barres égales, on retire les ${plus} € de l'or et on remet les ${moins} € du bronze : le total corrigé devient ${T} − ${plus} + ${moins} = ${3 * argent}. Ce total-là vaut exactement trois primes d'argent, d'où ${3 * argent} ÷ 3 = ${argent}.`,
+            q: `Une prime de ${T} € est partagée entre l’or, l’argent et le bronze. L’or a ${plus} € de plus que l’argent, le bronze ${moins} € de moins. Combien reçoit l’argent ?`,
+            rep: argent,
+            u: "€",
+            r: `On rend les trois barres égales à celle de l’argent. On retire les ${plus} € de trop de l’or. On rajoute les ${moins} € qui manquent au bronze. ${T} − ${plus} + ${moins} = ${3 * argent}. Puis ${3 * argent} ÷ 3 = ${argent}. L’argent reçoit ${argent} €.`,
           };
         },
-        () => ({
-          q: tirer([
-            `${x.p} demande pourquoi on parle de méthode « pré-algébrique » et pas d'équation. Explique-lui.`,
-            `Explique à ${x.p} pourquoi, en 6e, on dessine des barres au lieu d'écrire une équation.`,
-          ]),
-          mots: ["lettre", "sans", "dessin", "5e", "schéma", "schema"],
-          r: "En 6e on ne pose pas d'équation et on n'écrit pas de lettre : on dessine la relation au lieu de l'écrire avec un x. Le raisonnement est pourtant le même — retirer d'un côté, retirer de l'autre. La lettre arrive en 5e, et elle arrive plus facilement quand le dessin a été fait avant.",
-        }),
+        () => {
+          const n = randomInt(2, 5);
+          const part = randomInt(3, 20);
+          const T = n * part;
+          return {
+            q: `Le schéma montre ${n} barres égales. Elles font ${T} en tout. Combien vaut une barre ?`,
+            rep: part,
+            r: `${n} barres égales font ${T}. Une barre vaut ${T} ÷ ${n} = ${part}. En 6e, le schéma remplace l’équation. En 5e, on écrira une lettre à la place de la barre.`,
+            canvas: barres(
+              String(T),
+              Array.from({ length: n }, () => ({ label: "?", unknown: true })),
+              "Combien vaut une barre ?"
+            ),
+          };
+        },
       ];
-      return ouverteOuQcm(cas[randomInt(0, cas.length - 1)]());
+      return precise(cas[randomInt(0, cas.length - 1)]());
     },
   },
 
@@ -692,10 +729,15 @@ export const algebreBank: TutorBankItemV4[] = [
     microId: "algebre_inconnues",
     difficulty: 5,
     theme: "neutral",
-    hint: "Dis ce qui est COMMUN aux deux situations, et ce qui change.",
-    tags: ["algebre_probleme", "inconnues", "template", "ouverte"],
+    hint: "Ce qui est pareil des deux côtés ne compte pas : regarde ce qui change.",
+    tags: ["algebre_probleme", "inconnues", "template", "short"],
+    // 08/10/2026 : question ouverte rendue précise (Frédéric : « les questions open doivent être précises »).
+    // Avant : « Quelle méthode est la bonne ? », « Explique pourquoi cela ne suffit
+    // pas », « Explique la stratégie de l'échange ». Désormais : le prix d'un objet
+    // par la différence de deux paniers, « peut-on trouver les deux prix ? » avec
+    // une seule information (leurre : couper le total en deux), et le prix d'un
+    // objet quand on connaît l'autre.
     generate: () => {
-      const x = tirer(PRENOMS);
       const A = tirer(ARTICLES);
       let B = tirer(ARTICLES);
       while (B === A) B = tirer(ARTICLES);
@@ -704,37 +746,37 @@ export const algebreBank: TutorBankItemV4[] = [
           const n = randomInt(2, 5);
           const p = randomInt(B.prix[0], B.prix[1]);
           return {
-            q: `Deux paniers contiennent les mêmes ${A.pl}, mais l'un a ${n} ${B.pl} de plus et coûte ${n * p} € de plus. ${x.p} cherche le prix ${B.f ? "d’une" : "d’un"} ${sing(B)}. Quelle méthode est la bonne ?`,
-            mots: [] as string[],
-            qcm: {
-              bonne: `les ${A.pl} s’annulent : on divise la différence de prix par le nombre de ${B.pl} en plus`,
-              pieges: [
-                `on divise le prix d’un panier par le nombre de ${B.pl}`,
-                `il faut d’abord connaître le prix des ${A.pl}`,
-                `on ajoute la différence de prix au nombre de ${B.pl}`,
-              ],
-            },
-            r: `Les ${A.pl} sont les mêmes dans les deux paniers : ${A.f ? "elles" : "ils"} coûtent donc la même chose et s'annulent quand on compare. Toute la différence de prix vient des ${B.pl} en plus : ${n * p} € pour ${n}, soit ${n * p} ÷ ${n} = ${p} € l'un. On n'a même pas eu besoin de connaître le prix des ${A.pl}.`,
+            q: `Deux paniers contiennent les mêmes ${A.pl}. Le second a ${n} ${B.pl} de plus et coûte ${n * p} € de plus. Combien coûte ${B.un} ?`,
+            rep: p,
+            u: "€",
+            r: `Les ${A.pl} sont les mêmes : on n’en tient pas compte. La différence de prix vient des ${n} ${B.pl} en plus. ${n * p} ÷ ${n} = ${p}. ${Maj(B.un)} coûte ${p} €.`,
           };
         },
         () => {
-          const S = randomInt(12, 30);
+          const S = 2 * randomInt(6, 15);
           return {
-            q: `${x.p} sait seulement que ${A.un} et ${B.un} coûtent ${S} € ensemble. Explique-lui pourquoi cela ne suffit pas pour trouver les deux prix.`,
-            mots: ["plusieurs", "couples", "deux informations", "choisir", "infinité", "infinite"],
-            r: `« ${Maj(A.un)} et ${B.un} coûtent ${S} € » est vrai pour beaucoup de couples de prix : 5 et ${S - 5}, 6 et ${S - 6}, 7 et ${S - 7}… Rien ne permet de choisir entre eux. Il faut une seconde information, portant sur une combinaison différente, pour n'en garder qu'un seul.`,
+            q: `${Maj(A.un)} et ${B.un} coûtent ${S} € ensemble. Peut-on trouver le prix de chacun ?`,
+            qcm: {
+              bonne: "non",
+              pieges: [`oui : ${S / 2} € chacun`, `oui : ${S} € chacun`],
+            },
+            r: `Beaucoup de prix sont possibles : 5 + ${S - 5} = ${S}, 6 + ${S - 6} = ${S}, 7 + ${S - 7} = ${S}… Rien ne dit que les deux prix sont égaux. Il faut une autre information pour trouver les prix.`,
           };
         },
-        () => ({
-          q: tirer([
-            `Explique à ${x.p} la stratégie de l'échange : comment se ramener à un seul objet inconnu.`,
-            `${x.p} connaît le prix ${A.f ? "d’une" : "d’un"} ${sing(A)}, mais pas celui des ${B.pl}. Explique-lui comment se ramener à un seul objet inconnu.`,
-          ]),
-          mots: ["remplace", "connu", "retire", "un seul", "substitue"],
-          r: "Dès qu'on connaît le prix d'un objet, on le retire du panier et de son prix total : il ne reste plus qu'un seul type d'objet inconnu, en plusieurs exemplaires. On divise alors le prix restant par leur nombre. Toute la difficulté est de trouver le premier prix, souvent en comparant deux paniers.",
-        }),
+        () => {
+          const P = randomInt(A.prix[0], A.prix[1]);
+          const n = randomInt(2, 5);
+          const pb = randomInt(B.prix[0], B.prix[1]);
+          const T = P + n * pb;
+          return {
+            q: `${Maj(A.un)} coûte ${P} €. ${Maj(A.un)} et ${n} ${B.pl} coûtent ${T} €. Combien coûte ${B.un} ?`,
+            rep: pb,
+            u: "€",
+            r: `On connaît le prix ${A.f ? "d’une" : "d’un"} ${sing(A)} : on le retire du total. ${T} − ${P} = ${n * pb}. Il reste ${n} ${B.pl} pour ${n * pb} €. ${n * pb} ÷ ${n} = ${pb}. ${Maj(B.un)} coûte ${pb} €.`,
+          };
+        },
       ];
-      return ouverteOuQcm(cas[randomInt(0, cas.length - 1)]());
+      return precise(cas[randomInt(0, cas.length - 1)]());
     },
   },
 
@@ -972,44 +1014,49 @@ export const algebreBank: TutorBankItemV4[] = [
     microId: "algebre_motif",
     difficulty: 5,
     theme: "neutral",
-    hint: "Distingue ce qui se répète de ce qui ne se produit qu'une fois.",
-    tags: ["algebre_probleme", "motif", "template", "ouverte"],
+    hint: "Le départ est compté une seule fois. Ensuite, on ajoute le même nombre.",
+    tags: ["algebre_probleme", "motif", "template", "qcm"],
+    // 08/10/2026 : question ouverte rendue précise (Frédéric : « les questions open doivent être précises »).
+    // Avant : « Explique pourquoi multiplier par (étape − 1) », « Explique comment
+    // repérer la régularité » (un mot-clé suffisait). Désormais : le nombre
+    // d'allumettes pour n maisons (réponse courte), la valeur d'une étape (QCM de
+    // nombres ; leurre : « départ + étape × pas », l'ajout de trop), et l'écart
+    // entre deux termes. ⛔ Aucun QCM dont les choix sont des formules.
     generate: () => {
-      const x = tirer(PRENOMS);
       const cas = [
         () => {
           const d = randomInt(4, 9);
           const p = randomInt(2, d - 1);
           const n = randomInt(15, 40);
           return {
-            q: `Des maisons en allumettes : la première en demande ${d}, chaque maison ajoutée ${p} de plus. ${x.p} veut le nombre d'allumettes pour ${n} maisons sans les dessiner. Quel calcul traduit la structure du motif ?`,
-            mots: [] as string[],
-            qcm: {
-              bonne: `${d} + ${n - 1} × ${p}`,
-              pieges: [`${d} + ${n} × ${p}`, `${n} × ${p}`, `${n} × ${d}`],
-            },
-            r: `La première maison coûte ${d} allumettes ; ensuite, chaque maison ajoutée n'en coûte que ${p}. Pour ${n} maisons, il y a une première maison et ${n - 1} ajouts : ${d} + ${n - 1} × ${p} = ${d + (n - 1) * p}. La structure sépare ce qui n'arrive qu'une fois de ce qui se répète — c'est ce qui évite de dessiner.`,
+            q: `Des maisons en allumettes : la première en demande ${d}, chaque maison ajoutée ${p} de plus. Combien d’allumettes faut-il pour ${n} maisons ?`,
+            rep: d + (n - 1) * p,
+            r: `La première maison demande ${d} allumettes. Ensuite, chaque maison ajoute ${p} allumettes. Pour ${n} maisons, il y a la première et ${n - 1} maisons ajoutées : ${d} + ${n - 1} × ${p} = ${d + (n - 1) * p}.`,
           };
         },
-        () => ({
-          q: tirer([
-            `Explique à ${x.p} pourquoi, dans un motif, il faut multiplier le pas par (étape − 1) et non par le numéro de l'étape.`,
-            `${x.p} calcule l'étape 10 d'un motif en faisant « 10 × le pas + le départ ». Explique son erreur.`,
-          ]),
-          mots: ["première", "premiere", "déjà", "deja", "moins un", "ajouts", "départ", "depart"],
-          r: "Le premier terme est le point de DÉPART : on ne l'obtient pas en ajoutant le pas, il est déjà là. Les ajouts ne commencent qu'à partir de la deuxième étape. Pour atteindre l'étape n, on ajoute donc le pas n − 1 fois seulement — multiplier par n compte un ajout de trop.",
-        }),
+        () => {
+          const a = randomInt(3, 12);
+          let p = randomInt(2, 9);
+          while (p === a) p = randomInt(2, 9);
+          const k = randomInt(8, 15);
+          const bon = a + (k - 1) * p;
+          return {
+            q: `Un motif vaut ${a} à l’étape 1. On ajoute ${p} à chaque étape. Combien vaut l’étape ${k} ?`,
+            qcm: { bonne: String(bon), pieges: [String(a + k * p), String(k * p)] },
+            r: `À l’étape 1, on a déjà ${a}. Pour aller à l’étape ${k}, on ajoute ${p} seulement ${k - 1} fois : ${a} + ${k - 1} × ${p} = ${bon}. Calculer ${a} + ${k} × ${p} compterait un ajout de trop.`,
+          };
+        },
         () => {
           const a = randomInt(2, 12);
           const p = randomInt(2, 9);
           return {
-            q: `Un motif commence par ${a}, ${a + p}, ${a + 2 * p}… Explique à ${x.p} comment repérer sa régularité quand on ne connaît que ces premiers termes.`,
-            mots: ["différence", "difference", "soustrait", "consécutifs", "consecutifs", "même", "meme"],
-            r: `On calcule la différence entre deux termes consécutifs, puis on vérifie qu'elle est la même partout : ${a + p} − ${a} = ${p} et ${a + 2 * p} − ${a + p} = ${p}. Si l'écart est constant, le motif s'obtient en ajoutant toujours le même nombre, et on peut alors écrire sa structure.`,
+            q: `Un motif commence par ${a}, ${a + p}, ${a + 2 * p}… De combien augmente-t-il à chaque étape ?`,
+            rep: p,
+            r: `On calcule l’écart entre deux nombres qui se suivent : ${a + p} − ${a} = ${p} et ${a + 2 * p} − ${a + p} = ${p}. L’écart est toujours le même : le motif augmente de ${p} à chaque étape.`,
           };
         },
       ];
-      return ouverteOuQcm(cas[randomInt(0, cas.length - 1)]());
+      return precise(cas[randomInt(0, cas.length - 1)]());
     },
   },
 
@@ -1107,17 +1154,27 @@ export const algebreBank: TutorBankItemV4[] = [
     microId: "algebre_defi",
     difficulty: 5,
     theme: "neutral",
-    hint: "Explique le chemin inverse : on connaît le résultat, on cherche le rang.",
-    tags: ["algebre_probleme", "defi", "template", "ouverte"],
+    hint: "Fais le chemin à l’envers : retire le départ, puis divise.",
+    tags: ["algebre_probleme", "defi", "template", "qcm"],
+    // 08/10/2026 : question ouverte rendue précise (Frédéric : « les questions open doivent être précises »).
+    // Avant : « Explique comment faire le chemin à l'envers », « Explique en quoi
+    // ces problèmes préparent les lettres ». Désormais, trois réponses courtes :
+    // le numéro de l'étape (chemin à l'envers), le nombre de parts (6), et une
+    // part quand « n parts et encore k font T ». ⛔ Aucun QCM de formules.
     generate: () => {
       const x = tirer(PRENOMS);
       const cas = [
         () => {
           const m = tirer(MOTIFS);
+          const d = randomInt(4, 9);
+          let p = randomInt(3, 6);
+          while (p === d) p = randomInt(3, 6);
+          const k = randomInt(5, 14);
+          const T = d + (k - 1) * p;
           return {
-            q: `Dans un motif de ${m.nom}, ${x.p} connaît le nombre total ${deM(m)} et cherche le numéro de l'étape. Explique-lui comment faire le chemin à l'envers.`,
-            mots: ["retire", "divise", "première", "premiere", "ajoute 1", "inverse"],
-            r: "On défait les opérations dans l'ordre inverse. On retire d'abord ce que demande la première étape, puisqu'il n'arrive qu'une fois. Ce qui reste correspond aux ajouts : on le divise par le pas pour savoir combien il y en a eu. Enfin, on ajoute 1 pour compter la première étape.",
+            q: `Un motif de ${m.nom} : ${d} ${m.unite} à l’étape 1, puis ${p} de plus à chaque étape. ${x.p} a utilisé ${T} ${m.unite}. À quelle étape est-${il(x)} arrivé${x.f ? "e" : ""} ?`,
+            rep: k,
+            r: `On fait le chemin à l’envers. On retire les ${d} ${m.unite} de l’étape 1 : ${T} − ${d} = ${T - d}. On divise par ${p} pour compter les ajouts : ${T - d} ÷ ${p} = ${k - 1}. On ajoute 1 pour l’étape 1 : ${k - 1} + 1 = ${k}. C’est l’étape ${k}.`,
           };
         },
         () => {
@@ -1125,25 +1182,29 @@ export const algebreBank: TutorBankItemV4[] = [
           const T = 6 * part;
           const c = tirer(COLLECTIONS_ALG.filter((k) => !k.u));
           return {
-            q: `« Trois enfants se partagent ${T} ${c.pl}, le deuxième en a le double du premier et le troisième le triple. » ${x.p} fait un schéma en barres. En combien de parts égales le total est-il partagé ?`,
-            mots: [] as string[],
-            qcm: {
-              bonne: "6 parts : 1 + 2 + 3",
-              pieges: ["3 parts : une par enfant", "5 parts : 2 + 3", "2 parts : le double"],
-            },
-            r: `On dessine le premier comme UNE part, le deuxième comme deux parts identiques, le troisième comme trois. Le total vaut donc 1 + 2 + 3 = 6 parts égales, et ${T} ÷ 6 = ${part} ${c.pl} par part. Le premier en a ${part}, le deuxième ${2 * part}, le troisième ${3 * part} — et ${part} + ${2 * part} + ${3 * part} = ${T}.`,
+            q: `Trois enfants se partagent ${T} ${c.pl}. Le deuxième a le double du premier, le troisième le triple. En combien de parts égales faut-il couper le total ?`,
+            rep: 6,
+            r: `Le premier a 1 part, le deuxième 2 parts, le troisième 3 parts. Le total vaut 1 + 2 + 3 = 6 parts égales. Une part vaut ${T} ÷ 6 = ${part} ${c.pl}.`,
           };
         },
-        () => ({
-          q: tirer([
-            `Explique à ${x.p} en quoi ces problèmes préparent le calcul avec des lettres, qu'on apprendra en 5e.`,
-            `${x.p} demande à quoi servent les « parts » dessinées, puisqu'on n'écrit pas d'équation en 6e. Réponds-lui.`,
-          ]),
-          mots: ["lettre", "part", "inconnu", "x", "même raisonnement", "5e"],
-          r: "La « part » qu'on dessine joue exactement le rôle de la lettre : c'est un nombre qu'on ne connaît pas encore, mais avec lequel on raisonne. Écrire « le total vaut 6 parts » puis diviser par 6, c'est déjà résoudre une équation — sans l'écrire. En 5e, la part devient un x et le dessin devient une ligne de calcul.",
-        }),
+        () => {
+          const n = randomInt(2, 5);
+          const part = randomInt(3, 15);
+          const k = randomInt(2, 12);
+          const T = n * part + k;
+          return {
+            q: `Sur un schéma, ${n} parts égales et encore ${k} font ${T} en tout. Combien vaut une part ?`,
+            rep: part,
+            r: `On retire d’abord ${k} : ${T} − ${k} = ${n * part}. Puis on partage en ${n} : ${n * part} ÷ ${n} = ${part}. En 5e, la part deviendra une lettre.`,
+            canvas: barres(
+              String(T),
+              [...Array.from({ length: n }, () => ({ label: "?", unknown: true })), { label: String(k), value: String(k) }],
+              "Combien vaut une part ?"
+            ),
+          };
+        },
       ];
-      return ouverteOuQcm(cas[randomInt(0, cas.length - 1)]());
+      return precise(cas[randomInt(0, cas.length - 1)]());
     },
   },
 ];

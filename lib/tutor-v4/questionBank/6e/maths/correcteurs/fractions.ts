@@ -229,28 +229,64 @@ export const CORRECTEURS: CorrecteursMaths = {
     if (q.expected[0] !== `entre ${e} et ${e + 1}`) p.push(`réponse ${q.expected[0]} au lieu de entre ${e} et ${e + 1}`);
     return p;
   },
+  // 08/10/2026 : plus de question ouverte, quatre cas précis en QCM (voir le gabarit).
   fraction_mixte_tpl_ouverte: (q) => {
-    const p = affirmationsJustes(String(q.explanation ?? ""));
-    if (!q.expected.length) p.push("aucun mot-clé");
-    // ⛔ 06/10 : aucun mot-clé purement numérique (« 1 » accepterait toute réponse contenant un 1).
-    if (q.format === "open") {
-      const num = q.expected.filter((m) => /^\s*\d+(?:[,/]\d+)?\s*$/.test(String(m)));
-      if (num.length) p.push(`mot-clé purement numérique : ${num.join(", ")}`);
-    } else {
-      if (q.comparator !== "mcq_exact" || !(q.choices ?? []).includes(String(q.expected[0]))) p.push("QCM mal formé");
-      // La méthode juste : repères 1 et 1/2 pour ranger ; même entier pour l'écriture mixte.
-      const e = String(q.expected[0]);
-      if (/Pour ranger/.test(q.text) && !/à 1, puis à la moitié/.test(e)) p.push("la méthode rapide est de comparer à 1 puis à la moitié");
-      if (/écriture mixte/.test(q.text) && !/même entier/.test(e)) p.push("la raison est le même entier");
-      // Deux fractions de l'énoncé doivent bien avoir le même entier.
-      const fr = fractionsDe(q.text);
-      if (/écriture mixte/.test(q.text) && fr.length === 2 && Math.floor(fr[0][0] / fr[0][1]) !== Math.floor(fr[1][0] / fr[1][1]))
-        p.push("les deux fractions n'ont pas le même entier");
-    }
+    const p = [...affirmationsJustes(String(q.explanation ?? "")), ...affirmationsJustes(q.text)];
+    const ch = q.choices ?? [];
+    const e = String(q.expected[0]);
+    if (q.format !== "qcm" || q.comparator !== "mcq_exact") p.push("QCM attendu : plus de question ouverte");
+    if (q.expected.length !== 1 || !ch.includes(e)) p.push("bonne réponse absente des choix");
+    if (new Set(ch).size !== ch.length) p.push("choix en double");
+    if (ch.length < 3) p.push("au moins trois choix attendus");
+    // Frédéric (08/10) : des choix COURTS, l'explication va dans explanation.
+    for (const c of ch) if (c.length > 25 || /[:,;]/.test(c)) p.push(`choix trop long : ${c}`);
+    const fr =fractionsDe(q.text).filter(([a, b]) => a !== 1 || b !== 2);
     // Chaque fraction de l'énoncé doit être reprise dans l'explication.
-    for (const [a, b] of fractionsDe(q.text)) if (a !== 1 || b !== 2) if (!String(q.explanation).includes(`${a}/${b}`)) p.push(`${a}/${b} n'est pas expliquée`);
-    const m = q.text.match(/range (\d+)\/(\d+) après (\d+)/);
-    if (m && Number(m[1]) !== Number(m[3])) p.push("le piège doit reprendre le numérateur");
+    for (const [a, b] of fr) if (!String(q.explanation).includes(`${a}/${b}`)) p.push(`${a}/${b} n'est pas expliquée`);
+    if (/ordre croissant|de la plus petite à la plus grande/.test(q.text)) {
+      // Un seul choix est rangé dans le bon ordre, avec les fractions de l'énoncé.
+      const cle = (t: [number, number][]) => t.map(([a, b]) => `${a}/${b}`).sort().join("|");
+      const ranges = ch.filter((c) => {
+        const f = fractionsDe(c);
+        const v = f.map(([a, b]) => a / b);
+        return cle(f) === cle(fr) && v.every((x, i) => !i || v[i - 1] < x);
+      });
+      if (ranges.length !== 1 || ranges[0] !== e) p.push(`rangement : ${ranges.length} choix justes, attendu ${e}`);
+      for (const c of ch) if (cle(fractionsDe(c)) !== cle(fr)) p.push(`le choix ${c} ne reprend pas les fractions de l'énoncé`);
+    } else if (/la plus grande : \d+\/\d+ ou \d+\/\d+ \?/.test(q.text)) {
+      // Deux fractions de même dénominateur : la plus grande, et ce n'est pas « égales ».
+      if (fr.length !== 2) return [...p, "deux fractions attendues"];
+      const [[a, b], [c, d]] = fr;
+      if (b !== d) p.push("même dénominateur attendu (comparaison simple)");
+      if (egal(a / b, c / d)) p.push("fractions égales : pas de plus grande");
+      const bon = a / b > c / d ? `${a}/${b}` : `${c}/${d}`;
+      if (e !== bon) p.push(`réponse ${e} au lieu de ${bon}`);
+    } else if (/est-il plus grand que 1 \?/.test(q.text)) {
+      const f1 = fractionsDe(q.text); // 1/2 compris ici
+      if (f1.length !== 1) return [...p, "une seule fraction attendue"];
+      const [a, b] = f1[0];
+      if (a === b) p.push("fraction égale à 1");
+      const bon = a > b ? "oui" : "non";
+      if (e !== bon) p.push(`réponse ${e} au lieu de ${bon}`);
+    } else if (/entre quels entiers/i.test(q.text)) {
+      if (fr.length < 1) return [...p, "fraction introuvable"];
+      const [n, d] = fr[0];
+      if (n % d === 0) p.push("fraction entière : pas d'encadrement strict");
+      const k = Math.floor(n / d);
+      if (e !== `entre ${k} et ${k + 1}`) p.push(`réponse ${e} au lieu de entre ${k} et ${k + 1}`);
+      const justes = ch.filter((c) => {
+        const m = c.match(/^entre (\d+) et (\d+)$/);
+        return m && Number(m[1]) < n / d && n / d < Number(m[2]) && Number(m[2]) === Number(m[1]) + 1;
+      });
+      if (justes.length !== 1) p.push(`${justes.length} encadrements justes`);
+      if (!q.text.includes(`plus grand que ${n}.`)) p.push("le piège doit reprendre le numérateur");
+    } else if (/plus petite ou plus grande que 1\/2/.test(q.text)) {
+      if (fr.length !== 1) return [...p, "une seule fraction attendue"];
+      const [a, b] = fr[0];
+      if (2 * a === b) p.push("fraction égale à 1/2");
+      const bon = 2 * a < b ? "plus petite que 1/2" : "plus grande que 1/2";
+      if (e !== bon) p.push(`réponse ${e} au lieu de ${bon}`);
+    } else p.push("cas inconnu");
     return p;
   },
   fraction_defi_tpl_1: quantite,
