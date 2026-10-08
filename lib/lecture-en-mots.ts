@@ -153,6 +153,11 @@ export function enMots(texte: string): string {
     .replace(/_{2,}/g, " combien ")
     .replace(/\\%/g, "%")
     .replace(/\$([^$]+)\$/g, (_, f) => ` ${formuleEnMots(f)} `)
+    // ⛔ 08/10/2026 (Coach sonore) — un tiret de LISTE n'est pas un « moins ».
+    // « programme. – avancer de 6 m – tourner de 60° » se disait « moins
+    // avancer… moins tourner ». Tiret suivi d'un mot en minuscules d'au moins
+    // deux lettres = une puce : on marque une pause. « a – b » reste un moins.
+    .replace(/(^|\s)[–—-]\s+(?=\p{Ll}{2,})/gu, "$1, ")
     .replace(/[−–]/g, "-");
   // ⭐ Le coach écrit aussi du LaTeX SANS dollars, surtout dans les choix et
   // la réponse attendue (« x^2 », « \dfrac{\sqrt{3}}{2} ») : le même

@@ -733,6 +733,14 @@ export default function CoachIA() {
                 <span className="rounded-full border border-green-300 bg-white px-4 py-2 text-sm font-semibold text-green-700">
                   {totalMicros} séries d&apos;exercices
                 </span>
+                {/* ⭐ 08/10/2026 — le Coach sonore se dit AVANT d'entrer : le
+                    bouton qui l'allume est dans l'écran d'exercices. */}
+                <span
+                  title="Dans les exercices, le bouton « Coach sonore » lit les questions et les réponses à voix haute"
+                  className="rounded-full border border-sky-300 bg-sky-50 px-4 py-2 text-sm font-semibold text-sky-800"
+                >
+                  🔊 Écrit et sonore
+                </span>
                 {/* Le « mode complet » de la liste, à un clic et retenu —
                     comme dans le tutor, c'est le DÉFAUT qui a changé, pas le
                     possible. */}

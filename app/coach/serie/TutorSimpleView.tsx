@@ -1,11 +1,16 @@
 "use client";
 
-import { useEffect, useRef, type KeyboardEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import Link from "next/link";
 import { Video } from "lucide-react";
 import AudioBoost from "@/components/AudioBoost";
 import { MarkdownMath } from "@/components/MarkdownMath";
-import { buildReadableQuestion, speechLangForMatiere } from "./ListenButton";
+import {
+  buildReadableQuestion,
+  speakText,
+  speechLangForMatiere,
+  textePourLaVoix,
+} from "./ListenButton";
 import type { Classe, Matiere } from "@/lib/tutor-v4/catalog";
 import type { TutorMode, TutorQuestionOption } from "@/lib/tutor-v4/types";
 import { buildLearningVideoHref } from "@/lib/videoSearch";
@@ -155,9 +160,16 @@ export default function TutorSimpleView({
     }
   }, [currentQuestion?.id, wrongAnswerPanelOpen]);
 
+  const speechLang = speechLangForMatiere(matiere);
   const readableQuestion = currentQuestion
-    ? buildReadableQuestion(currentQuestion, speechLangForMatiere(matiere))
+    ? buildReadableQuestion(currentQuestion, speechLang)
     : "";
+  // Rendu serveur : pas de synthèse vocale ; on attend le client pour montrer
+  // les 🔊 des choix (sinon décalage d'hydratation).
+  const [speechOk, setSpeechOk] = useState(false);
+  useEffect(() => {
+    setSpeechOk(typeof window !== "undefined" && "speechSynthesis" in window);
+  }, []);
 
   return (
     <main
@@ -227,14 +239,17 @@ export default function TutorSimpleView({
               type="button"
               onClick={onToggleAutoRead}
               aria-pressed={autoRead}
-              title="Lire automatiquement les questions et les corrections à voix haute"
-              className={`rounded-md border px-3 py-2 text-sm font-bold shadow-sm ${
+              title="Le coach lit à voix haute les questions, les réponses possibles et les corrections"
+              /* ⭐ 08/10/2026 — « Lecture auto » devient « Coach sonore », et
+                 il se VOIT même éteint (bleu, pas blanc parmi les blancs) :
+                 c'est la porte d'entrée de l'élève qui lit mal. */
+              className={`rounded-md border px-3 py-2 text-sm font-black shadow-sm ${
                 autoRead
-                  ? "border-sky-500 bg-sky-600 text-white hover:bg-sky-500"
-                  : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                  ? "border-sky-600 bg-sky-600 text-white hover:bg-sky-500"
+                  : "border-sky-300 bg-sky-50 text-sky-800 hover:bg-sky-100"
               }`}
             >
-              {autoRead ? "🔊 Lecture auto : on" : "🔊 Lecture auto"}
+              {autoRead ? "🔊 Coach sonore : on" : "🔊 Coach sonore"}
             </button>
           </div>
         </header>
@@ -422,28 +437,59 @@ export default function TutorSimpleView({
                          les autres s'effacent. `answer` porte déjà ce choix
                          (handleQcmClick), aucun état en plus. */
                       const enCours = busy && answer === choice;
+                      /* ⭐ COACH SONORE (08/10/2026) — la voix dit « Réponse A,
+                         … » : la lettre doit donc SE VOIR sur le bouton, sinon
+                         l'élève qui ne lit pas ne sait pas lequel est « A ».
+                         Et chaque choix s'écoute seul (🔊 à sa droite), pour
+                         réentendre une réponse sans relancer toute la question. */
                       return (
-                        <button
-                          key={`${choice}-${index}`}
-                          type="button"
-                          onClick={() => onQcmClick(choice)}
-                          disabled={busy}
-                          aria-label={`Réponse ${lettre} : ${choice}`}
-                          aria-busy={enCours || undefined}
-                          className={`flex items-center justify-between gap-3 rounded-lg border px-4 text-left font-semibold text-slate-900 shadow-sm ${boardChoiceClass} ${
-                            enCours
-                              ? "border-sky-500 bg-sky-50 ring-2 ring-sky-400"
-                              : "border-slate-300 bg-white hover:bg-sky-50 disabled:opacity-50"
-                          }`}
-                        >
-                          <MarkdownMath inline>{choice}</MarkdownMath>
-                          {enCours ? (
-                            <span
-                              aria-hidden="true"
-                              className="h-5 w-5 shrink-0 animate-spin rounded-full border-2 border-sky-500 border-t-transparent"
-                            />
+                        <div key={`${choice}-${index}`} className="flex items-stretch gap-2">
+                          <button
+                            type="button"
+                            onClick={() => onQcmClick(choice)}
+                            disabled={busy}
+                            aria-label={`Réponse ${lettre} : ${choice}`}
+                            aria-busy={enCours || undefined}
+                            className={`flex min-w-0 flex-1 items-center justify-between gap-3 rounded-lg border px-4 text-left font-semibold text-slate-900 shadow-sm ${boardChoiceClass} ${
+                              enCours
+                                ? "border-sky-500 bg-sky-50 ring-2 ring-sky-400"
+                                : "border-slate-300 bg-white hover:bg-sky-50 disabled:opacity-50"
+                            }`}
+                          >
+                            <span className="flex min-w-0 items-center gap-3">
+                              <span
+                                aria-hidden="true"
+                                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sky-100 text-base font-black text-sky-700"
+                              >
+                                {lettre}
+                              </span>
+                              <MarkdownMath inline>{choice}</MarkdownMath>
+                            </span>
+                            {enCours ? (
+                              <span
+                                aria-hidden="true"
+                                className="h-5 w-5 shrink-0 animate-spin rounded-full border-2 border-sky-500 border-t-transparent"
+                              />
+                            ) : null}
+                          </button>
+                          {speechOk ? (
+                            <button
+                              type="button"
+                              onClick={() =>
+                                speakText(
+                                  // « A : … » se dit dans toutes les langues du coach.
+                                  `${lettre} : ${textePourLaVoix(choice, speechLang)}`,
+                                  speechLang,
+                                )
+                              }
+                              aria-label={`Écouter la réponse ${lettre}`}
+                              title={`Écouter la réponse ${lettre}`}
+                              className="flex w-12 shrink-0 items-center justify-center rounded-lg border border-sky-200 bg-sky-50 text-xl text-sky-700 shadow-sm hover:bg-sky-100"
+                            >
+                              🔊
+                            </button>
                           ) : null}
-                        </button>
+                        </div>
                       );
                     })}
                   </div>

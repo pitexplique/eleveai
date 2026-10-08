@@ -2,9 +2,10 @@
 //
 // La référence est la capture d'IXL : un paysage dessiné, plein écran, avec le
 // nom de la matière au milieu et une phrase sous lui. Chez eux c'est une côte,
-// un phare et un voilier ; ici c'est La Réunion vue du lagon — le piton, les
-// remparts, la barrière de corail — parce que c'est le paysage de l'auteur du
-// site et qu'un dessin générique n'aurait rien dit de plus.
+// un phare et un voilier ; ici c'est La Réunion — depuis le 08/10/2026, le
+// profil de la Diagonale des Fous 2026, de la mer à la mer (voir `PROFIL`) —
+// parce que c'est le pays de l'auteur du site et qu'un dessin générique
+// n'aurait rien dit de plus.
 //
 // ⛔ UN SEUL SVG EN LIGNE, PAS UNE IMAGE. Une illustration pleine largeur en
 // PNG, c'est 150 à 400 Ko sur le premier écran ; celle-ci pèse quelques
@@ -29,8 +30,11 @@ type Palette = {
 };
 
 /** Une palette par matière. Le dessin, lui, ne change pas : ce sont les mêmes
- *  montagnes vues à des heures différentes. Les objets qui flottent, eux,
- *  changent (voir `Motifs`). */
+ *  montagnes vues à des heures différentes.
+ *  ⚠️ 08/10/2026 — les objets flottants par matière (solides et équerre, livre
+ *  et plume…) sont PARTIS avec le profil du Grand Raid : posés sur la crête,
+ *  ils masquaient Nez-de-Bœuf et La Possession. La matière se dit par la
+ *  couleur, le titre et l'icône de la ligne du haut. */
 const PALETTES: Record<MatiereId, Palette> = {
   maths: {
     ciel: ["#dff1f7", "#f4fbfd"],
@@ -94,97 +98,53 @@ const PALETTES: Record<MatiereId, Palette> = {
   },
 };
 
-/** Ce qui flotte au-dessus du paysage, et qui dit la matière d'un coup d'œil.
- *  IXL pose un cube, une sphère et une équerre pour « Math ». */
-function Motifs({ matiere, c }: { matiere: MatiereId; c: string }) {
-  if (matiere === "francais") {
-    return (
-      <g opacity="0.9">
-        {/* Un livre ouvert, à gauche */}
-        <g transform="translate(96 150)">
-          <path d="M0 40 C 26 24 54 24 78 38 L 78 84 C 54 70 26 70 0 86 Z" fill="#ffffff" stroke={c} strokeWidth="3" />
-          <path d="M156 40 C 130 24 102 24 78 38 L 78 84 C 102 70 130 70 156 86 Z" fill="#ffffff" stroke={c} strokeWidth="3" />
-          <path d="M78 38 L 78 84" stroke={c} strokeWidth="3" />
-          <path d="M16 48 H 60 M16 60 H 60 M96 48 H 140 M96 60 H 140" stroke={c} strokeWidth="2.5" strokeLinecap="round" opacity="0.5" />
-        </g>
-        {/* Une plume, à droite */}
-        <g transform="translate(1210 140)">
-          <path d="M96 0 C 40 12 4 56 0 112 C 46 104 90 66 96 0 Z" fill="#ffffff" stroke={c} strokeWidth="3" />
-          <path d="M84 16 L 12 100" stroke={c} strokeWidth="2.5" strokeLinecap="round" opacity="0.6" />
-        </g>
-      </g>
-    );
-  }
-  if (matiere === "ia") {
-    return (
-      <g opacity="0.9">
-        <g transform="translate(110 156)">
-          {/* Un petit réseau : trois couches, des arêtes */}
-          <path d="M20 20 L 80 8 M20 20 L 80 56 M20 64 L 80 8 M20 64 L 80 56 M80 8 L 140 32 M80 56 L 140 32" stroke={c} strokeWidth="2.5" opacity="0.55" />
-          {[[20, 20], [20, 64], [80, 8], [80, 56], [140, 32]].map(([x, y], i) => (
-            <circle key={i} cx={x} cy={y} r="9" fill="#ffffff" stroke={c} strokeWidth="3" />
-          ))}
-        </g>
-        <g transform="translate(1230 150)">
-          {/* Une puce */}
-          <rect x="16" y="16" width="72" height="72" rx="12" fill="#ffffff" stroke={c} strokeWidth="3" />
-          <rect x="36" y="36" width="32" height="32" rx="6" fill="none" stroke={c} strokeWidth="3" />
-          <path d="M16 36 H 2 M16 68 H 2 M88 36 H 102 M88 68 H 102 M36 16 V 2 M68 16 V 2 M36 88 V 102 M68 88 V 102" stroke={c} strokeWidth="3" strokeLinecap="round" />
-        </g>
-      </g>
-    );
-  }
-  if (matiere === "anglais" || matiere === "espagnol") {
-    return (
-      <g opacity="0.9">
-        <g transform="translate(104 156)">
-          {/* Deux bulles qui se parlent */}
-          <path d="M4 8 H 96 A 12 12 0 0 1 108 20 V 62 A 12 12 0 0 1 96 74 H 44 L 24 92 V 74 H 4 A 12 12 0 0 1 -8 62 V 20 A 12 12 0 0 1 4 8 Z" fill="#ffffff" stroke={c} strokeWidth="3" />
-          <path d="M14 30 H 86 M14 48 H 64" stroke={c} strokeWidth="2.5" strokeLinecap="round" opacity="0.5" />
-        </g>
-        <g transform="translate(1216 150)">
-          {/* Un globe */}
-          <circle cx="56" cy="56" r="46" fill="#ffffff" stroke={c} strokeWidth="3" />
-          <path d="M10 56 H 102 M56 10 C 30 34 30 78 56 102 C 82 78 82 34 56 10" stroke={c} strokeWidth="2.5" fill="none" opacity="0.6" />
-        </g>
-      </g>
-    );
-  }
-  if (matiere === "economie") {
-    return (
-      <g opacity="0.9">
-        <g transform="translate(96 152)">
-          {/* Trois barres et une flèche */}
-          <rect x="8" y="58" width="24" height="42" rx="5" fill="#ffffff" stroke={c} strokeWidth="3" />
-          <rect x="44" y="36" width="24" height="64" rx="5" fill="#ffffff" stroke={c} strokeWidth="3" />
-          <rect x="80" y="14" width="24" height="86" rx="5" fill="#ffffff" stroke={c} strokeWidth="3" />
-        </g>
-        <g transform="translate(1224 150)">
-          {/* Une pièce */}
-          <circle cx="54" cy="56" r="44" fill="#ffffff" stroke={c} strokeWidth="3" />
-          <path d="M54 26 V 86 M40 40 H 62 A 10 10 0 0 1 62 60 H 40 M40 60 H 64 A 10 10 0 0 1 64 80 H 40" stroke={c} strokeWidth="3" fill="none" strokeLinecap="round" />
-        </g>
-      </g>
-    );
-  }
-  // Maths, par défaut : les solides d'IXL, et une équerre.
-  return (
-    <g opacity="0.92">
-      <g transform="translate(88 150)">
-        <path d="M44 4 L 84 76 H 4 Z" fill="#ffffff" stroke={c} strokeWidth="3" strokeLinejoin="round" />
-        <g transform="translate(88 28)">
-          <path d="M0 14 L 26 0 L 52 14 L 52 44 L 26 58 L 0 44 Z" fill="#ffffff" stroke={c} strokeWidth="3" strokeLinejoin="round" />
-          <path d="M0 14 L 26 28 L 52 14 M26 28 L 26 58" stroke={c} strokeWidth="2.5" fill="none" />
-        </g>
-        <circle cx="168" cy="62" r="22" fill="#ffffff" stroke={c} strokeWidth="3" />
-      </g>
-      <g transform="translate(1208 146)">
-        {/* Une équerre */}
-        <path d="M10 104 L 10 6 L 108 104 Z" fill="#ffffff" stroke={c} strokeWidth="3" strokeLinejoin="round" />
-        <path d="M10 76 H 34 M10 52 H 34 M10 28 H 34" stroke={c} strokeWidth="2.5" strokeLinecap="round" opacity="0.55" />
-      </g>
-    </g>
-  );
+/* ═══ LE RELIEF EST LE PROFIL DE LA DIAGONALE DES FOUS 2026 ══════════════════
+   Frédéric, 08/10/2026 : « refais le SVG pour qu'il corresponde au parcours du
+   Grand Raid de La Réunion, édition 2026 » (15-18 octobre 2026, 180 km,
+   ~10 200 m D+). L'édition 2026 NE PASSE PLUS PAR CILAOS : Saint-Pierre →
+   Nez-de-Bœuf → Kerveguen → Bélouve → Hell-Bourg → Mafate par la Plaine des
+   Merles → Maïdo → La Possession → chemin des Anglais → La Redoute.
+   Source de l'ordre des lieux : Réunion La 1ère, « Grand Raid 2026 : découvrez
+   les tracés des cinq courses ».
+   ⚠️ LES KILOMÈTRES ET LES ALTITUDES SONT APPROCHÉS (relevés de carte, pas le
+   roadbook officiel) : c'est un DESSIN, il ne porte donc ni km ni altitude
+   écrits. Seul l'ordre des lieux est sourcé. Le jour où le roadbook est en
+   main, on remplace les nombres ici et le dessin suit. */
+const PROFIL: { km: number; alt: number; nom?: string }[] = [
+  { km: 0, alt: 0, nom: "Saint-Pierre" },
+  { km: 14, alt: 800 }, // Domaine Vidot
+  { km: 22, alt: 1700 }, // Notre-Dame-de-la-Paix
+  { km: 30, alt: 2070, nom: "Nez-de-Bœuf" },
+  { km: 42, alt: 1600 }, // Plaine-des-Cafres
+  { km: 48, alt: 1550 }, // Mare à Boue
+  { km: 58, alt: 2200, nom: "Kerveguen" },
+  { km: 64, alt: 2450 }, // Cap Anglais, Caverne Dufour
+  { km: 76, alt: 1500 }, // Gîte de Bélouve
+  { km: 86, alt: 930, nom: "Hell-Bourg" },
+  { km: 96, alt: 1100 }, // Plaine des Merles
+  { km: 103, alt: 1900 }, // le passage vers Mafate
+  { km: 112, alt: 900, nom: "Mafate" }, // Îlet à Bourse
+  { km: 120, alt: 550 }, // Grand Place
+  { km: 128, alt: 1100 }, // Roche Plate
+  { km: 138, alt: 2200, nom: "Maïdo" },
+  { km: 150, alt: 1000 }, // sentier Ratinaud-Kalla
+  { km: 160, alt: 20, nom: "La Possession" },
+  { km: 166, alt: 10 }, // La Grande Chaloupe
+  { km: 174, alt: 600 }, // chemin des Anglais, Colorado
+  { km: 180, alt: 50, nom: "La Redoute" },
+];
+
+/** km 0 → 180 sur la largeur du dessin, avec une marge pour la mer. */
+// ⚠️ 90 → 1350, pas 0 → 1440 : le cadrage `slice` rogne ~35 unités de chaque
+// côté à 1 280 px, et « La Redoute » y perdait ses dernières lettres.
+const kmX = (km: number) => Math.round(90 + (km / 180) * 1260);
+/** 0 m en bas (y = 268), 2 500 m à y ≈ 163. ⚠️ Pas plus haut : à 1 280 px la
+ *  crête de Kerveguen traversait la phrase du bandeau (mesuré). Le relief est
+ *  donc écrasé ×2 environ — un dessin, pas une coupe à l'échelle. */
+const altY = (alt: number) => Math.round(268 - (alt / 2500) * 105);
+
+function traceProfil() {
+  return `M0 270 ${PROFIL.map((pt) => `L ${kmX(pt.km)} ${altY(pt.alt)}`).join(" ")} L 1440 270`;
 }
 
 export default function BandeauMatiere({
@@ -206,7 +166,7 @@ export default function BandeauMatiere({
         preserveAspectRatio="xMidYMid slice"
         className="h-[210px] w-full sm:h-[250px] lg:h-[280px]"
         role="img"
-        aria-label={`${titre} — illustration`}
+        aria-label={`${titre} — illustration : le profil de la Diagonale des Fous 2026, de Saint-Pierre à Saint-Denis`}
       >
         <defs>
           <linearGradient id={`${id}-ciel`} x1="0" y1="0" x2="0" y2="1">
@@ -230,31 +190,66 @@ export default function BandeauMatiere({
           <ellipse cx="700" cy="30" rx="40" ry="13" />
         </g>
 
-        {/* Le relief du fond : le piton au centre, les remparts autour */}
+        {/* Le relief : le profil de la Diagonale des Fous 2026 (voir `PROFIL`).
+            Derrière, une crête plus haute et plus pâle — les remparts — pour
+            que le profil ne flotte pas seul dans le ciel. */}
         <path
-          d="M0 178 L 150 128 L 250 162 L 390 96 L 520 158 L 660 78 L 760 132 L 900 70 L 1030 150 L 1160 104 L 1290 158 L 1440 120 L 1440 300 L 0 300 Z"
+          d={`M0 270 ${PROFIL.map((pt) => `L ${kmX(pt.km)} ${altY(pt.alt) - 26}`).join(" ")} L 1440 270 L 1440 300 L 0 300 Z`}
           fill={p.relief}
-          opacity="0.35"
+          opacity="0.22"
         />
-        {/* Les collines de devant */}
+        <path d={`${traceProfil()} L 1440 300 L 0 300 Z`} fill={p.colline} />
         <path
-          d="M0 214 C 160 174 300 200 430 214 C 560 228 660 206 790 196 C 920 186 1040 208 1160 216 C 1280 224 1370 212 1440 200 L 1440 300 L 0 300 Z"
-          fill={p.colline}
+          d={traceProfil()}
+          fill="none"
+          stroke={p.collineSombre}
+          strokeWidth="4"
+          strokeLinejoin="round"
         />
+        {/* Le sentier des coureurs, en pointillé sur la crête */}
         <path
-          d="M0 248 C 190 220 330 254 470 250 C 610 246 700 226 850 232 C 1000 238 1120 258 1260 250 C 1340 246 1400 238 1440 232 L 1440 300 L 0 300 Z"
-          fill={p.collineSombre}
-          opacity="0.75"
+          d={traceProfil()}
+          fill="none"
+          stroke={p.accent}
+          strokeWidth="2.5"
+          strokeDasharray="2 7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          transform="translate(0 -6)"
         />
 
-        {/* Le lagon, tout en bas : la bande d'eau qui ferme le dessin */}
-        <path d="M0 268 C 240 258 420 278 700 272 C 980 266 1180 282 1440 270 L 1440 300 L 0 300 Z" fill={`url(#${id}-eau)`} />
-        <g stroke="#ffffff" strokeWidth="3" strokeLinecap="round" opacity="0.6">
-          <path d="M180 284 h 44" />
-          <path d="M520 290 h 58" />
-          <path d="M980 284 h 48" />
-          <path d="M1260 292 h 40" />
-        </g>
+        {/* L'océan aux deux bouts : départ de Saint-Pierre, arrivée à Saint-Denis */}
+        <path d="M0 272 C 240 266 420 280 700 276 C 980 272 1180 282 1440 272 L 1440 300 L 0 300 Z" fill={`url(#${id}-eau)`} />
+
+        {/* Les lieux nommés : un point sur la crête, le nom en bas */}
+        {PROFIL.filter((pt) => pt.nom).map((pt) => (
+          <g key={pt.km}>
+            <line
+              x1={kmX(pt.km)}
+              y1={altY(pt.alt) - 4}
+              x2={kmX(pt.km)}
+              y2={278}
+              stroke={p.accent}
+              strokeWidth="1.5"
+              strokeDasharray="3 4"
+              opacity="0.45"
+            />
+            <circle cx={kmX(pt.km)} cy={altY(pt.alt) - 6} r="6" fill="#ffffff" stroke={p.accent} strokeWidth="3" />
+            <text
+              x={kmX(pt.km)}
+              y={294}
+              textAnchor={pt.km === 0 ? "start" : pt.km === 180 ? "end" : "middle"}
+              fontSize="15"
+              fontWeight="700"
+              fill={p.titre}
+              stroke="#ffffff"
+              strokeWidth="4"
+              paintOrder="stroke"
+            >
+              {pt.nom}
+            </text>
+          </g>
+        ))}
 
         {/* Deux oiseaux, parce qu'un ciel vide se voit */}
         <g stroke={p.relief} strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.5">
@@ -262,7 +257,27 @@ export default function BandeauMatiere({
           <path d="M380 60 q 9 -8 18 0 q 9 -8 18 0" />
         </g>
 
-        <Motifs matiere={matiere} c={p.accent} />
+
+        {/* ⭐ LE HAUT-PARLEUR DU COACH SONORE (08/10/2026, Frédéric : « mets un
+            haut-parleur sur le SVG »). Dans toutes les matières : le coach lit
+            à voix haute partout. Dans le ciel, AU-DESSUS du motif de gauche :
+            posé à côté du titre, il passait sous la phrase dès 1 280 px
+            (mesuré). Sur téléphone le cadrage le coupe, mais la pastille 🔊
+            sous la phrase le dit à sa place. */}
+        <g transform="translate(120 34)" opacity="0.95">
+          <path
+            d="M0 26 H 22 L 50 4 V 92 L 22 70 H 0 Z"
+            fill="#ffffff"
+            stroke={p.accent}
+            strokeWidth="3.5"
+            strokeLinejoin="round"
+          />
+          <g stroke={p.accent} strokeWidth="4" fill="none" strokeLinecap="round">
+            <path d="M64 32 C 74 42 74 54 64 64" />
+            <path d="M78 20 C 96 36 96 60 78 76" opacity="0.75" />
+            <path d="M92 8 C 118 30 118 66 92 88" opacity="0.5" />
+          </g>
+        </g>
       </svg>
 
       {/* ⚠️ LE TEXTE EST EN HTML, PAS DANS LE SVG. Dans le SVG il se serait
@@ -277,10 +292,21 @@ export default function BandeauMatiere({
           {titre}
         </h1>
         <p
-          className="mt-2 max-w-2xl text-sm leading-snug drop-shadow-[0_1px_0_rgba(255,255,255,0.9)] sm:text-base"
+          /* Voile blanc sur téléphone seulement : la phrase y prend trois
+             lignes et descend sur la crête du Grand Raid (mesuré à 375 px). */
+          className="mt-2 max-w-2xl rounded-xl bg-white/60 px-2 py-0.5 text-sm leading-snug drop-shadow-[0_1px_0_rgba(255,255,255,0.9)] sm:bg-transparent sm:px-0 sm:py-0 sm:text-base"
           style={{ color: p.phrase }}
         >
           {phrase}
+        </p>
+        {/* ⭐ LE COACH SONORE, DIT DÈS L'ACCUEIL (08/10/2026). Frédéric : dans
+            ses 6e, trois ou quatre élèves lisent très difficilement ; « que des
+            enfants qui ne savent pas lire peuvent quand même faire le coach »,
+            ça doit se voir sur le site. Une pastille, pas une phrase de plus :
+            le haut-parleur se comprend sans lire. */}
+        <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-1.5 text-xs font-bold text-sky-800 shadow-sm ring-1 ring-sky-200 sm:text-sm">
+          <span aria-hidden="true" className="text-base sm:text-lg">🔊</span>
+          Coach sonore&nbsp;: il lit les questions à voix haute
         </p>
       </div>
     </div>

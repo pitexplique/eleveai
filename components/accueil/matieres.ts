@@ -228,7 +228,10 @@ export function notionsDe(cle: string, niveau: string) {
 export const MATIERE_DE_LA_UNE: MatiereId = "maths";
 
 export const ACTIONS: { id: ActionId; label: string; court: string }[] = [
-  { id: "coach", label: "Coach", court: "Coach" },
+  // ⭐ 08/10/2026 — « quand on dit coach, on met coach écrit et oral » (puis
+  // « Coach sonore ») : le coach lit ses questions à voix haute, un enfant qui
+  // lit mal peut s'en servir. Sur téléphone, le bandeau le dit à sa place.
+  { id: "coach", label: "Coach écrit et sonore", court: "Coach" },
   { id: "evaluation", label: "Évaluation", court: "Évaluation" },
   { id: "fiche", label: "Fiche de cours", court: "Fiches" },
   { id: "photo", label: "Prendre en photo", court: "Photo" },

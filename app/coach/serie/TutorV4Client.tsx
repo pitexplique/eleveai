@@ -683,9 +683,20 @@ function forceScrollTopOnArrival() {
 
   // ACCESSIBILITÉ — lecture auto à voix haute (pensé pour les élèves déficients
   // visuels). Préférence mémorisée dans localStorage.
+  /* ⭐ 08/10/2026 — LE COACH EST « ÉCRIT ET ORAL ». Frédéric : « dans mes 6e,
+     trois ou quatre élèves ont de gros problèmes pour lire […] des enfants qui
+     ne savent pas lire peuvent quand même faire le coach de maths », puis le
+     nom : « Coach sonore ». La lecture auto, pensée pour les malvoyants,
+     devient le Coach sonore. `?sonore=1` dans l'adresse l'allume (et le
+     retient) : le lien qu'un prof donne à l'élève qui lit mal ouvre
+     directement en sonore. `?sonore=0` l'éteint. */
   const [autoRead, setAutoRead] = useState(false);
   useEffect(() => {
     if (typeof window === "undefined") return;
+    const oral = new URLSearchParams(window.location.search).get("sonore");
+    if (oral === "1" || oral === "0") {
+      window.localStorage.setItem("tutorv4-auto-read", oral);
+    }
     setAutoRead(window.localStorage.getItem("tutorv4-auto-read") === "1");
   }, []);
   function toggleAutoRead() {
@@ -704,9 +715,17 @@ function forceScrollTopOnArrival() {
 
   // Lit automatiquement la question + les choix dès qu'elle apparaît
   // (sauf sur l'écran de correction).
+  // À l'oral, l'élève qui ne lit pas n'a que la voix pour savoir s'il a
+  // réussi : le verdict de la réponse précédente précède la question suivante.
+  const verdictOralRef = useRef("");
   useEffect(() => {
     if (!autoRead || wrongAnswerPanelOpen || !currentQuestion) return;
-    speakText(buildReadableQuestion(currentQuestion, speechLang), speechLang);
+    const verdict = verdictOralRef.current;
+    verdictOralRef.current = "";
+    speakText(
+      verdict + buildReadableQuestion(currentQuestion, speechLang),
+      speechLang,
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoRead, currentQuestion?.id, wrongAnswerPanelOpen]);
 
@@ -1446,6 +1465,7 @@ function continueAfterExplanation() {
       }));
 
       if (typed.result.ok) {
+        verdictOralRef.current = "Bravo, c'est juste ! Question suivante. ";
         setFeedback(`Bonne réponse : ${currentMicroLabel}`);
         setExplanationText("");
         setWrongAnswerPanelOpen(false);
@@ -1508,6 +1528,7 @@ function continueAfterExplanation() {
           setPendingNextRecommendedStar(typed.recommendedStar);
           setPendingNextVisibleProgress(typed.visibleProgress);
         } else {
+          verdictOralRef.current = "Ce n'est pas la bonne réponse. Question suivante. ";
           setExplanationText("");
           setWrongAnswerPanelOpen(false);
 
@@ -1817,6 +1838,21 @@ function handleInputKeyDown(
               }`}
             >
               {classBoard ? "🔍 Affichage classe : on" : "🔍 Affichage classe"}
+            </button>
+
+            {/* Le Coach sonore, comme en vue simple (voir `autoRead`). */}
+            <button
+              type="button"
+              onClick={toggleAutoRead}
+              aria-pressed={autoRead}
+              title="Le coach lit à voix haute les questions, les réponses possibles et les corrections"
+              className={`rounded-2xl border px-4 py-2.5 text-center text-sm font-black shadow-sm ${
+                autoRead
+                  ? "border-sky-600 bg-sky-600 text-white hover:bg-sky-500"
+                  : "border-sky-300 bg-sky-50 text-sky-800 hover:bg-sky-100"
+              }`}
+            >
+              {autoRead ? "🔊 Coach sonore : on" : "🔊 Coach sonore"}
             </button>
 
             {/* Navigation rapide entre notions : ◀ ▶ (ou flèches clavier),
