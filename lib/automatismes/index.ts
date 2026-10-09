@@ -63,14 +63,16 @@ export function getNiveauAutomatismes(classe: string): AutoNiveau | null {
  * Un générateur qui lève une erreur ne doit pas priver l'élève de toute la
  * série : on retente, puis on saute.
  */
-export function tirerSerie(niveau: AutoNiveau, themeIds?: string[] | null): AutoQuestionServie[] {
+export function tirerSerie(niveau: AutoNiveau, themeIds?: string[] | null, nb?: number | null): AutoQuestionServie[] {
+  // ⭐ 09/10 — Frédéric : « je dois pouvoir choisir 3, 4, 5 questions ou 10 ».
+  // `nb` vide = le nombre de l'épreuve (`nbQuestions`).
   // Un ou PLUSIEURS thèmes choisis (Frédéric, 24/09 : « la totale, ou un, mais
   // aussi plusieurs ») : les questions tournent entre eux — Fractions,
   // Probabilités, Fractions, Probabilités… —, sans servir deux fois le même
   // énoncé. Aucun thème choisi = « la totale », plus bas.
   const choisis = niveau.themes.filter((t) => themeIds?.includes(t.id));
   if (choisis.length > 0) {
-    const total = niveau.nbQuestions ?? 10;
+    const total = nb ?? niveau.nbQuestions ?? 10;
     const vus = new Set<string>();
     const serie: AutoQuestionServie[] = [];
     for (let essai = 0; serie.length < total && essai < total * 20; essai++) {
@@ -91,7 +93,7 @@ export function tirerSerie(niveau: AutoNiveau, themeIds?: string[] | null): Auto
 
   // « La totale » imite l'épreuve : les thèmes hors épreuve n'y entrent pas.
   const themesEpreuve = niveau.themes.filter((t) => !t.horsEpreuve);
-  const n = Math.min(niveau.nbQuestions ?? themesEpreuve.length, themesEpreuve.length);
+  const n = Math.min(nb ?? niveau.nbQuestions ?? themesEpreuve.length, themesEpreuve.length);
   const toujours = new Set(niveau.toujours ?? []);
   const autres = themesEpreuve
     .filter((t) => !toujours.has(t.id))

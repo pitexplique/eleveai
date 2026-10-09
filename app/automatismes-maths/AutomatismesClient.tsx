@@ -29,6 +29,109 @@ function mmss(secondes: number) {
   return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 }
 
+const LETTRES = ["A", "B", "C", "D", "E", "F"];
+
+/**
+ * ⭐ 09/10/2026 — LA FEUILLE À DISTRIBUER, en deux colonnes (Frédéric : « on
+ * doit pouvoir imprimer les questions dans un PDF de 2 colonnes pour les
+ * élèves »). Invisible à l'écran, seule visible à l'impression : un en-tête
+ * Nom / Classe / Note, les questions en colonnes, puis le corrigé sur une page
+ * à part (le prof la garde ou ne l'imprime pas). Le PDF est celui du
+ * navigateur, comme le livret.
+ */
+function FeuilleImprimee({ serie, titre, duree }: { serie: AutoQuestionServie[]; titre: string; duree: number }) {
+  return (
+    <div className="feuille-auto hidden text-slate-950 print:block">
+      <style>{`
+        @media print {
+          @page { size: A4; margin: 12mm; }
+          header, footer, nav { display: none !important; }
+          .feuille-auto .colonnes { column-count: 2; column-gap: 8mm; column-rule: 1px solid #cbd5e1; }
+          .feuille-auto .question { break-inside: avoid; }
+          .feuille-auto .corrige { break-before: page; }
+          .feuille-auto svg, .feuille-auto canvas { max-width: 100%; height: auto; }
+        }
+      `}</style>
+
+      <div className="mb-3 flex items-end justify-between border-b-2 border-slate-900 pb-2">
+        <div>
+          <p className="text-[11px] font-bold uppercase tracking-wide text-slate-600">eleveai.fr</p>
+          <h1 className="text-xl font-black">{titre}</h1>
+          <p className="text-xs font-semibold text-slate-700">
+            {serie.length} questions · {duree} min · sans calculatrice
+          </p>
+        </div>
+        <div className="space-y-1 text-right text-sm font-semibold">
+          <p>Nom : ……………………………………</p>
+          <p>Classe : ………… Note : …… / {serie.length}</p>
+        </div>
+      </div>
+
+      <ol className="colonnes">
+        {serie.map((q, i) => (
+          <li key={i} className="question mb-3 pb-2 text-[13px] leading-snug">
+            <p className="text-[10px] font-black uppercase tracking-wide text-slate-600">
+              {i + 1}. {q.themeLabel}
+            </p>
+            <MarkdownMath className="mt-0.5 whitespace-pre-line">{q.text}</MarkdownMath>
+            {q.canvas ? (
+              <div className="mx-auto mt-1 max-w-[80mm]">
+                <CanvasRenderer figure={q.canvas} />
+              </div>
+            ) : null}
+            {q.format === "qcm" && q.choices ? (
+              <div className="mt-1 grid grid-cols-2 gap-x-3 gap-y-0.5">
+                {q.choices.map((c, k) => (
+                  <div key={k} className="flex gap-1">
+                    <span className="font-black">☐ {LETTRES[k]}.</span>
+                    <MarkdownMath inline>{c}</MarkdownMath>
+                  </div>
+                ))}
+              </div>
+            ) : q.format === "redaction" ? (
+              <div className="mt-1 space-y-5 pt-3">
+                {[0, 1, 2, 3].map((l) => (
+                  <div key={l} className="border-b border-dotted border-slate-500" />
+                ))}
+              </div>
+            ) : (
+              <p className="mt-2 text-slate-600">Réponse : ………………………………</p>
+            )}
+          </li>
+        ))}
+      </ol>
+
+      <section className="corrige">
+        <h2 className="mb-2 border-b-2 border-slate-900 pb-1 text-lg font-black">Corrigé · {titre}</h2>
+        <ol className="colonnes text-[12px] leading-snug">
+          {serie.map((q, i) => {
+            const rep =
+              q.format === "qcm" && q.choices
+                ? `${LETTRES[q.choices.indexOf(q.expected[0])]}. ${q.expected[0]}`
+                : q.format === "redaction"
+                  ? q.modele ?? ""
+                  : q.expected[0] ?? "";
+            return (
+              <li key={i} className="question mb-2 flex gap-1.5">
+                <span className="w-5 shrink-0 font-black">{i + 1}.</span>
+                <span>
+                  <MarkdownMath inline>{rep}</MarkdownMath>
+                  {q.format !== "redaction" ? (
+                    <span className="text-slate-600">
+                      {" — "}
+                      <MarkdownMath inline>{(q.explanation.split("\n").pop() ?? "").trim()}</MarkdownMath>
+                    </span>
+                  ) : null}
+                </span>
+              </li>
+            );
+          })}
+        </ol>
+      </section>
+    </div>
+  );
+}
+
 export default function AutomatismesClient() {
   const [classe, setClasse] = useState("3e");
   const niveau = useMemo(() => getNiveauAutomatismes(classe), [classe]);
@@ -36,6 +139,29 @@ export default function AutomatismesClient() {
   const [themes, setThemes] = useState<string[]>([]);
   /** `?apercu=1` : un exemple de chaque générateur, corrigé, sans chrono. */
   const [apercu, setApercu] = useState(false);
+  /** ⭐ 09/10 — Frédéric : « je dois pouvoir choisir 3, 4, 5 questions ou 10 ».
+   *  Vide = le nombre de l'épreuve ; le chrono suit, au prorata. */
+  const [nbChoisi, setNbChoisi] = useState<number | null>(null);
+  const nbDefaut = niveau?.nbQuestions ?? 10;
+  const nb = nbChoisi ?? nbDefaut;
+  const choixNb = [...new Set([3, 4, 5, 10, nbDefaut])].sort((a, b) => a - b);
+  const dureeMin = niveau ? Math.max(1, Math.round((niveau.duree * nb) / nbDefaut)) : 0;
+  /** La série à imprimer (2 colonnes + corrigé) : l'impression part quand elle est rendue. */
+  const [aImprimer, setAImprimer] = useState<AutoQuestionServie[]>([]);
+  const impressionDemandee = useRef(false);
+  useEffect(() => {
+    if (!impressionDemandee.current || !aImprimer.length) return;
+    impressionDemandee.current = false;
+    // Un tour plus tard : les formules et les figures ont pris leur place.
+    window.setTimeout(() => window.print(), 300);
+  }, [aImprimer]);
+
+  /** La série en cours si l'élève en a une, sinon une série neuve tirée pour le papier. */
+  function imprimer() {
+    if (!niveau) return;
+    impressionDemandee.current = true;
+    setAImprimer(serie.length > 0 ? [...serie] : tirerSerie(niveau, themes, nb));
+  }
 
   useEffect(() => {
     const p = new URLSearchParams(window.location.search);
@@ -71,11 +197,11 @@ export default function AutomatismesClient() {
 
   function lancer() {
     if (!niveau) return;
-    setSerie(apercu ? tirerApercu(niveau) : tirerSerie(niveau, themes));
+    setSerie(apercu ? tirerApercu(niveau) : tirerSerie(niveau, themes, nb));
     setReponses({});
     setCoches({});
     setValide(apercu);
-    setReste(niveau.duree * 60);
+    setReste(dureeMin * 60);
     // ⛔ Était `window.scrollTo({ top: 0 })` : on remontait en haut de la page
     // au lieu d'arriver sur la question 1 (Frédéric, 24/09). Puis un
     // `setTimeout(…, 60)` : trop tôt — la série et ses formules n'étaient pas
@@ -124,8 +250,11 @@ export default function AutomatismesClient() {
   const score = serie.reduce((s, q, i) => s + (juste(q, i) ? 1 : 0), 0);
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-emerald-50 via-sky-50 to-yellow-50 px-4 py-8 text-slate-950">
-      <section className="relative z-10 mx-auto max-w-5xl">
+    <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-emerald-50 via-sky-50 to-yellow-50 px-4 py-8 text-slate-950 print:min-h-0 print:overflow-visible print:bg-none print:bg-white print:p-0">
+      {aImprimer.length > 0 && niveau ? (
+        <FeuilleImprimee serie={aImprimer} titre={`Automatismes · ${niveau.label}`} duree={Math.max(1, Math.round((niveau.duree * aImprimer.length) / nbDefaut))} />
+      ) : null}
+      <section className="relative z-10 mx-auto max-w-5xl print:hidden">
         <div className="mb-8 overflow-hidden rounded-[2rem] border border-white/70 bg-white/80 p-6 shadow-2xl backdrop-blur-xl">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-800 ring-1 ring-emerald-200">
             <span>⚡</span>
@@ -240,14 +369,43 @@ export default function AutomatismesClient() {
             </div>
           ) : null}
 
+          {niveau && !apercu ? (
+            <div className="mt-6">
+              <p className="mb-3 text-sm font-black uppercase tracking-wide text-slate-700">
+                3. Combien de questions ?
+              </p>
+              <div className="flex flex-wrap gap-2" role="group" aria-label="Nombre de questions">
+                {choixNb.map((n) => (
+                  <button
+                    key={n}
+                    type="button"
+                    aria-pressed={nb === n}
+                    onClick={() => {
+                      setNbChoisi(n === nbDefaut ? null : n);
+                      reinitialiser();
+                    }}
+                    className={[
+                      "min-w-12 rounded-2xl px-4 py-2 text-sm font-black shadow-sm transition",
+                      nb === n
+                        ? "bg-emerald-700 text-white ring-4 ring-yellow-300"
+                        : "bg-white text-slate-800 ring-1 ring-slate-200 hover:bg-emerald-50",
+                    ].join(" ")}
+                  >
+                    {n}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
           {niveau ? (
             <div className="mt-6 rounded-3xl bg-gradient-to-r from-emerald-100 via-sky-100 to-yellow-100 p-4 ring-1 ring-white/80">
               <p className="text-sm font-black text-slate-800">
                 {apercu
                   ? `👀 Aperçu : trois exemples de chacun des ${niveau.themes.reduce((s, t) => s + t.generateurs.length, 0)} générateurs, déjà corrigés.`
                   : themes.length > 0
-                    ? `🎯 ${niveau.nbQuestions ?? 10} questions ${themes.length === 1 ? "sur le thème choisi" : `réparties entre tes ${themes.length} thèmes`}, sans calculatrice.`
-                    : `🎯 ${niveau.examen}. ${niveau.nbQuestions ?? niveau.themes.length} questions tirées parmi ${niveau.themes.length} thèmes${niveau.toujours?.includes("rediger") ? ", dont une à rédiger : c'est là que compte l'orthographe" : ""}.`}
+                    ? `🎯 ${nb} questions ${themes.length === 1 ? "sur le thème choisi" : `réparties entre tes ${themes.length} thèmes`}, sans calculatrice.`
+                    : `🎯 ${niveau.examen}. ${Math.min(nb, niveau.themes.length)} questions tirées parmi ${niveau.themes.length} thèmes${niveau.toujours?.includes("rediger") ? ", dont une à rédiger : c'est là que compte l'orthographe" : ""}.`}
               </p>
             </div>
           ) : null}
@@ -272,7 +430,20 @@ export default function AutomatismesClient() {
               onClick={lancer}
               className="mt-6 w-full rounded-2xl bg-gradient-to-r from-emerald-400 to-sky-400 px-5 py-4 text-base font-black text-slate-950 shadow-lg hover:from-emerald-300 hover:to-sky-300"
             >
-              {serie.length > 0 ? "🔁 Nouvelle série" : `⚡ Lancer une série (${niveau.duree} min)`}
+              {serie.length > 0 ? "🔁 Nouvelle série" : `⚡ Lancer une série (${dureeMin} min)`}
+            </button>
+          ) : null}
+
+          {/* ⭐ 09/10 — Frédéric : « on doit pouvoir imprimer les questions dans
+              un PDF de 2 colonnes pour les élèves ». La série affichée, ou une
+              neuve avec les réglages choisis ; corrigé sur une page à part. */}
+          {niveau && !apercu ? (
+            <button
+              type="button"
+              onClick={imprimer}
+              className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-5 py-3 text-sm font-black text-sky-800 ring-2 ring-sky-300 hover:bg-sky-50"
+            >
+              🖨️ Imprimer {serie.length > 0 ? "cette série" : `une série de ${nb} questions`} pour la classe (PDF, 2 colonnes)
             </button>
           ) : null}
         </div>
@@ -285,7 +456,7 @@ export default function AutomatismesClient() {
             au-dessus de "sans calculatrice" ». `scroll-mt-24` : l'en-tête du
             site ne doit pas la cacher. */}
         {enCours && niveau ? (() => {
-          const total = niveau.duree * 60;
+          const total = dureeMin * 60;
           const part = Math.max(0, Math.min(1, reste / total));
           const phrase =
             reste <= 60 ? "Dernière minute ! Relis tes réponses 👀"
