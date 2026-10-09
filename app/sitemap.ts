@@ -762,6 +762,16 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-10-05",
     },
   ],
+  "/fiches-cours/maths/5e/litteral-calcul": [
+    {
+      // 09/10/2026 : la vidéo PARLÉE du calcul littéral (5e, reprise en 4e).
+      id: "c8ScGIErxJM",
+      title: "Le calcul littéral — Maths 5e",
+      description:
+        "Une lettre, c'est un nombre : traduire une phrase, remplacer la lettre, réduire (3x + 2 ne fait pas 5x), tester une égalité, développer 3(x + 2) (5e).",
+      ajoutee: "2026-10-09",
+    },
+  ],
   "/fiches-cours/maths/5e/relatif-nombre": [
     {
       // 08/10/2026 : la première vidéo PARLÉE de 5e, les nombres relatifs.
