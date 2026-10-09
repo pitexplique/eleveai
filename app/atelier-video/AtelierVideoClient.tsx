@@ -195,11 +195,18 @@ export default function AtelierVideoClient() {
   const idSuivant = useRef(1);
 
   // Le brouillon de l'élève reste dans SON navigateur (simple confort).
+  // Arrivé par le clap de l'accueil (?matiere=francais…) : l'exemple de SA
+  // matière, sauf si son brouillon est un vrai travail (pas un exemple intact).
   useEffect(() => {
+    const matiere = new URLSearchParams(window.location.search).get("matiere");
+    const exemple = EXEMPLES.find((e) => e.matiere === matiere);
+    let brouillon: string | null = null;
     try {
-      const s = localStorage.getItem(CLE_STOCKAGE);
-      if (s) setSource(s);
+      brouillon = localStorage.getItem(CLE_STOCKAGE);
     } catch {}
+    const brouillonIntact = !brouillon || EXEMPLES.some((e) => e.script === brouillon);
+    if (exemple && brouillonIntact) setSource(exemple.script);
+    else if (brouillon) setSource(brouillon);
   }, []);
   useEffect(() => {
     try {

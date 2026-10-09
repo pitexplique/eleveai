@@ -282,12 +282,12 @@ export default function BandeauMatiere({
 
         {/* ⭐ LE CLAP DE L'ATELIER VIDÉO (09/10/2026, Frédéric : « si on clique
             sur le SVG de la page d'accueil, avec un clic : crée ta vidéo »).
-            En face du haut-parleur, dans le ciel de droite, et CLIQUABLE. En
-            maths seulement : l'atelier écrit des formules et des billes. Sur
-            téléphone le cadrage le coupe : la pastille 🎬 le dit à sa place. */}
-        {matiere === "maths" && (
-          <a href="/atelier-video" aria-label="Crée ta vidéo de maths : l'atelier vidéo">
-            <g transform="translate(1150 16) scale(0.8)" className="cursor-pointer" opacity="0.95">
+            En face du haut-parleur, dans le ciel de droite, et CLIQUABLE. Dans
+            TOUTES les matières (Frédéric : « cela concerne le français, pour la
+            rédaction ») ; l'atelier ouvre l'exemple de la matière. Sur téléphone
+            le cadrage le coupe : la pastille 🎬 le dit à sa place. */}
+        <a href={`/atelier-video?matiere=${matiere}`} aria-label="Crée ta vidéo : l'atelier vidéo">
+            <g transform="translate(1175 6) scale(0.7)" className="cursor-pointer" opacity="0.95">
               <rect x="0" y="34" width="112" height="70" rx="8" fill="#ffffff" stroke={p.accent} strokeWidth="3.5" />
               <g transform="rotate(-14 0 30)">
                 <rect x="0" y="12" width="112" height="22" rx="4" fill="#ffffff" stroke={p.accent} strokeWidth="3.5" />
@@ -300,7 +300,6 @@ export default function BandeauMatiere({
               <path d="M44 56 L 44 84 L 70 70 Z" fill={p.accent} />
             </g>
           </a>
-        )}
       </svg>
 
       {/* ⚠️ LE TEXTE EST EN HTML, PAS DANS LE SVG. Dans le SVG il se serait
@@ -335,15 +334,13 @@ export default function BandeauMatiere({
           </p>
           {/* La pastille du clap : un vrai lien, au-dessus du voile qui laisse
               passer les clics (pointer-events-auto). */}
-          {matiere === "maths" && (
-            <Link
-              href="/atelier-video"
-              className="pointer-events-auto inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-1.5 text-xs font-bold text-rose-700 shadow-sm ring-1 ring-rose-200 hover:bg-white sm:text-sm"
-            >
-              <span aria-hidden="true" className="text-base sm:text-lg">🎬</span>
-              Crée ta vidéo
-            </Link>
-          )}
+          <Link
+            href={`/atelier-video?matiere=${matiere}`}
+            className="pointer-events-auto inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-1.5 text-xs font-bold text-rose-700 shadow-sm ring-1 ring-rose-200 hover:bg-white sm:text-sm"
+          >
+            <span aria-hidden="true" className="text-base sm:text-lg">🎬</span>
+            Crée ta vidéo
+          </Link>
         </div>
       </div>
     </div>

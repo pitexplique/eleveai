@@ -532,9 +532,17 @@ export function versManim(
   return L.join("\n") + "\n";
 }
 
-export const EXEMPLES: { nom: string; script: string }[] = [
+/** Les matières de l'accueil : le clap du bandeau ouvre l'exemple de la sienne. */
+export type MatiereAtelier = "maths" | "francais" | "anglais" | "espagnol" | "economie" | "ia";
+
+// ⭐ 09/10/2026 — UN EXEMPLE PAR MATIÈRE (Frédéric : « cela concerne le
+// français, pour la rédaction », puis « maths français anglais espagnol
+// économie IA »). La voix reste française : en langues, l'explication est en
+// français et les mots étrangers restent courts.
+export const EXEMPLES: { nom: string; matiere: MatiereAtelier; script: string }[] = [
   {
     nom: "Trois quarts",
+    matiere: "maths",
     script: `objectif : comprendre que 3/4 = 0,75
 titre : Trois quarts, c'est combien ? | dis : Trois quarts, c'est combien ?
 écris : 3/4 | dis : On part de 3 sur 4.
@@ -545,6 +553,7 @@ agrandis`,
   },
   {
     nom: "12 billes",
+    matiere: "maths",
     script: `objectif : voir que 12 = 3 × 4, donc 12 ÷ 4 = 3
 titre : 12 billes | dis : J'ai 12 billes.
 billes : 3 x 4 | dis : Je les range en 3 rangées de 4.
@@ -555,12 +564,63 @@ agrandis | dis : C'est la même égalité, lue dans l'autre sens.`,
   },
   {
     nom: "Droite graduée",
+    matiere: "maths",
     script: `objectif : voir sur une droite graduée que -3 est plus petit que 2
 titre : Les nombres relatifs | dis : Les nombres relatifs.
 droite : -5 à 5 | dis : Voici une droite graduée, de -5 à 5.
 écris : -3 < 2 | dis : -3 est à gauche de 2, donc -3 est plus petit que 2.
 couleur : jaune
 agrandis`,
+  },
+  {
+    nom: "Raconter une histoire",
+    matiere: "francais",
+    script: `objectif : comprendre les trois temps d'un récit
+titre : Raconter une histoire | dis : Une histoire se raconte en trois temps.
+écris : La situation de départ | dis : D'abord, la situation de départ : qui, où, quand.
+écris : Les péripéties | dis : Ensuite, les péripéties : ce qui arrive aux personnages.
+écris : La fin | dis : Enfin, la fin : comment tout se termine.
+entoure : jaune | dis : Sans fin, ton lecteur reste sur sa faim.`,
+  },
+  {
+    nom: "Le prétérit",
+    matiere: "anglais",
+    script: `objectif : savoir former le prétérit des verbes réguliers
+titre : Le prétérit en anglais | dis : Le prétérit, c'est le passé en anglais.
+écris : I play | dis : Au présent : I play, je joue.
+transforme en : I played | dis : Au passé, on ajoute E D : I played, j'ai joué.
+couleur : jaune
+agrandis | dis : Verbe régulier : on ajoute E D.`,
+  },
+  {
+    nom: "Hablar",
+    matiere: "espagnol",
+    script: `objectif : savoir conjuguer hablar au présent
+titre : Hablar, au présent | dis : Hablar veut dire parler.
+écris : yo hablo | dis : Je parle : yo hablo.
+écris : tú hablas | dis : Tu parles : tú hablas.
+écris : él habla | dis : Il parle : él habla.
+entoure : vert | dis : Le radical habl ne change pas : seule la fin change.`,
+  },
+  {
+    nom: "L'inflation",
+    matiere: "economie",
+    script: `objectif : comprendre ce qu'est l'inflation
+titre : L'inflation | dis : L'inflation, c'est la hausse des prix.
+écris : Une baguette : 1 € | dis : L'an dernier, une baguette coûtait 1 euro.
+transforme en : Une baguette : 1,10 € | dis : Cette année, elle coûte 1,10 euro.
+écris : + 10 % | dis : Les prix ont augmenté de 10 %.
+entoure : rouge | dis : Avec le même argent, on achète moins.`,
+  },
+  {
+    nom: "Comment une IA écrit",
+    matiere: "ia",
+    script: `objectif : comprendre qu'une IA prédit le mot suivant
+titre : Comment une IA écrit | dis : Une IA écrit un mot après l'autre.
+écris : Le chat boit du … | dis : Elle lit le début de la phrase.
+écris : lait : très probable | dis : Elle devine le mot le plus probable : lait.
+écris : vélo : très peu probable | dis : Vélo, c'est très peu probable.
+entoure : vert | dis : Elle choisit, puis recommence, mot après mot.`,
   },
 ];
 
