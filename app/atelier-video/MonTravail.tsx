@@ -11,6 +11,8 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useEleve } from "@/context/EleveContext";
+import type { VoixEleve } from "@/lib/atelier-video/script";
+import MaVoix from "./MaVoix";
 
 const BUCKET = "atelier-videos";
 
@@ -26,16 +28,23 @@ type Reponse = {
   video?: string | null;
   chemin?: string;
   jeton?: string;
+  voix?: { cle: string; texte: string; duree: number; url: string }[];
 };
 
 export default function MonTravail({
   source,
   nomParDefaut,
+  phrases,
   onOuvrir,
+  onRemplacerPhrase,
+  onVoixEleve,
 }: {
   source: string;
   nomParDefaut: string;
+  phrases: string[];
   onOuvrir: (script: string) => void;
+  onRemplacerPhrase: (ancienne: string, nouvelle: string) => void;
+  onVoixEleve: (voix: Record<string, VoixEleve>) => void;
 }) {
   const { eleve } = useEleve();
   const token = eleve?.token ?? null;
@@ -68,6 +77,30 @@ export default function MonTravail({
   }, [rafraichir]);
 
   const nomEffectif = nom.trim() || nomParDefaut;
+
+  // Les voix enregistrées de CE projet, pour le code Manim (version 2).
+  const [voixEnregistrees, setVoixEnregistrees] = useState<Set<string>>(new Set());
+  const rafraichirVoix = useCallback(async () => {
+    if (!token) return;
+    const r = await appeler({ action: "liens-voix", nom: nomEffectif });
+    const carte: Record<string, VoixEleve> = {};
+    for (const v of r.ok ? (r.voix ?? []) : []) carte[v.texte] = { url: v.url, duree: v.duree };
+    setVoixEnregistrees(new Set(Object.keys(carte)));
+    onVoixEleve(carte);
+  }, [appeler, nomEffectif, onVoixEleve, token]);
+
+  useEffect(() => {
+    const t = setTimeout(() => rafraichirVoix().catch(() => {}), 600);
+    return () => clearTimeout(t);
+  }, [rafraichirVoix]);
+
+  /** Avant d'envoyer une voix : le script doit exister sous ce nom. */
+  const avantEnvoi = useCallback(async () => {
+    const r = await appeler({ action: "enregistrer", nom: nomEffectif, script: source });
+    if (!r.ok) setMessage({ ton: "erreur", texte: r.message ?? "Échec." });
+    else await rafraichir();
+    return r.ok;
+  }, [appeler, nomEffectif, rafraichir, source]);
 
   async function agir(f: () => Promise<void>) {
     setOccupe(true);
@@ -189,6 +222,15 @@ export default function MonTravail({
           {video && (
             <video src={video} controls preload="metadata" className="mt-4 w-full max-w-xl rounded-xl bg-black" />
           )}
+
+          <MaVoix
+            phrases={phrases}
+            enregistrees={voixEnregistrees}
+            appeler={appeler}
+            avantEnvoi={avantEnvoi}
+            onGardee={() => rafraichirVoix().catch(() => {})}
+            onRemplacerPhrase={onRemplacerPhrase}
+          />
 
           {projets.length > 0 && (
             <div className="mt-5">

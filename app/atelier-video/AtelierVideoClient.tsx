@@ -23,6 +23,7 @@ import {
   versManim,
   type Contenu,
   type Etape,
+  type VoixEleve,
 } from "@/lib/atelier-video/script";
 import MonTravail from "./MonTravail";
 
@@ -188,6 +189,7 @@ export default function AtelierVideoClient() {
   const [avecVoix, setAvecVoix] = useState(true);
   const [sousTitres, setSousTitres] = useState(true);
   const [voixManim, setVoixManim] = useState(true);
+  const [voixEleve, setVoixEleve] = useState<Record<string, VoixEleve>>({});
   const [copie, setCopie] = useState(false);
   const jeton = useRef(0);
   const idSuivant = useRef(1);
@@ -206,7 +208,9 @@ export default function AtelierVideoClient() {
   }, [source]);
 
   const script = useMemo(() => lireScript(source), [source]);
-  const code = useMemo(() => versManim(script, { sousTitres, voix: voixManim }), [script, sousTitres, voixManim]);
+  const code = useMemo(() => versManim(script, { sousTitres, voix: voixManim, voixEleve }),
+    [script, sousTitres, voixManim, voixEleve],
+  );
   const erreurs = script.remarques.filter((r) => r.niveau === "erreur");
   const conseils = script.remarques.filter((r) => r.niveau === "conseil");
 
@@ -486,11 +490,25 @@ export default function AtelierVideoClient() {
         nomParDefaut={
           (script.etapes.find((e) => e.type === "titre") as { texte?: string } | undefined)?.texte ?? "Ma vidéo"
         }
+        phrases={script.etapes.map((e) => e.voix).filter((v): v is string => !!v)}
         onOuvrir={(s) => {
           arreter();
           setScene({ pile: [] });
           setSource(s);
         }}
+        onRemplacerPhrase={(ancienne, nouvelle) =>
+          setSource((src) =>
+            src
+              .split(/\r?\n/)
+              .map((l) => {
+                // La phrase après « dis : », en bout de ligne (après « | ») ou seule.
+                const m = l.match(/^(.*?(?:\||^)\s*(?:dis|voix)\s*:\s*)(.*)$/i);
+                return m && m[2].trim() === ancienne ? m[1] + nouvelle : l;
+              })
+              .join("\n"),
+          )
+        }
+        onVoixEleve={setVoixEleve}
       />
      </div>
     </main>

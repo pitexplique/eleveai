@@ -24,7 +24,17 @@ const MAX_SCRIPT = 8000;
 const MAX_VIDEO = 50 * 1024 * 1024;
 const MAX_PROJETS = 30;
 
-type Projet = { nom: string; script: string; majLe: string };
+// La voix de l'élève (version 2) : une entrée par phrase « dis : », clé = début
+// du SHA-1 de la phrase (calculé par le navigateur), fichier dans voix/.
+type VoixEnregistree = { texte: string; duree: number; ext: "webm" | "m4a" | "ogg" };
+type Projet = { nom: string; script: string; majLe: string; voix?: Record<string, VoixEnregistree> };
+
+const TYPES_AUDIO: Record<string, VoixEnregistree["ext"]> = {
+  "audio/webm": "webm",
+  "audio/mp4": "m4a",
+  "audio/ogg": "ogg",
+};
+const MAX_VOIX = 5 * 1024 * 1024;
 
 function admin() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -33,17 +43,22 @@ function admin() {
   return createClient(url, key, { auth: { persistSession: false } });
 }
 
+const REGLAGES_BUCKET = {
+  public: false,
+  fileSizeLimit: MAX_VIDEO,
+  allowedMimeTypes: ["video/mp4", "application/json", ...Object.keys(TYPES_AUDIO)],
+};
+
 let bucketPret = false;
 async function assurerBucket(sb: SupabaseClient) {
   if (bucketPret) return;
   const { data } = await sb.storage.getBucket(BUCKET);
   if (!data) {
-    const { error } = await sb.storage.createBucket(BUCKET, {
-      public: false,
-      fileSizeLimit: MAX_VIDEO,
-      allowedMimeTypes: ["video/mp4", "application/json"],
-    });
+    const { error } = await sb.storage.createBucket(BUCKET, REGLAGES_BUCKET);
     if (error && !/exists/i.test(error.message)) throw error;
+  } else if (!Object.keys(TYPES_AUDIO).every((t) => data.allowed_mime_types?.includes(t))) {
+    // Bucket créé avant la version 2 (voix) : on ouvre les types audio.
+    await sb.storage.updateBucket(BUCKET, REGLAGES_BUCKET);
   }
   bucketPret = true;
 }
@@ -107,6 +122,55 @@ export async function POST(req: Request) {
   if (!id) return refus("Donne un nom à ta vidéo.");
   const chemin = `${dossier}/${id}`;
 
+  const lireProjet = async (): Promise<Projet | null> => {
+    const { data: f } = await stock.download(`${chemin}/projet.json`);
+    if (!f) return null;
+    try {
+      return JSON.parse(await f.text()) as Projet;
+    } catch {
+      return null;
+    }
+  };
+  const ecrireProjet = (p: Projet) =>
+    stock.upload(`${chemin}/projet.json`, JSON.stringify(p), { upsert: true, contentType: "application/json" });
+
+  if (action === "envoyer-voix" || action === "voix-ok") {
+    const cle = String(body.cle ?? "");
+    if (!/^[a-f0-9]{12}$/.test(cle)) return refus("Enregistrement invalide.");
+    const projet = await lireProjet();
+    if (!projet) return refus("Enregistre d'abord ton script sous ce nom.", 404);
+    const ext = TYPES_AUDIO[String(body.type ?? "").split(";")[0]];
+    if (!ext) return refus("Format de son non reconnu par ce navigateur.");
+    const fichier = `${chemin}/voix/${cle}.${ext}`;
+    if (action === "envoyer-voix") {
+      const taille = Number(body.taille);
+      if (!(taille > 0 && taille <= MAX_VOIX)) return refus("Enregistrement trop long : une phrase, pas plus.");
+      const { data, error } = await stock.createSignedUploadUrl(fichier, { upsert: true });
+      if (error || !data) return refus("Impossible de préparer l'envoi. Réessaie.", 500);
+      return NextResponse.json({ ok: true, chemin: data.path, jeton: data.token });
+    }
+    const texte = String(body.texte ?? "").slice(0, 500);
+    const duree = Number(body.duree);
+    if (!texte || !(duree > 0 && duree < 120)) return refus("Enregistrement invalide.");
+    projet.voix = { ...(projet.voix ?? {}), [cle]: { texte, duree, ext } };
+    const { error } = await ecrireProjet(projet);
+    if (error) return refus("L'enregistrement a échoué. Réessaie.", 500);
+    return NextResponse.json({ ok: true });
+  }
+
+  if (action === "liens-voix") {
+    const projet = await lireProjet();
+    if (!projet) return NextResponse.json({ ok: true, voix: [] });
+    // Liens valables 7 jours : le temps de coller le code dans try.manim.community.
+    const voix = await Promise.all(
+      Object.entries(projet.voix ?? {}).map(async ([cle, v]) => {
+        const { data } = await stock.createSignedUrl(`${chemin}/voix/${cle}.${v.ext}`, 7 * 24 * 3600);
+        return data?.signedUrl ? { cle, texte: v.texte, duree: v.duree, url: data.signedUrl } : null;
+      }),
+    );
+    return NextResponse.json({ ok: true, voix: voix.filter(Boolean) });
+  }
+
   if (action === "enregistrer") {
     const script = String(body.script ?? "").slice(0, MAX_SCRIPT);
     if (!script.trim()) return refus("Ton script est vide.");
@@ -114,11 +178,9 @@ export async function POST(req: Request) {
     const dossiers = (existants ?? []).filter((d) => !d.id).map((d) => d.name);
     if (!dossiers.includes(id) && dossiers.length >= MAX_PROJETS)
       return refus(`Tu as déjà ${MAX_PROJETS} vidéos : réutilise un nom existant pour remplacer l'une d'elles.`);
-    const projet: Projet = { nom, script, majLe: new Date().toISOString() };
-    const { error } = await stock.upload(`${chemin}/projet.json`, JSON.stringify(projet), {
-      upsert: true,
-      contentType: "application/json",
-    });
+    const avant = await lireProjet();
+    const projet: Projet = { nom, script, majLe: new Date().toISOString(), voix: avant?.voix };
+    const { error } = await ecrireProjet(projet);
     if (error) return refus("L'enregistrement a échoué. Réessaie.", 500);
     return NextResponse.json({ ok: true, id, nom });
   }

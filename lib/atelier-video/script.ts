@@ -322,12 +322,35 @@ function mobject(c: Contenu, couleur = "#FFFFFF") {
     : `Text(${py(c.texte)}, font_size=40, color=${py(couleur)})`;
 }
 
-/** Le script de l'élève en code Manim, prêt à coller dans try.manim.community. */
-export function versManim(script: Script, options: { sousTitres: boolean; voix: boolean }) {
+/** Une phrase enregistrée par l'élève : lien signé vers son fichier, et sa durée. */
+export type VoixEleve = { url: string; duree: number };
+
+/**
+ * Le script de l'élève en code Manim, prêt à coller dans try.manim.community.
+ *
+ * ⛔ 09/10/2026 — PAS de `%%manim` : dans une session Binder neuve, cette
+ * commande n'existe qu'APRÈS un `import manim` dans une case précédente. Le
+ * code est donc autonome : il rend la scène lui-même et affiche la vidéo.
+ *
+ * Voix de chaque phrase « dis : » : celle que l'élève a enregistrée
+ * (`voixEleve`, clé = la phrase), sinon la voix générée (gTTS) si `voix` est
+ * coché, sinon rien (sous-titres et attentes seulement).
+ */
+export function versManim(
+  script: Script,
+  options: { sousTitres: boolean; voix: boolean; voixEleve?: Record<string, VoixEleve> },
+) {
   const L: string[] = [];
   const dans = (s: string) => L.push(`        ${s}`);
-  const avecVoix = options.voix && script.etapes.some((e) => e.voix);
-  L.push("%%manim -qm MaVideo");
+  const voixEleve = options.voixEleve ?? {};
+  const phrases = script.etapes.map((e) => e.voix).filter((v): v is string => !!v);
+  const avecVoix = options.voix && phrases.some((p) => !voixEleve[p]);
+  const avecEleve = phrases.some((p) => voixEleve[p]);
+  L.push("import os");
+  L.push("import time");
+  if (avecEleve) L.push("import urllib.parse");
+  if (avecEleve) L.push("import urllib.request");
+  L.push("from IPython.display import Video, display");
   if (avecVoix) {
     // ⭐ 09/10/2026 — LA VOIX SANS MICRO : gTTS (synthèse vocale de Google,
     // gratuite) fabrique la voix pendant le rendu. Testé sur try.manim.community :
@@ -336,7 +359,7 @@ export function versManim(script: Script, options: { sousTitres: boolean; voix: 
     L.push("import sys");
     L.push("from manim import *");
     L.push("");
-    L.push("# La voix : installée au premier rendu (environ 20 secondes).");
+    L.push("# La voix générée : installée au premier rendu (environ 20 secondes).");
     L.push("try:");
     L.push("    from gtts import gTTS");
     L.push("    from mutagen.mp3 import MP3");
@@ -361,6 +384,19 @@ export function versManim(script: Script, options: { sousTitres: boolean; voix: 
     L.push("");
     L.push("");
     L.push("class MaVideo(Scene):");
+  }
+  if (avecEleve) {
+    // ⭐ 09/10/2026 — VERSION 2 : la voix de l'élève, enregistrée sur l'atelier,
+    // rangée dans Supabase. Le son webm du navigateur passe dans Manim (testé).
+    L.push("    def ma_voix(self, lien, duree):");
+    L.push("        # Télécharge MA voix, enregistrée sur l'atelier, et la pose sur la bande-son.");
+    L.push('        self.nb_voix = getattr(self, "nb_voix", 0) + 1');
+    L.push("        extension = os.path.splitext(urllib.parse.urlparse(lien).path)[1]");
+    L.push('        fichier = f"ma_voix_{self.nb_voix}{extension}"');
+    L.push("        urllib.request.urlretrieve(lien, fichier)");
+    L.push("        self.add_sound(fichier)");
+    L.push("        return duree");
+    L.push("");
   }
   L.push("    def construct(self):");
   if (script.objectif) dans(`# Objectif : ${script.objectif}`);
@@ -388,9 +424,13 @@ export function versManim(script: Script, options: { sousTitres: boolean; voix: 
       dans(`sous_titre = Text(${py(voix)}, font_size=24, color="#DDDDDD").to_edge(DOWN, buff=0.3)`);
       dans(`self.add(sous_titre)`);
     }
-    if (e.voix && avecVoix) {
+    const parle = e.voix ? (voixEleve[e.voix] ? "eleve" : options.voix ? "gtts" : null) : null;
+    if (e.voix && parle) {
       dans(`debut = self.renderer.time`);
-      dans(`duree = self.dire(${py(e.voix)})`);
+      if (parle === "eleve") {
+        const enreg = voixEleve[e.voix];
+        dans(`duree = self.ma_voix(${py(enreg.url)}, ${enreg.duree.toFixed(2)})`);
+      } else dans(`duree = self.dire(${py(e.voix)})`);
     }
     const v = `o${++n}`;
     switch (e.type) {
@@ -465,7 +505,7 @@ export function versManim(script: Script, options: { sousTitres: boolean; voix: 
       case "dis":
         break;
     }
-    if (e.voix && avecVoix) {
+    if (e.voix && parle) {
       // On laisse la voix finir sa phrase avant le plan suivant.
       dans(`reste = duree - (self.renderer.time - debut)`);
       dans(`self.wait(max(reste, 0) + 0.3)`);
@@ -479,6 +519,16 @@ export function versManim(script: Script, options: { sousTitres: boolean; voix: 
     dans("");
   }
   dans("self.wait(1)");
+  L.push("");
+  L.push("");
+  L.push("# Le rendu, puis la vidéo sous la case.");
+  L.push('config.quality = "medium_quality"');
+  // Un nom neuf à chaque rendu : sinon Manim garde le nom du premier rendu de la
+  // session et le navigateur peut ressortir l'ancienne vidéo de son cache.
+  L.push('config.output_file = f"ma_video_{int(time.time())}"');
+  L.push("scene = MaVideo()");
+  L.push("scene.render()");
+  L.push('display(Video(os.path.relpath(scene.renderer.file_writer.movie_file_path), html_attributes="controls"))');
   return L.join("\n") + "\n";
 }
 
