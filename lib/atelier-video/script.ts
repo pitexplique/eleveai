@@ -323,14 +323,45 @@ function mobject(c: Contenu, couleur = "#FFFFFF") {
 }
 
 /** Le script de l'élève en code Manim, prêt à coller dans try.manim.community. */
-export function versManim(script: Script, options: { sousTitres: boolean }) {
+export function versManim(script: Script, options: { sousTitres: boolean; voix: boolean }) {
   const L: string[] = [];
   const dans = (s: string) => L.push(`        ${s}`);
+  const avecVoix = options.voix && script.etapes.some((e) => e.voix);
   L.push("%%manim -qm MaVideo");
-  L.push("from manim import *");
-  L.push("");
-  L.push("");
-  L.push("class MaVideo(Scene):");
+  if (avecVoix) {
+    // ⭐ 09/10/2026 — LA VOIX SANS MICRO : gTTS (synthèse vocale de Google,
+    // gratuite) fabrique la voix pendant le rendu. Testé sur try.manim.community :
+    // pip n'y écrit ni dans le système ni dans --user, d'où --target ./voix.
+    L.push("import subprocess");
+    L.push("import sys");
+    L.push("from manim import *");
+    L.push("");
+    L.push("# La voix : installée au premier rendu (environ 20 secondes).");
+    L.push("try:");
+    L.push("    from gtts import gTTS");
+    L.push("    from mutagen.mp3 import MP3");
+    L.push("except ImportError:");
+    L.push('    subprocess.run([sys.executable, "-m", "pip", "install", "-q", "--target", "./voix", "gTTS", "mutagen"])');
+    L.push('    sys.path.insert(0, "./voix")');
+    L.push("    from gtts import gTTS");
+    L.push("    from mutagen.mp3 import MP3");
+    L.push("");
+    L.push("");
+    L.push("class MaVideo(Scene):");
+    L.push("    def dire(self, phrase):");
+    L.push("        # Fabrique la voix de la phrase et la pose sur la bande-son ; renvoie sa durée.");
+    L.push('        self.nb_voix = getattr(self, "nb_voix", 0) + 1');
+    L.push('        fichier = f"voix_{self.nb_voix}.mp3"');
+    L.push('        gTTS(phrase, lang="fr").save(fichier)');
+    L.push("        self.add_sound(fichier)");
+    L.push("        return MP3(fichier).info.length");
+    L.push("");
+  } else {
+    L.push("from manim import *");
+    L.push("");
+    L.push("");
+    L.push("class MaVideo(Scene):");
+  }
   L.push("    def construct(self):");
   if (script.objectif) dans(`# Objectif : ${script.objectif}`);
   dans("titre = None");
@@ -356,6 +387,10 @@ export function versManim(script: Script, options: { sousTitres: boolean }) {
     if (voix && options.sousTitres) {
       dans(`sous_titre = Text(${py(voix)}, font_size=24, color="#DDDDDD").to_edge(DOWN, buff=0.3)`);
       dans(`self.add(sous_titre)`);
+    }
+    if (e.voix && avecVoix) {
+      dans(`debut = self.renderer.time`);
+      dans(`duree = self.dire(${py(e.voix)})`);
     }
     const v = `o${++n}`;
     switch (e.type) {
@@ -430,7 +465,12 @@ export function versManim(script: Script, options: { sousTitres: boolean }) {
       case "dis":
         break;
     }
-    if (e.voix) {
+    if (e.voix && avecVoix) {
+      // On laisse la voix finir sa phrase avant le plan suivant.
+      dans(`reste = duree - (self.renderer.time - debut)`);
+      dans(`self.wait(max(reste, 0) + 0.3)`);
+      if (options.sousTitres) dans(`self.remove(sous_titre)`);
+    } else if (e.voix) {
       // Le temps de dire la phrase, moins ~1 s d'animation déjà passée.
       const reste = Math.max(0.5, dureeVoix(e.voix) - (e.type === "dis" ? 0 : 1));
       dans(`self.wait(${reste.toFixed(1)})`);

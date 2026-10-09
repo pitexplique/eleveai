@@ -186,6 +186,7 @@ export default function AtelierVideoClient() {
   const [ligneActive, setLigneActive] = useState<number | null>(null);
   const [avecVoix, setAvecVoix] = useState(true);
   const [sousTitres, setSousTitres] = useState(true);
+  const [voixManim, setVoixManim] = useState(true);
   const [copie, setCopie] = useState(false);
   const jeton = useRef(0);
   const idSuivant = useRef(1);
@@ -204,7 +205,7 @@ export default function AtelierVideoClient() {
   }, [source]);
 
   const script = useMemo(() => lireScript(source), [source]);
-  const code = useMemo(() => versManim(script, { sousTitres }), [script, sousTitres]);
+  const code = useMemo(() => versManim(script, { sousTitres, voix: voixManim }), [script, sousTitres, voixManim]);
   const erreurs = script.remarques.filter((r) => r.niveau === "erreur");
   const conseils = script.remarques.filter((r) => r.niveau === "conseil");
 
@@ -441,6 +442,10 @@ export default function AtelierVideoClient() {
             </button>
             {erreurs.length > 0 && <span className="ml-2 text-sm text-red-700">Corrige d&apos;abord les lignes en rouge.</span>}
             <label className="mt-2 flex items-center gap-2 text-sm">
+              <input type="checkbox" checked={voixManim} onChange={(e) => setVoixManim(e.target.checked)} />
+              Une voix lit tes phrases « dis : » dans la vidéo (pas besoin de micro)
+            </label>
+            <label className="mt-1 flex items-center gap-2 text-sm">
               <input type="checkbox" checked={sousTitres} onChange={(e) => setSousTitres(e.target.checked)} />
               Écrire la voix en sous-titres dans la vidéo
             </label>
@@ -462,7 +467,8 @@ export default function AtelierVideoClient() {
             colle ton code (<kbd>Ctrl</kbd>+<kbd>V</kbd>), puis appuie sur <kbd>Maj</kbd>+<kbd>Entrée</kbd>.
           </li>
           <li>
-            Attends environ 30 secondes : ta vidéo apparaît sous la case. Pour la garder : clic droit sur la vidéo,
+            Attends environ 30 secondes (une minute la première fois, le temps d&apos;installer la voix) : ta vidéo
+            apparaît sous la case, avec le son. Pour la garder : clic droit sur la vidéo,
             « Enregistrer la vidéo sous ». La page ne garde rien quand tu la fermes.
           </li>
         </ol>
