@@ -32,55 +32,40 @@ function mmss(secondes: number) {
 const LETTRES = ["A", "B", "C", "D", "E", "F"];
 
 /**
- * ⭐ 09/10/2026 — LA FEUILLE À DISTRIBUER, en deux colonnes (Frédéric : « on
- * doit pouvoir imprimer les questions dans un PDF de 2 colonnes pour les
- * élèves »). Invisible à l'écran, seule visible à l'impression : un en-tête
- * Nom / Classe / Note, les questions en colonnes, puis le corrigé sur une page
- * à part (le prof la garde ou ne l'imprime pas). Le PDF est celui du
- * navigateur, comme le livret.
+ * ⭐ 09/10/2026 — LA FEUILLE À DISTRIBUER : UNE FEUILLE POUR DEUX ÉLÈVES
+ * (Frédéric : « il faudrait que le prof puisse utiliser une feuille pour 2
+ * élèves, ça économise du papier »). La même série deux fois, côte à côte,
+ * séparées par un pointillé à découper ; chaque moitié a son Nom / Classe /
+ * Note. Invisible à l'écran, seule visible à l'impression ; le corrigé suit
+ * sur une page à part (le prof la garde ou ne l'imprime pas). Le PDF est
+ * celui du navigateur, comme le livret.
  */
-function FeuilleImprimee({ serie, titre, duree }: { serie: AutoQuestionServie[]; titre: string; duree: number }) {
+function CopieEleve({ serie, titre, duree }: { serie: AutoQuestionServie[]; titre: string; duree: number }) {
   return (
-    <div className="feuille-auto hidden text-slate-950 print:block">
-      <style>{`
-        @media print {
-          @page { size: A4; margin: 12mm; }
-          header, footer, nav { display: none !important; }
-          .feuille-auto .colonnes { column-count: 2; column-gap: 8mm; column-rule: 1px solid #cbd5e1; }
-          .feuille-auto .question { break-inside: avoid; }
-          .feuille-auto .corrige { break-before: page; }
-          .feuille-auto svg, .feuille-auto canvas { max-width: 100%; height: auto; }
-        }
-      `}</style>
-
-      <div className="mb-3 flex items-end justify-between border-b-2 border-slate-900 pb-2">
-        <div>
-          <p className="text-[11px] font-bold uppercase tracking-wide text-slate-600">eleveai.fr</p>
-          <h1 className="text-xl font-black">{titre}</h1>
-          <p className="text-xs font-semibold text-slate-700">
-            {serie.length} questions · {duree} min · sans calculatrice
-          </p>
-        </div>
-        <div className="space-y-1 text-right text-sm font-semibold">
-          <p>Nom : ……………………………………</p>
-          <p>Classe : ………… Note : …… / {serie.length}</p>
-        </div>
+    <div className="min-w-0">
+      <div className="mb-2 border-b-2 border-slate-900 pb-1.5">
+        <p className="text-[9px] font-bold uppercase tracking-wide text-slate-600">eleveai.fr</p>
+        <p className="text-base font-black leading-tight">{titre}</p>
+        <p className="text-[10px] font-semibold text-slate-700">
+          {serie.length} questions · {duree} min · sans calculatrice
+        </p>
+        <p className="mt-1.5 text-[12px] font-semibold">Nom : …………………………………………</p>
+        <p className="mt-1 text-[12px] font-semibold">Classe : ………… Note : …… / {serie.length}</p>
       </div>
-
-      <ol className="colonnes">
+      <ol>
         {serie.map((q, i) => (
-          <li key={i} className="question mb-3 pb-2 text-[13px] leading-snug">
-            <p className="text-[10px] font-black uppercase tracking-wide text-slate-600">
+          <li key={i} className="question mb-2.5 text-[12px] leading-snug">
+            <p className="text-[9px] font-black uppercase tracking-wide text-slate-600">
               {i + 1}. {q.themeLabel}
             </p>
             <MarkdownMath className="mt-0.5 whitespace-pre-line">{q.text}</MarkdownMath>
             {q.canvas ? (
-              <div className="mx-auto mt-1 max-w-[80mm]">
+              <div className="mx-auto mt-1 max-w-[62mm]">
                 <CanvasRenderer figure={q.canvas} />
               </div>
             ) : null}
             {q.format === "qcm" && q.choices ? (
-              <div className="mt-1 grid grid-cols-2 gap-x-3 gap-y-0.5">
+              <div className="mt-1 grid grid-cols-2 gap-x-2 gap-y-1.5">
                 {q.choices.map((c, k) => (
                   <div key={k} className="flex gap-1">
                     <span className="font-black">☐ {LETTRES[k]}.</span>
@@ -95,11 +80,36 @@ function FeuilleImprimee({ serie, titre, duree }: { serie: AutoQuestionServie[];
                 ))}
               </div>
             ) : (
-              <p className="mt-2 text-slate-600">Réponse : ………………………………</p>
+              <p className="mt-1.5 text-slate-600">Réponse : ……………………………</p>
             )}
           </li>
         ))}
       </ol>
+    </div>
+  );
+}
+
+function FeuilleImprimee({ serie, titre, duree }: { serie: AutoQuestionServie[]; titre: string; duree: number }) {
+  return (
+    <div className="feuille-auto hidden text-slate-950 print:block">
+      <style>{`
+        @media print {
+          @page { size: A4; margin: 10mm; }
+          header, footer, nav { display: none !important; }
+          .feuille-auto .deux-copies { display: grid; grid-template-columns: 1fr 1fr; column-gap: 12mm; position: relative; }
+          .feuille-auto .deux-copies::after { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; border-left: 1.5px dashed #64748b; }
+          .feuille-auto .colonnes { column-count: 2; column-gap: 8mm; column-rule: 1px solid #cbd5e1; }
+          .feuille-auto .question { break-inside: avoid; }
+          .feuille-auto .corrige { break-before: page; }
+          .feuille-auto svg, .feuille-auto canvas { max-width: 100%; height: auto; }
+        }
+      `}</style>
+
+      <p className="mb-1 text-center text-[10px] font-semibold text-slate-500">✂ Une feuille pour deux élèves : découper le long du pointillé</p>
+      <div className="deux-copies">
+        <CopieEleve serie={serie} titre={titre} duree={duree} />
+        <CopieEleve serie={serie} titre={titre} duree={duree} />
+      </div>
 
       <section className="corrige">
         <h2 className="mb-2 border-b-2 border-slate-900 pb-1 text-lg font-black">Corrigé · {titre}</h2>
@@ -443,7 +453,7 @@ export default function AutomatismesClient() {
               onClick={imprimer}
               className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-5 py-3 text-sm font-black text-sky-800 ring-2 ring-sky-300 hover:bg-sky-50"
             >
-              🖨️ Imprimer {serie.length > 0 ? "cette série" : `une série de ${nb} questions`} pour la classe (PDF, 2 colonnes)
+              🖨️ Imprimer {serie.length > 0 ? "cette série" : `une série de ${nb} questions`} (PDF, 1 feuille pour 2 élèves)
             </button>
           ) : null}
         </div>
