@@ -9,7 +9,7 @@
 // un tirage au rendu serveur ne serait pas celui du navigateur.
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
 import { CanvasRenderer } from "@/lib/canvas";
 import { MarkdownMath } from "@/components/MarkdownMath";
@@ -34,7 +34,7 @@ const LETTRES = ["A", "B", "C", "D", "E", "F"];
 /**
  * ⭐ 09/10/2026 — LA FEUILLE À DISTRIBUER : UNE FEUILLE POUR DEUX ÉLÈVES
  * (Frédéric : « il faudrait que le prof puisse utiliser une feuille pour 2
- * élèves, ça économise du papier »). La même série deux fois, côte à côte,
+ * élèves, ça économise du papier »). La même série deux fois (quatre si elle est courte), côte à côte,
  * séparées par un pointillé à découper ; chaque moitié a son Nom / Classe /
  * Note. Invisible à l'écran, seule visible à l'impression ; le corrigé suit
  * sur une page à part (le prof la garde ou ne l'imprime pas). Le PDF est
@@ -44,12 +44,14 @@ function CopieEleve({ serie, titre, duree }: { serie: AutoQuestionServie[]; titr
   return (
     <div className="min-w-0">
       <div className="mb-2 border-b-2 border-slate-900 pb-1.5">
-        <p className="text-[9px] font-bold uppercase tracking-wide text-slate-600">eleveai.fr</p>
-        <p className="text-base font-black leading-tight">{titre}</p>
+        <p className="flex items-baseline justify-between gap-2">
+          <span className="text-base font-black leading-tight">{titre}</span>
+          <span className="text-[9px] font-bold uppercase tracking-wide text-slate-600">eleveai.fr</span>
+        </p>
         <p className="text-[10px] font-semibold text-slate-700">
           {serie.length} questions · {duree} min · sans calculatrice
         </p>
-        <p className="mt-1.5 text-[12px] font-semibold">Nom : …………………………………………</p>
+        <p className="mt-1 text-[12px] font-semibold">Nom : …………………………………………</p>
         <p className="mt-1 text-[12px] font-semibold">Classe : ………… Note : …… / {serie.length}</p>
       </div>
       <ol>
@@ -90,7 +92,33 @@ function CopieEleve({ serie, titre, duree }: { serie: AutoQuestionServie[]; titr
 }
 
 function FeuilleImprimee({ serie, titre, duree }: { serie: AutoQuestionServie[]; titre: string; duree: number }) {
+  // ⭐ Frédéric, 09/10 (« bonnes suggestions ») : une série COURTE laissait le
+  // bas de la feuille vide → 4 copies par feuille quand deux copies tiennent
+  // l'une sous l'autre. On MESURE une copie à sa largeur imprimée (89 mm) au
+  // lieu de compter les questions : une figure pèse plus que trois calculs.
+  const mesureRef = useRef<HTMLDivElement>(null);
+  const [quatre, setQuatre] = useState(false);
+  useLayoutEffect(() => {
+    const h = mesureRef.current?.offsetHeight ?? Infinity;
+    // A4 : 277 mm utiles − la ligne ✂ (4 mm) et le pointillé entre les rangées (11 mm) ≈ 130 mm par copie.
+    setQuatre(h / (96 / 25.4) <= 130);
+  }, [serie]);
+  const paire = (
+    <div className="deux-copies">
+      <CopieEleve serie={serie} titre={titre} duree={duree} />
+      <CopieEleve serie={serie} titre={titre} duree={duree} />
+    </div>
+  );
   return (
+    <>
+    <div
+      ref={mesureRef}
+      aria-hidden="true"
+      className="pointer-events-none fixed left-[-10000px] top-0 print:hidden"
+      style={{ width: "89mm", visibility: "hidden" }}
+    >
+      <CopieEleve serie={serie} titre={titre} duree={duree} />
+    </div>
     <div className="feuille-auto hidden text-slate-950 print:block">
       <style>{`
         @media print {
@@ -105,11 +133,16 @@ function FeuilleImprimee({ serie, titre, duree }: { serie: AutoQuestionServie[];
         }
       `}</style>
 
-      <p className="mb-1 text-center text-[10px] font-semibold text-slate-500">✂ Une feuille pour deux élèves : découper le long du pointillé</p>
-      <div className="deux-copies">
-        <CopieEleve serie={serie} titre={titre} duree={duree} />
-        <CopieEleve serie={serie} titre={titre} duree={duree} />
-      </div>
+      <p className="mb-1 text-center text-[10px] font-semibold text-slate-500">
+        ✂ Une feuille pour {quatre ? "quatre" : "deux"} élèves : découper le long {quatre ? "des pointillés" : "du pointillé"}
+      </p>
+      {paire}
+      {quatre ? (
+        <>
+          <div className="my-[5mm] border-t-[1.5px] border-dashed border-slate-500" />
+          {paire}
+        </>
+      ) : null}
 
       <section className="corrige">
         <h2 className="mb-2 border-b-2 border-slate-900 pb-1 text-lg font-black">Corrigé · {titre}</h2>
@@ -139,6 +172,7 @@ function FeuilleImprimee({ serie, titre, duree }: { serie: AutoQuestionServie[];
         </ol>
       </section>
     </div>
+    </>
   );
 }
 
@@ -453,7 +487,7 @@ export default function AutomatismesClient() {
               onClick={imprimer}
               className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-5 py-3 text-sm font-black text-sky-800 ring-2 ring-sky-300 hover:bg-sky-50"
             >
-              🖨️ Imprimer {serie.length > 0 ? "cette série" : `une série de ${nb} questions`} (PDF, 1 feuille pour 2 élèves)
+              🖨️ Imprimer {serie.length > 0 ? "cette série" : `une série de ${nb} questions`} (PDF, 1 feuille pour 2 ou 4 élèves)
             </button>
           ) : null}
         </div>
