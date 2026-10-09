@@ -24,6 +24,7 @@ import {
   type Contenu,
   type Etape,
 } from "@/lib/atelier-video/script";
+import MonTravail from "./MonTravail";
 
 const CLE_STOCKAGE = "atelier-video:script";
 
@@ -479,6 +480,18 @@ export default function AtelierVideoClient() {
           </pre>
         </details>
       </section>
+
+      <MonTravail
+        source={source}
+        nomParDefaut={
+          (script.etapes.find((e) => e.type === "titre") as { texte?: string } | undefined)?.texte ?? "Ma vidéo"
+        }
+        onOuvrir={(s) => {
+          arreter();
+          setScene({ pile: [] });
+          setSource(s);
+        }}
+      />
      </div>
     </main>
   );
