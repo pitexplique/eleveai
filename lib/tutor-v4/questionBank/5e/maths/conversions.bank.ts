@@ -20,6 +20,7 @@
 // `conversion_avant_calcul`, et c'est elle qui porte le plus de distracteurs.
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import { PRENOMS, de, type Prenom } from "@/lib/tutor-v4/questionBank/6e/maths/entiers.bank";
 
 function randomChoice<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -41,6 +42,529 @@ function exp(
 
 const OFFICIEL = ["evaluation_nationale_4e", "eval4e_automatismes"];
 const OFFICIEL_PB = ["evaluation_nationale_4e", "eval4e_resolution"];
+
+/* =========================================================
+   SITUATIONS × TOURNURES × PRÉNOMS — 09/10/2026
+   ---------------------------------------------------------
+   ⛔ POURQUOI. Mesuré le 09/10 : 5 à 9 squelettes par micro, 11 à 18
+   répétitions sur 20 questions (« Convertis : # m = … cm » revenait à
+   l'identique). Chaque gabarit compose maintenant une SITUATION × une
+   TOURNURE × un PRÉNOM. Correcteurs : correcteurs/conversions.ts (ils
+   relisent les mesures du texte et refont la conversion).
+   ⚠️ Les nouveaux énoncés sont en texte simple (pas de LaTeX) : le coach
+   sonore les lit à voix haute. Une mesure s'écrit « 3,5 km » : nombre,
+   espace, symbole d'unité.
+   ========================================================= */
+
+function rint(min: number, max: number) {
+  return min + Math.floor(Math.random() * (max - min + 1));
+}
+function shuffle<T>(arr: T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+const r3 = (x: number) => Math.round(x * 1000) / 1000;
+/** Nombre à la française : « 3,5 », « 2400 ». */
+const nb = (x: number) => String(r3(x)).replace(".", ",");
+const deuxDecimales = (x: number) => Math.abs(x * 100 - Math.round(x * 100)) < 1e-6;
+const il = (p: Prenom) => (p.f ? "elle" : "il");
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+const prenom = () => randomChoice(PRENOMS);
+
+/** Les unités d'une même grandeur, avec leur puissance de 10 par rapport à l'unité de base. */
+type Unite = { s: string; nom: string; e: number };
+const LONGUEURS: Unite[] = [
+  { s: "km", nom: "kilomètres", e: 3 },
+  { s: "m", nom: "mètres", e: 0 },
+  { s: "dm", nom: "décimètres", e: -1 },
+  { s: "cm", nom: "centimètres", e: -2 },
+  { s: "mm", nom: "millimètres", e: -3 },
+];
+const MASSES: Unite[] = [
+  { s: "kg", nom: "kilogrammes", e: 3 },
+  { s: "g", nom: "grammes", e: 0 },
+  { s: "mg", nom: "milligrammes", e: -3 },
+];
+const CONTENANCES: Unite[] = [
+  { s: "L", nom: "litres", e: 0 },
+  { s: "dL", nom: "décilitres", e: -1 },
+  { s: "cL", nom: "centilitres", e: -2 },
+  { s: "mL", nom: "millilitres", e: -3 },
+];
+/** Une mesure réelle : la phrase, l'unité de départ, des valeurs plausibles, les unités d'arrivée permises. */
+type Mesure = { phrase: (p: Prenom, v: string) => string; u: string; v: number[]; vers: string[]; famille: Unite[] };
+const MESURES_CONV: Mesure[] = [
+  { phrase: (_p, v) => `La piste cyclable du parc mesure ${v} km`, u: "km", v: [2, 2.5, 3, 3.5, 4.2, 5], vers: ["m"], famille: LONGUEURS },
+  { phrase: (p, v) => `Le ruban ${de(p.nom)} mesure ${v} m`, u: "m", v: [1.2, 1.5, 2, 2.4, 3], vers: ["cm", "dm", "mm"], famille: LONGUEURS },
+  { phrase: (p, v) => `Le crayon ${de(p.nom)} mesure ${v} cm`, u: "cm", v: [12, 14, 15, 17, 18.5], vers: ["mm", "m", "dm"], famille: LONGUEURS },
+  { phrase: (_p, v) => `Une fourmi mesure ${v} mm`, u: "mm", v: [5, 6, 8, 12], vers: ["cm"], famille: LONGUEURS },
+  { phrase: (p, v) => `Le sentier de randonnée ${de(p.nom)} fait ${v} km`, u: "km", v: [6, 7.5, 8, 12.5], vers: ["m"], famille: LONGUEURS },
+  { phrase: (_p, v) => `La table de la cuisine mesure ${v} m de long`, u: "m", v: [1.6, 1.8, 2, 2.2], vers: ["cm", "mm"], famille: LONGUEURS },
+  { phrase: (p, v) => `La planche de skate ${de(p.nom)} mesure ${v} cm`, u: "cm", v: [78, 80, 82], vers: ["m", "mm", "dm"], famille: LONGUEURS },
+  { phrase: (_p, v) => `Le sac de pommes de terre pèse ${v} kg`, u: "kg", v: [2, 2.5, 5, 10], vers: ["g"], famille: MASSES },
+  { phrase: (p, v) => `Le cartable ${de(p.nom)} pèse ${v} kg`, u: "kg", v: [3, 3.5, 4.2, 5], vers: ["g"], famille: MASSES },
+  { phrase: (_p, v) => `Le paquet de farine pèse ${v} g`, u: "g", v: [250, 500, 1000, 1500], vers: ["kg"], famille: MASSES },
+  { phrase: (p, v) => `Le chaton ${de(p.nom)} pèse ${v} g`, u: "g", v: [450, 600, 800, 1200], vers: ["kg"], famille: MASSES },
+  { phrase: (_p, v) => `La pastèque du marché pèse ${v} kg`, u: "kg", v: [3.5, 4, 5.2, 6], vers: ["g"], famille: MASSES },
+  { phrase: (_p, v) => `Un comprimé de vitamine C contient ${v} g de vitamine`, u: "g", v: [0.5, 0.25, 1], vers: ["mg"], famille: MASSES },
+  { phrase: (p, v) => `La gourde ${de(p.nom)} contient ${v} cL`, u: "cL", v: [50, 75, 60], vers: ["L", "mL", "dL"], famille: CONTENANCES },
+  { phrase: (_p, v) => `La bouteille de jus de goyave contient ${v} L`, u: "L", v: [1, 1.5, 2], vers: ["cL", "mL", "dL"], famille: CONTENANCES },
+  { phrase: (_p, v) => `Le verre de la cantine contient ${v} cL`, u: "cL", v: [20, 25], vers: ["mL", "L", "dL"], famille: CONTENANCES },
+  { phrase: (_p, v) => `Une cuillère à soupe contient ${v} mL`, u: "mL", v: [15], vers: ["cL"], famille: CONTENANCES },
+  { phrase: (p, v) => `L’arrosoir ${de(p.nom)} contient ${v} L`, u: "L", v: [5, 8, 10, 12], vers: ["cL", "dL"], famille: CONTENANCES },
+  { phrase: (_p, v) => `La casserole contient ${v} mL de lait`, u: "mL", v: [250, 500, 750, 1500], vers: ["L", "cL"], famille: CONTENANCES },
+];
+const unite = (f: Unite[], s: string) => f.find((u) => u.s === s)!;
+/** v exprimé en `de`, écrit en `vers`. */
+const convertir = (f: Unite[], v: number, de_: string, vers: string) => r3(v * 10 ** (unite(f, de_).e - unite(f, vers).e));
+
+/** Conversion d'une mesure. niveau 2 : unité d'arrivée plus petite (on multiplie) ; 3 : dans les deux sens. */
+function genConvDecimal(niveau: 2 | 3) {
+  for (;;) {
+    const m = randomChoice(MESURES_CONV);
+    const v = randomChoice(m.v);
+    const vers = randomChoice(m.vers);
+    const ua = unite(m.famille, m.u);
+    const ub = unite(m.famille, vers);
+    if (niveau === 2 && ub.e > ua.e) continue;
+    const rep = convertir(m.famille, v, m.u, vers);
+    if (!deuxDecimales(rep)) continue;
+    const p = prenom();
+    const phrase = m.phrase(p, nb(v));
+    const t = rint(1, 5);
+    let text: string;
+    if (t === 1) text = `${phrase}. Combien cela fait-il de ${ub.nom} ?`;
+    else if (t === 2) text = `${phrase}. Convertis cette mesure en ${ub.nom}.`;
+    else if (t === 3) text = `Complète : ${nb(v)} ${m.u} = … ${vers}.`;
+    else if (t === 4) text = `${p.nom} lit : « ${phrase} ». ${cap(il(p))} veut l’écrire en ${ub.nom}. Que trouve-t-${il(p)} ?`;
+    else text = `${phrase}. Écris cette mesure en ${vers}.`;
+    const facteur = 10 ** Math.abs(ua.e - ub.e);
+    const plusPetite = ub.e < ua.e;
+    const explication = exp(
+      `1 ${plusPetite ? m.u : vers} = ${facteur} ${plusPetite ? vers : m.u}.`,
+      plusPetite ? "on va vers une unité plus petite : le nombre devient plus grand, on multiplie." : "on va vers une unité plus grande : le nombre devient plus petit, on divise.",
+      `${nb(v)} ${plusPetite ? "×" : "÷"} ${facteur} = ${nb(rep)}.`,
+      `${nb(v)} ${m.u} = ${nb(rep)} ${vers}.`,
+    );
+    if (niveau === 3 && Math.random() < 0.35) {
+      const pieges = [rep * 10, rep / 10, r3(plusPetite ? v / facteur : v * facteur), rep * 100];
+      const choix = [...new Set([rep, ...pieges].map(r3))].filter((x) => x > 0 && deuxDecimales(x)).slice(0, 4);
+      return {
+        text,
+        format: "qcm" as const,
+        choices: shuffle(choix.map((x) => `${nb(x)} ${vers}`)),
+        expected: [`${nb(rep)} ${vers}`],
+        comparator: "mcq_exact" as const,
+        explanation: explication,
+      };
+    }
+    return { text, format: "short" as const, expected: [`${nb(rep)} ${vers}`], comparator: "number_equal" as const, explanation: explication };
+  }
+}
+
+/* ─── Durées ─────────────────────────────────────────────────────────────── */
+const ACTIVITES: Array<(p: Prenom) => string> = [
+  (p) => `Le film que regarde ${p.nom} dure`,
+  (p) => `L’entraînement de natation ${de(p.nom)} dure`,
+  (p) => `Le trajet en bus ${de(p.nom)} dure`,
+  (p) => `La cuisson du gâteau ${de(p.nom)} dure`,
+  (p) => `La randonnée ${de(p.nom)} dure`,
+  (p) => `Le concert où va ${p.nom} dure`,
+  (p) => `Le voyage en train ${de(p.nom)} dure`,
+  (p) => `La partie de jeu de société ${de(p.nom)} dure`,
+  (p) => `La sieste du chat ${de(p.nom)} dure`,
+  (p) => `Le match de basket ${de(p.nom)} dure`,
+  (p) => `La séance de cinéma ${de(p.nom)} dure`,
+  (p) => `L’atelier de poterie ${de(p.nom)} dure`,
+];
+const hm = (h: number, m: number) => (m ? `${h} h ${m} min` : `${h} h`);
+
+/**
+ * Durées. niveau 1 : h (et min) → min ; 2 : min → h min (QCM) et h min → min ;
+ * 3 : additions avec retenue, h décimales (1,5 h), min s → s.
+ */
+function genConvDuree(niveau: 1 | 2 | 3) {
+  const p = prenom();
+  const act = randomChoice(ACTIVITES)(p);
+  if (niveau === 1) {
+    const h = rint(1, 3);
+    const m = randomChoice([0, 10, 15, 20, 30, 40, 45]);
+    const tot = h * 60 + m;
+    const text = randomChoice([
+      `${act} ${hm(h, m)}. Combien de minutes cela fait-il ?`,
+      `${act} ${hm(h, m)}. Écris cette durée en minutes.`,
+      `Complète : ${hm(h, m)} = … min.`,
+      `${act} ${hm(h, m)}. ${p.nom} veut l’écrire en minutes. Que trouve-t-${il(p)} ?`,
+      `${p.nom} regarde l’horloge : ${hm(h, m)} se sont écoulées. Combien de minutes est-ce ?`,
+    ]);
+    return {
+      text,
+      format: "short" as const,
+      expected: [`${tot} min`],
+      comparator: "number_equal" as const,
+      explanation: exp("une heure vaut 60 minutes.", "on change les heures en minutes, puis on ajoute les minutes.", `${h} × 60 = ${h * 60}${m ? `, puis ${h * 60} + ${m} = ${tot}` : ""}.`, `${hm(h, m)} = ${tot} min.`),
+    };
+  }
+  if (niveau === 2) {
+    const h = rint(1, 4);
+    const m = randomChoice([5, 10, 15, 20, 25, 35, 40, 45, 50, 55]);
+    const tot = h * 60 + m;
+    if (Math.random() < 0.5) {
+      const bon = hm(h, m);
+      const pieges = [hm(Math.floor(tot / 100), tot % 100), hm(h - 1 > 0 ? h - 1 : h + 1, m), hm(h, m + 10 < 60 ? m + 10 : m - 10), hm(h + 1, m)];
+      // « 1 h 35 min » pour 135 min : le piège de la fiche Éduscol (lire 135 comme 1 et 35).
+      const choix = [...new Set([bon, ...pieges.filter((x) => !x.startsWith("0 h"))])].slice(0, 4);
+      return {
+        text: randomChoice([
+          `${act} ${tot} min. Comment écrire cette durée en heures et minutes ?`,
+          `${act} ${tot} minutes. Cela fait combien d’heures et de minutes ?`,
+          `${p.nom} chronomètre : ${tot} min. Quelle écriture en heures et minutes est juste ?`,
+        ]),
+        format: "qcm" as const,
+        choices: shuffle(choix),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: exp("une heure vaut 60 minutes, pas 100.", "on cherche combien de fois 60 tient dans le nombre de minutes, et ce qu’il reste.", `${h} × 60 = ${h * 60} et ${tot} − ${h * 60} = ${m}.`, `${tot} min = ${bon}.`),
+      };
+    }
+    return {
+      text: randomChoice([
+        `${act} ${hm(h, m)}. Combien de minutes cela fait-il ?`,
+        `${act} ${hm(h, m)}. ${p.nom} veut l’écrire en minutes. Que trouve-t-${il(p)} ?`,
+        `Complète : ${hm(h, m)} = … min.`,
+      ]),
+      format: "short" as const,
+      expected: [`${tot} min`],
+      comparator: "number_equal" as const,
+      explanation: exp("une heure vaut 60 minutes.", "on change les heures en minutes, puis on ajoute les minutes.", `${h} × 60 = ${h * 60}, puis ${h * 60} + ${m} = ${tot}.`, `${hm(h, m)} = ${tot} min.`),
+    };
+  }
+  const t = rint(1, 3);
+  if (t === 1) {
+    // addition avec retenue, réponse en minutes
+    const h1 = rint(0, 2);
+    const m1 = randomChoice([35, 40, 45, 50, 55]);
+    const m2 = randomChoice([20, 25, 30, 35, 40]);
+    const tot = h1 * 60 + m1 + m2;
+    return {
+      text: `${act} ${hm(h1, m1).replace(/^0 h /, "")}. Ensuite, ${p.nom} attend encore ${m2} min. Combien de minutes cela fait-il en tout ?`,
+      format: "short" as const,
+      expected: [`${tot} min`],
+      comparator: "number_equal" as const,
+      explanation: exp("une heure vaut 60 minutes.", "on écrit tout en minutes, puis on additionne.", `${h1 ? `${h1} × 60 + ${m1} = ${h1 * 60 + m1}, puis ` : ""}${h1 * 60 + m1} + ${m2} = ${tot}.`, `cela fait ${tot} min en tout.`),
+    };
+  }
+  if (t === 2) {
+    // heures décimales
+    const h = rint(1, 3);
+    const d = randomChoice([0.25, 0.5, 0.75]);
+    const tot = Math.round((h + d) * 60);
+    return {
+      text: randomChoice([`${act} ${nb(h + d)} h. Combien de minutes cela fait-il ?`, `${p.nom} lit sur une notice : « durée ${nb(h + d)} h ». Écris cette durée en minutes.`]),
+      format: "short" as const,
+      expected: [`${tot} min`],
+      comparator: "number_equal" as const,
+      explanation: exp(
+        `${nb(d)} h n’est pas ${nb(d * 100)} min : c’est une fraction d’heure.`,
+        "on multiplie le nombre d’heures par 60.",
+        `${nb(h + d)} × 60 = ${tot}.`,
+        `${nb(h + d)} h = ${tot} min (soit ${hm(h, Math.round(d * 60))}).`,
+      ),
+    };
+  }
+  // minutes et secondes → secondes
+  const mi = rint(1, 6);
+  const s = randomChoice([5, 10, 15, 20, 30, 40, 45, 50]);
+  const tot = mi * 60 + s;
+  return {
+    text: randomChoice([
+      `${p.nom} fait le tour du lac à vélo en ${mi} min ${s} s. Combien de secondes cela fait-il ?`,
+      `La chanson préférée ${de(p.nom)} dure ${mi} min ${s} s. Écris cette durée en secondes.`,
+      `Complète : ${mi} min ${s} s = … s.`,
+    ]),
+    format: "short" as const,
+    expected: [`${tot} s`],
+    comparator: "number_equal" as const,
+    explanation: exp("une minute vaut 60 secondes.", "on change les minutes en secondes, puis on ajoute.", `${mi} × 60 = ${mi * 60}, puis ${mi * 60} + ${s} = ${tot}.`, `${mi} min ${s} s = ${tot} s.`),
+  };
+}
+
+/* ─── Convertir AVANT de calculer ───────────────────────────────────────── */
+type Melange = {
+  famille: Unite[];
+  /** grande unité, petite unité (réponse dans la petite) */
+  U: [string, string];
+  grand: number[];
+  petit: number[];
+  somme: (p: Prenom, a: string, b: string) => string;
+  qSomme: (p: Prenom) => string;
+  reste: (p: Prenom, a: string, b: string) => string;
+  qReste: string;
+};
+const MELANGES: Melange[] = [
+  {
+    famille: MASSES, U: ["kg", "g"], grand: [1, 1.5, 2, 2.5, 3], petit: [150, 250, 300, 400, 750],
+    somme: (p, a, b) => `${p.nom} pose sur la balance un sac de ${a} et un paquet de ${b}`,
+    qSomme: () => "Quelle masse cela fait-il en tout, en grammes ?",
+    reste: (p, a, b) => `${p.nom} a un sac de ${a} de farine. ${cap(il(p))} en utilise ${b} pour des crêpes`,
+    qReste: "Quelle masse de farine reste-t-il, en grammes ?",
+  },
+  {
+    famille: LONGUEURS, U: ["m", "cm"], grand: [1, 1.2, 1.5, 2, 2.4], petit: [35, 45, 60, 75, 80],
+    somme: (p, a, b) => `${p.nom} met bout à bout une planche de ${a} et une planche de ${b}`,
+    qSomme: () => "Quelle longueur cela fait-il en tout, en centimètres ?",
+    reste: (p, a, b) => `${p.nom} a un ruban de ${a}. ${cap(il(p))} en coupe ${b} pour un cadeau`,
+    qReste: "Quelle longueur de ruban reste-t-il, en centimètres ?",
+  },
+  {
+    famille: CONTENANCES, U: ["L", "cL"], grand: [1, 1.5, 2], petit: [20, 25, 33, 40, 75],
+    somme: (p, a, b) => `Pour un cocktail, ${p.nom} verse ${a} de jus et ${b} de sirop dans un saladier`,
+    qSomme: () => "Quel volume cela fait-il en tout, en centilitres ?",
+    reste: (p, a, b) => `La bouteille d’eau ${de(p.nom)} contient ${a}. ${cap(il(p))} en boit ${b}`,
+    qReste: "Quel volume d’eau reste-t-il, en centilitres ?",
+  },
+  {
+    famille: LONGUEURS, U: ["km", "m"], grand: [1, 1.5, 2, 3.5], petit: [250, 400, 600, 800],
+    somme: (p, a, b) => `${p.nom} court ${a} le matin et ${b} le soir`,
+    qSomme: () => "Quelle distance cela fait-il en tout, en mètres ?",
+    reste: (p, a, b) => `La randonnée ${de(p.nom)} fait ${a}. ${cap(il(p))} a déjà parcouru ${b}`,
+    qReste: "Quelle distance reste-t-il, en mètres ?",
+  },
+];
+const FRUITS = [
+  { nom: "cerises", prix: [6, 8, 10, 12] },
+  { nom: "fraises", prix: [8, 10, 12] },
+  { nom: "tomates", prix: [2, 3, 4] },
+  { nom: "pommes", prix: [2, 3, 4] },
+  { nom: "letchis", prix: [4, 5, 6, 8] },
+  { nom: "noix", prix: [10, 12, 16] },
+  { nom: "abricots", prix: [4, 5, 6] },
+];
+
+/** niveau 3 : somme, reste, comparaison ; niveau 4 : prix au kilogramme, recette, somme de trois. */
+function genAvantCalcul(niveau: 3 | 4) {
+  const p = prenom();
+  const t = niveau === 3 ? rint(1, 3) : rint(4, 6);
+  if (t === 1 || t === 2) {
+    const m = randomChoice(MELANGES);
+    const a = randomChoice(m.grand);
+    let b = randomChoice(m.petit);
+    const aPetit = convertir(m.famille, a, m.U[0], m.U[1]);
+    if (t === 2 && b >= aPetit) b = randomChoice(m.petit.filter((x) => x < aPetit));
+    const rep = t === 1 ? aPetit + b : aPetit - b;
+    const A = `${nb(a)} ${m.U[0]}`;
+    const B = `${b} ${m.U[1]}`;
+    return {
+      text: t === 1 ? `${m.somme(p, A, B)}. ${m.qSomme(p)}` : `${m.reste(p, A, B)}. ${m.qReste}`,
+      format: "short" as const,
+      expected: [`${nb(rep)} ${m.U[1]}`],
+      comparator: "number_equal" as const,
+      explanation: exp(
+        "on ne calcule qu’avec des mesures écrites dans la même unité.",
+        `on convertit d’abord ${A} en ${m.U[1]}.`,
+        `${A} = ${nb(aPetit)} ${m.U[1]}, puis ${nb(aPetit)} ${t === 1 ? "+" : "−"} ${b} = ${nb(rep)}.`,
+        `${t === 1 ? "cela fait" : "il reste"} ${nb(rep)} ${m.U[1]}.`,
+      ),
+    };
+  }
+  if (t === 3) {
+    // comparer trois mesures écrites dans trois unités
+    const f = randomChoice([LONGUEURS, MASSES, CONTENANCES]);
+    const base = f === MASSES ? "g" : f === LONGUEURS ? "cm" : "cL";
+    for (;;) {
+      const us = shuffle(f === MASSES ? ["kg", "g", "kg"] : f === LONGUEURS ? ["m", "cm", "mm"] : ["L", "cL", "mL"]);
+      const vals = us.map((u) =>
+        u === "kg" ? randomChoice([0.5, 1.2, 0.75, 2]) : u === "g" ? randomChoice([450, 800, 1500, 900]) : u === "m" ? randomChoice([0.6, 1.2, 0.85])
+          : u === "cm" ? randomChoice([45, 70, 95]) : u === "mm" ? randomChoice([500, 900, 1100]) : u === "L" ? randomChoice([0.5, 1.5, 0.75])
+          : u === "cL" ? randomChoice([33, 60, 80]) : randomChoice([400, 700, 900]),
+      );
+      const enBase = vals.map((v, i) => convertir(f, v, us[i], base));
+      if (new Set(enBase).size !== 3) continue;
+      const libelles = vals.map((v, i) => `${nb(v)} ${us[i]}`);
+      if (new Set(libelles).size !== 3) continue;
+      const grande = Math.random() < 0.5;
+      const k = enBase.indexOf(grande ? Math.max(...enBase) : Math.min(...enBase));
+      const quoi = f === MASSES ? "masses" : f === LONGUEURS ? "longueurs" : "contenances";
+      return {
+        text: randomChoice([
+          `Laquelle de ces trois ${quoi} est la plus ${grande ? "grande" : "petite"} : ${libelles.join(", ")} ?`,
+          `${p.nom} compare trois ${quoi} : ${libelles.join(" ; ")}. Quelle est la plus ${grande ? "grande" : "petite"} ?`,
+        ]),
+        format: "qcm" as const,
+        choices: shuffle(libelles),
+        expected: [libelles[k]],
+        comparator: "mcq_exact" as const,
+        explanation: exp(
+          "on ne compare des mesures que dans une même unité.",
+          `on convertit tout en ${base}.`,
+          libelles.map((l, i) => `${l} = ${nb(enBase[i])} ${base}`).join(" ; ") + ".",
+          `la plus ${grande ? "grande" : "petite"} est ${libelles[k]}.`,
+        ),
+      };
+    }
+  }
+  if (t === 4) {
+    // prix au kilogramme, quantité en grammes
+    const fr = randomChoice(FRUITS);
+    const prix = randomChoice(fr.prix);
+    const g = randomChoice([250, 500, 750, 1500, 200, 400]);
+    const rep = Math.round(prix * g) / 1000;
+    const prixTxt = (x: number) => (Number.isInteger(x) ? String(x) : x.toFixed(2).replace(".", ","));
+    return {
+      text: randomChoice([
+        `Les ${fr.nom} coûtent ${prix} € le kilogramme. ${p.nom} en achète ${g} g. Combien paie-t-${il(p)} ?`,
+        `Au marché, ${p.nom} prend ${g} g de ${fr.nom}, vendues ${prix} € le kilogramme. Quel est le prix à payer ?`,
+      ]).replace("vendues", fr.nom === "letchis" || fr.nom === "abricots" ? "vendus" : "vendues"),
+      format: "short" as const,
+      expected: [`${prixTxt(rep)} €`],
+      comparator: "number_equal" as const,
+      explanation: exp(
+        "le prix est donné pour un kilogramme, la quantité en grammes : on convertit d’abord.",
+        `${g} g = ${nb(g / 1000)} kg.`,
+        `${nb(g / 1000)} × ${prix} = ${prixTxt(rep)}.`,
+        `${p.nom} paie ${prixTxt(rep)} €.`,
+      ),
+    };
+  }
+  if (t === 5) {
+    // recette (comme l'item officiel lait / beurre)
+    const L = randomChoice([20, 22, 24]);
+    const gB = randomChoice([100, 200, 250, 500]);
+    const rep = r3((L * gB) / 1000);
+    return {
+      text: randomChoice([
+        `Avec ${L} L de lait, on obtient 1 kg de beurre. Combien de litres de lait faut-il pour obtenir ${gB} g de beurre ?`,
+        `À la ferme, ${p.nom} apprend qu’avec ${L} L de lait on obtient 1 kg de beurre. Quel volume de lait, en litres, faut-il pour ${gB} g de beurre ?`,
+      ]),
+      format: "short" as const,
+      expected: [`${nb(rep)} L`],
+      comparator: "number_equal" as const,
+      explanation: exp(
+        "les deux masses de beurre sont dans deux unités différentes.",
+        `on convertit : 1 kg = 1000 g, et ${gB} g, c’est ${1000 / gB} fois moins.`,
+        `${L} ÷ ${1000 / gB} = ${nb(rep)}.`,
+        `il faut ${nb(rep)} L de lait.`,
+      ),
+    };
+  }
+  // somme de trois mesures en trois unités, réponse dans la plus petite
+  const f = randomChoice([LONGUEURS, CONTENANCES]);
+  const [u1, u2, u3] = f === LONGUEURS ? ["m", "cm", "mm"] : ["L", "cL", "mL"];
+  const v1 = randomChoice([1, 1.2, 1.5, 2]);
+  const v2 = randomChoice([15, 25, 40, 55]);
+  const v3 = randomChoice([5, 8, 120, 250]);
+  const rep = convertir(f, v1, u1, u3) + convertir(f, v2, u2, u3) + v3;
+  const nomU3 = unite(f, u3).nom;
+  return {
+    text:
+      f === LONGUEURS
+        ? `${p.nom} mesure trois morceaux de fil : ${nb(v1)} ${u1}, ${v2} ${u2} et ${v3} ${u3}. Quelle longueur cela fait-il en tout, en ${nomU3} ?`
+        : `${p.nom} verse dans une carafe ${nb(v1)} ${u1} d’eau, ${v2} ${u2} de sirop et ${v3} ${u3} de jus de citron. Quel volume cela fait-il en tout, en ${nomU3} ?`,
+    format: "short" as const,
+    expected: [`${nb(rep)} ${u3}`],
+    comparator: "number_equal" as const,
+    explanation: exp(
+      "on additionne seulement des mesures écrites dans la même unité.",
+      `on écrit les trois mesures en ${u3}.`,
+      `${nb(v1)} ${u1} = ${nb(convertir(f, v1, u1, u3))} ${u3} ; ${v2} ${u2} = ${nb(convertir(f, v2, u2, u3))} ${u3} ; total : ${nb(rep)} ${u3}.`,
+      `cela fait ${nb(rep)} ${u3} en tout.`,
+    ),
+  };
+}
+
+/* ─── Cohérence : la bonne unité, la mesure plausible ───────────────────── */
+type ObjetReel = { quoi: string; verbe: "mesure" | "pèse" | "contient"; v: number; u: string; famille: Unite[] };
+const OBJETS_REELS: ObjetReel[] = [
+  { quoi: "une porte de maison", verbe: "mesure", v: 2, u: "m", famille: LONGUEURS },
+  { quoi: "un crayon neuf", verbe: "mesure", v: 17, u: "cm", famille: LONGUEURS },
+  { quoi: "un terrain de football", verbe: "mesure", v: 100, u: "m", famille: LONGUEURS },
+  { quoi: "une fourmi", verbe: "mesure", v: 5, u: "mm", famille: LONGUEURS },
+  { quoi: "le trajet de la maison au collège", verbe: "mesure", v: 3, u: "km", famille: LONGUEURS },
+  { quoi: "une feuille de cahier", verbe: "mesure", v: 30, u: "cm", famille: LONGUEURS },
+  { quoi: "un bus scolaire", verbe: "mesure", v: 12, u: "m", famille: LONGUEURS },
+  { quoi: "un grain de riz", verbe: "mesure", v: 6, u: "mm", famille: LONGUEURS },
+  { quoi: "un marathon", verbe: "mesure", v: 42, u: "km", famille: LONGUEURS },
+  { quoi: "un sac de riz", verbe: "pèse", v: 5, u: "kg", famille: MASSES },
+  { quoi: "une pomme", verbe: "pèse", v: 150, u: "g", famille: MASSES },
+  { quoi: "un comprimé de vitamine", verbe: "pèse", v: 500, u: "mg", famille: MASSES },
+  { quoi: "un chat adulte", verbe: "pèse", v: 4, u: "kg", famille: MASSES },
+  { quoi: "un trombone", verbe: "pèse", v: 1, u: "g", famille: MASSES },
+  { quoi: "une tablette de chocolat", verbe: "pèse", v: 100, u: "g", famille: MASSES },
+  { quoi: "une grande bouteille d’eau", verbe: "contient", v: 1.5, u: "L", famille: CONTENANCES },
+  { quoi: "une cuillère à café", verbe: "contient", v: 5, u: "mL", famille: CONTENANCES },
+  { quoi: "un verre", verbe: "contient", v: 20, u: "cL", famille: CONTENANCES },
+  { quoi: "une baignoire", verbe: "contient", v: 150, u: "L", famille: CONTENANCES },
+  { quoi: "une canette de soda", verbe: "contient", v: 33, u: "cL", famille: CONTENANCES },
+  { quoi: "un seau", verbe: "contient", v: 10, u: "L", famille: CONTENANCES },
+];
+/** Trois autres unités de la même grandeur, assez éloignées pour être absurdes. */
+function unitesAbsurdes(o: ObjetReel): string[] {
+  const e = unite(o.famille, o.u).e;
+  return o.famille.filter((x) => Math.abs(x.e - e) >= 1 && x.s !== "dm" && x.s !== "dL").map((x) => x.s);
+}
+
+/**
+ * niveau 1 : quelle unité convient ? ; 2 : quelle mesure est plausible ? ;
+ * 3 : une conversion écrite par un camarade : vrai ou faux ?
+ */
+function genCoherence(niveau: 1 | 2 | 3) {
+  const p = prenom();
+  if (niveau <= 2) {
+    const o = randomChoice(OBJETS_REELS);
+    const autres = shuffle(unitesAbsurdes(o)).slice(0, 3);
+    if (niveau === 1) {
+      return {
+        text: randomChoice([
+          `Quelle unité convient ? ${cap(o.quoi)} ${o.verbe} environ ${nb(o.v)} …`,
+          `${p.nom} écrit : « ${o.quoi} ${o.verbe} environ ${nb(o.v)} … ». Quelle unité doit-${il(p)} écrire ?`,
+          `Complète avec la bonne unité : ${o.quoi} ${o.verbe} environ ${nb(o.v)} …`,
+        ]),
+        format: "qcm" as const,
+        choices: shuffle([o.u, ...autres]),
+        expected: [o.u],
+        comparator: "mcq_exact" as const,
+        explanation: exp("une mesure ne se lit qu’avec son unité.", "on essaie chaque unité et on garde celle qui donne un objet reconnaissable.", `${nb(o.v)} ${o.u}, c’est un ordre de grandeur réaliste pour ${o.quoi}.`, `l’unité qui convient est ${o.u}.`),
+      };
+    }
+    const bon = `${nb(o.v)} ${o.u}`;
+    return {
+      text: randomChoice([
+        `${cap(o.quoi)} ${o.verbe} environ …`,
+        `${p.nom} cherche la bonne mesure : ${o.quoi} ${o.verbe} environ …`,
+        `Laquelle de ces mesures est plausible pour ${o.quoi} ?`,
+      ]),
+      format: "qcm" as const,
+      choices: shuffle([bon, ...autres.map((u) => `${nb(o.v)} ${u}`)]),
+      expected: [bon],
+      comparator: "mcq_exact" as const,
+      explanation: exp("un ordre de grandeur se vérifie en pensant à l’objet réel.", "on compare chaque proposition à ce qu’on connaît.", `seule la mesure ${bon} correspond à ${o.quoi}.`, `la bonne réponse est ${bon}.`),
+    };
+  }
+  // vrai ou faux sur une conversion
+  const m = randomChoice(MESURES_CONV);
+  const v = randomChoice(m.v);
+  const vers = randomChoice(m.vers);
+  const juste = convertir(m.famille, v, m.u, vers);
+  const vrai = Math.random() < 0.5;
+  const faux = randomChoice([juste * 10, juste / 10, juste * 100, juste / 100].map(r3).filter((x) => x > 0 && deuxDecimales(x)));
+  const ecrit = vrai || faux === undefined ? juste : faux;
+  return {
+    text: randomChoice([
+      `${p.nom} écrit : ${nb(v)} ${m.u} = ${nb(ecrit)} ${vers}. Vrai ou faux ?`,
+      `Vrai ou faux : ${nb(v)} ${m.u} = ${nb(ecrit)} ${vers} ? C’est ce que pense ${p.nom}.`,
+      `Sans poser de calcul, ${p.nom} contrôle l’égalité ${nb(v)} ${m.u} = ${nb(ecrit)} ${vers}. Vrai ou faux ?`,
+    ]),
+    format: "qcm" as const,
+    choices: ["vrai", "faux"],
+    expected: [ecrit === juste ? "vrai" : "faux"],
+    comparator: "mcq_exact" as const,
+    explanation: exp(
+      "changer d’unité ne change pas la mesure, seulement le nombre qui l’écrit.",
+      `on regarde le rapport entre ${m.u} et ${vers}.`,
+      `${nb(v)} ${m.u} = ${nb(juste)} ${vers}.`,
+      ecrit === juste ? "l’égalité est vraie." : `l’égalité est fausse : il fallait ${nb(juste)} ${vers}.`,
+    ),
+  };
+}
 
 export const conversionsBank: TutorBankItemV4[] = [
   /* ══════════════════════════════════════════════════════════════════════
@@ -227,31 +751,21 @@ export const conversionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Repère d’abord le rapport entre les deux unités : 10, 100 ou 1 000.",
     tags: ["grandeur_conversion", "template"],
-    generate: () => {
-      const paires = [
-        { de: "m", vers: "cm", facteur: 100 },
-        { de: "km", vers: "m", facteur: 1000 },
-        { de: "cm", vers: "mm", facteur: 10 },
-        { de: "kg", vers: "g", facteur: 1000 },
-        { de: "L", vers: "cL", facteur: 100 },
-      ];
-      const p = randomChoice(paires);
-      const valeur = randomChoice([2, 3, 5, 7, 12, 25]);
-      const resultat = valeur * p.facteur;
-
-      return {
-        text: `Convertis : $${valeur}\\ \\text{${p.de}} = \\ldots\\ \\text{${p.vers}}$`,
-        format: "short" as const,
-        expected: [String(resultat)],
-        comparator: "number_equal" as const,
-        explanation: exp(
-          `il y a ${p.facteur} ${p.vers} dans 1 ${p.de}.`,
-          "on va vers une unité plus petite, donc on multiplie.",
-          `${valeur} × ${p.facteur} = ${resultat}.`,
-          `${valeur} ${p.de} font ${resultat} ${p.vers}.`
-        ),
-      };
-    },
+    // 09/10/2026 : 19 mesures réelles × 5 tournures × prénoms (voir genConvDecimal).
+    generate: () => genConvDecimal(2),
+  },
+  {
+    kind: "template",
+    id: "5e_conversion_decimal_tpl_e3",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "grandeur_conversion",
+    microId: "conversion_decimal",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Unité plus petite : le nombre grandit. Unité plus grande : il diminue.",
+    tags: ["grandeur_conversion", "template"],
+    generate: () => genConvDecimal(3),
   },
 
   /* ══════════════════════════════════════════════════════════════════════
@@ -433,24 +947,34 @@ export const conversionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Cherche combien de fois 60 tient dans le nombre de minutes.",
     tags: ["grandeur_conversion", "template"],
-    generate: () => {
-      const heures = randomChoice([1, 2, 3]);
-      const minutes = randomChoice([5, 15, 20, 25, 40, 50]);
-      const total = heures * 60 + minutes;
-
-      return {
-        text: `Un trajet dure ${total} minutes. Combien de minutes reste-t-il une fois qu’on a compté ${heures} h ?`,
-        format: "short" as const,
-        expected: [String(minutes)],
-        comparator: "number_equal" as const,
-        explanation: exp(
-          "une heure vaut 60 minutes.",
-          "on retire autant de fois 60 qu’il y a d’heures entières.",
-          `${total} − ${heures} × 60 = ${minutes}.`,
-          `il reste ${minutes} minutes, donc ${total} min = ${heures} h ${minutes} min.`
-        ),
-      };
-    },
+    // 09/10/2026 : 12 activités × tournures × prénoms ; min → h min (QCM) et h min → min.
+    generate: () => genConvDuree(2),
+  },
+  {
+    kind: "template",
+    id: "5e_conversion_duree_tpl_e1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "grandeur_conversion",
+    microId: "conversion_duree",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Une heure, c’est 60 minutes.",
+    tags: ["grandeur_conversion", "template"],
+    generate: () => genConvDuree(1),
+  },
+  {
+    kind: "template",
+    id: "5e_conversion_duree_tpl_e3",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "grandeur_conversion",
+    microId: "conversion_duree",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une heure vaut 60 minutes, une minute 60 secondes ; 0,5 h n’est pas 50 min.",
+    tags: ["grandeur_conversion", "template"],
+    generate: () => genConvDuree(3),
   },
 
   /* ══════════════════════════════════════════════════════════════════════
@@ -636,24 +1160,21 @@ export const conversionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Convertis d’abord les kilogrammes en grammes.",
     tags: ["grandeur_conversion", "template"],
-    generate: () => {
-      const kg = randomChoice([1, 2, 3, 4]);
-      const g = randomChoice([150, 250, 400, 750]);
-      const total = kg * 1000 + g;
-
-      return {
-        text: `Un colis contient un paquet de ${kg} kg et un paquet de ${g} g. Quelle est la masse totale, en grammes ?`,
-        format: "short" as const,
-        expected: [String(total)],
-        comparator: "number_equal" as const,
-        explanation: exp(
-          "on n’additionne que des grandeurs de même unité.",
-          "on convertit les kilogrammes en grammes, puis on additionne.",
-          `${kg} kg = ${kg * 1000} g, puis ${kg * 1000} + ${g} = ${total}.`,
-          `la masse totale est ${total} g.`
-        ),
-      };
-    },
+    // 09/10/2026 : somme, reste ou comparaison, en masses, longueurs, contenances.
+    generate: () => genAvantCalcul(3),
+  },
+  {
+    kind: "template",
+    id: "5e_conversion_avant_calcul_tpl_e4",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "grandeur_conversion",
+    microId: "conversion_avant_calcul",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Écris d’abord toutes les mesures dans la même unité.",
+    tags: ["grandeur_conversion", "template"],
+    generate: () => genAvantCalcul(4),
   },
 
   /* ══════════════════════════════════════════════════════════════════════
@@ -839,28 +1360,33 @@ export const conversionsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Pense à l’objet réel avant de choisir l’unité.",
     tags: ["grandeur_conversion", "template"],
-    generate: () => {
-      const objets = [
-        { quoi: "une porte", valeur: 2, unite: "m", autres: ["cm", "km", "mm"] },
-        { quoi: "un crayon", valeur: 17, unite: "cm", autres: ["m", "km", "mm"] },
-        { quoi: "un sac de riz", valeur: 5, unite: "kg", autres: ["g", "mg", "t"] },
-        { quoi: "une cuillère de sirop", valeur: 15, unite: "mL", autres: ["L", "cL", "hL"] },
-        { quoi: "un terrain de foot", valeur: 100, unite: "m", autres: ["cm", "mm", "km"] },
-      ];
-      const o = randomChoice(objets);
-
-      return {
-        text: `Quelle unité convient pour dire que ${o.quoi} mesure environ ${o.valeur} … ? Réponds par l’unité seule.`,
-        format: "short" as const,
-        expected: [o.unite],
-        comparator: "exact_text" as const,
-        explanation: exp(
-          "une mesure ne se lit qu’avec son unité.",
-          "on essaie mentalement chaque unité et on garde celle qui donne un objet reconnaissable.",
-          `${o.valeur} ${o.unite} correspond bien à ${o.quoi}.`,
-          `l’unité qui convient est le ${o.unite}.`
-        ),
-      };
-    },
+    // 09/10/2026 : 21 objets réels ; QCM (avant : l'unité tapée au clavier, en exact_text).
+    generate: () => genCoherence(2),
+  },
+  {
+    kind: "template",
+    id: "5e_conversion_coherence_tpl_e1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "grandeur_conversion",
+    microId: "conversion_coherence",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Pense à l’objet réel avant de choisir l’unité.",
+    tags: ["grandeur_conversion", "template"],
+    generate: () => genCoherence(1),
+  },
+  {
+    kind: "template",
+    id: "5e_conversion_coherence_tpl_e3",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "grandeur_conversion",
+    microId: "conversion_coherence",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Vers une unité plus petite, le nombre doit grandir.",
+    tags: ["grandeur_conversion", "template"],
+    generate: () => genCoherence(3),
   },
 ];

@@ -30,6 +30,7 @@ import { mathsCe1QuestionBank } from "@/lib/tutor-v4/questionBank/ce1/maths/inde
 import { mathsCe2QuestionBank } from "@/lib/tutor-v4/questionBank/ce2/maths/index";
 import { mathsCm1QuestionBank } from "@/lib/tutor-v4/questionBank/cm1/maths/index";
 import { mathsCm2QuestionBank } from "@/lib/tutor-v4/questionBank/cm2/maths/index";
+import { maths5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/maths/index";
 import { maths6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/maths/index";
 import { francais6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/francais/index";
 
@@ -40,6 +41,7 @@ const BANQUES: Record<string, any[]> = {
   ce2: mathsCe2QuestionBank,
   cm1: mathsCm1QuestionBank,
   cm2: mathsCm2QuestionBank,
+  "5e": maths5eQuestionBank,
   "6e": maths6eQuestionBank,
   "6e-francais": francais6eQuestionBank,
 };

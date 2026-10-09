@@ -48,7 +48,224 @@ function numberLine(
   };
 }
 
-export const nombresRelatifsBank: TutorBankItemV4[] = [
+// ⭐ 09/10/2026 — DES SITUATIONS, PAS UNE PHRASE. Mesuré le 09/10 : 5 à 14
+// squelettes par micro, 13 à 18 répétitions sur 20. Chaque gabarit compose une
+// situation (températures, altitudes, étages, comptes, scores…) × une tournure ×
+// un prénom ; il a son correcteur dans correcteurs/nombres-relatifs.ts.
+// ⛔ Le signe moins est « − » (pas le tiret « - ») : `vraiMoins` le rétablit
+// partout à la sortie du fichier, items figés compris (voir en bas).
+import { PRENOMS, pick, de, type Prenom } from "@/lib/tutor-v4/questionBank/6e/maths/entiers.bank";
+import type { TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+
+export const il = (p: Prenom) => (p.f ? "elle" : "il");
+export const Il = (p: Prenom) => (p.f ? "Elle" : "Il");
+export function randInt(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+export function choix<T>(arr: readonly T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+/** Un entier non nul entre -max et max. */
+export function nonNul(max: number) {
+  const n = randInt(1, max);
+  return Math.random() < 0.5 ? -n : n;
+}
+/** « −7 », « +7 » (ou « 7 » si `plus` est faux), « 0 » ; virgule décimale. */
+export function rel(n: number, plus = true) {
+  const v = String(Math.abs(n)).replace(".", ",");
+  return n < 0 ? `−${v}` : n > 0 && plus ? `+${v}` : v;
+}
+/** Un relatif écrit APRÈS une opération : « (−3) », « (+3) » ou « 3 ». */
+export function par(n: number, plus = false) {
+  return n < 0 ? `(−${String(-n).replace(".", ",")})` : plus ? `(+${String(n).replace(".", ",")})` : String(n).replace(".", ",");
+}
+/** Les écritures acceptées d'un relatif : « −7 », « -7 » ; « +7 », « 7 » ; avec l'unité d'abord. */
+export function attendus(n: number, unite = ""): string[] {
+  const u = unite ? ` ${unite}` : "";
+  const base = n > 0 ? [`${rel(n, false)}${u}`, `+${rel(n, false)}${u}`] : [`${rel(n)}${u}`, `${rel(n).replace("−", "-")}${u}`];
+  return unite ? [...base, ...attendus(n)] : base;
+}
+
+/** ⛔ Le vrai signe moins : « -7 », « (-3) », « 5 - 3 », « le signe - » → « − ». Les traits d'union des mots restent. */
+export function moins(s: string): string {
+  return s.replace(/(?<!\p{L})-(?=\s?[\d(+−-])/gu, "−").replace(/(?<=\s)-(?=[\s,.)])/g, "−");
+}
+function vraiMoinsQ<T extends Partial<TutorGeneratedQuestionV4>>(q: T): T {
+  return {
+    ...q,
+    ...(q.text != null ? { text: moins(q.text) } : {}),
+    ...(q.choices ? { choices: q.choices.map(moins) } : {}),
+    ...(q.expected ? { expected: q.expected.map((e) => moins(String(e))) } : {}),
+    ...(q.explanation != null ? { explanation: moins(q.explanation) } : {}),
+    ...((q as any).hint != null ? { hint: moins((q as any).hint) } : {}),
+  };
+}
+/** Appliqué à toute la banque : items figés réécrits, gabarits enveloppés. */
+export function vraiMoins(items: TutorBankItemV4[]): TutorBankItemV4[] {
+  return items.map((it) =>
+    it.kind === "template"
+      ? { ...it, hint: it.hint != null ? moins(it.hint) : it.hint, generate: (ctx) => vraiMoinsQ(it.generate(ctx)) }
+      : (vraiMoinsQ(it as any) as TutorBankItemV4),
+  );
+}
+
+/** « 1 degré », « 3 degrés ». */
+export const pl = (a: number, mot: string) => `${a} ${mot}${a > 1 ? "s" : ""}`;
+const ord = (a: number) => (a === 1 ? "1er" : `${a}e`);
+
+/** Une grandeur repérée par un relatif (14 situations). Le signe se lit dans les MOTS
+ *  (`dire`, `sens` : « au-dessous de zéro », « sous le niveau de la mer ») ou dans le NOMBRE (`affiche`). */
+export type Repere = {
+  max: number;
+  /** L'unité de la réponse (« °C », « m », « € », « cm ») ou "". */
+  unite: string;
+  dire: (p: Prenom, n: number) => string;
+  sens: (n: number) => string;
+  affiche: (p: Prenom, n: number) => string;
+};
+const A = Math.abs;
+export const REPERES: Repere[] = [
+  {
+    max: 25, unite: "°C",
+    dire: (p, n) => `Ce matin, chez ${p.nom}, il fait ${pl(A(n), "degré")} ${n < 0 ? "au-dessous" : "au-dessus"} de zéro.`,
+    sens: (n) => `${pl(A(n), "degré")} ${n < 0 ? "au-dessous" : "au-dessus"} de zéro`,
+    affiche: (p, n) => `Ce matin, le thermomètre ${de(p.nom)} affiche ${rel(n)} °C.`,
+  },
+  {
+    max: 40, unite: "m",
+    dire: (p, n) => (n < 0 ? `${p.nom} plonge à ${-n} m sous le niveau de la mer.` : `${p.nom} grimpe sur une falaise, à ${n} m au-dessus du niveau de la mer.`),
+    sens: (n) => `${A(n)} m ${n < 0 ? "sous le" : "au-dessus du"} niveau de la mer`,
+    affiche: (p, n) => `Sur la carte ${de(p.nom)}, un point est noté à l’altitude ${rel(n)} m.`,
+  },
+  {
+    max: 5, unite: "",
+    dire: (p, n) => `${p.nom} prend l’ascenseur jusqu’au ${ord(A(n))} ${n < 0 ? "sous-sol" : "étage"}.`,
+    sens: (n) => `le ${ord(A(n))} ${n < 0 ? "sous-sol" : "étage"}`,
+    affiche: (p, n) => `Dans l’ascenseur, ${p.nom} appuie sur le bouton ${rel(n)}.`,
+  },
+  {
+    max: 80, unite: "€",
+    dire: (p, n) => (n < 0 ? `Le compte ${de(p.nom)} est à découvert de ${-n} €.` : `Le compte ${de(p.nom)} a ${n} € d’avance.`),
+    sens: (n) => (n < 0 ? `un découvert de ${-n} €` : `${n} € d’avance`),
+    affiche: (p, n) => `Le relevé du compte ${de(p.nom)} indique ${rel(n)} €.`,
+  },
+  {
+    max: 8, unite: "",
+    dire: (p, n) => `Au golf, ${p.nom} fait un trou en ${pl(A(n), "coup")} de ${n < 0 ? "moins" : "plus"} que le par.`,
+    sens: (n) => `${pl(A(n), "coup")} de ${n < 0 ? "moins" : "plus"} que le par`,
+    affiche: (p, n) => `Au golf, la carte ${de(p.nom)} indique ${rel(n)} pour ce trou.`,
+  },
+  {
+    max: 30, unite: "",
+    dire: (p, n) => `Au jeu, ${p.nom} ${n < 0 ? "perd" : "gagne"} ${pl(A(n), "point")} en un tour.`,
+    sens: (n) => `${pl(A(n), "point")} ${n < 0 ? "perdu" : "gagné"}${A(n) > 1 ? "s" : ""}`,
+    affiche: (p, n) => `Au jeu, le score du tour ${de(p.nom)} est ${rel(n)}.`,
+  },
+  {
+    max: 25, unite: "°C",
+    dire: (p, n) => `Le congélateur ${de(p.nom)} affiche ${pl(A(n), "degré")} ${n < 0 ? "au-dessous" : "au-dessus"} de zéro.`,
+    sens: (n) => `${pl(A(n), "degré")} ${n < 0 ? "au-dessous" : "au-dessus"} de zéro`,
+    affiche: (p, n) => `L’écran du congélateur ${de(p.nom)} indique ${rel(n)} °C.`,
+  },
+  {
+    max: 12, unite: "",
+    dire: (p, n) => `Sur un jeu de plateau, ${p.nom} ${n < 0 ? "recule" : "avance"} de ${pl(A(n), "case")}.`,
+    sens: (n) => `${n < 0 ? "reculer" : "avancer"} de ${pl(A(n), "case")}`,
+    affiche: (p, n) => `Sur le jeu de plateau, la carte tirée par ${p.nom} indique ${rel(n)}.`,
+  },
+  {
+    max: 50, unite: "cm",
+    dire: (p, n) => `${p.nom} note que la rivière est à ${A(n)} cm ${n < 0 ? "au-dessous" : "au-dessus"} de son niveau habituel.`,
+    sens: (n) => `${A(n)} cm ${n < 0 ? "au-dessous" : "au-dessus"} du niveau habituel`,
+    affiche: (p, n) => `L’échelle de la rivière, relevée par ${p.nom}, indique ${rel(n)} cm.`,
+  },
+  {
+    max: 20, unite: "°C",
+    dire: (p, n) => `En montagne, au refuge où dort ${p.nom}, il fait ${pl(A(n), "degré")} ${n < 0 ? "au-dessous" : "au-dessus"} de zéro.`,
+    sens: (n) => `${pl(A(n), "degré")} ${n < 0 ? "au-dessous" : "au-dessus"} de zéro`,
+    affiche: (p, n) => `Au refuge où dort ${p.nom}, le thermomètre indique ${rel(n)} °C.`,
+  },
+  {
+    max: 40, unite: "€",
+    dire: (p, n) => `Au marché, ${p.nom} ${n < 0 ? "dépense" : "gagne"} ${A(n)} € en une matinée.`,
+    sens: (n) => `${A(n)} € ${n < 0 ? "dépensés" : "gagnés"}`,
+    affiche: (p, n) => `Le carnet de marché ${de(p.nom)} indique ${rel(n)} € pour la matinée.`,
+  },
+  {
+    max: 900, unite: "",
+    dire: (p, n) => `${p.nom} lit sur une frise : l’an ${A(n)} ${n < 0 ? "avant" : "après"} J.-C.`,
+    sens: (n) => `l’an ${A(n)} ${n < 0 ? "avant" : "après"} J.-C.`,
+    affiche: (p, n) => `Sur la frise ${de(p.nom)}, une date est notée ${rel(n)}.`,
+  },
+  {
+    max: 10, unite: "m",
+    dire: (p, n) => (n < 0 ? `Un fou de Bassan, vu par ${p.nom}, plonge à ${-n} m sous la surface de l’eau.` : `Un fou de Bassan, vu par ${p.nom}, vole à ${n} m au-dessus de l’eau.`),
+    sens: (n) => `${A(n)} m ${n < 0 ? "sous la surface" : "au-dessus de l’eau"}`,
+    affiche: (p, n) => `Le capteur fixé sur un oiseau marin, suivi par ${p.nom}, indique ${rel(n)} m.`,
+  },
+  {
+    max: 4, unite: "",
+    dire: (p, n) => `Dans le parking, ${p.nom} gare la voiture au niveau ${A(n)} ${n < 0 ? "sous" : "au-dessus de"} la rue.`,
+    sens: (n) => `le niveau ${A(n)} ${n < 0 ? "sous" : "au-dessus de"} la rue`,
+    affiche: (p, n) => `Au parking, le ticket ${de(p.nom)} indique le niveau ${rel(n)}.`,
+  },
+];
+
+export const VILLES = ["Lille", "Brest", "Grenoble", "Strasbourg", "Chamonix", "Lyon", "Briançon", "Metz", "Annecy", "Besançon", "Reims", "Gap"];
+/** Deux éléments différents d'une liste. */
+export function deux<T>(arr: readonly T[]): [T, T] {
+  const a = choix(arr);
+  let b = choix(arr);
+  while (b === a) b = choix(arr);
+  return [a, b];
+}
+
+/** Comparer deux relatifs en situation (10 situations) : la phrase, la question, l'unité de la réponse. */
+export function comparaison(a: number, b: number, plusGrand: boolean) {
+  const [p, q] = deux(PRENOMS);
+  const [v1, v2] = deux(VILLES);
+  const sits = [
+    { u: "°C", t: `Ce matin, il fait ${rel(a)} °C à ${v1} et ${rel(b)} °C à ${v2}.`, g: "Quelle température est la plus élevée ?", pt: "Quelle température est la plus basse ?" },
+    { u: "m", t: `Sur la carte ${de(p.nom)}, le point A est à l’altitude ${rel(a)} m et le point B à ${rel(b)} m.`, g: "Quelle altitude est la plus haute ?", pt: "Quelle altitude est la plus basse ?" },
+    { u: "", t: `Au jeu, ${p.nom} a un score de ${rel(a)} et ${q.nom} un score de ${rel(b)}.`, g: "Quel est le meilleur score ?", pt: "Quel est le moins bon score ?" },
+    { u: "", t: `Dans l’ascenseur, ${p.nom} va au niveau ${rel(a)} et ${q.nom} au niveau ${rel(b)}.`, g: "Quel niveau est le plus haut ?", pt: "Quel niveau est le plus bas ?" },
+    { u: "€", t: `Le compte ${de(p.nom)} est à ${rel(a)} € et celui ${de(q.nom)} à ${rel(b)} €.`, g: "Quel solde est le plus élevé ?", pt: "Quel solde est le plus bas ?" },
+    { u: "", t: `Au golf, ${p.nom} termine à ${rel(a)} et ${q.nom} à ${rel(b)} par rapport au par.`, g: "Quel résultat est le plus grand ?", pt: "Quel résultat est le plus petit ?" },
+    { u: "", t: `Sur la frise ${de(p.nom)}, deux dates sont notées ${rel(a)} et ${rel(b)}.`, g: "Quelle date est la plus récente ?", pt: "Quelle date est la plus ancienne ?" },
+    { u: "", t: `${p.nom} hésite entre ${rel(a)} et ${rel(b)}.`, g: "Lequel est le plus grand ?", pt: "Lequel est le plus petit ?" },
+    { u: "", t: `Sur la droite graduée, ${p.nom} place ${rel(a)} et ${rel(b)}.`, g: "Lequel est le plus à droite ?", pt: "Lequel est le plus à gauche ?" },
+    { u: "°C", t: `Le congélateur ${de(p.nom)} est à ${rel(a)} °C, celui ${de(q.nom)} à ${rel(b)} °C.`, g: "Quelle température est la plus élevée ?", pt: "Quelle température est la plus basse ?" },
+  ];
+  const s = choix(sits);
+  const rep = plusGrand ? Math.max(a, b) : Math.min(a, b);
+  return { phrase: s.t, question: plusGrand ? s.g : s.pt, unite: s.u, rep };
+}
+
+/** Une droite graduée tirée au hasard : pas de 1, 2, 5 ou 10, une fenêtre qui contient 0. */
+export function droiteAuHasard() {
+  const step = choix([1, 1, 1, 2, 2, 5, 10]);
+  const ticks = choix([10, 12]);
+  const gauche = randInt(2, ticks - 2);
+  const min = -gauche * step;
+  return { min, max: min + ticks * step, step };
+}
+/** `k` valeurs distinctes non nulles sur les graduations de la droite (au moins une négative). */
+export function pointsSurDroite(d: { min: number; max: number; step: number }, k: number) {
+  const vals = new Set<number>([d.min + d.step * randInt(0, -d.min / d.step - 1)]);
+  while (vals.size < k) {
+    const v = d.min + randInt(0, (d.max - d.min) / d.step) * d.step;
+    if (v !== 0) vals.add(v);
+  }
+  return [...vals];
+}
+export function lettres(k: number) {
+  return shuffle(["A", "B", "C", "D", "E", "F", "G", "H", "K", "M", "N", "P", "R", "S", "T"]).slice(0, k).sort();
+}
+export function canvasDroite(d: { min: number; max: number; step: number }, points: { value: number; label: string }[]) {
+  return { ...numberLine(points, d.min, d.max), step: d.step };
+}
+
+const nombresRelatifsBrut: TutorBankItemV4[] = [
   // =========================
   // RELATIF_LIRE
   // =========================
@@ -871,27 +1088,26 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Au-dessus de zéro → positif ; au-dessous de zéro → négatif.",
     tags: ["relatif", "lecture", "template"],
+    // 09/10/2026 : une situation (14) × une tournure (4) × un prénom ; le signe se lit dans les mots.
     generate: () => {
-      const n = [1, 2, 3, 4, 5, 6, 7, 8, 9][
-        Math.floor(Math.random() * 9)
-      ];
-      const positive = Math.random() < 0.5;
-      const answer = positive ? `+${n}` : `-${n}`;
-      const desc = positive
-        ? `${n} au-dessus de zéro`
-        : `${n} au-dessous de zéro`;
-
+      const p = pick(PRENOMS);
+      const r = choix(REPERES);
+      const n = nonNul(r.max);
+      const question = choix([
+        "Écris ce nombre avec son signe.",
+        "Quel nombre relatif correspond à cette situation ?",
+        "Traduis la situation par un nombre relatif.",
+        `Quel nombre relatif ${p.nom} doit-${il(p)} noter ?`,
+      ]);
       return {
-        text: `Écris avec son signe : ${desc}.`,
+        text: `${r.dire(p, n)} ${question}`,
         format: "short",
-        expected: positive ? [`+${n}`, String(n)] : [`-${n}`],
+        expected: attendus(n, r.unite),
         comparator: "number_equal",
-        explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
-          "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
-          (positive
-          ? `${n} au-dessus de zéro est un nombre positif. Il s’écrit ${answer}.`
-          : `${n} au-dessous de zéro est un nombre négatif. Il s’écrit ${answer}.`) +
-          "\n\nConclusion : le nombre relatif choisi répond à la question.",
+        explanation: expl(
+          `« ${r.sens(n)} » : ${n < 0 ? "on est du côté des nombres négatifs, signe −" : "on est du côté des nombres positifs, signe +"}. ` +
+            `On écrit ${rel(n)}${r.unite ? ` ${r.unite}` : ""}.`,
+        ),
       };
     },
   },
@@ -910,25 +1126,34 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Regarde le signe du nombre.",
     tags: ["relatif", "signe", "template"],
+    // 09/10/2026 : le nombre affiché dans une situation (14) ou nu (4 tournures) ; un positif s'écrit parfois sans « + ».
     generate: () => {
-      const n = [1, 2, 3, 4, 5, 6, 7, 8, 9][
-        Math.floor(Math.random() * 9)
-      ];
-      const positive = Math.random() < 0.5;
-      const displayed = positive ? `+${n}` : `-${n}`;
+      const p = pick(PRENOMS);
+      const r = choix(REPERES);
+      const enSituation = Math.random() < 0.6;
+      const n = nonNul(enSituation ? r.max : 30);
+      const positive = n > 0;
+      const displayed = rel(n, Math.random() < 0.6);
       const expected = positive ? "positif" : "négatif";
 
       return {
-        text: `Le nombre ${displayed} est-il positif ou négatif ?`,
+        text: enSituation
+          ? `${r.affiche(p, n)} ${choix(["Ce nombre est-il positif ou négatif ?", "Est-ce un nombre positif ou négatif ?", `${p.nom} lit-${il(p)} un nombre positif ou négatif ?`])}`
+          : choix([
+              `Le nombre ${displayed} est-il positif ou négatif ?`,
+              `${p.nom} écrit ${displayed} au tableau. Ce nombre est-il positif ou négatif ?`,
+              `Sur la droite graduée, ${p.nom} place ${displayed}. Est-il positif ou négatif ?`,
+              `${displayed} : positif ou négatif ? ${p.nom} doit répondre.`,
+            ]),
         format: "qcm",
         choices: ["positif", "négatif"],
         expected: [expected],
         comparator: "mcq_exact",
         explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
           "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
-          (`Le nombre ${displayed} porte le signe ${
-          positive ? "+" : "-"
-        }. Il est donc ${expected}.`) +
+          (positive
+            ? `${rel(n)} (on peut aussi écrire ${rel(n, false)}, sans signe) est à droite de 0 : il est positif.`
+            : `${rel(n)} porte le signe − : il est à gauche de 0, il est négatif.`) +
           "\n\nConclusion : le nombre relatif choisi répond à la question.",
       };
     },
@@ -948,27 +1173,22 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Sur une droite graduée, le plus grand est le plus à droite.",
     tags: ["relatif", "comparaison", "template"],
+    // 09/10/2026 : deux relatifs quelconques (souvent deux négatifs) en situation (10 × 2 sens) ; réponse tapée, avec l'unité.
     generate: () => {
-      let a = Math.floor(Math.random() * 13) - 6;
-      let b = Math.floor(Math.random() * 13) - 6;
-      while (a === b) {
-        b = Math.floor(Math.random() * 13) - 6;
-      }
-      const max = Math.max(a, b);
-
+      const a = nonNul(15);
+      let b = Math.random() < 0.5 ? -randInt(1, 15) : nonNul(15);
+      while (b === a) b = nonNul(15);
+      const plusGrand = Math.random() < 0.5;
+      const c = comparaison(a, b, plusGrand);
       return {
-        text: `Quel nombre est le plus grand : ${formatSigned(a)} ou ${formatSigned(
-          b
-        )} ?`,
+        text: `${c.phrase} ${c.question}`,
         format: "short",
-        expected: [formatSigned(max), String(max)],
+        expected: attendus(c.rep, c.unite),
         comparator: "number_equal",
-        explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
-          "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
-          (`Sur une droite graduée, le plus grand nombre est le plus à droite. Ici, le plus grand est ${formatSigned(
-          max
-        )}.`) +
-          "\n\nConclusion : le nombre relatif choisi répond à la question.",
+        explanation: expl(
+          `Sur une droite graduée, le plus ${plusGrand ? "grand" : "petit"} nombre est le plus à ${plusGrand ? "droite" : "gauche"}. ` +
+            `${rel(Math.min(a, b))} < ${rel(Math.max(a, b))}, donc la réponse est ${rel(c.rep)}${c.unite ? ` ${c.unite}` : ""}.`,
+        ),
       };
     },
   },
@@ -983,26 +1203,120 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Parmi deux nombres négatifs, le plus proche de 0 est le plus grand.",
     tags: ["relatif", "comparaison", "inegalite", "template"],
+    // 09/10/2026 : surtout deux négatifs (parfois décimaux), nu ou en situation (8 tournures) ; un QCM « < » / « > ».
     generate: () => {
-      let a = -(Math.floor(Math.random() * 8) + 1);
-      let b = -(Math.floor(Math.random() * 8) + 1);
-      while (a === b) {
-        b = -(Math.floor(Math.random() * 8) + 1);
-      }
+      const p = pick(PRENOMS);
+      const decimal = Math.random() < 0.25;
+      const tirer = () => (decimal ? -randInt(1, 99) / 10 : Math.random() < 0.75 ? -randInt(1, 20) : nonNul(20));
+      const a = tirer();
+      let b = tirer();
+      while (b === a) b = tirer();
       const sign = a > b ? ">" : "<";
-
+      const [v1, v2] = deux(VILLES);
+      const paire = `${rel(a)} … ${rel(b)}`;
+      const text = choix([
+        `Complète avec < ou > : ${paire}`,
+        `${p.nom} compare deux nombres. Quel signe faut-il écrire ? ${paire}`,
+        `Quel signe, < ou >, ${p.nom} doit-${il(p)} placer entre les deux nombres ? ${paire}`,
+        `Il fait ${rel(a)} °C à ${v1} et ${rel(b)} °C à ${v2}. Complète avec < ou > : ${paire}`,
+        `Sur la carte ${de(p.nom)}, deux points sont aux altitudes ${rel(a)} m et ${rel(b)} m. Complète : ${paire}`,
+        `Le thermomètre ${de(p.nom)} indiquait ${rel(a)} °C hier et ${rel(b)} °C aujourd’hui. Complète avec < ou > : ${paire}`,
+        `${p.nom} range ses relevés. Complète avec le bon signe : ${paire}`,
+        `Sur la droite graduée de ${p.nom}, complète avec < ou > : ${paire}`,
+      ]);
       return {
-        text: `Complète avec > ou < : ${a} ... ${b}`,
-        format: "short",
+        text,
+        format: "qcm",
+        choices: ["<", ">"],
         expected: [sign],
-        comparator: "exact_text",
-        explanation:
-          "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
-          "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
-          (sign === ">"
-            ? `${a} est plus proche de 0 que ${b}, donc ${a} > ${b}.`
-            : `${a} est plus à gauche que ${b}, donc ${a} < ${b}.`) +
-          "\n\nConclusion : le nombre relatif choisi répond à la question.",
+        comparator: "mcq_exact",
+        explanation: expl(
+          a < 0 && b < 0
+            ? `Les deux nombres sont négatifs : le plus grand est le plus proche de 0. Donc ${rel(a)} ${sign} ${rel(b)}.`
+            : `Sur la droite graduée, le plus grand est le plus à droite. Donc ${rel(a)} ${sign} ${rel(b)}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "relatif_comparer_tpl_3_signes",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_comparer",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Un nombre positif est toujours plus grand qu’un nombre négatif.",
+    tags: ["relatif", "comparaison", "qcm", "template"],
+    // 09/10/2026 : un négatif et un positif (ou 0), en situation (10 × 2 sens) ; QCM à deux choix.
+    generate: () => {
+      const neg = -randInt(1, 12);
+      const pos = Math.random() < 0.15 ? 0 : randInt(1, 12);
+      const [a, b] = Math.random() < 0.5 ? [neg, pos] : [pos, neg];
+      const plusGrand = Math.random() < 0.5;
+      const c = comparaison(a, b, plusGrand);
+      const ecrire = (x: number) => `${rel(x)}${c.unite ? ` ${c.unite}` : ""}`;
+      return {
+        text: `${c.phrase} ${c.question}`,
+        format: "qcm",
+        choices: [ecrire(a), ecrire(b)],
+        expected: [ecrire(c.rep)],
+        comparator: "mcq_exact",
+        explanation: expl(
+          `${rel(neg)} est négatif, ${rel(pos)} ${pos === 0 ? "est zéro" : "est positif"} : ${rel(neg)} < ${rel(pos)}. ` +
+            `La réponse est donc ${ecrire(c.rep)}.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "relatif_comparer_tpl_4_ranger",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_comparer",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Place les nombres sur une droite graduée : de gauche à droite, ils sont dans l’ordre croissant.",
+    tags: ["relatif", "comparaison", "rangement", "qcm", "template"],
+    // 09/10/2026 : ranger quatre relatifs ; les leurres rangent par distance à 0, ou à l'envers.
+    generate: () => {
+      const p = pick(PRENOMS);
+      const vals = new Set<number>();
+      while (vals.size < 4) vals.add(Math.random() < 0.65 ? -randInt(1, 15) : randInt(0, 15));
+      // Il faut au moins deux négatifs et des distances à 0 toutes différentes.
+      let v = [...vals];
+      while (v.filter((x) => x < 0).length < 2 || new Set(v.map(Math.abs)).size < 4) {
+        v = [-randInt(1, 15), -randInt(1, 15), randInt(0, 15), Math.random() < 0.5 ? -randInt(1, 15) : randInt(0, 15)];
+      }
+      const croissant = Math.random() < 0.6;
+      const sit = choix([
+        { u: " °C", t: `${p.nom} a relevé ces températures : ${v.map((x) => `${rel(x)} °C`).join(" ; ")}.`, c: "Range-les de la plus basse à la plus haute.", d: "Range-les de la plus haute à la plus basse." },
+        { u: "", t: `Voici des nombres : ${v.map((x) => rel(x)).join(" ; ")}.`, c: `${p.nom} doit les ranger dans l’ordre croissant. Quel rangement est juste ?`, d: `${p.nom} doit les ranger dans l’ordre décroissant. Quel rangement est juste ?` },
+        { u: " m", t: `Sur la carte ${de(p.nom)}, quatre points ont pour altitudes ${v.map((x) => `${rel(x)} m`).join(" ; ")}.`, c: "Range-les de la plus basse à la plus haute.", d: "Range-les de la plus haute à la plus basse." },
+        { u: "", t: `Au jeu, les scores de la table ${de(p.nom)} sont ${v.map((x) => rel(x)).join(" ; ")}.`, c: "Range-les du plus petit au plus grand.", d: "Range-les du plus grand au plus petit." },
+      ]);
+      const ecrire = (xs: number[]) => xs.map((x) => `${rel(x)}${sit.u}`).join(croissant ? " < " : " > ");
+      const bon = [...v].sort((x, y) => (croissant ? x - y : y - x));
+      const parDistance = [...v].sort((x, y) => (croissant ? Math.abs(x) - Math.abs(y) : Math.abs(y) - Math.abs(x)));
+      const envers = [...bon].reverse();
+      // Piège : les négatifs rangés comme si −8 était plus grand que −3.
+      const cleFausse = (x: number) => (x < 0 ? -100 + Math.abs(x) : x);
+      const sansSigne = [...v].sort((x, y) => (croissant ? cleFausse(x) - cleFausse(y) : cleFausse(y) - cleFausse(x)));
+      const propositions = [...new Set([ecrire(bon), ecrire(parDistance), ecrire(envers), ecrire(sansSigne)])];
+      return {
+        text: `${sit.t} ${croissant ? sit.c : sit.d}`,
+        format: "qcm",
+        choices: shuffle(propositions),
+        expected: [ecrire(bon)],
+        comparator: "mcq_exact",
+        explanation: expl(
+          `Sur une droite graduée, de gauche à droite : ${[...v].sort((x, y) => x - y).map((x) => rel(x)).join(", ")}. ` +
+            "Parmi les négatifs, le plus petit est le plus loin de 0." +
+            (croissant ? "" : " Dans l’ordre décroissant, on lit dans l’autre sens."),
+        ),
       };
     },
   },
@@ -1021,35 +1335,32 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Lis l’abscisse du point sur la droite graduée.",
     tags: ["relatif", "placement", "canvas", "template"],
+    // 09/10/2026 : droite tirée (pas de 1, 2, 5 ou 10 ; fenêtre variable), 2 à 4 points, 5 tournures.
     generate: () => {
-      const value = Math.floor(Math.random() * 9) - 4;
-      const label = ["A", "B", "C"][Math.floor(Math.random() * 3)];
-
+      const p = pick(PRENOMS);
+      const d = droiteAuHasard();
+      const vals = pointsSurDroite(d, randInt(2, 4));
+      const labels = lettres(vals.length);
+      const points = vals.map((value, i) => ({ value, label: labels[i] }));
+      const cible = Math.random() < 0.7 ? points.find((x) => x.value < 0)! : choix(points);
+      const L = cible.label;
+      const text = choix([
+        `Quelle est l’abscisse du point ${L} ?`,
+        `${p.nom} lit l’abscisse du point ${L}. Que trouve-t-${il(p)} ?`,
+        `Quel nombre correspond au point ${L} ? Attention à la graduation.`,
+        `Sur cette droite graduée de ${d.step} en ${d.step}, quel nombre repère le point ${L} ?`,
+        `${p.nom} a placé le point ${L} sur la droite graduée. Quelle est son abscisse ?`,
+      ]);
       return {
-        text: `Quelle est l’abscisse du point ${label} ?`,
+        text,
         format: "short",
-        expected: [String(value), formatSigned(value)],
+        expected: attendus(cible.value),
         comparator: "number_equal",
-        explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
-          "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
-          (`Le point ${label} est placé au-dessus de ${formatSigned(
-          value
-        )}. Son abscisse est donc ${formatSigned(value)}.`) +
-          "\n\nConclusion : le nombre relatif choisi répond à la question.",
-        canvas: {
-          kind: "number_line",
-          min: -5,
-          max: 5,
-          step: 1,
-          points: [{ value, label }],
-          display: {
-            showTicks: true,
-            showValues: true,
-            showPoints: true,
-            showPointLabels: true,
-            showZero: true,
-          },
-        },
+        explanation: expl(
+          `La droite est graduée de ${d.step} en ${d.step}. Le point ${L} est ${cible.value < 0 ? "à gauche" : "à droite"} de 0, ` +
+            `à ${Math.abs(cible.value) / d.step} graduation${Math.abs(cible.value) / d.step > 1 ? "s" : ""} : son abscisse est ${rel(cible.value)}.`,
+        ),
+        canvas: canvasDroite(d, points),
       };
     },
   },
@@ -1064,46 +1375,84 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le point le plus à droite correspond au plus grand nombre.",
     tags: ["relatif", "placement", "comparaison", "canvas", "template"],
+    // 09/10/2026 : 3 ou 4 points sur une droite tirée ; six critères (droite, gauche, plus grande ou plus petite
+    // abscisse, plus proche ou plus loin de 0) × un prénom.
     generate: () => {
-      const values = uniqueNumbers([
-        Math.floor(Math.random() * 11) - 5,
-        Math.floor(Math.random() * 11) - 5,
-        Math.floor(Math.random() * 11) - 5,
+      const p = pick(PRENOMS);
+      const d = droiteAuHasard();
+      let vals = pointsSurDroite(d, randInt(3, 4));
+      while (new Set(vals.map(Math.abs)).size < vals.length) vals = pointsSurDroite(d, vals.length);
+      const labels = lettres(vals.length);
+      const points = vals.map((value, i) => ({ value, label: labels[i] }));
+      const crit = choix([
+        { q: "est le plus à droite", f: (x: number) => x, max: true },
+        { q: "est le plus à gauche", f: (x: number) => x, max: false },
+        { q: "a la plus grande abscisse", f: (x: number) => x, max: true },
+        { q: "a la plus petite abscisse", f: (x: number) => x, max: false },
+        { q: "est le plus proche de 0", f: (x: number) => Math.abs(x), max: false },
+        { q: "est le plus loin de 0", f: (x: number) => Math.abs(x), max: true },
       ]);
-      while (values.length < 3) {
-        values.push(Math.floor(Math.random() * 11) - 5);
-      }
-      const cleaned = uniqueNumbers(values).slice(0, 3);
-      const labels = ["A", "B", "C"];
-      const pairs = cleaned.map((v, i) => ({ value: v, label: labels[i] }));
-      const maxPoint = pairs.reduce((best, curr) =>
-        curr.value > best.value ? curr : best
-      );
-
+      const best = points.reduce((b, c) => ((crit.max ? crit.f(c.value) > crit.f(b.value) : crit.f(c.value) < crit.f(b.value)) ? c : b));
+      const text = choix([
+        `Quel point ${crit.q} ?`,
+        `${p.nom} regarde la droite graduée. Quel point ${crit.q} ?`,
+        `Parmi les points placés par ${p.nom}, lequel ${crit.q} ?`,
+        `Sur cette droite graduée, quel point ${crit.q} ? ${p.nom} hésite.`,
+      ]);
       return {
-        text: "Quel point est le plus à droite ?",
+        text,
         format: "qcm",
         choices: labels,
-        expected: [maxPoint.label],
+        expected: [best.label],
         comparator: "mcq_exact",
-        explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
-          "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
-          (`Le point le plus à droite représente le plus grand nombre. Ici, c’est ${maxPoint.label}.`) +
-          "\n\nConclusion : le nombre relatif choisi répond à la question.",
-        canvas: {
-          kind: "number_line",
-          min: -5,
-          max: 5,
-          step: 1,
-          points: pairs,
-          display: {
-            showTicks: true,
-            showValues: true,
-            showPoints: true,
-            showPointLabels: true,
-            showZero: true,
-          },
-        },
+        explanation: expl(
+          `Les abscisses sont : ${points.map((x) => `${x.label} = ${rel(x.value)}`).join(", ")}. ` +
+            `Le point qui ${crit.q} est ${best.label}.` +
+            (crit.f(-1) === 1 ? " On compare les distances à 0, sans tenir compte du signe." : " Plus un point est à droite, plus son abscisse est grande."),
+        ),
+        canvas: canvasDroite(d, points),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "relatif_placer_tpl_3_quel_point",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_placer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Pars de 0 : à gauche pour un négatif, à droite pour un positif, en comptant les graduations.",
+    tags: ["relatif", "placement", "qcm", "canvas", "template"],
+    // 09/10/2026 : quel point est placé en x ? (3 ou 4 points, un leurre à l'opposé de x) × 5 tournures.
+    generate: () => {
+      const p = pick(PRENOMS);
+      const d = droiteAuHasard();
+      let vals = pointsSurDroite(d, randInt(3, 4));
+      const x = vals[0];
+      // Le piège : l'opposé de x, s'il tient sur la droite.
+      if (-x <= d.max && !vals.includes(-x)) vals = [x, -x, ...vals.slice(1, vals.length - 1)];
+      const labels = lettres(vals.length);
+      const points = shuffle(vals).map((value, i) => ({ value, label: labels[i] }));
+      const bon = points.find((pt) => pt.value === x)!;
+      const text = choix([
+        `Quel point a pour abscisse ${rel(x)} ?`,
+        `${p.nom} a placé le nombre ${rel(x)} sur la droite graduée. Quelle lettre a-t-${il(p)} écrite ?`,
+        `Sur cette droite graduée, quel point est placé en ${rel(x)} ?`,
+        `Le thermomètre couché ${de(p.nom)} est gradué en degrés. Quel point marque ${rel(x)} °C ?`,
+        `${p.nom} cherche le point d’abscisse ${rel(x)}. Lequel est-ce ?`,
+      ]);
+      return {
+        text,
+        format: "qcm",
+        choices: labels,
+        expected: [bon.label],
+        comparator: "mcq_exact",
+        explanation: expl(
+          `La droite est graduée de ${d.step} en ${d.step}. ${rel(x)} est ${x < 0 ? "à gauche" : "à droite"} de 0, à ${Math.abs(x) / d.step} graduation${Math.abs(x) / d.step > 1 ? "s" : ""} : c’est le point ${bon.label}.`,
+        ),
+        canvas: canvasDroite(d, points),
       };
     },
   },
@@ -1122,21 +1471,99 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "L’opposé a la même distance à 0, mais de l’autre côté.",
     tags: ["relatif", "oppose", "template"],
+    // 09/10/2026 : retrouver le nombre dont on connaît l'opposé, ou compléter « x + … = 0 » (6 tournures).
     generate: () => {
-      const n = Math.floor(Math.random() * 9) + 1;
-      const positive = Math.random() < 0.5;
-      const shown = positive ? `+${n}` : `-${n}`;
-      const opposite = positive ? `-${n}` : `+${n}`;
-
+      const p = pick(PRENOMS);
+      const x = nonNul(30);
+      const text = choix([
+        `L’opposé d’un nombre est ${rel(x)}. Quel est ce nombre ?`,
+        `${p.nom} pense à un nombre. Son opposé est ${rel(x)}. À quel nombre pense-t-${il(p)} ?`,
+        `Complète : ${rel(x)} + … = 0`,
+        `Complète : … + ${par(x, true)} = 0`,
+        `Quel nombre est à la même distance de 0 que ${rel(x)}, mais de l’autre côté ? ${p.nom} cherche.`,
+        `${p.nom} doit ajouter un nombre à ${rel(x)} pour revenir à 0. Lequel ?`,
+      ]);
       return {
-        text: `Quel est l’opposé de ${shown} ?`,
+        text,
         format: "short",
-        expected: positive ? [`-${n}`] : [`+${n}`, String(n)],
+        expected: attendus(-x),
         comparator: "number_equal",
-        explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
-          "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
-          (`L’opposé de ${shown} est ${opposite}. Les deux nombres sont symétriques par rapport à 0.`) +
-          "\n\nConclusion : le nombre relatif choisi répond à la question.",
+        explanation: expl(
+          `${rel(x)} et ${rel(-x)} sont opposés : même distance à 0, de part et d’autre de 0. Leur somme vaut 0 : ${rel(x)} + ${par(-x, true)} = 0.`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "relatif_oppose_tpl_3_simple",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_oppose",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "On garde la distance à 0 et on change le signe.",
+    tags: ["relatif", "oppose", "template"],
+    // 09/10/2026 : l'opposé d'un nombre, nu ou en situation (symétrique sur la droite, ascenseur) — 6 tournures.
+    generate: () => {
+      const [p, q] = deux(PRENOMS);
+      const ascenseur = Math.random() < 0.2;
+      const x = nonNul(ascenseur ? 5 : 20);
+      const text = ascenseur
+        ? `Dans l’ascenseur, ${p.nom} descend au niveau ${rel(x)}. ${q.nom} va au niveau opposé. À quel niveau va ${q.nom} ?`
+        : choix([
+            `${p.nom} demande à ${q.nom} : « Quel est l’opposé de ${rel(x)} ? » Que doit répondre ${q.nom} ?`,
+            `${p.nom} écrit ${rel(x)}. Quel est l’opposé de ce nombre ?`,
+            `Sur la droite graduée ${de(p.nom)}, le point A a pour abscisse ${rel(x)}. Le point B est son symétrique par rapport à 0. Quelle est l’abscisse de B ?`,
+            `${p.nom} a noté ${rel(x)} au tableau. ${q.nom} doit écrire l’opposé juste en dessous. Que doit-${il(q)} écrire ?`,
+            `${p.nom} change le signe de ${rel(x)}. Quel nombre obtient-${il(p)} ?`,
+            `Donne l’opposé de ${rel(x)}, comme ${p.nom} l’a appris en classe.`,
+          ]);
+      return {
+        text: ascenseur && x > 0 ? text.replace("descend", "monte") : text,
+        format: "short",
+        expected: attendus(-x),
+        comparator: "number_equal",
+        explanation: expl(`On garde la distance à 0 (${Math.abs(x)}) et on change le signe : l’opposé de ${rel(x)} est ${rel(-x)}.`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "relatif_oppose_tpl_4_vrai_faux",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_oppose",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Deux nombres opposés : même distance à 0, signes contraires, somme nulle.",
+    tags: ["relatif", "oppose", "vrai_faux", "template"],
+    // 09/10/2026 : « Vrai ou faux ? » sur cinq affirmations chiffrées, la moitié fausses (2 tournures).
+    generate: () => {
+      const p = pick(PRENOMS);
+      const a = nonNul(25);
+      const vrai = Math.random() < 0.5;
+      const autre = vrai ? -a : choix([a, -a + (a > 0 ? -1 : 1), a + (a > 0 ? 1 : -1)]);
+      const aff = choix([
+        { t: `${rel(a)} et ${rel(autre)} sont opposés.`, v: autre === -a },
+        { t: `L’opposé de ${rel(a)} est ${rel(autre)}.`, v: autre === -a },
+        { t: `La somme de ${rel(a)} et de son opposé vaut ${vrai ? "0" : rel(choix([2 * a, a]))}.`, v: vrai },
+        { t: `${rel(a)} est plus grand que son opposé.`, v: a > 0 },
+        { t: `${rel(a)} est plus petit que son opposé.`, v: a < 0 },
+      ]);
+      const text = choix([`Vrai ou faux ? « ${aff.t} »`, `${p.nom} affirme : « ${aff.t} » Vrai ou faux ?`]);
+      return {
+        text,
+        format: "qcm",
+        choices: ["vrai", "faux"],
+        expected: [aff.v ? "vrai" : "faux"],
+        comparator: "mcq_exact",
+        explanation: expl(
+          `L’opposé de ${rel(a)} est ${rel(-a)} : même distance à 0, de l’autre côté. ${rel(a)} + ${par(-a, true)} = 0. ` +
+            `L’affirmation est donc ${aff.v ? "vraie" : "fausse"}.`,
+        ),
       };
     },
   },
@@ -1155,20 +1582,32 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "La valeur absolue est la distance à 0.",
     tags: ["relatif", "valeur_absolue", "template"],
+    // 09/10/2026 : le plus loin (ou le plus près) de 0 parmi quatre relatifs, nu ou en situation (6 tournures).
     generate: () => {
-      const n = Math.floor(Math.random() * 9) + 1;
-      const sign = Math.random() < 0.5 ? -1 : 1;
-      const shown = sign === 1 ? `+${n}` : `-${n}`;
-
+      const p = pick(PRENOMS);
+      const abs = shuffle(Array.from({ length: 20 }, (_, i) => i + 1)).slice(0, 4);
+      const vals = abs.map((a, i) => (i < 2 ? -a : Math.random() < 0.5 ? -a : a));
+      const loin = Math.random() < 0.5;
+      const cible = vals.reduce((b, c) => ((loin ? Math.abs(c) > Math.abs(b) : Math.abs(c) < Math.abs(b)) ? c : b));
+      const sit = choix([
+        { u: " °C", t: `${p.nom} a relevé quatre températures. Laquelle est la ${loin ? "plus éloignée" : "plus proche"} de 0 °C ?` },
+        { u: " m", t: `Quatre points de la carte ${de(p.nom)} ont ces altitudes. Lequel est le ${loin ? "plus loin" : "plus près"} du niveau de la mer (0 m) ?` },
+        { u: "", t: `Lequel de ces nombres est le ${loin ? "plus loin" : "plus près"} de 0 ?` },
+        { u: "", t: `${p.nom} place ces nombres sur une droite graduée. Lequel est le ${loin ? "plus éloigné" : "plus proche"} de 0 ?` },
+        { u: " €", t: `Quatre comptes ont ces soldes. ${p.nom} cherche celui qui est le ${loin ? "plus loin" : "plus près"} de 0 €. Lequel ?` },
+        { u: "", t: `Quel nombre a la ${loin ? "plus grande" : "plus petite"} distance à zéro ? ${p.nom} doit choisir.` },
+      ]);
+      const ecrire = (x: number) => `${rel(x)}${sit.u}`;
       return {
-        text: `Quelle est la valeur absolue de ${shown} ?`,
-        format: "short",
-        expected: [String(n)],
-        comparator: "number_equal",
-        explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
-          "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
-          (`La valeur absolue mesure la distance à 0. ${shown} est à distance ${n} de 0, donc sa valeur absolue est ${n}.`) +
-          "\n\nConclusion : le nombre relatif choisi répond à la question.",
+        text: sit.t,
+        format: "qcm",
+        choices: vals.map(ecrire),
+        expected: [ecrire(cible)],
+        comparator: "mcq_exact",
+        explanation: expl(
+          `On compare les distances à 0, sans regarder le signe : ${vals.map((x) => `${rel(x)} → ${Math.abs(x)}`).join(" ; ")}. ` +
+            `La ${loin ? "plus grande" : "plus petite"} est celle de ${rel(cible)}.`,
+        ),
       };
     },
   },
@@ -1183,25 +1622,57 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Deux nombres opposés ont la même valeur absolue.",
     tags: ["relatif", "valeur_absolue", "qcm", "template"],
+    // 09/10/2026 : les DEUX nombres à une distance donnée de 0 (5 tournures) ; leurres : un seul des deux, ou 0.
     generate: () => {
-      const n = Math.floor(Math.random() * 9) + 1;
-      const choices = shuffle([
-        `-${n}`,
-        `+${n}`,
-        `-${n} et +${n}`,
-        "0",
+      const p = pick(PRENOMS);
+      const n = randInt(1, 30);
+      const text = choix([
+        `Quels nombres sont à la distance ${n} de 0 ?`,
+        `Sur la droite graduée de 1 en 1, deux points sont à ${n} graduations de 0. Quelles sont leurs abscisses ?`,
+        `${p.nom} cherche tous les nombres dont la distance à zéro vaut ${n}. Lesquels trouve-t-${il(p)} ?`,
+        `Quels nombres ont pour valeur absolue ${n} ? ${p.nom} hésite.`,
+        `${p.nom} part de 0 et fait ${n} pas, vers la droite ou vers la gauche. Sur quels nombres peut-${il(p)} arriver ?`,
       ]);
-
+      const bon = `−${n} et +${n}`;
       return {
-        text: `Quel nombre a pour valeur absolue ${n} ?`,
+        text,
         format: "qcm",
-        choices,
-        expected: [`-${n} et +${n}`],
+        choices: shuffle([bon, `−${n} seulement`, `+${n} seulement`, `0 et +${n}`]),
+        expected: [bon],
         comparator: "mcq_exact",
-        explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
-          "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
-          (`Les nombres ${-n} et +${n} sont tous les deux à distance ${n} de 0. Ils ont donc pour valeur absolue ${n}.`) +
-          "\n\nConclusion : le nombre relatif choisi répond à la question.",
+        explanation: expl(`À ${n} de 0, il y a deux nombres, un de chaque côté : −${n} à gauche et +${n} à droite. Ils sont opposés.`),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "relatif_valeur_absolue_tpl_3_graduations",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "relatif_nombre",
+    microId: "relatif_valeur_absolue",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Compte les graduations entre 0 et le nombre, sans t’occuper du signe.",
+    tags: ["relatif", "valeur_absolue", "short", "template"],
+    // 09/10/2026 : la distance à zéro, nue ou en situation (6 tournures) ; l'unité quand la situation en a une.
+    generate: () => {
+      const p = pick(PRENOMS);
+      const x = nonNul(20);
+      const sit = choix([
+        { u: "", t: `À combien de graduations de 0 se trouve ${rel(x)} sur une droite graduée de 1 en 1 ?` },
+        { u: "", t: `${p.nom} part de 0 et va jusqu’à ${rel(x)} sur la droite graduée de 1 en 1. Combien de graduations parcourt-${il(p)} ?` },
+        { u: "", t: `Quelle est la distance à zéro de ${rel(x)} ? ${p.nom} la cherche.` },
+        { u: "°C", t: `Le thermomètre ${de(p.nom)} indique ${rel(x)} °C. De combien de degrés est-on éloigné de 0 °C ?` },
+        { u: "", t: `${p.nom} écrit ${rel(x)}. Quelle est la distance entre ce nombre et 0 ?` },
+        { u: "", t: `Combien d’unités séparent ${rel(x)} de 0 ? ${p.nom} compte sur la droite graduée.` },
+      ]);
+      return {
+        text: sit.t,
+        format: "short",
+        expected: sit.u ? [`${Math.abs(x)} ${sit.u}`, String(Math.abs(x))] : [String(Math.abs(x))],
+        comparator: "number_equal",
+        explanation: expl(`De 0 à ${rel(x)}, on compte ${Math.abs(x)} unités. Une distance n’a pas de signe : c’est ${Math.abs(x)}.`),
       };
     },
   },
@@ -1220,29 +1691,31 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
   theme: "neutral",
   hint: "Cherche un nombre situé à une certaine distance de 0 et repère sa position.",
   tags: ["relatif", "defi", "raisonnement", "distance", "droite_graduee", "template"],
+  // 09/10/2026 : trois sortes d'indices (distance + côté, distance + borne, même distance qu'un autre) × 3 présentations × prénoms.
   generate: () => {
-    const distance = Math.floor(Math.random() * 5) + 3; // 3 à 7
-    const isPositive = Math.random() < 0.5;
-
-    const number = isPositive ? distance : -distance;
-
-    const positionText = isPositive
-      ? `à droite de 0 mais à gauche de ${distance + 1}`
-      : `à gauche de 0 mais à droite de -${distance + 1}`;
-
-    const explanationPosition = isPositive
-      ? `Comme il est à droite de 0, le nombre est positif : ${distance}.`
-      : `Comme il est à gauche de 0, le nombre est négatif : -${distance}.`;
-
+    const p = pick(PRENOMS);
+    const d = randInt(2, 30);
+    const x = Math.random() < 0.6 ? -d : d;
+    const sorte = randInt(0, 2);
+    let indices: string[];
+    if (sorte === 0) indices = [`Je suis à ${d} unités de 0.`, choix([`Je suis ${x < 0 ? "à gauche" : "à droite"} de 0.`, `Je suis ${x < 0 ? "négatif" : "positif"}.`])];
+    else if (sorte === 1) {
+      const borne = x < 0 ? randInt(-d + 1, d) : randInt(-d, d - 1);
+      indices = [`Je suis à ${d} unités de 0.`, x < 0 ? `Je suis plus petit que ${rel(borne)}.` : `Je suis plus grand que ${rel(borne)}.`];
+    } else indices = [`Je suis à la même distance de 0 que ${rel(-x)}.`, `Je suis ${x < 0 ? "négatif" : "positif"}.`];
+    const texte = indices.join(" ");
     return {
-      text: `Je suis un nombre. Je suis à ${distance} unités de 0 sur la droite graduée. Je suis ${positionText}. Qui suis-je ?`,
+      text: choix([
+        `Devinette : « Je suis un nombre entier. ${texte} Qui suis-je ? »`,
+        `${p.nom} pose une devinette : « Je suis un nombre entier. ${texte} Qui suis-je ? »`,
+        `${p.nom} a écrit sur une carte : « Je suis un nombre entier. ${texte} Quel nombre suis-je ? »`,
+      ]),
       format: "short",
-      expected: [String(number)],
+      expected: attendus(x),
       comparator: "number_equal",
-      explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
-          "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
-          (`Être à ${distance} unités de 0 signifie que le nombre peut être ${distance} ou -${distance}. ${explanationPosition}`) +
-          "\n\nConclusion : le nombre relatif choisi répond à la question.",
+      explanation: expl(
+        `À ${d} unités de 0, il y a deux nombres : ${rel(-d)} et ${rel(d)}. Le second indice ne garde que ${rel(x)}.`,
+      ),
     };
   },
 },
@@ -1257,24 +1730,33 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "La distance entre deux points sur la droite se calcule en comptant les unités.",
     tags: ["relatif", "defi", "distance", "template"],
+    // 09/10/2026 : la distance entre deux relatifs, nue ou en situation (6), souvent de part et d'autre de 0.
     generate: () => {
-      let a = Math.floor(Math.random() * 7) - 5;
-      let b = Math.floor(Math.random() * 7) + 1;
-      while (a >= b) {
-        a = Math.floor(Math.random() * 7) - 5;
-        b = Math.floor(Math.random() * 7) + 1;
-      }
-      const distance = b - a;
-
+      const [p, q] = deux(PRENOMS);
+      const [v1, v2] = deux(VILLES);
+      const a = -randInt(1, 20);
+      let b = a;
+      while (b === a) b = Math.random() < 0.7 ? randInt(1, 20) : -randInt(1, 20);
+      const [x, y] = Math.random() < 0.5 ? [a, b] : [b, a];
+      const ecart = Math.abs(a - b);
+      const sit = choix([
+        { u: "", t: `Sur une droite graduée, A a pour abscisse ${rel(x)} et B a pour abscisse ${rel(y)}. Quelle est la distance entre A et B ?` },
+        { u: "m", t: `Un oiseau est à l’altitude ${rel(x)} m et un poisson, juste à la verticale, à l’altitude ${rel(y)} m. Quelle distance les sépare ?` },
+        { u: "°C", t: `À ${v1}, il fait ${rel(x)} °C ; à ${v2}, il fait ${rel(y)} °C. Quel est l’écart de température entre les deux villes ?` },
+        { u: "", t: `Au jeu, ${p.nom} a un score de ${rel(x)} et ${q.nom} un score de ${rel(y)}. Combien de points les séparent ?` },
+        { u: "", t: `${p.nom} place ${rel(x)} et ${rel(y)} sur la droite graduée de 1 en 1. Combien d’unités les séparent ?` },
+        { u: "m", t: `Sur la carte ${de(p.nom)}, deux points sont aux altitudes ${rel(x)} m et ${rel(y)} m. Quelle est la différence d’altitude ?` },
+      ]);
       return {
-        text: `Sur une droite graduée, A a pour abscisse ${a} et B a pour abscisse ${b}. Quelle est la distance entre A et B ?`,
+        text: sit.t,
         format: "short",
-        expected: [String(distance)],
+        expected: sit.u ? [`${ecart} ${sit.u}`, String(ecart)] : [String(ecart)],
         comparator: "number_equal",
-        explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
-          "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
-          (`Pour aller de ${a} à ${b}, on compte ${distance} unités. La distance entre A et B est donc ${distance}. ou Calcul : le plus grand - le plus petit nombre relatif`) +
-          "\n\nConclusion : le nombre relatif choisi répond à la question.",
+        explanation: expl(
+          a < 0 && b > 0
+            ? `De ${rel(a)} à 0 : ${-a} unités. De 0 à ${rel(b)} : ${b} unités. En tout : ${-a} + ${b} = ${ecart}.`
+            : `Les deux nombres sont du même côté de 0 : on compte de ${rel(Math.min(a, b))} à ${rel(Math.max(a, b))}, soit ${ecart} unités.`,
+        ),
       };
     },
   },
@@ -1289,19 +1771,31 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
   theme: "neutral",
   hint: "Compare le nombre et son opposé.",
   tags: ["relatif", "defi", "oppose", "comparaison", "piege", "template"],
+  // 09/10/2026 : AVANT, la devinette avait plusieurs réponses (« entre −6 et 0 » : −5, −4, … −1).
+  // Désormais : un encadrement à trois candidats, la parité n'en garde qu'un ; l'indice sur l'opposé donne le signe.
   generate: () => {
-    const n = Math.floor(Math.random() * 6) + 2; // 2 à 7
-    const number = -n;
-
+    const p = pick(PRENOMS);
+    let x = nonNul(40);
+    if (Math.abs(x) < 3) x = x < 0 ? -3 : 3;
+    const indices = [
+      x < 0 ? "Mon opposé est plus grand que moi." : "Mon opposé est plus petit que moi.",
+      `Je suis compris entre ${rel(x - 2)} et ${rel(x + 2)}.`,
+      `Je suis ${x % 2 === 0 ? "pair" : "impair"}.`,
+    ];
+    const texte = (Math.random() < 0.5 ? indices : [indices[1], indices[2], indices[0]]).join(" ");
     return {
-      text: `Je suis un nombre. Mon opposé est plus grand que moi. Je suis compris entre -${n + 2} et 0. Qui suis-je ?`,
+      text: choix([
+        `Devinette : « Je suis un nombre entier. ${texte} Qui suis-je ? »`,
+        `${p.nom} pose une devinette : « Je suis un nombre entier. ${texte} Qui suis-je ? »`,
+        `${p.nom} cache un nombre entier et donne trois indices : « ${texte} » Quel est ce nombre ?`,
+      ]),
       format: "short",
-      expected: [String(number)],
+      expected: attendus(x),
       comparator: "number_equal",
-      explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
-          "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
-          (`Si l’opposé est plus grand que le nombre, alors le nombre est négatif. Le seul nombre compris entre -${n + 2} et 0 qui vérifie cela est -${n}.`) +
-          "\n\nConclusion : le nombre relatif choisi répond à la question.",
+      explanation: expl(
+        `Entre ${rel(x - 2)} et ${rel(x + 2)}, il y a ${rel(x - 1)}, ${rel(x)} et ${rel(x + 1)}. ` +
+          `Seul ${rel(x)} est ${x % 2 === 0 ? "pair" : "impair"}. Il est bien ${x < 0 ? "négatif : son opposé est plus grand" : "positif : son opposé est plus petit"}.`,
+      ),
     };
   },
 },
@@ -1316,19 +1810,30 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
   theme: "neutral",
   hint: "Quand la somme fait 0, les nombres sont opposés.",
   tags: ["relatif", "defi", "addition", "oppose", "raisonnement", "template"],
+  // 09/10/2026 : « quand on m'ajoute a, on obtient b » (b souvent 0 : l'opposé) ou « si on m'enlève a » ; 3 présentations.
   generate: () => {
-    const n = Math.floor(Math.random() * 7) + 2;
-    const number = -n;
-
+    const p = pick(PRENOMS);
+    const x = nonNul(20);
+    const enleve = Math.random() < 0.3;
+    const a = enleve ? randInt(2, 15) : Math.random() < 0.5 ? -x : nonNul(15);
+    const b = enleve ? x - a : x + a;
+    const indice = enleve ? `Si on m’enlève ${a}, on obtient ${rel(b)}.` : `Quand on m’ajoute ${rel(a)}, on obtient ${rel(b)}.`;
     return {
-      text: `Je suis un nombre. Quand on m’additionne avec ${n}, on obtient 0. Qui suis-je ?`,
+      text: choix([
+        `Devinette : « Je suis un nombre entier. ${indice} Qui suis-je ? »`,
+        `${p.nom} pose une devinette : « Je suis un nombre. ${indice} Qui suis-je ? »`,
+        `${p.nom} pense à un nombre et dit : « ${indice} » À quel nombre pense-t-${il(p)} ?`,
+      ]),
       format: "short",
-      expected: [String(number)],
+      expected: attendus(x),
       comparator: "number_equal",
-      explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
-          "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
-          (`Un nombre qui, additionné à ${n}, donne 0 est son opposé. Donc le nombre est -${n}.`) +
-          "\n\nConclusion : le nombre relatif choisi répond à la question.",
+      explanation: expl(
+        enleve
+          ? `On fait le chemin inverse : ${rel(b)} + ${a} = ${rel(x)}. Vérification : ${rel(x)} − ${a} = ${rel(b)}.`
+          : b === 0
+            ? `Ajouter ${rel(a)} donne 0 : le nombre est l’opposé de ${rel(a)}, soit ${rel(x)}.`
+            : `On fait le chemin inverse : ${rel(b)} − ${par(a, true)} = ${rel(x)}. Vérification : ${rel(x)} + ${par(a, true)} = ${rel(b)}.`,
+      ),
     };
   },
 },
@@ -1343,29 +1848,29 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
   theme: "neutral",
   hint: "Utilise la distance à 0 et compare avec les bornes.",
   tags: ["relatif", "defi", "distance", "encadrement", "raisonnement", "template"],
+  // 09/10/2026 : distance à 0 + un encadrement (deux bornes tirées) qui écarte l'opposé ; 3 présentations.
   generate: () => {
-    const d = Math.floor(Math.random() * 5) + 3; // 3 à 7
-    const isPositive = Math.random() < 0.5;
-
-    const number = isPositive ? d : -d;
-
-    const textPosition = isPositive
-      ? `plus petit que ${d + 1} et plus grand que 0`
-      : `plus grand que -${d + 1} et plus petit que 0`;
-
-    const explanationSign = isPositive
-      ? `Le nombre est donc positif : ${d}.`
-      : `Le nombre est donc négatif : -${d}.`;
-
+    const p = pick(PRENOMS);
+    const d = randInt(3, 40);
+    const x = Math.random() < 0.6 ? -d : d;
+    // Bornes : x entre elles, −x dehors.
+    const lo = x - randInt(1, 6);
+    const hi = x + randInt(1, 6);
+    const ok = !(lo < -x && -x < hi);
+    const [bas, haut] = ok ? [lo, hi] : x < 0 ? [lo, Math.min(hi, 0)] : [Math.max(lo, 0), hi];
+    const texte = `Je suis à ${d} unités de 0. Je suis plus grand que ${rel(bas)} et plus petit que ${rel(haut)}.`;
     return {
-      text: `Je suis un nombre. Je suis à ${d} unités de 0. Je suis ${textPosition}. Qui suis-je ?`,
+      text: choix([
+        `Devinette : « Je suis un nombre entier. ${texte} Qui suis-je ? »`,
+        `${p.nom} pose une devinette : « Je suis un nombre entier. ${texte} Qui suis-je ? »`,
+        `${p.nom} a écrit sur une carte : « ${texte} Quel nombre suis-je ? »`,
+      ]),
       format: "short",
-      expected: [String(number)],
+      expected: attendus(x),
       comparator: "number_equal",
-      explanation: "Définition : un nombre relatif peut être positif, négatif ou nul.\n\n" +
-          "Méthode : on repère le signe, la distance à zéro et la position sur la droite graduée.\n\nCalcul : " +
-          (`Être à ${d} unités de 0 signifie que le nombre peut être ${d} ou -${d}. ${explanationSign}`) +
-          "\n\nConclusion : le nombre relatif choisi répond à la question.",
+      explanation: expl(
+        `À ${d} unités de 0, il y a ${rel(-d)} et ${rel(d)}. Seul ${rel(x)} est entre ${rel(bas)} et ${rel(haut)}.`,
+      ),
     };
   },
 },
@@ -1572,18 +2077,23 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Au-dessus → +, au-dessous → -.",
     tags: ["relatif", "lecture", "template"],
+    // 09/10/2026 : lecture inverse — le nombre est affiché, l'élève choisit ce qu'il veut dire (14 situations × 3 tournures).
     generate: () => {
-      const n = shuffle([3, 5, 6, 8, 9, 11])[0];
-      const dessous = shuffle([true, false])[0];
+      const p = pick(PRENOMS);
+      const r = choix(REPERES);
+      const n = nonNul(r.max);
+      const ecart = r.max >= 100 ? 100 : 10;
+      const loin = n < 0 ? n - ecart : n + ecart;
+      const question = choix(["Que veut dire ce nombre ?", "Qu’est-ce que cela signifie ?", `Comment ${p.nom} doit-${il(p)} le comprendre ?`]);
       return {
-        text: `Écris avec son signe : ${n} ${dessous ? "au-dessous" : "au-dessus"} de zéro.`,
-        format: "short",
-        expected: dessous ? [`-${n}`] : [`+${n}`, `${n}`],
-        comparator: "number_equal",
+        text: `${r.affiche(p, n)} ${question}`,
+        format: "qcm",
+        choices: shuffle([r.sens(n), r.sens(-n), r.sens(loin)]),
+        expected: [r.sens(n)],
+        comparator: "mcq_exact",
         explanation: expl(
-          dessous
-            ? `Au-dessous de zéro → négatif : -${n}.`
-            : `Au-dessus de zéro → positif : +${n}.`
+          `${rel(n)} porte le signe ${n < 0 ? "−" : "+"} : ${n < 0 ? "c’est le côté des nombres négatifs" : "c’est le côté des nombres positifs"}. ` +
+            `Il veut dire « ${r.sens(n)} ». Sa distance au repère est ${A(n)}.`,
         ),
       };
     },
@@ -1658,18 +2168,33 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le signe donne la réponse.",
     tags: ["relatif", "signe", "template"],
+    // 09/10/2026 : trouver LE positif (ou LE négatif) parmi quatre nombres ; 0 sert de piège ; nu ou en situation (6 tournures).
     generate: () => {
-      const n = shuffle([-12, -7, -3, 4, 6, 9])[0];
+      const p = pick(PRENOMS);
+      const veutPositif = Math.random() < 0.5;
+      const sg = veutPositif ? 1 : -1;
+      const bon = sg * randInt(1, 20);
+      const autres = new Set<number>([0]);
+      while (autres.size < 3) autres.add(-sg * randInt(1, 20));
+      const sit = choix([
+        { u: " °C", t: `${p.nom} a relevé quatre températures. Laquelle est ${veutPositif ? "positive" : "négative"} ?` },
+        { u: " m", t: `${p.nom} lit quatre altitudes sur une carte. Laquelle est ${veutPositif ? "positive" : "négative"} ?` },
+        { u: " €", t: `Le relevé du compte ${de(p.nom)} montre quatre opérations. Laquelle est ${veutPositif ? "positive" : "négative"} ?` },
+        { u: "", t: `Parmi ces nombres, lequel est ${veutPositif ? "positif" : "négatif"} ?` },
+        { u: "", t: `${p.nom} cherche le seul nombre ${veutPositif ? "positif" : "négatif"} de la liste. Lequel est-ce ?` },
+        { u: "", t: `Au jeu, ${p.nom} a noté quatre scores. Lequel est ${veutPositif ? "positif" : "négatif"} ?` },
+      ]);
+      const ecrire = (x: number) => `${rel(x, Math.random() < 0.5)}${sit.u}`;
+      const bonTexte = ecrire(bon);
       return {
-        text: `Le nombre ${formatSigned(n)} est-il positif ou négatif ?`,
+        text: sit.t,
         format: "qcm",
-        choices: ["positif", "négatif"],
-        expected: [n < 0 ? "négatif" : "positif"],
+        choices: shuffle([bonTexte, ...[...autres].map(ecrire)]),
+        expected: [bonTexte],
         comparator: "mcq_exact",
         explanation: expl(
-          n < 0
-            ? `${formatSigned(n)} porte le signe -, il est négatif.`
-            : `${formatSigned(n)} porte le signe +, il est positif.`
+          `${bonTexte} est ${veutPositif ? "à droite de 0 : il est positif" : "précédé du signe − : il est négatif"}. ` +
+            "Attention : 0 n’est ni positif ni négatif.",
         ),
       };
     },
@@ -1741,15 +2266,25 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "On change uniquement le signe.",
     tags: ["relatif", "oppose", "template"],
+    // 09/10/2026 : QCM — l'opposé parmi le nombre lui-même, 0 et un voisin (5 tournures).
     generate: () => {
-      const n = shuffle([-13, -8, -4, 6, 10, 14])[0];
-      const oppose = -n;
+      const p = pick(PRENOMS);
+      const n = nonNul(40);
+      const voisin = -n + (n > 0 ? -10 : 10);
+      const text = choix([
+        `Quel est l’opposé de ${rel(n)} ?`,
+        `${p.nom} cherche l’opposé de ${rel(n)}. Que doit-${il(p)} choisir ?`,
+        `Sur la droite graduée, quel nombre est le symétrique de ${rel(n)} par rapport à 0 ?`,
+        `${p.nom} affirme que la somme de ${rel(n)} et d’un de ces nombres vaut 0. Lequel ?`,
+        `Quel nombre a la même distance à 0 que ${rel(n)}, mais un signe contraire ? ${p.nom} doit le trouver.`,
+      ]);
       return {
-        text: `Quel est l’opposé de ${formatSigned(n)} ?`,
-        format: "short",
-        expected: oppose > 0 ? [`+${oppose}`, `${oppose}`] : [`${oppose}`],
-        comparator: "number_equal",
-        explanation: expl(`On change le signe : l’opposé de ${formatSigned(n)} est ${formatSigned(oppose)}.`),
+        text,
+        format: "qcm",
+        choices: shuffle([rel(-n), rel(n), "0", rel(voisin)]),
+        expected: [rel(-n)],
+        comparator: "mcq_exact",
+        explanation: expl(`On change le signe : l’opposé de ${rel(n)} est ${rel(-n)}. Et ${rel(n)} + ${par(-n, true)} = 0.`),
       };
     },
   },
@@ -1899,15 +2434,29 @@ export const nombresRelatifsBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Valeur absolue = distance à 0 (toujours positive).",
     tags: ["relatif", "valeur_absolue", "template"],
+    // 09/10/2026 : distance à zéro en situation (plongeur, compte, sous-sol, congélateur) ou nue (7 tournures).
     generate: () => {
-      const n = shuffle([-15, -11, -8, -6, 7, 13])[0];
+      const p = pick(PRENOMS);
+      const sit = choix([
+        { u: "m", n: -randInt(2, 40), t: (n: number) => `${p.nom} plonge : son profondimètre indique ${rel(n)} m. À quelle distance de la surface est-${il(p)} ?` },
+        { u: "€", n: -randInt(5, 90), t: (n: number) => `Le compte ${de(p.nom)} est à ${rel(n)} €. Combien d’euros faut-il ajouter pour revenir à 0 € ?` },
+        { u: "°C", n: -randInt(2, 25), t: (n: number) => `Le congélateur ${de(p.nom)} est à ${rel(n)} °C. De combien de degrés est-il sous 0 °C ?` },
+        { u: "", n: -randInt(1, 5), t: (n: number) => `${p.nom} est au niveau ${rel(n)} du parking. Combien de niveaux ${p.f ? "la" : "le"} séparent de la rue (niveau 0) ?` },
+        { u: "", n: nonNul(30), t: (n: number) => `Quelle est la valeur absolue de ${rel(n)} ?` },
+        { u: "", n: nonNul(30), t: (n: number) => `${p.nom} cherche la distance à zéro de ${rel(n)}. Que trouve-t-${il(p)} ?` },
+        { u: "", n: nonNul(30), t: (n: number) => `Quelle est la distance entre ${rel(n)} et 0 sur une droite graduée ? ${p.nom} répond.` },
+      ]);
+      const a = Math.abs(sit.n);
       return {
-        text: `Quelle est la valeur absolue de ${formatSigned(n)} ?`,
+        text: sit.t(sit.n),
         format: "short",
-        expected: [String(Math.abs(n))],
+        expected: sit.u ? [`${a} ${sit.u}`, String(a)] : [String(a)],
         comparator: "number_equal",
-        explanation: expl(`La valeur absolue de ${formatSigned(n)} est sa distance à 0, soit ${Math.abs(n)}.`),
+        explanation: expl(`La distance à 0 de ${rel(sit.n)} vaut ${a} : on garde le nombre sans son signe.`),
       };
     },
   },
 ];
+
+// ⛔ 09/10/2026 : le vrai signe moins « − » partout (énoncés, choix, réponses, aides, explications).
+export const nombresRelatifsBank: TutorBankItemV4[] = vraiMoins(nombresRelatifsBrut);

@@ -3,7 +3,9 @@
 import type {
   TutorBankItemV4,
   StatGraphCanvasData,
+  TableauDonneesCanvasData,
 } from "@/lib/tutor-v4/types";
+import { PRENOMS, de, type Prenom } from "@/lib/tutor-v4/questionBank/6e/maths/entiers.bank";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -69,6 +71,675 @@ function expl(calcul: string) {
     calcul +
     "\n\nConclusion : l’indicateur obtenu résume correctement les données."
   );
+}
+
+/* =========================================================
+   ENQUÊTES × TOURNURES × PRÉNOMS — 09/10/2026
+   ---------------------------------------------------------
+   ⛔ POURQUOI. Mesuré le 09/10 : 10 à 17 squelettes par micro, jusqu'à 18
+   répétitions sur 20 (« sport # élèves, musique # élèves… »). Chaque gabarit
+   compose maintenant une ENQUÊTE (15 sujets, un seul réunionnais) ou une
+   SÉRIE de mesures (12 contextes) × une TOURNURE × un PRÉNOM.
+   Correcteurs : correcteurs/statistiques.ts. Ils relisent le TABLEAU
+   (canvas « tableau_donnees »), le DIAGRAMME (canvas « stat_graph ») ou la
+   liste du texte, et refont le calcul.
+   ⚠️ Conventions que le correcteur lit : une catégorie se cite entre
+   guillemets (« Foot ») ; une liste de réponses s'écrit « A, B, A. » ; une
+   série de nombres s'écrit « 12 ; 15 ; 9 » (le point-virgule évite de
+   confondre avec la virgule décimale). ⛔ Pas de barre de fraction : une
+   fréquence s'écrit en décimal (0,25) ou en pourcentage (25 %).
+   ⚠️ Le diagramme ne surligne JAMAIS la réponse (avant : la barre la plus
+   haute était surlignée dans « quelle catégorie a le plus grand effectif ? »).
+   ========================================================= */
+
+const r2 = (x: number) => Math.round(x * 100) / 100;
+const nb = (x: number) => String(r2(x)).replace(".", ",");
+const il = (p: Prenom) => (p.f ? "elle" : "il");
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+const prenom = () => randomChoice(PRENOMS);
+function deuxPrenoms(): [Prenom, Prenom] {
+  const p = prenom();
+  let q = prenom();
+  while (q.nom === p.nom) q = prenom();
+  return [p, q];
+}
+/** « Combien d’élèves », « Combien de clients ». */
+const combienDe = (qui: string) => (/^[aeiouyéh]/i.test(qui) ? `Combien d’${qui}` : `Combien de ${qui}`);
+
+type Enquete = {
+  /** « les élèves de sa classe » */
+  groupe: (p: Prenom) => string;
+  /** « leur sport préféré » */
+  quoi: string;
+  /** ce qu'on compte : « élèves », « clients » */
+  qui: string;
+  cats: string[];
+  titre: string;
+};
+const ENQUETES: Enquete[] = [
+  { groupe: () => "les élèves de sa classe", quoi: "leur sport préféré", qui: "élèves", titre: "Sport", cats: ["Football", "Basket", "Natation", "Danse", "Judo", "Tennis"] },
+  { groupe: () => "les enfants du centre de loisirs", quoi: "leur fruit préféré", qui: "enfants", titre: "Fruit", cats: ["Pomme", "Banane", "Fraise", "Mangue", "Kiwi"] },
+  { groupe: () => "les élèves du collège", quoi: "leur façon de venir au collège", qui: "élèves", titre: "Transport", cats: ["À pied", "Vélo", "Bus", "Voiture", "Trottinette"] },
+  { groupe: () => "ses camarades de l’équipe de handball", quoi: "leur couleur préférée", qui: "joueurs", titre: "Couleur", cats: ["Rouge", "Bleu", "Vert", "Jaune", "Violet"] },
+  { groupe: () => "les voisins de son immeuble", quoi: "leur animal de compagnie", qui: "personnes", titre: "Animal", cats: ["Chat", "Chien", "Poisson", "Lapin", "Aucun"] },
+  { groupe: () => "les lecteurs du CDI", quoi: "le genre de livre qu’ils préfèrent", qui: "élèves", titre: "Genre", cats: ["BD", "Roman", "Manga", "Documentaire", "Poésie"] },
+  { groupe: () => "les élèves de l’école de musique", quoi: "leur instrument", qui: "élèves", titre: "Instrument", cats: ["Guitare", "Piano", "Batterie", "Flûte", "Violon"] },
+  { groupe: () => "sa famille et ses amis", quoi: "leur saison préférée", qui: "personnes", titre: "Saison", cats: ["Printemps", "Été", "Automne", "Hiver"] },
+  { groupe: () => "les clients du glacier", quoi: "leur parfum de glace", qui: "clients", titre: "Parfum", cats: ["Vanille", "Chocolat", "Fraise", "Pistache", "Citron"] },
+  { groupe: () => "les enfants de l’école primaire", quoi: "leur jeu préféré à la récréation", qui: "enfants", titre: "Jeu", cats: ["Billes", "Corde à sauter", "Ballon", "Cartes", "Cache-cache"] },
+  { groupe: () => "les demi-pensionnaires", quoi: "leur plat préféré à la cantine", qui: "élèves", titre: "Plat", cats: ["Pâtes", "Frites", "Pizza", "Couscous", "Lasagnes"] },
+  { groupe: () => "les clients d’un marchand du marché de Saint-Paul", quoi: "le fruit qu’ils achètent", qui: "clients", titre: "Fruit", cats: ["Letchis", "Mangues", "Ananas", "Bananes", "Papayes"] },
+  { groupe: () => "les élèves de sa classe", quoi: "leur activité du mercredi", qui: "élèves", titre: "Activité", cats: ["Sport", "Musique", "Dessin", "Lecture", "Jeux vidéo"] },
+  { groupe: () => "les spectateurs du cinéma", quoi: "le genre de film qu’ils préfèrent", qui: "spectateurs", titre: "Genre", cats: ["Comédie", "Aventure", "Animation", "Policier", "Science-fiction"] },
+  { groupe: () => "les élèves de sa classe", quoi: "leur matière préférée", qui: "élèves", titre: "Matière", cats: ["Maths", "Français", "Histoire", "SVT", "Anglais"] },
+];
+
+const interroges = (e: Enquete) => (e.qui === "personnes" ? "interrogées" : "interrogés");
+
+/** Une enquête tirée : n catégories, effectifs entre min et max, tous différents (un plus grand et un plus petit uniques). */
+function tirerEnquete(n: number, min: number, max: number) {
+  const e = randomChoice(ENQUETES);
+  const p = prenom();
+  // ⚠️ « Saison » n'a que 4 réponses : 5 effectifs pour 4 colonnes faussaient le
+  // tableau et le total (trouvé par le correcteur, 09/10).
+  n = Math.min(n, e.cats.length);
+  const cats = shuffle(e.cats).slice(0, n);
+  const eff: number[] = [];
+  while (eff.length < n) {
+    const v = randomInt(min, max);
+    if (!eff.includes(v)) eff.push(v);
+  }
+  const intro = `${p.nom} a interrogé ${e.groupe(p)} sur ${e.quoi}`;
+  return { e, p, cats, eff, intro, total: sum(eff) };
+}
+
+function tableauEffectifs(e: Enquete, cats: string[], eff: (number | string)[]): TableauDonneesCanvasData {
+  return {
+    kind: "tableau_donnees",
+    headers: [e.titre, ...cats],
+    rows: [{ label: "Effectif", values: eff }],
+    display: { compact: true },
+  };
+}
+
+function diagramme(cats: string[], eff: number[], type: "barres" | "batons" = "barres") {
+  return statGraphCanvas({ graphType: type, data: cats.map((label, i) => ({ label, value: eff[i] })) });
+}
+
+/** Les séries de mesures (pour les moyennes). */
+type SerieStat = {
+  /** « Voici les notes de Léa en maths » (sans les nombres) */
+  intro: (p: Prenom) => string;
+  /** ce que mesure chaque nombre, au singulier : « note », « temps de trajet » */
+  u: string;
+  min: number;
+  max: number;
+  fem: boolean;
+  nom: string;
+};
+const SERIES: SerieStat[] = [
+  { intro: (p) => `Voici les notes ${de(p.nom)} en maths ce trimestre (sur vingt)`, u: "", min: 6, max: 19, fem: true, nom: "note" },
+  { intro: (p) => `${p.nom} a chronométré son trajet jusqu’au collège, en minutes, plusieurs matins`, u: "min", min: 10, max: 30, fem: false, nom: "durée" },
+  { intro: (p) => `Voici les points marqués par ${p.nom} lors de ses derniers matchs de basket`, u: "points", min: 2, max: 24, fem: false, nom: "nombre de points" },
+  { intro: (p) => `Voici les distances parcourues à vélo par ${p.nom}, en kilomètres, chaque jour des vacances`, u: "km", min: 3, max: 18, fem: true, nom: "distance" },
+  { intro: (p) => `Voici le nombre de pages lues par ${p.nom} chaque soir`, u: "pages", min: 5, max: 40, fem: false, nom: "nombre de pages" },
+  { intro: (p) => `${p.nom} a mesuré ses plants de tomates, en centimètres`, u: "cm", min: 20, max: 60, fem: true, nom: "taille" },
+  { intro: () => `Voici le nombre de buts marqués par l’équipe de foot du collège à chaque match`, u: "buts", min: 0, max: 6, fem: false, nom: "nombre de buts" },
+  { intro: (p) => `${p.nom} a relevé la température à midi, en degrés, plusieurs jours de suite`, u: "°C", min: 14, max: 31, fem: true, nom: "température" },
+  { intro: (p) => `Voici l’argent de poche dépensé par ${p.nom} chaque semaine, en euros`, u: "€", min: 2, max: 15, fem: false, nom: "montant" },
+  { intro: (p) => `Voici le temps d’écran ${de(p.nom)}, en minutes, chaque jour de la semaine`, u: "min", min: 30, max: 120, fem: false, nom: "durée" },
+  { intro: (p) => `Le grand-père ${de(p.nom)} a pesé les pommes récoltées sur chaque arbre, en kilogrammes`, u: "kg", min: 10, max: 40, fem: true, nom: "masse" },
+  { intro: () => `Voici la hauteur de pluie tombée à Cilaos, en millimètres, plusieurs jours de suite`, u: "mm", min: 2, max: 30, fem: true, nom: "hauteur de pluie" },
+];
+const MESURES_STAT = new Set(["min", "km", "cm", "°C", "€", "kg", "mm"]);
+const avecU = (x: number, u: string) => (MESURES_STAT.has(u) ? `${nb(x)} ${u}` : nb(x));
+const listeNb = (xs: number[]) => xs.map(nb).join(" ; ");
+
+/** n valeurs de la série ; `moyenneEntiere` : la somme est un multiple de n. */
+function tirerValeurs(s: SerieStat, n: number, moyenneEntiere: boolean) {
+  for (;;) {
+    const xs = Array.from({ length: n }, () => randomInt(s.min, s.max));
+    if (!moyenneEntiere || sum(xs) % n === 0) return xs;
+  }
+}
+
+/* ─── Organiser des données brutes ───────────────────────────────────── */
+
+/**
+ * niveau 1 : 8 à 10 réponses, 3 catégories, un effectif ; 2 : 12 à 16 réponses,
+ * un effectif ou le total ; 3 : une série de nombres (pointures, frères et
+ * sœurs…), effectif d'une valeur, « au moins », valeur la plus fréquente.
+ */
+function genOrganiser(niveau: 1 | 2 | 3) {
+  if (niveau <= 2) {
+    const { e, cats, intro } = tirerEnquete(niveau === 1 ? 3 : randomChoice([3, 4]), 1, 20);
+    const n = niveau === 1 ? randomInt(8, 10) : randomInt(12, 16);
+    const liste = Array.from({ length: n }, () => randomChoice(cats));
+    for (const c of cats) if (!liste.includes(c)) liste[randomInt(0, n - 1)] = c;
+    const cible = randomChoice(cats.filter((c) => liste.includes(c)));
+    const eff = liste.filter((x) => x === cible).length;
+    const total = niveau === 2 && Math.random() < 0.3;
+    const qui = combienDe(e.qui);
+    const question = total
+      ? randomChoice([`${qui} ont répondu en tout ?`, "Quel est l’effectif total ?"])
+      : randomChoice([`${qui} ont répondu « ${cible} » ?`, `Quel est l’effectif de la réponse « ${cible} » ?`, `Combien de fois la réponse « ${cible} » apparaît-elle ?`]);
+    return {
+      text: `${intro}. Voici les réponses : ${liste.join(", ")}. ${question}`,
+      format: "short" as const,
+      expected: [String(total ? n : eff)],
+      comparator: "number_equal" as const,
+      explanation: expl(total ? `on compte toutes les réponses de la liste : il y en a ${n}.` : `on compte les « ${cible} » dans la liste : il y en a ${eff}. C’est l’effectif de « ${cible} ».`),
+    };
+  }
+  const contexte = randomChoice([
+    { intro: (p: Prenom) => `${p.nom} a relevé la pointure de ses camarades de club`, min: 35, max: 41, nom: "la pointure" },
+    { intro: (p: Prenom) => `${p.nom} a demandé à ses camarades combien ils ont de frères et sœurs`, min: 0, max: 4, nom: "le nombre" },
+    { intro: (p: Prenom) => `${p.nom} a relevé les notes du dernier contrôle de sa classe (sur vingt)`, min: 8, max: 17, nom: "la note" },
+    { intro: (p: Prenom) => `${p.nom} a lancé un dé plusieurs fois et noté les résultats`, min: 1, max: 6, nom: "le résultat" },
+    { intro: (p: Prenom) => `${p.nom} a compté les buts de son équipe à chaque match de la saison`, min: 0, max: 5, nom: "le nombre de buts" },
+  ]);
+  const p = prenom();
+  for (;;) {
+    const n = randomInt(12, 15);
+    const xs = Array.from({ length: n }, () => randomInt(contexte.min, Math.min(contexte.max, contexte.min + 5)));
+    const compte = (v: number) => xs.filter((x) => x === v).length;
+    const t = randomInt(1, 3);
+    let question: string;
+    let rep: number;
+    if (t === 1) {
+      const v = randomChoice(xs);
+      question = `Quel est l’effectif de la valeur ${v} ?`;
+      rep = compte(v);
+    } else if (t === 2) {
+      const seuil = randomInt(contexte.min + 1, Math.min(contexte.max, contexte.min + 4));
+      question = `Combien de valeurs sont supérieures ou égales à ${seuil} ?`;
+      rep = xs.filter((x) => x >= seuil).length;
+    } else {
+      const max = Math.max(...[...new Set(xs)].map(compte));
+      const modes = [...new Set(xs)].filter((v) => compte(v) === max);
+      if (modes.length !== 1) continue;
+      question = "Quelle valeur apparaît le plus souvent ?";
+      rep = modes[0];
+    }
+    return {
+      text: `${contexte.intro(p)} : ${listeNb(xs)}. ${question}`,
+      format: "short" as const,
+      expected: [String(rep)],
+      comparator: "number_equal" as const,
+      explanation: expl(
+        t === 3
+          ? `on compte chaque valeur ; ${rep} apparaît ${compte(rep)} fois, plus que toutes les autres.`
+          : `on range les valeurs en comptant : la réponse est ${rep}.`,
+      ),
+    };
+  }
+}
+
+/* ─── Lire un tableau d'effectifs ─────────────────────────────────────── */
+
+/**
+ * niveau 1 : effectif d'une catégorie ; 2 : total, écart entre deux, somme de
+ * deux ; 3 : « n'ont pas choisi », case manquante (total donné), la plus choisie.
+ */
+function genLireTableau(niveau: 1 | 2 | 3) {
+  const { e, p, cats, eff, intro, total } = tirerEnquete(niveau === 1 ? randomChoice([3, 4]) : randomChoice([4, 5]), 2, 15);
+  const qui = combienDe(e.qui);
+  const i = randomInt(0, cats.length - 1);
+  let j = randomInt(0, cats.length - 1);
+  while (j === i) j = randomInt(0, cats.length - 1);
+  const tete = randomChoice([
+    `${intro}. Voici ses résultats.`,
+    `${intro} et a rangé les réponses dans ce tableau.`,
+    `Ce tableau donne les réponses des ${e.qui} ${interroges(e)} par ${p.nom} sur ${e.quoi}.`,
+  ]);
+  const t = niveau === 1 ? 1 : niveau === 2 ? randomInt(2, 4) : randomInt(5, 7);
+  let question: string;
+  let rep: number;
+  let canvasEff: (number | string)[] = eff;
+  let qcm: string[] | null = null;
+  if (t === 1) {
+    question = randomChoice([`${qui} ont répondu « ${cats[i]} » ?`, `Quel est l’effectif de « ${cats[i]} » ?`]);
+    rep = eff[i];
+  } else if (t === 2) {
+    question = randomChoice([`${qui} ont répondu en tout ?`, "Quel est l’effectif total ?"]);
+    rep = total;
+  } else if (t === 3) {
+    const [a, b] = eff[i] > eff[j] ? [i, j] : [j, i];
+    question = `${qui} de plus ont répondu « ${cats[a]} » plutôt que « ${cats[b]} » ?`;
+    rep = eff[a] - eff[b];
+  } else if (t === 4) {
+    question = `${qui} ont répondu « ${cats[i]} » ou « ${cats[j]} » ?`;
+    rep = eff[i] + eff[j];
+  } else if (t === 5) {
+    question = `${qui} n’ont pas répondu « ${cats[i]} » ?`;
+    rep = total - eff[i];
+  } else if (t === 6) {
+    canvasEff = eff.map((x, k) => (k === i ? "?" : x));
+    question = `En tout, ${total} ${e.qui} ont répondu. Quel est l’effectif de « ${cats[i]} » ?`;
+    rep = eff[i];
+  } else {
+    const plus = Math.random() < 0.5;
+    const k = eff.indexOf(plus ? Math.max(...eff) : Math.min(...eff));
+    question = `Quelle réponse a été donnée le ${plus ? "plus" : "moins"} souvent ?`;
+    qcm = cats;
+    rep = k;
+  }
+  const canvas = tableauEffectifs(e, cats, canvasEff);
+  if (qcm) {
+    return {
+      text: `${tete} ${question}`,
+      format: "qcm" as const,
+      choices: shuffle(qcm),
+      expected: [cats[rep]],
+      comparator: "mcq_exact" as const,
+      explanation: expl(`on compare les effectifs du tableau : « ${cats[rep]} » a l’effectif ${eff[rep]}.`),
+      canvas,
+    };
+  }
+  return {
+    text: `${tete} ${question}`,
+    format: "short" as const,
+    expected: [String(rep)],
+    comparator: "number_equal" as const,
+    explanation: expl(
+      t === 1 ? `on lit la case de « ${cats[i]} » : ${eff[i]}.`
+        : t === 2 ? `on additionne les effectifs : ${eff.join(" + ")} = ${total}.`
+        : t === 3 ? `on soustrait les deux effectifs : la réponse est ${rep}.`
+        : t === 4 ? `on additionne les deux effectifs : ${eff[i]} + ${eff[j]} = ${rep}.`
+        : t === 5 ? `on enlève l’effectif de « ${cats[i]} » au total : ${total} − ${eff[i]} = ${rep}.`
+        : `on enlève au total les effectifs connus : ${total} − ${eff.filter((_, k) => k !== i).join(" − ")} = ${rep}.`,
+    ),
+    canvas,
+  };
+}
+
+/* ─── Lire un diagramme ───────────────────────────────────────────────── */
+
+/** niveau 2 : effectif lu, la plus haute / la plus basse ; 3 : total, écart, somme. */
+function genLireGraphique(niveau: 2 | 3) {
+  const { e, p, cats, eff, intro, total } = tirerEnquete(randomChoice([4, 5]), 2, 16);
+  const qui = combienDe(e.qui);
+  const i = randomInt(0, cats.length - 1);
+  let j = randomInt(0, cats.length - 1);
+  while (j === i) j = randomInt(0, cats.length - 1);
+  const type = randomChoice(["barres", "batons"] as const);
+  const tete = randomChoice([
+    `${intro}. Le diagramme montre ses résultats.`,
+    `Le diagramme ${type === "barres" ? "en barres" : "en bâtons"} donne les réponses des ${e.qui} ${interroges(e)} par ${p.nom} sur ${e.quoi}.`,
+    `${intro} et a tracé ce diagramme.`,
+  ]);
+  const canvas = diagramme(cats, eff, type);
+  const t = niveau === 2 ? randomInt(1, 3) : randomInt(4, 6);
+  if (t === 2 || t === 3) {
+    const plus = t === 2;
+    const k = eff.indexOf(plus ? Math.max(...eff) : Math.min(...eff));
+    return {
+      text: `${tete} D’après le diagramme, quelle réponse a été donnée le ${plus ? "plus" : "moins"} souvent ?`,
+      format: "qcm" as const,
+      choices: shuffle(cats),
+      expected: [cats[k]],
+      comparator: "mcq_exact" as const,
+      explanation: expl(`la ${plus ? "plus haute" : "plus basse"} barre est celle de « ${cats[k]} » (${eff[k]}).`),
+      canvas,
+    };
+  }
+  let question: string;
+  let rep: number;
+  if (t === 1) {
+    question = randomChoice([`D’après le diagramme, ${qui.toLowerCase()} ont répondu « ${cats[i]} » ?`, `Lis sur le diagramme l’effectif de « ${cats[i]} ».`]);
+    rep = eff[i];
+  } else if (t === 4) {
+    question = randomChoice([`D’après le diagramme, ${qui.toLowerCase()} ont répondu en tout ?`, "Quel est l’effectif total représenté ?"]);
+    rep = total;
+  } else if (t === 5) {
+    const [a, b] = eff[i] > eff[j] ? [i, j] : [j, i];
+    question = `${qui} de plus ont répondu « ${cats[a]} » plutôt que « ${cats[b]} » ?`;
+    rep = eff[a] - eff[b];
+  } else {
+    question = `${qui} ont répondu « ${cats[i]} » ou « ${cats[j]} » ?`;
+    rep = eff[i] + eff[j];
+  }
+  return {
+    text: `${tete} ${question}`,
+    format: "short" as const,
+    expected: [String(rep)],
+    comparator: "number_equal" as const,
+    explanation: expl(`on lit la hauteur des barres : ${cats.map((c, k) => `${c} ${eff[k]}`).join(", ")} ; la réponse est ${rep}.`),
+    canvas,
+  };
+}
+
+/** n effectifs différents, au moins `min`, de somme N. */
+function partage(N: number, n: number, min = 1): number[] {
+  // garde-fou : n effectifs distincts valent au moins min + (min + 1) + …
+  if (n * min + (n * (n - 1)) / 2 > N) throw new Error(`partage impossible : ${n} effectifs distincts pour ${N}`);
+  for (;;) {
+    const xs = Array.from({ length: n - 1 }, () => randomInt(min, Math.floor((2 * N) / n)));
+    const der = N - sum(xs);
+    const tous = [...xs, der];
+    if (der >= min && new Set(tous).size === n) return tous;
+  }
+}
+
+/* ─── Effectifs et fréquences ─────────────────────────────────────────── */
+
+/**
+ * niveau 2 : fréquence en nombre décimal (texte ou tableau) ;
+ * 3 : fréquence en pourcentage, ou effectif à partir de la fréquence.
+ * ⛔ Pas de « 8/20 » : une fréquence s'écrit 0,4 ou 40 %.
+ */
+function genFrequence(niveau: 2 | 3) {
+  const e = randomChoice(ENQUETES);
+  const p = prenom();
+  const N = randomChoice([10, 20, 25, 50]);
+  const n = randomChoice([3, 4]);
+  const cats = shuffle(e.cats).slice(0, n);
+  const eff = partage(N, n, 1);
+  const i = randomInt(0, n - 1);
+  const f = eff[i] / N;
+  const intro = `${p.nom} a interrogé ${e.groupe(p)} sur ${e.quoi}`;
+  const t = niveau === 2 ? randomInt(1, 2) : randomInt(3, 5);
+  const enPct = t === 3 || t === 4;
+  if (t === 5) {
+    // l'effectif à partir de la fréquence
+    // un effectif entier : 25 × 0,1 = 2,5 enfants était servi (trouvé par le correcteur)
+    const fd = randomChoice([0.1, 0.2, 0.3, 0.4, 0.5, 0.6].filter((x) => Number.isInteger(Math.round(N * x * 1e6) / 1e6)));
+    const k = r2(N * fd);
+    const enP = Math.random() < 0.5;
+    return {
+      text: `${intro} : ${N} ${e.qui} ont répondu. La fréquence de la réponse « ${cats[i]} » est ${enP ? `${Math.round(fd * 100)} %` : nb(fd)}. ${combienDe(e.qui)} ont répondu « ${cats[i]} » ?`,
+      format: "short" as const,
+      expected: [nb(k)],
+      comparator: "number_equal" as const,
+      explanation: expl(`effectif = fréquence × effectif total : ${N} × ${nb(fd)} = ${nb(k)}.`),
+    };
+  }
+  const consigne = enPct
+    ? randomChoice(["Donne-la en pourcentage.", "Écris-la en pourcentage."])
+    : randomChoice(["Donne-la en nombre décimal.", "Écris-la sous forme décimale."]);
+  const rep = enPct ? `${nb(f * 100)} %` : nb(f);
+  const explication = expl(
+    `fréquence = effectif ÷ effectif total = ${eff[i]} ÷ ${N} = ${nb(f)}${enPct ? `, soit ${nb(f * 100)} %` : ""}.`,
+  );
+  if (t === 2 || t === 4) {
+    return {
+      text: `${intro} et a rangé les réponses dans ce tableau. Quelle est la fréquence de la réponse « ${cats[i]} » ? ${consigne}`,
+      format: "short" as const,
+      expected: [rep],
+      comparator: "number_equal" as const,
+      explanation: explication,
+      canvas: tableauEffectifs(e, cats, eff),
+    };
+  }
+  return {
+    text: `${intro}. Sur ${N} ${e.qui}, ${eff[i]} ont répondu « ${cats[i]} ». Quelle est la fréquence de cette réponse ? ${consigne}`,
+    format: "short" as const,
+    expected: [rep],
+    comparator: "number_equal" as const,
+    explanation: explication,
+  };
+}
+
+/* ─── Représenter : hauteur d'une barre, angle d'un secteur ───────────── */
+
+/** niveau 2 : hauteur d'une barre (échelle donnée) ; 3 : angle d'un secteur circulaire. */
+function genRepresenter(niveau: 2 | 3) {
+  const e = randomChoice(ENQUETES);
+  const p = prenom();
+  const n = randomChoice([3, 4]);
+  const cats = shuffle(e.cats).slice(0, n);
+  const i = randomInt(0, n - 1);
+  const intro = `${p.nom} a interrogé ${e.groupe(p)} sur ${e.quoi}`;
+  if (niveau === 2) {
+    const s = randomChoice([2, 4, 5, 10]);
+    const eff: number[] = [];
+    while (eff.length < n) {
+      const v = s * randomInt(1, 8) + (s % 2 === 0 && Math.random() < 0.3 ? s / 2 : 0);
+      if (!eff.includes(v)) eff.push(v);
+    }
+    const h = eff[i] / s;
+    if (Math.random() < 0.3) {
+      // à l'envers : la hauteur est donnée
+      return {
+        text: `Dans le diagramme en barres ${de(p.nom)}, 1 cm représente ${s} ${e.qui}. La barre de « ${cats[i]} » mesure ${nb(h)} cm. ${combienDe(e.qui)} ont répondu « ${cats[i]} » ?`,
+        format: "short" as const,
+        expected: [nb(eff[i])],
+        comparator: "number_equal" as const,
+        explanation: expl(`chaque centimètre représente ${s} ${e.qui} : ${nb(h)} × ${s} = ${eff[i]}.`),
+      };
+    }
+    return {
+      text: `${intro} et veut tracer un diagramme en barres où 1 cm représente ${s} ${e.qui}. Quelle hauteur, en cm, doit avoir la barre de « ${cats[i]} » ?`,
+      format: "short" as const,
+      expected: [`${nb(h)} cm`],
+      comparator: "number_equal" as const,
+      explanation: expl(`1 cm pour ${s} ${e.qui} : ${eff[i]} ÷ ${s} = ${nb(h)} cm.`),
+      canvas: tableauEffectifs(e, cats, eff),
+    };
+  }
+  const N = randomChoice([18, 20, 24, 30, 36, 40, 45, 60, 72, 90]);
+  const eff = partage(N, n, 1);
+  const angle = (eff[i] * 360) / N;
+  if (Math.random() < 0.3) {
+    return {
+      text: `${intro} : ${N} ${e.qui} ont répondu. Dans son diagramme circulaire, le secteur de « ${cats[i]} » mesure ${angle}°. ${combienDe(e.qui)} ont répondu « ${cats[i]} » ?`,
+      format: "short" as const,
+      expected: [String(eff[i])],
+      comparator: "number_equal" as const,
+      explanation: expl(`le disque entier (360°) représente ${N} ${e.qui}, donc 1 ${e.qui.replace(/s$/, "")} correspond à 360 ÷ ${N} = ${360 / N}°. ${angle} ÷ ${360 / N} = ${eff[i]}.`),
+    };
+  }
+  return {
+    text: `${intro} et veut tracer un diagramme circulaire. Quel angle, en degrés, doit mesurer le secteur de « ${cats[i]} » ?`,
+    format: "short" as const,
+    expected: [`${angle}°`],
+    comparator: "number_equal" as const,
+    explanation: expl(`le disque entier (360°) représente les ${N} ${e.qui} : ${eff[i]} × 360 ÷ ${N} = ${angle}°.`),
+    canvas: tableauEffectifs(e, cats, eff),
+  };
+}
+
+/* ─── Choisir une représentation ──────────────────────────────────────── */
+
+const GRAPHIQUES = ["un diagramme en barres", "un diagramme circulaire", "un graphique en courbe"] as const;
+const BESOINS: Array<{ g: (typeof GRAPHIQUES)[number]; texte: (p: Prenom) => string }> = [
+  { g: "un graphique en courbe", texte: (p) => `${p.nom} relève la température de sa chambre à chaque heure et veut montrer son évolution au cours de la journée` },
+  { g: "un graphique en courbe", texte: (p) => `${p.nom} veut montrer l’évolution de sa taille, mesurée chaque année depuis sa naissance` },
+  { g: "un graphique en courbe", texte: (p) => `${p.nom} veut suivre l’évolution du nombre d’abonnés de sa chaîne, mois après mois` },
+  { g: "un graphique en courbe", texte: (p) => `${p.nom} mesure son plant de haricot chaque jour et veut montrer son évolution au cours du mois` },
+  { g: "un diagramme circulaire", texte: (p) => `${p.nom} veut montrer la répartition des élèves de sa classe selon leur moyen de transport, en parts du total` },
+  { g: "un diagramme circulaire", texte: (p) => `${p.nom} veut montrer la part de chaque dépense dans son budget de vacances` },
+  { g: "un diagramme circulaire", texte: (p) => `${p.nom} veut montrer la répartition des votes pour l’élection du délégué, en parts de l’ensemble des votes` },
+  { g: "un diagramme circulaire", texte: (p) => `${p.nom} veut montrer la répartition de sa journée entre sommeil, école et loisirs` },
+  { g: "un diagramme en barres", texte: (p) => `${p.nom} veut comparer le nombre de livres empruntés par chaque classe du collège` },
+  { g: "un diagramme en barres", texte: (p) => `${p.nom} veut comparer le nombre d’inscrits dans les clubs sportifs du collège` },
+  { g: "un diagramme en barres", texte: (p) => `${p.nom} veut comparer les ventes de chaque parfum de glace sur une journée` },
+  { g: "un diagramme en barres", texte: (p) => `${p.nom} veut comparer le nombre de médailles gagnées par quatre pays` },
+];
+
+/** niveau 2 et 3 : le graphique adapté ; niveau 4 : lire un diagramme circulaire (pourcentage d'un secteur). */
+function genChoisirRep(niveau: 2 | 3 | 4) {
+  const p = prenom();
+  if (niveau <= 3) {
+    const b = randomChoice(BESOINS);
+    return {
+      text: `${b.texte(p)}. ${randomChoice(["Quel graphique est le mieux adapté ?", `Quel graphique ${p.nom} doit-${il(p)} choisir ?`, "Quelle représentation convient le mieux ?"])}`,
+      format: "qcm" as const,
+      choices: shuffle([...GRAPHIQUES]),
+      expected: [b.g],
+      comparator: "mcq_exact" as const,
+      explanation: expl(
+        "une évolution dans le temps se montre avec une courbe ; des parts d’un tout avec un diagramme circulaire ; des effectifs à comparer avec des barres.",
+      ) + `\n\nIci : ${b.g}.`,
+    };
+  }
+  const e = randomChoice(ENQUETES);
+  const N = randomChoice([20, 25, 50, 100]);
+  const n = randomChoice([3, 4]);
+  const cats = shuffle(e.cats).slice(0, n);
+  const eff = partage(N, n, 1);
+  const i = randomInt(0, n - 1);
+  return {
+    text: `${p.nom} a interrogé ${e.groupe(p)} sur ${e.quoi} et a tracé ce diagramme circulaire. Quel pourcentage des ${e.qui} a répondu « ${cats[i]} » ?`,
+    format: "short" as const,
+    expected: [`${nb((eff[i] * 100) / N)} %`],
+    comparator: "number_equal" as const,
+    explanation: expl(`effectif total : ${eff.join(" + ")} = ${N}. Pourcentage : ${eff[i]} ÷ ${N} × 100 = ${nb((eff[i] * 100) / N)} %.`),
+    canvas: statGraphCanvas({ graphType: "camembert", data: cats.map((label, k) => ({ label, value: eff[k] })) }),
+  };
+}
+
+/* ─── Moyennes ────────────────────────────────────────────────────────── */
+
+const SERIES_OBJECTIF = SERIES.filter((s) => ["note", "nombre de points", "distance", "nombre de pages"].includes(s.nom));
+
+/** La valeur à ajouter pour atteindre une moyenne. */
+function genValeurManquante(n: number) {
+  const s = randomChoice(SERIES_OBJECTIF);
+  const p = prenom();
+  for (;;) {
+    const xs = Array.from({ length: n }, () => randomInt(s.min, s.max));
+    const M = randomInt(s.min + 2, s.max - 2);
+    const x = M * (n + 1) - sum(xs);
+    // plausible : dans la plage de la série, et pas loin des valeurs déjà obtenues
+    if (x < s.min || x > s.max || x < Math.min(...xs) - 8 || x > Math.max(...xs) + 8) continue;
+    return {
+      text: `${s.intro(p)} : ${listeNb(xs)}. ${p.nom} voudrait une moyenne de ${avecU(M, s.u)} avec une valeur de plus. ${randomChoice(["Quelle doit être cette valeur ?", "Quelle valeur doit-" + il(p) + " obtenir ?"])}`,
+      format: "short" as const,
+      expected: [avecU(x, s.u)],
+      comparator: "number_equal" as const,
+      explanation: expl(
+        `pour une moyenne de ${M} sur ${n + 1} valeurs, la somme doit valoir ${M} × ${n + 1} = ${M * (n + 1)}. Les ${n} valeurs font déjà ${sum(xs)}. Il manque ${M * (n + 1)} − ${sum(xs)} = ${x}.`,
+      ),
+    };
+  }
+}
+
+/** niveau 2 : 3 ou 4 valeurs, moyenne entière ; 3 : 4 ou 5 valeurs, ou un tableau d'effectifs ; 4 : la valeur manquante. */
+function genMoyenne(niveau: 2 | 3 | 4) {
+  if (niveau === 4) return genValeurManquante(randomChoice([3, 4]));
+  const p = prenom();
+  if (niveau === 3 && Math.random() < 0.4) {
+    // moyenne pondérée lue dans un tableau
+    const ctx = randomChoice([
+      { phrase: `${p.nom} a résumé les notes du dernier contrôle de sa classe (sur vingt)`, titre: "Note", vals: [8, 10, 12, 14, 16, 18] },
+      { phrase: `${p.nom} a demandé à ses camarades combien ils ont de frères et sœurs`, titre: "Frères et sœurs", vals: [0, 1, 2, 3] },
+      { phrase: `${p.nom} a relevé le nombre de buts marqués à chaque match de la saison`, titre: "Buts", vals: [0, 1, 2, 3, 4] },
+      { phrase: `${p.nom} a relevé la pointure des joueurs de son équipe`, titre: "Pointure", vals: [36, 37, 38, 39, 40] },
+    ]);
+    const vals = shuffle(ctx.vals).slice(0, randomChoice([3, 4])).sort((a, b) => a - b);
+    const N = vals.length >= 4 ? 20 : randomChoice([10, 20]);
+    const eff = partage(N, vals.length, 1);
+    const m = sum(vals.map((v, k) => v * eff[k])) / N;
+    return {
+      text: `${ctx.phrase} et a rangé les résultats dans ce tableau. ${randomChoice(["Quelle est la moyenne de cette série ?", "Calcule la moyenne de la série."])}`,
+      format: "short" as const,
+      expected: [nb(m)],
+      comparator: "number_equal" as const,
+      explanation: expl(`on multiplie chaque valeur par son effectif : ${vals.map((v, k) => `${v} × ${eff[k]}`).join(" + ")} = ${nb(m * N)} ; on divise par l’effectif total ${N} : ${nb(m)}.`),
+      canvas: {
+        kind: "tableau_donnees" as const,
+        headers: [ctx.titre, ...vals.map(String)],
+        rows: [{ label: "Effectif", values: eff }],
+        display: { compact: true },
+      },
+    };
+  }
+  const s = randomChoice(SERIES);
+  const n = niveau === 2 ? randomChoice([3, 4]) : randomChoice([4, 5]);
+  const xs = tirerValeurs(s, n, niveau === 2);
+  const m = sum(xs) / n;
+  return {
+    text: `${s.intro(p)} : ${listeNb(xs)}. ${randomChoice([
+      "Quelle est la moyenne de cette série ?",
+      "Calcule la moyenne de ces valeurs.",
+      `Aide ${p.nom} à calculer la moyenne.`,
+      "Quelle est la valeur moyenne ?",
+    ])}`,
+    format: "short" as const,
+    expected: [avecU(m, s.u)],
+    comparator: "number_equal" as const,
+    explanation: expl(`on additionne les ${n} valeurs : ${xs.join(" + ")} = ${sum(xs)} ; puis on divise par ${n} : ${sum(xs)} ÷ ${n} = ${nb(m)}.`),
+  };
+}
+
+/* ─── Défis ───────────────────────────────────────────────────────────── */
+
+/** Deux séries, deux prénoms : qui a la plus grande moyenne ? */
+function genComparerMoyennes() {
+  const s = randomChoice(SERIES_OBJECTIF);
+  const [p, q] = deuxPrenoms();
+  const n = 4;
+  const xa = tirerValeurs(s, n, true);
+  let xb = tirerValeurs(s, n, true);
+  if (Math.random() < 0.2) xb = shuffle(xa.map((x, k) => (k === 0 ? x + 1 : k === 1 ? x - 1 : x)));
+  const ma = sum(xa) / n;
+  const mb = sum(xb) / n;
+  const pareil = "c’est pareil pour les deux";
+  const correct = ma === mb ? pareil : ma > mb ? p.nom : q.nom;
+  const QUOI: Record<string, string> = {
+    note: "les notes en maths (sur vingt)",
+    "nombre de points": "les points marqués aux derniers matchs de basket",
+    distance: "les distances parcourues à vélo chaque jour, en kilomètres",
+    "nombre de pages": "le nombre de pages lues chaque soir",
+  };
+  return {
+    text: `Pour deux élèves, on compare ${QUOI[s.nom]}. ${p.nom} : ${listeNb(xa)}. ${q.nom} : ${listeNb(xb)}. Qui a la plus grande moyenne ?`,
+    format: "qcm" as const,
+    choices: [p.nom, q.nom, pareil],
+    expected: [correct],
+    comparator: "mcq_exact" as const,
+    explanation: expl(`${p.nom} : ${sum(xa)} ÷ ${n} = ${nb(ma)} ; ${q.nom} : ${sum(xb)} ÷ ${n} = ${nb(mb)}.`),
+  };
+}
+
+/** Moyenne pondérée lue sur un diagramme en bâtons (valeurs en abscisse). */
+function genMoyenneDiagramme() {
+  const p = prenom();
+  const ctx = randomChoice([
+    { phrase: `Le diagramme donne le nombre de buts marqués par l’équipe ${de(p.nom)} à chaque match de la saison`, vals: [0, 1, 2, 3, 4] },
+    { phrase: `Le diagramme donne le nombre de frères et sœurs des élèves de la classe ${de(p.nom)}`, vals: [0, 1, 2, 3] },
+    { phrase: `Le diagramme donne les notes obtenues par la classe ${de(p.nom)} au dernier contrôle (sur vingt)`, vals: [8, 10, 12, 14, 16] },
+    { phrase: `Le diagramme donne le nombre de livres lus cet été par les élèves du club lecture ${de(p.nom)}`, vals: [1, 2, 3, 4, 5] },
+  ]);
+  const vals = ctx.vals.slice(0, randomChoice([3, 4, 5].filter((k) => k <= ctx.vals.length)));
+  // ⚠️ 5 effectifs distincts font au moins 15 : avec 10, `partage` tournait sans fin.
+  const N = vals.length >= 4 ? 20 : randomChoice([10, 20]);
+  const eff = partage(N, vals.length, 1);
+  const m = sum(vals.map((v, k) => v * eff[k])) / N;
+  return {
+    text: `${ctx.phrase}. En bas, on lit la valeur ; la hauteur donne l’effectif. Quelle est la moyenne de cette série ?`,
+    format: "short" as const,
+    expected: [nb(m)],
+    comparator: "number_equal" as const,
+    explanation: expl(`effectif total : ${N}. Somme : ${vals.map((v, k) => `${v} × ${eff[k]}`).join(" + ")} = ${nb(m * N)}. Moyenne : ${nb(m * N)} ÷ ${N} = ${nb(m)}.`),
+    canvas: statGraphCanvas({ graphType: "batons", data: vals.map((v, k) => ({ label: String(v), value: eff[k] })) }),
+  };
+}
+
+/** La moyenne de n valeurs est connue ; une valeur s'ajoute : nouvelle moyenne. */
+function genNouvelleMoyenne() {
+  const p = prenom();
+  for (;;) {
+    const n = randomChoice([3, 4, 5]);
+    const ctx = randomChoice([
+      { M: [10, 11, 12, 13, 14], V: [8, 20], f: (M: number, V: number) => `${p.nom} a eu ${n} notes ce trimestre, et sa moyenne est de ${M} (sur vingt). Au contrôle suivant, ${il(p)} obtient ${V}. Quelle est sa nouvelle moyenne ?`, u: "" },
+      { M: [8, 10, 12, 15], V: [2, 25], f: (M: number, V: number) => `Sur ${n} matchs, ${p.nom} a marqué en moyenne ${M} points. Au match suivant, ${il(p)} marque ${V} points. Quelle est sa nouvelle moyenne ?`, u: "" },
+      { M: [10, 15, 20, 25], V: [5, 40], f: (M: number, V: number) => `Sur ${n} soirs, ${p.nom} a lu en moyenne ${M} pages. Le soir suivant, ${il(p)} lit ${V} pages. Quelle est sa nouvelle moyenne ?`, u: "" },
+      { M: [6, 8, 10, 12], V: [3, 20], f: (M: number, V: number) => `Sur ${n} jours, ${p.nom} a parcouru en moyenne ${M} km à vélo. Le jour suivant, ${il(p)} parcourt ${V} km. Quelle est sa nouvelle moyenne ?`, u: "km" },
+    ]);
+    const M = randomChoice(ctx.M);
+    const V = randomInt(ctx.V[0], ctx.V[1]);
+    const m = (n * M + V) / (n + 1);
+    if (V === M || Math.abs(m * 100 - Math.round(m * 100)) > 1e-9) continue;
+    return {
+      text: ctx.f(M, V),
+      format: "short" as const,
+      expected: [avecU(m, ctx.u)],
+      comparator: "number_equal" as const,
+      explanation: expl(`la somme des ${n} premières valeurs est ${n} × ${M} = ${n * M}. Avec la nouvelle : ${n * M} + ${V} = ${n * M + V}, pour ${n + 1} valeurs : ${n * M + V} ÷ ${n + 1} = ${nb(m)}.`),
+    };
+  }
 }
 
 export const statistiquesBank: TutorBankItemV4[] = [
@@ -173,25 +844,23 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_lire_tableau",
     difficulty: 2,
     theme: "neutral",
-    hint: "Additionne tous les effectifs.",
+    hint: "Lis les cases du tableau, puis calcule.",
     tags: ["stat_statistique", "tableau", "template"],
-    generate: () => {
-      const a = randomInt(4, 12);
-      const b = randomInt(4, 12);
-      const c = randomInt(4, 12);
-      const total = a + b + c;
-
-      return {
-        text: `Dans une enquête : sport ${a} élèves, musique ${b} élèves, dessin ${c} élèves. Quel est l’effectif total ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
-          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
-          (`On additionne les effectifs : ${a} + ${b} + ${c} = ${total}.`) +
-          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-      };
-    },
+    // 09/10/2026 : 15 enquêtes × tournures × prénoms, un vrai tableau (voir genLireTableau).
+    generate: () => genLireTableau(2),
+  },
+  {
+    kind: "template",
+    id: "stat_lire_tableau_tpl_e1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_lire_tableau",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Cherche la colonne de la réponse demandée.",
+    tags: ["stat_statistique", "tableau", "template"],
+    generate: () => genLireTableau(1),
   },
 
   /* =========================
@@ -266,31 +935,11 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_lire_graphique",
     difficulty: 2,
     theme: "neutral",
-    hint: "Repère la plus grande valeur.",
+    hint: "Compare la hauteur des barres.",
     tags: ["stat_statistique", "graphique", "canvas", "template"],
-    generate: () => {
-      const labels = ["A", "B", "C", "D"];
-      const values = shuffle([randomInt(4, 7), randomInt(8, 10), randomInt(11, 14), randomInt(15, 18)]);
-      const max = Math.max(...values);
-      const index = values.indexOf(max);
-
-      return {
-        text: "D’après le graphique, quelle catégorie a le plus grand effectif ?",
-        format: "qcm",
-        choices: labels,
-        expected: [labels[index]],
-        comparator: "mcq_exact",
-        explanation: "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
-          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
-          (`La plus grande valeur est ${max}. Elle correspond à la catégorie ${labels[index]}.`) +
-          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-        canvas: statGraphCanvas({
-          graphType: "barres",
-          data: labels.map((label, i) => ({ label, value: values[i] })),
-          highlightIndex: index,
-        }),
-      };
-    },
+    // 09/10/2026 : enquêtes × tournures × prénoms ; la barre de la réponse n'est
+    // plus surlignée (elle donnait la réponse).
+    generate: () => genLireGraphique(2),
   },
 
   /* =========================
@@ -350,22 +999,21 @@ export const statistiquesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Fréquence = effectif ÷ total.",
     tags: ["stat_statistique", "frequence", "template"],
-    generate: () => {
-      const total = randomChoice([20, 25, 30, 40, 50]);
-      const effectif = randomChoice([5, 10, 15, 20]);
-      const freq = effectif / total;
-
-      return {
-        text: `Dans un groupe de ${total} élèves, ${effectif} ont choisi l’activité théâtre. Quelle est la fréquence ?`,
-        format: "short",
-        expected: [formatNumber(freq), String(freq).replace(".", ",")],
-        comparator: "number_equal",
-        explanation: "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
-          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
-          (`Fréquence = ${effectif} ÷ ${total} = ${formatNumber(freq)}.`) +
-          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-      };
-    },
+    // 09/10/2026 : enquêtes × tournures × prénoms ; en pourcentage, ou l'effectif retrouvé.
+    generate: () => genFrequence(3),
+  },
+  {
+    kind: "template",
+    id: "stat_effectif_frequence_tpl_e2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_effectif_frequence",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Fréquence = effectif ÷ effectif total.",
+    tags: ["stat_statistique", "frequence", "template"],
+    generate: () => genFrequence(2),
   },
   {
     kind: "fixed",
@@ -425,32 +1073,23 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_representer",
     difficulty: 3,
     theme: "neutral",
-    hint: "Regarde si les hauteurs correspondent bien aux effectifs.",
-    tags: ["stat_statistique", "representation", "canvas", "template"],
-    generate: () => {
-      const data = [
-        { label: "A", value: randomInt(4, 10) },
-        { label: "B", value: randomInt(4, 10) },
-        { label: "C", value: randomInt(4, 10) },
-      ];
-
-      return {
-        text: "Le graphique représente trois effectifs. Quel est l’effectif total représenté ?",
-        format: "short",
-        expected: [String(sum(data.map((d) => d.value)))],
-        comparator: "number_equal",
-        explanation: "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
-          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
-          (`On additionne les effectifs : ${data
-          .map((d) => d.value)
-          .join(" + ")} = ${sum(data.map((d) => d.value))}.`) +
-          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-        canvas: statGraphCanvas({
-          graphType: "batons",
-          data,
-        }),
-      };
-    },
+    hint: "Le disque entier, 360°, représente l’effectif total.",
+    tags: ["stat_statistique", "representation", "template"],
+    // 09/10/2026 : l'angle d'un secteur circulaire (ou l'effectif à partir de l'angle).
+    generate: () => genRepresenter(3),
+  },
+  {
+    kind: "template",
+    id: "stat_representer_tpl_e2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_representer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Divise l’effectif par le nombre de personnes que représente 1 cm.",
+    tags: ["stat_statistique", "representation", "template"],
+    generate: () => genRepresenter(2),
   },
   {
     kind: "fixed",
@@ -569,23 +1208,22 @@ export const statistiquesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Somme des valeurs ÷ nombre de valeurs.",
     tags: ["stat_statistique", "moyenne", "template"],
-    generate: () => {
-      const a = randomChoice([6, 8, 10, 12]);
-      const b = randomChoice([10, 12, 14]);
-      const c = randomChoice([14, 16, 18]);
-      const mean = (a + b + c) / 3;
-
-      return {
-        text: `Calcule la moyenne de ${a} ; ${b} ; ${c}.`,
-        format: "short",
-        expected: [formatNumber(mean)],
-        comparator: "number_equal",
-        explanation: "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
-          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
-          (`Moyenne = (${a} + ${b} + ${c}) ÷ 3 = ${formatNumber(mean)}.`) +
-          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-      };
-    },
+    // 09/10/2026 : 12 séries × tournures × prénoms (avant : « Calcule la moyenne de # ; # ; # »,
+    // et une moyenne arrondie comme 10,67 donnée pour exacte). Voir genMoyenne.
+    generate: () => genMoyenne(3),
+  },
+  {
+    kind: "template",
+    id: "stat_moyenne_tpl_e2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_moyenne",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Additionne toutes les valeurs, puis divise par le nombre de valeurs.",
+    tags: ["stat_statistique", "moyenne", "template"],
+    generate: () => genMoyenne(2),
   },
   {
     kind: "fixed",
@@ -666,36 +1304,25 @@ export const statistiquesBank: TutorBankItemV4[] = [
     notionId: "stat_statistique",
     microId: "stat_defi",
     difficulty: 5,
-    theme: "reunion",
-    hint: "Calcule d’abord le total, puis la fréquence.",
-    tags: ["stat_statistique", "defi", "reunion", "template"],
-    generate: () => {
-      const mangues = randomInt(5, 12);
-      const ananas = randomInt(5, 12);
-      const letchis = randomInt(5, 12);
-      const total = mangues + ananas + letchis;
-      const freq = mangues / total;
-
-      return {
-        text: `Au marché de Saint-Pierre, on vend ${mangues} kg de mangues, ${ananas} kg d’ananas et ${letchis} kg de letchis. Quelle est la fréquence des mangues ?`,
-        format: "short",
-        expected: [formatNumber(freq), String(freq).replace(".", ",")],
-        comparator: "number_equal",
-        explanation: "Définition : les statistiques servent à organiser et résumer une série de données.\n\n" +
-          "Méthode : on lit le tableau ou le graphique, puis on calcule l’indicateur demandé.\n\nCalcul : " +
-          (`Total = ${mangues} + ${ananas} + ${letchis} = ${total}. Fréquence des mangues = ${mangues} ÷ ${total} = ${formatNumber(freq)}.`) +
-          "\n\nConclusion : l’indicateur obtenu résume correctement les données.",
-        canvas: statGraphCanvas({
-          graphType: "barres",
-          data: [
-            { label: "Mangues", value: mangues },
-            { label: "Ananas", value: ananas },
-            { label: "Letchis", value: letchis },
-          ],
-          highlightIndex: 0,
-        }),
-      };
-    },
+    theme: "neutral",
+    hint: "La somme doit valoir la moyenne voulue × le nombre de valeurs.",
+    tags: ["stat_statistique", "defi", "template"],
+    // 09/10/2026 : la valeur manquante pour atteindre une moyenne (avant : une
+    // fréquence arrondie, 0,33 pour 7 ÷ 21, donnée pour exacte).
+    generate: () => genValeurManquante(randomChoice([4, 5])),
+  },
+  {
+    kind: "template",
+    id: "stat_defi_tpl_e4",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Calcule la moyenne de chacun, puis compare.",
+    tags: ["stat_statistique", "defi", "template"],
+    generate: () => genComparerMoyennes(),
   },
 
   /* =========================
@@ -811,29 +1438,21 @@ export const statistiquesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Compte combien de fois la valeur demandée apparaît.",
     tags: ["stat_statistique", "organiser", "template"],
-    generate: () => {
-      const fruits = ["pomme", "banane", "kiwi"];
-      const cible = randomChoice(fruits);
-      const liste: string[] = [];
-      const counts: Record<string, number> = { pomme: 0, banane: 0, kiwi: 0 };
-      for (let i = 0; i < 8; i++) {
-        const f = randomChoice(fruits);
-        liste.push(f);
-        counts[f]++;
-      }
-      // garantir au moins une occurrence de la cible
-      if (counts[cible] === 0) {
-        liste[0] = cible;
-        counts[cible] = 1;
-      }
-      return {
-        text: `On relève les fruits choisis : ${liste.join(", ")}. Quel est l’effectif de « ${cible} » ?`,
-        format: "short",
-        expected: [String(counts[cible])],
-        comparator: "number_equal",
-        explanation: expl(`On compte les « ${cible} » dans la liste : effectif = ${counts[cible]}.`),
-      };
-    },
+    // 09/10/2026 : 15 enquêtes × tournures × prénoms (voir genOrganiser).
+    generate: () => genOrganiser(2),
+  },
+  {
+    kind: "template",
+    id: "stat_donnee_organiser_tpl_e1",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_donnee_organiser",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Compte la réponse demandée, une par une.",
+    tags: ["stat_statistique", "organiser", "template"],
+    generate: () => genOrganiser(1),
   },
   {
     kind: "template",
@@ -844,21 +1463,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_donnee_organiser",
     difficulty: 3,
     theme: "neutral",
-    hint: "Le total est la somme des effectifs.",
-    tags: ["stat_statistique", "organiser", "template", "total"],
-    generate: () => {
-      const a = randomInt(3, 9);
-      const b = randomInt(3, 9);
-      const c = randomInt(3, 9);
-      const total = a + b + c;
-      return {
-        text: `Un tableau d’effectifs indique : chien ${a}, chat ${b}, oiseau ${c}. Quel est l’effectif total ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: expl(`Total = ${a} + ${b} + ${c} = ${total}.`),
-      };
-    },
+    hint: "Compte chaque valeur de la série.",
+    tags: ["stat_statistique", "organiser", "template"],
+    // 09/10/2026 : une série de nombres à dépouiller (effectif, « au moins », la plus fréquente).
+    generate: () => genOrganiser(3),
   },
   {
     kind: "fixed",
@@ -986,18 +1594,8 @@ export const statistiquesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Lis directement la valeur demandée.",
     tags: ["stat_statistique", "tableau", "template"],
-    generate: () => {
-      const cats = ["rouge", "bleu", "vert"];
-      const vals = [randomInt(4, 15), randomInt(4, 15), randomInt(4, 15)];
-      const i = randomInt(0, 2);
-      return {
-        text: `Tableau des couleurs : ${cats.map((c, k) => `${c} ${vals[k]}`).join(", ")}. Quel est l’effectif de « ${cats[i]} » ?`,
-        format: "short",
-        expected: [String(vals[i])],
-        comparator: "number_equal",
-        explanation: expl(`L’effectif de « ${cats[i]} » se lit directement : ${vals[i]}.`),
-      };
-    },
+    // 09/10/2026 : un vrai tableau, enquêtes × tournures × prénoms (voir genLireTableau).
+    generate: () => genLireTableau(randomChoice([1, 2] as const)),
   },
   {
     kind: "template",
@@ -1010,19 +1608,8 @@ export const statistiquesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Total connu moins la somme des autres.",
     tags: ["stat_statistique", "tableau", "template", "manquant"],
-    generate: () => {
-      const a = randomInt(5, 12);
-      const b = randomInt(5, 12);
-      const manquant = randomInt(3, 10);
-      const total = a + b + manquant;
-      return {
-        text: `Tableau : musique ${a}, sport ${b}, dessin ?, total ${total}. Quel est l’effectif du dessin ?`,
-        format: "short",
-        expected: [String(manquant)],
-        comparator: "number_equal",
-        explanation: expl(`${a} + ${b} = ${a + b}. Effectif du dessin = ${total} − ${a + b} = ${manquant}.`),
-      };
-    },
+    // 09/10/2026 : « n'ont pas répondu », case manquante, la plus / moins choisie.
+    generate: () => genLireTableau(3),
   },
 
   /* =========================
@@ -1170,23 +1757,8 @@ export const statistiquesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Lis la hauteur de la barre demandée.",
     tags: ["stat_statistique", "graphique", "canvas", "template"],
-    generate: () => {
-      const labels = ["A", "B", "C", "D"];
-      const values = [randomInt(4, 18), randomInt(4, 18), randomInt(4, 18), randomInt(4, 18)];
-      const i = randomInt(0, 3);
-      return {
-        text: `D’après le graphique, quel est l’effectif de la catégorie ${labels[i]} ?`,
-        format: "short",
-        expected: [String(values[i])],
-        comparator: "number_equal",
-        explanation: expl(`La barre ${labels[i]} atteint la valeur ${values[i]}.`),
-        canvas: statGraphCanvas({
-          graphType: "barres",
-          data: labels.map((label, k) => ({ label, value: values[k] })),
-          highlightIndex: i,
-        }),
-      };
-    },
+    // 09/10/2026 : enquêtes × tournures × prénoms (voir genLireGraphique).
+    generate: () => genLireGraphique(2),
   },
   {
     kind: "template",
@@ -1199,22 +1771,8 @@ export const statistiquesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Additionne les hauteurs.",
     tags: ["stat_statistique", "graphique", "canvas", "template", "total"],
-    generate: () => {
-      const labels = ["A", "B", "C"];
-      const values = [randomInt(4, 12), randomInt(4, 12), randomInt(4, 12)];
-      const total = sum(values);
-      return {
-        text: "D’après le graphique, quel est l’effectif total ?",
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: expl(`On additionne les barres : ${values.join(" + ")} = ${total}.`),
-        canvas: statGraphCanvas({
-          graphType: "batons",
-          data: labels.map((label, k) => ({ label, value: values[k] })),
-        }),
-      };
-    },
+    // 09/10/2026 : total, écart, somme de deux barres (voir genLireGraphique).
+    generate: () => genLireGraphique(3),
   },
 
   /* =========================
@@ -1308,18 +1866,8 @@ export const statistiquesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Fréquence ×100 donne le pourcentage.",
     tags: ["stat_statistique", "frequence", "template", "pourcentage"],
-    generate: () => {
-      const total = randomChoice([20, 25, 50, 100]);
-      const effectif = randomChoice([5, 10, 15, 20]);
-      const pct = (effectif / total) * 100;
-      return {
-        text: `Sur ${total} personnes, ${effectif} préfèrent le thé. Quelle est la fréquence en pourcentage ?`,
-        format: "short",
-        expected: [`${formatNumber(pct)}%`, formatNumber(pct)],
-        comparator: "number_equal",
-        explanation: expl(`${effectif} ÷ ${total} = ${formatNumber(effectif / total)} = ${formatNumber(pct)} %.`),
-      };
-    },
+    // 09/10/2026 : enquêtes × tournures × prénoms (voir genFrequence).
+    generate: () => genFrequence(3),
   },
   {
     kind: "template",
@@ -1332,18 +1880,8 @@ export const statistiquesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Fréquence = effectif ÷ total.",
     tags: ["stat_statistique", "frequence", "template"],
-    generate: () => {
-      const total = randomChoice([8, 10, 16, 20, 25]);
-      const effectif = randomInt(1, total - 1);
-      const freq = effectif / total;
-      return {
-        text: `Une enquête porte sur ${total} réponses, dont ${effectif} « oui ». Quelle est la fréquence des « oui » (écriture décimale) ?`,
-        format: "short",
-        expected: [formatNumber(freq), String(freq).replace(".", ",")],
-        comparator: "number_equal",
-        explanation: expl(`Fréquence = ${effectif} ÷ ${total} = ${formatNumber(freq)}.`),
-      };
-    },
+    // 09/10/2026 : enquêtes × tournures × prénoms ; avant, 3 ÷ 16 = 0,1875 dépassait deux décimales.
+    generate: () => genFrequence(randomChoice([2, 3] as const)),
   },
 
   /* =========================
@@ -1462,27 +2000,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_representer",
     difficulty: 3,
     theme: "neutral",
-    hint: "Repère la barre la plus haute.",
-    tags: ["stat_statistique", "representation", "canvas", "template"],
-    generate: () => {
-      const labels = ["A", "B", "C", "D"];
-      const values = shuffle([randomInt(5, 8), randomInt(9, 12), randomInt(13, 16), randomInt(17, 20)]);
-      const max = Math.max(...values);
-      const i = values.indexOf(max);
-      return {
-        text: "Sur ce diagramme, quelle catégorie faut-il représenter par la barre la plus haute ?",
-        format: "qcm",
-        choices: labels,
-        expected: [labels[i]],
-        comparator: "mcq_exact",
-        explanation: expl(`Le plus grand effectif est ${max} : la barre la plus haute est celle de ${labels[i]}.`),
-        canvas: statGraphCanvas({
-          graphType: "barres",
-          data: labels.map((label, k) => ({ label, value: values[k] })),
-          highlightIndex: i,
-        }),
-      };
-    },
+    hint: "Le disque entier, 360°, représente l’effectif total.",
+    tags: ["stat_statistique", "representation", "template"],
+    // 09/10/2026 : angle d'un secteur circulaire (avant : la barre de la réponse surlignée).
+    generate: () => genRepresenter(3),
   },
   {
     kind: "template",
@@ -1493,19 +2014,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_representer",
     difficulty: 3,
     theme: "neutral",
-    hint: "Multiplie le nombre de carreaux par l’échelle.",
+    hint: "Regarde ce que représente 1 cm, ou 1 degré du disque.",
     tags: ["stat_statistique", "representation", "template", "echelle"],
-    generate: () => {
-      const echelle = randomChoice([2, 3, 5]);
-      const carreaux = randomInt(3, 8);
-      return {
-        text: `Sur un diagramme, 1 carreau représente ${echelle} élèves. Une barre mesure ${carreaux} carreaux. Combien d’élèves représente-t-elle ?`,
-        format: "short",
-        expected: [String(echelle * carreaux)],
-        comparator: "number_equal",
-        explanation: expl(`${carreaux} carreaux × ${echelle} = ${echelle * carreaux} élèves.`),
-      };
-    },
+    // 09/10/2026 : hauteur d'une barre ou angle d'un secteur, en situation.
+    generate: () => genRepresenter(randomChoice([2, 3] as const)),
   },
 
   /* =========================
@@ -1776,19 +2288,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_moyenne",
     difficulty: 3,
     theme: "neutral",
-    hint: "Somme ÷ 4.",
+    hint: "Somme des valeurs ÷ nombre de valeurs (ou ÷ effectif total dans un tableau).",
     tags: ["stat_statistique", "moyenne", "template"],
-    generate: () => {
-      const vals = [randomChoice([8, 10, 12]), randomChoice([10, 12, 14]), randomChoice([12, 14, 16]), randomChoice([14, 16, 18])];
-      const mean = sum(vals) / 4;
-      return {
-        text: `Calcule la moyenne de ${vals.join(" ; ")}.`,
-        format: "short",
-        expected: [formatNumber(mean), String(mean).replace(".", ",")],
-        comparator: "number_equal",
-        explanation: expl(`Moyenne = (${vals.join(" + ")}) ÷ 4 = ${sum(vals)} ÷ 4 = ${formatNumber(mean)}.`),
-      };
-    },
+    // 09/10/2026 : séries en situation, ou moyenne pondérée lue dans un tableau.
+    generate: () => genMoyenne(3),
   },
   {
     kind: "template",
@@ -1799,21 +2302,10 @@ export const statistiquesBank: TutorBankItemV4[] = [
     microId: "stat_moyenne",
     difficulty: 4,
     theme: "neutral",
-    hint: "Additionne toutes les notes puis divise par leur nombre.",
+    hint: "La somme doit valoir la moyenne voulue × le nombre de valeurs.",
     tags: ["stat_statistique", "moyenne", "template"],
-    generate: () => {
-      const n = randomChoice([2, 5]);
-      const base = randomChoice([10, 12, 14]);
-      const vals = Array.from({ length: n }, () => base + randomInt(-2, 2) * 2);
-      const mean = sum(vals) / n;
-      return {
-        text: `Un élève a obtenu les notes : ${vals.join(" ; ")}. Quelle est sa moyenne ?`,
-        format: "short",
-        expected: [formatNumber(mean), String(mean).replace(".", ",")],
-        comparator: "number_equal",
-        explanation: expl(`Somme = ${vals.join(" + ")} = ${sum(vals)}. Moyenne = ${sum(vals)} ÷ ${n} = ${formatNumber(mean)}.`),
-      };
-    },
+    // 09/10/2026 : la valeur qui manque pour atteindre une moyenne (voir genValeurManquante).
+    generate: () => genMoyenne(4),
   },
 
   /* =========================
@@ -1898,24 +2390,12 @@ export const statistiquesBank: TutorBankItemV4[] = [
     notionId: "stat_statistique",
     microId: "stat_defi",
     difficulty: 5,
-    theme: "reunion",
-    hint: "Additionne, puis divise par le nombre de jours.",
-    tags: ["stat_statistique", "defi", "reunion", "template"],
-    generate: () => {
-      const temps = [randomInt(26, 32), randomInt(26, 32), randomInt(26, 32)];
-      const mean = sum(temps) / 3;
-      return {
-        text: `À Saint-Denis, on relève les températures (°C) sur 3 jours : ${temps.join(" ; ")}. Quelle est la température moyenne ?`,
-        format: "short",
-        expected: [formatNumber(mean), String(mean).replace(".", ",")],
-        comparator: "number_equal",
-        explanation: expl(`Moyenne = (${temps.join(" + ")}) ÷ 3 = ${sum(temps)} ÷ 3 = ${formatNumber(mean)} °C.`),
-        canvas: statGraphCanvas({
-          graphType: "batons",
-          data: temps.map((value, k) => ({ label: `J${k + 1}`, value })),
-        }),
-      };
-    },
+    theme: "neutral",
+    hint: "Multiplie chaque valeur par son effectif, additionne, puis divise par l’effectif total.",
+    tags: ["stat_statistique", "defi", "template"],
+    // 09/10/2026 : moyenne pondérée lue sur un diagramme en bâtons (avant : une
+    // moyenne de trois températures, souvent arrondie et donnée pour exacte).
+    generate: () => genMoyenneDiagramme(),
   },
   {
     kind: "fixed",
@@ -1943,21 +2423,11 @@ export const statistiquesBank: TutorBankItemV4[] = [
     notionId: "stat_statistique",
     microId: "stat_defi",
     difficulty: 5,
-    theme: "reunion",
-    hint: "Fréquence ×100 = pourcentage.",
-    tags: ["stat_statistique", "defi", "reunion", "template", "pourcentage"],
-    generate: () => {
-      const oui = randomChoice([10, 15, 20, 25]);
-      const total = randomChoice([50, 100]);
-      const pct = (oui / total) * 100;
-      return {
-        text: `Un sondage à Saint-Pierre recueille ${total} réponses, dont ${oui} « pour » le projet. Quel pourcentage représente les « pour » ?`,
-        format: "short",
-        expected: [`${formatNumber(pct)}%`, formatNumber(pct)],
-        comparator: "number_equal",
-        explanation: expl(`${oui} ÷ ${total} = ${formatNumber(oui / total)} = ${formatNumber(pct)} %.`),
-      };
-    },
+    theme: "neutral",
+    hint: "Retrouve d’abord la somme des premières valeurs : moyenne × nombre de valeurs.",
+    tags: ["stat_statistique", "defi", "template"],
+    // 09/10/2026 : la nouvelle moyenne après une valeur de plus.
+    generate: () => genNouvelleMoyenne(),
   },
 
   /* ===== STAT_REPRESENTATION_CHOISIR =====
@@ -1975,48 +2445,21 @@ export const statistiquesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Des parts d’un tout : le camembert. Une comparaison : les barres. Une évolution : la ligne.",
     tags: ["stat_statistique", "representation", "template"],
-    generate: () => {
-      const cas = randomChoice([
-        {
-          situation: "la part de chaque type de déchet dans une poubelle de la classe",
-          bonne: "un diagramme circulaire",
-          pourquoi: "on répartit un tout en parts : le disque entier représente le total, chaque secteur une part.",
-        },
-        {
-          situation: "le nombre de licenciés dans cinq clubs sportifs de Saint-Denis",
-          bonne: "un diagramme en barres",
-          pourquoi: "on compare des quantités indépendantes : la hauteur des barres se compare d’un coup d’œil.",
-        },
-        {
-          situation: "la température relevée chaque jour pendant deux semaines",
-          bonne: "un graphique en ligne",
-          pourquoi: "on suit une évolution dans le temps : la ligne montre les hausses et les baisses.",
-        },
-        {
-          situation: "la répartition du budget d’une famille entre logement, nourriture et transport",
-          bonne: "un diagramme circulaire",
-          pourquoi: "les trois postes forment ensemble la totalité du budget : c’est un partage d’un tout.",
-        },
-        {
-          situation: "la hauteur d’un plant de canne mesurée chaque semaine",
-          bonne: "un graphique en ligne",
-          pourquoi: "la mesure évolue semaine après semaine : la ligne rend la progression visible.",
-        },
-      ]);
-      return {
-        text: `On veut représenter ${cas.situation}. Quelle représentation est la plus adaptée ?`,
-        format: "qcm",
-        choices: makeChoices(cas.bonne, [
-          "un diagramme circulaire",
-          "un diagramme en barres",
-          "un graphique en ligne",
-          "un tableau à double entrée",
-        ]),
-        expected: [cas.bonne],
-        comparator: "mcq_exact",
-        explanation: expl(`On choisit ${cas.bonne} : ${cas.pourquoi}`),
-      };
-    },
+    // 09/10/2026 : 12 besoins × tournures × prénoms (voir genChoisirRep).
+    generate: () => genChoisirRep(3),
+  },
+  {
+    kind: "template",
+    id: "stat_representation_choisir_tpl_e2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "stat_statistique",
+    microId: "stat_representation_choisir",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Des parts d’un tout : le diagramme circulaire. Une comparaison : les barres. Une évolution : la courbe.",
+    tags: ["stat_statistique", "representation", "template"],
+    generate: () => genChoisirRep(2),
   },
   {
     kind: "template",
@@ -2031,41 +2474,7 @@ export const statistiquesBank: TutorBankItemV4[] = [
     tags: ["stat_statistique", "representation", "qcm", "template"],
     // 08/10/2026 : précise et simple (Frédéric). Avant : « Quelle représentation choisis-tu, et pourquoi ? »
     // corrigé par un mot-clé. Désormais : QCM à trois graphiques, les mêmes trois situations.
-    generate: () => {
-      const cas = randomChoice([
-        {
-          // Frédéric (08/10) : « l'emploi du temps » se défendait aussi en barres.
-          situation: "comment une pizza a été partagée entre 4 amis",
-          bonne: "un diagramme circulaire",
-          quoi: "un partage d’un tout",
-          reponse:
-            "les 4 parts forment la pizza entière : un diagramme circulaire montre d’un coup qui a eu la plus grosse part.",
-        },
-        {
-          situation: "le nombre de visiteurs d’un musée mois par mois sur un an",
-          bonne: "un graphique en ligne",
-          quoi: "une évolution dans le temps",
-          reponse:
-            "les mois se suivent dans l’ordre : un graphique en ligne fait voir la montée en saison et la baisse ensuite.",
-        },
-        {
-          situation: "le nombre d’élèves dans chacune des six classes de 5e",
-          bonne: "un diagramme en barres",
-          quoi: "une comparaison de quantités",
-          reponse:
-            "les six classes n’ont pas d’ordre naturel et ne forment pas un tout à partager : un diagramme en barres les compare directement, hauteur contre hauteur.",
-        },
-      ]);
-      return {
-        text: `On veut représenter ${cas.situation}. Quel graphique choisir ?`,
-        format: "qcm",
-        choices: shuffle(["un diagramme circulaire", "un graphique en ligne", "un diagramme en barres"]),
-        expected: [cas.bonne],
-        comparator: "mcq_exact",
-        explanation: expl(
-          `Ici, ce qu’il faut faire voir, c’est ${cas.quoi} : ${cas.reponse}`,
-        ),
-      };
-    },
+    // 09/10/2026 : lire un diagramme circulaire (le pourcentage d'un secteur).
+    generate: () => genChoisirRep(4),
   },
 ];
