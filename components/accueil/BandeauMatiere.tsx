@@ -280,27 +280,35 @@ export default function BandeauMatiere({
           </g>
         </g>
 
-        {/* ⭐ LE CLAP DE L'ATELIER VIDÉO (09/10/2026, Frédéric : « si on clique
-            sur le SVG de la page d'accueil, avec un clic : crée ta vidéo »).
-            En face du haut-parleur, dans le ciel de droite, et CLIQUABLE. Dans
-            TOUTES les matières (Frédéric : « cela concerne le français, pour la
-            rédaction ») ; l'atelier ouvre l'exemple de la matière. Sur téléphone
-            le cadrage le coupe : la pastille 🎬 le dit à sa place. */}
-        <a href={`/atelier-video?matiere=${matiere}`} aria-label="Crée ta vidéo : l'atelier vidéo">
-            <g transform="translate(1175 6) scale(0.7)" className="cursor-pointer" opacity="0.95">
-              <rect x="0" y="34" width="112" height="70" rx="8" fill="#ffffff" stroke={p.accent} strokeWidth="3.5" />
-              <g transform="rotate(-14 0 30)">
-                <rect x="0" y="12" width="112" height="22" rx="4" fill="#ffffff" stroke={p.accent} strokeWidth="3.5" />
-                <g fill={p.accent}>
-                  <path d="M14 12 L 30 12 L 20 34 L 4 34 Z" />
-                  <path d="M46 12 L 62 12 L 52 34 L 36 34 Z" />
-                  <path d="M78 12 L 94 12 L 84 34 L 68 34 Z" />
-                </g>
-              </g>
-              <path d="M44 56 L 44 84 L 70 70 Z" fill={p.accent} />
-            </g>
-          </a>
       </svg>
+
+      {/* ⭐ LE CLAP DE L'ATELIER VIDÉO (09/10/2026, Frédéric : « si on clique
+          sur le SVG de la page d'accueil, avec un clic : crée ta vidéo »), dans
+          TOUTES les matières (« cela concerne le français, pour la rédaction ») ;
+          l'atelier ouvre l'exemple de la matière.
+          ⛔ PAS DANS LE GRAND DESSIN : son cadrage (`slice`) rogne les bords et le
+          haut selon la largeur d'écran — le clap y sortait coupé (« on ne le voit
+          pas entièrement »). Ici il est posé dans le coin, toujours entier.
+          Caché sous 1 024 px, où il touchait le titre (mesuré à 640 et 768, titre du français) :
+          la pastille 🎬 le dit. */}
+      <Link
+        href={`/atelier-video?matiere=${matiere}`}
+        aria-label="Crée ta vidéo : l'atelier vidéo"
+        className="absolute right-[3%] top-3 z-10 hidden w-16 opacity-95 transition-transform hover:scale-110 lg:block xl:w-20"
+      >
+        <svg viewBox="-4 -16 122 124" aria-hidden="true" className="h-auto w-full overflow-visible">
+          <rect x="0" y="34" width="112" height="70" rx="8" fill="#ffffff" stroke={p.accent} strokeWidth="3.5" />
+          <g transform="rotate(-14 0 30)">
+            <rect x="0" y="12" width="112" height="22" rx="4" fill="#ffffff" stroke={p.accent} strokeWidth="3.5" />
+            <g fill={p.accent}>
+              <path d="M14 12 L 30 12 L 20 34 L 4 34 Z" />
+              <path d="M46 12 L 62 12 L 52 34 L 36 34 Z" />
+              <path d="M78 12 L 94 12 L 84 34 L 68 34 Z" />
+            </g>
+          </g>
+          <path d="M44 56 L 44 84 L 70 70 Z" fill={p.accent} />
+        </svg>
+      </Link>
 
       {/* ⚠️ LE TEXTE EST EN HTML, PAS DANS LE SVG. Dans le SVG il se serait
           redimensionné avec le dessin — donc minuscule sur téléphone, où la
