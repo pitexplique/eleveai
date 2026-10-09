@@ -8,8 +8,8 @@
 // - le navigateur transcrit en même temps (SpeechRecognition, Chrome / Edge) :
 //   l'élève peut prendre ce qu'il a VRAIMENT dit comme phrase du script, et
 //   la règle « la voix dit, l'écran écrit » se vérifie alors sur sa parole ;
-// - « Garder » range le son dans Supabase ; le code Manim le télécharge à la
-//   place de la voix générée (lib/atelier-video/script.ts, `ma_voix`).
+// - « Garder » range le son dans Supabase ; l'aperçu le joue à la place de la
+//   voix du navigateur.
 // Sans micro, rien ne change : la voix générée reste là.
 // ⛔ Rien ne se lit tout seul : l'écoute se fait au clic.
 
@@ -260,8 +260,8 @@ export default function MaVoix({
     <div className="mt-6 rounded-xl border border-red-100 bg-red-50/40 p-3 sm:p-4">
       <p className="font-bold text-slate-900">🎙 Ta voix (version 2)</p>
       <p className="mt-1 text-sm text-slate-700">
-        Tu as un micro (un téléphone suffit) ? Enregistre chaque phrase avec ta voix : elle remplacera la voix générée
-        dans la vidéo Manim. Le site écrit ce qu&apos;il a entendu : si tu as dit autre chose, tu peux le mettre dans ton
+        Tu as un micro (un téléphone suffit) ? Enregistre chaque phrase avec ta voix : elle remplacera la voix du
+        navigateur dans ta vidéo. Le site écrit ce qu&apos;il a entendu : si tu as dit autre chose, tu peux le mettre dans ton
         script.
       </p>
       {uniques.length === 0 ? (

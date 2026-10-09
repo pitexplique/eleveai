@@ -3,10 +3,13 @@
 // app/atelier-video/AtelierVideoClient.tsx
 //
 // ⭐ 09/10/2026 — L'ATELIER VIDÉO, EN TEST. L'élève écrit son script en
-// français ; l'aperçu l'anime ici, dans le navigateur (gratuit, instantané) ;
-// le bouton « Copier le code Manim » donne le vrai code, à coller dans
-// try.manim.community pour le vrai rendu. Le découpage du script est dans
-// lib/atelier-video/script.ts, partagé par l'aperçu et le code Manim.
+// français ; l'aperçu l'anime ici, dans le navigateur (gratuit, instantané),
+// avec SA voix s'il l'a enregistrée. Le découpage du script est dans
+// lib/atelier-video/script.ts.
+// ⛔ 09/10/2026 — LA PARTIE « 3. Le vrai rendu avec Manim » EST RETIRÉE
+// (Frédéric : « trop long, trop complexe » : copier le code, ouvrir
+// try.manim.community, coller…). `versManim` reste dans la bibliothèque, testé
+// sur Binder, si un rendu Manim revient un jour sous une autre forme.
 //
 // ⛔ Rien ne se lance tout seul : l'aperçu et la voix partent au clic.
 
@@ -20,7 +23,6 @@ import {
   EXEMPLES,
   dureeVoix,
   lireScript,
-  versManim,
   type Contenu,
   type Etape,
   type VoixEleve,
@@ -61,9 +63,39 @@ function voixFrancaise(): SpeechSynthesisVoice | null {
   return voix.find((v) => v.localService) ?? voix[0] ?? null;
 }
 
-/** Dit la phrase si la voix est activée ; sinon attend le temps de la dire. */
-function parler(texte: string, avecVoix: boolean): Promise<void> {
+// Le son de l'élève en cours de lecture, pour que « Arrêter » le coupe aussi.
+let sonEnCours: HTMLAudioElement | null = null;
+
+function couperLaVoix() {
+  if (typeof window !== "undefined" && "speechSynthesis" in window) window.speechSynthesis.cancel();
+  sonEnCours?.pause();
+  sonEnCours = null;
+}
+
+/**
+ * Dit la phrase : avec la voix ENREGISTRÉE de l'élève s'il en a une (version 2),
+ * sinon avec la voix du navigateur si elle est activée, sinon attend le temps
+ * de la dire.
+ */
+function parler(texte: string, avecVoix: boolean, enregistree?: VoixEleve): Promise<void> {
   const duree = dureeVoix(texte) * 1000;
+  if (avecVoix && enregistree && typeof Audio !== "undefined") {
+    return new Promise((resolve) => {
+      const son = new Audio(enregistree.url);
+      sonEnCours = son;
+      let fini = false;
+      const finir = () => {
+        if (!fini) {
+          fini = true;
+          resolve();
+        }
+      };
+      son.onended = finir;
+      son.onerror = finir;
+      setTimeout(finir, enregistree.duree * 1000 + 3000);
+      son.play().catch(finir);
+    });
+  }
   if (!avecVoix || typeof window === "undefined" || !("speechSynthesis" in window)) return attendre(duree);
   return new Promise((resolve) => {
     const u = new SpeechSynthesisUtterance(texte);
@@ -187,10 +219,7 @@ export default function AtelierVideoClient() {
   const [enCours, setEnCours] = useState(false);
   const [ligneActive, setLigneActive] = useState<number | null>(null);
   const [avecVoix, setAvecVoix] = useState(true);
-  const [sousTitres, setSousTitres] = useState(true);
-  const [voixManim, setVoixManim] = useState(true);
   const [voixEleve, setVoixEleve] = useState<Record<string, VoixEleve>>({});
-  const [copie, setCopie] = useState(false);
   const jeton = useRef(0);
   const idSuivant = useRef(1);
 
@@ -215,15 +244,12 @@ export default function AtelierVideoClient() {
   }, [source]);
 
   const script = useMemo(() => lireScript(source), [source]);
-  const code = useMemo(() => versManim(script, { sousTitres, voix: voixManim, voixEleve }),
-    [script, sousTitres, voixManim, voixEleve],
-  );
   const erreurs = script.remarques.filter((r) => r.niveau === "erreur");
   const conseils = script.remarques.filter((r) => r.niveau === "conseil");
 
   function arreter() {
     jeton.current++;
-    if (typeof window !== "undefined" && "speechSynthesis" in window) window.speechSynthesis.cancel();
+    couperLaVoix();
     setEnCours(false);
     setLigneActive(null);
   }
@@ -245,7 +271,7 @@ export default function AtelierVideoClient() {
       if (!vivant()) return;
       setLigneActive(e.ligne);
       if (e.voix) setScene((s) => ({ ...s, sousTitre: e.voix }));
-      const voix = e.voix ? parler(e.voix, avecVoix) : Promise.resolve();
+      const voix = e.voix ? parler(e.voix, avecVoix, voixEleve[e.voix]) : Promise.resolve();
 
       let anim = 900;
       switch (e.type) {
@@ -315,15 +341,7 @@ export default function AtelierVideoClient() {
     }
   }
 
-  async function copierCode() {
-    try {
-      await navigator.clipboard.writeText(code);
-      setCopie(true);
-      setTimeout(() => setCopie(false), 2500);
-    } catch {
-      setCopie(false);
-    }
-  }
+
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-emerald-50 via-sky-50 to-yellow-50 text-slate-950">
@@ -340,8 +358,8 @@ export default function AtelierVideoClient() {
       <p className="text-xs font-bold uppercase tracking-wide text-amber-700">En test</p>
       <h1 className="mt-1 text-2xl font-black text-slate-900 sm:text-3xl">Atelier vidéo : écris ton script, regarde ta vidéo</h1>
       <p className="mt-2 max-w-3xl text-slate-700">
-        Une ligne = un plan. Tu écris ce qui apparaît à l&apos;écran et ce que dit la voix. L&apos;aperçu se joue ici ; le
-        vrai rendu se fait avec <strong>Manim</strong>, le logiciel des vidéos de maths, gratuitement.
+        Une ligne = un plan. Tu écris ce qui apparaît à l&apos;écran et ce que dit la voix, puis tu regardes ta vidéo.
+        Connecté, tu peux l&apos;enregistrer et y mettre ta propre voix.
       </p>
 
       <div className="mt-4 flex flex-wrap gap-2">
@@ -440,57 +458,6 @@ export default function AtelierVideoClient() {
         </section>
       </div>
 
-      <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:p-6">
-        <h2 className="text-lg font-black text-slate-900">3. Le vrai rendu avec Manim</h2>
-        <ol className="mt-3 list-decimal space-y-2 pl-5 text-slate-700">
-          <li>
-            <button
-              type="button"
-              onClick={copierCode}
-              disabled={erreurs.length > 0}
-              className="rounded-lg bg-emerald-600 px-3 py-1.5 font-bold text-white hover:bg-emerald-700 disabled:opacity-40"
-            >
-              {copie ? "✓ Code copié" : "Copier le code Manim"}
-            </button>
-            {erreurs.length > 0 && <span className="ml-2 text-sm text-red-700">Corrige d&apos;abord les lignes en rouge.</span>}
-            <label className="mt-2 flex items-center gap-2 text-sm">
-              <input type="checkbox" checked={voixManim} onChange={(e) => setVoixManim(e.target.checked)} />
-              Une voix lit tes phrases « dis : » dans la vidéo (pas besoin de micro)
-            </label>
-            <label className="mt-1 flex items-center gap-2 text-sm">
-              <input type="checkbox" checked={sousTitres} onChange={(e) => setSousTitres(e.target.checked)} />
-              Écrire la voix en sous-titres dans la vidéo
-            </label>
-          </li>
-          <li>
-            Ouvre{" "}
-            <a
-              href="https://try.manim.community"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-bold text-sky-700 underline"
-            >
-              try.manim.community
-            </a>{" "}
-            et attends que la page s&apos;affiche (environ 30 secondes). Pas besoin de compte.
-          </li>
-          <li>
-            Clique dans la <strong>première case grise de code</strong>, sélectionne tout (<kbd>Ctrl</kbd>+<kbd>A</kbd>),
-            colle ton code (<kbd>Ctrl</kbd>+<kbd>V</kbd>), puis appuie sur <kbd>Maj</kbd>+<kbd>Entrée</kbd>.
-          </li>
-          <li>
-            Attends environ 30 secondes (une minute la première fois, le temps d&apos;installer la voix) : ta vidéo
-            apparaît sous la case, avec le son. Pour la garder : clic droit sur la vidéo,
-            « Enregistrer la vidéo sous ». La page ne garde rien quand tu la fermes.
-          </li>
-        </ol>
-        <details className="mt-4">
-          <summary className="cursor-pointer text-sm font-bold text-slate-800">Voir le code Python (pour aller plus loin)</summary>
-          <pre className="mt-2 max-h-96 overflow-auto rounded-xl bg-slate-900 p-3 text-xs leading-5 text-slate-100">
-            {code}
-          </pre>
-        </details>
-      </section>
 
       <MonTravail
         source={source}
