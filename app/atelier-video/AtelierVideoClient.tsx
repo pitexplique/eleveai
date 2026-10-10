@@ -2,7 +2,7 @@
 
 // app/atelier-video/AtelierVideoClient.tsx
 //
-// ⭐ 09/10/2026 — L'ATELIER VIDÉO, EN TEST. L'élève écrit son script en
+// ⭐ 09/10/2026 — L'ATELIER VIDÉO (ouvert et dans le sitemap le 10/10). L'élève écrit son script en
 // français ; l'aperçu l'anime ici, dans le navigateur (gratuit, instantané),
 // avec SA voix s'il l'a enregistrée. Le découpage du script est dans
 // lib/atelier-video/script.ts.
@@ -489,7 +489,6 @@ export default function AtelierVideoClient() {
         .anim-cadre { animation: cadre 0.8s ease-out both; }
       `}</style>
 
-      <p className="text-xs font-bold uppercase tracking-wide text-amber-700">En test</p>
       <h1 className="mt-1 text-2xl font-black text-slate-900 sm:text-3xl">Atelier vidéo : écris ton script, regarde ta vidéo</h1>
       <p className="mt-2 max-w-3xl text-slate-700">
         Une ligne = un plan. Tu écris ce qui apparaît à l&apos;écran et ce que dit la voix, puis tu regardes ta vidéo.

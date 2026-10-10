@@ -130,6 +130,8 @@ const ROUTES: RouteConfig[] = [
   { path: "/automatismes-maths/livret/premiere", priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/automatismes-maths/livret/terminale-spe", priority: 0.8, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   { path: "/eval-pix-ia",       priority: 0.9,  changeFrequency: "weekly", lastMod: LASTMOD_CORE },
+  // 10/10/2026 — l'atelier vidéo : l'élève écrit son script, s'enregistre, télécharge sa vidéo.
+  { path: "/atelier-video",     priority: 0.85, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
 
   // ── KITS DE SURVIE (lycée) ─────────────────────────────────────────────────
   { path: "/guide-de-survie",                priority: 0.9, changeFrequency: "weekly", lastMod: LASTMOD_KIT },
