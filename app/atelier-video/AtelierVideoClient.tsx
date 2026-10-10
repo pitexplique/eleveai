@@ -15,6 +15,7 @@
 
 import "katex/dist/katex.min.css";
 import katex from "katex";
+import fixWebmDuration from "fix-webm-duration";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import {
@@ -27,32 +28,62 @@ import {
   type Etape,
   type VoixEleve,
 } from "@/lib/atelier-video/script";
+import {
+  HAUTEUR,
+  LARGEUR,
+  dessinerScene,
+  type ContenuDessin,
+  type ObjetDessin,
+  type SceneDessin,
+} from "@/lib/atelier-video/dessin";
 import MonTravail from "./MonTravail";
 
 const CLE_STOCKAGE = "atelier-video:script";
 
-type Objet = {
-  id: number;
-  rendu: { kind: "html"; html: string; formule: boolean } | { kind: "droite"; de: number; a: number } | { kind: "billes"; rangees: number; colonnes: number };
-  couleur: string;
-  cadre?: string;
-  grand?: boolean;
-  sortie?: boolean;
-};
+// La scène est la même pour l'aperçu (HTML) et pour la vidéo téléchargée
+// (canvas, lib/atelier-video/dessin.ts) : chaque objet garde l'instant de son
+// apparition, de son cadre, de son agrandissement… d'où se calculent les animations.
+type Objet = ObjetDessin;
+type Scene = SceneDessin;
 
-type Scene = { titre?: string; pile: Objet[]; sousTitre?: string };
+function contenuDe(c: Contenu): ContenuDessin {
+  return c.kind === "texte" ? { kind: "texte", texte: c.texte } : { kind: "formule", latex: c.latex };
+}
 
-function htmlDe(c: Contenu): Objet["rendu"] {
+function htmlDe(c: ContenuDessin) {
   if (c.kind === "texte") {
     const div = typeof document !== "undefined" ? document.createElement("div") : null;
     if (div) div.textContent = c.texte;
-    return { kind: "html", html: div ? div.innerHTML : c.texte, formule: false };
+    return { html: div ? div.innerHTML : c.texte, formule: false };
   }
-  return {
-    kind: "html",
-    html: katex.renderToString(c.latex, { throwOnError: false, displayMode: false }),
-    formule: true,
-  };
+  return { html: katex.renderToString(c.latex, { throwOnError: false, displayMode: false }), formule: true };
+}
+
+const maintenant = () => performance.now();
+
+/** Les formats que le navigateur sait filmer, du meilleur au plus courant. */
+function formatVideo() {
+  if (typeof MediaRecorder === "undefined") return null;
+  return (
+    ["video/webm;codecs=vp9,opus", "video/webm;codecs=vp8,opus", "video/webm", "video/mp4"].find((t) =>
+      MediaRecorder.isTypeSupported(t),
+    ) ?? null
+  );
+}
+
+/** Pour la vidéo téléchargée : la voix enregistrée de l'élève passe par l'audio du film. */
+type Export = { audio: AudioContext; sortie: MediaStreamAudioDestinationNode; tampons: Record<string, AudioBuffer> };
+
+function parlerDansLeFilm(texte: string, exp: Export): Promise<void> {
+  const tampon = exp.tampons[texte];
+  if (!tampon) return attendre(dureeVoix(texte) * 1000);
+  return new Promise((resolve) => {
+    const source = exp.audio.createBufferSource();
+    source.buffer = tampon;
+    source.connect(exp.sortie);
+    source.onended = () => resolve();
+    source.start();
+  });
 }
 
 const attendre = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
@@ -169,7 +200,9 @@ function Ecran({ scene }: { scene: Scene }) {
         </p>
       )}
       <div className="absolute inset-x-0 flex flex-col items-center" style={{ top: "13cqw", gap: "3.5cqw" }}>
-        {scene.pile.map((o) => (
+        {scene.pile.map((o) => {
+          const h = o.rendu.kind === "contenu" ? htmlDe(o.rendu.contenu) : null;
+          return (
           <div
             key={o.id}
             className="relative transition-all duration-500"
@@ -180,18 +213,18 @@ function Ecran({ scene }: { scene: Scene }) {
               zIndex: o.grand ? 2 : 1,
             }}
           >
-            {o.rendu.kind === "html" ? (
+            {h ? (
               <div
-                key={o.rendu.html}
+                key={o.t}
                 className="anim-ecrire whitespace-nowrap"
-                style={{ fontSize: o.rendu.formule ? "4.8cqw" : "2.9cqw" }}
-                dangerouslySetInnerHTML={{ __html: o.rendu.html }}
+                style={{ fontSize: h.formule ? "4.8cqw" : "2.9cqw" }}
+                dangerouslySetInnerHTML={{ __html: h.html }}
               />
             ) : o.rendu.kind === "droite" ? (
               <Droite de={o.rendu.de} a={o.rendu.a} />
-            ) : (
+            ) : o.rendu.kind === "billes" ? (
               <Billes rangees={o.rendu.rangees} colonnes={o.rendu.colonnes} />
-            )}
+            ) : null}
             {o.cadre && (
               <span
                 className="anim-cadre pointer-events-none absolute"
@@ -199,7 +232,8 @@ function Ecran({ scene }: { scene: Scene }) {
               />
             )}
           </div>
-        ))}
+          );
+        })}
       </div>
       {scene.sousTitre && (
         <p
@@ -256,71 +290,79 @@ export default function AtelierVideoClient() {
 
   useEffect(() => arreter, []);
 
-  async function jouer() {
+  // La scène vit aussi dans une ref : le film (canvas) la redessine à chaque
+  // image, sans attendre que React l'ait affichée.
+  const sceneRef = useRef<Scene>({ pile: [] });
+  const maj = (f: (s: Scene) => Scene) => {
+    sceneRef.current = f(sceneRef.current);
+    setScene(sceneRef.current);
+  };
+
+  /**
+   * Joue le script. Sans `exp` : l'aperçu, avec la voix de l'élève ou celle du
+   * navigateur. Avec `exp` : le tournage du film téléchargé, où seule la voix
+   * enregistrée de l'élève passe (la voix du navigateur ne se capture pas).
+   * Renvoie true si le script est allé jusqu'au bout.
+   */
+  async function jouer(exp?: Export): Promise<boolean> {
     arreter();
     const moi = ++jeton.current;
     const vivant = () => moi === jeton.current;
     setEnCours(true);
-    setScene({ pile: [] });
+    maj(() => ({ pile: [] }));
     await attendre(300);
 
     const derniere = (f: (o: Objet) => Objet) =>
-      setScene((s) => ({ ...s, pile: s.pile.map((o, i) => (i === s.pile.length - 1 ? f(o) : o)) }));
+      maj((s) => ({ ...s, pile: s.pile.map((o, i) => (i === s.pile.length - 1 ? f(o) : o)) }));
+    const empiler = (rendu: Objet["rendu"]) =>
+      maj((s) => ({ ...s, pile: [...s.pile, { id: idSuivant.current++, rendu, couleur: "#FFFFFF", t: maintenant() }] }));
 
     for (const e of script.etapes as Etape[]) {
-      if (!vivant()) return;
+      if (!vivant()) return false;
       setLigneActive(e.ligne);
-      if (e.voix) setScene((s) => ({ ...s, sousTitre: e.voix }));
-      const voix = e.voix ? parler(e.voix, avecVoix, voixEleve[e.voix]) : Promise.resolve();
+      if (e.voix) maj((s) => ({ ...s, sousTitre: e.voix }));
+      const voix = !e.voix
+        ? Promise.resolve()
+        : exp
+          ? parlerDansLeFilm(e.voix, exp)
+          : parler(e.voix, avecVoix, voixEleve[e.voix]);
 
       let anim = 900;
       switch (e.type) {
         case "titre":
-          setScene((s) => ({ ...s, titre: e.texte }));
+          maj((s) => ({ ...s, titre: e.texte, tTitre: maintenant() }));
           break;
         case "ecris":
-          setScene((s) => ({
-            ...s,
-            pile: [...s.pile, { id: idSuivant.current++, rendu: htmlDe(e.contenu), couleur: "#FFFFFF" }],
-          }));
+          empiler({ kind: "contenu", contenu: contenuDe(e.contenu) });
           break;
         case "transforme":
-          derniere((o) => ({ ...o, rendu: htmlDe(e.contenu) }));
+          derniere((o) => ({ ...o, rendu: { kind: "contenu", contenu: contenuDe(e.contenu) }, t: maintenant() }));
           break;
         case "entoure":
-          derniere((o) => ({ ...o, cadre: COULEURS[e.couleur] }));
+          derniere((o) => ({ ...o, cadre: COULEURS[e.couleur], tCadre: maintenant() }));
           break;
         case "couleur":
           derniere((o) => ({ ...o, couleur: COULEURS[e.couleur] }));
           break;
         case "agrandis":
-          derniere((o) => ({ ...o, grand: true }));
+          derniere((o) => ({ ...o, grand: true, tGrand: maintenant() }));
           await attendre(600);
-          if (!vivant()) return;
-          derniere((o) => ({ ...o, grand: false }));
+          if (!vivant()) return false;
+          derniere((o) => ({ ...o, grand: false, tGrand: maintenant() }));
           anim = 600;
           break;
         case "efface":
-          setScene((s) => ({ ...s, pile: s.pile.map((o) => ({ ...o, sortie: true })) }));
+          maj((s) => ({ ...s, pile: s.pile.map((o) => ({ ...o, sortie: true, tSortie: maintenant() })) }));
           await attendre(500);
-          if (!vivant()) return;
-          setScene((s) => ({ ...s, pile: [] }));
+          if (!vivant()) return false;
+          maj((s) => ({ ...s, pile: [] }));
           anim = 0;
           break;
         case "droite":
-          setScene((s) => ({
-            ...s,
-            pile: [...s.pile, { id: idSuivant.current++, rendu: { kind: "droite", de: e.de, a: e.a }, couleur: "#FFFFFF" }],
-          }));
+          empiler({ kind: "droite", de: e.de, a: e.a });
           break;
         case "billes":
-          setScene((s) => ({
-            ...s,
-            pile: [
-              ...s.pile,
-              { id: idSuivant.current++, rendu: { kind: "billes", rangees: e.rangees, colonnes: e.colonnes }, couleur: "#FFFFFF" },
-            ],
-          }));
+          empiler({ kind: "billes", rangees: e.rangees, colonnes: e.colonnes });
           anim = 600 + e.rangees * e.colonnes * 40;
           break;
         case "pause":
@@ -331,17 +373,109 @@ export default function AtelierVideoClient() {
           break;
       }
       await Promise.all([attendre(anim), voix]);
-      if (!vivant()) return;
-      if (e.voix) setScene((s) => ({ ...s, sousTitre: undefined }));
+      if (!vivant()) return false;
+      if (e.voix) maj((s) => ({ ...s, sousTitre: undefined }));
     }
     await attendre(800);
-    if (vivant()) {
-      setEnCours(false);
-      setLigneActive(null);
-    }
+    if (!vivant()) return false;
+    setEnCours(false);
+    setLigneActive(null);
+    return true;
   }
 
+  /* ── ⬇ TÉLÉCHARGER MA VIDÉO (10/10/2026) ─────────────────────────────────
+     Le navigateur rejoue le script sur un canvas et le filme lui-même
+     (captureStream + MediaRecorder) : un fichier vidéo, sans autre site, sans
+     rien installer. Le son = la voix ENREGISTRÉE de l'élève ; une phrase sans
+     enregistrement reste en sous-titre (la voix du navigateur ne se filme pas). */
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [tournage, setTournage] = useState<null | "prepare" | "filme" | "fini" | "erreur">(null);
+  const [film, setFilm] = useState<{ url: string; nom: string } | null>(null);
 
+  async function telecharger() {
+    const format = formatVideo();
+    const canvas = canvasRef.current;
+    if (!format || !canvas || typeof canvas.captureStream !== "function") {
+      setTournage("erreur");
+      return;
+    }
+    arreter();
+    setTournage("prepare");
+    let audio: AudioContext | null = null;
+    let boucle = 0;
+    try {
+      // Les polices des formules doivent être prêtes avant la première image.
+      await Promise.all([
+        document.fonts.load("40px KaTeX_Main"),
+        document.fonts.load("italic 40px KaTeX_Math"),
+      ]).catch(() => {});
+      audio = new AudioContext();
+      const sortie = audio.createMediaStreamDestination();
+      // ⛔ Un silence branché tout le tournage : sans lui, Chrome cesse
+      // d'enregistrer le son dès qu'aucune voix ne joue (mesuré le 10/10 : la
+      // piste s'arrêtait à 2,3 s sur 12), et une voix plus loin se décalerait.
+      const silence = audio.createConstantSource();
+      silence.offset.value = 0;
+      silence.connect(sortie);
+      silence.start();
+      // Les voix de l'élève, chargées AVANT de filmer : pas de trou dans le film.
+      const tampons: Record<string, AudioBuffer> = {};
+      for (const [texte, v] of Object.entries(voixEleve)) {
+        try {
+          const brut = await (await fetch(v.url)).arrayBuffer();
+          tampons[texte] = await audio.decodeAudioData(brut);
+        } catch {}
+      }
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) throw new Error("canvas");
+      const image = () => {
+        dessinerScene(ctx, sceneRef.current, maintenant());
+        boucle = requestAnimationFrame(image);
+      };
+      sceneRef.current = { pile: [] };
+      image();
+
+      const flux = canvas.captureStream(30);
+      for (const piste of sortie.stream.getAudioTracks()) flux.addTrack(piste);
+      const morceaux: Blob[] = [];
+      const enregistreur = new MediaRecorder(flux, { mimeType: format, videoBitsPerSecond: 3_000_000 });
+      enregistreur.ondataavailable = (ev) => ev.data.size && morceaux.push(ev.data);
+      const termine = new Promise<void>((r) => (enregistreur.onstop = () => r()));
+      enregistreur.start(1000);
+      const debutFilm = maintenant();
+      setTournage("filme");
+      const auBout = await jouer({ audio, sortie, tampons });
+      enregistreur.stop();
+      await termine;
+      if (!auBout) {
+        setTournage(null);
+        return;
+      }
+      const type = format.split(";")[0];
+      let blob = new Blob(morceaux, { type });
+      // ⛔ Un webm filmé par le navigateur n'écrit pas sa durée : certains
+      // lecteurs n'affichent alors ni la longueur ni la barre (mesuré le 10/10).
+      if (type === "video/webm") {
+        blob = await fixWebmDuration(blob, maintenant() - debutFilm, { logger: false }).catch(() => blob);
+      }
+      const titre = (script.etapes.find((x) => x.type === "titre") as { texte?: string } | undefined)?.texte ?? "ma-video";
+      const nom = `${titre.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]+/g, "-").replace(/^-|-$/g, "").toLowerCase() || "ma-video"}.${type === "video/mp4" ? "mp4" : "webm"}`;
+      if (film) URL.revokeObjectURL(film.url);
+      const url = URL.createObjectURL(blob);
+      setFilm({ url, nom });
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = nom;
+      a.click();
+      setTournage("fini");
+    } catch {
+      setTournage("erreur");
+    } finally {
+      cancelAnimationFrame(boucle);
+      audio?.close().catch(() => {});
+    }
+  }
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-emerald-50 via-sky-50 to-yellow-50 text-slate-950">
@@ -429,7 +563,16 @@ export default function AtelierVideoClient() {
         <section className="min-w-0">
           <p className="text-sm font-bold text-slate-800">2. L&apos;aperçu</p>
           <div className="mt-1">
-            <Ecran scene={scene} />
+            {/* Pendant le tournage, on montre le canvas filmé : c'est la vidéo. */}
+            <div className={tournage === "prepare" || tournage === "filme" ? "hidden" : ""}>
+              <Ecran scene={scene} />
+            </div>
+            <canvas
+              ref={canvasRef}
+              width={LARGEUR}
+              height={HAUTEUR}
+              className={`w-full rounded-xl bg-black shadow-lg ${tournage === "prepare" || tournage === "filme" ? "" : "hidden"}`}
+            />
           </div>
           <div className="mt-3 flex flex-wrap items-center gap-3">
             {enCours ? (
@@ -441,20 +584,55 @@ export default function AtelierVideoClient() {
                 ■ Arrêter
               </button>
             ) : (
-              <button
-                type="button"
-                onClick={jouer}
-                disabled={script.etapes.length === 0}
-                className="rounded-xl bg-sky-600 px-4 py-2 font-bold text-white hover:bg-sky-700 disabled:opacity-40"
-              >
-                ▶ Voir l&apos;aperçu
-              </button>
+              <>
+                <button
+                  type="button"
+                  onClick={() => jouer()}
+                  disabled={script.etapes.length === 0}
+                  className="rounded-xl bg-sky-600 px-4 py-2 font-bold text-white hover:bg-sky-700 disabled:opacity-40"
+                >
+                  ▶ Voir l&apos;aperçu
+                </button>
+                <button
+                  type="button"
+                  onClick={telecharger}
+                  disabled={script.etapes.length === 0 || erreurs.length > 0}
+                  className="rounded-xl bg-emerald-600 px-4 py-2 font-bold text-white hover:bg-emerald-700 disabled:opacity-40"
+                >
+                  ⬇ Télécharger ma vidéo
+                </button>
+              </>
             )}
             <label className="flex items-center gap-2 text-sm text-slate-700">
               <input type="checkbox" checked={avecVoix} onChange={(e) => setAvecVoix(e.target.checked)} />
               Lire la voix
             </label>
           </div>
+          {tournage === "prepare" && <p className="mt-2 text-sm text-slate-600">Préparation de la vidéo…</p>}
+          {tournage === "filme" && (
+            <p className="mt-2 text-sm font-semibold text-emerald-800">
+              🎬 Tournage en cours : la vidéo se joue une fois, puis se télécharge. Reste sur cette page.
+            </p>
+          )}
+          {tournage === "fini" && film && (
+            <p className="mt-2 text-sm text-emerald-800">
+              ✓ Ta vidéo est téléchargée.{" "}
+              <a href={film.url} download={film.nom} className="font-bold underline">
+                La télécharger à nouveau
+              </a>
+            </p>
+          )}
+          {tournage === "erreur" && (
+            <p className="mt-2 text-sm font-semibold text-red-700">
+              Ce navigateur ne sait pas fabriquer la vidéo. Essaie avec Chrome ou Edge.
+            </p>
+          )}
+          {Object.keys(voixEleve).length === 0 && script.etapes.some((x) => x.voix) && (
+            <p className="mt-2 text-xs text-slate-500">
+              Dans la vidéo téléchargée, on entend seulement ta voix enregistrée (partie 3) ; sans elle, les phrases
+              restent écrites en sous-titres.
+            </p>
+          )}
         </section>
       </div>
 

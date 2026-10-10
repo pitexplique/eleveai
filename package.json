@@ -21,6 +21,7 @@
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.47.10",
     "@vercel/analytics": "^1.6.1",
+    "fix-webm-duration": "^1.0.6",
     "katex": "^0.16.11",
     "lucide-react": "^0.561.0",
     "next": "^15.5.7",

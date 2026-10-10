@@ -131,8 +131,16 @@ export async function POST(req: Request) {
       return null;
     }
   };
+  // ⛔ `cacheControl: "0"` : par défaut Supabase garde le fichier une heure en
+  // cache, et la lecture suivante renvoyait l'ANCIEN projet (mesuré le 10/10 :
+  // une voix tout juste enregistrée n'apparaissait pas, et la voix suivante
+  // pouvait l'effacer en réécrivant le projet à partir de la version périmée).
   const ecrireProjet = (p: Projet) =>
-    stock.upload(`${chemin}/projet.json`, JSON.stringify(p), { upsert: true, contentType: "application/json" });
+    stock.upload(`${chemin}/projet.json`, JSON.stringify(p), {
+      upsert: true,
+      contentType: "application/json",
+      cacheControl: "0",
+    });
 
   if (action === "envoyer-voix" || action === "voix-ok") {
     const cle = String(body.cle ?? "");
