@@ -235,9 +235,19 @@ function studentBadgeLabel(star: HiddenStarState) {
   }
 }
 
-function scoreOn20(earned: number, possible: number) {
-  if (possible <= 0) return "—";
-  return ((earned / possible) * 20).toFixed(1);
+/* ⛔ 05/10/2026 — LA NOTE SUR 20 COMPTE LES QUESTIONS, PAS LES ÉTOILES.
+   Elle valait points gagnés / points possibles, et une question vaut 1 à 5
+   points selon ses étoiles. Le coach monte en difficulté quand l'élève réussit :
+   3 justes (1 + 2 + 2 = 5 pts) puis une fausse à 3 étoiles donnaient 5/8,
+   soit 12,5/20 au lieu de 15. Les élèves de Frédéric l'ont vu. La note est
+   donc bonnes réponses / questions ; les points restent affichés à part.
+   ⭐ 09/10/2026 — DEUX COMPTEURS, plus un : le Score /20 (les bonnes réponses)
+   et les Points ⭐ (sans dénominateur : une question ratée n'en retire aucun,
+   une question à 3 étoiles juste en rapporte 3). Écrit à la française :
+   « 12,5/20 », « 15/20 ». */
+function scoreOn20(bonnes: number, questions: number) {
+  if (questions <= 0) return "—";
+  return (Math.round((bonnes / questions) * 200) / 10).toString().replace(".", ",");
 }
 
 function renderCanvas(canvas?: CanvasFigure | null) {
@@ -959,8 +969,9 @@ useEffect(() => {
   const ficheHref = notion ? ficheHrefPourCoach(matiere, classe, notion) : null;
   const ficheAutreClasse = notion ? ficheClasseSource(matiere, classe, notion) : null;
 
+  // Bonnes réponses / questions, voir scoreOn20.
   const scoreSeanceSur20 =
-    possiblePoints > 0 ? ((earnedPoints / possiblePoints) * 20).toFixed(1) : "0.0";
+    nbTentatives > 0 ? scoreOn20(bonnesReponses, nbTentatives) : "0";
 
   // Tailles agrandies en mode « affichage classe » (sinon valeurs normales).
   const boardQuestionClass = classBoard
@@ -1609,8 +1620,8 @@ function handleInputKeyDown(
 
     setSaving(true);
 
-    const scoreSur20 = possiblePoints > 0
-      ? parseFloat(((earnedPoints / possiblePoints) * 20).toFixed(1))
+    const scoreSur20 = nbTentatives > 0
+      ? parseFloat(((bonnesReponses / nbTentatives) * 20).toFixed(1))
       : 0;
 
     // Insert via /api/resultats : identité prise dans le jeton de session.
@@ -1740,6 +1751,7 @@ function handleInputKeyDown(
             ) : null
           }
           score={scoreSeanceSur20}
+          points={earnedPoints}
           elapsedTime={formatDuration(elapsedSeconds)}
           questionsDone={nbTentatives}
           currentStar={recommendedStar}
@@ -1984,8 +1996,9 @@ function handleInputKeyDown(
               <>
                 <h2 className="text-base font-black text-slate-900">Tableau de bord</h2>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-3 gap-3">
                   <HeroStat title="Score" value={`${scoreSeanceSur20}/20`} icon="🎯" />
+                  <HeroStat title="Points" value={`${earnedPoints}`} icon="⭐" />
                   <HeroStat title="Temps" value={formatDuration(elapsedSeconds)} icon="⏱️" />
                 </div>
               </>
@@ -2364,7 +2377,7 @@ function handleInputKeyDown(
               <div className="grid gap-3">
                 <StatLine label="Score" value={`${scoreSeanceSur20}/20`} />
                 <StatLine label="Temps" value={formatDuration(elapsedSeconds)} />
-                <StatLine label="Points" value={`${earnedPoints}/${possiblePoints}`} />
+                <StatLine label="Points" value={`${earnedPoints}`} />
                 <StatLine label="Bonnes réponses" value={`${bonnesReponses}`} />
                 <StatLine label="Questions faites" value={`${nbTentatives}`} />
               </div>
@@ -2425,13 +2438,13 @@ function handleInputKeyDown(
                         <div className="grid grid-cols-3 gap-2 text-[11px] font-semibold text-slate-700">
                           <div className="rounded-xl bg-white/70 px-2 py-1">
                             Score :{" "}
-                            {scoreOn20(score.earnedPoints, score.possiblePoints)}
+                            {scoreOn20(score.success, score.attempts)}
                           </div>
                           <div className="rounded-xl bg-white/70 px-2 py-1">
                             Réussites : {score.success}/{score.attempts}
                           </div>
                           <div className="rounded-xl bg-white/70 px-2 py-1">
-                            Points : {score.earnedPoints}/{score.possiblePoints}
+                            Points : {score.earnedPoints} ⭐
                           </div>
                         </div>
 
@@ -2470,7 +2483,8 @@ function handleInputKeyDown(
 
           <SidebarCard title="Repères">
             <div className="space-y-2 text-sm text-slate-700">
-              <p>• Plus une mission a d’étoiles, plus elle rapporte de points.</p>
+              <p>• Ton score sur 20 compte tes bonnes réponses, quelles que soient les étoiles.</p>
+              <p>• Plus une mission a d’étoiles, plus elle rapporte de points ⭐.</p>
               <p>• Tu peux choisir la mission qui te paraît la plus adaptée.</p>
               <p>• En coaching, un indice peut apparaître pour t’aider.</p>
               <p>• Certaines missions affichent une figure.</p>

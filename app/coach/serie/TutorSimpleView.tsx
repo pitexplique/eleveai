@@ -39,6 +39,9 @@ type TutorSimpleViewProps = {
   wrongAnswerPanel: ReactNode;
   wrongAnswerPanelOpen: boolean;
   score: string;
+  // Points ⭐ gagnés (1 à 5 par question juste selon ses étoiles), à côté
+  // du score /20 qui, lui, ne compte que les bonnes réponses.
+  points: number;
   elapsedTime: string;
   questionsDone: number;
   currentStar: number;
@@ -104,6 +107,7 @@ export default function TutorSimpleView({
   wrongAnswerPanel,
   wrongAnswerPanelOpen,
   score,
+  points,
   elapsedTime,
   questionsDone,
   currentStar,
@@ -566,10 +570,11 @@ export default function TutorSimpleView({
           </section>
 
           {questionsDone > 0 ? (
-            <aside className="grid grid-cols-3 gap-2 lg:block lg:space-y-0">
+            <aside className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:block lg:space-y-0">
               <SimpleStat title="Questions" value={`${questionsDone}`} tone="green" />
               <SimpleStat title="Temps" value={elapsedTime} tone="blue" />
               <SimpleStat title="Score" value={`${score}/20`} tone="orange" />
+              <SimpleStat title="Points ⭐" value={`${points}`} tone="amber" />
             </aside>
           ) : null}
         </div>
@@ -633,12 +638,13 @@ function SimpleStat({
 }: {
   title: string;
   value: string;
-  tone: "green" | "blue" | "orange";
+  tone: "green" | "blue" | "orange" | "amber";
 }) {
   const toneClass = {
     green: "bg-lime-500 text-white",
     blue: "bg-sky-500 text-white",
     orange: "bg-orange-500 text-white",
+    amber: "bg-amber-400 text-slate-900",
   }[tone];
 
   return (
