@@ -495,6 +495,39 @@ export default function AtelierVideoClient() {
         Connecté, tu peux l&apos;enregistrer et y mettre ta propre voix.
       </p>
 
+      {/* ⭐ 10/10/2026 — Frédéric : « affiche les vidéos sur la page atelier
+          vidéo ». Les deux vidéos d'annonce, publiées le jour même. Même lecteur
+          que la page des tables (youtube-nocookie, chargé à la demande).
+          ⛔ Jamais d'autoplay : l'élève appuie lui-même. */}
+      <section aria-label="L'atelier en vidéo" className="mt-5 grid gap-4 lg:grid-cols-[2fr_1fr] lg:items-start">
+        <div className="min-w-0">
+          <p className="mb-1 text-sm font-bold text-slate-800">Comment ça marche, en 2 minutes</p>
+          <div className="aspect-video w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-900">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/2BLBr7db8kw"
+              title="Crée ta vidéo de maths : tu écris en français, elle s'anime toute seule"
+              loading="lazy"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="h-full w-full"
+            />
+          </div>
+        </div>
+        <div className="min-w-0">
+          <p className="mb-1 text-sm font-bold text-slate-800">En 50 secondes</p>
+          <div className="mx-auto aspect-[9/16] w-full max-w-[240px] overflow-hidden rounded-2xl border border-slate-200 bg-slate-900 lg:mx-0">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/HceXG688Jf4"
+              title="Et si c'était toi qui faisais la vidéo de maths ?"
+              loading="lazy"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="h-full w-full"
+            />
+          </div>
+        </div>
+      </section>
+
       <div className="mt-4 flex flex-wrap gap-2">
         <span className="self-center text-sm font-semibold text-slate-600">Exemples :</span>
         {EXEMPLES.map((ex) => (
