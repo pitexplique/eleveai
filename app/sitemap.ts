@@ -764,6 +764,17 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-10-05",
     },
   ],
+  "/fiches-exercices/maths/terminale-spe/continuite-tvi": [
+    {
+      // 11/10/2026 : la première paysage de terminale spé. Pas de fiche de cours
+      // de terminale : la vidéo se rattache à la feuille d'exercices.
+      id: "GWVlbZyiME4",
+      title: "Le théorème des valeurs intermédiaires (TVI) — Maths terminale",
+      description:
+        "Continuité, théorème des valeurs intermédiaires, unicité par la stricte monotonie, encadrer la solution de x³ + x − 1 = 0 et rédiger comme au bac (terminale spé).",
+      ajoutee: "2026-10-11",
+    },
+  ],
   "/fiches-cours/maths/5e/litteral-calcul": [
     {
       // 09/10/2026 : la vidéo PARLÉE du calcul littéral (5e, reprise en 4e).
