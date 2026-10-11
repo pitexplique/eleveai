@@ -775,6 +775,16 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-10-11",
     },
   ],
+  "/fiches-cours/maths/4e/trigo-cosinus": [
+    {
+      // 11/10/2026 : la vidéo PARLÉE du cosinus (4e).
+      id: "MG0rSH1IZlM",
+      title: "Le cosinus d'un angle aigu — Maths 4e",
+      description:
+        "Côté adjacent et hypoténuse, cos = adjacent ÷ hypoténuse, un cosinus toujours entre 0 et 1, calculer une longueur puis un angle avec la touche cos⁻¹ (maths 4e).",
+      ajoutee: "2026-10-11",
+    },
+  ],
   "/fiches-cours/maths/5e/litteral-calcul": [
     {
       // 09/10/2026 : la vidéo PARLÉE du calcul littéral (5e, reprise en 4e).
