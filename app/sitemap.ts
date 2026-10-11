@@ -775,6 +775,16 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-10-11",
     },
   ],
+  "/fiches-cours/maths/3e/trigo-trigonometrie": [
+    {
+      // 11/10/2026 : la vidéo PARLÉE de la trigonométrie (3e), suite du cosinus de 4e.
+      id: "H7Ow0W3NKCM",
+      title: "Trigonométrie : sinus, cosinus, tangente — Maths 3e",
+      description:
+        "Opposé, adjacent, hypoténuse, les trois rapports CAH SOH TOA, choisir le bon selon les côtés en jeu, calculer une longueur et un angle, la hauteur d'un arbre avec la tangente (maths 3e).",
+      ajoutee: "2026-10-11",
+    },
+  ],
   "/fiches-cours/maths/4e/trigo-cosinus": [
     {
       // 11/10/2026 : la vidéo PARLÉE du cosinus (4e).
