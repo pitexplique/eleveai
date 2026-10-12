@@ -764,6 +764,16 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-10-05",
     },
   ],
+  "/fiches-cours/maths/4e/litteral-factorisation": [
+    {
+      // 12/10/2026 : factoriser, le chemin retour du développement (4e, identités en 3e).
+      id: "x2n_wQ9d0AY",
+      title: "Factoriser : le chemin retour du développement — Maths 4e et 3e",
+      description:
+        "Repérer un facteur commun, factoriser 6x + 15 et x² + 4x, vérifier en développant, puis les identités remarquables à l'envers en 3e (4e, 3e).",
+      ajoutee: "2026-10-12",
+    },
+  ],
   "/fiches-exercices/maths/seconde/expressions-litterales-2de": [
     {
       // 12/10/2026 : isoler une lettre dans une formule (2de, 1re, STMG).
