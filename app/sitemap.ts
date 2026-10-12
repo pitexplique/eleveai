@@ -764,6 +764,16 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-10-05",
     },
   ],
+  "/fiches-exercices/maths/seconde/expressions-litterales-2de": [
+    {
+      // 12/10/2026 : isoler une lettre dans une formule (2de, 1re, STMG).
+      id: "j-vrDltO9vA",
+      title: "Une formule = 3 formules : isoler une lettre — Maths 2de, 1re, STMG",
+      description:
+        "d = v × t contient trois formules : isoler une lettre en défaisant les opérations des deux côtés, le piège v = d × t démasqué par les unités, isoler en deux étapes (seconde, 1re, STMG).",
+      ajoutee: "2026-10-12",
+    },
+  ],
   "/fiches-exercices/maths/terminale-spe/continuite-tvi": [
     {
       // 11/10/2026 : la première paysage de terminale spé. Pas de fiche de cours
