@@ -71,6 +71,16 @@ export const notions: NotionSource[] = [
     prerequis: ["derivation_formules"],
     levels: [1, 2, 3],
   },
+  // ⭐ AJOUTEE LE 12/10/2026 (Frederic : « on pourrait le rajouter en premiere
+  // aussi »). Lire une courbe AVANT de deriver : image, antecedents, signes,
+  // variations, equations, inequations. Meme moteur que la seconde.
+  {
+    id: "analyse_graphique_1s",
+    label: "Analyse graphique d'une fonction",
+    boId: "BOPSAN",
+    prerequis: [],
+    levels: [1, 2, 3],
+  },
   {
     id: "variations_fonctions",
     label: "Variations et courbes des fonctions",

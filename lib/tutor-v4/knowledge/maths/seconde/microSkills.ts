@@ -164,6 +164,14 @@ export const microSkills: MicroSkillSource[] = [
   // contenu de la section « Représentation algébrique et graphique ».
   { id: "fonction_domaine", label: "Déterminer le domaine de définition d'une fonction", notionId: "fonction_vocabulaire_2de", prerequis: ["fonction_image_formule"] },
 
+  /* ===================== analyse_graphique_2de (12/10/2026) ===================== */
+  { id: "graph_image", label: "Lire graphiquement l'image d'un nombre", notionId: "analyse_graphique_2de", prerequis: ["fonction_vocabulaire"] },
+  { id: "graph_antecedent", label: "Lire graphiquement les antécédents d'un nombre", notionId: "analyse_graphique_2de", prerequis: ["graph_image"] },
+  { id: "graph_tableau_signes", label: "Dresser le tableau de signes d'une fonction à partir de sa courbe", notionId: "analyse_graphique_2de", prerequis: ["graph_antecedent"] },
+  { id: "graph_tableau_variations", label: "Dresser le tableau de variations d'une fonction à partir de sa courbe", notionId: "analyse_graphique_2de", prerequis: ["graph_image"] },
+  { id: "graph_resoudre_equation", label: "Résoudre graphiquement une équation $f(x) = k$", notionId: "analyse_graphique_2de", prerequis: ["graph_antecedent"] },
+  { id: "graph_resoudre_inequation", label: "Résoudre graphiquement une inéquation ($f(x) < k$, $f(x) > k$…)", notionId: "analyse_graphique_2de", prerequis: ["graph_resoudre_equation"] },
+
   /* ===================== fonction_variations_extremums ===================== */
   { id: "variation_tableau", label: "Lire un tableau de variations", notionId: "fonction_variations_extremums", prerequis: ["fonction_vocabulaire"] },
   { id: "variation_croissance", label: "Décrire croissance et décroissance sur un intervalle", notionId: "fonction_variations_extremums", prerequis: ["variation_tableau", "intervalle_appartenance"] },

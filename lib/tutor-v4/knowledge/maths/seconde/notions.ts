@@ -125,6 +125,18 @@ export const notions: NotionSource[] = [
     prerequis: ["reels_intervalles"],
     levels: [1, 2, 3],
   },
+  // ⭐ AJOUTEE LE 12/10/2026 (Frederic) : tout ce qui se LIT sur une courbe,
+  // reuni dans une notion — image, antecedents, tableau de signes, tableau de
+  // variations, equations et inequations. Les memes gestes vivent aussi, un par
+  // un, dans leurs chapitres ; ici ils se pratiquent ensemble, sur des courbes
+  // tirees au hasard (moteur : questionBank/analyse-graphique-commun.ts).
+  {
+    id: "analyse_graphique_2de",
+    label: "Analyse graphique d'une fonction",
+    boId: "BO2F1",
+    prerequis: ["fonction_vocabulaire_2de"],
+    levels: [1, 2, 3],
+  },
   {
     id: "fonction_variations_extremums",
     label: "Variations et extremums",

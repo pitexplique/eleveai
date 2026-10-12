@@ -5,6 +5,7 @@ import { suitesBank } from "./suites.bank";
 import { secondDegreBank } from "./second-degre.bank";
 import { derivationBank } from "./derivation.bank";
 import { variationsFonctionsBank } from "./variations-fonctions.bank";
+import { analyseGraphiqueBank } from "./analyse-graphique.bank";
 import { exponentielleBank } from "./exponentielle.bank";
 import { trigonometrieBank } from "./trigonometrie.bank";
 import { produitScalaireBank } from "./produit-scalaire.bank";
@@ -20,6 +21,7 @@ export const mathsPremiereSpeQuestionBank: TutorBankItemV4[] = [
   ...secondDegreBank,
   // === ANALYSE ===
   ...derivationBank,
+  ...analyseGraphiqueBank,
   ...variationsFonctionsBank,
   ...exponentielleBank,
   ...trigonometrieBank,

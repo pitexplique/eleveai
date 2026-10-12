@@ -16,6 +16,7 @@ import { geometrieProblemesPlanBank } from "./geometrie-problemes-plan.bank";
 import { fonctionVocabulaireBank } from "./fonction-vocabulaire.bank";
 import { signesExpressionBank } from "./signes-expression.bank";
 import { fonctionVariationsBank } from "./fonction-variations.bank";
+import { analyseGraphiqueBank } from "./analyse-graphique.bank";
 import { fonctionsAffinesBank } from "./fonctions-affines.bank";
 import { fonctionsReferenceBank } from "./fonctions-reference.bank";
 import { informationChiffreeBank } from "./information-chiffree.bank";
@@ -45,6 +46,7 @@ export const mathsSecondeQuestionBank: TutorBankItemV4[] = [
   ...fonctionVocabulaireBank,
   ...signesExpressionBank,
   ...fonctionVariationsBank,
+  ...analyseGraphiqueBank,
   ...fonctionsAffinesBank,
   ...fonctionsReferenceBank,
   // === Domaine STATS & PROBAS — en cours de refonte (1 banque par notion) ===

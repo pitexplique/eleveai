@@ -33,6 +33,8 @@ import { mathsCm2QuestionBank } from "@/lib/tutor-v4/questionBank/cm2/maths/inde
 import { maths5eQuestionBank } from "@/lib/tutor-v4/questionBank/5e/maths/index";
 import { maths6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/maths/index";
 import { francais6eQuestionBank } from "@/lib/tutor-v4/questionBank/6e/francais/index";
+import { mathsSecondeQuestionBank } from "@/lib/tutor-v4/questionBank/seconde/maths/index";
+import { mathsPremiereSpeQuestionBank } from "@/lib/tutor-v4/questionBank/premiere-spe/maths/index";
 
 const BANQUES: Record<string, any[]> = {
   "4e": maths4eQuestionBank,
@@ -44,6 +46,8 @@ const BANQUES: Record<string, any[]> = {
   "5e": maths5eQuestionBank,
   "6e": maths6eQuestionBank,
   "6e-francais": francais6eQuestionBank,
+  seconde: mathsSecondeQuestionBank,
+  "premiere-spe": mathsPremiereSpeQuestionBank,
 };
 const [classe, ...demandees] = process.argv.slice(2);
 const B = BANQUES[classe];

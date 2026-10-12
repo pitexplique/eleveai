@@ -265,6 +265,44 @@ export const microSkills: MicroSkillSource[] = [
     prerequis: ["der_nombre_derive"],
   },
 
+  /* ===================== ANALYSE GRAPHIQUE (12/10/2026) ===================== */
+  {
+    id: "graph1s_image",
+    label: "Lire graphiquement l'image d'un nombre",
+    notionId: "analyse_graphique_1s",
+    prerequis: [],
+  },
+  {
+    id: "graph1s_antecedent",
+    label: "Lire graphiquement les antécédents d'un nombre",
+    notionId: "analyse_graphique_1s",
+    prerequis: ["graph1s_image"],
+  },
+  {
+    id: "graph1s_tableau_signes",
+    label: "Dresser le tableau de signes d'une fonction à partir de sa courbe",
+    notionId: "analyse_graphique_1s",
+    prerequis: ["graph1s_antecedent"],
+  },
+  {
+    id: "graph1s_tableau_variations",
+    label: "Dresser le tableau de variations d'une fonction à partir de sa courbe",
+    notionId: "analyse_graphique_1s",
+    prerequis: ["graph1s_image"],
+  },
+  {
+    id: "graph1s_resoudre_equation",
+    label: "Résoudre graphiquement une équation $f(x) = k$",
+    notionId: "analyse_graphique_1s",
+    prerequis: ["graph1s_antecedent"],
+  },
+  {
+    id: "graph1s_resoudre_inequation",
+    label: "Résoudre graphiquement une inéquation ($f(x) < k$, $f(x) > k$…)",
+    notionId: "analyse_graphique_1s",
+    prerequis: ["graph1s_resoudre_equation"],
+  },
+
   /* ===================== VARIATIONS ET COURBES ===================== */
   {
     id: "var_signe_derivee",
