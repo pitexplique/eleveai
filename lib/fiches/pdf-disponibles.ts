@@ -31,6 +31,7 @@ export const PDF_DISPONIBLES = new Set<string>([
   "algorithmique-et-python-seconde-cours-exercices-corriges.pdf",
   "algorithmique-et-python-terminale-spe-20-exercices-corriges.pdf",
   "algorithmique-variables-boucles-et-programmes-de-calcul-3e-cours-exercices-corriges.pdf",
+  "analyse-graphique-d-une-fonction-seconde-20-exercices-corriges.pdf",
   "analyser-une-phrase-nature-fonction-accords-cm2-cours-exercices-corriges.pdf",
   "angles-5e-20-exercices-corriges.pdf",
   "angles-5e-cours-exercices-corriges.pdf",

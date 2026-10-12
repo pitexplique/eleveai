@@ -774,6 +774,17 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-10-12",
     },
   ],
+  "/fiches-exercices/maths/seconde/analyse-graphique-2de": [
+    {
+      // 12/10/2026 : la paysage de la notion « Analyse graphique » (une nuit au
+      // Piton des Neiges). Pas de fiche de cours dédiée : elle va sur la feuille.
+      id: "YpVjGHxNKZI",
+      title: "Analyse graphique : image, antécédents, tableaux, inéquations — Maths seconde",
+      description:
+        "Lire une image et des antécédents, résoudre graphiquement T(t) = 0 et T(t) < 0, dresser le tableau de signes et le tableau de variations sur la courbe de la température d'une nuit au sommet du Piton des Neiges (seconde).",
+      ajoutee: "2026-10-12",
+    },
+  ],
   "/fiches-exercices/maths/terminale-spe/continuite-tvi": [
     {
       // 11/10/2026 : la première paysage de terminale spé. Pas de fiche de cours

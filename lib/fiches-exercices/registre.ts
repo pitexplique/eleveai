@@ -477,6 +477,14 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Du calcul seul au problème : image, antécédents (deux, un ou aucun), domaine de définition, lire une courbe, résoudre graphiquement, comparer deux courbes. Un plongeon de 10 mètres, des panneaux solaires, la distance de freinage, le CO₂ de l'atmosphère.",
   },
+  // ⭐ 12/10/2026 : la notion « Analyse graphique » (coach + paysage
+  // https://youtu.be/YpVjGHxNKZI), puis sa feuille — Frédéric : « faut générer
+  // la fiche d'exercices ». Tout se lit sur une courbe.
+  "maths/seconde/analyse-graphique-2de": {
+    titre: "Analyse graphique d'une fonction : 20 exercices corrigés",
+    resume:
+      "Tout se lit sur une courbe : image, antécédents, équations et inéquations résolues graphiquement, tableau de signes, tableau de variations. Les deux pièges nommés (le mauvais axe, zéros ou sommets). Un food-truck, la marée à Saint-Malo, une maison solaire, une crue, le compte d'un étudiant. Chaque corrigé dresse son tableau.",
+  },
   "maths/seconde/fonction-variations-extremums": {
     titre: "Variations et extremums : 20 exercices corrigés",
     resume:
