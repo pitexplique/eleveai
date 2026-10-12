@@ -4,10 +4,17 @@
 // entre deux graduations), ensemble de solutions point par point, ligne de
 // signes, ligne de variations. Puis chaque nombre affirmé doit figurer dans le
 // texte de l'exercice correspondant de la feuille.
-// Usage : npx --yes tsx@4 scripts/verifier-exercices-analyse-graphique.ts
+// Usage : npx --yes tsx@4 scripts/verifier-exercices-analyse-graphique.ts [seconde|premiere-spe]
 
 import { readFileSync } from "node:fs";
-import { COURBES, FAITS, evaluer, type CourbeNoeuds } from "@/lib/fiches-exercices/analyse-graphique-courbes";
+import * as S2 from "@/lib/fiches-exercices/analyse-graphique-courbes";
+import * as P1 from "@/lib/fiches-exercices/analyse-graphique-1s-courbes";
+import type { CourbeNoeuds } from "@/lib/fiches-exercices/analyse-graphique-courbes";
+
+const premiere = process.argv[2] === "premiere-spe";
+const COURBES: Record<string, CourbeNoeuds> = premiere ? P1.COURBES : S2.COURBES;
+const FAITS: any[] = premiere ? P1.FAITS : S2.FAITS;
+const evaluer = S2.evaluer;
 
 let defauts = 0;
 const ko = (m: string) => {
@@ -34,8 +41,8 @@ function dans(ens: string, x: number): boolean {
 }
 
 // Le texte de chaque exercice de la feuille, dans l'ordre.
-const source = readFileSync("lib/fiches-exercices/maths-seconde-analyse-graphique.tsx", "utf8");
-const blocs = source.split(/\n\s*\{\n\s*(?:titre: [^\n]*\n\s*)?enonce:/).slice(1);
+const source = readFileSync(premiere ? "lib/fiches-exercices/maths-premiere-spe-analyse-graphique.tsx" : "lib/fiches-exercices/maths-seconde-analyse-graphique.tsx", "utf8");
+const blocs = source.replace(/\r\n/g, "\n").split(/\n\s*\{\n\s*(?:titre: [^\n]*\n\s*)?enonce:/).slice(1);
 if (blocs.length !== 20) ko(`la feuille a ${blocs.length} exercices, pas 20`);
 /** Les nombres d'un texte de corrigé, LaTeX compris (« -2 », « −2 », « {-2} »). */
 const nombresDe = (t: string) => new Set((t.replace(/\\,/g, " ").match(/[−-]?\d+/g) ?? []).map((s) => Number(s.replace("−", "-"))));

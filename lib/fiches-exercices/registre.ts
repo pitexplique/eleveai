@@ -734,6 +734,13 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Du calcul d'un terme au problème de contrôle : montrer qu'une suite est arithmétique ou géométrique, sens de variation, sommes, taux d'évolution, seuil, et la suite auxiliaire qui ramène tout à une géométrique.",
   },
+  // ⭐ 12/10/2026 : la notion « Analyse graphique » de première spé (même
+  // moteur que la seconde), puis sa feuille — Frédéric : « fais les deux ».
+  "maths/premiere-spe/analyse-graphique-1s": {
+    titre: "Analyse graphique d'une fonction : 20 exercices corrigés",
+    resume:
+      "Tout se lit sur une courbe, un cran au-dessus de la seconde : trois sommets, un zéro qui ne change pas le signe, des solutions isolées, le nombre de solutions selon k, un tableau de signes déduit du tableau de variations, et le signe d'une vitesse qui annonce la dérivée. Un artisan, une montgolfière, le solde commercial d'un pays, un barrage.",
+  },
   "maths/premiere-spe/variations-fonctions": {
     titre: "Les variations d'une fonction : 20 exercices corrigés",
     resume:

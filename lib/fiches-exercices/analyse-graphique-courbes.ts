@@ -78,12 +78,13 @@ export function points(nom: NomCourbe): [number, number][] {
  * recalcule chacun sur la courbe : une image, des antécédents, un ensemble de
  * solutions, une ligne de signes, une ligne de variations.
  */
-export type Fait =
-  | { ex: number; c: NomCourbe; image: [number, number] }
-  | { ex: number; c: NomCourbe; antecedents: [number, number[]] }
-  | { ex: number; c: NomCourbe; ensemble: [string, number, string] } // [op, k, « ]−2 ; 2[ »]
-  | { ex: number; c: NomCourbe; signes: [number[], string] } // [bornes, « − 0 + 0 − »]
-  | { ex: number; c: NomCourbe; variations: [number[], number[]] };
+export type FaitDe<N extends string> =
+  | { ex: number; c: N; image: [number, number] }
+  | { ex: number; c: N; antecedents: [number, number[]] }
+  | { ex: number; c: N; ensemble: [string, number, string] } // [op, k, « ]−2 ; 2[ »]
+  | { ex: number; c: N; signes: [number[], string] } // [bornes, « − 0 + 0 − »]
+  | { ex: number; c: N; variations: [number[], number[]] };
+export type Fait = FaitDe<NomCourbe>;
 
 export const FAITS: Fait[] = [
   // ★

@@ -785,6 +785,17 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-10-12",
     },
   ],
+  "/fiches-exercices/maths/premiere-spe/analyse-graphique-1s": [
+    {
+      // 12/10/2026 : la paysage de seconde, servie en RÉVISION sur la feuille
+      // de première spé (même notion, même lecture de courbe).
+      id: "YpVjGHxNKZI",
+      title: "Analyse graphique : image, antécédents, tableaux, inéquations — Maths seconde",
+      description:
+        "Lire une image et des antécédents, résoudre graphiquement une équation et une inéquation, dresser le tableau de signes et le tableau de variations sur une courbe : la révision de la lecture graphique avant la dérivation (première spé).",
+      ajoutee: "2026-10-12",
+    },
+  ],
   "/fiches-exercices/maths/terminale-spe/continuite-tvi": [
     {
       // 11/10/2026 : la première paysage de terminale spé. Pas de fiche de cours
