@@ -214,6 +214,8 @@ const DEVOIRS: Devoir[] = [
   {
     numero: 7,
     titre: "La réciproque : conclure",
+    duree: "4 min",
+    video: "https://youtu.be/IV4gWGe597Q",
     exercices: [
       {
         enonce: "Dans le triangle ABC, AB = 6 cm, AC = 8 cm et BC = 10 cm. Ce triangle est-il rectangle ? Si oui, en quel sommet ?",
