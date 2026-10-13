@@ -186,6 +186,8 @@ const DEVOIRS: Devoir[] = [
   {
     numero: 6,
     titre: "La réciproque : vérifier l'égalité",
+    duree: "4 min",
+    video: "https://youtu.be/82Vbm0B3lWQ",
     exercices: [
       {
         enonce: "Un triangle a des côtés de 6 cm, 8 cm et 10 cm. Calcule le carré du plus grand côté, puis la somme des carrés des deux autres.",
