@@ -827,6 +827,25 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-10-11",
     },
   ],
+  "/fiches-cours/maths/3e/pythagore-theoreme": [
+    {
+      // 13/10/2026 : en 3e comme en 4e (Frédéric, « idem »), l'épisode 1 porte la notion.
+      id: "TBM5bum-xj4",
+      title: "L'hypoténuse : le plus long côté, sans rien mesurer — Pythagore, épisode 1 · Maths 4e",
+      description:
+        "L'angle droit et son petit carré, l'hypoténuse en face de l'angle droit et toujours le plus long côté, la méthode du côté sans la lettre, le triangle tourné : la révision de Pythagore pour la 3e.",
+      ajoutee: "2026-10-13",
+    },
+  ],
+  "/fiches-exercices/maths/3e/pythagore-theoreme": [
+    {
+      id: "TBM5bum-xj4",
+      title: "L'hypoténuse : le plus long côté, sans rien mesurer — Pythagore, épisode 1 · Maths 4e",
+      description:
+        "Repérer l'angle droit, trouver l'hypoténuse en face, même dans un triangle tourné : la vidéo de la feuille d'exercices de Pythagore (maths 3e).",
+      ajoutee: "2026-10-13",
+    },
+  ],
   "/fiches-cours/maths/4e/pythagore-theoreme": [
     {
       // 12/10/2026 : Pythagore, épisode 1 (l'hypoténuse), 4e ; une paysage par micro.
