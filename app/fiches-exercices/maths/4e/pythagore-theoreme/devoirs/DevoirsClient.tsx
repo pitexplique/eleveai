@@ -132,6 +132,8 @@ const DEVOIRS: Devoir[] = [
   {
     numero: 4,
     titre: "Calculer un côté de l'angle droit",
+    duree: "3 min",
+    video: "https://youtu.be/h3b8PvZDaEk",
     exercices: [
       {
         enonce: "Le triangle ABC est rectangle en A, avec BC = 5 cm et AB = 3 cm. Calcule AC.",
