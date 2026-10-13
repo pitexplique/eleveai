@@ -104,6 +104,8 @@ const DEVOIRS: Devoir[] = [
   {
     numero: 3,
     titre: "Calculer l'hypoténuse",
+    duree: "4 min",
+    video: "https://youtu.be/vwkGpUNngtQ",
     exercices: [
       {
         enonce: "Le triangle ABC est rectangle en A, avec AB = 3 cm et AC = 4 cm. Calcule BC.",
