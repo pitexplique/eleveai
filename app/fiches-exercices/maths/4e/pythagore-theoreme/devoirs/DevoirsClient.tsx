@@ -160,6 +160,8 @@ const DEVOIRS: Devoir[] = [
   {
     numero: 5,
     titre: "Rédiger",
+    duree: "3 min",
+    video: "https://youtu.be/cBgnO9A9cG8",
     exercices: [
       {
         enonce: "Remets dans l'ordre : (a) BC = √100 = 10 cm. (b) D'après le théorème de Pythagore : BC² = AB² + AC². (c) Le triangle ABC est rectangle en A. (d) BC² = 6² + 8² = 36 + 64 = 100.",
