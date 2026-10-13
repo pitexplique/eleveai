@@ -50,6 +50,18 @@
       ],
       "port": 3500,
       "autoPort": false
+    },
+    {
+      "name": "sorties-video",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "3900",
+        "--directory",
+        "manim/sorties"
+      ],
+      "port": 3900
     }
   ]
 }

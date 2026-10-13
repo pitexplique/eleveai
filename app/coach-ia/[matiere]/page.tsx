@@ -620,6 +620,13 @@ export default function CoachIA() {
     router.replace(`/coach-ia/${matiere}?${params.toString()}`, {
       scroll: false,
     });
+    /* 28/09/2026 — Frédéric : « quand on sélectionne la classe, assure-toi que
+       l'écran revienne en haut ». La page restait au niveau de défilement de
+       la classe précédente, souvent au milieu d'une liste qui n'est plus la
+       même. On remonte nous-mêmes (le `scroll: false` ci-dessus reste : c'est
+       Next qui ne doit pas sauter, pas nous) ; en instantané, un défilement
+       fluide pendant que la liste change de hauteur s'arrête en chemin. */
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }
 
   return (
