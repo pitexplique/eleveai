@@ -866,6 +866,16 @@ const VIDEOS_FICHES: Record<string, VideoSitemap[]> = {
       ajoutee: "2026-10-09",
     },
   ],
+  "/fiches-cours/maths/5e/volume-solide": [
+    {
+      // 13/10/2026 : « Les maths en vrai », l'eau à La Réunion (1 mm de pluie sur 1 m² = 1 L).
+      id: "S3sz_p8PC3s",
+      title: "Pourquoi la rivière est à sec à La Réunion ? Les maths de l'eau — 5e",
+      description:
+        "1 mm de pluie sur 1 m², c'est 1 litre : Saint-Benoît reçoit 5 fois plus de pluie que Saint-Pierre, 62 % de l'eau arrive au robinet, et un récupérateur d'eau de pluie en défi (maths 5e).",
+      ajoutee: "2026-10-13",
+    },
+  ],
   "/fiches-cours/maths/5e/relatif-nombre": [
     {
       // 08/10/2026 : la première vidéo PARLÉE de 5e, les nombres relatifs.
