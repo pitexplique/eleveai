@@ -474,6 +474,14 @@ export const microSkills: MicroSkillSource[] = [
       "pythagore_reciproque",
     ],
   },
+  // ⭐ 13/10/2026 — brevet 2026 (Asie, exercice 2) : le triangle rectangle caché
+  // dans un gobelet en tronc de cône. Aucune des micros au-dessus ne sortait du plan.
+  {
+    id: "pythagore_solide",
+    label: "Utiliser Pythagore dans un solide (cône, pyramide, pavé)",
+    notionId: "pythagore_theoreme",
+    prerequis: ["pythagore_calculer_cote", "pythagore_calculer_hypotenuse"],
+  },
   {
     id: "pythagore_defi",
     label: "Défis sur Pythagore",

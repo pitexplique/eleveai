@@ -24,6 +24,7 @@ import { fonctionsBank } from "./fonctions.bank";
 import { affineBank } from "./affine.bank";
 
 import { pythagore3eBank } from "./pythagore.bank";
+import { pythagoreSolide3eBank } from "./pythagore-solide.bank";
 import { trigonometrieBank } from "./trigonometrie.bank";
 import { trianglesBank } from "./triangles.bank";
 import { thalesBank } from "./thales.bank";
@@ -60,6 +61,7 @@ export const maths3eQuestionBank: TutorBankItemV4[] = [
   ...affineBank,
 
   ...pythagore3eBank,
+  ...pythagoreSolide3eBank,
   ...trigonometrieBank,
   ...trianglesBank,
   ...thalesBank,

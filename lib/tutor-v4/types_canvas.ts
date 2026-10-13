@@ -383,6 +383,50 @@ export type SectionSolideCanvasData = {
   };
 };
 
+/**
+ * ⭐ LE TRIANGLE RECTANGLE CACHÉ DANS UN SOLIDE (13/10/2026, micro de 3e
+ * `pythagore_solide`, née du brevet 2026 Asie : le gobelet en tronc de cône).
+ * Le solide est dessiné en perspective, et le triangle où l'on applique
+ * Pythagore est COLORIÉ, son angle droit codé, ses côtés étiquetés. C'est tout
+ * le geste de l'exercice : voir le triangle avant de calculer.
+ *
+ * Les trois sommets du triangle ont un RÔLE : `droit` porte l'angle droit,
+ * `haut` est au bout du premier côté de l'angle droit (la hauteur, l'axe, une
+ * arête), `bas` au bout du second ; l'hypoténuse est [haut bas].
+ *   · cone              : sommet S (haut), centre O (droit), A sur le cercle (bas)
+ *   · gobelet           : sommet O du cône en bas (haut), centre A de la petite
+ *                         base (droit), D sur son bord (bas) — le brevet
+ *   · pyramide          : sommet S (haut), centre H (droit), sommet A de la base (bas)
+ *   · pyramide_apotheme : sommet S (haut), centre H (droit), milieu M d'un côté (bas)
+ *   · pave_face         : ABCDEFGH ; triangle ABC rectangle en B (diagonale [AC])
+ *   · pave_espace       : ABCDEFGH ; triangle ACG rectangle en C (grande diagonale [AG])
+ * Pour le pavé, les noms viennent de `sommets` (huit lettres, ABCD en bas,
+ * EFGH au-dessus) et les rôles s'en déduisent.
+ */
+export type PythagoreSolideCanvasData = {
+  kind: "pythagore_solide";
+  solide:
+    | "cone"
+    | "gobelet"
+    | "pyramide"
+    | "pyramide_apotheme"
+    | "pave_face"
+    | "pave_espace";
+  noms?: { droit?: string; haut?: string; bas?: string };
+  /** Les huit sommets du pavé, dans l'ordre A B C D E F G H. */
+  sommets?: string[];
+  /** Les quatre sommets de la base de la pyramide (le premier est `bas`). */
+  base?: string[];
+  /** Étiquettes des côtés : « 8,2 cm », « ? »… Absentes = côté sans étiquette. */
+  cotes?: { droitHaut?: string; droitBas?: string; hypotenuse?: string };
+  titre?: string;
+  /** Colorier le triangle (défaut `true`). `false` pour « trouve le triangle ». */
+  montrerTriangle?: boolean;
+  /** Coder l'angle droit (défaut `true`). `false` quand la question demande OÙ il est. */
+  coderAngleDroit?: boolean;
+  size?: { width?: number; height?: number };
+};
+
 export type TableauProportionnaliteCell = {
   row: number;
   col: number;
@@ -2060,6 +2104,7 @@ export type CanvasFigure =
   | NumberLineCanvasData
   | Solide3DCanvasData
   | SectionSolideCanvasData
+  | PythagoreSolideCanvasData
   | ThalesCanvasData
   | StatGraphCanvasData
   | DiagrammeBoiteCanvasData

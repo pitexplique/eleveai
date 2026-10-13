@@ -32,6 +32,7 @@ export type {
   SectionSolideKind,
   SectionSolideType,
   SectionSolideCanvasData,
+  PythagoreSolideCanvasData,
   TableauProportionnaliteCell,
   TableauProportionnaliteCanvasData,
   AngleCanvasData,

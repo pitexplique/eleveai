@@ -51,6 +51,7 @@ const supportLinks: Record<string, string[]> = {
   pythagore_calculer_hypotenuse: ["entier_racine_calculer"],
   pythagore_calculer_cote: ["entier_racine_calculer"],
   pythagore_reciproque: ["triangle_inegalite"],
+  pythagore_solide: ["volume_representation", "volume_solide_reconnaitre"],
 
   // =========================
   // THALÈS
@@ -125,6 +126,7 @@ const supportLinks: Record<string, string[]> = {
     "section_cylindre",
     "section_cone_pyramide",
     "pythagore_defi",
+    "pythagore_solide",
     "volume_geometrie_espace_defi",
   ],
 

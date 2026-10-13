@@ -9,6 +9,7 @@ export { default as DroiteGradueeCanvas } from "./DroiteGradueeCanvas";
 export { default as ThalesCanvas } from "./ThalesCanvas";
 export { default as Solide3DCanvas } from "./Solide3DCanvas";
 export { default as SectionSolideCanvas } from "./SectionSolideCanvas";
+export { default as PythagoreSolideCanvas } from "./PythagoreSolideCanvas";
 export { default as StatGraphCanvas } from "./StatGraphCanvas";
 export { default as DiagrammeBoiteCanvas } from "./DiagrammeBoiteCanvas";
 export { default as CanvasProbabilites } from "./ProbabilitesCanvas";

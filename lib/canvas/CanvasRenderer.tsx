@@ -25,6 +25,7 @@ import FractionCanvas from "./FractionCanvas";
 import TableauProportionnaliteCanvas from "./TableauProportionnaliteCanvas";
 import ScratchCanvas from "./ScratchCanvas";
 import SectionSolideCanvas from "./SectionSolideCanvas";
+import PythagoreSolideCanvas from "./PythagoreSolideCanvas";
 import AlgebreCanvas from "./AlgebreCanvas";
 import SuiteCanvas from "./SuiteCanvas";
 import DureeCanvas from "./DureeCanvas";
@@ -73,6 +74,10 @@ export default function CanvasRenderer({ figure }: Props) {
 
     case "section_solide":
       return <SectionSolideCanvas figure={figure} />;
+
+    // Le triangle rectangle caché dans un solide (Pythagore dans l'espace).
+    case "pythagore_solide":
+      return <PythagoreSolideCanvas figure={figure} />;
 
     case "stat_graph":
       return <StatGraphCanvas figure={figure} />;
