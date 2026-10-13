@@ -28,16 +28,11 @@ import FloatingCoach from "@/components/FloatingCoach";
 import BoiteAOutils from "@/components/BoiteAOutils";
 import { useEleve } from "@/context/EleveContext";
 import Link from "next/link";
-import { BookOpen, Camera, ChevronRight, CirclePlay, PencilLine, Play } from "lucide-react";
+import { BookOpen, Camera, ChevronRight, PencilLine, Play } from "lucide-react";
 import { ficheExercicesHrefPourCoach } from "@/lib/fiches-exercices/registre";
 import { ficheClasseSource, ficheHrefPourCoach, libelleClasse } from "@/lib/fiches/registre";
 import { useNotionsPliees } from "@/components/coach/useNotionsPliees";
 import { track } from "@vercel/analytics";
-import {
-  youtubeSearchUrl,
-  CLASSE_YOUTUBE_LABEL,
-  MATIERE_YOUTUBE_LABEL,
-} from "@/lib/videos/youtubeSearch";
 
 /* ⭐ 13/09/2026 — LA COLONNE SE LIT DE LA TERMINALE AU CP (Frédéric : « plutôt
    que de démarrer sur CP et aller vers adulte, je préfère inversé »).
@@ -1122,12 +1117,6 @@ export default function CoachIA() {
                         <ol className="space-y-1">
                           {micros.map((microId, index) => {
                             const microVideos = videosParMicro[microId] ?? [];
-                            // « defi » au singulier selon les classes ; le
-                            // libellé sert de filet. Pas de loupe YouTube sur
-                            // les défis : une vidéo « défis sur… » n'existe pas.
-                            const estDefi =
-                              microId.includes("defi") ||
-                              (microLabels[microId] || "").toLowerCase().includes("défi");
                             return (
                             <li key={microId} className="flex items-stretch gap-1">
                               <button
@@ -1167,40 +1156,49 @@ export default function CoachIA() {
                                 // Lien YouTube « pile sur la compétence » : petit,
                                 // pour ne pas alourdir la liste. La vidéo EleveAI
                                 // de la notion reste dans l'en-tête, au-dessus.
-                                <a
-                                  href={microVideos[0].url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  onClick={(e) => e.stopPropagation()}
-                                  className="flex shrink-0 items-center gap-1 self-center rounded-lg border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-bold text-rose-700 transition hover:bg-rose-100"
-                                  title={microVideos[0].titre ?? "Vidéo sur cette compétence"}
-                                >
-                                  <Play className="h-3 w-3 fill-current" />
-                                  Vidéo
-                                </a>
-                              ) : !estDefi ? (
-                                // Pas encore de vidéo curatée : petite icône
-                                // vidéo discrète (façon IXL) → recherche YouTube
-                                // « matière classe notion micro » (libellés
-                                // naturels, jamais les slugs). Disparaît dès
-                                // qu'une vidéo est choisie dans /admin/ressources.
-                                <a
-                                  href={youtubeSearchUrl([
-                                    MATIERE_YOUTUBE_LABEL[matiere] ?? matiere,
-                                    CLASSE_YOUTUBE_LABEL[classe] ?? classe,
-                                    libelleNotion(notionId),
-                                    microLabels[microId] || "",
-                                  ])}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  onClick={(e) => e.stopPropagation()}
-                                  className="flex shrink-0 items-center self-center rounded-lg px-1.5 py-1 text-slate-300 transition hover:bg-slate-100 hover:text-slate-500"
-                                  title="Chercher une vidéo sur YouTube"
-                                  aria-label={`Chercher une vidéo YouTube : ${microLabels[microId] || microId}`}
-                                >
-                                  <CirclePlay className="h-4 w-4" />
-                                </a>
+                                // ⭐ 13/10/2026 — Frédéric : « on fait un short et une
+                                // paysage : pourquoi ne pas afficher le short à côté,
+                                // avec un rectangle vertical ? ». La paysage garde le
+                                // bouton « Vidéo » ; le short a sa petite case
+                                // verticale, le format d'un téléphone.
+                                (() => {
+                                  const paysage = microVideos.find((v) => !v.url.includes("/shorts/"));
+                                  const short = microVideos.find((v) => v.url.includes("/shorts/"));
+                                  return (
+                                    <span className="flex shrink-0 items-center gap-1 self-center">
+                                      {paysage ? (
+                                        <a
+                                          href={paysage.url}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          onClick={(e) => e.stopPropagation()}
+                                          className="flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-bold text-rose-700 transition hover:bg-rose-100"
+                                          title={paysage.titre ?? "Vidéo sur cette compétence"}
+                                        >
+                                          <Play className="h-3 w-3 fill-current" />
+                                          Vidéo
+                                        </a>
+                                      ) : null}
+                                      {short ? (
+                                        <a
+                                          href={short.url}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          onClick={(e) => e.stopPropagation()}
+                                          className="flex h-7 w-[18px] items-center justify-center rounded-[5px] border-2 border-rose-300 bg-rose-50 text-rose-600 transition hover:bg-rose-100"
+                                          title={short.titre ?? "Le short de cette compétence"}
+                                          aria-label={`Short : ${short.titre ?? microLabels[microId] ?? microId}`}
+                                        >
+                                          <Play className="h-2.5 w-2.5 fill-current" />
+                                        </a>
+                                      ) : null}
+                                    </span>
+                                  );
+                                })()
                               ) : null}
+                              {/* ⛔ 13/10/2026 — Frédéric : « avant je faisais une recherche
+                                  sur YouTube, il faut enlever cela ». Plus de loupe vers une
+                                  recherche YouTube : une micro sans vidéo EleveAI n'affiche rien. */}
                             </li>
                             );
                           })}
