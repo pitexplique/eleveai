@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Pas d'accident, pas de feu rouge… alors pourquoi ce bouchon au rond-point ?",
+  "01-billes": "Une bille, c'est une voiture. Le rond-point en laisse entrer une toutes les 4 secondes.",
+  "02-regulier": "Si les billes arrivent bien régulièrement, une toutes les 4,4 secondes : file, 0 bille.",
+  "03-hasard": "Mais les voitures arrivent au hasard : trois collées, puis un grand vide. Même nombre de billes… et la file monte à 18 !",
+  "04-question": "Le coupable, c'est le hasard. À toi : ce rond-point laisse entrer une voiture toutes les 4 secondes. Combien de voitures, au maximum, peut-il laisser entrer en 1 heure ? Réponds en commentaire !"
+}

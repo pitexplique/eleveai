@@ -1,0 +1,15 @@
+{
+  "00-accroche": "7 heures du matin, au rond-point. Pas d'accident, pas de feu rouge, pas de travaux. Et pourtant, la file s'allonge : 37 voitures. Qui a créé ce bouchon ?",
+  "01-billes": "Pour comprendre, remplaçons chaque voiture par une bille. Pour entrer dans le rond-point, une bille met 4 secondes.",
+  "02-regulier": "Premier essai : les billes arrivent bien sagement, une toutes les 4,4 secondes. Chacune trouve la porte libre. File : 0 bille. Attente : 0 seconde.",
+  "03-hasard": "Deuxième essai : le même nombre de billes, mais elles arrivent au hasard, comme de vraies voitures. Trois collées… puis un grand vide. Regarde la file orange : elle monte jusqu'à 18 billes.",
+  "04-loi": "Ce hasard a une loi : la loi exponentielle. Si une voiture arrive en moyenne toutes les 6 secondes, la probabilité que la suivante arrive plus de t secondes après, c'est e puissance moins t sur 6.",
+  "05-calcul": "Pour t égal à 4 : e puissance moins 4 sur 6, environ 0,51. Donc avec une probabilité de 0,49, presque une fois sur deux, la voiture suivante arrive moins de 4 secondes après. La porte est occupée : elle attend.",
+  "06-courbe": "Maintenant, on fait varier le nombre de billes. Une toutes les 8 secondes : 2 secondes d'attente. Toutes les 5 secondes : 8 secondes. Toutes les 4,4 secondes : 19 secondes. Toutes les 4 secondes : 62 secondes. La courbe reste plate… puis elle explose.",
+  "07-formule": "Cette courbe a une formule, celle des files d'attente : W égale rhô fois S, divisé par 2 fois 1 moins rhô. Rhô, c'est le remplissage du rond-point ; S, les 4 secondes pour entrer. Quand rhô s'approche de 1, on divise par un nombre presque nul : l'attente explose.",
+  "08-solution": "La bonne nouvelle : près du sommet, chaque bille compte. Enlève 1 bille sur 10 : l'attente passe de 62 secondes à 19 secondes. 3 fois moins.",
+  "09-automobilistes": "Pour toi, en voiture : partir 10 minutes plus tôt, covoiturer, conduire prudemment à vitesse régulière, et s'insérer franchement, sans hésiter.",
+  "10-region": "Pour la région : décaler de 15 minutes les horaires des lycées et des bureaux, et poser des feux qui rendent les arrivées régulières. Souviens-toi : sans hasard, pas de file.",
+  "11-defi": "Ton défi, en deux étapes. Une voiture arrive en moyenne toutes les 5 secondes. Un : quelle est la probabilité que la suivante arrive moins de 4 secondes après ? Deux : le rond-point est rempli à 80 %. D'après la formule, quelle est l'attente moyenne ?",
+  "12-appris": "Ce que tu as appris : la loi exponentielle décrit des arrivées au hasard. C'est ce hasard qui crée les bouchons. Et près du maximum, enlever un peu de voitures enlève beaucoup d'attente. Et toi, quel rond-point bouchonne près de chez toi ? Dis-le-moi en commentaire !"
+}
