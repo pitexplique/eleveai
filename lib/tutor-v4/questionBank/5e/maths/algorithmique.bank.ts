@@ -4,11 +4,8 @@
 // section au-dessus : les items déplacés sont restés à leur place dans le
 // fichier pour garder leur id, et donc l'historique des réponses des élèves.
 
-import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
-
-function randomChoice<T>(arr: T[]): T {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
+import type { TutorBankItemV4, ScratchBlockData, DifficultyLevel } from "@/lib/tutor-v4/types";
+import { PRENOMS, pick, de as deNom, type Prenom } from "@/lib/tutor-v4/questionBank/6e/maths/entiers.bank";
 
 function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
@@ -30,6 +27,2210 @@ function expl(def: string, meth: string, exec: string, concl: string) {
     `Exécution : ${exec}\n\n` +
     `Conclusion : ${concl}`
   );
+}
+
+/* ===========================================================================
+   ⛔⛔ 13/10/2026 — « DES QUESTIONS REVIENNENT ». Mesuré avant : 4 à 13
+   squelettes par micro, jusqu'à 18 répétitions sur 20. Les gabarits changeaient
+   les nombres, jamais la PHRASE ni la FORME du programme.
+
+   ⭐ Chaque gabarit tire désormais un PROGRAMME (écrit dans le texte en
+   pseudo-Scratch, entre « »), une SITUATION, un PRÉNOM et une TOURNURE. Le petit
+   interpréteur ci-dessous écrit le programme, fabrique les blocs du canvas et
+   l'EXÉCUTE : la réponse attendue et l'explication viennent de cette
+   exécution. Le correcteur (correcteurs/algorithmique.ts) relit le texte et
+   réexécute le programme avec son propre interpréteur.
+
+   Écriture : « mettre score à 3 » ; « ajouter 2 à score » ;
+   « mettre x à 2 × x + 1 » ; « répéter 4 fois [avancer de 20 pas ; tourner de 90°] » ;
+   « si score > 10 alors [dire “Bravo”] sinon [dire “Rejoue”] » ;
+   « demander “Quel âge as-tu ?” et attendre » ; « dire score ».
+   Les crochets figurent la « bouche » du bloc Scratch.
+=========================================================================== */
+
+const entre = (a: number, b: number) => a + Math.floor(Math.random() * (b - a + 1));
+
+/** Retire tant que le tirage ne convient pas (valeur négative, leurres confondus…). */
+function tirer<T>(f: () => T | null): T {
+  for (let i = 0; i < 500; i++) {
+    const r = f();
+    if (r) return r;
+  }
+  throw new Error("algorithmique 5e : tirage impossible");
+}
+
+/** La bonne réponse + des leurres DISTINCTS (n propositions en tout), ou null. */
+function propositions(bonne: string, leurres: readonly string[], n = 4): string[] | null {
+  const d = Array.from(new Set(leurres)).filter((w) => w !== bonne);
+  if (d.length < n - 1) return null;
+  return shuffle([bonne, ...shuffle(d).slice(0, n - 1)]);
+}
+
+/** « il » ou « elle ». */
+const pron = (p: Prenom) => (p.f ? "elle" : "il");
+
+type Op = "+" | "−" | "×";
+type Expr = number | string | { a: Expr; op: Op; b: Expr };
+const E = (a: Expr, op: Op, b: Expr): Expr => ({ a, op, b });
+const prio = (e: Expr) => (typeof e === "object" ? (e.op === "×" ? 2 : 1) : 3);
+
+/** L'expression écrite, avec les parenthèses nécessaires ; `sub` remplace les variables par leur valeur. */
+function exprTxt(e: Expr, sub?: Record<string, number>): string {
+  if (typeof e === "number") return String(e);
+  if (typeof e === "string") return sub && e in sub ? String(sub[e]) : e;
+  const p = e.op === "×" ? 2 : 1;
+  const g = prio(e.a) < p ? `(${exprTxt(e.a, sub)})` : exprTxt(e.a, sub);
+  const d = prio(e.b) < p || (e.op === "−" && prio(e.b) === 1) ? `(${exprTxt(e.b, sub)})` : exprTxt(e.b, sub);
+  return `${g} ${e.op} ${d}`;
+}
+
+function evalE(e: Expr, env: Record<string, number>): number {
+  if (typeof e === "number") return e;
+  if (typeof e === "string") {
+    if (!(e in env)) throw new Error(`variable ${e} sans valeur`);
+    return env[e];
+  }
+  const a = evalE(e.a, env);
+  const b = evalE(e.b, env);
+  return e.op === "+" ? a + b : e.op === "−" ? a - b : a * b;
+}
+
+type Cmp = ">" | "<" | "=";
+type Cond = { v: string; op: Cmp; s: number } | { v: string; pair: boolean } | { v: string; mult: number };
+
+function condTxt(c: Cond): string {
+  if ("op" in c) return `${c.v} ${c.op} ${c.s}`;
+  if ("pair" in c) return `${c.v} est ${c.pair ? "pair" : "impair"}`;
+  return `${c.v} est un multiple de ${c.mult}`;
+}
+
+function vraie(c: Cond, env: Record<string, number>): boolean {
+  const x = env[c.v];
+  if (x === undefined) throw new Error(`variable ${c.v} sans valeur`);
+  if ("op" in c) return c.op === ">" ? x > c.s : c.op === "<" ? x < c.s : x === c.s;
+  if ("pair" in c) return (x % 2 === 0) === c.pair;
+  return x % c.mult === 0;
+}
+
+type Ins =
+  | { k: "set"; v: string; e: Expr }
+  | { k: "add"; v: string; n: number }
+  | { k: "rep"; n: number; corps: Ins[] }
+  | { k: "si"; c: Cond; alors: Ins[]; sinon?: Ins[] }
+  | { k: "dire"; t: string }
+  | { k: "direv"; v: string }
+  | { k: "avancer"; n: number }
+  | { k: "tourner"; n: number }
+  | { k: "demander"; t: string }
+  | { k: "stylo" };
+
+function insTxt(i: Ins): string {
+  switch (i.k) {
+    case "set":
+      return `mettre ${i.v} à ${exprTxt(i.e)}`;
+    case "add":
+      return `ajouter ${i.n} à ${i.v}`;
+    case "rep":
+      return `répéter ${i.n} fois [${i.corps.map(insTxt).join(" ; ")}]`;
+    case "si":
+      return (
+        `si ${condTxt(i.c)} alors [${i.alors.map(insTxt).join(" ; ")}]` +
+        (i.sinon ? ` sinon [${i.sinon.map(insTxt).join(" ; ")}]` : "")
+      );
+    case "dire":
+      return `dire “${i.t}”`;
+    case "direv":
+      return `dire ${i.v}`;
+    case "avancer":
+      return `avancer de ${i.n} pas`;
+    case "tourner":
+      return `tourner de ${i.n}°`;
+    case "demander":
+      return `demander “${i.t}” et attendre`;
+    case "stylo":
+      return "stylo en position d’écriture";
+  }
+}
+
+const progTxt = (p: Ins[]) => p.map((i) => `« ${insTxt(i)} »`).join(" ; ");
+
+function blocs(p: Ins[]): ScratchBlockData[] {
+  return p.map((i): ScratchBlockData => {
+    switch (i.k) {
+      case "set":
+        return { type: "set_variable", variable: i.v, value: typeof i.e === "number" ? i.e : exprTxt(i.e) };
+      case "add":
+        return { type: "change_variable", variable: i.v, value: i.n };
+      case "rep":
+        return { type: "repeat", times: i.n, children: blocs(i.corps) };
+      case "si":
+        return i.sinon
+          ? { type: "if_else", condition: condTxt(i.c), children: blocs(i.alors), elseChildren: blocs(i.sinon) }
+          : { type: "if", condition: condTxt(i.c), children: blocs(i.alors) };
+      case "dire":
+        return { type: "say", text: i.t };
+      case "direv":
+        return { type: "say", text: i.v };
+      case "avancer":
+        return { type: "move", value: i.n };
+      case "tourner":
+        return { type: "turn", value: i.n };
+      case "demander":
+        return { type: "ask", text: i.t };
+      case "stylo":
+        return { type: "pen", text: "stylo en position d’écriture" };
+    }
+  });
+}
+
+/** Le canvas : les valeurs données dans le texte (« x vaut 4 »), puis le programme du texte. */
+function canvasProg(titre: string, p: Ins[], donnees: Record<string, number> = {}) {
+  return scratchCanvas(titre, [
+    { type: "event" },
+    ...Object.entries(donnees).map(([v, n]) => ({ type: "set_variable", variable: v, value: n })),
+    ...blocs(p),
+  ]);
+}
+
+type Etat = {
+  env: Record<string, number>;
+  dits: string[];
+  dist: number;
+  angle: number;
+  trace: string[];
+  min: number;
+  max: number;
+};
+
+function varsModifiees(p: Ins[], acc: string[] = []): string[] {
+  for (const i of p) {
+    if ((i.k === "set" || i.k === "add") && !acc.includes(i.v)) acc.push(i.v);
+    if (i.k === "rep") varsModifiees(i.corps, acc);
+    if (i.k === "si") {
+      varsModifiees(i.alors, acc);
+      if (i.sinon) varsModifiees(i.sinon, acc);
+    }
+  }
+  return acc;
+}
+
+const resserrer = (l: string[]) => (l.length > 5 ? [l[0], l[1], "…", l[l.length - 1]] : l);
+
+/** Exécute le programme. `reponses` : ce que l'utilisateur tape, dans l'ordre des « demander ». */
+function executer(p: Ins[], env0: Record<string, number> = {}, reponses: number[] = []): Etat {
+  const st: Etat = { env: {}, dits: [], dist: 0, angle: 0, trace: [], min: Infinity, max: -Infinity };
+  const lues = [...reponses];
+  const noter = (v: string, n: number) => {
+    st.env[v] = n;
+    st.min = Math.min(st.min, n);
+    st.max = Math.max(st.max, n);
+  };
+  for (const [v, n] of Object.entries(env0)) noter(v, n);
+  const run = (l: Ins[], muet: boolean) => {
+    for (const i of l) {
+      switch (i.k) {
+        case "set": {
+          const r = evalE(i.e, st.env);
+          const t =
+            typeof i.e === "number" ? `${r}`
+            : typeof i.e === "string" ? `de ${i.e}, soit ${r}`
+            : `${exprTxt(i.e, st.env)} = ${r}`;
+          noter(i.v, r);
+          if (!muet) st.trace.push(`${i.v} prend la valeur ${t}`);
+          break;
+        }
+        case "add": {
+          const o = st.env[i.v];
+          if (o === undefined) throw new Error(`variable ${i.v} sans valeur`);
+          noter(i.v, o + i.n);
+          if (!muet) st.trace.push(`${i.v} devient ${o} + ${i.n} = ${o + i.n}`);
+          break;
+        }
+        case "rep": {
+          const lignes: string[] = [];
+          const vs = varsModifiees(i.corps);
+          for (let t = 1; t <= i.n; t++) {
+            const d0 = st.dits.length;
+            run(i.corps, true);
+            let ligne = `tour ${t} : ` + (vs.length ? vs.map((v) => `${v} = ${st.env[v]}`).join(", ") : `${st.dist} pas en tout`);
+            const dits = st.dits.slice(d0);
+            if (dits.length) ligne += ` (le lutin dit ${dits.map((d) => `“${d}”`).join(", ")})`;
+            lignes.push(ligne);
+          }
+          if (!muet) st.trace.push(...resserrer(lignes));
+          break;
+        }
+        case "si": {
+          const ok = vraie(i.c, st.env);
+          if (!muet)
+            st.trace.push(
+              `test « ${condTxt(i.c)} » : ${ok ? "vrai" : "faux"}, ` +
+                (ok ? "on fait le « alors »" : i.sinon ? "on fait le « sinon »" : "on saute le bloc")
+            );
+          run(ok ? i.alors : i.sinon ?? [], muet);
+          break;
+        }
+        case "dire":
+          st.dits.push(i.t);
+          if (!muet) st.trace.push(`le lutin dit “${i.t}”`);
+          break;
+        case "direv": {
+          const x = st.env[i.v];
+          if (x === undefined) throw new Error(`variable ${i.v} sans valeur`);
+          st.dits.push(String(x));
+          if (!muet) st.trace.push(`le lutin dit ${x}`);
+          break;
+        }
+        case "avancer":
+          st.dist += i.n;
+          if (!muet) st.trace.push(`le lutin avance de ${i.n} pas`);
+          break;
+        case "tourner":
+          st.angle += i.n;
+          if (!muet) st.trace.push(`le lutin tourne de ${i.n}°`);
+          break;
+        case "demander": {
+          const r = lues.shift();
+          if (r === undefined) throw new Error("pas de réponse pour « demander »");
+          noter("réponse", r);
+          if (!muet) st.trace.push(`l’utilisateur répond ${r} : réponse vaut ${r}`);
+          break;
+        }
+        case "stylo":
+          break;
+      }
+    }
+  };
+  run(p, false);
+  return st;
+}
+
+/** Valeurs plausibles en 5e ici : entières, positives, au plus 999. */
+const plausible = (st: Etat) => st.max <= 999 && st.min >= 0;
+
+/** L'explication : la trace de l'exécution. */
+const explTrace = (def: string, meth: string, trace: string[], concl: string) =>
+  expl(def, meth, trace.join(" ; ") + ".", concl);
+
+const repNombre = (n: number) => ({ format: "short" as const, expected: [String(n)], comparator: "number_equal" as const });
+const repQcm = (bonne: string, choix: string[]) => ({
+  format: "qcm" as const,
+  choices: choix,
+  expected: [bonne],
+  comparator: "mcq_exact" as const,
+});
+
+/** Un nouveau gabarit (les anciens gardent leur objet et leur id). */
+function gabarit(
+  id: string,
+  notionId: "algo_programmation" | "algo_construire",
+  microId: string,
+  difficulty: DifficultyLevel,
+  hint: string,
+  tags: string[],
+  generate: () => any
+): TutorBankItemV4 {
+  return {
+    kind: "template",
+    id,
+    niveau: "5e",
+    matiere: "maths",
+    notionId,
+    microId,
+    difficulty,
+    theme: "neutral",
+    hint,
+    tags: [notionId, ...tags, "template"],
+    generate,
+  } as TutorBankItemV4;
+}
+
+/* ===========================================================================
+   LES SITUATIONS (une seule à La Réunion). `hi` : message quand c'est gagné.
+=========================================================================== */
+
+type Ctx = { v: string; intro: (p: Prenom) => string; hi: string; lo: string; depart: [number, number]; pas: [number, number] };
+
+const CTX: Ctx[] = [
+  { v: "score", intro: (p) => `${p.nom} programme un jeu de plateforme.`, hi: "Niveau suivant", lo: "Rejoue", depart: [0, 20], pas: [2, 9] },
+  { v: "pièces", intro: (p) => `${p.nom} crée un jeu de pirates : le lutin ramasse des pièces d’or.`, hi: "Trésor trouvé", lo: "Cherche encore", depart: [0, 15], pas: [2, 6] },
+  { v: "étoiles", intro: (p) => `Dans le jeu spatial ${deNom(p.nom)}, la fusée collecte des étoiles.`, hi: "Mission réussie", lo: "Continue", depart: [0, 12], pas: [1, 5] },
+  { v: "pommes", intro: (p) => `${p.nom} code un jeu de verger où l’on cueille des pommes.`, hi: "Panier plein", lo: "Encore des pommes", depart: [0, 10], pas: [2, 6] },
+  { v: "points", intro: (p) => `${p.nom} prépare un quiz pour sa classe.`, hi: "Gagné", lo: "Perdu", depart: [0, 10], pas: [1, 4] },
+  { v: "vies", intro: (p) => `Dans le jeu ${deNom(p.nom)}, le chat gagne des vies.`, hi: "En pleine forme", lo: "Attention", depart: [1, 5], pas: [1, 3] },
+  { v: "graines", intro: (p) => `${p.nom} programme un robot jardinier qui plante des graines.`, hi: "Jardin semé", lo: "Encore un rang", depart: [0, 20], pas: [3, 8] },
+  { v: "billes", intro: (p) => `${p.nom} simule une partie de billes dans Scratch.`, hi: "Sac plein", lo: "Rejoue", depart: [5, 25], pas: [2, 6] },
+  { v: "tours", intro: (p) => `${p.nom} simule une course de vélo sur une piste.`, hi: "Arrivée", lo: "Encore un tour", depart: [0, 6], pas: [1, 3] },
+  { v: "buts", intro: (p) => `${p.nom} programme un match de football.`, hi: "Victoire", lo: "Match nul", depart: [0, 4], pas: [1, 2] },
+  { v: "cartes", intro: (p) => `${p.nom} compte sa collection de cartes avec un programme.`, hi: "Album complet", lo: "Il en manque", depart: [10, 40], pas: [3, 9] },
+  { v: "livres", intro: (p) => `À la médiathèque, ${p.nom} programme un compteur de livres.`, hi: "Étagère pleine", lo: "Il reste de la place", depart: [5, 30], pas: [2, 7] },
+  { v: "litres", intro: (p) => `${p.nom} programme une pompe qui remplit un aquarium.`, hi: "Aquarium plein", lo: "Remplissage", depart: [0, 20], pas: [2, 8] },
+  { v: "gemmes", intro: (p) => `${p.nom} invente un jeu de labyrinthe plein de gemmes.`, hi: "Coffre ouvert", lo: "Cherche encore", depart: [0, 10], pas: [1, 5] },
+  { v: "paniers", intro: (p) => `${p.nom} programme un match de basket.`, hi: "Belle victoire", lo: "Encore un effort", depart: [0, 12], pas: [2, 3] },
+  { v: "bonbons", intro: (p) => `${p.nom} code une machine à bonbons.`, hi: "Machine pleine", lo: "Ajoute des bonbons", depart: [0, 25], pas: [3, 10] },
+  { v: "coquillages", intro: (p) => `Sur la plage de l’Hermitage, ${p.nom} programme un jeu de ramassage de coquillages.`, hi: "Seau plein", lo: "Cherche encore", depart: [0, 15], pas: [2, 6] },
+  { v: "sauts", intro: (p) => `${p.nom} programme un kangourou qui saute.`, hi: "Record battu", lo: "Encore un saut", depart: [0, 10], pas: [1, 4] },
+];
+
+/** Les déplacements : le lutin qui bouge, et qui le programme. */
+const COSTUMES = [
+  "un robot aspirateur", "un chat", "une tortue", "une voiture de course", "un petit robot",
+  "un dinosaure", "un chien", "un crabe", "un manchot", "une fourmi", "un poney", "une coccinelle",
+];
+function mobile(p: Prenom): string {
+  const x = pick(COSTUMES);
+  return pick([
+    `Le lutin ${deNom(p.nom)} est ${x}.`,
+    `Dans le jeu ${deNom(p.nom)}, le lutin est ${x}.`,
+    `${p.nom} a choisi ${x} comme lutin.`,
+  ]);
+}
+
+/** Les débuts de phrase neutres (pas de variable). */
+const lanceur = (p: Prenom) =>
+  pick([`${p.nom} programme son lutin.`, `${p.nom} teste un programme Scratch.`, mobile(p), `Dans le projet ${deNom(p.nom)}, le lutin suit un programme.`]);
+
+/** Les façons de présenter le programme. */
+const PRES = [
+  (p: string) => `Voici le programme : ${p}.`,
+  (p: string) => `Le programme exécute ${p}.`,
+  (p: string) => `On lance le programme ${p}.`,
+  (p: string) => `Le lutin exécute ${p}.`,
+];
+const presenter = (p: Ins[]) => pick(PRES)(progTxt(p));
+
+const qValeur = (v: string) =>
+  pick([
+    `Quelle est la valeur de la variable ${v} à la fin ?`,
+    `Que vaut ${v} une fois le programme terminé ?`,
+    `Combien vaut ${v} à la fin du programme ?`,
+    `Que contient la variable ${v} à la fin ?`,
+  ]);
+const Q_DIT = ["Quel nombre le lutin dit-il à la fin ?", "Quel nombre s’affiche à la fin ?"];
+const Q_PAS = [
+  "Combien de pas le lutin fait-il en tout ?",
+  "De combien de pas le lutin avance-t-il en tout ?",
+  "Quelle distance, en pas, le lutin parcourt-il ?",
+];
+const Q_MSG = ["Que dit le lutin ?", "Quel message s’affiche ?", "Quel message le lutin dit-il ?"];
+const RIEN = "il ne dit rien";
+
+/** La question sur la fin du programme : la variable, ou le nombre dit si le programme finit par « dire v ». */
+function finir(p: Ins[], v: string): { prog: Ins[]; q: string } {
+  if (Math.random() < 0.35) return { prog: [...p, { k: "direv", v }], q: pick(Q_DIT) };
+  return { prog: p, q: qValeur(v) };
+}
+
+const MESSAGES = ["Bonjour", "Salut", "Coucou", "C’est parti", "J’arrive", "Bravo", "À toi", "Bienvenue", "Hop", "On y va", "Super", "Au revoir"];
+
+/* ===========================================================================
+   LES GÉNÉRATEURS, micro par micro (en dessous, chaque gabarit y renvoie).
+=========================================================================== */
+
+/* ----- algo_sequence ----- */
+
+/** ★1 — quelle action vient en premier, en deuxième, en dernier, juste après… */
+function genSeqOrdre() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const n = entre(3, 4);
+    const pool: Ins[] = shuffle<Ins>([
+      { k: "dire", t: pick(MESSAGES) },
+      { k: "dire", t: pick(MESSAGES) },
+      { k: "avancer", n: 10 * entre(1, 9) },
+      { k: "avancer", n: 10 * entre(1, 9) },
+      { k: "tourner", n: pick([30, 45, 60, 90, 120, 180]) },
+    ]);
+    const prog = pool.slice(0, n);
+    const txts = prog.map(insTxt);
+    if (new Set(txts).size !== n) return null;
+    const rangs = ["en premier", "en deuxième", "en troisième", "en quatrième"];
+    const forme = entre(0, 4);
+    let idx: number;
+    let q: string;
+    if (forme <= 1) {
+      idx = entre(0, n - 2);
+      q = pick([`Quelle action le lutin fait-il ${rangs[idx]} ?`, `Quel bloc est exécuté ${rangs[idx]} ?`]);
+    } else if (forme === 2) {
+      idx = n - 1;
+      q = pick(["Quelle action le lutin fait-il en dernier ?", "Quel bloc est exécuté en dernier ?"]);
+    } else {
+      idx = entre(1, n - 1);
+      q = `Quel bloc est exécuté juste après « ${txts[idx - 1]} » ?`;
+    }
+    const bonne = txts[idx];
+    return {
+      text: `${lanceur(p)} ${presenter(prog)} ${q}`,
+      ...repQcm(bonne, shuffle(txts)),
+      explanation: expl(
+        "une séquence est une suite d’instructions exécutées dans l’ordre, de haut en bas.",
+        "on lit les blocs un par un, à partir du drapeau vert.",
+        txts.map((t, i) => `bloc ${i + 1} : ${t}`).join(" ; ") + ".",
+        `la réponse est « ${bonne} ».`
+      ),
+      canvas: canvasProg("Lire l’ordre des blocs", prog),
+    };
+  });
+}
+
+/** ★2 — la distance totale d'une séquence (avec des blocs qui ne font pas avancer). */
+function genSeqDistance() {
+  const p = pick(PRENOMS);
+  const n = entre(2, 4);
+  const prog: Ins[] = [];
+  for (let i = 0; i < n; i++) {
+    prog.push({ k: "avancer", n: 5 * entre(2, 16) });
+    if (i < n - 1 && Math.random() < 0.5)
+      prog.push(Math.random() < 0.6 ? { k: "tourner", n: pick([45, 90, 90, 180]) } : { k: "dire", t: pick(MESSAGES) });
+  }
+  const st = executer(prog);
+  const pas = prog.filter((i): i is Extract<Ins, { k: "avancer" }> => i.k === "avancer").map((i) => i.n);
+  return {
+    text: `${mobile(p)} ${presenter(prog)} ${pick(Q_PAS)}`,
+    ...repNombre(st.dist),
+    explanation: expl(
+      "une séquence est une suite d’instructions exécutées dans l’ordre.",
+      "on additionne les distances de tous les blocs « avancer » ; « tourner » et « dire » ne font pas avancer.",
+      `${pas.join(" + ")} = ${st.dist}.`,
+      `le lutin parcourt ${st.dist} pas.`
+    ),
+    canvas: canvasProg("Distance dans une séquence", prog),
+  };
+}
+
+/** Une modification de la variable : « ajouter b », « mettre v à v + b », « mettre v à v − b ». */
+function modifier(v: string, b: number): Ins {
+  const r = Math.random();
+  if (r < 0.55) return { k: "add", v, n: b };
+  if (r < 0.8) return { k: "set", v, e: E(v, "−", b) };
+  return { k: "set", v, e: E(v, "+", b) };
+}
+
+/** ★2 — la valeur finale d'une variable après quelques blocs. */
+function genSeqVariable() {
+  return tirer(() => {
+    const c = pick(CTX);
+    const p = pick(PRENOMS);
+    const prog: Ins[] = [{ k: "set", v: c.v, e: entre(...c.depart) }];
+    const n = entre(1, 3);
+    for (let i = 0; i < n; i++) prog.push(modifier(c.v, entre(...c.pas)));
+    const f = finir(prog, c.v);
+    const st = executer(f.prog);
+    if (!plausible(st)) return null;
+    const fin = st.env[c.v];
+    return {
+      text: `${c.intro(p)} ${presenter(f.prog)} ${f.q}`,
+      ...repNombre(fin),
+      explanation: explTrace(
+        "une variable garde une valeur que le programme peut changer.",
+        "on suit la valeur de la variable bloc après bloc, dans l’ordre.",
+        st.trace,
+        `la réponse est ${fin}.`
+      ),
+      canvas: canvasProg(`La variable ${c.v}`, f.prog),
+    };
+  });
+}
+
+/** ★2 — le lutin parle AU MILIEU du programme : il dit la valeur de ce moment-là. */
+function genSeqDireMilieu() {
+  return tirer(() => {
+    const c = pick(CTX);
+    const p = pick(PRENOMS);
+    const v = c.v;
+    const a = entre(...c.depart);
+    const b = entre(...c.pas);
+    const d = entre(...c.pas);
+    const prog: Ins[] = pick<Ins[]>([
+      [{ k: "set", v, e: a }, { k: "add", v, n: b }, { k: "direv", v }, { k: "add", v, n: d }],
+      [{ k: "set", v, e: a }, { k: "direv", v }, modifier(v, b)],
+      [{ k: "set", v, e: a }, modifier(v, b), { k: "direv", v }, modifier(v, d)],
+      [{ k: "set", v, e: a }, { k: "add", v, n: b }, { k: "add", v, n: d }, { k: "direv", v }, { k: "set", v, e: 0 }],
+    ]);
+    const st = executer(prog);
+    if (!plausible(st)) return null;
+    const dit = Number(st.dits[0]);
+    return {
+      text: `${c.intro(p)} ${presenter(prog)} ${pick(["Quel nombre le lutin dit-il ?", "Quel nombre s’affiche ?"])}`,
+      ...repNombre(dit),
+      explanation: explTrace(
+        "le bloc « dire » affiche la valeur de la variable AU MOMENT où il est exécuté.",
+        "on suit la variable dans l’ordre et on s’arrête au bloc « dire ».",
+        st.trace,
+        `le lutin dit ${dit}${st.env[v] !== dit ? ` (même si ${v} vaut ${st.env[v]} à la fin)` : ""}.`
+      ),
+      canvas: canvasProg(`Le lutin dit ${v}`, prog),
+    };
+  });
+}
+
+/** ★3 — l'ordre compte : la variable a déjà une valeur, puis deux blocs (parfois dans l'ordre « piège »). */
+function genSeqOrdreCompte() {
+  return tirer(() => {
+    const c = pick(CTX);
+    const p = pick(PRENOMS);
+    const v = c.v;
+    const x0 = entre(...c.depart);
+    const a = entre(...c.depart);
+    const b = entre(...c.pas);
+    const k = entre(2, 3);
+    const deux: [Ins, Ins] = pick<[Ins, Ins]>([
+      [{ k: "add", v, n: b }, { k: "set", v, e: a }],
+      [{ k: "set", v, e: a }, { k: "add", v, n: b }],
+      [{ k: "set", v, e: E(v, "×", k) }, { k: "add", v, n: b }],
+      [{ k: "add", v, n: b }, { k: "set", v, e: E(v, "×", k) }],
+    ]);
+    const f = finir([...deux], v);
+    const st = executer(f.prog, { [v]: x0 });
+    const autre = executer([deux[1], deux[0]], { [v]: x0 });
+    if (!plausible(st) || !plausible(autre)) return null;
+    const fin = st.env[v];
+    const diff = autre.env[v] !== st.env[v];
+    return {
+      text: `${c.intro(p)} Au départ, la variable ${v} vaut ${x0}. ${presenter(f.prog)} ${f.q}`,
+      ...repNombre(fin),
+      explanation: explTrace(
+        "un programme exécute ses blocs dans l’ordre : changer l’ordre peut changer le résultat.",
+        `on part avec ${v} = ${x0} et on fait les blocs de haut en bas.`,
+        st.trace,
+        `la réponse est ${fin}.${diff ? ` Dans l’autre ordre, on trouverait ${autre.env[v]}.` : ""}`
+      ),
+      canvas: canvasProg("L’ordre compte", f.prog, { [v]: x0 }),
+    };
+  });
+}
+
+/** Deux variables qui vivent ensemble. */
+const PAIRES: { a: string; b: string; intro: (p: Prenom) => string }[] = [
+  { a: "a", b: "b", intro: (p) => `${p.nom} teste un programme à deux variables.` },
+  { a: "x", b: "y", intro: (p) => `${p.nom} écrit un programme de calcul avec deux variables.` },
+  { a: "pommes", b: "poires", intro: (p) => `${p.nom} compte les fruits de deux paniers.` },
+  { a: "rouges", b: "bleus", intro: (p) => `${p.nom} compte des jetons rouges et des jetons bleus.` },
+  { a: "chats", b: "chiens", intro: (p) => `${p.nom} programme le compteur d’un refuge pour animaux.` },
+  { a: "filles", b: "garçons", intro: (p) => `${p.nom} compte les inscrits du club d’échecs.` },
+  { a: "matin", b: "soir", intro: (p) => `${p.nom} note les kilomètres de vélo du matin et du soir.` },
+  { a: "gauche", b: "droite", intro: (p) => `${p.nom} compte les voitures qui tournent à gauche ou à droite.` },
+];
+
+/* ----- algo_entree_sortie ----- */
+
+/** Les questions posées par le lutin, la variable qui garde la réponse, des réponses plausibles. */
+const QUESTIONS: { t: string; v: string; min: number; max: number }[] = [
+  { t: "Quel âge as-tu ?", v: "âge", min: 9, max: 14 },
+  { t: "Combien de billes as-tu ?", v: "billes", min: 5, max: 40 },
+  { t: "Choisis un nombre.", v: "nombre", min: 2, max: 30 },
+  { t: "Quelle est ta pointure ?", v: "pointure", min: 32, max: 42 },
+  { t: "Combien de pages as-tu lues ?", v: "pages", min: 5, max: 60 },
+  { t: "Combien d’élèves dans ta classe ?", v: "élèves", min: 20, max: 30 },
+  { t: "Combien de minutes de marche ?", v: "minutes", min: 5, max: 45 },
+  { t: "Combien de points as-tu marqués ?", v: "points", min: 3, max: 30 },
+  { t: "Combien de cartes as-tu ?", v: "cartes", min: 10, max: 50 },
+  { t: "Quelle est ta note ?", v: "note", min: 6, max: 20 },
+  { t: "Combien de tours de piste ?", v: "tours", min: 2, max: 12 },
+  { t: "Combien de pommes dans le panier ?", v: "pommes", min: 4, max: 25 },
+];
+
+const introQuestion = (p: Prenom) =>
+  pick([
+    `${p.nom} écrit un programme qui pose une question.`,
+    `${p.nom} programme un lutin qui discute.`,
+    `${p.nom} teste son programme avec la classe.`,
+    `Dans le programme ${deNom(p.nom)}, le lutin pose une question.`,
+  ]);
+
+/** Qui répond, et quoi. */
+function quiRepond(p: Prenom, r: number): string {
+  let q = pick(PRENOMS);
+  while (q.nom === p.nom) q = pick(PRENOMS);
+  return pick([`L’utilisateur répond ${r}.`, `${q.nom} répond ${r}.`, `On tape ${r} au clavier.`, `${q.nom} saisit ${r}.`]);
+}
+
+const Q_SORTIE = ["Quel nombre le lutin dit-il ?", "Quelle est la sortie du programme ?", "Quel nombre s’affiche ?"];
+
+/** ★1 — reconnaître l'entrée (« demander ») et la sortie (« dire »). */
+function genESRole() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const Qd = pick(QUESTIONS);
+    const v = Qd.v;
+    const prog: Ins[] = [{ k: "demander", t: Qd.t }, { k: "set", v, e: "réponse" }];
+    if (Math.random() < 0.5) prog.push({ k: "add", v, n: entre(1, 5) });
+    prog.push(Math.random() < 0.6 ? { k: "direv", v } : { k: "dire", t: pick(["Merci", "C’est noté", "Super", "D’accord"]) });
+    const sortie = Math.random() < 0.5;
+    const q = sortie
+      ? pick(["Quel bloc donne la sortie du programme ?", "Quel bloc affiche un résultat à l’écran ?", "Avec quel bloc le programme donne-t-il une information ?"])
+      : pick(["Quel bloc est l’entrée du programme ?", "Quel bloc récupère ce que tape l’utilisateur ?", "Avec quel bloc le programme reçoit-il une information ?"]);
+    const txts = prog.map(insTxt);
+    const bonne = sortie ? txts[txts.length - 1] : txts[0];
+    return {
+      text: `${introQuestion(p)} ${presenter(prog)} ${q}`,
+      ...repQcm(bonne, shuffle(txts)),
+      explanation: expl(
+        "une entrée est une information que le programme reçoit ; une sortie est une information qu’il affiche.",
+        "le bloc « demander … et attendre » reçoit ce que tape l’utilisateur ; le bloc « dire » affiche à l’écran.",
+        `l’entrée est « ${txts[0]} », la sortie est « ${txts[txts.length - 1]} ».`,
+        `la réponse est « ${bonne} ».`
+      ),
+      canvas: canvasProg("Entrée et sortie", prog),
+    };
+  });
+}
+
+/** ★2 — la réponse tapée, une modification, puis la sortie. */
+function genESCalcul() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const Qd = pick(QUESTIONS);
+    const v = Qd.v;
+    const r = entre(Qd.min, Qd.max);
+    const b = entre(2, 9);
+    const modif: Ins = pick<Ins>([{ k: "add", v, n: b }, { k: "set", v, e: E(v, "−", b) }, { k: "set", v, e: E(v, "×", 2) }, { k: "set", v, e: E(v, "+", b) }]);
+    const prog: Ins[] = [{ k: "demander", t: Qd.t }, { k: "set", v, e: "réponse" }, modif, { k: "direv", v }];
+    const st = executer(prog, {}, [r]);
+    if (!plausible(st)) return null;
+    const out = Number(st.dits[0]);
+    return {
+      text: `${introQuestion(p)} ${presenter(prog)} ${quiRepond(p, r)} ${pick(Q_SORTIE)}`,
+      ...repNombre(out),
+      explanation: explTrace(
+        "un programme reçoit une entrée, la transforme, puis donne une sortie.",
+        "on remplace « réponse » par le nombre tapé, puis on suit les blocs dans l’ordre.",
+        st.trace,
+        `le lutin dit ${out}.`
+      ),
+      canvas: canvasProg("Entrée → calcul → sortie", prog),
+    };
+  });
+}
+
+/** ★2 — deux variables : laquelle le lutin dit-il ? */
+function genESDeuxVariables() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const Qd = pick(QUESTIONS);
+    const v = Qd.v;
+    const r = entre(Qd.min, Qd.max);
+    const b = entre(2, 9);
+    const w = pick([
+      { n: "double", e: E(v, "×", 2) },
+      { n: "triple", e: E(v, "×", 3) },
+      { n: "résultat", e: E(v, "+", b) },
+      { n: "total", e: E(v, "+", b) },
+    ]);
+    const ditW = Math.random() < 0.5;
+    const prog: Ins[] = [{ k: "demander", t: Qd.t }, { k: "set", v, e: "réponse" }, { k: "set", v: w.n, e: w.e }, { k: "direv", v: ditW ? w.n : v }];
+    const st = executer(prog, {}, [r]);
+    if (!plausible(st)) return null;
+    const out = Number(st.dits[0]);
+    return {
+      text: `${introQuestion(p)} ${presenter(prog)} ${quiRepond(p, r)} ${pick(Q_SORTIE)}`,
+      ...repNombre(out),
+      explanation: explTrace(
+        "la sortie est ce que le bloc « dire » affiche : il faut regarder QUELLE variable il dit.",
+        "on suit les deux variables, puis on lit le bloc « dire ».",
+        st.trace,
+        `le lutin dit ${ditW ? w.n : v}, soit ${out}.`
+      ),
+      canvas: canvasProg("Quelle variable est dite ?", prog),
+    };
+  });
+}
+
+/** ★3 — entrée, calcul en une ou deux étapes, sortie. */
+function genESCalcul2() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const Qd = pick(QUESTIONS);
+    const v = Qd.v;
+    const r = entre(Qd.min, Qd.max);
+    const k = entre(2, 5);
+    const b = entre(1, 12);
+    const corps: Ins[] = pick<Ins[]>([
+      [{ k: "set", v, e: E(E("réponse", "×", k), "+", b) }],
+      [{ k: "set", v, e: E("réponse", "+", b) }, { k: "set", v, e: E(v, "×", k) }],
+      [{ k: "set", v, e: E(k, "×", "réponse") }, { k: "set", v, e: E(v, "−", b) }],
+      [{ k: "set", v, e: "réponse" }, { k: "set", v, e: E(E(v, "+", b), "×", k) }],
+    ]);
+    const prog: Ins[] = [{ k: "demander", t: Qd.t }, ...corps, { k: "direv", v }];
+    const st = executer(prog, {}, [r]);
+    if (!plausible(st)) return null;
+    const out = Number(st.dits[0]);
+    return {
+      text: `${introQuestion(p)} ${presenter(prog)} ${quiRepond(p, r)} ${pick(Q_SORTIE)}`,
+      ...repNombre(out),
+      explanation: explTrace(
+        "un programme peut prendre une entrée, faire un calcul, puis afficher une sortie.",
+        "on remplace « réponse » par le nombre tapé ; on fait la multiplication avant l’addition, sauf parenthèses.",
+        st.trace,
+        `le lutin dit ${out}.`
+      ),
+      canvas: canvasProg("Entrée → calcul → sortie", prog),
+    };
+  });
+}
+
+/** Deux questions, deux réponses, un calcul. */
+const DEUX_ENTREES: { intro: string; a: [string, string]; b: [string, string]; res: string; e: Expr; min: number; max: number }[] = [
+  { intro: "Le programme calcule l’aire d’un rectangle.", a: ["Longueur ?", "longueur"], b: ["Largeur ?", "largeur"], res: "aire", e: E("longueur", "×", "largeur"), min: 2, max: 12 },
+  { intro: "Le programme calcule le périmètre d’un rectangle.", a: ["Longueur ?", "longueur"], b: ["Largeur ?", "largeur"], res: "périmètre", e: E(2, "×", E("longueur", "+", "largeur")), min: 2, max: 15 },
+  { intro: "Le programme compte les biscuits d’un carton.", a: ["Combien de paquets ?", "paquets"], b: ["Combien de biscuits par paquet ?", "biscuits"], res: "total", e: E("paquets", "×", "biscuits"), min: 2, max: 12 },
+  { intro: "Le programme calcule la longueur d’une balade.", a: ["Distance à l’aller ?", "aller"], b: ["Distance au retour ?", "retour"], res: "trajet", e: E("aller", "+", "retour"), min: 2, max: 20 },
+  { intro: "Le programme compare deux âges.", a: ["Ton âge ?", "âge"], b: ["L’âge de ton frère ?", "frère"], res: "écart", e: E("âge", "−", "frère"), min: 2, max: 14 },
+  { intro: "Le programme compte les places d’une salle.", a: ["Combien de rangées ?", "rangées"], b: ["Combien de sièges par rangée ?", "sièges"], res: "places", e: E("rangées", "×", "sièges"), min: 3, max: 15 },
+  { intro: "Le programme additionne les points de deux manches.", a: ["Points de la première manche ?", "premier"], b: ["Points de la seconde manche ?", "second"], res: "score", e: E("premier", "+", "second"), min: 3, max: 25 },
+];
+
+/** ★3 — deux entrées, puis la sortie. */
+function genESDeuxEntrees() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const D = pick(DEUX_ENTREES);
+    const r1 = entre(D.min, D.max);
+    const r2 = entre(D.min, D.max);
+    const prog: Ins[] = [
+      { k: "demander", t: D.a[0] },
+      { k: "set", v: D.a[1], e: "réponse" },
+      { k: "demander", t: D.b[0] },
+      { k: "set", v: D.b[1], e: "réponse" },
+      { k: "set", v: D.res, e: D.e },
+      { k: "direv", v: D.res },
+    ];
+    const st = executer(prog, {}, [r1, r2]);
+    if (!plausible(st)) return null;
+    const out = Number(st.dits[0]);
+    let q = pick(PRENOMS);
+    while (q.nom === p.nom) q = pick(PRENOMS);
+    return {
+      text: `${p.nom} teste son programme. ${D.intro} ${presenter(prog)} ${pick([`${q.nom} répond ${r1}, puis ${r2}.`, `On tape ${r1}, puis ${r2}.`])} ${pick(Q_SORTIE)}`,
+      ...repNombre(out),
+      explanation: explTrace(
+        "un programme peut recevoir plusieurs entrées : chaque « demander » reçoit une réponse, dans l’ordre.",
+        "la première réponse va dans la première variable, la seconde dans la seconde ; puis on calcule.",
+        st.trace,
+        `le lutin dit ${out}.`
+      ),
+      canvas: canvasProg("Deux entrées", prog),
+    };
+  });
+}
+
+/** ★4 — retrouver l'entrée à partir de la sortie. */
+function genESRetrouver() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const Qd = pick(QUESTIONS);
+    const v = Qd.v;
+    const r = entre(Qd.min, Qd.max);
+    const k = entre(2, 4);
+    const b = entre(1, 9);
+    const corps: Ins[] = pick<Ins[]>([
+      [{ k: "set", v, e: E("réponse", "×", k) }, { k: "add", v, n: b }],
+      [{ k: "set", v, e: "réponse" }, { k: "add", v, n: b }],
+      [{ k: "set", v, e: E("réponse", "+", b) }, { k: "set", v, e: E(v, "×", k) }],
+      [{ k: "set", v, e: E(k, "×", "réponse") }],
+    ]);
+    const prog: Ins[] = [{ k: "demander", t: Qd.t }, ...corps, { k: "direv", v }];
+    const st = executer(prog, {}, [r]);
+    if (!plausible(st)) return null;
+    const out = Number(st.dits[0]);
+    let q = pick(PRENOMS);
+    while (q.nom === p.nom) q = pick(PRENOMS);
+    return {
+      text: `${introQuestion(p)} ${presenter(prog)} ${q.nom} tape un nombre et le lutin dit ${out}. Quel nombre ${q.nom} a-t-${pron(q)} tapé ?`,
+      ...repNombre(r),
+      explanation: explTrace(
+        "on connaît la sortie ; on cherche l’entrée.",
+        "on remonte le programme en faisant les opérations contraires (− au lieu de +, ÷ au lieu de ×), puis on vérifie.",
+        [`on vérifie avec ${r}`, ...st.trace],
+        `${q.nom} a tapé ${r}.`
+      ),
+      canvas: canvasProg("Retrouver l’entrée", prog),
+    };
+  });
+}
+
+/* ----- algo_expression_valeur ----- */
+
+/** Les variables d'une expression : une lettre, ou un nom dans une petite situation. */
+const VARS_EXPR: { v: string; min: number; max: number; intro?: (p: Prenom) => string }[] = [
+  { v: "x", min: 2, max: 12 },
+  { v: "n", min: 2, max: 12 },
+  { v: "a", min: 2, max: 10 },
+  { v: "y", min: 2, max: 12 },
+  { v: "t", min: 2, max: 9 },
+  { v: "côté", min: 3, max: 15, intro: (p) => `${p.nom} programme le tracé d’un carré.` },
+  { v: "âge", min: 9, max: 14, intro: (p) => `${p.nom} écrit un programme sur les âges de sa famille.` },
+  { v: "score", min: 2, max: 20, intro: (p) => `${p.nom} programme le tableau des scores d’un jeu.` },
+  { v: "billes", min: 3, max: 20, intro: (p) => `${p.nom} compte ses billes avec un programme.` },
+  { v: "longueur", min: 3, max: 15, intro: (p) => `${p.nom} programme le dessin d’un rectangle.` },
+];
+
+/** « x vaut 4. » sous plusieurs formes (toujours « … vaut … », que le correcteur relit). */
+const donneeTxt = (v: string, x: number, p: Prenom | null) =>
+  pick([`${v} vaut ${x}.`, `La variable ${v} vaut ${x}.`, `On sait que ${v} vaut ${x}.`, p ? `Dans le programme ${deNom(p.nom)}, ${v} vaut ${x}.` : `Ici, ${v} vaut ${x}.`]);
+
+const Q_EXPR = [
+  (e: string) => `Que vaut « ${e} » ?`,
+  (e: string) => `Calcule « ${e} ».`,
+  (e: string) => `Quelle est la valeur de « ${e} » ?`,
+  (e: string) => `Quel nombre donne le bloc « ${e} » ?`,
+];
+
+/** Une expression à une variable, posée telle quelle (le canvas : la valeur, puis le bloc qui dit l'expression). */
+function poserExpression(formes: ((v: string) => Expr)[], titre: string, def: string) {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const V = pick(VARS_EXPR);
+    const x = entre(V.min, V.max);
+    const e = pick(formes)(V.v);
+    const val = evalE(e, { [V.v]: x });
+    if (val < 0 || val > 999) return null;
+    const et = exprTxt(e);
+    const intro = V.intro && Math.random() < 0.7 ? `${V.intro(p)} ` : "";
+    return {
+      text: `${intro}${donneeTxt(V.v, x, intro ? null : p)} ${pick(Q_EXPR)(et)}`,
+      ...repNombre(val),
+      explanation: expl(
+        def,
+        `on remplace ${V.v} par ${x}, puis on calcule (la multiplication avant l’addition et la soustraction).`,
+        `${et} = ${exprTxt(e, { [V.v]: x })} = ${val}.`,
+        `la valeur est ${val}.`
+      ),
+      canvas: scratchCanvas(titre, [{ type: "event" }, { type: "set_variable", variable: V.v, value: x }, { type: "say", text: et }]),
+    };
+  });
+}
+
+const k2 = () => entre(2, 9);
+const b2 = () => entre(1, 15);
+
+function genExprAddition() {
+  return poserExpression(
+    [(v) => E(v, "+", b2()), (v) => E(v, "−", entre(1, 9)), (v) => E(b2(), "+", v), (v) => E(E(v, "+", b2()), "−", entre(1, 5))],
+    "Valeur d’une expression",
+    "calculer une expression, c’est remplacer la variable par sa valeur."
+  );
+}
+
+function genExprMultiplication() {
+  return poserExpression(
+    [(v) => E(k2(), "×", v), (v) => E(v, "×", k2()), (v) => E(v, "×", v)],
+    "Multiplication avec une variable",
+    "une expression avec une variable se calcule dès qu’on connaît la valeur de la variable."
+  );
+}
+
+function genExprDeuxEtapes() {
+  return poserExpression(
+    [
+      (v) => E(E(k2(), "×", v), "+", b2()),
+      (v) => E(b2(), "+", E(k2(), "×", v)),
+      (v) => E(E(k2(), "×", v), "−", entre(1, 9)),
+      (v) => E(E(v, "×", k2()), "+", b2()),
+      (v) => E(k2(), "×", E(v, "+", b2())),
+    ],
+    "Expression en deux étapes",
+    "une expression peut contenir plusieurs opérations : la multiplication passe avant l’addition, sauf parenthèses."
+  );
+}
+
+/** ★3 — un programme de calcul qui part d'un nombre écrit dans le premier bloc. */
+function genExprProgramme() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const r = pick(["résultat", "nombre", "calcul", "total"]);
+    const prog: Ins[] = [{ k: "set", v: r, e: entre(2, 12) }];
+    const etapes = shuffle<Ins>([
+      { k: "set", v: r, e: E(r, "×", entre(2, 5)) },
+      { k: "add", v: r, n: entre(1, 12) },
+      { k: "set", v: r, e: E(r, "−", entre(1, 9)) },
+      { k: "set", v: r, e: E(r, "+", entre(2, 9)) },
+    ]).slice(0, entre(2, 3));
+    const f = finir([...prog, ...etapes], r);
+    const st = executer(f.prog);
+    if (!plausible(st)) return null;
+    return {
+      text: `${pick([`${p.nom} teste un programme de calcul.`, `${p.nom} invente un programme de calcul pour sa classe.`, `Au club de code, ${p.nom} écrit un programme de calcul.`])} ${presenter(f.prog)} ${f.q}`,
+      ...repNombre(st.env[r]),
+      explanation: explTrace(
+        "exécuter un programme de calcul, c’est faire ses instructions dans l’ordre.",
+        `on suit la valeur de ${r} bloc après bloc.`,
+        st.trace,
+        `la réponse est ${st.env[r]}.`
+      ),
+      canvas: canvasProg("Programme de calcul", f.prog),
+    };
+  });
+}
+
+/** ★3 — la réponse tapée devient la valeur de la variable, puis une expression. */
+function genExprReponse() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const V = pick(VARS_EXPR);
+    const x = entre(V.min, V.max);
+    const k = k2();
+    const b = b2();
+    const e = pick<Expr>([E(E(k, "×", V.v), "+", b), E(V.v, "+", b), E(E(V.v, "×", k), "−", entre(1, 9)), E(k, "×", E(V.v, "+", b))]);
+    const r = pick(["résultat", "sortie", "calcul"]);
+    const prog: Ins[] = [{ k: "demander", t: "Choisis un nombre." }, { k: "set", v: V.v, e: "réponse" }, { k: "set", v: r, e }, { k: "direv", v: r }];
+    const st = executer(prog, {}, [x]);
+    if (!plausible(st)) return null;
+    const out = Number(st.dits[0]);
+    return {
+      text: `${V.intro ? V.intro(p) : `${p.nom} écrit un programme de calcul.`} ${presenter(prog)} ${quiRepond(p, x)} ${pick(Q_SORTIE)}`,
+      ...repNombre(out),
+      explanation: explTrace(
+        "une réponse tapée par l’utilisateur peut servir dans un calcul.",
+        `${V.v} prend la valeur tapée, puis on calcule ${exprTxt(e)}.`,
+        st.trace,
+        `le lutin dit ${out}.`
+      ),
+      canvas: canvasProg("Réponse utilisée dans un calcul", prog),
+    };
+  });
+}
+
+/** ★3 — deux variables dans la même expression. */
+function genExprDeuxVariables() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const [a, b] = pick<[string, string]>([["a", "b"], ["x", "y"], ["m", "n"], ["longueur", "largeur"], ["p", "q"]]);
+    const xa = entre(2, 9);
+    const xb = entre(2, 9);
+    const c = entre(1, 9);
+    const e = pick<Expr>([
+      E(E(a, "×", b), "+", c),
+      E(a, "+", E(b, "×", c)),
+      E(E(a, "+", b), "×", c),
+      E(E(a, "×", b), "−", c),
+      E(a, "×", E(b, "+", c)),
+      E(E(2, "×", a), "+", E(2, "×", b)),
+    ]);
+    const val = evalE(e, { [a]: xa, [b]: xb });
+    if (val < 0 || val > 999) return null;
+    const et = exprTxt(e);
+    return {
+      text: `${pick([`${p.nom} teste un bloc de calcul.`, `${p.nom} programme une formule à deux variables.`, `Au club de code, ${p.nom} écrit une formule.`])} ${a} vaut ${xa} et ${b} vaut ${xb}. ${pick(Q_EXPR)(et)}`,
+      ...repNombre(val),
+      explanation: expl(
+        "une expression peut contenir plusieurs variables : chacune est remplacée par sa valeur.",
+        "on remplace chaque variable, puis on respecte les priorités (parenthèses, puis ×, puis + et −).",
+        `${et} = ${exprTxt(e, { [a]: xa, [b]: xb })} = ${val}.`,
+        `la valeur est ${val}.`
+      ),
+      canvas: scratchCanvas("Deux variables", [
+        { type: "event" },
+        { type: "set_variable", variable: a, value: xa },
+        { type: "set_variable", variable: b, value: xb },
+        { type: "say", text: et },
+      ]),
+    };
+  });
+}
+
+/** ★4 — QCM : les leurres sont les vraies erreurs de priorité. */
+function genExprPieges() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const V = pick(VARS_EXPR);
+    const v = V.v;
+    const x = entre(V.min, Math.min(V.max, 12));
+    const k = entre(2, 6);
+    const b = entre(2, 9);
+    const formes: { e: Expr; leurres: number[] }[] = [
+      { e: E(k, "×", E(v, "+", b)), leurres: [k * x + b, k + x + b, k * x, x + b] },
+      { e: E(b, "+", E(k, "×", v)), leurres: [(b + k) * x, b + k + x, k * x, b + k] },
+      { e: E(E(k, "×", v), "−", b), leurres: [k * (x - b), k * x, x - b, k * x + b] },
+      { e: E(E(v, "+", b), "×", k), leurres: [x + b * k, x + b + k, x + b, x * k + b] },
+      { e: E(E(v, "×", v), "+", b), leurres: [2 * x + b, x * (x + b), x * x, x + b] },
+    ];
+    const F = pick(formes);
+    const val = evalE(F.e, { [v]: x });
+    if (val < 0 || val > 999) return null;
+    const choix = propositions(String(val), F.leurres.filter((l) => l >= 0).map(String));
+    if (!choix) return null;
+    const et = exprTxt(F.e);
+    return {
+      text: `${V.intro ? `${V.intro(p)} ` : ""}${donneeTxt(v, x, V.intro ? null : p)} ${pick(Q_EXPR)(et)}`,
+      ...repQcm(String(val), choix),
+      explanation: expl(
+        "dans une expression, on calcule d’abord les parenthèses, puis les multiplications, puis les additions et soustractions.",
+        `on remplace ${v} par ${x} et on respecte ces priorités.`,
+        `${et} = ${exprTxt(F.e, { [v]: x })} = ${val}.`,
+        `la bonne réponse est ${val}.`
+      ),
+      canvas: scratchCanvas("Attention aux priorités", [{ type: "event" }, { type: "set_variable", variable: v, value: x }, { type: "say", text: et }]),
+    };
+  });
+}
+
+/* ----- algo_prevoir_expression ----- */
+
+const introCalcul = (p: Prenom) =>
+  pick([
+    `${p.nom} écrit un programme de calcul.`,
+    `${p.nom} invente un programme de calcul pour sa classe.`,
+    `Au club de code, ${p.nom} écrit un programme de calcul.`,
+    `${p.nom} prépare un tour de magie avec un programme de calcul.`,
+  ]);
+
+const LETTRES = ["x", "n", "a", "t", "y"];
+const RES = ["résultat", "calcul", "sortie"];
+
+/** Un programme en deux ou trois blocs sur l'entrée L, rangé dans r, et sa formule. */
+function programmeFormule(L: string, r: string, parentheses: boolean | null) {
+  const k = entre(2, 9);
+  const b = entre(1, 12);
+  const c = entre(1, 9);
+  const sans: { prog: Ins[]; f: Expr; leurres: Expr[] }[] = [
+    { prog: [{ k: "set", v: r, e: E(k, "×", L) }, { k: "add", v: r, n: b }], f: E(E(k, "×", L), "+", b), leurres: [E(k, "×", E(L, "+", b)), E(L, "+", E(k, "×", b)), E(E(L, "×", b), "+", k), E(E(k, "+", L), "+", b)] },
+    { prog: [{ k: "set", v: r, e: E(L, "×", k) }, { k: "set", v: r, e: E(r, "−", b) }], f: E(E(L, "×", k), "−", b), leurres: [E(k, "×", E(L, "−", b)), E(L, "−", E(k, "×", b)), E(E(L, "×", b), "−", k), E(E(L, "+", k), "−", b)] },
+    { prog: [{ k: "set", v: r, e: L }, { k: "set", v: r, e: E(r, "×", k) }, { k: "add", v: r, n: b }], f: E(E(L, "×", k), "+", b), leurres: [E(E(L, "+", b), "×", k), E(L, "+", E(b, "×", k)), E(E(L, "+", k), "+", b), E(E(L, "×", b), "+", k)] },
+  ];
+  const avec: { prog: Ins[]; f: Expr; leurres: Expr[] }[] = [
+    { prog: [{ k: "set", v: r, e: E(L, "+", b) }, { k: "set", v: r, e: E(r, "×", k) }], f: E(E(L, "+", b), "×", k), leurres: [E(L, "+", E(b, "×", k)), E(E(k, "×", L), "+", b), E(E(L, "×", b), "+", k), E(E(L, "+", b), "+", k)] },
+    { prog: [{ k: "set", v: r, e: E(L, "−", c) }, { k: "set", v: r, e: E(r, "×", k) }], f: E(E(L, "−", c), "×", k), leurres: [E(L, "−", E(c, "×", k)), E(E(k, "×", L), "−", c), E(E(L, "×", k), "+", c), E(E(L, "−", c), "+", k)] },
+    { prog: [{ k: "set", v: r, e: E(L, "+", b) }, { k: "set", v: r, e: E(r, "×", k) }, { k: "add", v: r, n: c }], f: E(E(E(L, "+", b), "×", k), "+", c), leurres: [E(E(L, "+", E(b, "×", k)), "+", c), E(E(L, "+", b), "×", E(k, "+", c)), E(L, "+", E(b, "×", E(k, "+", c))), E(E(E(L, "×", k), "+", b), "+", c)] },
+  ];
+  const F = pick(parentheses === null ? [...sans, ...avec] : parentheses ? avec : sans);
+  return { ...F, prog: [...F.prog, { k: "direv" as const, v: r }] };
+}
+
+/** ★3 / ★4 — quelle formule traduit le programme ? */
+function genPrevoirFormule(parentheses: boolean) {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const L = pick(LETTRES);
+    const r = pick(RES);
+    const F = programmeFormule(L, r, parentheses);
+    // Les leurres ne doivent JAMAIS valoir la formule juste (testé sur plusieurs valeurs).
+    const egal = (g: Expr) => [2, 5, 7, 13].every((x) => evalE(g, { [L]: x }) === evalE(F.f, { [L]: x }));
+    const choix = propositions(exprTxt(F.f), F.leurres.filter((g) => !egal(g)).map((g) => exprTxt(g)));
+    if (!choix) return null;
+    const q = pick([
+      "Quelle formule correspond au programme ?",
+      "Quelle expression le lutin calcule-t-il ?",
+      `Quelle expression en ${L} donne le nombre dit par le lutin ?`,
+      "Quelle écriture traduit ce programme ?",
+    ]);
+    const x = entre(10, 15);
+    const st = executer(F.prog, { [L]: x });
+    return {
+      text: `${introCalcul(p)} Le nombre de départ est dans la variable ${L}. ${presenter(F.prog)} ${q}`,
+      ...repQcm(exprTxt(F.f), choix),
+      explanation: expl(
+        "un programme de calcul se traduit par une expression : on écrit ses opérations dans l’ordre, avec des parenthèses quand un résultat entier est réutilisé.",
+        `on part de ${L} et on suit les blocs un par un.`,
+        `le programme calcule ${exprTxt(F.f)}. Vérification avec ${L} = ${x} : ${exprTxt(F.f, { [L]: x })} = ${st.dits[0]}.`,
+        `la bonne formule est ${exprTxt(F.f)}.`
+      ),
+      canvas: canvasProg("Programme vers formule", F.prog),
+    };
+  });
+}
+
+/** ★3 — prévoir la sortie sans lancer le programme. */
+function genPrevoirSortie(surPlace: boolean) {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const L = pick(LETTRES);
+    const x = entre(2, 12);
+    let prog: Ins[];
+    if (surPlace) {
+      const etapes = shuffle<Ins>([
+        { k: "set", v: L, e: E(L, "+", entre(1, 9)) },
+        { k: "set", v: L, e: E(L, "×", entre(2, 5)) },
+        { k: "set", v: L, e: E(L, "−", entre(1, 9)) },
+        { k: "add", v: L, n: entre(1, 9) },
+      ]).slice(0, 3);
+      prog = [...etapes, { k: "direv", v: L }];
+    } else {
+      prog = programmeFormule(L, pick(RES), null).prog;
+    }
+    const st = executer(prog, { [L]: x });
+    if (!plausible(st)) return null;
+    const out = Number(st.dits[0]);
+    return {
+      text: `${introCalcul(p)} ${presenter(prog)} ${pick([
+        `${p.nom} veut prévoir le résultat avant de lancer le programme : ${L} vaut ${x}.`,
+        `Sans lancer le programme, on cherche sa sortie quand ${L} vaut ${x}.`,
+        `Cette fois, ${L} vaut ${x}.`,
+      ])} ${pick(Q_SORTIE)}`,
+      ...repNombre(out),
+      explanation: explTrace(
+        "prévoir un programme, c’est trouver son résultat avant de le lancer.",
+        `on part de ${L} = ${x} et on suit les blocs dans l’ordre.`,
+        st.trace,
+        `le lutin dit ${out}.`
+      ),
+      canvas: canvasProg("Prévoir le résultat", prog, { [L]: x }),
+    };
+  });
+}
+
+/** ★4 — deux programmes, la même entrée : lequel donne le plus grand (ou le plus petit) nombre ? */
+function genPrevoirComparer() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const L = pick(LETTRES);
+    const r = pick(RES);
+    const A = programmeFormule(L, r, null);
+    const B = programmeFormule(L, r, null);
+    if (exprTxt(A.f) === exprTxt(B.f)) return null;
+    const x = entre(2, 12);
+    const sa = executer(A.prog, { [L]: x });
+    const sb = executer(B.prog, { [L]: x });
+    if (!plausible(sa) || !plausible(sb)) return null;
+    const va = Number(sa.dits[0]);
+    const vb = Number(sb.dits[0]);
+    const grand = Math.random() < 0.6;
+    const bonne = va === vb ? "ils disent le même nombre" : (va > vb) === grand ? "le programme A" : "le programme B";
+    return {
+      text:
+        `${p.nom} compare deux programmes de calcul. Programme A : ${progTxt(A.prog)}. Programme B : ${progTxt(B.prog)}. ` +
+        `Au départ, ${L} vaut ${x} dans les deux programmes. ${grand ? "Quel programme fait dire au lutin le plus grand nombre ?" : "Quel programme fait dire au lutin le plus petit nombre ?"}`,
+      ...repQcm(bonne, ["le programme A", "le programme B", "ils disent le même nombre"]),
+      explanation: expl(
+        "pour comparer deux programmes, on les exécute avec la même entrée.",
+        `on remplace ${L} par ${x} dans chaque programme.`,
+        `programme A : ${exprTxt(A.f, { [L]: x })} = ${va}. Programme B : ${exprTxt(B.f, { [L]: x })} = ${vb}.`,
+        `la réponse est « ${bonne} ».`
+      ),
+    };
+  });
+}
+
+/* ----- algo_defi (lire un programme complet) ----- */
+
+/** ★4 — variable, boucle, et parfois un bloc après la boucle. */
+function genDefiBoucle() {
+  return tirer(() => {
+    const c = pick(CTX);
+    const p = pick(PRENOMS);
+    const v = c.v;
+    const n = entre(2, 6);
+    const b = entre(...c.pas);
+    const corps: Ins[] = Math.random() < 0.3 ? [{ k: "add", v, n: b }, { k: "add", v: "compteur", n: 1 }] : [modifier(v, b)];
+    const prog: Ins[] = [{ k: "set", v, e: entre(...c.depart) }];
+    if (corps.length > 1) prog.push({ k: "set", v: "compteur", e: 0 });
+    prog.push({ k: "rep", n, corps });
+    const apres = entre(0, 3);
+    if (apres === 1) prog.push({ k: "add", v, n: entre(1, 9) });
+    if (apres === 2) prog.push({ k: "set", v, e: E(v, "×", 2) });
+    if (apres === 3) prog.push({ k: "set", v, e: E(v, "−", entre(1, 9)) });
+    const cible = corps.length > 1 && Math.random() < 0.3 ? "compteur" : v;
+    const f = finir(prog, cible);
+    const st = executer(f.prog);
+    if (!plausible(st)) return null;
+    return {
+      text: `${c.intro(p)} ${presenter(f.prog)} ${f.q}`,
+      ...repNombre(st.env[cible]),
+      explanation: explTrace(
+        "un programme peut enchaîner des blocs, une boucle, puis d’autres blocs.",
+        "on suit la variable : avant la boucle, à chaque tour, puis après la boucle.",
+        st.trace,
+        `la réponse est ${st.env[cible]}.`
+      ),
+      canvas: canvasProg("Variable et boucle", f.prog),
+    };
+  });
+}
+
+/** ★5 — une entrée, une boucle, puis la sortie. */
+function genDefiEntreeBoucle() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const Qd = pick(QUESTIONS);
+    const v = Qd.v;
+    const r = entre(Qd.min, Qd.max);
+    const n = entre(2, 5);
+    const b = entre(2, 9);
+    const prog: Ins[] = [{ k: "demander", t: Qd.t }, { k: "set", v, e: "réponse" }, { k: "rep", n, corps: [modifier(v, b)] }];
+    const apres = entre(0, 2);
+    if (apres === 1) prog.push({ k: "set", v, e: E(v, "×", 2) });
+    if (apres === 2) prog.push({ k: "add", v, n: entre(1, 9) });
+    prog.push({ k: "direv", v });
+    const st = executer(prog, {}, [r]);
+    if (!plausible(st)) return null;
+    const out = Number(st.dits[0]);
+    return {
+      text: `${introQuestion(p)} ${presenter(prog)} ${quiRepond(p, r)} ${pick(Q_SORTIE)}`,
+      ...repNombre(out),
+      explanation: explTrace(
+        "un programme peut combiner une entrée, une boucle et une sortie.",
+        "on part de la valeur tapée, on fait chaque tour de boucle, puis les blocs suivants.",
+        st.trace,
+        `le lutin dit ${out}.`
+      ),
+      canvas: canvasProg("Entrée + boucle", prog),
+    };
+  });
+}
+
+/** ★5 — une boucle qui double, ou une boucle suivie d'un test. */
+function genDefiDoubleOuTest() {
+  return tirer(() => {
+    const c = pick(CTX);
+    const p = pick(PRENOMS);
+    const v = c.v;
+    let prog: Ins[];
+    let q: string;
+    const numerique = Math.random() < 0.5;
+    if (numerique) {
+      const corps: Ins[] = pick<Ins[]>([
+        [{ k: "set", v, e: E(v, "×", 2) }],
+        [{ k: "set", v, e: E(v, "×", 2) }, { k: "add", v, n: entre(1, 3) }],
+        [{ k: "add", v, n: entre(1, 4) }, { k: "set", v, e: E(v, "×", 2) }],
+        [{ k: "set", v, e: E(v, "×", 3) }],
+      ]);
+      const f = finir([{ k: "set", v, e: entre(1, 5) }, { k: "rep", n: entre(2, 4), corps }], v);
+      prog = f.prog;
+      q = f.q;
+    } else {
+      const a = entre(...c.depart);
+      const b = entre(...c.pas);
+      const n = entre(2, 5);
+      const fin = a + n * b;
+      const s = pick([fin, fin - 1, fin + 1, fin - b, fin + b, a + b]);
+      const op = pick<Cmp>([">", "<"]);
+      // « si score > s » : le message du succès ; « si score < s » : celui de l'effort.
+      const [m1, m2] = op === ">" ? [c.hi, c.lo] : [c.lo, c.hi];
+      prog = [{ k: "set", v, e: a }, { k: "rep", n, corps: [{ k: "add", v, n: b }] }, { k: "si", c: { v, op, s }, alors: [{ k: "dire", t: m1 }], sinon: [{ k: "dire", t: m2 }] }];
+      q = pick(Q_MSG);
+    }
+    const st = executer(prog);
+    if (!plausible(st)) return null;
+    const rep = numerique ? repNombre(st.env[v]) : repQcm(st.dits[0], shuffle([c.hi, c.lo]));
+    return {
+      text: `${c.intro(p)} ${presenter(prog)} ${q}`,
+      ...rep,
+      explanation: explTrace(
+        "dans une boucle, chaque tour repart de la valeur laissée par le tour précédent.",
+        "on fait les tours un par un, puis les blocs qui suivent la boucle.",
+        st.trace,
+        `la réponse est ${rep.expected[0]}.`
+      ),
+      canvas: canvasProg("Défi", prog),
+    };
+  });
+}
+
+/** ★5 — QCM : les leurres sont les vraies erreurs (un seul tour, départ oublié, départ compté à chaque tour). */
+function genDefiPieges() {
+  return tirer(() => {
+    const c = pick(CTX);
+    const p = pick(PRENOMS);
+    const v = c.v;
+    const d = entre(Math.max(2, c.depart[0]), Math.max(4, c.depart[1]));
+    const a = entre(...c.pas);
+    const n = entre(3, 6);
+    const prog: Ins[] = [{ k: "set", v, e: d }, { k: "rep", n, corps: [{ k: "add", v, n: a }] }, { k: "direv", v }];
+    const st = executer(prog);
+    if (!plausible(st)) return null;
+    const fin = st.env[v];
+    const choix = propositions(String(fin), [d + a, a * n, (d + a) * n].map(String));
+    if (!choix) return null;
+    return {
+      text: `${c.intro(p)} ${presenter(prog)} ${pick(PRENOMS.filter((x) => x.nom !== p.nom)).nom} pense que le lutin dira ${d + a}. Quel nombre le lutin dit-il vraiment ?`,
+      ...repQcm(String(fin), choix),
+      explanation: expl(
+        "une boucle « répéter n fois » exécute son contenu n fois, pas une seule.",
+        "on calcule l’augmentation totale, puis on l’ajoute à la valeur de départ.",
+        `la boucle ajoute ${a} à chaque tour, ${n} fois : ${a} × ${n} = ${a * n}. On part de ${d} : ${d} + ${a * n} = ${fin}. Annoncer ${d + a}, c’est n’avoir compté qu’un tour.`,
+        `le lutin dit ${fin}.`
+      ),
+      canvas: canvasProg("Le compte est bon ?", prog),
+    };
+  });
+}
+
+/* ----- algo_formule_bloc ----- */
+
+/** Les formules proposées : la bonne, puis des leurres qui ne lui sont JAMAIS égaux (éprouvés sur plusieurs valeurs). */
+function choixFormules(L: string | string[], bonne: Expr, leurres: Expr[]): string[] | null {
+  const vars = Array.isArray(L) ? L : [L];
+  const env = (x: number) => Object.fromEntries(vars.map((v, i) => [v, x + 3 * i]));
+  const egal = (g: Expr) => [2, 5, 7, 13].every((x) => evalE(g, env(x)) === evalE(bonne, env(x)));
+  return propositions(exprTxt(bonne), leurres.filter((g) => !egal(g)).map((g) => exprTxt(g)));
+}
+
+const Q_FORMULE = [
+  "Quelle formule faut-il écrire dans le bloc ?",
+  "Quel calcul le bloc opérateur doit-il faire ?",
+  "Quelle expression traduit ce programme ?",
+  "Quelle formule correspond ?",
+];
+
+/** ★2 — une étape : ajouter ou enlever. */
+function genFormuleAddition() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const c = pick(CTX);
+    const v = c.v;
+    const n = entre(2, 12);
+    const plus = Math.random() < 0.6;
+    const bonne = plus ? E(v, "+", n) : E(v, "−", n);
+    const desc = plus
+      ? pick([`ajouter ${n} à ${v}`, `augmenter ${v} de ${n}`])
+      : pick([`enlever ${n} à ${v}`, `diminuer ${v} de ${n}`]);
+    const choix = choixFormules(v, bonne, [plus ? E(v, "−", n) : E(v, "+", n), E(v, "×", n), E(n, "−", v)]);
+    if (!choix) return null;
+    return {
+      text: `${c.intro(p)} Le programme doit ${desc}. ${pick(Q_FORMULE)}`,
+      ...repQcm(exprTxt(bonne), choix),
+      explanation: expl(
+        "une formule décrit un calcul avec une variable ; dans Scratch, on l’écrit avec un bloc opérateur.",
+        "on repère l’opération demandée : ajouter, c’est +, enlever, c’est −.",
+        `${desc}, c’est calculer ${exprTxt(bonne)}.`,
+        `la formule est ${exprTxt(bonne)}.`
+      ),
+    };
+  });
+}
+
+/** ★2 — une étape : multiplier (doubler, tripler…). */
+function genFormuleMultiplication() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const c = pick(CTX);
+    const v = c.v;
+    const forme = entre(0, 2);
+    const n = forme === 0 ? entre(3, 9) : forme === 1 ? 2 : 3;
+    const desc = forme === 0 ? `multiplier ${v} par ${n}` : forme === 1 ? `doubler ${v}` : `tripler ${v}`;
+    const bonne = pick([E(n, "×", v), E(v, "×", n)]);
+    const choix = choixFormules(v, bonne, [E(n, "+", v), E(v, "−", n), E(v, "×", v), E(v, "+", v)]);
+    if (!choix) return null;
+    return {
+      text: `${c.intro(p)} Le programme doit ${desc}. ${pick(Q_FORMULE)}`,
+      ...repQcm(exprTxt(bonne), choix),
+      explanation: expl(
+        "une formule décrit un calcul avec une variable ; dans Scratch, on l’écrit avec un bloc opérateur.",
+        "doubler, c’est multiplier par 2 ; tripler, c’est multiplier par 3.",
+        `${desc}, c’est calculer ${exprTxt(bonne)}.`,
+        `la formule est ${exprTxt(bonne)}.`
+      ),
+    };
+  });
+}
+
+/** ★3 — un programme de calcul en deux étapes, décrit en français. */
+function genFormuleDeuxEtapes() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const L = pick(LETTRES);
+    const k = entre(2, 9);
+    const b = entre(1, 12);
+    const formes: { etapes: string; f: Expr; leurres: Expr[] }[] = [
+      { etapes: `multiplier par ${k}, puis ajouter ${b}`, f: E(E(k, "×", L), "+", b), leurres: [E(k, "×", E(L, "+", b)), E(L, "+", E(k, "×", b)), E(E(k, "+", L), "+", b)] },
+      { etapes: `ajouter ${b}, puis multiplier le résultat par ${k}`, f: E(E(L, "+", b), "×", k), leurres: [E(L, "+", E(b, "×", k)), E(E(k, "×", L), "+", b), E(E(L, "+", b), "+", k)] },
+      { etapes: `multiplier par ${k}, puis soustraire ${b}`, f: E(E(k, "×", L), "−", b), leurres: [E(k, "×", E(L, "−", b)), E(L, "−", E(k, "×", b)), E(E(k, "+", L), "−", b)] },
+      { etapes: `soustraire ${b}, puis multiplier le résultat par ${k}`, f: E(E(L, "−", b), "×", k), leurres: [E(L, "−", E(b, "×", k)), E(E(k, "×", L), "−", b), E(E(L, "−", b), "+", k)] },
+      { etapes: `ajouter ${b}, puis ajouter ${k}`, f: E(E(L, "+", b), "+", k), leurres: [E(E(L, "+", b), "×", k), E(L, "×", E(b, "+", k)), E(E(L, "×", b), "+", k)] },
+    ];
+    const F = pick(formes);
+    const choix = choixFormules(L, F.f, F.leurres);
+    if (!choix) return null;
+    return {
+      text: `${introCalcul(p)} Programme de calcul : choisir un nombre ${L}, ${F.etapes}. ${pick(Q_FORMULE)}`,
+      ...repQcm(exprTxt(F.f), choix),
+      explanation: expl(
+        "un programme de calcul se traduit par une formule.",
+        "on écrit les opérations dans l’ordre du programme ; quand on multiplie « le résultat », on met des parenthèses autour de ce résultat.",
+        `choisir ${L}, ${F.etapes} : cela donne ${exprTxt(F.f)}.`,
+        `la formule est ${exprTxt(F.f)}.`
+      ),
+    };
+  });
+}
+
+/** Les formules de géométrie et de comptage que le programme doit calculer. */
+// `v` : [la lettre de la formule, le nom de la variable dans le programme].
+const FORMULES_GEO: {
+  desc: (v: string, n: number) => string;
+  titre: (n: number) => string;
+  v: [string, string];
+  f: (v: string, n: number) => Expr;
+  leurres: (v: string, n: number) => Expr[];
+  res: string;
+}[] = [
+  { desc: (v, n) => `l’aire d’un rectangle de longueur ${v} et de largeur ${n}`, titre: (n) => `l’aire d’un rectangle de largeur ${n}`, v: ["L", "longueur"], f: (v, n) => E(v, "×", n), leurres: (v, n) => [E(v, "+", n), E(2, "×", E(v, "+", n)), E(E(2, "×", v), "+", n)], res: "aire" },
+  { desc: (v, n) => `le périmètre d’un rectangle de longueur ${v} et de largeur ${n}`, titre: (n) => `le périmètre d’un rectangle de largeur ${n}`, v: ["L", "longueur"], f: (v, n) => E(2, "×", E(v, "+", n)), leurres: (v, n) => [E(v, "×", n), E(E(2, "×", v), "+", n), E(v, "+", n)], res: "périmètre" },
+  { desc: (v) => `le périmètre d’un carré de côté ${v}`, titre: () => "le périmètre d’un carré", v: ["c", "côté"], f: (v) => E(4, "×", v), leurres: (v) => [E(v, "×", v), E(v, "+", 4), E(2, "×", v)], res: "périmètre" },
+  { desc: (v) => `l’aire d’un carré de côté ${v}`, titre: () => "l’aire d’un carré", v: ["c", "côté"], f: (v) => E(v, "×", v), leurres: (v) => [E(4, "×", v), E(2, "×", v), E(v, "+", 2)], res: "aire" },
+  { desc: (v) => `le périmètre d’un triangle équilatéral de côté ${v}`, titre: () => "le périmètre d’un triangle équilatéral", v: ["c", "côté"], f: (v) => E(3, "×", v), leurres: (v) => [E(v, "×", v), E(v, "+", 3), E(2, "×", v)], res: "périmètre" },
+  { desc: (v) => `le périmètre d’un hexagone régulier de côté ${v}`, titre: () => "le périmètre d’un hexagone régulier", v: ["c", "côté"], f: (v) => E(6, "×", v), leurres: (v) => [E(v, "+", 6), E(3, "×", v), E(4, "×", v)], res: "périmètre" },
+  { desc: (v) => `le nombre de roues de ${v} vélos`, titre: () => "le nombre de roues d’un groupe de vélos", v: ["n", "vélos"], f: (v) => E(2, "×", v), leurres: (v) => [E(v, "+", 2), E(4, "×", v), E(v, "×", v)], res: "roues" },
+  { desc: (v) => `le nombre de roues de ${v} voitures`, titre: () => "le nombre de roues des voitures d’un parking", v: ["n", "voitures"], f: (v) => E(4, "×", v), leurres: (v) => [E(v, "+", 4), E(2, "×", v), E(v, "×", v)], res: "roues" },
+  { desc: (v) => `le nombre de pattes de ${v} araignées`, titre: () => "le nombre de pattes d’un groupe d’araignées", v: ["n", "araignées"], f: (v) => E(8, "×", v), leurres: (v) => [E(v, "+", 8), E(4, "×", v), E(6, "×", v)], res: "pattes" },
+  { desc: (v) => `le nombre de pattes de ${v} poules`, titre: () => "le nombre de pattes des poules d’un poulailler", v: ["n", "poules"], f: (v) => E(2, "×", v), leurres: (v) => [E(v, "+", 2), E(4, "×", v), E(v, "×", v)], res: "pattes" },
+];
+
+/** ★3 — quelle formule le bloc doit-il calculer ? (aire, périmètre, roues, pattes) */
+function genFormuleGeo() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const G = pick(FORMULES_GEO);
+    const v = G.v[0];
+    const n = entre(2, 9);
+    const bonne = G.f(v, n);
+    const choix = choixFormules(v, bonne, G.leurres(v, n));
+    if (!choix) return null;
+    return {
+      text: `${pick([`${p.nom} veut qu’un programme calcule ${G.desc(v, n)}.`, `Le programme ${deNom(p.nom)} doit calculer ${G.desc(v, n)}.`, `Au club de code, ${p.nom} programme le calcul suivant : ${G.desc(v, n)}.`])} ${pick(Q_FORMULE)}`,
+      ...repQcm(exprTxt(bonne), choix),
+      explanation: expl(
+        "une formule peut modéliser une situation ; le programme la calcule avec un bloc opérateur.",
+        "on se rappelle la formule de la situation, puis on l’écrit avec la variable.",
+        `${G.desc(v, n)} se calcule par ${exprTxt(bonne)}.`,
+        `la formule est ${exprTxt(bonne)}.`
+      ),
+    };
+  });
+}
+
+/** ★3 — le programme calcule une formule : quelle valeur dit-il ? */
+function genFormuleValeur() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const G = pick(FORMULES_GEO);
+    const v = G.v[1];
+    const n = entre(2, 9);
+    const x = entre(2, 15);
+    const prog: Ins[] = [{ k: "set", v: G.res, e: G.f(v, n) }, { k: "direv", v: G.res }];
+    const st = executer(prog, { [v]: x });
+    if (!plausible(st)) return null;
+    const out = Number(st.dits[0]);
+    return {
+      text: `${pick([`${p.nom} programme le calcul suivant : ${G.titre(n)}.`, `Le programme ${deNom(p.nom)} calcule ${G.titre(n)}.`])} ${presenter(prog)} ${pick([`${v} vaut ${x}.`, `Cette fois, ${v} vaut ${x}.`])} ${pick(Q_SORTIE)}`,
+      ...repNombre(out),
+      explanation: explTrace(
+        "un bloc opérateur calcule une formule avec la valeur de la variable.",
+        `on remplace ${v} par ${x} dans la formule du bloc.`,
+        st.trace,
+        `le lutin dit ${out}.`
+      ),
+      canvas: canvasProg("Formule dans un bloc", prog, { [v]: x }),
+    };
+  });
+}
+
+/* ----- algo_parametre ----- */
+
+/** « On remplace « A » par « B ». » : A doit être UNE seule fois dans le programme. */
+function remplacer(p: Ins[], a: string, b: string): Ins[] | null {
+  let vu = 0;
+  const r = (l: Ins[]): Ins[] =>
+    l.map((i) => {
+      if (i.k === "rep") {
+        const t = `répéter ${i.n} fois`;
+        if (t === a) {
+          vu++;
+          const m = b.match(/^répéter (\d+) fois$/);
+          return { ...i, n: Number(m![1]), corps: r(i.corps) };
+        }
+        return { ...i, corps: r(i.corps) };
+      }
+      if (insTxt(i) === a) {
+        vu++;
+        return PARAM_TMP.get(b)!;
+      }
+      return i;
+    });
+  const out = r(p);
+  return vu === 1 ? out : null;
+}
+// Le bloc de remplacement, rangé par son texte le temps d'un tirage.
+const PARAM_TMP = new Map<string, Ins>();
+
+const verbeRemplacer = (p: Prenom, a: string, b: string) =>
+  pick([`${p.nom} remplace « ${a} » par « ${b} ».`, `On remplace « ${a} » par « ${b} ».`, `${p.nom} modifie un paramètre : on remplace « ${a} » par « ${b} ».`]);
+
+/** Construit la question « après modification ». */
+function apresModif(p: Prenom, intro: string, prog: Ins[], a: Ins | string, b: Ins | string, q: string, env: Record<string, number> = {}) {
+  const ta = typeof a === "string" ? a : insTxt(a);
+  const tb = typeof b === "string" ? b : insTxt(b);
+  if (typeof b !== "string") PARAM_TMP.set(tb, b);
+  const nouveau = remplacer(prog, ta, tb);
+  if (!nouveau) return null;
+  const st = executer(nouveau, env);
+  if (!plausible(st) || !plausible(executer(prog, env))) return null;
+  const donnees = Object.entries(env).map(([v, x]) => `${v} vaut ${x}.`).join(" ");
+  return { st, text: `${intro} ${presenter(prog)} ${donnees ? `${donnees} ` : ""}${verbeRemplacer(p, ta, tb)} ${q}`, nouveau };
+}
+
+/** ★3 — changer la distance d'un bloc « avancer ». */
+function genParamDistance() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const a = 10 * entre(1, 8);
+    const b = 10 * entre(1, 9);
+    if (a === b) return null;
+    const n = entre(2, 6);
+    const prog: Ins[] = pick<Ins[]>([
+      [{ k: "rep", n, corps: [{ k: "avancer", n: a }] }],
+      [{ k: "avancer", n: a }, { k: "tourner", n: 90 }, { k: "avancer", n: 5 * entre(2, 6) }],
+      [{ k: "rep", n, corps: [{ k: "avancer", n: a }, { k: "tourner", n: pick([60, 90, 120]) }] }],
+      [{ k: "avancer", n: 5 * entre(2, 6) }, { k: "dire", t: pick(MESSAGES) }, { k: "rep", n, corps: [{ k: "avancer", n: a }] }],
+    ]);
+    const r = apresModif(p, mobile(p), prog, { k: "avancer", n: a }, { k: "avancer", n: b }, pick(Q_PAS));
+    if (!r) return null;
+    return {
+      text: r.text,
+      ...repNombre(r.st.dist),
+      explanation: explTrace(
+        "un paramètre est un nombre que l’on peut régler dans un bloc ; le changer change ce que fait le programme.",
+        `on garde le programme et on remplace seulement ${a} par ${b}.`,
+        r.st.trace,
+        `le lutin parcourt ${r.st.dist} pas.`
+      ),
+      canvas: canvasProg("Modifier un paramètre", prog),
+    };
+  });
+}
+
+/** ★3 — changer le nombre de répétitions d'une boucle. */
+function genParamRepetitions() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const n = entre(2, 6);
+    const m = entre(2, 8);
+    if (n === m) return null;
+    if (Math.random() < 0.5) {
+      const prog: Ins[] = [{ k: "rep", n, corps: [{ k: "avancer", n: 5 * entre(2, 10) }] }];
+      const r = apresModif(p, mobile(p), prog, `répéter ${n} fois`, `répéter ${m} fois`, pick(Q_PAS));
+      if (!r) return null;
+      return {
+        text: r.text,
+        ...repNombre(r.st.dist),
+        explanation: explTrace("le nombre de répétitions est un paramètre de la boucle.", `la boucle tourne maintenant ${m} fois au lieu de ${n}.`, r.st.trace, `le lutin parcourt ${r.st.dist} pas.`),
+        canvas: canvasProg("Paramètre de boucle", prog),
+      };
+    }
+    const c = pick(CTX);
+    const f = finir([{ k: "set", v: c.v, e: entre(...c.depart) }, { k: "rep", n, corps: [{ k: "add", v: c.v, n: entre(...c.pas) }] }], c.v);
+    const r = apresModif(p, c.intro(p), f.prog, `répéter ${n} fois`, `répéter ${m} fois`, f.q);
+    if (!r) return null;
+    return {
+      text: r.text,
+      ...repNombre(r.st.env[c.v]),
+      explanation: explTrace("le nombre de répétitions est un paramètre de la boucle.", `la boucle tourne maintenant ${m} fois au lieu de ${n}.`, r.st.trace, `la réponse est ${r.st.env[c.v]}.`),
+      canvas: canvasProg("Paramètre de boucle", f.prog),
+    };
+  });
+}
+
+/** Les polygones réguliers : nom, nombre de côtés (l'angle se calcule : 360 ÷ côtés). */
+const POLYGONES: [string, number][] = [
+  ["un triangle équilatéral", 3],
+  ["un carré", 4],
+  ["un pentagone régulier", 5],
+  ["un hexagone régulier", 6],
+  ["un octogone régulier", 8],
+  ["un décagone régulier", 10],
+  ["un dodécagone régulier", 12],
+];
+const tracer = (n: number, c: number): Ins[] => [{ k: "stylo" }, { k: "rep", n, corps: [{ k: "avancer", n: c }, { k: "tourner", n: 360 / n }] }];
+
+/** ★3 — passer d'un polygone à un autre : quels paramètres changer ? */
+function genParamPolygone() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const [nom1, n1] = pick(POLYGONES);
+    const [nom2, n2] = pick(POLYGONES);
+    if (n1 === n2) return null;
+    const c = 10 * entre(3, 8);
+    const prog = tracer(n1, c);
+    const t1 = 360 / n1, t2 = 360 / n2;
+    const ch = (n: number, t: number) => `répéter ${n} fois, tourner de ${t}°`;
+    const choix = propositions(ch(n2, t2), [ch(n2, t1), ch(n1, t2), ch(n2, 180 - t2), ch(n2 * 2, t2 / 2)].filter((x) => !x.includes(".")));
+    if (!choix) return null;
+    return {
+      text: `${p.nom} trace ${nom1} avec ${progTxt(prog)}. ${p.f ? "Elle" : "Il"} veut maintenant tracer ${nom2}. ${pick(["Quels paramètres faut-il mettre ?", "Que faut-il écrire dans les blocs ?", "Quels nombres faut-il choisir ?"])}`,
+      ...repQcm(ch(n2, t2), choix),
+      explanation: expl(
+        "pour tracer un polygone régulier, on répète « avancer, tourner » autant de fois qu’il a de côtés ; les angles tournés font un tour complet : 360°.",
+        "nombre de répétitions = nombre de côtés ; angle = 360° ÷ nombre de côtés.",
+        `${nom2.replace(/^un /, "le ")} a ${n2} côtés : on répète ${n2} fois et on tourne de 360° ÷ ${n2} = ${t2}°.`,
+        `il faut « ${ch(n2, t2)} ».`
+      ),
+      canvas: canvasProg(`Tracer ${nom1}`, prog),
+    };
+  });
+}
+
+/** ★4 — changer un coefficient dans une formule. */
+function genParamCoefficient() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const L = pick(LETTRES);
+    const r = pick(RES);
+    const k1 = entre(2, 9);
+    const k2 = entre(2, 9);
+    if (k1 === k2) return null;
+    const avecAjout = Math.random() < 0.5;
+    const prog: Ins[] = [{ k: "set", v: r, e: E(k1, "×", L) }, ...(avecAjout ? [{ k: "add", v: r, n: entre(1, 9) } as Ins] : []), { k: "direv", v: r }];
+    const x = entre(2, 12);
+    const res = apresModif(p, introCalcul(p), prog, { k: "set", v: r, e: E(k1, "×", L) }, { k: "set", v: r, e: E(k2, "×", L) }, pick(Q_SORTIE), { [L]: x });
+    if (!res) return null;
+    const out = Number(res.st.dits[0]);
+    return {
+      text: res.text,
+      ...repNombre(out),
+      explanation: explTrace("un paramètre peut être un nombre dans une formule : ici, le coefficient de la multiplication.", `on utilise le nouveau coefficient ${k2} avec ${L} = ${x}.`, res.st.trace, `le lutin dit ${out}.`),
+      canvas: canvasProg("Changer un coefficient", prog, { [L]: x }),
+    };
+  });
+}
+
+/** ★4 — changer ce qu'une boucle ajoute. */
+function genParamAjout() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const c = pick(CTX);
+    const v = c.v;
+    const b1 = entre(...c.pas);
+    const b2 = entre(...c.pas) + entre(0, 3);
+    if (b1 === b2) return null;
+    const n = entre(2, 6);
+    const f = finir([{ k: "set", v, e: entre(...c.depart) }, { k: "rep", n, corps: [{ k: "add", v, n: b1 }] }], v);
+    const r = apresModif(p, c.intro(p), f.prog, { k: "add", v, n: b1 }, { k: "add", v, n: b2 }, f.q);
+    if (!r) return null;
+    return {
+      text: r.text,
+      ...repNombre(r.st.env[v]),
+      explanation: explTrace("changer un paramètre modifie l’effet du bloc à chaque tour de boucle.", `chaque tour ajoute maintenant ${b2} au lieu de ${b1}.`, r.st.trace, `la réponse est ${r.st.env[v]}.`),
+      canvas: canvasProg("Modifier un paramètre", f.prog),
+    };
+  });
+}
+
+/* ----- algo_test_condition ----- */
+
+/** Les façons de demander si un test est vrai (oui / non, ou vrai / faux). */
+const TOURNURES_VRAI = [
+  (c: string) => ({ q: `La condition “${c}” est-elle vraie ?`, oui: "oui", non: "non" }),
+  (c: string) => ({ q: `Le test “${c}” donne-t-il vrai ou faux ?`, oui: "vrai", non: "faux" }),
+  (c: string) => ({ q: `Vrai ou faux : “${c}” ?`, oui: "vrai", non: "faux" }),
+  (c: string) => ({ q: `Le programme teste “${c}”. Ce test est-il réussi ?`, oui: "oui", non: "non" }),
+];
+
+/** Un seuil proche de la valeur, souvent ÉGAL (pour travailler le strict). */
+const seuilPres = (x: number, b: number) => Math.max(0, pick([x, x, x - 1, x + 1, x - b, x + b, x + 2 * b]));
+
+/** Le message du « alors » : le succès pour « > », l'effort pour « < ». */
+const messagesSi = (c: Ctx, op: Cmp): [string, string] => (op === "<" ? [c.lo, c.hi] : [c.hi, c.lo]);
+
+const donneeVar = (v: string, x: number) => pick([`La variable ${v} vaut ${x}.`, `${v} vaut ${x}.`, `À cet instant, ${v} vaut ${x}.`]);
+
+/** ★2 — une comparaison : vraie ou fausse ? */
+function genTestVrai() {
+  const c = pick(CTX);
+  const p = pick(PRENOMS);
+  const x = entre(c.depart[0], c.depart[1] + 5);
+  const op = pick<Cmp>([">", ">", "<", "<", "="]);
+  const s = seuilPres(x, entre(...c.pas));
+  const cond: Cond = { v: c.v, op, s };
+  const ok = vraie(cond, { [c.v]: x });
+  const t = pick(TOURNURES_VRAI)(condTxt(cond));
+  const bonne = ok ? t.oui : t.non;
+  return {
+    text: `${c.intro(p)} ${donneeVar(c.v, x)} ${t.q}`,
+    ...repQcm(bonne, shuffle([t.oui, t.non])),
+    explanation: expl(
+      "une condition est un test : elle est vraie ou fausse.",
+      `on remplace ${c.v} par sa valeur, puis on compare (« > » et « < » sont stricts : un nombre n’est pas plus grand que lui-même).`,
+      `${x} ${op} ${s} est ${ok ? "vrai" : "faux"}.`,
+      `la réponse est « ${bonne} ».`
+    ),
+    canvas: canvasProg("Tester une condition", [{ k: "si", c: cond, alors: [{ k: "dire", t: messagesSi(c, op)[0] }] }], { [c.v]: x }),
+  };
+}
+
+/** ★2 — le bloc du « si » est-il exécuté ? (le lutin parle-t-il ?) */
+function genTestExecute() {
+  const c = pick(CTX);
+  const p = pick(PRENOMS);
+  const x = entre(c.depart[0], c.depart[1] + 5);
+  const op = pick<Cmp>([">", "<", "="]);
+  const s = seuilPres(x, entre(...c.pas));
+  const msg = messagesSi(c, op)[0];
+  const prog: Ins[] = [{ k: "set", v: c.v, e: x }, { k: "si", c: { v: c.v, op, s }, alors: [{ k: "dire", t: msg }] }];
+  const st = executer(prog);
+  const parle = st.dits.length > 0;
+  const oui = Math.random() < 0.5;
+  const q = oui ? `Le lutin dit-il “${msg}” ?` : pick(Q_MSG);
+  const bonne = oui ? (parle ? "oui" : "non") : parle ? msg : RIEN;
+  return {
+    text: `${c.intro(p)} ${presenter(prog)} ${q}`,
+    ...repQcm(bonne, oui ? shuffle(["oui", "non"]) : shuffle([msg, RIEN])),
+    explanation: explTrace(
+      "le bloc « si … alors » n’exécute ce qu’il contient que si la condition est vraie.",
+      "on calcule la valeur de la variable, puis on teste la condition.",
+      st.trace,
+      `la réponse est « ${bonne} ».`
+    ),
+    canvas: canvasProg("Si … alors", prog),
+  };
+}
+
+/** ★3 — la valeur finale d'une variable après un « si » (parfois « si … sinon »). */
+function genTestVariable() {
+  return tirer(() => {
+    const c = pick(CTX);
+    const p = pick(PRENOMS);
+    const v = c.v;
+    const a = entre(...c.depart);
+    const b = entre(...c.pas);
+    const avant: Ins[] = Math.random() < 0.4 ? [{ k: "add", v, n: entre(...c.pas) }] : [];
+    const x = executer([{ k: "set", v, e: a }, ...avant]).env[v];
+    const op = pick<Cmp>([">", "<", "="]);
+    const cond: Cond = { v, op, s: seuilPres(x, b) };
+    const sinon: Ins[] | undefined = Math.random() < 0.4 ? [pick<Ins>([{ k: "set", v, e: 0 }, { k: "add", v, n: 1 }, { k: "set", v, e: E(v, "−", 1) }])] : undefined;
+    const f = finir([{ k: "set", v, e: a }, ...avant, { k: "si", c: cond, alors: [modifier(v, b)], ...(sinon ? { sinon } : {}) }], v);
+    const st = executer(f.prog);
+    if (!plausible(st)) return null;
+    return {
+      text: `${c.intro(p)} ${presenter(f.prog)} ${f.q}`,
+      ...repNombre(st.env[v]),
+      explanation: explTrace(
+        "une condition décide si un bloc est exécuté ou sauté.",
+        "on suit la variable jusqu’au test, on regarde si la condition est vraie, puis on continue.",
+        st.trace,
+        `la réponse est ${st.env[v]}.`
+      ),
+      canvas: canvasProg("Condition et variable", f.prog),
+    };
+  });
+}
+
+/** ★3 — tester une propriété : pair, impair, multiple de… */
+function genTestParite() {
+  const c = pick(CTX);
+  const p = pick(PRENOMS);
+  const x = entre(2, 60);
+  const cond: Cond = pick<Cond>([{ v: c.v, pair: true }, { v: c.v, pair: false }, { v: c.v, mult: pick([3, 5, 10]) }]);
+  const ok = vraie(cond, { [c.v]: x });
+  if (Math.random() < 0.5) {
+    const t = pick(TOURNURES_VRAI)(condTxt(cond));
+    const bonne = ok ? t.oui : t.non;
+    return {
+      text: `${c.intro(p)} ${donneeVar(c.v, x)} ${t.q}`,
+      ...repQcm(bonne, shuffle([t.oui, t.non])),
+      explanation: expl(
+        "une condition peut tester une propriété d’un nombre.",
+        "un nombre pair est un multiple de 2 ; un multiple de 5 se termine par 0 ou 5 ; un multiple de 10 se termine par 0 ; pour 3, on divise.",
+        `${x} ${ok ? "vérifie" : "ne vérifie pas"} « ${condTxt(cond).replace(`${c.v} `, "")} ».`,
+        `la réponse est « ${bonne} ».`
+      ),
+      canvas: canvasProg("Tester une propriété", [{ k: "si", c: cond, alors: [{ k: "dire", t: c.hi }] }], { [c.v]: x }),
+    };
+  }
+  const prog: Ins[] = [{ k: "set", v: c.v, e: x }, { k: "si", c: cond, alors: [{ k: "dire", t: c.hi }], sinon: [{ k: "dire", t: c.lo }] }];
+  const st = executer(prog);
+  return {
+    text: `${c.intro(p)} ${presenter(prog)} ${pick(Q_MSG)}`,
+    ...repQcm(st.dits[0], shuffle([c.hi, c.lo])),
+    explanation: explTrace(
+      "une condition peut tester une propriété d’un nombre : pair, impair, multiple de…",
+      "on regarde si le nombre a la propriété, puis on exécute le « alors » ou le « sinon ».",
+      st.trace,
+      `le lutin dit “${st.dits[0]}”.`
+    ),
+    canvas: canvasProg("Tester une propriété", prog),
+  };
+}
+
+/** ★3 — « si … alors … sinon … » : quel message ? */
+function genTestSinon() {
+  const c = pick(CTX);
+  const p = pick(PRENOMS);
+  const x = entre(c.depart[0], c.depart[1] + 5);
+  const op = pick<Cmp>([">", "<", "="]);
+  const s = seuilPres(x, entre(...c.pas));
+  const [m1, m2] = messagesSi(c, op);
+  const donnee = Math.random() < 0.5;
+  const si: Ins = { k: "si", c: { v: c.v, op, s }, alors: [{ k: "dire", t: m1 }], sinon: [{ k: "dire", t: m2 }] };
+  const prog: Ins[] = donnee ? [si] : [{ k: "set", v: c.v, e: x }, si];
+  const st = executer(prog, donnee ? { [c.v]: x } : {});
+  return {
+    text: `${c.intro(p)} ${donnee ? `${donneeVar(c.v, x)} ` : ""}${presenter(prog)} ${pick(Q_MSG)}`,
+    ...repQcm(st.dits[0], shuffle([m1, m2])),
+    explanation: explTrace(
+      "avec « si … alors … sinon », le programme fait l’un OU l’autre, jamais les deux.",
+      "on teste la condition : vraie, on fait le « alors » ; fausse, on fait le « sinon ».",
+      st.trace,
+      `le lutin dit “${st.dits[0]}”.`
+    ),
+    canvas: canvasProg("Si … sinon", prog, donnee ? { [c.v]: x } : {}),
+  };
+}
+
+/** ★4 — une condition qui décide d'un déplacement. */
+function genTestDeplacement() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const v = pick(["énergie", "batterie", "carburant", "vitesse"]);
+    const x = entre(1, 20);
+    const op = pick<Cmp>([">", "<"]);
+    const s = seuilPres(x, entre(1, 4));
+    const a = 10 * entre(1, 6);
+    const b = 10 * entre(1, 9);
+    const sinon: Ins[] | undefined = Math.random() < 0.5 ? [{ k: "avancer", n: 5 * entre(1, 6) }] : Math.random() < 0.5 ? [{ k: "tourner", n: 90 }] : undefined;
+    if (sinon && sinon[0].k === "avancer" && sinon[0].n === b) return null;
+    const prog: Ins[] = [{ k: "avancer", n: a }, { k: "si", c: { v, op, s }, alors: [{ k: "avancer", n: b }], ...(sinon ? { sinon } : {}) }];
+    if (Math.random() < 0.4) prog.push({ k: "avancer", n: 5 * entre(1, 8) });
+    const st = executer(prog, { [v]: x });
+    return {
+      text: `${mobile(p)} ${pick([`La variable ${v} vaut ${x}.`, `Au départ, ${v} vaut ${x}.`])} ${presenter(prog)} ${pick(Q_PAS)}`,
+      ...repNombre(st.dist),
+      explanation: explTrace(
+        "un bloc conditionnel peut déclencher, ou non, un déplacement.",
+        `on teste la condition avec ${v} = ${x}, puis on additionne seulement les « avancer » exécutés.`,
+        st.trace,
+        `le lutin parcourt ${st.dist} pas.`
+      ),
+      canvas: canvasProg("Condition et déplacement", prog, { [v]: x }),
+    };
+  });
+}
+
+/* ----- algo_boucle ----- */
+
+/** ★2 — la distance parcourue avec une boucle. */
+function genBoucleDistance() {
+  const p = pick(PRENOMS);
+  const n = entre(2, 8);
+  const a = 5 * entre(2, 12);
+  const corps: Ins[] = Math.random() < 0.6 ? [{ k: "avancer", n: a }] : [{ k: "avancer", n: a }, { k: "tourner", n: pick([45, 60, 90, 120]) }];
+  const prog: Ins[] = [...(Math.random() < 0.3 ? [{ k: "avancer", n: 5 * entre(2, 8) } as Ins] : []), { k: "rep", n, corps }];
+  const st = executer(prog);
+  return {
+    text: `${mobile(p)} ${presenter(prog)} ${pick(Q_PAS)}`,
+    ...repNombre(st.dist),
+    explanation: explTrace(
+      "une boucle « répéter n fois » exécute n fois les blocs qu’elle contient.",
+      "on multiplie la distance d’un tour par le nombre de tours, sans oublier les blocs hors de la boucle.",
+      st.trace,
+      `le lutin parcourt ${st.dist} pas.`
+    ),
+    canvas: canvasProg("Distance avec une boucle", prog),
+  };
+}
+
+/** ★3 — une variable qui augmente à chaque tour. */
+function genBoucleCompteur() {
+  return tirer(() => {
+    const c = pick(CTX);
+    const p = pick(PRENOMS);
+    const v = c.v;
+    const d = Math.random() < 0.5 ? 0 : entre(...c.depart);
+    const f = finir([{ k: "set", v, e: d }, { k: "rep", n: entre(2, 7), corps: [{ k: "add", v, n: entre(...c.pas) }] }], v);
+    const st = executer(f.prog);
+    if (!plausible(st)) return null;
+    return {
+      text: `${c.intro(p)} ${presenter(f.prog)} ${f.q}`,
+      ...repNombre(st.env[v]),
+      explanation: explTrace(
+        "une boucle répète les blocs qu’elle contient : la variable change à chaque tour.",
+        "on part de la valeur de départ, puis on ajoute autant de fois qu’il y a de tours.",
+        st.trace,
+        `la réponse est ${st.env[v]}.`
+      ),
+      canvas: canvasProg("Boucle et variable", f.prog),
+    };
+  });
+}
+
+const Q_COMBIEN_REP = ["Combien de fois faut-il répéter la boucle ?", "Quel nombre faut-il écrire dans « répéter … fois » ?", "Combien de tours de boucle faut-il ?"];
+
+/** ★3 — retrouver le nombre de répétitions. */
+function genBoucleRetrouver() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const n = entre(2, 9);
+    if (Math.random() < 0.5) {
+      const a = 5 * entre(2, 10);
+      const T = n * a;
+      return {
+        text: `${mobile(p)} Le lutin doit parcourir ${T} pas en tout. Chaque tour de boucle contient « avancer de ${a} pas ». ${pick(Q_COMBIEN_REP)}`,
+        ...repNombre(n),
+        explanation: expl(
+          "une boucle répète la même instruction un nombre de fois choisi.",
+          "on divise la distance totale par la distance d’un tour.",
+          `${T} ÷ ${a} = ${n}.`,
+          `il faut répéter ${n} fois.`
+        ),
+      };
+    }
+    const c = pick(CTX);
+    const d = entre(...c.depart);
+    const b = entre(...c.pas);
+    const T = d + n * b;
+    if (T > 999) return null;
+    return {
+      text: `${c.intro(p)} Au départ, la variable ${c.v} vaut ${d}. Chaque tour de boucle fait « ajouter ${b} à ${c.v} ». On veut que ${c.v} arrive à ${T}. ${pick(Q_COMBIEN_REP)}`,
+      ...repNombre(n),
+      explanation: expl(
+        "chaque tour de boucle ajoute la même quantité.",
+        "on calcule ce qu’il faut ajouter en tout, puis on divise par l’ajout d’un tour.",
+        `il faut ajouter ${T} − ${d} = ${T - d} ; ${T - d} ÷ ${b} = ${n}.`,
+        `il faut répéter ${n} fois.`
+      ),
+    };
+  });
+}
+
+/** ★3 — le lutin parle dans la boucle : combien de fois, quel dernier nombre ? */
+function genBoucleParler() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const n = entre(2, 7);
+    if (Math.random() < 0.5) {
+      const m = pick(MESSAGES);
+      const avant = Math.random() < 0.4;
+      const prog: Ins[] = [...(avant ? [{ k: "dire", t: m } as Ins] : []), { k: "rep", n, corps: [{ k: "dire", t: m }, { k: "avancer", n: 5 * entre(2, 8) }] }];
+      const st = executer(prog);
+      const nb = st.dits.filter((d) => d === m).length;
+      return {
+        text: `${mobile(p)} ${presenter(prog)} Combien de fois le lutin dit-il “${m}” ?`,
+        ...repNombre(nb),
+        explanation: explTrace(
+          "les blocs dans la boucle sont exécutés à chaque tour ; ceux hors de la boucle, une seule fois.",
+          "on compte les tours, puis les blocs hors de la boucle.",
+          [`la boucle fait ${n} tours, avec un “${m}” à chaque tour${avant ? ", plus un “" + m + "” avant la boucle" : ""}`],
+          `le lutin dit “${m}” ${nb} fois.`
+        ),
+        canvas: canvasProg("Parler dans une boucle", prog),
+      };
+    }
+    const c = pick(CTX);
+    const prog: Ins[] = [{ k: "set", v: c.v, e: entre(...c.depart) }, { k: "rep", n, corps: [{ k: "add", v: c.v, n: entre(...c.pas) }, { k: "direv", v: c.v }] }];
+    const st = executer(prog);
+    if (!plausible(st)) return null;
+    const dernier = Number(st.dits[st.dits.length - 1]);
+    return {
+      text: `${c.intro(p)} ${presenter(prog)} ${pick(Q_DIT)}`,
+      ...repNombre(dernier),
+      explanation: explTrace(
+        "le lutin parle à chaque tour : il dit la valeur du moment.",
+        "on suit la variable tour après tour ; le dernier nombre dit est celui du dernier tour.",
+        st.trace,
+        `le dernier nombre dit est ${dernier}.`
+      ),
+      canvas: canvasProg("Parler dans une boucle", prog),
+    };
+  });
+}
+
+/** ★4 — les polygones réguliers : combien de répétitions, quel angle, quelle figure ? */
+function genBouclePolygone() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const [nom, n] = pick(POLYGONES);
+    const forme = entre(0, 2);
+    const expliquer = expl(
+      "pour tracer un polygone régulier, on répète « avancer, tourner » autant de fois qu’il a de côtés.",
+      "à la fin, le lutin a fait un tour complet : les angles tournés font 360° en tout.",
+      `${nom.replace(/^un /, "le ")} a ${n} côtés : ${n} répétitions, et 360° ÷ ${n} = ${360 / n}° à chaque tour.`,
+      forme === 0 ? `il faut répéter ${n} fois.` : forme === 1 ? `le lutin tourne de ${360 / n}°.` : `le programme trace ${nom}.`
+    );
+    if (forme === 0)
+      return {
+        text: `${p.nom} programme son lutin. Pour tracer ${nom}, combien de fois faut-il répéter « avancer, puis tourner » ?`,
+        ...repNombre(n),
+        explanation: expliquer,
+      };
+    if (forme === 1)
+      return {
+        text: `${p.nom} programme son lutin. Pour tracer ${nom} avec une boucle, de combien de degrés le lutin doit-il tourner à chaque tour ?`,
+        ...repNombre(360 / n),
+        explanation: expliquer,
+      };
+    const prog = tracer(n, 10 * entre(3, 8));
+    const autres = POLYGONES.filter(([, k]) => k !== n).map(([x]) => x);
+    const choix = propositions(nom, autres);
+    if (!choix) return null;
+    return {
+      text: `${p.nom} lance ${progTxt(prog)}. Quelle figure le lutin trace-t-il ?`,
+      ...repQcm(nom, choix),
+      explanation: expliquer,
+      canvas: canvasProg("Quelle figure ?", prog),
+    };
+  });
+}
+
+/* ----- algo_construire_defi (écrire, compléter, déboguer) ----- */
+
+/** Le programme écrit avec un « ? » à la place d'un nombre. */
+const avecTrou = (p: Ins[], vrai: string, trou: string) => progTxt(p).replace(vrai, trou);
+
+/** ★4 — compléter un programme pour atteindre un objectif. */
+function genCDCompleter() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const n = entre(2, 8);
+    if (Math.random() < 0.35) {
+      const a = 5 * entre(2, 10);
+      const prog: Ins[] = [{ k: "rep", n, corps: [{ k: "avancer", n: a }] }];
+      const T = n * a;
+      return {
+        text: `${mobile(p)} Le lutin doit parcourir ${T} pas en tout. Complète le programme : ${avecTrou(prog, `répéter ${n} fois`, "répéter ? fois")}. ${pick(["Quel nombre faut-il écrire à la place du point d’interrogation ?", "Quel nombre remplace le « ? » ?"])}`,
+        ...repNombre(n),
+        explanation: expl("compléter un programme, c’est trouver le paramètre qui atteint l’objectif.", "on divise la distance voulue par la distance d’un tour.", `${T} ÷ ${a} = ${n}.`, `il faut écrire ${n}.`),
+      };
+    }
+    const c = pick(CTX);
+    const v = c.v;
+    const d = entre(...c.depart);
+    const b = entre(...c.pas);
+    const prog: Ins[] = [{ k: "set", v, e: d }, { k: "rep", n, corps: [{ k: "add", v, n: b }] }];
+    const T = d + n * b;
+    if (T > 999) return null;
+    const trou = entre(0, 2);
+    const [vrai, faux, rep, calcul] =
+      trou === 0 ? [`répéter ${n} fois`, "répéter ? fois", n, `il faut ajouter ${T} − ${d} = ${T - d}, et ${T - d} ÷ ${b} = ${n}.`]
+      : trou === 1 ? [`ajouter ${b} à ${v}`, `ajouter ? à ${v}`, b, `il faut ajouter ${T} − ${d} = ${T - d} en ${n} tours : ${T - d} ÷ ${n} = ${b}.`]
+      : [`mettre ${v} à ${d}`, `mettre ${v} à ?`, d, `la boucle ajoute ${n} × ${b} = ${n * b} ; on part donc de ${T} − ${n * b} = ${d}.`];
+    return {
+      text: `${c.intro(p)} À la fin, la variable ${v} doit valoir ${T}. Complète le programme : ${avecTrou(prog, vrai as string, faux as string)}. ${pick(["Quel nombre faut-il écrire à la place du point d’interrogation ?", "Quel nombre remplace le « ? » ?"])}`,
+      ...repNombre(rep as number),
+      explanation: expl("compléter un programme, c’est trouver le nombre qui atteint l’objectif.", "on part de l’objectif et on remonte le programme.", calcul as string, `il faut écrire ${rep}.`),
+    };
+  });
+}
+
+/** ★4 — choisir le programme qui atteint l'objectif. */
+function genCDChoisir() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const c = pick(CTX);
+    const v = c.v;
+    const d = entre(...c.depart);
+    const b = entre(...c.pas);
+    const n = entre(2, 6);
+    const T = d + n * b;
+    const P = (d0: number, n0: number, b0: number): Ins[] => [{ k: "set", v, e: d0 }, { k: "rep", n: n0, corps: [{ k: "add", v, n: b0 }] }];
+    const bon = progTxt(P(d, n, b));
+    const leurres = [P(d, n + 1, b), P(d, n - 1, b), P(d, n, b + 1), P(d + b, n, b), P(0, n, b), P(d, b, n)]
+      .filter((x) => executer(x).env[v] !== T)
+      .map(progTxt);
+    const choix = propositions(bon, leurres);
+    if (!choix || T > 999) return null;
+    return {
+      text: `${c.intro(p)} Objectif : à la fin, la variable ${v} doit valoir ${T}. ${pick(["Quel programme atteint l’objectif ?", "Quel programme faut-il choisir ?", "Lequel de ces programmes convient ?"])}`,
+      ...repQcm(bon, choix),
+      explanation: expl(
+        "pour choisir un programme, on l’exécute dans sa tête et on compare avec l’objectif.",
+        "valeur finale = valeur de départ + nombre de tours × ce qu’on ajoute à chaque tour.",
+        `${d} + ${n} × ${b} = ${T}.`,
+        `le bon programme est ${bon}.`
+      ),
+    };
+  });
+}
+
+/** ★5 — trouver l'instruction fausse dans le tracé d'un polygone. */
+function genCDErreurPolygone() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const [nom, n] = pick(POLYGONES);
+    const c = 10 * entre(3, 8);
+    const angleFaux = Math.random() < 0.6;
+    const r = angleFaux ? n : pick([n - 1, n + 1, n + 2].filter((k) => k >= 3));
+    const t = angleFaux ? pick([30, 36, 45, 60, 72, 90, 120].filter((x) => x !== 360 / n)) : 360 / n;
+    const prog: Ins[] = [{ k: "stylo" }, { k: "rep", n: r, corps: [{ k: "avancer", n: c }, { k: "tourner", n: t }] }];
+    const fautive = angleFaux ? `tourner de ${t}°` : `répéter ${r} fois`;
+    return {
+      text: `${p.nom} veut tracer ${nom}. ${presenter(prog)} Le dessin n’est pas le bon. ${pick(["Quelle instruction pose problème ?", "Quel bloc faut-il corriger ?", "Où est l’erreur ?"])}`,
+      ...repQcm(fautive, shuffle([`répéter ${r} fois`, `tourner de ${t}°`, `avancer de ${c} pas`, "stylo en position d’écriture"])),
+      explanation: expl(
+        "pour tracer un polygone régulier : autant de répétitions que de côtés, et un angle de 360° ÷ nombre de côtés.",
+        "on compare chaque nombre du programme avec ce qu’il faudrait.",
+        `${nom.replace(/^un /, "le ")} a ${n} côtés : il faut répéter ${n} fois et tourner de ${360 / n}°. Le programme ${angleFaux ? `tourne de ${t}°` : `répète ${r} fois`}.`,
+        `l’instruction à corriger est « ${fautive} ».`
+      ),
+      canvas: canvasProg("Trouver l’erreur", prog),
+    };
+  });
+}
+
+/** ★5 — tester un programme faux : que dit-il VRAIMENT ? */
+function genCDTester() {
+  return tirer(() => {
+    const p = pick(PRENOMS);
+    const L = pick(["n", "x", "a", "nombre"]);
+    const k = entre(2, 5);
+    const b = entre(1, 9);
+    const formes: { but: Expr; bug: Ins[] }[] = [
+      { but: E(E(k, "×", L), "+", b), bug: [{ k: "add", v: L, n: b }, { k: "set", v: L, e: E(L, "×", k) }] },
+      { but: E(E(L, "+", b), "×", k), bug: [{ k: "set", v: L, e: E(L, "×", k) }, { k: "add", v: L, n: b }] },
+      { but: E(E(k, "×", L), "−", b), bug: [{ k: "set", v: L, e: E(L, "−", b) }, { k: "set", v: L, e: E(L, "×", k) }] },
+      { but: E(E(L, "×", k), "+", b), bug: [{ k: "add", v: L, n: b }, { k: "set", v: L, e: E(L, "×", k) }] },
+      { but: E(E(L, "×", 2), "+", b), bug: [{ k: "add", v: L, n: b }, { k: "add", v: L, n: 2 }] },
+    ];
+    const F = pick(formes);
+    const prog: Ins[] = [{ k: "demander", t: "Choisis un nombre." }, { k: "set", v: L, e: "réponse" }, ...F.bug, { k: "direv", v: L }];
+    const r = entre(b + 1, 12);
+    const st = executer(prog, {}, [r]);
+    if (!plausible(st)) return null;
+    const out = Number(st.dits[0]);
+    const voulu = evalE(F.but, { [L]: r });
+    if (out === voulu) return null;
+    let q = pick(PRENOMS);
+    while (q.nom === p.nom) q = pick(PRENOMS);
+    return {
+      text: `Le programme ${deNom(p.nom)} doit dire ${exprTxt(F.but)}, où ${L} est le nombre tapé. ${presenter(prog)} ${q.nom} tape ${r}. Quel nombre le lutin dit-il vraiment ?`,
+      ...repNombre(out),
+      explanation: explTrace(
+        "tester un programme, c’est l’exécuter avec une valeur simple et comparer avec ce qu’il devrait faire.",
+        `on suit les blocs avec ${L} = ${r}, puis on compare avec ${exprTxt(F.but, { [L]: r })} = ${voulu}.`,
+        st.trace,
+        `le lutin dit ${out}, et pas ${voulu} : le programme est faux.`
+      ),
+      canvas: canvasProg("Le programme à tester", prog),
+    };
+  });
+}
+
+/** ★4 — suivre deux variables : chaque bloc utilise les valeurs DU MOMENT. */
+function genSeqTrace() {
+  return tirer(() => {
+    const P = pick(PAIRES);
+    const p = pick(PRENOMS);
+    const { a, b } = P;
+    const va = entre(2, 9);
+    const vb = entre(2, 9);
+    const k = entre(2, 3);
+    const n = entre(1, 6);
+    const etapes: Ins[] = shuffle<Ins>([
+      { k: "set", v: a, e: E(a, "+", b) },
+      { k: "set", v: b, e: E(a, "×", k) },
+      { k: "set", v: b, e: E(b, "−", a) },
+      { k: "set", v: a, e: E(b, "+", n) },
+      { k: "add", v: b, n },
+      { k: "set", v: b, e: E(a, "+", b) },
+    ]).slice(0, entre(2, 3));
+    const prog: Ins[] = [{ k: "set", v: a, e: va }, { k: "set", v: b, e: vb }, ...etapes];
+    // Les deux variables doivent bouger (sinon la question est sans intérêt).
+    if (!etapes.some((i) => "v" in i && i.v === a) || !etapes.some((i) => "v" in i && i.v === b)) return null;
+    const cible = pick([a, b]);
+    const f = finir(prog, cible);
+    const st = executer(f.prog);
+    if (!plausible(st)) return null;
+    const fin = st.env[cible];
+    return {
+      text: `${P.intro(p)} ${presenter(f.prog)} ${f.q}`,
+      ...repNombre(fin),
+      explanation: explTrace(
+        "chaque bloc utilise la valeur des variables AU MOMENT où il est exécuté.",
+        "on note la valeur de chaque variable après chaque bloc, dans l’ordre.",
+        st.trace,
+        `la réponse est ${fin}.`
+      ),
+      canvas: canvasProg("Suivre deux variables", f.prog),
+    };
+  });
 }
 
 export const algorithmiqueBank: TutorBankItemV4[] = [
@@ -113,30 +2314,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_sequence",
     difficulty: 2,
     theme: "neutral",
-    hint: "Additionne les blocs “avancer”.",
+    hint: "Additionne les blocs « avancer » ; les autres blocs ne font pas avancer.",
     tags: ["algo_programmation", "sequence", "distance", "template", "canvas"],
-    generate: () => {
-      const a = randomChoice([10, 20, 30]);
-      const b = randomChoice([10, 20, 40]);
-      const total = a + b;
-
-      return {
-        text: "Quelle distance totale le lutin avance-t-il ?",
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : une séquence est une suite d’instructions.\n\n" +
-          "Méthode : on additionne les distances des blocs “avancer”.\n\n" +
-          `Exécution : le lutin avance de ${a}, puis de ${b}. Donc ${a} + ${b} = ${total}.\n\n` +
-          `Conclusion : le lutin avance de ${total} pas au total.`,
-        canvas: scratchCanvas("Distance dans une séquence", [
-          { type: "event" },
-          { type: "move", value: a },
-          { type: "move", value: b },
-        ]),
-      };
-    },
+    generate: genSeqDistance,
   },
 
   {
@@ -150,28 +2330,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Suis la valeur de la variable étape par étape.",
     tags: ["algo_programmation", "sequence", "variable", "template", "canvas"],
-    generate: () => {
-      const depart = randomChoice([0, 2, 5, 10]);
-      const ajout = randomChoice([3, 4, 5, 8]);
-      const final = depart + ajout;
-
-      return {
-        text: "Quelle est la valeur finale de la variable score ?",
-        format: "short",
-        expected: [String(final)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : une variable garde une valeur que le programme peut modifier.\n\n" +
-          "Méthode : on suit les blocs dans l’ordre.\n\n" +
-          `Exécution : score vaut d’abord ${depart}, puis on ajoute ${ajout}. Donc ${depart} + ${ajout} = ${final}.\n\n` +
-          `Conclusion : la valeur finale de score est ${final}.`,
-        canvas: scratchCanvas("Variable score", [
-          { type: "event" },
-          { type: "set_variable", variable: "score", value: depart },
-          { type: "change_variable", variable: "score", value: ajout },
-        ]),
-      };
-    },
+    generate: genSeqVariable,
   },
 
   {
@@ -304,38 +2463,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_entree_sortie",
     difficulty: 2,
     theme: "neutral",
-    hint: "La réponse saisie peut être placée dans une variable.",
+    hint: "La réponse tapée est rangée dans la variable : remplace « réponse » par ce nombre.",
     tags: ["algo_programmation", "entree", "variable", "template", "canvas"],
-    generate: () => {
-      const question = randomChoice([
-        "Quel est ton nombre ?",
-        "Choisis un nombre.",
-        "Entre une valeur.",
-      ]);
-
-      return {
-        text: "Quel bloc permet de récupérer une valeur donnée par l’utilisateur ?",
-        format: "qcm",
-        choices: shuffle([
-          "demander et attendre",
-          "avancer de 10",
-          "tourner de 90°",
-          "stylo en position d’écriture",
-        ]),
-        expected: ["demander et attendre"],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : une entrée est une donnée fournie au programme.\n\n" +
-          "Méthode : dans Scratch, on utilise un bloc de question pour obtenir une entrée.\n\n" +
-          "Exécution : “demander … et attendre” permet de récupérer une réponse.\n\n" +
-          "Conclusion : le bloc utile est “demander et attendre”.",
-        canvas: scratchCanvas("Demander une entrée", [
-          { type: "event" },
-          { type: "ask", text: question },
-          { type: "set_variable", variable: "nombre", value: "réponse" },
-        ]),
-      };
-    },
+    generate: genESCalcul,
   },
 
   {
@@ -347,28 +2477,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_entree_sortie",
     difficulty: 2,
     theme: "neutral",
-    hint: "Suis la valeur donnée à la variable.",
+    hint: "Regarde quelle variable le bloc « dire » affiche.",
     tags: ["algo_programmation", "sortie", "variable", "template", "canvas"],
-    generate: () => {
-      const valeur = randomChoice([4, 7, 10, 12, 15]);
-
-      return {
-        text: "Quelle valeur le programme affiche-t-il à la fin ?",
-        format: "short",
-        expected: [String(valeur)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : une sortie peut être une valeur affichée par le programme.\n\n" +
-          "Méthode : on regarde la valeur stockée dans la variable puis le bloc “dire”.\n\n" +
-          `Exécution : la variable nombre reçoit ${valeur}, puis le programme dit nombre.\n\n` +
-          `Conclusion : la valeur affichée est ${valeur}.`,
-        canvas: scratchCanvas("Afficher une variable", [
-          { type: "event" },
-          { type: "set_variable", variable: "nombre", value: valeur },
-          { type: "say", text: "nombre" },
-        ]),
-      };
-    },
+    generate: genESDeuxVariables,
   },
 
   {
@@ -382,30 +2493,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le programme prend une entrée, fait un calcul, puis affiche une sortie.",
     tags: ["algo_programmation", "entree", "sortie", "calcul", "template", "canvas"],
-    generate: () => {
-      const entree = randomChoice([2, 3, 4, 5, 6]);
-      const ajout = randomChoice([3, 5, 10]);
-      const sortie = entree + ajout;
-
-      return {
-        text: `L’utilisateur répond ${entree}. Quelle valeur le programme affiche-t-il ?`,
-        format: "short",
-        expected: [String(sortie)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : un programme peut prendre une entrée, effectuer un calcul, puis produire une sortie.\n\n" +
-          "Méthode : on suit la valeur de la variable étape par étape.\n\n" +
-          `Exécution : nombre vaut ${entree}, puis on ajoute ${ajout}. Donc ${entree} + ${ajout} = ${sortie}.\n\n` +
-          `Conclusion : le programme affiche ${sortie}.`,
-        canvas: scratchCanvas("Entrée → calcul → sortie", [
-          { type: "event" },
-          { type: "ask", text: "Choisis un nombre" },
-          { type: "set_variable", variable: "nombre", value: entree },
-          { type: "change_variable", variable: "nombre", value: ajout },
-          { type: "say", text: "nombre" },
-        ]),
-      };
-    },
+    generate: genESCalcul2,
   },
 
   {
@@ -517,32 +2605,8 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     difficulty: 2,
     theme: "neutral",
     hint: "Traduis la formule en opération.",
-    tags: ["algo_programmation", "formule", "addition", "template", "canvas"],
-    generate: () => {
-      const a = randomChoice([2, 3, 4, 5, 10]);
-
-      return {
-        text: `Quel bloc représente la formule x + ${a} ?`,
-        format: "qcm",
-        choices: shuffle([
-          `x + ${a}`,
-          `x - ${a}`,
-          `x × ${a}`,
-          `${a} - x`,
-        ]),
-        expected: [`x + ${a}`],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : une formule décrit un calcul avec une variable.\n\n" +
-          "Méthode : on identifie l’opération utilisée.\n\n" +
-          `Exécution : la formule x + ${a} signifie qu’on ajoute ${a} à x.\n\n` +
-          `Conclusion : le bloc correct est x + ${a}.`,
-        canvas: scratchCanvas("Choisir le bon bloc", [
-          { type: "event" },
-          { type: "operator", left: "x", operator: "+", right: a },
-        ]),
-      };
-    },
+    tags: ["algo_programmation", "formule", "addition", "template"],
+    generate: genFormuleAddition,
   },
 
   {
@@ -554,33 +2618,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_formule_bloc",
     difficulty: 2,
     theme: "neutral",
-    hint: "Le symbole × signifie multiplier.",
-    tags: ["algo_programmation", "formule", "multiplication", "template", "canvas"],
-    generate: () => {
-      const k = randomChoice([2, 3, 4, 5]);
-
-      return {
-        text: `Quel bloc représente la formule ${k} × x ?`,
-        format: "qcm",
-        choices: shuffle([
-          `${k} × x`,
-          `${k} + x`,
-          `x - ${k}`,
-          `${k} ÷ x`,
-        ]),
-        expected: [`${k} × x`],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : une formule peut contenir une multiplication.\n\n" +
-          "Méthode : on repère le symbole ×.\n\n" +
-          `Exécution : ${k} × x signifie qu’on multiplie x par ${k}.\n\n` +
-          `Conclusion : le bloc correct est ${k} × x.`,
-        canvas: scratchCanvas("Multiplication en blocs", [
-          { type: "event" },
-          { type: "operator", left: k, operator: "×", right: "x" },
-        ]),
-      };
-    },
+    hint: "Doubler, c’est multiplier par 2 ; tripler, c’est multiplier par 3.",
+    tags: ["algo_programmation", "formule", "multiplication", "template"],
+    generate: genFormuleMultiplication,
   },
 
   {
@@ -592,34 +2632,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_formule_bloc",
     difficulty: 3,
     theme: "neutral",
-    hint: "L’aire d’un rectangle se calcule avec longueur × largeur.",
-    tags: ["algo_programmation", "formule", "aire", "rectangle", "template", "canvas"],
-    generate: () => {
-      const largeur = randomChoice([2, 3, 4, 5]);
-
-      return {
-        text: `Un rectangle a une longueur variable L et une largeur ${largeur}. Quelle formule donne son aire ?`,
-        format: "qcm",
-        choices: shuffle([
-          `L × ${largeur}`,
-          `L + ${largeur}`,
-          `L - ${largeur}`,
-          `L ÷ ${largeur}`,
-        ]),
-        expected: [`L × ${largeur}`],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : une formule peut modéliser une situation mathématique.\n\n" +
-          "Méthode : on utilise la formule de l’aire du rectangle : longueur × largeur.\n\n" +
-          `Exécution : la longueur est L et la largeur est ${largeur}, donc l’aire vaut L × ${largeur}.\n\n` +
-          `Conclusion : la bonne formule est L × ${largeur}.`,
-        canvas: scratchCanvas("Formule d’aire", [
-          { type: "event" },
-          { type: "set_variable", variable: "largeur", value: largeur },
-          { type: "operator", left: "L", operator: "×", right: largeur },
-        ]),
-      };
-    },
+    hint: "Rappelle-toi la formule (aire, périmètre…), puis écris-la avec la lettre.",
+    tags: ["algo_programmation", "formule", "aire", "rectangle", "template"],
+    generate: genFormuleGeo,
   },
 
   {
@@ -632,37 +2647,8 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Traduis chaque instruction par une opération.",
-    tags: ["algo_programmation", "formule", "programme_calcul", "template", "canvas"],
-    generate: () => {
-      const k = randomChoice([2, 3, 4]);
-      const b = randomChoice([5, 6, 10]);
-
-      return {
-        text:
-          `Un programme prend un nombre x, le multiplie par ${k}, puis ajoute ${b}. ` +
-          "Quelle formule correspond au résultat ?",
-        format: "qcm",
-        choices: shuffle([
-          `${k} × x + ${b}`,
-          `${k} + x × ${b}`,
-          `x + ${k} + ${b}`,
-          `${k} × (x - ${b})`,
-        ]),
-        expected: [`${k} × x + ${b}`],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : un programme de calcul peut être traduit par une formule.\n\n" +
-          "Méthode : on respecte l’ordre des opérations décrites.\n\n" +
-          `Exécution : on multiplie x par ${k}, puis on ajoute ${b}. Cela donne ${k} × x + ${b}.\n\n` +
-          `Conclusion : la formule correcte est ${k} × x + ${b}.`,
-        canvas: scratchCanvas("Programme de calcul", [
-          { type: "event" },
-          { type: "set_variable", variable: "x", value: "réponse" },
-          { type: "operator", left: k, operator: "×", right: "x" },
-          { type: "operator", left: `${k} × x`, operator: "+", right: b },
-        ]),
-      };
-    },
+    tags: ["algo_programmation", "formule", "programme_calcul", "template"],
+    generate: genFormuleDeuxEtapes,
   },
 
   {
@@ -731,28 +2717,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Remplace x par sa valeur.",
     tags: ["algo_programmation", "expression", "valeur", "addition", "template", "canvas"],
-    generate: () => {
-      const x = randomChoice([2, 4, 5, 7, 10]);
-      const a = randomChoice([3, 5, 8, 10]);
-      const result = x + a;
-
-      return {
-        text: `Si x vaut ${x}, quelle est la valeur de x + ${a} ?`,
-        format: "short",
-        expected: [String(result)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : calculer la valeur d’une expression, c’est remplacer la variable par un nombre.\n\n" +
-          "Méthode : on remplace x par sa valeur, puis on effectue le calcul.\n\n" +
-          `Exécution : x + ${a} = ${x} + ${a} = ${result}.\n\n` +
-          `Conclusion : la valeur de l’expression est ${result}.`,
-        canvas: scratchCanvas("Valeur d’une expression", [
-          { type: "event" },
-          { type: "set_variable", variable: "x", value: x },
-          { type: "operator", left: "x", operator: "+", right: a },
-        ]),
-      };
-    },
+    generate: genExprAddition,
   },
 
   {
@@ -766,28 +2731,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Remplace x par sa valeur puis multiplie.",
     tags: ["algo_programmation", "expression", "valeur", "multiplication", "template", "canvas"],
-    generate: () => {
-      const x = randomChoice([2, 3, 4, 5, 6]);
-      const k = randomChoice([2, 3, 4, 5]);
-      const result = k * x;
-
-      return {
-        text: `Si x vaut ${x}, quelle est la valeur de ${k} × x ?`,
-        format: "short",
-        expected: [String(result)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : une expression avec variable peut être calculée si on connaît la valeur de la variable.\n\n" +
-          "Méthode : on remplace x par sa valeur.\n\n" +
-          `Exécution : ${k} × x = ${k} × ${x} = ${result}.\n\n` +
-          `Conclusion : la valeur de l’expression est ${result}.`,
-        canvas: scratchCanvas("Multiplication avec variable", [
-          { type: "event" },
-          { type: "set_variable", variable: "x", value: x },
-          { type: "operator", left: k, operator: "×", right: "x" },
-        ]),
-      };
-    },
+    generate: genExprMultiplication,
   },
 
   {
@@ -799,32 +2743,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_expression_valeur",
     difficulty: 3,
     theme: "neutral",
-    hint: "Commence par la multiplication, puis ajoute.",
+    hint: "Remplace la variable, puis : parenthèses d’abord, puis ×, puis + et −.",
     tags: ["algo_programmation", "expression", "valeur", "deux_etapes", "template", "canvas"],
-    generate: () => {
-      const x = randomChoice([2, 3, 4, 5]);
-      const k = randomChoice([2, 3, 4]);
-      const b = randomChoice([5, 7, 10]);
-      const result = k * x + b;
-
-      return {
-        text: `Si x vaut ${x}, quelle est la valeur de ${k} × x + ${b} ?`,
-        format: "short",
-        expected: [String(result)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : une expression peut contenir plusieurs opérations.\n\n" +
-          "Méthode : on remplace x, puis on respecte les priorités de calcul.\n\n" +
-          `Exécution : ${k} × ${x} + ${b} = ${k * x} + ${b} = ${result}.\n\n` +
-          `Conclusion : la valeur de l’expression est ${result}.`,
-        canvas: scratchCanvas("Expression en deux étapes", [
-          { type: "event" },
-          { type: "set_variable", variable: "x", value: x },
-          { type: "operator", left: k, operator: "×", right: "x" },
-          { type: "operator", left: `${k} × x`, operator: "+", right: b },
-        ]),
-      };
-    },
+    generate: genExprDeuxEtapes,
   },
 
   {
@@ -838,31 +2759,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Suis les blocs dans l’ordre.",
     tags: ["algo_programmation", "expression", "programme_calcul", "template", "canvas"],
-    generate: () => {
-      const depart = randomChoice([2, 3, 4, 5, 6]);
-      const mult = randomChoice([2, 3, 4]);
-      const ajout = randomChoice([1, 5, 10]);
-      const result = depart * mult + ajout;
-
-      return {
-        text: `Le nombre de départ est ${depart}. Quelle est la valeur finale de résultat ?`,
-        format: "short",
-        expected: [String(result)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : exécuter un programme de calcul consiste à suivre les instructions dans l’ordre.\n\n" +
-          "Méthode : on suit la variable étape par étape.\n\n" +
-          `Exécution : départ ${depart}. On multiplie par ${mult} : ${depart * mult}. Puis on ajoute ${ajout} : ${result}.\n\n` +
-          `Conclusion : la valeur finale est ${result}.`,
-        canvas: scratchCanvas("Programme de calcul", [
-          { type: "event" },
-          { type: "set_variable", variable: "résultat", value: depart },
-          { type: "set_variable", variable: "résultat", value: `${depart} × ${mult}` },
-          { type: "change_variable", variable: "résultat", value: ajout },
-          { type: "say", text: "résultat" },
-        ]),
-      };
-    },
+    generate: genExprProgramme,
   },
 
   {
@@ -876,30 +2773,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "La réponse de l’utilisateur devient la valeur de x.",
     tags: ["algo_programmation", "expression", "entree", "reponse", "template", "canvas"],
-    generate: () => {
-      const reponse = randomChoice([3, 4, 6, 8]);
-      const ajout = randomChoice([2, 5, 10]);
-      const result = reponse + ajout;
-
-      return {
-        text: `L’utilisateur répond ${reponse}. Quelle valeur le programme affiche-t-il ?`,
-        format: "short",
-        expected: [String(result)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : une entrée utilisateur peut être utilisée dans un calcul.\n\n" +
-          "Méthode : on remplace la réponse par la valeur donnée.\n\n" +
-          `Exécution : x reçoit ${reponse}, puis on calcule x + ${ajout}. Donc ${reponse} + ${ajout} = ${result}.\n\n` +
-          `Conclusion : le programme affiche ${result}.`,
-        canvas: scratchCanvas("Réponse utilisée dans un calcul", [
-          { type: "event" },
-          { type: "ask", text: "Choisis un nombre" },
-          { type: "set_variable", variable: "x", value: "réponse" },
-          { type: "operator", left: "x", operator: "+", right: ajout },
-          { type: "say", text: `x + ${ajout}` },
-        ]),
-      };
-    },
+    generate: genExprReponse,
   },
 
   {
@@ -967,31 +2841,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Lis le programme sans l’exécuter : suis la variable étape par étape.",
     tags: ["algo_programmation", "prevoir", "expression", "template", "canvas"],
-    generate: () => {
-      const x = randomChoice([2, 3, 4, 5]);
-      const a = randomChoice([2, 4, 6]);
-      const b = randomChoice([3, 5, 7]);
-      const result = x * a + b;
-
-      return {
-        text: `Sans exécuter le programme, prévois la valeur affichée si x vaut ${x}.`,
-        format: "short",
-        expected: [String(result)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : prévoir une expression, c’est anticiper le résultat avant exécution.\n\n" +
-          "Méthode : on lit les blocs dans l’ordre et on suit la valeur de la variable.\n\n" +
-          `Exécution : x vaut ${x}. On calcule ${x} × ${a} = ${x * a}, puis ${x * a} + ${b} = ${result}.\n\n` +
-          `Conclusion : la valeur affichée sera ${result}.`,
-        canvas: scratchCanvas("Prévoir le résultat", [
-          { type: "event" },
-          { type: "set_variable", variable: "x", value: x },
-          { type: "set_variable", variable: "résultat", value: `${a} × x` },
-          { type: "change_variable", variable: "résultat", value: b },
-          { type: "say", text: "résultat" },
-        ]),
-      };
-    },
+    generate: () => genPrevoirSortie(false),
   },
 
   {
@@ -1005,35 +2855,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Transforme les blocs en formule avec x.",
     tags: ["algo_programmation", "prevoir", "formule", "template", "canvas"],
-    generate: () => {
-      const a = randomChoice([2, 3, 4, 5]);
-      const b = randomChoice([1, 5, 10]);
-
-      return {
-        text: "Quelle formule correspond au programme ?",
-        format: "qcm",
-        choices: shuffle([
-          `${a} × x + ${b}`,
-          `x + ${a} × ${b}`,
-          `${a} × (x + ${b})`,
-          `x - ${a} + ${b}`,
-        ]),
-        expected: [`${a} × x + ${b}`],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : un programme peut être traduit par une expression littérale.\n\n" +
-          "Méthode : on remplace la valeur de départ par x et on suit les opérations dans l’ordre.\n\n" +
-          `Exécution : le programme multiplie x par ${a}, puis ajoute ${b}. La formule est donc ${a} × x + ${b}.\n\n` +
-          `Conclusion : la formule correcte est ${a} × x + ${b}.`,
-        canvas: scratchCanvas("Programme vers formule", [
-          { type: "event" },
-          { type: "set_variable", variable: "x", value: "réponse" },
-          { type: "set_variable", variable: "résultat", value: `${a} × x` },
-          { type: "change_variable", variable: "résultat", value: b },
-          { type: "say", text: "résultat" },
-        ]),
-      };
-    },
+    generate: () => genPrevoirFormule(false),
   },
 
   {
@@ -1047,36 +2869,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Ici, on ajoute d’abord, puis on multiplie tout le résultat.",
     tags: ["algo_programmation", "prevoir", "parentheses", "template", "canvas"],
-    generate: () => {
-      const a = randomChoice([2, 3, 4]);
-      const b = randomChoice([3, 5, 6]);
-
-      return {
-        text:
-          `Le programme ajoute ${b} à x, puis multiplie le résultat par ${a}. ` +
-          "Quelle formule correspond au programme ?",
-        format: "qcm",
-        choices: shuffle([
-          `(x + ${b}) × ${a}`,
-          `x + ${b} × ${a}`,
-          `x × ${a} + ${b}`,
-          `x - ${b} × ${a}`,
-        ]),
-        expected: [`(x + ${b}) × ${a}`],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : prévoir une expression demande de respecter l’ordre du programme.\n\n" +
-          "Méthode : quand un résultat intermédiaire est réutilisé, on peut avoir besoin de parenthèses.\n\n" +
-          `Exécution : on calcule d’abord x + ${b}, puis on multiplie tout par ${a}. La formule est donc (x + ${b}) × ${a}.\n\n` +
-          `Conclusion : les parenthèses sont nécessaires.`,
-        canvas: scratchCanvas("Attention aux parenthèses", [
-          { type: "event" },
-          { type: "set_variable", variable: "résultat", value: `x + ${b}` },
-          { type: "set_variable", variable: "résultat", value: `(x + ${b}) × ${a}` },
-          { type: "say", text: "résultat" },
-        ]),
-      };
-    },
+    generate: () => genPrevoirFormule(true),
   },
 
   {
@@ -1088,40 +2881,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_prevoir_expression",
     difficulty: 4,
     theme: "neutral",
-    hint: "Teste avec la valeur donnée pour x.",
+    hint: "Exécute chaque programme avec la même valeur de départ, puis compare.",
     tags: ["algo_programmation", "prevoir", "comparer", "template", "qcm"],
-    generate: () => {
-      const x = randomChoice([2, 3, 4, 5]);
-      const a = randomChoice([2, 3, 4]);
-      const b = randomChoice([5, 6, 10]);
-
-      const p1 = x * a + b;
-      const p2 = (x + b) * a;
-
-      const answer = p1 === p2 ? "oui" : "non";
-
-      return {
-        text:
-          `Pour x = ${x}, les deux programmes donnent-ils le même résultat ?\n` +
-          `Programme A : ${a} × x + ${b}\n` +
-          `Programme B : (x + ${b}) × ${a}`,
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: [answer],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : pour comparer deux programmes, on calcule leurs résultats avec la même entrée.\n\n" +
-          "Méthode : on remplace x par la valeur donnée dans chaque formule.\n\n" +
-          `Exécution : Programme A = ${a} × ${x} + ${b} = ${p1}. Programme B = (${x} + ${b}) × ${a} = ${p2}.\n\n` +
-          `Conclusion : la bonne réponse est ${answer}.`,
-        canvas: scratchCanvas("Comparer deux programmes", [
-          { type: "event" },
-          { type: "set_variable", variable: "x", value: x },
-          { type: "operator", left: `${a} × x`, operator: "+", right: b },
-          { type: "operator", left: `x + ${b}`, operator: "×", right: a },
-        ]),
-      };
-    },
+    generate: genPrevoirComparer,
   },
 
   {
@@ -1200,26 +2962,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le paramètre du bloc avancer est la distance.",
     tags: ["algo_programmation", "parametre", "distance", "template", "canvas"],
-    generate: () => {
-      const ancienneDistance = randomChoice([20, 30, 40]);
-      const nouvelleDistance = randomChoice([50, 60, 80]);
-
-      return {
-        text: `On remplace “avancer de ${ancienneDistance}” par “avancer de ${nouvelleDistance}”. Quelle distance le lutin avance-t-il maintenant ?`,
-        format: "short",
-        expected: [String(nouvelleDistance)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : un paramètre est une valeur que l’on peut modifier dans un bloc.\n\n" +
-          "Méthode : on repère la nouvelle valeur du bloc.\n\n" +
-          `Exécution : le bloc devient “avancer de ${nouvelleDistance}”.\n\n` +
-          `Conclusion : le lutin avance maintenant de ${nouvelleDistance} pas.`,
-        canvas: scratchCanvas("Modifier un paramètre", [
-          { type: "event" },
-          { type: "move", value: nouvelleDistance },
-        ]),
-      };
-    },
+    generate: genParamDistance,
   },
 
   {
@@ -1231,33 +2974,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_parametre",
     difficulty: 3,
     theme: "neutral",
-    hint: "Distance totale = nombre de répétitions × distance à chaque répétition.",
+    hint: "La boucle tourne avec le NOUVEAU nombre de répétitions.",
     tags: ["algo_programmation", "parametre", "boucle", "template", "canvas"],
-    generate: () => {
-      const times = randomChoice([3, 4, 5, 6]);
-      const pas = randomChoice([10, 20, 25]);
-      const total = times * pas;
-
-      return {
-        text: `Le programme répète ${times} fois “avancer de ${pas}”. Quelle distance totale est parcourue ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : modifier un paramètre peut changer le résultat d’un programme.\n\n" +
-          "Méthode : ici, on multiplie le nombre de répétitions par la distance.\n\n" +
-          `Exécution : ${times} × ${pas} = ${total}.\n\n` +
-          `Conclusion : la distance totale parcourue est ${total} pas.`,
-        canvas: scratchCanvas("Paramètre dans une boucle", [
-          { type: "event" },
-          {
-            type: "repeat",
-            times,
-            children: [{ type: "move", value: pas }],
-          },
-        ]),
-      };
-    },
+    generate: genParamRepetitions,
   },
 
   {
@@ -1271,31 +2990,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le coefficient multiplie la valeur de x.",
     tags: ["algo_programmation", "parametre", "coefficient", "formule", "template", "canvas"],
-    generate: () => {
-      const x = randomChoice([2, 3, 4, 5]);
-      const ancienCoeff = randomChoice([2, 3]);
-      const nouveauCoeff = randomChoice([4, 5, 6]);
-      const result = nouveauCoeff * x;
-
-      return {
-        text:
-          `Dans une formule, on remplace ${ancienCoeff} × x par ${nouveauCoeff} × x. ` +
-          `Si x = ${x}, quel est le nouveau résultat ?`,
-        format: "short",
-        expected: [String(result)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : un paramètre peut être un nombre dans une formule.\n\n" +
-          "Méthode : on utilise la nouvelle valeur du coefficient.\n\n" +
-          `Exécution : ${nouveauCoeff} × ${x} = ${result}.\n\n` +
-          `Conclusion : le nouveau résultat est ${result}.`,
-        canvas: scratchCanvas("Changer un coefficient", [
-          { type: "event" },
-          { type: "set_variable", variable: "x", value: x },
-          { type: "operator", left: nouveauCoeff, operator: "×", right: "x" },
-        ]),
-      };
-    },
+    generate: genParamCoefficient,
   },
 
   {
@@ -1307,34 +3002,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_parametre",
     difficulty: 4,
     theme: "neutral",
-    hint: "Suis la nouvelle valeur ajoutée.",
+    hint: "Chaque tour de boucle ajoute maintenant la NOUVELLE valeur.",
     tags: ["algo_programmation", "parametre", "variable", "template", "canvas"],
-    generate: () => {
-      const depart = randomChoice([5, 10, 20]);
-      const ancienAjout = randomChoice([2, 3, 4]);
-      const nouvelAjout = randomChoice([6, 8, 10]);
-      const final = depart + nouvelAjout;
-
-      return {
-        text:
-          `La variable score vaut ${depart}. On remplace “ajouter ${ancienAjout} à score” par “ajouter ${nouvelAjout} à score”. ` +
-          "Quelle est la nouvelle valeur finale de score ?",
-        format: "short",
-        expected: [String(final)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : changer un paramètre modifie l’effet du bloc.\n\n" +
-          "Méthode : on utilise la nouvelle valeur ajoutée.\n\n" +
-          `Exécution : ${depart} + ${nouvelAjout} = ${final}.\n\n` +
-          `Conclusion : la nouvelle valeur finale de score est ${final}.`,
-        canvas: scratchCanvas("Modifier une variable", [
-          { type: "event" },
-          { type: "set_variable", variable: "score", value: depart },
-          { type: "change_variable", variable: "score", value: nouvelAjout },
-          { type: "say", text: "score" },
-        ]),
-      };
-    },
+    generate: genParamAjout,
   },
 
   {
@@ -1436,32 +3106,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Vérifie si la condition est vraie ou fausse.",
     tags: ["algo_programmation", "condition", "if", "template", "canvas"],
-    generate: () => {
-      const score = randomChoice([12, 15, 18]);
-      const limite = randomChoice([10, 11, 14]);
-
-      return {
-        text: `Le score vaut ${score}. Le programme teste : “si score > ${limite}”. La condition est-elle vraie ?`,
-        format: "qcm",
-        choices: shuffle(["oui", "non"]),
-        expected: [score > limite ? "oui" : "non"],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : une condition permet de tester une situation.\n\n" +
-          "Méthode : on compare les deux nombres.\n\n" +
-          `Exécution : ${score} > ${limite} est ${score > limite ? "vrai" : "faux"}.\n\n` +
-          `Conclusion : la réponse est “${score > limite ? "oui" : "non"}”.`,
-        canvas: scratchCanvas("Tester une condition", [
-          { type: "event" },
-          { type: "set_variable", variable: "score", value: score },
-          {
-            type: "if",
-            condition: `score > ${limite}`,
-            children: [{ type: "say", text: "Bravo !" }],
-          },
-        ]),
-      };
-    },
+    generate: genTestVrai,
   },
 
   {
@@ -1475,35 +3120,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le programme agit seulement si la condition est vraie.",
     tags: ["algo_programmation", "condition", "if", "template", "canvas"],
-    generate: () => {
-      const vies = randomChoice([1, 2, 3]);
-      const limite = randomChoice([5, 6, 7]);
-
-      return {
-        text:
-          `Le programme teste “si vies > ${limite}”. ` +
-          `Le nombre de vies vaut ${vies}. ` +
-          `Le bloc à l’intérieur sera-t-il exécuté ?`,
-        format: "qcm",
-        choices: shuffle(["oui", "non"]),
-        expected: [vies > limite ? "oui" : "non"],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : un bloc “si” s’exécute seulement lorsque la condition est vraie.\n\n" +
-          "Méthode : on vérifie la comparaison.\n\n" +
-          `Exécution : ${vies} > ${limite} est ${vies > limite ? "vrai" : "faux"}.\n\n` +
-          `Conclusion : la réponse est “${vies > limite ? "oui" : "non"}”.`,
-        canvas: scratchCanvas("Condition fausse", [
-          { type: "event" },
-          { type: "set_variable", variable: "vies", value: vies },
-          {
-            type: "if",
-            condition: `vies > ${limite}`,
-            children: [{ type: "say", text: "Niveau gagné !" }],
-          },
-        ]),
-      };
-    },
+    generate: genTestExecute,
   },
 
   {
@@ -1517,45 +3134,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Observe ce qui arrive à la variable.",
     tags: ["algo_programmation", "condition", "variable", "template", "canvas"],
-    generate: () => {
-      const depart = randomChoice([2, 4, 6]);
-      const ajout = randomChoice([5, 10, 20]);
-      const condition = randomChoice([true, false]);
-
-      const limite = condition ? depart - 1 : depart + 5;
-      const final = condition ? depart + ajout : depart;
-
-      return {
-        text:
-          `La variable score vaut ${depart}. ` +
-          `Le programme teste “si score > ${limite}” puis ajoute ${ajout} à score.\n` +
-          "Quelle est la valeur finale de score ?",
-        format: "short",
-        expected: [String(final)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : une condition contrôle l’exécution d’actions.\n\n" +
-          "Méthode : on vérifie si la condition est vraie.\n\n" +
-          `Exécution : ${depart} > ${limite} est ${condition ? "vrai" : "faux"}.\n` +
-          `${condition ? `On ajoute ${ajout}.` : "Aucun ajout n’est effectué."}\n\n` +
-          `Conclusion : la valeur finale est ${final}.`,
-        canvas: scratchCanvas("Condition et variable", [
-          { type: "event" },
-          { type: "set_variable", variable: "score", value: depart },
-          {
-            type: "if",
-            condition: `score > ${limite}`,
-            children: [
-              {
-                type: "change_variable",
-                variable: "score",
-                value: ajout,
-              },
-            ],
-          },
-        ]),
-      };
-    },
+    generate: genTestVariable,
   },
 
   {
@@ -1567,34 +3146,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_test_condition",
     difficulty: 3,
     theme: "neutral",
-    hint: "Un nombre pair est divisible par 2.",
+    hint: "Pair : multiple de 2. Multiple de 5 : finit par 0 ou 5. Multiple de 10 : finit par 0.",
     tags: ["algo_programmation", "condition", "pair", "template", "canvas"],
-    generate: () => {
-      const nombre = randomChoice([4, 6, 8, 10, 3, 5, 7, 9]);
-
-      return {
-        text:
-          `Le programme teste : “si le nombre ${nombre} est pair”. ` +
-          `La condition est-elle vraie ?`,
-        format: "qcm",
-        choices: shuffle(["oui", "non"]),
-        expected: [nombre % 2 === 0 ? "oui" : "non"],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : une condition peut tester une propriété mathématique.\n\n" +
-          "Méthode : on vérifie si le nombre est divisible par 2.\n\n" +
-          `Exécution : ${nombre} ${nombre % 2 === 0 ? "est" : "n’est pas"} pair.\n\n` +
-          `Conclusion : la réponse est “${nombre % 2 === 0 ? "oui" : "non"}”.`,
-        canvas: scratchCanvas("Tester un nombre pair", [
-          { type: "event" },
-          {
-            type: "if",
-            condition: `${nombre} est pair`,
-            children: [{ type: "say", text: "Nombre pair !" }],
-          },
-        ]),
-      };
-    },
+    generate: genTestParite,
   },
 
   {
@@ -1608,36 +3162,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le déplacement se fait seulement si la condition est vraie.",
     tags: ["algo_programmation", "condition", "deplacement", "template", "canvas"],
-    generate: () => {
-      const energie = randomChoice([3, 6, 9]);
-      const seuil = randomChoice([5, 7]);
-
-      const avance = energie > seuil ? 50 : 0;
-
-      return {
-        text:
-          `Le programme dit : “si énergie > ${seuil}, avancer de 50”.\n` +
-          `L’énergie vaut ${energie}. Combien de pas le lutin avance-t-il ?`,
-        format: "short",
-        expected: [String(avance)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : un bloc conditionnel peut déclencher une action.\n\n" +
-          "Méthode : on regarde si la condition est vraie.\n\n" +
-          `Exécution : ${energie} > ${seuil} est ${energie > seuil ? "vrai" : "faux"}.\n` +
-          `${energie > seuil ? "Le lutin avance de 50 pas." : "Le lutin ne bouge pas."}\n\n` +
-          `Conclusion : le lutin avance de ${avance} pas.`,
-        canvas: scratchCanvas("Condition et déplacement", [
-          { type: "event" },
-          { type: "set_variable", variable: "energie", value: energie },
-          {
-            type: "if",
-            condition: `energie > ${seuil}`,
-            children: [{ type: "move", value: 50 }],
-          },
-        ]),
-      };
-    },
+    generate: genTestDeplacement,
   },
 
   {
@@ -1711,31 +3236,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Multiplie le nombre de répétitions par la distance.",
     tags: ["algo_programmation", "boucle", "distance", "template", "canvas"],
-    generate: () => {
-      const times = randomChoice([3, 4, 5, 6]);
-      const pas = randomChoice([10, 20, 25, 30]);
-      const total = times * pas;
-
-      return {
-        text: `Le programme répète ${times} fois “avancer de ${pas}”. Quelle distance totale est parcourue ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : une boucle répète plusieurs fois les mêmes instructions.\n\n" +
-          "Méthode : on multiplie le nombre de répétitions par la distance parcourue à chaque fois.\n\n" +
-          `Exécution : ${times} × ${pas} = ${total}.\n\n` +
-          `Conclusion : le lutin parcourt ${total} pas.`,
-        canvas: scratchCanvas("Distance totale", [
-          { type: "event" },
-          {
-            type: "repeat",
-            times,
-            children: [{ type: "move", value: pas }],
-          },
-        ]),
-      };
-    },
+    generate: genBoucleDistance,
   },
 
   {
@@ -1749,35 +3250,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "La variable augmente à chaque répétition.",
     tags: ["algo_programmation", "boucle", "variable", "template", "canvas"],
-    generate: () => {
-      const times = randomChoice([3, 4, 5]);
-      const ajout = randomChoice([2, 5, 10]);
-      const final = times * ajout;
-
-      return {
-        text: `La variable score commence à 0. On ajoute ${ajout} à score pendant ${times} répétitions. Quelle est la valeur finale de score ?`,
-        format: "short",
-        expected: [String(final)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : une boucle répète les blocs qu’elle contient.\n\n" +
-          "Méthode : on calcule l’augmentation totale de la variable.\n\n" +
-          `Exécution : ${times} répétitions de +${ajout}, donc ${times} × ${ajout} = ${final}.\n\n` +
-          `Conclusion : score vaut ${final}.`,
-        canvas: scratchCanvas("Boucle et variable", [
-          { type: "event" },
-          { type: "set_variable", variable: "score", value: 0 },
-          {
-            type: "repeat",
-            times,
-            children: [
-              { type: "change_variable", variable: "score", value: ajout },
-            ],
-          },
-          { type: "say", text: "score" },
-        ]),
-      };
-    },
+    generate: genBoucleCompteur,
   },
 
   {
@@ -1789,38 +3262,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_boucle",
     difficulty: 4,
     theme: "neutral",
-    hint: "Un carré a 4 côtés, un triangle équilatéral a 3 côtés.",
+    hint: "Autant de répétitions que de côtés ; les angles tournés font 360° en tout.",
     tags: ["algo_programmation", "boucle", "geometrie", "template", "canvas"],
-    generate: () => {
-      const figure = randomChoice([
-        { nom: "carré", cotes: 4, angle: 90 },
-        { nom: "triangle équilatéral", cotes: 3, angle: 120 },
-      ]);
-
-      return {
-        text: `Pour tracer un ${figure.nom}, combien de fois faut-il répéter le bloc avancer puis tourner ?`,
-        format: "short",
-        expected: [String(figure.cotes)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : une boucle peut éviter de répéter plusieurs fois les mêmes blocs.\n\n" +
-          "Méthode : pour tracer un polygone, on répète autant de fois qu’il y a de côtés.\n\n" +
-          `Exécution : un ${figure.nom} possède ${figure.cotes} côtés.\n\n` +
-          `Conclusion : il faut répéter ${figure.cotes} fois.`,
-        canvas: scratchCanvas(`Tracer un ${figure.nom}`, [
-          { type: "event" },
-          { type: "pen", text: "stylo en position d’écriture" },
-          {
-            type: "repeat",
-            times: figure.cotes,
-            children: [
-              { type: "move", value: 50 },
-              { type: "turn", value: figure.angle },
-            ],
-          },
-        ]),
-      };
-    },
+    generate: genBouclePolygone,
   },
     {
     kind: "template",
@@ -1832,32 +3276,8 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     hint: "Nombre de répétitions = distance totale ÷ distance par répétition.",
-    tags: ["algo_programmation", "boucle", "inverse", "template", "canvas"],
-    generate: () => {
-      const pas = randomChoice([10, 20, 25]);
-      const times = randomChoice([3, 4, 5, 6]);
-      const total = pas * times;
-
-      return {
-        text: `On veut avancer de ${total} pas au total. Chaque répétition avance de ${pas} pas. Combien de répétitions faut-il ?`,
-        format: "short",
-        expected: [String(times)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : une boucle répète plusieurs fois la même instruction.\n\n" +
-          "Méthode : on divise la distance totale par la distance d’une répétition.\n\n" +
-          `Exécution : ${total} ÷ ${pas} = ${times}.\n\n` +
-          `Conclusion : il faut ${times} répétitions.`,
-        canvas: scratchCanvas("Trouver le nombre de répétitions", [
-          { type: "event" },
-          {
-            type: "repeat",
-            times,
-            children: [{ type: "move", value: pas }],
-          },
-        ]),
-      };
-    },
+    tags: ["algo_programmation", "boucle", "inverse", "template"],
+    generate: genBoucleRetrouver,
   },
 
   {
@@ -1969,36 +3389,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Suis d’abord la variable, puis la boucle.",
     tags: ["algo_programmation", "defi", "variable", "boucle", "template", "canvas"],
-    generate: () => {
-      const depart = randomChoice([0, 5, 10]);
-      const ajout = randomChoice([2, 3, 5]);
-      const times = randomChoice([3, 4, 5]);
-      const final = depart + ajout * times;
-
-      return {
-        text: `La variable score vaut ${depart}. On ajoute ${ajout} à score pendant ${times} répétitions. Quelle est la valeur finale ?`,
-        format: "short",
-        expected: [String(final)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : un défi algorithmique peut combiner variable et boucle.\n\n" +
-          "Méthode : on calcule l’effet total de la boucle, puis on l’ajoute à la valeur de départ.\n\n" +
-          `Exécution : la boucle ajoute ${ajout} × ${times} = ${ajout * times}. Puis ${depart} + ${ajout * times} = ${final}.\n\n` +
-          `Conclusion : la valeur finale est ${final}.`,
-        canvas: scratchCanvas("Variable + boucle", [
-          { type: "event" },
-          { type: "set_variable", variable: "score", value: depart },
-          {
-            type: "repeat",
-            times,
-            children: [
-              { type: "change_variable", variable: "score", value: ajout },
-            ],
-          },
-          { type: "say", text: "score" },
-        ]),
-      };
-    },
+    generate: genDefiBoucle,
   },
 
   {
@@ -2012,41 +3403,35 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Compare ce que le programme fait vraiment avec ce qu’il était censé faire.",
     tags: ["algo_programmation", "defi", "erreur", "logique", "template", "canvas"],
-    generate: () => {
-      const cote = randomChoice([40, 50, 60]);
-
-      return {
-        text:
-          "Ce programme est censé tracer un carré. Quelle instruction pose problème ?",
-        format: "qcm",
-        choices: shuffle([
-          "tourner de 60°",
-          "répéter 4 fois",
-          `avancer de ${cote}`,
-          "stylo en position d’écriture",
-        ]),
-        expected: ["tourner de 60°"],
-        comparator: "mcq_exact",
-        explanation:
-          "Définition : un programme de tracé géométrique doit utiliser les bons angles.\n\n" +
-          "Méthode : pour un carré, on tourne de 90° à chaque sommet.\n\n" +
-          "Exécution : ici, le programme tourne de 60°, ce qui ne permet pas de tracer un carré.\n\n" +
-          "Conclusion : l’erreur est “tourner de 60°”.",
-        canvas: scratchCanvas("Trouver l’erreur", [
-          { type: "event" },
-          { type: "pen", text: "stylo en position d’écriture" },
-          {
-            type: "repeat",
-            times: 4,
-            children: [
-              { type: "move", value: cote },
-              { type: "turn", value: 60 },
-            ],
-          },
-        ]),
-      };
-    },
+    generate: genCDErreurPolygone,
   },
+  gabarit(
+    "5e_algo_construire_defi_tpl_3_completer",
+    "algo_construire",
+    "algo_construire_defi",
+    4,
+    "Pars de l’objectif et remonte le programme.",
+    ["defi", "completer", "boucle"],
+    genCDCompleter
+  ),
+  gabarit(
+    "5e_algo_construire_defi_tpl_4_choisir_programme",
+    "algo_construire",
+    "algo_construire_defi",
+    4,
+    "Exécute chaque programme dans ta tête : départ + tours × ajout.",
+    ["defi", "choisir", "boucle", "qcm"],
+    genCDChoisir
+  ),
+  gabarit(
+    "5e_algo_construire_defi_tpl_5_tester",
+    "algo_construire",
+    "algo_construire_defi",
+    5,
+    "Suis les blocs un par un avec le nombre tapé, puis compare avec ce qui était voulu.",
+    ["defi", "debug", "entree", "canvas"],
+    genCDTester
+  ),
     {
     kind: "template",
     id: "5e_algo_defi_tpl_3_entree_calcul_boucle",
@@ -2058,39 +3443,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Utilise la valeur saisie, puis applique la boucle.",
     tags: ["algo_programmation", "defi", "entree", "calcul", "boucle", "template", "canvas"],
-    generate: () => {
-      const reponse = randomChoice([2, 3, 4, 5]);
-      const ajout = randomChoice([2, 5, 10]);
-      const times = randomChoice([3, 4]);
-      const final = reponse + ajout * times;
-
-      return {
-        text:
-          `L’utilisateur répond ${reponse}. Le programme ajoute ${ajout} à nombre pendant ${times} répétitions. ` +
-          "Quelle est la valeur finale de nombre ?",
-        format: "short",
-        expected: [String(final)],
-        comparator: "number_equal",
-        explanation:
-          "Définition : un programme peut combiner une entrée, une variable et une boucle.\n\n" +
-          "Méthode : on part de la valeur saisie, puis on ajoute plusieurs fois la même quantité.\n\n" +
-          `Exécution : nombre vaut ${reponse}. La boucle ajoute ${ajout} × ${times} = ${ajout * times}. Donc ${reponse} + ${ajout * times} = ${final}.\n\n` +
-          `Conclusion : la valeur finale est ${final}.`,
-        canvas: scratchCanvas("Entrée + boucle", [
-          { type: "event" },
-          { type: "ask", text: "Choisis un nombre" },
-          { type: "set_variable", variable: "nombre", value: reponse },
-          {
-            type: "repeat",
-            times,
-            children: [
-              { type: "change_variable", variable: "nombre", value: ajout },
-            ],
-          },
-          { type: "say", text: "nombre" },
-        ]),
-      };
-    },
+    generate: genDefiEntreeBoucle,
   },
 
   {
@@ -2258,31 +3611,37 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_sequence",
     difficulty: 2,
     theme: "neutral",
-    hint: "Additionne les deux blocs “avancer”.",
+    hint: "Le bloc « dire » montre la valeur du moment, pas celle de la fin.",
     tags: ["algo_programmation", "sequence", "template", "canvas"],
-    generate: () => {
-      const a = randomChoice([10, 15, 20, 25]);
-      const b = randomChoice([10, 30, 40]);
-      const total = a + b;
-      return {
-        text: `Le lutin avance de ${a}, puis de ${b}. Quelle distance totale a-t-il parcourue ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: expl(
-          "une séquence exécute les blocs dans l’ordre.",
-          "on additionne les distances des blocs “avancer”.",
-          `${a} + ${b} = ${total}.`,
-          `le lutin a parcouru ${total} pas.`
-        ),
-        canvas: scratchCanvas("Deux avancées", [
-          { type: "event" },
-          { type: "move", value: a },
-          { type: "move", value: b },
-        ]),
-      };
-    },
+    generate: genSeqDireMilieu,
   },
+  gabarit(
+    "5e_algo_sequence_tpl_3_ordre",
+    "algo_programmation",
+    "algo_sequence",
+    1,
+    "Lis les blocs de haut en bas, à partir du drapeau vert.",
+    ["sequence", "ordre", "qcm", "canvas"],
+    genSeqOrdre
+  ),
+  gabarit(
+    "5e_algo_sequence_tpl_4_ordre_compte",
+    "algo_programmation",
+    "algo_sequence",
+    3,
+    "Fais les blocs un par un, dans l’ordre : changer l’ordre change le résultat.",
+    ["sequence", "ordre", "variable", "canvas"],
+    genSeqOrdreCompte
+  ),
+  gabarit(
+    "5e_algo_sequence_tpl_5_deux_variables",
+    "algo_programmation",
+    "algo_sequence",
+    4,
+    "Note la valeur de chaque variable après chaque bloc.",
+    ["sequence", "variable", "trace", "canvas"],
+    genSeqTrace
+  ),
 
   /* =========================
      TOP-UP — ALGO_ENTREE_SORTIE (+3)
@@ -2345,8 +3704,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       { type: "event" },
       { type: "ask", text: "Choisis un nombre" },
       { type: "set_variable", variable: "nombre", value: 7 },
-      { type: "operator", left: "nombre", operator: "×", right: 2 },
-      { type: "say", text: "résultat" },
+      { type: "say", text: "nombre × 2" },
     ]),
   },
   {
@@ -2358,33 +3716,28 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_entree_sortie",
     difficulty: 3,
     theme: "neutral",
-    hint: "Suis la valeur étape par étape.",
+    hint: "La première réponse va dans la première variable, la seconde dans la seconde.",
     tags: ["algo_programmation", "entree", "sortie", "template", "canvas"],
-    generate: () => {
-      const entree = randomChoice([3, 4, 6, 8]);
-      const facteur = randomChoice([2, 3, 5]);
-      const sortie = entree * facteur;
-      return {
-        text: `L’utilisateur répond ${entree}. Le programme multiplie par ${facteur} puis affiche. Quelle valeur s’affiche ?`,
-        format: "short",
-        expected: [String(sortie)],
-        comparator: "number_equal",
-        explanation: expl(
-          "un programme transforme une entrée en sortie.",
-          "on applique le calcul à la valeur saisie.",
-          `${entree} × ${facteur} = ${sortie}.`,
-          `le programme affiche ${sortie}.`
-        ),
-        canvas: scratchCanvas("Entrée → calcul → sortie", [
-          { type: "event" },
-          { type: "ask", text: "Choisis un nombre" },
-          { type: "set_variable", variable: "nombre", value: entree },
-          { type: "operator", left: "nombre", operator: "×", right: facteur },
-          { type: "say", text: "résultat" },
-        ]),
-      };
-    },
+    generate: genESDeuxEntrees,
   },
+  gabarit(
+    "5e_algo_entree_sortie_tpl_4_role",
+    "algo_programmation",
+    "algo_entree_sortie",
+    1,
+    "L’entrée vient de l’utilisateur (« demander ») ; la sortie s’affiche à l’écran (« dire »).",
+    ["entree", "sortie", "vocabulaire", "qcm", "canvas"],
+    genESRole
+  ),
+  gabarit(
+    "5e_algo_entree_sortie_tpl_5_retrouver_entree",
+    "algo_programmation",
+    "algo_entree_sortie",
+    4,
+    "Remonte le programme avec les opérations contraires, puis vérifie.",
+    ["entree", "sortie", "raisonnement", "canvas"],
+    genESRetrouver
+  ),
 
   /* =========================
      TOP-UP — ALGO_FORMULE_BLOC (+3)
@@ -2455,29 +3808,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_formule_bloc",
     difficulty: 3,
     theme: "neutral",
-    hint: "Applique la formule du périmètre du carré.",
+    hint: "Remplace la variable par sa valeur dans la formule du bloc.",
     tags: ["algo_programmation", "formule", "template", "canvas"],
-    generate: () => {
-      const cote = randomChoice([3, 5, 6, 8, 10]);
-      const perimetre = cote * 4;
-      return {
-        text: `Le bloc calcule “côté × 4” pour le périmètre d’un carré. Si côté vaut ${cote}, quel est le périmètre ?`,
-        format: "short",
-        expected: [String(perimetre)],
-        comparator: "number_equal",
-        explanation: expl(
-          "une formule en blocs se calcule en remplaçant la variable.",
-          "on remplace côté par sa valeur dans le bloc opérateur.",
-          `${cote} × 4 = ${perimetre}.`,
-          `le périmètre est ${perimetre}.`
-        ),
-        canvas: scratchCanvas("Périmètre du carré", [
-          { type: "event" },
-          { type: "set_variable", variable: "côté", value: cote },
-          { type: "operator", left: "côté", operator: "×", right: 4 },
-        ]),
-      };
-    },
+    generate: genFormuleValeur,
   },
 
   /* =========================
@@ -2542,31 +3875,19 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_expression_valeur",
     difficulty: 3,
     theme: "neutral",
-    hint: "Remplace x puis calcule.",
+    hint: "Remplace chaque variable par sa valeur, puis respecte les priorités.",
     tags: ["algo_programmation", "expression", "valeur", "template", "canvas"],
-    generate: () => {
-      const x = randomChoice([2, 3, 5, 6]);
-      const k = randomChoice([2, 3, 4]);
-      const result = k * x;
-      return {
-        text: `Si x vaut ${x}, quelle est la valeur de ${k} × x ?`,
-        format: "short",
-        expected: [String(result)],
-        comparator: "number_equal",
-        explanation: expl(
-          "on calcule l’expression en remplaçant x.",
-          "on multiplie le coefficient par la valeur de x.",
-          `${k} × ${x} = ${result}.`,
-          `la valeur de l’expression est ${result}.`
-        ),
-        canvas: scratchCanvas("Valeur d’une expression", [
-          { type: "event" },
-          { type: "set_variable", variable: "x", value: x },
-          { type: "operator", left: k, operator: "×", right: "x" },
-        ]),
-      };
-    },
+    generate: genExprDeuxVariables,
   },
+  gabarit(
+    "5e_algo_expression_valeur_tpl_6_pieges_priorites",
+    "algo_programmation",
+    "algo_expression_valeur",
+    4,
+    "Parenthèses d’abord, puis multiplications, puis additions et soustractions.",
+    ["expression", "valeur", "priorites", "qcm", "canvas"],
+    genExprPieges
+  ),
 
   /* =========================
      TOP-UP — ALGO_PREVOIR_EXPRESSION (+4)
@@ -2657,29 +3978,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Remplace x puis calcule.",
     tags: ["algo_programmation", "prevoir", "expression", "template", "canvas"],
-    generate: () => {
-      const x = randomChoice([4, 5, 7, 9]);
-      const a = randomChoice([3, 6, 10]);
-      const result = x + a;
-      return {
-        text: `Le programme affiche x + ${a}. Si l’utilisateur saisit ${x}, quelle valeur sera affichée ?`,
-        format: "short",
-        expected: [String(result)],
-        comparator: "number_equal",
-        explanation: expl(
-          "prévoir, c’est calculer le résultat à l’avance.",
-          "on remplace x par la valeur saisie.",
-          `${x} + ${a} = ${result}.`,
-          `le programme affichera ${result}.`
-        ),
-        canvas: scratchCanvas("Prévoir une sortie", [
-          { type: "event" },
-          { type: "set_variable", variable: "x", value: x },
-          { type: "operator", left: "x", operator: "+", right: a },
-          { type: "say", text: "résultat" },
-        ]),
-      };
-    },
+    generate: () => genPrevoirSortie(true),
   },
 
   /* =========================
@@ -2744,29 +4043,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_parametre",
     difficulty: 3,
     theme: "neutral",
-    hint: "Distance totale = répétitions × paramètre.",
-    tags: ["algo_programmation", "parametre", "boucle", "template", "canvas"],
-    generate: () => {
-      const times = randomChoice([3, 4, 5]);
-      const pas = randomChoice([15, 20, 30]);
-      const total = times * pas;
-      return {
-        text: `Une boucle répète ${times} fois “avancer de ${pas}”. Si on garde le même nombre de répétitions, quelle distance totale avec ce paramètre ?`,
-        format: "short",
-        expected: [String(total)],
-        comparator: "number_equal",
-        explanation: expl(
-          "le paramètre “distance” agit à chaque répétition.",
-          "on multiplie le nombre de répétitions par le paramètre.",
-          `${times} × ${pas} = ${total}.`,
-          `la distance totale est ${total}.`
-        ),
-        canvas: scratchCanvas("Paramètre dans une boucle", [
-          { type: "event" },
-          { type: "repeat", times, children: [{ type: "move", value: pas }] },
-        ]),
-      };
-    },
+    hint: "Autant de répétitions que de côtés ; angle = 360° ÷ nombre de côtés.",
+    tags: ["algo_programmation", "parametre", "boucle", "polygone", "template", "canvas"],
+    generate: genParamPolygone,
   },
 
   /* =========================
@@ -2838,31 +4117,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_test_condition",
     difficulty: 3,
     theme: "neutral",
-    hint: "Compare les deux nombres.",
+    hint: "Teste la condition : vraie, on fait le « alors » ; fausse, le « sinon ».",
     tags: ["algo_programmation", "condition", "template", "canvas"],
-    generate: () => {
-      const valeur = randomChoice([4, 7, 9, 12, 15]);
-      const limite = randomChoice([5, 8, 10]);
-      const vrai = valeur < limite;
-      return {
-        text: `La variable n vaut ${valeur}. La condition “si n < ${limite}” est-elle vraie ?`,
-        format: "qcm",
-        choices: shuffle(["oui", "non"]),
-        expected: [vrai ? "oui" : "non"],
-        comparator: "mcq_exact",
-        explanation: expl(
-          "une condition teste une comparaison.",
-          "on compare n et la limite.",
-          `${valeur} < ${limite} est ${vrai ? "vrai" : "faux"}.`,
-          `la réponse est “${vrai ? "oui" : "non"}”.`
-        ),
-        canvas: scratchCanvas("Condition à tester", [
-          { type: "event" },
-          { type: "set_variable", variable: "n", value: valeur },
-          { type: "if", condition: `n < ${limite}`, children: [{ type: "say", text: "OK" }] },
-        ]),
-      };
-    },
+    generate: genTestSinon,
   },
 
   /* =========================
@@ -2932,32 +4189,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_boucle",
     difficulty: 3,
     theme: "neutral",
-    hint: "Multiplie les répétitions par l’ajout.",
+    hint: "Les blocs dans la boucle se font à chaque tour ; ceux hors de la boucle, une seule fois.",
     tags: ["algo_programmation", "boucle", "variable", "template", "canvas"],
-    generate: () => {
-      const debut = randomChoice([0, 5, 10]);
-      const ajout = randomChoice([2, 3, 5]);
-      const times = randomChoice([3, 4, 5]);
-      const final = debut + ajout * times;
-      return {
-        text: `La variable total vaut ${debut}. On ajoute ${ajout} à total pendant ${times} répétitions. Quelle est la valeur finale ?`,
-        format: "short",
-        expected: [String(final)],
-        comparator: "number_equal",
-        explanation: expl(
-          "une boucle répète l’ajout à chaque tour.",
-          "on calcule l’augmentation totale puis on l’ajoute au départ.",
-          `${debut} + ${ajout} × ${times} = ${debut} + ${ajout * times} = ${final}.`,
-          `total vaut ${final}.`
-        ),
-        canvas: scratchCanvas("Boucle et variable", [
-          { type: "event" },
-          { type: "set_variable", variable: "total", value: debut },
-          { type: "repeat", times, children: [{ type: "change_variable", variable: "total", value: ajout }] },
-          { type: "say", text: "total" },
-        ]),
-      };
-    },
+    generate: genBoucleParler,
   },
 
   /* =========================
@@ -3078,32 +4312,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "algo_defi",
     difficulty: 5,
     theme: "neutral",
-    hint: "Suis la variable étape par étape.",
+    hint: "Fais les tours un par un : chaque tour repart de la valeur laissée par le précédent.",
     tags: ["algo_programmation", "defi", "template", "canvas"],
-    generate: () => {
-      const debut = randomChoice([1, 2, 3]);
-      const ajout = randomChoice([4, 6, 10]);
-      const times = randomChoice([2, 3, 4]);
-      const final = debut + ajout * times;
-      return {
-        text: `score vaut ${debut}. On répète ${times} fois “ajouter ${ajout} à score”. Quelle est la valeur finale de score ?`,
-        format: "short",
-        expected: [String(final)],
-        comparator: "number_equal",
-        explanation: expl(
-          "on suit la variable dans la boucle.",
-          "on ajoute l’augmentation totale à la valeur de départ.",
-          `${debut} + ${ajout} × ${times} = ${debut} + ${ajout * times} = ${final}.`,
-          `score vaut ${final}.`
-        ),
-        canvas: scratchCanvas("Compteur", [
-          { type: "event" },
-          { type: "set_variable", variable: "score", value: debut },
-          { type: "repeat", times, children: [{ type: "change_variable", variable: "score", value: ajout }] },
-          { type: "say", text: "score" },
-        ]),
-      };
-    },
+    generate: genDefiDoubleOuTest,
   },
 
   /* ===== ALGO_DEFI =====
@@ -3185,37 +4396,6 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     // 08/10/2026 : précise et simple (Frédéric). QCM dont les leurres sont les
     // vraies erreurs : un seul tour (début + ajout), oubli du départ (ajout × tours),
     // départ compté à chaque tour ((début + ajout) × tours).
-    generate: () => {
-      let debut = randomChoice([2, 4, 5, 10]);
-      let ajout = randomChoice([2, 3, 5, 6]);
-      let times = randomChoice([3, 4, 5, 6]);
-      // Seule collision possible entre leurres : début + ajout = ajout × tours.
-      while (debut + ajout === ajout * times) {
-        debut = randomChoice([2, 4, 5, 10]);
-        ajout = randomChoice([2, 3, 5, 6]);
-        times = randomChoice([3, 4, 5, 6]);
-      }
-      const final = debut + ajout * times;
-      const pieges = [debut + ajout, ajout * times, (debut + ajout) * times].map(String);
-      return {
-        text: `La variable total vaut ${debut}. Le programme répète ${times} fois « ajouter ${ajout} à total ». Quelle valeur affiche-t-il ?`,
-        format: "qcm",
-        choices: shuffle([String(final), ...pieges]),
-        expected: [String(final)],
-        comparator: "mcq_exact",
-        explanation: expl(
-          "une boucle répète son contenu un nombre connu de fois.",
-          "on calcule d’abord l’augmentation totale, puis on l’ajoute à la valeur de départ.",
-          `La boucle tourne ${times} fois et ajoute ${ajout} à chaque tour : ${ajout} × ${times} = ${ajout * times}. On part de ${debut}, donc ${debut} + ${ajout * times} = ${final}.`,
-          `total vaut ${final} à la fin.`,
-        ),
-        canvas: scratchCanvas("Total", [
-          { type: "event" },
-          { type: "set_variable", variable: "total", value: debut },
-          { type: "repeat", times, children: [{ type: "change_variable", variable: "total", value: ajout }] },
-          { type: "say", text: "total" },
-        ]),
-      };
-    },
+    generate: genDefiPieges,
   },
 ];

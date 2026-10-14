@@ -4,6 +4,7 @@ import type {
   TutorBankItemV4,
   TransformationCanvasData,
 } from "@/lib/tutor-v4/types";
+import { PRENOMS, de, pick, type Prenom } from "@/lib/tutor-v4/questionBank/6e/maths/entiers.bank";
 
 function randomChoice<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -27,6 +28,252 @@ function expl(calcul: string) {
     "\n\nConclusion : la figure ou le point obtenu est l’image par la symétrie centrale."
   );
 }
+
+/* ⭐ 13/10/2026 — LA VARIÉTÉ ET LA FIGURE CALCULÉE.
+   Mesuré le 13/10 : 8 à 10 squelettes par micro, jusqu'à 18 répétitions sur 20
+   (les gabarits à figure redessinaient TOUJOURS la même figure, avec la même
+   phrase). Chaque gabarit compose maintenant une SITUATION × une TOURNURE × un
+   PRÉNOM × des NOMS de points tirés (centre O, I, K…) ; les figures sont tirées
+   sur le quadrillage et leur image est CALCULÉE (point image = 2 × centre −
+   point), ou faussée exprès (un sommet décalé, un pliage au lieu d'un
+   demi-tour). Le correcteur (correcteurs/symetrie_centrale.ts) relit le texte
+   ET la figure. ⛔ Pas de coordonnées (retirées par Frédéric le 08/10 : hors
+   programme de 5e) : on compte des carreaux. */
+
+const rnd = (a: number, b: number) => Math.floor(Math.random() * (b - a + 1)) + a;
+const fr = (x: number) => String(Math.round(x * 100) / 100).replace(".", ",");
+const il = (p: Prenom) => (p.f ? "elle" : "il");
+
+/** Le centre : souvent O, parfois une autre lettre. */
+function centre(): string {
+  return pick(["O", "O", "O", "I", "K", "M", "S", "J"]);
+}
+/** Une lettre de point différente des lettres interdites. */
+function lettre(sauf: string[] = []): string {
+  return pick("ABCDEFGHLNPRTUVWXYZ".split("").filter((l) => !sauf.includes(l)));
+}
+/** n lettres qui se suivent (EFG, MNPQ…), sans les lettres interdites. */
+function lettresSuivies(n: number, sauf: string[] = []): string[] {
+  const A = "ABCDEFGHJKLMNPRSTUVWXYZ".split("");
+  for (;;) {
+    const i = rnd(0, A.length - n);
+    const l = A.slice(i, i + n);
+    if (!l.some((x) => sauf.includes(x))) return l;
+  }
+}
+
+type Pt = { x: number; y: number };
+const GRILLE = 10;
+const egalPt = (a: Pt, b: Pt) => a.x === b.x && a.y === b.y;
+const memeEnsemble = (u: Pt[], v: Pt[]) =>
+  u.length === v.length && u.every((p) => v.some((q) => egalPt(p, q))) && v.every((p) => u.some((q) => egalPt(p, q)));
+const dansGrille = (p: Pt) => p.x >= 0 && p.x <= GRILLE && p.y >= 0 && p.y <= GRILLE;
+const symC = (p: Pt, c: Pt): Pt => ({ x: 2 * c.x - p.x, y: 2 * c.y - p.y });
+
+/** Une forme dans une boîte 3 × 3 : triangle (aire ≥ 2 carreaux) ou quadrilatère convexe. */
+function forme(n: 3 | 4): Pt[] {
+  if (n === 3) {
+    for (;;) {
+      const t = [0, 1, 2].map(() => ({ x: rnd(0, 3), y: rnd(0, 3) }));
+      const aire2 = Math.abs((t[1].x - t[0].x) * (t[2].y - t[0].y) - (t[2].x - t[0].x) * (t[1].y - t[0].y));
+      if (aire2 >= 4) return t;
+    }
+  }
+  const a = rnd(2, 3), h = rnd(2, 3), u = rnd(0, 1), v = rnd(u + 1, 3);
+  return [{ x: 0, y: 0 }, { x: a, y: 0 }, { x: v, y: h }, { x: u, y: h }];
+}
+
+/** Une figure placée d'un côté du centre (dans un « quart » du quadrillage). */
+function figureAutour(n: 3 | 4): { c: Pt; src: Pt[]; sx: number; sy: number } {
+  const c = { x: rnd(4, 6), y: rnd(4, 6) };
+  const sx = pick([-1, 1]), sy = pick([-1, 1]);
+  const src = forme(n).map((p) => ({ x: c.x + sx * (1 + p.x), y: c.y + sy * (1 + p.y) }));
+  return { c, src, sx, sy };
+}
+
+/** L'image fausse : un ou deux sommets décalés d'un carreau (l'ensemble change). */
+function decaler(img: Pt[], combien: number): Pt[] {
+  for (;;) {
+    const res = img.map((p) => ({ ...p }));
+    const idx = [...img.keys()].sort(() => Math.random() - 0.5).slice(0, combien);
+    for (const i of idx) {
+      const [dx, dy] = pick([[1, 0], [-1, 0], [0, 1], [0, -1]]);
+      res[i] = { x: res[i].x + dx, y: res[i].y + dy };
+    }
+    const distincts = new Set(res.map((p) => `${p.x};${p.y}`)).size === res.length;
+    const nbFaux = img.filter((p) => !res.some((q) => egalPt(p, q))).length;
+    if (res.every(dansGrille) && distincts && nbFaux === combien) return res;
+  }
+}
+
+/** Une figure F et une figure rouge : son image exacte, ou une image faussée. */
+function figureSym(n: 3 | 4, juste: boolean, subtil = false) {
+  for (;;) {
+    const { c, src } = figureAutour(n);
+    const bon = src.map((p) => symC(p, c));
+    if (juste) return { c, src, img: bon, faute: "" };
+    const faute = subtil ? "sommet" : pick(["sommet", "sommet", "pliage_v", "pliage_h"]);
+    const img =
+      faute === "sommet" ? decaler(bon, 1)
+      : faute === "pliage_v" ? src.map((p) => ({ x: 2 * c.x - p.x, y: p.y }))
+      : src.map((p) => ({ x: p.x, y: 2 * c.y - p.y }));
+    if (!memeEnsemble(img, bon)) return { c, src, img, faute };
+  }
+}
+
+function canvasSym(src: Pt[], img: Pt[], c: Pt, F: string, C: string): TransformationCanvasData {
+  return transformationCanvas({
+    transformation: "symetrie_centrale",
+    grid: { rows: GRILLE, cols: GRILLE },
+    source: { label: F, points: src },
+    image: { label: `${F}'`, points: img },
+    center: { point: c, label: C },
+  });
+}
+
+/** Le nom d'une figure (F, G, P, T, R) — jamais le nom du centre. */
+function nomFigure(C: string) {
+  return pick(["F", "G", "P", "T", "R"].filter((l) => l !== C));
+}
+
+const CTX_FIG: ((p: Prenom, F: string, C: string) => string)[] = [
+  (p, F, C) => `${p.nom} dessine la figure bleue ${F} sur un quadrillage et marque le point ${C}.`,
+  (p, F, C) => `Pour le logo de son club, ${p.nom} trace la figure bleue ${F} et un point ${C}.`,
+  (p, F, C) => `En arts plastiques, ${p.nom} prépare un pochoir : la figure bleue ${F} et une punaise en ${C}.`,
+  (p, F, C) => `${p.nom} fait tourner un carton bleu ${F} autour d’une punaise plantée en ${C}.`,
+  (p, F, C) => `Sur un carrelage, ${p.nom} repère un motif bleu ${F} et un point ${C}.`,
+  (p, F, C) => `Pour un jeu de société, ${p.nom} dessine une pièce bleue ${F} et le point ${C}.`,
+  (p, F, C) => `${p.nom} décore une carte d’anniversaire avec la figure bleue ${F} et le point ${C}.`,
+  (p, F, C) => `Sur sa tablette, ${p.nom} trace la figure bleue ${F} et place le point ${C}.`,
+  (p, F, C) => `${p.nom} prépare une frise pour la classe : un motif bleu ${F} et un point ${C}.`,
+  (p, F, C) => `Dans un atelier de vitrail, ${p.nom} découpe une pièce bleue ${F} et marque le point ${C}.`,
+  (p, F, C) => `${p.nom} dessine un cerf-volant bleu ${F} et plante une épingle en ${C}.`,
+  (p, F, C) => `Sur le tableau, ${p.nom} trace la figure bleue ${F} et le point ${C}.`,
+];
+const QUESTION_OUI_NON: ((p: Prenom, F: string, C: string) => string)[] = [
+  (p, F, C) => `La figure rouge ${F}' est-elle l’image de ${F} par la symétrie de centre ${C} ?`,
+  (p, F, C) => `${p.nom} affirme que la figure rouge est le symétrique de ${F} par rapport à ${C}. A-t-${il(p)} raison ?`,
+  (p, F, C) => `La figure rouge est-elle obtenue par un demi-tour de ${F} autour de ${C} ?`,
+  (p, F, C) => `La figure rouge est-elle le symétrique de ${F} par rapport au point ${C} ?`,
+];
+
+/** Les situations où un point A a un symétrique A' par rapport à un centre (longueurs en cm). */
+/** La question « oui / non » sur une figure tirée : la figure rouge est-elle l'image ? */
+function genOuiNon(juste: boolean, n: 3 | 4, subtil = false) {
+  const C = centre();
+  const F = nomFigure(C);
+  const p = pick(PRENOMS);
+  const { c, src, img, faute } = figureSym(n, juste, subtil);
+  const calcul = juste
+    ? `chaque sommet de ${F} et le sommet correspondant de la figure rouge sont alignés avec ${C}, de part et d’autre, à la même distance : ${C} est au milieu.`
+    : faute === "sommet"
+      ? `un sommet de la figure rouge est décalé d’un carreau : ${C} n’est pas le milieu entre ce sommet et le sommet de ${F} qui lui correspond.`
+      : `la figure rouge est retournée comme dans un miroir (un pliage), elle n’a pas fait un demi-tour autour de ${C}.`;
+  return {
+    text: `${pick(CTX_FIG)(p, F, C)} ${pick(QUESTION_OUI_NON)(p, F, C)}`,
+    format: "qcm" as const,
+    choices: ["oui", "non"],
+    expected: [juste ? "oui" : "non"],
+    comparator: "mcq_exact" as const,
+    explanation: expl(`On vérifie chaque sommet : ${calcul}`),
+    canvas: canvasSym(src, img, c, F, C),
+  };
+}
+
+/** Quatre façons d'envoyer une figure de l'autre côté : une seule est la symétrie de centre C. */
+const TRANSFOS = {
+  centrale: (C: string) => `la symétrie de centre ${C}`,
+  axe_v: (C: string) => `le pliage le long de la droite verticale qui passe par ${C}`,
+  axe_h: (C: string) => `le pliage le long de la droite horizontale qui passe par ${C}`,
+  glissement: () => "un glissement, sans tourner",
+} as const;
+type Transfo = keyof typeof TRANSFOS;
+function genTransfo() {
+  for (;;) {
+    const { c, src, sx, sy } = figureAutour(pick([3, 4] as const));
+    const dx = rnd(4, 6), dy = rnd(4, 6);
+    const cands: Record<Transfo, Pt[]> = {
+      centrale: src.map((p) => symC(p, c)),
+      axe_v: src.map((p) => ({ x: 2 * c.x - p.x, y: p.y })),
+      axe_h: src.map((p) => ({ x: p.x, y: 2 * c.y - p.y })),
+      glissement: src.map((p) => ({ x: p.x - sx * dx, y: p.y - sy * dy })),
+    };
+    const cles = Object.keys(cands) as Transfo[];
+    const distincts = cles.every((a, i) => cles.every((b, j) => j <= i || !memeEnsemble(cands[a], cands[b])));
+    // Une forme symétrique (trapèze isocèle, parallélogramme…) : son demi-tour ou
+    // son pliage serait AUSSI un glissement. On l'écarte.
+    const translatee = (img: Pt[]) =>
+      img.some((q) => memeEnsemble(src.map((p) => ({ x: p.x + q.x - src[0].x, y: p.y + q.y - src[0].y })), img));
+    if (!distincts || !cands.glissement.every(dansGrille) || [cands.centrale, cands.axe_v, cands.axe_h].some(translatee)) continue;
+    return { c, src, cands };
+  }
+}
+
+/** Une figure nommée (« triangle EFG ») et son image (« E'F'G' ») par la symétrie de centre C. */
+function figureNommee(typ: "triangle" | "quadrilatère" | "rectangle", C: string) {
+  const L = lettresSuivies(typ === "triangle" ? 3 : 4, [C]);
+  return { L, quoi: `${typ} ${L.join("")}`, image: `${typ} ${L.map((l) => `${l}'`).join("")}` };
+}
+const INTRO_IMAGE: ((p: Prenom, quoi: string, image: string, C: string) => string)[] = [
+  (p, quoi, image, C) => `${p.nom} construit l’image du ${quoi} par la symétrie de centre ${C} : c’est le ${image}.`,
+  (p, quoi, image, C) => `Pour un logo, ${p.nom} trace le symétrique du ${quoi} par rapport à ${C} : le ${image}.`,
+  (p, quoi, image, C) => `En arts plastiques, ${p.nom} découpe le ${quoi}, puis lui fait faire un demi-tour autour de ${C} : il devient le ${image}.`,
+  (p, quoi, image, C) => `Sur un carrelage, ${p.nom} repère le ${quoi} et son symétrique par rapport au point ${C}, le ${image}.`,
+  (p, quoi, image, C) => `Pour un pochoir, ${p.nom} reproduit le ${quoi} par la symétrie de centre ${C}. On obtient le ${image}.`,
+  (p, quoi, image, C) => `Sur sa tablette, ${p.nom} fait tourner le ${quoi} d’un demi-tour autour du point ${C} : on obtient le ${image}.`,
+  (p, quoi, image, C) => `Pour une frise, ${p.nom} dessine le ${quoi} et son image par la symétrie de centre ${C}, le ${image}.`,
+];
+
+/** De vrais objets où deux points sont symétriques par rapport au centre (distances plausibles). */
+const DEFI_OBJETS: { u: "cm" | "m"; min: number; max: number; dire: (p: Prenom, A: string, C: string) => string }[] = [
+  { u: "m", min: 3, max: 10, dire: (p, A, C) => `Sur un manège de centre ${C}, la nacelle ${de(p.nom)} est en ${A} ; la nacelle ${A}' est son symétrique par rapport à ${C}.` },
+  { u: "m", min: 10, max: 30, dire: (p, A, C) => `Sur une grande roue de centre ${C}, ${p.nom} monte dans la cabine ${A}. La cabine ${A}' est le symétrique de ${A} par rapport à ${C}.` },
+  { u: "cm", min: 25, max: 35, dire: (p, A, C) => `Sur la roue du vélo ${de(p.nom)}, de centre ${C}, la valve ${A} et le point ${A}' sont symétriques par rapport à ${C}.` },
+  { u: "cm", min: 10, max: 20, dire: (p, A, C) => `Sur l’horloge de la classe, de centre ${C}, le chiffre 12 est en ${A} et le chiffre 6 en ${A}', le symétrique de ${A} par rapport à ${C}.` },
+  { u: "cm", min: 12, max: 20, dire: (p, A, C) => `Sur une pizza de centre ${C}, ${p.nom} pose une olive en ${A} et une autre en ${A}', le symétrique de ${A} par rapport à ${C}.` },
+  { u: "cm", min: 5, max: 15, dire: (p, A, C) => `Sur un carreau de faïence créole de La Réunion, de centre ${C}, ${p.nom} repère une fleur en ${A} et son symétrique ${A}' par rapport à ${C}.` },
+  { u: "m", min: 8, max: 25, dire: (p, A, C) => `Autour d’un rond-point de centre ${C}, un lampadaire est en ${A} et un autre en ${A}', le symétrique de ${A} par rapport à ${C}. ${p.nom} les observe.` },
+  { u: "cm", min: 15, max: 30, dire: (p, A, C) => `Sur le ventilateur ${de(p.nom)}, de centre ${C}, le bout de pale ${A}' est le symétrique du bout de pale ${A} par rapport à ${C}.` },
+  { u: "m", min: 1, max: 3, dire: (p, A, C) => `Sur un trampoline rond de centre ${C}, ${p.nom} repère deux ressorts, ${A} et ${A}', symétriques par rapport à ${C}.` },
+  { u: "cm", min: 30, max: 60, dire: (p, A, C) => `Sur une table ronde de centre ${C}, ${p.nom} pose un verre en ${A} et un autre en ${A}', le symétrique de ${A} par rapport à ${C}.` },
+  { u: "m", min: 15, max: 40, dire: (p, A, C) => `Sur le plan d’un stade, le centre du terrain est ${C}. ${p.nom} place un plot en ${A} et un autre en ${A}', le symétrique de ${A} par rapport à ${C}.` },
+];
+
+const MOUVEMENTS: { quoi: "centrale" | "axiale" | "glissement"; dire: (p: Prenom, C: string) => string }[] = [
+  { quoi: "centrale", dire: (p, C) => `${p.nom} fait faire un demi-tour à une carte à jouer autour d’une punaise plantée en ${C}.` },
+  { quoi: "centrale", dire: (p, C) => `${p.nom} tourne sa feuille d’un demi-tour, en gardant le doigt sur le point ${C}.` },
+  { quoi: "centrale", dire: (p, C) => `Une roue de vélo fait un demi-tour autour de son centre ${C}. ${p.nom} regarde où arrive la valve.` },
+  { quoi: "centrale", dire: (p, C) => `L’aiguille d’une horloge fait un demi-tour autour du centre ${C}. ${p.nom} observe le bout de l’aiguille.` },
+  { quoi: "centrale", dire: (p, C) => `${p.nom} fait pivoter un carreau de faïence d’un demi-tour autour de son centre ${C}.` },
+  { quoi: "centrale", dire: (p, C) => `Sur un manège, la nacelle ${de(p.nom)} fait un demi-tour autour du centre ${C}.` },
+  { quoi: "centrale", dire: (p, C) => `${p.nom} fait tourner une toupie d’un demi-tour autour de son centre ${C}.` },
+  { quoi: "centrale", dire: (p, C) => `${p.nom} fait faire un demi-tour à une hélice autour de son centre ${C}.` },
+  { quoi: "centrale", dire: (p, C) => `Sur sa tablette, ${p.nom} fait tourner un dessin d’un demi-tour autour du point ${C}.` },
+  { quoi: "axiale", dire: (p) => `${p.nom} plie sa feuille le long d’une droite (d) et décalque le dessin de l’autre côté.` },
+  { quoi: "axiale", dire: (p) => `${p.nom} regarde son dessin dans un miroir posé le long de la droite (d).` },
+  { quoi: "axiale", dire: (p) => `${p.nom} fait une tache de peinture, puis plie la feuille en deux le long d’un pli (d).` },
+  { quoi: "axiale", dire: (p) => `${p.nom} découpe une guirlande dans une feuille pliée le long d’une droite (d).` },
+  { quoi: "glissement", dire: (p) => `${p.nom} fait glisser une pièce de puzzle tout droit sur la table, sans la tourner.` },
+  { quoi: "glissement", dire: (p) => `${p.nom} pousse une boîte en ligne droite sur le sol, sans la tourner.` },
+  { quoi: "glissement", dire: (p) => `Un tapis roulant déplace la valise ${de(p.nom)} tout droit, sans la tourner.` },
+];
+const NOM_MOUVEMENT = { centrale: "une symétrie centrale", axiale: "une symétrie axiale", glissement: "un glissement" } as const;
+
+const CTX_POINT: ((p: Prenom, A: string, C: string) => string)[] = [
+  (p, A, C) => `Sur une carte au trésor, ${p.nom} marque un point ${A} et son symétrique ${A}' par rapport au point ${C}.`,
+  (p, A, C) => `Sur son cahier, ${p.nom} construit le symétrique ${A}' du point ${A} par rapport au point ${C}.`,
+  (p, A, C) => `${p.nom} dessine une roue de vélo de centre ${C}. Le point ${A}' est le symétrique de la valve ${A} par rapport à ${C}.`,
+  (p, A, C) => `Sur une pizza de centre ${C}, ${p.nom} pose une olive en ${A} et une autre en ${A}', le symétrique de ${A} par rapport à ${C}.`,
+  (p, A, C) => `${p.nom} dessine une horloge de centre ${C}. Le point ${A}' est le symétrique du point ${A} par rapport à ${C}.`,
+  (p, A, C) => `Sur le plan d’un manège de centre ${C}, ${p.nom} place la nacelle ${A} et la nacelle ${A}', symétrique de ${A} par rapport à ${C}.`,
+  (p, A, C) => `${p.nom} dessine une hélice. Le bout de pale ${A}' est le symétrique du bout ${A} par rapport au centre ${C}.`,
+  (p, A, C) => `Sur un plateau de jeu, ${p.nom} place un pion en ${A} et un autre en ${A}', le symétrique de ${A} par rapport à ${C}.`,
+  (p, A, C) => `Pour un logo, ${p.nom} trace le point ${A}' symétrique du point ${A} par rapport au point ${C}.`,
+  (p, A, C) => `Sur un carreau de faïence, ${p.nom} repère une fleur en ${A} et son symétrique ${A}' par rapport au centre ${C}.`,
+  (p, A, C) => `${p.nom} dessine une toupie vue de dessus, de centre ${C}. ${A}' est le symétrique du point ${A} par rapport à ${C}.`,
+  (p, A, C) => `Sur un plan du jardin, ${p.nom} plante un piquet en ${A} et un autre en ${A}', le symétrique de ${A} par rapport à ${C}.`,
+  (p, A, C) => `Sur une broderie, ${p.nom} place une perle en ${A} et une autre en ${A}', le symétrique de ${A} par rapport à ${C}.`,
+];
 
 export const symetrieCentraleBank: TutorBankItemV4[] = [
   /* =========================
@@ -121,39 +368,8 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Regarde si O est le milieu entre chaque point et son image.",
     tags: ["sym_centrale", "reconnaitre", "template", "canvas"],
-    generate: () => ({
-      text: "La figure rouge est-elle l’image de la figure bleue par symétrie centrale de centre O ?",
-      format: "qcm",
-      choices: ["oui", "non"],
-      expected: ["oui"],
-      comparator: "mcq_exact",
-      explanation:
-        "Définition : une symétrie centrale est un demi-tour autour d’un centre.\n\n" +
-        "Méthode : on vérifie que chaque point, son image et O sont alignés.\n\n" +
-        "Calcul : O est le milieu entre chaque point et son image.\n\n" +
-        "Conclusion : la figure rouge est bien l’image par symétrie centrale.",
-      canvas: transformationCanvas({
-        transformation: "symetrie_centrale",
-        grid: { rows: 8, cols: 8 },
-        source: {
-          label: "F",
-          points: [
-            { x: 1, y: 2 },
-            { x: 3, y: 2 },
-            { x: 2, y: 3 },
-          ],
-        },
-        image: {
-          label: "F'",
-          points: [
-            { x: 7, y: 6 },
-            { x: 5, y: 6 },
-            { x: 6, y: 5 },
-          ],
-        },
-        center: { point: { x: 4, y: 4 }, label: "O" },
-      }),
-    }),
+    // 13/10 : figure tirée ; le plus souvent juste (60 %), sinon faussée.
+    generate: () => genOuiNon(Math.random() < 0.6, pick([3, 4] as const)),
   },
 
   {
@@ -167,39 +383,48 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Vérifie tous les points, pas seulement un seul.",
     tags: ["sym_centrale", "reconnaitre", "piege", "template", "canvas"],
-    generate: () => ({
-      text: "La figure rouge est-elle l’image de la figure bleue par symétrie centrale de centre O ?",
-      format: "qcm",
-      choices: ["oui", "non"],
-      expected: ["non"],
-      comparator: "mcq_exact",
-      explanation:
-        "Définition : dans une symétrie centrale, O doit être le milieu entre chaque point et son image.\n\n" +
-        "Méthode : on vérifie l’alignement et les distances pour plusieurs points.\n\n" +
-        "Calcul : ici, au moins un point image n’est pas placé correctement par rapport à O.\n\n" +
-        "Conclusion : la figure rouge n’est pas l’image par symétrie centrale.",
-      canvas: transformationCanvas({
-        transformation: "symetrie_centrale",
-        grid: { rows: 8, cols: 8 },
-        source: {
-          label: "F",
-          points: [
-            { x: 2, y: 2 },
-            { x: 3, y: 2 },
-            { x: 2, y: 4 },
-          ],
-        },
-        image: {
-          label: "F'",
-          points: [
-            { x: 6, y: 6 },
-            { x: 5, y: 6 },
-            { x: 5, y: 4 },
-          ],
-        },
-        center: { point: { x: 4, y: 4 }, label: "O" },
-      }),
-    }),
+    // 13/10 : le piège (un sommet décalé, un pliage) le plus souvent (70 %).
+    generate: () => genOuiNon(Math.random() < 0.3, pick([3, 4] as const)),
+  },
+
+  // 13/10/2026 : l'étoile 1 n'avait que deux questions figées (18 répétitions sur 20).
+  {
+    kind: "template",
+    id: "5e_sym_centrale_reconnaitre_tpl_3_mouvement",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_reconnaitre",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Un demi-tour autour d’un point : symétrie centrale. Un pliage : symétrie axiale.",
+    tags: ["sym_centrale", "reconnaitre", "template", "vocabulaire"],
+    generate: () => {
+      const p = pick(PRENOMS);
+      const C = centre();
+      const m = pick(MOUVEMENTS);
+      const juste = NOM_MOUVEMENT[m.quoi];
+      const question = pick([
+        "Quelle transformation est-ce ?",
+        "Ce mouvement correspond à quelle transformation ?",
+        "Quel est le nom de cette transformation ?",
+        "Comment s’appelle ce mouvement en géométrie ?",
+      ]);
+      const pourquoi =
+        m.quoi === "centrale"
+          ? `un demi-tour autour d’un point, c’est une symétrie centrale (ici de centre ${C}).`
+          : m.quoi === "axiale"
+            ? "un pliage (ou un miroir) le long d’une droite, c’est une symétrie axiale."
+            : "on déplace tout droit sans tourner : c’est un glissement, ni un demi-tour ni un pliage.";
+      return {
+        text: `${m.dire(p, C)} ${question}`,
+        format: "qcm",
+        choices: shuffle(["une symétrie centrale", "une symétrie axiale", "un glissement", "un agrandissement"]),
+        expected: [juste],
+        comparator: "mcq_exact",
+        explanation: expl(`On regarde le mouvement : ${pourquoi}`),
+      };
+    },
   },
 
   // 08/10/2026 : précise et simple (Frédéric)
@@ -265,19 +490,25 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Le centre est au milieu.",
     tags: ["sym_centrale", "point", "distance", "template"],
+    // 13/10 : situation × tournure × prénom ; on donne OA ou OA', on demande l'autre.
     generate: () => {
-      const d = randomChoice([2, 3, 4, 5, 6]);
-
+      const p = pick(PRENOMS);
+      const C = centre();
+      const A = lettre([C]);
+      const d = rnd(4, 24) / 2;
+      const [donne, cherche] = pick([[`${C}${A}`, `${C}${A}'`], [`${C}${A}'`, `${C}${A}`]]);
+      const question = pick([
+        `${donne} = ${fr(d)} cm. Combien mesure ${cherche} ?`,
+        `On mesure ${donne} = ${fr(d)} cm. Quelle est la longueur ${cherche} ?`,
+        `${donne} = ${fr(d)} cm. Quelle est la distance ${cherche} ?`,
+        `${p.nom} mesure ${donne} = ${fr(d)} cm. Que vaut ${cherche} ?`,
+      ]);
       return {
-        text: `Dans une symétrie centrale de centre O, on sait que OA = ${d} cm. Quelle est la longueur OA' ?`,
+        text: `${pick(CTX_POINT)(p, A, C)} ${question}`,
         format: "short",
-        expected: [String(d)],
+        expected: [`${fr(d)} cm`],
         comparator: "number_equal",
-        explanation:
-          "Définition : dans une symétrie centrale, O est le milieu de [AA'].\n\n" +
-          "Méthode : on utilise l’égalité OA = OA'.\n\n" +
-          `Calcul : OA = ${d} cm, donc OA' = ${d} cm.\n\n` +
-          `Conclusion : OA' mesure ${d} cm.`,
+        explanation: expl(`${C} est le milieu de [${A}${A}'], donc ${C}${A}' = ${C}${A}. ${donne} = ${fr(d)} cm, donc ${cherche} = ${fr(d)} cm.`),
       };
     },
   },
@@ -291,35 +522,37 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     microId: "sym_centrale_point",
     difficulty: 3,
     theme: "neutral",
-    hint: "O est le milieu entre A et A'.",
-    tags: ["sym_centrale", "point", "coordonnees", "template"],
+    hint: "Pour aller du centre à A', on fait le chemin de A à l’envers.",
+    tags: ["sym_centrale", "point", "quadrillage", "template"],
+    // 13/10 : les coordonnées sont hors programme (Frédéric, 08/10) : on compte
+    // les carreaux du centre au point. Pièges : le même chemin, un seul sens
+    // inversé (un pliage), les deux nombres échangés (a ≠ b pour qu'il diffère).
     generate: () => {
-      const ox = 4;
-      const oy = 4;
-      const x = randomChoice([1, 2, 3]);
-      // Deux pièges sont « on échange x et y » et « on soustrait au centre ».
-      // Quand x + y = 4, ils s'écrivent pareil : (y ; x) et (4-x ; 4-y) sont le
-      // même couple.
-      const y = randomChoice([1, 2, 3].filter((v) => v + x !== 4));
-      const xp = 2 * ox - x;
-      const yp = 2 * oy - y;
-
+      const p = pick(PRENOMS);
+      const C = centre();
+      const A = lettre([C]);
+      const a = rnd(1, 6);
+      const b = pick([1, 2, 3, 4, 5, 6].filter((v) => v !== a));
+      const h = pick(["droite", "gauche"]);
+      const v = pick(["haut", "bas"]);
+      const H = h === "droite" ? "gauche" : "droite";
+      const V = v === "haut" ? "bas" : "haut";
+      const cx = (n: number) => `${n} carreau${n > 1 ? "x" : ""}`;
+      const chemin = (x: number, hh: string, y: number, vv: string) => `${cx(x)} vers la ${hh} et ${cx(y)} vers le ${vv}`;
+      const juste = chemin(a, H, b, V);
+      const question = pick([
+        `Comment aller de ${C} à ${A}' ?`,
+        `Quel chemin mène de ${C} à ${A}' ?`,
+        `Pour aller de ${C} à ${A}', que faut-il compter ?`,
+        `Où se trouve ${A}' en partant de ${C} ?`,
+      ]);
       return {
-        text: `Sur un quadrillage, O(${ox};${oy}) est le centre de symétrie et A(${x};${y}). Quelles sont les coordonnées de A' ?`,
+        text: `${pick(CTX_POINT)(p, A, C)} Sur le quadrillage, pour aller de ${C} à ${A}, on compte ${chemin(a, h, b, v)}. ${question}`,
         format: "qcm",
-        choices: shuffle([
-          `(${xp};${yp})`,
-          `(${x + ox};${y + oy})`,
-          `(${y};${x})`,
-          `(${ox - x};${oy - y})`,
-        ]),
-        expected: [`(${xp};${yp})`],
+        choices: shuffle([juste, ...shuffle([chemin(a, h, b, v), chemin(a, H, b, v), chemin(a, h, b, V), chemin(b, H, a, V)]).slice(0, 3)]),
+        expected: [juste],
         comparator: "mcq_exact",
-        explanation:
-          "Définition : dans une symétrie centrale, O est le milieu du segment [AA'].\n\n" +
-          "Méthode : on cherche le point situé de l’autre côté de O à la même distance.\n\n" +
-          `Calcul : avec O(${ox};${oy}) et A(${x};${y}), on obtient A'(${xp};${yp}).\n\n` +
-          `Conclusion : les coordonnées de A' sont (${xp};${yp}).`,
+        explanation: expl(`${C} est le milieu de [${A}${A}'] : de ${C} à ${A}', on fait le même nombre de carreaux, mais dans les sens contraires. ${A} : ${chemin(a, h, b, v)} ; donc ${A}' : ${juste}.`),
       };
     },
   },
@@ -409,39 +642,8 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Chaque sommet image doit être en face du sommet de départ par rapport à O.",
     tags: ["sym_centrale", "figure", "triangle", "template", "canvas"],
-    generate: () => ({
-      text: "La figure rouge est-elle bien l’image du triangle bleu par symétrie centrale de centre O ?",
-      format: "qcm",
-      choices: ["oui", "non"],
-      expected: ["oui"],
-      comparator: "mcq_exact",
-      explanation:
-        "Définition : l’image d’un triangle par symétrie centrale est obtenue en transformant ses trois sommets.\n\n" +
-        "Méthode : on vérifie que O est le milieu de [AA'], [BB'] et [CC'].\n\n" +
-        "Calcul : les trois sommets images sont correctement placés.\n\n" +
-        "Conclusion : la figure rouge est bien l’image du triangle bleu.",
-      canvas: transformationCanvas({
-        transformation: "symetrie_centrale",
-        grid: { rows: 8, cols: 8 },
-        source: {
-          label: "ABC",
-          points: [
-            { x: 2, y: 2 },
-            { x: 4, y: 2 },
-            { x: 2, y: 5 },
-          ],
-        },
-        image: {
-          label: "A'B'C'",
-          points: [
-            { x: 6, y: 6 },
-            { x: 4, y: 6 },
-            { x: 6, y: 3 },
-          ],
-        },
-        center: { point: { x: 4, y: 4 }, label: "O" },
-      }),
-    }),
+    // 13/10 : triangle tiré, image juste une fois sur deux.
+    generate: () => genOuiNon(Math.random() < 0.5, 3),
   },
 
   {
@@ -455,41 +657,38 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Construis l’image de chaque sommet.",
     tags: ["sym_centrale", "figure", "quadrilatere", "template", "canvas"],
-    generate: () => ({
-      text: "La figure rouge est l’image du quadrilatère bleu par symétrie centrale. Quel est le centre ?",
-      format: "qcm",
-      choices: shuffle(["O", "A", "B", "F'"]),
-      expected: ["O"],
-      comparator: "mcq_exact",
-      explanation:
-        "Définition : le centre de symétrie est le milieu entre chaque point et son image.\n\n" +
-        "Méthode : on repère le point situé au milieu des segments reliant les points correspondants.\n\n" +
-        "Calcul : le point O est au milieu entre les sommets et leurs images.\n\n" +
-        "Conclusion : le centre est O.",
-      canvas: transformationCanvas({
-        transformation: "symetrie_centrale",
-        grid: { rows: 8, cols: 8 },
-        source: {
-          label: "F",
-          points: [
-            { x: 1, y: 2 },
-            { x: 3, y: 2 },
-            { x: 3, y: 4 },
-            { x: 2, y: 5 },
-          ],
-        },
-        image: {
-          label: "F'",
-          points: [
-            { x: 7, y: 6 },
-            { x: 5, y: 6 },
-            { x: 5, y: 4 },
-            { x: 6, y: 3 },
-          ],
-        },
-        center: { point: { x: 4, y: 4 }, label: "O" },
-      }),
-    }),
+    // 13/10 : « quel est le centre ? » se lisait sur la figure (un seul point
+    // nommé). On demande maintenant QUELLE transformation donne la figure rouge :
+    // le demi-tour autour du point, un pliage vertical ou horizontal, un glissement.
+    generate: () => {
+      const C = centre();
+      const F = nomFigure(C);
+      const p = pick(PRENOMS);
+      const { c, src, cands } = genTransfo();
+      const cle = pick(["centrale", "centrale", "axe_v", "axe_h", "glissement"] as Transfo[]);
+      const juste = TRANSFOS[cle](C);
+      const question = pick([
+        `Quelle transformation envoie ${F} sur la figure rouge ${F}' ?`,
+        `Comment passe-t-on de ${F} à la figure rouge ?`,
+        `Quel mouvement transforme ${F} en ${F}' ?`,
+        `${p.nom} obtient la figure rouge à partir de ${F}. Par quelle transformation ?`,
+      ]);
+      const pourquoi =
+        cle === "centrale"
+          ? `chaque sommet et son image sont de part et d’autre de ${C}, à la même distance : c’est un demi-tour autour de ${C}.`
+          : cle === "glissement"
+            ? "la figure s’est déplacée tout droit, sans tourner ni se retourner : c’est un glissement."
+            : `la figure est retournée comme dans un miroir le long d’une droite ${cle === "axe_v" ? "verticale" : "horizontale"} qui passe par ${C} : c’est un pliage, pas un demi-tour.`;
+      return {
+        text: `${pick(CTX_FIG)(p, F, C)} ${question}`,
+        format: "qcm",
+        choices: shuffle((Object.keys(TRANSFOS) as Transfo[]).map((k) => TRANSFOS[k](C))),
+        expected: [juste],
+        comparator: "mcq_exact",
+        explanation: expl(`On compare ${F} et la figure rouge : ${pourquoi}`),
+        canvas: canvasSym(src, cands[cle], c, F, C),
+      };
+    },
   },
 
   {
@@ -640,19 +839,25 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "La symétrie centrale conserve les longueurs.",
     tags: ["sym_centrale", "propriete", "longueur", "template"],
+    // 13/10 : un triangle aux trois côtés donnés ; on demande UN côté de l'image.
     generate: () => {
-      const l = randomChoice([3, 4, 5, 6, 7, 8]);
-
+      const p = pick(PRENOMS);
+      const C = centre();
+      const { L, quoi, image } = figureNommee("triangle", C);
+      let c3: number[];
+      do c3 = [0, 1, 2].map(() => rnd(6, 30) / 2);
+      while (c3[0] + c3[1] <= c3[2] || c3[1] + c3[2] <= c3[0] || c3[0] + c3[2] <= c3[1] || new Set(c3).size < 3);
+      const cotes: [string, number][] = [[`${L[0]}${L[1]}`, c3[0]], [`${L[1]}${L[2]}`, c3[1]], [`${L[0]}${L[2]}`, c3[2]]];
+      const [nomC, v] = pick(cotes);
+      const cible = `${nomC[0]}'${nomC[1]}'`;
+      const donnees = shuffle(cotes).map(([n, x]) => `${n} = ${fr(x)} cm`);
+      const question = pick([`Combien mesure ${cible} ?`, `Quelle est la longueur ${cible} ?`, `Que vaut ${cible} ?`]);
       return {
-        text: `Un segment [AB] mesure ${l} cm. Son image par symétrie centrale est [A'B']. Quelle est la longueur A'B' ?`,
+        text: `${pick(INTRO_IMAGE)(p, quoi, image, C)} On sait que ${donnees[0]}, ${donnees[1]} et ${donnees[2]}. ${question}`,
         format: "short",
-        expected: [String(l)],
+        expected: [`${fr(v)} cm`],
         comparator: "number_equal",
-        explanation:
-          "Définition : une symétrie centrale conserve les longueurs.\n\n" +
-          "Méthode : on identifie le segment et son image.\n\n" +
-          `Calcul : AB = ${l} cm, donc A'B' = ${l} cm.\n\n` +
-          `Conclusion : A'B' mesure ${l} cm.`,
+        explanation: expl(`La symétrie centrale conserve les longueurs : ${cible} = ${nomC} = ${fr(v)} cm.`),
       };
     },
   },
@@ -668,19 +873,80 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "La symétrie centrale conserve les angles.",
     tags: ["sym_centrale", "propriete", "angle", "template"],
+    // 13/10 : deux angles d'un triangle donnés ; on demande un angle de l'image :
+    // un angle donné (il est conservé) ou le troisième (somme 180°).
     generate: () => {
-      const angle = randomChoice([35, 45, 60, 75, 90]);
-
+      const p = pick(PRENOMS);
+      const C = centre();
+      const { L, quoi, image } = figureNommee("triangle", C);
+      const a = rnd(25, 100);
+      const b = rnd(20, 155 - a);
+      const c = 180 - a - b;
+      const k = pick([0, 1, 2, 2]);
+      const val = [a, b, c][k];
+      const question = pick([
+        `Combien mesure l’angle en ${L[k]}' du ${image} ?`,
+        `Quelle est la mesure de l’angle en ${L[k]}' ?`,
+        `Que vaut l’angle en ${L[k]}' du ${image} ?`,
+      ]);
+      const calcul =
+        k === 2
+          ? `Dans le ${quoi}, l’angle en ${L[2]} mesure 180 − ${a} − ${b} = ${c}°. La symétrie centrale conserve les angles : l’angle en ${L[2]}' mesure aussi ${c}°.`
+          : `La symétrie centrale conserve les angles : l’angle en ${L[k]}' mesure comme l’angle en ${L[k]}, ${val}°.`;
       return {
-        text: `Un angle mesure ${angle}°. On applique une symétrie centrale. Quelle est la mesure de l’angle image ?`,
+        text: `${pick(INTRO_IMAGE)(p, quoi, image, C)} L’angle en ${L[0]} mesure ${a}° et l’angle en ${L[1]} mesure ${b}°. ${question}`,
         format: "short",
-        expected: [String(angle)],
+        expected: [`${val}°`, String(val)],
         comparator: "number_equal",
-        explanation:
-          "Définition : une symétrie centrale conserve les angles.\n\n" +
-          "Méthode : on reconnaît que la figure n’est pas déformée.\n\n" +
-          `Calcul : l’angle de départ mesure ${angle}°, donc l’angle image mesure aussi ${angle}°.\n\n` +
-          `Conclusion : l’angle image mesure ${angle}°.`,
+        explanation: expl(calcul),
+      };
+    },
+  },
+
+  // 13/10/2026 : l'étoile 2 n'avait que deux questions figées.
+  {
+    kind: "template",
+    id: "5e_sym_centrale_propriete_tpl_4_vrai_faux",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_propriete",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Un demi-tour ne change ni les longueurs, ni les angles.",
+    tags: ["sym_centrale", "propriete", "vrai_faux", "template"],
+    generate: () => {
+      const p = pick(PRENOMS);
+      const C = centre();
+      const [X, Y] = lettresSuivies(2, [C]);
+      const sorte = pick(["longueur", "longueur", "angle"]);
+      let affirmation: string, vrai: boolean, calcul: string;
+      if (sorte === "longueur") {
+        const a = rnd(4, 24) / 2;
+        const b = pick([a, a, 2 * a, a + 1, a / 2]);
+        vrai = b === a;
+        affirmation = `[${X}${Y}] mesure ${fr(a)} cm et son image [${X}'${Y}'] mesure ${fr(b)} cm.`;
+        calcul = `la symétrie centrale conserve les longueurs : [${X}'${Y}'] mesure ${fr(a)} cm, comme [${X}${Y}].`;
+      } else {
+        const a = rnd(25, 150);
+        const b = pick([a, a, 180 - a, a + 10]);
+        vrai = b === a;
+        affirmation = `L’angle en ${X} mesure ${a}° et son image, l’angle en ${X}', mesure ${b}°.`;
+        calcul = `la symétrie centrale conserve les angles : l’angle en ${X}' mesure ${a}°, comme l’angle en ${X}.`;
+      }
+      const intro = pick([
+        `${p.nom} construit l’image d’une figure par la symétrie de centre ${C}. ${il(p) === "elle" ? "Elle" : "Il"} écrit :`,
+        `Après un demi-tour autour du point ${C}, ${p.nom} note :`,
+        `Sur son cahier, ${p.nom} trace le symétrique d’une figure par rapport à ${C} et affirme :`,
+        `En arts plastiques, ${p.nom} reproduit un motif par la symétrie de centre ${C}. ${il(p) === "elle" ? "Elle" : "Il"} dit :`,
+      ]);
+      return {
+        text: `${intro} « ${affirmation} » Vrai ou faux ?`,
+        format: "qcm",
+        choices: ["vrai", "faux"],
+        expected: [vrai ? "vrai" : "faux"],
+        comparator: "mcq_exact",
+        explanation: expl(`On compare avec la figure de départ : ${calcul} L’affirmation est ${vrai ? "vraie" : "fausse"}.`),
       };
     },
   },
@@ -765,7 +1031,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     theme: "reunion",
     text: "Sur un dessin de margouillat, l’œil gauche est l’image de l’œil droit par symétrie centrale de centre O. Si l’œil droit est à 3 cm de O, à quelle distance de O se trouve l’œil gauche ?",
     format: "short",
-    expected: ["3"],
+    expected: ["3 cm", "3"],
     comparator: "number_equal",
     hint: "Le centre est au milieu.",
     explanation:
@@ -787,19 +1053,31 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     theme: "reunion",
     hint: "Dans une symétrie centrale, les distances au centre sont égales.",
     tags: ["sym_centrale", "defi", "reunion", "template"],
+    // 13/10 : de vrais objets (manège, grande roue, roue de vélo…), en cm ou en m ;
+    // La Réunion n'est plus qu'un contexte sur dix. On donne la distance entre les
+    // deux points symétriques et on cherche la distance au centre, ou l'inverse.
     generate: () => {
-      const d = randomChoice([2, 3, 4, 5, 6]);
-
+      const p = pick(PRENOMS);
+      const C = centre();
+      const A = lettre([C]);
+      const ctx = pick(DEFI_OBJETS);
+      const d = rnd(ctx.min * 2, ctx.max * 2) / 2;
+      const versCentre = Math.random() < 0.6;
+      const donne = versCentre ? `${A}${A}' = ${fr(2 * d)} ${ctx.u}` : `${C}${A} = ${fr(d)} ${ctx.u}`;
+      const question = versCentre
+        ? pick([`À quelle distance du centre ${C} se trouve ${A} ?`, `Combien mesure ${C}${A} ?`, `Que vaut ${C}${A}' ?`])
+        : pick([`Quelle distance sépare ${A} de ${A}' ?`, `Combien mesure ${A}${A}' ?`, `Quelle est la longueur ${A}${A}' ?`]);
+      const rep = versCentre ? d : 2 * d;
       return {
-        text: `Sur un motif de carrelage à La Réunion, un point A et son image A' sont symétriques par rapport au centre O. Si OA = ${d} cm, quelle est la longueur OA' ?`,
+        text: `${ctx.dire(p, A, C)} ${pick(["On mesure", `${p.nom} mesure`, "On sait que"])} ${donne}. ${question}`,
         format: "short",
-        expected: [String(d)],
+        expected: [`${fr(rep)} ${ctx.u}`],
         comparator: "number_equal",
-        explanation:
-          "Définition : dans une symétrie centrale, le centre est le milieu entre un point et son image.\n\n" +
-          "Méthode : on utilise l’égalité OA = OA'.\n\n" +
-          `Calcul : OA = ${d} cm, donc OA' = ${d} cm.\n\n` +
-          `Conclusion : OA' mesure ${d} cm.`,
+        explanation: expl(
+          versCentre
+            ? `${C} est le milieu de [${A}${A}'] : ${C}${A} = ${C}${A}' = ${fr(2 * d)} ÷ 2 = ${fr(d)} ${ctx.u}.`
+            : `${C} est le milieu de [${A}${A}'] : ${A}${A}' = ${fr(d)} + ${fr(d)} = ${fr(2 * d)} ${ctx.u}.`,
+        ),
       };
     },
   },
@@ -815,41 +1093,9 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Vérifie que le centre O est le milieu entre les figures.",
     tags: ["sym_centrale", "defi", "canvas", "template"],
-    generate: () => ({
-      text: "Un élève affirme que les deux figures sont symétriques par rapport à O. A-t-il raison ?",
-      format: "qcm",
-      choices: ["oui", "non"],
-      expected: ["oui"],
-      comparator: "mcq_exact",
-      explanation:
-        "Définition : deux figures sont symétriques par rapport à O si chaque point et son image ont O pour milieu.\n\n" +
-        "Méthode : on vérifie plusieurs sommets correspondants.\n\n" +
-        "Calcul : les sommets de la figure rouge sont bien opposés aux sommets de la figure bleue par rapport à O.\n\n" +
-        "Conclusion : l’élève a raison.",
-      canvas: transformationCanvas({
-        transformation: "symetrie_centrale",
-        grid: { rows: 8, cols: 8 },
-        source: {
-          label: "F",
-          points: [
-            { x: 1, y: 2 },
-            { x: 3, y: 2 },
-            { x: 3, y: 4 },
-            { x: 2, y: 5 },
-          ],
-        },
-        image: {
-          label: "F'",
-          points: [
-            { x: 7, y: 6 },
-            { x: 5, y: 6 },
-            { x: 5, y: 4 },
-            { x: 6, y: 3 },
-          ],
-        },
-        center: { point: { x: 4, y: 4 }, label: "O" },
-      }),
-    }),
+    // 13/10 : quadrilatère tiré ; la faute, quand il y en a une, est discrète
+    // (un seul sommet décalé d'un carreau) : il faut vérifier TOUS les sommets.
+    generate: () => genOuiNon(Math.random() < 0.5, 4, true),
   },
 
   // 08/10/2026 : précise et simple (Frédéric)
@@ -951,26 +1197,72 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "O est au milieu : il faut reporter la même distance de l’autre côté.",
     tags: ["sym_centrale", "point", "construction", "template"],
+    // 13/10 : sens (gauche, droite, haut, bas) × unité (carreaux, cm) × situation × tournure.
     generate: () => {
-      const left = randomChoice([2, 3, 4, 5]);
-      const right = left;
-
+      const p = pick(PRENOMS);
+      const C = centre();
+      const A = lettre([C]);
+      const n = rnd(2, 9);
+      const u = pick(["carreaux", "cm"]);
+      const [sens, oppose] = pick([
+        ["à gauche de", "à droite de"],
+        ["à droite de", "à gauche de"],
+        ["au-dessus de", "au-dessous de"],
+        ["au-dessous de", "au-dessus de"],
+      ]);
+      const juste = `${n} ${u} ${oppose} ${C}`;
+      const ou = pick([
+        `${A} est à ${n} ${u} ${sens} ${C}.`,
+        `${p.nom} place ${A} : il est à ${n} ${u} ${sens} ${C}.`,
+        `On lit que ${A} est à ${n} ${u} ${sens} ${C}.`,
+      ]);
+      const question = pick([`Où se trouve ${A}' ?`, `Où faut-il placer ${A}' ?`, `Où ${p.nom} doit-${il(p)} placer ${A}' ?`]);
       return {
-        text: `Sur une droite, le point A est à ${left} carreaux à gauche de O. Où se trouve A' ?`,
+        text: `${pick(CTX_POINT)(p, A, C)} ${ou} ${question}`,
         format: "qcm",
         choices: shuffle([
-          `${right} carreaux à droite de O`,
-          `${right} carreaux à gauche de O`,
-          `${right + 1} carreaux à droite de O`,
-          "sur le point O",
+          juste,
+          ...shuffle([`${n} ${u} ${sens} ${C}`, `${n + 1} ${u} ${oppose} ${C}`, `${2 * n} ${u} ${oppose} ${C}`, `sur le point ${C}`]).slice(0, 3),
         ]),
-        expected: [`${right} carreaux à droite de O`],
+        expected: [juste],
         comparator: "mcq_exact",
-        explanation:
-          "Définition : dans une symétrie centrale, le centre est le milieu entre un point et son image.\n\n" +
-          "Méthode : on reporte la même distance de l’autre côté du centre.\n\n" +
-          `Calcul : A est à ${left} carreaux à gauche de O, donc A' est à ${right} carreaux à droite de O.\n\n` +
-          "Conclusion : A' est placé de l’autre côté de O à la même distance.",
+        explanation: expl(`${C} est le milieu de [${A}${A}'] : on reporte la même distance de l’autre côté. ${A} est à ${n} ${u} ${sens} ${C}, donc ${A}' est à ${n} ${u} ${oppose} ${C}.`),
+      };
+    },
+  },
+
+  // 13/10/2026 : l'étoile 4 n'avait qu'une question figée.
+  {
+    kind: "template",
+    id: "5e_sym_centrale_point_tpl_4_segment",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_point",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Le centre est au milieu du segment qui relie un point à son symétrique.",
+    tags: ["sym_centrale", "point", "milieu", "template"],
+    generate: () => {
+      const p = pick(PRENOMS);
+      const C = centre();
+      const A = lettre([C]);
+      const d = rnd(3, 30) / 2;
+      const versSegment = Math.random() < 0.5;
+      const donne = versSegment ? `${C}${A} = ${fr(d)} cm` : `${A}${A}' = ${fr(2 * d)} cm`;
+      const question = versSegment
+        ? pick([`Combien mesure le segment [${A}${A}'] ?`, `Quelle est la longueur ${A}${A}' ?`, `Quelle distance sépare ${A} de ${A}' ?`])
+        : pick([`Combien mesure ${C}${A} ?`, `Quelle est la distance ${C}${A}' ?`, `À quelle distance de ${C} se trouve ${A} ?`]);
+      const rep = versSegment ? 2 * d : d;
+      const calcul = versSegment
+        ? `${C} est le milieu de [${A}${A}'] : ${A}${A}' = ${C}${A} + ${C}${A}' = ${fr(d)} + ${fr(d)} = ${fr(2 * d)} cm.`
+        : `${C} est le milieu de [${A}${A}'] : la distance au centre est la moitié de ${A}${A}' : ${fr(2 * d)} ÷ 2 = ${fr(d)} cm.`;
+      return {
+        text: `${pick(CTX_POINT)(p, A, C)} ${pick(["On mesure", `${p.nom} mesure`, "On sait que"])} ${donne}. ${question}`,
+        format: "short",
+        expected: [`${fr(rep)} cm`],
+        comparator: "number_equal",
+        explanation: expl(calcul),
       };
     },
   },
@@ -1013,23 +1305,43 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "L’image d’un segment s’obtient avec les images de ses extrémités.",
     tags: ["sym_centrale", "figure", "segment", "template"],
-    generate: () => ({
-      text: "Pour construire l’image du segment [AB] par symétrie centrale, que faut-il construire ?",
-      format: "qcm",
-      choices: shuffle([
-        "les images A' et B', puis relier A' à B'",
-        "seulement le milieu de [AB]",
-        "un axe vertical",
-        "un segment deux fois plus long",
-      ]),
-      expected: ["les images A' et B', puis relier A' à B'"],
-      comparator: "mcq_exact",
-      explanation:
-        "Définition : l’image d’un segment est le segment reliant les images de ses extrémités.\n\n" +
-        "Méthode : on construit A' puis B'.\n\n" +
-        "Calcul : on relie ensuite A' à B'.\n\n" +
-        "Conclusion : l’image de [AB] est [A'B'].",
-    }),
+    // 13/10 : segment, triangle ou quadrilatère aux noms tirés × situation × tournure.
+    generate: () => {
+      const p = pick(PRENOMS);
+      const C = centre();
+      const n = pick([2, 3, 4]);
+      const L = lettresSuivies(n, [C]);
+      const quoi = n === 2 ? `segment [${L.join("")}]` : n === 3 ? `triangle ${L.join("")}` : `quadrilatère ${L.join("")}`;
+      const nom = `du ${quoi}`;
+      const primes = L.map((l) => `${l}'`);
+      const liste = (t: string[]) => (t.length === 1 ? t[0] : `${t.slice(0, -1).join(", ")} et ${t[t.length - 1]}`);
+      const juste = n === 2
+        ? `construire ${primes[0]} et ${primes[1]}, puis tracer [${primes.join("")}]`
+        : `construire ${liste(primes)}, puis les relier dans le même ordre`;
+      const pieges = [
+        `construire seulement ${liste(primes.slice(0, n - 1))}, puis relier`,
+        `tracer une droite et plier la feuille le long de cette droite`,
+        `construire seulement le milieu de [${L[0]}${L[1]}]`,
+        `tracer une figure deux fois plus grande autour de ${C}`,
+      ];
+      const intro = pick([
+        `${p.nom} veut construire l’image ${nom} par la symétrie de centre ${C}.`,
+        `Pour un logo, ${p.nom} doit tracer le symétrique ${nom} par rapport à ${C}.`,
+        `Sur son cahier, ${p.nom} construit l’image ${nom} par la symétrie de centre ${C}.`,
+        `Pour un pochoir, ${p.nom} reproduit le ${quoi} par un demi-tour autour de ${C}.`,
+        `En arts plastiques, ${p.nom} doit dessiner le symétrique ${nom} par rapport à ${C}.`,
+        `Pour une frise, ${p.nom} construit l’image ${nom} dans la symétrie de centre ${C}.`,
+      ]);
+      const question = pick(["Que doit-" + il(p) + " faire ?", "Quelle est la bonne méthode ?", "Quelle méthode convient ?"]);
+      return {
+        text: `${intro} ${question}`,
+        format: "qcm",
+        choices: shuffle([juste, ...shuffle(pieges).slice(0, 3)]),
+        expected: [juste],
+        comparator: "mcq_exact",
+        explanation: expl(`On construit l’image de chaque sommet (${liste(primes)}), puis on les relie dans le même ordre. L’image d’un segment est le segment qui relie les images de ses extrémités.`),
+      };
+    },
   },
 
   {
@@ -1043,41 +1355,34 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Vérifie chaque sommet.",
     tags: ["sym_centrale", "figure", "piege", "template", "canvas"],
-    generate: () => ({
-      text: "La figure rouge est-elle correctement construite comme image de la figure bleue par symétrie centrale ?",
-      format: "qcm",
-      choices: ["oui", "non"],
-      expected: ["non"],
-      comparator: "mcq_exact",
-      explanation:
-        "Définition : tous les sommets doivent être correctement transformés.\n\n" +
-        "Méthode : on vérifie que O est le milieu entre chaque sommet et son image.\n\n" +
-        "Calcul : ici, un sommet image est mal placé.\n\n" +
-        "Conclusion : la figure rouge n’est pas correctement construite.",
-      canvas: transformationCanvas({
-        transformation: "symetrie_centrale",
-        grid: { rows: 8, cols: 8 },
-        source: {
-          label: "F",
-          points: [
-            { x: 1, y: 2 },
-            { x: 3, y: 2 },
-            { x: 3, y: 4 },
-            { x: 2, y: 5 },
-          ],
-        },
-        image: {
-          label: "F'",
-          points: [
-            { x: 7, y: 6 },
-            { x: 5, y: 6 },
-            { x: 5, y: 4 },
-            { x: 5, y: 3 },
-          ],
-        },
-        center: { point: { x: 4, y: 4 }, label: "O" },
-      }),
-    }),
+    // 13/10 : figure tirée ; on COMPTE les sommets mal placés (0, 1 ou 2) :
+    // une réponse précise, plus dure qu'un oui / non.
+    generate: () => {
+      const C = centre();
+      const F = nomFigure(C);
+      const p = pick(PRENOMS);
+      const n = pick([3, 4] as const);
+      const k = pick([0, 1, 1, 2, 2]);
+      const { c, src } = figureAutour(n);
+      const bon = src.map((q) => symC(q, c));
+      const img = k === 0 ? bon : decaler(bon, k);
+      const question = pick([
+        `${p.nom} a construit la figure rouge, l’image de ${F} par la symétrie de centre ${C}. Combien de sommets de la figure rouge sont mal placés ? (0 si tout est juste)`,
+        `La figure rouge devrait être le symétrique de ${F} par rapport à ${C}. Combien de ses sommets sont faux ? (0 si aucun)`,
+        `Vérifie la construction ${de(p.nom)} : la figure rouge doit être l’image de ${F} par un demi-tour autour de ${C}. Combien de sommets rouges sont mal placés ? (0 si aucun)`,
+      ]);
+      return {
+        text: `${pick(CTX_FIG)(p, F, C)} ${question}`,
+        format: "short",
+        expected: [String(k)],
+        comparator: "number_equal",
+        explanation: expl(
+          `Pour chaque sommet de ${F}, on compte les carreaux jusqu’à ${C}, puis on compte autant de carreaux de l’autre côté. ` +
+            (k === 0 ? "Tous les sommets rouges sont à la bonne place : 0 sommet faux." : `${k} sommet${k > 1 ? "s" : ""} rouge${k > 1 ? "s" : ""} ne tombe${k > 1 ? "nt" : ""} pas à la bonne place.`),
+        ),
+        canvas: canvasSym(src, img, c, F, C),
+      };
+    },
   },
 
   /* =========================
@@ -1118,19 +1423,83 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "La symétrie centrale conserve toutes les longueurs.",
     tags: ["sym_centrale", "propriete", "perimetre", "template"],
+    // 13/10 : les côtés d'un triangle ou d'un quadrilatère sont donnés : on
+    // calcule le périmètre, conservé par la symétrie.
     generate: () => {
-      const p = randomChoice([12, 14, 16, 18, 20, 24]);
-
+      const pr = pick(PRENOMS);
+      const C = centre();
+      const typ = pick(["triangle", "quadrilatère"] as const);
+      const { L, quoi, image } = figureNommee(typ, C);
+      const n = L.length;
+      let c: number[];
+      do c = L.map(() => rnd(4, 24) / 2);
+      while (2 * Math.max(...c) >= c.reduce((s, x) => s + x, 0));
+      const per = c.reduce((s, x) => s + x, 0);
+      const noms = L.map((l, i) => `${l}${L[(i + 1) % n]}`).map((s, i) => (i === n - 1 ? `${s[1]}${s[0]}` : s));
+      const donnees = noms.map((s, i) => `${s} = ${fr(c[i])} cm`);
+      const question = pick([
+        `Quel est le périmètre du ${image} ?`,
+        `Combien mesure le périmètre du ${image} ?`,
+        `Calcule le périmètre du ${image}.`,
+      ]);
       return {
-        text: `Une figure a un périmètre de ${p} cm. On construit son image par symétrie centrale. Quel est le périmètre de l’image ?`,
+        text: `${pick(INTRO_IMAGE)(pr, quoi, image, C)} On sait que ${donnees.slice(0, -1).join(", ")} et ${donnees[n - 1]}. ${question}`,
         format: "short",
-        expected: [String(p)],
+        expected: [`${fr(per)} cm`],
         comparator: "number_equal",
-        explanation:
-          "Définition : une symétrie centrale conserve les longueurs.\n\n" +
-          "Méthode : le périmètre est une somme de longueurs.\n\n" +
-          `Calcul : comme chaque longueur est conservée, le périmètre reste ${p} cm.\n\n` +
-          `Conclusion : le périmètre de l’image est ${p} cm.`,
+        explanation: expl(
+          `La symétrie centrale conserve les longueurs : le ${image} a les mêmes côtés que le ${quoi}. Périmètre : ${c.map(fr).join(" + ")} = ${fr(per)} cm.`,
+        ),
+      };
+    },
+  },
+
+  // 13/10/2026 : l'étoile 4 n'avait que des questions figées.
+  {
+    kind: "template",
+    id: "5e_sym_centrale_propriete_tpl_5_aire",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_propriete",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "La symétrie centrale conserve les longueurs, donc aussi l’aire.",
+    tags: ["sym_centrale", "propriete", "aire", "template"],
+    generate: () => {
+      const pr = pick(PRENOMS);
+      const C = centre();
+      const typ = pick(["rectangle", "triangle"] as const);
+      const { L, quoi, image } = figureNommee(typ, C);
+      let donnees: string, aire: number, calcul: string;
+      if (typ === "rectangle") {
+        const lo = rnd(4, 15);
+        const la = rnd(2, lo - 1);
+        aire = lo * la;
+        donnees = pick([
+          `Le ${quoi} a une longueur de ${lo} cm et une largeur de ${la} cm.`,
+          `${L[0]}${L[1]} = ${lo} cm et ${L[1]}${L[2]} = ${la} cm.`,
+        ]);
+        calcul = `L’aire du ${quoi} est ${lo} × ${la} = ${aire} cm².`;
+      } else {
+        const b = rnd(3, 14);
+        const h = rnd(2, 12);
+        const bb = b * h % 2 === 0 ? b : b + 1;
+        aire = (bb * h) / 2;
+        donnees = `Dans le ${quoi}, la base [${L[0]}${L[1]}] mesure ${bb} cm et la hauteur issue de ${L[2]} mesure ${h} cm.`;
+        calcul = `L’aire du ${quoi} est ${bb} × ${h} ÷ 2 = ${aire} cm².`;
+      }
+      const question = pick([
+        `Quelle est l’aire du ${image} ?`,
+        `Combien mesure l’aire du ${image} ?`,
+        `Calcule l’aire du ${image}.`,
+      ]);
+      return {
+        text: `${pick(INTRO_IMAGE)(pr, quoi, image, C)} ${donnees} ${question}`,
+        format: "short",
+        expected: [`${aire} cm²`],
+        comparator: "number_equal",
+        explanation: expl(`${calcul} La symétrie centrale conserve les longueurs : le ${image} est superposable au ${quoi}, il a la même aire, ${aire} cm².`),
       };
     },
   },
@@ -1173,20 +1542,94 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Une bonne construction respecte l’alignement et l’égalité des distances.",
     tags: ["sym_centrale", "defi", "erreur", "template"],
+    // 13/10 : quatre constructions d'élève, une seule juste (sur la droite, de
+    // l'autre côté, à la même distance) ; les nombres et les noms sont tirés.
     generate: () => {
-      const d = randomChoice([3, 4, 5, 6]);
-
+      const p = pick(PRENOMS);
+      const C = centre();
+      const A = lettre([C]);
+      const d = rnd(4, 20) / 2;
+      const autre = pick([d + 1, d + 0.5, d - 1, 2 * d].filter((x) => x > 0 && x !== d));
+      const cas = pick(["juste", "juste", "pas_aligne", "distance", "meme_cote"]);
+      const place =
+        cas === "juste"
+          ? `sur la droite (${A}${C}), de l’autre côté de ${C}, à ${fr(d)} cm de ${C}`
+          : cas === "pas_aligne"
+            ? `à ${fr(d)} cm de ${C}, mais pas sur la droite (${A}${C})`
+            : cas === "distance"
+              ? `sur la droite (${A}${C}), de l’autre côté de ${C}, à ${fr(autre)} cm de ${C}`
+              : `sur la droite (${A}${C}), du même côté que ${A}, à ${fr(autre)} cm de ${C}`;
+      const juste = cas === "juste";
+      const question = pick([
+        "Sa construction est-elle juste ?",
+        `${p.nom} a-t-${il(p)} bien construit ${A}' ?`,
+        `${A}' est-il bien le symétrique de ${A} par rapport à ${C} ?`,
+      ]);
+      const pourquoi = juste
+        ? `${A}' est sur la droite (${A}${C}), de l’autre côté de ${C}, et ${C}${A}' = ${C}${A} = ${fr(d)} cm : ${C} est le milieu de [${A}${A}'].`
+        : cas === "pas_aligne"
+          ? `${A}' est à la bonne distance, mais ${A}, ${C} et ${A}' ne sont pas alignés.`
+          : cas === "distance"
+            ? `${C}${A}' = ${fr(autre)} cm et ${C}${A} = ${fr(d)} cm : ces distances sont différentes, ${C} n’est pas le milieu.`
+            : `${A}' est du même côté que ${A} : ${C} n’est pas entre ${A} et ${A}'.`;
       return {
-        text: `Un élève veut construire A' image de A par symétrie centrale de centre O. Il sait que OA = ${d} cm. Il place A' à ${d} cm de O, mais pas sur la droite (AO). Sa construction est-elle correcte ?`,
+        text: `${p.nom} veut construire le symétrique ${A}' du point ${A} par rapport à ${C}. ${p.nom} mesure ${C}${A} = ${fr(d)} cm, puis place ${A}' ${place}. ${question}`,
         format: "qcm",
         choices: ["oui", "non"],
-        expected: ["non"],
+        expected: [juste ? "oui" : "non"],
         comparator: "mcq_exact",
-        explanation:
-          "Définition : dans une symétrie centrale, A, O et A' doivent être alignés.\n\n" +
-          "Méthode : il faut vérifier la distance et l’alignement.\n\n" +
-          `Calcul : même si OA' = ${d} cm, A' doit aussi être sur la droite (AO).\n\n` +
-          "Conclusion : la construction n’est pas correcte.",
+        explanation: expl(`On vérifie les trois conditions : ${pourquoi}`),
+      };
+    },
+  },
+
+  // 13/10/2026 : l'étoile 5 n'avait que deux questions figées.
+  {
+    kind: "template",
+    id: "5e_sym_centrale_defi_tpl_4_deux_points",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "sym_centrale",
+    microId: "sym_centrale_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "L’image du segment [AB] est [A'B'] : même longueur.",
+    tags: ["sym_centrale", "defi", "raisonnement", "template"],
+    generate: () => {
+      const p = pick(PRENOMS);
+      const C = centre();
+      const [A, B] = lettresSuivies(2, [C]);
+      const x = rnd(6, 24) / 2;
+      let y = rnd(6, 24) / 2;
+      while (y === x) y = rnd(6, 24) / 2;
+      const sorte = pick(["image", "image_croisee", "perimetre", "perimetre"]);
+      const intro = pick([
+        `${p.nom} place deux points ${A} et ${B}, puis leurs symétriques ${A}' et ${B}' par rapport au point ${C}.`,
+        `Sur un plan, ${p.nom} marque deux arbres ${A} et ${B}, et leurs symétriques ${A}' et ${B}' par rapport au point ${C}.`,
+        `Pour un logo, ${p.nom} trace ${A}' et ${B}', les symétriques de ${A} et ${B} par rapport au point ${C}.`,
+        `Sur un cerf-volant, ${p.nom} repère les points ${A} et ${B} et leurs symétriques ${A}' et ${B}' par rapport au point ${C}.`,
+      ]);
+      const donnees = `${A}${B} = ${fr(x)} cm et ${A}${B}' = ${fr(y)} cm.`;
+      let question: string, rep: number, calcul: string;
+      if (sorte === "image") {
+        question = pick([`Combien mesure ${A}'${B}' ?`, `Que vaut la longueur ${A}'${B}' ?`]);
+        rep = x;
+        calcul = `[${A}'${B}'] est l’image de [${A}${B}] : ${A}'${B}' = ${A}${B} = ${fr(x)} cm.`;
+      } else if (sorte === "image_croisee") {
+        question = pick([`Combien mesure ${A}'${B} ?`, `Que vaut la longueur ${A}'${B} ?`]);
+        rep = y;
+        calcul = `L’image de ${A} est ${A}' et l’image de ${B}' est ${B} : [${A}'${B}] est l’image de [${A}${B}'], donc ${A}'${B} = ${A}${B}' = ${fr(y)} cm.`;
+      } else {
+        question = pick([`Quel est le périmètre du quadrilatère ${A}${B}${A}'${B}' ?`, `Calcule le périmètre du quadrilatère ${A}${B}${A}'${B}'.`]);
+        rep = 2 * (x + y);
+        calcul = `${A}'${B}' = ${A}${B} = ${fr(x)} cm et ${B}${A}' = ${B}'${A} = ${fr(y)} cm (images l’un de l’autre). Périmètre : ${fr(x)} + ${fr(y)} + ${fr(x)} + ${fr(y)} = ${fr(rep)} cm.`;
+      }
+      return {
+        text: `${intro} ${donnees} ${question}`,
+        format: "short",
+        expected: [`${fr(rep)} cm`],
+        comparator: "number_equal",
+        explanation: expl(calcul),
       };
     },
   },
@@ -1315,7 +1758,7 @@ export const symetrieCentraleBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Dans une symétrie centrale de centre O, on sait que OA = 7 cm. Quelle est la longueur OA' ?",
     format: "short",
-    expected: ["7"],
+    expected: ["7 cm", "7"],
     comparator: "number_equal",
     hint: "O est le milieu de [AA'].",
     explanation: expl("O est le milieu de [AA'], donc OA' = OA = 7 cm."),

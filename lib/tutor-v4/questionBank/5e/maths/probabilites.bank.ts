@@ -4,6 +4,7 @@ import type {
   TutorBankItemV4,
   CanvasProbabilitesData,
 } from "@/lib/tutor-v4/types";
+import { PRENOMS, de, type Prenom } from "@/lib/tutor-v4/questionBank/6e/maths/entiers.bank";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -116,6 +117,472 @@ function expl(calcul: string) {
     calcul +
     "\n\nConclusion : la probabilité obtenue répond à la question."
   );
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LES SITUATIONS (09/10/2026) — gabarits variés ET corrigés.
+   Mesuré le 09/10 : 5 micros sur 5 sous le seuil (8 à 21 squelettes, 11 à 18
+   répétitions sur 20). Chaque gabarit compose maintenant une SITUATION (sac,
+   bocal, roue, cartes, loto…) × une TOURNURE × un PRÉNOM. Le texte écrit
+   TOUJOURS le contenu en clair (« 3 billes rouges et 5 billes bleues »,
+   « numérotées de 1 à 12 ») et l'événement entre guillemets : le correcteur
+   (correcteurs/probabilites.ts) recompte les issues à partir de ce texte.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const ri = (a: number, b: number) => a + Math.floor(Math.random() * (b - a + 1));
+const pick = <T,>(arr: readonly T[]): T => arr[Math.floor(Math.random() * arr.length)];
+const melange = <T,>(arr: readonly T[]): T[] => [...arr].sort(() => Math.random() - 0.5);
+const maj = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+const ilElle = (p: Prenom) => (p.f ? "elle" : "il");
+/** « a », « a et b », « a, b et c ». */
+const listeFr = (xs: string[]) => (xs.length <= 1 ? xs.join("") : `${xs.slice(0, -1).join(", ")} et ${xs[xs.length - 1]}`);
+/** Fraction réduite « 3/4 » (ou « 1 », « 0 »). */
+function reduite(a: number, b: number) {
+  if (a === 0) return "0";
+  const g = pgcd(a, b);
+  return b / g === 1 ? String(a / g) : `${a / g}/${b / g}`;
+}
+/** Les écritures acceptées d'une probabilité a/b : brute, puis réduite. */
+const ecritures = (a: number, b: number) => [...new Set([a === 0 ? "0" : a === b ? "1" : `${a}/${b}`, reduite(a, b)])];
+const pl = (n: number, s: string, p = `${s}s`) => (n > 1 ? p : s);
+function pe(def: string, meth: string, obs: string, ccl: string) {
+  return `Définition : ${def}\n\nMéthode : ${meth}\n\nObservation : ${obs}\n\nConclusion : ${ccl}`;
+}
+
+type Coul = "rouge" | "bleu" | "vert" | "jaune" | "violet" | "orange" | "rose" | "noir" | "blanc";
+// masculin singulier, féminin singulier, masculin pluriel, féminin pluriel
+const ACCORDS: Record<Coul, readonly [string, string, string, string]> = {
+  rouge: ["rouge", "rouge", "rouges", "rouges"],
+  bleu: ["bleu", "bleue", "bleus", "bleues"],
+  vert: ["vert", "verte", "verts", "vertes"],
+  jaune: ["jaune", "jaune", "jaunes", "jaunes"],
+  violet: ["violet", "violette", "violets", "violettes"],
+  orange: ["orange", "orange", "orange", "orange"],
+  rose: ["rose", "rose", "roses", "roses"],
+  noir: ["noir", "noire", "noirs", "noires"],
+  blanc: ["blanc", "blanche", "blancs", "blanches"],
+};
+const accorde = (c: Coul, f: boolean, pluriel: boolean) => ACCORDS[c][(f ? 1 : 0) + (pluriel ? 2 : 0)];
+
+type Objet = { s: string; p: string; f: boolean; couleurs: Coul[] };
+const TOUTES: Coul[] = ["rouge", "bleu", "vert", "jaune", "violet", "orange", "noir", "blanc"];
+const OBJ = {
+  bille: { s: "bille", p: "billes", f: true, couleurs: TOUTES },
+  jeton: { s: "jeton", p: "jetons", f: false, couleurs: TOUTES },
+  bonbon: { s: "bonbon", p: "bonbons", f: false, couleurs: ["rouge", "vert", "jaune", "orange", "rose", "blanc"] },
+  stylo: { s: "stylo", p: "stylos", f: false, couleurs: TOUTES },
+  perle: { s: "perle", p: "perles", f: true, couleurs: TOUTES },
+  chaussette: { s: "chaussette", p: "chaussettes", f: true, couleurs: ["rouge", "bleu", "vert", "noir", "blanc", "jaune"] },
+  ballon: { s: "ballon", p: "ballons", f: false, couleurs: ["rouge", "bleu", "vert", "jaune", "rose", "violet", "orange"] },
+  pomme: { s: "pomme", p: "pommes", f: true, couleurs: ["rouge", "vert", "jaune"] },
+  carte: { s: "carte", p: "cartes", f: true, couleurs: ["rouge", "bleu", "vert", "jaune", "violet", "orange"] },
+  cube: { s: "cube", p: "cubes", f: false, couleurs: TOUTES },
+  macaron: { s: "macaron", p: "macarons", f: false, couleurs: ["rose", "vert", "jaune", "violet", "blanc", "orange"] },
+  dossard: { s: "dossard", p: "dossards", f: false, couleurs: ["rouge", "bleu", "vert", "jaune", "orange", "blanc"] },
+  bracelet: { s: "bracelet", p: "bracelets", f: false, couleurs: ["rouge", "bleu", "vert", "jaune", "violet", "noir"] },
+  casquette: { s: "casquette", p: "casquettes", f: true, couleurs: ["rouge", "bleu", "vert", "noir", "blanc", "jaune"] },
+} satisfies Record<string, Objet>;
+const un = (o: Objet) => (o.f ? "une" : "un");
+
+type CtxUrne = { o: Objet; pose: (p: Prenom, contenu: string) => string; tire: (p: Prenom) => string; v: string };
+const CTX_URNES: CtxUrne[] = [
+  { o: OBJ.bille, pose: (p, c) => `Dans le sac ${de(p.nom)}, il y a ${c}.`, tire: (p) => `${p.nom} tire une bille au hasard.`, v: "tirer" },
+  { o: OBJ.jeton, pose: (_p, c) => `Pour un jeu de plateau, une boîte contient ${c}.`, tire: (p) => `${p.nom} pioche un jeton au hasard.`, v: "piocher" },
+  { o: OBJ.bonbon, pose: (p, c) => `Le paquet de bonbons ${de(p.nom)} contient ${c}.`, tire: (p) => `${maj(ilElle(p))} prend un bonbon au hasard, sans regarder.`, v: "prendre" },
+  { o: OBJ.stylo, pose: (p, c) => `Dans la trousse ${de(p.nom)}, il y a ${c}.`, tire: (p) => `${maj(ilElle(p))} attrape un stylo au hasard.`, v: "attraper" },
+  { o: OBJ.perle, pose: (p, c) => `Pour un collier, ${p.nom} a une boîte avec ${c}.`, tire: (p) => `${maj(ilElle(p))} prend une perle au hasard.`, v: "prendre" },
+  { o: OBJ.chaussette, pose: (p, c) => `Dans le tiroir ${de(p.nom)}, il y a ${c}.`, tire: (p) => `Le matin, dans le noir, ${ilElle(p)} prend une chaussette au hasard.`, v: "prendre" },
+  { o: OBJ.ballon, pose: (_p, c) => `Pour la fête du club, un carton contient ${c}.`, tire: (p) => `${p.nom} sort un ballon au hasard.`, v: "sortir" },
+  { o: OBJ.pomme, pose: (_p, c) => `Au marché, un cageot contient ${c}.`, tire: (p) => `${p.nom} prend une pomme au hasard.`, v: "prendre" },
+  { o: OBJ.carte, pose: (_p, c) => `Pour un jeu de cartes, on garde ${c}.`, tire: (p) => `${p.nom} tire une carte au hasard.`, v: "tirer" },
+  { o: OBJ.cube, pose: (p, c) => `Dans la boîte de construction ${de(p.nom)}, il y a ${c}.`, tire: (p) => `${maj(ilElle(p))} prend un cube au hasard.`, v: "prendre" },
+  { o: OBJ.macaron, pose: (_p, c) => `À la boulangerie, une boîte contient ${c}.`, tire: (p) => `${p.nom} choisit un macaron au hasard, les yeux fermés.`, v: "choisir" },
+  { o: OBJ.dossard, pose: (_p, c) => `Avant la course d’orientation, un sac contient ${c}.`, tire: (p) => `${p.nom} prend un dossard au hasard.`, v: "prendre" },
+  { o: OBJ.bracelet, pose: (_p, c) => `Au festival, un panier contient ${c}.`, tire: (p) => `${p.nom} reçoit un bracelet tiré au hasard.`, v: "recevoir" },
+  { o: OBJ.casquette, pose: (_p, c) => `Au camp de vacances, un carton contient ${c}.`, tire: (p) => `${p.nom} prend une casquette au hasard.`, v: "prendre" },
+  { o: OBJ.jeton, pose: (_p, c) => `À la kermesse de Saint-Denis, à La Réunion, une urne contient ${c}.`, tire: (p) => `${p.nom} pioche un jeton au hasard.`, v: "piocher" },
+];
+
+type Urne = { ctx: CtxUrne; p: Prenom; contenu: { c: Coul; n: number }[] };
+/** Une urne aux effectifs imposés (couleurs tirées). */
+function urneAvec(ns: number[], minCouleurs = ns.length + 1): Urne {
+  const ctx = pick(CTX_URNES.filter((c) => c.o.couleurs.length >= minCouleurs));
+  const cs = melange(ctx.o.couleurs).slice(0, ns.length);
+  return { ctx, p: pick(PRENOMS), contenu: cs.map((c, i) => ({ c, n: ns[i] })) };
+}
+/** Une urne de `k` couleurs, de `nMin` à `nMax` objets chacune. */
+const nouvelleUrne = (k: number, nMin: number, nMax: number) => urneAvec(Array.from({ length: k }, () => ri(nMin, nMax)));
+const totalUrne = (u: Urne) => u.contenu.reduce((a, x) => a + x.n, 0);
+const groupe = (o: Objet, c: Coul, n: number) => `${n} ${n > 1 ? o.p : o.s} ${accorde(c, o.f, n > 1)}`;
+const situationUrne = (u: Urne) => `${u.ctx.pose(u.p, listeFr(u.contenu.map((x) => groupe(u.ctx.o, x.c, x.n))))} ${u.ctx.tire(u.p)}`;
+/** « tirer une bille rouge », « … rouge ou bleue », « … qui n’est pas verte ». */
+function evtUrne(u: Urne, cs: Coul[], pas = false) {
+  const o = u.ctx.o;
+  const a = cs.map((c) => accorde(c, o.f, false));
+  return pas ? `${u.ctx.v} ${un(o)} ${o.s} qui n’est pas ${a[0]}` : `${u.ctx.v} ${un(o)} ${o.s} ${a.join(" ou ")}`;
+}
+const favUrne = (u: Urne, cs: Coul[], pas = false) =>
+  u.contenu.filter((x) => (pas ? !cs.includes(x.c) : cs.includes(x.c))).reduce((a, x) => a + x.n, 0);
+/** Le sac dessiné : un rond par objet (24 au plus). */
+function canvasUrne(u: Urne): CanvasProbabilitesData | undefined {
+  if (totalUrne(u) > 24) return undefined;
+  return { kind: "probabilites", variant: "billes", billes: { elements: u.contenu.flatMap((x) => Array.from({ length: x.n }, () => ({ couleur: x.c }))) } };
+}
+
+// Les expériences à issues numérotées de 1 à N (équiprobables).
+type CtxNum = { Ns: number[]; mot: "nombre" | "numéro"; pose: (p: Prenom, N: number) => string; canvas?: (N: number) => CanvasProbabilitesData | undefined };
+const roueNum = (N: number): CanvasProbabilitesData => ({ kind: "probabilites", variant: "roue", roue: { segments: Array.from({ length: N }, (_, i) => ({ label: String(i + 1), poids: 1 })) } });
+const CTX_NUM: CtxNum[] = [
+  { Ns: [6], mot: "nombre", pose: (p, N) => `${p.nom} lance un dé équilibré à ${N} faces, numérotées de 1 à ${N}.`, canvas: () => deCanvas() },
+  { Ns: [4, 8, 10, 12, 20], mot: "nombre", pose: (p, N) => `Pour un jeu de rôle, ${p.nom} lance un dé équilibré à ${N} faces, numérotées de 1 à ${N}.` },
+  { Ns: [8, 10, 12, 15, 20], mot: "nombre", pose: (p, N) => `${p.nom} mélange ${N} cartes numérotées de 1 à ${N}, puis en tire une au hasard.` },
+  { Ns: [4, 5, 6, 8, 10, 12], mot: "nombre", pose: (p, N) => `À la fête du village, une roue a ${N} secteurs de même taille, numérotés de 1 à ${N}. ${p.nom} la fait tourner.`, canvas: roueNum },
+  { Ns: [10, 12, 15, 20, 25, 30], mot: "numéro", pose: (p, N) => `Au loto du collège, un sac contient ${N} boules numérotées de 1 à ${N}. ${p.nom} en tire une au hasard.` },
+  { Ns: [20, 30, 40, 50], mot: "numéro", pose: (p, N) => `Pour la tombola, ${N} tickets numérotés de 1 à ${N} sont dans une urne. ${p.nom} en tire un au hasard.` },
+  { Ns: [20, 24, 25, 28, 30], mot: "numéro", pose: (_p, N) => `Les ${N} élèves d’une classe de 5e sont numérotés de 1 à ${N}. La professeure tire un numéro au hasard.` },
+  { Ns: [11, 12, 14, 15, 16, 18], mot: "numéro", pose: (p, N) => `Au club de handball, ${N} maillots numérotés de 1 à ${N} sont dans un sac. ${p.nom} en prend un au hasard.` },
+  { Ns: [8, 10, 12, 15, 20], mot: "numéro", pose: (p, N) => `Dans un jeu vidéo, ${p.nom} joue sur une carte de ${N} niveaux numérotés de 1 à ${N}. Le jeu en choisit un au hasard.` },
+  { Ns: [10, 12, 15, 20], mot: "numéro", pose: (p, N) => `En classe de mer, ${N} chambres sont numérotées de 1 à ${N}. ${p.nom} reçoit une chambre tirée au hasard.` },
+  { Ns: [12, 15, 20, 24], mot: "numéro", pose: (p, N) => `Au zoo, ${N} enclos sont numérotés de 1 à ${N}. ${p.nom} tire au hasard le premier enclos à visiter.` },
+  { Ns: [8, 10, 12], mot: "numéro", pose: (p, N) => `Dans la playlist ${de(p.nom)}, ${N} chansons sont numérotées de 1 à ${N}. Le lecteur en choisit une au hasard.` },
+  { Ns: [10, 12, 16, 20], mot: "numéro", pose: (p, N) => `À la médiathèque, ${N} romans sont numérotés de 1 à ${N}. ${p.nom} en emprunte un au hasard.` },
+  { Ns: [10, 15, 20], mot: "numéro", pose: (p, N) => `Au marché forain de Saint-Paul, à La Réunion, une loterie a ${N} billets numérotés de 1 à ${N}. ${p.nom} en tire un au hasard.` },
+];
+type Num = { ctx: CtxNum; p: Prenom; N: number };
+function nouveauNum(filtre: (N: number) => boolean = () => true): Num {
+  const ctx = pick(CTX_NUM.filter((c) => c.Ns.some(filtre)));
+  return { ctx, p: pick(PRENOMS), N: pick(ctx.Ns.filter(filtre)) };
+}
+const situationNum = (x: Num) => x.ctx.pose(x.p, x.N);
+type EvtNum = { lib: string; ok: (v: number) => boolean };
+const EVN = {
+  pair: (m: string): EvtNum => ({ lib: `obtenir un ${m} pair`, ok: (v) => v % 2 === 0 }),
+  impair: (m: string): EvtNum => ({ lib: `obtenir un ${m} impair`, ok: (v) => v % 2 === 1 }),
+  sup: (m: string, k: number): EvtNum => ({ lib: `obtenir un ${m} supérieur à ${k}`, ok: (v) => v > k }),
+  inf: (m: string, k: number): EvtNum => ({ lib: `obtenir un ${m} inférieur à ${k}`, ok: (v) => v < k }),
+  supEg: (m: string, k: number): EvtNum => ({ lib: `obtenir un ${m} supérieur ou égal à ${k}`, ok: (v) => v >= k }),
+  infEg: (m: string, k: number): EvtNum => ({ lib: `obtenir un ${m} inférieur ou égal à ${k}`, ok: (v) => v <= k }),
+  egal: (m: string, k: number): EvtNum => ({ lib: `obtenir le ${m} ${k}`, ok: (v) => v === k }),
+  pas: (m: string, k: number): EvtNum => ({ lib: `ne pas obtenir le ${m} ${k}`, ok: (v) => v !== k }),
+  mult: (_m: string, k: number): EvtNum => ({ lib: `obtenir un multiple de ${k}`, ok: (v) => v % k === 0 }),
+  pairSup: (m: string, k: number): EvtNum => ({ lib: `obtenir un ${m} pair supérieur à ${k}`, ok: (v) => v % 2 === 0 && v > k }),
+  impairInf: (m: string, k: number): EvtNum => ({ lib: `obtenir un ${m} impair inférieur à ${k}`, ok: (v) => v % 2 === 1 && v < k }),
+};
+const listeFav = (x: Num, e: EvtNum) => Array.from({ length: x.N }, (_, i) => i + 1).filter(e.ok);
+const favNum = (x: Num, e: EvtNum) => listeFav(x, e).length;
+/** Un événement simple « ni impossible ni certain » sur des issues numérotées. */
+function evtNumSimple(x: Num): EvtNum {
+  const m = x.ctx.mot;
+  const k = ri(2, x.N - 1);
+  return pick([EVN.pair(m), EVN.impair(m), EVN.sup(m, k), EVN.inf(m, k), EVN.supEg(m, k), EVN.infEg(m, k), EVN.egal(m, ri(1, x.N)), EVN.mult(m, ri(3, Math.min(6, x.N)))]);
+}
+
+// Les roues à secteurs de même taille, coloriés.
+const SECTEUR: Objet = { s: "secteur", p: "secteurs", f: false, couleurs: ["rouge", "bleu", "vert", "jaune", "violet", "orange", "rose"] };
+const INTROS_ROUE: ((p: Prenom) => string)[] = [
+  (p) => `À la kermesse, ${p.nom} fait tourner une roue.`,
+  (p) => `Dans un jeu de société, ${p.nom} fait tourner la roue des couleurs.`,
+  (p) => `À la fête du collège, ${p.nom} lance la roue de la loterie.`,
+  (p) => `Au centre aéré, ${p.nom} fait tourner la roue des activités.`,
+  (p) => `En EPS, ${p.nom} fait tourner une roue pour choisir son équipe.`,
+  (p) => `Au musée des sciences, ${p.nom} fait tourner une roue de jeu.`,
+  (p) => `À la radio du collège, ${p.nom} fait tourner la roue des cadeaux.`,
+  (p) => `Au camping, ${p.nom} fait tourner la roue du jeu du soir.`,
+];
+type Roue = { intro: (p: Prenom) => string; p: Prenom; contenu: { c: Coul; n: number }[] };
+function roueAvec(ns: number[]): Roue {
+  const cs = melange(SECTEUR.couleurs).slice(0, ns.length);
+  return { intro: pick(INTROS_ROUE), p: pick(PRENOMS), contenu: cs.map((c, i) => ({ c, n: ns[i] })) };
+}
+const totalRoue = (r: Roue) => r.contenu.reduce((a, x) => a + x.n, 0);
+const situationRoue = (r: Roue) =>
+  `${r.intro(r.p)} La roue a ${totalRoue(r)} secteurs de même taille : ${listeFr(r.contenu.map((x) => groupe(SECTEUR, x.c, x.n)))}.`;
+function evtRoue(cs: Coul[], pas = false) {
+  const a = cs.map((c) => accorde(c, false, false));
+  return pas ? `obtenir un secteur qui n’est pas ${a[0]}` : `obtenir un secteur ${a.join(" ou ")}`;
+}
+const favRoue = (r: Roue, cs: Coul[], pas = false) =>
+  r.contenu.filter((x) => (pas ? !cs.includes(x.c) : cs.includes(x.c))).reduce((a, x) => a + x.n, 0);
+const canvasRoue = (r: Roue): CanvasProbabilitesData => ({
+  kind: "probabilites",
+  variant: "roue",
+  roue: { segments: melange(r.contenu.flatMap((x) => Array.from({ length: x.n }, () => ({ label: "", poids: 1, couleur: x.c })))) },
+});
+
+/** Une situation quelconque et un événement : issues numérotées, sac ou roue. */
+type Sit = { texte: string; canvas?: CanvasProbabilitesData; lib: string; fav: number; total: number; detail: string };
+function situationQuelconque(opts: { maxN?: number; compose?: boolean } = {}): Sit {
+  const r = Math.random();
+  if (r < 0.4) {
+    const x = nouveauNum((N) => N <= (opts.maxN ?? 20));
+    const m = x.ctx.mot;
+    let e = evtNumSimple(x);
+    if (opts.compose) {
+      const k = ri(2, x.N - 2);
+      e = pick([EVN.pairSup(m, k), EVN.impairInf(m, k + 1), EVN.pas(m, ri(1, x.N)), EVN.mult(m, ri(3, Math.min(6, x.N))), EVN.supEg(m, k)]);
+    }
+    const fav = favNum(x, e);
+    if (fav === 0 || fav === x.N) return situationQuelconque(opts);
+    return { texte: situationNum(x), canvas: x.ctx.canvas?.(x.N), lib: e.lib, fav, total: x.N, detail: `Issues favorables : ${listeFr(listeFav(x, e).map(String))}.` };
+  }
+  if (r < 0.75) {
+    const u = nouvelleUrne(ri(2, 3), 1, 7);
+    const cs = melange(u.contenu.map((x) => x.c));
+    const genre = opts.compose && u.contenu.length === 3 ? pick(["ou", "pas"] as const) : opts.compose ? "pas" : "une";
+    const choisis = genre === "ou" ? cs.slice(0, 2) : cs.slice(0, 1);
+    const fav = favUrne(u, choisis, genre === "pas");
+    return { texte: situationUrne(u), canvas: canvasUrne(u), lib: evtUrne(u, choisis, genre === "pas"), fav, total: totalUrne(u), detail: `Chaque ${u.ctx.o.s} est une issue : ${fav} ${pl(fav, "issue favorable", "issues favorables")} sur ${totalUrne(u)}.` };
+  }
+  const ro = roueAvec(Array.from({ length: ri(2, 3) }, () => ri(1, 4)));
+  const cs = melange(ro.contenu.map((x) => x.c));
+  const genre = opts.compose && ro.contenu.length === 3 ? pick(["ou", "pas"] as const) : opts.compose ? "pas" : "une";
+  const choisis = genre === "ou" ? cs.slice(0, 2) : cs.slice(0, 1);
+  const fav = favRoue(ro, choisis, genre === "pas");
+  return { texte: situationRoue(ro), canvas: canvasRoue(ro), lib: evtRoue(choisis, genre === "pas"), fav, total: totalRoue(ro), detail: `Chaque secteur est une issue : ${fav} ${pl(fav, "secteur convient", "secteurs conviennent")} sur ${totalRoue(ro)}.` };
+}
+
+/** Un événement impossible ou certain, dans une situation tirée. */
+function situationExtreme(cat: "impossible" | "certain"): Sit {
+  const r = Math.random();
+  if (r < 0.45) {
+    const x = nouveauNum((N) => N <= 30);
+    const m = x.ctx.mot;
+    const N = x.N;
+    const e =
+      cat === "impossible"
+        ? pick([EVN.sup(m, N + ri(0, 4)), EVN.egal(m, N + ri(1, 9)), EVN.supEg(m, N + ri(1, 5)), EVN.egal(m, 0)])
+        : pick([EVN.infEg(m, N + ri(0, 4)), EVN.inf(m, N + ri(1, 5)), EVN.sup(m, 0), EVN.supEg(m, 1)]);
+    const fav = favNum(x, e);
+    return { texte: situationNum(x), canvas: x.ctx.canvas?.(x.N), lib: e.lib, fav, total: N, detail: `${fav} issues favorables sur ${N}.` };
+  }
+  if (r < 0.8) {
+    const u = nouvelleUrne(ri(2, 3), 1, 6);
+    const absente = pick(u.ctx.o.couleurs.filter((c) => !u.contenu.some((y) => y.c === c)));
+    let cs: Coul[];
+    let pas = false;
+    if (cat === "impossible") cs = [absente];
+    else if (u.contenu.length === 2 && Math.random() < 0.5) cs = u.contenu.map((y) => y.c);
+    else { cs = [absente]; pas = true; }
+    const fav = favUrne(u, cs, pas);
+    return { texte: situationUrne(u), canvas: canvasUrne(u), lib: evtUrne(u, cs, pas), fav, total: totalUrne(u), detail: "" };
+  }
+  const ro = roueAvec(Array.from({ length: 2 }, () => ri(1, 4)));
+  const absente = pick(SECTEUR.couleurs.filter((c) => !ro.contenu.some((y) => y.c === c)));
+  const [cs, pas] = cat === "impossible" ? [[absente], false] : pick([[[absente], true], [ro.contenu.map((y) => y.c), false]] as [Coul[], boolean][]);
+  const fav = favRoue(ro, cs, pas);
+  return { texte: situationRoue(ro), canvas: canvasRoue(ro), lib: evtRoue(cs, pas), fav, total: totalRoue(ro), detail: "" };
+}
+
+/** Des expériences aléatoires, et des actions dont le résultat est connu d'avance. */
+const EXP_ALEATOIRES = [
+  "lancer un dé et noter le nombre obtenu",
+  "lancer une pièce de monnaie",
+  "tirer une carte au hasard dans un jeu",
+  "faire tourner une roue de loterie",
+  "tirer au sort le nom d’un gagnant",
+  "piocher un jeton au hasard dans un sac",
+  "prendre un bonbon au hasard dans un paquet",
+  "tirer au sort l’équipe qui commence le match",
+  "écouter une chanson choisie au hasard",
+  "tirer une boule au hasard au loto",
+  "lancer un dé à 12 faces",
+  "tirer au sort l’ordre de passage à l’oral",
+];
+const EXP_DETERMINEES = [
+  "compter les élèves de sa classe",
+  "mesurer la longueur de sa table",
+  "peser un sac de farine",
+  "lire l’heure sur une horloge",
+  "compter les pages d’un livre",
+  "additionner deux nombres donnés",
+  "regarder la date sur un calendrier",
+  "compter les fenêtres du collège",
+  "mesurer sa taille avec une toise",
+  "chercher la capitale de l’Italie dans un atlas",
+  "calculer le prix de deux baguettes",
+  "compter les jours d’une semaine",
+];
+
+/* ═══ 13/10/2026 — ÉQUIPROBABILITÉ, CALCULER, DÉFIS ════════════════════════
+   Mesuré le 13/10 : proba_equiprobabilite 12 squelettes, proba_calculer 8,
+   proba_defi 15 (15 à 18 répétitions sur 20). Les gabarits tirent maintenant
+   leurs situations (sacs, roues, issues numérotées) ; les événements restent
+   entre guillemets, le contenu en clair : le correcteur recompte.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/** « 3/8 », « 0 », « 1 » : une fraction écrite telle quelle. */
+const ecrire = (a: number, b: number) => (a === 0 ? "0" : a === b ? "1" : `${a}/${b}`);
+/** Des propositions de fractions de VALEURS toutes différentes, la bonne en premier. */
+function fractionsDistinctes(juste: [number, number], pieges: [number, number][]): string[] {
+  const vus = [juste[0] / juste[1]];
+  const out = [ecrire(...juste)];
+  for (const [a, b] of pieges) {
+    if (b <= 0 || a < 0) continue;
+    const v = a / b;
+    if (vus.some((w) => Math.abs(w - v) < 1e-9)) continue;
+    vus.push(v);
+    out.push(ecrire(a, b));
+  }
+  return out;
+}
+const QUESTIONS_PROBA = (lib: string) => [
+  `Quelle est la probabilité de l’événement « ${lib} » ?`,
+  `Calcule la probabilité de « ${lib} ».`,
+  `Quelle est la probabilité de « ${lib} » ?`,
+  `Donne la probabilité de « ${lib} », sous forme de fraction.`,
+];
+
+function genCalculer(star: 2 | 3 | 4) {
+  let s: Sit;
+  if (star === 2) {
+    // ★2 : un seul événement simple, issues numérotées ou une couleur
+    do s = situationQuelconque({ maxN: 12 });
+    while (/ou |n’est pas/.test(s.lib));
+  } else s = situationQuelconque({ maxN: star === 3 ? 20 : 30, compose: star === 4 });
+  const text = `${s.texte} ${pick(QUESTIONS_PROBA(s.lib))}`;
+  const explanation = pe(
+    "dans une situation d’équiprobabilité, la probabilité d’un événement est le nombre d’issues favorables divisé par le nombre d’issues possibles.",
+    "on compte les issues possibles, puis les issues favorables.",
+    `${s.detail} Il y a ${s.total} issues possibles.`,
+    `la probabilité est ${ecrire(s.fav, s.total)}${reduite(s.fav, s.total) !== ecrire(s.fav, s.total) ? ` = ${reduite(s.fav, s.total)}` : ""}.`,
+  );
+  if (Math.random() < 0.4) {
+    const ch = fractionsDistinctes([s.fav, s.total], [[s.total - s.fav, s.total], [s.fav, s.total - s.fav], [s.total, s.fav], [s.fav + 1, s.total], [1, s.total]]).slice(0, 4);
+    if (ch.length >= 3) return { text, format: "qcm" as const, choices: melange(ch), expected: [ch[0]], comparator: "mcq_exact" as const, explanation, canvas: s.canvas };
+  }
+  return { text, format: "short" as const, expected: ecritures(s.fav, s.total), comparator: "fraction_decimal_equivalent" as const, explanation, canvas: s.canvas };
+}
+
+/** Deux événements ont-ils la même probabilité ? Quelle couleur a le plus de chances ? */
+function genEquiprobabilite(star: 2 | 3) {
+  const r = Math.random();
+  // la probabilité de chaque issue d'une expérience équiprobable
+  if (r < (star === 2 ? 0.35 : 0.2)) {
+    const x = nouveauNum((N) => N <= 30);
+    const text = `${situationNum(x)} ${pick([`Toutes les issues ont la même probabilité. Quelle est la probabilité de chacune ?`, `Les issues sont équiprobables. Quelle est la probabilité d’${x.ctx.mot === "nombre" ? "obtenir un nombre" : "obtenir un numéro"} donné ?`, `Quelle est la probabilité d’obtenir le ${x.ctx.mot} ${ri(1, x.N)} ?`])}`;
+    return {
+      text,
+      format: "short" as const,
+      expected: [`1/${x.N}`],
+      comparator: "fraction_decimal_equivalent" as const,
+      explanation: pe("des issues équiprobables ont toutes la même probabilité.", "on partage 1 entre toutes les issues.", `Il y a ${x.N} issues, de 1 à ${x.N}.`, `chaque issue a la probabilité 1/${x.N}.`),
+      canvas: x.ctx.canvas?.(x.N),
+    };
+  }
+  // deux couleurs : la même probabilité ?
+  const egales = Math.random() < 0.45;
+  const a = ri(1, 6);
+  const b = egales ? a : pick([1, 2, 3, 4, 5, 6, 7].filter((n) => n !== a));
+  const ns = star === 3 && Math.random() < 0.5 ? [a, b, ri(1, 5)] : [a, b];
+  if (Math.random() < 0.6) {
+    const u = urneAvec(ns);
+    const [c1, c2] = [u.contenu[0].c, u.contenu[1].c];
+    const e1 = evtUrne(u, [c1]), e2 = evtUrne(u, [c2]);
+    if (star === 3 && !egales && Math.random() < 0.5) {
+      const plus = a > b ? c1 : c2;
+      const nomC = (c: Coul) => accorde(c, u.ctx.o.f, false);
+      return {
+        text: `${situationUrne(u)} ${pick([`Entre « ${e1} » et « ${e2} », quel événement est le plus probable ?`, `Qu’est-ce qui a le plus de chances d’arriver : « ${e1} » ou « ${e2} » ?`])}`,
+        format: "qcm" as const,
+        choices: [`« ${e1} »`, `« ${e2} »`, "les deux ont la même probabilité"],
+        expected: [`« ${evtUrne(u, [plus])} »`],
+        comparator: "mcq_exact" as const,
+        explanation: pe("plus un événement a d’issues favorables, plus il est probable.", "on compare les effectifs.", `${a} ${pl(a, u.ctx.o.s, u.ctx.o.p)} ${nomC(c1)} contre ${b} ${nomC(c2)}.`, `« ${evtUrne(u, [plus])} » est le plus probable.`),
+        canvas: canvasUrne(u),
+      };
+    }
+    return {
+      text: `${situationUrne(u)} ${pick([`Les événements « ${e1} » et « ${e2} » ont-ils la même probabilité ?`, `« ${e1} » et « ${e2} » : ces deux événements sont-ils équiprobables ?`])}`,
+      format: "qcm" as const,
+      choices: ["oui", "non"],
+      expected: [egales ? "oui" : "non"],
+      comparator: "mcq_exact" as const,
+      explanation: pe("deux événements sont équiprobables s’ils ont la même probabilité.", "on compte les issues favorables à chacun.", `${a} contre ${b} sur ${totalUrne(u)}.`, egales ? "même nombre d’issues : ils sont équiprobables." : "pas le même nombre d’issues : ils ne sont pas équiprobables."),
+      canvas: canvasUrne(u),
+    };
+  }
+  const ro = roueAvec(ns.map((n) => Math.min(n, 5)));
+  const [c1, c2] = [ro.contenu[0].c, ro.contenu[1].c];
+  const [n1, n2] = [ro.contenu[0].n, ro.contenu[1].n];
+  const e1 = evtRoue([c1]), e2 = evtRoue([c2]);
+  return {
+    text: `${situationRoue(ro)} ${pick([`Les événements « ${e1} » et « ${e2} » ont-ils la même probabilité ?`, `« ${e1} » et « ${e2} » sont-ils équiprobables ?`])}`,
+    format: "qcm" as const,
+    choices: ["oui", "non"],
+    expected: [n1 === n2 ? "oui" : "non"],
+    comparator: "mcq_exact" as const,
+    explanation: pe("deux événements sont équiprobables s’ils ont la même probabilité.", "les secteurs ont la même taille : on compte les secteurs de chaque couleur.", `${n1} contre ${n2} sur ${totalRoue(ro)}.`, n1 === n2 ? "ils sont équiprobables." : "ils ne sont pas équiprobables."),
+    canvas: canvasRoue(ro),
+  };
+}
+
+/** Défis : l'événement contraire, deux sacs à comparer, le contenu à retrouver, l'erreur d'un élève. */
+function genDefiProba(star: 4 | 5) {
+  const r = Math.random();
+  if (r < 0.3) {
+    // le contraire, en situation
+    const s = situationQuelconque({ maxN: 30, compose: true });
+    if (!/n’est pas|ne pas/.test(s.lib)) return genDefiProba(star);
+    const text = `${s.texte} ${pick(QUESTIONS_PROBA(s.lib))}`;
+    return { text, format: "short" as const, expected: ecritures(s.fav, s.total), comparator: "fraction_decimal_equivalent" as const, explanation: pe("l’événement contraire se réalise quand l’événement ne se réalise pas.", "on compte les issues qui conviennent (ou on fait 1 moins la probabilité de l’événement).", `${s.detail}`, `la probabilité est ${ecrire(s.fav, s.total)}.`), canvas: s.canvas };
+  }
+  if (r < 0.55) {
+    // deux sacs
+    const o = pick([OBJ.bille, OBJ.jeton, OBJ.bonbon, OBJ.perle, OBJ.cube]);
+    const [c1, c2] = melange(o.couleurs.filter((c) => c !== "orange")).slice(0, 2) as Coul[];
+    let a1 = ri(1, 6), b1 = ri(1, 9), a2 = ri(1, 6), b2 = ri(1, 9);
+    if (Math.random() < 0.2) [a2, b2] = [a1 * 2, b1 * 2];
+    while (a1 * (a2 + b2) === a2 * (a1 + b1) && Math.random() < 0.7) [a2, b2] = [ri(1, 6), ri(1, 9)];
+    const p1 = a1 / (a1 + b1), p2 = a2 / (a2 + b2);
+    const rep = Math.abs(p1 - p2) < 1e-9 ? "autant dans les deux sacs" : p1 > p2 ? "dans le sac A" : "dans le sac B";
+    const g = (n: number, c: Coul) => `${n} ${n > 1 ? o.p : o.s} ${accorde(c, o.f, n > 1)}`;
+    const p = pick(PRENOMS);
+    const text = `${pick([`${p.nom} a deux sacs.`, "Voici deux sacs."])} Le sac A contient ${g(a1, c1)} et ${g(b1, c2)}. Le sac B contient ${g(a2, c1)} et ${g(b2, c2)}. On tire au hasard dans un seul sac. Dans quel sac a-t-on le plus de chances de tirer ${un(o)} ${o.s} ${accorde(c1, o.f, false)} ?`;
+    return {
+      text,
+      format: "qcm" as const,
+      choices: ["dans le sac A", "dans le sac B", "autant dans les deux sacs"],
+      expected: [rep],
+      comparator: "mcq_exact" as const,
+      explanation: pe("on compare des probabilités, pas des nombres d’objets.", "on calcule la probabilité dans chaque sac.", `Sac A : ${a1}/${a1 + b1}. Sac B : ${a2}/${a2 + b2}.`, `on a le plus de chances ${rep === "autant dans les deux sacs" ? "autant dans les deux sacs" : rep}.`),
+    };
+  }
+  if (r < 0.8) {
+    // le contenu à retrouver : « 3 billes rouges et des billes bleues ; p = 1/4 »
+    const u = urneAvec([1]);
+    const o = u.ctx.o;
+    const c1 = u.contenu[0].c;
+    const c2 = pick(o.couleurs.filter((c) => c !== c1));
+    const d = pick([2, 3, 4, 5]);
+    const k = ri(1, d - 1);
+    const m = ri(1, 4);
+    const a = k * m, tot = d * m;
+    if (tot > 30) return genDefiProba(star);
+    const text = `${u.ctx.pose(u.p, `${a} ${a > 1 ? o.p : o.s} ${accorde(c1, o.f, a > 1)} et des ${o.p} ${accorde(c2, o.f, true)}`)} La probabilité de ${evtUrne(u, [c1])} est ${k}/${d}. Combien y a-t-il de ${o.p} ${accorde(c2, o.f, true)} ?`;
+    return {
+      text,
+      format: "short" as const,
+      expected: [String(tot - a)],
+      comparator: "number_equal" as const,
+      explanation: pe("probabilité = issues favorables ÷ issues possibles.", `${a} ${o.p} sur le total valent ${k}/${d}.`, `${k}/${d} = ${a}/${tot} : il y a ${tot} ${o.p} en tout.`, `il y a ${tot} − ${a} = ${tot - a} ${o.p} ${accorde(c2, o.f, true)}.`),
+    };
+  }
+  // l'erreur d'un élève
+  const s = situationQuelconque({ maxN: 20, compose: star === 5 });
+  const faux: [number, number] = pick([[s.fav, s.total - s.fav], [s.total - s.fav, s.total], [s.fav + 1, s.total]] as [number, number][]);
+  if (Math.abs(faux[0] / faux[1] - s.fav / s.total) < 1e-9 || faux[1] === 0) return genDefiProba(star);
+  const p = pick(PRENOMS);
+  const text = `${s.texte} ${s.texte.includes(p.nom) ? "Un camarade" : p.nom} affirme que la probabilité de « ${s.lib} » est ${ecrire(...faux)}. Quelle est la bonne probabilité ?`;
+  const ch = fractionsDistinctes([s.fav, s.total], [faux, [s.total - s.fav, s.total], [s.fav, s.total - s.fav], [1, s.total]]).slice(0, 4);
+  return {
+    text,
+    format: "qcm" as const,
+    choices: melange(ch),
+    expected: [ch[0]],
+    comparator: "mcq_exact" as const,
+    explanation: pe("probabilité = issues favorables ÷ issues possibles.", "on recompte les issues.", `${s.detail} Il y a ${s.total} issues possibles.`, `la bonne probabilité est ${ecrire(s.fav, s.total)}.`),
+    canvas: s.canvas,
+  };
 }
 
 export const probabilitesBank: TutorBankItemV4[] = [
@@ -361,32 +828,52 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_issue",
     difficulty: 2,
     theme: "neutral",
-    hint: "Compte tous les objets possibles.",
+    hint: "Chaque objet, chaque secteur, chaque numéro est une issue : compte-les tous.",
     tags: ["proba_experience", "issue", "billes", "template"],
+    // 09/10/2026 : sacs, roues coloriées et issues numérotées tirés ; « combien d'issues possibles ? ».
     generate: () => {
-      const rouges = randomInt(2, 5);
-      const bleues = randomInt(1, 4);
-      const total = rouges + bleues;
-
+      let texte: string;
+      let canvas: CanvasProbabilitesData | undefined;
+      let total: number;
+      let detail: string;
+      const r = Math.random();
+      if (r < 0.5) {
+        const u = nouvelleUrne(ri(2, 3), 1, 7);
+        total = totalUrne(u);
+        texte = `${situationUrne(u)} Chaque ${u.ctx.o.s} est une issue.`;
+        canvas = canvasUrne(u);
+        detail = `${listeFr(u.contenu.map((y) => String(y.n)))} : ${total} ${u.ctx.o.p} en tout.`;
+      } else if (r < 0.75) {
+        const ro = roueAvec(Array.from({ length: ri(2, 3) }, () => ri(1, 5)));
+        total = totalRoue(ro);
+        texte = `${situationRoue(ro)} Chaque secteur est une issue.`;
+        canvas = canvasRoue(ro);
+        detail = `${total} secteurs en tout.`;
+      } else {
+        const x = nouveauNum((N) => N >= 10);
+        total = x.N;
+        texte = situationNum(x);
+        canvas = x.ctx.canvas?.(x.N);
+        detail = `les issues vont de 1 à ${x.N}.`;
+      }
+      const text = pick([
+        `${texte} Combien y a-t-il d’issues possibles ?`,
+        `${texte} Combien d’issues possibles compte cette expérience ?`,
+        `${texte} Compte les issues possibles.`,
+        `${texte} Quel est le nombre d’issues possibles ?`,
+      ]);
       return {
-        text: `Un sac contient ${rouges} billes rouges et ${bleues} billes bleues. Combien y a-t-il de billes au total ?`,
+        text,
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
-        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
-          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
-          (`Il y a ${rouges} + ${bleues} = ${total} billes au total.`) +
-          "\n\nConclusion : la probabilité obtenue répond à la question.",
-        canvas: billesCanvas([
-          ...Array.from({ length: rouges }, () => ({
-            couleur: couleurs.rouge,
-            label: "R",
-          })),
-          ...Array.from({ length: bleues }, () => ({
-            couleur: couleurs.bleu,
-            label: "B",
-          })),
-        ]),
+        explanation: pe(
+          "une issue est un résultat possible de l’expérience.",
+          "on compte tous les résultats qui peuvent sortir.",
+          detail,
+          `il y a ${total} issues possibles.`,
+        ),
+        canvas,
       };
     },
   },
@@ -503,36 +990,8 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Regarde si toutes les zones ont le même poids.",
     tags: ["proba_experience", "equiprobabilite", "roue", "template"],
-    generate: () => {
-      const equal = randomChoice([true, false]);
-
-      const segments = equal
-        ? [
-            { label: "A", poids: 1, couleur: couleurs.rouge },
-            { label: "B", poids: 1, couleur: couleurs.bleu },
-            { label: "C", poids: 1, couleur: couleurs.vert },
-          ]
-        : [
-            { label: "A", poids: 2, couleur: couleurs.rouge },
-            { label: "B", poids: 1, couleur: couleurs.bleu },
-            { label: "C", poids: 1, couleur: couleurs.vert },
-          ];
-
-      return {
-        text: "La roue représentée correspond-elle à une situation d’équiprobabilité ?",
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: [equal ? "oui" : "non"],
-        comparator: "mcq_exact",
-        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
-          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
-          (equal
-          ? "Oui. Toutes les zones ont le même poids."
-          : "Non. Les zones n’ont pas toutes le même poids.") +
-          "\n\nConclusion : la probabilité obtenue répond à la question.",
-        canvas: roueCanvas(segments),
-      };
-    },
+    // 13/10/2026 : sacs et roues tirés, deux événements comparés, probabilité de chaque issue.
+    generate: () => genEquiprobabilite(3),
   },
 
   // =========================
@@ -689,38 +1148,21 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Probabilité = cas favorables / cas possibles.",
     tags: ["proba_experience", "calcul", "billes", "template"],
-    generate: () => {
-      const rouges = randomInt(1, 5);
-      const bleues = randomInt(1, 5);
-      const total = rouges + bleues;
-      const result = rawFraction(rouges, total);
-
-      return {
-        text: `Un sac contient ${rouges} bille(s) rouge(s) et ${bleues} bille(s) bleue(s). Quelle est la probabilité de tirer une bille rouge ?`,
-        format: "qcm",
-        choices: makeChoices(result, [
-          rawFraction(bleues, total),
-          rawFraction(rouges, bleues),
-          rawFraction(total, rouges),
-        ]),
-        expected: [result],
-        comparator: "mcq_exact",
-        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
-          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
-          (`Il y a ${rouges} bille(s) rouge(s) sur ${total} bille(s) au total, donc la probabilité est ${result}.`) +
-          "\n\nConclusion : la probabilité obtenue répond à la question.",
-        canvas: billesCanvas([
-          ...Array.from({ length: rouges }, () => ({
-            couleur: couleurs.rouge,
-            label: "R",
-          })),
-          ...Array.from({ length: bleues }, () => ({
-            couleur: couleurs.bleu,
-            label: "B",
-          })),
-        ]),
-      };
-    },
+    // 13/10/2026 : situations tirées (sac, roue, issues numérotées) ; QCM aux pièges de valeurs distinctes.
+    generate: () => genCalculer(3),
+  },
+  {
+    kind: "template",
+    id: "proba_calculer_tpl_s2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_calculer",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Compte les issues qui conviennent, puis toutes les issues.",
+    tags: ["proba_experience", "calcul", "template"],
+    generate: () => genCalculer(2),
   },
   {
     kind: "template",
@@ -733,30 +1175,8 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Compte les faces qui vérifient la condition.",
     tags: ["proba_experience", "calcul", "de", "template", "piege"],
-    generate: () => {
-
-                      const seuil = randomChoice([2, 3, 4] as const);
-
-                      const favorables = [1, 2, 3, 4, 5, 6].filter(
-                        (n): n is 1 | 2 | 3 | 4 | 5 | 6 => n > seuil
-                      );
-
-                      const result = rawFraction(favorables.length, 6);
-
-                      return {
-                        text: `On lance un dé. Quelle est la probabilité d’obtenir un nombre strictement supérieur à ${seuil} ?`,
-                        format: "short",
-                        expected: [result, fraction(favorables.length, 6)],
-                        comparator: "fraction_decimal_equivalent",
-                        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
-          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
-          (`Les issues favorables sont ${favorables.join(
-                          ", "
-                        )} : il y en a ${favorables.length} sur 6. La probabilité est donc ${result}.`) +
-          "\n\nConclusion : la probabilité obtenue répond à la question.",
-                        canvas: deCanvas(favorables),
-                      };
-                    },
+    // 13/10/2026 : événements composés (pair et supérieur à…, « ou », « qui n’est pas »).
+    generate: () => genCalculer(4),
   },
 
   // =========================
@@ -874,52 +1294,25 @@ export const probabilitesBank: TutorBankItemV4[] = [
     notionId: "proba_experience",
     microId: "proba_defi",
     difficulty: 5,
-    theme: "reunion",
+    // 13/10/2026 : plus La Réunion par défaut (un contexte sur quinze) ; contraire, deux sacs,
+    // contenu à retrouver, l'erreur d'un élève.
+    theme: "neutral",
     hint: "Compte les cas favorables et les cas possibles.",
-    tags: ["proba_experience", "reunion", "defi", "template"],
-    generate: () => {
-      const mangue = randomInt(2, 5);
-      const ananas = randomInt(1, 4);
-      const letchis = randomInt(1, 4);
-      const total = mangue + ananas + letchis;
-      const result = rawFraction(mangue, total);
-
-      return {
-        text: `Dans un panier de fruits à La Réunion, il y a ${mangue} mangue(s), ${ananas} ananas et ${letchis} letchi(s). On prend un fruit au hasard. Quelle est la probabilité de prendre une mangue ?`,
-        format: "qcm",
-        // ⚠️ ananas et letchis tombent souvent sur le même nombre : les deux
-        // premiers pièges s'écrivent alors pareil et fondent au dédoublonnage.
-        // Deux pièges de secours : le rapport inversé, et les fruits qui ne
-        // sont PAS des mangues.
-        choices: makeChoices(result, [
-          rawFraction(ananas, total),
-          rawFraction(letchis, total),
-          rawFraction(mangue, ananas),
-          rawFraction(total, mangue),
-          rawFraction(ananas + letchis, total),
-        ]),
-        expected: [result],
-        comparator: "mcq_exact",
-        explanation: "Définition : une probabilité mesure la chance qu’un événement se produise entre 0 et 1.\n\n" +
-          "Méthode : on compte les issues favorables et les issues possibles, puis on forme le quotient.\n\nCalcul : " +
-          (`Il y a ${mangue} mangue(s) sur ${total} fruits au total, donc la probabilité est ${result}.`) +
-          "\n\nConclusion : la probabilité obtenue répond à la question.",
-        canvas: billesCanvas([
-          ...Array.from({ length: mangue }, () => ({
-            label: "M",
-            couleur: couleurs.jaune,
-          })),
-          ...Array.from({ length: ananas }, () => ({
-            label: "A",
-            couleur: couleurs.vert,
-          })),
-          ...Array.from({ length: letchis }, () => ({
-            label: "L",
-            couleur: couleurs.rouge,
-          })),
-        ]),
-      };
-    },
+    tags: ["proba_experience", "defi", "template"],
+    generate: () => genDefiProba(5),
+  },
+  {
+    kind: "template",
+    id: "proba_defi_tpl_s4",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Une probabilité se compare en fractions, pas en nombre d’objets.",
+    tags: ["proba_experience", "defi", "template"],
+    generate: () => genDefiProba(4),
   },
   {
     kind: "template",
@@ -935,38 +1328,8 @@ export const probabilitesBank: TutorBankItemV4[] = [
     // 08/10/2026 : précise et simple (Frédéric). Avant : « Explique pourquoi Rouge est l’issue la plus
     // probable sur cette roue » (toujours la même roue). Désormais : nombres de secteurs tirés,
     // et soit la couleur la plus probable (QCM), soit la probabilité d’une couleur (réponse courte).
-    generate: () => {
-      const noms = ["Rouge", "Bleu", "Vert"] as const;
-      const teintes = [couleurs.rouge, couleurs.bleu, couleurs.vert];
-      // Trois nombres distincts : une seule couleur est la plus probable.
-      const ns = shuffle([randomInt(4, 5), randomInt(2, 3), 1]);
-      const total = ns[0] + ns[1] + ns[2];
-      const decrire = `La roue a ${total} secteurs de même taille : ${ns[0]} rouge(s), ${ns[1]} bleu(s), ${ns[2]} vert(s).`;
-      const canvas = roueCanvas(noms.map((label, i) => ({ label, poids: ns[i], couleur: teintes[i] })));
-      if (Math.random() < 0.5) {
-        const iMax = ns.indexOf(Math.max(...ns));
-        return {
-          text: `${decrire} Quelle couleur a le plus de chances de sortir ?`,
-          format: "qcm" as const,
-          choices: [...noms],
-          expected: [noms[iMax]],
-          comparator: "mcq_exact" as const,
-          explanation: expl(`${noms[iMax]} occupe ${ns[iMax]} secteurs sur ${total} : c’est la couleur qui a le plus de secteurs, donc le plus de chances de sortir.`),
-          canvas,
-        };
-      }
-      const i = randomInt(0, 2);
-      const bonne = rawFraction(ns[i], total);
-      const reduite = fraction(ns[i], total);
-      return {
-        text: `${decrire} Quelle est la probabilité d’obtenir ${noms[i]} ?`,
-        format: "short" as const,
-        expected: bonne === reduite ? [bonne] : [bonne, reduite],
-        comparator: "fraction_decimal_equivalent" as const,
-        explanation: expl(`${noms[i]} occupe ${ns[i]} secteur(s) sur ${total}. La probabilité est ${bonne}${bonne === reduite ? "" : ` = ${reduite}`}.`),
-        canvas,
-      };
-    },
+    // 13/10/2026 : roues et sacs tirés, défis variés (fini « rouge(s) ») ; même générateur que proba_defi_tpl_1.
+    generate: () => genDefiProba(5),
   },
 
   // =========================
@@ -1132,21 +1495,29 @@ export const probabilitesBank: TutorBankItemV4[] = [
     microId: "proba_issue",
     difficulty: 2,
     theme: "neutral",
-    hint: "Compte les billes de la couleur demandée.",
+    hint: "Garde seulement les issues qui réalisent l’événement, et compte-les.",
     tags: ["proba_experience", "issue", "billes", "template"],
+    // 09/10/2026 : situations tirées (sac, roue, issues numérotées) × tournures × prénoms.
     generate: () => {
-      const rouges = randomInt(2, 5);
-      const bleues = randomInt(2, 5);
+      const s = situationQuelconque({ maxN: 20 });
+      const text = pick([
+        `${s.texte} Combien d’issues réalisent l’événement « ${s.lib} » ?`,
+        `${s.texte} Combien y a-t-il d’issues favorables à « ${s.lib} » ?`,
+        `${s.texte} Compte les issues favorables à l’événement « ${s.lib} ».`,
+        `${s.texte} Pour l’événement « ${s.lib} », combien d’issues conviennent ?`,
+      ]);
       return {
-        text: `Un sac contient ${rouges} billes rouges et ${bleues} billes bleues. Combien y a-t-il d’issues favorables à « tirer une bille rouge » ?`,
+        text,
         format: "short",
-        expected: [String(rouges)],
+        expected: [String(s.fav)],
         comparator: "number_equal",
-        explanation: expl(`Il y a ${rouges} billes rouges : ${rouges} issues favorables.`),
-        canvas: billesCanvas([
-          ...Array.from({ length: rouges }, () => ({ couleur: couleurs.rouge, label: "R" })),
-          ...Array.from({ length: bleues }, () => ({ couleur: couleurs.bleu, label: "B" })),
-        ]),
+        explanation: pe(
+          "une issue favorable est un résultat qui réalise l’événement.",
+          "on écrit les issues possibles, puis on garde celles qui conviennent.",
+          s.detail,
+          `il y a ${s.fav} ${pl(s.fav, "issue favorable", "issues favorables")}.`,
+        ),
+        canvas: s.canvas,
       };
     },
   },
@@ -1242,27 +1613,21 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Compte les billes de chaque couleur.",
     tags: ["proba_experience", "equiprobabilite", "billes", "template"],
-    generate: () => {
-      const equal = randomChoice([true, false]);
-      const rouges = 3;
-      const bleues = equal ? 3 : randomInt(1, 2);
-      return {
-        text: `Un sac contient ${rouges} billes rouges et ${bleues} billes bleues. Tirer rouge et tirer bleu sont-ils équiprobables ?`,
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: [equal ? "oui" : "non"],
-        comparator: "mcq_exact",
-        explanation: expl(
-          equal
-            ? `Il y a ${rouges} rouges et ${bleues} bleues : mêmes quantités, donc équiprobable.`
-            : `Il y a ${rouges} rouges et ${bleues} bleues : quantités différentes, donc pas équiprobable.`
-        ),
-        canvas: billesCanvas([
-          ...Array.from({ length: rouges }, () => ({ couleur: couleurs.rouge, label: "R" })),
-          ...Array.from({ length: bleues }, () => ({ couleur: couleurs.bleu, label: "B" })),
-        ]),
-      };
-    },
+    // 13/10/2026 : contextes tirés (sacs, paquets, roues), effectifs tirés.
+    generate: () => genEquiprobabilite(3),
+  },
+  {
+    kind: "template",
+    id: "proba_equiprobabilite_tpl_s2",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_equiprobabilite",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Deux événements sont équiprobables s’ils ont autant d’issues favorables.",
+    tags: ["proba_experience", "equiprobabilite", "template"],
+    generate: () => genEquiprobabilite(2),
   },
 
   // =========================
@@ -1297,22 +1662,8 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Probabilité = favorables ÷ total.",
     tags: ["proba_experience", "calculer", "billes", "template"],
-    generate: () => {
-      const rouges = randomInt(1, 4);
-      const bleues = randomInt(1, 4);
-      const total = rouges + bleues;
-      return {
-        text: `Un sac contient ${rouges} bille(s) rouge(s) et ${bleues} bille(s) bleue(s). Quelle est la probabilité de tirer une bille rouge ?`,
-        format: "short",
-        expected: [rawFraction(rouges, total), fraction(rouges, total)],
-        comparator: "fraction_decimal_equivalent",
-        explanation: expl(`Il y a ${rouges} billes rouges sur ${total} au total : probabilité = ${rawFraction(rouges, total)}.`),
-        canvas: billesCanvas([
-          ...Array.from({ length: rouges }, () => ({ couleur: couleurs.rouge, label: "R" })),
-          ...Array.from({ length: bleues }, () => ({ couleur: couleurs.bleu, label: "B" })),
-        ]),
-      };
-    },
+    // 13/10/2026 : situations tirées (fini « bille(s) rouge(s) »).
+    generate: () => genCalculer(3),
   },
 
   // =========================
@@ -1387,19 +1738,8 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Compte les issues favorables sur 6.",
     tags: ["proba_experience", "defi", "de", "template"],
-    generate: () => {
-      const seuil = randomChoice([2, 3, 4]);
-      const favorables = 6 - seuil;
-      const faces = Array.from({ length: 6 }, (_, i) => i + 1).filter((n) => n > seuil);
-      return {
-        text: `On lance un dé. Quelle est la probabilité d’obtenir un nombre strictement supérieur à ${seuil} ?`,
-        format: "short",
-        expected: [rawFraction(favorables, 6), fraction(favorables, 6)],
-        comparator: "fraction_decimal_equivalent",
-        explanation: expl(`Les issues favorables sont ${faces.join(", ")} : ${favorables} sur 6, soit ${rawFraction(favorables, 6)}.`),
-        canvas: deCanvas(faces),
-      };
-    },
+    // 13/10/2026 : événements composés dans des situations tirées.
+    generate: () => (Math.random() < 0.5 ? genCalculer(4) : genDefiProba(5)),
   },
 
   /* ===== PROBA_VOCABULAIRE =====
@@ -1418,48 +1758,55 @@ export const probabilitesBank: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Une issue est UN résultat ; un événement peut en regrouper plusieurs.",
     tags: ["proba_experience", "vocabulaire", "template"],
+    // 09/10/2026 : situations tirées (issues numérotées, sac, roue). « Une issue » ou
+    // « un événement » était ambigu (« obtenir 5 » est aussi un événement) : les
+    // propositions disent maintenant combien d'issues l'événement regroupe.
     generate: () => {
-      const cas = randomChoice([
-        {
-          phrase: "obtenir 5 en lançant un dé",
-          bonne: "une issue",
-          pourquoi: "c’est un seul résultat possible du lancer, on ne peut pas le décomposer.",
-        },
-        {
-          phrase: "obtenir un nombre impair en lançant un dé",
-          bonne: "un événement",
-          pourquoi: "cette phrase regroupe trois issues à la fois : 1, 3 et 5.",
-        },
-        {
-          phrase: "tirer la bille rouge d’un sac qui en contient une seule",
-          bonne: "une issue",
-          pourquoi: "une seule bille répond à la description : c’est un résultat unique.",
-        },
-        {
-          phrase: "obtenir un nombre plus grand que 4 en lançant un dé",
-          bonne: "un événement",
-          pourquoi: "deux issues conviennent, 5 et 6 : la phrase en regroupe plusieurs.",
-        },
-        {
-          phrase: "obtenir pile en lançant une pièce",
-          bonne: "une issue",
-          pourquoi: "la pièce n’a que deux résultats possibles, et pile en est un seul.",
-        },
+      let s: Sit;
+      const r = Math.random();
+      if (r < 0.3) {
+        // une seule issue : « obtenir le nombre 5 », ou la seule bille d'une couleur
+        const x = nouveauNum((N) => N <= 20);
+        const k = ri(1, x.N);
+        s = { texte: situationNum(x), canvas: x.ctx.canvas?.(x.N), lib: EVN.egal(x.ctx.mot, k).lib, fav: 1, total: x.N, detail: `Seul le ${k} convient.` };
+      } else if (r < 0.45) {
+        const u = urneAvec(melange([1, ri(2, 6), ri(1, 5)]).slice(0, ri(2, 3)));
+        const c = u.contenu.find((y) => y.n === 1)?.c ?? u.contenu[0].c;
+        const fav = favUrne(u, [c]);
+        s = { texte: situationUrne(u), canvas: canvasUrne(u), lib: evtUrne(u, [c]), fav, total: totalUrne(u), detail: `Chaque ${u.ctx.o.s} est une issue : ${fav} ${pl(fav, "issue convient", "issues conviennent")}.` };
+      } else if (r < 0.55) {
+        // impossible : aucune issue
+        const x = nouveauNum((N) => N <= 20);
+        s = { texte: situationNum(x), canvas: x.ctx.canvas?.(x.N), lib: EVN.sup(x.ctx.mot, x.N + ri(0, 3)).lib, fav: 0, total: x.N, detail: `Aucune issue ne dépasse ${x.N}.` };
+      } else {
+        do s = situationQuelconque({ maxN: 20 });
+        while (s.fav < 2);
+      }
+      const bonne = s.fav === 0 ? "un événement impossible : aucune issue" : s.fav === 1 ? "une seule issue" : "un événement qui regroupe plusieurs issues";
+      const text = pick([
+        `${s.texte} Que représente « ${s.lib} » ?`,
+        `${s.texte} Dans cette expérience, « ${s.lib} » est…`,
+        `${s.texte} Comment décrire « ${s.lib} » ?`,
+        `${s.texte} Choisis la bonne description de « ${s.lib} ».`,
       ]);
       return {
-        text: `En probabilités, comment appelle-t-on « ${cas.phrase} » ?`,
+        text,
         format: "qcm",
-        choices: makeChoices(cas.bonne, [
-          "une issue",
-          "un événement",
+        choices: melange([
+          "une seule issue",
+          "un événement qui regroupe plusieurs issues",
+          "un événement impossible : aucune issue",
           "une expérience aléatoire",
-          "une fréquence",
         ]),
-        expected: [cas.bonne],
+        expected: [bonne],
         comparator: "mcq_exact",
-        explanation: expl(
-          `C’est ${cas.bonne} : ${cas.pourquoi} Rappel : une issue est UN résultat possible, un événement peut en regrouper plusieurs.`,
+        explanation: pe(
+          "une issue est UN résultat possible ; un événement peut regrouper plusieurs issues, une seule, ou aucune.",
+          "on compte les issues qui réalisent l’événement.",
+          s.fav ? s.detail : "Aucune issue ne convient.",
+          `« ${s.lib} » : ${bonne}.`,
         ),
+        canvas: s.canvas,
       };
     },
   },
@@ -1476,55 +1823,260 @@ export const probabilitesBank: TutorBankItemV4[] = [
     tags: ["proba_experience", "vocabulaire", "qcm", "template"],
     // 08/10/2026 : précise et simple (Frédéric). Avant : « … certain, impossible, ou ni l’un ni l’autre ? Explique. »
     // corrigé par un mot-clé. Désormais un QCM à trois réponses, et deux cas « ni l’un ni l’autre ».
+    // 09/10/2026 : situations tirées ; un tiers impossible, un tiers certain, un tiers ni l'un ni l'autre.
     generate: () => {
-      const cas = randomChoice([
-        {
-          phrase: "obtenir 7 en lançant un dé à six faces",
-          nature: "impossible",
-          proba: "0",
-          pourquoi: "aucune face ne porte le 7 : aucune issue ne convient.",
-        },
-        {
-          phrase: "obtenir un nombre plus petit que 7 en lançant un dé à six faces",
-          nature: "certain",
-          proba: "1",
-          pourquoi: "les six faces conviennent : toutes les issues sont favorables.",
-        },
-        {
-          phrase: "tirer une bille verte dans un sac qui ne contient que des billes rouges",
-          nature: "impossible",
-          proba: "0",
-          pourquoi: "aucune bille verte ne s’y trouve : aucune issue ne convient.",
-        },
-        {
-          phrase: "obtenir pile ou face en lançant une pièce",
-          nature: "certain",
-          proba: "1",
-          pourquoi: "la pièce retombe forcément sur l’une des deux faces.",
-        },
-        {
-          phrase: "obtenir 6 en lançant un dé à six faces",
-          nature: "ni l’un ni l’autre",
-          proba: "1/6",
-          pourquoi: "le 6 peut sortir, mais pas à coup sûr : une issue sur six convient.",
-        },
-        {
-          phrase: "tirer une bille rouge dans un sac de 2 billes rouges et 3 billes bleues",
-          nature: "ni l’un ni l’autre",
-          proba: "2/5",
-          pourquoi: "une bille rouge peut sortir, mais une bleue aussi : 2 issues sur 5 conviennent.",
-        },
+      const cat = pick(["impossible", "certain", "ni l’un ni l’autre"] as const);
+      const s = cat === "ni l’un ni l’autre" ? situationQuelconque() : situationExtreme(cat);
+      const text = pick([
+        `${s.texte} L’événement « ${s.lib} » est-il certain, impossible, ou ni l’un ni l’autre ?`,
+        `${s.texte} Comment qualifier l’événement « ${s.lib} » ?`,
+        `${s.texte} « ${s.lib} » : est-ce certain, impossible, ou ni l’un ni l’autre ?`,
+        `${s.texte} Choisis le mot qui convient pour « ${s.lib} ».`,
       ]);
+      const proba = s.fav === 0 ? "0" : s.fav === s.total ? "1" : `${s.fav}/${s.total}`;
       return {
-        text: `L’événement « ${cas.phrase} » est-il certain, impossible, ou ni l’un ni l’autre ?`,
+        text,
         format: "qcm",
         choices: ["certain", "impossible", "ni l’un ni l’autre"],
-        expected: [cas.nature],
+        expected: [cat],
         comparator: "mcq_exact",
-        explanation: expl(
-          cas.nature === "ni l’un ni l’autre"
-            ? `Ni l’un ni l’autre : ${cas.pourquoi} Sa probabilité vaut ${cas.proba}, entre 0 et 1.`
-            : `Cet événement est ${cas.nature} : ${cas.pourquoi} Sa probabilité vaut donc ${cas.proba}.`,
+        explanation: pe(
+          "un événement impossible n’a aucune issue favorable (probabilité 0) ; un événement certain les a toutes (probabilité 1).",
+          "on compte les issues favorables et on les compare au total.",
+          `${s.fav} ${pl(s.fav, "issue favorable", "issues favorables")} sur ${s.total}.`,
+          cat === "ni l’un ni l’autre" ? `ni l’un ni l’autre : la probabilité vaut ${proba}, entre 0 et 1.` : `l’événement est ${cat} : sa probabilité vaut ${proba}.`,
+        ),
+        canvas: s.canvas,
+      };
+    },
+  },
+
+  /* ===== PROBA_VOCABULAIRE : ★1, ★2, ★4 (09/10/2026) =====
+     Les étoiles 1 et 2 n'avaient que des items figés. */
+  {
+    kind: "template",
+    id: "proba_vocabulaire_tpl_alea",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Aléatoire : on ne peut pas savoir le résultat à l’avance, c’est le hasard qui décide.",
+    tags: ["proba_experience", "vocabulaire", "qcm", "template"],
+    generate: () => {
+      const p = pick(PRENOMS);
+      const pas = Math.random() < 0.3;
+      const [justes, faux] = pas ? [EXP_DETERMINEES, EXP_ALEATOIRES] : [EXP_ALEATOIRES, EXP_DETERMINEES];
+      const bonne = pick(justes);
+      const choices = melange([bonne, ...melange(faux).slice(0, 3)]);
+      const text = pas
+        ? pick([
+            `Laquelle de ces expériences n’est PAS aléatoire ?`,
+            `${p.nom} doit trouver l’expérience qui ne dépend PAS du hasard. Laquelle ?`,
+            `Pour ${p.nom}, quelle expérience a un résultat qu’on peut prévoir à l’avance ?`,
+          ])
+        : pick([
+            `Laquelle de ces expériences est aléatoire ?`,
+            `${p.nom} hésite entre quatre activités. Laquelle est une expérience aléatoire ?`,
+            `Pour ${p.nom}, quelle expérience a un résultat qu’on ne peut pas prévoir ?`,
+            `${p.nom} cherche une expérience qui dépend du hasard. Laquelle choisir ?`,
+            `En cours, ${p.nom} doit citer une expérience aléatoire. Laquelle convient ?`,
+          ]);
+      return {
+        text,
+        format: "qcm",
+        choices,
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: pe(
+          "une expérience est aléatoire quand on connaît les résultats possibles, mais qu’on ne peut pas savoir à l’avance lequel sortira.",
+          "pour chaque expérience, on se demande : si on la refait, peut-on obtenir un autre résultat ?",
+          pas ? `« ${bonne} » donne toujours le même résultat : rien n’est dû au hasard.` : `« ${bonne} » : le résultat dépend du hasard.`,
+          pas ? `l’expérience qui n’est pas aléatoire est « ${bonne} ».` : `l’expérience aléatoire est « ${bonne} ».`,
+        ),
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "proba_vocabulaire_tpl_issue_possible",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Une issue est un résultat qui peut vraiment sortir.",
+    tags: ["proba_experience", "vocabulaire", "issue", "qcm", "template"],
+    generate: () => {
+      const pas = Math.random() < 0.35;
+      let texte: string;
+      let canvas: CanvasProbabilitesData | undefined;
+      let possibles: string[];
+      let impossibles: string[];
+      if (Math.random() < 0.55) {
+        const x = nouveauNum((N) => N <= 20);
+        const m = x.ctx.mot;
+        texte = situationNum(x);
+        canvas = x.ctx.canvas?.(x.N);
+        possibles = melange(Array.from({ length: x.N }, (_, i) => `le ${m} ${i + 1}`));
+        impossibles = melange([0, x.N + 1, x.N + 2, x.N + ri(3, 5), x.N + ri(6, 10)].map((k) => `le ${m} ${k}`));
+      } else {
+        // assez de couleurs absentes pour trois leurres (ou trois couleurs présentes)
+        const u = urneAvec(Array.from({ length: pas ? 3 : 2 }, () => ri(1, 6)), 5);
+        const o = u.ctx.o;
+        texte = situationUrne(u);
+        canvas = canvasUrne(u);
+        possibles = melange(u.contenu.map((y) => `${un(o)} ${o.s} ${accorde(y.c, o.f, false)}`));
+        impossibles = melange(o.couleurs.filter((c) => !u.contenu.some((y) => y.c === c)).map((c) => `${un(o)} ${o.s} ${accorde(c, o.f, false)}`));
+      }
+      const [justes, faux] = pas ? [impossibles, possibles] : [possibles, impossibles];
+      const bonne = justes[0];
+      const text = pas
+        ? pick([`${texte} Lequel de ces résultats n’est PAS une issue possible ?`, `${texte} Quel résultat ne peut PAS sortir ?`, `${texte} Une seule proposition n’est pas une issue. Laquelle ?`])
+        : pick([`${texte} Lequel de ces résultats est une issue possible ?`, `${texte} Quel résultat peut sortir ?`, `${texte} Une seule proposition est une issue. Laquelle ?`]);
+      return {
+        text,
+        format: "qcm",
+        choices: melange([bonne, ...faux.slice(0, 3)]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: pe(
+          "une issue est un résultat possible de l’expérience.",
+          "on écrit la liste des résultats qui peuvent sortir.",
+          pas ? `« ${bonne} » ne fait pas partie des résultats possibles.` : `« ${bonne} » fait partie des résultats possibles ; les autres propositions ne peuvent pas sortir.`,
+          pas ? `« ${bonne} » n’est pas une issue.` : `« ${bonne} » est une issue.`,
+        ),
+        canvas,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "proba_vocabulaire_tpl_01",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Impossible : probabilité 0. Certain : probabilité 1.",
+    tags: ["proba_experience", "vocabulaire", "template"],
+    generate: () => {
+      const cat = pick(["impossible", "certain"] as const);
+      const s = situationExtreme(cat);
+      const rep = cat === "impossible" ? "0" : "1";
+      const text = pick([
+        `${s.texte} Quelle est la probabilité de l’événement « ${s.lib} » ?`,
+        `${s.texte} Donne la probabilité de l’événement « ${s.lib} ».`,
+        `${s.texte} On note A l’événement « ${s.lib} ». Que vaut la probabilité de A ?`,
+        `${s.texte} Écris la probabilité de l’événement « ${s.lib} ».`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: [rep],
+        comparator: "number_equal",
+        explanation: pe(
+          "un événement impossible a pour probabilité 0 ; un événement certain a pour probabilité 1.",
+          "on compte les issues favorables.",
+          `${s.fav} ${pl(s.fav, "issue favorable", "issues favorables")} sur ${s.total} : l’événement est ${cat}.`,
+          `la probabilité vaut ${rep}.`,
+        ),
+        canvas: s.canvas,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "proba_vocabulaire_tpl_impcert",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Peut-il arriver ? Arrive-t-il à coup sûr ?",
+    tags: ["proba_experience", "vocabulaire", "qcm", "template"],
+    generate: () => {
+      const cat = pick(["impossible", "certain"] as const);
+      const s = situationExtreme(cat);
+      const text = pick([
+        `${s.texte} L’événement « ${s.lib} » est…`,
+        `${s.texte} Comment appelle-t-on l’événement « ${s.lib} » ?`,
+        `${s.texte} Quel mot convient pour « ${s.lib} » ?`,
+      ]);
+      return {
+        text,
+        format: "qcm",
+        choices: ["impossible", "certain", "possible mais pas certain"],
+        expected: [cat],
+        comparator: "mcq_exact",
+        explanation: pe(
+          "un événement impossible ne se produit jamais ; un événement certain se produit toujours.",
+          "on compte les issues qui conviennent.",
+          `${s.fav} ${pl(s.fav, "issue convient", "issues conviennent")} sur ${s.total}.`,
+          `l’événement est ${cat}.`,
+        ),
+        canvas: s.canvas,
+      };
+    },
+  },
+  {
+    kind: "template",
+    id: "proba_vocabulaire_tpl_bornes",
+    niveau: "5e",
+    matiere: "maths",
+    notionId: "proba_experience",
+    microId: "proba_vocabulaire",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Une probabilité est toujours entre 0 et 1.",
+    tags: ["proba_experience", "vocabulaire", "bornes", "qcm", "template"],
+    generate: () => {
+      const p = pick(PRENOMS);
+      const valide = () =>
+        pick([
+          () => { const b = ri(3, 12); return `${ri(1, b - 1)}/${b}`; },
+          () => `0,${ri(1, 9)}${pick(["", String(ri(1, 9))])}`,
+          () => pick(["0", "1"]),
+        ])();
+      const invalide = () =>
+        pick([
+          () => { const b = ri(2, 9); return `${b + ri(1, 5)}/${b}`; },
+          () => `1,${ri(1, 9)}`,
+          () => `${ri(2, 6)}`,
+          () => `−0,${ri(1, 9)}`,
+        ])();
+      const peut = Math.random() < 0.35;
+      const [faire, autre] = peut ? [valide, invalide] : [invalide, valide];
+      const bonne = faire();
+      const leurres = new Set<string>();
+      while (leurres.size < 3) { const l = autre(); if (l !== bonne) leurres.add(l); }
+      const text = peut
+        ? pick([
+            `Lequel de ces nombres peut être une probabilité ?`,
+            `${p.nom} a trouvé quatre résultats. Un seul peut être une probabilité. Lequel ?`,
+            `Quel nombre ${p.nom} peut-${p.f ? "elle" : "il"} donner comme probabilité ?`,
+          ])
+        : pick([
+            `Lequel de ces nombres ne peut pas être une probabilité ?`,
+            `${p.nom} a calculé quatre probabilités. Laquelle est forcément fausse ?`,
+            `Un seul de ces nombres ne peut pas être une probabilité. Lequel ?`,
+            `${p.nom} a fait une erreur : un de ses résultats ne peut pas être une probabilité. Lequel ?`,
+          ]);
+      return {
+        text,
+        format: "qcm",
+        choices: melange([bonne, ...leurres]),
+        expected: [bonne],
+        comparator: "mcq_exact",
+        explanation: pe(
+          "une probabilité est un nombre compris entre 0 (impossible) et 1 (certain).",
+          "on compare chaque nombre à 0 et à 1.",
+          peut ? `${bonne} est entre 0 et 1 ; les autres sont plus grands que 1 ou négatifs.` : `${bonne} est ${bonne.startsWith("−") ? "négatif" : "plus grand que 1"}.`,
+          peut ? `${bonne} peut être une probabilité.` : `${bonne} ne peut pas être une probabilité.`,
         ),
       };
     },
