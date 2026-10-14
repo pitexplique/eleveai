@@ -1,0 +1,5 @@
+{
+  "00-accroche": "3 x fois 2 x, ça fait 6 x ?",
+  "01-image": "Un rectangle de 3 x sur 2 x. Je le découpe : 3 fois 2, 6 petits carrés de x sur x. Chaque carré a pour aire x au carré. L'aire : 6 x au carré, pas 6 x. Mais 3 x plus 2 x, c'est 5 x : là, on additionne.",
+  "02-question": "Réduis : 4 x fois 3 x. Et 4 x plus 3 x ? Réponds en commentaire !"
+}

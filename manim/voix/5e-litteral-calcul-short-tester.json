@@ -1,0 +1,8 @@
+{
+  "00-accroche": "x plus x égale x fois x. C'est vrai pour x égale 2 ?",
+  "01-calcul": "Testons. x plus x : 2 plus 2, 4. x fois x : 2 fois 2, 4. 4 égale 4 : l'égalité est vraie pour x égale 2.",
+  "02-piege": "Alors elle est toujours vraie ? Beaucoup le croient. Et c'est faux !",
+  "03-contre": "Testons x égale 3. x plus x : 6. x fois x : 9. 6 n'est pas égal à 9. Vraie pour une valeur, ça ne veut pas dire vraie pour toutes.",
+  "04-defi": "À toi. L'égalité 2 x plus 1 égale 7 est-elle vraie pour x égale 3 ? Et pour x égale 4 ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur le calcul littéral est juste en dessous."
+}

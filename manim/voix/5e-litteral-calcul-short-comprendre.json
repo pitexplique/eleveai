@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Si x vaut 2, combien vaut 3 x ?",
+  "01-piege": "Beaucoup répondent 32. On colle le 3 et le 2. Et c'est faux !",
+  "02-sens": "3 x, ça veut dire 3 fois x. Le signe fois est caché entre le nombre et la lettre. Pour x égale 2, 3 x, c'est 3 fois 2 : 6.",
+  "03-regle": "Un nombre collé à une lettre, c'est toujours une multiplication. Ce nombre s'appelle le coefficient. Et 3 plus x, ça s'écrit avec le signe plus : on ne le cache jamais.",
+  "04-defi": "À toi. Si a vaut 5, combien vaut 4 a ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur le calcul littéral est juste en dessous."
+}

@@ -1,0 +1,12 @@
+{
+  "00-garde": "Calculer la valeur d'une expression. Et si la valeur est négative ?",
+  "01-formule": "Une voiture roule à v kilomètres par heure. Sa distance de freinage sur route sèche, en mètres, est environ v au carré divisé par 100. À 50 kilomètres par heure : 50 au carré, 2 500, divisé par 100 : 25 mètres.",
+  "02-double": "Et à 100 kilomètres par heure ? 100 au carré, 10 000, divisé par 100 : 100 mètres. La vitesse double, mais la distance est multipliée par 4. Le carré change tout.",
+  "03-negatif": "Avec un nombre négatif, des parenthèses. 2 a moins 5, pour a égale moins 3 : 2 fois, parenthèse, moins 3, moins 5. Moins 6 moins 5 : moins 11.",
+  "04-carre": "Le carré d'un négatif. x au carré, pour x égale moins 3 : parenthèse, moins 3, au carré, c'est moins 3 fois moins 3 : plus 9. Un carré n'est jamais négatif.",
+  "05-verifier": "Calculer sert aussi à vérifier. Un élève dit que x au carré plus 1 vaut toujours plus que 2 x. Pour x égale 3 : 10 et 6, vrai. Pour x égale 1 : 2 et 2. Égaux ! Un seul exemple suffit à montrer qu'une affirmation est fausse.",
+  "06-defi": "À toi de jouer. Calcule 3 x au carré moins 2 x, pour x égale moins 2. Mets pause, et cherche !",
+  "06b-correction": "Correction. x au carré : parenthèse, moins 2, au carré, 4. 3 fois 4 : 12. Moins 2 fois moins 2 : plus 4. 12 plus 4 : 16.",
+  "07-finale": "Ce que tu as appris. Une formule se calcule en remplaçant la lettre. Un négatif se protège par des parenthèses. Et un seul contre-exemple suffit à prouver qu'une affirmation est fausse. L'épisode 3 t'attend : réduire.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

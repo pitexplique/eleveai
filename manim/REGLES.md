@@ -55,12 +55,33 @@ Les vidéos sont **muettes** (choix du 13/07 pour produire en volume sans goulot
 - **Couleurs** : importées de `manim/charte.py`, jamais redéfinies. Jaune = titres, bleu = calcul en cours, orange = retenues/pauses, vert = résultats justes et vérifications, rouge = erreurs/« impossible ».
 - **Mascotte** : `MascotteMargouillat` de `manim/mascotte.py`, présente sur chaque écran (coin bas-droit, scale ≈ 0.5 ; plus grande sur l'écran d'accueil). ⚠️ **JAMAIS le π** (signature 3Blue1Brown/Manim). Le dessin est provisoire : quand le concours logo élèves donnera le margouillat officiel, on ne change QUE `mascotte.py`.
 - **Structure des écrans** (signature EleveAI) :
-  1. Accueil : titre + « Maths <classe> » + question d'accroche
+  1. Page de garde : le NOM de la notion + sa QUESTION (+ la ceinture), puis tout de suite la situation CONCRÈTE (⛔ 12/10/2026 : ni formule ni « ce que tu sauras faire » au début ; le bilan va à la fin, et depuis le 13/10/2026 il s'intitule « Ce que tu as appris » — plus jamais « ce que tu sais / sauras faire »)
   2. 2 à 4 écrans de démonstration ANIMÉE (le cœur)
   3. Défi + pause orange (« Mets pause et cherche ! »)
   4. Correction
   5. À retenir (3 lignes max) + signature `SIGNATURE`
 - **Fond noir** (défaut Manim), textes blancs, français partout.
+
+## ⛔ Les CEINTURES de difficulté — RÈGLE DU 11/10/2026
+
+Frédéric, 11/10/2026 : « à partir de maintenant il faudrait que apparaisse une étoile de difficulté ou de ceinture », et « tous les animaux ne montent pas de la même façon en haut de l'arbre ». Une même notion se décline du plus visuel au plus exigeant, et chaque élève y monte par son chemin.
+
+- **L'échelle est celle du judo**, dans cet ordre : blanche, jaune, orange, verte, bleue, marron, noire.
+- **Chaque vidéo affiche sa ceinture, sans exception.** En paysage, la page de garde montre l'échelle entière, avec la ceinture du jour grandie, en couleur, et nommée (« Ceinture verte ») ; les autres restent pâles. Dans un short aussi, c'est l'ÉCHELLE ENTIÈRE, sous le titre (⛔ 13/10/2026, Frédéric : « affiche l'ordre des ceintures pour que l'élève sache où se situe la sienne ») : `echelle_ceintures("blanche").scale_to_fit_width(config.frame_width * 0.7)`. Les miniatures (paysage et short) la dessinent aussi : `echelle()` de `miniature_short_expression.py`.
+- **Les ceintures sont DESSINÉES** (bande, nœud, deux pans), jamais un emoji. Le code se trouve dans `scripts/seconde/signes_expression_2de.py` : `CEINTURES`, `ceinture()`, `echelle_ceintures()`. À importer de là, pas à recopier.
+- **Repères** : la blanche, c'est le short visuel ci-dessous ; la verte, c'est la paysage complète du niveau de la classe (méthode, pièges, défi corrigé). Les autres ceintures se fixent avec Frédéric au fil des vidéos : on ne les invente pas seul.
+
+### ⛔ Le short CEINTURE BLANCHE : la règle
+
+Premier modèle : `scripts/seconde/signes_short_dauphin.py`, le dauphin et le tableau de signes (11/10/2026). Frédéric : « un short simple : un dauphin qui saute en haut et le tableau de signes qui se remplit en bas ; le dauphin devient bleu dans l'air et d'une autre couleur dans l'eau ».
+
+1. **Format 9:16, environ 45 s, une seule idée.** Aucun calcul : on VOIT la notion.
+2. **En HAUT, l'image concrète qui bouge** (un animal, un objet, un lieu de La Réunion) ; **en BAS, l'objet mathématique qui se remplit EN MÊME TEMPS** (tableau, droite graduée, schéma).
+3. **Le geste de l'image et la case qui se remplit sont SYNCHRONES.** L'œil doit pouvoir descendre tout droit de l'un à l'autre : par exemple, le dauphin passe exactement au-dessus de sa colonne, et un curseur relie les deux.
+4. **Un code couleur partagé** entre l'image et les maths : le dauphin est bleu dans l'air, comme le « + » ; il est orange dans l'eau, comme le « − ». La paysage de la même notion garde ce même code.
+5. **Une voix courte, validée à deux** (voir `script-video-se-valide-a-deux`), et chaque mot dit est écrit à l'écran.
+6. **Le short finit par une question chiffrée à laquelle on répond en commentaire** (« Combien de secondes le dauphin est-il dans l'air ? »). Pas d'annonce d'objectifs.
+7. **Il accompagne une paysage de la même notion**, qu'on publie AVANT lui.
 
 ## Workflow voix (téléphone) — OPTIONNEL, seulement notions phares / voix d'élèves
 
@@ -115,6 +136,7 @@ Une seule personne (Frédéric) doit couvrir toutes les classes. On sépare **la
 - [ ] **Un visuel par écran + le défi dessiné** (« plus c'est visuel, mieux c'est »)
 - [ ] **Muet + texte** : le texte à l'écran porte l'explication (étapes + pourquoi)
 - [ ] Margouillat sur chaque écran, couleurs de `charte.py`
+- [ ] **La ceinture est affichée** (échelle sur la page de garde, badge dans un short)
 - [ ] Rendu 1080p60 (`-qh` via `render_all.py`) + miniature générée
 - [ ] Titre/description YouTube conformes (sans chevrons `< >`), playlist par classe
 - [ ] URL dans `/admin/ressources` (badge ▶) + entrée `VIDEOS_FICHES` du sitemap

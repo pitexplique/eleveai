@@ -1,0 +1,12 @@
+{
+  "00-garde": "Calculer une expression littérale. Que vaut 2 x plus 3 y, pour x égale 2 et y égale 5 ?",
+  "01-marche": "Au marché, les mangues coûtent 2 euros, les ananas 3 euros. Pour x mangues et y ananas, je paie 2 x plus 3 y.",
+  "02-deux-lettres": "J'achète 2 mangues et 5 ananas. Je remplace chaque lettre par sa valeur, en remettant les signes fois : 2 fois 2, plus 3 fois 5. 4 plus 15 : 19 euros.",
+  "03-priorites": "Les priorités ne changent pas : d'abord les carrés, puis les multiplications, puis les additions. x au carré plus 3 x, pour x égale 4. 4 au carré : 16. 3 fois 4 : 12. 16 plus 12 : 28.",
+  "04-negatif": "Avec un nombre négatif, toujours des parenthèses. 5 moins 2 x, pour x égale moins 3 : 5 moins 2 fois, parenthèse, moins 3. 2 fois moins 3 : moins 6. 5 moins, moins 6 : c'est 5 plus 6, 11.",
+  "05-carre-negatif": "Le piège du carré. x au carré, pour x égale moins 3. Parenthèse, moins 3, au carré : moins 3 fois moins 3, plus 9. Sans parenthèses, on trouverait moins 9 : c'est faux.",
+  "06-defi": "À toi de jouer. Calcule 3 a moins b, pour a égale 2 et b égale moins 4. Mets pause, et cherche !",
+  "06b-correction": "Correction. 3 fois 2, moins, parenthèse, moins 4. 6 moins, moins 4 : c'est 6 plus 4, 10.",
+  "07-finale": "Ce que tu as appris. On remplace chaque lettre par sa valeur. On respecte les priorités, carrés compris. Et un négatif se protège par des parenthèses. L'épisode 4 t'attend : réduire une expression.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

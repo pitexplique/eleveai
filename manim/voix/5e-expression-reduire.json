@@ -1,0 +1,13 @@
+{
+  "00-garde": "Réduire une expression littérale. 3 x plus 2 x, ça fait combien ?",
+  "01-sacs": "Imagine des sacs fermés. Dans chaque sac, il y a x billes. On ne sait pas combien, mais tous les sacs en contiennent autant. 3 x, ce sont 3 sacs. Et 2, ce sont 2 billes seules.",
+  "02-regrouper": "3 sacs, plus 2 sacs, ça fait 5 sacs. 3 x plus 2 x égale 5 x. On additionne les coefficients : 3 plus 2, 5. La lettre ne change pas.",
+  "03-moins": "Ça marche aussi en enlevant. 4 x moins x : 4 sacs, j'en enlève 1. Il reste 3 sacs : 3 x. Car x tout seul, c'est 1 x.",
+  "04-trier": "Une expression mélangée ? On trie. 3 x plus 2, plus 2 x. Les sacs avec les sacs : 3 x plus 2 x, 5 x. Les billes seules restent seules : plus 2. Le résultat : 5 x plus 2.",
+  "05-piege-sac": "Premier piège. 3 x plus 2, ça ne fait pas 5 x ! Les 2 billes ne sont pas des sacs. 3 x plus 2 ne se réduit pas : il reste 3 x plus 2.",
+  "06-piege-carre": "Deuxième piège. x plus x, c'est 2 x : 2 sacs. Mais x fois x, c'est x au carré. Pour x égale 3 : 2 x vaut 6, mais x au carré vaut 9. Ce n'est pas pareil.",
+  "07-defi": "À toi de jouer. Réduis : x plus 4, plus 3 x, plus 1. Mets pause, et cherche !",
+  "07b-correction": "Correction. Les sacs : x plus 3 x, c'est 1 x plus 3 x, 4 x. Les billes seules : 4 plus 1, 5. Le résultat : 4 x plus 5.",
+  "08-finale": "Ce que tu as appris. On additionne les coefficients des x. On trie les x et les nombres seuls. Et 2 x n'est pas x au carré. L'épisode 5 t'attend : tester une égalité.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

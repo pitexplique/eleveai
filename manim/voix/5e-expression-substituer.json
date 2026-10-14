@@ -1,0 +1,13 @@
+{
+  "00-garde": "Calculer une expression littérale. Si je connais x, que vaut 3 x plus 2 ?",
+  "01-marche": "Retour au marché de Saint-Pierre. Les letchis : 3 euros la barquette, et 2 euros le sac. Le prix, c'est 3 x plus 2. Aujourd'hui, j'achète 7 barquettes. Combien je paie ?",
+  "02-remplacer": "Je remplace x par 7. Attention : le signe fois caché revient ! 3 x devient 3 fois 7. Le prix : 3 fois 7, plus 2.",
+  "03-priorite": "Puis je calcule, la multiplication d'abord. 3 fois 7 : 21. Plus 2 : 23. Je paie 23 euros.",
+  "04-exemple": "Un autre. 3 x moins 2, pour x égale 6. Je remplace : 3 fois 6, moins 2. 18 moins 2 : 16.",
+  "05-negatif": "Et avec un nombre négatif ? 2 x plus 5, pour x égale moins 3. Je remplace avec des parenthèses : 2 fois, parenthèse, moins 3, plus 5. 2 fois moins 3, c'est moins 3 plus moins 3 : moins 6. Moins 6 plus 5 : moins 1.",
+  "06-piege": "Le piège. Pour x égale 4, 3 x ne vaut pas 34. On remet toujours le signe fois : 3 fois 4, 12.",
+  "07-defi": "À toi de jouer. Calcule 4 x moins 5, pour x égale 2. Mets pause, et cherche !",
+  "07b-correction": "Correction. Je remplace x par 2 : 4 fois 2, moins 5. 8 moins 5 : 3.",
+  "08-finale": "Ce que tu as appris. Pour remplacer la lettre, on remet le signe fois. On fait la multiplication d'abord. Et un nombre négatif se met entre parenthèses. L'épisode 4 t'attend : réduire une expression.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

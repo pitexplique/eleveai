@@ -1,0 +1,8 @@
+{
+  "00-accroche": "5 fois, parenthèse, x moins 2. Ça fait 5 x moins 2 ?",
+  "01-piege": "Beaucoup oublient de multiplier le 2. Et c'est faux !",
+  "02-sacs": "5 fois, parenthèse, x moins 2, c'est 5 fois la même chose : un sac de x billes, auquel on enlève 2 billes. 5 sacs, et 5 fois 2 billes enlevées.",
+  "03-regle": "5 fois x : 5 x. 5 fois 2 : 10. On obtient 5 x moins 10. Le 5 multiplie tout ce qu'il y a dans la parenthèse.",
+  "04-defi": "À toi. Développe : 4 fois, parenthèse, x plus 3.",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur le calcul littéral est juste en dessous."
+}

@@ -1,0 +1,12 @@
+{
+  "00-garde": "Traduire une phrase en expression. Comment écrire le double de la somme de a et b ?",
+  "01-jardin": "Un jardin créole rectangulaire : longueur a, largeur b. Pour la clôture, on fait le tour : a plus b plus a plus b. C'est le double de a plus b : 2 fois, parenthèse, a plus b.",
+  "02-vocabulaire": "Quatre mots à connaître. La somme : on additionne, x plus y. La différence : on soustrait, x moins y. Le produit : on multiplie, 5 fois n, donc 5 n. Le quotient : on divise, x divisé par 4.",
+  "03-ordre": "Le premier mot donne l'opération faite en dernier. Le double de la somme de x et 3 : la somme d'abord, x plus 3, entre parenthèses ; puis le double, 2 fois, parenthèse, x plus 3. Mais la somme du double de x et de 3 : 2 x plus 3.",
+  "04-comparer": "Ce n'est pas pareil. Pour x égale 4 : 2 fois, parenthèse, 4 plus 3, ça fait 14. Et 2 fois 4, plus 3, ça fait 11.",
+  "05-situation": "Une situation. Au cinéma, une place coûte 8 euros, et un pop-corn 5 euros. Pour n places et un seul pop-corn : 8 n plus 5. Pour n places et n pop-corns : 8 n plus 5 n, donc 13 n.",
+  "06-defi": "À toi de jouer. Traduis : le triple de y diminué de 5. Puis : le triple de la différence de y et 5. Mets pause, et cherche !",
+  "06b-correction": "Correction. Le triple de y diminué de 5 : 3 y moins 5. Le triple de la différence de y et 5 : 3 fois, parenthèse, y moins 5. Une parenthèse change tout.",
+  "07-finale": "Ce que tu as appris. Somme, différence, produit, quotient. Le premier mot donne l'opération faite en dernier. Et une parenthèse change tout. L'épisode 3 t'attend : calculer une expression.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

@@ -1,0 +1,13 @@
+{
+  "00-garde": "Comprendre une expression littérale. Que cache l'écriture 3 x ?",
+  "01-marche": "Au marché de Saint-Pierre, les letchis coûtent 3 euros la barquette. Et le sac pour les emporter coûte 2 euros. Combien je paie ?",
+  "02-tableau": "1 barquette : 3 fois 1, plus 2 : 5 euros. 4 barquettes : 3 fois 4, plus 2 : 14 euros. 10 barquettes : 3 fois 10, plus 2 : 32 euros. C'est toujours le même calcul. Seul le nombre de barquettes change.",
+  "03-lettre": "Ce nombre qui change, je l'appelle x. Le prix s'écrit : 3 fois x, plus 2. Une lettre, c'est un nombre : un nombre qu'on ne connaît pas encore, ou qui peut changer.",
+  "04-signe-cache": "Pour aller plus vite, on cache le signe fois entre un nombre et une lettre. 3 fois x s'écrit 3 x. Le prix devient 3 x plus 2.",
+  "05-anatomie": "Dans 3 x plus 2, chaque morceau a un nom. Le 3, collé à la lettre, c'est le coefficient : le prix d'une barquette. Le 2, tout seul, c'est le terme constant : le sac, qu'on paie toujours, quel que soit x.",
+  "06-piege": "Le piège. Si x vaut 2, 3 x ne vaut pas 32 ! On ne colle pas les chiffres. 3 x, c'est 3 fois 2 : 6. Et le signe plus, lui, ne se cache jamais : 3 plus x s'écrit toujours avec son plus.",
+  "07-defi": "À toi de jouer. Dans 5 a plus 7, quel est le coefficient ? Quel est le terme constant ? Et si a vaut 3, combien vaut 5 a ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Le coefficient, collé à la lettre a, c'est 5. Le terme constant, c'est 7. Et pour a égale 3, 5 a, c'est 5 fois 3 : 15. Pas 53 !",
+  "08-finale": "Ce que tu as appris. 3 x, c'est 3 fois x. Le nombre collé à la lettre est le coefficient, le nombre seul est le terme constant. Et on ne colle jamais les chiffres. L'épisode 2 t'attend : traduire une phrase en expression.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

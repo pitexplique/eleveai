@@ -1,0 +1,5 @@
+{
+  "00-accroche": "Moins 3 au carré : 9, ou moins 9 ?",
+  "01-image": "Pour x égale moins 3, x au carré, c'est parenthèse, moins 3, au carré. Moins 3 fois moins 3 : plus 9. Sans parenthèses, on ne met au carré que le 3, et on trouve moins 9. C'est faux.",
+  "02-question": "Pour x égale moins 2, combien vaut x au carré plus x ? Réponds en commentaire !"
+}

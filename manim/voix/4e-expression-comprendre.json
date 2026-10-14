@@ -1,0 +1,13 @@
+{
+  "00-garde": "Comprendre une expression littérale. Que veut dire 7 a moins 2 ?",
+  "01-stylos": "Un vendeur de Saint-Denis vend des stylos à 2 euros pièce, et il ajoute 3 euros de frais d'envoi. Pour x stylos, le prix est 2 x plus 3. Une seule formule pour tous les nombres de stylos.",
+  "02-termes": "Une expression est faite de termes, séparés par des plus ou des moins. Dans 2 x plus 3, il y a deux termes : 2 x, et 3. 2 x, c'est 2 fois x : son coefficient est 2. Le 3 est le terme constant.",
+  "03-moins": "Avec un moins, le signe reste collé à son terme. Dans 7 a moins 2, les termes sont 7 a et moins 2. Le coefficient de a est 7. Le terme constant est moins 2.",
+  "04-caches": "Des coefficients cachés. x tout seul, c'est 1 fois x : son coefficient est 1. Moins x, c'est moins 1 fois x : son coefficient est moins 1.",
+  "05-somme-produit": "Somme ou produit ? 3 plus x est une somme : on ajoute. 3 x est un produit : on multiplie. Et x au carré, c'est x fois x : encore un produit. Pour x égale 5 : 3 plus x vaut 8, 3 x vaut 15, et x au carré vaut 25.",
+  "06-piege": "Le piège. 3 x fois 2, ça ne fait pas 5 x. C'est 3 fois x fois 2, donc 6 x. Dans un produit, on multiplie les nombres, on ne les additionne pas.",
+  "07-defi": "À toi de jouer. Dans 4 x plus 7, quel est le coefficient ? Quel est le terme constant ? Et dans 5 moins y, quel est le coefficient de y ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Dans 4 x plus 7, le coefficient est 4, et le terme constant est 7. Dans 5 moins y, le terme en y est moins y : son coefficient est moins 1.",
+  "08-finale": "Ce que tu as appris. Une expression se découpe en termes, et le signe reste collé à son terme. Un coefficient peut être caché, ou négatif. Et une somme n'est pas un produit. L'épisode 2 t'attend : traduire une phrase.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

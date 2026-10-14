@@ -1,0 +1,5 @@
+{
+  "00-accroche": "Un moins devant une parenthèse : le piège.",
+  "01-image": "5 x moins, parenthèse, 2 x moins 3. Le moins change tous les signes de la parenthèse : 5 x moins 2 x plus 3. Le résultat : 3 x plus 3. Pas 3 x moins 3 !",
+  "02-question": "Réduis : 7 moins, parenthèse, x moins 4. Réponds en commentaire !"
+}

@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Le triple de n, diminué de 4. Comment l'écrire ?",
+  "01-piege": "Beaucoup écrivent 3 fois, parenthèse, n moins 4. Et c'est faux !",
+  "02-ordre": "On lit dans l'ordre. D'abord le triple de n : 3 n. Ensuite, diminué de 4 : on enlève 4. On obtient 3 n moins 4.",
+  "03-preuve": "Ce n'est pas pareil ? Testons avec n égale 10. 3 n moins 4 : 30 moins 4, 26. Et 3 fois, parenthèse, n moins 4 : 3 fois 6, 18. Deux résultats différents : ce ne sont pas les mêmes expressions.",
+  "04-defi": "À toi. Écris : le double de x, augmenté de 7.",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur le calcul littéral est juste en dessous."
+}

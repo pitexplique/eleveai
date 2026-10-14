@@ -1,0 +1,12 @@
+{
+  "00-garde": "Réduire une expression. Et quand un moins se trouve devant une parenthèse ?",
+  "01-familles": "Rappel : on ne regroupe que les termes de la même famille. 4 a moins 2 a plus 3 : 2 a plus 3. Et 2 x plus 3 x au carré ne fait pas 5 x au carré : x et x au carré ne sont pas de la même famille.",
+  "02-plus-parenthese": "Un plus devant une parenthèse : on l'enlève sans rien changer. 5 x plus, parenthèse, 2 x moins 3 : 5 x plus 2 x moins 3, donc 7 x moins 3.",
+  "03-moins-parenthese": "Un moins devant une parenthèse : on change le signe de chaque terme à l'intérieur. 5 x moins, parenthèse, 2 x moins 3 : 5 x moins 2 x plus 3. Donc 3 x plus 3.",
+  "04-pourquoi": "Pourquoi ? Enlever 2 x moins 3, c'est enlever 2 x, mais ce n'est pas enlever 3 : le moins 3, on l'avait déjà retiré. Vérifions pour x égale 1 : 5 moins, parenthèse, 2 moins 3, ça fait 5 moins moins 1, donc 6. Et 3 plus 3 : 6.",
+  "05-piege": "Le piège : changer seulement le premier signe. 5 x moins 2 x moins 3 : c'est faux. Le moins s'applique à toute la parenthèse.",
+  "06-defi": "À toi de jouer. Réduis : 4 x au carré moins x, moins, parenthèse, x au carré moins 5 x plus 2. Mets pause, et cherche !",
+  "06b-correction": "Correction. J'enlève la parenthèse en changeant les signes : 4 x au carré moins x moins x au carré plus 5 x moins 2. Les x au carré : 3 x au carré. Les x : 4 x. Le résultat : 3 x au carré plus 4 x moins 2.",
+  "07-finale": "Ce que tu as appris. On regroupe par familles. Un plus devant une parenthèse ne change rien. Un moins change tous les signes. L'épisode 4 t'attend : développer.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

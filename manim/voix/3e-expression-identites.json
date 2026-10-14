@@ -1,0 +1,13 @@
+{
+  "00-garde": "Les identités remarquables. x plus 3, au carré : x au carré plus 9 ?",
+  "01-carre": "Un carré de côté x plus 3. Je le découpe : un carré x sur x, aire x au carré. Un petit carré 3 sur 3, aire 9. Et deux rectangles x sur 3 : 3 x chacun. Ceux qu'on oublie !",
+  "02-somme": "L'aire totale : x au carré plus 6 x plus 9. C'est la première identité : a plus b, au carré, égale a au carré plus 2 a b plus b au carré. Le 2 a b, ce sont les deux rectangles.",
+  "03-difference": "La deuxième : a moins b, au carré, égale a au carré moins 2 a b plus b au carré. x moins 5, au carré : x au carré moins 10 x plus 25.",
+  "04-produit": "La troisième : a moins b, fois a plus b, égale a au carré moins b au carré. x moins 5, fois x plus 5 : x au carré moins 25. Les termes en x s'annulent : moins 5 x plus 5 x, 0.",
+  "05-calcul-mental": "Un tour de calcul mental. 21 fois 19 : c'est 20 plus 1, fois 20 moins 1. 20 au carré moins 1 au carré : 400 moins 1, 399.",
+  "06-factoriser": "Dans l'autre sens, elles factorisent. x au carré moins 49 : x au carré moins 7 au carré, donc x moins 7, fois x plus 7. Et x au carré plus 6 x plus 9 : x plus 3, au carré.",
+  "07-defi": "À toi de jouer. Développe x moins 4, au carré. Puis factorise x au carré moins 36. Mets pause, et cherche !",
+  "07b-correction": "Correction. x moins 4, au carré : x au carré moins 8 x plus 16. x au carré moins 36 : x moins 6, fois x plus 6.",
+  "08-finale": "Ce que tu as appris. x plus 3, au carré, n'est pas x au carré plus 9 : il manque les deux rectangles. Les trois identités servent à développer, et à factoriser. Tu as fini la série de 3e. Les défis t'attendent sur le coach !",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

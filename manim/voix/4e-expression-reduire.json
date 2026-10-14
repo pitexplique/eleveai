@@ -1,0 +1,13 @@
+{
+  "00-garde": "Réduire une expression. 2 x plus 5, plus 3 x moins 7 : ça se simplifie ?",
+  "01-familles": "Des termes semblables ont la même partie littérale : ils sont de la même famille. 3 x et moins 5 x : la famille des x. 2 et 7 : les nombres. Mais x et x au carré : deux familles différentes.",
+  "02-regrouper": "On réduit famille par famille. 2 x plus 3 x : 5 x. 5 moins 7 : moins 2. Le résultat : 5 x moins 2.",
+  "03-negatifs": "Avec des coefficients négatifs. 4 a moins a, c'est 4 a moins 1 a : 3 a. Et 2 x moins 6 x : 2 moins 6, moins 4. On obtient moins 4 x.",
+  "04-carres": "Avec des carrés. 3 x au carré, plus 2 x, plus x au carré. Les x au carré ensemble : 3 plus 1, 4 x au carré. Le 2 x reste seul. Le résultat : 4 x au carré plus 2 x.",
+  "05-perimetre": "À quoi ça sert ? Un triangle a pour côtés x, x plus 2, et 2 x. Son périmètre : x plus x plus 2 plus 2 x. Réduit : 4 x plus 2. Plus court, et plus facile à calculer.",
+  "06-pieges": "Deux pièges. 2 x plus 3 ne fait pas 5 x : ce n'est pas la même famille. Et 3 x fois 2 x ne fait pas 6 x, mais 6 x au carré : x fois x, c'est x au carré.",
+  "07-defi": "À toi de jouer. Réduis : 7 y moins 3, plus 2 y, moins y, plus 8. Mets pause, et cherche !",
+  "07b-correction": "Correction. Les y : 7 y plus 2 y moins y, 7 plus 2 moins 1, 8 y. Les nombres : moins 3 plus 8, 5. Le résultat : 8 y plus 5.",
+  "08-finale": "Ce que tu as appris. Des termes semblables sont de la même famille. On réduit famille par famille, avec les négatifs et les carrés. Et on ne mélange jamais les familles. La suite : développer.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

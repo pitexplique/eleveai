@@ -1,0 +1,14 @@
+{
+  "00-garde": "Développer. Comment enlever les parenthèses de 5 fois, parenthèse, x plus 3 ?",
+  "01-champ": "Un planteur de Saint-Joseph a un champ rectangulaire. Sa largeur : 5 mètres. Sa longueur : x mètres, plus 3 mètres. Quelle est son aire ?",
+  "02-aire-entiere": "L'aire d'un rectangle, c'est largeur fois longueur. Ici : 5 fois, parenthèse, x plus 3. La parenthèse, c'est toute la longueur.",
+  "03-decouper": "Je découpe le champ en deux morceaux. Le premier : 5 sur x, son aire est 5 x. Le deuxième : 5 sur 3, son aire est 15. En tout : 5 x plus 15.",
+  "04-regle": "Les deux calculs donnent la même aire. Donc 5 fois, parenthèse, x plus 3, égale 5 x plus 15. Le 5 multiplie le x, et il multiplie le 3. C'est ça, développer.",
+  "05-verifier": "Vérifions avec des nombres. 4 fois, parenthèse, 3 plus 5 : 4 fois 8, 32. Et 4 fois 3, plus 4 fois 5 : 12 plus 20, 32. Pareil !",
+  "06-moins": "Avec un moins, c'est la même règle. 4 fois, parenthèse, x moins 1 : 4 fois x, moins 4 fois 1. On obtient 4 x moins 4.",
+  "07-piege": "Le piège : écrire 5 x plus 3. On a oublié de multiplier le 3 ! Le nombre devant la parenthèse multiplie tout ce qu'il y a dedans.",
+  "08-defi": "À toi de jouer. Développe : 2 fois, parenthèse, 3 x plus 4. Mets pause, et cherche !",
+  "08b-correction": "Correction. 2 fois 3 x : 6 x. 2 fois 4 : 8. On obtient 6 x plus 8.",
+  "09-finale": "Ce que tu as appris. Développer, c'est découper un rectangle. Le nombre devant la parenthèse multiplie chaque terme. Et on n'oublie jamais le deuxième. Tu as fini la série. Les défis t'attendent sur le coach !",
+  "10-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

@@ -1,0 +1,13 @@
+{
+  "00-garde": "Tester une égalité. Une égalité avec une lettre est-elle vraie ?",
+  "01-devinette": "Ti Margo pense à un nombre. Il le multiplie par 3, puis il ajoute 1. Il trouve 10. Toi, tu penses que son nombre est 3. Comment en être sûr ?",
+  "02-ecrire": "J'appelle x son nombre. Multiplier par 3, puis ajouter 1 : 3 x plus 1. Il trouve 10 : 3 x plus 1 égale 10. Une égalité a deux côtés : à gauche et à droite du signe égal.",
+  "03-tester-vrai": "Je teste x égale 3. À gauche : 3 fois 3, plus 1, ça fait 10. À droite : 10. Les deux côtés sont égaux : l'égalité est vraie pour x égale 3. Tu avais raison !",
+  "04-tester-faux": "Et pour x égale 2 ? À gauche : 3 fois 2, plus 1, ça fait 7. À droite : 10. 7 n'est pas égal à 10 : l'égalité est fausse pour x égale 2.",
+  "05-deux-cotes": "Une lettre des deux côtés ? Même méthode. 2 x moins 3 égale x plus 2, pour x égale 5. À gauche : 2 fois 5, moins 3, ça fait 7. À droite : 5 plus 2, ça fait 7. 7 égale 7 : vraie pour x égale 5.",
+  "06-methode": "La méthode, en trois étapes. Un : je calcule le côté gauche. Deux : je calcule le côté droit. Trois : je compare. Égaux ? L'égalité est vraie. Différents ? Elle est fausse.",
+  "07-defi": "À toi de jouer. L'égalité 4 x égale 12 est-elle vraie pour x égale 3 ? Et pour x égale 1 ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Pour x égale 3 : 4 fois 3, ça fait 12. 12 égale 12 : vraie. Pour x égale 1 : 4 fois 1, ça fait 4. 4 n'est pas égal à 12 : fausse.",
+  "08-finale": "Ce que tu as appris. Pour tester une égalité, on calcule chaque côté, puis on compare. Égaux : elle est vraie. Différents : elle est fausse. L'épisode 6 t'attend : développer.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

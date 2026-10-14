@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Un rectangle mesure x plus 3 de long, et x de large. Quel est son périmètre ?",
+  "01-piege": "Beaucoup écrivent x plus 3 plus x. Ils oublient deux côtés. Et c'est faux !",
+  "02-tour": "Le périmètre, c'est le tour : deux longueurs et deux largeurs. 2 fois, parenthèse, x plus 3, plus 2 x. Je développe : 2 x plus 6, plus 2 x.",
+  "03-reduire": "Je réduis : 2 x plus 2 x, 4 x. Le périmètre, c'est 4 x plus 6. Vérifions pour x égale 5 : 4 fois 5 plus 6, 26. Et le rectangle de 8 sur 5 a bien un tour de 26.",
+  "04-defi": "À toi. Un carré a pour côté x plus 2. Écris son périmètre, puis réduis-le.",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur le calcul littéral est juste en dessous."
+}

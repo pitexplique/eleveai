@@ -1,0 +1,5 @@
+{
+  "00-accroche": "4 plus 5 plus 6 : un multiple de 3. Toujours ?",
+  "01-image": "Trois nombres qui se suivent : n, n plus 1, n plus 2. Leur somme : 3 n plus 3, c'est 3 fois, parenthèse, n plus 1. Toujours un multiple de 3 : 3 fois le nombre du milieu.",
+  "02-question": "La somme de 5 nombres qui se suivent est-elle toujours un multiple de 5 ? Réponds en commentaire !"
+}

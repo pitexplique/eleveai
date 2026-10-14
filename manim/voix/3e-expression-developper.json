@@ -1,0 +1,13 @@
+{
+  "00-garde": "Développer. Comment multiplier deux parenthèses ?",
+  "01-rappel": "Rappel : le nombre devant la parenthèse multiplie chaque terme. 3 fois, parenthèse, x plus 4 : 3 x plus 12. Avec un négatif : moins 2 fois, parenthèse, x moins 5 : moins 2 x, et moins 2 fois moins 5, plus 10. Moins 2 x plus 10.",
+  "02-terrain": "Un terrain rectangulaire : x plus 2 mètres sur x plus 3 mètres. Son aire : parenthèse, x plus 2, fois, parenthèse, x plus 3.",
+  "03-decouper": "Je découpe le terrain en quatre. x fois x : x au carré. x fois 3 : 3 x. 2 fois x : 2 x. 2 fois 3 : 6. En tout : x au carré plus 3 x plus 2 x plus 6.",
+  "04-reduire": "Je réduis : 3 x plus 2 x, 5 x. L'aire : x au carré plus 5 x plus 6. C'est la double distributivité : chaque terme de la première parenthèse multiplie chaque terme de la deuxième.",
+  "05-signes": "Avec des signes moins, même méthode, en faisant attention aux signes. Parenthèse, x moins 4, fois, parenthèse, x plus 1 : x au carré, plus x, moins 4 x, moins 4. Donc x au carré moins 3 x moins 4.",
+  "06-piege": "Le piège : 4 fois, parenthèse, x plus 3, égale 4 x plus 3. Faux : le 3 aussi est multiplié. 4 x plus 12.",
+  "07-defi": "À toi de jouer. Développe et réduis : parenthèse, 2 x plus 1, fois, parenthèse, x moins 3. Mets pause, et cherche !",
+  "07b-correction": "Correction. 2 x fois x : 2 x au carré. 2 x fois moins 3 : moins 6 x. 1 fois x : x. 1 fois moins 3 : moins 3. Je réduis : 2 x au carré moins 5 x moins 3.",
+  "08-finale": "Ce que tu as appris. Le nombre devant la parenthèse multiplie chaque terme, même s'il est négatif. La double distributivité, ce sont quatre produits. Puis on réduit. L'épisode 5 t'attend : factoriser.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

@@ -1,0 +1,13 @@
+{
+  "00-garde": "Factoriser. Le chemin inverse du développement.",
+  "01-tablette": "Une tablette de chocolat de 3 rangées. Dans chaque rangée, x carrés au lait et 4 carrés noirs. En tout : 3 x plus 12 carrés. Mais aussi : 3 rangées de x plus 4. 3 x plus 12 égale 3 fois, parenthèse, x plus 4.",
+  "02-sens": "Développer, c'est transformer un produit en somme. Factoriser, c'est transformer une somme en produit. Même égalité, lue dans l'autre sens.",
+  "03-facteur": "La méthode : je cherche le facteur commun à tous les termes. 5 x moins 15 : 5 fois x, moins 5 fois 3. Le facteur commun est 5. Donc 5 fois, parenthèse, x moins 3.",
+  "04-lettre": "Le facteur commun peut être une lettre. x au carré plus 7 x : x fois x, plus 7 fois x. Le facteur commun est x : x fois, parenthèse, x plus 7.",
+  "05-verifier": "Toujours vérifier en développant. Un élève écrit : 6 x plus 12 égale 6 fois, parenthèse, x plus 12. Je développe : 6 x plus 72. Ce n'est pas 6 x plus 12 : c'est faux. La bonne réponse : 6 fois, parenthèse, x plus 2.",
+  "06-utilite": "À quoi ça sert ? Un produit est nul si l'un de ses facteurs est nul. x au carré moins 3 x égale 0 devient x fois, parenthèse, x moins 3, égale 0 : donc x égale 0, ou x égale 3.",
+  "07-defi": "À toi de jouer. Factorise : 4 x plus 20. Puis : 2 x au carré moins 6 x. Mets pause, et cherche !",
+  "07b-correction": "Correction. 4 x plus 20 : 4 fois, parenthèse, x plus 5. 2 x au carré moins 6 x : le facteur commun est 2 x. 2 x fois, parenthèse, x moins 3.",
+  "08-finale": "Ce que tu as appris. Factoriser, c'est trouver le facteur commun, nombre ou lettre. On écrit la forme factorisée. Et on vérifie toujours en développant. L'épisode 6 t'attend : les identités remarquables.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

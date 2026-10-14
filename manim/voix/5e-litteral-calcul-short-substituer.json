@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Pour x égale moins 2, combien vaut 5 moins 3 x ?",
+  "01-piege": "Beaucoup trouvent moins 1. Ils oublient que x est négatif. Et c'est faux !",
+  "02-parentheses": "Je remplace x par moins 2, avec des parenthèses. 5 moins 3 fois, parenthèse, moins 2. D'abord la multiplication : 3 fois moins 2, ça fait moins 6.",
+  "03-calcul": "Il reste 5 moins, moins 6. Enlever moins 6, c'est ajouter 6. 5 plus 6 : 11. Avec un négatif, toujours des parenthèses.",
+  "04-defi": "À toi. Pour x égale moins 1, combien vaut 4 moins 2 x ?",
+  "05-fin": "Ta réponse en commentaire. La vidéo complète sur le calcul littéral est juste en dessous."
+}

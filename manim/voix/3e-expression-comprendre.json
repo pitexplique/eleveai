@@ -1,0 +1,13 @@
+{
+  "00-garde": "À quoi sert une lettre ? À prouver qu'une règle marche pour tous les nombres.",
+  "01-constat": "Prends trois nombres qui se suivent : 4, 5, 6. Leur somme : 15. Puis 10, 11, 12 : 33. Puis 20, 21, 22 : 63. 15, 33, 63 : toujours un multiple de 3. Coïncidence ?",
+  "02-exemples": "On pourrait tester mille exemples. Ça ne prouverait rien pour le mille et unième. Il faut un calcul qui parle de tous les nombres à la fois.",
+  "03-lettre": "J'appelle n le premier nombre. Le suivant : n plus 1. Le troisième : n plus 2. Une lettre, c'est un nombre quelconque : n peut valoir 4, 10, ou n'importe quel entier.",
+  "04-calcul": "La somme : n, plus n plus 1, plus n plus 2. Je réduis : 3 n plus 3. Je factorise : 3 fois, parenthèse, n plus 1. C'est 3 fois un entier : un multiple de 3. Pour tous les n.",
+  "05-lire": "Lire l'expression, c'est la comprendre. 3 fois, parenthèse, n plus 1 : le nombre du milieu, multiplié par 3. Vérifions : pour 4, 5, 6, le milieu est 5, et 3 fois 5, 15.",
+  "06-piege": "Le piège. 5 x ne veut pas dire 5 plus x. 5 x, c'est 5 fois x. Pour x égale 2 : 5 x vaut 10, 5 plus x vaut 7.",
+  "07-defi": "À toi de jouer. Prouve que la somme de deux nombres impairs qui se suivent est toujours un multiple de 4. Indice : appelle-les 2 n plus 1 et 2 n plus 3. Mets pause, et cherche !",
+  "07b-correction": "Correction. 2 n plus 1, plus 2 n plus 3 : 4 n plus 4. Je factorise : 4 fois, parenthèse, n plus 1. Un multiple de 4, pour tous les n.",
+  "08-finale": "Ce que tu as appris. Une lettre nomme un nombre quelconque. On écrit le calcul, on le réduit. Et on lit l'expression pour prouver une règle pour tous les nombres. L'épisode 2 t'attend : calculer la valeur d'une expression.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

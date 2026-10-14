@@ -1,0 +1,12 @@
+{
+  "00-garde": "Traduire une phrase en expression littérale. Comment écrire une phrase avec une lettre ?",
+  "01-marche": "Au marché, Ti Margo a x euros dans sa poche. Sa sœur a 5 euros de plus que lui. Son cousin a le double. Combien ont-ils ? On ne connaît pas x, mais on peut l'écrire.",
+  "02-mots-plus": "Les mots qui ajoutent ou qui enlèvent. 5 de plus que x : x plus 5. x augmenté de 3 : x plus 3. x diminué de 7 : x moins 7.",
+  "03-mots-fois": "Les mots qui multiplient ou qui divisent. Le double de x : 2 fois x, donc 2 x. Le triple de x : 3 x. La moitié de x : x divisé par 2. Le quart de x : x divisé par 4.",
+  "04-ordre": "Une phrase plus longue ? On la lit dans l'ordre, morceau par morceau. Le triple de x, augmenté de 2. D'abord le triple de x : 3 x. Puis augmenté de 2 : plus 2. On obtient 3 x plus 2 : le prix des letchis de l'épisode 1 !",
+  "05-piege": "Le piège. Le double de x augmenté de 5, ce n'est pas 2 fois, parenthèse, x plus 5. Là, on doublerait aussi le 5. Pour x égale 1 : 2 x plus 5 vaut 7, mais 2 fois, parenthèse, x plus 5, vaut 12.",
+  "06-defi": "À toi de jouer. Traduis : le triple d'un nombre n, diminué de 4. Puis : 6 de plus que y. Mets pause, et cherche !",
+  "06b-correction": "Correction. Le triple de n : 3 n. Diminué de 4 : moins 4. On obtient 3 n moins 4. Et 6 de plus que y : y plus 6.",
+  "07-finale": "Ce que tu as appris. Plus, de plus, augmenté de : on ajoute. Diminué de : on enlève. Le double, le triple, la moitié : on multiplie ou on divise. Et une phrase se lit dans l'ordre. L'épisode 3 t'attend : remplacer la lettre par un nombre.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}
