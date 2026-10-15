@@ -108,27 +108,36 @@ def composer(h):
     # champ de réponse) : rien d'important n'y va.
     y = 250 if story else 70
 
-    # ── Le bandeau
-    pilule(d, marge, y, "CRPE 2027  ·  ÉPREUVE DE MATHS  ·  LA RÉUNION", GRAS(k(28)),
-           (254, 243, 199), (146, 64, 14))
-    y += k(100)
+    # ── Le titre : « CRPE · épreuve de maths · La Réunion » EN PLUS GROS
+    # (Frédéric, 15/10 : « mets le plus gros »). C'est ce qu'on lit en un quart
+    # de seconde en faisant défiler : le concours, la matière, l'île. Chaque
+    # ligne prend toute la largeur utile.
+    def ajuste(texte, maxi):
+        t = maxi
+        while largeur(d, texte, NOIR(t)) > W - 2 * marge:
+            t -= 2
+        return NOIR(t)
 
-    # ── L'accroche
-    d.text((marge, y), "Vous enseignerez", font=NOIR(k(72)), fill=ENCRE)
-    y += k(84)
-    d.text((marge, y), "jusqu'au CM2.", font=NOIR(k(72)), fill=ENCRE)
-    y += k(110)
-    d.text((marge, y), "L'épreuve, elle,", font=NOIR(k(84)), fill=ORANGE)
-    y += k(98)
-    t = "va jusqu'en 3e."
-    d.text((marge, y), "va jusqu'en 3", font=NOIR(k(84)), fill=ORANGE)
-    x3 = marge + largeur(d, "va jusqu'en 3", NOIR(k(84)))
-    d.text((x3 + 2, y + k(4)), "e", font=NOIR(k(46)), fill=ORANGE)
-    d.text((x3 + 4 + largeur(d, "e", NOIR(k(46))), y), ".", font=NOIR(k(84)), fill=ORANGE)
-    # le trait épais sous la ligne, comme le titre de la page
-    d.rounded_rectangle((marge, y + k(122), marge + largeur(d, t, NOIR(k(84))) - 10, y + k(132)),
-                        radius=6, fill=ORANGE_CLAIR)
-    y += k(150)
+    f1 = ajuste("CRPE 2027", k(190))
+    d.text((marge, y - f1.size * 0.12), "CRPE 2027", font=f1, fill=NAVY)
+    y += int(f1.size * 0.95)
+    f2 = ajuste("ÉPREUVE DE MATHS", k(120))
+    d.text((marge, y), "ÉPREUVE DE MATHS", font=f2, fill=ORANGE)
+    y += int(f2.size * 1.05)
+    f3 = ajuste("LA RÉUNION · 974", k(120))
+    d.text((marge, y), "LA RÉUNION · 974", font=f3, fill=(13, 148, 136))
+    y += int(f3.size * 1.25)
+
+    # ── L'accroche, désormais en second
+    d.text((marge, y), "Vous enseignerez jusqu'au CM2.", font=NOIR(k(46)), fill=ENCRE)
+    y += k(62)
+    t = "L'épreuve, elle, va jusqu'en 3e."
+    debut = "L'épreuve, elle, va jusqu'en 3"
+    d.text((marge, y), debut, font=NOIR(k(46)), fill=ORANGE)
+    x3 = marge + largeur(d, debut, NOIR(k(46)))
+    d.text((x3 + 2, y), "e", font=NOIR(k(26)), fill=ORANGE)
+    d.text((x3 + 3 + largeur(d, "e", NOIR(k(26))), y), ".", font=NOIR(k(46)), fill=ORANGE)
+    y += k(90)
 
     # ── Les notions de collège qui tombent
     x = marge
