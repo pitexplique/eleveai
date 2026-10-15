@@ -145,19 +145,24 @@ def composer(h):
     d.text((x3 + 3 + largeur(d, "e", NOIR(k(26))), y), ".", font=NOIR(k(46)), fill=ORANGE)
     y += k(80)
 
-    # ── Les notions de collège qui tombent
-    x = marge
-    for n in ["Thalès", "Pythagore", "PGCD", "équations", "probabilités"]:
-        f = GRAS(k(30))
-        if x + largeur(d, n, f) + 52 > W - marge:
-            x = marge
-            y += k(70)
-        x, _ = pilule(d, x, y, n, f, (255, 228, 230), (159, 18, 57), pad_x=24, pad_y=12)
-        x += 14
-    y += k(100) if story else k(78)
+    # ── Les notions de collège qui tombent — STORY SEULEMENT depuis que
+    # l'encadré bleu porte le déroulé : le post (4:5) n'a plus la place, et
+    # l'accroche y dit déjà « jusqu'en 3e ».
+    if story:
+        x = marge
+        for n in ["Thalès", "Pythagore", "PGCD", "équations", "probabilités"]:
+            f = GRAS(k(30))
+            if x + largeur(d, n, f) + 52 > W - marge:
+                x = marge
+                y += k(70)
+            x, _ = pilule(d, x, y, n, f, (255, 228, 230), (159, 18, 57), pad_x=24, pad_y=12)
+            x += 14
+        y += k(84)
+    else:
+        y += k(4)
 
     # ── La carte de l'offre
-    haut_carte = k(300)
+    haut_carte = k(288)
     carte(im, (marge, y, W - marge, y + haut_carte))
     d = ImageDraw.Draw(im)
     cx = marge + 44
@@ -167,18 +172,33 @@ def composer(h):
     px = cx + largeur(d, "60 € ", NOIR(k(84)))
     d.text((px, y + k(182)), "la matinée, sans forfait", font=GRAS(k(34)), fill=GRIS)
     d.text((px, y + k(228)), "1re séance : samedi 24 octobre", font=GRAS(k(30)), fill=GRIS)
-    y += haut_carte + (56 if story else 40)
+    y += haut_carte + (40 if story else 26)
 
     # ── L'action : le seul bloc sombre
     # ⭐ 15/10 : le TÉLÉPHONE y entre (« il manque le numéro de téléphone »).
     # C'est un appel qui a lancé cette pub : on donne le numéro, pas seulement
     # le lien, et en blanc sur le bloc sombre, là où l'œil finit.
-    haut_cta = k(282)
+    # ⭐ 15/10, encore : « en encadré bleu il ne faut pas mettre test gratuit,
+    # il faut mettre le déroulé et la philosophie de la séance ».
+    haut_cta = k(392)
     carte(im, (marge, y, W - marge, y + haut_cta), fond_c=NAVY + (255,))
     d = ImageDraw.Draw(im)
-    d.text((cx, y + k(34)), "Test gratuit : où en êtes-vous ?", font=NOIR(k(44)), fill=BLANC)
-    pilule(d, cx, y + k(104), "eleveai.fr/formation-crpe", NOIR(k(38)), AMBRE, NAVY, pad_x=28, pad_y=14)
-    d.text((cx, y + k(194)), "Tél. 06 92 74 29 58", font=NOIR(k(48)), fill=AMBRE)
+    # ⭐ SA PHILOSOPHIE, MOT POUR MOT (Frédéric, 15/10) : « ce présenter, ce
+    # sentir bien, savoir ce qui bloque, résoudre ». Quatre temps, dans cet
+    # ordre — ne pas les reformuler.
+    d.text((cx, y + k(30)), "Ma philosophie", font=NOIR(k(44)), fill=BLANC)
+    temps = ["Se présenter", "Se sentir bien", "Savoir ce qui bloque", "Résoudre"]
+    for i, l in enumerate(temps):
+        ly = y + k(96) + i * k(50)
+        r = k(18)
+        d.ellipse((cx, ly + k(2), cx + 2 * r, ly + k(2) + 2 * r), fill=AMBRE)
+        f = NOIR(k(25))
+        n = str(i + 1)
+        d.text((cx + r - largeur(d, n, f) / 2, ly + k(4)), n, font=f, fill=NAVY)
+        d.text((cx + 2 * r + k(18), ly - k(2)), l, font=NOIR(k(36)), fill=BLANC if i < 3 else AMBRE)
+    fin, _ = pilule(d, cx, y + k(306), "eleveai.fr/formation-crpe", NOIR(k(32)), AMBRE, NAVY,
+                    pad_x=22, pad_y=12)
+    d.text((fin + k(26), y + k(310)), "06 92 74 29 58", font=NOIR(k(40)), fill=BLANC)
     y += haut_cta
 
     # ── La signature : un visage, et Ti Margo
@@ -244,10 +264,11 @@ def composer_partage():
     d.text((cx, 250), "1re séance : sam. 24 oct.", font=GRAS(24), fill=GRIS)
     carte(im, (x0, 330, x1, LH - 40), rayon=28, fond_c=NAVY + (255,))
     d = ImageDraw.Draw(im)
-    d.text((cx, 356), "Test gratuit", font=NOIR(32), fill=BLANC)
-    d.text((cx, 400), "15 min pour savoir", font=GRAS(24), fill=(203, 213, 225))
-    d.text((cx, 430), "où vous en êtes", font=GRAS(24), fill=(203, 213, 225))
-    d.text((cx, 490), "06 92 74 29 58", font=NOIR(34), fill=AMBRE)
+    # Sa philosophie, comme sur le post (15/10) — plus de « Test gratuit » ici.
+    d.text((cx, 350), "Ma philosophie", font=NOIR(30), fill=BLANC)
+    for i, l in enumerate(["1. Se présenter", "2. Se sentir bien", "3. Savoir ce qui bloque", "4. Résoudre"]):
+        d.text((cx, 392 + i * 30), l, font=GRAS(25), fill=(226, 232, 240))
+    d.text((cx, 522), "06 92 74 29 58", font=NOIR(34), fill=AMBRE)
     return im.convert("RGB")
 
 
