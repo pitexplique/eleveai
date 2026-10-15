@@ -819,7 +819,7 @@ function pcGenArbreBranche(niveau: 3 | 4 | 5): TutorGeneratedQuestionV4 {
     `Réponse : $${P(b.v)}$.`
   );
   if (niveau === 5)
-    return { text: `${base} Justifie.`, format: "open", expected: pcEcritures(b.v, 100), comparator: "contains_keyword", explanation: explication };
+    return { text: `${base} Donne-la en écriture décimale.`, format: "open", expected: pcEcritures(b.v, 100), comparator: "contains_keyword", explanation: explication };
   const cand = [b.v, p, q, r, 100 - p, 100 - q, 100 - r].filter((x, i, arr) => arr.indexOf(x) === i);
   const bon = `$${P(b.v)}$`;
   const leurres = cand.slice(1).map((x) => `$${P(x)}$`);
@@ -905,7 +905,7 @@ function pcGenSuccession(niveau: 3 | 4 | 5, format: "short" | "qcm" | "open"): T
     `La probabilité est $${pcM(c.v, c.den)}$.`
   );
   if (format === "short") return { text, format, expected: pcEcritures(c.v, c.den), comparator: "number_equal", explanation };
-  if (format === "open") return { text: `${text} Justifie avec un arbre.`, format, expected: pcEcritures(c.v, c.den), comparator: "contains_keyword", explanation };
+  if (format === "open") return { text: `${text} Donne le résultat en écriture décimale.`, format, expected: pcEcritures(c.v, c.den), comparator: "contains_keyword", explanation };
   const extras: [number, number][] = [[p, 100], [q, 100], [p * p, 10000], [q * q, 10000], [2 * p * q, 10000]];
   const ok = [...c.leurres, ...extras].filter((l) => l[0] / l[1] <= 1 && Math.abs(l[0] / l[1] - c.v / c.den) > 1e-9);
   const bon = `$${pcM(c.v, c.den)}$`;
@@ -934,7 +934,7 @@ function pcGenTotales(format: "qcm" | "short" | "open"): TutorGeneratedQuestionV
   const canvas = avecArbre ? { canvas: t.fig } : {};
   if (format === "short") return { text: `${donnees} ${question}`, format, expected: pcEcritures(vB, 10000), comparator: "number_equal", explanation, ...canvas };
   if (format === "open")
-    return { text: `${donnees} ${question} Écris la formule utilisée.`, format, expected: pcEcritures(vB, 10000), comparator: "contains_keyword", explanation, ...canvas };
+    return { text: `${donnees} ${question} Donne le résultat en écriture décimale.`, format, expected: pcEcritures(vB, 10000), comparator: "number_equal", explanation, ...canvas };
   const bon = `$${P(p)} \\times ${P(q)} + ${P(100 - p)} \\times ${P(r)}$`;
   const fausses: [string, number][] = [
     [`$${P(q)} + ${P(r)}$`, (q + r) / 100],
@@ -2994,50 +2994,6 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "probabilites_conditionnelles", "registres", "reunion", "qcm"],
   },
   {
-    kind: "fixed",
-    id: "premiere_pc_reg_open_1",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_registres",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Explique la différence entre $P(A \\cap B)$ et $P_A(B)$, avec un exemple de la vie courante.",
-    format: "open",
-    expected: ["univers", "parmi", "sachant", "sous-groupe", "reference", "référence", "denominateur", "dénominateur"],
-    comparator: "contains_keyword",
-    hint: "Dans chaque cas, sur quel groupe compte-t-on ?",
-    explanation: exp(
-      "Les deux nombres comptent la même chose au numérateur, mais pas sur le même groupe de référence.",
-      "$P(A \\cap B)$ compte sur l'univers ENTIER : on tire au hasard dans toute la population et on demande les deux conditions.",
-      "$P_A(B)$ ne compte que dans $A$ : on s'est déjà restreint. Exemple : sur $100$ élèves, $20$ font espagnol et $12$ d'entre eux sont demi-pensionnaires. Alors $P(A \\cap B) = \\dfrac{12}{100} = 0{,}12$, mais $P_A(B) = \\dfrac{12}{20} = 0{,}6$.",
-      "Même numérateur, dénominateur différent : $P_A(B)$ change de monde, $P(A \\cap B)$ reste dans l'univers de départ."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "registres", "open"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_pc_reg_open_2",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_registres",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Quels mots d'un énoncé signalent qu'il faut écrire une probabilité CONDITIONNELLE ?",
-    format: "open",
-    expected: ["parmi", "sachant", "si l'on sait", "des ", "sous-groupe"],
-    comparator: "contains_keyword",
-    hint: "Cherche les mots qui restreignent la population avant de poser la question.",
-    explanation: exp(
-      "Une probabilité conditionnelle apparaît dès que l'énoncé restreint la population AVANT de poser sa question.",
-      "Les marqueurs les plus fréquents sont : « parmi », « sachant que », « si l'on sait que », « lorsqu'on a déjà », et le « des » d'un pourcentage (« $30\\,\\%$ DES fumeurs »).",
-      "À l'inverse, « et », « à la fois », « les deux » signalent une intersection, calculée sur l'univers entier.",
-      "« Parmi » et « sachant que » sont les deux signaux les plus sûrs : ils désignent ce qui va en indice."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "registres", "open"],
-  },
-  {
     kind: "template",
     id: "premiere_pc_reg_tpl_1",
     niveau: "premiere-spe",
@@ -3144,50 +3100,6 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "probabilites_conditionnelles", "tableau", "canvas", "piege", "qcm"],
   },
   {
-    kind: "fixed",
-    id: "premiere_pc_tab_open_1",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_tableau",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Dans un tableau croisé, comment sait-on quel effectif mettre au dénominateur d'une probabilité conditionnelle ?",
-    format: "open",
-    expected: ["condition", "total", "ligne", "colonne", "sous-groupe", "parmi"],
-    comparator: "contains_keyword",
-    hint: "Quel groupe l'énoncé désigne-t-il comme déjà connu ?",
-    explanation: exp(
-      "Une probabilité conditionnelle compte à l'intérieur d'un sous-groupe : ce sous-groupe fournit le dénominateur.",
-      "On repère la condition — le « sachant que » ou le « parmi » — et on cherche son effectif TOTAL dans le tableau : c'est un total de ligne ou de colonne, jamais le total général.",
-      "Le numérateur est la case qui croise les deux caractères. Par exemple $P_{\\text{seconde}}(\\text{DP})$ prend le total de la ligne « seconde » ; $P_{\\text{DP}}(\\text{seconde})$ prend le total de la colonne « DP ».",
-      "Le dénominateur est toujours le total du groupe mis en condition ; le total général ne sert qu'aux probabilités simples et aux intersections."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "tableau", "open"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_pc_tab_open_2",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_tableau",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Un élève calcule $\\dfrac{45}{200}$ et annonce « la probabilité qu'un élève de seconde soit demi-pensionnaire ». Explique son erreur.",
-    format: "open",
-    expected: ["total general", "total général", "intersection", "denominateur", "dénominateur", "80"],
-    comparator: "contains_keyword",
-    hint: "Que représente vraiment le nombre qu'il a calculé ?",
-    explanation: exp(
-      "Le dénominateur dit sur quel groupe on compte : le changer change complètement le sens du résultat.",
-      "En divisant par $200$, l'élève a compté sur l'ensemble des élèves du lycée : il a calculé $P(\\text{seconde} \\cap \\text{DP})$, la probabilité qu'un élève tiré au hasard soit à la fois en seconde et demi-pensionnaire.",
-      "La question portait sur les élèves de seconde uniquement : le dénominateur devait être $80$, et non $200$. Les deux résultats diffèrent nettement : $0{,}225$ contre $0{,}56$.",
-      "Il a calculé une intersection au lieu d'une conditionnelle : il fallait $\\dfrac{45}{80}$."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "tableau", "piege", "open"],
-  },
-  {
     kind: "template",
     id: "premiere_pc_tab_tpl_1",
     niveau: "premiere-spe",
@@ -3237,50 +3149,6 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       "La branche porte $0{,}8$."
     ),
     tags: ["premiere", "maths", "probabilites_conditionnelles", "arbre_construire", "reunion", "piege", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_pc_arbc_open_1",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_arbre_construire",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Explique comment on décide quel événement placer au PREMIER niveau d'un arbre pondéré.",
-    format: "open",
-    expected: ["conditionnelle", "sachant", "parmi", "donnee", "donnée", "premier"],
-    comparator: "contains_keyword",
-    hint: "Regarde quelles probabilités l'énoncé donne « toutes seules », sans condition.",
-    explanation: exp(
-      "Un arbre se construit dans l'ordre où l'information est donnée : au premier niveau, les événements dont on connaît la probabilité SANS condition.",
-      "On repère dans l'énoncé les probabilités conditionnelles : leur condition doit déjà avoir été franchie quand on les rencontre.",
-      "Si l'énoncé dit « $70\\,\\%$ viennent en car, et parmi eux $80\\,\\%$ sont à l'heure », alors « car » est au premier niveau et « à l'heure » au second — l'inverse obligerait à calculer avant de construire.",
-      "Au premier niveau : l'événement qui sert de CONDITION aux autres ; au second : ceux qui s'écrivent avec « parmi » ou « sachant que »."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "arbre_construire", "open"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_pc_arbc_open_2",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_arbre_construire",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Comment vérifier qu'un arbre pondéré est correctement rempli, avant de s'en servir ?",
-    format: "open",
-    expected: ["somme", "1", "noeud", "nœud", "vaut 1", "chemins"],
-    comparator: "contains_keyword",
-    hint: "Deux contrôles : un sur chaque nœud, un sur l'ensemble des chemins.",
-    explanation: exp(
-      "Un arbre correct obéit à deux règles de somme, faciles à vérifier d'un coup d'œil.",
-      "Premier contrôle : à chaque nœud, les branches qui en partent forment une partition, donc leurs probabilités s'additionnent à $1$.",
-      "Second contrôle : la somme des probabilités de TOUS les chemins complets vaut également $1$, puisqu'ils décrivent tous les cas possibles.",
-      "Si l'une des deux sommes ne tombe pas sur $1$, il y a une erreur — le plus souvent une conditionnelle confondue avec une probabilité simple."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "arbre_construire", "open"],
   },
   {
     kind: "template",
@@ -3367,50 +3235,6 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "probabilites_conditionnelles", "partition", "piege", "qcm"],
   },
   {
-    kind: "fixed",
-    id: "premiere_pc_part_open_1",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_partition",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Pourquoi la formule des probabilités totales exige-t-elle une partition de l'univers ?",
-    format: "open",
-    expected: ["compte deux fois", "oublie", "chevauche", "recouvre", "incompatibles", "reunion"],
-    comparator: "contains_keyword",
-    hint: "Que se passerait-il si deux morceaux se chevauchaient ? S'il en manquait un ?",
-    explanation: exp(
-      "La formule des probabilités totales découpe $B$ en morceaux selon les cas de la partition, puis additionne leurs probabilités.",
-      "Si deux cas se chevauchaient, les issues communes seraient comptées DEUX FOIS : la somme dépasserait la vraie probabilité.",
-      "Si les cas ne recouvraient pas tout l'univers, une partie de $B$ ne serait comptée nulle part : la somme serait trop petite.",
-      "Il faut donc les deux conditions à la fois : ni double compte, ni oubli — c'est exactement la définition d'une partition."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "partition", "open"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_pc_part_open_2",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_partition",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Donne un exemple de partition de l'univers en trois événements, dans une situation de ton choix.",
-    format: "open",
-    expected: ["incompatibles", "reunion", "réunion", "univers", "tous les cas", "chacun"],
-    comparator: "contains_keyword",
-    hint: "Choisis un caractère qui range chaque individu dans une case et une seule.",
-    explanation: exp(
-      "Une partition découpe l'univers en cas qui ne se chevauchent pas et n'oublient personne.",
-      "Il suffit de choisir un caractère qui classe chaque issue dans une case et une seule.",
-      "Exemples : pour un lycée, « seconde », « première », « terminale » ; pour un dé, « moins de $3$ », « $3$ ou $4$ », « plus de $4$ » ; pour un trajet, « à pied », « en car », « autrement ».",
-      "Le test : chaque individu tombe dans exactement une case — ni deux, ni zéro."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "partition", "open"],
-  },
-  {
     kind: "template",
     id: "premiere_pc_part_tpl_1",
     niveau: "premiere-spe",
@@ -3495,50 +3319,6 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "probabilites_conditionnelles", "inverser", "qcm"],
   },
   {
-    kind: "fixed",
-    id: "premiere_pc_inv_open_1",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_inverser",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Explique, avec tes mots, pourquoi « la plupart des accidents ont lieu près du domicile » ne veut PAS dire « rouler près de chez soi est dangereux ».",
-    format: "open",
-    expected: ["inverse", "condition", "plus souvent", "temps", "trajets", "denominateur", "dénominateur"],
-    comparator: "contains_keyword",
-    hint: "Compare « parmi les accidents » et « parmi les trajets ».",
-    explanation: exp(
-      "La phrase compare deux probabilités conditionnelles qui n'ont pas le même groupe de référence.",
-      "L'affirmation vraie est $P_{\\text{accident}}(\\text{près de chez soi})$ : parmi les accidents, beaucoup ont lieu près du domicile.",
-      "La conclusion tirée serait $P_{\\text{près de chez soi}}(\\text{accident})$ : parmi les trajets près de chez soi, la proportion d'accidents. Or on fait énormément plus de trajets près de chez soi qu'ailleurs : le dénominateur est immense, la proportion reste faible.",
-      "On a inversé la condition : le groupe de référence n'est pas le même, la conclusion ne suit pas."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "inverser", "open"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_pc_inv_open_2",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_inverser",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Comment calcule-t-on $P_B(A)$ quand l'énoncé ne donne que $P(A)$, $P_A(B)$ et $P_{\\bar A}(B)$ ?",
-    format: "open",
-    expected: ["probabilites totales", "probabilités totales", "intersection", "denominateur", "dénominateur", "P(B)"],
-    comparator: "contains_keyword",
-    hint: "Il te manque le dénominateur : comment l'obtenir ?",
-    explanation: exp(
-      "$P_B(A) = \\dfrac{P(A \\cap B)}{P(B)}$ : il faut donc le numérateur et le dénominateur, qu'aucun n'est donné directement.",
-      "Le numérateur s'obtient par la règle du produit : $P(A \\cap B) = P(A) \\times P_A(B)$ — c'est le premier chemin de l'arbre.",
-      "Le dénominateur s'obtient par la formule des probabilités totales : $P(B) = P(A) \\times P_A(B) + P(\\bar A) \\times P_{\\bar A}(B)$, c'est-à-dire la somme des deux chemins menant à $B$.",
-      "On divise ensuite l'un par l'autre : c'est exactement le calcul qui redresse l'illusion des faux positifs."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "inverser", "open"],
-  },
-  {
     kind: "template",
     id: "premiere_pc_inv_tpl_1",
     niveau: "premiere-spe",
@@ -3615,50 +3395,6 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       "$P_A(B) = 0$ — deux événements incompatibles de probabilités non nulles sont toujours dépendants."
     ),
     tags: ["premiere", "maths", "probabilites_conditionnelles", "independance_incompatible", "qcm"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_pc_indinc_open_1",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_independance_incompatible",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Explique pourquoi « incompatibles » et « indépendants » sont presque des contraires, alors qu'on les confond souvent.",
-    format: "open",
-    expected: ["intersection vide", "renseigne", "informe", "produit", "contraire", "exclut"],
-    comparator: "contains_keyword",
-    hint: "Si $A$ est réalisé, que sais-tu de $B$ dans chaque cas ?",
-    explanation: exp(
-      "Indépendants signifie : savoir que $A$ s'est produit n'apprend RIEN sur $B$, la probabilité de $B$ ne change pas.",
-      "Incompatibles signifie : savoir que $A$ s'est produit apprend TOUT sur $B$ — il est devenu impossible.",
-      "Le second cas est donc le comble de la dépendance. Deux événements incompatibles de probabilités non nulles ne peuvent jamais être indépendants : $P(A \\cap B) = 0$ alors que $P(A) \\times P(B) \\neq 0$.",
-      "La confusion vient du vocabulaire courant, où « indépendant » évoque « séparé » : en probabilités, c'est presque l'inverse."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "independance_incompatible", "open"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_pc_indinc_open_2",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_independance_incompatible",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Donne un exemple de deux événements incompatibles, et un exemple de deux événements indépendants, avec un même dé ou deux dés.",
-    format: "open",
-    expected: ["deux des", "deux dés", "meme lancer", "même lancer", "pair", "impair", "intersection vide"],
-    comparator: "contains_keyword",
-    hint: "L'incompatibilité se joue dans un seul lancer ; l'indépendance demande souvent deux lancers.",
-    explanation: exp(
-      "Incompatibles : les deux ne peuvent pas se produire ensemble. Indépendants : l'un ne renseigne pas sur l'autre.",
-      "Sur UN SEUL lancer, « obtenir un nombre pair » et « obtenir $3$ » sont incompatibles : leur intersection est vide.",
-      "Sur DEUX lancers, « le premier dé donne $6$ » et « le second dé donne $6$ » sont indépendants : le premier résultat n'influence pas le second, et $P(A \\cap B) = \\dfrac{1}{36} = \\dfrac{1}{6} \\times \\dfrac{1}{6}$.",
-      "Les deux notions ne parlent même pas de la même chose : l'une des issues possibles, l'autre de l'information apportée."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "independance_incompatible", "open"],
   },
   {
     kind: "template",
@@ -3745,50 +3481,6 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     tags: ["premiere", "maths", "probabilites_conditionnelles", "succession", "piege", "qcm"],
   },
   {
-    kind: "fixed",
-    id: "premiere_pc_suc_open_1",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_succession",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Explique pourquoi un tirage AVEC remise donne des épreuves indépendantes, mais pas un tirage sans remise.",
-    format: "open",
-    expected: ["composition", "identique", "change", "remet", "meme sac", "même sac"],
-    comparator: "contains_keyword",
-    hint: "Dans quel état se trouve le sac au moment du second tirage, dans chaque cas ?",
-    explanation: exp(
-      "Deux épreuves sont indépendantes quand le résultat de la première ne change pas les probabilités de la seconde.",
-      "Avec remise, on remet la boule : le sac retrouve exactement sa composition de départ. La seconde épreuve se déroule dans les mêmes conditions, quel que soit le premier résultat.",
-      "Sans remise, il manque une boule — et pas n'importe laquelle : celle qu'on vient de tirer. Les proportions changent, et elles changent différemment selon ce qu'on a tiré.",
-      "C'est la composition du sac au second tirage qui décide : identique → indépendance, modifiée → dépendance."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "succession", "open"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_pc_suc_open_2",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_succession",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Un joueur a obtenu cinq fois « pile » de suite. Il affirme que « face » a maintenant plus de chances de sortir. Explique pourquoi il se trompe.",
-    format: "open",
-    expected: ["independant", "indépendant", "memoire", "mémoire", "toujours", "1/2", "0,5"],
-    comparator: "contains_keyword",
-    hint: "La pièce se souvient-elle des lancers précédents ?",
-    explanation: exp(
-      "Les lancers successifs d'une pièce sont des épreuves indépendantes : chaque lancer ignore complètement les précédents.",
-      "La probabilité de « face » reste donc $\\dfrac{1}{2}$ au sixième lancer, exactement comme au premier.",
-      "Ce qui est rare, c'est la SUITE de cinq piles vue d'avance ($\\dfrac{1}{32}$). Mais une fois qu'elle est réalisée, elle n'influence rien : la pièce n'a pas de mémoire.",
-      "C'est l'erreur du joueur : confondre « une longue série est improbable au départ » et « elle doit se corriger ensuite »."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "succession", "piege", "open"],
-  },
-  {
     kind: "template",
     id: "premiere_pc_suc_tpl_1",
     niveau: "premiere-spe",
@@ -3819,52 +3511,10 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
      QUESTIONS OUVERTES — compléments du 02/08/2026.
      Quatre micro-compétences écrites avant le découpage n'avaient aucune
      question ouverte : deux ouvertes fixes + un TEMPLATE ouvert chacune.
+     ⛔ 15/10/2026 : les ouvertes fixes (« Explique pourquoi… », corrigées au
+     mot-clé) sont SUPPRIMÉES ; ne restent que des gabarits chiffrés précis.
   ========================================================= */
 
-  {
-    kind: "fixed",
-    id: "premiere_pc_cond_open_1",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_conditionnelle",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Pourquoi divise-t-on par $P(A)$ dans la formule $P_A(B) = \\dfrac{P(A \\cap B)}{P(A)}$ ?",
-    format: "open",
-    expected: ["nouvel univers", "univers", "reduit", "réduit", "ramene a 1", "ramène à 1", "reference"],
-    comparator: "contains_keyword",
-    hint: "Dans quel ensemble se place-t-on une fois qu'on sait $A$ réalisé ?",
-    explanation: exp(
-      "Savoir que $A$ est réalisé change le monde dans lequel on compte : les issues hors de $A$ n'existent plus.",
-      "$A$ devient le nouvel univers. Or un univers doit avoir une probabilité totale égale à $1$, et $A$ ne pèse que $P(A)$.",
-      "On divise donc tout par $P(A)$ pour « remettre à l'échelle » : c'est exactement ce que fait la formule. Le numérateur $P(A \\cap B)$ compte la part de $B$ qui survit dans ce nouvel univers.",
-      "La division ramène le sous-groupe à un univers complet — d'où l'exigence $P(A) \\neq 0$ : on ne peut pas se placer dans un événement impossible."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "conditionnelle", "open"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_pc_cond_open_2",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_conditionnelle",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Peut-on avoir $P_A(B)$ plus grand que $P(B)$ ? Explique ce que cela signifie.",
-    format: "open",
-    expected: ["favorise", "augmente", "information", "plus probable", "lien", "oui"],
-    comparator: "contains_keyword",
-    hint: "Que dit-on quand savoir $A$ rend $B$ plus probable ?",
-    explanation: exp(
-      "$P(B)$ est la probabilité de $B$ dans la population entière ; $P_A(B)$ la même probabilité, mais restreinte aux individus de $A$.",
-      "Rien n'oblige les deux à être égales : si $B$ est plus fréquent parmi les $A$ que dans l'ensemble, alors $P_A(B) > P(B)$.",
-      "Cela signifie que savoir $A$ réalisé rend $B$ PLUS probable : les deux événements ne sont pas indépendants, $A$ « favorise » $B$. Exemple : parmi les élèves qui révisent, la proportion de bonnes notes dépasse celle de la classe entière.",
-      "Oui, c'est courant — et l'égalité $P_A(B) = P(B)$ est justement le cas particulier de l'indépendance."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "conditionnelle", "open"],
-  },
   {
     kind: "template",
     id: "premiere_pc_cond_tpl_open",
@@ -3875,8 +3525,8 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     difficulty: 5,
     theme: "neutral",
     hint: "$P_A(B) = \\dfrac{P(A \\cap B)}{P(A)}$ — puis compare le résultat à $P(B)$.",
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "conditionnelle", "open", "template"],
-    // ★5 ouverte — une situation tirée : calculer P_A(B), la comparer à P(B), interpréter.
+    tags: ["premiere", "maths", "probabilites_conditionnelles", "conditionnelle", "qcm", "template"],
+    // ★5 QCM — une situation tirée : calculer P_A(B), la comparer à P(B), conclure.
     // Un tirage sur quatre est construit INDÉPENDANT (nAB × N = nA × nB).
     generate: () => {
       const c = pickOne(PC_CTX);
@@ -3896,16 +3546,33 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
       const donnees = pct
         ? `${c.verbe} des ${c.pop} : $${pcPctM(e.nA, e.N)}$ d'entre ${c.eux} ${c.A.p}, $${pcPctM(e.nB, e.N)}$ ${c.B.p}, et $${pcPctM(e.nAB, e.N)}$ ${c.A.p} et ${c.B.p}. ${pcDef(c)}`
         : `On choisit ${c.un} au hasard. ${pcDef(c)} On donne $P(${a}) = ${pcM(e.nA, e.N)}$, $P(${b}) = ${pcM(e.nB, e.N)}$ et $P(${a} \\cap ${b}) = ${pcM(e.nAB, e.N)}$.`;
+      // 15/10/2026 : ancienne version ouverte (« compare et interprète »,
+      // corrigée au mot-clé « divise », « compare »…) → QCM précis : la valeur
+      // de P_A(B) ET la bonne conclusion ; leurres = mauvaises conclusions,
+      // condition inversée P_B(A), intersection prise pour P_A(B).
       const question = pickOne([
-        `Calcule $P_{${a}}(${b})$, puis compare-la à $P(${b})$ et interprète.`,
-        `Savoir que ${c.le} ${c.A.s} rend-il l'événement $${b}$ plus probable, moins probable, ou rien ne change ? Justifie par un calcul.`,
-        `Calcule la probabilité de l'événement « ${c.le} ${c.B.s} » sachant que ${c.le} ${c.A.s}, et dis ce que ce résultat apprend en le comparant à $P(${b})$.`,
+        `Calcule $P_{${a}}(${b})$ et compare-la à $P(${b})$. Quelle réponse est juste ?`,
+        `Savoir que ${c.le} ${c.A.s} rend-il l'événement $${b}$ plus probable, moins probable, ou rien ne change ? Choisis la réponse juste.`,
+        `On calcule la probabilité de l'événement « ${c.le} ${c.B.s} » sachant que ${c.le} ${c.A.s}, puis on la compare à $P(${b})$. Quelle réponse est juste ?`,
       ]);
+      const concl = (l: string) =>
+        l === "n'influence pas"
+          ? `rien ne change : $${a}$ et $${b}$ sont indépendants`
+          : `savoir que ${c.le} ${c.A.s} rend $${b}$ ${l === "favorise" ? "plus" : "moins"} probable`;
+      const val = (n: number, d: number) => `$P_{${a}}(${b}) = ${pcM(n, d)}$`;
+      const bon = `${val(e.nAB, e.nA)} : ${concl(lien)}`;
+      const autres = ["favorise", "défavorise", "n'influence pas"].filter((l) => l !== lien);
+      const leurres = [
+        ...autres.map((l) => `${val(e.nAB, e.nA)} : ${concl(l)}`),
+        ...(pcJuste(e.nAB, e.nB, 4) ? [`${val(e.nAB, e.nB)} : ${concl(lien)}`] : []),
+        `${val(e.nAB, e.N)} : ${concl(lien)}`,
+      ];
       return {
         text: `${donnees} ${question}`,
-        format: "open",
-        expected: [r, "divise", lien.split(" ")[0], "compare", "independant"],
-        comparator: "contains_keyword",
+        format: "qcm",
+        choices: makeChoices(bon, leurres),
+        expected: [bon],
+        comparator: "mcq_exact",
         explanation: exp(
           "Une probabilité conditionnelle se calcule en divisant l'intersection par la probabilité de la condition, puis s'interprète en la comparant à la probabilité simple.",
           `$P_{${a}}(${b}) = \\dfrac{P(${a} \\cap ${b})}{P(${a})} = \\dfrac{${pcM(e.nAB, e.N)}}{${pcM(e.nA, e.N)}} = ${pcM(e.nAB, e.nA)}$.`,
@@ -3918,50 +3585,6 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     },
   },
 
-  {
-    kind: "fixed",
-    id: "premiere_pc_arb_open_1",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_arbre",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Dans un arbre pondéré, pourquoi multiplie-t-on le long d'un chemin, mais additionne-t-on entre plusieurs chemins ?",
-    format: "open",
-    expected: ["et", "ou", "successivement", "plusieurs chemins", "intersection", "reunion", "réunion"],
-    comparator: "contains_keyword",
-    hint: "Un chemin traduit un « et » ; plusieurs chemins traduisent un « ou ».",
-    explanation: exp(
-      "Un arbre traduit deux opérations logiques différentes, et chacune a son opération arithmétique.",
-      "Suivre UN chemin, c'est réaliser une étape PUIS une autre : c'est un « et », donc une intersection. La règle du produit donne $P(A \\cap B) = P(A) \\times P_A(B)$.",
-      "Emprunter plusieurs chemins pour atteindre un même événement, c'est réaliser l'un OU l'autre : ces chemins sont incompatibles — on ne peut pas passer par deux branches à la fois — donc leurs probabilités s'additionnent.",
-      "Le long du chemin on multiplie (« et »), entre les chemins on additionne (« ou ») : c'est exactement la formule des probabilités totales."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "arbre", "open"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_pc_arb_open_2",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_arbre",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Quels contrôles permettent de vérifier qu'un arbre pondéré est correct avant de s'en servir ?",
-    format: "open",
-    expected: ["somme", "1", "noeud", "nœud", "chemins", "verifie"],
-    comparator: "contains_keyword",
-    hint: "Deux sommes doivent valoir $1$ : lesquelles ?",
-    explanation: exp(
-      "Un arbre correct obéit à deux règles de somme, vérifiables d'un coup d'œil avant tout calcul.",
-      "Premier contrôle, à chaque nœud : les branches qui en partent décrivent tous les cas possibles à cette étape, leurs probabilités totalisent donc $1$.",
-      "Second contrôle, à la fin : la somme des probabilités de TOUS les chemins complets vaut également $1$, puisqu'ils épuisent les possibilités.",
-      "Si l'une des deux sommes ne tombe pas sur $1$, il y a une erreur — le plus souvent une probabilité simple placée là où il fallait une conditionnelle."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "arbre", "open"],
-  },
   {
     kind: "template",
     id: "premiere_pc_arb_tpl_open",
@@ -3977,50 +3600,6 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
   },
 
   {
-    kind: "fixed",
-    id: "premiere_pc_tot_open_1",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_totales",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Explique l'idée de la formule des probabilités totales, avec tes mots.",
-    format: "open",
-    expected: ["decoupe", "découpe", "cas", "morceaux", "additionne", "chemins"],
-    comparator: "contains_keyword",
-    hint: "On découpe un événement en morceaux : selon quoi ?",
-    explanation: exp(
-      "La formule des probabilités totales sert quand on ne sait pas calculer $P(B)$ directement, mais qu'on sait la calculer dans chaque cas de figure.",
-      "On découpe l'univers en cas qui ne se chevauchent pas et n'oublient rien : une partition, souvent $\\{A ; \\bar A\\}$.",
-      "L'événement $B$ se découpe alors en morceaux correspondants : $B \\cap A$ et $B \\cap \\bar A$. Comme ces morceaux sont incompatibles, leurs probabilités s'additionnent.",
-      "$P(B) = P(A) \\times P_A(B) + P(\\bar A) \\times P_{\\bar A}(B)$ : sur l'arbre, c'est la somme de tous les chemins qui aboutissent à $B$."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "totales", "open"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_pc_tot_open_2",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_totales",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Un élève écrit $P(B) = P_A(B) + P_{\\bar A}(B)$. Explique pourquoi c'est faux.",
-    format: "open",
-    expected: ["pondere", "pondéré", "poids", "P(A)", "multiplie", "depasser 1", "dépasser 1"],
-    comparator: "contains_keyword",
-    hint: "Que se passerait-il si les deux conditionnelles valaient $0{,}8$ ?",
-    explanation: exp(
-      "Les probabilités conditionnelles se calculent dans des sous-groupes de tailles différentes : on ne peut pas les additionner telles quelles.",
-      "Il faut PONDÉRER chacune par la taille de son groupe, c'est-à-dire par $P(A)$ et $P(\\bar A)$.",
-      "Sans ces poids, le résultat peut dépasser $1$ : si $P_A(B) = P_{\\bar A}(B) = 0{,}8$, sa somme vaudrait $1{,}6$, ce qui est impossible. Avec les poids, on retrouverait $0{,}8$, ce qui est cohérent.",
-      "La formule correcte est $P(B) = P(A)P_A(B) + P(\\bar A)P_{\\bar A}(B)$ : c'est une moyenne pondérée, pas une somme."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "totales", "piege", "open"],
-  },
-  {
     kind: "template",
     id: "premiere_pc_tot_tpl_open",
     niveau: "premiere-spe",
@@ -4034,50 +3613,6 @@ export const probabilitesConditionnellesBank: TutorBankItemV4[] = [
     generate: () => pcGenTotales("open"),
   },
 
-  {
-    kind: "fixed",
-    id: "premiere_pc_ind_open_1",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_independance",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Que signifie concrètement « $A$ et $B$ sont indépendants » ? Explique sans formule.",
-    format: "open",
-    expected: ["n'apprend rien", "ne change pas", "information", "savoir", "meme probabilite", "même probabilité"],
-    comparator: "contains_keyword",
-    hint: "Que se passe-t-il pour la probabilité de $B$ quand on apprend que $A$ est réalisé ?",
-    explanation: exp(
-      "L'indépendance est une question d'INFORMATION : apprendre quelque chose modifie-t-il ce qu'on attend de l'autre ?",
-      "Deux événements sont indépendants quand savoir que $A$ s'est produit n'apprend rien sur $B$ : sa probabilité reste la même.",
-      "Cela s'écrit $P_A(B) = P(B)$, ou de façon équivalente $P(A \\cap B) = P(A) \\times P(B)$. Deux lancers de dé successifs sont indépendants : le premier résultat ne renseigne pas sur le second.",
-      "À l'inverse, « être demi-pensionnaire » et « habiter loin » ne le sont probablement pas : connaître l'un change ce qu'on attend de l'autre."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "independance", "open"],
-  },
-  {
-    kind: "fixed",
-    id: "premiere_pc_ind_open_2",
-    niveau: "premiere-spe",
-    matiere: "maths",
-    notionId: "probabilites_conditionnelles",
-    microId: "pc_independance",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Comment démontre-t-on que deux événements sont indépendants, et pourquoi l'intuition ne suffit-elle pas ?",
-    format: "open",
-    expected: ["calcul", "produit", "P(A) x P(B)", "verifie", "vérifie", "intersection"],
-    comparator: "contains_keyword",
-    hint: "Quelle égalité doit-on vérifier avec des nombres ?",
-    explanation: exp(
-      "L'indépendance a une définition chiffrée : $P(A \\cap B) = P(A) \\times P(B)$. Ce n'est pas une impression, c'est une égalité à vérifier.",
-      "On calcule donc séparément l'intersection d'un côté, le produit des deux probabilités de l'autre, puis on compare.",
-      "L'intuition trompe souvent : deux tirages « qui n'ont rien à voir » peuvent être liés par une cause commune, et deux événements qui semblent liés peuvent être numériquement indépendants. Seul le calcul tranche.",
-      "On compare $P(A \\cap B)$ et $P(A) \\times P(B)$ : égalité → indépendants, sinon non. Et attention, incompatibles ne veut pas dire indépendants — c'est même le contraire."
-    ),
-    tags: ["premiere", "maths", "probabilites_conditionnelles", "independance", "open"],
-  },
   {
     kind: "template",
     id: "premiere_pc_ind_tpl_open",

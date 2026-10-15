@@ -2150,29 +2150,6 @@ export const probabilitesBank: TutorBankItemV4[] = [
     generate: () => genDefi(4),
   },
 
-  {
-    kind: "fixed",
-    id: "cm1_probabilite_defi_open_1_expliquer_possible",
-    niveau: "cm1",
-    matiere: "maths",
-    notionId: "probabilite",
-    microId: "probabilite_defi",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Explique pourquoi tirer une bille rouge est possible dans ce sac.",
-    format: "open",
-    expected: ["rouge", "bille", "possible"],
-    comparator: "contains_keyword",
-    hint: "Regarde s’il y a au moins une bille rouge.",
-    explanation: exp(
-      "Un événement possible peut arriver.",
-      "On regarde si l’objet demandé existe.",
-      "Le sac contient des billes rouges.",
-      "Tirer une bille rouge est donc possible."
-    ),
-    tags: ["cm1", "probabilite", "defi", "open", "billes", "canvas"],
-    canvas: billesCanvas(),
-  },
 
   // ============================================================
   // TOP-UP — PROBABILITE_VOCABULAIRE
