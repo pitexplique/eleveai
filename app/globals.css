@@ -1,4 +1,8 @@
 @import "tailwindcss";
+/* ⛔ 15/10/2026 : Tailwind lisait aussi manim/ (scripts, consignes). Un chemin
+   Windows dans un .md (« \1418b1ff… ») y passait pour un échappement CSS, et
+   « Invalid code point » cassait la construction de TOUT le site. */
+@source not "../manim";
 
 /* 🔥 RESET COMPLET */
 html, body {

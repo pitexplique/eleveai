@@ -19,7 +19,7 @@ LA 3e EST DÉJÀ FAITE : LA RÉUTILISER, PAS LA RECOPIER
   → reprendre le CODE des dessins (dé, roue, sac, cartes, bonbons, arbre) et la structure des scènes, mais PAS les mêmes situations ni les mêmes phrases : la 4e est un cran EN DESSOUS de la 3e (pas d'arbre à deux épreuves, pas d'événement contraire formalisé). Un élève qui regarde les deux doit voir l'idée grandir, pas la même vidéo.
 - Micros propres à la 4e (rien à reprendre, à créer) : proba_convertir (fraction ↔ décimal ↔ pourcentage), proba_comparer (quel jeu est le plus favorable ?), et les 5 micros fréquences (fréquence observée, la comparer à la probabilité, répéter l'expérience, taille de l'échantillon — histogramme du dé 600 lancers de manim/scripts/annonce/annonce_probabilites.py).
 - Dessins validés à réutiliser : manim/scripts/annonce/annonce_probabilites.py et annonce_probabilites_short.py.
-- Consigne de rendu de la 3e, à adapter (chemins 3e → 4e, ceintures) : C:\Users\FRED\AppData\Local\Temp\claude\C--Users-FRED-Documents-eleveai\1418b1ff-2e82-4d09-8b86-740d4cbbca04\scratchpad\consigne_proba3e.md (si elle n'existe plus : elle est résumée dans la mémoire serie-probabilites-cm1-terminale).
+- Consigne de rendu de la 3e, à adapter (chemins 3e → 4e, ceintures) : C:/Users/FRED/AppData/Local/Temp/claude/C--Users-FRED-Documents-eleveai/1418b1ff-2e82-4d09-8b86-740d4cbbca04/scratchpad/consigne_proba3e.md (si elle n'existe plus : elle est résumée dans la mémoire serie-probabilites-cm1-terminale).
 
 RÉGLAGES 4e
 - Classe Manim : class Notion4e(Notion6e) avec identite = "Maths 4e — EleveAI" ; shorts sur Short6e + margo_bas.
