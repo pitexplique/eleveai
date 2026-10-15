@@ -1,0 +1,13 @@
+{
+  "00-garde": "L'événement contraire. Le calcul le plus rapide.",
+  "01-situation": "Aux petits chevaux, il faut un 6 pour sortir. Quelle chance de ne pas sortir ?",
+  "02-calcul": "Ne pas faire 6, c'est le contraire de faire 6. Faire 6 : 1 chance sur 6. Ne pas faire 6 : 1 moins 1 sur 6, c'est 5 sur 6.",
+  "03-regle": "La règle : la probabilité du contraire de A, c'est 1 moins la probabilité de A. A et son contraire se partagent toutes les issues : leurs probabilités font 1.",
+  "04-mots": "Bien écrire le contraire, c'est la moitié du travail. Le contraire de « obtenir un nombre pair », c'est « obtenir un nombre impair ». Le contraire de « au moins 3 », c'est « moins de 3 ».",
+  "05-pourcentage": "Avec des pourcentages. La météo annonce 70 pour cent de risque de pluie. La probabilité qu'il ne pleuve pas : 100 moins 70, 30 pour cent.",
+  "06-piege": "Le piège : oublier le 1 moins. Si gagner a une probabilité de 0,2, perdre n'a pas 0,2, mais 1 moins 0,2, c'est 0,8.",
+  "07-defi": "À toi de jouer. Dans un sac, la probabilité de tirer une bille verte est 3 sur 8. Quelle est la probabilité de ne pas tirer une bille verte ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 1 moins 3 sur 8, c'est 8 sur 8 moins 3 sur 8 : 5 sur 8.",
+  "08-finale": "Ce que tu as appris. La probabilité du contraire, c'est 1 moins la probabilité. Bien écrire le contraire, c'est la moitié du travail. Et ça marche aussi en pourcentage. L'épisode 7 t'attend : deux épreuves.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

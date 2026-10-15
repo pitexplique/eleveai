@@ -1,0 +1,11 @@
+{
+  "00-garde": "Les défis des probabilités. Prêt à raisonner ?",
+  "01-defi1": "Premier défi. Boîte A : 7 bonbons blancs et 6 roses. Boîte B : 3 blancs et 1 rose. Tu veux un blanc. Quelle boîte choisis-tu ?",
+  "02-correction1": "Boîte A : 7 sur 13, un peu plus d'une chance sur 2. Boîte B : 3 sur 4. La boîte B gagne, avec pourtant moins de bonbons blancs. Ce qui compte, c'est la proportion.",
+  "03-defi2": "Deuxième défi. Un sac contient 5 jetons jaunes et 9 noirs. Combien de jaunes faut-il ajouter pour que la probabilité du jaune soit 2 sur 5 ?",
+  "04-correction2": "On essaie. Avec 1 jaune de plus : 6 jaunes sur 15 jetons. 6 sur 15, c'est 2 sur 5. Il faut ajouter 1 jaune.",
+  "05-defi3": "Troisième défi. Un dé est truqué : le 6 sort deux fois plus souvent que chacune des autres faces. Quelle est la probabilité du 6 ?",
+  "06-correction3": "Les 5 autres faces comptent 1 part chacune, le 6 compte 2 parts : 7 parts en tout. Le 6 a 2 chances sur 7.",
+  "07-finale": "Ce que tu as appris. On compare des proportions, pas des quantités. On cherche le nombre qui donne la bonne probabilité. Et on compte en parts quand ce n'est pas équiprobable. Tu as fini la série de 3e. Les défis continuent sur le coach !",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

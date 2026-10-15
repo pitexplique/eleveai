@@ -1,0 +1,13 @@
+{
+  "00-garde": "Calculer une probabilité. En un seul calcul.",
+  "01-situation": "Dans un paquet, 4 bonbons au citron, 5 à la fraise et 3 à la menthe. Les yeux fermés, tu en prends un. Quelle chance d'avoir la fraise ?",
+  "02-formule": "Quand les issues sont équiprobables, la probabilité, c'est le nombre d'issues favorables sur le nombre total d'issues. 5 bonbons à la fraise, 12 en tout : 5 sur 12.",
+  "03-ecritures": "Une probabilité s'écrit de trois façons. 1 sur 4, c'est 0,25, c'est 25 pour cent.",
+  "04-somme": "Citron : 4 sur 12. Fraise : 5 sur 12. Menthe : 3 sur 12. Le total fait 12 sur 12, c'est 1. La somme des probabilités de toutes les issues fait toujours 1.",
+  "05-tableau": "Avec un tableau. Dans une classe de 28 élèves, 7 sont des filles demi-pensionnaires. On tire un élève au hasard : la probabilité d'une fille demi-pensionnaire est 7 sur 28, donc 1 sur 4.",
+  "06-piege": "Le piège : diviser par le nombre de catégories. 3 parfums, donc 1 sur 3 ? Non : on divise par le nombre de bonbons.",
+  "07-defi": "À toi de jouer. Des maillots numérotés de 1 à 14. Probabilité d'obtenir un multiple de 4 ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Les multiples de 4 : 4, 8 et 12. 3 issues favorables sur 14 : 3 sur 14.",
+  "08-finale": "Ce que tu as appris. Une probabilité, c'est favorables sur total, quand c'est équiprobable. Elle s'écrit en fraction, en décimal ou en pourcentage. Et la somme fait toujours 1. L'épisode 6 t'attend : l'événement contraire.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

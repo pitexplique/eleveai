@@ -1,0 +1,14 @@
+{
+  "00-garde": "Deux épreuves. Que se passe-t-il quand on recommence ?",
+  "01-situation": "Deux pièces, lancées l'une après l'autre. Quelle chance d'avoir deux fois pile ?",
+  "02-arbre": "On dessine un arbre. Premier lancer : pile ou face, 1 chance sur 2 chacun. Deuxième lancer : encore pile ou face. 4 chemins : pile pile, pile face, face pile, face face.",
+  "03-multiplier": "Sur un chemin, on multiplie. Pile puis pile : 1 sur 2 fois 1 sur 2, c'est 1 sur 4.",
+  "04-avec-remise": "Avec un sac : 2 billes rouges et 3 bleues. On tire une bille, on la remet, et on en tire une autre. Deux rouges : 2 sur 5 fois 2 sur 5, c'est 4 sur 25.",
+  "05-sans-remise": "Sans remise, le sac change. Après une rouge, il reste 1 rouge sur 4 billes. Deux rouges : 2 sur 5 fois 1 sur 4, c'est 2 sur 20, donc 1 sur 10.",
+  "06-tableau": "Avec deux dés, un tableau de 6 lignes et 6 colonnes donne les 36 issues. Faire un double : 6 cases sur 36, c'est 1 sur 6.",
+  "07-piege": "Le piège : additionner au lieu de multiplier sur un chemin. 1 sur 2 plus 1 sur 2, ça fait 1 : ce n'est pas la chance d'avoir deux piles.",
+  "08-defi": "À toi de jouer. 6 perles jaunes et 4 noires. On en tire deux, sans remise. Probabilité de deux perles jaunes ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Première jaune : 6 sur 10. Il reste alors 5 jaunes sur 9 perles. 6 sur 10 fois 5 sur 9, c'est 30 sur 90, donc 1 sur 3.",
+  "09-finale": "Ce que tu as appris. Deux épreuves se représentent par un arbre ou un tableau. Sur un chemin, on multiplie. Sans remise, le sac change entre les deux tirages. L'épisode 8 t'attend : les défis.",
+  "10-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

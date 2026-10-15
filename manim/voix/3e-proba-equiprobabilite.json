@@ -1,0 +1,12 @@
+{
+  "00-garde": "L'équiprobabilité. Toutes les issues ont-elles la même chance ?",
+  "01-situation": "À la kermesse, une roue est partagée en 4 couleurs : rouge, bleu, vert et jaune. Le rouge prend la moitié de la roue. Tu paries sur quelle couleur ?",
+  "02-pas-equi": "Il y a 4 issues, mais elles n'ont pas la même chance. Le rouge prend la moitié de la roue : il a 1 chance sur 2. Ici, les issues ne sont pas équiprobables.",
+  "03-definition": "Une situation est équiprobable quand toutes les issues ont la même chance. Un dé bien équilibré : chaque face a 1 chance sur 6. Une pièce : 1 chance sur 2 pour pile.",
+  "04-billes": "Dans un sac, 3 billes rouges et 1 bleue. Deux couleurs, mais pas la même chance : on raisonne bille par bille. Les 4 billes sont équiprobables, 3 sont rouges : la probabilité du rouge est 3 sur 4.",
+  "05-piege": "Le piège : 2 couleurs, donc 1 chance sur 2. Faux ! On compte les billes, pas les couleurs.",
+  "06-defi": "À toi de jouer. Une roue : bleu sur 180 degrés, vert sur 90 degrés, jaune sur 90 degrés. Quelle est la probabilité du vert ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Le tour complet fait 360 degrés. Le vert en prend 90 : 90 sur 360, c'est 1 sur 4.",
+  "07-finale": "Ce que tu as appris. Équiprobable : toutes les issues ont la même chance. Sinon, on raisonne sur des parts égales, billes ou secteurs. Et 2 couleurs ne font pas 1 chance sur 2. L'épisode 4 t'attend : les événements.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

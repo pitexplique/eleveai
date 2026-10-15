@@ -92,6 +92,9 @@ class NotionSeconde(Scene):
     # ── les objets récurrents ───────────────────────────────────────────────
 
     def add_mascotte(self, scale=0.5):
+        # 14/10/2026 : pas de « Frédéric Lacoste » à côté de Ti-Margo dans les
+        # paysages (essayé puis retiré à sa demande : « il y a ma photo » sur
+        # les miniatures).
         m = MascotteMargouillat().scale(scale).to_corner(DOWN + RIGHT, buff=0.35)
         self.add(m)
         return m

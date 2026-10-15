@@ -1,0 +1,13 @@
+{
+  "00-garde": "Le vocabulaire des probabilités. Quand peut-on parler de hasard ?",
+  "01-situation": "Avant une partie de petits chevaux, on lance un dé pour savoir qui commence. Personne ne sait ce qui va sortir. Mais on sait ce qui peut sortir : 1, 2, 3, 4, 5 ou 6.",
+  "02-experience": "Une expérience aléatoire, c'est une expérience dont on connaît tous les résultats possibles, sans savoir lequel va sortir. Lancer un dé, tirer une carte, jouer à pile ou face. Mesurer la longueur d'une table, ce n'est pas aléatoire : le résultat ne dépend pas du hasard.",
+  "03-issue": "Chaque résultat possible s'appelle une issue. Avec un dé, il y a 6 issues : 1, 2, 3, 4, 5 et 6.",
+  "04-evenement": "Un événement, c'est une phrase qui sera vraie ou fausse après l'expérience. Obtenir un nombre pair : il est réalisé par 2, 4 et 6.",
+  "05-certain-impossible": "Obtenir un nombre plus petit que 7 : c'est toujours vrai. C'est un événement certain, de probabilité 1. Obtenir 8 : c'est jamais. C'est un événement impossible, de probabilité 0. Une probabilité est toujours entre 0 et 1.",
+  "06-piege": "Le piège : peu probable ne veut pas dire impossible. Gagner au loto est très peu probable, mais ce n'est pas impossible.",
+  "07-defi": "À toi de jouer. On tire une carte dans un jeu de 32 cartes. Tirer une carte rouge : certain, possible ou impossible ? Et tirer un 2 ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Une carte rouge : possible, il y en a 16 sur 32. Un 2 : impossible, le jeu de 32 cartes commence au 7.",
+  "08-finale": "Ce que tu as appris. Une expérience aléatoire a des issues connues, mais un résultat imprévisible. Un événement est réalisé par certaines issues. Certain, c'est 1 ; impossible, c'est 0. L'épisode 2 t'attend : compter les issues.",
+  "09-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

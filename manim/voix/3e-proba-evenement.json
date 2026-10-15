@@ -1,0 +1,12 @@
+{
+  "00-garde": "Les événements. Quelles issues réalisent un événement ?",
+  "01-situation": "Au jeu de l'oie, tu lances un dé. Tu gagnes si tu fais plus de 4. Quels lancers te font gagner ?",
+  "02-issues": "Plus de 4 : ce sont 5 et 6. L'événement « obtenir plus de 4 » est réalisé par 2 issues : 5 et 6.",
+  "03-mots": "Attention aux mots. Strictement supérieur à 4 : 5 et 6. Supérieur ou égal à 4 : 4, 5 et 6. Un seul mot change le nombre d'issues.",
+  "04-et-ou": "Deux conditions. Un nombre pair ET supérieur à 3 : 4 et 6. Un nombre pair OU supérieur à 3 : 2, 4, 5 et 6. ET garde ce qui vérifie les deux ; OU garde ce qui vérifie au moins une.",
+  "05-incompatibles": "Deux événements sont incompatibles s'ils ne peuvent pas arriver en même temps. Obtenir 1 et obtenir un nombre pair : incompatibles.",
+  "06-defi": "À toi de jouer. Des maillots numérotés de 1 à 12. Quelles issues réalisent : un multiple de 3 et strictement supérieur à 7 ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Les multiples de 3 : 3, 6, 9 et 12. Strictement supérieurs à 7 : 9 et 12. Deux issues : 9 et 12.",
+  "07-finale": "Ce que tu as appris. Un événement est réalisé par une liste d'issues. Strictement et ou égal ne donnent pas la même liste. ET garde les deux conditions, OU au moins une. L'épisode 5 t'attend : calculer une probabilité.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

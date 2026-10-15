@@ -1,0 +1,12 @@
+{
+  "00-garde": "Les issues. Combien de résultats possibles ?",
+  "01-situation": "On écrit le mot BANANE, une lettre par étiquette, et on mélange les 6 étiquettes dans un chapeau. On en tire une, et on regarde la lettre.",
+  "02-issues": "Les issues, ce sont les résultats qu'on peut noter : B, A, N, E. Il y a 4 issues. Pas 6 : il y a 6 étiquettes, mais seulement 4 lettres différentes.",
+  "03-liste": "Pour n'en oublier aucune, on fait la liste. Une roue de jeu à 8 cases numérotées de 1 à 8 : 8 issues, de 1 à 8.",
+  "04-deux-pieces": "Avec deux pièces, on lance l'une puis l'autre. Les issues : pile pile, pile face, face pile, face face. 4 issues. Pile face et face pile, ce n'est pas la même chose.",
+  "05-piege": "Le piège : compter les objets au lieu des résultats. 6 étiquettes, mais 4 lettres. Toujours se demander : qu'est-ce que je note ?",
+  "06-defi": "À toi de jouer. On tire une étiquette du mot PAPAYE. Combien d'issues ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Les lettres différentes sont P, A, Y et E : 4 issues, pour 6 étiquettes.",
+  "07-finale": "Ce que tu as appris. Une issue, c'est un résultat qu'on peut noter. On les liste pour n'en oublier aucune. Et on compte les résultats, pas les objets. L'épisode 3 t'attend : l'équiprobabilité.",
+  "08-abonne": "Pour t'entraîner, va sur le coach, sur éleveai point f r. Et si la vidéo t'a aidé, abonne-toi à la chaîne !"
+}

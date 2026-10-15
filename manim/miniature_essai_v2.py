@@ -500,6 +500,38 @@ def acc_expression_identites_3e(d):
     _piege3(d, "(x + 3)² = x² + 9 ?", "il manque 6x !", 76)
 
 
+def acc_proba_vocabulaire_3e(d):
+    _piege3(d, "Peu probable = impossible ?", "non : le loto n'est pas à 0", 54)
+
+
+def acc_proba_issue_3e(d):
+    _piege3(d, "BANANE : 6 issues ?", "non : 4 lettres, 4 issues", 54)
+
+
+def acc_proba_equiprobabilite_3e(d):
+    _piege3(d, "2 couleurs = 1 chance sur 2 ?", "non : on compte les billes", 54)
+
+
+def acc_proba_evenement_3e(d):
+    _piege3(d, "Plus de 4 ou au moins 4 ?", "5 et 6… ou 4, 5 et 6 !", 54)
+
+
+def acc_proba_calculer_3e(d):
+    _piege3(d, "3 parfums = 1 chance sur 3 ?", "non : 5 bonbons sur 12", 54)
+
+
+def acc_proba_contraire_3e(d):
+    _piege3(d, "Gagner 0,2 → perdre 0,2 ?", "non : 1 − 0,2 = 0,8", 54)
+
+
+def acc_proba_deux_epreuves_3e(d):
+    _piege3(d, "Deux fois pile = 1/2 ?", "non : 1/2 × 1/2 = 1/4", 54)
+
+
+def acc_proba_defi_3e(d):
+    _piege3(d, "7 blancs ou 3 blancs ?", "la proportion gagne : 3/4", 54)
+
+
 def acc_carre_racine_4e(d):
     """⭐ 12/10/2026 : Pythagore, épisode 2. Le carrelage de 5 sur 5 (carreaux
     orange, côté bleu), l'aller et le retour écrits ; ceinture JAUNE."""
@@ -582,6 +614,27 @@ def acc_rond_point_974(d):
     d.text((540, 430), "→ 19 s", font=police("ariblk.ttf", 56), fill=BLEU)
     d.text((540, 505), "1 voiture sur 10 en moins", font=police("arialbd.ttf", 24), fill=NAVY)
     echelle(d, 640, 592, "noire", s=0.5)
+
+
+def acc_annonce_probabilites(d):
+    """⭐ 14/10/2026 : bande-annonce « Probabilités ». Refaite à sa demande pour
+    le VOTE (« donne ton avis ») : les 9 classes, chacune avec sa case à cocher,
+    « plus de 300 vidéos », un dé."""
+    lignes = [["CM1", "CM2", "6e", "5e", "4e"], ["3e", "2de", "1re", "Tle"]]
+    f = police("ariblk.ttf", 40)
+    for r, classes in enumerate(lignes):
+        y = 352 + r * 70
+        for i, cl in enumerate(classes):
+            x = 66 + i * 168
+            d.rounded_rectangle([x, y + 6, x + 38, y + 44], radius=8, outline=NAVY, width=5,
+                                fill=(255, 255, 255))
+            d.text((x + 50, y), cl, font=f, fill=BLEU)
+    d.text((66, 505), "plus de 300 vidéos", font=police("ariblk.ttf", 50), fill=ROUGE)
+    x, y, c = 640, 492, 92
+    d.rounded_rectangle([x, y, x + c, y + c], radius=18, fill=(255, 255, 255), outline=NAVY, width=5)
+    for px, py in [(-1, 1), (1, 1), (-1, 0), (1, 0), (-1, -1), (1, -1)]:
+        cx, cy = x + c / 2 + px * c * 0.27, y + c / 2 + py * c * 0.27
+        d.ellipse([cx - 9, cy - 9, cx + 9, cy + 9], fill=NAVY)
 
 
 def acc_cote_4e(d):
@@ -755,6 +808,69 @@ def acc_defi_cube_4e(d):
 
 
 ESSAIS = {
+    # 15/10/2026 — probabilités 3e, 01-vocabulaire, CEINTURE VERTE.
+    "eleveai-maths-3e-proba-vocabulaire": {
+        "badge": "MATHS · 3E", "duree": "EN 3 MIN",
+        "titre": ["LE VOCABULAIRE", "DES PROBABILITÉS"],
+        "accroche": acc_proba_vocabulaire_3e,
+        "dossier": "3e/maths/probabilites/01-vocabulaire",
+    },
+    # 15/10/2026 — probabilités 3e, 02-issues, CEINTURE VERTE.
+    "eleveai-maths-3e-proba-issue": {
+        "badge": "MATHS · 3E", "duree": "EN 2 MIN",
+        "titre": ["LES ISSUES", "D'UNE EXPÉRIENCE"],
+        "accroche": acc_proba_issue_3e,
+        "dossier": "3e/maths/probabilites/02-issues",
+    },
+    # 15/10/2026 — probabilités 3e, 03-equiprobabilite, CEINTURE VERTE.
+    "eleveai-maths-3e-proba-equiprobabilite": {
+        "badge": "MATHS · 3E", "duree": "EN 2 MIN",
+        "titre": ["COMPRENDRE", "L'ÉQUIPROBABILITÉ"],
+        "accroche": acc_proba_equiprobabilite_3e,
+        "dossier": "3e/maths/probabilites/03-equiprobabilite",
+    },
+    # 15/10/2026 — probabilités 3e, 04-evenements, CEINTURE VERTE.
+    "eleveai-maths-3e-proba-evenement": {
+        "badge": "MATHS · 3E", "duree": "EN 2 MIN",
+        "titre": ["COMPRENDRE", "LES ÉVÉNEMENTS"],
+        "accroche": acc_proba_evenement_3e,
+        "dossier": "3e/maths/probabilites/04-evenements",
+    },
+    # 15/10/2026 — probabilités 3e, 05-calculer, CEINTURE VERTE.
+    "eleveai-maths-3e-proba-calculer": {
+        "badge": "MATHS · 3E", "duree": "EN 2 MIN",
+        "titre": ["CALCULER UNE", "PROBABILITÉ"],
+        "accroche": acc_proba_calculer_3e,
+        "dossier": "3e/maths/probabilites/05-calculer",
+    },
+    # 15/10/2026 — probabilités 3e, 06-contraire, CEINTURE VERTE.
+    "eleveai-maths-3e-proba-contraire": {
+        "badge": "MATHS · 3E", "duree": "EN 2 MIN",
+        "titre": ["L'ÉVÉNEMENT", "CONTRAIRE"],
+        "accroche": acc_proba_contraire_3e,
+        "dossier": "3e/maths/probabilites/06-contraire",
+    },
+    # 15/10/2026 — probabilités 3e, 07-deux-epreuves, CEINTURE VERTE.
+    "eleveai-maths-3e-proba-deux-epreuves": {
+        "badge": "MATHS · 3E", "duree": "EN 2 MIN",
+        "titre": ["DEUX ÉPREUVES :", "L'ARBRE"],
+        "accroche": acc_proba_deux_epreuves_3e,
+        "dossier": "3e/maths/probabilites/07-deux-epreuves",
+    },
+    # 15/10/2026 — probabilités 3e, 08-defis, CEINTURE VERTE.
+    "eleveai-maths-3e-proba-defi": {
+        "badge": "MATHS · 3E", "duree": "EN 2 MIN",
+        "titre": ["LES DÉFIS DES", "PROBABILITÉS"],
+        "accroche": acc_proba_defi_3e,
+        "dossier": "3e/maths/probabilites/08-defis",
+    },
+    # 14/10/2026 — BANDE-ANNONCE de la série « Probabilités, de l'école à la terminale » (≈ 1:40).
+    "eleveai-annonce-probabilites": {
+        "badge": "PROBABILITÉS · CM1 → TLE", "duree": "DONNE TON AVIS",
+        "titre": ["QUELLE CLASSE", "EN PREMIER ?"],
+        "accroche": acc_annonce_probabilites,
+        "dossier": "annonce/probabilites",
+    },
     # 13/10/2026 — expression littérale 3e, 01-comprendre, CEINTURE VERTE (≈ 3 min).
     "eleveai-maths-3e-expression-comprendre": {
         "badge": "MATHS · 3E", "duree": "EN 3 MIN",
