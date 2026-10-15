@@ -132,7 +132,7 @@ def composer(h):
 
     y = ligne("CRPE 2027", NAVY, y) + k(26)
     y = ligne("ÉPREUVE DE MATHS", ORANGE, y) + k(22)
-    y = ligne("LA RÉUNION · 974", (13, 148, 136), y) + k(40)
+    y = ligne("LA RÉUNION · 974", (13, 148, 136), y) + k(30)
 
     # ── L'accroche, désormais en second
     d.text((marge, y), "Vous enseignerez jusqu'au CM2.", font=NOIR(k(46)), fill=ENCRE)
@@ -143,7 +143,7 @@ def composer(h):
     x3 = marge + largeur(d, debut, NOIR(k(46)))
     d.text((x3 + 2, y), "e", font=NOIR(k(26)), fill=ORANGE)
     d.text((x3 + 3 + largeur(d, "e", NOIR(k(26))), y), ".", font=NOIR(k(46)), fill=ORANGE)
-    y += k(90)
+    y += k(80)
 
     # ── Les notions de collège qui tombent
     x = marge
@@ -154,10 +154,10 @@ def composer(h):
             y += k(70)
         x, _ = pilule(d, x, y, n, f, (255, 228, 230), (159, 18, 57), pad_x=24, pad_y=12)
         x += 14
-    y += k(100) if story else k(92)
+    y += k(100) if story else k(78)
 
     # ── La carte de l'offre
-    haut_carte = k(330)
+    haut_carte = k(300)
     carte(im, (marge, y, W - marge, y + haut_carte))
     d = ImageDraw.Draw(im)
     cx = marge + 44
@@ -170,15 +170,19 @@ def composer(h):
     y += haut_carte + (56 if story else 40)
 
     # ── L'action : le seul bloc sombre
-    haut_cta = k(214)
+    # ⭐ 15/10 : le TÉLÉPHONE y entre (« il manque le numéro de téléphone »).
+    # C'est un appel qui a lancé cette pub : on donne le numéro, pas seulement
+    # le lien, et en blanc sur le bloc sombre, là où l'œil finit.
+    haut_cta = k(282)
     carte(im, (marge, y, W - marge, y + haut_cta), fond_c=NAVY + (255,))
     d = ImageDraw.Draw(im)
     d.text((cx, y + k(34)), "Test gratuit : où en êtes-vous ?", font=NOIR(k(44)), fill=BLANC)
     pilule(d, cx, y + k(104), "eleveai.fr/formation-crpe", NOIR(k(38)), AMBRE, NAVY, pad_x=28, pad_y=14)
+    d.text((cx, y + k(194)), "Tél. 06 92 74 29 58", font=NOIR(k(48)), fill=AMBRE)
     y += haut_cta
 
     # ── La signature : un visage, et Ti Margo
-    bas = h - (260 if story else 60)
+    bas = h - (260 if story else 48)
     av = avatar_rond(k(132))
     im.paste(av, (marge, bas - av.height), av)
     tx = marge + av.width + 26
