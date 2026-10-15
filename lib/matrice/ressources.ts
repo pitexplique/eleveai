@@ -1907,7 +1907,7 @@ export const RESSOURCES: RessourceEleveAI[] = [
     // ⭐ 15/10/2026, Frédéric : « dans la barre de recherche on devrait trouver
     // crpe ». La barre de l'en-tête (suggestions.ts) ne lit QUE les ressources
     // qui ont des `motsCles` — l'alias du lexique ne suffisait pas.
-    motsCles: ["crpe", "formation crpe", "concours professeur des ecoles", "professeur des ecoles", "prof des ecoles", "instituteur"],
+    motsCles: ["crpe", "formation crpe", "concours professeur des ecoles", "professeur des ecoles", "prof des ecoles", "instituteur", "test crpe", "positionnement"],
     intentions: ["preparer"],
     type: "page",
     statut: "validee",

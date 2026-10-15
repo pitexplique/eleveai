@@ -394,7 +394,7 @@ const FAQ: { q: string; r: string }[] = [
   },
   {
     q: "Et si le groupe ne se forme pas ?",
-    r: `En dessous de ${TARIF.seuilOuverture} inscrits, la session n'ouvre pas — pour une raison pédagogique, pas comptable. Vous êtes prévenu deux semaines avant le 3 octobre, et vous n'avez rien avancé.`,
+    r: `En dessous de ${TARIF.seuilOuverture} inscrits, la session n'ouvre pas — pour une raison pédagogique, pas comptable. Vous êtes prévenu avant la première séance, et vous n'avez rien avancé.`,
   },
 ];
 
@@ -671,6 +671,15 @@ export default function FormationCrpePage() {
           >
             Voir les {NB_SEANCES} samedis
           </a>
+          {/* ⭐ 15/10/2026 — LE TEST EN LIGNE. Celui qui hésite se demande
+              d'abord s'il en a besoin : le test lui répond en un quart d'heure,
+              gratuitement, et son bilan renvoie ici. */}
+          <Link
+            href="/formation-crpe/test"
+            className="rounded-2xl bg-white px-7 py-3.5 text-base font-black text-sky-700 ring-1 ring-sky-200 transition hover:bg-sky-50"
+          >
+            🎯 Faire le test (15 min)
+          </Link>
         </div>
 
         {/* Les trois chiffres qui décident. Un candidat compare trois choses —
@@ -768,6 +777,65 @@ export default function FormationCrpePage() {
               — Frédéric Lacoste, professeur de mathématiques, fondateur d&apos;EleveAI
             </span>
           </p>
+        </div>
+
+        {/* ── LE TEST, ET LE COMPTE ────────────────────────────────────────
+            ⭐ 15/10/2026. Frédéric, après l'appel d'une candidate qui voulait
+            rejoindre le samedi : « compléter si [ils] sont connectés ils auront
+            accès à d'autres fonctionnalités » et « faire le test pour savoir où
+            ils en sont ».
+            ⚠️ LE COMPTE NE PROMET QUE CE QUI EXISTE : l'enregistrement du
+            bilan, les séries du coach notées et gardées, la liste « À
+            réviser », le calcul rapide et les défis du jour — tous visibles au
+            tableau de bord (app/dashboard-eleve). Rien d'autre. */}
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+          <div className="rounded-3xl bg-sky-50 p-6 shadow-sm ring-1 ring-sky-200 sm:p-7">
+            <p className="text-xs font-black uppercase tracking-wide text-sky-700">
+              Gratuit · 15 minutes
+            </p>
+            <h2 className="mt-1 text-lg font-black text-sky-950 sm:text-xl">
+              🎯 Où en êtes-vous&nbsp;?
+            </h2>
+            <p className="mt-3 text-sm font-semibold leading-7 text-slate-700">
+              18 questions, deux par thème de l&apos;épreuve, corrigées une à
+              une. Le bilan vous dit quels samedis comptent le plus pour vous —
+              et lesquels vous pourriez presque sauter. Vous arrivez après le 3
+              octobre&nbsp;? Ce test remplace l&apos;épreuve d&apos;entrée.
+            </p>
+            <Link
+              href="/formation-crpe/test"
+              className="mt-4 inline-block rounded-2xl bg-sky-600 px-6 py-3 text-sm font-black text-white transition hover:bg-sky-500"
+            >
+              Faire le test →
+            </Link>
+          </div>
+          <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200/70 sm:p-7">
+            <p className="text-xs font-black uppercase tracking-wide text-emerald-700">
+              Avec un compte gratuit
+            </p>
+            <h2 className="mt-1 text-lg font-black text-slate-900 sm:text-xl">
+              🔑 Entre deux samedis, le site garde la trace
+            </h2>
+            <ul className="mt-3 space-y-2 text-sm font-semibold leading-6 text-slate-700">
+              {[
+                "Le bilan du test, enregistré.",
+                "Les séries du coach, notées et gardées, thème par thème.",
+                "La liste « À réviser », tenue à jour pour vous.",
+                "Le calcul rapide et les défis du jour, pour l'entretien.",
+              ].map((l) => (
+                <li key={l} className="flex gap-2">
+                  <span aria-hidden className="font-black text-emerald-600">✓</span>
+                  <span>{l}</span>
+                </li>
+              ))}
+            </ul>
+            <Link
+              href="/auth/signup"
+              className="mt-4 inline-block rounded-2xl bg-emerald-600 px-6 py-3 text-sm font-black text-white transition hover:bg-emerald-500"
+            >
+              Créer mon compte →
+            </Link>
+          </div>
         </div>
 
         {/* ── LE CALENDRIER ──────────────────────────────────────────────── */}
@@ -901,7 +969,7 @@ export default function FormationCrpePage() {
             En dessous de {TARIF.seuilOuverture}, on ne confronte plus rien&nbsp;:
             la moitié de ce qu&apos;on apprend un samedi vient de la copie du
             voisin, pas de la mienne. Si le groupe ne se forme pas, vous êtes
-            prévenu deux semaines avant le 3 octobre et vous n&apos;avez rien
+            prévenu avant la première séance et vous n&apos;avez rien
             avancé. Au-delà de {TARIF.plafondGroupe}, je ne peux plus corriger
             toutes les copies dans la séance — et c&apos;est précisément ce que
             vous venez chercher.
@@ -917,7 +985,7 @@ export default function FormationCrpePage() {
             href="#inscription"
             className="inline-block rounded-2xl bg-orange-500 px-7 py-3.5 text-base font-black text-white shadow-lg shadow-orange-500/20 transition hover:scale-105 hover:bg-orange-400"
           >
-            Retenir ma place pour le 3 octobre →
+            Rejoindre le groupe du samedi →
           </a>
         </p>
 
@@ -984,13 +1052,16 @@ export default function FormationCrpePage() {
           className="mt-12 scroll-mt-24 rounded-3xl bg-[#041B33] p-6 text-white shadow-xl sm:p-8"
         >
           <h2 className="text-2xl font-black sm:text-3xl">
-            Retenir votre place pour le 3 octobre
+            Rejoindre le groupe du samedi
           </h2>
+          {/* ⚠️ 15/10/2026 : ce bloc disait « Retenir votre place pour le 3
+              octobre », date passée. On entre en cours d'année (voir la FAQ),
+              donc plus de date ici. */}
           <p className="mt-2 text-sm font-semibold leading-7 text-white/75">
             Rendez-vous à {LIEU_LONG}, {HORAIRES_PHRASE}. Dites-moi où vous en
-            êtes et ce que vous ratez d&apos;habitude en maths. Aucune avance à
-            verser&nbsp;: on se compte, et la session s&apos;ouvre si nous sommes
-            assez.
+            êtes — le bilan du test en ligne suffit — et ce que vous ratez
+            d&apos;habitude en maths. Aucune avance à verser&nbsp;: on se
+            compte, et la session s&apos;ouvre si nous sommes assez.
           </p>
 
           <div className="mt-5 flex flex-wrap items-center gap-3">

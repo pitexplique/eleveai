@@ -454,6 +454,8 @@ const ROUTES: RouteConfig[] = [
   // « maths CRPE Saint-Pierre ». Ne pas espérer du volume : ce qui compte est
   // qu'un candidat de l'île qui cherche exactement ça la trouve.
   { path: "/formation-crpe",    priority: 0.8,  changeFrequency: "weekly",  lastMod: LASTMOD_SEO_AOUT },
+  // 15/10/2026 : le test de positionnement CRPE, gratuit, qui renvoie au samedi.
+  { path: "/formation-crpe/test", priority: 0.7, changeFrequency: "monthly", lastMod: LASTMOD_SEO_AOUT },
   { path: "/contact",           priority: 0.65, changeFrequency: "monthly", lastMod: LASTMOD_CORE },
   // 20/07 : les pages de la PHILOSOPHIE qui manquaient au sitemap (audit
   // Frédéric « qu'il n'oublie pas notre philosophie ») — la charte d'usage de
